@@ -1,0 +1,4 @@
+Default SVG artwork must have one object with ID "boundingRect" and another with ID "textArea".
+"boundingRect" delimits image borders, while "textArea" is the area where the applet will draw text.
+
+The current (temporany) picture is a modified version of a Pedro Carbajal's artwork, used with permission by the author. It's licensed under GPL.
