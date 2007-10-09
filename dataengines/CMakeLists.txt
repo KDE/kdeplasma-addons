@@ -1,1 +1,6 @@
+macro_optional_find_package(KdepimLibs)
+if(KDE4_SYNDICATION_LIBS)
+    add_subdirectory(ebn)
+endif(KDE4_SYNDICATION_LIBS)
+add_subdirectory(ebn)
 add_subdirectory(twitter)
