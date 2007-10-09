@@ -1,0 +1,109 @@
+/***************************************************************************
+ *   Copyright (C) 2007 by Thomas Georgiou <TAGeorgiou@gmail.com>          *
+ *   Copyright (C) 2007 by Jeff Cooper <weirdsox11@gmail.com>              *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ ***************************************************************************/
+
+#ifndef DICT_H
+#define DICT_H
+
+#include <QImage>
+#include <QPaintDevice>
+#include <QLabel>
+#include <QPixmap>
+#include <QTimer>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QTime>
+#include <QX11Info>
+#include <QGraphicsItem>
+#include <QColor>
+#include <QTextEdit>
+
+#include <plasma/applet.h>
+#include <plasma/dataengine.h>
+#include <plasma/widgets/vboxlayout.h>
+#include <plasma/widgets/lineedit.h>
+#include <plasma/widgets/flash.h>
+#include <plasma/widgets/pushbutton.h>
+#include "arrow.h"
+#include "ui_config.h"
+
+class QTimer;
+class QLineEdit;
+
+
+class KDialog;
+
+namespace Plasma
+{
+    class Svg;
+}
+
+class Dict : public Plasma::Applet
+{
+    Q_OBJECT
+    public:
+        Dict(QObject *parent, const QVariantList &args);
+        ~Dict();
+
+        void setPath(const QString&);
+        QSizeF contentSizeHint() const;
+        void constraintsUpdated(Plasma::Constraints);
+
+    public slots:
+        void updated(const QString &name, const Plasma::DataEngine::Data &data);
+        void showConfigurationInterface();
+        void autoDefine(const QString &word);
+        void linkDefine(const QString &word);
+        void pageRight();
+        void pageLeft();
+
+    protected slots:
+//         void acceptedTimeStringState(bool);
+        void configAccepted();
+        void define();
+
+    private:
+        QRectF m_bounds;
+        int m_pixelSize;
+        QString m_timezone;
+        Plasma::Svg* m_theme;
+        QTime m_time;
+        QVariant m_thedef;
+        KDialog *m_dialog; //should we move this into another class?
+	QTextEdit *m_defDisplay;
+	QLineEdit *m_wordChooser;
+	QString m_word;
+        QTimer* m_timer;
+        int m_width;
+        int m_autoDefineTimeout;
+        QGraphicsPixmapItem *m_graphicsIcon; 
+//	Plasma::VBoxLayout *m_layout;
+	Plasma::LineEdit *m_wordEdit;
+        Plasma::LineEdit *m_defEdit;
+	Plasma::Flash *m_flash;
+        Arrow *m_rightArrow;
+        Arrow *m_leftArrow;
+        QStringList m_defList;
+        QStringList::iterator m_i;
+	Ui::config ui;
+};
+
+K_EXPORT_PLASMA_APPLET(dict, Dict)
+
+#endif

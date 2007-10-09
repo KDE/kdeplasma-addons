@@ -1,0 +1,24 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=File Watcher
+Name[bg]=Наблюдение на файлове
+Name[de]=Dateibetrachter
+Name[es]=Observar archivo
+Name[ja]=ファイルウォッチャー
+Name[nl]=Bestandenvolger
+Name[pt]=Vigilante de Ficheiros
+Name[pt_BR]=Vigilante de Ficheiros
+Name[sv]=Filövervakning
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_fileWatcher
+X-KDE-PluginInfo-Author=Jesper Thomschutz
+X-KDE-PluginInfo-Email=jesperht@yahoo.com
+X-KDE-PluginInfo-Name=fileWatcher
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=File System
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

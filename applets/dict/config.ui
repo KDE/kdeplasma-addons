@@ -1,0 +1,72 @@
+<ui version="4.0" >
+ <class>config</class>
+ <widget class="QWidget" name="config" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>275</width>
+    <height>92</height>
+   </rect>
+  </property>
+  <property name="styleSheet" >
+   <string/>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <layout class="QVBoxLayout" >
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="timeout_label" >
+         <property name="text" >
+          <string>Timeout</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="timeoutSpinBox" >
+         <property name="minimum" >
+          <number>100</number>
+         </property>
+         <property name="maximum" >
+          <number>3000</number>
+         </property>
+         <property name="singleStep" >
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="width_label" >
+         <property name="text" >
+          <string>Width</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="widthSpinBox" >
+         <property name="minimum" >
+          <number>100</number>
+         </property>
+         <property name="maximum" >
+          <number>2000</number>
+         </property>
+         <property name="value" >
+          <number>500</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

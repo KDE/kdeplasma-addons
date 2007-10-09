@@ -1,0 +1,22 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.lancelot.App">
+    <method name="show">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="hide">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="showItem">
+      <arg type="b" direction="out"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="addClient">
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="removeClient">
+      <arg type="b" direction="out"/>
+      <arg name="id" type="i" direction="in"/>
+    </method>
+  </interface>
+</node>

@@ -1,0 +1,30 @@
+[Desktop Entry]
+Name=Colour picker
+Name[bg]=Цветове
+Name[de]=Farbauswähler
+Name[es]=Selector de color
+Name[nl]=Kleurenkiezer
+Name[pt]=Extractor de cores
+Name[pt_BR]=Extractor de cores
+Name[sv]=Färghämtare
+Comment=Pick a color from the desktop
+Comment[bg]=Избор на цвят от работния плот
+Comment[es]=Selecciona un color del escritorio
+Comment[nl]=Kies een kleur van de desktop
+Comment[pt]=Recolhe uma cor do ambiente de trabalho
+Comment[pt_BR]=Recolhe uma cor do ambiente de trabalho
+Comment[sv]=Hämta en färg från skrivbordet
+Icon=kolourpicker
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_kolourpicker
+X-KDE-PluginInfo-Author=Pino Toscano
+X-KDE-PluginInfo-Email=pino@kde.org
+X-KDE-PluginInfo-Name=kolourpicker
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Graphics
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

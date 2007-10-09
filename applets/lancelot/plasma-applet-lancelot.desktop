@@ -1,0 +1,25 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Lancelot
+Name[bg]=Ланселот
+Comment=Desktop application launcher
+Comment[bg]=Стартиране на приложение на работния плот
+Comment[es]=Iniciador de una aplicación de escritorio
+Comment[ja]=デスクトップアプリケーションを起動します
+Comment[nl]=Programmastarter
+Comment[pt]=Lançador de aplicações do ambiente de trabalho
+Comment[pt_BR]=Lançador de aplicações do ambiente de trabalho
+Comment[sv]=Starta program från skrivbordet
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_lancelot
+X-KDE-PluginInfo-Author=Ivan Cukic
+X-KDE-PluginInfo-Email=ivan.cukic+kde@gmail.com
+X-KDE-PluginInfo-Name=plasma_applet_lancelot
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Launchers
+X-KDE-PluginInfo-Depends=filebrowser
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
