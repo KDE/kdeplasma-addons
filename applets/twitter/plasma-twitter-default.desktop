@@ -1,0 +1,28 @@
+[Desktop Entry]
+Name=Twitter Microblogging
+Name[es]=Micro bitácora Twitter
+Name[ja]=Twitter ミニブログ
+Name[pt]=Micro-Blog do Twitter
+Name[pt_BR]=Micro-Blog do Twitter
+Name[sv]=Twitter-mikrowebbjournal
+Comment=Lets you update your Twitter status and display your timeline. See http://www.twitter.com for more information.
+Comment[bg]=Обновяване на Twitter и показване на линия с времето. За повече информация вижте  http://www.twitter.com.
+Comment[es]=Le permite actualizar el estado de su Twitter y mostrar su línea temporal. Consulte http://www.twitter.com para obtener más información.
+Comment[nl]=Staat toe uw Twitter-status bij te werken en uw tijdslijn te weergeven. Zie http://www.twitter.com voor meer informatie.
+Comment[pt]=Permite-lhe actualizar o seu estado no Twitter e mostrar a sua linha temporal. Veja mais informações em http://www.twitter.com.
+Comment[pt_BR]=Permite-lhe actualizar o seu estado no Twitter e mostrar a sua linha temporal. Veja mais informações em http://www.twitter.com.
+Comment[sv]=Låter dig uppdatera din Twitter-status och visa ditt schema. Se http://www.twitter.com för mer information.
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_twitter
+X-KDE-PluginInfo-Author=André Duffeck
+X-KDE-PluginInfo-Email=andre@duffeck.de
+X-KDE-PluginInfo-Name=twitter
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
