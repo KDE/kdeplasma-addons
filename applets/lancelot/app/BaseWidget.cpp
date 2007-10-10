@@ -107,8 +107,6 @@ void BaseWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsIte
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
-    kDebug() << "Painting widget named " << name() << "\n";
-    
     // Background Painting
     if (m_svg) {
         resizeSvg();

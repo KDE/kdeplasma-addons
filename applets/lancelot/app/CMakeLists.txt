@@ -17,6 +17,7 @@ set(
   LancelotApplication.cpp
   LancelotWindow.cpp
   PositionLayout.cpp
+  CardLayout.cpp
   ExtenderButton.cpp
   BaseWidget.cpp
   ActionListView.cpp

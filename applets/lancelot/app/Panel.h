@@ -34,18 +34,22 @@ public:
     //void resize (qreal width, qreal height);
     void setGeometry (const QRectF & geometry);
     
-    void setLayout(Plasma::Layout * layout);
-    Plasma::Layout * layout();
+    void setLayout(Plasma::LayoutItem * layout);
+    Plasma::LayoutItem * layout();
     
     void setWidget(Plasma::Widget * widget);
     Plasma::Widget * widget();
+    
+    void setVisible(bool visible);
+    void show();
+    void hide();
 
 private:
     void init();
     void invalidate();
     
     BaseWidget m_titleWidget;
-    Plasma::Layout * m_layout;
+    Plasma::LayoutItem * m_layout;
     Plasma::Widget * m_widget;
 };
 

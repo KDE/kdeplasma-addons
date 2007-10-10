@@ -36,18 +36,6 @@ Qt::Orientations PositionLayout::expandingDirections() const
     return Qt::Horizontal | Qt::Vertical;
 }
 
-/*
-bool PositionLayout::hasWidthForHeight() const
-{
-    return true;
-}
-
-qreal PositionLayout::widthForHeight(qreal w) const
-{
-    Q_UNUSED(w);
-    return qreal();
-}*/
-
 QRectF PositionLayout::geometry() const {
 	return m_geometry;
 }
@@ -62,7 +50,7 @@ void PositionLayout::setGeometry(const QRectF& geometry)
     for (int i = 0 ; i < count() ; i++) {
         LayoutItem *l = itemAt(i);
         if (!m_itemPositions.contains(l)) continue;
-        l->setGeometry(m_itemPositions[l].calculateRectangle(geometry.width(), geometry.height()));
+        l->setGeometry(m_itemPositions[l].calculateRectangle(geometry));
     }
 
     m_geometry = geometry;
@@ -72,14 +60,6 @@ QSizeF PositionLayout::sizeHint() const
 {
     qreal hintHeight = 0.0;
     qreal hintWidth = 0.0;
-
-    /*foreach(LayoutItem *l, children()) {
-
-        QSizeF hint = l->sizeHint();
-
-        hintHeight = qMax(hint.height(), hintHeight);
-        hintWidth += hint.width() + spacing();
-    }*/
 
     return QSizeF(hintWidth, hintHeight);
 }
@@ -98,28 +78,30 @@ void PositionLayout::removeItem (Plasma::LayoutItem * item) {
     m_items.removeAll(item);
 }
 
-QRectF PositionLayout::Position::calculateRectangle(float parentWidth, float parentHeight) {
+QRectF PositionLayout::Position::calculateRectangle(QRectF geometry) {
     QRectF rect;
 
     // X1 coordinate
     float absv = fabs(m_x1);
-    if (absv <= 1.0) absv = parentWidth * absv;         // In percents
-    rect.setLeft(m_x1 >= 0 ? absv : parentWidth - absv);
+    if (absv <= 1.0) absv = geometry.width() * absv;         // In percents
+    rect.setLeft(m_x1 >= 0 ? absv : geometry.width() - absv);
 
     // Y1 coordinate
     absv = fabs(m_y1);
-    if (absv <= 1.0) absv = parentHeight * absv;        // In percents
-    rect.setTop(m_y1 >= 0 ? absv : parentHeight - absv);
+    if (absv <= 1.0) absv = geometry.height() * absv;        // In percents
+    rect.setTop(m_y1 >= 0 ? absv : geometry.height() - absv);
 
     // X2 coordinate
     absv = fabs(m_x2);
-    if (absv <= 1.0) absv = parentWidth * absv;         // In percents
-    rect.setWidth((m_x2 >= 0 ? absv : parentWidth - absv) - rect.left());
+    if (absv <= 1.0) absv = geometry.width() * absv;         // In percents
+    rect.setWidth((m_x2 >= 0 ? absv : geometry.width() - absv) - rect.left());
 
     // Y2 coordinate
     absv = fabs(m_y2);
-    if (absv <= 1.0) absv = parentHeight * absv;        // In percents
-    rect.setHeight((m_y2 >= 0 ? absv : parentHeight - absv) - rect.top());
+    if (absv <= 1.0) absv = geometry.height() * absv;        // In percents
+    rect.setHeight((m_y2 >= 0 ? absv : geometry.height() - absv) - rect.top());
+    
+    rect.moveTopLeft(rect.topLeft() + geometry.topLeft());
     
     return rect;
 }

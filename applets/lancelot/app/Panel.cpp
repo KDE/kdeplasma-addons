@@ -1,4 +1,5 @@
 #include "Panel.h"
+#include <KDebug>
 
 namespace Lancelot
 {
@@ -31,6 +32,19 @@ void Panel::init()
     invalidate();
 }
 
+void Panel::setVisible(bool visible) {
+    kDebug() << "Hiding panel\n";
+    m_titleWidget.setVisible(visible);
+    Plasma::Widget::setVisible(visible);
+}
+
+void Panel::show() {
+    setVisible(true);
+}
+
+void Panel::hide() {
+    setVisible(false);
+}
 
 Panel::~Panel() {}
 
@@ -65,10 +79,15 @@ void Panel::setGeometry (const QRectF & geometry) {
 }
 
 void Panel::invalidate() {
+    //QRectF rect(0, 0, size().width(), 32);
+
     if (title() == "") {
         m_titleWidget.hide();
         if (m_widget) {
             m_widget->setGeometry(QRectF(QPointF(), size()));
+        }
+        if (m_layout) {
+            m_layout->setGeometry(QRectF(QPointF(), size()));
         }
     } else {
         m_titleWidget.show();
@@ -76,23 +95,26 @@ void Panel::invalidate() {
         m_titleWidget.setGeometry(rect);    
         rect.setTop(32);
         rect.setHeight(size().height() - 32);
+        
         if (m_layout) {
+            //kDebug() << "Setting geometry for the child layout " << rect << "\n";
             m_layout->setGeometry(rect);
         }
         
         if (m_widget) {
+            //kDebug() << "Setting geometry for the child widget " << rect << "\n";
             m_widget->setGeometry(rect);
         }
     }
 
 }
 
-void Panel::setLayout(Plasma::Layout * layout) {
+void Panel::setLayout(Plasma::LayoutItem * layout) {
     m_layout = layout;
     invalidate();
 }
 
-Plasma::Layout * Panel::layout() {
+Plasma::LayoutItem * Panel::layout() {
     return m_layout;
 }
 

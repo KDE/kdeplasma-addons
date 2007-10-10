@@ -16,36 +16,26 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef POSITIONLAYOUT_H_
-#define POSITIONLAYOUT_H_
+#ifndef CARDLAYOUT_H_
+#define CARDLAYOUT_H_
 
 #include <plasma/widgets/layout.h>
+#include <plasma/widgets/widget.h>
 #include <cmath>
 #include <QMap>
 
 namespace Lancelot
 {
 
-class PositionLayout : public Plasma::Layout
+class CardLayout : public Plasma::Layout
 {
-public:
-    class Position {
-    public:
-        Position(float x1 = 0, float y1 = 0, float x2 = 0, float y2 = 0)
-          : m_x1(x1), m_y1(y1), m_x2(x2), m_y2(y2) {}
-
-    protected:
-        float m_x1, m_y1;
-        float m_x2, m_y2;
-        QRectF calculateRectangle(QRectF geometry);
-        friend class PositionLayout;
-    };
     
+public:
     // reimplemented
     virtual Qt::Orientations expandingDirections() const;
     
-    explicit PositionLayout(LayoutItem * parent = 0);
-    virtual ~PositionLayout();
+    explicit CardLayout(LayoutItem * parent = 0);
+    virtual ~CardLayout();
     
     virtual QRectF geometry() const;
     void setGeometry(const QRectF& geometry);
@@ -53,22 +43,26 @@ public:
     QSizeF sizeHint() const;
     
     void addItem (Plasma::LayoutItem * item);
-    void addItem (Plasma::LayoutItem * item, Position position);
+    void addItem (Plasma::Widget * widget,const QString & id);
     
     void removeItem (Plasma::LayoutItem * item);
+    void removeItem (const QString & id);
 
     virtual int count() const;
     virtual int indexOf(Plasma::LayoutItem * item) const;
     virtual Plasma::LayoutItem * itemAt(int i) const;
     virtual Plasma::LayoutItem * takeAt(int i);
     
+    void show(const QString & id);
+    void hideAll();    
 
 private:
-    QMap< Plasma::LayoutItem * , Position > m_itemPositions;
     QList < Plasma::LayoutItem * > m_items;
+    QMap < QString, Plasma::Widget * > m_widgets;
+    Plasma::Widget * m_shown;
     QRectF m_geometry;
 };
 
 }
 
-#endif /*POSITIONLAYOUT_H_*/
+#endif /*CARDLAYOUT_H_*/

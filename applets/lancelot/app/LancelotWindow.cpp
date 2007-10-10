@@ -24,7 +24,7 @@
 #define HIDE_TIMER_INTERVAL 2000
 
 LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
-  : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_categoriesSignalMapper(NULL), m_phase(NULL)
+  : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_sectionsSignalMapper(NULL), m_phase(NULL)
 {
     setupUi(this);
     
@@ -33,60 +33,31 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     
     m_phase = new Plasma::Phase(this);
     
-    m_categoriesSignalMapper = new QSignalMapper(this);
-    connect (m_categoriesSignalMapper, 
+    m_sectionsSignalMapper = new QSignalMapper(this);
+    connect (m_sectionsSignalMapper, 
         SIGNAL(mapped(const QString &)), 
         this, 
         SLOT(itemActivated(const QString &))
     );
 
-    /*
-    connect(buttonCategoryApplications, SIGNAL(activated()), m_categoriesSignalMapper, SLOT(map()));
-    m_categoriesSignalMapper->setMapping(buttonCategoryApplications, "Applications");
+    connect(buttonSectionApplications, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "Applications");
 
-    connect(buttonCategoryContacts, SIGNAL(activated()), m_categoriesSignalMapper, SLOT(map()));
-    m_categoriesSignalMapper->setMapping(buttonCategoryContacts, "Contacts");
+    connect(buttonSectionContacts, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+    m_sectionsSignalMapper->setMapping(buttonSectionContacts, "Contacts");
 
-    connect(buttonCategoryDocuments, SIGNAL(activated()), m_categoriesSignalMapper, SLOT(map()));
-    m_categoriesSignalMapper->setMapping(buttonCategoryDocuments, "Documents");
+    connect(buttonSectionDocuments, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+    m_sectionsSignalMapper->setMapping(buttonSectionDocuments, "Documents");
 
-    connect(buttonCategorySystem, SIGNAL(activated()), m_categoriesSignalMapper, SLOT(map()));
-    m_categoriesSignalMapper->setMapping(buttonCategorySystem, "System");
-    */
+    connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+    m_sectionsSignalMapper->setMapping(buttonSectionSystem, "System");
     
     
 }
 
 void LancelotWindow::itemActivated(const QString & item) {
     kDebug() << item << " is activated\n";
-    
-    Lancelot::Panel * showingPanel = NULL;
-    Lancelot::Panel * hidingPanel = NULL;
-    
-    /*
-    foreach (Lancelot::Panel * panel, categoryPanels) {
-        if (panel->isVisible()) hidingPanel = panel;
-    }
-
-    if (item == "Applications")
-        showingPanel = panelCategoryApplications;
-    else if (item == "Contacts")
-        showingPanel = panelCategoryContacts;
-    else if (item == "Documents")
-        showingPanel = panelCategoryDocuments;
-    else if (item == "System")
-        showingPanel = panelCategorySystem;*/
-
-    if (showingPanel == NULL || showingPanel == hidingPanel) return;
-    
-    if (hidingPanel)
-        hidingPanel->setZValue(hidingPanel->zValue() - 1);
-    showingPanel->setZValue(showingPanel->zValue() + 1);
-    showingPanel->show();
-    m_phase->animateItem(showingPanel, Plasma::Phase::Appear);
-    if (hidingPanel)
-        hidingPanel->hide();
-
+    layoutCenter->show(item);
 }
 
 LancelotWindow::~LancelotWindow() {

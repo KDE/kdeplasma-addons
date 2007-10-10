@@ -75,7 +75,7 @@ private Q_SLOTS:
 private:
     QTimer m_hideTimer;
     bool m_hovered;
-    QSignalMapper * m_categoriesSignalMapper;
+    QSignalMapper * m_sectionsSignalMapper;
     Plasma::Phase * m_phase;
 };
 
