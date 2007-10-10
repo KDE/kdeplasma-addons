@@ -54,7 +54,6 @@ ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
 
 void ExtenderButton::init()
 {
-    kDebug() << "ExtenderButton::init()\n";
     if (!m_extenderButtonSvg) {
         m_extenderButtonSvg = new Plasma::Svg("lancelot/extender_button");
         m_extenderButtonSvg->setContentType(Plasma::Svg::ImageSet);
@@ -77,8 +76,6 @@ void ExtenderButton::init()
 
 ExtenderButton::~ExtenderButton()
 {
-    kDebug() << "ExtenderButton::~ExtenderButton()\n";
-
     if (--m_extendersCount == 0) {
         delete m_extenderButtonSvg;
         delete m_extenderIconSvg;
