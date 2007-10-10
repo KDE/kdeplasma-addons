@@ -43,16 +43,16 @@ public:
 
     class Extender : public SUPER {
     public:
-        Extender(Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(icon, "", "", parent) {
+        Extender(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
             m_svgElementPrefix = "extender_";
         };
         friend class ExtenderButton;
         
     };
 
-    ExtenderButton(QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ExtenderButton(QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ExtenderButton(Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    ExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    ExtenderButton(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    ExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~ExtenderButton();
 

@@ -28,25 +28,25 @@ Plasma::Svg * ExtenderButton::m_extenderButtonSvg= NULL;
 Plasma::Svg * ExtenderButton::m_extenderIconSvg= NULL;
 int * ExtenderButton::m_extendersCount = 0;
 
-ExtenderButton::ExtenderButton(QString title, QString description,
+ExtenderButton::ExtenderButton(QString name, QString title, QString description,
         QGraphicsItem * parent) :
-    SUPER(title, description, parent), m_extender(NULL),
+    SUPER(name, title, description, parent), m_extender(NULL),
             m_extenderPosition(NO), m_activationMethod(CLICK)
 {
     init();
 }
 
-ExtenderButton::ExtenderButton(QIcon * icon, QString title,
+ExtenderButton::ExtenderButton(QString name, QIcon * icon, QString title,
         QString description, QGraphicsItem * parent) :
-    SUPER(icon, title, description, parent), m_extender(NULL),
+    SUPER(name, icon, title, description, parent), m_extender(NULL),
             m_extenderPosition(NO), m_activationMethod(CLICK)
 {
     init();
 }
 
-ExtenderButton::ExtenderButton(Plasma::Svg * icon, QString title,
+ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
         QString description, QGraphicsItem * parent) :
-    SUPER(icon, title, description, parent), m_extender(NULL),
+    SUPER(name, icon, title, description, parent), m_extender(NULL),
             m_extenderPosition(NO), m_activationMethod(CLICK)
 {
     init();
@@ -54,6 +54,7 @@ ExtenderButton::ExtenderButton(Plasma::Svg * icon, QString title,
 
 void ExtenderButton::init()
 {
+    kDebug() << "ExtenderButton::init()\n";
     if (!m_extenderButtonSvg) {
         m_extenderButtonSvg = new Plasma::Svg("lancelot/extender_button");
         m_extenderButtonSvg->setContentType(Plasma::Svg::ImageSet);
@@ -66,7 +67,7 @@ void ExtenderButton::init()
 
     m_svg = m_extenderButtonSvg;
 
-    m_extender = new Extender(m_extenderIconSvg, this);
+    m_extender = new Extender(name() + "::Extender", m_extenderIconSvg, this);
     m_extender->setVisible(false);
     m_extender->m_svg = m_svg;
     m_extender->m_iconSize = QSize(16, 16);
@@ -76,6 +77,8 @@ void ExtenderButton::init()
 
 ExtenderButton::~ExtenderButton()
 {
+    kDebug() << "ExtenderButton::~ExtenderButton()\n";
+
     if (--m_extendersCount == 0) {
         delete m_extenderButtonSvg;
         delete m_extenderIconSvg;

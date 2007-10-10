@@ -90,7 +90,7 @@ void ActionListView::positionScrollButtons() {
 Lancelot::ExtenderButton * ActionListView::createButton()
 {
     Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
-            "", "", this);
+            "", "", "", this);
     button->resize(size().width() - EXTENDER_SIZE, m_itemHeight);
     button->setInnerOrientation(Lancelot::ExtenderButton::HORIZONTAL);
     button->setExtenderPosition(Lancelot::ExtenderButton::RIGHT);

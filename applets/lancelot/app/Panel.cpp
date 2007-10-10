@@ -5,21 +5,21 @@ namespace Lancelot
 
 Panel::Panel(QIcon * icon, QString title, QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget(icon, title, "", this), m_layout(NULL), m_widget(NULL)
+    m_titleWidget("", icon, title, "", this), m_layout(NULL), m_widget(NULL)
 {
     init();
 }
 
 Panel::Panel(QString title, QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget(title, "", this), m_layout(NULL), m_widget(NULL)
+    m_titleWidget("", title, "", this), m_layout(NULL), m_widget(NULL)
 {
     init();
 }
 
 Panel::Panel(QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget("", "", this), m_layout(NULL), m_widget(NULL)
+    m_titleWidget("", "", "", this), m_layout(NULL), m_widget(NULL)
 {
     init();
 }

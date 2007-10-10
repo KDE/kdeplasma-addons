@@ -109,6 +109,7 @@ protected:
     
     void setupUi(QFrame * object) 
     {
+        kDebug() << "Ui::LancelotWindow::setupUi() {\n";
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -122,12 +123,13 @@ protected:
         layoutMain->setSize(50, Plasma::BottomPositioned);
         
         m_corona->setSceneRect(QRectF(0, 0, 550, 500));
-
+        kDebug() << "} // Ui::LancelotWindow::setupUi()\n";
     }
     
     void createObjects(QFrame * object)
     {
         Q_UNUSED(object);
+        kDebug() << "Ui::LancelotWindow::createObjects()\n";
         
         // Components
         layoutMain = new Plasma::BorderLayout();
@@ -136,25 +138,27 @@ protected:
         layoutSystem = new Plasma::HBoxLayout();
         panelSystem = new Lancelot::Panel();
 
+        systemButtons.clear();
         systemButtons.append(buttonSystemLockScreen = 
-            new Lancelot::ExtenderButton(new KIcon("system-lock-screen"), "Lock Session", "", panelSystem));
+            new Lancelot::ExtenderButton("buttonSystemLockScreen", new KIcon("system-lock-screen"), "Lock Session", "", panelSystem));
         systemButtons.append(buttonSystemLogout = 
-            new Lancelot::ExtenderButton(new KIcon("system-log-out"), "Log Out...", "", panelSystem));
+            new Lancelot::ExtenderButton("buttonSystemLogout", new KIcon("system-log-out"), "Log Out...", "", panelSystem));
         systemButtons.append(buttonSystemSwitchUser = 
-            new Lancelot::ExtenderButton(new KIcon("switchuser"), "Switch User", "", panelSystem));
+            new Lancelot::ExtenderButton("buttonSystemSwitchUser", new KIcon("switchuser"), "Switch User", "", panelSystem));
         
         // Sections area
         layoutSections = new Plasma::VBoxLayout();
         panelSections = new Lancelot::Panel();
         
+        sectionButtons.clear();
         sectionButtons.append(buttonSectionApplications = 
-            new Lancelot::ExtenderButton(new KIcon("make-kdevelop"), "Applications", "", panelSections));
+            new Lancelot::ExtenderButton("buttonSectionApplications", new KIcon("make-kdevelop"), "Applications", "", panelSections));
         sectionButtons.append(buttonSectionContacts = 
-            new Lancelot::ExtenderButton(new KIcon("kontact"), "Contacts", "", panelSections));
+            new Lancelot::ExtenderButton("buttonSectionContacts", new KIcon("kontact"), "Contacts", "", panelSections));
         sectionButtons.append(buttonSectionDocuments = 
-            new Lancelot::ExtenderButton(new KIcon("applications-office"), "Documents", "", panelSections));
+            new Lancelot::ExtenderButton("buttonSectionDocuments", new KIcon("applications-office"), "Documents", "", panelSections));
         sectionButtons.append(buttonSectionSystem = 
-            new Lancelot::ExtenderButton(new KIcon("video-display"), "System", "", panelSections));
+            new Lancelot::ExtenderButton("buttonSectionSystem", new KIcon("video-display"), "System", "", panelSections));
         
         // Search area     
         layoutSearch = new Plasma::HBoxLayout();
@@ -166,22 +170,25 @@ protected:
     void setupObjects(QFrame * object)
     {
         Q_UNUSED(object);
+        kDebug() << "Ui::LancelotWindow::setupObjects()\n";
 
         // System area
-        layoutMain->addItem(layoutSystem, Plasma::BottomPositioned);
-        
+        layoutMain->addItem(panelSystem, Plasma::BottomPositioned);
+
         foreach (Lancelot::ExtenderButton * button, systemButtons) {
             button->setActivationMethod(Lancelot::ExtenderButton::EXTENDER);
             button->setExtenderPosition(Lancelot::ExtenderButton::BOTTOM);
             button->setIconSize(QSize(24, 24));
             button->setZValue(SYSTEM_BUTTONS_Z_VALUE);
 
-            m_corona->addItem(button);
-            layoutSystem->addItem(button);
+            //m_corona->addItem(button);
+            //layoutSystem->addItem(button);
         }
+        panelSystem->setLayout(layoutSystem);
+        m_corona->addItem(panelSystem);
 
         // Sections area
-        layoutMain->addItem(layoutSections, Plasma::LeftPositioned);
+        layoutMain->addItem(panelSections, Plasma::LeftPositioned);
         layoutSections->setSpacing(0);
         
         foreach (Lancelot::ExtenderButton * button, sectionButtons) {
@@ -190,21 +197,26 @@ protected:
             button->setZValue(1);
             button->setInnerOrientation(Lancelot::BaseWidget::VERTICAL);
 
-            m_corona->addItem(button);
-            layoutSections->addItem(button);
+            //m_corona->addItem(button);
+            //layoutSections->addItem(button);
         }
+        panelSections->setLayout(layoutSections);
+        m_corona->addItem(panelSections);
         
-        
-
         // Search area     
-        layoutMain->addItem(layoutSearch, Plasma::TopPositioned);
+        layoutMain->addItem(panelSearch, Plasma::TopPositioned);
         
         layoutSearch->addItem(editSearch);
+        panelSearch->setLayout(layoutSearch);
+        m_corona->addItem(panelSearch);
+
 
 
     }
     
     void setupShell(QFrame * object) {
+        kDebug() << "Ui::LancelotWindow::setupShell()\n";
+        
         object->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
         KWindowSystem::setState( object->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
         

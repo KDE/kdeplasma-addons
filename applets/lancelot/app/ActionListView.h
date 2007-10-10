@@ -81,7 +81,7 @@ protected:
     class ScrollButton : public Lancelot::BaseWidget {
     public:
         ScrollButton (ActionListView * list, ActionListView::ScrollDirection direction)
-          : BaseWidget("", "", list), m_list(list), m_direction(direction) {
+          : BaseWidget("", "", "", list), m_list(list), m_direction(direction) {
             m_svg = new Plasma::Svg("lancelot/action_list_view");
             m_svg->setContentType(Plasma::Svg::ImageSet);
             m_svgElementPrefix = QString((m_direction == UP)?"up":"down") + "_scroll_";

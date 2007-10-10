@@ -44,29 +44,29 @@ void BaseWidget::init()
     resize(140, 38);
 }
 
-BaseWidget::BaseWidget(QString title, QString description, QGraphicsItem * parent)
+BaseWidget::BaseWidget(QString name, QString title, QString description, QGraphicsItem * parent)
   : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter), 
-    m_title(title), m_description(description)
+    m_title(title), m_description(description), m_name(name)
 {
     init();
 }
 
-BaseWidget::BaseWidget(QIcon * icon, QString title, QString description, QGraphicsItem * parent)
+BaseWidget::BaseWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
 : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
   m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
   m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter),
-  m_title(title), m_description(description) 
+  m_title(title), m_description(description), m_name(name)
 {
     init();
 }
 
-BaseWidget::BaseWidget(Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
+BaseWidget::BaseWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
 : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
   m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
   m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter),
-  m_title(title), m_description(description) 
+  m_title(title), m_description(description), m_name(name) 
 {
     init();
 }
@@ -106,6 +106,8 @@ void BaseWidget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 void BaseWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
     Q_UNUSED(widget);
     Q_UNUSED(option);
+    
+    kDebug() << "Painting widget named " << name() << "\n";
     
     // Background Painting
     if (m_svg) {
@@ -245,6 +247,9 @@ QIcon * BaseWidget::icon() const { return m_icon; }
 
 void BaseWidget::setIconInSvg(Plasma::Svg * icon) { m_iconInSvg = icon; update(); }
 Plasma::Svg * BaseWidget::iconInSvg() const { return m_iconInSvg; }
+
+void BaseWidget::setName(QString name) { m_name = name; }
+QString BaseWidget::name() const { return m_name; }
 
 void BaseWidget::setTitle(QString title) { m_title = title; update(); }
 QString BaseWidget::title() const { return m_title; }

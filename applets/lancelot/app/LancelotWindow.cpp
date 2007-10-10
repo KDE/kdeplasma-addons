@@ -115,6 +115,9 @@ void LancelotWindow::focusOutEvent(QFocusEvent * event) {
 }
 
 bool LancelotWindow::lancelotShow() {
+    foreach (Lancelot::ExtenderButton * btn , systemButtons) {
+        kDebug() << "Button's name is " << btn->name() << "\n";
+    }
     show();
     m_hideTimer.stop();
     return true;

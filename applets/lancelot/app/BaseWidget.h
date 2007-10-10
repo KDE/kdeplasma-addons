@@ -34,9 +34,9 @@ class BaseWidget: public Plasma::Widget
 public:
     enum InnerOrientation { VERTICAL, HORIZONTAL };
     
-    BaseWidget(QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseWidget(QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseWidget(Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseWidget(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~BaseWidget();
 
@@ -71,6 +71,8 @@ public:
     void setAlignment(Qt::Alignment alignment);
     Qt::Alignment alignment() const;
     
+    void setName(QString name);
+    QString name() const;
     
 Q_SIGNALS:
     void mouseHoverEnter();
@@ -92,6 +94,7 @@ protected:
     
     QString m_title;
     QString m_description;
+    QString m_name; // ATM mostly for debuging purposes
     
 private:
     void init();
