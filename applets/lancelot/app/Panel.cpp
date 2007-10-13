@@ -4,26 +4,34 @@
 namespace Lancelot
 {
 
-Panel::Panel(QIcon * icon, QString title, QGraphicsItem * parent)
+Panel::Panel(QString name, QIcon * icon, QString title, QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget("", icon, title, "", this), m_layout(NULL), m_widget(NULL)
+    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()), m_name(name),
+    m_titleWidget(name + "::TitleWidget", icon, title, "", this)
 {
     init();
 }
 
-Panel::Panel(QString title, QGraphicsItem * parent)
+Panel::Panel(QString name, QString title, QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget("", title, "", this), m_layout(NULL), m_widget(NULL)
+    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()), m_name(name),
+    m_titleWidget(name + "::TitleWidget", title, "", this)
 {
     init();
 }
 
-Panel::Panel(QGraphicsItem * parent)
+Panel::Panel(QString name, QGraphicsItem * parent)
   : Plasma::Widget(parent),
-    m_titleWidget("", "", "", this), m_layout(NULL), m_widget(NULL)
+    m_layout(NULL), m_widget(NULL), m_hasTitle(false), m_name(name),
+    m_titleWidget(name + "::TitleWidget", "", "" , this)
 {
     init();
 }
+
+Panel::~Panel()
+{
+}
+
 
 void Panel::init()
 {
@@ -32,24 +40,9 @@ void Panel::init()
     invalidate();
 }
 
-void Panel::setVisible(bool visible) {
-    kDebug() << "Hiding panel\n";
-    m_titleWidget.setVisible(visible);
-    Plasma::Widget::setVisible(visible);
-}
-
-void Panel::show() {
-    setVisible(true);
-}
-
-void Panel::hide() {
-    setVisible(false);
-}
-
-Panel::~Panel() {}
-
 void Panel::setTitle(QString & title)
 {
+    m_hasTitle = (title != "");
     m_titleWidget.setTitle(title);
 }
 
@@ -79,9 +72,7 @@ void Panel::setGeometry (const QRectF & geometry) {
 }
 
 void Panel::invalidate() {
-    //QRectF rect(0, 0, size().width(), 32);
-
-    if (title() == "") {
+    if (!m_hasTitle) {
         m_titleWidget.hide();
         if (m_widget) {
             m_widget->setGeometry(QRectF(QPointF(), size()));
@@ -97,12 +88,10 @@ void Panel::invalidate() {
         rect.setHeight(size().height() - 32);
         
         if (m_layout) {
-            //kDebug() << "Setting geometry for the child layout " << rect << "\n";
             m_layout->setGeometry(rect);
         }
         
         if (m_widget) {
-            //kDebug() << "Setting geometry for the child widget " << rect << "\n";
             m_widget->setGeometry(rect);
         }
     }
@@ -134,7 +123,7 @@ void Panel::paintWidget(QPainter * painter,
     Q_UNUSED(option);
     Q_UNUSED(widget);
     // TODO: Comment the next line
-    painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
+    //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
 }
 
 

@@ -13,9 +13,9 @@ namespace Lancelot
 class Panel: public Plasma::Widget
 {
 public:
-    Panel(QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);
-    Panel(QString title, QGraphicsItem * parent = 0);
-    Panel(QGraphicsItem * parent = 0);
+    Panel(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);
+    Panel(QString name, QString title, QGraphicsItem * parent = 0);
+    Panel(QString name, QGraphicsItem * parent = 0);
     
 	virtual ~Panel();
 	
@@ -48,9 +48,12 @@ private:
     void init();
     void invalidate();
     
-    BaseWidget m_titleWidget;
     Plasma::LayoutItem * m_layout;
     Plasma::Widget * m_widget;
+    bool m_hasTitle;
+    QString m_name;
+    
+    BaseWidget m_titleWidget;
 };
 
 }
