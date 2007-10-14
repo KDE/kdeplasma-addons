@@ -54,7 +54,7 @@ Notes::Notes(QObject *parent,
     cg = config();
 
     m_textArea->setTextWidth(cg.readEntry("textWidth",205));
-    m_textArea->setPos(25, 75);
+    m_textArea->setPos(25, 25);
     m_textArea->setPlainText(cg.readEntry("autoSave",i18n("Welcome to Notes Plasmoid! Type your notes here...")));
     m_textArea->setStyled(false);
     m_textArea->setOpenExternalLinks(true);
@@ -67,6 +67,7 @@ void Notes::saveNote()
     KConfigGroup cg = config();
     cg.writeEntry("autoSave",m_textArea->toPlainText());
     cg.config()->sync();
+
 }
 
 Notes::~Notes()
