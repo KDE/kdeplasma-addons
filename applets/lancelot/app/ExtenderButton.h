@@ -39,12 +39,12 @@ class ExtenderButton : public SUPER
 {
     Q_OBJECT
 public:
-    enum ExtenderPosition { NO = 0, RIGHT = 1, LEFT = 2, TOP = 3, BOTTOM = 4 };
-    enum ActivationMethod { HOVER = 0, CLICK = 1, EXTENDER = 2 };
+    enum ExtenderPosition { No = 0, Right = 1, Left = 2, Top = 3, Bottom = 4 };
+    enum ActivationMethod { Hover = 0, Click = 1, Extender = 2 };
 
-    class Extender : public SUPER {
+    class ExtenderObject : public SUPER {
     public:
-        Extender(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
+        ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
             m_svgElementPrefix = "extender_";
         };
         friend class ExtenderButton;
@@ -77,7 +77,7 @@ private:
     void relayoutExtender();
     void init();
     
-    Extender * m_extender;
+    ExtenderObject * m_extender;
     ExtenderPosition m_extenderPosition;
     ActivationMethod m_activationMethod;
     

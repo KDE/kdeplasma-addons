@@ -30,30 +30,6 @@ namespace Plasma {
     class Phase;
 }
 
-class DummyListModel : public Lancelot::ActionListViewModel {
-public:
-    DummyListModel(QString title, int size) : Lancelot::ActionListViewModel(), m_size(size), m_title(title) {}
-    virtual ~DummyListModel() {}
-    
-    virtual QString title(int index) const {
-        if (index % 10 == 3) {
-            return "\nCategory " + QString::number(index) + QString((index < size())?"":"err"); 
-        }
-        return m_title + QString::number(index) + QString((index < size())?"":"err"); 
-    }
-    
-    virtual QString description(int index) const {
-        if (index % 10 == 3) return "";
-        return "Description " + QString::number(index); 
-    }
-    virtual QIcon * icon(int index) const { Q_UNUSED(index); return NULL; }
-    virtual int size() const { return m_size; }
-private:
-    int m_size;
-    QString m_title;
-};
-
-
 class LancelotWindow : public QFrame, public Ui::LancelotWindow
 {
     Q_OBJECT

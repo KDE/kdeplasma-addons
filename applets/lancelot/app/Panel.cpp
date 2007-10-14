@@ -95,7 +95,6 @@ void Panel::invalidate() {
             m_widget->setGeometry(rect);
         }
     }
-
 }
 
 void Panel::setLayout(Plasma::LayoutItem * layout) {

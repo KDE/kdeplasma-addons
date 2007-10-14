@@ -32,7 +32,7 @@ int * ExtenderButton::m_extendersCount = 0;
 ExtenderButton::ExtenderButton(QString name, QString title, QString description,
         QGraphicsItem * parent) :
     SUPER(name, title, description, parent), m_extender(NULL),
-            m_extenderPosition(NO), m_activationMethod(CLICK)
+            m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
 }
@@ -40,7 +40,7 @@ ExtenderButton::ExtenderButton(QString name, QString title, QString description,
 ExtenderButton::ExtenderButton(QString name, QIcon * icon, QString title,
         QString description, QGraphicsItem * parent) :
     SUPER(name, icon, title, description, parent), m_extender(NULL),
-            m_extenderPosition(NO), m_activationMethod(CLICK)
+            m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
 }
@@ -48,7 +48,7 @@ ExtenderButton::ExtenderButton(QString name, QIcon * icon, QString title,
 ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
         QString description, QGraphicsItem * parent) :
     SUPER(name, icon, title, description, parent), m_extender(NULL),
-            m_extenderPosition(NO), m_activationMethod(CLICK)
+            m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
 }
@@ -67,7 +67,7 @@ void ExtenderButton::init()
 
     m_svg = m_extenderButtonSvg;
 
-    m_extender = new Extender(name() + "::Extender", m_extenderIconSvg, this);
+    m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
     m_extender->setVisible(false);
     m_extender->m_svg = m_svg;
     m_extender->m_iconSize = QSize(16, 16);
@@ -86,18 +86,18 @@ ExtenderButton::~ExtenderButton()
 
 QRectF ExtenderButton::boundingRect() const
 {
-    if (!m_hover || m_extenderPosition == NO)
+    if (!m_hover || m_extenderPosition == No)
         return QRectF(0, 0, size().width(), size().height());
     switch (m_extenderPosition) {
-    case TOP:
+    case Top:
         return QRectF(0, - EXTENDER_SIZE, size().width(), size().height() + EXTENDER_SIZE);
-    case BOTTOM:
+    case Bottom:
         return QRectF(0, 0, size().width(), size().height() + EXTENDER_SIZE);
-    case LEFT:
+    case Left:
         return QRectF(- EXTENDER_SIZE, 0, size().width() + EXTENDER_SIZE, size().height());
-    case RIGHT:
+    case Right:
         return QRectF(0, 0, size().width() + EXTENDER_SIZE, size().height());
-    case NO:
+    case No:
         return QRectF(0, 0, size().width(), size().height());
     }
     return QRectF();
@@ -105,9 +105,9 @@ QRectF ExtenderButton::boundingRect() const
 
 void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 {
-    if (m_extenderPosition != NO)
+    if (m_extenderPosition != No)
         m_extender->setVisible(true);
-    else if (m_activationMethod == HOVER)
+    else if (m_activationMethod == Hover)
 emit         activated();
     SUPER::hoverEnterEvent(event);
 }
@@ -131,27 +131,27 @@ void ExtenderButton::relayoutExtender()
 {
     if (!m_extender) return;
     switch (m_extenderPosition) {
-    case TOP:
+    case Top:
         m_extender->setPos(0, - EXTENDER_SIZE);
         m_extender->resize(size().width(), EXTENDER_SIZE);
         m_svgElementSufix = "_top";
         break;
-    case BOTTOM:
+    case Bottom:
         m_extender->setPos(0, size().height());
         m_extender->resize(size().width(), EXTENDER_SIZE);
         m_svgElementSufix = "_bottom";
         break;
-    case LEFT:
+    case Left:
         m_extender->setPos(- EXTENDER_SIZE, 0);
         m_extender->resize(EXTENDER_SIZE, size().height());
         m_svgElementSufix = "_left";
         break;
-    case RIGHT:
+    case Right:
         m_extender->setPos(size().width(), 0);
         m_extender->resize(EXTENDER_SIZE, size().height());
         m_svgElementSufix = "_right";
         break;
-    case NO:
+    case No:
         break;
     }
     m_extender->m_svgElementSufix = m_svgElementSufix;
@@ -167,8 +167,8 @@ void ExtenderButton::setActivationMethod(ExtenderButton::ActivationMethod method
     if (m_activationMethod == method)
         return;
     m_activationMethod = method;
-    if (m_activationMethod != EXTENDER)
-        setExtenderPosition(ExtenderButton::NO);
+    if (m_activationMethod != Extender)
+        setExtenderPosition(ExtenderButton::No);
 }
 
 ExtenderButton::ActivationMethod ExtenderButton::activationMethod()

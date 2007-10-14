@@ -49,7 +49,7 @@ void BaseWidget::init()
 BaseWidget::BaseWidget(QString name, QString title, QString description, QGraphicsItem * parent)
   : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
-    m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter), 
+    m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter), 
     m_title(title), m_description(description), m_name(name)
 {
     init();
@@ -58,7 +58,7 @@ BaseWidget::BaseWidget(QString name, QString title, QString description, QGraphi
 BaseWidget::BaseWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
 : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
   m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
-  m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter),
+  m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
   m_title(title), m_description(description), m_name(name)
 {
     init();
@@ -67,7 +67,7 @@ BaseWidget::BaseWidget(QString name, QIcon * icon, QString title, QString descri
 BaseWidget::BaseWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
 : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
   m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
-  m_innerOrientation(HORIZONTAL), m_alignment(Qt::AlignCenter),
+  m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
   m_title(title), m_description(description), m_name(name) 
 {
     init();
@@ -133,7 +133,7 @@ void BaseWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsIte
     QRectF descriptionRect  = painter->boundingRect(widgetRect,
         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
     
-    if (m_innerOrientation == VERTICAL || (m_title.isEmpty() && m_description.isEmpty())) {
+    if (m_innerOrientation == Vertical || (m_title.isEmpty() && m_description.isEmpty())) {
         setLeft(iconRect, widgetRect, m_alignment);
         setLeft(titleRect, widgetRect, m_alignment);
         setLeft(descriptionRect, widgetRect, m_alignment);

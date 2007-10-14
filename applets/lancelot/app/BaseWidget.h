@@ -33,7 +33,7 @@ class BaseWidget: public Plasma::Widget
     Q_OBJECT
     
 public:
-    enum InnerOrientation { VERTICAL, HORIZONTAL };
+    enum InnerOrientation { Vertical, Horizontal };
     
     BaseWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
     BaseWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);

@@ -47,10 +47,9 @@ Q_SIGNALS:
 class ActionListView : public Plasma::Widget
 {
     Q_OBJECT
+    
 public:
-    
-    
-    ActionListView(ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
+    ActionListView(QString name, ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
     
     void setModel(ActionListViewModel * model);
@@ -67,6 +66,9 @@ public:
 
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    
+    QString name() const;
+    void setName(QString & name);
 
 Q_SIGNALS:
     void activated(int index);
@@ -74,18 +76,18 @@ Q_SIGNALS:
 protected slots:
     void scrollTimer();
     
-protected:
+private:
     enum ScrollDirection {
-        UP = 1, NO = 0, DOWN = -1
+        Up = 1, No = 0, Down = -1
     };
 
     class ScrollButton : public Lancelot::BaseWidget {
     public:
-        ScrollButton (ActionListView * list, ActionListView::ScrollDirection direction)
-          : BaseWidget("", "", "", list), m_list(list), m_direction(direction) {
+        ScrollButton (ActionListView * list, QGraphicsItem * parent, ActionListView::ScrollDirection direction)
+          : BaseWidget("", "", "", parent), m_list(list), m_direction(direction) {
             m_svg = new Plasma::Svg("lancelot/action_list_view");
             m_svg->setContentType(Plasma::Svg::ImageSet);
-            m_svgElementPrefix = QString((m_direction == UP)?"up":"down") + "_scroll_";
+            m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
             setAcceptsHoverEvents(true);
         };
         void hoverEnterEvent ( QGraphicsSceneHoverEvent * event) {
@@ -93,7 +95,7 @@ protected:
             BaseWidget::hoverEnterEvent(event);
         };
         void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event) {
-            m_list->scroll(ActionListView::NO);
+            m_list->scroll(ActionListView::No);
             BaseWidget::hoverLeaveEvent(event);
         };
         //void hide() {};
@@ -103,6 +105,7 @@ protected:
         ActionListView::ScrollDirection m_direction;
     };
     
+    QString m_name;
     qreal m_topButtonVirtualY;
     QTransform m_topButtonScale;
     QTransform m_bottomButtonScale;
@@ -126,6 +129,7 @@ protected:
     QLinkedList < ExtenderButton * > m_buttons;
     
     int m_firstButtonIndex;
+    bool m_creatingButtons;
     
     void positionScrollButtons();
     ScrollButton * buttonUp, * buttonDown;
