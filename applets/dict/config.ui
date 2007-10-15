@@ -20,7 +20,7 @@
        <item>
         <widget class="QLabel" name="timeout_label" >
          <property name="text" >
-          <string>Timeout</string>
+          <string>Timeout:</string>
          </property>
         </widget>
        </item>
@@ -44,7 +44,7 @@
        <item>
         <widget class="QLabel" name="width_label" >
          <property name="text" >
-          <string>Width</string>
+          <string>Width:</string>
          </property>
         </widget>
        </item>
