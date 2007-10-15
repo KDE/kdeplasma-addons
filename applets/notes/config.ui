@@ -45,7 +45,7 @@
       <item row="0" column="0" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
-         <string>Notes Size</string>
+         <string>Notes size:</string>
         </property>
         <property name="buddy" >
          <cstring>sizeEdit</cstring>
@@ -62,14 +62,14 @@
       <item row="1" column="0" colspan="2" >
        <widget class="KPushButton" name="fontSelectButton" >
         <property name="text" >
-         <string>Select Font</string>
+         <string>Select Font...</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="2" >
         <widget class="KPushButton" name="colorSelectButton" >
          <property name="text" >
-          <string>Select Text Color</string>
+          <string>Select Text Color...</string>
          </property>
         </widget>
        </item>
