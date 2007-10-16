@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by André Duffeck                                   *
+ *   Copyright (C) 2007 by André Duffeck <duffeck@kde.org>                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -40,6 +40,8 @@ namespace Plasma
     class Svg;
     class LineEdit;
     class Flash;
+    class Icon;
+    class VBoxLayout;
 }
 namespace KIO
 {
@@ -57,7 +59,6 @@ class Twitter : public Plasma::Applet
 
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
-        QSizeF contentSizeHint() const;
 
     public slots:
         void updated(const QString &name, const Plasma::DataEngine::Data &data);
@@ -70,8 +71,6 @@ class Twitter : public Plasma::Applet
         void updateStatus();
         void downloadHistory();
 
-        void geometryChanged();
-
         void slotConnected();
         void slotRead();
 
@@ -82,13 +81,14 @@ class Twitter : public Plasma::Applet
         void pictureDownloaded( const QString &nick );
 
     private:
-        QSizeF m_size;
         Plasma::Svg *m_theme;
         KDialog *m_dialog;
         Plasma::LineEdit *m_title;
         Plasma::LineEdit *m_statusEdit;
         Plasma::LineEdit *m_historyEdit;
         Plasma::Flash *m_flash;
+        Plasma::Icon *m_icon;
+        Plasma::VBoxLayout *m_layout;
 
         KLineEdit *m_usernameEdit;
         KLineEdit *m_passwordEdit;
@@ -109,7 +109,6 @@ class Twitter : public Plasma::Applet
         QHttpResponseHeader m_header;
         QDomDocument m_historyDoc;
         QString m_data;
-        QPixmap m_picture;
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by André Duffeck                                   *
+ *   Copyright (C) 2007 by André Duffeck <duffeck@kde.org>                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -46,6 +46,8 @@
 #include <plasma/dataengine.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
+#include <plasma/widgets/boxlayout.h>
+#include <plasma/widgets/icon.h>
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -54,6 +56,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     kDebug() << "Loading applet twitter";
     setHasConfigurationInterface(true);
     setDrawStandardBackground(true);
+    m_theme = new Plasma::Svg("widgets/twitter", this);
+
 
     KConfigGroup cg = config();
     m_username = cg.readEntry( "username" );
@@ -62,36 +66,53 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_historyRefresh = cg.readEntry( "historyRefresh", 5 );
     m_includeFriends = cg.readEntry( "includeFriends", true );
 
+    m_engine = dataEngine("twitter");
+    m_engine->setProperty( "username", m_username );
+    m_engine->setProperty( "password", m_password );
+    connect( m_engine, SIGNAL(newSource(const QString&)), SLOT(newSource(const QString&)) );
+
+
+    m_layout = new Plasma::VBoxLayout( this );
+    m_layout->setMargin( 0 );
+    m_layout->setSpacing( 0 );
+
+    m_flash = new Plasma::Flash( this );
+    m_flash->setColor( Qt::gray );
+    m_flash->setSize( QSize(150, 20) );
+    QFont fnt = qApp->font();
+    fnt.setBold( true );
+    m_flash->setFont( fnt );
+    m_layout->addItem( m_flash );
+
+
+    Plasma::HBoxLayout *headerLayout = new Plasma::HBoxLayout( m_layout );
+    headerLayout->setMargin( 0 );
+    m_layout->addItem( headerLayout );
+
+
+    m_icon = new Plasma::Icon( this );
+    m_icon->hide();
+    headerLayout->addItem( m_icon );
+
 
     m_statusEdit = new Plasma::LineEdit( this );
     if ( m_username.isEmpty() || m_password.isEmpty() ) {
         m_statusEdit->hide();
     }
+    m_statusEdit->setStyled( true );
+    m_statusEdit->setTextWidth( 150 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) );
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
+    headerLayout->addItem( m_statusEdit );
+
 
     m_historyEdit = new Plasma::LineEdit( this );
     m_historyEdit->setStyled( false );
     m_historyEdit->setEnabled( false );
     m_historyEdit->setCursor( Qt::ArrowCursor );
     m_historyEdit->setAcceptedMouseButtons( Qt::NoButton );
+    m_layout->addItem( m_historyEdit );
 
-    m_flash = new Plasma::Flash( this );
-    m_flash->setColor( Qt::gray );
-    QFont fnt = qApp->font();
-    fnt.setBold( true );
-    m_flash->setFont( fnt );
-
-    m_theme = new Plasma::Svg("widgets/twitter", this);
-
-    m_engine = dataEngine("twitter");
-    m_engine->setProperty( "username", m_username );
-    m_engine->setProperty( "password", m_password );
-    connect( m_engine, SIGNAL(newSource(const QString&)), SLOT(newSource(const QString&)) );
-
-    m_size = QSizeF( 250, 250 );
-
-    geometryChanged();
     downloadHistory();
 }
 
@@ -129,13 +150,11 @@ void Twitter::updated(const QString& source, const Plasma::DataEngine::Data &dat
             }
         html += "</table>";
         m_historyEdit->setHtml( html );
-        geometryChanged();
         m_flash->flash( i18n("%1 new tweets", newCount ), 20*1000 );
     } else if( source.startsWith( "UserInfo" ) ) {
         QPixmap pm = data.value( "Image" ).value<QPixmap>();
         if( !pm.isNull() ) {
-            m_picture = pm;
-            geometryChanged();
+            m_icon->setIcon( QIcon( pm ) );
         }
     }
     update();
@@ -145,49 +164,6 @@ void Twitter::newSource( const QString &source )
 {
     if( !source.startsWith( "Timeline" ) )
         m_engine->connectSource( source, this );
-}
-
-
-QSizeF Twitter::contentSizeHint() const
-{
-    return m_size;
-}
-
-void Twitter::geometryChanged()
-{
-    prepareGeometryChange();
-
-    const int cx = 0;
-    const int cy = 0;
-    const int width = (int)contentSize().width();
-
-    int y = cy+21;
-    int w = 300;
-    int h = 250;
-
-    if( m_picture.isNull() ) {
-        m_statusEdit->setTextWidth( width-6 );
-        m_statusEdit->setPos( cx+3, y );
-        m_statusEdit->setGeometry( QRectF( cx, y, width-6, cy+72-21 ) );
-    } else {
-        m_statusEdit->setTextWidth( width-61 );
-        m_statusEdit->setPos( cx+58, y );
-        m_statusEdit->setGeometry( QRectF( cx+55, y, width-61, cy+72-21 ) );
-    }
-    y = cy+78;
-
-    m_historyEdit->setTextWidth( width-6 );
-    m_historyEdit->setPos( cx+3, y );
-
-    if( h < y+m_historyEdit->geometry().height()+6 )
-        h = (int)(y+m_historyEdit->geometry().height()+6);
-
-    m_size = QSizeF( w, h  );
-
-    m_flash->setSize( QSize( width-75, 20 ) );
-    m_flash->setPos( cx, cy);
-
-    update();
 }
 
 void Twitter::showConfigurationInterface()
@@ -245,8 +221,7 @@ void Twitter::showConfigurationInterface()
 void Twitter::configAccepted()
 {
     if( m_username != m_usernameEdit->text() ) {
-        m_picture = QPixmap();
-        geometryChanged();
+        m_icon->setIcon( QIcon() );
     }
 
     KConfigGroup cg = config();
@@ -261,12 +236,18 @@ void Twitter::configAccepted()
     m_includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
     cg.config()->sync();
 
-    m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
+//     m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
+    kDebug() << m_username << " " << m_password;
+    if( !m_username.isEmpty() && !m_password.isEmpty() )
+      m_statusEdit->show();
+    else
+      m_statusEdit->hide();
 
     m_engine->setProperty( "username", m_username );
     m_engine->setProperty( "password", m_password );
 
     downloadHistory();
+    update();
 }
 
 Twitter::~Twitter()
@@ -286,9 +267,6 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     p->setBrush( QColor( 32, 32, 32 ) );
     p->drawRect( contentsRect.x(), contentsRect.y() + 18, contentsRect.width(), 54);
     p->drawRect( contentsRect.x(), contentsRect.y() + 75, contentsRect.width(), contentsRect.height()-75);
-
-    if( !m_picture.isNull() )
-        p->drawPixmap( contentsRect.x()+3, contentsRect.y()+21, m_picture );
 }
 
 
