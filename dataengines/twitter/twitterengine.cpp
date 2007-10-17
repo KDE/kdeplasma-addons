@@ -134,7 +134,6 @@ bool TwitterEngine::updateSource(const QString &source)
     }
     QStringList tokens = source.split(':');
     if (tokens.at(0)=="Update") {
-        kDebug() << source << " : " << sourceDict()[source];
         if( !sourceDict()[source] )
             getTweet(tokens.at(1).toInt());
     }
