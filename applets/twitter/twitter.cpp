@@ -161,9 +161,8 @@ void Twitter::showTweets()
         e->setAcceptedMouseButtons( Qt::NoButton );
         m_layout->addItem( e );
         m_tweetWidgets.append( e );
-    kDebug();
+
         Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
-    kDebug();
         QString html = "<table cellspacing='0'>";
         html += i18n( "<tr><td width='1%'><font color='#fcfcfc'><b>%1</b></font></td>"
                 "<td align='right' width='99%'><font color='#fcfcfc'>%2 from %3</font></td></tr>", 
@@ -243,6 +242,7 @@ void Twitter::configAccepted()
         m_icon->setIcon( QIcon() );
     }
     bool refresh = ( m_historySize != m_historySizeSpinBox->value() );
+    bool changed = false;
 
     KConfigGroup cg = config();
     m_username = m_usernameEdit->text();
@@ -253,6 +253,10 @@ void Twitter::configAccepted()
     cg.writeEntry("historySize", m_historySize);
     m_historyRefresh = m_historyRefreshSpinBox->value();
     cg.writeEntry("historyRefresh", m_historyRefresh);
+
+    if( m_includeFriends != (m_checkIncludeFriends->checkState() == Qt::Checked) )
+        changed = true;
+
     m_includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
     cg.config()->sync();
 
@@ -268,6 +272,10 @@ void Twitter::configAccepted()
 
     if( refresh ) {
         showTweets();
+    }
+    if( changed ) {
+        m_tweetMap.clear();
+        downloadHistory();
     }
 }
 
