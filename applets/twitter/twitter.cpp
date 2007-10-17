@@ -69,6 +69,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_engine = dataEngine("twitter");
     m_engine->setProperty( "username", m_username );
     m_engine->setProperty( "password", m_password );
+    m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
     connect( m_engine, SIGNAL(newSource(const QString&)), SLOT(newSource(const QString&)) );
 
 
@@ -78,21 +79,23 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
     m_flash = new Plasma::Flash( this );
     m_flash->setColor( Qt::gray );
-    m_flash->setSize( QSize(150, 20) );
+    m_flash->setSize( QSize(145, 20) );
     QFont fnt = qApp->font();
     fnt.setBold( true );
     m_flash->setFont( fnt );
     m_layout->addItem( m_flash );
 
 
-    Plasma::HBoxLayout *headerLayout = new Plasma::HBoxLayout( m_layout );
-    headerLayout->setMargin( 0 );
-    m_layout->addItem( headerLayout );
+    m_headerLayout = new Plasma::HBoxLayout( m_layout );
+    m_headerLayout->setMargin( 0 );
+    m_layout->addItem( m_headerLayout );
 
 
     m_icon = new Plasma::Icon( this );
-    m_icon->hide();
-    headerLayout->addItem( m_icon );
+    m_icon->setIcon( KIcon( "user" ) );
+    m_icon->setIconSize( 48, 48 );
+    m_icon->setText( m_username );
+    m_headerLayout->addItem( m_icon );
 
 
     m_statusEdit = new Plasma::LineEdit( this );
@@ -100,18 +103,11 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
         m_statusEdit->hide();
     }
     m_statusEdit->setStyled( true );
-    m_statusEdit->setTextWidth( 150 );
+    m_statusEdit->setTextWidth( 200 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) );
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
-    headerLayout->addItem( m_statusEdit );
+    m_headerLayout->addItem( m_statusEdit );
 
-
-    m_historyEdit = new Plasma::LineEdit( this );
-    m_historyEdit->setStyled( false );
-    m_historyEdit->setEnabled( false );
-    m_historyEdit->setCursor( Qt::ArrowCursor );
-    m_historyEdit->setAcceptedMouseButtons( Qt::NoButton );
-    m_layout->addItem( m_historyEdit );
 
     downloadHistory();
 }
@@ -119,8 +115,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 void Twitter::updated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << source;
-    if( source == QString( "Timeline:%1" ).arg( m_username ) ||
-        source == QString( "TimelineWithFriends:%1" ).arg( m_username ) ) {
+    if( source == m_curTimeline ) {
         m_flash->flash( i18n("Refreshing timeline...") );
         QVariantList l = data.value( source ).toList();
 
@@ -130,40 +125,64 @@ void Twitter::updated(const QString& source, const Plasma::DataEngine::Data &dat
                 newCount++;
             }
         }
-
-        int i = 0;
-        QString html = "<table cellspacing='0'>";
-        while(i < m_historySize && i < l.size() ) {
-            uint id = l[i].toUInt();
-            QString tweet = QString( "Update:%1" ).arg( l[i].toString() );
-            if( id > m_lastTweet )
-                m_lastTweet = id;
-            Plasma::DataEngine::Data tweetData = m_engine->query( tweet );
-
-            html += i18n( "<tr><td width='1%'><font color='#fcfcfc'><b>%1</b></font></td>"
-                    "<td align='right' width='99%'><font color='#fcfcfc'>%2 from %3</font></td></tr>", 
-                    tweetData.value( "User" ).toString(), timeDescription( tweetData.value( "Date" ).toDateTime() ),
-                    tweetData.value( "Source" ).toString() );
-            html += QString( "<tr><td colspan='2'><font color='#fcfcfc'>%1<br></font></td></tr>" )
-                    .arg( tweetData.value( "Status" ).toString() );
-            ++i;
-            }
-        html += "</table>";
-        m_historyEdit->setHtml( html );
+        foreach( QVariant id, l ) {
+            if( id.toUInt() > m_lastTweet )
+                m_lastTweet = id.toUInt();
+        }
         m_flash->flash( i18n("%1 new tweets", newCount ), 20*1000 );
+        showTweets();
+    } else if( source.startsWith( "Update" ) ) {
+        m_tweetMap[source] = data;
     } else if( source.startsWith( "UserInfo" ) ) {
         QPixmap pm = data.value( "Image" ).value<QPixmap>();
         if( !pm.isNull() ) {
             m_icon->setIcon( QIcon( pm ) );
         }
     }
-    update();
+    updateGeometry();
 }
+
+void Twitter::showTweets()
+{
+    foreach( Plasma::LineEdit *e, m_tweetWidgets ) {
+        m_layout->removeItem( e );
+        delete e;
+    }
+    m_tweetWidgets.clear();
+
+    int i = 0;
+    int pos = m_tweetMap.keys().size() - 1;
+    while(i < m_historySize && i < m_tweetMap.keys().size() ) {
+        Plasma::LineEdit *e = new Plasma::LineEdit( this );
+        e->setTextWidth( 250 );
+        e->setStyled( false );
+        e->setEnabled( false );
+        e->setCursor( Qt::ArrowCursor );
+        e->setAcceptedMouseButtons( Qt::NoButton );
+        m_layout->addItem( e );
+        m_tweetWidgets.append( e );
+    kDebug();
+        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+    kDebug();
+        QString html = "<table cellspacing='0'>";
+        html += i18n( "<tr><td width='1%'><font color='#fcfcfc'><b>%1</b></font></td>"
+                "<td align='right' width='99%'><font color='#fcfcfc'>%2 from %3</font></td></tr>", 
+                tweetData.value( "User" ).toString(), timeDescription( tweetData.value( "Date" ).toDateTime() ),
+                tweetData.value( "Source" ).toString() );
+        html += QString( "<tr><td colspan='2'><font color='#fcfcfc'>%1<br></font></td></tr>" )
+                .arg( tweetData.value( "Status" ).toString() );
+        html += "</table>";
+        e->setHtml( html );
+        ++i;
+        --pos;
+    }
+    updateGeometry();
+}
+
 
 void Twitter::newSource( const QString &source )
 {
-    if( !source.startsWith( "Timeline" ) )
-        m_engine->connectSource( source, this );
+    m_engine->connectSource( source, this );
 }
 
 void Twitter::showConfigurationInterface()
@@ -223,6 +242,7 @@ void Twitter::configAccepted()
     if( m_username != m_usernameEdit->text() ) {
         m_icon->setIcon( QIcon() );
     }
+    bool refresh = ( m_historySize != m_historySizeSpinBox->value() );
 
     KConfigGroup cg = config();
     m_username = m_usernameEdit->text();
@@ -236,8 +256,7 @@ void Twitter::configAccepted()
     m_includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
     cg.config()->sync();
 
-//     m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
-    kDebug() << m_username << " " << m_password;
+    m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
     if( !m_username.isEmpty() && !m_password.isEmpty() )
       m_statusEdit->show();
     else
@@ -245,9 +264,11 @@ void Twitter::configAccepted()
 
     m_engine->setProperty( "username", m_username );
     m_engine->setProperty( "password", m_password );
+    m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
 
-    downloadHistory();
-    update();
+    if( refresh ) {
+        showTweets();
+    }
 }
 
 Twitter::~Twitter()
@@ -265,8 +286,10 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, contentsRect.y(), 75, 12), "twitter" );
 
     p->setBrush( QColor( 32, 32, 32 ) );
-    p->drawRect( contentsRect.x(), contentsRect.y() + 18, contentsRect.width(), 54);
-    p->drawRect( contentsRect.x(), contentsRect.y() + 75, contentsRect.width(), contentsRect.height()-75);
+    foreach( Plasma::LineEdit *e, m_tweetWidgets ) {
+        p->drawRect( 0, e->geometry().y(), contentSize().width(), e->geometry().height() );
+    }
+    p->drawRect( m_headerLayout->geometry() );
 }
 
 
@@ -288,8 +311,8 @@ void Twitter::downloadHistory()
     if ( m_username.isEmpty() || m_password.isEmpty() )
         return;
 
-    if( !m_curTimeline.isEmpty() )
-        m_engine->disconnectSource( m_curTimeline, this );
+//     if( !m_curTimeline.isEmpty() )
+//         m_engine->disconnectSource( m_curTimeline, this );
 
     QString query;
     if( m_includeFriends) {
@@ -298,7 +321,8 @@ void Twitter::downloadHistory()
         query = QString( "Timeline:%1" ).arg( m_username );
     }
     m_curTimeline = query;
-    m_engine->connectSource( query, this );
+    kDebug() << "Connecting to source " << query;
+    m_engine->query( query );
 }
 
 QString Twitter::timeDescription( const QDateTime &dt )

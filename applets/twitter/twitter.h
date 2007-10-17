@@ -42,6 +42,7 @@ namespace Plasma
     class Flash;
     class Icon;
     class VBoxLayout;
+    class HBoxLayout;
 }
 namespace KIO
 {
@@ -76,6 +77,7 @@ class Twitter : public Plasma::Applet
 
     protected:
         QString timeDescription( const QDateTime &dt );
+        void showTweets();
 
     Q_SIGNALS:
         void pictureDownloaded( const QString &nick );
@@ -89,6 +91,7 @@ class Twitter : public Plasma::Applet
         Plasma::Flash *m_flash;
         Plasma::Icon *m_icon;
         Plasma::VBoxLayout *m_layout;
+        Plasma::HBoxLayout *m_headerLayout;
 
         KLineEdit *m_usernameEdit;
         KLineEdit *m_passwordEdit;
@@ -114,6 +117,8 @@ class Twitter : public Plasma::Applet
         QMap< QString, QPixmap > m_pictureMap;
         QMap< KJob *, QString > m_pictureDownloadMap;
         QMap< KJob *, QByteArray > m_bufferMap;
+        QMap< QString, Plasma::DataEngine::Data > m_tweetMap;
+        QList< Plasma::LineEdit * > m_tweetWidgets;
 
         uint m_lastTweet;
 };
