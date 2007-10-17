@@ -1,6 +1,6 @@
 /*
  *   Copyright (C) 2007 Trever Fischer <wm161@wm161.net>
- *   Copyright (C) 2007 André Duffeck <andre@duffeck.de>
+ *   Copyright (C) 2007 André Duffeck <duffekc@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -40,7 +40,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     connect(m_http,SIGNAL(requestFinished(int,bool)), this, SLOT(requestFinished(int,bool)));
 
     setMinimumUpdateInterval(10 * 1000);
-    setUpdateInterval(60 * 1000);
+    setUpdateInterval(5 * 60 * 1000);
 }
 
 TwitterEngine::~TwitterEngine()
@@ -59,6 +59,11 @@ void TwitterEngine::setUsername(const QString &username)
     m_http->setUser(m_username,m_password);
 }
 
+void TwitterEngine::setInterval(const QString &interval)
+{
+    setUpdateInterval( interval.toInt() );
+}
+
 QString TwitterEngine::username() const
 {
     return m_username;
@@ -69,6 +74,11 @@ QString TwitterEngine::password() const
     return m_password;
 }
 
+QString TwitterEngine::interval() const
+{
+    return m_interval;
+}
+
 /*QStringList TwitterEngine::sources() const
 {
     return QStringList() << "Timeline";
@@ -76,7 +86,7 @@ QString TwitterEngine::password() const
 
 bool TwitterEngine::sourceRequested(const QString &name)
 {
-    kDebug() ;
+    kDebug() << name;
     m_activeSources.append( name );
     updateSource(name);
     return true;
@@ -84,7 +94,7 @@ bool TwitterEngine::sourceRequested(const QString &name)
 
 void TwitterEngine::requestFinished(int id, bool error)
 {
-    kDebug() ;
+    kDebug() << id << error;
     if( error ) {
         kDebug() << "An error occured: " << m_http->errorString();
         return;

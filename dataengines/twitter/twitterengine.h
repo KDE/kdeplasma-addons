@@ -1,6 +1,6 @@
 /*
  *   Copyright (C) 2007 Trever Fischer <wm161@wm161.net>
- *   Copyright (C) 2007 André Duffeck <andre@duffeck.de>
+ *   Copyright (C) 2007 André Duffeck <duffeck@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -33,6 +33,7 @@ class TwitterEngine : public Plasma::DataEngine
     Q_OBJECT
     Q_PROPERTY(QString username READ username WRITE setUsername)
     Q_PROPERTY(QString password READ password WRITE setPassword)
+    Q_PROPERTY(QString interval READ interval WRITE setInterval)
 
     public:
         TwitterEngine(QObject* parent,const QVariantList& args);
@@ -43,6 +44,10 @@ class TwitterEngine : public Plasma::DataEngine
 
         QString username() const;
         void setUsername(const QString &username);
+
+        QString interval() const;
+        void setInterval(const QString& interval);
+
         //QStringList sources() const;
         enum UpdateType { Timeline=1, Status, UserTimeline, UserTimelineWithFriends, UserImage };
 
@@ -63,6 +68,7 @@ private:
 
         QString m_username;
         QString m_password;
+        QString m_interval;
         QHttp* m_http;
         QMap<int,UpdateType> m_updates;
         QMap<int,QString> m_timelines;
