@@ -17,13 +17,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LISTVIEW_H_
-#define LISTVIEW_H_
+#ifndef LANCELOT_LISTVIEW_H_
+#define LANCELOT_LISTVIEW_H_
 
 #include <QtGui>
 #include <QtCore>
 #include <KDebug>
-#include <plasma/widgets/widget.h>
+#include "Widget.h"
 #include "ExtenderButton.h"
 
 namespace Lancelot
@@ -38,13 +38,18 @@ public:
     virtual QString title(int index) const = 0;
     virtual QString description(int index) const { Q_UNUSED(index); return QString(); };
     virtual QIcon * icon(int index) const = 0;
+    virtual bool isCategory(int index) const { return false; };
+    
     virtual int size() const = 0;
     
 Q_SIGNALS:
     void updated();
-};    
+    void itemInserted(int index);
+    void itemDeleted(int index);
+    void itemAltered(int index);
+};
 
-class ActionListView : public Plasma::Widget
+class ActionListView : public Widget
 {
     Q_OBJECT
     
@@ -55,88 +60,92 @@ public:
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model();
     
-    void setItemHeight(int height);
-    int itemHeight();
-    void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
+    void setMinimumItemHeight(int height);
+    void setMaximumItemHeight(int height);
+    void setPreferredItemHeight(int height);
     
+    int minimumItemHeight();
+    int maximumItemHeight();
+    int preferredItemHeight();
+    
+    void setCategoryItemHeight(int height);
+    int categoryItemHeight();
+
     void setExtenderPosition(ExtenderButton::ExtenderPosition position);
     ExtenderButton::ExtenderPosition extenderPosition();
     
+    void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
 
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    //virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    //virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     
-    QString name() const;
-    void setName(QString & name);
-
 Q_SIGNALS:
     void activated(int index);
     
 protected slots:
     void scrollTimer();
+    void modelUpdated();
+    void modelItemInserted(int index);
+    void modelItemDeleted(int index);
+    void modelItemAltered(int index);
     
 private:
     enum ScrollDirection {
         Up = 1, No = 0, Down = -1
     };
+    
+    enum ListTail {
+        Start = 0, End = 1
+    };
 
-    class ScrollButton : public Lancelot::BaseWidget {
+    class ScrollButton : public Lancelot::BaseActionWidget {
     public:
-        ScrollButton (ActionListView * list, QGraphicsItem * parent, ActionListView::ScrollDirection direction)
-          : BaseWidget("", "", "", parent), m_list(list), m_direction(direction) {
-            m_svg = new Plasma::Svg("lancelot/action_list_view");
-            m_svg->setContentType(Plasma::Svg::ImageSet);
-            m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
-            setAcceptsHoverEvents(true);
-        };
-        void hoverEnterEvent ( QGraphicsSceneHoverEvent * event) {
-            m_list->scroll(m_direction);
-            BaseWidget::hoverEnterEvent(event);
-        };
-        void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event) {
-            m_list->scroll(ActionListView::No);
-            BaseWidget::hoverLeaveEvent(event);
-        };
-        //void hide() {};
-        //void show() {};
+        ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
+        void hoverEnterEvent ( QGraphicsSceneHoverEvent * event);
+        void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event);
+
     private:
         ActionListView * m_list;
         ActionListView::ScrollDirection m_direction;
     };
     
-    QString m_name;
-    qreal m_topButtonVirtualY;
-    QTransform m_topButtonScale;
-    QTransform m_bottomButtonScale;
+    ActionListViewModel * m_model;
+    
+    int m_minimumItemHeight;
+    int m_maximumItemHeight;
+    int m_preferredItemHeight;
+    int m_categoryItemHeight;
+    int m_currentItemHeight;
+    
+    ExtenderButton::ExtenderPosition m_extenderPosition;
+    ScrollButton * scrollButtonUp, * scrollButtonDown;
     
     void scroll(ScrollDirection direction);
     ScrollDirection m_scrollDirection;
     QTimer m_scrollTimer;
     int m_scrollInterval;
     
-    ActionListViewModel * m_model;
-    int m_itemHeight;
-    
-    ExtenderButton::ExtenderPosition m_extenderPosition;
+    int m_topButtonIndex;
+    QList< QPair < ExtenderButton *, int > > m_buttons;
+    QList< ExtenderButton * > m_buttonsLimbo; // Buttons that are no longer needed, but not deleted
 
-    void deleteButtons();
-    void createNeededButtons(bool fullReload = false);
-    ExtenderButton * createButton();
+    QTransform m_topButtonScale;
+    QTransform m_bottomButtonScale;
     
-    void shiftButtonList(ScrollDirection direction);
-    
-    QLinkedList < ExtenderButton * > m_buttons;
-    
-    int m_firstButtonIndex;
-    bool m_creatingButtons;
+    bool m_initialButtonsCreationRunning;
+    void initialButtonsCreation();
     
     void positionScrollButtons();
-    ScrollButton * buttonUp, * buttonDown;
-    
+    Lancelot::ExtenderButton * createButton();
+    void deleteAllButtons();
+    bool addButton(ListTail where);
+    void deleteButton(ListTail where);
+    int calculateItemHeight();
+   
     friend class ScrollButton;
 };
 
 }
 
-#endif /*LISTVIEW_H_*/
+#endif /*LANCELOT_LISTVIEW_H_*/

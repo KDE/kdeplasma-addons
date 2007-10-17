@@ -1,16 +1,16 @@
-#ifndef PANEL_H_
-#define PANEL_H_
+#ifndef LANCELOT_PANEL_H_
+#define LANCELOT_PANEL_H_
 
-#include <plasma/widgets/widget.h>
+#include "Widget.h"
 #include <plasma/widgets/layout.h>
-#include "BaseWidget.h"
+#include "BaseActionWidget.h"
 
 #include <QIcon>
 
 namespace Lancelot
 {
 
-class Panel: public Plasma::Widget
+class Panel: public Widget
 {
 public:
     Panel(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);
@@ -37,8 +37,8 @@ public:
     void setLayout(Plasma::LayoutItem * layout);
     Plasma::LayoutItem * layout();
     
-    void setWidget(Plasma::Widget * widget);
-    Plasma::Widget * widget();
+    void setWidget(Widget * widget);
+    Widget * widget();
     
     void setVisible(bool visible);
     void show();
@@ -49,11 +49,10 @@ private:
     void invalidate();
     
     Plasma::LayoutItem * m_layout;
-    Plasma::Widget * m_widget;
+    Widget * m_widget;
     bool m_hasTitle;
-    QString m_name;
     
-    BaseWidget m_titleWidget;
+    BaseActionWidget m_titleWidget;
 };
 
 }

@@ -16,12 +16,13 @@ set(
   main.cpp
   LancelotApplication.cpp
   LancelotWindow.cpp
-  PositionLayout.cpp
   CardLayout.cpp
   ExtenderButton.cpp
-  BaseWidget.cpp
+  BaseActionWidget.cpp
   ActionListView.cpp
   Panel.cpp
+  Global.cpp
+  Widget.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml

@@ -17,29 +17,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef BASEWIDGET_H_
-#define BASEWIDGET_H_
+#ifndef LANCELOT_BASEACTIONWIDGET_H_
+#define LANCELOT_BASEACTIONWIDGET_H_
 
 #include <QtGui>
 #include <QtCore>
-#include <plasma/widgets/widget.h>
 #include <plasma/svg.h>
+#include "Widget.h"
 
 namespace Lancelot
 {
 
-class BaseWidget: public Plasma::Widget
-{
+class BaseActionWidget: public Widget {
     Q_OBJECT
     
 public:
     enum InnerOrientation { Vertical, Horizontal };
     
-    BaseWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseWidget(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
-    virtual ~BaseWidget();
+    virtual ~BaseActionWidget();
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);   
 	virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
@@ -47,10 +46,10 @@ public:
     
     void setSvg(Plasma::Svg * svg);
     Plasma::Svg * svg() const;
-
+/*
     void resize (const QSizeF &size);
     void resize (qreal width, qreal height);
-    
+    */
     void setIconSize(QSize size);
     QSize iconSize() const;
     
@@ -72,9 +71,6 @@ public:
     void setAlignment(Qt::Alignment alignment);
     Qt::Alignment alignment() const;
     
-    void setName(QString name);
-    QString name() const;
-    
 Q_SIGNALS:
     void mouseHoverEnter();
     void mouseHoverLeave();
@@ -95,7 +91,6 @@ protected:
     
     QString m_title;
     QString m_description;
-    QString m_name; // ATM mostly for debuging purposes
     
 private:
     void init();
@@ -105,4 +100,4 @@ private:
 
 } // namespace Lancelot
 
-#endif /*BASEWIDGET_H_*/
+#endif /*LANCELOT_BASEACTIONWIDGET_H_*/

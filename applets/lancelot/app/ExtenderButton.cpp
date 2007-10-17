@@ -25,8 +25,8 @@
 
 namespace Lancelot {
 
-Plasma::Svg * ExtenderButton::m_extenderButtonSvg= NULL;
-Plasma::Svg * ExtenderButton::m_extenderIconSvg= NULL;
+Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
+Plasma::Svg * ExtenderButton::m_extenderIconSvg = NULL;
 int * ExtenderButton::m_extendersCount = 0;
 
 ExtenderButton::ExtenderButton(QString name, QString title, QString description,
@@ -61,10 +61,9 @@ void ExtenderButton::init()
 
         m_extenderIconSvg = new Plasma::Svg("lancelot/extender_button_icon");
         m_extenderIconSvg->setContentType(Plasma::Svg::ImageSet);
-
-        ++m_extendersCount;
     }
 
+    ++m_extendersCount;
     m_svg = m_extenderButtonSvg;
 
     m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
@@ -80,6 +79,8 @@ ExtenderButton::~ExtenderButton()
     if (--m_extendersCount == 0) {
         delete m_extenderButtonSvg;
         delete m_extenderIconSvg;
+        m_extenderButtonSvg = 0;
+        m_extenderIconSvg = 0;
     }
     delete m_extender;
 }
@@ -108,7 +109,7 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     if (m_extenderPosition != No)
         m_extender->setVisible(true);
     else if (m_activationMethod == Hover)
-emit         activated();
+    emit activated();
     SUPER::hoverEnterEvent(event);
 }
 

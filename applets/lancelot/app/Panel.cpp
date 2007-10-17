@@ -5,24 +5,24 @@ namespace Lancelot
 {
 
 Panel::Panel(QString name, QIcon * icon, QString title, QGraphicsItem * parent)
-  : Plasma::Widget(parent),
-    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()), m_name(name),
+  : Widget(name, parent),
+    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()),
     m_titleWidget(name + "::TitleWidget", icon, title, "", this)
 {
     init();
 }
 
 Panel::Panel(QString name, QString title, QGraphicsItem * parent)
-  : Plasma::Widget(parent),
-    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()), m_name(name),
+  : Widget(name, parent),
+    m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()),
     m_titleWidget(name + "::TitleWidget", title, "", this)
 {
     init();
 }
 
 Panel::Panel(QString name, QGraphicsItem * parent)
-  : Plasma::Widget(parent),
-    m_layout(NULL), m_widget(NULL), m_hasTitle(false), m_name(name),
+  : Widget(name, parent),
+    m_layout(NULL), m_widget(NULL), m_hasTitle(false),
     m_titleWidget(name + "::TitleWidget", "", "" , this)
 {
     init();
@@ -67,7 +67,7 @@ QSize Panel::iconSize() const {
 }
 
 void Panel::setGeometry (const QRectF & geometry) {
-    Plasma::Widget::setGeometry(geometry);
+    Widget::setGeometry(geometry);
     invalidate();
 }
 
@@ -106,13 +106,13 @@ Plasma::LayoutItem * Panel::layout() {
     return m_layout;
 }
 
-void Panel::setWidget(Plasma::Widget * widget) {
+void Panel::setWidget(Widget * widget) {
     m_widget = widget;
     widget->setParentItem(this);
     invalidate();
 }
 
-Plasma::Widget * Panel::widget() {
+Widget * Panel::widget() {
     return m_widget;
 }
 

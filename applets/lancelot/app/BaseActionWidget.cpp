@@ -17,9 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "BaseWidget.h"
+#include "BaseActionWidget.h"
 #include <KDebug>
 #include <cmath>
+#include "Global.h"
 
 #define WIDGET_PADDING 8
 
@@ -39,77 +40,87 @@
 namespace Lancelot
 {
 
-void BaseWidget::init()
+void BaseActionWidget::init()
 {
-    kDebug() << name() << " BaseWidget::init() reached\n";
+    kDebug() << name() << "\n";
     setAcceptsHoverEvents(true);
-    //resize(140, 38);
+    resize(140, 38);
 }
 
-BaseWidget::BaseWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-  : Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
+  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter), 
-    m_title(title), m_description(description), m_name(name)
+    m_title(title), m_description(description)
 {
     init();
 }
 
-BaseWidget::BaseWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-: Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
-  m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
-  m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
-  m_title(title), m_description(description), m_name(name)
+BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
+  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+    m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
+    m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
+    m_title(title), m_description(description)
 {
     init();
 }
 
-BaseWidget::BaseWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-: Plasma::Widget(parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
-  m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
-  m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
-  m_title(title), m_description(description), m_name(name) 
+BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
+  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+    m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
+    m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
+    m_title(title), m_description(description) 
 {
     init();
 }
 
-BaseWidget::~BaseWidget()
+BaseActionWidget::~BaseActionWidget()
 {}
 
-void BaseWidget::resize (const QSizeF &size) {
-    Plasma::Widget::resize(size);
+/*
+void BaseActionWidget::resize (const QSizeF &size) {
+    Widget::resize(size);
     resizeSvg();
 }
 
-void BaseWidget::resize (qreal width, qreal height) {
-    Plasma::Widget::resize(width, height);
+void BaseActionWidget::resize (qreal width, qreal height) {
+    Widget::resize(width, height);
     resizeSvg();
 }
+*/
 
-
-void BaseWidget::resizeSvg() {
-    if (m_svg) m_svg->resize(size());
+void BaseActionWidget::resizeSvg() {
+    if (m_svg) {
+        m_svg->resize(size());
+    }
 }
 
-void BaseWidget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
+void BaseActionWidget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
     m_hover = true;
-    Plasma::Widget::hoverEnterEvent(event);
+    Widget::hoverEnterEvent(event);
     emit mouseHoverEnter();
     update();
 }
 
-void BaseWidget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
+void BaseActionWidget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
     m_hover = false;
-    Plasma::Widget::hoverEnterEvent(event);
+    Widget::hoverEnterEvent(event);
     emit mouseHoverLeave();
     update();
 }
 
-void BaseWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
+void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
+    if (!m_hover) {
+        painter->setPen(QPen(Global::textColorNormal));
+    } else {
+        painter->setPen(QPen(Global::textColorActive));
+    }
+    
     // Background Painting
+    kDebug() << "SVG object is " << (long)m_svg << "\n";
     if (m_svg) {
         resizeSvg();
         QString element = m_svgElementPrefix + (m_hover?"button_active":"button_inactive") + m_svgElementSufix;
@@ -230,41 +241,38 @@ void BaseWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsIte
     }
 }
 
-void BaseWidget::setSvg(Plasma::Svg * svg) {
+void BaseActionWidget::setSvg(Plasma::Svg * svg) {
     m_svg = svg;
     update();
 }
 
-Plasma::Svg * BaseWidget::svg() const {
+Plasma::Svg * BaseActionWidget::svg() const {
     return m_svg;
 }
 
-void BaseWidget::setIconSize(QSize size) { m_iconSize = size; update(); }
-QSize BaseWidget::iconSize() const { return m_iconSize; }
+void BaseActionWidget::setIconSize(QSize size) { m_iconSize = size; update(); }
+QSize BaseActionWidget::iconSize() const { return m_iconSize; }
 
-void BaseWidget::setIcon(QIcon * icon) { m_icon = icon; update(); }
-QIcon * BaseWidget::icon() const { return m_icon; }
+void BaseActionWidget::setIcon(QIcon * icon) { m_icon = icon; update(); }
+QIcon * BaseActionWidget::icon() const { return m_icon; }
 
-void BaseWidget::setIconInSvg(Plasma::Svg * icon) { m_iconInSvg = icon; update(); }
-Plasma::Svg * BaseWidget::iconInSvg() const { return m_iconInSvg; }
+void BaseActionWidget::setIconInSvg(Plasma::Svg * icon) { m_iconInSvg = icon; update(); }
+Plasma::Svg * BaseActionWidget::iconInSvg() const { return m_iconInSvg; }
 
-void BaseWidget::setName(QString name) { m_name = name; }
-QString BaseWidget::name() const { return m_name; }
+void BaseActionWidget::setTitle(QString title) { m_title = title; update(); }
+QString BaseActionWidget::title() const { return m_title; }
 
-void BaseWidget::setTitle(QString title) { m_title = title; update(); }
-QString BaseWidget::title() const { return m_title; }
+void BaseActionWidget::setDescription(QString description) { m_description = description; update(); }
+QString BaseActionWidget::description() const { return m_description; }
 
-void BaseWidget::setDescription(QString description) { m_description = description; update(); }
-QString BaseWidget::description() const { return m_description; }
+void BaseActionWidget::setInnerOrientation(BaseActionWidget::InnerOrientation position) { m_innerOrientation = position; update(); }
+BaseActionWidget::InnerOrientation BaseActionWidget::innerOrientation() const { return m_innerOrientation; }
 
-void BaseWidget::setInnerOrientation(BaseWidget::InnerOrientation position) { m_innerOrientation = position; update(); }
-BaseWidget::InnerOrientation BaseWidget::innerOrientation() const { return m_innerOrientation; }
-
-void BaseWidget::setAlignment(Qt::Alignment alignment) { m_alignment = alignment; update(); }
-Qt::Alignment BaseWidget::alignment() const { return m_alignment; }
+void BaseActionWidget::setAlignment(Qt::Alignment alignment) { m_alignment = alignment; update(); }
+Qt::Alignment BaseActionWidget::alignment() const { return m_alignment; }
 
 
 
 } // namespace Lancelot
 
-#include "BaseWidget.moc"
+#include "BaseActionWidget.moc"

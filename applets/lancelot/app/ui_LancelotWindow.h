@@ -38,22 +38,19 @@
 #include <plasma/widgets/nodelayout.h>
 #include <plasma/widgets/boxlayout.h>
 
-//#include "PositionLayout.h"
-
 #include "ExtenderButton.h"
 #include "ActionListView.h"
 #include "Panel.h"
 #include "CardLayout.h"
-#include "PositionLayout.h"
-//#include "NodeLayout.h"
+#include "Global.h"
 
 #define SYSTEM_BUTTONS_Z_VALUE 1
 
 // CreateSection (Panel, lAyout, LeftList, RightList)
 #define CreateSection(SECTION) \
     (layoutSection ## SECTION) = new Plasma::NodeLayout(); \
-    (listSection ## SECTION ## Left) = new Lancelot::ActionListView("listSectionLeft", new DummyListModel(#SECTION, 20), (panelSection ## SECTION)); \
-    (listSection ## SECTION ## Right) = new Lancelot::ActionListView("listSectionRight", new DummyListModel(#SECTION, 20), (panelSection ## SECTION));
+    (listSection ## SECTION ## Left) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Left", NULL /*new DummyListModel(#SECTION, 5)*/, (panelSection ## SECTION)); \
+    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new DummyListModel(#SECTION, 15), (panelSection ## SECTION));
 
 // SetupSection (lAyout, LeftList, RightList)
 #define SetupSection(SECTION) \
@@ -70,13 +67,14 @@
     (listSection ## SECTION ## Left)->setExtenderPosition(Lancelot::ExtenderButton::Left); \
     (panelSection ## SECTION)->setLayout(layoutSection ## SECTION);
 
-#define DebugSection(SECTION) \
+#define DebugSection(SECTION) ;
+/*\
     kDebug() << "panelSection" << #SECTION << " " << (long) (panelSection ## SECTION) << "\n"; \
     kDebug() << "layoutSection" << #SECTION << " " << (long) (layoutSection ## SECTION) << "\n"; \
     kDebug() << "listSection" << #SECTION << "Left " << (long) (listSection ## SECTION ## Left) << "\n"; \
     kDebug() << "                         " << (listSection ## SECTION ## Left)->name() << "\n"; \
     kDebug() << "listSection" << #SECTION << "Right " << (long) (listSection ## SECTION ## Right) << "\n"; \
-    kDebug() << "                         " << (listSection ## SECTION ## Right)->name() << "\n";
+    kDebug() << "                         " << (listSection ## SECTION ## Right)->name() << "\n";*/
     
 class DummyListModel : public Lancelot::ActionListViewModel {
 public:
@@ -211,6 +209,8 @@ protected:
         // TODO: Make it show exactly what you want!!! It works?
         object->resize(550, 500);
         
+        Lancelot::Global::activateAll();
+
         layoutMain->setGeometry(QRectF(0, 0, 550, 500));
         
         m_corona->setSceneRect(QRectF(0, 0, 550, 500));
@@ -332,7 +332,7 @@ protected:
             button->setActivationMethod(Lancelot::ExtenderButton::Hover);
             button->setIconSize(QSize(48, 48));
             button->setZValue(1);
-            button->setInnerOrientation(Lancelot::BaseWidget::Vertical);
+            button->setInnerOrientation(Lancelot::BaseActionWidget::Vertical);
 
             layoutSections->addItem(button);
         }

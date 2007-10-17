@@ -17,19 +17,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef EXTENDERBUTTON_H_
-#define EXTENDERBUTTON_H_
+#ifndef LANCELOT_EXTENDERBUTTON_H_
+#define LANCELOT_EXTENDERBUTTON_H_
 
 #include <QtGui>
 #include <QtCore>
-#include <plasma/widgets/widget.h>
-#include "BaseWidget.h"
+#include "Widget.h"
+#include "BaseActionWidget.h"
 
 #ifdef SUPER
 #undef SUPER
 #endif
 
-#define SUPER BaseWidget
+#define SUPER BaseActionWidget
 #define EXTENDER_SIZE 20
 
 namespace Lancelot

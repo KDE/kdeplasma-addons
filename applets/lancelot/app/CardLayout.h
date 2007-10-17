@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CARDLAYOUT_H_
-#define CARDLAYOUT_H_
+#ifndef LANCELOT_CARDLAYOUT_H_
+#define LANCELOT_CARDLAYOUT_H_
 
 #include <plasma/widgets/layout.h>
 #include <plasma/widgets/widget.h>
