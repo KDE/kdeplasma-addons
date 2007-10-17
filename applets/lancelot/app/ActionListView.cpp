@@ -41,21 +41,21 @@ ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection dire
     m_svg->setContentType(Plasma::Svg::ImageSet);
     m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
     setAcceptsHoverEvents(true);
-};
+}
 
 void ActionListView::ScrollButton::hoverEnterEvent (QGraphicsSceneHoverEvent * event)
 {
     if (m_hover) return;
     m_list->scroll(m_direction);
     BaseActionWidget::hoverEnterEvent(event);
-};
+}
 
 void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * event)
 {
     if (!m_hover) return;
     m_list->scroll(ActionListView::No);
     BaseActionWidget::hoverLeaveEvent(event);
-};
+}
 
 // ActionListView
 ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraphicsItem * parent)
