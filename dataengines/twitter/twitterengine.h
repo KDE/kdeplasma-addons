@@ -61,6 +61,7 @@ class TwitterEngine : public Plasma::DataEngine
         void getTweet(const int &ID);
         void getUserImage( const QString &who, const KUrl& url );
         void requestFinished(int id, bool error);
+        void unauthorizedRequestFinished(int id, bool error);
         bool updateSource(const QString &source);
 
 private:
@@ -70,7 +71,9 @@ private:
         QString m_password;
         QString m_interval;
         QHttp* m_http;
+        QHttp* m_unauthorizedHttp;
         QMap<int,UpdateType> m_updates;
+        QMap<int,UpdateType> m_unauthorizedUpdates;
         QMap<int,QString> m_timelines;
         QStringList m_activeSources;
         QMap<QString,KUrl> m_userImages;

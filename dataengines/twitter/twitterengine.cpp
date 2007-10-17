@@ -38,6 +38,8 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 
     m_http = new QHttp("twitter.com");
     connect(m_http,SIGNAL(requestFinished(int,bool)), this, SLOT(requestFinished(int,bool)));
+    m_unauthorizedHttp = new QHttp("twitter.com");
+    connect(m_unauthorizedHttp,SIGNAL(requestFinished(int,bool)), this, SLOT(unauthorizedRequestFinished(int,bool)));
 
     setMinimumUpdateInterval(10 * 1000);
     setUpdateInterval(5 * 60 * 1000);
@@ -127,6 +129,29 @@ void TwitterEngine::requestFinished(int id, bool error)
     }
 }
 
+void TwitterEngine::unauthorizedRequestFinished(int id, bool error)
+{
+    kDebug() << id << error;
+    if( error ) {
+        kDebug() << "An error occured: " << m_unauthorizedHttp->errorString();
+        return;
+    }
+    UpdateType type = m_unauthorizedUpdates.take(id);
+    QByteArray data = m_unauthorizedHttp->readAll();
+    QDomDocument xml;
+    xml.setContent(data);
+
+    if (type==UserImage) {
+        kDebug() << "UserImage:" << m_timelines.value(id);
+        QImage img;
+        img.loadFromData( data );
+        QPixmap pm = QPixmap::fromImage( img ).scaled( 48, 48 );
+        QString user = m_timelines.value(id);
+        setData(QString("UserInfo:%1").arg(user), "Image", pm );
+    }
+}
+
+
 bool TwitterEngine::updateSource(const QString &source)
 {
     if (source=="Timeline") {
@@ -181,9 +206,9 @@ void TwitterEngine::getTweet(const int &ID)
 void TwitterEngine::getUserImage( const QString &who, const KUrl &url )
 {
     kDebug() << who << " " << url.url();
-    m_http->setHost( url.host() );
-    int id = m_http->get( url.path() );
-    m_updates.insert( id, UserImage );
+    m_unauthorizedHttp->setHost( url.host() );
+    int id = m_unauthorizedHttp->get( url.path() );
+    m_unauthorizedUpdates.insert( id, UserImage );
     m_timelines.insert( id, who );
 }
 
