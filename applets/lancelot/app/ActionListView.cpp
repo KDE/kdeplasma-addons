@@ -176,10 +176,10 @@ ActionListViewModel * ActionListView::model()
     return m_model;
 }
 
-void ActionListView::modelUpdated() {};
-void ActionListView::modelItemInserted(int index) {};
-void ActionListView::modelItemDeleted(int index) {};
-void ActionListView::modelItemAltered(int index) {};
+void ActionListView::modelUpdated() {}
+void ActionListView::modelItemInserted(int index) {}
+void ActionListView::modelItemDeleted(int index) {}
+void ActionListView::modelItemAltered(int index) {}
 
 void ActionListView::paintWidget(QPainter * painter,
         const QStyleOptionGraphicsItem * option, QWidget * widget)
