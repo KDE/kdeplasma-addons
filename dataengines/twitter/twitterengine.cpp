@@ -133,8 +133,11 @@ bool TwitterEngine::updateSource(const QString &source)
         updateTimeline();
     }
     QStringList tokens = source.split(':');
-    if (tokens.at(0)=="Update")
-        getTweet(tokens.at(1).toInt());
+    if (tokens.at(0)=="Update") {
+        kDebug() << source << " : " << sourceDict()[source];
+        if( !sourceDict()[source] )
+            getTweet(tokens.at(1).toInt());
+    }
     if (tokens.at(0)=="Timeline") {
         updateUser(tokens.at(1));
     }
