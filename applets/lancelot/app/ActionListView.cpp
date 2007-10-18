@@ -252,10 +252,10 @@ ActionListViewModel * ActionListView::model()
 }
 
 // TODO: Model updates
-void ActionListView::modelUpdated() {};
-void ActionListView::modelItemInserted(int index) { Q_UNUSED(index); };
-void ActionListView::modelItemDeleted(int index) { Q_UNUSED(index); };
-void ActionListView::modelItemAltered(int index) { Q_UNUSED(index); };
+void ActionListView::modelUpdated() { initialButtonsCreation(); };
+void ActionListView::modelItemInserted(int index) { Q_UNUSED(index); modelUpdated(); };
+void ActionListView::modelItemDeleted(int index)  { Q_UNUSED(index); modelUpdated(); };
+void ActionListView::modelItemAltered(int index)  { Q_UNUSED(index); modelUpdated(); };
 
 void ActionListView::paintWidget(QPainter * painter,
         const QStyleOptionGraphicsItem * option, QWidget * widget)

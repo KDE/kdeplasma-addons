@@ -1,5 +1,4 @@
 #include "ActionListViewModels.h"
-#include <KDebug>
 
 namespace Lancelot {
 
@@ -195,7 +194,6 @@ int ActionListViewMergedModel::modelCount() const
 int ActionListViewMergedModel::size() const
 {
     int size = m_models.size();
-    kDebug() << size << "\n";
     foreach (ActionListViewModel * model, m_models) {
         size += model->size();
     }

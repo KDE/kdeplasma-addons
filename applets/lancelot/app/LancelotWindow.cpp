@@ -42,7 +42,7 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     );
 
     connect(buttonSectionApplications, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "Applications");
+    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "");
 
     connect(buttonSectionContacts, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionContacts, "Contacts");

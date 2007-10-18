@@ -42,6 +42,7 @@
 #include "ActionListView.h"
 #include "ActionListViewModels.h"
 #include "Panel.h"
+#include "PassagewayView.h"
 #include "CardLayout.h"
 #include "Global.h"
 
@@ -142,7 +143,7 @@ protected:
     // Center area
     Lancelot::CardLayout * layoutCenter;
     QList < Lancelot::Panel * > sectionPanels;
-    Lancelot::Panel * panelSectionApplications;
+    Lancelot::PassagewayView * panelSectionApplications;
     
     // Center area :: Search
     Lancelot::Panel * panelSectionSearch;
@@ -238,7 +239,7 @@ protected:
         layoutCenter = new Lancelot::CardLayout();
         
         sectionPanels.append(panelSectionApplications = 
-            new Lancelot::Panel("panelSectionApplications", new KIcon("make-kdevelop"), "Applications"));
+            new Lancelot::PassagewayView("panelSectionApplications"));
         sectionPanels.append(panelSectionContacts = 
             new Lancelot::Panel("panelSectionContacts", new KIcon("kontact"), "Contacts"));
         sectionPanels.append(panelSectionDocuments = 

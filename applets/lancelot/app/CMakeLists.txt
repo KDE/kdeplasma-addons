@@ -21,6 +21,8 @@ set(
   BaseActionWidget.cpp
   ActionListView.cpp
   ActionListViewModels.cpp
+  PassagewayView.cpp
+  PassagewayViewModels.cpp
   Panel.cpp
   Global.cpp
   Widget.cpp
