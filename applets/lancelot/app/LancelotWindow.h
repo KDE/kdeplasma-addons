@@ -47,7 +47,8 @@ protected:
     void focusOutEvent(QFocusEvent * event);
     
 private Q_SLOTS:
-    void itemActivated(const QString & item);
+    void sectionActivated(const QString & item);
+    void activated(int index);
     
 private:
     QTimer m_hideTimer;

@@ -40,6 +40,7 @@
 
 #include "ExtenderButton.h"
 #include "ActionListView.h"
+#include "ActionListViewModels.h"
 #include "Panel.h"
 #include "CardLayout.h"
 #include "Global.h"
@@ -49,8 +50,8 @@
 // CreateSection (Panel, lAyout, LeftList, RightList)
 #define CreateSection(SECTION) \
     (layoutSection ## SECTION) = new Plasma::NodeLayout(); \
-    (listSection ## SECTION ## Left) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Left", NULL /*new DummyListModel(#SECTION, 5)*/, (panelSection ## SECTION)); \
-    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new DummyListModel(#SECTION, 15), (panelSection ## SECTION));
+    (listSection ## SECTION ## Left) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Left", new Lancelot::DummyActionListViewModel(#SECTION, 20), (panelSection ## SECTION)); \
+    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new Lancelot::DummyActionListViewMergedModel(#SECTION, 5), (panelSection ## SECTION));
 
 // SetupSection (lAyout, LeftList, RightList)
 #define SetupSection(SECTION) \
@@ -65,6 +66,7 @@
         Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0) \
     ); \
     (listSection ## SECTION ## Left)->setExtenderPosition(Lancelot::ExtenderButton::Left); \
+    (listSection ## SECTION ## Right)->setExtenderPosition(Lancelot::ExtenderButton::Right); \
     (panelSection ## SECTION)->setLayout(layoutSection ## SECTION);
 
 #define DebugSection(SECTION) ;
@@ -76,30 +78,6 @@
     kDebug() << "listSection" << #SECTION << "Right " << (long) (listSection ## SECTION ## Right) << "\n"; \
     kDebug() << "                         " << (listSection ## SECTION ## Right)->name() << "\n";*/
     
-class DummyListModel : public Lancelot::ActionListViewModel {
-public:
-    DummyListModel(QString title, int size) : Lancelot::ActionListViewModel(), m_size(size), m_title(title) {}
-    virtual ~DummyListModel() {}
-    
-    virtual QString title(int index) const {
-        if (index % 10 == 3) {
-            return "\nCategory " + QString::number(index) + QString((index < size())?"":"err"); 
-        }
-        return m_title + QString::number(index) + QString((index < size())?"":"err"); 
-    }
-    
-    virtual QString description(int index) const {
-        if (index % 10 == 3) return "";
-        return "Description " + QString::number(index); 
-    }
-    virtual QIcon * icon(int index) const { Q_UNUSED(index); return NULL; }
-    virtual int size() const { return m_size; }
-private:
-    int m_size;
-    QString m_title;
-};
-
-
 namespace Ui {
 class LancelotWindow
 {
@@ -206,7 +184,6 @@ protected:
         setupObjects(object);
         setupTests(object);
 
-        // TODO: Make it show exactly what you want!!! It works?
         object->resize(550, 500);
         
         Lancelot::Global::activateAll();
@@ -386,8 +363,8 @@ protected:
         m_view->setFrameStyle(QFrame::NoFrame);
         m_view->setCacheMode(QGraphicsView::CacheBackground);
         m_view->setInteractive(true);
-        m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // TODO: Change to off
-        m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);   // TODO: Change to off
+        m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
         m_view->m_background = new Plasma::Svg("lancelot/theme");
         m_view->m_background->setContentType(Plasma::Svg::ImageSet);

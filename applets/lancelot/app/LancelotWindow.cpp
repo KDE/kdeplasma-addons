@@ -38,7 +38,7 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     connect (m_sectionsSignalMapper, 
         SIGNAL(mapped(const QString &)), 
         this, 
-        SLOT(itemActivated(const QString &))
+        SLOT(sectionActivated(const QString &))
     );
 
     connect(buttonSectionApplications, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
@@ -53,10 +53,17 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionSystem, "System");
     
+    kDebug() << "###############################################\n";
+    connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
     
 }
 
-void LancelotWindow::itemActivated(const QString & item) {
+void LancelotWindow::activated(int index) {
+    kDebug() << index << " is activated\n";
+    
+}
+
+void LancelotWindow::sectionActivated(const QString & item) {
     kDebug() << item << " is activated\n";
     layoutCenter->show(item);
 }

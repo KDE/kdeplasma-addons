@@ -20,6 +20,7 @@ set(
   ExtenderButton.cpp
   BaseActionWidget.cpp
   ActionListView.cpp
+  ActionListViewModels.cpp
   Panel.cpp
   Global.cpp
   Widget.cpp

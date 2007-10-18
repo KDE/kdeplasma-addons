@@ -120,7 +120,6 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     }
     
     // Background Painting
-    kDebug() << "SVG object is " << (long)m_svg << "\n";
     if (m_svg) {
         resizeSvg();
         QString element = m_svgElementPrefix + (m_hover?"button_active":"button_inactive") + m_svgElementSufix;

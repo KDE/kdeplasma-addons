@@ -23,31 +23,14 @@
 #include <QtGui>
 #include <QtCore>
 #include <KDebug>
+#include <KIcon>
 #include "Widget.h"
 #include "ExtenderButton.h"
+#include "ActionListViewModels.h"
 
 namespace Lancelot
 {
 
-class ActionListViewModel: public QObject {
-    Q_OBJECT
-public:
-    ActionListViewModel() {};
-    virtual ~ActionListViewModel() {};
-    
-    virtual QString title(int index) const = 0;
-    virtual QString description(int index) const { Q_UNUSED(index); return QString(); };
-    virtual QIcon * icon(int index) const = 0;
-    virtual bool isCategory(int index) const { return false; };
-    
-    virtual int size() const = 0;
-    
-Q_SIGNALS:
-    void updated();
-    void itemInserted(int index);
-    void itemDeleted(int index);
-    void itemAltered(int index);
-};
 
 class ActionListView : public Widget
 {
@@ -77,6 +60,8 @@ public:
     void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
 
+    void wheelEvent ( QGraphicsSceneWheelEvent * event );
+    
     //virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     //virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     
@@ -85,6 +70,8 @@ Q_SIGNALS:
     
 protected slots:
     void scrollTimer();
+    void itemActivated(int index);
+    
     void modelUpdated();
     void modelItemInserted(int index);
     void modelItemDeleted(int index);
@@ -122,9 +109,11 @@ private:
     ScrollButton * scrollButtonUp, * scrollButtonDown;
     
     void scroll(ScrollDirection direction);
+    void scrollBy(int ammount);
     ScrollDirection m_scrollDirection;
     QTimer m_scrollTimer;
     int m_scrollInterval;
+    int m_scrollTimes;
     
     int m_topButtonIndex;
     QList< QPair < ExtenderButton *, int > > m_buttons;
@@ -132,6 +121,8 @@ private:
 
     QTransform m_topButtonScale;
     QTransform m_bottomButtonScale;
+    
+    QSignalMapper m_signalMapper;
     
     bool m_initialButtonsCreationRunning;
     void initialButtonsCreation();
