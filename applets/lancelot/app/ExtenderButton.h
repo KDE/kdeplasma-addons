@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -48,7 +48,7 @@ public:
             m_svgElementPrefix = "extender_";
         };
         friend class ExtenderButton;
-        
+
     };
 
     ExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
@@ -58,38 +58,38 @@ public:
     virtual ~ExtenderButton();
 
     virtual QRectF boundingRect () const;
-	
+
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    
+
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition();
-    
+
     void setActivationMethod(ActivationMethod method);
     ActivationMethod activationMethod();
-    
+
     void setGeometry (const QRectF & geometry);
-    
+
 protected:
     void mousePressEvent ( QGraphicsSceneMouseEvent * event );
-    
+
 private:
     void relayoutExtender();
     void init();
-    
+
     ExtenderObject * m_extender;
     ExtenderPosition m_extenderPosition;
     ActivationMethod m_activationMethod;
-    
+
     static Plasma::Svg * m_extenderIconSvg;
     static Plasma::Svg * m_extenderButtonSvg;
     static int * m_extendersCount;
 
 Q_SIGNALS:
     void activated();
-    
-    
-	
+
+
+
 };
 
 }

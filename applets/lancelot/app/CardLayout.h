@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -30,22 +30,22 @@ namespace Lancelot
 
 class CardLayout : public Plasma::Layout
 {
-    
+
 public:
     // reimplemented
     virtual Qt::Orientations expandingDirections() const;
-    
+
     explicit CardLayout(LayoutItem * parent = 0);
     virtual ~CardLayout();
-    
+
     virtual QRectF geometry() const;
     void setGeometry(const QRectF& geometry);
 
     QSizeF sizeHint() const;
-    
+
     void addItem (Plasma::LayoutItem * item);
     void addItem (Plasma::Widget * widget,const QString & id);
-    
+
     void removeItem (Plasma::LayoutItem * item);
     void removeItem (const QString & id);
 
@@ -53,9 +53,9 @@ public:
     virtual int indexOf(Plasma::LayoutItem * item) const;
     virtual Plasma::LayoutItem * itemAt(int i) const;
     virtual Plasma::LayoutItem * takeAt(int i);
-    
+
     void show(const QString & id);
-    void hideAll();    
+    void hideAll();
 
 private:
     QList < Plasma::LayoutItem * > m_items;

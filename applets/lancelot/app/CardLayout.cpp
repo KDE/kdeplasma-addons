@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -24,7 +24,7 @@ namespace Lancelot
 {
 
 
-CardLayout::CardLayout(LayoutItem * parent) 
+CardLayout::CardLayout(LayoutItem * parent)
   : Plasma::Layout(parent), m_shown(NULL)
 {
 }
@@ -47,23 +47,23 @@ void CardLayout::setGeometry(const QRectF& geometry)
         kDebug() << "Invalid Geometry " << geometry;
         return;
     }
-    
-    
-    
+
+
+
     QRectF g = geometry;
     g.setTopLeft(g.topLeft() + QPointF(margin(), margin()));
     g.setBottomRight(g.bottomRight() - QPointF(margin(), margin()));
-    
+
     foreach (Plasma::LayoutItem * l, m_items) {
         l->setGeometry(g);
     }
-    
+
     foreach (Plasma::Widget * l, m_widgets) {
         l->show();
         l->setGeometry(g);
         if (m_shown != l) l->hide();
     }
-    
+
     m_geometry = geometry;
 }
 
@@ -76,7 +76,7 @@ QSizeF CardLayout::sizeHint() const
         hintHeight = qMax(l->sizeHint().height(), hintHeight);
         hintWidth  = qMax(l->sizeHint().width(), hintWidth);
     }
-    
+
     foreach (Plasma::Widget * l, m_widgets) {
         hintHeight = qMax(l->sizeHint().height(), hintHeight);
         hintWidth  = qMax(l->sizeHint().width(), hintWidth);

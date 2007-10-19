@@ -11,11 +11,11 @@ class Widget : public Plasma::Widget
 public:
 	Widget(QString name, QGraphicsItem * parent = 0);
 	virtual ~Widget();
-	
+
     void setGeometry (const QRectF & geometry);
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
-    
+
     QString name() const;
     void setName(QString name);
 

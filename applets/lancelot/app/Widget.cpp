@@ -23,7 +23,7 @@ void Widget::setName(QString name) {
 
 void Widget::setGeometry (const QRectF & geometry) {
     if (!Global::processGeometryChanges) return;
-    Plasma::Widget::setGeometry(geometry);    
+    Plasma::Widget::setGeometry(geometry);
 }
 
 void Widget::update (const QRectF &rect) {

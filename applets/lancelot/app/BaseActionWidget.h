@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -30,72 +30,74 @@ namespace Lancelot
 
 class BaseActionWidget: public Widget {
     Q_OBJECT
-    
+
 public:
     enum InnerOrientation { Vertical, Horizontal };
-    
+
     BaseActionWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
     BaseActionWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
     BaseActionWidget(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~BaseActionWidget();
 
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);   
+    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 	virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    
+
     void setSvg(Plasma::Svg * svg);
     Plasma::Svg * svg() const;
-/*
-    void resize (const QSizeF &size);
-    void resize (qreal width, qreal height);
-    */
+
     void setIconSize(QSize size);
     QSize iconSize() const;
-    
+
     void setIcon(QIcon * icon);
     QIcon * icon() const;
-    
+
     void setInnerOrientation(InnerOrientation position);
     InnerOrientation innerOrientation() const;
-    
+
     void setIconInSvg(Plasma::Svg * icon);
     Plasma::Svg * iconInSvg() const;
-    
+
     void setTitle(QString title);
     QString title() const;
-    
+
     void setDescription(QString description);
     QString description() const;
-    
+
     void setAlignment(Qt::Alignment alignment);
     Qt::Alignment alignment() const;
-    
+
+    void enable(bool value = true);
+    void disable();
+    bool enabled() const;
+
 Q_SIGNALS:
     void mouseHoverEnter();
     void mouseHoverLeave();
-    
+
 protected:
     bool m_hover;
-    
+    bool m_enabled;
+
     void resizeSvg();
     Plasma::Svg * m_svg;
     QString m_svgElementPrefix, m_svgElementSufix;
-    
+
     QIcon * m_icon;
     Plasma::Svg * m_iconInSvg;
     QSize m_iconSize;
     InnerOrientation m_innerOrientation;
 
     Qt::Alignment m_alignment;
-    
+
     QString m_title;
     QString m_description;
-    
+
 private:
     void init();
 
-    
+
 };
 
 } // namespace Lancelot

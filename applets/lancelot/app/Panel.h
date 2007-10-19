@@ -16,30 +16,28 @@ public:
     Panel(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);
     Panel(QString name, QString title, QGraphicsItem * parent = 0);
     Panel(QString name, QGraphicsItem * parent = 0);
-    
+
 	virtual ~Panel();
-	
-	void setTitle(QString & title);
+
+	void setTitle(const QString & title);
 	QString title() const;
-	
+
 	void setIcon(QIcon * icon);
 	QIcon * icon() const;
 
 	void setIconSize(QSize size);
     QSize iconSize() const;
-	
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);   
 
-    //void resize (const QSizeF &size);
-    //void resize (qreal width, qreal height);
+    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+
     void setGeometry (const QRectF & geometry);
-    
+
     void setLayout(Plasma::LayoutItem * layout);
     Plasma::LayoutItem * layout();
-    
+
     void setWidget(Widget * widget);
     Widget * widget();
-    
+
     void setVisible(bool visible);
     void show();
     void hide();
@@ -47,11 +45,11 @@ public:
 private:
     void init();
     void invalidate();
-    
+
     Plasma::LayoutItem * m_layout;
     Widget * m_widget;
     bool m_hasTitle;
-    
+
     BaseActionWidget m_titleWidget;
 };
 

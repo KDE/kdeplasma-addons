@@ -14,21 +14,21 @@ class LancelotApplication: public KUniqueApplication
 public:
 	LancelotApplication(int argc, char **argv);
 	virtual ~LancelotApplication();
-	
+
 	static int main(int argc, char **argv);
-	
+
 public Q_SLOTS:
     bool show();
     bool hide();
     bool showItem(QString name);
-    
+
     int addClient();
     bool removeClient(int id);
-       
+
 protected:
     static LancelotApplication * application;
     LancelotWindow * window;
-    
+
 private:
     int m_clientsNumber;
     int m_lastID;

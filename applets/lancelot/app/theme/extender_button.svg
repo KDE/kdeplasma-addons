@@ -43,7 +43,6 @@
          id="stop3397" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient3383">
       <stop
          style="stop-color:#ffffff;stop-opacity:1;"
@@ -55,7 +54,6 @@
          id="stop3387" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient3375">
       <stop
          style="stop-color:#5b5b5b;stop-opacity:1;"
@@ -637,9 +635,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="3.6947917"
      inkscape:cx="289.62906"
-     inkscape:cy="779.24361"
+     inkscape:cy="584.37471"
      inkscape:document-units="px"
-     inkscape:current-layer="extender_button_active_right"
+     inkscape:current-layer="button_active"
      inkscape:window-width="1440"
      inkscape:window-height="806"
      inkscape:window-x="0"

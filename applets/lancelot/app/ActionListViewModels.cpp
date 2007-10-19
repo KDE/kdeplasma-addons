@@ -15,7 +15,7 @@ ActionListViewModel::~ActionListViewModel()
 QString ActionListViewModel::description(int index) const
 {
     Q_UNUSED(index);
-    return QString(); 
+    return QString();
 }
 
 KIcon * ActionListViewModel::icon(int index) const
@@ -51,10 +51,10 @@ void ActionListViewMergedModel::modelUpdated()
 void ActionListViewMergedModel::modelItemInserted(int modelIndex)
 {
     if (!sender()) return;
-    
+
     int model = m_models.indexOf((ActionListViewModel *)sender());
     if (model == -1) return;
-    
+
     int index;
     fromChildCoordinates(index, model, modelIndex);
     emit itemInserted(index);
@@ -63,10 +63,10 @@ void ActionListViewMergedModel::modelItemInserted(int modelIndex)
 void ActionListViewMergedModel::modelItemDeleted(int modelIndex)
 {
     if (!sender()) return;
-    
+
     int model = m_models.indexOf((ActionListViewModel *)sender());
     if (model == -1) return;
-    
+
     int index;
     fromChildCoordinates(index, model, modelIndex);
     emit itemDeleted(index);
@@ -75,10 +75,10 @@ void ActionListViewMergedModel::modelItemDeleted(int modelIndex)
 void ActionListViewMergedModel::modelItemAltered(int modelIndex)
 {
     if (!sender()) return;
-    
+
     int model = m_models.indexOf((ActionListViewModel *)sender());
     if (model == -1) return;
-    
+
     int index;
     fromChildCoordinates(index, model, modelIndex);
     emit itemAltered(index);
@@ -88,7 +88,7 @@ QString ActionListViewMergedModel::description(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
-    
+
     if (model == -1 || modelIndex == -1) return "";
     return m_models.at(model)->description(modelIndex);
 
@@ -98,7 +98,7 @@ KIcon * ActionListViewMergedModel::icon(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
-    
+
     if (model == -1) return NULL;
     if (modelIndex == -1) return m_modelsMetadata.at(model).second;
     return m_models.at(model)->icon(modelIndex);
@@ -108,7 +108,7 @@ bool ActionListViewMergedModel::isCategory(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
-    
+
     if (model == -1) return false;
     if (model != -1 && modelIndex == -1) return true;
     return m_models.at(model)->isCategory(modelIndex);
@@ -117,12 +117,12 @@ bool ActionListViewMergedModel::isCategory(int index) const
 void ActionListViewMergedModel::activated(int index)
 {
     emit itemActivated(index);
-    
+
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
-    
+
     if (model == -1 || modelIndex == -1) return;
-    
+
     m_models.at(model)->activated(modelIndex);
 }
 
@@ -130,7 +130,7 @@ QString ActionListViewMergedModel::title(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
-    
+
     if (model == -1) return "Error";
     if (modelIndex == -1) return m_modelsMetadata.at(model).first;
     return m_models.at(model)->title(modelIndex);
@@ -157,7 +157,7 @@ void ActionListViewMergedModel::fromChildCoordinates(int & index, int model, int
     index = -1;
     if (model >= m_models.size()) return;
     if (modelIndex >= m_models.at(model)->size()) return;
-    
+
     index = 0;
     foreach (ActionListViewModel * m, m_models) {
         if (model > 0) {
@@ -176,7 +176,7 @@ void ActionListViewMergedModel::addModel(KIcon * icon, QString title, ActionList
     if (!model) return;
     m_models.append(model);
     m_modelsMetadata.append(QPair< QString, KIcon * >(title, icon));
-    
+
     connect(model, SIGNAL(updated()),         this, SLOT(modelUpdated()));
     connect(model, SIGNAL(itemInserted(int)), this, SLOT(modelItemInserted(int)));
     connect(model, SIGNAL(itemDeleted(int)),  this, SLOT(modelItemDeleted(int)));

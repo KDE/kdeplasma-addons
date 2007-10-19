@@ -23,14 +23,14 @@ LancelotApplication::LancelotApplication(int argc, char **argv)
 {
     window = new LancelotWindow();
     setQuitOnLastWindowClosed(false);
-    
+
     kDebug() << "Init DBUS...\n";
     new AppAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
     kDebug() << "DBUS registered...\n";
-    
-    
+
+
 }
 
 LancelotApplication::~LancelotApplication()
@@ -40,7 +40,7 @@ LancelotApplication::~LancelotApplication()
 int LancelotApplication::main(int argc, char **argv) {
     KLocale::setMainCatalog("lancelot");
 
-    KCmdLineArgs::init(argc, argv, 
+    KCmdLineArgs::init(argc, argv,
         new KAboutData(
             QByteArray("lancelot"),
             QByteArray(""),

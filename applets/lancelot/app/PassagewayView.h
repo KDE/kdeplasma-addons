@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -41,7 +41,7 @@ namespace Lancelot
 class PassagewayView : public Lancelot::Panel
 {
 public:
-	PassagewayView(QString name, ActionListViewModel * entranceModel = 0, 
+	PassagewayView(QString name, ActionListViewModel * entranceModel = 0,
 	        PassagewayViewModel * atlasModel = 0, QGraphicsItem * parent = 0);
 	virtual ~PassagewayView();
 
@@ -49,43 +49,45 @@ public:
     void setEntranceModel(ActionListViewModel * model);
     void setEntranceTitle(const QString & title);
     void setEntranceIcon(KIcon * icon);
-    
+
     ActionListViewModel * entranceModel();
     QString entranceTitle();
     KIcon * entranceIcon();
-    
+
 	// Atlas
 	void setAtlasModel(PassagewayViewModel * model);
 	void setAtlasTitle(const QString & title);
 	void setAtlasIcon(KIcon * icon);
-    
+
     PassagewayViewModel * atlasModel();
     QString atlasTitle();
     KIcon * atlasIcon();
 
 private:
-    
+
     Plasma::NodeLayout * m_layout;
-    
+
     // Entrance
     ActionListViewModel * m_entranceModel;
     QString m_entranceTitle;
     KIcon * m_entranceIcon;
-    
+
     // Atlas
     PassagewayViewModel * m_atlasModel;
     QString m_atlasTitle;
     KIcon * m_atlasIcon;
-    
+
     // Other
-    class Milestone {
+    class Step {
+    public:
         QString title;
         KIcon * icon;
         ActionListViewModel * model;
     };
-    QList < Milestone > m_path;
-    
+    QList < Step > m_path;
+
     QList < ActionListView * > m_listViews;
+    QList < Panel * > m_listViewPanels;
 };
 
 }

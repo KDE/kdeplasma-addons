@@ -14,16 +14,16 @@ class ActionListViewModel: public QObject {
 public:
     ActionListViewModel();
     virtual ~ActionListViewModel();
-    
+
     virtual QString title(int index) const = 0;
     virtual QString description(int index) const;
     virtual KIcon * icon(int index) const;
     virtual bool isCategory(int index) const;
 
     virtual void activated(int index);
-    
+
     virtual int size() const = 0;
-    
+
 Q_SIGNALS:
     void itemActivated(int index);
 
@@ -38,7 +38,7 @@ class ActionListViewMergedModel: public ActionListViewModel {
 public:
     ActionListViewMergedModel();
     virtual ~ActionListViewMergedModel();
-    
+
     void addModel(KIcon * icon, QString title, ActionListViewModel * model);
 
     int modelCount() const;
@@ -52,7 +52,7 @@ public:
     virtual int size() const;
 
     virtual void activated(int index);
-    
+
 private:
     void toChildCoordinates(int index, int & model, int & modelIndex) const;
     void fromChildCoordinates(int & index, int model, int modelIndex) const;
@@ -66,7 +66,7 @@ private slots:
     void modelItemDeleted(int index);
     void modelItemAltered(int index);
 
-    
+
 Q_SIGNALS:
     void itemActivated(int index);
 
@@ -80,19 +80,19 @@ class DummyActionListViewModel : public ActionListViewModel {
 public:
     DummyActionListViewModel(QString title, int size)
         : Lancelot::ActionListViewModel(), m_size(size), m_title(title), m_icon(new KIcon("lancelot")) {}
-    
+
     virtual ~DummyActionListViewModel() {}
-    
+
     virtual QString title(int index) const {
-        return m_title + QString::number(index) + QString((index < size())?"":"err"); 
+        return m_title + QString::number(index) + QString((index < size())?"":"err");
     }
-    
+
     virtual QString description(int index) const {
-        return "Description " + QString::number(index); 
+        return "Description " + QString::number(index);
     }
     virtual KIcon * icon(int index) const { Q_UNUSED(index); return m_icon; }
     virtual int size() const { return m_size; }
-    
+
     virtual void activated(int index) {
         QMessageBox::information (NULL, "Item is activated", title(index));
     }

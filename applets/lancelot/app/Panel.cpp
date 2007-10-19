@@ -37,10 +37,11 @@ void Panel::init()
 {
     m_titleWidget.setIconSize(QSize(16, 16));
     m_titleWidget.setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_titleWidget.disable();
     invalidate();
 }
 
-void Panel::setTitle(QString & title)
+void Panel::setTitle(const QString & title)
 {
     m_hasTitle = (title != "");
     m_titleWidget.setTitle(title);
@@ -51,7 +52,7 @@ QString Panel::title() const {
 }
 
 void Panel::setIcon(QIcon * icon) {
-    m_titleWidget.setIcon(icon);    
+    m_titleWidget.setIcon(icon);
 }
 
 QIcon * Panel::icon() const {
@@ -59,7 +60,7 @@ QIcon * Panel::icon() const {
 }
 
 void Panel::setIconSize(QSize size) {
-    m_titleWidget.setIconSize(size);    
+    m_titleWidget.setIconSize(size);
 }
 
 QSize Panel::iconSize() const {
@@ -83,14 +84,14 @@ void Panel::invalidate() {
     } else {
         m_titleWidget.show();
         QRectF rect(0, 0, size().width(), 32);
-        m_titleWidget.setGeometry(rect);    
+        m_titleWidget.setGeometry(rect);
         rect.setTop(32);
         rect.setHeight(size().height() - 32);
-        
+
         if (m_layout) {
             m_layout->setGeometry(rect);
         }
-        
+
         if (m_widget) {
             m_widget->setGeometry(rect);
         }

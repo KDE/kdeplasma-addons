@@ -48,7 +48,7 @@ void BaseActionWidget::init()
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter), 
     m_title(title), m_description(description)
@@ -57,7 +57,7 @@ BaseActionWidget::BaseActionWidget(QString name, QString title, QString descript
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description)
@@ -66,7 +66,7 @@ BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QS
 }
 
 BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_svg(NULL), m_svgElementPrefix(""), 
+  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
     m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description) 
@@ -77,18 +77,6 @@ BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString tit
 BaseActionWidget::~BaseActionWidget()
 {}
 
-/*
-void BaseActionWidget::resize (const QSizeF &size) {
-    Widget::resize(size);
-    resizeSvg();
-}
-
-void BaseActionWidget::resize (qreal width, qreal height) {
-    Widget::resize(width, height);
-    resizeSvg();
-}
-*/
-
 void BaseActionWidget::resizeSvg() {
     if (m_svg) {
         m_svg->resize(size());
@@ -96,6 +84,7 @@ void BaseActionWidget::resizeSvg() {
 }
 
 void BaseActionWidget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
+    if (!m_enabled) return;
     m_hover = true;
     Widget::hoverEnterEvent(event);
     emit mouseHoverEnter();
@@ -103,6 +92,7 @@ void BaseActionWidget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 }
 
 void BaseActionWidget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
+    if (!m_enabled) return;
     m_hover = false;
     Widget::hoverEnterEvent(event);
     emit mouseHoverLeave();
@@ -270,6 +260,20 @@ BaseActionWidget::InnerOrientation BaseActionWidget::innerOrientation() const { 
 void BaseActionWidget::setAlignment(Qt::Alignment alignment) { m_alignment = alignment; update(); }
 Qt::Alignment BaseActionWidget::alignment() const { return m_alignment; }
 
+void BaseActionWidget::enable(bool value) {
+    if (m_hover && m_enabled) {
+        hoverLeaveEvent(NULL);
+    }
+    m_enabled = value;
+}
+
+void BaseActionWidget::disable() {
+    enable(false);
+}
+
+bool BaseActionWidget::enabled() const {
+    return m_enabled;
+}
 
 
 } // namespace Lancelot

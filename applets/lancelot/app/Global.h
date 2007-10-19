@@ -11,13 +11,13 @@ class Global
 public:
 	Global();
 	virtual ~Global();
-	
+
 	static bool processGeometryChanges;
 	static bool processUpdateRequests;
-	
+
     static QColor textColorNormal;
     static QColor textColorActive;
-	
+
 	static void activateAll();
 	static void deactivateAll();
 };

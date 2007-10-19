@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -28,16 +28,16 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
   : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_sectionsSignalMapper(NULL), m_phase(NULL)
 {
     setupUi(this);
-    
+
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
-    
+
     m_phase = new Plasma::Phase(this);
-    
+
     m_sectionsSignalMapper = new QSignalMapper(this);
-    connect (m_sectionsSignalMapper, 
-        SIGNAL(mapped(const QString &)), 
-        this, 
+    connect (m_sectionsSignalMapper,
+        SIGNAL(mapped(const QString &)),
+        this,
         SLOT(sectionActivated(const QString &))
     );
 
@@ -52,15 +52,15 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
 
     connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionSystem, "System");
-    
+
     kDebug() << "###############################################\n";
     connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
-    
+
 }
 
 void LancelotWindow::activated(int index) {
     kDebug() << index << " is activated\n";
-    
+
 }
 
 void LancelotWindow::sectionActivated(const QString & item) {

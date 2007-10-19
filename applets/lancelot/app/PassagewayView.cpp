@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -22,26 +22,39 @@
 namespace Lancelot
 {
 
-PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel, 
+PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
     : Panel(name, parent), m_entranceModel(entranceModel), m_atlasModel(atlasModel)
 {
     setLayout(m_layout = new Plasma::NodeLayout());
-    
+
     for (int i = 0; i < 3; ++i) {
         m_listViews.append(new ActionListView(name + "::List_" + QString::number(i), NULL, this));
+        m_listViewPanels.append(new Panel(name + "::List_" + QString::number(i), this));
+        m_listViewPanels.last()->setWidget(m_listViews.last());
     }
-    
+
     m_layout->addItem(
-        m_listViews.at(0),
+        m_listViewPanels.at(0),
         Plasma::NodeLayout::NodeCoordinate(0, 0, 32, 0),
         Plasma::NodeLayout::NodeCoordinate(0.5, 1.0, 0, 0)
     );
     m_layout->addItem(
-        m_listViews.at(1),
+        m_listViewPanels.at(1),
         Plasma::NodeLayout::NodeCoordinate(0.5, 0, 0, 0),
         Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0)
     );
+
+    m_listViewPanels.at(0)->setTitle("Entrance");
+    m_listViewPanels.at(1)->setTitle("Atlas");
+
+    m_path.append(Step());
+    m_path.last().title = "Entrance";
+    m_path.last().model = entranceModel;
+
+    m_path.append(Step());
+    m_path.last().title = "Atlas";
+    m_path.last().model = atlasModel;
 
 }
 

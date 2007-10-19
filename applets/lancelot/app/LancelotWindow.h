@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -36,7 +36,7 @@ class LancelotWindow : public QFrame, public Ui::LancelotWindow
 public:
 	LancelotWindow( QWidget * parent = 0, Qt::WindowFlags f = 0 );
 	virtual ~LancelotWindow();
-	
+
     bool lancelotShow();
     bool lancelotHide();
     bool lancelotShowItem(QString name);
@@ -45,11 +45,11 @@ protected:
     void leaveEvent(QEvent * event);
     void enterEvent(QEvent * event);
     void focusOutEvent(QFocusEvent * event);
-    
+
 private Q_SLOTS:
     void sectionActivated(const QString & item);
     void activated(int index);
-    
+
 private:
     QTimer m_hideTimer;
     bool m_hovered;
