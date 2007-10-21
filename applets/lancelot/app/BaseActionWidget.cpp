@@ -42,7 +42,6 @@ namespace Lancelot
 
 void BaseActionWidget::init()
 {
-    kDebug() << name() << "\n";
     setAcceptsHoverEvents(true);
     resize(140, 38);
 }
@@ -103,10 +102,14 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
+    if (!m_group) return;
+    
     if (!m_hover) {
-        painter->setPen(QPen(Global::textColorNormal));
+        painter->setPen(QPen(* m_foregroundColorNormal));
+        //painter->setPen(QPen(m_group->m_foregroundColorNormal));
     } else {
-        painter->setPen(QPen(Global::textColorActive));
+        painter->setPen(QPen(* m_foregroundColorActive));
+        //painter->setPen(QPen(m_group->m_foregroundColorActive));
     }
     
     // Background Painting

@@ -65,7 +65,7 @@ PassagewayView::~PassagewayView()
 // Entrance
 void PassagewayView::setEntranceModel(ActionListViewModel * model) { m_entranceModel = model; }
 void PassagewayView::setEntranceTitle(const QString & title)       { m_entranceTitle = title; }
-void PassagewayView::setEntranceIcon(KIcon * icon)                 { m_entranceIcon; }
+void PassagewayView::setEntranceIcon(KIcon * icon)                 { m_entranceIcon = icon; }
 
 ActionListViewModel * PassagewayView::entranceModel() { return m_entranceModel; }
 QString PassagewayView::entranceTitle()               { return m_entranceTitle; }

@@ -35,6 +35,28 @@
 namespace Lancelot
 {
 
+class ExtenderButton;
+
+class ExtenderButtonTimer: public QObject {
+    Q_OBJECT
+public:
+    static ExtenderButtonTimer * getInstance();
+    void startTimer(ExtenderButton * owner);
+    void stopTimer();
+
+protected slots:
+    void fire();
+
+private:
+    ExtenderButtonTimer();
+    ~ExtenderButtonTimer();
+
+    static ExtenderButtonTimer * m_instance;
+    QTimer m_timer;
+    ExtenderButton * m_owner;
+};
+
+
 class ExtenderButton : public SUPER
 {
     Q_OBJECT
@@ -83,13 +105,18 @@ private:
 
     static Plasma::Svg * m_extenderIconSvg;
     static Plasma::Svg * m_extenderButtonSvg;
-    static int * m_extendersCount;
-
+    static int m_extendersCount;
+    
+    void timerFired();
+    
+protected slots:
+    void startTimer();
+    void stopTimer();
+    
 Q_SIGNALS:
     void activated();
-
-
-
+    
+    friend class ExtenderButtonTimer;
 };
 
 }

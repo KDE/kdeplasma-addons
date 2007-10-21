@@ -177,7 +177,7 @@ protected:
 
         object->resize(550, 500);
 
-        Lancelot::Global::activateAll();
+        Lancelot::Global::getInstance()->activateAll();
 
         layoutMain->setGeometry(QRectF(0, 0, 550, 500));
 

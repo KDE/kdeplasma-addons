@@ -23,11 +23,43 @@
 #include <KDebug>
 #include <KIcon>
 
+#define ACTIVATION_TIME 300
+
 namespace Lancelot {
 
 Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
 Plasma::Svg * ExtenderButton::m_extenderIconSvg = NULL;
-int * ExtenderButton::m_extendersCount = 0;
+int ExtenderButton::m_extendersCount = 0;
+
+ExtenderButtonTimer * ExtenderButtonTimer::getInstance() {
+    if (!m_instance) {
+        m_instance = new ExtenderButtonTimer();
+        m_instance->m_timer.setInterval(ACTIVATION_TIME);
+        connect(&(m_instance->m_timer), SIGNAL(timeout()),
+                m_instance, SLOT(fire()));
+    }
+    return m_instance;
+}
+
+void ExtenderButtonTimer::startTimer(ExtenderButton * owner) {
+    if (!owner) return;
+    m_owner = owner;
+    m_timer.start();
+}
+
+void ExtenderButtonTimer::stopTimer() {
+    m_timer.stop();
+}
+
+void ExtenderButtonTimer::fire() {
+    m_owner->timerFired();
+}
+
+ExtenderButtonTimer::ExtenderButtonTimer() : QObject() {};
+ExtenderButtonTimer::~ExtenderButtonTimer() {};
+
+
+ExtenderButtonTimer * ExtenderButtonTimer::m_instance = NULL;
 
 ExtenderButton::ExtenderButton(QString name, QString title, QString description,
         QGraphicsItem * parent) :
@@ -71,7 +103,9 @@ void ExtenderButton::init()
     m_extender->m_svg = m_svg;
     m_extender->m_iconSize = QSize(16, 16);
 
-    connect(m_extender, SIGNAL(mouseHoverEnter()), this, SIGNAL(activated()));
+    //connect(m_extender, SIGNAL(mouseHoverEnter()), this, SIGNAL(activated()));
+    connect(m_extender, SIGNAL(mouseHoverEnter()), this, SLOT(startTimer()));
+    connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));
 }
 
 ExtenderButton::~ExtenderButton()
@@ -83,6 +117,18 @@ ExtenderButton::~ExtenderButton()
         m_extenderIconSvg = 0;
     }
     delete m_extender;
+}
+
+void ExtenderButton::timerFired() {
+    emit activated();
+}
+
+void ExtenderButton::startTimer() {
+    ExtenderButtonTimer::getInstance()->startTimer(this);
+}
+
+void ExtenderButton::stopTimer() {
+    ExtenderButtonTimer::getInstance()->stopTimer();
 }
 
 QRectF ExtenderButton::boundingRect() const
@@ -106,16 +152,19 @@ QRectF ExtenderButton::boundingRect() const
 
 void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 {
-    if (m_extenderPosition != No)
+    if (m_extenderPosition != No) {
         m_extender->setVisible(true);
-    else if (m_activationMethod == Hover)
-    emit activated();
+    } else if (m_activationMethod == Hover) {
+        //emit activated();
+        startTimer();
+    }
     SUPER::hoverEnterEvent(event);
 }
 
 void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
     m_extender->setVisible(false);
+    stopTimer();
     SUPER::hoverLeaveEvent(event);
 }
 

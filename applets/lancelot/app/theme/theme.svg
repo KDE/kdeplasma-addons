@@ -22,11 +22,11 @@
     <linearGradient
        id="linearGradient4217">
       <stop
-         style="stop-color:#383838;stop-opacity:1;"
+         style="stop-color:#5f7cad;stop-opacity:1;"
          offset="0"
          id="stop4219" />
       <stop
-         style="stop-color:#222222;stop-opacity:1;"
+         style="stop-color:#9badcc;stop-opacity:1;"
          offset="1"
          id="stop4221" />
     </linearGradient>
@@ -399,11 +399,11 @@
          height="489.75281"
          width="520.534"
          id="rect3625"
-         style="fill:#222222;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#9badcc;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          rx="6.2632709"
          ry="6.2632709" />
       <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect3195"
          width="391.05399"
          height="419.26874"

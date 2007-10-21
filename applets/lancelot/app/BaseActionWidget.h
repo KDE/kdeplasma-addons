@@ -34,9 +34,12 @@ class BaseActionWidget: public Widget {
 public:
     enum InnerOrientation { Vertical, Horizontal };
 
-    BaseActionWidget(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseActionWidget(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    BaseActionWidget(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name = QString(), QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name, QIcon * icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+    BaseActionWidget(QString name, Plasma::Svg * icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~BaseActionWidget();
 
