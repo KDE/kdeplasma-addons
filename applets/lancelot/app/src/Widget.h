@@ -20,6 +20,7 @@
 #ifndef LANCELOT_WIDGET_H_
 #define LANCELOT_WIDGET_H_
 
+#include <QtGui>
 #include <plasma/widgets/widget.h>
 #include "Global.h"
 
@@ -36,7 +37,7 @@ public:
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
     
-    void setGroup(Group * group);
+    void setGroup(Group * group = NULL);
     Group * getGroup();
 
     QString name() const;
@@ -52,6 +53,8 @@ protected:
     QColor * m_backgroundColorActive;
     
     virtual void groupUpdated();
+    
+    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
     friend class Group;
     friend class Global;

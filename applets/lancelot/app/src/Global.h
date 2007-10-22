@@ -62,7 +62,6 @@ private:
     QMap < QString, QVariant > m_properties;
     
     QList < Widget * > m_widgets;
-    bool m_stop;
     
     QColor m_foregroundColorNormal;
     QColor m_foregroundColorActive;

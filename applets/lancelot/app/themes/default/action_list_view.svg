@@ -13,20 +13,21 @@
    height="1052.3622047"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
-   sodipodi:docbase="/home/kde-devel/src/plasma/extragear/applets/lancelot/app/theme"
+   inkscape:version="0.45"
+   sodipodi:docbase="/home/ivan/Projects/KDE/Plasma/applets/Lancelot/app/theme"
    sodipodi:docname="action_list_view.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
   <defs
      id="defs4">
     <linearGradient
        id="linearGradient3183">
       <stop
-         style="stop-color:#2f2f2f;stop-opacity:1;"
+         style="stop-color:#d5d5d5;stop-opacity:1;"
          offset="0"
          id="stop3185" />
       <stop
-         style="stop-color:#000000;stop-opacity:1;"
+         style="stop-color:#ffffff;stop-opacity:1;"
          offset="1"
          id="stop3187" />
     </linearGradient>
@@ -35,11 +36,11 @@
       <stop
          id="stop3177"
          offset="0"
-         style="stop-color:#7c7c7c;stop-opacity:1;" />
+         style="stop-color:#b5c8e4;stop-opacity:1;" />
       <stop
          id="stop3179"
          offset="1"
-         style="stop-color:#2a2a2a;stop-opacity:1;" />
+         style="stop-color:#eaeaea;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient3133">
@@ -164,12 +165,12 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.8439961"
-     inkscape:cx="277.4329"
+     inkscape:cx="321.36099"
      inkscape:cy="496.67463"
      inkscape:document-units="px"
-     inkscape:current-layer="up_scroll_button_inactive"
+     inkscape:current-layer="layer1"
      inkscape:window-width="1440"
-     inkscape:window-height="806"
+     inkscape:window-height="812"
      inkscape:window-x="0"
      inkscape:window-y="24" />
   <metadata
@@ -192,7 +193,7 @@
        inkscape:label="#g3170"
        transform="translate(-80,0)">
       <path
-         style="fill:#767676;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,539.97535 238.22078,539.97535 C 202.13721,539.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
          id="path3168"
          sodipodi:nodetypes="cscc" />
@@ -234,7 +235,7 @@
          sodipodi:nodetypes="cscc"
          id="path3213"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,539.97535 238.22078,539.97535 C 202.13721,539.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
-         style="fill:#7b7b7b;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1" />
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1" />
       <path
          style="fill:url(#radialGradient3225);fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,533.97535 238.22078,533.97535 C 202.13721,533.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
@@ -270,7 +271,7 @@
        id="down_scroll_button_active"
        inkscape:label="#g3170">
       <path
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
+         style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,539.97535 238.22078,539.97535 C 202.13721,539.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
          id="path3261"
          sodipodi:nodetypes="cscc" />
@@ -291,7 +292,7 @@
            sodipodi:cy="394.82907"
            sodipodi:cx="406.31189"
            id="path3267"
-           style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="opacity:1;fill:#545454;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            sodipodi:type="arc" />
         <path
            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -312,7 +313,7 @@
          sodipodi:nodetypes="cscc"
          id="path3277"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,539.97535 238.22078,539.97535 C 202.13721,539.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1" />
+         style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1" />
       <path
          style="fill:url(#radialGradient3289);fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1"
          d="M 303.58957,501.85443 C 303.58957,518.48118 274.30436,533.97535 238.22078,533.97535 C 202.13721,533.97535 172.85199,518.48118 172.85199,501.85443 L 303.58957,501.85443 z "
@@ -324,7 +325,7 @@
          id="g3281">
         <path
            sodipodi:type="arc"
-           style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="opacity:1;fill:#545454;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="path3283"
            sodipodi:cx="406.31189"
            sodipodi:cy="394.82907"

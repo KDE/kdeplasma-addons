@@ -117,16 +117,4 @@ Widget * Panel::widget() {
     return m_widget;
 }
 
-void Panel::paintWidget(QPainter * painter,
-        const QStyleOptionGraphicsItem * option, QWidget * widget)
-{
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-    Q_UNUSED(painter);
-    // TODO: Comment the next line
-    //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
-}
-
-
-
 }

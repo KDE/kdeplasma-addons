@@ -28,8 +28,6 @@ public:
 	void setIconSize(QSize size);
     QSize iconSize() const;
 
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
     void setGeometry (const QRectF & geometry);
 
     void setLayout(Plasma::LayoutItem * layout);

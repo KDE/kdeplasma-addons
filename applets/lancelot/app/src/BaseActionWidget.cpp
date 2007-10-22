@@ -102,7 +102,7 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
-    if (!m_group) return;
+    Widget::paintWidget(painter, option, widget);
     
     if (!m_hover) {
         painter->setPen(QPen(* m_foregroundColorNormal));

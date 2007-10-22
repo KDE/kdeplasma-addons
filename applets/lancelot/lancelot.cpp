@@ -52,10 +52,12 @@ Lancelot::~Lancelot() {
 }
 
 void Lancelot::hoverEnterEvent (QGraphicsSceneHoverEvent * event) {
+    Q_UNUSED(event);
     kDebug() << "Calling DBUS " << m_dbus->call( "show" ).errorMessage() << "\n";
 }
 
 void Lancelot::hoverLeaveEvent (QGraphicsSceneHoverEvent * event) {
+    Q_UNUSED(event);
     kDebug() << "Calling DBUS " << m_dbus->call( "hide" ).errorMessage() << "\n";
 }
 

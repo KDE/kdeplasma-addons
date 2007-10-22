@@ -25,13 +25,15 @@
 namespace Lancelot {
 
 Widget::Widget(QString name, QGraphicsItem * parent) :
-    Plasma::Widget(parent), m_name(name), m_foregroundColorNormal(NULL),
+    Plasma::Widget(parent), m_name(name), m_group(NULL), m_foregroundColorNormal(NULL),
             m_foregroundColorActive(NULL), m_backgroundColorNormal(NULL),
-            m_backgroundColorActive(NULL), m_group(NULL)
-
+            m_backgroundColorActive(NULL)
 {
+    kDebug() << "Creating a widget " << name << "\n";
     Global::getInstance()->addWidget(this);
-    Group::getDefaultGroup()->addWidget(this);
+    //Group::getDefaultGroup()->addWidget(this);
+    setGroup();
+    kDebug() << "Created widget " << name << "\n";
 }
 
 Widget::~Widget()
@@ -53,6 +55,7 @@ void Widget::setGroup(Group * group)
     
     m_group = group;
     m_group->addWidget(this);
+    groupUpdated();
 }
 
 Group * Widget::getGroup() {
@@ -110,6 +113,19 @@ void Widget::update(qreal x, qreal y, qreal w, qreal h)
     if (!Global::getInstance()->processGeometryChanges)
         return;
     Plasma::Widget::update(x, y, w, h);
+}
+
+void Widget::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+    
+    // TODO: Comment the next line
+    kDebug() << name() << "!\n";
+    if (!m_group)
+        kDebug() << "Group is not assigned for" << name() << "!\n";
+    if (!m_backgroundColorNormal)
+        kDebug() << "Group is not processed for" << name() << "!\n";
+    painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(* m_backgroundColorNormal));
 }
 
 }

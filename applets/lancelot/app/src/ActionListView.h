@@ -62,9 +62,6 @@ public:
 
     void wheelEvent ( QGraphicsSceneWheelEvent * event );
 
-    //virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    //virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-
 Q_SIGNALS:
     void activated(int index);
 

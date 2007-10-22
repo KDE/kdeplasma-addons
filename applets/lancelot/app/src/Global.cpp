@@ -41,7 +41,7 @@ Group * Group::getDefaultGroup()
 }
 
 Group::Group(QString name)
-  : m_name(name), m_stop(false)
+  : m_name(name)
 {
 }
 
@@ -52,23 +52,24 @@ Group::~Group()
 void Group::addWidget(Widget * widget)
 {
     if (!widget) return;
-    if (m_widgets.contains(widget)) return;
     
-    if (m_stop) return;
-    m_stop = true;
-    widget->setGroup(this);
+    if (m_widgets.contains(widget)) return;
     m_widgets.append(widget);
     
-    if (Global::getInstance()->processGroupChanges) {
-        widget->groupUpdated();
-    }
+    //widget->setGroup(this);
     
-    m_stop = false;
+    /*if (Global::getInstance()->processGroupChanges) {
+        widget->groupUpdated();
+    }*/
 }
 
 void Group::removeWidget(Widget * widget)
 {
     if (Group::getDefaultGroup() == this) return;
+    
+    if (!m_widgets.contains(widget)) return;
+    m_widgets.removeAll(widget);
+    
     widget->setGroup(NULL);
 }
 
@@ -153,6 +154,13 @@ void Global::activateAll() {
     processGeometryChanges = true;
     processUpdateRequests = true;
     processGroupChanges = true;
+    
+    kDebug() << " ######## GROUP IS EMPTY!!! ######## \n";
+    foreach (Widget * widget, m_widgets) {
+        if (!widget->m_group)
+            kDebug() << " ######## GROUP IS EMPTY!!! ######## \n";
+    }
+    
     Group::loadAll();
 }
 
