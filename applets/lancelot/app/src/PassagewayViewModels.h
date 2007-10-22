@@ -27,8 +27,8 @@ namespace Lancelot
 
 class PassagewayViewModel: public ActionListViewModel {
 public:
-    PassagewayViewModel() {};
-    virtual ~PassagewayViewModel() {};
+    PassagewayViewModel() {}
+    virtual ~PassagewayViewModel() {}
 
     PassagewayViewModel * child(int index) { Q_UNUSED(index); return NULL; }
 

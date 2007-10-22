@@ -55,8 +55,8 @@ void ExtenderButtonTimer::fire() {
     m_owner->timerFired();
 }
 
-ExtenderButtonTimer::ExtenderButtonTimer() : QObject() {};
-ExtenderButtonTimer::~ExtenderButtonTimer() {};
+ExtenderButtonTimer::ExtenderButtonTimer() : QObject() {}
+ExtenderButtonTimer::~ExtenderButtonTimer() {}
 
 
 ExtenderButtonTimer * ExtenderButtonTimer::m_instance = NULL;

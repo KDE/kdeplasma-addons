@@ -68,7 +68,7 @@ public:
     public:
         ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
             m_svgElementPrefix = "extender_";
-        };
+        }
         friend class ExtenderButton;
 
     };

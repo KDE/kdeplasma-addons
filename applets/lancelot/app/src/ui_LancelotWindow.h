@@ -80,9 +80,9 @@ protected:
     class CustomGraphicsView : public QGraphicsView {
     public:
         CustomGraphicsView  ( QWidget * parent = 0 )
-            : QGraphicsView(parent), m_background(NULL) {};
+            : QGraphicsView(parent), m_background(NULL) {}
         CustomGraphicsView  ( QGraphicsScene * scene, QWidget * parent = 0 )
-            : QGraphicsView(scene, parent), m_background(NULL) {};
+            : QGraphicsView(scene, parent), m_background(NULL) {}
         void drawBackground (QPainter * painter, const QRectF & rect)
         {
             Q_UNUSED(rect);
@@ -90,7 +90,7 @@ protected:
                 m_background->resize(QSizeF(550, 500));
                 m_background->paint(painter, 0, 0, "background");
             }
-        };
+        }
 
     private:
         Plasma::Svg * m_background;
