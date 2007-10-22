@@ -176,7 +176,7 @@ void GLTexture::initStatic()
     mFramebufferObjectSupported = hasGLExtension( "GL_EXT_framebuffer_object" );
     mSaturationSupported = ((hasGLExtension("GL_ARB_texture_env_crossbar")
         && hasGLExtension("GL_ARB_texture_env_dot3")) || hasGLVersion(1, 4))
-        && (glTextureUnitsCount() >= 4) && glActiveTexture != NULL;
+        && (glTextureUnitsCount >= 4) && glActiveTexture != NULL; // check if the symbol glActiveTexture is implemented
     }
 
 bool GLTexture::isNull() const
