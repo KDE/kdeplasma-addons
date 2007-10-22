@@ -4,4 +4,5 @@ install(FILES
     extender_button.svg
     extender_button_icon.svg
     action_list_view.svg
-    DESTINATION ${DATA_INSTALL_DIR}/lancelot/theme/black/)
+    
+    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/black/lancelot/)
