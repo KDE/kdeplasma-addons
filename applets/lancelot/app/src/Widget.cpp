@@ -41,10 +41,10 @@ Widget::~Widget()
     
 }
 
-void Widget::setGroup(Group * group)
+void Widget::setGroup(WidgetGroup * group)
 {
     if (group == NULL) {
-        group = Group::getDefaultGroup();
+        group = WidgetGroup::getDefaultGroup();
     }
     
     if (group == m_group) return;
@@ -58,7 +58,7 @@ void Widget::setGroup(Group * group)
     groupUpdated();
 }
 
-Group * Widget::getGroup() {
+WidgetGroup * Widget::getGroup() {
     return m_group;
 }
 

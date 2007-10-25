@@ -20,52 +20,51 @@
 #include "Global.h"
 #include "Widget.h"
 #include <KDebug>
+#include <plasma/theme.h>
+#include <KStandardDirs>
 
 namespace Lancelot
 {
 
 // Group
-QMap < QString, Group * > Group::m_groups; 
+QMap < QString, WidgetGroup * > WidgetGroup::m_groups; 
 
-Group * Group::getGroup(QString name)
+WidgetGroup * WidgetGroup::getGroup(QString name)
 {
     if (!m_groups.contains(name)) {
-        m_groups.insert(name, new Group(name));
+        m_groups.insert(name, new WidgetGroup(name));
     }
     return m_groups[name];
 }
 
-Group * Group::getDefaultGroup()
+WidgetGroup * WidgetGroup::getDefaultGroup()
 {
     return getGroup("Default");
 }
 
-Group::Group(QString name)
-  : m_name(name)
+WidgetGroup::WidgetGroup(QString name)
+  : m_confGroupTheme(NULL), m_name(name)
 {
+    m_confGroupTheme = new KConfigGroup(Global::getInstance()->theme(), "Group-" + name);
 }
 
-Group::~Group()
+WidgetGroup::~WidgetGroup()
 {
+    delete m_confGroupTheme;
 }
 
-void Group::addWidget(Widget * widget)
+void WidgetGroup::addWidget(Widget * widget)
 {
     if (!widget) return;
     
     if (m_widgets.contains(widget)) return;
     m_widgets.append(widget);
     
-    //widget->setGroup(this);
-    
-    /*if (Global::getInstance()->processGroupChanges) {
-        widget->groupUpdated();
-    }*/
 }
 
-void Group::removeWidget(Widget * widget)
+void WidgetGroup::removeWidget(Widget * widget)
 {
-    if (Group::getDefaultGroup() == this) return;
+    if (WidgetGroup::getDefaultGroup() == this) return;
     
     if (!m_widgets.contains(widget)) return;
     m_widgets.removeAll(widget);
@@ -73,61 +72,61 @@ void Group::removeWidget(Widget * widget)
     widget->setGroup(NULL);
 }
 
-bool Group::hasProperty(QString property)
+bool WidgetGroup::hasProperty(QString property)
 {
     return m_properties.contains(property);
 }
 
-QVariant Group::getProperty(QString property)
+QVariant WidgetGroup::getProperty(QString property)
 {
     return m_properties.value(property);
 }
 
-QColor Group::getPropertyAsColor(QString property)
+QColor WidgetGroup::getPropertyAsColor(QString property)
 {
     return m_properties.value(property).value<QColor>();
 }
 
-QString Group::getPropertyAsString(QString property)
+QString WidgetGroup::getPropertyAsString(QString property)
 {
     return m_properties.value(property).toString();
 }
 
-int Group::getPropertyAsInteger(QString property)
+int WidgetGroup::getPropertyAsInteger(QString property)
 {
     return m_properties.value(property).toInt();
 }
 
-bool Group::getPropertyAsBoolean(QString property)
+bool WidgetGroup::getPropertyAsBoolean(QString property)
 {
     return m_properties.value(property).toBool();
 }
 
-void * Group::getPropertyAsPointer(QString property)
+void * WidgetGroup::getPropertyAsPointer(QString property)
 {
     return m_properties.value(property).value< void * >();
 }
 
-QString Group::name()
+QString WidgetGroup::name()
 {
     return m_name;
 }
 
-void Group::loadAll()
+void WidgetGroup::loadAll()
 {
     kDebug() << "Load all\n";
-    foreach(Group * group, m_groups) {
+    foreach(WidgetGroup * group, m_groups) {
         group->load();
     }
 }
 
-void Group::load()
+void WidgetGroup::load()
 {
     // TODO: Load properties from theme configuration file
-    m_foregroundColorNormal = QColor(125, 125, 125);
-    m_foregroundColorActive = QColor(175, 175, 175);
-    m_backgroundColorNormal = QColor(0, 0, 0);
-    m_backgroundColorActive = QColor(255, 255, 255);
+    m_foregroundColorNormal = m_confGroupTheme->readEntry("foreground.color.normal", QColor(Qt::black));
+    m_foregroundColorActive = m_confGroupTheme->readEntry("foreground.color.active", QColor(Qt::black));
+    m_backgroundColorNormal = m_confGroupTheme->readEntry("background.color.normal", QColor(Qt::white));
+    m_backgroundColorActive = m_confGroupTheme->readEntry("background.color.active", QColor(Qt::white));
     
     m_properties["foregroundColorNormal"] = qVariantFromValue((void *) & m_foregroundColorNormal);
     m_properties["foregroundColorActive"] = qVariantFromValue((void *) & m_foregroundColorActive);
@@ -155,13 +154,7 @@ void Global::activateAll() {
     processUpdateRequests = true;
     processGroupChanges = true;
     
-    kDebug() << " ######## GROUP IS EMPTY!!! ######## \n";
-    foreach (Widget * widget, m_widgets) {
-        if (!widget->m_group)
-            kDebug() << " ######## GROUP IS EMPTY!!! ######## \n";
-    }
-    
-    Group::loadAll();
+    WidgetGroup::loadAll();
 }
 
 void Global::deactivateAll() {
@@ -173,12 +166,38 @@ void Global::deactivateAll() {
 Global::Global()
   : processGeometryChanges(false),
     processUpdateRequests(false),
-    processGroupChanges(false)
+    processGroupChanges(false),
+    m_confLancelot(NULL),
+    m_confTheme(NULL)
 {
+    Plasma::Theme::self()->setApplication("Lancelot");
+    m_confLancelot = new KConfig("lancelotrc");
+    
+    // TODO: If Plasma::Theme supports file(), alter the following code
+    QString search = "desktoptheme/" + Plasma::Theme::self()->themeName() + "/lancelot/theme.config";
+    QString path =  KStandardDirs::locate( "data", search );
+    if (path == "") {
+        kDebug() << "Error: No theme configuration file: " << search << "\n";
+        path = "lancelotrc";
+    }
+    m_confTheme = new KConfig(path);
+
 }
 
 Global::~Global()
 {
+    delete m_confLancelot; 
+    delete m_confTheme; 
+}
+
+KConfig * Global::theme()
+{
+    return m_confTheme;
+}
+
+KConfig * Global::config()
+{
+    return m_confLancelot;
 }
 
 void Global::addWidget(Widget * widget)

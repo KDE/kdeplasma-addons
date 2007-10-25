@@ -25,16 +25,18 @@
 #include <QMap>
 #include <QList>
 #include <QVariant>
+#include <KConfig>
+#include <KConfigGroup>
 
 namespace Lancelot
 {
 
 class Widget;
 
-class Group : public QObject {
+class WidgetGroup : public QObject {
 public:
-    static Group * getGroup(QString name);
-    static Group * getDefaultGroup();
+    static WidgetGroup * getGroup(QString name);
+    static WidgetGroup * getDefaultGroup();
     static void loadAll();
 
     bool     hasProperty(QString property);
@@ -53,10 +55,11 @@ public:
     QString name();
     
 private:
-    static QMap < QString, Group * > m_groups;
+    static QMap < QString, WidgetGroup * > m_groups;
+    KConfigGroup * m_confGroupTheme;
     
-    Group(QString name);
-    virtual ~Group();
+    WidgetGroup(QString name);
+    virtual ~WidgetGroup();
 
     QString m_name;
     QMap < QString, QVariant > m_properties;
@@ -82,6 +85,10 @@ public:
 
 	void addWidget(Widget * widget);
 	
+    KConfig * theme();
+    KConfig * config();
+	
+	
 private:
     static Global * m_instance;
 
@@ -89,6 +96,12 @@ private:
     virtual ~Global();
 
     QList< Widget * > m_widgets;
+    
+    KConfig * m_confLancelot;
+    KConfig * m_confTheme;
+    //(const QString &file=QString(), OpenFlags mode=FullConfig, const char *resourceType="config")
+    
+    friend class WidgetGroup;
 };
 
 }

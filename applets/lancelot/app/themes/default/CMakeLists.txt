@@ -1,4 +1,5 @@
 install(FILES
+    theme.config
     theme.svg
     default_button.svg
     extender_button.svg

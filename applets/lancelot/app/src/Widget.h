@@ -37,15 +37,15 @@ public:
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
     
-    void setGroup(Group * group = NULL);
-    Group * getGroup();
+    void setGroup(WidgetGroup * group = NULL);
+    WidgetGroup * getGroup();
 
     QString name() const;
     void setName(QString name);
 
 protected:
     QString m_name;
-    Group * m_group;
+    WidgetGroup * m_group;
     
     QColor * m_foregroundColorNormal;
     QColor * m_foregroundColorActive;
@@ -56,7 +56,7 @@ protected:
     
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-    friend class Group;
+    friend class WidgetGroup;
     friend class Global;
 };
 
