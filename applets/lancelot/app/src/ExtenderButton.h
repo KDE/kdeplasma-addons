@@ -40,7 +40,7 @@ class ExtenderButton;
 class ExtenderButtonTimer: public QObject {
     Q_OBJECT
 public:
-    static ExtenderButtonTimer * getInstance();
+    static ExtenderButtonTimer * instance();
     void startTimer(ExtenderButton * owner);
     void stopTimer();
 
@@ -67,7 +67,8 @@ public:
     class ExtenderObject : public SUPER {
     public:
         ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
-            m_svgElementPrefix = "extender_";
+            // TODO: set a group for extender object
+            //m_svgElementPrefix = "extender_";
         }
         friend class ExtenderButton;
 
@@ -91,6 +92,7 @@ public:
     ActivationMethod activationMethod();
 
     void setGeometry (const QRectF & geometry);
+    void setGroup(WidgetGroup * group = NULL);
 
 protected:
     void mousePressEvent ( QGraphicsSceneMouseEvent * event );
@@ -103,9 +105,9 @@ private:
     ExtenderPosition m_extenderPosition;
     ActivationMethod m_activationMethod;
 
-    static Plasma::Svg * m_extenderIconSvg;
-    static Plasma::Svg * m_extenderButtonSvg;
-    static int m_extendersCount;
+    //static Plasma::Svg * m_extenderIconSvg;
+    //static Plasma::Svg * m_extenderButtonSvg;
+    //static int m_extendersCount;
     
     void timerFired();
     

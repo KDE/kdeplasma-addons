@@ -39,9 +39,9 @@ namespace Lancelot {
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
   : BaseActionWidget(list->name() + "::" + QString((direction == Up)?"up":"down"), "", "", parent), m_list(list), m_direction(direction)
 {
-    m_svg = new Plasma::Svg("lancelot/action_list_view");
-    m_svg->setContentType(Plasma::Svg::ImageSet);
-    m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
+    //m_svg = new Plasma::Svg("lancelot/action_list_view");
+    //m_svg->setContentType(Plasma::Svg::ImageSet);
+    //m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
     setAcceptsHoverEvents(true);
 }
 
@@ -284,6 +284,31 @@ void ActionListView::paintWidget(QPainter * painter,
     //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
 }
 
+void ActionListView::setItemsGroup(WidgetGroup * group)
+{
+    if (group == NULL) {
+        group = WidgetGroup::defaultGroup();
+    }
+    
+    if (group == m_itemsGroup) return;
+    
+    m_itemsGroup = group;
+    
+    QPair < ExtenderButton *, int > pair;
+    foreach(pair, m_buttons) {
+        pair.first->setGroup(group);
+    }
+
+    ExtenderButton * button;
+    foreach(button, m_buttonsLimbo) {
+        button->setGroup(group);
+    }
+}
+
+WidgetGroup * ActionListView::itemsGroup() {
+    return m_itemsGroup;
+}
+
 void ActionListView::setExtenderPosition(ExtenderButton::ExtenderPosition position)
 {
     if (position == ExtenderButton::Top) position = ExtenderButton::Left;
@@ -332,6 +357,7 @@ Lancelot::ExtenderButton * ActionListView::createButton()
 
     if (!m_buttonsLimbo.empty()) {
         button = m_buttonsLimbo.takeFirst();
+        button->enable();
         button->show();
     } else {
         button = new Lancelot::ExtenderButton(m_name + "Button",
@@ -425,6 +451,7 @@ bool ActionListView::addButton(ListTail where) {
     button->setDescription(m_model->description(itemIndex));
     button->setIcon(m_model->icon(itemIndex));
     button->setLayout(NULL);
+    button->enable(!m_model->isCategory(itemIndex));
     m_signalMapper.setMapping(button, itemIndex);
 
     int itemHeight = itemHeightFromIndex(itemIndex);

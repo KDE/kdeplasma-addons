@@ -59,7 +59,10 @@ public:
 
     void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
-
+    
+    void setItemsGroup(WidgetGroup * group = NULL);
+    WidgetGroup * itemsGroup();
+    
     void wheelEvent ( QGraphicsSceneWheelEvent * event );
 
 Q_SIGNALS:
@@ -95,6 +98,8 @@ private:
     };
 
     ActionListViewModel * m_model;
+    WidgetGroup * m_itemsGroup;
+
 
     int m_minimumItemHeight;
     int m_maximumItemHeight;

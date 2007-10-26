@@ -44,12 +44,10 @@ public:
     virtual ~BaseActionWidget();
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-	virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-
+/*
     void setSvg(Plasma::Svg * svg);
     Plasma::Svg * svg() const;
-
+*/
     void setIconSize(QSize size);
     QSize iconSize() const;
 
@@ -71,21 +69,10 @@ public:
     void setAlignment(Qt::Alignment alignment);
     Qt::Alignment alignment() const;
 
-    void enable(bool value = true);
-    void disable();
-    bool enabled() const;
-
-Q_SIGNALS:
-    void mouseHoverEnter();
-    void mouseHoverLeave();
-
 protected:
-    bool m_hover;
-    bool m_enabled;
-
-    void resizeSvg();
-    Plasma::Svg * m_svg;
-    QString m_svgElementPrefix, m_svgElementSufix;
+    //void resizeSvg();
+    //Plasma::Svg * m_svg;
+    //QString m_svgElementPrefix, m_svgElementSufix;
 
     QIcon * m_icon;
     Plasma::Svg * m_iconInSvg;

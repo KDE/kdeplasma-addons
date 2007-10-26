@@ -29,32 +29,44 @@ namespace Lancelot
 
 class Widget : public Plasma::Widget
 {
+    Q_OBJECT
 public:
 	Widget(QString name, QGraphicsItem * parent = 0);
 	virtual ~Widget();
+
+    void enable(bool value = true);
+    void disable();
+    bool enabled() const;
 
     void setGeometry (const QRectF & geometry);
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
     
-    void setGroup(WidgetGroup * group = NULL);
-    WidgetGroup * getGroup();
+    void setGroup(const QString & groupName);
+    virtual void setGroup(WidgetGroup * group = NULL);
+    WidgetGroup * group();
 
     QString name() const;
     void setName(QString name);
 
+Q_SIGNALS:
+    void mouseHoverEnter();
+    void mouseHoverLeave();
+
 protected:
+    bool m_hover;
+    bool m_enabled;
+
     QString m_name;
     WidgetGroup * m_group;
-    
-    QColor * m_foregroundColorNormal;
-    QColor * m_foregroundColorActive;
-    QColor * m_backgroundColorNormal;
-    QColor * m_backgroundColorActive;
     
     virtual void groupUpdated();
     
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+
+    void paintBackground (QPainter * painter);
 
     friend class WidgetGroup;
     friend class Global;

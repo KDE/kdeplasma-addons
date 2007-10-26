@@ -27,11 +27,11 @@
 
 namespace Lancelot {
 
-Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
+/*Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
 Plasma::Svg * ExtenderButton::m_extenderIconSvg = NULL;
-int ExtenderButton::m_extendersCount = 0;
+int ExtenderButton::m_extendersCount = 0;*/
 
-ExtenderButtonTimer * ExtenderButtonTimer::getInstance() {
+ExtenderButtonTimer * ExtenderButtonTimer::instance() {
     if (!m_instance) {
         m_instance = new ExtenderButtonTimer();
         m_instance->m_timer.setInterval(ACTIVATION_TIME);
@@ -87,7 +87,7 @@ ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
 
 void ExtenderButton::init()
 {
-    if (!m_extenderButtonSvg) {
+    /*if (!m_extenderButtonSvg) {
         m_extenderButtonSvg = new Plasma::Svg("lancelot/extender_button");
         m_extenderButtonSvg->setContentType(Plasma::Svg::ImageSet);
 
@@ -96,11 +96,12 @@ void ExtenderButton::init()
     }
 
     ++m_extendersCount;
-    m_svg = m_extenderButtonSvg;
+    m_svg = m_extenderButtonSvg;*/
 
-    m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
+    m_extender = new ExtenderObject(name() + "::Extender", NULL, this);
     m_extender->setVisible(false);
-    m_extender->m_svg = m_svg;
+    m_extender->setGroup(m_group->name() + "-Extender");
+    //m_extender->m_svg = m_svg;
     m_extender->m_iconSize = QSize(16, 16);
 
     //connect(m_extender, SIGNAL(mouseHoverEnter()), this, SIGNAL(activated()));
@@ -108,14 +109,20 @@ void ExtenderButton::init()
     connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));
 }
 
+void ExtenderButton::setGroup(WidgetGroup * group)
+{
+    Widget::setGroup(group);
+    m_extender->setGroup(m_group->name() + "-Extender");
+}
+
 ExtenderButton::~ExtenderButton()
 {
-    if (--m_extendersCount == 0) {
+    /*if (--m_extendersCount == 0) {
         delete m_extenderButtonSvg;
         delete m_extenderIconSvg;
         m_extenderButtonSvg = 0;
         m_extenderIconSvg = 0;
-    }
+    }*/
     delete m_extender;
 }
 
@@ -124,11 +131,11 @@ void ExtenderButton::timerFired() {
 }
 
 void ExtenderButton::startTimer() {
-    ExtenderButtonTimer::getInstance()->startTimer(this);
+    ExtenderButtonTimer::instance()->startTimer(this);
 }
 
 void ExtenderButton::stopTimer() {
-    ExtenderButtonTimer::getInstance()->stopTimer();
+    ExtenderButtonTimer::instance()->stopTimer();
 }
 
 QRectF ExtenderButton::boundingRect() const
@@ -184,27 +191,27 @@ void ExtenderButton::relayoutExtender()
     case Top:
         m_extender->setPos(0, - EXTENDER_SIZE);
         m_extender->resize(size().width(), EXTENDER_SIZE);
-        m_svgElementSufix = "_top";
+        //m_svgElementSufix = "_top";
         break;
     case Bottom:
         m_extender->setPos(0, size().height());
         m_extender->resize(size().width(), EXTENDER_SIZE);
-        m_svgElementSufix = "_bottom";
+        //m_svgElementSufix = "_bottom";
         break;
     case Left:
         m_extender->setPos(- EXTENDER_SIZE, 0);
         m_extender->resize(EXTENDER_SIZE, size().height());
-        m_svgElementSufix = "_left";
+        //m_svgElementSufix = "_left";
         break;
     case Right:
         m_extender->setPos(size().width(), 0);
         m_extender->resize(EXTENDER_SIZE, size().height());
-        m_svgElementSufix = "_right";
+        //m_svgElementSufix = "_right";
         break;
     case No:
         break;
     }
-    m_extender->m_svgElementSufix = m_svgElementSufix;
+    //m_extender->m_svgElementSufix = m_svgElementSufix;
 }
 
 ExtenderButton::ExtenderPosition ExtenderButton::extenderPosition()

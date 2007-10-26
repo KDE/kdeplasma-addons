@@ -29,28 +29,43 @@ namespace Lancelot
 // Group
 QMap < QString, WidgetGroup * > WidgetGroup::m_groups; 
 
-WidgetGroup * WidgetGroup::getGroup(QString name)
+WidgetGroup * WidgetGroup::group(const QString & name)
 {
-    if (!m_groups.contains(name)) {
-        m_groups.insert(name, new WidgetGroup(name));
+    QString groupName = name;
+    if (groupName == "") {
+        groupName = "Default";
     }
-    return m_groups[name];
+    
+    if (!m_groups.contains(groupName)) {
+        m_groups.insert(groupName, new WidgetGroup(groupName));
+    }
+    return m_groups[groupName];
 }
 
-WidgetGroup * WidgetGroup::getDefaultGroup()
+WidgetGroup * WidgetGroup::defaultGroup()
 {
-    return getGroup("Default");
+    return group("Default");
 }
 
 WidgetGroup::WidgetGroup(QString name)
-  : m_confGroupTheme(NULL), m_name(name)
+  : m_confGroupTheme(NULL), m_name(name), m_backgroundSvg(NULL),
+    m_hasBackgroundColor(false), m_ownsBackgroundSvg(false)
+    //,
+    //m_cachedBackgroundNormal(NULL), m_cachedBackgroundActive(NULL), m_cachedBackgroundDisabled(NULL)
 {
-    m_confGroupTheme = new KConfigGroup(Global::getInstance()->theme(), "Group-" + name);
+    kDebug() << "Creating group named " << name << "\n";
+    m_confGroupTheme = new KConfigGroup(Global::instance()->theme(), "Group-" + name);
 }
 
 WidgetGroup::~WidgetGroup()
 {
     delete m_confGroupTheme;
+    if (m_ownsBackgroundSvg) {
+        delete m_backgroundSvg;
+    }
+    //delete m_cachedBackgroundNormal;
+    //delete m_cachedBackgroundActive;
+    //delete m_cachedBackgroundDisabled;
 }
 
 void WidgetGroup::addWidget(Widget * widget)
@@ -64,7 +79,7 @@ void WidgetGroup::addWidget(Widget * widget)
 
 void WidgetGroup::removeWidget(Widget * widget)
 {
-    if (WidgetGroup::getDefaultGroup() == this) return;
+    if (WidgetGroup::defaultGroup() == this) return;
     
     if (!m_widgets.contains(widget)) return;
     m_widgets.removeAll(widget);
@@ -72,45 +87,64 @@ void WidgetGroup::removeWidget(Widget * widget)
     widget->setGroup(NULL);
 }
 
-bool WidgetGroup::hasProperty(QString property)
+bool WidgetGroup::hasProperty(QString property) const
 {
     return m_properties.contains(property);
 }
 
-QVariant WidgetGroup::getProperty(QString property)
+QVariant WidgetGroup::property(QString property) const
 {
     return m_properties.value(property);
 }
 
-QColor WidgetGroup::getPropertyAsColor(QString property)
+QColor WidgetGroup::propertyAsColor(QString property) const
 {
     return m_properties.value(property).value<QColor>();
 }
 
-QString WidgetGroup::getPropertyAsString(QString property)
+QString WidgetGroup::propertyAsString(QString property) const
 {
     return m_properties.value(property).toString();
 }
 
-int WidgetGroup::getPropertyAsInteger(QString property)
+int WidgetGroup::propertyAsInteger(QString property) const
 {
     return m_properties.value(property).toInt();
 }
 
-bool WidgetGroup::getPropertyAsBoolean(QString property)
+bool WidgetGroup::propertyAsBoolean(QString property) const
 {
     return m_properties.value(property).toBool();
 }
 
-void * WidgetGroup::getPropertyAsPointer(QString property)
+void * WidgetGroup::propertyAsPointer(QString property) const
 {
     return m_properties.value(property).value< void * >();
 }
 
-QString WidgetGroup::name()
+QString WidgetGroup::name() const
 {
     return m_name;
 }
+
+Plasma::Svg * WidgetGroup::backgroundSvg() const
+{
+    return m_backgroundSvg;
+}
+
+const WidgetGroup::ColorScheme * WidgetGroup::backgroundColor() const
+{
+    if (!m_hasBackgroundColor) {
+        return NULL;
+    }
+    return & m_backgroundColor;
+}
+
+const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
+{
+    return & m_foregroundColor;
+}
+
 
 void WidgetGroup::loadAll()
 {
@@ -120,18 +154,67 @@ void WidgetGroup::loadAll()
     }
 }
 
+void WidgetGroup::copyFrom(WidgetGroup * group)
+{
+    if (this == group) return;
+    
+    m_properties = group->m_properties;
+
+    m_foregroundColor = group->m_foregroundColor;
+    m_hasBackgroundColor = group->m_hasBackgroundColor;
+    m_backgroundColor = group->m_backgroundColor;
+    
+    if (m_ownsBackgroundSvg) {
+        delete m_backgroundSvg;
+    }
+    m_backgroundSvg = group->m_backgroundSvg;
+    m_ownsBackgroundSvg = false;
+}
+
 void WidgetGroup::load()
 {
-    // TODO: Load properties from theme configuration file
-    m_foregroundColorNormal = m_confGroupTheme->readEntry("foreground.color.normal", QColor(Qt::black));
-    m_foregroundColorActive = m_confGroupTheme->readEntry("foreground.color.active", QColor(Qt::black));
-    m_backgroundColorNormal = m_confGroupTheme->readEntry("background.color.normal", QColor(Qt::white));
-    m_backgroundColorActive = m_confGroupTheme->readEntry("background.color.active", QColor(Qt::white));
+    m_hasBackgroundColor = false;
+    if (m_ownsBackgroundSvg) {
+        delete m_backgroundSvg;
+    }
+    m_backgroundSvg = NULL;
     
-    m_properties["foregroundColorNormal"] = qVariantFromValue((void *) & m_foregroundColorNormal);
-    m_properties["foregroundColorActive"] = qVariantFromValue((void *) & m_foregroundColorActive);
-    m_properties["backgroundColorNormal"] = qVariantFromValue((void *) & m_backgroundColorNormal);
-    m_properties["backgroundColorActive"] = qVariantFromValue((void *) & m_backgroundColorActive);
+    WidgetGroup * group;
+    
+    if (!m_confGroupTheme->exists()) {
+        kDebug() << "This (" << m_name << ") group is not defined in the theme. Loading the default group.\n";
+        group = WidgetGroup::defaultGroup();
+        if (group == this) return;
+        
+        copyFrom(group);
+        return;
+    }
+    
+    group = WidgetGroup::group(m_confGroupTheme->readEntry("parent", "Default"));
+    if (group != this) {
+        group->load();
+        copyFrom(group);
+    }
+    
+    // TODO: Load properties from theme configuration file
+    m_foregroundColor.normal   = m_confGroupTheme->readEntry("foreground.color.normal",   m_foregroundColor.normal);
+    m_foregroundColor.active   = m_confGroupTheme->readEntry("foreground.color.active",   m_foregroundColor.active);
+    m_foregroundColor.disabled = m_confGroupTheme->readEntry("foreground.color.disabled", m_foregroundColor.disabled);
+    
+    QString type = m_confGroupTheme->readEntry("background.type", "none");
+    if (type == "color") {
+        m_hasBackgroundColor       = true;
+        m_backgroundColor.normal   = m_confGroupTheme->readEntry("background.color.normal",   m_backgroundColor.normal);
+        m_backgroundColor.active   = m_confGroupTheme->readEntry("background.color.active",   m_backgroundColor.active);
+        m_backgroundColor.disabled = m_confGroupTheme->readEntry("background.color.disabled", m_backgroundColor.disabled);
+    } else if (type == "svg") {
+        if (m_ownsBackgroundSvg) {
+            delete m_backgroundSvg;
+        }
+        m_backgroundSvg = new Plasma::Svg(m_confGroupTheme->readEntry("background.svg"));
+        m_ownsBackgroundSvg = true;
+        m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
+    }
     
     foreach (Widget * widget, m_widgets) {
         widget->groupUpdated();
@@ -142,7 +225,7 @@ void WidgetGroup::load()
 
 Global * Global::m_instance = NULL;
 
-Global * Global::getInstance() {
+Global * Global::instance() {
     if (!m_instance) {
         m_instance = new Global();
     }

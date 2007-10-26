@@ -47,8 +47,7 @@ void BaseActionWidget::init()
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
-    m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
+  : Widget(name, parent), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter), 
     m_title(title), m_description(description)
 {
@@ -56,8 +55,7 @@ BaseActionWidget::BaseActionWidget(QString name, QString title, QString descript
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
-    m_svgElementSufix(""), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
+  : Widget(name, parent), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description)
 {
@@ -65,8 +63,7 @@ BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QS
 }
 
 BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_hover(false), m_enabled(true), m_svg(NULL), m_svgElementPrefix(""), 
-    m_svgElementSufix(""), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
+  : Widget(name, parent), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description) 
 {
@@ -76,27 +73,11 @@ BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString tit
 BaseActionWidget::~BaseActionWidget()
 {}
 
-void BaseActionWidget::resizeSvg() {
+/*void BaseActionWidget::resizeSvg() {
     if (m_svg) {
         m_svg->resize(size());
     }
-}
-
-void BaseActionWidget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
-    if (!m_enabled) return;
-    m_hover = true;
-    Widget::hoverEnterEvent(event);
-    emit mouseHoverEnter();
-    update();
-}
-
-void BaseActionWidget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
-    if (!m_enabled) return;
-    m_hover = false;
-    Widget::hoverEnterEvent(event);
-    emit mouseHoverLeave();
-    update();
-}
+}*/
 
 void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
     Q_UNUSED(widget);
@@ -104,20 +85,16 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     
     Widget::paintWidget(painter, option, widget);
     
-    if (!m_hover) {
-        painter->setPen(QPen(* m_foregroundColorNormal));
-        //painter->setPen(QPen(m_group->m_foregroundColorNormal));
+    if (!m_enabled) {
+        painter->setPen(QPen(m_group->foregroundColor()->disabled));
+    } else if (m_hover) {
+        painter->setPen(QPen(m_group->foregroundColor()->active));
     } else {
-        painter->setPen(QPen(* m_foregroundColorActive));
-        //painter->setPen(QPen(m_group->m_foregroundColorActive));
+        painter->setPen(QPen(m_group->foregroundColor()->normal));
     }
     
     // Background Painting
-    if (m_svg) {
-        resizeSvg();
-        QString element = m_svgElementPrefix + (m_hover?"button_active":"button_inactive") + m_svgElementSufix;
-        m_svg->paint(painter, 0, 0, element);
-    }
+    paintBackground(painter);
 
     QFont titleFont = painter->font();
     QFont descriptionFont = painter->font();
@@ -233,14 +210,15 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     }
 }
 
-void BaseActionWidget::setSvg(Plasma::Svg * svg) {
+/*
+ * void BaseActionWidget::setSvg(Plasma::Svg * svg) {
     m_svg = svg;
     update();
 }
 
 Plasma::Svg * BaseActionWidget::svg() const {
     return m_svg;
-}
+}*/
 
 void BaseActionWidget::setIconSize(QSize size) { m_iconSize = size; update(); }
 QSize BaseActionWidget::iconSize() const { return m_iconSize; }
@@ -262,21 +240,6 @@ BaseActionWidget::InnerOrientation BaseActionWidget::innerOrientation() const { 
 
 void BaseActionWidget::setAlignment(Qt::Alignment alignment) { m_alignment = alignment; update(); }
 Qt::Alignment BaseActionWidget::alignment() const { return m_alignment; }
-
-void BaseActionWidget::enable(bool value) {
-    if (m_hover && m_enabled) {
-        hoverLeaveEvent(NULL);
-    }
-    m_enabled = value;
-}
-
-void BaseActionWidget::disable() {
-    enable(false);
-}
-
-bool BaseActionWidget::enabled() const {
-    return m_enabled;
-}
 
 
 } // namespace Lancelot

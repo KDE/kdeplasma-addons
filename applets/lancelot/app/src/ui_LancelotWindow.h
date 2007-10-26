@@ -173,11 +173,12 @@ protected:
         setupShell(object);
         createObjects(object);
         setupObjects(object);
+        setupGroups(object);
         setupTests(object);
 
         object->resize(550, 500);
 
-        Lancelot::Global::getInstance()->activateAll();
+        Lancelot::Global::instance()->activateAll();
 
         layoutMain->setGeometry(QRectF(0, 0, 550, 500));
 
@@ -243,6 +244,33 @@ protected:
         CreateSection (System);
         CreateSection (Documents);
         CreateSection (Contacts);
+    }
+
+    void setupGroups(QFrame * object)
+    {
+        Q_UNUSED(object);
+        kDebug() << "Ui::LancelotWindow::setupGroups()\n";
+
+        foreach (Lancelot::ExtenderButton * button, systemButtons) {
+            button->Widget::setGroup("SystemButtons");
+        }
+
+        // Sections area
+        foreach (Lancelot::ExtenderButton * button, sectionButtons) {
+            button->Widget::setGroup("SectionButtons");
+        }
+        buttonSystemSwitchUser->disable();
+        //panelSections->setLayout(layoutSections);
+
+        // Search area
+        //panelSearch->setLayout(layoutSearch);
+
+        // Center area
+
+        /*SetupSection (Search);
+        SetupSection (System);
+        SetupSection (Documents);
+        SetupSection (Contacts);*/
     }
 
     void setupObjects(QFrame * object)

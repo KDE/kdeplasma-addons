@@ -27,6 +27,7 @@
 #include <QVariant>
 #include <KConfig>
 #include <KConfigGroup>
+#include <plasma/svg.h>
 
 namespace Lancelot
 {
@@ -35,24 +36,34 @@ class Widget;
 
 class WidgetGroup : public QObject {
 public:
-    static WidgetGroup * getGroup(QString name);
-    static WidgetGroup * getDefaultGroup();
+    
+    class ColorScheme {
+    public:
+        QColor normal, disabled, active;
+    };
+    
+    static WidgetGroup * group(const QString & name);
+    static WidgetGroup * defaultGroup();
     static void loadAll();
 
-    bool     hasProperty(QString property);
-    QVariant getProperty(QString property);
-    QColor   getPropertyAsColor(QString property);
-    QString  getPropertyAsString(QString property);
-    int      getPropertyAsInteger(QString property);
-    bool     getPropertyAsBoolean(QString property);
-    void *   getPropertyAsPointer(QString property);
+    bool     hasProperty(QString property) const;
+    QVariant property(QString property) const;
+    QColor   propertyAsColor(QString property) const;
+    QString  propertyAsString(QString property) const;
+    int      propertyAsInteger(QString property) const;
+    bool     propertyAsBoolean(QString property) const;
+    void *   propertyAsPointer(QString property) const;
+    
+    Plasma::Svg * backgroundSvg() const;
+    const ColorScheme * backgroundColor() const;
+    const ColorScheme * foregroundColor() const;
     
     void load();
     
     void addWidget(Widget * widget);
     void removeWidget(Widget * widget);
     
-    QString name();
+    QString name() const;
     
 private:
     static QMap < QString, WidgetGroup * > m_groups;
@@ -66,15 +77,23 @@ private:
     
     QList < Widget * > m_widgets;
     
-    QColor m_foregroundColorNormal;
-    QColor m_foregroundColorActive;
-    QColor m_backgroundColorNormal;
-    QColor m_backgroundColorActive;
+    ColorScheme m_foregroundColor;
+    ColorScheme m_backgroundColor;
+    Plasma::Svg * m_backgroundSvg;
+    bool m_hasBackgroundColor : 1;
+    bool m_ownsBackgroundSvg : 1;
+    //QPixmap * m_cachedBackgroundNormal;
+    //QPixmap * m_cachedBackgroundActive;
+    //QPixmap * m_cachedBackgroundDisabled;
+    
+    void copyFrom(WidgetGroup * group);
+    
+    friend class Widget;
 };
 
 class Global : public QObject {
 public:
-    static Global * getInstance();
+    static Global * instance();
 
     bool processGeometryChanges;
 	bool processUpdateRequests;
