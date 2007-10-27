@@ -44,7 +44,7 @@ void BaseActionWidget::init()
 {
     setAcceptsHoverEvents(true);
     resize(140, 38);
-    setGroup("BaseActionWidget");
+    setGroupByName("BaseActionWidget");
 
 }
 

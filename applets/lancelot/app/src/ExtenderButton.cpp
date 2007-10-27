@@ -95,7 +95,7 @@ void ExtenderButton::init()
     m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
     m_extender->setVisible(false);
     
-    Widget::setGroup("ExtenderButton");
+    setGroupByName("ExtenderButton");
     
     m_extender->m_iconSize = QSize(16, 16);
 
@@ -110,7 +110,7 @@ void ExtenderButton::init()
 void ExtenderButton::setGroup(WidgetGroup * group)
 {
     Widget::setGroup(group);
-    m_extender->setGroup(m_group->name() + "-Extender");
+    m_extender->setGroupByName(m_group->name() + "-Extender");
 }
 
 ExtenderButton::~ExtenderButton()

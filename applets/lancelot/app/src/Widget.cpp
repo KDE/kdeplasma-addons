@@ -55,7 +55,7 @@ void Widget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
     update();
 }
 
-void Widget::setGroup(const QString & groupName)
+void Widget::setGroupByName(const QString & groupName)
 {
     setGroup(WidgetGroup::group(groupName));
 }

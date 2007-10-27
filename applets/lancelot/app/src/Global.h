@@ -46,19 +46,15 @@ public:
     static WidgetGroup * defaultGroup();
     static void loadAll();
 
-    bool     hasProperty(QString property) const;
-    QVariant property(QString property) const;
-    QColor   propertyAsColor(QString property) const;
-    QString  propertyAsString(QString property) const;
-    int      propertyAsInteger(QString property) const;
-    bool     propertyAsBoolean(QString property) const;
-    void *   propertyAsPointer(QString property) const;
+    bool     hasProperty(const QString & property) const;
+    QVariant property(const QString & property) const;
+    void setProperty(const QString & property, const QVariant & value);
     
     Plasma::Svg * backgroundSvg() const;
     const ColorScheme * backgroundColor() const;
     const ColorScheme * foregroundColor() const;
     
-    void load();
+    void load(bool full = false);
     
     void addWidget(Widget * widget);
     void removeWidget(Widget * widget);
@@ -82,6 +78,7 @@ private:
     Plasma::Svg * m_backgroundSvg;
     bool m_hasBackgroundColor : 1;
     bool m_ownsBackgroundSvg : 1;
+    bool m_loaded : 1;
     //QPixmap * m_cachedBackgroundNormal;
     //QPixmap * m_cachedBackgroundActive;
     //QPixmap * m_cachedBackgroundDisabled;

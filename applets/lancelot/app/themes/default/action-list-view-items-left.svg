@@ -61,6 +61,17 @@
        x2="367.53082"
        y2="207.26047"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6143"
+       id="linearGradient2679"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       x1="438.58295"
+       y1="264.88116"
+       x2="438.58295"
+       y2="250.03554"
+       gradientTransform="matrix(2.2113017,0,0,2.2113017,-781.79294,-404.99358)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -100,26 +111,11 @@
        transform="matrix(2.2113017,0,0,2.2113017,-781.79294,-404.99358)"
        inkscape:label="#g3202"
        id="active">
-      <rect
-         style="opacity:1;fill:url(#linearGradient6149);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect2218"
-         width="153.1553"
-         height="29.667492"
-         x="366.75647"
-         y="235.21367"
-         inkscape:label="#rect2346"
-         rx="2.5745568"
-         ry="2.5745568" />
-      <rect
-         ry="0"
-         rx="0"
-         inkscape:label="#rect2346"
-         y="235.21367"
-         x="366.75647"
-         height="29.667496"
-         width="7.9502659"
-         id="rect3686"
-         style="opacity:1;fill:url(#linearGradient6149);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         style="opacity:1;fill:url(#linearGradient2679);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 29.21875 115.125 L 29.21875 123.09375 L 29.21875 172.78125 L 29.21875 180.75 L 37.1875 180.75 L 46.78125 180.75 L 359.90625 180.75 C 364.32187 180.75 367.87499 177.19688 367.875 172.78125 L 367.875 123.09375 C 367.875 118.67813 364.32186 115.125 359.90625 115.125 L 46.78125 115.125 L 37.1875 115.125 L 29.21875 115.125 z "
+         transform="matrix(0.4522223,0,0,0.4522223,353.54422,183.14714)"
+         id="rect2218" />
     </g>
     <rect
        inkscape:label="#rect2346"

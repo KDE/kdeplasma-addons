@@ -66,9 +66,14 @@
         Plasma::NodeLayout::NodeCoordinate(0.5, 0, 4, 0), \
         Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0) \
     ); \
+    (listSection ## SECTION ## Left)->setItemsGroup(Lancelot::WidgetGroup::group("ActionListView-Left-Items")); \
+    (listSection ## SECTION ## Right)->setItemsGroup(Lancelot::WidgetGroup::group("ActionListView-Right-Items")); \
     (listSection ## SECTION ## Left)->setExtenderPosition(Lancelot::ExtenderButton::Left); \
     (listSection ## SECTION ## Right)->setExtenderPosition(Lancelot::ExtenderButton::Right); \
     (panelSection ## SECTION)->setLayout(layoutSection ## SECTION);
+    //(listSection ## SECTION ## Left)->setGroupByName("ActionListView-Left");
+    //(listSection ## SECTION ## Right)->setGroupByName("ActionListView-Right");
+
 
 namespace Ui {
 class LancelotWindow
@@ -252,12 +257,12 @@ protected:
         kDebug() << "Ui::LancelotWindow::setupGroups()\n";
 
         foreach (Lancelot::ExtenderButton * button, systemButtons) {
-            button->Widget::setGroup("SystemButtons");
+            button->setGroupByName("SystemButtons");
         }
 
         // Sections area
         foreach (Lancelot::ExtenderButton * button, sectionButtons) {
-            button->Widget::setGroup("SectionButtons");
+            button->setGroupByName("SectionButtons");
         }
         buttonSystemSwitchUser->disable();
         //panelSections->setLayout(layoutSections);

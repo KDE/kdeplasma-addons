@@ -84,7 +84,7 @@ public:
     virtual ~DummyActionListViewModel() {}
 
     virtual QString title(int index) const {
-        return m_title + QString::number(index) + QString((index < size())?"":"err");
+        return m_title + " " + QString::number(index) + " long long long long long " + QString((index < size())?"":"err");
     }
 
     virtual QString description(int index) const {

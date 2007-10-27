@@ -69,7 +69,7 @@ ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraph
     m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
     m_initialButtonsCreationRunning(false)
 {
-    Widget::setGroup("ActionListView");
+    setGroupByName("ActionListView");
     m_itemsGroup = WidgetGroup::group("ActionListView-Items");
 
     setAcceptsHoverEvents(true);
@@ -114,8 +114,8 @@ void ActionListView::positionScrollButtons()
         scrollButtonDown->setZValue(100);
         scrollButtonDown->show();
 
-        scrollButtonUp->setGroup(m_group->name() + "-Scroll-Up");
-        scrollButtonDown->setGroup(m_group->name() + "-Scroll-Down");
+        scrollButtonUp->setGroupByName(m_group->name() + "-Scroll-Up");
+        scrollButtonDown->setGroupByName(m_group->name() + "-Scroll-Down");
 
     }
 
@@ -130,9 +130,10 @@ void ActionListView::setGroup(WidgetGroup * group)
 {
     Widget::setGroup(group);
     if (scrollButtonUp) {
-        scrollButtonUp->setGroup(m_group->name() + "-Scroll-Up");
-        scrollButtonDown->setGroup(m_group->name() + "-Scroll-Down");
+        scrollButtonUp->setGroupByName(m_group->name() + "-Scroll-Up");
+        scrollButtonDown->setGroupByName(m_group->name() + "-Scroll-Down");
     }
+    //setItemsGroup(WidgetGroup::group(group->name() + "-Items"));
 }
 
 void ActionListView::scroll(ScrollDirection direction)
