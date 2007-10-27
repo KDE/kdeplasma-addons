@@ -28,6 +28,8 @@
 #include <QTextDocument>
 
 #include <plasma/applet.h>
+#include <plasma/widgets/pushbutton.h>
+#include <plasma/widgets/boxlayout.h>
 
 #include "fileWatcherConfig.h"
 
@@ -47,6 +49,9 @@ class FileWatcher : public Plasma::Applet
     QGraphicsTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
+    Plasma::PushButton *configureButton;
+    Plasma::BoxLayout *buttonBox;
+    bool configured;
 
   private slots:
     void showConfigurationInterface();

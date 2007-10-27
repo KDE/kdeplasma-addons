@@ -11,6 +11,7 @@ Name[pt_BR]=Vigilante de Ficheiros
 Name[sv]=Filövervakning
 Type=Service
 ServiceTypes=Plasma/Applet
+Icon=application-octet-stream
 
 X-KDE-Library=plasma_applet_fileWatcher
 X-KDE-PluginInfo-Author=Jesper Thomschutz
