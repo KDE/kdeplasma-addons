@@ -106,7 +106,7 @@ class DummyActionListViewMergedModel : public ActionListViewMergedModel {
 public:
     DummyActionListViewMergedModel (QString title, int subs) {
         while (subs-- != 0) {
-            addModel(NULL, title + QString::number(subs), new DummyActionListViewModel(title + QString::number(subs), subs + 2));
+            addModel(NULL, title + QString::number(subs), new DummyActionListViewModel(title + QString::number(subs), 2 + subs % 2));
         }
     }
 };

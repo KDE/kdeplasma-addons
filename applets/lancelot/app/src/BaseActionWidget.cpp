@@ -85,9 +85,14 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
-    // TODO: Cutting the long titles... gradient?
     
-    Widget::paintWidget(painter, option, widget);
+    paintBackground(painter);
+    paintForeground(painter);
+    
+}
+
+void BaseActionWidget::paintForeground (QPainter * painter) {
+    // TODO: Cutting the long titles... gradient?
     
     if (!m_enabled) {
         painter->setPen(QPen(m_group->foregroundColor()->disabled));

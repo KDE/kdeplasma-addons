@@ -120,15 +120,7 @@ void Widget::update(qreal x, qreal y, qreal w, qreal h)
 void Widget::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) {
     Q_UNUSED(option);
     Q_UNUSED(widget);
-    
-    // TODO: Comment the next line
-    //kDebug() << name() << "!\n";
-    //if (!m_group)
-    //    kDebug() << "Group is not assigned for" << name() << "!\n";
-    //if (!m_backgroundColorNormal)
-    //    kDebug() << "Group is not processed for" << name() << "!\n";
-    //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(* m_backgroundColorNormal));
-    
+
     paintBackground(painter);
 }
 
@@ -150,19 +142,25 @@ bool Widget::enabled() const {
 void Widget::paintBackground (QPainter * painter) {
     if (!m_group) return;
     
+    QString element;
+    if (!m_enabled) {
+        element = "disabled";
+    } else if (m_hover) {
+        element = "active";
+    } else {
+        element = "normal";
+    }
+    
+    paintBackground(painter, element);
+}
+
+void Widget::paintBackground (QPainter * painter, const QString & element) {
+    if (!m_group) return;
+    
     // Background Painting
     kDebug() << "Painting bkg ####\n";
     if (Plasma::Svg * svg = m_group->backgroundSvg()) {
         svg->resize(size());
-        //QString element = m_svgElementPrefix + "button_" + (m_hover?"active":"inactive") + m_svgElementSufix;
-        QString element;
-        if (!m_enabled) {
-            element = "disabled";
-        } else if (m_hover) {
-            element = "active";
-        } else {
-            element = "normal";
-        }
         
         svg->paint(painter, 0, 0, element);
         

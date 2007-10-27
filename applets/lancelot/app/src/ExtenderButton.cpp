@@ -35,6 +35,7 @@ ExtenderButtonTimer * ExtenderButtonTimer::instance() {
     if (!m_instance) {
         m_instance = new ExtenderButtonTimer();
         m_instance->m_timer.setInterval(ACTIVATION_TIME);
+        m_instance->m_timer.setSingleShot(true);
         connect(&(m_instance->m_timer), SIGNAL(timeout()),
                 m_instance, SLOT(fire()));
     }

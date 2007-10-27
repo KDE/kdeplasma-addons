@@ -18,6 +18,7 @@
  */
 
 #include "LancelotWindow.h"
+#include "ToggleExtenderButton.h"
 
 #include <plasma/animator.h>
 #include <plasma/phase.h>
@@ -42,7 +43,7 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     );
 
     connect(buttonSectionApplications, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "");
+    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "Applications");
 
     connect(buttonSectionContacts, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionContacts, "Contacts");
@@ -65,6 +66,12 @@ void LancelotWindow::activated(int index) {
 
 void LancelotWindow::sectionActivated(const QString & item) {
     kDebug() << item << " is activated\n";
+    foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
+        button->setPressed(false);
+    }
+    if (sectionButtons.contains(item)) {
+        sectionButtons[item]->setPressed(true);
+    }
     layoutCenter->show(item);
 }
 

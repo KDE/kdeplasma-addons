@@ -44,6 +44,7 @@ public:
     virtual ~BaseActionWidget();
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+
 /*
     void setSvg(Plasma::Svg * svg);
     Plasma::Svg * svg() const;
@@ -73,6 +74,8 @@ protected:
     //void resizeSvg();
     //Plasma::Svg * m_svg;
     //QString m_svgElementPrefix, m_svgElementSufix;
+    
+    void paintForeground (QPainter * painter);
 
     QIcon * m_icon;
     Plasma::Svg * m_iconInSvg;

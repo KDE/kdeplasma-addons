@@ -67,6 +67,7 @@ protected:
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 
     void paintBackground (QPainter * painter);
+    void paintBackground (QPainter * painter, const QString & element);
 
     friend class WidgetGroup;
     friend class Global;

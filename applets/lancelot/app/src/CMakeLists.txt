@@ -22,8 +22,10 @@ set(
   CardLayout.cpp
 
   Panel.cpp
-  ExtenderButton.cpp
   BaseActionWidget.cpp
+  
+  ExtenderButton.cpp
+  ToggleExtenderButton.cpp
 
   ActionListView.cpp
   ActionListViewModels.cpp
