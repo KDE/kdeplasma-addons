@@ -37,8 +37,13 @@ WidgetGroup * WidgetGroup::group(const QString & name)
     }
     
     if (!m_groups.contains(groupName)) {
-        m_groups.insert(groupName, new WidgetGroup(groupName));
+        WidgetGroup * group = new WidgetGroup(groupName);
+        if (Global::instance()->processGroupChanges) {
+            group->load();
+        }
+        m_groups.insert(groupName, group);
     }
+    
     return m_groups[groupName];
 }
 

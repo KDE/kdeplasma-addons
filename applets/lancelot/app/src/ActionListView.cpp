@@ -69,6 +69,9 @@ ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraph
     m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
     m_initialButtonsCreationRunning(false)
 {
+    Widget::setGroup("ActionListView");
+    m_itemsGroup = WidgetGroup::group("ActionListView-Items");
+
     setAcceptsHoverEvents(true);
 
     setModel(model);
@@ -78,7 +81,6 @@ ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraph
 
     connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
     m_scrollTimer.setSingleShot(false);
-
 }
 
 void ActionListView::itemActivated(int index) {
@@ -111,6 +113,10 @@ void ActionListView::positionScrollButtons()
         scrollButtonDown->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonDown->setZValue(100);
         scrollButtonDown->show();
+
+        scrollButtonUp->setGroup(m_group->name() + "-Scroll-Up");
+        scrollButtonDown->setGroup(m_group->name() + "-Scroll-Down");
+
     }
 
     float left = (size().width() - EXTENDER_SIZE - SCROLL_BUTTON_WIDTH) / 2;
@@ -118,6 +124,15 @@ void ActionListView::positionScrollButtons()
 
     scrollButtonUp->setPos(left, 0);
     scrollButtonDown->setPos(left, size().height() - SCROLL_BUTTON_HEIGHT);
+}
+
+void ActionListView::setGroup(WidgetGroup * group)
+{
+    Widget::setGroup(group);
+    if (scrollButtonUp) {
+        scrollButtonUp->setGroup(m_group->name() + "-Scroll-Up");
+        scrollButtonDown->setGroup(m_group->name() + "-Scroll-Down");
+    }
 }
 
 void ActionListView::scroll(ScrollDirection direction)
@@ -361,11 +376,12 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button->show();
     } else {
         button = new Lancelot::ExtenderButton(m_name + "Button",
-            new KIcon("system-lock-screen"), "Caption", "Decr", this);
+            (QIcon *)NULL, "", "", this);
 
         button->setInnerOrientation(Lancelot::ExtenderButton::Horizontal);
         button->setExtenderPosition(m_extenderPosition);
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        button->setGroup(m_itemsGroup);
 
         connect(button, SIGNAL(activated()), &m_signalMapper, SLOT(map()));
     }

@@ -38,6 +38,7 @@ void Panel::init()
     m_titleWidget.setIconSize(QSize(16, 16));
     m_titleWidget.setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     m_titleWidget.disable();
+    Widget::setGroup("Panel");
     invalidate();
 }
 
@@ -70,6 +71,12 @@ QSize Panel::iconSize() const {
 void Panel::setGeometry (const QRectF & geometry) {
     Widget::setGeometry(geometry);
     invalidate();
+}
+
+void Panel::setGroup(WidgetGroup * group)
+{
+    Widget::setGroup(group);
+    m_titleWidget.setGroup(m_group->name() + "-Title");
 }
 
 void Panel::invalidate() {

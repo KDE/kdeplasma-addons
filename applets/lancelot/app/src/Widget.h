@@ -42,7 +42,7 @@ public:
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
     
-    void setGroup(const QString & groupName);
+    virtual void setGroup(const QString & groupName);
     virtual void setGroup(WidgetGroup * group = NULL);
     WidgetGroup * group();
 

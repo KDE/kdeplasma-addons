@@ -40,6 +40,8 @@ public:
     void show();
     void hide();
 
+    void setGroup(WidgetGroup * group = NULL);
+
 private:
     void init();
     void invalidate();

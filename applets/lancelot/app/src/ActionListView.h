@@ -64,6 +64,7 @@ public:
     WidgetGroup * itemsGroup();
     
     void wheelEvent ( QGraphicsSceneWheelEvent * event );
+    void setGroup(WidgetGroup * group = NULL);
 
 Q_SIGNALS:
     void activated(int index);

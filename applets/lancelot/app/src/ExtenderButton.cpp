@@ -27,8 +27,8 @@
 
 namespace Lancelot {
 
-/*Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
 Plasma::Svg * ExtenderButton::m_extenderIconSvg = NULL;
+/*Plasma::Svg * ExtenderButton::m_extenderButtonSvg = NULL;
 int ExtenderButton::m_extendersCount = 0;*/
 
 ExtenderButtonTimer * ExtenderButtonTimer::instance() {
@@ -63,7 +63,7 @@ ExtenderButtonTimer * ExtenderButtonTimer::m_instance = NULL;
 
 ExtenderButton::ExtenderButton(QString name, QString title, QString description,
         QGraphicsItem * parent) :
-    SUPER(name, title, description, parent), m_extender(NULL),
+            BaseActionWidget(name, title, description, parent), m_extender(NULL),
             m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
@@ -71,7 +71,7 @@ ExtenderButton::ExtenderButton(QString name, QString title, QString description,
 
 ExtenderButton::ExtenderButton(QString name, QIcon * icon, QString title,
         QString description, QGraphicsItem * parent) :
-    SUPER(name, icon, title, description, parent), m_extender(NULL),
+            BaseActionWidget(name, icon, title, description, parent), m_extender(NULL),
             m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
@@ -79,7 +79,7 @@ ExtenderButton::ExtenderButton(QString name, QIcon * icon, QString title,
 
 ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
         QString description, QGraphicsItem * parent) :
-    SUPER(name, icon, title, description, parent), m_extender(NULL),
+            BaseActionWidget(name, icon, title, description, parent), m_extender(NULL),
             m_extenderPosition(No), m_activationMethod(Click)
 {
     init();
@@ -87,26 +87,24 @@ ExtenderButton::ExtenderButton(QString name, Plasma::Svg * icon, QString title,
 
 void ExtenderButton::init()
 {
-    /*if (!m_extenderButtonSvg) {
-        m_extenderButtonSvg = new Plasma::Svg("lancelot/extender_button");
-        m_extenderButtonSvg->setContentType(Plasma::Svg::ImageSet);
-
-        m_extenderIconSvg = new Plasma::Svg("lancelot/extender_button_icon");
+    if (!m_extenderIconSvg) {
+        m_extenderIconSvg = new Plasma::Svg("lancelot/extender-button-icon");
         m_extenderIconSvg->setContentType(Plasma::Svg::ImageSet);
     }
 
-    ++m_extendersCount;
-    m_svg = m_extenderButtonSvg;*/
-
-    m_extender = new ExtenderObject(name() + "::Extender", NULL, this);
+    m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
     m_extender->setVisible(false);
-    m_extender->setGroup(m_group->name() + "-Extender");
-    //m_extender->m_svg = m_svg;
+    
+    Widget::setGroup("ExtenderButton");
+    
     m_extender->m_iconSize = QSize(16, 16);
 
     //connect(m_extender, SIGNAL(mouseHoverEnter()), this, SIGNAL(activated()));
     connect(m_extender, SIGNAL(mouseHoverEnter()), this, SLOT(startTimer()));
     connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));
+    
+    
+
 }
 
 void ExtenderButton::setGroup(WidgetGroup * group)
@@ -165,14 +163,14 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
         //emit activated();
         startTimer();
     }
-    SUPER::hoverEnterEvent(event);
+    BaseActionWidget::hoverEnterEvent(event);
 }
 
 void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
     m_extender->setVisible(false);
     stopTimer();
-    SUPER::hoverLeaveEvent(event);
+    BaseActionWidget::hoverLeaveEvent(event);
 }
 
 void ExtenderButton::setExtenderPosition(
@@ -241,7 +239,7 @@ void ExtenderButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
 
 void ExtenderButton::setGeometry(const QRectF & geometry)
 {
-    SUPER::setGeometry(geometry);
+    BaseActionWidget::setGeometry(geometry);
     relayoutExtender();
 }
 

@@ -44,6 +44,8 @@ void BaseActionWidget::init()
 {
     setAcceptsHoverEvents(true);
     resize(140, 38);
+    setGroup("BaseActionWidget");
+
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
@@ -189,7 +191,16 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
         if (m_icon || m_iconInSvg) {
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), m_iconSize);
             if (m_icon) {
-                m_icon->paint(painter, rect);
+                QIcon::Mode mode;
+                if (!m_enabled) {
+                    mode = QIcon::Disabled;
+                } else if (m_hover) {
+                    mode = QIcon::Active;
+                } else {
+                    mode = QIcon::Normal;
+                }
+                
+                m_icon->paint(painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
                 m_iconInSvg->resize(m_iconSize);
                 m_iconInSvg->paint(painter, rect.left(), rect.top(), m_hover?"active":"inactive");

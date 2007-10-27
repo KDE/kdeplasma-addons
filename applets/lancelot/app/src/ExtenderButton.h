@@ -25,11 +25,6 @@
 #include "Widget.h"
 #include "BaseActionWidget.h"
 
-#ifdef SUPER
-#undef SUPER
-#endif
-
-#define SUPER BaseActionWidget
 #define EXTENDER_SIZE 20
 
 namespace Lancelot
@@ -57,16 +52,16 @@ private:
 };
 
 
-class ExtenderButton : public SUPER
+class ExtenderButton : public BaseActionWidget
 {
     Q_OBJECT
 public:
     enum ExtenderPosition { No = 0, Right = 1, Left = 2, Top = 3, Bottom = 4 };
     enum ActivationMethod { Hover = 0, Click = 1, Extender = 2 };
 
-    class ExtenderObject : public SUPER {
+    class ExtenderObject : public BaseActionWidget {
     public:
-        ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : SUPER(name, icon, "", "", parent) {
+        ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : BaseActionWidget(name, icon, "", "", parent) {
             // TODO: set a group for extender object
             //m_svgElementPrefix = "extender_";
         }
@@ -105,7 +100,7 @@ private:
     ExtenderPosition m_extenderPosition;
     ActivationMethod m_activationMethod;
 
-    //static Plasma::Svg * m_extenderIconSvg;
+    static Plasma::Svg * m_extenderIconSvg;
     //static Plasma::Svg * m_extenderButtonSvg;
     //static int m_extendersCount;
     

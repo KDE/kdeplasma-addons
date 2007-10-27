@@ -95,9 +95,9 @@ class Global : public QObject {
 public:
     static Global * instance();
 
-    bool processGeometryChanges;
-	bool processUpdateRequests;
-    bool processGroupChanges;
+    bool processGeometryChanges : 1;
+	bool processUpdateRequests : 1;
+    bool processGroupChanges : 1;
 
 	void activateAll();
 	void deactivateAll();

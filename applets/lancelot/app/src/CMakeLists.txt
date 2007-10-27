@@ -12,18 +12,24 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${P
 set(
   plasma_lancelot_SRCS
   main.cpp
-  LancelotApplication.cpp
-  LancelotWindow.cpp
-  CardLayout.cpp
-  ExtenderButton.cpp
-  BaseActionWidget.cpp
-  ActionListView.cpp
-  ActionListViewModels.cpp
-  PassagewayView.cpp
-  PassagewayViewModels.cpp
-  Panel.cpp
+
   Global.cpp
   Widget.cpp
+
+  LancelotApplication.cpp
+  LancelotWindow.cpp
+
+  CardLayout.cpp
+
+  Panel.cpp
+  ExtenderButton.cpp
+  BaseActionWidget.cpp
+
+  ActionListView.cpp
+  ActionListViewModels.cpp
+
+  PassagewayView.cpp
+  PassagewayViewModels.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
