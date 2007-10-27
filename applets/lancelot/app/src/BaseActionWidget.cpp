@@ -85,6 +85,8 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     Q_UNUSED(widget);
     Q_UNUSED(option);
     
+    // TODO: Cutting the long titles... gradient?
+    
     Widget::paintWidget(painter, option, widget);
     
     if (!m_enabled) {
@@ -116,7 +118,15 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
     
     if (m_innerOrientation == Vertical || (m_title.isEmpty() && m_description.isEmpty())) {
-        setLeft(iconRect, widgetRect, m_alignment);
+
+        // Modified setLeft macro for icon since we can not cut it if it's larger than needed
+        // setLeft(iconRect, widgetRect, m_alignment);
+        if (m_alignment & Qt::AlignHCenter) {
+            iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - iconRect.width()) / 2);
+        } else if (m_alignment & Qt::AlignRight) {
+            iconRect.moveLeft(WIDGET_PADDING + widgetRect.width() - iconRect.width());
+        }
+        
         setLeft(titleRect, widgetRect, m_alignment);
         setLeft(descriptionRect, widgetRect, m_alignment);
         
@@ -175,7 +185,6 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
             descriptionRect.moveTop(titleRect.bottom());
         }
         
-        // TODO: Horizontal Alignment
         if ((widgetRect.width() < width) || (m_alignment & Qt::AlignLeft)) {
             iconRect.moveLeft(WIDGET_PADDING);
             titleRect.setWidth(widgetRect.width() - ((m_icon || m_iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));

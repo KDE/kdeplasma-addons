@@ -64,6 +64,8 @@ public:
         ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : BaseActionWidget(name, icon, "", "", parent) {
             // TODO: set a group for extender object
             //m_svgElementPrefix = "extender_";
+            setInnerOrientation(Vertical);
+            setAlignment(Qt::AlignCenter);
         }
         friend class ExtenderButton;
 
