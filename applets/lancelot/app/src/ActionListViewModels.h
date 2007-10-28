@@ -5,6 +5,7 @@
 #include <QString>
 #include <KIcon>
 #include <QMessageBox>
+#include <QVariant>
 
 namespace Lancelot
 {
@@ -20,9 +21,10 @@ public:
     virtual KIcon * icon(int index) const;
     virtual bool isCategory(int index) const;
 
-    virtual void activated(int index);
-
     virtual int size() const = 0;
+    
+public slots:
+    void activated(int index);
 
 Q_SIGNALS:
     void itemActivated(int index);
@@ -31,13 +33,56 @@ Q_SIGNALS:
     void itemInserted(int index);
     void itemDeleted(int index);
     void itemAltered(int index);
+    
+protected:
+    /** Models should reimplement this function. It is invoked when 
+     *  an item is activated, before the itemActivated signal is emitted */
+    virtual void activate(int index) { Q_UNUSED(index); };
 };
 
-class ActionListViewMergedModel: public ActionListViewModel {
+class StandardActionListViewModel: public ActionListViewModel {
+    Q_OBJECT
+protected:
+    class Item {
+    public:
+        Item(QString itemTitle, QString itemDescription, KIcon * itemIcon, QVariant itemData)
+          : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData) {};
+        
+        QString title;
+        QString description;
+        KIcon * icon;
+        QVariant data;
+    };
+
+public:
+    StandardActionListViewModel();
+    virtual ~StandardActionListViewModel();
+
+    virtual QString title(int index) const;
+    virtual QString description(int index) const;
+    virtual KIcon * icon(int index) const;
+    virtual bool isCategory(int index) const;
+
+    virtual int size() const;
+    
+    void add(const Item & item);
+    void add(const QString & title, const QString & description, KIcon * icon, const QVariant & data);
+    
+    void set(int index, const Item & item);
+    void set(int index, const QString & title, const QString & description, KIcon * icon, const QVariant & data);
+    void removeAt(int index);
+    
+protected:
+    
+    QList < Item > m_items;
+    
+};
+
+class MergedActionListViewModel: public ActionListViewModel {
     Q_OBJECT
 public:
-    ActionListViewMergedModel();
-    virtual ~ActionListViewMergedModel();
+    MergedActionListViewModel();
+    virtual ~MergedActionListViewModel();
 
     void addModel(KIcon * icon, QString title, ActionListViewModel * model);
 
@@ -51,7 +96,8 @@ public:
     virtual bool isCategory(int index) const;
     virtual int size() const;
 
-    virtual void activated(int index);
+protected:
+    virtual void activate(int index);
 
 private:
     void toChildCoordinates(int index, int & model, int & modelIndex) const;
@@ -102,9 +148,9 @@ private:
     KIcon * m_icon;
 };
 
-class DummyActionListViewMergedModel : public ActionListViewMergedModel {
+class DummyMergedActionListViewModel : public MergedActionListViewModel {
 public:
-    DummyActionListViewMergedModel (QString title, int subs) {
+    DummyMergedActionListViewModel (QString title, int subs) {
         while (subs-- != 0) {
             addModel(NULL, title + QString::number(subs), new DummyActionListViewModel(title + QString::number(subs), 2 + subs % 2));
         }

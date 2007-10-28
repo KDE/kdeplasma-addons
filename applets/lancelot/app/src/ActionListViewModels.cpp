@@ -1,4 +1,5 @@
 #include "ActionListViewModels.h"
+#include <KDebug>
 
 namespace Lancelot {
 
@@ -30,26 +31,100 @@ bool ActionListViewModel::isCategory(int index) const {
 }
 
 void ActionListViewModel::activated(int index) {
+    activate(index);
     emit itemActivated(index);
 }
 
-// ActionListViewMergedModel
+// StandardActionListViewModel
 
-ActionListViewMergedModel::ActionListViewMergedModel()
+StandardActionListViewModel::StandardActionListViewModel()
 {
 }
 
-ActionListViewMergedModel::~ActionListViewMergedModel()
+StandardActionListViewModel::~StandardActionListViewModel()
 {
 }
 
-void ActionListViewMergedModel::modelUpdated()
+QString StandardActionListViewModel::title(int index) const
 {
+    if (index >= m_items.size()) return "";
+    return m_items.at(index).title;
+}
+
+QString StandardActionListViewModel::description(int index) const
+{
+    if (index >= m_items.size()) return "";
+    return m_items.at(index).description;
+}
+
+KIcon * StandardActionListViewModel::icon(int index) const
+{
+    if (index >= m_items.size()) return NULL;
+    return m_items.at(index).icon;
+}
+
+bool StandardActionListViewModel::isCategory(int index) const
+{
+    Q_UNUSED(index);
+    return false;
+}
+
+int StandardActionListViewModel::size() const
+{
+    return m_items.size();
+}
+
+void StandardActionListViewModel::add(const Item & item)
+{
+    m_items.append(item);
+    emit itemInserted(m_items.size() - 1);
+}
+
+void StandardActionListViewModel::add(const QString & title, const QString & description, KIcon * icon, const QVariant & data)
+{
+    m_items.append(Item(title, description, icon, data));
+    emit itemInserted(m_items.size() - 1);
+}
+
+void StandardActionListViewModel::set(int index, const Item & item)
+{
+    if (index >= m_items.size()) return;
+    m_items[index] = item;
+    emit itemAltered(index);
+}
+
+void StandardActionListViewModel::set(int index, const QString & title, const QString & description, KIcon * icon, const QVariant & data)
+{
+    if (index >= m_items.size()) return;
+    m_items[index] = Item(title, description, icon, data);
+    emit itemAltered(index);
+}
+
+void StandardActionListViewModel::removeAt(int index)
+{
+    m_items.removeAt(index);
+    emit itemDeleted(index);
+}
+
+// MergedActionListViewModel
+
+MergedActionListViewModel::MergedActionListViewModel()
+{
+}
+
+MergedActionListViewModel::~MergedActionListViewModel()
+{
+}
+
+void MergedActionListViewModel::modelUpdated()
+{
+    kDebug();
     emit updated();
 }
 
-void ActionListViewMergedModel::modelItemInserted(int modelIndex)
+void MergedActionListViewModel::modelItemInserted(int modelIndex)
 {
+    kDebug();
     if (!sender()) return;
 
     int model = m_models.indexOf((ActionListViewModel *)sender());
@@ -60,8 +135,9 @@ void ActionListViewMergedModel::modelItemInserted(int modelIndex)
     emit itemInserted(index);
 }
 
-void ActionListViewMergedModel::modelItemDeleted(int modelIndex)
+void MergedActionListViewModel::modelItemDeleted(int modelIndex)
 {
+    kDebug();
     if (!sender()) return;
 
     int model = m_models.indexOf((ActionListViewModel *)sender());
@@ -72,8 +148,9 @@ void ActionListViewMergedModel::modelItemDeleted(int modelIndex)
     emit itemDeleted(index);
 }
 
-void ActionListViewMergedModel::modelItemAltered(int modelIndex)
+void MergedActionListViewModel::modelItemAltered(int modelIndex)
 {
+    kDebug();
     if (!sender()) return;
 
     int model = m_models.indexOf((ActionListViewModel *)sender());
@@ -84,7 +161,7 @@ void ActionListViewMergedModel::modelItemAltered(int modelIndex)
     emit itemAltered(index);
 }
 
-QString ActionListViewMergedModel::description(int index) const
+QString MergedActionListViewModel::description(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
@@ -94,7 +171,7 @@ QString ActionListViewMergedModel::description(int index) const
 
 }
 
-KIcon * ActionListViewMergedModel::icon(int index) const
+KIcon * MergedActionListViewModel::icon(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
@@ -104,7 +181,7 @@ KIcon * ActionListViewMergedModel::icon(int index) const
     return m_models.at(model)->icon(modelIndex);
 }
 
-bool ActionListViewMergedModel::isCategory(int index) const
+bool MergedActionListViewModel::isCategory(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
@@ -114,10 +191,8 @@ bool ActionListViewMergedModel::isCategory(int index) const
     return m_models.at(model)->isCategory(modelIndex);
 }
 
-void ActionListViewMergedModel::activated(int index)
+void MergedActionListViewModel::activate(int index)
 {
-    emit itemActivated(index);
-
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
 
@@ -126,7 +201,7 @@ void ActionListViewMergedModel::activated(int index)
     m_models.at(model)->activated(modelIndex);
 }
 
-QString ActionListViewMergedModel::title(int index) const
+QString MergedActionListViewModel::title(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
@@ -136,7 +211,7 @@ QString ActionListViewMergedModel::title(int index) const
     return m_models.at(model)->title(modelIndex);
 }
 
-void ActionListViewMergedModel::toChildCoordinates(int index, int & model, int & modelIndex) const
+void MergedActionListViewModel::toChildCoordinates(int index, int & model, int & modelIndex) const
 {
     model = 0; modelIndex = 0;
     foreach (ActionListViewModel * m, m_models) {
@@ -152,7 +227,7 @@ void ActionListViewMergedModel::toChildCoordinates(int index, int & model, int &
     modelIndex = -1;
 }
 
-void ActionListViewMergedModel::fromChildCoordinates(int & index, int model, int modelIndex) const
+void MergedActionListViewModel::fromChildCoordinates(int & index, int model, int modelIndex) const
 {
     index = -1;
     if (model >= m_models.size()) return;
@@ -171,7 +246,7 @@ void ActionListViewMergedModel::fromChildCoordinates(int & index, int model, int
     index = -1;
 }
 
-void ActionListViewMergedModel::addModel(KIcon * icon, QString title, ActionListViewModel * model)
+void MergedActionListViewModel::addModel(KIcon * icon, QString title, ActionListViewModel * model)
 {
     if (!model) return;
     m_models.append(model);
@@ -185,13 +260,13 @@ void ActionListViewMergedModel::addModel(KIcon * icon, QString title, ActionList
     emit updated();
 }
 
-int ActionListViewMergedModel::modelCount() const
+int MergedActionListViewModel::modelCount() const
 {
     return m_models.size();
 }
 
 
-int ActionListViewMergedModel::size() const
+int MergedActionListViewModel::size() const
 {
     int size = m_models.size();
     foreach (ActionListViewModel * model, m_models) {

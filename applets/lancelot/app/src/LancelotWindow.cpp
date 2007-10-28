@@ -29,6 +29,8 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
   : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_sectionsSignalMapper(NULL), m_phase(NULL)
 {
     setupUi(this);
+    
+    createModels();
 
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
@@ -119,3 +121,18 @@ bool LancelotWindow::lancelotShowItem(QString name) {
     Q_UNUSED(name);
     return false;
 }
+
+void LancelotWindow::createModels() {
+    m_systemLeftModel = new Lancelot::MergedActionListViewModel();
+    m_systemLeftModel->addModel(
+        NULL, i18n("Places"),             
+        m_placesModel = new Lancelot::Models::Places()
+    );
+    m_systemLeftModel->addModel(
+        NULL, i18n("Media"),             
+        m_devicesModel = new Lancelot::Models::Devices()
+    );
+    listSectionSystemLeft->setModel(m_systemLeftModel);
+    listSectionSystemRight->setModel(m_devicesModel);
+}
+

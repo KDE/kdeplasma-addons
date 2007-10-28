@@ -53,7 +53,7 @@
 #define CreateSection(SECTION) \
     (layoutSection ## SECTION) = new Plasma::NodeLayout(); \
     (listSection ## SECTION ## Left) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Left", new Lancelot::DummyActionListViewModel(#SECTION, 20), (panelSection ## SECTION)); \
-    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new Lancelot::DummyActionListViewMergedModel(#SECTION, 5), (panelSection ## SECTION));
+    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new Lancelot::DummyMergedActionListViewModel(#SECTION, 5), (panelSection ## SECTION));
 
 // SetupSection (lAyout, LeftList, RightList)
 #define SetupSection(SECTION) \
