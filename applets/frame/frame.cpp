@@ -214,7 +214,7 @@ void Frame::showConfigurationInterface()
         ui.picRequester->comboBox()->insertItem(0, "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/400x300");
         ui.slideShowRequester->setMode(KFile::Directory);
         ui.slideShowRequester->setGeometry(ui.picRequester->frameGeometry());
-        ui.TimeSpinner->setMinimumTime(QTime(0,0,10)); // minimum to 10 seconds
+        ui.TimeSpinner->setMinimumTime(QTime(0,0,1)); // minimum to 1 seconds
     }
     ui.frameCheckBox->setChecked(m_frame);
     ui.shadowCheckBox->setChecked(m_shadow);
