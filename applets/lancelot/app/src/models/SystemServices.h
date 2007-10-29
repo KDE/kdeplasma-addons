@@ -18,46 +18,30 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_DEVICES_H_
-#define LANCELOT_MODELS_DEVICES_H_
+#ifndef LANCELOT_MODELS_SYSTEMSERVICES_H_
+#define LANCELOT_MODELS_SYSTEMSERVICES_H_
 
 #include "../ActionListViewModels.h"
-#include <solid/device.h>
-#include <solid/storageaccess.h>
 
 namespace Lancelot {
 namespace Models {
 
-class Devices : public StandardActionListViewModel {
+class SystemServices : public StandardActionListViewModel {
     Q_OBJECT
 public:
-    enum Type {
-        Fixed = 1,
-        Removable = 2,
-        All = 0
-    };
-
-    Devices(Type filter = All);
-    virtual ~Devices();
-
-private slots:
-    void deviceRemoved(const QString & udi);
-    void deviceAdded(const QString & udi);
-    void freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable);
-    void udiAccessibilityChanged(bool accessible);
+    SystemServices();
+    virtual ~SystemServices();
 
 protected:
     void activate(int index);
 
 private:
-    void loadDevices();
-    void addDevice(const Solid::Device & device);
+    void loadSystemServices();
+    void addService(const QString & service);
 
-    Type m_filter;
-    QMap < const Solid::StorageAccess *, QString> m_udis;
 };
 
 }
 }
 
-#endif /* LANCELOT_MODELS_DEVICES_H_ */
+#endif /* LANCELOT_MODELS_SYSTEMSERVICES_H_ */

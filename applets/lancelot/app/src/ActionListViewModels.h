@@ -22,7 +22,7 @@ public:
     virtual bool isCategory(int index) const;
 
     virtual int size() const = 0;
-    
+
 public slots:
     void activated(int index);
 
@@ -33,9 +33,9 @@ Q_SIGNALS:
     void itemInserted(int index);
     void itemDeleted(int index);
     void itemAltered(int index);
-    
+
 protected:
-    /** Models should reimplement this function. It is invoked when 
+    /** Models should reimplement this function. It is invoked when
      *  an item is activated, before the itemActivated signal is emitted */
     virtual void activate(int index) { Q_UNUSED(index); };
 };
@@ -47,7 +47,7 @@ protected:
     public:
         Item(QString itemTitle, QString itemDescription, KIcon * itemIcon, QVariant itemData)
           : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData) {};
-        
+
         QString title;
         QString description;
         KIcon * icon;
@@ -64,18 +64,18 @@ public:
     virtual bool isCategory(int index) const;
 
     virtual int size() const;
-    
+
     void add(const Item & item);
     void add(const QString & title, const QString & description, KIcon * icon, const QVariant & data);
-    
+
     void set(int index, const Item & item);
     void set(int index, const QString & title, const QString & description, KIcon * icon, const QVariant & data);
     void removeAt(int index);
-    
+
 protected:
-    
+
     QList < Item > m_items;
-    
+
 };
 
 class MergedActionListViewModel: public ActionListViewModel {

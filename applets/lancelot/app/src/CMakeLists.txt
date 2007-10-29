@@ -23,7 +23,7 @@ set(
 
   Panel.cpp
   BaseActionWidget.cpp
-  
+
   ExtenderButton.cpp
   ToggleExtenderButton.cpp
 
@@ -32,9 +32,10 @@ set(
 
   PassagewayView.cpp
   PassagewayViewModels.cpp
-  
+
   models/Devices.cpp
   models/Places.cpp
+  models/SystemServices.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml

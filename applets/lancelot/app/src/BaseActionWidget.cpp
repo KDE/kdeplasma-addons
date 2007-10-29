@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -49,15 +49,15 @@ void BaseActionWidget::init()
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32), 
-    m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter), 
+  : Widget(name, parent), m_icon(NULL), m_iconInSvg(NULL), m_iconSize(32, 32),
+    m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description)
 {
     init();
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32), 
+  : Widget(name, parent), m_icon(icon), m_iconInSvg(NULL), m_iconSize(32, 32),
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
     m_title(title), m_description(description)
 {
@@ -65,9 +65,9 @@ BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QS
 }
 
 BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-  : Widget(name, parent), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32), 
+  : Widget(name, parent), m_icon(NULL), m_iconInSvg(icon), m_iconSize(32, 32),
     m_innerOrientation(Horizontal), m_alignment(Qt::AlignCenter),
-    m_title(title), m_description(description) 
+    m_title(title), m_description(description)
 {
     init();
 }
@@ -84,16 +84,16 @@ BaseActionWidget::~BaseActionWidget()
 void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
     Q_UNUSED(widget);
     Q_UNUSED(option);
-    
-    
+
+
     paintBackground(painter);
     paintForeground(painter);
-    
+
 }
 
 void BaseActionWidget::paintForeground (QPainter * painter) {
     // TODO: Cutting the long titles... gradient?
-    
+
     if (!m_enabled) {
         painter->setPen(QPen(m_group->foregroundColor()->disabled));
     } else if (m_hover) {
@@ -101,27 +101,27 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     } else {
         painter->setPen(QPen(m_group->foregroundColor()->normal));
     }
-    
+
     // Background Painting
     paintBackground(painter);
 
     QFont titleFont = painter->font();
     QFont descriptionFont = painter->font();
     descriptionFont.setPointSize(descriptionFont.pointSize() - 2);
-    
+
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect         = QRectF(0, 0, m_iconSize.width(), m_iconSize.height());
-    
+
     if (!m_icon && !m_iconInSvg) iconRect = QRectF(0, 0, 0, 0);
-    
+
     // painter->setFont(titleFont)); // NOT NEEDED
     QRectF titleRect        = painter->boundingRect(widgetRect,
         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_title);
-    
+
     painter->setFont(descriptionFont);
     QRectF descriptionRect  = painter->boundingRect(widgetRect,
         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
-    
+
     if (m_innerOrientation == Vertical || (m_title.isEmpty() && m_description.isEmpty())) {
 
         // Modified setLeft macro for icon since we can not cut it if it's larger than needed
@@ -131,21 +131,21 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         } else if (m_alignment & Qt::AlignRight) {
             iconRect.moveLeft(WIDGET_PADDING + widgetRect.width() - iconRect.width());
         }
-        
+
         setLeft(titleRect, widgetRect, m_alignment);
         setLeft(descriptionRect, widgetRect, m_alignment);
-        
+
         float top = WIDGET_PADDING, height =
             iconRect.height() + titleRect.height() + descriptionRect.height();
-        
+
         if ((m_icon || m_iconInSvg) && !(m_title.isEmpty() && m_description.isEmpty()))
             height += WIDGET_PADDING;
-        
-        if (m_alignment & Qt::AlignVCenter) 
+
+        if (m_alignment & Qt::AlignVCenter)
             top = (widgetRect.height() - height) / 2 + WIDGET_PADDING;
         if (m_alignment & Qt::AlignBottom)
             top = widgetRect.height() - height + WIDGET_PADDING;
-        
+
         if (m_icon || m_iconInSvg) {
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), m_iconSize);
@@ -157,7 +157,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
             }
             top += m_iconSize.height() + WIDGET_PADDING;
         }
-        
+
         if (!m_title.isEmpty()) {
             titleRect.moveTop(top);
             painter->setFont(titleFont);
@@ -165,7 +165,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, m_title);
             top += titleRect.height();
         }
-        
+
         if (!m_description.isEmpty()) {
             descriptionRect.moveTop(top);
             painter->setFont(descriptionFont);
@@ -182,14 +182,14 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
             titleRect.moveTop(WIDGET_PADDING);
             descriptionRect.moveTop(titleRect.bottom());
         } else if (m_alignment & (Qt::AlignVCenter | Qt::AlignBottom)) {
-            iconRect.moveTop(WIDGET_PADDING + 
+            iconRect.moveTop(WIDGET_PADDING +
                     ((m_alignment & Qt::AlignVCenter) ? 0.5 : 1) * (widgetRect.height() - iconRect.height()));
             titleRect.moveTop(WIDGET_PADDING +
-                    ((m_alignment & Qt::AlignVCenter) ? 0.5 : 1) * (widgetRect.height() - 
+                    ((m_alignment & Qt::AlignVCenter) ? 0.5 : 1) * (widgetRect.height() -
                             ((m_description.isEmpty())?0:descriptionRect.height()) - titleRect.height()));
             descriptionRect.moveTop(titleRect.bottom());
         }
-        
+
         if ((widgetRect.width() < width) || (m_alignment & Qt::AlignLeft)) {
             iconRect.moveLeft(WIDGET_PADDING);
             titleRect.setWidth(widgetRect.width() - ((m_icon || m_iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
@@ -213,20 +213,20 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 } else {
                     mode = QIcon::Normal;
                 }
-                
+
                 m_icon->paint(painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
                 m_iconInSvg->resize(m_iconSize);
                 m_iconInSvg->paint(painter, rect.left(), rect.top(), m_hover?"active":"inactive");
             }
         }
-        
+
         if (!m_title.isEmpty()) {
             painter->setFont(titleFont);
             painter->drawText(titleRect,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_title);
         }
-        
+
         if (!m_description.isEmpty()) {
             painter->setFont(descriptionFont);
             painter->drawText(descriptionRect,

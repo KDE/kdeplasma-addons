@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -17,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "Places.h"
+#include "SystemServices.h"
 #include <KRun>
 #include <KLocalizedString>
 #include <KDebug>
@@ -32,41 +33,42 @@
 namespace Lancelot {
 namespace Models {
 
-Places::Places()
+SystemServices::SystemServices()
 {
-    loadPlaces();
+    loadSystemServices();
 }
 
-Places::~Places()
+SystemServices::~SystemServices()
 {
 }
 
-void Places::loadPlaces()
+void SystemServices::loadSystemServices()
 {
-    add(
-        i18n("Home Folder"),
-        getenv("HOME"),
-        new KIcon("user-home"),
-        getenv("HOME")
-    );
 
-    add(
-        i18n("Root Folder"),
-        "/",
-        new KIcon("folder-red"),
-        "/"
-    );
-
-    add(
-        i18n("Network Folders"),
-        "remote:/",
-        new KIcon("network"),
-        "remote:/"
-    );
+    addService("systemsettings");
+    addService("ksysguard");
+    addService("kinfocenter");
+    addService("adept");
 
 }
 
-void Places::activate(int index)
+void SystemServices::addService(const QString & serviceName)
+{
+    KService::Ptr service = KService::serviceByStorageId(serviceName);
+    if (service) {
+        QString genericName = service->genericName();
+        QString appName = service->name();
+
+        add(
+            genericName.isEmpty() ? appName : genericName,
+            genericName.isEmpty() ? "" : appName,
+            new KIcon(service->icon()),
+            service->entryPath() //"settings:/"
+        );
+    }
+}
+
+void SystemServices::activate(int index)
 {
     kDebug() << m_items.at(index).data.toString() << "\n";
     new KRun(KUrl(m_items.at(index).data.toString()), 0);

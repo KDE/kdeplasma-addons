@@ -21,6 +21,7 @@
 #include "Devices.h"
 #include <KRun>
 #include <KDebug>
+#include <KLocalizedString>
 
 #include <solid/device.h>
 #include <solid/deviceinterface.h>
@@ -31,8 +32,11 @@
 namespace Lancelot {
 namespace Models {
 
-Devices::Devices()
-{    
+#define StringCoalesce(A, B) (A == "")?(B):(A)
+
+Devices::Devices(Type filter)
+    : m_filter(filter)
+{
     kDebug() << "connecting\n";
     kDebug() << connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),
             this, SLOT(deviceAdded(QString)));
@@ -49,11 +53,11 @@ Devices::~Devices()
 
 void Devices::deviceRemoved(const QString & udi)
 {
-    // TODO: implement 
+    // TODO: implement
     kDebug() << "deviceRemoved " << udi << "\n";
     QMutableListIterator<Item> i(m_items);
     int index = 0;
-    
+
     while (i.hasNext()) {
         Item & item = i.next();
         if (item.data.toString() == udi) {
@@ -64,7 +68,7 @@ void Devices::deviceRemoved(const QString & udi)
         }
         ++index;
     }
-    
+
 }
 
 void Devices::deviceAdded(const QString & udi)
@@ -76,9 +80,25 @@ void Devices::deviceAdded(const QString & udi)
 void Devices::addDevice(const Solid::Device & device)
 {
     const Solid::StorageAccess * access = device.as<Solid::StorageAccess>();
-    
+
     if (!access) return;
-    
+
+    // Testing if it is removable
+    if (m_filter != All) {
+        bool removable;
+
+        Solid::StorageDrive *drive = 0;
+        Solid::Device parentDevice = device;
+
+        while (parentDevice.isValid() && !drive) {
+            drive = parentDevice.as<Solid::StorageDrive>();
+            parentDevice = parentDevice.parent();
+        }
+
+        removable = (drive && (drive->isHotpluggable() || drive->isRemovable()));
+        if ((m_filter == Removable) == !removable) return; // Dirty trick simulating XOR
+    }
+
     connect (
         access, SIGNAL(accessibilityChanged(bool)),
         this, SLOT(udiAccessibilityChanged(bool))
@@ -87,7 +107,7 @@ void Devices::addDevice(const Solid::Device & device)
 
     add(
         device.product(),
-        access->filePath(),
+        StringCoalesce(access->filePath(), i18n("Unmounted")),
         new KIcon(device.icon()),
         device.udi()
     );
@@ -104,7 +124,7 @@ void Devices::udiAccessibilityChanged(bool accessible)
     kDebug() << udi << "\n";
     QMutableListIterator<Item> i(m_items);
     int index = 0;
-    
+
     while (i.hasNext()) {
         Item & item = i.next();
         if (item.data.toString() == udi) {
@@ -113,16 +133,16 @@ void Devices::udiAccessibilityChanged(bool accessible)
         ++index;
     }
     kDebug() << index << "\n";
-    
-    m_items[index].description = access->filePath();
-    emit itemAltered(index);    
+
+    m_items[index].description = StringCoalesce(access->filePath(), i18n("Unmounted"));
+    emit itemAltered(index);
 
 }
 
 
 void Devices::loadDevices()
 {
-    QList<Solid::Device> deviceList = 
+    QList<Solid::Device> deviceList =
         Solid::Device::listFromType(Solid::DeviceInterface::StorageAccess, QString());
 
     foreach(const Solid::Device & device, deviceList) {
@@ -132,7 +152,7 @@ void Devices::loadDevices()
 
 void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
 {
-    
+
 }
 
 void Devices::activate(int index)
@@ -141,7 +161,7 @@ void Devices::activate(int index)
     //kDebug() << m_items.at(index).data.toString() << "\n";
     //new KRun(KUrl(m_items.at(index).data.toStringList().at(1)), 0);
     Solid::StorageAccess * access = Solid::Device(m_items.at(index).data.toString()).as<Solid::StorageAccess>();
-    
+
     if (!access) return;
 
     //if (!access->isAccessible()) {

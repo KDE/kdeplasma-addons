@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -27,7 +27,7 @@ namespace Lancelot
 {
 
 // Group
-QMap < QString, WidgetGroup * > WidgetGroup::m_groups; 
+QMap < QString, WidgetGroup * > WidgetGroup::m_groups;
 
 WidgetGroup * WidgetGroup::group(const QString & name)
 {
@@ -35,7 +35,7 @@ WidgetGroup * WidgetGroup::group(const QString & name)
     if (groupName == "") {
         groupName = "Default";
     }
-    
+
     if (!m_groups.contains(groupName)) {
         WidgetGroup * group = new WidgetGroup(groupName);
         if (Global::instance()->processGroupChanges) {
@@ -43,7 +43,7 @@ WidgetGroup * WidgetGroup::group(const QString & name)
         }
         m_groups.insert(groupName, group);
     }
-    
+
     return m_groups[groupName];
 }
 
@@ -76,19 +76,19 @@ WidgetGroup::~WidgetGroup()
 void WidgetGroup::addWidget(Widget * widget)
 {
     if (!widget) return;
-    
+
     if (m_widgets.contains(widget)) return;
     m_widgets.append(widget);
-    
+
 }
 
 void WidgetGroup::removeWidget(Widget * widget)
 {
     if (WidgetGroup::defaultGroup() == this) return;
-    
+
     if (!m_widgets.contains(widget)) return;
     m_widgets.removeAll(widget);
-    
+
     widget->setGroup(NULL);
 }
 
@@ -142,13 +142,13 @@ void WidgetGroup::loadAll()
 void WidgetGroup::copyFrom(WidgetGroup * group)
 {
     if (this == group) return;
-    
+
     m_properties = group->m_properties;
 
     m_foregroundColor = group->m_foregroundColor;
     m_hasBackgroundColor = group->m_hasBackgroundColor;
     m_backgroundColor = group->m_backgroundColor;
-    
+
     if (m_ownsBackgroundSvg) {
         delete m_backgroundSvg;
     }
@@ -160,37 +160,37 @@ void WidgetGroup::load(bool full)
 {
     if (m_loaded && !full) return;
     m_loaded = true;
-    
+
     kDebug() << "Loading group " << m_name << "\n";
-    
+
     m_hasBackgroundColor = false;
     if (m_ownsBackgroundSvg) {
         delete m_backgroundSvg;
     }
     m_backgroundSvg = NULL;
-    
+
     WidgetGroup * group;
-    
+
     if (!m_confGroupTheme->exists()) {
         kDebug() << "This (" << m_name << ") group is not defined in the theme. Loading the default group.\n";
         group = WidgetGroup::defaultGroup();
         if (group == this) return;
-        
+
         copyFrom(group);
         return;
     }
-    
+
     group = WidgetGroup::group(m_confGroupTheme->readEntry("parent", "Default"));
     if (group != this) {
         group->load(false);
         copyFrom(group);
     }
-    
+
     // TODO: Load properties from theme configuration file
     m_foregroundColor.normal   = m_confGroupTheme->readEntry("foreground.color.normal",   m_foregroundColor.normal);
     m_foregroundColor.active   = m_confGroupTheme->readEntry("foreground.color.active",   m_foregroundColor.active);
     m_foregroundColor.disabled = m_confGroupTheme->readEntry("foreground.color.disabled", m_foregroundColor.disabled);
-    
+
     QString type = m_confGroupTheme->readEntry("background.type", "none");
     kDebug() << "Background for group " << m_name << " is of " << type << " type\n";
     if (type == "color") {
@@ -208,7 +208,7 @@ void WidgetGroup::load(bool full)
         m_ownsBackgroundSvg = true;
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
-    
+
     kDebug() << "Notifying objects\n";
     foreach (Widget * widget, m_widgets) {
         widget->groupUpdated();
@@ -230,7 +230,7 @@ void Global::activateAll() {
     processGeometryChanges = true;
     processUpdateRequests = true;
     processGroupChanges = true;
-    
+
     WidgetGroup::loadAll();
 }
 
@@ -249,7 +249,7 @@ Global::Global()
 {
     Plasma::Theme::self()->setApplication("Lancelot");
     m_confLancelot = new KConfig("lancelotrc");
-    
+
     // TODO: If Plasma::Theme supports file(), alter the following code
     QString search = "desktoptheme/" + Plasma::Theme::self()->themeName() + "/lancelot/theme.config";
     QString path =  KStandardDirs::locate( "data", search );
@@ -263,8 +263,8 @@ Global::Global()
 
 Global::~Global()
 {
-    delete m_confLancelot; 
-    delete m_confTheme; 
+    delete m_confLancelot;
+    delete m_confTheme;
 }
 
 KConfig * Global::theme()

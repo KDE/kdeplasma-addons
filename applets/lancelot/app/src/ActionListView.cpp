@@ -39,9 +39,6 @@ namespace Lancelot {
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
   : BaseActionWidget(list->name() + "::" + QString((direction == Up)?"up":"down"), "", "", parent), m_list(list), m_direction(direction)
 {
-    //m_svg = new Plasma::Svg("lancelot/action_list_view");
-    //m_svg->setContentType(Plasma::Svg::ImageSet);
-    //m_svgElementPrefix = QString((m_direction == Up)?"up":"down") + "_scroll_";
     setAcceptsHoverEvents(true);
 }
 
@@ -99,8 +96,6 @@ ActionListView::~ActionListView()
 void ActionListView::positionScrollButtons()
 {
     if (!scrollButtonUp) {
-        // Call from constructor - create and init objects
-
         scrollButtonUp = new ScrollButton(Up, this);
         scrollButtonDown = new ScrollButton(Down, this);
 
@@ -133,7 +128,6 @@ void ActionListView::setGroup(WidgetGroup * group)
         scrollButtonUp->setGroupByName(m_group->name() + "-Scroll-Up");
         scrollButtonDown->setGroupByName(m_group->name() + "-Scroll-Down");
     }
-    //setItemsGroup(WidgetGroup::group(group->name() + "-Items"));
 }
 
 void ActionListView::scroll(ScrollDirection direction)
@@ -249,22 +243,20 @@ void ActionListView::setGeometry(const QRectF & geometry)
 
     if (!m_model) return;
 
-    //calculateItemHeight();
-
     initialButtonsCreation();
 }
 
 void ActionListView::setModel(ActionListViewModel * model)
 {
     if (!model) return;
-    
+
     if (m_model) {
         // disconnencting from old model
         disconnect ( m_model, 0, this, 0 );
     }
-    
+
     m_model = model;
-    
+
     connect(m_model, SIGNAL(updated()),
             this, SLOT(modelUpdated()));
     connect(m_model, SIGNAL(itemInserted(int)),
@@ -273,7 +265,7 @@ void ActionListView::setModel(ActionListViewModel * model)
             this, SLOT(modelItemDeleted(int)));
     connect(m_model, SIGNAL(itemAltered(int)),
             this, SLOT(modelItemAltered(int)));
-    
+
     initialButtonsCreation();
     update();
 }
@@ -303,29 +295,34 @@ void ActionListView::modelItemDeleted(int index)
 
 void ActionListView::modelItemAltered(int index)
 {
-    Q_UNUSED(index);
-    modelUpdated();
+    // TODO: What if an item became a category, or vice versa?
+    int buttonIndex = index - m_topButtonIndex;
+    if (buttonIndex >= 0 && buttonIndex < m_buttons.size()) {
+        m_buttons.at(buttonIndex).first->setTitle(m_model->title(index));
+        m_buttons.at(buttonIndex).first->setDescription(m_model->description(index));
+        m_buttons.at(buttonIndex).first->setIcon(m_model->icon(index));
+    }
 }
 
-void ActionListView::paintWidget(QPainter * painter,
+/*void ActionListView::paintWidget(QPainter * painter,
         const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
     Q_UNUSED(painter);
     //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
-}
+}*/
 
 void ActionListView::setItemsGroup(WidgetGroup * group)
 {
     if (group == NULL) {
         group = WidgetGroup::defaultGroup();
     }
-    
+
     if (group == m_itemsGroup) return;
-    
+
     m_itemsGroup = group;
-    
+
     QPair < ExtenderButton *, int > pair;
     foreach(pair, m_buttons) {
         pair.first->setGroup(group);
@@ -468,7 +465,7 @@ void ActionListView::initialButtonsCreation() {
 
 bool ActionListView::addButton(ListTail where) {
     if (!m_model) return false;
-    
+
     if (m_buttons.empty()) {
         where = End;
     }

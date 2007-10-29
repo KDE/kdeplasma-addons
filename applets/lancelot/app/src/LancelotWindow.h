@@ -28,6 +28,7 @@
 
 #include "models/Devices.h"
 #include "models/Places.h"
+#include "models/SystemServices.h"
 
 namespace Plasma {
     class Phase;
@@ -55,16 +56,20 @@ private Q_SLOTS:
 
 private:
     void createModels();
-    Lancelot::Models::Devices * m_devicesModel;
-    Lancelot::Models::Places * m_placesModel;
-    Lancelot::MergedActionListViewModel * m_systemLeftModel;
+    Lancelot::MergedActionListViewModel * m_systemRightModel;
+    Lancelot::Models::Devices * m_devicesModelRemovable;
+    Lancelot::Models::Devices * m_devicesModelFixed;
 
-    
+    Lancelot::MergedActionListViewModel * m_systemLeftModel;
+    Lancelot::Models::Places * m_placesModel;
+    Lancelot::Models::SystemServices * m_systemServicesModel;
+
+
     QTimer m_hideTimer;
     bool m_hovered;
     QSignalMapper * m_sectionsSignalMapper;
     Plasma::Phase * m_phase;
-    
+
 };
 
 #endif /*LANCELOTWINDOW_H_*/

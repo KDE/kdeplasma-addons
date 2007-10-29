@@ -138,7 +138,7 @@ protected:
 
     // Center area
     QStringList sections;
-    
+
     Lancelot::CardLayout * layoutCenter;
     QMap < QString, Lancelot::Panel * > sectionPanels;
     Lancelot::PassagewayView * panelSectionApplications;
@@ -214,19 +214,20 @@ protected:
             new Lancelot::ExtenderButton("buttonSystemSwitchUser", new KIcon("switchuser"), "Switch User", ""));
 
         // Sections area
-        sections << "Applications" << "Contacts" << "Documents" << "System"; // << "Search";
-        
+        // sections << "Applications" << "Computer" << "Contacts" << "Documents"; // << "Search";
+        sections << "Documents" << "Contacts" << "Computer" << "Applications"; // << "Search";
+
         layoutSections = new Plasma::VBoxLayout();
         panelSections = new Lancelot::Panel("panelSections");
 
-        sectionButtons.insert("System", buttonSectionSystem =
-            new Lancelot::ToggleExtenderButton("buttonSectionSystem", new KIcon("video-display"), "System", "", panelSections));
+        sectionButtons.insert("Computer", buttonSectionSystem =
+            new Lancelot::ToggleExtenderButton("buttonSectionSystem", new KIcon("video-display"), i18n("Computer"), "", panelSections));
         sectionButtons.insert("Documents", buttonSectionDocuments =
-            new Lancelot::ToggleExtenderButton("buttonSectionDocuments", new KIcon("applications-office"), "Documents", "", panelSections));
+            new Lancelot::ToggleExtenderButton("buttonSectionDocuments", new KIcon("applications-office"), i18n("Documents"), "", panelSections));
         sectionButtons.insert("Contacts", buttonSectionContacts =
-            new Lancelot::ToggleExtenderButton("buttonSectionContacts", new KIcon("kontact"), "Contacts", "", panelSections));
+            new Lancelot::ToggleExtenderButton("buttonSectionContacts", new KIcon("kontact"), i18n("Contacts"), "", panelSections));
         sectionButtons.insert("Applications", buttonSectionApplications =
-            new Lancelot::ToggleExtenderButton("buttonSectionApplications", new KIcon("make-kdevelop"), "Applications", "", panelSections));
+            new Lancelot::ToggleExtenderButton("buttonSectionApplications", new KIcon("make-kdevelop"), i18n("Applications"), "", panelSections));
 
         // Search area
         layoutSearch = new Plasma::NodeLayout();
@@ -244,8 +245,8 @@ protected:
             new Lancelot::Panel("panelSectionContacts", new KIcon("kontact"), i18n("Contacts")));
         sectionPanels.insert("Documents", panelSectionDocuments =
             new Lancelot::Panel("panelSectionDocuments", new KIcon("applications-office"), i18n("Documents")));
-        sectionPanels.insert("System", panelSectionSystem =
-            new Lancelot::Panel("panelSectionSystem", new KIcon("video-display"), i18n("System")));
+        sectionPanels.insert("Computer", panelSectionSystem =
+            new Lancelot::Panel("panelSectionSystem", new KIcon("video-display"), i18n("Computer")));
         sectionPanels.insert("Serch", panelSectionSearch =
             new Lancelot::Panel("panelSectionSearch", new KIcon("find"), i18n("Search")));
 

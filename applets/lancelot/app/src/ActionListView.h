@@ -57,12 +57,12 @@ public:
     void setExtenderPosition(ExtenderButton::ExtenderPosition position);
     ExtenderButton::ExtenderPosition extenderPosition();
 
-    void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
+    //void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
-    
+
     void setItemsGroup(WidgetGroup * group = NULL);
     WidgetGroup * itemsGroup();
-    
+
     void wheelEvent ( QGraphicsSceneWheelEvent * event );
     void setGroup(WidgetGroup * group = NULL);
 

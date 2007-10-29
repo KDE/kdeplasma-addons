@@ -103,16 +103,16 @@ private:
     static Plasma::Svg * m_extenderIconSvg;
     //static Plasma::Svg * m_extenderButtonSvg;
     //static int m_extendersCount;
-    
+
     void timerFired();
-    
+
 protected slots:
     void startTimer();
     void stopTimer();
-    
+
 Q_SIGNALS:
     void activated();
-    
+
     friend class ExtenderButtonTimer;
 };
 

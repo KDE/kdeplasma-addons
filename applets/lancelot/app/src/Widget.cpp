@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -36,7 +36,7 @@ Widget::Widget(QString name, QGraphicsItem * parent) :
 
 Widget::~Widget()
 {
-    
+
 }
 
 void Widget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
@@ -65,13 +65,13 @@ void Widget::setGroup(WidgetGroup * group)
     if (group == NULL) {
         group = WidgetGroup::defaultGroup();
     }
-    
+
     if (group == m_group) return;
 
     if (m_group != NULL) {
         m_group->removeWidget(this);
     }
-    
+
     m_group = group;
     m_group->addWidget(this);
     groupUpdated();
@@ -141,7 +141,7 @@ bool Widget::enabled() const {
 
 void Widget::paintBackground (QPainter * painter) {
     if (!m_group) return;
-    
+
     QString element;
     if (!m_enabled) {
         element = "disabled";
@@ -150,20 +150,20 @@ void Widget::paintBackground (QPainter * painter) {
     } else {
         element = "normal";
     }
-    
+
     paintBackground(painter, element);
 }
 
 void Widget::paintBackground (QPainter * painter, const QString & element) {
     if (!m_group) return;
-    
+
     // Background Painting
     kDebug() << "Painting bkg ####\n";
     if (Plasma::Svg * svg = m_group->backgroundSvg()) {
         svg->resize(size());
-        
+
         svg->paint(painter, 0, 0, element);
-        
+
     } else if (const WidgetGroup::ColorScheme * scheme = m_group->backgroundColor()) {
         const QColor * color;
         if (!m_enabled) {
@@ -173,7 +173,7 @@ void Widget::paintBackground (QPainter * painter, const QString & element) {
         } else {
             color = & (scheme->normal);
         }
-        
+
         painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(*color));
 
     }

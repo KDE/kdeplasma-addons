@@ -74,7 +74,7 @@ protected:
     //void resizeSvg();
     //Plasma::Svg * m_svg;
     //QString m_svgElementPrefix, m_svgElementSufix;
-    
+
     void paintForeground (QPainter * painter);
 
     QIcon * m_icon;

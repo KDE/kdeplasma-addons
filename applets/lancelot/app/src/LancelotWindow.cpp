@@ -29,7 +29,7 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
   : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_sectionsSignalMapper(NULL), m_phase(NULL)
 {
     setupUi(this);
-    
+
     createModels();
 
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
@@ -54,9 +54,9 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     m_sectionsSignalMapper->setMapping(buttonSectionDocuments, "Documents");
 
     connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionSystem, "System");
+    m_sectionsSignalMapper->setMapping(buttonSectionSystem, "Computer");
 
-    kDebug() << "###############################################\n";
+    // TODO : Comment the following line
     connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
 
 }
@@ -125,14 +125,25 @@ bool LancelotWindow::lancelotShowItem(QString name) {
 void LancelotWindow::createModels() {
     m_systemLeftModel = new Lancelot::MergedActionListViewModel();
     m_systemLeftModel->addModel(
-        NULL, i18n("Places"),             
+        NULL, i18n("Places"),
         m_placesModel = new Lancelot::Models::Places()
     );
     m_systemLeftModel->addModel(
-        NULL, i18n("Media"),             
-        m_devicesModel = new Lancelot::Models::Devices()
+        NULL, i18n("System"),
+        m_systemServicesModel = new Lancelot::Models::SystemServices()
     );
+
     listSectionSystemLeft->setModel(m_systemLeftModel);
-    listSectionSystemRight->setModel(m_devicesModel);
+
+    m_systemRightModel = new Lancelot::MergedActionListViewModel();
+    m_systemRightModel->addModel(
+        NULL, i18n("Removable"),
+        m_devicesModelRemovable = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable)
+    );
+    m_systemRightModel->addModel(
+        NULL, i18n("Fixed"),
+        m_devicesModelFixed = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed)
+    );
+    listSectionSystemRight->setModel(m_systemRightModel);
 }
 

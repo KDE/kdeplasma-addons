@@ -36,7 +36,7 @@ bool ToggleExtenderButton::isPressed() const
 void ToggleExtenderButton::setPressed(bool pressed)
 {
     if (pressed == m_pressed) return;
-    
+
     emit toggled(m_pressed = pressed);
     update();
 }
@@ -55,7 +55,7 @@ void ToggleExtenderButton::paintWidget (QPainter * painter, const QStyleOptionGr
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
-    
+
     paintBackground(painter);
     if (m_pressed) {
         paintBackground(painter, "pressed");

@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -41,7 +41,7 @@ public:
     void setGeometry (const QRectF & geometry);
     void update (const QRectF &rect = QRectF());
     void update (qreal x, qreal y, qreal w, qreal h);
-    
+
     virtual void setGroupByName(const QString & groupName);
     virtual void setGroup(WidgetGroup * group = NULL);
     WidgetGroup * group();
@@ -59,9 +59,9 @@ protected:
 
     QString m_name;
     WidgetGroup * m_group;
-    
+
     virtual void groupUpdated();
-    
+
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );

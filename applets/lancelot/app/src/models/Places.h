@@ -1,6 +1,5 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -31,10 +30,10 @@ class Places : public StandardActionListViewModel {
 public:
     Places();
     virtual ~Places();
-    
+
 protected:
     void activate(int index);
-    
+
 private:
     void loadPlaces();
 };

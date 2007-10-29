@@ -95,16 +95,16 @@ void ExtenderButton::init()
 
     m_extender = new ExtenderObject(name() + "::Extender", m_extenderIconSvg, this);
     m_extender->setVisible(false);
-    
+
     setGroupByName("ExtenderButton");
-    
+
     m_extender->m_iconSize = QSize(16, 16);
 
     //connect(m_extender, SIGNAL(mouseHoverEnter()), this, SIGNAL(activated()));
     connect(m_extender, SIGNAL(mouseHoverEnter()), this, SLOT(startTimer()));
     connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));
-    
-    
+
+
 
 }
 

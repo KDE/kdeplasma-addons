@@ -14,23 +14,23 @@ public:
     ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~ToggleExtenderButton();
-    
+
     bool isPressed() const;
     void setPressed(bool pressed = true);
-    
+
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-    
+
 public slots:
     void toggle();
 
 Q_SIGNALS:
     void toggled(bool pressed);
-    
+
 private:
     bool m_pressed;
     void init();
-    
+
 };
 
 }
