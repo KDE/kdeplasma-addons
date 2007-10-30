@@ -1,6 +1,5 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -18,27 +17,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "SystemServices.h"
+#ifndef LANCELOT_MODELS_FOLDERMODEL_H_
+#define LANCELOT_MODELS_FOLDERMODEL_H_
+
+#include "BaseModel.h"
+#include <QDir>
+
+class KDirWatch;
 
 namespace Lancelot {
 namespace Models {
 
-SystemServices::SystemServices()
-{
-    load();
+class FolderModel : public BaseModel {
+    Q_OBJECT
+public:
+    FolderModel(QString dirPath, QDir::SortFlags sort = QDir::NoSort);
+    virtual ~FolderModel();
+
+protected:
+    void load();
+
+private:
+    static KDirWatch * m_dirWatch;
+    QString m_dirPath;
+
+private Q_SLOTS:
+    void dirty(const QString & dirPath);
+};
+
+}
 }
 
-SystemServices::~SystemServices()
-{
-}
-
-void SystemServices::load()
-{
-    addService("systemsettings");
-    addService("ksysguard");
-    addService("kinfocenter");
-    addService("adept");
-}
-
-}
-}
+#endif /* LANCELOT_MODELS_FOLDERMODEL_H_ */

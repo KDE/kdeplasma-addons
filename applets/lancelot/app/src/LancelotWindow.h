@@ -29,6 +29,8 @@
 #include "models/Devices.h"
 #include "models/Places.h"
 #include "models/SystemServices.h"
+#include "models/RecentDocuments.h"
+#include "models/FolderModel.h"
 
 namespace Plasma {
     class Phase;
@@ -56,14 +58,25 @@ private Q_SLOTS:
 
 private:
     void createModels();
-    Lancelot::MergedActionListViewModel * m_systemRightModel;
-    Lancelot::Models::Devices * m_devicesModelRemovable;
-    Lancelot::Models::Devices * m_devicesModelFixed;
 
+    // Computer models
     Lancelot::MergedActionListViewModel * m_systemLeftModel;
-    Lancelot::Models::Places * m_placesModel;
-    Lancelot::Models::SystemServices * m_systemServicesModel;
+    Lancelot::MergedActionListViewModel * m_systemRightModel;
 
+    Lancelot::Models::Devices           * m_devicesModelRemovable;
+    Lancelot::Models::Devices           * m_devicesModelFixed;
+    Lancelot::Models::Places            * m_placesModel;
+    Lancelot::Models::SystemServices    * m_systemServicesModel;
+
+    // Documents models
+    Lancelot::MergedActionListViewModel * m_documentsLeftModel;
+    //Lancelot::MergedActionListViewModel * m_documentsRightModel;
+
+    Lancelot::Models::RecentDocuments   * m_recentDocumentsModel;
+    Lancelot::Models::FolderModel       * m_recentDocumentsModel2;
+    //Lancelot::Models::Devices           * m_devicesModelFixed;
+    //Lancelot::Models::Places            * m_placesModel;
+    //Lancelot::Models::SystemServices    * m_systemServicesModel;
 
     QTimer m_hideTimer;
     bool m_hovered;

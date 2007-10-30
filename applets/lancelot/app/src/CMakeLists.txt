@@ -33,9 +33,17 @@ set(
   PassagewayView.cpp
   PassagewayViewModels.cpp
 
+# Models
+  models/BaseModel.cpp
+  models/FolderModel.cpp
+
+# Computer
   models/Devices.cpp
   models/Places.cpp
   models/SystemServices.cpp
+
+# Documents
+  models/RecentDocuments.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml

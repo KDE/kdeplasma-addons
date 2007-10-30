@@ -37,14 +37,14 @@ namespace Models {
 Devices::Devices(Type filter)
     : m_filter(filter)
 {
+    load();
+
     kDebug() << "connecting\n";
     kDebug() << connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),
             this, SLOT(deviceAdded(QString)));
     kDebug() << connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(QString)),
             this, SLOT(deviceRemoved(QString)));
     kDebug() << "connected\n";
-
-    loadDevices();
 }
 
 Devices::~Devices()
@@ -140,7 +140,7 @@ void Devices::udiAccessibilityChanged(bool accessible)
 }
 
 
-void Devices::loadDevices()
+void Devices::load()
 {
     QList<Solid::Device> deviceList =
         Solid::Device::listFromType(Solid::DeviceInterface::StorageAccess, QString());
@@ -158,15 +158,14 @@ void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize,
 void Devices::activate(int index)
 {
     if (index > m_items.size() - 1) return;
-    //kDebug() << m_items.at(index).data.toString() << "\n";
-    //new KRun(KUrl(m_items.at(index).data.toStringList().at(1)), 0);
     Solid::StorageAccess * access = Solid::Device(m_items.at(index).data.toString()).as<Solid::StorageAccess>();
 
     if (!access) return;
 
-    //if (!access->isAccessible()) {
+    if (!access->isAccessible()) {
         access->setup();
-    //}
+    }
+
     new KRun(KUrl(access->filePath()), 0);
 }
 

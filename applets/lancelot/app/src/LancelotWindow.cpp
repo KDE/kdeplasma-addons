@@ -20,6 +20,7 @@
 #include "LancelotWindow.h"
 #include "ToggleExtenderButton.h"
 
+#include <KRecentDocument>
 #include <plasma/animator.h>
 #include <plasma/phase.h>
 
@@ -123,6 +124,8 @@ bool LancelotWindow::lancelotShowItem(QString name) {
 }
 
 void LancelotWindow::createModels() {
+    // Computer models
+
     m_systemLeftModel = new Lancelot::MergedActionListViewModel();
     m_systemLeftModel->addModel(
         NULL, i18n("Places"),
@@ -132,7 +135,6 @@ void LancelotWindow::createModels() {
         NULL, i18n("System"),
         m_systemServicesModel = new Lancelot::Models::SystemServices()
     );
-
     listSectionSystemLeft->setModel(m_systemLeftModel);
 
     m_systemRightModel = new Lancelot::MergedActionListViewModel();
@@ -145,5 +147,15 @@ void LancelotWindow::createModels() {
         m_devicesModelFixed = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed)
     );
     listSectionSystemRight->setModel(m_systemRightModel);
+
+    // Document models
+    m_documentsLeftModel = new Lancelot::MergedActionListViewModel();
+    m_documentsLeftModel->addModel(
+        NULL, i18n("Recent documents"),
+        m_recentDocumentsModel = new Lancelot::Models::RecentDocuments()
+    );
+    listSectionDocumentsLeft->setModel(m_documentsLeftModel);
+    //listSectionDocumentsRight->setModel(m_recentDocumentsModel2);
+
 }
 

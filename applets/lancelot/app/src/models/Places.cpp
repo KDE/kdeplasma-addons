@@ -21,28 +21,22 @@
 #include <KRun>
 #include <KLocalizedString>
 #include <KDebug>
-#include <KServiceTypeTrader>
-
-#include <solid/device.h>
-#include <solid/deviceinterface.h>
-#include <solid/devicenotifier.h>
-#include <solid/storageaccess.h>
-#include <solid/storagedrive.h>
 
 namespace Lancelot {
 namespace Models {
 
 Places::Places()
 {
-    loadPlaces();
+    load();
 }
 
 Places::~Places()
 {
 }
 
-void Places::loadPlaces()
+void Places::load()
 {
+    // We don't want to use addUrl, because of the icons
     add(
         i18n("Home Folder"),
         getenv("HOME"),
@@ -64,12 +58,6 @@ void Places::loadPlaces()
         "remote:/"
     );
 
-}
-
-void Places::activate(int index)
-{
-    kDebug() << m_items.at(index).data.toString() << "\n";
-    new KRun(KUrl(m_items.at(index).data.toString()), 0);
 }
 
 }

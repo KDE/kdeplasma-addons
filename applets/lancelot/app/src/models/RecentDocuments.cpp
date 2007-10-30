@@ -1,6 +1,5 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -18,27 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "SystemServices.h"
+#include "RecentDocuments.h"
+#include <KStandardDirs>
+#include <KDebug>
 
 namespace Lancelot {
 namespace Models {
 
-SystemServices::SystemServices()
-{
-    load();
-}
+RecentDocuments::RecentDocuments()
+    : FolderModel(KStandardDirs::locateLocal("data", QLatin1String("RecentDocuments/")), QDir::Time)
+{}
 
-SystemServices::~SystemServices()
+RecentDocuments::~RecentDocuments()
 {
-}
-
-void SystemServices::load()
-{
-    addService("systemsettings");
-    addService("ksysguard");
-    addService("kinfocenter");
-    addService("adept");
 }
 
 }
 }
+
+#include "RecentDocuments.moc"

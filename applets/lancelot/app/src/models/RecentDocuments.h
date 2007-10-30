@@ -1,6 +1,5 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -18,27 +17,23 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "SystemServices.h"
+#ifndef LANCELOT_MODELS_RECENTDOCUMENTS_H_
+#define LANCELOT_MODELS_RECENTDOCUMENTS_H_
+
+#include "FolderModel.h"
+#include <KDirWatch>
 
 namespace Lancelot {
 namespace Models {
 
-SystemServices::SystemServices()
-{
-    load();
-}
-
-SystemServices::~SystemServices()
-{
-}
-
-void SystemServices::load()
-{
-    addService("systemsettings");
-    addService("ksysguard");
-    addService("kinfocenter");
-    addService("adept");
-}
+class RecentDocuments : public FolderModel {
+    Q_OBJECT
+public:
+    RecentDocuments();
+    virtual ~RecentDocuments();
+};
 
 }
 }
+
+#endif /* LANCELOT_MODELS_RECENTDOCUMENTS_H_ */

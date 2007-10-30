@@ -21,23 +21,19 @@
 #ifndef LANCELOT_MODELS_SYSTEMSERVICES_H_
 #define LANCELOT_MODELS_SYSTEMSERVICES_H_
 
-#include "../ActionListViewModels.h"
+#include "BaseModel.h"
 
 namespace Lancelot {
 namespace Models {
 
-class SystemServices : public StandardActionListViewModel {
+class SystemServices : public BaseModel {
     Q_OBJECT
 public:
     SystemServices();
     virtual ~SystemServices();
 
 protected:
-    void activate(int index);
-
-private:
-    void loadSystemServices();
-    void addService(const QString & service);
+    void load();
 
 };
 

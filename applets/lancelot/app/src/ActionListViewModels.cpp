@@ -76,12 +76,14 @@ int StandardActionListViewModel::size() const
 
 void StandardActionListViewModel::add(const Item & item)
 {
+    kDebug() << item.title;
     m_items.append(item);
     emit itemInserted(m_items.size() - 1);
 }
 
 void StandardActionListViewModel::add(const QString & title, const QString & description, KIcon * icon, const QVariant & data)
 {
+    kDebug() << title;
     m_items.append(Item(title, description, icon, data));
     emit itemInserted(m_items.size() - 1);
 }

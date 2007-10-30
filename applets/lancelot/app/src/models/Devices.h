@@ -21,14 +21,14 @@
 #ifndef LANCELOT_MODELS_DEVICES_H_
 #define LANCELOT_MODELS_DEVICES_H_
 
-#include "../ActionListViewModels.h"
+#include "BaseModel.h"
 #include <solid/device.h>
 #include <solid/storageaccess.h>
 
 namespace Lancelot {
 namespace Models {
 
-class Devices : public StandardActionListViewModel {
+class Devices : public BaseModel {
     Q_OBJECT
 public:
     enum Type {
@@ -48,9 +48,9 @@ private slots:
 
 protected:
     void activate(int index);
+    void load();
 
 private:
-    void loadDevices();
     void addDevice(const Solid::Device & device);
 
     Type m_filter;

@@ -20,22 +20,19 @@
 #ifndef LANCELOT_MODELS_PLACES_H_
 #define LANCELOT_MODELS_PLACES_H_
 
-#include "../ActionListViewModels.h"
+#include "BaseModel.h"
 
 namespace Lancelot {
 namespace Models {
 
-class Places : public StandardActionListViewModel {
+class Places : public BaseModel {
     Q_OBJECT
 public:
     Places();
     virtual ~Places();
 
 protected:
-    void activate(int index);
-
-private:
-    void loadPlaces();
+    void load();
 };
 
 }
