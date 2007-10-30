@@ -44,6 +44,7 @@ set(
 
 # Documents
   models/RecentDocuments.cpp
+  models/OpenDocuments.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
@@ -51,7 +52,7 @@ QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
 
 kde4_add_executable(lancelot ${plasma_lancelot_SRCS})
 
-target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS})
+target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} taskmanager)
 
 ## DBUS service
 

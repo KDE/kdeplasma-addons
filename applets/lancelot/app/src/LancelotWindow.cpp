@@ -2,16 +2,16 @@
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License version 2,
+ *   it under the terms of the GNU Lesser/Library General Public License version 2,
  *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ *   GNU Lesser/Library General Public License for more details
  *
- *   You should have received a copy of the GNU General Public
+ *   You should have received a copy of the GNU Lesser/Library General Public
  *   License along with this program; if not, write to the
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -154,8 +154,13 @@ void LancelotWindow::createModels() {
         NULL, i18n("Recent documents"),
         m_recentDocumentsModel = new Lancelot::Models::RecentDocuments()
     );
+    m_documentsLeftModel->addModel(
+        NULL, i18n("Open documents"),
+        m_openDocumentsModel = new Lancelot::Models::OpenDocuments()
+    );
     listSectionDocumentsLeft->setModel(m_documentsLeftModel);
-    //listSectionDocumentsRight->setModel(m_recentDocumentsModel2);
 
+    m_documentsRightModel = new Lancelot::MergedActionListViewModel();
+    listSectionDocumentsRight->setModel(m_documentsRightModel);
 }
 

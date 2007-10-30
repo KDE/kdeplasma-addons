@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,25 +18,43 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_PLACES_H_
-#define LANCELOT_MODELS_PLACES_H_
+#ifndef LANCELOT_MODELS_OPENDOCUMENTS_H_
+#define LANCELOT_MODELS_OPENDOCUMENTS_H_
 
 #include "BaseModel.h"
+#include <plasma/taskmanager.h>
+#include <QSet>
 
 namespace Lancelot {
 namespace Models {
 
-class Places : public BaseModel {
+class OpenDocuments : public BaseModel {
     Q_OBJECT
 public:
-    Places();
-    virtual ~Places();
+    OpenDocuments();
+    virtual ~OpenDocuments();
 
 protected:
+    void activate(int index);
     void load();
+
+private slots:
+    void taskChanged();
+    void taskAdded(Task::TaskPtr task);
+    void taskRemoved(Task::TaskPtr task);
+
+private:
+    void connectTask(Task::TaskPtr task);
+    bool setDataForTask(Task::TaskPtr task);
+
+    int indexOf(WId wid);
+    
+    QMap <WId, Task::TaskPtr > m_tasks;
+    QSet <QString> m_classes;
+    QRegExp m_rx;
 };
 
 }
 }
 
-#endif /* LANCELOT_MODELS_PLACES_H_ */
+#endif /* LANCELOT_MODELS_OPENDOCUMENTS_H_ */
