@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
- *   or (at your option) any later version, as published by the Free 
+ *   or (at your option) any later version, as published by the Free
  *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
@@ -33,11 +33,11 @@ public:
     ~Lancelot();
 
     QSizeF contentSizeHint () const;
-    
+
 protected:
     void hoverEnterEvent   (QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent   (QGraphicsSceneHoverEvent * event);
-    
+
 private:
     Plasma::Icon * m_icon;
     QDBusInterface * m_dbus;
