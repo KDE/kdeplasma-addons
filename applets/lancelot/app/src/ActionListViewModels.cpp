@@ -1,3 +1,22 @@
+/*
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Lesser/Library General Public License version 2,
+ *   or (at your option) any later version, as published by the Free
+ *   Software Foundation
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Lesser/Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Lesser/Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 #include "ActionListViewModels.h"
 #include <KDebug>
 
@@ -111,6 +130,7 @@ void StandardActionListViewModel::removeAt(int index)
 // MergedActionListViewModel
 
 MergedActionListViewModel::MergedActionListViewModel()
+  : m_hideEmptyModels(true)
 {
 }
 
@@ -129,11 +149,16 @@ void MergedActionListViewModel::modelItemInserted(int modelIndex)
     kDebug();
     if (!sender()) return;
 
-    int model = m_models.indexOf((ActionListViewModel *)sender());
+    ActionListViewModel * m = (ActionListViewModel *)sender();
+    int model = m_models.indexOf(m);
     if (model == -1) return;
 
     int index;
     fromChildCoordinates(index, model, modelIndex);
+    
+    if (m_hideEmptyModels && m->size() == 1) {
+        emit itemInserted(index - 1); // We insert the model name too // TODO: Check if this really works
+    }
     emit itemInserted(index);
 }
 
@@ -142,11 +167,16 @@ void MergedActionListViewModel::modelItemDeleted(int modelIndex)
     kDebug();
     if (!sender()) return;
 
-    int model = m_models.indexOf((ActionListViewModel *)sender());
+    ActionListViewModel * m = (ActionListViewModel *)sender();
+    int model = m_models.indexOf(m);
     if (model == -1) return;
 
     int index;
     fromChildCoordinates(index, model, modelIndex);
+
+    if (m_hideEmptyModels && m->size() == 0) {
+        emit itemDeleted(index + 1); // We delete the model name too // TODO: Check if this really works
+    }
     emit itemDeleted(index);
 }
 
@@ -217,11 +247,15 @@ void MergedActionListViewModel::toChildCoordinates(int index, int & model, int &
 {
     model = 0; modelIndex = 0;
     foreach (ActionListViewModel * m, m_models) {
-        if (index <= m->size()) {
-            modelIndex = index - 1;
-            return;
+        if (!m_hideEmptyModels || m->size() != 0) {
+            if (index <= m->size()) {
+                modelIndex = index - 1;
+                return;
+            } else {
+                index -= m->size() + 1;
+                ++model;
+            }
         } else {
-            index -= m->size() + 1;
             ++model;
         }
     }
@@ -237,11 +271,13 @@ void MergedActionListViewModel::fromChildCoordinates(int & index, int model, int
 
     index = 0;
     foreach (ActionListViewModel * m, m_models) {
-        if (model > 0) {
-            index += m->size() + 1;
-        } else {
-            index += modelIndex + 1;
-            return;
+        if (!m_hideEmptyModels || m->size() != 0) {
+            if (model > 0) {
+                index += m->size() + 1;
+            } else {
+                index += modelIndex + 1;
+                return;
+            }
         }
         --model;
     }
@@ -259,6 +295,8 @@ void MergedActionListViewModel::addModel(KIcon * icon, QString title, ActionList
     connect(model, SIGNAL(itemDeleted(int)),  this, SLOT(modelItemDeleted(int)));
     connect(model, SIGNAL(itemAltered(int)),  this, SLOT(modelItemAltered(int)));
 
+    if (m_hideEmptyModels && model->size() == 0) return; // We will not show empty models
+
     emit updated();
 }
 
@@ -270,11 +308,24 @@ int MergedActionListViewModel::modelCount() const
 
 int MergedActionListViewModel::size() const
 {
-    int size = m_models.size();
+    int size;
     foreach (ActionListViewModel * model, m_models) {
-        size += model->size();
+        if (m_hideEmptyModels && model->size() == 0) continue; // We will not show empty models
+        size += model->size() + 1;
     }
     return size;
+}
+
+bool MergedActionListViewModel::hideEmptyModels() const
+{
+    return m_hideEmptyModels;
+}
+
+void MergedActionListViewModel::setHideEmptyModels(bool hide)
+{
+    if (m_hideEmptyModels == hide) return;
+    m_hideEmptyModels = hide;
+    emit updated();
 }
 
 

@@ -45,6 +45,7 @@ void BaseModel::activate(int index)
 {
     kDebug() << m_items.at(index).data.toString() << "\n";
     new KRun(KUrl(m_items.at(index).data.toString()), 0);
+    LancelotApplication::application()->hide(true);
 }
 
 void BaseModel::addService(const QString & serviceName)

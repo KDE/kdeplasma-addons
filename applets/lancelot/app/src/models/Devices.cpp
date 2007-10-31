@@ -167,6 +167,7 @@ void Devices::activate(int index)
     }
 
     new KRun(KUrl(access->filePath()), 0);
+    LancelotApplication::application()->hide(true);
 }
 
 }

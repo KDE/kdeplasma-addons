@@ -31,6 +31,7 @@
 #include "models/SystemServices.h"
 #include "models/RecentDocuments.h"
 #include "models/OpenDocuments.h"
+#include "models/NewDocuments.h"
 #include "models/FolderModel.h"
 
 namespace Plasma {
@@ -45,7 +46,7 @@ public:
 	virtual ~LancelotWindow();
 
     bool lancelotShow();
-    bool lancelotHide();
+    bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
 
 protected:
@@ -56,6 +57,14 @@ protected:
 private Q_SLOTS:
     void sectionActivated(const QString & item);
     void activated(int index);
+    
+    void systemLock();
+    void systemLogout();
+    void systemSwitchUser();
+
+    void systemDoLock();
+    void systemDoLogout();
+    void systemDoSwitchUser();
 
 private:
     void createModels();
@@ -75,6 +84,8 @@ private:
 
     Lancelot::Models::RecentDocuments   * m_recentDocumentsModel;
     Lancelot::Models::OpenDocuments     * m_openDocumentsModel;
+    Lancelot::Models::NewDocuments      * m_newDocumentsModel;
+
     //Lancelot::Models::Devices           * m_devicesModelFixed;
     //Lancelot::Models::Places            * m_placesModel;
     //Lancelot::Models::SystemServices    * m_systemServicesModel;

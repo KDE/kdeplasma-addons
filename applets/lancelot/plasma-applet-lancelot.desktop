@@ -4,14 +4,20 @@ Icon=lancelot
 
 Name=Lancelot
 Name[bg]=Ланселот
-Comment=Desktop application launcher
-Comment[bg]=Стартиране на приложение на работния плот
-Comment[es]=Iniciador de una aplicación de escritorio
-Comment[ja]=デスクトップアプリケーションを起動します
-Comment[nl]=Programmastarter
-Comment[pt]=Lançador de aplicações do ambiente de trabalho
-Comment[pt_BR]=Lançador de aplicações do ambiente de trabalho
-Comment[sv]=Starta program från skrivbordet
+
+Comment=Launcher to start applications
+Comment[el]=Εκτέλεση εφαρμογών
+Comment[et]=Rakenduste käivitaja
+Comment[ga]=Tosaitheoir a thosaíonn feidhmchláir
+Comment[ja]=アプリケーションを起動するランチャー
+Comment[nb]=Starter programmer som ikke hører til KDE
+Comment[nds]=Röppt Programmen op
+Comment[pt]=Lançador para iniciar aplicações
+Comment[pt_BR]=Lançador para iniciar aplicativos
+Comment[sv]=Startprogram för att köra program
+Comment[x-test]=xxLauncher to start applicationsxx
+Comment[zh_CN]=启动应用程序的启动器
+Comment[zh_TW]=應用程式啟動器
 Type=Service
 ServiceTypes=Plasma/Applet
 

@@ -24,6 +24,15 @@
 #include <plasma/animator.h>
 #include <plasma/phase.h>
 
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusReply>
+
+#include <libworkspace/kworkspace.h>
+#include "ksmserver_interface.h"
+#include "screensaver_interface.h"
+
+#include <QMessageBox>
+
 #define HIDE_TIMER_INTERVAL 2000
 
 LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
@@ -56,15 +65,88 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
 
     connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionSystem, "Computer");
+    
+    connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
+    connect(buttonSystemLogout, SIGNAL(activated()),     this, SLOT(systemLogout()));
+    connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
+    buttonSystemSwitchUser->disable();
+    
     // TODO : Comment the following line
-    connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
+    // connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
 
 }
 
-void LancelotWindow::activated(int index) {
+void LancelotWindow::activated(int index)
+{
     kDebug() << index << " is activated\n";
+}
 
+
+void LancelotWindow::systemLock()
+{
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoLock()));
+}
+
+void LancelotWindow::systemLogout()
+{
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoLogout()));
+}
+
+void LancelotWindow::systemDoLock()
+{
+    org::freedesktop::ScreenSaver screensaver(
+        "org.freedesktop.ScreenSaver",
+        "/ScreenSaver",
+        QDBusConnection::sessionBus()
+    );
+    
+    if (screensaver.isValid()) {
+        screensaver.Lock();
+    }
+}
+
+void LancelotWindow::systemDoLogout()
+{
+    //KWorkSpace::ShutdownConfirm confirm = KWorkSpace::ShutdownConfirmDefault;
+    //KWorkSpace::ShutdownType type = KWorkSpace::ShutdownTypeNone;
+    //KWorkSpace::requestShutDown(confirm, type);
+    org::kde::KSMServerInterface smserver(
+        "org.kde.ksmserver",
+        "/KSMServer",
+        QDBusConnection::sessionBus()
+    );
+
+    if (smserver.isValid()) {
+        smserver.logout(
+            KWorkSpace::ShutdownConfirmDefault,
+            KWorkSpace::ShutdownTypeDefault,
+            KWorkSpace::ShutdownModeDefault
+        );
+    }
+}
+
+void LancelotWindow::systemSwitchUser()
+{
+    QMessageBox::information(NULL, "", "Lorem ipsum dolor sit amet");
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
+}
+
+void LancelotWindow::systemDoSwitchUser()
+{
+    org::kde::KSMServerInterface smserver(
+        "org.kde.ksmserver",
+        "/KSMServer",
+        QDBusConnection::sessionBus()
+    );
+
+    if (smserver.isValid()) {
+        kDebug() << smserver.sessionList().value();
+        QMessageBox::information(NULL, "", smserver.sessionList().value().join(";"));
+    }
 }
 
 void LancelotWindow::sectionActivated(const QString & item) {
@@ -112,7 +194,12 @@ bool LancelotWindow::lancelotShow() {
     return true;
 }
 
-bool LancelotWindow::lancelotHide() {
+bool LancelotWindow::lancelotHide(bool immediate) {
+    if (immediate) {
+        hide();
+        return true;
+    }
+    
     if (m_hovered) return false;
     m_hideTimer.start();
     return true;
@@ -151,16 +238,20 @@ void LancelotWindow::createModels() {
     // Document models
     m_documentsLeftModel = new Lancelot::MergedActionListViewModel();
     m_documentsLeftModel->addModel(
-        NULL, i18n("Recent documents"),
-        m_recentDocumentsModel = new Lancelot::Models::RecentDocuments()
-    );
-    m_documentsLeftModel->addModel(
-        NULL, i18n("Open documents"),
-        m_openDocumentsModel = new Lancelot::Models::OpenDocuments()
+        NULL, i18n("New:"),
+        m_newDocumentsModel = new Lancelot::Models::NewDocuments()
     );
     listSectionDocumentsLeft->setModel(m_documentsLeftModel);
 
     m_documentsRightModel = new Lancelot::MergedActionListViewModel();
+    m_documentsRightModel->addModel(
+        NULL, i18n("Recent documents"),
+        m_recentDocumentsModel = new Lancelot::Models::RecentDocuments()
+    );
+    m_documentsRightModel->addModel(
+        NULL, i18n("Open documents"),
+        m_openDocumentsModel = new Lancelot::Models::OpenDocuments()
+    );
     listSectionDocumentsRight->setModel(m_documentsRightModel);
 }
 

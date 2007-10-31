@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,43 +18,26 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPPLICATION_H_
-#define LANCELOTAPPLICATION_H_
+#ifndef LANCELOT_MODELS_NEWDOCUMENTS_H_
+#define LANCELOT_MODELS_NEWDOCUMENTS_H_
 
-#include <kuniqueapplication.h>
-#include <QTimer>
-#include <QSet>
+#include "BaseModel.h"
 
-class LancelotWindow;
+namespace Lancelot {
+namespace Models {
 
-class LancelotApplication: public KUniqueApplication
-{
+class NewDocuments : public BaseModel {
     Q_OBJECT
-    //CLASSINFO("D-Bus Interface", "org.kde.lancelot")
 public:
-	static int main(int argc, char **argv);
-	static LancelotApplication * application();
-
-public Q_SLOTS:
-    bool show();
-    bool hide(bool immediate = false);
-    bool showItem(QString name);
-
-    int addClient();
-    bool removeClient(int id);
+    NewDocuments();
+    virtual ~NewDocuments();
 
 protected:
-    static LancelotApplication * m_application;
-    LancelotWindow * window;
-
-private:
-    LancelotApplication(int argc, char **argv);
-    virtual ~LancelotApplication();
-
-    int m_clientsNumber;
-    int m_lastID;
-    QSet<int> m_clients;
+    void load();
 
 };
 
-#endif /*LANCELOTAPPLICATION_H_*/
+}
+}
+
+#endif /* LANCELOT_MODELS_NEWDOCUMENTS_H_ */

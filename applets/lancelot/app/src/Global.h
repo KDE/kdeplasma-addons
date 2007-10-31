@@ -29,6 +29,8 @@
 #include <KConfigGroup>
 #include <plasma/svg.h>
 
+#include "LancelotApplication.h"
+
 namespace Lancelot
 {
 
@@ -91,7 +93,7 @@ private:
 class Global : public QObject {
 public:
     static Global * instance();
-
+    
     bool processGeometryChanges : 1;
 	bool processUpdateRequests : 1;
     bool processGroupChanges : 1;
@@ -107,6 +109,7 @@ public:
 
 private:
     static Global * m_instance;
+    LancelotApplication * m_application;
 
     Global();
     virtual ~Global();

@@ -45,10 +45,17 @@ set(
 # Documents
   models/RecentDocuments.cpp
   models/OpenDocuments.cpp
+  models/NewDocuments.cpp
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
                      LancelotApplication.h LancelotApplication)
+
+set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${screensaver_xml} screensaver_interface)
+
+set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${ksmserver_xml} ksmserver_interface)
 
 kde4_add_executable(lancelot ${plasma_lancelot_SRCS})
 
@@ -59,7 +66,7 @@ target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} taskmanager)
 configure_file(org.kde.lancelot.service.in
   ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION ${CMAKE_INSTALL_PREFIX}/share/dbus-1/services )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION ${DBUS_SERVICES_INSTALL_DIR}) # ${CMAKE_INSTALL_PREFIX}/share/dbus-1/services )
 
 ########### install applicaiton ###############
 install(TARGETS lancelot DESTINATION ${BIN_INSTALL_DIR} )

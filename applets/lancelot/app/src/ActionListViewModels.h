@@ -1,10 +1,28 @@
+/*
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Lesser/Library General Public License version 2,
+ *   or (at your option) any later version, as published by the Free
+ *   Software Foundation
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Lesser/Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Lesser/Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 #ifndef ACTIONLISTVIEWMODELS_H_
 #define ACTIONLISTVIEWMODELS_H_
 
 #include <QPair>
 #include <QString>
 #include <KIcon>
-#include <QMessageBox>
 #include <QVariant>
 
 namespace Lancelot
@@ -95,6 +113,9 @@ public:
     virtual KIcon * icon(int index) const;
     virtual bool isCategory(int index) const;
     virtual int size() const;
+    
+    bool hideEmptyModels() const;
+    void setHideEmptyModels(bool hide);
 
 protected:
     virtual void activate(int index);
@@ -104,6 +125,7 @@ private:
     void fromChildCoordinates(int & index, int model, int modelIndex) const;
     QList< ActionListViewModel * > m_models;
     QList< QPair< QString, KIcon * > > m_modelsMetadata;
+    bool m_hideEmptyModels;
 
 private slots:
     // listen to model changes
@@ -139,9 +161,7 @@ public:
     virtual KIcon * icon(int index) const { Q_UNUSED(index); return m_icon; }
     virtual int size() const { return m_size; }
 
-    virtual void activated(int index) {
-        QMessageBox::information (NULL, "Item is activated", title(index));
-    }
+    virtual void activated(int index) { Q_UNUSED(index); }
 private:
     int m_size;
     QString m_title;
