@@ -27,7 +27,7 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 
-#include <libworkspace/kworkspace.h>
+#include <kworkspace/kworkspace.h>
 #include "ksmserver_interface.h"
 #include "screensaver_interface.h"
 
