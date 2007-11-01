@@ -41,7 +41,7 @@ int glTextureUnitsCount;
 void initGLX()
     {
     // Get GLX version
-    int major, minor;
+    //int major, minor;
     //glXQueryVersion( display(), &major, &minor );
     //glXVersion = MAKE_GL_VERSION( major, minor, 0 );
     // Get list of supported GLX extensions
@@ -56,6 +56,12 @@ void initGL()
     // Get OpenGL version
     QString glversionstring = QString((const char*)glGetString(GL_VERSION));
     QStringList glversioninfo = glversionstring.left(glversionstring.indexOf(' ')).split('.');
+
+    if (glversioninfo.isEmpty() || glversionstring.isEmpty()) {
+        // something went very wrong =/
+        return;
+    }
+
     glVersion = MAKE_GL_VERSION(glversioninfo[0].toInt(), glversioninfo[1].toInt(),
                                     glversioninfo.count() > 2 ? glversioninfo[2].toInt() : 0);
     // Get list of supported OpenGL extensions
