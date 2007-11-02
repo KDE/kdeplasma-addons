@@ -48,12 +48,10 @@ public:
     bool lancelotShow();
     bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
-    void clearFocus();
 
 protected:
     void leaveEvent(QEvent * event);
     void enterEvent(QEvent * event);
-    void focusOutEvent(QFocusEvent * event);
 
 private Q_SLOTS:
     void sectionActivated(const QString & item);

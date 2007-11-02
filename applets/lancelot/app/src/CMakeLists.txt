@@ -57,6 +57,9 @@ QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
 QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${screensaver_xml} screensaver_interface)
 
+set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.krunner.Interface.xml)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${screensaver_xml} krunner_interface)
+
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
 QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${ksmserver_xml} ksmserver_interface)
 

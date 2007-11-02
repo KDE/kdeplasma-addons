@@ -33,6 +33,8 @@ class LancelotApplication: public KUniqueApplication
 public:
 	static int main(int argc, char **argv);
 	static LancelotApplication * application();
+	
+	bool event(QEvent * e);
 
 public Q_SLOTS:
     bool show();

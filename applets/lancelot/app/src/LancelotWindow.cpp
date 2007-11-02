@@ -30,6 +30,7 @@
 #include <kworkspace/kworkspace.h>
 #include "ksmserver_interface.h"
 #include "screensaver_interface.h"
+#include "krunner_interface.h"
 
 #include <QMessageBox>
 
@@ -77,18 +78,11 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     connect(buttonSystemLogout, SIGNAL(activated()),     this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
-    buttonSystemSwitchUser->disable();
-
     setFocusPolicy(Qt::WheelFocus);
 
     // TODO : Comment the following line
     // connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
 
-}
-
-void LancelotWindow::clearFocus()
-{
-    lancelotHide(true);
 }
 
 void LancelotWindow::activated(int index)
@@ -144,22 +138,16 @@ void LancelotWindow::systemDoLogout()
 
 void LancelotWindow::systemSwitchUser()
 {
-    QMessageBox::information(NULL, "", "Lorem ipsum dolor sit amet");
     hide();
     QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
 }
 
 void LancelotWindow::systemDoSwitchUser()
 {
-    org::kde::KSMServerInterface smserver(
-        "org.kde.ksmserver",
-        "/KSMServer",
-        QDBusConnection::sessionBus()
-    );
-
-    if (smserver.isValid()) {
-        kDebug() << smserver.sessionList().value();
-        QMessageBox::information(NULL, "", smserver.sessionList().value().join(";"));
+    org::kde::krunner::Interface 
+        krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
+    if (krunner.isValid()) {
+        krunner.switchUser();
     }
 }
 
@@ -192,20 +180,15 @@ void LancelotWindow::enterEvent(QEvent * event) {
     m_hideTimer.stop();
 }
 
-void LancelotWindow::focusOutEvent(QFocusEvent * event) {
-    Q_UNUSED(event);
-    m_hovered = false;
-    kDebug() << "Window out of focus\n";
-    hide();
-}
-
 bool LancelotWindow::lancelotShow() {
     foreach (Lancelot::ExtenderButton * btn , systemButtons) {
         kDebug() << "Button's name is " << btn->name() << "\n";
     }
-    /*m_view->*/show();
+    show();
+    KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     m_hideTimer.stop();
     setFocus();
+    editSearch->setFocus();
     return true;
 }
 

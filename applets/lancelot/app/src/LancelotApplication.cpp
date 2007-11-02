@@ -48,10 +48,20 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
     init();
 }
 
+bool LancelotApplication::event(QEvent * e)
+{
+    kDebug() << e;
+    if (e->type() == QEvent::ApplicationDeactivate) {
+        hide(true);
+    }
+    return KUniqueApplication::event(e);
+    
+}
+
 void LancelotApplication::init()
 {
     window = new LancelotWindow();
-    KWindowSystem::setState( window->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
+    
     setQuitOnLastWindowClosed(false);
 
     kDebug() << "Init DBUS...\n";

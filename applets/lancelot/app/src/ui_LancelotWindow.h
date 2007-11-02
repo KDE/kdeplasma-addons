@@ -97,7 +97,7 @@ protected:
         {
             Q_UNUSED(rect); // Q_UNUSED(painter);
             painter->setCompositionMode(QPainter::CompositionMode_Source);
-            painter->fillRect(QRect(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2), Qt::transparent);
+            painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
             if (m_background) {
                 m_background->resize(QSizeF(550, 500));
                 m_background->paint(painter, 0, 0, "background");
