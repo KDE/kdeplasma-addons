@@ -113,7 +113,7 @@ public:
     virtual KIcon * icon(int index) const;
     virtual bool isCategory(int index) const;
     virtual int size() const;
-    
+
     bool hideEmptyModels() const;
     void setHideEmptyModels(bool hide);
 

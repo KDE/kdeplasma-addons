@@ -28,7 +28,7 @@ namespace Models {
 KDirWatch * FolderModel::m_dirWatch = NULL;
 
 FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
-    : m_dirPath(dirPath)
+    : m_dirPath(dirPath), m_sort(sort)
 {
     if (!m_dirPath.endsWith(QDir::separator())) {
         m_dirPath += QDir::separator();
@@ -58,7 +58,7 @@ void FolderModel::load()
 
     QStringList files = QDir(m_dirPath).entryList(
         QDir::Files | QDir::NoDotAndDotDot,
-        QDir::Name
+        m_sort
     );
 
     foreach (const QString & file, files) {

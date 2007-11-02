@@ -32,14 +32,26 @@
 
 #include "lancelotadaptor.h"
 
-
+#include "QtDisplay.h"
 
 LancelotApplication * LancelotApplication::m_application = NULL;
 
 LancelotApplication::LancelotApplication(int argc, char **argv)
     : KUniqueApplication(argc, argv), window(0), m_clientsNumber(0), m_lastID(-1)
 {
+    init();
+}
+
+LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, Qt::HANDLE colormap, bool configUnique)
+    : KUniqueApplication(display, visual, colormap, configUnique), window(0), m_clientsNumber(0), m_lastID(-1)
+{
+    init();
+}
+
+void LancelotApplication::init()
+{
     window = new LancelotWindow();
+    KWindowSystem::setState( window->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     setQuitOnLastWindowClosed(false);
 
     kDebug() << "Init DBUS...\n";
@@ -47,8 +59,6 @@ LancelotApplication::LancelotApplication(int argc, char **argv)
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
     kDebug() << "DBUS registered...\n";
-
-
 }
 
 LancelotApplication::~LancelotApplication()
@@ -80,7 +90,11 @@ int LancelotApplication::main(int argc, char **argv)
         )
     );
 
-    LancelotApplication::m_application = new LancelotApplication(argc, argv);
+    QtDisplay * dpy = new QtDisplay();
+    //KApplication app(dpy->display(),dpy->visual(),dpy->colormap());
+
+    //LancelotApplication::m_application = new LancelotApplication(argc, argv);
+    LancelotApplication::m_application = new LancelotApplication(dpy->display(),dpy->visual(),dpy->colormap());
 
     return LancelotApplication::m_application->exec();
 }

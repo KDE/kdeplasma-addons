@@ -93,7 +93,7 @@ private:
 class Global : public QObject {
 public:
     static Global * instance();
-    
+
     bool processGeometryChanges : 1;
 	bool processUpdateRequests : 1;
     bool processGroupChanges : 1;

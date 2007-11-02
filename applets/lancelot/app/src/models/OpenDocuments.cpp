@@ -28,7 +28,7 @@ OpenDocuments::OpenDocuments()
   : m_rx("([^-]+) - ([^-]*)")
 {
     m_classes << "kate" << "kwrite" << "kedit" << "VCLSalFrame" << "gimp" << "krita";
-    
+
     load();
 }
 
@@ -57,7 +57,7 @@ void OpenDocuments::load()
         TaskManager::self(), SIGNAL(taskAdded(Task::TaskPtr)),
         this, SLOT(taskAdded(Task::TaskPtr))
     );
-    
+
     connect(
         TaskManager::self(), SIGNAL(taskRemoved(Task::TaskPtr)),
         this, SLOT(taskRemoved(Task::TaskPtr))
@@ -93,7 +93,7 @@ bool OpenDocuments::setDataForTask(Task::TaskPtr task)
     Q_ASSERT(task);
 
     if (!m_classes.contains(task->className())) return false;
-    
+
     int index = indexOf(task->window());
     if (index == -1) {
         index = m_items.size();
@@ -102,21 +102,21 @@ bool OpenDocuments::setDataForTask(Task::TaskPtr task)
         );
         m_tasks[task->window()] = task;
     }
-    
+
     QString title = task->visibleName();
     QString description;
     if (m_rx.exactMatch(task->visibleName())) {
         title = m_rx.cap(1);
         description = m_rx.cap(2);
     }
-    
+
     kDebug() << task->className();
     kDebug() << task->classClass();
-    
+
     KIcon * icon = new KIcon(QIcon(task->icon(32, 32)));
-    
+
     set(index, title, description, icon, uint(task->window()));
-    
+
     return true;
 }
 

@@ -48,6 +48,12 @@ protected:
 
 private:
     LancelotApplication(int argc, char **argv);
+    LancelotApplication(Display * display,
+        Qt::HANDLE visual = 0,
+        Qt::HANDLE colormap = 0,
+        bool configUnique = false);
+    void init();
+
     virtual ~LancelotApplication();
 
     int m_clientsNumber;

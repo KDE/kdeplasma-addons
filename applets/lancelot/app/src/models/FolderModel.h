@@ -40,6 +40,7 @@ protected:
 private:
     static KDirWatch * m_dirWatch;
     QString m_dirPath;
+    QDir::SortFlags m_sort;
 
 private Q_SLOTS:
     void dirty(const QString & dirPath);

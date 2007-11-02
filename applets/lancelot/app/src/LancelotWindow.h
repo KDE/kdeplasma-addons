@@ -48,6 +48,7 @@ public:
     bool lancelotShow();
     bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
+    void clearFocus();
 
 protected:
     void leaveEvent(QEvent * event);
@@ -57,7 +58,7 @@ protected:
 private Q_SLOTS:
     void sectionActivated(const QString & item);
     void activated(int index);
-    
+
     void systemLock();
     void systemLogout();
     void systemSwitchUser();

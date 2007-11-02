@@ -25,6 +25,8 @@
 #include <kwindowsystem.h>
 #include <KIcon>
 
+#include <QVariantList>
+
 #include <plasma/svg.h>
 #include <plasma/plasma.h>
 #include <plasma/corona.h>
@@ -37,6 +39,8 @@
 #include <plasma/widgets/borderlayout.h>
 #include <plasma/widgets/nodelayout.h>
 #include <plasma/widgets/boxlayout.h>
+
+#include <plasma/containment.h>
 
 #include "ExtenderButton.h"
 #include "ToggleExtenderButton.h"
@@ -91,7 +95,9 @@ protected:
             : QGraphicsView(scene, parent), m_background(NULL) {}
         void drawBackground (QPainter * painter, const QRectF & rect)
         {
-            Q_UNUSED(rect);
+            Q_UNUSED(rect); // Q_UNUSED(painter);
+            painter->setCompositionMode(QPainter::CompositionMode_Source);
+            painter->fillRect(QRect(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2), Qt::transparent);
             if (m_background) {
                 m_background->resize(QSizeF(550, 500));
                 m_background->paint(painter, 0, 0, "background");
@@ -107,6 +113,8 @@ protected:
     CustomGraphicsView * m_view;
     Plasma::Corona     * m_corona;
     QVBoxLayout        * m_layout;
+
+    Plasma::Containment * testContainment;
 
     // Components
     Plasma::BorderLayout * layoutMain;
@@ -198,6 +206,8 @@ protected:
     {
         Q_UNUSED(object);
         kDebug() << "Ui::LancelotWindow::createObjects()\n";
+
+        testContainment = new Plasma::Containment();
 
         // Components
         layoutMain = new Plasma::BorderLayout();
@@ -345,6 +355,32 @@ protected:
 
         // Center area
         layoutCenter->setMargin(0);
+
+        //layoutCenter->addItem(testContainment);
+        //m_corona->addItem(testContainment);
+        testContainment->setFormFactor(Plasma::Planar);
+        testContainment->setLocation(Plasma::Desktop);
+        testContainment->addApplet("digital-clock");
+        testContainment->setGeometry(QRectF(0, 0, 500, 500));
+
+        Plasma::Applet * applet = Plasma::Applet::loadApplet("digital-clock");
+        //m_corona->addItem(applet);
+        applet->setParentItem(panelSectionContacts);
+        applet->setDrawStandardBackground(false);
+        applet->setGeometry(QRectF(120, 100, 120, 70));
+
+        applet = Plasma::Applet::loadApplet("clock");
+        //m_corona->addItem(applet);
+        applet->setParentItem(panelSectionContacts);
+        applet->setDrawStandardBackground(false);
+        applet->setGeometry(QRectF(0, 0, 200, 200));
+
+        applet = Plasma::Applet::loadApplet("battery");
+        //m_corona->addItem(applet);
+        applet->setParentItem(panelSectionContacts);
+        applet->setDrawStandardBackground(false);
+        applet->setGeometry(QRectF(300, 100, 120, 70));
+
         QMapIterator<QString, Lancelot::Panel *> i(sectionPanels);
         while (i.hasNext()) {
             i.next();
@@ -363,7 +399,7 @@ protected:
     void setupShell(QFrame * object) {
         kDebug() << "Ui::LancelotWindow::setupShell()\n";
 
-        object->setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+        object->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
         KWindowSystem::setState( object->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
 
         m_corona = new Plasma::Corona(object);
@@ -372,9 +408,8 @@ protected:
         object->setLayout(m_layout);
 
         m_view = new CustomGraphicsView(m_corona, object);
+        m_view->setWindowFlags(Qt::FramelessWindowHint);
         m_view->setFrameStyle(QFrame::NoFrame);
-        m_view->setCacheMode(QGraphicsView::CacheBackground);
-        m_view->setInteractive(true);
         m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

@@ -33,6 +33,9 @@ set(
   PassagewayView.cpp
   PassagewayViewModels.cpp
 
+# Display
+  QtDisplay.cpp
+
 # Models
   models/BaseModel.cpp
   models/FolderModel.cpp

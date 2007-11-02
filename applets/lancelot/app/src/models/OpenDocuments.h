@@ -48,7 +48,7 @@ private:
     bool setDataForTask(Task::TaskPtr task);
 
     int indexOf(WId wid);
-    
+
     QMap <WId, Task::TaskPtr > m_tasks;
     QSet <QString> m_classes;
     QRegExp m_rx;

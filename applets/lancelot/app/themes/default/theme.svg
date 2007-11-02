@@ -14,7 +14,7 @@
    id="svg8985"
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
-   sodipodi:docbase="/home/kde-devel/src/plasma/extragear/applets/lancelot/app/theme"
+   sodipodi:docbase="/home/kde-devel/src/plasma/extragear/applets/lancelot/app/themes/default"
    sodipodi:docname="theme.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
@@ -264,7 +264,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.1659935"
      inkscape:cx="388.88612"
-     inkscape:cy="519.9866"
+     inkscape:cy="532.02464"
      inkscape:document-units="px"
      inkscape:current-layer="background"
      inkscape:window-width="1440"
@@ -365,12 +365,14 @@
        id="background"
        inkscape:label="#g9062">
       <rect
-         style="fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#f0f0f0;fill-opacity:0;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect2652"
          width="550.5849"
          height="519.72845"
          x="113.59367"
-         y="272.51135" />
+         y="272.51135"
+         rx="0"
+         ry="0" />
       <path
          sodipodi:type="arc"
          style="fill:url(#radialGradient3214);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:4, 4;stroke-dashoffset:0;stroke-opacity:1"

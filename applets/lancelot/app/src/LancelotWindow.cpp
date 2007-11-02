@@ -38,7 +38,14 @@
 LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
   : QFrame(parent, f), m_hideTimer(this), m_hovered(false), m_sectionsSignalMapper(NULL), m_phase(NULL)
 {
+    setWindowOpacity(0.9);
     setupUi(this);
+
+    setAttribute(Qt::WA_NoSystemBackground);
+    //m_view->setAttribute(Qt::WA_NoSystemBackground);
+
+    //setAutoFillBackground(false);
+    m_view->setAutoFillBackground(false);
 
     createModels();
 
@@ -65,16 +72,23 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
 
     connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
     m_sectionsSignalMapper->setMapping(buttonSectionSystem, "Computer");
-    
+
     connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
     connect(buttonSystemLogout, SIGNAL(activated()),     this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
     buttonSystemSwitchUser->disable();
-    
+
+    setFocusPolicy(Qt::WheelFocus);
+
     // TODO : Comment the following line
     // connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
 
+}
+
+void LancelotWindow::clearFocus()
+{
+    lancelotHide(true);
 }
 
 void LancelotWindow::activated(int index)
@@ -102,7 +116,7 @@ void LancelotWindow::systemDoLock()
         "/ScreenSaver",
         QDBusConnection::sessionBus()
     );
-    
+
     if (screensaver.isValid()) {
         screensaver.Lock();
     }
@@ -189,8 +203,9 @@ bool LancelotWindow::lancelotShow() {
     foreach (Lancelot::ExtenderButton * btn , systemButtons) {
         kDebug() << "Button's name is " << btn->name() << "\n";
     }
-    show();
+    /*m_view->*/show();
     m_hideTimer.stop();
+    setFocus();
     return true;
 }
 
@@ -199,7 +214,7 @@ bool LancelotWindow::lancelotHide(bool immediate) {
         hide();
         return true;
     }
-    
+
     if (m_hovered) return false;
     m_hideTimer.start();
     return true;
