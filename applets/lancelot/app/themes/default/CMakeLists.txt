@@ -1,12 +1,7 @@
 install(FILES
-    #default_button.svg
-    #extender_button.svg
-    #action_list_view.svg
-
     theme.config
     theme.svg
 
-    widget.svg
     panel-title.svg
 
     system-buttons.svg
@@ -24,4 +19,5 @@ install(FILES
 
     extender-button-icon.svg
 
-    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/)
+    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/
+)
