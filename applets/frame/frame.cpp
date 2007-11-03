@@ -95,7 +95,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     m_swOutline = 8;
 
     //Initialize handles
-    m_handle1 = KIcon("rotate").pixmap(32,32);
+    m_handle1 = KIcon("transform-rotate").pixmap(32,32);
 
     //Initialize the slideshow timer
     slideShowTimer = new QTimer(this);
