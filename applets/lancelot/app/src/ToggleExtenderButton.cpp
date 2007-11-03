@@ -43,7 +43,6 @@ ToggleExtenderButton::ToggleExtenderButton(QString name, Plasma::Svg * icon, QSt
 
 void ToggleExtenderButton::init()
 {
-    kDebug() << "Init\n";
     connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 

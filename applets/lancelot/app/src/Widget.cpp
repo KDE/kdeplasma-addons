@@ -28,10 +28,8 @@ Widget::Widget(QString name, QGraphicsItem * parent) :
     Plasma::Widget(parent), m_hover(false), m_enabled(true),
     m_name(name), m_group(NULL)
 {
-    kDebug() << "Creating a widget " << name << "\n";
     Global::instance()->addWidget(this);
     setGroup();
-    kDebug() << "Created widget " << name << "\n";
 }
 
 Widget::~Widget()
@@ -158,7 +156,6 @@ void Widget::paintBackground (QPainter * painter, const QString & element) {
     if (!m_group) return;
 
     // Background Painting
-    kDebug() << "Painting bkg ####\n";
     if (Plasma::Svg * svg = m_group->backgroundSvg()) {
         svg->resize(size());
 

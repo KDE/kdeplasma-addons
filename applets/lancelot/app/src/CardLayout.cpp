@@ -44,11 +44,8 @@ QRectF CardLayout::geometry() const {
 void CardLayout::setGeometry(const QRectF& geometry)
 {
     if (!geometry.isValid() || geometry.isEmpty()) {
-        kDebug() << "Invalid Geometry " << geometry;
         return;
     }
-
-
 
     QRectF g = geometry;
     g.setTopLeft(g.topLeft() + QPointF(margin(), margin()));

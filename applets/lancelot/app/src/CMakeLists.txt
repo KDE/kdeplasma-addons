@@ -15,6 +15,7 @@ set(
 
   Global.cpp
   Widget.cpp
+  WidgetPositioner.cpp
 
   LancelotApplication.cpp
   LancelotWindow.cpp
@@ -49,6 +50,10 @@ set(
   models/RecentDocuments.cpp
   models/OpenDocuments.cpp
   models/NewDocuments.cpp
+
+# Runner (Search)
+  models/Runner.cpp
+
 )
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml

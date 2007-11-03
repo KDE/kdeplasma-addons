@@ -38,7 +38,6 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
         m_dirWatch = new KDirWatch();
     }
 
-    kDebug() << "Watching " << m_dirPath;
     m_dirWatch->addDir(m_dirPath);
 
     connect (m_dirWatch, SIGNAL(dirty(const QString &)), this, SLOT(dirty(const QString &)));
@@ -54,8 +53,6 @@ void FolderModel::load()
 {
     m_items.clear();
 
-    kDebug() << m_dirPath;
-
     QStringList files = QDir(m_dirPath).entryList(
         QDir::Files | QDir::NoDotAndDotDot,
         m_sort
@@ -68,7 +65,6 @@ void FolderModel::load()
 
 void FolderModel::dirty(const QString & dirPath)
 {
-    kDebug() << dirPath << " is dirty and we want " << m_dirPath;
     if (m_dirPath == dirPath) {
         load();
     }

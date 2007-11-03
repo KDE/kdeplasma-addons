@@ -432,16 +432,13 @@ void ActionListView::deleteAllButtons()
 }
 
 void ActionListView::initialButtonsCreation() {
-    kDebug() << "Invoked\n";
     if (m_initialButtonsCreationRunning) return;
     m_initialButtonsCreationRunning = true;
     calculateItemHeight();
 
-    kDebug() << "Deleting buttons\n";
     deleteAllButtons();
     if (!m_model) return;
 
-    kDebug() << "Processing\n";
     int listHeight = qRound(geometry().height());
 
     if (!addButton(End)) return; // The model is empty or something else is wrong
@@ -538,7 +535,6 @@ int ActionListView::calculateItemHeight()
 
     int listHeight = qRound(geometry().height());
     int categoriesHeight = 0, items = 0;
-    kDebug() << "cih\n";
     for (int i = 0; i < m_model->size(); i++) {
         if (m_model->isCategory(i)) {
             categoriesHeight += m_categoryItemHeight;
@@ -547,11 +543,8 @@ int ActionListView::calculateItemHeight()
         }
         if (categoriesHeight + items * m_minimumItemHeight > listHeight) {
             return m_currentItemHeight = m_preferredItemHeight;
-            kDebug() << "cih1.5\n";
-
         }
     }
-    kDebug() << "cih2\n";
 
     if (items == 0) return 0;
 

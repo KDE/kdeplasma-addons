@@ -26,6 +26,7 @@
 #include <KIcon>
 
 #include <QVariantList>
+#include <klineedit.h>
 
 #include <plasma/svg.h>
 #include <plasma/plasma.h>
@@ -34,7 +35,7 @@
 #include <plasma/widgets/pushbutton.h>
 //#include <plasma/widgets/icon.h>
 #include <plasma/widgets/label.h>
-#include <plasma/widgets/lineedit.h>
+//#include <plasma/widgets/lineedit.h>
 
 #include <plasma/widgets/borderlayout.h>
 #include <plasma/widgets/nodelayout.h>
@@ -42,6 +43,7 @@
 
 #include <plasma/containment.h>
 
+#include "WidgetPositioner.h"
 #include "ExtenderButton.h"
 #include "ToggleExtenderButton.h"
 #include "ActionListView.h"
@@ -141,8 +143,11 @@ protected:
     // Search area
     Plasma::NodeLayout * layoutSearch;
     Lancelot::Panel * panelSearch;
-    Plasma::LineEdit * editSearch;
     Plasma::Label * labelSearch;
+
+    //Plasma::LineEdit * editSearch;
+    Lancelot::WidgetPositioner * editSearchPositioner;
+    KLineEdit * editSearch;
 
     // Center area
     QStringList sections;
@@ -154,7 +159,7 @@ protected:
     // Center area :: Search
     Lancelot::Panel * panelSectionSearch;
     Plasma::NodeLayout * layoutSectionSearch;
-    Lancelot::ActionListView * listSectionSearchLeft;   // Applications... maybe something more
+    Lancelot::ActionListView * listSectionSearchLeft;   // KRunner
     Lancelot::ActionListView * listSectionSearchRight;  // Strigi results
 
     // Center area :: System
@@ -185,7 +190,6 @@ protected:
 
     void setupUi(QFrame * object)
     {
-        kDebug() << "Ui::LancelotWindow::setupUi() {\n";
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -199,13 +203,11 @@ protected:
         layoutMain->setGeometry(QRectF(0, 0, 550, 500));
 
         m_corona->setSceneRect(QRectF(0, 0, 550, 500));
-        kDebug() << "} // Ui::LancelotWindow::setupUi()\n";
     }
 
     void createObjects(QFrame * object)
     {
         Q_UNUSED(object);
-        kDebug() << "Ui::LancelotWindow::createObjects()\n";
 
         testContainment = new Plasma::Containment();
 
@@ -243,7 +245,10 @@ protected:
         layoutSearch = new Plasma::NodeLayout();
         panelSearch = new Lancelot::Panel("panelSearch");
 
-        editSearch = new Plasma::LineEdit(panelSearch);
+        // editSearch = new Plasma::LineEdit(panelSearch); // Upgrading to KLineEdit...
+        editSearch = new KLineEdit(object);
+        editSearchPositioner = new Lancelot::WidgetPositioner(editSearch, m_view, panelSearch);
+
         labelSearch = new Plasma::Label(panelSearch);
 
         // Main area
@@ -257,7 +262,7 @@ protected:
             new Lancelot::Panel("panelSectionDocuments", new KIcon("applications-office"), i18n("Documents")));
         sectionPanels.insert("Computer", panelSectionSystem =
             new Lancelot::Panel("panelSectionSystem", new KIcon("video-display"), i18n("Computer")));
-        sectionPanels.insert("Serch", panelSectionSearch =
+        sectionPanels.insert("Search", panelSectionSearch =
             new Lancelot::Panel("panelSectionSearch", new KIcon("find"), i18n("Search")));
 
         // Center area :: Sections
@@ -270,7 +275,6 @@ protected:
     void setupGroups(QFrame * object)
     {
         Q_UNUSED(object);
-        kDebug() << "Ui::LancelotWindow::setupGroups()\n";
 
         foreach (Lancelot::ExtenderButton * button, systemButtons) {
             button->setGroupByName("SystemButtons");
@@ -284,7 +288,6 @@ protected:
     void setupObjects(QFrame * object)
     {
         Q_UNUSED(object);
-        kDebug() << "Ui::LancelotWindow::setupObjects()\n";
 
         layoutMain->setSpacing(4);
         layoutMain->setMargin(15);
@@ -340,7 +343,7 @@ protected:
         // Search area
         layoutMain->addItem(panelSearch, Plasma::TopPositioned);
 
-        layoutSearch->addItem(editSearch,
+        layoutSearch->addItem(editSearchPositioner,
             Plasma::NodeLayout::NodeCoordinate(0.5, 0.5, 0, 0),
             Plasma::NodeLayout::NodeCoordinate(1.0, 0.5, -10, INFINITY)
         );
@@ -352,6 +355,11 @@ protected:
 
         panelSearch->setLayout(layoutSearch);
         m_corona->addItem(panelSearch);
+
+        delete object->layout();
+
+        editSearch->setClearButtonShown(true);
+        editSearch->setFrame(false);
 
         // Center area
         layoutCenter->setMargin(0);
@@ -386,7 +394,6 @@ protected:
             i.next();
             layoutCenter->addItem(i.value(), i.key());
             m_corona->addItem(i.value());
-            //kDebug() << "Adding " << panel->title() << " to card layout\n";
         }
         layoutMain->addItem(layoutCenter, Plasma::CenterPositioned);
 
@@ -397,10 +404,8 @@ protected:
     }
 
     void setupShell(QFrame * object) {
-        kDebug() << "Ui::LancelotWindow::setupShell()\n";
-
         object->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
-        KWindowSystem::setState( object->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
+        KWindowSystem::setState(object->winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove);
 
         m_corona = new Plasma::Corona(object);
         m_layout = new QVBoxLayout(object);

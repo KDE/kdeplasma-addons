@@ -58,7 +58,6 @@ WidgetGroup::WidgetGroup(QString name)
     // TODO : Add caching?
     //m_cachedBackgroundNormal(NULL), m_cachedBackgroundActive(NULL), m_cachedBackgroundDisabled(NULL)
 {
-    kDebug() << "Creating group named " << name << "\n";
     m_confGroupTheme = new KConfigGroup(Global::instance()->theme(), "Group-" + name);
 }
 
@@ -133,7 +132,6 @@ const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
 
 void WidgetGroup::loadAll()
 {
-    kDebug() << "Load all\n";
     foreach(WidgetGroup * group, m_groups) {
         group->load();
     }
@@ -161,8 +159,6 @@ void WidgetGroup::load(bool full)
     if (m_loaded && !full) return;
     m_loaded = true;
 
-    kDebug() << "Loading group " << m_name << "\n";
-
     m_hasBackgroundColor = false;
     if (m_ownsBackgroundSvg) {
         delete m_backgroundSvg;
@@ -172,7 +168,6 @@ void WidgetGroup::load(bool full)
     WidgetGroup * group;
 
     if (!m_confGroupTheme->exists()) {
-        kDebug() << "This (" << m_name << ") group is not defined in the theme. Loading the default group.\n";
         group = WidgetGroup::defaultGroup();
         if (group == this) return;
 
@@ -192,9 +187,7 @@ void WidgetGroup::load(bool full)
     m_foregroundColor.disabled = m_confGroupTheme->readEntry("foreground.color.disabled", m_foregroundColor.disabled);
 
     QString type = m_confGroupTheme->readEntry("background.type", "none");
-    kDebug() << "Background for group " << m_name << " is of " << type << " type\n";
     if (type == "color") {
-        kDebug() << "Background for group " << m_name << " is a color scheme\n";
         m_hasBackgroundColor       = true;
         m_backgroundColor.normal   = m_confGroupTheme->readEntry("background.color.normal",   m_backgroundColor.normal);
         m_backgroundColor.active   = m_confGroupTheme->readEntry("background.color.active",   m_backgroundColor.active);
@@ -203,13 +196,11 @@ void WidgetGroup::load(bool full)
         if (m_ownsBackgroundSvg) {
             delete m_backgroundSvg;
         }
-        kDebug() << "Background for group " << m_name << " is " << m_confGroupTheme->readEntry("background.svg") << "\n";
         m_backgroundSvg = new Plasma::Svg(m_confGroupTheme->readEntry("background.svg"));
         m_ownsBackgroundSvg = true;
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
 
-    kDebug() << "Notifying objects\n";
     foreach (Widget * widget, m_widgets) {
         widget->groupUpdated();
     }
@@ -254,7 +245,6 @@ Global::Global()
     QString search = "desktoptheme/" + Plasma::Theme::self()->themeName() + "/lancelot/theme.config";
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
-        kDebug() << "Error: No theme configuration file: " << search << "\n";
         path = "lancelotrc";
     }
     m_confTheme = new KConfig(path);

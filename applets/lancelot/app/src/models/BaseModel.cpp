@@ -23,7 +23,6 @@
 
 #include <KRun>
 #include <KLocalizedString>
-#include <KDebug>
 #include <KDesktopFile>
 #include <KIcon>
 #include <KGlobal>
@@ -43,7 +42,6 @@ BaseModel::~BaseModel()
 
 void BaseModel::activate(int index)
 {
-    kDebug() << m_items.at(index).data.toString() << "\n";
     new KRun(KUrl(m_items.at(index).data.toString()), 0);
     LancelotApplication::application()->hide(true);
 }
@@ -77,7 +75,6 @@ void BaseModel::addUrl(const QString & url)
 
 void BaseModel::addUrl(const KUrl & url)
 {
-    kDebug() << url;
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
 
         // .desktop files may be services (type field == 'Application' or 'Service')

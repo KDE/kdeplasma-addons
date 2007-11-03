@@ -20,7 +20,6 @@
 
 #include "Devices.h"
 #include <KRun>
-#include <KDebug>
 #include <KLocalizedString>
 
 #include <solid/device.h>
@@ -39,12 +38,10 @@ Devices::Devices(Type filter)
 {
     load();
 
-    kDebug() << "connecting\n";
-    kDebug() << connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),
-            this, SLOT(deviceAdded(QString)));
-    kDebug() << connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(QString)),
-            this, SLOT(deviceRemoved(QString)));
-    kDebug() << "connected\n";
+    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),
+        this, SLOT(deviceAdded(QString)));
+    connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(QString)),
+        this, SLOT(deviceRemoved(QString)));
 }
 
 Devices::~Devices()
@@ -54,7 +51,6 @@ Devices::~Devices()
 void Devices::deviceRemoved(const QString & udi)
 {
     // TODO: implement
-    kDebug() << "deviceRemoved " << udi << "\n";
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -73,7 +69,6 @@ void Devices::deviceRemoved(const QString & udi)
 
 void Devices::deviceAdded(const QString & udi)
 {
-    kDebug() << "deviceAdded " << udi << "\n";
     addDevice(Solid::Device(udi));
 }
 
@@ -121,7 +116,6 @@ void Devices::udiAccessibilityChanged(bool accessible)
         return;
     }
     QString udi = m_udis[access];
-    kDebug() << udi << "\n";
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -132,7 +126,6 @@ void Devices::udiAccessibilityChanged(bool accessible)
         }
         ++index;
     }
-    kDebug() << index << "\n";
 
     m_items[index].description = StringCoalesce(access->filePath(), i18n("Unmounted"));
     emit itemAltered(index);

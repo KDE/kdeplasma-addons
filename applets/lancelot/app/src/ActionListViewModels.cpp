@@ -95,14 +95,12 @@ int StandardActionListViewModel::size() const
 
 void StandardActionListViewModel::add(const Item & item)
 {
-    kDebug() << item.title;
     m_items.append(item);
     emit itemInserted(m_items.size() - 1);
 }
 
 void StandardActionListViewModel::add(const QString & title, const QString & description, KIcon * icon, const QVariant & data)
 {
-    kDebug() << title;
     m_items.append(Item(title, description, icon, data));
     emit itemInserted(m_items.size() - 1);
 }
@@ -140,13 +138,11 @@ MergedActionListViewModel::~MergedActionListViewModel()
 
 void MergedActionListViewModel::modelUpdated()
 {
-    kDebug();
     emit updated();
 }
 
 void MergedActionListViewModel::modelItemInserted(int modelIndex)
 {
-    kDebug();
     if (!sender()) return;
 
     ActionListViewModel * m = (ActionListViewModel *)sender();
@@ -164,7 +160,6 @@ void MergedActionListViewModel::modelItemInserted(int modelIndex)
 
 void MergedActionListViewModel::modelItemDeleted(int modelIndex)
 {
-    kDebug();
     if (!sender()) return;
 
     ActionListViewModel * m = (ActionListViewModel *)sender();
@@ -182,7 +177,6 @@ void MergedActionListViewModel::modelItemDeleted(int modelIndex)
 
 void MergedActionListViewModel::modelItemAltered(int modelIndex)
 {
-    kDebug();
     if (!sender()) return;
 
     int model = m_models.indexOf((ActionListViewModel *)sender());
@@ -327,7 +321,6 @@ void MergedActionListViewModel::setHideEmptyModels(bool hide)
     m_hideEmptyModels = hide;
     emit updated();
 }
-
 
 }
 

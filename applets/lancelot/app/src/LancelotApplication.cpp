@@ -50,25 +50,22 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
 
 bool LancelotApplication::event(QEvent * e)
 {
-    kDebug() << e;
     if (e->type() == QEvent::ApplicationDeactivate) {
         hide(true);
     }
     return KUniqueApplication::event(e);
-    
+
 }
 
 void LancelotApplication::init()
 {
     window = new LancelotWindow();
-    
+
     setQuitOnLastWindowClosed(false);
 
-    kDebug() << "Init DBUS...\n";
     new AppAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
-    kDebug() << "DBUS registered...\n";
 }
 
 LancelotApplication::~LancelotApplication()
@@ -111,13 +108,11 @@ int LancelotApplication::main(int argc, char **argv)
 
 bool LancelotApplication::show()
 {
-    kDebug() << "DCOP CALL SHOW\n";
     return window->lancelotShow();
 }
 
 bool LancelotApplication::hide(bool immediate)
 {
-    kDebug() << "DCOP CALL HIDE\n";
     return window->lancelotHide(immediate);
 }
 
@@ -140,4 +135,10 @@ bool LancelotApplication::removeClient(int id)
     m_clientsNumber--;
     m_clients.remove(id);
     return true;
+}
+
+void LancelotApplication::search(const QString & string)
+{
+    Q_ASSERT(window);
+    window->search(string);
 }

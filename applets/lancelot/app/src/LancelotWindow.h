@@ -33,6 +33,7 @@
 #include "models/OpenDocuments.h"
 #include "models/NewDocuments.h"
 #include "models/FolderModel.h"
+#include "models/Runner.h"
 
 namespace Plasma {
     class Phase;
@@ -53,9 +54,13 @@ protected:
     void leaveEvent(QEvent * event);
     void enterEvent(QEvent * event);
 
+public Q_SLOTS:
+    void search(const QString & string);
+
 private Q_SLOTS:
     void sectionActivated(const QString & item);
-    void activated(int index);
+
+    void doSearch();
 
     void systemLock();
     void systemLogout();
@@ -85,11 +90,17 @@ private:
     Lancelot::Models::OpenDocuments     * m_openDocumentsModel;
     Lancelot::Models::NewDocuments      * m_newDocumentsModel;
 
+    // Search models
+    Lancelot::Models::Runner            * m_runnerModel;
+
     //Lancelot::Models::Devices           * m_devicesModelFixed;
     //Lancelot::Models::Places            * m_placesModel;
     //Lancelot::Models::SystemServices    * m_systemServicesModel;
 
     QTimer m_hideTimer;
+    QTimer m_searchTimer;
+    QString m_searchString;
+
     bool m_hovered;
     QSignalMapper * m_sectionsSignalMapper;
     Plasma::Phase * m_phase;

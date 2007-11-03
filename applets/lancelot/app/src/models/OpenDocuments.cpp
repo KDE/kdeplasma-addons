@@ -110,9 +110,6 @@ bool OpenDocuments::setDataForTask(Task::TaskPtr task)
         description = m_rx.cap(2);
     }
 
-    kDebug() << task->className();
-    kDebug() << task->classClass();
-
     KIcon * icon = new KIcon(QIcon(task->icon(32, 32)));
 
     set(index, title, description, icon, uint(task->window()));

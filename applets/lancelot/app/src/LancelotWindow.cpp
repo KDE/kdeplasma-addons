@@ -32,8 +32,6 @@
 #include "screensaver_interface.h"
 #include "krunner_interface.h"
 
-#include <QMessageBox>
-
 #define HIDE_TIMER_INTERVAL 2000
 
 LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
@@ -50,8 +48,13 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
 
     createModels();
 
+    connect(& m_searchTimer, SIGNAL(timeout()), this, SLOT(doSearch()));
+    m_searchTimer.setInterval(200);
+    m_searchTimer.setSingleShot(true);
+
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
+    m_hideTimer.setSingleShot(true);
 
     m_phase = new Plasma::Phase(this);
 
@@ -80,16 +83,7 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
 
     setFocusPolicy(Qt::WheelFocus);
 
-    // TODO : Comment the following line
-    // connect(listSectionSystemLeft, SIGNAL(activated(int)), this, SLOT(activated(int)));
-
 }
-
-void LancelotWindow::activated(int index)
-{
-    kDebug() << index << " is activated\n";
-}
-
 
 void LancelotWindow::systemLock()
 {
@@ -144,7 +138,7 @@ void LancelotWindow::systemSwitchUser()
 
 void LancelotWindow::systemDoSwitchUser()
 {
-    org::kde::krunner::Interface 
+    org::kde::krunner::Interface
         krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
     if (krunner.isValid()) {
         krunner.switchUser();
@@ -152,7 +146,6 @@ void LancelotWindow::systemDoSwitchUser()
 }
 
 void LancelotWindow::sectionActivated(const QString & item) {
-    kDebug() << item << " is activated\n";
     foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
         button->setPressed(false);
     }
@@ -169,21 +162,16 @@ LancelotWindow::~LancelotWindow() {
 void LancelotWindow::leaveEvent(QEvent * event) {
     Q_UNUSED(event);
     m_hovered = false;
-    kDebug() << "Mouse has left Lancelot window\n";
     m_hideTimer.start();
 }
 
 void LancelotWindow::enterEvent(QEvent * event) {
     Q_UNUSED(event);
     m_hovered = true;
-    kDebug() << "Mouse has entered Lancelot window\n";
     m_hideTimer.stop();
 }
 
 bool LancelotWindow::lancelotShow() {
-    foreach (Lancelot::ExtenderButton * btn , systemButtons) {
-        kDebug() << "Button's name is " << btn->name() << "\n";
-    }
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     m_hideTimer.stop();
@@ -251,5 +239,31 @@ void LancelotWindow::createModels() {
         m_openDocumentsModel = new Lancelot::Models::OpenDocuments()
     );
     listSectionDocumentsRight->setModel(m_documentsRightModel);
+
+    // Search Models
+    m_runnerModel = new Lancelot::Models::Runner();
+    listSectionSearchLeft->setModel(m_runnerModel);
+    connect(
+        editSearch, SIGNAL(textChanged(const QString &)),
+        this, SLOT(search(const QString &))
+    );
+
+}
+
+void LancelotWindow::search(const QString & string)
+{
+    if (editSearch->text() != string) {
+        editSearch->setText(string);
+    }
+    m_searchTimer.stop();
+    m_searchString = string;
+    m_searchTimer.start();
+}
+
+void LancelotWindow::doSearch()
+{
+    m_searchTimer.stop();
+    m_runnerModel->setSearchString(m_searchString);
+    sectionActivated("Search");
 }
 

@@ -33,13 +33,14 @@ class LancelotApplication: public KUniqueApplication
 public:
 	static int main(int argc, char **argv);
 	static LancelotApplication * application();
-	
+
 	bool event(QEvent * e);
 
 public Q_SLOTS:
     bool show();
     bool hide(bool immediate = false);
     bool showItem(QString name);
+    void search(const QString & string);
 
     int addClient();
     bool removeClient(int id);
