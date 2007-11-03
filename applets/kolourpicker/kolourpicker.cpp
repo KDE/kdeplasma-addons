@@ -122,7 +122,7 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     menu->addTitle(i18n("History"));
     m_historyMenu = menu;
     m_historyMenu->addSeparator();
-    QAction *act = m_historyMenu->addAction(KIcon("history-clear"), i18n("Clear History"));
+    QAction *act = m_historyMenu->addAction(KIcon("edit-clear-history"), i18n("Clear History"));
     connect(act, SIGNAL(triggered(bool)), this, SLOT(clearHistory()));
 
     resize(QSizeF(22, 50));
