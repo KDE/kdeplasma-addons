@@ -33,13 +33,11 @@
 #include <plasma/corona.h>
 
 #include <plasma/widgets/pushbutton.h>
-//#include <plasma/widgets/icon.h>
 #include <plasma/widgets/label.h>
-//#include <plasma/widgets/lineedit.h>
 
 #include <plasma/widgets/borderlayout.h>
 #include <plasma/widgets/nodelayout.h>
-#include <plasma/widgets/boxlayout.h>
+//#include <plasma/widgets/boxlayout.h>
 
 #include <plasma/containment.h>
 
@@ -131,7 +129,7 @@ protected:
     Lancelot::ExtenderButton * buttonSystemSwitchUser;
 
     // Sections area
-    Plasma::VBoxLayout * layoutSections;
+    Plasma::NodeLayout * layoutSections; // was VBoxLaoyut
     Lancelot::Panel * panelSections;
 
     QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
@@ -229,7 +227,7 @@ protected:
         // sections << "Applications" << "Computer" << "Contacts" << "Documents"; // << "Search";
         sections << "Documents" << "Contacts" << "Computer" << "Applications"; // << "Search";
 
-        layoutSections = new Plasma::VBoxLayout();
+        layoutSections = new Plasma::NodeLayout();
         panelSections = new Lancelot::Panel("panelSections");
 
         sectionButtons.insert("Computer", buttonSectionSystem =
@@ -328,6 +326,8 @@ protected:
         layoutMain->addItem(panelSections, Plasma::LeftPositioned);
         layoutSections->setSpacing(0);
         layoutSections->setMargin(0);
+        
+        qreal top = 0;
 
         foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
             button->setActivationMethod(Lancelot::ExtenderButton::Hover);
@@ -335,7 +335,11 @@ protected:
             button->setZValue(1);
             button->setInnerOrientation(Lancelot::BaseActionWidget::Vertical);
 
-            layoutSections->addItem(button);
+            layoutSections->addItem(button,
+                Plasma::NodeLayout::NodeCoordinate(0, top),
+                Plasma::NodeLayout::NodeCoordinate(1.0, top + 0.25)        
+            );
+            top += 0.25;
         }
         panelSections->setLayout(layoutSections);
         m_corona->addItem(panelSections);
