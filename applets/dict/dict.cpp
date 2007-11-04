@@ -131,7 +131,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 void Dict::pageRight()
 {
     m_leftArrow->show();
-    kDebug()<< "right\n";
+    kDebug()<< "right";
     if (m_i != --m_defList.end())
         m_i++;
     m_defEdit->setHtml(*m_i);
@@ -143,7 +143,7 @@ void Dict::pageRight()
 void Dict::pageLeft()
 {
     m_rightArrow->show();
-    kDebug()<< "left\n";
+    kDebug()<< "left";
     if (m_i != m_defList.begin())
         m_i--;
     m_defEdit->setHtml(*m_i);
@@ -154,7 +154,7 @@ void Dict::pageLeft()
 
 void Dict::linkDefine(const QString &text)
 {
-    kDebug() <<"ACTIVATED\n";
+    kDebug() <<"ACTIVATED";
     m_wordEdit->setPlainText(text);
     define();
 }
