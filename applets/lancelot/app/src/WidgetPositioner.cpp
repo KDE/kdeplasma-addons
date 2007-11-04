@@ -12,11 +12,6 @@ WidgetPositioner::~WidgetPositioner()
 {
 }
 
-void WidgetPositioner::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
-{
-    painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(0,0,0)));
-}
-
 void WidgetPositioner::setGeometry(const QRectF & geometry)
 {
     m_geometry = geometry;

@@ -71,8 +71,8 @@
         Plasma::NodeLayout::NodeCoordinate(0.5, 0, 4, 0), \
         Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0) \
     ); \
-    (listSection ## SECTION ## Left)->setItemsGroup(Lancelot::WidgetGroup::group("ActionListView-Left-Items")); \
-    (listSection ## SECTION ## Right)->setItemsGroup(Lancelot::WidgetGroup::group("ActionListView-Right-Items")); \
+    (listSection ## SECTION ## Left)->setItemsGroup(instance->group("ActionListView-Left-Items")); \
+    (listSection ## SECTION ## Right)->setItemsGroup(instance->group("ActionListView-Right-Items")); \
     (listSection ## SECTION ## Left)->setExtenderPosition(Lancelot::ExtenderButton::Left); \
     (listSection ## SECTION ## Right)->setExtenderPosition(Lancelot::ExtenderButton::Right); \
     (panelSection ## SECTION)->setLayout(layoutSection ## SECTION);
@@ -108,6 +108,8 @@ protected:
         Plasma::Svg * m_background;
         friend class LancelotWindow;
     };
+    
+    Lancelot::Instance * instance;
 
     Plasma::Svg * m_mainTheme;
     CustomGraphicsView * m_view;
@@ -188,6 +190,9 @@ protected:
 
     void setupUi(QFrame * object)
     {
+        // First of all we MUST create a Lancelot::Instance
+        instance = new Lancelot::Instance();
+        
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -196,7 +201,7 @@ protected:
 
         object->resize(550, 500);
 
-        Lancelot::Global::instance()->activateAll();
+        instance->activateAll();
 
         layoutMain->setGeometry(QRectF(0, 0, 550, 500));
 

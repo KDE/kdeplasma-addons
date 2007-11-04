@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=lancelot
+
+Name=Lancelot Part
+
+Comment=Parts of Lancelot menu on the desktop
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_lancelot_part
+X-KDE-PluginInfo-Author=Ivan Cukic
+X-KDE-PluginInfo-Email=ivan.cukic+kde@gmail.com
+X-KDE-PluginInfo-Name=plasma_applet_lancelot_part
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Windows and Tasks
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -17,38 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_BASEMODEL_H_
-#define LANCELOT_MODELS_BASEMODEL_H_
+#include "lancelot.h"
+#include "KDebug"
+#include "KIcon"
 
-#include "../LancelotApplication.h"
-#include "../ActionListViewModels.h"
-#include <KService>
-#include <KUrl>
+#include "../src/Global.h"
+#include "../src/ActionListView.h"
+#include "../src/models/Places.h"
 
-namespace Lancelot {
-namespace Models {
-
-class BaseModel : public StandardActionListViewModel {
-    Q_OBJECT
-public:
-    BaseModel();
-    virtual ~BaseModel();
-
-protected:
-    virtual void activate(int index);
-    virtual void load() = 0;
-
-    void addService(const QString & service);
-    void addService(const KService::Ptr & service);
-
-    void addUrl(const QString & url);
-    void addUrl(const KUrl & url);
+LancelotPart::LancelotPart(QObject *parent, const QVariantList &args) :
+    Plasma::Applet(parent, args)
+{
+    setDrawStandardBackground(true);
+    new Lancelot::Instance();
+    Lancelot::ActionListView * list = new Lancelot::ActionListView("Noname", new Lancelot::Models::Places(), this);
+    list->setGeometry(QRectF(0,0, 200,300));
     
-    void hideLancelotWindow();
-    void changeLancelotSearchString(const QString & string);
-};
-
-}
+    setAcceptsHoverEvents(true);
 }
 
-#endif /* LANCELOT_MODELS_BASEMODEL_H_ */
+LancelotPart::~LancelotPart() {
+}
+
+QSizeF LancelotPart::contentSizeHint () const {
+    return QSizeF(200, 300);
+}
+
+
+#include "lancelot.moc"

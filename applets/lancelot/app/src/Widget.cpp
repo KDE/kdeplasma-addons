@@ -24,12 +24,21 @@
 
 namespace Lancelot {
 
-Widget::Widget(QString name, QGraphicsItem * parent) :
-    Plasma::Widget(parent), m_hover(false), m_enabled(true),
-    m_name(name), m_group(NULL)
+WidgetCore::WidgetCore()
+: m_group(NULL)
 {
-    Global::instance()->addWidget(this);
-    setGroup();
+}
+
+WidgetCore::~WidgetCore()
+{
+}
+
+Widget::Widget(QString name, QGraphicsItem * parent) :
+    WidgetCore(), Plasma::Widget(parent), m_hover(false), m_enabled(true),
+    m_name(name)
+{
+    Instance::activeInstance()->addWidget(this);
+    m_group = Instance::activeInstance()->defaultGroup();
 }
 
 Widget::~Widget()
@@ -55,13 +64,13 @@ void Widget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 
 void Widget::setGroupByName(const QString & groupName)
 {
-    setGroup(WidgetGroup::group(groupName));
+    setGroup(instance()->group(groupName));
 }
 
 void Widget::setGroup(WidgetGroup * group)
 {
     if (group == NULL) {
-        group = WidgetGroup::defaultGroup();
+        group = instance()->defaultGroup();
     }
 
     if (group == m_group) return;
@@ -75,8 +84,16 @@ void Widget::setGroup(WidgetGroup * group)
     groupUpdated();
 }
 
-WidgetGroup * Widget::group() {
+WidgetGroup * Widget::group()
+{
     return m_group;
+}
+
+Instance * Widget::instance()
+{
+    if (!m_group) return Instance::activeInstance();
+    
+    return m_group->m_instance;
 }
 
 void Widget::groupUpdated()
@@ -96,21 +113,21 @@ void Widget::setName(QString name)
 
 void Widget::setGeometry(const QRectF & geometry)
 {
-    if (!Global::instance()->processGeometryChanges)
+    if (!m_group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::setGeometry(geometry);
 }
 
 void Widget::update(const QRectF &rect)
 {
-    if (!Global::instance()->processGeometryChanges)
+    if (!m_group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::update(rect);
 }
 
 void Widget::update(qreal x, qreal y, qreal w, qreal h)
 {
-    if (!Global::instance()->processGeometryChanges)
+    if (!m_group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::update(x, y, w, h);
 }

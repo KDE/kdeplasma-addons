@@ -43,7 +43,17 @@ BaseModel::~BaseModel()
 void BaseModel::activate(int index)
 {
     new KRun(KUrl(m_items.at(index).data.toString()), 0);
-    LancelotApplication::application()->hide(true);
+    hideLancelotWindow();
+}
+
+void BaseModel::hideLancelotWindow()
+{
+    LancelotApplication::hide(true);
+}
+
+void BaseModel::changeLancelotSearchString(const QString & string)
+{
+    LancelotApplication::search(string);
 }
 
 void BaseModel::addService(const QString & serviceName)

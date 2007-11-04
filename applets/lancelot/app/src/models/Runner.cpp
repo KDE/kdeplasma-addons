@@ -105,10 +105,10 @@ void Runner::activate(int index)
     }
 
     if (action->type() == Plasma::SearchAction::InformationalMatch) {
-        LancelotApplication::application()->search(action->data().toString());
+        changeLancelotSearchString(action->data().toString());
     } else {
         action->activate( QAction::Trigger );
-        LancelotApplication::application()->hide(true);
+        hideLancelotWindow();
     }
 
 }

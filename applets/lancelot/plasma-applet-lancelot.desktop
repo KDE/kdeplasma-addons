@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Icon=lancelot
 
-Name=Lancelot
+Name=Lancelot Launcher
 Name[bg]=Ланселот
 
 Comment=Launcher to start applications
@@ -28,6 +28,6 @@ X-KDE-PluginInfo-Name=plasma_applet_lancelot
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Windows and Tasks
-X-KDE-PluginInfo-Depends=filebrowser
+X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true

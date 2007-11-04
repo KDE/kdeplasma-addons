@@ -109,6 +109,8 @@ void Devices::addDevice(const Solid::Device & device)
 
 void Devices::udiAccessibilityChanged(bool accessible)
 {
+    Q_UNUSED(accessible);
+    
     Solid::StorageAccess * access = (Solid::StorageAccess *) sender();
     if (!m_udis.contains(access)) {
         return;
@@ -143,7 +145,10 @@ void Devices::load()
 
 void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
 {
-
+    Q_UNUSED(mountPoint);
+    Q_UNUSED(kbSize);
+    Q_UNUSED(kbUsed);
+    Q_UNUSED(kbAvailable);
 }
 
 void Devices::activate(int index)
@@ -158,7 +163,7 @@ void Devices::activate(int index)
     }
 
     new KRun(KUrl(access->filePath()), 0);
-    LancelotApplication::application()->hide(true);
+    hideLancelotWindow();
 }
 
 }

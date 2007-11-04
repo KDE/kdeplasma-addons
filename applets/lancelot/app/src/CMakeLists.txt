@@ -9,6 +9,8 @@ ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${PLASMA_INCLUDE_DIR})
 
+# Lancelot Menu
+
 set(
   plasma_lancelot_SRCS
   main.cpp
@@ -84,3 +86,30 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION $
 
 ########### install applicaiton ###############
 install(TARGETS lancelot DESTINATION ${BIN_INSTALL_DIR} )
+
+
+# Lancelot Part Applet
+
+## add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+
+#include_directories(
+#  ${CMAKE_SOURCE_DIR}
+#  ${CMAKE_BINARY_DIR}
+#  ${KDE4_INCLUDES}
+#)
+
+set(plasma_applet_lancelot_part_SRCS ${plasma_lancelot_SRCS} parts/lancelot.cpp)
+
+kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
+
+target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${KDE4_KIO_LIBS} taskmanager)
+
+install(
+  TARGETS plasma_applet_lancelot_part
+  DESTINATION ${PLUGIN_INSTALL_DIR}
+)
+
+install(
+ FILES parts/plasma-applet-lancelot-part.desktop
+ DESTINATION ${SERVICES_INSTALL_DIR}
+)

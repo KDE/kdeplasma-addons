@@ -17,38 +17,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_BASEMODEL_H_
-#define LANCELOT_MODELS_BASEMODEL_H_
+#ifndef LANCELOT_PARTS_H
+#define LANCELOT_PARTS_H
 
-#include "../LancelotApplication.h"
-#include "../ActionListViewModels.h"
-#include <KService>
-#include <KUrl>
+#include <Plasma/Applet>
 
-namespace Lancelot {
-namespace Models {
+class QDBusInterface;
 
-class BaseModel : public StandardActionListViewModel {
+class LancelotPart : public Plasma::Applet
+{
     Q_OBJECT
 public:
-    BaseModel();
-    virtual ~BaseModel();
+    LancelotPart(QObject * parent, const QVariantList &args);
+    ~LancelotPart();
+
+    QSizeF contentSizeHint () const;
 
 protected:
-    virtual void activate(int index);
-    virtual void load() = 0;
 
-    void addService(const QString & service);
-    void addService(const KService::Ptr & service);
-
-    void addUrl(const QString & url);
-    void addUrl(const KUrl & url);
+private:
     
-    void hideLancelotWindow();
-    void changeLancelotSearchString(const QString & string);
 };
 
-}
-}
+K_EXPORT_PLASMA_APPLET(lancelot-part, LancelotPart)
 
-#endif /* LANCELOT_MODELS_BASEMODEL_H_ */
+#endif

@@ -23,9 +23,6 @@ public:
 
     QSizeF sizeHint() const;
 
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
-
 private:
     QRectF m_geometry;
     QWidget * m_widget;

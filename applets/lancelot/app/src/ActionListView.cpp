@@ -67,7 +67,7 @@ ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraph
     m_initialButtonsCreationRunning(false)
 {
     setGroupByName("ActionListView");
-    m_itemsGroup = WidgetGroup::group("ActionListView-Items");
+    m_itemsGroup = instance()->group("ActionListView-Items");
 
     setAcceptsHoverEvents(true);
 
@@ -316,7 +316,7 @@ void ActionListView::modelItemAltered(int index)
 void ActionListView::setItemsGroup(WidgetGroup * group)
 {
     if (group == NULL) {
-        group = WidgetGroup::defaultGroup();
+        group = instance()->defaultGroup();
     }
 
     if (group == m_itemsGroup) return;

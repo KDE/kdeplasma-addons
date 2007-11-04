@@ -27,38 +27,13 @@ namespace Lancelot
 {
 
 // Group
-QMap < QString, WidgetGroup * > WidgetGroup::m_groups;
-
-WidgetGroup * WidgetGroup::group(const QString & name)
-{
-    QString groupName = name;
-    if (groupName == "") {
-        groupName = "Default";
-    }
-
-    if (!m_groups.contains(groupName)) {
-        WidgetGroup * group = new WidgetGroup(groupName);
-        if (Global::instance()->processGroupChanges) {
-            group->load();
-        }
-        m_groups.insert(groupName, group);
-    }
-
-    return m_groups[groupName];
-}
-
-WidgetGroup * WidgetGroup::defaultGroup()
-{
-    return group("Default");
-}
-
-WidgetGroup::WidgetGroup(QString name)
-  : m_confGroupTheme(NULL), m_name(name), m_backgroundSvg(NULL),
+WidgetGroup::WidgetGroup(Instance * instance, QString name)
+  : m_confGroupTheme(NULL), m_instance(instance), m_name(name), m_backgroundSvg(NULL),
     m_hasBackgroundColor(false), m_ownsBackgroundSvg(false), m_loaded(false)
     // TODO : Add caching?
     //m_cachedBackgroundNormal(NULL), m_cachedBackgroundActive(NULL), m_cachedBackgroundDisabled(NULL)
 {
-    m_confGroupTheme = new KConfigGroup(Global::instance()->theme(), "Group-" + name);
+    m_confGroupTheme = new KConfigGroup(m_instance->theme(), "Group-" + name);
 }
 
 WidgetGroup::~WidgetGroup()
@@ -83,7 +58,7 @@ void WidgetGroup::addWidget(Widget * widget)
 
 void WidgetGroup::removeWidget(Widget * widget)
 {
-    if (WidgetGroup::defaultGroup() == this) return;
+    if (m_instance->defaultGroup() == this) return;
 
     if (!m_widgets.contains(widget)) return;
     m_widgets.removeAll(widget);
@@ -129,14 +104,6 @@ const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
     return & m_foregroundColor;
 }
 
-
-void WidgetGroup::loadAll()
-{
-    foreach(WidgetGroup * group, m_groups) {
-        group->load();
-    }
-}
-
 void WidgetGroup::copyFrom(WidgetGroup * group)
 {
     if (this == group) return;
@@ -168,14 +135,14 @@ void WidgetGroup::load(bool full)
     WidgetGroup * group;
 
     if (!m_confGroupTheme->exists()) {
-        group = WidgetGroup::defaultGroup();
+        group = m_instance->defaultGroup();
         if (group == this) return;
 
         copyFrom(group);
         return;
     }
 
-    group = WidgetGroup::group(m_confGroupTheme->readEntry("parent", "Default"));
+    group = m_instance->group(m_confGroupTheme->readEntry("parent", "Default"));
     if (group != this) {
         group->load(false);
         copyFrom(group);
@@ -206,34 +173,36 @@ void WidgetGroup::load(bool full)
     }
 }
 
-// Global
+// Instance
+Instance * Instance::m_activeInstance = NULL;
 
-Global * Global::m_instance = NULL;
-
-Global * Global::instance() {
-    if (!m_instance) {
-        m_instance = new Global();
-    }
-    return m_instance;
+Instance * Instance::activeInstance()
+{
+    return m_activeInstance;
 }
 
-void Global::activateAll() {
-    processGeometryChanges = true;
-    processUpdateRequests = true;
+void Instance::setActiveInstance(Instance * instance)
+{
+    m_activeInstance = instance;
+}
+
+void Instance::activateAll() {
+    //processGeometryChanges = true;
+    //processUpdateRequests = true;
     processGroupChanges = true;
 
-    WidgetGroup::loadAll();
+    loadAllGroups();
 }
 
-void Global::deactivateAll() {
-    processGeometryChanges = false;
-    processUpdateRequests = false;
+void Instance::deactivateAll() {
+    //processGeometryChanges = false;
+    //processUpdateRequests = false;
     processGroupChanges = false;
 }
 
-Global::Global()
-  : processGeometryChanges(false),
-    processUpdateRequests(false),
+Instance::Instance()
+  : //processGeometryChanges(false),
+    //processUpdateRequests(false),
     processGroupChanges(false),
     m_confLancelot(NULL),
     m_confTheme(NULL)
@@ -248,30 +217,63 @@ Global::Global()
         path = "lancelotrc";
     }
     m_confTheme = new KConfig(path);
-
+    
+    m_activeInstance = this;
 }
 
-Global::~Global()
+Instance::~Instance()
 {
     delete m_confLancelot;
     delete m_confTheme;
 }
 
-KConfig * Global::theme()
+KConfig * Instance::theme()
 {
     return m_confTheme;
 }
 
-KConfig * Global::config()
+KConfig * Instance::config()
 {
     return m_confLancelot;
 }
 
-void Global::addWidget(Widget * widget)
+void Instance::addWidget(Widget * widget)
 {
     if (widget == NULL) return;
     if (m_widgets.contains(widget)) return;
     m_widgets.append(widget);
 }
+
+void Instance::loadAllGroups()
+{
+    foreach(WidgetGroup * group, m_groups) {
+        group->load();
+    }
+}
+
+WidgetGroup * Instance::group(const QString & name)
+{
+    QString groupName = name;
+    if (groupName == "") {
+        groupName = "Default";
+    }
+
+    if (!m_groups.contains(groupName)) {
+        WidgetGroup * group = new WidgetGroup(this, groupName);
+        if (processGroupChanges) {
+            group->load();
+        }
+        m_groups.insert(groupName, group);
+    }
+
+    return m_groups[groupName];
+}
+
+WidgetGroup * Instance::defaultGroup()
+{
+    return group("Default");
+}
+
+
 
 }

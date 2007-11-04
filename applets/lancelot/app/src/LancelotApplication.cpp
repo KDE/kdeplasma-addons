@@ -72,10 +72,10 @@ LancelotApplication::~LancelotApplication()
 {
 }
 
-LancelotApplication * LancelotApplication::application()
+/*LancelotApplication * LancelotApplication::aapplication()
 {
     return m_application;
-}
+}*/
 
 
 int LancelotApplication::main(int argc, char **argv)
@@ -108,17 +108,20 @@ int LancelotApplication::main(int argc, char **argv)
 
 bool LancelotApplication::show()
 {
-    return window->lancelotShow();
+    if (!m_application) return false;
+    return m_application->window->lancelotShow();
 }
 
 bool LancelotApplication::hide(bool immediate)
 {
-    return window->lancelotHide(immediate);
+    if (!m_application || !(m_application->window)) return false;
+    return m_application->window->lancelotHide(immediate);
 }
 
 bool LancelotApplication::showItem(QString name)
 {
-    return window->lancelotShowItem(name);
+    if (!m_application || !(m_application->window)) return false;
+    return m_application->window->lancelotShowItem(name);
 }
 
 int LancelotApplication::addClient()
@@ -131,14 +134,14 @@ int LancelotApplication::addClient()
 
 bool LancelotApplication::removeClient(int id)
 {
-    if (!m_clients.contains(id)) return false;
+    if (!m_application || !(m_application->window)) return false;
     m_clientsNumber--;
     m_clients.remove(id);
     return true;
 }
 
-void LancelotApplication::search(const QString & string)
+bool LancelotApplication::search(const QString & string)
 {
-    Q_ASSERT(window);
-    window->search(string);
+    if (!m_application || !(m_application->window)) return false;
+    m_application->window->search(string);
 }

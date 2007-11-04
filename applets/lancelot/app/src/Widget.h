@@ -27,7 +27,17 @@
 namespace Lancelot
 {
 
-class Widget : public Plasma::Widget
+class WidgetCore
+{
+public:
+    WidgetCore();
+    virtual ~WidgetCore();
+
+protected:
+    WidgetGroup * m_group;
+};
+
+class Widget : public Plasma::Widget, public WidgetCore
 {
     Q_OBJECT
 public:
@@ -45,6 +55,7 @@ public:
     virtual void setGroupByName(const QString & groupName);
     virtual void setGroup(WidgetGroup * group = NULL);
     WidgetGroup * group();
+    Instance * instance();
 
     QString name() const;
     void setName(QString name);
@@ -58,7 +69,6 @@ protected:
     bool m_enabled;
 
     QString m_name;
-    WidgetGroup * m_group;
 
     virtual void groupUpdated();
 

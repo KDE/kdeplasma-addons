@@ -35,6 +35,7 @@ namespace Lancelot
 {
 
 class Widget;
+class Instance;
 
 class WidgetGroup : public QObject {
 public:
@@ -44,18 +45,14 @@ public:
         QColor normal, disabled, active;
     };
 
-    static WidgetGroup * group(const QString & name);
-    static WidgetGroup * defaultGroup();
-    static void loadAll();
-
-    bool     hasProperty(const QString & property) const;
+    bool hasProperty(const QString & property) const;
     QVariant property(const QString & property) const;
     void setProperty(const QString & property, const QVariant & value);
 
     Plasma::Svg * backgroundSvg() const;
     const ColorScheme * backgroundColor() const;
     const ColorScheme * foregroundColor() const;
-
+    
     void load(bool full = false);
 
     void addWidget(Widget * widget);
@@ -64,11 +61,12 @@ public:
     QString name() const;
 
 private:
-    static QMap < QString, WidgetGroup * > m_groups;
     KConfigGroup * m_confGroupTheme;
 
-    WidgetGroup(QString name);
+    WidgetGroup(Instance * instance, QString name);
     virtual ~WidgetGroup();
+    
+    Instance * m_instance;
 
     QString m_name;
     QMap < QString, QVariant > m_properties;
@@ -88,14 +86,14 @@ private:
     void copyFrom(WidgetGroup * group);
 
     friend class Widget;
+    friend class Instance;
 };
 
-class Global : public QObject {
+class Instance : public QObject {
 public:
-    static Global * instance();
+    Instance();
+    virtual ~Instance();
 
-    bool processGeometryChanges : 1;
-	bool processUpdateRequests : 1;
     bool processGroupChanges : 1;
 
 	void activateAll();
@@ -105,20 +103,25 @@ public:
 
     KConfig * theme();
     KConfig * config();
-
+    
+    WidgetGroup * group(const QString & name);
+    WidgetGroup * defaultGroup();
+    
+    static Instance * activeInstance();
+    static void setActiveInstance(Instance * instance);
 
 private:
-    static Global * m_instance;
-    LancelotApplication * m_application;
-
-    Global();
-    virtual ~Global();
+    void loadAllGroups();
+    
+    // TODO: Warning! When threading comes around this approach will break... 
+    // it'll need mutexes, or something else...
+    static Instance * m_activeInstance;
 
     QList< Widget * > m_widgets;
+    QMap < QString, WidgetGroup * > m_groups;
 
     KConfig * m_confLancelot;
     KConfig * m_confTheme;
-    //(const QString &file=QString(), OpenFlags mode=FullConfig, const char *resourceType="config")
 
     friend class WidgetGroup;
 };
