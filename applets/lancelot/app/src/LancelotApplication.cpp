@@ -48,6 +48,11 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
     init();
 }
 
+bool LancelotApplication::exists()
+{
+    return (m_application != NULL);
+}
+
 bool LancelotApplication::event(QEvent * e)
 {
     if (e->type() == QEvent::ApplicationDeactivate) {

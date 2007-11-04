@@ -207,7 +207,9 @@ Instance::Instance()
     m_confLancelot(NULL),
     m_confTheme(NULL)
 {
-    Plasma::Theme::self()->setApplication("Lancelot");
+    if (LancelotApplication::exists()) {
+        Plasma::Theme::self()->setApplication("Lancelot");
+    }
     m_confLancelot = new KConfig("lancelotrc");
 
     // TODO: If Plasma::Theme supports file(), alter the following code

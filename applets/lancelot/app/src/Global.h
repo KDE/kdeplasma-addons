@@ -109,7 +109,7 @@ public:
     
     static Instance * activeInstance();
     static void setActiveInstance(Instance * instance);
-
+    
 private:
     void loadAllGroups();
     
