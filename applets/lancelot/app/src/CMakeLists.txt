@@ -77,6 +77,9 @@ target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} taskmanager)
 configure_file(org.kde.lancelot.service.in
   ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service)
 
+# To regenerate .xml file:
+# qdbuscpp2xml -M -s LancelotApplication.h -o org.kde.lancelot.xml.new
+# And make the needed changes
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION ${DBUS_SERVICES_INSTALL_DIR}) # ${CMAKE_INSTALL_PREFIX}/share/dbus-1/services )
 
 ########### install applicaiton ###############

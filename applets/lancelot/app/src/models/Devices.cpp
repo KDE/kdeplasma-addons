@@ -50,7 +50,6 @@ Devices::~Devices()
 
 void Devices::deviceRemoved(const QString & udi)
 {
-    // TODO: implement
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -111,7 +110,6 @@ void Devices::addDevice(const Solid::Device & device)
 void Devices::udiAccessibilityChanged(bool accessible)
 {
     Solid::StorageAccess * access = (Solid::StorageAccess *) sender();
-    // TODO: implement
     if (!m_udis.contains(access)) {
         return;
     }

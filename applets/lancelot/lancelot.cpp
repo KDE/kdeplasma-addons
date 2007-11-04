@@ -31,34 +31,29 @@ Lancelot::Lancelot(QObject *parent, const QVariantList &args) :
     m_icon = new Plasma::Icon(KIcon("lancelot"), "Lancelot", this);
     m_icon->setGeometry(QRectF(0, 0, 64, 64));
     setAcceptsHoverEvents(true);
-    //setHandlesChildEvents(true);
     m_dbus = new QDBusInterface( "org.kde.lancelot", "/Lancelot", "org.kde.lancelot.App");
 
-    //kDebug() << "Calling DBUS " << m_dbus->call( "addClient" ).errorMessage() << "\n";
-    kDebug() << "Registering this applet with Lancelot application\n";
     QDBusReply<int> reply = m_dbus->call("addClient");
 
     if (reply.isValid()) {
         m_clientID = reply.value();
     }
-
-    //m_icon->setIcon(KIcon("lanabout-kde"));
 }
 
 Lancelot::~Lancelot() {
-    kDebug() << "Calling DBUS " << m_dbus->call( "removeClient", "id" ).errorMessage() << "\n";
+    m_dbus->call( "removeClient", "id" );
     delete m_icon;
     delete m_dbus;
 }
 
 void Lancelot::hoverEnterEvent (QGraphicsSceneHoverEvent * event) {
     Q_UNUSED(event);
-    kDebug() << "Calling DBUS " << m_dbus->call( "show" ).errorMessage() << "\n";
+    m_dbus->call( "show" );
 }
 
 void Lancelot::hoverLeaveEvent (QGraphicsSceneHoverEvent * event) {
     Q_UNUSED(event);
-    kDebug() << "Calling DBUS " << m_dbus->call( "hide" ).errorMessage() << "\n";
+    m_dbus->call( "hide" );
 }
 
 QSizeF Lancelot::contentSizeHint () const {
