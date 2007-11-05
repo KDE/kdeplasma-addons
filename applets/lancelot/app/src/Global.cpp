@@ -163,12 +163,16 @@ void WidgetGroup::load(bool full)
         if (m_ownsBackgroundSvg) {
             delete m_backgroundSvg;
         }
+
         m_backgroundSvg = new Plasma::Svg(m_confGroupTheme->readEntry("background.svg"));
         m_ownsBackgroundSvg = true;
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
 
+    kDebug() << m_name;
     foreach (Widget * widget, m_widgets) {
+        kDebug() << (long)widget;
+        kDebug() << widget->name();
         widget->groupUpdated();
     }
 }

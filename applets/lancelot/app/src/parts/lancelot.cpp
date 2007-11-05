@@ -29,8 +29,9 @@ LancelotPart::LancelotPart(QObject *parent, const QVariantList &args) :
     Plasma::Applet(parent, args)
 {
     setDrawStandardBackground(true);
-    new Lancelot::Instance();
+    Lancelot::Instance * instance = new Lancelot::Instance();
     Lancelot::ActionListView * list = new Lancelot::ActionListView("Noname", new Lancelot::Models::Places(), this);
+    instance->activateAll();
     list->setGeometry(QRectF(0,0, 200,300));
     
     setAcceptsHoverEvents(true);
