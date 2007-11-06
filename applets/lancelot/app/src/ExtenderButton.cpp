@@ -234,8 +234,13 @@ ExtenderButton::ActivationMethod ExtenderButton::activationMethod()
 
 void ExtenderButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-    Q_UNUSED(event);
-    emit activated();
+    // Q_UNUSED(event);
+    if (event->button() == Qt::LeftButton) {
+        emit activated();
+    } else {
+        event->ignore();
+    }
+    BaseActionWidget::mousePressEvent(event);
 }
 
 void ExtenderButton::setGeometry(const QRectF & geometry)

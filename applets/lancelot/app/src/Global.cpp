@@ -179,6 +179,7 @@ void WidgetGroup::load(bool full)
 
 // Instance
 Instance * Instance::m_activeInstance = NULL;
+bool Instance::m_hasApplication = false;
 
 Instance * Instance::activeInstance()
 {
@@ -211,7 +212,7 @@ Instance::Instance()
     m_confLancelot(NULL),
     m_confTheme(NULL)
 {
-    if (LancelotApplication::exists()) {
+    if (Instance::m_hasApplication) {
         Plasma::Theme::self()->setApplication("Lancelot");
     }
     m_confLancelot = new KConfig("lancelotrc");
@@ -223,7 +224,7 @@ Instance::Instance()
         path = "lancelotrc";
     }
     m_confTheme = new KConfig(path);
-    
+
     m_activeInstance = this;
 }
 
@@ -280,6 +281,14 @@ WidgetGroup * Instance::defaultGroup()
     return group("Default");
 }
 
+bool Instance::hasApplication()
+{
+    return Instance::m_hasApplication;
+}
 
+void Instance::setHasApplication(bool value)
+{
+    Instance::m_hasApplication = value;
+}
 
 }

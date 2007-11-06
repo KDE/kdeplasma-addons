@@ -29,7 +29,7 @@
 #include <KConfigGroup>
 #include <plasma/svg.h>
 
-#include "LancelotApplication.h"
+//#include "LancelotApplication.h"
 
 namespace Lancelot
 {
@@ -107,11 +107,19 @@ public:
     WidgetGroup * group(const QString & name);
     WidgetGroup * defaultGroup();
     
+    bool isApplication();
+    void setIsApplication(bool value);
+    
     static Instance * activeInstance();
     static void setActiveInstance(Instance * instance);
     
+    static bool hasApplication();
+    static void setHasApplication(bool value);
+        
 private:
     void loadAllGroups();
+
+    static bool m_hasApplication;
     
     // TODO: Warning! When threading comes around this approach will break... 
     // it'll need mutexes, or something else...
@@ -122,7 +130,7 @@ private:
 
     KConfig * m_confLancelot;
     KConfig * m_confTheme;
-
+    
     friend class WidgetGroup;
 };
 

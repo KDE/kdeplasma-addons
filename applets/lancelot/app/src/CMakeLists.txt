@@ -9,18 +9,11 @@ ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${PLASMA_INCLUDE_DIR})
 
-# Lancelot Menu
-
-set(
-  plasma_lancelot_SRCS
-  main.cpp
-
+# Lancelot UI Widgets files
+set(plasma_lancelot_widgets_SRCS
   Global.cpp
   Widget.cpp
   WidgetPositioner.cpp
-
-  LancelotApplication.cpp
-  LancelotWindow.cpp
 
   CardLayout.cpp
 
@@ -35,40 +28,56 @@ set(
 
   PassagewayView.cpp
   PassagewayViewModels.cpp
+)
 
-# Display
-  QtDisplay.cpp
-
-# Models
+# Lancelot data models files
+set(plasma_lancelot_models_SRCS
   models/BaseModel.cpp
   models/FolderModel.cpp
 
-# Computer
   models/Devices.cpp
   models/Places.cpp
   models/SystemServices.cpp
 
-# Documents
   models/RecentDocuments.cpp
   models/OpenDocuments.cpp
   models/NewDocuments.cpp
 
-# Runner (Search)
   models/Runner.cpp
-
 )
 
-QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_SRCS org.kde.lancelot.xml
-                     LancelotApplication.h LancelotApplication)
+# Lancelot application files
+set(plasma_lancelot_application_SRCS
+  LancelotApplication.cpp
+  LancelotWindow.cpp
+  QtDisplay.cpp
+)
+
+# Lancelot D-Bus connections
+#set(plasma_lancelot_dbus_SRCS)
 
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
-QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${screensaver_xml} screensaver_interface)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_application_SRCS ${screensaver_xml} screensaver_interface)
 
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.krunner.Interface.xml)
-QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${screensaver_xml} krunner_interface)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_application_SRCS ${screensaver_xml} krunner_interface)
 
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
-QT4_ADD_DBUS_INTERFACE(plasma_lancelot_SRCS ${ksmserver_xml} ksmserver_interface)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
+
+QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_application_SRCS org.kde.lancelot.xml
+     LancelotApplication.h LancelotApplication)
+
+# Lancelot Menu
+set(
+  plasma_lancelot_SRCS
+  main.cpp
+
+  ${plasma_lancelot_widgets_SRCS}
+  ${plasma_lancelot_models_SRCS}
+  ${plasma_lancelot_application_SRCS}
+)
+
 
 kde4_add_executable(lancelot ${plasma_lancelot_SRCS})
 
@@ -90,15 +99,12 @@ install(TARGETS lancelot DESTINATION ${BIN_INSTALL_DIR} )
 
 # Lancelot Part Applet
 
-## add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-
-#include_directories(
-#  ${CMAKE_SOURCE_DIR}
-#  ${CMAKE_BINARY_DIR}
-#  ${KDE4_INCLUDES}
-#)
-
-set(plasma_applet_lancelot_part_SRCS ${plasma_lancelot_SRCS} parts/lancelot.cpp)
+set(plasma_applet_lancelot_part_SRCS
+  ${plasma_lancelot_widgets_SRCS}
+  ${plasma_lancelot_models_SRCS}
+  ${plasma_lancelot_application_SRCS}
+  parts/LancelotPart.cpp
+)
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
 
@@ -110,6 +116,24 @@ install(
 )
 
 install(
- FILES parts/plasma-applet-lancelot-part.desktop
- DESTINATION ${SERVICES_INSTALL_DIR}
+  FILES parts/plasma-applet-lancelot-part.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+)
+
+# Lancelot Main Applet
+
+set(plasma_applet_lancelot_SRCS ${plasma_lancelot_widgets_SRCS} applet/LancelotApplet.cpp)
+
+kde4_add_plugin(plasma_applet_lancelot ${plasma_applet_lancelot_SRCS})
+
+target_link_libraries(plasma_applet_lancelot ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+
+install(
+  TARGETS plasma_applet_lancelot
+  DESTINATION ${PLUGIN_INSTALL_DIR}
+)
+
+install(
+  FILES applet/plasma-applet-lancelot.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
 )

@@ -39,8 +39,6 @@ public Q_SLOTS:
     static bool hide(bool immediate = false);
     static bool showItem(QString name);
     static bool search(const QString & string);
-    
-    static bool exists();
 
     int addClient();
     bool removeClient(int id);
@@ -48,10 +46,11 @@ public Q_SLOTS:
     //static LancelotApplication * LancelotApplication::application()
 
 protected:
-    static LancelotApplication * m_application;
     LancelotWindow * window;
 
 private:
+    static LancelotApplication * m_application;
+    
     LancelotApplication(int argc, char **argv);
     LancelotApplication(Display * display,
         Qt::HANDLE visual = 0,

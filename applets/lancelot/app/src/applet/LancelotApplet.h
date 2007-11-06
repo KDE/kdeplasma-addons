@@ -20,25 +20,39 @@
 #ifndef LANCELOT_PARTS_H
 #define LANCELOT_PARTS_H
 
-#include <Plasma/Applet>
+#include <plasma/applet.h>
+#include <plasma/widgets/nodelayout.h>
+
+#include "../src/Global.h"
+#include "../src/ExtenderButton.h"
 
 class QDBusInterface;
 
-class LancelotPart : public Plasma::Applet
+class LancelotApplet : public Plasma::Applet
 {
     Q_OBJECT
 public:
-    LancelotPart(QObject * parent, const QVariantList &args);
-    ~LancelotPart();
+    LancelotApplet(QObject * parent, const QVariantList &args);
+    ~LancelotApplet();
 
-    QSizeF contentSizeHint () const;
-
-protected:
+    QSizeF contentSizeHint() const;
+    void setGeometry(const QRectF & geometry);
+    
+protected Q_SLOTS:
+    void showLancelot();
 
 private:
-    
+    QDBusInterface * m_dbus;
+    int m_clientID;
+
+    Lancelot::Instance * m_instance;
+    Lancelot::ExtenderButton * m_buttonMain;
+    Plasma::NodeLayout * m_layout;
+    /*
+    Lancelot::ExtenderButton * ...;  TODO: make other buttons
+    */
 };
 
-K_EXPORT_PLASMA_APPLET(lancelot-part, LancelotPart)
+K_EXPORT_PLASMA_APPLET(lancelot-applet, LancelotApplet)
 
 #endif

@@ -17,23 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "lancelot.h"
+#include "LancelotPart.h"
 #include "KDebug"
 #include "KIcon"
 
-#include "../src/Global.h"
-#include "../src/ActionListView.h"
 #include "../src/models/Places.h"
 
 LancelotPart::LancelotPart(QObject *parent, const QVariantList &args) :
     Plasma::Applet(parent, args)
 {
     setDrawStandardBackground(true);
-    Lancelot::Instance * instance = new Lancelot::Instance();
-    Lancelot::ActionListView * list = new Lancelot::ActionListView("Noname", new Lancelot::Models::Places(), this);
-    instance->activateAll();
-    list->setGeometry(QRectF(0,0, 200,300));
     
+    instance = new Lancelot::Instance();
+    list = new Lancelot::ActionListView("Noname", new Lancelot::Models::Places(), this);
+    
+    instance->activateAll();
+   
     setAcceptsHoverEvents(true);
 }
 
@@ -44,5 +43,14 @@ QSizeF LancelotPart::contentSizeHint () const {
     return QSizeF(200, 300);
 }
 
+void LancelotPart::setGeometry(const QRectF & geometry)
+{
+    Applet::setGeometry(geometry);
+    if (list) {
+        list->setGeometry(QRectF(QPoint(), contentSize()));
+    }
+}
 
-#include "lancelot.moc"
+
+
+#include "LancelotPart.moc"

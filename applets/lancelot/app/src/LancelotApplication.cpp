@@ -27,6 +27,7 @@
 #include <KAction>
 #include <KStandardAction>
 
+#include "Global.h"
 #include "LancelotWindow.h"
 #include "LancelotApplication.h"
 
@@ -46,11 +47,6 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
     : KUniqueApplication(display, visual, colormap, configUnique), window(0), m_clientsNumber(0), m_lastID(-1)
 {
     init();
-}
-
-bool LancelotApplication::exists()
-{
-    return (m_application != NULL);
 }
 
 bool LancelotApplication::event(QEvent * e)
@@ -77,12 +73,6 @@ LancelotApplication::~LancelotApplication()
 {
 }
 
-/*LancelotApplication * LancelotApplication::aapplication()
-{
-    return m_application;
-}*/
-
-
 int LancelotApplication::main(int argc, char **argv)
 {
     KLocale::setMainCatalog("lancelot");
@@ -103,10 +93,9 @@ int LancelotApplication::main(int argc, char **argv)
     );
 
     QtDisplay * dpy = new QtDisplay();
-    //KApplication app(dpy->display(),dpy->visual(),dpy->colormap());
 
-    //LancelotApplication::m_application = new LancelotApplication(argc, argv);
     LancelotApplication::m_application = new LancelotApplication(dpy->display(),dpy->visual(),dpy->colormap());
+    Lancelot::Instance::setHasApplication(true);
 
     return LancelotApplication::m_application->exec();
 }
@@ -114,19 +103,19 @@ int LancelotApplication::main(int argc, char **argv)
 bool LancelotApplication::show()
 {
     if (!m_application) return false;
-    return m_application->window->lancelotShow();
+    return LancelotApplication::m_application->window->lancelotShow();
 }
 
 bool LancelotApplication::hide(bool immediate)
 {
-    if (!m_application || !(m_application->window)) return false;
-    return m_application->window->lancelotHide(immediate);
+    if (!m_application || !(LancelotApplication::m_application->window)) return false;
+    return LancelotApplication::m_application->window->lancelotHide(immediate);
 }
 
 bool LancelotApplication::showItem(QString name)
 {
-    if (!m_application || !(m_application->window)) return false;
-    return m_application->window->lancelotShowItem(name);
+    if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
+    return LancelotApplication::m_application->window->lancelotShowItem(name);
 }
 
 int LancelotApplication::addClient()
@@ -139,7 +128,7 @@ int LancelotApplication::addClient()
 
 bool LancelotApplication::removeClient(int id)
 {
-    if (!m_application || !(m_application->window)) return false;
+    if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
     m_clientsNumber--;
     m_clients.remove(id);
     return true;
@@ -147,6 +136,7 @@ bool LancelotApplication::removeClient(int id)
 
 bool LancelotApplication::search(const QString & string)
 {
-    if (!m_application || !(m_application->window)) return false;
-    m_application->window->search(string);
+    if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
+    LancelotApplication::m_application->window->search(string);
+    return true;
 }
