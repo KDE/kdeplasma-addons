@@ -19,5 +19,5 @@ install(FILES
 
     extender-button-icon.svg
 
-    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/black/lancelot/
+    DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/
 )
