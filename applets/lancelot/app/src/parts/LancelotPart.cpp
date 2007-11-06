@@ -24,15 +24,18 @@
 #include "../src/models/Places.h"
 
 LancelotPart::LancelotPart(QObject *parent, const QVariantList &args) :
-    Plasma::Applet(parent, args)
+    Lancelot::WidgetCore(), Plasma::Applet(parent, args)
 {
-    setDrawStandardBackground(true);
-    
     instance = new Lancelot::Instance();
+    //instance()->addWidget(this);
+
+    setDrawStandardBackground(true);
+
     list = new Lancelot::ActionListView("Noname", new Lancelot::Models::Places(), this);
-    
+
+    m_group = instance->defaultGroup();
     instance->activateAll();
-   
+
     setAcceptsHoverEvents(true);
 }
 
@@ -46,11 +49,9 @@ QSizeF LancelotPart::contentSizeHint () const {
 void LancelotPart::setGeometry(const QRectF & geometry)
 {
     Applet::setGeometry(geometry);
-    if (list) {
+    if (m_group && list) {
         list->setGeometry(QRectF(QPoint(), contentSize()));
     }
 }
 
-
-
-#include "LancelotPart.moc"
+//#include "LancelotPart.maoc"

@@ -34,11 +34,14 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
         m_buttonMain = new Lancelot::ExtenderButton("launcher", new KIcon("lancelot"), "", "", this),
         Plasma::NodeLayout::NodeCoordinate(0, 0),
         Plasma::NodeLayout::NodeCoordinate(1, 1)
-    );        
+    );
+
+    m_buttonMain->setActivationMethod(Lancelot::ExtenderButton::Hover);
+
     m_instance->activateAll();
 
     setAcceptsHoverEvents(true);
-    
+
     connect(m_buttonMain, SIGNAL(activated()), this, SLOT(showLancelot()));
 
     // Connecting to Lancelot application via DBus
@@ -49,7 +52,7 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
     if (reply.isValid()) {
         m_clientID = reply.value();
     }
-    
+
 }
 
 LancelotApplet::~LancelotApplet()

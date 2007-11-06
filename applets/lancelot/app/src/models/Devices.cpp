@@ -110,7 +110,7 @@ void Devices::addDevice(const Solid::Device & device)
 void Devices::udiAccessibilityChanged(bool accessible)
 {
     Q_UNUSED(accessible);
-    
+
     Solid::StorageAccess * access = (Solid::StorageAccess *) sender();
     if (!m_udis.contains(access)) {
         return;

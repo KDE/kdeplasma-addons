@@ -37,7 +37,7 @@ public:
 
     QSizeF contentSizeHint() const;
     void setGeometry(const QRectF & geometry);
-    
+
 protected Q_SLOTS:
     void showLancelot();
 

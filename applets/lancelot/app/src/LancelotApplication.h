@@ -42,7 +42,7 @@ public Q_SLOTS:
 
     int addClient();
     bool removeClient(int id);
-    
+
     //static LancelotApplication * LancelotApplication::application()
 
 protected:
@@ -50,7 +50,7 @@ protected:
 
 private:
     static LancelotApplication * m_application;
-    
+
     LancelotApplication(int argc, char **argv);
     LancelotApplication(Display * display,
         Qt::HANDLE visual = 0,

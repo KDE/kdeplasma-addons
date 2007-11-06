@@ -92,7 +92,7 @@ WidgetGroup * Widget::group()
 Instance * Widget::instance()
 {
     if (!m_group) return Instance::activeInstance();
-    
+
     return m_group->m_instance;
 }
 

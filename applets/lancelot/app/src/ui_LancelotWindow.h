@@ -108,7 +108,7 @@ protected:
         Plasma::Svg * m_background;
         friend class LancelotWindow;
     };
-    
+
     Lancelot::Instance * instance;
 
     Plasma::Svg * m_mainTheme;
@@ -192,7 +192,7 @@ protected:
     {
         // First of all we MUST create a Lancelot::Instance
         instance = new Lancelot::Instance();
-        
+
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -331,7 +331,7 @@ protected:
         layoutMain->addItem(panelSections, Plasma::LeftPositioned);
         layoutSections->setSpacing(0);
         layoutSections->setMargin(0);
-        
+
         qreal top = 0;
 
         foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
@@ -342,7 +342,7 @@ protected:
 
             layoutSections->addItem(button,
                 Plasma::NodeLayout::NodeCoordinate(0, top),
-                Plasma::NodeLayout::NodeCoordinate(1.0, top + 0.25)        
+                Plasma::NodeLayout::NodeCoordinate(1.0, top + 0.25)
             );
             top += 0.25;
         }

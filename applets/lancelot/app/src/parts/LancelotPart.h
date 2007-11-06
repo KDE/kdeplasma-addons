@@ -22,13 +22,14 @@
 
 #include <plasma/applet.h>
 #include "../src/Global.h"
+#include "../src/Widget.h"
 #include "../src/ActionListView.h"
 
 class QDBusInterface;
 
-class LancelotPart : public Plasma::Applet
+class LancelotPart : public Lancelot::WidgetCore, public Plasma::Applet
 {
-    Q_OBJECT
+    //Q_OBJECT
 public:
     LancelotPart(QObject * parent, const QVariantList &args);
     ~LancelotPart();

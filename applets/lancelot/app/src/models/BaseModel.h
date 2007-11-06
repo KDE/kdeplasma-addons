@@ -43,7 +43,7 @@ protected:
 
     void addUrl(const QString & url);
     void addUrl(const KUrl & url);
-    
+
     void hideLancelotWindow();
     void changeLancelotSearchString(const QString & string);
 };

@@ -77,8 +77,8 @@ public:
 
     virtual QRectF boundingRect () const;
 
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition();
@@ -90,7 +90,7 @@ public:
     void setGroup(WidgetGroup * group = NULL);
 
 protected:
-    void mousePressEvent ( QGraphicsSceneMouseEvent * event );
+    void mousePressEvent (QGraphicsSceneMouseEvent * event);
 
 private:
     void relayoutExtender();

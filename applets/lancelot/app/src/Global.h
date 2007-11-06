@@ -52,7 +52,7 @@ public:
     Plasma::Svg * backgroundSvg() const;
     const ColorScheme * backgroundColor() const;
     const ColorScheme * foregroundColor() const;
-    
+
     void load(bool full = false);
 
     void addWidget(Widget * widget);
@@ -65,7 +65,7 @@ private:
 
     WidgetGroup(Instance * instance, QString name);
     virtual ~WidgetGroup();
-    
+
     Instance * m_instance;
 
     QString m_name;
@@ -103,25 +103,25 @@ public:
 
     KConfig * theme();
     KConfig * config();
-    
+
     WidgetGroup * group(const QString & name);
     WidgetGroup * defaultGroup();
-    
+
     bool isApplication();
     void setIsApplication(bool value);
-    
+
     static Instance * activeInstance();
     static void setActiveInstance(Instance * instance);
-    
+
     static bool hasApplication();
     static void setHasApplication(bool value);
-        
+
 private:
     void loadAllGroups();
 
     static bool m_hasApplication;
-    
-    // TODO: Warning! When threading comes around this approach will break... 
+
+    // TODO: Warning! When threading comes around this approach will break...
     // it'll need mutexes, or something else...
     static Instance * m_activeInstance;
 
@@ -130,7 +130,7 @@ private:
 
     KConfig * m_confLancelot;
     KConfig * m_confTheme;
-    
+
     friend class WidgetGroup;
 };
 
