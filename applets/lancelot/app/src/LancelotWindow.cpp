@@ -41,9 +41,6 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
     setupUi(this);
 
     setAttribute(Qt::WA_NoSystemBackground);
-    //m_view->setAttribute(Qt::WA_NoSystemBackground);
-
-    //setAutoFillBackground(false);
     m_view->setAutoFillBackground(false);
 
     createModels();
@@ -65,17 +62,12 @@ LancelotWindow::LancelotWindow( QWidget * parent, Qt::WindowFlags f )
         SLOT(sectionActivated(const QString &))
     );
 
-    connect(buttonSectionApplications, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionApplications, "Applications");
-
-    connect(buttonSectionContacts, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionContacts, "Contacts");
-
-    connect(buttonSectionDocuments, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionDocuments, "Documents");
-
-    connect(buttonSectionSystem, SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-    m_sectionsSignalMapper->setMapping(buttonSectionSystem, "Computer");
+    QMapIterator<QString, Lancelot::ToggleExtenderButton * > i(sectionButtons);
+    while (i.hasNext()) {
+        i.next();
+        connect(i.value(), SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+        m_sectionsSignalMapper->setMapping(i.value(), i.key());
+    }
 
     connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
     connect(buttonSystemLogout, SIGNAL(activated()),     this, SLOT(systemLogout()));
@@ -208,7 +200,7 @@ void LancelotWindow::createModels() {
         NULL, i18n("System"),
         m_systemServicesModel = new Lancelot::Models::SystemServices()
     );
-    listSectionSystemLeft->setModel(m_systemLeftModel);
+    sectionListsLeft[sectComputer]->setModel(m_systemLeftModel);
 
     m_systemRightModel = new Lancelot::MergedActionListViewModel();
     m_systemRightModel->addModel(
@@ -219,7 +211,7 @@ void LancelotWindow::createModels() {
         NULL, i18n("Fixed"),
         m_devicesModelFixed = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed)
     );
-    listSectionSystemRight->setModel(m_systemRightModel);
+    sectionListsRight[sectComputer]->setModel(m_systemRightModel);
 
     // Document models
     m_documentsLeftModel = new Lancelot::MergedActionListViewModel();
@@ -227,7 +219,7 @@ void LancelotWindow::createModels() {
         NULL, i18n("New:"),
         m_newDocumentsModel = new Lancelot::Models::NewDocuments()
     );
-    listSectionDocumentsLeft->setModel(m_documentsLeftModel);
+    sectionListsLeft[sectDocuments]->setModel(m_documentsLeftModel);
 
     m_documentsRightModel = new Lancelot::MergedActionListViewModel();
     m_documentsRightModel->addModel(
@@ -238,11 +230,11 @@ void LancelotWindow::createModels() {
         NULL, i18n("Open documents"),
         m_openDocumentsModel = new Lancelot::Models::OpenDocuments()
     );
-    listSectionDocumentsRight->setModel(m_documentsRightModel);
+    sectionListsRight[sectDocuments]->setModel(m_documentsRightModel);
 
     // Search Models
     m_runnerModel = new Lancelot::Models::Runner();
-    listSectionSearchLeft->setModel(m_runnerModel);
+    sectionListsLeft[sectSearch]->setModel(m_runnerModel);
     connect(
         editSearch, SIGNAL(textChanged(const QString &)),
         this, SLOT(search(const QString &))
@@ -264,6 +256,6 @@ void LancelotWindow::doSearch()
 {
     m_searchTimer.stop();
     m_runnerModel->setSearchString(m_searchString);
-    sectionActivated("Search");
+    sectionActivated(sectSearch);
 }
 

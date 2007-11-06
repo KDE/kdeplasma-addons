@@ -49,6 +49,8 @@ public:
     bool lancelotShow();
     bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
+    
+    //QList < QPair < QString, QPair < QString, QString > > > lancelotSections();
 
 protected:
     void leaveEvent(QEvent * event);

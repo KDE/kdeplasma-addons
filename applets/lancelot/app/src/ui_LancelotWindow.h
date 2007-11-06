@@ -53,32 +53,16 @@
 
 #define SYSTEM_BUTTONS_Z_VALUE 1
 
-// CreateSection (Panel, lAyout, LeftList, RightList)
-#define CreateSection(SECTION) \
-    (layoutSection ## SECTION) = new Plasma::NodeLayout(); \
-    (listSection ## SECTION ## Left) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Left", new Lancelot::DummyActionListViewModel(#SECTION, 20), (panelSection ## SECTION)); \
-    (listSection ## SECTION ## Right) = new Lancelot::ActionListView(QString("listSection") + #SECTION + "Right", new Lancelot::DummyMergedActionListViewModel(#SECTION, 5), (panelSection ## SECTION));
+// For compile time checking
+#define sectApplications "Applications"
+#define sectComputer     "Computer"
+#define sectContacts     "Contacts"
+#define sectDocuments    "Documents"
+#define sectSearch       "Search"
 
-// SetupSection (lAyout, LeftList, RightList)
-#define SetupSection(SECTION) \
-    (layoutSection ## SECTION)->addItem( \
-        (listSection ## SECTION ## Left), \
-        Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 0), \
-        Plasma::NodeLayout::NodeCoordinate(0.5, 1.0, -4, 0) \
-    ); \
-    (layoutSection ## SECTION)->addItem( \
-        (listSection ## SECTION ## Right), \
-        Plasma::NodeLayout::NodeCoordinate(0.5, 0, 4, 0), \
-        Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0) \
-    ); \
-    (listSection ## SECTION ## Left)->setItemsGroup(instance->group("ActionListView-Left-Items")); \
-    (listSection ## SECTION ## Right)->setItemsGroup(instance->group("ActionListView-Right-Items")); \
-    (listSection ## SECTION ## Left)->setExtenderPosition(Lancelot::ExtenderButton::Left); \
-    (listSection ## SECTION ## Right)->setExtenderPosition(Lancelot::ExtenderButton::Right); \
-    (panelSection ## SECTION)->setLayout(layoutSection ## SECTION);
-    //(listSection ## SECTION ## Left)->setGroupByName("ActionListView-Left");
-    //(listSection ## SECTION ## Right)->setGroupByName("ActionListView-Right");
-
+#define AddSectionData(Name, Icon, Caption) \
+    sectionsOrder << Name; \
+    sectionsData[Name] = QPair < QString, QString > (Icon, Caption);
 
 namespace Ui {
 class LancelotWindow
@@ -109,6 +93,9 @@ protected:
         friend class LancelotWindow;
     };
 
+    QStringList sectionsOrder;
+    QMap < QString, QPair < QString, QString > > sectionsData;
+    
     Lancelot::Instance * instance;
 
     Plasma::Svg * m_mainTheme;
@@ -130,16 +117,6 @@ protected:
     Lancelot::ExtenderButton * buttonSystemLogout;
     Lancelot::ExtenderButton * buttonSystemSwitchUser;
 
-    // Sections area
-    Plasma::NodeLayout * layoutSections; // was VBoxLaoyut
-    Lancelot::Panel * panelSections;
-
-    QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
-    Lancelot::ToggleExtenderButton * buttonSectionApplications;
-    Lancelot::ToggleExtenderButton * buttonSectionContacts;
-    Lancelot::ToggleExtenderButton * buttonSectionDocuments;
-    Lancelot::ToggleExtenderButton * buttonSectionSystem;
-
     // Search area
     Plasma::NodeLayout * layoutSearch;
     Lancelot::Panel * panelSearch;
@@ -149,39 +126,21 @@ protected:
     Lancelot::WidgetPositioner * editSearchPositioner;
     KLineEdit * editSearch;
 
+    // Sections area
+    Plasma::NodeLayout * layoutSections; // was VBoxLaoyut
+    Lancelot::Panel * panelSections;
+
+    QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
+    QMap < QString, Lancelot::Panel * > sectionPanels;
+    QMap < QString, Plasma::NodeLayout * > sectionLayouts;
+    
+    QMap < QString, Lancelot::ActionListView * > sectionListsLeft;   // these have no Application key
+    QMap < QString, Lancelot::ActionListView * > sectionListsRight;  // these have no Application key
+
     // Center area
-    QStringList sections;
 
     Lancelot::CardLayout * layoutCenter;
-    QMap < QString, Lancelot::Panel * > sectionPanels;
     Lancelot::PassagewayView * panelSectionApplications;
-
-    // Center area :: Search
-    Lancelot::Panel * panelSectionSearch;
-    Plasma::NodeLayout * layoutSectionSearch;
-    Lancelot::ActionListView * listSectionSearchLeft;   // KRunner
-    Lancelot::ActionListView * listSectionSearchRight;  // Strigi results
-
-    // Center area :: System
-    Lancelot::Panel * panelSectionSystem;
-    Plasma::NodeLayout * layoutSectionSystem;
-    Lancelot::ActionListView * listSectionSystemLeft;   // Places (devices, media)
-    Lancelot::ActionListView * listSectionSystemRight;  // Configuration
-
-    // Center area :: Documents
-    Lancelot::Panel * panelSectionDocuments;
-    Plasma::NodeLayout * layoutSectionDocuments;
-    Lancelot::ActionListView * listSectionDocumentsLeft;   // Open applications???
-    Lancelot::ActionListView * listSectionDocumentsRight;  // Recent documents
-
-    // Center area :: Contacts
-    Lancelot::Panel * panelSectionContacts;
-    Plasma::NodeLayout * layoutSectionContacts;
-    Lancelot::ActionListView * listSectionContactsLeft;   // Status (mail, on-line contacts...)
-    Lancelot::ActionListView * listSectionContactsRight;  // Actions (new mail?)
-
-
-    // Dummy - debug vars
 
     void setupTests(QFrame * object)
     {
@@ -192,7 +151,16 @@ protected:
     {
         // First of all we MUST create a Lancelot::Instance
         instance = new Lancelot::Instance();
-
+        
+        AddSectionData(sectApplications, "applications-other",  i18n("Applications"));
+        AddSectionData(sectComputer,     "computer-laptop",     i18n("Computer"));
+        AddSectionData(sectContacts,     "kontact",             i18n("Contacts"));
+        AddSectionData(sectDocuments,    "applications-office", i18n("Documents"));
+        AddSectionData(sectSearch,       "edit-find",           i18n("Search"));
+        
+        kDebug() << "Sections: " << sectionsOrder;
+        kDebug() << "Sections: " << sectionsData;
+      
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -229,20 +197,31 @@ protected:
             new Lancelot::ExtenderButton("buttonSystemSwitchUser", new KIcon("switchuser"), "Switch User", ""));
 
         // Sections area
-        // sections << "Applications" << "Computer" << "Contacts" << "Documents"; // << "Search";
-        sections << "Documents" << "Contacts" << "Computer" << "Applications"; // << "Search";
-
         layoutSections = new Plasma::NodeLayout();
         panelSections = new Lancelot::Panel("panelSections");
 
-        sectionButtons.insert("Computer", buttonSectionSystem =
-            new Lancelot::ToggleExtenderButton("buttonSectionSystem", new KIcon("video-display"), i18n("Computer"), "", panelSections));
-        sectionButtons.insert("Documents", buttonSectionDocuments =
-            new Lancelot::ToggleExtenderButton("buttonSectionDocuments", new KIcon("applications-office"), i18n("Documents"), "", panelSections));
-        sectionButtons.insert("Contacts", buttonSectionContacts =
-            new Lancelot::ToggleExtenderButton("buttonSectionContacts", new KIcon("kontact"), i18n("Contacts"), "", panelSections));
-        sectionButtons.insert("Applications", buttonSectionApplications =
-            new Lancelot::ToggleExtenderButton("buttonSectionApplications", new KIcon("make-kdevelop"), i18n("Applications"), "", panelSections));
+        layoutCenter = new Lancelot::CardLayout();
+
+        foreach (QString section, sectionsOrder) {
+            sectionLayouts[section] = new Plasma::NodeLayout();
+            sectionButtons[section] = new Lancelot::ToggleExtenderButton(
+                    "buttonSection" + section, 
+                    new KIcon(sectionsData[section].first),
+                    sectionsData[section].second,
+                    "", panelSections
+            );
+            if (section != sectApplications) {
+                sectionPanels[section] = new Lancelot::Panel(
+                    "panelSection" + section, 
+                    new KIcon(sectionsData[section].first),
+                    sectionsData[section].second
+                );
+                sectionListsLeft[section]  = new Lancelot::ActionListView("listSection" + section + "Left", NULL,  sectionPanels[section]);
+                sectionListsRight[section] = new Lancelot::ActionListView("listSection" + section + "Right", NULL, sectionPanels[section]);
+            } else {
+                sectionPanels[section] = new Lancelot::PassagewayView("panelSectionApplications");
+            }
+        }
 
         // Search area
         layoutSearch = new Plasma::NodeLayout();
@@ -254,25 +233,6 @@ protected:
 
         labelSearch = new Plasma::Label(panelSearch);
 
-        // Main area
-        layoutCenter = new Lancelot::CardLayout();
-
-        sectionPanels.insert("Applications", panelSectionApplications =
-            new Lancelot::PassagewayView("panelSectionApplications"));
-        sectionPanels.insert("Contacts", panelSectionContacts =
-            new Lancelot::Panel("panelSectionContacts", new KIcon("kontact"), i18n("Contacts")));
-        sectionPanels.insert("Documents", panelSectionDocuments =
-            new Lancelot::Panel("panelSectionDocuments", new KIcon("applications-office"), i18n("Documents")));
-        sectionPanels.insert("Computer", panelSectionSystem =
-            new Lancelot::Panel("panelSectionSystem", new KIcon("video-display"), i18n("Computer")));
-        sectionPanels.insert("Search", panelSectionSearch =
-            new Lancelot::Panel("panelSectionSearch", new KIcon("find"), i18n("Search")));
-
-        // Center area :: Sections
-        CreateSection (Search);
-        CreateSection (System);
-        CreateSection (Documents);
-        CreateSection (Contacts);
     }
 
     void setupGroups(QFrame * object)
@@ -380,7 +340,7 @@ protected:
         testContainment->addApplet("digital-clock");
         testContainment->setGeometry(QRectF(0, 0, 500, 500));
 
-        Plasma::Applet * applet = Plasma::Applet::loadApplet("digital-clock");
+        /*Plasma::Applet * applet = Plasma::Applet::loadApplet("digital-clock");
         //m_corona->addItem(applet);
         applet->setParentItem(panelSectionContacts);
         applet->setDrawStandardBackground(false);
@@ -396,7 +356,7 @@ protected:
         //m_corona->addItem(applet);
         applet->setParentItem(panelSectionContacts);
         applet->setDrawStandardBackground(false);
-        applet->setGeometry(QRectF(300, 100, 120, 70));
+        applet->setGeometry(QRectF(300, 100, 120, 70));*/
 
         QMapIterator<QString, Lancelot::Panel *> i(sectionPanels);
         while (i.hasNext()) {
@@ -406,10 +366,27 @@ protected:
         }
         layoutMain->addItem(layoutCenter, Plasma::CenterPositioned);
 
-        SetupSection (Search);
-        SetupSection (System);
-        SetupSection (Documents);
-        SetupSection (Contacts);
+        foreach (QString section, sectionsOrder) {
+            if (section == sectApplications) continue;
+            sectionLayouts[section]->addItem(
+                sectionListsLeft[section],
+                Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 0),
+                Plasma::NodeLayout::NodeCoordinate(0.5, 1.0, -4, 0)
+            );
+            sectionLayouts[section]->addItem(
+                sectionListsRight[section],
+                Plasma::NodeLayout::NodeCoordinate(0.5, 0, 4, 0),
+                Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0)
+            );
+            
+            sectionListsLeft[section]->setItemsGroup(instance->group("ActionListView-Left-Items"));
+            sectionListsLeft[section]->setExtenderPosition(Lancelot::ExtenderButton::Left);
+            
+            sectionListsRight[section]->setItemsGroup(instance->group("ActionListView-Right-Items"));
+            sectionListsRight[section]->setExtenderPosition(Lancelot::ExtenderButton::Right);
+            
+            sectionPanels[section]->setLayout(sectionLayouts[section]);
+        }
     }
 
     void setupShell(QFrame * object) {
