@@ -61,8 +61,8 @@ void EbnApplet::constraintsUpdated(Plasma::Constraints)
     prepareGeometryChange();
 }
 
-void EbnApplet::updated(const QString& source,
-                        const Plasma::DataEngine::Data& data)
+void EbnApplet::dataUpdated(const QString& source,
+                            const Plasma::DataEngine::Data& data)
 {
     prepareGeometryChange();
     if ( source != watchSource ) {

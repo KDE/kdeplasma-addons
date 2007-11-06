@@ -112,7 +112,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     downloadHistory();
 }
 
-void Twitter::updated(const QString& source, const Plasma::DataEngine::Data &data)
+void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << source;
     if( source == m_curTimeline ) {

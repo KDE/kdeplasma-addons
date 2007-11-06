@@ -173,7 +173,7 @@ void Dict::constraintsUpdated(Plasma::Constraints)
     updateGeometry();
 }
 
-void Dict::updated(const QString& source, const Plasma::DataEngine::Data &data)
+void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);
     if (m_flash) {
@@ -205,7 +205,7 @@ void Dict::updated(const QString& source, const Plasma::DataEngine::Data &data)
 	else
 	   m_rightArrow->hide();
         m_leftArrow->hide();
-        //m_defEdit->updated(QString("test"),data);
+        //m_defEdit->dataUpdated(QString("test"),data);
     }
     updateGeometry();
 }

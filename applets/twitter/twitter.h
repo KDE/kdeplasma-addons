@@ -62,7 +62,7 @@ class Twitter : public Plasma::Applet
                             const QRect &contentsRect);
 
     public slots:
-        void updated(const QString &name, const Plasma::DataEngine::Data &data);
+        void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void showConfigurationInterface();
 
     protected slots:

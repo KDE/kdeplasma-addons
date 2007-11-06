@@ -143,12 +143,11 @@ void Frame::resizeEvent(QResizeEvent *)
     prepareGeometryChange();
 }
 
-void Frame::updated(const QString& source, const Plasma::DataEngine::Data &data)
+void Frame::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);
     Q_UNUSED(data);
     QGraphicsItem::update();
-
 }
 
 void Frame::setSlideShow()

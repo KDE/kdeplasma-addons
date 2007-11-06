@@ -66,7 +66,7 @@ class Dict : public Plasma::Applet
         void constraintsUpdated(Plasma::Constraints);
 
     public slots:
-        void updated(const QString &name, const Plasma::DataEngine::Data &data);
+        void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void showConfigurationInterface();
         void autoDefine(const QString &word);
         void linkDefine(const QString &word);
