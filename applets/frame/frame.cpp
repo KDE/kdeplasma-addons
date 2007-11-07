@@ -479,6 +479,7 @@ void Frame::updateSizes()
     }
 
     m_boundingRect = mapToPicture(QPolygon(m_pixmapOutlineRect)).boundingRect();
+    setSize(QSizeF(m_boundingRect.width(), m_boundingRect.height()));
 }
 
 ///transform a polygon to the "logical coordinates" of the picture, accounting its rotation. 
