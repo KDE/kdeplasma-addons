@@ -16,6 +16,7 @@
       <arg name="name" type="s" direction="in"/>
     </method>
     <method name="search">
+      <arg type="b" direction="out"/>
       <arg name="string" type="s" direction="in"/>
     </method>
     <method name="addClient">
@@ -24,6 +25,15 @@
     <method name="removeClient">
       <arg type="b" direction="out"/>
       <arg name="id" type="i" direction="in"/>
+    </method>
+    <method name="sectionIDs">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="sectionNames">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="sectionIcons">
+      <arg type="as" direction="out"/>
     </method>
   </interface>
 </node>

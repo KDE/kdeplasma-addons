@@ -18,6 +18,7 @@ install(FILES
     action-list-view-items-extenders-right.svg
 
     extender-button-icon.svg
-
+    launch-applet-button.svg
+    
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/
 )

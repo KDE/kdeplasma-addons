@@ -50,7 +50,9 @@ public:
     bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
     
-    //QList < QPair < QString, QPair < QString, QString > > > lancelotSections();
+    QStringList sectionIDs();
+    QStringList sectionNames();
+    QStringList sectionIcons();
 
 protected:
     void leaveEvent(QEvent * event);

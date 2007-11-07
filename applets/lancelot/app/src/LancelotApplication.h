@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+// TODO: Inspect for memory leaks... (new KIcon mostly)
+
 #ifndef LANCELOTAPPLICATION_H_
 #define LANCELOTAPPLICATION_H_
 
@@ -29,7 +31,8 @@ class LancelotWindow;
 class LancelotApplication: public KUniqueApplication
 {
     Q_OBJECT
-    //CLASSINFO("D-Bus Interface", "org.kde.lancelot")
+    Q_CLASSINFO("D-Bus Interface", "org.kde.lancelot.App")
+    
 public:
 	static int main(int argc, char **argv);
 	bool event(QEvent * e);
@@ -42,6 +45,10 @@ public Q_SLOTS:
 
     int addClient();
     bool removeClient(int id);
+    
+    QStringList sectionIDs();
+    QStringList sectionNames();
+    QStringList sectionIcons();
 
     //static LancelotApplication * LancelotApplication::application()
 

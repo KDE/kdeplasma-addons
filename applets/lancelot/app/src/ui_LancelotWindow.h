@@ -204,12 +204,14 @@ protected:
 
         foreach (QString section, sectionsOrder) {
             sectionLayouts[section] = new Plasma::NodeLayout();
-            sectionButtons[section] = new Lancelot::ToggleExtenderButton(
+            if (section != sectSearch) {
+                sectionButtons[section] = new Lancelot::ToggleExtenderButton(
                     "buttonSection" + section, 
                     new KIcon(sectionsData[section].first),
                     sectionsData[section].second,
                     "", panelSections
-            );
+                );
+            }
             if (section != sectApplications) {
                 sectionPanels[section] = new Lancelot::Panel(
                     "panelSection" + section, 
@@ -293,6 +295,7 @@ protected:
         layoutSections->setMargin(0);
 
         qreal top = 0;
+        qreal increase = 1.0 / sectionButtons.size();
 
         foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
             button->setActivationMethod(Lancelot::ExtenderButton::Hover);
@@ -302,9 +305,9 @@ protected:
 
             layoutSections->addItem(button,
                 Plasma::NodeLayout::NodeCoordinate(0, top),
-                Plasma::NodeLayout::NodeCoordinate(1.0, top + 0.25)
+                Plasma::NodeLayout::NodeCoordinate(1.0, top + increase)
             );
-            top += 0.25;
+            top += increase;
         }
         panelSections->setLayout(layoutSections);
         m_corona->addItem(panelSections);

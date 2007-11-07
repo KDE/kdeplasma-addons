@@ -259,3 +259,32 @@ void LancelotWindow::doSearch()
     sectionActivated(sectSearch);
 }
 
+QStringList LancelotWindow::sectionIDs()
+{
+    QStringList result;
+    foreach (QString section, sectionsOrder) {
+        if (section == sectSearch) continue;
+        result << section;
+    }
+    return result;
+}
+
+QStringList LancelotWindow::sectionNames()
+{
+    QStringList result;
+    foreach (QString section, sectionsOrder) {
+        if (section == sectSearch) continue;
+        result << sectionsData[section].second;
+    }
+    return result;
+}
+
+QStringList LancelotWindow::sectionIcons()
+{
+    QStringList result;
+    foreach (QString section, sectionsOrder) {
+        if (section == sectSearch) continue;
+        result << sectionsData[section].first;
+    }
+    return result;
+}

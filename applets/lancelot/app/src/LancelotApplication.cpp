@@ -140,3 +140,21 @@ bool LancelotApplication::search(const QString & string)
     LancelotApplication::m_application->window->search(string);
     return true;
 }
+
+QStringList LancelotApplication::sectionIDs()
+{
+    if (!window) return QStringList();
+    return window->sectionIDs();
+}
+
+QStringList LancelotApplication::sectionNames()
+{
+    if (!window) return QStringList();
+    return window->sectionNames();
+}
+
+QStringList LancelotApplication::sectionIcons()
+{
+    if (!window) return QStringList();
+    return window->sectionIcons();
+}
