@@ -29,6 +29,8 @@ class Kolourpicker : public Plasma::Applet
         Kolourpicker(QObject *parent, const QVariantList &args);
         ~Kolourpicker();
 
+        void constraintsUpdated(Plasma::Constraints constraints);
+
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual bool eventFilter(QObject *watched, QEvent *event);

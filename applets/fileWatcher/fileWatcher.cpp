@@ -30,7 +30,6 @@
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), config_dialog(0)
 {
-  setDrawStandardBackground(true);
   setHasConfigurationInterface(true);
 
   file = new QFile(this);
@@ -63,7 +62,6 @@ void FileWatcher::loadFile(const QString& path)
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
   {
     kDebug() << "Error: could not open file:" << path;
-    setDrawStandardBackground(true);
     configured = false; 
     configureButton->show();
     return;

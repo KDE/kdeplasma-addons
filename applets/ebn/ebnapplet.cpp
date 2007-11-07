@@ -36,7 +36,6 @@ EbnApplet::EbnApplet(QObject* parent, const QVariantList &args)
     , watchSource('/')
 {
     setHasConfigurationInterface(false);
-    setDrawStandardBackground(true);
 
     connect(m_viewEdit, SIGNAL(linkActivated(const QString&)),
             this, SLOT(doLink(const QString&)));

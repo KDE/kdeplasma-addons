@@ -54,6 +54,7 @@ class Frame : public Plasma::Applet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect);
 	QRectF boundingRect() const;
         QPainterPath shape() const;
+        void constraintsUpdated(Plasma::Constraints constraints);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);

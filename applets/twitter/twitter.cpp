@@ -55,7 +55,6 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 {
     kDebug() << "Loading applet twitter";
     setHasConfigurationInterface(true);
-    setDrawStandardBackground(true);
     m_theme = new Plasma::Svg("widgets/twitter", this);
 
 

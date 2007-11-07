@@ -65,7 +65,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
-    setDrawStandardBackground(false);
     setCachePaintMode(NoCacheMode);
 
     m_dialog = 0;
@@ -107,9 +106,16 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     if (m_slideShow) {
         setSlideShow();
         slideShowTimer->start();
-    } 
-	else {   
+    }
+    else {
         choosePicture(m_currentUrl);
+    }
+}
+
+void Frame::constraintsUpdated(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        setDrawStandardBackground(false);
     }
 }
 

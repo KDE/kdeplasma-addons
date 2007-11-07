@@ -60,7 +60,6 @@ Dict::Dict(QObject *parent, const QVariantList &args)
       m_flash(0)
 {
     setHasConfigurationInterface(true);
-    setDrawStandardBackground(true);
 
     KConfigGroup cg = config();
     m_width = cg.readEntry("width", 500);

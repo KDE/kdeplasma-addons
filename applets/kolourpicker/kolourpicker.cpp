@@ -97,8 +97,6 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
 Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_grabWidget(0)
 {
-    setDrawStandardBackground(false);
-
     Plasma::BoxLayout *mainlay = new Plasma::BoxLayout(Plasma::BoxLayout::TopToBottom, 0);
     setLayout(mainlay);
     mainlay->setMargin(0);
@@ -132,6 +130,13 @@ Kolourpicker::~Kolourpicker()
 {
     clearHistory();
     delete m_historyMenu;
+}
+
+void Kolourpicker::constraintsUpdated(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        setDrawStandardBackground(false);
+    }
 }
 
 bool Kolourpicker::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
