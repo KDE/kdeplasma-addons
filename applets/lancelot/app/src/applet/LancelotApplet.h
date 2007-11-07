@@ -26,6 +26,8 @@
 #include "../src/Global.h"
 #include "../src/ExtenderButton.h"
 
+#include <QString>
+
 class QDBusInterface;
 
 class LancelotApplet : public Plasma::Applet
@@ -37,9 +39,12 @@ public:
 
     QSizeF contentSizeHint() const;
     void setGeometry(const QRectF & geometry);
+    
+    qreal heightForWidth(qreal width) const;
 
 protected Q_SLOTS:
     void showLancelot();
+    void showLancelotSection(const QString & section);
 
 private:
     QDBusInterface * m_dbus;
@@ -48,9 +53,9 @@ private:
     Lancelot::Instance * m_instance;
     Lancelot::ExtenderButton * m_buttonMain;
     Plasma::NodeLayout * m_layout;
-    /*
-    Lancelot::ExtenderButton * ...;  TODO: make other buttons
-    */
+    
+    QList< Lancelot::ExtenderButton * > m_sectionButtons;
+    
 };
 
 K_EXPORT_PLASMA_APPLET(lancelot-applet, LancelotApplet)

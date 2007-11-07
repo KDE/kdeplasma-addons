@@ -29,29 +29,64 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
 {
     setDrawStandardBackground(true);
     m_instance = new Lancelot::Instance();
+
+    // Connecting to Lancelot application via DBus
+    m_dbus = new QDBusInterface( "org.kde.lancelot", "/Lancelot", "org.kde.lancelot.App");
+    QDBusReply<int> reply = m_dbus->call("addClient");
+    if (reply.isValid()) {
+        m_clientID = reply.value();
+    }
+
+    QDBusReply<QStringList> replyIDs   = m_dbus->call("sectionIDs");
+    QDBusReply<QStringList> replyNames = m_dbus->call("sectionNames");
+    QDBusReply<QStringList> replyIcons = m_dbus->call("sectionIcons");
+
+    // creating buttons...
     m_layout = new Plasma::NodeLayout();
+    
+    kDebug();
+    if (replyIDs.isValid() && replyNames.isValid() && replyIcons.isValid()) {
+        for (int i = 0; i < replyIDs.value().size(); i++) {
+            kDebug() << replyIDs.value().at(i) << replyIcons.value().at(i) << replyNames.value().at(i);
+            m_sectionButtons << new Lancelot::ExtenderButton(
+                replyIDs.value().at(i),
+                new KIcon(replyIcons.value().at(i)),
+                "", "", this
+            );
+        }
+    }
+    kDebug();
+    
+    qreal wpercent = 1.0 / (m_sectionButtons.size() + 1.0);
+    
     m_layout->addItem(
         m_buttonMain = new Lancelot::ExtenderButton("launcher", new KIcon("lancelot"), "", "", this),
         Plasma::NodeLayout::NodeCoordinate(0, 0),
-        Plasma::NodeLayout::NodeCoordinate(1, 1)
+        Plasma::NodeLayout::NodeCoordinate(wpercent, 1)
     );
+    m_buttonMain->setGroupByName("AppletLaunchButton");
+    
+    qreal left = wpercent;
+    
+    foreach(Lancelot::ExtenderButton * button, m_sectionButtons) {
+        button->setGroupByName("AppletLaunchButton");
+        m_layout->addItem(
+            button,
+            Plasma::NodeLayout::NodeCoordinate(left, 0),
+            Plasma::NodeLayout::NodeCoordinate(left + wpercent, 1)
+        );
+        left += wpercent;
+    }
 
     m_buttonMain->setActivationMethod(Lancelot::ExtenderButton::Hover);
 
     m_instance->activateAll();
-
+    m_layout->setGeometry(QRectF(QPoint(), contentSize()));
+    
     setAcceptsHoverEvents(true);
 
     connect(m_buttonMain, SIGNAL(activated()), this, SLOT(showLancelot()));
 
-    // Connecting to Lancelot application via DBus
-    m_dbus = new QDBusInterface( "org.kde.lancelot", "/Lancelot", "org.kde.lancelot.App");
-
-    QDBusReply<int> reply = m_dbus->call("addClient");
-
-    if (reply.isValid()) {
-        m_clientID = reply.value();
-    }
 
 }
 
@@ -72,12 +107,22 @@ void LancelotApplet::setGeometry(const QRectF & geometry)
 
 QSizeF LancelotApplet::contentSizeHint() const
 {
-    return QSizeF(64, 64);
+    return QSizeF(48 * (1 + m_sectionButtons.size()), 48);
 }
 
 void LancelotApplet::showLancelot()
 {
     m_dbus->call("show");
+}
+
+void LancelotApplet::showLancelotSection(const QString & section)
+{
+    m_dbus->call("showItem");
+}
+
+qreal LancelotApplet::heightForWidth(qreal width) const
+{
+    return width / (1 + m_sectionButtons.size());
 }
 
 
