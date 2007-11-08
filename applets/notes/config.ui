@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>221</width>
-    <height>260</height>
+    <width>292</width>
+    <height>262</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
@@ -19,7 +19,7 @@
       <item>
        <widget class="QRadioButton" name="saveIfClosed" >
         <property name="text" >
-         <string>Save note if applet is closed</string>
+         <string>Save note at applet quit</string>
         </property>
         <property name="checked" >
          <bool>true</bool>
@@ -29,7 +29,7 @@
       <item>
        <widget class="QRadioButton" name="saveIfFocusLeft" >
         <property name="text" >
-         <string>Save note if focus is left</string>
+         <string>Save note when applet looses focus</string>
         </property>
        </widget>
       </item>
@@ -47,16 +47,6 @@
         <property name="text" >
          <string>Notes size:</string>
         </property>
-        <property name="buddy" >
-         <cstring>sizeEdit</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="QLineEdit" name="sizeEdit" >
-        <property name="text" >
-         <string>256</string>
-        </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="2" >
@@ -67,12 +57,28 @@
        </widget>
       </item>
       <item row="2" column="0" colspan="2" >
-        <widget class="KPushButton" name="colorSelectButton" >
-         <property name="text" >
-          <string>Select Text Color...</string>
-         </property>
-        </widget>
-       </item>
+       <widget class="KPushButton" name="colorSelectButton" >
+        <property name="text" >
+         <string>Select Text Color...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QSpinBox" name="sizeSpinBox" >
+        <property name="minimum" >
+         <number>50</number>
+        </property>
+        <property name="maximum" >
+         <number>1024</number>
+        </property>
+        <property name="singleStep" >
+         <number>5</number>
+        </property>
+        <property name="value" >
+         <number>256</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

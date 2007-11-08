@@ -24,20 +24,12 @@
 #include <KFontDialog>
 #include <KColorDialog>
 
-#include <QFont>
-#include <QPainter>
-#include <QRectF>
-#include <QSizeF>
-#include <QGraphicsTextItem>
-#include <QIntValidator>
-
-#include <plasma/widgets/vboxlayout.h>
-
-Notes::Notes(QObject *parent,
-             const QVariantList &args)
+Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
     m_notes_theme("widgets/notes", this),
     m_dialog(0),
+    m_font(QFont()),
+    m_textColor(QColor()),
     m_size(256,256)
 
 {
@@ -53,7 +45,10 @@ Notes::Notes(QObject *parent,
 
     cg = config();
 
-    m_textArea->setTextWidth(cg.readEntry("textWidth",205));
+    int size = cg.readEntry("size", 256);
+    m_size = QSizeF(size, size);
+
+    m_textArea->setTextWidth(cg.readEntry("textWidth", size - 50));
     m_textArea->setPos(25, 25);
     m_textArea->setPlainText(cg.readEntry("autoSave",i18n("Welcome to Notes Plasmoid! Type your notes here...")));
     m_textArea->setStyled(false);
@@ -64,6 +59,7 @@ Notes::Notes(QObject *parent,
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
+    Q_UNUSED(constraints);
     setDrawStandardBackground(false);
 }
 
@@ -78,6 +74,7 @@ void Notes::saveNote()
 Notes::~Notes()
 {
     saveNote();
+    delete m_dialog;
 }
 
 void Notes::setContentSize(const QSizeF& size)
@@ -96,7 +93,6 @@ void Notes::paintInterface(QPainter *p,
 {
     Q_UNUSED(option);
 
-
     m_notes_theme.resize((int)contentsRect.width(),
                          (int)contentsRect.height());
     m_notes_theme.paint(p,
@@ -108,16 +104,18 @@ void Notes::showConfigurationInterface()
 {
     if (m_dialog == 0) {
         m_dialog = new KDialog;
+        m_dialog->setWindowIcon(KIcon("knotes"));
         m_dialog->setCaption( i18n("Notes Configuration") );
         ui.setupUi(m_dialog->mainWidget());
         m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
         m_dialog->showButtonSeparator(true);
-        ui.sizeEdit->setValidator(new QIntValidator(0,2048, ui.sizeEdit));
         connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
         connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
         connect( ui.fontSelectButton, SIGNAL(clicked()), this, SLOT(showFontSelectDlg()) );
         connect( ui.colorSelectButton, SIGNAL(clicked()), this, SLOT(showColorSelectDlg()));
     }
+
+    ui.sizeSpinBox->setValue(m_size.width());
 
     m_dialog->show();
 }
@@ -129,21 +127,22 @@ void Notes::showFontSelectDlg()
 
 void Notes::showColorSelectDlg()
 {
-    KColorDialog::getColor( m_textColor);
+    KColorDialog::getColor(m_textColor);
 }
 
 void Notes::configAccepted()
 {
     prepareGeometryChange();
 
-    cg.writeEntry("size", ui.sizeEdit->text());
+    cg.writeEntry("size", ui.sizeSpinBox->value());
     cg.writeEntry("font", m_font);
     cg.writeEntry("textcolor", m_textColor);
     cg.writeEntry("savenote", ui.saveIfClosed->isChecked() ? "closenote" : "focusleft" );
     cg.config()->sync();
 
-    QSizeF size(ui.sizeEdit->text().toInt(),ui.sizeEdit->text().toInt());
+    QSizeF size(ui.sizeSpinBox->value(),ui.sizeSpinBox->value());
     setContentSize(size);
+    m_textArea->setTextWidth(ui.sizeSpinBox->value() - 50);
     m_textArea->setFont(m_font);
     m_textArea->setDefaultTextColor(m_textColor);
 }

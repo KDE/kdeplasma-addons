@@ -53,7 +53,7 @@ class Notes : public Plasma::Applet
         void showColorSelectDlg();
 
     protected:
-	void saveNote();
+        void saveNote();
 
     private:
         Plasma::Svg m_notes_theme;
