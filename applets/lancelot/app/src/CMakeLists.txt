@@ -53,6 +53,10 @@ set(plasma_lancelot_application_SRCS
   QtDisplay.cpp
 )
 
+# Lancelot client files
+set(plasma_lancelot_client_SRCS
+)
+
 # Lancelot D-Bus connections
 #set(plasma_lancelot_dbus_SRCS)
 
@@ -64,6 +68,9 @@ QT4_ADD_DBUS_INTERFACE(plasma_lancelot_application_SRCS ${screensaver_xml} krunn
 
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
 QT4_ADD_DBUS_INTERFACE(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
+
+set(lancelot_xml org.kde.lancelot.xml)
+QT4_ADD_DBUS_INTERFACE(plasma_lancelot_client_SRCS ${lancelot_xml} lancelot_interface)
 
 QT4_ADD_DBUS_ADAPTOR(plasma_lancelot_application_SRCS org.kde.lancelot.xml
      LancelotApplication.h LancelotApplication)
@@ -122,7 +129,7 @@ install(
 
 # Lancelot Main Applet
 
-set(plasma_applet_lancelot_SRCS ${plasma_lancelot_widgets_SRCS} applet/LancelotApplet.cpp)
+set(plasma_applet_lancelot_SRCS ${plasma_lancelot_widgets_SRCS} ${plasma_lancelot_client_SRCS} applet/LancelotApplet.cpp)
 
 kde4_add_plugin(plasma_applet_lancelot ${plasma_applet_lancelot_SRCS})
 

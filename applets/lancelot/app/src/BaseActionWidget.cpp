@@ -250,7 +250,6 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     );
     gradient.setColorAt(1, Qt::transparent);
     gradient.setColorAt(0, Qt::black);
-    //painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setCompositionMode(QPainter::CompositionMode_DestinationIn);
     painter->fillRect(
         0, 0, size().width(), size().height(),

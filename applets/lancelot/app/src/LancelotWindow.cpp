@@ -184,8 +184,13 @@ bool LancelotWindow::lancelotHide(bool immediate) {
 }
 
 bool LancelotWindow::lancelotShowItem(QString name) {
-    Q_UNUSED(name);
-    return false;
+    //Q_UNUSED(name);
+    //return false;
+    sectionActivated(name);
+    if (!isVisible()) {
+        lancelotShow();
+    }
+    return true;
 }
 
 void LancelotWindow::createModels() {

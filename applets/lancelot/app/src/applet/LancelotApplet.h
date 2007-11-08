@@ -25,6 +25,7 @@
 
 #include "../src/Global.h"
 #include "../src/ExtenderButton.h"
+#include "lancelot_interface.h"
 
 #include <QString>
 
@@ -47,8 +48,11 @@ protected Q_SLOTS:
     void showLancelotSection(const QString & section);
 
 private:
-    QDBusInterface * m_dbus;
+    org::kde::lancelot::App * m_lancelot;
+    
     int m_clientID;
+    
+    QSignalMapper m_signalMapper;
 
     Lancelot::Instance * m_instance;
     Lancelot::ExtenderButton * m_buttonMain;
