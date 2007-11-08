@@ -92,8 +92,21 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
 }
 
 void BaseActionWidget::paintForeground (QPainter * painter) {
+    QPainter * _painter = painter;
+    
+    // Background Painting
+    paintBackground(_painter);
+    
     // TODO: Cutting the long titles... gradient?
-
+    
+    //QImage foreground(size().toSize().width(), size().toSize().height(), QImage::Format_ARGB32);
+    QPixmap foreground(size().toSize().width(), size().toSize().height());
+    foreground.fill(Qt::transparent);
+    
+    // Replacing painter with QImage painter
+    QPainter fpainter(&foreground);
+    painter = &fpainter;
+    
     if (!m_enabled) {
         painter->setPen(QPen(m_group->foregroundColor()->disabled));
     } else if (m_hover) {
@@ -101,9 +114,6 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     } else {
         painter->setPen(QPen(m_group->foregroundColor()->normal));
     }
-
-    // Background Painting
-    paintBackground(painter);
 
     QFont titleFont = painter->font();
     QFont descriptionFont = painter->font();
@@ -146,14 +156,14 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         if (m_alignment & Qt::AlignBottom)
             top = widgetRect.height() - height + WIDGET_PADDING;
 
-        if (m_icon || m_iconInSvg) {
+        if (m_icon || m_iconInSvg) { // using real painter...
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), m_iconSize);
             if (m_icon) {
-                m_icon->paint(painter, rect);
+                m_icon->paint(_painter, rect);
             } else {
                 m_iconInSvg->resize(m_iconSize);
-                m_iconInSvg->paint(painter, rect.left(), rect.top(), m_hover?"active":"inactive");
+                m_iconInSvg->paint(_painter, rect.left(), rect.top(), m_hover?"active":"inactive");
             }
             top += m_iconSize.height() + WIDGET_PADDING;
         }
@@ -202,7 +212,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
         descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
 
-        if (m_icon || m_iconInSvg) {
+        if (m_icon || m_iconInSvg) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), m_iconSize);
             if (m_icon) {
                 QIcon::Mode mode;
@@ -214,10 +224,10 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                     mode = QIcon::Normal;
                 }
 
-                m_icon->paint(painter, rect, Qt::AlignCenter, mode, QIcon::Off);
+                m_icon->paint(_painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
                 m_iconInSvg->resize(m_iconSize);
-                m_iconInSvg->paint(painter, rect.left(), rect.top(), m_hover?"active":"inactive");
+                m_iconInSvg->paint(_painter, rect.left(), rect.top(), m_hover?"active":"inactive");
             }
         }
 
@@ -233,6 +243,24 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
         }
     }
+    
+    QLinearGradient gradient = QLinearGradient(
+        QPointF(size().width() - WIDGET_PADDING - 20, 0),
+        QPointF(size().width() - WIDGET_PADDING, 0)
+    );
+    gradient.setColorAt(1, Qt::transparent);
+    gradient.setColorAt(0, Qt::black);
+    //painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter->setCompositionMode(QPainter::CompositionMode_DestinationIn);
+    painter->fillRect(
+        0, 0, size().width(), size().height(),
+        gradient);
+    //
+    
+    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    _painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    
+    _painter->drawPixmap(0, 0, foreground);
 }
 
 /*

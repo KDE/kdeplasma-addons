@@ -33,11 +33,15 @@
     <linearGradient
        id="linearGradient6143">
       <stop
-         style="stop-color:#b0b0b0;stop-opacity:1;"
+         style="stop-color:#4f4f4f;stop-opacity:1;"
          offset="0"
          id="stop6145" />
       <stop
-         style="stop-color:#e8e8e8;stop-opacity:1;"
+         id="stop3255"
+         offset="0.5"
+         style="stop-color:#2f2f2f;stop-opacity:1;" />
+      <stop
+         style="stop-color:#242424;stop-opacity:1;"
          offset="1"
          id="stop6147" />
     </linearGradient>
@@ -70,7 +74,7 @@
        y1="264.88116"
        x2="438.58295"
        y2="250.03554"
-       gradientTransform="matrix(2.2113017,0,0,2.2113017,-781.79294,-404.99358)" />
+       gradientTransform="matrix(-0.9999999,0,0,-0.9999999,886.66307,500.09554)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -86,7 +90,7 @@
      inkscape:cx="278.33442"
      inkscape:cy="897.48148"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="active"
      inkscape:window-width="1440"
      inkscape:window-height="806"
      inkscape:window-x="0"
@@ -107,13 +111,12 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       transform="matrix(-2.2113017,0,0,-2.2113017,1178.8867,700.86857)"
+       transform="matrix(2.2113017,0,0,2.2113017,-781.79294,-404.99358)"
        inkscape:label="#g3202"
        id="active">
       <path
          style="opacity:1;fill:url(#linearGradient2679);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 29.21875,115.125 L 29.21875,123.09375 L 29.21875,172.78125 L 29.21875,180.75 L 37.1875,180.75 L 46.78125,180.75 L 359.90625,180.75 C 364.32187,180.75 367.87499,177.19688 367.875,172.78125 L 367.875,123.09375 C 367.875,118.67813 364.32186,115.125 359.90625,115.125 L 46.78125,115.125 L 37.1875,115.125 L 29.21875,115.125 z "
-         transform="matrix(0.4522223,0,0,0.4522223,353.54422,183.14714)"
+         d="M 519.9055,264.88632 L 519.9055,261.28267 L 519.9055,238.81288 L 519.9055,235.20923 L 516.30185,235.20923 L 511.96334,235.20923 L 370.36124,235.20923 C 368.36439,235.20923 366.75759,236.81603 366.75759,238.81288 L 366.75759,261.28267 C 366.75759,263.27952 368.3644,264.88632 370.36124,264.88632 L 511.96334,264.88632 L 516.30185,264.88632 L 519.9055,264.88632 z "
          id="rect2218" />
     </g>
     <rect

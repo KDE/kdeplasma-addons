@@ -45,10 +45,6 @@ public:
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-/*
-    void setSvg(Plasma::Svg * svg);
-    Plasma::Svg * svg() const;
-*/
     void setIconSize(QSize size);
     QSize iconSize() const;
 
