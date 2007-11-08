@@ -62,6 +62,11 @@ Notes::Notes(QObject *parent,
     m_textArea->setDefaultTextColor(cg.readEntry("textcolor",m_textColor));
 }
 
+void Notes::constraintsUpdated(Plasma::Constraints constraints)
+{
+    setDrawStandardBackground(false);
+}
+
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
