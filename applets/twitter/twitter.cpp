@@ -27,6 +27,8 @@
 #include <QTextDocument>
 #include <QTcpSocket>
 #include <QCheckBox>
+#include <QTimer>
+#include <QGradient>
 
 #include <KDebug>
 #include <KIcon>
@@ -107,6 +109,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
 
+    m_refreshTimer = new QTimer( this );
+    connect( m_refreshTimer, SIGNAL(timeout()), SLOT(showTweets()) );
 
     downloadHistory();
 }
@@ -133,41 +137,74 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
     } else if( source.startsWith( "Update" ) ) {
         m_tweetMap[source] = data;
     } else if( source.startsWith( "UserInfo" ) ) {
+        QString user = source.split( ':' ).at(1);
         QPixmap pm = data.value( "Image" ).value<QPixmap>();
         if( !pm.isNull() ) {
-            m_icon->setIcon( QIcon( pm ) );
+            if( user == m_username ) {
+                m_icon->setIcon( QIcon( pm ) );
+            }
+            m_pictureMap[user] = pm;
         }
+        if( m_refreshTimer->isActive() )
+            m_refreshTimer->stop();
+        m_refreshTimer->start( 500 );
     }
     updateGeometry();
 }
 
 void Twitter::showTweets()
 {
-    foreach( Plasma::LineEdit *e, m_tweetWidgets ) {
-        m_layout->removeItem( e );
-        delete e;
+    if( m_refreshTimer->isActive() )
+        m_refreshTimer->stop();
+
+    for( int i = m_tweetWidgets.size()-1; i >= 0; --i ) {
+        Tweet t = m_tweetWidgets[i];
+        m_layout->removeItem( t.layout );
+//         t.layout->removeItem( t.icon );
+//         t.layout->removeItem( t.edit );
+        delete t.icon;
+        delete t.edit;
+        delete t.layout;
     }
     m_tweetWidgets.clear();
 
     int i = 0;
     int pos = m_tweetMap.keys().size() - 1;
     while(i < m_historySize && i < m_tweetMap.keys().size() ) {
+        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+        QString user = tweetData.value( "User" ).toString();
+
+        Plasma::HBoxLayout *tweetLayout = new Plasma::HBoxLayout( 0 );
+        tweetLayout->setMargin( 0 );
+        tweetLayout->setSpacing( 0 );
+        m_layout->addItem( tweetLayout );
+
         Plasma::LineEdit *e = new Plasma::LineEdit( this );
         e->setTextWidth( 250 );
         e->setStyled( false );
         e->setEnabled( false );
         e->setCursor( Qt::ArrowCursor );
         e->setAcceptedMouseButtons( Qt::NoButton );
-        m_layout->addItem( e );
-        m_tweetWidgets.append( e );
 
-        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+        Plasma::Icon *icon = new Plasma::Icon( this );
+        icon->setIcon( QIcon(m_pictureMap[user]) );
+        icon->setText( user );
+        tweetLayout->addItem( icon );
+        tweetLayout->addItem( e );
+        tweetLayout->update();
+
+        Tweet t;
+        t.layout = tweetLayout;
+        t.icon = icon;
+        t.edit = e;
+
+        m_tweetWidgets.append( t );
+
         QString html = "<table cellspacing='0'>";
-        html += i18n( "<tr><td width='1%'><font color='#fcfcfc'><b>%1</b></font></td>"
-                "<td align='right' width='99%'><font color='#fcfcfc'>%2 from %3</font></td></tr>", 
-                tweetData.value( "User" ).toString(), timeDescription( tweetData.value( "Date" ).toDateTime() ),
+        html += i18n( "<tr><td align='right' width='99%'><font color='#9c9c9c'>%1 from %2</font></td></tr>", 
+                timeDescription( tweetData.value( "Date" ).toDateTime() ),
                 tweetData.value( "Source" ).toString() );
-        html += QString( "<tr><td colspan='2'><font color='#fcfcfc'>%1<br></font></td></tr>" )
+        html += QString( "<tr><td><font color='#fcfcfc'>%1<br></font></td></tr>" )
                 .arg( tweetData.value( "Status" ).toString() );
         html += "</table>";
         e->setHtml( html );
@@ -292,10 +329,17 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     m_theme->resize();
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, contentsRect.y(), 75, 12), "twitter" );
 
-    p->setBrush( QColor( 32, 32, 32 ) );
-    foreach( Plasma::LineEdit *e, m_tweetWidgets ) {
-        p->drawRect( 0, e->geometry().y(), contentSize().width(), e->geometry().height() );
+    foreach( Tweet t, m_tweetWidgets ) {
+        QLinearGradient g( t.layout->geometry().topLeft(), t.layout->geometry().bottomRight() );
+        g.setColorAt( 0, QColor( 30, 30, 30 ) );
+        g.setColorAt( 1, QColor( 70, 70, 70 ) );
+        p->setBrush( QBrush( g ));
+        p->drawRect( 0, t.layout->geometry().y(), contentSize().width(), t.layout->geometry().height() );
     }
+    QLinearGradient g( m_headerLayout->geometry().topLeft(), m_headerLayout->geometry().bottomRight() );
+    g.setColorAt( 0, QColor( 30, 30, 30 ) );
+    g.setColorAt( 1, QColor( 70, 70, 70 ) );
+    p->setBrush( QBrush( g ));
     p->drawRect( m_headerLayout->geometry() );
 }
 

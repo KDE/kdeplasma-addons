@@ -49,6 +49,12 @@ namespace KIO
     class Job;
 }
 
+struct Tweet {
+    Plasma::HBoxLayout *layout;
+    Plasma::Icon *icon;
+    Plasma::LineEdit *edit;
+};
+
 class Twitter : public Plasma::Applet
 {
     Q_OBJECT
@@ -75,9 +81,10 @@ class Twitter : public Plasma::Applet
         void slotConnected();
         void slotRead();
 
+        void showTweets();
+
     protected:
         QString timeDescription( const QDateTime &dt );
-        void showTweets();
 
     Q_SIGNALS:
         void pictureDownloaded( const QString &nick );
@@ -118,7 +125,9 @@ class Twitter : public Plasma::Applet
         QMap< KJob *, QString > m_pictureDownloadMap;
         QMap< KJob *, QByteArray > m_bufferMap;
         QMap< QString, Plasma::DataEngine::Data > m_tweetMap;
-        QList< Plasma::LineEdit * > m_tweetWidgets;
+        QList< Tweet > m_tweetWidgets;
+
+        QTimer *m_refreshTimer;
 
         uint m_lastTweet;
 };
