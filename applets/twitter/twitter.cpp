@@ -112,7 +112,9 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL(timeout()), SLOT(showTweets()) );
 
-    downloadHistory();
+    if( !m_username.isEmpty() && !m_password.isEmpty() ) {
+        downloadHistory();
+    }
 }
 
 void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
@@ -281,10 +283,17 @@ void Twitter::configAccepted()
     bool changed = false;
 
     KConfigGroup cg = config();
+
+    if( m_username != m_usernameEdit->text() )
+        changed = true;
     m_username = m_usernameEdit->text();
     cg.writeEntry( "username", m_username );
+
+    if( m_password != m_passwordEdit->text() )
+        changed = true;
     m_password = m_passwordEdit->text();
     cg.writeEntry( "password", KStringHandler::obscure(m_password) );
+
     m_historySize = m_historySizeSpinBox->value();
     cg.writeEntry("historySize", m_historySize);
     m_historyRefresh = m_historyRefreshSpinBox->value();
@@ -305,6 +314,7 @@ void Twitter::configAccepted()
     m_engine->setProperty( "username", m_username );
     m_engine->setProperty( "password", m_password );
     m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
+    m_icon->setText( m_username );
 
     if( refresh ) {
         showTweets();
