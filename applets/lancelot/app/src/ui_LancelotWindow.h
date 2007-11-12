@@ -49,6 +49,7 @@
 #include "Panel.h"
 #include "PassagewayView.h"
 #include "CardLayout.h"
+#include "FlipLayout.h"
 #include "Global.h"
 
 #define SYSTEM_BUTTONS_Z_VALUE 1
@@ -106,10 +107,10 @@ protected:
     Plasma::Containment * testContainment;
 
     // Components
-    Plasma::BorderLayout * layoutMain;
+    Lancelot::FlipLayout < Plasma::BorderLayout > * layoutMain;
 
     // System area
-    Plasma::BorderLayout * layoutSystem;
+    Lancelot::FlipLayout < Plasma::BorderLayout > * layoutSystem;
     Plasma::NodeLayout * layoutSystemButtons;
 
     QList < Lancelot::ExtenderButton * > systemButtons;
@@ -127,7 +128,7 @@ protected:
     KLineEdit * editSearch;
 
     // Sections area
-    Plasma::NodeLayout * layoutSections; // was VBoxLaoyut
+    Lancelot::FlipLayout < Plasma::NodeLayout > * layoutSections; // was VBoxLaoyut
     Lancelot::Panel * panelSections;
 
     QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
@@ -151,6 +152,8 @@ protected:
     {
         // First of all we MUST create a Lancelot::Instance
         instance = new Lancelot::Instance();
+        
+        Lancelot::FlipLayoutGlobal::setFlip(Lancelot::FlipLayoutGlobal::Both);
         
         AddSectionData(sectApplications, "applications-other",  i18n("Applications"));
         AddSectionData(sectComputer,     "computer-laptop",     i18n("Computer"));
@@ -183,10 +186,10 @@ protected:
         testContainment = new Plasma::Containment();
 
         // Components
-        layoutMain = new Plasma::BorderLayout();
+        layoutMain = new Lancelot::FlipLayout < Plasma::BorderLayout > ();
 
         // System area
-        layoutSystem = new Plasma::BorderLayout();
+        layoutSystem = new Lancelot::FlipLayout < Plasma::BorderLayout >();
         layoutSystemButtons = new Plasma::NodeLayout();
 
         systemButtons.append(buttonSystemLockScreen =
@@ -197,7 +200,7 @@ protected:
             new Lancelot::ExtenderButton("buttonSystemSwitchUser", new KIcon("switchuser"), "Switch User", ""));
 
         // Sections area
-        layoutSections = new Plasma::NodeLayout();
+        layoutSections = new Lancelot::FlipLayout < Plasma::NodeLayout > ();
         panelSections = new Lancelot::Panel("panelSections");
 
         layoutCenter = new Lancelot::CardLayout();
@@ -266,7 +269,8 @@ protected:
         layoutSystem->setSpacing(0);
         layoutSystem->setMargin(6);
         layoutSystem->setSize(128.0, Plasma::LeftPositioned);
-        layoutSystem->setSize(0.0,  Plasma::BottomPositioned);
+        //layoutSystem->setSize(0.0,  Plasma::BottomPositioned);
+        //layoutSystem->setSize(0.0,  Plasma::TopPositioned);
         layoutSystem->addItem(layoutSystemButtons);
 
         layoutSystemButtons->setSpacing(0);

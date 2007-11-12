@@ -15,6 +15,7 @@ set(plasma_lancelot_widgets_SRCS
   Widget.cpp
   WidgetPositioner.cpp
 
+  FlipLayout.cpp
   CardLayout.cpp
 
   Panel.cpp
