@@ -114,9 +114,16 @@ bool TwitterEngine::sourceRequested(const QString &name)
 
 void TwitterEngine::requestFinished(int id, bool error)
 {
-    kDebug() << id << error;
+    kDebug() << id << error << m_http->lastResponse().statusCode();
     if( error ) {
         kDebug() << "An error occured: " << m_http->errorString();
+        return;
+    } else if( m_http->lastResponse().statusCode() == 401 ) {
+        // Resend request, altough i'd guess that QHttps's job...
+        foreach( QString source, m_activeSources ) {
+            if( source.startsWith( "Timeline" ) )
+               updateSource( source );
+        }
         return;
     }
     UpdateType type = m_updates.take(id);
