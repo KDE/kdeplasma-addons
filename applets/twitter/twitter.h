@@ -114,6 +114,7 @@ class Twitter : public Plasma::Applet
         QTimer *m_refreshTimer;
 
         uint m_lastTweet;
+        bool m_waitingForData;
 };
 
 K_EXPORT_PLASMA_APPLET(twitter, Twitter)

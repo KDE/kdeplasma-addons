@@ -133,6 +133,10 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         showTweets();
     } else if( source.startsWith( "Update" ) ) {
         m_tweetMap[source] = data;
+        if( m_waitingForData ) {
+            m_waitingForData = false;
+            showTweets();
+        }
     } else if( source.startsWith( "UserInfo" ) ) {
         QString user = source.split( ':' ).at(1);
         QPixmap pm = data.value( "Image" ).value<QPixmap>();
@@ -154,19 +158,30 @@ void Twitter::showTweets()
     if( m_refreshTimer->isActive() )
         m_refreshTimer->stop();
 
+    // Verify that all tweets have arrived already
+    int i = 0;
+    int pos = m_tweetMap.keys().size() - 1;
+    while(i < m_historySize && i < m_tweetMap.keys().size() ) {
+        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+        if( tweetData.value( "User" ).toString().isEmpty() ) {
+            m_waitingForData = true;
+            return;
+        }
+        ++i;
+        --pos;
+    }
+
     for( int i = m_tweetWidgets.size()-1; i >= 0; --i ) {
         Tweet t = m_tweetWidgets[i];
         m_layout->removeItem( t.layout );
-//         t.layout->removeItem( t.icon );
-//         t.layout->removeItem( t.edit );
         delete t.icon;
         delete t.edit;
         delete t.layout;
     }
     m_tweetWidgets.clear();
 
-    int i = 0;
-    int pos = m_tweetMap.keys().size() - 1;
+    i = 0;
+    pos = m_tweetMap.keys().size() - 1;
     while(i < m_historySize && i < m_tweetMap.keys().size() ) {
         Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
         QString user = tweetData.value( "User" ).toString();
