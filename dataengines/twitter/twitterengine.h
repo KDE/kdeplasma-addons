@@ -24,6 +24,8 @@
 
 #include <QMap>
 #include <QStringList>
+#include <QTcpSocket>
+#include <QHttpResponseHeader>
 
 class QDomNodeList;
 class QHttp;
@@ -34,6 +36,8 @@ class TwitterEngine : public Plasma::DataEngine
     Q_PROPERTY(QString username READ username WRITE setUsername)
     Q_PROPERTY(QString password READ password WRITE setPassword)
     Q_PROPERTY(QString interval READ interval WRITE setInterval)
+    Q_PROPERTY(QString status READ status WRITE setStatus)
+
 
     public:
         TwitterEngine(QObject* parent,const QVariantList& args);
@@ -47,6 +51,9 @@ class TwitterEngine : public Plasma::DataEngine
 
         QString interval() const;
         void setInterval(const QString& interval);
+
+        QString status() const;
+        void setStatus(const QString& refresh);
 
         //QStringList sources() const;
         enum UpdateType { Timeline=1, Status, UserTimeline, UserTimelineWithFriends, UserImage };
@@ -64,12 +71,16 @@ class TwitterEngine : public Plasma::DataEngine
         void unauthorizedRequestFinished(int id, bool error);
         bool updateSource(const QString &source);
 
-private:
+        void slotConnected();
+        void slotRead();
+
+    private:
         QList<QVariant> parseStatuses(QDomNodeList items);
 
         QString m_username;
         QString m_password;
         QString m_interval;
+        QString m_status;
         QHttp* m_http;
         QHttp* m_unauthorizedHttp;
         QMap<int,UpdateType> m_updates;
@@ -77,6 +88,9 @@ private:
         QMap<int,QString> m_timelines;
         QStringList m_activeSources;
         QMap<QString,KUrl> m_userImages;
+        QTcpSocket *m_socket;
+        QHttpResponseHeader m_header;
+        QString m_data;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)

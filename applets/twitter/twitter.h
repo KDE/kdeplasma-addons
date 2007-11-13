@@ -22,7 +22,6 @@
 
 #include <QLabel>
 #include <QDomDocument>
-#include <QHttpResponseHeader>
 #include <QMap>
 
 #include <plasma/applet.h>
@@ -44,10 +43,6 @@ namespace Plasma
     class VBoxLayout;
     class HBoxLayout;
 }
-namespace KIO
-{
-    class Job;
-}
 
 struct Tweet {
     Plasma::HBoxLayout *layout;
@@ -59,8 +54,6 @@ class Twitter : public Plasma::Applet
 {
     Q_OBJECT
     public:
-        enum Action { Idle, Upload, HistoryDownload };
-
         Twitter(QObject *parent, const QVariantList &args);
         ~Twitter();
 
@@ -77,9 +70,6 @@ class Twitter : public Plasma::Applet
         void configAccepted();
         void updateStatus();
         void downloadHistory();
-
-        void slotConnected();
-        void slotRead();
 
         void showTweets();
 
@@ -112,13 +102,7 @@ class Twitter : public Plasma::Applet
         int m_historyRefresh;
         bool m_includeFriends;
 
-        Action m_action;
-
         Plasma::DataEngine *m_engine;
-        QTcpSocket *m_socket;
-        QHttpResponseHeader m_header;
-        QDomDocument m_historyDoc;
-        QString m_data;
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;

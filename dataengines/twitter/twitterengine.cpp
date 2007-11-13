@@ -30,6 +30,9 @@
 
 #include <KDebug>
 #include <KUrl>
+#include <ksocketfactory.h>
+#include <KCodecs>
+#include <KUrl>
 
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent)
@@ -66,6 +69,16 @@ void TwitterEngine::setInterval(const QString &interval)
     setUpdateInterval( interval.toInt() );
 }
 
+void TwitterEngine::setStatus(const QString &status)
+{
+    kDebug();
+    m_status = status;
+
+    m_socket = KSocketFactory::connectToHost( "http", "twitter.com", 80 );
+    connect( m_socket, SIGNAL(connected()), SLOT(slotConnected()) );
+    connect( m_socket, SIGNAL(readyRead()), SLOT(slotRead()) );  
+}
+
 QString TwitterEngine::username() const
 {
     return m_username;
@@ -79,6 +92,11 @@ QString TwitterEngine::password() const
 QString TwitterEngine::interval() const
 {
     return m_interval;
+}
+
+QString TwitterEngine::status() const
+{
+    return m_status;
 }
 
 /*QStringList TwitterEngine::sources() const
@@ -252,5 +270,53 @@ QList<QVariant> TwitterEngine::parseStatuses(QDomNodeList updates)
     }
     return timeline;
 }
+
+void TwitterEngine::slotConnected()
+{
+    kDebug() ;
+    QString auth = QString( "%1:%2" ).arg( m_username, m_password );
+    auth = QString( "Basic " ) + KCodecs::base64Encode( auth.toAscii() );
+    QString data;
+    QString status = QString( "source=kdetwitter&status=%1" ).arg( m_status );
+    data = QString("POST /statuses/update.xml HTTP/1.1\r\n"
+        "Authorization: %1\r\n"
+        "User-Agent: Mozilla/5.0\r\n"
+        "Host: twitter.com\r\n"
+        "Accept: */*\r\n"
+        "Content-Length: %2\r\n"
+        "Content-Type: application/x-www-form-urlencoded\r\n\r\n"
+        "%3" )
+        .arg( auth, QString::number(status.toUtf8().length()), status );
+
+    m_header = QHttpResponseHeader();
+    m_data.truncate( 0 );
+    m_socket->write( data.toUtf8(), data.toUtf8().length() );
+}
+
+void TwitterEngine::slotRead()
+{
+    kDebug() ;
+    QString read = m_socket->readAll();
+
+    QString data;
+    if( !m_header.isValid() ) {
+        m_header = read.section( "\r\n\r\n", 0, 0 );
+        m_data = read.section( "\r\n\r\n", 1, 1 );
+    } else {
+        m_data.append( read );
+    }
+
+    if( m_header.statusCode() == 401 ) {
+        kDebug() << "Status upload succeeded.";
+        return;
+    }
+
+    kDebug() << "Status upload succeeded.";
+    foreach( QString source, m_activeSources ) {
+        if( source.startsWith( "Timeline" ) )
+            updateSource( source );
+    }
+}
+
 
 #include "twitterengine.moc"

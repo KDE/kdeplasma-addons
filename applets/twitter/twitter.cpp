@@ -35,13 +35,8 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KDialog>
-#include <ksocketfactory.h>
 #include <KLineEdit>
 #include <KStringHandler>
-#include <KCodecs>
-#include <KUrl>
-#include <KIO/Job>
-#include <KIO/TransferJob>
 
 #include <plasma/svg.h>
 #include <plasma/theme.h>
@@ -356,12 +351,8 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
 
 void Twitter::updateStatus()
 {
-    kDebug() ;
-    m_action = Upload;
-
-    m_socket = KSocketFactory::connectToHost( "http", "twitter.com", 80 );
-    connect( m_socket, SIGNAL(connected()), SLOT(slotConnected()) );
-    connect( m_socket, SIGNAL(readyRead()), SLOT(slotRead()) );
+    m_engine->setProperty( "status", m_statusEdit->toPlainText() );
+    m_statusEdit->setPlainText("");
 }
 
 void Twitter::downloadHistory()
@@ -404,57 +395,5 @@ QString Twitter::timeDescription( const QDateTime &dt )
     }
     return desc;
 }
-
-void Twitter::slotConnected()
-{
-    kDebug() ;
-    QString auth = QString( "%1:%2" ).arg( m_username, m_password );
-    auth = QString( "Basic " ) + KCodecs::base64Encode( auth.toAscii() );
-    QString data;
-    if( m_action == Upload ) {
-        QString status = QString( "source=kdetwitter&status=%1" ).arg( m_statusEdit->toPlainText() );
-        data = QString("POST /statuses/update.json HTTP/1.1\r\n"
-                "Authorization: %1\r\n"
-                "User-Agent: Mozilla/5.0\r\n"
-                "Host: twitter.com\r\n"
-                "Accept: */*\r\n"
-                "Content-Length: %2\r\n"
-                "Content-Type: application/x-www-form-urlencoded\r\n\r\n"
-                "%3" )
-                .arg( auth, QString::number(status.toUtf8().length()), status );
-    }
-
-    m_header = QHttpResponseHeader();
-    m_data.truncate( 0 );
-    m_socket->write( data.toUtf8(), data.toUtf8().length() );
-}
-
-void Twitter::slotRead()
-{
-    kDebug() ;
-    QString read = m_socket->readAll();
-
-    QString data;
-    if( !m_header.isValid() ) {
-        m_header = read.section( "\r\n\r\n", 0, 0 );
-        m_data = read.section( "\r\n\r\n", 1, 1 );
-    } else {
-        m_data.append( read );
-    }
-
-    if( m_header.statusCode() == 401 ) {
-        m_flash->flash( i18n("Authentication failed") );
-        m_action = Idle;
-        return;
-    }
-
-    if( m_action == Upload ) {
-        kDebug() << "Status upload succeeded.";
-        m_flash->flash( i18n("Status upload succeeded") );
-        m_action = Idle;
-        m_statusEdit->setPlainText("");
-    }
-}
-
 
 #include "twitter.moc"
