@@ -44,7 +44,9 @@ private slots:
     void deviceRemoved(const QString & udi);
     void deviceAdded(const QString & udi);
     void freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable);
-    void udiAccessibilityChanged(bool accessible);
+    void udiAccessibilityChanged(bool accessible, const QString & udi);
+    
+    void deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi);
 
 protected:
     void activate(int index);
@@ -54,7 +56,8 @@ private:
     void addDevice(const Solid::Device & device);
 
     Type m_filter;
-    QMap < const Solid::StorageAccess *, QString> m_udis;
+    //QMap < const Solid::StorageAccess *, QString> m_udis;
+    //QStringList m_devicesMounting;
 };
 
 }

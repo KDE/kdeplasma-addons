@@ -19,6 +19,8 @@
  */
 
 #include "Devices.h"
+
+#include <QMessageBox>
 #include <KRun>
 #include <KLocalizedString>
 
@@ -94,10 +96,10 @@ void Devices::addDevice(const Solid::Device & device)
     }
 
     connect (
-        access, SIGNAL(accessibilityChanged(bool)),
-        this, SLOT(udiAccessibilityChanged(bool))
+        access, SIGNAL(accessibilityChanged(bool, const QString &)),
+        this, SLOT(udiAccessibilityChanged(bool, const QString &))
     );
-    m_udis[access] = device.udi();
+    //m_udis[access] = device.udi();
 
     add(
         device.product(),
@@ -107,15 +109,15 @@ void Devices::addDevice(const Solid::Device & device)
     );
 }
 
-void Devices::udiAccessibilityChanged(bool accessible)
+void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
 {
     Q_UNUSED(accessible);
 
-    Solid::StorageAccess * access = (Solid::StorageAccess *) sender();
-    if (!m_udis.contains(access)) {
-        return;
-    }
-    QString udi = m_udis[access];
+    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
+    //if (!m_udis.contains(access)) {
+    //    return;
+    //}
+    
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -154,17 +156,39 @@ void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize,
 void Devices::activate(int index)
 {
     if (index > m_items.size() - 1) return;
-    Solid::StorageAccess * access = Solid::Device(m_items.at(index).data.toString()).as<Solid::StorageAccess>();
+    QString udi = m_items.at(index).data.toString();
+    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
 
     if (!access) return;
 
     if (!access->isAccessible()) {
+        //m_devicesMounting << udi;
+        connect(access, SIGNAL(setupDone(Solid::ErrorType, QVariant, const QString &)),
+            this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
         access->setup();
+        return;
     }
 
     new KRun(KUrl(access->filePath()), 0);
     hideLancelotWindow();
 }
+
+void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
+{
+    //m_devicesMounting.removeAll(udi);
+    
+    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
+    access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+
+    if (!access || !access->isAccessible()) {
+        QMessageBox::critical(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
+        return;
+    }
+
+    new KRun(KUrl(access->filePath()), 0);
+    hideLancelotWindow();
+}
+
 
 }
 }

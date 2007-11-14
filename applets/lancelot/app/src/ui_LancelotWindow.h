@@ -104,7 +104,7 @@ protected:
     Plasma::Corona     * m_corona;
     QVBoxLayout        * m_layout;
 
-    Plasma::Containment * testContainment;
+    //Plasma::Containment * testContainment;
 
     // Components
     Lancelot::FlipLayout < Plasma::BorderLayout > * layoutMain;
@@ -140,6 +140,7 @@ protected:
 
     // Center area
 
+    Lancelot::Widget * centerBackground;
     Lancelot::CardLayout * layoutCenter;
     Lancelot::PassagewayView * panelSectionApplications;
 
@@ -183,7 +184,7 @@ protected:
     {
         Q_UNUSED(object);
 
-        testContainment = new Plasma::Containment();
+        //testContainment = new Plasma::Containment();
 
         // Components
         layoutMain = new Lancelot::FlipLayout < Plasma::BorderLayout > ();
@@ -204,6 +205,7 @@ protected:
         panelSections = new Lancelot::Panel("panelSections");
 
         layoutCenter = new Lancelot::CardLayout();
+        centerBackground = new Lancelot::Widget("centerBackground");
 
         foreach (QString section, sectionsOrder) {
             sectionLayouts[section] = new Plasma::NodeLayout();
@@ -298,7 +300,7 @@ protected:
         layoutSections->setSpacing(0);
         layoutSections->setMargin(0);
 
-        qreal top = 0;
+        qreal top = 1.0;
         qreal increase = 1.0 / sectionButtons.size();
 
         foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
@@ -308,10 +310,10 @@ protected:
             button->setInnerOrientation(Lancelot::BaseActionWidget::Vertical);
 
             layoutSections->addItem(button,
-                Plasma::NodeLayout::NodeCoordinate(0, top),
-                Plasma::NodeLayout::NodeCoordinate(1.0, top + increase)
+                Plasma::NodeLayout::NodeCoordinate(0, top - increase),
+                Plasma::NodeLayout::NodeCoordinate(1.0, top)
             );
-            top += increase;
+            top -= increase;
         }
         panelSections->setLayout(layoutSections);
         m_corona->addItem(panelSections);
@@ -342,10 +344,10 @@ protected:
 
         //layoutCenter->addItem(testContainment);
         //m_corona->addItem(testContainment);
-        testContainment->setFormFactor(Plasma::Planar);
-        testContainment->setLocation(Plasma::Desktop);
-        testContainment->addApplet("digital-clock");
-        testContainment->setGeometry(QRectF(0, 0, 500, 500));
+        //testContainment->setFormFactor(Plasma::Planar);
+        //testContainment->setLocation(Plasma::Desktop);
+        //testContainment->addApplet("digital-clock");
+        //testContainment->setGeometry(QRectF(0, 0, 500, 500));
 
         /*Plasma::Applet * applet = Plasma::Applet::loadApplet("digital-clock");
         //m_corona->addItem(applet);
@@ -365,6 +367,11 @@ protected:
         applet->setDrawStandardBackground(false);
         applet->setGeometry(QRectF(300, 100, 120, 70));*/
 
+        layoutCenter->addItem(centerBackground);
+        m_corona->addItem(centerBackground);
+        centerBackground->setGroupByName("MainPanel");
+        centerBackground->disable();
+        
         QMapIterator<QString, Lancelot::Panel *> i(sectionPanels);
         while (i.hasNext()) {
             i.next();
