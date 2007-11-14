@@ -164,11 +164,35 @@ void LancelotWindow::enterEvent(QEvent * event) {
 }
 
 bool LancelotWindow::lancelotShow() {
+    panelSections->show();
+    layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
+    layoutMain->update();
+    resizeWindow(this, QSize(mainWidth + sectionsWidth, 500));
+    
+    return showWindow();    
+}
+
+bool LancelotWindow::lancelotShowItem(QString name) {
+    sectionActivated(name);
+    
+    panelSections->hide();
+    layoutMain->setSize(0, Plasma::LeftPositioned);
+    layoutMain->setGeometry(layoutMain->geometry());
+    resizeWindow(this, QSize(mainWidth, 500));
+    
+    if (!isVisible()) {
+        return showWindow();
+    }
+    return true;
+}
+
+bool LancelotWindow::showWindow() {
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     m_hideTimer.stop();
     setFocus();
     editSearch->setFocus();
+    
     return true;
 }
 
@@ -180,16 +204,6 @@ bool LancelotWindow::lancelotHide(bool immediate) {
 
     if (m_hovered) return false;
     m_hideTimer.start();
-    return true;
-}
-
-bool LancelotWindow::lancelotShowItem(QString name) {
-    //Q_UNUSED(name);
-    //return false;
-    sectionActivated(name);
-    if (!isVisible()) {
-        lancelotShow();
-    }
     return true;
 }
 

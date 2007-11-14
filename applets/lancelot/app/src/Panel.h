@@ -55,10 +55,6 @@ public:
     void setWidget(Widget * widget);
     Widget * widget();
 
-    void setVisible(bool visible);
-    void show();
-    void hide();
-
     void setGroup(WidgetGroup * group = NULL);
 
 private:

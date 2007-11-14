@@ -61,6 +61,9 @@
 #define sectDocuments    "Documents"
 #define sectSearch       "Search"
 
+#define sectionsWidth 128
+#define mainWidth 422
+
 #define AddSectionData(Name, Icon, Caption) \
     sectionsOrder << Name; \
     sectionsData[Name] = QPair < QString, QString > (Icon, Caption);
@@ -72,6 +75,7 @@ class LancelotWindow
 
 protected:
     // Plasma shell
+
     class CustomGraphicsView : public QGraphicsView {
     public:
         CustomGraphicsView  ( QWidget * parent = 0 )
@@ -81,10 +85,12 @@ protected:
         void drawBackground (QPainter * painter, const QRectF & rect)
         {
             Q_UNUSED(rect); // Q_UNUSED(painter);
-            painter->setCompositionMode(QPainter::CompositionMode_Source);
+            painter->setCompositionMode(QPainter::CompositionMode_Clear);
             painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
+            painter->setCompositionMode(QPainter::CompositionMode_Source);
             if (m_background) {
-                m_background->resize(QSizeF(550, 500));
+                //m_background->resize(QSizeF(mainWidth + sectionsWidth, 500));
+                m_background->resize(size());
                 m_background->paint(painter, 0, 0, "background");
             }
         }
@@ -154,16 +160,13 @@ protected:
         // First of all we MUST create a Lancelot::Instance
         instance = new Lancelot::Instance();
         
-        Lancelot::FlipLayoutGlobal::setFlip(Lancelot::FlipLayoutGlobal::Both);
+        //Lancelot::FlipLayoutGlobal::setFlip(Lancelot::FlipLayoutGlobal::Both);
         
         AddSectionData(sectApplications, "applications-other",  i18n("Applications"));
         AddSectionData(sectComputer,     "computer-laptop",     i18n("Computer"));
         AddSectionData(sectContacts,     "kontact",             i18n("Contacts"));
         AddSectionData(sectDocuments,    "applications-office", i18n("Documents"));
         AddSectionData(sectSearch,       "edit-find",           i18n("Search"));
-        
-        kDebug() << "Sections: " << sectionsOrder;
-        kDebug() << "Sections: " << sectionsData;
       
         setupShell(object);
         createObjects(object);
@@ -171,13 +174,28 @@ protected:
         setupGroups(object);
         setupTests(object);
 
-        object->resize(550, 500);
-
         instance->activateAll();
 
-        layoutMain->setGeometry(QRectF(0, 0, 550, 500));
+        m_view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+        
+        resizeWindow(object, QSize(mainWidth + sectionsWidth, 500));
+    }
+    
+    void resizeWindow(QFrame * object, QSize newSize)
+    {
+        m_view->resetCachedContent();
+        
+        object->resize(newSize.width(), newSize.height());
+        m_view->resize(newSize.width(), newSize.height());
+        
+        m_corona->setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
+        layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
+        layoutMain->update();
 
-        m_corona->setSceneRect(QRectF(0, 0, 550, 500));
+        m_view->invalidateScene();
+        m_view->update();
+        
+        object->update();
     }
 
     void createObjects(QFrame * object)
@@ -266,7 +284,7 @@ protected:
         layoutMain->addItem(layoutSystem, Plasma::BottomPositioned);
         layoutMain->setSize(40.0, Plasma::BottomPositioned);
         layoutMain->setSize(30.0, Plasma::TopPositioned);
-        layoutMain->setSize(128.0, Plasma::LeftPositioned);
+        layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
 
         layoutSystem->setSpacing(0);
         layoutSystem->setMargin(6);

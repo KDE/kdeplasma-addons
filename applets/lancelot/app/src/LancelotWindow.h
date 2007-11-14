@@ -76,6 +76,7 @@ private Q_SLOTS:
 
 private:
     void createModels();
+    bool showWindow();
 
     // Computer models
     Lancelot::MergedActionListViewModel * m_systemLeftModel;
