@@ -223,6 +223,8 @@ void Twitter::showTweets()
         ++i;
         --pos;
     }
+
+    m_layout->invalidate();
     updateGeometry();
 }
 
