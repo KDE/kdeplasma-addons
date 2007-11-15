@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=File Watcher
 Name[bg]=Наблюдение на файлове
 Name[de]=Dateibetrachter
@@ -10,7 +9,7 @@ Name[pt]=Vigilante de Ficheiros
 Name[pt_BR]=Vigilante de Ficheiros
 Name[sv]=Filövervakning
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 Icon=application-octet-stream
 
 X-KDE-Library=plasma_applet_fileWatcher

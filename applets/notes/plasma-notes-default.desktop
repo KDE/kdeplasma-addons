@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Notes
 Name[bg]=Бележки
 Name[de]=Notizen
@@ -19,8 +18,8 @@ Comment[pt_BR]=Notas Autocolantes
 Comment[sv]=Postit-liknande anteckningar
 Icon=knotes
 Type=Service
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_notes
 X-KDE-PluginInfo-Author=Lukas Kropatschek
 X-KDE-PluginInfo-Email=lukas.krop@gmail.com

@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=English Breakfast Network
 Name[bg]=Мрежа English Breakfast
 Name[es]=Red de desayuno inglés
@@ -13,8 +12,8 @@ Comment[pt_BR]=Obter informações do sistema de verificação de qualidade auto
 Comment[sv]=Hämta information från KDE:s automatiska kvalitetskontroll
 Type=Service
 Icon=kteatime
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_ebn
 X-KDE-PluginInfo-Author=Alex Merry
 X-KDE-PluginInfo-Email=alex.merry@kdemail.net

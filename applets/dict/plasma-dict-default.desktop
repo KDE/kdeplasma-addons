@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Dictionary
 Name[bg]=Речник
 Name[de]=Wörterbuch
@@ -19,8 +18,8 @@ Comment[pt_BR]=Procurar significados das palavras
 Comment[sv]=Slå upp ords betydelse
 Type=Service
 Icon=accessories-dictionary
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_dict
 X-KDE-PluginInfo-Author=The Plasma Team
 X-KDE-PluginInfo-Email=panel-devel@kde.org

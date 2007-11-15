@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Picture Frame
 Name[ja]=写真フレーム
 Name[pt]=Moldura de Imagens
@@ -14,8 +13,8 @@ Comment[sv]=Visa dina favoritbilder
 Comment[zh_TW]=顯示您最愛的圖片
 Icon=image-jpeg2000
 Type=Service
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_frame
 X-KDE-PluginInfo-Author=Anne-Marie Mahfouf
 X-KDE-PluginInfo-Email=panel-devel@kde.org

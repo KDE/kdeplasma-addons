@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Icon=lancelot
 
 Name=Lancelot Launcher
@@ -19,8 +18,8 @@ Comment[x-test]=xxLauncher to start applicationsxx
 Comment[zh_CN]=启动应用程序的启动器
 Comment[zh_TW]=應用程式啟動器
 Type=Service
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_lancelot
 X-KDE-PluginInfo-Author=Ivan Cukic
 X-KDE-PluginInfo-Email=ivan.cukic+kde@gmail.com

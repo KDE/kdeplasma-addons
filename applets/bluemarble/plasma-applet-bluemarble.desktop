@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=3D Earth Model
 Name[bg]=3D модел на земята
 Name[es]=Modelo 3D de la Tierra
@@ -18,8 +17,8 @@ Comment[pt_BR]=Mostra a Terra no seu ecrã
 Comment[sv]=Visar jorden på skrivbordet
 Icon=world
 Type=Service
-ServiceTypes=Plasma/Applet
 
+X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_bluemarble
 X-KDE-PluginInfo-Author=Rivo Laks
 X-KDE-PluginInfo-Email=rivolaks@hot.ee

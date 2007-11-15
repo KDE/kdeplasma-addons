@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Twitter Data Engine
 Name[bg]=Ядро за Twitter
 Name[es]=Motor de datos Twitter
@@ -8,7 +7,7 @@ Name[nl]=Twitter-gegevensengine
 Name[pt]=Motor de Dados do Twitter
 Name[pt_BR]=Motor de Dados do Twitter
 Name[sv]=Datagränssnitt för Twitter
-ServiceTypes=Plasma/DataEngine
+X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
 X-KDE-Library=plasma_engine_twitter
