@@ -1,0 +1,25 @@
+[Desktop Entry]
+Name=Comic Strip
+Name[et]=Koomiks
+Name[pt]=Banda Desenhada
+Name[pt_BR]=Banda Desenhada
+Name[sv]=Tecknad serie
+Comment=Shows a comic strip from the internet.
+Comment[et]=Internetist hangitud koomiksi näitamine
+Comment[pt]=Mostra uma banda desenhada da Internet.
+Comment[pt_BR]=Mostra uma banda desenhada da Internet.
+Comment[sv]=Visar en tecknad serie från Internet.
+Icon=face-smile-big
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_comic
+X-KDE-PluginInfo-Author=Tobias Koenig
+X-KDE-PluginInfo-Email=tokoe@kde.org
+X-KDE-PluginInfo-Name=comic
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Graphics
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
