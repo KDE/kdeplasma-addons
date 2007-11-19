@@ -27,7 +27,7 @@
 #include <klocale.h>
 #include <kmenu.h>
 
-#include <plasma/widgets/boxlayout.h>
+#include <plasma/layouts/boxlayout.h>
 #include <plasma/widgets/pushbutton.h>
 
 static KMenu* buildMenuForColor(const QColor &color)

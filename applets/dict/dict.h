@@ -36,7 +36,7 @@
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
-#include <plasma/widgets/vboxlayout.h>
+#include <plasma/layouts/vboxlayout.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
 #include <plasma/widgets/pushbutton.h>

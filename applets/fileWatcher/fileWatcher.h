@@ -29,7 +29,7 @@
 
 #include <plasma/applet.h>
 #include <plasma/widgets/pushbutton.h>
-#include <plasma/widgets/boxlayout.h>
+#include <plasma/layouts/boxlayout.h>
 
 #include "fileWatcherConfig.h"
 

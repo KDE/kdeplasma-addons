@@ -43,7 +43,7 @@
 #include <plasma/dataengine.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
-#include <plasma/widgets/boxlayout.h>
+#include <plasma/layouts/boxlayout.h>
 #include <plasma/widgets/icon.h>
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)

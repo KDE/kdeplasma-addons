@@ -51,7 +51,7 @@
 #include <kurl.h>
 #include <QPicture>
 #include <plasma/dataenginemanager.h>
-#include <plasma/widgets/vboxlayout.h>
+#include <plasma/layouts/vboxlayout.h>
 #include <plasma/phase.h>
 #include <plasma/theme.h>
 #include "math.h"
