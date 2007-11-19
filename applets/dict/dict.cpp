@@ -124,7 +124,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     fnt.setBold( true );
     m_flash->setFont( fnt );
     m_flash->setPos(25,-10);
-    m_flash->setSize(QSize(200,20));
+    m_flash->resize(QSize(200,20));
 }
 
 void Dict::pageRight()

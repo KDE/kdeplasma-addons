@@ -75,7 +75,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
     m_flash = new Plasma::Flash( this );
     m_flash->setColor( Qt::gray );
-    m_flash->setSize( QSize(145, 20) );
+    m_flash->resize( QSize(145, 20) );
     QFont fnt = qApp->font();
     fnt.setBold( true );
     m_flash->setFont( fnt );
