@@ -25,6 +25,7 @@
 #include <kuniqueapplication.h>
 #include <QTimer>
 #include <QSet>
+#include <QStringList>
 
 class LancelotWindow;
 
