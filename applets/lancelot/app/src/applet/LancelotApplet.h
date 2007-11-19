@@ -21,7 +21,7 @@
 #define LANCELOT_PARTS_H
 
 #include <plasma/applet.h>
-#include <plasma/widgets/nodelayout.h>
+#include <plasma/layouts/nodelayout.h>
 
 #include "../src/Global.h"
 #include "../src/ExtenderButton.h"

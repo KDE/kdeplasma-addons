@@ -35,8 +35,8 @@
 #include <plasma/widgets/pushbutton.h>
 #include <plasma/widgets/label.h>
 
-#include <plasma/widgets/borderlayout.h>
-#include <plasma/widgets/nodelayout.h>
+#include <plasma/layouts/borderlayout.h>
+#include <plasma/layouts/nodelayout.h>
 //#include <plasma/widgets/boxlayout.h>
 
 #include <plasma/containment.h>

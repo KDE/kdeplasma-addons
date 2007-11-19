@@ -28,7 +28,7 @@
 #include "ActionListViewModels.h"
 #include "PassagewayView.h"
 #include "PassagewayViewModels.h"
-#include <plasma/widgets/nodelayout.h>
+#include <plasma/layouts/nodelayout.h>
 
 namespace Lancelot
 {

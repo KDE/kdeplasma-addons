@@ -20,7 +20,7 @@
 #ifndef LANCELOT_FLIPLAYOUT_H_
 #define LANCELOT_FLIPLAYOUT_H_
 
-#include <plasma/widgets/layout.h>
+#include <plasma/layouts/layout.h>
 #include <plasma/widgets/widget.h>
 #include <cmath>
 #include <QMap>

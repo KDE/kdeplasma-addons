@@ -21,7 +21,7 @@
 #define LANCELOT_PANEL_H_
 
 #include "Widget.h"
-#include <plasma/widgets/layout.h>
+#include <plasma/layouts/layout.h>
 #include "BaseActionWidget.h"
 
 #include <QIcon>
