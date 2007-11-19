@@ -62,9 +62,9 @@ void DilbertProvider::Private::pageRequestFinished( bool err )
 
   int pos = exp.indexIn( data ) + pattern.length();
 
-  const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
+  const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
 
-  QUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1.gif" ).arg( sub ) );
+  QUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
 
   mImageHttp = new QHttp( "dilbert.com", 80, mParent );
   mImageHttp->setHost( url.host() );
