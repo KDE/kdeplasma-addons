@@ -203,7 +203,7 @@ void Twitter::showTweets()
         icon->setText( user );
         tweetLayout->addItem( icon );
         tweetLayout->addItem( e );
-        tweetLayout->update();
+        tweetLayout->updateGeometry();
 
         Tweet t;
         t.layout = tweetLayout;
