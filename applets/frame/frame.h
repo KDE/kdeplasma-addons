@@ -63,12 +63,6 @@ class Frame : public Plasma::Applet
     protected Q_SLOTS:
 	void dropEvent(QGraphicsSceneDragDropEvent *event);
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-	//void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-        void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        void mousePressEvent ( QGraphicsSceneMouseEvent * event );
-        void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-        void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 	void resizeEvent( QResizeEvent * );
 	void configAccepted();
 	void choosePicture(const KUrl& currentUrl);
@@ -110,12 +104,6 @@ class Frame : public Plasma::Applet
 	//Plasma::Layout *m_layout;
 	/// The size of the picture, it's max(width, height) that is set
 	int m_pixelSize;
-	/// Rotation angle & transformation matrix
-	int m_rotation;
-        /// If true, the user is rotating/scaling the frame.
-        bool m_liveTransform;
-        int m_ltReferenceRotation;
-        int m_ltReferencePixelSize;
         /// Pixmap rect
         QRect m_pixmapRect;
         /// Pixmap rect + frame/shadow outline
@@ -127,9 +115,6 @@ class Frame : public Plasma::Applet
         int m_swOutline;
         /// Max Picture Dimension
         static const int m_maxDimension=800;
-        /// handles
-        QPixmap m_handle1;
-        Plasma::Phase::AnimId m_handle1AnimId;
         /// Utility functions
         double angleForPos(QPointF in);
         double distanceForPos(QPointF in);

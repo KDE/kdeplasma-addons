@@ -59,8 +59,7 @@
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), 
-      m_dialog(0),
-      m_liveTransform(false)
+      m_dialog(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -70,7 +69,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     m_dialog = 0;
     m_slideNumber = 0;
     m_skipPaint = 0;
-    m_handle1AnimId = 0;
     // Get config values
     KConfigGroup cg = config();
     m_frameColor = cg.readEntry("frameColor", QColor(70, 90, 130));
@@ -79,22 +77,14 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     m_squareCorners = cg.readEntry("squareCorners", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
     m_pixelSize = cg.readEntry("size", 350);
-    m_rotation = cg.readEntry("rotation",0);
     m_slideShow = cg.readEntry("slideshow", false);
     m_slideShowUrl = cg.readEntry("slideshow url");
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
     m_currentUrl = cg.readEntry("url", "default");
-    /*/ m_layout is unused for now.
-    m_layout = new Plasma::VBoxLayout(0);
-    m_layout->setGeometry(QRectF(0, 0, 400, 800));
-    m_layout->setMargin(12);*/
  
     //Frame & Shadow dimensions
     m_frameOutline = 8;
     m_swOutline = 8;
-
-    //Initialize handles
-    m_handle1 = KIcon("transform-rotate").pixmap(32,32);
 
     //Initialize the slideshow timer
     slideShowTimer = new QTimer(this);
@@ -244,7 +234,6 @@ void Frame::configAccepted()
     m_shadow = ui.shadowCheckBox->isChecked();
     cg.writeEntry("shadow", m_shadow);
     cg.writeEntry("size", m_pixelSize);
-    cg.writeEntry("rotation", m_rotation);
     m_squareCorners = ui.squareButton->isChecked();
     cg.writeEntry("squareCorners", m_squareCorners);
     m_roundCorners = ui.roundButton->isChecked();
@@ -275,16 +264,6 @@ void Frame::configAccepted()
 
 QRectF Frame::boundingRect() const
 {
-    // return m_layout->geometry();
-    if (m_liveTransform) {
-        //If the user is transforming the picture, this set the bouding rect to the widest area
-        //So we don't need to call prepareGeometryChange each mouse movement.
-        QSize tmp = myPicture.size();
-        tmp.scale(m_maxDimension,m_maxDimension,Qt::KeepAspectRatio);
-        tmp+=QSize(2*(m_swOutline+m_frameOutline),2*(m_swOutline+m_frameOutline));
-        qreal diagonal = sqrt(tmp.width()*tmp.width()+tmp.height()*tmp.height());
-        return QRectF(-diagonal/2,-diagonal/2,diagonal,diagonal);
-    }
     return m_boundingRect;
 }
 
@@ -368,8 +347,8 @@ void Frame::composePicture(QPainter* painter)
     framePath.addRoundRect(frameRect, roundingFactor);
 
     p->save();
-    p->setRenderHint(QPainter::SmoothPixmapTransform, !m_liveTransform); 
-    p->setRenderHint(QPainter::Antialiasing,!m_liveTransform); 
+    p->setRenderHint(QPainter::SmoothPixmapTransform, true); 
+    p->setRenderHint(QPainter::Antialiasing,true); 
 
     //If we draw on the pixmap, we can't use negative coordinates, so ...
     if (painter==NULL) {
@@ -377,11 +356,11 @@ void Frame::composePicture(QPainter* painter)
 	}
     
     //Rotation
-    p->rotate(m_rotation);
+    p->rotate(0);
 
     //Shadow 
     //TODO faster. I'd like to use it on liveTransform.
-    if (m_shadow && !m_liveTransform) {
+    if (m_shadow) {
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap,Qt::RoundJoin));
         p->setBrush(Qt::NoBrush);
         for (int i = 0; i <= m_swOutline; i+=1) {
@@ -434,22 +413,8 @@ void Frame::composePicture(QPainter* painter)
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 {
     Q_UNUSED(option);
- 
-    if (m_liveTransform) {
-        //if true draw directly  
-        composePicture(p);
-    }
-    else {
-        //draw the cached pixmap
-        p->drawPixmap (m_boundingRect.x(),m_boundingRect.y(), *m_cmpPicture);
-    }
 
-    if (m_handle1AnimId) {
-        p->setRenderHint(QPainter::SmoothPixmapTransform, !m_liveTransform); 
-        p->rotate(m_rotation);
-        QPoint pos = QPoint(m_pixmapRect.right()-32,m_pixmapRect.bottom()-32);
-        p->drawPixmap(pos.x(), pos.y(), Plasma::Phase::self()->animationResult(m_handle1AnimId));
-    }
+    p->drawPixmap (m_boundingRect.x(),m_boundingRect.y(), *m_cmpPicture);
 }
 	
 double Frame::angleForPos(QPointF in)
@@ -487,100 +452,9 @@ void Frame::updateSizes()
 QPolygon Frame::mapToPicture(const QPolygon in) const
 {
     QMatrix matrix;
-    matrix.rotate(m_rotation);
+    matrix.rotate(0);
     return matrix.map(in);
 }
 
-void Frame::mousePressEvent ( QGraphicsSceneMouseEvent * event ) 
-{
-
-
-    //Start the live transformation mode if the user clicks on bottom right corner
-    QPolygon activeArea = QPolygon(QRect(m_pixmapRect.right() - 32, m_pixmapRect.bottom() - 32, 32,32));
-
-    activeArea = mapToPicture(activeArea);
-
-    if ((event->button() ==  Qt::LeftButton) && (activeArea.containsPoint(event->pos().toPoint(),Qt::OddEvenFill)))
-    {
-        m_liveTransform = true;
-        m_ltReferenceRotation = m_rotation;
-        m_ltReferencePixelSize = m_pixelSize;
-    }
-
-}
-
-void Frame::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
-{
-    if (!m_liveTransform) {
-        return QGraphicsItem::mouseReleaseEvent(event);
-    }
-    //Exit from live transformation mode and store the changes
-    m_liveTransform = false;
-    //If the rotation is small is set to zero
-    m_rotation = m_rotation%360;
-    if (m_rotation < 5 && m_rotation > -5) {
-        m_rotation = 0;
-    }
-    KConfigGroup cg = config();
-    cg.writeEntry("rotation", m_rotation);
-    cg.writeEntry("size", m_pixelSize);
-    cg.config()->sync();
-    updateSizes();
-    composePicture(); //Cache the composed & transformed pixmap.
-    update();
-}
-
-void Frame::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    m_handle1AnimId = Plasma::Phase::self()->animateElement(this, Plasma::Phase::ElementAppear);
-    Plasma::Phase::self()->setAnimationPixmap(m_handle1AnimId, m_handle1);
-}
-
-void Frame::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    
-    if (m_handle1AnimId) {
-        m_handle1AnimId = Plasma::Phase::self()->animateElement(this, Plasma::Phase::ElementDisappear);
-        Plasma::Phase::self()->setAnimationPixmap(m_handle1AnimId, m_handle1);
-    }
-}
-void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-
-    if (!m_liveTransform) {
-        return QGraphicsItem::mouseMoveEvent(event);
-    }
-    //The hand is faster than the eye. So we skip some mouse movements ^^''
-    if (m_skipPaint != 4){
-        m_skipPaint++;
-        return;
-    } 
-    else {
-      m_skipPaint = 0;
-    }
-
-    // Map the original button-down position back to local coordinates.
-    // Since transformations aren't done by setTransform(), it is redundant now, 
-    // But it works anyway and could be useful in the future.
-    QPointF buttonDownPos = mapFromScene(event->buttonDownScenePos(Qt::LeftButton));
-
-    const double pi = 3.14159265;
-    qreal oldAngle = (180 * angleForPos(buttonDownPos)) / pi;
-    qreal newAngle = (180 * angleForPos(event->pos())) / pi;
-    qreal scaleFactor = distanceForPos(event->pos()) /  distanceForPos(buttonDownPos);
-
-    // Determine the item's new rotation
-    m_rotation = (int)(m_ltReferenceRotation - newAngle + oldAngle);
-    m_pixelSize = (int) (m_ltReferencePixelSize * scaleFactor);
-    // Don't allow to go over maxDimension
-    if (m_pixelSize > m_maxDimension) {
-      m_pixelSize = m_maxDimension;
-    }
-    // Update pixmap geometry & redraw. 
-    updateSizes();
-    update();
-}
 
 #include "frame.moc"
