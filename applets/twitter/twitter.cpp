@@ -75,6 +75,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
     m_flash = new Plasma::Flash( this );
     m_flash->setColor( Qt::gray );
+    //FIXME: this needs to be based on the font size, no?
+    m_flash->setMaximumSize( QSize(145, 30) );
     m_flash->resize( QSize(145, 20) );
     QFont fnt = qApp->font();
     fnt.setBold( true );
