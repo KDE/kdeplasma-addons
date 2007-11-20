@@ -25,10 +25,10 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QTextDocument>
-#include <QTcpSocket>
 #include <QCheckBox>
 #include <QTimer>
 #include <QGradient>
+#include <QFontMetrics>
 
 #include <KDebug>
 #include <KIcon>
@@ -75,17 +75,18 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
     m_flash = new Plasma::Flash( this );
     m_flash->setColor( Qt::gray );
-    //FIXME: this needs to be based on the font size, no?
-    m_flash->setMaximumSize( QSize(145, 30) );
-    m_flash->resize( QSize(145, 20) );
     QFont fnt = qApp->font();
     fnt.setBold( true );
+    QFontMetrics fm( fnt );
+    m_flash->resize( QSize(200, fm.height()) );
+    m_flash->setMaximumSize( QSizeF(200, fm.height()+10 ) );
     m_flash->setFont( fnt );
     m_layout->addItem( m_flash );
 
 
     m_headerLayout = new Plasma::HBoxLayout( m_layout );
-    m_headerLayout->setMargin( 0 );
+    m_headerLayout->setMargin( 5 );
+    m_headerLayout->setSpacing( 5 );
     m_layout->addItem( m_headerLayout );
 
 
@@ -101,7 +102,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
         m_statusEdit->hide();
     }
     m_statusEdit->setStyled( true );
-    m_statusEdit->setTextWidth( 200 );
+    m_statusEdit->setTextWidth( 250 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) );
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
@@ -145,6 +146,8 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         if( !pm.isNull() ) {
             if( user == m_username ) {
                 m_icon->setIcon( QIcon( pm ) );
+                m_icon->resize( 55, 55 );
+                m_icon->setMaximumSize( QSizeF( 55, 55 ) );
             }
             m_pictureMap[user] = pm;
         }
@@ -189,8 +192,8 @@ void Twitter::showTweets()
         QString user = tweetData.value( "User" ).toString();
 
         Plasma::HBoxLayout *tweetLayout = new Plasma::HBoxLayout( 0 );
-        tweetLayout->setMargin( 0 );
-        tweetLayout->setSpacing( 0 );
+        tweetLayout->setMargin( 5 );
+        tweetLayout->setSpacing( 5 );
         m_layout->addItem( tweetLayout );
 
         Plasma::LineEdit *e = new Plasma::LineEdit( this );
@@ -203,6 +206,9 @@ void Twitter::showTweets()
         Plasma::Icon *icon = new Plasma::Icon( this );
         icon->setIcon( QIcon(m_pictureMap[user]) );
         icon->setText( user );
+        icon->resize( 60, 60 );
+        icon->setMaximumSize( QSizeF( 60, 60 ) );
+        icon->setMinimumSize( QSizeF( 60, 60 ) );
         tweetLayout->addItem( icon );
         tweetLayout->addItem( e );
         tweetLayout->updateGeometry();
