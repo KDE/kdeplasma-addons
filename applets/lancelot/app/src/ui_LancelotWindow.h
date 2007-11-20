@@ -190,7 +190,7 @@ protected:
         
         m_corona->setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
         layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
-        layoutMain->update();
+        layoutMain->updateGeometry();
 
         m_view->invalidateScene();
         m_view->update();

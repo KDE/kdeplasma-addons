@@ -37,17 +37,9 @@ Qt::Orientations CardLayout::expandingDirections() const
     return Qt::Horizontal | Qt::Vertical;
 }
 
-QRectF CardLayout::geometry() const {
-    return m_geometry;
-}
-
-void CardLayout::setGeometry(const QRectF& geometry)
+void CardLayout::relayout()
 {
-    if (!geometry.isValid() || geometry.isEmpty()) {
-        return;
-    }
-
-    QRectF g = geometry;
+    QRectF g = geometry();
     g.setTopLeft(g.topLeft() + QPointF(margin(TopMargin), margin(LeftMargin)));
     g.setBottomRight(g.bottomRight() - QPointF(margin(RightMargin), margin(BottomMargin)));
 
@@ -60,8 +52,6 @@ void CardLayout::setGeometry(const QRectF& geometry)
         l->setGeometry(g);
         if (m_shown != l) l->hide();
     }
-
-    m_geometry = geometry;
 }
 
 QSizeF CardLayout::sizeHint() const

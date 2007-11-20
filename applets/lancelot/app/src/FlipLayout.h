@@ -56,17 +56,11 @@ private:
 
 template <typename SuperLayout>
 class FlipLayout : public SuperLayout { //Plasma::Layout
-public:
-    
-    void setGeometry(const QRectF & geometry)
+protected:
+    void relayout()
     {
-        if (
-            !geometry.isValid() ||
-            this->geometry() == geometry
-        ) return;
-
-        kDebug() << "Master" << geometry;
-        SuperLayout::setGeometry(geometry);
+        QRectF rect = SuperLayout::geometry();
+        kDebug() << "Master" << rect;
         
         if (FlipLayoutGlobal::flip() == FlipLayoutGlobal::No) return;
         
@@ -80,17 +74,17 @@ public:
             childGeometry = item->geometry();
             kDebug() << "Pre flip" << childGeometry;
             if (FlipLayoutGlobal::flip() & FlipLayoutGlobal::Horizontal) {
-                // 2 * geometry.left() - twice because we already have one
-                // value of geometry.left() inside the childGeometry.left()
+                // 2 * rect.left() - twice because we already have one
+                // value of rect.left() inside the childGeometry.left()
                 childGeometry.moveLeft(
-                    2 * geometry.left()       + geometry.width()
+                    2 * rect.left()       + rect.width()
                       - childGeometry.left()  - childGeometry.width()
                 );
             }
             if (FlipLayoutGlobal::flip() & FlipLayoutGlobal::Vertical) {
-                // 2 * geometry.top() - same reason as aforemontioned
+                // 2 * rect.top() - same reason as aforemontioned
                 childGeometry.moveTop(
-                    2 * geometry.top()      + geometry.height()
+                    2 * rect.top()      + rect.height()
                       - childGeometry.top() - childGeometry.height()
                 );
             }

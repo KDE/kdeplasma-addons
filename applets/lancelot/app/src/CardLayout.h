@@ -38,9 +38,6 @@ public:
     explicit CardLayout(LayoutItem * parent = 0);
     virtual ~CardLayout();
 
-    virtual QRectF geometry() const;
-    void setGeometry(const QRectF& geometry);
-
     QSizeF sizeHint() const;
 
     void addItem (Plasma::LayoutItem * item);
@@ -57,11 +54,13 @@ public:
     void show(const QString & id);
     void hideAll();
 
+protected:
+    void relayout();
+
 private:
     QList < Plasma::LayoutItem * > m_items;
     QMap < QString, Plasma::Widget * > m_widgets;
     Plasma::Widget * m_shown;
-    QRectF m_geometry;
 };
 
 }
