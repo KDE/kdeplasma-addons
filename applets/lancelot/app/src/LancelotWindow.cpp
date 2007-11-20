@@ -166,7 +166,7 @@ void LancelotWindow::enterEvent(QEvent * event) {
 bool LancelotWindow::lancelotShow() {
     panelSections->show();
     layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
-    layoutMain->update();
+    layoutMain->updateGeometry();
     resizeWindow(this, QSize(mainWidth + sectionsWidth, 500));
     
     return showWindow();    
