@@ -68,7 +68,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
 
     m_dialog = 0;
     m_slideNumber = 0;
-    m_skipPaint = 0;
     // Get config values
     KConfigGroup cg = config();
     m_frameColor = cg.readEntry("frameColor", QColor(70, 90, 130));
