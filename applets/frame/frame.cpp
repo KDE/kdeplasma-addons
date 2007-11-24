@@ -58,8 +58,8 @@
 
 
 Frame::Frame(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), 
-      m_dialog(0)
+    : Plasma::Applet(parent, args),
+      m_dialog(0), m_paintCount(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -81,7 +81,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     m_slideShowUrl = cg.readEntry("slideshow url");
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
     m_currentUrl = cg.readEntry("url", "default");
- 
+
     //Frame & Shadow dimensions
     m_frameOutline = 8;
     m_swOutline = 8;
@@ -91,8 +91,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     connect(slideShowTimer, SIGNAL(timeout()), this, SLOT(setSlideShow()));
     slideShowTimer->setInterval(m_slideshowTime*1000);
 
-    //Initialize the picture
-    m_cmpPicture = NULL;
     if (m_slideShow) {
         setSlideShow();
         slideShowTimer->start();
@@ -111,8 +109,7 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 QImage Frame::loadDefaultImage(QString message)
 {
-
-    //Create a QImage with same axpect ratio of default svg and current pixelSize 
+    //Create a QImage with same axpect ratio of default svg and current pixelSize
     QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
     QSvgRenderer sr(svgFile);
     double scale = (double)m_pixelSize/sr.boundsOnElement("boundingRect").size().width();
@@ -134,18 +131,6 @@ QImage Frame::loadDefaultImage(QString message)
     return imload;
 }
 
-void Frame::resizeEvent(QResizeEvent *)
-{
-    prepareGeometryChange();
-}
-
-void Frame::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
-{
-    Q_UNUSED(source);
-    Q_UNUSED(data);
-    QGraphicsItem::update();
-}
-
 void Frame::setSlideShow()
 {
     QDir dir(m_slideShowUrl.path());
@@ -164,36 +149,39 @@ void Frame::setSlideShow()
 void Frame::choosePicture(const KUrl& currentUrl)
 {
     //FIXME this method hangs Plasma while it downloads & scale the picture
-    
+
     /* KIO::NetAccess is useless for now.
     if ( !KIO::NetAccess::download( currentUrl, tmpFile, 0L ) ) {
     kDebug() << "Load Error!\n";
-    } else*/    
+    } else*/
 
     //ugly nested if..else :/
     if (currentUrl.url() == "default") {
-        myPicture = loadDefaultImage("Put your photo here\nor drop a folder for starting a slideshow");
-    } 
+        m_picture = loadDefaultImage("Put your photo here\nor drop a folder for starting a slideshow");
+    }
 	else {
         //QString tmpFile(currentUrl.path());
         QImage tempImage(currentUrl.path());
         if (tempImage.isNull()){
-            myPicture = loadDefaultImage("Error loading image");
-        } 
-		else { //Load success! Scale the image if it is too big 
-            if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) { 
-                myPicture = tempImage.scaled(m_maxDimension,m_maxDimension, 
+            m_picture = loadDefaultImage("Error loading image");
+        }
+		else { //Load success! Scale the image if it is too big
+            if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
+                m_picture = tempImage.scaled(m_maxDimension,m_maxDimension,
                                              Qt::KeepAspectRatio,Qt::SmoothTransformation);
-            } 
+            }
 			else {
-                myPicture=tempImage;
+                m_picture=tempImage;
             }
         }
     }
 
-    prepareGeometryChange();
-    updateSizes();
-    composePicture();
+    QSize frameSize = m_picture.size();
+    frameSize.scale(m_pixelSize, m_pixelSize, Qt::KeepAspectRatio);
+    setSize(frameSize);
+
+    m_pixmapCache = QPixmap();
+
     update();
 }
 
@@ -216,9 +204,9 @@ void Frame::showConfigurationInterface()
     ui.squareButton->setChecked(m_squareCorners);
     ui.roundButton->setChecked(m_roundCorners);
     ui.pictureComboBox->setCurrentIndex(m_slideShow);
-    //ui.stackedWidget->setCurrentIndex(m_slideShow*2);	
-    ui.picRequester->setUrl(m_currentUrl);    
-    ui.slideShowRequester->setUrl(m_slideShowUrl);  
+    //ui.stackedWidget->setCurrentIndex(m_slideShow*2);
+    ui.picRequester->setUrl(m_currentUrl);
+    ui.slideShowRequester->setUrl(m_slideShowUrl);
     ui.TimeSpinner->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_dialog->show();
 }
@@ -244,12 +232,12 @@ void Frame::configAccepted()
     cg.writeEntry("slideshow", m_slideShow);
     m_slideShowUrl = ui.slideShowRequester->url();
     cg.writeEntry("slideshow url", m_slideShowUrl);
-    
+
     QTime timerTime = ui.TimeSpinner->time();
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
     slideShowTimer->setInterval(m_slideshowTime*1000);
     cg.writeEntry("slideshow time", m_slideshowTime);
-    
+
     if (m_slideShow) {
         setSlideShow();
         slideShowTimer->start();
@@ -258,28 +246,24 @@ void Frame::configAccepted()
         slideShowTimer->stop();
         choosePicture(m_currentUrl);
     }
-    
+
     cg.config()->sync();
 }
 
-QRectF Frame::boundingRect() const
+QSizeF Frame::contentSizeHint() const
 {
-    return m_boundingRect;
+    QSizeF pixSize(m_picture.size());
+    pixSize = pixSize.boundedTo(contentSize());
+
+    return pixSize.expandedTo(contentSize());
 }
 
-QPainterPath Frame::shape() const
-{
-    QPainterPath path;
-    path.addPolygon(mapToPicture(QPolygon(m_pixmapOutlineRect)));
-    return path;
-}
- 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
-{ 
+{
 	kDebug() << event->mimeData()->formats();
 	if (event->mimeData()->hasUrls()) {
 		event->acceptProposedAction();
-	} 
+	}
 	else {
          event->ignore();
 	}
@@ -294,7 +278,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
         m_slideShow = true;
         setSlideShow();
         slideShowTimer->start();
-    } 
+    }
 	else {
         m_currentUrl = droppedUrl;
         choosePicture(m_currentUrl);
@@ -309,56 +293,63 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 Frame::~Frame()
 {
-    //delete m_layout;
-    delete m_cmpPicture;
 }
 
-//if *painter is NULL, it draws to m_cmpPicture.
-void Frame::composePicture(QPainter* painter)
+void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
+                           const QRect &contentsRect)
 {
+    // HACK: paintCount is a work around to ensure we paint in the cache
+    // several times the first time. Without this workaround we get garbage
+    // in the cache (likely to be a Qt bug)
+
+    if (m_pixmapCache.isNull() || contentsRect.size()!=m_pixmapCache.size()
+        || m_paintCount<2) {
+
+        paintCache(option, contentsRect);
+
+        if (m_paintCount<2) {
+            ++m_paintCount;
+        }
+    }
+
+    p->drawPixmap(contentsRect, m_pixmapCache);
+}
+
+void Frame::paintCache(const QStyleOptionGraphicsItem *option,
+                       const QRect &contentsRect)
+{
+    Q_UNUSED(option);
+
+    m_pixmapCache = QPixmap(contentsRect.size());
+    m_pixmapCache.fill(Qt::transparent);
+
+    QPainter *p = new QPainter(&m_pixmapCache);
+    p->fillRect(m_pixmapCache.rect(), Qt::transparent);
 
     int roundingFactor = 12 * m_roundCorners;
     int swRoundness = roundingFactor+m_frameOutline/2*m_frame*m_roundCorners;
 
-    QRect frameRect = m_pixmapRect; //Pretty useless.
-    qreal ratio = (double)m_pixmapRect.width()/(double)myPicture.width();
+    QRect frameRect = contentsRect.adjusted(m_swOutline, m_swOutline,
+                                            -m_swOutline, -m_swOutline); //Pretty useless.
 
     QRect shadowRect;
     if (m_frame) {
-        shadowRect = frameRect.adjusted(-m_frameOutline+1,-m_frameOutline+1,m_frameOutline-1,m_frameOutline-1);
-	}
-    else  {
+        shadowRect = frameRect.adjusted(-m_frameOutline+1, -m_frameOutline+1,
+                                        m_frameOutline-1, m_frameOutline-1);
+    } else {
         shadowRect = frameRect;
-	}
+    }
+
     //choose where to draw.
-    QPainter *p;
-    if (painter == NULL) {
-        delete m_cmpPicture;
-        m_cmpPicture = new QPixmap(m_boundingRect.size());
-        m_cmpPicture->fill(Qt::transparent);
-        p = new QPainter(m_cmpPicture);
-    } 
-	else  {
-        p = painter;
-	}
-    
+
     ///The frame path. It will be used to draw the frame and clip the image.
     QPainterPath framePath;
     framePath.addRoundRect(frameRect, roundingFactor);
 
-    p->save();
-    p->setRenderHint(QPainter::SmoothPixmapTransform, true); 
-    p->setRenderHint(QPainter::Antialiasing,true); 
+    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
+    p->setRenderHint(QPainter::Antialiasing, true);
 
-    //If we draw on the pixmap, we can't use negative coordinates, so ...
-    if (painter==NULL) {
-		p->translate(m_boundingRect.width()/2,m_boundingRect.height()/2);
-	}
-    
-    //Rotation
-    p->rotate(0);
-
-    //Shadow 
+    //Shadow
     //TODO faster. I'd like to use it on liveTransform.
     if (m_shadow) {
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap,Qt::RoundJoin));
@@ -366,18 +357,18 @@ void Frame::composePicture(QPainter* painter)
         for (int i = 0; i <= m_swOutline; i+=1) {
             p->setOpacity(0.7*exp(-(i/(double)(m_swOutline/3))));
             QPainterPath tr; //I use this because p.drawRoundRect is different(and ugly)
-            tr.addRoundRect(shadowRect,swRoundness+i);
+            tr.addRoundRect(shadowRect, swRoundness+i);
             p->drawPath(tr);
-            shadowRect.adjust(-1,-1,+1,+1);
+            shadowRect.adjust(-1, -1, +1, +1);
         }
-    } 
-    
+    }
+
     p->setBrush(Qt::NoBrush);
 
     //Frame
     if (m_frame) {
         p->setOpacity(0.5);
-        p->setPen(QPen(m_frameColor, m_frameOutline*2, Qt::SolidLine, Qt::FlatCap,Qt::MiterJoin));
+        p->setPen(QPen(m_frameColor, m_frameOutline*2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
         p->drawPath(framePath);
     }
 
@@ -386,75 +377,22 @@ void Frame::composePicture(QPainter* painter)
     //Picture
     p->save();
     if (m_roundCorners) {
-		p->setClipPath(framePath);
+        p->setClipPath(framePath);
     }
-    p->translate(frameRect.x(),frameRect.y());
-    p->scale(ratio,ratio);
-    p->drawImage(0,0,myPicture); 
+
+    p->drawImage(frameRect, m_picture.scaledToWidth(frameRect.width()));
     p->restore();
 
     // black frame
     if (m_frame) {
-		p->setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-		p->drawPath(framePath);
-    } 
-    else if (m_roundCorners) {
+        p->setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p->drawPath(framePath);
+    } else if (m_roundCorners) {
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p->drawPath(framePath);
     }
 
-    p->restore();
-
-    if (painter == NULL) {
-        delete p;
-    }
+    delete p;
 }
-
-void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
-{
-    Q_UNUSED(option);
-
-    p->drawPixmap (m_boundingRect.x(),m_boundingRect.y(), *m_cmpPicture);
-}
-	
-double Frame::angleForPos(QPointF in)
-{
-    return atan2(0-in.y(),in.x());
-}
-
-double Frame::distanceForPos(QPointF in)
-{
-    return sqrt(in.x()*in.x()+in.y()*in.y());
-}
-
-void Frame::updateSizes()
-{
-    QSize pixSize = myPicture.size();
-    pixSize.scale(m_pixelSize,m_pixelSize,Qt::KeepAspectRatio);
-    m_pixmapRect = QRect(QPoint(0,0),pixSize);
-    m_pixmapRect.translate(-m_pixmapRect.width()/2,-m_pixmapRect.height()/2);
-    m_pixmapOutlineRect = m_pixmapRect;
-
-    if (m_frame) { 
-        m_pixmapOutlineRect.adjust(-m_frameOutline,-m_frameOutline,m_frameOutline,m_frameOutline);
-    }
-
-    if (m_shadow) {
-        m_pixmapOutlineRect.adjust(-m_swOutline,-m_swOutline,m_swOutline,m_swOutline);
-    }
-
-    m_boundingRect = mapToPicture(QPolygon(m_pixmapOutlineRect)).boundingRect();
-    setSize(QSizeF(m_boundingRect.width(), m_boundingRect.height()));
-}
-
-///transform a polygon to the "logical coordinates" of the picture, accounting its rotation. 
-//(rotation isn't done by QGraphicsItem, so we must use this)
-QPolygon Frame::mapToPicture(const QPolygon in) const
-{
-    QMatrix matrix;
-    matrix.rotate(0);
-    return matrix.map(in);
-}
-
 
 #include "frame.moc"
