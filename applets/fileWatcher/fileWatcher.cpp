@@ -43,7 +43,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
   textStream = 0;
 
   configureButton = new Plasma::PushButton(i18n("&Configure File Watcher"), this);  
-  buttonBox = new Plasma::BoxLayout(Plasma::BoxLayout::LeftToRight, this);
+  buttonBox = new Plasma::BoxLayout(Plasma::BoxLayout::TopToBottom, this);
   buttonBox->addItem(configureButton);
 
   connect(configureButton, SIGNAL(clicked()), this, SLOT(showConfigurationInterface()));
@@ -111,7 +111,7 @@ void FileWatcher::newData()
 QSizeF FileWatcher::contentSizeHint() const
 {
   if (!configured)
-    return QSizeF(150, 75);
+    return QSizeF(200, 50);
   
   return textItem->boundingRect().size();
 }
