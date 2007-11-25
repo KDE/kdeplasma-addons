@@ -53,7 +53,7 @@ class Frame : public Plasma::Applet
 
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
-        QSizeF contentSizeHint() const;
+        void init();
         void constraintsUpdated(Plasma::Constraints constraints);
 
     public slots:

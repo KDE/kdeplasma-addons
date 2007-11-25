@@ -20,14 +20,9 @@
 
 #include "frame.h"
 
-#include <QApplication>
-#include <QBitmap>
-#include <QGraphicsScene>
-#include <QPaintEvent>
 #include <QPainter>
 #include <QPixmap>
 #include <QStyleOptionGraphicsItem>
-#include <QGridLayout>
 #include <QRadioButton>
 #include <QGroupBox>
 #include <QGraphicsSceneDragDropEvent>
@@ -41,21 +36,15 @@
 #include <KDebug>
 #include <kdialog.h>
 #include <KLocale>
-#include <KIcon>
 #include <kcolorbutton.h>
 #include <kcombobox.h>
 #include <KSharedConfig>
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
-#include <kio/netaccess.h>
 #include <kurl.h>
-#include <QPicture>
-#include <plasma/dataenginemanager.h>
-#include <plasma/layouts/vboxlayout.h>
-#include <plasma/phase.h>
 #include <plasma/theme.h>
-#include "math.h"
 
+#include "math.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -65,7 +54,10 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setCachePaintMode(NoCacheMode);
+}
 
+void Frame::init()
+{
     m_dialog = 0;
     m_slideNumber = 0;
     // Get config values
@@ -247,14 +239,6 @@ void Frame::configAccepted()
     }
 
     cg.config()->sync();
-}
-
-QSizeF Frame::contentSizeHint() const
-{
-    QSizeF pixSize(m_picture.size());
-    pixSize = pixSize.boundedTo(contentSize());
-
-    return pixSize.expandedTo(contentSize());
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
