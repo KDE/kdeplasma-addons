@@ -33,12 +33,11 @@ public:
 
     ~BlueMarble();
 
-    virtual QRectF boundingRect() const;
     qreal width() const {
-        return boundingRect().width();
+        return contentSize().width();
     }
     qreal height() const {
-        return boundingRect().height();
+        return contentSize().height();
     }
     virtual void paintGLInterface(QPainter *painter,
                                   const QStyleOptionGraphicsItem *option);

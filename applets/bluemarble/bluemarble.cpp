@@ -48,6 +48,7 @@ BlueMarble::BlueMarble(QObject *parent, const QVariantList &args)
     mRotZ = 0;
     mSunAngle = 0;
 
+    resize(400, 400);
     initializeGL();
 }
 
@@ -59,16 +60,12 @@ BlueMarble::~BlueMarble()
     delete mAtmosphereShader;
 }
 
-QRectF BlueMarble::boundingRect() const
-{
-    return QRectF(0, 0, 400, 400);
-}
-
 void BlueMarble::generateModel()
 {
     mSphere = gluNewQuadric();
     gluQuadricTexture(mSphere, GL_TRUE);
 }
+
 /*
 void BlueMarble::mousePressEvent(QGraphicsSceneMouseEvent* e)
 {
@@ -128,8 +125,7 @@ void BlueMarble::initializeGL()
     startTimer(500);
 }
 
-void BlueMarble::paintGLInterface(QPainter *,
-                  const QStyleOptionGraphicsItem *)
+void BlueMarble::paintGLInterface(QPainter *, const QStyleOptionGraphicsItem *)
 {
     checkGLError("paint 1");
     glViewport(0, 0, int(width()), int(height()));
