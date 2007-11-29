@@ -20,4 +20,4 @@ X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=kteatime
 X-KDE-Library=plasma_engine_ebn
-X-EngineName=ebn
+X-Plasma-EngineName=ebn

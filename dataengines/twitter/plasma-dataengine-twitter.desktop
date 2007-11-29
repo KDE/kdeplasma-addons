@@ -11,4 +11,4 @@ X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
 X-KDE-Library=plasma_engine_twitter
-X-EngineName=twitter
+X-Plasma-EngineName=twitter

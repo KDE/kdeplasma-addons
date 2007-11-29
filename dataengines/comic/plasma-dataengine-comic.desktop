@@ -14,4 +14,4 @@ ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=face-smile-big
 X-KDE-Library=plasma_engine_comic
-X-EngineName=comic
+X-Plasma-EngineName=comic
