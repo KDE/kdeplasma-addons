@@ -15,5 +15,5 @@ target_link_libraries(plasma_engine_twitter ${KDE4_KIO_LIBS}
 plasma ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS})
 
 install(TARGETS plasma_engine_twitter DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-engine-twitter.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install(FILES plasma-dataengine-twitter.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
