@@ -74,13 +74,13 @@ void Runner::load()
         runner->match(&m_context);
     }
 
-    QList < QList < Plasma::SearchAction * > > matchLists;
+    QList < QList < Plasma::SearchMatch * > > matchLists;
     matchLists << m_context.informationalMatches()
                << m_context.exactMatches()
                << m_context.possibleMatches();
 
-    foreach (QList < Plasma::SearchAction * > matchList, matchLists) {
-        foreach (Plasma::SearchAction * action, matchList) {
+    foreach (QList < Plasma::SearchMatch * > matchList, matchLists) {
+        foreach (Plasma::SearchMatch * action, matchList) {
             add(
                 action->text(),
                 action->runner()->objectName(),
@@ -95,7 +95,7 @@ void Runner::load()
 
 void Runner::activate(int index)
 {
-    Plasma::SearchAction * action = (Plasma::SearchAction *)
+    Plasma::SearchMatch * action = (Plasma::SearchMatch *)
         m_items[index].data.value< void * >();
 
     Q_ASSERT(action);
@@ -104,7 +104,7 @@ void Runner::activate(int index)
         return;
     }
 
-    if (action->type() == Plasma::SearchAction::InformationalMatch) {
+    if (action->type() == Plasma::SearchMatch::InformationalMatch) {
         changeLancelotSearchString(action->data().toString());
     } else {
         action->exec();
