@@ -107,7 +107,7 @@ void Runner::activate(int index)
     if (action->type() == Plasma::SearchAction::InformationalMatch) {
         changeLancelotSearchString(action->data().toString());
     } else {
-        action->activate( QAction::Trigger );
+        action->exec();
         hideLancelotWindow();
     }
 
