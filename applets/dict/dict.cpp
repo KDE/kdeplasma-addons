@@ -62,7 +62,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
 
     KConfigGroup cg = config();
-    m_width = cg.readEntry("width", 500);
+    m_width = 500;
     m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
     m_wordEdit = new Plasma::LineEdit(this);
     m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
@@ -167,9 +167,19 @@ QSizeF Dict::contentSizeHint() const
     }
 }
 
-void Dict::constraintsUpdated(Plasma::Constraints)
+void Dict::constraintsUpdated(Plasma::Constraints constraints)
 {
-    updateGeometry();
+    if (constraints & Plasma::FormFactorConstraint) {
+        //updateGeometry();
+    }
+    if (constraints & Plasma::SizeConstraint) {
+        m_width=size().width();
+//        m_width=500;
+	m_defEdit->setTextWidth(m_width);
+	m_wordEdit->setTextWidth(m_width);
+//        updateGeometry();
+    }
+    kDebug() << m_width << "!!!!!!!!!!!!!!!!";
 }
 
 void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
@@ -259,9 +269,6 @@ void Dict::define()
 void Dict::configAccepted()
 {
     KConfigGroup cg = config();
-
-    m_width = ui.widthSpinBox->value();
-    cg.writeEntry("width", m_width);
 
     m_autoDefineTimeout = ui.timeoutSpinBox->value();
     cg.writeEntry("autoDefineTimeout", m_autoDefineTimeout);
