@@ -1,0 +1,17 @@
+project(plasma-fifteenPuzzle)
+
+add_subdirectory(icons)
+include_directories( ${KDE4_INCLUDES} )
+
+set(fifteenPuzzle_SRCS src/fifteenPuzzleConfig.cpp src/fifteenPuzzle.cpp src/fifteen.cpp src/piece.cpp )
+
+qt4_add_resources(fifteenPuzzle_SRCS resources.qrc)
+
+kde4_add_ui_files(fifteenPuzzle_SRCS src/fifteenPuzzleConfig.ui )
+kde4_add_plugin(plasma_applet_fifteenPuzzle ${fifteenPuzzle_SRCS})
+
+target_link_libraries(plasma_applet_fifteenPuzzle ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+
+
+install(TARGETS plasma_applet_fifteenPuzzle DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-applet-fifteenPuzzle.desktop DESTINATION ${SERVICES_INSTALL_DIR})

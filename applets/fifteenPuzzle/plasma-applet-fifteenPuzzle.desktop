@@ -1,0 +1,28 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fifteen Puzzle
+Name[es]=Rompecabezas quince
+Name[et]=Viisteist
+Name[pt]=Puzzle dos Quinze
+Name[pt_BR]=Puzzle dos Quinze
+Name[sv]=Femtonspel
+Comment=Try to put the pieces in order
+Comment[es]=Pruebe a situar las piezas en orden
+Comment[et]=Klotside järjekorda seadmise mäng
+Comment[pt]=Tente colocar as peças por ordem
+Comment[pt_BR]=Tente colocar as peças por ordem
+Comment[sv]=Försök att ordna delarna
+Icon=fifteenpuzzle
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_fifteenPuzzle
+X-KDE-PluginInfo-Author=Jesper Thomschutz
+X-KDE-PluginInfo-Email=jeperht@yahoo.com
+X-KDE-PluginInfo-Name=fifteenPuzzle
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Toy
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
