@@ -1,6 +1,6 @@
 macro_optional_find_package(KdepimLibs)
-if(KDE4_SYNDICATION_LIBS)
+if(KDEPIMLIBS_FOUND)
     add_subdirectory(ebn)
-endif(KDE4_SYNDICATION_LIBS)
+endif(KDEPIMLIBS_FOUND)
 add_subdirectory(comic)
 add_subdirectory(twitter)
