@@ -80,7 +80,7 @@ void Fifteen::shuffle()
 bool Fifteen::isSolvable()
 {
   int fields[16];
-  int odd_even_solvable;
+  bool odd_even_solvable;
   for (int i=0;  i<16; ++i)
   {
     fields[i] = m_pieces[i]->getId();
@@ -89,15 +89,15 @@ bool Fifteen::isSolvable()
       fields[i] = 16;
       switch (i)
       {
-        case 0: case  2: case  5: case  7: odd_even_solvable = 1; break;
+        case 0: case  2: case  5: case  7:
         case 8: case 10: case 13: case 15: odd_even_solvable = 1; break;
-        case 1: case  3: case  4: case  6: odd_even_solvable = -1; break;
-        case 9: case 11: case 12: case 14: odd_even_solvable = -1; break;
+        case 1: case  3: case  4: case  6:
+        case 9: case 11: case 12: case 14: odd_even_solvable = 0; break;
       }
     }
   }
 
-  signed int odd_even_permutations = 1;
+  bool odd_even_permutations = 1;
   for (int i=0; i<16; ++i)
   {
     int field = fields[i];
@@ -106,7 +106,7 @@ bool Fifteen::isSolvable()
       int temp_field = fields[field-1];
       fields[field-1] = field;
       field = temp_field;
-      odd_even_permutations = odd_even_permutations * -1;
+      odd_even_permutations = !odd_even_permutations;
     }
   }
 
