@@ -50,27 +50,67 @@ void Fifteen::clearPieces()
 
 void Fifteen::shuffle()
 {
-  clearPieces();
-  m_pieces.fill(NULL);
+  bool solvable = false;
   qsrand(time(0));
-
-  for (int i=0; i<16; ++i)
+  while (!solvable)
   {
-    int rand = qrand() % 16;
-   
-    while (m_pieces.at(rand) != NULL)
-      rand = qrand() % 16;
-    
-      m_pieces[rand] = new Piece(SIZE, i, this);
-      m_pieces[rand]->hide();
-      QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*))); 
-    
-      if (i == 0)
-        m_blank = m_pieces[rand];
+    clearPieces();
+    m_pieces.fill(NULL);
+    for (int i=0; i<16; ++i)
+    {
+      int rand = qrand() % 16;
+     
+      while (m_pieces.at(rand) != NULL)
+        rand = qrand() % 16;
+      
+        m_pieces[rand] = new Piece(SIZE, i, this);
+        m_pieces[rand]->hide();
+        QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*))); 
+      
+        if (i == 0)
+          m_blank = m_pieces[rand];
+    }
+    solvable = isSolvable();
   }
   updatePixmaps();
   updateNumerals();
   drawPieces();
+}
+
+bool Fifteen::isSolvable()
+{
+  int fields[16];
+  int odd_even_solvable;
+  for (int i=0;  i<16; ++i)
+  {
+    fields[i] = m_pieces[i]->getId();
+    if (fields[i] == 0)
+    {
+      fields[i] = 16;
+      switch (i)
+      {
+        case 0: case  2: case  5: case  7: odd_even_solvable = 1; break;
+        case 8: case 10: case 13: case 15: odd_even_solvable = 1; break;
+        case 1: case  3: case  4: case  6: odd_even_solvable = -1; break;
+        case 9: case 11: case 12: case 14: odd_even_solvable = -1; break;
+      }
+    }
+  }
+
+  signed int odd_even_permutations = 1;
+  for (int i=0; i<16; ++i)
+  {
+    int field = fields[i];
+    while (field != i+1)
+    {
+      int temp_field = fields[field-1];
+      fields[field-1] = field;
+      field = temp_field;
+      odd_even_permutations = odd_even_permutations * -1;
+    }
+  }
+
+  return odd_even_solvable == odd_even_permutations;
 }
 
 void Fifteen::updateNumerals()

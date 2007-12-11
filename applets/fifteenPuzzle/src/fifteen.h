@@ -45,7 +45,8 @@ private:
   void updatePixmaps();
   void clearPieces();
   void updateNumerals();
- 
+  bool isSolvable();
+
   QVector<Piece *> m_pieces;
   QVector<QPixmap> m_pixmaps;
   QGraphicsItem *m_blank;
