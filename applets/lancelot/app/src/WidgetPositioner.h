@@ -19,7 +19,7 @@ public:
 	virtual ~WidgetPositioner();
 
     void setGeometry (const QRectF & geometry);
-	QRectF geometry();
+	QRectF geometry() const;
 
     QSizeF sizeHint() const;
 

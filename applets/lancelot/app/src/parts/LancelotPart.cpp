@@ -40,6 +40,7 @@ LancelotPart::LancelotPart(QObject *parent, const QVariantList &args) :
 }
 
 LancelotPart::~LancelotPart() {
+    delete instance;
 }
 
 QSizeF LancelotPart::contentSizeHint () const {

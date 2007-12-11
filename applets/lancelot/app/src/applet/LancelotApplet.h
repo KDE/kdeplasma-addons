@@ -40,7 +40,7 @@ public:
 
     QSizeF contentSizeHint() const;
     void setGeometry(const QRectF & geometry);
-    
+
     qreal heightForWidth(qreal width) const;
 
 protected Q_SLOTS:
@@ -49,17 +49,17 @@ protected Q_SLOTS:
 
 private:
     org::kde::lancelot::App * m_lancelot;
-    
+
     int m_clientID;
-    
+
     QSignalMapper m_signalMapper;
 
     Lancelot::Instance * m_instance;
     Lancelot::ExtenderButton * m_buttonMain;
     Plasma::NodeLayout * m_layout;
-    
+
     QList< Lancelot::ExtenderButton * > m_sectionButtons;
-    
+
 };
 
 K_EXPORT_PLASMA_APPLET(lancelot-applet, LancelotApplet)

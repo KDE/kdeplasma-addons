@@ -117,7 +117,7 @@ void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
     //if (!m_udis.contains(access)) {
     //    return;
     //}
-    
+
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -176,7 +176,7 @@ void Devices::activate(int index)
 void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
 {
     //m_devicesMounting.removeAll(udi);
-    
+
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
     access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
 

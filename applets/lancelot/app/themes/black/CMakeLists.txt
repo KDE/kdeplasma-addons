@@ -20,6 +20,6 @@ install(FILES
     extender-button-icon.svg
     launch-applet-button.svg
     main-panel.svg
-    
+
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/
 )

@@ -37,6 +37,7 @@
 
 #include <plasma/layouts/borderlayout.h>
 #include <plasma/layouts/nodelayout.h>
+#include <plasma/layouts/fliplayout.h>
 //#include <plasma/widgets/boxlayout.h>
 
 #include <plasma/containment.h>
@@ -49,7 +50,7 @@
 #include "Panel.h"
 #include "PassagewayView.h"
 #include "CardLayout.h"
-#include "FlipLayout.h"
+//#include "FlipLayout.h"
 #include "Global.h"
 
 #define SYSTEM_BUTTONS_Z_VALUE 1
@@ -102,7 +103,7 @@ protected:
 
     QStringList sectionsOrder;
     QMap < QString, QPair < QString, QString > > sectionsData;
-    
+
     Lancelot::Instance * instance;
 
     Plasma::Svg * m_mainTheme;
@@ -113,10 +114,10 @@ protected:
     //Plasma::Containment * testContainment;
 
     // Components
-    Lancelot::FlipLayout < Plasma::BorderLayout > * layoutMain;
+    Plasma::FlipLayout < Plasma::BorderLayout > * layoutMain;
 
     // System area
-    Lancelot::FlipLayout < Plasma::BorderLayout > * layoutSystem;
+    Plasma::FlipLayout < Plasma::BorderLayout > * layoutSystem;
     Plasma::NodeLayout * layoutSystemButtons;
 
     QList < Lancelot::ExtenderButton * > systemButtons;
@@ -134,13 +135,13 @@ protected:
     KLineEdit * editSearch;
 
     // Sections area
-    Lancelot::FlipLayout < Plasma::NodeLayout > * layoutSections; // was VBoxLaoyut
+    Plasma::FlipLayout < Plasma::NodeLayout > * layoutSections; // was VBoxLaoyut
     Lancelot::Panel * panelSections;
 
     QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
     QMap < QString, Lancelot::Panel * > sectionPanels;
     QMap < QString, Plasma::NodeLayout * > sectionLayouts;
-    
+
     QMap < QString, Lancelot::ActionListView * > sectionListsLeft;   // these have no Application key
     QMap < QString, Lancelot::ActionListView * > sectionListsRight;  // these have no Application key
 
@@ -159,15 +160,13 @@ protected:
     {
         // First of all we MUST create a Lancelot::Instance
         instance = new Lancelot::Instance();
-        
-        //Lancelot::FlipLayoutGlobal::setFlip(Lancelot::FlipLayoutGlobal::Both);
-        
+
         AddSectionData(sectApplications, "applications-other",  i18n("Applications"));
         AddSectionData(sectComputer,     "computer-laptop",     i18n("Computer"));
         AddSectionData(sectContacts,     "kontact",             i18n("Contacts"));
         AddSectionData(sectDocuments,    "applications-office", i18n("Documents"));
         AddSectionData(sectSearch,       "edit-find",           i18n("Search"));
-      
+
         setupShell(object);
         createObjects(object);
         setupObjects(object);
@@ -177,24 +176,24 @@ protected:
         instance->activateAll();
 
         m_view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-        
+
         resizeWindow(object, QSize(mainWidth + sectionsWidth, 500));
     }
-    
+
     void resizeWindow(QFrame * object, QSize newSize)
     {
         m_view->resetCachedContent();
-        
+
         object->resize(newSize.width(), newSize.height());
         m_view->resize(newSize.width(), newSize.height());
-        
+
         m_corona->setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
         layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
         layoutMain->updateGeometry();
 
         m_view->invalidateScene();
         m_view->update();
-        
+
         object->update();
     }
 
@@ -205,10 +204,12 @@ protected:
         //testContainment = new Plasma::Containment();
 
         // Components
-        layoutMain = new Lancelot::FlipLayout < Plasma::BorderLayout > ();
+        layoutMain = new Plasma::FlipLayout < Plasma::BorderLayout > ();
+        layoutMain->setFlip(Plasma::HorizontalFlip | Plasma::VerticalFlip);
 
         // System area
-        layoutSystem = new Lancelot::FlipLayout < Plasma::BorderLayout >();
+        layoutSystem = new Plasma::FlipLayout < Plasma::BorderLayout >();
+        layoutSystem->setFlip(Plasma::HorizontalFlip | Plasma::VerticalFlip);
         layoutSystemButtons = new Plasma::NodeLayout();
 
         systemButtons.append(buttonSystemLockScreen =
@@ -219,7 +220,8 @@ protected:
             new Lancelot::ExtenderButton("buttonSystemSwitchUser", new KIcon("switchuser"), "Switch User", ""));
 
         // Sections area
-        layoutSections = new Lancelot::FlipLayout < Plasma::NodeLayout > ();
+        layoutSections = new Plasma::FlipLayout < Plasma::NodeLayout > ();
+        layoutSections->setFlip(Plasma::HorizontalFlip | Plasma::VerticalFlip);
         panelSections = new Lancelot::Panel("panelSections");
 
         layoutCenter = new Lancelot::CardLayout();
@@ -229,7 +231,7 @@ protected:
             sectionLayouts[section] = new Plasma::NodeLayout();
             if (section != sectSearch) {
                 sectionButtons[section] = new Lancelot::ToggleExtenderButton(
-                    "buttonSection" + section, 
+                    "buttonSection" + section,
                     new KIcon(sectionsData[section].first),
                     sectionsData[section].second,
                     "", panelSections
@@ -237,7 +239,7 @@ protected:
             }
             if (section != sectApplications) {
                 sectionPanels[section] = new Lancelot::Panel(
-                    "panelSection" + section, 
+                    "panelSection" + section,
                     new KIcon(sectionsData[section].first),
                     sectionsData[section].second
                 );
@@ -389,7 +391,7 @@ protected:
         m_corona->addItem(centerBackground);
         centerBackground->setGroupByName("MainPanel");
         centerBackground->disable();
-        
+
         QMapIterator<QString, Lancelot::Panel *> i(sectionPanels);
         while (i.hasNext()) {
             i.next();
@@ -410,13 +412,13 @@ protected:
                 Plasma::NodeLayout::NodeCoordinate(0.5, 0, 4, 0),
                 Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0)
             );
-            
+
             sectionListsLeft[section]->setItemsGroup(instance->group("ActionListView-Left-Items"));
             sectionListsLeft[section]->setExtenderPosition(Lancelot::ExtenderButton::Left);
-            
+
             sectionListsRight[section]->setItemsGroup(instance->group("ActionListView-Right-Items"));
             sectionListsRight[section]->setExtenderPosition(Lancelot::ExtenderButton::Right);
-            
+
             sectionPanels[section]->setLayout(sectionLayouts[section]);
         }
     }

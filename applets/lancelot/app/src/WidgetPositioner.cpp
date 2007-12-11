@@ -22,7 +22,7 @@ void WidgetPositioner::setGeometry(const QRectF & geometry)
     }
 }
 
-QRectF WidgetPositioner::geometry()
+QRectF WidgetPositioner::geometry() const
 {
     return m_geometry;
 }

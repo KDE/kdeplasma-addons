@@ -25,14 +25,12 @@
 #include <QDBusReply>
 
 LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
-    Plasma::Applet(parent, args), m_lancelot(NULL)
+    Plasma::Applet(parent, args), m_lancelot(NULL),
+    m_clientID(-1), m_instance(NULL), m_buttonMain(NULL), m_layout(NULL)
 {
     setDrawStandardBackground(true);
     m_instance = new Lancelot::Instance();
 
-    // Connecting to Lancelot application via DBus
-    //m_dbus = new QDBusInterface( "org.kde.lancelot", "/Lancelot", "org.kde.lancelot.App");
-    
     m_lancelot = new org::kde::lancelot::App(
         "org.kde.lancelot",
         "/Lancelot",
@@ -55,16 +53,15 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
 
     // creating buttons...
     m_layout = new Plasma::NodeLayout();
-    
+
     kDebug();
     if (replyIDs.isValid() && replyNames.isValid() && replyIcons.isValid()) {
         for (int i = 0; i < replyIDs.value().size(); i++) {
-            kDebug() << replyIDs.value().at(i) << replyIcons.value().at(i) << replyNames.value().at(i);
             Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
                 replyIDs.value().at(i), new KIcon(replyIcons.value().at(i)), "", "", this
             );
             m_sectionButtons << button;
-            
+
             connect(button, SIGNAL(activated()), & m_signalMapper, SLOT(map()));
             m_signalMapper.setMapping(button, replyIDs.value().at(i));
         }
@@ -73,20 +70,18 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
         & m_signalMapper, SIGNAL(mapped(const QString &)),
         this, SLOT(showLancelotSection(const QString &))
     );
-    
-    kDebug();
-    
+
     qreal wpercent = 1.0 / (m_sectionButtons.size() + 1.0);
-    
+
     m_layout->addItem(
         m_buttonMain = new Lancelot::ExtenderButton("launcher", new KIcon("lancelot"), "", "", this),
         Plasma::NodeLayout::NodeCoordinate(0, 0),
         Plasma::NodeLayout::NodeCoordinate(wpercent, 1)
     );
     m_buttonMain->setGroupByName("AppletLaunchButton");
-    
+
     qreal left = wpercent;
-    
+
     foreach(Lancelot::ExtenderButton * button, m_sectionButtons) {
         button->setGroupByName("AppletLaunchButton");
         m_layout->addItem(
@@ -102,7 +97,7 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
 
     m_instance->activateAll();
     m_layout->setGeometry(QRectF(QPoint(), contentSize()));
-    
+
     setAcceptsHoverEvents(true);
 
     connect(m_buttonMain, SIGNAL(activated()), this, SLOT(showLancelot()));
@@ -114,8 +109,13 @@ LancelotApplet::~LancelotApplet()
 {
     m_lancelot->removeClient(m_clientID);
     delete m_lancelot;
-    delete m_layout;
+    
     delete m_buttonMain;
+    foreach (Lancelot::ExtenderButton * button, m_sectionButtons) {
+        delete button;
+    }
+    delete m_layout;
+    
     delete m_instance;
 }
 

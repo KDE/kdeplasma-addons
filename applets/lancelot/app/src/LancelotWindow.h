@@ -49,7 +49,7 @@ public:
     bool lancelotShow();
     bool lancelotHide(bool immediate = false);
     bool lancelotShowItem(QString name);
-    
+
     QStringList sectionIDs();
     QStringList sectionNames();
     QStringList sectionIcons();

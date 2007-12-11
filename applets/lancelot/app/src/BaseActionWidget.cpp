@@ -93,20 +93,20 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
 
 void BaseActionWidget::paintForeground (QPainter * painter) {
     QPainter * _painter = painter;
-    
+
     // Background Painting
     paintBackground(_painter);
-    
+
     // TODO: Cutting the long titles... gradient?
-    
+
     //QImage foreground(size().toSize().width(), size().toSize().height(), QImage::Format_ARGB32);
     QPixmap foreground(size().toSize().width(), size().toSize().height());
     foreground.fill(Qt::transparent);
-    
+
     // Replacing painter with QImage painter
     QPainter fpainter(&foreground);
     painter = &fpainter;
-    
+
     if (!m_enabled) {
         painter->setPen(QPen(m_group->foregroundColor()->disabled));
     } else if (m_hover) {
@@ -243,7 +243,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
         }
     }
-    
+
     QLinearGradient gradient = QLinearGradient(
         QPointF(size().width() - WIDGET_PADDING - 20, 0),
         QPointF(size().width() - WIDGET_PADDING, 0)
@@ -255,10 +255,10 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         0, 0, size().width(), size().height(),
         gradient);
     //
-    
+
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     _painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    
+
     _painter->drawPixmap(0, 0, foreground);
 }
 

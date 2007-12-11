@@ -45,7 +45,7 @@ private slots:
     void deviceAdded(const QString & udi);
     void freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable);
     void udiAccessibilityChanged(bool accessible, const QString & udi);
-    
+
     void deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi);
 
 protected:
