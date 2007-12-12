@@ -28,10 +28,10 @@
 #include "userfriendlyprovider.h"
 #include "xkcdprovider.h"
 
-ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
+ComicEngine::ComicEngine( QObject* parent, const QVariantList& )
     : Plasma::DataEngine( parent )
 {
-    Q_UNUSED(args)
+    setUpdateInterval( 0 );
 }
 
 ComicEngine::~ComicEngine()
