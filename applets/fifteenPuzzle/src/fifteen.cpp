@@ -50,28 +50,36 @@ void Fifteen::clearPieces()
 
 void Fifteen::shuffle()
 {
-  bool solvable = false;
   qsrand(time(0));
-  while (!solvable)
+  clearPieces();
+  m_pieces.fill(NULL);
+  for (int i=0; i<16; ++i)
   {
-    clearPieces();
-    m_pieces.fill(NULL);
-    for (int i=0; i<16; ++i)
-    {
       int rand = qrand() % 16;
-     
+
       while (m_pieces.at(rand) != NULL)
-        rand = qrand() % 16;
-      
-        m_pieces[rand] = new Piece(SIZE, i, this);
-        m_pieces[rand]->hide();
-        QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*))); 
-      
-        if (i == 0)
+          rand = qrand() % 16;
+
+      m_pieces[rand] = new Piece(SIZE, i, this);
+      m_pieces[rand]->hide();
+      QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*))); 
+
+      if (i == 0)
           m_blank = m_pieces[rand];
-    }
-    solvable = isSolvable();
   }
+
+  if (!isSolvable()) {
+      //this is where I would rip out two pieces and swap them around, if it were a plastic puzzle
+      int a = 1;
+      int b = 2;
+      if (m_pieces[a] == m_blank) { //you can't pull out a hole!
+          a = 3;
+      } else if (m_pieces[b] == m_blank) {
+          b = 0;
+      }
+      qSwap(m_pieces[a], m_pieces[b]);
+  }
+
   updatePixmaps();
   updateNumerals();
   drawPieces();
