@@ -32,8 +32,8 @@ EbnEngine::EbnEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args)
 
-    setMinimumUpdateInterval(60 * 1000);
-    setUpdateInterval(60 * 60 * 1000);
+    setMinimumUpdateInterval(60 * 1000); // one minute
+    setUpdateInterval(60 * 60 * 1000); // one hour
 }
 
 EbnEngine::~EbnEngine()
@@ -92,11 +92,8 @@ void EbnEngine::processFeed(Syndication::Loader* loader, Syndication::FeedPtr fe
     Q_UNUSED(loader)
     if (error != Syndication::Success) {
         kDebug() << "syndication failed";
-        //TODO: should probably tell the user it failed? =)
-        //      note that if you give an incorrect module or component
-        //      name, it will simply be ignored.  Only an incorrect
-        //      section name (or a broken internet connection) will
-        //      cause a failure
+        // Without a successful feed load, we don't know what was requested,
+        // so we can't do anything useful
         return;
     }
     QString source = urlToSource(feed->link());
@@ -106,7 +103,7 @@ void EbnEngine::processFeed(Syndication::Loader* loader, Syndication::FeedPtr fe
     kDebug() << "received " << feed->items().count() << " item(s) for " << feed->title();
     QVariantMap items;
     foreach (const Syndication::ItemPtr& item, feed->items()) {
-        /*
+        /* - useful for testing in plasmaengineexplorer
         QStringList data;
         data << item->title().section(" - ", 1, 1).section(' ', 0, 0);
         data << item->link();
