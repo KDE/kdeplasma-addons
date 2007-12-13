@@ -14,7 +14,7 @@ Comment[nl]=Kies een kleur van de desktop
 Comment[pt]=Recolhe uma cor do ambiente de trabalho
 Comment[pt_BR]=Recolhe uma cor do ambiente de trabalho
 Comment[sv]=Hämta en färg från skrivbordet
-Icon=kolourpicker
+Icon=color-picker
 Type=Service
 ServiceTypes=Plasma/Applet
 
