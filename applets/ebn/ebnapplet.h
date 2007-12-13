@@ -39,6 +39,8 @@ class EbnApplet : public Plasma::Applet
         EbnApplet(QObject *parent, const QVariantList &args);
         ~EbnApplet();
 
+        void init();
+
         void paintInterface(QPainter* painter,
                             const QStyleOptionGraphicsItem* option,
                             const QRect& rect);

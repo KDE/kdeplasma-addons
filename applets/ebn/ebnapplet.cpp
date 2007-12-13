@@ -36,7 +36,14 @@ EbnApplet::EbnApplet(QObject* parent, const QVariantList &args)
     , watchSource('/')
 {
     setHasConfigurationInterface(false);
+}
 
+EbnApplet::~EbnApplet()
+{
+}
+
+void EbnApplet::init()
+{
     connect(m_viewEdit, SIGNAL(linkActivated(const QString&)),
             this, SLOT(doLink(const QString&)));
 
@@ -46,10 +53,6 @@ EbnApplet::EbnApplet(QObject* parent, const QVariantList &args)
     go();
 }
 
-EbnApplet::~EbnApplet()
-{
-}
-
 QSizeF EbnApplet::contentSizeHint() const
 {
     return m_viewEdit->geometry().size();
@@ -57,14 +60,13 @@ QSizeF EbnApplet::contentSizeHint() const
 
 void EbnApplet::constraintsUpdated(Plasma::Constraints)
 {
-    prepareGeometryChange();
 }
 
 void EbnApplet::dataUpdated(const QString& source,
                             const Plasma::DataEngine::Data& data)
 {
-    prepareGeometryChange();
     if ( source != watchSource ) {
+        kDebug() << "Source was" << source << "but we wanted" << watchSource;
         // ignore all other sources
         return;
     }
@@ -100,7 +102,7 @@ void EbnApplet::dataUpdated(const QString& source,
     kDebug()<<"parentSource :"<<parentSource<<endl;
     m_viewEdit->setHtml(content);
 
-    update();
+    updateGeometry();
 }
 
 void EbnApplet::doLink(const QString& source)
@@ -114,7 +116,6 @@ void EbnApplet::doLink(const QString& source)
 
 void EbnApplet::go(const QString& source)
 {
-    prepareGeometryChange();
     if ( watchSource == "/" ) {
         dataEngine("ebn")->disconnectSource(watchSource, this);
     }
@@ -136,7 +137,7 @@ void EbnApplet::go(const QString& source)
         dataEngine("ebn")->connectSource(source, this);
     }
     watchSource = source;
-    update();
+    updateGeometry();
 }
 
 void EbnApplet::paintInterface(QPainter* p,
