@@ -223,7 +223,7 @@ void ActionListView::scrollBy(int scrollAmmount) {
 
     /*int*/ partHeight = qRound(geometry().height()) - m_buttons.last().second;
     /*int*/ height = itemHeightFromIndex(m_topButtonIndex + m_buttons.size() - 1);
-    /*qreal*/ scale = qMin(1.0, (qreal)(partHeight) / height);
+    /*qreal*/ scale = qMin(qreal(1.0), (qreal)(partHeight) / height);
     m_bottomButtonScale.reset();
     m_bottomButtonScale.scale(1, scale);
 
