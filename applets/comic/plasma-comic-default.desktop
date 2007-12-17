@@ -11,7 +11,7 @@ Comment[pt_BR]=Mostra uma banda desenhada da Internet.
 Comment[sv]=Visar en tecknad serie från Internet.
 Icon=face-smile-big
 Type=Service
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 
 X-KDE-Library=plasma_applet_comic
 X-KDE-PluginInfo-Author=Tobias Koenig
