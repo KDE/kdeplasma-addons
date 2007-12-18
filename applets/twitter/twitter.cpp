@@ -93,6 +93,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_icon = new Plasma::Icon( this );
     m_icon->setIcon( KIcon( "user" ) );
     m_icon->setIconSize( 48, 48 );
+    m_icon->setMinimumSize( QSizeF( 60, 60 ) );
+    m_icon->setMaximumSize( QSizeF( 60, 60 ) );
     m_icon->setText( m_username );
     m_headerLayout->addItem( m_icon );
 
