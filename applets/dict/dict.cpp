@@ -24,21 +24,11 @@
 #include <math.h>
 
 #include <QApplication>
-#include <QBitmap>
 #include <QGraphicsScene>
-#include <QMatrix>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QPixmap>
 #include <QStyleOptionGraphicsItem>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
 #include <QCheckBox>
 #include <QPushButton>
-#include <QSpinBox>
 //#include <QTextArea>
-#include <QLineEdit>
 #include <iostream>
 
 

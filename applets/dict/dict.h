@@ -21,17 +21,9 @@
 #ifndef DICT_H
 #define DICT_H
 
-#include <QImage>
-#include <QPaintDevice>
-#include <QLabel>
-#include <QPixmap>
 #include <QTimer>
-#include <QPaintEvent>
-#include <QPainter>
 #include <QTime>
-#include <QX11Info>
 #include <QGraphicsItem>
-#include <QColor>
 #include <QTextEdit>
 
 #include <plasma/applet.h>
