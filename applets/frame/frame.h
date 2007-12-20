@@ -95,8 +95,6 @@ class Frame : public Plasma::Applet
 	QImage m_picture;
 	/// Off-Screen pixmap
 	QPixmap m_pixmapCache;
-	/// The size of the picture, it's max(width, height) that is set
-	int m_pixelSize;
         /// Frame & shadow outline thickness
         int m_frameOutline;
         int m_swOutline;

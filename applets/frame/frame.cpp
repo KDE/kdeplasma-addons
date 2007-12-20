@@ -54,6 +54,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setCachePaintMode(NoCacheMode);
+    setSize(350, 350);
 }
 
 void Frame::init()
@@ -67,7 +68,6 @@ void Frame::init()
     m_shadow = cg.readEntry("shadow", true);
     m_squareCorners = cg.readEntry("squareCorners", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
-    m_pixelSize = cg.readEntry("size", 350);
     m_slideShow = cg.readEntry("slideshow", false);
     m_slideShowUrl = cg.readEntry("slideshow url");
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
@@ -103,8 +103,9 @@ QImage Frame::loadDefaultImage(QString message)
     //Create a QImage with same axpect ratio of default svg and current pixelSize
     QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
     QSvgRenderer sr(svgFile);
-    double scale = (double)m_pixelSize/sr.boundsOnElement("boundingRect").size().width();
-    QImage imload(m_pixelSize, (int) (sr.boundsOnElement("boundingRect").size().height()*scale),QImage::Format_ARGB32);
+    int pixelSize = contentSize().toSize().width();
+    double scale = (double)pixelSize/sr.boundsOnElement("boundingRect").size().width();
+    QImage imload(pixelSize, (int) (sr.boundsOnElement("boundingRect").size().height()*scale),QImage::Format_ARGB32);
     imload.fill(Qt::white);
     QPainter p(&imload);
     sr.render(&p,QRect(QPoint(0,0),imload.size()));
@@ -168,7 +169,7 @@ void Frame::choosePicture(const KUrl& currentUrl)
     }
 
     QSize frameSize = m_picture.size();
-    frameSize.scale(m_pixelSize, m_pixelSize, Qt::KeepAspectRatio);
+    frameSize.scale(contentSize().toSize(), Qt::KeepAspectRatio);
     setSize(frameSize);
 
     m_pixmapCache = QPixmap();
@@ -212,7 +213,6 @@ void Frame::configAccepted()
     cg.writeEntry("frame", m_frame);
     m_shadow = ui.shadowCheckBox->isChecked();
     cg.writeEntry("shadow", m_shadow);
-    cg.writeEntry("size", m_pixelSize);
     m_squareCorners = ui.squareButton->isChecked();
     cg.writeEntry("squareCorners", m_squareCorners);
     m_roundCorners = ui.roundButton->isChecked();
