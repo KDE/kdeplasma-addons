@@ -34,6 +34,11 @@ class QSpinBox;
 class KJob;
 class QCheckBox;
 
+namespace KWallet
+{
+    class Wallet;
+}
+
 namespace Plasma
 {
     class Svg;
@@ -56,6 +61,7 @@ class Twitter : public Plasma::Applet
     public:
         Twitter(QObject *parent, const QVariantList &args);
         ~Twitter();
+        void init();
 
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
@@ -63,6 +69,7 @@ class Twitter : public Plasma::Applet
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void showConfigurationInterface();
+        void gotWallet(bool success);
 
     protected slots:
         void newSource( const QString & );
@@ -80,6 +87,11 @@ class Twitter : public Plasma::Applet
         void pictureDownloaded( const QString &nick );
 
     private:
+        void getWallet();
+        bool enterWalletFolder(const QString &folder);
+        void gotPassword();
+        void writeConfigPassword();
+
         Plasma::Svg *m_theme;
         KDialog *m_dialog;
         Plasma::LineEdit *m_title;
@@ -115,6 +127,9 @@ class Twitter : public Plasma::Applet
 
         uint m_lastTweet;
         bool m_waitingForData;
+        KWallet::Wallet *m_wallet;
+        enum WalletWait { None=0, Read, Write };
+        WalletWait m_walletWait;
 };
 
 K_EXPORT_PLASMA_APPLET(twitter, Twitter)

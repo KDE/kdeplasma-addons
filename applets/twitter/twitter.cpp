@@ -29,6 +29,7 @@
 #include <QTimer>
 #include <QGradient>
 #include <QFontMetrics>
+#include <QGraphicsView>
 
 #include <KDebug>
 #include <KIcon>
@@ -37,6 +38,8 @@
 #include <KDialog>
 #include <KLineEdit>
 #include <KStringHandler>
+#include <KWallet/Wallet>
+#include <KMessageBox>
 
 #include <plasma/svg.h>
 #include <plasma/theme.h>
@@ -48,12 +51,15 @@
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_dialog(0), m_lastTweet( 0 )
+      m_dialog(0), m_lastTweet(0), m_wallet(0), m_walletWait(None)
 {
-    kDebug() << "Loading applet twitter";
     setHasConfigurationInterface(true);
-    m_theme = new Plasma::Svg("widgets/twitter", this);
+    setContentSize(300,150); //should be an ok default
+}
 
+void Twitter::init()
+{
+    m_theme = new Plasma::Svg("widgets/twitter", this);
 
     KConfigGroup cg = config();
     m_username = cg.readEntry( "username" );
@@ -64,7 +70,6 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
     m_engine = dataEngine("twitter");
     m_engine->setProperty( "username", m_username );
-    m_engine->setProperty( "password", m_password );
     m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
     connect( m_engine, SIGNAL(newSource(const QString&)), SLOT(newSource(const QString&)) );
 
@@ -98,11 +103,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_icon->setText( m_username );
     m_headerLayout->addItem( m_icon );
 
-
     m_statusEdit = new Plasma::LineEdit( this );
-    if ( m_username.isEmpty() || m_password.isEmpty() ) {
-        m_statusEdit->hide();
-    }
+    m_statusEdit->hide();
     m_statusEdit->setStyled( true );
     m_statusEdit->setTextWidth( 250 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) );
@@ -112,8 +114,88 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL(timeout()), SLOT(showTweets()) );
 
-    if( !m_username.isEmpty() && !m_password.isEmpty() ) {
-        downloadHistory();
+    if(! m_username.isEmpty()) {
+        if (m_password.isEmpty()) {
+            m_walletWait = Read;
+            getWallet();
+        } else { //use config value
+            gotPassword();
+        }
+    }
+}
+
+void Twitter::getWallet()
+{
+    kDebug();
+    //TODO: maybe Plasma in general should handle the wallet
+    if (m_wallet) {
+        //user must be a dumbass. kill that old attempt.
+        delete m_wallet;
+    }
+    QGraphicsView *v = view();
+    WId w;
+    if (!v) {
+        kDebug() << "eek! no view!";
+        w=0;
+    } else {
+        w=v->winId();
+    }
+    m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),
+            w, KWallet::Wallet::Asynchronous );
+    connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( gotWallet(bool) ) );
+}
+
+void Twitter::gotWallet(bool success)
+{
+    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))){
+        if (m_walletWait == Read) {
+            QString pwd;
+            if (m_wallet->readPassword(m_username, pwd) == 0) {
+                m_password = pwd;
+                gotPassword();
+            }
+        } else if (m_walletWait == Write) {
+            if (m_wallet->writePassword(m_username, m_password) != 0) {
+                kDebug() << "failed to write password";
+                writeConfigPassword();
+            }
+        }
+    } else {
+        kDebug() << "failed to get wallet";
+        if (m_walletWait == Write) {
+            writeConfigPassword();
+        }
+    }
+    m_walletWait = None;
+    delete m_wallet;
+    m_wallet = 0;
+}
+
+bool Twitter::enterWalletFolder(const QString &folder)
+{
+    //TODO: seems a bit silly to have a function just for this here
+    //why doesn't kwallet have this itself?
+    m_wallet->createFolder(folder);
+    if (! m_wallet->setFolder(folder)) {
+        kDebug() << "failed to open folder" << folder;
+        return false;
+    }
+    return true;
+}
+
+void Twitter::gotPassword()
+{
+    m_engine->setProperty( "password", m_password );
+    m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
+    downloadHistory();
+}
+void Twitter::writeConfigPassword()
+{
+    kDebug();
+    if (KMessageBox::warningYesNo(0, i18n("Failed to access kwallet. Store password in config file instead?"))
+            == KMessageBox::Yes) {
+        KConfigGroup cg = config();
+        cg.writeEntry( "password", KStringHandler::obscure(m_password) );
     }
 }
 
@@ -314,7 +396,19 @@ void Twitter::configAccepted()
     if( m_password != m_passwordEdit->text() )
         changed = true;
     m_password = m_passwordEdit->text();
-    cg.writeEntry( "password", KStringHandler::obscure(m_password) );
+    //if (m_walletWait == Read)
+    //then the user is a dumbass.
+    //we're going to ignore that, which drops the read attempt
+    //I hope that doesn't cause trouble.
+    //XXX if there's a value in the config, the wallet will never be read
+    //if a user saves their password in the config and later changes their mind
+    //then they might not understand that they have to delete the password from plasma-appletsrc
+    //TODO if the password is blank, it'd be convenient to try and *read* from the wallet instead
+    if (changed) {
+        //a change in name *or* pass means we need to update the wallet
+        m_walletWait = Write;
+        getWallet();
+    }
 
     m_historySize = m_historySizeSpinBox->value();
     cg.writeEntry("historySize", m_historySize);
@@ -325,13 +419,8 @@ void Twitter::configAccepted()
         changed = true;
 
     m_includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
-    cg.config()->sync();
 
     m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
-    if( !m_username.isEmpty() && !m_password.isEmpty() )
-      m_statusEdit->show();
-    else
-      m_statusEdit->hide();
 
     m_engine->setProperty( "username", m_username );
     m_engine->setProperty( "password", m_password );
