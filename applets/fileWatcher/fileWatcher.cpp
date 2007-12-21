@@ -79,7 +79,7 @@ void FileWatcher::loadFile(const QString& path)
 
   QObject::connect(watcher,SIGNAL(fileChanged(QString)),this,SLOT(newData()));
   
-  setToolTip(path);
+  QGraphicsItem::setToolTip(path);
 }
 
 void FileWatcher::newData()
