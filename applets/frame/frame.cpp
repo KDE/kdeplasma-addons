@@ -48,7 +48,7 @@
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_dialog(0), m_paintCount(0)
+      m_dialog(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -168,12 +168,7 @@ void Frame::choosePicture(const KUrl& currentUrl)
         }
     }
 
-    QSize frameSize = m_picture.size();
-    frameSize.scale(contentSize().toSize(), Qt::KeepAspectRatio);
-    setSize(frameSize);
-
     m_pixmapCache = QPixmap();
-
     update();
 }
 
@@ -279,41 +274,37 @@ Frame::~Frame()
 }
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
-                           const QRect &contentsRect)
+                           const QRect &rect)
 {
-    // HACK: paintCount is a work around to ensure we paint in the cache
-    // several times the first time. Without this workaround we get garbage
-    // in the cache (likely to be a Qt bug)
-
-    if (m_pixmapCache.isNull() || contentsRect.size()!=m_pixmapCache.size()
-        || m_paintCount<2) {
-
-        paintCache(option, contentsRect);
-
-        if (m_paintCount<2) {
-            ++m_paintCount;
-        }
+    if (m_pixmapCache.isNull() || contentRect().toRect().size()!=m_pixmapCache.size()) {
+        paintCache(option, contentRect().toRect().size());
     }
 
-    p->drawPixmap(contentsRect, m_pixmapCache);
+//    p->save();
+//    p->setCompositionMode(QPainter::CompositionMode_Source);
+    p->drawPixmap(rect, m_pixmapCache, rect);
+//    p->restore();
 }
 
 void Frame::paintCache(const QStyleOptionGraphicsItem *option,
-                       const QRect &contentsRect)
+                       const QSize &contentsSize)
 {
     Q_UNUSED(option);
 
-    m_pixmapCache = QPixmap(contentsRect.size());
+    m_pixmapCache = QPixmap(contentsSize);
     m_pixmapCache.fill(Qt::transparent);
 
     QPainter *p = new QPainter(&m_pixmapCache);
-    p->fillRect(m_pixmapCache.rect(), Qt::transparent);
 
     int roundingFactor = 12 * m_roundCorners;
     int swRoundness = roundingFactor+m_frameOutline/2*m_frame*m_roundCorners;
 
-    QRect frameRect = contentsRect.adjusted(m_swOutline, m_swOutline,
-                                            -m_swOutline, -m_swOutline); //Pretty useless.
+    QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
+                                                    -m_swOutline, -m_swOutline); //Pretty useless.
+
+    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, Qt::FastTransformation);
+    frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
+                      frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 
     QRect shadowRect;
     if (m_frame) {
@@ -326,8 +317,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     //choose where to draw.
 
     ///The frame path. It will be used to draw the frame and clip the image.
-    QPainterPath framePath;
-    framePath.addRoundRect(frameRect, roundingFactor);
+    QPainterPath framePath = Plasma::roundedRectangle(frameRect, roundingFactor);
 
     p->setRenderHint(QPainter::SmoothPixmapTransform, true);
     p->setRenderHint(QPainter::Antialiasing, true);
@@ -363,7 +353,9 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->setClipPath(framePath);
     }
 
-    p->drawImage(frameRect, m_picture.scaledToWidth(frameRect.width()));
+    // scale and center
+//    kDebug() << "painting to" << frameRect << imageTarget << "for image of size" << scaledImage.size();
+    p->drawImage(frameRect, scaledImage);
     p->restore();
 
     // black frame

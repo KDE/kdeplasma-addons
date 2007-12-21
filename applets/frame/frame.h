@@ -68,7 +68,7 @@ class Frame : public Plasma::Applet
 
     private:
         void paintCache(const QStyleOptionGraphicsItem *option,
-                        const QRect &contentsRect);
+                        const QSize &contentsSize);
 
 	/// The current color of the frame
         QColor m_frameColor;
@@ -100,8 +100,6 @@ class Frame : public Plasma::Applet
         int m_swOutline;
         /// Max Picture Dimension
         static const int m_maxDimension=800;
-        // HACK: Ensure several repaints, cf. paintInterface() code
-        int m_paintCount;
 	/// Designer Config file
 	Ui::config ui;
         /// Default image
