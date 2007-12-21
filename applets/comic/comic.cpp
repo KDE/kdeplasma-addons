@@ -105,11 +105,15 @@ void ComicApplet::slotPreviousDay()
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
-    if ( event->button() == Qt::LeftButton ) {
+    event->ignore();
+
+    if ( event->button() == Qt::LeftButton && contentRect().contains(event->pos()) ) {
         if ( event->pos().x() < s_arrowWidth ) {
             slotPreviousDay();
+            event->accept();
         } else if ( mShowNextButton && event->pos().x() > contentSizeHint().width() - s_arrowWidth ) {
             slotNextDay();
+            event->accept();
         }
     }
 }
