@@ -69,6 +69,11 @@ class Twitter : public Plasma::Applet
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void showConfigurationInterface();
+        /**
+         * called by KWallet after it's asked permission for wallet access
+         * @success whether we get to use it
+         * TODO this would be better as two functions.
+         */
         void gotWallet(bool success);
 
     protected slots:
@@ -87,9 +92,22 @@ class Twitter : public Plasma::Applet
         void pictureDownloaded( const QString &nick );
 
     private:
+        /**
+         * attempt to get the wallet from KWallet
+         * */
         void getWallet();
+        /**
+         * convenience function for setting the folder
+         */
         bool enterWalletFolder(const QString &folder);
+        /**
+         * called when a non-blank password is retrieved
+         * FIXME: this is a bad name for a function.
+         */
         void gotPassword();
+        /**
+         * write the password to config instead of wallet
+         */
         void writeConfigPassword();
 
         Plasma::Svg *m_theme;
