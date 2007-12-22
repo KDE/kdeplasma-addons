@@ -29,7 +29,7 @@
       <item>
        <widget class="QRadioButton" name="saveIfFocusLeft" >
         <property name="text" >
-         <string>Save note when applet looses focus</string>
+         <string>Save note when applet loses focus</string>
         </property>
        </widget>
       </item>
