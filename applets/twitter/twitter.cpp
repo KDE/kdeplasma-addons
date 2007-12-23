@@ -97,10 +97,10 @@ void Twitter::init()
 
     m_icon = new Plasma::Icon( this );
     m_icon->setIcon( KIcon( "user" ) );
-    m_icon->setIconSize( 48, 48 );
-    m_icon->setMinimumSize( QSizeF( 60, 60 ) );
-    m_icon->setMaximumSize( QSizeF( 60, 60 ) );
     m_icon->setText( m_username );
+    QSizeF iconSize = m_icon->sizeFromIconSize(32);
+    m_icon->setMinimumSize( iconSize );
+    m_icon->setMaximumSize( iconSize );
     m_headerLayout->addItem( m_icon );
 
     m_statusEdit = new Plasma::LineEdit( this );
@@ -230,8 +230,9 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         if( !pm.isNull() ) {
             if( user == m_username ) {
                 m_icon->setIcon( QIcon( pm ) );
-                m_icon->resize( 55, 55 );
-                m_icon->setMaximumSize( QSizeF( 55, 55 ) );
+                QSizeF iconSize = m_icon->sizeFromIconSize(32);
+                m_icon->setMinimumSize( iconSize );
+                m_icon->setMaximumSize( iconSize );
             }
             m_pictureMap[user] = pm;
         }
@@ -290,9 +291,9 @@ void Twitter::showTweets()
         Plasma::Icon *icon = new Plasma::Icon( this );
         icon->setIcon( QIcon(m_pictureMap[user]) );
         icon->setText( user );
-        icon->resize( 60, 60 );
-        icon->setMaximumSize( QSizeF( 60, 60 ) );
-        icon->setMinimumSize( QSizeF( 60, 60 ) );
+        QSizeF iconSize = icon->sizeFromIconSize(32);
+        icon->setMinimumSize( iconSize );
+        icon->setMaximumSize( iconSize );
         tweetLayout->addItem( icon );
         tweetLayout->addItem( e );
         tweetLayout->updateGeometry();
