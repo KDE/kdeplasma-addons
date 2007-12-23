@@ -36,7 +36,11 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
+    setDrawStandardBackground(false);
+}
 
+void Notes::init()
+{
 
     m_notes_theme.setContentType(Plasma::Svg::SingleImage);
 
@@ -48,27 +52,38 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     int size = cg.readEntry("size", 256);
     m_size = QSizeF(size, size);
 
-    m_textArea->setTextWidth(cg.readEntry("textWidth", size - 50));
-    m_textArea->setPos(25, 25);
+    int pos = (int)(boundingRect().height() / 10);
+    m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
     m_textArea->setPlainText(cg.readEntry("autoSave",i18n("Welcome to Notes Plasmoid! Type your notes here...")));
     m_textArea->setStyled(false);
     m_textArea->setOpenExternalLinks(true);
     m_textArea->setFont(cg.readEntry("font",m_font));
     m_textArea->setDefaultTextColor(cg.readEntry("textcolor",m_textColor));
+    connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
+    connect(m_textArea, SIGNAL(textChanged(const QString &)), this, SLOT(saveText(const QString &)));
+
 }
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints);
+    int pos = (int)(boundingRect().height() / 10);
+    m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
     setDrawStandardBackground(false);
+    cg.writeEntry("size", (int)(boundingRect().height()));
+    cg.sync();
 }
 
 void Notes::saveNote()
 {
-    KConfigGroup cg = config();
     cg.writeEntry("autoSave",m_textArea->toPlainText());
     cg.config()->sync();
+}
 
+void Notes::saveText(const QString& text)
+{
+    cg.writeEntry("autoSave", m_textArea->toPlainText());
+    cg.config()->sync();
 }
 
 Notes::~Notes()
@@ -108,7 +123,6 @@ void Notes::showConfigurationInterface()
         m_dialog->setCaption( i18n("Notes Configuration") );
         ui.setupUi(m_dialog->mainWidget());
         m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        m_dialog->showButtonSeparator(true);
         connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
         connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
         connect( ui.fontSelectButton, SIGNAL(clicked()), this, SLOT(showFontSelectDlg()) );
@@ -137,7 +151,6 @@ void Notes::configAccepted()
     cg.writeEntry("size", ui.sizeSpinBox->value());
     cg.writeEntry("font", m_font);
     cg.writeEntry("textcolor", m_textColor);
-    cg.writeEntry("savenote", ui.saveIfClosed->isChecked() ? "closenote" : "focusleft" );
     cg.config()->sync();
 
     QSizeF size(ui.sizeSpinBox->value(),ui.sizeSpinBox->value());

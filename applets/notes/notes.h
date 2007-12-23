@@ -38,7 +38,7 @@ class Notes : public Plasma::Applet
     public:
         Notes(QObject *parent, const QVariantList &args);
         ~Notes();
-
+        void init();
         void setContentSize(const QSizeF& size);
         QSizeF contentSizeHint() const;
         void paintInterface(QPainter *painter,
@@ -51,9 +51,11 @@ class Notes : public Plasma::Applet
         void configAccepted();
         void showFontSelectDlg();
         void showColorSelectDlg();
-
-    protected:
         void saveNote();
+        void saveText(const QString& text);
+
+//    protected:
+//        void saveNote();
 
     private:
         Plasma::Svg m_notes_theme;
