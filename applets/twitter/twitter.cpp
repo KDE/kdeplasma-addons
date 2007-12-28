@@ -96,7 +96,7 @@ void Twitter::init()
 
 
     m_icon = new Plasma::Icon( this );
-    m_icon->setIcon( KIcon( "user" ) );
+    m_icon->setIcon( KIcon( "user-identity" ) );
     m_icon->setText( m_username );
     QSizeF iconSize = m_icon->sizeFromIconSize(32);
     m_icon->setMinimumSize( iconSize );
