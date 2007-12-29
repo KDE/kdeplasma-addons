@@ -36,7 +36,7 @@ OpenDocuments::~OpenDocuments()
 {
 }
 
-void OpenDocuments::connectTask(Task::TaskPtr task)
+void OpenDocuments::connectTask(TaskPtr task)
 {
     Q_ASSERT(task);
     connect(
@@ -47,30 +47,30 @@ void OpenDocuments::connectTask(Task::TaskPtr task)
 
 void OpenDocuments::load()
 {
-    foreach (Task::TaskPtr task, TaskManager::self()->tasks().values()) {
+    foreach (TaskPtr task, TaskManager::TaskManager::self()->tasks().values()) {
         if (setDataForTask(task)) {
             connectTask(task);
         }
     }
 
     connect(
-        TaskManager::self(), SIGNAL(taskAdded(Task::TaskPtr)),
-        this, SLOT(taskAdded(Task::TaskPtr))
+        TaskManager::TaskManager::self(), SIGNAL(taskAdded(TaskPtr)),
+        this, SLOT(taskAdded(TaskPtr))
     );
 
     connect(
-        TaskManager::self(), SIGNAL(taskRemoved(Task::TaskPtr)),
-        this, SLOT(taskRemoved(Task::TaskPtr))
+        TaskManager::TaskManager::self(), SIGNAL(taskRemoved(TaskPtr)),
+        this, SLOT(taskRemoved(TaskPtr))
     );
 }
 
-void OpenDocuments::taskAdded(Task::TaskPtr task)
+void OpenDocuments::taskAdded(TaskPtr task)
 {
     connectTask(task);
     setDataForTask(task);
 }
 
-void OpenDocuments::taskRemoved(Task::TaskPtr task)
+void OpenDocuments::taskRemoved(TaskPtr task)
 {
     Q_ASSERT(task);
     int index = indexOf(task->window());
@@ -82,13 +82,13 @@ void OpenDocuments::taskRemoved(Task::TaskPtr task)
 
 void OpenDocuments::taskChanged()
 {
-    Task* task = qobject_cast<Task*>(sender());
+    TaskManager::Task* task = qobject_cast<TaskManager::Task*>(sender());
     Q_ASSERT(task);
 
-    setDataForTask(Task::TaskPtr(task));
+    setDataForTask(TaskPtr(task));
 }
 
-bool OpenDocuments::setDataForTask(Task::TaskPtr task)
+bool OpenDocuments::setDataForTask(TaskPtr task)
 {
     Q_ASSERT(task);
 

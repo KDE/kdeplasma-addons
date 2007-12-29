@@ -25,6 +25,8 @@
 #include <plasma/taskmanager.h>
 #include <QSet>
 
+using TaskManager::TaskPtr;
+
 namespace Lancelot {
 namespace Models {
 
@@ -40,16 +42,16 @@ protected:
 
 private slots:
     void taskChanged();
-    void taskAdded(Task::TaskPtr task);
-    void taskRemoved(Task::TaskPtr task);
+    void taskAdded(TaskPtr task);
+    void taskRemoved(TaskPtr task);
 
 private:
-    void connectTask(Task::TaskPtr task);
-    bool setDataForTask(Task::TaskPtr task);
+    void connectTask(TaskPtr task);
+    bool setDataForTask(TaskPtr task);
 
     int indexOf(WId wid);
 
-    QMap <WId, Task::TaskPtr > m_tasks;
+    QMap <WId, TaskPtr > m_tasks;
     QSet <QString> m_classes;
     QRegExp m_rx;
 };
