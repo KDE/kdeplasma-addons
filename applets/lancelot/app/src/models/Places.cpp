@@ -54,7 +54,7 @@ void Places::load()
     add(
         i18n("Network Folders"),
         "remote:/",
-        new KIcon("network"),
+        new KIcon("folder-remote"),
         "remote:/"
     );
 
