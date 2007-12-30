@@ -37,15 +37,16 @@ static KMenu* buildMenuForColor(const QColor &color)
     act->setData(color);
     QString htmlName = color.name();
     QString htmlNameUp = htmlName.toUpper();
-    act = menu->addAction(KIcon("text-html"), htmlName);
+    KIcon mimeIcon("text-html");
+    act = menu->addAction(mimeIcon, htmlName);
     act->setData(color);
-    act = menu->addAction(KIcon("text-html"), htmlName.mid(1));
+    act = menu->addAction(mimeIcon, htmlName.mid(1));
     act->setData(color);
     if (htmlNameUp != htmlName)
     {
-        act = menu->addAction(KIcon("text-html"), htmlNameUp);
+        act = menu->addAction(mimeIcon, htmlNameUp);
         act->setData(color);
-        act = menu->addAction(KIcon("text-html"), htmlNameUp.mid(1));
+        act = menu->addAction(mimeIcon, htmlNameUp.mid(1));
         act->setData(color);
     }
     return menu;
@@ -94,6 +95,47 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
 }
 
 
+class PickerButton : public Plasma::PushButton
+{
+    public:
+        PickerButton(Widget *parent = 0);
+
+        /*virtual*/ Qt::Orientations expandingDirections() const;
+
+        void adaptToFormFactor(Plasma::FormFactor formFactor);
+
+    private:
+        Qt::Orientations m_orientation;
+};
+
+PickerButton::PickerButton(Widget *parent)
+    : Plasma::PushButton(parent), m_orientation(Qt::Horizontal)
+{
+}
+
+Qt::Orientations PickerButton::expandingDirections() const
+{
+    return m_orientation;
+}
+
+void PickerButton::adaptToFormFactor(Plasma::FormFactor formFactor)
+{
+    switch (formFactor)
+    {
+    case Plasma::Planar:
+    case Plasma::MediaCenter:
+        m_orientation = Qt::Horizontal | Qt::Vertical;
+        break;
+    case Plasma::Horizontal:
+        m_orientation = Qt::Horizontal;
+        break;
+    case Plasma::Vertical:
+        m_orientation = Qt::Vertical;
+        break;
+    }
+}
+
+
 Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_grabWidget(0)
 {
@@ -102,18 +144,15 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     mainlay->setMargin(0);
     mainlay->setSpacing(4);
 
-    m_grabButton = new Plasma::PushButton(this);
+    m_grabButton = new PickerButton(this);
     mainlay->addItem(m_grabButton);
     m_grabButton->setIcon(KIcon("color-picker"));
-    m_grabButton->setIconSize(QSizeF(22, 22));
     connect(m_grabButton, SIGNAL(clicked()), this, SLOT(grabClicked()));
 
-    m_historyButton = new Plasma::PushButton(this);
+    m_historyButton = new PickerButton(this);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
-    m_historyButton->setIcon(KIcon("color-picker"));
     m_historyButton->setIcon(KIcon(QIcon(new ColorIconEngine(Qt::gray))));
-    m_historyButton->setIconSize(QSizeF(22, 22));
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
     KMenu *menu = new KMenu();
@@ -122,8 +161,6 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     m_historyMenu->addSeparator();
     QAction *act = m_historyMenu->addAction(KIcon("edit-clear-history"), i18n("Clear History"));
     connect(act, SIGNAL(triggered(bool)), this, SLOT(clearHistory()));
-
-    resize(QSizeF(22, 50));
 }
 
 Kolourpicker::~Kolourpicker()
@@ -136,6 +173,9 @@ void Kolourpicker::constraintsUpdated(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         setDrawStandardBackground(false);
+        m_grabButton->adaptToFormFactor(formFactor());
+        m_historyButton->adaptToFormFactor(formFactor());
+        layout()->invalidate();
     }
 }
 
@@ -245,11 +285,12 @@ void Kolourpicker::addColor(const QColor &color)
 
     KMenu *newmenu = buildMenuForColor(color);
     QAction *act = newmenu->menuAction();
-    act->setIcon(QIcon(new ColorIconEngine(color)));
+    QIcon colorIcon(new ColorIconEngine(color));
+    act->setIcon(colorIcon);
     act->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
     m_historyMenu->insertMenu(m_historyMenu->actions().at(1), newmenu);
-    m_historyButton->setIcon(KIcon(QIcon(new ColorIconEngine(color))));
+    m_historyButton->setIcon(KIcon(colorIcon));
     m_menus.insert(color, act);
     m_historyButton->setEnabled(true);
 }
