@@ -252,7 +252,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     gradient.setColorAt(0, Qt::black);
     painter->setCompositionMode(QPainter::CompositionMode_DestinationIn);
     painter->fillRect(
-        0, 0, size().width(), size().height(),
+        0, 0, (int)size().width(), (int)size().height(),
         gradient);
     //
 

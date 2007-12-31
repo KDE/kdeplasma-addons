@@ -175,6 +175,8 @@ void Devices::activate(int index)
 
 void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
 {
+    Q_UNUSED(error);
+    Q_UNUSED(errorData);
     //m_devicesMounting.removeAll(udi);
 
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();

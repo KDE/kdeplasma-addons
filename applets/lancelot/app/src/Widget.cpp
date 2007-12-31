@@ -34,7 +34,10 @@ WidgetCore::~WidgetCore()
 }
 
 Widget::Widget(QString name, QGraphicsItem * parent) :
-    WidgetCore(), Plasma::Widget(parent), m_hover(false), m_enabled(true),
+    Plasma::Widget(parent),
+    WidgetCore(),
+    m_hover(false),
+    m_enabled(true),
     m_name(name)
 {
     Instance::activeInstance()->addWidget(this);
