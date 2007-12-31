@@ -163,7 +163,7 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-        m_width=size().width();
+        m_width=(int)size().width();
 //        m_width=500;
 	m_defEdit->setTextWidth(m_width);
 	m_wordEdit->setTextWidth(m_width);
