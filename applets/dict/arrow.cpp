@@ -37,6 +37,9 @@ QRectF Arrow::boundingRect() const
 
 void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(QPen(QBrush(QColor(255,255,255,200)), 1,Qt::SolidLine, Qt::RoundCap));
     painter->setBrush(QBrush(Qt::white, Qt::SolidPattern));
@@ -55,6 +58,7 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 void Arrow::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     emit clicked();
 }
 
