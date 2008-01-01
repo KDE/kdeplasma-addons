@@ -63,7 +63,6 @@ class Notes : public Plasma::Applet
 
         Ui::config ui;
         KDialog *m_dialog;
-        KConfigGroup cg;
 
         QFont m_font;
         QColor m_textColor;

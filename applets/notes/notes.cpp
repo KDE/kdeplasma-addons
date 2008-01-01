@@ -47,7 +47,7 @@ void Notes::init()
     m_textArea = new Plasma::LineEdit(this);
     m_textArea->setMultiLine(true);
 
-    cg = config();
+    KConfigGroup cg = config();
 
     int size = cg.readEntry("size", 256);
     m_size = QSizeF(size, size);
@@ -67,25 +67,30 @@ void Notes::init()
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints);
-    int pos = (int)(boundingRect().height() / 10);
-    m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
     setDrawStandardBackground(false);
-    cg.writeEntry("size", (int)(boundingRect().height()));
-    cg.sync();
+    if (constraints & Plasma::SizeConstraint) {
+        int pos = (int)(boundingRect().height() / 10);
+        m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
+        KConfigGroup cg = config();
+        cg.writeEntry("size", (int)(boundingRect().height()));
+        emit configNeedsSaving();
+    }
 }
 
 void Notes::saveNote()
 {
+    KConfigGroup cg = config();
     cg.writeEntry("autoSave",m_textArea->toPlainText());
-    cg.config()->sync();
+    emit configNeedsSaving();
 }
 
 void Notes::saveText(const QString& text)
 {
     Q_UNUSED(text);
 
+    KConfigGroup cg = config();
     cg.writeEntry("autoSave", m_textArea->toPlainText());
-    cg.config()->sync();
+    emit configNeedsSaving();
 }
 
 Notes::~Notes()
@@ -150,10 +155,11 @@ void Notes::configAccepted()
 {
     prepareGeometryChange();
 
+    KConfigGroup cg = config();
     cg.writeEntry("size", ui.sizeSpinBox->value());
     cg.writeEntry("font", m_font);
     cg.writeEntry("textcolor", m_textColor);
-    cg.config()->sync();
+    emit configNeedsSaving();
 
     QSizeF size(ui.sizeSpinBox->value(),ui.sizeSpinBox->value());
     setContentSize(size);

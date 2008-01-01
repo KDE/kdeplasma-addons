@@ -233,7 +233,7 @@ void Frame::configAccepted()
         choosePicture(m_currentUrl);
     }
 
-    cg.config()->sync();
+    emit configNeedsSaving();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -266,7 +266,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     KConfigGroup cg = config();
     cg.writeEntry("url", m_currentUrl);
     cg.writeEntry("slideshow url", m_slideShowUrl);
-    cg.config()->sync();
+    emit configNeedsSaving();
 }
 
 Frame::~Frame()
