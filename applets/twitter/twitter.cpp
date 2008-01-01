@@ -456,7 +456,10 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
         g.setColorAt( 0, QColor( 30, 30, 30 ) );
         g.setColorAt( 1, QColor( 70, 70, 70 ) );
         p->setBrush( QBrush( g ));
-        p->drawRect( 0, t.layout->geometry().y(), contentSize().width(), t.layout->geometry().height() );
+        p->drawRect(0,
+                    (int)t.layout->geometry().y(),
+                    (int)contentSize().width(),
+                    (int)t.layout->geometry().height());
     }
     QLinearGradient g( m_headerLayout->geometry().topLeft(), m_headerLayout->geometry().bottomRight() );
     g.setColorAt( 0, QColor( 30, 30, 30 ) );
