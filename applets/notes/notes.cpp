@@ -82,6 +82,8 @@ void Notes::saveNote()
 
 void Notes::saveText(const QString& text)
 {
+    Q_UNUSED(text);
+
     cg.writeEntry("autoSave", m_textArea->toPlainText());
     cg.config()->sync();
 }
@@ -129,7 +131,7 @@ void Notes::showConfigurationInterface()
         connect( ui.colorSelectButton, SIGNAL(clicked()), this, SLOT(showColorSelectDlg()));
     }
 
-    ui.sizeSpinBox->setValue(m_size.width());
+    ui.sizeSpinBox->setValue((int)m_size.width());
 
     m_dialog->show();
 }
