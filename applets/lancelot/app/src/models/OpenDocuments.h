@@ -22,7 +22,7 @@
 #define LANCELOT_MODELS_OPENDOCUMENTS_H_
 
 #include "BaseModel.h"
-#include <plasma/taskmanager.h>
+#include <taskmanager/taskmanager.h>
 #include <QSet>
 
 using TaskManager::TaskPtr;
