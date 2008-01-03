@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by André Duffeck <duffeck@kde.org>                 *
+ *   Copyright (C) 2007 Chani Armitage <chanika@gmail.com>                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -31,7 +32,6 @@
 class KDialog;
 class KLineEdit;
 class QSpinBox;
-class KJob;
 class QCheckBox;
 
 namespace KWallet
@@ -70,15 +70,17 @@ class Twitter : public Plasma::Applet
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void showConfigurationInterface();
         /**
-         * called by KWallet after it's asked permission for wallet access
-         * @success whether we get to use it
-         * TODO this would be better as two functions.
+         * read from the opened KWallet
+         * @param success whether we got to open it
          */
-        void gotWallet(bool success);
+        void readWallet(bool success);
+        /**
+         * write to the opened KWallet
+         * @param success whether we got to open it
+         */
+        void writeWallet(bool success);
 
     protected slots:
-        void newSource( const QString & );
-
         void configAccepted();
         void updateStatus();
         void downloadHistory();
@@ -87,9 +89,6 @@ class Twitter : public Plasma::Applet
 
     protected:
         QString timeDescription( const QDateTime &dt );
-
-    Q_SIGNALS:
-        void pictureDownloaded( const QString &nick );
 
     private:
         /**
@@ -101,10 +100,9 @@ class Twitter : public Plasma::Applet
          */
         bool enterWalletFolder(const QString &folder);
         /**
-         * called when a non-blank password is retrieved
-         * FIXME: this is a bad name for a function.
+         * sets name & password and updates stuff
          */
-        void gotPassword();
+        void setAuth();
         /**
          * write the password to config instead of wallet
          */
@@ -136,15 +134,10 @@ class Twitter : public Plasma::Applet
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;
-        QMap< KJob *, QString > m_pictureDownloadMap;
-        QMap< KJob *, QByteArray > m_bufferMap;
         QMap< QString, Plasma::DataEngine::Data > m_tweetMap;
         QList< Tweet > m_tweetWidgets;
 
-        QTimer *m_refreshTimer;
-
         uint m_lastTweet;
-        bool m_waitingForData;
         KWallet::Wallet *m_wallet;
         enum WalletWait { None=0, Read, Write };
         WalletWait m_walletWait;

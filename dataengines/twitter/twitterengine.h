@@ -1,6 +1,7 @@
 /*
  *   Copyright (C) 2007 Trever Fischer <wm161@wm161.net>
  *   Copyright (C) 2007 André Duffeck <duffeck@kde.org>
+ *   Copyright (C) 2007 Chani Armitage <chanika@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -23,74 +24,70 @@
 #include <plasma/dataengine.h>
 
 #include <QMap>
-#include <QStringList>
-#include <QTcpSocket>
-#include <QHttpResponseHeader>
 
 class QDomNodeList;
 class QHttp;
 
+/**
+ * Twitter Data Engine
+ *
+ * This engine provides access to twitter.com timelines.
+ * There are three types of timeline you can connect to:
+ * Timeline
+ * Timeline:<user>
+ * TimelineWithFriends:<user>
+ *
+ * Timeline is the public timeline that shows tweets from all twitter users.
+ * Timeline:<user> shows only the tweets of that user.
+ * TimelineWithFriends:<user> shows the normal timeline of that user and their
+ * friends. it requires a password to be configured for the user.
+ *
+ * To configure a password, use setConfig(user, password).
+ *
+ * If you need to display user images, the UserImages source provides a list of
+ * all images, and LatestImage provides just the most recently downloaded one.
+ **/
 class TwitterEngine : public Plasma::DataEngine
 {
     Q_OBJECT
-    Q_PROPERTY(QString username READ username WRITE setUsername)
-    Q_PROPERTY(QString password READ password WRITE setPassword)
-    Q_PROPERTY(QString interval READ interval WRITE setInterval)
     Q_PROPERTY(QString status READ status WRITE setStatus)
-
+    Q_PROPERTY(Plasma::DataEngine::Data config READ config WRITE setConfig)
 
     public:
-        TwitterEngine(QObject* parent,const QVariantList& args);
+        TwitterEngine(QObject* parent, const QVariantList& args);
         ~TwitterEngine();
-
-        QString password() const;
-        void setPassword(const QString &password);
-
-        QString username() const;
-        void setUsername(const QString &username);
-
-        QString interval() const;
-        void setInterval(const QString& interval);
 
         QString status() const;
         void setStatus(const QString& refresh);
+        Plasma::DataEngine::Data config() const;
+        void setConfig(const Plasma::DataEngine::Data& config);
 
-        //QStringList sources() const;
-        enum UpdateType { Timeline=1, Status, UserTimeline, UserTimelineWithFriends, UserImage };
+        enum UpdateType { Timeline=1, UserTimeline, UserTimelineWithFriends, UserImage, Post };
 
     protected:
+        //from DataEngine
         bool sourceRequested(const QString &name);
 
     protected slots:
+        void requestFinished(int id, bool error);
+        void anonRequestFinished(int id, bool error);
+        bool updateSource(const QString &source);
+
+    private:
         void updateTimeline();
         void updateUser(const QString &who);
         void updateUserWithFriends(const QString &who);
-        void getTweet(const int &ID);
         void getUserImage( const QString &who, const KUrl& url );
-        void requestFinished(int id, bool error);
-        void unauthorizedRequestFinished(int id, bool error);
-        bool updateSource(const QString &source);
+        void parseStatuses(QDomNodeList items, const QString& source);
 
-        void slotConnected();
-        void slotRead();
-
-    private:
-        QList<QVariant> parseStatuses(QDomNodeList items);
-
-        QString m_username;
-        QString m_password;
-        QString m_interval;
         QString m_status;
         QHttp* m_http;
-        QHttp* m_unauthorizedHttp;
-        QMap<int,UpdateType> m_updates;
-        QMap<int,UpdateType> m_unauthorizedUpdates;
-        QMap<int,QString> m_timelines;
-        QStringList m_activeSources;
+        QHttp* m_anonHttp;
+        QMap<int,UpdateType> m_pendingRequests;
+        QMap<int,UpdateType> m_pendingAnonRequests;
+        QMap<int,QString> m_pendingNames;
         QMap<QString,KUrl> m_userImages;
-        QTcpSocket *m_socket;
-        QHttpResponseHeader m_header;
-        QString m_data;
+        Plasma::DataEngine::Data m_config;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)

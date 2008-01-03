@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by André Duffeck <duffeck@kde.org>                 *
+ *   Copyright (C) 2007 Chani Armitage <chanika@gmail.com>                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,7 +27,6 @@
 #include <QSpinBox>
 #include <QTextDocument>
 #include <QCheckBox>
-#include <QTimer>
 #include <QGradient>
 #include <QFontMetrics>
 #include <QGraphicsView>
@@ -49,6 +49,8 @@
 #include <plasma/layouts/boxlayout.h>
 #include <plasma/widgets/icon.h>
 
+Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
+
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_dialog(0), m_lastTweet(0), m_wallet(0), m_walletWait(None)
@@ -61,6 +63,7 @@ void Twitter::init()
 {
     m_theme = new Plasma::Svg("widgets/twitter", this);
 
+    //config stuff
     KConfigGroup cg = config();
     m_username = cg.readEntry( "username" );
     m_password = KStringHandler::obscure( cg.readEntry( "password" ) );
@@ -69,11 +72,10 @@ void Twitter::init()
     m_includeFriends = cg.readEntry( "includeFriends", true );
 
     m_engine = dataEngine("twitter");
-    m_engine->setProperty( "username", m_username );
-    m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
-    connect( m_engine, SIGNAL(newSource(const QString&)), SLOT(newSource(const QString&)) );
+    //FIXME check validity
+    m_engine->connectSource("LatestImage", this);
 
-
+    //ui setup
     m_layout = new Plasma::VBoxLayout( this );
     m_layout->setMargin( 0 );
     m_layout->setSpacing( 0 );
@@ -111,15 +113,13 @@ void Twitter::init()
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
 
-    m_refreshTimer = new QTimer( this );
-    connect( m_refreshTimer, SIGNAL(timeout()), SLOT(showTweets()) );
-
+    //set things in motion
     if(! m_username.isEmpty()) {
         if (m_password.isEmpty()) {
             m_walletWait = Read;
             getWallet();
         } else { //use config value
-            gotPassword();
+            setAuth();
         }
     }
 }
@@ -142,29 +142,34 @@ void Twitter::getWallet()
     }
     m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),
             w, KWallet::Wallet::Asynchronous );
-    connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( gotWallet(bool) ) );
+    if (m_walletWait == Write) {
+        connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( writeWallet(bool) ) );
+    } else {
+        connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( readWallet(bool) ) );
+    }
 }
 
-void Twitter::gotWallet(bool success)
+void Twitter::writeWallet(bool success)
 {
-    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))){
-        if (m_walletWait == Read) {
-            QString pwd;
-            if (m_wallet->readPassword(m_username, pwd) == 0) {
-                m_password = pwd;
-                gotPassword();
-            }
-        } else if (m_walletWait == Write) {
-            if (m_wallet->writePassword(m_username, m_password) != 0) {
-                kDebug() << "failed to write password";
-                writeConfigPassword();
-            }
-        }
+    if (!(success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))
+                && (m_wallet->writePassword(m_username, m_password) == 0))) {
+        kDebug() << "failed to write password";
+        writeConfigPassword();
+    }
+    m_walletWait = None;
+    delete m_wallet;
+    m_wallet = 0;
+}
+
+void Twitter::readWallet(bool success)
+{
+    QString pwd;
+    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) 
+            && (m_wallet->readPassword(m_username, pwd) == 0)) {
+        m_password = pwd;
+        setAuth();
     } else {
-        kDebug() << "failed to get wallet";
-        if (m_walletWait == Write) {
-            writeConfigPassword();
-        }
+        kDebug() << "failed to read password";
     }
     m_walletWait = None;
     delete m_wallet;
@@ -183,12 +188,15 @@ bool Twitter::enterWalletFolder(const QString &folder)
     return true;
 }
 
-void Twitter::gotPassword()
+void Twitter::setAuth()
 {
-    m_engine->setProperty( "password", m_password );
+    Plasma::DataEngine::Data conf = m_engine->property("config").value<Plasma::DataEngine::Data>();
+    conf[m_username] = m_password;
+    m_engine->setProperty("config", QVariant::fromValue(conf));
     m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
     downloadHistory();
 }
+
 void Twitter::writeConfigPassword()
 {
     kDebug();
@@ -202,31 +210,38 @@ void Twitter::writeConfigPassword()
 void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << source;
-    if( source == m_curTimeline ) {
-        m_flash->flash( i18n("Refreshing timeline...") );
-        QVariantList l = data.value( source ).toList();
+    if (data.isEmpty()) { //this is a fake update from a new source
+        return;
+    }
 
+    if (source == m_curTimeline) {
+        m_flash->flash( i18n("Refreshing timeline...") );
+
+        //add the newbies
         int newCount = 0;
-        foreach( QVariant id, l ) {
-            if( id.toUInt() > m_lastTweet ) {
+        uint maxId = m_lastTweet;
+        foreach (QString id, data.keys()) {
+            uint i=id.toUInt();
+            if (i > m_lastTweet) {
                 newCount++;
+                QVariant v = data.value(id);
+                //Warning: This function is not available with MSVC 6
+                Plasma::DataEngine::Data t = v.value<Plasma::DataEngine::Data>();
+                m_tweetMap[id] = t;
+                if (i > maxId) {
+                    maxId = i;
+                }
             }
         }
-        foreach( QVariant id, l ) {
-            if( id.toUInt() > m_lastTweet )
-                m_lastTweet = id.toUInt();
-        }
-        m_flash->flash( i18n("%1 new tweets", newCount ), 20*1000 );
+        m_lastTweet = maxId;
+        m_flash->flash( i18n("%1 new tweets", newCount), 20*1000 );
         showTweets();
-    } else if( source.startsWith( "Update" ) ) {
-        m_tweetMap[source] = data;
-        if( m_waitingForData ) {
-            m_waitingForData = false;
-            showTweets();
+    } else if (source == "LatestImage") {
+        QString user = data.begin().key();
+        if (user.isEmpty()) {
+            return;
         }
-    } else if( source.startsWith( "UserInfo" ) ) {
-        QString user = source.split( ':' ).at(1);
-        QPixmap pm = data.value( "Image" ).value<QPixmap>();
+        QPixmap pm = data[user].value<QPixmap>();
         if( !pm.isNull() ) {
             if( user == m_username ) {
                 m_icon->setIcon( QIcon( pm ) );
@@ -235,32 +250,17 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
                 m_icon->setMaximumSize( iconSize );
             }
             m_pictureMap[user] = pm;
+            //TODO it would be nice to check whether the updated image is actually in use
+            showTweets();
         }
-        if( m_refreshTimer->isActive() )
-            m_refreshTimer->stop();
-        m_refreshTimer->start( 500 );
     }
     updateGeometry();
 }
 
 void Twitter::showTweets()
 {
-    if( m_refreshTimer->isActive() )
-        m_refreshTimer->stop();
 
-    // Verify that all tweets have arrived already
-    int i = 0;
-    int pos = m_tweetMap.keys().size() - 1;
-    while(i < m_historySize && i < m_tweetMap.keys().size() ) {
-        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
-        if( tweetData.value( "User" ).toString().isEmpty() ) {
-            m_waitingForData = true;
-            return;
-        }
-        ++i;
-        --pos;
-    }
-
+    //clear out tweet widgets - is such deletion really necessary? FIXME
     for( int i = m_tweetWidgets.size()-1; i >= 0; --i ) {
         Tweet t = m_tweetWidgets[i];
         m_layout->removeItem( t.layout );
@@ -270,9 +270,10 @@ void Twitter::showTweets()
     }
     m_tweetWidgets.clear();
 
-    i = 0;
-    pos = m_tweetMap.keys().size() - 1;
-    while(i < m_historySize && i < m_tweetMap.keys().size() ) {
+    int i = 0;
+    int pos = m_tweetMap.keys().size() - 1;
+    kDebug() << pos;
+    while(i < m_historySize && pos >= 0 ) {
         Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
         QString user = tweetData.value( "User" ).toString();
 
@@ -281,6 +282,7 @@ void Twitter::showTweets()
         tweetLayout->setSpacing( 5 );
         m_layout->addItem( tweetLayout );
 
+        //TODO maybe a label would be better?
         Plasma::LineEdit *e = new Plasma::LineEdit( this );
         e->setTextWidth( 250 );
         e->setStyled( false );
@@ -319,12 +321,6 @@ void Twitter::showTweets()
 
     m_layout->invalidate();
     updateGeometry();
-}
-
-
-void Twitter::newSource( const QString &source )
-{
-    m_engine->connectSource( source, this );
 }
 
 void Twitter::showConfigurationInterface()
@@ -381,22 +377,27 @@ void Twitter::showConfigurationInterface()
 
 void Twitter::configAccepted()
 {
-    if( m_username != m_usernameEdit->text() ) {
-        m_icon->setIcon( QIcon() );
-    }
-    bool refresh = ( m_historySize != m_historySizeSpinBox->value() );
+    QString username = m_usernameEdit->text();
+    QString password = m_passwordEdit->text();
+    int historyRefresh = m_historyRefreshSpinBox->value();
+    int historySize = m_historySizeSpinBox->value();
+    bool includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
     bool changed = false;
 
     KConfigGroup cg = config();
 
-    if( m_username != m_usernameEdit->text() )
+    if (m_username != username) {
         changed = true;
-    m_username = m_usernameEdit->text();
-    cg.writeEntry( "username", m_username );
+        m_username = username;
+        m_icon->setIcon( QIcon() );
+        m_icon->setText( m_username );
+        cg.writeEntry( "username", m_username );
+    }
 
-    if( m_password != m_passwordEdit->text() )
+    if (m_password != password) {
         changed = true;
-    m_password = m_passwordEdit->text();
+        m_password = password;
+    }
     //if (m_walletWait == Read)
     //then the user is a dumbass.
     //we're going to ignore that, which drops the read attempt
@@ -411,29 +412,30 @@ void Twitter::configAccepted()
         getWallet();
     }
 
-    m_historySize = m_historySizeSpinBox->value();
-    cg.writeEntry("historySize", m_historySize);
-    m_historyRefresh = m_historyRefreshSpinBox->value();
-    cg.writeEntry("historyRefresh", m_historyRefresh);
-
-    if( m_includeFriends != (m_checkIncludeFriends->checkState() == Qt::Checked) )
+    if (m_historyRefresh != historyRefresh) {
         changed = true;
-
-    m_includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
-
-    m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
-
-    m_engine->setProperty( "username", m_username );
-    m_engine->setProperty( "password", m_password );
-    m_engine->setProperty( "interval", m_historyRefresh*60*1000 );
-    m_icon->setText( m_username );
-
-    if( refresh ) {
-        showTweets();
+        m_historyRefresh = historyRefresh;
+        cg.writeEntry("historyRefresh", m_historyRefresh);
     }
-    if( changed ) {
+
+    if (m_includeFriends != includeFriends) {
+        changed = true;
+        m_includeFriends = includeFriends;
+    }
+
+    if (m_historySize != historySize) {
+        m_historySize = historySize;
+        cg.writeEntry("historySize", m_historySize);
+        if (! changed) {
+            showTweets();
+        }
+    }
+
+    if (changed) {
+        //TODO we only *need* to wipe the map if name or includeFriends changed
         m_tweetMap.clear();
-        downloadHistory();
+        m_lastTweet=0;
+        setAuth();
     }
 }
 
@@ -471,30 +473,40 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
 
 void Twitter::updateStatus()
 {
-    m_engine->setProperty( "status", m_statusEdit->toPlainText() );
+    QString status = m_username + ":" + m_statusEdit->toPlainText();
+    m_engine->setProperty( "status", status );
     m_statusEdit->setPlainText("");
 }
 
+//what this really means now is 'reconnect to the timeline source'
 void Twitter::downloadHistory()
 {
     kDebug() ;
-    m_flash->flash( i18n("Refreshing timeline..."), -1 );
-
-    if ( m_username.isEmpty() || m_password.isEmpty() )
+    if (m_username.isEmpty() || m_password.isEmpty()) {
+        if (!m_curTimeline.isEmpty()) {
+            m_engine->disconnectSource(m_curTimeline, this);
+        }
         return;
+    }
 
-//     if( !m_curTimeline.isEmpty() )
-//         m_engine->disconnectSource( m_curTimeline, this );
+    m_flash->flash( i18n("Refreshing timeline..."), -1 );
 
     QString query;
     if( m_includeFriends) {
-        query = QString( "TimelineWithFriends:%1" ).arg( m_username );
+        query = QString("TimelineWithFriends:%1");
     } else {
-        query = QString( "Timeline:%1" ).arg( m_username );
+        query = QString("Timeline:%1");
     }
-    m_curTimeline = query;
+    query = query.arg(m_username);
+    if (m_curTimeline != query) {
+        //ditch the old one, if needed
+        if (!m_curTimeline.isEmpty()) {
+            m_engine->disconnectSource(m_curTimeline, this);
+        }
+        m_curTimeline = query;
+    }
     kDebug() << "Connecting to source " << query;
-    m_engine->query( query );
+    m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
 }
 
 QString Twitter::timeDescription( const QDateTime &dt )
