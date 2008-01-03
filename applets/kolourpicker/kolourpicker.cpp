@@ -33,7 +33,7 @@
 static KMenu* buildMenuForColor(const QColor &color)
 {
     KMenu *menu = new KMenu();
-    QAction *act = menu->addAction(KIcon("text"), QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
+    QAction *act = menu->addAction(KIcon("draw-text"), QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     act->setData(color);
     QString htmlName = color.name();
     QString htmlNameUp = htmlName.toUpper();
