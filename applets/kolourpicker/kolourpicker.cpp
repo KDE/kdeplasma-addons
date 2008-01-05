@@ -177,6 +177,20 @@ void Kolourpicker::constraintsUpdated(Plasma::Constraints constraints)
         m_historyButton->adaptToFormFactor(formFactor());
         layout()->invalidate();
     }
+
+    if (constraints & Plasma::SizeConstraint) {
+        Plasma::BoxLayout *l = dynamic_cast<Plasma::BoxLayout *>(layout());
+        if (l->minimumSize().height() > geometry().size().height()) {
+            l->setDirection(Plasma::BoxLayout::LeftToRight);
+        } else {
+            l->setDirection(Plasma::BoxLayout::TopToBottom);
+        }
+    }
+}
+
+Qt::Orientations Kolourpicker::expandingDirections() const
+{
+    return 0;
 }
 
 bool Kolourpicker::sceneEventFilter(QGraphicsItem *watched, QEvent *event)

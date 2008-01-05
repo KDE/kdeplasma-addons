@@ -28,6 +28,7 @@ class Kolourpicker : public Plasma::Applet
         ~Kolourpicker();
 
         void constraintsUpdated(Plasma::Constraints constraints);
+        Qt::Orientations expandingDirections() const;
 
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
