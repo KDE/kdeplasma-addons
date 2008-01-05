@@ -29,6 +29,7 @@ FileWatcherConfig::FileWatcherConfig(QWidget *parent)
   setCaption(i18n("File Watcher Settings"));
   
   ui.setupUi(mainWidget());
+  mainWidget()->layout()->setMargin(0);
   urlRequester = new KUrlRequester(this);
   ui.hboxLayout->addWidget(urlRequester);
   urlRequester->setFocus();

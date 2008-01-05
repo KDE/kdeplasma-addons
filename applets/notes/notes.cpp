@@ -129,6 +129,7 @@ void Notes::showConfigurationInterface()
         m_dialog->setWindowIcon(KIcon("knotes"));
         m_dialog->setCaption( i18n("Notes Configuration") );
         ui.setupUi(m_dialog->mainWidget());
+        m_dialog->mainWidget()->layout()->setMargin(0);
         m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
         connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
         connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );

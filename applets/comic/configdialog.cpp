@@ -90,6 +90,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     showButtonSeparator( true );
 
     QGridLayout *layout = new QGridLayout( mainWidget() );
+    layout->setMargin( 0 );
     mComicIdentifier = new QComboBox( mainWidget() );
 
     QLabel *label = new QLabel( i18n( "Comic:" ), mainWidget() );
