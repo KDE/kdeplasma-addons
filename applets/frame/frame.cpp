@@ -331,8 +331,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->setBrush(Qt::NoBrush);
         for (int i = 0; i <= m_swOutline; i+=1) {
             p->setOpacity(0.7*exp(-(i/(double)(m_swOutline/3))));
-            QPainterPath tr; //I use this because p.drawRoundRect is different(and ugly)
-            tr.addRoundRect(shadowRect, swRoundness+i);
+            QPainterPath tr=Plasma::roundedRectangle(shadowRect, swRoundness+i);
             p->drawPath(tr);
             shadowRect.adjust(-1, -1, +1, +1);
         }
