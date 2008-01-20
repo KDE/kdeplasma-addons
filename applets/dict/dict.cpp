@@ -76,6 +76,11 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_wordEdit->setTextWidth(m_width-wordEditOffset);
     m_defEdit->setTextWidth(m_width);
     m_defEdit->setPos(15,40);
+	
+	m_wordEdit->setStyled(true);
+	m_defEdit->setStyled(true);
+	m_wordEdit->setDefaultTextColor(Qt::white);
+	m_defEdit->setDefaultTextColor(Qt::white);
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
@@ -163,8 +168,8 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-        m_width=(int)size().width();
-//        m_width=500;
+//        m_width=(int)size().width();
+        m_width=500;
 	m_defEdit->setTextWidth(m_width);
 	m_wordEdit->setTextWidth(m_width);
 //        updateGeometry();
@@ -206,6 +211,9 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         m_leftArrow->hide();
         //m_defEdit->dataUpdated(QString("test"),data);
     }
+	if (data.contains("wn")) {
+		m_defEdit->setHtml(data[QString("wn")].toString());
+	}
     updateGeometry();
 }
 
