@@ -166,7 +166,7 @@ void Fifteen::updatePixmaps()
     
     for (int i=1; i < 16; ++i)
     {
-      if (i%4 == 0 && i != 0)
+      if ((i-1)%4 == 0 && i != 1)
       {
         x = 0;
         y = y + SIZE;
