@@ -76,24 +76,24 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset);
     m_defEdit->setTextWidth(contentSize().width());
     m_defEdit->setPos(15,40);
-	
-	m_wordEdit->setStyled(true);
-	m_defEdit->setStyled(true);
-	m_wordEdit->setDefaultTextColor(Qt::white);
-	m_defEdit->setDefaultTextColor(Qt::white);
+
+    m_wordEdit->setStyled(true);
+    m_defEdit->setStyled(true);
+    m_wordEdit->setDefaultTextColor(Qt::white);
+    m_defEdit->setDefaultTextColor(Qt::white);
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
     m_timer->setInterval(m_autoDefineTimeout);
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(define()));
-    
+
     m_word = QString("");
     dataEngine("dict")->connectSource(m_word, this);
     connect(m_wordEdit, SIGNAL(editingFinished()), this, SLOT(define()));
     connect(m_wordEdit, SIGNAL(textChanged(const QString&)), this, SLOT(autoDefine(const QString&)));
     connect(m_defEdit, SIGNAL(linkActivated(const QString&)), this, SLOT(linkDefine(const QString&)));
-    
+
 //  This is the fix for links/selecting text
     QGraphicsItem::GraphicsItemFlags flags = m_defEdit->flags();
     flags ^= QGraphicsItem::ItemIsMovable;
@@ -168,8 +168,8 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-		m_defEdit->setTextWidth(contentSize().width()-30-40);
-		m_wordEdit->setTextWidth(contentSize().width()-30);
+        m_defEdit->setTextWidth(contentSize().width()-30-40);
+        m_wordEdit->setTextWidth(contentSize().width()-30);
         updateGeometry();
     }
 }
@@ -178,7 +178,7 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
 {
     Q_UNUSED(source);
     if (m_flash) {
-      m_flash->kill();
+        m_flash->kill();
     }
     if (!m_word.isEmpty()) {
         m_defEdit->show();
@@ -201,16 +201,16 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
             m_defList.removeAt(0);
         m_i = m_defList.begin();
         m_defEdit->setHtml(*m_i);
-	if (m_i != --m_defList.end())
-           m_rightArrow->show();
-	else
-	   m_rightArrow->hide();
+        if (m_i != --m_defList.end())
+            m_rightArrow->show();
+        else
+            m_rightArrow->hide();
         m_leftArrow->hide();
         //m_defEdit->dataUpdated(QString("test"),data);
     }
-	if (data.contains("wn")) {
-		m_defEdit->setHtml(data[QString("wn")].toString());
-	}
+    if (data.contains("wn")) {
+        m_defEdit->setHtml(data[QString("wn")].toString());
+    }
     updateGeometry();
 }
 
@@ -249,7 +249,7 @@ void Dict::define()
     m_word = newWord;
 
     if (!m_word.isEmpty()) { //get new definition
-	m_flash->flash(i18n("Looking up ") + m_word);
+        m_flash->flash(i18n("Looking up ") + m_word);
         dataEngine("dict")->connectSource(m_word, this);
     } else { //make the definition box disappear
         m_defEdit->setPlainText(QString());
