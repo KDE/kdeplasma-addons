@@ -73,21 +73,21 @@ class Dict : public Plasma::Applet
     private:
         QVariant m_thedef;
         KDialog *m_dialog; //should we move this into another class?
-		QTextEdit *m_defDisplay;
-		QLineEdit *m_wordChooser;
-		QString m_word;
+        QTextEdit *m_defDisplay;
+        QLineEdit *m_wordChooser;
+        QString m_word;
         QTimer* m_timer;
         int m_autoDefineTimeout;
         QGraphicsPixmapItem *m_graphicsIcon; 
-//	Plasma::VBoxLayout *m_layout;
-		Plasma::LineEdit *m_wordEdit;
+//  Plasma::VBoxLayout *m_layout;
+        Plasma::LineEdit *m_wordEdit;
         Plasma::LineEdit *m_defEdit;
-		Plasma::Flash *m_flash;
+        Plasma::Flash *m_flash;
         Arrow *m_rightArrow;
         Arrow *m_leftArrow;
         QStringList m_defList;
         QStringList::iterator m_i;
-		Ui::config ui;
+        Ui::config ui;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
