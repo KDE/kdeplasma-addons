@@ -52,7 +52,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
 
     KConfigGroup cg = config();
-    m_width = 500;
+    setContentSize(500,200);
     m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
     m_wordEdit = new Plasma::LineEdit(this);
     m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
@@ -73,8 +73,8 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     const int wordEditOffset = 40;
     m_graphicsIcon->setPos(-40 + wordEditOffset + 12,3);
     m_wordEdit->setPos(15 + wordEditOffset,7);
-    m_wordEdit->setTextWidth(m_width-wordEditOffset);
-    m_defEdit->setTextWidth(m_width);
+    m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset);
+    m_defEdit->setTextWidth(contentSize().width());
     m_defEdit->setPos(15,40);
 	
 	m_wordEdit->setStyled(true);
@@ -155,11 +155,11 @@ void Dict::linkDefine(const QString &text)
 
 QSizeF Dict::contentSizeHint() const
 {
-    if (m_defEdit->isVisible()) {
-        return QSizeF(30 + m_defEdit->boundingRect().width(), 50 + m_defEdit->boundingRect().height());
-    } else {
-        return QSizeF(30 + m_wordEdit->boundingRect().width() + 40, 40);
-    }
+     if (m_defEdit->isVisible()) {
+         return QSizeF(contentSize().width(), 50 + m_defEdit->boundingRect().height());
+     } else {
+         return QSizeF(contentSize().width(), 40);
+     }
 }
 
 void Dict::constraintsUpdated(Plasma::Constraints constraints)
@@ -168,13 +168,10 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-//        m_width=(int)size().width();
-        m_width=500;
-	m_defEdit->setTextWidth(m_width);
-	m_wordEdit->setTextWidth(m_width);
-//        updateGeometry();
+		m_defEdit->setTextWidth(contentSize().width()-30-40);
+		m_wordEdit->setTextWidth(contentSize().width()-30);
+        updateGeometry();
     }
-    kDebug() << m_width << "!!!!!!!!!!!!!!!!";
 }
 
 void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
@@ -230,7 +227,6 @@ void Dict::showConfigurationInterface()
         connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
     }
 
-    ui.widthSpinBox->setValue(m_width);
     ui.timeoutSpinBox->setValue(m_autoDefineTimeout);
     m_dialog->show();
     kDebug() << "SHOW config dialog";
