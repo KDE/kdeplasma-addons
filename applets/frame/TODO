@@ -1,13 +1,9 @@
-TODO:
-- Fix a bunch of regressions due to plasma core changes (some critical)
-- Make handles in corners: resize, rotate, rounded corners, using a nice Phase animation
-- Asynchronous image loading (& maybe scaling) currently the plasmoid hangs plasma on image load.
-- (DONE) Drag'n'drop for setting the image. Dropping a folder starts slideshow mode. How can we let the user discover it?
-- Plasma::Layout? What will happen on different coronas? How should it behave on different formfactors?
-- Switch to the standard rotate/resize of plasma when/if avaliable 
+TODO FOR 4.1:
 
-- (DONE - default pic installed) Take a default pic from user installed wallpapers to initialize the applet (if internet is not available)
-- Make the Wikipedia Picture Of The Day an engine (RSS)
+- clean the code
+- Make the Wikipedia Picture Of The Day an engine (RSS) - Keep craig Duquette updated when it's done so he'll see about a flickr engine! - have several engines as the comic engine has.
+- clean the config dialog and take ideas from Desktop config (share some config settings?) - add recursive dirs as an option for slideshow (although beware of too many options)
+
 
 IDEAS FOR THE FRAME APPLET
 (some already implemented)
@@ -18,8 +14,3 @@ IDEAS FOR THE FRAME APPLET
 The images sort of scale down and fade in when the appear... then after thirty or so pictures are shown, the lower ones fade out again :)
 - meta data: flip the pic and read metadata (date, size,...) and add your own comment
 
---------
-Settings : organize
-
-- choose picture -> slideshow, Wikipedia Picture of The Day or own pic
----------
