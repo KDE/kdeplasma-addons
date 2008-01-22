@@ -107,7 +107,7 @@ void Runner::activate(int index)
     if (action->type() == Plasma::SearchMatch::InformationalMatch) {
         changeLancelotSearchString(action->data().toString());
     } else {
-        action->exec();
+        action->exec(&m_context);
         hideLancelotWindow();
     }
 
