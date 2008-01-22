@@ -24,8 +24,10 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
-#include <QGraphicsItemAnimation>
-#include <QTimeLine>
+
+#include <KDebug>
+
+#include "plasma/phase.h"
 
 #define SIZE 48
 
@@ -52,12 +54,24 @@ void Fifteen::shuffle()
   qsrand(time(0));
   clearPieces();
   m_pieces.fill(NULL);
+  int numPiecesLeft = 16;
   for (int i = 0; i < 16; ++i) {
-    int rand = qrand() % 16;
+    int randIndex = qrand() % numPiecesLeft;
+    int rand = 0;
+    --numPiecesLeft;
 
-    while (m_pieces.at(rand) != NULL) {
-      rand = qrand() % 16;
+    // make sure we have an empty piece
+    if (randIndex == 0 && m_pieces.at(0)) {
+        ++randIndex;
     }
+
+    for (int j = 0; j < randIndex; ++j) {
+        ++rand;
+        while (m_pieces.at(rand)) {
+            ++rand;
+        }
+    }
+    kDebug() << "rand" << randIndex << rand;
 
     m_pieces[rand] = new Piece(SIZE, i, this);
     m_pieces[rand]->hide();
@@ -177,18 +191,7 @@ void Fifteen::piecePressed(QGraphicsItem *item)
 {
   if (isAdjacent(item, m_blank)) {
     QPointF pos = item->pos();
-
-    QTimeLine *timer = new QTimeLine(170);
-
-    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(item);
-    animation->setTimeLine(timer);
-
-    animation->setPosAt(0.0, item->pos());
-    animation->setPosAt(1.00, m_blank->pos());
-
-    timer->start();
-
+    Plasma::Phase::self()->moveItem(item, Plasma::Phase::FastSlideIn, m_blank->pos().toPoint());
     m_blank->setPos(pos);
   }
 }
