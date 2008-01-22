@@ -24,9 +24,12 @@
 
 #include <QPen>
 #include <QPainter>
-#include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QFontMetrics>
+
+#include <KDebug>
+
+#include <plasma/widgets/widget.h>
 
 Piece::Piece(int size, int id, QGraphicsItem *parent)
     : QGraphicsPixmapItem(parent)
@@ -85,9 +88,23 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
   Q_UNUSED(event);
-  if (m_id == 0) {
-    return;
+  if (m_id == 0 || event->button() != Qt::LeftButton) {
+      event->ignore();
+      return;
   }
 
+  event->accept();
   emit pressed(this);
 }
+
+void Piece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    // HACK: QGraphicsItem's documentation says that the event will be passed
+    // to the parent if it's not handled, but it isn't passed. This can be
+    // removed when Qt4.4 becomes a requirement. See Qt bug #176902.
+    Plasma::Widget *parentWidget = Plasma::Widget::parent(this);
+    if (parentWidget) {
+        parentWidget->contextMenuEvent(event);
+    }
+}
+
