@@ -20,39 +20,106 @@
 #include "fifteenPuzzle.h"
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), config_dialog(0)
+    : Plasma::Applet(parent, args), configDialog(0)
 {
   setHasConfigurationInterface(true);
   board = new Fifteen(this);
   board->setRect(0, 0, 192, 192); // 48 * 4 = 192
 }
 
+void FifteenPuzzle::init()
+{
+  createMenu();
+
+  KConfigGroup cg = config();
+
+  usePlainPieces = cg.readEntry("UsePlainPieces", true);
+  imagePath = cg.readEntry("ImagePath", QString());
+  showNumerals = cg.readEntry("ShowNumerals", true);
+
+  // make sure nobody messed up with the config file
+  if (!usePlainPieces &&
+      (imagePath.isEmpty() ||
+       QPixmap(imagePath).isNull())) {
+    usePlainPieces = true;
+  }
+
+  updateBoard();
+}
+
 QSizeF FifteenPuzzle::contentSizeHint() const
-{ 
+{
   return board->boundingRect().size();
 }
 
 void FifteenPuzzle::constraintsUpdated(Plasma::Constraints constraints)
 {
-  if (constraints & Plasma::SizeConstraint)
-  {
+  if (constraints & Plasma::SizeConstraint) {
     QSizeF size = this->contentSize();
     board->resetTransform();
-    board->scale(size.width()/192,size.height()/192);
+    board->scale(size.width() / 192, size.height() / 192);
   }
+}
+
+QList<QAction*> FifteenPuzzle::contextActions()
+{
+  return actions;
 }
 
 void FifteenPuzzle::showConfigurationInterface()
 {
-  if (config_dialog == 0)
-  {
-    config_dialog = new FifteenPuzzleConfig();
-    QObject::connect(config_dialog,SIGNAL(setSplitPixmap(QString)),board, SLOT(setSplitPixmap(QString)));
-    QObject::connect(config_dialog,SIGNAL(setIdentical()),board, SLOT(setIdentical()));
-    QObject::connect(config_dialog,SIGNAL(setNumerals(bool)),board, SLOT(setNumerals(bool)));
-    QObject::connect(config_dialog,SIGNAL(shuffle()),board, SLOT(shuffle()));
+  if (configDialog == 0) {
+    configDialog = new FifteenPuzzleConfig();
+    connect(configDialog, SIGNAL(shuffle()), board, SLOT(shuffle()));
+    connect(configDialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(configDialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
   }
-  config_dialog->show();
+
+  if (usePlainPieces) {
+    configDialog->ui.rb_identical->setChecked(true);
+  }
+  else {
+    configDialog->ui.rb_split->setChecked(true);
+  }
+  configDialog->ui.urlRequester->setUrl(imagePath);
+  configDialog->ui.cb_showNumerals->setChecked(showNumerals);
+  configDialog->show();
+}
+
+void FifteenPuzzle::configAccepted()
+{
+  KConfigGroup cg = config();
+
+  usePlainPieces = configDialog->ui.rb_identical->isChecked();
+  imagePath = configDialog->ui.urlRequester->url().path();
+  showNumerals = configDialog->ui.cb_showNumerals->isChecked();
+
+  cg.writeEntry("UsePlainPieces", usePlainPieces);
+  cg.writeEntry("ImagePath", imagePath);
+  cg.writeEntry("ShowNumerals", showNumerals);
+
+  updateBoard();
+
+  emit configNeedsSaving();
+}
+
+void FifteenPuzzle::updateBoard()
+{
+  if (usePlainPieces) {
+    board->setIdentical();
+  }
+  else {
+    board->setSplitPixmap(imagePath);
+    board->setNumerals(showNumerals);
+  }
+}
+
+void FifteenPuzzle::createMenu()
+{
+  QAction *shuffle = new QAction(i18n("Shuffle Pieces"), this);
+  actions.append(shuffle);
+  connect(shuffle, SIGNAL(triggered(bool)), board, SLOT(shuffle()));
 }
 
 #include "fifteenPuzzle.moc"
+

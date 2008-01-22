@@ -30,16 +30,28 @@ class FifteenPuzzle : public Plasma::Applet
   Q_OBJECT
   public:
     FifteenPuzzle(QObject *parent, const QVariantList &args);
+
+    void init();
     QSizeF contentSizeHint() const;
     void constraintsUpdated(Plasma::Constraints constraints);
-  
+    QList<QAction*> contextActions();
+
+  protected slots:
+    void configAccepted();
+
   private:
-    Fifteen *board;  
-    FifteenPuzzleConfig *config_dialog;
+    void updateBoard();
+    void createMenu();
+
+    Fifteen *board;
+    FifteenPuzzleConfig *configDialog;
+    QList<QAction *> actions;
+    bool usePlainPieces;
+    QString imagePath;
+    bool showNumerals;
 
   private slots:
     void showConfigurationInterface();
-
 };
 
 K_EXPORT_PLASMA_APPLET(fifteenPuzzle, FifteenPuzzle)

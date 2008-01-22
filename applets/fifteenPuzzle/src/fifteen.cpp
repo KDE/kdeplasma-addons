@@ -29,9 +29,8 @@
 
 #define SIZE 48
 
-
-Fifteen::Fifteen(QGraphicsItem *parent) 
-	: QGraphicsRectItem(parent)
+Fifteen::Fifteen(QGraphicsItem *parent)
+    : QGraphicsRectItem(parent)
 {
   m_pixmaps.resize(16);
   m_pieces.resize(16);
@@ -53,31 +52,32 @@ void Fifteen::shuffle()
   qsrand(time(0));
   clearPieces();
   m_pieces.fill(NULL);
-  for (int i=0; i<16; ++i)
-  {
-      int rand = qrand() % 16;
+  for (int i = 0; i < 16; ++i) {
+    int rand = qrand() % 16;
 
-      while (m_pieces.at(rand) != NULL)
-          rand = qrand() % 16;
+    while (m_pieces.at(rand) != NULL) {
+      rand = qrand() % 16;
+    }
 
-      m_pieces[rand] = new Piece(SIZE, i, this);
-      m_pieces[rand]->hide();
-      QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*))); 
+    m_pieces[rand] = new Piece(SIZE, i, this);
+    m_pieces[rand]->hide();
+    QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*)));
 
-      if (i == 0)
-          m_blank = m_pieces[rand];
+    if (i == 0) {
+      m_blank = m_pieces[rand];
+    }
   }
 
   if (!isSolvable()) {
-      //this is where I would rip out two pieces and swap them around, if it were a plastic puzzle
-      int a = 1;
-      int b = 2;
-      if (m_pieces[a] == m_blank) { //you can't pull out a hole!
-          a = 3;
-      } else if (m_pieces[b] == m_blank) {
-          b = 0;
-      }
-      qSwap(m_pieces[a], m_pieces[b]);
+    // this is where I would rip out two pieces and swap them around, if it were a plastic puzzle
+    int a = 1;
+    int b = 2;
+    if (m_pieces[a] == m_blank) { // you can't pull out a hole!
+      a = 3;
+    } else if (m_pieces[b] == m_blank) {
+      b = 0;
+    }
+    qSwap(m_pieces[a], m_pieces[b]);
   }
 
   updatePixmaps();
@@ -89,14 +89,11 @@ bool Fifteen::isSolvable()
 {
   int fields[16];
   bool odd_even_solvable;
-  for (int i=0;  i<16; ++i)
-  {
+  for (int i = 0;  i < 16; ++i) {
     fields[i] = m_pieces[i]->getId();
-    if (fields[i] == 0)
-    {
+    if (fields[i] == 0) {
       fields[i] = 16;
-      switch (i)
-      {
+      switch (i) {
         case 0: case  2: case  5: case  7:
         case 8: case 10: case 13: case 15: odd_even_solvable = 1; break;
         case 1: case  3: case  4: case  6:
@@ -106,13 +103,11 @@ bool Fifteen::isSolvable()
   }
 
   bool odd_even_permutations = 1;
-  for (int i=0; i<16; ++i)
-  {
+  for (int i = 0; i < 16; ++i) {
     int field = fields[i];
-    while (field != i+1)
-    {
-      int temp_field = fields[field-1];
-      fields[field-1] = field;
+    while (field != i + 1) {
+      int temp_field = fields[field - 1];
+      fields[field - 1] = field;
       field = temp_field;
       odd_even_permutations = !odd_even_permutations;
     }
@@ -123,8 +118,9 @@ bool Fifteen::isSolvable()
 
 void Fifteen::updateNumerals()
 {
-  for (int i = 0; i < 16; ++i)
+  for (int i = 0; i < 16; ++i) {
     m_pieces[i]->showNumeral(m_numerals);
+  }
 
   update(boundingRect());
 }
@@ -132,7 +128,7 @@ void Fifteen::updateNumerals()
 void Fifteen::setNumerals(bool show)
 {
   m_numerals = show;
-  updateNumerals(); 
+  updateNumerals();
 }
 
 void Fifteen::setSplitPixmap(QString path)
@@ -153,21 +149,17 @@ void Fifteen::updatePixmaps()
 {
   QPixmap pixmap;
 
-  if (!m_splitPixmap)
-  {
+  if (!m_splitPixmap) {
     pixmap = m_pixmap.scaled(SIZE, SIZE);
     m_pixmaps.fill(pixmap);
   }
-  else
-  {
-    pixmap = m_pixmap.scaled(SIZE*4, SIZE*4);
+  else {
+    pixmap = m_pixmap.scaled(SIZE * 4, SIZE * 4);
     int x = 0;
     int y = 0;
-    
-    for (int i=1; i < 16; ++i)
-    {
-      if ((i-1)%4 == 0 && i != 1)
-      {
+
+    for (int i = 1; i < 16; ++i) {
+      if ((i - 1) % 4 == 0 && i != 1) {
         x = 0;
         y = y + SIZE;
       }
@@ -176,18 +168,18 @@ void Fifteen::updatePixmaps()
     }
   }
 
-  for (int i=0;i<16;++i)
+  for (int i = 0; i < 16; ++i) {
     m_pieces[i]->setPixmap(m_pixmaps[m_pieces[i]->getId()]);
+  }
 }
 
 void Fifteen::piecePressed(QGraphicsItem *item)
 {
-  if (isAdjacent(item, m_blank))
-  {
+  if (isAdjacent(item, m_blank)) {
     QPointF pos = item->pos();
 
     QTimeLine *timer = new QTimeLine(170);
-    
+
     QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
     animation->setItem(item);
     animation->setTimeLine(timer);
@@ -198,32 +190,32 @@ void Fifteen::piecePressed(QGraphicsItem *item)
     timer->start();
 
     m_blank->setPos(pos);
-   }
+  }
 }
 
 bool Fifteen::isAdjacent(QGraphicsItem *a, QGraphicsItem *b)
-{  
+{
   qreal ax = a->pos().x();
   qreal ay = a->pos().y();
-  
+
   qreal bx = b->pos().x();
   qreal by = b->pos().y();
-  
+
   /*
   qDebug() << "ax:" << ax << "ay:" << ay; 
   qDebug() << "bx:" << bx << "by:" << by;
   */
 
-  //Left
+  // Left
   if (ax + SIZE == bx && ay == by)
     return true;
-  //Right
+  // Right
   if (ax - SIZE == bx && ay == by)
     return true;
-  //Above
+  // Above
   if (ay + SIZE == by && ax == bx)
     return true;
-  //Below
+  // Below
   if (ay - SIZE == by && ax == bx)
     return true;
 
@@ -235,15 +227,13 @@ void Fifteen::drawPieces()
   int x = 0;
   int y = 0;
 
-  for (int i=0; i < 16; ++i)
-  {
-    if (i%4 == 0 && i != 0)
-    {
+  for (int i = 0; i < 16; ++i) {
+    if (i % 4 == 0 && i != 0) {
       x = 0;
       y = y + SIZE;
     }
-    
-    m_pieces.at(i)->setPos(x,y);
+
+    m_pieces.at(i)->setPos(x, y);
     m_pieces.at(i)->show();
     x += SIZE;
   }

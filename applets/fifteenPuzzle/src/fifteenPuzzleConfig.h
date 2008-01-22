@@ -25,33 +25,16 @@
 
 #include "ui_fifteenPuzzleConfig.h"
 
-class FifteenPuzzleConfig : public KDialog 
+class FifteenPuzzleConfig : public KDialog
 {
   Q_OBJECT
-
   public:
-    FifteenPuzzleConfig(QWidget *parent=0);
-
-  private slots:
-    void returnPressed(const QString& path);
-    void pathSelected(const KUrl& url);
-    void splitPixmapToggled(bool toggled);
-    void identicalToggled(bool toggled);
-    void showNumeralsChanged(int state);
-  
-  private:
-    bool isValidImage(const QString &path);
+    FifteenPuzzleConfig(QWidget *parent = 0);
 
     Ui::fifteenPuzzleConfig ui;
-    KUrlRequester *urlRequester;
 
-  
   signals:
-    void setIdentical();
-    void setSplitPixmap(QString path);
-    void setNumerals(bool show);
     void shuffle();
 };
 
 #endif
-

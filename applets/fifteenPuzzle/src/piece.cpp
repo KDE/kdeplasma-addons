@@ -17,18 +17,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-// Thanks to ThomasZ and Jens B-W for making this prettier than just some 
+// Thanks to ThomasZ and Jens B-W for making this prettier than just some
 // off-centered text and gradients ;)
 
 #include "piece.h"
+
 #include <QPen>
 #include <QPainter>
-#include <QDebug>   
+#include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QFontMetrics>
 
 Piece::Piece(int size, int id, QGraphicsItem *parent)
-          : QGraphicsPixmapItem(parent)
+    : QGraphicsPixmapItem(parent)
 {
   m_size = size;
   m_id = id;
@@ -46,17 +47,18 @@ void Piece::showNumeral(bool show)
 }
 
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-           QWidget *widget)
+                  QWidget *widget)
 {
-
-  if (m_id == 0)
+  if (m_id == 0) {
     return;
+  }
 
   QGraphicsPixmapItem::paint(painter, option, widget);
 
-  if (!m_numeral)
+  if (!m_numeral) {
     return;
- 
+  }
+
   QFont font = painter->font();
   font.setBold(true);
   font.setPointSize(14);
@@ -66,21 +68,26 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
   QString text = QString::number(m_id);
 
   QPen pen = painter->pen();
-  
-  pen.setColor(QColor(0,0,0,90));
+
+  pen.setColor(QColor(0, 0, 0, 90));
   painter->setPen(pen);
-  painter->drawText( ((m_size/2) - m.width(text)/2)+2, ((m_size/2) + m.ascent()/2)+2, text);
-  
+  painter->drawText(((m_size / 2) - m.width(text) / 2) + 2,
+                    ((m_size / 2) + m.ascent() / 2) + 2,
+                    text);
+
   pen.setColor(QColor(Qt::white));
   painter->setPen(pen);
-  painter->drawText( (m_size/2) - m.width(text)/2, (m_size/2) + m.ascent()/2, text);
+  painter->drawText((m_size / 2) - m.width(text) / 2,
+                    (m_size / 2) + m.ascent() / 2,
+                    text);
 }
 
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
   Q_UNUSED(event);
-  if (m_id == 0)
+  if (m_id == 0) {
     return;
+  }
 
   emit pressed(this);
 }

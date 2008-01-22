@@ -27,31 +27,31 @@
 
 class Fifteen : public QObject, public QGraphicsRectItem
 {
-Q_OBJECT
+  Q_OBJECT
+  public:
+    Fifteen(QGraphicsItem *parent = 0);
 
-public:
-	Fifteen(QGraphicsItem *parent = 0 );
-  
-public slots:
-  void piecePressed(QGraphicsItem *item);
-  void setSplitPixmap(QString path);
-  void setIdentical();
-  void setNumerals(bool show);
-  void shuffle();
+  public slots:
+    void piecePressed(QGraphicsItem *item);
+    void setSplitPixmap(QString path);
+    void setIdentical();
+    void setNumerals(bool show);
+    void shuffle();
 
-private:
-  void drawPieces();
-  bool isAdjacent(QGraphicsItem *a, QGraphicsItem *b);
-  void updatePixmaps();
-  void clearPieces();
-  void updateNumerals();
-  bool isSolvable();
+  private:
+    void drawPieces();
+    bool isAdjacent(QGraphicsItem *a, QGraphicsItem *b);
+    void updatePixmaps();
+    void clearPieces();
+    void updateNumerals();
+    bool isSolvable();
 
-  QVector<Piece *> m_pieces;
-  QVector<QPixmap> m_pixmaps;
-  QGraphicsItem *m_blank;
-  bool m_splitPixmap;
-  QPixmap m_pixmap;
-  bool m_numerals;
+    QVector<Piece *> m_pieces;
+    QVector<QPixmap> m_pixmaps;
+    QGraphicsItem *m_blank;
+    bool m_splitPixmap;
+    QPixmap m_pixmap;
+    bool m_numerals;
 };
+
 #endif

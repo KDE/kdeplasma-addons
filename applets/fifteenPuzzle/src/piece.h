@@ -24,24 +24,25 @@
 #include <QObject>
 
 class Piece : public QObject, public QGraphicsPixmapItem
-{  
-Q_OBJECT
+{
+  Q_OBJECT
 
-public:
-	Piece(int size, int id, QGraphicsItem * parent);
-  int getId();
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  void showNumeral(bool show);
+  public:
+    Piece(int size, int id, QGraphicsItem * parent);
+    int getId();
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void showNumeral(bool show);
 
-private:
-  int m_id;
-  int m_size;
-  bool m_numeral;
- 
-protected:
-  void mousePressEvent(QGraphicsSceneMouseEvent *event);  
+  private:
+    int m_id;
+    int m_size;
+    bool m_numeral;
 
-signals:
-  void pressed(QGraphicsItem *item);
+  protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+  signals:
+    void pressed(QGraphicsItem *item);
 };
+
 #endif
