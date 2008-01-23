@@ -19,6 +19,8 @@
 
 #include "fifteenPuzzle.h"
 
+#include <QtCore/QFile>
+
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), configDialog(0)
 {
@@ -39,9 +41,10 @@ void FifteenPuzzle::init()
 
   // make sure nobody messed up with the config file
   if (!usePlainPieces &&
-      (imagePath.isEmpty() ||
+      (!QFile::exists(imagePath) ||
        QPixmap(imagePath).isNull())) {
     usePlainPieces = true;
+    imagePath = QString();
   }
 
   updateBoard();

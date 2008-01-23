@@ -33,6 +33,9 @@ class FifteenPuzzleConfig : public KDialog
 
     Ui::fifteenPuzzleConfig ui;
 
+  protected Q_SLOTS:
+    void slotButtonClicked(int button);
+
   signals:
     void shuffle();
 };

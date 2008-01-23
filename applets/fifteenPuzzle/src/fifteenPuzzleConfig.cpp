@@ -17,9 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "fifteenPuzzleConfig.h"
+#include <kmessagebox.h>
 
-#include <QMessageBox>
+#include <QtCore/QFile>
+#include <QtGui/QPixmap>
+
+#include "fifteenPuzzleConfig.h"
 
 FifteenPuzzleConfig::FifteenPuzzleConfig(QWidget *parent)
     : KDialog(parent)
@@ -30,6 +33,31 @@ FifteenPuzzleConfig::FifteenPuzzleConfig(QWidget *parent)
   ui.setupUi(mainWidget());
 
   connect(ui.pb_shuffle, SIGNAL(clicked()), this, SIGNAL(shuffle()));
+}
+
+void FifteenPuzzleConfig::slotButtonClicked(int button)
+{
+  if (ui.rb_identical->isChecked() == false) {
+    switch (button) {
+      case KDialog::Ok:
+      case KDialog::Apply: {
+        QString path = ui.urlRequester->url().path();
+        if (!QFile::exists(path) ||
+            QPixmap(path).isNull()) {
+          KMessageBox::sorry(this,
+            i18nc("@body:window", "You have to provide a valid image"),
+            i18nc("@title:window", "Configure Fifteen Puzzle"),
+            KMessageBox::Notify);
+        } else {
+          KDialog::slotButtonClicked(button);
+        }
+        return;
+      }
+      default:
+        break;
+    }
+  }
+  KDialog::slotButtonClicked(button);
 }
 
 #include "fifteenPuzzleConfig.moc"
