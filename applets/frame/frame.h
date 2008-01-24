@@ -41,7 +41,6 @@ class QGraphicsSceneDragDropEvent;
 namespace Plasma
 {
     class Layout;
-    //class DataEngine;
 }
 
 class Frame : public Plasma::Applet
@@ -49,7 +48,6 @@ class Frame : public Plasma::Applet
     Q_OBJECT
     public:
         Frame(QObject *parent, const QVariantList &args);
-        ~Frame();
 
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
@@ -60,48 +58,50 @@ class Frame : public Plasma::Applet
         void showConfigurationInterface();
 
     protected Q_SLOTS:
-	void dropEvent(QGraphicsSceneDragDropEvent *event);
+        void dropEvent(QGraphicsSceneDragDropEvent *event);
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-	void configAccepted();
-	void choosePicture(const KUrl& currentUrl);
-	void setSlideShow();
+        void configAccepted();
+        void choosePicture(const KUrl& currentUrl);
+        void setSlideShow();
+
+    private Q_SLOTS:
+        void addDir();
+        void removeDir();
 
     private:
         void paintCache(const QStyleOptionGraphicsItem *option,
                         const QSize &contentsSize);
 
-	/// The current color of the frame
+        /// The current color of the frame
         QColor m_frameColor;
-        KDialog *m_dialog; //should we move this into another class?
-	/// true if the user wants a frame. If false, there's only the black border around the picture
-	bool m_frame;
-	/// If true, the frame will have squared corners
-	bool m_squareCorners;
-	/// If true, the frame will have round corners
-	bool m_roundCorners;
-	/// If true, the picture will have a drop shadow.
-	bool m_shadow;
-	/// true if the user wants Wikipedia Picture of the Day (unused)
-	bool m_potd;
-	/// Stores the current picture URL when slideShow is false. Wikipedia Picture of the Day is default.
-	KUrl m_currentUrl;
-	/// The current slideshow folder
-	KUrl m_slideShowUrl;
+        KDialog *m_dialog; // should we move this into another class?
+        /// true if the user wants a frame. If false, there's only the black border around the picture
+        bool m_frame;
+        /// If true, the frame will have rounded corners
+        bool m_roundCorners;
+        /// If true, the picture will have a drop shadow.
+        bool m_shadow;
+        /// true if the user wants Wikipedia Picture of the Day (unused)
+        bool m_potd;
+        /// Stores the current picture URL when slideShow is false. Wikipedia Picture of the Day is default.
+        KUrl m_currentUrl;
+        /// The current slideshow folder
+        QStringList m_slideShowPaths;
         bool m_slideShow;
         unsigned int m_slideNumber;
-        QTimer *slideShowTimer;
-	int m_slideshowTime;
-	/// The current picture
-	QImage m_picture;
-	/// Off-Screen pixmap
-	QPixmap m_pixmapCache;
+        QTimer *m_slideShowTimer;
+        int m_slideshowTime;
+        /// The current picture
+        QImage m_picture;
+        /// Off-Screen pixmap
+        QPixmap m_pixmapCache;
         /// Frame & shadow outline thickness
         int m_frameOutline;
         int m_swOutline;
         /// Max Picture Dimension
         static const int m_maxDimension=800;
-	/// Designer Config file
-	Ui::config ui;
+        /// Designer Config file
+        Ui::config ui;
         /// Default image
         QImage loadDefaultImage(QString message);
 };
