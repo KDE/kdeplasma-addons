@@ -41,12 +41,6 @@ class EbnApplet : public Plasma::Applet
 
         void init();
 
-        void paintInterface(QPainter* painter,
-                            const QStyleOptionGraphicsItem* option,
-                            const QRect& rect);
-        QSizeF contentSizeHint() const;
-        void constraintsUpdated(Plasma::Constraints);
-
     public slots:
         void dataUpdated(const QString& name, const Plasma::DataEngine::Data& data);
         /**
@@ -72,6 +66,13 @@ class EbnApplet : public Plasma::Applet
          * We ignore updates from everywhere else
          */
         QString watchSource;
+
+        // %1 for title
+        QString htmlHeader;
+        QString htmlFooter;
+        // %1 for href
+        // %2 for text
+        QString link;
 };
 
 K_EXPORT_PLASMA_APPLET(ebn, EbnApplet)

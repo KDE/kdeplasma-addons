@@ -27,15 +27,18 @@
 #include <QWidget>
 
 #include <KToolInvocation>
+#include <KColorScheme>
+
+#include <Plasma/Theme>
 
 using namespace Plasma;
 
-EbnApplet::EbnApplet(QObject* parent, const QVariantList &args)
-    : Applet( parent, args )
-    , m_viewEdit( new Plasma::LineEdit(this) )
-    , watchSource('/')
+EbnApplet::EbnApplet(QObject *parent, const QVariantList &args)
+    : Applet(parent, args),
+      m_viewEdit(0),
+      watchSource('/')
 {
-    setHasConfigurationInterface(false);
+    setContentSize(400,400);
 }
 
 EbnApplet::~EbnApplet()
@@ -44,22 +47,22 @@ EbnApplet::~EbnApplet()
 
 void EbnApplet::init()
 {
+    m_viewEdit = new Plasma::LineEdit(this);
     connect(m_viewEdit, SIGNAL(linkActivated(const QString&)),
             this, SLOT(doLink(const QString&)));
 
     m_viewEdit->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    m_viewEdit->setFont(Plasma::Theme::self()->font());
+    m_viewEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
+    KColorScheme colorScheme(QPalette::Active, KColorScheme::View,
+                             Plasma::Theme::self()->colors());
+    link = "<a href=\"%2\"><font color=\"%1\">%3</font></a>";
+    link = link.arg(colorScheme.foreground(KColorScheme::LinkText).color().name());
+    htmlHeader = "<html><body><h1>%1</h1>";
+    htmlFooter = "</body></html>";
 
     // Load the default page
     go();
-}
-
-QSizeF EbnApplet::contentSizeHint() const
-{
-    return m_viewEdit->geometry().size();
-}
-
-void EbnApplet::constraintsUpdated(Plasma::Constraints)
-{
 }
 
 void EbnApplet::dataUpdated(const QString& source,
@@ -75,7 +78,7 @@ void EbnApplet::dataUpdated(const QString& source,
     //QString weblink( data.value("link").toString() ); // browser link
     QVariantMap items( data.value("items").toMap() );
 
-    QString content = "<html><h1>" + title + "</h1><ul>";
+    QString content = "<ul>";
 
     QMapIterator<QString, QVariant> it(items);
     while (it.hasNext()) {
@@ -83,11 +86,9 @@ void EbnApplet::dataUpdated(const QString& source,
         QVariantMap map = it.value().toMap();
         content += "<li>";
         if ( map.contains("source") ) {
-            content += "<a href=\"" + map["source"].toString() + "\">"
-                       + it.key() + "</a>";
+            content += link.arg(map["source"].toString()).arg(it.key());
         } else {
-            content += "<a href=\"" + map["link"].toString() + "\">"
-                       + it.key() + "</a>";
+            content += link.arg(map["link"].toString()).arg(it.key());
         }
         content += ": " + i18np("%1 issue", "%1 issues", map["issues"].toString().toInt()) + "</li>";
     }
@@ -97,10 +98,10 @@ void EbnApplet::dataUpdated(const QString& source,
     if ( parentSource.isEmpty() ) {
         parentSource = "/";
     }
-    
-    content += "<p><a href=\"" + parentSource + "\">Back</a></p></html>";
-    kDebug()<<"parentSource :"<<parentSource<<endl;
-    m_viewEdit->setHtml(content);
+
+    content += "<p>" + link.arg(parentSource).arg(i18n("Back")) + "</p>";
+    kDebug() << "parentSource:" << parentSource;
+    m_viewEdit->setHtml(htmlHeader.arg(title) + content + htmlFooter);
 
     updateGeometry();
 }
@@ -120,34 +121,24 @@ void EbnApplet::go(const QString& source)
         dataEngine("ebn")->disconnectSource(watchSource, this);
     }
     if ( source == "/" ) {
-        m_viewEdit->setHtml(QString("<html>"
-                              "<h1>English Breakfast Network</h1>"
-                              "<ul>"
-                                "<li><a href=\"apidocs\">%1</a></li>"
-                                "<li><a href=\"krazy\">%2</a></li>"
-                                "<li><a href=\"sanitizer\">%3</a></li>"
-                                "<li><a href=\"unittests\">%4</a></li>"
-                              "</ul>"
-                            "</html>").arg( i18n("API Documentation")).arg(i18n("Code Checking")).arg(i18n("Documentation Sanitizer")).arg(i18n("Unit Testing")));
+        QString content = "<ul>";
+        content += "<li>" + link.arg("apidocs").arg(i18n("API Documentation")) + "</li>";
+        content += "<li>" + link.arg("krazy").arg(i18n("Code Checking")) + "</li>";
+        content += "<li>" + link.arg("sanitizer").arg(i18n("Documentation Sanitizer")) + "</li>";
+        content += "<li>" + link.arg("unittests").arg(i18n("Unit Testing")) + "</li>";
+        content += "</ul>";
+        m_viewEdit->setHtml(htmlHeader.arg("English Breakfast Network") +
+                            content + htmlFooter);
     } else {
-        m_viewEdit->setHtml(QString("<html>"
-                              "<h1>%1</h1>"
-                              "<p><a href=\"%2\">%3</a></p>"
-                            "</html>").arg(i18n("Loading...")).arg(watchSource).arg(i18n("Cancel")));
+        m_viewEdit->setHtml(htmlHeader.arg(i18n("Loading...")) +
+                            "<p>" +
+                            link.arg(watchSource).arg(i18n("Cancel")) +
+                            "</p>" +
+                            htmlFooter);
         dataEngine("ebn")->connectSource(source, this);
     }
     watchSource = source;
     updateGeometry();
-}
-
-void EbnApplet::paintInterface(QPainter* p,
-                               const QStyleOptionGraphicsItem* option,
-                               const QRect& rect)
-{
-    Q_UNUSED(option);
-    Q_UNUSED(rect);
-
-    p->setRenderHint(QPainter::Antialiasing);
 }
 
 #include "ebnapplet.moc"
