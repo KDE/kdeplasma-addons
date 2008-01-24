@@ -71,7 +71,7 @@ void Fifteen::shuffle()
             ++rand;
         }
     }
-    kDebug() << "rand" << randIndex << rand;
+    //kDebug() << "rand" << randIndex << rand;
 
     m_pieces[rand] = new Piece(SIZE, i, this);
     m_pieces[rand]->hide();
