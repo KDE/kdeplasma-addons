@@ -32,7 +32,6 @@ class FifteenPuzzle : public Plasma::Applet
     FifteenPuzzle(QObject *parent, const QVariantList &args);
 
     void init();
-    QSizeF contentSizeHint() const;
     void constraintsUpdated(Plasma::Constraints constraints);
     QList<QAction*> contextActions();
 

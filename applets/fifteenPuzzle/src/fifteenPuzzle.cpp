@@ -25,6 +25,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), configDialog(0)
 {
   setHasConfigurationInterface(true);
+  setRemainSquare(true);
   board = new Fifteen(this);
   board->setRect(0, 0, 192, 192); // 48 * 4 = 192
 }
@@ -48,11 +49,6 @@ void FifteenPuzzle::init()
   }
 
   updateBoard();
-}
-
-QSizeF FifteenPuzzle::contentSizeHint() const
-{
-  return board->boundingRect().size();
 }
 
 void FifteenPuzzle::constraintsUpdated(Plasma::Constraints constraints)
