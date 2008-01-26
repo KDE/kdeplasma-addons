@@ -62,7 +62,7 @@ void TwitterEngine::setStatus(const QString &status)
         return; // failed to get a name
     }
     QString user = status.left(colon);
-    m_status = status.right(status.length() - (colon + 1));
+    m_status = QUrl::toPercentEncoding(status.right(status.length() - (colon + 1)));
     QString statusurl = QString("source=kdetwitter&status=%1").arg(m_status);
     m_http->setUser(user, m_config.value(user).toString());
     int id = m_http->post("/statuses/update.xml", statusurl.toUtf8());
