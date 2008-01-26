@@ -20,6 +20,8 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
+#include <plasma/theme.h>
+
 #include "comic.h"
 #include "configdialog.h"
 
@@ -140,7 +142,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth - 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth - 5, height / 2 + 15 ) );
 
-        p->setBrush( Qt::white );
+        p->setBrush( Plasma::Theme::self()->textColor() );
         p->drawPolygon( arrow );
     }
     if ( mShowNextButton ) {
@@ -149,7 +151,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth + imageWidth + 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth + imageWidth + 5, height / 2 + 15 ) );
 
-        p->setBrush( Qt::white );
+        p->setBrush( Plasma::Theme::self()->textColor() );
         p->drawPolygon( arrow );
     }
     p->restore();
