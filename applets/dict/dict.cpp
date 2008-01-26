@@ -41,6 +41,7 @@
 #include <QTime>
 #include <plasma/svg.h>
 #include <plasma/phase.h>
+#include <plasma/theme.h>
 
 using namespace Plasma;
 
@@ -79,8 +80,8 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 
     m_wordEdit->setStyled(true);
     m_defEdit->setStyled(true);
-    m_wordEdit->setDefaultTextColor(Qt::white);
-    m_defEdit->setDefaultTextColor(Qt::white);
+    m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
+    m_defEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
 
 //  Timer for auto-define
     m_timer = new QTimer(this);

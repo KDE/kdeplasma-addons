@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include <plasma/theme.h>
+
 #include "arrow.h"
 
 Arrow::Arrow(QGraphicsItem *parent)
@@ -41,8 +43,10 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     Q_UNUSED(widget);
 
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(QPen(QBrush(QColor(255,255,255,200)), 1,Qt::SolidLine, Qt::RoundCap));
-    painter->setBrush(QBrush(Qt::white, Qt::SolidPattern));
+    QColor penColor = Plasma::Theme::self()->textColor();
+    penColor.setAlpha(200);
+    painter->setPen(QPen(QBrush(penColor), 1,Qt::SolidLine, Qt::RoundCap));
+    painter->setBrush(QBrush(Plasma::Theme::self()->textColor(), Qt::SolidPattern));
     if (m_direction == 0) {
         QPoint points[3] = {QPoint(10,0),
             QPoint(0,15),
