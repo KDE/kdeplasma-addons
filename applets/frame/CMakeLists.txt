@@ -1,7 +1,8 @@
 project(plasma-frame)
 
 set(frame_SRCS
-    frame.cpp)
+    frame.cpp
+    picture.cpp)
 
 
 kde4_add_ui_files(frame_SRCS config.ui )
@@ -11,4 +12,4 @@ target_link_libraries(plasma_applet_frame ${PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4
 
 install(TARGETS plasma_applet_frame DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-frame-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES picture-frame-default.svg DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
+install(FILES picture-frame-default.jpg DESTINATION ${DATA_INSTALL_DIR}/plasma-frame)

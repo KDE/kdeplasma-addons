@@ -47,6 +47,7 @@
 #include <plasma/theme.h>
 
 #include <math.h>
+#include "picture.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -98,36 +99,6 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
     }
 }
 
-QImage Frame::loadDefaultImage(QString message)
-{
-    // Create a QImage with same axpect ratio of default svg and current pixelSize
-    QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
-    QSvgRenderer sr(svgFile);
-    int pixelSize = contentSize().toSize().width();
-    double scale = (double) pixelSize / sr.boundsOnElement("boundingRect").size().width();
-    QImage imload(pixelSize,
-                  (int) (sr.boundsOnElement("boundingRect").size().height() * scale),
-                  QImage::Format_ARGB32);
-    imload.fill(Qt::white);
-    QPainter p(&imload);
-    sr.render(&p, QRect(QPoint(0, 0), imload.size()));
-
-    // Set the font and draw text in a textRect
-    QRectF textRect = sr.boundsOnElement("textArea");
-    textRect = QRectF(textRect.x() * scale,
-                      textRect.y() * scale,
-                      textRect.width() * scale,
-                      textRect.height() * scale);
-    QFont textFont;
-    // textFont.setItalic(true);
-    textFont.setBold(true);
-    textFont.setPixelSize(imload.height() / 15);
-    p.setFont(textFont);
-    p.drawText(textRect.toRect(), message);
-    p.end();
-    return imload;
-}
-
 void Frame::setSlideShow()
 {
     QStringList picList;
@@ -153,21 +124,8 @@ void Frame::setSlideShow()
 
 void Frame::choosePicture(const KUrl& currentUrl)
 {
-    if (currentUrl.url().isEmpty()) {
-        m_picture = loadDefaultImage("Put your photo here\nor drop a folder for starting a slideshow");
-    } else {
-        QImage tempImage(currentUrl.path());
-        if (tempImage.isNull()){
-            m_picture = loadDefaultImage("Error loading image");
-        } else { // Load success! Scale the image if it is too big
-            if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
-                m_picture = tempImage.scaled(m_maxDimension,m_maxDimension,
-                                             Qt::KeepAspectRatio,Qt::SmoothTransformation);
-            } else {
-                m_picture = tempImage;
-            }
-        }
-    }
+    Picture myPicture;
+    m_picture = myPicture.setPicture(currentUrl);
 
     m_pixmapCache = QPixmap();
     update();

@@ -98,12 +98,8 @@ class Frame : public Plasma::Applet
         /// Frame & shadow outline thickness
         int m_frameOutline;
         int m_swOutline;
-        /// Max Picture Dimension
-        static const int m_maxDimension=800;
         /// Designer Config file
         Ui::config ui;
-        /// Default image
-        QImage loadDefaultImage(QString message);
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)
