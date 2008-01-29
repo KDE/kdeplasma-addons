@@ -23,7 +23,10 @@
 #include <QPixmap>
 #include <QImage>
 
+#include <plasma/theme.h>
+
 class KUrl;
+class QDir;
 
 /**
  * @brief Picture choice
@@ -42,11 +45,11 @@ class Picture
 	* Set Default picture with written message @p message if no picture or folder was choosen 
 	* by the user
 	**/
-	QImage defaultPicture(const QString &message);
+	QImage defaultPicture(int pixelSize, const QString &message);
 	/** 
 	* Set picture from location @p currentUrl 
 	**/
-	QImage setPicture( const KUrl &currentUrl);
+	QImage setPicture(int pixelSize, const KUrl &currentUrl);
 	/**
 	* Find all the pictures in each of the dirs that are listed in @p slideShowPaths
 	**/

@@ -22,6 +22,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QPixmap>
+#include <QSvgRenderer>
 
 #include <KUrl>
 #include <KStandardDirs>
@@ -35,33 +36,38 @@ Picture::~Picture()
 {
 }
 
-QImage Picture::defaultPicture(const QString &message)
+QImage Picture::defaultPicture(int pixelSize, const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
-    QString defaultFile = KGlobal::dirs()->findResource("data", "plasma-frame/picture-frame-default.jpg");
-    QImage imload; 
-    imload.load( defaultFile);
-    // Write message
+    QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
+    QSvgRenderer sr(svgFile);
+    QImage imload(sr.defaultSize(),QImage::Format_RGB32);//TODO optimize, too slow
+   
     QPainter p(&imload);
+    sr.render(&p, QRect(QPoint(0, 0), imload.size()));
+
+    // Set the font and draw text 
     p.setRenderHint(QPainter::Antialiasing);
     QFont textFont;
-    textFont.setPixelSize(imload.height() / 10);
+    textFont.setPixelSize(imload.height() / 12);
     p.setFont(textFont);
     p.drawText(imload.rect(), Qt::AlignCenter, message);
     p.end();
     return imload;
 }
 
-QImage Picture::setPicture(const KUrl &currentUrl)
+QImage Picture::setPicture(int pixelSize, const KUrl &currentUrl)
 {
+    QImage m_picture;
     if (currentUrl.url().isEmpty()) {
-	return defaultPicture("Put your photo here\nor drop a folder\nfor starting a slideshow");
+	m_picture = defaultPicture(pixelSize, "Put your photo here\nor drop a folder\nfor starting a slideshow");
+	return m_picture;
     } else {
         QImage tempImage(currentUrl.path());
         if (tempImage.isNull()){
-            return defaultPicture("Error loading image");
-        } else { // Load success! Scale the image if it is too big
-	    QImage m_picture;
+            m_picture = defaultPicture(pixelSize, "Error loading image");
+	    return m_picture;
+        } else { // Load success! Scale the image if it is too big	    
             if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
                 m_picture = tempImage.scaled(m_maxDimension,m_maxDimension,
                                              Qt::KeepAspectRatio,Qt::SmoothTransformation);
@@ -88,3 +94,4 @@ QStringList Picture::findSlideShowPics(const QStringList &slideShowPaths)
     }
     return picList;
 }
+

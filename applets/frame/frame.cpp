@@ -116,7 +116,7 @@ void Frame::setSlideShow()
 void Frame::choosePicture(const KUrl& currentUrl)
 {
     Picture myPicture;
-    m_picture = myPicture.setPicture(currentUrl);
+    m_picture = myPicture.setPicture(contentSize().toSize().width(), currentUrl);
 
     m_pixmapCache = QPixmap();
     update();
