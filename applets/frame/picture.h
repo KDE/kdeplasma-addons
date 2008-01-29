@@ -46,7 +46,7 @@ class Picture
 	/** 
 	* Set picture from location @p currentUrl 
 	**/
-	QImage setPicture( KUrl currentUrl);
+	QImage setPicture( const KUrl &currentUrl);
 	/**
 	* Find all the pictures in each of the dirs that are listed in @p slideShowPaths
 	**/

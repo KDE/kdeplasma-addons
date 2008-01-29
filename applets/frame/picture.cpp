@@ -52,7 +52,7 @@ QImage Picture::defaultPicture(const QString &message)
     return imload;
 }
 
-QImage Picture::setPicture(KUrl currentUrl)
+QImage Picture::setPicture(const KUrl &currentUrl)
 {
     if (currentUrl.url().isEmpty()) {
 	return defaultPicture("Put your photo here\nor drop a folder\nfor starting a slideshow");
