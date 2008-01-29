@@ -19,12 +19,12 @@
 
 #include "picture.h"
 
+#include <QDir>
 #include <QPainter>
 #include <QPixmap>
-#include <QSvgRenderer>
 
 #include <KUrl>
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 
 Picture::Picture()
@@ -35,7 +35,7 @@ Picture::~Picture()
 {
 }
 
-QImage Picture::defaultPicture(QString message)
+QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
     QString defaultFile = KGlobal::dirs()->findResource("data", "plasma-frame/picture-frame-default.jpg");
@@ -71,4 +71,20 @@ QImage Picture::setPicture(KUrl currentUrl)
 	    return m_picture;
         }
     }
+}
+
+QStringList Picture::findSlideShowPics(const QStringList &slideShowPaths)
+{
+    QStringList picList;
+
+    foreach (const QString &path, slideShowPaths) {
+        QDir dir(path);
+        QStringList filters;
+        filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
+        dir.setNameFilters(filters);
+        foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
+            picList.append(path + "/" + imageFile);
+        }
+    }
+    return picList;
 }

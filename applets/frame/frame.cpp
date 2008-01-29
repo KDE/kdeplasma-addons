@@ -101,18 +101,9 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 void Frame::setSlideShow()
 {
-    QStringList picList;
-
-    foreach (const QString &path, m_slideShowPaths) {
-        QDir dir(path);
-        QStringList filters;
-        filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
-        dir.setNameFilters(filters);
-        foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
-            picList.append(path + "/" + imageFile);
-        }
-    }
-
+    Picture myPicture;
+    QStringList picList=myPicture.findSlideShowPics(m_slideShowPaths);
+    kDebug() <<"picList = " << picList <<endl;
     if (!picList.isEmpty()) {
         KUrl currentUrl(picList.at(m_slideNumber % picList.count()));
         m_slideNumber++;

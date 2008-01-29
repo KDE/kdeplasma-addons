@@ -42,11 +42,15 @@ class Picture
 	* Set Default picture with written message @p message if no picture or folder was choosen 
 	* by the user
 	**/
-	QImage defaultPicture(QString message);
+	QImage defaultPicture(const QString &message);
 	/** 
 	* Set picture from location @p currentUrl 
 	**/
 	QImage setPicture( KUrl currentUrl);
+	/**
+	* Find all the pictures in each of the dirs that are listed in @p slideShowPaths
+	**/
+	QStringList findSlideShowPics(const QStringList &slideShowPaths);
 
     private:
         QImage getPicture(){return m_picture;};
