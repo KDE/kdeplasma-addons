@@ -44,8 +44,6 @@
 #include <KUrl>
 #include <KDirSelectDialog>
 
-#include <plasma/theme.h>
-
 #include <math.h>
 #include "picture.h"
 
@@ -73,7 +71,7 @@ void Frame::init()
     m_slideShow = cg.readEntry("slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
-    m_currentUrl = cg.readEntry("url", QString());
+    m_currentUrl = cg.readEntry("url", "Default");
 
     // Frame & Shadow dimensions
     m_frameOutline = 8;

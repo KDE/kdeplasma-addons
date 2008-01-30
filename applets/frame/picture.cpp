@@ -27,7 +27,6 @@
 #include <KUrl>
 #include <KStandardDirs>
 
-
 Picture::Picture()
 {
 }
@@ -59,7 +58,7 @@ QImage Picture::defaultPicture(int pixelSize, const QString &message)
 QImage Picture::setPicture(int pixelSize, const KUrl &currentUrl)
 {
     QImage m_picture;
-    if (currentUrl.url().isEmpty()) {
+    if (currentUrl.path() == "Default") {
 	m_picture = defaultPicture(pixelSize, "Put your photo here\nor drop a folder\nfor starting a slideshow");
 	return m_picture;
     } else {
