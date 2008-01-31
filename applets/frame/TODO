@@ -5,6 +5,11 @@ TODO FOR 4.1:
 - engine to support many Pictures of The Day 
 - Make the Wikipedia Picture Of The Day an engine (RSS) - Keep craig Duquette updated when it's done so he'll see about a flickr engine! - have several engines as the comic engine has.
 - clean the config dialog and take ideas from Desktop config (share some config settings?) - add recursive dirs as an option for slideshow (although beware of too many options)
+- add the PoTD choices as a stack widget in config
+
+BUGS
+
+- svgz do not load
 
 
 IDEAS FOR THE FRAME APPLET
