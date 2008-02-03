@@ -18,6 +18,8 @@
 
 #include "comicprovider.h"
 
+#include <KUrl>
+
 ComicProvider::ComicProvider( QObject *parent )
     : QObject( parent )
 {

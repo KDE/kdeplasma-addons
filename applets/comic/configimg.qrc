@@ -5,5 +5,6 @@
  <file alias="snoopy.png">pics/snoopy.png</file>
  <file alias="userfriendly.png">pics/userfriendly.png</file>
  <file alias="xkcd.png">pics/xkcd.png</file>
+ <file alias="osnews.png">pics/osnews.png</file>
 </qresource>
 </RCC>

@@ -18,10 +18,11 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
-#include <QtCore/QUrl>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
+
+#include <KUrl>
 
 #include "garfieldprovider.h"
 
@@ -60,7 +61,7 @@ void GarfieldProvider::Private::imageRequestFinished( bool error )
 GarfieldProvider::GarfieldProvider( const QDate &date, QObject *parent )
     : ComicProvider( parent ), d( new Private( this, date ) )
 {
-    QUrl url( QString( "http://images.ucomics.com/comics/ga/%1/ga%2.gif" ).arg( date.toString( "yyyy" ) )
+    KUrl url( QString( "http://images.ucomics.com/comics/ga/%1/ga%2.gif" ).arg( date.toString( "yyyy" ) )
                                                                           .arg( date.toString( "yyMMdd" ) ) );
 
     d->mHttp->setHost( url.host() );
@@ -80,6 +81,11 @@ QImage GarfieldProvider::image() const
 QString GarfieldProvider::identifier() const
 {
     return QString( "garfield:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+}
+
+KUrl GarfieldProvider::websiteUrl() const
+{
+    return QString();
 }
 
 #include "garfieldprovider.moc"

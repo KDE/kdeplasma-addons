@@ -18,10 +18,11 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
-#include <QtCore/QUrl>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
+
+#include <KUrl>
 
 #include "snoopyprovider.h"
 
@@ -64,7 +65,7 @@ void SnoopyProvider::Private::pageRequestFinished( bool err )
 
   const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
 
-  QUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1.gif" ).arg( sub ) );
+  KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1.gif" ).arg( sub ) );
 
   mImageHttp = new QHttp( "snoopy.com", 80, mParent );
   mImageHttp->setHost( url.host() );
@@ -88,7 +89,7 @@ void SnoopyProvider::Private::imageRequestFinished( bool error )
 SnoopyProvider::SnoopyProvider( const QDate &date, QObject *parent )
     : ComicProvider( parent ), d( new Private( this, date ) )
 {
-    QUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( date.toString( "yyyyMMdd" ) ) );
+    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( date.toString( "yyyyMMdd" ) ) );
 
     QHttpRequestHeader header( "GET", url.path() );
     header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -116,6 +117,11 @@ QImage SnoopyProvider::image() const
 QString SnoopyProvider::identifier() const
 {
     return QString( "snoopy:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+}
+
+KUrl SnoopyProvider::websiteUrl() const
+{
+    return QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( d->mDate.toString( "yyyyMMdd" ) );
 }
 
 #include "snoopyprovider.moc"

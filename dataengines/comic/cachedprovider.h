@@ -21,6 +21,8 @@
 
 #include "comicprovider.h"
 
+#include <QHash>
+
 /**
  * This class provides comics from the local cache.
  */
@@ -61,9 +63,16 @@ class CachedProvider : public ComicProvider
         static bool isCached( const QString &identifier );
 
         /**
+         * Map of keys and values to store in the config file for an individual identifier
+         */
+        typedef QHash<QString, QString> Settings;
+
+        /**
          * Stores the given @p comic with the given @p identifier in the cache.
          */
-        static bool storeInCache( const QString &identifier, const QImage &comic );
+        static bool storeInCache( const QString &identifier, const QImage &comic, const Settings &info = Settings() );
+
+        virtual KUrl websiteUrl() const;
 
     private Q_SLOTS:
         void triggerFinished();

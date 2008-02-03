@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
+ *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,6 +21,8 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
+#include <KRun>
+
 #include <plasma/theme.h>
 
 #include "comic.h"
@@ -31,10 +34,13 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mCurrentDate( QDate::currentDate() ),
       mConfigDialog( 0 ),
+      mScaleComic(true),
       mShowPreviousButton( true ),
       mShowNextButton( false )
 {
     setHasConfigurationInterface( true );
+
+    setContentSize(QSizeF( 300, 100 ));
 
     loadConfig();
 
@@ -49,10 +55,14 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
 {
-    prepareGeometryChange();
-    mImage = data[ name ].value<QImage>();
-    updateGeometry();
-    update();
+    mImage = data[ "image" ].value<QImage>();
+    mWebsiteUrl = data[ "websiteUrl" ].value<KUrl>();
+
+    if (!mImage.isNull()) {
+        prepareGeometryChange();
+        updateGeometry();
+        update();
+    }
 }
 
 void ComicApplet::showConfigurationInterface()
@@ -64,6 +74,7 @@ void ComicApplet::showConfigurationInterface()
     }
 
     mConfigDialog->setComicIdentifier( mComicIdentifier );
+    mConfigDialog->setScaleComic(mScaleComic);
 
     mConfigDialog->show();
     mConfigDialog->raise();
@@ -72,6 +83,7 @@ void ComicApplet::showConfigurationInterface()
 void ComicApplet::applyConfig()
 {
     mComicIdentifier = mConfigDialog->comicIdentifier();
+    mScaleComic = mConfigDialog->scaleComic();
 
     saveConfig();
 
@@ -83,12 +95,14 @@ void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
     mComicIdentifier = cg.readEntry( "comic", "userfriendly" );
+    mScaleComic = cg.readEntry( "scaleComic", true );
 }
 
 void ComicApplet::saveConfig()
 {
     KConfigGroup cg = config();
     cg.writeEntry( "comic", mComicIdentifier );
+    cg.writeEntry( "scaleComic", mScaleComic );
 }
 
 void ComicApplet::slotNextDay()
@@ -110,11 +124,18 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     event->ignore();
 
     if ( event->button() == Qt::LeftButton && contentRect().contains(event->pos()) ) {
+        QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
+
         if ( event->pos().x() < s_arrowWidth ) {
             slotPreviousDay();
             event->accept();
         } else if ( mShowNextButton && event->pos().x() > contentSizeHint().width() - s_arrowWidth ) {
             slotNextDay();
+            event->accept();
+        } else if (!mWebsiteUrl.isEmpty() &&
+                    event->pos().y() > contentSizeHint().height() - fm.height() &&
+                    event->pos().x() > contentSizeHint().width() - fm.width(mWebsiteUrl.host()) - s_arrowWidth) {
+            KRun::runUrl(mWebsiteUrl, "text/html", 0);
             event->accept();
         }
     }
@@ -124,15 +145,28 @@ QSizeF ComicApplet::contentSizeHint() const
 {
     if ( !mImage.isNull() ) {
         const QSizeF size = mImage.size();
-        return QSizeF( size.width() + 2*s_arrowWidth, size.height() );
+
+        if (mScaleComic) {
+            return QSizeF( contentSize().width(), (contentSize().width()/size.width())*size.height() );
+        } else {
+            return QSizeF( size.width() + 2*s_arrowWidth, size.height() + Plasma::Theme::self()->fontMetrics().height() );
+        }
     } else
-        return QSizeF( 300, 100 );
+        return contentSize();
 }
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect& )
 {
-    int imageWidth = ( mImage.isNull() ? 300 - 2*s_arrowWidth : mImage.width() );
-    int height = ( mImage.isNull() ? 100 : mImage.height() );
+    int imageWidth = ( mImage.isNull() ? 300 : contentSize().width() ) - 2*s_arrowWidth;
+    int height = ( mImage.isNull() ? 100 : contentSize().height() );
+
+    if (!mWebsiteUrl.isEmpty()) {
+        QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
+        height -= fm.height();
+        p->setPen(Plasma::Theme::self()->textColor());
+        p->drawText(QRectF(s_arrowWidth, height, imageWidth, fm.height()), 
+Qt::AlignRight, mWebsiteUrl.host());
+    }
 
     p->save();
     p->setRenderHint( QPainter::Antialiasing );
@@ -154,9 +188,10 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         p->setBrush( Plasma::Theme::self()->textColor() );
         p->drawPolygon( arrow );
     }
-    p->restore();
 
-    p->drawImage( s_arrowWidth, 0, mImage );
+    p->drawImage( QRectF(s_arrowWidth, 0, imageWidth, height), mImage );
+
+    p->restore();
 }
 
 void ComicApplet::updateComic()
@@ -171,10 +206,6 @@ void ComicApplet::updateComic()
     engine->connectSource( identifier, this );
 
     const Plasma::DataEngine::Data data = engine->query( identifier );
-    mImage = data[ identifier ].value<QImage>();
-
-    if ( !mImage.isNull() )
-        update();
 }
 
 void ComicApplet::updateButtons()

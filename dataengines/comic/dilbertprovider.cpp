@@ -18,10 +18,11 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
-#include <QtCore/QUrl>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
+
+#include <KUrl>
 
 #include "dilbertprovider.h"
 
@@ -64,7 +65,7 @@ void DilbertProvider::Private::pageRequestFinished( bool err )
 
   const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
 
-  QUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
+  KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
 
   mImageHttp = new QHttp( "dilbert.com", 80, mParent );
   mImageHttp->setHost( url.host() );
@@ -88,7 +89,7 @@ void DilbertProvider::Private::imageRequestFinished( bool error )
 DilbertProvider::DilbertProvider( const QDate &date, QObject *parent )
     : ComicProvider( parent ), d( new Private( this, date ) )
 {
-    QUrl url( QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" ).arg( date.toString( "yyyyMMdd" ) ) );
+    KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" ).arg( date.toString( "yyyyMMdd" ) ) );
 
     QHttpRequestHeader header( "GET", url.path() );
     header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -116,6 +117,11 @@ QImage DilbertProvider::image() const
 QString DilbertProvider::identifier() const
 {
     return QString( "dilbert:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+}
+
+KUrl DilbertProvider::websiteUrl() const
+{
+    return QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" ).arg( d->mDate.toString( "yyyyMMdd" ) );
 }
 
 #include "dilbertprovider.moc"

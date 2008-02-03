@@ -1,4 +1,6 @@
 /*
+ *   Copyright (C) 2007 Marco Martin  <notmart@gmail.com>
+ *   derived from DilbertProvider by
  *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -16,43 +18,38 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GARFIELDPROVIDER_H
-#define GARFIELDPROVIDER_H
+#ifndef OSNEWSPROVIDER_H
+#define OSNEWSPROVIDER_H
 
 #include "comicprovider.h"
 
+#include <syndication/loader.h>
+#include <syndication/feed.h>
+
 /**
- * This class provides the comic strip image for garfield.com.
+ * This class provides the comic strip image for penny-arcade.com.
  */
-class GarfieldProvider : public ComicProvider
+class OsNewsProvider : public ComicProvider
 {
     Q_OBJECT
 
     public:
         /**
-         * Creates a new garfield provider.
+         * Creates a new OsNews provider.
          *
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        GarfieldProvider( const QDate &date, QObject *parent = 0 );
+        OsNewsProvider( const QDate &date, QObject *parent = 0 );
 
         /**
-         * Destroys the garfield provider.
+         * Destroys the OsNews provider.
          */
-        ~GarfieldProvider();
+        ~OsNewsProvider();
 
-        /**
-         * Returns the requested image.
-         *
-         * Note: This method returns only a valid image after the
-         *       finished() signal has been emitted.
-         */
+        //Reimplementations
         virtual QImage image() const;
 
-        /**
-         * Returns the identifier of the comic request (name + date).
-         */
         virtual QString identifier() const;
 
         virtual KUrl websiteUrl() const;
@@ -61,6 +58,10 @@ class GarfieldProvider : public ComicProvider
       class Private;
       Private* const d;
 
+      Q_PRIVATE_SLOT( d, void processRss(Syndication::Loader* loader,
+                           Syndication::FeedPtr feed,
+                           Syndication::ErrorCode error) )
+      Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
       Q_PRIVATE_SLOT( d, void imageRequestFinished( bool ) )
 };
 

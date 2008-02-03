@@ -21,6 +21,7 @@
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
+#include <QtGui/QCheckBox>
 
 #include <klocale.h>
 
@@ -37,6 +38,7 @@ class ComicModel : public QAbstractListModel
           mComics << ComicEntry( "garfield", i18n( "Garfield" ), QPixmap( ":garfield" ) );
           mComics << ComicEntry( "snoopy", i18n( "Snoopy" ), QPixmap( ":snoopy" ) );
           mComics << ComicEntry( "xkcd", i18n( "XKCD" ), QPixmap( ":xkcd" ) );
+          mComics << ComicEntry( "osnews", i18n( "OsNews Focus Shift" ), QPixmap( ":osnews" ) );
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -95,8 +97,12 @@ ConfigDialog::ConfigDialog( QWidget *parent )
 
     QLabel *label = new QLabel( i18n( "Comic:" ), mainWidget() );
     label->setBuddy( mComicIdentifier );
+
+    mScaleComic = new QCheckBox( i18n("Make comic resizable"), mainWidget() );
+
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
+    layout->addWidget( mScaleComic, 1, 0 );
 
     mModel = new ComicModel( this );
     mComicIdentifier->setModel( mModel );
@@ -121,4 +127,14 @@ QString ConfigDialog::comicIdentifier() const
 {
     const QModelIndex index = mModel->index( mComicIdentifier->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
+}
+
+void ConfigDialog::setScaleComic(bool scale)
+{
+   mScaleComic->setChecked(scale);
+}
+
+bool ConfigDialog::scaleComic() const
+{
+    return mScaleComic->isChecked();
 }

@@ -18,9 +18,11 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QTimer>
+#include <QtCore/QSettings>
 #include <QtGui/QImage>
 
 #include <kstandarddirs.h>
+#include <KUrl>
 
 #include "cachedprovider.h"
 
@@ -68,7 +70,24 @@ bool CachedProvider::isCached( const QString &identifier )
     return QFile::exists( identifierToPath( identifier ) );
 }
 
-bool CachedProvider::storeInCache( const QString &identifier, const QImage &comic )
+bool CachedProvider::storeInCache( const QString &identifier, const QImage &comic, const Settings &info )
 {
-    return comic.save( identifierToPath( identifier ), "PNG" );
+    const QString path = identifierToPath( identifier );
+
+    if (!info.isEmpty()) {
+        QSettings settings( path+".conf", QSettings::IniFormat );
+
+        for(Settings::const_iterator i = info.constBegin();
+            i != info.constEnd(); ++i) {
+            settings.setValue(i.key(), i.value());
+        }
+    }
+
+    return comic.save( path, "PNG" );
+}
+
+KUrl CachedProvider::websiteUrl() const
+{
+    QSettings settings( identifierToPath( mIdentifier )+".conf", QSettings::IniFormat );
+    return KUrl(settings.value("websiteUrl", QString()).toString());
 }

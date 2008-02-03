@@ -18,10 +18,11 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
-#include <QtCore/QUrl>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
+
+#include <KUrl>
 
 #include "xkcdprovider.h"
 
@@ -76,7 +77,7 @@ void XkcdProvider::Private::pageRequestFinished( bool err )
 
   const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
 
-  QUrl url( QString( "http://imgs.xkcd.com/comics/%1.png" ).arg( sub ) );
+  KUrl url( QString( "http://imgs.xkcd.com/comics/%1.png" ).arg( sub ) );
 
   mImageHttp = new QHttp( "imgs.xkcd.com", 80, mParent );
   mImageHttp->setHost( url.host() );
@@ -100,7 +101,7 @@ void XkcdProvider::Private::imageRequestFinished( bool error )
 XkcdProvider::XkcdProvider( const QDate &date, QObject *parent )
     : ComicProvider( parent ), d( new Private( this, date ) )
 {
-    QUrl url( QString( "http://xkcd.com/%1/" ).arg( dateToId( date ) ) );
+    KUrl url( QString( "http://xkcd.com/%1/" ).arg( dateToId( date ) ) );
 
     d->mHttp->setHost( url.host() );
     d->mHttp->get( url.path() );
@@ -119,6 +120,11 @@ QImage XkcdProvider::image() const
 QString XkcdProvider::identifier() const
 {
     return QString( "xkcd:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+}
+
+KUrl XkcdProvider::websiteUrl() const
+{
+    return QString( "http://xkcd.com/%1/" ).arg( dateToId( d->mDate ) );
 }
 
 #include "xkcdprovider.moc"

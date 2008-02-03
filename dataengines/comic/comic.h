@@ -50,8 +50,6 @@ class ComicEngine : public Plasma::DataEngine
     private Q_SLOTS:
         void finished( ComicProvider* );
         void error( ComicProvider* );
-
-    private:
 };
 
 K_EXPORT_PLASMA_DATAENGINE(comic, ComicEngine)

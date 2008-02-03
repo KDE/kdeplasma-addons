@@ -18,6 +18,8 @@
 
 #include <QtCore/QDate>
 
+#include <KUrl>
+
 #include "comic.h"
 
 // comic providers
@@ -27,6 +29,7 @@
 #include "snoopyprovider.h"
 #include "userfriendlyprovider.h"
 #include "xkcdprovider.h"
+#include "osnewsprovider.h"
 
 ComicEngine::ComicEngine( QObject* parent, const QVariantList& )
     : Plasma::DataEngine( parent )
@@ -55,7 +58,7 @@ bool ComicEngine::updateSource( const QString &identifier )
     // ... start a new query otherwise
     const QStringList parts = identifier.split( ':', QString::SkipEmptyParts );
 
-    const QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
+    QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
     if ( !date.isValid() ) {
         return false;
     }
@@ -71,6 +74,8 @@ bool ComicEngine::updateSource( const QString &identifier )
       provider = new SnoopyProvider( date, this );
     else if ( parts[ 0 ] == "xkcd" )
       provider = new XkcdProvider( date, this );
+    else if ( parts[ 0 ] == "osnews" )
+      provider = new OsNewsProvider( date, this );
 
     connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
     connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
@@ -80,19 +85,24 @@ bool ComicEngine::updateSource( const QString &identifier )
 
 bool ComicEngine::sourceRequested( const QString &identifier )
 {
-    setData( identifier, QImage() );
+    setData( identifier, DataEngine::Data() );
 
     return updateSource( identifier );
 }
 
 void ComicEngine::finished( ComicProvider *provider )
 {
-    setData( provider->identifier(), provider->image() );
+    QString identifier(provider->identifier());
+    setData( identifier, "image", provider->image() );
 
     // store in cache if it's not the response of a CachedProvider
     if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() ) {
-        CachedProvider::storeInCache( provider->identifier(), provider->image() );
+        CachedProvider::Settings info;
+        info["websiteUrl"] = provider->websiteUrl().prettyUrl();
+        CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
     }
+
+    setData( identifier, "websiteUrl", provider->websiteUrl());
 
     provider->deleteLater();
 }

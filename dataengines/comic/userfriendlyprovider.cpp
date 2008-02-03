@@ -18,10 +18,11 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
-#include <QtCore/QUrl>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
+
+#include <KUrl>
 
 #include "userfriendlyprovider.h"
 
@@ -64,7 +65,7 @@ void UserFriendlyProvider::Private::pageRequestFinished( bool err )
 
   const QString sub = data.mid( pos, data.indexOf( ' ', pos ) - pos - 1 );
 
-  QUrl url( QString( "http://www.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
+  KUrl url( QString( "http://www.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
 
   mImageHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
   mImageHttp->setHost( url.host() );
@@ -117,6 +118,11 @@ QImage UserFriendlyProvider::image() const
 QString UserFriendlyProvider::identifier() const
 {
     return QString( "userfriendly:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+}
+
+KUrl UserFriendlyProvider::websiteUrl() const
+{
+    return KUrl(QString( "http://ars.userfriendly.org/cartoons/?id=" ) + d->mDate.toString( "yyyyMMdd" ));
 }
 
 #include "userfriendlyprovider.moc"

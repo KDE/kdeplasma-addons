@@ -20,9 +20,10 @@
 #define COMICPROVIDER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QDate>
 
-class QDate;
 class QImage;
+class KUrl;
 
 /**
  * This class is an interface for comic providers.
@@ -43,6 +44,11 @@ class ComicProvider : public QObject
          * Destroys the comic provider.
          */
         virtual ~ComicProvider();
+
+        /**
+         * Returns the Url of the website where thee comic of that particular date resides
+         */
+        virtual KUrl websiteUrl() const = 0;
 
         /**
          * Returns the requested image.
@@ -72,6 +78,8 @@ class ComicProvider : public QObject
          * @param provider The provider which emitted the signal.
          */
         void error( ComicProvider *provider );
+    private:
+        QDate m_date;
 };
 
 #endif
