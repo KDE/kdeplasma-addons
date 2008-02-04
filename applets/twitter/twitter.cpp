@@ -412,10 +412,11 @@ void Twitter::configAccepted()
     //XXX if there's a value in the config, the wallet will never be read
     //if a user saves their password in the config and later changes their mind
     //then they might not understand that they have to delete the password from plasma-appletsrc
-    //TODO if the password is blank, it'd be convenient to try and *read* from the wallet instead
-    if (changed) {
+    //FIXME if the username is blank, don't connect to the engine, set needsconfiguring, etc
+    if (! m_username.isEmpty() && (changed || m_password.isEmpty())) {
         //a change in name *or* pass means we need to update the wallet
-        m_walletWait = Write;
+        //if the user doesn't set a password, see if it's already in our wallet
+        m_walletWait = m_password.isEmpty() ? Read : Write;
         getWallet();
     }
 
