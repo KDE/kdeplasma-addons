@@ -72,7 +72,10 @@ void Twitter::init()
     m_includeFriends = cg.readEntry( "includeFriends", true );
 
     m_engine = dataEngine("twitter");
-    //FIXME check validity
+    if (! m_engine->isValid()) {
+        setFailedToLaunch(true, "Failed to load twitter DataEngine");
+        return;
+    }
     m_engine->connectSource("LatestImage", this);
 
     //ui setup
@@ -110,7 +113,7 @@ void Twitter::init()
     m_statusEdit->hide();
     m_statusEdit->setStyled( true );
     m_statusEdit->setTextWidth( 250 );
-    connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) );
+    connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) ); //FIXME no such slot
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
 
@@ -127,7 +130,6 @@ void Twitter::init()
 
 void Twitter::getWallet()
 {
-    kDebug();
     //TODO: maybe Plasma in general should handle the wallet
     if (m_wallet) {
         //user must be a dumbass. kill that old attempt.
@@ -152,6 +154,7 @@ void Twitter::getWallet()
 
 void Twitter::writeWallet(bool success)
 {
+    //kDebug();
     if (!(success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))
                 && (m_wallet->writePassword(m_username, m_password) == 0))) {
         kDebug() << "failed to write password";
@@ -164,6 +167,7 @@ void Twitter::writeWallet(bool success)
 
 void Twitter::readWallet(bool success)
 {
+    //kDebug();
     QString pwd;
     if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) 
             && (m_wallet->readPassword(m_username, pwd) == 0)) {
