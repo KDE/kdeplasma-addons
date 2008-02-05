@@ -109,9 +109,10 @@ void TwitterEngine::requestFinished(int id, bool error)
 
     if (error) {
         kDebug() << "An error occured: " << m_http->errorString();
-        //oh bugger, all our pending requests just went poof. FIXME
-        //need to either dump them or reschedule them
-        //FIXME: icons will never get downloaded if this interrupts them
+        //oh bugger, all our pending requests just went poof.
+        m_pendingRequests.clear();
+        //m_pendingNames.clear(); did the anon ones get dropped too?
+        //TODO: reschedule them?
         //TODO: someday we should use solid's engine to check for network outage
         setData("Error", "description", m_http->errorString());
         return;
@@ -186,6 +187,9 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
     }
     if( error ) {
         kDebug() << "An error occured: " << m_anonHttp->errorString();
+        //oh bugger, all our pending requests just went poof.
+        m_pendingAnonRequests.clear();
+        //FIXME: icons will never get downloaded if this interrupts them
         setData("Error", "description", m_anonHttp->errorString());
         return;
     }
@@ -273,7 +277,7 @@ void TwitterEngine::getUserImage( const QString &who, const KUrl &url )
     m_anonHttp->setHost( url.host() ); //it's not twitter.com
     int id = m_anonHttp->get( url.path() );
     m_pendingAnonRequests.insert( id, UserImage );
-    m_pendingNames.insert( id, who ); //FIXME is it safe to share with the other http object?
+    m_pendingNames.insert( id, who ); //FIXME is it safe to share with the other http object? if we never clear, yeah
 }
 
 //parses the returned xml for a timeline
