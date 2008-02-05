@@ -102,7 +102,7 @@ bool TwitterEngine::sourceRequested(const QString &name)
 //everything but image?
 void TwitterEngine::requestFinished(int id, bool error)
 {
-    kDebug() << id;
+    //kDebug() << id;
     //we *always* want to remove these
     UpdateType type = m_pendingRequests.take(id);
     QString user = m_pendingNames.take(id);
@@ -134,7 +134,7 @@ void TwitterEngine::requestFinished(int id, bool error)
         break;
     default:
         //we never inserted it, so we ignore it
-        kDebug() << "ignoring this request";
+        //kDebug() << "ignoring this request";
         return;
     }
     kDebug() << source;
@@ -178,7 +178,7 @@ void TwitterEngine::requestFinished(int id, bool error)
 //only used for images so far
 void TwitterEngine::anonRequestFinished(int id, bool error)
 {
-    kDebug() << id;
+    //kDebug() << id;
     //we *always* want to remove these
     UpdateType type = m_pendingAnonRequests.take(id);
     QString user = m_pendingNames.take(id);
@@ -285,7 +285,7 @@ void TwitterEngine::getUserImage( const QString &who, const KUrl &url )
 //and fetches new images if needed
 void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
 {
-    kDebug() << source;
+    //kDebug() << source;
     clearData(source); //get rid of the old ones
     for (uint i=0;i<updates.length();i++) {
         QDomNode n = updates.at( i );
