@@ -94,9 +94,13 @@ Plasma::DataEngine::Data TwitterEngine::config() const
 bool TwitterEngine::sourceRequested(const QString &name)
 {
     kDebug() << name;
+    if (name != "UserImages" && name != "LatestImage" && ! name.startsWith("Error")
+            && ! name.startsWith("Timeline")) {
+        return false;
+    }
     setData(name, DataEngine::Data()); //need to have something because we're async.
     updateSource(name); //start a download
-    return true; //TODO what if they requested a nonsense source like "foobar"?
+    return true;
 }
 
 //everything but image?
@@ -225,6 +229,10 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
 bool TwitterEngine::updateSource(const QString &source)
 {
     kDebug() << source;
+    //right now it only makes sense to do an update on timelines
+    if (! source.startsWith("Timeline")) {
+        return false;
+    }
     if (source=="Timeline") {
         updateTimeline();
     }
