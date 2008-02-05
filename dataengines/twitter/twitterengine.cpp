@@ -44,6 +44,8 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 
     m_http = new QHttp("twitter.com");
     connect(m_http,SIGNAL(requestFinished(int,bool)), this, SLOT(requestFinished(int,bool)));
+    //so it turns out we really need this second qhttp because in qt 4.3 there's no way to unset
+    //authorization once it's turned on. :(
     m_anonHttp = new QHttp();
     connect(m_anonHttp,SIGNAL(requestFinished(int,bool)), this, SLOT(anonRequestFinished(int,bool)));
 
@@ -104,41 +106,62 @@ void TwitterEngine::requestFinished(int id, bool error)
     //we *always* want to remove these
     UpdateType type = m_pendingRequests.take(id);
     QString user = m_pendingNames.take(id);
-    if (type == 0) { //we never inserted it, so we ignore it
-        return;
-    }
-    if( error ) {
+
+    if (error) {
         kDebug() << "An error occured: " << m_http->errorString();
         //oh bugger, all our pending requests just went poof. FIXME
         //need to either dump them or reschedule them
-        //problem: icons may never get downloaded if this interrupts them
+        //FIXME: icons will never get downloaded if this interrupts them
+        //TODO: someday we should use solid's engine to check for network outage
+        setData("Error", "description", m_http->errorString());
         return;
-    } else if( m_http->lastResponse().statusCode() == 401 ) {
-        kDebug() << "Unauthorized";
-        //TODO: tell the applet
-        return;
-    } else if (m_http->lastResponse().statusCode() != 200) {
-        kDebug() << "not ok!" << m_http->lastResponse().statusCode(); //um, so, what do we do now? FIXME
     }
-    QByteArray data = m_http->readAll();
-    QDomDocument xml;
-    xml.setContent(data);
 
+    QString source;
     switch (type) {
-    case Timeline: //TODO move to anon
-        kDebug() << "Timeline";
-        parseStatuses(xml.elementsByTagName("status"), "Timeline");
+    case Timeline:
+        source = "Timeline";
         break;
     case UserTimeline:
-        kDebug() << QString("Timeline:%1").arg(user);
-        parseStatuses(xml.elementsByTagName("status"), QString("Timeline:%1").arg(user));
+        source = "Timeline:" + user;
         break;
     case UserTimelineWithFriends:
-        kDebug() << QString("TimelineWithFriends:%1").arg(user);
-        parseStatuses(xml.elementsByTagName("status"), QString("TimelineWithFriends:%1").arg(user));
+        source = "TimelineWithFriends:" + user;
         break;
     case Post:
-        kDebug() << "Status upload succeeded.";
+        source = "Upload";
+        break;
+    default:
+        //we never inserted it, so we ignore it
+        kDebug() << "ignoring this request";
+        return;
+    }
+    kDebug() << source;
+
+    clearData("Error");
+
+    if (m_http->lastResponse().statusCode() != 200) {
+        //the clearing of a general error probably shouldn't clear one of these
+        //what should clear it is an ok from the same source
+        kDebug() << "not ok!" << m_http->lastResponse().statusCode() << m_http->lastResponse().reasonPhrase();
+        source.prepend("Error:");
+        setData(source, "code", m_http->lastResponse().statusCode());
+        setData(source, "description", m_http->lastResponse().reasonPhrase());
+        return;
+    }
+    clearData("Error:" + source);
+
+    QByteArray data = m_http->readAll();
+    QDomDocument xml;
+
+    switch (type) {
+    case Timeline:
+    case UserTimeline:
+    case UserTimelineWithFriends:
+        xml.setContent(data);
+        parseStatuses(xml.elementsByTagName("status"), source);
+        break;
+    case Post:
         //the data is a copy of the status update. could be useful someday.
         //update every bloody timeline we've got
         foreach( QString source, sources() ) {
@@ -147,7 +170,7 @@ void TwitterEngine::requestFinished(int id, bool error)
         }
         break;
     default:
-        kDebug() << "unexpected type" << type;
+        kDebug() << "can't happen" << type;
     }
 }
 
@@ -163,10 +186,19 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
     }
     if( error ) {
         kDebug() << "An error occured: " << m_anonHttp->errorString();
+        setData("Error", "description", m_anonHttp->errorString());
         return;
-    } else if (m_anonHttp->lastResponse().statusCode() != 200) {
-        kDebug() << "not ok!" << m_anonHttp->lastResponse().statusCode(); //um, so, what do we do now? FIXME
     }
+    clearData("Error");
+
+    if (m_anonHttp->lastResponse().statusCode() != 200) {
+        kDebug() << "not ok!" << m_anonHttp->lastResponse().statusCode() << m_anonHttp->lastResponse().reasonPhrase();
+        setData("Error:UserImages", "code", m_http->lastResponse().statusCode());
+        setData("Error:UserImages", "description", m_http->lastResponse().reasonPhrase());
+        return;
+    }
+    clearData("Error:UserImages");
+
     QByteArray data = m_anonHttp->readAll();
 
     if (type==UserImage) {
@@ -174,7 +206,8 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
         QImage img;
         img.loadFromData( data );
         QPixmap pm = QPixmap::fromImage( img ).scaled( 48, 48 ); //FIXME do we really want to do this?
-        setData("UserImages", user, pm); //FIXME clear out old images someday
+        //TODO instead of these two sources, maybe provide the ability to query a specific user?
+        setData("UserImages", user, pm);
         clearData("LatestImage");
         setData("LatestImage", user, pm);
         //FIXME user's own image needs an explicit request somehow. is there a userinfo xml?

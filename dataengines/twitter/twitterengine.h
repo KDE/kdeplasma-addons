@@ -38,11 +38,14 @@ class QHttp;
  * TimelineWithFriends:<user>
  *
  * Timeline is the public timeline that shows tweets from all twitter users.
- * Timeline:<user> shows only the tweets of that user.
+ * Timeline:<user> shows only the tweets of that user. it currently requires a password.
  * TimelineWithFriends:<user> shows the normal timeline of that user and their
  * friends. it requires a password to be configured for the user.
  *
  * To configure a password, use setConfig(user, password).
+ *
+ * For each source you connect to, you should also connect to Error:<source> to see http errors.
+ * You should also connect to the Error source for general errors.
  *
  * If you need to display user images, the UserImages source provides a list of
  * all images, and LatestImage provides just the most recently downloaded one.
