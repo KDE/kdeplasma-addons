@@ -27,6 +27,8 @@
 #include "../src/ExtenderButton.h"
 #include "lancelot_interface.h"
 
+#include "LancelotAppletConfig.h"
+
 #include <QString>
 
 class QDBusInterface;
@@ -39,26 +41,59 @@ public:
     ~LancelotApplet();
 
     QSizeF contentSizeHint() const;
-    void setGeometry(const QRectF & geometry);
 
-    qreal heightForWidth(qreal width) const;
-
+    Qt::Orientations expandingDirections() const;
+    
+    bool hasHeightForWidth () const;
+    qreal heightForWidth (qreal width) const;
+    
+    bool hasWidthForHeight () const;
+    qreal widthForHeight (qreal height) const;
+    
+    void updateGeometry ();
+    void constraintsUpdated (Plasma::Constraints constraints);
+    
+    void showConfigurationInterface();
+    bool hasConfigurationInterface();
+    
 protected Q_SLOTS:
     void showLancelot();
     void showLancelotSection(const QString & section);
+    
+    void configAccepted();
 
 private:
-    org::kde::lancelot::App * m_lancelot;
-
-    int m_clientID;
-
     QSignalMapper m_signalMapper;
 
-    Lancelot::Instance * m_instance;
-    Lancelot::ExtenderButton * m_buttonMain;
-    Plasma::NodeLayout * m_layout;
+    int m_clientID;
+    org::kde::lancelot::App * m_lancelot;
 
-    QList< Lancelot::ExtenderButton * > m_sectionButtons;
+    Lancelot::Instance * m_instance;
+    
+    Plasma::NodeLayout * m_layout;
+    QList< Lancelot::ExtenderButton * > m_buttons;
+
+    LancelotAppletConfig * m_configDialog;
+
+    // Current state / configuration
+    bool m_isVertical;
+    
+    bool m_showCategories;
+    QString m_mainIcon;
+    bool m_clickActivation;
+    
+
+    // Atoms
+    void dbusConnect();
+    
+    void deleteButtons();
+    void createCategories();
+    void createMenuButton();
+    void layoutButtons();
+
+    void loadConfig();
+    void saveConfig();
+    void applyConfig();
 
 };
 

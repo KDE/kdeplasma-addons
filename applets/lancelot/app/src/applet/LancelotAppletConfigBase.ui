@@ -1,0 +1,264 @@
+<ui version="4.0" >
+ <class>LancelotAppletConfigBase</class>
+ <widget class="QWidget" name="LancelotAppletConfigBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>443</width>
+    <height>346</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupAppletIcons" >
+     <property name="title" >
+      <string>Applet icons</string>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QRadioButton" name="radioShowCategories" >
+        <property name="text" >
+         <string>Show cate&amp;gories inside the applet</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioShowMenuIconOnly" >
+        <property name="text" >
+         <string>Show only &amp;menu launcher icon</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupAppletIconsChoose" >
+        <property name="title" >
+         <string>Choose icon</string>
+        </property>
+        <layout class="QGridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="iconLancelot" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>20000</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QLabel" name="iconKDE" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>20000</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" >
+          <widget class="QLabel" name="iconStartHere" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>20000</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" >
+          <widget class="KIconButton" name="iconCustom" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>20000</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="icon" >
+            <string>run</string>
+           </property>
+           <property name="iconSize" >
+            <number>48</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QRadioButton" name="radioIconLancelot" >
+           <property name="text" >
+            <string>&amp;Lancelot</string>
+           </property>
+           <property name="checked" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QRadioButton" name="radioIconKDE" >
+           <property name="text" >
+            <string>&amp;KDE Logo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2" >
+          <widget class="QRadioButton" name="radioIconStartHere" >
+           <property name="text" >
+            <string>&amp;Start Here</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" >
+          <widget class="QRadioButton" name="radioIconCustom" >
+           <property name="text" >
+            <string>Custo&amp;m</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupActivation" >
+     <property name="title" >
+      <string>Menu activation</string>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QRadioButton" name="radioActivationHover" >
+        <property name="text" >
+         <string>Show menu on icon &amp;hover (after a predefined interval of time)</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioActivationClick" >
+        <property name="text" >
+         <string>Show menu on &amp;click</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>radioShowMenuIconOnly</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupAppletIconsChoose</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>49</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>48</x>
+     <y>110</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>iconCustom</sender>
+   <signal>iconChanged(QString)</signal>
+   <receiver>radioIconCustom</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>361</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>360</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

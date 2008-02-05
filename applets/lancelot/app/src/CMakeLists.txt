@@ -129,7 +129,18 @@ install(
 
 # Lancelot Main Applet
 
-set(plasma_applet_lancelot_SRCS ${plasma_lancelot_widgets_SRCS} ${plasma_lancelot_client_SRCS} applet/LancelotApplet.cpp)
+set(plasma_applet_lancelot_SRCS
+  ${plasma_lancelot_widgets_SRCS}
+  ${plasma_lancelot_client_SRCS}
+  applet/LancelotApplet.cpp
+  applet/LancelotAppletConfig.cpp
+)
+
+kde4_add_ui_files(
+  plasma_applet_lancelot_SRCS
+  applet/LancelotAppletConfigBase.ui
+)
+
 
 kde4_add_plugin(plasma_applet_lancelot ${plasma_applet_lancelot_SRCS})
 

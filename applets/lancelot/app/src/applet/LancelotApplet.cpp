@@ -24,13 +24,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 
-LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
-    Plasma::Applet(parent, args), m_lancelot(NULL),
-    m_clientID(-1), m_instance(NULL), m_buttonMain(NULL), m_layout(NULL)
-{
-    setDrawStandardBackground(true);
-    m_instance = new Lancelot::Instance();
-
+void LancelotApplet::dbusConnect() {
     m_lancelot = new org::kde::lancelot::App(
         "org.kde.lancelot",
         "/Lancelot",
@@ -39,70 +33,44 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
 
     if (!m_lancelot->isValid()) {
         kDebug() << "DBUS connetcion to Lancelot failed!\n";
-        //return;
+        setFailedToLaunch(true, i18n("Can't start Lancelot"));
     }
 
     QDBusReply<int> reply = m_lancelot->addClient();
     if (reply.isValid()) {
         m_clientID = reply.value();
     }
+    
+    
+}
 
-    QDBusReply<QStringList> replyIDs   = m_lancelot->sectionIDs();
-    QDBusReply<QStringList> replyNames = m_lancelot->sectionNames();
-    QDBusReply<QStringList> replyIcons = m_lancelot->sectionIcons();
+LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
+    Plasma::Applet(parent, args), m_lancelot(NULL),
+    m_clientID(-1), m_instance(NULL), m_layout(NULL),
+    m_showCategories(false), m_isVertical(false),
+    m_configDialog(NULL)
+{
+    setDrawStandardBackground(true);
+    setHasConfigurationInterface(true);
+    setAcceptsHoverEvents(true);
+    
+    dbusConnect();
+    
+    // Instantiating Lancelot framework
+    m_instance = new Lancelot::Instance();
 
-    // creating buttons...
     m_layout = new Plasma::NodeLayout();
+    setLayout(m_layout);
 
-    kDebug();
-    if (replyIDs.isValid() && replyNames.isValid() && replyIcons.isValid()) {
-        for (int i = 0; i < replyIDs.value().size(); i++) {
-            Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
-                replyIDs.value().at(i), new KIcon(replyIcons.value().at(i)), "", "", this
-            );
-            m_sectionButtons << button;
+    loadConfig();
+    applyConfig();
 
-            connect(button, SIGNAL(activated()), & m_signalMapper, SLOT(map()));
-            m_signalMapper.setMapping(button, replyIDs.value().at(i));
-        }
-    }
     connect(
         & m_signalMapper, SIGNAL(mapped(const QString &)),
         this, SLOT(showLancelotSection(const QString &))
     );
-
-    qreal wpercent = 1.0 / (m_sectionButtons.size() + 1.0);
-
-    m_layout->addItem(
-        m_buttonMain = new Lancelot::ExtenderButton("launcher", new KIcon("lancelot"), "", "", this),
-        Plasma::NodeLayout::NodeCoordinate(0, 0),
-        Plasma::NodeLayout::NodeCoordinate(wpercent, 1)
-    );
-    m_buttonMain->setGroupByName("AppletLaunchButton");
-
-    qreal left = wpercent;
-
-    foreach(Lancelot::ExtenderButton * button, m_sectionButtons) {
-        button->setGroupByName("AppletLaunchButton");
-        m_layout->addItem(
-            button,
-            Plasma::NodeLayout::NodeCoordinate(left, 0),
-            Plasma::NodeLayout::NodeCoordinate(left + wpercent, 1)
-        );
-        left += wpercent;
-        button->setActivationMethod(Lancelot::ExtenderButton::Hover);
-    }
-
-    m_buttonMain->setActivationMethod(Lancelot::ExtenderButton::Hover);
-
+        
     m_instance->activateAll();
-    m_layout->setGeometry(QRectF(QPoint(), contentSize()));
-
-    setAcceptsHoverEvents(true);
-
-    connect(m_buttonMain, SIGNAL(activated()), this, SLOT(showLancelot()));
-
-
 }
 
 LancelotApplet::~LancelotApplet()
@@ -110,41 +78,232 @@ LancelotApplet::~LancelotApplet()
     m_lancelot->removeClient(m_clientID);
     delete m_lancelot;
     
-    delete m_buttonMain;
-    foreach (Lancelot::ExtenderButton * button, m_sectionButtons) {
-        delete button;
-    }
+    deleteButtons();
     delete m_layout;
     
     delete m_instance;
 }
 
-void LancelotApplet::setGeometry(const QRectF & geometry)
+Qt::Orientations LancelotApplet::expandingDirections() const
 {
-    Applet::setGeometry(geometry);
-    m_layout->setGeometry(QRectF(QPoint(), contentSize()));
+    return 0;
+}
+
+void LancelotApplet::constraintsUpdated(Plasma::Constraints constraints)
+{
+    kDebug() << "Constraints are updated!\n";
+    if (Plasma::FormFactorConstraint | constraints) {
+        m_isVertical = (formFactor() == Plasma::Vertical);
+        kDebug() << "I am going to be " << (m_isVertical?"VERTICAL":"NORMAL") << " from now on\n";
+        layoutButtons();
+    }
 }
 
 QSizeF LancelotApplet::contentSizeHint() const
 {
-    return QSizeF(48 * (1 + m_sectionButtons.size()), 48);
+    if (m_isVertical) {
+        return QSizeF(48, 48 * (1 + m_buttons.size()));
+    } else {
+        return QSizeF(48 * (1 + m_buttons.size()), 48);
+    }
 }
 
 void LancelotApplet::showLancelot()
 {
     m_lancelot->show();
-    kDebug() << "DBUS\n";
 }
 
 void LancelotApplet::showLancelotSection(const QString & section)
 {
     m_lancelot->showItem(section);
-    kDebug() << "DBUS " << section << "\n";
 }
 
-qreal LancelotApplet::heightForWidth(qreal width) const
+bool LancelotApplet::hasHeightForWidth () const
 {
-    return width / (1 + m_sectionButtons.size());
+    return true;
+}
+
+qreal LancelotApplet::heightForWidth (qreal width) const
+{
+    if (m_buttons.size() == 0) {
+        return width;
+    }
+
+    if (m_isVertical) {
+        return width * m_buttons.size();
+    } else {
+        return width / (qreal)m_buttons.size();
+    }
+}
+
+bool LancelotApplet::hasWidthForHeight () const
+{
+    return true;
+}
+
+qreal LancelotApplet::widthForHeight (qreal height) const
+{
+    if (m_buttons.size() == 0) {
+        return height;
+    }
+
+    if (m_isVertical) {
+        return height / (qreal)m_buttons.size();
+    } else {
+        return height * m_buttons.size();
+    }
+}
+
+void LancelotApplet::updateGeometry ()
+{
+    Plasma::Applet::updateGeometry();
+    kDebug() << "updateGeometry()\n";
+}
+
+
+void LancelotApplet::deleteButtons()
+{
+    foreach (Lancelot::ExtenderButton * button, m_buttons) {
+        m_layout->removeItem(button);
+        button->setParent(NULL);
+        delete button;
+    }
+    m_buttons.clear();
+}
+
+void LancelotApplet::createCategories()
+{
+    deleteButtons();
+
+    // Loading Lancelot application categories
+    QDBusReply<QStringList> replyIDs   = m_lancelot->sectionIDs();
+    QDBusReply<QStringList> replyNames = m_lancelot->sectionNames();
+    QDBusReply<QStringList> replyIcons = m_lancelot->sectionIcons();
+
+    if (!replyIDs.isValid() || !replyNames.isValid() || !replyIcons.isValid()) {
+        // Error connecting to Lancelot via d-bus
+        setFailedToLaunch(true);
+        return;
+    } else {
+        // Creating buttons...
+        for (int i = 0; i < replyIDs.value().size(); i++) {
+            Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
+                replyIDs.value().at(i),
+                new KIcon(replyIcons.value().at(i)),
+                "",
+                "",
+                this
+            );
+
+            connect(
+                button, SIGNAL(activated()),
+                & m_signalMapper, SLOT(map())
+            );
+            m_signalMapper.setMapping(button, replyIDs.value().at(i));
+
+            m_buttons << button;
+        }
+    }
+}
+
+void LancelotApplet::createMenuButton()
+{
+    deleteButtons();
+
+    Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
+        "launcher",
+        new KIcon(m_mainIcon),
+        "",
+        "",
+        this
+    );
+
+    //button->setGroupByName("AppletLaunchButton");
+    connect(button, SIGNAL(activated()), this, SLOT(showLancelot()));
+
+    m_buttons << button;
+}
+
+void LancelotApplet::layoutButtons()
+{
+    if (m_buttons.size() == 0) {
+        return;
+    }
+    
+    qreal wpercent = 1.0 / (m_buttons.size());
+    qreal distance = 0;
+
+    foreach(Lancelot::ExtenderButton * button, m_buttons) {
+        button->setGroupByName("AppletLaunchButton");
+        button->setActivationMethod(m_clickActivation?(Lancelot::ExtenderButton::Click):(Lancelot::ExtenderButton::Hover));
+        
+        if (m_isVertical) {
+            m_layout->addItem(
+                button,
+                Plasma::NodeLayout::NodeCoordinate(0, distance),
+                Plasma::NodeLayout::NodeCoordinate(1, distance + wpercent)
+            );
+        } else {
+            m_layout->addItem(
+                button,
+                Plasma::NodeLayout::NodeCoordinate(distance, 0),
+                Plasma::NodeLayout::NodeCoordinate(distance + wpercent, 1)
+            );
+        }
+        distance += wpercent;
+    }
+    
+}
+
+void LancelotApplet::applyConfig()
+{
+    if (m_showCategories) {
+        createCategories();
+    } else {
+        createMenuButton();
+    }
+}
+    
+void LancelotApplet::loadConfig()
+{
+    KConfigGroup kcg =  config();
+    m_showCategories =  (kcg.readEntry("show", "main") != "main");
+    m_mainIcon =        kcg.readEntry("icon", "lancelot");
+    m_clickActivation = (kcg.readEntry("activate", "click") == "click");
+}
+
+void LancelotApplet::saveConfig()
+{
+    KConfigGroup kcg = config();
+    kcg.writeEntry("show", (m_showCategories?"categories":"main"));
+    kcg.writeEntry("icon", m_mainIcon);
+    kcg.writeEntry("show", (m_clickActivation?"click":"hover"));
+    save(&kcg);
+}
+  
+void LancelotApplet::configAccepted()
+{
+    m_showCategories = m_configDialog->showCategories();
+    m_mainIcon = m_configDialog->icon();
+    m_clickActivation = m_configDialog->clickActivation();
+    
+    saveConfig();
+    applyConfig();
+}
+
+void LancelotApplet::showConfigurationInterface()
+{
+    if (m_configDialog == NULL) {
+        m_configDialog = new LancelotAppletConfig();
+        connect(m_configDialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+        connect(m_configDialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    }
+    m_configDialog->show();
+}
+
+bool hasConfigurationInterface()      
+{
+    return true;
 }
 
 
