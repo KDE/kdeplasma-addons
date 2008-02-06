@@ -252,7 +252,6 @@ void LancelotApplet::layoutButtons()
         }
         distance += wpercent;
     }
-    
 }
 
 void LancelotApplet::applyConfig()
@@ -262,6 +261,8 @@ void LancelotApplet::applyConfig()
     } else {
         createMenuButton();
     }
+    emit geometryChanged();
+    layoutButtons();
 }
     
 void LancelotApplet::loadConfig()
@@ -298,6 +299,11 @@ void LancelotApplet::showConfigurationInterface()
         connect(m_configDialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
         connect(m_configDialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     }
+
+    m_configDialog->setShowCategories(m_showCategories);
+    m_configDialog->setIcon(m_mainIcon);
+    m_configDialog->setClickActivation(m_clickActivation);
+
     m_configDialog->show();
 }
 
