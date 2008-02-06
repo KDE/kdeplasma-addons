@@ -40,8 +40,8 @@ Qt::Orientations CardLayout::expandingDirections() const
 void CardLayout::relayout()
 {
     QRectF g = geometry();
-    g.setTopLeft(g.topLeft() + QPointF(margin(TopMargin), margin(LeftMargin)));
-    g.setBottomRight(g.bottomRight() - QPointF(margin(RightMargin), margin(BottomMargin)));
+    g.setTopLeft(g.topLeft() + QPointF(margin(Plasma::TopMargin), margin(Plasma::LeftMargin)));
+    g.setBottomRight(g.bottomRight() - QPointF(margin(Plasma::RightMargin), margin(Plasma::BottomMargin)));
 
     foreach (Plasma::LayoutItem * l, m_items) {
         l->setGeometry(g);
