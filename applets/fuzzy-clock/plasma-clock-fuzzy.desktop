@@ -1,0 +1,27 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fuzzy Clock
+Name[pt]=Relógio Difuso
+Name[pt_BR]=Relógio Difuso
+Name[sv]=Inexakt klocka
+
+Comment=A simple fuzzy clock
+Comment[da]=Et simpelt uklart ur
+Comment[pt]=Um relógio difuso simples
+Comment[pt_BR]=Um relógio difuso simples
+Comment[sv]=En enkel inexakt klocka
+
+Icon=chronometer
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_fuzzy_clock
+X-KDE-PluginInfo-Author=Riccardo Iaconelli, Sven Burmeister
+X-KDE-PluginInfo-Email=riccardo@kde.org, sven.burmeister@gmx.net
+X-KDE-PluginInfo-Name=fuzzy-clock
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Date and Time
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

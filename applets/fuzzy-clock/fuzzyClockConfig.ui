@@ -1,0 +1,446 @@
+<ui version="4.0" >
+ <class>fuzzyClockConfig</class>
+ <widget class="QWidget" name="fuzzyClockConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>432</width>
+    <height>478</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>420</width>
+    <height>478</height>
+   </size>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QTabWidget" name="ClockTab" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize" >
+      <size>
+       <width>400</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="AppearanceTab" >
+      <attribute name="title" >
+       <string>Appearance</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="fontTimeLabel" >
+           <property name="text" >
+            <string>Font</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFontComboBox" name="fontTime" />
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="fontColorLabel" >
+           <property name="text" >
+            <string>Font color</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="fontTimeBold" >
+           <property name="text" >
+            <string>&amp;Bold</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>161</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="KColorCombo" name="fontColor" >
+           <item>
+            <property name="text" >
+             <string>Custom...</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string/>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="showDate" >
+         <property name="text" >
+          <string>Show &amp;date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QCheckBox" name="showYear" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Show &amp;year</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="showDay" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Show day of the &amp;week</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="showTimezone" >
+         <property name="text" >
+          <string>Show &amp;timezone</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Adjust text to panel-height</string>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="2" row="0" column="1" >
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QSlider" name="adjustToHeight" >
+             <property name="toolTip" >
+              <string>0: disable; 2: use full panel-height</string>
+             </property>
+             <property name="maximum" >
+              <number>2</number>
+             </property>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition" >
+              <enum>QSlider::TicksBothSides</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="fuzzynessSlider" >
+             <property name="toolTip" >
+              <string>1: least fuzzy</string>
+             </property>
+             <property name="minimum" >
+              <number>1</number>
+             </property>
+             <property name="maximum" >
+              <number>4</number>
+             </property>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition" >
+              <enum>QSlider::TicksBothSides</enum>
+             </property>
+             <property name="tickInterval" >
+              <number>1</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>Degree of fuzzyness</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="TimezonesTab" >
+      <attribute name="title" >
+       <string>Timezones</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QCheckBox" name="useLocalTimeZone" >
+         <property name="text" >
+          <string>Use &amp;local timezone</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KTimeZoneWidget" name="timeZones" >
+         <property name="minimumSize" >
+          <size>
+           <width>300</width>
+           <height>150</height>
+          </size>
+         </property>
+         <column>
+          <property name="text" >
+           <string>Area</string>
+          </property>
+         </column>
+         <column>
+          <property name="text" >
+           <string>Region</string>
+          </property>
+         </column>
+         <column>
+          <property name="text" >
+           <string>Comment</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KColorCombo</class>
+   <extends>QComboBox</extends>
+   <header>kcolorcombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTimeZoneWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>ktimezonewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>showDate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>showDay</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>111</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>309</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showDate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>showYear</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>78</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>369</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>useLocalTimeZone</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>timeZones</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>209</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>209</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
