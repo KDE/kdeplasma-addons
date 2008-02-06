@@ -1,0 +1,142 @@
+<ui version="4.0" >
+ <class>clockConfig</class>
+ <widget class="QWidget" name="clockConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Appearance</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QCheckBox" name="showSecondHandCheckBox" >
+        <property name="toolTip" >
+         <string>Show the second leds</string>
+        </property>
+        <property name="whatsThis" >
+         <string>Check this if you want to display second leds in order to see the seconds.</string>
+        </property>
+        <property name="text" >
+         <string>Show &amp;seconds</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showGridCheckBox" >
+        <property name="toolTip" >
+         <string>Show the grid</string>
+        </property>
+        <property name="whatsThis" >
+         <string>Check this if you want to see a grid around leds.</string>
+        </property>
+        <property name="text" >
+         <string>Show grid</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showOffLedsCheckBox" >
+        <property name="toolTip" >
+         <string>Show the off leds</string>
+        </property>
+        <property name="whatsThis" >
+         <string>Check this if you want to see off leds.</string>
+        </property>
+        <property name="text" >
+         <string>Show off leds</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2" >
+     <property name="title" >
+      <string>Timezones</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QCheckBox" name="localTimeZone" >
+        <property name="text" >
+         <string>Use &amp;local timezone</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KTimeZoneWidget" name="timeZones" >
+        <property name="minimumSize" >
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <column>
+         <property name="text" >
+          <string>Area</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Region</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Comment</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KTimeZoneWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>ktimezonewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>localTimeZone</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>timeZones</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>199</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>199</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
