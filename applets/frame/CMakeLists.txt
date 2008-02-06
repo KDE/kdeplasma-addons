@@ -2,6 +2,7 @@ project(plasma-frame)
 
 set(frame_SRCS
     frame.cpp
+    slideshow.cpp
     picture.cpp)
 
 

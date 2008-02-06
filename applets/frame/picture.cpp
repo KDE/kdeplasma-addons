@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 *
+ *   Copyright  2008 by Thomas Coopman <thomas.coopman@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -23,9 +24,14 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QSvgRenderer>
+#include <QTextDocument>
+#include <QTextOption>
 
 #include <KUrl>
 #include <KStandardDirs>
+
+#include <klocalizedstring.h>
+
 
 Picture::Picture()
 {
@@ -35,7 +41,7 @@ Picture::~Picture()
 {
 }
 
-QImage Picture::defaultPicture(int pixelSize, const QString &message)
+QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
     QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
@@ -50,21 +56,24 @@ QImage Picture::defaultPicture(int pixelSize, const QString &message)
     QFont textFont;
     textFont.setPixelSize(imload.height() / 12);
     p.setFont(textFont);
-    p.drawText(imload.rect(), Qt::AlignCenter, message);
+    QTextOption option;
+    option.setAlignment(Qt::AlignCenter);
+    option.setWrapMode(QTextOption::WordWrap);
+    p.drawText(imload.rect(), message, option);
     p.end();
     return imload;
 }
 
-QImage Picture::setPicture(int pixelSize, const KUrl &currentUrl)
+QImage Picture::setPicture(const KUrl &currentUrl)
 {
     QImage m_picture;
     if (currentUrl.path() == "Default") {
-	m_picture = defaultPicture(pixelSize, "Put your photo here\nor drop a folder\nfor starting a slideshow");
+	m_picture = defaultPicture(i18nc("Info", "Put your photo here or drop a folder for starting a slideshow"));
 	return m_picture;
     } else {
         QImage tempImage(currentUrl.path());
         if (tempImage.isNull()){
-            m_picture = defaultPicture(pixelSize, "Error loading image");
+            m_picture = defaultPicture(i18nc("Error", "Error loading image"));
 	    return m_picture;
         } else { // Load success! Scale the image if it is too big	    
             if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
@@ -76,21 +85,5 @@ QImage Picture::setPicture(int pixelSize, const KUrl &currentUrl)
 	    return m_picture;
         }
     }
-}
-
-QStringList Picture::findSlideShowPics(const QStringList &slideShowPaths)
-{
-    QStringList picList;
-
-    foreach (const QString &path, slideShowPaths) {
-        QDir dir(path);
-        QStringList filters;
-        filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
-        dir.setNameFilters(filters);
-        foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
-            picList.append(path + "/" + imageFile);
-        }
-    }
-    return picList;
 }
 

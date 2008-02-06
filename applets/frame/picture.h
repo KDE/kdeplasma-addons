@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 *
+ *   Copyright  2008 by Thomas Coopman <thomas.coopman@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -36,7 +37,7 @@ class QDir;
  * makes it ready for the Frame class to paint this picture.
  */
 
-class Picture 
+class Picture
 {
     public:
 	Picture();
@@ -45,15 +46,11 @@ class Picture
 	* Set Default picture with written message @p message if no picture or folder was choosen 
 	* by the user
 	**/
-	QImage defaultPicture(int pixelSize, const QString &message);
+	QImage defaultPicture(const QString &message);
 	/** 
 	* Set picture from location @p currentUrl 
 	**/
-	QImage setPicture(int pixelSize, const KUrl &currentUrl);
-	/**
-	* Find all the pictures in each of the dirs that are listed in @p slideShowPaths
-	**/
-	QStringList findSlideShowPics(const QStringList &slideShowPaths);
+	QImage setPicture(const KUrl &currentUrl);
 
     private:
         QImage getPicture(){return m_picture;};

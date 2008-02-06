@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright  2007 by Anne-Marie Mahfouf <annma@kde.org>              *
- *   Copyright  2007 by Antonio Vinci <mercurio@personellarete.it>      *
+ *   Copyright  2007 by Anne-Marie Mahfouf <annma@kde.org>                 *
+ *   Copyright  2007 by Antonio Vinci <mercurio@personellarete.it>         *
+ *   Copyright  2008 by Thomas Coopman <thomas.coopman@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -46,6 +47,7 @@
 
 #include <math.h>
 #include "picture.h"
+#include "slideshow.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -56,6 +58,12 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
     setCachePaintMode(NoCacheMode);
     setSize(350, 350);
+    m_mySlideShow = new SlideShow();
+}
+
+Frame::~Frame()
+{
+	delete m_mySlideShow;
 }
 
 void Frame::init()
@@ -68,10 +76,10 @@ void Frame::init()
     m_frame = cg.readEntry("frame", false);
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
-    m_slideShow = cg.readEntry("slideshow", false);
+    //m_slideShow = cg.readEntry("slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
-    m_currentUrl = cg.readEntry("url", "Default");
+    //m_currentUrl = cg.readEntry("url", "Default");
 
     // Frame & Shadow dimensions
     m_frameOutline = 8;
@@ -79,15 +87,10 @@ void Frame::init()
 
     // Initialize the slideshow timer
     m_slideShowTimer = new QTimer(this);
-    connect(m_slideShowTimer, SIGNAL(timeout()), this, SLOT(setSlideShow()));
+    connect(m_slideShowTimer, SIGNAL(timeout()), this, SLOT(updatePicture()));
     m_slideShowTimer->setInterval(m_slideshowTime * 1000);
 
-    if (m_slideShow) {
-        setSlideShow();
-        m_slideShowTimer->start();
-    } else {
-        choosePicture(m_currentUrl);
-    }
+    initSlideShow();
 }
 
 void Frame::constraintsUpdated(Plasma::Constraints constraints)
@@ -97,27 +100,11 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
     }
 }
 
-void Frame::setSlideShow()
+void Frame::updatePicture()
 {
-    Picture myPicture;
-    QStringList picList=myPicture.findSlideShowPics(m_slideShowPaths);
-    kDebug() <<"picList = " << picList <<endl;
-    if (!picList.isEmpty()) {
-        KUrl currentUrl(picList.at(m_slideNumber % picList.count()));
-        m_slideNumber++;
-        choosePicture(currentUrl);
-    } else {
-        choosePicture(m_currentUrl);
-    }
-}
-
-void Frame::choosePicture(const KUrl& currentUrl)
-{
-    Picture myPicture;
-    m_picture = myPicture.setPicture(contentSize().toSize().width(), currentUrl);
-
-    m_pixmapCache = QPixmap();
-    update();
+	m_picture = m_mySlideShow->getImage();
+	m_pixmapCache = QPixmap();
+	update();
 }
 
 void Frame::addDir()
@@ -200,15 +187,22 @@ void Frame::configAccepted()
     m_slideShowTimer->setInterval(m_slideshowTime * 1000);
     cg.writeEntry("slideshow time", m_slideshowTime);
 
-    if (m_slideShow) {
-        setSlideShow();
-        m_slideShowTimer->start();
-    } else {
-        m_slideShowTimer->stop();
-        choosePicture(m_currentUrl);
-    }
-
+    initSlideShow();
+    
+    
     emit configNeedsSaving();
+}
+
+void Frame::initSlideShow()
+{
+	if (m_slideShow) {
+		m_mySlideShow->setDirs(m_slideShowPaths);
+		m_slideShowTimer->start();
+	} else {
+		m_mySlideShow->setImage(m_currentUrl.path());
+		m_slideShowTimer->stop();
+	}
+	updatePicture();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -226,22 +220,17 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
     // If the url is a local directory start slideshowmode
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
-        if (!m_slideShowPaths.contains(droppedUrl.path())) {
-            m_slideShowPaths.append(droppedUrl.path());
-            if (!m_slideShow) {
-                m_slideShow = true;
-                setSlideShow();
-                m_slideShowTimer->start();
-            }
+    	m_slideShowPaths.append(droppedUrl.path());
+        if (!m_slideShow) {
+            m_slideShow = true;
         }
     } else {
         m_currentUrl = droppedUrl;
-        choosePicture(m_currentUrl);
         if (m_slideShow) {
-            m_slideShowTimer->stop();
             m_slideShow = false;
         }
     }
+    initSlideShow();
 
     KConfigGroup cg = config();
     cg.writeEntry("url", m_currentUrl);
@@ -275,7 +264,8 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
 
     QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
                                                     -m_swOutline, -m_swOutline); //Pretty useless.
-
+    
+    //TODO check if correct
     QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, Qt::FastTransformation);
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
                       frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());

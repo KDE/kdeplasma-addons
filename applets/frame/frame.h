@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright  2007 by Anne-Marie Mahfouf <annma@kde.org>              *
- *   Copyright  2007 by Antonio Vinci <mercurio@personellarete.it>      *
+ *   Copyright  2007 by Anne-Marie Mahfouf <annma@kde.org>                 *
+ *   Copyright  2007 by Antonio Vinci <mercurio@personellarete.it>         *
+ *   Copyright  2008 by Thomas Coopman <thomas.coopman@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -37,6 +38,7 @@
 
 class KDialog;
 class QGraphicsSceneDragDropEvent;
+class SlideShow;
 
 namespace Plasma
 {
@@ -48,6 +50,7 @@ class Frame : public Plasma::Applet
     Q_OBJECT
     public:
         Frame(QObject *parent, const QVariantList &args);
+        ~Frame();
 
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
@@ -61,8 +64,7 @@ class Frame : public Plasma::Applet
         void dropEvent(QGraphicsSceneDragDropEvent *event);
         void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
         void configAccepted();
-        void choosePicture(const KUrl& currentUrl);
-        void setSlideShow();
+        void updatePicture();
 
     private Q_SLOTS:
         void addDir();
@@ -71,6 +73,7 @@ class Frame : public Plasma::Applet
     private:
         void paintCache(const QStyleOptionGraphicsItem *option,
                         const QSize &contentsSize);
+        void initSlideShow();
 
         /// The current color of the frame
         QColor m_frameColor;
@@ -87,7 +90,6 @@ class Frame : public Plasma::Applet
         KUrl m_currentUrl;
         /// The current slideshow folder
         QStringList m_slideShowPaths;
-        bool m_slideShow;
         unsigned int m_slideNumber;
         QTimer *m_slideShowTimer;
         int m_slideshowTime;
@@ -100,6 +102,9 @@ class Frame : public Plasma::Applet
         int m_swOutline;
         /// Designer Config file
         Ui::config ui;
+        /// Slideshow
+        bool m_slideShow;
+        SlideShow* m_mySlideShow;
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)
