@@ -75,9 +75,9 @@ void XkcdProvider::Private::pageRequestFinished( bool err )
 
   int pos = exp.indexIn( data ) + pattern.length();
 
-  const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
+  const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos + 4 );
 
-  KUrl url( QString( "http://imgs.xkcd.com/comics/%1.png" ).arg( sub ) );
+  KUrl url( QString( "http://imgs.xkcd.com/comics/%1" ).arg( sub ) );
 
   mImageHttp = new QHttp( "imgs.xkcd.com", 80, mParent );
   mImageHttp->setHost( url.host() );
