@@ -56,7 +56,7 @@ public:
     void load(bool full = false);
 
     void addWidget(Widget * widget);
-    void removeWidget(Widget * widget);
+    void removeWidget(Widget * widget, bool setDefaultGroup = true);
 
     QString name() const;
 

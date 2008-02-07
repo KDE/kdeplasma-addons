@@ -46,7 +46,9 @@ Widget::Widget(QString name, QGraphicsItem * parent) :
 
 Widget::~Widget()
 {
-
+    if (m_group != NULL) {
+        m_group->removeWidget(this, false);
+    }
 }
 
 void Widget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {

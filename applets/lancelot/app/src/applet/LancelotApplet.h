@@ -65,8 +65,8 @@ protected Q_SLOTS:
 private:
     QSignalMapper m_signalMapper;
 
-    int m_clientID;
     org::kde::lancelot::App * m_lancelot;
+    int m_clientID;
 
     Lancelot::Instance * m_instance;
     
@@ -77,6 +77,7 @@ private:
 
     // Current state / configuration
     bool m_isVertical;
+    bool m_blockUpdates;
     
     bool m_showCategories;
     QString m_mainIcon;

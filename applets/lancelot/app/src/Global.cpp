@@ -56,14 +56,14 @@ void WidgetGroup::addWidget(Widget * widget)
 
 }
 
-void WidgetGroup::removeWidget(Widget * widget)
+void WidgetGroup::removeWidget(Widget * widget, bool setDefaultGroup)
 {
     if (m_instance->defaultGroup() == this) return;
 
     if (!m_widgets.contains(widget)) return;
     m_widgets.removeAll(widget);
 
-    widget->setGroup(NULL);
+    if (setDefaultGroup) widget->setGroup(NULL);
 }
 
 bool WidgetGroup::hasProperty(const QString & property) const
