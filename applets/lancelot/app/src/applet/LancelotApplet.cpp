@@ -95,11 +95,15 @@ Qt::Orientations LancelotApplet::expandingDirections() const
 
 void LancelotApplet::constraintsUpdated(Plasma::Constraints constraints)
 {
-    kDebug() << "Constraints are updated!\n";
-    if (Plasma::FormFactorConstraint | constraints) {
+    if (constraints & (Plasma::LocationConstraint | Plasma::SizeConstraint)) {
+        //layoutButtons();
+        updateGeometry();
+    }
+    if (constraints & Plasma::FormFactorConstraint) {
         m_isVertical = (formFactor() == Plasma::Vertical);
         kDebug() << "I am going to be " << (m_isVertical?"VERTICAL":"NORMAL") << " from now on\n";
-        layoutButtons();
+        //layoutButtons();
+        updateGeometry();
     }
 }
 
@@ -239,6 +243,7 @@ void LancelotApplet::createMenuButton()
 
 void LancelotApplet::layoutButtons()
 {
+    kDebug() << ".";
     if (m_buttons.size() == 0) {
         kDebug() << "Buttons size 0";
         return;
@@ -254,11 +259,9 @@ void LancelotApplet::layoutButtons()
         iconSize = (int)(qMin(contentSize().width() / m_buttons.size(), contentSize().height()));
     }
 
-    kDebug() << "Icon size is : " << iconSize;
     if (iconSize > 80) iconSize = 64;
     else if (iconSize > 60) iconSize = 48;
     else if (iconSize > 32) iconSize = 32;
-    kDebug() << "Icon size is : " << iconSize;
     
     qreal wpercent = 1.0 / (m_buttons.size());
     qreal distance = 0;
@@ -289,12 +292,14 @@ void LancelotApplet::layoutButtons()
 
 void LancelotApplet::applyConfig()
 {
+    kDebug() << ".";
     if (m_showCategories) {
         createCategories();
     } else {
         createMenuButton();
     }
     emit geometryChanged();
+    updateGeometry();
     //layoutButtons();
 }
     
