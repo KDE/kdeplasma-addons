@@ -3,6 +3,14 @@
   <interface name="org.kde.lancelot.App">
     <method name="show">
       <arg type="b" direction="out"/>
+      <arg name="x" type="i" direction="in"/>
+      <arg name="y" type="i" direction="in"/>
+    </method>
+    <method name="showItem">
+      <arg type="b" direction="out"/>
+      <arg name="x" type="i" direction="in"/>
+      <arg name="y" type="i" direction="in"/>
+      <arg name="name" type="s" direction="in"/>
     </method>
     <method name="hide">
       <arg type="b" direction="out"/>
@@ -10,10 +18,6 @@
     </method>
     <method name="hide">
       <arg type="b" direction="out"/>
-    </method>
-    <method name="showItem">
-      <arg type="b" direction="out"/>
-      <arg name="name" type="s" direction="in"/>
     </method>
     <method name="search">
       <arg type="b" direction="out"/>

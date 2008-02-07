@@ -46,9 +46,9 @@ public:
 	LancelotWindow( QWidget * parent = 0, Qt::WindowFlags f = 0 );
 	virtual ~LancelotWindow();
 
-    bool lancelotShow();
+    bool lancelotShow(int x, int y);
+    bool lancelotShowItem(int x, int y, QString name);
     bool lancelotHide(bool immediate = false);
-    bool lancelotShowItem(QString name);
 
     QStringList sectionIDs();
     QStringList sectionNames();
@@ -76,7 +76,7 @@ private Q_SLOTS:
 
 private:
     void createModels();
-    bool showWindow();
+    bool showWindow(int x, int y);
 
     // Computer models
     Lancelot::MergedActionListViewModel * m_systemLeftModel;

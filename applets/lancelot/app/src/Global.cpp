@@ -148,7 +148,7 @@ void WidgetGroup::load(bool full)
         copyFrom(group);
     }
 
-    // TODO: Load properties from theme configuration file
+    // Load properties from theme configuration file
     m_foregroundColor.normal   = m_confGroupTheme->readEntry("foreground.color.normal",   m_foregroundColor.normal);
     m_foregroundColor.active   = m_confGroupTheme->readEntry("foreground.color.active",   m_foregroundColor.active);
     m_foregroundColor.disabled = m_confGroupTheme->readEntry("foreground.color.disabled", m_foregroundColor.disabled);
@@ -192,23 +192,17 @@ void Instance::setActiveInstance(Instance * instance)
 }
 
 void Instance::activateAll() {
-    //processGeometryChanges = true;
-    //processUpdateRequests = true;
     processGroupChanges = true;
 
     loadAllGroups();
 }
 
 void Instance::deactivateAll() {
-    //processGeometryChanges = false;
-    //processUpdateRequests = false;
     processGroupChanges = false;
 }
 
 Instance::Instance()
-  : //processGeometryChanges(false),
-    //processUpdateRequests(false),
-    processGroupChanges(false),
+  : processGroupChanges(false),
     m_confLancelot(NULL),
     m_confTheme(NULL)
 {

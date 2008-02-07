@@ -121,12 +121,14 @@ QSizeF LancelotApplet::contentSizeHint() const
 
 void LancelotApplet::showLancelot()
 {
-    m_lancelot->show();
+    QPoint position = popupPosition(QSize());
+    m_lancelot->show(position.x(), position.y());
 }
 
 void LancelotApplet::showLancelotSection(const QString & section)
 {
-    m_lancelot->showItem(section);
+    QPoint position = popupPosition(QSize());
+    m_lancelot->showItem(position.x(), position.y(), section);
 }
 
 bool LancelotApplet::hasHeightForWidth () const
@@ -182,7 +184,7 @@ void LancelotApplet::deleteButtons()
         button = m_buttons.takeLast();
         m_layout->removeItem(button);
         button->setParent(NULL);
-        delete button; // TODO: Something's wrong here... - this will be a memory leak
+        delete button;
     }
     m_buttons.clear();
     m_blockUpdates = false;

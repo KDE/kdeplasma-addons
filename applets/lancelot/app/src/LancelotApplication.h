@@ -39,9 +39,10 @@ public:
 	bool event(QEvent * e);
 
 public Q_SLOTS:
-    static bool show();
+    static bool show(int x, int y);
+    static bool showItem(int x, int y, QString name);
+    
     static bool hide(bool immediate = false);
-    static bool showItem(QString name);
     static bool search(const QString & string);
 
     int addClient();
@@ -50,8 +51,6 @@ public Q_SLOTS:
     QStringList sectionIDs();
     QStringList sectionNames();
     QStringList sectionIcons();
-
-    //static LancelotApplication * LancelotApplication::application()
 
 protected:
     LancelotWindow * window;

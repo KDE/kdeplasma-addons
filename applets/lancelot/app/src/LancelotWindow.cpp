@@ -163,16 +163,19 @@ void LancelotWindow::enterEvent(QEvent * event) {
     m_hideTimer.stop();
 }
 
-bool LancelotWindow::lancelotShow() {
+bool LancelotWindow::lancelotShow(int x, int y) {
     panelSections->show();
     layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
     resizeWindow(this, QSize(mainWidth + sectionsWidth, 500));
     
-    return showWindow();    
+    if (!isVisible()) {
+        return showWindow(x, y);
+    }
+    return true;    
 }
 
-bool LancelotWindow::lancelotShowItem(QString name) {
+bool LancelotWindow::lancelotShowItem(int x, int y, QString name) {
     sectionActivated(name);
     
     panelSections->hide();
@@ -181,18 +184,44 @@ bool LancelotWindow::lancelotShowItem(QString name) {
     resizeWindow(this, QSize(mainWidth, 500));
     
     if (!isVisible()) {
-        return showWindow();
+        return showWindow(x, y);
     }
     return true;
 }
 
-bool LancelotWindow::showWindow() {
+bool LancelotWindow::showWindow(int x, int y) {
+    QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
+
+    Plasma::Flip flip = Plasma::VerticalFlip;
+    
+    if (x < screenRect.left()) {
+        x = screenRect.left();
+    }
+    
+    if (y < screenRect.top()) {
+        y = screenRect.top();
+    }
+
+    if (x + width() > screenRect.right()) {
+        x = screenRect.right() - width();
+        flip |= Plasma::HorizontalFlip;
+    }
+    
+    if (y + height() > screenRect.bottom()) {
+        y = screenRect.bottom() - height();
+        flip &= ~Plasma::VerticalFlip;
+    }
+    
+    layoutMain->setFlip(flip);
+    layoutMain->invalidate();
+
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     m_hideTimer.stop();
     setFocus();
     editSearch->setFocus();
-    
+    move(x, y);
+
     return true;
 }
 

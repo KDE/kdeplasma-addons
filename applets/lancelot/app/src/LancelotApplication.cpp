@@ -100,10 +100,10 @@ int LancelotApplication::main(int argc, char **argv)
     return LancelotApplication::m_application->exec();
 }
 
-bool LancelotApplication::show()
+bool LancelotApplication::show(int x, int y)
 {
     if (!m_application) return false;
-    return LancelotApplication::m_application->window->lancelotShow();
+    return LancelotApplication::m_application->window->lancelotShow(x, y);
 }
 
 bool LancelotApplication::hide(bool immediate)
@@ -112,10 +112,10 @@ bool LancelotApplication::hide(bool immediate)
     return LancelotApplication::m_application->window->lancelotHide(immediate);
 }
 
-bool LancelotApplication::showItem(QString name)
+bool LancelotApplication::showItem(int x, int y, QString name)
 {
     if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
-    return LancelotApplication::m_application->window->lancelotShowItem(name);
+    return LancelotApplication::m_application->window->lancelotShowItem(x, y, name);
 }
 
 int LancelotApplication::addClient()
