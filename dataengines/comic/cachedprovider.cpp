@@ -18,7 +18,6 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QTimer>
-#include <QtCore/QSettings>
 #include <QtGui/QImage>
 
 #include <kstandarddirs.h>
@@ -37,11 +36,14 @@ static QString identifierToPath( const QString &identifier )
 CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
     : ComicProvider( parent ), mIdentifier( identifier )
 {
+    mSettings = new QSettings( identifierToPath( mIdentifier )+".conf", QSettings::IniFormat );
+
     QTimer::singleShot( 0, this, SLOT( triggerFinished() ) );
 }
 
 CachedProvider::~CachedProvider()
 {
+   delete mSettings;
 }
 
 QImage CachedProvider::image() const
@@ -58,6 +60,16 @@ QImage CachedProvider::image() const
 QString CachedProvider::identifier() const
 {
     return mIdentifier;
+}
+
+QString CachedProvider::nextIdentifierSuffix() const
+{
+   return mSettings->value("nextIdentifierSuffix", QString()).toString();
+}
+
+QString CachedProvider::previousIdentifierSuffix() const
+{
+   return mSettings->value("previousIdentifierSuffix", QString()).toString();
 }
 
 void CachedProvider::triggerFinished()
@@ -88,6 +100,5 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 
 KUrl CachedProvider::websiteUrl() const
 {
-    QSettings settings( identifierToPath( mIdentifier )+".conf", QSettings::IniFormat );
-    return KUrl(settings.value("websiteUrl", QString()).toString());
+    return KUrl(mSettings->value("websiteUrl", QString()).toString());
 }

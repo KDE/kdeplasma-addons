@@ -27,9 +27,13 @@ class ComicProvider;
  * This class provides the comic strip.
  *
  * The query keys have the following structure:
- *   <comic_identifier>:<date>
+ *   <comic_identifier>:<suffix>
+ * usually the suffix is the date
  * e.g.
  *   userfriendly:2007-07-19
+ * but some other comics uses numerical identifiers, like
+ *   xkcd:378
+ * if the suffix is empty the latest comic will be returned
  *
  */
 class ComicEngine : public Plasma::DataEngine
@@ -50,6 +54,9 @@ class ComicEngine : public Plasma::DataEngine
     private Q_SLOTS:
         void finished( ComicProvider* );
         void error( ComicProvider* );
+
+    private:
+        bool mEmptySuffix;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(comic, ComicEngine)

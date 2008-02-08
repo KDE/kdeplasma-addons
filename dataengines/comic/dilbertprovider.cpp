@@ -124,4 +124,23 @@ KUrl DilbertProvider::websiteUrl() const
     return QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" ).arg( d->mDate.toString( "yyyyMMdd" ) );
 }
 
+QString DilbertProvider::nextIdentifierSuffix() const
+{
+   if (d->mDate < QDate::currentDate()) {
+       return d->mDate.addDays(+1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
+QString DilbertProvider::previousIdentifierSuffix() const
+{
+   //only current year is archived
+   if (d->mDate > QDate(QDate::currentDate().year(), 1, 1)) {
+       return d->mDate.addDays(-1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
 #include "dilbertprovider.moc"

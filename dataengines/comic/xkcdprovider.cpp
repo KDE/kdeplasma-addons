@@ -16,21 +16,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpRequestHeader>
 
 #include <KUrl>
+#include <KDebug>
 
 #include "xkcdprovider.h"
 
 class XkcdProvider::Private
 {
   public:
-    Private( XkcdProvider *parent, const QDate &date )
-      : mParent( parent ), mDate( date )
+    Private( XkcdProvider *parent, const int requestedId )
+      : mParent( parent ), mRequestedId( requestedId ), mHasNextComic(false)
     {
       mHttp = new QHttp( "xkcd.com", 80, mParent );
       connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
@@ -42,24 +42,13 @@ class XkcdProvider::Private
 
     XkcdProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
+    int mRequestedId;
+    bool mHasNextComic;
 
     QHttp *mHttp;
     QHttp *mImageHttp;
 };
-
-static QString dateToId( const QDate &date )
-{
-    static QDate initialDate = QDate( 2006, 12, 6 ); // when everything started...
-
-    if ( date < initialDate )
-        return QString();
-
-    int days = initialDate.daysTo( date );
-
-    return QString::number( days );
-}
 
 void XkcdProvider::Private::pageRequestFinished( bool err )
 {
@@ -84,6 +73,23 @@ void XkcdProvider::Private::pageRequestFinished( bool err )
   mImageHttp->get( url.path() );
 
   mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
+
+  //search the id of this comic if it was not specified
+  if (mRequestedId < 1) {
+      const QString idPattern( "http://xkcd.com/(\\d+)/" );
+      QRegExp idExp( idPattern );
+
+      if (idExp.indexIn( data ) > -1) {
+          mRequestedId = idExp.cap(1).toInt();
+      }
+  }
+
+
+  //now search if there is a next comic
+  const QString nextPattern( "href=\"#\"" );
+  const QRegExp nextExp( nextPattern );
+
+  mHasNextComic = (nextExp.indexIn( data ) == -1);
 }
 
 void XkcdProvider::Private::imageRequestFinished( bool error )
@@ -98,13 +104,17 @@ void XkcdProvider::Private::imageRequestFinished( bool error )
   emit mParent->finished( mParent );
 }
 
-XkcdProvider::XkcdProvider( const QDate &date, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, date ) )
+XkcdProvider::XkcdProvider( const int requestedId, QObject *parent )
+    : ComicProvider( parent ), d( new Private( this, requestedId ) )
 {
-    KUrl url( QString( "http://xkcd.com/%1/" ).arg( dateToId( date ) ) );
+    KUrl baseUrl( QString( "http://xkcd.com/" ) );
 
-    d->mHttp->setHost( url.host() );
-    d->mHttp->get( url.path() );
+    if (requestedId > 0) {
+        baseUrl.setPath(QString::number(requestedId)+'/');
+    }
+
+    d->mHttp->setHost( baseUrl.host() );
+    d->mHttp->get( baseUrl.path() );
 }
 
 XkcdProvider::~XkcdProvider()
@@ -119,12 +129,30 @@ QImage XkcdProvider::image() const
 
 QString XkcdProvider::identifier() const
 {
-    return QString( "xkcd:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+    return QString( "xkcd:%1" ).arg( d->mRequestedId );
 }
 
 KUrl XkcdProvider::websiteUrl() const
 {
-    return QString( "http://xkcd.com/%1/" ).arg( dateToId( d->mDate ) );
+    return QString( "http://xkcd.com/%1/" ).arg( d->mRequestedId );
+}
+
+QString XkcdProvider::nextIdentifierSuffix() const
+{
+   if (d->mHasNextComic) {
+       return QString::number(d->mRequestedId+1);
+   } else {
+       return QString();
+   }
+}
+
+QString XkcdProvider::previousIdentifierSuffix() const
+{
+   if (d->mRequestedId > 1) {
+       return QString::number(d->mRequestedId-1);
+   } else {
+       return QString();
+   }
 }
 
 #include "xkcdprovider.moc"

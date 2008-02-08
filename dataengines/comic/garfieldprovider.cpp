@@ -85,7 +85,26 @@ QString GarfieldProvider::identifier() const
 
 KUrl GarfieldProvider::websiteUrl() const
 {
-    return QString();
+    return QString("http://www.gocomics.com/garfield/%1/").arg(d->mDate.toString("yyyy/MM/dd"));
+}
+
+QString GarfieldProvider::nextIdentifierSuffix() const
+{
+   if (d->mDate < QDate::currentDate()) {
+       return d->mDate.addDays(+1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
+QString GarfieldProvider::previousIdentifierSuffix() const
+{
+   //comic from 1 Jan 1979 Woha!
+   if (d->mDate > QDate(1979, 1, 1)) {
+       return d->mDate.addDays(-1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
 }
 
 #include "garfieldprovider.moc"

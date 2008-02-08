@@ -55,8 +55,12 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
 {
-    mImage = data[ "image" ].value<QImage>();
-    mWebsiteUrl = data[ "websiteUrl" ].value<KUrl>();
+    mImage = data[ "Image" ].value<QImage>();
+    mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
+    mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
+    mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+
+    updateButtons();
 
     if (!mImage.isNull()) {
         prepareGeometryChange();
@@ -88,7 +92,6 @@ void ComicApplet::applyConfig()
     saveConfig();
 
     updateComic();
-    updateButtons();
 }
 
 void ComicApplet::loadConfig()
@@ -107,16 +110,12 @@ void ComicApplet::saveConfig()
 
 void ComicApplet::slotNextDay()
 {
-    mCurrentDate = mCurrentDate.addDays( 1 );
-    updateComic();
-    updateButtons();
+    updateComic(mNextIdentifierSuffix);
 }
 
 void ComicApplet::slotPreviousDay()
 {
-    mCurrentDate = mCurrentDate.addDays( -1 );
-    updateComic();
-    updateButtons();
+    updateComic(mPreviousIdentifierSuffix);
 }
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
@@ -126,12 +125,13 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     if ( event->button() == Qt::LeftButton && contentRect().contains(event->pos()) ) {
         QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
 
-        if ( event->pos().x() < s_arrowWidth ) {
+        if ( mShowPreviousButton && event->pos().x() < s_arrowWidth ) {
             slotPreviousDay();
             event->accept();
         } else if ( mShowNextButton && event->pos().x() > contentSizeHint().width() - s_arrowWidth ) {
             slotNextDay();
             event->accept();
+        //link clicked
         } else if (!mWebsiteUrl.isEmpty() &&
                     event->pos().y() > contentSizeHint().height() - fm.height() &&
                     event->pos().x() > contentSizeHint().width() - fm.width(mWebsiteUrl.host()) - s_arrowWidth) {
@@ -194,13 +194,13 @@ Qt::AlignRight, mWebsiteUrl.host());
     p->restore();
 }
 
-void ComicApplet::updateComic()
+void ComicApplet::updateComic(const QString &identifierSuffix)
 {
     Plasma::DataEngine *engine = dataEngine( "comic" );
     if ( !engine )
         return;
 
-    const QString identifier = mComicIdentifier + ":" + mCurrentDate.toString( Qt::ISODate );
+    const QString identifier = mComicIdentifier + ":" + identifierSuffix;
 
     engine->disconnectSource( identifier, this );
     engine->connectSource( identifier, this );
@@ -210,10 +210,15 @@ void ComicApplet::updateComic()
 
 void ComicApplet::updateButtons()
 {
-    if ( mCurrentDate == QDate::currentDate() )
+    if ( mNextIdentifierSuffix.isNull() )
         mShowNextButton = false;
     else
         mShowNextButton = true;
+
+    if ( mPreviousIdentifierSuffix.isNull() )
+        mShowPreviousButton = false;
+    else
+        mShowPreviousButton = true;
 }
 
 #include "comic.moc"

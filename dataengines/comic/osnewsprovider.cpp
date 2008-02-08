@@ -54,6 +54,7 @@ class OsNewsProvider::Private
     QDate mAskedDate;
     QDate mCurrentDate;
     QDate mPreviousDate;
+    QDate mNextDate;
     QString mTitle;
     QImage mImage;
 
@@ -110,25 +111,27 @@ void OsNewsProvider::Private::processRss(Syndication::Loader* loader,
     } else {
         QVariantList items;
 
+        QDateTime itemDate;
+        QDate tempDate;
+        QDate tempNextDate;
+
         foreach (const Syndication::ItemPtr& item, feed->items()) {
-            QDateTime date;
-            date.setTime_t(item->datePublished());
-            mPreviousDate = QDate(date.date());
-            if (mPreviousDate <= mAskedDate) {
+            itemDate.setTime_t(item->datePublished());
+            if( !tempDate.isNull() ) {
+                tempNextDate = tempDate;
+            }
+            tempDate = QDate(itemDate.date());
+            if (tempDate <= mAskedDate) {
                 if (mPageUrl.isEmpty()) {
                     mPageUrl = item->link();
                     mTitle = item->title();
+                    mCurrentDate = tempDate;
+                    mNextDate = tempNextDate;
                 } else {
-                    mCurrentDate = mPreviousDate;
+                    mPreviousDate = tempDate;;
                     break;
                 }
             }
-
-            mCurrentDate = mPreviousDate;
-        }
-        //have we reached the last?
-        if (mCurrentDate == mPreviousDate) {
-            mPreviousDate = QDate();
         }
 
         kDebug() << "Comic webpage found: " << mPageUrl;
@@ -168,6 +171,16 @@ OsNewsProvider::~OsNewsProvider()
 KUrl OsNewsProvider::websiteUrl() const
 {
    return d->mPageUrl;
+}
+
+QString OsNewsProvider::nextIdentifierSuffix() const
+{
+   return d->mNextDate.toString(Qt::ISODate);
+}
+
+QString OsNewsProvider::previousIdentifierSuffix() const
+{
+   return d->mPreviousDate.toString(Qt::ISODate);
 }
 
 QImage OsNewsProvider::image() const

@@ -125,4 +125,23 @@ KUrl UserFriendlyProvider::websiteUrl() const
     return KUrl(QString( "http://ars.userfriendly.org/cartoons/?id=" ) + d->mDate.toString( "yyyyMMdd" ));
 }
 
+QString UserFriendlyProvider::nextIdentifierSuffix() const
+{
+   if (d->mDate < QDate::currentDate()) {
+       return d->mDate.addDays(+1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
+QString UserFriendlyProvider::previousIdentifierSuffix() const
+{
+   //comic born 17 Now 1997
+   if (d->mDate > QDate(1997, 11, 17)) {
+       return d->mDate.addDays(-1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
 #include "userfriendlyprovider.moc"

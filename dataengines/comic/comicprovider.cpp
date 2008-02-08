@@ -29,4 +29,13 @@ ComicProvider::~ComicProvider()
 {
 }
 
+ComicProvider::SuffixType ComicProvider::suffixType(const QString &name)
+{
+    if (name == "xkcd") {
+        return IntSuffix;
+    } else {
+        return DateSuffix;
+    }
+}
+
 #include "comicprovider.moc"

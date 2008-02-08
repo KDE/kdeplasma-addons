@@ -124,4 +124,23 @@ KUrl SnoopyProvider::websiteUrl() const
     return QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( d->mDate.toString( "yyyyMMdd" ) );
 }
 
+QString SnoopyProvider::nextIdentifierSuffix() const
+{
+   if (d->mDate < QDate::currentDate()) {
+       return d->mDate.addDays(+1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
+QString SnoopyProvider::previousIdentifierSuffix() const
+{
+   //only current year is archived
+   if (d->mDate > QDate(QDate::currentDate().year(), 1, 1)) {
+       return d->mDate.addDays(-1).toString( Qt::ISODate );
+   } else {
+       return QString();
+   }
+}
+
 #include "snoopyprovider.moc"

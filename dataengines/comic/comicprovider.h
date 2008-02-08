@@ -34,6 +34,16 @@ class ComicProvider : public QObject
 
     public:
         /**
+         * What is the meaning of the suffix of the identifier comicname:suffix
+         * Usually it's a date, it can also be a simple integer or a string
+         */
+        enum SuffixType {
+            DateSuffix = 0,
+            IntSuffix,
+            StringSuffix
+        };
+
+        /**
          * Creates a new comic provider.
          *
          * @param parent The parent object.
@@ -44,6 +54,8 @@ class ComicProvider : public QObject
          * Destroys the comic provider.
          */
         virtual ~ComicProvider();
+
+        static SuffixType suffixType(const QString &name);
 
         /**
          * Returns the Url of the website where thee comic of that particular date resides
@@ -59,9 +71,19 @@ class ComicProvider : public QObject
         virtual QImage image() const = 0;
 
         /**
-         * Returns the identifier of the comic request (name + date).
+         * Returns the identifier of the comic request (usually name + date).
          */
         virtual QString identifier() const = 0;
+
+        /**
+         * Returns the identifier suffix of the next comic
+         */
+        virtual QString nextIdentifierSuffix() const = 0;
+
+        /**
+         * Returns the identifier suffix of the previous comic
+         */
+        virtual QString previousIdentifierSuffix() const = 0;
 
     Q_SIGNALS:
         /**

@@ -35,7 +35,7 @@ class XkcdProvider : public ComicProvider
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        XkcdProvider( const QDate &date, QObject *parent = 0 );
+        XkcdProvider( const int requestedId, QObject *parent = 0 );
 
         /**
          * Destroys the xkcd provider.
@@ -56,6 +56,10 @@ class XkcdProvider : public ComicProvider
         virtual QString identifier() const;
 
         virtual KUrl websiteUrl() const;
+
+        virtual QString nextIdentifierSuffix() const;
+
+        virtual QString previousIdentifierSuffix() const;
 
     private:
       class Private;

@@ -55,6 +55,10 @@ class UserFriendlyProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
+        virtual QString nextIdentifierSuffix() const;
+
+        virtual QString previousIdentifierSuffix() const;
+
         virtual KUrl websiteUrl() const;
 
     private:

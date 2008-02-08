@@ -21,7 +21,8 @@
 
 #include "comicprovider.h"
 
-#include <QHash>
+#include <QtCore/QSettings>
+#include <QtCore/QHash>
 
 /**
  * This class provides comics from the local cache.
@@ -58,6 +59,16 @@ class CachedProvider : public ComicProvider
         virtual QString identifier() const;
 
         /**
+         * Returns the identifier suffix of the next comic
+         */
+        virtual QString nextIdentifierSuffix() const;
+
+        /**
+         * Returns the identifier suffix of the previous comic
+         */
+        virtual QString previousIdentifierSuffix() const;
+
+        /**
          * Returns whether a comic with the given @p identifier is cached.
          */
         static bool isCached( const QString &identifier );
@@ -79,6 +90,7 @@ class CachedProvider : public ComicProvider
 
     private:
         QString mIdentifier;
+        QSettings *mSettings;
 };
 
 #endif

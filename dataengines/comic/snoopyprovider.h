@@ -57,6 +57,10 @@ class SnoopyProvider : public ComicProvider
 
         virtual KUrl websiteUrl() const;
 
+        virtual QString nextIdentifierSuffix() const;
+
+        virtual QString previousIdentifierSuffix() const;
+
     private:
       class Private;
       Private* const d;

@@ -54,7 +54,7 @@ class ComicApplet : public Plasma::Applet
         void mousePressEvent( QGraphicsSceneMouseEvent* );
 
     private:
-        void updateComic();
+        void updateComic(const QString &identifierSuffix = QString());
         void updateButtons();
         void loadConfig();
         void saveConfig();
@@ -63,6 +63,8 @@ class ComicApplet : public Plasma::Applet
         QDate mCurrentDate;
         QUrl mWebsiteUrl;
         QString mComicIdentifier;
+        QString mNextIdentifierSuffix;
+        QString mPreviousIdentifierSuffix;
         ConfigDialog *mConfigDialog;
         bool mScaleComic;
         bool mShowPreviousButton;

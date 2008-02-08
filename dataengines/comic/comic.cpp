@@ -19,6 +19,7 @@
 #include <QtCore/QDate>
 
 #include <KUrl>
+#include <KDebug>
 
 #include "comic.h"
 
@@ -32,7 +33,7 @@
 #include "osnewsprovider.h"
 
 ComicEngine::ComicEngine( QObject* parent, const QVariantList& )
-    : Plasma::DataEngine( parent )
+    : Plasma::DataEngine( parent ), mEmptySuffix(false)
 {
     setUpdateInterval( 0 );
 }
@@ -56,26 +57,67 @@ bool ComicEngine::updateSource( const QString &identifier )
     }
 
     // ... start a new query otherwise
-    const QStringList parts = identifier.split( ':', QString::SkipEmptyParts );
+    const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
 
-    QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
-    if ( !date.isValid() ) {
+    //: are mandatory
+    if (parts.count() < 2) {
         return false;
     }
 
     ComicProvider *provider = 0;
-    if ( parts[ 0 ] == "userfriendly" )
-      provider = new UserFriendlyProvider( date, this );
-    else if ( parts[ 0 ] == "dilbert" )
-      provider = new DilbertProvider( date, this );
-    else if ( parts[ 0 ] == "garfield" )
-      provider = new GarfieldProvider( date, this );
-    else if ( parts[ 0 ] == "snoopy" )
-      provider = new SnoopyProvider( date, this );
-    else if ( parts[ 0 ] == "xkcd" )
-      provider = new XkcdProvider( date, this );
-    else if ( parts[ 0 ] == "osnews" )
-      provider = new OsNewsProvider( date, this );
+
+    ComicProvider::SuffixType st = ComicProvider::suffixType(parts[ 0 ]);
+
+    //Here goes who uses dates
+    if (st == ComicProvider::DateSuffix) {
+        QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
+
+        //default is today ()
+        if (!date.isValid() || date.isNull()) {
+            date = QDate::currentDate();
+            mEmptySuffix = true;
+        } else {
+            mEmptySuffix = false;
+        }
+
+        if (parts[ 0 ] == "userfriendly") {
+            provider = new UserFriendlyProvider( date, this );
+        } else if (parts[ 0 ] == "dilbert") {
+            provider = new DilbertProvider( date, this );
+        } else if (parts[ 0 ] == "garfield") {
+            provider = new GarfieldProvider( date, this );
+        } else if (parts[ 0 ] == "snoopy") {
+            provider = new SnoopyProvider( date, this );
+        } else if (parts[ 0 ] == "osnews") {
+            provider = new OsNewsProvider( date, this );
+        //Invalid name asked
+        } else {
+            return false;
+        }
+
+    //Here goes who use int ids
+    } else if (st == ComicProvider::IntSuffix) {
+        bool ok;
+        int requestedId = parts[ 1 ].toInt(&ok);
+
+        if (!ok) {
+            requestedId = -1;
+            mEmptySuffix = true;
+        } else {
+            mEmptySuffix = false;
+        }
+
+        if (parts[ 0 ] == "xkcd") {
+            provider = new XkcdProvider( requestedId, this );
+        //Invalid name asked
+        } else {
+            return false;
+        }
+    //No other types supported at the moment
+    } else {
+        return false;
+    }
+
 
     connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
     connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
@@ -93,16 +135,28 @@ bool ComicEngine::sourceRequested( const QString &identifier )
 void ComicEngine::finished( ComicProvider *provider )
 {
     QString identifier(provider->identifier());
-    setData( identifier, "image", provider->image() );
-
-    // store in cache if it's not the response of a CachedProvider
-    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() ) {
-        CachedProvider::Settings info;
-        info["websiteUrl"] = provider->websiteUrl().prettyUrl();
-        CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
+    //if it was asked an empty suffix return an empty suffix
+    if (mEmptySuffix) {
+        identifier = identifier.left(identifier.indexOf(':') + 1);
     }
 
-    setData( identifier, "websiteUrl", provider->websiteUrl());
+    setData( identifier, "Image", provider->image() );
+    setData( identifier, "Website Url", provider->websiteUrl());
+    setData( identifier, "Next identifier suffix", provider->nextIdentifierSuffix());
+    setData( identifier, "Previous identifier suffix", provider->previousIdentifierSuffix());
+
+    // store in cache if it's not the response of a CachedProvider,
+    // if there is a valid image and if there is a next comic
+    // (if we're on today's comic it could become stale)
+    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() && !provider->nextIdentifierSuffix().isNull() ) {
+        CachedProvider::Settings info;
+
+        info["websiteUrl"] = provider->websiteUrl().prettyUrl();
+        info["nextIdentifierSuffix"] = provider->nextIdentifierSuffix();
+        info["previousIdentifierSuffix"] = provider->previousIdentifierSuffix();
+
+        CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
+    }
 
     provider->deleteLater();
 }
