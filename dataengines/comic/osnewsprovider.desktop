@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-Library=plasma_comic_osnewsprovider
+X-KDE-PlasmaComicProvider-SuffixType=Date
+X-KDE-PlasmaComicProvider-Identifier=osnews
+Icon=
+
+Name=OSNews Provider
+Comment=OSNews Provider

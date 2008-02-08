@@ -32,15 +32,16 @@ class GarfieldProvider : public ComicProvider
         /**
          * Creates a new garfield provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        GarfieldProvider( const QDate &date, QObject *parent = 0 );
+        GarfieldProvider( QObject *parent, const QVariantList& );
 
         /**
          * Destroys the garfield provider.
          */
         ~GarfieldProvider();
+
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -55,11 +56,10 @@ class GarfieldProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
-
-        virtual QString nextIdentifierSuffix() const;
-
-        virtual QString previousIdentifierSuffix() const;
 
     private:
       class Private;

@@ -20,22 +20,80 @@
 
 #include <KUrl>
 
-ComicProvider::ComicProvider( QObject *parent )
-    : QObject( parent )
+class ComicProvider::Private
 {
+    public:
+        Private()
+            : mIsCurrent( false )
+        {
+        }
+
+        QDate mRequestedDate;
+        int mRequestedNumber;
+        QString mRequestedId;
+        bool mIsCurrent;
+};
+
+ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
+    : QObject( parent ), d( new Private )
+{
+    Q_ASSERT( args.count() == 2 );
+
+    const QString type = args[ 0 ].toString();
+    if ( type == "Date" )
+        d->mRequestedDate = args[ 1 ].toDate();
+    else if ( type == "Number" )
+        d->mRequestedNumber = args[ 1 ].toInt();
+    else if ( type == "String" )
+        d->mRequestedId = args[ 1 ].toString();
+    else
+        Q_ASSERT( false && "Invalid type passed to comic provider" );
 }
 
 ComicProvider::~ComicProvider()
 {
+    delete d;
 }
 
-ComicProvider::SuffixType ComicProvider::suffixType(const QString &name)
+QString ComicProvider::nextIdentifier() const
 {
-    if (name == "xkcd") {
-        return IntSuffix;
-    } else {
-        return DateSuffix;
-    }
+    if ( identifierType() == DateIdentifier && d->mRequestedDate != QDate::currentDate() )
+        return d->mRequestedDate.addDays( 1 ).toString( Qt::ISODate );
+
+    return QString();
+}
+
+QString ComicProvider::previousIdentifier() const
+{
+    if ( identifierType() == DateIdentifier )
+        return d->mRequestedDate.addDays( -1 ).toString( Qt::ISODate );
+
+    return QString();
+}
+
+void ComicProvider::setIsCurrent( bool value )
+{
+    d->mIsCurrent = value;
+}
+
+bool ComicProvider::isCurrent() const
+{
+    return d->mIsCurrent;
+}
+
+QDate ComicProvider::requestedDate() const
+{
+    return d->mRequestedDate;
+}
+
+int ComicProvider::requestedNumber() const
+{
+    return d->mRequestedNumber;
+}
+
+QString ComicProvider::requestedString() const
+{
+    return d->mRequestedId;
 }
 
 #include "comicprovider.moc"

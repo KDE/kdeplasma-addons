@@ -26,11 +26,13 @@
 
 #include "garfieldprovider.h"
 
+COMICPROVIDER_EXPORT_PLUGIN( GarfieldProvider, "GarfieldProvider", "" )
+
 class GarfieldProvider::Private
 {
   public:
-    Private( GarfieldProvider *parent, const QDate &date )
-      : mParent( parent ), mDate( date )
+    Private( GarfieldProvider *parent )
+      : mParent( parent )
     {
       mHttp = new QHttp( "images.ucomics.com", 80, mParent );
       connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
@@ -40,7 +42,6 @@ class GarfieldProvider::Private
 
     GarfieldProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 
     QHttp *mHttp;
@@ -58,11 +59,11 @@ void GarfieldProvider::Private::imageRequestFinished( bool error )
     emit mParent->finished( mParent );
 }
 
-GarfieldProvider::GarfieldProvider( const QDate &date, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, date ) )
+GarfieldProvider::GarfieldProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QString( "http://images.ucomics.com/comics/ga/%1/ga%2.gif" ).arg( date.toString( "yyyy" ) )
-                                                                          .arg( date.toString( "yyMMdd" ) ) );
+    KUrl url( QString( "http://images.ucomics.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
+                                                                          .arg( requestedDate().toString( "yyMMdd" ) ) );
 
     d->mHttp->setHost( url.host() );
     d->mHttp->get( url.path() );
@@ -73,6 +74,11 @@ GarfieldProvider::~GarfieldProvider()
     delete d;
 }
 
+ComicProvider::IdentifierType GarfieldProvider::identifierType() const
+{
+    return DateIdentifier;
+}
+
 QImage GarfieldProvider::image() const
 {
     return d->mImage;
@@ -80,31 +86,12 @@ QImage GarfieldProvider::image() const
 
 QString GarfieldProvider::identifier() const
 {
-    return QString( "garfield:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+    return QString( "garfield:%1" ).arg( requestedDate().toString( Qt::ISODate ) );
 }
 
 KUrl GarfieldProvider::websiteUrl() const
 {
-    return QString("http://www.gocomics.com/garfield/%1/").arg(d->mDate.toString("yyyy/MM/dd"));
-}
-
-QString GarfieldProvider::nextIdentifierSuffix() const
-{
-   if (d->mDate < QDate::currentDate()) {
-       return d->mDate.addDays(+1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
-}
-
-QString GarfieldProvider::previousIdentifierSuffix() const
-{
-   //comic from 1 Jan 1979 Woha!
-   if (d->mDate > QDate(1979, 1, 1)) {
-       return d->mDate.addDays(-1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
+    return QString( "http://www.gocomics.com/garfield/%1/" ).arg( requestedDate().toString( "yyyy/MM/dd" ) );
 }
 
 #include "garfieldprovider.moc"

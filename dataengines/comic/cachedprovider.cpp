@@ -17,6 +17,7 @@
  */
 
 #include <QtCore/QFile>
+#include <QtCore/QSettings>
 #include <QtCore/QTimer>
 #include <QtGui/QImage>
 
@@ -33,43 +34,47 @@ static QString identifierToPath( const QString &identifier )
 }
 
 
-CachedProvider::CachedProvider( const QString &identifier, QObject *parent )
-    : ComicProvider( parent ), mIdentifier( identifier )
+CachedProvider::CachedProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args )
 {
-    mSettings = new QSettings( identifierToPath( mIdentifier )+".conf", QSettings::IniFormat );
-
     QTimer::singleShot( 0, this, SLOT( triggerFinished() ) );
 }
 
 CachedProvider::~CachedProvider()
 {
-   delete mSettings;
+}
+
+ComicProvider::IdentifierType CachedProvider::identifierType() const
+{
+    return StringIdentifier;
 }
 
 QImage CachedProvider::image() const
 {
-    if ( !QFile::exists( identifierToPath( mIdentifier ) ) )
+    if ( !QFile::exists( identifierToPath( requestedString() ) ) )
         return QImage();
 
     QImage img;
-    img.load( identifierToPath( mIdentifier ), "PNG" );
+    img.load( identifierToPath( requestedString() ), "PNG" );
 
     return img;
 }
 
 QString CachedProvider::identifier() const
 {
-    return mIdentifier;
+    return requestedString();
 }
 
-QString CachedProvider::nextIdentifierSuffix() const
+QString CachedProvider::nextIdentifier() const
 {
-   return mSettings->value("nextIdentifierSuffix", QString()).toString();
+    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "nextIdentifier", QString() ).toString();
 }
 
-QString CachedProvider::previousIdentifierSuffix() const
+QString CachedProvider::previousIdentifier() const
 {
-   return mSettings->value("previousIdentifierSuffix", QString()).toString();
+    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "previousIdentifier", QString() ).toString();
 }
 
 void CachedProvider::triggerFinished()
@@ -86,12 +91,12 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 {
     const QString path = identifierToPath( identifier );
 
-    if (!info.isEmpty()) {
+    if ( !info.isEmpty() ) {
         QSettings settings( path+".conf", QSettings::IniFormat );
 
-        for(Settings::const_iterator i = info.constBegin();
-            i != info.constEnd(); ++i) {
-            settings.setValue(i.key(), i.value());
+        for ( Settings::const_iterator i = info.constBegin();
+              i != info.constEnd(); ++i) {
+              settings.setValue( i.key(), i.value() );
         }
     }
 
@@ -100,5 +105,6 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 
 KUrl CachedProvider::websiteUrl() const
 {
-    return KUrl(mSettings->value("websiteUrl", QString()).toString());
+    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
+    return KUrl( settings.value( "websiteUrl", QString() ).toString() );
 }

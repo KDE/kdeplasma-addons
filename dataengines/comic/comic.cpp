@@ -21,21 +21,22 @@
 #include <KUrl>
 #include <KDebug>
 
+#include <KServiceTypeTrader>
+
 #include "comic.h"
 
-// comic providers
 #include "cachedprovider.h"
-#include "dilbertprovider.h"
-#include "garfieldprovider.h"
-#include "snoopyprovider.h"
-#include "userfriendlyprovider.h"
-#include "xkcdprovider.h"
-#include "osnewsprovider.h"
 
 ComicEngine::ComicEngine( QObject* parent, const QVariantList& )
     : Plasma::DataEngine( parent ), mEmptySuffix(false)
 {
     setUpdateInterval( 0 );
+
+    KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
+    Q_FOREACH ( KService::Ptr service, services ) {
+        mFactories.insert( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
+                           service );
+    }
 }
 
 ComicEngine::~ComicEngine()
@@ -50,7 +51,10 @@ bool ComicEngine::updateSource( const QString &identifier )
 {
     // check whether it is cached already...
     if ( CachedProvider::isCached( identifier ) ) {
-        ComicProvider *provider = new CachedProvider( identifier, this );
+        QVariantList args;
+        args << "String" << identifier;
+
+        ComicProvider *provider = new CachedProvider( this, args );
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
         connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
         return true;
@@ -60,64 +64,32 @@ bool ComicEngine::updateSource( const QString &identifier )
     const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
 
     //: are mandatory
-    if (parts.count() < 2) {
+    if ( parts.count() < 2 )
         return false;
-    }
 
+    if ( !mFactories.contains( parts[ 0 ] ) )
+        return false;
+
+    const KService::Ptr service = mFactories[ parts[ 0 ] ];
+
+    bool isCurrentComic = parts[ 1 ].isEmpty();
+
+    QVariantList args;
     ComicProvider *provider = 0;
 
-    ComicProvider::SuffixType st = ComicProvider::suffixType(parts[ 0 ]);
-
-    //Here goes who uses dates
-    if (st == ComicProvider::DateSuffix) {
+    const QString type = service->property( "X-KDE-PlasmaComicProvider-SuffixType", QVariant::String ).toString();
+    if ( type == "Date" ) {
         QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
-
-        //default is today ()
-        if (!date.isValid() || date.isNull()) {
+        if ( !date.isValid() )
             date = QDate::currentDate();
-            mEmptySuffix = true;
-        } else {
-            mEmptySuffix = false;
-        }
 
-        if (parts[ 0 ] == "userfriendly") {
-            provider = new UserFriendlyProvider( date, this );
-        } else if (parts[ 0 ] == "dilbert") {
-            provider = new DilbertProvider( date, this );
-        } else if (parts[ 0 ] == "garfield") {
-            provider = new GarfieldProvider( date, this );
-        } else if (parts[ 0 ] == "snoopy") {
-            provider = new SnoopyProvider( date, this );
-        } else if (parts[ 0 ] == "osnews") {
-            provider = new OsNewsProvider( date, this );
-        //Invalid name asked
-        } else {
-            return false;
-        }
-
-    //Here goes who use int ids
-    } else if (st == ComicProvider::IntSuffix) {
-        bool ok;
-        int requestedId = parts[ 1 ].toInt(&ok);
-
-        if (!ok) {
-            requestedId = -1;
-            mEmptySuffix = true;
-        } else {
-            mEmptySuffix = false;
-        }
-
-        if (parts[ 0 ] == "xkcd") {
-            provider = new XkcdProvider( requestedId, this );
-        //Invalid name asked
-        } else {
-            return false;
-        }
-    //No other types supported at the moment
-    } else {
-        return false;
+        args << "Date" << date;
+    } else if ( type == "Number" ) {
+        args << "Number" << parts[ 1 ].toInt();
     }
 
+    provider = qobject_cast<ComicProvider*>( service->createInstance<QObject>( this, args ) );
+    provider->setIsCurrent( isCurrentComic );
 
     connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
     connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
@@ -134,26 +106,31 @@ bool ComicEngine::sourceRequested( const QString &identifier )
 
 void ComicEngine::finished( ComicProvider *provider )
 {
-    QString identifier(provider->identifier());
-    //if it was asked an empty suffix return an empty suffix
-    if (mEmptySuffix) {
-        identifier = identifier.left(identifier.indexOf(':') + 1);
-    }
+    QString identifier( provider->identifier() );
+
+    /**
+     * Requests for the current day have no suffix (date or id)
+     * set initially, so we have to remove the 'faked' suffix
+     * here again to not confuse the applet.
+     */
+    if ( provider->isCurrent() )
+        identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
 
     setData( identifier, "Image", provider->image() );
-    setData( identifier, "Website Url", provider->websiteUrl());
-    setData( identifier, "Next identifier suffix", provider->nextIdentifierSuffix());
-    setData( identifier, "Previous identifier suffix", provider->previousIdentifierSuffix());
+    setData( identifier, "Website Url", provider->websiteUrl() );
+    setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
+    setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
     // (if we're on today's comic it could become stale)
-    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() && !provider->nextIdentifierSuffix().isNull() ) {
+    if ( dynamic_cast<CachedProvider*>( provider ) == 0 && !provider->image().isNull() &&
+         !provider->nextIdentifier().isEmpty() ) {
         CachedProvider::Settings info;
 
-        info["websiteUrl"] = provider->websiteUrl().prettyUrl();
-        info["nextIdentifierSuffix"] = provider->nextIdentifierSuffix();
-        info["previousIdentifierSuffix"] = provider->previousIdentifierSuffix();
+        info[ "websiteUrl" ] = provider->websiteUrl().prettyUrl();
+        info[ "nextIdentifier" ] = provider->nextIdentifier();
+        info[ "previousIdentifier" ] = provider->previousIdentifier();
 
         CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
     }

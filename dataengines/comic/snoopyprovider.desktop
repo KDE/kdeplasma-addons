@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-Library=plasma_comic_snoopyprovider
+X-KDE-PlasmaComicProvider-SuffixType=Date
+X-KDE-PlasmaComicProvider-Identifier=snoopy
+Icon=
+
+Name=Snoopy Provider
+Comment=Snoopy Provider

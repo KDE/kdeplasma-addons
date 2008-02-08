@@ -54,7 +54,7 @@ class ComicApplet : public Plasma::Applet
         void mousePressEvent( QGraphicsSceneMouseEvent* );
 
     private:
-        void updateComic(const QString &identifierSuffix = QString());
+        void updateComic( const QString &identifierSuffix = QString() );
         void updateButtons();
         void loadConfig();
         void saveConfig();

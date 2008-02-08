@@ -35,12 +35,14 @@ class UserFriendlyProvider : public ComicProvider
          * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        UserFriendlyProvider( const QDate &date, QObject *parent = 0 );
+        UserFriendlyProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the userfriendly provider.
          */
         ~UserFriendlyProvider();
+
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -55,10 +57,9 @@ class UserFriendlyProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
-        virtual QString nextIdentifierSuffix() const;
-
-        virtual QString previousIdentifierSuffix() const;
-
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
 
     private:

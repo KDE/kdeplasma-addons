@@ -32,15 +32,16 @@ class XkcdProvider : public ComicProvider
         /**
          * Creates a new xkcd provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        XkcdProvider( const int requestedId, QObject *parent = 0 );
+        XkcdProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the xkcd provider.
          */
         ~XkcdProvider();
+
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -57,9 +58,9 @@ class XkcdProvider : public ComicProvider
 
         virtual KUrl websiteUrl() const;
 
-        virtual QString nextIdentifierSuffix() const;
+        virtual QString nextIdentifier() const;
 
-        virtual QString previousIdentifierSuffix() const;
+        virtual QString previousIdentifier() const;
 
     private:
       class Private;

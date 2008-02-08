@@ -26,11 +26,13 @@
 
 #include "userfriendlyprovider.h"
 
+COMICPROVIDER_EXPORT_PLUGIN( UserFriendlyProvider, "UserFriendlyProvider", "" )
+
 class UserFriendlyProvider::Private
 {
   public:
-    Private( UserFriendlyProvider *parent, const QDate &date )
-      : mParent( parent ), mDate( date )
+    Private( UserFriendlyProvider *parent )
+      : mParent( parent )
     {
       mHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
       connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
@@ -42,7 +44,6 @@ class UserFriendlyProvider::Private
 
     UserFriendlyProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 
     QHttp *mHttp;
@@ -85,10 +86,10 @@ void UserFriendlyProvider::Private::imageRequestFinished( bool error )
   emit mParent->finished( mParent );
 }
 
-UserFriendlyProvider::UserFriendlyProvider( const QDate &date, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, date ) )
+UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    QString path( QString( "/cartoons/?id=" ) + date.toString( "yyyyMMdd" ) );
+    QString path( QString( "/cartoons/?id=" ) + requestedDate().toString( "yyyyMMdd" ) );
 
     QHttpRequestHeader header( "GET", path );
     header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -98,7 +99,7 @@ UserFriendlyProvider::UserFriendlyProvider( const QDate &date, QObject *parent )
     header.setValue( "Accept-Language", "en" );
     header.setValue( "Host", "ars.userfriendly.org" );
     header.setValue( "Referer", QString( "http://ars.userfriendly.org/cartoons/?id=%1" )
-                                   .arg( date.addDays( -1 ).toString( "yyyyMMdd" ) ) );
+                                   .arg( requestedDate().addDays( -1 ).toString( "yyyyMMdd" ) ) );
     header.setValue( "Connection", "Keep-Alive" );
 
     d->mHttp->setHost( "ars.userfriendly.org" );
@@ -110,6 +111,11 @@ UserFriendlyProvider::~UserFriendlyProvider()
     delete d;
 }
 
+ComicProvider::IdentifierType UserFriendlyProvider::identifierType() const
+{
+    return DateIdentifier;
+}
+
 QImage UserFriendlyProvider::image() const
 {
     return d->mImage;
@@ -117,31 +123,13 @@ QImage UserFriendlyProvider::image() const
 
 QString UserFriendlyProvider::identifier() const
 {
-    return QString( "userfriendly:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+    return QString( "userfriendly:%1" ).arg( requestedDate().toString( Qt::ISODate ) );
 }
 
 KUrl UserFriendlyProvider::websiteUrl() const
 {
-    return KUrl(QString( "http://ars.userfriendly.org/cartoons/?id=" ) + d->mDate.toString( "yyyyMMdd" ));
-}
-
-QString UserFriendlyProvider::nextIdentifierSuffix() const
-{
-   if (d->mDate < QDate::currentDate()) {
-       return d->mDate.addDays(+1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
-}
-
-QString UserFriendlyProvider::previousIdentifierSuffix() const
-{
-   //comic born 17 Now 1997
-   if (d->mDate > QDate(1997, 11, 17)) {
-       return d->mDate.addDays(-1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
+    return KUrl( QString( "http://ars.userfriendly.org/cartoons/?id=" ) +
+                   requestedDate().toString( "yyyyMMdd" ) );
 }
 
 #include "userfriendlyprovider.moc"

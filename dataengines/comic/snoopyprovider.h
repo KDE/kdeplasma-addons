@@ -32,15 +32,16 @@ class SnoopyProvider : public ComicProvider
         /**
          * Creates a new snoopy provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        SnoopyProvider( const QDate &date, QObject *parent = 0 );
+        SnoopyProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the snoopy provider.
          */
         ~SnoopyProvider();
+
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -55,11 +56,10 @@ class SnoopyProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
-
-        virtual QString nextIdentifierSuffix() const;
-
-        virtual QString previousIdentifierSuffix() const;
 
     private:
       class Private;

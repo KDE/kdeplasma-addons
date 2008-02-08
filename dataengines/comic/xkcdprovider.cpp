@@ -26,11 +26,13 @@
 
 #include "xkcdprovider.h"
 
+COMICPROVIDER_EXPORT_PLUGIN( XkcdProvider, "XkcdProvider", "" )
+
 class XkcdProvider::Private
 {
   public:
-    Private( XkcdProvider *parent, const int requestedId )
-      : mParent( parent ), mRequestedId( requestedId ), mHasNextComic(false)
+    Private( XkcdProvider *parent )
+      : mParent( parent ), mHasNextComic(false)
     {
       mHttp = new QHttp( "xkcd.com", 80, mParent );
       connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
@@ -43,8 +45,8 @@ class XkcdProvider::Private
     XkcdProvider *mParent;
     QByteArray mPage;
     QImage mImage;
-    int mRequestedId;
     bool mHasNextComic;
+    int mRequestedId;
 
     QHttp *mHttp;
     QHttp *mImageHttp;
@@ -104,13 +106,15 @@ void XkcdProvider::Private::imageRequestFinished( bool error )
   emit mParent->finished( mParent );
 }
 
-XkcdProvider::XkcdProvider( const int requestedId, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, requestedId ) )
+XkcdProvider::XkcdProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args ), d( new Private( this ) )
 {
+    d->mRequestedId = requestedNumber();
+
     KUrl baseUrl( QString( "http://xkcd.com/" ) );
 
-    if (requestedId > 0) {
-        baseUrl.setPath(QString::number(requestedId)+'/');
+    if (d->mRequestedId > 0) {
+        baseUrl.setPath( QString::number( d->mRequestedId ) + '/' );
     }
 
     d->mHttp->setHost( baseUrl.host() );
@@ -120,6 +124,11 @@ XkcdProvider::XkcdProvider( const int requestedId, QObject *parent )
 XkcdProvider::~XkcdProvider()
 {
     delete d;
+}
+
+ComicProvider::IdentifierType XkcdProvider::identifierType() const
+{
+    return NumberIdentifier;
 }
 
 QImage XkcdProvider::image() const
@@ -137,19 +146,19 @@ KUrl XkcdProvider::websiteUrl() const
     return QString( "http://xkcd.com/%1/" ).arg( d->mRequestedId );
 }
 
-QString XkcdProvider::nextIdentifierSuffix() const
+QString XkcdProvider::nextIdentifier() const
 {
-   if (d->mHasNextComic) {
-       return QString::number(d->mRequestedId+1);
+   if ( d->mHasNextComic ) {
+       return QString::number( d->mRequestedId + 1 );
    } else {
        return QString();
    }
 }
 
-QString XkcdProvider::previousIdentifierSuffix() const
+QString XkcdProvider::previousIdentifier() const
 {
-   if (d->mRequestedId > 1) {
-       return QString::number(d->mRequestedId-1);
+   if ( d->mRequestedId > 1 ) {
+       return QString::number( d->mRequestedId - 1 );
    } else {
        return QString();
    }

@@ -57,6 +57,7 @@ class ComicEngine : public Plasma::DataEngine
 
     private:
         bool mEmptySuffix;
+        QMap<QString, KService::Ptr> mFactories;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(comic, ComicEngine)

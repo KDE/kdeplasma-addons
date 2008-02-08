@@ -35,11 +35,13 @@
 //own
 #include "osnewsprovider.h"
 
+COMICPROVIDER_EXPORT_PLUGIN( OsNewsProvider, "OsNewsProvider", "" )
+
 class OsNewsProvider::Private
 {
   public:
-    Private( OsNewsProvider *parent, const QDate &date )
-      : mParent( parent ), mAskedDate( date )
+    Private( OsNewsProvider *parent )
+      : mParent( parent )
     {
     }
 
@@ -51,7 +53,6 @@ class OsNewsProvider::Private
 
     OsNewsProvider *mParent;
     QByteArray mPage;
-    QDate mAskedDate;
     QDate mCurrentDate;
     QDate mPreviousDate;
     QDate mNextDate;
@@ -121,7 +122,7 @@ void OsNewsProvider::Private::processRss(Syndication::Loader* loader,
                 tempNextDate = tempDate;
             }
             tempDate = QDate(itemDate.date());
-            if (tempDate <= mAskedDate) {
+            if (tempDate <= mParent->requestedDate()) {
                 if (mPageUrl.isEmpty()) {
                     mPageUrl = item->link();
                     mTitle = item->title();
@@ -148,8 +149,8 @@ void OsNewsProvider::Private::processRss(Syndication::Loader* loader,
     }
 }
 
-OsNewsProvider::OsNewsProvider( const QDate &date, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, date ) )
+OsNewsProvider::OsNewsProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args ), d( new Private( this ) )
 {
     KUrl url( "http://osnews.com/feed/topic/79" );
 
@@ -168,17 +169,22 @@ OsNewsProvider::~OsNewsProvider()
     delete d;
 }
 
+ComicProvider::IdentifierType OsNewsProvider::identifierType() const
+{
+    return DateIdentifier;
+}
+
 KUrl OsNewsProvider::websiteUrl() const
 {
    return d->mPageUrl;
 }
 
-QString OsNewsProvider::nextIdentifierSuffix() const
+QString OsNewsProvider::nextIdentifier() const
 {
    return d->mNextDate.toString(Qt::ISODate);
 }
 
-QString OsNewsProvider::previousIdentifierSuffix() const
+QString OsNewsProvider::previousIdentifier() const
 {
    return d->mPreviousDate.toString(Qt::ISODate);
 }
@@ -190,7 +196,7 @@ QImage OsNewsProvider::image() const
 
 QString OsNewsProvider::identifier() const
 {
-    return QString( "osnews:%1" ).arg( d->mAskedDate.toString( Qt::ISODate ) );
+    return QString( "osnews:%1" ).arg( requestedDate().toString( Qt::ISODate ) );
 }
 
 #include "osnewsprovider.moc"

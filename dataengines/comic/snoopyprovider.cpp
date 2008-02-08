@@ -26,11 +26,13 @@
 
 #include "snoopyprovider.h"
 
+COMICPROVIDER_EXPORT_PLUGIN( SnoopyProvider, "SnoopyProvider", "" )
+
 class SnoopyProvider::Private
 {
   public:
-    Private( SnoopyProvider *parent, const QDate &date )
-      : mParent( parent ), mDate( date )
+    Private( SnoopyProvider *parent )
+      : mParent( parent )
     {
       mHttp = new QHttp( "snoopy.com", 80, mParent );
       connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
@@ -42,7 +44,6 @@ class SnoopyProvider::Private
 
     SnoopyProvider *mParent;
     QByteArray mPage;
-    QDate mDate;
     QImage mImage;
 
     QHttp *mHttp;
@@ -86,10 +87,11 @@ void SnoopyProvider::Private::imageRequestFinished( bool error )
   emit mParent->finished( mParent );
 }
 
-SnoopyProvider::SnoopyProvider( const QDate &date, QObject *parent )
-    : ComicProvider( parent ), d( new Private( this, date ) )
+SnoopyProvider::SnoopyProvider( QObject *parent, const QVariantList &args )
+    : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( date.toString( "yyyyMMdd" ) ) );
+    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
+                .arg( requestedDate().toString( "yyyyMMdd" ) ) );
 
     QHttpRequestHeader header( "GET", url.path() );
     header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -109,6 +111,11 @@ SnoopyProvider::~SnoopyProvider()
     delete d;
 }
 
+ComicProvider::IdentifierType SnoopyProvider::identifierType() const
+{
+    return DateIdentifier;
+}
+
 QImage SnoopyProvider::image() const
 {
     return d->mImage;
@@ -116,31 +123,13 @@ QImage SnoopyProvider::image() const
 
 QString SnoopyProvider::identifier() const
 {
-    return QString( "snoopy:%1" ).arg( d->mDate.toString( Qt::ISODate ) );
+    return QString( "snoopy:%1" ).arg( requestedDate().toString( Qt::ISODate ) );
 }
 
 KUrl SnoopyProvider::websiteUrl() const
 {
-    return QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" ).arg( d->mDate.toString( "yyyyMMdd" ) );
-}
-
-QString SnoopyProvider::nextIdentifierSuffix() const
-{
-   if (d->mDate < QDate::currentDate()) {
-       return d->mDate.addDays(+1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
-}
-
-QString SnoopyProvider::previousIdentifierSuffix() const
-{
-   //only current year is archived
-   if (d->mDate > QDate(QDate::currentDate().year(), 1, 1)) {
-       return d->mDate.addDays(-1).toString( Qt::ISODate );
-   } else {
-       return QString();
-   }
+    return QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
+             .arg( requestedDate().toString( "yyyyMMdd" ) );
 }
 
 #include "snoopyprovider.moc"

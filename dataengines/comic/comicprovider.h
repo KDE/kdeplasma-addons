@@ -22,40 +22,49 @@
 #include <QtCore/QObject>
 #include <QtCore/QDate>
 
+#include <kpluginfactory.h>
+
+#include "plasma_comic_export.h"
+
 class QImage;
 class KUrl;
+
+#define COMICPROVIDER_EXPORT_PLUGIN( classname, componentName, catalogName ) \
+    K_PLUGIN_FACTORY( classname ## Factory, registerPlugin< classname >(); ) \
+    K_EXPORT_PLUGIN( classname ## Factory( componentName, catalogName ) )
 
 /**
  * This class is an interface for comic providers.
  */
-class ComicProvider : public QObject
+class PLASMA_COMIC_EXPORT ComicProvider : public QObject
 {
     Q_OBJECT
 
     public:
-        /**
-         * What is the meaning of the suffix of the identifier comicname:suffix
-         * Usually it's a date, it can also be a simple integer or a string
-         */
-        enum SuffixType {
-            DateSuffix = 0,
-            IntSuffix,
-            StringSuffix
+        enum IdentifierType {
+            DateIdentifier = 0,
+            NumberIdentifier,
+            StringIdentifier
         };
 
         /**
          * Creates a new comic provider.
          *
          * @param parent The parent object.
+         * @param args Arguments passed by the plugin loader.
          */
-        ComicProvider( QObject *parent = 0 );
+        ComicProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the comic provider.
          */
         virtual ~ComicProvider();
 
-        static SuffixType suffixType(const QString &name);
+        /**
+         * Returns the type of identifier that is used by this
+         * comic provider.
+         */
+        virtual IdentifierType identifierType() const = 0;
 
         /**
          * Returns the Url of the website where thee comic of that particular date resides
@@ -76,14 +85,24 @@ class ComicProvider : public QObject
         virtual QString identifier() const = 0;
 
         /**
-         * Returns the identifier suffix of the next comic
+         * Returns the identifier of the next comic.
          */
-        virtual QString nextIdentifierSuffix() const = 0;
+        virtual QString nextIdentifier() const;
 
         /**
-         * Returns the identifier suffix of the previous comic
+         * Returns the identifier of the previous comic.
          */
-        virtual QString previousIdentifierSuffix() const = 0;
+        virtual QString previousIdentifier() const;
+
+        /**
+         * Set whether this request is for the current comic.
+         */
+        void setIsCurrent( bool value );
+
+        /**
+         * Returns whether this request is for the current comic.
+         */
+        bool isCurrent() const;
 
     Q_SIGNALS:
         /**
@@ -100,8 +119,15 @@ class ComicProvider : public QObject
          * @param provider The provider which emitted the signal.
          */
         void error( ComicProvider *provider );
+
+    protected:
+        QDate requestedDate() const;
+        int requestedNumber() const;
+        QString requestedString() const;
+
     private:
-        QDate m_date;
+        class Private;
+        Private* const d;
 };
 
 #endif

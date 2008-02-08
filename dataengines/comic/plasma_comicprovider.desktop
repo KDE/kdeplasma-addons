@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=PlasmaComic/Plugin
+Comment=Plugin for Plasma Comic Engine
+
+[PropertyDef::X-KDE-PlasmaComicProvider-SuffixType]
+Type=QString
+
+[PropertyDef::X-KDE-PlasmaComicProvider-Identifier]
+Type=QString

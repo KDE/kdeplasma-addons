@@ -32,15 +32,16 @@ class DilbertProvider : public ComicProvider
         /**
          * Creates a new dilbert provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        DilbertProvider( const QDate &date, QObject *parent = 0 );
+        DilbertProvider( QObject *parent, const QVariantList& );
 
         /**
          * Destroys the dilbert provider.
          */
         ~DilbertProvider();
+
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -55,11 +56,10 @@ class DilbertProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
-
-        virtual QString nextIdentifierSuffix() const;
-
-        virtual QString previousIdentifierSuffix() const;
 
     private:
       class Private;

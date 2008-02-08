@@ -21,7 +21,6 @@
 
 #include "comicprovider.h"
 
-#include <QtCore/QSettings>
 #include <QtCore/QHash>
 
 /**
@@ -38,12 +37,19 @@ class CachedProvider : public ComicProvider
          * @param identifier The identifier of the cached comic.
          * @param parent The parent object.
          */
-        CachedProvider( const QString &identifier, QObject *parent = 0 );
+        CachedProvider( QObject *parent, const QVariantList &args = QVariantList() );
 
         /**
          * Destroys the cached provider.
          */
         ~CachedProvider();
+
+        /**
+         * Returns the identifier type.
+         *
+         * Is always StringIdentifier here.
+         */
+        IdentifierType identifierType() const;
 
         /**
          * Returns the requested image.
@@ -59,14 +65,14 @@ class CachedProvider : public ComicProvider
         virtual QString identifier() const;
 
         /**
-         * Returns the identifier suffix of the next comic
+         * Returns the identifier suffix of the next comic.
          */
-        virtual QString nextIdentifierSuffix() const;
+        virtual QString nextIdentifier() const;
 
         /**
-         * Returns the identifier suffix of the previous comic
+         * Returns the identifier suffix of the previous comic.
          */
-        virtual QString previousIdentifierSuffix() const;
+        virtual QString previousIdentifier() const;
 
         /**
          * Returns whether a comic with the given @p identifier is cached.
@@ -83,14 +89,13 @@ class CachedProvider : public ComicProvider
          */
         static bool storeInCache( const QString &identifier, const QImage &comic, const Settings &info = Settings() );
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
 
     private Q_SLOTS:
         void triggerFinished();
-
-    private:
-        QString mIdentifier;
-        QSettings *mSettings;
 };
 
 #endif

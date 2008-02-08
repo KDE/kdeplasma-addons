@@ -37,10 +37,9 @@ class OsNewsProvider : public ComicProvider
         /**
          * Creates a new OsNews provider.
          *
-         * @param date The date for which the image shall be fetched.
          * @param parent The parent object.
          */
-        OsNewsProvider( const QDate &date, QObject *parent = 0 );
+        OsNewsProvider( QObject *parent, const QVariantList &args );
 
         /**
          * Destroys the OsNews provider.
@@ -48,15 +47,17 @@ class OsNewsProvider : public ComicProvider
         ~OsNewsProvider();
 
         //Reimplementations
+        IdentifierType identifierType() const;
+
         virtual QImage image() const;
 
         virtual QString identifier() const;
 
         virtual KUrl websiteUrl() const;
 
-        virtual QString nextIdentifierSuffix() const;
+        virtual QString nextIdentifier() const;
 
-        virtual QString previousIdentifierSuffix() const;
+        virtual QString previousIdentifier() const;
 
     private:
       class Private;
