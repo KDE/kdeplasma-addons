@@ -29,14 +29,13 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     m_notes_theme("widgets/notes", this),
     m_dialog(0),
     m_font(QFont()),
-    m_textColor(QColor()),
-    m_size(256,256)
-
+    m_textColor(QColor())
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setDrawStandardBackground(false);
+    setContentSize(256, 256);
 }
 
 void Notes::init()
@@ -49,14 +48,13 @@ void Notes::init()
 
     KConfigGroup cg = config();
 
-    int size = cg.readEntry("size", 256);
-    m_size = QSizeF(size, size);
-
     int pos = (int)(boundingRect().height() / 10);
     m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
     m_textArea->setPlainText(cg.readEntry("autoSave",i18n("Welcome to Notes Plasmoid! Type your notes here...")));
     m_textArea->setStyled(false);
+    //FIXME this has no effect right now. try setTextInteractionFlags
     m_textArea->setOpenExternalLinks(true);
+    //FIXME I do not think these two lines mean what you think they mean.
     m_textArea->setFont(cg.readEntry("font",m_font));
     m_textArea->setDefaultTextColor(cg.readEntry("textcolor",m_textColor));
     connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
@@ -69,11 +67,9 @@ void Notes::constraintsUpdated(Plasma::Constraints constraints)
     Q_UNUSED(constraints);
     setDrawStandardBackground(false);
     if (constraints & Plasma::SizeConstraint) {
+        //FIXME this sucks for nonsquare notes
         int pos = (int)(boundingRect().height() / 10);
         m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
-        KConfigGroup cg = config();
-        cg.writeEntry("size", (int)(boundingRect().height()));
-        emit configNeedsSaving();
     }
 }
 
@@ -96,17 +92,10 @@ void Notes::saveText(const QString& text)
 Notes::~Notes()
 {
     saveNote();
+    //FIXME is it really ok to save from here?
+    //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
+    //text back. it was useful when there were load/save issues but it's silly now.
     delete m_dialog;
-}
-
-void Notes::setContentSize(const QSizeF& size)
-{
-    m_size = size;
-}
-
-QSizeF Notes::contentSizeHint() const
-{
-    return m_size;
 }
 
 void Notes::paintInterface(QPainter *p,
@@ -137,11 +126,9 @@ void Notes::showConfigurationInterface()
         connect( ui.colorSelectButton, SIGNAL(clicked()), this, SLOT(showColorSelectDlg()));
     }
 
-    ui.sizeSpinBox->setValue((int)m_size.width());
-
     m_dialog->show();
 }
-
+//FIXME those two dialogs give the cancel button issues.
 void Notes::showFontSelectDlg()
 {
     KFontDialog::getFont(m_font);
@@ -157,14 +144,11 @@ void Notes::configAccepted()
     prepareGeometryChange();
 
     KConfigGroup cg = config();
-    cg.writeEntry("size", ui.sizeSpinBox->value());
+    //TODO only write if changed. but how do we know if that happened?
     cg.writeEntry("font", m_font);
     cg.writeEntry("textcolor", m_textColor);
     emit configNeedsSaving();
 
-    QSizeF size(ui.sizeSpinBox->value(),ui.sizeSpinBox->value());
-    setContentSize(size);
-    m_textArea->setTextWidth(ui.sizeSpinBox->value() - 50);
     m_textArea->setFont(m_font);
     m_textArea->setDefaultTextColor(m_textColor);
 }

@@ -39,8 +39,6 @@ class Notes : public Plasma::Applet
         Notes(QObject *parent, const QVariantList &args);
         ~Notes();
         void init();
-        void setContentSize(const QSizeF& size);
-        QSizeF contentSizeHint() const;
         void paintInterface(QPainter *painter,
                             const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);

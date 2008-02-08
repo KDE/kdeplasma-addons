@@ -9,51 +9,22 @@
     <height>138</height>
    </rect>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <widget class="QLabel" name="label_2" >
-     <property name="text" >
-      <string>Notes size:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" >
-    <widget class="QSpinBox" name="sizeSpinBox" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimum" >
-      <number>50</number>
-     </property>
-     <property name="maximum" >
-      <number>1024</number>
-     </property>
-     <property name="singleStep" >
-      <number>5</number>
-     </property>
-     <property name="value" >
-      <number>256</number>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2" >
+  <layout class="QVBoxLayout" >
+   <item>
     <widget class="KPushButton" name="fontSelectButton" >
      <property name="text" >
       <string>Select Font...</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2" >
+   <item>
     <widget class="KPushButton" name="colorSelectButton" >
      <property name="text" >
       <string>Select Text Color...</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2" >
+   <item>
     <spacer>
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
