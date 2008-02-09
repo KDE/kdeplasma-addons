@@ -76,10 +76,10 @@ void Frame::init()
     m_frame = cg.readEntry("frame", false);
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
-    //m_slideShow = cg.readEntry("slideshow", false);
+    m_slideShow = cg.readEntry("slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
-    //m_currentUrl = cg.readEntry("url", "Default");
+    m_currentUrl = cg.readEntry("url", "Default");
 
     // Frame & Shadow dimensions
     m_frameOutline = 8;
