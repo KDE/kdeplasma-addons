@@ -56,6 +56,7 @@ class Notes : public Plasma::Applet
 //        void saveNote();
 
     private:
+        void updateTextGeometry();
         Plasma::Svg m_notes_theme;
         Plasma::LineEdit *m_textArea;
 

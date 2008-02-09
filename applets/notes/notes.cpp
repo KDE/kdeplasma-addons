@@ -48,8 +48,7 @@ void Notes::init()
 
     KConfigGroup cg = config();
 
-    int pos = (int)(boundingRect().height() / 10);
-    m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
+    updateTextGeometry();
     m_textArea->setPlainText(cg.readEntry("autoSave",i18n("Welcome to Notes Plasmoid! Type your notes here...")));
     m_textArea->setStyled(false);
     //FIXME this has no effect right now. try setTextInteractionFlags
@@ -64,13 +63,20 @@ void Notes::init()
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
-    Q_UNUSED(constraints);
+    //XXX why does everything break so horribly if I remove this line?
     setDrawStandardBackground(false);
     if (constraints & Plasma::SizeConstraint) {
-        //FIXME this sucks for nonsquare notes
-        int pos = (int)(boundingRect().height() / 10);
-        m_textArea->setGeometry(QRectF(pos, pos, boundingRect().width() - 2*pos, boundingRect().height() - 2*pos));
+        updateTextGeometry();
     }
+}
+
+void Notes::updateTextGeometry()
+{
+    //note: we're using a custom bg so we have no 'border': using boundingrect here is ok
+    //FIXME there's no way to force the height on a qgraohicstextitem :(
+    const qreal xpad = boundingRect().width() / 10;
+    const qreal ypad = boundingRect().height() / 10;
+    m_textArea->setGeometry(QRectF(xpad, ypad, boundingRect().width() - 2 * xpad, boundingRect().height() - 2 * ypad));
 }
 
 void Notes::saveNote()
