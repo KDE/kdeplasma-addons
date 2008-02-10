@@ -26,6 +26,7 @@
 
 class ConfigDialog : public KDialog
 {
+    Q_OBJECT
     public:
         ConfigDialog( QWidget *parent );
         ~ConfigDialog();
@@ -49,7 +50,12 @@ class ConfigDialog : public KDialog
         Ui::config ui;
 	/// Image Preview
 	QLabel *m_preview;
-	float m_ratio;
+	/// Allow to preview each new chosen picture
+	void previewPicture(const QImage &pix);
+
+private slots:
+	void changePreview(const KUrl &);
+
 };
 
 #endif

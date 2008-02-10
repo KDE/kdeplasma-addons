@@ -21,7 +21,7 @@
 #include <KStandardDirs>
 
 #include "configdialog.h"
-
+#include "picture.h"
 
 ConfigDialog::ConfigDialog( QWidget *parent )
     : KDialog( parent )
@@ -43,18 +43,16 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     QString monitorPath = KStandardDirs::locate("data",  "kcontrol/pics/monitor.png");
     // Size of monitor image: 200x186
     // Geometry of "display" part of monitor image: (23,14)-[151x115]
-    qreal previewRatio = 128.0 / (101.0 * m_ratio);
-    QSize monitorSize(200, int(186 * previewRatio));
-    QRect previewRect(23, int(14 * previewRatio), 151, int(115 * previewRatio));
-    //m_preview_renderer.setSize(previewRect.size());
-    
-    ui.monitorLabel->setPixmap(QPixmap(monitorPath));//.scaled(monitorSize));
+    ui.monitorLabel->setPixmap(QPixmap(monitorPath));
     ui.monitorLabel->setWhatsThis(i18n(
         "This picture of a monitor contains a preview of "
-        "what the current settings will look like on your desktop."));
+        "the picture you currently have in your frame."));
     m_preview = new QLabel(ui.monitorLabel);
     m_preview->setScaledContents(true);
-    m_preview->setGeometry(previewRect);
+    m_preview->setGeometry(23,14,151,115);
+    m_preview->show();
+
+    connect(ui.picRequester, SIGNAL(urlSelected(const KUrl & )), this, SLOT(changePreview(const KUrl &)));
 }
 
 ConfigDialog::~ConfigDialog()
@@ -110,3 +108,16 @@ KUrl ConfigDialog::currentUrl() const
 {
     return ui.picRequester->url();
 }
+
+void ConfigDialog::previewPicture(const QImage &image)
+{
+    QImage scaledImage = image.scaled(QRect(23,14,151,115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    m_preview->setPixmap(QPixmap::fromImage(scaledImage));
+}
+
+void ConfigDialog::changePreview(const KUrl &path)
+{
+    Picture myPicture;
+    previewPicture(myPicture.setPicture(path));
+}
+

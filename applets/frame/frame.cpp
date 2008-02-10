@@ -140,7 +140,7 @@ void Frame::showConfigurationInterface()
     }
     connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
-   
+    
     m_configDialog->setRoundCorners( m_roundCorners );
     m_configDialog->setShadow(m_shadow);
     m_configDialog->setShowFrame(m_frame);
@@ -152,7 +152,7 @@ void Frame::showConfigurationInterface()
     m_configDialog->ui.slideShowDirList->addItems(m_slideShowPaths);
     m_configDialog->ui.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
     m_configDialog->ui.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
-
+    m_configDialog->previewPicture(m_picture);
     m_configDialog->show();
     m_configDialog->raise();
 }
