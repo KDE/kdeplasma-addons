@@ -31,7 +31,7 @@ class QDir;
 
 /**
  * @brief Picture choice
- * @author Anne-Marie Mahfouf <mahfouf@kde.org>
+ * @author Anne-Marie Mahfouf <annma@kde.org>
  *
  * This class handles the choice of the picture and 
  * makes it ready for the Frame class to paint this picture.

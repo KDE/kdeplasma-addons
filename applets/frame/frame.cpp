@@ -63,7 +63,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
 
 Frame::~Frame()
 {
-	delete m_mySlideShow;
+    delete m_mySlideShow;
 }
 
 void Frame::init()
@@ -102,9 +102,9 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 void Frame::updatePicture()
 {
-	m_picture = m_mySlideShow->getImage();
-	m_pixmapCache = QPixmap();
-	update();
+    m_picture = m_mySlideShow->getImage();
+    m_pixmapCache = QPixmap();
+    update();
 }
 
 void Frame::addDir()
