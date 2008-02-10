@@ -35,7 +35,6 @@
 #include <QSvgRenderer>
 
 #include <KDebug>
-#include <KDialog>
 #include <KLocale>
 #include <KColorButton>
 #include <KComboBox>
@@ -46,12 +45,14 @@
 #include <KDirSelectDialog>
 
 #include <math.h>
+
+#include "configdialog.h"
 #include "picture.h"
 #include "slideshow.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_dialog(0)
+      m_configDialog( 0 )
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -64,15 +65,15 @@ Frame::Frame(QObject *parent, const QVariantList &args)
 Frame::~Frame()
 {
     delete m_mySlideShow;
+    delete m_configDialog;
 }
 
 void Frame::init()
 {
-    m_dialog = 0;
     m_slideNumber = 0;
     // Get config values
     KConfigGroup cg = config();
-    m_frameColor = cg.readEntry("frameColor", QColor(70, 90, 130));
+    m_frameColor = cg.readEntry("frameColor", QColor(70, 90, 130)); //theme?
     m_frame = cg.readEntry("frame", false);
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
@@ -113,76 +114,75 @@ void Frame::addDir()
     if (dialog.exec()) {
         QString path = dialog.url().path();
         if (!m_slideShowPaths.contains(path)) {
-            ui.slideShowDirList->addItem(path);
+            m_configDialog->ui.slideShowDirList->addItem(path);
         }
-        ui.removeDirButton->setEnabled(true);
+        m_configDialog->ui.removeDirButton->setEnabled(true);
     }
 }
 
 void Frame::removeDir()
 {
-    int row = ui.slideShowDirList->currentRow();
+    int row = m_configDialog->ui.slideShowDirList->currentRow();
     if (row != -1) {
-        ui.slideShowDirList->takeItem(row);
-        if (ui.slideShowDirList->count() == 0) {
-            ui.removeDirButton->setEnabled(false);
+        m_configDialog->ui.slideShowDirList->takeItem(row);
+        if (m_configDialog->ui.slideShowDirList->count() == 0) {
+            m_configDialog->ui.removeDirButton->setEnabled(false);
         }
     }
 }
 
 void Frame::showConfigurationInterface()
 {
-    if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption(i18nc("@title:window", "Configure Frame"));
-        QWidget *widget = new QWidget();
-        ui.setupUi(widget);
-        m_dialog->setMainWidget(widget);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect(m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-        connect(m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-        ui.addDirButton->setIcon(KIcon("list-add"));
-        connect(ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
-        ui.removeDirButton->setIcon(KIcon("list-remove"));
-        connect(ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
-        ui.slideShowDelay->setMinimumTime(QTime(0, 0, 1)); // minimum to 1 seconds
+   if ( !m_configDialog ) {
+        m_configDialog = new ConfigDialog( 0 );
+        connect( m_configDialog, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
+        connect( m_configDialog, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
     }
-    ui.frameCheckBox->setChecked(m_frame);
-    ui.shadowCheckBox->setChecked(m_shadow);
-    ui.roundCheckBox->setChecked(m_roundCorners);
-    ui.pictureComboBox->setCurrentIndex(m_slideShow);
-    ui.picRequester->setUrl(m_currentUrl);
-    ui.slideShowDirList->clear();
-    ui.slideShowDirList->addItems(m_slideShowPaths);
-    ui.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
-    ui.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
-    m_dialog->show();
+    connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
+    connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
+   
+    m_configDialog->setRoundCorners( m_roundCorners );
+    m_configDialog->setShadow(m_shadow);
+    m_configDialog->setShowFrame(m_frame);
+    m_configDialog->setFrameColor(m_frameColor);
+
+    m_configDialog->ui.pictureComboBox->setCurrentIndex(m_slideShow);//to change when adding PoTD
+    m_configDialog->setCurrentUrl(m_currentUrl);
+    m_configDialog->ui.slideShowDirList->clear();
+    m_configDialog->ui.slideShowDirList->addItems(m_slideShowPaths);
+    m_configDialog->ui.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
+    m_configDialog->ui.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
+
+    m_configDialog->show();
+    m_configDialog->raise();
 }
 
 void Frame::configAccepted()
 {
     prepareGeometryChange();
     KConfigGroup cg = config();
-    m_frameColor = ui.changeFrameColor->color();
-    cg.writeEntry("frameColor", m_frameColor);
-    m_frame = ui.frameCheckBox->isChecked();
-    cg.writeEntry("frame", m_frame);
-    m_shadow = ui.shadowCheckBox->isChecked();
-    cg.writeEntry("shadow", m_shadow);
-    m_roundCorners = ui.roundCheckBox->isChecked();
+    // Appearance
+    m_roundCorners = m_configDialog->roundCorners();
     cg.writeEntry("roundCorners", m_roundCorners);
-    m_currentUrl = ui.picRequester->url();
+    m_shadow = m_configDialog->shadow();
+    cg.writeEntry("shadow", m_shadow);
+    m_frame = m_configDialog->showFrame();
+    cg.writeEntry("frame", m_frame);
+    m_frameColor = m_configDialog->frameColor();
+    cg.writeEntry("frameColor", m_frameColor);
+
+    m_currentUrl = m_configDialog->currentUrl();
     cg.writeEntry("url", m_currentUrl);
-    m_slideShow = ui.pictureComboBox->currentIndex();
+    m_slideShow = m_configDialog->ui.pictureComboBox->currentIndex();
     cg.writeEntry("slideshow", m_slideShow);
     m_slideShowPaths.clear();
     QStringList dirs;
-    for (int i = 0; i < ui.slideShowDirList->count(); i++) {
-        m_slideShowPaths << ui.slideShowDirList->item(i)->text();
+    for (int i = 0; i < m_configDialog->ui.slideShowDirList->count(); i++) {
+        m_slideShowPaths << m_configDialog->ui.slideShowDirList->item(i)->text();
     }
     cg.writeEntry("slideshow paths", m_slideShowPaths);
 
-    QTime timerTime = ui.slideShowDelay->time();
+    QTime timerTime = m_configDialog->ui.slideShowDelay->time();
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
     m_slideShowTimer->setInterval(m_slideshowTime * 1000);
     cg.writeEntry("slideshow time", m_slideshowTime);

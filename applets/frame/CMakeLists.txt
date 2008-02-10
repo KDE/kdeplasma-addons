@@ -3,7 +3,8 @@ project(plasma-frame)
 set(frame_SRCS
     frame.cpp
     slideshow.cpp
-    picture.cpp)
+    picture.cpp
+    configdialog.cpp)
 
 
 kde4_add_ui_files(frame_SRCS config.ui )

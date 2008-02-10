@@ -34,9 +34,7 @@
 #include <plasma/dataengine.h>
 #include <plasma/phase.h>
 
-#include "ui_config.h"
-
-class KDialog;
+class ConfigDialog;
 class QGraphicsSceneDragDropEvent;
 class SlideShow;
 
@@ -77,7 +75,8 @@ class Frame : public Plasma::Applet
 
         /// The current color of the frame
         QColor m_frameColor;
-        KDialog *m_dialog; // should we move this into another class?
+	/// Configuration dialog
+        ConfigDialog *m_configDialog; 
         /// true if the user wants a frame. If false, there's only the black border around the picture
         bool m_frame;
         /// If true, the frame will have rounded corners
@@ -100,8 +99,6 @@ class Frame : public Plasma::Applet
         /// Frame & shadow outline thickness
         int m_frameOutline;
         int m_swOutline;
-        /// Designer Config file
-        Ui::config ui;
         /// Slideshow
         bool m_slideShow;
         SlideShow* m_mySlideShow;
