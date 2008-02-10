@@ -4,6 +4,7 @@ class AbstractWidgetHandler:
     
     def __init__(self):
         self.__node = 0
+        self.__root = "root";
         
     def name(self):
         return "AbstractWidget"
@@ -21,7 +22,10 @@ class AbstractWidgetHandler:
         return self.name() + " * " + self.node().getAttribute("name") + ";"
     
     def initialization(self):
-        return self.node().getAttribute("name") + " = new " + self.name() + "();"
+        return WidgetHandlerManager.root() + "->addItem(" + self._construction() + ");"
+    
+    def _construction(self):
+        return self.node().getAttribute("name") + " = new " + self.name() + "()"
     
     def setup(self):
         setup = ""

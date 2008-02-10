@@ -19,7 +19,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 
-import sys
+import sys, os
 
 import xml.dom.minidom
 from xml.dom.minidom import Node
@@ -35,6 +35,7 @@ from Modules import debug
 stmtDefine         = ""
 stmtDeclaration    = ""
 stmtInitialization = ""
+stmtIncludes       = set()
 stmtSetup          = ""
 
 def processDefines(node):
@@ -104,13 +105,14 @@ def processWidget(node):
         
 # Main program: ##################################################################################
 
-debug.message("Program ", sys.argv[0])
-debug.message("is parsing ", sys.argv[1])
-
 doc = xml.dom.minidom.parse(sys.argv[1])
 
 if not doc.documentElement.localName == "pui":
     exit
+
+rootObjectType = ""
+className      = ""
+
 
 for node in doc.documentElement.childNodes:
     if not node.nodeType == xml.dom.Node.ELEMENT_NODE:
@@ -118,10 +120,22 @@ for node in doc.documentElement.childNodes:
     elif node.localName == "defines":
         processDefines(node)
     elif node.localName == "ui":
+        rootObjectType = node.getAttribute("rootObjectType")
+        className      = node.getAttribute("className")
+        
         for child in node.childNodes:
             processElement(child)
 
-print "/* Defines */\n", stmtDefine
-print "/* Declarations */\n", stmtDeclaration
-print "/* Initialization */\n", stmtInitialization
-print "/* Setup */\n", stmtSetup
+template = open("template/cpp.h") 
+template = template.readlines()
+template = "".join(template)
+
+print template \
+    .replace("${HEADER_ID}",          "PUI_" + className.upper() + "_H") \
+    .replace("${CLASS_NAME}",         className) \
+    .replace("${PARENT_OBJECT_TYPE}", rootObjectType) \
+    .replace("${INCLUDES}",           "\n".join(stmtIncludes)) \
+    .replace("${DEFINES}",            stmtDefine) \
+    .replace("${DECLARATION}",        stmtDeclaration) \
+    .replace("${INITIALIZATION}",     stmtInitialization) \
+    .replace("${SETUP}",              stmtSetup)

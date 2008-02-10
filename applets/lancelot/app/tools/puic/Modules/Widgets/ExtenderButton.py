@@ -15,8 +15,8 @@ class ExtenderButtonHanlder(AbstractWidget.AbstractWidgetHandler):
         setup = AbstractWidget.AbstractWidgetHandler.setup(self)
         return setup
     
-    def initialization(self):
-        create = '${NAME} = new Lancelot::ExtenderButton("${NAME}", ${ICON}, ${TITLE}, ${DESCRIPTION});'
+    def _construction(self):
+        create = '${NAME} = new Lancelot::ExtenderButton("${NAME}", ${ICON}, ${TITLE}, ${DESCRIPTION})'
         create = create.replace('${NAME}', self.node().getAttribute('name'));
         
         if self.node().hasAttribute('ExtenderButton:icon'):

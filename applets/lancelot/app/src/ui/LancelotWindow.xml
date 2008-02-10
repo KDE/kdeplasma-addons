@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pui
-    xmlns:item="http://nonexistant"
-    xmlns:code="http://nonexistant"
-    xmlns:NodeLayout="http://nonexistant"
-    xmlns:FlipLayout="http://nonexistant"
-    xmlns:BorderLayout="http://nonexistant"
-    xmlns:ExtenderButton="http://nonexistant"
+    xmlns:item            = "http://nonexistant"
+    xmlns:code            = "http://nonexistant"
+    xmlns:NodeLayout      = "http://nonexistant"
+    xmlns:FlipLayout      = "http://nonexistant"
+    xmlns:BorderLayout    = "http://nonexistant"
+    xmlns:ExtenderButton  = "http://nonexistant"
 >
     <defines>
         <!-- These values will be converted to #define statements -->
@@ -13,7 +13,10 @@
         <define name="SEARCH_HEIGHT" value="30" />
         <define name="CATEGORIES_WIDTH" value="128" />
     </defines>
-    <ui>
+    <ui
+        rootObjectType="Plasma::Corona"
+        className="LancelotWindow"
+    >
         <item:layout
             type="Plasma::FlipLayout" name="layoutMain"
             FlipLayout:realLayout="Plasma::BorderLayout"

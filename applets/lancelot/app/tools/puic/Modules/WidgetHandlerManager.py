@@ -1,5 +1,6 @@
 
 __handlers = {};
+__root = "root"
 
 def handlers():
     return __handlers
@@ -11,3 +12,9 @@ def handler(widgetName):
 
 def addHandler(handler):
     __handlers[handler.name()] = handler
+
+def setRoot(root):
+    __root = root
+    
+def root():
+    return __root
