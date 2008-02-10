@@ -107,8 +107,8 @@ public:
     WidgetGroup * group(const QString & name);
     WidgetGroup * defaultGroup();
 
-    bool isApplication();
-    void setIsApplication(bool value);
+    ///bool isApplication();
+    ///void setIsApplication(bool value);
 
     static Instance * activeInstance();
     static void setActiveInstance(Instance * instance);

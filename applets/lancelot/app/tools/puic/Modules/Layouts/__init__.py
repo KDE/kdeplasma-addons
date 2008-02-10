@@ -1,1 +1,1 @@
-__all__ = ["NodeLayout", "FlipLayout"]
+__all__ = ["NodeLayout", "FlipLayout", "BorderLayout"]

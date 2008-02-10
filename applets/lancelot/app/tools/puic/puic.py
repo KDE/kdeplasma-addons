@@ -25,15 +25,17 @@ import xml.dom.minidom
 from xml.dom.minidom import Node
 
 from Modules.Layouts import *
+from Modules.Widgets import *
+
 from Modules import LayoutHandlerManager
+from Modules import WidgetHandlerManager
+
+from Modules import debug
 
 stmtDefine         = ""
 stmtDeclaration    = ""
 stmtInitialization = ""
 stmtSetup          = ""
-
-def debug(msg, var):
-    print >> sys.stdout, "------------------------ : ",  msg, " ", var
 
 def processDefines(node):
     global stmtDefine
@@ -42,28 +44,28 @@ def processDefines(node):
         if not defineNode.nodeType == xml.dom.Node.ELEMENT_NODE:
             continue
         if defineNode.localName == "define":
-            stmtDefine += "\n#define " + defineNode.getAttribute("name") + " " + defineNode.getAttribute("value")
+            stmtDefine += "#define " + defineNode.getAttribute("name") + " " + defineNode.getAttribute("value") + "\n"
 
 def processElement(node):
+    global stmtDeclaration
+    global stmtInitialization
     global stmtSetup
-    debug(">> processElement M1", node.localName)
 
     if node.nodeType == xml.dom.Node.COMMENT_NODE:
-        stmtSetup += "\n/*" + node.nodeValue + "*/"
+        stmtSetup += "/*" + node.nodeValue + "*/\n"
         return 0
     
     if not node.nodeType == xml.dom.Node.ELEMENT_NODE:
         return 0
     
-    debug(">> processElement M2", node.localName)
     if node.prefix == "code" or node.localName == "code":
         for child in node.childNodes:
             if node.localName == "declaration":
-                stmtDeclaration += "\n" + child.nodeValue
+                stmtDeclaration += child.nodeValue + "\n"
             elif node.localName == "initialization":
-                stmtInitialization += "\n" + child.nodeValue
+                stmtInitialization += child.nodeValue + "\n"
             else:
-                stmtSetup += "\n" + child.nodeValue
+                stmtSetup += child.nodeValue + "\n"
     elif node.prefix == "item":
         if node.localName == "layout":
             processLayout(node)
@@ -75,25 +77,35 @@ def processLayout(node):
     global stmtDeclaration
     global stmtInitialization
     global stmtSetup
-    debug(">> processLayout", node.getAttribute("type"))
-
-    lmgr = LayoutHandlerManager.handler(node.getAttribute("type")) # make this check if layout is supported
     
-    lmgr.setNode(node)
+    handler = LayoutHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if layout is supported
     
-    stmtDeclaration    += "\n" + lmgr.declaration()
-    stmtInitialization += "\n" + lmgr.initialization()
-    stmtSetup          += "\n" + lmgr.setup()
+    handler.setNode(node)
     
-    debug("", stmtSetup)
+    stmtDeclaration    += handler.declaration() + "\n"
+    stmtInitialization += handler.initialization() + "\n"
+    stmtSetup          += handler.setup() + "\n"
 
     for child in node.childNodes:
         processElement(child)
         
+def processWidget(node):
+    global stmtDeclaration
+    global stmtInitialization
+    global stmtSetup
+    
+    handler = WidgetHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if widget is supported
+    
+    handler.setNode(node)
+    
+    stmtDeclaration    += handler.declaration() + "\n"
+    stmtInitialization += handler.initialization() + "\n"
+    stmtSetup          += handler.setup() + "\n"
+        
 # Main program: ##################################################################################
 
-debug("Program ", sys.argv[0])
-debug("is parsing ", sys.argv[1])
+debug.message("Program ", sys.argv[0])
+debug.message("is parsing ", sys.argv[1])
 
 doc = xml.dom.minidom.parse(sys.argv[1])
 
@@ -109,7 +121,7 @@ for node in doc.documentElement.childNodes:
         for child in node.childNodes:
             processElement(child)
 
-print "/* Defines */", stmtDefine
-print "/* Declarations */", stmtDeclaration
-print "/* Initialization */", stmtInitialization
-print "/* Setup */", stmtSetup
+print "/* Defines */\n", stmtDefine
+print "/* Declarations */\n", stmtDeclaration
+print "/* Initialization */\n", stmtInitialization
+print "/* Setup */\n", stmtSetup

@@ -7,14 +7,12 @@ class NodeLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def name(self):
         return "Plasma::NodeLayout"
     
-    def declaration(self):
-        return "Plasma::NodeLayout * " + self.node().getAttribute("name") + ";"
-    
-    def initialization(self):
-        return self.node().getAttribute("name") + " = new Plasma::NodeLayout();"
-    
+    def include(self):
+        return "#include <plasma/layouts/nodelayout.h>"
+
     def setup(self):
-        setup = ""
+        setup = AbstractLayout.AbstractLayoutHandler.setup(self)
+        
         for child in self.node().childNodes:
             if not child.nodeType == xml.dom.Node.ELEMENT_NODE or not child.prefix == "item":
                 continue
@@ -25,5 +23,4 @@ class NodeLayoutHandler(AbstractLayout.AbstractLayoutHandler):
                   + ");\n"
         return setup
 
-lh = NodeLayoutHandler()
-LayoutHandlerManager.addHandler(lh)
+LayoutHandlerManager.addHandler(NodeLayoutHandler())

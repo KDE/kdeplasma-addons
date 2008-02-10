@@ -85,12 +85,11 @@ protected:
             : QGraphicsView(scene, parent), m_background(NULL) {}
         void drawBackground (QPainter * painter, const QRectF & rect)
         {
-            Q_UNUSED(rect); // Q_UNUSED(painter);
+            Q_UNUSED(rect);
             painter->setCompositionMode(QPainter::CompositionMode_Clear);
             painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
             painter->setCompositionMode(QPainter::CompositionMode_Source);
             if (m_background) {
-                //m_background->resize(QSizeF(mainWidth + sectionsWidth, 500));
                 m_background->resize(size());
                 m_background->paint(painter, 0, 0, "background");
             }

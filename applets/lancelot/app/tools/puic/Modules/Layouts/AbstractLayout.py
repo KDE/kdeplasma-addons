@@ -12,14 +12,22 @@ class AbstractLayoutHandler:
         self.__node = node
         
     def node(self):
-        return self.__node            
+        return self.__node
     
-    def declaration(self):
+    def include(self):
         return "/* " + self.name() + " declaration - not implemented */"
     
+    def declaration(self):
+        return self.name() + " * " + self.node().getAttribute("name") + ";"
+    
     def initialization(self):
-        return "/* " + self.name() + " initialization - not implemented */"
+        return self.node().getAttribute("name") + " = new " + self.name() + "();"
     
     def setup(self):
-        return "/* " + self.name() + " setup - not implemented */"
+        setup = ""
 
+        if self.node().hasAttribute("margin"):
+            setup += self.node().getAttribute("name") + "->setMargin(" + self.node().getAttribute("margin") + ");\n";
+        if self.node().hasAttribute("spacing"):
+            setup += self.node().getAttribute("name") + "->setSpacing(" + self.node().getAttribute("spacing") + ");\n";
+        return setup
