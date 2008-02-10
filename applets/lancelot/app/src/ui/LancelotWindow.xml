@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pui
+    xmlns:item="http://nonexistant"
+    xmlns:code="http://nonexistant"
+    xmlns:NodeLayout="http://nonexistant"
+    xmlns:FlipLayout="http://nonexistant"
+    xmlns:BorderLayout="http://nonexistant"
+    xmlns:ExtenderButton="http://nonexistant"
+>
+    <defines>
+        <!-- These values will be converted to #define statements -->
+        <define name="SYSTEM_HEIGHT" value="40" />
+        <define name="SEARCH_HEIGHT" value="30" />
+        <define name="CATEGORIES_WIDTH" value="128" />
+    </defines>
+    <ui>
+        <item:layout
+            type="Plasma::FlipLayout" name="layoutMain"
+            FlipLayout:realLayout="Plasma::BorderLayout"
+            margin="0" spacing="0"
+            BorderLayout:leftSize="CATEGORIES_WIDTH"
+        >
+            <!-- Categories container -->
+            <item:layout
+                type="Plasma::FlipLayout" name="layoutMainLeft"
+                FlipLayout:realLayout="Plasma::BorderLayout"
+                margin="0" spacing="0"
+                BorderLayout:position="Left"
+                BorderLayout:topSize="SEARCH_HEIGHT"
+                BorderLayout:bottomSize="SYSTEM_HEIGHT"
+            >
+                <item:layout
+                    type="Plasma::FlipLayout" name="layoutCategories"
+                    FlipLayout:realLayout="Plasma::NodeLayout"
+                    margin="0" spacing="0"
+                >
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSectionsApplications"
+                        NodeLayout:topLeft="0, 0, 0, 0"
+                        NodeLayout:bottomRight="1, 0, .25, 0"
+                        ExtenderButton:title="Applications"
+                        ExtenderButton:icon="applications-other"
+                    />
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSectionsComputer"
+                        NodeLayout:topLeft="0, 0, .25, 0"
+                        NodeLayout:bottomRight="1, 0, .5, 0"
+                        ExtenderButton:title="Computer"
+                        ExtenderButton:icon="computer-laptop"
+                    />
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSectionsContacts"
+                        NodeLayout:topLeft="0, 0, .5, 0"
+                        NodeLayout:bottomRight="1, 0, .75, 0"
+                        ExtenderButton:title="Contacts"
+                        ExtenderButton:icon="kontact"
+                    />
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSectionsDocuments"
+                        NodeLayout:topLeft="0, 0, .75, 0"
+                        NodeLayout:bottomRight="1, 0, 1, 0"
+                        ExtenderButton:title="Documents"
+                        ExtenderButton:icon="applications-office"
+                    />
+                </item:layout>
+            </item:layout>
+            <item:layout
+                type="Plasma::FlipLayout" name="layoutMainCenter"
+                FlipLayout:realLayout="Plasma::BorderLayout"
+                margin="0" spacing="0"
+                BorderLayout:position="Center"
+                BorderLayout:topSize="SEARCH_HEIGHT"
+                BorderLayout:bottomSize="SYSTEM_HEIGHT"
+            >
+                <item:layout
+                    type="Plasma::NodeLayout" name="layoutSearch"
+                    margin="0" spacing="0"
+                    BorderLayout:position="Top"
+                >
+                <!--
+                    Dirty hack to get an edit box before Qt 4.4 :: begin
+                    <code:declaration>
+                        KLineEdit * editSearch;
+                    </code:declaration>
+                    <code:initialization>
+                        editSearch = new KLineEdit(object);
+                    </code:initialization>
+                    <code:setup>
+                        editSearch->setClearButtonShown(true);
+                        editSearch->setFrame(false);
+                    </code:setup>
+                    Dirty hack to get an edit box before Qt 4.4 :: end
+                    <item:widget
+                        name="editSearchPositioner"
+                        ></item:widget>
+                
+                        editSearch = new KLineEdit(object);
+                    editSearchPositioner = new Lancelot::WidgetPositioner(editSearch, m_view, panelSearch);
+            
+                    labelSearch = new Plasma::Label(panelSearch);
+                            
+                                    layoutSearch->addItem(editSearchPositioner,
+                        Plasma::NodeLayout::NodeCoordinate(0.5, 0.5, 0, 0),
+                        Plasma::NodeLayout::NodeCoordinate(1.0, 0.5, -10, INFINITY)
+                    );
+                    layoutSearch->addItem(labelSearch,
+                        Plasma::NodeLayout::NodeCoordinate(0.5, 0.5, 0, 0),
+                        1.1, 0.5
+                    );
+                -->
+                </item:layout>
+                <item:layout
+                    type="Plasma::NodeLayout" name="layoutCenter"
+                    margin="0" spacing="0"
+                    BorderLayout:position="Center"
+                >
+                </item:layout>
+                <item:layout
+                    type="Plasma::NodeLayout" name="layoutSystem"
+                    margin="0" spacing="0"
+                    BorderLayout:position="Bottom"
+                >
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSystemLockScreen"
+                        NodeLayout:topLeft="0, 0, 0, 0"
+                        NodeLayout:bottomRight="1.0 / 3.0, 0, 1, 0"
+                        ExtenderButton:title="Lock Session"
+                        ExtenderButton:icon="system-lock-screen"
+                    />
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSystemLogout"
+                        NodeLayout:topLeft="1.0 / 3.0, 0, 0, 0"
+                        NodeLayout:bottomRight="2.0 / 3.0, 0, 1, 0"
+                        ExtenderButton:title="Log Out..."
+                        ExtenderButton:icon="system-log-out"
+                    />
+                    <item:widget
+                        type="Lancelot::ExtenderButton" name="buttonSystemSwitchUser"
+                        NodeLayout:topLeft="2.0 / 3.0, 0, 0, 0"
+                        NodeLayout:bottomRight="1, 0, 1, 0"
+                        ExtenderButton:title="Switch User"
+                        ExtenderButton:icon="switchuser"
+                    />
+                </item:layout>
+            </item:layout>
+            
+        </item:layout>
+    </ui>
+</pui>
