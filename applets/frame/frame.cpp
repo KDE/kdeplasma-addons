@@ -195,14 +195,14 @@ void Frame::configAccepted()
 
 void Frame::initSlideShow()
 {
-	if (m_slideShow) {
-		m_mySlideShow->setDirs(m_slideShowPaths);
-		m_slideShowTimer->start();
-	} else {
-		m_mySlideShow->setImage(m_currentUrl.path());
-		m_slideShowTimer->stop();
-	}
-	updatePicture();
+    if (m_slideShow) {
+	    m_mySlideShow->setDirs(m_slideShowPaths);
+	    m_slideShowTimer->start();
+    } else {
+	    m_mySlideShow->setImage(m_currentUrl.path());
+	    m_slideShowTimer->stop();
+    }
+    updatePicture();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)

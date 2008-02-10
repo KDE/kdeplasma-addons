@@ -54,33 +54,89 @@
          <number>0</number>
         </property>
         <widget class="QWidget" name="page" >
-         <layout class="QVBoxLayout" >
-          <item>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="picLabel" >
+              <property name="text" >
+               <string>Picture:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KUrlComboRequester" name="picRequester" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="acceptDrops" >
+               <bool>true</bool>
+              </property>
+              <property name="filter" >
+               <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" >
            <layout class="QVBoxLayout" >
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>421</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item>
              <layout class="QHBoxLayout" >
               <item>
-               <widget class="QLabel" name="picLabel" >
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType" >
+                 <enum>QSizePolicy::MinimumExpanding</enum>
+                </property>
+                <property name="sizeHint" >
+                 <size>
+                  <width>40</width>
+                  <height>91</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="monitorLabel" >
                 <property name="text" >
-                 <string>Picture:</string>
+                 <string>TextLabel</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="KUrlComboRequester" name="picRequester" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="acceptDrops" >
-                 <bool>true</bool>
+                <property name="sizeType" >
+                 <enum>QSizePolicy::MinimumExpanding</enum>
                 </property>
-                <property name="filter" >
-                 <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
+                <property name="sizeHint" >
+                 <size>
+                  <width>40</width>
+                  <height>101</height>
+                 </size>
                 </property>
-               </widget>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -91,8 +147,8 @@
               </property>
               <property name="sizeHint" >
                <size>
-                <width>20</width>
-                <height>40</height>
+                <width>438</width>
+                <height>16</height>
                </size>
               </property>
              </spacer>

@@ -17,7 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <klocale.h>
+#include <KLocale>
+#include <KStandardDirs>
 
 #include "configdialog.h"
 
@@ -38,6 +39,22 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     ui.addDirButton->setIcon(KIcon("list-add"));
     ui.removeDirButton->setIcon(KIcon("list-remove"));
     ui.slideShowDelay->setMinimumTime(QTime(0, 0, 1)); // minimum to 1 second
+
+    QString monitorPath = KStandardDirs::locate("data",  "kcontrol/pics/monitor.png");
+    // Size of monitor image: 200x186
+    // Geometry of "display" part of monitor image: (23,14)-[151x115]
+    qreal previewRatio = 128.0 / (101.0 * m_ratio);
+    QSize monitorSize(200, int(186 * previewRatio));
+    QRect previewRect(23, int(14 * previewRatio), 151, int(115 * previewRatio));
+    //m_preview_renderer.setSize(previewRect.size());
+    
+    ui.monitorLabel->setPixmap(QPixmap(monitorPath));//.scaled(monitorSize));
+    ui.monitorLabel->setWhatsThis(i18n(
+        "This picture of a monitor contains a preview of "
+        "what the current settings will look like on your desktop."));
+    m_preview = new QLabel(ui.monitorLabel);
+    m_preview->setScaledContents(true);
+    m_preview->setGeometry(previewRect);
 }
 
 ConfigDialog::~ConfigDialog()

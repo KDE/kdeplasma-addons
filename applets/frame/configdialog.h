@@ -47,6 +47,9 @@ class ConfigDialog : public KDialog
 	KUrl currentUrl() const;
         /// Designer Config file
         Ui::config ui;
+	/// Image Preview
+	QLabel *m_preview;
+	float m_ratio;
 };
 
 #endif
