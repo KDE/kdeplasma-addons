@@ -76,7 +76,6 @@ void Twitter::init()
         setFailedToLaunch(true, "Failed to load twitter DataEngine");
         return;
     }
-    m_engine->connectSource("LatestImage", this);
 
     //ui setup
     m_layout = new Plasma::VBoxLayout( this );
@@ -116,6 +115,11 @@ void Twitter::init()
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) ); //FIXME no such slot
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
+
+    //hook up some sources
+    m_engine->connectSource("LatestImage", this);
+    m_engine->connectSource("Error:UserImages", this);
+    m_engine->connectSource("Error", this);
 
     //set things in motion
     if(! m_username.isEmpty()) {
@@ -215,8 +219,13 @@ void Twitter::writeConfigPassword()
 void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << source;
-    if (data.isEmpty()) { //this is a fake update from a new source
-        return;
+    if (data.isEmpty()) {
+        if (source.startsWith("Error")) {
+            m_flash->kill(); //FIXME only clear it if it was showing an error msg
+        } else {
+            //this is a fake update from a new source
+            return;
+        }
     }
 
     if (source == m_curTimeline) {
@@ -259,6 +268,9 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
             //TODO it would be nice to check whether the updated image is actually in use
             showTweets();
         }
+    } else if (source.startsWith("Error")) {
+        QString desc = data["description"].toString();
+        m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
     }
     updateGeometry();
 }
@@ -493,6 +505,7 @@ void Twitter::downloadHistory()
     if (m_username.isEmpty() || m_password.isEmpty()) {
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
+            m_engine->disconnectSource("Error:" + m_curTimeline, this);
         }
         return;
     }
@@ -510,11 +523,13 @@ void Twitter::downloadHistory()
         //ditch the old one, if needed
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
+            m_engine->disconnectSource("Error:" + m_curTimeline, this);
         }
         m_curTimeline = query;
     }
     kDebug() << "Connecting to source " << query;
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
+    m_engine->connectSource("Error:" + query, this);
 }
 
 QString Twitter::timeDescription( const QDateTime &dt )
