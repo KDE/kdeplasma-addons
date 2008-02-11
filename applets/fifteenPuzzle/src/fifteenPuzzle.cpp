@@ -28,7 +28,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   setRemainSquare(true);
   board = new Fifteen(this);
   board->setRect(0, 0, 192, 192); // 48 * 4 = 192
-  setSize(board->boundingRect().size());
+  resize(board->boundingRect().size());
 }
 
 void FifteenPuzzle::init()
