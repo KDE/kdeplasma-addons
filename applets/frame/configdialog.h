@@ -54,7 +54,10 @@ class ConfigDialog : public KDialog
 	void previewPicture(const QImage &pix);
 
 private slots:
+	/// Update preview when URL changes via the file dialog
 	void changePreview(const KUrl &);
+	/// Update preview when URL changes via the combobox
+	void changePreview(const QString &);
 
 };
 

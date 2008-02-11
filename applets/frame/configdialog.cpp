@@ -17,6 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include <KComboBox>
 #include <KLocale>
 #include <KStandardDirs>
 
@@ -53,6 +54,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     m_preview->show();
 
     connect(ui.picRequester, SIGNAL(urlSelected(const KUrl & )), this, SLOT(changePreview(const KUrl &)));
+    connect(ui.picRequester->comboBox(), SIGNAL(activated(const QString & )), this, SLOT(changePreview(const QString &)));
 }
 
 ConfigDialog::~ConfigDialog()
@@ -121,3 +123,8 @@ void ConfigDialog::changePreview(const KUrl &path)
     previewPicture(myPicture.setPicture(path));
 }
 
+void ConfigDialog::changePreview(const QString &path)
+{
+    Picture myPicture;
+    previewPicture(myPicture.setPicture(KUrl(path)));
+}
