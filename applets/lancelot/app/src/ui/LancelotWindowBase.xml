@@ -15,7 +15,7 @@
     </defines>
     <ui
         rootObjectType="Plasma::Corona"
-        className="LancelotWindow"
+        className="LancelotWindowBase"
     >
         <item:layout
             type="Plasma::FlipLayout" name="layoutMain"
