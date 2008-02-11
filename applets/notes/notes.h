@@ -50,10 +50,6 @@ class Notes : public Plasma::Applet
         void showFontSelectDlg();
         void showColorSelectDlg();
         void saveNote();
-        void saveText(const QString& text);
-
-//    protected:
-//        void saveNote();
 
     private:
         void updateTextGeometry();

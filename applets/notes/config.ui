@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>229</width>
-    <height>138</height>
+    <width>167</width>
+    <height>72</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
@@ -23,19 +23,6 @@
       <string>Select Text Color...</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" >
-      <size>
-       <width>221</width>
-       <height>64</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

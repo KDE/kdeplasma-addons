@@ -56,8 +56,6 @@ void Notes::init()
     m_textColor = cg.readEntry("textcolor", QColor());
     m_textArea->setDefaultTextColor(m_textColor);
     connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
-    connect(m_textArea, SIGNAL(textChanged(const QString &)), this, SLOT(saveText(const QString &)));
-
 }
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
@@ -72,7 +70,7 @@ void Notes::constraintsUpdated(Plasma::Constraints constraints)
 void Notes::updateTextGeometry()
 {
     //note: we're using a custom bg so we have no 'border': using boundingrect here is ok
-    //FIXME there's no way to force the height on a qgraohicstextitem :(
+    //FIXME there's no way to force the height on a qgraphicstextitem :(
     const qreal xpad = boundingRect().width() / 10;
     const qreal ypad = boundingRect().height() / 10;
     m_textArea->setGeometry(QRectF(xpad, ypad, boundingRect().width() - 2 * xpad, boundingRect().height() - 2 * ypad));
@@ -80,15 +78,6 @@ void Notes::updateTextGeometry()
 
 void Notes::saveNote()
 {
-    KConfigGroup cg = config();
-    cg.writeEntry("autoSave",m_textArea->toPlainText());
-    emit configNeedsSaving();
-}
-
-void Notes::saveText(const QString& text)
-{
-    Q_UNUSED(text);
-
     KConfigGroup cg = config();
     cg.writeEntry("autoSave", m_textArea->toPlainText());
     emit configNeedsSaving();
@@ -133,6 +122,7 @@ void Notes::showConfigurationInterface()
 
     m_dialog->show();
 }
+
 //FIXME those two dialogs give the cancel button issues.
 void Notes::showFontSelectDlg()
 {
