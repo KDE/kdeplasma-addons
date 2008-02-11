@@ -172,9 +172,10 @@ void TwitterEngine::requestFinished(int id, bool error)
     case Post:
         //the data is a copy of the status update. could be useful someday.
         //update every bloody timeline we've got
-        foreach( QString source, sources() ) {
-            if( source.startsWith( "Timeline" ) )
-                updateSource( source );
+        foreach (QString source, sources()) {
+            if (source.startsWith("Timeline")) {
+                updateSource(source);
+            }
         }
         break;
     case UserInfo:
@@ -196,7 +197,7 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
     if (type == 0) { //we never inserted it, so we ignore it
         return;
     }
-    if( error ) {
+    if (error) {
         kDebug() << "An error occured: " << m_anonHttp->errorString();
         //oh bugger, all our pending requests just went poof.
         m_pendingAnonRequests.clear();
@@ -216,11 +217,11 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
 
     QByteArray data = m_anonHttp->readAll();
 
-    if (type==UserImage) {
+    if (type == UserImage) {
         kDebug() << "UserImage:" << user;
         QImage img;
-        img.loadFromData( data );
-        QPixmap pm = QPixmap::fromImage( img ).scaled( 48, 48 ); //FIXME do we really want to do this?
+        img.loadFromData(data);
+        QPixmap pm = QPixmap::fromImage(img).scaled(48, 48); //FIXME do we really want to do this?
         //TODO instead of these two sources, maybe provide the ability to query a specific user?
         setData("UserImages", user, pm);
         clearData("LatestImage");
@@ -240,18 +241,18 @@ bool TwitterEngine::updateSource(const QString &source)
     if (! source.startsWith("Timeline")) {
         return false;
     }
-    if (source=="Timeline") {
+    if (source == "Timeline") {
         updateTimeline();
     }
     QStringList tokens = source.split(':');
-    if (tokens.at(0)=="Timeline") {
+    if (tokens.at(0) == "Timeline") {
         updateUser(tokens.at(1));
-    } else if (tokens.at(0)=="TimelineWithFriends") {
+    } else if (tokens.at(0) == "TimelineWithFriends") {
         updateUserWithFriends(tokens.at(1));
     }
     // Get own image for the case that the timeline has no own tweet
-    if ((tokens.at(0)=="Timeline" || tokens.at(0)=="TimelineWithFriends") &&
-        !m_userImages.contains(tokens.at(1)) ) {
+    if ((tokens.at(0) == "Timeline" || tokens.at(0) == "TimelineWithFriends") &&
+        !m_userImages.contains(tokens.at(1))) {
         getUserInfo(tokens.at(1));
     }
     return false;
@@ -264,7 +265,7 @@ bool TwitterEngine::updateSource(const QString &source)
 //TODO we never need auth for this
 void TwitterEngine::updateTimeline()
 {
-    m_pendingRequests.insert(m_http->get("/statuses/public_timeline.xml"),Timeline);
+    m_pendingRequests.insert(m_http->get("/statuses/public_timeline.xml"), Timeline);
 }
 
 //source Timeline:user
@@ -275,9 +276,9 @@ void TwitterEngine::updateTimeline()
 void TwitterEngine::updateUser(const QString &who)
 {
     m_http->setUser(who, m_config.value(who).toString());
-    int id=m_http->get(QString("/statuses/user_timeline/%1.xml").arg(who));
-    m_pendingRequests.insert(id,UserTimeline);
-    m_pendingNames.insert(id,who);
+    int id = m_http->get(QString("/statuses/user_timeline/%1.xml").arg(who));
+    m_pendingRequests.insert(id, UserTimeline);
+    m_pendingNames.insert(id, who);
 }
 
 //source TimelineWithFriends:user
@@ -286,26 +287,26 @@ void TwitterEngine::updateUser(const QString &who)
 void TwitterEngine::updateUserWithFriends(const QString &who)
 {
     m_http->setUser(who, m_config.value(who).toString());
-    int id=m_http->get(QString("/statuses/friends_timeline.xml"));
-    m_pendingRequests.insert(id,UserTimelineWithFriends);
-    m_pendingNames.insert(id,who);
+    int id = m_http->get(QString("/statuses/friends_timeline.xml"));
+    m_pendingRequests.insert(id, UserTimelineWithFriends);
+    m_pendingNames.insert(id, who);
 }
 
-void TwitterEngine::getUserImage( const QString &who, const KUrl &url )
+void TwitterEngine::getUserImage(const QString &who, const KUrl &url)
 {
     kDebug() << who << "has image" << url.url();
-    m_anonHttp->setHost( url.host() ); //it's not twitter.com
-    int id = m_anonHttp->get( url.path() );
-    m_pendingAnonRequests.insert( id, UserImage );
-    m_pendingNames.insert( id, who ); //FIXME is it safe to share with the other http object? if we never clear, yeah
+    m_anonHttp->setHost(url.host()); //it's not twitter.com
+    int id = m_anonHttp->get(url.path());
+    m_pendingAnonRequests.insert(id, UserImage);
+    m_pendingNames.insert(id, who); //FIXME is it safe to share with the other http object? if we never clear, yeah
 }
 
-void TwitterEngine::getUserInfo( const QString &who )
+void TwitterEngine::getUserInfo(const QString &who)
 {
-    m_http->setUser( who, m_config.value( who ).toString());
-    int id=m_http->get( QString( "/users/show/%1.xml" ).arg( who ) );
-    m_pendingRequests.insert( id, UserInfo );
-    m_pendingNames.insert( id, who );
+    m_http->setUser(who, m_config.value(who).toString());
+    int id = m_http->get(QString("/users/show/%1.xml").arg(who));
+    m_pendingRequests.insert(id, UserInfo);
+    m_pendingNames.insert(id, who);
 }
 
 //parses the returned xml for a timeline
@@ -315,44 +316,44 @@ void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
 {
     //kDebug() << source;
     clearData(source); //get rid of the old ones
-    for (uint i=0;i<updates.length();i++) {
-        QDomNode n = updates.at( i );
+    for (uint i = 0; i<updates.length(); i++) {
+        QDomNode n = updates.at(i);
 
         //extract useful data
-        QString text = n.firstChildElement( "text" ).text();
-        QDomNode usernode = n.firstChildElement( "user" );
-        QString user = usernode.firstChildElement( "screen_name" ).text();
-        QString imageUrl = usernode.firstChildElement( "profile_image_url" ).text();
-        QString url = usernode.firstChildElement( "url" ).text();
-        QString tsource = n.firstChildElement( "source" ).text();
-        QString id = n.firstChildElement( "id" ).text();
+        QString text = n.firstChildElement("text").text();
+        QDomNode usernode = n.firstChildElement("user");
+        QString user = usernode.firstChildElement("screen_name").text();
+        QString imageUrl = usernode.firstChildElement("profile_image_url").text();
+        QString url = usernode.firstChildElement("url").text();
+        QString tsource = n.firstChildElement("source").text();
+        QString id = n.firstChildElement("id").text();
         //there's lots more data in there, but we have enough for now
 
         //get the timestamp in a useful form
-        QString created = n.firstChildElement( "created_at" ).text();
-        created = created.right( created.length() - 4 );
-        created.replace( QRegExp( "[+]\\d\\d\\d\\d" ), "" );
-        QDateTime time = QDateTime::fromString( created, "MMM dd hh:mm:ss  yyyy" );
-        time.setTimeSpec( Qt::UTC );
+        QString created = n.firstChildElement("created_at").text();
+        created = created.right(created.length() - 4);
+        created.replace(QRegExp("[+]\\d\\d\\d\\d"), "");
+        QDateTime time = QDateTime::fromString(created, "MMM dd hh:mm:ss  yyyy");
+        time.setTimeSpec(Qt::UTC);
 
         //bundle up each tweet
         DataEngine::Data tweet;
-        tweet["Date"]=QVariant(time);
-        tweet["Status"]=QVariant(text);
-        tweet["User"]=QVariant(user);
-        tweet["Source"]=QVariant(tsource);
-        tweet["url"]=QVariant(url);
+        tweet["Date"] = QVariant(time);
+        tweet["Status"] = QVariant(text);
+        tweet["User"] = QVariant(user);
+        tweet["Source"] = QVariant(tsource);
+        tweet["url"] = QVariant(url);
         QVariant v;
         v.setValue(tweet);
         setData(source, id, v);
 
         //update the image if necessary
         //TODO check whether anyone cares, first
-        KUrl imgKurl( imageUrl );
-        if( !m_userImages.contains( user ) ||
-            m_userImages[user] != imgKurl ) {
+        KUrl imgKurl(imageUrl);
+        if (!m_userImages.contains(user) ||
+            m_userImages[user] != imgKurl) {
             m_userImages[user] = imgKurl; //FIXME if the download fails it'll never retry
-            getUserImage( user, imgKurl );
+            getUserImage(user, imgKurl);
         }
     }
 }
@@ -360,16 +361,16 @@ void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
 void TwitterEngine::parseUserInfo(const QDomDocument &info)
 {
     QDomElement e = info.documentElement();
-    if( e.isNull() ) {
+    if (e.isNull()) {
         kDebug() << "UserInfo element is null :(";
         return;
     }
 
     // We only parse the icon for now
-    QString user = e.firstChildElement( "screen_name" ).text();
-    QString imageUrl = e.firstChildElement( "profile_image_url" ).text();
-    if( !imageUrl.isEmpty() && !user.isEmpty() ) {
-        getUserImage( user, KUrl( imageUrl ) );
+    QString user = e.firstChildElement("screen_name").text();
+    QString imageUrl = e.firstChildElement("profile_image_url").text();
+    if (!imageUrl.isEmpty() && !user.isEmpty()) {
+        getUserImage(user, KUrl(imageUrl));
     }
 }
 
