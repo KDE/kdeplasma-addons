@@ -277,30 +277,14 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
 
 void Twitter::showTweets()
 {
-
-    //clear out tweet widgets - is such deletion really necessary? FIXME
-    for( int i = m_tweetWidgets.size()-1; i >= 0; --i ) {
-        Tweet t = m_tweetWidgets[i];
-        m_layout->removeItem( t.layout );
-        delete t.icon;
-        delete t.edit;
-        delete t.layout;
-    }
-    m_tweetWidgets.clear();
-
-    int i = 0;
-    int pos = m_tweetMap.keys().size() - 1;
-    kDebug() << pos;
-    while(i < m_historySize && pos >= 0 ) {
-        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
-        QString user = tweetData.value( "User" ).toString();
-
+    // Adjust the number of the TweetWidgets if the configuration has changed
+    // Add more tweetWidgets if there are not enough
+    while( m_tweetWidgets.size() < m_historySize ) {
         Plasma::HBoxLayout *tweetLayout = new Plasma::HBoxLayout( 0 );
         tweetLayout->setMargin( 5 );
         tweetLayout->setSpacing( 5 );
         m_layout->addItem( tweetLayout );
 
-        //TODO maybe a label would be better?
         Plasma::LineEdit *e = new Plasma::LineEdit( this );
         e->setTextWidth( 250 );
         e->setStyled( false );
@@ -309,8 +293,6 @@ void Twitter::showTweets()
         e->setAcceptedMouseButtons( Qt::NoButton );
 
         Plasma::Icon *icon = new Plasma::Icon( this );
-        icon->setIcon( QIcon(m_pictureMap[user]) );
-        icon->setText( user );
         QSizeF iconSize = icon->sizeFromIconSize(48);
         iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
         icon->setMinimumSize( iconSize );
@@ -325,6 +307,31 @@ void Twitter::showTweets()
         t.edit = e;
 
         m_tweetWidgets.append( t );
+    }
+    //clear out tweet widgets if there are too many
+    while( m_tweetWidgets.size() > m_historySize ) {
+        Tweet t = m_tweetWidgets[m_tweetWidgets.size()-1];
+        m_layout->removeItem( t.layout );
+        delete t.icon;
+        delete t.edit;
+        delete t.layout;
+        m_tweetWidgets.removeAt( m_tweetWidgets.size()-1 );
+    }
+
+    int i = 0;
+    int pos = m_tweetMap.keys().size() - 1;
+    while(i < m_historySize && pos >= 0 ) {
+        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+        QString user = tweetData.value( "User" ).toString();
+
+        Tweet t = m_tweetWidgets[i];
+        t.icon->setIcon( QIcon(m_pictureMap[user]) );
+        QSizeF iconSize = t.icon->sizeFromIconSize(48);
+        iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
+        t.icon->setMinimumSize( iconSize );
+        t.icon->setMaximumSize( iconSize );
+        t.icon->setText( user );
+        t.icon->updateGeometry();
 
         QString html = "<table cellspacing='0'>";
         html += i18n( "<tr><td align='right' width='99%'><font color='#9c9c9c'>%1 from %2</font></td></tr>", 
@@ -333,7 +340,7 @@ void Twitter::showTweets()
         html += QString( "<tr><td><font color='#fcfcfc'>%1<br></font></td></tr>" )
                 .arg( tweetData.value( "Status" ).toString() );
         html += "</table>";
-        e->setHtml( html );
+        t.edit->setHtml( html );
         ++i;
         --pos;
     }
