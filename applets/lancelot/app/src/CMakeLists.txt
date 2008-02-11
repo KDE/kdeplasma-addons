@@ -1,5 +1,7 @@
 project(LancelotMenu)
 
+include(PlasmaUIMacros)
+
 IF(CMAKE_COMPILER_IS_GNUCC)
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fmessage-length=0")
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
@@ -51,6 +53,10 @@ set(plasma_lancelot_application_SRCS
   LancelotApplication.cpp
   LancelotWindow.cpp
   QtDisplay.cpp
+)
+
+KDE4_ADD_PLASMA_UI_FILES(plasma_lancelot_application_SRCS
+  "ui/LancelotWindowBase.xml"
 )
 
 # Lancelot client files

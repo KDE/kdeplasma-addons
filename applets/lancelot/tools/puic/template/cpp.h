@@ -6,8 +6,10 @@
 #ifndef ${HEADER_ID}
 #define ${HEADER_ID}
 
+/* Includes */
 ${INCLUDES}
 
+/* Defines */
 ${DEFINES}
 
 namespace Ui {

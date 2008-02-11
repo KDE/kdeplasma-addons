@@ -35,6 +35,7 @@
                 <item:layout
                     type="Plasma::FlipLayout" name="layoutCategories"
                     FlipLayout:realLayout="Plasma::NodeLayout"
+                    BorderLayout:position="Center"
                     margin="0" spacing="0"
                 >
                     <item:widget

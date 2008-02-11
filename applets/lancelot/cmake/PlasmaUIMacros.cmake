@@ -1,20 +1,25 @@
+set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_SOURCE_DIR}/applets/lancelot/tools/puic/puic.py)
+
+message("Plasma UI Compiler is located at: " ${KDE_PLASMA_UIC_EXECUTABLE})
 
 #usage: KDE4_ADD_PLASMA_UI_FILES(foo_SRCS ${ui_files})
 macro (KDE4_ADD_PLASMA_UI_FILES _sources )
-   message("asdpo ############################################################1")
    foreach (_current_FILE ${ARGN})
-      message("asdpo ############################################################3")
 
       get_filename_component(_tmp_FILE ${_current_FILE} ABSOLUTE)
-      message(${_tmp_FILE})
-      
       get_filename_component(_basename ${_tmp_FILE} NAME_WE)
-      message(${_basename})
-      
       set(_header ${CMAKE_CURRENT_BINARY_DIR}/ui_${_basename}.h)
-      message(${_header})
+      
+      message(${KDE_PLASMA_UIC_EXECUTABLE} "\n  " ${_tmp_FILE} "\n  " ${_header})
 
-      message("asdpo ############################################################3")
+      add_custom_command(OUTPUT ${_header}
+         COMMAND ${KDE_PLASMA_UIC_EXECUTABLE}
+         ${_tmp_FILE}
+         ${_header}
+      )
+      
+      list(APPEND ${_sources} ${_header})
+      
    endforeach (_current_FILE)
 endmacro (KDE4_ADD_PLASMA_UI_FILES)
 

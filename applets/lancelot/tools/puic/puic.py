@@ -80,8 +80,11 @@ def processLayout(node):
     global stmtSetup
     
     handler = LayoutHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if layout is supported
-    
     handler.setNode(node)
+    
+    includes = handler.include()
+    for include in includes.split("\n"):
+        stmtIncludes.add(include)
     
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
@@ -96,8 +99,11 @@ def processWidget(node):
     global stmtSetup
     
     handler = WidgetHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if widget is supported
-    
     handler.setNode(node)
+
+    includes = handler.include()
+    for include in includes.split("\n"):
+        stmtIncludes.add(include)
     
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
@@ -113,7 +119,6 @@ if not doc.documentElement.localName == "pui":
 rootObjectType = ""
 className      = ""
 
-
 for node in doc.documentElement.childNodes:
     if not node.nodeType == xml.dom.Node.ELEMENT_NODE:
         continue
@@ -126,11 +131,13 @@ for node in doc.documentElement.childNodes:
         for child in node.childNodes:
             processElement(child)
 
-template = open("template/cpp.h") 
+template = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "template/cpp.h")) 
 template = template.readlines()
 template = "".join(template)
 
-print template \
+output = open(sys.argv[2], 'w')
+
+print >> output, template\
     .replace("${HEADER_ID}",          "PUI_" + className.upper() + "_H") \
     .replace("${CLASS_NAME}",         className) \
     .replace("${PARENT_OBJECT_TYPE}", rootObjectType) \
@@ -139,3 +146,5 @@ print template \
     .replace("${DECLARATION}",        stmtDeclaration) \
     .replace("${INITIALIZATION}",     stmtInitialization) \
     .replace("${SETUP}",              stmtSetup)
+
+output.close()

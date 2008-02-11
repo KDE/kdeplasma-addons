@@ -9,7 +9,7 @@ class ExtenderButtonHanlder(AbstractWidget.AbstractWidgetHandler):
         return "Lancelot::ExtenderButton"
     
     def include(self):
-        return "#include \"ExtenderButton.h\""
+        return '#include <KIcon>\n#include "ExtenderButton.h"'
 
     def setup(self):
         setup = AbstractWidget.AbstractWidgetHandler.setup(self)

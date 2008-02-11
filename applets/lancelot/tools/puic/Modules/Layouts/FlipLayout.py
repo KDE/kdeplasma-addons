@@ -6,7 +6,10 @@ class FlipLayoutHandler(AbstractLayout.AbstractLayoutHandler):
         return "Plasma::FlipLayout"
 
     def include(self):
-        return "#include <plasma/layouts/fliplayout.h>"
+        h = LayoutHandlerManager.handler(self.node().getAttribute("FlipLayout:realLayout"))
+        h.setNode(self.node())
+        
+        return h.include() + "\n#include <plasma/layouts/fliplayout.h>"
 
     def declaration(self):
         return "Plasma::FlipLayout < " + self.node().getAttribute("FlipLayout:realLayout") + " > * " + self.node().getAttribute("name") + ";"
