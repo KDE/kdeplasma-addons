@@ -58,7 +58,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setCachePaintMode(NoCacheMode);
-    setSize(QSize(350, 350));
+    resize(350, 350);
     m_mySlideShow = new SlideShow();
 }
 
