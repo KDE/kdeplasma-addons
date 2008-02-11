@@ -136,6 +136,9 @@ void TwitterEngine::requestFinished(int id, bool error)
     case Post:
         source = "Upload";
         break;
+    case UserInfo:
+        source = "UserInfo";
+        break;
     default:
         //we never inserted it, so we ignore it
         //kDebug() << "ignoring this request";
@@ -173,6 +176,10 @@ void TwitterEngine::requestFinished(int id, bool error)
             if( source.startsWith( "Timeline" ) )
                 updateSource( source );
         }
+        break;
+    case UserInfo:
+        xml.setContent(data);
+        parseUserInfo(xml);
         break;
     default:
         kDebug() << "can't happen" << type;
@@ -242,6 +249,11 @@ bool TwitterEngine::updateSource(const QString &source)
     } else if (tokens.at(0)=="TimelineWithFriends") {
         updateUserWithFriends(tokens.at(1));
     }
+    // Get own image for the case that the timeline has no own tweet
+    if ((tokens.at(0)=="Timeline" || tokens.at(0)=="TimelineWithFriends") &&
+        !m_userImages.contains(tokens.at(1)) ) {
+        getUserInfo(tokens.at(1));
+    }
     return false;
 }
 
@@ -288,6 +300,14 @@ void TwitterEngine::getUserImage( const QString &who, const KUrl &url )
     m_pendingNames.insert( id, who ); //FIXME is it safe to share with the other http object? if we never clear, yeah
 }
 
+void TwitterEngine::getUserInfo( const QString &who )
+{
+    m_http->setUser( who, m_config.value( who ).toString());
+    int id=m_http->get( QString( "/users/show/%1.xml" ).arg( who ) );
+    m_pendingRequests.insert( id, UserInfo );
+    m_pendingNames.insert( id, who );
+}
+
 //parses the returned xml for a timeline
 //sets the data for the source
 //and fetches new images if needed
@@ -329,11 +349,27 @@ void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
         //update the image if necessary
         //TODO check whether anyone cares, first
         KUrl imgKurl( imageUrl );
-        if( !m_userImages.contains( user ) || 
+        if( !m_userImages.contains( user ) ||
             m_userImages[user] != imgKurl ) {
             m_userImages[user] = imgKurl; //FIXME if the download fails it'll never retry
             getUserImage( user, imgKurl );
         }
+    }
+}
+
+void TwitterEngine::parseUserInfo(const QDomDocument &info)
+{
+    QDomElement e = info.documentElement();
+    if( e.isNull() ) {
+        kDebug() << "UserInfo element is null :(";
+        return;
+    }
+
+    // We only parse the icon for now
+    QString user = e.firstChildElement( "screen_name" ).text();
+    QString imageUrl = e.firstChildElement( "profile_image_url" ).text();
+    if( !imageUrl.isEmpty() && !user.isEmpty() ) {
+        getUserImage( user, KUrl( imageUrl ) );
     }
 }
 

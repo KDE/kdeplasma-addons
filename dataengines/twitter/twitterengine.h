@@ -25,6 +25,7 @@
 
 #include <QMap>
 
+class QDomDocument;
 class QDomNodeList;
 class QHttp;
 
@@ -65,7 +66,7 @@ class TwitterEngine : public Plasma::DataEngine
         Plasma::DataEngine::Data config() const;
         void setConfig(const Plasma::DataEngine::Data& config);
 
-        enum UpdateType { Timeline=1, UserTimeline, UserTimelineWithFriends, UserImage, Post };
+        enum UpdateType { Timeline=1, UserTimeline, UserTimelineWithFriends, UserImage, Post, UserInfo };
 
     protected:
         //from DataEngine
@@ -81,7 +82,9 @@ class TwitterEngine : public Plasma::DataEngine
         void updateUser(const QString &who);
         void updateUserWithFriends(const QString &who);
         void getUserImage( const QString &who, const KUrl& url );
+        void getUserInfo( const QString &who );
         void parseStatuses(QDomNodeList items, const QString& source);
+        void parseUserInfo(const QDomDocument &info);
 
         QString m_status;
         QHttp* m_http;
