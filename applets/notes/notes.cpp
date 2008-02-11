@@ -27,9 +27,7 @@
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
     m_notes_theme("widgets/notes", this),
-    m_dialog(0),
-    m_font(QFont()),
-    m_textColor(QColor())
+    m_dialog(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -53,9 +51,10 @@ void Notes::init()
     m_textArea->setStyled(false);
     //FIXME this has no effect right now. try setTextInteractionFlags
     m_textArea->setOpenExternalLinks(true);
-    //FIXME I do not think these two lines mean what you think they mean.
-    m_textArea->setFont(cg.readEntry("font",m_font));
-    m_textArea->setDefaultTextColor(cg.readEntry("textcolor",m_textColor));
+    m_font = cg.readEntry("font", QFont());
+    m_textArea->setFont(m_font);
+    m_textColor = cg.readEntry("textcolor", QColor());
+    m_textArea->setDefaultTextColor(m_textColor);
     connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
     connect(m_textArea, SIGNAL(textChanged(const QString &)), this, SLOT(saveText(const QString &)));
 
