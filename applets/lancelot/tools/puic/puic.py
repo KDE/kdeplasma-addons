@@ -37,6 +37,7 @@ stmtDeclaration    = ""
 stmtInitialization = ""
 stmtIncludes       = set()
 stmtSetup          = ""
+WidgetHandlerManager.pushRoot("root")
 
 def processDefines(node):
     global stmtDefine
@@ -108,8 +109,18 @@ def processWidget(node):
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
     stmtSetup          += handler.setup() + "\n"
+    
+    WidgetHandlerManager.pushRoot(node.getAttribute("name"))
+    for child in node.childNodes:
+        processElement(child)
+    WidgetHandlerManager.popRoot()
+        
         
 # Main program: ##################################################################################
+
+print "Plasma UI Compiler 0.1"
+print "Generating ", sys.argv[2]
+print "From ", sys.argv[1]
 
 doc = xml.dom.minidom.parse(sys.argv[1])
 

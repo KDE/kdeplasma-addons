@@ -13,6 +13,20 @@ class ExtenderButtonHanlder(AbstractWidget.AbstractWidgetHandler):
 
     def setup(self):
         setup = AbstractWidget.AbstractWidgetHandler.setup(self)
+        if self.node().hasAttribute('ExtenderButton:group'):
+            setup += self.node().getAttribute('name') + '->setGroupByName("' + self.node().getAttribute('ExtenderButton:group') + '");'
+        if self.node().hasAttribute('ExtenderButton:activation'):
+            setup += self.node().getAttribute('name') + '->setActivationMethod(Lancelot::ExtenderButton::' \
+                  + self.node().getAttribute('ExtenderButton:activation') + ');'
+        if self.node().hasAttribute('ExtenderButton:extenderPosition'):
+            setup += self.node().getAttribute('name') + '->setExtenderPosition(Lancelot::ExtenderButton::' \
+                  + self.node().getAttribute('ExtenderButton:extenderPosition') + ');'
+        if self.node().hasAttribute('ExtenderButton:iconSize'):
+            setup += self.node().getAttribute('name') + '->setIconSize(QSize(' \
+                  + self.node().getAttribute('ExtenderButton:iconSize') + '));'
+        if self.node().hasAttribute('ExtenderButton:orientation'):
+            setup += self.node().getAttribute('name') + '->setInnerOrientation(Lancelot::BaseActionWidget::' \
+                  + self.node().getAttribute('ExtenderButton:orientation') + ');'
         return setup
     
     def _construction(self):

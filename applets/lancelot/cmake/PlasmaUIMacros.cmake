@@ -16,6 +16,7 @@ macro (KDE4_ADD_PLASMA_UI_FILES _sources )
          COMMAND ${KDE_PLASMA_UIC_EXECUTABLE}
          ${_tmp_FILE}
          ${_header}
+         DEPENDS ${_current_FILE}
       )
       
       list(APPEND ${_sources} ${_header})

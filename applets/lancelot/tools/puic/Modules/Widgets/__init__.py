@@ -1,1 +1,1 @@
-__all__ = ["ExtenderButton"]
+__all__ = ["ExtenderButton", "Panel"]

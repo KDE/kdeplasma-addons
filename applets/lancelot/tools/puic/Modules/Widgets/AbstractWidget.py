@@ -22,7 +22,8 @@ class AbstractWidgetHandler:
         return self.name() + " * " + self.node().getAttribute("name") + ";"
     
     def initialization(self):
-        return WidgetHandlerManager.root() + "->addItem(" + self._construction() + ");"
+        return WidgetHandlerManager.root() + "->addChild(" + self._construction() + ");"
+        # return "(" + self._construction() + ")->setParent(" + WidgetHandlerManager.root() + ");"
     
     def _construction(self):
         return self.node().getAttribute("name") + " = new " + self.name() + "()"
