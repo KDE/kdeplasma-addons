@@ -34,8 +34,7 @@
             >
                 <item:widget
                     type="Lancelot::Panel" name="panelSections"
-                    Panel:title="Sections"
-                    BorderLayout:position="Left"
+                    BorderLayout:position="Center"
                 >
                     <item:layout
                         type="Plasma::FlipLayout" name="layoutSections"

@@ -80,28 +80,24 @@ LancelotWindow::~LancelotWindow()
 
 void LancelotWindow::lancelotShow(int x, int y)
 {
-    // TODO: make this // panelSections->show();
+    panelSections->show();
     layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
     
     resizeWindow(QSize(mainWidth + sectionsWidth, windowHeight));
     
-    if (!isVisible()) {
-        showWindow(x, y);
-    }
+    showWindow(x, y);
 }
 
 void LancelotWindow::lancelotShowItem(int x, int y, QString name)
 {
-    // TODO: make this // panelSections->show();
+    panelSections->hide();
     layoutMain->setSize(0, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
     
     resizeWindow(QSize(mainWidth, windowHeight));
     
-    if (!isVisible()) {
-        showWindow(x, y);
-    }
+    showWindow(x, y);
 }
 
 void LancelotWindow::lancelotHide(bool immediate)
@@ -122,6 +118,13 @@ void LancelotWindow::search(const QString & string)
 
 void LancelotWindow::showWindow(int x, int y)
 {
+    m_hideTimer.stop();
+
+    if (isVisible()) {
+        return;
+    }
+
+    
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
 
     Plasma::Flip flip = Plasma::VerticalFlip;
@@ -149,7 +152,6 @@ void LancelotWindow::showWindow(int x, int y)
 
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
-    m_hideTimer.stop();
     
     //KWindowSystem::activateWindow(winId());
     KWindowSystem::forceActiveWindow(winId());
