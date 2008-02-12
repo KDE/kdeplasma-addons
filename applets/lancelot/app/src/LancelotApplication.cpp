@@ -103,19 +103,22 @@ int LancelotApplication::main(int argc, char **argv)
 bool LancelotApplication::show(int x, int y)
 {
     if (!m_application) return false;
-    return LancelotApplication::m_application->window->lancelotShow(x, y);
+    LancelotApplication::m_application->window->lancelotShow(x, y);
+    return true;
 }
 
 bool LancelotApplication::hide(bool immediate)
 {
     if (!m_application || !(LancelotApplication::m_application->window)) return false;
-    return LancelotApplication::m_application->window->lancelotHide(immediate);
+    LancelotApplication::m_application->window->lancelotHide(immediate);
+    return true;
 }
 
 bool LancelotApplication::showItem(int x, int y, QString name)
 {
     if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
-    return LancelotApplication::m_application->window->lancelotShowItem(x, y, name);
+    LancelotApplication::m_application->window->lancelotShowItem(x, y, name);
+    return true;
 }
 
 int LancelotApplication::addClient()

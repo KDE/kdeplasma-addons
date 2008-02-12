@@ -11,19 +11,18 @@
         <!-- These values will be converted to #define statements -->
         <define name="SYSTEM_HEIGHT" value="40" />
         <define name="SEARCH_HEIGHT" value="30" />
-        <define name="CATEGORIES_WIDTH" value="128" />
+        <define name="SECTIONS_WIDTH" value="128" />
     </defines>
     <ui
-        rootObjectType="Plasma::Corona"
+        rootObjectType="Plasma::Widget"
         className="LancelotWindowBase"
     >
         <item:layout
             type="Plasma::FlipLayout" name="layoutMain"
             FlipLayout:realLayout="Plasma::BorderLayout"
             margin="0" spacing="0"
-            BorderLayout:leftSize="CATEGORIES_WIDTH"
+            BorderLayout:leftSize="SECTIONS_WIDTH"
         >
-            <!-- Categories container -->
             <item:layout
                 type="Plasma::FlipLayout" name="layoutMainLeft"
                 FlipLayout:realLayout="Plasma::BorderLayout"
@@ -33,38 +32,54 @@
                 BorderLayout:bottomSize="SYSTEM_HEIGHT"
             >
                 <item:layout
-                    type="Plasma::FlipLayout" name="layoutCategories"
+                    type="Plasma::FlipLayout" name="layoutSections"
                     FlipLayout:realLayout="Plasma::NodeLayout"
-                    BorderLayout:position="Center"
+                    BorderLayout:position="Left"
                     margin="0" spacing="0"
                 >
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSectionsApplications"
-                        NodeLayout:topLeft="0, 0, 0, 0"
-                        NodeLayout:bottomRight="1, 0, .25, 0"
+                        NodeLayout:topLeft     = "0, 0"
+                        NodeLayout:bottomRight = "1, .25"
                         ExtenderButton:title="Applications"
                         ExtenderButton:icon="applications-other"
+                        ExtenderButton:group="SectionButtons"
+                        ExtenderButton:activation="Hover"
+                        ExtenderButton:iconSize="48, 48"
+                        ExtenderButton:orientation="Vertical"
                     />
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSectionsComputer"
-                        NodeLayout:topLeft="0, 0, .25, 0"
-                        NodeLayout:bottomRight="1, 0, .5, 0"
+                        NodeLayout:topLeft     = "0, .25"
+                        NodeLayout:bottomRight = "1, .50"
                         ExtenderButton:title="Computer"
                         ExtenderButton:icon="computer-laptop"
+                        ExtenderButton:group="SectionButtons"
+                        ExtenderButton:activation="Hover"
+                        ExtenderButton:iconSize="48, 48"
+                        ExtenderButton:orientation="Vertical"
                     />
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSectionsContacts"
-                        NodeLayout:topLeft="0, 0, .5, 0"
-                        NodeLayout:bottomRight="1, 0, .75, 0"
+                        NodeLayout:topLeft     = "0, .50"
+                        NodeLayout:bottomRight = "1, .75"
                         ExtenderButton:title="Contacts"
                         ExtenderButton:icon="kontact"
+                        ExtenderButton:group="SectionButtons"
+                        ExtenderButton:activation="Hover"
+                        ExtenderButton:iconSize="48, 48"
+                        ExtenderButton:orientation="Vertical"
                     />
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSectionsDocuments"
-                        NodeLayout:topLeft="0, 0, .75, 0"
-                        NodeLayout:bottomRight="1, 0, 1, 0"
+                        NodeLayout:topLeft     = "0, .75"
+                        NodeLayout:bottomRight = "1, 1"
                         ExtenderButton:title="Documents"
                         ExtenderButton:icon="applications-office"
+                        ExtenderButton:group="SectionButtons"
+                        ExtenderButton:activation="Hover"
+                        ExtenderButton:iconSize="48, 48"
+                        ExtenderButton:orientation="Vertical"
                     />
                 </item:layout>
             </item:layout>
@@ -126,24 +141,36 @@
                 >
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSystemLockScreen"
-                        NodeLayout:topLeft="0, 0, 0, 0"
-                        NodeLayout:bottomRight="1.0 / 3.0, 0, 1, 0"
+                        NodeLayout:topLeft     = "0, 0"
+                        NodeLayout:bottomRight = "1.0 / 3.0, 1, 0, -20"
                         ExtenderButton:title="Lock Session"
                         ExtenderButton:icon="system-lock-screen"
+                        ExtenderButton:group="SystemButtons"
+                        ExtenderButton:activation="Extender"
+                        ExtenderButton:extenderPosition="Bottom"
+                        ExtenderButton:iconSize="24, 24"
                     />
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSystemLogout"
-                        NodeLayout:topLeft="1.0 / 3.0, 0, 0, 0"
-                        NodeLayout:bottomRight="2.0 / 3.0, 0, 1, 0"
+                        NodeLayout:topLeft     = "1.0 / 3.0, 0"
+                        NodeLayout:bottomRight = "2.0 / 3.0, 1, 0, -20"
                         ExtenderButton:title="Log Out..."
                         ExtenderButton:icon="system-log-out"
+                        ExtenderButton:group="SystemButtons"
+                        ExtenderButton:activation="Extender"
+                        ExtenderButton:extenderPosition="Bottom"
+                        ExtenderButton:iconSize="24, 24"
                     />
                     <item:widget
                         type="Lancelot::ExtenderButton" name="buttonSystemSwitchUser"
-                        NodeLayout:topLeft="2.0 / 3.0, 0, 0, 0"
-                        NodeLayout:bottomRight="1, 0, 1, 0"
+                        NodeLayout:topLeft     = "2.0 / 3.0, 0"
+                        NodeLayout:bottomRight = "1, 1, 0, -20"
                         ExtenderButton:title="Switch User"
                         ExtenderButton:icon="switchuser"
+                        ExtenderButton:group="SystemButtons"
+                        ExtenderButton:activation="Extender"
+                        ExtenderButton:extenderPosition="Bottom"
+                        ExtenderButton:iconSize="24, 24"
                     />
                 </item:layout>
             </item:layout>
