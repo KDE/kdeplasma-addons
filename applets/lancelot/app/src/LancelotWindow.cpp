@@ -70,7 +70,7 @@ LancelotWindow::LancelotWindow()
     m_corona->addItem(m_root);
 
     setupUi(m_root);
-    
+    instance->activateAll();
     //m_root->setLayout(layoutMain);
 }
 

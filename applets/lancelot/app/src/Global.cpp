@@ -169,7 +169,7 @@ void WidgetGroup::load(bool full)
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
 
-    kDebug() << m_name;
+    kDebug() << "Widget::Group" << m_name;
     foreach (Widget * widget, m_widgets) {
         kDebug() << (long)widget;
         kDebug() << widget->name();

@@ -9,7 +9,7 @@
 >
     <defines>
         <!-- These values will be converted to #define statements -->
-        <define name="SYSTEM_HEIGHT" value="40" />
+        <define name="SYSTEM_HEIGHT" value="60" />
         <define name="SEARCH_HEIGHT" value="30" />
         <define name="SECTIONS_WIDTH" value="128" />
     </defines>
