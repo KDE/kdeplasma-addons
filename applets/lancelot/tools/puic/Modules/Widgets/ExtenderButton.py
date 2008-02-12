@@ -4,7 +4,7 @@ from .. import debug
 
 import xml
 
-class ExtenderButtonHanlder(AbstractWidget.AbstractWidgetHandler):
+class ExtenderButtonHandler(AbstractWidget.AbstractWidgetHandler):
     def name(self):
         return "Lancelot::ExtenderButton"
     
@@ -13,41 +13,41 @@ class ExtenderButtonHanlder(AbstractWidget.AbstractWidgetHandler):
 
     def setup(self):
         setup = AbstractWidget.AbstractWidgetHandler.setup(self)
-        if self.node().hasAttribute('ExtenderButton:group'):
-            setup += self.node().getAttribute('name') + '->setGroupByName("' + self.node().getAttribute('ExtenderButton:group') + '");'
-        if self.node().hasAttribute('ExtenderButton:activation'):
-            setup += self.node().getAttribute('name') + '->setActivationMethod(Lancelot::ExtenderButton::' \
-                  + self.node().getAttribute('ExtenderButton:activation') + ');'
-        if self.node().hasAttribute('ExtenderButton:extenderPosition'):
-            setup += self.node().getAttribute('name') + '->setExtenderPosition(Lancelot::ExtenderButton::' \
-                  + self.node().getAttribute('ExtenderButton:extenderPosition') + ');'
-        if self.node().hasAttribute('ExtenderButton:iconSize'):
-            setup += self.node().getAttribute('name') + '->setIconSize(QSize(' \
-                  + self.node().getAttribute('ExtenderButton:iconSize') + '));'
-        if self.node().hasAttribute('ExtenderButton:orientation'):
-            setup += self.node().getAttribute('name') + '->setInnerOrientation(Lancelot::BaseActionWidget::' \
-                  + self.node().getAttribute('ExtenderButton:orientation') + ');'
+        if self.hasAttribute('group'):
+            setup += self.attribute('name') + '->setGroupByName("' + self.attribute('group') + '");'
+        if self.hasAttribute('activation'):
+            setup += self.attribute('name') + '->setActivationMethod(Lancelot::ExtenderButton::' \
+                  + self.attribute('activation') + ');'
+        if self.hasAttribute('extenderPosition'):
+            setup += self.attribute('name') + '->setExtenderPosition(Lancelot::ExtenderButton::' \
+                  + self.attribute('extenderPosition') + ');'
+        if self.hasAttribute('iconSize'):
+            setup += self.attribute('name') + '->setIconSize(QSize(' \
+                  + self.attribute('iconSize') + '));'
+        if self.hasAttribute('orientation'):
+            setup += self.attribute('name') + '->setInnerOrientation(Lancelot::BaseActionWidget::' \
+                  + self.attribute('orientation') + ');'
         return setup
     
     def _construction(self):
-        create = '${NAME} = new Lancelot::ExtenderButton("${NAME}", ${ICON}, ${TITLE}, ${DESCRIPTION})'
-        create = create.replace('${NAME}', self.node().getAttribute('name'));
+        create = '${NAME} = new ' + self.name() + '("${NAME}", ${ICON}, ${TITLE}, ${DESCRIPTION})'
+        create = create.replace('${NAME}', self.attribute('name'));
         
-        if self.node().hasAttribute('ExtenderButton:icon'):
-            create = create.replace('${ICON}', 'new KIcon("' + self.node().getAttribute('ExtenderButton:icon') + '")')
+        if self.hasAttribute('icon'):
+            create = create.replace('${ICON}', 'new KIcon("' + self.attribute('icon') + '")')
         else:
             create = create.replace('${ICON}', '0')
             
-        if self.node().hasAttribute('ExtenderButton:title'):
-            create = create.replace('${TITLE}', 'i18n("' + self.node().getAttribute('ExtenderButton:title') + '")')
+        if self.hasAttribute('title'):
+            create = create.replace('${TITLE}', 'i18n("' + self.attribute('title') + '")')
         else:
             create = create.replace('${TITLE}', '""')
             
-        if self.node().hasAttribute('ExtenderButton:description'):
-            create = create.replace('${DESCRIPTION}', 'i18n("' + self.node().getAttribute('ExtenderButton:description') + '")')
+        if self.hasAttribute('description'):
+            create = create.replace('${DESCRIPTION}', 'i18n("' + self.attribute('description') + '")')
         else:
             create = create.replace('${DESCRIPTION}', '""')
         
         return create
 
-WidgetHandlerManager.addHandler(ExtenderButtonHanlder())
+WidgetHandlerManager.addHandler(ExtenderButtonHandler())

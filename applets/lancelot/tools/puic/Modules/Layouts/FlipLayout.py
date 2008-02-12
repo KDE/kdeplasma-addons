@@ -6,23 +6,23 @@ class FlipLayoutHandler(AbstractLayout.AbstractLayoutHandler):
         return "Plasma::FlipLayout"
 
     def include(self):
-        h = LayoutHandlerManager.handler(self.node().getAttribute("FlipLayout:realLayout"))
+        h = LayoutHandlerManager.handler(self.attribute("realLayout"))
         h.setNode(self.node())
         
         return h.include() + "\n#include <plasma/layouts/fliplayout.h>"
 
     def declaration(self):
-        return "Plasma::FlipLayout < " + self.node().getAttribute("FlipLayout:realLayout") + " > * " + self.node().getAttribute("name") + ";"
+        return "Plasma::FlipLayout < " + self.attribute("realLayout") + " > * " + self.attribute("name") + ";"
     
     def initialization(self):
-        return self.node().getAttribute("name") + " = new Plasma::FlipLayout < " + self.node().getAttribute("FlipLayout:realLayout") + " > ();"
+        return self.attribute("name") + " = new Plasma::FlipLayout < " + self.attribute("realLayout") + " > ();"
     
     def setup(self):
         setup = ""
-        if self.node().hasAttribute("FlipLayout:flip"):
-            setup += self.node().getAttribute("name") + "->setFlip(" + self.node().getAttribute("FlipLayout:flip") + ");\n";
+        if self.attribute("flip"):
+            setup += self.attribute("name") + "->setFlip(" + self.attribute("flip") + ");\n";
 
-        h = LayoutHandlerManager.handler(self.node().getAttribute("FlipLayout:realLayout"))
+        h = LayoutHandlerManager.handler(self.attribute("realLayout"))
         h.setNode(self.node())
         
         return setup + h.setup()

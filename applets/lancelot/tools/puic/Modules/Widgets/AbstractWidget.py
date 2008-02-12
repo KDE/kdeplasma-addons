@@ -1,40 +1,21 @@
+from .. import AbstractItem
 from .. import WidgetHandlerManager
 
-class AbstractWidgetHandler:
-    
-    def __init__(self):
-        self.__node = 0
-        self.__root = "root";
-        
-    def name(self):
-        return "AbstractWidget"
-    
-    def setNode(self, node):
-        self.__node = node
-        
-    def node(self):
-        return self.__node
-    
-    def include(self):
-        return "/* " + self.name() + " declaration - not implemented */"
-    
-    def declaration(self):
-        return self.name() + " * " + self.node().getAttribute("name") + ";"
-    
-    def initialization(self):
-        return WidgetHandlerManager.root() + "->addChild(" + self._construction() + ");"
-        # return "(" + self._construction() + ")->setParent(" + WidgetHandlerManager.root() + ");"
-    
-    def _construction(self):
-        return self.node().getAttribute("name") + " = new " + self.name() + "()"
-    
+class AbstractWidgetHandler(AbstractItem.AbstractItemHandler):
+
     def setup(self):
         setup = ""
 
-        if self.node().hasAttribute("minimumSize"):
-            setup += self.node().getAttribute("name") + "->setMinimumSize(" + self.node().getAttribute("minimumSize") + ");\n";
-        if self.node().hasAttribute("maximumSize"):
-            setup += self.node().getAttribute("name") + "->setMaximumSize(" + self.node().getAttribute("maximumSize") + ");\n";
-        if self.node().hasAttribute("opacity"):
-            setup += self.node().getAttribute("name") + "->setOpacity(" + self.node().getAttribute("opacity") + ");\n";
+        if self.hasAttribute("minimumSize"):
+            setup += attribute("name") + "->setMinimumSize(" + self.attribute("minimumSize") + ");\n";
+            
+        if self.hasAttribute("maximumSize"):
+            setup += attribute("name") + "->setMaximumSize(" + self.attribute("maximumSize") + ");\n";
+            
+        if self.hasAttribute("opacity"):
+            setup += self.attribute("name") + "->setOpacity(" + self.attribute("opacity") + ");\n";
+            
         return setup
+
+    def initialization(self):
+        return WidgetHandlerManager.root() + "->addChild(" + self._construction() + ");"

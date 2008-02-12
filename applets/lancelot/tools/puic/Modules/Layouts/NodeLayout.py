@@ -17,9 +17,9 @@ class NodeLayoutHandler(AbstractLayout.AbstractLayoutHandler):
             if not child.nodeType == xml.dom.Node.ELEMENT_NODE or not child.prefix == "item":
                 continue
             
-            setup += self.node().getAttribute("name") + "->addItem(" + child.getAttribute("name") + ",\n" \
-                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute("NodeLayout:topLeft") + "),\n" \
-                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute("NodeLayout:bottomRight") + ")\n" \
+            setup += self.attribute("name") + "->addItem(" + child.getAttribute("name") + ",\n" \
+                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":topLeft") + "),\n" \
+                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":bottomRight") + ")\n" \
                   + ");\n"
         return setup
 
