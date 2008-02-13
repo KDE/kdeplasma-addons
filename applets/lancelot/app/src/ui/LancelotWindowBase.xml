@@ -119,37 +119,39 @@
                     
                     Plasma__BorderLayout:position="Top"
                 >
-                <!--
-                    Dirty hack to get an edit box before Qt 4.4 :: begin
+                <!-- Dirty hack to get an edit box before Qt 4.4 :: begin -->
+                    <code:include><![CDATA[
+                    #include <KLineEdit>
+                    ]]></code:include>
                     <code:declaration>
                         KLineEdit * editSearch;
+                        Plasma::Widget      * _m_root;
+                        QGraphicsView       * _m_view;
                     </code:declaration>
                     <code:initialization>
-                        editSearch = new KLineEdit(object);
+                        editSearch = new KLineEdit(); //(QWidget *)this
                     </code:initialization>
                     <code:setup>
                         editSearch->setClearButtonShown(true);
                         editSearch->setFrame(false);
                     </code:setup>
-                    Dirty hack to get an edit box before Qt 4.4 :: end
                     <item:widget
-                        name="editSearchPositioner"
-                        ></item:widget>
-                
-                        editSearch = new KLineEdit(object);
-                    editSearchPositioner = new Lancelot::WidgetPositioner(editSearch, m_view, panelSearch);
-            
-                    labelSearch = new Plasma::Label(panelSearch);
-                            
-                                    layoutSearch->addItem(editSearchPositioner,
-                        Plasma::NodeLayout::NodeCoordinate(0.5, 0.5, 0, 0),
-                        Plasma::NodeLayout::NodeCoordinate(1.0, 0.5, -10, INFINITY)
-                    );
-                    layoutSearch->addItem(labelSearch,
-                        Plasma::NodeLayout::NodeCoordinate(0.5, 0.5, 0, 0),
-                        1.1, 0.5
-                    );
-                -->
+                        type="Lancelot::WidgetPositioner" name="editSearchPositioner"
+                        widgetName="editSearch"
+                        view="_m_view"
+                        parent="_m_root"
+                        
+                        Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                        Plasma__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
+                    />
+                    <item:widget
+                        type="Plasma::Label" name="labelSearch"
+                        text="Search"
+                        
+                        Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                        Plasma__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
+                    />
+                <!-- Dirty hack to get an edit box before Qt 4.4 :: end -->
                 </item:layout>
                 <item:layout
                     type="Plasma::NodeLayout" name="layoutCenter"

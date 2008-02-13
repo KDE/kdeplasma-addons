@@ -68,8 +68,18 @@ LancelotWindow::LancelotWindow()
 
     m_root = new RootWidget(); //Applet(0, "plasma_applet_clock");
     m_corona->addItem(m_root);
-
+    
+    /* Dirty hack to get an edit box before Qt 4.4 :: begin */
+    _m_view = m_view;
+    _m_root = m_root;
+    /* Dirty hack to get an edit box before Qt 4.4 :: end */
+    
     setupUi(m_root);
+    
+    /* Dirty hack to get an edit box before Qt 4.4 :: begin */
+    editSearch->setParent(this);
+    /* Dirty hack to get an edit box before Qt 4.4 :: end */
+
     instance->activateAll();
     //m_root->setLayout(layoutMain);
 }

@@ -35,7 +35,7 @@ from Modules import debug
 stmtDefine         = ""
 stmtDeclaration    = ""
 stmtInitialization = ""
-stmtIncludes       = set()
+stmtInclude       = set()
 stmtSetup          = ""
 WidgetHandlerManager.pushRoot("root")
 
@@ -49,6 +49,8 @@ def processDefines(node):
             stmtDefine += "#define " + defineNode.getAttribute("name") + " " + defineNode.getAttribute("value") + "\n"
 
 def processElement(node):
+    global stmtDefine
+    global stmtInclude
     global stmtDeclaration
     global stmtInitialization
     global stmtSetup
@@ -62,7 +64,11 @@ def processElement(node):
     
     if node.prefix == "code" or node.localName == "code":
         for child in node.childNodes:
-            if node.localName == "declaration":
+            if node.localName == "define":
+                stmtDefine += child.nodeValue + "\n"
+            elif node.localName == "include":
+                stmtInclude.add(child.nodeValue)
+            elif node.localName == "declaration":
                 stmtDeclaration += child.nodeValue + "\n"
             elif node.localName == "initialization":
                 stmtInitialization += child.nodeValue + "\n"
@@ -85,7 +91,7 @@ def processLayout(node):
     
     includes = handler.include()
     for include in includes.split("\n"):
-        stmtIncludes.add(include)
+        stmtInclude.add(include)
     
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
@@ -104,7 +110,7 @@ def processWidget(node):
 
     includes = handler.include()
     for include in includes.split("\n"):
-        stmtIncludes.add(include)
+        stmtInclude.add(include)
     
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
@@ -152,7 +158,7 @@ print >> output, template\
     .replace("${HEADER_ID}",          "PUI_" + className.upper() + "_H") \
     .replace("${CLASS_NAME}",         className) \
     .replace("${PARENT_OBJECT_TYPE}", rootObjectType) \
-    .replace("${INCLUDES}",           "\n".join(stmtIncludes)) \
+    .replace("${INCLUDES}",           "\n".join(stmtInclude)) \
     .replace("${DEFINES}",            stmtDefine) \
     .replace("${DECLARATION}",        stmtDeclaration) \
     .replace("${INITIALIZATION}",     stmtInitialization) \

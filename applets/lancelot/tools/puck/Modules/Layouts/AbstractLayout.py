@@ -1,3 +1,4 @@
+from .. import LayoutHandlerManager
 from .. import AbstractItem
 
 class AbstractLayoutHandler(AbstractItem.AbstractItemHandler):
@@ -14,3 +15,5 @@ class AbstractLayoutHandler(AbstractItem.AbstractItemHandler):
         if self.hasAttribute("spacing"):
             setup += self.attribute("name") + "->setSpacing(" + self.attribute("spacing") + ");\n";
         return setup
+
+LayoutHandlerManager.addHandler(AbstractLayoutHandler())

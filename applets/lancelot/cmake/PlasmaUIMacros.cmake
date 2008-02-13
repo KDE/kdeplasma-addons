@@ -1,6 +1,6 @@
 set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_SOURCE_DIR}/applets/lancelot/tools/puic/puic.py)
 
-message("Plasma UI Compiler is located at: " ${KDE_PLASMA_UIC_EXECUTABLE})
+message("Plasma UI Compiler (Puck) is located at: " ${KDE_PLASMA_UIC_EXECUTABLE})
 
 #usage: KDE4_ADD_PLASMA_UI_FILES(foo_SRCS ${ui_files})
 macro (KDE4_ADD_PLASMA_UI_FILES _sources )

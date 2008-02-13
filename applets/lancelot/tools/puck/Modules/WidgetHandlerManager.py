@@ -7,7 +7,8 @@ def handlers():
 
 def handler(widgetName):
     if not __handlers.has_key(widgetName):
-        print "Error: Widget has no handler " + widgetName
+        print "WARNING: Widget has no handler ", widgetName, " USING DEFAULT HANDLER"
+        return __handlers["Abstract"]
     return __handlers[widgetName]
 
 def addHandler(handler):

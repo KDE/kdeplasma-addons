@@ -1,12 +1,13 @@
 from . import debug
 
 class AbstractItemHandler:
+    __node = 0
     
     def __init__(self):
         self.__node = 0
         
     def name(self):
-        return "AbstractItem"
+        return "Abstract"
     
     def namespace(self):
         return self.name().replace(":", "_")
@@ -18,16 +19,16 @@ class AbstractItemHandler:
         return self.__node
     
     def include(self):
-        return "/* " + self.name() + " declaration - not implemented */"
+        return "/* " + self.attribute("type") + " declaration - not implemented */"
     
     def declaration(self):
-        return self.name() + " * " + self.attribute("name") + ";"
+        return self.attribute("type") + " * " + self.attribute("name") + ";"
     
     def initialization(self):
-        return self.attribute("name") + " = new " + self.name() + "();"
+        return self._construction() + ";";
     
     def _construction(self):
-        return self.attribute("name") + " = new " + self.name() + "()"
+        return self.attribute("name") + " = new " + self.attribute("type") + "()"
     
     def setup(self):
         setup = ""

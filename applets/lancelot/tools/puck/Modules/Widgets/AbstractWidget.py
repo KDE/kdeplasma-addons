@@ -19,3 +19,5 @@ class AbstractWidgetHandler(AbstractItem.AbstractItemHandler):
 
     def initialization(self):
         return WidgetHandlerManager.root() + "->addChild(" + self._construction() + ");"
+
+WidgetHandlerManager.addHandler(AbstractWidgetHandler())
