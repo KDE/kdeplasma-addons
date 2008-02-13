@@ -106,13 +106,6 @@ void BinaryClock::connectToEngine()
     }
 }
 
-void BinaryClock::constraintsUpdated(Plasma::Constraints constraints)
-{
-    Q_UNUSED(constraints)
-
-    updateGeometry();
-}
-
 void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);

@@ -44,7 +44,6 @@ class BinaryClock : public Plasma::Applet
         Qt::Orientations expandingDirections() const;
         QSizeF contentSizeHint() const;
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
-        void constraintsUpdated(Plasma::Constraints constraints);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
