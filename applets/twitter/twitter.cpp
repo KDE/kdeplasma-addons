@@ -40,6 +40,7 @@
 #include <KStringHandler>
 #include <KWallet/Wallet>
 #include <KMessageBox>
+#include <KColorScheme>
 
 #include <plasma/svg.h>
 #include <plasma/theme.h>
@@ -88,13 +89,14 @@ void Twitter::init()
     fnt.setBold( true );
     QFontMetrics fm( fnt );
     m_flash->resize( QSize(200, fm.height()) );
-    m_flash->setMaximumSize( QSizeF(200, fm.height()+10 ) );
+    m_flash->setMaximumSize( QSizeF(200, fm.height()+4 ) );
     m_flash->setFont( fnt );
     m_layout->addItem( m_flash );
 
 
     m_headerLayout = new Plasma::HBoxLayout( m_layout );
     m_headerLayout->setMargin( 5 );
+    m_headerLayout->setMargin( Plasma::BottomMargin, 10 );
     m_headerLayout->setSpacing( 5 );
     m_layout->addItem( m_headerLayout );
 
@@ -103,7 +105,6 @@ void Twitter::init()
     m_icon->setIcon( KIcon( "user-identity" ) );
     m_icon->setText( m_username );
     QSizeF iconSize = m_icon->sizeFromIconSize(48);
-    iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
     m_icon->setMinimumSize( iconSize );
     m_icon->setMaximumSize( iconSize );
     m_headerLayout->addItem( m_icon );
@@ -111,7 +112,7 @@ void Twitter::init()
     m_statusEdit = new Plasma::LineEdit( this );
     m_statusEdit->hide();
     m_statusEdit->setStyled( true );
-    m_statusEdit->setTextWidth( 250 );
+    m_statusEdit->setTextWidth( 200 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) ); //FIXME no such slot
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
@@ -260,7 +261,6 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
             if( user == m_username ) {
                 m_icon->setIcon( QIcon( pm ) );
                 QSizeF iconSize = m_icon->sizeFromIconSize(48);
-                iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
                 m_icon->setMinimumSize( iconSize );
                 m_icon->setMaximumSize( iconSize );
             }
@@ -293,8 +293,7 @@ void Twitter::showTweets()
         e->setAcceptedMouseButtons( Qt::NoButton );
 
         Plasma::Icon *icon = new Plasma::Icon( this );
-        QSizeF iconSize = icon->sizeFromIconSize(48);
-        iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
+        QSizeF iconSize = icon->sizeFromIconSize(30);
         icon->setMinimumSize( iconSize );
         icon->setMaximumSize( iconSize );
         tweetLayout->addItem( icon );
@@ -320,25 +319,24 @@ void Twitter::showTweets()
 
     int i = 0;
     int pos = m_tweetMap.keys().size() - 1;
+    KColorScheme colorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::self()->colors());
     while(i < m_historySize && pos >= 0 ) {
         Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
         QString user = tweetData.value( "User" ).toString();
 
         Tweet t = m_tweetWidgets[i];
         t.icon->setIcon( QIcon(m_pictureMap[user]) );
-        QSizeF iconSize = t.icon->sizeFromIconSize(48);
-        iconSize = QSizeF( qMax(iconSize.width(), 60.0), qMax(iconSize.height(), 60.0) );
+        QSizeF iconSize = t.icon->sizeFromIconSize(30);
         t.icon->setMinimumSize( iconSize );
         t.icon->setMaximumSize( iconSize );
-        t.icon->setText( user );
         t.icon->updateGeometry();
 
-        QString html = "<table cellspacing='0'>";
-        html += i18n( "<tr><td align='right' width='99%'><font color='#9c9c9c'>%1 from %2</font></td></tr>", 
+        QString html = "<table cellspacing='0' spacing='5'>";
+        html += i18n( "<tr><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='99%'><font color='%2'>%3 from %4</font></td></tr>", user, colorScheme.foreground(KColorScheme::InactiveText).color().name(),
                 timeDescription( tweetData.value( "Date" ).toDateTime() ),
                 tweetData.value( "Source" ).toString() );
-        html += QString( "<tr><td><font color='#fcfcfc'>%1<br></font></td></tr>" )
-                .arg( tweetData.value( "Status" ).toString() );
+        html += QString( "<tr><td colspan='2'><font color='%1'>%2</font></td></tr>" )
+                .arg( colorScheme.foreground().color().name()).arg( tweetData.value( "Status" ).toString() );
         html += "</table>";
         t.edit->setHtml( html );
         ++i;
@@ -478,23 +476,14 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     p->setRenderHint(QPainter::SmoothPixmapTransform);
 
     m_theme->resize();
-    m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, contentsRect.y(), 75, 12), "twitter" );
+    m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
 
     foreach( Tweet t, m_tweetWidgets ) {
-        QLinearGradient g( t.layout->geometry().topLeft(), t.layout->geometry().bottomRight() );
-        g.setColorAt( 0, QColor( 30, 30, 30 ) );
-        g.setColorAt( 1, QColor( 70, 70, 70 ) );
-        p->setBrush( QBrush( g ));
-        p->drawRect(0,
-                    (int)t.layout->geometry().y(),
-                    (int)contentSize().width(),
-                    (int)t.layout->geometry().height());
+        QRectF tweetRect(0, t.layout->geometry().y(), contentSize().width(), t.layout->geometry().height());
+        m_theme->paint( p, tweetRect, "tweet" );
     }
-    QLinearGradient g( m_headerLayout->geometry().topLeft(), m_headerLayout->geometry().bottomRight() );
-    g.setColorAt( 0, QColor( 30, 30, 30 ) );
-    g.setColorAt( 1, QColor( 70, 70, 70 ) );
-    p->setBrush( QBrush( g ));
-    p->drawRect( m_headerLayout->geometry() );
+    QRectF headerRect(0, m_headerLayout->geometry().y(), contentSize().width(), m_headerLayout->geometry().height()-5);
+    m_theme->paint( p, headerRect, "tweet" );
 }
 
 
@@ -544,14 +533,14 @@ QString Twitter::timeDescription( const QDateTime &dt )
     int diff = dt.secsTo( QDateTime::currentDateTime() );
     QString desc;
 
-    if( diff < 5 ) {
-        desc = i18n( "less than 5 seconds ago" );
-    } else if( diff < 60 ) {
-        desc = i18n( "less than %1 seconds ago", QString::number( diff ) );
-    } else if( diff < 60*60 ) {
+    if( diff < 60 ) {
+        desc = i18n( "1 minute ago" );
+    }else if( diff < 60*60 ) {
         desc = i18n( "%1 minutes ago", QString::number( diff/60 ) );
+    } else if( diff < 2*60*60 ) {
+        desc = i18n( "1 hour ago");
     } else if( diff < 24*60*60 ) {
-        desc = i18n( "about %1 hours ago", QString::number( diff/3600 ) );
+        desc = i18n( "%1 hours ago", QString::number( diff/3600 ) );
     } else {
         desc = dt.toString( Qt::LocaleDate );
     }
