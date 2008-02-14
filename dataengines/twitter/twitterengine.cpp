@@ -370,6 +370,7 @@ void TwitterEngine::parseUserInfo(const QDomDocument &info)
     QString user = e.firstChildElement("screen_name").text();
     QString imageUrl = e.firstChildElement("profile_image_url").text();
     if (!imageUrl.isEmpty() && !user.isEmpty()) {
+        m_userImages[user] = KUrl(imageUrl);
         getUserImage(user, KUrl(imageUrl));
     }
 }
