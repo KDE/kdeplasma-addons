@@ -249,7 +249,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
             }
         }
         m_lastTweet = maxId;
-        m_flash->flash( i18n("%1 new tweets", newCount), 20*1000 );
+        m_flash->flash( i18n("%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
         showTweets();
     } else if (source == "LatestImage") {
         QString user = data.begin().key();
