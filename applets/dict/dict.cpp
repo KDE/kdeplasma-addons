@@ -70,7 +70,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 	m_defDisplayProxy = new QGraphicsProxyWidget(this);
 	m_defDisplayProxy->setWidget(m_defBrowser);
 	m_defBrowser->show();
-	m_defDisplayProxy->setPos(8,25);
+	m_defDisplayProxy->setPos(8,36);
 	//m_defBrowser->resize(200,200);
 	m_defDisplayProxy->resize(200,200);
 	m_defDisplayProxy->hide();
@@ -181,7 +181,7 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
     }
     if (constraints & Plasma::SizeConstraint) {
         //m_defEdit->setTextWidth(contentSize().width()-30-40);
-		m_defDisplayProxy->resize(contentSize().toSize());
+		m_defDisplayProxy->resize(contentSize().width()-20,contentSize().height()-30);
         m_wordEdit->setTextWidth(contentSize().width()-30);
         updateGeometry();
     }
