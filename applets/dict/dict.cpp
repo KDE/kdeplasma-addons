@@ -184,9 +184,41 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         m_leftArrow->hide();
     } */
     if (data.contains("wn")) {
-        m_defBrowser->setHtml(data[QString("wn")].toString());
+        m_defBrowser->setHtml(wnToHtml(data[QString("wn")].toString()));
     }
     updateGeometry();
+}
+
+QString Dict::wnToHtml(const QString &text)
+{
+    QList<QString> splitText = text.split('\n');
+    QString def;
+    def += "<dl>\n";
+    bool isFirst=true;
+    while (!splitText.empty()) {
+        QString currentLine = splitText.takeFirst();
+        if (currentLine.startsWith("151")) {
+            isFirst = true;
+            continue;
+        }
+        if (currentLine.startsWith(".")) {
+            def += "</dd>";
+            continue;
+        }
+        if (!(currentLine.startsWith("150") || currentLine.startsWith("151")
+           || currentLine.startsWith("250") || currentLine.startsWith("552"))) {
+            if (isFirst) {
+                def += "<dt>" + currentLine + "</dt>\n<dd>";
+                continue;
+            } else {
+                def += currentLine;
+                continue;
+            }
+        }
+
+    }
+    def += "</dl>";
+    return def;
 }
 
 void Dict::showConfigurationInterface()

@@ -71,6 +71,8 @@ class Dict : public Plasma::Applet
         void define();
 
     private:
+        QString wnToHtml(const QString& text);
+
         QVariant m_thedef;
         KDialog *m_dialog; //should we move this into another class?
         QLineEdit *m_wordChooser;
