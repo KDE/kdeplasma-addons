@@ -96,11 +96,11 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     //flags ^= QGraphicsItem::ItemIsMovable;
    // m_defEdit->setFlags(flags);
 
-    m_flash = new Plasma::Flash( this );
-    m_flash->setColor( Qt::gray );
+    m_flash = new Plasma::Flash(this);
+    m_flash->setColor(Qt::gray);
     QFont fnt = qApp->font();
-    fnt.setBold( true );
-    m_flash->setFont( fnt );
+    fnt.setBold(true);
+    m_flash->setFont(fnt);
     m_flash->setPos(25,-10);
     m_flash->resize(QSize(200,20));
 }
@@ -283,6 +283,7 @@ Dict::~Dict()
 {
     delete m_dialog;
     delete m_defDisplayProxy;
+    delete m_defBrowser;
 }
 
 void Dict::autoDefine(const QString &word)
