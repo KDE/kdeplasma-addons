@@ -73,9 +73,9 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 
 //  Position lineedits
     const int wordEditOffset = 40;
-    m_graphicsIcon->setPos(-40 + wordEditOffset + 12,3);
+    m_graphicsIcon->setPos(12,3);
     m_wordEdit->setPos(15 + wordEditOffset,7);
-    m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset);
+    m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset-10);
 
     m_wordEdit->setStyled(true);
     //m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
@@ -145,7 +145,7 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
     }
     if (constraints & Plasma::SizeConstraint) {
         m_defDisplayProxy->resize(contentSize().width()-20,contentSize().height()-30);
-        m_wordEdit->setTextWidth(contentSize().width()-30);
+        m_wordEdit->setTextWidth(contentSize().width()-65);
         updateGeometry();
     }
 }
