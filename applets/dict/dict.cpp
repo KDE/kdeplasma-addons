@@ -282,6 +282,7 @@ void Dict::configAccepted()
 Dict::~Dict()
 {
     delete m_dialog;
+    delete m_defDisplayProxy;
 }
 
 void Dict::autoDefine(const QString &word)
