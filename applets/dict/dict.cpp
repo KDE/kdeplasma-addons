@@ -59,23 +59,14 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
     m_wordEdit->setDefaultText(i18n("Enter word to define here"));
     Phase::self()->animateItem(m_wordEdit, Phase::Appear);
-    //m_defEdit = new Plasma::LineEdit(this);
-    //m_defEdit->setTextInteractionFlags(Qt::TextBrowserInteraction);
-
-    //m_defEdit->hide();
-    //m_defEdit->setMultiLine(true);
-    //m_wordEdit->setZValue(m_defEdit->zValue()+1);
 
     m_defBrowser = new QWebView();
     m_defDisplayProxy = new QGraphicsProxyWidget(this);
     m_defDisplayProxy->setWidget(m_defBrowser);
     m_defBrowser->show();
     m_defDisplayProxy->setPos(8,36);
-    //m_defBrowser->resize(200,200);
     m_defDisplayProxy->resize(200,200);
     m_defDisplayProxy->hide();
-//  m_defBrowser->setTextBackgroundColor(Plasma::Theme::self()->backgroundColor());
-//  m_def->setTextColor(Plasma::Theme::self()->textColor());
 //  Icon in upper-left corner
     QIcon icon = KIcon("accessories-dictionary");
     m_graphicsIcon = new QGraphicsPixmapItem(icon.pixmap(32,32), this);
@@ -85,13 +76,9 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_graphicsIcon->setPos(-40 + wordEditOffset + 12,3);
     m_wordEdit->setPos(15 + wordEditOffset,7);
     m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset);
-    //m_defEdit->setTextWidth(contentSize().width());
-    //m_defEdit->setPos(15,40);
 
     m_wordEdit->setStyled(true);
-    //m_defEdit->setStyled(true);
     m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
-    //m_defEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
@@ -133,29 +120,6 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_flash->resize(QSize(200,20));
 }
 
-void Dict::pageRight()
-{
-    m_leftArrow->show();
-    kDebug()<< "right";
-    if (m_i != --m_defList.end())
-        m_i++;
-    m_defEdit->setHtml(*m_i);
-    if (m_i == --m_defList.end())
-        m_rightArrow->hide();
-    updateGeometry();
-}
-
-void Dict::pageLeft()
-{
-    m_rightArrow->show();
-    kDebug()<< "left";
-    if (m_i != m_defList.begin())
-        m_i--;
-    m_defEdit->setHtml(*m_i);
-    if (m_i == m_defList.begin())
-        m_leftArrow->hide();
-    updateGeometry();
-}
 
 void Dict::linkDefine(const QString &text)
 {
@@ -180,7 +144,6 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-        //m_defEdit->setTextWidth(contentSize().width()-30-40);
         m_defDisplayProxy->resize(contentSize().width()-20,contentSize().height()-30);
         m_wordEdit->setTextWidth(contentSize().width()-30);
         updateGeometry();
@@ -194,12 +157,10 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         m_flash->kill();
     }
     if (!m_word.isEmpty()) {
-        //m_defEdit->show();
-        //Phase::self()->animateItem(m_defEdit, Phase::Appear);
         m_defDisplayProxy->show();
         Phase::self()->animateItem(m_defDisplayProxy, Phase::Appear);
     }
-    if (data.contains("gcide")) {
+/*    if (data.contains("gcide")) {
         QString defHeader;
         m_defList = data[QString("gcide")].toString().split("<!--PAGE START-->"); //<!--DEFINITION START-->
         for (int n = 0; n < m_defList.size(); ++n)
@@ -221,8 +182,7 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         else
             m_rightArrow->hide();
         m_leftArrow->hide();
-        //m_defEdit->dataUpdated(QString("test"),data);
-    }
+    } */
     if (data.contains("wn")) {
         m_defBrowser->setHtml(data[QString("wn")].toString());
     }
@@ -267,9 +227,7 @@ void Dict::define()
         m_flash->flash(i18n("Looking up ") + m_word);
         dataEngine("dict")->connectSource(m_word, this);
     } else { //make the definition box disappear
-        //m_defEdit->setPlainText(QString());
         Phase::self()->animateItem(m_defDisplayProxy, Phase::Disappear);
-        //m_defEdit->hide();
         m_defDisplayProxy->hide();
         m_rightArrow->hide();
         m_leftArrow->hide();

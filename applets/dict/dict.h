@@ -64,8 +64,6 @@ class Dict : public Plasma::Applet
         void showConfigurationInterface();
         void autoDefine(const QString &word);
         void linkDefine(const QString &word);
-        void pageRight();
-        void pageLeft();
 
     protected slots:
 //         void acceptedTimeStringState(bool);
@@ -75,7 +73,6 @@ class Dict : public Plasma::Applet
     private:
         QVariant m_thedef;
         KDialog *m_dialog; //should we move this into another class?
-        QTextEdit *m_defDisplay;
         QLineEdit *m_wordChooser;
         QString m_word;
         QTimer* m_timer;
@@ -83,15 +80,14 @@ class Dict : public Plasma::Applet
         QGraphicsPixmapItem *m_graphicsIcon; 
 //  Plasma::VBoxLayout *m_layout;
         Plasma::LineEdit *m_wordEdit;
-        Plasma::LineEdit *m_defEdit;
         Plasma::Flash *m_flash;
         Arrow *m_rightArrow;
         Arrow *m_leftArrow;
         QStringList m_defList;
         QStringList::iterator m_i;
         Ui::config ui;
-    QWebView *m_defBrowser;
-    QGraphicsProxyWidget *m_defDisplayProxy;
+        QWebView *m_defBrowser;
+        QGraphicsProxyWidget *m_defDisplayProxy;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
