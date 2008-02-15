@@ -4,8 +4,7 @@ INCLUDE_DIRECTORIES(
 	${QT_QTWEBKIT_INCLUDE_DIR})
 
 set(dict_SRCS
-    dict.cpp
-    arrow.cpp)
+    dict.cpp)
 
 
 kde4_add_ui_files(dict_SRCS config.ui )
