@@ -70,9 +70,10 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 	m_defDisplayProxy = new QGraphicsProxyWidget(this);
 	m_defDisplayProxy->setWidget(m_defBrowser);
 	m_defBrowser->show();
-	m_defDisplayProxy->setPos(10,25);
-	m_defBrowser->resize(200,200);
+	m_defDisplayProxy->setPos(8,25);
+	//m_defBrowser->resize(200,200);
 	m_defDisplayProxy->resize(200,200);
+	m_defDisplayProxy->hide();
 // 	m_defBrowser->setTextBackgroundColor(Plasma::Theme::self()->backgroundColor());
 // 	m_def->setTextColor(Plasma::Theme::self()->textColor());
 //  Icon in upper-left corner
@@ -180,6 +181,7 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
     }
     if (constraints & Plasma::SizeConstraint) {
         //m_defEdit->setTextWidth(contentSize().width()-30-40);
+		m_defDisplayProxy->resize(contentSize().toSize());
         m_wordEdit->setTextWidth(contentSize().width()-30);
         updateGeometry();
     }
@@ -194,6 +196,8 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
     if (!m_word.isEmpty()) {
         //m_defEdit->show();
         //Phase::self()->animateItem(m_defEdit, Phase::Appear);
+		m_defDisplayProxy->show();
+		Phase::self()->animateItem(m_defDisplayProxy, Phase::Appear);
     }
     if (data.contains("gcide")) {
         QString defHeader;
@@ -264,8 +268,9 @@ void Dict::define()
         dataEngine("dict")->connectSource(m_word, this);
     } else { //make the definition box disappear
         //m_defEdit->setPlainText(QString());
-        Phase::self()->animateItem(m_defEdit, Phase::Disappear);
+        Phase::self()->animateItem(m_defDisplayProxy, Phase::Disappear);
         //m_defEdit->hide();
+		m_defDisplayProxy->hide();
         m_rightArrow->hide();
         m_leftArrow->hide();
     }
