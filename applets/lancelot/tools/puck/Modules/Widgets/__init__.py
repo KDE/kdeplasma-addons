@@ -1,1 +1,1 @@
-__all__ = ["ExtenderButton", "ToggleExtenderButton", "Panel", "AbstractWidget", "Label", "WidgetPositioner"]
+__all__ = ["ExtenderButton", "ToggleExtenderButton", "Panel", "AbstractWidget", "Label", "WidgetPositioner", "LancelotWidget"]

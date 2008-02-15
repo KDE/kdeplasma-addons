@@ -15,6 +15,8 @@ class PanelHandler(AbstractWidget.AbstractWidgetHandler):
         setup = AbstractWidget.AbstractWidgetHandler.setup(self)
         if self.hasAttribute('group'):
             setup += self.attribute('name') + '->setGroupByName("' + self.attribute('group') + '");'
+        if self.hasAttribute('background'):
+            setup += self.attribute('name') + '->setBackground("' + self.attribute('background') + '");'
         if self.hasAttribute('iconSize'):
             setup += self.attribute('name') + '->setIconSize(QSize(' \
                   + self.attribute('iconSize') + '));'

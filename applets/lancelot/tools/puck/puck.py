@@ -79,6 +79,8 @@ def processElement(node):
             processLayout(node)
         elif node.localName == "widget":
             processWidget(node)
+        elif node.localName == "qwidget":
+            processQWidget(node)
         
 
 def processLayout(node):
@@ -120,8 +122,7 @@ def processWidget(node):
     for child in node.childNodes:
         processElement(child)
     WidgetHandlerManager.popRoot()
-        
-        
+  
 # Main program: ##################################################################################
 
 print "Plasma UI Compiler 0.1"
