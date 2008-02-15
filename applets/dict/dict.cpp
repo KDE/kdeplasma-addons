@@ -208,7 +208,9 @@ QString Dict::wnToHtml(const QString &text)
         if (!(currentLine.startsWith("150") || currentLine.startsWith("151")
            || currentLine.startsWith("250") || currentLine.startsWith("552"))) {
             if (isFirst) {
-                def += "<dt>" + currentLine + "</dt>\n<dd>";
+                def += "<dt><b>" + currentLine + "</b></dt>\n<dd>";
+        kDebug() << def << "\nDEFINITION^^^^^^^^^";
+        isFirst = false;
                 continue;
             } else {
                 def += currentLine;
