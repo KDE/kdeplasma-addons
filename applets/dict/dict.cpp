@@ -129,8 +129,8 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-        m_defDisplayProxy->resize(contentSize().width()-20,contentSize().height()-40);
-        m_wordEdit->setTextWidth(contentSize().width()-65);
+        m_defDisplayProxy->resize(contentSize().width()-15,contentSize().height()-40);
+        m_wordEdit->setTextWidth(contentSize().width()-60);
         updateGeometry();
     }
 }
