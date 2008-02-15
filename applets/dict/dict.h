@@ -90,8 +90,8 @@ class Dict : public Plasma::Applet
         QStringList m_defList;
         QStringList::iterator m_i;
         Ui::config ui;
-	QWebView *m_defBrowser;
-	QGraphicsProxyWidget *m_defDisplayProxy;
+    QWebView *m_defBrowser;
+    QGraphicsProxyWidget *m_defDisplayProxy;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
