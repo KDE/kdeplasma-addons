@@ -120,6 +120,11 @@ QSizeF Dict::contentSizeHint() const
 //      } else {
 //          return QSizeF(contentSize().width(), 40);
 //      }
+//      if (m_defDisplayProxy->isVisible()) {
+//          return contentSize();
+//      } else { 
+//          return QSizeF(contentSize().width(), 40);
+//      }
       return QSizeF(contentSize());
 }
 
@@ -170,6 +175,7 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
     } */
     if (data.contains("wn")) {
         m_defBrowser->setHtml(wnToHtml(data[QString("wn")].toString()));
+	//updateConstraints();
     }
     updateGeometry();
 }
