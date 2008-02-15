@@ -209,10 +209,13 @@ QString Dict::wnToHtml(const QString &text)
            || currentLine.startsWith("250") || currentLine.startsWith("552"))) {
             if (isFirst) {
                 def += "<dt><b>" + currentLine + "</b></dt>\n<dd>";
-            kDebug() << def << "\nDEFINITION^^^^^^^^^";
-            isFirst = false;
+                isFirst = false;
                 continue;
             } else {
+                if (currentLine.contains(QRegExp("([1-9]{1,2}:)"))) {
+                    def += "\n<br>\n";
+                }
+                currentLine.replace(QRegExp("^([\\s\\S]*[1-9]{1,2}:)"), "<b>\\1</b>");
                 def += currentLine;
                 continue;
             }
