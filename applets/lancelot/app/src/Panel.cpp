@@ -26,7 +26,8 @@ namespace Lancelot
 Panel::Panel(QString name, QIcon * icon, QString title, QGraphicsItem * parent)
   : Widget(name, parent),
     m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()),
-    m_titleWidget(name + "::TitleWidget", icon, title, "", this)
+    m_titleWidget(name + "::TitleWidget", icon, title, "", this),
+    m_background(NULL)
 {
     init();
 }
@@ -34,7 +35,8 @@ Panel::Panel(QString name, QIcon * icon, QString title, QGraphicsItem * parent)
 Panel::Panel(QString name, QString title, QGraphicsItem * parent)
   : Widget(name, parent),
     m_layout(NULL), m_widget(NULL), m_hasTitle(title != QString()),
-    m_titleWidget(name + "::TitleWidget", title, "", this)
+    m_titleWidget(name + "::TitleWidget", title, "", this),
+    m_background(NULL)
 {
     init();
 }
@@ -42,15 +44,33 @@ Panel::Panel(QString name, QString title, QGraphicsItem * parent)
 Panel::Panel(QString name, QGraphicsItem * parent)
   : Widget(name, parent),
     m_layout(NULL), m_widget(NULL), m_hasTitle(false),
-    m_titleWidget(name + "::TitleWidget", "", "" , this)
+    m_titleWidget(name + "::TitleWidget", "", "" , this),
+    m_background(NULL)
 {
     init();
 }
 
 Panel::~Panel()
 {
+    delete m_background;
 }
 
+void Panel::setBackground(const QString & imagePath)
+{
+    if (!m_background) {
+        m_background = new Plasma::SvgPanel(imagePath);
+        m_background->setBorderFlags(Plasma::SvgPanel::DrawAllBorders);
+    } else {
+        m_background->setFile(imagePath);
+    }
+    invalidate();
+}
+
+void Panel::clearBackground()
+{
+    delete m_background;
+    m_background = NULL;
+}
 
 void Panel::init()
 {
@@ -89,6 +109,9 @@ QSize Panel::iconSize() const {
 
 void Panel::setGeometry (const QRectF & geometry) {
     Widget::setGeometry(geometry);
+    if (m_background) {
+        m_background->resize(geometry.size());
+    }
     invalidate();
 }
 
@@ -98,21 +121,33 @@ void Panel::setGroup(WidgetGroup * group)
     m_titleWidget.setGroupByName(m_group->name() + "-Title");
 }
 
-void Panel::invalidate() {
+void Panel::invalidate()
+{
+    QRectF rect = QRectF(QPointF(), size());
+    if (m_background) {
+        rect.setTop(m_background->marginSize(Plasma::TopMargin));
+        rect.setLeft(m_background->marginSize(Plasma::LeftMargin));
+        rect.setWidth(rect.width() - m_background->marginSize(Plasma::RightMargin));
+        rect.setHeight(rect.height() - m_background->marginSize(Plasma::BottomMargin));
+    }
+    
     if (!m_hasTitle) {
         m_titleWidget.hide();
         if (m_widget) {
-            m_widget->setGeometry(QRectF(QPointF(), size()));
+            m_widget->setGeometry(rect);
         }
         if (m_layout) {
-            m_layout->setGeometry(QRectF(QPointF(), size()));
+            m_layout->setGeometry(rect);
         }
     } else {
+        qreal h = rect.height();
+        
         m_titleWidget.show();
-        QRectF rect(0, 0, size().width(), 32);
+        rect.setHeight(32);
         m_titleWidget.setGeometry(rect);
+        
         rect.setTop(32);
-        rect.setHeight(size().height() - 32);
+        rect.setHeight(h - 32);
 
         if (m_layout) {
             m_layout->setGeometry(rect);
@@ -124,23 +159,36 @@ void Panel::invalidate() {
     }
 }
 
-void Panel::setLayout(Plasma::LayoutItem * layout) {
+void Panel::setLayout(Plasma::LayoutItem * layout)
+{
     m_layout = layout;
     invalidate();
 }
 
-Plasma::LayoutItem * Panel::layout() {
+Plasma::LayoutItem * Panel::layout()
+{
     return m_layout;
 }
 
-void Panel::setWidget(Widget * widget) {
+void Panel::setWidget(Widget * widget)
+{
     m_widget = widget;
     widget->setParentItem(this);
     invalidate();
 }
 
-Widget * Panel::widget() {
+Widget * Panel::widget()
+{
     return m_widget;
+}
+
+void Panel::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+    if (m_background) {
+        m_background->paint(painter, option->rect);
+    }
 }
 
 }

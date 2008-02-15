@@ -22,7 +22,9 @@
 
 #include "Widget.h"
 #include <plasma/layouts/layout.h>
+#include <plasma/svgpanel.h>
 #include "BaseActionWidget.h"
+
 
 #include <QIcon>
 
@@ -54,8 +56,13 @@ public:
 
     void setWidget(Widget * widget);
     Widget * widget();
+    
+    void setBackground(const QString & imagePath);
+    void clearBackground();
 
     void setGroup(WidgetGroup * group = NULL);
+
+    void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     void init();
@@ -66,6 +73,7 @@ private:
     bool m_hasTitle;
 
     BaseActionWidget m_titleWidget;
+    Plasma::SvgPanel * m_background;
 };
 
 }

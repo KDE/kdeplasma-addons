@@ -11,6 +11,7 @@ class CustomGraphicsView;
 
 class LancelotWindow: public QWidget, public Ui::LancelotWindowBase
 {
+    Q_OBJECT
 public:
     LancelotWindow();
     virtual ~LancelotWindow();
@@ -20,6 +21,19 @@ public Q_SLOTS:
     void lancelotShowItem(int x, int y, QString name);
     void lancelotHide(bool immediate = false);
     void search(const QString & string);
+    
+protected Q_SLOTS:
+    void sectionActivated(const QString & item);
+
+    void doSearch();
+
+    void systemLock();
+    void systemLogout();
+    void systemSwitchUser();
+
+    void systemDoLock();
+    void systemDoLogout();
+    void systemDoSwitchUser();
 
 public:
     QStringList sectionIDs();
@@ -38,8 +52,13 @@ private:
     CustomGraphicsView  * m_view;
     Plasma::Corona      * m_corona;
     QVBoxLayout         * m_layout;
+
     QTimer                m_hideTimer;
+    QTimer                m_searchTimer;
+    QString               m_searchString;
+
     bool                  m_hovered;
+    QSignalMapper       * m_sectionsSignalMapper;
 
     Lancelot::Instance  * instance;
 };

@@ -41,7 +41,7 @@ class Widget : public Plasma::Widget, public WidgetCore
 {
     Q_OBJECT
 public:
-	Widget(QString name, QGraphicsItem * parent = 0);
+	Widget(QString name = "", QGraphicsItem * parent = 0);
 	virtual ~Widget();
 
     void enable(bool value = true);

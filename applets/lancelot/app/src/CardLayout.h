@@ -56,7 +56,8 @@ public:
 
 protected:
     void relayout();
-
+    void releaseManagedItems();
+    
 private:
     QList < Plasma::LayoutItem * > m_items;
     QMap < QString, Plasma::Widget * > m_widgets;

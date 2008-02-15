@@ -1,11 +1,24 @@
 #include "LancelotWindow.h"
 #include <kwindowsystem.h>
 
+#include <KRecentDocument>
+#include <plasma/animator.h>
+#include <plasma/phase.h>
+
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusReply>
+
+#include <kworkspace/kworkspace.h>
+#include "ksmserver_interface.h"
+#include "screensaver_interface.h"
+#include "krunner_interface.h"
+
 #define windowHeight 500
 #define sectionsWidth 128
 #define mainWidth 422
 
 #define HIDE_TIMER_INTERVAL 1500
+#define SEARCH_TIMER_INTERVAL 300
 
 // QGV with a custom background painted
 
@@ -31,10 +44,6 @@ private:
     friend class LancelotWindow;
 };
 
-class RootWidget: public Plasma::Widget {
-    protected:
-};
-
 // Window
 
 LancelotWindow::LancelotWindow()
@@ -43,6 +52,10 @@ LancelotWindow::LancelotWindow()
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
     
+    connect(& m_searchTimer, SIGNAL(timeout()), this, SLOT(doSearch()));
+    m_searchTimer.setInterval(SEARCH_TIMER_INTERVAL);
+    m_searchTimer.setSingleShot(true);
+
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
     m_hideTimer.setSingleShot(true);
@@ -59,14 +72,15 @@ LancelotWindow::LancelotWindow()
     m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    m_view->m_background = new Plasma::Svg("lancelot/theme");
-    m_view->m_background->setContentType(Plasma::Svg::ImageSet);
+    //m_view->m_background = new Plasma::Svg("lancelot/theme");
+    //m_view->m_background->setContentType(Plasma::Svg::ImageSet);
 
     m_layout->addWidget(m_view);
     
     instance = new Lancelot::Instance();
 
-    m_root = new RootWidget(); //Applet(0, "plasma_applet_clock");
+    m_root = new Lancelot::Panel("m_root"); //new RootWidget(); //Applet(0, "plasma_applet_clock");
+    ((Lancelot::Panel * )m_root)->setBackground("lancelot/main-background");
     m_corona->addItem(m_root);
     
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
@@ -75,13 +89,38 @@ LancelotWindow::LancelotWindow()
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
     
     setupUi(m_root);
+    ((Lancelot::Panel * )m_root)->setLayout(layoutMain);
+    centerBackground->disable();
     
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
     editSearch->setParent(this);
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     instance->activateAll();
-    //m_root->setLayout(layoutMain);
+    
+    m_sectionsSignalMapper = new QSignalMapper(this);
+    connect (m_sectionsSignalMapper,
+        SIGNAL(mapped(const QString &)),
+        this,
+        SLOT(sectionActivated(const QString &))
+    );
+
+    QMapIterator<QString, Lancelot::ToggleExtenderButton * > i(sectionButtons);
+    while (i.hasNext()) {
+        i.next();
+        connect(i.value(), SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+        m_sectionsSignalMapper->setMapping(i.value(), i.key());
+    }
+
+    connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
+    connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
+    connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
+    
+    connect(editSearch,
+        SIGNAL(textChanged(const QString &)),
+        this, SLOT(search(const QString &))
+    );
+
 }
 
 LancelotWindow::~LancelotWindow()
@@ -101,6 +140,8 @@ void LancelotWindow::lancelotShow(int x, int y)
 
 void LancelotWindow::lancelotShowItem(int x, int y, QString name)
 {
+    sectionActivated(name);
+
     panelSections->hide();
     layoutMain->setSize(0, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
@@ -119,11 +160,6 @@ void LancelotWindow::lancelotHide(bool immediate)
 
     if (m_hovered) return;
     m_hideTimer.start();
-}
-
-void LancelotWindow::search(const QString & string)
-{
-    
 }
 
 void LancelotWindow::showWindow(int x, int y)
@@ -186,13 +222,14 @@ void LancelotWindow::resizeWindow(QSize newSize)
     m_view->update();
     
     m_root->setGeometry(QRect(QPoint(), newSize));
-    layoutMain->setGeometry(QRect(QPoint(), newSize));
-    layoutMain->invalidate();
+    //layoutMain->setGeometry(QRect(QPoint(), newSize));
+    //layoutMain->invalidate();
 
     update();
 }
 
 void LancelotWindow::focusOutEvent(QFocusEvent * event) {
+    Q_UNUSED(event);
     hide();
 }
 
@@ -229,3 +266,80 @@ QStringList LancelotWindow::sectionIcons()
     return res;
 }
 
+void LancelotWindow::sectionActivated(const QString & item) {
+    foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
+        button->setPressed(false);
+    }
+    if (sectionButtons.contains(item)) {
+        sectionButtons[item]->setPressed(true);
+    }
+    layoutCenter->show(item);
+}
+
+void LancelotWindow::search(const QString & string)
+{
+    if (editSearch->text() != string) {
+        editSearch->setText(string);
+    }
+    m_searchTimer.stop();
+    m_searchString = string;
+    m_searchTimer.start();
+}
+
+void LancelotWindow::doSearch()
+{
+    m_searchTimer.stop();
+    //m_runnerModel->setSearchString(m_searchString);
+    sectionActivated("search");
+}
+
+void LancelotWindow::systemLock()
+{
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoLock()));
+}
+
+void LancelotWindow::systemLogout()
+{
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoLogout()));
+}
+
+void LancelotWindow::systemDoLock()
+{
+    org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());
+
+    if (screensaver.isValid()) {
+        screensaver.Lock();
+    }
+}
+
+void LancelotWindow::systemDoLogout()
+{
+    org::kde::KSMServerInterface smserver("org.kde.ksmserver", "/KSMServer", QDBusConnection::sessionBus());
+
+    if (smserver.isValid()) {
+        smserver.logout(
+            KWorkSpace::ShutdownConfirmDefault,
+            KWorkSpace::ShutdownTypeDefault,
+            KWorkSpace::ShutdownModeDefault
+        );
+    }
+}
+
+void LancelotWindow::systemSwitchUser()
+{
+    hide();
+    QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
+}
+
+void LancelotWindow::systemDoSwitchUser()
+{
+    org::kde::krunner::Interface krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
+    
+    if (krunner.isValid()) {
+        krunner.switchUser();
+    }
+}
+
+#include "LancelotWindow.moc"

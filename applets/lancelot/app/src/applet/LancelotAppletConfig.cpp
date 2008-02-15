@@ -54,6 +54,7 @@ QString LancelotAppletConfig::icon() const
     if (m_ui.radioIconCustom->isChecked()) {
         return m_ui.iconCustom->icon();
     }
+    return "lancelot";
 }
 
 void LancelotAppletConfig::setShowCategories(bool value)

@@ -158,4 +158,17 @@ void CardLayout::hideAll() {
     m_shown = NULL;
 }
 
+void CardLayout::releaseManagedItems()
+{
+    // QList < Plasma::LayoutItem * > m_items;
+    // QMap < QString, Plasma::Widget * > m_widgets;
+
+    foreach (Plasma::LayoutItem * item, m_items) {
+        item->unsetManagingLayout(this);
+    }
+    foreach (Plasma::LayoutItem * item, m_widgets) {
+        item->unsetManagingLayout(this);
+    }
+}
+
 }
