@@ -78,7 +78,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset);
 
     m_wordEdit->setStyled(true);
-    m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
+    //m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
