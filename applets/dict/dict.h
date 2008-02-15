@@ -34,7 +34,6 @@
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
 #include <plasma/widgets/pushbutton.h>
-#include "arrow.h"
 #include "ui_config.h"
 
 class QTimer;
@@ -83,8 +82,6 @@ class Dict : public Plasma::Applet
 //  Plasma::VBoxLayout *m_layout;
         Plasma::LineEdit *m_wordEdit;
         Plasma::Flash *m_flash;
-        Arrow *m_rightArrow;
-        Arrow *m_leftArrow;
         QStringList m_defList;
         QStringList::iterator m_i;
         Ui::config ui;

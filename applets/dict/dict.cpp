@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 #include "dict.h"
-//#include "arrow.h"
 
 #include <math.h>
 
@@ -96,20 +95,6 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     //QGraphicsItem::GraphicsItemFlags flags = m_defEdit->flags();
     //flags ^= QGraphicsItem::ItemIsMovable;
    // m_defEdit->setFlags(flags);
-
-//  Setup Arrows
-    m_rightArrow = new Arrow(this);
-    m_rightArrow->setPos(contentSize().width()-m_rightArrow->boundingRect().width(),contentSize().height());
-    connect(m_rightArrow, SIGNAL(clicked()), this, SLOT(pageRight()));
-    m_rightArrow->setDirection(1);
-    m_rightArrow->setZValue(1);
-    m_rightArrow->hide();
-    m_leftArrow = new Arrow(this);
-    m_leftArrow->setPos(0,contentSize().height());
-    connect(m_leftArrow, SIGNAL(clicked()), this, SLOT(pageLeft()));
-    m_leftArrow->setDirection(0);
-    m_leftArrow->setZValue(1);
-    m_leftArrow->hide();
 
     m_flash = new Plasma::Flash( this );
     m_flash->setColor( Qt::gray );
@@ -266,8 +251,6 @@ void Dict::define()
     } else { //make the definition box disappear
         Phase::self()->animateItem(m_defDisplayProxy, Phase::Disappear);
         m_defDisplayProxy->hide();
-        m_rightArrow->hide();
-        m_leftArrow->hide();
     }
 
     updateConstraints();
