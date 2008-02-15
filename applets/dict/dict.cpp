@@ -121,7 +121,7 @@ QSizeF Dict::contentSizeHint() const
 //          return QSizeF(contentSize().width(), 40);
 //      }
       if (m_defDisplayProxy->isVisible()) {
-          return QSizeF(contentSize());
+          return QSizeF(contentSize().width(), 40+m_defDisplayProxy->size().height());
       } else { 
          return QSizeF(contentSize().width(), 40);
       }
@@ -134,7 +134,9 @@ void Dict::constraintsUpdated(Plasma::Constraints constraints)
         //updateGeometry();
     }
     if (constraints & Plasma::SizeConstraint) {
-        m_defDisplayProxy->resize(contentSize().width()-15,contentSize().height()-40);
+    if (m_defDisplayProxy->isVisible()) {
+            m_defDisplayProxy->resize(contentSize().width()-15,contentSize().height()-40);
+    }
         m_wordEdit->setTextWidth(contentSize().width()-60);
         updateGeometry();
     }
