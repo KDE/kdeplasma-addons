@@ -1,0 +1,21 @@
+INSTALL
+From Package:
+
+System-wide install:
+Extract this archive to $KDE4ROOT/share/apps/desktoptheme directory,
+where $KDE4ROOT is the location where your KDE4.0 is installed.
+
+User-only install: (kudos to boardercoach for reminding me of this)
+Extract this archive to ~/.kde4/share/apps/desktoptheme directory
+
+From SVN:
+Just normal cmakekde will do
+
+HOW TO ACTIVATE
+
+Open your plasmarc file (~/.kde4/share/config/plasmarc) and in the
+[Theme] section replace name=Default with name=slim-glow
+
+When you restart plasma, the new theme will be loaded.
+(you can log out, and log back in)
+
