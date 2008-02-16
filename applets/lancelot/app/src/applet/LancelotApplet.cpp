@@ -57,24 +57,27 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
     setDrawStandardBackground(true);
     setHasConfigurationInterface(true);
     setAcceptsHoverEvents(true);
-    
     dbusConnect();
-    
+
     // Instantiating Lancelot framework
     m_instance = new Lancelot::Instance();
-
+    
     m_layout = new Plasma::NodeLayout();
+    
     setLayout(m_layout);
-
-    loadConfig();
     applyConfig();
-
+    
     connect(
         & m_signalMapper, SIGNAL(mapped(const QString &)),
         this, SLOT(showLancelotSection(const QString &))
     );
         
     m_instance->activateAll();
+}
+
+void LancelotApplet::init() {
+    loadConfig();
+    applyConfig();
 }
 
 LancelotApplet::~LancelotApplet()
@@ -294,7 +297,6 @@ void LancelotApplet::layoutButtons()
 
 void LancelotApplet::applyConfig()
 {
-    kDebug() << ".";
     if (m_showCategories) {
         createCategories();
     } else {
@@ -302,7 +304,6 @@ void LancelotApplet::applyConfig()
     }
     emit geometryChanged();
     updateGeometry();
-    //layoutButtons();
 }
     
 void LancelotApplet::loadConfig()
@@ -311,6 +312,9 @@ void LancelotApplet::loadConfig()
     m_showCategories =  (kcg.readEntry("show", "main") != "main");
     m_mainIcon =        kcg.readEntry("icon", "lancelot");
     m_clickActivation = (kcg.readEntry("activate", "click") == "click");
+    kDebug() << "Loaded config:";
+    kDebug() << "  Show categories is set to " << (m_showCategories?"YES":"NO");
+    kDebug() << "  Activation is set to " << (m_clickActivation?"CLICK":"HOVER");
 }
 
 void LancelotApplet::saveConfig()
@@ -346,11 +350,5 @@ void LancelotApplet::showConfigurationInterface()
 
     m_configDialog->show();
 }
-
-bool hasConfigurationInterface()      
-{
-    return true;
-}
-
 
 #include "LancelotApplet.moc"

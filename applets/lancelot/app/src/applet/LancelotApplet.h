@@ -56,6 +56,8 @@ public:
     void showConfigurationInterface();
     bool hasConfigurationInterface();
     
+    void init();
+    
 protected Q_SLOTS:
     void showLancelot();
     void showLancelotSection(const QString & section);
