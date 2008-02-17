@@ -13,7 +13,7 @@
    <item>
     <widget class="QGroupBox" name="groupAppletIcons" >
      <property name="title" >
-      <string>Applet icons</string>
+      <string>Applet Icons</string>
      </property>
      <layout class="QVBoxLayout" >
       <item>
@@ -36,7 +36,7 @@
       <item>
        <widget class="QGroupBox" name="groupAppletIconsChoose" >
         <property name="title" >
-         <string>Choose icon</string>
+         <string>Choose Icon</string>
         </property>
         <layout class="QGridLayout" >
          <item row="0" column="0" >
@@ -191,7 +191,7 @@
    <item>
     <widget class="QGroupBox" name="groupActivation" >
      <property name="title" >
-      <string>Menu activation</string>
+      <string>Menu Activation</string>
      </property>
      <layout class="QVBoxLayout" >
       <item>

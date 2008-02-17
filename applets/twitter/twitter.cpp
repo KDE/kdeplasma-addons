@@ -367,11 +367,11 @@ void Twitter::showConfigurationInterface()
         m_historyRefreshSpinBox->setSuffix(i18n(" minutes"));
         m_checkIncludeFriends = new QCheckBox( configWidget );
 
-        QLabel *usernameLabel = new QLabel( i18n("Username"), configWidget );
-        QLabel *passwordLabel = new QLabel( i18n("Password"), configWidget );
-        QLabel *historyLabel = new QLabel( i18n("Timeline size"), configWidget );
-        QLabel *historyRefreshLabel = new QLabel( i18n("Timeline refresh"), configWidget );
-        QLabel *friendsLabel = new QLabel( i18n("Show messages of friends"), configWidget );
+        QLabel *usernameLabel = new QLabel( i18n("User name:"), configWidget );
+        QLabel *passwordLabel = new QLabel( i18n("Password:"), configWidget );
+        QLabel *historyLabel = new QLabel( i18n("Timeline size:"), configWidget );
+        QLabel *historyRefreshLabel = new QLabel( i18n("Timeline refresh:"), configWidget );
+        QLabel *friendsLabel = new QLabel( i18n("Show messages of friends:"), configWidget );
 
         m_passwordEdit->setPasswordMode( true );
 
