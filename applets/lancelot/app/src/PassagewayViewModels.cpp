@@ -22,4 +22,12 @@
 namespace Lancelot
 {
 
+PassagewayViewModel::PassagewayViewModel()
+{    
+}
+
+PassagewayViewModel::~PassagewayViewModel()
+{    
+}
+
 }

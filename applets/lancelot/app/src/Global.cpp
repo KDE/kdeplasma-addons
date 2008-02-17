@@ -168,7 +168,11 @@ void WidgetGroup::load(bool full)
         m_ownsBackgroundSvg = true;
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
+    
+    notifyUpdated();
+}
 
+void WidgetGroup::notifyUpdated() {
     kDebug() << "Widget::Group" << m_name;
     foreach (Widget * widget, m_widgets) {
         kDebug() << (long)widget;

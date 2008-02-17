@@ -22,31 +22,47 @@
 namespace Lancelot
 {
 
+class CaptionedList: public Panel {
+public:
+    CaptionedList(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0)
+        : Panel(name, icon, title, parent), m_list(NULL)
+    {
+        m_list = new ActionListView(name + "::List", 0, this);
+        setWidget(m_list);
+    }
+    
+    ActionListView * list()
+    {
+        return m_list;
+    }
+
+private:
+    ActionListView * m_list;
+    
+};
+
 PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
-    : Panel(name, parent), m_entranceModel(entranceModel), m_atlasModel(atlasModel)
+    : Panel(name, parent)
 {
     setLayout(m_layout = new Plasma::NodeLayout());
 
-    for (int i = 0; i < 3; ++i) {
-        m_listViews.append(new ActionListView(name + "::List_" + QString::number(i), NULL, this));
-        m_listViewPanels.append(new Panel(name + "::List_" + QString::number(i), this));
-        m_listViewPanels.last()->setWidget(m_listViews.last());
+    for (int i = 0; i < 2; ++i) {
+        m_list.append(new CaptionedList(name + "::" + QString::number(i), NULL, "", this));
+        m_list.last()->list()->setExtenderPosition(((i == 0)?(Lancelot::ExtenderButton::Left):(Lancelot::ExtenderButton::Right)));
+
     }
 
     m_layout->addItem(
-        m_listViewPanels.at(0),
+        m_list.at(0),
         Plasma::NodeLayout::NodeCoordinate(0, 0, 32, 0),
         Plasma::NodeLayout::NodeCoordinate(0.5, 1.0, 0, 0)
     );
     m_layout->addItem(
-        m_listViewPanels.at(1),
+        m_list.at(1),
         Plasma::NodeLayout::NodeCoordinate(0.5, 0, 0, 0),
         Plasma::NodeLayout::NodeCoordinate(1.0, 1.0, 0, 0)
     );
-
-    m_listViewPanels.at(0)->setTitle("Entrance");
-    m_listViewPanels.at(1)->setTitle("Atlas");
 
     m_path.append(Step());
     m_path.last().title = "Entrance";
@@ -63,22 +79,44 @@ PassagewayView::~PassagewayView()
 }
 
 // Entrance
-void PassagewayView::setEntranceModel(ActionListViewModel * model) { m_entranceModel = model; }
-void PassagewayView::setEntranceTitle(const QString & title)       { m_entranceTitle = title; }
-void PassagewayView::setEntranceIcon(KIcon * icon)                 { m_entranceIcon = icon; }
+void PassagewayView::setEntranceModel(ActionListViewModel * model)
+{
+    m_list.at(0)->list()->setModel(model);
+}
 
-ActionListViewModel * PassagewayView::entranceModel() { return m_entranceModel; }
-QString PassagewayView::entranceTitle()               { return m_entranceTitle; }
-KIcon * PassagewayView::entranceIcon()                { return m_entranceIcon; }
+void PassagewayView::setEntranceTitle(const QString & title)
+{
+    m_list.at(0)->setTitle(title);
+}
+
+void PassagewayView::setEntranceIcon(KIcon * icon)
+{
+    m_list.at(0)->setIcon(icon);
+}
+
+// ActionListViewModel * PassagewayView::entranceModel() { return m_entranceModel; }
+// QString PassagewayView::entranceTitle()               { return m_entranceTitle; }
+// KIcon * PassagewayView::entranceIcon()                { return m_entranceIcon; }
 
 // Atlas
-void PassagewayView::setAtlasModel(PassagewayViewModel * model) { m_atlasModel = model; }
-void PassagewayView::setAtlasTitle(const QString & title)       { m_atlasTitle = title; }
-void PassagewayView::setAtlasIcon(KIcon * icon)                 { m_atlasIcon = icon; }
+void PassagewayView::setAtlasModel(PassagewayViewModel * model)
+{
+    m_list.at(1)->list()->setModel(model);
+}
 
-PassagewayViewModel * PassagewayView::atlasModel() { return m_atlasModel; }
-QString PassagewayView::atlasTitle()               { return m_atlasTitle; }
-KIcon * PassagewayView::atlasIcon()                { return m_atlasIcon; }
+void PassagewayView::setAtlasTitle(const QString & title)
+{
+    m_list.at(1)->setTitle(title);
+}
+
+void PassagewayView::setAtlasIcon(KIcon * icon)
+{
+    m_list.at(1)->setIcon(icon);
+}
+
+// PassagewayViewModel * PassagewayView::atlasModel() { return m_atlasModel; }
+// QString PassagewayView::atlasTitle()               { return m_atlasTitle; }
+// KIcon * PassagewayView::atlasIcon()                { return m_atlasIcon; }
 
 
 }

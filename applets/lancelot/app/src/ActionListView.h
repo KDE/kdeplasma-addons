@@ -61,6 +61,7 @@ public:
     void setGeometry (const QRectF & geometry);
 
     void setItemsGroup(WidgetGroup * group = NULL);
+    void setItemsGroupByName(const QString & group);
     WidgetGroup * itemsGroup();
 
     void wheelEvent ( QGraphicsSceneWheelEvent * event );

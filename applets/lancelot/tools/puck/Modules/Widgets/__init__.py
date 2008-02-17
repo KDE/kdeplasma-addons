@@ -1,1 +1,11 @@
-__all__ = ["ExtenderButton", "ToggleExtenderButton", "Panel", "AbstractWidget", "Label", "WidgetPositioner", "LancelotWidget"]
+__all__ = [
+           "ExtenderButton",
+           "ToggleExtenderButton",
+           "Panel",
+           "AbstractWidget",
+           "Label",
+           "WidgetPositioner",
+           "LancelotWidget",
+           "ActionListView",
+           "PassagewayView"
+           ]

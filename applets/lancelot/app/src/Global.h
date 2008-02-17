@@ -52,6 +52,7 @@ public:
     Plasma::Svg * backgroundSvg() const;
     const ColorScheme * backgroundColor() const;
     const ColorScheme * foregroundColor() const;
+    void notifyUpdated();
 
     void load(bool full = false);
 

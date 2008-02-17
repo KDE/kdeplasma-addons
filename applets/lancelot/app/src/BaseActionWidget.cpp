@@ -97,9 +97,6 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     // Background Painting
     paintBackground(_painter);
 
-    // TODO: Cutting the long titles... gradient?
-
-    //QImage foreground(size().toSize().width(), size().toSize().height(), QImage::Format_ARGB32);
     QPixmap foreground(size().toSize().width(), size().toSize().height());
     foreground.fill(Qt::transparent);
 

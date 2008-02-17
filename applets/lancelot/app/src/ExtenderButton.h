@@ -88,6 +88,7 @@ public:
 
     void setGeometry (const QRectF & geometry);
     void setGroup(WidgetGroup * group = NULL);
+    void groupUpdated();
 
 protected:
     void mousePressEvent (QGraphicsSceneMouseEvent * event);

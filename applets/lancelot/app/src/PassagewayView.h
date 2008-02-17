@@ -33,6 +33,8 @@
 namespace Lancelot
 {
 
+class CaptionedList;
+
 /**
  * Class for non-click tree-browsing with a list of fast-access items
  * Entrance - the list of fast-access items
@@ -50,32 +52,21 @@ public:
     void setEntranceTitle(const QString & title);
     void setEntranceIcon(KIcon * icon);
 
-    ActionListViewModel * entranceModel();
-    QString entranceTitle();
-    KIcon * entranceIcon();
+    // ActionListViewModel * entranceModel();
+    // QString entranceTitle();
+    // KIcon * entranceIcon();
 
 	// Atlas
 	void setAtlasModel(PassagewayViewModel * model);
 	void setAtlasTitle(const QString & title);
 	void setAtlasIcon(KIcon * icon);
 
-    PassagewayViewModel * atlasModel();
-    QString atlasTitle();
-    KIcon * atlasIcon();
+    // PassagewayViewModel * atlasModel();
+	// QString atlasTitle();
+	// KIcon * atlasIcon();
 
 private:
-
     Plasma::NodeLayout * m_layout;
-
-    // Entrance
-    ActionListViewModel * m_entranceModel;
-    QString m_entranceTitle;
-    KIcon * m_entranceIcon;
-
-    // Atlas
-    PassagewayViewModel * m_atlasModel;
-    QString m_atlasTitle;
-    KIcon * m_atlasIcon;
 
     // Other
     class Step {
@@ -86,8 +77,7 @@ private:
     };
     QList < Step > m_path;
 
-    QList < ActionListView * > m_listViews;
-    QList < Panel * > m_listViewPanels;
+    QList < CaptionedList * > m_list;
 };
 
 }

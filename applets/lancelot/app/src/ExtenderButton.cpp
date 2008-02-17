@@ -110,14 +110,16 @@ void ExtenderButton::setGroup(WidgetGroup * group)
     m_extender->setGroupByName(m_group->name() + "-Extender");
 }
 
+void ExtenderButton::groupUpdated()
+{
+    BaseActionWidget::groupUpdated();
+    if (group()->hasProperty("ExtenderPosition")) {
+        setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
+    }
+}
+
 ExtenderButton::~ExtenderButton()
 {
-    /*if (--m_extendersCount == 0) {
-        delete m_extenderButtonSvg;
-        delete m_extenderIconSvg;
-        m_extenderButtonSvg = 0;
-        m_extenderIconSvg = 0;
-    }*/
     delete m_extender;
 }
 

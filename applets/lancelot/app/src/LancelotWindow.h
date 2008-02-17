@@ -9,6 +9,10 @@
 
 class CustomGraphicsView;
 
+namespace Lancelot {
+    class ActionListViewModel;
+}
+
 class LancelotWindow: public QWidget, public Ui::LancelotWindowBase
 {
     Q_OBJECT
@@ -45,7 +49,8 @@ protected:
     void leaveEvent(QEvent * event);
     void enterEvent(QEvent * event);
     void resizeWindow(QSize newSize);
-    void showWindow(int x, int y);
+    void showWindow(int x, int y, int width, int height);
+    void setupModels();
 
 private:
     Plasma::Widget      * m_root;
@@ -59,6 +64,9 @@ private:
 
     bool                  m_hovered;
     QSignalMapper       * m_sectionsSignalMapper;
+
+    QMap < QString, Lancelot::ActionListViewModel * > m_models;
+    QMap < QString, Lancelot::ActionListViewModel * > m_modelGroups;
 
     Lancelot::Instance  * instance;
 };

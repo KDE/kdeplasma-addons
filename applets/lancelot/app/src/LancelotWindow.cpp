@@ -13,12 +13,23 @@
 #include "screensaver_interface.h"
 #include "krunner_interface.h"
 
+#include "models/Devices.h"
+#include "models/Places.h"
+#include "models/SystemServices.h"
+#include "models/RecentDocuments.h"
+#include "models/OpenDocuments.h"
+#include "models/NewDocuments.h"
+#include "models/FolderModel.h"
+#include "models/Runner.h"
+
 #define windowHeight 500
 #define sectionsWidth 128
 #define mainWidth 422
 
 #define HIDE_TIMER_INTERVAL 1500
 #define SEARCH_TIMER_INTERVAL 300
+
+#define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
 // QGV with a custom background painted
 
@@ -34,10 +45,6 @@ public:
         painter->setCompositionMode(QPainter::CompositionMode_Clear);
         painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
         painter->setCompositionMode(QPainter::CompositionMode_Source);
-        if (m_background) {
-            m_background->resize(size());
-            m_background->paint(painter, 0, 0, "background");
-        }
     }
 private:
     Plasma::Svg * m_background;
@@ -90,7 +97,8 @@ LancelotWindow::LancelotWindow()
     
     setupUi(m_root);
     ((Lancelot::Panel * )m_root)->setLayout(layoutMain);
-    centerBackground->disable();
+
+    setupModels();
     
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
     editSearch->setParent(this);
@@ -133,9 +141,7 @@ void LancelotWindow::lancelotShow(int x, int y)
     layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
     
-    resizeWindow(QSize(mainWidth + sectionsWidth, windowHeight));
-    
-    showWindow(x, y);
+    showWindow(x, y, mainWidth + sectionsWidth, windowHeight);
 }
 
 void LancelotWindow::lancelotShowItem(int x, int y, QString name)
@@ -146,9 +152,7 @@ void LancelotWindow::lancelotShowItem(int x, int y, QString name)
     layoutMain->setSize(0, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
     
-    resizeWindow(QSize(mainWidth, windowHeight));
-    
-    showWindow(x, y);
+    showWindow(x, y, mainWidth, windowHeight);
 }
 
 void LancelotWindow::lancelotHide(bool immediate)
@@ -162,14 +166,14 @@ void LancelotWindow::lancelotHide(bool immediate)
     m_hideTimer.start();
 }
 
-void LancelotWindow::showWindow(int x, int y)
+void LancelotWindow::showWindow(int x, int y, int w, int h)
 {
     m_hideTimer.stop();
 
     if (isVisible()) {
+        resizeWindow(QSize(w, h));
         return;
     }
-
     
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
 
@@ -194,16 +198,26 @@ void LancelotWindow::showWindow(int x, int y)
     }
     
     layoutMain->setFlip(flip);
-    layoutMain->invalidate();
-
+    layoutMainLeft->setFlip(flip);
+    layoutSections->setFlip(flip);
+    layoutMainCenter->setFlip(flip);
+    
+    instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
+            (flip & Plasma::VerticalFlip)?(Lancelot::ExtenderButton::Top):(Lancelot::ExtenderButton::Bottom)
+    ));
+    instance->group("SystemButtons")->notifyUpdated();
+    
+    resizeWindow(QSize(w, h));
+    
+    move(x, y);
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     
     //KWindowSystem::activateWindow(winId());
     KWindowSystem::forceActiveWindow(winId());
     
-    // TODO: make this // editSearch->setFocus();
-    move(x, y);
+    editSearch->setFocus();
+
 }
 
 void LancelotWindow::resizeWindow(QSize newSize)
@@ -340,6 +354,106 @@ void LancelotWindow::systemDoSwitchUser()
     if (krunner.isValid()) {
         krunner.switchUser();
     }
+}
+
+void LancelotWindow::setupModels()
+{
+    
+    // Models:
+    
+    m_models["Places"] =
+        new Lancelot::Models::Places();
+    m_models["SystemServices"] =
+        new Lancelot::Models::SystemServices();
+    m_models["Devices/Removable"] =
+        new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
+    m_models["Devices/Fixed"] =
+        new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
+
+    m_models["NewDocuments"] =
+        new Lancelot::Models::NewDocuments();
+    m_models["RecentDocuments"] =
+        new Lancelot::Models::RecentDocuments();
+    m_models["OpenDocuments"] =
+        new Lancelot::Models::OpenDocuments();
+
+    m_models["Runner"] =
+        new Lancelot::Models::Runner();
+    
+    // Groups:
+    
+    m_modelGroups["ComputerLeft"] =
+        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["DocumentsLeft"] =
+        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ContactsLeft"] =
+        new Lancelot::MergedActionListViewModel();
+    //m_modelGroups["SearchLeft"] =
+    //    new Lancelot::MergedActionListViewModel();
+    
+    m_modelGroups["ComputerRight"] =
+        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["DocumentsRight"] =
+        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ContactsRight"] =
+        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["SearchRight"] =
+        new Lancelot::MergedActionListViewModel();
+    
+    // Assignments: Model - Group:
+    // define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+    
+    Merged(m_modelGroups["ComputerLeft"])->addModel(
+        NULL, i18n("Places"),
+        m_models["Places"]
+    );
+    Merged(m_modelGroups["ComputerLeft"])->addModel(
+        NULL, i18n("System"),
+        m_models["SystemServices"]
+    );
+
+    Merged(m_modelGroups["ComputerRight"])->addModel(
+        NULL, i18n("Removable"),
+        m_models["Devices/Removable"]
+    );
+    Merged(m_modelGroups["ComputerRight"])->addModel(
+        NULL, i18n("Fixed"),
+        m_models["Devices/Fixed"]
+    );
+
+    Merged(m_modelGroups["DocumentsLeft"])->addModel(
+        NULL, i18n("New:"),
+        m_models["NewDocuments"]
+    );
+
+    Merged(m_modelGroups["DocumentsRight"])->addModel(
+        NULL, i18n("Recent documents"),
+        m_models["RecentDocuments"]
+    );
+    Merged(m_modelGroups["DocumentsRight"])->addModel(
+        NULL, i18n("Open documents"),
+        m_models["OpenDocuments"]
+    );
+
+    m_modelGroups["SearchLeft"] = m_models["Runner"];
+                                           
+    // Assignments: ListView - Group
+    
+    listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
+    listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
+    //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
+    listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
+
+    listComputerRight->setModel(m_modelGroups["ComputerRight"]);
+    listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
+    //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
+    listSearchRight->setModel(m_modelGroups["SearchRight"]);
+    
+    // Applications passageview
+    
+    passagewayApplications->setEntranceModel(new Lancelot::DummyActionListViewModel("Application", 10));
+    passagewayApplications->setAtlasModel(new Lancelot::DummyPassagewayViewModel("ApplicationB", 10, 1));
+
 }
 
 #include "LancelotWindow.moc"

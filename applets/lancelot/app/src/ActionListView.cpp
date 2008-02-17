@@ -313,6 +313,10 @@ void ActionListView::modelItemAltered(int index)
     //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
 }*/
 
+void ActionListView::setItemsGroupByName(const QString & group) {
+    setItemsGroup(instance()->group(group));
+}
+
 void ActionListView::setItemsGroup(WidgetGroup * group)
 {
     if (group == NULL) {

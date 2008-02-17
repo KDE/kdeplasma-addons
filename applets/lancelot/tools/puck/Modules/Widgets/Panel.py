@@ -32,7 +32,7 @@ class PanelHandler(AbstractWidget.AbstractWidgetHandler):
         return setup
     
     def _construction(self):
-        create = '${NAME} = new Lancelot::Panel("${NAME}", ${ICON}, ${TITLE})'
+        create = '${NAME} = new ' + self.name() + '("${NAME}", ${ICON}, ${TITLE})'
         create = create.replace('${NAME}', self.attribute('name'));
         
         if self.hasAttribute('icon'):
