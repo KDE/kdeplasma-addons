@@ -51,7 +51,7 @@
           <item>
            <widget class="QLabel" name="label" >
             <property name="text" >
-             <string>Max rows</string>
+             <string>Max rows:</string>
             </property>
            </widget>
           </item>

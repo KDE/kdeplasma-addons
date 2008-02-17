@@ -57,7 +57,7 @@
          <item>
           <widget class="QLabel" name="fontColorLabel" >
            <property name="text" >
-            <string>Font color</string>
+            <string>Font color:</string>
            </property>
           </widget>
          </item>
@@ -267,7 +267,7 @@
          <item row="0" column="0" >
           <widget class="QLabel" name="label_2" >
            <property name="text" >
-            <string>Adjust text to panel-height</string>
+            <string>Adjust text to panel-height:</string>
            </property>
           </widget>
          </item>
@@ -316,7 +316,7 @@
          <item row="1" column="0" >
           <widget class="QLabel" name="label" >
            <property name="text" >
-            <string>Degree of fuzzyness</string>
+            <string>Degree of fuzzyness:</string>
            </property>
           </widget>
          </item>
