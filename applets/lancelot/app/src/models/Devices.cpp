@@ -24,6 +24,10 @@
 #include <KRun>
 #include <KLocalizedString>
 
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <KDebug>
+
 #include <solid/device.h>
 #include <solid/deviceinterface.h>
 #include <solid/devicenotifier.h>
@@ -156,6 +160,7 @@ void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize,
 void Devices::activate(int index)
 {
     if (index > m_items.size() - 1) return;
+    
     QString udi = m_items.at(index).data.toString();
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
 
@@ -169,7 +174,9 @@ void Devices::activate(int index)
         return;
     }
 
-    new KRun(KUrl(access->filePath()), 0);
+    //new KRun(KUrl(access->filePath()), 0);
+    KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
+    
     hideLancelotWindow();
 }
 
@@ -187,7 +194,7 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
         return;
     }
 
-    new KRun(KUrl(access->filePath()), 0);
+    KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
     hideLancelotWindow();
 }
 
