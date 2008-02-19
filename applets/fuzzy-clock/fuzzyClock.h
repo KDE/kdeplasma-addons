@@ -73,7 +73,6 @@ Qt::Orientations expandingDirections() const;
         QSizeF m_minimumContentSize;
 
         bool m_configUpdated;
-        bool m_fixedHeight;
 
         KTimeZone m_timezone;
         KTimeZone m_localTimezone;

@@ -104,7 +104,8 @@ void Clock::init()
 
 Qt::Orientations Clock::expandingDirections() const
 {
-    return Qt::Vertical;
+    //This tells the layout whether it's ok to be stretched, even if we do not need that space. Since we would become far too wide on a panel we do not want that.
+    return 0;
 }
 
 // QSizeF Clock::contentSizeHint() const
@@ -115,8 +116,6 @@ Qt::Orientations Clock::expandingDirections() const
 void Clock::constraintsUpdated(Plasma::Constraints constraints)
 {
     kDebug() << "constraintsUpdated() called";
-
-    m_fixedHeight = false;
 
     if (m_oldContentSize.toSize() != contentSize().toSize() || m_configUpdated == true ) { //The size changed or config was updated
         kDebug() << "The contentSize() changed! old: " << m_oldContentSize << "new: " << contentSize();
@@ -138,12 +137,10 @@ void Clock::constraintsUpdated(Plasma::Constraints constraints)
             } else {
                 kDebug() << "######## Small FormFactor";
 
-                //In case of the panel we have to accept the height, even if we do not need it! Otherwise constraintsUpdated gets called again and again with the smae height over and over again.
-                m_fixedHeight = true;
                 calculateSize();
             }
 
-        kDebug() << "The new size has been calculated. needed: " << m_contentSize << "\nactual contentSize() is: " << contentSize() << "\nminimumContentSize() needed: " << minimumContentSize();
+        kDebug() << "The new size has been calculated and set.\nneeded m_contenSize (if not in panel): " << m_contentSize << "\nactual contentSize() is: " << contentSize() << "\nminimumContentSize() needed (in panel): " << minimumContentSize();
 
         m_oldContentSize = contentSize();
         m_configUpdated = false;
@@ -508,8 +505,6 @@ QFontMetrics m_fmDate ( m_fontDate );
 m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
 m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
 
-//If we are in the panel we will use the least possible space for the fontSize set, always!
-
 if ( contentSize().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
     kDebug() << "Plasmoid wider than the timestring";
     if( m_showDate == true && m_showTimezone == true ) { //date + timezone enabled
@@ -571,16 +566,16 @@ if ( contentSize().width() > m_timeStringSize.width() && (formFactor() == Plasma
     //Adjust the height to the new horizontal size
     m_contentSize = QSizeF ( contentSize().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
 
-    if ( m_fixedHeight == true ) { //if we are on the panel we are forced to accept the given height.
+    if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height. 
         kDebug() << "needed height: " << m_contentSize.height() << "fixed height forced on us: " << contentSize().height();
         setContentSize ( QSizeF ( m_contentSize.width(),contentSize().height() ) );
     } else {
         setContentSize ( QSizeF ( m_contentSize.width(),m_contentSize.height() ) );
     }
 
-} else { //timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
+} else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
 
-    kDebug() << "Plasmoid is too small for timestring, we are using smallestReadable as pointSize";
+    kDebug() << "Plasmoid is in a panel or too small for the timestring, we are using smallestReadable as pointSize";
 
     if ( m_showDate == true && m_showTimezone == true ) { //Date + timezone enabled
         kDebug() << "Date + timezone enabled";
@@ -645,7 +640,7 @@ if ( contentSize().width() > m_timeStringSize.width() && (formFactor() == Plasma
     }
 
     //If the user enabled adjustToHeight we increase the point-size until the height is fully used. 40 as limit to avoid an endless loop.
-    if ( m_adjustToHeight != 0 ) {
+    if ( m_adjustToHeight != 0 && formFactor() != Plasma::Vertical ) {
         while ( ( m_fmTime.height() < ( contentSize().height() - m_subtitleStringSize.height() - m_verticalSpacing )*heightToUse ) && m_fontTime.pointSize() < 40 ) {
     
             //decrease pointSize
@@ -656,27 +651,34 @@ if ( contentSize().width() > m_timeStringSize.width() && (formFactor() == Plasma
             m_timeStringSize = QSizeF ( m_fmTime.width( m_timeString ),  m_fmTime.height() );
         }
     
-        //Adjust the width to the new size
+        //Adjust the width to the new size, including margins
         m_minimumContentSize = QSizeF ( m_timeStringSize.width() + m_margin*2,m_minimumContentSize.height() );
     }
 
     kDebug() << "Set new minimumContentSize. contentSize() " << contentSize() << "minimumSize: " << m_minimumContentSize;
 
-    if ( m_fixedHeight == true ) { //if we are on the panel we are forced to accept the given height.
-        kDebug() << "needed height: " << m_minimumContentSize.height() << "fixed height forced on us: " << contentSize().height() << " adding margin left/right of: " << m_margin;
+    //if the minimal width is larger than the actual size
+    if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
+            setMinimumContentSize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
+        }
 
-        //If the minimal size does not fit the minimal font
-        if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
-            //set new minimumSize
-            setMinimumContentSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) );
+    //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
+    if( m_timeStringSize.width() + m_margin*2 < contentSize().width() ) {
+            setContentSize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
         }
+
+    if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
+        kDebug() << "needed height: " << m_minimumContentSize.height() << "fixed height forced on us: " << contentSize().height() << " adding margin left/right of: " << m_margin << "width is going to be set setContentSize( " << m_minimumContentSize.width()+m_margin*2 << contentSize().height() << ")";
+
         setContentSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,contentSize().height() ) );
-    } else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
-        if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
-            //set new minimumSize
-            setMinimumContentSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) );
-        }
-        setContentSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,contentSize().height() ) );
+    } else if ( formFactor() == Plasma::Vertical ) {
+        kDebug() << "needed width: " << m_minimumContentSize.width() << "fixed width forced on us: " << contentSize().width() << " adding margin left/right of: " << m_margin;
+    
+        setContentSize ( QSizeF ( contentSize().width(),m_minimumContentSize.height() ) );
+    }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
+        //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
+        kDebug() << "we set the minimum size needed as the size we want";
+        setContentSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) );
     }
 }
 }
