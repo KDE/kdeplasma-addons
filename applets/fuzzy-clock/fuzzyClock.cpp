@@ -56,6 +56,8 @@ Clock::Clock(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(true);
     setDrawStandardBackground(true);
+    //If we do not set this, the user has to press CTRL when shrinking the plasmoid on the desktop beyond a certain size.
+    setAspectRatioMode(Qt::IgnoreAspectRatio);
 }
 
 void Clock::init()
