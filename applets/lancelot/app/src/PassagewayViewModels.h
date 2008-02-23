@@ -30,6 +30,8 @@ public:
     PassagewayViewModel();
     virtual ~PassagewayViewModel();
     virtual PassagewayViewModel * child(int index) = 0;
+    virtual QString modelTitle() const = 0;
+    virtual KIcon * modelIcon()  const = 0;
 };
 
 class DummyPassagewayViewModel: public PassagewayViewModel {
@@ -59,6 +61,14 @@ public:
     PassagewayViewModel * child(int index)
     {
         return m_child;
+    }
+
+    QString modelTitle() const {
+        return m_title;
+    }
+
+    KIcon * modelIcon() const {
+        return NULL;
     }
 
     QString title(int index) const {

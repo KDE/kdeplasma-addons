@@ -270,8 +270,9 @@
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
                                 
                                 Plasma__NodeLayout:topLeft     = "0, 0"
-                                Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
+                                Plasma__NodeLayout:bottomRight = "1.0, 1, 0, 0"
                             />
+                            <!--
                             <item:widget
                                 name="listSearchRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
@@ -279,6 +280,7 @@
                                 Plasma__NodeLayout:topLeft     = "0.5, 0"
                                 Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
+                            -->
                         </item:layout>
                     </item:widget>
                 </item:layout>

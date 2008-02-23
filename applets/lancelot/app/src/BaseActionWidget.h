@@ -57,10 +57,10 @@ public:
     void setIconInSvg(Plasma::Svg * icon);
     Plasma::Svg * iconInSvg() const;
 
-    void setTitle(QString title);
+    void setTitle(const QString & title);
     QString title() const;
 
-    void setDescription(QString description);
+    void setDescription(const QString & description);
     QString description() const;
 
     void setAlignment(Qt::Alignment alignment);

@@ -67,7 +67,7 @@ void Runner::load()
         return;
     }
 
-    m_context.setSearchTerm(m_searchString);
+    m_context.resetSearchTerm(m_searchString);
     //m_context.addStringCompletions(m_executions);
 
     foreach (Plasma::AbstractRunner* runner, m_runners) {
@@ -75,9 +75,9 @@ void Runner::load()
     }
 
     QList < QList < Plasma::SearchMatch * > > matchLists;
-    matchLists << m_context.informationalMatches()
-               << m_context.exactMatches()
-               << m_context.possibleMatches();
+    matchLists << m_context.matches();
+    //           << m_context.exactMatches()
+    //           << m_context.possibleMatches();
 
     foreach (QList < Plasma::SearchMatch * > matchList, matchLists) {
         foreach (Plasma::SearchMatch * action, matchList) {

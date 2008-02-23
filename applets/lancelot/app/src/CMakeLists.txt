@@ -37,6 +37,9 @@ set(plasma_lancelot_models_SRCS
   models/BaseModel.cpp
   models/FolderModel.cpp
 
+  models/FavoriteApplications.cpp
+  models/Applications.cpp
+
   models/Devices.cpp
   models/Places.cpp
   models/SystemServices.cpp

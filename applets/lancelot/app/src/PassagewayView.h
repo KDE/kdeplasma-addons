@@ -28,12 +28,13 @@
 #include "ActionListViewModels.h"
 #include "PassagewayView.h"
 #include "PassagewayViewModels.h"
+
 #include <plasma/layouts/nodelayout.h>
+#include <plasma/layouts/boxlayout.h>
+#include <plasma/layouts/layoutanimator.h>
 
 namespace Lancelot
 {
-
-class CaptionedList;
 
 /**
  * Class for non-click tree-browsing with a list of fast-access items
@@ -42,6 +43,10 @@ class CaptionedList;
  */
 class PassagewayView : public Lancelot::Panel
 {
+    Q_OBJECT
+private:
+    class Step;
+    
 public:
 	PassagewayView(QString name, ActionListViewModel * entranceModel = 0,
 	        PassagewayViewModel * atlasModel = 0, QGraphicsItem * parent = 0);
@@ -52,32 +57,41 @@ public:
     void setEntranceTitle(const QString & title);
     void setEntranceIcon(KIcon * icon);
 
-    // ActionListViewModel * entranceModel();
-    // QString entranceTitle();
-    // KIcon * entranceIcon();
-
 	// Atlas
 	void setAtlasModel(PassagewayViewModel * model);
 	void setAtlasTitle(const QString & title);
 	void setAtlasIcon(KIcon * icon);
 
-    // PassagewayViewModel * atlasModel();
-	// QString atlasTitle();
-	// KIcon * atlasIcon();
-
+private Q_SLOTS:
+    void listItemActivated(int index);
+    
+private:
+    void back(int steps);
+    void next(Step newStep);
+	
 private:
     Plasma::NodeLayout * m_layout;
 
     // Other
     class Step {
     public:
+        Step(QString t, KIcon * i, ActionListViewModel * m)
+            : title(t), icon(i), model(m) {};
         QString title;
         KIcon * icon;
         ActionListViewModel * model;
     };
-    QList < Step > m_path;
-
-    QList < CaptionedList * > m_list;
+    
+    QList < Step * > m_path;
+    
+    QList < ExtenderButton * > m_buttons;
+    Plasma::BoxLayout * m_buttonsLayout;
+    Plasma::LayoutAnimator * m_buttonsAnimator;
+    
+    QList < ActionListView * > m_lists;
+    Plasma::BoxLayout * m_listsLayout;
+    Plasma::LayoutAnimator * m_listsAnimator;
+    
 };
 
 }

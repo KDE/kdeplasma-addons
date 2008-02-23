@@ -175,6 +175,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
 
         if (!m_description.isEmpty()) {
             descriptionRect.moveTop(top);
+            
             painter->setFont(descriptionFont);
             painter->drawText(descriptionRect,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, m_description);
@@ -235,6 +236,12 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         }
 
         if (!m_description.isEmpty()) {
+            if (!m_hover) {
+                QPen pen = painter->pen();
+                QColor clr = painter->pen().color();
+                clr.setAlphaF(0.3);
+                painter->setPen(QPen(clr));
+            }
             painter->setFont(descriptionFont);
             painter->drawText(descriptionRect,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, m_description);
@@ -259,16 +266,6 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     _painter->drawPixmap(0, 0, foreground);
 }
 
-/*
- * void BaseActionWidget::setSvg(Plasma::Svg * svg) {
-    m_svg = svg;
-    update();
-}
-
-Plasma::Svg * BaseActionWidget::svg() const {
-    return m_svg;
-}*/
-
 void BaseActionWidget::setIconSize(QSize size) { m_iconSize = size; update(); }
 QSize BaseActionWidget::iconSize() const { return m_iconSize; }
 
@@ -278,10 +275,10 @@ QIcon * BaseActionWidget::icon() const { return m_icon; }
 void BaseActionWidget::setIconInSvg(Plasma::Svg * icon) { m_iconInSvg = icon; update(); }
 Plasma::Svg * BaseActionWidget::iconInSvg() const { return m_iconInSvg; }
 
-void BaseActionWidget::setTitle(QString title) { m_title = title; update(); }
+void BaseActionWidget::setTitle(const QString & title) { m_title = title; update(); }
 QString BaseActionWidget::title() const { return m_title; }
 
-void BaseActionWidget::setDescription(QString description) { m_description = description; update(); }
+void BaseActionWidget::setDescription(const QString & description) { m_description = description; update(); }
 QString BaseActionWidget::description() const { return m_description; }
 
 void BaseActionWidget::setInnerOrientation(BaseActionWidget::InnerOrientation position) { m_innerOrientation = position; update(); }

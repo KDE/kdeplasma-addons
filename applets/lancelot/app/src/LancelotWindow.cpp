@@ -20,6 +20,8 @@
 #include "models/OpenDocuments.h"
 #include "models/NewDocuments.h"
 #include "models/FolderModel.h"
+#include "models/FavoriteApplications.h"
+#include "models/Applications.h"
 #include "models/Runner.h"
 
 #define windowHeight 500
@@ -295,15 +297,16 @@ void LancelotWindow::search(const QString & string)
     if (editSearch->text() != string) {
         editSearch->setText(string);
     }
-    m_searchTimer.stop();
+    //m_searchTimer.stop();
     m_searchString = string;
-    m_searchTimer.start();
+    //m_searchTimer.start();
+    doSearch(); 
 }
 
 void LancelotWindow::doSearch()
 {
     m_searchTimer.stop();
-    //m_runnerModel->setSearchString(m_searchString);
+    ((Lancelot::Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
     sectionActivated("search");
 }
 
@@ -343,8 +346,11 @@ void LancelotWindow::systemDoLogout()
 
 void LancelotWindow::systemSwitchUser()
 {
-    hide();
-    QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
+    //  // For now, we do not use systems switch function, but rather
+    //  // SESSIONS runner...
+    //  // hide();
+    //  // QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
+    search("SESSIONS");
 }
 
 void LancelotWindow::systemDoSwitchUser()
@@ -447,12 +453,13 @@ void LancelotWindow::setupModels()
     listComputerRight->setModel(m_modelGroups["ComputerRight"]);
     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
-    listSearchRight->setModel(m_modelGroups["SearchRight"]);
+    //listSearchRight->setModel(m_modelGroups["SearchRight"]);
     
     // Applications passageview
     
-    passagewayApplications->setEntranceModel(new Lancelot::DummyActionListViewModel("Application", 10));
-    passagewayApplications->setAtlasModel(new Lancelot::DummyPassagewayViewModel("ApplicationB", 10, 1));
+    passagewayApplications->setEntranceModel(new Lancelot::Models::FavoriteApplications());
+    //passagewayApplications->setAtlasModel(new Lancelot::DummyPassagewayViewModel("ApplicationB", 10, 1));
+    passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 
 }
 
