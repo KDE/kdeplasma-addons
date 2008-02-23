@@ -14,7 +14,7 @@
    id="svg3899"
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
-   sodipodi:docbase="/home/kde-devel/src/plasma/extragear/applets/lancelot/app/themes/default"
+   sodipodi:docbase="/opt/kde4/src/plasma/extragear/desktopthemes/slim-glow/lancelot"
    sodipodi:docname="action-list-view-scroll-up.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
@@ -100,11 +100,11 @@
      inkscape:cx="154.60041"
      inkscape:cy="995.71429"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="active"
      inkscape:window-width="1440"
      inkscape:window-height="806"
      inkscape:window-x="0"
-     inkscape:window-y="24" />
+     inkscape:window-y="25" />
   <metadata
      id="metadata3904">
     <rdf:RDF>
