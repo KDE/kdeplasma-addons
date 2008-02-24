@@ -254,11 +254,11 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
 {
     Q_UNUSED(option);
 
-    m_pixmapCache = QPixmap(contentsSize);
+    m_pixmapCache = QPixmap::fromImage(m_picture).scaled(contentsSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    setContentSize(m_pixmapCache.rect().size());
     m_pixmapCache.fill(Qt::transparent);
 
-    QPainter *p = new QPainter(&m_pixmapCache);
-
+    
     int roundingFactor = 12 * m_roundCorners;
     int swRoundness = roundingFactor + m_frameOutline / 2 * m_frame * m_roundCorners;
 
@@ -270,6 +270,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
                       frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 
+    QPainter *p = new QPainter(&m_pixmapCache);
     QRect shadowRect;
     if (m_frame) {
         shadowRect = frameRect.adjusted(-m_frameOutline + 1, -m_frameOutline + 1,
