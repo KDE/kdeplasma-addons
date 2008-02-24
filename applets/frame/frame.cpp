@@ -253,9 +253,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
                        const QSize &contentsSize)
 {
     Q_UNUSED(option);
-
-    m_pixmapCache = QPixmap::fromImage(m_picture).scaled(contentsSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    setContentSize(m_pixmapCache.rect().size());
+    m_pixmapCache = QPixmap(contentsSize);
     m_pixmapCache.fill(Qt::transparent);
 
     
