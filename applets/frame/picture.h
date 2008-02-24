@@ -27,7 +27,6 @@
 #include <plasma/theme.h>
 
 class KUrl;
-class QDir;
 
 /**
  * @brief Picture choice

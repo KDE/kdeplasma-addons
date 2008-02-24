@@ -29,7 +29,6 @@
 class KDialog;
 class QFont;
 class QSizeF;
-class KConfigGroup;
 
 class Notes : public Plasma::Applet
 {

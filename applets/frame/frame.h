@@ -38,10 +38,6 @@ class ConfigDialog;
 class QGraphicsSceneDragDropEvent;
 class SlideShow;
 
-namespace Plasma
-{
-    class Layout;
-}
 
 class Frame : public Plasma::Applet
 {

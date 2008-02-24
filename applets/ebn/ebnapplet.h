@@ -29,8 +29,6 @@
 #include <QString>
 #include <QRectF>
 
-class QPainter;
-class QStyleOptionGraphicsItem;
 
 class EbnApplet : public Plasma::Applet
 {

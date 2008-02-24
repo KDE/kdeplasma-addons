@@ -42,11 +42,6 @@ class QLineEdit;
 
 class KDialog;
 
-namespace Plasma
-{
-    class Svg;
-}
-
 class Dict : public Plasma::Applet
 {
     Q_OBJECT
