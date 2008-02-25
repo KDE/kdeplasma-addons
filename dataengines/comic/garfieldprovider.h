@@ -41,6 +41,9 @@ class GarfieldProvider : public ComicProvider
          */
         ~GarfieldProvider();
 
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
         /**

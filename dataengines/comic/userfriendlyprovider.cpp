@@ -30,60 +30,58 @@ COMICPROVIDER_EXPORT_PLUGIN( UserFriendlyProvider, "UserFriendlyProvider", "" )
 
 class UserFriendlyProvider::Private
 {
-  public:
-    Private( UserFriendlyProvider *parent )
-      : mParent( parent )
-    {
-      mHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
-      connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
-    }
+    public:
+        Private( UserFriendlyProvider *parent )
+          : mParent( parent )
+        {
+            mHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
+            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
+        }
 
-    void pageRequestFinished( bool );
-    void imageRequestFinished( bool );
-    void parsePage();
+        void pageRequestFinished( bool );
+        void imageRequestFinished( bool );
+        void parsePage();
 
-    UserFriendlyProvider *mParent;
-    QByteArray mPage;
-    QImage mImage;
+        UserFriendlyProvider *mParent;
+        QImage mImage;
 
-    QHttp *mHttp;
-    QHttp *mImageHttp;
+        QHttp *mHttp;
+        QHttp *mImageHttp;
 };
 
 void UserFriendlyProvider::Private::pageRequestFinished( bool err )
 {
-  if ( err ) {
-    emit mParent->error( mParent );
-    return;
-  }
+    if ( err ) {
+        emit mParent->error( mParent );
+        return;
+    }
 
-  const QString pattern( "<img border=\"0\" src=\"http://www.userfriendly.org/cartoons/archives/" );
-  const QRegExp exp( pattern );
+    const QString pattern( "<img border=\"0\" src=\"http://www.userfriendly.org/cartoons/archives/" );
+    const QRegExp exp( pattern );
 
-  const QString data = QString::fromUtf8( mHttp->readAll() );
+    const QString data = QString::fromUtf8( mHttp->readAll() );
 
-  int pos = exp.indexIn( data ) + pattern.length();
+    const int pos = exp.indexIn( data ) + pattern.length();
+    const QString sub = data.mid( pos, data.indexOf( ' ', pos ) - pos - 1 );
 
-  const QString sub = data.mid( pos, data.indexOf( ' ', pos ) - pos - 1 );
+    KUrl url( QString( "http://www.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
 
-  KUrl url( QString( "http://www.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
+    mImageHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
+    mImageHttp->setHost( url.host() );
+    mImageHttp->get( url.path() );
 
-  mImageHttp = new QHttp( "ars.userfriendly.org", 80, mParent );
-  mImageHttp->setHost( url.host() );
-  mImageHttp->get( url.path() );
-
-  mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
+    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
 }
 
 void UserFriendlyProvider::Private::imageRequestFinished( bool error )
 {
-  if ( error ) {
-    emit mParent->error( mParent );
-    return;
-  }
+    if ( error ) {
+        emit mParent->error( mParent );
+        return;
+    }
 
-  mImage = QImage::fromData( mImageHttp->readAll() );
-  emit mParent->finished( mParent );
+    mImage = QImage::fromData( mImageHttp->readAll() );
+    emit mParent->finished( mParent );
 }
 
 UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList &args )
@@ -128,8 +126,8 @@ QString UserFriendlyProvider::identifier() const
 
 KUrl UserFriendlyProvider::websiteUrl() const
 {
-    return KUrl( QString( "http://ars.userfriendly.org/cartoons/?id=" ) +
-                   requestedDate().toString( "yyyyMMdd" ) );
+    return KUrl( QString( "http://ars.userfriendly.org/cartoons/?id=%1" )
+                   .arg( requestedDate().toString( "yyyyMMdd" ) ) );
 }
 
 #include "userfriendlyprovider.moc"

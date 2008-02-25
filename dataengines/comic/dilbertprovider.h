@@ -41,6 +41,9 @@ class DilbertProvider : public ComicProvider
          */
         ~DilbertProvider();
 
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
         /**

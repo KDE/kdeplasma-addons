@@ -30,21 +30,20 @@ COMICPROVIDER_EXPORT_PLUGIN( GarfieldProvider, "GarfieldProvider", "" )
 
 class GarfieldProvider::Private
 {
-  public:
-    Private( GarfieldProvider *parent )
-      : mParent( parent )
-    {
-      mHttp = new QHttp( "images.ucomics.com", 80, mParent );
-      connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-    }
+    public:
+        Private( GarfieldProvider *parent )
+          : mParent( parent )
+        {
+            mHttp = new QHttp( "images.ucomics.com", 80, mParent );
+            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
+        }
 
-    void imageRequestFinished( bool );
+        void imageRequestFinished( bool );
 
-    GarfieldProvider *mParent;
-    QByteArray mPage;
-    QImage mImage;
+        GarfieldProvider *mParent;
+        QImage mImage;
 
-    QHttp *mHttp;
+        QHttp *mHttp;
 };
 
 void GarfieldProvider::Private::imageRequestFinished( bool error )
@@ -54,8 +53,7 @@ void GarfieldProvider::Private::imageRequestFinished( bool error )
         return;
     }
 
-    QByteArray data = mHttp->readAll();
-    mImage = QImage::fromData( data );
+    mImage = QImage::fromData( mHttp->readAll() );
     emit mParent->finished( mParent );
 }
 

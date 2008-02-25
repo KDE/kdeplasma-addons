@@ -30,61 +30,58 @@ COMICPROVIDER_EXPORT_PLUGIN( DilbertProvider, "DilbertProvider", "" )
 
 class DilbertProvider::Private
 {
-  public:
-    Private( DilbertProvider *parent )
-      : mParent( parent )
-    {
-      mHttp = new QHttp( "dilbert.com", 80, mParent );
-      connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
-    }
+    public:
+        Private( DilbertProvider *parent )
+          : mParent( parent )
+        {
+            mHttp = new QHttp( "dilbert.com", 80, mParent );
+            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
+        }
 
-    void pageRequestFinished( bool );
-    void imageRequestFinished( bool );
-    void parsePage();
+        void pageRequestFinished( bool );
+        void imageRequestFinished( bool );
+        void parsePage();
 
-    DilbertProvider *mParent;
-    QByteArray mPage;
-    QImage mImage;
+        DilbertProvider *mParent;
+        QImage mImage;
 
-    QHttp *mHttp;
-    QHttp *mImageHttp;
+        QHttp *mHttp;
+        QHttp *mImageHttp;
 };
 
 void DilbertProvider::Private::pageRequestFinished( bool err )
 {
-  if ( err ) {
-    emit mParent->error( mParent );
-    return;
-  }
+    if ( err ) {
+        emit mParent->error( mParent );
+        return;
+    }
 
-  const QString pattern( "<IMG SRC=\"/comics/dilbert/archive/images/dilbert" );
-  const QRegExp exp( pattern );
+    const QString pattern( "<IMG SRC=\"/comics/dilbert/archive/images/dilbert" );
+    const QRegExp exp( pattern );
 
-  const QString data = QString::fromUtf8( mHttp->readAll() );
+    const QString data = QString::fromUtf8( mHttp->readAll() );
 
-  int pos = exp.indexIn( data ) + pattern.length();
+    const int pos = exp.indexIn( data ) + pattern.length();
+    const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
 
-  const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
+    KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
 
-  KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
+    mImageHttp = new QHttp( "dilbert.com", 80, mParent );
+    mImageHttp->setHost( url.host() );
+    mImageHttp->get( url.path() );
 
-  mImageHttp = new QHttp( "dilbert.com", 80, mParent );
-  mImageHttp->setHost( url.host() );
-  mImageHttp->get( url.path() );
-
-  mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
+    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
 }
 
 void DilbertProvider::Private::imageRequestFinished( bool error )
 {
-  if ( error ) {
-    emit mParent->error( mParent );
-    return;
-  }
+    if ( error ) {
+        emit mParent->error( mParent );
+        return;
+    }
 
-  QByteArray data = mImageHttp->readAll();
-  mImage = QImage::fromData( data );
-  emit mParent->finished( mParent );
+    mImage = QImage::fromData( mImageHttp->readAll() );
+    emit mParent->finished( mParent );
 }
 
 DilbertProvider::DilbertProvider( QObject *parent, const QVariantList &args )

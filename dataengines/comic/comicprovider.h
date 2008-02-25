@@ -19,8 +19,8 @@
 #ifndef COMICPROVIDER_H
 #define COMICPROVIDER_H
 
-#include <QtCore/QObject>
 #include <QtCore/QDate>
+#include <QtCore/QObject>
 
 #include <kpluginfactory.h>
 
@@ -41,10 +41,14 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
     Q_OBJECT
 
     public:
+        /**
+         * Describes the type of how this comic provider
+         * references the previous or next comic strip.
+         */
         enum IdentifierType {
-            DateIdentifier = 0,
-            NumberIdentifier,
-            StringIdentifier
+            DateIdentifier = 0,   ///< References by date
+            NumberIdentifier,     ///< References by numerical identifier
+            StringIdentifier      ///< References by arbitrary string
         };
 
         /**
@@ -67,7 +71,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual IdentifierType identifierType() const = 0;
 
         /**
-         * Returns the Url of the website where thee comic of that particular date resides
+         * Returns the url of the website where the comic of that particular date resides.
          */
         virtual KUrl websiteUrl() const = 0;
 
@@ -80,27 +84,27 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual QImage image() const = 0;
 
         /**
-         * Returns the identifier of the comic request (usually name + date).
+         * Returns the identifier of the comic request.
          */
         virtual QString identifier() const = 0;
 
         /**
-         * Returns the identifier of the next comic.
+         * Returns the identifier of the next comic (default: date of next day).
          */
         virtual QString nextIdentifier() const;
 
         /**
-         * Returns the identifier of the previous comic.
+         * Returns the identifier of the previous comic (default: date of previous day).
          */
         virtual QString previousIdentifier() const;
 
         /**
-         * Set whether this request is for the current comic.
+         * Set whether this request is for the current comic (only used internally).
          */
         void setIsCurrent( bool value );
 
         /**
-         * Returns whether this request is for the current comic.
+         * Returns whether this request is for the current comic (only used internally).
          */
         bool isCurrent() const;
 

@@ -42,6 +42,9 @@ class UserFriendlyProvider : public ComicProvider
          */
         ~UserFriendlyProvider();
 
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
         /**

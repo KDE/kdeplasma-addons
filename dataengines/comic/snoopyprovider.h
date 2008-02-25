@@ -41,6 +41,9 @@ class SnoopyProvider : public ComicProvider
          */
         ~SnoopyProvider();
 
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
         /**

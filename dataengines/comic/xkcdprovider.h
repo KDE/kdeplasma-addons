@@ -41,6 +41,9 @@ class XkcdProvider : public ComicProvider
          */
         ~XkcdProvider();
 
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
         /**
