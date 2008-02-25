@@ -38,10 +38,8 @@
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent)
+    : Plasma::DataEngine(parent, args)
 {
-    Q_UNUSED(args);
-
     m_http = new QHttp("twitter.com");
     connect(m_http,SIGNAL(requestFinished(int,bool)), this, SLOT(requestFinished(int,bool)));
     //so it turns out we really need this second qhttp because in qt 4.3 there's no way to unset

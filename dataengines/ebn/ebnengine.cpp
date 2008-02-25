@@ -28,10 +28,8 @@
 #include <syndication/item.h>
 
 EbnEngine::EbnEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent)
+    : Plasma::DataEngine(parent, args)
 {
-    Q_UNUSED(args)
-
     setMinimumUpdateInterval(60 * 1000); // one minute
     setUpdateInterval(60 * 60 * 1000); // one hour
 }

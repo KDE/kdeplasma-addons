@@ -27,8 +27,8 @@
 
 #include "cachedprovider.h"
 
-ComicEngine::ComicEngine( QObject* parent, const QVariantList& )
-    : Plasma::DataEngine( parent ), mEmptySuffix(false)
+ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
+    : Plasma::DataEngine( parent, args ), mEmptySuffix(false)
 {
     setUpdateInterval( 0 );
 
