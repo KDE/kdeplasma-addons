@@ -40,6 +40,11 @@
           <string>Slideshow</string>
          </property>
         </item>
+        <item>
+         <property name="text" >
+          <string>Picture of the day</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -252,6 +257,31 @@
            </layout>
           </item>
          </layout>
+        </widget>
+        <widget class="QWidget" name="page_2" >
+         <widget class="QComboBox" name="potdComboBox" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>271</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="selectPoTDlabel" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>158</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Select Picture of the day source:</string>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>

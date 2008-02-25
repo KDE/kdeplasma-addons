@@ -53,6 +53,7 @@ class Frame : public Plasma::Applet
 
     public slots:
         void showConfigurationInterface();
+	void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
 
     protected Q_SLOTS:
         void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -79,8 +80,9 @@ class Frame : public Plasma::Applet
         bool m_roundCorners;
         /// If true, the picture will have a drop shadow.
         bool m_shadow;
-        /// true if the user wants Wikipedia Picture of the Day (unused)
-        bool m_potd;
+	/// PoTD
+	QString m_potdProvider;
+	bool m_potd;
         /// Stores the current picture URL when slideShow is false. Wikipedia Picture of the Day is default.
         KUrl m_currentUrl;
         /// The current slideshow folder

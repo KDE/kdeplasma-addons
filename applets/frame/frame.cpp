@@ -43,6 +43,7 @@
 #include <KUrlRequester>
 #include <KUrl>
 #include <KDirSelectDialog>
+#include <KServiceTypeTrader>
 
 #include <math.h>
 
@@ -68,6 +69,22 @@ Frame::~Frame()
     delete m_configDialog;
 }
 
+void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
+{
+    QDate mCurrentDate = QDate::currentDate();
+    const QString identifier = m_potdProvider + ":" + mCurrentDate.toString( Qt::ISODate );
+
+    QImage _picture = data[ identifier ].value<QImage>();
+    
+    if ( !_picture.isNull() ) {
+	m_picture = _picture;
+	m_pixmapCache = QPixmap();
+        prepareGeometryChange();
+        updateGeometry();
+        update();
+    }
+}
+
 void Frame::init()
 {
     m_slideNumber = 0;
@@ -81,6 +98,8 @@ void Frame::init()
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
     m_currentUrl = cg.readEntry("url", "Default");
+    m_potdProvider = cg.readEntry("potdProvider", "");
+    m_potd = cg.readEntry("potd", false);
 
     // Frame & Shadow dimensions
     m_frameOutline = 8;
@@ -135,6 +154,14 @@ void Frame::showConfigurationInterface()
 {
    if ( !m_configDialog ) {
         m_configDialog = new ConfigDialog( 0 );
+	
+	KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
+	foreach (KService::Ptr service, services) {
+	    const QString *service_name = new QString ( service->name() );
+	    const QVariant *service_identifier = new QVariant ( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
+	    m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), *service_name, *service_identifier );
+	}
+	
         connect( m_configDialog, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
         connect( m_configDialog, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
     }
@@ -146,7 +173,15 @@ void Frame::showConfigurationInterface()
     m_configDialog->setShowFrame(m_frame);
     m_configDialog->setFrameColor(m_frameColor);
 
-    m_configDialog->ui.pictureComboBox->setCurrentIndex(m_slideShow);//to change when adding PoTD
+    if (m_slideShow)
+	m_configDialog->ui.pictureComboBox->setCurrentIndex(1);
+    else if (m_potd)
+	m_configDialog->ui.pictureComboBox->setCurrentIndex(2);
+    else
+	m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
+
+    m_configDialog->ui.potdComboBox->setCurrentIndex( m_configDialog->ui.potdComboBox->findData(m_potdProvider) );
+
     m_configDialog->setCurrentUrl(m_currentUrl);
     m_configDialog->ui.slideShowDirList->clear();
     m_configDialog->ui.slideShowDirList->addItems(m_slideShowPaths);
@@ -171,9 +206,24 @@ void Frame::configAccepted()
     m_frameColor = m_configDialog->frameColor();
     cg.writeEntry("frameColor", m_frameColor);
 
+    if (m_configDialog->ui.pictureComboBox->currentIndex() == 1)
+    {
+	m_slideShow = true;
+	m_potd = false;
+    }
+    else if (m_configDialog->ui.pictureComboBox->currentIndex() == 2)
+    {
+	m_slideShow = false;
+	m_potd = true;
+    }
+    else
+    {
+	m_slideShow = false;
+	m_potd = false;
+    }
+
     m_currentUrl = m_configDialog->currentUrl();
     cg.writeEntry("url", m_currentUrl);
-    m_slideShow = m_configDialog->ui.pictureComboBox->currentIndex();
     cg.writeEntry("slideshow", m_slideShow);
     m_slideShowPaths.clear();
     QStringList dirs;
@@ -187,9 +237,12 @@ void Frame::configAccepted()
     m_slideShowTimer->setInterval(m_slideshowTime * 1000);
     cg.writeEntry("slideshow time", m_slideshowTime);
 
+    m_potdProvider = m_configDialog->ui.potdComboBox->itemData(m_configDialog->ui.potdComboBox->currentIndex()).toString();
+    cg.writeEntry("potdProvider", m_potdProvider);
+    cg.writeEntry("potd", m_potd);
+
     initSlideShow();
-    
-    
+
     emit configNeedsSaving();
 }
 
@@ -198,11 +251,25 @@ void Frame::initSlideShow()
     if (m_slideShow) {
 	    m_mySlideShow->setDirs(m_slideShowPaths);
 	    m_slideShowTimer->start();
+    } else if (m_potd) {
+	Plasma::DataEngine *engine = dataEngine( "potd" );
+	if ( !engine )
+	    return;
+
+	QDate mCurrentDate = QDate::currentDate();
+	const QString identifier = m_potdProvider + ":" + mCurrentDate.toString( Qt::ISODate );
+    
+	engine->disconnectSource( identifier, this );
+	engine->connectSource( identifier, this );
+    
+	const Plasma::DataEngine::Data data = engine->query( identifier );
     } else {
 	    m_mySlideShow->setImage(m_currentUrl.path());
 	    m_slideShowTimer->stop();
     }
-    updatePicture();
+    
+    if (!m_potd)
+	updatePicture();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
