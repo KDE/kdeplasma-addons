@@ -3,10 +3,6 @@ project(plasma_comic_dataengine)
 set(comic_engine_SRCS
     cachedprovider.cpp
     comic.cpp
-#    snoopyprovider.cpp
-#    userfriendlyprovider.cpp
-#    xkcdprovider.cpp
-#    osnewsprovider.cpp
 )
 
 kde4_add_plugin(plasma_engine_comic ${comic_engine_SRCS})
@@ -39,6 +35,9 @@ kde4_add_plugin( plasma_comic_dilbertprovider ${comic_dilbert_provider_SRCS} )
 target_link_libraries( plasma_comic_dilbertprovider plasmacomicprovidercore )
 install( TARGETS plasma_comic_dilbertprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES dilbertprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_dilbert.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
 
 set( comic_userfriendly_provider_SRCS
      userfriendlyprovider.cpp
@@ -48,6 +47,9 @@ kde4_add_plugin( plasma_comic_userfriendlyprovider ${comic_userfriendly_provider
 target_link_libraries( plasma_comic_userfriendlyprovider plasmacomicprovidercore )
 install( TARGETS plasma_comic_userfriendlyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES userfriendlyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_userfriendly.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
 
 set( comic_garfield_provider_SRCS
      garfieldprovider.cpp
@@ -57,6 +59,9 @@ kde4_add_plugin( plasma_comic_garfieldprovider ${comic_garfield_provider_SRCS} )
 target_link_libraries( plasma_comic_garfieldprovider plasmacomicprovidercore )
 install( TARGETS plasma_comic_garfieldprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES garfieldprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_garfield.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
 
 set( comic_osnews_provider_SRCS
      osnewsprovider.cpp
@@ -66,6 +71,9 @@ kde4_add_plugin( plasma_comic_osnewsprovider ${comic_osnews_provider_SRCS} )
 target_link_libraries( plasma_comic_osnewsprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
 install( TARGETS plasma_comic_osnewsprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES osnewsprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_osnews.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
 
 set( comic_snoopy_provider_SRCS
      snoopyprovider.cpp
@@ -75,6 +83,9 @@ kde4_add_plugin( plasma_comic_snoopyprovider ${comic_snoopy_provider_SRCS} )
 target_link_libraries( plasma_comic_snoopyprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
 install( TARGETS plasma_comic_snoopyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES snoopyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_snoopy.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
 
 set( comic_xkcd_provider_SRCS
      xkcdprovider.cpp
@@ -84,3 +95,4 @@ kde4_add_plugin( plasma_comic_xkcdprovider ${comic_xkcd_provider_SRCS} )
 target_link_libraries( plasma_comic_xkcdprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
 install( TARGETS plasma_comic_xkcdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES xkcdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_xkcd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )

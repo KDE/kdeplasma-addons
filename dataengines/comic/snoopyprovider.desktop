@@ -4,7 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_snoopyprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=snoopy
-Icon=
+Icon=plasma_comic_snoopy
 
-Name=Snoopy Provider
-Comment=Snoopy Provider
+Name=Snoopy
+Comment=Snoopy

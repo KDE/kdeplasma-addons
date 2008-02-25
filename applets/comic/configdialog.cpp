@@ -23,7 +23,9 @@
 #include <QtGui/QLabel>
 #include <QtGui/QCheckBox>
 
-#include <klocale.h>
+#include <KLocale>
+#include <KServiceTypeTrader>
+#include <KStandardDirs>
 
 #include "configdialog.h"
 
@@ -33,12 +35,12 @@ class ComicModel : public QAbstractListModel
         ComicModel( QObject *parent = 0 )
             : QAbstractListModel( parent )
         {
-          mComics << ComicEntry( "userfriendly", i18n( "Userfriendly" ), QPixmap( ":userfriendly" ) );
-          mComics << ComicEntry( "dilbert", i18n( "Dilbert" ), QPixmap( ":dilbert" ) );
-          mComics << ComicEntry( "garfield", i18n( "Garfield" ), QPixmap( ":garfield" ) );
-          mComics << ComicEntry( "snoopy", i18n( "Snoopy" ), QPixmap( ":snoopy" ) );
-          mComics << ComicEntry( "xkcd", i18n( "XKCD" ), QPixmap( ":xkcd" ) );
-          mComics << ComicEntry( "osnews", i18n( "OsNews Focus Shift" ), QPixmap( ":osnews" ) );
+            KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
+            Q_FOREACH ( KService::Ptr service, services ) {
+                mComics << ComicEntry( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
+                                       service->name(),
+                                       QPixmap( KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) ) ) );
+            }
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -98,7 +100,7 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), mainWidget() );
     label->setBuddy( mComicIdentifier );
 
-    mScaleComic = new QCheckBox( i18n("Make comic resizable"), mainWidget() );
+    mScaleComic = new QCheckBox( i18n( "Make comic resizable" ), mainWidget() );
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
@@ -131,7 +133,7 @@ QString ConfigDialog::comicIdentifier() const
 
 void ConfigDialog::setScaleComic(bool scale)
 {
-   mScaleComic->setChecked(scale);
+    mScaleComic->setChecked(scale);
 }
 
 bool ConfigDialog::scaleComic() const

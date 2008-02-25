@@ -4,7 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_dilbertprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=dilbert
-Icon=
+Icon=plasma_comic_dilbert
 
-Name=Dilbert Provider
-Comment=Dilbert Provider
+Name=Dilbert
+Comment=Dilbert

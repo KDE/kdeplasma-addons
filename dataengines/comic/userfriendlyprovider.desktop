@@ -4,7 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_userfriendlyprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=userfriendly
-Icon=
+Icon=plasma_comic_userfriendly
 
-Name=UserFriendly Provider
-Comment=UserFriendly Provider
+Name=UserFriendly
+Comment=UserFriendly
