@@ -1,3 +1,22 @@
+/*
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Lesser/Library General Public License version 2,
+ *   or (at your option) any later version, as published by the Free
+ *   Software Foundation
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Lesser/Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Lesser/Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 #include "LancelotWindow.h"
 #include <kwindowsystem.h>
 
@@ -60,7 +79,7 @@ LancelotWindow::LancelotWindow()
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
-    
+
     connect(& m_searchTimer, SIGNAL(timeout()), this, SLOT(doSearch()));
     m_searchTimer.setInterval(SEARCH_TIMER_INTERVAL);
     m_searchTimer.setSingleShot(true);
@@ -70,7 +89,7 @@ LancelotWindow::LancelotWindow()
     m_hideTimer.setSingleShot(true);
 
     m_corona = new Plasma::Corona(this);
-    
+
     m_layout = new QVBoxLayout(this);
     m_layout->setContentsMargins (0, 0, 0, 0);
     setLayout(m_layout);
@@ -85,29 +104,29 @@ LancelotWindow::LancelotWindow()
     //m_view->m_background->setContentType(Plasma::Svg::ImageSet);
 
     m_layout->addWidget(m_view);
-    
+
     instance = new Lancelot::Instance();
 
     m_root = new Lancelot::Panel("m_root"); //new RootWidget(); //Applet(0, "plasma_applet_clock");
     ((Lancelot::Panel * )m_root)->setBackground("lancelot/main-background");
     m_corona->addItem(m_root);
-    
+
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
     _m_view = m_view;
     _m_root = m_root;
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
-    
+
     setupUi(m_root);
     ((Lancelot::Panel * )m_root)->setLayout(layoutMain);
 
     setupModels();
-    
+
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
     editSearch->setParent(this);
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     instance->activateAll();
-    
+
     m_sectionsSignalMapper = new QSignalMapper(this);
     connect (m_sectionsSignalMapper,
         SIGNAL(mapped(const QString &)),
@@ -125,7 +144,7 @@ LancelotWindow::LancelotWindow()
     connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
     connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
-    
+
     connect(editSearch,
         SIGNAL(textChanged(const QString &)),
         this, SLOT(search(const QString &))
@@ -142,7 +161,7 @@ void LancelotWindow::lancelotShow(int x, int y)
     panelSections->show();
     layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
-    
+
     showWindow(x, y, mainWidth + sectionsWidth, windowHeight);
 }
 
@@ -153,7 +172,7 @@ void LancelotWindow::lancelotShowItem(int x, int y, QString name)
     panelSections->hide();
     layoutMain->setSize(0, Plasma::LeftPositioned);
     layoutMain->updateGeometry();
-    
+
     showWindow(x, y, mainWidth, windowHeight);
 }
 
@@ -176,15 +195,15 @@ void LancelotWindow::showWindow(int x, int y, int w, int h)
         resizeWindow(QSize(w, h));
         return;
     }
-    
+
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
 
     Plasma::Flip flip = Plasma::VerticalFlip;
-    
+
     if (x < screenRect.left()) {
         x = screenRect.left();
     }
-    
+
     if (y < screenRect.top()) {
         y = screenRect.top();
     }
@@ -193,31 +212,31 @@ void LancelotWindow::showWindow(int x, int y, int w, int h)
         x = screenRect.right() - width();
         flip |= Plasma::HorizontalFlip;
     }
-    
+
     if (y + height() > screenRect.bottom()) {
         y = screenRect.bottom() - height();
         flip &= ~Plasma::VerticalFlip;
     }
-    
+
     layoutMain->setFlip(flip);
     layoutMainLeft->setFlip(flip);
     layoutSections->setFlip(flip);
     layoutMainCenter->setFlip(flip);
-    
+
     instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
             (flip & Plasma::VerticalFlip)?(Lancelot::ExtenderButton::Top):(Lancelot::ExtenderButton::Bottom)
     ));
     instance->group("SystemButtons")->notifyUpdated();
-    
+
     resizeWindow(QSize(w, h));
-    
+
     move(x, y);
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
-    
+
     //KWindowSystem::activateWindow(winId());
     KWindowSystem::forceActiveWindow(winId());
-    
+
     editSearch->setFocus();
 
 }
@@ -236,7 +255,7 @@ void LancelotWindow::resizeWindow(QSize newSize)
 
     m_view->invalidateScene();
     m_view->update();
-    
+
     m_root->setGeometry(QRect(QPoint(), newSize));
     //layoutMain->setGeometry(QRect(QPoint(), newSize));
     //layoutMain->invalidate();
@@ -300,7 +319,7 @@ void LancelotWindow::search(const QString & string)
     //m_searchTimer.stop();
     m_searchString = string;
     //m_searchTimer.start();
-    doSearch(); 
+    doSearch();
 }
 
 void LancelotWindow::doSearch()
@@ -356,7 +375,7 @@ void LancelotWindow::systemSwitchUser()
 void LancelotWindow::systemDoSwitchUser()
 {
     org::kde::krunner::Interface krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
-    
+
     if (krunner.isValid()) {
         krunner.switchUser();
     }
@@ -364,9 +383,9 @@ void LancelotWindow::systemDoSwitchUser()
 
 void LancelotWindow::setupModels()
 {
-    
+
     // Models:
-    
+
     m_models["Places"] =
         new Lancelot::Models::Places();
     m_models["SystemServices"] =
@@ -385,9 +404,9 @@ void LancelotWindow::setupModels()
 
     m_models["Runner"] =
         new Lancelot::Models::Runner();
-    
+
     // Groups:
-    
+
     m_modelGroups["ComputerLeft"] =
         new Lancelot::MergedActionListViewModel();
     m_modelGroups["DocumentsLeft"] =
@@ -396,7 +415,7 @@ void LancelotWindow::setupModels()
         new Lancelot::MergedActionListViewModel();
     //m_modelGroups["SearchLeft"] =
     //    new Lancelot::MergedActionListViewModel();
-    
+
     m_modelGroups["ComputerRight"] =
         new Lancelot::MergedActionListViewModel();
     m_modelGroups["DocumentsRight"] =
@@ -405,10 +424,10 @@ void LancelotWindow::setupModels()
         new Lancelot::MergedActionListViewModel();
     m_modelGroups["SearchRight"] =
         new Lancelot::MergedActionListViewModel();
-    
+
     // Assignments: Model - Group:
     // define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
-    
+
     Merged(m_modelGroups["ComputerLeft"])->addModel(
         NULL, i18n("Places"),
         m_models["Places"]
@@ -442,9 +461,9 @@ void LancelotWindow::setupModels()
     );
 
     m_modelGroups["SearchLeft"] = m_models["Runner"];
-                                           
+
     // Assignments: ListView - Group
-    
+
     listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
     listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
     //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
@@ -454,10 +473,15 @@ void LancelotWindow::setupModels()
     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
     //listSearchRight->setModel(m_modelGroups["SearchRight"]);
-    
+
     // Applications passageview
-    
-    passagewayApplications->setEntranceModel(new Lancelot::Models::FavoriteApplications());
+
+    passagewayApplications->setEntranceModel(
+        new Lancelot::PassagewayViewModelProxy(
+            new Lancelot::Models::FavoriteApplications(),
+            i18n("Favorites"), new KIcon("favorites")
+        )
+    );
     //passagewayApplications->setAtlasModel(new Lancelot::DummyPassagewayViewModel("ApplicationB", 10, 1));
     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 

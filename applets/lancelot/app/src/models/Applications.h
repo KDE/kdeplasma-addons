@@ -50,17 +50,17 @@ public slots:
 private:
     void load();
     void clear();
-    
+
     class ApplicationData {
     public:
         QString name, description;
         KIcon * icon;
         QString desktopFile;
     };
-    
+
     QList < Applications * > m_submodels;
     QList < ApplicationData > m_items;
-    
+
     QString m_root;
     QString m_title;
     KIcon * m_icon;

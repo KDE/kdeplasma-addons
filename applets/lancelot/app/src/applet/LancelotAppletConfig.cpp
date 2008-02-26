@@ -1,3 +1,22 @@
+/*
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Lesser/Library General Public License version 2,
+ *   or (at your option) any later version, as published by the Free
+ *   Software Foundation
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Lesser/Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Lesser/Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 #include "LancelotAppletConfig.h"
 
 LancelotAppletConfig::LancelotAppletConfig()
@@ -6,22 +25,22 @@ LancelotAppletConfig::LancelotAppletConfig()
 
     QWidget * widget = new QWidget();
     m_ui.setupUi(widget);
-    
+
     m_ui.iconLancelot->setPixmap((new KIcon("lancelot"))->pixmap(48));
     m_ui.iconKDE->setPixmap((new KIcon("kde"))->pixmap(48));
     m_ui.iconStartHere->setPixmap((new KIcon("start-here"))->pixmap(48));
-    
+
     qbgIcons.addButton(m_ui.radioShowCategories);
     qbgIcons.addButton(m_ui.radioShowMenuIconOnly);
-    
+
     qbgChooseIcon.addButton(m_ui.radioIconLancelot);
     qbgChooseIcon.addButton(m_ui.radioIconKDE);
     qbgChooseIcon.addButton(m_ui.radioIconStartHere);
     qbgChooseIcon.addButton(m_ui.radioIconCustom);
-    
+
     qbgMenuActivation.addButton(m_ui.radioActivationHover);
     qbgMenuActivation.addButton(m_ui.radioActivationClick);
-    
+
     setMainWidget(widget);
     setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
 }

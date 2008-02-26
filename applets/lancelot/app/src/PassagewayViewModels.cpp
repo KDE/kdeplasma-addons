@@ -23,11 +23,73 @@ namespace Lancelot
 {
 
 PassagewayViewModel::PassagewayViewModel()
-{    
+{
 }
 
 PassagewayViewModel::~PassagewayViewModel()
-{    
+{
+}
+
+PassagewayViewModelProxy::PassagewayViewModelProxy(ActionListViewModel * model, QString title, KIcon * icon)
+    : m_model(model), m_modelTitle(title), m_modelIcon(icon)
+{
+    connect(model, SIGNAL( itemActivated(int) ),
+            this,  SIGNAL( itemActivated(int) ));
+    connect(model, SIGNAL( itemInserted(int)  ),
+            this,  SIGNAL( itemInserted(int)  ));
+    connect(model, SIGNAL( itemAltered(int)   ),
+            this,  SIGNAL( itemAltered(int)   ));
+    connect(model, SIGNAL( itemDeleted(int)   ),
+            this,  SIGNAL( itemDeleted(int)   ));
+    connect(model, SIGNAL( updated()          ),
+            this,  SIGNAL( updated()          ));
+}
+
+// PassagewayViewModel
+PassagewayViewModel * PassagewayViewModelProxy::child(int index)
+{
+    return NULL;
+}
+
+QString PassagewayViewModelProxy::modelTitle() const
+{
+    return m_modelTitle;
+}
+
+KIcon * PassagewayViewModelProxy::modelIcon()  const
+{
+    return m_modelIcon;
+}
+
+// ActionListViewModel
+QString PassagewayViewModelProxy::title(int index) const
+{
+    return m_model->title(index);
+}
+
+QString PassagewayViewModelProxy::description(int index) const
+{
+    return m_model->description(index);
+}
+
+KIcon * PassagewayViewModelProxy::icon(int index) const
+{
+    return m_model->icon(index);
+}
+
+bool PassagewayViewModelProxy::isCategory(int index) const
+{
+    return m_model->isCategory(index);
+}
+
+int PassagewayViewModelProxy::size() const
+{
+    return m_model->size();
+}
+
+void PassagewayViewModelProxy::activate(int index)
+{
+    m_model->activated(index);
 }
 
 }

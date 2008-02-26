@@ -168,7 +168,7 @@ void WidgetGroup::load(bool full)
         m_ownsBackgroundSvg = true;
         m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
-    
+
     notifyUpdated();
 }
 

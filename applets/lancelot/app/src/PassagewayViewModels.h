@@ -34,55 +34,42 @@ public:
     virtual KIcon * modelIcon()  const = 0;
 };
 
-class DummyPassagewayViewModel: public PassagewayViewModel {
-private:
-    int m_size;
-    int m_level;
-    QString m_title;
-    DummyPassagewayViewModel * m_child;
-    KIcon * m_icon;
-    
+class PassagewayViewModelProxy: public PassagewayViewModel {
+    Q_OBJECT
 public:
-    DummyPassagewayViewModel(QString title, int size, int level)
-        : Lancelot::PassagewayViewModel(),
-          m_size(size), m_title(title), m_level(level),
-          m_icon(new KIcon("lancelot")), m_child(NULL)
-    {
-         if (size > 3) {
-             m_child = new DummyPassagewayViewModel(title, size - 1, level + 1);
-         }
-    }
-    
-    virtual ~DummyPassagewayViewModel()
-    {
-        delete m_child;
-    }
+    PassagewayViewModelProxy(ActionListViewModel * model,
+            QString title = QString(), KIcon * icon = NULL);
 
-    PassagewayViewModel * child(int index)
-    {
-        return m_child;
-    }
+    // PassagewayViewModel
+    PassagewayViewModel * child(int index);
+    QString modelTitle() const;
+    KIcon * modelIcon()  const;
 
-    QString modelTitle() const {
-        return m_title;
-    }
+    // ActionListViewModel
+    QString title(int index) const;
+    QString description(int index) const;
+    KIcon * icon(int index) const;
+    bool isCategory(int index) const;
 
-    KIcon * modelIcon() const {
-        return NULL;
-    }
+    int size() const;
 
-    QString title(int index) const {
-        return m_title + " " + QString::number(index) + " " + QString::number(m_level) + QString((index < size())?"":"err");
-    }
+Q_SIGNALS:
+    void itemActivated(int index);
 
-    QString description(int index) const {
-        return "Description " + QString::number(index);
-    }
-    
-    KIcon * icon(int index) const { Q_UNUSED(index); return m_icon; }
-    int size() const { return m_size; }
+    void updated();
+    void itemInserted(int index);
+    void itemDeleted(int index);
+    void itemAltered(int index);
 
-    void activated(int index) { Q_UNUSED(index); }
+protected:
+    /** Models should reimplement this function. It is invoked when
+     *  an item is activated, before the itemActivated signal is emitted */
+    void activate(int index);
+
+private:
+    ActionListViewModel * m_model;
+    QString m_modelTitle;
+    KIcon * m_modelIcon;
 };
 
 }

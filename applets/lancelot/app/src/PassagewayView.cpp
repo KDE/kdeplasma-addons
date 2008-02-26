@@ -22,7 +22,7 @@
 namespace Lancelot
 {
 
-PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel,
+PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
     : Panel(name, parent), m_layout(NULL), m_buttonsLayout(NULL), m_listsLayout(NULL)
 {
@@ -45,7 +45,7 @@ PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel
     m_buttonsLayout->setAnimator(m_buttonsAnimator);
 
     m_layout->addItem(
-        m_listsLayout = new Plasma::BoxLayout(Plasma::BoxLayout::LeftToRight),
+        m_listsLayout = new ColumnLayout(),
         Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 32),
         Plasma::NodeLayout::NodeCoordinate(1, 1, 0, 0)
     );
@@ -58,7 +58,7 @@ PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel
     m_listsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
     m_listsAnimator->setTimeLine(new QTimeLine(300, this));
 
-    m_buttonsLayout->setAnimator(m_buttonsAnimator);
+    m_listsLayout->setAnimator(m_listsAnimator);
 
     next(Step("", NULL, entranceModel));
     next(Step("", NULL, atlasModel));
@@ -66,7 +66,16 @@ PassagewayView::PassagewayView(QString name, ActionListViewModel * entranceModel
 
 void PassagewayView::listItemActivated(int index)
 {
-    next(Step("Test", new KIcon("lancelot"), NULL));
+    for (int i = m_lists.size() - 1; i >= 0; --i) {
+        if (m_lists.at(i) == sender()) {
+            PassagewayViewModel * model = m_path.at(i)->model;
+            if (model)
+                model = model->child(index);
+            if (model) {
+                next(Step(model->modelTitle(), model->modelIcon(), model));
+            }
+        }
+    }
 }
 
 PassagewayView::~PassagewayView()
@@ -93,34 +102,33 @@ void PassagewayView::back(int steps)
 
 void PassagewayView::next(Step newStep)
 {
-    ExtenderButton * button = new ExtenderButton(m_name + "::button", newStep.icon, newStep.title, "", this);
-    ActionListView * list   = new ActionListView(m_name + "::list", newStep.model, this);
+    Step * step = new Step(newStep.title, newStep.icon, newStep.model);
+    ExtenderButton * button =
+        new ExtenderButton(m_name + "::button", step->icon, step->title, "", this);
+    ActionListView * list   =
+        new ActionListView(m_name + "::list", step->model, this);
 
     button->setIconSize(QSize(24, 24));
     button->setAlignment(Qt::AlignLeft);
-    
+
     m_buttons.append(button);
     m_lists.append(list);
-    m_path.append(new Step(newStep));
+    m_path.append(step);
 
     m_buttonsLayout->addItem(button);
-    m_listsLayout->addItem(list);
-    
-    if (m_lists.size() > 2) {
-        m_listsLayout->takeAt(0);
-    }
-    
+    m_listsLayout->push(list);
+
     connect(
         list, SIGNAL(activated(int)),
         this, SLOT(listItemActivated(int))
     );
-    
 }
 
 // Entrance
-void PassagewayView::setEntranceModel(ActionListViewModel * model)
+void PassagewayView::setEntranceModel(PassagewayViewModel * model)
 {
     if (m_lists.size() < 2) return;
+    m_path.at(0)->model = model;
     m_lists.at(0)->setModel(model);
 }
 
@@ -142,6 +150,7 @@ void PassagewayView::setEntranceIcon(KIcon * icon)
 void PassagewayView::setAtlasModel(PassagewayViewModel * model)
 {
     if (m_lists.size() < 2) return;
+    m_path.at(1)->model = model;
     m_lists.at(1)->setModel(model);
 }
 
