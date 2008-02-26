@@ -65,6 +65,7 @@ public:
 
 private Q_SLOTS:
     void listItemActivated(int index);
+    void pathButtonActivated();
 
 private:
     void back(int steps);

@@ -44,7 +44,7 @@ public:
 
     enum RelayoutType { Clean, Push, Pop, Resize };
 
-    Private(ColumnLayout * parent): q(parent), animator(NULL), count(3) {}
+    Private(ColumnLayout * parent): q(parent), animator(NULL), count(2) {}
 
     QList < Plasma::Widget * > items;
     Plasma::LayoutAnimator * animator;
@@ -84,7 +84,7 @@ public:
                         item->setVisible(true);
                     }
                 }
-                newGeometry.moveLeft(itemWidth);
+                newGeometry.moveLeft(newGeometry.left() + itemWidth);
             }
         }
         q->startAnimation();

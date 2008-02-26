@@ -59,15 +59,27 @@ PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel
     m_listsAnimator->setTimeLine(new QTimeLine(300, this));
 
     m_listsLayout->setAnimator(m_listsAnimator);
+    m_listsLayout->setColumnCount(13);
 
     next(Step("", NULL, entranceModel));
     next(Step("", NULL, atlasModel));
+}
+
+void PassagewayView::pathButtonActivated()
+{
+    for (int i = m_buttons.size() - 1; i >= 0; --i) {
+        if (m_buttons.at(i) == sender()) {
+            back(m_buttons.size() - i - 2);
+        }
+    }
 }
 
 void PassagewayView::listItemActivated(int index)
 {
     for (int i = m_lists.size() - 1; i >= 0; --i) {
         if (m_lists.at(i) == sender()) {
+            back(m_lists.size() - i - 1);
+
             PassagewayViewModel * model = m_path.at(i)->model;
             if (model)
                 model = model->child(index);
@@ -97,12 +109,24 @@ PassagewayView::~PassagewayView()
 
 void PassagewayView::back(int steps)
 {
+    for (int i = 0; i < steps; ++i) {
+        ExtenderButton * button = m_buttons.takeLast();
+        ActionListView * list   = m_lists.takeLast();
+        m_path.takeLast();
 
+        m_buttonsLayout->removeItem(button);
+        m_listsLayout->pop();
+
+        //delete button;  // TODO: Find a way to do this
+        //delete list;    // TODO: Find a way to do this
+        button->hide();
+        list->hide();
+    }
 }
 
 void PassagewayView::next(Step newStep)
 {
-    Step * step = new Step(newStep.title, newStep.icon, newStep.model);
+    Step * step = new Step(newStep);
     ExtenderButton * button =
         new ExtenderButton(m_name + "::button", step->icon, step->title, "", this);
     ActionListView * list   =
@@ -110,6 +134,8 @@ void PassagewayView::next(Step newStep)
 
     button->setIconSize(QSize(24, 24));
     button->setAlignment(Qt::AlignLeft);
+
+    list->setExtenderPosition(ExtenderButton::Right);
 
     m_buttons.append(button);
     m_lists.append(list);
@@ -121,6 +147,11 @@ void PassagewayView::next(Step newStep)
     connect(
         list, SIGNAL(activated(int)),
         this, SLOT(listItemActivated(int))
+    );
+
+    connect(
+        button, SIGNAL(activated()),
+        this, SLOT(pathButtonActivated())
     );
 }
 
