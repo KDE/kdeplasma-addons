@@ -2,9 +2,9 @@ TODO FOR 4.1:
 
 - clean the code: class Picture is added (28th January 2008), still to do is add slideshow code there
 - comic-like engine to support many Pictures of The Day => in playground/base/plasma/engines/potd (started 1st February 2008)
-- Make the Wikipedia Picture Of The Day an engine (RSS) - Keep craig Duquette updated when it's done so he'll see about a flickr engine! - have several engines as the comic engine has.
+
 - clean the config dialog and take ideas from Desktop config (share some config settings?) - add recursive dirs as an option for slideshow (although beware of too many options)
-- add the PoTD choices as a stack widget in config
+
 - right-click action: set as wallpaper for the current picture
 
 ------------------
