@@ -45,7 +45,6 @@ class OsNewsProvider::Private
         {
         }
 
-        void pageRequestFinished( bool );
         void imageRequestFinished( bool );
         void processRss( Syndication::Loader*, Syndication::FeedPtr, Syndication::ErrorCode );
 
@@ -58,35 +57,10 @@ class OsNewsProvider::Private
 
         Syndication::Loader *mLoader;
 
-        QHttp *mPageHttp;
         QHttp *mImageHttp;
 
         KUrl mPageUrl;
 };
-
-void OsNewsProvider::Private::pageRequestFinished( bool err )
-{
-    if ( err ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    const QString pattern( "<img src=\"http://www.osnews.com/images/comics/" );
-    const QRegExp exp( pattern );
-
-    const QString data = QString::fromUtf8( mPageHttp->readAll() );
-
-    const int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
-
-    KUrl url( QString( "http://www.osnews.com/images/comics/%1" ).arg( sub ) );
-
-    mImageHttp = new QHttp( "osnews.com", 80, mParent );
-    mImageHttp->setHost( url.host() );
-    mImageHttp->get( url.path() );
-
-    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-}
 
 void OsNewsProvider::Private::imageRequestFinished( bool error )
 {
@@ -109,6 +83,7 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
         QDateTime itemDate;
         QDate tempDate;
         QDate tempNextDate;
+        QString description;
 
         foreach ( const Syndication::ItemPtr& item, feed->items() ) {
             itemDate.setTime_t( item->datePublished() );
@@ -120,6 +95,7 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
                 if ( mPageUrl.isEmpty() ) {
                     mPageUrl = item->link();
                     mTitle = item->title();
+                    description = item->description();
                     mCurrentDate = tempDate;
                     mNextDate = tempNextDate;
                 } else {
@@ -130,12 +106,22 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
         }
 
         kDebug() << "Comic webpage found: " << mPageUrl;
+        kDebug() << "Comic webpage found desc: " << description;
+
+        const int start = description.indexOf( "http://" );
+        const int end = description.indexOf ( "\"", start );
+        const QString imgUrl = description.mid( start, end - start );
+        kDebug() << "imgUrl: " << imgUrl;
 
         if ( !mPageUrl.isEmpty() ) {
-            mPageHttp = new QHttp( "osnews.com", 80, mParent );
-            mPageHttp->setHost( mPageUrl.host() );
-            mPageHttp->get( mPageUrl.path() );
-            connect( mPageHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
+
+            KUrl url( imgUrl );
+
+            mImageHttp = new QHttp( "www.osnews.com", 80, mParent );
+            mImageHttp->setHost( url.host() );
+            mImageHttp->get( url.path() );
+
+            mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
         } else {
             //this should never happen
             emit mParent->error( mParent );
@@ -146,7 +132,7 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
 OsNewsProvider::OsNewsProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( "http://osnews.com/feed/topic/79" );
+    KUrl url( "http://osnews.com/files/comics.xml" );
 
     d->mLoader = Syndication::Loader::create();
     connect( d->mLoader, SIGNAL( loadingComplete( Syndication::Loader*, Syndication::FeedPtr, Syndication::ErrorCode ) ),

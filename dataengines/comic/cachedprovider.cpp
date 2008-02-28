@@ -108,3 +108,5 @@ KUrl CachedProvider::websiteUrl() const
     QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
     return KUrl( settings.value( "websiteUrl", QString() ).toString() );
 }
+
+#include "cachedprovider.moc"

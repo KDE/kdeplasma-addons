@@ -66,7 +66,6 @@ class OsNewsProvider : public ComicProvider
       Q_PRIVATE_SLOT( d, void processRss(Syndication::Loader* loader,
                            Syndication::FeedPtr feed,
                            Syndication::ErrorCode error) )
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
       Q_PRIVATE_SLOT( d, void imageRequestFinished( bool ) )
 };
 
