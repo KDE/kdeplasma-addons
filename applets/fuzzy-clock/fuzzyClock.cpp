@@ -237,7 +237,7 @@ void Clock::showConfigurationInterface()
     //2. If one opens the settings the first time setSelected does not work. It only does the second time settings are opened.
     //3. If the sorting is set to true the widget does not return any values.
     ui.timeZones->setSelected( m_timezone.name(), true );
-    ui.timeZones->setEnabled( m_useLocalTimezone );
+    ui.timeZones->setEnabled( !m_useLocalTimezone );
 
     ui.fuzzynessSlider->setSliderPosition( m_fuzzyness );
     ui.showTimezone->setChecked( m_showTimezone );
