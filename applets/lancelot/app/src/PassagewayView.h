@@ -74,6 +74,8 @@ private:
 private:
     Plasma::NodeLayout * m_layout;
 
+    ColumnLayout::ColumnSizer * m_sizer;
+
     // Other
     class Step {
     public:

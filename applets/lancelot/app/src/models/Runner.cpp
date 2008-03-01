@@ -31,7 +31,7 @@ namespace Models {
 Runner::Runner(QString search)
     : m_searchString(search)
 {
-    m_runners = Plasma::AbstractRunner::loadRunners(this);
+    m_runners = Plasma::AbstractRunner::load(this);
 
     load();
 }

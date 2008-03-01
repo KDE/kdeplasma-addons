@@ -45,7 +45,7 @@ public:
     KIcon * modelIcon()  const;
 
 public slots:
-    void activated(int index);
+    void activate(int index);
 
 private:
     void load();

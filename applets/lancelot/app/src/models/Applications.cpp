@@ -23,6 +23,9 @@
 #include <kstandarddirs.h>
 #include <kservicegroup.h>
 
+#include <KRun>
+#include <KUrl>
+#include <KDebug>
 // Applications
 
 namespace Lancelot {
@@ -51,7 +54,7 @@ void Applications::load()
 {
     if (m_loaded) clear();
     m_loaded = true;
-    
+
     KServiceGroup::Ptr root = KServiceGroup::group(m_root);
     if (!root || !root->isValid())
         return;
@@ -64,7 +67,7 @@ void Applications::load()
         ApplicationData data;
 
         const KSycocaEntry::Ptr p = (*it);
-        
+
         if (p->isType(KST_KService)) {
             const KService::Ptr service = KService::Ptr::staticCast(p);
 
@@ -89,7 +92,7 @@ void Applications::load()
                 serviceGroup->caption(),
                 new KIcon(serviceGroup->icon())
             ));
-            
+
             // appName = serviceGroup->comment();
         }
     }
@@ -132,9 +135,16 @@ int Applications::size() const
     return m_submodels.size() + m_items.size();
 }
 
-void Applications::activated(int index)
+void Applications::activate(int index)
 {
-    // TODO:
+    kDebug() << " activated ";
+
+    if (index >= size()) return;
+    if (index < m_submodels.size()) return;
+    kDebug() << " activated passed ";
+
+    new KRun(KUrl(m_items.at(index - m_submodels.size()).desktopFile), 0);
+    LancelotApplication::hide(true);
 }
 
 PassagewayViewModel * Applications::child(int index)

@@ -44,9 +44,25 @@ namespace Lancelot
  *  Since ColumnLayout needs the ability to hide certain items
  *  in it, it works only for Plasma::Widget subclasses.
  */
+
 class ColumnLayout: public Plasma::Layout
 {
 public:
+    class ColumnSizer
+    {
+    public:
+        virtual void init(int count)  = 0;
+        virtual qreal size() = 0;
+        virtual ~ColumnSizer();
+
+        enum SizerType {
+            EqualSizer,
+            GoldenSizer
+        };
+
+        static ColumnSizer * create(SizerType type);
+    };
+
     ColumnLayout(Plasma::LayoutItem * parent = 0);
     ~ColumnLayout();
 
@@ -69,6 +85,9 @@ public:
     Plasma::Widget * pop();
 
     QSizeF sizeHint() const;
+
+    void setSizer(ColumnSizer * sizer);
+    ColumnSizer * sizer() const;
 
 protected:
     void relayout();

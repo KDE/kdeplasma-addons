@@ -18,9 +18,42 @@
  */
 
 #include "PassagewayView.h"
+#include <KDebug>
 
 namespace Lancelot
 {
+
+class PassagewayViewSizer: public ColumnLayout::ColumnSizer {
+public:
+    PassagewayViewSizer()
+    {
+        m_sizer = ColumnLayout::ColumnSizer::create(ColumnSizer::ColumnSizer::GoldenSizer);
+    }
+    void init(int size)
+    {
+        m_size = size;
+        m_pass = true;
+        if (size > 2) {
+            m_sizer->init(size - 1);
+        }
+    }
+
+    qreal size()
+    {
+        if (!m_size)     return 1.0;
+        if (m_size <= 2) return 1.0 / m_size;
+        if (m_pass) {
+            m_pass = false;
+            return 0.01;
+        } else {
+            return m_sizer->size();
+        }
+    }
+private:
+    ColumnLayout::ColumnSizer * m_sizer;
+    int m_size;
+    bool m_pass;
+};
 
 PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
@@ -60,6 +93,7 @@ PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel
 
     m_listsLayout->setAnimator(m_listsAnimator);
     m_listsLayout->setColumnCount(13);
+    m_listsLayout->setSizer(new PassagewayViewSizer());
 
     next(Step("", NULL, entranceModel));
     next(Step("", NULL, atlasModel));
@@ -78,13 +112,17 @@ void PassagewayView::listItemActivated(int index)
 {
     for (int i = m_lists.size() - 1; i >= 0; --i) {
         if (m_lists.at(i) == sender()) {
+            kDebug() << " activating ";
             back(m_lists.size() - i - 1);
 
             PassagewayViewModel * model = m_path.at(i)->model;
-            if (model)
-                model = model->child(index);
             if (model) {
-                next(Step(model->modelTitle(), model->modelIcon(), model));
+                kDebug() << " activating item ";
+                //model->activated(index);
+                model = model->child(index);
+                if (model) {
+                    next(Step(model->modelTitle(), model->modelIcon(), model));
+                }
             }
         }
     }

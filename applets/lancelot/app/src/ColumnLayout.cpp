@@ -21,8 +21,67 @@
 #include <QList>
 #include <plasma/layouts/layoutitem.h>
 
+#define GOLDEN_SIZE  0.381966011250105  // 1 / (1 + phi); phi = (sqrt(5) + 1) / 2
+
 namespace Lancelot
 {
+
+class GoldenColumnSizer: public ColumnLayout::ColumnSizer {
+public:
+    void init(int count) {
+        m_position = 0;
+        qreal size = 1.0;
+        m_sizes.clear();
+        while (count) {
+            if (count == 1) {
+                m_sizes.prepend(size);
+            } else if (count == 2) {
+                m_sizes.prepend((1 - GOLDEN_SIZE) * size);
+                size *= GOLDEN_SIZE;
+            } else {
+                m_sizes.prepend(size * GOLDEN_SIZE);
+                size -= size * GOLDEN_SIZE;
+            }
+            --count;
+        }
+    }
+
+    qreal size() {
+        if (m_position < 0 || m_position > m_sizes.size()) return 0;
+        return m_sizes.at(m_position++);
+    }
+private:
+    QList < qreal > m_sizes;
+    int m_position;
+};
+
+class EqualColumnSizer: public ColumnLayout::ColumnSizer {
+public:
+    void init(int count) {
+        m_count = count;
+    }
+
+    qreal size() {
+        return 1.0 / m_count;
+    }
+private:
+    int m_count;
+};
+
+ColumnLayout::ColumnSizer::~ColumnSizer()
+{
+}
+
+ColumnLayout::ColumnSizer * ColumnLayout::ColumnSizer::create(SizerType type)
+{
+    switch (type) {
+        case EqualSizer:
+            return new EqualColumnSizer();
+        case GoldenSizer:
+            return new GoldenColumnSizer();
+    }
+    return NULL;
+}
 
 class ColumnLayout::Private: public QObject {
     Q_OBJECT
@@ -41,24 +100,25 @@ public Q_SLOTS:
 
 public:
     ColumnLayout * q;
+    QList < Plasma::Widget * > items;
+    Plasma::LayoutAnimator * animator;
+    ColumnLayout::ColumnSizer * sizer;
+    int count;
 
     enum RelayoutType { Clean, Push, Pop, Resize };
 
-    Private(ColumnLayout * parent): q(parent), animator(NULL), count(2) {}
-
-    QList < Plasma::Widget * > items;
-    Plasma::LayoutAnimator * animator;
-    int count;
+    Private(ColumnLayout * parent)
+        : q(parent), animator(NULL), count(2), sizer(new GoldenColumnSizer()) {}
 
     void relayout(RelayoutType type = Clean)
     {
         if (items.size() == 0) return;
 
         int showItems   = qMin(items.size(), count);
-        qreal itemWidth = q->geometry().width() / showItems;
+        qreal width     = q->geometry().width();
+        sizer->init(showItems);
 
         QRectF newGeometry = q->geometry();
-        newGeometry.setWidth(itemWidth);
 
         int i = 0;
 
@@ -70,6 +130,8 @@ public:
                     item->setVisible(false);
                 }
             } else {
+                qreal itemWidth = sizer->size() * width;
+                newGeometry.setWidth(itemWidth);
                 if (animator) {
                     animator->setGeometry(item, newGeometry);
                     if (!item->isVisible()) {
@@ -115,6 +177,18 @@ public:
         return widget;
     }
 };
+
+void ColumnLayout::setSizer(ColumnLayout::ColumnSizer * sizer)
+{
+    delete d->sizer;
+    d->sizer = sizer;
+    d->relayout(Private::Resize);
+}
+
+ColumnLayout::ColumnSizer * ColumnLayout::sizer() const
+{
+    return d->sizer;
+}
 
 QSizeF ColumnLayout::sizeHint() const
 {
