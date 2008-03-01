@@ -1,4 +1,4 @@
-project(plasma_playground)
+project(plasma_extragear)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
