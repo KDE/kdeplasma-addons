@@ -22,7 +22,6 @@
 #include <QtNetwork/QHttpRequestHeader>
 
 #include <KUrl>
-#include <KDebug>
 
 #include "phdprovider.h"
 
@@ -50,8 +49,6 @@ class PhdProvider::Private
         QHttp *mHttp;
         QHttp *mImageHttp;
 };
-
-#include <KDebug>
 
 void PhdProvider::Private::pageRequestFinished( bool err )
 {
@@ -157,7 +154,6 @@ QString PhdProvider::nextIdentifier() const
 
 QString PhdProvider::previousIdentifier() const
 {
-   kDebug() << d->mRequestedId;
    if ( d->mRequestedId > 1 ) {
        return QString::number( d->mRequestedId - 1 );
    } else {
