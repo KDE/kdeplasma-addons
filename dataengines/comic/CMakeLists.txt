@@ -96,3 +96,15 @@ target_link_libraries( plasma_comic_xkcdprovider plasmacomicprovidercore ${KDE4_
 install( TARGETS plasma_comic_xkcdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES xkcdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_xkcd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_phd_provider_SRCS
+     phdprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_phdprovider ${comic_phd_provider_SRCS} )
+target_link_libraries( plasma_comic_phdprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
+install( TARGETS plasma_comic_phdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES phdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_phd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
