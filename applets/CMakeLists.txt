@@ -5,8 +5,11 @@ else(PLASMA_OPENGL_FOUND)
      MESSAGE(STATUS "libplasma doesn't support OpenGL applets")
 endif(PLASMA_OPENGL_FOUND)
 
+if(QT_QTWEBKIT_FOUND)
+  add_subdirectory(dict)
+endif(QT_QTWEBKIT_FOUND)
+
 add_subdirectory(ebn)
-add_subdirectory(dict)
 add_subdirectory(fileWatcher)
 add_subdirectory(frame)
 add_subdirectory(kolourpicker)
