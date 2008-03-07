@@ -20,6 +20,9 @@
 #include "LancelotWindow.h"
 #include <kwindowsystem.h>
 
+#include <QGraphicsItem>
+#include <QStyleOptionGraphicsItem>
+
 #include <KRecentDocument>
 #include <plasma/animator.h>
 #include <plasma/phase.h>
@@ -43,46 +46,140 @@
 #include "models/Applications.h"
 #include "models/Runner.h"
 
-#define windowHeight 500
 #define sectionsWidth 128
-#define mainWidth 422
+#define windowHeightDefault 500
+#define mainWidthDefault    422
 
 #define HIDE_TIMER_INTERVAL 1500
 #define SEARCH_TIMER_INTERVAL 300
 
 #define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
-// QGV with a custom background painted
+// Transparent QGV
 
 class CustomGraphicsView : public QGraphicsView {
 public:
-    CustomGraphicsView  ( QWidget * parent = 0 )
-        : QGraphicsView(parent), m_background(NULL) {}
-    CustomGraphicsView  ( QGraphicsScene * scene, QWidget * parent = 0 )
-        : QGraphicsView(scene, parent), m_background(NULL) {}
-    void drawBackground (QPainter * painter, const QRectF & rect)
+    CustomGraphicsView(
+        QGraphicsScene * scene,
+        LancelotWindow * parent
+    ) : QGraphicsView(scene, parent),
+        m_parent(parent), m_resizing(false),
+        m_cache(NULL)
+    {
+        setWindowFlags(Qt::FramelessWindowHint);
+        setFrameStyle(QFrame::NoFrame);
+        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+        m_fgBrush = QBrush(QColor(0, 0, 0, 200));
+    }
+
+    void drawItems (QPainter * painter, int numItems,
+            QGraphicsItem ** items, const QStyleOptionGraphicsItem * options )
+    {
+        if (m_resizing) {
+            painter->drawPixmap(0, 0, m_cache->scaled(size()));
+        } else {
+            QGraphicsView::drawItems(painter, numItems, items, options);
+        }
+    }
+
+    void drawBackground(QPainter * painter, const QRectF & rect)
     {
         Q_UNUSED(rect);
         painter->setCompositionMode(QPainter::CompositionMode_Clear);
         painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
         painter->setCompositionMode(QPainter::CompositionMode_Source);
     }
+
+    void drawForeground(QPainter * painter, const QRectF & rect)
+    {
+        if (m_resizing) {
+            painter->fillRect(rect, m_fgBrush);
+        }
+    }
+
+//    void drawItems(QPainter * painter, int numItems,
+//            QGraphicsItem ** items,  const QStyleOptionGraphicsItem * options)
+//    {
+//        if (!m_resizing) {
+//            QGraphicsView::drawItems(painter, numItems, items, options);
+//        }
+//    }
+
+#define passEvent(Event)                           \
+    void Event(QMouseEvent *e) {                   \
+        m_parent->Event(e);                        \
+        QGraphicsView::Event(e);                   \
+    }
+
+    passEvent(mousePressEvent)
+    passEvent(mouseReleaseEvent)
+    passEvent(mouseMoveEvent)
+
+#undef passEvent
+
+    void resize(QSize newSize = QSize()) {
+
+        if (newSize == QSize()) {
+            newSize = size();
+        }
+
+        QGraphicsView::resize(newSize.width(), newSize.height());
+
+        if (!m_resizing) {
+            resetCachedContent();
+            m_parent->m_corona->
+                setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
+
+            //layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
+            //layoutMain->updateGeometry();
+
+            m_parent->m_root->
+                setGeometry(QRect(QPoint(), newSize));
+
+            invalidateScene();
+        }
+        update();
+    }
+
+    void startResizing()
+    {
+        m_cache = new QPixmap(size());
+        render(& QPainter(m_cache));
+        m_resizing = true;
+    }
+
+    void stopResizing()
+    {
+        m_resizing = false;
+        delete m_cache;
+        resize();
+    }
+
 private:
-    Plasma::Svg * m_background;
+    LancelotWindow * m_parent;
+    Plasma::Widget * m_root;
+    QBrush           m_fgBrush;
+
+    bool             m_resizing;
+    QPixmap        * m_cache;
+
     friend class LancelotWindow;
 };
 
 // Window
 
 LancelotWindow::LancelotWindow()
+    : m_root(NULL), m_view(NULL), m_corona(NULL), m_layout(NULL),
+    m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
+    m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
+    instance(NULL), m_resizeDirection(None),
+    m_mainSize(mainWidthDefault, windowHeightDefault)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
-
-    connect(& m_searchTimer, SIGNAL(timeout()), this, SLOT(doSearch()));
-    m_searchTimer.setInterval(SEARCH_TIMER_INTERVAL);
-    m_searchTimer.setSingleShot(true);
 
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
@@ -95,14 +192,6 @@ LancelotWindow::LancelotWindow()
     setLayout(m_layout);
 
     m_view = new CustomGraphicsView(m_corona, this);
-    m_view->setWindowFlags(Qt::FramelessWindowHint);
-    m_view->setFrameStyle(QFrame::NoFrame);
-    m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    //m_view->m_background = new Plasma::Svg("lancelot/theme");
-    //m_view->m_background->setContentType(Plasma::Svg::ImageSet);
-
     m_layout->addWidget(m_view);
 
     instance = new Lancelot::Instance();
@@ -123,6 +212,7 @@ LancelotWindow::LancelotWindow()
 
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
     editSearch->setParent(this);
+    editSearch->installEventFilter(this);
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     instance->activateAll();
@@ -150,30 +240,32 @@ LancelotWindow::LancelotWindow()
         this, SLOT(search(const QString &))
     );
 
+    loadConfig();
 }
 
 LancelotWindow::~LancelotWindow()
 {
 }
 
+void LancelotWindow::loadConfig()
+{
+    m_mainSize = QSize(
+        m_mainConfig.readEntry("width",  mainWidthDefault),
+        m_mainConfig.readEntry("height", windowHeightDefault)
+    );
+}
+
 void LancelotWindow::lancelotShow(int x, int y)
 {
-    panelSections->show();
-    layoutMain->setSize(sectionsWidth, Plasma::LeftPositioned);
-    layoutMain->updateGeometry();
-
-    showWindow(x, y, mainWidth + sectionsWidth, windowHeight);
+    m_showingFull = true;
+    showWindow(x, y);
 }
 
 void LancelotWindow::lancelotShowItem(int x, int y, QString name)
 {
     sectionActivated(name);
-
-    panelSections->hide();
-    layoutMain->setSize(0, Plasma::LeftPositioned);
-    layoutMain->updateGeometry();
-
-    showWindow(x, y, mainWidth, windowHeight);
+    m_showingFull = false;
+    showWindow(x, y);
 }
 
 void LancelotWindow::lancelotHide(bool immediate)
@@ -187,12 +279,17 @@ void LancelotWindow::lancelotHide(bool immediate)
     m_hideTimer.start();
 }
 
-void LancelotWindow::showWindow(int x, int y, int w, int h)
+void LancelotWindow::showWindow(int x, int y)
 {
+    panelSections->setVisible(m_showingFull);
+
+    layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Plasma::LeftPositioned);
+
+    m_resizeDirection = None;
     m_hideTimer.stop();
 
     if (isVisible()) {
-        resizeWindow(QSize(w, h));
+        resizeWindow();
         return;
     }
 
@@ -228,39 +325,23 @@ void LancelotWindow::showWindow(int x, int y, int w, int h)
     ));
     instance->group("SystemButtons")->notifyUpdated();
 
-    resizeWindow(QSize(w, h));
+    resizeWindow();
 
     move(x, y);
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
-
-    //KWindowSystem::activateWindow(winId());
     KWindowSystem::forceActiveWindow(winId());
-
     editSearch->setFocus();
-
 }
 
-void LancelotWindow::resizeWindow(QSize newSize)
+void LancelotWindow::resizeWindow()
 {
-    //kDebug()
-    m_view->resetCachedContent();
-
-    resize(newSize.width(), newSize.height());
-    m_view->resize(newSize.width(), newSize.height());
-
-    m_corona->setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
-    layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
-    layoutMain->updateGeometry();
-
-    m_view->invalidateScene();
-    m_view->update();
-
-    m_root->setGeometry(QRect(QPoint(), newSize));
-    //layoutMain->setGeometry(QRect(QPoint(), newSize));
-    //layoutMain->invalidate();
-
-    update();
+    QSize newSize = m_mainSize;
+    if (m_showingFull) {
+        newSize.rwidth() += sectionsWidth;
+    }
+    resize(newSize);
+    m_view->resize(newSize);
 }
 
 void LancelotWindow::focusOutEvent(QFocusEvent * event) {
@@ -271,13 +352,17 @@ void LancelotWindow::focusOutEvent(QFocusEvent * event) {
 void LancelotWindow::leaveEvent(QEvent * event) {
     Q_UNUSED(event);
     m_hovered = false;
-    m_hideTimer.start();
+    if (m_resizeDirection != None) {
+        m_hideTimer.start();
+    }
+    QWidget::leaveEvent(event);
 }
 
 void LancelotWindow::enterEvent(QEvent * event) {
     Q_UNUSED(event);
     m_hovered = true;
     m_hideTimer.stop();
+    QWidget::enterEvent(event);
 }
 
 QStringList LancelotWindow::sectionIDs()
@@ -301,13 +386,16 @@ QStringList LancelotWindow::sectionIcons()
     return res;
 }
 
-void LancelotWindow::sectionActivated(const QString & item) {
+void LancelotWindow::sectionActivated(const QString & item)
+{
     foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
         button->setPressed(false);
     }
+
     if (sectionButtons.contains(item)) {
         sectionButtons[item]->setPressed(true);
     }
+
     layoutCenter->show(item);
 }
 
@@ -316,15 +404,9 @@ void LancelotWindow::search(const QString & string)
     if (editSearch->text() != string) {
         editSearch->setText(string);
     }
-    //m_searchTimer.stop();
-    m_searchString = string;
-    //m_searchTimer.start();
-    doSearch();
-}
 
-void LancelotWindow::doSearch()
-{
-    m_searchTimer.stop();
+    m_searchString = string;
+
     ((Lancelot::Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
     sectionActivated("search");
 }
@@ -352,6 +434,8 @@ void LancelotWindow::systemDoLock()
 
 void LancelotWindow::systemDoLogout()
 {
+    kDebug() << "Do Logout!!!";
+
     org::kde::KSMServerInterface smserver("org.kde.ksmserver", "/KSMServer", QDBusConnection::sessionBus());
 
     if (smserver.isValid()) {
@@ -372,93 +456,52 @@ void LancelotWindow::systemSwitchUser()
     search("SESSIONS");
 }
 
-void LancelotWindow::systemDoSwitchUser()
-{
-    org::kde::krunner::Interface krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
-
-    if (krunner.isValid()) {
-        krunner.switchUser();
-    }
-}
+//  void LancelotWindow::systemDoSwitchUser()
+//  {
+//      org::kde::krunner::Interface krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
+//
+//      if (krunner.isValid()) {
+//          krunner.switchUser();
+//      }
+//  }
 
 void LancelotWindow::setupModels()
 {
-
     // Models:
+    m_models["Places"]            = new Lancelot::Models::Places();
+    m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
+    m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
+    m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
 
-    m_models["Places"] =
-        new Lancelot::Models::Places();
-    m_models["SystemServices"] =
-        new Lancelot::Models::SystemServices();
-    m_models["Devices/Removable"] =
-        new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
-    m_models["Devices/Fixed"] =
-        new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
+    m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
+    m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
+    m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
 
-    m_models["NewDocuments"] =
-        new Lancelot::Models::NewDocuments();
-    m_models["RecentDocuments"] =
-        new Lancelot::Models::RecentDocuments();
-    m_models["OpenDocuments"] =
-        new Lancelot::Models::OpenDocuments();
-
-    m_models["Runner"] =
-        new Lancelot::Models::Runner();
+    m_models["Runner"]            = new Lancelot::Models::Runner();
 
     // Groups:
 
-    m_modelGroups["ComputerLeft"] =
-        new Lancelot::MergedActionListViewModel();
-    m_modelGroups["DocumentsLeft"] =
-        new Lancelot::MergedActionListViewModel();
-    m_modelGroups["ContactsLeft"] =
-        new Lancelot::MergedActionListViewModel();
-    //m_modelGroups["SearchLeft"] =
-    //    new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
+    m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
 
-    m_modelGroups["ComputerRight"] =
-        new Lancelot::MergedActionListViewModel();
-    m_modelGroups["DocumentsRight"] =
-        new Lancelot::MergedActionListViewModel();
-    m_modelGroups["ContactsRight"] =
-        new Lancelot::MergedActionListViewModel();
-    m_modelGroups["SearchRight"] =
-        new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
+    m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
+    m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
 
     // Assignments: Model - Group:
-    // define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+    // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
-    Merged(m_modelGroups["ComputerLeft"])->addModel(
-        NULL, i18n("Places"),
-        m_models["Places"]
-    );
-    Merged(m_modelGroups["ComputerLeft"])->addModel(
-        NULL, i18n("System"),
-        m_models["SystemServices"]
-    );
+    Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("Places"),           m_models["Places"]);
+    Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("System"),           m_models["SystemServices"]);
 
-    Merged(m_modelGroups["ComputerRight"])->addModel(
-        NULL, i18n("Removable"),
-        m_models["Devices/Removable"]
-    );
-    Merged(m_modelGroups["ComputerRight"])->addModel(
-        NULL, i18n("Fixed"),
-        m_models["Devices/Fixed"]
-    );
+    Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Removable"),        m_models["Devices/Removable"]);
+    Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Fixed"),            m_models["Devices/Fixed"]);
 
-    Merged(m_modelGroups["DocumentsLeft"])->addModel(
-        NULL, i18n("New:"),
-        m_models["NewDocuments"]
-    );
+    Merged(m_modelGroups["DocumentsLeft"])->addModel (NULL, i18n("New:"),             m_models["NewDocuments"]);
 
-    Merged(m_modelGroups["DocumentsRight"])->addModel(
-        NULL, i18n("Recent documents"),
-        m_models["RecentDocuments"]
-    );
-    Merged(m_modelGroups["DocumentsRight"])->addModel(
-        NULL, i18n("Open documents"),
-        m_models["OpenDocuments"]
-    );
+    Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Recent documents"), m_models["RecentDocuments"]);
+    Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Open documents"),   m_models["OpenDocuments"]);
 
     m_modelGroups["SearchLeft"] = m_models["Runner"];
 
@@ -478,13 +521,88 @@ void LancelotWindow::setupModels()
 
     passagewayApplications->setEntranceModel(
         new Lancelot::PassagewayViewModelProxy(
-            new Lancelot::Models::FavoriteApplications(),
-            i18n("Favorites"), new KIcon("favorites")
+            new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), new KIcon("favorites")
         )
     );
-    //passagewayApplications->setAtlasModel(new Lancelot::DummyPassagewayViewModel("ApplicationB", 10, 1));
     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 
 }
 
+// Resizing:
+
+void LancelotWindow::mousePressEvent(QMouseEvent * e)
+{
+    m_resizeDirection = None;
+
+    if (e->x() >= width() - 10)  m_resizeDirection |= Right;
+    else if (e->x() <= 10)       m_resizeDirection |= Left;
+
+    if (e->y() >= height() - 10) m_resizeDirection |= Down;
+    else if (e->y() <= 10)       m_resizeDirection |= Up;
+
+    if (m_resizeDirection != None) {
+        m_originalMousePosition  = e->globalPos();
+        m_originalWindowPosition = pos();
+        m_originalMainSize       = m_mainSize;
+        m_view->startResizing();
+    }
+
+    QWidget::mousePressEvent(e);
+}
+
+void LancelotWindow::mouseReleaseEvent(QMouseEvent * e)
+{
+    if (m_resizeDirection != None) {
+        m_mainConfig.writeEntry("width",  m_mainSize.width());
+        m_mainConfig.writeEntry("height", m_mainSize.height());
+        m_mainConfig.sync();
+        m_resizeDirection = None;
+
+        //resizeWindow();
+        m_view->stopResizing();
+    }
+    QWidget::mouseReleaseEvent(e);
+}
+
+void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
+{
+    if (m_resizeDirection != None) {
+        m_mainSize = m_originalMainSize;
+
+        QPoint newWindowPosition = m_originalWindowPosition;
+        QPoint diff = e->globalPos() - m_originalMousePosition;
+
+        if (m_resizeDirection & Right) {
+            m_mainSize.rwidth() += diff.x();
+        } else if (m_resizeDirection & Left) {
+            m_mainSize.rwidth() -= diff.x();
+            newWindowPosition.rx() += diff.x();
+        }
+
+        if (m_resizeDirection & Down) {
+            m_mainSize.rheight() += diff.y();
+        } else if (m_resizeDirection & Up) {
+            m_mainSize.rheight() -= diff.y();
+            newWindowPosition.ry() += diff.y();
+        }
+
+        move(newWindowPosition);
+        resizeWindow();
+    }
+    QWidget::mouseMoveEvent(e);
+}
+
+bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
+{
+     if ((object == editSearch) && (event->type() == QEvent::KeyPress)) {
+         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+         if (keyEvent->key() == Qt::Key_Escape) {
+             lancelotHide(true);
+             return true;
+         }
+     }
+     return false;
+}
+
 #include "LancelotWindow.moc"
+

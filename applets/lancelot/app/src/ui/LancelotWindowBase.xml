@@ -2,8 +2,8 @@
 <pui
     xmlns:item = "http://nonexistant"
     xmlns:code = "http://nonexistant"
-    
-    xmlns:Plasma__BorderLayout = "http://nonexistant" 
+
+    xmlns:Plasma__BorderLayout = "http://nonexistant"
     xmlns:Plasma__NodeLayout   = "http://nonexistant"
     xmlns:Lancelot__CardLayout = "http://nonexistant"
 >
@@ -30,12 +30,12 @@
                 margin="0" spacing="0"
                 topSize="SEARCH_HEIGHT"
                 bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
-                
+
                 Plasma__BorderLayout:position="Left"
             >
                 <item:widget
                     name="panelSections" type="Lancelot::Panel"
-                    
+
                     Plasma__BorderLayout:position="Center"
                 >
                     <item:layout
@@ -80,7 +80,7 @@
                         />
                         <item:widget
                             name="buttonSectionsComputer" type="Lancelot::ToggleExtenderButton"
-                            
+
                             title="Computer"
                             icon="computer-laptop"
                             group="SectionButtons"
@@ -93,14 +93,14 @@
                         />
                         <item:widget
                             name="buttonSectionsApplications" type="Lancelot::ToggleExtenderButton"
-                            
+
                             title="Applications"
                             icon="applications-other"
                             group="SectionButtons"
                             activation="Hover"
                             iconSize="48, 48"
                             orientation="Vertical"
-                            
+
                             Plasma__NodeLayout:topLeft     = "0, .75 , 0, 1"
                             Plasma__NodeLayout:bottomRight = "1, 1   , 0, -1"
                         />
@@ -119,7 +119,7 @@
                 <item:layout
                     name="layoutSearch" type="Plasma::NodeLayout"
                     margin="0" spacing="0"
-                    
+
                     Plasma__BorderLayout:position="Top"
                 >
                 <!-- Dirty hack to get an edit box before Qt 4.4 :: begin -->
@@ -141,14 +141,14 @@
                     <item:widget
                         name="editSearchPositioner" type="Lancelot::WidgetPositioner"
                         widgetName="editSearch" view="_m_view" parent="_m_root"
-                        
+
                         Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
                         Plasma__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
                     />
                     <item:widget
                         type="Plasma::Label" name="labelSearch"
                         text="Search"
-                        
+
                         Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
                         Plasma__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
                     />
@@ -157,44 +157,44 @@
                 <item:layout
                     name="layoutCenter" type="Lancelot::CardLayout"
                     margin="0" spacing="0"
-                    
+
                     Plasma__BorderLayout:position="Center"
                 >
                     <item:widget
                         name="passagewayApplications" type="Lancelot::PassagewayView"
-                        
+
                         entranceTitle="Favorite"
                         entranceIcon="favorite"
                         atlasTitle="Applications"
                         atlasIcon="applications-other"
-                        
+
                         background="lancelot/inner-background"
-                        
+
                         Lancelot__CardLayout:cardName="applications"
                     >
                     </item:widget>
                     <item:widget
                         name="panelComputer" type="Lancelot::Panel"
-                           
+
                         title="Computer"
                         icon="computer-laptop"
                         iconSize="22, 22"
                         background="lancelot/inner-background"
-                        
+
                         Lancelot__CardLayout:cardName="computer"
                     >
                         <item:layout name="layoutPanelComputer" type="Plasma::NodeLayout">
                             <item:widget
                                 name="listComputerLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0, 0"
                                 Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listComputerRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0.5, 0"
                                 Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
@@ -207,21 +207,21 @@
                         icon="kontact"
                         iconSize="22, 22"
                         background="lancelot/inner-background"
-                        
+
                         Lancelot__CardLayout:cardName="contacts"
                     >
                         <item:layout name="layoutPanelContacts" type="Plasma::NodeLayout">
                             <item:widget
                                 name="listContactsLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0, 0"
                                 Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listContactsRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0.5, 0"
                                 Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
@@ -234,21 +234,21 @@
                         icon="applications-office"
                         iconSize="22, 22"
                         background="lancelot/inner-background"
-                        
+
                         Lancelot__CardLayout:cardName="documents"
                     >
                         <item:layout name="layoutDocumentsComputer" type="Plasma::NodeLayout">
                             <item:widget
                                 name="listDocumentsLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0, 0"
                                 Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listDocumentsRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0.5, 0"
                                 Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
@@ -261,14 +261,14 @@
                         icon="find"
                         iconSize="22, 22"
                         background="lancelot/inner-background"
-                        
+
                         Lancelot__CardLayout:cardName="search"
                     >
                         <item:layout name="layoutSearchComputer" type="Plasma::NodeLayout">
                             <item:widget
                                 name="listSearchLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0, 0"
                                 Plasma__NodeLayout:bottomRight = "1.0, 1, 0, 0"
                             />
@@ -276,7 +276,7 @@
                             <item:widget
                                 name="listSearchRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-                                
+
                                 Plasma__NodeLayout:topLeft     = "0.5, 0"
                                 Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
@@ -287,7 +287,7 @@
                 <item:layout
                     name="layoutSystem" type="Plasma::NodeLayout"
                     margin="0" spacing="0"
-                    
+
                     Plasma__BorderLayout:position="Bottom"
                 >
                     <item:widget

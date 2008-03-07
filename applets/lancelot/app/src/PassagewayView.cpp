@@ -18,7 +18,6 @@
  */
 
 #include "PassagewayView.h"
-#include <KDebug>
 
 namespace Lancelot
 {
@@ -112,13 +111,10 @@ void PassagewayView::listItemActivated(int index)
 {
     for (int i = m_lists.size() - 1; i >= 0; --i) {
         if (m_lists.at(i) == sender()) {
-            kDebug() << " activating ";
             back(m_lists.size() - i - 1);
 
             PassagewayViewModel * model = m_path.at(i)->model;
             if (model) {
-                kDebug() << " activating item ";
-                //model->activated(index);
                 model = model->child(index);
                 if (model) {
                     next(Step(model->modelTitle(), model->modelIcon(), model));
