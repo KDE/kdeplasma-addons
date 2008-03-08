@@ -33,21 +33,21 @@ class LancelotApplication: public KUniqueApplication
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.lancelot.App")
-    
+
 public:
-	static int main(int argc, char **argv);
-	bool event(QEvent * e);
+    static int main(int argc, char **argv);
+    bool event(QEvent * e);
 
 public Q_SLOTS:
     static bool show(int x, int y);
     static bool showItem(int x, int y, QString name);
-    
+
     static bool hide(bool immediate = false);
     static bool search(const QString & string);
 
     int addClient();
     bool removeClient(int id);
-    
+
     QStringList sectionIDs();
     QStringList sectionNames();
     QStringList sectionIcons();

@@ -130,7 +130,7 @@ void Panel::invalidate()
         rect.setWidth(rect.width() - m_background->marginSize(Plasma::RightMargin));
         rect.setHeight(rect.height() - m_background->marginSize(Plasma::BottomMargin));
     }
-    
+
     if (!m_hasTitle) {
         m_titleWidget.hide();
         if (m_widget) {
@@ -141,11 +141,11 @@ void Panel::invalidate()
         }
     } else {
         qreal h = rect.height();
-        
+
         m_titleWidget.show();
         rect.setHeight(32);
         m_titleWidget.setGeometry(rect);
-        
+
         rect.setTop(32);
         rect.setHeight(h - 32);
 

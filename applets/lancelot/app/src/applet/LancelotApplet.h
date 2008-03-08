@@ -43,25 +43,25 @@ public:
     QSizeF contentSizeHint() const;
 
     Qt::Orientations expandingDirections() const;
-    
+
     bool hasHeightForWidth () const;
     qreal heightForWidth (qreal width) const;
-    
+
     bool hasWidthForHeight () const;
     qreal widthForHeight (qreal height) const;
-    
+
     void updateGeometry ();
     void constraintsUpdated (Plasma::Constraints constraints);
-    
+
     void showConfigurationInterface();
     bool hasConfigurationInterface();
-    
+
     void init();
-    
+
 protected Q_SLOTS:
     void showLancelot();
     void showLancelotSection(const QString & section);
-    
+
     void configAccepted();
 
 private:
@@ -71,7 +71,7 @@ private:
     int m_clientID;
 
     Lancelot::Instance * m_instance;
-    
+
     Plasma::NodeLayout * m_layout;
     QList< Lancelot::ExtenderButton * > m_buttons;
 
@@ -80,15 +80,15 @@ private:
     // Current state / configuration
     bool m_isVertical;
     bool m_blockUpdates;
-    
+
     bool m_showCategories;
     QString m_mainIcon;
     bool m_clickActivation;
-    
+
 
     // Atoms
     void dbusConnect();
-    
+
     void deleteButtons();
     void createCategories();
     void createMenuButton();

@@ -24,12 +24,12 @@
 
 class LancelotAppletConfig : public KDialog {
 public:
-	LancelotAppletConfig();
-	virtual ~LancelotAppletConfig();
+    LancelotAppletConfig();
+    virtual ~LancelotAppletConfig();
 
-	bool showCategories() const;
-	bool clickActivation() const;
-	QString icon() const;
+    bool showCategories() const;
+    bool clickActivation() const;
+    QString icon() const;
 
     void setShowCategories(bool value);
     void setClickActivation(bool value);

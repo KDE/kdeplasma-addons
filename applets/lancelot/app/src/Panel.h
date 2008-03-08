@@ -38,15 +38,15 @@ public:
     Panel(QString name, QString title, QGraphicsItem * parent = 0);
     Panel(QString name, QGraphicsItem * parent = 0);
 
-	virtual ~Panel();
+    virtual ~Panel();
 
-	void setTitle(const QString & title);
-	QString title() const;
+    void setTitle(const QString & title);
+    QString title() const;
 
-	void setIcon(QIcon * icon);
-	QIcon * icon() const;
+    void setIcon(QIcon * icon);
+    QIcon * icon() const;
 
-	void setIconSize(QSize size);
+    void setIconSize(QSize size);
     QSize iconSize() const;
 
     void setGeometry (const QRectF & geometry);
@@ -56,7 +56,7 @@ public:
 
     void setWidget(Widget * widget);
     Widget * widget();
-    
+
     void setBackground(const QString & imagePath);
     void clearBackground();
 

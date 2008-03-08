@@ -42,14 +42,14 @@ void LancelotApplet::dbusConnect() {
     } else {
         setFailedToLaunch(true, i18n("Can't connect to Lancelot"));
     }
-    
-    
+
+
 }
 
 LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
     Plasma::Applet(parent, args), m_lancelot(NULL),
     m_clientID(-1), m_instance(NULL), m_layout(NULL),
-    m_configDialog(NULL), 
+    m_configDialog(NULL),
     m_isVertical(false), m_blockUpdates(false),
     m_showCategories(false), m_mainIcon(),
     m_clickActivation(false)
@@ -61,17 +61,17 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
 
     // Instantiating Lancelot framework
     m_instance = new Lancelot::Instance();
-    
+
     m_layout = new Plasma::NodeLayout();
-    
+
     setLayout(m_layout);
     applyConfig();
-    
+
     connect(
         & m_signalMapper, SIGNAL(mapped(const QString &)),
         this, SLOT(showLancelotSection(const QString &))
     );
-        
+
     m_instance->activateAll();
 }
 
@@ -84,10 +84,10 @@ LancelotApplet::~LancelotApplet()
 {
     m_lancelot->removeClient(m_clientID);
     delete m_lancelot;
-    
+
     deleteButtons();
     delete m_layout;
-    
+
     delete m_instance;
 }
 
@@ -255,9 +255,9 @@ void LancelotApplet::layoutButtons()
     }
 
     int iconSize = 48;
-    
+
     kDebug() << "Geometry is " << contentSize();
-    
+
     if (m_isVertical) {
         iconSize = (int)(qMin(contentSize().width(), contentSize().height() / m_buttons.size()));
     } else {
@@ -267,7 +267,7 @@ void LancelotApplet::layoutButtons()
     if (iconSize > 80) iconSize = 64;
     else if (iconSize > 60) iconSize = 48;
     else if (iconSize > 32) iconSize = 32;
-    
+
     qreal wpercent = 1.0 / (m_buttons.size());
     qreal distance = 0;
 
@@ -275,7 +275,7 @@ void LancelotApplet::layoutButtons()
         button->setGroupByName("AppletLaunchButton");
         button->setActivationMethod(m_clickActivation?(Lancelot::ExtenderButton::Click):(Lancelot::ExtenderButton::Hover));
         button->setIconSize(QSize(iconSize, iconSize));
-        
+
         if (m_isVertical) {
             m_layout->addItem(
                 button,
@@ -291,7 +291,7 @@ void LancelotApplet::layoutButtons()
         }
         distance += wpercent;
     }
-    
+
     m_layout->invalidate();
 }
 
@@ -305,7 +305,7 @@ void LancelotApplet::applyConfig()
     emit geometryChanged();
     updateGeometry();
 }
-    
+
 void LancelotApplet::loadConfig()
 {
     KConfigGroup kcg =  config();
@@ -325,13 +325,13 @@ void LancelotApplet::saveConfig()
     kcg.writeEntry("activate", (m_clickActivation?"click":"hover"));
     save(&kcg);
 }
-  
+
 void LancelotApplet::configAccepted()
 {
     m_showCategories = m_configDialog->showCategories();
     m_mainIcon = m_configDialog->icon();
     m_clickActivation = m_configDialog->clickActivation();
-    
+
     saveConfig();
     applyConfig();
 }

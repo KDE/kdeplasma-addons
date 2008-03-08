@@ -160,7 +160,7 @@ void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize,
 void Devices::activate(int index)
 {
     if (index > m_items.size() - 1) return;
-    
+
     QString udi = m_items.at(index).data.toString();
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
 
@@ -176,7 +176,7 @@ void Devices::activate(int index)
 
     //new KRun(KUrl(access->filePath()), 0);
     KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
-    
+
     hideLancelotWindow();
 }
 

@@ -52,6 +52,7 @@
 
 #define HIDE_TIMER_INTERVAL 1500
 #define SEARCH_TIMER_INTERVAL 300
+#define RESIZE_BORDER 10
 
 #define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
@@ -534,11 +535,11 @@ void LancelotWindow::mousePressEvent(QMouseEvent * e)
 {
     m_resizeDirection = None;
 
-    if (e->x() >= width() - 10)  m_resizeDirection |= Right;
-    else if (e->x() <= 10)       m_resizeDirection |= Left;
+    if (e->x() >= width() - RESIZE_BORDER)  m_resizeDirection |= Right;
+    else if (e->x() <= RESIZE_BORDER)       m_resizeDirection |= Left;
 
-    if (e->y() >= height() - 10) m_resizeDirection |= Down;
-    else if (e->y() <= 10)       m_resizeDirection |= Up;
+    if (e->y() >= height() - RESIZE_BORDER) m_resizeDirection |= Down;
+    else if (e->y() <= RESIZE_BORDER)       m_resizeDirection |= Up;
 
     if (m_resizeDirection != None) {
         m_originalMousePosition  = e->globalPos();

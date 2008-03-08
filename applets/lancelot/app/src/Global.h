@@ -97,10 +97,10 @@ public:
 
     bool processGroupChanges : 1;
 
-	void activateAll();
-	void deactivateAll();
+    void activateAll();
+    void deactivateAll();
 
-	void addWidget(Widget * widget);
+    void addWidget(Widget * widget);
 
     KConfig * theme();
     KConfig * config();

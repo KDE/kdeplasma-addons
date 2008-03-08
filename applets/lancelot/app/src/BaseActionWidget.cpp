@@ -175,7 +175,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
 
         if (!m_description.isEmpty()) {
             descriptionRect.moveTop(top);
-            
+
             painter->setFont(descriptionFont);
             painter->drawText(descriptionRect,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, m_description);

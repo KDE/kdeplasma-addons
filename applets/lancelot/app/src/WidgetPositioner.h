@@ -34,11 +34,11 @@ namespace Lancelot
 class WidgetPositioner: public Widget
 {
 public:
-	WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent);
-	virtual ~WidgetPositioner();
+    WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent);
+    virtual ~WidgetPositioner();
 
     void setGeometry (const QRectF & geometry);
-	QRectF geometry() const;
+    QRectF geometry() const;
 
     QSizeF sizeHint() const;
 
