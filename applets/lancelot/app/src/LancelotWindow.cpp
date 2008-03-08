@@ -46,13 +46,14 @@
 #include "models/Applications.h"
 #include "models/Runner.h"
 
+#include "ResizeBordersPanel.h"
+
 #define sectionsWidth 128
 #define windowHeightDefault 500
 #define mainWidthDefault    422
 
 #define HIDE_TIMER_INTERVAL 1500
 #define SEARCH_TIMER_INTERVAL 300
-#define RESIZE_BORDER 10
 
 #define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
@@ -197,8 +198,9 @@ LancelotWindow::LancelotWindow()
 
     instance = new Lancelot::Instance();
 
-    m_root = new Lancelot::Panel("m_root"); //new RootWidget(); //Applet(0, "plasma_applet_clock");
-    ((Lancelot::Panel * )m_root)->setBackground("lancelot/main-background");
+    m_root = new Lancelot::ResizeBordersPanel("m_root");
+
+    m_root->setBackground("lancelot/main-background");
     m_corona->addItem(m_root);
 
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
@@ -207,7 +209,7 @@ LancelotWindow::LancelotWindow()
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     setupUi(m_root);
-    ((Lancelot::Panel * )m_root)->setLayout(layoutMain);
+    m_root->setLayout(layoutMain);
 
     setupModels();
 
@@ -535,11 +537,11 @@ void LancelotWindow::mousePressEvent(QMouseEvent * e)
 {
     m_resizeDirection = None;
 
-    if (e->x() >= width() - RESIZE_BORDER)  m_resizeDirection |= Right;
-    else if (e->x() <= RESIZE_BORDER)       m_resizeDirection |= Left;
+    if (e->x() >= width() - m_root->borderSize(Plasma::RightMargin))  m_resizeDirection |= Right;
+    else if (e->x() <= m_root->borderSize(Plasma::LeftMargin))        m_resizeDirection |= Left;
 
-    if (e->y() >= height() - RESIZE_BORDER) m_resizeDirection |= Down;
-    else if (e->y() <= RESIZE_BORDER)       m_resizeDirection |= Up;
+    if (e->y() >= height() - m_root->borderSize(Plasma::BottomMargin)) m_resizeDirection |= Down;
+    else if (e->y() <= m_root->borderSize(Plasma::TopMargin))          m_resizeDirection |= Up;
 
     if (m_resizeDirection != None) {
         m_originalMousePosition  = e->globalPos();

@@ -32,6 +32,7 @@ class CustomGraphicsView;
 
 namespace Lancelot {
     class ActionListViewModel;
+    class ResizeBordersPanel;
 }
 
 class LancelotWindow: public QWidget, public Ui::LancelotWindowBase
@@ -147,7 +148,7 @@ protected:
     void enterEvent    (QEvent      * event);
 
 private:
-    Plasma::Widget      * m_root;
+    Lancelot::ResizeBordersPanel * m_root;
     CustomGraphicsView  * m_view;
     Plasma::Corona      * m_corona;
     QVBoxLayout         * m_layout;

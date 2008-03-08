@@ -64,6 +64,8 @@ public:
 
     void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
+    qreal borderSize(Plasma::MarginEdge edge);
+
 private:
     void init();
     void invalidate();

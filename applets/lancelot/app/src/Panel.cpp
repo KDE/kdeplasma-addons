@@ -55,6 +55,14 @@ Panel::~Panel()
     delete m_background;
 }
 
+qreal Panel::borderSize(Plasma::MarginEdge edge)
+{
+    if (!m_background) {
+        return 0;
+    }
+    return m_background->marginSize(edge);
+}
+
 void Panel::setBackground(const QString & imagePath)
 {
     if (!m_background) {

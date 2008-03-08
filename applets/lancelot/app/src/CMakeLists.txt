@@ -31,6 +31,8 @@ set(plasma_lancelot_widgets_SRCS
 
   PassagewayView.cpp
   PassagewayViewModels.cpp
+
+  ResizeBordersPanel.cpp
 )
 
 # Lancelot data models files
