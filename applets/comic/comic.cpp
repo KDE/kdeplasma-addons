@@ -170,6 +170,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
 
     p->save();
     p->setRenderHint( QPainter::Antialiasing );
+    p->setRenderHint( QPainter::SmoothPixmapTransform );
     if ( mShowPreviousButton ) {
         QPolygon arrow( 3 );
         arrow.setPoint( 0, QPoint( 3, height / 2 ) );
