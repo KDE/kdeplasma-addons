@@ -47,8 +47,11 @@ void Notes::init()
     KConfigGroup cg = config();
 
     updateTextGeometry();
-    m_textArea->setPlainText(cg.readEntry("autoSave",QString()));
     m_textArea->setDefaultText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
+    QString text = cg.readEntry("autoSave",QString());
+    if (! text.isEmpty()) {
+        m_textArea->setPlainText(text);
+    }
     m_textArea->setStyled(false);
     //FIXME this has no effect right now. try setTextInteractionFlags
     m_textArea->setOpenExternalLinks(true);
