@@ -55,10 +55,10 @@ void Notes::init()
     m_textArea->setStyled(false);
     //FIXME this has no effect right now. try setTextInteractionFlags
     m_textArea->setOpenExternalLinks(true);
-    m_font = cg.readEntry("font", QFont());
-    m_textArea->setFont(m_font);
-    m_textColor = cg.readEntry("textcolor", QColor());
-    m_textArea->setDefaultTextColor(m_textColor);
+    QFont font = cg.readEntry("font", QFont());
+    m_textArea->setFont(font);
+    QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
+    m_textArea->setDefaultTextColor(textColor);
     connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
 }
 
@@ -120,22 +120,11 @@ void Notes::showConfigurationInterface()
         m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
         connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
         connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-        connect( ui.fontSelectButton, SIGNAL(clicked()), this, SLOT(showFontSelectDlg()) );
-        connect( ui.colorSelectButton, SIGNAL(clicked()), this, SLOT(showColorSelectDlg()));
     }
 
+    ui.textColorButton->setColor(m_textArea->defaultTextColor());
+    ui.textFontButton->setFont(m_textArea->font());
     m_dialog->show();
-}
-
-//FIXME those two dialogs give the cancel button issues.
-void Notes::showFontSelectDlg()
-{
-    KFontDialog::getFont(m_font);
-}
-
-void Notes::showColorSelectDlg()
-{
-    KColorDialog::getColor(m_textColor);
 }
 
 void Notes::configAccepted()
@@ -143,13 +132,26 @@ void Notes::configAccepted()
     prepareGeometryChange();
 
     KConfigGroup cg = config();
-    //TODO only write if changed. but how do we know if that happened?
-    cg.writeEntry("font", m_font);
-    cg.writeEntry("textcolor", m_textColor);
-    emit configNeedsSaving();
 
-    m_textArea->setFont(m_font);
-    m_textArea->setDefaultTextColor(m_textColor);
+    bool changed = false;
+
+    QFont newFont = ui.textFontButton->font();
+    if (m_textArea->font() != newFont) {
+        changed = true;
+        cg.writeEntry("font", newFont);
+        m_textArea->setFont(newFont);
+    }
+
+    QColor newColor = ui.textColorButton->color();
+    if (m_textArea->defaultTextColor() != newColor) {
+        changed = true;
+        cg.writeEntry("textcolor", newColor);
+        m_textArea->setDefaultTextColor(newColor);
+    }
+
+    if (changed) {
+        emit configNeedsSaving();
+    }
 }
 
 #include "notes.moc"

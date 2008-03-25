@@ -46,8 +46,6 @@ class Notes : public Plasma::Applet
     public slots:
         void showConfigurationInterface();
         void configAccepted();
-        void showFontSelectDlg();
-        void showColorSelectDlg();
         void saveNote();
 
     private:
@@ -58,8 +56,6 @@ class Notes : public Plasma::Applet
         Ui::config ui;
         KDialog *m_dialog;
 
-        QFont m_font;
-        QColor m_textColor;
         QSizeF m_size;
 };
 

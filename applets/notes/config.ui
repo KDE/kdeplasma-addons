@@ -5,32 +5,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>167</width>
-    <height>72</height>
+    <width>316</width>
+    <height>65</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
-   <item>
-    <widget class="KPushButton" name="fontSelectButton" >
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="textFontLabel" >
      <property name="text" >
-      <string>Select Font...</string>
+      <string>Font:</string>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="KPushButton" name="colorSelectButton" >
+   <item row="0" column="1" >
+    <widget class="KFontRequester" name="textFontButton" />
+   </item>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="textColorLabel" >
      <property name="text" >
-      <string>Select Text Color...</string>
+      <string>Text Color:</string>
      </property>
     </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="KColorButton" name="textColorButton" />
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>KColorButton</class>
    <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KFontRequester</class>
+   <extends>QWidget</extends>
+   <header>kfontrequester.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
