@@ -88,8 +88,8 @@ void Twitter::init()
     QFont fnt = qApp->font();
     fnt.setBold( true );
     QFontMetrics fm( fnt );
-    m_flash->resize( QSize(200, fm.height()) );
-    m_flash->setMaximumSize( QSizeF(200, fm.height()+4 ) );
+    m_flash->resize( QSize(250, fm.height()) );
+    m_flash->setMaximumSize( QSizeF(250, fm.height()+4 ) );
     m_flash->setFont( fnt );
     m_layout->addItem( m_flash );
 
@@ -112,7 +112,7 @@ void Twitter::init()
     m_statusEdit = new Plasma::LineEdit( this );
     m_statusEdit->hide();
     m_statusEdit->setStyled( true );
-    m_statusEdit->setTextWidth( 200 );
+    m_statusEdit->setTextWidth( 250 );
     connect( m_statusEdit->document(), SIGNAL(contentsChanged()), SLOT(geometryChanged()) ); //FIXME no such slot
     connect( m_statusEdit, SIGNAL(editingFinished()), SLOT(updateStatus()) );
     m_headerLayout->addItem( m_statusEdit );
@@ -286,7 +286,7 @@ void Twitter::showTweets()
         m_layout->addItem( tweetLayout );
 
         Plasma::LineEdit *e = new Plasma::LineEdit( this );
-        e->setTextWidth( 250 );
+        e->setTextWidth( 300 );
         e->setStyled( false );
         e->setEnabled( false );
         e->setCursor( Qt::ArrowCursor );
