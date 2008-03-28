@@ -95,6 +95,7 @@ void Frame::init()
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
     m_slideShow = cg.readEntry("slideshow", false);
+    m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
     m_currentUrl = cg.readEntry("url", "Default");
@@ -188,6 +189,8 @@ void Frame::showConfigurationInterface()
     else
 	m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
 
+    m_configDialog->ui.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
+
     m_configDialog->ui.potdComboBox->setCurrentIndex( m_configDialog->ui.potdComboBox->findData(m_potdProvider) );
 
     m_configDialog->setCurrentUrl(m_currentUrl);
@@ -233,6 +236,8 @@ void Frame::configAccepted()
     m_currentUrl = m_configDialog->currentUrl();
     cg.writeEntry("url", m_currentUrl);
     cg.writeEntry("slideshow", m_slideShow);
+    m_recursiveSlideShow = m_configDialog->ui.recursiveCheckBox->checkState() == Qt::Checked ? true : false;
+    cg.writeEntry("recursive slideshow", m_recursiveSlideShow);
     m_slideShowPaths.clear();
     QStringList dirs;
     for (int i = 0; i < m_configDialog->ui.slideShowDirList->count(); i++) {
@@ -257,7 +262,7 @@ void Frame::configAccepted()
 void Frame::initSlideShow()
 {
     if (m_slideShow) {
-	    m_mySlideShow->setDirs(m_slideShowPaths);
+	    m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
 	    m_slideShowTimer->start();
     } else if (m_potd) {
 	Plasma::DataEngine *engine = dataEngine( "potd" );

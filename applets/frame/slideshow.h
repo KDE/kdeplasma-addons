@@ -32,7 +32,7 @@ class SlideShow
 		SlideShow();
 		~SlideShow();
 		
-		void setDirs(const QStringList &slideShowPaths);
+		void setDirs(const QStringList &slideShowPaths, bool recursive = false);
 		void setImage(const QString &imagePath);
 		QImage getImage();
 		
@@ -43,6 +43,7 @@ class SlideShow
 		
 		void addImage(const QString &imagePath);
 		void addDir(const QString &path);
+		void addRecursiveDir(const QString &path);
 		KUrl getUrl();
 
 };

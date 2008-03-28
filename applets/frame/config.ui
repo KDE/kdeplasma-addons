@@ -206,6 +206,13 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="recursiveCheckBox" >
+            <property name="text" >
+             <string>&amp;Include subdirectories</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="label_2" >

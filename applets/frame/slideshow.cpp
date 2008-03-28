@@ -34,12 +34,16 @@ SlideShow::~SlideShow()
 {
 }
 
-void SlideShow::setDirs(const QStringList &slideShowPath)
+void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 {
-	m_pictures.clear();
-	foreach (const QString &path, slideShowPath) {
-		addDir(path);
-	}
+    m_pictures.clear();
+    foreach (const QString &path, slideShowPath) {
+        if (recursive) {
+            addRecursiveDir(path);
+        } else {
+            addDir(path);
+        }
+    }
 }
 
 void SlideShow::setImage(const QString &imagePath) 
@@ -63,6 +67,16 @@ void SlideShow::addDir(const QString &path)
 	foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
 		addImage(path + "/" + imageFile);
 	}
+}
+
+void SlideShow::addRecursiveDir(const QString &path)
+{
+    addDir(path);
+    QDir dir(path);
+
+    foreach (const QString &subDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        addRecursiveDir(path + "/" + subDir);
+    }
 }
 
 QImage SlideShow::getImage() 
