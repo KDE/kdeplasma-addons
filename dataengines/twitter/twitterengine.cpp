@@ -329,9 +329,8 @@ void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
 
         //get the timestamp in a useful form
         QString created = n.firstChildElement("created_at").text();
-        created = created.right(created.length() - 4);
-        created.replace(QRegExp("[+]\\d\\d\\d\\d"), "");
-        QDateTime time = QDateTime::fromString(created, "MMM dd hh:mm:ss  yyyy");
+        created.replace(QRegExp("[+]\\d\\d\\d\\d\\s"), "");
+        QDateTime time = QDateTime::fromString(created, Qt::TextDate);
         time.setTimeSpec(Qt::UTC);
 
         //bundle up each tweet
