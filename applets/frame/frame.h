@@ -50,6 +50,7 @@ class Frame : public Plasma::Applet
                             const QRect &contentsRect);
         void init();
 	void constraintsUpdated(Plasma::Constraints constraints);
+        QSizeF contentSizeHint() const;
 
     public slots:
         void showConfigurationInterface();

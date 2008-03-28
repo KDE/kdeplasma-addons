@@ -120,6 +120,14 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
     }
 }
 
+QSizeF Frame::contentSizeHint() const {
+    if (!m_picture.isNull()) {
+        return QSizeF( contentSize().width(), (contentSize().width() / m_picture.width() ) * m_picture.height() );
+    } else {
+        return contentSize();
+    }
+}
+
 void Frame::updatePicture()
 {
     m_picture = m_mySlideShow->getImage();
