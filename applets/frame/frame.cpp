@@ -221,14 +221,10 @@ void Frame::configAccepted()
     {
 	m_slideShow = true;
 	m_potd = false;
-    }
-    else if (m_configDialog->ui.pictureComboBox->currentIndex() == 2)
-    {
+    }  else if (m_configDialog->ui.pictureComboBox->currentIndex() == 2)   {
 	m_slideShow = false;
 	m_potd = true;
-    }
-    else
-    {
+    }  else {
 	m_slideShow = false;
 	m_potd = false;
     }
