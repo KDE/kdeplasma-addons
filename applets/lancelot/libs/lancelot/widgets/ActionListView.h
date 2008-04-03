@@ -20,19 +20,20 @@
 #ifndef LANCELOT_LISTVIEW_H_
 #define LANCELOT_LISTVIEW_H_
 
+#include "../lancelot_export.h"
+
 #include <QtGui>
 #include <QtCore>
 #include <KDebug>
 #include <KIcon>
 #include "Widget.h"
 #include "ExtenderButton.h"
-#include "ActionListViewModels.h"
-
+#include "../models/ActionListViewModels.h"
 namespace Lancelot
 {
 
 
-class ActionListView : public Widget
+class LANCELOT_EXPORT ActionListView : public Widget
 {
     Q_OBJECT
 

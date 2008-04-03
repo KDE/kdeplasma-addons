@@ -23,8 +23,8 @@
 #include <plasma/applet.h>
 #include <plasma/layouts/nodelayout.h>
 
-#include "../src/Global.h"
-#include "../src/ExtenderButton.h"
+#include <lancelot/Global.h>
+#include <lancelot/widgets/ExtenderButton.h>
 #include "lancelot_interface.h"
 
 #include "LancelotAppletConfig.h"

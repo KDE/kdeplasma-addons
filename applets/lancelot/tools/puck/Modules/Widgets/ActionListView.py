@@ -7,9 +7,9 @@ import xml
 class ActionListViewHandler(LancelotWidget.LancelotWidgetHandler):
     def name(self):
         return "Lancelot::ActionListView"
-    
+
     def include(self):
-        return '#include <KIcon>\n#include "ActionListView.h"'
+        return '#include <KIcon>\n#include <lancelot/widgets/ActionListView.h>'
 
     def setup(self):
         setup = LancelotWidget.LancelotWidgetHandler.setup(self)

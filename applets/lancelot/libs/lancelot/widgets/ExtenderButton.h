@@ -20,6 +20,8 @@
 #ifndef LANCELOT_EXTENDERBUTTON_H_
 #define LANCELOT_EXTENDERBUTTON_H_
 
+#include "../lancelot_export.h"
+
 #include <QtGui>
 #include <QtCore>
 #include "Widget.h"
@@ -32,7 +34,7 @@ namespace Lancelot
 
 class ExtenderButton;
 
-class ExtenderButtonTimer: public QObject {
+class LANCELOT_EXPORT ExtenderButtonTimer: public QObject {
     Q_OBJECT
 public:
     static ExtenderButtonTimer * instance();
@@ -52,7 +54,7 @@ private:
 };
 
 
-class ExtenderButton : public BaseActionWidget
+class LANCELOT_EXPORT ExtenderButton : public BaseActionWidget
 {
     Q_OBJECT
 public:

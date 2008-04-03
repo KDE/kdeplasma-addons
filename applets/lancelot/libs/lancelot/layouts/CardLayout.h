@@ -20,6 +20,8 @@
 #ifndef LANCELOT_CARDLAYOUT_H_
 #define LANCELOT_CARDLAYOUT_H_
 
+#include "../lancelot_export.h"
+
 #include <plasma/layouts/layout.h>
 #include <plasma/widgets/widget.h>
 #include <cmath>
@@ -28,7 +30,7 @@
 namespace Lancelot
 {
 
-class CardLayout : public Plasma::Layout
+class LANCELOT_EXPORT CardLayout : public Plasma::Layout
 {
 
 public:

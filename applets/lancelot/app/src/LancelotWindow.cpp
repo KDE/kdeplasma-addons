@@ -46,7 +46,7 @@
 #include "models/Applications.h"
 #include "models/Runner.h"
 
-#include "ResizeBordersPanel.h"
+#include <lancelot/widgets/ResizeBordersPanel.h>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500

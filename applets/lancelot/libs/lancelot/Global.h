@@ -30,6 +30,7 @@
 #include <plasma/svg.h>
 
 //#include "LancelotApplication.h"
+#include "lancelot_export.h"
 
 namespace Lancelot
 {
@@ -37,7 +38,7 @@ namespace Lancelot
 class Widget;
 class Instance;
 
-class WidgetGroup : public QObject {
+class LANCELOT_EXPORT WidgetGroup : public QObject {
 public:
 
     class ColorScheme {
@@ -90,7 +91,7 @@ private:
     friend class Instance;
 };
 
-class Instance : public QObject {
+class LANCELOT_EXPORT Instance : public QObject {
 public:
     Instance();
     virtual ~Instance();

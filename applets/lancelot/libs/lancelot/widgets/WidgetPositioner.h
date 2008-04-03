@@ -20,6 +20,8 @@
 #ifndef WIDGETPOSITIONER_H_
 #define WIDGETPOSITIONER_H_
 
+#include "../lancelot_export.h"
+
 #include "Widget.h"
 #include <QWidget>
 #include <QGraphicsView>
@@ -31,7 +33,7 @@ namespace Lancelot
  * Dirty hack to show QWidget as a part of QGV. It works for the
  * case it is used. It is not meant to be used elsewhere.
  */
-class WidgetPositioner: public Widget
+class LANCELOT_EXPORT WidgetPositioner: public Widget
 {
 public:
     WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent);

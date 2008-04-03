@@ -8,13 +8,13 @@ class AbstractWidgetHandler(AbstractItem.AbstractItemHandler):
 
         if self.hasAttribute('minimumSize'):
             setup += attribute('name') + '->setMinimumSize(' + self.attribute('minimumSize') + ');\n';
-            
+
         if self.hasAttribute('maximumSize'):
             setup += attribute('name') + '->setMaximumSize(' + self.attribute('maximumSize') + ');\n';
-            
+
         if self.hasAttribute('opacity'):
             setup += self.attribute('name') + '->setOpacity(' + self.attribute('opacity') + ');\n';
-            
+
         return setup
 
     def initialization(self):

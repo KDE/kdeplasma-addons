@@ -22,7 +22,7 @@
 #define APPLICATIONS_H_
 
 #include "BaseModel.h"
-#include "../PassagewayViewModels.h"
+#include <lancelot/models/PassagewayViewModels.h>
 
 namespace Lancelot {
 namespace Models {

@@ -20,15 +20,18 @@
 #ifndef PASSAGEWAYVIEW_H_
 #define PASSAGEWAYVIEW_H_
 
+#include "../lancelot_export.h"
+
 #include "Widget.h"
 #include <KIcon>
 
 #include "Panel.h"
 #include "ActionListView.h"
-#include "ActionListViewModels.h"
 #include "PassagewayView.h"
-#include "PassagewayViewModels.h"
-#include "ColumnLayout.h"
+#include "../layouts/ColumnLayout.h"
+
+#include "../models/PassagewayViewModels.h"
+#include "../models/ActionListViewModels.h"
 
 #include <plasma/layouts/nodelayout.h>
 #include <plasma/layouts/boxlayout.h>
@@ -42,7 +45,7 @@ namespace Lancelot
  * Entrance - the list of fast-access items
  * Atlas - all items
  */
-class PassagewayView : public Lancelot::Panel
+class LANCELOT_EXPORT PassagewayView : public Lancelot::Panel
 {
     Q_OBJECT
 private:

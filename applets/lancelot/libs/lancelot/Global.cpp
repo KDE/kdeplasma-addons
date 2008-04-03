@@ -18,7 +18,7 @@
  */
 
 #include "Global.h"
-#include "Widget.h"
+#include "widgets/Widget.h"
 #include <KDebug>
 #include <plasma/theme.h>
 #include <KStandardDirs>

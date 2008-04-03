@@ -1,39 +1,14 @@
 project(LancelotMenu)
 
+find_package(KDE4 REQUIRED)
+find_package(Plasma REQUIRED)
+
+message("Lancelot libs: ${LANCELOT_LIBS}")
+find_package(Lancelot REQUIRED)
+
 include(PlasmaUIMacros)
 
-IF(CMAKE_COMPILER_IS_GNUCC)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fmessage-length=0")
-ENDIF(CMAKE_COMPILER_IS_GNUCC)
-IF(CMAKE_COMPILER_IS_GNUCXX)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmessage-length=0")
-ENDIF(CMAKE_COMPILER_IS_GNUCXX)
-
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${PLASMA_INCLUDE_DIR})
-
-# Lancelot UI Widgets files
-set(plasma_lancelot_widgets_SRCS
-  Global.cpp
-  Widget.cpp
-  WidgetPositioner.cpp
-
-  CardLayout.cpp
-  ColumnLayout.cpp
-
-  Panel.cpp
-  BaseActionWidget.cpp
-
-  ExtenderButton.cpp
-  ToggleExtenderButton.cpp
-
-  ActionListView.cpp
-  ActionListViewModels.cpp
-
-  PassagewayView.cpp
-  PassagewayViewModels.cpp
-
-  ResizeBordersPanel.cpp
-)
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${PLASMA_INCLUDE_DIR} ${LANCELOT_INCLUDE_DIR})
 
 # Lancelot data models files
 set(plasma_lancelot_models_SRCS
@@ -100,7 +75,7 @@ set(
 
 kde4_add_executable(lancelot ${plasma_lancelot_SRCS})
 
-target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} taskmanager)
+target_link_libraries(lancelot ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} ${LANCELOT_LIBS} taskmanager)
 
 ## DBUS service
 
@@ -127,7 +102,7 @@ set(plasma_applet_lancelot_part_SRCS
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
 
-target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${KDE4_KIO_LIBS} taskmanager)
+target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} taskmanager)
 
 install(
   TARGETS plasma_applet_lancelot_part
@@ -156,7 +131,7 @@ kde4_add_ui_files(
 
 kde4_add_plugin(plasma_applet_lancelot ${plasma_applet_lancelot_SRCS})
 
-target_link_libraries(plasma_applet_lancelot ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(plasma_applet_lancelot ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS})
 
 install(
   TARGETS plasma_applet_lancelot

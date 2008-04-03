@@ -20,12 +20,14 @@
 #ifndef PASSAGEWAYVIEWMODELS_H_
 #define PASSAGEWAYVIEWMODELS_H_
 
+#include "../lancelot_export.h"
+
 #include "ActionListViewModels.h"
 
 namespace Lancelot
 {
 
-class PassagewayViewModel: public ActionListViewModel {
+class LANCELOT_EXPORT PassagewayViewModel: public ActionListViewModel {
 public:
     PassagewayViewModel();
     virtual ~PassagewayViewModel();
@@ -34,7 +36,7 @@ public:
     virtual KIcon * modelIcon()  const = 0;
 };
 
-class PassagewayViewModelProxy: public PassagewayViewModel {
+class LANCELOT_EXPORT PassagewayViewModelProxy: public PassagewayViewModel {
     Q_OBJECT
 public:
     PassagewayViewModelProxy(ActionListViewModel * model,

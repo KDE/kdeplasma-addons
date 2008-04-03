@@ -20,6 +20,8 @@
 #ifndef LANCELOT_PANEL_H_
 #define LANCELOT_PANEL_H_
 
+#include "../lancelot_export.h"
+
 #include "Widget.h"
 #include <plasma/layouts/layout.h>
 #include <plasma/svgpanel.h>
@@ -31,7 +33,7 @@
 namespace Lancelot
 {
 
-class Panel: public Widget
+class LANCELOT_EXPORT Panel: public Widget
 {
 public:
     Panel(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);

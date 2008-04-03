@@ -6,7 +6,7 @@ import xml
 class LabelHandler(AbstractWidget.AbstractWidgetHandler):
     def name(self):
         return "Plasma::Label"
-    
+
     def include(self):
         return "#include <plasma/widgets/label.h>"
 

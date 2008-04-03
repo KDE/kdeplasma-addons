@@ -6,9 +6,9 @@ import xml
 class CardLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def name(self):
         return 'Lancelot::CardLayout'
-    
+
     def include(self):
-        return '#include "CardLayout.h"'
+        return '#include <lancelot/layouts/CardLayout.h>'
 
     def setup(self):
         setup = AbstractLayout.AbstractLayoutHandler.setup(self)
@@ -16,7 +16,7 @@ class CardLayoutHandler(AbstractLayout.AbstractLayoutHandler):
         for child in self.node().childNodes:
             if not child.nodeType == xml.dom.Node.ELEMENT_NODE or not child.prefix == 'item':
                 continue
-            
+
             line = self.attribute('name') + '->addItem(${ITEM_NAME}${CARD_NAME});';
             if child.hasAttribute(self.namespace() + ':cardName'):
                 setup += line \

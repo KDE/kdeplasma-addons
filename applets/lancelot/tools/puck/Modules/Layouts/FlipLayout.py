@@ -8,15 +8,15 @@ class FlipLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def include(self):
         h = LayoutHandlerManager.handler(self.attribute("realLayout"))
         h.setNode(self.node())
-        
+
         return h.include() + "\n#include <plasma/layouts/fliplayout.h>"
 
     def declaration(self):
         return "Plasma::FlipLayout < " + self.attribute("realLayout") + " > * " + self.attribute("name") + ";"
-    
+
     def initialization(self):
         return self.attribute("name") + " = new Plasma::FlipLayout < " + self.attribute("realLayout") + " > ();"
-    
+
     def setup(self):
         setup = ""
         if self.attribute("flip"):
@@ -24,7 +24,7 @@ class FlipLayoutHandler(AbstractLayout.AbstractLayoutHandler):
 
         h = LayoutHandlerManager.handler(self.attribute("realLayout"))
         h.setNode(self.node())
-        
+
         return setup + h.setup()
 
 LayoutHandlerManager.addHandler(FlipLayoutHandler())

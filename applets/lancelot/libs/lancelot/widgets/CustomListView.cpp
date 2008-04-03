@@ -17,27 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef RESIZE_BORDERS_PANEL_H
-#define RESIZE_BORDERS_PANEL_H
-
-#include "Panel.h"
+#include "CustomListView.h"
+#include <QLinkedListIterator>
+#include <cmath>
+#include <KDebug>
+#include <KIcon>
 
 namespace Lancelot
 {
 
-class ResizeBordersPanel: public Panel {
-public:
-    ResizeBordersPanel(QString name, QGraphicsItem * parent = 0);
-    void setGeometry (const QRectF & geometry);
-
-private:
-    class Private;
-    Private * d;
-
-};
-
 } // namespace Lancelot
 
-#endif // RESIZE_BORDERS_PANEL_H
-
-
+#include "CustomListView.moc"

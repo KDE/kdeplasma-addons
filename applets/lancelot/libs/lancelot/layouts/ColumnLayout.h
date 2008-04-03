@@ -20,6 +20,8 @@
 #ifndef COLUMNLAYOUT_H_
 #define COLUMNLAYOUT_H_
 
+#include "../lancelot_export.h"
+
 #include <plasma/widgets/widget.h>
 #include <plasma/layouts/layout.h>
 #include <plasma/layouts/layoutanimator.h>
@@ -45,7 +47,7 @@ namespace Lancelot
  *  in it, it works only for Plasma::Widget subclasses.
  */
 
-class ColumnLayout: public Plasma::Layout
+class LANCELOT_EXPORT ColumnLayout: public Plasma::Layout
 {
 public:
     class ColumnSizer

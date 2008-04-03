@@ -6,9 +6,9 @@ import xml
 class WidgetPositionerHandler(AbstractWidget.AbstractWidgetHandler):
     def name(self):
         return "Lancelot::WidgetPositioner"
-    
+
     def include(self):
-        return '#include "WidgetPositioner.h"'
+        return '#include <lancelot/widgets/WidgetPositioner.h>'
 
     def _construction(self):
         return self.attribute("name") + " = new " + self.attribute("type") + \

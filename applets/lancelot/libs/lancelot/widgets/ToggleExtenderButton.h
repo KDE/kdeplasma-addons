@@ -20,12 +20,14 @@
 #ifndef TOGGLEEXTENDERBUTTON_H_
 #define TOGGLEEXTENDERBUTTON_H_
 
+#include "../lancelot_export.h"
+
 #include "ExtenderButton.h"
 
 namespace Lancelot
 {
 
-class ToggleExtenderButton : public Lancelot::ExtenderButton {
+class LANCELOT_EXPORT ToggleExtenderButton : public Lancelot::ExtenderButton {
     Q_OBJECT
 public:
     ToggleExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);

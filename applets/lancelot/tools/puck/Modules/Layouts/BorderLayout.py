@@ -6,13 +6,13 @@ import xml
 class BorderLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def name(self):
         return "Plasma::BorderLayout"
-    
+
     def include(self):
         return "#include <plasma/layouts/borderlayout.h>"
 
     def setup(self):
         setup = AbstractLayout.AbstractLayoutHandler.setup(self)
-        
+
         if self.hasAttribute("leftSize"):
             setup += self.attribute("name") + \
                      "->setSize(" + self.attribute("leftSize") + ", Plasma::LeftPositioned);\n";

@@ -20,6 +20,8 @@
 #ifndef LANCELOT_BASEACTIONWIDGET_H_
 #define LANCELOT_BASEACTIONWIDGET_H_
 
+#include "../lancelot_export.h"
+
 #include <QtGui>
 #include <QtCore>
 #include <plasma/svg.h>
@@ -28,7 +30,7 @@
 namespace Lancelot
 {
 
-class BaseActionWidget: public Widget {
+class LANCELOT_EXPORT BaseActionWidget: public Widget {
     Q_OBJECT
 
 public:

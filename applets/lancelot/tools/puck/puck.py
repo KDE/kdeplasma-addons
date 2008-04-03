@@ -41,7 +41,7 @@ WidgetHandlerManager.pushRoot("root")
 
 def processDefines(node):
     global stmtDefine
-    
+
     for defineNode in node.childNodes:
         if not defineNode.nodeType == xml.dom.Node.ELEMENT_NODE:
             continue
@@ -58,10 +58,10 @@ def processElement(node):
     if node.nodeType == xml.dom.Node.COMMENT_NODE:
         stmtSetup += "/*" + node.nodeValue + "*/\n"
         return 0
-    
+
     if not node.nodeType == xml.dom.Node.ELEMENT_NODE:
         return 0
-    
+
     if node.prefix == "code" or node.localName == "code":
         for child in node.childNodes:
             if node.localName == "define":
@@ -81,48 +81,48 @@ def processElement(node):
             processWidget(node)
         elif node.localName == "qwidget":
             processQWidget(node)
-        
+
 
 def processLayout(node):
     global stmtDeclaration
     global stmtInitialization
     global stmtSetup
-    
+
     handler = LayoutHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if layout is supported
     handler.setNode(node)
-    
+
     includes = handler.include()
     for include in includes.split("\n"):
         stmtInclude.add(include)
-    
+
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
     stmtSetup          += handler.setup() + "\n"
 
     for child in node.childNodes:
         processElement(child)
-        
+
 def processWidget(node):
     global stmtDeclaration
     global stmtInitialization
     global stmtSetup
-    
+
     handler = WidgetHandlerManager.handler(node.getAttribute("type")) # TODO: make this check if widget is supported
     handler.setNode(node)
 
     includes = handler.include()
     for include in includes.split("\n"):
         stmtInclude.add(include)
-    
+
     stmtDeclaration    += handler.declaration() + "\n"
     stmtInitialization += handler.initialization() + "\n"
     stmtSetup          += handler.setup() + "\n"
-    
+
     WidgetHandlerManager.pushRoot(node.getAttribute("name"))
     for child in node.childNodes:
         processElement(child)
     WidgetHandlerManager.popRoot()
-  
+
 # Main program: ##################################################################################
 
 print "Plasma UI Compiler 0.1"
@@ -145,11 +145,11 @@ for node in doc.documentElement.childNodes:
     elif node.localName == "ui":
         rootObjectType = node.getAttribute("rootObjectType")
         className      = node.getAttribute("className")
-        
+
         for child in node.childNodes:
             processElement(child)
 
-template = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "template/cpp.h")) 
+template = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "template/cpp.h"))
 template = template.readlines()
 template = "".join(template)
 

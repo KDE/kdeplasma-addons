@@ -17,38 +17,29 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_BASEMODEL_H_
-#define LANCELOT_MODELS_BASEMODEL_H_
+#ifndef RESIZE_BORDERS_PANEL_H
+#define RESIZE_BORDERS_PANEL_H
 
-#include "../LancelotApplication.h"
-#include <lancelot/models/ActionListViewModels.h>
-#include <KService>
-#include <KUrl>
+#include "../lancelot_export.h"
 
-namespace Lancelot {
-namespace Models {
+#include "Panel.h"
 
-class BaseModel : public StandardActionListViewModel {
-    Q_OBJECT
+namespace Lancelot
+{
+
+class LANCELOT_EXPORT ResizeBordersPanel: public Panel {
 public:
-    BaseModel();
-    virtual ~BaseModel();
+    ResizeBordersPanel(QString name, QGraphicsItem * parent = 0);
+    void setGeometry (const QRectF & geometry);
 
-protected:
-    virtual void activate(int index);
-    virtual void load() = 0;
+private:
+    class Private;
+    Private * d;
 
-    void addService(const QString & service);
-    void addService(const KService::Ptr & service);
-
-    void addUrl(const QString & url);
-    void addUrl(const KUrl & url);
-
-    void hideLancelotWindow();
-    void changeLancelotSearchString(const QString & string);
 };
 
-}
-}
+} // namespace Lancelot
 
-#endif /* LANCELOT_MODELS_BASEMODEL_H_ */
+#endif // RESIZE_BORDERS_PANEL_H
+
+

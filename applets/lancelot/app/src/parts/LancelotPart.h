@@ -21,9 +21,9 @@
 #define LANCELOT_PARTS_H
 
 #include <plasma/applet.h>
-#include "../src/Global.h"
-#include "../src/Widget.h"
-#include "../src/ActionListView.h"
+#include <lancelot/Global.h>
+#include <lancelot/widgets/Widget.h>
+#include <lancelot/widgets/ActionListView.h>
 
 class QDBusInterface;
 

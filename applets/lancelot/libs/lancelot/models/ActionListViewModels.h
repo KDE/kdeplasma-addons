@@ -20,6 +20,8 @@
 #ifndef ACTIONLISTVIEWMODELS_H_
 #define ACTIONLISTVIEWMODELS_H_
 
+#include "../lancelot_export.h"
+
 #include <QPair>
 #include <QString>
 #include <KIcon>
@@ -28,7 +30,7 @@
 namespace Lancelot
 {
 
-class ActionListViewModel: public QObject {
+class LANCELOT_EXPORT ActionListViewModel: public QObject {
     Q_OBJECT
 public:
     ActionListViewModel();
@@ -58,10 +60,10 @@ protected:
     virtual void activate(int index) { Q_UNUSED(index); };
 };
 
-class StandardActionListViewModel: public ActionListViewModel {
+class LANCELOT_EXPORT StandardActionListViewModel: public ActionListViewModel {
     Q_OBJECT
 protected:
-    class Item {
+    class LANCELOT_EXPORT Item {
     public:
         Item(QString itemTitle, QString itemDescription, KIcon * itemIcon, QVariant itemData)
           : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData) {};
@@ -96,7 +98,7 @@ protected:
 
 };
 
-class MergedActionListViewModel: public ActionListViewModel {
+class LANCELOT_EXPORT MergedActionListViewModel: public ActionListViewModel {
     Q_OBJECT
 public:
     MergedActionListViewModel();
@@ -144,7 +146,7 @@ Q_SIGNALS:
     void itemAltered(int index);
 };
 
-class DummyActionListViewModel : public ActionListViewModel {
+class LANCELOT_EXPORT DummyActionListViewModel : public ActionListViewModel {
 public:
     DummyActionListViewModel(QString title, int size)
         : Lancelot::ActionListViewModel(), m_size(size), m_title(title), m_icon(new KIcon("lancelot")) {}
@@ -168,7 +170,7 @@ private:
     KIcon * m_icon;
 };
 
-class DummyMergedActionListViewModel : public MergedActionListViewModel {
+class LANCELOT_EXPORT DummyMergedActionListViewModel : public MergedActionListViewModel {
 public:
     DummyMergedActionListViewModel (QString title, int subs) {
         while (subs-- != 0) {

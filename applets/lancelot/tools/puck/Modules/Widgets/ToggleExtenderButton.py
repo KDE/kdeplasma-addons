@@ -7,8 +7,8 @@ import xml
 class ToggleExtenderButtonHandler(ExtenderButton.ExtenderButtonHandler):
     def name(self):
         return "Lancelot::ToggleExtenderButton"
-    
+
     def include(self):
-        return '#include <KIcon>\n#include "ToggleExtenderButton.h"'
+        return '#include <KIcon>\n#include <lancelot/widgets/ToggleExtenderButton.h>'
 
 WidgetHandlerManager.addHandler(ToggleExtenderButtonHandler())

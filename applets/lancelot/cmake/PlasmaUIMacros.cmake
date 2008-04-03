@@ -1,4 +1,7 @@
-set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_SOURCE_DIR}/applets/lancelot/tools/puck/puck.py)
+if (NOT KDE_PLASMA_UIC_EXECUTABLE)
+   # We don't have Puck path
+   set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_SOURCE_DIR}/applets/lancelot/tools/puck/puck.py)
+endif (NOT KDE_PLASMA_UIC_EXECUTABLE)
 
 message("Plasma UI Compiler (Puck) is located at: " ${KDE_PLASMA_UIC_EXECUTABLE})
 

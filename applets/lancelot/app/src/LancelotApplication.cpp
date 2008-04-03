@@ -27,7 +27,7 @@
 #include <KAction>
 #include <KStandardAction>
 
-#include "Global.h"
+#include <lancelot/Global.h>
 #include "LancelotWindow.h"
 #include "LancelotApplication.h"
 

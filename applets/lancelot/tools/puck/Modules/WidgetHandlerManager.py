@@ -16,9 +16,9 @@ def addHandler(handler):
 
 def pushRoot(root):
     __roots.append(root)
-    
+
 def popRoot():
     __roots.pop()
-    
+
 def root():
     return __roots[-1]

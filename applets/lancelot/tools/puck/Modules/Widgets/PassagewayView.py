@@ -7,9 +7,9 @@ import xml
 class PassagewayView(Panel.PanelHandler):
     def name(self):
         return "Lancelot::PassagewayView"
-    
+
     def include(self):
-        return '#include <KIcon>\n#include "PassagewayView.h"'
+        return '#include <KIcon>\n#include <lancelot/widgets/PassagewayView.h>'
 
     def setup(self):
         setup = Panel.PanelHandler.setup(self)

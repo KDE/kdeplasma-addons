@@ -20,14 +20,16 @@
 #ifndef LANCELOT_WIDGET_H_
 #define LANCELOT_WIDGET_H_
 
+#include "../lancelot_export.h"
+
 #include <QtGui>
 #include <plasma/widgets/widget.h>
-#include "Global.h"
+#include "../Global.h"
 
 namespace Lancelot
 {
 
-class WidgetCore
+class LANCELOT_EXPORT WidgetCore
 {
 public:
     WidgetCore();
@@ -37,7 +39,7 @@ protected:
     WidgetGroup * m_group;
 };
 
-class Widget : public Plasma::Widget, public WidgetCore
+class LANCELOT_EXPORT Widget : public Plasma::Widget, public WidgetCore
 {
     Q_OBJECT
 public:
