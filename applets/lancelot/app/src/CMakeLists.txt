@@ -2,8 +2,6 @@ project(LancelotMenu)
 
 find_package(KDE4 REQUIRED)
 find_package(Plasma REQUIRED)
-
-message("Lancelot libs: ${LANCELOT_LIBS}")
 find_package(Lancelot REQUIRED)
 
 include(PlasmaUIMacros)

@@ -6,6 +6,19 @@ include (KDE4Defaults)
 find_package(Plasma REQUIRED)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
+########### define variables ##########
+
+set(LANCELOT_INCLUDE_DIR
+   "${CMAKE_CURRENT_SOURCE_DIR}/.."
+   CACHE STRING
+   "Override include_dir for liblancelot"
+   FORCE)
+set(LANCELOT_LIBS
+   "${CMAKE_BINARY_DIR}/lib/liblancelot.so"
+   CACHE STRING
+   "Override libs for liblancelot"
+   FORCE)
+
 # include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
 include_directories(
@@ -15,12 +28,6 @@ include_directories(
 )
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1209)
-
-########### define variables ##########
-set(LANCELOT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..
-   CACHE STRING "Override include dir for liblancelot")
-set(LANCELOT_LIBS liblancelot
-   CACHE STRING "Override libs dir for liblancelot")
 
 ########### libLancelot ###############
 
