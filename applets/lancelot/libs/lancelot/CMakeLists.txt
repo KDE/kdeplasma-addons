@@ -9,22 +9,24 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 ########### define variables ##########
 
 set(LANCELOT_INCLUDE_DIR
-   "${CMAKE_CURRENT_SOURCE_DIR}/.."
-   CACHE STRING
-   "Override include_dir for liblancelot"
-   FORCE)
-set(LANCELOT_LIBS
-   "${CMAKE_BINARY_DIR}/lib/liblancelot.so"
-   CACHE STRING
-   "Override libs for liblancelot"
-   FORCE)
+        "${CMAKE_CURRENT_SOURCE_DIR}/.."
+        CACHE STRING
+        "Location of liblancelot headers"
+        FORCE)
 
-# include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+set(LANCELOT_LIBS
+        "lancelot"
+        CACHE STRING
+        "Location of liblancelot binary"
+        FORCE)
 
 include_directories(
-   ${CMAKE_CURRENT_SOURCE_DIR}
-   ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs
-   ${KDE4_INCLUDES}
+        ${CMAKE_SOURCE_DIR}
+        ${CMAKE_BINARY_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${KDE4_INCLUDES}
+        ${PLASMA_INCLUDE_DIR}
 )
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1209)
@@ -32,27 +34,27 @@ add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1209)
 ########### libLancelot ###############
 
 set(lancelot_LIB_SRCS
-   Global.cpp
+        Global.cpp
 
-   # Widgets
-   widgets/ActionListView.cpp
-   widgets/BaseActionWidget.cpp
-   #widgets/CustomListView.cpp
-   widgets/ExtenderButton.cpp
-   widgets/Panel.cpp
-   widgets/PassagewayView.cpp
-   widgets/ResizeBordersPanel.cpp
-   widgets/ToggleExtenderButton.cpp
-   widgets/Widget.cpp
-   widgets/WidgetPositioner.cpp
+        # Widgets
+        widgets/ActionListView.cpp
+        widgets/BaseActionWidget.cpp
+        #widgets/CustomListView.cpp
+        widgets/ExtenderButton.cpp
+        widgets/Panel.cpp
+        widgets/PassagewayView.cpp
+        widgets/ResizeBordersPanel.cpp
+        widgets/ToggleExtenderButton.cpp
+        widgets/Widget.cpp
+        widgets/WidgetPositioner.cpp
 
-   # Layouts
-   layouts/CardLayout.cpp
-   layouts/ColumnLayout.cpp
+        # Layouts
+        layouts/CardLayout.cpp
+        layouts/ColumnLayout.cpp
 
-   # Models
-   models/ActionListViewModels.cpp
-   models/PassagewayViewModels.cpp
+        # Models
+        models/ActionListViewModels.cpp
+        models/PassagewayViewModels.cpp
 )
 
 kde4_add_library(lancelot SHARED ${lancelot_LIB_SRCS})
@@ -70,14 +72,14 @@ install(TARGETS lancelot DESTINATION ${LIB_INSTALL_DIR})
 ########### install files ###############
 
 set(lancelot_LIB_INCLUDES
-  lancelot.h
-  lancelot_export.h
-  Global.h
+   lancelot.h
+   lancelot_export.h
+   Global.h
 )
 
 install(FILES
-  ${lancelot_LIB_INCLUDES}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot
+   ${lancelot_LIB_INCLUDES}
+   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot
 )
 
 install(FILES

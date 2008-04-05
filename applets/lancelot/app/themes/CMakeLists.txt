@@ -1,2 +1,2 @@
-add_subdirectory(blue)
-add_subdirectory(black)
+#add_subdirectory(blue)
+#add_subdirectory(black)

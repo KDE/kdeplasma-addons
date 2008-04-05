@@ -9,8 +9,8 @@ message("Plasma UI Compiler (Puck) is located at: " ${KDE_PLASMA_UIC_EXECUTABLE}
 # so that it complies with CMake style guides before (if) it  \
 # becomes a standard part of Plasma
 
-#usage: KDE4_ADD_PLASMA_UI_FILES(foo_SRCS ${ui_files})
-macro (KDE4_ADD_PLASMA_UI_FILES _sources )
+#usage: PLASMAUI_ADD_UI_FILES(foo_SRCS ${ui_files})
+macro (PLASMAUI_ADD_UI_FILES _sources )
    foreach (_current_FILE ${ARGN})
 
       get_filename_component(_tmp_FILE ${_current_FILE} ABSOLUTE)
@@ -30,5 +30,5 @@ macro (KDE4_ADD_PLASMA_UI_FILES _sources )
       list(APPEND ${_sources} ${_header})
 
    endforeach (_current_FILE)
-endmacro (KDE4_ADD_PLASMA_UI_FILES)
+endmacro (PLASMAUI_ADD_UI_FILES)
 
