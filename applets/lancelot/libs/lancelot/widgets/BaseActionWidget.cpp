@@ -104,12 +104,12 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     QPainter fpainter(&foreground);
     painter = &fpainter;
 
-    if (!m_enabled) {
-        painter->setPen(QPen(m_group->foregroundColor()->disabled));
-    } else if (m_hover) {
-        painter->setPen(QPen(m_group->foregroundColor()->active));
+    if (!isEnabled()) {
+        painter->setPen(QPen(group()->foregroundColor()->disabled));
+    } else if (isHovered()) {
+        painter->setPen(QPen(group()->foregroundColor()->active));
     } else {
-        painter->setPen(QPen(m_group->foregroundColor()->normal));
+        painter->setPen(QPen(group()->foregroundColor()->normal));
     }
 
     QFont titleFont = painter->font();
@@ -160,7 +160,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 m_icon->paint(_painter, rect);
             } else {
                 m_iconInSvg->resize(m_iconSize);
-                m_iconInSvg->paint(_painter, rect.left(), rect.top(), m_hover?"active":"inactive");
+                m_iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
             }
             top += m_iconSize.height() + WIDGET_PADDING;
         }
@@ -214,9 +214,9 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), m_iconSize);
             if (m_icon) {
                 QIcon::Mode mode;
-                if (!m_enabled) {
+                if (!isEnabled()) {
                     mode = QIcon::Disabled;
-                } else if (m_hover) {
+                } else if (isHovered()) {
                     mode = QIcon::Active;
                 } else {
                     mode = QIcon::Normal;
@@ -225,7 +225,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                 m_icon->paint(_painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
                 m_iconInSvg->resize(m_iconSize);
-                m_iconInSvg->paint(_painter, rect.left(), rect.top(), m_hover?"active":"inactive");
+                m_iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
             }
         }
 
@@ -236,7 +236,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         }
 
         if (!m_description.isEmpty()) {
-            if (!m_hover) {
+            if (!isHovered()) {
                 QPen pen = painter->pen();
                 QColor clr = painter->pen().color();
                 clr.setAlphaF(0.3);

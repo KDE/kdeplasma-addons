@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+// TODO: Convert to dptr
+
 #ifndef PASSAGEWAYVIEW_H_
 #define PASSAGEWAYVIEW_H_
 

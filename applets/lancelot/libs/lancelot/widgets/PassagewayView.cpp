@@ -162,9 +162,9 @@ void PassagewayView::next(Step newStep)
 {
     Step * step = new Step(newStep);
     ExtenderButton * button =
-        new ExtenderButton(m_name + "::button", step->icon, step->title, "", this);
+        new ExtenderButton(name() + "::button", step->icon, step->title, "", this);
     ActionListView * list   =
-        new ActionListView(m_name + "::list", step->model, this);
+        new ActionListView(name() + "::list", step->model, this);
 
     button->setIconSize(QSize(24, 24));
     button->setAlignment(Qt::AlignLeft);

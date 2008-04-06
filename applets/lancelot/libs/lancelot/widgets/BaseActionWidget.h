@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+// TODO: Convert to dptr
+
 #ifndef LANCELOT_BASEACTIONWIDGET_H_
 #define LANCELOT_BASEACTIONWIDGET_H_
 

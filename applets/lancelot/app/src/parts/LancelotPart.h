@@ -27,7 +27,7 @@
 
 class QDBusInterface;
 
-class LancelotPart : public Lancelot::WidgetCore, public Plasma::Applet
+class LancelotPart : /*public Lancelot::WidgetCore,*/ public Plasma::Applet
 {
     //Q_OBJECT
 public:

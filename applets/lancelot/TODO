@@ -3,6 +3,7 @@ m - medium
 a - advanced
 h - hard
 
+Menu:
 TODO: (m) Themes and configuration for resize borders
 TODO: (m) Resize to work ... better
 TODO: (a) Finish PassagewayView (clicking, categories)
@@ -11,3 +12,10 @@ TODO: (a) Contacts section
 TODO: (m) Search history
 TODO: (m) Switch menu instead of searching for SESSIONS
 
+Library:
+TODO: (a) Dptr everything
+
+Applet:
+
+Parts:
+TODO: (h) Make it :)

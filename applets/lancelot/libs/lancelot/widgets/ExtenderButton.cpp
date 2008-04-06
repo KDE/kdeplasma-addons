@@ -107,7 +107,7 @@ void ExtenderButton::init()
 void ExtenderButton::setGroup(WidgetGroup * group)
 {
     Widget::setGroup(group);
-    m_extender->setGroupByName(m_group->name() + "-Extender");
+    m_extender->setGroupByName(group->name() + "-Extender");
 }
 
 void ExtenderButton::groupUpdated()
@@ -137,7 +137,7 @@ void ExtenderButton::stopTimer() {
 
 QRectF ExtenderButton::boundingRect() const
 {
-    if (!m_hover || m_extenderPosition == No)
+    if (!isHovered() || m_extenderPosition == No)
         return QRectF(0, 0, size().width(), size().height());
     switch (m_extenderPosition) {
     case Top:

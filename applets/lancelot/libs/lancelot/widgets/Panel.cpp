@@ -126,7 +126,7 @@ void Panel::setGeometry (const QRectF & geometry) {
 void Panel::setGroup(WidgetGroup * group)
 {
     Widget::setGroup(group);
-    m_titleWidget.setGroupByName(m_group->name() + "-Title");
+    m_titleWidget.setGroupByName(group->name() + "-Title");
 }
 
 void Panel::invalidate()

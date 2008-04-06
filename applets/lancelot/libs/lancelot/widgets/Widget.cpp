@@ -24,47 +24,62 @@
 
 namespace Lancelot {
 
-WidgetCore::WidgetCore()
-: m_group(NULL)
-{
-}
+class Widget::Private {
+public:
+    Private()
+      : hover(false),
+        enabled(true),
+        name(QString()),
+        group(NULL)
+    {};
 
-WidgetCore::~WidgetCore()
-{
-}
+    bool hover;
+    bool enabled;
+    QString name;
+    WidgetGroup * group;
+};
 
 Widget::Widget(QString name, QGraphicsItem * parent) :
     Plasma::Widget(parent),
-    WidgetCore(),
-    m_hover(false),
-    m_enabled(true),
-    m_name(name)
+    d(new Private())
+    //WidgetCore(),
+    //d->hover(false),
+    //d->enabled(true),
+    //d->name(name),
+    //d->group(NULL)
 {
     Instance::activeInstance()->addWidget(this);
-    m_group = Instance::activeInstance()->defaultGroup();
+    d->group = Instance::activeInstance()->defaultGroup();
 }
 
 Widget::~Widget()
 {
-    if (m_group != NULL) {
-        m_group->removeWidget(this, false);
+    if (d->group != NULL) {
+        d->group->removeWidget(this, false);
     }
 }
 
-void Widget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
-    if (!m_enabled) return;
-    m_hover = true;
+void Widget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event )
+{
+    if (!d->enabled) return;
+    d->hover = true;
     Plasma::Widget::hoverEnterEvent(event);
     emit mouseHoverEnter();
     update();
 }
 
-void Widget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
-    if (!m_enabled) return;
-    m_hover = false;
+void Widget::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event )
+{
+    if (!d->enabled) return;
+    d->hover = false;
     Plasma::Widget::hoverEnterEvent(event);
     emit mouseHoverLeave();
     update();
+}
+
+bool Widget::isHovered() const
+{
+    return d->hover;
 }
 
 void Widget::setGroupByName(const QString & groupName)
@@ -78,27 +93,27 @@ void Widget::setGroup(WidgetGroup * group)
         group = instance()->defaultGroup();
     }
 
-    if (group == m_group) return;
+    if (group == d->group) return;
 
-    if (m_group != NULL) {
-        m_group->removeWidget(this);
+    if (d->group != NULL) {
+        d->group->removeWidget(this);
     }
 
-    m_group = group;
-    m_group->addWidget(this);
+    d->group = group;
+    d->group->addWidget(this);
     groupUpdated();
 }
 
 WidgetGroup * Widget::group()
 {
-    return m_group;
+    return d->group;
 }
 
 Instance * Widget::instance()
 {
-    if (!m_group) return Instance::activeInstance();
+    if (!d->group) return Instance::activeInstance();
 
-    return m_group->m_instance;
+    return d->group->m_instance;
 }
 
 void Widget::groupUpdated()
@@ -108,31 +123,31 @@ void Widget::groupUpdated()
 
 QString Widget::name() const
 {
-    return m_name;
+    return d->name;
 }
 
 void Widget::setName(QString name)
 {
-    m_name = name;
+    d->name = name;
 }
 
 void Widget::setGeometry(const QRectF & geometry)
 {
-    if (!m_group) //!instance()->processGeometryChanges)
+    if (!d->group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::setGeometry(geometry);
 }
 
 void Widget::update(const QRectF &rect)
 {
-    if (!m_group) //!instance()->processGeometryChanges)
+    if (!d->group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::update(rect);
 }
 
 void Widget::update(qreal x, qreal y, qreal w, qreal h)
 {
-    if (!m_group) //!instance()->processGeometryChanges)
+    if (!d->group) //!instance()->processGeometryChanges)
         return;
     Plasma::Widget::update(x, y, w, h);
 }
@@ -145,27 +160,27 @@ void Widget::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * o
 }
 
 void Widget::enable(bool value) {
-    if (m_hover && m_enabled) {
+    if (d->hover && d->enabled) {
         hoverLeaveEvent(NULL);
     }
-    m_enabled = value;
+    d->enabled = value;
 }
 
 void Widget::disable() {
     enable(false);
 }
 
-bool Widget::enabled() const {
-    return m_enabled;
+bool Widget::isEnabled() const {
+    return d->enabled;
 }
 
 void Widget::paintBackground (QPainter * painter) {
-    if (!m_group) return;
+    if (!d->group) return;
 
     QString element;
-    if (!m_enabled) {
+    if (!d->enabled) {
         element = "disabled";
-    } else if (m_hover) {
+    } else if (d->hover) {
         element = "active";
     } else {
         element = "normal";
@@ -175,19 +190,19 @@ void Widget::paintBackground (QPainter * painter) {
 }
 
 void Widget::paintBackground (QPainter * painter, const QString & element) {
-    if (!m_group) return;
+    if (!d->group) return;
 
     // Background Painting
-    if (Plasma::Svg * svg = m_group->backgroundSvg()) {
+    if (Plasma::Svg * svg = d->group->backgroundSvg()) {
         svg->resize(size());
 
         svg->paint(painter, 0, 0, element);
 
-    } else if (const WidgetGroup::ColorScheme * scheme = m_group->backgroundColor()) {
+    } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;
-        if (!m_enabled) {
+        if (!d->enabled) {
             color = & (scheme->disabled);
-        } else if (m_hover) {
+        } else if (d->hover) {
             color = & (scheme->active);
         } else {
             color = & (scheme->normal);

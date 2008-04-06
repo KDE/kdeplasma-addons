@@ -55,7 +55,7 @@ public:
         void paintWidget(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
         {
             Q_UNUSED(widget);
-            if (m_hover) {
+            if (isHovered()) {
                 if (m_position == ResizeBordersPanel::Private::Top
                         || m_position == ResizeBordersPanel::Private::Bottom) {
                     QLinearGradient fade(0, 0, option->rect.width() / 2, 0);

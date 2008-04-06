@@ -29,17 +29,7 @@
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT WidgetCore
-{
-public:
-    WidgetCore();
-    virtual ~WidgetCore();
-
-protected:
-    WidgetGroup * m_group;
-};
-
-class LANCELOT_EXPORT Widget : public Plasma::Widget, public WidgetCore
+class LANCELOT_EXPORT Widget : public Plasma::Widget
 {
     Q_OBJECT
 public:
@@ -48,7 +38,7 @@ public:
 
     void enable(bool value = true);
     void disable();
-    bool enabled() const;
+    bool isEnabled() const;
 
     void setGeometry (const QRectF & geometry);
     void update (const QRectF &rect = QRectF());
@@ -62,15 +52,15 @@ public:
     QString name() const;
     void setName(QString name);
 
+    bool isHovered() const;
+
 Q_SIGNALS:
     void mouseHoverEnter();
     void mouseHoverLeave();
 
 protected:
-    bool m_hover;
-    bool m_enabled;
-
-    QString m_name;
+    class Private;
+    Private * d;
 
     virtual void groupUpdated();
 

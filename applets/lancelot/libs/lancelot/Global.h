@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+// TODO: Convert to dptr
+
 #ifndef LANCELOT_GLOBAL_H_
 #define LANCELOT_GLOBAL_H_
 
@@ -29,7 +31,6 @@
 #include <KConfigGroup>
 #include <plasma/svg.h>
 
-//#include "LancelotApplication.h"
 #include "lancelot_export.h"
 
 namespace Lancelot

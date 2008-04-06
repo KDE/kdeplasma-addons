@@ -44,7 +44,7 @@ ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection dire
 
 void ActionListView::ScrollButton::hoverEnterEvent (QGraphicsSceneHoverEvent * event)
 {
-    if (m_hover) return;
+    if (isHovered()) return;
     m_list->m_scrollTimes = -1;
     m_list->scroll(m_direction);
     BaseActionWidget::hoverEnterEvent(event);
@@ -52,7 +52,7 @@ void ActionListView::ScrollButton::hoverEnterEvent (QGraphicsSceneHoverEvent * e
 
 void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * event)
 {
-    if (!m_hover) return;
+    if (!isHovered()) return;
     m_list->m_scrollTimes = -1;
     m_list->scroll(ActionListView::No);
     BaseActionWidget::hoverLeaveEvent(event);
@@ -109,8 +109,8 @@ void ActionListView::positionScrollButtons()
         scrollButtonDown->setZValue(100);
         scrollButtonDown->show();
 
-        scrollButtonUp->setGroupByName(m_group->name() + "-Scroll-Up");
-        scrollButtonDown->setGroupByName(m_group->name() + "-Scroll-Down");
+        scrollButtonUp->setGroupByName(group()->name() + "-Scroll-Up");
+        scrollButtonDown->setGroupByName(group()->name() + "-Scroll-Down");
 
     }
 
@@ -125,8 +125,8 @@ void ActionListView::setGroup(WidgetGroup * group)
 {
     Widget::setGroup(group);
     if (scrollButtonUp) {
-        scrollButtonUp->setGroupByName(m_group->name() + "-Scroll-Up");
-        scrollButtonDown->setGroupByName(m_group->name() + "-Scroll-Down");
+        scrollButtonUp->setGroupByName(group->name() + "-Scroll-Up");
+        scrollButtonDown->setGroupByName(group->name() + "-Scroll-Down");
     }
 }
 
@@ -393,7 +393,7 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button->enable();
         button->show();
     } else {
-        button = new Lancelot::ExtenderButton(m_name + "Button",
+        button = new Lancelot::ExtenderButton(name() + "Button",
             (QIcon *)NULL, "", "", this);
 
         button->setInnerOrientation(Lancelot::ExtenderButton::Horizontal);
