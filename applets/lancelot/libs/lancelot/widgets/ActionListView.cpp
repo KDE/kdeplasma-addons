@@ -121,12 +121,12 @@ void ActionListView::positionScrollButtons()
     scrollButtonDown->setPos(left, size().height() - SCROLL_BUTTON_HEIGHT);
 }
 
-void ActionListView::setGroup(WidgetGroup * group)
+void ActionListView::setGroup(WidgetGroup * g)
 {
-    Widget::setGroup(group);
+    Widget::setGroup(g);
     if (scrollButtonUp) {
-        scrollButtonUp->setGroupByName(group->name() + "-Scroll-Up");
-        scrollButtonDown->setGroupByName(group->name() + "-Scroll-Down");
+        scrollButtonUp->setGroupByName(group()->name() + "-Scroll-Up");
+        scrollButtonDown->setGroupByName(group()->name() + "-Scroll-Down");
     }
 }
 

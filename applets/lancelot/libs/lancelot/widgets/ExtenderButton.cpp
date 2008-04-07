@@ -104,10 +104,10 @@ void ExtenderButton::init()
     connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));
 }
 
-void ExtenderButton::setGroup(WidgetGroup * group)
+void ExtenderButton::setGroup(WidgetGroup * g)
 {
-    Widget::setGroup(group);
-    m_extender->setGroupByName(group->name() + "-Extender");
+    Widget::setGroup(g);
+    m_extender->setGroupByName(group()->name() + "-Extender");
 }
 
 void ExtenderButton::groupUpdated()
