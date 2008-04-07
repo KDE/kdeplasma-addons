@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef LANCELOT_GLOBAL_H_
 #define LANCELOT_GLOBAL_H_
 
@@ -63,32 +61,15 @@ public:
 
     QString name() const;
 
+    Instance * instance();
+
 private:
-    KConfigGroup * m_confGroupTheme;
+    class Private;
+    Private * d;
 
     WidgetGroup(Instance * instance, QString name);
     virtual ~WidgetGroup();
 
-    Instance * m_instance;
-
-    QString m_name;
-    QMap < QString, QVariant > m_properties;
-
-    QList < Widget * > m_widgets;
-
-    ColorScheme m_foregroundColor;
-    ColorScheme m_backgroundColor;
-    Plasma::Svg * m_backgroundSvg;
-    bool m_hasBackgroundColor : 1;
-    bool m_ownsBackgroundSvg : 1;
-    bool m_loaded : 1;
-    //QPixmap * m_cachedBackgroundNormal;
-    //QPixmap * m_cachedBackgroundActive;
-    //QPixmap * m_cachedBackgroundDisabled;
-
-    void copyFrom(WidgetGroup * group);
-
-    friend class Widget;
     friend class Instance;
 };
 
@@ -96,8 +77,6 @@ class LANCELOT_EXPORT Instance : public QObject {
 public:
     Instance();
     virtual ~Instance();
-
-    bool processGroupChanges : 1;
 
     void activateAll();
     void deactivateAll();
@@ -120,21 +99,8 @@ public:
     static void setHasApplication(bool value);
 
 private:
-    void loadAllGroups();
-
-    static bool m_hasApplication;
-
-    // TODO: Warning! When threading comes around this approach will break...
-    // it'll need mutexes, or something else...
-    static Instance * m_activeInstance;
-
-    QList< Widget * > m_widgets;
-    QMap < QString, WidgetGroup * > m_groups;
-
-    KConfig * m_confLancelot;
-    KConfig * m_confTheme;
-
-    friend class WidgetGroup;
+    class Private;
+    Private * d;
 };
 
 }

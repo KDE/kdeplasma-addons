@@ -57,6 +57,7 @@ Widget::~Widget()
     if (d->group != NULL) {
         d->group->removeWidget(this, false);
     }
+    delete d;
 }
 
 void Widget::hoverEnterEvent ( QGraphicsSceneHoverEvent * event )
@@ -113,7 +114,7 @@ Instance * Widget::instance()
 {
     if (!d->group) return Instance::activeInstance();
 
-    return d->group->m_instance;
+    return d->group->instance();
 }
 
 void Widget::groupUpdated()

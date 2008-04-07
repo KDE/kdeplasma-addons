@@ -27,41 +27,94 @@ namespace Lancelot
 {
 
 // Group
+class WidgetGroup::Private {
+public:
+    Private()
+      : confGroupTheme(NULL), instance(NULL), name(QString()), backgroundSvg(NULL),
+       hasBackgroundColor(false), ownsBackgroundSvg(false), loaded(false)
+       // TODO : Add caching?
+       //cachedBackgroundNormal(NULL), cachedBackgroundActive(NULL), cachedBackgroundDisabled(NULL)
+    {}
+
+    ~Private()
+    {
+        delete confGroupTheme;
+        if (ownsBackgroundSvg) {
+            delete backgroundSvg;
+        }
+        //delete d->cachedBackgroundNormal;
+        //delete d->cachedBackgroundActive;
+        //delete d->cachedBackgroundDisabled;
+    }
+
+    KConfigGroup * confGroupTheme;
+
+    Instance * instance;
+
+    QString name;
+    QMap < QString, QVariant > properties;
+
+    QList < Widget * > widgets;
+
+    ColorScheme foregroundColor;
+    ColorScheme backgroundColor;
+    Plasma::Svg * backgroundSvg;
+
+    bool hasBackgroundColor : 1;
+    bool ownsBackgroundSvg : 1;
+    bool loaded : 1;
+
+    void copyFrom(WidgetGroup::Private * d)
+    {
+        if (this == d) return;
+
+        properties = d->properties;
+
+        foregroundColor = d->foregroundColor;
+        hasBackgroundColor = d->hasBackgroundColor;
+        backgroundColor = d->backgroundColor;
+
+        if (ownsBackgroundSvg) {
+            delete backgroundSvg;
+        }
+        backgroundSvg = d->backgroundSvg;
+        ownsBackgroundSvg = false;
+    }
+};
+
 WidgetGroup::WidgetGroup(Instance * instance, QString name)
-  : m_confGroupTheme(NULL), m_instance(instance), m_name(name), m_backgroundSvg(NULL),
-    m_hasBackgroundColor(false), m_ownsBackgroundSvg(false), m_loaded(false)
-    // TODO : Add caching?
-    //m_cachedBackgroundNormal(NULL), m_cachedBackgroundActive(NULL), m_cachedBackgroundDisabled(NULL)
+    : d(new Private())
 {
-    m_confGroupTheme = new KConfigGroup(m_instance->theme(), "Group-" + name);
+    d->instance = instance;
+    d->name = name;
+    d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
 }
 
 WidgetGroup::~WidgetGroup()
 {
-    delete m_confGroupTheme;
-    if (m_ownsBackgroundSvg) {
-        delete m_backgroundSvg;
-    }
-    //delete m_cachedBackgroundNormal;
-    //delete m_cachedBackgroundActive;
-    //delete m_cachedBackgroundDisabled;
+    delete d;
+}
+
+Instance * WidgetGroup::instance()
+{
+    return d->instance;
 }
 
 void WidgetGroup::addWidget(Widget * widget)
 {
     if (!widget) return;
 
-    if (m_widgets.contains(widget)) return;
-    m_widgets.append(widget);
+    if (d->widgets.contains(widget)) return;
+    d->widgets.append(widget);
 
 }
 
 void WidgetGroup::removeWidget(Widget * widget, bool setDefaultGroup)
 {
-    if (m_instance->defaultGroup() == this) return;
+    if (d->instance->defaultGroup() == this) return;
 
-    if (!m_widgets.contains(widget)) return;
-    m_widgets.removeAll(widget);
+    if (!d->widgets.contains(widget)) return;
+    d->widgets.removeAll(widget);
 
     if (setDefaultGroup) {
         widget->setGroup(NULL);
@@ -70,113 +123,96 @@ void WidgetGroup::removeWidget(Widget * widget, bool setDefaultGroup)
 
 bool WidgetGroup::hasProperty(const QString & property) const
 {
-    return m_properties.contains(property);
+    return d->properties.contains(property);
 }
 
 QVariant WidgetGroup::property(const QString & property) const
 {
-    return m_properties.value(property);
+    return d->properties.value(property);
 }
 
 void WidgetGroup::setProperty(const QString & property, const QVariant & value)
 {
-    m_properties[property] = value;
+    d->properties[property] = value;
 }
 
 QString WidgetGroup::name() const
 {
-    return m_name;
+    return d->name;
 }
 
 Plasma::Svg * WidgetGroup::backgroundSvg() const
 {
-    return m_backgroundSvg;
+    return d->backgroundSvg;
 }
 
 const WidgetGroup::ColorScheme * WidgetGroup::backgroundColor() const
 {
-    if (!m_hasBackgroundColor) {
+    if (!d->hasBackgroundColor) {
         return NULL;
     }
-    return & m_backgroundColor;
+    return & d->backgroundColor;
 }
 
 const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
 {
-    return & m_foregroundColor;
-}
-
-void WidgetGroup::copyFrom(WidgetGroup * group)
-{
-    if (this == group) return;
-
-    m_properties = group->m_properties;
-
-    m_foregroundColor = group->m_foregroundColor;
-    m_hasBackgroundColor = group->m_hasBackgroundColor;
-    m_backgroundColor = group->m_backgroundColor;
-
-    if (m_ownsBackgroundSvg) {
-        delete m_backgroundSvg;
-    }
-    m_backgroundSvg = group->m_backgroundSvg;
-    m_ownsBackgroundSvg = false;
+    return & d->foregroundColor;
 }
 
 void WidgetGroup::load(bool full)
 {
-    if (m_loaded && !full) return;
-    m_loaded = true;
+    if (d->loaded && !full) return;
+    d->loaded = true;
 
-    m_hasBackgroundColor = false;
-    if (m_ownsBackgroundSvg) {
-        delete m_backgroundSvg;
+    d->hasBackgroundColor = false;
+    if (d->ownsBackgroundSvg) {
+        delete d->backgroundSvg;
     }
-    m_backgroundSvg = NULL;
+    d->backgroundSvg = NULL;
 
     WidgetGroup * group;
 
-    if (!m_confGroupTheme->exists()) {
-        group = m_instance->defaultGroup();
+    if (!d->confGroupTheme->exists()) {
+        group = d->instance->defaultGroup();
         if (group == this) return;
 
-        copyFrom(group);
+        d->copyFrom(group->d);
         return;
     }
 
-    group = m_instance->group(m_confGroupTheme->readEntry("parent", "Default"));
+    group = d->instance->group(d->confGroupTheme->readEntry("parent", "Default"));
     if (group != this) {
         group->load(false);
-        copyFrom(group);
+        d->copyFrom(group->d);
     }
 
     // Load properties from theme configuration file
-    m_foregroundColor.normal   = m_confGroupTheme->readEntry("foreground.color.normal",   m_foregroundColor.normal);
-    m_foregroundColor.active   = m_confGroupTheme->readEntry("foreground.color.active",   m_foregroundColor.active);
-    m_foregroundColor.disabled = m_confGroupTheme->readEntry("foreground.color.disabled", m_foregroundColor.disabled);
+    d->foregroundColor.normal   = d->confGroupTheme->readEntry("foreground.color.normal",   d->foregroundColor.normal);
+    d->foregroundColor.active   = d->confGroupTheme->readEntry("foreground.color.active",   d->foregroundColor.active);
+    d->foregroundColor.disabled = d->confGroupTheme->readEntry("foreground.color.disabled", d->foregroundColor.disabled);
 
-    QString type = m_confGroupTheme->readEntry("background.type", "none");
+    QString type = d->confGroupTheme->readEntry("background.type", "none");
     if (type == "color") {
-        m_hasBackgroundColor       = true;
-        m_backgroundColor.normal   = m_confGroupTheme->readEntry("background.color.normal",   m_backgroundColor.normal);
-        m_backgroundColor.active   = m_confGroupTheme->readEntry("background.color.active",   m_backgroundColor.active);
-        m_backgroundColor.disabled = m_confGroupTheme->readEntry("background.color.disabled", m_backgroundColor.disabled);
+        d->hasBackgroundColor       = true;
+        d->backgroundColor.normal   = d->confGroupTheme->readEntry("background.color.normal",   d->backgroundColor.normal);
+        d->backgroundColor.active   = d->confGroupTheme->readEntry("background.color.active",   d->backgroundColor.active);
+        d->backgroundColor.disabled = d->confGroupTheme->readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
-        if (m_ownsBackgroundSvg) {
-            delete m_backgroundSvg;
+        if (d->ownsBackgroundSvg) {
+            delete d->backgroundSvg;
         }
 
-        m_backgroundSvg = new Plasma::Svg(m_confGroupTheme->readEntry("background.svg"));
-        m_ownsBackgroundSvg = true;
-        m_backgroundSvg->setContentType(Plasma::Svg::ImageSet);
+        d->backgroundSvg = new Plasma::Svg(d->confGroupTheme->readEntry("background.svg"));
+        d->ownsBackgroundSvg = true;
+        d->backgroundSvg->setContentType(Plasma::Svg::ImageSet);
     }
 
     notifyUpdated();
 }
 
 void WidgetGroup::notifyUpdated() {
-    kDebug() << "Widget::Group" << m_name;
-    foreach (Widget * widget, m_widgets) {
+    kDebug() << "Widget::Group" << d->name;
+    foreach (Widget * widget, d->widgets) {
         kDebug() << (long)widget;
         kDebug() << widget->name();
         widget->groupUpdated();
@@ -184,38 +220,72 @@ void WidgetGroup::notifyUpdated() {
 }
 
 // Instance
-Instance * Instance::m_activeInstance = NULL;
-bool Instance::m_hasApplication = false;
+
+class Instance::Private {
+public:
+    Private()
+      : processGroupChanges(false),
+        confLancelot(NULL),
+        confTheme(NULL)
+    {}
+
+    ~Private()
+    {
+        delete confLancelot;
+        delete confTheme;
+    }
+
+    static bool hasApplication;
+
+    // TODO: Warning! When threading comes around this approach will break...
+    // it'll need mutexes, or something else...
+    static Instance * activeInstance;
+
+    QList< Widget * > widgets;
+    QMap < QString, WidgetGroup * > groups;
+
+    bool processGroupChanges : 1;
+    KConfig * confLancelot;
+    KConfig * confTheme;
+
+    void loadAllGroups()
+    {
+        foreach(WidgetGroup * group, groups) {
+            group->load();
+        }
+    }
+};
+
+Instance * Instance::Private::activeInstance = NULL;
+bool Instance::Private::hasApplication = false;
 
 Instance * Instance::activeInstance()
 {
-    return m_activeInstance;
+    return Instance::Private::activeInstance;
 }
 
 void Instance::setActiveInstance(Instance * instance)
 {
-    m_activeInstance = instance;
+    Instance::Private::activeInstance = instance;
 }
 
 void Instance::activateAll() {
-    processGroupChanges = true;
+    d->processGroupChanges = true;
 
-    loadAllGroups();
+    d->loadAllGroups();
 }
 
 void Instance::deactivateAll() {
-    processGroupChanges = false;
+    d->processGroupChanges = false;
 }
 
 Instance::Instance()
-  : processGroupChanges(false),
-    m_confLancelot(NULL),
-    m_confTheme(NULL)
+  : d(new Private)
 {
-    if (Instance::m_hasApplication) {
+    if (Instance::d->hasApplication) {
         Plasma::Theme::self()->setApplication("Lancelot");
     }
-    m_confLancelot = new KConfig("lancelotrc");
+    d->confLancelot = new KConfig("lancelotrc");
 
     // TODO: If Plasma::Theme supports file(), alter the following code
     QString search = "desktoptheme/" + Plasma::Theme::self()->themeName() + "/lancelot/theme.config";
@@ -223,39 +293,31 @@ Instance::Instance()
     if (path == "") {
         path = "lancelotrc";
     }
-    m_confTheme = new KConfig(path);
+    d->confTheme = new KConfig(path);
 
-    m_activeInstance = this;
+    Instance::Private::activeInstance = this;
 }
 
 Instance::~Instance()
 {
-    delete m_confLancelot;
-    delete m_confTheme;
+    delete d;
 }
 
 KConfig * Instance::theme()
 {
-    return m_confTheme;
+    return d->confTheme;
 }
 
 KConfig * Instance::config()
 {
-    return m_confLancelot;
+    return d->confLancelot;
 }
 
 void Instance::addWidget(Widget * widget)
 {
     if (widget == NULL) return;
-    if (m_widgets.contains(widget)) return;
-    m_widgets.append(widget);
-}
-
-void Instance::loadAllGroups()
-{
-    foreach(WidgetGroup * group, m_groups) {
-        group->load();
-    }
+    if (d->widgets.contains(widget)) return;
+    d->widgets.append(widget);
 }
 
 WidgetGroup * Instance::group(const QString & name)
@@ -265,15 +327,15 @@ WidgetGroup * Instance::group(const QString & name)
         groupName = "Default";
     }
 
-    if (!m_groups.contains(groupName)) {
+    if (!d->groups.contains(groupName)) {
         WidgetGroup * group = new WidgetGroup(this, groupName);
-        if (processGroupChanges) {
+        if (d->processGroupChanges) {
             group->load();
         }
-        m_groups.insert(groupName, group);
+        d->groups.insert(groupName, group);
     }
 
-    return m_groups[groupName];
+    return d->groups[groupName];
 }
 
 WidgetGroup * Instance::defaultGroup()
@@ -283,12 +345,12 @@ WidgetGroup * Instance::defaultGroup()
 
 bool Instance::hasApplication()
 {
-    return Instance::m_hasApplication;
+    return Instance::Private::hasApplication;
 }
 
 void Instance::setHasApplication(bool value)
 {
-    Instance::m_hasApplication = value;
+    Instance::Private::hasApplication = value;
 }
 
 }
