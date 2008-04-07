@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef WIDGETPOSITIONER_H_
 #define WIDGETPOSITIONER_H_
 
@@ -35,7 +33,7 @@ namespace Lancelot
  * Dirty hack to show QWidget as a part of QGV. It works for the
  * case it is used. It is not meant to be used elsewhere.
  */
-class LANCELOT_EXPORT WidgetPositioner: public Widget
+class LANCELOT_EXPORT_DEPRECATED WidgetPositioner: public Widget
 {
 public:
     WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent);

@@ -66,7 +66,7 @@ public:
     class ExtenderObject : public BaseActionWidget {
     public:
         ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : BaseActionWidget(name, icon, "", "", parent) {
-            setInnerOrientation(Vertical);
+            setInnerOrientation(Qt::Vertical);
             setAlignment(Qt::AlignCenter);
         }
         friend class ExtenderButton;

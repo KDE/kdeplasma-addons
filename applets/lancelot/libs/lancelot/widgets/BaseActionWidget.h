@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef LANCELOT_BASEACTIONWIDGET_H_
 #define LANCELOT_BASEACTIONWIDGET_H_
 
@@ -36,8 +34,6 @@ class LANCELOT_EXPORT BaseActionWidget: public Widget {
     Q_OBJECT
 
 public:
-    enum InnerOrientation { Vertical, Horizontal };
-
     BaseActionWidget(QString name = QString(), QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
     BaseActionWidget(QString name, QIcon * icon, QString title = QString(),
@@ -49,45 +45,35 @@ public:
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-    void setIconSize(QSize size);
-    QSize iconSize() const;
-
-    void setIcon(QIcon * icon);
     QIcon * icon() const;
+    void setIcon(QIcon * icon);
 
-    void setInnerOrientation(InnerOrientation position);
-    InnerOrientation innerOrientation() const;
-
-    void setIconInSvg(Plasma::Svg * icon);
     Plasma::Svg * iconInSvg() const;
+    void setIconInSvg(Plasma::Svg * svg);
 
-    void setTitle(const QString & title);
-    QString title() const;
+    QSize iconSize() const;
+    void setIconSize(QSize size);
 
-    void setDescription(const QString & description);
-    QString description() const;
+    Qt::Orientation innerOrientation() const;
+    void setInnerOrientation(Qt::Orientation orientation);
 
-    void setAlignment(Qt::Alignment alignment);
     Qt::Alignment alignment() const;
+    void setAlignment(Qt::Alignment alignment);
+
+    QString title() const;
+    void setTitle(const QString & title);
+
+    QString description() const;
+    void setDescription(const QString & description);
 
 protected:
-
     void paintForeground (QPainter * painter);
-
-    QIcon * m_icon;
-    Plasma::Svg * m_iconInSvg;
-    QSize m_iconSize;
-    InnerOrientation m_innerOrientation;
-
-    Qt::Alignment m_alignment;
-
-    QString m_title;
-    QString m_description;
 
 private:
     void init();
 
-
+    class Private;
+    Private * d;
 };
 
 } // namespace Lancelot

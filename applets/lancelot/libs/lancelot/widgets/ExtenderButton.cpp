@@ -98,7 +98,7 @@ void ExtenderButton::init()
 
     setGroupByName("ExtenderButton");
 
-    m_extender->m_iconSize = QSize(16, 16);
+    m_extender->setIconSize(QSize(16, 16));
 
     connect(m_extender, SIGNAL(mouseHoverEnter()), this, SLOT(startTimer()));
     connect(m_extender, SIGNAL(mouseHoverLeave()), this, SLOT(stopTimer()));

@@ -396,7 +396,7 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button = new Lancelot::ExtenderButton(name() + "Button",
             (QIcon *)NULL, "", "", this);
 
-        button->setInnerOrientation(Lancelot::ExtenderButton::Horizontal);
+        button->setInnerOrientation(Qt::Horizontal);
         button->setExtenderPosition(m_extenderPosition);
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         button->setGroup(m_itemsGroup);

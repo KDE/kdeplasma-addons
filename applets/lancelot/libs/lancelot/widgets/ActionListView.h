@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef LANCELOT_LISTVIEW_H_
 #define LANCELOT_LISTVIEW_H_
 
@@ -34,8 +32,7 @@
 namespace Lancelot
 {
 
-
-class LANCELOT_EXPORT ActionListView : public Widget
+class LANCELOT_EXPORT_DEPRECATED ActionListView : public Widget
 {
     Q_OBJECT
 

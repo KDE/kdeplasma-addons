@@ -25,7 +25,7 @@ class ExtenderButtonHandler(AbstractWidget.AbstractWidgetHandler):
             setup += self.attribute('name') + '->setIconSize(QSize(' \
                   + self.attribute('iconSize') + '));'
         if self.hasAttribute('orientation'):
-            setup += self.attribute('name') + '->setInnerOrientation(Lancelot::BaseActionWidget::' \
+            setup += self.attribute('name') + '->setInnerOrientation(Qt::' \
                   + self.attribute('orientation') + ');'
         return setup
 
