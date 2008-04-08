@@ -174,7 +174,7 @@
               <item>
                <widget class="KPushButton" name="addDirButton" >
                 <property name="text" >
-                 <string>&amp;Add Directory...</string>
+                 <string>&amp;Add Folder...</string>
                 </property>
                </widget>
               </item>
@@ -184,7 +184,7 @@
                  <bool>false</bool>
                 </property>
                 <property name="text" >
-                 <string>&amp;Remove Directory</string>
+                 <string>&amp;Remove Folder</string>
                 </property>
                </widget>
               </item>
@@ -208,7 +208,7 @@
           <item>
            <widget class="QCheckBox" name="recursiveCheckBox" >
             <property name="text" >
-             <string>&amp;Include subdirectories</string>
+             <string>&amp;Include Subfolders</string>
             </property>
            </widget>
           </item>
