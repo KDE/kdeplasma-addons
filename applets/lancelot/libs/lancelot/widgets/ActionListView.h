@@ -20,6 +20,7 @@
 #ifndef LANCELOT_LISTVIEW_H_
 #define LANCELOT_LISTVIEW_H_
 
+#include "../lancelot.h"
 #include "../lancelot_export.h"
 
 #include <QtGui>
@@ -54,8 +55,8 @@ public:
     void setCategoryItemHeight(int height);
     int categoryItemHeight();
 
-    void setExtenderPosition(ExtenderButton::ExtenderPosition position);
-    ExtenderButton::ExtenderPosition extenderPosition();
+    void setExtenderPosition(ExtenderPosition position);
+    ExtenderPosition extenderPosition();
 
     //void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
@@ -109,7 +110,7 @@ private:
     int m_categoryItemHeight;
     int m_currentItemHeight;
 
-    ExtenderButton::ExtenderPosition m_extenderPosition;
+    ExtenderPosition m_extenderPosition;
     ScrollButton * scrollButtonUp, * scrollButtonDown;
 
     void scroll(ScrollDirection direction);

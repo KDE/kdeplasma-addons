@@ -17,11 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef LANCELOT_EXTENDERBUTTON_H_
 #define LANCELOT_EXTENDERBUTTON_H_
 
+#include "../lancelot.h"
 #include "../lancelot_export.h"
 
 #include <QtGui>
@@ -34,52 +33,17 @@
 namespace Lancelot
 {
 
-class ExtenderButton;
-
-class LANCELOT_EXPORT ExtenderButtonTimer: public QObject {
-    Q_OBJECT
-public:
-    static ExtenderButtonTimer * instance();
-    void startTimer(ExtenderButton * owner);
-    void stopTimer();
-
-protected slots:
-    void fire();
-
-private:
-    ExtenderButtonTimer();
-    ~ExtenderButtonTimer();
-
-    static ExtenderButtonTimer * m_instance;
-    QTimer m_timer;
-    ExtenderButton * m_owner;
-};
-
-
 class LANCELOT_EXPORT ExtenderButton : public BaseActionWidget
 {
     Q_OBJECT
 public:
-    enum ExtenderPosition { No = 0, Right = 1, Left = 2, Top = 3, Bottom = 4 };
-    enum ActivationMethod { Hover = 0, Click = 1, Extender = 2 };
-
-    class ExtenderObject : public BaseActionWidget {
-    public:
-        ExtenderObject(QString name, Plasma::Svg * icon, QGraphicsItem * parent = 0) : BaseActionWidget(name, icon, "", "", parent) {
-            setInnerOrientation(Qt::Vertical);
-            setAlignment(Qt::AlignCenter);
-        }
-        friend class ExtenderButton;
-
-    };
-
     ExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
     ExtenderButton(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
     ExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~ExtenderButton();
 
-    virtual QRectF boundingRect () const;
+    virtual QRectF boundingRect() const;
 
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
@@ -94,31 +58,17 @@ public:
     void setGroup(WidgetGroup * group = NULL);
     void groupUpdated();
 
+Q_SIGNALS:
+    void activated();
+
 protected:
     void mousePressEvent (QGraphicsSceneMouseEvent * event);
 
 private:
-    void relayoutExtender();
-    void init();
+    class Private;
+    Private * d;
 
-    ExtenderObject * m_extender;
-    ExtenderPosition m_extenderPosition;
-    ActivationMethod m_activationMethod;
-
-    static Plasma::Svg * m_extenderIconSvg;
-    //static Plasma::Svg * m_extenderButtonSvg;
-    //static int m_extendersCount;
-
-    void timerFired();
-
-protected slots:
-    void startTimer();
-    void stopTimer();
-
-Q_SIGNALS:
-    void activated();
-
-    friend class ExtenderButtonTimer;
+    friend class ExtenderObject;
 };
 
 }

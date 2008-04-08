@@ -97,7 +97,9 @@ BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString tit
 }
 
 BaseActionWidget::~BaseActionWidget()
-{}
+{
+    delete d;
+}
 
 /*void BaseActionWidget::resizeSvg() {
   if (d->svg) {

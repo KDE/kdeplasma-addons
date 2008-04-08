@@ -324,7 +324,7 @@ void LancelotWindow::showWindow(int x, int y)
     layoutMainCenter->setFlip(flip);
 
     instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
-            (flip & Plasma::VerticalFlip)?(Lancelot::ExtenderButton::Top):(Lancelot::ExtenderButton::Bottom)
+            (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
     ));
     instance->group("SystemButtons")->notifyUpdated();
 

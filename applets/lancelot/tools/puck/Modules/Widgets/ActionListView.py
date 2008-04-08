@@ -16,7 +16,7 @@ class ActionListViewHandler(LancelotWidget.LancelotWidgetHandler):
         if self.hasAttribute('itemsGroup'):
             setup += self.attribute('name') + '->setItemsGroupByName("' + self.attribute('itemsGroup') + '");'
         if self.hasAttribute('extenderPosition'):
-            setup += self.attribute('name') + '->setExtenderPosition(Lancelot::ExtenderButton::' + self.attribute('extenderPosition') + ');'
+            setup += self.attribute('name') + '->setExtenderPosition(Lancelot::' + self.attribute('extenderPosition') + 'Extender);'
         return setup
 
 WidgetHandlerManager.addHandler(ActionListViewHandler())

@@ -169,7 +169,7 @@ void PassagewayView::next(Step newStep)
     button->setIconSize(QSize(24, 24));
     button->setAlignment(Qt::AlignLeft);
 
-    list->setExtenderPosition(ExtenderButton::Right);
+    list->setExtenderPosition(RightExtender);
 
     m_buttons.append(button);
     m_lists.append(list);

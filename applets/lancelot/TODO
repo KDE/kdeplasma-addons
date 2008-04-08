@@ -14,6 +14,8 @@ TODO: (m) Switch menu instead of searching for SESSIONS
 
 Library:
 TODO: (a) Dptr everything
+TODO: (m) Replace setGeometry with updateGeometry where possible
+
 
 Applet:
 

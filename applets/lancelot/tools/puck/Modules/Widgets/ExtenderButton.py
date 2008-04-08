@@ -16,11 +16,11 @@ class ExtenderButtonHandler(AbstractWidget.AbstractWidgetHandler):
         if self.hasAttribute('group'):
             setup += self.attribute('name') + '->setGroupByName("' + self.attribute('group') + '");'
         if self.hasAttribute('activation'):
-            setup += self.attribute('name') + '->setActivationMethod(Lancelot::ExtenderButton::' \
-                  + self.attribute('activation') + ');'
+            setup += self.attribute('name') + '->setActivationMethod(Lancelot::' \
+                  + self.attribute('activation') + 'Activate);'
         if self.hasAttribute('extenderPosition'):
-            setup += self.attribute('name') + '->setExtenderPosition(Lancelot::ExtenderButton::' \
-                  + self.attribute('extenderPosition') + ');'
+            setup += self.attribute('name') + '->setExtenderPosition(Lancelot::' \
+                  + self.attribute('extenderPosition') + 'Extender);'
         if self.hasAttribute('iconSize'):
             setup += self.attribute('name') + '->setIconSize(QSize(' \
                   + self.attribute('iconSize') + '));'

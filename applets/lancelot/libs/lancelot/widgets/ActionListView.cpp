@@ -62,7 +62,7 @@ void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * e
 ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraphicsItem * parent)
   : Widget(name, parent), m_model(NULL),
     m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
-    m_extenderPosition(ExtenderButton::No), scrollButtonUp(NULL), scrollButtonDown(NULL),
+    m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
     m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
     m_initialButtonsCreationRunning(false)
 {
@@ -115,7 +115,7 @@ void ActionListView::positionScrollButtons()
     }
 
     float left = (size().width() - EXTENDER_SIZE - SCROLL_BUTTON_WIDTH) / 2;
-    if (m_extenderPosition == ExtenderButton::Left) left += EXTENDER_SIZE;
+    if (m_extenderPosition == LeftExtender) left += EXTENDER_SIZE;
 
     scrollButtonUp->setPos(left, 0);
     scrollButtonDown->setPos(left, size().height() - SCROLL_BUTTON_HEIGHT);
@@ -342,10 +342,10 @@ WidgetGroup * ActionListView::itemsGroup() {
     return m_itemsGroup;
 }
 
-void ActionListView::setExtenderPosition(ExtenderButton::ExtenderPosition position)
+void ActionListView::setExtenderPosition(ExtenderPosition position)
 {
-    if (position == ExtenderButton::Top) position = ExtenderButton::Left;
-    if (position == ExtenderButton::Bottom) position = ExtenderButton::Right;
+    if (position == TopExtender) position = LeftExtender;
+    if (position == BottomExtender) position = RightExtender;
 
     if (m_extenderPosition == position) return;
     m_extenderPosition = position;
@@ -354,10 +354,10 @@ void ActionListView::setExtenderPosition(ExtenderButton::ExtenderPosition positi
     qreal width = geometry().width();
 
     switch (position) {
-    case ExtenderButton::Left:
+    case LeftExtender:
         left = EXTENDER_SIZE;
         // break; // We neet to have width -= EXTENDER_SIZE for Left too
-    case ExtenderButton::Right:
+    case RightExtender:
         width -= EXTENDER_SIZE;
         break;
     default:
@@ -379,7 +379,7 @@ void ActionListView::setExtenderPosition(ExtenderButton::ExtenderPosition positi
     }
 }
 
-ExtenderButton::ExtenderPosition ActionListView::extenderPosition()
+ExtenderPosition ActionListView::extenderPosition()
 {
     return m_extenderPosition;
 }
@@ -518,10 +518,10 @@ bool ActionListView::addButton(ListTail where) {
     qreal width = geometry().width();
 
     switch (m_extenderPosition) {
-    case ExtenderButton::Left:
+    case LeftExtender:
         left = EXTENDER_SIZE;
         // break; // We neet to have width -= EXTENDER_SIZE for Left too
-    case ExtenderButton::Right:
+    case RightExtender:
         width -= EXTENDER_SIZE;
         break;
     default:

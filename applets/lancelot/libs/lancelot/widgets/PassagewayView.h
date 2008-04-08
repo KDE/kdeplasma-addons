@@ -22,6 +22,7 @@
 #ifndef PASSAGEWAYVIEW_H_
 #define PASSAGEWAYVIEW_H_
 
+#include "../lancelot.h"
 #include "../lancelot_export.h"
 
 #include "Widget.h"

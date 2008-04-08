@@ -273,7 +273,7 @@ void LancelotApplet::layoutButtons()
 
     foreach(Lancelot::ExtenderButton * button, m_buttons) {
         button->setGroupByName("AppletLaunchButton");
-        button->setActivationMethod(m_clickActivation?(Lancelot::ExtenderButton::Click):(Lancelot::ExtenderButton::Hover));
+        button->setActivationMethod(m_clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
         button->setIconSize(QSize(iconSize, iconSize));
 
         if (m_isVertical) {
