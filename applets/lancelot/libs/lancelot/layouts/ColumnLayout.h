@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef COLUMNLAYOUT_H_
 #define COLUMNLAYOUT_H_
 
@@ -71,9 +69,9 @@ public:
     ~ColumnLayout();
 
     void insertItem(int index, Plasma::LayoutItem * item); /**< Not implemented. See class description. */
-    void addItem(Plasma::LayoutItem * item); /**< Not implemented. See class description. */
-    void removeItem(Plasma::LayoutItem * item); /**< Not implemented. See class description. */
-    LayoutItem * takeAt(int i); /**< Not implemented. See class description. */
+    void addItem(Plasma::LayoutItem * item);               /**< Not implemented. See class description. */
+    void removeItem(Plasma::LayoutItem * item);            /**< Not implemented. See class description. */
+    LayoutItem * takeAt(int i);                            /**< Not implemented. See class description. */
 
     int indexOf(Plasma::LayoutItem * item) const;
     LayoutItem * itemAt(int i) const;

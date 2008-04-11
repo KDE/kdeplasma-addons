@@ -34,9 +34,7 @@ namespace Lancelot
 
 class LANCELOT_EXPORT CardLayout : public Plasma::Layout
 {
-
 public:
-    // reimplemented
     virtual Qt::Orientations expandingDirections() const;
 
     explicit CardLayout(LayoutItem * parent = 0);
@@ -63,9 +61,8 @@ protected:
     void releaseManagedItems();
 
 private:
-    QList < Plasma::LayoutItem * > m_items;
-    QMap < QString, Plasma::Widget * > m_widgets;
-    Plasma::Widget * m_shown;
+    class Private;
+    Private * d;
 };
 
 }
