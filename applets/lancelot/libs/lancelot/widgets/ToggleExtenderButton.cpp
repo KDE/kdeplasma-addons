@@ -23,45 +23,49 @@
 namespace Lancelot
 {
 
+class ToggleExtenderButton::Private {
+public:
+    Private() : pressed(false)
+    {
+
+    }
+    bool pressed;
+};
+
 ToggleExtenderButton::ToggleExtenderButton(QString name, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, title, description, parent), m_pressed(false)
+  : ExtenderButton(name, title, description, parent), d(new Private())
 {
-    init();
+    connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 
 ToggleExtenderButton::ToggleExtenderButton(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, icon, title, description, parent), m_pressed(false)
+  : ExtenderButton(name, icon, title, description, parent), d(new Private())
 {
-    init();
+    connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 
 ToggleExtenderButton::ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, icon, title, description, parent), m_pressed(false)
-{
-    init();
-}
-
-void ToggleExtenderButton::init()
+  : ExtenderButton(name, icon, title, description, parent), d(new Private())
 {
     connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 
 bool ToggleExtenderButton::isPressed() const
 {
-    return m_pressed;
+    return d->pressed;
 }
 
 void ToggleExtenderButton::setPressed(bool pressed)
 {
-    if (pressed == m_pressed) return;
+    if (pressed == d->pressed) return;
 
-    emit toggled(m_pressed = pressed);
+    emit toggled(d->pressed = pressed);
     update();
 }
 
 void ToggleExtenderButton::toggle()
 {
-    emit toggled(m_pressed = !m_pressed);
+    emit toggled(d->pressed = !d->pressed);
     update();
 }
 
@@ -75,7 +79,7 @@ void ToggleExtenderButton::paintWidget (QPainter * painter, const QStyleOptionGr
     Q_UNUSED(widget);
 
     paintBackground(painter);
-    if (m_pressed) {
+    if (d->pressed) {
         paintBackground(painter, "pressed");
     }
     paintForeground(painter);

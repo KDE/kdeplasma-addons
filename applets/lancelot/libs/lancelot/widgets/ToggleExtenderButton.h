@@ -43,7 +43,6 @@ public:
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-
 public slots:
     void toggle();
 
@@ -51,9 +50,8 @@ Q_SIGNALS:
     void toggled(bool pressed);
 
 private:
-    bool m_pressed;
-    void init();
-
+    class Private;
+    Private * d;
 };
 
 }

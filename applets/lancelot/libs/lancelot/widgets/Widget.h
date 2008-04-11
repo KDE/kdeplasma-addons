@@ -59,9 +59,6 @@ Q_SIGNALS:
     void mouseHoverLeave();
 
 protected:
-    class Private;
-    Private * d;
-
     virtual void groupUpdated();
 
     virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
@@ -70,6 +67,10 @@ protected:
 
     void paintBackground (QPainter * painter);
     void paintBackground (QPainter * painter, const QString & element);
+
+private:
+    class Private;
+    Private * d;
 
     friend class WidgetGroup;
     friend class Global;
