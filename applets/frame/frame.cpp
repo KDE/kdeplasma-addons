@@ -123,7 +123,11 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 QSizeF Frame::contentSizeHint() const {
     if (!m_picture.isNull()) {
-        return QSizeF( contentSize().width(), (contentSize().width() / m_picture.width() ) * m_picture.height() );
+        if (m_picture.width() > m_picture.height()) {
+            return QSizeF( contentSize().width(), (contentSize().width() / m_picture.width() ) * m_picture.height() );
+        } else {
+            return QSizeF( (contentSize().height() / m_picture.height()) * m_picture.width(), contentSize().height() );
+        }
     } else {
         return contentSize();
     }
@@ -403,6 +407,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p->drawPath(framePath);
     }
+    updateGeometry();
 
     delete p;
 }
