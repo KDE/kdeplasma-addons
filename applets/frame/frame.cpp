@@ -123,10 +123,11 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 QSizeF Frame::contentSizeHint() const {
     if (!m_picture.isNull()) {
+        qreal maxSize = contentSize().width() > contentSize().height() ? contentSize().width() : contentSize().height();
         if (m_picture.width() > m_picture.height()) {
-            return QSizeF( contentSize().width(), (contentSize().width() / m_picture.width() ) * m_picture.height() );
+            return QSizeF( maxSize, (maxSize / m_picture.width()) * m_picture.height() );
         } else {
-            return QSizeF( (contentSize().height() / m_picture.height()) * m_picture.width(), contentSize().height() );
+            return QSizeF( (maxSize / m_picture.height()) * m_picture.width(), maxSize );
         }
     } else {
         return contentSize();
