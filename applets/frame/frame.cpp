@@ -123,12 +123,14 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 
 QSizeF Frame::contentSizeHint() const {
     if (!m_picture.isNull()) {
+        QSizeF sizeHint;
         qreal maxSize = contentSize().width() > contentSize().height() ? contentSize().width() : contentSize().height();
         if (m_picture.width() > m_picture.height()) {
-            return QSizeF( maxSize, (maxSize / m_picture.width()) * m_picture.height() );
+            sizeHint = QSizeF( maxSize, (maxSize / m_picture.width()) * m_picture.height() );
         } else {
-            return QSizeF( (maxSize / m_picture.height()) * m_picture.width(), maxSize );
+            sizeHint = QSizeF( (maxSize / m_picture.height()) * m_picture.width(), maxSize );
         }
+        return sizeHint;
     } else {
         return contentSize();
     }
@@ -324,6 +326,7 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
 {
     if (m_pixmapCache.isNull() ||
         contentRect().toRect().size() != m_pixmapCache.size()) {
+        updateGeometry();
         paintCache(option, contentRect().toRect().size());
     }
 
@@ -408,7 +411,6 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         p->drawPath(framePath);
     }
-    updateGeometry();
 
     delete p;
 }
