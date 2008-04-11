@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
-
 #ifndef LANCELOT_PANEL_H_
 #define LANCELOT_PANEL_H_
 
@@ -71,15 +69,8 @@ public:
     qreal borderSize(Plasma::MarginEdge edge);
 
 private:
-    void init();
-    void invalidate();
-
-    Plasma::LayoutItem * m_layout;
-    Widget * m_widget;
-    bool m_hasTitle;
-
-    BaseActionWidget m_titleWidget;
-    Plasma::SvgPanel * m_background;
+    class Private;
+    Private * d;
 };
 
 }

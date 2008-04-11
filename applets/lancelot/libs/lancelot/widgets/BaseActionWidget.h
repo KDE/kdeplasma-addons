@@ -70,11 +70,6 @@ protected:
     void paintForeground (QPainter * painter);
 
 private:
-    // Init is a common part of all constructors
-    // so we will keep it here instead of moving
-    // it to Private.
-    void init();
-
     class Private;
     Private * d;
 };

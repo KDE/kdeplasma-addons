@@ -26,6 +26,9 @@
 
 #define max(A, B) ((A) >= (B)) ? (A) : (B)
 
+// macro for setting the left coordinate of items
+// relative to the parent and with alignment
+// taken into consideration
 #define setLeft(itemRect, parentRect, alignment) \
     if ((parentRect).width() > (itemRect).width()) { \
         if ((alignment) & Qt::AlignHCenter) \
@@ -42,23 +45,36 @@ namespace Lancelot
 
 class BaseActionWidget::Private {
 public:
-    Private(QString title, QString description)
+    Private(BaseActionWidget * parent, QString title, QString description)
         : icon(NULL), iconInSvg(NULL), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
-    {}
+    {
+        init(parent);
+    }
 
-    Private(QIcon * icon, QString title, QString description)
+    Private(BaseActionWidget * parent, QIcon * icon, QString title, QString description)
         : icon(icon), iconInSvg(NULL), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
-    {}
+    {
+        init(parent);
+    }
 
-    Private(Plasma::Svg * icon, QString title, QString description)
+    Private(BaseActionWidget * parent, Plasma::Svg * icon, QString title, QString description)
         : icon(NULL), iconInSvg(icon), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
-    {}
+    {
+        init(parent);
+    }
+
+    void init(BaseActionWidget * parent)
+    {
+        parent->setAcceptsHoverEvents(true);
+        parent->resize(140, 38);
+        parent->setGroupByName("BaseActionWidget");
+    }
 
     QIcon * icon;
     Plasma::Svg * iconInSvg;
@@ -71,29 +87,19 @@ public:
     QString description;
 };
 
-void BaseActionWidget::init()
-{
-    setAcceptsHoverEvents(true);
-    resize(140, 38);
-    setGroupByName("BaseActionWidget");
-}
-
 BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(title, description))
+    : Widget(name, parent), d(new Private(this, title, description))
 {
-    init();
 }
 
 BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(icon, title, description))
+    : Widget(name, parent), d(new Private(this, icon, title, description))
 {
-    init();
 }
 
 BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(icon, title, description))
+    : Widget(name, parent), d(new Private(this, icon, title, description))
 {
-    init();
 }
 
 BaseActionWidget::~BaseActionWidget()
