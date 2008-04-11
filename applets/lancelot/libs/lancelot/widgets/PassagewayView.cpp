@@ -54,70 +54,168 @@ private:
     bool m_pass;
 };
 
+
+class PassagewayView::Private {
+public:
+    Private(PassagewayViewModel * entranceModel,
+            PassagewayViewModel * atlasModel,
+            PassagewayView * p)
+      : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p)
+    {
+        parent->setLayout(layout = new Plasma::NodeLayout());
+
+        layout->addItem(
+            buttonsLayout = new Plasma::BoxLayout(Plasma::BoxLayout::LeftToRight),
+            Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 0),
+            Plasma::NodeLayout::NodeCoordinate(1, 0, 0, 32)
+        );
+        buttonsLayout->setMargin(0);
+
+        buttonsAnimator = new Plasma::LayoutAnimator(parent);
+        buttonsAnimator->setAutoDeleteOnRemoval(true);
+        buttonsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
+        buttonsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
+        buttonsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
+        buttonsAnimator->setTimeLine(new QTimeLine(300, parent));
+
+        buttonsLayout->setAnimator(buttonsAnimator);
+
+        layout->addItem(
+            listsLayout = new ColumnLayout(),
+            Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 32),
+            Plasma::NodeLayout::NodeCoordinate(1, 1, 0, 0)
+        );
+        listsLayout->setMargin(0);
+
+        listsAnimator = new Plasma::LayoutAnimator(parent);
+        listsAnimator->setAutoDeleteOnRemoval(false);
+        listsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
+        listsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
+        listsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
+        listsAnimator->setTimeLine(new QTimeLine(300, parent));
+
+        listsLayout->setAnimator(listsAnimator);
+        listsLayout->setColumnCount(13);
+        listsLayout->setSizer(new PassagewayViewSizer());
+
+        next(Step("", NULL, entranceModel));
+        next(Step("", NULL, atlasModel));
+    }
+
+    ~Private()
+    {
+        delete buttonsLayout;
+        delete listsLayout;
+        delete layout;
+
+        foreach(ExtenderButton * button, buttons) {
+            delete button;
+        }
+        foreach(ActionListView * list, lists) {
+            delete list;
+        }
+        foreach(Step * step, path) {
+            delete step;
+        }
+    }
+
+    class Step {
+    public:
+        Step(QString t, KIcon * i, PassagewayViewModel * m)
+            : title(t), icon(i), model(m) {};
+        QString title;
+        KIcon * icon;
+        PassagewayViewModel * model;
+    };
+
+    void back(int steps)
+    {
+        for (int i = 0; i < steps; ++i) {
+            ExtenderButton * button = buttons.takeLast();
+            ActionListView * list   = lists.takeLast();
+            path.takeLast();
+
+            buttonsLayout->removeItem(button);
+            listsLayout->pop();
+
+            //delete button;  // TODO: Find a way to do this
+            //delete list;    // TODO: Find a way to do this
+            button->hide();
+            list->hide();
+        }
+    }
+
+    void next(Step newStep)
+    {
+        Step * step = new Step(newStep);
+        ExtenderButton * button =
+            new ExtenderButton(parent->name() + "::button", step->icon, step->title, "", parent);
+        ActionListView * list   =
+            new ActionListView(parent->name() + "::list", step->model, parent);
+
+        button->setIconSize(QSize(24, 24));
+        button->setAlignment(Qt::AlignLeft);
+
+        list->setExtenderPosition(RightExtender);
+
+        buttons.append(button);
+        lists.append(list);
+        path.append(step);
+
+        buttonsLayout->addItem(button);
+        listsLayout->push(list);
+
+        QObject::connect(
+            list, SIGNAL(activated(int)),
+            parent, SLOT(listItemActivated(int))
+        );
+
+        QObject::connect(
+            button, SIGNAL(activated()),
+            parent, SLOT(pathButtonActivated())
+        );
+    }
+
+    QList < Step * > path;
+    QList < ExtenderButton * > buttons;
+    QList < ActionListView * > lists;
+
+    Plasma::NodeLayout          * layout;
+    ColumnLayout::ColumnSizer   * sizer;
+    Plasma::BoxLayout           * buttonsLayout;
+    Plasma::LayoutAnimator      * buttonsAnimator;
+    ColumnLayout                * listsLayout;
+    Plasma::LayoutAnimator      * listsAnimator;
+    PassagewayView              * parent;
+};
+
 PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
-    : Panel(name, parent), m_layout(NULL), m_buttonsLayout(NULL), m_listsLayout(NULL)
+    : Panel(name, parent), d(new Private(entranceModel, atlasModel, this))
 {
-    setLayout(m_layout = new Plasma::NodeLayout());
-
-    m_layout->addItem(
-        m_buttonsLayout = new Plasma::BoxLayout(Plasma::BoxLayout::LeftToRight),
-        Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 0),
-        Plasma::NodeLayout::NodeCoordinate(1, 0, 0, 32)
-    );
-    m_buttonsLayout->setMargin(0);
-
-    m_buttonsAnimator = new Plasma::LayoutAnimator(this);
-    m_buttonsAnimator->setAutoDeleteOnRemoval(true);
-    m_buttonsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
-    m_buttonsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
-    m_buttonsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
-    m_buttonsAnimator->setTimeLine(new QTimeLine(300, this));
-
-    m_buttonsLayout->setAnimator(m_buttonsAnimator);
-
-    m_layout->addItem(
-        m_listsLayout = new ColumnLayout(),
-        Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 32),
-        Plasma::NodeLayout::NodeCoordinate(1, 1, 0, 0)
-    );
-    m_listsLayout->setMargin(0);
-
-    m_listsAnimator = new Plasma::LayoutAnimator(this);
-    m_listsAnimator->setAutoDeleteOnRemoval(false);
-    m_listsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
-    m_listsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
-    m_listsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
-    m_listsAnimator->setTimeLine(new QTimeLine(300, this));
-
-    m_listsLayout->setAnimator(m_listsAnimator);
-    m_listsLayout->setColumnCount(13);
-    m_listsLayout->setSizer(new PassagewayViewSizer());
-
-    next(Step("", NULL, entranceModel));
-    next(Step("", NULL, atlasModel));
+    //setLayout(layout);
 }
 
 void PassagewayView::pathButtonActivated()
 {
-    for (int i = m_buttons.size() - 1; i >= 0; --i) {
-        if (m_buttons.at(i) == sender()) {
-            back(m_buttons.size() - i - 2);
+    for (int i = d->buttons.size() - 1; i >= 0; --i) {
+        if (d->buttons.at(i) == sender()) {
+            d->back(d->buttons.size() - i - 2);
         }
     }
 }
 
 void PassagewayView::listItemActivated(int index)
 {
-    for (int i = m_lists.size() - 1; i >= 0; --i) {
-        if (m_lists.at(i) == sender()) {
-            back(m_lists.size() - i - 1);
+    for (int i = d->lists.size() - 1; i >= 0; --i) {
+        if (d->lists.at(i) == sender()) {
+            d->back(d->lists.size() - i - 1);
 
-            PassagewayViewModel * model = m_path.at(i)->model;
+            PassagewayViewModel * model = d->path.at(i)->model;
             if (model) {
                 model = model->child(index);
                 if (model) {
-                    next(Step(model->modelTitle(), model->modelIcon(), model));
+                    d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
                 }
             }
         }
@@ -126,111 +224,51 @@ void PassagewayView::listItemActivated(int index)
 
 PassagewayView::~PassagewayView()
 {
-    delete m_buttonsLayout;
-    delete m_listsLayout;
-    delete m_layout;
-
-    foreach(ExtenderButton * button, m_buttons) {
-        delete button;
-    }
-    foreach(ActionListView * list, m_lists) {
-        delete list;
-    }
-    foreach(Step * step, m_path) {
-        delete step;
-    }
-}
-
-void PassagewayView::back(int steps)
-{
-    for (int i = 0; i < steps; ++i) {
-        ExtenderButton * button = m_buttons.takeLast();
-        ActionListView * list   = m_lists.takeLast();
-        m_path.takeLast();
-
-        m_buttonsLayout->removeItem(button);
-        m_listsLayout->pop();
-
-        //delete button;  // TODO: Find a way to do this
-        //delete list;    // TODO: Find a way to do this
-        button->hide();
-        list->hide();
-    }
-}
-
-void PassagewayView::next(Step newStep)
-{
-    Step * step = new Step(newStep);
-    ExtenderButton * button =
-        new ExtenderButton(name() + "::button", step->icon, step->title, "", this);
-    ActionListView * list   =
-        new ActionListView(name() + "::list", step->model, this);
-
-    button->setIconSize(QSize(24, 24));
-    button->setAlignment(Qt::AlignLeft);
-
-    list->setExtenderPosition(RightExtender);
-
-    m_buttons.append(button);
-    m_lists.append(list);
-    m_path.append(step);
-
-    m_buttonsLayout->addItem(button);
-    m_listsLayout->push(list);
-
-    connect(
-        list, SIGNAL(activated(int)),
-        this, SLOT(listItemActivated(int))
-    );
-
-    connect(
-        button, SIGNAL(activated()),
-        this, SLOT(pathButtonActivated())
-    );
+    delete d;
 }
 
 // Entrance
 void PassagewayView::setEntranceModel(PassagewayViewModel * model)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(0)->model = model;
-    m_lists.at(0)->setModel(model);
+    if (d->lists.size() < 2) return;
+    d->path.at(0)->model = model;
+    d->lists.at(0)->setModel(model);
 }
 
 void PassagewayView::setEntranceTitle(const QString & title)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(0)->title = title;
-    m_buttons.at(0)->setTitle(title);
+    if (d->lists.size() < 2) return;
+    d->path.at(0)->title = title;
+    d->buttons.at(0)->setTitle(title);
 }
 
 void PassagewayView::setEntranceIcon(KIcon * icon)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(0)->icon = icon;
-    m_buttons.at(0)->setIcon(icon);
+    if (d->lists.size() < 2) return;
+    d->path.at(0)->icon = icon;
+    d->buttons.at(0)->setIcon(icon);
 }
 
 // Atlas
 void PassagewayView::setAtlasModel(PassagewayViewModel * model)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(1)->model = model;
-    m_lists.at(1)->setModel(model);
+    if (d->lists.size() < 2) return;
+    d->path.at(1)->model = model;
+    d->lists.at(1)->setModel(model);
 }
 
 void PassagewayView::setAtlasTitle(const QString & title)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(1)->title = title;
-    m_buttons.at(1)->setTitle(title);
+    if (d->lists.size() < 2) return;
+    d->path.at(1)->title = title;
+    d->buttons.at(1)->setTitle(title);
 }
 
 void PassagewayView::setAtlasIcon(KIcon * icon)
 {
-    if (m_lists.size() < 2) return;
-    m_path.at(1)->icon = icon;
-    m_buttons.at(1)->setIcon(icon);
+    if (d->lists.size() < 2) return;
+    d->path.at(1)->icon = icon;
+    d->buttons.at(1)->setIcon(icon);
 }
 
 }
