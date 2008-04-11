@@ -473,8 +473,6 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
 {
     Q_UNUSED(option);
 
-    p->setRenderHint(QPainter::SmoothPixmapTransform);
-
     m_theme->resize();
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
 
