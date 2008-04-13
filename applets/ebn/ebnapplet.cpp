@@ -38,7 +38,7 @@ EbnApplet::EbnApplet(QObject *parent, const QVariantList &args)
       m_viewEdit(0),
       watchSource('/')
 {
-    setContentSize(400,400);
+    resize(400,400);
 }
 
 EbnApplet::~EbnApplet()
