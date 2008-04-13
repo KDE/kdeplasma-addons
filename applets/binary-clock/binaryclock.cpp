@@ -35,7 +35,7 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
     m_dialog(0)
 {
     setHasConfigurationInterface(true);
-    setContentSize(getWidthFromHeight(128), 128);
+    resize(getWidthFromHeight(128), 128);
 }
 
 void BinaryClock::init()
@@ -76,7 +76,7 @@ int BinaryClock::getWidthFromHeight(int h) const
 
 QSizeF BinaryClock::contentSizeHint() const
 {
-    QSizeF sizeHint = contentSize();
+    QSizeF sizeHint = geometry().size();
 
     switch (formFactor()) {
         case Plasma::Vertical:
