@@ -124,7 +124,7 @@ void Frame::constraintsUpdated(Plasma::Constraints constraints)
 QSizeF Frame::contentSizeHint() const {
     if (!m_picture.isNull()) {
         QSizeF sizeHint;
-        qreal maxSize = contentSize().width() > contentSize().height() ? contentSize().width() : contentSize().height();
+        qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
         if (m_picture.width() > m_picture.height()) {
             sizeHint = QSizeF( maxSize, (maxSize / m_picture.width()) * m_picture.height() );
         } else {
@@ -132,7 +132,7 @@ QSizeF Frame::contentSizeHint() const {
         }
         return sizeHint;
     } else {
-        return contentSize();
+        return geometry().size();
     }
 }
 
@@ -325,9 +325,9 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
                            const QRect &rect)
 {
     if (m_pixmapCache.isNull() ||
-        contentRect().toRect().size() != m_pixmapCache.size()) {
+        geometry().toRect().size() != m_pixmapCache.size()) {
         updateGeometry();
-        paintCache(option, contentRect().toRect().size());
+        paintCache(option, geometry().toRect().size());
     }
 
     p->drawPixmap(rect, m_pixmapCache, rect);
