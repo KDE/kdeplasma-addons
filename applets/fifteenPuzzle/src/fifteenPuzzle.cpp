@@ -55,7 +55,7 @@ void FifteenPuzzle::init()
 void FifteenPuzzle::constraintsUpdated(Plasma::Constraints constraints)
 {
   if (constraints & Plasma::SizeConstraint) {
-    QSizeF size = this->contentSize();
+    QSizeF size = this->geometry().size();
     board->resetTransform();
     board->scale(size.width() / 192, size.height() / 192);
   }
