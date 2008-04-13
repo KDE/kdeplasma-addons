@@ -33,7 +33,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setDrawStandardBackground(false);
-    setContentSize(256, 256);
+    resize(256, 256);
 }
 
 void Notes::init()
