@@ -40,7 +40,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 {
     setHasConfigurationInterface( true );
 
-    setContentSize( QSizeF( 300, 100 ) );
+    resize( 300, 100 );
 
     loadConfig();
 
@@ -122,7 +122,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     event->ignore();
 
-    if ( event->button() == Qt::LeftButton && contentRect().contains( event->pos() ) ) {
+    if ( event->button() == Qt::LeftButton && geometry().contains( event->pos() ) ) {
         QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
 
         if ( mShowPreviousButton && event->pos().x() < s_arrowWidth ) {
@@ -147,18 +147,18 @@ QSizeF ComicApplet::contentSizeHint() const
         const QSizeF size = mImage.size();
 
         if ( mScaleComic ) {
-            return QSizeF( contentSize().width(), (contentSize().width() / size.width() ) * size.height() );
+            return QSizeF( geometry().width(), (geometry().width() / size.width() ) * size.height() );
         } else {
             return QSizeF( size.width() + 2 * s_arrowWidth, size.height() + Plasma::Theme::self()->fontMetrics().height() );
         }
     } else
-        return contentSize();
+        return geometry().size();
 }
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect& )
 {
-    int imageWidth = ( mImage.isNull() ? 300 : contentSize().width() ) - 2 * s_arrowWidth;
-    int height = ( mImage.isNull() ? 100 : contentSize().height() );
+    int imageWidth = ( mImage.isNull() ? 300 : geometry().width() ) - 2 * s_arrowWidth;
+    int height = ( mImage.isNull() ? 100 : geometry().height() );
 
     if ( !mWebsiteUrl.isEmpty() ) {
         QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
