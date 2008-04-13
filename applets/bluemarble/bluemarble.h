@@ -34,10 +34,10 @@ public:
     ~BlueMarble();
 
     qreal width() const {
-        return contentSize().width();
+        return geometry().width();
     }
     qreal height() const {
-        return contentSize().height();
+        return geometry().height();
     }
     virtual void paintGLInterface(QPainter *painter,
                                   const QStyleOptionGraphicsItem *option);
