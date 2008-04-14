@@ -30,6 +30,7 @@
 #include <QGradient>
 #include <QFontMetrics>
 #include <QGraphicsView>
+#include <QGraphicsLinearLayout>
 
 #include <KDebug>
 #include <KIcon>
@@ -47,7 +48,6 @@
 #include <plasma/dataengine.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
-#include <plasma/layouts/boxlayout.h>
 #include <plasma/widgets/icon.h>
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
@@ -79,7 +79,7 @@ void Twitter::init()
     }
 
     //ui setup
-    m_layout = new Plasma::VBoxLayout( this );
+    m_layout = new QGraphicsLinearLayout( Qt::Vertical, this );
     m_layout->setMargin( 0 );
     m_layout->setSpacing( 0 );
 
@@ -94,7 +94,7 @@ void Twitter::init()
     m_layout->addItem( m_flash );
 
 
-    m_headerLayout = new Plasma::HBoxLayout( m_layout );
+    m_headerLayout = new QGraphicsLinearLayout( Qt::Horizontal );
     m_headerLayout->setMargin( 5 );
     m_headerLayout->setMargin( Plasma::BottomMargin, 10 );
     m_headerLayout->setSpacing( 5 );
@@ -280,7 +280,7 @@ void Twitter::showTweets()
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
     while( m_tweetWidgets.size() < m_historySize ) {
-        Plasma::HBoxLayout *tweetLayout = new Plasma::HBoxLayout( 0 );
+        QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal );
         tweetLayout->setMargin( 5 );
         tweetLayout->setSpacing( 5 );
         m_layout->addItem( tweetLayout );

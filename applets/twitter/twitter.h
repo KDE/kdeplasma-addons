@@ -33,6 +33,7 @@ class KDialog;
 class KLineEdit;
 class QSpinBox;
 class QCheckBox;
+class QGraphicsLinearLayout;
 
 namespace KWallet
 {
@@ -45,12 +46,10 @@ namespace Plasma
     class LineEdit;
     class Flash;
     class Icon;
-    class VBoxLayout;
-    class HBoxLayout;
 }
 
 struct Tweet {
-    Plasma::HBoxLayout *layout;
+    QGraphicsLinearLayout *layout;
     Plasma::Icon *icon;
     Plasma::LineEdit *edit;
 };
@@ -115,8 +114,8 @@ class Twitter : public Plasma::Applet
         Plasma::LineEdit *m_historyEdit;
         Plasma::Flash *m_flash;
         Plasma::Icon *m_icon;
-        Plasma::VBoxLayout *m_layout;
-        Plasma::HBoxLayout *m_headerLayout;
+        QGraphicsLinearLayout *m_layout;
+        QGraphicsLinearLayout *m_headerLayout;
 
         KLineEdit *m_usernameEdit;
         KLineEdit *m_passwordEdit;
