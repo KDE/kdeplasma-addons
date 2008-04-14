@@ -10,10 +10,10 @@
 #ifndef KOLOURPICKER_H
 #define KOLOURPICKER_H
 
-#include <Plasma/Applet>
+#include <plasma/applet.h>
 
-#include <QColor>
-#include <QHash>
+#include <qcolor.h>
+#include <qhash.h>
 
 class QMenu;
 class QWidget;
