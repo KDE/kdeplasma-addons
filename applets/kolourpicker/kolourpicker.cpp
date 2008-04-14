@@ -9,24 +9,24 @@
 
 #include "kolourpicker.h"
 
-#include <qapplication.h>
-#include <qclipboard.h>
-#include <qcursor.h>
-#include <qdesktopwidget.h>
-#include <qevent.h>
-#include <qgraphicssceneevent.h>
-#include <qgraphicslinearlayout.h>
-#include <qicon.h>
-#include <qiconengine.h>
-#include <qimage.h>
-#include <qmimedata.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <QApplication>
+#include <QClipboard>
+#include <QCursor>
+#include <QDesktopWidget>
+#include <QEvent>
+#include <QGraphicsSceneEvent>
+#include <QGraphicsLinearLayout>
+#include <QIcon>
+#include <QIconEngine>
+#include <QImage>
+#include <QMimeData>
+#include <QPainter>
+#include <QPixmap>
 
-#include <kdebug.h>
-#include <kicon.h>
-#include <klocale.h>
-#include <kmenu.h>
+#include <KDebug>
+#include <KIcon>
+#include <KLocale>
+#include <KMenu>
 
 #include <plasma/widgets/pushbutton.h>
 
