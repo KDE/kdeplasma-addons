@@ -15,6 +15,7 @@
 #include <qdesktopwidget.h>
 #include <qevent.h>
 #include <qgraphicssceneevent.h>
+#include <qgraphicslinearlayout.h>
 #include <qicon.h>
 #include <qiconengine.h>
 #include <qimage.h>
@@ -27,7 +28,6 @@
 #include <klocale.h>
 #include <kmenu.h>
 
-#include <plasma/layouts/boxlayout.h>
 #include <plasma/widgets/pushbutton.h>
 
 static KMenu* buildMenuForColor(const QColor &color)
@@ -139,9 +139,10 @@ void PickerButton::adaptToFormFactor(Plasma::FormFactor formFactor)
 Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_grabWidget(0)
 {
-    Plasma::BoxLayout *mainlay = new Plasma::BoxLayout(Plasma::BoxLayout::TopToBottom, 0);
+    resize(40, 80);
+
+    QGraphicsLinearLayout *mainlay = new QGraphicsLinearLayout(Qt::Vertical);
     setLayout(mainlay);
-    mainlay->setMargin(0);
     mainlay->setSpacing(4);
 
     m_grabButton = new PickerButton(this);
@@ -179,11 +180,11 @@ void Kolourpicker::constraintsUpdated(Plasma::Constraints constraints)
     }
 
     if (constraints & Plasma::SizeConstraint) {
-        Plasma::BoxLayout *l = dynamic_cast<Plasma::BoxLayout *>(layout());
+        QGraphicsLinearLayout *l = dynamic_cast<QGraphicsLinearLayout *>(layout());
         if (l->minimumSize().height() > geometry().size().height()) {
-            l->setDirection(Plasma::BoxLayout::LeftToRight);
+            l->setOrientation(Qt::Horizontal);
         } else {
-            l->setDirection(Plasma::BoxLayout::TopToBottom);
+            l->setOrientation(Qt::Vertical);
         }
     }
 }
