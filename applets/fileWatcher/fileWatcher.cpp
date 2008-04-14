@@ -24,6 +24,8 @@
 #include <QStringList>
 #include <QTextDocument>
 
+#include <Plasma/Theme>
+
 #include "fileWatcher.h"
 #include "fileWatcherConfig.h"
 
@@ -31,19 +33,20 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), config_dialog(0)
 {
   setHasConfigurationInterface(true);
+  resize(250, 250);
 
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
-  textItem->setDefaultTextColor(QColor("pink"));
-  
+  textItem->setDefaultTextColor(Plasma::Theme::self()->textColor());
+
   textDocument = textItem->document();
- 
+
   textDocument->setMaximumBlockCount(6); 
   textStream = 0;
 
   configureButton = new Plasma::PushButton(i18n("&Configure File Watcher"), this);  
-  buttonBox = new Plasma::BoxLayout(Plasma::BoxLayout::TopToBottom, this);
+  buttonBox = new QGraphicsLinearLayout(Qt::Vertical, this);
   buttonBox->addItem(configureButton);
 
   connect(configureButton, SIGNAL(clicked()), this, SLOT(showConfigurationInterface()));
