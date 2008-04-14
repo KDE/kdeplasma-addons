@@ -20,6 +20,11 @@
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+#include <QTextEdit>
+
+
 #include <Plasma/Applet>
 #include <Plasma/Svg>
 #include <plasma/widgets/lineedit.h>
@@ -44,17 +49,18 @@ class Notes : public Plasma::Applet
         void constraintsUpdated(Plasma::Constraints constraints);
 
     public slots:
-        void showConfigurationInterface();
+        void createConfigurationInterface(KConfigDialog *parent);
         void configAccepted();
         void saveNote();
 
     private:
         void updateTextGeometry();
         Plasma::Svg m_notes_theme;
-        Plasma::LineEdit *m_textArea;
-
+        QGraphicsLinearLayout *m_layout;
+        QGraphicsProxyWidget *m_proxy;
+        QTextEdit *m_textEdit;
         Ui::config ui;
-        KDialog *m_dialog;
+        //KDialog *m_dialog;
 
         QSizeF m_size;
 };

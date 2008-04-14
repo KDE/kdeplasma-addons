@@ -19,15 +19,18 @@
 
 #include "notes.h"
 
-#include <KDialog>
+#include <QTextEdit>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+
+#include <KConfigDialog>
 #include <KConfigGroup>
 #include <KFontDialog>
 #include <KColorDialog>
 
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-    m_notes_theme("widgets/notes", this),
-    m_dialog(0)
+    m_notes_theme("widgets/notes", this)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -41,25 +44,33 @@ void Notes::init()
 
     m_notes_theme.setContentType(Plasma::Svg::SingleImage);
 
-    m_textArea = new Plasma::LineEdit(this);
-    m_textArea->setMultiLine(true);
+    m_textEdit = new QTextEdit();
+
+    m_layout = new QGraphicsLinearLayout();
+    m_layout->setContentsMargins(0,0,0,0);
+    m_layout->setSpacing(0);
+    m_proxy = new QGraphicsProxyWidget(this);
+    m_proxy->setWidget(m_textEdit);
+    m_proxy->show();
+    m_layout->addItem(m_proxy);
+    setLayout(m_layout);
 
     KConfigGroup cg = config();
 
     updateTextGeometry();
-    m_textArea->setDefaultText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
+// //m_textArea->setDefaultText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
     QString text = cg.readEntry("autoSave",QString());
     if (! text.isEmpty()) {
-        m_textArea->setPlainText(text);
+//     //m_textArea->setPlainText(text);
     }
-    m_textArea->setStyled(false);
+ //m_textArea->setStyled(false);
     //FIXME this has no effect right now. try setTextInteractionFlags
-    m_textArea->setOpenExternalLinks(true);
+    //m_textArea->setOpenExternalLinks(true);
     QFont font = cg.readEntry("font", QFont());
-    m_textArea->setFont(font);
+ //m_textArea->setFont(font);
     QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
-    m_textArea->setDefaultTextColor(textColor);
-    connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
+ //m_textArea->setDefaultTextColor(textColor);
+    //connect(m_textArea, SIGNAL(editingFinished()), this, SLOT(saveNote())); // FIXME: Doesn't work? This could make the following unnecessary ...
 }
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
@@ -77,13 +88,13 @@ void Notes::updateTextGeometry()
     //FIXME there's no way to force the height on a qgraphicstextitem :(
     const qreal xpad = boundingRect().width() / 10;
     const qreal ypad = boundingRect().height() / 10;
-    m_textArea->setGeometry(QRectF(xpad, ypad, boundingRect().width() - 2 * xpad, boundingRect().height() - 2 * ypad));
+ //m_textArea->setGeometry(QRectF(xpad, ypad, boundingRect().width() - 2 * xpad, boundingRect().height() - 2 * ypad));
 }
 
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("autoSave", m_textArea->toPlainText());
+    //cg.writeEntry("autoSave", m_textArea->toPlainText());
     emit configNeedsSaving();
 }
 
@@ -93,7 +104,6 @@ Notes::~Notes()
     //FIXME is it really ok to save from here?
     //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
     //text back. it was useful when there were load/save issues but it's silly now.
-    delete m_dialog;
 }
 
 void Notes::paintInterface(QPainter *p,
@@ -109,22 +119,16 @@ void Notes::paintInterface(QPainter *p,
                        (int)contentsRect.top());
 }
 
-void Notes::showConfigurationInterface()
+void Notes::createConfigurationInterface(KConfigDialog *parent)
 {
-    if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setWindowIcon(KIcon("knotes"));
-        m_dialog->setCaption( i18n("Notes Configuration") );
-        ui.setupUi(m_dialog->mainWidget());
-        m_dialog->mainWidget()->layout()->setMargin(0);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
-
-    ui.textColorButton->setColor(m_textArea->defaultTextColor());
-    ui.textFontButton->setFont(m_textArea->font());
-    m_dialog->show();
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    parent->addPage(widget, parent->windowTitle(), "battery");
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    //ui.textColorButton->setColor(m_textArea->defaultTextColor());
+    //ui.textFontButton->setFont(m_textArea->font());
 }
 
 void Notes::configAccepted()
@@ -136,18 +140,18 @@ void Notes::configAccepted()
     bool changed = false;
 
     QFont newFont = ui.textFontButton->font();
-    if (m_textArea->font() != newFont) {
+    //if (m_textArea->font() != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
-        m_textArea->setFont(newFont);
-    }
+        //m_textArea->setFont(newFont);
+    //}
 
     QColor newColor = ui.textColorButton->color();
-    if (m_textArea->defaultTextColor() != newColor) {
+    //if (m_textArea->defaultTextColor() != newColor) {
         changed = true;
         cg.writeEntry("textcolor", newColor);
-        m_textArea->setDefaultTextColor(newColor);
-    }
+        //m_textArea->setDefaultTextColor(newColor);
+    //}
 
     if (changed) {
         emit configNeedsSaving();
