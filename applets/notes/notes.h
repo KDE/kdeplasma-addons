@@ -27,7 +27,6 @@
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
-#include <plasma/widgets/lineedit.h>
 
 #include "ui_config.h"
 
