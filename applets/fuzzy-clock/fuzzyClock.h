@@ -1,5 +1,4 @@
 /***************************************************************************
- *   Copyright (C) 2005,2006,2007 by Siraj Razick <siraj@kdemail.net>      *
  *   Copyright (C) 2007 by Sven Burmeister <sven.burmeister@gmx.net>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

@@ -1,5 +1,4 @@
 /***************************************************************************
- *   Copyright 2005,2006,2007 by Siraj Razick <siraj@kdemail.net>          *
  *   Copyright 2007 by Riccardo Iaconelli <riccardo@kde.org>               *
  *   Copyright 2007 by Davide Bettio <davide.bettio@kdemail.net>           *
  *                                                                         *

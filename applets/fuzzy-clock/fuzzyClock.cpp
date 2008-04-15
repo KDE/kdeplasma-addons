@@ -1,6 +1,5 @@
 /***************************************************************************
  *   Copyright (c) 1996-2002 the kicker authors. (fuzzy logic)             *
- *   Copyright (C) 2005,2006,2007 by Siraj Razick <siraj@kdemail.net>      *
  *   Copyright (C) 2007 by Riccardo Iaconelli <ruphy@fsfe.org>             *
  *   Copyright (C) 2007 by Sven Burmeister <sven.burmeister@gmx.net>       *
  *                                                                         *
