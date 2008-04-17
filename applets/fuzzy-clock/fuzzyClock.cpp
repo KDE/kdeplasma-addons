@@ -51,7 +51,8 @@ Clock::Clock(QObject *parent, const QVariantList &args)
       m_showTimezone(false),
       m_dialog(0),
       m_calendar(0),
-      m_layout(0)
+      m_layout(0),
+      m_oldContentSize(QSizeF (0,0))
 {
     setHasConfigurationInterface(true);
     setDrawStandardBackground(true);
@@ -61,10 +62,9 @@ Clock::Clock(QObject *parent, const QVariantList &args)
 
 void Clock::init()
 {
-    m_oldContentSize = QSizeF (0,0);
     m_contentSize = geometry().size();
 
-    kDebug() << "The first contentSize() we get, init() called: " << geometry().size();
+    kDebug() << "The first content's size [geometry().size()] we get, init() called: " << geometry().size();
 
     m_localTimezone = KSystemTimeZones::local();
     m_locale = KGlobal::locale();
@@ -118,8 +118,8 @@ void Clock::constraintsUpdated(Plasma::Constraints constraints)
 {
     kDebug() << "constraintsUpdated() called";
 
-    if (m_oldContentSize.toSize() != geometry().size() || m_configUpdated == true ) { //The size changed or config was updated
-        kDebug() << "The contentSize() changed! old: " << m_oldContentSize << "new: " << geometry().size();
+    if ( (m_oldContentSize.toSize() != geometry().size() && m_oldContentSize.toSize() != QSize (0,0)) || m_configUpdated == true ) { //The size changed or config was updated
+        kDebug() << "The content's size [geometry().size()] changed! old: " << m_oldContentSize << "new: " << geometry().size();
 
         if ( m_configUpdated ) {
             calculateDateString();
@@ -141,7 +141,7 @@ void Clock::constraintsUpdated(Plasma::Constraints constraints)
                 calculateSize();
             }
 
-        kDebug() << "The new size has been calculated and set.\nneeded m_contenSize (if not in panel): " << m_contentSize << "\nactual contentSize() is: " << geometry().size() << "\nminimumContentSize() needed (in panel): " << minimumSize();
+        kDebug() << "The new size has been calculated and set.\nneeded m_contenSize (if not in panel): " << m_contentSize << "\nactual content's size [geometry().size()] is: " << geometry().size() << "\nminimumSize() needed (in panel): " << minimumSize();
 
         m_oldContentSize = geometry().size();
         m_configUpdated = false;
@@ -493,8 +493,8 @@ void Clock::calculateSize()
 //
 // minimalTimeStringSize = QSizeF( minimalFontTime.width( m_timeString ) + m_margin*2,minimalFontTime.height() );
 
-    //In case adjustToHeight was disabled we have to reset the point-size of fontTime
-    m_fontTime.setPointSize ( m_fontDate.pointSize() );
+//In case adjustToHeight was disabled we have to reset the point-size of fontTime
+m_fontTime.setPointSize ( m_fontDate.pointSize() );
 
 //Actual size, set in config or init
 QFontMetrics m_fmTime ( m_fontTime );
@@ -550,11 +550,11 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
     }
 
     //Make the timestring fit the plasmoid since it is bigger than smallestReadable
-    m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), 1) );
+    m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), KGlobalSettings::smallestReadableFont().pointSize()) );
 
     m_fmTime = QFontMetrics( m_fontTime );
 
-    while ( ( m_fmTime.width( m_timeString ) > geometry().size().width() || m_fmTime.height() > geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) && m_fontTime.pointSize() > 1 ) {
+    while ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin || m_fmTime.height() > geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
 
         //decrease pointSize
         m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
@@ -641,39 +641,56 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
     }
 
     //If the user enabled adjustToHeight we increase the point-size until the height is fully used. 40 as limit to avoid an endless loop.
-    if ( m_adjustToHeight != 0 && formFactor() != Plasma::Vertical ) {
-        while ( ( m_fmTime.height() < ( geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing )*heightToUse ) && m_fontTime.pointSize() < 40 ) {
+    if ( m_adjustToHeight != 0 ) {
+        kDebug() << "We try to find a larger font that fits the size:";
 
+        //FIXME: if the clock is the only applet on a vertical panel and returns 0 via expandingDirections(), it still gets the full height of the panel as recommended height, i.e. on a vertical panel width a height of 800, geometry().size().height() does not return 48 but some huge value. Unless this is fixed in plasma, the while-loop will take a while.
+
+        //Make the timestring fit the plasmoid since it is bigger than smallestReadable
+        m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), KGlobalSettings::smallestReadableFont().pointSize()) );
+    
+        m_fmTime = QFontMetrics( m_fontTime );
+    
+        kDebug() << "Starting with a point size of: " << m_fontTime.pointSize();
+
+        kDebug() << "We want to have: \nwidth: < " << geometry().size().width() - 2*m_margin << "\nheight < " << (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse;
+
+        while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) || m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
+    
             //decrease pointSize
-            m_fontTime.setPointSize(m_fontTime.pointSize() + 1);
+            m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
 
+            kDebug() << "new point size: " << m_fontTime.pointSize();
+    
             m_fmTime = QFontMetrics( m_fontTime );
-
+    
             m_timeStringSize = QSizeF ( m_fmTime.width( m_timeString ),  m_fmTime.height() );
         }
-
-        //Adjust the width to the new size, including margins
-        m_minimumContentSize = QSizeF ( m_timeStringSize.width() + m_margin*2,m_minimumContentSize.height() );
     }
 
-    kDebug() << "Set new minimumContentSize. contentSize() " << geometry().size() << "minimumSize: " << m_minimumContentSize;
+    //Adjust the width to the new size, including margins, will be reverted, if the panel is vertical
+    m_minimumContentSize = QSizeF ( m_timeStringSize.width() + m_margin*2,m_minimumContentSize.height() );
 
-    //if the minimal width is larger than the actual size
+    kDebug() << "Set new minimumSize: geometry().size() " << geometry().size() << "\nm_minimumContentSize: " << m_minimumContentSize;
+
+    //if the minimal width is larger than the actual size -> force minimal needed width
     if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
             setMinimumSize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
         }
 
     //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
-    if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() ) {
+    //However: If we are in a vertical panel, we should use the width given.
+    if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
+            kDebug() << "The width we got was too big, we need less, so lets resize.";
             resize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
         }
 
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
-        kDebug() << "needed height: " << m_minimumContentSize.height() << "fixed height forced on us: " << geometry().size().height() << " adding margin left/right of: " << m_margin << "width is going to be set setContentSize( " << m_minimumContentSize.width()+m_margin*2 << geometry().size().height() << ")";
+        kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
 
-        resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,geometry().size().height() ) );
+        resize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
     } else if ( formFactor() == Plasma::Vertical ) {
-        kDebug() << "needed width: " << m_minimumContentSize.width() << "fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
+        kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
 
         resize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
     }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
