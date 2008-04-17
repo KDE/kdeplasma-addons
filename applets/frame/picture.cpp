@@ -44,7 +44,7 @@ Picture::~Picture()
 QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
-    QString svgFile = Plasma::Theme::self()->image("widgets/picture-frame-default");
+    QString svgFile = Plasma::Theme::self()->imagePath("widgets/picture-frame-default");
     QSvgRenderer sr(svgFile);
     QImage imload(sr.defaultSize(),QImage::Format_RGB32);//TODO optimize, too slow
    

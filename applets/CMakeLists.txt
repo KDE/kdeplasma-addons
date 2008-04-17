@@ -13,7 +13,7 @@ endif(QT_QTWEBKIT_FOUND)
 
 #add_subdirectory(ebn)
 #add_subdirectory(fileWatcher)
-#add_subdirectory(frame)
+add_subdirectory(frame)
 # pino: disabled, will improve it myself later
 #add_subdirectory(kolourpicker)
 #add_subdirectory(lancelot)
