@@ -31,7 +31,6 @@
 #include "ui_config.h"
 
 class KDialog;
-class QFont;
 class QSizeF;
 
 class Notes : public Plasma::Applet
