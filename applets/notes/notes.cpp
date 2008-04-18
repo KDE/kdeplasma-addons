@@ -42,7 +42,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 void Notes::init()
 {
 
-    m_notes_theme.setContentType(Plasma::Svg::SingleImage);
+    m_notes_theme.setContainsMultipleImages(false);
 
     m_textEdit = new QTextEdit();
 
