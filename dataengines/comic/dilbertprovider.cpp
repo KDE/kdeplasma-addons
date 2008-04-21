@@ -56,15 +56,21 @@ void DilbertProvider::Private::pageRequestFinished( bool err )
         return;
     }
 
-    const QString pattern( "<IMG SRC=\"/comics/dilbert/archive/images/dilbert" );
-    const QRegExp exp( pattern );
+    const QString pattern( "<img src=\"(/dyn/str_strip/[0-9/]+/[0-9]+\\.strip\\.print\\.gif)\"" );
+    QRegExp exp( pattern );
 
     const QString data = QString::fromUtf8( mHttp->readAll() );
 
-    const int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
+    const int pos = exp.indexIn( data );
 
-    KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/images/dilbert%1" ).arg( sub ) );
+    KUrl url;
+
+    if (pos > -1) {
+        QString sub = exp.cap(1);
+        url = KUrl( QString( "http://dilbert.com/%1" ).arg( sub ) );
+    } else {
+        url = KUrl( QString( "http://dilbert.com/img/v1/404.gif" ) );
+    }
 
     mImageHttp = new QHttp( "dilbert.com", 80, mParent );
     mImageHttp->setHost( url.host() );
@@ -87,8 +93,8 @@ void DilbertProvider::Private::imageRequestFinished( bool error )
 DilbertProvider::DilbertProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" )
-                .arg( requestedDate().toString( "yyyyMMdd" ) ) );
+    KUrl url( QString( "http://dilbert.com/strips/comic/%1/" )
+                .arg( requestedDate().toString( "yyyy-MM-dd" ) ) );
 
     QHttpRequestHeader header( "GET", url.path() );
     header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -125,8 +131,8 @@ QString DilbertProvider::identifier() const
 
 KUrl DilbertProvider::websiteUrl() const
 {
-    return QString( "http://dilbert.com/comics/dilbert/archive/dilbert-%1.html" )
-             .arg( requestedDate().toString( "yyyyMMdd" ) );
+    return QString( "http://dilbert.com/strips/comic/%1/" )
+             .arg( requestedDate().toString( "yyyy-MM-dd" ) );
 }
 
 #include "dilbertprovider.moc"
