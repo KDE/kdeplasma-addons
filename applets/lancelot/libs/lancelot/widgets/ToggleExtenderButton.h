@@ -27,19 +27,56 @@
 namespace Lancelot
 {
 
+/**
+ * Toggle button widget with special activation (toggling) options
+ * beside clicking - hover and extender activation
+ *
+ * @author Ivan Cukic
+ */
 class LANCELOT_EXPORT ToggleExtenderButton : public Lancelot::ExtenderButton {
     Q_OBJECT
+    Q_PROPERTY ( bool pressed READ isPressed WRITE setPressed )
 public:
-    ToggleExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ToggleExtenderButton(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    /**
+     * Creates a new Lancelot::ToggleExtenderButton
+     * @param name the internal name of the widget
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ToggleExtenderButton(QString name = QString(), QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+
+    /**
+     * Creates a new Lancelot::BasicWidget
+     * @param name the internal name of the widget
+     * @param icon the icon for the widget
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ToggleExtenderButton(QString name, QIcon icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+
+    /**
+     * Creates a new Lancelot::BasicWidget
+     * @param name the internal name of the widget
+     * @param icon Svg with active, inactive and disabled states
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
 
     virtual ~ToggleExtenderButton();
 
     bool isPressed() const;
     void setPressed(bool pressed = true);
 
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+protected:
+    Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 public slots:
     void toggle();
@@ -52,6 +89,6 @@ private:
     Private * d;
 };
 
-}
+} // namespace Lancelot
 
 #endif /*TOGGLEEXTENDERBUTTON_H_*/

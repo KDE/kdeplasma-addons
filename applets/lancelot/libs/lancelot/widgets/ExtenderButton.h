@@ -26,43 +26,101 @@
 #include <QtGui>
 #include <QtCore>
 #include "Widget.h"
-#include "BaseActionWidget.h"
+#include "BasicWidget.h"
 
 #define EXTENDER_SIZE 20
 
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT ExtenderButton : public BaseActionWidget
+/**
+ * Button widget with special activation options beside clicking
+ * - hover and extender activation
+ *
+ * @author Ivan Cukic
+ */
+class LANCELOT_EXPORT ExtenderButton : public BasicWidget
 {
     Q_OBJECT
+    Q_PROPERTY ( ExtenderPosition extenderPosition READ extenderPosition WRITE setExtenderPosition )
+    Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
 public:
-    ExtenderButton(QString name = QString(), QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ExtenderButton(QString name, QIcon * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
-    ExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(), QString description = QString(), QGraphicsItem * parent = 0);
+    /**
+     * Creates a new Lancelot::ExtenderButton
+     * @param name the internal name of the widget
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ExtenderButton(QString name = QString(), QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
 
+    /**
+     * Creates a new Lancelot::BasicWidget
+     * @param name the internal name of the widget
+     * @param icon the icon for the widget
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ExtenderButton(QString name, QIcon icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+
+    /**
+     * Creates a new Lancelot::BasicWidget
+     * @param name the internal name of the widget
+     * @param icon Svg with active, inactive and disabled states
+     * @param title the title of the widget
+     * @param description the description of the widget
+     * @param parent parent item
+     */
+    ExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(),
+            QString description = QString(), QGraphicsItem * parent = 0);
+
+    /**
+     * Destroys Lancelot::ExtenderButton
+     */
     virtual ~ExtenderButton();
 
-    virtual QRectF boundingRect() const;
-
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-
+    /**
+     * Sets the position of the extender
+     */
     void setExtenderPosition(ExtenderPosition position);
+
+    /**
+     * @returns the extender position
+     */
     ExtenderPosition extenderPosition();
 
+    /**
+     * Sets the activation method of the ExtenderButton
+     */
     void setActivationMethod(ActivationMethod method);
+
+    /**
+     * @returns activation method
+     */
     ActivationMethod activationMethod();
 
-    void setGeometry (const QRectF & geometry);
-    void setGroup(WidgetGroup * group = NULL);
-    void groupUpdated();
+    Override virtual void setGeometry(const QRectF & rect);
+    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    // Override virtual void updateGeometry();
+
+    Override virtual void setGroup(WidgetGroup * group = NULL);
+    Override virtual void groupUpdated();
+
+    Override virtual QRectF boundingRect() const;
 
 Q_SIGNALS:
+    /**
+     * Emitted when the button is activated
+     */
     void activated();
 
 protected:
-    void mousePressEvent (QGraphicsSceneMouseEvent * event);
+    Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 private:
     class Private;
@@ -71,6 +129,6 @@ private:
     friend class ExtenderObject;
 };
 
-}
+} // namespace Lancelot
 
 #endif /*EXTENDERBUTTON_H_*/

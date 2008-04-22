@@ -25,27 +25,34 @@ namespace Lancelot
 
 class ToggleExtenderButton::Private {
 public:
-    Private() : pressed(false)
+    Private()
+      : pressed(false)
     {
-
     }
+
     bool pressed;
 };
 
-ToggleExtenderButton::ToggleExtenderButton(QString name, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, title, description, parent), d(new Private())
+ToggleExtenderButton::ToggleExtenderButton(QString name, QString title,
+        QString description, QGraphicsItem * parent)
+  : ExtenderButton(name, title, description, parent),
+    d(new Private())
 {
     connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 
-ToggleExtenderButton::ToggleExtenderButton(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, icon, title, description, parent), d(new Private())
+ToggleExtenderButton::ToggleExtenderButton(QString name, QIcon icon,
+        QString title, QString description, QGraphicsItem * parent)
+  : ExtenderButton(name, icon, title, description, parent),
+    d(new Private())
 {
     connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
 
-ToggleExtenderButton::ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-  : ExtenderButton(name, icon, title, description, parent), d(new Private())
+ToggleExtenderButton::ToggleExtenderButton(QString name, Plasma::Svg * icon,
+        QString title, QString description, QGraphicsItem * parent)
+  : ExtenderButton(name, icon, title, description, parent),
+    d(new Private())
 {
     connect (this, SIGNAL(activated()), this, SLOT(toggle()));
 }
@@ -73,7 +80,8 @@ ToggleExtenderButton::~ToggleExtenderButton()
 {
 }
 
-void ToggleExtenderButton::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void ToggleExtenderButton::paint(QPainter * painter,
+        const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -85,7 +93,6 @@ void ToggleExtenderButton::paintWidget (QPainter * painter, const QStyleOptionGr
     paintForeground(painter);
 }
 
-
-}
+} // namespace Lancelot
 
 #include "ToggleExtenderButton.moc"

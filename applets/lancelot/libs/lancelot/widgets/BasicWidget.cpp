@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "BaseActionWidget.h"
+#include "BasicWidget.h"
 #include <KDebug>
 #include <cmath>
 #include "Global.h"
@@ -43,40 +43,40 @@
 namespace Lancelot
 {
 
-class BaseActionWidget::Private {
-public:
-    Private(BaseActionWidget * parent, QString title, QString description)
-        : icon(NULL), iconInSvg(NULL), iconSize(32, 32),
+class BasicWidget::Private {
+    public:
+    Private(BasicWidget * parent, QString title, QString description)
+      : icon(QIcon()), iconInSvg(NULL), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
         init(parent);
     }
 
-    Private(BaseActionWidget * parent, QIcon * icon, QString title, QString description)
-        : icon(icon), iconInSvg(NULL), iconSize(32, 32),
+    Private(BasicWidget * parent, QIcon icon, QString title, QString description)
+      : icon(icon), iconInSvg(NULL), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
         init(parent);
     }
 
-    Private(BaseActionWidget * parent, Plasma::Svg * icon, QString title, QString description)
-        : icon(NULL), iconInSvg(icon), iconSize(32, 32),
+    Private(BasicWidget * parent, Plasma::Svg * icon, QString title, QString description)
+      : icon(QIcon()), iconInSvg(icon), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
         init(parent);
     }
 
-    void init(BaseActionWidget * parent)
+    void init(BasicWidget * parent)
     {
         parent->setAcceptsHoverEvents(true);
         parent->resize(140, 38);
-        parent->setGroupByName("BaseActionWidget");
+        parent->setGroupByName("BasicWidget");
     }
 
-    QIcon * icon;
+    QIcon icon;
     Plasma::Svg * iconInSvg;
     QSize iconSize;
     Qt::Orientation innerOrientation;
@@ -87,33 +87,41 @@ public:
     QString description;
 };
 
-BaseActionWidget::BaseActionWidget(QString name, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(this, title, description))
+BasicWidget::BasicWidget(QString name, QString title, QString description,
+        QGraphicsItem * parent)
+  : Widget(name, parent),
+    d(new Private(this, title, description))
 {
 }
 
-BaseActionWidget::BaseActionWidget(QString name, QIcon * icon, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(this, icon, title, description))
+BasicWidget::BasicWidget(QString name, QIcon icon, QString title,
+        QString description, QGraphicsItem * parent)
+  : Widget(name, parent),
+    d(new Private(this, icon, title, description))
 {
 }
 
-BaseActionWidget::BaseActionWidget(QString name, Plasma::Svg * icon, QString title, QString description, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private(this, icon, title, description))
+BasicWidget::BasicWidget(QString name, Plasma::Svg * icon, QString title,
+        QString description, QGraphicsItem * parent)
+  : Widget(name, parent),
+    d(new Private(this, icon, title, description))
 {
 }
 
-BaseActionWidget::~BaseActionWidget()
+BasicWidget::~BasicWidget()
 {
     delete d;
 }
 
-/*void BaseActionWidget::resizeSvg() {
+/*void BasicWidget::resizeSvg() {
   if (d->svg) {
   d->svg->resize(size());
   }
   }*/
 
-void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget ) {
+void BasicWidget::paint(QPainter * painter,
+        const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
@@ -122,7 +130,8 @@ void BaseActionWidget::paintWidget ( QPainter * painter, const QStyleOptionGraph
     paintForeground(painter);
 }
 
-void BaseActionWidget::paintForeground (QPainter * painter) {
+void BasicWidget::paintForeground(QPainter * painter)
+{
     QPainter * _painter = painter;
 
     // Background Painting
@@ -150,7 +159,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect         = QRectF(0, 0, d->iconSize.width(), d->iconSize.height());
 
-    if (!d->icon && !d->iconInSvg) iconRect = QRectF(0, 0, 0, 0);
+    if (d->icon.isNull() && !d->iconInSvg) iconRect = QRectF(0, 0, 0, 0);
 
     // painter->setFont(titleFont)); // NOT NEEDED
     QRectF titleRect        = painter->boundingRect(widgetRect,
@@ -176,7 +185,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         float top = WIDGET_PADDING, height =
             iconRect.height() + titleRect.height() + descriptionRect.height();
 
-        if ((d->icon || d->iconInSvg) && !(d->title.isEmpty() && d->description.isEmpty()))
+        if ((!d->icon.isNull() || d->iconInSvg) && !(d->title.isEmpty() && d->description.isEmpty()))
             height += WIDGET_PADDING;
 
         if (d->alignment & Qt::AlignVCenter)
@@ -184,11 +193,11 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         if (d->alignment & Qt::AlignBottom)
             top = widgetRect.height() - height + WIDGET_PADDING;
 
-        if (d->icon || d->iconInSvg) { // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg) { // using real painter...
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
-            if (d->icon) {
-                d->icon->paint(_painter, rect);
+            if (!d->icon.isNull()) {
+                d->icon.paint(_painter, rect);
             } else {
                 d->iconInSvg->resize(d->iconSize);
                 d->iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
@@ -231,7 +240,7 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
 
         if ((widgetRect.width() < width) || (d->alignment & Qt::AlignLeft)) {
             iconRect.moveLeft(WIDGET_PADDING);
-            titleRect.setWidth(widgetRect.width() - ((d->icon || d->iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
+            titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
             descriptionRect.setWidth(titleRect.width());
         } else if (d->alignment & Qt::AlignHCenter) {
             iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width) / 2);
@@ -241,9 +250,9 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
         titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
         descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
 
-        if (d->icon || d->iconInSvg) {  // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
-            if (d->icon) {
+            if (!d->icon.isNull()) {
                 QIcon::Mode mode;
                 if (!isEnabled()) {
                     mode = QIcon::Disabled;
@@ -253,10 +262,10 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
                     mode = QIcon::Normal;
                 }
 
-                d->icon->paint(_painter, rect, Qt::AlignCenter, mode, QIcon::Off);
+                d->icon.paint(_painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
                 d->iconInSvg->resize(d->iconSize);
-                d->iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
+                d->iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive"); //TODO: add disabled state
             }
         }
 
@@ -297,79 +306,79 @@ void BaseActionWidget::paintForeground (QPainter * painter) {
     _painter->drawPixmap(0, 0, foreground);
 }
 
-void BaseActionWidget::setIconSize(QSize size)
+void BasicWidget::setIconSize(QSize size)
 {
     d->iconSize = size; update();
 }
 
-QSize BaseActionWidget::iconSize() const
+QSize BasicWidget::iconSize() const
 {
     return d->iconSize;
 }
 
-void BaseActionWidget::setIcon(QIcon * icon)
+void BasicWidget::setIcon(QIcon icon)
 {
     d->icon = icon; update();
 }
 
-QIcon * BaseActionWidget::icon() const
+QIcon BasicWidget::icon() const
 {
     return d->icon;
 }
 
-void BaseActionWidget::setIconInSvg(Plasma::Svg * icon)
+void BasicWidget::setIconInSvg(Plasma::Svg * icon)
 {
     d->iconInSvg = icon;
     update();
 }
 
-Plasma::Svg * BaseActionWidget::iconInSvg() const
+Plasma::Svg * BasicWidget::iconInSvg() const
 {
     return d->iconInSvg;
 }
 
-void BaseActionWidget::setTitle(const QString & title)
+void BasicWidget::setTitle(const QString & title)
 {
     d->title = title;
     update();
 }
 
-QString BaseActionWidget::title() const
+QString BasicWidget::title() const
 {
     return d->title;
 }
 
-void BaseActionWidget::setDescription(const QString & description)
+void BasicWidget::setDescription(const QString & description)
 {
     d->description = description;
     update();
 }
 
-QString BaseActionWidget::description() const
+QString BasicWidget::description() const
 {
     return d->description;
 }
 
-void BaseActionWidget::setInnerOrientation(Qt::Orientation position) {
+void BasicWidget::setInnerOrientation(Qt::Orientation position) {
     d->innerOrientation = position;
     update();
 }
 
-Qt::Orientation BaseActionWidget::innerOrientation() const
+Qt::Orientation BasicWidget::innerOrientation() const
 {
     return d->innerOrientation;
 }
 
-void BaseActionWidget::setAlignment(Qt::Alignment alignment)
+void BasicWidget::setAlignment(Qt::Alignment alignment)
 {
     d->alignment = alignment; update();
 }
 
-Qt::Alignment BaseActionWidget::alignment() const
+Qt::Alignment BasicWidget::alignment() const
 {
     return d->alignment;
 }
 
 } // namespace Lancelot
 
-#include "BaseActionWidget.moc"
+#include "BasicWidget.moc"

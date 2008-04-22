@@ -37,24 +37,24 @@ set(lancelot_LIB_SRCS
         Global.cpp
 
         # Widgets
-        widgets/ActionListView.cpp
-        widgets/BaseActionWidget.cpp
-        #widgets/CustomListView.cpp
-        widgets/ExtenderButton.cpp
-        widgets/Panel.cpp
-        widgets/PassagewayView.cpp
-        widgets/ResizeBordersPanel.cpp
-        widgets/ToggleExtenderButton.cpp
         widgets/Widget.cpp
-        widgets/WidgetPositioner.cpp
+        widgets/BasicWidget.cpp
+        widgets/ExtenderButton.cpp
+        widgets/ToggleExtenderButton.cpp
+        # widgets/ActionListView.cpp
+        # widgets/Panel.cpp
+        # widgets/PassagewayView.cpp
+        # widgets/ResizeBordersPanel.cpp
+        # widgets/WidgetPositioner.cpp
+        # # widgets/CustomListView.cpp
 
         # Layouts
-        layouts/CardLayout.cpp
-        layouts/ColumnLayout.cpp
+        # layouts/CardLayout.cpp
+        # layouts/ColumnLayout.cpp
 
         # Models
-        models/ActionListViewModels.cpp
-        models/PassagewayViewModels.cpp
+        # models/ActionListViewModels.cpp
+        # models/PassagewayViewModels.cpp
 )
 
 kde4_add_library(lancelot SHARED ${lancelot_LIB_SRCS})
@@ -84,7 +84,7 @@ install(FILES
 
 install(FILES
    widgets/ActionListView.h
-   widgets/BaseActionWidget.h
+   widgets/BasicWidget.h
    #widgets/CustomListView.h
    widgets/ExtenderButton.h
    widgets/Panel.h
@@ -104,3 +104,6 @@ install(FILES
    models/ActionListViewModels.h
    models/PassagewayViewModels.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models)
+
+# tests
+add_subdirectory(tests)

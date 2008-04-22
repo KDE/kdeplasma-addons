@@ -87,6 +87,7 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
 {
     d->instance = instance;
     d->name = name;
+    kDebug() << "Group-" + name << " " << d->instance->theme()->name();
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
 }
 
@@ -173,12 +174,15 @@ void WidgetGroup::load(bool full)
     WidgetGroup * group;
 
     if (!d->confGroupTheme->exists()) {
+        kDebug() << "Config group doesn't exist : " << d->confGroupTheme->name();
+
         group = d->instance->defaultGroup();
         if (group == this) return;
 
         d->copyFrom(group->d);
         return;
     }
+    kDebug() << "Config group EXISTS : " << d->confGroupTheme->name();
 
     group = d->instance->group(d->confGroupTheme->readEntry("parent", "Default"));
     if (group != this) {
@@ -202,9 +206,12 @@ void WidgetGroup::load(bool full)
             delete d->backgroundSvg;
         }
 
+        kDebug() << "Svg Location " << d->confGroupTheme->readEntry("background.svg");
         d->backgroundSvg = new Plasma::Svg(d->confGroupTheme->readEntry("background.svg"));
+        kDebug() << "Svg " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal");
         d->ownsBackgroundSvg = true;
-        d->backgroundSvg->setContentType(Plasma::Svg::ImageSet);
+        // d->backgroundSvg->setContentType(Plasma::Svg::ImageSet); // ToWoC
+        d->backgroundSvg->setContainsMultipleImages(true);
     }
 
     notifyUpdated();
@@ -293,6 +300,7 @@ Instance::Instance()
     if (path == "") {
         path = "lancelotrc";
     }
+    kDebug() << "Theme " << path;
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;
@@ -327,6 +335,7 @@ WidgetGroup * Instance::group(const QString & name)
         groupName = "Default";
     }
 
+    kDebug() << "Creating a group named " << groupName;
     if (!d->groups.contains(groupName)) {
         WidgetGroup * group = new WidgetGroup(this, groupName);
         if (d->processGroupChanges) {

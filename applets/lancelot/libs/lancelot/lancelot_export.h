@@ -25,10 +25,10 @@
 
 #ifndef LANCELOT_EXPORT
 # if defined(MAKE_LANCELOT_LIB)
-   /* We are building this library */ 
+   /* We are building this library */
 #  define LANCELOT_EXPORT KDE_EXPORT
 # else
-   /* We are using this library */ 
+   /* We are using this library */
 #  define LANCELOT_EXPORT KDE_IMPORT
 # endif
 #endif
@@ -36,5 +36,8 @@
 #ifndef LANCELOT_EXPORT_DEPRECATED
 # define LANCELOT_EXPORT_DEPRECATED KDE_DEPRECATED LANCELOT_EXPORT
 #endif
+
+// Override annotation. Does nothing.
+#define Override
 
 #endif // LANCELOT_EXPORT_H

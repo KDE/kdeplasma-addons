@@ -23,50 +23,105 @@
 #include "../lancelot_export.h"
 
 #include <QtGui>
-#include <plasma/widgets/widget.h>
+#include <QGraphicsWidget>
 #include "../Global.h"
 
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT Widget : public Plasma::Widget
+/**
+ * Base class for Widgets that want to use Lancelot framework
+ *
+ * @author Ivan Cukic
+ */
+class LANCELOT_EXPORT Widget : public QGraphicsWidget
 {
     Q_OBJECT
+    Q_PROPERTY ( QString name READ name WRITE setName )
 public:
+    /**
+     * Creates a new Lancelot::Widget
+     * @param name the internal name of the widget
+     * @param parent parent item
+     */
     Widget(QString name = "", QGraphicsItem * parent = 0);
+
+    /**
+     * Destroys Lancelot::Widget
+     */
     virtual ~Widget();
 
-    void enable(bool value = true);
-    void disable();
-    bool isEnabled() const;
-
-    void setGeometry (const QRectF & geometry);
-    void update (const QRectF &rect = QRectF());
-    void update (qreal x, qreal y, qreal w, qreal h);
-
+    /**
+     * Sets this widget's group by group name.
+     */
     virtual void setGroupByName(const QString & groupName);
+
+    /**
+     * Sets this widget's group.
+     */
     virtual void setGroup(WidgetGroup * group = NULL);
+
+    /**
+     * Returns this widget's group.
+     */
     WidgetGroup * group();
+
+    /**
+     * Returns the Lancelot::Instance to which this object
+     * belongs.
+     */
     Instance * instance();
 
+    /**
+     * Returns the name of the widget.
+     */
     QString name() const;
+
+    /**
+     * Sets the name of the widget
+     */
     void setName(QString name);
 
+    /**
+     * Returns whether the mouse cursor is hovering the widget
+     */
     bool isHovered() const;
 
 Q_SIGNALS:
+    /**
+     * This signal is emitted when the mouse cursor enters the widget
+     */
     void mouseHoverEnter();
+
+    /**
+     * This signal is emitted when the mouse cursor leaves the widget
+     */
     void mouseHoverLeave();
 
 protected:
+    /**
+     * This function is invoked when the group containing this
+     * widget is updated. Reimplement if you need any additional
+     * properties in your widget which need to be set using
+     * the groups mechanism.
+     */
     virtual void groupUpdated();
 
-    virtual void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * Paints the widget background using the widget's SVG. Element name is
+     * calculated according to widget's state
+     */
+    void paintBackground(QPainter * painter);
 
-    void paintBackground (QPainter * painter);
-    void paintBackground (QPainter * painter, const QString & element);
+    /**
+     * Paints the widget background using the specified element from widget's SVG
+     */
+    void paintBackground(QPainter * painter, const QString & element);
+
+    Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;
@@ -76,6 +131,6 @@ private:
     friend class Global;
 };
 
-}
+} // namespace Lancelot
 
 #endif /*LANCELOT_WIDGET_H_*/
