@@ -123,7 +123,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     event->ignore();
 
     if ( event->button() == Qt::LeftButton && geometry().contains( event->pos() ) ) {
-        QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
+        QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
         if ( mShowPreviousButton && event->pos().x() < s_arrowWidth ) {
             slotPreviousDay();
@@ -149,7 +149,7 @@ QSizeF ComicApplet::contentSizeHint() const
         if ( mScaleComic ) {
             return QSizeF( geometry().width(), (geometry().width() / size.width() ) * size.height() );
         } else {
-            return QSizeF( size.width() + 2 * s_arrowWidth, size.height() + Plasma::Theme::self()->fontMetrics().height() );
+            return QSizeF( size.width() + 2 * s_arrowWidth, size.height() + Plasma::Theme::defaultTheme()->fontMetrics().height() );
         }
     } else
         return geometry().size();
@@ -161,9 +161,9 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     int height = ( mImage.isNull() ? 100 : geometry().height() );
 
     if ( !mWebsiteUrl.isEmpty() ) {
-        QFontMetrics fm = Plasma::Theme::self()->fontMetrics();
+        QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         height -= fm.height();
-        p->setPen( Plasma::Theme::self()->textColor() );
+        p->setPen( Plasma::Theme::defaultTheme()->textColor() );
         p->drawText( QRectF( s_arrowWidth, height, imageWidth, fm.height() ),
                      Qt::AlignRight, mWebsiteUrl.host() );
     }
@@ -177,7 +177,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth - 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth - 5, height / 2 + 15 ) );
 
-        p->setBrush( Plasma::Theme::self()->textColor() );
+        p->setBrush( Plasma::Theme::defaultTheme()->textColor() );
         p->drawPolygon( arrow );
     }
     if ( mShowNextButton ) {
@@ -186,7 +186,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth + imageWidth + 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth + imageWidth + 5, height / 2 + 15 ) );
 
-        p->setBrush( Plasma::Theme::self()->textColor() );
+        p->setBrush( Plasma::Theme::defaultTheme()->textColor() );
         p->drawPolygon( arrow );
     }
 
