@@ -27,15 +27,26 @@
 namespace Lancelot
 {
 
+/**
+ * Panel with border resizing notifications
+ *
+ * @author Ivan Cukic
+ */
 class LANCELOT_EXPORT ResizeBordersPanel: public Panel {
 public:
+    /**
+     * Creates a new ResizeBordersPanel
+     * @param name the internal name of the widget
+     * @param parent parent item
+     */
     ResizeBordersPanel(QString name, QGraphicsItem * parent = 0);
-    void setGeometry (const QRectF & geometry);
+
+    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    Override virtual void setGeometry(const QRectF & geometry);
 
 private:
     class Private;
     Private * d;
-
 };
 
 } // namespace Lancelot

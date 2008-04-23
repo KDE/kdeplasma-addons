@@ -52,7 +52,7 @@ public:
             m_d->updateChildren();
         }
 
-        void paintWidget(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+        void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
         {
             Q_UNUSED(widget);
             if (isHovered()) {
@@ -148,13 +148,12 @@ public:
 
     void updateChildren()
     {
-        foreach (Plasma::Widget * item, borderItems) {
+        foreach (QGraphicsWidget * item, borderItems) {
             item->update();
         }
     }
 
-
-    QMap < int, Plasma::Widget * > borderItems;
+    QMap < int, QGraphicsWidget * > borderItems;
     int activePosition;
     ResizeBordersPanel * q;
 };
@@ -162,9 +161,11 @@ public:
 ResizeBordersPanel::ResizeBordersPanel(QString name, QGraphicsItem * parent)
     : Panel(name, parent), d(new Private(this))
 {
-    /*foreach (Plasma::Widget * widget, d->borderItems) {
-        widget->setCursor(Qt::IBeamCursor);
-    }*/
+}
+
+void ResizeBordersPanel::setGeometry(qreal x, qreal y, qreal w, qreal h)
+{
+    setGeometry(QRectF(x, y, w, h));
 }
 
 void ResizeBordersPanel::setGeometry(const QRectF & geometry)

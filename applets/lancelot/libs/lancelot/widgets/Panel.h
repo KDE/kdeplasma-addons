@@ -134,7 +134,7 @@ public:
     Override virtual void setGroup(WidgetGroup * group = NULL);
 
 protected:
-    Override virtual void paintWidget(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;

@@ -42,10 +42,10 @@ set(lancelot_LIB_SRCS
         widgets/ExtenderButton.cpp
         widgets/ToggleExtenderButton.cpp
         widgets/Panel.cpp
+        widgets/ResizeBordersPanel.cpp
 
         # widgets/ActionListView.cpp
         # widgets/PassagewayView.cpp
-        # widgets/ResizeBordersPanel.cpp
         # widgets/WidgetPositioner.cpp
 
         # # widgets/CustomListView.cpp

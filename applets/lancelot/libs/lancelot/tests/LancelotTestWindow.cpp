@@ -29,6 +29,7 @@
 #include "../widgets/ExtenderButton.h"
 #include "../widgets/ToggleExtenderButton.h"
 #include "../widgets/Panel.h"
+#include "../widgets/ResizeBordersPanel.h"
 
 LancelotTestWindow::LancelotTestWindow()
     : QGraphicsView()
@@ -84,6 +85,13 @@ LancelotTestWindow::LancelotTestWindow()
     toggleExtenderButton->setGroupByName("SectionButtons");
     panel->setLayoutItem(toggleExtenderButton);
 
+    // ResizeBordersPanel
+    Lancelot::ResizeBordersPanel * resizeBordersPanel;
+    resizeBordersPanel = new Lancelot::ResizeBordersPanel("namePanel");
+    m_corona->addItem(resizeBordersPanel);
+    resizeBordersPanel->setBackground("lancelot/main-background");
+
+    resizeBordersPanel->setGeometry(300, 250, 200, 200);
 
     instance->activateAll();
     kDebug() << "########################## " << extenderButton->geometry();

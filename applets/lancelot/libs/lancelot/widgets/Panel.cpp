@@ -219,7 +219,7 @@ QGraphicsLayoutItem * Panel::layoutItem()
     return d->layoutItem;
 }
 
-void Panel::paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void Panel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
