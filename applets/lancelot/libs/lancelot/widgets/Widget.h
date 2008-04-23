@@ -87,6 +87,9 @@ public:
      */
     bool isHovered() const;
 
+    Override virtual void setGeometry(const QRectF & rect);
+    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+
 Q_SIGNALS:
     /**
      * This signal is emitted when the mouse cursor enters the widget
@@ -117,6 +120,13 @@ protected:
      * Paints the widget background using the specified element from widget's SVG
      */
     void paintBackground(QPainter * painter, const QString & element);
+
+    /**
+     * Reimplement this function if you want to be notified
+     * when a geometry changes. This is not the same function
+     * as QGraphicsWidget::updateGeometry()
+     */
+    virtual void geometryUpdated();
 
     Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);

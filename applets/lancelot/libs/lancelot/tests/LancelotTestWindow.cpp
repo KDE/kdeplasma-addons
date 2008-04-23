@@ -23,9 +23,12 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <QStyleOptionGraphicsItem>
+#include <KDebug>
 
 #include "../widgets/Widget.h"
 #include "../widgets/ExtenderButton.h"
+#include "../widgets/ToggleExtenderButton.h"
+#include "../widgets/Panel.h"
 
 LancelotTestWindow::LancelotTestWindow()
     : QGraphicsView()
@@ -39,32 +42,51 @@ LancelotTestWindow::LancelotTestWindow()
 
     instance = new Lancelot::Instance();
 
-    Lancelot::ExtenderButton * widget;
+    Lancelot::ExtenderButton * extenderButton;
 
-    // widget->setGroupByName("SystemButtons");
-    widget = new Lancelot::ExtenderButton("name", KIcon("lancelot"), "Title", "Description");
-    widget->setExtenderPosition(Lancelot::LeftExtender);
-    m_corona->addItem(widget);
-    widget->setGeometry(50, 50, 150, 50);
+    // ExtenderButton
+    extenderButton = new Lancelot::ExtenderButton("name1", KIcon("lancelot"), "Title", "Description");
+    extenderButton->setExtenderPosition(Lancelot::LeftExtender);
+    m_corona->addItem(extenderButton);
+    extenderButton->setGeometry(50, 50, 150, 50);
+    extenderButton->setGroupByName("SystemButtons");
 
-    widget = new Lancelot::ExtenderButton("name", KIcon("lancelot"), "Title", "Description");
-    widget->setExtenderPosition(Lancelot::BottomExtender);
-    m_corona->addItem(widget);
-    widget->setGeometry(50, 150, 150, 50);
+    extenderButton = new Lancelot::ExtenderButton("name2", KIcon("lancelot"), "Title", "Description");
+    extenderButton->setExtenderPosition(Lancelot::BottomExtender);
+    m_corona->addItem(extenderButton);
+    extenderButton->setGeometry(50, 150, 150, 50);
+    extenderButton->setGroupByName("SystemButtons");
 
-    widget = new Lancelot::ExtenderButton("name", KIcon("lancelot"), "Title", "Description");
-    widget->setExtenderPosition(Lancelot::RightExtender);
-    m_corona->addItem(widget);
-    widget->setGeometry(250, 50, 150, 50);
+    extenderButton = new Lancelot::ExtenderButton("name3", KIcon("lancelot"), "Title", "Description");
+    extenderButton->setExtenderPosition(Lancelot::RightExtender);
+    m_corona->addItem(extenderButton);
+    extenderButton->setGeometry(250, 50, 150, 50);
+    extenderButton->setGroupByName("SystemButtons");
 
-    widget = new Lancelot::ExtenderButton("name", KIcon("lancelot"), "Title", "Description");
-    widget->setExtenderPosition(Lancelot::TopExtender);
-    m_corona->addItem(widget);
-    widget->setGeometry(250, 150, 150, 50);
+    extenderButton = new Lancelot::ExtenderButton("name4", KIcon("lancelot"), "Title", "Description");
+    extenderButton->setExtenderPosition(Lancelot::TopExtender);
+    m_corona->addItem(extenderButton);
+    extenderButton->setGeometry(250, 150, 150, 50);
+    extenderButton->setGroupByName("SystemButtons");
 
+    // Panel
+    Lancelot::Panel * panel;
+    panel = new Lancelot::Panel("namePanel", KIcon("lancelot"), "Title");
+    m_corona->addItem(panel);
+    panel->setGeometry(50, 250, 200, 200);
+
+    // ToggleExtenderButton
+    Lancelot::ToggleExtenderButton * toggleExtenderButton;
+    toggleExtenderButton = new Lancelot::ToggleExtenderButton("name5", KIcon("lancelot"), "Title", "Description", panel);
+    toggleExtenderButton->setActivationMethod(Lancelot::ClickActivate);
+    //m_corona->addItem(toggleExtenderButton);
+    //toggleExtenderButton->setGeometry(50, 250, 150, 150);
+    toggleExtenderButton->setGroupByName("SectionButtons");
+    panel->setLayoutItem(toggleExtenderButton);
 
 
     instance->activateAll();
+    kDebug() << "########################## " << extenderButton->geometry();
 }
 
 LancelotTestWindow::~LancelotTestWindow()

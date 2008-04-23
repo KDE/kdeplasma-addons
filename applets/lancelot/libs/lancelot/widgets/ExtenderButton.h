@@ -102,9 +102,7 @@ public:
      */
     ActivationMethod activationMethod();
 
-    Override virtual void setGeometry(const QRectF & rect);
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
-    // Override virtual void updateGeometry();
+    Override virtual void geometryUpdated();
 
     Override virtual void setGroup(WidgetGroup * group = NULL);
     Override virtual void groupUpdated();

@@ -91,7 +91,7 @@ public:
         if (!extenderIconSvg) {
             extenderIconSvg = new Plasma::Svg("lancelot/extender-button-icon");
             //extenderIconSvg->setContentType(Plasma::Svg::ImageSet);
-            extenderIconSvg->setContainsMultipleImages(true);
+            //extenderIconSvg->setContainsMultipleImages(true);
         }
 
         extender = new ExtenderObject(q->name() + "::Extender", extenderIconSvg, q);
@@ -108,8 +108,7 @@ public:
     void relayoutExtender()
     {
         if (!extender) return;
-        QRectF geometry = QRectF(QPointF(0, 0), QSizeF(w, h));  // q->geometry();
-        kDebug() << "Parent geometry " << geometry;
+        QRectF geometry = QRectF(QPointF(0, 0), q->size());
         switch (extenderPosition) {
         case TopExtender:
             geometry.setHeight(EXTENDER_SIZE);
@@ -145,7 +144,6 @@ public:
     ActivationMethod activationMethod;
 
     static Plasma::Svg * extenderIconSvg;
-    qreal w, h;
 };
 
 Plasma::Svg * ExtenderButton::Private::extenderIconSvg = NULL;
@@ -269,27 +267,11 @@ void ExtenderButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
     BasicWidget::mousePressEvent(event);
 }
 
-void ExtenderButton::setGeometry(qreal x, qreal y, qreal w, qreal h)
+void ExtenderButton::geometryUpdated()
 {
-    setGeometry(QRectF(x, y, w, h));
-}
-
-void ExtenderButton::setGeometry(const QRectF & rect)
-{
-    BasicWidget::setGeometry(rect);
-
-    // TODO: Qt Bug returning wrong size() bypass
-    d->w = rect.width();
-    d->h = rect.height();
+    BasicWidget::geometryUpdated();
     d->relayoutExtender();
-    kDebug() << rect;
 }
-
-// void ExtenderButton::updateGeometry()
-// {
-//     BasicWidget::updateGeometry();
-//     d->relayoutExtender();
-// }
 
 } // namespace Lancelot
 

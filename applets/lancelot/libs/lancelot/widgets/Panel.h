@@ -21,52 +21,120 @@
 #define LANCELOT_PANEL_H_
 
 #include "../lancelot_export.h"
+#include "plasma/plasma.h"
 
 #include "Widget.h"
-#include <plasma/layouts/layout.h>
-#include <plasma/svgpanel.h>
-#include "BaseActionWidget.h"
-
 
 #include <QIcon>
 
 namespace Lancelot
 {
 
+/**
+ * A container widget with optional title-bar
+ *
+ * @author Ivan Cukic
+ */
 class LANCELOT_EXPORT Panel: public Widget
 {
+    Q_OBJECT
+    Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
+    Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
+    Q_PROPERTY ( QString title READ title WRITE setTitle )
 public:
-    Panel(QString name, QIcon * icon, QString title = QString(), QGraphicsItem * parent = 0);
+    /**
+     * Creates a new Lancelot::Panel
+     * @param name the internal name of the widget
+     * @param icon the icon for the widget
+     * @param title the title of the widget
+     * @param parent parent item
+     */
+    Panel(QString name, QIcon icon, QString title = QString(),
+            QGraphicsItem * parent = 0);
+
+    /**
+     * Creates a new Lancelot::Widget
+     * @param name the internal name of the widget
+     * @param title the title of the widget
+     * @param parent parent item
+     */
     Panel(QString name, QString title, QGraphicsItem * parent = 0);
+
+    /**
+     * Creates a new Lancelot::Widget
+     * @param name the internal name of the widget
+     * @param parent parent item
+     */
     Panel(QString name, QGraphicsItem * parent = 0);
 
+    /**
+     * Destroys Lancelot::Panel
+     */
     virtual ~Panel();
 
+    /**
+     * Sets title of this Lancelot::BasicWidget
+     */
     void setTitle(const QString & title);
+
+    /**
+     * @returns title of this Lancelot::BasicWidget
+     */
     QString title() const;
 
-    void setIcon(QIcon * icon);
-    QIcon * icon() const;
+    /**
+     * Sets icon of this Lancelot::BasicWidget
+     */
+    void setIcon(QIcon icon);
 
+    /**
+     * @returns icon of this Lancelot::BasicWidget
+     */
+    QIcon icon() const;
+
+    /**
+     * Sets icon size of this Lancelot::BasicWidget
+     */
     void setIconSize(QSize size);
+
+    /**
+     * @returns icon size of this Lancelot::BasicWidget
+     */
     QSize iconSize() const;
 
-    void setGeometry (const QRectF & geometry);
+    /**
+     * Sets the layout item for the components in case the panel
+     * should contain more than one item at a time
+     */
+    void setLayoutItem(QGraphicsLayoutItem * layoutItem);
 
-    void setLayout(Plasma::LayoutItem * layout);
-    Plasma::LayoutItem * layout();
+    /**
+     * @returns the layout item
+     */
+    QGraphicsLayoutItem * layoutItem();
 
-    void setWidget(Widget * widget);
-    Widget * widget();
-
+    /**
+     * Sets the background image for the panel
+     */
     void setBackground(const QString & imagePath);
+
+    /**
+     * Clears the background
+     */
     void clearBackground();
 
-    void setGroup(WidgetGroup * group = NULL);
-
-    void paintWidget (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
+    /**
+     * @param edge edge
+     * @returns size of the specified edge
+     */
     qreal borderSize(Plasma::MarginEdge edge);
+
+    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    Override virtual void setGeometry(const QRectF & geometry);
+    Override virtual void setGroup(WidgetGroup * group = NULL);
+
+protected:
+    Override virtual void paintWidget(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;

@@ -211,7 +211,7 @@ void WidgetGroup::load(bool full)
         kDebug() << "Svg " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal");
         d->ownsBackgroundSvg = true;
         // d->backgroundSvg->setContentType(Plasma::Svg::ImageSet); // ToWoC
-        d->backgroundSvg->setContainsMultipleImages(true);
+        // d->backgroundSvg->setContainsMultipleImages(true);
     }
 
     notifyUpdated();

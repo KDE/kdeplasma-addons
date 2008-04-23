@@ -69,20 +69,37 @@ public:
     ToggleExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
+    /**
+     * Destroys Lancelot::ToggleExtenderButton
+     */
     virtual ~ToggleExtenderButton();
 
+    /**
+     * @returns whether the button is in pressed state
+     */
     bool isPressed() const;
+
+    /**
+     * Sets whether the button is in pressed state
+     */
     void setPressed(bool pressed = true);
+
+public slots:
+    /**
+     * Toggles the pressed state
+     */
+    void toggle();
+
+Q_SIGNALS:
+    /**
+     * This signal is sent when the pressed state is changed
+     * @param pressed the new state
+     */
+    void toggled(bool pressed);
 
 protected:
     Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
-public slots:
-    void toggle();
-
-Q_SIGNALS:
-    void toggled(bool pressed);
 
 private:
     class Private;

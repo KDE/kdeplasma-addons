@@ -155,9 +155,12 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
 
     // Background Painting
     if (Plasma::Svg * svg = d->group->backgroundSvg()) {
-        kDebug() << "Painting SVG background";
-        svg->resize(size());
-        svg->paint(painter, 0, 0, element);
+        kDebug() << "Painting SVG background " << svg->imagePath();
+        kDebug() << "Resizing to " << size();
+
+        // TODO: Fix rendering - it is pixelated
+        // svg->resize(size());  // something's wrong
+        svg->paint(painter, QRectF(QPointF(), size()), element);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         kDebug() << "Painting simple background";
@@ -174,6 +177,22 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
 
     }
 
+}
+
+void Widget::geometryUpdated()
+{
+
+}
+
+void Widget::setGeometry(const QRectF & rect)
+{
+    QGraphicsWidget::setGeometry(rect);
+    geometryUpdated();
+}
+
+void Widget::setGeometry(qreal x, qreal y, qreal w, qreal h)
+{
+    Widget::setGeometry(QRectF(x, y, w, h));
 }
 
 } // namespace Lancelot
