@@ -29,9 +29,10 @@
 #include <KColorDialog>
 
 Notes::Notes(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    m_notes_theme("widgets/notes", this)
+    : Plasma::Applet(parent, args)
+    , m_notes_theme(this)
 {
+    m_notes_theme.setImagePath("widgets/notes");
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
