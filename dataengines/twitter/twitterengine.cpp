@@ -89,7 +89,7 @@ Plasma::DataEngine::Data TwitterEngine::config() const
     return QStringList() << "Timeline";
 }*/
 
-bool TwitterEngine::sourceRequested(const QString &name)
+bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
     kDebug() << name;
     if (name != "UserImages" && name != "LatestImage" && ! name.startsWith("Error")
@@ -97,7 +97,7 @@ bool TwitterEngine::sourceRequested(const QString &name)
         return false;
     }
     setData(name, DataEngine::Data()); //need to have something because we're async.
-    updateSource(name); //start a download
+    updateSourceEvent(name); //start a download
     return true;
 }
 
@@ -172,7 +172,7 @@ void TwitterEngine::requestFinished(int id, bool error)
         //update every bloody timeline we've got
         foreach (QString source, sources()) {
             if (source.startsWith("Timeline")) {
-                updateSource(source);
+                updateSourceEvent(source);
             }
         }
         break;
@@ -232,7 +232,7 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
 //also called by twitter from sourceRequested
 //and when it thinks an update would be useful
 //always returns false becaues everything is async
-bool TwitterEngine::updateSource(const QString &source)
+bool TwitterEngine::updateSourceEvent(const QString &source)
 {
     kDebug() << source;
     //right now it only makes sense to do an update on timelines

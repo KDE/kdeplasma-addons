@@ -47,7 +47,7 @@ void ComicEngine::init()
 {
 }
 
-bool ComicEngine::updateSource( const QString &identifier )
+bool ComicEngine::updateSourceEvent( const QString &identifier )
 {
     // check whether it is cached already...
     if ( CachedProvider::isCached( identifier ) ) {
@@ -97,11 +97,11 @@ bool ComicEngine::updateSource( const QString &identifier )
     return true;
 }
 
-bool ComicEngine::sourceRequested( const QString &identifier )
+bool ComicEngine::sourceRequestEvent( const QString &identifier )
 {
     setData( identifier, DataEngine::Data() );
 
-    return updateSource( identifier );
+    return updateSourceEvent( identifier );
 }
 
 void ComicEngine::finished( ComicProvider *provider )

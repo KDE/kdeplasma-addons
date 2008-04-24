@@ -54,10 +54,10 @@ class EbnEngine : public Plasma::DataEngine
 
     protected:
         void init();
-        bool sourceRequested(const QString &name);
+        bool sourceRequestEvent(const QString &name);
 
     protected slots:
-        bool updateSource(const QString &name);
+        bool updateSourceEvent(const QString &name);
         void processFeed(Syndication::Loader* loader,
                          Syndication::FeedPtr feed,
                          Syndication::ErrorCode error);

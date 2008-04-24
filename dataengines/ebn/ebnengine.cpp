@@ -42,7 +42,7 @@ void EbnEngine::init()
 {
 }
 
-bool EbnEngine::updateSource(const QString &name)
+bool EbnEngine::updateSourceEvent(const QString &name)
 {
     QString section = name.section('/', 0, 0, QString::SectionSkipEmpty);
     QString component = name.section('/', 1, 1, QString::SectionSkipEmpty);
@@ -60,9 +60,9 @@ bool EbnEngine::updateSource(const QString &name)
     return false;
 }
 
-bool EbnEngine::sourceRequested(const QString &name)
+bool EbnEngine::sourceRequestEvent(const QString &name)
 {
-    updateSource(name);
+    updateSourceEvent(name);
 
     return true;
 }

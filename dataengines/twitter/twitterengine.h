@@ -70,12 +70,12 @@ class TwitterEngine : public Plasma::DataEngine
 
     protected:
         //from DataEngine
-        bool sourceRequested(const QString &name);
+        bool sourceRequestEvent(const QString &name);
 
     protected slots:
         void requestFinished(int id, bool error);
         void anonRequestFinished(int id, bool error);
-        bool updateSource(const QString &source);
+        bool updateSourceEvent(const QString &source);
 
     private:
         void updateTimeline();

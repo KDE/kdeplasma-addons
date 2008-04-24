@@ -46,10 +46,10 @@ class ComicEngine : public Plasma::DataEngine
 
     protected:
         void init();
-        bool sourceRequested( const QString &identifier );
+        bool sourceRequestEvent( const QString &identifier );
 
     protected Q_SLOTS:
-        bool updateSource( const QString &identifier );
+        bool updateSourceEvent( const QString &identifier );
 
     private Q_SLOTS:
         void finished( ComicProvider* );
