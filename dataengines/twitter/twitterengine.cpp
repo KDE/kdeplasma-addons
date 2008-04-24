@@ -144,7 +144,7 @@ void TwitterEngine::requestFinished(int id, bool error)
     }
     kDebug() << source;
 
-    clearData("Error");
+    removeAllData("Error");
 
     if (m_http->lastResponse().statusCode() != 200) {
         //the clearing of a general error probably shouldn't clear one of these
@@ -155,7 +155,7 @@ void TwitterEngine::requestFinished(int id, bool error)
         setData(source, "description", m_http->lastResponse().reasonPhrase());
         return;
     }
-    clearData("Error:" + source);
+    removeAllData("Error:" + source);
 
     QByteArray data = m_http->readAll();
     QDomDocument xml;
@@ -203,7 +203,7 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
         setData("Error", "description", m_anonHttp->errorString());
         return;
     }
-    clearData("Error");
+    removeAllData("Error");
 
     if (m_anonHttp->lastResponse().statusCode() != 200) {
         kDebug() << "not ok!" << m_anonHttp->lastResponse().statusCode() << m_anonHttp->lastResponse().reasonPhrase();
@@ -211,7 +211,7 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
         setData("Error:UserImages", "description", m_http->lastResponse().reasonPhrase());
         return;
     }
-    clearData("Error:UserImages");
+    removeAllData("Error:UserImages");
 
     QByteArray data = m_anonHttp->readAll();
 
@@ -222,7 +222,7 @@ void TwitterEngine::anonRequestFinished(int id, bool error)
         QPixmap pm = QPixmap::fromImage(img).scaled(48, 48); //FIXME do we really want to do this?
         //TODO instead of these two sources, maybe provide the ability to query a specific user?
         setData("UserImages", user, pm);
-        clearData("LatestImage");
+        removeAllData("LatestImage");
         setData("LatestImage", user, pm);
         //FIXME user's own image needs an explicit request somehow. is there a userinfo xml?
     }
@@ -313,7 +313,7 @@ void TwitterEngine::getUserInfo(const QString &who)
 void TwitterEngine::parseStatuses(QDomNodeList updates, const QString& source)
 {
     //kDebug() << source;
-    clearData(source); //get rid of the old ones
+    removeAllData(source); //get rid of the old ones
     for (uint i = 0; i<updates.length(); i++) {
         QDomNode n = updates.at(i);
 
