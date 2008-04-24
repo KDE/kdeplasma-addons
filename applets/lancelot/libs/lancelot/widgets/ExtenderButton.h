@@ -34,8 +34,8 @@ namespace Lancelot
 {
 
 /**
- * Button widget with special activation options beside clicking
- * - hover and extender activation
+ * Button widget with special activation options beside
+ * clicking - hover and extender activation
  *
  * @author Ivan Cukic
  */

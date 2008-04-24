@@ -196,21 +196,21 @@ ExtenderButton::~ExtenderButton()
 
 QRectF ExtenderButton::boundingRect() const
 {
-    if (!isHovered() || d->extenderPosition == NoExtender)
+    //if (!isHovered() || d->extenderPosition == NoExtender)
         return QRectF(0, 0, size().width(), size().height());
-    switch (d->extenderPosition) {
-    case TopExtender:
-        return QRectF(0, - EXTENDER_SIZE, size().width(), size().height() + EXTENDER_SIZE);
-    case BottomExtender:
-        return QRectF(0, 0, size().width(), size().height() + EXTENDER_SIZE);
-    case LeftExtender:
-        return QRectF(- EXTENDER_SIZE, 0, size().width() + EXTENDER_SIZE, size().height());
-    case RightExtender:
-        return QRectF(0, 0, size().width() + EXTENDER_SIZE, size().height());
-    case NoExtender:
-        return QRectF(0, 0, size().width(), size().height());
-    }
-    return QRectF();
+    //switch (d->extenderPosition) {
+    //case TopExtender:
+    //    return QRectF(0, - EXTENDER_SIZE, size().width(), size().height() + EXTENDER_SIZE);
+    //case BottomExtender:
+    //    return QRectF(0, 0, size().width(), size().height() + EXTENDER_SIZE);
+    //case LeftExtender:
+    //    return QRectF(- EXTENDER_SIZE, 0, size().width() + EXTENDER_SIZE, size().height());
+    //case RightExtender:
+    //    return QRectF(0, 0, size().width() + EXTENDER_SIZE, size().height());
+    //case NoExtender:
+    //    return QRectF(0, 0, size().width(), size().height());
+    //}
+    //return QRectF();
 }
 
 void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)

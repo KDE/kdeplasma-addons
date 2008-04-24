@@ -31,13 +31,11 @@ namespace Lancelot
 {
 
 /**
- * A Widget with a common appeareance.
+ * Provides a common appeareance with an icon, title
+ * and a description. %Layout can be vertical or
+ * horizontal.
  *
  * @author Ivan Cukic
- *
- * Provides a common appeareance with an icon, title
- * and a description. Layout can be vertical or
- * horizontal.
  *
  * The icon can be a QIcon or contained in a Plasma::Svg
  */

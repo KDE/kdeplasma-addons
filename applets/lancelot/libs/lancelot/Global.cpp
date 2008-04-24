@@ -289,6 +289,7 @@ void Instance::deactivateAll() {
 Instance::Instance()
   : d(new Private)
 {
+    // TODO: Allow other applications to be privileged
     if (Instance::d->hasApplication) {
         Plasma::Theme::self()->setApplication("Lancelot");
     }
