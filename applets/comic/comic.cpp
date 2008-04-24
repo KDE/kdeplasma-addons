@@ -163,7 +163,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     if ( !mWebsiteUrl.isEmpty() ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         height -= fm.height();
-        p->setPen( Plasma::Theme::defaultTheme()->textColor() );
+        p->setPen( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
         p->drawText( QRectF( s_arrowWidth, height, imageWidth, fm.height() ),
                      Qt::AlignRight, mWebsiteUrl.host() );
     }
@@ -177,7 +177,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth - 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth - 5, height / 2 + 15 ) );
 
-        p->setBrush( Plasma::Theme::defaultTheme()->textColor() );
+        p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
         p->drawPolygon( arrow );
     }
     if ( mShowNextButton ) {
@@ -186,7 +186,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( s_arrowWidth + imageWidth + 5, height / 2 - 15 ) );
         arrow.setPoint( 2, QPoint( s_arrowWidth + imageWidth + 5, height / 2 + 15 ) );
 
-        p->setBrush( Plasma::Theme::defaultTheme()->textColor() );
+        p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
         p->drawPolygon( arrow );
     }
 
