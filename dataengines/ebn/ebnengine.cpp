@@ -30,8 +30,8 @@
 EbnEngine::EbnEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
-    setMinimumUpdateInterval(60 * 1000); // one minute
-    setUpdateInterval(60 * 60 * 1000); // one hour
+    setMinimumPollingInterval(60 * 1000); // one minute
+    setPollingInterval(60 * 60 * 1000); // one hour
 }
 
 EbnEngine::~EbnEngine()

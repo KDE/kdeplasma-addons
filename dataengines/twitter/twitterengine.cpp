@@ -47,7 +47,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     m_anonHttp = new QHttp();
     connect(m_anonHttp,SIGNAL(requestFinished(int,bool)), this, SLOT(anonRequestFinished(int,bool)));
 
-    setMinimumUpdateInterval(2 * 1000);
+    setMinimumPollingInterval(2 * 1000);
 }
 
 TwitterEngine::~TwitterEngine()

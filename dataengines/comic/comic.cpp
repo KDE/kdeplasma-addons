@@ -30,7 +30,7 @@
 ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args ), mEmptySuffix(false)
 {
-    setUpdateInterval( 0 );
+    setPollingInterval( 0 );
 
     KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
     Q_FOREACH ( KService::Ptr service, services ) {
