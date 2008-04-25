@@ -22,7 +22,7 @@
 
 #include <QTextEdit>
 #include <QGraphicsLinearLayout>
-#include <QGraphicsProxyWidget>
+#include <QGraphicsTextItem>
 
 #include <KConfigDialog>
 #include <KConfigGroup>
@@ -39,81 +39,74 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
     setDrawStandardBackground(false);
     resize(256, 256);
+
     m_textEdit = new QTextEdit();
+    m_layout = new QGraphicsLinearLayout();
+    m_proxy = new QGraphicsProxyWidget(this);
+    updateTextGeometry();
 }
 
 void Notes::init()
 {
-
     m_notes_theme.setContainsMultipleImages(false);
 
-
-    m_textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
+    m_proxy->setWidget(m_textEdit);
+    m_proxy->show();
+    m_textEdit->setStyleSheet("QTextEdit { border: none }");
     m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
-    m_textEdit->setAutoFillBackground(false);
+    m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
+    m_textEdit->viewport()->setAutoFillBackground(false);
+    m_layout->addItem(m_proxy);
+
     KConfigGroup cg = config();
 
-    m_textEdit->setPlainText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
+    m_textEdit->setPlainText(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
     QString text = cg.readEntry("autoSave",QString());
     if (! text.isEmpty()) {
         m_textEdit->setPlainText(text);
     }
-    //FIXME this has no effect right now. try setTextInteractionFlags
-    //m_textEdit->setOpenExternalLinks(true);
     QFont font = cg.readEntry("font", QFont());
-    QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
-    
     m_textEdit->setFont(font);
+    QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->setTextColor(textColor);
-    m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
-    m_textEdit->viewport()->setAutoFillBackground(false);
-    m_textEdit->setStyleSheet("background: none");
 
-    m_proxy = new QGraphicsProxyWidget(this);
-    m_proxy->setWidget(m_textEdit);
-    m_proxy->show();
-
-    m_layout = new QGraphicsLinearLayout();
-    m_layout->setContentsMargins(0,0,0,0);
-    m_layout->setSpacing(0);
     setLayout(m_layout);
-    m_layout->addItem(m_proxy);
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote())); 
-    //updateTextGeometry();
+    updateTextGeometry();
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
 }
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
-    Q_UNUSED(constraints);
     //XXX why does everything break so horribly if I remove this line?
     setDrawStandardBackground(false);
-    //if (constraints & Plasma::SizeConstraint) {
-    //    updateTextGeometry();
-    //}
+    if (constraints & Plasma::SizeConstraint) {
+        updateTextGeometry();
+    }
 }
 
-/*
 void Notes::updateTextGeometry()
 {
-    //note: we're using a custom bg so we have no 'border': using boundingrect here is ok
-    //FIXME there's no way to force the height on a qgraphicstextitem :(
-    //const qreal xpad = boundingRect().width() / 10;
-    //const qreal ypad = boundingRect().height() / 10;
-    //m_textEdit->setGeometry(QRectF(xpad, ypad, boundingRect().width() - 2 * xpad, boundingRect().height() - 2 * ypad));
-    m_textEdit->setGeometry(geometry());
+    const qreal xpad = geometry().width() / 10;
+    const qreal ypad = geometry().height() / 10;
+    m_layout->setSpacing(xpad);
+    m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
 }
-*/
+
 void Notes::saveNote()
 {
+    KConfigGroup cg = config();
+    cg.writeEntry("autoSave", m_textEdit->toPlainText());
+    kDebug() << m_textEdit->toPlainText();
     emit configNeedsSaving();
 }
 
 Notes::~Notes()
 {
-    saveNote();
+    emit configNeedsSaving();
     //FIXME is it really ok to save from here?
     //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
     //text back. it was useful when there were load/save issues but it's silly now.
+    saveNote();
 }
 
 void Notes::paintInterface(QPainter *p,
@@ -121,15 +114,9 @@ void Notes::paintInterface(QPainter *p,
                            const QRect &contentsRect)
 {
     Q_UNUSED(option);
-    Q_UNUSED(contentsRect);
 
-    //p->setRenderHint(QPainter::SmoothPixmapTransform);
-    //p->setRenderHint(QPainter::Antialiasing);
-
-    //kDebug() << "painting" << geometry(); 
     m_notes_theme.resize(geometry().size());
-
-    m_notes_theme.paint(p, geometry().topLeft());
+    m_notes_theme.paint(p, contentsRect);
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
@@ -147,9 +134,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 void Notes::configAccepted()
 {
     prepareGeometryChange();
-
     KConfigGroup cg = config();
-
     bool changed = false;
 
     QFont newFont = ui.textFontButton->font();
@@ -160,6 +145,7 @@ void Notes::configAccepted()
     }
 
     QColor newColor = ui.textColorButton->color();
+    kDebug() << m_textEdit->textColor() << newColor;
     if (m_textEdit->textColor() != newColor) {
         changed = true;
         cg.writeEntry("textcolor", newColor);

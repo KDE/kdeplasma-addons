@@ -18,6 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
@@ -33,6 +34,7 @@
 
 class KDialog;
 class QSizeF;
+class QGraphicsTextItem;
 
 class Notes : public Plasma::Applet
 {
@@ -53,12 +55,14 @@ class Notes : public Plasma::Applet
         void saveNote();
 
     private:
-        //void updateTextGeometry();
+        void updateTextGeometry();
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
         QGraphicsProxyWidget *m_proxy;
         QTextEdit *m_textEdit;
         Ui::config ui;
+        //KDialog *m_dialog;
+
         QSizeF m_size;
 };
 
