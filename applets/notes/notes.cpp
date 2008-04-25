@@ -49,8 +49,8 @@ void Notes::init()
 
 
     m_textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
-
-
+    //m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
+    //m_textEdit->setAutoFillBackground(false);
     KConfigGroup cg = config();
 
     //m_textEdit->setDefaultText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
@@ -65,26 +65,26 @@ void Notes::init()
     
     m_textEdit->setFont(font);
     m_textEdit->setTextColor(textColor);
-    m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
-    m_textEdit->viewport()->setAutoFillBackground(false);
-    m_textEdit->setAutoFillBackground(false);
-    m_textEdit->setStyleSheet("background: none");
+    //m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
+    //m_textEdit->viewport()->setAutoFillBackground(false);
+    //m_textEdit->setStyleSheet("background: none");
 
     m_proxy = new QGraphicsProxyWidget(this);
-    m_proxy->setWidget(m_textEdit);
-    m_proxy->show();
+    //m_proxy->setWidget(m_textEdit);
+    //m_proxy->show();
 
     m_layout = new QGraphicsLinearLayout();
     m_layout->setContentsMargins(0,0,0,0);
     m_layout->setSpacing(0);
-    setLayout(m_layout);
-    m_layout->addItem(m_proxy);
+    //setLayout(m_layout);
+    //m_layout->addItem(m_proxy);
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote())); 
     //updateTextGeometry();
 }
 
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
+    Q_UNUSED(constraints);
     //XXX why does everything break so horribly if I remove this line?
     setDrawStandardBackground(false);
     //if (constraints & Plasma::SizeConstraint) {
@@ -121,13 +121,15 @@ void Notes::paintInterface(QPainter *p,
                            const QRect &contentsRect)
 {
     Q_UNUSED(option);
-    kDebug() << "painting";
+    Q_UNUSED(contentsRect);
 
-    m_notes_theme.resize((int)contentsRect.width(),
-                         (int)contentsRect.height());
+    kDebug() << "painting" << geometry(); 
+
+    m_notes_theme.resize((int)geometry().width(),
+                         (int)geometry().height());
     m_notes_theme.paint(p,
-                       (int)contentsRect.left(),
-                       (int)contentsRect.top());
+                       (int)geometry().left(),
+                       (int)geometry().top());
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
