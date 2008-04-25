@@ -49,11 +49,11 @@ void Notes::init()
 
 
     m_textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
-    //m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
-    //m_textEdit->setAutoFillBackground(false);
+    m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
+    m_textEdit->setAutoFillBackground(false);
     KConfigGroup cg = config();
 
-    //m_textEdit->setDefaultText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
+    m_textEdit->setPlainText(i18n("Welcome to Notes Plasmoid! Type your notes here..."));
     QString text = cg.readEntry("autoSave",QString());
     if (! text.isEmpty()) {
         m_textEdit->setPlainText(text);
@@ -65,19 +65,19 @@ void Notes::init()
     
     m_textEdit->setFont(font);
     m_textEdit->setTextColor(textColor);
-    //m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
-    //m_textEdit->viewport()->setAutoFillBackground(false);
-    //m_textEdit->setStyleSheet("background: none");
+    m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
+    m_textEdit->viewport()->setAutoFillBackground(false);
+    m_textEdit->setStyleSheet("background: none");
 
     m_proxy = new QGraphicsProxyWidget(this);
-    //m_proxy->setWidget(m_textEdit);
-    //m_proxy->show();
+    m_proxy->setWidget(m_textEdit);
+    m_proxy->show();
 
     m_layout = new QGraphicsLinearLayout();
     m_layout->setContentsMargins(0,0,0,0);
     m_layout->setSpacing(0);
-    //setLayout(m_layout);
-    //m_layout->addItem(m_proxy);
+    setLayout(m_layout);
+    m_layout->addItem(m_proxy);
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote())); 
     //updateTextGeometry();
 }
@@ -123,13 +123,13 @@ void Notes::paintInterface(QPainter *p,
     Q_UNUSED(option);
     Q_UNUSED(contentsRect);
 
-    kDebug() << "painting" << geometry(); 
+    //p->setRenderHint(QPainter::SmoothPixmapTransform);
+    //p->setRenderHint(QPainter::Antialiasing);
 
-    m_notes_theme.resize((int)geometry().width(),
-                         (int)geometry().height());
-    m_notes_theme.paint(p,
-                       (int)geometry().left(),
-                       (int)geometry().top());
+    //kDebug() << "painting" << geometry(); 
+    m_notes_theme.resize(geometry().size());
+
+    m_notes_theme.paint(p, geometry().topLeft());
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
@@ -137,7 +137,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage(widget, parent->windowTitle(), "battery");
+    parent->addPage(widget, parent->windowTitle(), "notes");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.textColorButton->setColor(m_textEdit->textColor());
