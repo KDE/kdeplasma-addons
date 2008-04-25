@@ -228,4 +228,5 @@ void Panel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
     }
 }
 
-}
+} // namespace Lancelot
+

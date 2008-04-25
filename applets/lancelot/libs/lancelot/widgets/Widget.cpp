@@ -198,3 +198,4 @@ void Widget::setGeometry(qreal x, qreal y, qreal w, qreal h)
 } // namespace Lancelot
 
 #include "Widget.moc"
+

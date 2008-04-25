@@ -184,4 +184,5 @@ void CardLayout::releaseManagedItems()
     }
 }
 
-}
+} // namespace Lancelot
+

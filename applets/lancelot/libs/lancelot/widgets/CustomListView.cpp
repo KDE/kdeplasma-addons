@@ -29,3 +29,4 @@ namespace Lancelot
 } // namespace Lancelot
 
 #include "CustomListView.moc"
+

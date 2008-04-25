@@ -382,3 +382,4 @@ Qt::Alignment BasicWidget::alignment() const
 } // namespace Lancelot
 
 #include "BasicWidget.moc"
+

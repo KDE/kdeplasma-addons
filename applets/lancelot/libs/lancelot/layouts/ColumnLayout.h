@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef COLUMNLAYOUT_H_
-#define COLUMNLAYOUT_H_
+#ifndef LANCELOT_COLUMN_LAYOUT_H_
+#define LANCELOT_COLUMN_LAYOUT_H_
 
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 
 #include <plasma/widgets/widget.h>
 #include <plasma/layouts/layout.h>
@@ -100,6 +100,7 @@ private:
     Private * const d;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*COLUMNLAYOUT_H_*/
+#endif /* LANCELOT_COLUMN_LAYOUT_H_ */
+

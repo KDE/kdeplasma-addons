@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PASSAGEWAYVIEWMODELS_H_
-#define PASSAGEWAYVIEWMODELS_H_
+#ifndef LANCELOT_PASSAGEWAY_VIEW_MODELS_H_
+#define LANCELOT_PASSAGEWAY_VIEW_MODELS_H_
 
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 
 #include "ActionListViewModels.h"
 
@@ -74,6 +74,7 @@ private:
     KIcon * m_modelIcon;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*PASSAGEWAYVIEWMODELS_H_*/
+#endif /* LANCELOT_PASSAGEWAY_VIEW_MODELS_H_ */
+

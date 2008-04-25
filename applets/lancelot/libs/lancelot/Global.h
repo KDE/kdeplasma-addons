@@ -29,7 +29,7 @@
 #include <KConfigGroup>
 #include <plasma/svg.h>
 
-#include "lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 
 namespace Lancelot
 {
@@ -226,7 +226,8 @@ public:
     /**
      * Active instance is the instance to which all currently created
      * widgets are inserted into.
-     * \note { Note that only one instance can be active at a time }
+     * \note
+     *   Note that only one instance can be active at a time
      * @returns a pointer to the active instance
      */
     static Instance * activeInstance();
@@ -254,6 +255,7 @@ private:
     Private * d;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*GLOBAL_H_*/
+#endif /* LANCELOT_GLOBAL_H_ */
+

@@ -92,4 +92,5 @@ void PassagewayViewModelProxy::activate(int index)
     m_model->activated(index);
 }
 
-}
+} // namespace Lancelot
+

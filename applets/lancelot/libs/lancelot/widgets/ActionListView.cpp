@@ -584,6 +584,7 @@ int ActionListView::preferredItemHeight() { return m_preferredItemHeight; }
 void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = height; }
 int ActionListView::categoryItemHeight() { return m_categoryItemHeight; }
 
-}
+} // namespace Lancelot
 
 #include "ActionListView.moc"
+

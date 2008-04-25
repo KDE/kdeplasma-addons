@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef TOGGLEEXTENDERBUTTON_H_
-#define TOGGLEEXTENDERBUTTON_H_
+#ifndef LANCELOT_TOGGLE_EXTENDER_BUTTON_H_
+#define LANCELOT_TOGGLE_EXTENDER_BUTTON_H_
 
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 
 #include "ExtenderButton.h"
 
@@ -108,4 +108,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /*TOGGLEEXTENDERBUTTON_H_*/
+#endif /* LANCELOT_TOGGLE_EXTENDER_BUTTON_H_ */
+

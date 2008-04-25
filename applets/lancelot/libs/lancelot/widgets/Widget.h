@@ -20,11 +20,11 @@
 #ifndef LANCELOT_WIDGET_H_
 #define LANCELOT_WIDGET_H_
 
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
+#include <lancelot/Global.h>
 
 #include <QtGui>
 #include <QGraphicsWidget>
-#include "../Global.h"
 
 namespace Lancelot
 {
@@ -143,4 +143,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /*LANCELOT_WIDGET_H_*/
+#endif /* LANCELOT_WIDGET_H_ */
+

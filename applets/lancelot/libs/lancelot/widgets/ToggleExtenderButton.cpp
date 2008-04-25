@@ -96,3 +96,4 @@ void ToggleExtenderButton::paint(QPainter * painter,
 } // namespace Lancelot
 
 #include "ToggleExtenderButton.moc"
+

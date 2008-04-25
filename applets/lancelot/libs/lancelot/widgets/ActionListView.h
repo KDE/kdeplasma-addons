@@ -17,19 +17,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_LISTVIEW_H_
-#define LANCELOT_LISTVIEW_H_
+#ifndef LANCELOT_ACTION_LIST_VIEW_H_
+#define LANCELOT_ACTION_LIST_VIEW_H_
 
-#include "../lancelot.h"
-#include "../lancelot_export.h"
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
 
 #include <QtGui>
 #include <QtCore>
 #include <KDebug>
 #include <KIcon>
-#include "Widget.h"
-#include "ExtenderButton.h"
-#include "../models/ActionListViewModels.h"
+
+#include <lancelot/widgets/Widget.h>
+#include <lancelot/widgets/ExtenderButton.h>
+#include <lancelot/models/ActionListViewModels.h>
+
 namespace Lancelot
 {
 
@@ -142,6 +144,7 @@ private:
     friend class ScrollButton;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*LANCELOT_LISTVIEW_H_*/
+#endif /* LANCELOT_ACTION_LIST_VIEW_H_ */
+

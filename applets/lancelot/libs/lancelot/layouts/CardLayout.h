@@ -17,12 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Convert to dptr
+#ifndef LANCELOT_CARD_LAYOUT_H_
+#define LANCELOT_CARD_LAYOUT_H_
 
-#ifndef LANCELOT_CARDLAYOUT_H_
-#define LANCELOT_CARDLAYOUT_H_
-
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 
 #include <plasma/layouts/layout.h>
 #include <plasma/widgets/widget.h>
@@ -65,6 +63,7 @@ private:
     Private * d;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*CARDLAYOUT_H_*/
+#endif /* LANCELOT_CARD_LAYOUT_H_ */
+

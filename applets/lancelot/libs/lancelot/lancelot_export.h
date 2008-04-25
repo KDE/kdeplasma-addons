@@ -17,8 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef LANCELOT_EXPORT_H
-#define LANCELOT_EXPORT_H
+#ifndef LANCELOT_EXPORT_H_
+#define LANCELOT_EXPORT_H_
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
@@ -40,4 +40,5 @@
 // Override annotation. Does nothing.
 #define Override
 
-#endif // LANCELOT_EXPORT_H
+#endif // LANCELOT_EXPORT_H_
+

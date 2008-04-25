@@ -17,11 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_EXTENDERBUTTON_H_
-#define LANCELOT_EXTENDERBUTTON_H_
+#ifndef LANCELOT_EXTENDER_BUTTON_H_
+#define LANCELOT_EXTENDER_BUTTON_H_
 
-#include "../lancelot.h"
-#include "../lancelot_export.h"
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
 
 #include <QtGui>
 #include <QtCore>
@@ -129,4 +129,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /*EXTENDERBUTTON_H_*/
+#endif /* LANCELOT_EXTENDER_BUTTON_H_ */
+

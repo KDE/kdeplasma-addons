@@ -322,6 +322,7 @@ void MergedActionListViewModel::setHideEmptyModels(bool hide)
     emit updated();
 }
 
-}
+} // namespace Lancelot
 
 #include "ActionListViewModels.moc"
+

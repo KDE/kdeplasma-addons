@@ -363,4 +363,5 @@ void Instance::setHasApplication(bool value)
     Instance::Private::hasApplication = value;
 }
 
-}
+} // namespace Lancelot
+

@@ -271,4 +271,5 @@ void PassagewayView::setAtlasIcon(KIcon * icon)
     d->buttons.at(1)->setIcon(icon);
 }
 
-}
+} // namespace Lancelot
+

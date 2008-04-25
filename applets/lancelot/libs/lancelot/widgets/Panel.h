@@ -20,7 +20,7 @@
 #ifndef LANCELOT_PANEL_H_
 #define LANCELOT_PANEL_H_
 
-#include "../lancelot_export.h"
+#include <lancelot/lancelot_export.h>
 #include "plasma/plasma.h"
 
 #include "Widget.h"
@@ -141,6 +141,7 @@ private:
     Private * d;
 };
 
-}
+} // namespace Lancelot
 
-#endif /*PANEL_H_*/
+#endif /* LANCELOT_PANEL_H_*/
+

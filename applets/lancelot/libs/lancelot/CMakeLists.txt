@@ -44,6 +44,8 @@ set(lancelot_LIB_SRCS
         widgets/Panel.cpp
         widgets/ResizeBordersPanel.cpp
 
+        # widgets/ScrollPane.cpp
+
         # widgets/ActionListView.cpp
         # widgets/PassagewayView.cpp
         # widgets/WidgetPositioner.cpp
@@ -51,6 +53,7 @@ set(lancelot_LIB_SRCS
         # # widgets/CustomListView.cpp
 
         # Layouts
+        layouts/FullBorderLayout.cpp
         # layouts/CardLayout.cpp
         # layouts/ColumnLayout.cpp
 

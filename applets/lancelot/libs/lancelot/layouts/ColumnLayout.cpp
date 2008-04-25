@@ -293,6 +293,7 @@ void ColumnLayout::releaseManagedItems()
     }
 }
 
-}
+} // namespace Lancelot
+
 #include "ColumnLayout.moc"
 

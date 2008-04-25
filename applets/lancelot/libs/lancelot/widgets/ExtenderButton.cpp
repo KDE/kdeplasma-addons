@@ -196,6 +196,7 @@ ExtenderButton::~ExtenderButton()
 
 QRectF ExtenderButton::boundingRect() const
 {
+
     //if (!isHovered() || d->extenderPosition == NoExtender)
         return QRectF(0, 0, size().width(), size().height());
     //switch (d->extenderPosition) {

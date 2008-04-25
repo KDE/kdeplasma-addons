@@ -54,5 +54,5 @@ QSizeF WidgetPositioner::sizeHint() const
     return QSizeF();
 }
 
+} // namespace Lancelot
 
-}
