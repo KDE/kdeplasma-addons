@@ -39,7 +39,7 @@
 #include <KDialog>
 #include <QTime>
 #include <plasma/svg.h>
-#include <plasma/phase.h>
+#include <plasma/animator.h>
 #include <plasma/theme.h>
 
 using namespace Plasma;

@@ -27,7 +27,7 @@
 
 #include <KDebug>
 
-#include "plasma/phase.h"
+#include "plasma/animator.h"
 
 #define SIZE 48
 

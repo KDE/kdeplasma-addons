@@ -32,7 +32,7 @@
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
-#include <plasma/phase.h>
+#include <plasma/animator.h>
 
 class ConfigDialog;
 class QGraphicsSceneDragDropEvent;

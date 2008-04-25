@@ -25,7 +25,6 @@
 
 #include <KRecentDocument>
 #include <plasma/animator.h>
-#include <plasma/phase.h>
 
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
