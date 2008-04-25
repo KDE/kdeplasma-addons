@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PLASMA_NODE_LAYOUT
-#define PLASMA_NODE_LAYOUT
+#ifndef LANCELOT_NODE_LAYOUT_H_
+#define LANCELOT_NODE_LAYOUT_H_
 
 #include <QtCore/QMap>
 #include <cmath>
@@ -33,8 +33,8 @@ namespace Plasma {
  * Node layout has an advanced layouting mechanism. Every item's position
  * is defined by two nodes - one for top-left corner, and the other one for
  * bottom-right corner.
- * 
- * Each node is defined by a pair of relative (xr, yr) and a pair of 
+ *
+ * Each node is defined by a pair of relative (xr, yr) and a pair of
  * absolute (xa, ya) coordinates. The calculated node coordinates depend
  * on the size and position of the NodeLayout object in the following
  * manner:
@@ -43,7 +43,7 @@ namespace Plasma {
  *
  * Alternatively, the item's position can be defined by using one node and
  * one pair of relative coordinates (xr, yr). In that case, the item is sized
- * following the sizeHint(). The relative coordinates (this time they are 
+ * following the sizeHint(). The relative coordinates (this time they are
  * relative to the item's geometry, not the layout's) specify what point of
  * the item will be bound to the defined node.
  */
@@ -115,6 +115,7 @@ private:
     Private * const d;
 };
 
-}
+} // namespace Lancelot
 
-#endif /* PLASMA_NODE_LAYOUT */
+#endif /* LANCELOT_NODE_LAYOUT_H_ */
+

@@ -104,7 +104,7 @@ public:
         }
 
         QRectF result;
-        if (!item || !items.contains(item)) { 
+        if (!item || !items.contains(item)) {
             return QRectF();
         }
 
@@ -156,7 +156,7 @@ public:
 };
 
 
-NodeLayout::NodeLayout(LayoutItem * parent) 
+NodeLayout::NodeLayout(LayoutItem * parent)
   : Layout(parent), d(new Private(this))
 {
 }
@@ -266,4 +266,5 @@ LayoutItem * NodeLayout::takeAt(int i)
     return item;
 }
 
-}
+} // namespace Lancelot
+

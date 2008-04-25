@@ -1,0 +1,20 @@
+/** @mainpage Lancelot libraries
+
+This directory contains the classes making up liblancelot, which provides the
+framework built on top of %Plasma framework providing more advanced widgets
+and a bit different widget paradigm.
+
+@authors
+Ivan Cukic \<ivan.cukic+kde@gmail.com\><br>
+
+@maintainers
+Ivan Cukic \<ivan.cukic+kde@gmail.com\><br>
+
+@licenses
+@lgpl
+
+*/
+
+// DOXYGEN_SET_PROJECT_NAME = liblancelot
+// DOXYGEN_SET_RECURSIVE = YES
+// vim:ts=4:sw=4:expandtab:filetype=doxygen
