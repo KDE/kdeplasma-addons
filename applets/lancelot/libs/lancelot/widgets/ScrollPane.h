@@ -22,7 +22,7 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include "Panel.h"
+#include <lancelot/widgets/Panel.h>
 
 namespace Lancelot
 {
@@ -53,10 +53,10 @@ public:
      * Sets the currently displayed area.
      * This function tells the Scrollable widget which
      * part of it is shown after scrolling.
-     * \note
+     * @note
      *   The size of the scrolling viewport doesn't need to
      *   be equal to ScrollPane::viewportSize()
-     *
+     * @param viewport new viewport rectangle
      */
     virtual void viewportChanged(QRectF viewport) = 0;
 
@@ -64,13 +64,13 @@ public:
      * @param direction direction for which the scroll unit
      *                  size is needed
      * @returns scroll unit size
-     *
      */
     virtual qreal scrollUnit(Qt::Orientation direction) = 0;
 
     /**
      * Sets the scroll pane that contains this Scrollable
      * widget
+     * @param pane scroll pane
      */
     virtual void setScrollPane(ScrollPane * pane);
 

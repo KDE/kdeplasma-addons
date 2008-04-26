@@ -34,10 +34,11 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT Widget : public QGraphicsWidget
-{
+class LANCELOT_EXPORT Widget : public QGraphicsWidget {
     Q_OBJECT
+
     Q_PROPERTY ( QString name READ name WRITE setName )
+
 public:
     /**
      * Creates a new Lancelot::Widget
@@ -53,11 +54,13 @@ public:
 
     /**
      * Sets this widget's group by group name.
+     * @param groupName name of the group
      */
     virtual void setGroupByName(const QString & groupName);
 
     /**
      * Sets this widget's group.
+     * @param group new group
      */
     virtual void setGroup(WidgetGroup * group = NULL);
 
@@ -79,6 +82,7 @@ public:
 
     /**
      * Sets the name of the widget
+     * @param name new name
      */
     void setName(QString name);
 
@@ -113,11 +117,14 @@ protected:
     /**
      * Paints the widget background using the widget's SVG. Element name is
      * calculated according to widget's state
+     * @param painter painter to paint on
      */
     void paintBackground(QPainter * painter);
 
     /**
      * Paints the widget background using the specified element from widget's SVG
+     * @param painter painter to paint on
+     * @param element element to paint
      */
     void paintBackground(QPainter * painter, const QString & element);
 

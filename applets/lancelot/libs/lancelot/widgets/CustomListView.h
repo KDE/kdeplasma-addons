@@ -26,9 +26,10 @@
 #include <QtCore>
 #include <KDebug>
 #include <KIcon>
-#include "Widget.h"
-#include "ExtenderButton.h"
-#include "ActionListViewModels.h"
+
+#include <lancelot/widgets/Widget.h>
+#include <lancelot/widgets/ExtenderButton.h>
+#include <lancelot/widgets/ActionListViewModels.h>
 
 namespace Lancelot
 {

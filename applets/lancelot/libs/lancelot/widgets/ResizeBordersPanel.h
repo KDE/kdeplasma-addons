@@ -22,7 +22,7 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include "Panel.h"
+#include <lancelot/widgets/Panel.h>
 
 namespace Lancelot
 {

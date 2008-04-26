@@ -25,8 +25,9 @@
 
 #include <QtGui>
 #include <QtCore>
-#include "Widget.h"
-#include "BasicWidget.h"
+
+#include <lancelot/widgets/Widget.h>
+#include <lancelot/widgets/BasicWidget.h>
 
 #define EXTENDER_SIZE 20
 
@@ -42,8 +43,10 @@ namespace Lancelot
 class LANCELOT_EXPORT ExtenderButton : public BasicWidget
 {
     Q_OBJECT
+
     Q_PROPERTY ( ExtenderPosition extenderPosition READ extenderPosition WRITE setExtenderPosition )
     Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
+
 public:
     /**
      * Creates a new Lancelot::ExtenderButton
@@ -84,6 +87,7 @@ public:
 
     /**
      * Sets the position of the extender
+     * @param position new position
      */
     void setExtenderPosition(ExtenderPosition position);
 
@@ -94,6 +98,7 @@ public:
 
     /**
      * Sets the activation method of the ExtenderButton
+     * @param method new activation method
      */
     void setActivationMethod(ActivationMethod method);
 

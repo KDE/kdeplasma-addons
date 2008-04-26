@@ -193,7 +193,7 @@ void Panel::setGeometry(qreal x, qreal y, qreal w, qreal h)
     setGeometry(QRectF(x, y, w, h));
 }
 
-void Panel::setGeometry (const QRectF & geometry)
+void Panel::setGeometry(const QRectF & geometry)
 {
     Widget::setGeometry(geometry);
     if (d->background) {

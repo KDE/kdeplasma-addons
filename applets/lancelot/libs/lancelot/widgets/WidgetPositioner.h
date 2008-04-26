@@ -22,7 +22,7 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include "Widget.h"
+#include <lancelot/widgets/Widget.h>
 #include <QWidget>
 #include <QGraphicsView>
 

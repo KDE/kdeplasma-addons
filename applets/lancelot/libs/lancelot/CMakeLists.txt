@@ -2,6 +2,7 @@ project(liblancelot)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
+message ("Includes are : ${KDE4Defaults}")
 
 find_package(Plasma REQUIRED)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
@@ -27,6 +28,7 @@ include_directories(
         ${CMAKE_CURRENT_BINARY_DIR}
         ${KDE4_INCLUDES}
         ${PLASMA_INCLUDE_DIR}
+        ${LANCELOT_INCLUDE_DIR}
 )
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1209)
@@ -44,6 +46,7 @@ set(lancelot_LIB_SRCS
         widgets/Panel.cpp
         widgets/ResizeBordersPanel.cpp
 
+        widgets/ScrollBar.cpp
         # widgets/ScrollPane.cpp
 
         # widgets/ActionListView.cpp

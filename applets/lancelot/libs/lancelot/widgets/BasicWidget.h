@@ -42,9 +42,9 @@ namespace Lancelot
  */
 class LANCELOT_EXPORT BasicWidget: public Widget {
     Q_OBJECT
+
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
-
     Q_PROPERTY ( QString name READ name WRITE setName )
     Q_PROPERTY ( QString title READ title WRITE setTitle )
     Q_PROPERTY ( QString description READ description WRITE setDescription )
@@ -95,6 +95,7 @@ public:
 
     /**
      * Sets icon of this Lancelot::BasicWidget
+     * @param icon new icon
      */
     void setIcon(QIcon icon);
 
@@ -105,6 +106,7 @@ public:
 
     /**
      * Sets icon of this Lancelot::BasicWidget
+     * @param svg new icon
      */
     void setIconInSvg(Plasma::Svg * svg);
 
@@ -115,6 +117,7 @@ public:
 
     /**
      * Sets icon size of this Lancelot::BasicWidget
+     * @param size new icon size
      */
     void setIconSize(QSize size);
 
@@ -125,6 +128,7 @@ public:
 
     /**
      * Sets the inner orientation of this Lancelot::BasicWidget
+     * @param orientation new inner orientation
      */
     void setInnerOrientation(Qt::Orientation orientation);
 
@@ -135,6 +139,7 @@ public:
 
     /**
      * Sets alignment of this Lancelot::BasicWidget
+     * @param alignment new alignment
      */
     void setAlignment(Qt::Alignment alignment);
 
@@ -145,6 +150,7 @@ public:
 
     /**
      * Sets title of this Lancelot::BasicWidget
+     * @param title new title
      */
     void setTitle(const QString & title);
 
@@ -155,18 +161,19 @@ public:
 
     /**
      * Sets description of this Lancelot::BasicWidget
+     * @return description new description
      */
     void setDescription(const QString & description);
 
 protected:
-    Override virtual void paint(QPainter * painter,
-            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
     /**
      * Common implementation of icon/text/description
      * rendering
      */
     void paintForeground(QPainter * painter);
+
+    Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;

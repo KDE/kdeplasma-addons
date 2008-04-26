@@ -30,6 +30,7 @@
 #include "../widgets/ToggleExtenderButton.h"
 #include "../widgets/Panel.h"
 #include "../widgets/ResizeBordersPanel.h"
+#include "../widgets/ScrollBar.h"
 
 #include "../layouts/FullBorderLayout.h"
 
@@ -141,13 +142,25 @@ LancelotTestWindow::LancelotTestWindow()
 
     fbl->setGeometry(QRectF(600, 0, 400, 400));
 
+    // Scroll bar
+    Lancelot::ScrollBar * sb = new Lancelot::ScrollBar("");
+    m_corona->addItem(sb);
+    sb->setMinimum(100);
+    sb->setMaximum(200);
+    sb->setViewSize(40);
+    sb->setValue(30);
+    sb->setGeometry(QRectF(0, 0, 20, 200));
 
-
-
+    QTimeLine * timeLine = new QTimeLine(5000, this);
+    timeLine->setFrameRange(100, 300);
+    connect(timeLine, SIGNAL(frameChanged(int)), sb, SLOT(setValue(int)));
+    timeLine->setLoopCount(0);
 
 
     instance->activateAll();
     kDebug() << "########################## " << extenderButton->geometry();
+
+    timeLine->start();
 }
 
 LancelotTestWindow::~LancelotTestWindow()

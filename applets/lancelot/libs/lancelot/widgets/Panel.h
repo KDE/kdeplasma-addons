@@ -21,9 +21,9 @@
 #define LANCELOT_PANEL_H_
 
 #include <lancelot/lancelot_export.h>
-#include "plasma/plasma.h"
+#include <plasma/plasma.h>
 
-#include "Widget.h"
+#include <lancelot/widgets/Widget.h>
 
 #include <QIcon>
 
@@ -38,9 +38,11 @@ namespace Lancelot
 class LANCELOT_EXPORT Panel: public Widget
 {
     Q_OBJECT
+
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
     Q_PROPERTY ( QString title READ title WRITE setTitle )
+
 public:
     /**
      * Creates a new Lancelot::Panel
@@ -74,6 +76,7 @@ public:
 
     /**
      * Sets title of this Lancelot::BasicWidget
+     * @param title new title
      */
     void setTitle(const QString & title);
 
@@ -84,6 +87,7 @@ public:
 
     /**
      * Sets icon of this Lancelot::BasicWidget
+     * @param icon new icon
      */
     void setIcon(QIcon icon);
 
@@ -94,6 +98,7 @@ public:
 
     /**
      * Sets icon size of this Lancelot::BasicWidget
+     * @param size new icon size
      */
     void setIconSize(QSize size);
 
@@ -105,6 +110,7 @@ public:
     /**
      * Sets the layout item for the components in case the panel
      * should contain more than one item at a time
+     * @param layoutItem the contained layout item
      */
     void setLayoutItem(QGraphicsLayoutItem * layoutItem);
 
@@ -115,6 +121,7 @@ public:
 
     /**
      * Sets the background image for the panel
+     * @param imagePath location of Svg to use as background
      */
     void setBackground(const QString & imagePath);
 

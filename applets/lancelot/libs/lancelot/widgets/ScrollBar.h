@@ -20,10 +20,111 @@
 #ifndef LANCELOT_SCROLL_BAR_H_
 #define LANCELOT_SCROLL_BAR_H_
 
-#include <lancelot/ExtenderButton.h>
+#include <lancelot/lancelot_export.h>
+#include <QtGui>
+#include <QtCore>
+#include <lancelot/widgets/Widget.h>
 
 namespace Lancelot
 {
+
+/**
+ * A widget implementing scroll bars
+ *
+ * @author Ivan Cukic
+ */
+class LANCELOT_EXPORT ScrollBar: public Widget {
+    Q_OBJECT
+
+    Q_PROPERTY ( int minimum READ minimum WRITE setMinimum )
+    Q_PROPERTY ( int maximum READ maximum WRITE setMaximum )
+    Q_PROPERTY ( int value READ value WRITE setValue )
+    Q_PROPERTY ( int viewSize READ viewSize WRITE setViewSize )
+    Q_PROPERTY ( Qt::Orientation orientation READ orientation WRITE setOrientation )
+
+public:
+    /**
+     * Creates a new Lancelot::ScrollBar
+     * @param parent parent item
+     */
+    ScrollBar(QString name, QGraphicsItem * parent = NULL);
+
+    /**
+     * Destroys this Lancelot::ScrollBar
+     */
+    ~ScrollBar();
+
+    /**
+     * Sets the minimum scroll bar value
+     * @param value new value
+     */
+    void setMinimum(int value);
+
+    /**
+     * @returns the minimum scroll bar value
+     */
+    int minimum() const;
+
+    /**
+     * Sets the maximum scroll bar value
+     * @param value new value
+     */
+    void setMaximum(int value);
+
+    /**
+     * @returns the maximum scroll bar value
+     */
+    int maximum() const;
+
+    /**
+     * @returns the scrollbar position
+     */
+    int value() const;
+
+    /**
+     * Sets the size of the view on which the handle size depends
+     * @param value new value
+     */
+    void setViewSize(int value);
+
+    /**
+     * @returns the size of the view on which the handle size depends
+     */
+    int viewSize() const;
+
+    /**
+     * Sets the scrollbar orientation
+     * @param value new value
+     */
+    void setOrientation(Qt::Orientation value);
+
+    /**
+     * @returns the scrollbar orientation
+     */
+    Qt::Orientation orientation() const;
+
+    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    Override virtual void setGeometry(const QRectF & geometry);
+    Override virtual void setGroup(WidgetGroup * group = NULL);
+
+public Q_SLOTS:
+    /**
+     * Sets the scrollbar position
+     * @param value new value
+     */
+    void setValue(int value);
+
+Q_SIGNALS:
+    /**
+     * Signal that is emitted when the scrollbar position is changed
+     * @param value new value
+     */
+    void valueChanged(int value);
+
+private:
+    class Private;
+    Private * d;
+};
 
 } // namespace Lancelot
 

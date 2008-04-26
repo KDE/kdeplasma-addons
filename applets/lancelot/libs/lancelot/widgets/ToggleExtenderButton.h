@@ -22,7 +22,7 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include "ExtenderButton.h"
+#include <lancelot/widgets/ExtenderButton.h>
 
 namespace Lancelot
 {
@@ -35,7 +35,9 @@ namespace Lancelot
  */
 class LANCELOT_EXPORT ToggleExtenderButton : public Lancelot::ExtenderButton {
     Q_OBJECT
+
     Q_PROPERTY ( bool pressed READ isPressed WRITE setPressed )
+
 public:
     /**
      * Creates a new Lancelot::ToggleExtenderButton
@@ -81,8 +83,12 @@ public:
 
     /**
      * Sets whether the button is in pressed state
+     * @param passed the new state
      */
     void setPressed(bool pressed = true);
+
+    Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 public slots:
     /**
@@ -96,10 +102,6 @@ Q_SIGNALS:
      * @param pressed the new state
      */
     void toggled(bool pressed);
-
-protected:
-    Override virtual void paint(QPainter * painter,
-            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;

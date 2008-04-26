@@ -73,11 +73,14 @@ public:
     /**
      * Adds item in the center.
      * Equal to: addItem(item, Center);
+     * @param item item to add
      */
     void addItem(QGraphicsLayoutItem * item);
 
     /**
      * Adds item at the specified position
+     * @param item item to add
+     * @param position position to which to add
      */
     void addItem(QGraphicsLayoutItem * item, Place position);
 
@@ -87,12 +90,16 @@ public:
      *
      * For left and right widgets, it sets the width; while
      * for top and bottom ones, it sets the height.
+     *
+     * @param size size of the border
+     * @param border border for which the size is being specified
      */
     void setSize(qreal size, Border border);
 
     /**
      * Activates the automatic sizing of a border widget,
      * according to it's sizeHint()
+     * @param border border for which the auto size is being specified
      */
     void setAutoSize(Border border);
 
@@ -101,6 +108,8 @@ public:
      *
      * If automatic sizing for that border widget is activated,
      * it will return a value less than zero.
+     *
+     * @param border border for which the size is requested
      */
     qreal size(Border border);
 

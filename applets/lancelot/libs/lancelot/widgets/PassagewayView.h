@@ -23,12 +23,12 @@
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
-#include "Widget.h"
+#include <lancelot/widgets/Widget.h>
 #include <KIcon>
 
-#include "Panel.h"
-#include "ActionListView.h"
-#include "PassagewayView.h"
+#include <lancelot/widgets/Panel.h>
+#include <lancelot/widgets/ActionListView.h>
+#include <lancelot/widgets/PassagewayView.h>
 #include <lancelot/layouts/ColumnLayout.h>
 
 #include <lancelot/models/PassagewayViewModels.h>
