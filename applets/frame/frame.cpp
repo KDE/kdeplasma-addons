@@ -117,7 +117,7 @@ void Frame::init()
 void Frame::constraintsUpdated(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
-        setBackgroundHints(NoBackground);
+        setBackgroundHints(Plasma::Applet::NoBackground);
     }
 }
 
