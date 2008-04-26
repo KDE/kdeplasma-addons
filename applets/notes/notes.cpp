@@ -37,7 +37,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
-    setDrawStandardBackground(false);
+    setBackgroundHints(NoBackground);
     resize(256, 256);
 
     m_textEdit = new QTextEdit();
@@ -78,7 +78,7 @@ void Notes::init()
 void Notes::constraintsUpdated(Plasma::Constraints constraints)
 {
     //XXX why does everything break so horribly if I remove this line?
-    setDrawStandardBackground(false);
+    setBackgroundHints(NoBackground);
     if (constraints & Plasma::SizeConstraint) {
         updateTextGeometry();
     }
