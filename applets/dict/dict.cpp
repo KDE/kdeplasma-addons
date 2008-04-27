@@ -128,7 +128,7 @@ QSizeF Dict::contentSizeHint() const
 //      return QSizeF(contentSize());
 }
 
-void Dict::constraintsUpdated(Plasma::Constraints constraints)
+void Dict::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         //updateGeometry();

@@ -114,9 +114,9 @@ Qt::Orientations Clock::expandingDirections() const
 //     return contentSize();
 // }
 
-void Clock::constraintsUpdated(Plasma::Constraints constraints)
+void Clock::constraintsEvent(Plasma::Constraints constraints)
 {
-    kDebug() << "constraintsUpdated() called";
+    kDebug() << "constraintsEvent() called";
 
     if ( (m_oldContentSize.toSize() != geometry().size() && m_oldContentSize.toSize() != QSize (0,0)) || m_configUpdated == true ) { //The size changed or config was updated
         kDebug() << "The content's size [geometry().size()] changed! old: " << m_oldContentSize << "new: " << geometry().size();

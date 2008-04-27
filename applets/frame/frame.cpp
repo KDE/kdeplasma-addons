@@ -114,7 +114,7 @@ void Frame::init()
     initSlideShow();
 }
 
-void Frame::constraintsUpdated(Plasma::Constraints constraints)
+void Frame::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(Plasma::Applet::NoBackground);

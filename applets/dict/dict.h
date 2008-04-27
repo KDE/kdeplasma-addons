@@ -51,7 +51,7 @@ class Dict : public Plasma::Applet
 
         void setPath(const QString&);
         QSizeF contentSizeHint() const;
-        void constraintsUpdated(Plasma::Constraints);
+        void constraintsEvent(Plasma::Constraints);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);

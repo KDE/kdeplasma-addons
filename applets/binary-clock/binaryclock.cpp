@@ -177,7 +177,8 @@ void BinaryClock::configAccepted()
     }
 
     connectToEngine();
-    constraintsUpdated(Plasma::AllConstraints);
+    //TODO: Why we don't call updateConstraints?
+    constraintsEvent(Plasma::AllConstraints);
     cg.config()->sync();
 }
 

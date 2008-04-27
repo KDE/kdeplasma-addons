@@ -44,7 +44,7 @@ class Clock : public Plasma::Applet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect);
         void setPath(const QString&);
 //         QSizeF contentSizeHint() const;
-        void constraintsUpdated(Plasma::Constraints constraints);
+        void constraintsEvent(Plasma::Constraints constraints);
         void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 Qt::Orientations expandingDirections() const;
