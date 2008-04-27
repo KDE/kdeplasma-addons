@@ -51,7 +51,6 @@ public:
     qreal widthForHeight (qreal height) const;
 
     void updateGeometry ();
-    void constraintsUpdated (Plasma::Constraints constraints);
 
     void showConfigurationInterface();
     bool hasConfigurationInterface();
@@ -63,6 +62,9 @@ protected Q_SLOTS:
     void showLancelotSection(const QString & section);
 
     void configAccepted();
+
+protected:
+    void constraintsEvent (Plasma::Constraints constraints);
 
 private:
     QSignalMapper m_signalMapper;

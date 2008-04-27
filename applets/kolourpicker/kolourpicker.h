@@ -27,13 +27,13 @@ class Kolourpicker : public Plasma::Applet
         Kolourpicker(QObject *parent, const QVariantList &args);
         ~Kolourpicker();
 
-        void constraintsUpdated(Plasma::Constraints constraints);
         Qt::Orientations expandingDirections() const;
 
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual bool eventFilter(QObject *watched, QEvent *event);
         virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private slots:
         void grabClicked();

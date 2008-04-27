@@ -75,7 +75,7 @@ void Notes::init()
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
 }
 
-void Notes::constraintsUpdated(Plasma::Constraints constraints)
+void Notes::constraintsEvent(Plasma::Constraints constraints)
 {
     //XXX why does everything break so horribly if I remove this line?
     setBackgroundHints(Plasma::Applet::NoBackground);

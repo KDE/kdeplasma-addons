@@ -170,7 +170,7 @@ Kolourpicker::~Kolourpicker()
     delete m_historyMenu;
 }
 
-void Kolourpicker::constraintsUpdated(Plasma::Constraints constraints)
+void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         setDrawStandardBackground(false);

@@ -44,7 +44,6 @@ class Clock : public Plasma::Applet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect);
         void setPath(const QString&);
 //         QSizeF contentSizeHint() const;
-        void constraintsEvent(Plasma::Constraints constraints);
         void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 Qt::Orientations expandingDirections() const;
@@ -57,6 +56,9 @@ Qt::Orientations expandingDirections() const;
 //         void acceptedTimeStringState(bool);
         void configAccepted();
         void showCalendar(QGraphicsSceneMouseEvent *event);
+
+    protected:
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         void calculateTimeString();

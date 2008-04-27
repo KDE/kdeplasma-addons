@@ -49,7 +49,6 @@ class Frame : public Plasma::Applet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                             const QRect &contentsRect);
         void init();
-	void constraintsEvent(Plasma::Constraints constraints);
         QSizeF contentSizeHint() const;
 
     public slots:
@@ -65,6 +64,9 @@ class Frame : public Plasma::Applet
     private Q_SLOTS:
         void addDir();
         void removeDir();
+
+    protected:
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         void paintCache(const QStyleOptionGraphicsItem *option,

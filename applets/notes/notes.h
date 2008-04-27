@@ -47,12 +47,14 @@ class Notes : public Plasma::Applet
         void paintInterface(QPainter *painter,
                             const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);
-        void constraintsUpdated(Plasma::Constraints constraints);
 
     public slots:
         void createConfigurationInterface(KConfigDialog *parent);
         void configAccepted();
         void saveNote();
+
+    protected:
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         void updateTextGeometry();
