@@ -88,8 +88,8 @@ void Notes::constraintsEvent(Plasma::Constraints constraints)
 
 void Notes::updateTextGeometry()
 {
-    const qreal xpad = geometry().width() / 10;
-    const qreal ypad = geometry().height() / 10;
+    const qreal xpad = geometry().width() / 15;
+    const qreal ypad = geometry().height() / 15;
     m_layout->setSpacing(xpad);
     m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
 }
