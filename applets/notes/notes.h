@@ -24,8 +24,8 @@
 
 #include <QGraphicsLinearLayout>
 #include <QGraphicsProxyWidget>
-#include <QTextEdit>
 
+#include <KTextEdit>
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
@@ -57,11 +57,12 @@ class Notes : public Plasma::Applet
         void constraintsEvent(Plasma::Constraints constraints);
 
     private:
+        bool m_checkSpelling;
         void updateTextGeometry();
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
         QGraphicsProxyWidget *m_proxy;
-        QTextEdit *m_textEdit;
+        KTextEdit *m_textEdit;
         Ui::config ui;
         //KDialog *m_dialog;
 

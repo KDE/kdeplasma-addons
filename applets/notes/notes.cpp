@@ -40,7 +40,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setBackgroundHints(Plasma::Applet::NoBackground);
     resize(256, 256);
 
-    m_textEdit = new QTextEdit();
+    m_textEdit = new KTextEdit();
     m_layout = new QGraphicsLinearLayout();
     m_proxy = new QGraphicsProxyWidget(this);
     updateTextGeometry();
@@ -52,7 +52,8 @@ void Notes::init()
 
     m_proxy->setWidget(m_textEdit);
     m_proxy->show();
-    m_textEdit->setStyleSheet("QTextEdit { border: none }");
+    m_textEdit->setCheckSpellingEnabled(true);
+    m_textEdit->setFrameShape(QFrame::NoFrame);
     m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
     m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
     m_textEdit->viewport()->setAutoFillBackground(false);
@@ -69,7 +70,8 @@ void Notes::init()
     m_textEdit->setFont(font);
     QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->setTextColor(textColor);
-
+    m_checkSpelling = cg.readEntry("checkSpelling", true);
+    m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
     setLayout(m_layout);
     updateTextGeometry();
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
@@ -129,6 +131,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.textColorButton->setColor(m_textEdit->textColor());
     ui.textFontButton->setFont(m_textEdit->font());
+    ui.checkSpelling->setChecked(m_checkSpelling);
 }
 
 void Notes::configAccepted()
@@ -138,7 +141,7 @@ void Notes::configAccepted()
     bool changed = false;
 
     QFont newFont = ui.textFontButton->font();
-    if (m_textEdit->font() != newFont) {
+    if (m_textEdit->currentFont() != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
         m_textEdit->setFont(newFont);
@@ -150,6 +153,14 @@ void Notes::configAccepted()
         changed = true;
         cg.writeEntry("textcolor", newColor);
         m_textEdit->setTextColor(newColor);
+    }
+
+    bool spellCheck = ui.checkSpelling->isChecked();
+    if (spellCheck != m_checkSpelling) {
+        m_checkSpelling = spellCheck;
+        cg.writeEntry("checkSpelling", m_checkSpelling);
+        m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
+        changed = true;
     }
 
     if (changed) {
