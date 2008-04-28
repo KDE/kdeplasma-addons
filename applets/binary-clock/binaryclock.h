@@ -46,10 +46,12 @@ class BinaryClock : public Plasma::Applet
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void showConfigurationInterface();
 
     protected slots:
         void configAccepted();
+
+    protected:
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         void connectToEngine();
@@ -70,7 +72,6 @@ class BinaryClock : public Plasma::Applet
         QTime m_lastTimeSeen;
         QTime m_time;
 
-        KDialog *m_dialog;
         Ui::clockConfig ui;
 };
 

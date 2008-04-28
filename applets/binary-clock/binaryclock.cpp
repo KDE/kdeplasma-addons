@@ -20,7 +20,7 @@
 
 #include <QPainter>
 
-#include <KDialog>
+#include <KConfigDialog>
 #include <Plasma/DataEngine>
 
 #include "ui_clockConfig.h"
@@ -30,8 +30,7 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
     m_ledsColor(Qt::white),
     m_offLedsColor(QColor::fromRgb(255, 255, 255, 40)),
-    m_gridColor(QColor::fromRgb(255, 255, 255, 60)),
-    m_dialog(0)
+    m_gridColor(QColor::fromRgb(255, 255, 255, 60))
 {
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
@@ -122,18 +121,14 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
     update();
 }
 
-void BinaryClock::showConfigurationInterface()
+void BinaryClock::createConfigurationInterface(KConfigDialog *parent)
 {
-     if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption( i18nc("@title:window","Configure Clock") );
-
-        ui.setupUi(m_dialog->mainWidget());
-        m_dialog->mainWidget()->layout()->setMargin(0);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 
     ui.timeZones->setSelected(m_timezone, true);
     ui.timeZones->setEnabled(m_timezone != "Local");
@@ -141,8 +136,6 @@ void BinaryClock::showConfigurationInterface()
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
-
-    m_dialog->show();
 }
 
 void BinaryClock::configAccepted()
