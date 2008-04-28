@@ -166,7 +166,7 @@ void Frame::removeDir()
     }
 }
 
-void Frame::showConfigurationInterface()
+void Frame::createConfigurationInterface()
 {
    if ( !m_configDialog ) {
         m_configDialog = new ConfigDialog( 0 );

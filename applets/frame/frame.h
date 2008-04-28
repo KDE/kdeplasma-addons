@@ -52,7 +52,7 @@ class Frame : public Plasma::Applet
         QSizeF contentSizeHint() const;
 
     public slots:
-        void showConfigurationInterface();
+        void createConfigurationInterface();
 	void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
 
     protected Q_SLOTS:
