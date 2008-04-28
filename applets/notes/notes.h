@@ -49,12 +49,12 @@ class Notes : public Plasma::Applet
                             const QRect& contentsRect);
 
     public slots:
-        void createConfigurationInterface(KConfigDialog *parent);
         void configAccepted();
         void saveNote();
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         bool m_checkSpelling;
