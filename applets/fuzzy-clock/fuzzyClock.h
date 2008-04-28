@@ -50,7 +50,6 @@ Qt::Orientations expandingDirections() const;
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void showConfigurationInterface();
 
     protected slots:
 //         void acceptedTimeStringState(bool);
@@ -59,6 +58,7 @@ Qt::Orientations expandingDirections() const;
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         void calculateTimeString();
@@ -106,7 +106,6 @@ Qt::Orientations expandingDirections() const;
         bool m_showDay;
         QTime m_time;
         QDate m_date;
-        KDialog *m_dialog; //should we move this into another class?
         Plasma::Dialog *m_calendar;
         KLocale *m_locale;
         QVBoxLayout *m_layout;

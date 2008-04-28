@@ -33,7 +33,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KSharedConfig>
-#include <KDialog>
+#include <KConfigDialog>
 
 #include <KSystemTimeZones>
 
@@ -49,7 +49,6 @@ Clock::Clock(QObject *parent, const QVariantList &args)
       m_showYear(false),
       m_showDay(false),
       m_showTimezone(false),
-      m_dialog(0),
       m_calendar(0),
       m_layout(0),
       m_oldContentSize(QSizeF (0,0))
@@ -218,18 +217,14 @@ void Clock::showCalendar(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void Clock::showConfigurationInterface()
+void Clock::createConfigurationInterface(KConfigDialog *parent)
 {
-    if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption( i18n("Configure Fuzzy-Clock") );
-        QWidget *widget = new QWidget;
-        ui.setupUi(widget);
-        m_dialog->setMainWidget(widget);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 
     ui.useLocalTimeZone->setChecked( m_useLocalTimezone );
     //FIXME: There are several bugs in KTimeZones. 1. Even though the correct zone is selected debug-output states "no such zon: 'nameofZone'"
@@ -251,7 +246,6 @@ void Clock::showConfigurationInterface()
 
      //Set focus to this widget, oxygen's colour for selected items in a non-focused widgets are not readable.
     ui.timeZones->setFocus( Qt::OtherFocusReason );
-    m_dialog->show();
 }
 
 void Clock::configAccepted()
