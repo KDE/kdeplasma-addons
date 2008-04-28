@@ -70,7 +70,7 @@ void Notes::init()
     m_textEdit->setFont(font);
     QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->setTextColor(textColor);
-    m_checkSpelling = cg.readEntry("checkSpelling", true);
+    m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
     setLayout(m_layout);
     updateTextGeometry();
