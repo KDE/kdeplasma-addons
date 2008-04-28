@@ -57,14 +57,18 @@ class Notes : public Plasma::Applet
         void createConfigurationInterface(KConfigDialog *parent);
 
     private:
+        int fontSize();
+        int m_autoFontPercent;
+        bool m_autoFont;
         bool m_checkSpelling;
         void updateTextGeometry();
+        QFont m_font;
+        QColor m_textColor;
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
         QGraphicsProxyWidget *m_proxy;
         KTextEdit *m_textEdit;
         Ui::config ui;
-        //KDialog *m_dialog;
 
         QSizeF m_size;
 };

@@ -24,6 +24,7 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
 
+#include <KGlobalSettings>
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KFontDialog>
@@ -43,6 +44,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     m_textEdit = new KTextEdit();
     m_layout = new QGraphicsLinearLayout();
     m_proxy = new QGraphicsProxyWidget(this);
+    m_autoFont = false;
     updateTextGeometry();
 }
 
@@ -66,10 +68,11 @@ void Notes::init()
     if (! text.isEmpty()) {
         m_textEdit->setPlainText(text);
     }
-    QFont font = cg.readEntry("font", QFont());
-    m_textEdit->setFont(font);
-    QColor textColor = cg.readEntry("textcolor", QColor(Qt::black));
-    m_textEdit->setTextColor(textColor);
+    m_font = cg.readEntry("font", KGlobalSettings::generalFont());
+    m_autoFont = cg.readEntry("autoFont", true);
+    m_autoFontPercent = cg.readEntry("autoFontPercent", 5);
+    m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
+    m_textEdit->setTextColor(m_textColor);
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
     setLayout(m_layout);
@@ -92,6 +95,20 @@ void Notes::updateTextGeometry()
     const qreal ypad = geometry().height() / 15;
     m_layout->setSpacing(xpad);
     m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
+    m_font.setPointSize(fontSize());
+    m_textEdit->setFont(m_font);
+}
+
+int Notes::fontSize()
+{
+    if (m_autoFont) {
+        int geo = qMax(geometry().width(), geometry().height());
+        int size = qMax(KGlobalSettings::smallestReadableFont().pointSize(), qRound(geo*m_autoFontPercent/100));
+        kDebug() << size << geo*m_autoFontPercent << geo << m_autoFontPercent << geometry();
+        return size;
+    } else {
+        return m_font.pointSize();
+    }
 }
 
 void Notes::saveNote()
@@ -104,7 +121,6 @@ void Notes::saveNote()
 
 Notes::~Notes()
 {
-    emit configNeedsSaving();
     //FIXME is it really ok to save from here?
     //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
     //text back. it was useful when there were load/save issues but it's silly now.
@@ -129,8 +145,10 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, parent->windowTitle(), "notes");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    ui.textColorButton->setColor(m_textEdit->textColor());
+    ui.textColorButton->setColor(m_textColor);
     ui.textFontButton->setFont(m_textEdit->font());
+    ui.autoFont->setChecked(m_autoFont);
+    ui.autoFontPercent->setValue(m_autoFontPercent);
     ui.checkSpelling->setChecked(m_checkSpelling);
 }
 
@@ -141,29 +159,46 @@ void Notes::configAccepted()
     bool changed = false;
 
     QFont newFont = ui.textFontButton->font();
-    if (m_textEdit->currentFont() != newFont) {
+    if (m_font != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
+        m_font = newFont;
+        m_font.setPointSize(fontSize());
         m_textEdit->setFont(newFont);
+    }
+
+    if (m_autoFont == ui.autoFont->isChecked()) {
+        changed = true;
+        m_autoFont = ui.autoFont->isChecked();
+        cg.writeEntry("autoFont", m_autoFont);
+    }
+
+    if (m_autoFontPercent != ui.autoFontPercent->value()) {
+        changed = true;
+        m_autoFontPercent = (ui.autoFontPercent->value());
+        cg.writeEntry("autoFontPercent", m_autoFontPercent);
     }
 
     QColor newColor = ui.textColorButton->color();
     kDebug() << m_textEdit->textColor() << newColor;
-    if (m_textEdit->textColor() != newColor) {
+    if (m_textColor != newColor) {
         changed = true;
-        cg.writeEntry("textcolor", newColor);
-        m_textEdit->setTextColor(newColor);
+        m_textColor = newColor;
+        cg.writeEntry("textcolor", m_textColor);
+        m_textEdit->setTextColor(m_textColor);
     }
 
     bool spellCheck = ui.checkSpelling->isChecked();
     if (spellCheck != m_checkSpelling) {
+        changed = true;
         m_checkSpelling = spellCheck;
         cg.writeEntry("checkSpelling", m_checkSpelling);
         m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
-        changed = true;
     }
 
     if (changed) {
+        kDebug() << "autoFont" << m_autoFont << m_autoFontPercent << ui.autoFontPercent->value();
+        updateTextGeometry();
         emit configNeedsSaving();
     }
 }
