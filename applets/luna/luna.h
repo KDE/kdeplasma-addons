@@ -24,7 +24,6 @@
 #include <Plasma/DataEngine>
 #include <Plasma/Svg>
 
-class KDialog;
 class Ui::lunaConfig;
 
 class Luna : public Plasma::Applet
@@ -39,10 +38,12 @@ class Luna : public Plasma::Applet
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void showConfigurationInterface();
 
     protected slots:
         void configAccepted();
+
+    protected:
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         void connectToEngine();
@@ -52,7 +53,6 @@ class Luna : public Plasma::Applet
         bool northHemisphere;
 
         Plasma::Svg *m_theme;
-        KDialog *m_dialog;
         Ui::lunaConfig ui;
 };
 

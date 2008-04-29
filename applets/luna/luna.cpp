@@ -26,7 +26,7 @@
 #include <Plasma/Theme>
 #include <KDialog>
 #include <KDebug>
-#include <KDialog>
+#include <KConfigDialog>
 
 #include "ui_lunaConfig.h"
 #include "phases.cpp"
@@ -34,20 +34,20 @@
 #include "luna.h"
 
 Luna::Luna(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    m_dialog(0)
+    : Plasma::Applet(parent, args)
 {
     setHasConfigurationInterface(true);
     setRemainSquare(true);
-    resize(QSize(128, 128));
+    resize(QSize(64, 64));
 
     counter = -1;
 }
 
 void Luna::init()
 {
-    m_theme = new Plasma::Svg("widgets/luna", this);
-    m_theme->setContentType(Plasma::Svg::ImageSet);
+    m_theme = new Plasma::Svg(this);
+    m_theme->setImagePath("widgets/luna");
+    m_theme->setContainsMultipleImages(true);
 
     if (!m_theme->isValid()) {
         setFailedToLaunch(true, i18n("The luna SVG file was not found"));
@@ -80,23 +80,17 @@ void Luna::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
     calcStatus(dt.toTime_t());
 }
 
-void Luna::showConfigurationInterface()
+void Luna::createConfigurationInterface(KConfigDialog *parent)
 {
-    if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption( i18nc("@title:window","Configure Luna") );
-        ui.setupUi(m_dialog->mainWidget());
-        m_dialog->mainWidget()->layout()->setMargin(0);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 
     ui.northenRadio->setChecked(northHemisphere);
     ui.southernRadio->setChecked(!northHemisphere);
-
-    m_dialog->show();
 }
 
 void Luna::configAccepted()
@@ -108,8 +102,6 @@ void Luna::configAccepted()
     cg.writeEntry("northHemisphere", northHemisphere);
 
     update();
-
-    constraintsUpdated(Plasma::AllConstraints);
 
     cg.config()->sync();
 }
@@ -133,7 +125,9 @@ const QRect &contentsRect)
 
 void Luna::calcStatus(time_t time)
 {
+    #if 0
     Plasma::ToolTipData::ToolTipData toolTipData;
+    #endif
 
     uint lun = 0;
     time_t last_new = 0;
@@ -180,7 +174,9 @@ void Luna::calcStatus(time_t time)
 
     if ( fm.daysTo( now ) == 0 ) {
         counter = 14;
+        #if 0
         toolTipData.mainText = i18n( "Full Moon" );
+        #endif
         return;
     } else if ( counter <= 15 && counter >= 13 ) {
         counter = 14 + fm.daysTo( now );
@@ -223,7 +219,9 @@ void Luna::calcStatus(time_t time)
 
     switch (counter) {
     case 0:
+        #if 0
         toolTipData.mainText = i18n("New Moon");
+        #endif
         return;
     case 1:
     case 2:
@@ -231,10 +229,14 @@ void Luna::calcStatus(time_t time)
     case 4:
     case 5:
     case 6:
+        #if 0
         toolTipData.mainText = i18np("Waxing Crescent (New Moon was yesterday)", "Waxing Crescent (%1 days since New Moon)", counter );
+        #endif
         break;
     case 7:
+        #if 0
         toolTipData.mainText = i18n("First Quarter");
+        #endif
         break;
     case 8:
     case 9:
@@ -242,7 +244,9 @@ void Luna::calcStatus(time_t time)
     case 11:
     case 12:
     case 13:
+        #if 0
         toolTipData.mainText = i18np( "Waxing Gibbous (Tomorrow is Full Moon)", "Waxing Gibbous (%1 days to Full Moon)", -fm.daysTo( now ) );
+        #endif
         break;
     case 14:
         assert( false );
@@ -253,10 +257,14 @@ void Luna::calcStatus(time_t time)
     case 18:
     case 19:
     case 20:
+        #if 0
         toolTipData.mainText = i18np("Waning Gibbous (Yesterday was Full Moon)", "Waning Gibbous (%1 days since Full Moon)", fm.daysTo( now ) );
+        #endif
         break;
     case 21:
+        #if 0
         toolTipData.mainText = i18n("Last Quarter");
+        #endif
         break;
     case 22:
     case 23:
@@ -266,13 +274,16 @@ void Luna::calcStatus(time_t time)
     case 27:
     case 28:
         kDebug() << "nn.days " << ln.daysTo( now ) << " " << nn.daysTo( now );
+        #if 0
         toolTipData.mainText = i18np("Waning Crescent (Tomorrow is New Moon)", "Waning Crescent (%1 days to New Moon)", -nn.daysTo( now ) );
+        #endif
         break;
     default:
         kFatal() << "coolo can't count\n";
     }
-
+    #if 0
     setToolTip(toolTipData);
+    #endif
 }
 
 #include "luna.moc"
