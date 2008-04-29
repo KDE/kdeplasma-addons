@@ -49,7 +49,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
   buttonBox = new QGraphicsLinearLayout(Qt::Vertical, this);
   buttonBox->addItem(configureButton);
 
-  connect(configureButton, SIGNAL(clicked()), this, SLOT(showConfigurationInterface()));
+  connect(configureButton, SIGNAL(clicked()), this, SLOT(createConfigurationInterface()));
   configured = false;
 }
 
