@@ -64,7 +64,7 @@ void Notes::init()
     KConfigGroup cg = config();
 
     m_textEdit->setPlainText(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
-    QString text = cg.readEntry("autoSave",QString());
+    QString text = cg.readEntry("autoSave", QString());
     if (! text.isEmpty()) {
         m_textEdit->setPlainText(text);
     }
@@ -102,9 +102,8 @@ void Notes::updateTextGeometry()
 int Notes::fontSize()
 {
     if (m_autoFont) {
-        int geo = (int)((geometry().width() + geometry().height())/2);
-        int size = qMax(KGlobalSettings::smallestReadableFont().pointSize(), qRound(geo*m_autoFontPercent/100));
-        return size;
+        int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100);
+        return qMax(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
     } else {
         return m_font.pointSize();
     }
@@ -138,7 +137,7 @@ void Notes::paintInterface(QPainter *p,
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
 {
-    QWidget *widget = new QWidget();
+    QWidget *widget = new QWidget(); // Do we need to delete this later?
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage(widget, parent->windowTitle(), "notes");
@@ -179,12 +178,11 @@ void Notes::configAccepted()
     }
 
     QColor newColor = ui.textColorButton->color();
-    kDebug() << m_textEdit->textColor() << newColor;
     if (m_textColor != newColor) {
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textcolor", m_textColor);
-        m_textEdit->setTextColor(m_textColor);
+        m_textEdit->setTextColor(m_textColor); // This doesn't seem to work, why?
     }
 
     bool spellCheck = ui.checkSpelling->isChecked();
@@ -196,7 +194,6 @@ void Notes::configAccepted()
     }
 
     if (changed) {
-        kDebug() << "autoFont" << m_autoFont << m_autoFontPercent << ui.autoFontPercent->value();
         updateTextGeometry();
         emit configNeedsSaving();
     }
