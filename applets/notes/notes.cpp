@@ -102,7 +102,7 @@ void Notes::updateTextGeometry()
 int Notes::fontSize()
 {
     if (m_autoFont) {
-        int geo = qMax(geometry().width(), geometry().height());
+        int geo = (int)((geometry().width() + geometry().height())/2);
         int size = qMax(KGlobalSettings::smallestReadableFont().pointSize(), qRound(geo*m_autoFontPercent/100));
         kDebug() << size << geo*m_autoFontPercent << geo << m_autoFontPercent << geometry();
         return size;
