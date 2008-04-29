@@ -42,7 +42,6 @@ class Piece : public QObject, public QGraphicsPixmapItem
 
   protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
   signals:
     void pressed(QGraphicsItem *item);

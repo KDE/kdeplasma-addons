@@ -50,7 +50,7 @@ class FifteenPuzzle : public Plasma::Applet
     bool showNumerals;
 
   private slots:
-    void showConfigurationInterface();
+    void createConfigurationInterface();
 };
 
 K_EXPORT_PLASMA_APPLET(fifteenPuzzle, FifteenPuzzle)

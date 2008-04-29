@@ -29,8 +29,6 @@
 
 #include <KDebug>
 
-#include <plasma/widgets/widget.h>
-
 Piece::Piece(int size, int id, QGraphicsItem *parent)
     : QGraphicsPixmapItem(parent)
 {
@@ -97,14 +95,5 @@ void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
   emit pressed(this);
 }
 
-void Piece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    // HACK: QGraphicsItem's documentation says that the event will be passed
-    // to the parent if it's not handled, but it isn't passed. This can be
-    // removed when Qt4.4 becomes a requirement. See Qt bug #176902.
-    Plasma::Widget *parentWidget = Plasma::Widget::parent(this);
-    if (parentWidget) {
-        parentWidget->contextMenuEvent(event);
-    }
-}
+
 

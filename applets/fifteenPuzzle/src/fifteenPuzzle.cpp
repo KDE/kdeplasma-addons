@@ -66,7 +66,7 @@ QList<QAction*> FifteenPuzzle::contextActions()
   return actions;
 }
 
-void FifteenPuzzle::showConfigurationInterface()
+void FifteenPuzzle::createConfigurationInterface()
 {
   if (configDialog == 0) {
     configDialog = new FifteenPuzzleConfig();

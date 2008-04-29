@@ -191,7 +191,7 @@ void Fifteen::piecePressed(QGraphicsItem *item)
 {
   if (isAdjacent(item, m_blank)) {
     QPointF pos = item->pos();
-    Plasma::Phase::self()->moveItem(item, Plasma::Phase::FastSlideIn, m_blank->pos().toPoint());
+    Plasma::Animator::self()->moveItem(item, Plasma::Animator::FastSlideInMovement, m_blank->pos().toPoint());
     m_blank->setPos(pos);
   }
 }
