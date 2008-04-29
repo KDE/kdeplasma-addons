@@ -69,7 +69,7 @@ void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Da
     }
 }
 
-void ComicApplet::showConfigurationInterface()
+void ComicApplet::createConfigurationInterface()
 {
     if ( !mConfigDialog ) {
         mConfigDialog = new ConfigDialog( 0 );

@@ -43,7 +43,7 @@ class ComicApplet : public Plasma::Applet
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
-        void showConfigurationInterface();
+        void createConfigurationInterface();
 
     private Q_SLOTS:
         void slotNextDay();
