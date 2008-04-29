@@ -142,7 +142,7 @@ void FileWatcher::maxRowsChanged(int rows)
   loadFile(file->fileName());
 }
 
-void FileWatcher::showConfigurationInterface()
+void FileWatcher::createConfigurationInterface()
 {
   if (config_dialog == 0) 
   {

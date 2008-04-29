@@ -54,7 +54,7 @@ class FileWatcher : public Plasma::Applet
     bool configured;
 
   private slots:
-    void showConfigurationInterface();
+    void createConfigurationInterface();
     void newData();
     void fontChanged(const QFont& font);
     void fontColorChanged(const QColor& color);
