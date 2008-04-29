@@ -62,8 +62,8 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
 void Twitter::init()
 {
-    m_theme = new Plasma::Svg("widgets/twitter", this);
-
+    m_theme = new Plasma::Svg(this);
+    m_theme.setImagePath("widgets/twitter");
     //config stuff
     KConfigGroup cg = config();
     m_username = cg.readEntry( "username" );
@@ -347,7 +347,7 @@ void Twitter::showTweets()
     updateGeometry();
 }
 
-void Twitter::showConfigurationInterface()
+void Twitter::createConfigurationInterface()
 {
      if (m_dialog == 0) {
         m_dialog = new KDialog;

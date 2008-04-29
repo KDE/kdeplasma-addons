@@ -67,7 +67,7 @@ class Twitter : public Plasma::Applet
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void showConfigurationInterface();
+        void createConfigurationInterface();
         /**
          * read from the opened KWallet
          * @param success whether we got to open it
