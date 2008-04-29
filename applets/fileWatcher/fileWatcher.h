@@ -29,29 +29,33 @@
 #include <QGraphicsLinearLayout>
 
 #include <plasma/applet.h>
-#include <plasma/widgets/pushbutton.h>
 
 #include "fileWatcherConfig.h"
+
+class QPushButton;
+class QGraphicsProxyWidget;
 
 class FileWatcher : public Plasma::Applet
 {
   Q_OBJECT
   public:
     FileWatcher(QObject *parent, const QVariantList &args);
+    ~FileWatcher();
     QSizeF contentSizeHint() const;
-  
+
   private:
     void loadFile(const QString& path);
-   
+
     QFile *file;
     QFileSystemWatcher *watcher;
     FileWatcherConfig *config_dialog;
     QGraphicsTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
-    Plasma::PushButton *configureButton;
+    QPushButton *configureButton;
     QGraphicsLinearLayout *buttonBox;
     bool configured;
+    QGraphicsProxyWidget *m_proxy;
 
   private slots:
     void createConfigurationInterface();

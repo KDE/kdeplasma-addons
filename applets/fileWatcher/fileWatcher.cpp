@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QStringList>
 #include <QTextDocument>
+#include <QGraphicsProxyWidget>
 
 #include <Plasma/Theme>
 
@@ -34,7 +35,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 {
   setHasConfigurationInterface(true);
   resize(250, 250);
-
+  m_proxy = new QGraphicsProxyWidget(this);
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
@@ -42,17 +43,27 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 
   textDocument = textItem->document();
 
-  textDocument->setMaximumBlockCount(6); 
+  textDocument->setMaximumBlockCount(6);
   textStream = 0;
 
-  configureButton = new Plasma::PushButton(i18n("&Configure File Watcher"), this);  
+  configureButton = new QPushButton(i18n("&Configure File Watcher"));
+  m_proxy->setWidget( configureButton );
   buttonBox = new QGraphicsLinearLayout(Qt::Vertical, this);
-  buttonBox->addItem(configureButton);
+  buttonBox->addItem(m_proxy);
 
   connect(configureButton, SIGNAL(clicked()), this, SLOT(createConfigurationInterface()));
   configured = false;
+  m_proxy->show();
 }
 
+
+FileWatcher::~FileWatcher()
+{
+  delete textStream;
+  textStream = 0;
+  textDocument->clear();
+  file->close();
+}
 
 void FileWatcher::loadFile(const QString& path)
 {
@@ -65,23 +76,23 @@ void FileWatcher::loadFile(const QString& path)
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
   {
     kDebug() << "Error: could not open file:" << path;
-    configured = false; 
+    configured = false;
     configureButton->show();
     return;
   }
-  
+
   configureButton->hide();
   configured = true;
-  
+
   textStream = new QTextStream(file);
 
   newData();
 
-  watcher->removePaths(watcher->files()); 
+  watcher->removePaths(watcher->files());
   watcher->addPath(path);
 
   QObject::connect(watcher,SIGNAL(fileChanged(QString)),this,SLOT(newData()));
-  
+
   QGraphicsItem::setToolTip(path);
 }
 
@@ -90,14 +101,14 @@ void FileWatcher::newData()
   QTextCursor cursor(textDocument);
   cursor.movePosition(QTextCursor::End);
   cursor.beginEditBlock();
- 
+
 // Slight speed optimization hack for bigger files.
 // Doing this is faster than doing unnecessary insertText()
   QString data = textStream->readAll();
   QStringList list = data.split("\n",QString::SkipEmptyParts);
-  
+
   int rows = list.size() - textDocument->maximumBlockCount();
- 
+
   if ( rows < 0)
     rows = 0;
 
@@ -106,7 +117,7 @@ void FileWatcher::newData()
     cursor.insertText(list.at(i));
     cursor.insertBlock();
   }
-  
+
   cursor.endEditBlock();
   updateGeometry();
 }
@@ -115,14 +126,14 @@ QSizeF FileWatcher::contentSizeHint() const
 {
   if (!configured)
     return QSizeF(200, 50);
-  
+
   return textItem->boundingRect().size();
 }
 
 
 void FileWatcher::newPath(const QString& path)
 {
-  loadFile(path);  
+  loadFile(path);
 }
 
 void FileWatcher::fontColorChanged(const QColor& color)
@@ -133,7 +144,7 @@ void FileWatcher::fontColorChanged(const QColor& color)
 
 void FileWatcher::fontChanged(const QFont& font)
 {
-  textItem->setFont(font);  
+  textItem->setFont(font);
 }
 
 void FileWatcher::maxRowsChanged(int rows)
@@ -144,7 +155,7 @@ void FileWatcher::maxRowsChanged(int rows)
 
 void FileWatcher::createConfigurationInterface()
 {
-  if (config_dialog == 0) 
+  if (config_dialog == 0)
   {
     config_dialog = new FileWatcherConfig();
     QObject::connect(config_dialog,SIGNAL(newFile(const QString&)),this,SLOT(newPath(const QString&)));
