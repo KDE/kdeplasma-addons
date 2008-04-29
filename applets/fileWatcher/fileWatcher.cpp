@@ -38,7 +38,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
-  textItem->setDefaultTextColor(Plasma::Theme::self()->textColor());
+  textItem->setDefaultTextColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
 
   textDocument = textItem->document();
 
