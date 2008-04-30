@@ -37,7 +37,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
     setHasConfigurationInterface(true);
-    setRemainSquare(true);
+    setAspectRatioMode(Plasma::Square);
     resize(QSize(64, 64));
 
     counter = -1;
