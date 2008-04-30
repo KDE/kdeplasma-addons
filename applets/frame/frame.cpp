@@ -37,6 +37,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KColorButton>
+#include <KConfigDialog>
 #include <KComboBox>
 #include <KSharedConfig>
 #include <KStandardDirs>
@@ -166,7 +167,7 @@ void Frame::removeDir()
     }
 }
 
-void Frame::createConfigurationInterface()
+void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
    if ( !m_configDialog ) {
         m_configDialog = new ConfigDialog( 0 );
@@ -180,6 +181,12 @@ void Frame::createConfigurationInterface()
 	
         connect( m_configDialog, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
         connect( m_configDialog, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
+	
+	parent->setCaption( i18nc( "@title:window", "Configure Frame" ) );
+	parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+	parent->addPage( m_configDialog, parent->windowTitle(), icon() );
+	parent->setDefaultButton( KDialog::Ok );
+	parent->showButtonSeparator( true );
     }
     connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));

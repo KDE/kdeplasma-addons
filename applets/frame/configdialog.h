@@ -24,7 +24,7 @@
 
 #include "ui_config.h"
 
-class ConfigDialog : public KDialog
+class ConfigDialog : public QWidget
 {
     Q_OBJECT
     public:

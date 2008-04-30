@@ -25,17 +25,9 @@
 #include "picture.h"
 
 ConfigDialog::ConfigDialog( QWidget *parent )
-    : KDialog( parent )
+    : QWidget( parent )
 {
-    setCaption( i18nc( "@title:window", "Configure Frame" ) );
-
-    setButtons( Ok | Cancel | Apply );
-    setDefaultButton( Ok );
-    showButtonSeparator( true );
-
-    QWidget *widget = new QWidget();
-    ui.setupUi(widget);
-    setMainWidget(widget);
+    ui.setupUi(this);
     
     ui.addDirButton->setIcon(KIcon("list-add"));
     ui.removeDirButton->setIcon(KIcon("list-remove"));
