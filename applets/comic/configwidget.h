@@ -17,20 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef CONFIGWIDGET_H
+#define CONFIGWIDGET_H
 
-#include <kdialog.h>
+#include <QtGui/QWidget>
 
 class ComicModel;
 class QComboBox;
 class QCheckBox;
 
-class ConfigDialog : public KDialog
+class ConfigWidget : public QWidget
 {
     public:
-        ConfigDialog( QWidget *parent );
-        ~ConfigDialog();
+        ConfigWidget( QWidget *parent );
+        ~ConfigWidget();
 
         void setComicIdentifier( const QString &comic );
         QString comicIdentifier() const;

@@ -21,19 +21,19 @@
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
+#include <KConfigDialog>
 #include <KRun>
 
 #include <plasma/theme.h>
 
 #include "comic.h"
-#include "configdialog.h"
+#include "configwidget.h"
 
 static const int s_arrowWidth = 30;
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mCurrentDate( QDate::currentDate() ),
-      mConfigDialog( 0 ),
       mScaleComic( true ),
       mShowPreviousButton( true ),
       mShowNextButton( false )
@@ -50,7 +50,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
 ComicApplet::~ComicApplet()
 {
-    delete mConfigDialog;
 }
 
 void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
@@ -69,25 +68,23 @@ void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Da
     }
 }
 
-void ComicApplet::createConfigurationInterface()
+void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
-    if ( !mConfigDialog ) {
-        mConfigDialog = new ConfigDialog( 0 );
-        connect( mConfigDialog, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
-        connect( mConfigDialog, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
-    }
+    mConfigWidget = new ConfigWidget( parent );
+    mConfigWidget->setComicIdentifier( mComicIdentifier );
+    mConfigWidget->setScaleComic( mScaleComic );
 
-    mConfigDialog->setComicIdentifier( mComicIdentifier );
-    mConfigDialog->setScaleComic( mScaleComic );
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
 
-    mConfigDialog->show();
-    mConfigDialog->raise();
+    connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
+    connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
 }
 
 void ComicApplet::applyConfig()
 {
-    mComicIdentifier = mConfigDialog->comicIdentifier();
-    mScaleComic = mConfigDialog->scaleComic();
+    mComicIdentifier = mConfigWidget->comicIdentifier();
+    mScaleComic = mConfigWidget->scaleComic();
 
     saveConfig();
 
@@ -97,7 +94,7 @@ void ComicApplet::applyConfig()
 void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
-    mComicIdentifier = cg.readEntry( "comic", "userfriendly" );
+    mComicIdentifier = cg.readEntry( "comic", "garfield" );
     mScaleComic = cg.readEntry( "scaleComic", true );
 }
 

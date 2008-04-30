@@ -28,7 +28,7 @@
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 
-class ConfigDialog;
+class ConfigWidget;
 
 class ComicApplet : public Plasma::Applet
 {
@@ -43,7 +43,7 @@ class ComicApplet : public Plasma::Applet
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
-        void createConfigurationInterface();
+        void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
         void slotNextDay();
@@ -65,7 +65,7 @@ class ComicApplet : public Plasma::Applet
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
-        ConfigDialog *mConfigDialog;
+        ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;

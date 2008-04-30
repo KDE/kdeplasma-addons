@@ -27,7 +27,7 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
-#include "configdialog.h"
+#include "configwidget.h"
 
 class ComicModel : public QAbstractListModel
 {
@@ -84,23 +84,17 @@ class ComicModel : public QAbstractListModel
 };
 
 
-ConfigDialog::ConfigDialog( QWidget *parent )
-    : KDialog( parent )
+ConfigWidget::ConfigWidget( QWidget *parent )
+    : QWidget( parent )
 {
-    setCaption( i18n( "Comic Configuration" ) );
-
-    setButtons( Ok | Apply | Cancel );
-    setDefaultButton( Ok );
-    showButtonSeparator( true );
-
-    QGridLayout *layout = new QGridLayout( mainWidget() );
+    QGridLayout *layout = new QGridLayout( this );
     layout->setMargin( 0 );
-    mComicIdentifier = new QComboBox( mainWidget() );
+    mComicIdentifier = new QComboBox( this );
 
-    QLabel *label = new QLabel( i18n( "Comic:" ), mainWidget() );
+    QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
-    mScaleComic = new QCheckBox( i18n( "Make comic resizable" ), mainWidget() );
+    mScaleComic = new QCheckBox( i18n( "Make comic resizable" ), this );
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
@@ -110,11 +104,11 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     mComicIdentifier->setModel( mModel );
 }
 
-ConfigDialog::~ConfigDialog()
+ConfigWidget::~ConfigWidget()
 {
 }
 
-void ConfigDialog::setComicIdentifier( const QString &comic )
+void ConfigWidget::setComicIdentifier( const QString &comic )
 {
     for ( int i = 0; i < mModel->rowCount(); ++i ) {
         const QModelIndex index = mModel->index( i, 0 );
@@ -125,18 +119,18 @@ void ConfigDialog::setComicIdentifier( const QString &comic )
     }
 }
 
-QString ConfigDialog::comicIdentifier() const
+QString ConfigWidget::comicIdentifier() const
 {
     const QModelIndex index = mModel->index( mComicIdentifier->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
 }
 
-void ConfigDialog::setScaleComic(bool scale)
+void ConfigWidget::setScaleComic(bool scale)
 {
     mScaleComic->setChecked(scale);
 }
 
-bool ConfigDialog::scaleComic() const
+bool ConfigWidget::scaleComic() const
 {
     return mScaleComic->isChecked();
 }
