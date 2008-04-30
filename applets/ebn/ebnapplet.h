@@ -26,6 +26,9 @@
 #include <QString>
 #include <QRectF>
 
+class QGraphicsLinearLayout;
+class QGraphicsProxyWidget;
+class KTextEdit;
 
 class EbnApplet : public Plasma::Applet
 {
@@ -49,11 +52,9 @@ class EbnApplet : public Plasma::Applet
          */
         void go(const QString& source = "/");
 
-        Plasma::VBoxLayout* m_layout;
-        /**
-         * Displays the results
-         */
-        Plasma::LineEdit* m_viewEdit;
+    QGraphicsLinearLayout *m_layout;
+        QGraphicsProxyWidget *m_proxy;
+        KTextEdit *m_viewEdit;
 
         /**
          * The source currently displayed

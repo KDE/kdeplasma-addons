@@ -30,6 +30,9 @@
 #include <KColorScheme>
 
 #include <Plasma/Theme>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+#include <KTextEdit>
 
 using namespace Plasma;
 
@@ -47,15 +50,18 @@ EbnApplet::~EbnApplet()
 
 void EbnApplet::init()
 {
-    m_viewEdit = new Plasma::LineEdit(this);
+    m_viewEdit = new KTextEdit();
+    m_layout = new QGraphicsLinearLayout();
+    m_proxy = new QGraphicsProxyWidget(this);
+
     connect(m_viewEdit, SIGNAL(linkActivated(const QString&)),
             this, SLOT(doLink(const QString&)));
 
-    m_viewEdit->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    m_viewEdit->setFont(Plasma::Theme::self()->font());
-    m_viewEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
+    //m_viewEdit->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    m_viewEdit->setFont(Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont));
+    m_viewEdit->setTextColor(Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor) );
     KColorScheme colorScheme(QPalette::Active, KColorScheme::View,
-                             Plasma::Theme::self()->colors());
+                             Plasma::Theme::defaultTheme()->colorScheme());
     link = "<a href=\"%2\"><font color=\"%1\">%3</font></a>";
     link = link.arg(colorScheme.foreground(KColorScheme::LinkText).color().name());
     htmlHeader = "<html><body><h1>%1</h1>";
