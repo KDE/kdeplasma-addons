@@ -20,6 +20,7 @@
 #include <QVariant>
 #include "Widget.h"
 #include "Global.h"
+#include <lancelot/lancelot.h>
 #include <KDebug>
 
 namespace Lancelot {
@@ -27,24 +28,25 @@ namespace Lancelot {
 class Widget::Private {
 public:
     Private()
-      : hover(false),
-        name(QString()),
-        group(NULL)
+      : group(NULL),
+        initd(0),
+        hover(false)
     {
     };
 
-    bool hover;
-    QString name;
     WidgetGroup * group;
+    int initd;
+    int noOfAncestors;
+    bool hover : 1;
 };
 
-Widget::Widget(QString name, QGraphicsItem * parent)
+Widget::Widget(QGraphicsItem * parent)
   : QGraphicsWidget(parent),
     d(new Private())
 {
     Instance::activeInstance()->addWidget(this);
     d->group = Instance::activeInstance()->defaultGroup();
-    d->name  = name;
+    L_WIDGET_SET_INITIALIZED;
 }
 
 Widget::~Widget()
@@ -117,16 +119,6 @@ void Widget::groupUpdated()
     update();
 }
 
-QString Widget::name() const
-{
-    return d->name;
-}
-
-void Widget::setName(QString name)
-{
-    d->name = name;
-}
-
 void Widget::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
         QWidget * widget) {
     Q_UNUSED(option);
@@ -154,16 +146,13 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
     if (!d->group) return;
 
     // Background Painting
-    if (Plasma::Svg * svg = d->group->backgroundSvg()) {
-        kDebug() << "Painting SVG background " << svg->imagePath();
-        kDebug() << "Resizing to " << size();
-
+    if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
         // TODO: Fix rendering - it is pixelated
-        // svg->resize(size());  // something's wrong
-        svg->paint(painter, QRectF(QPointF(), size()), element);
+        svg->resize(size());
+        svg->setElementPrefix(element);
+        svg->paint(painter, QRectF(QPointF(), size())); //, element);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
-        kDebug() << "Painting simple background";
         const QColor * color;
         if (!isEnabled()) {
             color = & (scheme->disabled);
@@ -172,11 +161,8 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
         } else {
             color = & (scheme->normal);
         }
-
         painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(*color));
-
     }
-
 }
 
 void Widget::geometryUpdated()
@@ -193,6 +179,31 @@ void Widget::setGeometry(const QRectF & rect)
 void Widget::setGeometry(qreal x, qreal y, qreal w, qreal h)
 {
     Widget::setGeometry(QRectF(x, y, w, h));
+}
+
+QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    QSizeF result;
+    switch (which) {
+        case Qt::MinimumSize:
+            result = QSizeF();
+            break;
+        case Qt::MaximumSize:
+            result = MAX_WIDGET_SIZE;
+            break;
+        case Qt::PreferredSize:
+            if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
+                result = QSizeF(
+                    svg->marginSize(Plasma::LeftMargin) +
+                    svg->marginSize(Plasma::RightMargin),
+                    svg->marginSize(Plasma::TopMargin) +
+                    svg->marginSize(Plasma::BottomMargin)
+                    );
+            } else {
+                result = QSizeF();
+            }
+    }
+    return result.boundedTo(constraint);
 }
 
 } // namespace Lancelot

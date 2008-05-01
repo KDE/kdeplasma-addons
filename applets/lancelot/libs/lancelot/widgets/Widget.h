@@ -20,7 +20,11 @@
 #ifndef LANCELOT_WIDGET_H_
 #define LANCELOT_WIDGET_H_
 
+#include <KDebug>
+
 #include <lancelot/lancelot_export.h>
+#include <lancelot/lancelot.h>
+
 #include <lancelot/Global.h>
 
 #include <QtGui>
@@ -37,15 +41,14 @@ namespace Lancelot
 class LANCELOT_EXPORT Widget : public QGraphicsWidget {
     Q_OBJECT
 
-    Q_PROPERTY ( QString name READ name WRITE setName )
+    L_WIDGET
 
 public:
     /**
      * Creates a new Lancelot::Widget
-     * @param name the internal name of the widget
      * @param parent parent item
      */
-    Widget(QString name = "", QGraphicsItem * parent = 0);
+    Widget(QGraphicsItem * parent = 0);
 
     /**
      * Destroys Lancelot::Widget
@@ -76,23 +79,16 @@ public:
     Instance * instance();
 
     /**
-     * Returns the name of the widget.
-     */
-    QString name() const;
-
-    /**
-     * Sets the name of the widget
-     * @param name new name
-     */
-    void setName(QString name);
-
-    /**
      * Returns whether the mouse cursor is hovering the widget
      */
     bool isHovered() const;
 
     Override virtual void setGeometry(const QRectF & rect);
     Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+
+protected:
+    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 Q_SIGNALS:
     /**
@@ -142,7 +138,7 @@ protected:
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 
     friend class WidgetGroup;
     friend class Global;

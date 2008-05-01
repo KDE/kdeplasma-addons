@@ -70,7 +70,7 @@ protected Q_SLOTS:
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

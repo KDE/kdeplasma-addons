@@ -13,9 +13,10 @@ TODO: (m) Search history
 TODO: (m) Switch menu instead of searching for SESSIONS
 
 Library:
-TODO: (a) Dptr everything
-TODO: (m) Replace setGeometry with updateGeometry where possible
-
+TODO: (h) convert to WoC
+TODO: (e) check for memory leaks related to Private
+TODO: (a) switch groups to QMetaObject and properties
+TODO: (m) remove internal widget names
 
 Applet:
 

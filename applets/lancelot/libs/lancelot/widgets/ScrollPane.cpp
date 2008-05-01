@@ -20,8 +20,11 @@
 #include <KDebug>
 
 #include "ScrollPane.h"
+#include "ScrollBar.h"
 #include "Widget.h"
+#include <lancelot/layouts/FullBorderLayout.h>
 
+#define SCROLLBAR_WIDTH 16
 
 namespace Lancelot
 {
@@ -58,71 +61,38 @@ ScrollPane * Scrollable::scrollPane() const
 
 // ScrollPane implementation
 
-class ScrollButton: public BasicWidget {
-public:
-    ScrollButton(QString name, Qt::ArrowType direction, ScrollPane * parent)
-        : BasicWidget(name, parent)
-    {
-        QString directionSuffix;
-        switch (direction) {
-            case Qt::LeftArrow:
-                directionSuffix = "left";
-                break;
-            case Qt::RightArrow:
-                directionSuffix = "right";
-                break;
-            case Qt::UpArrow:
-                directionSuffix = "up";
-                break;
-            case Qt::DownArrow:
-                directionSuffix = "down";
-                break;
-            case Qt::NoArrow:
-                directionSuffix = "no";
-                break;
-        }
-        setIconInSvg(new Plasma::Svg("arrow-" + directionSuffix));
-
-        pane = parent;
-    }
-private:
-    ScrollPane * pane;
-};
-
 class ScrollPane::Private {
 public:
     Scrollable   * widget;
-    ScrollButton * up;
-    ScrollButton * down;
-    ScrollButton * left;
-    ScrollButton * right;
+    FullBorderLayout * layout;
+    ScrollBar * vertical;
+    ScrollBar * horizontal;
 };
 
-ScrollPane::ScrollPane(QString name, QGraphicsItem * parent)
-    : Widget(name, parent), d(new Private())
+ScrollPane::ScrollPane(QGraphicsItem * parent)
+    : Widget(parent), d(new Private())
 {
     setFlag(QGraphicsItem::ItemClipsChildrenToShape);
 
-    up     = new ScrollButton(Qt::UpArrow);
-    down   = new ScrollButton(Qt::DownArrow);
-    left   = new ScrollButton(Qt::LeftArrow);
-    right  = new ScrollButton(Qt::RightArrow);
+    d->layout = new FullBorderLayout(this);
+    d->layout->setSize(SCROLLBAR_WIDTH, FullBorderLayout::RightBorder);
+    d->layout->setSize(SCROLLBAR_WIDTH, FullBorderLayout::BottomBorder);
 
+    d->vertical   = new ScrollBar(this);
+    d->vertical->setOrientation(Qt::Vertical);
+    d->horizontal = new ScrollBar(this);
+    d->horizontal->setOrientation(Qt::Horizontal);
+
+    d->layout->addItem(d->vertical, FullBorderLayout::Right);
+    d->layout->addItem(d->horizontal, FullBorderLayout::Bottom);
+    d->layout->addItem(new Widget(this));
+
+    setLayout(d->layout);
 }
 
 ScrollPane::~ScrollPane()
 {
     delete d;
-}
-
-void ScrollPane::setGeometry(qreal x, qreal y, qreal w, qreal h)
-{
-    setGeometry(QRectF(x, y, w, h));
-}
-
-void ScrollPane::setGeometry(const QRectF & geometry)
-{
-    Widget::setGeometry(geometry);
 }
 
 void ScrollPane::setScrollableWidget(Scrollable * widget)

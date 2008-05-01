@@ -46,38 +46,40 @@ class LANCELOT_EXPORT ExtenderButton : public BasicWidget
 
     Q_PROPERTY ( ExtenderPosition extenderPosition READ extenderPosition WRITE setExtenderPosition )
     Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
+    Q_PROPERTY ( bool checkable READ isCheckable WRITE setCheckable )
+    Q_PROPERTY ( bool checked READ isChecked WRITE setChecked )
+    Q_PROPERTY ( bool down READ isDown WRITE setDown )
+
+    L_WIDGET
 
 public:
     /**
      * Creates a new Lancelot::ExtenderButton
-     * @param name the internal name of the widget
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QString name = QString(), QString title = QString(),
+    ExtenderButton(QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
-     * @param name the internal name of the widget
      * @param icon the icon for the widget
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QString name, QIcon icon, QString title = QString(),
+    ExtenderButton(QIcon icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
-     * @param name the internal name of the widget
      * @param icon Svg with active, inactive and disabled states
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QString name, Plasma::Svg * icon, QString title = QString(),
+    ExtenderButton(Plasma::Svg * icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
@@ -107,6 +109,27 @@ public:
      */
     ActivationMethod activationMethod();
 
+    /**
+     * Makes the button checkable when set to true
+     * @param checkable checkable
+     */
+    void setCheckable(bool checkable);
+
+    /**
+     * @returns whether the button is checkable
+     */
+    bool isCheckable();
+
+    /**
+     * @returns whether the button is checked
+     */
+    bool isChecked();
+
+    /**
+     * @returns whether the button is down
+     */
+    bool isDown();
+
     Override virtual void geometryUpdated();
 
     Override virtual void setGroup(WidgetGroup * group = NULL);
@@ -114,20 +137,69 @@ public:
 
     Override virtual QRectF boundingRect() const;
 
+    Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+
+public slots:
+    /**
+     * Sets whether the button is checked.
+     * Has no effect if button is not checkable.
+     * @param checked checked
+     */
+    void setChecked(bool checked);
+
+    /**
+     * Toggles the checked state.
+     * Has no effect if button is not checkable.
+     */
+    void toggle();
+
+    /**
+     * Sets whether the button is down
+     * @param down down
+     */
+    void setDown(bool down);
+
 Q_SIGNALS:
     /**
      * Emitted when the button is activated
+     * @param checked true if the button is checked
      */
-    void activated();
+    void activated(bool checked = false);
+
+    /**
+     * Emitted when the state of a checkable button is changed
+     * @param checked the new state
+     */
+    void toggled(bool checked);
+
+    /**
+     * Emitted when the button is clicked.
+     * You should use the activated() signal instead if you want to
+     * support other activation methods beside clicking.
+     * @param checked true if the button is checked
+     */
+    void clicked(bool checked = false);
+
+    /**
+     * This signal is emitted when the button is pressed down
+     */
+    void pressed();
+
+    /**
+     * This signal is emitted when the button is released
+     */
+    void released();
 
 protected:
     Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
     Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 
     friend class ExtenderObject;
 };

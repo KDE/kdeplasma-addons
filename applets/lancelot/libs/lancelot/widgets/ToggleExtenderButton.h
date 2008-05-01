@@ -105,7 +105,7 @@ Q_SIGNALS:
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

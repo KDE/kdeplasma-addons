@@ -24,6 +24,9 @@
 
 #define COLOR 255,0,0
 
+// TODO: Make ResizeBordersPanel use FullBorderLayout
+// TODO: Make the resize feedback themable
+
 namespace Lancelot
 {
 
@@ -31,8 +34,8 @@ class ResizeBordersPanel::Private {
 public:
     class BorderItem: public Widget {
     public:
-        BorderItem(QString name = "", QGraphicsItem * parent = 0, ResizeBordersPanel::Private * d = 0, int position = 0)
-            : Widget(name, parent), m_position(position), m_d(d)
+        BorderItem(QGraphicsItem * parent = 0, ResizeBordersPanel::Private * d = 0, int position = 0)
+            : Widget(parent), m_position(position), m_d(d)
         {
             setAcceptsHoverEvents(true);
         }
@@ -110,7 +113,7 @@ public:
 
     void add(int where)
     {
-        BorderItem * item = new BorderItem(q->name(), q, this, where);
+        BorderItem * item = new BorderItem(q, this, where);
         borderItems[where] = item;
 
         // Setting the cursor
@@ -158,8 +161,8 @@ public:
     ResizeBordersPanel * q;
 };
 
-ResizeBordersPanel::ResizeBordersPanel(QString name, QGraphicsItem * parent)
-    : Panel(name, parent), d(new Private(this))
+ResizeBordersPanel::ResizeBordersPanel(QGraphicsItem * parent)
+    : Panel(parent), d(new Private(this))
 {
 }
 

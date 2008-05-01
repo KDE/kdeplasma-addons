@@ -27,30 +27,30 @@ namespace Lancelot
 
 class Panel::Private {
 public:
-    Private(QString name, QIcon icon, QString title, Panel * parent)
+    Private(QIcon icon, QString title, Panel * parent)
       : layoutItem(NULL),
         hasTitle(title != QString()),
-        titleWidget(name + "::TitleWidget", icon, title, "", parent),
+        titleWidget(icon, title, "", parent),
         background(NULL),
         q(parent)
     {
         init();
     }
 
-    Private(QString name, QString title, Panel * parent)
+    Private(QString title, Panel * parent)
       : layoutItem(NULL),
         hasTitle(title != QString()),
-        titleWidget(name + "::TitleWidget", title, "", parent),
+        titleWidget(title, "", parent),
         background(NULL),
         q(parent)
     {
         init();
     }
 
-    Private(QString name, Panel * parent)
+    Private(Panel * parent)
       : layoutItem(NULL),
         hasTitle(false),
-        titleWidget(name + "::TitleWidget", "", "", parent),
+        titleWidget("", "", parent),
         background(NULL),
         q(parent)
     {
@@ -109,20 +109,20 @@ public:
     Panel * q;
 };
 
-Panel::Panel(QString name, QIcon icon, QString title, QGraphicsItem * parent)
-  : Widget(name, parent), d(new Private(name, icon, title, this))
+Panel::Panel(QIcon icon, QString title, QGraphicsItem * parent)
+  : Widget(parent), d(new Private(icon, title, this))
 {
     setGroupByName("Panel");
 }
 
-Panel::Panel(QString name, QString title, QGraphicsItem * parent)
-  : Widget(name, parent), d(new Private(name, title, this))
+Panel::Panel(QString title, QGraphicsItem * parent)
+  : Widget(parent), d(new Private(title, this))
 {
     setGroupByName("Panel");
 }
 
-Panel::Panel(QString name, QGraphicsItem * parent)
-  : Widget(name, parent), d(new Private(name, this))
+Panel::Panel(QGraphicsItem * parent)
+  : Widget(parent), d(new Private(this))
 {
     setGroupByName("Panel");
 }

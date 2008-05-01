@@ -46,28 +46,25 @@ class LANCELOT_EXPORT Panel: public Widget
 public:
     /**
      * Creates a new Lancelot::Panel
-     * @param name the internal name of the widget
      * @param icon the icon for the widget
      * @param title the title of the widget
      * @param parent parent item
      */
-    Panel(QString name, QIcon icon, QString title = QString(),
+    Panel(QIcon icon, QString title = QString(),
             QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::Widget
-     * @param name the internal name of the widget
      * @param title the title of the widget
      * @param parent parent item
      */
-    Panel(QString name, QString title, QGraphicsItem * parent = 0);
+    Panel(QString title, QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::Widget
-     * @param name the internal name of the widget
      * @param parent parent item
      */
-    Panel(QString name, QGraphicsItem * parent = 0);
+    Panel(QGraphicsItem * parent = 0);
 
     /**
      * Destroys Lancelot::Panel
@@ -145,7 +142,7 @@ protected:
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

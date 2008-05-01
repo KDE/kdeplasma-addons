@@ -36,17 +36,16 @@ class LANCELOT_EXPORT ResizeBordersPanel: public Panel {
 public:
     /**
      * Creates a new ResizeBordersPanel
-     * @param name the internal name of the widget
      * @param parent parent item
      */
-    ResizeBordersPanel(QString name, QGraphicsItem * parent = 0);
+    ResizeBordersPanel(QGraphicsItem * parent = 0);
 
     Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     Override virtual void setGeometry(const QRectF & geometry);
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

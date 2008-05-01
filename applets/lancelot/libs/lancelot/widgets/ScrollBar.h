@@ -21,6 +21,8 @@
 #define LANCELOT_SCROLL_BAR_H_
 
 #include <lancelot/lancelot_export.h>
+#include <lancelot/lancelot.h>
+
 #include <QtGui>
 #include <QtCore>
 #include <lancelot/widgets/Widget.h>
@@ -40,14 +42,17 @@ class LANCELOT_EXPORT ScrollBar: public Widget {
     Q_PROPERTY ( int maximum READ maximum WRITE setMaximum )
     Q_PROPERTY ( int value READ value WRITE setValue )
     Q_PROPERTY ( int viewSize READ viewSize WRITE setViewSize )
+    Q_PROPERTY ( int pageSize READ pageSize WRITE setPageSize )
+    Q_PROPERTY ( int stepSize READ stepSize WRITE setStepSize )
     Q_PROPERTY ( Qt::Orientation orientation READ orientation WRITE setOrientation )
+    Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
 
 public:
     /**
      * Creates a new Lancelot::ScrollBar
      * @param parent parent item
      */
-    ScrollBar(QString name, QGraphicsItem * parent = NULL);
+    ScrollBar(QGraphicsItem * parent = NULL);
 
     /**
      * Destroys this Lancelot::ScrollBar
@@ -93,6 +98,28 @@ public:
     int viewSize() const;
 
     /**
+     * Sets the size of one scrolling step
+     * @param value new value
+     */
+    void setStepSize(int value);
+
+    /**
+     * @returns the size of one scrolling step
+     */
+    int stepSize() const;
+
+    /**
+     * Sets the size of one scrolling page
+     * @param value new value
+     */
+    void setPageSize(int value);
+
+    /**
+     * @returns the size of one scrolling page
+     */
+    int pageSize() const;
+
+    /**
      * Sets the scrollbar orientation
      * @param value new value
      */
@@ -102,6 +129,19 @@ public:
      * @returns the scrollbar orientation
      */
     Qt::Orientation orientation() const;
+
+    /**
+     * Sets the activation method
+     * @param method new method
+     * @note
+     * ExtenderActivate is not supported and is treated as HoverActivate
+     */
+    void setActivationMethod(ActivationMethod method);
+
+    /**
+     * @returns activation method
+     */
+    ActivationMethod activationMethod() const;
 
     Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     Override virtual void setGeometry(const QRectF & geometry);
@@ -114,6 +154,26 @@ public Q_SLOTS:
      */
     void setValue(int value);
 
+    /**
+     * Increases the value by one step.
+     */
+    void stepIncrease();
+
+    /**
+     * Decreases the value by one step.
+     */
+    void stepDecrease();
+
+    /**
+     * Increases the value by one page.
+     */
+    void pageIncrease();
+
+    /**
+     * Decrease the value by one page.
+     */
+    void pageDecrease();
+
 Q_SIGNALS:
     /**
      * Signal that is emitted when the scrollbar position is changed
@@ -121,9 +181,12 @@ Q_SIGNALS:
      */
     void valueChanged(int value);
 
+protected:
+    Override virtual void groupUpdated();
+
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

@@ -21,6 +21,7 @@
 #include <KDebug>
 #include <cmath>
 #include "Global.h"
+#include <lancelot/lancelot.h>
 
 #define WIDGET_PADDING 8
 
@@ -87,25 +88,28 @@ class BasicWidget::Private {
     QString description;
 };
 
-BasicWidget::BasicWidget(QString name, QString title, QString description,
+BasicWidget::BasicWidget(QString title, QString description,
         QGraphicsItem * parent)
-  : Widget(name, parent),
+  : Widget(parent),
     d(new Private(this, title, description))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
-BasicWidget::BasicWidget(QString name, QIcon icon, QString title,
+BasicWidget::BasicWidget(QIcon icon, QString title,
         QString description, QGraphicsItem * parent)
-  : Widget(name, parent),
+  : Widget(parent),
     d(new Private(this, icon, title, description))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
-BasicWidget::BasicWidget(QString name, Plasma::Svg * icon, QString title,
+BasicWidget::BasicWidget(Plasma::Svg * icon, QString title,
         QString description, QGraphicsItem * parent)
-  : Widget(name, parent),
+  : Widget(parent),
     d(new Private(this, icon, title, description))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
 BasicWidget::~BasicWidget()
@@ -113,18 +117,11 @@ BasicWidget::~BasicWidget()
     delete d;
 }
 
-/*void BasicWidget::resizeSvg() {
-  if (d->svg) {
-  d->svg->resize(size());
-  }
-  }*/
-
 void BasicWidget::paint(QPainter * painter,
         const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(widget);
     Q_UNUSED(option);
-
 
     paintBackground(painter);
     paintForeground(painter);
@@ -133,9 +130,6 @@ void BasicWidget::paint(QPainter * painter,
 void BasicWidget::paintForeground(QPainter * painter)
 {
     QPainter * _painter = painter;
-
-    // Background Painting
-    paintBackground(_painter);
 
     QPixmap foreground(size().toSize().width(), size().toSize().height());
     foreground.fill(Qt::transparent);
@@ -377,6 +371,34 @@ void BasicWidget::setAlignment(Qt::Alignment alignment)
 Qt::Alignment BasicWidget::alignment() const
 {
     return d->alignment;
+}
+
+QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    QSizeF result = QSizeF();
+
+    if (!L_WIDGET_IS_INITIALIZED) {
+        kDebug() << "Widget is not initialized";
+        return result;
+    }
+    kDebug() << "Widget is initialized, yey";
+
+    switch (which) {
+        case Qt::MinimumSize:
+            result = d->iconSize;
+        case Qt::MaximumSize:
+            result = MAX_WIDGET_SIZE;
+            break;
+        case Qt::PreferredSize:
+            // Do we need a more precise sizeHint?
+            result = d->iconSize + QSizeF(2 * WIDGET_PADDING, 2 * WIDGET_PADDING);
+            if (d->innerOrientation == Qt::Horizontal) {
+                result.scale(5.0, 1.0, Qt::IgnoreAspectRatio);
+            } else {
+                result.scale(2.0, 2.0, Qt::IgnoreAspectRatio);
+            }
+    }
+    return result.boundedTo(constraint);
 }
 
 } // namespace Lancelot

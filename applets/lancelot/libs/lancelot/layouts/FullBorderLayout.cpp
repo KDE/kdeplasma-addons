@@ -18,6 +18,8 @@
  */
 
 #include "FullBorderLayout.h"
+#include <lancelot/lancelot.h>
+#include <KDebug>
 
 namespace Lancelot {
 
@@ -95,68 +97,76 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
 {
     QGraphicsLayout::setGeometry(rect);
 
+    QRectF effectiveRect = geometry();
+    qreal left = 0, top = 0, right = 0, bottom = 0;
+    // getContentsMargins(&left, &top, &right, &bottom);
+    effectiveRect.adjust(+left, +top, -right, -bottom);
+
+    kDebug() << left << " " << top << " ";
+    kDebug() << geometry() << " " << rect << " " << effectiveRect;
+
     qreal topMargin, bottomMargin, leftMargin, rightMargin;
     d->calculateBorderSizes(topMargin, bottomMargin, leftMargin, rightMargin);
 
     QRectF itemRect;
 
-    itemRect = rect;
+    itemRect = effectiveRect;
     itemRect.setSize(QSizeF(leftMargin, topMargin));
 
     if (d->itemPositions[TopLeft]) {
         d->itemPositions[TopLeft]->setGeometry(itemRect);
     }
 
-    itemRect.setLeft(rect.left() + leftMargin);
-    itemRect.setWidth(rect.width() - leftMargin - rightMargin);
+    itemRect.setLeft(effectiveRect.left() + leftMargin);
+    itemRect.setWidth(effectiveRect.width() - leftMargin - rightMargin);
 
     if (d->itemPositions[Top]) {
         d->itemPositions[Top]->setGeometry(itemRect);
     }
 
     itemRect.setWidth(rightMargin);
-    itemRect.moveRight(rect.right());
+    itemRect.moveRight(effectiveRect.right());
 
     if (d->itemPositions[TopRight]) {
         d->itemPositions[TopRight]->setGeometry(itemRect);
     }
 
-    itemRect.setTop(rect.top() + topMargin);
-    itemRect.setHeight(rect.height() - topMargin - bottomMargin);
+    itemRect.setTop(effectiveRect.top() + topMargin);
+    itemRect.setHeight(effectiveRect.height() - topMargin - bottomMargin);
 
     if (d->itemPositions[Right]) {
         d->itemPositions[Right]->setGeometry(itemRect);
     }
 
     itemRect.setHeight(bottomMargin);
-    itemRect.moveBottom(rect.bottom());
+    itemRect.moveBottom(effectiveRect.bottom());
 
     if (d->itemPositions[BottomRight]) {
         d->itemPositions[BottomRight]->setGeometry(itemRect);
     }
 
-    itemRect.setLeft(rect.left() + leftMargin);
-    itemRect.setWidth(rect.width() - leftMargin - rightMargin);
+    itemRect.setLeft(effectiveRect.left() + leftMargin);
+    itemRect.setWidth(effectiveRect.width() - leftMargin - rightMargin);
 
     if (d->itemPositions[Bottom]) {
         d->itemPositions[Bottom]->setGeometry(itemRect);
     }
 
-    itemRect.setLeft(rect.left());
+    itemRect.setLeft(effectiveRect.left());
     itemRect.setWidth(leftMargin);
 
     if (d->itemPositions[BottomLeft]) {
         d->itemPositions[BottomLeft]->setGeometry(itemRect);
     }
 
-    itemRect.setTop(rect.top() + topMargin);
-    itemRect.setHeight(rect.height() - topMargin - bottomMargin);
+    itemRect.setTop(effectiveRect.top() + topMargin);
+    itemRect.setHeight(effectiveRect.height() - topMargin - bottomMargin);
 
     if (d->itemPositions[Left]) {
         d->itemPositions[Left]->setGeometry(itemRect);
     }
 
-    itemRect = rect;
+    itemRect = effectiveRect;
     itemRect.adjust(
             leftMargin, topMargin,
             - rightMargin, - bottomMargin
@@ -173,6 +183,10 @@ QSizeF FullBorderLayout::sizeHint(Qt::SizeHint which,
     Q_UNUSED(which);
     Q_UNUSED(constraint);
 
+    if (which == Qt::MaximumSize) {
+        return MAX_WIDGET_SIZE;
+    }
+
     qreal topMargin, bottomMargin, leftMargin, rightMargin;
     d->calculateBorderSizes(topMargin, bottomMargin, leftMargin, rightMargin);
 
@@ -186,6 +200,7 @@ QSizeF FullBorderLayout::sizeHint(Qt::SizeHint which,
             ->preferredSize().width();
     }
 
+    kDebug() << hintWidth << " " << hintHeight;
     return QSizeF(hintWidth, hintHeight);
 }
 

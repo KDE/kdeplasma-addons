@@ -81,7 +81,7 @@ public:
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 /**
@@ -93,10 +93,9 @@ class LANCELOT_EXPORT ScrollPane: public Widget {
 public:
     /**
      * Creates a new Lancelot::ScrollPane
-     * @param name the internal name of the widget
      * @param parent parent item
      */
-    ScrollPane(QString name, QGraphicsItem * parent = 0);
+    ScrollPane(QGraphicsItem * parent = 0);
 
     /**
      * Destroys this ScrollPane
@@ -123,12 +122,9 @@ public:
      */
     virtual QSizeF currentViewportSize() const;
 
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
-    Override virtual void setGeometry(const QRectF & geometry);
-
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

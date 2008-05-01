@@ -20,6 +20,9 @@
 #ifndef LIBLANCELOT_H_
 #define LIBLANCELOT_H_
 
+#include <QWidget>
+#include <QMetaObject>
+
 namespace Lancelot
 {
 
@@ -36,6 +39,32 @@ enum ActivationMethod {
     ClickActivate = 1,
     ExtenderActivate = 2
 };
+
+#define MAX_WIDGET_SIZE QSizeF(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX)
+
+#define L_WIDGET                                           \
+    private:                                               \
+        const QMetaObject * L_INITD_META_OBJECT;           \
+    protected:                                             \
+        virtual bool L_isInitialized() const {             \
+            return L_metaObject() == metaObject();         \
+        }                                                  \
+        virtual void L_setInitialized() {                  \
+            L_INITD_META_OBJECT = metaObject();            \
+        }                                                  \
+        virtual const QMetaObject * L_metaObject() const { \
+            return L_INITD_META_OBJECT;                    \
+        }
+//    public:
+//        virtual void debug() const {
+//            kDebug() << " 1 " << L_metaObject()->className();
+//            kDebug() << " 2 " << metaObject()->className();
+//            kDebug() << " 3 " << (long int)(L_INITD_META_OBJECT->className());
+//            kDebug() << " 4 " << (long int)(metaObject()->className());
+//        }
+
+#define L_WIDGET_IS_INITIALIZED  L_isInitialized()
+#define L_WIDGET_SET_INITIALIZED L_setInitialized(); updateGeometry();
 
 } // namespace Lancelot
 

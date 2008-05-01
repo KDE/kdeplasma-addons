@@ -21,6 +21,7 @@
 #define LANCELOT_BASIC_WIDGET_H_
 
 #include <lancelot/lancelot_export.h>
+#include <lancelot/lancelot.h>
 
 #include <QtGui>
 #include <QtCore>
@@ -45,42 +46,40 @@ class LANCELOT_EXPORT BasicWidget: public Widget {
 
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
-    Q_PROPERTY ( QString name READ name WRITE setName )
     Q_PROPERTY ( QString title READ title WRITE setTitle )
     Q_PROPERTY ( QString description READ description WRITE setDescription )
     Q_PROPERTY ( Qt::Orientation innerOrientation READ innerOrientation WRITE setInnerOrientation )
 
+    L_WIDGET
+
 public:
     /**
      * Creates a new Lancelot::BasicWidget
-     * @param name the internal name of the widget
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QString name = QString(), QString title = QString(),
+    BasicWidget(QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
-     * @param name the internal name of the widget
      * @param icon the icon for the widget
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QString name, QIcon icon, QString title = QString(),
+    BasicWidget(QIcon icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
-     * @param name the internal name of the widget
      * @param icon Svg with active, inactive and disabled states
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QString name, Plasma::Svg * icon, QString title = QString(),
+    BasicWidget(Plasma::Svg * icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
@@ -174,10 +173,12 @@ protected:
 
     Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;
-    Private * d;
+    Private * const d;
 };
 
 } // namespace Lancelot

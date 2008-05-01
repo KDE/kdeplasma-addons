@@ -58,7 +58,7 @@ public:
 
     ColorScheme foregroundColor;
     ColorScheme backgroundColor;
-    Plasma::Svg * backgroundSvg;
+    Plasma::PanelSvg * backgroundSvg;
 
     bool hasBackgroundColor : 1;
     bool ownsBackgroundSvg : 1;
@@ -142,7 +142,7 @@ QString WidgetGroup::name() const
     return d->name;
 }
 
-Plasma::Svg * WidgetGroup::backgroundSvg() const
+Plasma::PanelSvg * WidgetGroup::backgroundSvg() const
 {
     return d->backgroundSvg;
 }
@@ -207,11 +207,10 @@ void WidgetGroup::load(bool full)
         }
 
         kDebug() << "Svg Location " << d->confGroupTheme->readEntry("background.svg");
-        d->backgroundSvg = new Plasma::Svg(d->confGroupTheme->readEntry("background.svg"));
+        d->backgroundSvg = new Plasma::PanelSvg(d->confGroupTheme->readEntry("background.svg"));
         kDebug() << "Svg " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal");
+        kDebug() << d->backgroundSvg->hasElement("center");
         d->ownsBackgroundSvg = true;
-        // d->backgroundSvg->setContentType(Plasma::Svg::ImageSet); // ToWoC
-        // d->backgroundSvg->setContainsMultipleImages(true);
     }
 
     notifyUpdated();
@@ -220,8 +219,6 @@ void WidgetGroup::load(bool full)
 void WidgetGroup::notifyUpdated() {
     kDebug() << "Widget::Group" << d->name;
     foreach (Widget * widget, d->widgets) {
-        kDebug() << (long)widget;
-        kDebug() << widget->name();
         widget->groupUpdated();
     }
 }
