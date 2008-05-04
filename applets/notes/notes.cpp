@@ -70,7 +70,7 @@ void Notes::init()
     }
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
-    m_autoFontPercent = cg.readEntry("autoFontPercent", 5);
+    m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
     m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->setTextColor(m_textColor);
     m_checkSpelling = cg.readEntry("checkSpelling", false);
