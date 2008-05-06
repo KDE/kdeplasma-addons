@@ -169,26 +169,25 @@ void Frame::removeDir()
 
 void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
-   if ( !m_configDialog ) {
-        m_configDialog = new ConfigDialog( parent );
-	
-	KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
-	foreach (KService::Ptr service, services) {
-	    const QString *service_name = new QString ( service->name() );
-	    const QVariant *service_identifier = new QVariant ( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
-	    m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), *service_name, *service_identifier );
-	}
-
-	parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-	parent->addPage( m_configDialog, parent->windowTitle(), icon() );
-	parent->setDefaultButton( KDialog::Ok );
-	parent->showButtonSeparator( true );
-        connect( parent, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
-        connect( parent, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
+    m_configDialog = new ConfigDialog( parent );
+    
+    KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
+    foreach (KService::Ptr service, services) {
+	const QString *service_name = new QString ( service->name() );
+	const QVariant *service_identifier = new QVariant ( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
+	m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), *service_name, *service_identifier );
     }
+
+    parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    parent->addPage( m_configDialog, parent->windowTitle(), icon() );
+    parent->setDefaultButton( KDialog::Ok );
+    parent->showButtonSeparator( true );
+    connect( parent, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
+    connect( parent, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
+
     connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
-    
+
     m_configDialog->setRoundCorners( m_roundCorners );
     m_configDialog->setShadow(m_shadow);
     m_configDialog->setShowFrame(m_frame);
