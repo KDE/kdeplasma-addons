@@ -34,7 +34,6 @@ static const int s_arrowWidth = 30;
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mCurrentDate( QDate::currentDate() ),
-      mScaleComic( true ),
       mShowPreviousButton( true ),
       mShowNextButton( false )
 {
@@ -52,7 +51,7 @@ ComicApplet::~ComicApplet()
 {
 }
 
-void ComicApplet::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
+void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
@@ -72,7 +71,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
     mConfigWidget = new ConfigWidget( parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
-    mConfigWidget->setScaleComic( mScaleComic );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
@@ -84,7 +82,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 void ComicApplet::applyConfig()
 {
     mComicIdentifier = mConfigWidget->comicIdentifier();
-    mScaleComic = mConfigWidget->scaleComic();
 
     saveConfig();
 
@@ -95,14 +92,12 @@ void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
     mComicIdentifier = cg.readEntry( "comic", "garfield" );
-    mScaleComic = cg.readEntry( "scaleComic", true );
 }
 
 void ComicApplet::saveConfig()
 {
     KConfigGroup cg = config();
     cg.writeEntry( "comic", mComicIdentifier );
-    cg.writeEntry( "scaleComic", mScaleComic );
 }
 
 void ComicApplet::slotNextDay()
@@ -122,16 +117,19 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     if ( event->button() == Qt::LeftButton && geometry().contains( event->pos() ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
-        if ( mShowPreviousButton && event->pos().x() < s_arrowWidth ) {
+        const QRectF rect = contentsRect();
+        if ( mShowPreviousButton && event->pos().x() > rect.left() &&
+                                    event->pos().x() < (rect.left() + s_arrowWidth) ) {
             slotPreviousDay();
             event->accept();
-        } else if ( mShowNextButton && event->pos().x() > contentSizeHint().width() - s_arrowWidth ) {
+        } else if ( mShowNextButton && event->pos().x() > (rect.right() - s_arrowWidth) &&
+                                       event->pos().x() < rect.right() ) {
             slotNextDay();
             event->accept();
         //link clicked
         } else if ( !mWebsiteUrl.isEmpty() &&
-                    event->pos().y() > contentSizeHint().height() - fm.height() &&
-                    event->pos().x() > contentSizeHint().width() - fm.width( mWebsiteUrl.host() ) - s_arrowWidth ) {
+                    event->pos().y() > (rect.bottom() - fm.height()) &&
+                    event->pos().x() > (rect.right() - fm.width( mWebsiteUrl.host() ) - s_arrowWidth) ) {
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
             event->accept();
         }
@@ -141,53 +139,58 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 QSizeF ComicApplet::contentSizeHint() const
 {
     if ( !mImage.isNull() ) {
-        const QSizeF size = mImage.size();
-
-        if ( mScaleComic ) {
-            return QSizeF( geometry().width(), (geometry().width() / size.width() ) * size.height() );
-        } else {
-            return QSizeF( size.width() + 2 * s_arrowWidth, size.height() + Plasma::Theme::defaultTheme()->fontMetrics().height() );
-        }
+        const QSize size = mImage.size();
+        return QSizeF( geometry().width(), (geometry().width() / size.width() ) * size.height() );
     } else
         return geometry().size();
 }
 
-void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect& )
+void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
-    int imageWidth = ( mImage.isNull() ? 300 : geometry().width() ) - 2 * s_arrowWidth;
-    int height = ( mImage.isNull() ? 100 : geometry().height() );
-
+    int urlHeight = 0;
     if ( !mWebsiteUrl.isEmpty() ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-        height -= fm.height();
+        urlHeight = fm.height();
+        int height = contentRect.bottom() - urlHeight;
         p->setPen( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
-        p->drawText( QRectF( s_arrowWidth, height, imageWidth, fm.height() ),
+        p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
                      Qt::AlignRight, mWebsiteUrl.host() );
     }
 
     p->save();
     p->setRenderHint( QPainter::Antialiasing );
     p->setRenderHint( QPainter::SmoothPixmapTransform );
+
+    int leftImageGap = 0;
+    int buttonMiddle = (contentRect.height() / 2) + contentRect.top();
     if ( mShowPreviousButton ) {
         QPolygon arrow( 3 );
-        arrow.setPoint( 0, QPoint( 3, height / 2 ) );
-        arrow.setPoint( 1, QPoint( s_arrowWidth - 5, height / 2 - 15 ) );
-        arrow.setPoint( 2, QPoint( s_arrowWidth - 5, height / 2 + 15 ) );
+        arrow.setPoint( 0, QPoint( contentRect.left() + 3, buttonMiddle ) );
+        arrow.setPoint( 1, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle - 15 ) );
+        arrow.setPoint( 2, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle + 15 ) );
 
         p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
         p->drawPolygon( arrow );
+
+        leftImageGap = s_arrowWidth;
     }
+
+    int rightImageGap = 0;
     if ( mShowNextButton ) {
         QPolygon arrow( 3 );
-        arrow.setPoint( 0, QPoint( s_arrowWidth + imageWidth + s_arrowWidth - 3, height / 2 ) );
-        arrow.setPoint( 1, QPoint( s_arrowWidth + imageWidth + 5, height / 2 - 15 ) );
-        arrow.setPoint( 2, QPoint( s_arrowWidth + imageWidth + 5, height / 2 + 15 ) );
+        arrow.setPoint( 0, QPoint( contentRect.right() - 3, buttonMiddle ) );
+        arrow.setPoint( 1, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15 ) );
+        arrow.setPoint( 2, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle + 15 ) );
 
         p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
         p->drawPolygon( arrow );
+
+        rightImageGap = s_arrowWidth;
     }
 
-    p->drawImage( QRectF( s_arrowWidth, 0, imageWidth, height ), mImage );
+    QRect imageRect( contentRect.x() + leftImageGap, contentRect.y(),
+                     contentRect.width() - (leftImageGap + rightImageGap), contentRect.height() - urlHeight );
+    p->drawImage( imageRect, mImage );
 
     p->restore();
 }

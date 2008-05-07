@@ -94,11 +94,8 @@ ConfigWidget::ConfigWidget( QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
-    mScaleComic = new QCheckBox( i18n( "Make comic resizable" ), this );
-
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
-    layout->addWidget( mScaleComic, 1, 0 );
 
     mModel = new ComicModel( this );
     mComicIdentifier->setModel( mModel );
@@ -123,14 +120,4 @@ QString ConfigWidget::comicIdentifier() const
 {
     const QModelIndex index = mModel->index( mComicIdentifier->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
-}
-
-void ConfigWidget::setScaleComic(bool scale)
-{
-    mScaleComic->setChecked(scale);
-}
-
-bool ConfigWidget::scaleComic() const
-{
-    return mScaleComic->isChecked();
 }

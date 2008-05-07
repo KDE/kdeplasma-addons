@@ -34,12 +34,9 @@ class ConfigWidget : public QWidget
 
         void setComicIdentifier( const QString &comic );
         QString comicIdentifier() const;
-        void setScaleComic(bool scale);
-        bool scaleComic() const;
 
     private:
         QComboBox *mComicIdentifier;
-        QCheckBox *mScaleComic;
         ComicModel *mModel;
 };
 
