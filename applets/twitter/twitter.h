@@ -24,6 +24,7 @@
 #include <QLabel>
 #include <QDomDocument>
 #include <QMap>
+#include <QGraphicsProxyWidget>
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
@@ -31,9 +32,11 @@
 
 class KDialog;
 class KLineEdit;
+class KTextEdit;
 class QSpinBox;
 class QCheckBox;
 class QGraphicsLinearLayout;
+class KColorScheme;
 
 namespace KWallet
 {
@@ -43,15 +46,17 @@ namespace KWallet
 namespace Plasma
 {
     class Svg;
-    class LineEdit;
     class Flash;
     class Icon;
+    class WebContent;
 }
 
 struct Tweet {
     QGraphicsLinearLayout *layout;
     Plasma::Icon *icon;
-    Plasma::LineEdit *edit;
+    KTextEdit *content;
+    QGraphicsProxyWidget *contentProxy;
+    Plasma::Icon *favIcon;
 };
 
 class Twitter : public Plasma::Applet
@@ -67,7 +72,7 @@ class Twitter : public Plasma::Applet
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void createConfigurationInterface();
+        void createConfigurationInterface( KConfigDialog *parent );
         /**
          * read from the opened KWallet
          * @param success whether we got to open it
@@ -109,9 +114,9 @@ class Twitter : public Plasma::Applet
 
         Plasma::Svg *m_theme;
         KDialog *m_dialog;
-        Plasma::LineEdit *m_title;
-        Plasma::LineEdit *m_statusEdit;
-        Plasma::LineEdit *m_historyEdit;
+        KTextEdit *m_statusEdit;
+        QGraphicsProxyWidget *m_statusProxy;
+        Plasma::WebContent *m_historyEdit;
         Plasma::Flash *m_flash;
         Plasma::Icon *m_icon;
         QGraphicsLinearLayout *m_layout;
@@ -140,6 +145,8 @@ class Twitter : public Plasma::Applet
         KWallet::Wallet *m_wallet;
         enum WalletWait { None=0, Read, Write };
         WalletWait m_walletWait;
+
+        KColorScheme *m_colorScheme;
 };
 
 K_EXPORT_PLASMA_APPLET(twitter, Twitter)
