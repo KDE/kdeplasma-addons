@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Elegance
+
+Comment=An elegant theme for plasma.
+Comment[fr]=Un thème élégant pour plasma.
+
+X-KDE-PluginInfo-Author=AdrienV
+X-KDE-PluginInfo-Email=adrien.vermeulen (at) free.fr
+X-KDE-PluginInfo-Name=Elegance
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://www.kde-look.org
+X-KDE-PluginInfo-Category=Plasma Theme
+X-KDE-PluginInfo-Depends=KDE4
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

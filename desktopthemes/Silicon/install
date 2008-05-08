@@ -1,0 +1,19 @@
+INSTALL
+
+System-wide install:
+Extract this archive to $KDE4ROOT/share/apps/desktoptheme directory,
+where $KDE4ROOT is the location where your KDE4.0 is installed.
+
+User-only install:
+Extract this archive to ~/.kde4/share/apps/desktoptheme directory
+
+HOW TO ACTIVATE
+
+Open your plasmarc file (~/.kde4/share/config/plasmarc) and in the
+[Theme] section replace name=Default with name=silicon
+
+When you restart plasma, the new theme will be loaded.
+(you can log out, and log back in)
+
+In newer Versions of plasma you can select it through the theme chooser.
+
