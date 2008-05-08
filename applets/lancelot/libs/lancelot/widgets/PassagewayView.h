@@ -34,9 +34,7 @@
 #include <lancelot/models/PassagewayViewModels.h>
 #include <lancelot/models/ActionListViewModels.h>
 
-#include <plasma/layouts/nodelayout.h>
-#include <plasma/layouts/boxlayout.h>
-#include <plasma/layouts/layoutanimator.h>
+#include <lancelot/layouts/NodeLayout.h>
 
 namespace Lancelot
 {

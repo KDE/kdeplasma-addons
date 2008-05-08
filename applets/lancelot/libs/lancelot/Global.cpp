@@ -207,7 +207,8 @@ void WidgetGroup::load(bool full)
         }
 
         kDebug() << "Svg Location " << d->confGroupTheme->readEntry("background.svg");
-        d->backgroundSvg = new Plasma::PanelSvg(d->confGroupTheme->readEntry("background.svg"));
+        d->backgroundSvg = new Plasma::PanelSvg(NULL);
+        d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
         kDebug() << "Svg " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal");
         kDebug() << d->backgroundSvg->hasElement("center");
         d->ownsBackgroundSvg = true;
@@ -287,13 +288,13 @@ Instance::Instance()
   : d(new Private)
 {
     // TODO: Allow other applications to be privileged
-    if (Instance::d->hasApplication) {
-        Plasma::Theme::self()->setApplication("Lancelot");
-    }
+    // if (Instance::d->hasApplication) {
+    //    Plasma::Theme::defaultTheme()->setApplication("Lancelot");
+    // }
     d->confLancelot = new KConfig("lancelotrc");
 
     // TODO: If Plasma::Theme supports file(), alter the following code
-    QString search = "desktoptheme/" + Plasma::Theme::self()->themeName() + "/lancelot/theme.config";
+    QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/theme.config";
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
         path = "lancelotrc";

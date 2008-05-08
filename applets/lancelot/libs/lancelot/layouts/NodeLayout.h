@@ -23,11 +23,11 @@
 #include <QtCore/QMap>
 #include <cmath>
 
-#include <plasma/plasma_export.h>
-#include <plasma/plasma.h>
-#include <plasma/layouts/layout.h>
+#include <lancelot/lancelot_export.h>
 
-namespace Plasma {
+#include <QGraphicsLayout>
+
+namespace Lancelot {
 
 /**
  * Node layout has an advanced layouting mechanism. Every item's position
@@ -48,9 +48,9 @@ namespace Plasma {
  * the item will be bound to the defined node.
  */
 
-class PLASMA_EXPORT NodeLayout : public Layout {
+class LANCELOT_EXPORT NodeLayout : public QGraphicsLayout {
 public:
-    class PLASMA_EXPORT NodeCoordinate {
+    class LANCELOT_EXPORT NodeCoordinate {
     public:
         /**
          * Position is calculated:
@@ -70,24 +70,27 @@ public:
         float yr, ya;
     };
 
-    // reimplemented
-    virtual Qt::Orientations expandingDirections() const;
+    /**
+     * Creates a new Lancelot::NodeLayout
+     * @param parent parent layout item
+     */
+    explicit NodeLayout(QGraphicsLayoutItem * parent = 0);
 
-    explicit NodeLayout(LayoutItem * parent = 0);
+    /**
+     * Destroys this Lancelot::NodeLayout
+     */
     virtual ~NodeLayout();
-
-    QSizeF sizeHint() const;
 
     /**
      * Adds item at top-left corner, with automatic sizing
      * (using sizeHint of the item)
      */
-    void addItem (LayoutItem * item);
+    void addItem(QGraphicsLayoutItem * item);
 
     /**
      * Adds item with specified top-left and bottom right corners.
      */
-    void addItem (LayoutItem * item,
+    void addItem(QGraphicsLayoutItem * item,
             NodeCoordinate topLeft, NodeCoordinate bottomRight);
 
     /**
@@ -96,19 +99,15 @@ public:
      * are relative coordinates so (0, 0) represent top left corner,
      * (0.5, 0.5) represent the center of the item etc.
      */
-    void addItem (LayoutItem * item,
+    void addItem(QGraphicsLayoutItem * item,
             NodeCoordinate node, qreal xr = 0, qreal yr = 0);
 
-    void removeItem (LayoutItem * item);
-
-    virtual int count() const;
-    virtual int indexOf(LayoutItem * item) const;
-    virtual LayoutItem * itemAt(int i) const;
-    virtual LayoutItem * takeAt(int i);
-
-protected:
-    void relayout();
-    void releaseManagedItems();
+    Override virtual void setGeometry(const QRectF & rect);
+    Override virtual int count() const;
+    Override virtual QGraphicsLayoutItem * itemAt(int i) const;
+    Override virtual void removeAt(int index);
+    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;

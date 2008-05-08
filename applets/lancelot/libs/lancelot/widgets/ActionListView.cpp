@@ -37,7 +37,7 @@ namespace Lancelot {
 #define itemHeightFromIndex(A) ((m_model->isCategory(A)) ? m_categoryItemHeight : m_currentItemHeight)
 
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
-  : BaseActionWidget(list->name() + "::" + QString((direction == Up)?"up":"down"), "", "", parent), m_list(list), m_direction(direction)
+  : BasicWidget("", "", parent), m_list(list), m_direction(direction)
 {
     setAcceptsHoverEvents(true);
 }
@@ -47,7 +47,7 @@ void ActionListView::ScrollButton::hoverEnterEvent (QGraphicsSceneHoverEvent * e
     if (isHovered()) return;
     m_list->m_scrollTimes = -1;
     m_list->scroll(m_direction);
-    BaseActionWidget::hoverEnterEvent(event);
+    BasicWidget::hoverEnterEvent(event);
 }
 
 void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * event)
@@ -55,12 +55,12 @@ void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * e
     if (!isHovered()) return;
     m_list->m_scrollTimes = -1;
     m_list->scroll(ActionListView::No);
-    BaseActionWidget::hoverLeaveEvent(event);
+    BasicWidget::hoverLeaveEvent(event);
 }
 
 // ActionListView
-ActionListView::ActionListView(QString name, ActionListViewModel * model, QGraphicsItem * parent)
-  : Widget(name, parent), m_model(NULL),
+ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent)
+  : Widget(parent), m_model(NULL),
     m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
     m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
     m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
@@ -99,12 +99,12 @@ void ActionListView::positionScrollButtons()
         scrollButtonUp = new ScrollButton(Up, this);
         scrollButtonDown = new ScrollButton(Down, this);
 
-        addChild(scrollButtonUp);
+        //addChild(scrollButtonUp);
         scrollButtonUp->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonUp->setZValue(100);
         scrollButtonUp->show();
 
-        addChild(scrollButtonDown);
+        //addChild(scrollButtonDown);
         scrollButtonDown->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonDown->setZValue(100);
         scrollButtonDown->show();
@@ -155,9 +155,6 @@ void ActionListView::scrollBy(int scrollAmmount) {
     if (m_scrollDirection == Up && m_buttons.first().second >= 0) {
         if (m_topButtonIndex <= 0) {
             scroll(No);
-            if (scrollButtonUp) {
-                scrollButtonUp->setOpacity(0.3);
-            }
             return;
         } else {
             m_buttons.first().first->setTransform(QTransform());
@@ -170,21 +167,12 @@ void ActionListView::scrollBy(int scrollAmmount) {
             + m_buttons.last().second <= geometry().height()) {
         if (m_topButtonIndex + m_buttons.size() >= m_model->size()) {
             scroll(No);
-            if (scrollButtonDown) {
-                scrollButtonDown->setOpacity(0.3);
-            }
             return;
         } else {
             m_buttons.last().first->setTransform(QTransform());
             addButton(End);
         }
     }
-
-    if (scrollButtonUp) {
-        scrollButtonUp->setOpacity(1);
-        scrollButtonDown->setOpacity(1);
-    }
-
 
     QPair < ExtenderButton *, int > pair;
     QMutableListIterator< QPair < ExtenderButton *, int > > i(m_buttons);
@@ -218,7 +206,6 @@ void ActionListView::scrollBy(int scrollAmmount) {
     m_topButtonScale.translate(0, - partHeight);
     m_topButtonScale.scale(1, scale);
 
-    m_buttons.first().first->setOpacity(scale);
     m_buttons.first().first->setTransform(m_topButtonScale);
 
     /*int*/ partHeight = qRound(geometry().height()) - m_buttons.last().second;
@@ -227,7 +214,6 @@ void ActionListView::scrollBy(int scrollAmmount) {
     m_bottomButtonScale.reset();
     m_bottomButtonScale.scale(1, scale);
 
-    m_buttons.last().first->setOpacity(scale);
     m_buttons.last().first->setTransform(m_bottomButtonScale);
 
 }
@@ -300,7 +286,7 @@ void ActionListView::modelItemAltered(int index)
     if (buttonIndex >= 0 && buttonIndex < m_buttons.size()) {
         m_buttons.at(buttonIndex).first->setTitle(m_model->title(index));
         m_buttons.at(buttonIndex).first->setDescription(m_model->description(index));
-        m_buttons.at(buttonIndex).first->setIcon(m_model->icon(index));
+        m_buttons.at(buttonIndex).first->setIcon(*(m_model->icon(index)));
     }
 }
 
@@ -390,11 +376,11 @@ Lancelot::ExtenderButton * ActionListView::createButton()
 
     if (!m_buttonsLimbo.empty()) {
         button = m_buttonsLimbo.takeFirst();
-        button->enable();
+        button->setEnabled(true);
         button->show();
     } else {
-        button = new Lancelot::ExtenderButton(name() + "Button",
-            (QIcon *)NULL, "", "", this);
+        button = new Lancelot::ExtenderButton(
+            "", "", this);
 
         button->setInnerOrientation(Qt::Horizontal);
         button->setExtenderPosition(m_extenderPosition);
@@ -485,9 +471,9 @@ bool ActionListView::addButton(ListTail where) {
     ExtenderButton * button = createButton();
     button->setTitle(m_model->title(itemIndex));
     button->setDescription(m_model->description(itemIndex));
-    button->setIcon(m_model->icon(itemIndex));
+    button->setIcon(*(m_model->icon(itemIndex)));
     button->setLayout(NULL);
-    button->enable(!m_model->isCategory(itemIndex));
+    button->setEnabled(!m_model->isCategory(itemIndex));
     m_signalMapper.setMapping(button, itemIndex);
 
     int itemHeight = itemHeightFromIndex(itemIndex);
@@ -585,6 +571,4 @@ void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = 
 int ActionListView::categoryItemHeight() { return m_categoryItemHeight; }
 
 } // namespace Lancelot
-
-#include "ActionListView.moc"
 

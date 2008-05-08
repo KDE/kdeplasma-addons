@@ -31,6 +31,9 @@ namespace Lancelot {
  *
  * A layout which lays one item per border (left, top, bottom, right)
  * one per corner and one item in center.
+ *
+ * @author Ivan Cukic
+ *
  */
 class LANCELOT_EXPORT FullBorderLayout : public QGraphicsLayout {
 public:

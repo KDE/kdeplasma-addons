@@ -22,41 +22,74 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include <plasma/layouts/layout.h>
-#include <plasma/widgets/widget.h>
 #include <cmath>
 #include <QMap>
+
+#include <QGraphicsLayout>
+#include <QGraphicsLayoutItem>
+#include <QGraphicsWidget>
 
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT CardLayout : public Plasma::Layout
+/**
+ * CardLayout positions its children like a stack of cards.
+ *
+ * Every child takes the whole area available to CardLayout, but
+ * only one child is shown at a time.
+ *
+ * @note Only QGraphicsWidget based items can be hidden.
+ *
+ * @author Ivan Cukic
+ *
+ */
+
+class LANCELOT_EXPORT CardLayout : public QGraphicsLayout
 {
 public:
-    virtual Qt::Orientations expandingDirections() const;
 
-    explicit CardLayout(LayoutItem * parent = 0);
+    /**
+     * Creates a new Lancelot::CardLayout
+     * @param parent parent layout item
+     */
+    explicit CardLayout(QGraphicsLayoutItem * parent = 0);
+
+    /**
+     * Destroys this Lancelot::CardLayout
+     */
     virtual ~CardLayout();
 
-    QSizeF sizeHint() const;
+    /**
+     * Adds a QGraphicsLayoutItem to this layout.
+     * @note Items added using this method will be always shown
+     * @param item item to add
+     */
+    void addItem (QGraphicsLayoutItem * item);
 
-    void addItem (Plasma::LayoutItem * item);
-    void addItem (Plasma::Widget * widget,const QString & id);
+    /**
+     * Adds a QGraphicsWidget.
+     * @param item item to add
+     * @param id used to identify the item
+     */
+    void addItem (QGraphicsWidget * widget, const QString & id);
 
-    void removeItem (Plasma::LayoutItem * item);
-    void removeItem (const QString & id);
-
-    virtual int count() const;
-    virtual int indexOf(Plasma::LayoutItem * item) const;
-    virtual Plasma::LayoutItem * itemAt(int i) const;
-    virtual Plasma::LayoutItem * takeAt(int i);
-
+    /**
+     * Shows the item specified by id, and hides all other
+     * items
+     */
     void show(const QString & id);
+
+    /**
+     * Hides all items that can be hidden
+     */
     void hideAll();
 
-protected:
-    void relayout();
-    void releaseManagedItems();
+    Override virtual void setGeometry(const QRectF & rect);
+    Override virtual int count() const;
+    Override virtual QGraphicsLayoutItem * itemAt(int i) const;
+    Override virtual void removeAt(int index);
+    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;

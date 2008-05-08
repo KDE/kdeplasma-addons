@@ -87,15 +87,16 @@ LancelotTestWindow::LancelotTestWindow()
     Lancelot::Panel * panel;
     panel = new Lancelot::Panel(KIcon("lancelot"), "Title");
     m_corona->addItem(panel);
+    panel->setBackground("lancelot/main-background");
     panel->setGeometry(50, 250, 200, 200);
 
-    // // ResizeBordersPanel
-    // ResizeBordersPanel * resizeBordersPanel;
-    // resizeBordersPanel = new ResizeBordersPanel("namePanel");
-    // m_corona->addItem(resizeBordersPanel);
-    // resizeBordersPanel->setBackground("lancelot/main-background");
+    // ResizeBordersPanel
+    ResizeBordersPanel * resizeBordersPanel;
+    resizeBordersPanel = new ResizeBordersPanel();
+    m_corona->addItem(resizeBordersPanel);
+    resizeBordersPanel->setBackground("lancelot/main-background");
 
-    // resizeBordersPanel->setGeometry(300, 250, 200, 200);
+    resizeBordersPanel->setGeometry(300, 250, 200, 200);
 
     // ScrollPane
     ScrollPane * scrollPane = new ScrollPane();

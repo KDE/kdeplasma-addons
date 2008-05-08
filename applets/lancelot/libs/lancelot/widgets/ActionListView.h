@@ -40,7 +40,7 @@ class LANCELOT_EXPORT_DEPRECATED ActionListView : public Widget
     Q_OBJECT
 
 public:
-    ActionListView(QString name, ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
+    ActionListView(ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
 
     void setModel(ActionListViewModel * model);
@@ -60,7 +60,6 @@ public:
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition();
 
-    //void paintWidget ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget );
     void setGeometry (const QRectF & geometry);
 
     void setItemsGroup(WidgetGroup * group = NULL);
@@ -91,7 +90,7 @@ private:
         Start = 0, End = 1
     };
 
-    class ScrollButton : public Lancelot::BaseActionWidget {
+    class ScrollButton : public Lancelot::BasicWidget {
     public:
         ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
         void hoverEnterEvent ( QGraphicsSceneHoverEvent * event);

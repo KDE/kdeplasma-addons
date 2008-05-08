@@ -142,12 +142,14 @@ qreal Panel::borderSize(Plasma::MarginEdge edge)
 
 void Panel::setBackground(const QString & imagePath)
 {
+    kDebug() << " Setting background " << imagePath;
     if (!d->background) {
-        d->background = new Plasma::PanelSvg(imagePath);
+        d->background = new Plasma::PanelSvg(this);
         d->background->setEnabledBorders(Plasma::PanelSvg::AllBorders);
-    } else {
-        d->background->setImagePath(imagePath);
     }
+
+    d->background->setImagePath(imagePath);
+    kDebug() << " Setting background " << d->background->isValid();
     d->invalidate();
 }
 
@@ -197,7 +199,7 @@ void Panel::setGeometry(const QRectF & geometry)
 {
     Widget::setGeometry(geometry);
     if (d->background) {
-        d->background->resize(geometry.size());
+        d->background->resizePanel(geometry.size());
     }
     d->invalidate();
 }
@@ -224,7 +226,11 @@ void Panel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
     Q_UNUSED(option);
     Q_UNUSED(widget);
     if (d->background) {
-        d->background->paint(painter, option->rect);
+        kDebug() << " Panel has a background " << d->background->isValid();
+        // d->background->resizePanel(boundingRect().size());
+        d->background->paintPanel(painter, option->rect);
+    } else {
+        kDebug() << " Panel has no background ";
     }
 }
 

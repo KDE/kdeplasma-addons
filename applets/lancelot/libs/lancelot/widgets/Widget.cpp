@@ -147,10 +147,11 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
 
     // Background Painting
     if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
-        // TODO: Fix rendering - it is pixelated
-        svg->resize(size());
+        kDebug() << "Background prefix " << element;
         svg->setElementPrefix(element);
-        svg->paint(painter, QRectF(QPointF(), size())); //, element);
+        kDebug() << "Background prefix " << svg->hasElementPrefix(element);
+        svg->resizePanel(size());
+        svg->paintPanel(painter, QRectF(QPointF(), size())); //, element);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;

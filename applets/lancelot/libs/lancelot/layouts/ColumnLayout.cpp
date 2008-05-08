@@ -19,7 +19,7 @@
 
 #include "ColumnLayout.h"
 #include <QList>
-#include <plasma/layouts/layoutitem.h>
+#include <QGraphicsWidget>
 
 #define GOLDEN_SIZE  0.381966011250105  // 1 / (1 + phi); phi = (sqrt(5) + 1) / 2
 
@@ -83,32 +83,17 @@ ColumnLayout::ColumnSizer * ColumnLayout::ColumnSizer::create(SizerType type)
     return NULL;
 }
 
-class ColumnLayout::Private: public QObject {
-    Q_OBJECT
-public Q_SLOTS:
-    void stateChanged(
-            Plasma::LayoutItem * item,
-            Plasma::LayoutAnimator::State oldState,
-            Plasma::LayoutAnimator::State newState
-    )
-    {
-        if (oldState == Plasma::LayoutAnimator::RemovedState
-                && items.contains((Plasma::Widget *)item)) {
-            ((Plasma::Widget *)item)->hide();
-        }
-    }
-
+class ColumnLayout::Private {
 public:
     ColumnLayout * q;
-    QList < Plasma::Widget * > items;
-    Plasma::LayoutAnimator * animator;
+    QList < QGraphicsWidget * > items;
     ColumnLayout::ColumnSizer * sizer;
     int count;
 
     enum RelayoutType { Clean, Push, Pop, Resize };
 
     Private(ColumnLayout * parent)
-        : q(parent), animator(NULL), count(2), sizer(new GoldenColumnSizer()) {}
+        : q(parent), sizer(new GoldenColumnSizer()), count(2) {}
 
     void relayout(RelayoutType type = Clean)
     {
@@ -122,57 +107,36 @@ public:
 
         int i = 0;
 
-        foreach (Plasma::Widget * item, items) {
+        foreach (QGraphicsWidget * item, items) {
             if (items.size() - showItems > i++) {
-                if (animator) {
-                    animator->setCurrentState(item, Plasma::LayoutAnimator::RemovedState);
-                } else {
-                    item->setVisible(false);
-                }
+                item->setVisible(false);
             } else {
                 qreal itemWidth = sizer->size() * width;
                 newGeometry.setWidth(itemWidth);
-                if (animator) {
-                    animator->setGeometry(item, newGeometry);
-                    if (!item->isVisible()) {
-                        item->setVisible(true);
-                        animator->setCurrentState(item, Plasma::LayoutAnimator::InsertedState);
-                    } else {
-                        animator->setCurrentState(item, Plasma::LayoutAnimator::StandardState);
-                    }
-                } else {
-                    item->setGeometry(newGeometry);
-                    if (!item->isVisible()) {
-                        item->setVisible(true);
-                    }
+                item->setGeometry(newGeometry);
+                if (!item->isVisible()) {
+                    item->setVisible(true);
                 }
                 newGeometry.moveLeft(newGeometry.left() + itemWidth);
             }
         }
-        q->startAnimation();
     }
 
-    void push(Plasma::Widget * widget)
+    void push(QGraphicsWidget * widget)
     {
         if (!widget || items.contains(widget)) {
             return;
         }
 
-        widget->setManagingLayout(q);
-
         //TODO: Uncomment : widget->hide();
         items.append(widget);
-
-        if (animator)  {
-            animator->setCurrentState(widget, Plasma::LayoutAnimator::InsertedState);
-        }
 
         q->updateGeometry();
     }
 
-    Plasma::Widget * pop()
+    QGraphicsWidget * pop()
     {
-        Plasma::Widget * widget = items.takeLast();
+        QGraphicsWidget * widget = items.takeLast();
         relayout(Pop);
         return widget;
     }
@@ -190,22 +154,18 @@ ColumnLayout::ColumnSizer * ColumnLayout::sizer() const
     return d->sizer;
 }
 
-QSizeF ColumnLayout::sizeHint() const
+QSizeF ColumnLayout::sizeHint(Qt::SizeHint which,
+        const QSizeF & constraint) const
 {
     return QSizeF();
 }
 
-void ColumnLayout::relayout()
-{
-    d->relayout(Private::Resize);
-}
-
-void ColumnLayout::push(Plasma::Widget * widget)
+void ColumnLayout::push(QGraphicsWidget * widget)
 {
     d->push(widget);
 }
 
-Plasma::Widget * ColumnLayout::pop()
+QGraphicsWidget * ColumnLayout::pop()
 {
     return d->pop();
 }
@@ -222,8 +182,8 @@ int ColumnLayout::columnCount() const
     return d->count;
 }
 
-ColumnLayout::ColumnLayout(LayoutItem * parent)
-    : Plasma::Layout(parent), d(new Private(this))
+ColumnLayout::ColumnLayout(QGraphicsLayoutItem * parent)
+    : QGraphicsLayout(parent), d(new Private(this))
 {
 
 }
@@ -233,36 +193,13 @@ ColumnLayout::~ColumnLayout()
     delete d;
 }
 
-void ColumnLayout::insertItem(int index, Plasma::LayoutItem * item)
+void ColumnLayout::removeAt(int index)
 {
 }
 
-void ColumnLayout::addItem(Plasma::LayoutItem * item)
-{
-}
-
-void ColumnLayout::removeItem(Plasma::LayoutItem * item)
-{
-}
-
-int ColumnLayout::indexOf(Plasma::LayoutItem * item) const
-{
-    return d->items.indexOf((Plasma::Widget *) item);
-}
-
-Plasma::LayoutItem * ColumnLayout::itemAt(int i) const
+QGraphicsLayoutItem * ColumnLayout::itemAt(int i) const
 {
     return d->items.at(i);
-}
-
-Plasma::LayoutItem * ColumnLayout::takeAt(int i)
-{
-    return NULL;
-}
-
-Qt::Orientations ColumnLayout::expandingDirections() const
-{
-    return Qt::Horizontal | Qt::Vertical;
 }
 
 int ColumnLayout::count() const
@@ -270,27 +207,10 @@ int ColumnLayout::count() const
     return d->items.size();
 }
 
-void ColumnLayout::setAnimator(Plasma::LayoutAnimator * animator)
+void ColumnLayout::setGeometry(const QRectF & rect)
 {
-    Plasma::Layout::setAnimator(animator);
-    d->animator = animator;
-
-    if (animator) {
-        d->connect(
-                animator, SIGNAL(stateChanged(Plasma::LayoutItem *,
-                        Plasma::LayoutAnimator::State, Plasma::LayoutAnimator::State)),
-                d, SLOT(stateChanged(Plasma::LayoutItem *,
-                        Plasma::LayoutAnimator::State, Plasma::LayoutAnimator::State))
-               );
-    }
-
-}
-
-void ColumnLayout::releaseManagedItems()
-{
-    foreach (LayoutItem* item, d->items) {
-        item->unsetManagingLayout(this);
-    }
+    QGraphicsLayout::setGeometry(rect);
+    d->relayout();
 }
 
 } // namespace Lancelot

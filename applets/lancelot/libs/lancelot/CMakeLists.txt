@@ -48,20 +48,22 @@ set(lancelot_LIB_SRCS
         widgets/ScrollBar.cpp
         widgets/ScrollPane.cpp
 
-        # widgets/ActionListView.cpp
+        widgets/ActionListView.cpp
         # widgets/PassagewayView.cpp
-        # widgets/WidgetPositioner.cpp
+        widgets/WidgetPositioner.cpp
 
         # # widgets/CustomListView.cpp
 
         # Layouts
         layouts/FullBorderLayout.cpp
-        # layouts/CardLayout.cpp
-        # layouts/ColumnLayout.cpp
+        layouts/NodeLayout.cpp
+        layouts/CardLayout.cpp
+        layouts/ColumnLayout.cpp
+        layouts/FlipLayout.cpp
 
         # Models
-        # models/ActionListViewModels.cpp
-        # models/PassagewayViewModels.cpp
+        models/ActionListViewModels.cpp
+        models/PassagewayViewModels.cpp
 )
 
 kde4_add_library(lancelot SHARED ${lancelot_LIB_SRCS})

@@ -21,10 +21,8 @@
 #define LANCELOT_COLUMN_LAYOUT_H_
 
 #include <lancelot/lancelot_export.h>
-
-#include <plasma/widgets/widget.h>
-#include <plasma/layouts/layout.h>
-#include <plasma/layouts/layoutanimator.h>
+#include <QGraphicsLayoutItem>
+#include <QGraphicsLayout>
 
 namespace Lancelot
 {
@@ -41,59 +39,108 @@ namespace Lancelot
  *
  *  To make that clear, pop and push functions are introduced.
  *  Trying to invoke one of the standard item manipulation
- *  functions from Plasma::Layout will do nothing.
+ *  functions from QGraphicsLayout will do nothing.
  *
  *  Since ColumnLayout needs the ability to hide certain items
- *  in it, it works only for Plasma::Widget subclasses.
+ *  in it, it works only for QGraphicsWidget subclasses.
  */
 
-class LANCELOT_EXPORT ColumnLayout: public Plasma::Layout
+class LANCELOT_EXPORT ColumnLayout: public QGraphicsLayout
 {
 public:
-    class ColumnSizer
-    {
+    /**
+     * Abstract interface for implementing column size calculation
+     * depending on the column count.
+     * Two basic implementations are provided - one that returns
+     * equal sizes for all visible columns, and one that uses the
+     * golden ratio.
+     */
+    class ColumnSizer {
     public:
-        virtual void init(int count)  = 0;
+        /**
+         * Initializes the ColumnSizer.
+         * This function should calculate or otherwise prepare
+         * the data needed for retrieving the sizes of columns
+         * depending on the column count. It should also reset
+         * the current column counter to the first column.
+         * @param count column count
+         */
+        virtual void init(int count) = 0;
+
+        /**
+         * @returns the size of the current column.
+         * This function should return the size of the current
+         * column and move the current column pointer to the
+         * next column.
+         */
         virtual qreal size() = 0;
+
+        /**
+         * Destroys the ColumnLayout::ColumnSizer
+         */
         virtual ~ColumnSizer();
 
         enum SizerType {
-            EqualSizer,
-            GoldenSizer
+            EqualSizer,  ///< Sizer that returns the same size for all visible columns
+            GoldenSizer  ///< Sizer that uses golden ratio for visible column sizes
         };
 
+        /**
+         * @returns a new ColumnSizer with one of the default
+         * implementations
+         */
         static ColumnSizer * create(SizerType type);
     };
 
-    ColumnLayout(Plasma::LayoutItem * parent = 0);
+    /**
+     * Creates a new Lancelot::ColumnLayout
+     * @param parent parent layout item
+     */
+    ColumnLayout(QGraphicsLayoutItem * parent = 0);
+
+    /**
+     * Destroys Lancelot::ColumnLayout
+     */
     ~ColumnLayout();
 
-    void insertItem(int index, Plasma::LayoutItem * item); /**< Not implemented. See class description. */
-    void addItem(Plasma::LayoutItem * item);               /**< Not implemented. See class description. */
-    void removeItem(Plasma::LayoutItem * item);            /**< Not implemented. See class description. */
-    LayoutItem * takeAt(int i);                            /**< Not implemented. See class description. */
-
-    int indexOf(Plasma::LayoutItem * item) const;
-    LayoutItem * itemAt(int i) const;
-    Qt::Orientations expandingDirections() const;
-
-    int count() const;
-    void setAnimator(Plasma::LayoutAnimator * animator);
-
+    /**
+     * Sets the maximum number of visible columns
+     */
     void setColumnCount(int count);
+
+    /**
+     * @returns the number of visible columns
+     */
     int columnCount() const;
 
-    void push(Plasma::Widget * widget);
-    Plasma::Widget * pop();
+    /**
+     * Pushes the specified widget to the end of stack
+     */
+    void push(QGraphicsWidget * widget);
 
-    QSizeF sizeHint() const;
+    /**
+     * Removes the last widget from the stack and returns it
+     * @returns the last widget in stack
+     */
+    QGraphicsWidget * pop();
 
+    /**
+     * Sets the ColumnSizer object
+     */
     void setSizer(ColumnSizer * sizer);
+
+    /**
+     * @returns the current ColumnSizer
+     */
     ColumnSizer * sizer() const;
 
-protected:
-    void relayout();
-    void releaseManagedItems();
+    Override virtual void setGeometry(const QRectF & rect);
+    Override virtual int count() const;
+    Override virtual QGraphicsLayoutItem * itemAt(int i) const;
+    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
+
+    Override virtual void removeAt(int index);  /**< Not implemented. See class description. */
 
 private:
     class Private;

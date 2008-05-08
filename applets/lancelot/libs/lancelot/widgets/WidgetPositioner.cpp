@@ -23,7 +23,7 @@ namespace Lancelot
 {
 
 WidgetPositioner::WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent)
-    : Widget("WidgetPositioner", parent), m_widget(widget), m_view(view)
+    : Widget(parent), m_widget(widget), m_view(view)
 {
 }
 
@@ -37,7 +37,6 @@ void WidgetPositioner::setGeometry(const QRectF & geometry)
     if (m_widget) {
         QPoint pos = m_view->mapFromScene(mapToScene(m_geometry.topLeft()));
         m_widget->setGeometry(QRect(pos, geometry.size().toSize()));
-        //m_widget->setGeometry(sceneBoundingRect().toRect());
     }
 }
 

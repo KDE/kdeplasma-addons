@@ -105,7 +105,8 @@ public:
         checked(false)
     {
         if (!extenderIconSvg) {
-            extenderIconSvg = new Plasma::Svg("lancelot/extender-button-icon");
+            extenderIconSvg = new Plasma::Svg(q);
+            extenderIconSvg->setImagePath("lancelot/extender-button-icon");
         }
 
         extender = new ExtenderObject(extenderIconSvg, q);
