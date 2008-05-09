@@ -68,6 +68,7 @@ public:
 
 private:
     FlipLayoutManager();
+    ~FlipLayoutManager();
     static FlipLayoutManager * m_instance;
 
     class Private;

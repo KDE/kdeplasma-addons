@@ -39,6 +39,7 @@ public:
      * @param parent parent item
      */
     ResizeBordersPanel(QGraphicsItem * parent = 0);
+    ~ResizeBordersPanel();
 
     Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     Override virtual void setGeometry(const QRectF & geometry);

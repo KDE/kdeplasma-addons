@@ -78,6 +78,7 @@ void ToggleExtenderButton::toggle()
 
 ToggleExtenderButton::~ToggleExtenderButton()
 {
+    delete d;
 }
 
 void ToggleExtenderButton::paint(QPainter * painter,
