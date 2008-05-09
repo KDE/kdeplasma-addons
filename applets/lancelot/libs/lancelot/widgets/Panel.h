@@ -35,7 +35,7 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT Panel: public Widget
+class LANCELOT_EXPORT Panel: public Lancelot::Widget
 {
     Q_OBJECT
 
@@ -43,7 +43,16 @@ class LANCELOT_EXPORT Panel: public Widget
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
     Q_PROPERTY ( QString title READ title WRITE setTitle )
 
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/Panel.h QIcon QSize QString)
+
 public:
+    /**
+     * Creates a new Lancelot::Widget
+     * @param parent parent item
+     */
+    Panel(QGraphicsItem * parent = 0);
+
     /**
      * Creates a new Lancelot::Panel
      * @param icon the icon for the widget
@@ -59,12 +68,6 @@ public:
      * @param parent parent item
      */
     Panel(QString title, QGraphicsItem * parent = 0);
-
-    /**
-     * Creates a new Lancelot::Widget
-     * @param parent parent item
-     */
-    Panel(QGraphicsItem * parent = 0);
 
     /**
      * Destroys Lancelot::Panel
@@ -133,12 +136,12 @@ public:
      */
     qreal borderSize(Plasma::MarginEdge edge);
 
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
-    Override virtual void setGeometry(const QRectF & geometry);
-    Override virtual void setGroup(WidgetGroup * group = NULL);
+    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    L_Override virtual void setGeometry(const QRectF & geometry);
+    L_Override virtual void setGroup(WidgetGroup * group = NULL);
 
 protected:
-    Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    L_Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
     class Private;

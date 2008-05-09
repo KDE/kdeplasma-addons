@@ -31,7 +31,7 @@ namespace Models {
 Runner::Runner(QString search)
     : m_searchString(search)
 {
-    m_runners = Plasma::AbstractRunner::load(this);
+    // m_runners = Plasma::AbstractRunner::load(this);
 
     load();
 }
@@ -52,7 +52,7 @@ void Runner::setSearchString(const QString & search)
 }
 
 void Runner::load()
-{
+{/*
     m_items.clear();
 
     int matchCount = 0;
@@ -91,10 +91,10 @@ void Runner::load()
             ++matchCount;
         }
     }
-}
+*/}
 
 void Runner::activate(int index)
-{
+{/*
     Plasma::SearchMatch * action = (Plasma::SearchMatch *)
         m_items[index].data.value< void * >();
 
@@ -110,8 +110,8 @@ void Runner::activate(int index)
         action->exec(&m_context);
         hideLancelotWindow();
     }
-
+*/
 }
 
-}
-}
+} // namespace Models
+} // namespace Lancelot

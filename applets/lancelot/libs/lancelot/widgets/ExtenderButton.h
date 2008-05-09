@@ -40,7 +40,7 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT ExtenderButton : public BasicWidget
+class LANCELOT_EXPORT ExtenderButton : public Lancelot::BasicWidget
 {
     Q_OBJECT
 
@@ -51,16 +51,23 @@ class LANCELOT_EXPORT ExtenderButton : public BasicWidget
     Q_PROPERTY ( bool down READ isDown WRITE setDown )
 
     L_WIDGET
+    L_INCLUDE(lancelot/widgets/ExtenderButton.h lancelot/lancelot.h)
 
 public:
+    /**
+     * Creates a new Lancelot::ExtenderButton
+     * @param parent parent item
+     */
+    ExtenderButton(QGraphicsItem * parent = 0);
+
     /**
      * Creates a new Lancelot::ExtenderButton
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QString title = QString(),
-            QString description = QString(), QGraphicsItem * parent = 0);
+    ExtenderButton(QString title, QString description = QString(),
+            QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
@@ -91,23 +98,23 @@ public:
      * Sets the position of the extender
      * @param position new position
      */
-    void setExtenderPosition(ExtenderPosition position);
+    void setExtenderPosition(Lancelot::ExtenderPosition position);
 
     /**
      * @returns the extender position
      */
-    ExtenderPosition extenderPosition();
+    Lancelot::ExtenderPosition extenderPosition();
 
     /**
      * Sets the activation method of the ExtenderButton
      * @param method new activation method
      */
-    void setActivationMethod(ActivationMethod method);
+    void setActivationMethod(Lancelot::ActivationMethod method);
 
     /**
      * @returns activation method
      */
-    ActivationMethod activationMethod();
+    Lancelot::ActivationMethod activationMethod();
 
     /**
      * Makes the button checkable when set to true
@@ -130,14 +137,14 @@ public:
      */
     bool isDown();
 
-    Override virtual void geometryUpdated();
+    L_Override virtual void geometryUpdated();
 
-    Override virtual void setGroup(WidgetGroup * group = NULL);
-    Override virtual void groupUpdated();
+    L_Override virtual void setGroup(WidgetGroup * group = NULL);
+    L_Override virtual void groupUpdated();
 
-    Override virtual QRectF boundingRect() const;
+    L_Override virtual QRectF boundingRect() const;
 
-    Override virtual void paint(QPainter * painter,
+    L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 public slots:
@@ -192,10 +199,10 @@ Q_SIGNALS:
     void released();
 
 protected:
-    Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
-    Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 private:
     class Private;

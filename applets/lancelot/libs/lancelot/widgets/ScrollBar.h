@@ -35,7 +35,7 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT ScrollBar: public Widget {
+class LANCELOT_EXPORT ScrollBar: public Lancelot::Widget {
     Q_OBJECT
 
     Q_PROPERTY ( int minimum READ minimum WRITE setMinimum )
@@ -47,12 +47,15 @@ class LANCELOT_EXPORT ScrollBar: public Widget {
     Q_PROPERTY ( Qt::Orientation orientation READ orientation WRITE setOrientation )
     Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
 
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/ScrollBar.h lancelot/lancelot.h)
+
 public:
     /**
      * Creates a new Lancelot::ScrollBar
      * @param parent parent item
      */
-    ScrollBar(QGraphicsItem * parent = NULL);
+    ScrollBar(QGraphicsItem * parent = 0);
 
     /**
      * Destroys this Lancelot::ScrollBar
@@ -136,16 +139,16 @@ public:
      * @note
      * ExtenderActivate is not supported and is treated as HoverActivate
      */
-    void setActivationMethod(ActivationMethod method);
+    void setActivationMethod(Lancelot::ActivationMethod method);
 
     /**
      * @returns activation method
      */
-    ActivationMethod activationMethod() const;
+    Lancelot::ActivationMethod activationMethod() const;
 
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
-    Override virtual void setGeometry(const QRectF & geometry);
-    Override virtual void setGroup(WidgetGroup * group = NULL);
+    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    L_Override virtual void setGeometry(const QRectF & geometry);
+    L_Override virtual void setGroup(WidgetGroup * group = NULL);
 
 public Q_SLOTS:
     /**
@@ -182,7 +185,7 @@ Q_SIGNALS:
     void valueChanged(int value);
 
 protected:
-    Override virtual void groupUpdated();
+    L_Override virtual void groupUpdated();
 
 private:
     class Private;

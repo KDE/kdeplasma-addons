@@ -89,7 +89,11 @@ private:
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT ScrollPane: public Widget {
+class LANCELOT_EXPORT ScrollPane: public Lancelot::Widget {
+
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/ScrollPane.h)
+
 public:
     /**
      * Creates a new Lancelot::ScrollPane

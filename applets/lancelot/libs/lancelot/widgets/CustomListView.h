@@ -34,7 +34,7 @@
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT CustomListViewItem: public Widget
+class LANCELOT_EXPORT CustomListViewItem: public Lancelot::Widget
 {
     Q_OBJECT
 public:

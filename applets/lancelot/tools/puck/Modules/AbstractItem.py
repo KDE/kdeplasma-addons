@@ -6,9 +6,11 @@ class AbstractItemHandler:
     def __init__(self):
         self.__node = 0
 
+    """ @returns the full C++ name for this class """
     def name(self):
         return "Abstract"
 
+    """ @returns the XML namespace for this class (for use in the PUCK XML) """
     def namespace(self):
         return self.name().replace(":", "_")
 
@@ -18,38 +20,33 @@ class AbstractItemHandler:
     def node(self):
         return self.__node
 
+    """ @returns the C++ inlcudes for needed by the class """
     def include(self):
         return "/* " + self.attribute("type") + " declaration - not implemented */"
 
+    """ @returns the C++ variable declaration """
     def declaration(self):
         return self.attribute("type") + " * " + self.attribute("name") + ";"
 
+    """ @returns the C++ variable initialization """
     def initialization(self):
         return self._construction() + ";";
 
     def _construction(self):
         return self.attribute("name") + " = new " + self.attribute("type") + "()"
 
+    """ @returns the C++ object setup (properties etc.) """
     def setup(self):
-        setup = ""
+        return ""
 
-        if self.hasAttribute("minimumSize"):
-            setup += attribute("name") + "->setMinimumSize(" + self.attribute("minimumSize") + ");\n";
-
-        if self.hasAttribute("maximumSize"):
-            setup += attribute("name") + "->setMaximumSize(" + self.attribute("maximumSize") + ");\n";
-
-        if self.hasAttribute("opacity"):
-            setup += self.attribute("name") + "->setOpacity(" + self.attribute("opacity") + ");\n";
-
-        return setup
-
+    """ @returns whether the active node has the specified attribute """
     def hasAttribute(self, attrName):
         debug.message(self.name(), " wants attribute " + self.namespace() + ":" + attrName)
         return \
             self.node().hasAttribute(self.name() + ":" + attrName) or \
             self.node().hasAttribute(attrName)
 
+    """ @returns the value of the active node's attribute """
     def attribute(self, attrName):
         debug.message(self.name(), " retrieves attribute " + self.namespace() + ":" + attrName)
 

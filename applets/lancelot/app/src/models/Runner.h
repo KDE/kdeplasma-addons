@@ -44,7 +44,7 @@ protected:
 private:
     QString m_searchString;
     Plasma::AbstractRunner::List m_runners;
-    Plasma::SearchContext m_context;
+    Plasma::RunnerContext m_context;
 };
 
 }

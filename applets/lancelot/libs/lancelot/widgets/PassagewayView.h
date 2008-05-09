@@ -35,6 +35,7 @@
 #include <lancelot/models/ActionListViewModels.h>
 
 #include <lancelot/layouts/NodeLayout.h>
+#include <QGraphicsLinearLayout>
 
 namespace Lancelot
 {
@@ -47,20 +48,25 @@ namespace Lancelot
 class LANCELOT_EXPORT PassagewayView : public Lancelot::Panel
 {
     Q_OBJECT
+
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/PassagewayView.h)
+
 public:
-    PassagewayView(QString name, PassagewayViewModel * entranceModel = 0,
+    PassagewayView(QGraphicsItem * parent = 0);
+    PassagewayView(PassagewayViewModel * entranceModel,
             PassagewayViewModel * atlasModel = 0, QGraphicsItem * parent = 0);
     virtual ~PassagewayView();
 
     // Entrance
     void setEntranceModel(PassagewayViewModel * model);
     void setEntranceTitle(const QString & title);
-    void setEntranceIcon(KIcon * icon);
+    void setEntranceIcon(KIcon icon);
 
     // Atlas
     void setAtlasModel(PassagewayViewModel * model);
     void setAtlasTitle(const QString & title);
-    void setAtlasIcon(KIcon * icon);
+    void setAtlasIcon(KIcon icon);
 
 protected Q_SLOTS:
     virtual void listItemActivated(int index);

@@ -46,7 +46,7 @@ namespace Lancelot
 
 class BasicWidget::Private {
     public:
-    Private(BasicWidget * parent, QString title, QString description)
+    Private(BasicWidget * parent, QString title = QString(), QString description = QString())
       : icon(QIcon()), iconInSvg(NULL), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
@@ -87,6 +87,13 @@ class BasicWidget::Private {
     QString title;
     QString description;
 };
+
+BasicWidget::BasicWidget(QGraphicsItem * parent)
+  : Widget(parent),
+    d(new Private(this))
+{
+    L_WIDGET_SET_INITIALIZED;
+}
 
 BasicWidget::BasicWidget(QString title, QString description,
         QGraphicsItem * parent)

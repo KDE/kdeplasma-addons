@@ -49,7 +49,7 @@ set(lancelot_LIB_SRCS
         widgets/ScrollPane.cpp
 
         widgets/ActionListView.cpp
-        # widgets/PassagewayView.cpp
+        widgets/PassagewayView.cpp
         widgets/WidgetPositioner.cpp
 
         # # widgets/CustomListView.cpp
@@ -99,7 +99,6 @@ install(FILES
    widgets/Panel.h
    widgets/PassagewayView.h
    widgets/ResizeBordersPanel.h
-   widgets/ToggleExtenderButton.h
    widgets/Widget.h
    widgets/WidgetPositioner.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets)

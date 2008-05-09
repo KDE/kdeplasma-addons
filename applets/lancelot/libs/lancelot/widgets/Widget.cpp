@@ -80,6 +80,14 @@ bool Widget::isHovered() const
     return d->hover;
 }
 
+QString Widget::groupName() const
+{
+    if (d->group) {
+        return d->group->name();
+    }
+    return QString();
+}
+
 void Widget::setGroupByName(const QString & groupName)
 {
     setGroup(instance()->group(groupName));
@@ -102,12 +110,12 @@ void Widget::setGroup(WidgetGroup * group)
     groupUpdated();
 }
 
-WidgetGroup * Widget::group()
+WidgetGroup * Widget::group() const
 {
     return d->group;
 }
 
-Instance * Widget::instance()
+Instance * Widget::instance() const
 {
     if (!d->group) return Instance::activeInstance();
 

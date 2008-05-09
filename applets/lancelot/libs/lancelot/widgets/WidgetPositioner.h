@@ -33,8 +33,12 @@ namespace Lancelot
  * Dirty hack to show QWidget as a part of QGV. It works for the
  * case it is used. It is not meant to be used elsewhere.
  */
-class LANCELOT_EXPORT_DEPRECATED WidgetPositioner: public Widget
+class LANCELOT_EXPORT_DEPRECATED WidgetPositioner: public Lancelot::Widget
 {
+
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/WidgetPositioner.h)
+
 public:
     WidgetPositioner(QWidget * widget, QGraphicsView * view, QGraphicsItem * parent);
     virtual ~WidgetPositioner();

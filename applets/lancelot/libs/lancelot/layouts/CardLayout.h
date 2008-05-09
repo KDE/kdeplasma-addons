@@ -64,14 +64,14 @@ public:
      * @note Items added using this method will be always shown
      * @param item item to add
      */
-    void addItem (QGraphicsLayoutItem * item);
+    void addItem(QGraphicsLayoutItem * item);
 
     /**
      * Adds a QGraphicsWidget.
      * @param item item to add
      * @param id used to identify the item
      */
-    void addItem (QGraphicsWidget * widget, const QString & id);
+    void addItem(QGraphicsWidget * widget, const QString & id);
 
     /**
      * Shows the item specified by id, and hides all other
@@ -84,11 +84,11 @@ public:
      */
     void hideAll();
 
-    Override virtual void setGeometry(const QRectF & rect);
-    Override virtual int count() const;
-    Override virtual QGraphicsLayoutItem * itemAt(int i) const;
-    Override virtual void removeAt(int index);
-    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override virtual void setGeometry(const QRectF & rect);
+    L_Override virtual int count() const;
+    L_Override virtual QGraphicsLayoutItem * itemAt(int i) const;
+    L_Override virtual void removeAt(int index);
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 private:

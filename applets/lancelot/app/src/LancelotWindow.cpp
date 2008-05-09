@@ -159,9 +159,9 @@ public:
     }
 
 private:
-    LancelotWindow * m_parent;
-    Plasma::Widget * m_root;
-    QBrush           m_fgBrush;
+    LancelotWindow  * m_parent;
+    QGraphicsWidget * m_root;
+    QBrush            m_fgBrush;
 
     bool             m_resizing;
     QPixmap        * m_cache;
@@ -197,14 +197,14 @@ LancelotWindow::LancelotWindow()
 
     instance = new Lancelot::Instance();
 
-    m_root = new Lancelot::ResizeBordersPanel("m_root");
+    m_root = new Lancelot::ResizeBordersPanel();
 
     m_root->setBackground("lancelot/main-background");
     m_corona->addItem(m_root);
 
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
-    _m_view = m_view;
-    _m_root = m_root;
+    // _m_view = m_view;
+    // _m_root = m_root;
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     setupUi(m_root);
@@ -213,8 +213,8 @@ LancelotWindow::LancelotWindow()
     setupModels();
 
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */
-    editSearch->setParent(this);
-    editSearch->installEventFilter(this);
+    // editSearch->setParent(this);
+    // editSearch->installEventFilter(this);
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     instance->activateAll();
@@ -226,7 +226,7 @@ LancelotWindow::LancelotWindow()
         SLOT(sectionActivated(const QString &))
     );
 
-    QMapIterator<QString, Lancelot::ToggleExtenderButton * > i(sectionButtons);
+    QMapIterator<QString, Lancelot::ExtenderButton * > i(sectionButtons);
     while (i.hasNext()) {
         i.next();
         connect(i.value(), SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
@@ -237,10 +237,10 @@ LancelotWindow::LancelotWindow()
     connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
-    connect(editSearch,
-        SIGNAL(textChanged(const QString &)),
-        this, SLOT(search(const QString &))
-    );
+    //connect(editSearch,
+    //    SIGNAL(textChanged(const QString &)),
+    //    this, SLOT(search(const QString &))
+    //);
 
     loadConfig();
 }
@@ -285,7 +285,7 @@ void LancelotWindow::showWindow(int x, int y)
 {
     panelSections->setVisible(m_showingFull);
 
-    layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Plasma::LeftPositioned);
+    layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
 
     m_resizeDirection = None;
     m_hideTimer.stop();
@@ -333,7 +333,7 @@ void LancelotWindow::showWindow(int x, int y)
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     KWindowSystem::forceActiveWindow(winId());
-    editSearch->setFocus();
+    // editSearch->setFocus();
 }
 
 void LancelotWindow::resizeWindow()
@@ -390,12 +390,12 @@ QStringList LancelotWindow::sectionIcons()
 
 void LancelotWindow::sectionActivated(const QString & item)
 {
-    foreach (Lancelot::ToggleExtenderButton * button, sectionButtons) {
-        button->setPressed(false);
+    foreach (Lancelot::ExtenderButton * button, sectionButtons) {
+        button->setChecked(false);
     }
 
     if (sectionButtons.contains(item)) {
-        sectionButtons[item]->setPressed(true);
+        sectionButtons[item]->setChecked(true);
     }
 
     layoutCenter->show(item);
@@ -403,9 +403,9 @@ void LancelotWindow::sectionActivated(const QString & item)
 
 void LancelotWindow::search(const QString & string)
 {
-    if (editSearch->text() != string) {
-        editSearch->setText(string);
-    }
+    // if (editSearch->text() != string) {
+    //    editSearch->setText(string);
+    // }
 
     m_searchString = string;
 
@@ -469,64 +469,64 @@ void LancelotWindow::systemSwitchUser()
 
 void LancelotWindow::setupModels()
 {
-    // Models:
-    m_models["Places"]            = new Lancelot::Models::Places();
-    m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
-    m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
-    m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
-
-    m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
-    m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
-    m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
-
-    m_models["Runner"]            = new Lancelot::Models::Runner();
-
-    // Groups:
-
-    m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
-    m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
-    m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
-
-    m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
-    m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
-    m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
-
-    // Assignments: Model - Group:
-    // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
-
-    Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("Places"),           m_models["Places"]);
-    Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("System"),           m_models["SystemServices"]);
-
-    Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Removable"),        m_models["Devices/Removable"]);
-    Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Fixed"),            m_models["Devices/Fixed"]);
-
-    Merged(m_modelGroups["DocumentsLeft"])->addModel (NULL, i18n("New:"),             m_models["NewDocuments"]);
-
-    Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Recent documents"), m_models["RecentDocuments"]);
-    Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Open documents"),   m_models["OpenDocuments"]);
-
-    m_modelGroups["SearchLeft"] = m_models["Runner"];
-
-    // Assignments: ListView - Group
-
-    listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
-    listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
-    //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
-    listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
-
-    listComputerRight->setModel(m_modelGroups["ComputerRight"]);
-    listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
-    //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
-    //listSearchRight->setModel(m_modelGroups["SearchRight"]);
-
-    // Applications passageview
-
-    passagewayApplications->setEntranceModel(
-        new Lancelot::PassagewayViewModelProxy(
-            new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), new KIcon("favorites")
-        )
-    );
-    passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
+//     // Models:
+//     m_models["Places"]            = new Lancelot::Models::Places();
+//     m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
+//     m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
+//     m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
+//
+//     m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
+//     m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
+//     m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
+//
+//     m_models["Runner"]            = new Lancelot::Models::Runner();
+//
+//     // Groups:
+//
+//     m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
+//     m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
+//     m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
+//
+//     m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
+//     m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
+//     m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
+//
+//     // Assignments: Model - Group:
+//     // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+//
+//     Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("Places"),           m_models["Places"]);
+//     Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("System"),           m_models["SystemServices"]);
+//
+//     Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Removable"),        m_models["Devices/Removable"]);
+//     Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Fixed"),            m_models["Devices/Fixed"]);
+//
+//     Merged(m_modelGroups["DocumentsLeft"])->addModel (NULL, i18n("New:"),             m_models["NewDocuments"]);
+//
+//     Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Recent documents"), m_models["RecentDocuments"]);
+//     Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Open documents"),   m_models["OpenDocuments"]);
+//
+//     m_modelGroups["SearchLeft"] = m_models["Runner"];
+//
+//     // Assignments: ListView - Group
+//
+//     listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
+//     listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
+//     //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
+//     listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
+//
+//     listComputerRight->setModel(m_modelGroups["ComputerRight"]);
+//     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
+//     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
+//     //listSearchRight->setModel(m_modelGroups["SearchRight"]);
+//
+//     // Applications passageview
+//
+//     passagewayApplications->setEntranceModel(
+//         new Lancelot::PassagewayViewModelProxy(
+//             new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), new KIcon("favorites")
+//         )
+//     );
+//     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 
 }
 
@@ -596,14 +596,14 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
 
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
-     if ((object == editSearch) && (event->type() == QEvent::KeyPress)) {
-         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-         if (keyEvent->key() == Qt::Key_Escape) {
-             lancelotHide(true);
-             return true;
-         }
-     }
-     return false;
+//     if ((object == editSearch) && (event->type() == QEvent::KeyPress)) {
+//         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+//         if (keyEvent->key() == Qt::Key_Escape) {
+//             lancelotHide(true);
+//             return true;
+//         }
+//     }
+//     return false;
 }
 
 #include "LancelotWindow.moc"

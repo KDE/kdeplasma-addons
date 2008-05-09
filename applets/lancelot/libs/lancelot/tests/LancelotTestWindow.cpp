@@ -27,7 +27,6 @@
 
 #include "../widgets/Widget.h"
 #include "../widgets/ExtenderButton.h"
-#include "../widgets/ToggleExtenderButton.h"
 #include "../widgets/Panel.h"
 #include "../widgets/ResizeBordersPanel.h"
 #include "../widgets/ScrollBar.h"

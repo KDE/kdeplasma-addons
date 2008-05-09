@@ -62,24 +62,27 @@ Plasma::Flip FlipLayoutManager::globalFlip() const
     return d->globalFlip;
 }
 
-void FlipLayoutManager::setFlip(QGraphicsLayout * layout, Plasma::Flip flip)
+void FlipLayoutManager::setFlip(const QGraphicsLayout * layout, Plasma::Flip flip)
 {
-    d->globalFlipLayouts.remove(layout);
-    d->flips[layout] = flip;
+    QGraphicsLayout * l = const_cast<QGraphicsLayout *>(layout);
+    d->globalFlipLayouts.remove(l);
+    d->flips[l] = flip;
 }
 
-void FlipLayoutManager::setUseGlobalFlip(QGraphicsLayout * layout)
+void FlipLayoutManager::setUseGlobalFlip(const QGraphicsLayout * layout)
 {
-    d->flips.remove(layout);
-    d->globalFlipLayouts.insert(layout);
+    QGraphicsLayout * l = const_cast<QGraphicsLayout *>(layout);
+    d->flips.remove(l);
+    d->globalFlipLayouts.insert(l);
 }
 
-Plasma::Flip FlipLayoutManager::flip(QGraphicsLayout * layout) const
+Plasma::Flip FlipLayoutManager::flip(const QGraphicsLayout * layout) const
 {
-    if (d->globalFlipLayouts.contains(layout)) {
+    QGraphicsLayout * l = const_cast<QGraphicsLayout *>(layout);
+    if (d->globalFlipLayouts.contains(l)) {
         return d->globalFlip;
-    } else if (d->flips.contains(layout)) {
-        return d->flips[layout];
+    } else if (d->flips.contains(l)) {
+        return d->flips[l];
     }
     return 0;
 }

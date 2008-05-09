@@ -5,10 +5,10 @@ import xml
 
 class NodeLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def name(self):
-        return "Plasma::NodeLayout"
+        return "Lancelot::NodeLayout"
 
     def include(self):
-        return "#include <plasma/layouts/nodelayout.h>"
+        return "#include <lancelot/layouts/NodeLayout.h>"
 
     def setup(self):
         setup = AbstractLayout.AbstractLayoutHandler.setup(self)
@@ -18,8 +18,8 @@ class NodeLayoutHandler(AbstractLayout.AbstractLayoutHandler):
                 continue
 
             setup += self.attribute("name") + "->addItem(" + child.getAttribute("name") + ",\n" \
-                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":topLeft") + "),\n" \
-                  + "  Plasma::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":bottomRight") + ")\n" \
+                  + "  Lancelot::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":topLeft") + "),\n" \
+                  + "  Lancelot::NodeLayout::NodeCoordinate(" + child.getAttribute(self.namespace() + ":bottomRight") + ")\n" \
                   + ");\n"
         return setup
 

@@ -46,20 +46,20 @@ public:
      * @param layout layout
      * @param flip new flip
      */
-    void setFlip(QGraphicsLayout * layout, Plasma::Flip flip);
+    void setFlip(const QGraphicsLayout * layout, Plasma::Flip flip);
 
     /**
      * Makes the specified layout to use the global flip
      * @param layout layout
      */
-    void setUseGlobalFlip(QGraphicsLayout * layout);
+    void setUseGlobalFlip(const QGraphicsLayout * layout);
 
     /**
      * @returns the flip for the specified layout. If
      * the layout uses global flip, the global flip is
      * returned
      */
-    Plasma::Flip flip(QGraphicsLayout * layout) const;
+    Plasma::Flip flip(const QGraphicsLayout * layout) const;
 
     /**
      * @returns the singleton instance of the FlipLayoutManager
@@ -93,8 +93,7 @@ public:
         return FlipLayoutManager::instance()->flip(this);
     }
 
-protected:
-    Override virtual void setGeometry(const QRectF & geometry)
+    L_Override virtual void setGeometry(const QRectF & geometry)
     {
         SuperLayout::setGeometry(geometry);
         QRectF rect = SuperLayout::geometry();

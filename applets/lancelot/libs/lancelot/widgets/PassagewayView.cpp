@@ -62,44 +62,25 @@ public:
             PassagewayView * p)
       : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p)
     {
-        parent->setLayout(layout = new Plasma::NodeLayout());
+        parent->setLayout(layout = new NodeLayout());
 
         layout->addItem(
-            buttonsLayout = new Plasma::BoxLayout(Plasma::BoxLayout::LeftToRight),
-            Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 0),
-            Plasma::NodeLayout::NodeCoordinate(1, 0, 0, 32)
+            buttonsLayout = new QGraphicsLinearLayout(Qt::Horizontal),
+            NodeLayout::NodeCoordinate(0, 0, 0, 0),
+            NodeLayout::NodeCoordinate(1, 0, 0, 32)
         );
-        buttonsLayout->setMargin(0);
-
-        buttonsAnimator = new Plasma::LayoutAnimator(parent);
-        buttonsAnimator->setAutoDeleteOnRemoval(true);
-        buttonsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
-        buttonsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
-        buttonsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
-        buttonsAnimator->setTimeLine(new QTimeLine(300, parent));
-
-        buttonsLayout->setAnimator(buttonsAnimator);
 
         layout->addItem(
             listsLayout = new ColumnLayout(),
-            Plasma::NodeLayout::NodeCoordinate(0, 0, 0, 32),
-            Plasma::NodeLayout::NodeCoordinate(1, 1, 0, 0)
+            NodeLayout::NodeCoordinate(0, 0, 0, 32),
+            NodeLayout::NodeCoordinate(1, 1, 0, 0)
         );
-        listsLayout->setMargin(0);
 
-        listsAnimator = new Plasma::LayoutAnimator(parent);
-        listsAnimator->setAutoDeleteOnRemoval(false);
-        listsAnimator->setEffect(Plasma::LayoutAnimator::InsertedState, Plasma::LayoutAnimator::FadeEffect);
-        listsAnimator->setEffect(Plasma::LayoutAnimator::StandardState, Plasma::LayoutAnimator::MoveEffect);
-        listsAnimator->setEffect(Plasma::LayoutAnimator::RemovedState,  Plasma::LayoutAnimator::FadeEffect);
-        listsAnimator->setTimeLine(new QTimeLine(300, parent));
-
-        listsLayout->setAnimator(listsAnimator);
         listsLayout->setColumnCount(13);
         listsLayout->setSizer(new PassagewayViewSizer());
 
-        next(Step("", NULL, entranceModel));
-        next(Step("", NULL, atlasModel));
+        next(Step("", KIcon(), entranceModel));
+        next(Step("", KIcon(), atlasModel));
     }
 
     ~Private()
@@ -121,10 +102,10 @@ public:
 
     class Step {
     public:
-        Step(QString t, KIcon * i, PassagewayViewModel * m)
+        Step(QString t, KIcon i, PassagewayViewModel * m)
             : title(t), icon(i), model(m) {};
         QString title;
-        KIcon * icon;
+        KIcon icon;
         PassagewayViewModel * model;
     };
 
@@ -149,9 +130,9 @@ public:
     {
         Step * step = new Step(newStep);
         ExtenderButton * button =
-            new ExtenderButton(parent->name() + "::button", step->icon, step->title, "", parent);
+            new ExtenderButton(step->icon, step->title, "", parent);
         ActionListView * list   =
-            new ActionListView(parent->name() + "::list", step->model, parent);
+            new ActionListView(step->model, parent);
 
         button->setIconSize(QSize(24, 24));
         button->setAlignment(Qt::AlignLeft);
@@ -180,20 +161,22 @@ public:
     QList < ExtenderButton * > buttons;
     QList < ActionListView * > lists;
 
-    Plasma::NodeLayout          * layout;
+    NodeLayout          * layout;
     ColumnLayout::ColumnSizer   * sizer;
-    Plasma::BoxLayout           * buttonsLayout;
-    Plasma::LayoutAnimator      * buttonsAnimator;
+    QGraphicsLinearLayout       * buttonsLayout;
     ColumnLayout                * listsLayout;
-    Plasma::LayoutAnimator      * listsAnimator;
     PassagewayView              * parent;
 };
 
-PassagewayView::PassagewayView(QString name, PassagewayViewModel * entranceModel,
-    PassagewayViewModel * atlasModel, QGraphicsItem * parent)
-    : Panel(name, parent), d(new Private(entranceModel, atlasModel, this))
+PassagewayView::PassagewayView(QGraphicsItem * parent)
+    : Panel(parent), d(new Private(NULL, NULL, this))
 {
-    //setLayout(layout);
+}
+
+PassagewayView::PassagewayView(PassagewayViewModel * entranceModel,
+    PassagewayViewModel * atlasModel, QGraphicsItem * parent)
+    : Panel(parent), d(new Private(entranceModel, atlasModel, this))
+{
 }
 
 void PassagewayView::pathButtonActivated()
@@ -215,7 +198,7 @@ void PassagewayView::listItemActivated(int index)
             if (model) {
                 model = model->child(index);
                 if (model) {
-                    d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
+                    d->next(Private::Step(model->modelTitle(), *(model->modelIcon()), model));
                 }
             }
         }
@@ -242,7 +225,7 @@ void PassagewayView::setEntranceTitle(const QString & title)
     d->buttons.at(0)->setTitle(title);
 }
 
-void PassagewayView::setEntranceIcon(KIcon * icon)
+void PassagewayView::setEntranceIcon(KIcon icon)
 {
     if (d->lists.size() < 2) return;
     d->path.at(0)->icon = icon;
@@ -264,7 +247,7 @@ void PassagewayView::setAtlasTitle(const QString & title)
     d->buttons.at(1)->setTitle(title);
 }
 
-void PassagewayView::setAtlasIcon(KIcon * icon)
+void PassagewayView::setAtlasIcon(KIcon icon)
 {
     if (d->lists.size() < 2) return;
     d->path.at(1)->icon = icon;

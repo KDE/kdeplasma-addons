@@ -54,7 +54,7 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
     m_showCategories(false), m_mainIcon(),
     m_clickActivation(false)
 {
-    setDrawStandardBackground(true);
+    // setDrawStandardBackground(true);
     setHasConfigurationInterface(true);
     setAcceptsHoverEvents(true);
     dbusConnect();
@@ -62,7 +62,7 @@ LancelotApplet::LancelotApplet(QObject *parent, const QVariantList &args) :
     // Instantiating Lancelot framework
     m_instance = new Lancelot::Instance();
 
-    m_layout = new Plasma::NodeLayout();
+    m_layout = new Lancelot::NodeLayout();
 
     setLayout(m_layout);
     applyConfig();
@@ -96,7 +96,7 @@ Qt::Orientations LancelotApplet::expandingDirections() const
     return 0;
 }
 
-void LancelotApplet::constraintsUpdated(Plasma::Constraints constraints)
+void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::LocationConstraint | Plasma::SizeConstraint)) {
         //layoutButtons();
@@ -183,9 +183,11 @@ void LancelotApplet::deleteButtons()
 {
     m_blockUpdates = true;
     Lancelot::ExtenderButton * button;
+    while (m_layout->count() > 0) {
+        m_layout->removeAt(0);
+    }
     while (m_buttons.size() > 0) {
         button = m_buttons.takeLast();
-        m_layout->removeItem(button);
         button->setParent(NULL);
         delete button;
     }
@@ -210,8 +212,7 @@ void LancelotApplet::createCategories()
         // Creating buttons...
         for (int i = 0; i < replyIDs.value().size(); i++) {
             Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
-                replyIDs.value().at(i),
-                new KIcon(replyIcons.value().at(i)),
+                KIcon(replyIcons.value().at(i)),
                 "",
                 "",
                 this
@@ -233,8 +234,7 @@ void LancelotApplet::createMenuButton()
     deleteButtons();
 
     Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
-        "launcher",
-        new KIcon(m_mainIcon),
+        KIcon(m_mainIcon),
         "",
         "",
         this
@@ -256,12 +256,12 @@ void LancelotApplet::layoutButtons()
 
     int iconSize = 48;
 
-    kDebug() << "Geometry is " << contentSize();
+    // kDebug() << "Geometry is " << contentSize();
 
     if (m_isVertical) {
-        iconSize = (int)(qMin(contentSize().width(), contentSize().height() / m_buttons.size()));
+        iconSize = (int)(qMin(size().width(), size().height() / m_buttons.size()));
     } else {
-        iconSize = (int)(qMin(contentSize().width() / m_buttons.size(), contentSize().height()));
+        iconSize = (int)(qMin(size().width() / m_buttons.size(), size().height()));
     }
 
     if (iconSize > 80) iconSize = 64;
@@ -279,14 +279,14 @@ void LancelotApplet::layoutButtons()
         if (m_isVertical) {
             m_layout->addItem(
                 button,
-                Plasma::NodeLayout::NodeCoordinate(0, distance),
-                Plasma::NodeLayout::NodeCoordinate(1, distance + wpercent)
+                Lancelot::NodeLayout::NodeCoordinate(0, distance),
+                Lancelot::NodeLayout::NodeCoordinate(1, distance + wpercent)
             );
         } else {
             m_layout->addItem(
                 button,
-                Plasma::NodeLayout::NodeCoordinate(distance, 0),
-                Plasma::NodeLayout::NodeCoordinate(distance + wpercent, 1)
+                Lancelot::NodeLayout::NodeCoordinate(distance, 0),
+                Lancelot::NodeLayout::NodeCoordinate(distance + wpercent, 1)
             );
         }
         distance += wpercent;

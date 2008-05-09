@@ -1,11 +1,16 @@
 __all__ = [
-           "ExtenderButton",
-           "ToggleExtenderButton",
-           "Panel",
-           "AbstractWidget",
-           "Label",
-           "WidgetPositioner",
-           "LancelotWidget",
-           "ActionListView",
-           "PassagewayView"
-           ]
+    "Lancelot__ActionListView",
+    "Lancelot__BasicWidget",
+    "Lancelot__ExtenderButton",
+    "Lancelot__Panel",
+    "Lancelot__PassagewayView",
+    "Lancelot__ResizeBordersPanel",
+    "Lancelot__ScrollBar",
+    "Lancelot__ScrollButton",
+    "Lancelot__ScrollPane",
+    "Lancelot__WidgetPositioner",
+    "Lancelot__Widget",
+    "QGraphicsLayoutItem",
+    "QGraphicsLayout",
+    "QGraphicsWidget"
+]

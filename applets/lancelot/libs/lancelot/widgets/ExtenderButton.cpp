@@ -180,6 +180,14 @@ public:
 Plasma::Svg * ExtenderButton::Private::extenderIconSvg = NULL;
 QBasicTimer ExtenderObject::timer = QBasicTimer();
 
+ExtenderButton::ExtenderButton(QGraphicsItem * parent)
+  : BasicWidget(parent),
+    d(new Private(this))
+{
+    setGroupByName("ExtenderButton");
+    L_WIDGET_SET_INITIALIZED;
+}
+
 ExtenderButton::ExtenderButton(QString title,
         QString description, QGraphicsItem * parent)
   : BasicWidget(title, description, parent),

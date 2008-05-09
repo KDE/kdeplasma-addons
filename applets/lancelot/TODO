@@ -16,7 +16,8 @@ Library:
 TODO: (h) convert to WoC
 TODO: (e) check for memory leaks related to Private
 TODO: (a) switch groups to QMetaObject and properties
-TODO: (m) remove internal widget names
+TODO: (m) add margin features to layouts
+TODO: (m) add propper size hints to layouts and widgets
 
 Applet:
 

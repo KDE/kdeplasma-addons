@@ -3,9 +3,9 @@
     xmlns:item = "http://nonexistant"
     xmlns:code = "http://nonexistant"
 
-    xmlns:Plasma__BorderLayout = "http://nonexistant"
-    xmlns:Plasma__NodeLayout   = "http://nonexistant"
-    xmlns:Lancelot__CardLayout = "http://nonexistant"
+    xmlns:Lancelot__FullBorderLayout = "http://nonexistant"
+    xmlns:Lancelot__NodeLayout       = "http://nonexistant"
+    xmlns:Lancelot__CardLayout       = "http://nonexistant"
 >
     <defines>
         <!-- These values will be converted to #define statements -->
@@ -16,35 +16,35 @@
     </defines>
     <ui
         className="LancelotWindowBase"
-        rootObjectType="Plasma::Widget"
+        rootObjectType="QGraphicsWidget"
     >
         <item:layout
-            name="layoutMain" type="Plasma::FlipLayout"
-            realLayout="Plasma::BorderLayout"
+            name="layoutMain" type="Lancelot::FlipLayout"
+            realLayout="Lancelot::FullBorderLayout"
             margin="0" spacing="0"
             leftSize="SECTIONS_WIDTH"
         >
             <item:layout
-                name="layoutMainLeft" type="Plasma::FlipLayout"
-                realLayout="Plasma::BorderLayout"
+                name="layoutMainLeft" type="Lancelot::FlipLayout"
+                realLayout="Lancelot::FullBorderLayout"
                 margin="0" spacing="0"
                 topSize="SEARCH_HEIGHT"
                 bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
 
-                Plasma__BorderLayout:position="Left"
+                Lancelot__FullBorderLayout:position="Left"
             >
                 <item:widget
                     name="panelSections" type="Lancelot::Panel"
 
-                    Plasma__BorderLayout:position="Center"
+                    Lancelot__FullBorderLayout:position="Center"
                 >
                     <item:layout
-                        name="layoutSections" type="Plasma::FlipLayout"
-                        realLayout="Plasma::NodeLayout"
+                        name="layoutSections" type="Lancelot::FlipLayout"
+                        realLayout="Lancelot::NodeLayout"
                         margin="0" spacing="0"
                     >
                         <code:declaration><![CDATA[
-                            QMap < QString, Lancelot::ToggleExtenderButton * > sectionButtons;
+                            QMap < QString, Lancelot::ExtenderButton * > sectionButtons;
                         ]]></code:declaration>
                         <code:setup><![CDATA[
                             sectionButtons["applications"] = buttonSectionsApplications;
@@ -53,7 +53,7 @@
                             sectionButtons["contacts"]     = buttonSectionsContacts;
                         ]]></code:setup>
                         <item:widget
-                            name="buttonSectionsDocuments" type="Lancelot::ToggleExtenderButton"
+                            name="buttonSectionsDocuments" type="Lancelot::ExtenderButton"
 
                             title="Documents"
                             icon="applications-office"
@@ -61,12 +61,13 @@
                             activation="Hover"
                             iconSize="48, 48"
                             orientation="Vertical"
+                            checkable="true"
 
-                            Plasma__NodeLayout:topLeft     = "0, 0  , 0, 1"
-                            Plasma__NodeLayout:bottomRight = "1, .25, 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0, 0  , 0, 1"
+                            Lancelot__NodeLayout:bottomRight = "1, .25, 0, -1"
                         />
                         <item:widget
-                            name="buttonSectionsContacts" type="Lancelot::ToggleExtenderButton"
+                            name="buttonSectionsContacts" type="Lancelot::ExtenderButton"
 
                             title="Contacts"
                             icon="kontact"
@@ -74,12 +75,13 @@
                             activation="Hover"
                             iconSize="48, 48"
                             orientation="Vertical"
+                            checkable="true"
 
-                            Plasma__NodeLayout:topLeft     = "0, .25  , 0, 1"
-                            Plasma__NodeLayout:bottomRight = "1, .5  , 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0, .25  , 0, 1"
+                            Lancelot__NodeLayout:bottomRight = "1, .5  , 0, -1"
                         />
                         <item:widget
-                            name="buttonSectionsComputer" type="Lancelot::ToggleExtenderButton"
+                            name="buttonSectionsComputer" type="Lancelot::ExtenderButton"
 
                             title="Computer"
                             icon="computer-laptop"
@@ -87,12 +89,13 @@
                             activation="Hover"
                             iconSize="48, 48"
                             orientation="Vertical"
+                            checkable="true"
 
-                            Plasma__NodeLayout:topLeft     = "0, .5  , 0, 1"
-                            Plasma__NodeLayout:bottomRight = "1, .75  , 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0, .5  , 0, 1"
+                            Lancelot__NodeLayout:bottomRight = "1, .75  , 0, -1"
                         />
                         <item:widget
-                            name="buttonSectionsApplications" type="Lancelot::ToggleExtenderButton"
+                            name="buttonSectionsApplications" type="Lancelot::ExtenderButton"
 
                             title="Applications"
                             icon="applications-other"
@@ -100,35 +103,36 @@
                             activation="Hover"
                             iconSize="48, 48"
                             orientation="Vertical"
+                            checkable="true"
 
-                            Plasma__NodeLayout:topLeft     = "0, .75 , 0, 1"
-                            Plasma__NodeLayout:bottomRight = "1, 1   , 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0, .75 , 0, 1"
+                            Lancelot__NodeLayout:bottomRight = "1, 1   , 0, -1"
                         />
                     </item:layout>
                 </item:widget>
             </item:layout>
             <item:layout
-                name="layoutMainCenter" type="Plasma::FlipLayout"
-                realLayout="Plasma::BorderLayout"
+                name="layoutMainCenter" type="Lancelot::FlipLayout"
+                realLayout="Lancelot::FullBorderLayout"
                 margin="0" spacing="0"
                 topSize="SEARCH_HEIGHT"
                 bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
 
-                Plasma__BorderLayout:position="Center"
+                Lancelot__FullBorderLayout:position="Center"
             >
                 <item:layout
-                    name="layoutSearch" type="Plasma::NodeLayout"
+                    name="layoutSearch" type="Lancelot::NodeLayout"
                     margin="0" spacing="0"
 
-                    Plasma__BorderLayout:position="Top"
+                    Lancelot__FullBorderLayout:position="Top"
                 >
-                <!-- Dirty hack to get an edit box before Qt 4.4 :: begin -->
+                <!-- Dirty hack to get an edit box before Qt 4.4 :: begin
                 <code:include><![CDATA[
                     #include <KLineEdit>
                     ]]></code:include>
                     <code:declaration>
                         KLineEdit * editSearch;
-                        Plasma::Widget      * _m_root;
+                        QGraphicsWidget     * _m_root;
                         QGraphicsView       * _m_view;
                     </code:declaration>
                     <code:initialization>
@@ -138,27 +142,28 @@
                         editSearch->setClearButtonShown(true);
                         editSearch->setFrame(false);
                     </code:setup>
+
                     <item:widget
                         name="editSearchPositioner" type="Lancelot::WidgetPositioner"
                         widgetName="editSearch" view="_m_view" parent="_m_root"
 
-                        Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                        Plasma__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
+                        Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                        Lancelot__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
                     />
                     <item:widget
                         type="Plasma::Label" name="labelSearch"
                         text="Search"
 
-                        Plasma__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                        Plasma__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
+                        Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                        Lancelot__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
                     />
-                <!-- Dirty hack to get an edit box before Qt 4.4 :: end -->
+                Dirty hack to get an edit box before Qt 4.4 :: end -->
                 </item:layout>
                 <item:layout
                     name="layoutCenter" type="Lancelot::CardLayout"
                     margin="0" spacing="0"
 
-                    Plasma__BorderLayout:position="Center"
+                    Lancelot__FullBorderLayout:position="Center"
                 >
                     <item:widget
                         name="passagewayApplications" type="Lancelot::PassagewayView"
@@ -183,20 +188,20 @@
 
                         Lancelot__CardLayout:cardName="computer"
                     >
-                        <item:layout name="layoutPanelComputer" type="Plasma::NodeLayout">
+                        <item:layout name="layoutPanelComputer" type="Lancelot::NodeLayout">
                             <item:widget
                                 name="listComputerLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
 
-                                Plasma__NodeLayout:topLeft     = "0, 0"
-                                Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0, 0"
+                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listComputerRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                                Plasma__NodeLayout:topLeft     = "0.5, 0"
-                                Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
                         </item:layout>
                     </item:widget>
@@ -210,20 +215,20 @@
 
                         Lancelot__CardLayout:cardName="contacts"
                     >
-                        <item:layout name="layoutPanelContacts" type="Plasma::NodeLayout">
+                        <item:layout name="layoutPanelContacts" type="Lancelot::NodeLayout">
                             <item:widget
                                 name="listContactsLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
 
-                                Plasma__NodeLayout:topLeft     = "0, 0"
-                                Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0, 0"
+                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listContactsRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                                Plasma__NodeLayout:topLeft     = "0.5, 0"
-                                Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
                         </item:layout>
                     </item:widget>
@@ -237,20 +242,20 @@
 
                         Lancelot__CardLayout:cardName="documents"
                     >
-                        <item:layout name="layoutDocumentsComputer" type="Plasma::NodeLayout">
+                        <item:layout name="layoutDocumentsComputer" type="Lancelot::NodeLayout">
                             <item:widget
                                 name="listDocumentsLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
 
-                                Plasma__NodeLayout:topLeft     = "0, 0"
-                                Plasma__NodeLayout:bottomRight = "0.5, 1, -2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0, 0"
+                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                             />
                             <item:widget
                                 name="listDocumentsRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                                Plasma__NodeLayout:topLeft     = "0.5, 0"
-                                Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
                         </item:layout>
                     </item:widget>
@@ -264,31 +269,31 @@
 
                         Lancelot__CardLayout:cardName="search"
                     >
-                        <item:layout name="layoutSearchComputer" type="Plasma::NodeLayout">
+                        <item:layout name="layoutSearchComputer" type="Lancelot::NodeLayout">
                             <item:widget
                                 name="listSearchLeft" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
 
-                                Plasma__NodeLayout:topLeft     = "0, 0"
-                                Plasma__NodeLayout:bottomRight = "1.0, 1, 0, 0"
+                                Lancelot__NodeLayout:topLeft     = "0, 0"
+                                Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"
                             />
                             <!--
                             <item:widget
                                 name="listSearchRight" type="Lancelot::ActionListView"
                                 itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                                Plasma__NodeLayout:topLeft     = "0.5, 0"
-                                Plasma__NodeLayout:bottomRight = "1, 1, 2, 0"
+                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
                             />
                             -->
                         </item:layout>
                     </item:widget>
                 </item:layout>
                 <item:layout
-                    name="layoutSystem" type="Plasma::NodeLayout"
+                    name="layoutSystem" type="Lancelot::NodeLayout"
                     margin="0" spacing="0"
 
-                    Plasma__BorderLayout:position="Bottom"
+                    Lancelot__FullBorderLayout:position="Bottom"
                 >
                     <item:widget
                         name="buttonSystemLockScreen" type="Lancelot::ExtenderButton"
@@ -300,8 +305,8 @@
                         extenderPosition="Bottom"
                         iconSize="24, 24"
 
-                        Plasma__NodeLayout:topLeft     = "0, 0, 0, SYSTEM_PADDING"
-                        Plasma__NodeLayout:bottomRight = "1.0 / 3.0, 1, -2, - SYSTEM_PADDING"
+                        Lancelot__NodeLayout:topLeft     = "0, 0, 0, SYSTEM_PADDING"
+                        Lancelot__NodeLayout:bottomRight = "1.0 / 3.0, 1, -2, - SYSTEM_PADDING"
                     />
                     <item:widget
                         name="buttonSystemLogout" type="Lancelot::ExtenderButton"
@@ -313,8 +318,8 @@
                         extenderPosition="Bottom"
                         iconSize="24, 24"
 
-                        Plasma__NodeLayout:topLeft     = "1.0 / 3.0, 0, 1, SYSTEM_PADDING"
-                        Plasma__NodeLayout:bottomRight = "2.0 / 3.0, 1, -1, - SYSTEM_PADDING"
+                        Lancelot__NodeLayout:topLeft     = "1.0 / 3.0, 0, 1, SYSTEM_PADDING"
+                        Lancelot__NodeLayout:bottomRight = "2.0 / 3.0, 1, -1, - SYSTEM_PADDING"
                     />
                     <item:widget
                         name="buttonSystemSwitchUser" type="Lancelot::ExtenderButton"
@@ -326,8 +331,8 @@
                         extenderPosition="Bottom"
                         iconSize="24, 24"
 
-                        Plasma__NodeLayout:topLeft     = "2.0 / 3.0, 0, 2, SYSTEM_PADDING"
-                        Plasma__NodeLayout:bottomRight = "1, 1, 0, - SYSTEM_PADDING"
+                        Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, 2, SYSTEM_PADDING"
+                        Lancelot__NodeLayout:bottomRight = "1, 1, 0, - SYSTEM_PADDING"
                     />
                 </item:layout>
             </item:layout>

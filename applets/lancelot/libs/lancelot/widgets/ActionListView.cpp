@@ -59,6 +59,25 @@ void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * e
 }
 
 // ActionListView
+ActionListView::ActionListView(QGraphicsItem * parent)
+  : Widget(parent), m_model(NULL),
+    m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
+    m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
+    m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
+    m_initialButtonsCreationRunning(false)
+{
+    setGroupByName("ActionListView");
+    m_itemsGroup = instance()->group("ActionListView-Items");
+
+    setAcceptsHoverEvents(true);
+
+    connect(&m_signalMapper, SIGNAL(mapped(int)),
+                 this, SLOT(itemActivated(int)));
+
+    connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
+    m_scrollTimer.setSingleShot(false);
+}
+
 ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent)
   : Widget(parent), m_model(NULL),
     m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
@@ -216,6 +235,11 @@ void ActionListView::scrollBy(int scrollAmmount) {
 
     m_buttons.last().first->setTransform(m_bottomButtonScale);
 
+}
+
+void ActionListView::setGeometry(qreal x, qreal y, qreal w, qreal h)
+{
+    setGeometry(QRectF(x, y, w, h));
 }
 
 void ActionListView::setGeometry(const QRectF & geometry)

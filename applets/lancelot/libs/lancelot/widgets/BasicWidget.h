@@ -41,7 +41,7 @@ namespace Lancelot
  *
  * The icon can be a QIcon or contained in a Plasma::Svg
  */
-class LANCELOT_EXPORT BasicWidget: public Widget {
+class LANCELOT_EXPORT BasicWidget: public Lancelot::Widget {
     Q_OBJECT
 
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
@@ -51,16 +51,23 @@ class LANCELOT_EXPORT BasicWidget: public Widget {
     Q_PROPERTY ( Qt::Orientation innerOrientation READ innerOrientation WRITE setInnerOrientation )
 
     L_WIDGET
+    L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
 
 public:
+    /**
+     * Creates a new Lancelot::BasicWidget
+     * @param parent parent item
+     */
+    BasicWidget(QGraphicsItem * parent = 0);
+
     /**
      * Creates a new Lancelot::BasicWidget
      * @param title the title of the widget
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QString title = QString(),
-            QString description = QString(), QGraphicsItem * parent = 0);
+    BasicWidget(QString title, QString description = QString(),
+            QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::BasicWidget
@@ -171,9 +178,9 @@ protected:
      */
     void paintForeground(QPainter * painter);
 
-    Override virtual void paint(QPainter * painter,
+    L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 private:

@@ -3,19 +3,19 @@ from .  import AbstractLayout
 
 class FlipLayoutHandler(AbstractLayout.AbstractLayoutHandler):
     def name(self):
-        return "Plasma::FlipLayout"
+        return "Lancelot::FlipLayout"
 
     def include(self):
         h = LayoutHandlerManager.handler(self.attribute("realLayout"))
         h.setNode(self.node())
 
-        return h.include() + "\n#include <plasma/layouts/fliplayout.h>"
+        return h.include() + "\n#include <lancelot/layouts/FlipLayout.h>"
 
     def declaration(self):
-        return "Plasma::FlipLayout < " + self.attribute("realLayout") + " > * " + self.attribute("name") + ";"
+        return "Lancelot::FlipLayout < " + self.attribute("realLayout") + " > * " + self.attribute("name") + ";"
 
     def initialization(self):
-        return self.attribute("name") + " = new Plasma::FlipLayout < " + self.attribute("realLayout") + " > ();"
+        return self.attribute("name") + " = new Lancelot::FlipLayout < " + self.attribute("realLayout") + " > ();"
 
     def setup(self):
         setup = ""

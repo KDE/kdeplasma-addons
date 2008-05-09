@@ -32,17 +32,25 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT ResizeBordersPanel: public Panel {
+class LANCELOT_EXPORT ResizeBordersPanel: public Lancelot::Panel {
+
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/ResizeBordersPanel.h)
+
 public:
     /**
      * Creates a new ResizeBordersPanel
      * @param parent parent item
      */
     ResizeBordersPanel(QGraphicsItem * parent = 0);
+
+    /**
+     * Destroys this Lancelot::ResizeBordersPanel
+     */
     ~ResizeBordersPanel();
 
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
-    Override virtual void setGeometry(const QRectF & geometry);
+    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    L_Override virtual void setGeometry(const QRectF & geometry);
 
 private:
     class Private;

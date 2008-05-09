@@ -21,7 +21,7 @@
 #define LANCELOT_PARTS_H
 
 #include <plasma/applet.h>
-#include <plasma/layouts/nodelayout.h>
+#include <lancelot/layouts/NodeLayout.h>
 
 #include <lancelot/Global.h>
 #include <lancelot/widgets/ExtenderButton.h>
@@ -64,7 +64,7 @@ protected Q_SLOTS:
     void configAccepted();
 
 protected:
-    void constraintsEvent (Plasma::Constraints constraints);
+    void constraintsEvent(Plasma::Constraints constraints);
 
 private:
     QSignalMapper m_signalMapper;
@@ -74,7 +74,7 @@ private:
 
     Lancelot::Instance * m_instance;
 
-    Plasma::NodeLayout * m_layout;
+    Lancelot::NodeLayout * m_layout;
     QList< Lancelot::ExtenderButton * > m_buttons;
 
     LancelotAppletConfig * m_configDialog;

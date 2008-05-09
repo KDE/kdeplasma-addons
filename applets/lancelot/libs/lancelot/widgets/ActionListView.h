@@ -35,12 +35,15 @@
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT_DEPRECATED ActionListView : public Widget
+class LANCELOT_EXPORT_DEPRECATED ActionListView : public Lancelot::Widget
 {
     Q_OBJECT
+    L_WIDGET
+    L_INCLUDE(lancelot/widgets/ActionListView.h)
 
 public:
-    ActionListView(ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
+    ActionListView(QGraphicsItem * parent = 0);
+    ActionListView(ActionListViewModel * model, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
 
     void setModel(ActionListViewModel * model);
@@ -60,14 +63,15 @@ public:
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition();
 
-    void setGeometry (const QRectF & geometry);
-
     void setItemsGroup(WidgetGroup * group = NULL);
     void setItemsGroupByName(const QString & group);
     WidgetGroup * itemsGroup();
 
     void wheelEvent ( QGraphicsSceneWheelEvent * event );
-    void setGroup(WidgetGroup * group = NULL);
+
+    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    L_Override virtual void setGeometry(const QRectF & geometry);
+    L_Override virtual void setGroup(WidgetGroup * group = NULL);
 
 Q_SIGNALS:
     void activated(int index);

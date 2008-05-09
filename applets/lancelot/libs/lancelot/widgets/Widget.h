@@ -41,7 +41,10 @@ namespace Lancelot
 class LANCELOT_EXPORT Widget : public QGraphicsWidget {
     Q_OBJECT
 
+    Q_PROPERTY(QString group READ groupName WRITE setGroupByName)
+
     L_WIDGET
+    L_INCLUDE(lancelot/widgets/Widget.h QString)
 
 public:
     /**
@@ -62,6 +65,11 @@ public:
     virtual void setGroupByName(const QString & groupName);
 
     /**
+     * @returns this widget's group's name.
+     */
+    QString groupName() const;
+
+    /**
      * Sets this widget's group.
      * @param group new group
      */
@@ -70,24 +78,24 @@ public:
     /**
      * Returns this widget's group.
      */
-    WidgetGroup * group();
+    WidgetGroup * group() const;
 
     /**
      * Returns the Lancelot::Instance to which this object
      * belongs.
      */
-    Instance * instance();
+    Instance * instance() const;
 
     /**
      * Returns whether the mouse cursor is hovering the widget
      */
     bool isHovered() const;
 
-    Override virtual void setGeometry(const QRectF & rect);
-    Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
+    L_Override virtual void setGeometry(const QRectF & rect);
+    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
 
 protected:
-    Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 Q_SIGNALS:
@@ -131,9 +139,9 @@ protected:
      */
     virtual void geometryUpdated();
 
-    Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    Override virtual void paint(QPainter * painter,
+    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:
