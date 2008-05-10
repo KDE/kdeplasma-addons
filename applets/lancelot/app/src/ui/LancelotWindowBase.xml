@@ -23,318 +23,301 @@
             realLayout="Lancelot::FullBorderLayout"
             margin="0" spacing="0"
             leftSize="SECTIONS_WIDTH"
+            topSize="SEARCH_HEIGHT"
+            bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
+            rightSize="0"
         >
-            <item:layout
-                name="layoutMainLeft" type="Lancelot::FlipLayout"
-                realLayout="Lancelot::FullBorderLayout"
-                margin="0" spacing="0"
-                topSize="SEARCH_HEIGHT"
-                bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
+            <item:widget
+                name="panelSections" type="Lancelot::Panel"
 
                 Lancelot__FullBorderLayout:position="Left"
             >
-                <item:widget
-                    name="panelSections" type="Lancelot::Panel"
-
-                    Lancelot__FullBorderLayout:position="Center"
+                <item:layout
+                    name="layoutSections" type="Lancelot::FlipLayout"
+                    realLayout="Lancelot::NodeLayout"
+                    margin="0" spacing="0"
                 >
-                    <item:layout
-                        name="layoutSections" type="Lancelot::FlipLayout"
-                        realLayout="Lancelot::NodeLayout"
-                        margin="0" spacing="0"
-                    >
-                        <code:declaration><![CDATA[
-                            QMap < QString, Lancelot::ExtenderButton * > sectionButtons;
-                        ]]></code:declaration>
-                        <code:setup><![CDATA[
-                            sectionButtons["applications"] = buttonSectionsApplications;
-                            sectionButtons["computer"]     = buttonSectionsComputer;
-                            sectionButtons["documents"]    = buttonSectionsDocuments;
-                            sectionButtons["contacts"]     = buttonSectionsContacts;
-                        ]]></code:setup>
+                    <code:declaration><![CDATA[
+                        QMap < QString, Lancelot::ExtenderButton * > sectionButtons;
+                    ]]></code:declaration>
+                    <code:setup><![CDATA[
+                        sectionButtons["applications"] = buttonSectionsApplications;
+                        sectionButtons["computer"]     = buttonSectionsComputer;
+                        sectionButtons["documents"]    = buttonSectionsDocuments;
+                        sectionButtons["contacts"]     = buttonSectionsContacts;
+                    ]]></code:setup>
+                    <item:widget
+                        name="buttonSectionsDocuments" type="Lancelot::ExtenderButton"
+
+                        title="Documents"
+                        icon="applications-office"
+                        group="SectionButtons"
+                        activationMethod="Hover"
+                        iconSize="48, 48"
+                        orientation="Vertical"
+                        checkable="true"
+
+                        Lancelot__NodeLayout:topLeft     = "0, 0  , 0, 1"
+                        Lancelot__NodeLayout:bottomRight = "1, .25, 0, -1"
+                    />
+                    <item:widget
+                        name="buttonSectionsContacts" type="Lancelot::ExtenderButton"
+
+                        title="Contacts"
+                        icon="kontact"
+                        group="SectionButtons"
+                        activationMethod="Hover"
+                        iconSize="48, 48"
+                        orientation="Vertical"
+                        checkable="true"
+
+                        Lancelot__NodeLayout:topLeft     = "0, .25  , 0, 1"
+                        Lancelot__NodeLayout:bottomRight = "1, .5  , 0, -1"
+                    />
+                    <item:widget
+                        name="buttonSectionsComputer" type="Lancelot::ExtenderButton"
+
+                        title="Computer"
+                        icon="computer-laptop"
+                        group="SectionButtons"
+                        activationMethod="Hover"
+                        iconSize="48, 48"
+                        orientation="Vertical"
+                        checkable="true"
+
+                        Lancelot__NodeLayout:topLeft     = "0, .5  , 0, 1"
+                        Lancelot__NodeLayout:bottomRight = "1, .75  , 0, -1"
+                    />
+                    <item:widget
+                        name="buttonSectionsApplications" type="Lancelot::ExtenderButton"
+
+                        title="Applications"
+                        icon="applications-other"
+                        group="SectionButtons"
+                        activationMethod="Hover"
+                        iconSize="48, 48"
+                        orientation="Vertical"
+                        checkable="true"
+
+                        Lancelot__NodeLayout:topLeft     = "0, .75 , 0, 1"
+                        Lancelot__NodeLayout:bottomRight = "1, 1   , 0, -1"
+                    />
+                </item:layout>
+            </item:widget>
+            <item:layout
+                name="layoutSearch" type="Lancelot::NodeLayout"
+                margin="0" spacing="0"
+
+                Lancelot__FullBorderLayout:position="Top"
+            >
+            <!-- Dirty hack to get an edit box before Qt 4.4 :: begin
+            <code:include><![CDATA[
+                #include <KLineEdit>
+                ]]></code:include>
+                <code:declaration>
+                    KLineEdit * editSearch;
+                    QGraphicsWidget     * _m_root;
+                    QGraphicsView       * _m_view;
+                </code:declaration>
+                <code:initialization>
+                    editSearch = new KLineEdit(); //(QWidget *)this
+                </code:initialization>
+                <code:setup>
+                    editSearch->setClearButtonShown(true);
+                    editSearch->setFrame(false);
+                </code:setup>
+
+                <item:widget
+                    name="editSearchPositioner" type="Lancelot::WidgetPositioner"
+                    widgetName="editSearch" view="_m_view" parent="_m_root"
+
+                    Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                    Lancelot__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
+                />
+                <item:widget
+                    type="Plasma::Label" name="labelSearch"
+                    text="Search"
+
+                    Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
+                    Lancelot__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
+                />
+            Dirty hack to get an edit box before Qt 4.4 :: end -->
+            </item:layout>
+            <item:layout
+                name="layoutCenter" type="Lancelot::CardLayout"
+                margin="0" spacing="0"
+
+                Lancelot__FullBorderLayout:position="Center"
+            >
+                <item:widget
+                    name="passagewayApplications" type="Lancelot::PassagewayView"
+
+                    entranceTitle="Favorite"
+                    entranceIcon="favorite"
+                    atlasTitle="Applications"
+                    atlasIcon="applications-other"
+
+                    background="lancelot/inner-background"
+
+                    Lancelot__CardLayout:cardName="applications"
+                >
+                </item:widget>
+                <item:widget
+                    name="panelComputer" type="Lancelot::Panel"
+
+                    title="Computer"
+                    icon="computer-laptop"
+                    iconSize="22, 22"
+                    background="lancelot/inner-background"
+
+                    Lancelot__CardLayout:cardName="computer"
+                >
+                    <item:layout name="layoutPanelComputer" type="Lancelot::NodeLayout">
                         <item:widget
-                            name="buttonSectionsDocuments" type="Lancelot::ExtenderButton"
+                            name="listComputerLeft" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
 
-                            title="Documents"
-                            icon="applications-office"
-                            group="SectionButtons"
-                            activation="Hover"
-                            iconSize="48, 48"
-                            orientation="Vertical"
-                            checkable="true"
-
-                            Lancelot__NodeLayout:topLeft     = "0, 0  , 0, 1"
-                            Lancelot__NodeLayout:bottomRight = "1, .25, 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0, 0"
+                            Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
-                            name="buttonSectionsContacts" type="Lancelot::ExtenderButton"
+                            name="listComputerRight" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                            title="Contacts"
-                            icon="kontact"
-                            group="SectionButtons"
-                            activation="Hover"
-                            iconSize="48, 48"
-                            orientation="Vertical"
-                            checkable="true"
+                            Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                            Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
+                        />
+                    </item:layout>
+                </item:widget>
+                <item:widget
+                    name="panelContacts" type="Lancelot::Panel"
 
-                            Lancelot__NodeLayout:topLeft     = "0, .25  , 0, 1"
-                            Lancelot__NodeLayout:bottomRight = "1, .5  , 0, -1"
+                    title="Contacts"
+                    icon="kontact"
+                    iconSize="22, 22"
+                    background="lancelot/inner-background"
+
+                    Lancelot__CardLayout:cardName="contacts"
+                >
+                    <item:layout name="layoutPanelContacts" type="Lancelot::NodeLayout">
+                        <item:widget
+                            name="listContactsLeft" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+
+                            Lancelot__NodeLayout:topLeft     = "0, 0"
+                            Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
-                            name="buttonSectionsComputer" type="Lancelot::ExtenderButton"
+                            name="listContactsRight" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                            title="Computer"
-                            icon="computer-laptop"
-                            group="SectionButtons"
-                            activation="Hover"
-                            iconSize="48, 48"
-                            orientation="Vertical"
-                            checkable="true"
+                            Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                            Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
+                        />
+                    </item:layout>
+                </item:widget>
+                <item:widget
+                    name="panelDocuments" type="Lancelot::Panel"
 
-                            Lancelot__NodeLayout:topLeft     = "0, .5  , 0, 1"
-                            Lancelot__NodeLayout:bottomRight = "1, .75  , 0, -1"
+                    title="Documents"
+                    icon="applications-office"
+                    iconSize="22, 22"
+                    background="lancelot/inner-background"
+
+                    Lancelot__CardLayout:cardName="documents"
+                >
+                    <item:layout name="layoutDocumentsComputer" type="Lancelot::NodeLayout">
+                        <item:widget
+                            name="listDocumentsLeft" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+
+                            Lancelot__NodeLayout:topLeft     = "0, 0"
+                            Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
-                            name="buttonSectionsApplications" type="Lancelot::ExtenderButton"
+                            name="listDocumentsRight" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
 
-                            title="Applications"
-                            icon="applications-other"
-                            group="SectionButtons"
-                            activation="Hover"
-                            iconSize="48, 48"
-                            orientation="Vertical"
-                            checkable="true"
-
-                            Lancelot__NodeLayout:topLeft     = "0, .75 , 0, 1"
-                            Lancelot__NodeLayout:bottomRight = "1, 1   , 0, -1"
+                            Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                            Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
                         />
+                    </item:layout>
+                </item:widget>
+                <item:widget
+                    name="panelSearch" type="Lancelot::Panel"
+
+                    title="Search"
+                    icon="find"
+                    iconSize="22, 22"
+                    background="lancelot/inner-background"
+
+                    Lancelot__CardLayout:cardName="search"
+                >
+                    <item:layout name="layoutSearchComputer" type="Lancelot::NodeLayout">
+                        <item:widget
+                            name="listSearchLeft" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+
+                            Lancelot__NodeLayout:topLeft     = "0, 0"
+                            Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"
+                        />
+                        <!--
+                        <item:widget
+                            name="listSearchRight" type="Lancelot::ActionListView"
+                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
+
+                            Lancelot__NodeLayout:topLeft     = "0.5, 0"
+                            Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
+                        />
+                        -->
                     </item:layout>
                 </item:widget>
             </item:layout>
             <item:layout
-                name="layoutMainCenter" type="Lancelot::FlipLayout"
-                realLayout="Lancelot::FullBorderLayout"
+                name="layoutSystem" type="Lancelot::NodeLayout"
                 margin="0" spacing="0"
-                topSize="SEARCH_HEIGHT"
-                bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
 
-                Lancelot__FullBorderLayout:position="Center"
+                Lancelot__FullBorderLayout:position="Bottom"
             >
-                <item:layout
-                    name="layoutSearch" type="Lancelot::NodeLayout"
-                    margin="0" spacing="0"
+                <item:widget
+                    name="buttonSystemLockScreen" type="Lancelot::ExtenderButton"
 
-                    Lancelot__FullBorderLayout:position="Top"
-                >
-                <!-- Dirty hack to get an edit box before Qt 4.4 :: begin
-                <code:include><![CDATA[
-                    #include <KLineEdit>
-                    ]]></code:include>
-                    <code:declaration>
-                        KLineEdit * editSearch;
-                        QGraphicsWidget     * _m_root;
-                        QGraphicsView       * _m_view;
-                    </code:declaration>
-                    <code:initialization>
-                        editSearch = new KLineEdit(); //(QWidget *)this
-                    </code:initialization>
-                    <code:setup>
-                        editSearch->setClearButtonShown(true);
-                        editSearch->setFrame(false);
-                    </code:setup>
+                    title="Lock Session"
+                    icon="system-lock-screen"
+                    group="SystemButtons"
+                    activationMethod="Extender"
+                    extenderPosition="Bottom"
+                    iconSize="24, 24"
 
-                    <item:widget
-                        name="editSearchPositioner" type="Lancelot::WidgetPositioner"
-                        widgetName="editSearch" view="_m_view" parent="_m_root"
+                    Lancelot__NodeLayout:topLeft     = "0, 0, 0, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "1.0 / 3.0, 1, -2, - SYSTEM_PADDING"
+                />
+                <item:widget
+                    name="buttonSystemLogout" type="Lancelot::ExtenderButton"
 
-                        Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                        Lancelot__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
-                    />
-                    <item:widget
-                        type="Plasma::Label" name="labelSearch"
-                        text="Search"
+                    title="Log Out..."
+                    icon="system-log-out"
+                    group="SystemButtons"
+                    activationMethod="Extender"
+                    extenderPosition="Bottom"
+                    iconSize="24, 24"
 
-                        Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                        Lancelot__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
-                    />
-                Dirty hack to get an edit box before Qt 4.4 :: end -->
-                </item:layout>
-                <item:layout
-                    name="layoutCenter" type="Lancelot::CardLayout"
-                    margin="0" spacing="0"
+                    Lancelot__NodeLayout:topLeft     = "1.0 / 3.0, 0, 1, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "2.0 / 3.0, 1, -1, - SYSTEM_PADDING"
+                />
+                <item:widget
+                    name="buttonSystemSwitchUser" type="Lancelot::ExtenderButton"
 
-                    Lancelot__FullBorderLayout:position="Center"
-                >
-                    <item:widget
-                        name="passagewayApplications" type="Lancelot::PassagewayView"
+                    title="Switch User"
+                    icon="switchuser"
+                    group="SystemButtons"
+                    activationMethod="Extender"
+                    extenderPosition="Bottom"
+                    iconSize="24, 24"
 
-                        entranceTitle="Favorite"
-                        entranceIcon="favorite"
-                        atlasTitle="Applications"
-                        atlasIcon="applications-other"
-
-                        background="lancelot/inner-background"
-
-                        Lancelot__CardLayout:cardName="applications"
-                    >
-                    </item:widget>
-                    <item:widget
-                        name="panelComputer" type="Lancelot::Panel"
-
-                        title="Computer"
-                        icon="computer-laptop"
-                        iconSize="22, 22"
-                        background="lancelot/inner-background"
-
-                        Lancelot__CardLayout:cardName="computer"
-                    >
-                        <item:layout name="layoutPanelComputer" type="Lancelot::NodeLayout">
-                            <item:widget
-                                name="listComputerLeft" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-
-                                Lancelot__NodeLayout:topLeft     = "0, 0"
-                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
-                            />
-                            <item:widget
-                                name="listComputerRight" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-
-                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
-                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
-                            />
-                        </item:layout>
-                    </item:widget>
-                    <item:widget
-                        name="panelContacts" type="Lancelot::Panel"
-
-                        title="Contacts"
-                        icon="kontact"
-                        iconSize="22, 22"
-                        background="lancelot/inner-background"
-
-                        Lancelot__CardLayout:cardName="contacts"
-                    >
-                        <item:layout name="layoutPanelContacts" type="Lancelot::NodeLayout">
-                            <item:widget
-                                name="listContactsLeft" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-
-                                Lancelot__NodeLayout:topLeft     = "0, 0"
-                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
-                            />
-                            <item:widget
-                                name="listContactsRight" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-
-                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
-                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
-                            />
-                        </item:layout>
-                    </item:widget>
-                    <item:widget
-                        name="panelDocuments" type="Lancelot::Panel"
-
-                        title="Documents"
-                        icon="applications-office"
-                        iconSize="22, 22"
-                        background="lancelot/inner-background"
-
-                        Lancelot__CardLayout:cardName="documents"
-                    >
-                        <item:layout name="layoutDocumentsComputer" type="Lancelot::NodeLayout">
-                            <item:widget
-                                name="listDocumentsLeft" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-
-                                Lancelot__NodeLayout:topLeft     = "0, 0"
-                                Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
-                            />
-                            <item:widget
-                                name="listDocumentsRight" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-
-                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
-                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
-                            />
-                        </item:layout>
-                    </item:widget>
-                    <item:widget
-                        name="panelSearch" type="Lancelot::Panel"
-
-                        title="Search"
-                        icon="find"
-                        iconSize="22, 22"
-                        background="lancelot/inner-background"
-
-                        Lancelot__CardLayout:cardName="search"
-                    >
-                        <item:layout name="layoutSearchComputer" type="Lancelot::NodeLayout">
-                            <item:widget
-                                name="listSearchLeft" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
-
-                                Lancelot__NodeLayout:topLeft     = "0, 0"
-                                Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"
-                            />
-                            <!--
-                            <item:widget
-                                name="listSearchRight" type="Lancelot::ActionListView"
-                                itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-
-                                Lancelot__NodeLayout:topLeft     = "0.5, 0"
-                                Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
-                            />
-                            -->
-                        </item:layout>
-                    </item:widget>
-                </item:layout>
-                <item:layout
-                    name="layoutSystem" type="Lancelot::NodeLayout"
-                    margin="0" spacing="0"
-
-                    Lancelot__FullBorderLayout:position="Bottom"
-                >
-                    <item:widget
-                        name="buttonSystemLockScreen" type="Lancelot::ExtenderButton"
-
-                        title="Lock Session"
-                        icon="system-lock-screen"
-                        group="SystemButtons"
-                        activation="Extender"
-                        extenderPosition="Bottom"
-                        iconSize="24, 24"
-
-                        Lancelot__NodeLayout:topLeft     = "0, 0, 0, SYSTEM_PADDING"
-                        Lancelot__NodeLayout:bottomRight = "1.0 / 3.0, 1, -2, - SYSTEM_PADDING"
-                    />
-                    <item:widget
-                        name="buttonSystemLogout" type="Lancelot::ExtenderButton"
-
-                        title="Log Out..."
-                        icon="system-log-out"
-                        group="SystemButtons"
-                        activation="Extender"
-                        extenderPosition="Bottom"
-                        iconSize="24, 24"
-
-                        Lancelot__NodeLayout:topLeft     = "1.0 / 3.0, 0, 1, SYSTEM_PADDING"
-                        Lancelot__NodeLayout:bottomRight = "2.0 / 3.0, 1, -1, - SYSTEM_PADDING"
-                    />
-                    <item:widget
-                        name="buttonSystemSwitchUser" type="Lancelot::ExtenderButton"
-
-                        title="Switch User"
-                        icon="switchuser"
-                        group="SystemButtons"
-                        activation="Extender"
-                        extenderPosition="Bottom"
-                        iconSize="24, 24"
-
-                        Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, 2, SYSTEM_PADDING"
-                        Lancelot__NodeLayout:bottomRight = "1, 1, 0, - SYSTEM_PADDING"
-                    />
-                </item:layout>
+                    Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, 2, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "1, 1, 0, - SYSTEM_PADDING"
+                />
             </item:layout>
         </item:layout>
     </ui>

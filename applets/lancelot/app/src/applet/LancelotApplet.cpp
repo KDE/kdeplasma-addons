@@ -23,6 +23,7 @@
 
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <iostream>
 
 void LancelotApplet::dbusConnect() {
     m_lancelot = new org::kde::lancelot::App(
@@ -91,11 +92,6 @@ LancelotApplet::~LancelotApplet()
     delete m_instance;
 }
 
-Qt::Orientations LancelotApplet::expandingDirections() const
-{
-    return 0;
-}
-
 void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::LocationConstraint | Plasma::SizeConstraint)) {
@@ -110,8 +106,12 @@ void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-QSizeF LancelotApplet::contentSizeHint() const
+QSizeF LancelotApplet::sizeHint(Qt::SizeHint which,
+        const QSizeF & constraint) const
 {
+    Q_UNUSED(which);
+    kDebug() << "LAPLET" << constraint;
+    std::cout << "LAPLET\n\n\n";
     if (m_buttons.size() <= 1) {
         return QSizeF(48, 48);
     }
@@ -134,46 +134,9 @@ void LancelotApplet::showLancelotSection(const QString & section)
     m_lancelot->showItem(position.x(), position.y(), section);
 }
 
-bool LancelotApplet::hasHeightForWidth () const
-{
-    return true;
-}
-
-qreal LancelotApplet::heightForWidth (qreal width) const
-{
-    if (m_buttons.size() == 0) {
-        return width;
-    }
-
-    if (m_isVertical) {
-        return width * m_buttons.size();
-    } else {
-        return width / (qreal)m_buttons.size();
-    }
-}
-
-bool LancelotApplet::hasWidthForHeight () const
-{
-    return true;
-}
-
-qreal LancelotApplet::widthForHeight (qreal height) const
-{
-    if (m_buttons.size() == 0) {
-        return height;
-    }
-
-    if (m_isVertical) {
-        return height / (qreal)m_buttons.size();
-    } else {
-        return height * m_buttons.size();
-    }
-}
-
-void LancelotApplet::updateGeometry ()
+void LancelotApplet::updateGeometry()
 {
     if (m_blockUpdates) return;
-    Plasma::Applet::updateGeometry();
     kDebug() << "updateGeometry()\n";
     layoutButtons();
 }

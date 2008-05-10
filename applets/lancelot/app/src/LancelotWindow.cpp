@@ -208,7 +208,7 @@ LancelotWindow::LancelotWindow()
     /* Dirty hack to get an edit box before Qt 4.4 :: end */
 
     setupUi(m_root);
-    m_root->setLayout(layoutMain);
+    m_root->setLayoutItem(layoutMain);
 
     setupModels();
 
@@ -318,9 +318,7 @@ void LancelotWindow::showWindow(int x, int y)
     }
 
     layoutMain->setFlip(flip);
-    layoutMainLeft->setFlip(flip);
     layoutSections->setFlip(flip);
-    layoutMainCenter->setFlip(flip);
 
     instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
             (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)

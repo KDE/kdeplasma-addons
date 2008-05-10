@@ -150,7 +150,9 @@ void CardLayout::show(const QString & id)
         d->shown->hide();
     }
     d->shown = d->widgets[id];
+    d->shown->setGeometry(geometry());
     d->shown->show();
+    kDebug() << "Layout geom" << geometry() << "child" << d->shown->geometry();
 }
 
 void CardLayout::hideAll()

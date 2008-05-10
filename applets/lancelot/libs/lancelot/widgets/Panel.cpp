@@ -234,5 +234,37 @@ void Panel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, Q
     }
 }
 
+QSizeF Panel::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    QSizeF result = QSizeF();
+
+    if (!L_WIDGET_IS_INITIALIZED) {
+        return result;
+    }
+
+    // TODO: Count the header as well
+
+    if (!d->layoutItem) {
+        switch (which) {
+            case Qt::MinimumSize:
+                result = QSizeF();
+                break;
+            case Qt::MaximumSize:
+                result = MAX_WIDGET_SIZE;
+                break;
+            default:
+                result = QSizeF(100, 100);
+        }
+    } else {
+        result = d->layoutItem->effectiveSizeHint(which, constraint);
+    }
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    kDebug() << "sizeHint " << which << result;
+    return result;
+}
+
+
 } // namespace Lancelot
 

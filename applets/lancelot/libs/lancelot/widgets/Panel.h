@@ -142,6 +142,8 @@ public:
 
 protected:
     L_Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;

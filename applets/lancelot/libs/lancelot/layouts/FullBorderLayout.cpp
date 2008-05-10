@@ -76,7 +76,7 @@ public:
         }
 
         // left
-        left = sizes[FullBorderLayout::TopBorder];
+        left = sizes[FullBorderLayout::LeftBorder];
         if (left < 0) {
             left = 0;
             if (itemPositions[FullBorderLayout::TopLeft]) {
@@ -91,7 +91,7 @@ public:
         }
 
         // right
-        right = sizes[FullBorderLayout::TopBorder];
+        right = sizes[FullBorderLayout::RightBorder];
         if (right < 0) {
             right = 0;
             if (itemPositions[FullBorderLayout::TopRight]) {
@@ -104,7 +104,12 @@ public:
                 right = qMax(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
             }
         }
-
+        kDebug() << "Border sizes are "
+            << sizes[FullBorderLayout::LeftBorder]
+            << sizes[FullBorderLayout::TopBorder]
+            << sizes[FullBorderLayout::RightBorder]
+            << sizes[FullBorderLayout::BottomBorder];
+        kDebug() << "Border sizes are " << left << top << right << bottom;
     }
 };
 

@@ -157,9 +157,10 @@ public:
             break;
         }
         extender->setGeometry(geometry);
+        extender->setPreferredSize(geometry.size());
 
-        qreal left, top, right, bottom;
-        q->getContentsMargins(&left, &top, &right, &bottom);
+        // qreal left, top, right, bottom;
+        // q->getContentsMargins(&left, &top, &right, &bottom);
     }
 
     ExtenderButton * q;

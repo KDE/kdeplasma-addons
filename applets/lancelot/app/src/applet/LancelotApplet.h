@@ -40,22 +40,12 @@ public:
     LancelotApplet(QObject * parent, const QVariantList &args);
     ~LancelotApplet();
 
-    QSizeF contentSizeHint() const;
-
-    Qt::Orientations expandingDirections() const;
-
-    bool hasHeightForWidth () const;
-    qreal heightForWidth (qreal width) const;
-
-    bool hasWidthForHeight () const;
-    qreal widthForHeight (qreal height) const;
-
-    void updateGeometry ();
-
-    void showConfigurationInterface();
     bool hasConfigurationInterface();
 
     void init();
+
+public Q_SLOTS:
+    void showConfigurationInterface();
 
 protected Q_SLOTS:
     void showLancelot();
@@ -64,7 +54,10 @@ protected Q_SLOTS:
     void configAccepted();
 
 protected:
-    void constraintsEvent(Plasma::Constraints constraints);
+    L_Override virtual void constraintsEvent(Plasma::Constraints
+            constraints);
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     QSignalMapper m_signalMapper;
@@ -89,6 +82,7 @@ private:
 
 
     // Atoms
+    void updateGeometry();
     void dbusConnect();
 
     void deleteButtons();
