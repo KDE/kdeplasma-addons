@@ -16,7 +16,7 @@ add_subdirectory(fileWatcher)
 add_subdirectory(frame)
 # pino: disabled, will improve it myself later
 #add_subdirectory(kolourpicker)
-#add_subdirectory(lancelot)
+add_subdirectory(lancelot)
 add_subdirectory(notes)
 add_subdirectory(twitter)
 add_subdirectory(comic)

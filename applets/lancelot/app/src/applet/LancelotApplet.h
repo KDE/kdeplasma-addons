@@ -31,7 +31,6 @@
 
 #include <QString>
 
-class QDBusInterface;
 
 class LancelotApplet : public Plasma::Applet
 {

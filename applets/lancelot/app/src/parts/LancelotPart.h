@@ -25,7 +25,6 @@
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ActionListView.h>
 
-class QDBusInterface;
 
 class LancelotPart : /*public Lancelot::WidgetCore,*/ public Plasma::Applet
 {
