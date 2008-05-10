@@ -385,18 +385,17 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
     QSizeF result = QSizeF();
 
     if (!L_WIDGET_IS_INITIALIZED) {
-        kDebug() << "Widget is not initialized";
         return result;
     }
-    kDebug() << "Widget is initialized, yey";
 
     switch (which) {
         case Qt::MinimumSize:
             result = d->iconSize;
+            break;
         case Qt::MaximumSize:
             result = MAX_WIDGET_SIZE;
             break;
-        case Qt::PreferredSize:
+        default:
             // Do we need a more precise sizeHint?
             result = d->iconSize + QSizeF(2 * WIDGET_PADDING, 2 * WIDGET_PADDING);
             if (d->innerOrientation == Qt::Horizontal) {
@@ -405,7 +404,11 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
                 result.scale(2.0, 2.0, Qt::IgnoreAspectRatio);
             }
     }
-    return result.boundedTo(constraint);
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    kDebug() << "sizeHint " << which << result << title();
+    return result;
 }
 
 } // namespace Lancelot

@@ -46,40 +46,65 @@ public:
     void calculateBorderSizes(qreal & top, qreal & bottom, qreal & left, qreal & right) const
     {
         // top
-        if ((top = sizes[FullBorderLayout::TopBorder]) < 0) {
+        top = sizes[FullBorderLayout::TopBorder];
+        if (top < 0) {
+            top = 0;
+            if (itemPositions[FullBorderLayout::TopLeft]) {
+                top = qMax(top, itemPositions[FullBorderLayout::TopLeft]->preferredSize().height());
+            }
             if (itemPositions[FullBorderLayout::Top]) {
-                top = itemPositions[FullBorderLayout::Top]->preferredSize().height();
-            } else {
-                top = 0;
+                top = qMax(top, itemPositions[FullBorderLayout::Top]->preferredSize().height());
+            }
+            if (itemPositions[FullBorderLayout::TopRight]) {
+                top = qMax(top, itemPositions[FullBorderLayout::TopRight]->preferredSize().height());
             }
         }
 
         // bottom
-        if ((bottom = sizes[FullBorderLayout::BottomBorder]) < 0) {
+        bottom = sizes[FullBorderLayout::BottomBorder];
+        if (bottom < 0) {
+            bottom = 0;
+            if (itemPositions[FullBorderLayout::BottomLeft]) {
+                bottom = qMax(bottom, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().height());
+            }
             if (itemPositions[FullBorderLayout::Bottom]) {
-                bottom = itemPositions[FullBorderLayout::Bottom]->preferredSize().height();
-            } else {
-                bottom = 0;
+                bottom = qMax(bottom, itemPositions[FullBorderLayout::Bottom]->preferredSize().height());
+            }
+            if (itemPositions[FullBorderLayout::BottomRight]) {
+                bottom = qMax(bottom, itemPositions[FullBorderLayout::BottomRight]->preferredSize().height());
             }
         }
 
         // left
-        if ((left = sizes[FullBorderLayout::LeftBorder]) < 0) {
+        left = sizes[FullBorderLayout::TopBorder];
+        if (left < 0) {
+            left = 0;
+            if (itemPositions[FullBorderLayout::TopLeft]) {
+                left = qMax(left, itemPositions[FullBorderLayout::TopLeft]->preferredSize().width());
+            }
             if (itemPositions[FullBorderLayout::Left]) {
-                left = itemPositions[FullBorderLayout::Left]->preferredSize().width();
-            } else {
-                left = 0;
+                left = qMax(left, itemPositions[FullBorderLayout::Left]->preferredSize().width());
+            }
+            if (itemPositions[FullBorderLayout::BottomLeft]) {
+                left = qMax(left, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().width());
             }
         }
 
         // right
-        if ((right = sizes[FullBorderLayout::RightBorder]) < 0) {
+        right = sizes[FullBorderLayout::TopBorder];
+        if (right < 0) {
+            right = 0;
+            if (itemPositions[FullBorderLayout::TopRight]) {
+                right = qMax(right, itemPositions[FullBorderLayout::TopRight]->preferredSize().width());
+            }
             if (itemPositions[FullBorderLayout::Right]) {
-                right = itemPositions[FullBorderLayout::Right]->preferredSize().width();
-            } else {
-                right = 0;
+                right = qMax(right, itemPositions[FullBorderLayout::Right]->preferredSize().width());
+            }
+            if (itemPositions[FullBorderLayout::BottomRight]) {
+                right = qMax(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
             }
         }
+
     }
 };
 

@@ -21,6 +21,9 @@
 
 #include <QPair>
 #include <QMap>
+#include <KDebug>
+#include "Global.h"
+#include <lancelot/lancelot.h>
 
 #include <limits>
 
@@ -131,7 +134,7 @@ public:
             result.setHeight(item->preferredSize().height());
             result.moveTop(result.top() - items[item].second.yr * result.height());
         }
-
+        kDebug() << result << geometry;
         return result;
     }
 
@@ -178,7 +181,23 @@ QSizeF NodeLayout::sizeHint(Qt::SizeHint which,
 {
     Q_UNUSED(which);
     Q_UNUSED(constraint);
-    return d->sizeHint;
+    QSizeF result;
+
+    switch (which) {
+        case Qt::MinimumSize:
+            result = QSizeF();
+            break;
+        case Qt::MaximumSize:
+            result = MAX_WIDGET_SIZE;
+            break;
+        default:
+            result = d->sizeHint;
+    }
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    kDebug() << "sizeHint " << which << result;
+    return result;
 }
 
 void NodeLayout::addItem(QGraphicsLayoutItem * item)
@@ -194,6 +213,8 @@ void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate topLeft, Nod
 
     d->items[item] = QPair<NodeCoordinate, NodeCoordinate>(topLeft, bottomRight);
     d->calculateSizeHint(item);
+    updateGeometry();
+    kDebug() << d->sizeHint;
 }
 
 void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate node, qreal xr, qreal yr)
@@ -205,6 +226,8 @@ void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate node, qreal 
     d->items[item] = QPair<NodeCoordinate, NodeCoordinate>(node,
         NodeCoordinate::simple(xr, yr, NodeCoordinate::InnerRelative, NodeCoordinate::InnerRelative));
     d->calculateSizeHint(item);
+    updateGeometry();
+    kDebug() << d->sizeHint;
 }
 
 int NodeLayout::count() const

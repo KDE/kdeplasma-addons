@@ -33,6 +33,9 @@
 #include "../widgets/ScrollPane.h"
 
 #include "../layouts/FullBorderLayout.h"
+#include "../layouts/FlipLayout.h"
+#include "../layouts/NodeLayout.h"
+#include "../layouts/CardLayout.h"
 
 using namespace Lancelot;
 
@@ -40,77 +43,54 @@ LancelotTestWindow::LancelotTestWindow()
     : QGraphicsView()
 {
 
+    // Initialization
     setFocusPolicy(Qt::WheelFocus);
-    //setDragMode(QGraphicsView::ScrollHandDrag);
-
     m_corona = new Plasma::Corona(this);
     setScene(m_corona);
-
     instance = new Instance();
 
-    ExtenderButton * extenderButton;
+    // Test area - begin ####################################
+    Lancelot::FlipLayout < Lancelot::FullBorderLayout > * mainLayout;
+    mainLayout = new Lancelot::FlipLayout < Lancelot::FullBorderLayout >();
+    mainLayout->setFlip(Plasma::HorizontalFlip);
 
-    // ExtenderButton
-    extenderButton = new ExtenderButton(KIcon("lancelot"), "Title", "Description");
-    extenderButton->setExtenderPosition(LeftExtender);
-    m_corona->addItem(extenderButton);
-    extenderButton->setGeometry(50, 50, 150, 50);
-    extenderButton->setGroupByName("SystemButtons");
-    extenderButton->setEnabled(false);
-    //extenderButton->BasicWidget::debug();
-    kDebug() << "sizeHint " << extenderButton->minimumSize();
-    //extenderButton->updateGeometry();
-    kDebug() << "sizeHint " << extenderButton->minimumSize();
+    Lancelot::ExtenderButton * button;
 
-    extenderButton = new ExtenderButton(KIcon("lancelot"), "Title", "Description");
-    extenderButton->setExtenderPosition(BottomExtender);
-    m_corona->addItem(extenderButton);
-    extenderButton->setGeometry(50, 150, 150, 50);
-    extenderButton->setGroupByName("SystemButtons");
-    extenderButton->setCheckable(true);
-    extenderButton->setChecked(true);
+    button = new Lancelot::ExtenderButton("TL");
+    button->setGroupByName("SystemButtons");
+    mainLayout->addItem(button, Lancelot::FullBorderLayout::TopLeft);
+    m_corona->addItem(button);
 
-    extenderButton = new ExtenderButton(KIcon("lancelot"), "Title", "Description");
-    extenderButton->setExtenderPosition(RightExtender);
-    m_corona->addItem(extenderButton);
-    extenderButton->setGeometry(250, 50, 150, 50);
-    extenderButton->setGroupByName("SystemButtons");
+    button = new Lancelot::ExtenderButton("BR");
+    button->setGroupByName("SystemButtons");
+    mainLayout->addItem(button, Lancelot::FullBorderLayout::BottomRight);
+    m_corona->addItem(button);
 
-    extenderButton = new ExtenderButton(KIcon("lancelot"), "Title", "Description");
-    extenderButton->setExtenderPosition(TopExtender);
-    m_corona->addItem(extenderButton);
-    extenderButton->setGeometry(250, 150, 150, 50);
-    extenderButton->setGroupByName("SystemButtons");
+    Lancelot::NodeLayout * centerLayout;
+    centerLayout = new Lancelot::NodeLayout();
+    mainLayout->addItem(centerLayout, Lancelot::FullBorderLayout::Center);
 
-    // Panel
-    Lancelot::Panel * panel;
-    panel = new Lancelot::Panel(KIcon("lancelot"), "Title");
-    m_corona->addItem(panel);
-    panel->setBackground("lancelot/main-background");
-    panel->setGeometry(50, 250, 200, 200);
+    button = new Lancelot::ExtenderButton("ND1");
+    button->setGroupByName("SystemButtons");
+    centerLayout->addItem(button,
+            Lancelot::NodeLayout::NodeCoordinate(),
+            Lancelot::NodeLayout::NodeCoordinate(0.5, 0.5)
+            );
+    m_corona->addItem(button);
 
-    // ResizeBordersPanel
-    ResizeBordersPanel * resizeBordersPanel;
-    resizeBordersPanel = new ResizeBordersPanel();
-    m_corona->addItem(resizeBordersPanel);
-    resizeBordersPanel->setBackground("lancelot/main-background");
+    button = new Lancelot::ExtenderButton("ND2");
+    button->setGroupByName("SystemButtons");
+    centerLayout->addItem(button,
+            Lancelot::NodeLayout::NodeCoordinate(0.5, 0.5),
+            Lancelot::NodeLayout::NodeCoordinate(1, 1)
+            );
+    m_corona->addItem(button);
 
-    resizeBordersPanel->setGeometry(300, 250, 200, 200);
+    // Test area - end   ####################################
 
-    // ScrollPane
-    ScrollPane * scrollPane = new ScrollPane();
-    // Widget * scrollPane = new Widget();
-    m_corona->addItem(scrollPane);
-    // scrollPane->setGeometry(300, 250, 200, 200);
-    scrollPane->setGroupByName("SystemButtons");
-    scrollPane->setGeometry(400, 0, 200, 200);
-
+    // Starting...
+    mainLayout->setGeometry(QRectF(8, 8, 400, 300));
     instance->activateAll();
-    scrollPane->setGeometry(400, 0, 250, 250);
-    scrollPane->update();
-    kDebug() << "########################## " << extenderButton->geometry();
-
-    // timeLine->start();
 }
 
 LancelotTestWindow::~LancelotTestWindow()
