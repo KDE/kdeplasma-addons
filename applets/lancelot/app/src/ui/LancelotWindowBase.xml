@@ -54,7 +54,7 @@
                         group="SectionButtons"
                         activationMethod="Hover"
                         iconSize="48, 48"
-                        orientation="Vertical"
+                        innerOrientation="Vertical"
                         checkable="true"
 
                         Lancelot__NodeLayout:topLeft     = "0, 0  , 0, 1"
@@ -68,7 +68,7 @@
                         group="SectionButtons"
                         activationMethod="Hover"
                         iconSize="48, 48"
-                        orientation="Vertical"
+                        innerOrientation="Vertical"
                         checkable="true"
 
                         Lancelot__NodeLayout:topLeft     = "0, .25  , 0, 1"
@@ -82,7 +82,7 @@
                         group="SectionButtons"
                         activationMethod="Hover"
                         iconSize="48, 48"
-                        orientation="Vertical"
+                        innerOrientation="Vertical"
                         checkable="true"
 
                         Lancelot__NodeLayout:topLeft     = "0, .5  , 0, 1"
@@ -96,7 +96,7 @@
                         group="SectionButtons"
                         activationMethod="Hover"
                         iconSize="48, 48"
-                        orientation="Vertical"
+                        innerOrientation="Vertical"
                         checkable="true"
 
                         Lancelot__NodeLayout:topLeft     = "0, .75 , 0, 1"

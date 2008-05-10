@@ -389,11 +389,11 @@ QStringList LancelotWindow::sectionIcons()
 void LancelotWindow::sectionActivated(const QString & item)
 {
     foreach (Lancelot::ExtenderButton * button, sectionButtons) {
-        button->setChecked(false);
+        // button->setChecked(false);
     }
 
     if (sectionButtons.contains(item)) {
-        sectionButtons[item]->setChecked(true);
+         // sectionButtons[item]->setChecked(true);
     }
 
     layoutCenter->show(item);

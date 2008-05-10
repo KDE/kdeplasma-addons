@@ -58,11 +58,14 @@ LancelotTestWindow::LancelotTestWindow()
 
     button = new Lancelot::ExtenderButton("TL");
     button->setGroupByName("SystemButtons");
+    button->setCheckable(true);
     mainLayout->addItem(button, Lancelot::FullBorderLayout::TopLeft);
     m_corona->addItem(button);
 
     button = new Lancelot::ExtenderButton("BR");
     button->setGroupByName("SystemButtons");
+    button->setCheckable(true);
+    button->setChecked(true);
     mainLayout->addItem(button, Lancelot::FullBorderLayout::BottomRight);
     m_corona->addItem(button);
 
