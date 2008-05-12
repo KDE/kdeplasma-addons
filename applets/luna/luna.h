@@ -44,6 +44,7 @@ class Luna : public Plasma::Applet
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
+        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         void connectToEngine();

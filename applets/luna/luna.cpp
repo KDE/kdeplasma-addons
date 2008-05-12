@@ -45,6 +45,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
 
 void Luna::init()
 {
+    setAspectRatioMode(Plasma::Square);
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/luna");
     m_theme->setContainsMultipleImages(true);
@@ -63,7 +64,18 @@ void Luna::init()
 
 Luna::~Luna()
 {
+    delete m_theme;
+}
 
+void Luna::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::SizeConstraint) {
+        if (formFactor() == Plasma::Horizontal) {
+            setMinimumWidth(geometry().height());
+        } else if (formFactor() == Plasma::Vertical) {
+            setMinimumHeight((int)geometry().width());
+        }
+    }
 }
 
 void Luna::connectToEngine()
