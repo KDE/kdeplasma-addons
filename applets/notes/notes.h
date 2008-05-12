@@ -48,14 +48,16 @@ class Notes : public Plasma::Applet
                             const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);
 
-    public slots:
+    public Q_SLOTS:
         void configAccepted();
-        void saveNote();
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
         void createConfigurationInterface(KConfigDialog *parent);
 
+    private Q_SLOTS:
+        void saveNote();
+        void focusNote();
     private:
         int fontSize();
         int m_autoFontPercent;
@@ -68,6 +70,7 @@ class Notes : public Plasma::Applet
         QGraphicsLinearLayout *m_layout;
         QGraphicsProxyWidget *m_proxy;
         KTextEdit *m_textEdit;
+        QString m_defaultText;
         Ui::config ui;
 
         QSizeF m_size;

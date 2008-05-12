@@ -41,10 +41,12 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setBackgroundHints(Plasma::Applet::NoBackground);
     resize(256, 256);
 
+    m_defaultText = i18n("Welcome to the Notes Plasmoid! Type your notes here...");
     m_textEdit = new KTextEdit();
     m_layout = new QGraphicsLinearLayout();
     m_proxy = new QGraphicsProxyWidget(this);
     m_autoFont = false;
+
     updateTextGeometry();
 }
 
@@ -63,10 +65,11 @@ void Notes::init()
 
     KConfigGroup cg = config();
 
-    m_textEdit->setPlainText(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
     QString text = cg.readEntry("autoSave", QString());
     if (! text.isEmpty()) {
         m_textEdit->setPlainText(text);
+    } else {
+        m_textEdit->setPlainText(m_defaultText);
     }
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
@@ -78,6 +81,8 @@ void Notes::init()
     setLayout(m_layout);
     updateTextGeometry();
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
+    connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
+    focusNote();
 }
 
 void Notes::constraintsEvent(Plasma::Constraints constraints)
@@ -115,6 +120,17 @@ void Notes::saveNote()
     cg.writeEntry("autoSave", m_textEdit->toPlainText());
     kDebug() << m_textEdit->toPlainText();
     emit configNeedsSaving();
+}
+
+void Notes::focusNote()
+{
+    if (m_textEdit->toPlainText() == m_defaultText) {
+        m_textEdit->setEnabled(false);
+        kDebug() << "enabled: false";
+    } else {
+        m_textEdit->setEnabled(true);
+        kDebug() << "enabled: true";
+    }
 }
 
 Notes::~Notes()
