@@ -50,6 +50,17 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     updateTextGeometry();
 }
 
+Notes::~Notes()
+{
+    //FIXME is it really ok to save from here?
+    //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
+    //text back. it was useful when there were load/save issues but it's silly now.
+    saveNote();
+    delete m_textEdit;
+    delete m_layout;
+    delete m_proxy;
+}
+
 void Notes::init()
 {
     m_notes_theme.setContainsMultipleImages(false);
@@ -131,14 +142,6 @@ void Notes::focusNote()
         //m_textEdit->setEnabled(true);
         kDebug() << "enabled: true";
     }
-}
-
-Notes::~Notes()
-{
-    //FIXME is it really ok to save from here?
-    //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
-    //text back. it was useful when there were load/save issues but it's silly now.
-    saveNote();
 }
 
 void Notes::paintInterface(QPainter *p,
