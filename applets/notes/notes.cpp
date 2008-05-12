@@ -125,10 +125,10 @@ void Notes::saveNote()
 void Notes::focusNote()
 {
     if (m_textEdit->toPlainText() == m_defaultText) {
-        m_textEdit->setEnabled(false);
+        //m_textEdit->setEnabled(false);
         kDebug() << "enabled: false";
     } else {
-        m_textEdit->setEnabled(true);
+        //m_textEdit->setEnabled(true);
         kDebug() << "enabled: true";
     }
 }
