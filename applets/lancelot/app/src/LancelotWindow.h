@@ -182,7 +182,7 @@ private:
         Left = 4, Right = 8
     };
 
-    Q_DECLARE_FLAGS(ResizeDirection, BaseDirection);
+    Q_DECLARE_FLAGS(ResizeDirection, BaseDirection)
 
     ResizeDirection m_resizeDirection;
     QPoint          m_originalMousePosition;
