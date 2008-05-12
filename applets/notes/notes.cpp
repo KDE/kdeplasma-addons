@@ -43,7 +43,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
     m_defaultText = i18n("Welcome to the Notes Plasmoid! Type your notes here...");
     m_textEdit = new KTextEdit();
-    m_layout = new QGraphicsLinearLayout();
+    m_layout = new QGraphicsLinearLayout(this);
     m_proxy = new QGraphicsProxyWidget(this);
     m_autoFont = false;
 
@@ -57,8 +57,6 @@ Notes::~Notes()
     //text back. it was useful when there were load/save issues but it's silly now.
     saveNote();
     delete m_textEdit;
-    delete m_layout;
-    delete m_proxy;
 }
 
 void Notes::init()
