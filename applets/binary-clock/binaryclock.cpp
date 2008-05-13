@@ -51,11 +51,6 @@ BinaryClock::~BinaryClock()
 {
 }
 
-Qt::Orientations BinaryClock::expandingDirections() const
-{
-    return 0;
-}
-
 int BinaryClock::getHeightFromWidth(int w) const
 {
     int dots = m_showSeconds ? 6 : 4;
@@ -70,27 +65,6 @@ int BinaryClock::getWidthFromHeight(int h) const
     int rectSize = (h - 3) / 4;
 
     return (rectSize * dots) + 5;
-}
-
-QSizeF BinaryClock::contentSizeHint() const
-{
-    QSizeF sizeHint = geometry().size();
-
-    switch (formFactor()) {
-        case Plasma::Vertical:
-            sizeHint.setHeight(getHeightFromWidth((int) sizeHint.width()));
-            break;
-
-        case Plasma::Horizontal:
-            sizeHint.setWidth(getWidthFromHeight((int) sizeHint.height()));
-            break;
-
-        default:
-            sizeHint.setWidth(getWidthFromHeight((int) sizeHint.height()));
-            break;
-    }
-
-    return sizeHint;
 }
 
 void BinaryClock::connectToEngine()
@@ -179,10 +153,11 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                                  const QRect &contentsRect)
 {
     Q_UNUSED(option);
+    Q_UNUSED(contentsRect);
 
-    QSizeF m_size = contentsRect.size();
-    int appletHeight = (int) m_size.height();
-    int appletWidth = (int) m_size.width();
+    QSizeF m_size = size();
+    int appletHeight = (int) size().height();
+    int appletWidth = (int) size().width();
     int dots = m_showSeconds ? 6 : 4;
 
     int rectSize = (appletHeight - 3) / 4;
