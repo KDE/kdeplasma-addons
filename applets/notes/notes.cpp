@@ -90,7 +90,7 @@ void Notes::init()
     setLayout(m_layout);
     updateTextGeometry();
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
-    connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
+    //connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
     focusNote();
 }
 
@@ -182,16 +182,20 @@ void Notes::configAccepted()
         m_textEdit->setFont(newFont);
     }
 
-    if (m_autoFont == ui.autoFont->isChecked()) {
+    if (m_autoFont != ui.autoFont->isChecked()) {
         changed = true;
         m_autoFont = ui.autoFont->isChecked();
         cg.writeEntry("autoFont", m_autoFont);
+        m_font.setPointSize(fontSize());
     }
 
     if (m_autoFontPercent != ui.autoFontPercent->value()) {
         changed = true;
         m_autoFontPercent = (ui.autoFontPercent->value());
         cg.writeEntry("autoFontPercent", m_autoFontPercent);
+        if (m_autoFont) {
+            m_font.setPointSize(fontSize());
+        }
     }
 
     QColor newColor = ui.textColorButton->color();
