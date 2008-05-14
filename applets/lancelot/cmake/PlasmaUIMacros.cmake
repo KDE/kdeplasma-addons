@@ -1,3 +1,11 @@
+find_package(PythonInterp REQUIRED)
+if (NOT PYTHONINTERP_FOUND)
+   message(FATAL_ERROR
+      "Python interpreter is not found on this machine. Python is needed to "
+      "compile Lancelot. Mind that it is required ONLY for compilation. It is "
+      "not needed for running Lancelot" )
+endif (NOT PYTHONINTERP_FOUND)
+
 if (NOT KDE_PLASMA_UIC_EXECUTABLE)
    # We don't have Puck path
    set (KDE_PLASMA_UIC_EXECUTABLE ${CMAKE_SOURCE_DIR}/applets/lancelot/tools/puck/puck.py)
