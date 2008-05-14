@@ -1,10 +1,12 @@
 find_package(PythonInterp REQUIRED)
-if (NOT PYTHONINTERP_FOUND)
+if (PYTHONINTERP_FOUND)
+   message("-- Found Python interpreter: ${PYTHON_EXECUTABLE}")
+else (PYTHONINTERP_FOUND)
    message(FATAL_ERROR
       "Python interpreter is not found on this machine. Python is needed to "
       "compile Lancelot. Mind that it is required ONLY for compilation. It is "
       "not needed for running Lancelot" )
-endif (NOT PYTHONINTERP_FOUND)
+endif (PYTHONINTERP_FOUND)
 
 if (NOT KDE_PLASMA_UIC_EXECUTABLE)
    # We don't have Puck path
@@ -28,7 +30,7 @@ macro (PLASMAUI_ADD_UI_FILES _sources )
       message(${KDE_PLASMA_UIC_EXECUTABLE} "\n  " ${_tmp_FILE} "\n  " ${_header})
 
       add_custom_command(OUTPUT ${_header}
-         COMMAND ${KDE_PLASMA_UIC_EXECUTABLE}
+         COMMAND ${PYTHON_EXECUTABLE} ${KDE_PLASMA_UIC_EXECUTABLE}
          ${_tmp_FILE}
          ${_header}
 
