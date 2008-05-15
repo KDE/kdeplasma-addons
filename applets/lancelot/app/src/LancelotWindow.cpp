@@ -601,7 +601,7 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 //             return true;
 //         }
 //     }
-//     return false;
+     return QWidget::eventFilter(object, event);
 }
 
 #include "LancelotWindow.moc"
