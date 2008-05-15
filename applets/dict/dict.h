@@ -70,7 +70,6 @@ class Dict : public Plasma::Applet
         QString wnToHtml(const QString& text);
 
         QVariant m_thedef;
-        KDialog *m_dialog; //should we move this into another class?
         QLineEdit *m_wordChooser;
         QString m_word;
         QTimer* m_timer;
@@ -84,6 +83,7 @@ class Dict : public Plasma::Applet
         Ui::config ui;
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defDisplayProxy;
+	QGraphicsProxyWidget *m_lineProxyWidget;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)

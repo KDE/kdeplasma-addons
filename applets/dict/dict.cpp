@@ -47,7 +47,6 @@ using namespace Plasma;
 
 Dict::Dict(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_dialog(0),
       m_flash(0)
 {
     setHasConfigurationInterface(true);
@@ -59,10 +58,9 @@ void Dict::init()
     KConfigGroup cg = config();
 
     m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
-    QGraphicsProxyWidget * graphicsWidget = new QGraphicsProxyWidget(this);
-    QFrame *widget = new QFrame;
-    m_wordEdit = new KLineEdit(widget);
-    graphicsWidget->setWidget(widget);
+    m_lineProxyWidget = new QGraphicsProxyWidget(this);
+    m_wordEdit = new KLineEdit;
+    m_lineProxyWidget->setWidget(m_wordEdit);
 
     //TODO m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
     m_wordEdit->setText(i18n("Enter word to define here"));
@@ -82,7 +80,8 @@ void Dict::init()
 //  Position lineedits
     const int wordEditOffset = 40;
     m_graphicsIcon->setPos(12,3);
-    // TODO m_wordEdit->setPos(15 + wordEditOffset,7);
+    m_lineProxyWidget->setPos(15 + wordEditOffset,7);
+    m_lineProxyWidget->show();
     // TODO m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset-10);
 
     // TODO m_wordEdit->setStyled(true);
@@ -275,19 +274,13 @@ void Dict::configAccepted()
     cg.writeEntry("autoDefineTimeout", m_autoDefineTimeout);
     m_timer->setInterval(m_autoDefineTimeout);
 
-    m_dialog->deleteLater();
-    m_dialog = 0;
-
-    // these are automatically deallocated when we delete m_dialog
-    // zero them out just to be safe and conscientious
     updateConstraints();
 }
 
 Dict::~Dict()
 {
-    delete m_dialog;
     delete m_defDisplayProxy;
-    delete m_defBrowser;
+    delete m_lineProxyWidget;
 }
 
 void Dict::autoDefine(const QString &word)
