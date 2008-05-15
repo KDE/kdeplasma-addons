@@ -28,12 +28,11 @@
 #include <QtWebKit/QWebView>
 #include <QGraphicsProxyWidget>
 
+#include <KLineEdit>
+
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
-#include <plasma/layouts/vboxlayout.h>
-#include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/flash.h>
-#include <plasma/widgets/pushbutton.h>
 #include "ui_config.h"
 
 class QTimer;
@@ -49,13 +48,13 @@ class Dict : public Plasma::Applet
         Dict(QObject *parent, const QVariantList &args);
         ~Dict();
 
+	void init();
         void setPath(const QString&);
         QSizeF contentSizeHint() const;
         void constraintsEvent(Plasma::Constraints);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-        void showConfigurationInterface();
         void autoDefine(const QString &word);
         void linkDefine(const QString &word);
 
@@ -63,6 +62,9 @@ class Dict : public Plasma::Applet
 //         void acceptedTimeStringState(bool);
         void configAccepted();
         void define();
+
+    protected:
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         QString wnToHtml(const QString& text);
@@ -75,7 +77,7 @@ class Dict : public Plasma::Applet
         int m_autoDefineTimeout;
         QGraphicsPixmapItem *m_graphicsIcon; 
 //  Plasma::VBoxLayout *m_layout;
-        Plasma::LineEdit *m_wordEdit;
+        KLineEdit *m_wordEdit;
         Plasma::Flash *m_flash;
         QStringList m_defList;
         QStringList::iterator m_i;

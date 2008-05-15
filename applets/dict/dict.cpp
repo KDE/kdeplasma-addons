@@ -24,13 +24,14 @@
 
 #include <QApplication>
 #include <QGraphicsScene>
+#include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
 #include <QCheckBox>
 #include <QPushButton>
 //#include <QTextArea>
 #include <iostream>
 
-
+#include <KConfigDialog>
 #include <KDebug>
 #include <KLocale>
 #include <KIcon>
@@ -50,14 +51,22 @@ Dict::Dict(QObject *parent, const QVariantList &args)
       m_flash(0)
 {
     setHasConfigurationInterface(true);
+    resize(500,200);
+}
 
+void Dict::init()
+{
     KConfigGroup cg = config();
-    setContentSize(500,200);
+
     m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
-    m_wordEdit = new Plasma::LineEdit(this);
-    m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
-    m_wordEdit->setDefaultText(i18n("Enter word to define here"));
-    Phase::self()->animateItem(m_wordEdit, Phase::Appear);
+    QGraphicsProxyWidget * graphicsWidget = new QGraphicsProxyWidget(this);
+    QFrame *widget = new QFrame;
+    m_wordEdit = new KLineEdit(widget);
+    graphicsWidget->setWidget(widget);
+
+    //TODO m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
+    m_wordEdit->setText(i18n("Enter word to define here"));
+    //TODO Phase::self()->animateItem(m_wordEdit, Phase::Appear);  
 
     m_defBrowser = new QWebView();
     m_defDisplayProxy = new QGraphicsProxyWidget(this);
@@ -73,11 +82,11 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 //  Position lineedits
     const int wordEditOffset = 40;
     m_graphicsIcon->setPos(12,3);
-    m_wordEdit->setPos(15 + wordEditOffset,7);
-    m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset-10);
+    // TODO m_wordEdit->setPos(15 + wordEditOffset,7);
+    // TODO m_wordEdit->setTextWidth(contentSize().width()-wordEditOffset-10);
 
-    m_wordEdit->setStyled(true);
-    //m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
+    // TODO m_wordEdit->setStyled(true);
+    // TODO m_wordEdit->setDefaultTextColor(Plasma::Theme::self()->textColor());
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
@@ -109,7 +118,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
 void Dict::linkDefine(const QString &text)
 {
     kDebug() <<"ACTIVATED";
-    m_wordEdit->setPlainText(text);
+    m_wordEdit->setText(text);
     define();
 }
 
@@ -121,9 +130,9 @@ QSizeF Dict::contentSizeHint() const
 //          return QSizeF(contentSize().width(), 40);
 //      }
       if (m_defDisplayProxy->isVisible()) {
-          return QSizeF(contentSize().width(), 40+m_defDisplayProxy->size().height());
+          return QSizeF(geometry().width(), 40+m_defDisplayProxy->size().height());
       } else { 
-         return QSizeF(contentSize().width(), 40);
+         return QSizeF(geometry().width(), 40);
       }
 //      return QSizeF(contentSize());
 }
@@ -135,9 +144,9 @@ void Dict::constraintsEvent(Plasma::Constraints constraints)
     }
     if (constraints & Plasma::SizeConstraint) {
     if (m_defDisplayProxy->isVisible()) {
-            m_defDisplayProxy->resize(contentSize().width()-15,contentSize().height()-40);
+            m_defDisplayProxy->resize(geometry().width()-15, geometry().height()-40);
     }
-        m_wordEdit->setTextWidth(contentSize().width()-60);
+        //m_wordEdit->setTextWidth(geometry().width()-60);
         updateGeometry();
     }
 }
@@ -150,7 +159,7 @@ void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
     }
     if (!m_word.isEmpty()) {
         m_defDisplayProxy->show();
-        Phase::self()->animateItem(m_defDisplayProxy, Phase::Appear);
+        // TODO Phase::self()->animateItem(m_defDisplayProxy, Phase::Appear);
     }
 /*    if (data.contains("gcide")) {
         QString defHeader;
@@ -218,21 +227,16 @@ QString Dict::wnToHtml(const QString &text)
     return def;
 }
 
-void Dict::showConfigurationInterface()
+void Dict::createConfigurationInterface(KConfigDialog *parent)
 {
-     if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption( i18n("Configure Dict") );
-        QWidget* widget = new QWidget();
-        ui.setupUi(widget);
-        m_dialog->setMainWidget(widget);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 
     ui.timeoutSpinBox->setValue(m_autoDefineTimeout);
-    m_dialog->show();
     kDebug() << "SHOW config dialog";
 }
 
@@ -242,7 +246,7 @@ void Dict::define()
         m_timer->stop();
     }
 
-    QString newWord = m_wordEdit->toPlainText();
+    QString newWord = m_wordEdit->text();
 
     if (newWord == m_word) {
         // avoid re-defining the same word
@@ -256,7 +260,7 @@ void Dict::define()
         m_flash->flash(i18n("Looking up ") + m_word);
         dataEngine("dict")->connectSource(m_word, this);
     } else { //make the definition box disappear
-        Phase::self()->animateItem(m_defDisplayProxy, Phase::Disappear);
+        // TODO Phase::self()->animateItem(m_defDisplayProxy, Phase::Disappear);
         m_defDisplayProxy->hide();
     }
 
