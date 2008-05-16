@@ -30,7 +30,6 @@
 #include <plasma/dataengine.h>
 
 
-class KDialog;
 class KLineEdit;
 class KTextEdit;
 class QSpinBox;
@@ -113,7 +112,6 @@ class Twitter : public Plasma::Applet
         void writeConfigPassword();
 
         Plasma::Svg *m_theme;
-        KDialog *m_dialog;
         KTextEdit *m_statusEdit;
         QGraphicsProxyWidget *m_statusProxy;
         Plasma::WebContent *m_historyEdit;

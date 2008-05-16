@@ -38,7 +38,7 @@
 #include <KIcon>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KDialog>
+#include <KConfigDialog>
 #include <KLineEdit>
 #include <KTextEdit>
 #include <KStringHandler>
@@ -58,7 +58,7 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_dialog(0), m_lastTweet(0), m_wallet(0), m_walletWait(None),
+      m_lastTweet(0), m_wallet(0), m_walletWait(None),
       m_colorScheme(0)
 {
     setHasConfigurationInterface(true);
@@ -384,46 +384,39 @@ void Twitter::showTweets()
 
 void Twitter::createConfigurationInterface(KConfigDialog *parent)
 {
-     if (m_dialog == 0) {
-        m_dialog = new KDialog();
-        m_dialog->setPlainCaption(i18n("Configure Twitter Applet"));
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    connect( parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
+    connect( parent, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
 
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
+    QWidget *configWidget = new QWidget();
 
-        QWidget *configWidget = new QWidget(m_dialog);
+    m_usernameEdit = new KLineEdit( configWidget );
+    m_passwordEdit = new KLineEdit( configWidget );
+    m_historySizeSpinBox = new QSpinBox( configWidget );
+    m_historySizeSpinBox->setSuffix(i18n(" tweets"));
+    m_historyRefreshSpinBox = new QSpinBox( configWidget );
+    m_historyRefreshSpinBox->setSuffix(i18n(" minutes"));
+    m_checkIncludeFriends = new QCheckBox( configWidget );
 
-        m_usernameEdit = new KLineEdit( configWidget );
-        m_passwordEdit = new KLineEdit( configWidget );
-        m_historySizeSpinBox = new QSpinBox( configWidget );
-        m_historySizeSpinBox->setSuffix(i18n(" tweets"));
-        m_historyRefreshSpinBox = new QSpinBox( configWidget );
-        m_historyRefreshSpinBox->setSuffix(i18n(" minutes"));
-        m_checkIncludeFriends = new QCheckBox( configWidget );
+    QLabel *usernameLabel = new QLabel( i18n("User name:"), configWidget );
+    QLabel *passwordLabel = new QLabel( i18n("Password:"), configWidget );
+    QLabel *historyLabel = new QLabel( i18n("Timeline size:"), configWidget );
+    QLabel *historyRefreshLabel = new QLabel( i18n("Timeline refresh:"), configWidget );
+    QLabel *friendsLabel = new QLabel( i18n("Show messages of friends:"), configWidget );
 
-        QLabel *usernameLabel = new QLabel( i18n("User name:"), configWidget );
-        QLabel *passwordLabel = new QLabel( i18n("Password:"), configWidget );
-        QLabel *historyLabel = new QLabel( i18n("Timeline size:"), configWidget );
-        QLabel *historyRefreshLabel = new QLabel( i18n("Timeline refresh:"), configWidget );
-        QLabel *friendsLabel = new QLabel( i18n("Show messages of friends:"), configWidget );
+    m_passwordEdit->setPasswordMode( true );
 
-        m_passwordEdit->setPasswordMode( true );
-
-        QGridLayout *layout = new QGridLayout( configWidget );
-        layout->addWidget( usernameLabel, 0, 0 );
-        layout->addWidget( m_usernameEdit, 0, 1 );
-        layout->addWidget( passwordLabel, 1, 0 );
-        layout->addWidget( m_passwordEdit, 1, 1 );
-        layout->addWidget( historyLabel, 2, 0 );
-        layout->addWidget( m_historySizeSpinBox, 2, 1 );
-        layout->addWidget( historyRefreshLabel, 3, 0 );
-        layout->addWidget( m_historyRefreshSpinBox, 3, 1 );
-        layout->addWidget( friendsLabel, 4, 0);
-        layout->addWidget( m_checkIncludeFriends, 4, 1 );
-
-        m_dialog->setMainWidget(configWidget);
-    }
+    QGridLayout *layout = new QGridLayout( configWidget );
+    layout->addWidget( usernameLabel, 0, 0 );
+    layout->addWidget( m_usernameEdit, 0, 1 );
+    layout->addWidget( passwordLabel, 1, 0 );
+    layout->addWidget( m_passwordEdit, 1, 1 );
+    layout->addWidget( historyLabel, 2, 0 );
+    layout->addWidget( m_historySizeSpinBox, 2, 1 );
+    layout->addWidget( historyRefreshLabel, 3, 0 );
+    layout->addWidget( m_historyRefreshSpinBox, 3, 1 );
+    layout->addWidget( friendsLabel, 4, 0);
+    layout->addWidget( m_checkIncludeFriends, 4, 1 );
 
     m_usernameEdit->setText( m_username );
     m_passwordEdit->setText( m_password );
@@ -431,7 +424,8 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     m_historyRefreshSpinBox->setValue( m_historyRefresh );
     m_checkIncludeFriends->setCheckState( m_includeFriends ? Qt::Checked : Qt::Unchecked );
 
-    m_dialog->show();
+    parent->addPage(configWidget, parent->windowTitle(), icon());
+
 }
 
 void Twitter::configAccepted()
@@ -501,7 +495,6 @@ void Twitter::configAccepted()
 
 Twitter::~Twitter()
 {
-    delete m_dialog;
     delete m_colorScheme;
 }
 
