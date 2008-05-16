@@ -41,7 +41,7 @@ class LANCELOT_EXPORT Panel: public Lancelot::Widget
 
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
-    Q_PROPERTY ( QString title READ title WRITE setTitle )
+    Q_PROPERTY ( QString title READ title WRITE setTitle ) L_EXTRA ( i18n )
 
     L_WIDGET
     L_INCLUDE(lancelot/widgets/Panel.h QIcon QSize QString)

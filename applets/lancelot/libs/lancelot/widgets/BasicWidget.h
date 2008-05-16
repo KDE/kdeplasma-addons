@@ -46,8 +46,8 @@ class LANCELOT_EXPORT BasicWidget: public Lancelot::Widget {
 
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
-    Q_PROPERTY ( QString title READ title WRITE setTitle )
-    Q_PROPERTY ( QString description READ description WRITE setDescription )
+    Q_PROPERTY ( QString title READ title WRITE setTitle ) L_EXTRA ( i18n )
+    Q_PROPERTY ( QString description READ description WRITE setDescription ) L_EXTRA ( i18n )
     Q_PROPERTY ( Qt::Orientation innerOrientation READ innerOrientation WRITE setInnerOrientation )
 
     L_WIDGET

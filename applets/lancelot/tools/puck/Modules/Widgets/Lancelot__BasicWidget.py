@@ -29,11 +29,11 @@ class Lancelot__BasicWidgetHandler(Lancelot__Widget.Lancelot__WidgetHandler):
         
         if self.hasAttribute('title'):
             setup += self.attribute('name') \
-                  + '->setTitle("' + self.attribute('title') + '");'
+                  + '->setTitle(i18n("' + self.attribute('title') + '"));'
         
         if self.hasAttribute('description'):
             setup += self.attribute('name') \
-                  + '->setDescription("' + self.attribute('description') + '");'
+                  + '->setDescription(i18n("' + self.attribute('description') + '"));'
         
         if self.hasAttribute('innerOrientation'):
             setup += self.attribute('name') \

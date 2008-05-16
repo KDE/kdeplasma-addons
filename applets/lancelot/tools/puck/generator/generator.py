@@ -44,9 +44,10 @@ def parseFile(inputFile):
     includes = []
 
     reNamespace = re.compile("namespace\s+([^\s]+)")
-    reClass = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([^\s]+)|class.*[\s]+([^\s]+)[\s]*(:|{|;|$)")
-    reProperty = re.compile("Q_PROPERTY\s*\(\s*([^\s]+)\s+([^\s]+)\s+READ\s+([^\s]+)\s+WRITE\s+([^\s]+)\s*\)")
-    reIncludes = re.compile("L_INCLUDE\s*\(\s*(.+)\s*\)")
+    reClass     = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([^\s]+)|class.*[\s]+([^\s]+)[\s]*(:|{|;|$)")
+    reProperty  = re.compile("Q_PROPERTY\s*\(\s*([^\s]+)\s+([^\s]+)\s+READ\s+([^\s]+)\s+WRITE\s+([^\s]+)\s*\)")
+    reIncludes  = re.compile("L_INCLUDE\s*\(\s*(.+)\s*\)")
+    reExtra     = re.compile(".*L_EXTRA\s*\(\s*(.+)\s*\)")
 
     data = open(inputFile).readlines()
 
@@ -81,7 +82,13 @@ def parseFile(inputFile):
         match = reProperty.match(line)
         if match:
             print "Found property ", match.groups()
-            properties.append(match.groups())
+            append = list(match.groups())
+
+            match = reExtra.match(line)
+            if match:
+                append.append(match.group(1).strip())
+
+            properties.append(append)
             # print properties
             continue
 
@@ -104,6 +111,8 @@ def propertyValueExes(type):
     # Qt and Kde types
     if (type == "QString"):
         return "\"${VALUE}\""
+    elif (type == "QString i18n"):
+        return "i18n(\"${VALUE}\")"
     elif (type == "KIcon"):
         return "KIcon(\"${VALUE}\")"
     elif (type == "QIcon"):
@@ -158,7 +167,13 @@ def processClass():
     propertyTemplate = template[begin + 23:end]
     propertiesCode = ""
     for property in properties:
-        exes = propertyValueExes(property[0]).split("${VALUE}")
+        exes = ""
+        print "Has this no of props: ", len(property);
+        if (len(property) == 5):
+            exes = propertyValueExes(property[0] + " " + property[4]).split("${VALUE}")
+        else:
+            exes = propertyValueExes(property[0]).split("${VALUE}")
+        print exes
         propertiesCode += propertyTemplate\
                 .replace("${PROPERTY_NAME}", property[1])\
                 .replace("${PROPERTY_SETTER}", property[3])\

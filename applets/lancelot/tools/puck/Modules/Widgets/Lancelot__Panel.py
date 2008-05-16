@@ -1,6 +1,3 @@
-## PUCK Generator: disable
-## This file is modified after running generator!
-
 from .. import WidgetHandlerManager
 from .. import AbstractItem
 from . import Lancelot__Widget
@@ -36,7 +33,7 @@ class Lancelot__PanelHandler(Lancelot__Widget.Lancelot__WidgetHandler):
 
         if self.hasAttribute('title'):
             setup += self.attribute('name') \
-                  + '->setTitle("' + self.attribute('title') + '");'
+                  + '->setTitle(i18n("' + self.attribute('title') + '"));'
 
         ## Changed area begin: ##
         for child in self.node().childNodes:
@@ -45,7 +42,6 @@ class Lancelot__PanelHandler(Lancelot__Widget.Lancelot__WidgetHandler):
 
             setup += self.attribute("name") + "->setLayoutItem(" + child.getAttribute("name") + ");\n"
         ## Changed area end. ##
-
 
 
         return setup;

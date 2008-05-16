@@ -25,5 +25,8 @@
 // Include annotation. Does nothing. Needed by PUCK module generator
 #define L_INCLUDE(A)
 
+// Extra data needed by PUCK module generator. Does nothing otherwise
+#define L_EXTRA(A)
+
 #endif // LANCELOT_EXPORT_H_
 
