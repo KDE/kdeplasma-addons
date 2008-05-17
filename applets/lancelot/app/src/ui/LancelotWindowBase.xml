@@ -295,7 +295,7 @@
                 <item:widget
                     name="buttonSystemLogout" type="Lancelot::ExtenderButton"
 
-                    title="Log Out..."
+                    title="Log Out"
                     icon="system-log-out"
                     group="SystemButtons"
                     activationMethod="Extender"
