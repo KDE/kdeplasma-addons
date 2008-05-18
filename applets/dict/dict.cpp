@@ -279,8 +279,6 @@ void Dict::configAccepted()
 
 Dict::~Dict()
 {
-    delete m_defDisplayProxy;
-    delete m_lineProxyWidget;
 }
 
 void Dict::autoDefine(const QString &word)
