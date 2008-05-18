@@ -56,10 +56,11 @@ void FileWatcher::init()
   m_proxy->setWidget( configureButton );
   buttonBox = new QGraphicsLinearLayout(Qt::Vertical, this);
   buttonBox->addItem(m_proxy);
+  
+  setLayout(buttonBox);
 
   connect(configureButton, SIGNAL(clicked()), this, SLOT(createConfigurationInterface()));
   configured = false;
-  m_proxy->show();
 }
 
 
@@ -69,7 +70,6 @@ FileWatcher::~FileWatcher()
   textStream = 0;
   textDocument->clear();
   file->close();
-  delete m_proxy;
 }
 
 void FileWatcher::loadFile(const QString& path)
@@ -128,15 +128,6 @@ void FileWatcher::newData()
   cursor.endEditBlock();
   updateGeometry();
 }
-
-QSizeF FileWatcher::contentSizeHint() const
-{
-  if (!configured)
-    return QSizeF(200, 50);
-
-  return textItem->boundingRect().size();
-}
-
 
 void FileWatcher::newPath(const QString& path)
 {

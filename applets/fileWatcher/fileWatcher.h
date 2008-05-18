@@ -43,8 +43,7 @@ class FileWatcher : public Plasma::Applet
     ~FileWatcher();
 
     void init();
-    QSizeF contentSizeHint() const;
-
+    
   private:
     void loadFile(const QString& path);
 
