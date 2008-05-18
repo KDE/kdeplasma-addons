@@ -32,7 +32,7 @@ class FifteenPuzzle : public Plasma::Applet
     FifteenPuzzle(QObject *parent, const QVariantList &args);
 
     void init();
-    void constraintsUpdated(Plasma::Constraints constraints);
+    void constraintsEvent(Plasma::Constraints constraints);
     QList<QAction*> contextActions();
 
   protected slots:
@@ -50,7 +50,7 @@ class FifteenPuzzle : public Plasma::Applet
     bool showNumerals;
 
   private slots:
-    void createConfigurationInterface();
+    void createConfigurationInterface(KConfigDialog *parent);
 };
 
 K_EXPORT_PLASMA_APPLET(fifteenPuzzle, FifteenPuzzle)

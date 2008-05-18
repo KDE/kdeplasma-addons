@@ -19,16 +19,24 @@
 
 #include "fifteenPuzzle.h"
 
+//Qt
 #include <QtCore/QFile>
+#include <QGraphicsLinearLayout>
+
+//KDE
+#include <KConfigDialog>
+
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), configDialog(0)
 {
   setHasConfigurationInterface(true);
-  setRemainSquare(true);
   board = new Fifteen(this);
-  board->setRect(0, 0, 192, 192); // 48 * 4 = 192
-  resize(board->boundingRect().size());
+  QGraphicsLinearLayout * lay = new QGraphicsLinearLayout(this);
+  lay->addItem(board);
+  setLayout(lay);
+  board->resize(192, 192); // 48 * 4 = 192
+  resize(board->geometry().size());
 }
 
 void FifteenPuzzle::init()
@@ -52,11 +60,10 @@ void FifteenPuzzle::init()
   updateBoard();
 }
 
-void FifteenPuzzle::constraintsUpdated(Plasma::Constraints constraints)
+void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
 {
   if (constraints & Plasma::SizeConstraint) {
     QSizeF size = this->geometry().size();
-    board->resetTransform();
     board->scale(size.width() / 192, size.height() / 192);
   }
 }
@@ -66,14 +73,16 @@ QList<QAction*> FifteenPuzzle::contextActions()
   return actions;
 }
 
-void FifteenPuzzle::createConfigurationInterface()
+void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
 {
   if (configDialog == 0) {
     configDialog = new FifteenPuzzleConfig();
     connect(configDialog, SIGNAL(shuffle()), board, SLOT(shuffle()));
-    connect(configDialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(configDialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
   }
+  parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+  connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+  connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+  parent->addPage(configDialog, parent->windowTitle(), icon());
 
   if (usePlainPieces) {
     configDialog->ui.rb_identical->setChecked(true);

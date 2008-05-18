@@ -20,12 +20,12 @@
 #ifndef FIFTEEN_H
 #define FIFTEEN_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsWidget>
 #include <QObject>
 
 #include "piece.h"
 
-class Fifteen : public QObject, public QGraphicsRectItem
+class Fifteen : public QGraphicsWidget
 {
   Q_OBJECT
   public:

@@ -28,7 +28,8 @@ FifteenPuzzleConfig::FifteenPuzzleConfig(QWidget *parent)
     : KDialog(parent)
 {
   setCaption(i18nc("@title:window", "Configure Fifteen Puzzle"));
-  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+  
+  setButtons(KDialog::None);
 
   ui.setupUi(mainWidget());
 

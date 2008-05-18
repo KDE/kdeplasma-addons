@@ -29,10 +29,10 @@
 
 #include "plasma/animator.h"
 
-#define SIZE 48
+static const int SIZE = 48;
 
 Fifteen::Fifteen(QGraphicsItem *parent)
-    : QGraphicsRectItem(parent)
+    : QGraphicsWidget(parent)
 {
   m_pixmaps.resize(16);
   m_pieces.resize(16);
