@@ -41,6 +41,8 @@ class FileWatcher : public Plasma::Applet
   public:
     FileWatcher(QObject *parent, const QVariantList &args);
     ~FileWatcher();
+
+    void init();
     QSizeF contentSizeHint() const;
 
   private:

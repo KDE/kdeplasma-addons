@@ -37,6 +37,10 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 {
   setHasConfigurationInterface(true);
   resize(250, 250);
+}
+
+void FileWatcher::init()
+{
   m_proxy = new QGraphicsProxyWidget(this);
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
