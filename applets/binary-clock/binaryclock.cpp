@@ -64,7 +64,20 @@ int BinaryClock::getWidthFromHeight(int h) const
     int dots = m_showSeconds ? 6 : 4;
     int rectSize = (h - 3) / 4;
 
-    return (rectSize * dots) + 5;
+    return (rectSize * dots) + (dots - 1);
+}
+
+void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Vertical) {
+            setMaximumHeight(getHeightFromWidth(contentsRect().width()));
+        } else if (formFactor() == Plasma::Horizontal) {
+            setMaximumWidth(getWidthFromHeight(contentsRect().height()));
+        } else {
+            resize(getWidthFromHeight(contentsRect().height()), contentsRect().height());
+        }
+    }
 }
 
 void BinaryClock::connectToEngine()
@@ -153,16 +166,15 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                                  const QRect &contentsRect)
 {
     Q_UNUSED(option);
-    Q_UNUSED(contentsRect);
 
-    QSizeF m_size = size();
-    int appletHeight = (int) size().height();
-    int appletWidth = (int) size().width();
+    QSizeF m_size = contentsRect.size();
+    int appletHeight = (int) contentsRect.height();
+    int appletWidth = (int) contentsRect.width();
     int dots = m_showSeconds ? 6 : 4;
 
     int rectSize = (appletHeight - 3) / 4;
-    int yPos = (appletHeight % rectSize) / 2;
-    int xPos = (appletWidth - (rectSize * dots) - 5) / 2;
+    int yPos = ((appletHeight % rectSize) / 2) + contentsRect.topLeft().y();
+    int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect.topLeft().x();
 
     const QString hours = m_time.toString("HH");
     const QString minutes = m_time.toString("mm");
