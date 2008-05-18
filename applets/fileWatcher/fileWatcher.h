@@ -58,7 +58,7 @@ class FileWatcher : public Plasma::Applet
     QGraphicsProxyWidget *m_proxy;
 
   private slots:
-    void createConfigurationInterface();
+    void createConfigurationInterface(KConfigDialog *parent);
     void newData();
     void fontChanged(const QFont& font);
     void fontColorChanged(const QColor& color);

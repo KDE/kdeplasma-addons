@@ -25,6 +25,8 @@
 #include <QTextDocument>
 #include <QGraphicsProxyWidget>
 
+#include <KConfigDialog>
+
 #include <Plasma/Theme>
 
 #include "fileWatcher.h"
@@ -63,6 +65,7 @@ FileWatcher::~FileWatcher()
   textStream = 0;
   textDocument->clear();
   file->close();
+  delete m_proxy;
 }
 
 void FileWatcher::loadFile(const QString& path)
@@ -153,17 +156,19 @@ void FileWatcher::maxRowsChanged(int rows)
   loadFile(file->fileName());
 }
 
-void FileWatcher::createConfigurationInterface()
+void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
 {
-  if (config_dialog == 0)
-  {
-    config_dialog = new FileWatcherConfig();
+    config_dialog = new FileWatcherConfig(parent);
+
+    parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    parent->addPage( config_dialog, parent->windowTitle(), icon() );
+    parent->setDefaultButton( KDialog::Ok );
+    parent->showButtonSeparator( true );
+
     QObject::connect(config_dialog,SIGNAL(newFile(const QString&)),this,SLOT(newPath(const QString&)));
     QObject::connect(config_dialog,SIGNAL(maxRowsChanged(int)),this,SLOT(maxRowsChanged(int)));
     QObject::connect(config_dialog,SIGNAL(fontChanged(QFont)),this,SLOT(fontChanged(QFont)));
     QObject::connect(config_dialog,SIGNAL(fontColorChanged(QColor)),this,SLOT(fontColorChanged(QColor)));
-  }
-  config_dialog->show();
 }
 #include "fileWatcher.moc"
 
