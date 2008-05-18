@@ -48,7 +48,6 @@ class Dict : public Plasma::Applet
 
 	void init();
         void setPath(const QString&);
-        QSizeF contentSizeHint() const;
         void constraintsEvent(Plasma::Constraints);
 
     public slots:
@@ -75,13 +74,13 @@ class Dict : public Plasma::Applet
         QGraphicsPixmapItem *m_graphicsIcon; 
 	QGraphicsLinearLayout *m_layout;
         KLineEdit *m_wordEdit;
-        Plasma::Flash *m_flash;
+        //Plasma::Flash *m_flash;
         QStringList m_defList;
         QStringList::iterator m_i;
         Ui::config ui;
         QWebView *m_defBrowser;
-        QGraphicsProxyWidget *m_defDisplayProxy;
-	QGraphicsProxyWidget *m_lineProxyWidget;
+        QGraphicsProxyWidget *m_defBrowserProxy;
+	QGraphicsProxyWidget *m_wordProxyWidget;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
