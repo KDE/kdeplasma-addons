@@ -28,7 +28,12 @@
 #include <QStyleOptionGraphicsItem>
 #include <QCheckBox>
 #include <QPushButton>
-//#include <QTextArea>
+#include <QTime>
+#include <QTimer>
+#include <QtWebKit/QWebView>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+
 #include <iostream>
 
 #include <KConfigDialog>
@@ -37,8 +42,7 @@
 #include <KIcon>
 #include <KSharedConfig>
 #include <KTimeZoneWidget>
-#include <KDialog>
-#include <QTime>
+
 #include <plasma/svg.h>
 #include <plasma/animator.h>
 #include <plasma/theme.h>
@@ -69,9 +73,8 @@ void Dict::init()
     m_defBrowser = new QWebView();
     m_defDisplayProxy = new QGraphicsProxyWidget(this);
     m_defDisplayProxy->setWidget(m_defBrowser);
-    m_defBrowser->show();
-    m_defDisplayProxy->setPos(8,40);
-    m_defDisplayProxy->resize(200,200);
+    //m_defDisplayProxy->setPos(8,40);
+    //m_defDisplayProxy->resize(200,200);
     m_defDisplayProxy->hide();
 //  Icon in upper-left corner
     QIcon icon = KIcon("accessories-dictionary");
@@ -92,6 +95,11 @@ void Dict::init()
     m_timer->setInterval(m_autoDefineTimeout);
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(define()));
+
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical);
+    m_layout->addItem(m_lineProxyWidget);
+    m_layout->addItem(m_defDisplayProxy);
+    setLayout(m_layout);
 
     m_word = QString("");
     dataEngine("dict")->connectSource(m_word, this);

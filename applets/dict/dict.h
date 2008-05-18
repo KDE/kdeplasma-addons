@@ -21,12 +21,8 @@
 #ifndef DICT_H
 #define DICT_H
 
-#include <QTimer>
-#include <QTime>
 #include <QGraphicsItem>
 #include <QTextEdit>
-#include <QtWebKit/QWebView>
-#include <QGraphicsProxyWidget>
 
 #include <KLineEdit>
 
@@ -38,8 +34,10 @@
 class QTimer;
 class QLineEdit;
 
-
-class KDialog;
+class QWebView;
+class QGraphicsWidget;
+class QGraphicsProxyWidget;
+class QGraphicsLinearLayout;
 
 class Dict : public Plasma::Applet
 {
@@ -75,7 +73,7 @@ class Dict : public Plasma::Applet
         QTimer* m_timer;
         int m_autoDefineTimeout;
         QGraphicsPixmapItem *m_graphicsIcon; 
-//  Plasma::VBoxLayout *m_layout;
+	QGraphicsLinearLayout *m_layout;
         KLineEdit *m_wordEdit;
         Plasma::Flash *m_flash;
         QStringList m_defList;
