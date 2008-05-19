@@ -79,6 +79,7 @@ void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &da
     
     if ( !_picture.isNull() ) {
 	m_picture = _picture;
+	resize(contentSizeHint());
 	m_pixmapCache = QPixmap();
         prepareGeometryChange();
         updateGeometry();
@@ -140,7 +141,8 @@ QSizeF Frame::contentSizeHint() const {
 void Frame::updatePicture()
 {
     m_picture = m_mySlideShow->getImage();
-    m_pixmapCache = QPixmap();
+	resize(contentSizeHint());
+	m_pixmapCache = QPixmap();
     update();
 }
 
