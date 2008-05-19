@@ -33,7 +33,7 @@ ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
     setPollingInterval( 0 );
 
     KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
-    Q_FOREACH ( KService::Ptr service, services ) {
+    Q_FOREACH ( const KService::Ptr &service, services ) {
         mFactories.insert( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
                            service );
     }

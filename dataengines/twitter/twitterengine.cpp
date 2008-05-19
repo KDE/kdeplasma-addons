@@ -170,7 +170,7 @@ void TwitterEngine::requestFinished(int id, bool error)
     case Post:
         //the data is a copy of the status update. could be useful someday.
         //update every bloody timeline we've got
-        foreach (QString source, sources()) {
+        foreach (const QString &source, sources()) {
             if (source.startsWith("Timeline")) {
                 updateSourceEvent(source);
             }
