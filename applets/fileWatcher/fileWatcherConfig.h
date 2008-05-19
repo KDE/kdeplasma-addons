@@ -20,12 +20,11 @@
 #ifndef FILEWATCHERCONFIG_H
 #define FILEWATCHERCONFIG_H
 
-#include <KDialog>
 #include <KUrlRequester>
 
 #include "ui_fileWatcherConfig.h"
 
-class FileWatcherConfig : public KDialog 
+class FileWatcherConfig : public QWidget 
 {
   Q_OBJECT
 
