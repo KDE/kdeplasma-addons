@@ -251,7 +251,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         //add the newbies
         int newCount = 0;
         uint maxId = m_lastTweet;
-        foreach (QString id, data.keys()) {
+        foreach (const QString &id, data.keys()) {
             uint i=id.toUInt();
             if (i > m_lastTweet) {
                 newCount++;
@@ -510,7 +510,7 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     m_theme->resize();
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
 
-    foreach( Tweet t, m_tweetWidgets ) {
+    foreach( const Tweet &t, m_tweetWidgets ) {
         QRectF tweetRect(contentsRect.x(), t.layout->geometry().y(), contentsRect.width(), t.layout->geometry().height());
         m_theme->paint( p, tweetRect, "tweet" );
     }

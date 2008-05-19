@@ -36,7 +36,7 @@ class ComicModel : public QAbstractListModel
             : QAbstractListModel( parent )
         {
             KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
-            Q_FOREACH ( KService::Ptr service, services ) {
+            Q_FOREACH ( const KService::Ptr &service, services ) {
                 mComics << ComicEntry( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
                                        service->name(),
                                        QPixmap( KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) ) ) );

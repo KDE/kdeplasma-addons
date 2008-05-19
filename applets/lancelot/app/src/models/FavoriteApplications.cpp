@@ -41,7 +41,7 @@ void FavoriteApplications::load()
     KConfigGroup favoritesGroup = cfg.group("Favorites");
 
     QList<QString> favoriteList = favoritesGroup.readEntry("FavoriteURLs", QList<QString>());
-    foreach(QString favorite, favoriteList) {
+    foreach(const QString &favorite, favoriteList) {
         addUrl(favorite);
     }
 }
