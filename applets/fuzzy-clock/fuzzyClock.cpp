@@ -500,11 +500,11 @@ QFontMetrics m_fmDate ( m_fontDate );
 m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
 m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
 
-if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
+if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
     kDebug() << "Plasmoid wider than the timestring";
     if( m_showDate == true && m_showTimezone == true ) { //date + timezone enabled
         kDebug() << "Date + Timezone enabled";
-        if ( geometry().size().width() > m_dateStringSize.width() +  m_timezoneStringSize.width() ) { //date + timezone fit -> 2 rows within the plasmoid
+        if ( contentsRect().size().width() > m_dateStringSize.width() +  m_timezoneStringSize.width() ) { //date + timezone fit -> 2 rows within the plasmoid
 
             kDebug() << "plasmoid wider than date + timezone in 1 row";
             m_subtitleString = m_dateString + ' ' + m_timezoneString; //Set subtitleString
@@ -548,7 +548,7 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
 
     m_fmTime = QFontMetrics( m_fontTime );
 
-    while ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin || m_fmTime.height() > geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
+    while ( ( m_fmTime.width( m_timeString ) > contentsRect().size().width() - 2*m_margin || m_fmTime.height() > contentsRect().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
 
         //decrease pointSize
         m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
@@ -559,13 +559,15 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
     }
 
     //Adjust the height to the new horizontal size
-    m_contentSize = QSizeF ( geometry().size().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+    m_contentSize = QSizeF ( contentsRect().width(),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
 
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
         kDebug() << "needed height: " << m_contentSize.height() << "fixed height forced on us: " << geometry().size().height();
-        resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
+        //FIXME: it was resizing to size() itself
+        //resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
     } else {
-        resize ( QSizeF ( m_contentSize.width(),m_contentSize.height() ) );
+        //add margins
+        resize ( m_contentSize + QSizeF(size()-contentsRect().size()) );
     }
 
 } else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
@@ -669,14 +671,14 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
 
     //if the minimal width is larger than the actual size -> force minimal needed width
     if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
-            setMinimumSize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
+            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
         }
 
     //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
     //However: If we are in a vertical panel, we should use the width given.
     if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
             kDebug() << "The width we got was too big, we need less, so lets resize.";
-            resize ( QSizeF ( m_minimumContentSize.width(),m_minimumContentSize.height() ) );
+            resize ( m_minimumContentSize + (size() - contentsRect().size()) );
         }
 
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
@@ -690,7 +692,7 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
     }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
         //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
         kDebug() << "we set the minimum size needed as the size we want";
-        resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) );
+        resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
     }
 }
 }
@@ -698,7 +700,6 @@ if ( geometry().size().width() > m_timeStringSize.width() && (formFactor() == Pl
 void Clock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 {
     Q_UNUSED( option );
-    Q_UNUSED( contentsRect );
 
     kDebug() << "We get painted!";
 
@@ -709,13 +710,13 @@ void Clock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
         p->setPen(QPen(m_fontColor));
         p->setFont( m_fontDate );
 
-        kDebug() << "date + timezone [" << m_subtitleString << "] gets painted. y: " << -m_subtitleStringSize.height() + geometry().size().height() << "width: " << geometry().size().width() << "[needed: " << m_fmDate.width( m_subtitleString ) << "] " << "height:" << m_subtitleStringSize.height();
+        kDebug() << "date + timezone [" << m_subtitleString << "] gets painted. y: " << -m_subtitleStringSize.height() + contentsRect.size().height() << "width: " << contentsRect.size().width() << "[needed: " << m_fmDate.width( m_subtitleString ) << "] " << "height:" << m_subtitleStringSize.height();
 
         if( m_showDate == true || m_showTimezone == true ) {
         //Draw the subtitle
-        p->drawText( QRectF(0,
-                -m_subtitleStringSize.height() + geometry().size().height(),
-                geometry().size().width(),
+        p->drawText( QRectF(contentsRect.x(),
+                contentsRect.y() - m_subtitleStringSize.height() + contentsRect.size().height(),
+                contentsRect.size().width(),
                 m_subtitleStringSize.height()) ,
             m_subtitleString,
             QTextOption(Qt::AlignHCenter)
@@ -725,16 +726,16 @@ void Clock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
 
         QFontMetrics m_fmTime ( m_fontTime );
 
-        kDebug() << "timestrings [" << m_timeString << "] gets painted. width: " << geometry().size().width() << "[needed: " << m_fmTime.width( m_timeString ) << "] " << "height: " << m_timeStringSize.height();
+        kDebug() << "timestrings [" << m_timeString << "] gets painted. width: " << contentsRect.size().width() << "[needed: " << m_fmTime.width( m_timeString ) << "] " << "height: " << m_timeStringSize.height();
 
         p->setFont( m_fontTime );
         p->setPen(QPen(m_fontColor));
         p->setRenderHint(QPainter::SmoothPixmapTransform);
         p->setRenderHint(QPainter::Antialiasing);
 
-        p->drawText( QRectF(0,
-                0,
-                geometry().size().width(),
+        p->drawText( QRectF(contentsRect.x(),
+                contentsRect.y(),
+                contentsRect.size().width(),
                 m_timeStringSize.height()) ,
             m_timeString,
             QTextOption(Qt::AlignHCenter)
