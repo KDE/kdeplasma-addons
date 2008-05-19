@@ -32,7 +32,7 @@ MinimizeAll::MinimizeAll(QObject *parent, const QVariantList &args)
 {
     setAspectRatioMode(Plasma::Square);
     int iconSize = IconSize(KIconLoader::Desktop);
-    resize(iconSize, iconSize);
+    resize(iconSize*2, iconSize*2);
 }
 
 MinimizeAll::~MinimizeAll()
