@@ -92,6 +92,7 @@ class Twitter : public Plasma::Applet
 
     protected:
         QString timeDescription( const QDateTime &dt );
+        bool eventFilter(QObject *obj, QEvent *event);
 
     private:
         /**

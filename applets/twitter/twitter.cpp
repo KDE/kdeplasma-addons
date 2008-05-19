@@ -123,6 +123,7 @@ void Twitter::init()
     m_statusEdit->setTextBackgroundColor( QColor(0,0,0,0) );
     m_statusEdit->viewport()->setAutoFillBackground( false );
     m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
+    m_statusEdit->installEventFilter(this);
     m_statusProxy->setWidget( m_statusEdit );
     m_headerLayout->addItem( m_statusProxy );
 
@@ -517,6 +518,30 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     p->drawRoundedRect( m_statusEdit->geometry(), 5, 5 );
 }
 
+
+bool Twitter::eventFilter(QObject *obj, QEvent *event)
+{
+    if (obj == m_statusEdit) {
+        //FIXME:it's nevessary this eventfilter to intercept keypresses in
+        // QTextEdit (or KTextedit) is it intended?
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+
+            //use control modifiers to allow multiline input (even if twitter seems to flatten everything to a slingle line)
+            if (!(keyEvent->modifiers() & Qt::ControlModifier) &&
+                (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)) {
+                updateStatus();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return Plasma::Applet::eventFilter(obj, event);
+    }
+}
 
 void Twitter::updateStatus()
 {
