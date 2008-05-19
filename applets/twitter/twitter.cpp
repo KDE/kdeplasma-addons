@@ -122,7 +122,11 @@ void Twitter::init()
     m_statusEdit->setAttribute( Qt::WA_NoSystemBackground );
     m_statusEdit->setTextBackgroundColor( QColor(0,0,0,0) );
     m_statusEdit->viewport()->setAutoFillBackground( false );
-    m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
+    //FIXME: m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
+    // seems to have no effect
+    QPalette editPal = m_statusEdit->palette();
+    editPal.setColor(QPalette::Text, m_colorScheme->foreground().color());
+    m_statusEdit->setPalette(editPal);
     m_statusEdit->installEventFilter(this);
     m_statusProxy->setWidget( m_statusEdit );
     m_headerLayout->addItem( m_statusProxy );
