@@ -67,7 +67,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
 Frame::~Frame()
 {
     delete m_mySlideShow;
-    delete m_configDialog;
 }
 
 void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
