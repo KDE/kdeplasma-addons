@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Konsole Profiles Applet
+Name[et]=Konsooli profiilide aplett
+Name[sv]=Konsole profilminiprogram
+Comment=Konsole Profiles Launcher
+Comment[et]=Konsooli profiilide aplett
+Comment[sv]=Konsole profilstart
+Type=Service
+Icon=utilities-terminal
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_konsoleprofiles
+X-KDE-PluginInfo-Author=Montel Laurent
+X-KDE-PluginInfo-Email=montel@kde.org
+X-KDE-PluginInfo-Name=konsoleprofiles
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Version=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+

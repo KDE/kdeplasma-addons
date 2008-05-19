@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Konq Profiles Applet
+Name[et]=Konquerori profiilide aplett
+Name[sv]=Konqueror profilminiprogram
+Comment=Konq Profiles Launcher
+Comment[et]=Konquerori profiilide aplett
+Comment[sv]=Konqueror profilstart
+Type=Service
+Icon=konqueror
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_konqprofiles
+X-KDE-PluginInfo-Author=Montel Laurent
+X-KDE-PluginInfo-Email=montel@kde.org
+X-KDE-PluginInfo-Name=konqprofiles
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Version=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
