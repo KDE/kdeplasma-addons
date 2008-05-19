@@ -24,7 +24,9 @@
 #include <plasma/dataengine.h>
 
 class QGraphicsGridLayout;
-class QLabel;
+namespace Plasma {
+    class Label;
+};
 
 class NowPlaying : public Plasma::Applet
 {
@@ -44,8 +46,6 @@ public slots:
 
 private:
     void findPlayer();
-    QGraphicsLayoutItem* createLabel(const QString& text);
-    QGraphicsLayoutItem* createLabel(QLabel* label);
 
     enum State {
         Playing,
@@ -56,10 +56,15 @@ private:
     QString m_watchingPlayer;
     State m_state;
 
-    QLabel* m_artistLabel;
-    QLabel* m_titleLabel;
-    QLabel* m_albumLabel;
-    QLabel* m_timeLabel;
+    Plasma::Label* m_artistLabel;
+    Plasma::Label* m_titleLabel;
+    Plasma::Label* m_albumLabel;
+    Plasma::Label* m_timeLabel;
+
+    Plasma::Label* m_artistText;
+    Plasma::Label* m_titleText;
+    Plasma::Label* m_albumText;
+    Plasma::Label* m_timeText;
 
     QGraphicsGridLayout* m_layout;
 };

@@ -26,19 +26,21 @@
 
 #include <KGlobalSettings>
 #include <Plasma/Theme>
+#include <Plasma/Label>
 
 #include <QGraphicsGridLayout>
-#include <QGraphicsProxyWidget>
-#include <QLabel>
-#include <QFont>
 
 NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_state(NoPlayer),
-      m_artistLabel(new QLabel),
-      m_titleLabel(new QLabel),
-      m_albumLabel(new QLabel),
-      m_timeLabel(new QLabel),
+      m_artistLabel(new Plasma::Label),
+      m_titleLabel(new Plasma::Label),
+      m_albumLabel(new Plasma::Label),
+      m_timeLabel(new Plasma::Label),
+      m_artistText(new Plasma::Label),
+      m_titleText(new Plasma::Label),
+      m_albumText(new Plasma::Label),
+      m_timeText(new Plasma::Label),
       m_layout(0)
 {
     resize(200, 60);
@@ -49,49 +51,30 @@ NowPlaying::~NowPlaying()
 {
 }
 
-QGraphicsLayoutItem* NowPlaying::createLabel(const QString& text)
-{
-    QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-
-    QLabel* label = new QLabel(text);
-    label->setFont(font);
-    label->setAutoFillBackground(false);
-
-    QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget;
-    proxy->setWidget(label);
-
-    return proxy;
-}
-
-QGraphicsLayoutItem* NowPlaying::createLabel(QLabel* label)
-{
-    QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-
-    label->setFont(font);
-    label->setAutoFillBackground(false);
-
-    QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget;
-    proxy->setWidget(label);
-
-    return proxy;
-}
-
 void NowPlaying::init()
 {
     m_layout = new QGraphicsGridLayout;
 
-    m_layout->addItem(createLabel(i18nc("For a song or other music", "Artist:")), 0, 0);
-    m_layout->addItem(createLabel(m_artistLabel), 0, 1);
+    // set up labels
+    m_artistLabel->setText(i18nc("For a song or other music", "Artist:"));
+    m_titleLabel->setText(i18nc("For a song or other music", "Title:"));
+    m_albumLabel->setText(i18nc("For a song or other music", "Album:"));
+    m_timeLabel->setText(i18nc("Position in a song", "Time:"));
 
-    m_layout->addItem(createLabel(i18nc("For a song or other music", "Title:")), 1, 0);
-    m_layout->addItem(createLabel(m_titleLabel), 1, 1);
+    // create layout
+    // TODO: make this configurable
+    m_layout->addItem(m_artistLabel, 0, 0);
+    m_layout->addItem(m_artistText, 0, 1);
+    m_layout->addItem(m_titleLabel, 1, 0);
+    m_layout->addItem(m_titleText, 1, 1);
+    m_layout->addItem(m_albumLabel, 2, 0);
+    m_layout->addItem(m_albumText, 2, 1);
+    m_layout->addItem(m_timeLabel, 3, 0);
+    m_layout->addItem(m_timeText, 3, 1);
 
-    m_layout->addItem(createLabel(i18nc("For a song or other music", "Album:")), 2, 0);
-    m_layout->addItem(createLabel(m_albumLabel), 2, 1);
-
-    m_layout->addItem(createLabel(i18nc("Position in a song", "Time:")), 3, 0);
-    m_layout->addItem(createLabel(m_timeLabel), 3, 1);
-
+    // calculate the left col width (why can't QGraphicsGridLayout just do this?)
+    // DISABLED: for some reason the Labels aren't returning a sensible width
+    //           if they did, maybe we could just use setColumnStretchFactor(0,0)?
     qreal width = 0;
     for (int i = 0; i < m_layout->rowCount(); i++) {
         QGraphicsLayoutItem* item = m_layout->itemAt(i, 0);
@@ -99,7 +82,11 @@ void NowPlaying::init()
             width = qMax(width, item->preferredWidth());
         }
     }
-    m_layout->setColumnFixedWidth(0, width + 5);
+    kDebug() << "Preferred width is" << width;
+    //m_layout->setColumnFixedWidth(0, width + 5);
+    // instead:
+    m_layout->setColumnStretchFactor(0, 1);
+    m_layout->setColumnStretchFactor(1, 2);
 
     setLayout(m_layout);
 
@@ -139,19 +126,19 @@ void NowPlaying::dataUpdated(const QString &name,
         m_state = Stopped;
     }
 
-    m_artistLabel->setText(data["Artist"].toString());
-    m_albumLabel->setText(data["Album"].toString());
-    m_titleLabel->setText(data["Title"].toString());
+    m_artistText->setText(data["Artist"].toString());
+    m_albumText->setText(data["Album"].toString());
+    m_titleText->setText(data["Title"].toString());
 
     int length = data["Length"].toInt();
     if (length != 0) {
         int pos = data["Position"].toInt();
-        m_timeLabel->setText(QString::number(pos / 60) + ':' +
+        m_timeText->setText(QString::number(pos / 60) + ':' +
                              QString::number(pos % 60).rightJustified(2, '0') + " / " +
                              QString::number(length / 60) + ':' +
                              QString::number(length % 60).rightJustified(2, '0'));
     } else {
-        m_timeLabel->setText(QString());
+        m_timeText->setText(QString());
     }
 
     update();
