@@ -1,0 +1,22 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Show Desktop
+Name[et]=Näita töölauda
+Name[sv]=Visa skrivbord
+Comment=Lets you show the desktop
+Comment[et]=Võimaldab näha töölauda
+Comment[sv]=Låter dig visa skrivbordet
+Icon=user-desktop
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_showdesktop
+X-KDE-PluginInfo-Author=André Duffeck
+X-KDE-PluginInfo-Email=duffeck@kde.org
+X-KDE-PluginInfo-Name=showdesktop
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Windows and Tasks
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
