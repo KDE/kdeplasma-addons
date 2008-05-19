@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Unit Converter
+Name[et]=Ühikute teisendaja
+Name[sv]=Enhetskonvertering
+Comment=Convert values to different units
+Comment[et]=Väärtuste teisendamine
+Comment[sv]=Konverterar värden till andra enheter
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_converterrunner
+X-KDE-PluginInfo-Author=Petri Damstén
+X-KDE-PluginInfo-Email=damu@iki.fi
+X-KDE-PluginInfo-Name=unitconverter
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-License=LGPL
