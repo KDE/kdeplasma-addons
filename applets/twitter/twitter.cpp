@@ -506,10 +506,10 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
 
     foreach( Tweet t, m_tweetWidgets ) {
-        QRectF tweetRect(0, t.layout->geometry().y(), size().width(), t.layout->geometry().height());
+        QRectF tweetRect(contentsRect.x(), t.layout->geometry().y(), contentsRect.width(), t.layout->geometry().height());
         m_theme->paint( p, tweetRect, "tweet" );
     }
-    QRectF headerRect(0, m_headerLayout->geometry().y(), size().width(), m_headerLayout->geometry().height()-5);
+    QRectF headerRect(contentsRect.x(), m_headerLayout->geometry().y(), contentsRect.width(), m_headerLayout->geometry().height()-5);
     m_theme->paint( p, headerRect, "tweet" );
 
     p->setRenderHints( QPainter::Antialiasing | QPainter::SmoothPixmapTransform );
