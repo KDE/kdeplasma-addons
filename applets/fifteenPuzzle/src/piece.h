@@ -23,7 +23,6 @@
 #include <QGraphicsItem>
 #include <QObject>
 
-class QGraphicsSceneContextMenuEvent;
 
 class Piece : public QObject, public QGraphicsPixmapItem
 {
