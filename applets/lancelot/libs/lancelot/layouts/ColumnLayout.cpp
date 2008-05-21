@@ -215,5 +215,3 @@ void ColumnLayout::setGeometry(const QRectF & rect)
 
 } // namespace Lancelot
 
-#include "ColumnLayout.moc"
-
