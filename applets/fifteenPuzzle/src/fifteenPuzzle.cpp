@@ -70,10 +70,8 @@ void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
 
 void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
 {
-  if (configDialog == 0) {
-    configDialog = new FifteenPuzzleConfig();
-    connect(configDialog, SIGNAL(shuffle()), board, SLOT(shuffle()));
-  }
+  configDialog = new FifteenPuzzleConfig();
+  connect(configDialog, SIGNAL(shuffle()), board, SLOT(shuffle()));
   parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
   connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
