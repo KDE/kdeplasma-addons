@@ -72,7 +72,7 @@ Frame::~Frame()
 void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
 {
     QDate mCurrentDate = QDate::currentDate();
-    const QString identifier = m_potdProvider + ":" + mCurrentDate.toString( Qt::ISODate );
+    const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
 
     QImage _picture = data[ identifier ].value<QImage>();
     
@@ -278,7 +278,7 @@ void Frame::initSlideShow()
 	    return;
 
 	QDate mCurrentDate = QDate::currentDate();
-	const QString identifier = m_potdProvider + ":" + mCurrentDate.toString( Qt::ISODate );
+	const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
     
 	engine->disconnectSource( identifier, this );
 	engine->connectSource( identifier, this );

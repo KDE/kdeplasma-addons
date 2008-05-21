@@ -201,7 +201,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     if ( !engine )
         return;
 
-    const QString identifier = mComicIdentifier + ":" + identifierSuffix;
+    const QString identifier = mComicIdentifier + ':' + identifierSuffix;
 
     engine->disconnectSource( identifier, this );
     engine->connectSource( identifier, this );

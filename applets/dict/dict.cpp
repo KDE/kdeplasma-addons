@@ -67,7 +67,7 @@ void Dict::init()
     m_wordEdit->setText(i18n("Enter word to define here"));
     m_wordProxyWidget->setWidget(m_wordEdit);
     m_wordProxyWidget->show();
-    //TODO Phase::self()->animateItem(m_wordEdit, Phase::Appear);  
+    Plasma::Animator::self()->animateItem(m_wordProxyWidget, Plasma::Animator::AppearAnimation);  
 
     m_defBrowser = new QWebView();
     m_defBrowserProxy = new QGraphicsProxyWidget(this);
@@ -184,7 +184,7 @@ QString Dict::wnToHtml(const QString &text)
             isFirst = true;
             continue;
         }
-        if (currentLine.startsWith(".")) {
+        if (currentLine.startsWith('.')) {
             def += "</dd>";
             continue;
         }
