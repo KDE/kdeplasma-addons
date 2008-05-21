@@ -114,7 +114,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     event->ignore();
 
-    if ( event->button() == Qt::LeftButton && geometry().contains( event->pos() ) ) {
+    if ( event->button() == Qt::LeftButton ) { //&& geometry().contains( event->pos() ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
         const QRectF rect = contentsRect();
