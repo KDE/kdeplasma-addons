@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "configwidget.h"
+
 #include <QtCore/QAbstractListModel>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
@@ -26,8 +28,6 @@
 #include <KLocale>
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
-
-#include "configwidget.h"
 
 class ComicModel : public QAbstractListModel
 {

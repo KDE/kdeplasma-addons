@@ -24,7 +24,7 @@
 #include <Plasma/DataEngine>
 #include <Plasma/Svg>
 
-class Ui::lunaConfig;
+#include "ui_lunaConfig.h"
 
 class Luna : public Plasma::Applet
 {

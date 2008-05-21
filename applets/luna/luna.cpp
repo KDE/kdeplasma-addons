@@ -18,20 +18,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+
+#include "luna.h"
+
 #include <assert.h>
 
 #include <QPainter>
 
 #include <Plasma/Svg>
 #include <Plasma/Theme>
-#include <KDialog>
 #include <KDebug>
 #include <KConfigDialog>
 
-#include "ui_lunaConfig.h"
 #include "phases.cpp"
 
-#include "luna.h"
+
 
 Luna::Luna(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)

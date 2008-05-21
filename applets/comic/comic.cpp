@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "comic.h"
+
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
@@ -26,7 +28,6 @@
 
 #include <plasma/theme.h>
 
-#include "comic.h"
 #include "configwidget.h"
 
 static const int s_arrowWidth = 30;

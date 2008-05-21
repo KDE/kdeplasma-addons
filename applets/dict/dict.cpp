@@ -32,7 +32,6 @@
 #include <QTimer>
 #include <QtWebKit/QWebView>
 #include <QGraphicsLinearLayout>
-#include <QGraphicsProxyWidget>
 
 #include <iostream>
 

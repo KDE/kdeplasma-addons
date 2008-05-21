@@ -17,12 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "fifteenPuzzleConfig.h"
+
 #include <kmessagebox.h>
 
 #include <QtCore/QFile>
 #include <QtGui/QPixmap>
-
-#include "fifteenPuzzleConfig.h"
 
 FifteenPuzzleConfig::FifteenPuzzleConfig(QWidget *parent)
     : KDialog(parent)
