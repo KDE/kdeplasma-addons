@@ -549,7 +549,7 @@ bool Twitter::eventFilter(QObject *obj, QEvent *event)
 
 void Twitter::updateStatus()
 {
-    QString status = m_username + ":" + m_statusEdit->toPlainText();
+    QString status = m_username + ':' + m_statusEdit->toPlainText();
     m_engine->setProperty( "status", status );
     m_statusEdit->setPlainText("");
 }
