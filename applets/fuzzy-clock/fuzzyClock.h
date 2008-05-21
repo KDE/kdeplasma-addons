@@ -31,7 +31,6 @@
 #include "ui_fuzzyClockConfig.h"
 #include <ui_calendar.h>
 
-class KDialog;
 
 class Clock : public Plasma::Applet
 {

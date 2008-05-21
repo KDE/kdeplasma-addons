@@ -23,13 +23,10 @@
 #include <plasma/applet.h>
 #include <plasma/dialog.h>
 
-class QPainter;
 class QTreeView;
-class QStyleOptionGraphicsItem;
 class QGraphicsProxyWidget;
 class QStandardItemModel;
 class QModelIndex;
-class QGraphicsWidget;
 class QGraphicsLinearLayout;
 
 namespace Plasma

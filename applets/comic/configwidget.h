@@ -24,7 +24,6 @@
 
 class ComicModel;
 class QComboBox;
-class QCheckBox;
 
 class ConfigWidget : public QWidget
 {

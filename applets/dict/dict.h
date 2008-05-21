@@ -35,7 +35,6 @@ class QTimer;
 class QLineEdit;
 
 class QWebView;
-class QGraphicsWidget;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 

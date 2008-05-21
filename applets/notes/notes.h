@@ -32,9 +32,7 @@
 
 #include "ui_config.h"
 
-class KDialog;
 class QSizeF;
-class QGraphicsTextItem;
 
 class Notes : public Plasma::Applet
 {

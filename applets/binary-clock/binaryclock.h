@@ -24,10 +24,8 @@
 #include <Plasma/Applet>
 
 class QTime;
-class QSizeF;
 class QColor;
 
-class KDialog;
 class Plasma::DataEngine;
 
 class Ui::clockConfig;

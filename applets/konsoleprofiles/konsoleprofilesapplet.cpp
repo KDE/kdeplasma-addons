@@ -116,6 +116,7 @@ void KonsoleProfilesApplet::constraintsEvent(Plasma::Constraints constraints)
             m_proxy = new QGraphicsProxyWidget(this);
             m_proxy->setWidget(m_widget);
             m_proxy->show();
+            setLayout( m_layout );
             //Laurent size fixed until I was able to resize it correctly
             //setMinimumContentSize(m_widget->size());
             //setMaximumContentSize(m_widget->size());
