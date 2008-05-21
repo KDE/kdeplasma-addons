@@ -33,8 +33,7 @@ class FifteenPuzzle : public Plasma::Applet
 
     void init();
     void constraintsEvent(Plasma::Constraints constraints);
-    QList<QAction*> contextActions();
-
+    virtual QList<QAction*> contextualActions();
   protected slots:
     void configAccepted();
 

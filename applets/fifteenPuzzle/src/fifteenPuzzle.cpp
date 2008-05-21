@@ -68,11 +68,6 @@ void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
   }
 }
 
-QList<QAction*> FifteenPuzzle::contextActions()
-{
-  return actions;
-}
-
 void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
 {
   if (configDialog == 0) {
@@ -129,6 +124,12 @@ void FifteenPuzzle::createMenu()
   actions.append(shuffle);
   connect(shuffle, SIGNAL(triggered(bool)), board, SLOT(shuffle()));
 }
+
+QList<QAction*> FifteenPuzzle::contextualActions()
+{
+    return actions;
+}
+
 
 #include "fifteenPuzzle.moc"
 
