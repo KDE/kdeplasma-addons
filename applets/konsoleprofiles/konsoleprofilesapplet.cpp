@@ -66,6 +66,7 @@ void KonsoleProfilesApplet::init()
     l_layout->setMargin(0);
 
     m_listView= new QTreeView(m_widget);
+    m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
     m_listView->setRootIsDecorated(false);
     m_listView->setHeaderHidden(true);
     m_listView->setMouseTracking(true);
