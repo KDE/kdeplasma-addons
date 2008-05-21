@@ -102,7 +102,7 @@ void Fifteen::shuffle()
 bool Fifteen::isSolvable()
 {
   int fields[16];
-  bool odd_even_solvable;
+  bool odd_even_solvable=0;
   for (int i = 0;  i < 16; ++i) {
     fields[i] = m_pieces[i]->getId();
     if (fields[i] == 0) {
@@ -205,7 +205,7 @@ bool Fifteen::isAdjacent(QGraphicsItem *a, QGraphicsItem *b)
   qreal by = b->pos().y();
 
   /*
-  qDebug() << "ax:" << ax << "ay:" << ay; 
+  qDebug() << "ax:" << ax << "ay:" << ay;
   qDebug() << "bx:" << bx << "by:" << by;
   */
 
