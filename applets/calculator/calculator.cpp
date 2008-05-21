@@ -42,6 +42,9 @@ void CalculatorApplet::init()
     m_proxy = new QGraphicsProxyWidget(this);
     m_layout = new QGraphicsGridLayout;
 
+    previousAddSubOperation=calcNone;
+    previousMulDivOperation=calcNone;
+
     inputText = QString('0');
     sum = 0;
     factor = 0;
