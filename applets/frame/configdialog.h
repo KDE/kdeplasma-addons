@@ -20,8 +20,6 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <kdialog.h>
-
 #include "ui_config.h"
 
 class ConfigDialog : public QWidget
