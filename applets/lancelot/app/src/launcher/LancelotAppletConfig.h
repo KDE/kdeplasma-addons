@@ -17,15 +17,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPPLETCONFIG_H_
-#define LANCELOTAPPLETCONFIG_H_
+#ifndef LANCELOT_LAUNCHER_APPLET_CONFIG_H_
+#define LANCELOT_LAUNCHER_APPLET_CONFIG_H_
 
 #include <ui_LancelotAppletConfigBase.h>
 
-class LancelotAppletConfig : public KDialog {
+class LancelotAppletConfig: public Ui::LancelotAppletConfigBase {
 public:
-    LancelotAppletConfig();
-    virtual ~LancelotAppletConfig();
+    void setupUi(QWidget * widget);
 
     bool showCategories() const;
     bool clickActivation() const;
@@ -35,11 +34,9 @@ public:
     void setClickActivation(bool value);
     void setIcon(QString icon);
 
-private:
-    Ui::LancelotAppletConfigBase m_ui;
-    QButtonGroup qbgIcons;
-    QButtonGroup qbgChooseIcon;
-    QButtonGroup qbgMenuActivation;
+    QButtonGroup * qbgIcons;
+    QButtonGroup * qbgChooseIcon;
+    QButtonGroup * qbgMenuActivation;
 };
 
-#endif /*LANCELOTAPPLETCONFIG_H_*/
+#endif /* LANCELOT_LAUNCHER_APPLET_CONFIG_H_ */

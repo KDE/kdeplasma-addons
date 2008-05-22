@@ -125,29 +125,33 @@ install(TARGETS lancelot-menu DESTINATION ${BIN_INSTALL_DIR} )
 
 # Lancelot Main Applet
 
-set(plasma_applet_lancelot_SRCS
+set(plasma_applet_lancelot_launcher_SRCS
   ${plasma_lancelot_widgets_SRCS}
   ${plasma_lancelot_client_SRCS}
-  applet/LancelotApplet.cpp
-  applet/LancelotAppletConfig.cpp
+  launcher/LancelotApplet.cpp
+  launcher/LancelotAppletConfig.cpp
 )
 
 kde4_add_ui_files(
-  plasma_applet_lancelot_SRCS
-  applet/LancelotAppletConfigBase.ui
+  plasma_applet_lancelot_launcher_SRCS
+  launcher/LancelotAppletConfigBase.ui
 )
 
+kde4_add_plugin(plasma_applet_lancelot_launcher ${plasma_applet_lancelot_launcher_SRCS})
 
-kde4_add_plugin(plasma_applet_lancelot ${plasma_applet_lancelot_SRCS})
-
-target_link_libraries(plasma_applet_lancelot ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(
+   plasma_applet_lancelot_launcher
+   ${PLASMA_LIBS}
+   ${LANCELOT_LIBS}
+   ${KDE4_KIO_LIBS}
+)
 
 install(
-  TARGETS plasma_applet_lancelot
+  TARGETS plasma_applet_lancelot_launcher
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
 install(
-  FILES applet/plasma-applet-lancelot.desktop
+  FILES launcher/plasma-applet-lancelot-launcher.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
 )

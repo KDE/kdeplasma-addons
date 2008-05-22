@@ -44,6 +44,7 @@ set(lancelot_LIB_SRCS
         widgets/ExtenderButton.cpp
         widgets/Panel.cpp
         widgets/ResizeBordersPanel.cpp
+        widgets/HoverIcon.cpp
 
         widgets/ScrollBar.cpp
         widgets/ScrollPane.cpp
@@ -101,6 +102,7 @@ install(FILES
    widgets/ResizeBordersPanel.h
    widgets/Widget.h
    widgets/WidgetPositioner.h
+   widgets/HoverIcon.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets)
 
 install(FILES

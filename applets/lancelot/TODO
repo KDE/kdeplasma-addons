@@ -18,6 +18,9 @@ TODO: (e) check for memory leaks related to Private
 TODO: (a) switch groups to QMetaObject and properties
 TODO: (m) add margin features to layouts
 TODO: (m) add propper size hints to layouts and widgets
+TODO: (e) move the groups mechanism away from Widget
+          so that ordinary plasma widgets could be extended
+          when needed. Add groups support to HoverIcon
 
 Applet:
 
