@@ -210,9 +210,6 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
 QSizeF FullBorderLayout::sizeHint(Qt::SizeHint which,
         const QSizeF & constraint) const
 {
-    Q_UNUSED(which);
-    Q_UNUSED(constraint);
-
     if (which == Qt::MaximumSize) {
         return MAX_WIDGET_SIZE;
     }
@@ -225,13 +222,16 @@ QSizeF FullBorderLayout::sizeHint(Qt::SizeHint which,
 
     if (d->itemPositions[Center]) {
         hintHeight += d->itemPositions[Center]
-            ->preferredSize().height();
+            ->effectiveSizeHint(which, constraint).height();
         hintWidth += d->itemPositions[Center]
-            ->preferredSize().width();
+            ->effectiveSizeHint(which, constraint).width();
     }
 
-    kDebug() << hintWidth << " " << hintHeight;
-    return QSizeF(hintWidth, hintHeight);
+    QSizeF result = QSizeF(hintWidth, hintHeight);
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    return result;
 }
 
 void FullBorderLayout::addItem(QGraphicsLayoutItem * item)

@@ -34,8 +34,6 @@ public:
     void relayout()
     {
         QRectF g = q->geometry();
-        // g.setTopLeft(g.topLeft() + QPointF(margin(Plasma::TopMargin), margin(Plasma::LeftMargin)));
-        // g.setBottomRight(g.bottomRight() - QPointF(margin(Plasma::RightMargin), margin(Plasma::BottomMargin)));
 
         foreach (QGraphicsLayoutItem * l, items) {
             l->setGeometry(g);
@@ -84,20 +82,17 @@ CardLayout::~CardLayout()
 QSizeF CardLayout::sizeHint(Qt::SizeHint which,
             const QSizeF & constraint) const
 {
-    qreal hintHeight = 0.0;
-    qreal hintWidth = 0.0;
+    QSizeF size = QSizeF(0, 0);
 
     foreach (QGraphicsLayoutItem * l, d->items) {
-        hintHeight = qMax(l->preferredSize().height(), hintHeight);
-        hintWidth  = qMax(l->preferredSize().width(), hintWidth);
+        size = size.expandedTo(l->effectiveSizeHint(which, constraint));
     }
 
     foreach (QGraphicsWidget * l, d->widgets) {
-        hintHeight = qMax(l->preferredSize().height(), hintHeight);
-        hintWidth  = qMax(l->preferredSize().width(), hintWidth);
+        size = size.expandedTo(l->effectiveSizeHint(which, constraint));
     }
 
-    return QSizeF(hintWidth, hintHeight);
+    return size;
 }
 
 void CardLayout::addItem(QGraphicsLayoutItem * item)

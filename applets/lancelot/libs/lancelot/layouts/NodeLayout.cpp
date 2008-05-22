@@ -73,7 +73,7 @@ class NodeLayout::Private {
 public:
     QMap <QGraphicsLayoutItem * , QPair < NodeCoordinate, NodeCoordinate > > items;
     NodeLayout * parent;
-    QSizeF sizeHint;
+    QMap < Qt::SizeHint, QSizeF > sizeHintCache;
 
     Private(NodeLayout * parentLayout) {
         parent = parentLayout;
@@ -141,7 +141,9 @@ public:
     void calculateSizeHint(QGraphicsLayoutItem * item = NULL) {
         if (item == NULL) {
             // Recalculate the sizeHint using all items
-            sizeHint = QSizeF();
+            sizeHintCache[Qt::MinimumSize] = QSizeF();
+            sizeHintCache[Qt::MaximumSize] = QSizeF();
+            sizeHintCache[Qt::PreferredSize] = QSizeF();
             foreach (QGraphicsLayoutItem * item, items.keys()) {
                 if (item) {
                     calculateSizeHint(item);
@@ -156,11 +158,17 @@ public:
             // not do anything smarter concerning the sizeHint when there are
             // autosized elements.
 
-            qreal width  = item->preferredSize().width()  / qMin(scaled.width(), qreal(1.0));
-            qreal height = item->preferredSize().height() / qMin(scaled.height(), qreal(1.0));
+            QSizeF size;
 
-            if (width > sizeHint.width())   sizeHint.setWidth(width);
-            if (height > sizeHint.height()) sizeHint.setHeight(height);
+            foreach (Qt::SizeHint which, sizeHintCache.keys()) {
+                size = item->effectiveSizeHint(which);
+                size.scale(
+                    1 / qMin(scaled.width(), qreal(1.0)),
+                    1 / qMin(scaled.height(), qreal(1.0)),
+                    Qt::IgnoreAspectRatio
+                );
+                sizeHintCache[which] = sizeHintCache[which].expandedTo(size);
+            }
         }
     }
 
@@ -184,14 +192,11 @@ QSizeF NodeLayout::sizeHint(Qt::SizeHint which,
     QSizeF result;
 
     switch (which) {
-        case Qt::MinimumSize:
-            result = QSizeF();
-            break;
         case Qt::MaximumSize:
             result = MAX_WIDGET_SIZE;
             break;
         default:
-            result = d->sizeHint;
+            result = d->sizeHintCache[which];
     }
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
@@ -214,7 +219,6 @@ void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate topLeft, Nod
     d->items[item] = QPair<NodeCoordinate, NodeCoordinate>(topLeft, bottomRight);
     d->calculateSizeHint(item);
     updateGeometry();
-    kDebug() << d->sizeHint;
 }
 
 void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate node, qreal xr, qreal yr)
@@ -227,7 +231,6 @@ void NodeLayout::addItem(QGraphicsLayoutItem * item, NodeCoordinate node, qreal 
         NodeCoordinate::simple(xr, yr, NodeCoordinate::InnerRelative, NodeCoordinate::InnerRelative));
     d->calculateSizeHint(item);
     updateGeometry();
-    kDebug() << d->sizeHint;
 }
 
 int NodeLayout::count() const
