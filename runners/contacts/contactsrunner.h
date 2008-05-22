@@ -25,7 +25,7 @@
 
 namespace KABC {
    class AddressBook;
-};
+}
 
 class ContactsRunner : public Plasma::AbstractRunner {
     Q_OBJECT

@@ -26,7 +26,7 @@
 class QGraphicsGridLayout;
 namespace Plasma {
     class Label;
-};
+}
 
 class NowPlaying : public Plasma::Applet
 {
