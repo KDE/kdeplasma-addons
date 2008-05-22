@@ -32,7 +32,7 @@ public:
 
     void setShowCategories(bool value);
     void setClickActivation(bool value);
-    void setIcon(QString icon);
+    void setIcon(const QString & icon);
 
     QButtonGroup * qbgIcons;
     QButtonGroup * qbgChooseIcon;

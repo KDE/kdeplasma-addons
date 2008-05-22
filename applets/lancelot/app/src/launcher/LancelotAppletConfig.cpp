@@ -87,7 +87,7 @@ void LancelotAppletConfig::setClickActivation(bool value)
     }
 }
 
-void LancelotAppletConfig::setIcon(QString icon)
+void LancelotAppletConfig::setIcon(const QString & icon)
 {
     if (icon == "lancelot") {
         radioIconLancelot->click();

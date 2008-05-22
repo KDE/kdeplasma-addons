@@ -24,7 +24,7 @@
 #include <lancelot/lancelot_export.h>
 
 #include <lancelot/widgets/Widget.h>
-#include <KIcon>
+#include <QIcon>
 
 #include <lancelot/widgets/Panel.h>
 #include <lancelot/widgets/ActionListView.h>
@@ -61,12 +61,12 @@ public:
     // Entrance
     void setEntranceModel(PassagewayViewModel * model);
     void setEntranceTitle(const QString & title);
-    void setEntranceIcon(KIcon icon);
+    void setEntranceIcon(QIcon icon);
 
     // Atlas
     void setAtlasModel(PassagewayViewModel * model);
     void setAtlasTitle(const QString & title);
-    void setAtlasIcon(KIcon icon);
+    void setAtlasIcon(QIcon icon);
 
 protected Q_SLOTS:
     virtual void listItemActivated(int index);

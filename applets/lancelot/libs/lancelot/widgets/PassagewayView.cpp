@@ -79,8 +79,8 @@ public:
         listsLayout->setColumnCount(13);
         listsLayout->setSizer(new PassagewayViewSizer());
 
-        next(Step("", KIcon(), entranceModel));
-        next(Step("", KIcon(), atlasModel));
+        next(Step("", QIcon(), entranceModel));
+        next(Step("", QIcon(), atlasModel));
     }
 
     ~Private()
@@ -102,10 +102,10 @@ public:
 
     class Step {
     public:
-        Step(QString t, KIcon i, PassagewayViewModel * m)
+        Step(QString t, QIcon i, PassagewayViewModel * m)
             : title(t), icon(i), model(m) {};
         QString title;
-        KIcon icon;
+        QIcon icon;
         PassagewayViewModel * model;
     };
 
@@ -198,7 +198,7 @@ void PassagewayView::listItemActivated(int index)
             if (model) {
                 model = model->child(index);
                 if (model) {
-                    d->next(Private::Step(model->modelTitle(), *(model->modelIcon()), model));
+                    d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
                 }
             }
         }
@@ -225,7 +225,7 @@ void PassagewayView::setEntranceTitle(const QString & title)
     d->buttons.at(0)->setTitle(title);
 }
 
-void PassagewayView::setEntranceIcon(KIcon icon)
+void PassagewayView::setEntranceIcon(QIcon icon)
 {
     if (d->lists.size() < 2) return;
     d->path.at(0)->icon = icon;
@@ -247,7 +247,7 @@ void PassagewayView::setAtlasTitle(const QString & title)
     d->buttons.at(1)->setTitle(title);
 }
 
-void PassagewayView::setAtlasIcon(KIcon icon)
+void PassagewayView::setAtlasIcon(QIcon icon)
 {
     if (d->lists.size() < 2) return;
     d->path.at(1)->icon = icon;

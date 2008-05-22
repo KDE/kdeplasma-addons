@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-// TODO: Inspect for memory leaks... (new KIcon mostly)
-
 #ifndef LANCELOTAPPLICATION_H_
 #define LANCELOTAPPLICATION_H_
 
@@ -40,7 +38,7 @@ public:
 
 public Q_SLOTS:
     static bool show(int x, int y);
-    static bool showItem(int x, int y, QString name);
+    static bool showItem(int x, int y, const QString & name);
 
     static bool hide(bool immediate = false);
     static bool search(const QString & string);

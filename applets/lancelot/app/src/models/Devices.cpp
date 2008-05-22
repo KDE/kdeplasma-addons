@@ -108,7 +108,7 @@ void Devices::addDevice(const Solid::Device & device)
     add(
         device.product(),
         StringCoalesce(access->filePath(), i18n("Unmounted")),
-        new KIcon(device.icon()),
+        QIcon(device.icon()),
         device.udi()
     );
 }

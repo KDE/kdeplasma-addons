@@ -21,7 +21,7 @@
 #include <QLinkedListIterator>
 #include <cmath>
 #include <KDebug>
-#include <KIcon>
+#include <QIcon>
 
 #define SCROLL_BUTTON_WIDTH 66
 #define SCROLL_BUTTON_HEIGHT 19
@@ -310,7 +310,7 @@ void ActionListView::modelItemAltered(int index)
     if (buttonIndex >= 0 && buttonIndex < m_buttons.size()) {
         m_buttons.at(buttonIndex).first->setTitle(m_model->title(index));
         m_buttons.at(buttonIndex).first->setDescription(m_model->description(index));
-        m_buttons.at(buttonIndex).first->setIcon(*(m_model->icon(index)));
+        m_buttons.at(buttonIndex).first->setIcon(m_model->icon(index));
     }
 }
 
@@ -495,7 +495,7 @@ bool ActionListView::addButton(ListTail where) {
     ExtenderButton * button = createButton();
     button->setTitle(m_model->title(itemIndex));
     button->setDescription(m_model->description(itemIndex));
-    button->setIcon(*(m_model->icon(itemIndex)));
+    button->setIcon(m_model->icon(itemIndex));
     button->setLayout(NULL);
     button->setEnabled(!m_model->isCategory(itemIndex));
     m_signalMapper.setMapping(button, itemIndex);

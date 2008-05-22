@@ -38,10 +38,10 @@ QString ActionListViewModel::description(int index) const
     return QString();
 }
 
-KIcon * ActionListViewModel::icon(int index) const
+QIcon ActionListViewModel::icon(int index) const
 {
     Q_UNUSED(index);
-    return NULL;
+    return QIcon();
 }
 
 bool ActionListViewModel::isCategory(int index) const {
@@ -76,9 +76,9 @@ QString StandardActionListViewModel::description(int index) const
     return m_items.at(index).description;
 }
 
-KIcon * StandardActionListViewModel::icon(int index) const
+QIcon StandardActionListViewModel::icon(int index) const
 {
-    if (index >= m_items.size()) return NULL;
+    if (index >= m_items.size()) return QIcon();
     return m_items.at(index).icon;
 }
 
@@ -99,7 +99,7 @@ void StandardActionListViewModel::add(const Item & item)
     emit itemInserted(m_items.size() - 1);
 }
 
-void StandardActionListViewModel::add(const QString & title, const QString & description, KIcon * icon, const QVariant & data)
+void StandardActionListViewModel::add(const QString & title, const QString & description, QIcon icon, const QVariant & data)
 {
     m_items.append(Item(title, description, icon, data));
     emit itemInserted(m_items.size() - 1);
@@ -112,7 +112,7 @@ void StandardActionListViewModel::set(int index, const Item & item)
     emit itemAltered(index);
 }
 
-void StandardActionListViewModel::set(int index, const QString & title, const QString & description, KIcon * icon, const QVariant & data)
+void StandardActionListViewModel::set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data)
 {
     if (index >= m_items.size()) return;
     m_items[index] = Item(title, description, icon, data);
@@ -197,12 +197,12 @@ QString MergedActionListViewModel::description(int index) const
 
 }
 
-KIcon * MergedActionListViewModel::icon(int index) const
+QIcon MergedActionListViewModel::icon(int index) const
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
 
-    if (model == -1) return NULL;
+    if (model == -1) return QIcon();
     if (modelIndex == -1) return m_modelsMetadata.at(model).second;
     return m_models.at(model)->icon(modelIndex);
 }
@@ -278,11 +278,11 @@ void MergedActionListViewModel::fromChildCoordinates(int & index, int model, int
     index = -1;
 }
 
-void MergedActionListViewModel::addModel(KIcon * icon, QString title, ActionListViewModel * model)
+void MergedActionListViewModel::addModel(QIcon icon, const QString & title, ActionListViewModel * model)
 {
     if (!model) return;
     m_models.append(model);
-    m_modelsMetadata.append(QPair< QString, KIcon * >(title, icon));
+    m_modelsMetadata.append(QPair< QString, QIcon >(title, icon));
 
     connect(model, SIGNAL(updated()),         this, SLOT(modelUpdated()));
     connect(model, SIGNAL(itemInserted(int)), this, SLOT(modelItemInserted(int)));

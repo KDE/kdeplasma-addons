@@ -263,7 +263,7 @@ void LancelotWindow::lancelotShow(int x, int y)
     showWindow(x, y);
 }
 
-void LancelotWindow::lancelotShowItem(int x, int y, QString name)
+void LancelotWindow::lancelotShowItem(int x, int y, const QString & name)
 {
     sectionActivated(name);
     m_showingFull = false;
@@ -467,64 +467,64 @@ void LancelotWindow::systemSwitchUser()
 
 void LancelotWindow::setupModels()
 {
-//     // Models:
-//     m_models["Places"]            = new Lancelot::Models::Places();
-//     m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
-//     m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
-//     m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
-//
-//     m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
-//     m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
-//     m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
-//
-//     m_models["Runner"]            = new Lancelot::Models::Runner();
-//
-//     // Groups:
-//
-//     m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
-//     m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
-//     m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
-//
-//     m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
-//     m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
-//     m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
-//
-//     // Assignments: Model - Group:
-//     // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
-//
-//     Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("Places"),           m_models["Places"]);
-//     Merged(m_modelGroups["ComputerLeft"])->addModel  (NULL, i18n("System"),           m_models["SystemServices"]);
-//
-//     Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Removable"),        m_models["Devices/Removable"]);
-//     Merged(m_modelGroups["ComputerRight"])->addModel (NULL, i18n("Fixed"),            m_models["Devices/Fixed"]);
-//
-//     Merged(m_modelGroups["DocumentsLeft"])->addModel (NULL, i18n("New:"),             m_models["NewDocuments"]);
-//
-//     Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Recent documents"), m_models["RecentDocuments"]);
-//     Merged(m_modelGroups["DocumentsRight"])->addModel(NULL, i18n("Open documents"),   m_models["OpenDocuments"]);
-//
-//     m_modelGroups["SearchLeft"] = m_models["Runner"];
-//
-//     // Assignments: ListView - Group
-//
-//     listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
-//     listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
-//     //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
-//     listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
-//
-//     listComputerRight->setModel(m_modelGroups["ComputerRight"]);
-//     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
-//     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
-//     //listSearchRight->setModel(m_modelGroups["SearchRight"]);
-//
-//     // Applications passageview
-//
-//     passagewayApplications->setEntranceModel(
-//         new Lancelot::PassagewayViewModelProxy(
-//             new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), new KIcon("favorites")
-//         )
-//     );
-//     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
+     // Models:
+     m_models["Places"]            = new Lancelot::Models::Places();
+     m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
+     m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
+     m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
+
+     m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
+     m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
+     m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
+
+     m_models["Runner"]            = new Lancelot::Models::Runner();
+
+     // Groups:
+
+     m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
+
+     m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
+
+     // Assignments: Model - Group:
+     // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+
+     Merged(m_modelGroups["ComputerLeft"])->addModel  (QIcon(), i18n("Places"),           m_models["Places"]);
+     Merged(m_modelGroups["ComputerLeft"])->addModel  (QIcon(), i18n("System"),           m_models["SystemServices"]);
+
+     Merged(m_modelGroups["ComputerRight"])->addModel (QIcon(), i18n("Removable"),        m_models["Devices/Removable"]);
+     Merged(m_modelGroups["ComputerRight"])->addModel (QIcon(), i18n("Fixed"),            m_models["Devices/Fixed"]);
+
+     Merged(m_modelGroups["DocumentsLeft"])->addModel (QIcon(), i18n("New:"),             m_models["NewDocuments"]);
+
+     Merged(m_modelGroups["DocumentsRight"])->addModel(QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
+     Merged(m_modelGroups["DocumentsRight"])->addModel(QIcon(), i18n("Open documents"),   m_models["OpenDocuments"]);
+
+     m_modelGroups["SearchLeft"] = m_models["Runner"];
+
+     // Assignments: ListView - Group
+
+     listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
+     listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
+     //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
+     listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
+
+     listComputerRight->setModel(m_modelGroups["ComputerRight"]);
+     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
+     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
+     //listSearchRight->setModel(m_modelGroups["SearchRight"]);
+
+     // Applications passageview
+
+     passagewayApplications->setEntranceModel(
+         new Lancelot::PassagewayViewModelProxy(
+             new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), KIcon("favorites")
+         )
+     );
+     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 
 }
 

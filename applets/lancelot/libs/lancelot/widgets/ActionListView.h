@@ -26,7 +26,7 @@
 #include <QtGui>
 #include <QtCore>
 #include <KDebug>
-#include <KIcon>
+#include <QIcon>
 
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ExtenderButton.h>
@@ -67,7 +67,7 @@ public:
     void setItemsGroupByName(const QString & group);
     WidgetGroup * itemsGroup();
 
-    void wheelEvent ( QGraphicsSceneWheelEvent * event );
+    void wheelEvent(QGraphicsSceneWheelEvent * event);
 
     L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     L_Override virtual void setGeometry(const QRectF & geometry);
@@ -97,8 +97,8 @@ private:
     class ScrollButton : public Lancelot::BasicWidget {
     public:
         ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
-        void hoverEnterEvent ( QGraphicsSceneHoverEvent * event);
-        void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event);
+        void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
     private:
         ActionListView * m_list;

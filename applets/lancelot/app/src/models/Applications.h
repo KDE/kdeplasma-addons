@@ -30,19 +30,19 @@ namespace Models {
 class Applications : public PassagewayViewModel {
     Q_OBJECT
 public:
-    Applications(QString root = "", QString title = "", KIcon * icon = NULL);
+    Applications(QString root = "", QString title = "", QIcon icon = QIcon());
     virtual ~Applications();
 
     QString title(int index) const;
     QString description(int index) const;
-    KIcon * icon(int index) const;
+    QIcon icon(int index) const;
     bool isCategory(int index) const;
 
     int size() const;
 
     PassagewayViewModel * child(int index);
     QString modelTitle() const;
-    KIcon * modelIcon()  const;
+    QIcon modelIcon()  const;
 
 public slots:
     void activate(int index);
@@ -54,7 +54,7 @@ private:
     class ApplicationData {
     public:
         QString name, description;
-        KIcon * icon;
+        QIcon icon;
         QString desktopFile;
     };
 
@@ -63,7 +63,7 @@ private:
 
     QString m_root;
     QString m_title;
-    KIcon * m_icon;
+    QIcon m_icon;
     bool m_loaded;
 };
 

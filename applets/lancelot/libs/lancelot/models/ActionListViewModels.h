@@ -24,7 +24,7 @@
 
 #include <QPair>
 #include <QString>
-#include <KIcon>
+#include <QIcon>
 #include <QVariant>
 
 namespace Lancelot
@@ -38,7 +38,7 @@ public:
 
     virtual QString title(int index) const = 0;
     virtual QString description(int index) const;
-    virtual KIcon * icon(int index) const;
+    virtual QIcon icon(int index) const;
     virtual bool isCategory(int index) const;
 
     virtual int size() const = 0;
@@ -65,12 +65,12 @@ class LANCELOT_EXPORT StandardActionListViewModel: public ActionListViewModel {
 protected:
     class LANCELOT_EXPORT Item {
     public:
-        Item(QString itemTitle, QString itemDescription, KIcon * itemIcon, QVariant itemData)
+        Item(QString itemTitle, QString itemDescription, QIcon itemIcon, QVariant itemData)
           : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData) {};
 
         QString title;
         QString description;
-        KIcon * icon;
+        QIcon icon;
         QVariant data;
     };
 
@@ -80,16 +80,16 @@ public:
 
     virtual QString title(int index) const;
     virtual QString description(int index) const;
-    virtual KIcon * icon(int index) const;
+    virtual QIcon icon(int index) const;
     virtual bool isCategory(int index) const;
 
     virtual int size() const;
 
     void add(const Item & item);
-    void add(const QString & title, const QString & description, KIcon * icon, const QVariant & data);
+    void add(const QString & title, const QString & description, QIcon icon, const QVariant & data);
 
     void set(int index, const Item & item);
-    void set(int index, const QString & title, const QString & description, KIcon * icon, const QVariant & data);
+    void set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data);
     void removeAt(int index);
 
 protected:
@@ -104,7 +104,7 @@ public:
     MergedActionListViewModel();
     virtual ~MergedActionListViewModel();
 
-    void addModel(KIcon * icon, QString title, ActionListViewModel * model);
+    void addModel(QIcon icon, const QString & title, ActionListViewModel * model);
 
     int modelCount() const;
 
@@ -112,7 +112,7 @@ public:
 
     virtual QString title(int index) const;
     virtual QString description(int index) const;
-    virtual KIcon * icon(int index) const;
+    virtual QIcon icon(int index) const;
     virtual bool isCategory(int index) const;
     virtual int size() const;
 
@@ -126,7 +126,7 @@ private:
     void toChildCoordinates(int index, int & model, int & modelIndex) const;
     void fromChildCoordinates(int & index, int model, int modelIndex) const;
     QList< ActionListViewModel * > m_models;
-    QList< QPair< QString, KIcon * > > m_modelsMetadata;
+    QList< QPair< QString, QIcon > > m_modelsMetadata;
     bool m_hideEmptyModels;
 
 private slots:
@@ -145,40 +145,6 @@ Q_SIGNALS:
     void itemDeleted(int index);
     void itemAltered(int index);
 };
-
-class LANCELOT_EXPORT DummyActionListViewModel : public ActionListViewModel {
-public:
-    DummyActionListViewModel(QString title, int size)
-        : Lancelot::ActionListViewModel(), m_size(size), m_title(title), m_icon(new KIcon("lancelot")) {}
-
-    virtual ~DummyActionListViewModel() {}
-
-    virtual QString title(int index) const {
-        return m_title + " " + QString::number(index) + " long long long long long " + QString((index < size())?"":"err");
-    }
-
-    virtual QString description(int index) const {
-        return "Description " + QString::number(index);
-    }
-    virtual KIcon * icon(int index) const { Q_UNUSED(index); return m_icon; }
-    virtual int size() const { return m_size; }
-
-    virtual void activated(int index) { Q_UNUSED(index); }
-private:
-    int m_size;
-    QString m_title;
-    KIcon * m_icon;
-};
-
-class LANCELOT_EXPORT DummyMergedActionListViewModel : public MergedActionListViewModel {
-public:
-    DummyMergedActionListViewModel (QString title, int subs) {
-        while (subs-- != 0) {
-            addModel(NULL, title + QString::number(subs), new DummyActionListViewModel(title + QString::number(subs), 2 + subs % 2));
-        }
-    }
-};
-
 
 } // namespace Lancelot
 

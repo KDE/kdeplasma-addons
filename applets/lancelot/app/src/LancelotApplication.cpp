@@ -114,7 +114,7 @@ bool LancelotApplication::hide(bool immediate)
     return true;
 }
 
-bool LancelotApplication::showItem(int x, int y, QString name)
+bool LancelotApplication::showItem(int x, int y, const QString & name)
 {
     if (!LancelotApplication::m_application || !(LancelotApplication::m_application->window)) return false;
     LancelotApplication::m_application->window->lancelotShowItem(x, y, name);

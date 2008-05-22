@@ -26,12 +26,13 @@
 #include <KRun>
 #include <KUrl>
 #include <KDebug>
+#include <KIcon>
 // Applications
 
 namespace Lancelot {
 namespace Models {
 
-Applications::Applications(QString root, QString title, KIcon * icon):
+Applications::Applications(QString root, QString title, QIcon icon):
     m_root(root), m_title(title), m_icon(icon), m_loaded(false)
 {
     load();
@@ -40,7 +41,6 @@ Applications::Applications(QString root, QString title, KIcon * icon):
 Applications::~Applications()
 {
     clear();
-    delete m_icon;
 }
 
 void Applications::clear()
@@ -74,7 +74,7 @@ void Applications::load()
             if (service->noDisplay())
                 continue;
 
-            data.icon = new KIcon(service->icon());
+            data.icon = KIcon(service->icon());
             data.name = service->name();
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
@@ -90,7 +90,7 @@ void Applications::load()
             m_submodels.append(new Applications(
                 serviceGroup->relPath(),
                 serviceGroup->caption(),
-                new KIcon(serviceGroup->icon())
+                KIcon(serviceGroup->icon())
             ));
 
             // appName = serviceGroup->comment();
@@ -114,9 +114,9 @@ QString Applications::description(int index) const
     return m_items.at(index - m_submodels.size()).description;
 }
 
-KIcon * Applications::icon(int index) const
+QIcon Applications::icon(int index) const
 {
-    if (index >= size()) return NULL;
+    if (index >= size()) return QIcon();
     return
         (index < m_submodels.size()) ?
             m_submodels.at(index)->modelIcon() :
@@ -159,7 +159,7 @@ QString Applications::modelTitle() const
     return m_title;
 }
 
-KIcon * Applications::modelIcon() const
+QIcon Applications::modelIcon() const
 {
     return m_icon;
 }

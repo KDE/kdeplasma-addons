@@ -30,7 +30,7 @@ PassagewayViewModel::~PassagewayViewModel()
 {
 }
 
-PassagewayViewModelProxy::PassagewayViewModelProxy(ActionListViewModel * model, QString title, KIcon * icon)
+PassagewayViewModelProxy::PassagewayViewModelProxy(ActionListViewModel * model, QString title, QIcon icon)
     : m_model(model), m_modelTitle(title), m_modelIcon(icon)
 {
     connect(model, SIGNAL( itemActivated(int) ),
@@ -56,7 +56,7 @@ QString PassagewayViewModelProxy::modelTitle() const
     return m_modelTitle;
 }
 
-KIcon * PassagewayViewModelProxy::modelIcon()  const
+QIcon PassagewayViewModelProxy::modelIcon()  const
 {
     return m_modelIcon;
 }
@@ -72,7 +72,7 @@ QString PassagewayViewModelProxy::description(int index) const
     return m_model->description(index);
 }
 
-KIcon * PassagewayViewModelProxy::icon(int index) const
+QIcon PassagewayViewModelProxy::icon(int index) const
 {
     return m_model->icon(index);
 }

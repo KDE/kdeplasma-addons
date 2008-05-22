@@ -21,6 +21,7 @@
 #include <KRun>
 #include <KLocalizedString>
 #include <KDebug>
+#include <KIcon>
 
 namespace Lancelot {
 namespace Models {
@@ -40,21 +41,21 @@ void Places::load()
     add(
         i18n("Home Folder"),
         getenv("HOME"),
-        new KIcon("user-home"),
+        KIcon("user-home"),
         getenv("HOME")
     );
 
     add(
         i18n("Root Folder"),
         "/",
-        new KIcon("folder-red"),
+        KIcon("folder-red"),
         "/"
     );
 
     add(
         i18n("Network Folders"),
         "remote:/",
-        new KIcon("folder-remote"),
+        KIcon("folder-remote"),
         "remote:/"
     );
 

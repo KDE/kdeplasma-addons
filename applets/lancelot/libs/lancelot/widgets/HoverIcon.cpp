@@ -90,7 +90,6 @@ void HoverIcon::timerEvent(QTimerEvent * event)
         d->stopTimer();
         if (d->activationMethod == HoverActivate) {
             emit activated();
-            hoverLeaveEvent(0);
         }
     }
     Plasma::Icon::timerEvent(event);

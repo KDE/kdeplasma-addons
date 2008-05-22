@@ -33,24 +33,24 @@ public:
     virtual ~PassagewayViewModel();
     virtual PassagewayViewModel * child(int index) = 0;
     virtual QString modelTitle() const = 0;
-    virtual KIcon * modelIcon()  const = 0;
+    virtual QIcon modelIcon()  const = 0;
 };
 
 class LANCELOT_EXPORT PassagewayViewModelProxy: public PassagewayViewModel {
     Q_OBJECT
 public:
     PassagewayViewModelProxy(ActionListViewModel * model,
-            QString title = QString(), KIcon * icon = NULL);
+            QString title = QString(), QIcon icon = QIcon());
 
     // PassagewayViewModel
     PassagewayViewModel * child(int index);
     QString modelTitle() const;
-    KIcon * modelIcon()  const;
+    QIcon modelIcon()  const;
 
     // ActionListViewModel
     QString title(int index) const;
     QString description(int index) const;
-    KIcon * icon(int index) const;
+    QIcon icon(int index) const;
     bool isCategory(int index) const;
 
     int size() const;
@@ -71,7 +71,7 @@ protected:
 private:
     ActionListViewModel * m_model;
     QString m_modelTitle;
-    KIcon * m_modelIcon;
+    QIcon m_modelIcon;
 };
 
 } // namespace Lancelot

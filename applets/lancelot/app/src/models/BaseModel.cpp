@@ -24,7 +24,7 @@
 #include <KRun>
 #include <KLocalizedString>
 #include <KDesktopFile>
-#include <KIcon>
+#include <QIcon>
 #include <KGlobal>
 #include <KMimeType>
 #include <KUrl>
@@ -71,7 +71,7 @@ void BaseModel::addService(const KService::Ptr & service)
         add(
             genericName.isEmpty() ? appName : genericName,
             genericName.isEmpty() ? "" : appName,
-            new KIcon(service->icon()),
+            QIcon(service->icon()),
             service->entryPath()
         );
     }
@@ -104,14 +104,14 @@ void BaseModel::addUrl(const KUrl & url)
         add(
             QFileInfo(url.path()).baseName(),
             desktopUrl.isLocalFile() ? desktopUrl.path() : desktopUrl.prettyUrl(),
-            new KIcon(desktopFile.readIcon()),
+            QIcon(desktopFile.readIcon()),
             desktopFile.readUrl()
         );
     } else {
         add(
             QFileInfo(url.path()).baseName(),
             url.isLocalFile() ? url.path() : url.prettyUrl(),
-            new KIcon(KMimeType::iconNameForUrl(url)),
+            QIcon(KMimeType::iconNameForUrl(url)),
             url.url()
         );
     }

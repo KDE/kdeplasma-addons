@@ -84,7 +84,7 @@ void Runner::load()
             add(
                 action->text(),
                 action->runner()->objectName(),
-                new KIcon(action->icon()),
+                action->icon(),
                 qVariantFromValue((void *)action)
             );
 

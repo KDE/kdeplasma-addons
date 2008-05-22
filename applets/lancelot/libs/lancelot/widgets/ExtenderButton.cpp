@@ -21,7 +21,7 @@
 
 #include <QRectF>
 #include <KDebug>
-#include <KIcon>
+#include <QIcon>
 
 #define ACTIVATION_TIME 300
 

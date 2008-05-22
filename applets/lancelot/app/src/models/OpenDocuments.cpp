@@ -98,7 +98,7 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
     if (index == -1) {
         index = m_items.size();
         add (
-            "", "", NULL, uint(task->window())
+            "", "", QIcon(), uint(task->window())
         );
         m_tasks[task->window()] = task;
     }
@@ -110,7 +110,7 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
         description = m_rx.cap(2);
     }
 
-    KIcon * icon = new KIcon(QIcon(task->icon(32, 32)));
+    QIcon icon = QIcon(task->icon(32, 32));
 
     set(index, title, description, icon, uint(task->window()));
 

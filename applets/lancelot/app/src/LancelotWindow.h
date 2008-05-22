@@ -26,6 +26,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 
+#include <KIcon>
 #include "ui_LancelotWindowBase.h"
 
 class CustomGraphicsView;
@@ -57,7 +58,7 @@ public Q_SLOTS:
      * @param y y coordinate of the mouse
      * @param name the name of the section to be shown
      */
-    void lancelotShowItem(int x, int y, QString name);
+    void lancelotShowItem(int x, int y, const QString & name);
 
     /**
      * Hides window
