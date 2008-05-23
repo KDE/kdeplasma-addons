@@ -31,7 +31,6 @@ public:
       : layoutItem(NULL),
         hasTitle(title != QString()),
         titleWidget(icon, title, "", parent),
-        background(NULL),
         q(parent)
     {
         init();
@@ -41,7 +40,6 @@ public:
       : layoutItem(NULL),
         hasTitle(title != QString()),
         titleWidget(title, "", parent),
-        background(NULL),
         q(parent)
     {
         init();
@@ -51,7 +49,6 @@ public:
       : layoutItem(NULL),
         hasTitle(false),
         titleWidget("", "", parent),
-        background(NULL),
         q(parent)
     {
         init();
@@ -59,7 +56,6 @@ public:
 
     ~Private()
     {
-        delete background;
     }
 
     void init()
@@ -73,11 +69,11 @@ public:
     void invalidate()
     {
         QRectF rect = QRectF(QPointF(), q->size());
-        if (background) {
-            rect.setTop(background->marginSize(Plasma::TopMargin));
-            rect.setLeft(background->marginSize(Plasma::LeftMargin));
-            rect.setWidth(rect.width() - background->marginSize(Plasma::RightMargin));
-            rect.setHeight(rect.height() - background->marginSize(Plasma::BottomMargin));
+        if (q->group() && q->group()->backgroundSvg()) {
+            rect.setTop(q->group()->backgroundSvg()->marginSize(Plasma::TopMargin));
+            rect.setLeft(q->group()->backgroundSvg()->marginSize(Plasma::LeftMargin));
+            rect.setWidth(rect.width() - q->group()->backgroundSvg()->marginSize(Plasma::RightMargin));
+            rect.setHeight(rect.height() - q->group()->backgroundSvg()->marginSize(Plasma::BottomMargin));
         }
 
         if (!hasTitle) {
@@ -105,7 +101,6 @@ public:
     bool hasTitle;
 
     BasicWidget titleWidget;
-    Plasma::PanelSvg * background;
     Panel * q;
 };
 
@@ -134,29 +129,10 @@ Panel::~Panel()
 
 qreal Panel::borderSize(Plasma::MarginEdge edge)
 {
-    if (!d->background) {
+    if (!(group()) || !(group()->backgroundSvg())) {
         return 0;
     }
-    return d->background->marginSize(edge);
-}
-
-void Panel::setBackground(const QString & imagePath)
-{
-    kDebug() << " Setting background " << imagePath;
-    if (!d->background) {
-        d->background = new Plasma::PanelSvg(this);
-        d->background->setEnabledBorders(Plasma::PanelSvg::AllBorders);
-    }
-
-    d->background->setImagePath(imagePath);
-    kDebug() << " Setting background " << d->background->isValid();
-    d->invalidate();
-}
-
-void Panel::clearBackground()
-{
-    delete d->background;
-    d->background = NULL;
+    return group()->backgroundSvg()->marginSize(edge);
 }
 
 void Panel::setTitle(const QString & title)
@@ -198,9 +174,6 @@ void Panel::setGeometry(qreal x, qreal y, qreal w, qreal h)
 void Panel::setGeometry(const QRectF & geometry)
 {
     Widget::setGeometry(geometry);
-    if (d->background) {
-        d->background->resizePanel(geometry.size());
-    }
     d->invalidate();
 }
 
@@ -219,19 +192,6 @@ void Panel::setLayoutItem(QGraphicsLayoutItem * layoutItem)
 QGraphicsLayoutItem * Panel::layoutItem()
 {
     return d->layoutItem;
-}
-
-void Panel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
-{
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-    if (d->background) {
-        kDebug() << " Panel has a background " << d->background->isValid();
-        // d->background->resizePanel(boundingRect().size());
-        d->background->paintPanel(painter, option->rect);
-    } else {
-        kDebug() << " Panel has no background ";
-    }
 }
 
 QSizeF Panel::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const

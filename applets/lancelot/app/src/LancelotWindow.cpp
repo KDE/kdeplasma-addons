@@ -199,7 +199,7 @@ LancelotWindow::LancelotWindow()
 
     m_root = new Lancelot::ResizeBordersPanel();
 
-    m_root->setBackground("lancelot/main-background");
+    m_root->setGroupByName("RootPanel");
     m_corona->addItem(m_root);
 
     /* Dirty hack to get an edit box before Qt 4.4 :: begin */

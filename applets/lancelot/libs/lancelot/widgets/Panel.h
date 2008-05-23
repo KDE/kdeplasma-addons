@@ -75,35 +75,35 @@ public:
     virtual ~Panel();
 
     /**
-     * Sets title of this Lancelot::BasicWidget
+     * Sets title of this Lancelot::Panel
      * @param title new title
      */
     void setTitle(const QString & title);
 
     /**
-     * @returns title of this Lancelot::BasicWidget
+     * @returns title of this Lancelot::Panel
      */
     QString title() const;
 
     /**
-     * Sets icon of this Lancelot::BasicWidget
+     * Sets icon of this Lancelot::Panel
      * @param icon new icon
      */
     void setIcon(QIcon icon);
 
     /**
-     * @returns icon of this Lancelot::BasicWidget
+     * @returns icon of this Lancelot::Panel
      */
     QIcon icon() const;
 
     /**
-     * Sets icon size of this Lancelot::BasicWidget
+     * Sets icon size of this Lancelot::Panel
      * @param size new icon size
      */
     void setIconSize(QSize size);
 
     /**
-     * @returns icon size of this Lancelot::BasicWidget
+     * @returns icon size of this Lancelot::Panel
      */
     QSize iconSize() const;
 
@@ -120,17 +120,6 @@ public:
     QGraphicsLayoutItem * layoutItem();
 
     /**
-     * Sets the background image for the panel
-     * @param imagePath location of Svg to use as background
-     */
-    void setBackground(const QString & imagePath);
-
-    /**
-     * Clears the background
-     */
-    void clearBackground();
-
-    /**
      * @param edge edge
      * @returns size of the specified edge
      */
@@ -139,9 +128,10 @@ public:
     L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     L_Override virtual void setGeometry(const QRectF & geometry);
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
+    // L_Override virtual void groupUpdated();
 
 protected:
-    L_Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    // L_Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 

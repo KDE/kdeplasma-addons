@@ -156,8 +156,7 @@
                     entranceIcon="favorite"
                     atlasTitle="Applications"
                     atlasIcon="applications-other"
-
-                    background="lancelot/inner-background"
+                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="applications"
                 >
@@ -168,7 +167,7 @@
                     title="Computer"
                     icon="computer-laptop"
                     iconSize="22, 22"
-                    background="lancelot/inner-background"
+                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="computer"
                 >
@@ -195,7 +194,7 @@
                     title="Contacts"
                     icon="kontact"
                     iconSize="22, 22"
-                    background="lancelot/inner-background"
+                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="contacts"
                 >
@@ -222,7 +221,7 @@
                     title="Documents"
                     icon="applications-office"
                     iconSize="22, 22"
-                    background="lancelot/inner-background"
+                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="documents"
                 >
@@ -249,7 +248,7 @@
                     title="Search"
                     icon="find"
                     iconSize="22, 22"
-                    background="lancelot/inner-background"
+                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="search"
                 >
