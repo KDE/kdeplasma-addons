@@ -27,6 +27,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <KDebug>
+#include <KIcon>
 
 #include <solid/device.h>
 #include <solid/deviceinterface.h>
@@ -108,7 +109,7 @@ void Devices::addDevice(const Solid::Device & device)
     add(
         device.product(),
         StringCoalesce(access->filePath(), i18n("Unmounted")),
-        QIcon(device.icon()),
+        KIcon(device.icon()),
         device.udi()
     );
 }
