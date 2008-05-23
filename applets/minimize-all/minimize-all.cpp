@@ -27,12 +27,14 @@
 #include <QGraphicsLinearLayout>
 
 MinimizeAll::MinimizeAll(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_wm2ShowingDesktop(false), m_down(false),
-      m_goingDown(false)
+    : Plasma::Applet(parent, args), m_wm2ShowingDesktop(false)
+#ifndef MINIMIZE_ONLY
+      , m_down(false), m_goingDown(false)
+#endif
 {
     setAspectRatioMode(Plasma::Square);
     int iconSize = IconSize(KIconLoader::Desktop);
-    resize(iconSize*2, iconSize*2);
+    resize(iconSize * 2, iconSize * 2);
 }
 
 MinimizeAll::~MinimizeAll()
@@ -42,7 +44,7 @@ MinimizeAll::~MinimizeAll()
 void MinimizeAll::init()
 {
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
-    layout->setContentsMargins(0,0,0,0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
     Plasma::Icon *icon = new Plasma::Icon(KIcon("plasma-minimize-all"), QString(), this);
@@ -52,10 +54,11 @@ void MinimizeAll::init()
     NETRootInfo info(QX11Info::display(), NET::Supported);
     m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
 
+#ifndef MINIMIZE_ONLY
     if (m_wm2ShowingDesktop) {
-        connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)),
-                this, SLOT(reset()));
+        connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), this, SLOT(reset()));
     }
+#endif
 }
 
 QSizeF MinimizeAll::contentSizeHint() const
@@ -81,14 +84,20 @@ QSizeF MinimizeAll::contentSizeHint() const
 void MinimizeAll::pressed()
 {
     if (m_wm2ShowingDesktop) {
+        NETRootInfo info(QX11Info::display(), 0);
+#ifndef MINIMIZE_ONLY
         m_down = !m_down;
         m_goingDown = m_down;
-        NETRootInfo info(QX11Info::display(), 0);
         info.setShowingDesktop(m_down);
         // NETRootInfo::showingDesktop() returns always false
         QTimer::singleShot(500, this, SLOT(delay()));
+#else
+        info.setShowingDesktop(true);
+#endif
     }
 }
+
+#ifndef MINIMIZE_ONLY
 
 void MinimizeAll::delay()
 {
@@ -101,5 +110,7 @@ void MinimizeAll::reset()
         m_down = false;
     }
 }
+
+#endif
 
 #include "minimize-all.moc"

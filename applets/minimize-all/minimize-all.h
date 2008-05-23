@@ -18,6 +18,8 @@
 #ifndef MINIMIZEALL_HEADER
 #define MINIMIZEALL_HEADER
 
+#define MINIMIZE_ONLY
+
 #include <Plasma/Applet>
 
 class MinimizeAll : public Plasma::Applet
@@ -32,13 +34,17 @@ class MinimizeAll : public Plasma::Applet
 
     public slots:
         void pressed();
+#ifndef MINIMIZE_ONLY
         void reset();
         void delay();
+#endif
 
     private:
         bool m_wm2ShowingDesktop;
+#ifndef MINIMIZE_ONLY
         bool m_down;
         bool m_goingDown;
+#endif
 };
 
 K_EXPORT_PLASMA_APPLET(minimize-all, MinimizeAll)
