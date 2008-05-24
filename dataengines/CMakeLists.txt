@@ -1,6 +1,2 @@
-macro_optional_find_package(KdepimLibs)
-if(KDEPIMLIBS_FOUND)
-    add_subdirectory(ebn)
-endif(KDEPIMLIBS_FOUND)
 add_subdirectory(comic)
 add_subdirectory(twitter)
