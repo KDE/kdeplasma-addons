@@ -136,7 +136,7 @@ void Fifteen::updateNumerals()
     m_pieces[i]->showNumeral(m_numerals);
   }
 
-  update(boundingRect());
+  update();
 }
 
 void Fifteen::setNumerals(bool show)
