@@ -21,7 +21,7 @@ kde4_add_library( plasmacomicprovidercore SHARED ${comic_provider_core_SRCS} )
 target_link_libraries( plasmacomicprovidercore ${KDE4_KDEUI_LIBS} )
 set_target_properties( plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1 )
 
-install( TARGETS plasmacomicprovidercore DESTINATION ${LIB_INSTALL_DIR} )
+install( TARGETS plasmacomicprovidercore ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES plasma_comicprovider.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
 
 
