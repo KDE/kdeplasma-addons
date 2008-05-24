@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "minimize-all.h"
+#include "showdesktop.h"
 #include <plasma/widgets/icon.h>
 #include <plasma/containment.h>
 #include <KIcon>
@@ -26,7 +26,7 @@
 #include <QTimer>
 #include <QGraphicsLinearLayout>
 
-MinimizeAll::MinimizeAll(QObject *parent, const QVariantList &args)
+ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_wm2ShowingDesktop(false)
 #ifndef MINIMIZE_ONLY
       , m_down(false), m_goingDown(false)
@@ -37,17 +37,17 @@ MinimizeAll::MinimizeAll(QObject *parent, const QVariantList &args)
     resize(iconSize * 2, iconSize * 2);
 }
 
-MinimizeAll::~MinimizeAll()
+ShowDesktop::~ShowDesktop()
 {
 }
 
-void MinimizeAll::init()
+void ShowDesktop::init()
 {
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    Plasma::Icon *icon = new Plasma::Icon(KIcon("plasma-minimize-all"), QString(), this);
+    Plasma::Icon *icon = new Plasma::Icon(KIcon("user-desktop"), QString(), this);
     layout->addItem(icon);
     connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));
 
@@ -61,7 +61,7 @@ void MinimizeAll::init()
 #endif
 }
 
-QSizeF MinimizeAll::contentSizeHint() const
+QSizeF ShowDesktop::contentSizeHint() const
 {
     QSizeF sizeHint = geometry().size();
 
@@ -81,7 +81,7 @@ QSizeF MinimizeAll::contentSizeHint() const
     return sizeHint;
 }
 
-void MinimizeAll::pressed()
+void ShowDesktop::pressed()
 {
     if (m_wm2ShowingDesktop) {
         NETRootInfo info(QX11Info::display(), 0);
@@ -99,12 +99,12 @@ void MinimizeAll::pressed()
 
 #ifndef MINIMIZE_ONLY
 
-void MinimizeAll::delay()
+void ShowDesktop::delay()
 {
     m_goingDown = false;
 }
 
-void MinimizeAll::reset()
+void ShowDesktop::reset()
 {
     if (!m_goingDown) {
         m_down = false;
@@ -113,4 +113,4 @@ void MinimizeAll::reset()
 
 #endif
 
-#include "minimize-all.moc"
+#include "showdesktop.moc"

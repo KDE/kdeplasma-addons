@@ -15,19 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MINIMIZEALL_HEADER
-#define MINIMIZEALL_HEADER
+#ifndef SHOWDESKTOP_HEADER
+#define SHOWDESKTOP_HEADER
 
 #define MINIMIZE_ONLY
 
 #include <Plasma/Applet>
 
-class MinimizeAll : public Plasma::Applet
+class ShowDesktop : public Plasma::Applet
 {
     Q_OBJECT
     public:
-        MinimizeAll(QObject *parent, const QVariantList &args);
-        ~MinimizeAll();
+        ShowDesktop(QObject *parent, const QVariantList &args);
+        ~ShowDesktop();
 
         virtual void init();
         virtual QSizeF contentSizeHint() const;
@@ -47,6 +47,6 @@ class MinimizeAll : public Plasma::Applet
 #endif
 };
 
-K_EXPORT_PLASMA_APPLET(minimize-all, MinimizeAll)
+K_EXPORT_PLASMA_APPLET(showdesktop, ShowDesktop)
 
 #endif
