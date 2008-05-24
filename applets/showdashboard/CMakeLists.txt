@@ -1,4 +1,4 @@
-project(showdesktop)
+project(showdashboard)
 
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
@@ -11,15 +11,15 @@ include_directories(
    ${KDE4_INCLUDES}
    )
 
-set(showdesktop_SRCS showdesktop.cpp)
+set(showdashboard_SRCS showdashboard.cpp)
 
-kde4_add_plugin(plasma_applet_showdesktop ${showdesktop_SRCS})
-target_link_libraries(plasma_applet_showdesktop
-                      ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
+kde4_add_plugin(plasma_applet_showdashboard ${showdashboard_SRCS})
+target_link_libraries(plasma_applet_showdashboard
+                       ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
  
-install(TARGETS plasma_applet_showdesktop
-        DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS plasma_applet_showdashboard
+         DESTINATION ${PLUGIN_INSTALL_DIR})
  
-install(FILES plasma-applet-showdesktop.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES plasma-applet-showdashboard.desktop
+         DESTINATION ${SERVICES_INSTALL_DIR})
 

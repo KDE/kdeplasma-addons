@@ -19,36 +19,65 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef SHOWDESKTOP_H
-#define SHOWDESKTOP_H
+#include "showdashboard.h"
+
+// Qt
+#include <QDBusInterface>
+
+// KDE
+#include <KWindowSystem>
+#include <KIconLoader>
 
 
-//KDE
-#include <KIcon>
-
-// Plasma
-#include <Plasma/Applet>
-#include <plasma/widgets/icon.h>
-//Qt
-#include <QtGui/QGraphicsSceneEvent>
-#include <QtGui/QPainter>
-
-class ShowDesktop : public Plasma::Applet
+ShowDashboard::ShowDashboard(QObject *parent, const QVariantList &args)
+    : Plasma::Applet(parent, args)
 {
-    Q_OBJECT
-    public:
-        ShowDesktop(QObject *parent, const QVariantList &args);
-        ~ShowDesktop() {};
-        void init();
-	Qt::Orientations expandingDirections() const;
-    protected:
-        void constraintsEvent(Plasma::Constraints constraints);
-    private:
-	Plasma::Icon * m_icon;
-    protected slots:
-        void toggleShowDesktop(bool);
-};
 
-K_EXPORT_PLASMA_APPLET(showdesktop, ShowDesktop)
+}
 
-#endif
+void ShowDashboard::init()
+{
+    setBackgroundHints(NoBackground);
+    m_icon = new Plasma::Icon(KIcon("user-dashboard"),QString(),this);
+    connect(m_icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
+
+}
+
+void ShowDashboard::constraintsEvent(Plasma::Constraints constraints)
+{
+    setBackgroundHints(NoBackground);
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Planar ||
+            formFactor() == Plasma::MediaCenter) {
+            m_icon->setText(i18n("Show Desktop"));
+            setMinimumSize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Desktop)));
+        } else {
+            m_icon->setText(0);
+            m_icon->setInfoText(0);
+            setMinimumSize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Panel)));
+       }
+    }
+    if (constraints & Plasma::SizeConstraint && m_icon) {
+        resize(size());
+        m_icon->resize(size());
+    }
+
+    updateGeometry();
+}
+
+Qt::Orientations ShowDashboard::expandingDirections() const
+{
+    return Qt::Vertical;
+}
+
+void ShowDashboard::toggleShowDashboard(bool pressed)
+{
+    if (!pressed) {
+        return;
+    }
+    QDBusInterface plasmaApp( "org.kde.plasma", "/App" );
+    plasmaApp.call( "toggleDashboard" );
+}
+
+
+#include "showdashboard.moc"
