@@ -117,13 +117,13 @@ public:
 
         if (q->formFactor() == Plasma::Vertical) {
             // layout->setPreferredSize(size.width(), size.width() * (showCategories?4:1));
-            q->resize(size.width(), size.width() * (showCategories?4:1));
+            q->resize(size.width(), size.width() * buttons.count());
         } else if (q->formFactor() == Plasma::Horizontal) {
             // layout->setPreferredSize(size.height() * (showCategories?4:1), size.height());
-            q->resize(size.height() * (showCategories?4:1), size.height());
+            q->resize(size.height() * buttons.count(), size.height());
         } else {
             size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
-            size = QSizeF(size.height() * (showCategories?4:1), size.height());
+            size = QSizeF(size.height() * buttons.count(), size.height());
             kDebug() << size;
             layout->setPreferredSize(size);
             q->resize(size);
@@ -170,7 +170,7 @@ void LancelotApplet::saveConfig()
     kcg.writeEntry("show", (d->showCategories?"categories":"main"));
     kcg.writeEntry("icon", d->mainIcon);
     kcg.writeEntry("activate", (d->clickActivation?"click":"hover"));
-    save(&kcg);
+    save(kcg);
 }
 
 void LancelotApplet::applyConfig()
