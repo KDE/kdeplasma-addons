@@ -49,7 +49,7 @@ void ShowDashboard::constraintsEvent(Plasma::Constraints constraints)
     if (constraints & Plasma::FormFactorConstraint) {
         if (formFactor() == Plasma::Planar ||
             formFactor() == Plasma::MediaCenter) {
-            m_icon->setText(i18n("Show Desktop"));
+            m_icon->setText(i18n("Show Dashboard"));
             setMinimumSize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Desktop)));
         } else {
             m_icon->setText(0);

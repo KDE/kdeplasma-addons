@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Show Dashboard
 Comment=Lets you show the dashboard
-Icon=user-desktop
+Icon=user-dashboard
 Type=Service
 ServiceTypes=Plasma/Applet
 
