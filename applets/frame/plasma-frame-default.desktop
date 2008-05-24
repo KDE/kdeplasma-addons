@@ -13,6 +13,7 @@ Comment[sv]=Visa dina favoritbilder
 Comment[zh_TW]=顯示您最愛的圖片
 Icon=image-jpeg2000
 Type=Service
+X-Plasma-DropMimeTypes=image/jpeg,image/png
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_frame
