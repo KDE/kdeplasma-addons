@@ -30,6 +30,5 @@ add_subdirectory(notes)
 add_subdirectory(nowplaying)
 add_subdirectory(showdashboard)
 add_subdirectory(showdesktop)
-add_subdirectory(tutorial)
 add_subdirectory(twitter)
 
