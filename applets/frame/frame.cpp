@@ -62,8 +62,8 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setCacheMode(QGraphicsItem::NoCache);
     resize(350, 350*800/1280);
     m_mySlideShow = new SlideShow();
-    if ( args.count() == 3 ) {
-        m_currentUrl = args.value(2).toString();
+    if ( args.count() ) {
+        m_currentUrl = args.value(0).toString();
     } else {
         m_currentUrl = KUrl("Default");
     }
@@ -93,6 +93,11 @@ void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &da
 
 void Frame::init()
 {
+    bool frameReceivedUrlArgs = false;
+    if (m_currentUrl != KUrl("Default") ) {
+        frameReceivedUrlArgs = true;
+    }
+
     m_slideNumber = 0;
     // Get config values
     KConfigGroup cg = config();
@@ -118,6 +123,10 @@ void Frame::init()
     m_slideShowTimer->setInterval(m_slideshowTime * 1000);
 
     initSlideShow();
+    if (frameReceivedUrlArgs) {
+        cg.writeEntry("url", m_currentUrl);
+        emit configNeedsSaving();
+    }
 }
 
 void Frame::constraintsEvent(Plasma::Constraints constraints)
