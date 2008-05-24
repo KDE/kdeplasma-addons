@@ -232,7 +232,7 @@ QString MergedActionListViewModel::title(int index) const
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
 
-    if (model == -1) return "MALVM Error";
+    if (model == -1) return "Error";
     if (modelIndex == -1) return m_modelsMetadata.at(model).first;
     return m_models.at(model)->title(modelIndex);
 }
@@ -303,13 +303,10 @@ int MergedActionListViewModel::modelCount() const
 int MergedActionListViewModel::size() const
 {
     int result = 0;
-    kDebug() << "---";
     foreach (ActionListViewModel * model, m_models) {
-        // kDebug() << m_modelsMetadata.at(model).first << model->size();
         if (m_hideEmptyModels && model->size() == 0) continue; // We will not show empty models
         result += model->size() + 1;
     }
-    kDebug() << "We are returning " << result;
     return result;
 }
 

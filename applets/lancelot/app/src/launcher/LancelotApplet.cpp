@@ -159,7 +159,7 @@ LancelotApplet::~LancelotApplet()
 void LancelotApplet::loadConfig()
 {
     KConfigGroup kcg = config();
-    d->showCategories =  (kcg.readEntry("show", "ain") != "main");
+    d->showCategories =  (kcg.readEntry("show", "main") != "main");
     d->mainIcon = kcg.readEntry("icon", "lancelot");
     d->clickActivation = (kcg.readEntry("activate", "click") == "click");
 }
