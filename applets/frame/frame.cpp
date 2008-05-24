@@ -62,6 +62,11 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setCacheMode(QGraphicsItem::NoCache);
     resize(350, 350*800/1280);
     m_mySlideShow = new SlideShow();
+    if ( args.count() == 3 ) {
+        m_currentUrl = args.value(2).toString();
+    } else {
+        m_currentUrl = KUrl("Default");
+    }
 }
 
 Frame::~Frame()
@@ -99,7 +104,7 @@ void Frame::init()
     m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
-    m_currentUrl = cg.readEntry("url", "Default");
+    m_currentUrl = cg.readEntry("url", m_currentUrl);
     m_potdProvider = cg.readEntry("potdProvider", "");
     m_potd = cg.readEntry("potd", false);
 
