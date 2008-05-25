@@ -1,5 +1,5 @@
 project(plasma_comic_dataengine)
-
+find_package(KdepimLibs)
 set(comic_engine_SRCS
     cachedprovider.cpp
     comic.cpp
