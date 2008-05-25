@@ -22,6 +22,7 @@
 #include <qmimedata.h>
 #include <qpainter.h>
 #include <qpixmap.h>
+#include <qpushbutton.h>
 
 #include <kdebug.h>
 #include <kicon.h>
@@ -98,24 +99,14 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
 class PickerButton : public Plasma::PushButton
 {
     public:
-        PickerButton(Widget *parent = 0);
-
-        /*virtual*/ Qt::Orientations expandingDirections() const;
+        PickerButton(QGraphicsWidget *parent = 0);
 
         void adaptToFormFactor(Plasma::FormFactor formFactor);
-
-    private:
-        Qt::Orientations m_orientation;
 };
 
-PickerButton::PickerButton(Widget *parent)
-    : Plasma::PushButton(parent), m_orientation(Qt::Horizontal)
+PickerButton::PickerButton(QGraphicsWidget *parent)
+    : Plasma::PushButton(parent)
 {
-}
-
-Qt::Orientations PickerButton::expandingDirections() const
-{
-    return m_orientation;
 }
 
 void PickerButton::adaptToFormFactor(Plasma::FormFactor formFactor)
@@ -124,13 +115,13 @@ void PickerButton::adaptToFormFactor(Plasma::FormFactor formFactor)
     {
     case Plasma::Planar:
     case Plasma::MediaCenter:
-        m_orientation = Qt::Horizontal | Qt::Vertical;
+        setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         break;
     case Plasma::Horizontal:
-        m_orientation = Qt::Horizontal;
+        setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
         break;
     case Plasma::Vertical:
-        m_orientation = Qt::Vertical;
+        setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
         break;
     }
 }
@@ -140,20 +131,22 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_grabWidget(0)
 {
     resize(40, 80);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
 
     QGraphicsLinearLayout *mainlay = new QGraphicsLinearLayout(Qt::Vertical);
     setLayout(mainlay);
     mainlay->setSpacing(4);
+    mainlay->setContentsMargins(0.0, 0.0, 0.0, 0.0);
 
     m_grabButton = new PickerButton(this);
     mainlay->addItem(m_grabButton);
-    m_grabButton->setIcon(KIcon("color-picker"));
+    m_grabButton->nativeWidget()->setIcon(KIcon("color-picker"));
     connect(m_grabButton, SIGNAL(clicked()), this, SLOT(grabClicked()));
 
     m_historyButton = new PickerButton(this);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
-    m_historyButton->setIcon(KIcon(QIcon(new ColorIconEngine(Qt::gray))));
+    m_historyButton->nativeWidget()->setIcon(QIcon(new ColorIconEngine(Qt::gray)));
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
     KMenu *menu = new KMenu();
@@ -173,25 +166,21 @@ Kolourpicker::~Kolourpicker()
 void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
-        setDrawStandardBackground(false);
+        if (formFactor() == Plasma::Planar) {
+            setBackgroundHints(Plasma::Applet::StandardBackground);
+        } else {
+            setBackgroundHints(Plasma::Applet::NoBackground);
+        }
         m_grabButton->adaptToFormFactor(formFactor());
         m_historyButton->adaptToFormFactor(formFactor());
-        layout()->invalidate();
-    }
 
-    if (constraints & Plasma::SizeConstraint) {
         QGraphicsLinearLayout *l = dynamic_cast<QGraphicsLinearLayout *>(layout());
-        if (l->minimumSize().height() > geometry().size().height()) {
+        if (formFactor() == Plasma::Horizontal) {
             l->setOrientation(Qt::Horizontal);
         } else {
             l->setOrientation(Qt::Vertical);
         }
     }
-}
-
-Qt::Orientations Kolourpicker::expandingDirections() const
-{
-    return 0;
 }
 
 bool Kolourpicker::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
@@ -277,7 +266,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
 void Kolourpicker::clearHistory()
 {
     m_historyButton->setEnabled(false);
-    m_historyButton->setIcon(KIcon(QIcon(new ColorIconEngine(Qt::gray))));
+    m_historyButton->nativeWidget()->setIcon(QIcon(new ColorIconEngine(Qt::gray)));
     QHash<QColor, QAction *>::ConstIterator it = m_menus.begin(), itEnd = m_menus.end();
     for ( ; it != itEnd; ++it )
     {
@@ -305,7 +294,7 @@ void Kolourpicker::addColor(const QColor &color)
     act->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
     m_historyMenu->insertMenu(m_historyMenu->actions().at(1), newmenu);
-    m_historyButton->setIcon(KIcon(colorIcon));
+    m_historyButton->nativeWidget()->setIcon(colorIcon);
     m_menus.insert(color, act);
     m_historyButton->setEnabled(true);
 }

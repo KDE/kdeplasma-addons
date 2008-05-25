@@ -27,8 +27,6 @@ class Kolourpicker : public Plasma::Applet
         Kolourpicker(QObject *parent, const QVariantList &args);
         ~Kolourpicker();
 
-        Qt::Orientations expandingDirections() const;
-
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual bool eventFilter(QObject *watched, QEvent *event);
