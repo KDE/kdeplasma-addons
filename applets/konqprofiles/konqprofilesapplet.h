@@ -43,8 +43,6 @@ public:
 
     void init();
 
-    void initSysTray();
-
     enum SpecificRoles {
         ProfilesName = Qt::UserRole+1
     };
@@ -56,7 +54,7 @@ protected slots:
 
 protected:
     void initSessionFiles();
-    void constraintsEvent(Plasma::Constraints constraints);
+    void constraintsUpdated(Plasma::Constraints constraints);
 
 private:
     Plasma::Dialog *m_widget;
@@ -65,6 +63,7 @@ private:
     QGraphicsLinearLayout *m_layout;
     QGraphicsProxyWidget * m_proxy;
     QStandardItemModel *m_konqModel;
+    bool closePopup;
 };
 
 K_EXPORT_PLASMA_APPLET(konqprofilesapplet, KonqProfilesApplet )

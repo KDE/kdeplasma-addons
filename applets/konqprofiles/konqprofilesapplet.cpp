@@ -39,7 +39,7 @@
 #include <kio/global.h>
 
 KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_icon( 0 ), m_layout( 0 ), m_proxy(0)
+    : Plasma::Applet(parent, args), m_icon( 0 ), m_layout( 0 ), m_proxy(0), closePopup( false )
 {
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize, iconSize);
@@ -60,7 +60,23 @@ KonqProfilesApplet::~KonqProfilesApplet()
 
 void KonqProfilesApplet::init()
 {
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    setMaximumSize(INT_MAX, INT_MAX);
+    m_layout = new QGraphicsLinearLayout(this);
+    m_layout->setContentsMargins(0, 0, 0, 0);
+    m_layout->setSpacing(0);
+    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    m_layout->setMaximumSize(INT_MAX, INT_MAX);
+    m_layout->setOrientation(Qt::Horizontal);
+    setLayout(m_layout);
+
+    m_icon = new Plasma::Icon(KIcon("konqueror"), QString(), this);
+    connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenMenu()));
+
     m_widget = new Plasma::Dialog();
+
+    m_proxy = new QGraphicsProxyWidget(this);
+
     QVBoxLayout *l_layout = new QVBoxLayout();
     l_layout->setSpacing(0);
     l_layout->setMargin(0);
@@ -84,47 +100,36 @@ void KonqProfilesApplet::init()
     m_widget->setLayout( l_layout );
     m_widget->adjustSize();
 
+    constraintsUpdated(Plasma::FormFactorConstraint);
 }
 
-void KonqProfilesApplet::constraintsEvent(Plasma::Constraints constraints)
+void KonqProfilesApplet::constraintsUpdated(Plasma::Constraints constraints)
 {
-    // on the panel we don't want a background, and our proxy widget in Planar has one
-    setBackgroundHints(NoBackground);
-
-    bool isSizeConstrained = formFactor() != Plasma::Planar && formFactor() != Plasma::MediaCenter;
-
     if (constraints & Plasma::FormFactorConstraint) {
-        if (isSizeConstrained) {
-            delete m_layout;
-            m_layout = 0;
-
-            if (m_proxy) {
-                m_proxy->setWidget(0);
-                delete m_proxy;
-                m_proxy = 0;
-            }
-
-            initSysTray();
-        } else {
-            delete m_icon;
-            m_icon = 0;
-
+        // Plasma::Dialog already has standard background
+        setBackgroundHints(NoBackground);
+        m_layout->removeAt(0);
+        switch (formFactor()) {
+        case Plasma::Planar:
+        case Plasma::MediaCenter:
+            closePopup = false;
+            setAspectRatioMode(Plasma::IgnoreAspectRatio);
             m_widget->setWindowFlags(Qt::Widget);
-            m_layout = new QGraphicsLinearLayout();
-            m_layout->setContentsMargins(0,0,0,0);
-            m_layout->setSpacing(0);
-            m_proxy = new QGraphicsProxyWidget(this);
             m_proxy->setWidget(m_widget);
             m_proxy->show();
-            //Laurent size fixed until I was able to resize it correctly
-            //setMinimumContentSize(m_widget->size());
-            //setMaximumContentSize(m_widget->size());
-
+            m_layout->addItem(m_proxy);
+            setMinimumSize( 300, 300 );
+            break;
+        case Plasma::Horizontal:
+        case Plasma::Vertical:
+            closePopup = true;
+            setAspectRatioMode(Plasma::Square);
+            m_widget->setWindowFlags(Qt::Popup);
+            m_proxy->setWidget(0);
+            m_proxy->hide();
+            m_layout->addItem(m_icon);
+            break;
         }
-    }
-
-    if (m_icon && constraints & Plasma::SizeConstraint) {
-        m_icon->resize(geometry().size());
     }
 }
 
@@ -157,20 +162,6 @@ void KonqProfilesApplet::initSessionFiles()
     }
 }
 
-void KonqProfilesApplet::initSysTray()
-{
-    if (m_icon) {
-        return;
-    }
-
-    m_widget->setWindowFlags(Qt::Popup);
-
-    m_icon = new Plasma::Icon(KIcon("konqueror"), QString(), this);
-    connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenMenu()));
-    m_icon->resize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Small)));
-    updateGeometry();
-}
-
 void KonqProfilesApplet::slotOpenMenu()
 {
     if (m_widget->isVisible()) {
@@ -185,7 +176,7 @@ void KonqProfilesApplet::slotOpenMenu()
 
 void KonqProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
-    if ( m_icon )
+    if ( closePopup )
         m_widget->hide();
     QStringList args;
     args<<"--profile"<<index.data(ProfilesName).toString();
