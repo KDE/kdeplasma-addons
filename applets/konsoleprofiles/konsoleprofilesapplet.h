@@ -42,7 +42,6 @@ public:
     ~KonsoleProfilesApplet();
 
     void init();
-    void initSysTray();
 
     enum SpecificRoles {
         ProfilesName = Qt::UserRole+1
@@ -55,7 +54,7 @@ protected slots:
 
 protected:
     void initSessionFiles();
-    void constraintsEvent(Plasma::Constraints constraints);
+    void constraintsUpdated(Plasma::Constraints constraints);
 
 private:
     Plasma::Dialog *m_widget;
@@ -64,6 +63,7 @@ private:
     QGraphicsProxyWidget * m_proxy;
     QGraphicsLinearLayout *m_layout;
     QStandardItemModel *m_konsoleModel;
+    bool m_closePopup;
 };
 
 K_EXPORT_PLASMA_APPLET(konsoleprofilesapplet, KonsoleProfilesApplet )
