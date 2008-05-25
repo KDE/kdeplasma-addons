@@ -209,7 +209,8 @@ bool Kolourpicker::eventFilter(QObject *watched, QEvent *event)
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
-        QPixmap pix = QPixmap::grabWindow(m_grabWidget->winId(), me->globalPos().x(), me->globalPos().y(), 1, 1);
+        QDesktopWidget *desktop = QApplication::desktop();
+        QPixmap pix = QPixmap::grabWindow(desktop->winId(), me->globalPos().x(), me->globalPos().y(), 1, 1);
         QImage img = pix.toImage();
         QColor color(img.pixel(0, 0));
 
@@ -239,7 +240,7 @@ void Kolourpicker::grabClicked()
 {
     if (m_grabWidget)
     {
-        m_grabWidget->grabMouse();
+        m_grabWidget->grabMouse(Qt::CrossCursor);
     }
 }
 
