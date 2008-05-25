@@ -25,8 +25,13 @@
 #include <QGraphicsProxyWidget>
 
 #include <plasma/applet.h>
-class QPushButton;
+
 class QLabel;
+
+namespace Plasma
+{
+    class PushButton;
+}
 
 class CalculatorApplet : public Plasma::Applet
 {
@@ -66,15 +71,15 @@ private:
     bool waitingForDigit;
 
     QLabel      *mOutputDisplay;
-    QPushButton *mButtonDigit[10];
-    QPushButton *mButtonDecimal;
-    QPushButton *mButtonAdd;
-    QPushButton *mButtonSubtract;
-    QPushButton *mButtonMultiply;
-    QPushButton *mButtonDivide;
-    QPushButton *mButtonEquals;
-    QPushButton *mButtonClear;
-    QPushButton *mButtonAllClear;
+    Plasma::PushButton *mButtonDigit[10];
+    Plasma::PushButton *mButtonDecimal;
+    Plasma::PushButton *mButtonAdd;
+    Plasma::PushButton *mButtonSubtract;
+    Plasma::PushButton *mButtonMultiply;
+    Plasma::PushButton *mButtonDivide;
+    Plasma::PushButton *mButtonEquals;
+    Plasma::PushButton *mButtonClear;
+    Plasma::PushButton *mButtonAllClear;
     QGraphicsGridLayout *m_layout;
     QGraphicsProxyWidget *m_proxy;
 

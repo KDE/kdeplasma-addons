@@ -26,7 +26,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <Plasma/Theme>
-
+#include <Plasma/PushButton>
 
 CalculatorApplet::CalculatorApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args )
@@ -63,91 +63,88 @@ void CalculatorApplet::init()
     mOutputDisplay->setText(inputText);
     mOutputDisplay->setVisible(true);
 
-    mButtonDigit[0] = new QPushButton( QString::number(0) );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonDigit[0] );
+    mButtonDigit[0] = new Plasma::PushButton( this );
+    mButtonDigit[0]->setText( QString::number(0) );
     connect( mButtonDigit[0], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
     mButtonDigit[0]->setVisible( true );
-    m_layout->addItem( w, 5,1,1,2 );
+    m_layout->addItem( mButtonDigit[0], 5,1,1,2 );
 
 
     for (int i = 1; i < NumDigitButtons; i++) {
         int row = ((9 - i) / 3) + 2;
         int column = ((i - 1) % 3) + 1;
-        mButtonDigit[i] = new QPushButton( QString::number(i) );
-        w = new QGraphicsProxyWidget;
-        w->setWidget( mButtonDigit[i] );
+        mButtonDigit[i] = new Plasma::PushButton( this );
+        mButtonDigit[i]->setText( QString::number(i) );
         connect( mButtonDigit[i], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
         mButtonDigit[i]->setVisible( true );
-        m_layout->addItem( w, row,column );
+        m_layout->addItem( mButtonDigit[i], row,column );
     }
 
 
-    mButtonDecimal = new QPushButton( KGlobal::locale()->decimalSymbol());
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonDecimal );
-    m_layout->addItem( w, 5, 3 );
+    mButtonDecimal = new Plasma::PushButton( this );
+    mButtonDecimal->setText( KGlobal::locale()->decimalSymbol() );
+    m_layout->addItem( mButtonDecimal, 5, 3 );
     connect( mButtonDecimal, SIGNAL( clicked() ), this, SLOT( slotDecimalClicked() ) );
     mButtonDecimal->setVisible( true );
 
-    mButtonEquals = new QPushButton( "=" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonEquals );
-    m_layout->addItem( w, 4, 4,2,1 );
+    mButtonEquals = new Plasma::PushButton( this );
+    mButtonEquals->setText( "=" );
+    m_layout->addItem( mButtonEquals, 4, 4,2,1 );
 
     connect( mButtonEquals, SIGNAL( clicked() ), this, SLOT( slotEqualsClicked() ) );
     mButtonEquals->setVisible( true );
 
-    mButtonAdd = new QPushButton( "+" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonAdd );
-    m_layout->addItem( w, 3, 4 );
+    mButtonAdd = new Plasma::PushButton( this );
+    mButtonAdd->setText( "+" );
+    m_layout->addItem( mButtonAdd, 3, 4 );
     connect( mButtonAdd, SIGNAL( clicked() ), this, SLOT( slotAddClicked() ) );
     mButtonAdd->setVisible( true );
 
-    mButtonSubtract = new QPushButton( "-" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonSubtract );
-    m_layout->addItem( w, 2, 4 );
+    mButtonSubtract = new Plasma::PushButton( this );
+    mButtonSubtract->setText( "-" );
+    m_layout->addItem( mButtonSubtract, 2, 4 );
 
     connect( mButtonSubtract, SIGNAL( clicked() ), this, SLOT( slotSubtractClicked() ) );
     mButtonSubtract->setVisible( true );
 
-    mButtonMultiply = new QPushButton( "X" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonMultiply );
-    m_layout->addItem( w, 1, 3 );
+    mButtonMultiply = new Plasma::PushButton( this );
+    mButtonMultiply->setText( "X" );
+    m_layout->addItem( mButtonMultiply, 1, 3 );
 
     connect( mButtonMultiply, SIGNAL( clicked() ), this, SLOT( slotMultiplyClicked() ) );
     mButtonMultiply->setVisible( true );
 
-    mButtonDivide = new QPushButton( "/" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonDivide );
+    mButtonDivide = new Plasma::PushButton( this );
+    mButtonDivide->setText( "/" );
 
-    m_layout->addItem( w, 1, 2 );
+    m_layout->addItem( mButtonDivide, 1, 2 );
 
     connect( mButtonDivide, SIGNAL( clicked() ), this, SLOT( slotDivideClicked() ) );
     mButtonDivide->setVisible( true );
 
-    mButtonClear = new QPushButton( "C" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonClear );
+    mButtonClear = new Plasma::PushButton( this );
+    mButtonClear->setText( "C" );
 
-    m_layout->addItem( w, 1, 1 );
+    m_layout->addItem( mButtonClear, 1, 1 );
     connect( mButtonClear, SIGNAL( clicked() ), this, SLOT( slotClearClicked() ) );
     mButtonClear->setVisible( true );
 
-    mButtonAllClear = new QPushButton( "AC" );
-    w = new QGraphicsProxyWidget;
-    w->setWidget( mButtonAllClear );
+    mButtonAllClear = new Plasma::PushButton( this );
+    mButtonAllClear->setText( "AC" );
 
-    m_layout->addItem( w, 1, 4);
+    m_layout->addItem( mButtonAllClear, 1, 4);
     connect( mButtonAllClear, SIGNAL( clicked() ), this, SLOT( slotAllClearClicked() ) );
     mButtonAllClear->setVisible( true );
 
     m_proxy->show();
     setLayout(m_layout);
+
+    // the following three lines are a complete pain and only partially work.
+    // this should be moved into convenience methods in Applet, or TT needs to improve
+    // how this works in QGraphicsWidget.
+    qreal left, top, right, bottom;
+    getContentsMargins(&left, &top, &right, &bottom);
+    setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
 }
 
 CalculatorApplet::~CalculatorApplet()
@@ -162,103 +159,103 @@ void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
     case Qt::Key_Return:
     case Qt::Key_Enter:
     {
-        mButtonEquals->animateClick();
+        mButtonEquals->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_Plus:
     {
-        mButtonAdd->animateClick();
+        mButtonAdd->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_Minus:
     {
-        mButtonSubtract->animateClick();
+        mButtonSubtract->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_multiply:
     {
-        mButtonMultiply->animateClick();
+        mButtonMultiply->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_Slash:
     {
-        mButtonDivide->animateClick();
+        mButtonDivide->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_1:
     {
-        mButtonDigit[1]->animateClick();
+        mButtonDigit[1]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_2:
     {
-        mButtonDigit[2]->animateClick();
+        mButtonDigit[2]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_3:
     {
-        mButtonDigit[3]->animateClick();
+        mButtonDigit[3]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_4:
     {
-        mButtonDigit[4]->animateClick();
+        mButtonDigit[4]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_5:
     {
-        mButtonDigit[5]->animateClick();
+        mButtonDigit[5]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_6:
     {
-        mButtonDigit[6]->animateClick();
+        mButtonDigit[6]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_7:
     {
-        mButtonDigit[7]->animateClick();
+        mButtonDigit[7]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_8:
     {
-        mButtonDigit[8]->animateClick();
+        mButtonDigit[8]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_9:
     {
-        mButtonDigit[9]->animateClick();
+        mButtonDigit[9]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_0:
     {
-        mButtonDigit[0]->animateClick();
+        mButtonDigit[0]->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_Comma:
     {
-        mButtonDecimal->animateClick();
+        mButtonDecimal->nativeWidget()->animateClick();
         event->accept();
         break;
     }
     case Qt::Key_Escape:
     {
-        mButtonClear->animateClick();
+        mButtonClear->nativeWidget()->animateClick();
         event->accept();
         break;
     }
@@ -269,7 +266,7 @@ void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
 
 void CalculatorApplet::slotDigitClicked()
 {
-    QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+    Plasma::PushButton *clickedButton = qobject_cast<Plasma::PushButton *>(sender());
     int newDigit = clickedButton->text().toInt();
 
     if (inputText == "0" && newDigit == 0.0)
