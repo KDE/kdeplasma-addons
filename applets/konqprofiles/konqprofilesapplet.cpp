@@ -35,6 +35,7 @@
 #include <KIcon>
 #include <KToolInvocation>
 #include <KDirWatch>
+#include <KGlobalSettings>
 #include <QFileInfo>
 #include <kio/global.h>
 
@@ -93,7 +94,13 @@ void KonqProfilesApplet::init()
 
     initSessionFiles();
 
-    connect(m_listView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(slotOnItemClicked(const QModelIndex &)));
+    if (KGlobalSettings::singleClick()) {
+        connect(m_listView, SIGNAL(clicked(const QModelIndex &)),
+                this, SLOT(slotOnItemClicked(const QModelIndex &)));
+    } else {
+        connect(m_listView, SIGNAL(doubleClicked(const QModelIndex &)),
+                this, SLOT(slotOnItemClicked(const QModelIndex &)));
+    }
 
     l_layout->addWidget( m_listView );
 
