@@ -18,14 +18,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_DEVICES_H_
-#define LANCELOT_MODELS_DEVICES_H_
+#ifndef LANCELOTAPP_MODELS_DEVICES_H_
+#define LANCELOTAPP_MODELS_DEVICES_H_
 
 #include "BaseModel.h"
 #include <solid/device.h>
 #include <solid/storageaccess.h>
 
-namespace Lancelot {
 namespace Models {
 
 class Devices : public BaseModel {
@@ -60,7 +59,6 @@ private:
     //QStringList m_devicesMounting;
 };
 
-}
-}
+} // namespace Models
 
-#endif /* LANCELOT_MODELS_DEVICES_H_ */
+#endif /* LANCELOTAPP_MODELS_DEVICES_H_ */

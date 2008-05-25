@@ -17,18 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_BASEMODEL_H_
-#define LANCELOT_MODELS_BASEMODEL_H_
+#ifndef LANCELOTAPP_MODELS_BASEMODEL_H_
+#define LANCELOTAPP_MODELS_BASEMODEL_H_
 
 #include "../LancelotApplication.h"
 #include <lancelot/models/ActionListViewModels.h>
 #include <KService>
 #include <KUrl>
 
-namespace Lancelot {
 namespace Models {
 
-class BaseModel : public StandardActionListViewModel {
+class BaseModel : public Lancelot::StandardActionListViewModel {
     Q_OBJECT
 public:
     BaseModel();
@@ -48,7 +47,6 @@ protected:
     void changeLancelotSearchString(const QString & string);
 };
 
-}
-}
+} // namespace Models
 
-#endif /* LANCELOT_MODELS_BASEMODEL_H_ */
+#endif /* LANCELOTAPP_MODELS_BASEMODEL_H_ */

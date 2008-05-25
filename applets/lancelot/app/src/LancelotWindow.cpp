@@ -407,7 +407,7 @@ void LancelotWindow::search(const QString & string)
 
     m_searchString = string;
 
-    ((Lancelot::Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
+    ((Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
     sectionActivated("search");
 }
 
@@ -468,16 +468,16 @@ void LancelotWindow::systemSwitchUser()
 void LancelotWindow::setupModels()
 {
      // Models:
-     m_models["Places"]            = new Lancelot::Models::Places();
-     m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
-     m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
-     m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
+     m_models["Places"]            = new Models::Places();
+     m_models["SystemServices"]    = new Models::SystemServices();
+     m_models["Devices/Removable"] = new Models::Devices(Models::Devices::Removable);
+     m_models["Devices/Fixed"]     = new Models::Devices(Models::Devices::Fixed);
 
-     m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
-     m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
-     m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
+     m_models["NewDocuments"]      = new Models::NewDocuments();
+     m_models["RecentDocuments"]   = new Models::RecentDocuments();
+     m_models["OpenDocuments"]     = new Models::OpenDocuments();
 
-     m_models["Runner"]            = new Lancelot::Models::Runner();
+     m_models["Runner"]            = new Models::Runner();
 
      // Groups:
 
@@ -521,10 +521,10 @@ void LancelotWindow::setupModels()
 
      passagewayApplications->setEntranceModel(
          new Lancelot::PassagewayViewModelProxy(
-             new Lancelot::Models::FavoriteApplications(), i18n("Favorites"), KIcon("favorites")
+             new Models::FavoriteApplications(), i18n("Favorites"), KIcon("favorites")
          )
      );
-     passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
+     passagewayApplications->setAtlasModel(new Models::Applications());
 
 }
 

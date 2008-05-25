@@ -18,12 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_SYSTEMSERVICES_H_
-#define LANCELOT_MODELS_SYSTEMSERVICES_H_
+#ifndef LANCELOTAPP_MODELS_SYSTEMSERVICES_H_
+#define LANCELOTAPP_MODELS_SYSTEMSERVICES_H_
 
 #include "BaseModel.h"
 
-namespace Lancelot {
 namespace Models {
 
 class SystemServices : public BaseModel {
@@ -38,6 +37,5 @@ protected:
 };
 
 }
-}
 
-#endif /* LANCELOT_MODELS_SYSTEMSERVICES_H_ */
+#endif /* LANCELOTAPP_MODELS_SYSTEMSERVICES_H_ */

@@ -66,6 +66,12 @@ qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${krunner_xml} krunner_i
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
 
+set(kmail_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.kmail.xml)
+qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kmail_xml} kmail_interface)
+
+set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
+qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kopete_xml} kopete_interface)
+
 set(lancelot_xml org.kde.lancelot.xml)
 qt4_add_dbus_interface(plasma_lancelot_client_SRCS ${lancelot_xml} lancelot_interface)
 

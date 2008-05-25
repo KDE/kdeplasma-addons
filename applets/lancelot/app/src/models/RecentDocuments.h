@@ -17,13 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_RECENTDOCUMENTS_H_
-#define LANCELOT_MODELS_RECENTDOCUMENTS_H_
+#ifndef LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_
+#define LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_
 
 #include "FolderModel.h"
 #include <KDirWatch>
 
-namespace Lancelot {
 namespace Models {
 
 class RecentDocuments : public FolderModel {
@@ -33,7 +32,6 @@ public:
     virtual ~RecentDocuments();
 };
 
-}
-}
+} // namespace Models
 
-#endif /* LANCELOT_MODELS_RECENTDOCUMENTS_H_ */
+#endif /* LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_ */

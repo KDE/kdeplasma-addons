@@ -25,7 +25,6 @@
 
 #include <plasma/abstractrunner.h>
 
-namespace Lancelot {
 namespace Models {
 
 Runner::Runner(QString search)
@@ -114,4 +113,3 @@ void Runner::activate(int index)
 }
 
 } // namespace Models
-} // namespace Lancelot

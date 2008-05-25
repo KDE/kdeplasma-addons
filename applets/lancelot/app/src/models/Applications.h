@@ -18,16 +18,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef APPLICATIONS_H_
-#define APPLICATIONS_H_
+#ifndef LANCELOTAPP_MODELS_APPLICATIONS_H_
+#define LANCELOTAPP_MODELS_APPLICATIONS_H_
 
 #include "BaseModel.h"
 #include <lancelot/models/PassagewayViewModels.h>
 
-namespace Lancelot {
 namespace Models {
 
-class Applications : public PassagewayViewModel {
+class Applications : public Lancelot::PassagewayViewModel {
     Q_OBJECT
 public:
     Applications(QString root = "", QString title = "", QIcon icon = QIcon());
@@ -67,7 +66,6 @@ private:
     bool m_loaded;
 };
 
-}
-}
+} // namespace Models
 
-#endif /* APPLICATIONS_H_*/
+#endif /* LANCELOTAPP_MODELS_APPLICATIONS_H_ */

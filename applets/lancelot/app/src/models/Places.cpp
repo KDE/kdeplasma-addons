@@ -23,7 +23,6 @@
 #include <KDebug>
 #include <KIcon>
 
-namespace Lancelot {
 namespace Models {
 
 Places::Places()
@@ -61,5 +60,4 @@ void Places::load()
 
 }
 
-}
-}
+} // namespace Models

@@ -35,7 +35,6 @@
 #include <solid/storageaccess.h>
 #include <solid/storagedrive.h>
 
-namespace Lancelot {
 namespace Models {
 
 #define StringCoalesce(A, B) (A == "")?(B):(A)
@@ -200,5 +199,4 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
 }
 
 
-}
-}
+} // namespace Models

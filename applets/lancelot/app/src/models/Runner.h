@@ -17,13 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_RUNNER_H_
-#define LANCELOT_MODELS_RUNNER_H_
+#ifndef LANCELOTAPP_MODELS_RUNNER_H_
+#define LANCELOTAPP_MODELS_RUNNER_H_
 
 #include "BaseModel.h"
 #include <plasma/abstractrunner.h>
 
-namespace Lancelot {
 namespace Models {
 
 class Runner : public BaseModel {
@@ -47,7 +46,6 @@ private:
     Plasma::RunnerContext m_context;
 };
 
-}
-}
+} // namespace Models
 
-#endif /* LANCELOT_MODELS_DEVICES_H_ */
+#endif /* LANCELOTAPP_MODELS_DEVICES_H_ */

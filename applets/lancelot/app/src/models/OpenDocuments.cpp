@@ -21,7 +21,6 @@
 #include "OpenDocuments.h"
 #include <KDebug>
 
-namespace Lancelot {
 namespace Models {
 
 OpenDocuments::OpenDocuments()
@@ -143,7 +142,6 @@ void OpenDocuments::activate(int index)
     hideLancelotWindow();
 }
 
-}
-}
+} // namespace Models
 
 #include "OpenDocuments.moc"

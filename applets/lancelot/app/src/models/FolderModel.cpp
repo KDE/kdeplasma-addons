@@ -22,7 +22,6 @@
 #include <QDir>
 #include <KDebug>
 
-namespace Lancelot {
 namespace Models {
 
 KDirWatch * FolderModel::m_dirWatch = NULL;
@@ -70,7 +69,6 @@ void FolderModel::dirty(const QString & dirPath)
     }
 }
 
-}
-}
+} // namespace Models
 
 #include "FolderModel.moc"

@@ -29,7 +29,6 @@
 #include <KIcon>
 // Applications
 
-namespace Lancelot {
 namespace Models {
 
 Applications::Applications(QString root, QString title, QIcon icon):
@@ -147,7 +146,7 @@ void Applications::activate(int index)
     LancelotApplication::hide(true);
 }
 
-PassagewayViewModel * Applications::child(int index)
+Lancelot::PassagewayViewModel * Applications::child(int index)
 {
     if (index >= m_submodels.size())
         return NULL;
@@ -164,5 +163,4 @@ QIcon Applications::modelIcon() const
     return m_icon;
 }
 
-}
-}
+} // namespace Models

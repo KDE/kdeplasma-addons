@@ -29,7 +29,6 @@
 #include <KMimeType>
 #include <KUrl>
 
-namespace Lancelot {
 namespace Models {
 
 BaseModel::BaseModel()
@@ -117,5 +116,4 @@ void BaseModel::addUrl(const KUrl & url)
     }
 }
 
-}
-}
+} // namespace Models

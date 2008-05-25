@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_MODELS_OPENDOCUMENTS_H_
-#define LANCELOT_MODELS_OPENDOCUMENTS_H_
+#ifndef LANCELOTAPP_MODELS_OPENDOCUMENTS_H_
+#define LANCELOTAPP_MODELS_OPENDOCUMENTS_H_
 
 #include "BaseModel.h"
 #include <taskmanager/taskmanager.h>
@@ -27,7 +27,6 @@
 
 using TaskManager::TaskPtr;
 
-namespace Lancelot {
 namespace Models {
 
 class OpenDocuments : public BaseModel {
@@ -56,7 +55,6 @@ private:
     QRegExp m_rx;
 };
 
-}
-}
+} // namespace Models
 
-#endif /* LANCELOT_MODELS_OPENDOCUMENTS_H_ */
+#endif /* LANCELOTAPP_MODELS_OPENDOCUMENTS_H_ */

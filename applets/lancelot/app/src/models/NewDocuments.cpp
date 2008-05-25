@@ -20,7 +20,6 @@
 
 #include "NewDocuments.h"
 
-namespace Lancelot {
 namespace Models {
 
 NewDocuments::NewDocuments()
@@ -41,5 +40,4 @@ void NewDocuments::load()
     addService("gimp");
 }
 
-}
-}
+} // namespace Models

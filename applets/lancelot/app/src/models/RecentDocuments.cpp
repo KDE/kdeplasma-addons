@@ -21,7 +21,6 @@
 #include <KStandardDirs>
 #include <KDebug>
 
-namespace Lancelot {
 namespace Models {
 
 RecentDocuments::RecentDocuments()
@@ -32,7 +31,6 @@ RecentDocuments::~RecentDocuments()
 {
 }
 
-}
-}
+} // namespace Models
 
 #include "RecentDocuments.moc"

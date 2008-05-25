@@ -23,7 +23,6 @@
 #include <KConfigGroup>
 #include <KStandardDirs>
 
-namespace Lancelot {
 namespace Models {
 
 FavoriteApplications::FavoriteApplications()
@@ -46,6 +45,4 @@ void FavoriteApplications::load()
     }
 }
 
-
-}
-}
+} // namespace Models

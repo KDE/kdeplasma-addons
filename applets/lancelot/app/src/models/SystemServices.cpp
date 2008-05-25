@@ -20,7 +20,6 @@
 
 #include "SystemServices.h"
 
-namespace Lancelot {
 namespace Models {
 
 SystemServices::SystemServices()
@@ -40,5 +39,4 @@ void SystemServices::load()
     addService("adept");
 }
 
-}
-}
+} // namespace Models
