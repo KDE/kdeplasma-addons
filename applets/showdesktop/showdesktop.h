@@ -18,7 +18,7 @@
 #ifndef SHOWDESKTOP_HEADER
 #define SHOWDESKTOP_HEADER
 
-#define MINIMIZE_ONLY
+//#define MINIMIZE_ONLY
 
 #include <Plasma/Applet>
 
@@ -30,7 +30,6 @@ class ShowDesktop : public Plasma::Applet
         ~ShowDesktop();
 
         virtual void init();
-        virtual QSizeF contentSizeHint() const;
 
     public slots:
         void pressed();

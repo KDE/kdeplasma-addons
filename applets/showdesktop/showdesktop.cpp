@@ -32,7 +32,7 @@ ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
       , m_down(false), m_goingDown(false)
 #endif
 {
-    setAspectRatioMode(Plasma::Square);
+    //setAspectRatioMode(Plasma::Square); // CPU 100% ??
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize * 2, iconSize * 2);
 }
@@ -59,26 +59,6 @@ void ShowDesktop::init()
         connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), this, SLOT(reset()));
     }
 #endif
-}
-
-QSizeF ShowDesktop::contentSizeHint() const
-{
-    QSizeF sizeHint = geometry().size();
-
-    if (containment() && containment()->containmentType() ==
-                         Plasma::Containment::PanelContainment) {
-        switch (formFactor()) {
-            case Plasma::Vertical:
-                sizeHint.setHeight(sizeHint.width());
-                break;
-            case Plasma::Horizontal:
-                sizeHint.setWidth(sizeHint.height());
-                break;
-            default:
-                break;
-        }
-    }
-    return sizeHint;
 }
 
 void ShowDesktop::pressed()
