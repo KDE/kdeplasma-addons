@@ -12,4 +12,3 @@ target_link_libraries(plasma_applet_showdesktop
 install(TARGETS plasma_applet_showdesktop DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-showdesktop.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-kde4_install_icons(${ICON_INSTALL_DIR})
