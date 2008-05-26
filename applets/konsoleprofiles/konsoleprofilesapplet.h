@@ -20,8 +20,7 @@
 #ifndef _KONSOLEPROFILESAPPLET_H_
 #define _KONSOLEPROFILESAPPLET_H_
 
-#include <plasma/applet.h>
-#include <plasma/dialog.h>
+#include <plasmaappletdialog.h>
 
 class QTreeView;
 class QGraphicsProxyWidget;
@@ -29,41 +28,28 @@ class QStandardItemModel;
 class QModelIndex;
 class QGraphicsLinearLayout;
 
-namespace Plasma
-{
-    class Icon;
-}
-
-class KonsoleProfilesApplet : public Plasma::Applet
+class KonsoleProfilesApplet : public PlasmaAppletDialog
 {
     Q_OBJECT
 public:
     KonsoleProfilesApplet(QObject *parent, const QVariantList &args);
     ~KonsoleProfilesApplet();
 
-    void init();
-
+    QWidget *widget();
     enum SpecificRoles {
         ProfilesName = Qt::UserRole+1
     };
 
 protected slots:
-    void slotOpenMenu();
     void slotOnItemClicked(const QModelIndex &index);
     void slotUpdateSessionMenu();
 
 protected:
     void initSessionFiles();
-    void constraintsUpdated(Plasma::Constraints constraints);
-
+    void initialize();
 private:
-    Plasma::Dialog *m_widget;
     QTreeView *m_listView;
-    Plasma::Icon *m_icon;
-    QGraphicsProxyWidget * m_proxy;
-    QGraphicsLinearLayout *m_layout;
     QStandardItemModel *m_konsoleModel;
-    bool m_closePopup;
 };
 
 K_EXPORT_PLASMA_APPLET(konsoleprofilesapplet, KonsoleProfilesApplet )
