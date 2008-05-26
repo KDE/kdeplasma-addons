@@ -41,7 +41,6 @@ PlasmaAppletDialog::PlasmaAppletDialog(QObject *parent, const QVariantList &args
 {
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize, iconSize);
-    initialize();
 }
 
 PlasmaAppletDialog::~PlasmaAppletDialog()
@@ -62,6 +61,8 @@ void PlasmaAppletDialog::initialize()
 
 void PlasmaAppletDialog::init()
 {
+    initialize();
+    initMinimumSize();
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     setMaximumSize(INT_MAX, INT_MAX);
     m_layout = new QGraphicsLinearLayout(this);
@@ -106,7 +107,7 @@ void PlasmaAppletDialog::constraintsUpdated(Plasma::Constraints constraints)
             m_proxy->setWidget(m_dialog);
             m_proxy->show();
             m_layout->addItem(m_proxy);
-            setMinimumSize( m_minimumSize);
+            setMinimumSize( m_minimumSize.width(), m_minimumSize.height());
             break;
         case Plasma::Horizontal:
         case Plasma::Vertical:

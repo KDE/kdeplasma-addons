@@ -52,13 +52,15 @@ protected:
     virtual void initialize();
     void constraintsUpdated(Plasma::Constraints constraints);
 
-private:
-    Plasma::Dialog *m_dialog;
-    Plasma::Icon *m_icon;
+protected:
     QSize m_minimumSize;
+    Plasma::Icon *m_icon;
+    Plasma::Dialog *m_dialog;
+    bool m_closePopup;
+
+private:
     QGraphicsLinearLayout *m_layout;
     QGraphicsProxyWidget * m_proxy;
-    bool m_closePopup;
 };
 
 #endif /* PLASMAAPPLETDIALOG_H */

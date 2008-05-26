@@ -20,50 +20,36 @@
 #ifndef _KONQPROFILESAPPLET_H_
 #define _KONQPROFILESAPPLET_H_
 
-#include <plasma/applet.h>
-#include <plasma/dialog.h>
 
+#include <plasmaappletdialog.h>
 class QTreeView;
 class QGraphicsProxyWidget;
 class QStandardItemModel;
 class QModelIndex;
 class QGraphicsLinearLayout;
 
-namespace Plasma
-{
-    class Icon;
-}
-
-class KonqProfilesApplet : public Plasma::Applet
+class KonqProfilesApplet : public PlasmaAppletDialog
 {
     Q_OBJECT
 public:
     KonqProfilesApplet(QObject *parent, const QVariantList &args);
-    ~KonqProfilesApplet();
+    virtual ~KonqProfilesApplet();
 
-    void init();
-
+    QWidget *widget();
     enum SpecificRoles {
         ProfilesName = Qt::UserRole+1
     };
 
 protected slots:
-    void slotOpenMenu();
     void slotOnItemClicked(const QModelIndex &index);
     void slotUpdateKonqProfiles();
 
 protected:
     void initSessionFiles();
-    void constraintsUpdated(Plasma::Constraints constraints);
-
+    void initialize();
 private:
-    Plasma::Dialog *m_widget;
     QTreeView *m_listView;
-    Plasma::Icon *m_icon;
-    QGraphicsLinearLayout *m_layout;
-    QGraphicsProxyWidget * m_proxy;
     QStandardItemModel *m_konqModel;
-    bool closePopup;
 };
 
 K_EXPORT_PLASMA_APPLET(konqprofilesapplet, KonqProfilesApplet )

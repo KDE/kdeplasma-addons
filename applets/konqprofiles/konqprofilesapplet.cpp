@@ -36,10 +36,8 @@
 #include <kio/global.h>
 
 KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_icon( 0 ), m_layout( 0 ), m_proxy(0), closePopup( false )
+    : PlasmaAppletDialog(parent, args), m_listView( 0 )
 {
-    int iconSize = IconSize(KIconLoader::Desktop);
-    resize(iconSize, iconSize);
     KDirWatch *dirwatch = new KDirWatch( this );
     QStringList lst = KGlobal::dirs()->findDirs( "data", "konqueror/profiles/" );
     for ( int i = 0; i < lst.count(); i++ )
@@ -51,90 +49,40 @@ KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args
 
 KonqProfilesApplet::~KonqProfilesApplet()
 {
-    delete m_widget;
-    delete m_icon;
 }
 
-void KonqProfilesApplet::init()
+void KonqProfilesApplet::initialize()
 {
-    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    setMaximumSize(INT_MAX, INT_MAX);
-    m_layout = new QGraphicsLinearLayout(this);
-    m_layout->setContentsMargins(0, 0, 0, 0);
-    m_layout->setSpacing(0);
-    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    m_layout->setMaximumSize(INT_MAX, INT_MAX);
-    m_layout->setOrientation(Qt::Horizontal);
-    setLayout(m_layout);
-
     m_icon = new Plasma::Icon(KIcon("konqueror"), QString(), this);
-    connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenMenu()));
-
-    m_widget = new Plasma::Dialog();
-
-    m_proxy = new QGraphicsProxyWidget(this);
-
-    QVBoxLayout *l_layout = new QVBoxLayout();
-    l_layout->setSpacing(0);
-    l_layout->setMargin(0);
-
-    m_listView= new QTreeView(m_widget);
-    m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
-    m_listView->setRootIsDecorated(false);
-    m_listView->setHeaderHidden(true);
-    m_listView->setMouseTracking(true);
-
-    m_konqModel = new QStandardItemModel(this);
-    m_listView->setModel(m_konqModel);
-    m_listView->setMouseTracking(true);
-
-    initSessionFiles();
-
-    if (KGlobalSettings::singleClick()) {
-        connect(m_listView, SIGNAL(clicked(const QModelIndex &)),
-                this, SLOT(slotOnItemClicked(const QModelIndex &)));
-    } else {
-        connect(m_listView, SIGNAL(doubleClicked(const QModelIndex &)),
-                this, SLOT(slotOnItemClicked(const QModelIndex &)));
-    }
-
-    l_layout->addWidget( m_listView );
-
-    m_widget->setLayout( l_layout );
-    m_widget->adjustSize();
-
-    constraintsUpdated(Plasma::FormFactorConstraint);
 }
 
-void KonqProfilesApplet::constraintsUpdated(Plasma::Constraints constraints)
+QWidget *KonqProfilesApplet::widget()
 {
-    if (constraints & Plasma::FormFactorConstraint) {
-        // Plasma::Dialog already has standard background
-        setBackgroundHints(NoBackground);
-        m_layout->removeAt(0);
-        switch (formFactor()) {
-        case Plasma::Planar:
-        case Plasma::MediaCenter:
-            closePopup = false;
-            setAspectRatioMode(Plasma::IgnoreAspectRatio);
-            m_widget->setWindowFlags(Qt::Widget);
-            m_proxy->setWidget(m_widget);
-            m_proxy->show();
-            m_layout->addItem(m_proxy);
-            setMinimumSize( 300, 300 );
-            break;
-        case Plasma::Horizontal:
-        case Plasma::Vertical:
-            closePopup = true;
-            setAspectRatioMode(Plasma::Square);
-            m_widget->setWindowFlags(Qt::Popup);
-            m_proxy->setWidget(0);
-            m_proxy->hide();
-            m_layout->addItem(m_icon);
-            break;
+    if ( !m_listView )
+    {
+        m_listView= new QTreeView(m_dialog);
+        m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
+        m_listView->setRootIsDecorated(false);
+        m_listView->setHeaderHidden(true);
+        m_listView->setMouseTracking(true);
+
+        m_konqModel = new QStandardItemModel(this);
+        m_listView->setModel(m_konqModel);
+        m_listView->setMouseTracking(true);
+
+        initSessionFiles();
+
+        if (KGlobalSettings::singleClick()) {
+            connect(m_listView, SIGNAL(clicked(const QModelIndex &)),
+                    this, SLOT(slotOnItemClicked(const QModelIndex &)));
+        } else {
+            connect(m_listView, SIGNAL(doubleClicked(const QModelIndex &)),
+                    this, SLOT(slotOnItemClicked(const QModelIndex &)));
         }
     }
+    return m_listView;
 }
+
 
 void KonqProfilesApplet::slotUpdateKonqProfiles()
 {
@@ -165,22 +113,10 @@ void KonqProfilesApplet::initSessionFiles()
     }
 }
 
-void KonqProfilesApplet::slotOpenMenu()
-{
-    if (m_widget->isVisible()) {
-        m_widget->hide();
-    } else {
-        m_widget->move(popupPosition(m_widget->sizeHint()));
-        m_widget->show();
-    }
-
-    m_widget->clearFocus();
-}
-
 void KonqProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
-    if ( closePopup )
-        m_widget->hide();
+    if ( m_closePopup )
+        m_dialog->hide();
     QStringList args;
     args<<"--profile"<<index.data(ProfilesName).toString();
     KToolInvocation::kdeinitExec("konqueror", args);
