@@ -23,14 +23,10 @@
 #include <QVBoxLayout>
 #include <KStandardDirs>
 #include <KIconLoader>
-#include <KMessageBox>
-#include <KStandardGuiItem>
 #include <plasma/widgets/icon.h>
 #include <QGraphicsProxyWidget>
-#include <QGraphicsGridLayout>
 #include <QGraphicsLinearLayout>
 #include <KIcon>
-#include <KGlobalSettings>
 
 PlasmaAppletDialog::PlasmaAppletDialog(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
