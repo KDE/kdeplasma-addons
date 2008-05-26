@@ -45,14 +45,12 @@ public:
 
     virtual void initMinimumSize();
 
-protected slots:
-    void slotOpenMenu();
+private Q_SLOTS:
+    void slotOpenDialog();
 
 protected:
     virtual void initialize();
     void constraintsUpdated(Plasma::Constraints constraints);
-
-protected:
     QSize m_minimumSize;
     Plasma::Icon *m_icon;
     Plasma::Dialog *m_dialog;

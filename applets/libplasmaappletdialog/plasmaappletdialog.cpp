@@ -73,7 +73,7 @@ void PlasmaAppletDialog::init()
     m_layout->setOrientation(Qt::Horizontal);
     setLayout(m_layout);
 
-    connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenMenu()));
+    connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenDialog()));
 
     m_dialog = new Plasma::Dialog();
 
@@ -123,7 +123,7 @@ void PlasmaAppletDialog::constraintsUpdated(Plasma::Constraints constraints)
 }
 
 
-void PlasmaAppletDialog::slotOpenMenu()
+void PlasmaAppletDialog::slotOpenDialog()
 {
     if (m_dialog->isVisible()) {
         m_dialog->hide();
