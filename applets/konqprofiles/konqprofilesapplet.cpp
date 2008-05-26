@@ -18,17 +18,13 @@
  ***************************************************************************/
 
 #include "konqprofilesapplet.h"
-#include <QStyleOptionGraphicsItem>
 #include <QTreeView>
 #include <QVBoxLayout>
 #include <KStandardDirs>
 #include <KIconLoader>
-#include <KInputDialog>
-#include <KMessageBox>
 #include <KStandardGuiItem>
 #include <plasma/widgets/icon.h>
 #include <QGraphicsProxyWidget>
-#include <QGraphicsGridLayout>
 #include <QListWidgetItem>
 #include <QGraphicsLinearLayout>
 #include <QStandardItemModel>
