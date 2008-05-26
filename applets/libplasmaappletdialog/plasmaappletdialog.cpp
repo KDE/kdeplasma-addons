@@ -35,9 +35,9 @@
 PlasmaAppletDialog::PlasmaAppletDialog(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
     , m_icon( 0 )
+    , m_closePopup( false )
     , m_layout( 0 )
     , m_proxy(0)
-    , m_closePopup( false )
 {
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize, iconSize);
