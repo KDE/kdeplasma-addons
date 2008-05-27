@@ -21,7 +21,6 @@
 #define FIFTEEN_H
 
 #include <QGraphicsWidget>
-#include <QObject>
 
 #include "piece.h"
 

@@ -22,7 +22,6 @@
 #define DICT_H
 
 #include <QGraphicsItem>
-#include <QTextEdit>
 
 #include <KLineEdit>
 

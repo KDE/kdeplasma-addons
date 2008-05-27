@@ -21,7 +21,6 @@
 #define FIFTEENPUZZLECONFIG_H
 
 #include <KDialog>
-#include <KUrlRequester>
 
 #include "ui_fifteenPuzzleConfig.h"
 

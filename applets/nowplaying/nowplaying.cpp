@@ -22,9 +22,7 @@
 
 #include "nowplaying.h"
 
-#include <QPainter>
 
-#include <KGlobalSettings>
 #include <Plasma/Theme>
 #include <Plasma/Label>
 

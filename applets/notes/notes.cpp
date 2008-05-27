@@ -20,15 +20,12 @@
 
 #include "notes.h"
 
-#include <QTextEdit>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
 
 #include <KGlobalSettings>
 #include <KConfigDialog>
 #include <KConfigGroup>
-#include <KFontDialog>
-#include <KColorDialog>
 
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)

@@ -21,7 +21,6 @@
 
 
 #include <QVBoxLayout>
-#include <KStandardDirs>
 #include <KIconLoader>
 #include <plasma/widgets/icon.h>
 #include <QGraphicsProxyWidget>
