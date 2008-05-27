@@ -19,13 +19,10 @@
 
 #include "konsoleprofilesapplet.h"
 #include <QTreeView>
-#include <QVBoxLayout>
 #include <KStandardDirs>
-#include <KIconLoader>
 #include <plasma/widgets/icon.h>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsGridLayout>
-#include <QListWidgetItem>
 #include <QStandardItemModel>
 #include <KIcon>
 #include <KToolInvocation>

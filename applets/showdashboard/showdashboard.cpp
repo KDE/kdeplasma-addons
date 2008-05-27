@@ -25,7 +25,6 @@
 #include <QDBusInterface>
 
 // KDE
-#include <KWindowSystem>
 #include <KIconLoader>
 
 
