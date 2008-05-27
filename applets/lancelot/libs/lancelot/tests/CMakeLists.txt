@@ -31,4 +31,4 @@ kde4_add_executable(lancelot-test ${plasma_lancelot_tests_SRCS})
 
 target_link_libraries(lancelot-test ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} ${LANCELOT_LIBS})
 
-install(TARGETS lancelot-test DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS lancelot-test ${INSTALL_TARGETS_DEFAULT_ARGS} )

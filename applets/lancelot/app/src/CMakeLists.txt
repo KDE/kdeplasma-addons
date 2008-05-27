@@ -104,7 +104,7 @@ configure_file(org.kde.lancelot.service.in
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.lancelot.service DESTINATION ${DBUS_SERVICES_INSTALL_DIR}) # ${CMAKE_INSTALL_PREFIX}/share/dbus-1/services )
 
 ########### install applicaiton ###############
-install(TARGETS lancelot-menu DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS lancelot-menu ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # Lancelot Part Applet
 
