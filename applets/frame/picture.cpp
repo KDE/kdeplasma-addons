@@ -68,13 +68,13 @@ QImage Picture::setPicture(const KUrl &currentUrl)
 {
     QImage m_picture;
     if (currentUrl.path() == "Default") {
-	m_picture = defaultPicture(i18nc("Info", "Put your photo here or drop a folder for starting a slideshow"));
-	return m_picture;
+        m_picture = defaultPicture(i18nc("Info", "Put your photo here or drop a folder to start a slideshow"));
+        return m_picture;
     } else {
         QImage tempImage(currentUrl.path());
         if (tempImage.isNull()){
             m_picture = defaultPicture(i18nc("Error", "Error loading image"));
-	    return m_picture;
+            return m_picture;
         } else { // Load success! Scale the image if it is too big	    
             if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
                 m_picture = tempImage.scaled(m_maxDimension,m_maxDimension,
@@ -82,7 +82,7 @@ QImage Picture::setPicture(const KUrl &currentUrl)
             } else {
                 m_picture = tempImage;
             }
-	    return m_picture;
+            return m_picture;
         }
     }
 }
