@@ -22,10 +22,7 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include <QPaintDevice>
-#include <QLabel>
 #include <QPixmap>
-#include <QPaintEvent>
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QColor>

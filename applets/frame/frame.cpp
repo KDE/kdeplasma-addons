@@ -24,24 +24,15 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QStyleOptionGraphicsItem>
-#include <QRadioButton>
-#include <QGroupBox>
 #include <QGraphicsSceneDragDropEvent>
 #include <QPen>
 #include <QCheckBox>
-#include <QSpinBox>
 #include <QTimer>
 #include <QFileInfo>
-#include <QSvgRenderer>
 
 #include <KDebug>
-#include <KLocale>
-#include <KColorButton>
 #include <KConfigDialog>
-#include <KComboBox>
 #include <KSharedConfig>
-#include <KStandardDirs>
-#include <KUrlRequester>
 #include <KUrl>
 #include <KDirSelectDialog>
 #include <KServiceTypeTrader>

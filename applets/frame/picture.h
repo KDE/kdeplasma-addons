@@ -21,7 +21,6 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
-#include <QPixmap>
 #include <QImage>
 
 #include <plasma/theme.h>

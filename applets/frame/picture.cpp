@@ -20,15 +20,11 @@
 
 #include "picture.h"
 
-#include <QDir>
 #include <QPainter>
-#include <QPixmap>
 #include <QSvgRenderer>
-#include <QTextDocument>
 #include <QTextOption>
 
 #include <KUrl>
-#include <KStandardDirs>
 
 #include <klocalizedstring.h>
 
