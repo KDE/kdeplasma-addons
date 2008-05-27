@@ -19,12 +19,9 @@
 
 #include "konqprofilesapplet.h"
 #include <QTreeView>
-#include <QVBoxLayout>
 #include <KStandardDirs>
-#include <KIconLoader>
 #include <plasma/widgets/icon.h>
 #include <QGraphicsProxyWidget>
-#include <QListWidgetItem>
 #include <QGraphicsLinearLayout>
 #include <QStandardItemModel>
 #include <KIcon>
