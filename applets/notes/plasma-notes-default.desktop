@@ -1,21 +1,6 @@
 [Desktop Entry]
 Name=Notes
-Name[bg]=Бележки
-Name[de]=Notizen
-Name[es]=Notas
-Name[ja]=メモ
-Name[nl]=Notities
-Name[pt]=Notas
-Name[pt_BR]=Notas
-Name[sv]=Anteckningar
 Comment=Postit-like Notes
-Comment[bg]=Бележки в стил Postit
-Comment[es]=Notas al estilo de las notas adhesivas
-Comment[ja]=Postit 風のメモ
-Comment[nl]=Post-it-achtige notities
-Comment[pt]=Notas Autocolantes
-Comment[pt_BR]=Notas Autocolantes
-Comment[sv]=Postit-liknande anteckningar
 Icon=knotes
 Type=Service
 

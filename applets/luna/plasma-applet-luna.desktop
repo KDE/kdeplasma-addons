@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Name=Luna
 Comment=Moon phase applet
-Comment[sv]=Månfas-miniprogram
 Icon=chronometer
 Type=Service
 ServiceTypes=Plasma/Applet

@@ -1,10 +1,6 @@
 [Desktop Entry]
 Name=Konq Profiles Applet
-Name[et]=Konquerori profiilide aplett
-Name[sv]=Konqueror profilminiprogram
 Comment=Konq Profiles Launcher
-Comment[et]=Konquerori profiilide aplett
-Comment[sv]=Konqueror profilstart
 Type=Service
 Icon=konqueror
 X-KDE-ServiceTypes=Plasma/Applet

@@ -1,14 +1,6 @@
 [Desktop Entry]
 Name=Comic Strip
-Name[et]=Koomiks
-Name[pt]=Banda Desenhada
-Name[pt_BR]=Banda Desenhada
-Name[sv]=Tecknad serie
 Comment=Shows a comic strip from the internet.
-Comment[et]=Internetist hangitud koomiksi näitamine
-Comment[pt]=Mostra uma banda desenhada da Internet.
-Comment[pt_BR]=Mostra uma banda desenhada da Internet.
-Comment[sv]=Visar en tecknad serie från Internet.
 Icon=face-smile-big
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet

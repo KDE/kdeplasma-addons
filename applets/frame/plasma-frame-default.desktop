@@ -1,16 +1,6 @@
 [Desktop Entry]
 Name=Picture Frame
-Name[ja]=写真フレーム
-Name[pt]=Moldura de Imagens
-Name[pt_BR]=Moldura de Imagens
-Name[sv]=Bildvisare
-Name[zh_TW]=圖片框架
 Comment=Display your favorite pictures
-Comment[ja]=お気に入りの写真を表示します
-Comment[pt]=Mostrar as suas imagens favoritas
-Comment[pt_BR]=Exibe suas imagens favoritas
-Comment[sv]=Visa dina favoritbilder
-Comment[zh_TW]=顯示您最愛的圖片
 Icon=image-jpeg2000
 Type=Service
 X-Plasma-DropMimeTypes=image/jpeg,image/png

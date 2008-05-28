@@ -1,14 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Binary Clock
-Name[pt]=Relógio Binário
-Name[pt_BR]=Relógio Binário
-Name[sv]=Binärklocka
 Comment=A binary clock
-Comment[da]=Et binært ur
-Comment[pt]=Um relógio binário
-Comment[pt_BR]=Um relógio binário
-Comment[sv]=En binär klocka
 Icon=chronometer
 Type=Service
 ServiceTypes=Plasma/Applet

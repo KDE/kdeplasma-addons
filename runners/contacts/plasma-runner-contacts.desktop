@@ -1,10 +1,6 @@
 [Desktop Entry]
 Name=Contacts
-Name[et]=Kontaktid
-Name[sv]=Kontakter
 Comment=Finds entries in your address book
-Comment[et]=Kirjete otsimine aadressiraamatust
-Comment[sv]=Hittar poster i din adressbok
 ServiceTypes=Plasma/Runner
 Type=Service
 X-KDE-Library=krunner_contacts

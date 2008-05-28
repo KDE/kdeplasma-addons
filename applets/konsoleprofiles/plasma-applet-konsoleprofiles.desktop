@@ -1,10 +1,6 @@
 [Desktop Entry]
 Name=Konsole Profiles Applet
-Name[et]=Konsooli profiilide aplett
-Name[sv]=Konsole profilminiprogram
 Comment=Konsole Profiles Launcher
-Comment[et]=Konsooli profiilide aplett
-Comment[sv]=Konsole profilstart
 Type=Service
 Icon=utilities-terminal
 X-KDE-ServiceTypes=Plasma/Applet

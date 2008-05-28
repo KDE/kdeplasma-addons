@@ -1,13 +1,5 @@
 [Desktop Entry]
 Name=File Watcher
-Name[bg]=Наблюдение на файлове
-Name[de]=Dateibetrachter
-Name[es]=Observar archivo
-Name[ja]=ファイルウォッチャー
-Name[nl]=Bestandenvolger
-Name[pt]=Vigilante de Ficheiros
-Name[pt_BR]=Vigilante de Ficheiros
-Name[sv]=Filövervakning
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 Icon=application-octet-stream

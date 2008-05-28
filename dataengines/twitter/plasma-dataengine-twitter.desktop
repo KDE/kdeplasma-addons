@@ -1,12 +1,5 @@
 [Desktop Entry]
 Name=Twitter Data Engine
-Name[bg]=Ядро за Twitter
-Name[es]=Motor de datos Twitter
-Name[ja]=Twitter データエンジン
-Name[nl]=Twitter-gegevensengine
-Name[pt]=Motor de Dados do Twitter
-Name[pt_BR]=Motor de Dados do Twitter
-Name[sv]=Datagränssnitt för Twitter
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im

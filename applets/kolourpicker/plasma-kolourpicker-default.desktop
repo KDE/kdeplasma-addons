@@ -1,19 +1,6 @@
 [Desktop Entry]
 Name=Color Picker
-Name[bg]=Цветове
-Name[de]=Farbauswähler
-Name[es]=Selector de color
-Name[nl]=Kleurenkiezer
-Name[pt]=Extractor de cores
-Name[pt_BR]=Extractor de cores
-Name[sv]=Färghämtare
 Comment=Pick a color from the desktop
-Comment[bg]=Избор на цвят от работния плот
-Comment[es]=Selecciona un color del escritorio
-Comment[nl]=Kies een kleur van de desktop
-Comment[pt]=Recolhe uma cor do ambiente de trabalho
-Comment[pt_BR]=Recolhe uma cor do ambiente de trabalho
-Comment[sv]=Hämta en färg från skrivbordet
 Icon=color-picker
 Type=Service
 ServiceTypes=Plasma/Applet

@@ -1,15 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Comic Data Engine
-Name[et]=Koomiksi andmete mootor
-Name[pt]=Motor de Dados de Banda Desenhada
-Name[pt_BR]=Motor de Dados de Banda Desenhada
-Name[sv]=Datagränssnitt för serier
 Comment=Data Engine for comic strips
-Comment[et]=Koomiksi andmemootor
-Comment[pt]=Motor de Dados para bandas desenhadas
-Comment[pt_BR]=Motor de Dados para bandas desenhadas
-Comment[sv]=Datagränssnitt för tecknade serier
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=face-smile-big

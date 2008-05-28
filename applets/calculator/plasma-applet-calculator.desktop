@@ -1,8 +1,6 @@
 [Desktop Entry]
 Name=Calculator
-Name[sv]=Miniräknare
 Comment=A simple calculator.
-Comment[sv]=En enkel miniräknare.
 Icon=accessories-calculator
 Type=Service
 ServiceTypes=Plasma/Applet

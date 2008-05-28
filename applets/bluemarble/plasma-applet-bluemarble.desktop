@@ -1,20 +1,6 @@
 [Desktop Entry]
 Name=3D Earth Model
-Name[bg]=3D модел на земята
-Name[es]=Modelo 3D de la Tierra
-Name[ja]=3D 地球モデル
-Name[nl]=3D aardemodel
-Name[pt]=Modelo da Terra em 3D
-Name[pt_BR]=Modelo da Terra em 3D
-Name[sv]=Tredimensionell modell av jorden
 Comment=Shows Earth on your desktop
-Comment[bg]=Показва земята на работния плот
-Comment[es]=Muestra la Tierra en su escritorio
-Comment[ja]=あなたのデスクトップに地球を表示します
-Comment[nl]=Toont de aarde op uw bureaublad
-Comment[pt]=Mostra a Terra no seu ecrã
-Comment[pt_BR]=Mostra a Terra no seu ecrã
-Comment[sv]=Visar jorden på skrivbordet
 Icon=world
 Type=Service
 

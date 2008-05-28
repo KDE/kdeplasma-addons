@@ -1,21 +1,6 @@
 [Desktop Entry]
 Name=Dictionary
-Name[bg]=Речник
-Name[de]=Wörterbuch
-Name[es]=Diccionario
-Name[ja]=辞書
-Name[nl]=Woordenboek
-Name[pt]=Dicionário
-Name[pt_BR]=Dicionário
-Name[sv]=Ordlista
 Comment=Look up the meaning of words
-Comment[bg]=Търсене на думи в речника
-Comment[es]=Buscar significados de las palabras
-Comment[ja]=単語の意味を検索します
-Comment[nl]=Zoek de betekenis van woorden op
-Comment[pt]=Procurar significados das palavras
-Comment[pt_BR]=Procurar significados das palavras
-Comment[sv]=Slå upp ords betydelse
 Type=Service
 Icon=accessories-dictionary
 

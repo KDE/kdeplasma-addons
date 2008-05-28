@@ -1,17 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fifteen Puzzle
-Name[es]=Rompecabezas quince
-Name[et]=Viisteist
-Name[pt]=Puzzle dos Quinze
-Name[pt_BR]=Puzzle dos Quinze
-Name[sv]=Femtonspel
 Comment=Try to put the pieces in order
-Comment[es]=Pruebe a situar las piezas en orden
-Comment[et]=Klotside järjekorda seadmise mäng
-Comment[pt]=Tente colocar as peças por ordem
-Comment[pt_BR]=Tente colocar as peças por ordem
-Comment[sv]=Försök att ordna delarna
 Icon=fifteenpuzzle
 Type=Service
 ServiceTypes=Plasma/Applet

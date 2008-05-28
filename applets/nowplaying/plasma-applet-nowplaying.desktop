@@ -1,18 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Now Playing
-Name[da]=Afspiller nu
-Name[et]=Praegu mängitakse
-Name[pt]=Agora a Tocar
-Name[pt_BR]=Agora a Tocar
-Name[sv]=Spelar nu
 
 Comment=Displays currently playing audio
-Comment[da]=Viser lyd som aktuelt bliver afspillet
-Comment[et]=Näitab parajasti esitatavat helifaili
-Comment[pt]=Mostra o áudio actualmente em reprodução
-Comment[pt_BR]=Mostra o áudio actualmente em reprodução
-Comment[sv]=Visar musik som för närvarande spelas
 
 Icon=applications-multimedia
 Type=Service

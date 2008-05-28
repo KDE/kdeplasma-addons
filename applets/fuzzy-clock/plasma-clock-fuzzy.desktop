@@ -1,15 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fuzzy Clock
-Name[pt]=Relógio Difuso
-Name[pt_BR]=Relógio Difuso
-Name[sv]=Inexakt klocka
 
 Comment=A simple fuzzy clock
-Comment[da]=Et simpelt uklart ur
-Comment[pt]=Um relógio difuso simples
-Comment[pt_BR]=Um relógio difuso simples
-Comment[sv]=En enkel inexakt klocka
 
 Icon=chronometer
 Type=Service

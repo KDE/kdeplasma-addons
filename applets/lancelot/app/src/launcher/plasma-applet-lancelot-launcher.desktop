@@ -2,21 +2,8 @@
 Icon=lancelot
 
 Name=Lancelot Launcher
-Name[bg]=Ланселот
 
 Comment=Launcher to start applications
-Comment[el]=Εκτέλεση εφαρμογών
-Comment[et]=Rakenduste käivitaja
-Comment[ga]=Tosaitheoir a thosaíonn feidhmchláir
-Comment[ja]=アプリケーションを起動するランチャー
-Comment[nb]=Starter programmer som ikke hører til KDE
-Comment[nds]=Röppt Programmen op
-Comment[pt]=Lançador para iniciar aplicações
-Comment[pt_BR]=Lançador para iniciar aplicativos
-Comment[sv]=Startprogram för att köra program
-Comment[x-test]=xxLauncher to start applicationsxx
-Comment[zh_CN]=启动应用程序的启动器
-Comment[zh_TW]=應用程式啟動器
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
