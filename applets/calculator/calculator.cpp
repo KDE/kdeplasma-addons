@@ -22,6 +22,9 @@
 #include <QtGui/QPainter>
 #include <QLabel>
 #include <QPushButton>
+#include <QAction>
+#include <QClipboard>
+#include <QApplication>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -145,6 +148,10 @@ void CalculatorApplet::init()
     qreal left, top, right, bottom;
     getContentsMargins(&left, &top, &right, &bottom);
     setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
+
+    QAction *copy = new QAction(i18n( "Copy" ), this);
+    actions.append(copy);
+    connect(copy, SIGNAL(triggered(bool)), this, SLOT(slotCopy()));
 }
 
 CalculatorApplet::~CalculatorApplet()
@@ -483,5 +490,16 @@ void CalculatorApplet::handleError(const QString &errorMessage)
 
 }
 
+QList<QAction*> CalculatorApplet::contextualActions()
+{
+    return actions;
+}
+
+void CalculatorApplet::slotCopy()
+{
+    QString txt = mOutputDisplay->text();
+    (QApplication::clipboard())->setText(txt, QClipboard::Clipboard);
+    (QApplication::clipboard())->setText(txt, QClipboard::Selection);
+}
 
 #include "calculator.moc"

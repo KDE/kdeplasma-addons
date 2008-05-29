@@ -27,6 +27,7 @@
 #include <plasma/applet.h>
 
 class QLabel;
+class QAction;
 
 namespace Plasma
 {
@@ -43,6 +44,8 @@ public:
 
     void init();
 
+    virtual QList<QAction*> contextualActions();
+
 private Q_SLOTS:
     void handleError(const QString &errorMessage);
     void slotDigitClicked();
@@ -54,6 +57,7 @@ private Q_SLOTS:
     void slotEqualsClicked();
     void slotClearClicked();
     void slotAllClearClicked();
+    void slotCopy();
 
 protected:
     virtual void keyPressEvent ( QKeyEvent * event );
@@ -82,7 +86,7 @@ private:
     Plasma::PushButton *mButtonAllClear;
     QGraphicsGridLayout *m_layout;
     QGraphicsProxyWidget *m_proxy;
-
+    QList<QAction *> actions;
 };
 
 K_EXPORT_PLASMA_APPLET(calculator, CalculatorApplet)
