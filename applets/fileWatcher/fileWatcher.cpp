@@ -52,15 +52,13 @@ void FileWatcher::init()
   textDocument->setMaximumBlockCount(6);
   textStream = 0;
 
-  configureButton = new QPushButton(i18n("&Configure File Watcher"));
-  m_proxy->setWidget( configureButton );
-  buttonBox = new QGraphicsLinearLayout(Qt::Vertical, this);
-  buttonBox->addItem(m_proxy);
-  
-  setLayout(buttonBox);
+  QString path = config().readEntry("path", QString());
 
-  connect(configureButton, SIGNAL(clicked()), this, SLOT(createConfigurationInterface()));
-  configured = false;
+  if (path.isEmpty()) {
+      setConfigurationRequired(true);
+  } else {
+      loadFile(path);
+  }
 }
 
 
@@ -83,13 +81,11 @@ void FileWatcher::loadFile(const QString& path)
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
   {
     kDebug() << "Error: could not open file:" << path;
-    configured = false;
-    configureButton->show();
+    setConfigurationRequired(true);
     return;
   }
 
-  configureButton->hide();
-  configured = true;
+  setConfigurationRequired(false);
 
   textStream = new QTextStream(file);
 
@@ -131,6 +127,8 @@ void FileWatcher::newData()
 
 void FileWatcher::newPath(const QString& path)
 {
+  KConfigGroup c = config();
+  c.writeEntry("path", path);
   loadFile(path);
 }
 
