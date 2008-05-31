@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=Aya
+Name[uk]=Айя
 Comment=Theme that matches current system colors (Optimized with Oxygen style)
+Comment[es]=Tema que coincide con los colores del sistema actual (optimizado para el estilo Oxígeno)
+Comment[fr]=Thème correspondant aux couleurs actuelles du système (optimisé pour le style Oxygen)
+Comment[gl]=Tema que emprega as cores actuais do sistema (Optimizado para o estilo Oxygen)
+Comment[lv]=Tēma, kas lieto aktīvās sistēmas krāsas (Optimizēta ar Oxygen stilu)
+Comment[pt]=Um tema que corresponde às cores actuais do sistema (Optimizado com o estilo Oxygen)
+Comment[pt_BR]=Um tema que corresponde às cores actuais do sistema (Optimizado com o estilo Oxygen)
+Comment[sv]=Tema som motsvarar nuvarande systemfärger (optimerad för stilen Oxygen)
+Comment[tr]=Geçerli sistem renkleri ile uyumlu bir tema (Oxygen biçimi için iyileştirilmiş)
+Comment[uk]=Тема, що відповідає поточним системним кольорам (Оптимізовано зі стилем Oxygen)
+Comment[zh_TW]=符合目前系統顏色的主題（依 Oxygen 樣式最佳化）
 X-KDE-PluginInfo-Author=Jamboarder
 X-KDE-PluginInfo-Email=jamboarder@yahoo.com
 X-KDE-PluginInfo-Name=Aya

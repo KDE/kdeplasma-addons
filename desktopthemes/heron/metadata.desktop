@@ -1,6 +1,19 @@
 [Desktop Entry]
 Name=Heron
+Name[es]=Garza
+Name[sv]=Häger
+Name[uk]=Герон
 Comment=Simple, smooth theme
+Comment[es]=Un tema suave y simple
+Comment[fr]=Thème simple et lisse
+Comment[gl]=Un tema simples
+Comment[lv]=Vienkārša, gluda tēma
+Comment[pt]=Tema simples e suave
+Comment[pt_BR]=Tema simples e suave
+Comment[sv]=Enkelt, jämnt tema
+Comment[tr]=Basit, düz tema
+Comment[uk]=Проста, гладенька тема
+Comment[zh_TW]=簡單，平順的主題
 
 X-KDE-PluginInfo-Author=Lukas Gianinazzi
 X-KDE-PluginInfo-Email=redict-dot-info(at)gmx.com

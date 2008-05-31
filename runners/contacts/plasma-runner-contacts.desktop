@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Contacts
+Name[el]=Επαφές
+Name[ga]=Teagmhálacha
+Name[gl]=Contactos
+Name[lv]=Kontakti
+Name[pt]=Contactos
+Name[pt_BR]=Contactos
+Name[sv]=Kontakter
+Name[uk]=Контакти
+Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
+Comment[el]=Αναζητά καταχωρήσεις στο βιβλίο διευθύνσεών σας
+Comment[ga]=Aimsigh teagmhálacha i do leabhar seoltaí
+Comment[gl]=Encontra entradas no seu caderno de enderezos
+Comment[lv]=Atrod ierakstus adrešu grāmatā
+Comment[pt]=Descobre elementos no seu livro de endereços
+Comment[pt_BR]=Descobre elementos no seu livro de endereços
+Comment[sv]=Hittar poster i din adressbok
+Comment[uk]=Знайти записи у вашій адресній книзі
+Comment[zh_TW]=找到通訊錄中的聯絡人
 ServiceTypes=Plasma/Runner
 Type=Service
 X-KDE-Library=krunner_contacts

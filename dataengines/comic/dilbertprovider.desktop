@@ -7,4 +7,13 @@ X-KDE-PlasmaComicProvider-Identifier=dilbert
 Icon=plasma_comic_dilbert
 
 Name=Dilbert
+Name[lv]=Dilberts
+Name[uk]=Дильберт
+Name[x-test]=xxDilbertxx
+Name[zh_TW]=呆伯特
 Comment=Dilbert
+Comment[lv]=Dilberts
+Comment[nl]=Dilbert-strip
+Comment[uk]=Дильберт
+Comment[x-test]=xxDilbertxx
+Comment[zh_TW]=呆伯特

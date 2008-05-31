@@ -7,4 +7,12 @@ X-KDE-PlasmaComicProvider-Identifier=userfriendly
 Icon=plasma_comic_userfriendly
 
 Name=UserFriendly
+Name[km]=ងាយស្រួល​ប្រើ
+Name[ro]=Prietenos
+Name[x-test]=xxUserFriendlyxx
 Comment=UserFriendly
+Comment[km]=ងាយស្រួល​ប្រើ
+Comment[nl]=UserFriendly-strip
+Comment[ro]=Prietenos
+Comment[tr]=Kullanıcı Dostu
+Comment[x-test]=xxUserFriendlyxx

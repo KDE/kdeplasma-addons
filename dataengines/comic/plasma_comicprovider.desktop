@@ -2,6 +2,26 @@
 Type=ServiceType
 X-KDE-ServiceType=PlasmaComic/Plugin
 Comment=Plugin for Plasma Comic Engine
+Comment[el]=Πρόσθετο της μηχανής Plasma κόμικς
+Comment[es]=Complemento para el motor de tebeos de Plasma
+Comment[fi]=Liitännäinen sarjakuvatietomoottorille
+Comment[ga]=Breiseán le haghaidh inneall stiallchartún Plasma
+Comment[gl]=Extensión para o motor de Cómics de Plasma
+Comment[it]=Plugin per il Motore fumetti per Plasma
+Comment[ja]=Plasma コミックエンジンのためのプラグイン
+Comment[km]=កម្មវិធី​ជំនួយ​សម្រាប់​ម៉ាស៊ីន​បំប្លែង Plasma
+Comment[lv]=Spraudnis Plasma komiksu dzinējam
+Comment[nds]=Moduul för den Plasma-Datenkarn
+Comment[nl]=Plugin voor Plasma-stripboek-gegevensengine
+Comment[pt]='Plugin' do Motor de Banda Desenhada do Plasma
+Comment[pt_BR]='Plugin' do Motor de Banda Desenhada do Plasma
+Comment[ro]=Modul pentru Motorul de benzi desenate Plasma
+Comment[sv]=Insticksprogram för Plasma seriegränssnitt
+Comment[tr]=Plasma Çizgi Roman Motoru için Eklenti
+Comment[uk]=Додаток для джерела жартів Плазми
+Comment[x-test]=xxPlugin for Plasma Comic Enginexx
+Comment[zh_CN]=Plasma 连环画引擎插件
+Comment[zh_TW]=Plasma 漫畫引擎外掛程式
 
 [PropertyDef::X-KDE-PlasmaComicProvider-SuffixType]
 Type=QString

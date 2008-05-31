@@ -1,8 +1,30 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Now Playing
+Name[es]=Reproduciendo ahora
+Name[ga]=Á Sheinm Anois
+Name[gl]=A reproducir
+Name[km]=កំពុង​ចាក់
+Name[lv]=Šobrīd atskaņo
+Name[pt]=Agora a Tocar
+Name[pt_BR]=Agora a Tocar
+Name[sv]=Spelar nu
+Name[tr]=Şimdi Çalınıyor
+Name[uk]=Зараз відтворюється
+Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
+Comment[es]=Muestra el audio que se está reproduciendo
+Comment[ga]=Taispeáin an ceol á sheinm anois
+Comment[gl]=Mostra o son a reproducir
+Comment[km]=បង្ហាញ​អូឌីយ៉ូ​ដែល​កំពុង​ចាក់​បច្ចុប្បន្ន
+Comment[lv]=Parāda šobrīd atskaņoto skaņdarbu
+Comment[pt]=Mostra o áudio actualmente em reprodução
+Comment[pt_BR]=Mostra o áudio actualmente em reprodução
+Comment[sv]=Visar musik som för närvarande spelas
+Comment[tr]=O anda çalınan sesi gösterir
+Comment[uk]=Показує інформацію про аудіо, що відтворюється
+Comment[zh_TW]=顯示目前播放的音樂
 
 Icon=applications-multimedia
 Type=Service

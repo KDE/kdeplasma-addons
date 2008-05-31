@@ -1,6 +1,21 @@
 [Desktop Entry]
 Name=Unit Converter
+Name[gl]=Convertedor de unidades
+Name[lv]=Mērvienību pārveidotājs
+Name[pt]=Conversor de Unidades
+Name[pt_BR]=Conversor de Unidades
+Name[sv]=Enhetskonvertering
+Name[uk]=Перетворювач одиниць
+Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
+Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες
+Comment[gl]=Converte valores entre diferentes unidades
+Comment[lv]=Pārveido vērtības starp dažādām mērvienībām
+Comment[pt]=Converte os valores para diferentes unidades
+Comment[pt_BR]=Converte os valores para diferentes unidades
+Comment[sv]=Konverterar värden till andra enheter
+Comment[uk]=Перетворення значень у різних одиницях
+Comment[zh_TW]=將數值轉換不同的單位
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 X-KDE-Library=krunner_converterrunner

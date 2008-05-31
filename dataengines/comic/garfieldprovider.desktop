@@ -7,4 +7,17 @@ X-KDE-PlasmaComicProvider-Identifier=garfield
 Icon=plasma_comic_garfield
 
 Name=Garfield
+Name[fi]=Karvinen
+Name[lv]=Garfields
+Name[sv]=Gustav
+Name[uk]=Гарфілд
+Name[x-test]=xxGarfieldxx
+Name[zh_TW]=加菲貓
 Comment=Garfield
+Comment[fi]=Karvinen
+Comment[lv]=Garfields
+Comment[nl]=Garfield-strip
+Comment[sv]=Gustav
+Comment[uk]=Гарфілд
+Comment[x-test]=xxGarfieldxx
+Comment[zh_TW]=加菲貓

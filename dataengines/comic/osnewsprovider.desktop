@@ -7,4 +7,9 @@ X-KDE-PlasmaComicProvider-Identifier=osnews
 Icon=plasma_comic_osnews
 
 Name=OSNews
+Name[ro]=ȘtiriOS
+Name[x-test]=xxOSNewsxx
 Comment=OSNews
+Comment[nl]=OSNews-strip
+Comment[ro]=ȘtiriOS
+Comment[x-test]=xxOSNewsxx

@@ -1,6 +1,37 @@
 [Desktop Entry]
 Name=Slim Glow
+Name[es]=Brillo suave
+Name[fi]=Ohut hohto
+Name[gl]=Brillo delgado
+Name[nds]=Glöhnig
+Name[pa]=ਸਲਿਮ ਗਲੋ
+Name[pt]=Brilho Leve
+Name[pt_BR]=Brilho Leve
+Name[ro]=Strălucire delicată
+Name[sv]=Elegant glöd
+Name[th]=แวววาวและสวยเพรียว
+Name[uk]=Тьмяне сяйво
+Name[x-test]=xxSlim Glowxx
 Comment=Slick theme for dark wallpapers
+Comment[da]=Fikst tema til mørke baggrundsbilleder
+Comment[el]=Λείο θέμα για σκοτεινές ταπετσαρίες της επιφάνειας εργασίας
+Comment[es]=Tema apropiado para fondos de escritorio oscuros
+Comment[fi]=Teema tummille taustakuville
+Comment[fr]=Thème approprié pour les fonds d'écran sombres
+Comment[gl]=Tema bon para fondos de escritorio escuros
+Comment[lv]=Spīdīga tēma tumšām ekrāntapetēm
+Comment[nds]=Eenfach Muster för düüster Achtergrünn
+Comment[nl]=Elegant thema voor donkere achtergrondafbeeldingen
+Comment[pa]=ਗੂੜੇ ਵਾਲਪੇਪਰਾਂ ਲਈ ਹਲਕਾ ਥੀਮ
+Comment[pt]=Um tema bonito para papéis de parede escuros
+Comment[pt_BR]=Um tema bonito para papéis de parede escuros
+Comment[ro]=Temă netedă pentru tapete întunecate
+Comment[sv]=Elegant tema för mörka skrivbordsunderlägg
+Comment[th]=ชุดตกแต่ง Slick สำหรับใช้กับพื้นหลังมืด ๆ
+Comment[tr]=Koyu duvar kağıtları için Slick teması
+Comment[uk]=Приваблива тема для темного тла стільниці
+Comment[x-test]=xxSlick theme for dark wallpapersxx
+Comment[zh_TW]=暗桌布的平凡主題
 
 X-KDE-PluginInfo-Author=Ivan Čukić
 X-KDE-PluginInfo-Email=ivan.cukic+kde(at)gmail.com

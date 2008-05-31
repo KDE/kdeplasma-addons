@@ -1,7 +1,27 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Show Dashboard
+Name[es]=Mostrar cuadro de mandos
+Name[ga]=Taispeáin an Painéal
+Name[gl]=Mostrar Dashboard
+Name[km]=បង្ហាញផ្ទាំង​គ្រប់គ្រង
+Name[pt]=Mostrar o Painel
+Name[pt_BR]=Mostrar o Painel
+Name[sv]=Visa instrumentpanel
+Name[tr]=Kontrol Panelini Göster
+Name[uk]=Показати панель приладів
+Name[zh_TW]=顯示儀表板
 Comment=Lets you show the dashboard
+Comment[es]=Le permite mostrar el cuadro de mandos
+Comment[ga]=Ligeann sé seo duit an Painéal a thaispeáint
+Comment[gl]=Permítelle mostrar o Dashboard
+Comment[km]=អនុញ្ញាត​ឲ្យ​អ្នក​បង្ហាញ​ផ្ទាំង​គ្រប់គ្រង
+Comment[pt]=Permite-lhe mostrar o painel
+Comment[pt_BR]=Permite-lhe mostrar o painel
+Comment[sv]=Låter dig visa instrumentpanelen
+Comment[tr]=Kontrol panelini göstermenizi sağlar
+Comment[uk]=Дає змогу побачити панель приладів
+Comment[zh_TW]=顯示出您的儀表板
 Icon=user-dashboard
 Type=Service
 ServiceTypes=Plasma/Applet

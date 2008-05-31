@@ -1,6 +1,23 @@
 [Desktop Entry]
 Name=Silicon
+Name[es]=Silicio
+Name[fr]=Silicone
+Name[gl]=Silicio
+Name[pt]=Silicone
+Name[pt_BR]=Silicone
+Name[sv]=Kisel
+Name[uk]=Силікон
 Comment=Transparent slim theme
+Comment[es]=Tema delgado transparente
+Comment[fr]=Thème transparent et fin
+Comment[gl]=Un tema transparente
+Comment[lv]=Caurspīdīga slaida tēma
+Comment[pt]=Tema leve e transparente
+Comment[pt_BR]=Tema leve e transparente
+Comment[sv]=Genomskinligt smalt tema
+Comment[tr]=Şeffaf ince tema
+Comment[uk]=Прозора струнка тема
+Comment[zh_TW]=透明的主題
 
 X-KDE-PluginInfo-Author=Lukas Gianinazzi
 X-KDE-PluginInfo-Email=redict-dot-info(at)gmx.com
