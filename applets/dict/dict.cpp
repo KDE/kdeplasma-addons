@@ -76,8 +76,8 @@ void Dict::init()
 //  Icon in upper-left corner
     QIcon icon = KIcon("accessories-dictionary");
     //m_graphicsIcon = new QGraphicsPixmapItem(icon.pixmap(32,32), this);
-	m_icon = new Plasma::Icon(this);
-	m_icon->setIcon(icon);
+    m_icon = new Plasma::Icon(this);
+    m_icon->setIcon(icon);
 
 //  Position lineedits
     //const int wordEditOffset = 40;
@@ -92,9 +92,9 @@ void Dict::init()
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(define()));
 
-	m_horLayout = new QGraphicsLinearLayout(Qt::Horizontal);
-	m_horLayout->addItem(m_icon);
-	m_horLayout->addItem(m_wordProxyWidget);
+    m_horLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    m_horLayout->addItem(m_icon);
+    m_horLayout->addItem(m_wordProxyWidget);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_horLayout);
     m_layout->addItem(m_defBrowserProxy);

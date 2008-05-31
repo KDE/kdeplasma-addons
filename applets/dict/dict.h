@@ -45,7 +45,7 @@ class Dict : public Plasma::Applet
         Dict(QObject *parent, const QVariantList &args);
         ~Dict();
 
-	void init();
+    void init();
         void setPath(const QString&);
         void constraintsEvent(Plasma::Constraints);
 
@@ -72,7 +72,7 @@ class Dict : public Plasma::Applet
         int m_autoDefineTimeout;
         //QGraphicsPixmapItem *m_graphicsIcon; 
         QGraphicsLinearLayout *m_layout;
-		QGraphicsLinearLayout *m_horLayout;
+        QGraphicsLinearLayout *m_horLayout;
         KLineEdit *m_wordEdit;
         //Plasma::Flash *m_flash;
         QStringList m_defList;
@@ -80,8 +80,8 @@ class Dict : public Plasma::Applet
         Ui::config ui;
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
-	QGraphicsProxyWidget *m_wordProxyWidget;
-		Plasma::Icon *m_icon;
+        QGraphicsProxyWidget *m_wordProxyWidget;
+        Plasma::Icon *m_icon;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
