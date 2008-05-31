@@ -312,6 +312,7 @@ void Twitter::showTweets()
         c->viewport()->setAutoFillBackground(false);
         c->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
         c->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        c->setReadOnly(true);
 
         Plasma::Icon *icon = new Plasma::Icon( this );
         QSizeF iconSize = icon->sizeFromIconSize(30);
