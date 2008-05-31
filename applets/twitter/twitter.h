@@ -32,6 +32,7 @@
 
 class KLineEdit;
 class KTextEdit;
+class KTextBrowser;
 class QSpinBox;
 class QCheckBox;
 class QGraphicsLinearLayout;
@@ -53,7 +54,7 @@ namespace Plasma
 struct Tweet {
     QGraphicsLinearLayout *layout;
     Plasma::Icon *icon;
-    KTextEdit *content;
+    KTextBrowser *content;
     QGraphicsProxyWidget *contentProxy;
     Plasma::Icon *favIcon;
 };

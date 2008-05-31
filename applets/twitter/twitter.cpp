@@ -41,6 +41,7 @@
 #include <KConfigDialog>
 #include <KLineEdit>
 #include <KTextEdit>
+#include <KTextBrowser>
 #include <KStringHandler>
 #include <KWallet/Wallet>
 #include <KMessageBox>
@@ -302,7 +303,7 @@ void Twitter::showTweets()
         tweetLayout->setSpacing( 5 );
         m_layout->insertItem( m_layout->count()-1, tweetLayout );
 
-        KTextEdit *c = new KTextEdit();
+        KTextBrowser *c = new KTextBrowser();
         QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget( this );
         proxy->setWidget( c );
         c->setCursor( Qt::ArrowCursor );
@@ -369,8 +370,12 @@ void Twitter::showTweets()
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
         html += i18n( "<tr><td align='left' width='auto'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>", user, m_colorScheme->foreground(KColorScheme::InactiveText).color().name(),
                 timeDescription( tweetData.value( "Date" ).toDateTime() ), sourceString);
+        QString status = tweetData.value( "Status" ).toString();
+
+        status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
+
         html += QString( "<tr><td colspan='2'><font color='%1'>%2</font></td></tr>" )
-                .arg( m_colorScheme->foreground().color().name()).arg( tweetData.value( "Status" ).toString() );
+                .arg( m_colorScheme->foreground().color().name()).arg( status );
         html += "</table>";
         t.content->setHtml( html );
         t.content->document()->setTextWidth(t.content->width());
