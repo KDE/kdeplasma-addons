@@ -28,6 +28,7 @@
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 #include <plasma/widgets/flash.h>
+#include <plasma/widgets/icon.h>
 #include "ui_config.h"
 
 class QTimer;
@@ -69,8 +70,9 @@ class Dict : public Plasma::Applet
         QString m_word;
         QTimer* m_timer;
         int m_autoDefineTimeout;
-        QGraphicsPixmapItem *m_graphicsIcon; 
-	QGraphicsLinearLayout *m_layout;
+        //QGraphicsPixmapItem *m_graphicsIcon; 
+        QGraphicsLinearLayout *m_layout;
+		QGraphicsLinearLayout *m_horLayout;
         KLineEdit *m_wordEdit;
         //Plasma::Flash *m_flash;
         QStringList m_defList;
@@ -79,6 +81,7 @@ class Dict : public Plasma::Applet
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
 	QGraphicsProxyWidget *m_wordProxyWidget;
+		Plasma::Icon *m_icon;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)
