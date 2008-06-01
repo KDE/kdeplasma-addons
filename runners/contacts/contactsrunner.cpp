@@ -89,7 +89,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 	    else
 		match.setIcon(m_icon);
 
-	    match.setText(i18n("Mail to %1", a.realName()));
+	    match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
 	    match.setData(a.preferredEmail());
             matches.append(match);
 	}
