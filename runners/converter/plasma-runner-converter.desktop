@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Unit Converter
 Name[gl]=Convertedor de unidades
+Name[ja]=単位変換ツール
 Name[lv]=Mērvienību pārveidotājs
 Name[pt]=Conversor de Unidades
 Name[pt_BR]=Conversor de Unidades
@@ -10,6 +11,7 @@ Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες
 Comment[gl]=Converte valores entre diferentes unidades
+Comment[ja]=数値を他の単位に変換します
 Comment[lv]=Pārveido vērtības starp dažādām mērvienībām
 Comment[pt]=Converte os valores para diferentes unidades
 Comment[pt_BR]=Converte os valores para diferentes unidades
