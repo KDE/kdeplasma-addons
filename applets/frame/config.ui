@@ -16,7 +16,7 @@
    </size>
   </property>
   <property name="styleSheet" >
-   <string/>
+   <string notr="true" />
   </property>
   <layout class="QVBoxLayout" >
    <item>
@@ -56,9 +56,17 @@
          </size>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>440</width>
+           <height>200</height>
+          </rect>
+         </property>
          <layout class="QGridLayout" >
           <item row="0" column="0" >
            <layout class="QHBoxLayout" >
@@ -70,7 +78,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KUrlComboRequester" name="picRequester" >
+             <widget class="KUrlComboRequester" native="1" name="picRequester" >
               <property name="sizePolicy" >
                <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
                 <horstretch>0</horstretch>
@@ -80,7 +88,7 @@
               <property name="acceptDrops" >
                <bool>true</bool>
               </property>
-              <property name="filter" >
+              <property name="filter" stdset="0" >
                <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
               </property>
              </widget>
@@ -94,7 +102,7 @@
               <property name="orientation" >
                <enum>Qt::Vertical</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>421</width>
                 <height>20</height>
@@ -112,7 +120,7 @@
                 <property name="sizeType" >
                  <enum>QSizePolicy::MinimumExpanding</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>91</height>
@@ -135,7 +143,7 @@
                 <property name="sizeType" >
                  <enum>QSizePolicy::MinimumExpanding</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>101</height>
@@ -150,7 +158,7 @@
               <property name="orientation" >
                <enum>Qt::Vertical</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>438</width>
                 <height>16</height>
@@ -163,54 +171,77 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_3" >
-         <layout class="QVBoxLayout" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>440</width>
+           <height>200</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout" >
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout" name="horizontalLayout" >
             <item>
-             <widget class="KListWidget" name="slideShowDirList" />
-            </item>
-            <item>
-             <layout class="QVBoxLayout" >
+             <layout class="QHBoxLayout" >
               <item>
-               <widget class="KPushButton" name="addDirButton" >
-                <property name="text" >
-                 <string>&amp;Add Folder...</string>
-                </property>
-               </widget>
+               <widget class="KListWidget" name="slideShowDirList" />
               </item>
               <item>
-               <widget class="KPushButton" name="removeDirButton" >
-                <property name="enabled" >
-                 <bool>false</bool>
-                </property>
-                <property name="text" >
-                 <string>&amp;Remove Folder</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer>
-                <property name="orientation" >
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" >
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
+               <layout class="QVBoxLayout" >
+                <item>
+                 <widget class="KPushButton" name="addDirButton" >
+                  <property name="text" >
+                   <string>&amp;Add Folder...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="KPushButton" name="removeDirButton" >
+                  <property name="enabled" >
+                   <bool>false</bool>
+                  </property>
+                  <property name="text" >
+                   <string>&amp;Remove Folder</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer>
+                  <property name="orientation" >
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0" >
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="recursiveCheckBox" >
-            <property name="text" >
-             <string>&amp;Include Subfolders</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_2" >
+            <item>
+             <widget class="QCheckBox" name="recursiveCheckBox" >
+              <property name="text" >
+               <string>&amp;Include Subfolders</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="randomCheckBox" >
+              <property name="text" >
+               <string>Randomize</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" >
@@ -253,7 +284,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -264,8 +295,20 @@
            </layout>
           </item>
          </layout>
+         <zorder>horizontalLayoutWidget</zorder>
+         <zorder>recursiveCheckBox</zorder>
+         <zorder>randomCheckBox</zorder>
+         <zorder>randomCheckBox</zorder>
         </widget>
         <widget class="QWidget" name="page_2" >
+         <property name="geometry" >
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
          <widget class="QComboBox" name="potdComboBox" >
           <property name="geometry" >
            <rect>
@@ -365,14 +408,14 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="color" >
+            <property name="color" stdset="0" >
              <color>
               <red>70</red>
               <green>90</green>
               <blue>130</blue>
              </color>
             </property>
-            <property name="defaultColor" >
+            <property name="defaultColor" stdset="0" >
              <color>
               <red>70</red>
               <green>90</green>
@@ -386,7 +429,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -399,6 +442,7 @@
        </layout>
       </item>
      </layout>
+     <zorder>randomCheckBox</zorder>
     </widget>
    </item>
    <item>
@@ -406,7 +450,7 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>0</height>
@@ -434,7 +478,7 @@
   </customwidget>
   <customwidget>
    <class>KUrlComboRequester</class>
-   <extends>KUrlRequester</extends>
+   <extends>QWidget</extends>
    <header>kurlrequester.h</header>
    <container>1</container>
   </customwidget>

@@ -32,6 +32,9 @@ class ConfigDialog : public QWidget
 	/// Round corners for the frame
 	void setRoundCorners(bool round);
         bool roundCorners() const;
+	/// Randomness for the slideshow
+	void setRandom(bool random);
+        bool random() const;
 	/// Set a shadow for the frame
 	void setShadow(bool round);
         bool shadow() const;

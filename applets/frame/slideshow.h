@@ -23,6 +23,8 @@
 #include <QString>
 #include <QStringList>
 #include <QImage>
+#include <math.h>
+#include <iostream>
 
 class KUrl;
 
@@ -34,12 +36,14 @@ class SlideShow
 		
 		void setDirs(const QStringList &slideShowPaths, bool recursive = false);
 		void setImage(const QString &imagePath);
+		void setRandom(bool);
 		QImage getImage();
 		
 	private:
 		QStringList m_pictures;
 		QStringList m_filters;
 		int m_slideNumber;
+		bool useRandom;
 		
 		void addImage(const QString &imagePath);
 		void addDir(const QString &path);

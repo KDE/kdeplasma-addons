@@ -97,6 +97,7 @@ void Frame::init()
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
     m_slideShow = cg.readEntry("slideshow", false);
+    m_random = cg.readEntry("random", false);
     m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
@@ -206,6 +207,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     else
 	m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
 
+    m_configDialog->ui.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
     m_configDialog->ui.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
 
     m_configDialog->ui.potdComboBox->setCurrentIndex( m_configDialog->ui.potdComboBox->findData(m_potdProvider) );
@@ -246,6 +248,8 @@ void Frame::configAccepted()
 	m_potd = false;
     }
 
+    m_random = m_configDialog->random();
+    cg.writeEntry("random", m_random);
     m_currentUrl = m_configDialog->currentUrl();
     cg.writeEntry("url", m_currentUrl);
     cg.writeEntry("slideshow", m_slideShow);
@@ -276,6 +280,7 @@ void Frame::initSlideShow()
 {
     if (m_slideShow) {
 	    m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
+            m_mySlideShow->setRandom(m_random);
 	    m_slideShowTimer->start();
     } else if (m_potd) {
 	Plasma::DataEngine *engine = dataEngine( "potd" );

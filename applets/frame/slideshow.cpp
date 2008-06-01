@@ -22,16 +22,22 @@
 
 #include "picture.h"
 #include "slideshow.h"
-
+#include <stdlib.h>
 
 SlideShow::SlideShow()
 {
 	m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
 	m_slideNumber = 0;
+	useRandom = false;
 }
 
 SlideShow::~SlideShow()
 {
+}
+
+void SlideShow::setRandom(bool tmp)
+{
+	useRandom = tmp;
 }
 
 void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
@@ -89,7 +95,17 @@ QImage SlideShow::getImage()
 KUrl SlideShow::getUrl() 
 {
 	if (!m_pictures.isEmpty()) {
-		return KUrl(m_pictures.at(m_slideNumber++ % m_pictures.count()));
+
+		int index = -1;
+
+		if(useRandom) {
+			index = floor((double(rand()) / double(RAND_MAX)) * double(m_pictures.count()));
+			kDebug() << "Random was selected and the index was: " << index << " out of " << m_pictures.count() << " images" << endl;
+		} else {
+			index = m_slideNumber++ % m_pictures.count();
+                }
+
+		return KUrl(m_pictures.at(index));
 	} else {
 		return KUrl("Default");
 	}

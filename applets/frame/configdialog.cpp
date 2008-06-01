@@ -63,6 +63,16 @@ bool ConfigDialog::roundCorners() const
     return ui.roundCheckBox->isChecked();
 }
 
+void ConfigDialog::setRandom(bool random)
+{
+    ui.randomCheckBox->setChecked(random);
+}
+
+bool ConfigDialog::random() const
+{
+    return ui.randomCheckBox->isChecked();
+}
+
 void ConfigDialog::setShadow(bool shadow)
 {
     ui.shadowCheckBox->setChecked(shadow);

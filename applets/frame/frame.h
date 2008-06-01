@@ -99,6 +99,7 @@ class Frame : public Plasma::Applet
         int m_swOutline;
         /// Slideshow
         bool m_slideShow;
+        bool m_random;
         bool m_recursiveSlideShow;
         SlideShow* m_mySlideShow;
 };
