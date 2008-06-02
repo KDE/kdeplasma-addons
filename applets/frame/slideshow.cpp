@@ -19,6 +19,7 @@
 
 #include <QDir>
 #include <KUrl>
+#include <KRandomSequence>
 
 #include "picture.h"
 #include "slideshow.h"
@@ -26,9 +27,10 @@
 
 SlideShow::SlideShow()
 {
-	m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
-	m_slideNumber = 0;
-	useRandom = false;
+    m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
+    m_slideNumber = 0;
+    useRandom = false;
+    randomInt = 0;
 }
 
 SlideShow::~SlideShow()
@@ -54,25 +56,31 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 
 void SlideShow::setImage(const QString &imagePath) 
 {
-	m_pictures.clear();
-	addImage(imagePath);
+    m_pictures.clear();
+    addImage(imagePath);
 }
 
 void SlideShow::addImage(const QString &imagePath)
 {
-	if (!m_pictures.contains(imagePath)) {
-		m_pictures.append(imagePath);
-	}
+    if (!m_pictures.contains(imagePath)) {
+	    m_pictures.append(imagePath);
+    }
 }
 
 void SlideShow::addDir(const QString &path)
 {
-	QDir dir(path);
+    QDir dir(path);
 
-	dir.setNameFilters(m_filters);
-	foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
-		addImage(path + "/" + imageFile);
-	}
+    dir.setNameFilters(m_filters);
+    foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
+	    addImage(path + "/" + imageFile);
+    }
+    KRandomSequence randomSequence;
+    indexList.clear();
+    //get the number of sounds then shuffle it: each number will be taken once then the sequence will come back
+    for (uint j = 0; j < m_pictures.count(); j++) 
+	indexList.append(j);
+    randomSequence.randomize(indexList);
 }
 
 void SlideShow::addRecursiveDir(const QString &path)
@@ -87,26 +95,26 @@ void SlideShow::addRecursiveDir(const QString &path)
 
 QImage SlideShow::getImage() 
 {
-	KUrl url = getUrl();
-	Picture myPicture;
-	return myPicture.setPicture(url);
+    KUrl url = getUrl();
+    Picture myPicture;
+    return myPicture.setPicture(url);
 }
 
 KUrl SlideShow::getUrl() 
 {
-	if (!m_pictures.isEmpty()) {
+    if (!m_pictures.isEmpty()) {
 
-		int index = -1;
+	    int index = -1;
+	    if(useRandom) {
+		    randomInt++;
+		    index = indexList[randomInt%m_pictures.count()];
+		    kDebug() << "Random was selected and the index was: " << index << " out of " << m_pictures.count() << " images" << endl;
+	    } else {
+		    index = m_slideNumber++ % m_pictures.count();
+	    }
 
-		if(useRandom) {
-			index = floor((double(rand()) / double(RAND_MAX)) * double(m_pictures.count()));
-			kDebug() << "Random was selected and the index was: " << index << " out of " << m_pictures.count() << " images" << endl;
-		} else {
-			index = m_slideNumber++ % m_pictures.count();
-                }
-
-		return KUrl(m_pictures.at(index));
-	} else {
-		return KUrl("Default");
-	}
+	    return KUrl(m_pictures.at(index));
+    } else {
+	    return KUrl("Default");
+    }
 }

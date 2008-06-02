@@ -49,6 +49,8 @@ class SlideShow
 		void addDir(const QString &path);
 		void addRecursiveDir(const QString &path);
 		KUrl getUrl();
+		QList<int> indexList;
+		int randomInt;
 
 };
 

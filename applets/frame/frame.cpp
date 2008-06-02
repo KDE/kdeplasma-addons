@@ -146,8 +146,8 @@ QSizeF Frame::contentSizeHint() const {
 void Frame::updatePicture()
 {
     m_picture = m_mySlideShow->getImage();
-	resize(contentSizeHint());
-	m_pixmapCache = QPixmap();
+    resize(contentSizeHint());
+    m_pixmapCache = QPixmap();
     update();
 }
 
