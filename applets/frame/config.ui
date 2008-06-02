@@ -56,15 +56,15 @@
          </size>
         </property>
         <property name="currentIndex" >
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page" >
          <property name="geometry" >
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>440</width>
-           <height>200</height>
+           <width>454</width>
+           <height>230</height>
           </rect>
          </property>
          <layout class="QGridLayout" >
@@ -78,7 +78,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KUrlComboRequester" native="1" name="picRequester" >
+             <widget class="KUrlComboRequester" name="picRequester" >
               <property name="sizePolicy" >
                <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
                 <horstretch>0</horstretch>
@@ -88,7 +88,7 @@
               <property name="acceptDrops" >
                <bool>true</bool>
               </property>
-              <property name="filter" stdset="0" >
+              <property name="filter" >
                <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
               </property>
              </widget>
@@ -175,8 +175,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>440</width>
-           <height>200</height>
+           <width>454</width>
+           <height>230</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout" >
@@ -295,18 +295,14 @@
            </layout>
           </item>
          </layout>
-         <zorder>horizontalLayoutWidget</zorder>
-         <zorder>recursiveCheckBox</zorder>
-         <zorder>randomCheckBox</zorder>
-         <zorder>randomCheckBox</zorder>
         </widget>
         <widget class="QWidget" name="page_2" >
          <property name="geometry" >
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>100</width>
-           <height>30</height>
+           <width>454</width>
+           <height>230</height>
           </rect>
          </property>
          <widget class="QComboBox" name="potdComboBox" >
@@ -408,14 +404,14 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="color" stdset="0" >
+            <property name="color" >
              <color>
               <red>70</red>
               <green>90</green>
               <blue>130</blue>
              </color>
             </property>
-            <property name="defaultColor" stdset="0" >
+            <property name="defaultColor" >
              <color>
               <red>70</red>
               <green>90</green>
@@ -442,7 +438,6 @@
        </layout>
       </item>
      </layout>
-     <zorder>randomCheckBox</zorder>
     </widget>
    </item>
    <item>
@@ -478,7 +473,7 @@
   </customwidget>
   <customwidget>
    <class>KUrlComboRequester</class>
-   <extends>QWidget</extends>
+   <extends>KUrlRequester</extends>
    <header>kurlrequester.h</header>
    <container>1</container>
   </customwidget>
