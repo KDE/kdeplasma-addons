@@ -58,6 +58,7 @@ private Q_SLOTS:
     void slotClearClicked();
     void slotAllClearClicked();
     void slotCopy();
+    void slotPaste();
 
 protected:
     virtual void keyPressEvent ( QKeyEvent * event );

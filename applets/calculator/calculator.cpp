@@ -152,6 +152,10 @@ void CalculatorApplet::init()
     QAction *copy = new QAction(i18n( "Copy" ), this);
     actions.append(copy);
     connect(copy, SIGNAL(triggered(bool)), this, SLOT(slotCopy()));
+
+    QAction *paste = new QAction(i18n( "Paste" ), this);
+    actions.append(paste);
+    connect(paste, SIGNAL(triggered(bool)), this, SLOT(slotPaste()));
 }
 
 CalculatorApplet::~CalculatorApplet()
@@ -500,6 +504,18 @@ void CalculatorApplet::slotCopy()
     QString txt = mOutputDisplay->text();
     (QApplication::clipboard())->setText(txt, QClipboard::Clipboard);
     (QApplication::clipboard())->setText(txt, QClipboard::Selection);
+}
+
+void CalculatorApplet::slotPaste()
+{
+    QString tmp_str = (QApplication::clipboard())->text(QClipboard::Clipboard );
+    if ( tmp_str.isEmpty() )
+        tmp_str = (QApplication::clipboard())->text(QClipboard::Selection);
+    bool ok;
+    long value = tmp_str.toLong( &ok );
+    if ( ok )
+        mOutputDisplay->setText( QString::number( value ) );
+
 }
 
 #include "calculator.moc"
