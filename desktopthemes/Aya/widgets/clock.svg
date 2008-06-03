@@ -34,6 +34,32 @@
   </metadata>
   <defs
      id="defs5">
+    <linearGradient
+       id="linearGradient3353">
+      <stop
+         style="stop-color:#474747;stop-opacity:1;"
+         offset="0"
+         id="stop3355" />
+      <stop
+         id="stop3361"
+         offset="0.5"
+         style="stop-color:#929292;stop-opacity:1;" />
+      <stop
+         style="stop-color:#474747;stop-opacity:1;"
+         offset="1"
+         id="stop3357" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3349">
+      <stop
+         style="stop-color:#4b4b4b;stop-opacity:1;"
+         offset="0"
+         id="stop3351" />
+      <stop
+         style="stop-color:#8c8c8c;stop-opacity:1;"
+         offset="1"
+         id="stop3353" />
+    </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 150 : 1"
@@ -428,9 +454,27 @@
        fx="40.772263"
        fy="437.87555"
        r="74.609375" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3353"
+       id="linearGradient3359"
+       x1="-38.825516"
+       y1="198.35371"
+       x2="-33.231562"
+       y2="198.35371"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3353"
+       id="linearGradient3370"
+       x1="-65.001068"
+       y1="183.08627"
+       x2="-57.462624"
+       y2="183.08627"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
-     inkscape:window-height="707"
+     inkscape:window-height="768"
      inkscape:window-width="948"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -446,29 +490,15 @@
      showgrid="false"
      width="300px"
      height="300px"
-     inkscape:zoom="1.4953277"
-     inkscape:cx="235.06327"
-     inkscape:cy="98.611262"
-     inkscape:window-x="322"
-     inkscape:window-y="7"
+     inkscape:zoom="2.2719999"
+     inkscape:cx="86.190566"
+     inkscape:cy="135"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:current-layer="svg2" />
   <path
-     style="opacity:1;fill:#606060;fill-opacity:1;stroke:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.08779998;stroke-opacity:1"
-     d="M -68.170632,219.49085 L -68.170632,161.60043 C -69.049062,161.33401 -69.622962,159.70954 -69.623222,159.17271 C -69.623222,158.63593 -69.049342,157.17603 -68.170632,156.90961 L -68.170632,154.49085 L -64.920012,154.49085 L -64.920012,156.90961 C -64.018392,157.17366 -63.398212,158.62755 -63.398212,159.17271 C -63.398212,159.71788 -64.018392,161.33637 -64.920012,161.60043 L -64.920012,219.49085 L -68.170632,219.49085 z "
-     id="HourHand"
-     inkscape:label="#rect3745"
-     sodipodi:nodetypes="ccsccccsccc" />
-  <path
-     id="MinuteHand"
-     d="M -79.838226,251.43158 L -80.028236,160.73904 C -80.740808,160.43179 -81.207035,159.90367 -81.208505,159.2831 C -81.209815,158.66255 -80.745896,158.09406 -80.034426,157.78531 L -80.040296,154.98915 L -77.405876,154.98641 L -77.400027,157.7826 C -76.668609,158.08709 -76.164869,158.64767 -76.16351,159.27786 C -76.1622,159.90811 -76.663707,160.43032 -77.393839,160.73633 L -77.203814,251.42884 L -79.838226,251.43158 z "
-     style="opacity:1;fill:#606060;fill-opacity:1;stroke:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.08779998;stroke-opacity:1"
-     sodipodi:nodetypes="ccsccccsccc"
-     inkscape:transform-center-x="-0.0067856387"
-     inkscape:label="#path3750"
-     inkscape:transform-center-y="47.163723" />
-  <path
      style="fill:#cc5457;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M -85.642611,154.51431 L -87.618871,154.52109 L -86.422731,250.2269 L -85.642611,154.51431 z "
+     d="M -82.561625,130.09673 L -84.537885,130.10427 L -83.341745,236.58253 L -82.561625,130.09673 z"
      id="SecondHand"
      sodipodi:nodetypes="cccc"
      inkscape:label="#path3752" />
@@ -1315,4 +1345,42 @@
          id="path3914" />
     </g>
   </g>
+  <rect
+     style="opacity:1;fill:url(#linearGradient3370);fill-opacity:1.0;stroke:#4b4b4b;stroke-width:0.99999994000000003;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="HourHand"
+     width="6.538445"
+     height="76.142906"
+     x="-64.501068"
+     y="145.01482"
+     inkscape:label="#rect2577" />
+  <rect
+     style="opacity:1;fill:url(#linearGradient3359);fill-opacity:1;stroke:#4b4b4b;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="MinuteHand"
+     width="4.5939541"
+     height="109.14968"
+     x="-38.325516"
+     y="143.77887"
+     inkscape:label="#rect3358" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:0.11764706;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="MinuteHandShadow"
+     width="4.5939541"
+     height="109.14967"
+     x="-27.385008"
+     y="147.26358"
+     inkscape:label="#rect3358" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:0.11764706;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="HourHandShadow"
+     width="6.538445"
+     height="76.142906"
+     x="-54.765705"
+     y="151.97374"
+     inkscape:label="#rect2577" />
+  <path
+     style="fill:#000000;fill-opacity:0.11764706;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M -76.916802,136.8268 L -78.893062,136.83434 L -77.696922,243.3126 L -76.916802,136.8268 z"
+     id="SecondHandShadow"
+     sodipodi:nodetypes="cccc"
+     inkscape:label="#path3752" />
 </svg>
