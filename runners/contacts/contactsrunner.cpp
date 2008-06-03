@@ -25,8 +25,6 @@
 #include <KIcon>
 #include <KToolInvocation>
 /*#include <KMimeType>
-#include <KService>
-#include <KStandardDirs>
 #include <KUrl>
 
 */

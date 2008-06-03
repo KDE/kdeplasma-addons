@@ -19,7 +19,6 @@
 #ifndef CONVERTRUNNER_H
 #define CONVERTRUNNER_H
 
-#include <KGenericFactory>
 #include <plasma/abstractrunner.h>
 #include "unit.h"
 
