@@ -39,9 +39,11 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowNextButton( false )
 {
     setHasConfigurationInterface( true );
-
     resize( 480, 160 );
+}
 
+void ComicApplet::init()
+{
     loadConfig();
 
     updateComic();

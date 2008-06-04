@@ -40,6 +40,7 @@ class ComicApplet : public Plasma::Applet
 
         QSizeF contentSizeHint() const;
         void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
+	void init();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
