@@ -32,7 +32,7 @@ ShowDesktop::ShowDesktop(QObject *parent, const QVariantList &args)
       , m_down(false), m_goingDown(false)
 #endif
 {
-    //setAspectRatioMode(Plasma::Square); // CPU 100% ??
+    setAspectRatioMode(Plasma::ConstrainedSquare);
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize * 2, iconSize * 2);
 }

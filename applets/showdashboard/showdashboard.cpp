@@ -48,6 +48,8 @@ void ShowDashboard::init()
     Plasma::Icon *icon = new Plasma::Icon(KIcon("plasma"), QString(), this);
     layout->addItem(icon);
 
+    setAspectRatioMode(Plasma::ConstrainedSquare);
+
     connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
 }
 
