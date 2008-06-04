@@ -23,15 +23,8 @@
 #define SHOWDASHBOARD_H
 
 
-//KDE
-#include <KIcon>
-
-// Plasma
 #include <Plasma/Applet>
-#include <plasma/widgets/icon.h>
-//Qt
-#include <QtGui/QGraphicsSceneEvent>
-#include <QtGui/QPainter>
+
 
 class ShowDashboard : public Plasma::Applet
 {
@@ -40,11 +33,7 @@ class ShowDashboard : public Plasma::Applet
         ShowDashboard(QObject *parent, const QVariantList &args);
         ~ShowDashboard() {};
         void init();
-       Qt::Orientations expandingDirections() const;
-    protected:
-        void constraintsEvent(Plasma::Constraints constraints);
-    private:
-       Plasma::Icon * m_icon;
+
     protected slots:
         void toggleShowDashboard(bool);
 };

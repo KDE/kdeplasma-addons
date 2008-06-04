@@ -28,7 +28,7 @@ Comment[sv]=Låter dig visa instrumentpanelen
 Comment[tr]=Kontrol panelini göstermenizi sağlar
 Comment[uk]=Дає змогу побачити панель приладів
 Comment[zh_TW]=顯示出您的儀表板
-Icon=user-dashboard
+Icon=plasma
 Type=Service
 ServiceTypes=Plasma/Applet
 

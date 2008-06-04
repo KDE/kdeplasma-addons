@@ -23,50 +23,32 @@
 
 // Qt
 #include <QDBusInterface>
+#include <QGraphicsLinearLayout>
 
 // KDE
+#include <KIcon>
+#include <plasma/widgets/icon.h>
 #include <KIconLoader>
 
 
 ShowDashboard::ShowDashboard(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
-
+    setBackgroundHints(NoBackground);
+    //setAspectRatioMode(Plasma::Square);
+    resize(80, 80);
 }
 
 void ShowDashboard::init()
 {
-    setBackgroundHints(NoBackground);
-    m_icon = new Plasma::Icon(KIcon("user-dashboard"),QString(),this);
-    connect(m_icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
-}
+    Plasma::Icon *icon = new Plasma::Icon(KIcon("plasma"), QString(), this);
+    layout->addItem(icon);
 
-void ShowDashboard::constraintsEvent(Plasma::Constraints constraints)
-{
-    setBackgroundHints(NoBackground);
-    if (constraints & Plasma::FormFactorConstraint) {
-        if (formFactor() == Plasma::Planar ||
-            formFactor() == Plasma::MediaCenter) {
-            m_icon->setText(i18n("Show Dashboard"));
-            setMinimumSize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Desktop)));
-        } else {
-            m_icon->setText(0);
-            m_icon->setInfoText(0);
-            setMinimumSize(m_icon->sizeFromIconSize(IconSize(KIconLoader::Panel)));
-       }
-    }
-    if (constraints & Plasma::SizeConstraint && m_icon) {
-        resize(size());
-        m_icon->resize(size());
-    }
-
-    updateGeometry();
-}
-
-Qt::Orientations ShowDashboard::expandingDirections() const
-{
-    return Qt::Vertical;
+    connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
 }
 
 void ShowDashboard::toggleShowDashboard(bool pressed)
