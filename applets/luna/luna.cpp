@@ -38,7 +38,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
     setHasConfigurationInterface(true);
-    setAspectRatioMode(Plasma::Square);
+    setAspectRatioMode(Plasma::ConstrainedSquare);
     resize(QSize(64, 64));
 
     counter = -1;
@@ -46,7 +46,6 @@ Luna::Luna(QObject *parent, const QVariantList &args)
 
 void Luna::init()
 {
-    setAspectRatioMode(Plasma::Square);
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/luna");
     m_theme->setContainsMultipleImages(true);
