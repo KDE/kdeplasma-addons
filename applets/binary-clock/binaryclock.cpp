@@ -21,16 +21,15 @@
 #include <QPainter>
 
 #include <KConfigDialog>
+
 #include <Plasma/DataEngine>
+#include <Plasma/Theme>
 
 #include "ui_clockConfig.h"
 #include "binaryclock.h"
 
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    m_ledsColor(Qt::white),
-    m_offLedsColor(QColor::fromRgb(255, 255, 255, 40)),
-    m_gridColor(QColor::fromRgb(255, 255, 255, 60))
+    : Plasma::Applet(parent, args)
 {
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
@@ -43,6 +42,12 @@ void BinaryClock::init()
     m_showSeconds = cg.readEntry("showSeconds", true);
     m_showGrid = cg.readEntry("showGrid", true);
     m_showOffLeds = cg.readEntry("showOffLeds", true);
+
+    m_ledsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    m_offLedsColor = QColor(m_ledsColor);
+    m_offLedsColor.setAlpha(40);
+    m_gridColor = QColor(m_ledsColor);
+    m_gridColor.setAlpha(60);
 
     connectToEngine();
 }
