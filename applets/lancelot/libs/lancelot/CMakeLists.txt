@@ -77,7 +77,7 @@ target_link_libraries(
 )
 
 set_target_properties(lancelot PROPERTIES VERSION 0.1.0 SOVERSION 1)
-install(TARGETS lancelot DESTINATION ${LIB_INSTALL_DIR})
+install(TARGETS lancelot ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
