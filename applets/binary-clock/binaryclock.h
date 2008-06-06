@@ -50,6 +50,9 @@ class BinaryClock : public Plasma::Applet
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
 
+    private slots:
+        void updateColors();
+
     private:
         void connectToEngine();
 

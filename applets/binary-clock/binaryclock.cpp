@@ -29,7 +29,8 @@
 #include "binaryclock.h"
 
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      m_time(0, 0)
 {
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
@@ -43,11 +44,9 @@ void BinaryClock::init()
     m_showGrid = cg.readEntry("showGrid", true);
     m_showOffLeds = cg.readEntry("showOffLeds", true);
 
-    m_ledsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    m_offLedsColor = QColor(m_ledsColor);
-    m_offLedsColor.setAlpha(40);
-    m_gridColor = QColor(m_ledsColor);
-    m_gridColor.setAlpha(60);
+    updateColors();
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
     connectToEngine();
 }
@@ -165,6 +164,18 @@ void BinaryClock::configAccepted()
     //TODO: Why we don't call updateConstraints?
     constraintsEvent(Plasma::AllConstraints);
     cg.config()->sync();
+}
+
+
+void BinaryClock::updateColors()
+{
+    m_ledsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    m_offLedsColor = QColor(m_ledsColor);
+    m_offLedsColor.setAlpha(40);
+    m_gridColor = QColor(m_ledsColor);
+    m_gridColor.setAlpha(60);
+
+    update();
 }
 
 void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
