@@ -39,7 +39,8 @@ Luna::Luna(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::ConstrainedSquare);
-    resize(QSize(64, 64));
+    size = 82;
+    resize(QSize(size, size));
 
     counter = -1;
 }
@@ -129,7 +130,7 @@ const QRect &contentsRect)
     }else{
         p->save();
         p->rotate(180);
-        p->translate(-contentsRect.width(), -contentsRect.height());
+        p->translate(-contentsRect.width() -size/2, -contentsRect.height()-size/2);
         m_theme->paint(p, contentsRect, QString::number(counter));
         p->restore();
     }

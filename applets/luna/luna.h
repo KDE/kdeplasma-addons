@@ -53,6 +53,8 @@ class Luna : public Plasma::Applet
         int counter;
         bool northHemisphere;
 
+	int size;
+
         Plasma::Svg *m_theme;
         Ui::lunaConfig ui;
 };
