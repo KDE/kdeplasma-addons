@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.46"
    width="250"
    height="250"
    version="1.0"
@@ -34,6 +34,13 @@
   </metadata>
   <defs
      id="defs5">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 125 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="250 : 125 : 1"
+       inkscape:persp3d-origin="125 : 83.333333 : 1"
+       id="perspective2704" />
     <linearGradient
        id="linearGradient3352">
       <stop
@@ -262,7 +269,7 @@
        r="58.519108" />
   </defs>
   <sodipodi:namedview
-     inkscape:window-height="828"
+     inkscape:window-height="819"
      inkscape:window-width="1440"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -282,7 +289,7 @@
      inkscape:cx="-197.59394"
      inkscape:cy="145.77418"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="24"
      inkscape:current-layer="svg2" />
   <rect
      style="opacity:1;fill:#00316e;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -407,25 +414,25 @@
      inkscape:label="#path3752"
      sodipodi:nodetypes="cccc"
      id="SecondHand"
-     d="M -523.98874,119.57604 L -525.965,119.58282 L -524.76886,215.28863 L -523.98874,119.57604 z "
-     style="fill:#ffeb55;fill-opacity:0.72527474;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="M -523.98874,111.57604 L -525.965,111.58282 L -524.76886,207.28863 L -523.98874,111.57604 z"
+     style="fill:#ffeb55;fill-opacity:0.72527472;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <rect
-     style="opacity:1;fill:#ffffff;fill-opacity:0.58241761;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="opacity:1;fill:#ffffff;fill-opacity:0.58241763;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="MinuteHand"
      width="5.811595"
      height="108.48311"
      x="-509.48315"
-     y="110.52172"
+     y="98.521721"
      rx="2.9057975"
      ry="2.9057975"
      inkscape:label="#rect3401" />
   <rect
-     y="110.52172"
+     y="98.521721"
      x="-489.48315"
      height="77.487938"
      width="5.811595"
      id="HourHand"
-     style="opacity:1;fill:#ffffff;fill-opacity:0.58241761;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="opacity:1;fill:#ffffff;fill-opacity:0.58241763;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      rx="2.9057975"
      ry="2.9057975"
      inkscape:label="#rect3403" />
