@@ -38,7 +38,6 @@ class ComicApplet : public Plasma::Applet
         ComicApplet( QObject *parent, const QVariantList &args );
         ~ComicApplet();
 
-        QSizeF contentSizeHint() const;
         void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
 	void init();
 
@@ -59,6 +58,7 @@ class ComicApplet : public Plasma::Applet
         void updateButtons();
         void loadConfig();
         void saveConfig();
+        void updateSize();
 
         QImage mImage;
         QDate mCurrentDate;

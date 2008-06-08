@@ -40,6 +40,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
+    setAspectRatioMode(Plasma::KeepAspectRatio );
 }
 
 void ComicApplet::init()
@@ -64,6 +65,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     updateButtons();
 
     if ( !mImage.isNull() ) {
+        updateSize();
         prepareGeometryChange();
         updateGeometry();
         update();
@@ -139,13 +141,18 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     }
 }
 
-QSizeF ComicApplet::contentSizeHint() const
+void ComicApplet::updateSize()
 {
-    if ( !mImage.isNull() ) {
+    if ( !mImage.isNull() && mImage.size().width() > 0 ) {
+        // Set height for given width keeping image aspect ratio
         const QSize size = mImage.size();
-        return QSizeF( geometry().width(), (geometry().width() / size.width() ) * size.height() );
-    } else
-        return geometry().size();
+        int leftArea = mShowPreviousButton ? s_arrowWidth : 0;
+        int rightArea = mShowNextButton ? s_arrowWidth : 0;
+        qreal aspectRatio = qreal(size.height()) / size.width();
+        qreal imageHeight = aspectRatio * ( geometry().width() - leftArea - rightArea );
+        int bottomArea = Plasma::Theme::defaultTheme()->fontMetrics().height();
+        resize( geometry().width(), imageHeight + bottomArea );
+    }
 }
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
