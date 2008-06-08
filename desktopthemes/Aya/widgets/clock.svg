@@ -462,7 +462,8 @@
        y1="198.35371"
        x2="-33.231562"
        y2="198.35371"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,1.1290386,1.3204226,-12.391035)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3353"
@@ -471,10 +472,11 @@
        y1="183.08627"
        x2="-57.462624"
        y2="183.08627"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.9441935,0,0,1.1347174,-2.2791592,-15.14298)" />
   </defs>
   <sodipodi:namedview
-     inkscape:window-height="768"
+     inkscape:window-height="767"
      inkscape:window-width="948"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -492,13 +494,13 @@
      height="300px"
      inkscape:zoom="2.2719999"
      inkscape:cx="86.190566"
-     inkscape:cy="135"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:cy="82.183096"
+     inkscape:window-x="152"
+     inkscape:window-y="22"
      inkscape:current-layer="svg2" />
   <path
      style="fill:#cc5457;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M -82.561625,130.09673 L -84.537885,130.10427 L -83.341745,236.58253 L -82.561625,130.09673 z"
+     d="M -83.001766,136.36203 L -84.978026,136.37283 L -83.781886,288.85312 L -83.001766,136.36203 z"
      id="SecondHand"
      sodipodi:nodetypes="cccc"
      inkscape:label="#path3752" />
@@ -1346,40 +1348,40 @@
     </g>
   </g>
   <rect
-     style="opacity:1;fill:url(#linearGradient3370);fill-opacity:1.0;stroke:#4b4b4b;stroke-width:0.99999994000000003;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="opacity:1;fill:url(#linearGradient3370);fill-opacity:1;stroke:#4b4b4b;stroke-width:1.00000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="HourHand"
-     width="6.538445"
-     height="76.142906"
-     x="-64.501068"
-     y="145.01482"
+     width="6.1735573"
+     height="86.400688"
+     x="-63.180649"
+     y="149.40787"
      inkscape:label="#rect2577" />
   <rect
      style="opacity:1;fill:url(#linearGradient3359);fill-opacity:1;stroke:#4b4b4b;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="MinuteHand"
      width="4.5939541"
-     height="109.14968"
-     x="-38.325516"
-     y="143.77887"
+     height="123.2342"
+     x="-37.005093"
+     y="149.94084"
      inkscape:label="#rect3358" />
   <rect
      style="opacity:1;fill:#000000;fill-opacity:0.11764706;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="MinuteHandShadow"
      width="4.5939541"
-     height="109.14967"
-     x="-27.385008"
-     y="147.26358"
+     height="123.72713"
+     x="-26.064585"
+     y="149.89972"
      inkscape:label="#rect3358" />
   <rect
      style="opacity:1;fill:#000000;fill-opacity:0.11764706;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="HourHandShadow"
-     width="6.538445"
-     height="76.142906"
-     x="-54.765705"
-     y="151.97374"
+     width="6.1735568"
+     height="87.458809"
+     x="-53.988579"
+     y="148.78719"
      inkscape:label="#rect2577" />
   <path
      style="fill:#000000;fill-opacity:0.11764706;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M -76.916802,136.8268 L -78.893062,136.83434 L -77.696922,243.3126 L -76.916802,136.8268 z"
+     d="M -77.356943,135.61255 L -79.333203,135.62333 L -78.137063,288.10362 L -77.356943,135.61255 z"
      id="SecondHandShadow"
      sodipodi:nodetypes="cccc"
      inkscape:label="#path3752" />
