@@ -52,6 +52,7 @@ Dict::Dict(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
       //m_flash(0)
 {
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
     resize(500,200);
 }
