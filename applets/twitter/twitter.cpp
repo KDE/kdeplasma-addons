@@ -62,6 +62,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
       m_lastTweet(0), m_wallet(0), m_walletWait(None),
       m_colorScheme(0)
 {
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
     resize(600, 350);
 }
