@@ -72,6 +72,10 @@ void SlideShow::addDir(const QString &path)
     QDir dir(path);
 
     dir.setNameFilters(m_filters);
+    if (dir.entryList().isEmpty())  {
+	//TODO remove the path from the list
+	return;
+    }
     foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
 	    addImage(path + "/" + imageFile);
     }
