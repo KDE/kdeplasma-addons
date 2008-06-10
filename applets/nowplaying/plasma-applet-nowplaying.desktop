@@ -1,7 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Now Playing
+Name[el]=Τρέχουσα αναπαραγωγή
 Name[es]=Reproduciendo ahora
+Name[fr]=En cours de lecture
 Name[ga]=Á Sheinm Anois
 Name[gl]=A reproducir
 Name[ja]=今聴いているもの
@@ -14,10 +16,13 @@ Name[sl]=Trenutno se predvaja
 Name[sv]=Spelar nu
 Name[tr]=Şimdi Çalınıyor
 Name[uk]=Зараз відтворюється
+Name[zh_CN]=现在收听
 Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
+Comment[el]=Εμφάνιση κομματιού που αναπαράγεται αυτήν τη στιγμή
 Comment[es]=Muestra el audio que se está reproduciendo
+Comment[fr]=Montre les éléments en cours de lecture
 Comment[ga]=Taispeáin an ceol á sheinm anois
 Comment[gl]=Mostra o son a reproducir
 Comment[ja]=今聴いている音楽を表示します
@@ -30,6 +35,7 @@ Comment[sl]=Prikaz skladbe, ki se trenutno predvaja
 Comment[sv]=Visar musik som för närvarande spelas
 Comment[tr]=O anda çalınan sesi gösterir
 Comment[uk]=Показує інформацію про аудіо, що відтворюється
+Comment[zh_CN]=显示正在收听的音乐
 Comment[zh_TW]=顯示目前播放的音樂
 
 Icon=applications-multimedia

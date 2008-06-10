@@ -9,7 +9,9 @@ Name[pt]=Silicone
 Name[pt_BR]=Silicone
 Name[sv]=Kisel
 Name[uk]=Силікон
+Name[zh_CN]=光滑
 Comment=Transparent slim theme
+Comment[el]=Διαφανές λεπτό θέμα
 Comment[es]=Tema delgado transparente
 Comment[fr]=Thème transparent et fin
 Comment[gl]=Un tema transparente
@@ -22,6 +24,7 @@ Comment[sl]=Prosojna tema
 Comment[sv]=Genomskinligt smalt tema
 Comment[tr]=Şeffaf ince tema
 Comment[uk]=Прозора струнка тема
+Comment[zh_CN]=透明的简化主题
 Comment[zh_TW]=透明的主題
 
 X-KDE-PluginInfo-Author=Lukas Gianinazzi

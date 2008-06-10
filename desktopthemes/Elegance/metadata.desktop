@@ -9,8 +9,10 @@ Name[pt]=Elegância
 Name[pt_BR]=Elegância
 Name[sv]=Elegans
 Name[uk]=Елегантність
+Name[zh_CN]=优雅
 
 Comment=An elegant theme for plasma.
+Comment[el]=Ένα κομψό θέμα για το plasma.
 Comment[es]=Un elegante tema para plasma.
 Comment[fr]=Un thème élégant pour plasma.
 Comment[gl]=Un tema elegante para plasma.
@@ -23,6 +25,7 @@ Comment[sl]=Elegantna tema za Plazmo
 Comment[sv]=Ett elegant tema för plasma.
 Comment[tr]=Plasma için şık bir tema.
 Comment[uk]=Елегантна тема для Плазми.
+Comment[zh_CN]=一个优雅的 Plasma 主题。
 Comment[zh_TW]=plasma 高雅的主題。
 
 X-KDE-PluginInfo-Author=AdrienV
