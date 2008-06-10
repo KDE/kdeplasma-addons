@@ -31,6 +31,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
     , m_notes_theme(this)
 {
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     m_notes_theme.setImagePath("widgets/notes");
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
