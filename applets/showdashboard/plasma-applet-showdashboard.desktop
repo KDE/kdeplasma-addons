@@ -36,7 +36,7 @@ Comment[tr]=Kontrol panelini göstermenizi sağlar
 Comment[uk]=Дає змогу побачити панель приладів
 Comment[zh_CN]=显示仪表板部件
 Comment[zh_TW]=顯示出您的儀表板
-Icon=plasma
+Icon=dashboard-show
 Type=Service
 ServiceTypes=Plasma/Applet
 
