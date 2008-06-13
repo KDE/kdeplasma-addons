@@ -116,7 +116,7 @@ void Luna::configAccepted()
 
     update();
 
-    cg.config()->sync();
+    emit configNeedsSaving();
 }
 
 void Luna::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,

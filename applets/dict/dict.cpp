@@ -264,6 +264,8 @@ void Dict::configAccepted()
     m_timer->setInterval(m_autoDefineTimeout);
 
     updateConstraints();
+
+    emit configNeedsSaving();
 }
 
 Dict::~Dict()

@@ -502,6 +502,8 @@ void Twitter::configAccepted()
         m_tweetMap.clear();
         m_lastTweet=0;
         setAuth();
+
+        emit configNeedsSaving();
     }
 }
 
