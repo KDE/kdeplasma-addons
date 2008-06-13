@@ -140,6 +140,8 @@ void BinaryClock::configAccepted()
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
 
+    emit configNeedsSaving();
+
     update();
     QStringList tzs = ui.timeZones->selection();
 
