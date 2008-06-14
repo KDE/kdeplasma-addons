@@ -26,6 +26,7 @@
 #include <QGraphicsProxyWidget>
 
 #include <KConfigDialog>
+#include <KMessageBox>
 
 #include <Plasma/Theme>
 
@@ -80,7 +81,7 @@ void FileWatcher::loadFile(const QString& path)
   file->setFileName(path);
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
   {
-    kDebug() << "Error: could not open file:" << path;
+    KMessageBox::error(0, i18n("Could not open file: %1", path));
     setConfigurationRequired(true);
     return;
   }
