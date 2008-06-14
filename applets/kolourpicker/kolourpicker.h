@@ -27,6 +27,9 @@ class Kolourpicker : public Plasma::Applet
         Kolourpicker(QObject *parent, const QVariantList &args);
         ~Kolourpicker();
 
+    public Q_SLOTS:
+        virtual void init();
+
     protected:
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual bool eventFilter(QObject *watched, QEvent *event);
@@ -41,12 +44,13 @@ class Kolourpicker : public Plasma::Applet
         void installFilter();
 
     private:
-        void addColor(const QColor &color);
+        void addColor(const QColor &color, bool save = true);
 
         PickerButton *m_grabButton;
         PickerButton *m_historyButton;
         QMenu *m_historyMenu;
         QHash<QColor, QAction *> m_menus;
+        QStringList m_colors;
         QWidget *m_grabWidget;
 };
 

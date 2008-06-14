@@ -196,6 +196,17 @@ Kolourpicker::~Kolourpicker()
     delete m_historyMenu;
 }
 
+void Kolourpicker::init()
+{
+    KConfigGroup cg = config();
+
+    QList<QString> colorList = cg.readEntry("Colors", QList<QString>());
+    Q_FOREACH (const QString &color, colorList)
+    {
+        addColor(QColor(color), false);
+    }
+}
+
 void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
@@ -305,6 +316,12 @@ void Kolourpicker::clearHistory()
         delete *it;
     }
     m_menus.clear();
+    m_colors.clear();
+
+    KConfigGroup cg = config();
+    cg.writeEntry("Colors", m_colors);
+
+    emit configNeedsSaving();
 }
 
 void Kolourpicker::installFilter()
@@ -312,7 +329,7 @@ void Kolourpicker::installFilter()
     m_grabButton->installSceneEventFilter(this);
 }
 
-void Kolourpicker::addColor(const QColor &color)
+void Kolourpicker::addColor(const QColor &color, bool save)
 {
     QHash<QColor, QAction *>::ConstIterator it = m_menus.find(color);
     if (it != m_menus.end())
@@ -327,7 +344,15 @@ void Kolourpicker::addColor(const QColor &color)
     m_historyMenu->insertMenu(m_historyMenu->actions().at(1), newmenu);
     m_historyButton->nativeWidget()->setIcon(colorIcon);
     m_menus.insert(color, act);
+    m_colors.append(color.name());
     m_historyButton->setEnabled(true);
+    if (save)
+    {
+        KConfigGroup cg = config();
+        cg.writeEntry("Colors", m_colors);
+
+        emit configNeedsSaving();
+    }
 }
 
 #include "kolourpicker.moc"
