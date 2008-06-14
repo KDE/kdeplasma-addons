@@ -45,14 +45,19 @@ void FileWatcher::init()
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
-  textItem->setDefaultTextColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
 
   textDocument = textItem->document();
 
-  textDocument->setMaximumBlockCount(6);
   textStream = 0;
 
-  QString path = config().readEntry("path", QString());
+  KConfigGroup cg = config();
+
+  QString path = cg.readEntry("path", QString());
+  textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
+  textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
+  textDocument->setMaximumBlockCount(cg.readEntry("maxRows", 5) + 1);
+
+  textItem->update();
 
   if (path.isEmpty()) {
       setConfigurationRequired(true);
