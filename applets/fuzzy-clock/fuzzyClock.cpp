@@ -41,17 +41,17 @@
 
 Clock::Clock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
+      m_oldContentSize(QSizeF (0,0)),
+      m_adjustToHeight(1),
       m_fontColor(Qt::white),
       m_fontTimeBold(false),
-      m_adjustToHeight(1),
       m_fontTime(KGlobalSettings::smallestReadableFont()),
+      m_showTimezone(false),
       m_showDate(false),
       m_showYear(false),
       m_showDay(false),
-      m_showTimezone(false),
       m_calendar(0),
-      m_layout(0),
-      m_oldContentSize(QSizeF (0,0))
+      m_layout(0)
 {
     setHasConfigurationInterface(true);
     setBackgroundHints(Plasma::Applet::DefaultBackground);
