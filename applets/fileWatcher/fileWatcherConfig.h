@@ -31,6 +31,9 @@ class FileWatcherConfig : public QWidget
   public:
     FileWatcherConfig(QWidget *parent=0);
 
+    void setPath(QString path);
+    void setMaxRows(int rows);
+
   private slots:
     void returnPressed(const QString& path);
     void pathSelected(const KUrl& url);

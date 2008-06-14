@@ -38,6 +38,16 @@ FileWatcherConfig::FileWatcherConfig(QWidget *parent)
   QObject::connect(ui.sb_maxRows,SIGNAL(valueChanged(int)),this,SLOT(maxRowsValueChanged(int)));
 }
 
+void FileWatcherConfig::setPath(QString path)
+{
+  urlRequester->setPath(path);
+}
+
+void FileWatcherConfig::setMaxRows(int rows)
+{
+  ui.sb_maxRows->setValue(rows);
+}
+
 void FileWatcherConfig::maxRowsValueChanged(int rows)
 {
   emit maxRowsChanged(rows); 

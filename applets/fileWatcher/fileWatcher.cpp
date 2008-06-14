@@ -42,7 +42,6 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 
 void FileWatcher::init()
 {
-  m_proxy = new QGraphicsProxyWidget(this);
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
@@ -73,6 +72,8 @@ FileWatcher::~FileWatcher()
 
 void FileWatcher::loadFile(const QString& path)
 {
+  if (path == "") return;
+
   delete textStream;
   textStream = 0;
   textDocument->clear();
@@ -128,26 +129,22 @@ void FileWatcher::newData()
 
 void FileWatcher::newPath(const QString& path)
 {
-  KConfigGroup c = config();
-  c.writeEntry("path", path);
-  loadFile(path);
+  m_tmpPath = path;
 }
 
 void FileWatcher::fontColorChanged(const QColor& color)
 {
-  textItem->setDefaultTextColor(color);
-  textItem->update();
+  m_tmpColor = color;
 }
 
 void FileWatcher::fontChanged(const QFont& font)
 {
-  textItem->setFont(font);
+  m_tmpFont = font;
 }
 
 void FileWatcher::maxRowsChanged(int rows)
 {
-  textDocument->setMaximumBlockCount(rows+1);
-  loadFile(file->fileName());
+  m_tmpMaxRows = rows;
 }
 
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
@@ -158,11 +155,41 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage( config_dialog, parent->windowTitle(), icon() );
     parent->setDefaultButton( KDialog::Ok );
     parent->showButtonSeparator( true );
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     QObject::connect(config_dialog,SIGNAL(newFile(const QString&)),this,SLOT(newPath(const QString&)));
     QObject::connect(config_dialog,SIGNAL(maxRowsChanged(int)),this,SLOT(maxRowsChanged(int)));
     QObject::connect(config_dialog,SIGNAL(fontChanged(QFont)),this,SLOT(fontChanged(QFont)));
     QObject::connect(config_dialog,SIGNAL(fontColorChanged(QColor)),this,SLOT(fontColorChanged(QColor)));
-}
-#include "fileWatcher.moc"
 
+    m_tmpPath = file->fileName();
+    config_dialog->setPath(m_tmpPath);
+    m_tmpColor = textItem->defaultTextColor();
+    m_tmpFont = textItem->font();
+    m_tmpMaxRows = textDocument->maximumBlockCount() - 1;
+    config_dialog->setMaxRows(m_tmpMaxRows);
+}
+
+void FileWatcher::configAccepted()
+{
+    KConfigGroup cg = config();
+
+    cg.writePathEntry("path", m_tmpPath);
+
+    textItem->setDefaultTextColor(m_tmpColor);
+    cg.writeEntry("textColor", m_tmpColor);
+
+    textItem->setFont(m_tmpFont);
+    cg.writeEntry("font", m_tmpFont);
+
+    textDocument->setMaximumBlockCount(m_tmpMaxRows + 1);
+    cg.writeEntry("maxRows", m_tmpMaxRows);
+
+    textItem->update();
+    loadFile(m_tmpPath);
+
+    emit configNeedsSaving();
+}
+
+#include "fileWatcher.moc"

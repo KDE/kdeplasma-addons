@@ -50,13 +50,21 @@ class FileWatcher : public Plasma::Applet
     QFile *file;
     QFileSystemWatcher *watcher;
     FileWatcherConfig *config_dialog;
+    Ui::fileWatcherConfig ui;
     QGraphicsTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
-    QPushButton *configureButton;
     QGraphicsLinearLayout *buttonBox;
     bool configured;
     QGraphicsProxyWidget *m_proxy;
+
+    QColor m_tmpColor;
+    QFont m_tmpFont;
+    QString m_tmpPath;
+    int m_tmpMaxRows;
+
+  protected slots:
+    void configAccepted();
 
   private slots:
     void createConfigurationInterface(KConfigDialog *parent);
