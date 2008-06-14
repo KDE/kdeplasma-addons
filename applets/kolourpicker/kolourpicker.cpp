@@ -31,6 +31,14 @@
 
 #include <plasma/widgets/pushbutton.h>
 
+#include <config-kolourpicker.h>
+
+#if defined(KOLOURPICKER_X11_LIB)
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <QX11Info>
+#endif
+
 static KMenu* buildMenuForColor(const QColor &color)
 {
     KMenu *menu = new KMenu();
@@ -51,6 +59,31 @@ static KMenu* buildMenuForColor(const QColor &color)
         act->setData(color);
     }
     return menu;
+}
+
+static QColor pickColor(const QPoint &point)
+{
+#if defined(KOLOURPICKER_X11_LIB)
+/*
+  It seems the Qt4 stuff returns a null grabbed pixmap when the Display
+  has ARGB visuals.
+  Then, access directly to the screen pixels using the X API.
+*/
+    Window root = RootWindow(QX11Info::display(), QX11Info::appScreen());
+    XImage *ximg = XGetImage(QX11Info::display(), root, point.x(), point.y(), 1, 1, -1, ZPixmap);
+    unsigned long xpixel = XGetPixel(ximg, 0, 0);
+    XDestroyImage(ximg);
+    XColor xcol;
+    xcol.pixel = xpixel;
+    xcol.flags = DoRed | DoGreen | DoBlue;
+    XQueryColor(QX11Info::display(), DefaultColormap(QX11Info::display(), QX11Info::appScreen()), &xcol);
+    return QColor::fromRgbF(xcol.red / 65535.0, xcol.green / 65535.0, xcol.blue / 65535.0);
+#else
+    QDesktopWidget *desktop = QApplication::desktop();
+    QPixmap pix = QPixmap::grabWindow(desktop->winId(), point.x(), point.y(), 1, 1);
+    QImage img = pix.toImage();
+    return QColor(img.pixel(0, 0));
+#endif
 }
 
 
@@ -209,10 +242,7 @@ bool Kolourpicker::eventFilter(QObject *watched, QEvent *event)
 
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
 
-        QDesktopWidget *desktop = QApplication::desktop();
-        QPixmap pix = QPixmap::grabWindow(desktop->winId(), me->globalPos().x(), me->globalPos().y(), 1, 1);
-        QImage img = pix.toImage();
-        QColor color(img.pixel(0, 0));
+        const QColor color = pickColor(me->globalPos());
 
         kDebug() << event->type() << me->globalPos() << color;
 
