@@ -43,6 +43,16 @@ void FileWatcherConfig::setPath(QString path)
   urlRequester->setPath(path);
 }
 
+void FileWatcherConfig::setTextColor(const QColor &color)
+{
+  fontColor = color;
+}
+
+void FileWatcherConfig::setFont(const QFont &f)
+{
+  font = f;
+}
+
 void FileWatcherConfig::setMaxRows(int rows)
 {
   ui.sb_maxRows->setValue(rows);
@@ -55,14 +65,24 @@ void FileWatcherConfig::maxRowsValueChanged(int rows)
 
 void FileWatcherConfig::fontPressed()
 {
-  font = QFontDialog::getFont(NULL,font); 
-  emit fontChanged(font);
+  bool ok;
+
+  QFont tmpFont = QFontDialog::getFont(&ok, font);
+
+  if (ok){
+     font = tmpFont;
+     emit fontChanged(font);
+  }
 }
 
 void FileWatcherConfig::fontColorPressed()
 {
-  fontColor = QColorDialog::getColor(fontColor);
-  emit fontColorChanged(fontColor);
+  QColor tmpColor = QColorDialog::getColor(fontColor);
+
+  if (tmpColor.isValid()){
+     fontColor = tmpColor;
+     emit fontColorChanged(fontColor);
+  }
 }
 
 void FileWatcherConfig::pathSelected(const KUrl &url)

@@ -171,7 +171,9 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     m_tmpPath = file->fileName();
     config_dialog->setPath(m_tmpPath);
     m_tmpColor = textItem->defaultTextColor();
+    config_dialog->setTextColor(m_tmpColor);
     m_tmpFont = textItem->font();
+    config_dialog->setFont(m_tmpFont);
     m_tmpMaxRows = textDocument->maximumBlockCount() - 1;
     config_dialog->setMaxRows(m_tmpMaxRows);
 }
