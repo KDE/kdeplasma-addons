@@ -129,6 +129,18 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
 }
 
 
+class ColorIcon : public QIcon
+{
+    public:
+        ColorIcon(const QColor &color);
+};
+
+ColorIcon::ColorIcon(const QColor &color)
+    : QIcon(new ColorIconEngine(color))
+{
+}
+
+
 class PickerButton : public Plasma::PushButton
 {
     public:
@@ -179,7 +191,7 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     m_historyButton = new PickerButton(this);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->setIcon(QIcon(new ColorIconEngine(Qt::gray)));
+    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
     KMenu *menu = new KMenu();
@@ -260,7 +272,7 @@ bool Kolourpicker::eventFilter(QObject *watched, QEvent *event)
         addColor(color);
 
         KMenu *newmenu = buildMenuForColor(color);
-        newmenu->addTitle(QIcon(new ColorIconEngine(color)), i18n("Copy Color Value"), newmenu->actions().first());
+        newmenu->addTitle(ColorIcon(color), i18n("Copy Color Value"), newmenu->actions().first());
         connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
         newmenu->exec(QCursor::pos());
         delete newmenu;
@@ -308,7 +320,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
 void Kolourpicker::clearHistory()
 {
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->setIcon(QIcon(new ColorIconEngine(Qt::gray)));
+    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
     QHash<QColor, QAction *>::ConstIterator it = m_menus.begin(), itEnd = m_menus.end();
     for ( ; it != itEnd; ++it )
     {
@@ -337,7 +349,7 @@ void Kolourpicker::addColor(const QColor &color, bool save)
 
     KMenu *newmenu = buildMenuForColor(color);
     QAction *act = newmenu->menuAction();
-    QIcon colorIcon(new ColorIconEngine(color));
+    ColorIcon colorIcon(color);
     act->setIcon(colorIcon);
     act->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
