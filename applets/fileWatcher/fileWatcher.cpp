@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Jesper Thomschutz <jesperht@yahoo.com>          *
  *                         Simon Hausmann <hausmann@kde.org>               *
+ *   Copyright (C) 2008 by Davide Bettio <davide.bettio@kdemail.net>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,26 +19,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "fileWatcher.h"
+
 #include <QGraphicsTextItem>
 #include <QFileSystemWatcher>
 #include <QFile>
 #include <QStringList>
 #include <QTextDocument>
-#include <QGraphicsProxyWidget>
+#include <QTextCursor>
 
 #include <KConfigDialog>
 #include <KMessageBox>
 
 #include <Plasma/Theme>
 
-#include "fileWatcher.h"
 #include "fileWatcherConfig.h"
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), config_dialog(0)
+    : Plasma::Applet(parent, args),
+      config_dialog(0)
 {
   setHasConfigurationInterface(true);
-  resize(250, 250);
+  resize(400, 400);
 }
 
 void FileWatcher::init()
@@ -45,9 +48,7 @@ void FileWatcher::init()
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
-
   textDocument = textItem->document();
-
   textStream = 0;
 
   KConfigGroup cg = config();
@@ -61,6 +62,7 @@ void FileWatcher::init()
 
   if (path.isEmpty()) {
       setConfigurationRequired(true);
+
   } else {
       loadFile(path);
   }
@@ -70,40 +72,35 @@ void FileWatcher::init()
 FileWatcher::~FileWatcher()
 {
   delete textStream;
-  textStream = 0;
-  textDocument->clear();
-  file->close();
 }
 
 void FileWatcher::loadFile(const QString& path)
 {
-  if (path == "") return;
+  if (path.isEmpty()) return;
 
   delete textStream;
   textStream = 0;
   textDocument->clear();
-
+  watcher->removePaths(watcher->files());
   file->close();
+
   file->setFileName(path);
-  if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-  {
+  if (!file->open(QIODevice::ReadOnly | QIODevice::Text)){
     KMessageBox::error(0, i18n("Could not open file: %1", path));
     setConfigurationRequired(true);
+
     return;
   }
 
   setConfigurationRequired(false);
+  QGraphicsItem::setToolTip(path);
 
   textStream = new QTextStream(file);
 
   newData();
 
-  watcher->removePaths(watcher->files());
   watcher->addPath(path);
-
-  QObject::connect(watcher,SIGNAL(fileChanged(QString)),this,SLOT(newData()));
-
-  QGraphicsItem::setToolTip(path);
+  QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(newData()));
 }
 
 void FileWatcher::newData()
@@ -112,18 +109,17 @@ void FileWatcher::newData()
   cursor.movePosition(QTextCursor::End);
   cursor.beginEditBlock();
 
-// Slight speed optimization hack for bigger files.
-// Doing this is faster than doing unnecessary insertText()
+  //Slight speed optimization hack for bigger files.
+  //Doing this is faster than doing unnecessary insertText()
   QString data = textStream->readAll();
-  QStringList list = data.split("\n",QString::SkipEmptyParts);
+  QStringList list = data.split("\n", QString::SkipEmptyParts);
 
   int rows = list.size() - textDocument->maximumBlockCount();
 
   if ( rows < 0)
     rows = 0;
 
-  for (int i = rows; i < list.size(); i++)
-  {
+  for (int i = rows; i < list.size(); i++){
     cursor.insertText(list.at(i));
     cursor.insertBlock();
   }
@@ -156,17 +152,16 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
 {
     config_dialog = new FileWatcherConfig(parent);
 
-    parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage( config_dialog, parent->windowTitle(), icon() );
-    parent->setDefaultButton( KDialog::Ok );
-    parent->showButtonSeparator( true );
+    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    parent->addPage(config_dialog, parent->windowTitle(), icon());
+    parent->showButtonSeparator(true);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    QObject::connect(config_dialog,SIGNAL(newFile(const QString&)),this,SLOT(newPath(const QString&)));
-    QObject::connect(config_dialog,SIGNAL(maxRowsChanged(int)),this,SLOT(maxRowsChanged(int)));
-    QObject::connect(config_dialog,SIGNAL(fontChanged(QFont)),this,SLOT(fontChanged(QFont)));
-    QObject::connect(config_dialog,SIGNAL(fontColorChanged(QColor)),this,SLOT(fontColorChanged(QColor)));
+    QObject::connect(config_dialog, SIGNAL(newFile(const QString&)), this, SLOT(newPath(const QString&)));
+    QObject::connect(config_dialog, SIGNAL(maxRowsChanged(int)), this, SLOT(maxRowsChanged(int)));
+    QObject::connect(config_dialog, SIGNAL(fontChanged(QFont)), this, SLOT(fontChanged(QFont)));
+    QObject::connect(config_dialog, SIGNAL(fontColorChanged(QColor)), this, SLOT(fontColorChanged(QColor)));
 
     m_tmpPath = file->fileName();
     config_dialog->setPath(m_tmpPath);

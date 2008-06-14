@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Jesper Thomschutz <jesperht@yahoo.com>          *
+ *   Copyright (C) 2008 by Davide Bettio <davide.bettio@kdemail.net>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,20 +23,21 @@
 #include <QFontDialog>
 #include <QColorDialog>
 
+#include <KUrlRequester>
+
 FileWatcherConfig::FileWatcherConfig(QWidget *parent)
-: QWidget( parent )
-{ 
+: QWidget(parent)
+{
   ui.setupUi(this);
-  //mainWidget()->layout()->setMargin(0);
   urlRequester = new KUrlRequester(this);
   ui.hboxLayout->addWidget(urlRequester);
   urlRequester->setFocus();
- 
-  QObject::connect(urlRequester,SIGNAL(returnPressed(const QString&)),this,SLOT(returnPressed(const QString&)));
-  QObject::connect(urlRequester,SIGNAL(urlSelected(const KUrl&)),this,SLOT(pathSelected(const KUrl&)));
-  QObject::connect(ui.pb_font,SIGNAL(clicked()),this,SLOT(fontPressed()));
-  QObject::connect(ui.pb_fontColor,SIGNAL(clicked()),this,SLOT(fontColorPressed()));
-  QObject::connect(ui.sb_maxRows,SIGNAL(valueChanged(int)),this,SLOT(maxRowsValueChanged(int)));
+
+  QObject::connect(urlRequester, SIGNAL(returnPressed(const QString&)), this, SLOT(returnPressed(const QString&)));
+  QObject::connect(urlRequester, SIGNAL(urlSelected(const KUrl&)), this, SLOT(pathSelected(const KUrl&)));
+  QObject::connect(ui.pb_font, SIGNAL(clicked()), this, SLOT(fontPressed()));
+  QObject::connect(ui.pb_fontColor, SIGNAL(clicked()), this, SLOT(fontColorPressed()));
+  QObject::connect(ui.sb_maxRows, SIGNAL(valueChanged(int)), this, SLOT(maxRowsValueChanged(int)));
 }
 
 void FileWatcherConfig::setPath(QString path)
@@ -100,4 +102,3 @@ void FileWatcherConfig::returnPressed(const QString& path)
 }
 
 #include "fileWatcherConfig.moc"
-

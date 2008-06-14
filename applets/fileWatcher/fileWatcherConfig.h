@@ -20,7 +20,7 @@
 #ifndef FILEWATCHERCONFIG_H
 #define FILEWATCHERCONFIG_H
 
-#include <KUrlRequester>
+class KUrlRequester;
 
 #include "ui_fileWatcherConfig.h"
 
@@ -29,7 +29,7 @@ class FileWatcherConfig : public QWidget
   Q_OBJECT
 
   public:
-    FileWatcherConfig(QWidget *parent=0);
+    FileWatcherConfig(QWidget *parent = 0);
 
     void setPath(QString path);
     void setTextColor(const QColor &color);
@@ -42,18 +42,18 @@ class FileWatcherConfig : public QWidget
     void fontPressed();
     void fontColorPressed();
     void maxRowsValueChanged(int rows);
- 
+
   private:
     Ui::fileWatcherConfig ui;
     KUrlRequester *urlRequester;
     QFont font;
     QColor fontColor;
-  
+
   signals:
     void fontChanged(QFont);
     void fontColorChanged(QColor);
     void newFile(const QString& path);
-    void maxRowsChanged(int rows); 
+    void maxRowsChanged(int rows);
 };
 
 #endif

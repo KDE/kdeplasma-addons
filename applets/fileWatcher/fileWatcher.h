@@ -20,59 +20,52 @@
 #ifndef FILEWATCHER_H
 #define FILEWATCHER_H
 
-#include <QGraphicsTextItem>
-#include <QFile>
-#include <QQueue>
-#include <QFileSystemWatcher>
-#include <QTextCursor>
-#include <QTextDocument>
-#include <QGraphicsLinearLayout>
+#include <Plasma/Applet>
 
-#include <plasma/applet.h>
+class QFile;
+class QFileSystemWatcher;
+class QTextDocument;
+class QGraphicsTextItem;
 
-#include "fileWatcherConfig.h"
-
-class QPushButton;
-class QGraphicsProxyWidget;
+class FileWatcherConfig;
 
 class FileWatcher : public Plasma::Applet
 {
   Q_OBJECT
+
   public:
     FileWatcher(QObject *parent, const QVariantList &args);
     ~FileWatcher();
 
     void init();
-    
+
+  protected slots:
+    void configAccepted();
+
+  private slots:
+    void newData();
+
+    void createConfigurationInterface(KConfigDialog *parent);
+
+    void fontChanged(const QFont& font);
+    void fontColorChanged(const QColor& color);
+    void newPath(const QString& path);
+    void maxRowsChanged(int);
+
   private:
     void loadFile(const QString& path);
 
     QFile *file;
     QFileSystemWatcher *watcher;
     FileWatcherConfig *config_dialog;
-    Ui::fileWatcherConfig ui;
     QGraphicsTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
-    QGraphicsLinearLayout *buttonBox;
-    bool configured;
-    QGraphicsProxyWidget *m_proxy;
 
     QColor m_tmpColor;
     QFont m_tmpFont;
     QString m_tmpPath;
     int m_tmpMaxRows;
-
-  protected slots:
-    void configAccepted();
-
-  private slots:
-    void createConfigurationInterface(KConfigDialog *parent);
-    void newData();
-    void fontChanged(const QFont& font);
-    void fontColorChanged(const QColor& color);
-    void newPath(const QString& path);
-    void maxRowsChanged(int);
 };
 
 K_EXPORT_PLASMA_APPLET(fileWatcher, FileWatcher)
