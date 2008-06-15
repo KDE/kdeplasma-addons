@@ -527,6 +527,7 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
     m_theme->paint( p, headerRect, "tweet" );
 
     p->setRenderHints( QPainter::Antialiasing | QPainter::SmoothPixmapTransform );
+    p->translate(0.5, 0.5);
     p->setPen( m_colorScheme->shade( KColorScheme::LightShade ) );
     p->drawRoundedRect( m_statusEdit->geometry(), 5, 5 );
 }
