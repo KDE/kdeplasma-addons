@@ -42,21 +42,22 @@
 static KMenu* buildMenuForColor(const QColor &color)
 {
     KMenu *menu = new KMenu();
+    const QVariant colorData = qVariantFromValue(color);
     QAction *act = menu->addAction(KIcon("draw-text"), QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
-    act->setData(color);
+    act->setData(colorData);
     QString htmlName = color.name();
     QString htmlNameUp = htmlName.toUpper();
     KIcon mimeIcon("text-html");
     act = menu->addAction(mimeIcon, htmlName);
-    act->setData(color);
+    act->setData(colorData);
     act = menu->addAction(mimeIcon, htmlName.mid(1));
-    act->setData(color);
+    act->setData(colorData);
     if (htmlNameUp != htmlName)
     {
         act = menu->addAction(mimeIcon, htmlNameUp);
-        act->setData(color);
+        act->setData(colorData);
         act = menu->addAction(mimeIcon, htmlNameUp.mid(1));
-        act->setData(color);
+        act->setData(colorData);
     }
     return menu;
 }
