@@ -390,7 +390,9 @@ void Twitter::showTweets()
         ++i;
         --pos;
     }
-    resize(m_layout->sizeHint(Qt::PreferredSize));
+    qreal left, top, right, bottom;
+    getContentsMargins(&left, &top, &right, &bottom);
+    resize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
     updateGeometry();
 }
 
