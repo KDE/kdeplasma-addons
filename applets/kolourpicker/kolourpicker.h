@@ -40,7 +40,7 @@ class Kolourpicker : public Plasma::Applet
         void grabClicked();
         void historyClicked();
         void colorActionTriggered(QAction *act);
-        void clearHistory();
+        void clearHistory(bool save = true);
         void installFilter();
 
     private:

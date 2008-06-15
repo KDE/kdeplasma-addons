@@ -204,7 +204,7 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
 
 Kolourpicker::~Kolourpicker()
 {
-    clearHistory();
+    clearHistory(false);
     delete m_historyMenu;
 }
 
@@ -317,7 +317,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
     QApplication::clipboard()->setMimeData(mime, QClipboard::Clipboard);
 }
 
-void Kolourpicker::clearHistory()
+void Kolourpicker::clearHistory(bool save)
 {
     m_historyButton->setEnabled(false);
     m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
@@ -330,10 +330,13 @@ void Kolourpicker::clearHistory()
     m_menus.clear();
     m_colors.clear();
 
-    KConfigGroup cg = config();
-    cg.writeEntry("Colors", m_colors);
+    if (save)
+    {
+        KConfigGroup cg = config();
+        cg.writeEntry("Colors", m_colors);
 
-    emit configNeedsSaving();
+        emit configNeedsSaving();
+    }
 }
 
 void Kolourpicker::installFilter()
