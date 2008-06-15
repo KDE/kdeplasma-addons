@@ -45,6 +45,7 @@ class Kolourpicker : public Plasma::Applet
 
     private:
         void addColor(const QColor &color, bool save = true);
+        void saveData(KConfigGroup &cg);
 
         PickerButton *m_grabButton;
         PickerButton *m_historyButton;

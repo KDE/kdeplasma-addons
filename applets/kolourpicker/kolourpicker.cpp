@@ -333,9 +333,7 @@ void Kolourpicker::clearHistory(bool save)
     if (save)
     {
         KConfigGroup cg = config();
-        cg.writeEntry("Colors", m_colors);
-
-        emit configNeedsSaving();
+        saveData(cg);
     }
 }
 
@@ -364,10 +362,15 @@ void Kolourpicker::addColor(const QColor &color, bool save)
     if (save)
     {
         KConfigGroup cg = config();
-        cg.writeEntry("Colors", m_colors);
-
-        emit configNeedsSaving();
+        saveData(cg);
     }
+}
+
+void Kolourpicker::saveData(KConfigGroup &cg)
+{
+    cg.writeEntry("Colors", m_colors);
+
+    emit configNeedsSaving();
 }
 
 #include "kolourpicker.moc"
