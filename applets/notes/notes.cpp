@@ -68,6 +68,7 @@ void Notes::init()
     m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
     m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
     m_textEdit->viewport()->setAutoFillBackground(false);
+    m_proxy->setMinimumSize(QSize(0, 0));
     m_layout->addItem(m_proxy);
 
     KConfigGroup cg = config();
