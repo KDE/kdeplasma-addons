@@ -130,7 +130,7 @@ const QRect &contentsRect)
     }else{
         p->save();
         p->rotate(180);
-        p->translate(-contentsRect.width() -size/2, -contentsRect.height()-size/2);
+        p->translate(-geometry().width(), -geometry().height());
         m_theme->paint(p, contentsRect, QString::number(counter));
         p->restore();
     }
