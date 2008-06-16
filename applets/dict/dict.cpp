@@ -32,7 +32,7 @@
 #include <KLineEdit>
 
 #include <Plasma/Animator>
-#include <plasma/widgets/icon.h>
+#include <Plasma/Icon>
 
 using namespace Plasma;
 
