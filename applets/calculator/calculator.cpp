@@ -21,7 +21,7 @@
 #include "calculator.h"
 #include <QtGui/QPainter>
 #include <QLabel>
-#include <QPushButton>
+#include <KPushButton>
 #include <QAction>
 #include <QClipboard>
 #include <QApplication>

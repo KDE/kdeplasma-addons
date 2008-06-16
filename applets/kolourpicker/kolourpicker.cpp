@@ -22,7 +22,7 @@
 #include <qmimedata.h>
 #include <qpainter.h>
 #include <qpixmap.h>
-#include <qpushbutton.h>
+#include <kpushbutton.h>
 
 #include <kdebug.h>
 #include <kicon.h>
