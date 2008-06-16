@@ -101,7 +101,7 @@ void Twitter::init()
     fnt.setBold( true );
     QFontMetrics fm( fnt );
     m_flash->setFont( fnt );
-    m_flash->flash( "test", 20000 );
+    m_flash->flash( "", 20000 );
     flashLayout->addItem( m_flash );
     flashLayout->setItemSpacing( 0, 175 );
     m_layout->addItem( flashLayout );
@@ -150,6 +150,8 @@ void Twitter::init()
         } else { //use config value
             setAuth();
         }
+    }else{
+        setAuthRequired(true);
     }
 }
 
@@ -227,6 +229,12 @@ void Twitter::setAuth()
     downloadHistory();
 }
 
+void Twitter::setAuthRequired(bool required)
+{
+    setConfigurationRequired(required);
+    m_statusEdit->setEnabled(!required);
+}
+
 void Twitter::writeConfigPassword()
 {
     kDebug();
@@ -293,6 +301,11 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         }
     } else if (source.startsWith("Error")) {
         QString desc = data["description"].toString();
+
+        if (desc == "Authentication required"){
+            setAuthRequired(true);            
+        }
+
         m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
     }
     updateGeometry();
@@ -515,6 +528,8 @@ void Twitter::configAccepted()
 
         emit configNeedsSaving();
     }
+
+    setAuthRequired(m_username.isEmpty() || m_password.isEmpty());
 }
 
 Twitter::~Twitter()

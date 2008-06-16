@@ -110,6 +110,10 @@ class Twitter : public Plasma::Applet
          */
         void setAuth();
         /**
+         * disable the UI until user is authenticated
+         */
+        void setAuthRequired(bool auth);
+        /**
          * write the password to config instead of wallet
          */
         void writeConfigPassword();
