@@ -162,6 +162,40 @@ CalculatorApplet::~CalculatorApplet()
 {
 }
 
+void CalculatorApplet::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::SizeConstraint) {
+        if (layout() && (layout()->minimumSize().width() > size().width() ||
+               layout()->minimumSize().height() > size().height())) {
+            for (int i = 0; i < 10; ++i) {
+                mButtonDigit[i]->setVisible( false );
+            }
+
+            mButtonDecimal->setVisible( false );
+            mButtonAdd->setVisible( false );
+            mButtonSubtract->setVisible( false );
+            mButtonMultiply->setVisible( false );
+            mButtonDivide->setVisible( false );
+            mButtonEquals->setVisible( false );
+            mButtonClear->setVisible( false );
+            mButtonAllClear->setVisible( false );
+        } else {
+            for (int i = 0; i < 10; ++i) {
+                mButtonDigit[i]->setVisible( true );
+            }
+
+            mButtonDecimal->setVisible( true );
+            mButtonAdd->setVisible( true );
+            mButtonSubtract->setVisible( true );
+            mButtonMultiply->setVisible( true );
+            mButtonDivide->setVisible( true );
+            mButtonEquals->setVisible( true );
+            mButtonClear->setVisible( true );
+            mButtonAllClear->setVisible( true );
+        }
+    }
+}
+
 void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
 {
     switch( event->key() )

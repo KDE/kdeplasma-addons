@@ -62,6 +62,8 @@ private Q_SLOTS:
 
 protected:
     virtual void keyPressEvent ( QKeyEvent * event );
+    void constraintsEvent(Plasma::Constraints constraints);
+
 private:
     double sum;
     double factor;
