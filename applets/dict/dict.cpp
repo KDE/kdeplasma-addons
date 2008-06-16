@@ -54,6 +54,7 @@ void Dict::init()
     m_wordEdit = new KLineEdit;
     m_wordEdit->setClearButtonShown( true );
     m_wordEdit->setClickMessage(i18n("Enter word to define here"));
+    m_wordEdit->setAttribute(Qt::WA_NoSystemBackground);
     m_wordProxyWidget->setWidget(m_wordEdit);
     m_wordProxyWidget->show();
     Plasma::Animator::self()->animateItem(m_wordProxyWidget, Plasma::Animator::AppearAnimation);
