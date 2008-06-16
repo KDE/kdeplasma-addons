@@ -88,6 +88,7 @@ class Twitter : public Plasma::Applet
         void configAccepted();
         void updateStatus();
         void downloadHistory();
+        void openProfile();
 
         void showTweets();
 

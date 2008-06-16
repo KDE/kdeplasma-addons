@@ -33,6 +33,7 @@
 #include <QGraphicsLinearLayout>
 #include <QWebPage>
 #include <QWebFrame>
+#include <QAction>
 
 #include <KDebug>
 #include <KIcon>
@@ -46,6 +47,7 @@
 #include <KWallet/Wallet>
 #include <KMessageBox>
 #include <KColorScheme>
+#include <KRun>
 
 #include <plasma/svg.h>
 #include <plasma/theme.h>
@@ -277,10 +279,13 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         QPixmap pm = data[user].value<QPixmap>();
         if( !pm.isNull() ) {
             if( user == m_username ) {
-                m_icon->setIcon( QIcon( pm ) );
+                QAction *profile = new QAction(QIcon(pm), m_username, this);
+                
                 QSizeF iconSize = m_icon->sizeFromIconSize(48);
+                m_icon->setAction(profile);
                 m_icon->setMinimumSize( iconSize );
                 m_icon->setMaximumSize( iconSize );
+                connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
             }
             m_pictureMap[user] = pm;
             //TODO it would be nice to check whether the updated image is actually in use
@@ -358,11 +363,14 @@ void Twitter::showTweets()
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
+        QAction *profile = new QAction(QIcon(m_pictureMap[user]), user, this);
+        
         Tweet t = m_tweetWidgets[i];
-        t.icon->setIcon( QIcon(m_pictureMap[user]) );
+        t.icon->setAction(profile);
         QSizeF iconSize = t.icon->sizeFromIconSize(30);
         t.icon->setMinimumSize( iconSize );
         t.icon->setMaximumSize( iconSize );
+        connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
 
         QString sourceString;
         if( favIcon.isNull() ) {
@@ -598,6 +606,15 @@ void Twitter::downloadHistory()
     kDebug() << "Connecting to source " << query;
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
+}
+
+void Twitter::openProfile()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    
+    if (action) {
+        KRun::runUrl( KUrl("http://www.twitter.com/" + action->text()), "text/html", 0 );
+    }
 }
 
 QString Twitter::timeDescription( const QDateTime &dt )
