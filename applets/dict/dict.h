@@ -21,14 +21,8 @@
 #ifndef DICT_H
 #define DICT_H
 
-#include <QGraphicsItem>
-
-#include <KLineEdit>
-
-#include <plasma/applet.h>
-#include <plasma/dataengine.h>
-#include <plasma/widgets/flash.h>
-#include <plasma/widgets/icon.h>
+#include <Plasma/Applet>
+#include <Plasma/DataEngine>
 #include "ui_config.h"
 
 class QTimer;
@@ -37,6 +31,13 @@ class QLineEdit;
 class QWebView;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
+
+class KLineEdit;
+
+namespace Plasma
+{
+    class Icon;
+}
 
 class Dict : public Plasma::Applet
 {

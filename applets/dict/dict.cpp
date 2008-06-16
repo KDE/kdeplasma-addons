@@ -20,31 +20,19 @@
 
 #include "dict.h"
 
-#include <math.h>
-
-#include <QApplication>
-#include <QGraphicsScene>
 #include <QGraphicsProxyWidget>
-#include <QStyleOptionGraphicsItem>
-#include <QCheckBox>
-#include <QPushButton>
 #include <QTime>
 #include <QTimer>
 #include <QtWebKit/QWebView>
 #include <QGraphicsLinearLayout>
 
-#include <iostream>
-
 #include <KConfigDialog>
 #include <KDebug>
-#include <KLocale>
 #include <KIcon>
-#include <KSharedConfig>
-#include <KTimeZoneWidget>
+#include <KLineEdit>
 
-#include <plasma/svg.h>
-#include <plasma/animator.h>
-#include <plasma/theme.h>
+#include <Plasma/Animator>
+#include <plasma/widgets/icon.h>
 
 using namespace Plasma;
 
