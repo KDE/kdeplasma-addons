@@ -40,7 +40,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
-    setAspectRatioMode(Plasma::KeepAspectRatio );
+    setAspectRatioMode( Plasma::KeepAspectRatio );
 }
 
 void ComicApplet::init()
@@ -117,8 +117,6 @@ void ComicApplet::slotPreviousDay()
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
-    event->ignore();
-
     if ( event->button() == Qt::LeftButton ) { //&& geometry().contains( event->pos() ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
@@ -126,19 +124,18 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
         if ( mShowPreviousButton && event->pos().x() > rect.left() &&
                                     event->pos().x() < (rect.left() + s_arrowWidth) ) {
             slotPreviousDay();
-            event->accept();
         } else if ( mShowNextButton && event->pos().x() > (rect.right() - s_arrowWidth) &&
                                        event->pos().x() < rect.right() ) {
             slotNextDay();
-            event->accept();
         //link clicked
         } else if ( !mWebsiteUrl.isEmpty() &&
                     event->pos().y() > (rect.bottom() - fm.height()) &&
                     event->pos().x() > (rect.right() - fm.width( mWebsiteUrl.host() ) - s_arrowWidth) ) {
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
-            event->accept();
         }
     }
+
+    event->ignore();
 }
 
 void ComicApplet::updateSize()
