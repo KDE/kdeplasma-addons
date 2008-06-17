@@ -21,13 +21,12 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <QGraphicsGridLayout>
-#include <QGraphicsProxyWidget>
-
 #include <plasma/applet.h>
 
 class QLabel;
 class QAction;
+class QGraphicsGridLayout;
+class QGraphicsProxyWidget;
 
 namespace Plasma
 {

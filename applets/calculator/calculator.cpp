@@ -19,15 +19,18 @@
  ***************************************************************************/
 
 #include "calculator.h"
-#include <QtGui/QPainter>
-#include <QLabel>
-#include <KPushButton>
-#include <QAction>
-#include <QClipboard>
-#include <QApplication>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <QLabel>
+#include <QAction>
+#include <QApplication>
+#include <QClipboard>
+#include <QGraphicsGridLayout>
+#include <QGraphicsProxyWidget>
+
+#include <KPushButton>
+#include <KGlobal>
+#include <KLocale>
+
 #include <Plasma/Theme>
 #include <Plasma/PushButton>
 
