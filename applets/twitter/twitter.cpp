@@ -288,6 +288,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         if( !pm.isNull() ) {
             if( user == m_username ) {
                 QAction *profile = new QAction(QIcon(pm), m_username, this);
+                profile->setData(m_username);
                 
                 QSizeF iconSize = m_icon->sizeFromIconSize(48);
                 m_icon->setAction(profile);
@@ -376,7 +377,8 @@ void Twitter::showTweets()
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
-        QAction *profile = new QAction(QIcon(m_pictureMap[user]), user, this);
+        QAction *profile = new QAction(QIcon(m_pictureMap[user]), QString(), this);
+        profile->setData(user);
         
         Tweet t = m_tweetWidgets[i];
         t.icon->setAction(profile);
@@ -628,7 +630,7 @@ void Twitter::openProfile()
     QAction *action = qobject_cast<QAction *>(sender());
     
     if (action) {
-        KRun::runUrl( KUrl("http://www.twitter.com/" + action->text()), "text/html", 0 );
+        KRun::runUrl( KUrl("http://www.twitter.com/" + action->data().toString()), "text/html", 0 );
     }
 }
 
