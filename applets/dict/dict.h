@@ -37,6 +37,7 @@ class KLineEdit;
 namespace Plasma
 {
     class Icon;
+    class LineEdit;
 }
 
 class Dict : public Plasma::Applet
@@ -74,14 +75,13 @@ class Dict : public Plasma::Applet
         //QGraphicsPixmapItem *m_graphicsIcon; 
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_horLayout;
-        KLineEdit *m_wordEdit;
+        Plasma::LineEdit *m_wordEdit;
         //Plasma::Flash *m_flash;
         QStringList m_defList;
         QStringList::iterator m_i;
         Ui::config ui;
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
-        QGraphicsProxyWidget *m_wordProxyWidget;
         Plasma::Icon *m_icon;
 };
 

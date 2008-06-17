@@ -33,6 +33,7 @@
 
 #include <Plasma/Animator>
 #include <Plasma/Icon>
+#include <Plasma/LineEdit>
 
 using namespace Plasma;
 
@@ -50,14 +51,11 @@ void Dict::init()
     KConfigGroup cg = config();
 
     m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
-    m_wordProxyWidget = new QGraphicsProxyWidget(this);
-    m_wordEdit = new KLineEdit;
-    m_wordEdit->setClearButtonShown( true );
-    m_wordEdit->setClickMessage(i18n("Enter word to define here"));
-    m_wordEdit->setAttribute(Qt::WA_NoSystemBackground);
-    m_wordProxyWidget->setWidget(m_wordEdit);
-    m_wordProxyWidget->show();
-    Plasma::Animator::self()->animateItem(m_wordProxyWidget, Plasma::Animator::AppearAnimation);
+    m_wordEdit = new LineEdit;
+    m_wordEdit->nativeWidget()->setClearButtonShown( true );
+    m_wordEdit->nativeWidget()->setClickMessage(i18n("Enter word to define here"));
+    m_wordEdit->show();
+    Plasma::Animator::self()->animateItem(m_wordEdit, Plasma::Animator::AppearAnimation);
 
     m_defBrowser = new QWebView();
     m_defBrowserProxy = new QGraphicsProxyWidget(this);
@@ -84,7 +82,7 @@ void Dict::init()
 
     m_horLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     m_horLayout->addItem(m_icon);
-    m_horLayout->addItem(m_wordProxyWidget);
+    m_horLayout->addItem(m_wordEdit);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_horLayout);
     m_layout->addItem(m_defBrowserProxy);
@@ -93,7 +91,7 @@ void Dict::init()
     m_word = QString("");
     dataEngine("dict")->connectSource(m_word, this);
     connect(m_wordEdit, SIGNAL(editingFinished()), this, SLOT(define()));
-    connect(m_wordEdit, SIGNAL(textChanged(const QString&)), this, SLOT(autoDefine(const QString&)));
+    connect(m_wordEdit->nativeWidget(), SIGNAL(textChanged(const QString&)), this, SLOT(autoDefine(const QString&)));
     //connect(m_defEdit, SIGNAL(linkActivated(const QString&)), this, SLOT(linkDefine(const QString&)));
 
 //  This is the fix for links/selecting text
