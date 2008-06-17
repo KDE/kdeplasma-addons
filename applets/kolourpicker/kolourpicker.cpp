@@ -7,7 +7,6 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-
 #include "kolourpicker.h"
 
 #include <qapplication.h>
@@ -243,13 +242,11 @@ void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
 
 bool Kolourpicker::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
-    m_grabButton->SetMinimumSize(22,22);
     if (watched == m_grabButton && event->type() == QEvent::GraphicsSceneMouseRelease)
     {
         m_grabWidget = static_cast<QGraphicsSceneMouseEvent *>(event)->widget();
         if (m_grabWidget && m_grabWidget->parentWidget())
         {
-    m_historyButton->SetMinimumSize(22,22);
             m_grabWidget = m_grabWidget->parentWidget();
         }
         if (m_grabWidget)
