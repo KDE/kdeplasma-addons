@@ -24,7 +24,6 @@
 #include <QLabel>
 #include <QDomDocument>
 #include <QMap>
-#include <QGraphicsProxyWidget>
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
@@ -36,6 +35,7 @@ class KTextBrowser;
 class QSpinBox;
 class QCheckBox;
 class QGraphicsLinearLayout;
+class QGraphicsProxyWidget;
 class KColorScheme;
 
 namespace KWallet
@@ -48,6 +48,7 @@ namespace Plasma
     class Svg;
     class Flash;
     class Icon;
+    class TextEdit;
     class WebContent;
 }
 
@@ -119,8 +120,7 @@ class Twitter : public Plasma::Applet
         void writeConfigPassword();
 
         Plasma::Svg *m_theme;
-        KTextEdit *m_statusEdit;
-        QGraphicsProxyWidget *m_statusProxy;
+        Plasma::TextEdit *m_statusEdit;
         Plasma::WebContent *m_historyEdit;
         Plasma::Flash *m_flash;
         Plasma::Icon *m_icon;

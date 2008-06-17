@@ -31,6 +31,7 @@
 #include <QFontMetrics>
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
 #include <QWebPage>
 #include <QWebFrame>
 #include <QAction>
@@ -56,6 +57,7 @@
 #include <plasma/widgets/flash.h>
 #include <plasma/widgets/icon.h>
 #include <plasma/widgets/webcontent.h>
+#include <Plasma/TextEdit>
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
@@ -120,20 +122,18 @@ void Twitter::init()
     m_icon->setMaximumSize( iconSize );
     m_headerLayout->addItem( m_icon );
 
-    m_statusProxy = new QGraphicsProxyWidget( this );
-    m_statusEdit = new KTextEdit();
-    m_statusEdit->setFrameShape( QFrame::NoFrame );
-    m_statusEdit->setAttribute( Qt::WA_NoSystemBackground );
-    m_statusEdit->setTextBackgroundColor( QColor(0,0,0,0) );
-    m_statusEdit->viewport()->setAutoFillBackground( false );
+    m_statusEdit = new Plasma::TextEdit();
+    m_statusEdit->nativeWidget()->setFrameShape( QFrame::NoFrame );
+    m_statusEdit->nativeWidget()->setTextBackgroundColor( QColor(0,0,0,0) );
+    m_statusEdit->nativeWidget()->viewport()->setAutoFillBackground( false );
+
     //FIXME: m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
     // seems to have no effect
     QPalette editPal = m_statusEdit->palette();
     editPal.setColor(QPalette::Text, m_colorScheme->foreground().color());
-    m_statusEdit->setPalette(editPal);
-    m_statusEdit->installEventFilter(this);
-    m_statusProxy->setWidget( m_statusEdit );
-    m_headerLayout->addItem( m_statusProxy );
+    m_statusEdit->nativeWidget()->setPalette(editPal);
+    m_statusEdit->nativeWidget()->installEventFilter(this);
+    m_headerLayout->addItem( m_statusEdit );
 
     m_layout->addStretch();
 
@@ -586,9 +586,9 @@ bool Twitter::eventFilter(QObject *obj, QEvent *event)
 
 void Twitter::updateStatus()
 {
-    QString status = m_username + ':' + m_statusEdit->toPlainText();
+    QString status = m_username + ':' + m_statusEdit->nativeWidget()->toPlainText();
     m_engine->setProperty( "status", status );
-    m_statusEdit->setPlainText("");
+    m_statusEdit->nativeWidget()->setPlainText("");
 }
 
 //what this really means now is 'reconnect to the timeline source'
