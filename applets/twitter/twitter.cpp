@@ -21,24 +21,19 @@
 #include "twitter.h"
 
 #include <QApplication>
-#include <QPainter>
 #include <QGridLayout>
 #include <QPushButton>
 #include <QSpinBox>
-#include <QTextDocument>
 #include <QCheckBox>
-#include <QGradient>
 #include <QFontMetrics>
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsProxyWidget>
-#include <QWebPage>
-#include <QWebFrame>
 #include <QAction>
+#include <QLabel>
 
 #include <KDebug>
 #include <KIcon>
-#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigDialog>
 #include <KLineEdit>
@@ -50,13 +45,11 @@
 #include <KColorScheme>
 #include <KRun>
 
-#include <plasma/svg.h>
-#include <plasma/theme.h>
-#include <plasma/dataengine.h>
-// #include <plasma/widgets/lineedit.h>
-#include <plasma/widgets/flash.h>
-#include <plasma/widgets/icon.h>
-#include <plasma/widgets/webcontent.h>
+#include <Plasma/Svg>
+#include <Plasma/Theme>
+#include <Plasma/DataEngine>
+#include <Plasma/Flash>
+#include <Plasma/Icon>
 #include <Plasma/TextEdit>
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)

@@ -21,13 +21,10 @@
 #ifndef TWITTER_H
 #define TWITTER_H
 
-#include <QLabel>
-#include <QDomDocument>
 #include <QMap>
 
-#include <plasma/applet.h>
-#include <plasma/dataengine.h>
-
+#include <Plasma/Applet>
+#include <Plasma/DataEngine>
 
 class KLineEdit;
 class KTextEdit;
