@@ -7,6 +7,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
+
 #include "kolourpicker.h"
 
 #include <qapplication.h>
