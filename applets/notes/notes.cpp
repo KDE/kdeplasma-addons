@@ -26,6 +26,9 @@
 #include <KGlobalSettings>
 #include <KConfigDialog>
 #include <KConfigGroup>
+#include <KTextEdit>
+
+#include <Plasma/TextEdit>
 
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
@@ -40,9 +43,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     resize(256, 256);
 
     m_defaultText = i18n("Welcome to the Notes Plasmoid! Type your notes here...");
-    m_textEdit = new KTextEdit();
+    m_textEdit = new Plasma::TextEdit();
     m_layout = new QGraphicsLinearLayout(this);
-    m_proxy = new QGraphicsProxyWidget(this);
     m_autoFont = false;
 
     updateTextGeometry();
@@ -60,35 +62,31 @@ Notes::~Notes()
 void Notes::init()
 {
     m_notes_theme.setContainsMultipleImages(false);
-
-    m_proxy->setWidget(m_textEdit);
-    m_proxy->show();
-    m_textEdit->setCheckSpellingEnabled(true);
-    m_textEdit->setFrameShape(QFrame::NoFrame);
-    m_textEdit->setAttribute(Qt::WA_NoSystemBackground);
-    m_textEdit->setTextBackgroundColor(QColor(0,0,0,0));
-    m_textEdit->viewport()->setAutoFillBackground(false);
-    m_proxy->setMinimumSize(QSize(0, 0));
-    m_layout->addItem(m_proxy);
+    m_textEdit->nativeWidget()->setCheckSpellingEnabled(true);
+    m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
+    m_textEdit->nativeWidget()->setTextBackgroundColor(QColor(0,0,0,0));
+    m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
+    m_textEdit->setMinimumSize(QSize(0, 0));
+    m_layout->addItem(m_textEdit);
 
     KConfigGroup cg = config();
 
     QString text = cg.readEntry("autoSave", QString());
     if (! text.isEmpty()) {
-        m_textEdit->setPlainText(text);
+        m_textEdit->nativeWidget()->setPlainText(text);
     } else {
-        m_textEdit->setPlainText(m_defaultText);
+        m_textEdit->nativeWidget()->setPlainText(m_defaultText);
     }
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
     m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
-    m_textEdit->setTextColor(m_textColor);
+    m_textEdit->nativeWidget()->setTextColor(m_textColor);
     m_checkSpelling = cg.readEntry("checkSpelling", false);
-    m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
+    m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     setLayout(m_layout);
     updateTextGeometry();
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(saveNote()));
+    connect(m_textEdit->nativeWidget(), SIGNAL(textChanged()), this, SLOT(saveNote()));
     //connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
     focusNote();
 }
@@ -109,7 +107,7 @@ void Notes::updateTextGeometry()
     m_layout->setSpacing(xpad);
     m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
     m_font.setPointSize(fontSize());
-    m_textEdit->setFont(m_font);
+    m_textEdit->nativeWidget()->setFont(m_font);
 }
 
 int Notes::fontSize()
@@ -125,14 +123,14 @@ int Notes::fontSize()
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("autoSave", m_textEdit->toPlainText());
-    kDebug() << m_textEdit->toPlainText();
+    cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toPlainText());
+    kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
 }
 
 void Notes::focusNote()
 {
-    if (m_textEdit->toPlainText() == m_defaultText) {
+    if (m_textEdit->nativeWidget()->toPlainText() == m_defaultText) {
         //m_textEdit->setEnabled(false);
         kDebug() << "enabled: false";
     } else {
@@ -160,7 +158,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.textColorButton->setColor(m_textColor);
-    ui.textFontButton->setFont(m_textEdit->font());
+    ui.textFontButton->setFont(m_textEdit->nativeWidget()->font());
     ui.autoFont->setChecked(m_autoFont);
     ui.autoFontPercent->setValue(m_autoFontPercent);
     ui.checkSpelling->setChecked(m_checkSpelling);
@@ -178,7 +176,7 @@ void Notes::configAccepted()
         cg.writeEntry("font", newFont);
         m_font = newFont;
         m_font.setPointSize(fontSize());
-        m_textEdit->setFont(newFont);
+        m_textEdit->nativeWidget()->setFont(newFont);
     }
 
     if (m_autoFont != ui.autoFont->isChecked()) {
@@ -202,7 +200,7 @@ void Notes::configAccepted()
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textcolor", m_textColor);
-        m_textEdit->setTextColor(m_textColor); // This doesn't seem to work, why?
+        m_textEdit->nativeWidget()->setTextColor(m_textColor); // This doesn't seem to work, why?
     }
 
     bool spellCheck = ui.checkSpelling->isChecked();
@@ -210,7 +208,7 @@ void Notes::configAccepted()
         changed = true;
         m_checkSpelling = spellCheck;
         cg.writeEntry("checkSpelling", m_checkSpelling);
-        m_textEdit->setCheckSpellingEnabled(m_checkSpelling);
+        m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     }
 
     if (changed) {

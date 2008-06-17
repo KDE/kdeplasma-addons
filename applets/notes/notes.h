@@ -23,9 +23,6 @@
 #define NOTES_HEADER
 
 #include <QGraphicsLinearLayout>
-#include <QGraphicsProxyWidget>
-
-#include <KTextEdit>
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
@@ -33,6 +30,11 @@
 #include "ui_config.h"
 
 class QSizeF;
+
+namespace Plasma
+{
+    class TextEdit;
+}
 
 class Notes : public Plasma::Applet
 {
@@ -66,8 +68,7 @@ class Notes : public Plasma::Applet
         QColor m_textColor;
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
-        QGraphicsProxyWidget *m_proxy;
-        KTextEdit *m_textEdit;
+        Plasma::TextEdit *m_textEdit;
         QString m_defaultText;
         Ui::config ui;
 
