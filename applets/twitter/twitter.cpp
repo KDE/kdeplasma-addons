@@ -390,7 +390,7 @@ void Twitter::showTweets()
             sourceString = i18n(" from %1", tweetData.value( "Source" ).toString());
         }
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
-        html += i18n( "<tr><td align='left' width='auto'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>", user, m_colorScheme->foreground(KColorScheme::InactiveText).color().name(),
+        html += i18n( "<tr><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>", user, m_colorScheme->foreground(KColorScheme::InactiveText).color().name(),
                 timeDescription( tweetData.value( "Date" ).toDateTime() ), sourceString);
         QString status = tweetData.value( "Status" ).toString();
 
