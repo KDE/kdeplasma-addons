@@ -50,7 +50,7 @@ private Q_SLOTS:
 
 protected:
     virtual void initialize();
-    void constraintsUpdated(Plasma::Constraints constraints);
+    void constraintsEvent(Plasma::Constraints constraints);
     QSize m_minimumSize;
     Plasma::Icon *m_icon;
     Plasma::Dialog *m_dialog;

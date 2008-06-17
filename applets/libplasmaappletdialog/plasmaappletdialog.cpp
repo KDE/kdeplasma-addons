@@ -28,11 +28,12 @@
 #include <KIcon>
 
 PlasmaAppletDialog::PlasmaAppletDialog(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
-    , m_icon( 0 )
-    , m_closePopup( false )
-    , m_layout( 0 )
-    , m_proxy(0)
+    : Plasma::Applet(parent, args),
+      m_icon(0),
+      m_dialog(0),
+      m_closePopup( false ),
+      m_layout(0),
+      m_proxy(0)
 {
     int iconSize = IconSize(KIconLoader::Desktop);
     resize(iconSize, iconSize);
@@ -40,6 +41,9 @@ PlasmaAppletDialog::PlasmaAppletDialog(QObject *parent, const QVariantList &args
 
 PlasmaAppletDialog::~PlasmaAppletDialog()
 {
+    if (m_proxy) {
+        m_proxy->setWidget(0);
+    }
     delete m_dialog;
     delete m_icon;
 }
@@ -69,25 +73,10 @@ void PlasmaAppletDialog::init()
     setLayout(m_layout);
 
     connect(m_icon, SIGNAL(clicked()), this, SLOT(slotOpenDialog()));
-
-    m_dialog = new Plasma::Dialog();
-
-    m_proxy = new QGraphicsProxyWidget(this);
-
-    QVBoxLayout *l_layout = new QVBoxLayout();
-    l_layout->setSpacing(0);
-    l_layout->setMargin(0);
-
-
-    l_layout->addWidget( widget() );
-
-    m_dialog->setLayout( l_layout );
-    m_dialog->adjustSize();
-
-    constraintsUpdated(Plasma::FormFactorConstraint);
+    //updateConstraints(Plasma::FormFactorConstraint);
 }
 
-void PlasmaAppletDialog::constraintsUpdated(Plasma::Constraints constraints)
+void PlasmaAppletDialog::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         // Plasma::Dialog already has standard background
@@ -97,10 +86,17 @@ void PlasmaAppletDialog::constraintsUpdated(Plasma::Constraints constraints)
         case Plasma::Planar:
         case Plasma::MediaCenter:
             m_closePopup = false;
+            delete m_dialog;
+            m_dialog = 0;
+
             setAspectRatioMode(Plasma::IgnoreAspectRatio);
-            m_dialog->setWindowFlags(Qt::Widget);
-            m_proxy->setWidget(m_dialog);
-            m_proxy->show();
+
+            if (!m_proxy) {
+                m_proxy = new QGraphicsProxyWidget(this);
+                m_proxy->setWidget(widget());
+                m_proxy->show();
+            }
+
             m_layout->addItem(m_proxy);
             setMinimumSize( m_minimumSize.width(), m_minimumSize.height());
             break;
@@ -108,9 +104,23 @@ void PlasmaAppletDialog::constraintsUpdated(Plasma::Constraints constraints)
         case Plasma::Vertical:
             m_closePopup = true;
             setAspectRatioMode(Plasma::Square);
-            m_dialog->setWindowFlags(Qt::Popup);
-            m_proxy->setWidget(0);
-            m_proxy->hide();
+
+            if (m_proxy) {
+                m_proxy->setWidget(0); // prevent it from deleting our widget!
+                delete m_proxy;
+                m_proxy = 0;
+            }
+
+            if (!m_dialog) {
+                m_dialog = new Plasma::Dialog();
+                m_dialog->setWindowFlags(Qt::Popup);
+                QVBoxLayout *l_layout = new QVBoxLayout(m_dialog);
+                l_layout->setSpacing(0);
+                l_layout->setMargin(0);
+                l_layout->addWidget(widget());
+                m_dialog->adjustSize();
+            }
+
             m_layout->addItem(m_icon);
             break;
         }
