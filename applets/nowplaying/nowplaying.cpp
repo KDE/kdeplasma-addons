@@ -41,7 +41,8 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_timeText(new Plasma::Label),
       m_layout(0)
 {
-    resize(200, 60);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
+    resize(300, 150);
     setMinimumSize(100, 30);
 }
 
