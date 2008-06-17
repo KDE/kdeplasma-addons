@@ -22,13 +22,12 @@
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
-#include <QGraphicsLinearLayout>
-
 #include <Plasma/Applet>
 #include <Plasma/Svg>
 
 #include "ui_config.h"
 
+class QGraphicsLinearLayout;
 class QSizeF;
 
 namespace Plasma
