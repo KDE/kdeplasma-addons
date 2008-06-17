@@ -26,6 +26,8 @@
 #include <QClipboard>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
+#include <QFontMetrics>
+#include <QSizePolicy>
 
 #include <KPushButton>
 #include <KGlobal>
@@ -40,7 +42,7 @@ CalculatorApplet::CalculatorApplet( QObject *parent, const QVariantList &args )
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     m_layout = 0;
     resize(300,300);
-    setMinimumSize(300,300);
+    setMinimumSize(50,50);
 }
 
 void CalculatorApplet::init()
@@ -50,6 +52,8 @@ void CalculatorApplet::init()
 
     previousAddSubOperation=calcNone;
     previousMulDivOperation=calcNone;
+
+    int buttonX,buttonY;
 
     inputText = QString('0');
     sum = 0;
@@ -65,13 +69,20 @@ void CalculatorApplet::init()
     QFont font = Plasma::Theme::defaultTheme()->font( Plasma::Theme::DefaultFont );
     font.setBold(true);
     font.setPointSize(16);
+    QFontMetrics metric(font);
+    mOutputDisplay->setMinimumSize(50,metric.height());
     mOutputDisplay->setFont(font);
     mOutputDisplay->setText(inputText);
     mOutputDisplay->setVisible(true);
 
     mButtonDigit[0] = new Plasma::PushButton( this );
+    QFontMetrics metric1(mButtonDigit[0]->font());
+    buttonY=metric1.height()*1.3;
+    buttonX=metric1.width("00");
     mButtonDigit[0]->setText( QString::number(0) );
     connect( mButtonDigit[0], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
+    mButtonDigit[0]->setMinimumSize(buttonX,buttonY);
+    mButtonDigit[0]->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
     mButtonDigit[0]->setVisible( true );
     m_layout->addItem( mButtonDigit[0], 5,1,1,2 );
 
@@ -83,6 +94,8 @@ void CalculatorApplet::init()
         mButtonDigit[i]->setText( QString::number(i) );
         connect( mButtonDigit[i], SIGNAL( clicked() ), this, SLOT( slotDigitClicked() ) );
         mButtonDigit[i]->setVisible( true );
+	mButtonDigit[i]->setMinimumSize(buttonX,buttonY);
+	mButtonDigit[i]->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonDigit[i], row,column );
     }
 
@@ -92,9 +105,13 @@ void CalculatorApplet::init()
     m_layout->addItem( mButtonDecimal, 5, 3 );
     connect( mButtonDecimal, SIGNAL( clicked() ), this, SLOT( slotDecimalClicked() ) );
     mButtonDecimal->setVisible( true );
+    mButtonDecimal->setMinimumSize(buttonX,buttonY);
+    mButtonDecimal->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
     mButtonEquals = new Plasma::PushButton( this );
     mButtonEquals->setText( "=" );
+    mButtonEquals->setMinimumSize(buttonX,buttonY);
+    mButtonEquals->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
     m_layout->addItem( mButtonEquals, 4, 4,2,1 );
 
     connect( mButtonEquals, SIGNAL( clicked() ), this, SLOT( slotEqualsClicked() ) );
@@ -102,12 +119,17 @@ void CalculatorApplet::init()
 
     mButtonAdd = new Plasma::PushButton( this );
     mButtonAdd->setText( "+" );
+    mButtonAdd->setMinimumSize(buttonX,buttonY);
+    mButtonAdd->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
+
     m_layout->addItem( mButtonAdd, 3, 4 );
     connect( mButtonAdd, SIGNAL( clicked() ), this, SLOT( slotAddClicked() ) );
     mButtonAdd->setVisible( true );
 
     mButtonSubtract = new Plasma::PushButton( this );
     mButtonSubtract->setText( "-" );
+    mButtonSubtract->setMinimumSize(buttonX,buttonY);
+    mButtonSubtract->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
     m_layout->addItem( mButtonSubtract, 2, 4 );
 
     connect( mButtonSubtract, SIGNAL( clicked() ), this, SLOT( slotSubtractClicked() ) );
@@ -115,6 +137,8 @@ void CalculatorApplet::init()
 
     mButtonMultiply = new Plasma::PushButton( this );
     mButtonMultiply->setText( "X" );
+    mButtonMultiply->setMinimumSize(buttonX,buttonY);
+    mButtonMultiply->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
     m_layout->addItem( mButtonMultiply, 1, 3 );
 
     connect( mButtonMultiply, SIGNAL( clicked() ), this, SLOT( slotMultiplyClicked() ) );
@@ -122,6 +146,8 @@ void CalculatorApplet::init()
 
     mButtonDivide = new Plasma::PushButton( this );
     mButtonDivide->setText( "/" );
+    mButtonDivide->setMinimumSize(buttonX,buttonY);
+    mButtonDivide->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
     m_layout->addItem( mButtonDivide, 1, 2 );
 
@@ -130,6 +156,8 @@ void CalculatorApplet::init()
 
     mButtonClear = new Plasma::PushButton( this );
     mButtonClear->setText( "C" );
+    mButtonClear->setMinimumSize(buttonX,buttonY);
+    mButtonClear->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
     m_layout->addItem( mButtonClear, 1, 1 );
     connect( mButtonClear, SIGNAL( clicked() ), this, SLOT( slotClearClicked() ) );
@@ -137,6 +165,8 @@ void CalculatorApplet::init()
 
     mButtonAllClear = new Plasma::PushButton( this );
     mButtonAllClear->setText( "AC" );
+    mButtonAllClear->setMinimumSize(buttonX,buttonY);
+    mButtonAllClear->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
     m_layout->addItem( mButtonAllClear, 1, 4);
     connect( mButtonAllClear, SIGNAL( clicked() ), this, SLOT( slotAllClearClicked() ) );
