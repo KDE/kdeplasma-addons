@@ -555,7 +555,7 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
 
 bool Twitter::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == m_statusEdit) {
+    if (obj == m_statusEdit->nativeWidget()) {
         //FIXME:it's nevessary this eventfilter to intercept keypresses in
         // QTextEdit (or KTextedit) is it intended?
         if (event->type() == QEvent::KeyPress) {
