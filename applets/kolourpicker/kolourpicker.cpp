@@ -186,12 +186,14 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
 
     m_grabButton = new PickerButton(this);
     mainlay->addItem(m_grabButton);
+    m_grabButton->setMinimumSize(22,22);
     m_grabButton->nativeWidget()->setIcon(KIcon("color-picker"));
     connect(m_grabButton, SIGNAL(clicked()), this, SLOT(grabClicked()));
 
     m_historyButton = new PickerButton(this);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
+    m_historyButton->setMinimumSize(22,22);
     m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
