@@ -79,8 +79,6 @@ void PlasmaAppletDialog::init()
 void PlasmaAppletDialog::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
-        // Plasma::Dialog already has standard background
-        setBackgroundHints(NoBackground);
         m_layout->removeAt(0);
         switch (formFactor()) {
         case Plasma::Planar:
