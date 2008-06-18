@@ -2,6 +2,7 @@
 Name=Contacts
 Name[el]=Επαφές
 Name[es]=Contactos
+Name[et]=Kontaktid
 Name[ga]=Teagmhálacha
 Name[gl]=Contactos
 Name[ja]=連絡先
@@ -20,6 +21,7 @@ Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
 Comment[el]=Αναζητά καταχωρήσεις στο βιβλίο διευθύνσεών σας
 Comment[es]=Buscar entradas en su libreta de direcciones
+Comment[et]=Kirjete otsimine aadressiraamatust
 Comment[fr]=Trouver des entrées dans votre carnet d'adresse
 Comment[ga]=Aimsigh teagmhálacha i do leabhar seoltaí
 Comment[gl]=Encontra entradas no seu caderno de enderezos

@@ -2,6 +2,7 @@
 Name=Konq Profiles Applet
 Name[el]=Μικροεφαρμογή προφίλ Konq
 Name[es]=Aplicación de perfiles de Konqueror
+Name[et]=Konquerori profiilide aplett
 Name[fr]=Applet des profils Konq
 Name[ga]=Feidhmchláirín Próifílí Konq
 Name[gl]=Applet de perfís de Konq
@@ -21,6 +22,7 @@ Name[zh_TW]=Konq 設定檔小程式
 Comment=Konq Profiles Launcher
 Comment[el]=Εκτελεστής προφίλ Konq
 Comment[es]=Iniciador de perfiles de Konqueror
+Comment[et]=Konquerori profiilide käivitaja
 Comment[fr]=Lanceur de profils Konq
 Comment[ga]=Tosaitheoir Próifílí Konq
 Comment[gl]=Lanzador de perfís de Konq

@@ -2,6 +2,7 @@
 Name=Unit Converter
 Name[el]=Μετατροπέας μονάδων
 Name[es]=Conversor de unidades
+Name[et]=Ühikute teisendaja
 Name[fr]=Convertisseur d'unité
 Name[gl]=Convertedor de unidades
 Name[ja]=単位変換ツール
@@ -20,6 +21,7 @@ Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες
 Comment[es]=Convierte valores a diferentes unidades
+Comment[et]=Väärtuste teisendamine erinevatesse ühikutesse
 Comment[fr]=Conversion de valeurs dans diverses unités
 Comment[gl]=Converte valores entre diferentes unidades
 Comment[ja]=数値を他の単位に変換します

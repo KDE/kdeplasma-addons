@@ -2,6 +2,7 @@
 Name=Calculator
 Name[el]=Αριθμομηχανή
 Name[es]=Calculadora
+Name[et]=Kalkulaator
 Name[fr]=Calculatrice
 Name[ga]=Áireamhán
 Name[gl]=Calculadora
@@ -21,6 +22,7 @@ Name[zh_TW]=計算機
 Comment=A simple calculator.
 Comment[el]=Μια απλή αριθμομηχανή.
 Comment[es]=Una sencilla calculadora.
+Comment[et]=Lihtne kalkulaator.
 Comment[fr]=Une simple calculatrice
 Comment[ga]=Áireamhán simplí.
 Comment[gl]=Unha calculadora sinxela.

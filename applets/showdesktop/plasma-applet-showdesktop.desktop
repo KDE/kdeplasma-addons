@@ -2,6 +2,7 @@
 Name=Show Desktop
 Name[el]=Εμφάνιση επιφάνειας εργασίας
 Name[es]=Mostrar escritorio
+Name[et]=Töölaua näitamine
 Name[fr]=Voir le bureau
 Name[ga]=Taispeáin an Deasc
 Name[gl]=Mostrar o escritorio
@@ -21,6 +22,7 @@ Name[zh_TW]=顯示桌面
 Comment=Lets you show the desktop
 Comment[el]=Επιτρέπει την εμφάνιση της επιφάνειας εργασίας
 Comment[es]=Le permite mostrar el escritorio
+Comment[et]=Võimaldab näidata töölauda
 Comment[fr]=Vous permet de voir le bureau
 Comment[ga]=Ligeann sé seo duit an Deasc a fheiceáil
 Comment[gl]=Permítelle ver o escritorio

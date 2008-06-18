@@ -7,6 +7,7 @@ X-KDE-PlasmaComicProvider-Identifier=phd
 Icon=plasma_comic_phd
 
 Name=PhD Comics
+Name[et]=PhD koomiks
 Name[fi]=PhD-sarjakuvat
 Name[gl]=Cómics PhD
 Name[lv]=PhD komiksi
@@ -18,6 +19,7 @@ Name[x-test]=xxPhD Comicsxx
 Name[zh_CN]=PhD 连环画
 Name[zh_TW]=PhD 漫畫
 Comment=PhD Comics
+Comment[et]=PhD koomiks
 Comment[fi]=PhD-sarjakuvat
 Comment[gl]=Cómics PhD
 Comment[lv]=PhD komiksi
