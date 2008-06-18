@@ -73,7 +73,7 @@
     <linearGradient
        id="linearGradient3328">
       <stop
-         style="stop-color:#5a5a5a;stop-opacity:0.49019608;"
+         style="stop-color:#5a5a5a;stop-opacity:0.41176471;"
          offset="0"
          id="stop3330" />
       <stop
@@ -86,7 +86,7 @@
       <stop
          id="stop3324"
          offset="0"
-         style="stop-color:#646464;stop-opacity:0.60784316;" />
+         style="stop-color:#646464;stop-opacity:0.52941179;" />
       <stop
          id="stop3326"
          offset="1"
@@ -130,20 +130,20 @@
       <stop
          id="stop3204"
          offset="0"
-         style="stop-color:#969696;stop-opacity:0.60784316;" />
+         style="stop-color:#969696;stop-opacity:0.52941179;" />
       <stop
          id="stop3206"
          offset="1"
-         style="stop-color:#828282;stop-opacity:0.60784316;" />
+         style="stop-color:#828282;stop-opacity:0.52941179;" />
     </linearGradient>
     <linearGradient
        id="linearGradient3142">
       <stop
-         style="stop-color:#828282;stop-opacity:0.39215687;"
+         style="stop-color:#828282;stop-opacity:0.3137255;"
          offset="0"
          id="stop3144" />
       <stop
-         style="stop-color:#6e6e6e;stop-opacity:0.39215687;"
+         style="stop-color:#6e6e6e;stop-opacity:0.3137255;"
          offset="1"
          id="stop3146" />
     </linearGradient>
@@ -486,11 +486,11 @@
      inkscape:cx="202.73735"
      inkscape:cy="651.54879"
      inkscape:document-units="px"
-     inkscape:current-layer="topleft"
+     inkscape:current-layer="layer2"
      inkscape:window-width="985"
-     inkscape:window-height="767"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-height="768"
+     inkscape:window-x="113"
+     inkscape:window-y="14"
      showguides="true"
      inkscape:guide-bbox="true"
      showgrid="false" />
@@ -557,21 +557,22 @@
        inkscape:label="#rect3182" />
     <g
        id="left"
-       inkscape:label="#g3338">
+       inkscape:label="#g3338"
+       style="opacity:1">
       <rect
          y="352.36218"
          x="98"
          height="100"
          width="2"
          id="rect3268"
-         style="opacity:1;fill:url(#linearGradient3289);fill-opacity:1;stroke:none;stroke-width:0.12839976;stroke-opacity:1" />
+         style="opacity:1;fill:url(#linearGradient3289);fill-opacity:1;stroke:none;stroke-width:0.12839976000000000;stroke-opacity:1" />
       <rect
          y="352.36218"
          x="86"
          height="100"
          width="12"
          id="rect3196"
-         style="fill:url(#linearGradient3336);fill-opacity:1;stroke:none;stroke-width:0.14072546;stroke-opacity:1" />
+         style="fill:url(#linearGradient3336);fill-opacity:1;stroke:none;stroke-width:0.14072546000000000;stroke-opacity:1" />
     </g>
     <g
        id="topleft"
@@ -582,14 +583,14 @@
          height="8"
          width="2"
          id="rect3264"
-         style="opacity:1;fill:#828282;fill-opacity:0.39215686;stroke:none;stroke-width:1;stroke-opacity:0.78431373" />
+         style="opacity:1;fill:#828282;fill-opacity:0.39215686000000000;stroke:none;stroke-width:1;stroke-opacity:0.78431373000000004" />
       <rect
          y="344.36218"
          x="94"
          height="8"
          width="4"
          id="rect3208"
-         style="opacity:1;fill:#969696;fill-opacity:0.60784316;stroke:none;stroke-width:1;stroke-opacity:1" />
+         style="opacity:1;fill:#969696;fill-opacity:0.52941179;stroke:none;stroke-width:1;stroke-opacity:1" />
       <path
          transform="matrix(-2.6382116,0,0,-1.905375,904.46153,1018.8401)"
          sodipodi:end="1.5707963"
@@ -600,23 +601,25 @@
          sodipodi:cy="349.78833"
          sodipodi:cx="307.20111"
          id="path3213"
-         style="opacity:1;fill:#969696;fill-opacity:0.60784316;stroke:none;stroke-linecap:square;stroke-opacity:1"
+         style="opacity:1;fill:#969696;fill-opacity:0.52941179;stroke:none;stroke-linecap:square;stroke-opacity:1"
          sodipodi:type="arc" />
     </g>
     <g
        id="top"
-       inkscape:label="#g3246">
+       inkscape:label="#g3246"
+       style="opacity:1">
       <rect
          y="344.36218"
          x="100"
          height="8"
          width="200"
          id="rect3172"
-         style="fill:#828282;fill-opacity:0.39215687;stroke:none;stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.78431373000000004" />
+         style="fill:#828282;fill-opacity:0.3137255;stroke:none;stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.78431373000000004" />
     </g>
     <g
        id="topright"
-       inkscape:label="#g3254">
+       inkscape:label="#g3254"
+       style="opacity:1">
       <path
          transform="matrix(2.6382116,0,0,-1.905375,-510.46153,1018.8401)"
          sodipodi:end="1.5707963"
@@ -627,12 +630,13 @@
          sodipodi:cy="349.78833"
          sodipodi:cx="307.20111"
          id="path3179"
-         style="opacity:1;fill:#828282;fill-opacity:0.39215687;stroke:none;stroke-linecap:square;stroke-opacity:0.78431373000000004"
+         style="opacity:1;fill:#828282;fill-opacity:0.3137255;stroke:none;stroke-linecap:square;stroke-opacity:0.78431373000000004"
          sodipodi:type="arc" />
     </g>
     <g
        id="bottomleft"
-       inkscape:label="#g2261">
+       inkscape:label="#g2261"
+       style="opacity:1">
       <path
          sodipodi:nodetypes="ccsc"
          id="path3326"
@@ -644,21 +648,21 @@
          height="3"
          width="6.0023112"
          id="rect3374"
-         style="fill:url(#linearGradient3387);fill-opacity:1;stroke:none;stroke-width:0.12899683;stroke-opacity:1;display:inline" />
+         style="fill:url(#linearGradient3387);fill-opacity:1;stroke:none;stroke-width:0.12899683000000001;stroke-opacity:1;display:inline" />
       <rect
          y="452.36218"
          x="98"
          height="8"
          width="2"
          id="rect3274"
-         style="fill:#6e6e6e;fill-opacity:0.39215687;stroke:none;stroke-width:0.14164283999999999;stroke-opacity:0.90196078000000002" />
+         style="fill:#6e6e6e;fill-opacity:0.39215686999999999;stroke:none;stroke-width:0.14164283999999999;stroke-opacity:0.90196078000000002" />
       <rect
          y="452.36218"
          x="94"
          height="8"
          width="4"
          id="rect3210"
-         style="fill:#828282;fill-opacity:0.60784316;stroke:none;stroke-width:1;stroke-opacity:1" />
+         style="fill:#828282;fill-opacity:0.52941179;stroke:none;stroke-width:1;stroke-opacity:1" />
       <path
          transform="matrix(-2.6382116,0,0,1.905375,904.46153,-214.11576)"
          sodipodi:end="1.5707963"
@@ -669,16 +673,17 @@
          sodipodi:cy="349.78833"
          sodipodi:cx="307.20111"
          id="path3215"
-         style="fill:#828282;fill-opacity:0.60784316;stroke:none;stroke-linecap:square;stroke-opacity:1"
+         style="fill:#828282;fill-opacity:0.52941179;stroke:none;stroke-linecap:square;stroke-opacity:1"
          sodipodi:type="arc" />
       <path
          id="path3312"
          d="M 93.420541,459.80004 C 86.533704,459.80004 86.511257,453.1945 86.511257,453.1945"
-         style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient3378);stroke-width:1.0215081;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline" />
+         style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient3378);stroke-width:1.02150809999999992;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline" />
     </g>
     <g
        id="bottomright"
-       inkscape:label="#g3240">
+       inkscape:label="#g3240"
+       style="opacity:1">
       <path
          sodipodi:nodetypes="ccsc"
          id="path3352"
@@ -694,30 +699,31 @@
          sodipodi:cy="349.78833"
          sodipodi:cx="307.20111"
          id="path3188"
-         style="fill:#6e6e6e;fill-opacity:0.39215687;stroke:none;stroke-linecap:square;stroke-opacity:0.78431373000000004"
+         style="fill:#6e6e6e;fill-opacity:0.3137255;stroke:none;stroke-linecap:square;stroke-opacity:0.78431373000000004"
          sodipodi:type="arc" />
       <path
          id="path3316"
          d="M 300.52452,459.85382 C 307.38646,459.85382 307.4088,453.29126 307.4088,453.29126"
-         style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient2263);stroke-width:1.03566921;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline" />
+         style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient2263);stroke-width:1.03566921000000001;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline" />
     </g>
     <g
        id="bottom"
-       inkscape:label="#g3276">
+       inkscape:label="#g3276"
+       style="opacity:1">
       <rect
          y="460.36218"
          x="100"
          height="3"
          width="200"
          id="rect3402"
-         style="opacity:1;fill:url(#linearGradient3274);fill-opacity:1;stroke:none;stroke-width:0.54852098;stroke-opacity:0.90196078;display:inline" />
+         style="opacity:1;fill:url(#linearGradient3274);fill-opacity:1;stroke:none;stroke-width:0.54852098000000005;stroke-opacity:0.90196078000000002;display:inline" />
       <rect
          y="452.36218"
          x="100"
          height="8"
          width="200"
          id="rect3194"
-         style="opacity:1;fill:#6e6e6e;fill-opacity:0.39215687;stroke:none;stroke-width:1;stroke-opacity:0.78431373000000004" />
+         style="opacity:1;fill:#6e6e6e;fill-opacity:0.3137255;stroke:none;stroke-width:1;stroke-opacity:0.78431373000000004" />
     </g>
   </g>
 </svg>
