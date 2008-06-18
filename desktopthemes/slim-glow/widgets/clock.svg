@@ -286,7 +286,7 @@
      width="250px"
      height="250px"
      inkscape:zoom="1.4636041"
-     inkscape:cx="-197.59394"
+     inkscape:cx="-316.13693"
      inkscape:cy="145.77418"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -407,7 +407,7 @@
      sodipodi:cy="94.347137"
      sodipodi:cx="-221.73567"
      id="HandCenterScrew"
-     style="opacity:1;fill:#ffffff;fill-opacity:0.65384614;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="opacity:1;fill:#ffffff;fill-opacity:0.06976745;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      sodipodi:type="arc"
      inkscape:label="#path3396" />
   <path
@@ -420,20 +420,20 @@
      style="opacity:1;fill:#ffffff;fill-opacity:0.58241763;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="MinuteHand"
      width="5.811595"
-     height="108.48311"
+     height="78.355743"
      x="-509.48315"
-     y="98.521721"
+     y="110.88473"
      rx="2.9057975"
-     ry="2.9057975"
+     ry="2.0988145"
      inkscape:label="#rect3401" />
   <rect
-     y="98.521721"
+     y="110.13689"
      x="-489.48315"
-     height="77.487938"
+     height="48.917347"
      width="5.811595"
      id="HourHand"
      style="opacity:1;fill:#ffffff;fill-opacity:0.58241763;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      rx="2.9057975"
-     ry="2.9057975"
+     ry="1.8344001"
      inkscape:label="#rect3403" />
 </svg>
