@@ -1,10 +1,5 @@
 project(liblancelot)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-message ("Includes are : ${KDE4Defaults}")
-
-find_package(Plasma REQUIRED)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 ########### define variables ##########

@@ -1,11 +1,5 @@
 project(LancelotMenu)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-
-find_package(Plasma REQUIRED)
-find_package(Lancelot REQUIRED)
-
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 include(PlasmaUIMacros)
