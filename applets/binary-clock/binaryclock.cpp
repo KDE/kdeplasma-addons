@@ -30,6 +30,9 @@
 
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
+      m_showSeconds(true),
+      m_showGrid(true),
+      m_showOffLeds(true),
       m_time(0, 0)
 {
     setHasConfigurationInterface(true);
@@ -40,15 +43,15 @@ void BinaryClock::init()
 {
     KConfigGroup cg = config();
     m_timezone = cg.readEntry("timezone", "Local");
-    m_showSeconds = cg.readEntry("showSeconds", true);
-    m_showGrid = cg.readEntry("showGrid", true);
-    m_showOffLeds = cg.readEntry("showOffLeds", true);
-
-    updateColors();
+    m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
+    m_showGrid = cg.readEntry("showGrid", m_showGrid);
+    m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
     connectToEngine();
+
+    updateColors();
 }
 
 BinaryClock::~BinaryClock()
@@ -140,9 +143,6 @@ void BinaryClock::configAccepted()
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
 
-    emit configNeedsSaving();
-
-    update();
     QStringList tzs = ui.timeZones->selection();
 
     if (ui.localTimeZone->checkState() == Qt::Checked) {
@@ -163,9 +163,9 @@ void BinaryClock::configAccepted()
     }
 
     connectToEngine();
-    //TODO: Why we don't call updateConstraints?
     constraintsEvent(Plasma::AllConstraints);
-    cg.config()->sync();
+    update();
+    emit configNeedsSaving();
 }
 
 
@@ -184,6 +184,10 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                                  const QRect &contentsRect)
 {
     Q_UNUSED(option);
+
+    if (! m_time.isValid()) {
+        return;
+    }
 
     QSizeF m_size = contentsRect.size();
     int appletHeight = (int) contentsRect.height();
