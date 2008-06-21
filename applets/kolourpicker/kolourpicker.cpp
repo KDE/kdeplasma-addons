@@ -192,7 +192,7 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     m_historyButton = new PickerButton(this);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
+    m_historyButton->nativeWidget()->QPushButton::setIcon(ColorIcon(Qt::gray));
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
     KMenu *menu = new KMenu();
@@ -321,7 +321,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
 void Kolourpicker::clearHistory(bool save)
 {
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
+    m_historyButton->nativeWidget()->QPushButton::setIcon(ColorIcon(Qt::gray));
     QHash<QColor, QAction *>::ConstIterator it = m_menus.begin(), itEnd = m_menus.end();
     for ( ; it != itEnd; ++it )
     {
@@ -356,7 +356,7 @@ void Kolourpicker::addColor(const QColor &color, bool save)
     act->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
     m_historyMenu->insertMenu(m_historyMenu->actions().at(1), newmenu);
-    m_historyButton->nativeWidget()->setIcon(colorIcon);
+    m_historyButton->nativeWidget()->QPushButton::setIcon(colorIcon);
     m_menus.insert(color, act);
     m_colors.append(color.name());
     m_historyButton->setEnabled(true);
