@@ -7,3 +7,21 @@
  - Plasma dialog background
  - Opaque plasma dialog background
 
+0.3:
+- Theme for Lancelot included
+- Removed non-default theme elements
+- Installable through GHNS
+
+0.4:
+- changed the panel a bit (including the opaque version)
+- changed borders of the logout screen
+
+0.5:
+- different panel looks for differently placed panels (left, right, top, bottom) - requires the SVN version of KDE
+- removed (Plasma Theme) from the name here at kde-look
+
+0.6:
+- altered panels - panels that are not 100% wide or high are almost transparent
+- changed hints
+- added translucent background
+- krunner background
