@@ -18,10 +18,12 @@
 
 0.5:
 - different panel looks for differently placed panels (left, right, top, bottom) - requires the SVN version of KDE
-- removed (Plasma Theme) from the name here at kde-look
+- removed Lancelot theme from main package
 
-0.6:
+0.6: Preparations for KDE 4.1
 - altered panels - panels that are not 100% wide or high are almost transparent
 - changed hints
 - added translucent background
 - krunner background
+- tasks theme
+
