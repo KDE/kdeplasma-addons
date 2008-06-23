@@ -35,18 +35,26 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     , m_notes_theme(this)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    m_notes_theme.setImagePath("widgets/notes");
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setBackgroundHints(Plasma::Applet::NoBackground);
-    resize(256, 256);
+
+    m_notes_theme.setImagePath("widgets/notes");
+    m_notes_theme.setContainsMultipleImages(false);
 
     m_defaultText = i18n("Welcome to the Notes Plasmoid! Type your notes here...");
     m_textEdit = new Plasma::TextEdit();
+    m_textEdit->setMinimumSize(QSize(0, 0));
     m_layout = new QGraphicsLinearLayout(this);
+    m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
+    m_textEdit->nativeWidget()->setTextBackgroundColor(QColor(0,0,0,0));
+    m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
+    m_layout->addItem(m_textEdit);
+
     m_autoFont = false;
 
+    resize(256, 256);
     updateTextGeometry();
 }
 
@@ -61,14 +69,6 @@ Notes::~Notes()
 
 void Notes::init()
 {
-    m_notes_theme.setContainsMultipleImages(false);
-    m_textEdit->nativeWidget()->setCheckSpellingEnabled(true);
-    m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
-    m_textEdit->nativeWidget()->setTextBackgroundColor(QColor(0,0,0,0));
-    m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
-    m_textEdit->setMinimumSize(QSize(0, 0));
-    m_layout->addItem(m_textEdit);
-
     KConfigGroup cg = config();
 
     QString text = cg.readEntry("autoSave", QString());
@@ -84,7 +84,6 @@ void Notes::init()
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
-    setLayout(m_layout);
     updateTextGeometry();
     connect(m_textEdit->nativeWidget(), SIGNAL(textChanged()), this, SLOT(saveNote()));
     //connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
@@ -166,7 +165,6 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 
 void Notes::configAccepted()
 {
-    prepareGeometryChange();
     KConfigGroup cg = config();
     bool changed = false;
 
