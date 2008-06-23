@@ -40,6 +40,9 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
     setBackgroundHints(Plasma::Applet::NoBackground);
 
+    m_saveTimer.setSingleShot(true);
+    connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
+
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
 
@@ -61,8 +64,6 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 Notes::~Notes()
 {
     //FIXME is it really ok to save from here?
-    //also, this has a really weird effect: if I remove a note then add a new one, I can get the old
-    //text back. it was useful when there were load/save issues but it's silly now.
     saveNote();
     delete m_textEdit;
 }
@@ -85,9 +86,7 @@ void Notes::init()
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
-    connect(m_textEdit->nativeWidget(), SIGNAL(textChanged()), this, SLOT(saveNote()));
-    //connect(this, SIGNAL(clicked()), this, SLOT(focusNote()));
-    focusNote();
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
 }
 
 void Notes::constraintsEvent(Plasma::Constraints constraints)
@@ -119,23 +118,17 @@ int Notes::fontSize()
     }
 }
 
+void Notes::delayedSaveNote()
+{
+    m_saveTimer.start(5000);
+}
+
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
     cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toPlainText());
-    kDebug() << m_textEdit->nativeWidget()->toPlainText();
+    //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
-}
-
-void Notes::focusNote()
-{
-    if (m_textEdit->nativeWidget()->toPlainText() == m_defaultText) {
-        //m_textEdit->setEnabled(false);
-        kDebug() << "enabled: false";
-    } else {
-        //m_textEdit->setEnabled(true);
-        kDebug() << "enabled: true";
-    }
 }
 
 void Notes::paintInterface(QPainter *p,

@@ -22,6 +22,8 @@
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
+#include <QTimer>
+
 #include <Plasma/Applet>
 #include <Plasma/Svg>
 
@@ -56,13 +58,16 @@ class Notes : public Plasma::Applet
 
     private Q_SLOTS:
         void saveNote();
-        void focusNote();
+        void delayedSaveNote();
+
     private:
         int fontSize();
         int m_autoFontPercent;
         bool m_autoFont;
         bool m_checkSpelling;
         void updateTextGeometry();
+
+        QTimer m_saveTimer;
         QFont m_font;
         QColor m_textColor;
         Plasma::Svg m_notes_theme;
