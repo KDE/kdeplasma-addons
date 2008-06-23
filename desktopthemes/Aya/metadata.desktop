@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Aya
+Name[ko]=아야
 Name[uk]=Айя
 Name[x-test]=xxAyaxx
 Comment=Theme that matches current system colors (Optimized with Oxygen style)
@@ -9,6 +10,7 @@ Comment[et]=Teema, mis sobib aktiivsete süsteemi värvidega (optimeeritud Oxyge
 Comment[fr]=Thème correspondant aux couleurs actuelles du système (optimisé pour le style Oxygen)
 Comment[gl]=Tema que emprega as cores actuais do sistema (Optimizado para o estilo Oxygen)
 Comment[km]=ស្បែក​ដែល​ផ្គូផ្គង​នឹង​ពណ៌​ប្រព័ន្ធ​បច្ចុប្បន្ន (បាន​ធ្វើ​ឲ្យ​ប្រសើរ​ជា​មួយ​រចនាប័ទ្ម​អ៊ុកស៊ីហ្សែន)
+Comment[ko]=현재 시스템 색상과 잘 어울리는 테마 (Oxygen 스타일에 최적화됨)
 Comment[lv]=Tēma, kas lieto aktīvās sistēmas krāsas (Optimizēta ar Oxygen stilu)
 Comment[nds]=Muster, dat to de aktuellen Systeemklören passt (Mit Oxygen-Stil topasst)
 Comment[pt]=Um tema que corresponde às cores actuais do sistema (Optimizado com o estilo Oxygen)

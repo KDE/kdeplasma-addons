@@ -8,6 +8,7 @@ Icon=plasma_comic_garfield
 
 Name=Garfield
 Name[fi]=Karvinen
+Name[ko]=가필드
 Name[lv]=Garfields
 Name[sv]=Gustav
 Name[uk]=Гарфілд
@@ -15,6 +16,7 @@ Name[x-test]=xxGarfieldxx
 Name[zh_TW]=加菲貓
 Comment=Garfield
 Comment[fi]=Karvinen
+Comment[ko]=가필드
 Comment[lv]=Garfields
 Comment[nl]=Garfield-strip
 Comment[sv]=Gustav
