@@ -51,7 +51,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setCacheMode(QGraphicsItem::NoCache);
-    resize(350, 350*800/1280);
+    resize(400, 300);
     m_mySlideShow = new SlideShow();
     if ( args.count() ) {
         m_currentUrl = args.value(0).toString();

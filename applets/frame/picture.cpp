@@ -52,6 +52,7 @@ QImage Picture::defaultPicture(const QString &message)
     QFont textFont;
     textFont.setPixelSize(imload.height() / 12);
     p.setFont(textFont);
+    p.setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     QTextOption option;
     option.setAlignment(Qt::AlignCenter);
     option.setWrapMode(QTextOption::WordWrap);
