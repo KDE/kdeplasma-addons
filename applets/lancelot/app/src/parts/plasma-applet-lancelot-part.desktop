@@ -2,6 +2,7 @@
 Icon=lancelot
 
 Name=Lancelot Part
+Name[ca]=Part del Lancelot
 Name[csb]=Dzélk Lancelota
 Name[de]=Lancelot-Komponente
 Name[el]=Τμήμα του Lancelot
@@ -31,6 +32,7 @@ Name[zh_CN]=Lancelot 部件
 Name[zh_TW]=Lancelot 部件
 
 Comment=Parts of Lancelot menu on the desktop
+Comment[ca]=Parts del menú del Lancelot a l'escriptori
 Comment[cs]=Části Lancelot menu na ploše
 Comment[csb]=Dzélczi menu Lancelota na pùlce
 Comment[de]=Teile des Lancelot-Menüs auf der Arbeitsfläche

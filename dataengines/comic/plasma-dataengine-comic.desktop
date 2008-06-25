@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Comic Data Engine
+Name[ca]=Motor de dades de còmics
 Name[csb]=Mòtór pòdôwków kòmiksów
 Name[de]=Comic-Datentreiber
 Name[el]=Μηχανή δεδομένων κόμικς
@@ -29,6 +30,7 @@ Name[x-test]=xxComic Data Enginexx
 Name[zh_CN]=连环画数据引擎
 Name[zh_TW]=漫畫資料引擎
 Comment=Data Engine for comic strips
+Comment[ca]=Motor de dades per a tires còmiques
 Comment[csb]=Mòtór pòdôwków dlô kòmiksowëch sztripków
 Comment[de]=Datentreiber für Comic-Strips
 Comment[el]=Μηχανή δεδομένων για κόμικς

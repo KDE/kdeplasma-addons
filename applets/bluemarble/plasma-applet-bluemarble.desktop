@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=3D Earth Model
+Name[ca]=Model terraqui 3D
 Name[cs]=3D model Země
 Name[csb]=Mòdel Zemi w 3D
 Name[de]=3D-Globus
@@ -31,6 +32,7 @@ Name[x-test]=xx3D Earth Modelxx
 Name[zh_CN]=三维地球模型
 Name[zh_TW]=立體地球模型
 Comment=Shows Earth on your desktop
+Comment[ca]=Mostra la terra a l'escriptori
 Comment[cs]=Ukáže Zemi na vaší pracovní ploše
 Comment[csb]=Pòkażë Zemiã na twòjim pùlce
 Comment[de]=Bringt die Erde auf Ihre Arbeitsfläche

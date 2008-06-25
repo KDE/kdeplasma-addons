@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Twitter Microblogging
+Name[ca]=Twitter microblogging
 Name[csb]=Mikrobloggòwanié Twitter
 Name[el]=Μικροϊστολόγιο Twitter
 Name[es]=Uso del microblog Twitter
@@ -22,6 +23,7 @@ Name[uk]=Міні-журнал Twitter
 Name[x-test]=xxTwitter Microbloggingxx
 Name[zh_CN]=Twitter 微博客
 Comment=Lets you update your Twitter status and display your timeline. See http://www.twitter.com for more information.
+Comment[ca]=Us permet actualitzar l'estat al Twitter i mostrar la línia de temps. Vegeu http://www.twitter.com per a més informació.
 Comment[cs]=Umožní aktualizaci stavu v síti Twitter a zobrazí historii. Na http://www.twitter.com/ naleznete více informací.
 Comment[csb]=Pòzwôlô na aktualizowanié sztatusa twòjégò Twittera ë wëskrzëniwô ùcék czasu. Szëkôj na http://www.twitter.com za wicy wëdowiédzë.
 Comment[de]=Aktualisiert Ihren Twitter-Status und mehr. Siehe http://www.twitter.com für weitere Informationen.

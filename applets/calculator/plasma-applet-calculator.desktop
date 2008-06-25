@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Calculator
+Name[ca]=Calculadora
 Name[el]=Αριθμομηχανή
 Name[es]=Calculadora
 Name[et]=Kalkulaator
@@ -21,6 +22,7 @@ Name[x-test]=xxCalculatorxx
 Name[zh_CN]=计算器
 Name[zh_TW]=計算機
 Comment=A simple calculator.
+Comment[ca]=Una calculadora senzilla.
 Comment[el]=Μια απλή αριθμομηχανή.
 Comment[es]=Una sencilla calculadora.
 Comment[et]=Lihtne kalkulaator.

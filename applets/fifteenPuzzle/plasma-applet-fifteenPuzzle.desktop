@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fifteen Puzzle
+Name[ca]=Trencaclosques quinze
 Name[cs]=Hra Patnáct
 Name[csb]=Piãtnôsce pùzzlów
 Name[de]=Fünfzehn Steine
@@ -30,6 +31,7 @@ Name[x-test]=xxFifteen Puzzlexx
 Name[zh_CN]=十五子拼图
 Name[zh_TW]=Fifteen 解謎遊戲
 Comment=Try to put the pieces in order
+Comment[ca]=Intenta col·locar les peces en ordre
 Comment[cs]=Zkuste dílky správně poskládat
 Comment[csb]=Ùłożë pòprówno elementë
 Comment[el]=Προσπαθήστε να τοποθετήσετε τα κομμάτια στη θέση τους

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fuzzy Clock
+Name[ca]=Rellotge aproximat
 Name[el]=Ασαφές ρολόι
 Name[es]=Reloj impreciso
 Name[et]=Segane kell
@@ -28,6 +29,7 @@ Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
 Comment=A simple fuzzy clock
+Comment[ca]=Un rellotge aproximat senzill
 Comment[el]=Ένα απλό ασαφές ρολόι
 Comment[es]=Un simple reloj impreciso
 Comment[et]=Lihtne segane kell

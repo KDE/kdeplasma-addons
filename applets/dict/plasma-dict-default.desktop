@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Dictionary
+Name[ca]=Diccionari
 Name[cs]=Slovník
 Name[csb]=Slowôrz
 Name[de]=Wörterbuch
@@ -32,6 +33,7 @@ Name[x-test]=xxDictionaryxx
 Name[zh_CN]=词典
 Name[zh_TW]=字典
 Comment=Look up the meaning of words
+Comment[ca]=Cerca el significat de les paraules
 Comment[cs]=Vyhledat význam slov
 Comment[csb]=Szëkôj za znaczeniama słów
 Comment[de]=Schlägt die Bedeutung von Wörtern nach

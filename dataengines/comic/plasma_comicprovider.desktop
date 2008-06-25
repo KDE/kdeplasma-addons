@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=PlasmaComic/Plugin
 Comment=Plugin for Plasma Comic Engine
+Comment[ca]=Connector per al motor de còmics del plasma
 Comment[el]=Πρόσθετο της μηχανής Plasma κόμικς
 Comment[es]=Complemento para el motor de tebeos de Plasma
 Comment[et]=Plasma koomiksite mootori plugin

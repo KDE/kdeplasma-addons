@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Show Dashboard
+Name[ca]=Mostra el tauler
 Name[el]=Εμφάνιση πίνακα
 Name[es]=Mostrar cuadro de mandos
 Name[et]=Dashboardi näitamine
@@ -22,6 +23,7 @@ Name[x-test]=xxShow Dashboardxx
 Name[zh_CN]=显示仪表板
 Name[zh_TW]=顯示儀表板
 Comment=Lets you show the dashboard
+Comment[ca]=Us permet veure el tauler
 Comment[el]=Επιτρέπει την εμφάνιση του πίνακα μικροεφαρμογών
 Comment[es]=Le permite mostrar el cuadro de mandos
 Comment[et]=Võimaldab näidata Dashboardi

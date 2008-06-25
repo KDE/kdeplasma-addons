@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Binary Clock
+Name[ca]=Rellotge binari
 Name[el]=Δυαδικό ρολόι
 Name[es]=Reloj binario
 Name[et]=Binaarkell
@@ -27,6 +28,7 @@ Name[x-test]=xxBinary Clockxx
 Name[zh_CN]=二进制时钟
 Name[zh_TW]=數位時鐘
 Comment=A binary clock
+Comment[ca]=Un rellotge binari
 Comment[el]=Ένα δυαδικό ρολόι
 Comment[es]=Un reloj binario
 Comment[et]=Binaarkell

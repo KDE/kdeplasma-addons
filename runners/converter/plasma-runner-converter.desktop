@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Unit Converter
+Name[ca]=Conversor d'unitats
 Name[el]=Μετατροπέας μονάδων
 Name[es]=Conversor de unidades
 Name[et]=Ühikute teisendaja
@@ -20,6 +21,7 @@ Name[x-test]=xxUnit Converterxx
 Name[zh_CN]=单位转换器
 Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
+Comment[ca]=Converteix valors a diferents unitats
 Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες
 Comment[es]=Convierte valores a diferentes unidades
 Comment[et]=Väärtuste teisendamine erinevatesse ühikutesse

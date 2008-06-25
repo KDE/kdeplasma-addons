@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Konq Profiles Applet
+Name[ca]=Miniaplicació de perfils del Konqueror
 Name[el]=Μικροεφαρμογή προφίλ Konq
 Name[es]=Aplicación de perfiles de Konqueror
 Name[et]=Konquerori profiilide aplett
@@ -21,6 +22,7 @@ Name[x-test]=xxKonq Profiles Appletxx
 Name[zh_CN]=Konqueror 配置集小程序
 Name[zh_TW]=Konq 設定檔小程式
 Comment=Konq Profiles Launcher
+Comment[ca]=Executador de perfils del Konqueror
 Comment[el]=Εκτελεστής προφίλ Konq
 Comment[es]=Iniciador de perfiles de Konqueror
 Comment[et]=Konquerori profiilide käivitaja

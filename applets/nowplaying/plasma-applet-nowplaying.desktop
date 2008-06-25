@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Now Playing
+Name[ca]=Ara s'està escoltant
 Name[el]=Τρέχουσα αναπαραγωγή
 Name[es]=Reproduciendo ahora
 Name[et]=Praegu esitamisel
@@ -23,6 +24,7 @@ Name[zh_CN]=现在收听
 Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
+Comment[ca]=Mostra la reproducció actual d'àudio
 Comment[el]=Εμφάνιση κομματιού που αναπαράγεται αυτήν τη στιγμή
 Comment[es]=Muestra el audio que se está reproduciendo
 Comment[et]=Näitab parajasti mängitavat muusikat

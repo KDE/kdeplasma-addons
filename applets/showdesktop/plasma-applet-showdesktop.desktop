@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Show Desktop
+Name[ca]=Mostra l'escriptori
 Name[el]=Εμφάνιση επιφάνειας εργασίας
 Name[es]=Mostrar escritorio
 Name[et]=Töölaua näitamine
@@ -21,6 +22,7 @@ Name[x-test]=xxShow Desktopxx
 Name[zh_CN]=显示桌面
 Name[zh_TW]=顯示桌面
 Comment=Lets you show the desktop
+Comment[ca]=Us permet veure l'escriptori
 Comment[el]=Επιτρέπει την εμφάνιση της επιφάνειας εργασίας
 Comment[es]=Le permite mostrar el escritorio
 Comment[et]=Võimaldab näidata töölauda
