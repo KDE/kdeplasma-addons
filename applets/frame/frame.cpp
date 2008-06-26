@@ -363,7 +363,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
                                                     -m_swOutline, -m_swOutline); //Pretty useless.
     
     //TODO check if correct
-    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, Qt::FastTransformation);
+    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
                       frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 
