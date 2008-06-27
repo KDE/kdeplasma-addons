@@ -84,7 +84,7 @@ set(lancelot_LIB_INCLUDES
 
 install(FILES
    ${lancelot_LIB_INCLUDES}
-   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot
+   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot COMPONENT Devel
 )
 
 install(FILES
@@ -98,17 +98,17 @@ install(FILES
    widgets/Widget.h
    widgets/WidgetPositioner.h
    widgets/HoverIcon.h
-   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets)
+   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets COMPONENT Devel)
 
 install(FILES
    layouts/CardLayout.h
    layouts/ColumnLayout.h
-   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/layouts)
+   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/layouts COMPONENT Devel)
 
 install(FILES
    models/ActionListViewModels.h
    models/PassagewayViewModels.h
-   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models)
+   DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 
 # tests
 add_subdirectory(tests)
