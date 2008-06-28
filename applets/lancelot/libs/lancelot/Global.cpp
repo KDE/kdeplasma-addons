@@ -114,7 +114,7 @@ void WidgetGroup::removeWidget(Widget * widget, bool setDefaultGroup)
 {
     if (d->instance->defaultGroup() == this) return;
 
-    if (!d->widgets.contains(widget)) return;
+    if (!(d->widgets.contains(widget))) return;
     d->widgets.removeAll(widget);
 
     if (setDefaultGroup) {
@@ -149,7 +149,7 @@ Plasma::PanelSvg * WidgetGroup::backgroundSvg() const
 
 const WidgetGroup::ColorScheme * WidgetGroup::backgroundColor() const
 {
-    if (!d->hasBackgroundColor) {
+    if (!(d->hasBackgroundColor)) {
         return NULL;
     }
     return & d->backgroundColor;
@@ -173,7 +173,7 @@ void WidgetGroup::load(bool full)
 
     WidgetGroup * group;
 
-    if (!d->confGroupTheme->exists()) {
+    if (!(d->confGroupTheme->exists())) {
         kDebug() << "Config group doesn't exist : " << d->confGroupTheme->name();
 
         group = d->instance->defaultGroup();
@@ -341,7 +341,7 @@ WidgetGroup * Instance::group(const QString & name)
     }
 
     kDebug() << "Creating a group named " << groupName;
-    if (!d->groups.contains(groupName)) {
+    if (!(d->groups.contains(groupName))) {
         WidgetGroup * group = new WidgetGroup(this, groupName);
         if (d->processGroupChanges) {
             group->load();

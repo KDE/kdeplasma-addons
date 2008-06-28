@@ -31,7 +31,7 @@ namespace Lancelot {
 class ExtenderObject : public BasicWidget {
 public:
     ExtenderObject(Plasma::Svg * icon,
-            ExtenderButton * parent = 0)
+            ExtenderButton * parent)
       : BasicWidget(icon, "", "", parent),
         m_parent(parent)
     {
@@ -109,7 +109,7 @@ public:
             extenderIconSvg->setImagePath("lancelot/extender-button-icon");
         }
 
-        extender = new ExtenderObject(extenderIconSvg, q);
+        extender = new ExtenderObject(extenderIconSvg, parent);
         extender->setVisible(false);
 
         extender->setIconSize(QSize(16, 16));
@@ -347,7 +347,8 @@ void ExtenderButton::paint(QPainter * painter,
 
 void ExtenderButton::setChecked(bool checked)
 {
-    if (!d->checkable) return;
+    if (!(d->checkable)) return;
+    if (d->checked == checked) return;
     d->checked = checked;
     update();
     emit toggled(d->checked);
@@ -360,14 +361,15 @@ bool ExtenderButton::isChecked()
 
 void ExtenderButton::toggle()
 {
-    if (!d->checkable) return;
-    d->checked = !d->checked;
+    if (!(d->checkable)) return;
+    d->checked = !(d->checked);
     update();
     emit toggled(d->checked);
 }
 
 void ExtenderButton::setCheckable(bool checkable)
 {
+    if (d->checkable == checkable) return;
     d->checkable = checkable;
     if (!checkable) {
         d->checked = false;
@@ -382,6 +384,7 @@ bool ExtenderButton::isCheckable()
 
 void ExtenderButton::setDown(bool down)
 {
+    if (d->down == down) return;
     d->down = down;
     update();
 }

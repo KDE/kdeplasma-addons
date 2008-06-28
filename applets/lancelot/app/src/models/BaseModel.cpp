@@ -28,6 +28,7 @@
 #include <KGlobal>
 #include <KMimeType>
 #include <KUrl>
+#include <KDebug>
 
 namespace Models {
 
@@ -84,8 +85,8 @@ void BaseModel::addUrl(const QString & url)
 
 void BaseModel::addUrl(const KUrl & url)
 {
+    kDebug() << url;
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
-
         // .desktop files may be services (type field == 'Application' or 'Service')
         // or they may be other types such as links.
         //
@@ -94,19 +95,24 @@ void BaseModel::addUrl(const KUrl & url)
 
         const KService::Ptr service = KService::serviceByDesktopPath(url.path());
         if (service) {
+            kDebug() << "Local desktop file - Service";
             return addService(service);
         }
 
+        kDebug() << "Local desktop file - Application " << url.path();
         KDesktopFile desktopFile(url.path());
         KUrl desktopUrl(desktopFile.readUrl());
+        kDebug() << desktopUrl;
 
         add(
             QFileInfo(url.path()).baseName(),
             desktopUrl.isLocalFile() ? desktopUrl.path() : desktopUrl.prettyUrl(),
             KIcon(desktopFile.readIcon()),
-            desktopFile.readUrl()
+            // url.path() //desktopFile.readUrl()
+            url.url()
         );
     } else {
+        kDebug() << "Normal URL";
         add(
             QFileInfo(url.path()).baseName(),
             url.isLocalFile() ? url.path() : url.prettyUrl(),

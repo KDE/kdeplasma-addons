@@ -97,7 +97,7 @@ QSizeF CardLayout::sizeHint(Qt::SizeHint which,
 
 void CardLayout::addItem(QGraphicsLayoutItem * item)
 {
-    if (!d->items.contains(item)) {
+    if (!(d->items.contains(item))) {
         d->items.append(item);
     }
 }
@@ -139,7 +139,7 @@ void CardLayout::removeAt(int i)
 
 void CardLayout::show(const QString & id)
 {
-    if (!d->widgets.contains(id)) return;
+    if (!(d->widgets.contains(id))) return;
     if (d->shown == d->widgets[id]) return;
     if (d->shown) {
         d->shown->hide();
@@ -152,7 +152,7 @@ void CardLayout::show(const QString & id)
 
 void CardLayout::hideAll()
 {
-    if (!d->shown) return;
+    if (!(d->shown)) return;
     d->shown->hide();
     d->shown = NULL;
 }

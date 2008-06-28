@@ -117,7 +117,7 @@ WidgetGroup * Widget::group() const
 
 Instance * Widget::instance() const
 {
-    if (!d->group) return Instance::activeInstance();
+    if (!(d->group)) return Instance::activeInstance();
 
     return d->group->instance();
 }
@@ -136,7 +136,7 @@ void Widget::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
 }
 
 void Widget::paintBackground(QPainter * painter) {
-    if (!d->group) return;
+    if (!(d->group)) return;
 
     QString element;
     if (!isEnabled()) {
@@ -151,7 +151,7 @@ void Widget::paintBackground(QPainter * painter) {
 }
 
 void Widget::paintBackground(QPainter * painter, const QString & element) {
-    if (!d->group) return;
+    if (!(d->group)) return;
 
     // Background Painting
     if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {

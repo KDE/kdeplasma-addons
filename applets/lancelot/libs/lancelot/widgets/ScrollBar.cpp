@@ -44,17 +44,17 @@ public:
         downBar    = new ExtenderButton("", "", parent);
         handle     = new ExtenderButton("", "", parent);
 
-        kDebug() << "Connecting everything";
-        kDebug() << connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
-        kDebug() << connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
+        "Connecting everything";
+        connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
+        connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
 
         upTimer.setInterval(100);
         upTimer.setSingleShot(false);
-        kDebug() << connect(&upTimer, SIGNAL(timeout()), parent, SLOT(stepDecrease()));
+        connect(&upTimer, SIGNAL(timeout()), parent, SLOT(stepDecrease()));
 
         downTimer.setInterval(100);
         downTimer.setSingleShot(false);
-        kDebug() << connect(&downTimer, SIGNAL(timeout()), parent, SLOT(stepIncrease()));
+        connect(&downTimer, SIGNAL(timeout()), parent, SLOT(stepIncrease()));
     }
 
     ~Private()

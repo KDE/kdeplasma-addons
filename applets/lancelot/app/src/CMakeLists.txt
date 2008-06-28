@@ -1,6 +1,7 @@
 project(LancelotMenu)
 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+# Moved up level
+# add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 include(PlasmaUIMacros)
 

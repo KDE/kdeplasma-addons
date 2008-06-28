@@ -204,7 +204,7 @@ QSizeF Panel::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
 
     // TODO: Count the header as well
 
-    if (!d->layoutItem) {
+    if (!(d->layoutItem)) {
         switch (which) {
             case Qt::MinimumSize:
                 result = QSizeF();

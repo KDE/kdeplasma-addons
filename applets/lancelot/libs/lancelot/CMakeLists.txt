@@ -1,6 +1,12 @@
+# Adds KDE definitions so that libLancelot could be built independently
+# from the rest of the kdeplasmoids module
 project(liblancelot)
 
+find_package(KDE4 REQUIRED)
+include (KDE4Defaults)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+
+find_package(Plasma REQUIRED)
 
 ########### define variables ##########
 
