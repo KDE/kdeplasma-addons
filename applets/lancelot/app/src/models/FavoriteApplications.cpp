@@ -22,7 +22,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KStandardDirs>
-#include <KDebug>
 
 namespace Models {
 
@@ -42,7 +41,6 @@ void FavoriteApplications::load()
 
     QList<QString> favoriteList = favoritesGroup.readEntry("FavoriteURLs", QList<QString>());
     foreach(const QString &favorite, favoriteList) {
-        kDebug() << favorite;
         addUrl(favorite);
     }
 }
