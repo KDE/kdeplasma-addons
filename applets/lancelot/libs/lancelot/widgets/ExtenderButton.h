@@ -147,6 +147,8 @@ public:
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
+    L_Override virtual void timerEvent(QTimerEvent * event);
+
 public slots:
     /**
      * Sets whether the button is checked.
@@ -172,7 +174,7 @@ Q_SIGNALS:
      * Emitted when the button is activated
      * @param checked true if the button is checked
      */
-    void activated(bool checked = false);
+    void activated();
 
     /**
      * Emitted when the state of a checkable button is changed

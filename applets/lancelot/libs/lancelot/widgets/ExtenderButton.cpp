@@ -56,30 +56,12 @@ public:
 
     void startTimer()
     {
-        timer.start(ACTIVATION_TIME, this);
+        timer.start(ACTIVATION_TIME, m_parent);
     }
 
     void stopTimer()
     {
         timer.stop();
-    }
-
-    void timerEvent(QTimerEvent * event)
-    {
-        if (event->timerId() == timer.timerId()) {
-            stopTimer();
-            // The line above somehow changes m_parent even when it is declared const...
-            // So, until I discover what is happening, the following line must remain here
-            m_parent->toggle();
-            hide();
-            // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
-            hoverLeaveEvent(0);
-            m_parent->hoverLeaveEvent(0);
-
-            // Sending the activate signal
-            m_parent->activate();
-        }
-        QObject::timerEvent(event);
     }
 
     void paint(QPainter * painter,
@@ -185,6 +167,22 @@ public:
 
 Plasma::Svg * ExtenderButton::Private::extenderIconSvg = NULL;
 QBasicTimer ExtenderObject::timer = QBasicTimer();
+
+void ExtenderButton::timerEvent(QTimerEvent * event)
+{
+    if (event->timerId() == ExtenderObject::timer.timerId()) {
+        d->extender->stopTimer();
+        toggle();
+        hide();
+        // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
+        hoverLeaveEvent(0);
+        d->extender->hoverLeaveEvent(0);
+
+        // Sending the activate signal
+        activate();
+    }
+    QObject::timerEvent(event);
+}
 
 ExtenderButton::ExtenderButton(QGraphicsItem * parent)
   : BasicWidget(parent),
@@ -372,10 +370,6 @@ bool ExtenderButton::isChecked()
 void ExtenderButton::toggle()
 {
     kDebug() << "### " << (void *) this;
-    kDebug() << "### " << title();
-    kDebug() << "### " << (void *) d;
-    kDebug() << "### " << d->checked;
-    kDebug() << "### " << d->checkable;
 
     if (!d->checkable) return;
     d->checked = !d->checked;
