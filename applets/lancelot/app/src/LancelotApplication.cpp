@@ -51,6 +51,8 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
 
 bool LancelotApplication::event(QEvent * e)
 {
+    kDebug() << (void *) e;
+    kDebug() << e;
     if (e->type() == QEvent::ApplicationDeactivate) {
         hide(true);
     }

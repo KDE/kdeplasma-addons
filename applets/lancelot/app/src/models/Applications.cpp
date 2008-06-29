@@ -77,6 +77,7 @@ void Applications::load()
             data.name = service->name();
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
+            kDebug() << data.desktopFile;
 
             m_items.append(data);
         } else if (p->isType(KST_KServiceGroup)) {

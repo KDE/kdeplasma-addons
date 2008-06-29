@@ -66,27 +66,18 @@ public:
 
     void timerEvent(QTimerEvent * event)
     {
-        ExtenderButton * t_parent = m_parent;
-        kDebug() << " Extender ##### This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
-        kDebug() << " Extender ##### " << m_parent->title();
-        kDebug() << " Extender ##### " << m_parent->isChecked();
-        kDebug() << " Extender ##### " << m_parent->isCheckable();
         if (event->timerId() == timer.timerId()) {
-            kDebug() << " Extender ##1## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             stopTimer();
-            kDebug() << " Extender ##2## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
-            m_parent->activate();
-            // The line above somehow changes m_parent even if it is declared const...
+            // The line above somehow changes m_parent even when it is declared const...
             // So, until I discover what is happening, the following line must remain here
-            m_parent = t_parent;
-            kDebug() << " Extender ##3## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             m_parent->toggle();
-            kDebug() << " Extender ##4## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             hide();
             // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
             hoverLeaveEvent(0);
             m_parent->hoverLeaveEvent(0);
-            kDebug() << " Extender ##5## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
+
+            // Sending the activate signal
+            m_parent->activate();
         }
         QObject::timerEvent(event);
     }
