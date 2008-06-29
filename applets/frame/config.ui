@@ -268,7 +268,7 @@
                <enum>QDateTimeEdit::HourSection</enum>
               </property>
               <property name="displayFormat" >
-               <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
+               <string comment="(qtdt-format) Please do not change the quotes (') and translate only the content of the quotes.">hh 'Hours' mm 'Mins' ss 'Secs'</string>
               </property>
               <property name="time" >
                <time>
