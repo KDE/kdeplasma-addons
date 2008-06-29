@@ -32,9 +32,10 @@ class ExtenderObject : public BasicWidget {
 public:
     ExtenderObject(Plasma::Svg * icon,
             ExtenderButton * parent)
-      : BasicWidget(icon, "", "", parent),
+      : BasicWidget(icon, "", ""),
         m_parent(parent)
     {
+        setParentItem(parent);
         setInnerOrientation(Qt::Vertical);
         setAlignment(Qt::AlignCenter);
     }
@@ -65,14 +66,27 @@ public:
 
     void timerEvent(QTimerEvent * event)
     {
+        ExtenderButton * t_parent = m_parent;
+        kDebug() << " Extender ##### This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
+        kDebug() << " Extender ##### " << m_parent->title();
+        kDebug() << " Extender ##### " << m_parent->isChecked();
+        kDebug() << " Extender ##### " << m_parent->isCheckable();
         if (event->timerId() == timer.timerId()) {
+            kDebug() << " Extender ##1## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             stopTimer();
-            emit m_parent->activated();
+            kDebug() << " Extender ##2## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
+            m_parent->activate();
+            // The line above somehow changes m_parent even if it is declared const...
+            // So, until I discover what is happening, the following line must remain here
+            m_parent = t_parent;
+            kDebug() << " Extender ##3## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             m_parent->toggle();
+            kDebug() << " Extender ##4## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
             hide();
             // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
             hoverLeaveEvent(0);
             m_parent->hoverLeaveEvent(0);
+            kDebug() << " Extender ##5## This: " << (void *) this << " m_parent: " << (void *) m_parent << " t_parent: " << (void *) t_parent;
         }
         QObject::timerEvent(event);
     }
@@ -301,13 +315,18 @@ void ExtenderButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
     }
 }
 
+void ExtenderButton::activate()
+{
+    emit activated();
+    toggle();
+    update();
+}
+
 void ExtenderButton::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
     if (d->down && (event->button() == Qt::LeftButton)) {
         d->down = false;
-        emit activated();
-        toggle();
-        update();
+        activate();
         emit clicked();
         emit released();
     } else {
@@ -347,7 +366,7 @@ void ExtenderButton::paint(QPainter * painter,
 
 void ExtenderButton::setChecked(bool checked)
 {
-    if (!(d->checkable)) return;
+    if (!d->checkable) return;
     if (d->checked == checked) return;
     d->checked = checked;
     update();
@@ -361,8 +380,14 @@ bool ExtenderButton::isChecked()
 
 void ExtenderButton::toggle()
 {
-    if (!(d->checkable)) return;
-    d->checked = !(d->checked);
+    kDebug() << "### " << (void *) this;
+    kDebug() << "### " << title();
+    kDebug() << "### " << (void *) d;
+    kDebug() << "### " << d->checked;
+    kDebug() << "### " << d->checkable;
+
+    if (!d->checkable) return;
+    d->checked = !d->checked;
     update();
     emit toggled(d->checked);
 }

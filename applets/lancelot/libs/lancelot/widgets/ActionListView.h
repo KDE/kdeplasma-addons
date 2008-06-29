@@ -107,7 +107,7 @@ private:
 
     ActionListViewModel * m_model;
     WidgetGroup * m_itemsGroup;
-
+    WidgetGroup * m_categoriesGroup;
 
     int m_minimumItemHeight;
     int m_maximumItemHeight;

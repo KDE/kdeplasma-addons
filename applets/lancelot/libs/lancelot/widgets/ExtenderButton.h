@@ -203,6 +203,7 @@ protected:
     L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    void activate();
 
 private:
     class Private;

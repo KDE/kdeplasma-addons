@@ -160,7 +160,7 @@ void BasicWidget::paintForeground(QPainter * painter)
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect         = QRectF(0, 0, d->iconSize.width(), d->iconSize.height());
 
-    if (d->icon.isNull() && !(d->iconInSvg)) iconRect = QRectF(0, 0, 0, 0);
+    if (d->icon.isNull() && !d->iconInSvg) iconRect = QRectF(0, 0, 0, 0);
 
     // painter->setFont(titleFont)); // NOT NEEDED
     QRectF titleRect        = painter->boundingRect(widgetRect,
@@ -186,7 +186,7 @@ void BasicWidget::paintForeground(QPainter * painter)
         float top = WIDGET_PADDING, height =
             iconRect.height() + titleRect.height() + descriptionRect.height();
 
-        if ((!(d->icon.isNull()) || d->iconInSvg) && !(d->title.isEmpty() && d->description.isEmpty()))
+        if ((!d->icon.isNull() || d->iconInSvg) && !(d->title.isEmpty() && d->description.isEmpty()))
             height += WIDGET_PADDING;
 
         if (d->alignment & Qt::AlignVCenter)
@@ -194,10 +194,10 @@ void BasicWidget::paintForeground(QPainter * painter)
         if (d->alignment & Qt::AlignBottom)
             top = widgetRect.height() - height + WIDGET_PADDING;
 
-        if (!(d->icon.isNull()) || d->iconInSvg) { // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg) { // using real painter...
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
-            if (!(d->icon.isNull())) {
+            if (!d->icon.isNull()) {
                 d->icon.paint(_painter, rect);
             } else {
                 d->iconInSvg->resize(d->iconSize);
@@ -206,7 +206,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             top += d->iconSize.height() + WIDGET_PADDING;
         }
 
-        if (!(d->title.isEmpty())) {
+        if (!d->title.isEmpty()) {
             titleRect.moveTop(top);
             painter->setFont(titleFont);
             painter->drawText(titleRect,
@@ -214,7 +214,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             top += titleRect.height();
         }
 
-        if (!(d->description.isEmpty())) {
+        if (!d->description.isEmpty()) {
             descriptionRect.moveTop(top);
 
             painter->setFont(descriptionFont);
@@ -241,7 +241,7 @@ void BasicWidget::paintForeground(QPainter * painter)
 
         if ((widgetRect.width() < width) || (d->alignment & Qt::AlignLeft)) {
             iconRect.moveLeft(WIDGET_PADDING);
-            titleRect.setWidth(widgetRect.width() - ((!(d->icon.isNull()) || d->iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
+            titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
             descriptionRect.setWidth(titleRect.width());
         } else if (d->alignment & Qt::AlignHCenter) {
             iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width) / 2);
@@ -251,9 +251,9 @@ void BasicWidget::paintForeground(QPainter * painter)
         titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
         descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
 
-        if (!(d->icon.isNull()) || d->iconInSvg) {  // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
-            if (!(d->icon.isNull())) {
+            if (!d->icon.isNull()) {
                 QIcon::Mode mode;
                 if (!isEnabled()) {
                     mode = QIcon::Disabled;
@@ -270,13 +270,13 @@ void BasicWidget::paintForeground(QPainter * painter)
             }
         }
 
-        if (!(d->title.isEmpty())) {
+        if (!d->title.isEmpty()) {
             painter->setFont(titleFont);
             painter->drawText(titleRect,
                     Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title);
         }
 
-        if (!(d->description.isEmpty())) {
+        if (!d->description.isEmpty()) {
             if (!isHovered()) {
                 QPen pen = painter->pen();
                 QColor clr = painter->pen().color();

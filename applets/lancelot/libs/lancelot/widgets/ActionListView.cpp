@@ -68,6 +68,7 @@ ActionListView::ActionListView(QGraphicsItem * parent)
 {
     setGroupByName("ActionListView");
     m_itemsGroup = instance()->group("ActionListView-Items");
+    m_categoriesGroup = instance()->group("ActionListView-Categories");
 
     setAcceptsHoverEvents(true);
 
@@ -87,6 +88,7 @@ ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * pare
 {
     setGroupByName("ActionListView");
     m_itemsGroup = instance()->group("ActionListView-Items");
+    m_categoriesGroup = instance()->group("ActionListView-Categories");
 
     setAcceptsHoverEvents(true);
 
@@ -409,7 +411,6 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button->setInnerOrientation(Qt::Horizontal);
         button->setExtenderPosition(m_extenderPosition);
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        button->setGroup(m_itemsGroup);
 
         connect(button, SIGNAL(activated()), &m_signalMapper, SLOT(map()));
     }
@@ -496,8 +497,14 @@ bool ActionListView::addButton(ListTail where) {
     button->setTitle(m_model->title(itemIndex));
     button->setDescription(m_model->description(itemIndex));
     button->setIcon(m_model->icon(itemIndex));
+    if (m_model->isCategory(itemIndex)) {
+        button->setIconSize(QSize(m_categoryItemHeight, m_categoryItemHeight));
+        button->setGroup(m_categoriesGroup);
+    } else {
+        button->setGroup(m_itemsGroup);
+    }
     button->setLayout(NULL);
-    button->setEnabled(!m_model->isCategory(itemIndex));
+    // button->setEnabled(!m_model->isCategory(itemIndex));
     m_signalMapper.setMapping(button, itemIndex);
 
     int itemHeight = itemHeightFromIndex(itemIndex);
@@ -538,6 +545,7 @@ bool ActionListView::addButton(ListTail where) {
         break;
     }
 
+    button->setPreferredSize(QSizeF(width, itemHeight));
     button->setGeometry(QRectF(left, buttonTop, width, itemHeight));
 
     return true;

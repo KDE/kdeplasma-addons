@@ -45,7 +45,8 @@ Widget::Widget(QGraphicsItem * parent)
     d(new Private())
 {
     Instance::activeInstance()->addWidget(this);
-    d->group = Instance::activeInstance()->defaultGroup();
+    setGroup(NULL);
+    // d->group = Instance::activeInstance()->defaultGroup();
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -102,7 +103,7 @@ void Widget::setGroup(WidgetGroup * group)
     if (group == d->group) return;
 
     if (d->group != NULL) {
-        d->group->removeWidget(this);
+        d->group->removeWidget(this, false);
     }
 
     d->group = group;
@@ -117,7 +118,7 @@ WidgetGroup * Widget::group() const
 
 Instance * Widget::instance() const
 {
-    if (!(d->group)) return Instance::activeInstance();
+    if (!d->group) return Instance::activeInstance();
 
     return d->group->instance();
 }
@@ -136,7 +137,7 @@ void Widget::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
 }
 
 void Widget::paintBackground(QPainter * painter) {
-    if (!(d->group)) return;
+    if (!d->group) return;
 
     QString element;
     if (!isEnabled()) {
@@ -151,7 +152,7 @@ void Widget::paintBackground(QPainter * painter) {
 }
 
 void Widget::paintBackground(QPainter * painter, const QString & element) {
-    if (!(d->group)) return;
+    if (!d->group) return;
 
     // Background Painting
     if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {

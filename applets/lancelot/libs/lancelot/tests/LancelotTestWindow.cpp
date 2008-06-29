@@ -89,11 +89,14 @@ LancelotTestWindow::LancelotTestWindow()
             );
     m_corona->addItem(button);
 
+    centerLayout->removeAt(centerLayout->count() - 1);
+    delete button;
     // Test area - end   ####################################
 
     // Starting...
     mainLayout->setGeometry(QRectF(8, 8, 400, 300));
     instance->activateAll();
+
 }
 
 LancelotTestWindow::~LancelotTestWindow()
