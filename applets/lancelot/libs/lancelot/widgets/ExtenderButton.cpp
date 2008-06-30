@@ -369,8 +369,6 @@ bool ExtenderButton::isChecked()
 
 void ExtenderButton::toggle()
 {
-    kDebug() << "### " << (void *) this;
-
     if (!d->checkable) return;
     d->checked = !d->checked;
     update();

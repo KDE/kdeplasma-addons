@@ -1,6 +1,5 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
- *   Copyright (C) 2006 Aaron Seigo <aseigo@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -21,6 +20,7 @@
 #include "Runner.h"
 #include <KRun>
 #include <KDebug>
+#include <KIcon>
 #include <KLocalizedString>
 
 #include <plasma/abstractrunner.h>
@@ -32,7 +32,12 @@ Runner::Runner(QString search)
 {
     // m_runners = Plasma::AbstractRunner::load(this);
 
-    load();
+    m_runnerManager = new Plasma::RunnerManager(this);
+    connect(
+        m_runnerManager, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
+        this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&))
+    );
+    setSearchString(QString());
 }
 
 Runner::~Runner()
@@ -47,69 +52,48 @@ QString Runner::searchString()
 void Runner::setSearchString(const QString & search)
 {
     m_searchString = search.trimmed();
-    load();
+
+    if (m_searchString.isEmpty()) {
+        m_items.clear();
+        add(
+            i18n("Search string is empty"),
+            i18n("Enter something to search for"),
+            KIcon("help-hint"),
+            QVariant()
+        );
+    } else {
+        m_runnerManager->launchQuery(search);
+    }
+}
+
+// Code taken from KRunner Runner::setQueryMatches
+void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
+{
+    m_items.clear();
+
+    QList < Plasma::QueryMatch > matches = m;
+    QMutableListIterator < Plasma::QueryMatch > newMatchIt(matches);
+
+    // first pass: we try and match up items with existing ids (match persisitence)
+    while (newMatchIt.hasNext()) {
+        Plasma::QueryMatch match = newMatchIt.next();
+        add(
+            match.text(),
+            match.subtext(),
+            match.icon(),
+            match.id()
+        );
+    }
 }
 
 void Runner::load()
-{/*
-    m_items.clear();
-
-    int matchCount = 0;
-
-    if (m_searchString.isEmpty()) {
-        add(
-            "Search string is empty",
-            "Enter something to search for",
-            NULL,
-            QVariant()
-        );
-        return;
-    }
-
-    m_context.resetSearchTerm(m_searchString);
-    //m_context.addStringCompletions(m_executions);
-
-    foreach (Plasma::AbstractRunner* runner, m_runners) {
-        runner->match(&m_context);
-    }
-
-    QList < QList < Plasma::SearchMatch * > > matchLists;
-    matchLists << m_context.matches();
-    //           << m_context.exactMatches()
-    //           << m_context.possibleMatches();
-
-    foreach (QList < Plasma::SearchMatch * > matchList, matchLists) {
-        foreach (Plasma::SearchMatch * action, matchList) {
-            add(
-                action->text(),
-                action->runner()->objectName(),
-                action->icon(),
-                qVariantFromValue((void *)action)
-            );
-
-            ++matchCount;
-        }
-    }
-*/}
+{
+}
 
 void Runner::activate(int index)
-{/*
-    Plasma::SearchMatch * action = (Plasma::SearchMatch *)
-        m_items[index].data.value< void * >();
-
-    Q_ASSERT(action);
-
-    if (!action->isEnabled()) {
-        return;
-    }
-
-    if (action->type() == Plasma::SearchMatch::InformationalMatch) {
-        changeLancelotSearchString(action->data().toString());
-    } else {
-        action->exec(&m_context);
-        hideLancelotWindow();
-    }
-*/
+{
+    m_runnerManager->run(m_items[index].data.value< QString >());
+    hideLancelotWindow();
 }
 
 } // namespace Models

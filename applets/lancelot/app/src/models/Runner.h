@@ -21,7 +21,8 @@
 #define LANCELOTAPP_MODELS_RUNNER_H_
 
 #include "BaseModel.h"
-#include <plasma/abstractrunner.h>
+#include <plasma/runnermanager.h>
+#include <plasma/querymatch.h>
 
 namespace Models {
 
@@ -35,6 +36,7 @@ public:
 
 public Q_SLOTS:
     void setSearchString(const QString & search);
+    void setQueryMatches(const QList<Plasma::QueryMatch> &matches);
 
 protected:
     void activate(int index);
@@ -42,8 +44,7 @@ protected:
 
 private:
     QString m_searchString;
-    Plasma::AbstractRunner::List m_runners;
-    Plasma::RunnerContext m_context;
+    Plasma::RunnerManager * m_runnerManager;
 };
 
 } // namespace Models

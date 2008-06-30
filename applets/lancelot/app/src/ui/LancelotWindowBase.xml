@@ -225,7 +225,7 @@
 
                     Lancelot__CardLayout:cardName="documents"
                 >
-                    <item:layout name="layoutDocumentsComputer" type="Lancelot::NodeLayout">
+                    <item:layout name="layoutPanelDocuments" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listDocumentsLeft" type="Lancelot::ActionListView"
                             itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
@@ -246,13 +246,13 @@
                     name="panelSearch" type="Lancelot::Panel"
 
                     title="Search"
-                    icon="find"
+                    icon="edit-find"
                     iconSize="22, 22"
                     group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="search"
                 >
-                    <item:layout name="layoutSearchComputer" type="Lancelot::NodeLayout">
+                    <item:layout name="layoutPanelSearch" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listSearchLeft" type="Lancelot::ActionListView"
                             itemsGroup="ActionListView-Left-Items" extenderPosition="Left"

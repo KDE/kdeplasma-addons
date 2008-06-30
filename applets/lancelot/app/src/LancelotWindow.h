@@ -36,6 +36,11 @@ namespace Lancelot {
     class ResizeBordersPanel;
 }
 
+namespace Plasma
+{
+    class LineEdit;
+}
+
 class LancelotWindow: public QWidget, public Ui::LancelotWindowBase
 {
     Q_OBJECT
@@ -153,6 +158,8 @@ private:
     CustomGraphicsView  * m_view;
     Plasma::Corona      * m_corona;
     QVBoxLayout         * m_layout;
+
+    Plasma::LineEdit    * editSearch;
 
     QTimer                m_hideTimer;
     QString               m_searchString;

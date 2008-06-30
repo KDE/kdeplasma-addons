@@ -47,6 +47,9 @@
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
 
+#include <KLineEdit>
+#include <Plasma/LineEdit>
+
 #define sectionsWidth 128
 #define windowHeightDefault 500
 #define mainWidthDefault    422
@@ -212,10 +215,16 @@ LancelotWindow::LancelotWindow()
 
     setupModels();
 
-    /* Dirty hack to get an edit box before Qt 4.4 :: begin */
-    // editSearch->setParent(this);
-    // editSearch->installEventFilter(this);
-    /* Dirty hack to get an edit box before Qt 4.4 :: end */
+    /* TODO: Convert this to PUCK generated code */
+    editSearch = new Plasma::LineEdit();
+    editSearch->setParentItem(m_root);
+    editSearch->nativeWidget()->setClearButtonShown(true);
+    editSearch->nativeWidget()->setClickMessage(i18n("Search"));
+    editSearch->show();
+    layoutSearch->addItem(editSearch,
+        Lancelot::NodeLayout::NodeCoordinate(0.0, 0.5, 0, 0),
+        Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
+    );
 
     instance->activateAll();
 
@@ -237,10 +246,10 @@ LancelotWindow::LancelotWindow()
     connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
-    //connect(editSearch,
-    //    SIGNAL(textChanged(const QString &)),
-    //    this, SLOT(search(const QString &))
-    //);
+    connect(editSearch->widget(),
+        SIGNAL(textChanged(const QString &)),
+        this, SLOT(search(const QString &))
+    );
 
     loadConfig();
 }
@@ -401,9 +410,9 @@ void LancelotWindow::sectionActivated(const QString & item)
 
 void LancelotWindow::search(const QString & string)
 {
-    // if (editSearch->text() != string) {
-    //    editSearch->setText(string);
-    // }
+    if (editSearch->text() != string) {
+        editSearch->setText(string);
+    }
 
     m_searchString = string;
 
@@ -594,13 +603,13 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
 
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
-//     if ((object == editSearch) && (event->type() == QEvent::KeyPress)) {
-//         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-//         if (keyEvent->key() == Qt::Key_Escape) {
-//             lancelotHide(true);
-//             return true;
-//         }
-//     }
+     if (event->type() == QEvent::KeyPress) {
+         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+         if (keyEvent->key() == Qt::Key_Escape) {
+             lancelotHide(true);
+             return true;
+         }
+     }
      return QWidget::eventFilter(object, event);
 }
 
