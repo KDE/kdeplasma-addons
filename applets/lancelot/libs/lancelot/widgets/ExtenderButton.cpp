@@ -173,7 +173,7 @@ void ExtenderButton::timerEvent(QTimerEvent * event)
     if (event->timerId() == ExtenderObject::timer.timerId()) {
         d->extender->stopTimer();
         toggle();
-        hide();
+        d->extender->hide();
         // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
         hoverLeaveEvent(0);
         d->extender->hoverLeaveEvent(0);

@@ -81,6 +81,7 @@ void LancelotApplication::init()
 
     if ( KAuthorized::authorizeKAction("show_lancelot")) {
         a = m_actionCollection->addAction(i18n("Lancelot"), this);
+        a->setText(i18n("Lancelot"));
         a->setGlobalShortcut(KShortcut(Qt::ALT + Qt::Key_F5));
         connect(
                 a, SIGNAL(triggered(bool)),
