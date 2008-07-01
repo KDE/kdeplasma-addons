@@ -51,6 +51,11 @@ public:
 
 public Q_SLOTS:
     /**
+     * Shows full window centered on the screen.
+     */
+    void lancelotShowCentered();
+
+    /**
      * Shows full window.
      * @param x x coordinate of the mouse
      * @param y y coordinate of the mouse
@@ -136,8 +141,9 @@ protected:
      * Shows window
      * @param x x coordinate of position to show at
      * @param y y coordinate of position to show at
+     * @param centered override x and y and show window centered
      */
-    void showWindow(int x, int y);
+    void showWindow(int x, int y, bool centered = false);
 
     /**
      * Creates and sets up data models

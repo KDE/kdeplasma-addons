@@ -25,7 +25,13 @@
 #include <QtDBus>
 
 #include <KAction>
+#include <KActionCollection>
 #include <KStandardAction>
+#include <KAuthorized>
+//#include <KGlobalAccel>
+//#include <KGlobalSettings>
+#include <KLocale>
+
 
 #include <lancelot/Global.h>
 #include "LancelotWindow.h"
@@ -69,6 +75,19 @@ void LancelotApplication::init()
     new AppAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
+
+    m_actionCollection = new KActionCollection(this);
+    KAction * a = 0;
+
+    if ( KAuthorized::authorizeKAction("show_lancelot")) {
+        a = m_actionCollection->addAction(i18n("Lancelot"), this);
+        a->setGlobalShortcut(KShortcut(Qt::ALT + Qt::Key_F5));
+        connect(
+                a, SIGNAL(triggered(bool)),
+                this, SLOT(showCentered())
+                );
+    }
+
 }
 
 LancelotApplication::~LancelotApplication()
@@ -100,6 +119,13 @@ int LancelotApplication::main(int argc, char **argv)
     Lancelot::Instance::setHasApplication(true);
 
     return LancelotApplication::m_application->exec();
+}
+
+bool LancelotApplication::showCentered()
+{
+    if (!m_application) return false;
+    LancelotApplication::m_application->window->lancelotShowCentered();
+    return true;
 }
 
 bool LancelotApplication::show(int x, int y)

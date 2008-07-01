@@ -182,7 +182,7 @@ LancelotWindow::LancelotWindow()
     m_mainSize(mainWidthDefault, windowHeightDefault)
 {
     setFocusPolicy(Qt::WheelFocus);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
 
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
@@ -225,6 +225,7 @@ LancelotWindow::LancelotWindow()
         Lancelot::NodeLayout::NodeCoordinate(0.0, 0.5, 0, 0),
         Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
     );
+    editSearch->nativeWidget()->installEventFilter(this);
 
     instance->activateAll();
 
@@ -272,6 +273,12 @@ void LancelotWindow::lancelotShow(int x, int y)
     showWindow(x, y);
 }
 
+void LancelotWindow::lancelotShowCentered()
+{
+    m_showingFull = true;
+    showWindow(0, 0, true);
+}
+
 void LancelotWindow::lancelotShowItem(int x, int y, const QString & name)
 {
     sectionActivated(name);
@@ -290,7 +297,7 @@ void LancelotWindow::lancelotHide(bool immediate)
     m_hideTimer.start();
 }
 
-void LancelotWindow::showWindow(int x, int y)
+void LancelotWindow::showWindow(int x, int y, bool centered)
 {
     panelSections->setVisible(m_showingFull);
 
@@ -306,24 +313,35 @@ void LancelotWindow::showWindow(int x, int y)
 
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
 
-    Plasma::Flip flip = Plasma::VerticalFlip;
+    Plasma::Flip flip;
 
-    if (x < screenRect.left()) {
-        x = screenRect.left();
-    }
+    if (!centered) {
+        flip = Plasma::VerticalFlip;
 
-    if (y < screenRect.top()) {
-        y = screenRect.top();
-    }
+        if (x < screenRect.left()) {
+            x = screenRect.left();
+        }
 
-    if (x + width() > screenRect.right()) {
-        x = screenRect.right() - width();
-        flip |= Plasma::HorizontalFlip;
-    }
+        if (y < screenRect.top()) {
+            y = screenRect.top();
+        }
 
-    if (y + height() > screenRect.bottom()) {
-        y = screenRect.bottom() - height();
-        flip &= ~Plasma::VerticalFlip;
+        if (x + width() > screenRect.right()) {
+            x = screenRect.right() - width();
+            flip |= Plasma::HorizontalFlip;
+        }
+
+        if (y + height() > screenRect.bottom()) {
+            y = screenRect.bottom() - height();
+            flip &= ~Plasma::VerticalFlip;
+        }
+    } else {
+        flip = Plasma::NoFlip;
+
+        x = screenRect.left()
+            + (screenRect.width() - width()) / 2;
+        y = screenRect.top()
+            + (screenRect.height() - height()) / 2;
     }
 
     layoutMain->setFlip(flip);
@@ -340,7 +358,8 @@ void LancelotWindow::showWindow(int x, int y)
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     KWindowSystem::forceActiveWindow(winId());
-    // editSearch->setFocus();
+    editSearch->setFocus();
+    editSearch->setText(QString());
 }
 
 void LancelotWindow::resizeWindow()
@@ -603,14 +622,15 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
 
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
-     if (event->type() == QEvent::KeyPress) {
-         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-         if (keyEvent->key() == Qt::Key_Escape) {
-             lancelotHide(true);
-             return true;
-         }
-     }
-     return QWidget::eventFilter(object, event);
+    kDebug() << event;
+    if (object == editSearch->nativeWidget() && event->type() == QEvent::KeyPress) {
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Escape) {
+            lancelotHide(true);
+            return true;
+        }
+    }
+    return QWidget::eventFilter(object, event);
 }
 
 #include "LancelotWindow.moc"

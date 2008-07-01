@@ -26,6 +26,7 @@
 #include <QStringList>
 
 class LancelotWindow;
+class KActionCollection;
 
 class LancelotApplication: public KUniqueApplication
 {
@@ -38,6 +39,7 @@ public:
 
 public Q_SLOTS:
     static bool show(int x, int y);
+    static bool showCentered();
     static bool showItem(int x, int y, const QString & name);
 
     static bool hide(bool immediate = false);
@@ -68,6 +70,7 @@ private:
     int m_clientsNumber;
     int m_lastID;
     QSet<int> m_clients;
+    KActionCollection * m_actionCollection;
 
 };
 
