@@ -175,7 +175,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
     QStringList separators;
-    separators << QString(CONVERSION_CHAR) << i18n("in");
+    separators << QString(CONVERSION_CHAR) << i18nc("amount of <unit1> in <unit2>", "in");
     QString s = cmd.get(StringParser::GetString);
     if (!s.isEmpty() && !separators.contains(s)) {
         unit1 += " " + s;
