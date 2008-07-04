@@ -37,6 +37,8 @@
 #include <KDirSelectDialog>
 #include <KServiceTypeTrader>
 
+#include <plasma/paintutils.h>
+
 #include <math.h>
 
 #include "configdialog.h"
@@ -379,7 +381,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     // choose where to draw.
 
     // The frame path. It will be used to draw the frame and clip the image.
-    QPainterPath framePath = Plasma::roundedRectangle(frameRect, roundingFactor);
+    QPainterPath framePath = Plasma::PaintUtils::roundedRectangle(frameRect, roundingFactor);
 
     p->setRenderHint(QPainter::SmoothPixmapTransform, true);
     p->setRenderHint(QPainter::Antialiasing, true);
@@ -391,7 +393,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->setBrush(Qt::NoBrush);
         for (int i = 0; i <= m_swOutline; i += 1) {
             p->setOpacity(0.7 * exp(-(i / (double)(m_swOutline / 3))));
-            QPainterPath tr = Plasma::roundedRectangle(shadowRect, swRoundness + i);
+            QPainterPath tr = Plasma::PaintUtils::roundedRectangle(shadowRect, swRoundness + i);
             p->drawPath(tr);
             shadowRect.adjust(-1, -1, +1, +1);
         }
