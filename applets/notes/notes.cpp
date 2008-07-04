@@ -39,10 +39,20 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
     setBackgroundHints(Plasma::Applet::NoBackground);
-
     m_saveTimer.setSingleShot(true);
     connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
+    resize(256, 256);
+}
 
+Notes::~Notes()
+{
+    //FIXME is it really ok to save from here?
+    saveNote();
+    delete m_textEdit;
+}
+
+void Notes::init()
+{
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
 
@@ -57,20 +67,10 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
     m_autoFont = false;
 
-    resize(256, 256);
-    updateTextGeometry();
-}
-
-Notes::~Notes()
-{
-    //FIXME is it really ok to save from here?
-    saveNote();
-    delete m_textEdit;
-}
-
-void Notes::init()
-{
     KConfigGroup cg = config();
+    // color must be before setPlainText("foo")
+    m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
+    m_textEdit->nativeWidget()->setTextColor(m_textColor);
 
     QString text = cg.readEntry("autoSave", QString());
     if (! text.isEmpty()) {
@@ -81,8 +81,7 @@ void Notes::init()
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
-    m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
-    m_textEdit->nativeWidget()->setTextColor(m_textColor);
+
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
@@ -106,6 +105,7 @@ void Notes::updateTextGeometry()
     m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
     m_font.setPointSize(fontSize());
     m_textEdit->nativeWidget()->setFont(m_font);
+    
 }
 
 int Notes::fontSize()
@@ -191,7 +191,10 @@ void Notes::configAccepted()
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textcolor", m_textColor);
-        m_textEdit->nativeWidget()->setTextColor(m_textColor); // This doesn't seem to work, why?
+	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+	m_textEdit->nativeWidget()->selectAll();
+        m_textEdit->nativeWidget()->setTextColor(m_textColor); 
+	m_textEdit->nativeWidget()->setTextCursor(textCursor);
     }
 
     bool spellCheck = ui.checkSpelling->isChecked();
