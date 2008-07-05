@@ -29,15 +29,14 @@ class Widget::Private {
 public:
     Private()
       : group(NULL),
-        initd(0),
-        hover(false)
+        hover(false),
+        down(false)
     {
     };
 
     WidgetGroup * group;
-    int initd;
-    int noOfAncestors;
     bool hover : 1;
+    bool down : 1;
 };
 
 Widget::Widget(QGraphicsItem * parent)
@@ -74,6 +73,29 @@ void Widget::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     QGraphicsWidget::hoverEnterEvent(event);
     emit mouseHoverLeave();
     update();
+}
+
+void Widget::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (event->button() == Qt::LeftButton) {
+        d->down = true;
+        update();
+        event->accept();
+        emit pressed();
+    } else {
+        QGraphicsWidget::mousePressEvent(event);
+    }
+}
+
+void Widget::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (d->down && (event->button() == Qt::LeftButton)) {
+        d->down = false;
+        emit clicked();
+        emit released();
+    } else {
+        QGraphicsWidget::mouseReleaseEvent(event);
+    }
 }
 
 bool Widget::isHovered() const
@@ -142,6 +164,8 @@ void Widget::paintBackground(QPainter * painter) {
     QString element;
     if (!isEnabled()) {
         element = "disabled";
+    } else if (d->down) {
+        element = "down";
     } else if (d->hover) {
         element = "active";
     } else {
@@ -219,6 +243,12 @@ QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     }
     return result.boundedTo(constraint);
 }
+
+bool Widget::isDown()
+{
+    return d->down;
+}
+
 
 } // namespace Lancelot
 

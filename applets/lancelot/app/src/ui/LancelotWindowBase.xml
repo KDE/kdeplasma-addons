@@ -110,38 +110,6 @@
 
                 Lancelot__FullBorderLayout:position="Top"
             >
-            <!-- Dirty hack to get an edit box before Qt 4.4 :: begin
-            <code:include><![CDATA[
-                #include <KLineEdit>
-                ]]></code:include>
-                <code:declaration>
-                    KLineEdit * editSearch;
-                    QGraphicsWidget     * _m_root;
-                    QGraphicsView       * _m_view;
-                </code:declaration>
-                <code:initialization>
-                    editSearch = new KLineEdit(); //(QWidget *)this
-                </code:initialization>
-                <code:setup>
-                    editSearch->setClearButtonShown(true);
-                    editSearch->setFrame(false);
-                </code:setup>
-
-                <item:widget
-                    name="editSearchPositioner" type="Lancelot::WidgetPositioner"
-                    widgetName="editSearch" view="_m_view" parent="_m_root"
-
-                    Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                    Lancelot__NodeLayout:bottomRight="1.0, 0.5, -10, INFINITY"
-                />
-                <item:widget
-                    type="Plasma::Label" name="labelSearch"
-                    text="Search"
-
-                    Lancelot__NodeLayout:topLeft="0.5, 0.5, 0, 0"
-                    Lancelot__NodeLayout:bottomRight="1.1, 0.5, INFINITY, INFINITY"
-                />
-            Dirty hack to get an edit box before Qt 4.4 :: end -->
             </item:layout>
             <item:layout
                 name="layoutCenter" type="Lancelot::CardLayout"
@@ -255,20 +223,11 @@
                     <item:layout name="layoutPanelSearch" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listSearchLeft" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+                            itemsGroup="ActionListView-Left-Items" extenderPosition="Right"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"
                         />
-                        <!--
-                        <item:widget
-                            name="listSearchRight" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
-
-                            Lancelot__NodeLayout:topLeft     = "0.5, 0"
-                            Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
-                        />
-                        -->
                     </item:layout>
                 </item:widget>
             </item:layout>
@@ -308,7 +267,7 @@
                     name="buttonSystemSwitchUser" type="Lancelot::ExtenderButton"
 
                     title="Switch User"
-                    icon="switchuser"
+                    icon="system-switch-user"
                     group="SystemButtons"
                     activationMethod="Extender"
                     extenderPosition="Bottom"

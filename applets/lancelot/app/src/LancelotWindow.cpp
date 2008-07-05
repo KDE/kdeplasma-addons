@@ -306,8 +306,11 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     m_resizeDirection = None;
     m_hideTimer.stop();
 
+    resizeWindow();
     if (isVisible()) {
-        resizeWindow();
+        // We are exiting because we do not want to move already opened window
+        // because most probably it is just invoked from the same applet and
+        // needs to show only another category
         return;
     }
 
@@ -352,7 +355,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     ));
     instance->group("SystemButtons")->notifyUpdated();
 
-    resizeWindow();
+    //resizeWindow();
 
     move(x, y);
     show();

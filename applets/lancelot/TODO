@@ -11,6 +11,9 @@ TODO: (a) Keyboard: Keyboard navigation
 TODO: (a) Contacts section
 TODO: (m) Search history
 TODO: (m) Switch menu instead of searching for SESSIONS
+TODO: (m) Switch to new lists
+TODO: (a) Speed up
+TODO: (a) Configuration
 
 Library:
 TODO: (h) convert to WoC
@@ -21,8 +24,11 @@ TODO: (m) add propper size hints to layouts and widgets
 TODO: (e) move the groups mechanism away from Widget
           so that ordinary plasma widgets could be extended
           when needed. Add groups support to HoverIcon
+TODO: (a) create new lists (scroll panes...)
+TODO: (a) add menu widget
 
 Applet:
+TODO: (m) fix the hovering
 
 Parts:
 TODO: (h) Make it :)

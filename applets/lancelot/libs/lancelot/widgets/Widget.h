@@ -91,6 +91,11 @@ public:
      */
     bool isHovered() const;
 
+    /**
+     * @returns whether the button is down
+     */
+    bool isDown();
+
     L_Override virtual void setGeometry(const QRectF & rect);
     L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
 
@@ -108,6 +113,24 @@ Q_SIGNALS:
      * This signal is emitted when the mouse cursor leaves the widget
      */
     void mouseHoverLeave();
+
+    /**
+     * Emitted when the button is clicked.
+     * You should use the activated() signal instead if you want to
+     * support other activation methods beside clicking.
+     * @param checked true if the button is checked
+     */
+    void clicked();
+
+    /**
+     * This signal is emitted when the button is pressed down
+     */
+    void pressed();
+
+    /**
+     * This signal is emitted when the button is released
+     */
+    void released();
 
 protected:
     /**
@@ -141,6 +164,10 @@ protected:
 
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+
+    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 

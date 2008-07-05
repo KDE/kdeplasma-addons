@@ -32,6 +32,27 @@ class ExtenderObject : public BasicWidget {
 public:
     ExtenderObject(Plasma::Svg * icon,
             ExtenderButton * parent)
+      : BasicWidget(icon, "", "")
+    {
+        setParentItem(parent);
+        setInnerOrientation(Qt::Vertical);
+        setAlignment(Qt::AlignCenter);
+    }
+
+    // Needed because of a Qt bug - making it public
+    // so that ExtenderButton can invoke it directly
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+    {
+        BasicWidget::hoverLeaveEvent(event);
+    }
+};
+
+
+//
+/* class ExtenderObject : public BasicWidget {
+public:
+    ExtenderObject(Plasma::Svg * icon,
+            ExtenderButton * parent)
       : BasicWidget(icon, "", ""),
         m_parent(parent)
     {
@@ -42,12 +63,14 @@ public:
 
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     {
+        // TODO: Replace this with signals/slots
         BasicWidget::hoverEnterEvent(event);
         startTimer();
     }
 
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     {
+        // TODO: Replace this with signals/slots
         BasicWidget::hoverLeaveEvent(event);
         stopTimer();
     }
@@ -77,7 +100,7 @@ public:
 
 private:
     ExtenderButton * m_parent;
-};
+};*/
 
 // ExtenderButton
 class ExtenderButton::Private {
@@ -87,7 +110,6 @@ public:
         extender(NULL),
         extenderPosition(NoExtender),
         activationMethod(ClickActivate),
-        down(false),
         checkable(false),
         checked(false)
     {
@@ -100,6 +122,22 @@ public:
         extender->setVisible(false);
 
         extender->setIconSize(QSize(16, 16));
+
+        timer.setInterval(ACTIVATION_TIME);
+        timer.setSingleShot(true);
+        connect(
+                extender, SIGNAL(mouseHoverEnter()),
+                &timer, SLOT(start())
+               );
+        connect(
+                extender, SIGNAL(mouseHoverLeave()),
+                &timer, SLOT(stop())
+               );
+        connect(
+                &timer, SIGNAL(timeout()),
+                parent, SLOT(activate())
+               );
+
     }
 
     ~Private()
@@ -112,7 +150,7 @@ public:
         if (!extender) return;
         QRectF geometry = QRectF(QPointF(0, 0), q->size());
 
-        extender->borders = Plasma::PanelSvg::AllBorders;
+        Plasma::PanelSvg::EnabledBorders extender_borders = Plasma::PanelSvg::AllBorders;
         borders = Plasma::PanelSvg::AllBorders;
 
         switch (extenderPosition) {
@@ -120,25 +158,25 @@ public:
             geometry.setHeight(EXTENDER_SIZE);
             geometry.moveTop(- EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::TopBorder;
-            extender->borders &= ~ Plasma::PanelSvg::BottomBorder;
+            extender_borders &= ~ Plasma::PanelSvg::BottomBorder;
             break;
         case BottomExtender:
             geometry.moveTop(geometry.bottom());
             geometry.setHeight(EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::BottomBorder;
-            extender->borders &= ~ Plasma::PanelSvg::TopBorder;
+            extender_borders &= ~ Plasma::PanelSvg::TopBorder;
             break;
         case LeftExtender:
             geometry.setWidth(EXTENDER_SIZE);
             geometry.moveLeft(- EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::LeftBorder;
-            extender->borders &= ~ Plasma::PanelSvg::RightBorder;
+            extender_borders &= ~ Plasma::PanelSvg::RightBorder;
             break;
         case RightExtender:
             geometry.moveLeft(geometry.right());
             geometry.setWidth(EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::RightBorder;
-            extender->borders &= ~ Plasma::PanelSvg::LeftBorder;
+            extender_borders &= ~ Plasma::PanelSvg::LeftBorder;
             break;
         case NoExtender:
             break;
@@ -146,29 +184,33 @@ public:
         extender->setGeometry(geometry);
         extender->setPreferredSize(geometry.size());
 
+        if (Plasma::PanelSvg * svg = extender->group()->backgroundSvg()) {
+            svg->setEnabledBorders(extender_borders);
+        }
+
         // qreal left, top, right, bottom;
         // q->getContentsMargins(&left, &top, &right, &bottom);
     }
 
     ExtenderButton * q;
 
-    ExtenderObject * extender;
     ExtenderPosition extenderPosition;
     ActivationMethod activationMethod;
 
     static Plasma::Svg * extenderIconSvg;
     Plasma::PanelSvg::EnabledBorders borders;
 
-    bool down : 1;
+    ExtenderObject * extender;
+    QTimer timer;
     bool checkable : 1;
     bool checked : 1;
 
 };
 
 Plasma::Svg * ExtenderButton::Private::extenderIconSvg = NULL;
-QBasicTimer ExtenderObject::timer = QBasicTimer();
+// QBasicTimer ExtenderObject::timer = QBasicTimer();
 
-void ExtenderButton::timerEvent(QTimerEvent * event)
+/*void ExtenderButton::timerEvent(QTimerEvent * event)
 {
     if (event->timerId() == ExtenderObject::timer.timerId()) {
         d->extender->stopTimer();
@@ -182,13 +224,14 @@ void ExtenderButton::timerEvent(QTimerEvent * event)
         activate();
     }
     QObject::timerEvent(event);
-}
+}*/
 
 ExtenderButton::ExtenderButton(QGraphicsItem * parent)
   : BasicWidget(parent),
     d(new Private(this))
 {
     setGroupByName("ExtenderButton");
+    connect(this, SIGNAL(clicked()), this, SLOT(activate()));
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -198,6 +241,7 @@ ExtenderButton::ExtenderButton(QString title,
     d(new Private(this))
 {
     setGroupByName("ExtenderButton");
+    connect(this, SIGNAL(clicked()), this, SLOT(activate()));
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -207,6 +251,7 @@ ExtenderButton::ExtenderButton(QIcon icon, QString title,
     d(new Private(this))
 {
     setGroupByName("ExtenderButton");
+    connect(this, SIGNAL(clicked()), this, SLOT(activate()));
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -216,6 +261,7 @@ ExtenderButton::ExtenderButton(Plasma::Svg * icon, QString title,
     d(new Private(this))
 {
     setGroupByName("ExtenderButton");
+    connect(this, SIGNAL(clicked()), this, SLOT(activate()));
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -253,7 +299,7 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     if (d->extenderPosition != NoExtender) {
         d->extender->setVisible(true);
     } else if (d->activationMethod == HoverActivate) {
-        d->extender->startTimer();
+        d->timer.start();
     }
     BasicWidget::hoverEnterEvent(event);
 }
@@ -261,7 +307,7 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
     d->extender->setVisible(false);
-    d->extender->stopTimer();
+    d->timer.stop();
     BasicWidget::hoverLeaveEvent(event);
 }
 
@@ -292,35 +338,16 @@ ActivationMethod ExtenderButton::activationMethod()
     return d->activationMethod;
 }
 
-void ExtenderButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
-{
-    if (event->button() == Qt::LeftButton) {
-        d->down = true;
-        update();
-        event->accept();
-        emit pressed();
-    } else {
-        BasicWidget::mousePressEvent(event);
-    }
-}
-
 void ExtenderButton::activate()
 {
-    emit activated();
     toggle();
+    d->timer.stop();
+    d->extender->hide();
+    // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
+    hoverLeaveEvent(0);
+    //d->extender->hoverLeaveEvent(0);
     update();
-}
-
-void ExtenderButton::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
-{
-    if (d->down && (event->button() == Qt::LeftButton)) {
-        d->down = false;
-        activate();
-        emit clicked();
-        emit released();
-    } else {
-        BasicWidget::mouseReleaseEvent(event);
-    }
+    emit activated();
 }
 
 void ExtenderButton::geometryUpdated()
@@ -343,9 +370,7 @@ void ExtenderButton::paint(QPainter * painter,
         }
     }
 
-    if (d->down) {
-        paintBackground(painter, "down");
-    } else if (d->checked) {
+    if (d->checked && !isDown()) {
         paintBackground(painter, "checked");
     } else {
         paintBackground(painter);
@@ -388,18 +413,6 @@ void ExtenderButton::setCheckable(bool checkable)
 bool ExtenderButton::isCheckable()
 {
     return d->checkable;
-}
-
-void ExtenderButton::setDown(bool down)
-{
-    if (d->down == down) return;
-    d->down = down;
-    update();
-}
-
-bool ExtenderButton::isDown()
-{
-    return d->down;
 }
 
 } // namespace Lancelot

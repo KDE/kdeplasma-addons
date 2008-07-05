@@ -48,7 +48,6 @@ class LANCELOT_EXPORT ExtenderButton : public Lancelot::BasicWidget
     Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
     Q_PROPERTY ( bool checkable READ isCheckable WRITE setCheckable )
     Q_PROPERTY ( bool checked READ isChecked WRITE setChecked )
-    Q_PROPERTY ( bool down READ isDown WRITE setDown )
 
     L_WIDGET
     L_INCLUDE(lancelot/widgets/ExtenderButton.h lancelot/lancelot.h)
@@ -132,11 +131,6 @@ public:
      */
     bool isChecked();
 
-    /**
-     * @returns whether the button is down
-     */
-    bool isDown();
-
     L_Override virtual void geometryUpdated();
 
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
@@ -146,8 +140,6 @@ public:
 
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-
-    L_Override virtual void timerEvent(QTimerEvent * event);
 
 public slots:
     /**
@@ -163,12 +155,6 @@ public slots:
      */
     void toggle();
 
-    /**
-     * Sets whether the button is down
-     * @param down down
-     */
-    void setDown(bool down);
-
 Q_SIGNALS:
     /**
      * Emitted when the button is activated
@@ -182,29 +168,11 @@ Q_SIGNALS:
      */
     void toggled(bool checked);
 
-    /**
-     * Emitted when the button is clicked.
-     * You should use the activated() signal instead if you want to
-     * support other activation methods beside clicking.
-     * @param checked true if the button is checked
-     */
-    void clicked(bool checked = false);
-
-    /**
-     * This signal is emitted when the button is pressed down
-     */
-    void pressed();
-
-    /**
-     * This signal is emitted when the button is released
-     */
-    void released();
-
 protected:
-    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+
+protected slots:
     void activate();
 
 private:

@@ -29,6 +29,8 @@ KDirWatch * FolderModel::m_dirWatch = NULL;
 FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
     : m_dirPath(dirPath), m_sort(sort)
 {
+    kDebug() << dirPath;
+
     if (!m_dirPath.endsWith(QDir::separator())) {
         m_dirPath += QDir::separator();
     }

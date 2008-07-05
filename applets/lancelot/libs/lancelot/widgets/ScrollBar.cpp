@@ -25,6 +25,19 @@
 namespace Lancelot
 {
 
+class D_ExtenderButton : public ExtenderButton {
+public:
+    void paint(QPainter * painter,
+        const QStyleOptionGraphicsItem * option, QWidget * widget)
+    {
+        // painter->fillRect(QRectF(QPointF(), size()), QBrush(QColor(0,0,0)));
+        ExtenderButton::paint(painter, option, widget);
+    }
+
+    D_ExtenderButton(QGraphicsItem * parent = 0)
+        : ExtenderButton(parent) {}
+};
+
 class ScrollBar::Private {
 public:
     Private(ScrollBar * parent)
@@ -38,13 +51,12 @@ public:
         activationMethod(ExtenderActivate),
         q(parent)
     {
-        upButton   = new ExtenderButton("", "", parent);
-        downButton = new ExtenderButton("", "", parent);
-        upBar      = new ExtenderButton("", "", parent);
-        downBar    = new ExtenderButton("", "", parent);
-        handle     = new ExtenderButton("", "", parent);
+        upButton   = new D_ExtenderButton(parent);
+        downButton = new D_ExtenderButton(parent);
+        upBar      = new D_ExtenderButton(parent);
+        downBar    = new D_ExtenderButton(parent);
+        handle     = new D_ExtenderButton(parent);
 
-        "Connecting everything";
         connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
         connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
 

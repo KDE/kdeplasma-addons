@@ -69,6 +69,7 @@ LancelotTestWindow::LancelotTestWindow()
     mainLayout->addItem(button, Lancelot::FullBorderLayout::BottomRight);
     m_corona->addItem(button);
 
+    /*
     Lancelot::NodeLayout * centerLayout;
     centerLayout = new Lancelot::NodeLayout();
     mainLayout->addItem(centerLayout, Lancelot::FullBorderLayout::Center);
@@ -88,9 +89,28 @@ LancelotTestWindow::LancelotTestWindow()
             Lancelot::NodeLayout::NodeCoordinate(1, 1)
             );
     m_corona->addItem(button);
+    */
 
-    centerLayout->removeAt(centerLayout->count() - 1);
-    delete button;
+    Lancelot::ScrollBar * sb = new Lancelot::ScrollBar();
+    m_corona->addItem(sb);
+    sb->setMinimum(100);
+    sb->setMaximum(200);
+    sb->setViewSize(40);
+    sb->setValue(30);
+    sb->setGeometry(QRectF(0, 0, 10, 200));
+    // mainLayout->addItem(sb, Lancelot::FullBorderLayout::Left);
+
+    QTimeLine * timeLine = new QTimeLine(5000, this);
+    timeLine->setFrameRange(100, 300);
+    connect(timeLine, SIGNAL(frameChanged(int)), sb, SLOT(setValue(int)));
+    timeLine->setLoopCount(0);
+
+/*
+    Lancelot::ScrollPane * scrollpane;
+    scrollpane = new Lancelot::ScrollPane();
+    mainLayout->addItem(scrollpane);
+    m_corona->addItem(scrollpane);*/
+
     // Test area - end   ####################################
 
     // Starting...
