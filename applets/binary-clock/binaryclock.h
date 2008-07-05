@@ -26,9 +26,12 @@
 class QTime;
 class QColor;
 
-class Plasma::DataEngine;
-
-class Ui::clockConfig;
+namespace Plasma {
+    class DataEngine;
+}
+namespace Ui {
+    class clockConfig;
+}
 
 class BinaryClock : public Plasma::Applet
 {

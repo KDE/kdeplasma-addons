@@ -31,8 +31,8 @@
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_showSeconds(true),
-      m_showGrid(true),
       m_showOffLeds(true),
+      m_showGrid(true),
       m_time(0, 0)
 {
     setHasConfigurationInterface(true);
