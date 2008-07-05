@@ -61,7 +61,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
-    resize(600, 350);
+    resize(200, 350);
 }
 
 void Twitter::init()
@@ -337,7 +337,6 @@ void Twitter::showTweets()
         QSizeF favIconSize = icon->sizeFromIconSize(16);
         favIcon->setMinimumSize( favIconSize );
         favIcon->setMaximumSize( favIconSize );
-        
 
         tweetLayout->addItem( icon );
         tweetLayout->addItem( proxy );
