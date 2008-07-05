@@ -15,7 +15,7 @@ I18N_NOOP("Log Out");
 I18N_NOOP("Switch User");
 
 // The strings that will be needed in the future
-I18N_NOOP("needed program is not running", "%1 is not running");
-I18N_NOOP("start a program", "start %1");
+I18N_NOOP2("needed program is not running", "%1 is not running");
+I18N_NOOP2("start a program", "start %1");
 I18N_NOOP("Online contacts");
 I18N_NOOP("e-Mail contacts");
