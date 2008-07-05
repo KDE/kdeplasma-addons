@@ -30,6 +30,7 @@
 #include <KDebug>
 #include <KIcon>
 #include <KLineEdit>
+#include <KStandardDirs>
 
 #include <Plasma/Animator>
 #include <Plasma/Icon>
@@ -62,10 +63,9 @@ void Dict::init()
     m_defBrowserProxy->setWidget(m_defBrowser);
     m_defBrowserProxy->hide();
 //  Icon in upper-left corner
-    QIcon icon = KIcon("accessories-dictionary");
-    //m_graphicsIcon = new QGraphicsPixmapItem(icon.pixmap(32,32), this);
+	QString iconpath = KStandardDirs::locate("icon", "oxygen/scalable/apps/accessories-dictionary.svgz");
     m_icon = new Plasma::Icon(this);
-    m_icon->setIcon(icon);
+    m_icon->setSvg(iconpath);
 
 //  Position lineedits
     //const int wordEditOffset = 40;
