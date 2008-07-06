@@ -270,7 +270,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
             }
         }
         m_lastTweet = maxId;
-        m_flash->flash( i18n("%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
+        m_flash->flash( i18np( "1 new tweet", "%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
         showTweets();
     } else if (source == "LatestImage") {
         QString user = data.begin().key();
@@ -632,13 +632,13 @@ QString Twitter::timeDescription( const QDateTime &dt )
     QString desc;
 
     if( diff < 60 ) {
-        desc = i18n( "1 minute ago" );
+        desc = i18n( "Less than a minute ago" );
     }else if( diff < 60*60 ) {
-        desc = i18n( "%1 minutes ago", QString::number( diff/60 ) );
+        desc = i18np( "1 minute ago", "%1 minutes ago", diff/60 );
     } else if( diff < 2*60*60 ) {
-        desc = i18n( "1 hour ago");
+        desc = i18n( "Over an hour ago");
     } else if( diff < 24*60*60 ) {
-        desc = i18n( "%1 hours ago", QString::number( diff/3600 ) );
+        desc = i18np( "1 hour ago", "%1 hours ago", diff/3600 );
     } else {
         desc = dt.toString( Qt::LocaleDate );
     }
