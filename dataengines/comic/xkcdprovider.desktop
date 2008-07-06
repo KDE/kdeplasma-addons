@@ -7,7 +7,10 @@ X-KDE-PlasmaComicProvider-Identifier=xkcd
 Icon=plasma_comic_xkcd
 
 Name=XKCD
+Name[sr]=ИксКЦД
 Name[x-test]=xxXKCDxx
 Comment=XKCD
 Comment[nl]=XKCD-strip
+Comment[sr]=Стрип „ИксКЦД“
+Comment[sr@latin]=Strip „XKCD“
 Comment[x-test]=xxXKCDxx

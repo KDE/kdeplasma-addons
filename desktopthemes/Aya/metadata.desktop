@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Aya
 Name[ko]=아야
+Name[sr]=Аја
 Name[uk]=Айя
 Name[x-test]=xxAyaxx
 Comment=Theme that matches current system colors (Optimized with Oxygen style)
 Comment[ca]=Tema que coincideix amb els colors actuals del sistema (optimitzat per a l'estil Oxygen)
+Comment[da]=Tema som matcher de aktuelle systemfarver (optimeret med Oxygen-stil)
 Comment[el]=Θέμα που αντιστοιχεί στα τρέχοντα χρώματα του συστήματος (βελτιστοποιημένο με στυλ Oxygen)
 Comment[es]=Tema que coincide con los colores del sistema actual (optimizado para el estilo Oxígeno)
 Comment[et]=Teema, mis sobib aktiivsete süsteemi värvidega (optimeeritud Oxygeni stiilile)
@@ -17,6 +19,8 @@ Comment[nds]=Muster, dat to de aktuellen Systeemklören passt (Mit Oxygen-Stil t
 Comment[pt]=Um tema que corresponde às cores actuais do sistema (Optimizado com o estilo Oxygen)
 Comment[pt_BR]=Um tema que corresponde às cores actuais do sistema (Optimizado com o estilo Oxygen)
 Comment[sl]=Tema, ki se ujema s sistemskimi barvami (optimizirana za slog Oxygen)
+Comment[sr]=Тема у складу са текућим бојама система (најбоље са стилом Кисеоника)
+Comment[sr@latin]=Tema u skladu sa tekućim bojama sistema (najbolje sa stilom Kiseonika)
 Comment[sv]=Tema som motsvarar nuvarande systemfärger (optimerad för stilen Oxygen)
 Comment[tr]=Geçerli sistem renkleri ile uyumlu bir tema (Oxygen biçimi için iyileştirilmiş)
 Comment[uk]=Тема, що відповідає поточним системним кольорам (Оптимізовано зі стилем Oxygen)

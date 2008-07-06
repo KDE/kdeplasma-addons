@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Fuzzy Clock
 Name[ca]=Rellotge aproximat
+Name[da]=Upræcist ur
 Name[el]=Ασαφές ρολόι
 Name[es]=Reloj impreciso
 Name[et]=Segane kell
@@ -19,6 +20,8 @@ Name[pt]=Relógio Difuso
 Name[pt_BR]=Relógio Difuso
 Name[ro]=Ceas evaziv
 Name[sl]=Zgovorna ura
+Name[sr]=одокативни сат
+Name[sr@latin]=odokativni sat
 Name[sv]=Inexakt klocka
 Name[th]=นาฬิกาแบบตรรกพื้นฐาน
 Name[tr]=Bulanık Saat
@@ -29,6 +32,7 @@ Name[zh_TW]=模糊時鐘
 
 Comment=A simple fuzzy clock
 Comment[ca]=Un rellotge aproximat senzill
+Comment[da]=Et simpelt upræcist ur
 Comment[el]=Ένα απλό ασαφές ρολόι
 Comment[es]=Un simple reloj impreciso
 Comment[et]=Lihtne segane kell
@@ -47,6 +51,8 @@ Comment[pt]=Um relógio difuso simples
 Comment[pt_BR]=Um relógio difuso simples
 Comment[ro]=Un simplu ceas evaziv
 Comment[sl]=Preprosta zgovorna ura
+Comment[sr]=Једноставан сат с приближним временом
+Comment[sr@latin]=Jednostavan sat s približnim vremenom
 Comment[sv]=En enkel inexakt klocka
 Comment[th]=นาฬิกาแบบตรรกพื้นฐาน
 Comment[tr]=Basit bir bulanık saat

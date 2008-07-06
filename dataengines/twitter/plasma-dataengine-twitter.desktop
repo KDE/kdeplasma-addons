@@ -2,6 +2,7 @@
 Name=Twitter Data Engine
 Name[ca]=Motor de dades del Twitter
 Name[csb]=Mòtór pòdôwków Twitter
+Name[da]=Datamotor til Twitter
 Name[de]=Twitter-Datentreiber
 Name[el]=Μηχανή δεδομένων Twitter
 Name[es]=Motor de datos de Twitter
@@ -21,6 +22,8 @@ Name[pt]=Motor de Dados do Twitter
 Name[pt_BR]=Mecanismo de Dados do Twitter
 Name[ro]=Motor de date Twitter
 Name[sl]=Twitter
+Name[sr]=мотор Твитера
+Name[sr@latin]=motor Twittera
 Name[sv]=Datagränssnitt för Twitter
 Name[th]=โปรแกรมประมวลผลข้อมูล Twitter
 Name[tr]=Twitter Veri Motoru

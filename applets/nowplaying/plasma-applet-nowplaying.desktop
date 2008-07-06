@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Now Playing
 Name[ca]=Ara s'està escoltant
+Name[da]=Afspiller nu
 Name[el]=Τρέχουσα αναπαραγωγή
 Name[es]=Reproduciendo ahora
 Name[et]=Praegu esitamisel
@@ -15,6 +16,8 @@ Name[nds]=Lopen Stück
 Name[pt]=Agora a Tocar
 Name[pt_BR]=Agora a Tocar
 Name[sl]=Trenutno se predvaja
+Name[sr]=тренутна свирка
+Name[sr@latin]=trenutna svirka
 Name[sv]=Spelar nu
 Name[tr]=Şimdi Çalınıyor
 Name[uk]=Зараз відтворюється
@@ -24,6 +27,7 @@ Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
 Comment[ca]=Mostra la reproducció actual d'àudio
+Comment[da]=Viser musik som aktuelt afspilles 
 Comment[el]=Εμφάνιση κομματιού που αναπαράγεται αυτήν τη στιγμή
 Comment[es]=Muestra el audio que se está reproduciendo
 Comment[et]=Näitab parajasti mängitavat muusikat
@@ -38,6 +42,8 @@ Comment[nds]=Wiest opstunns afspeelt Stücken
 Comment[pt]=Mostra o áudio actualmente em reprodução
 Comment[pt_BR]=Mostra o áudio actualmente em reprodução
 Comment[sl]=Prikaz skladbe, ki se trenutno predvaja
+Comment[sr]=Која се то музика управо пушта?
+Comment[sr@latin]=Koja se to muzika upravo pušta?
 Comment[sv]=Visar musik som för närvarande spelas
 Comment[tr]=O anda çalınan sesi gösterir
 Comment[uk]=Показує інформацію про аудіо, що відтворюється
