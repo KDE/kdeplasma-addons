@@ -46,11 +46,11 @@ BackgroundNormal=0,0,0
 DecorationFocus=239,132,65
 DecorationHover=72,177,60
 ForegroundActive=255,0,0
-ForegroundInactive=152,152,152
+ForegroundInactive=40,40,40
 ForegroundLink=0,0,255
 ForegroundNegative=107,0,0
-ForegroundNeutral=0,90,95
-ForegroundNormal=255,255,255
+ForegroundNeutral=160,160,160
+ForegroundNormal=185,185,185
 ForegroundPositive=0,95,0
 ForegroundVisited=88,55,150
 
