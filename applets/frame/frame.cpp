@@ -334,6 +334,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 
     KConfigGroup cg = config();
     cg.writeEntry("url", m_currentUrl);
+    cg.writeEntry("slideshow", m_slideShow);
     cg.writeEntry("slideshow paths", m_slideShowPaths);
     emit configNeedsSaving();
 }
