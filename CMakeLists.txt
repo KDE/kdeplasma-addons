@@ -1,4 +1,4 @@
-project(plasma_extragear)
+project(kdeplasma-addons)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
