@@ -61,8 +61,7 @@ void FileWatcher::init()
   textItem->update();
 
   if (path.isEmpty()) {
-      setConfigurationRequired(true);
-
+      setConfigurationRequired(true, i18n("Select a file to watch."));
   } else {
       loadFile(path);
   }
