@@ -64,7 +64,7 @@
            <x>0</x>
            <y>0</y>
            <width>454</width>
-           <height>230</height>
+           <height>205</height>
           </rect>
          </property>
          <layout class="QGridLayout" >
@@ -349,6 +349,16 @@
          <widget class="QCheckBox" name="roundCheckBox" >
           <property name="text" >
            <string>Use rounded corners</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="smoothScaling" >
+          <property name="toolTip" >
+           <string>Use smooth scaling when resizing pictures. Usually pictures look better this way, but it takes more time to load them.</string>
+          </property>
+          <property name="text" >
+           <string>Use smooth scaling</string>
           </property>
          </widget>
         </item>

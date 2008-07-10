@@ -35,6 +35,9 @@ class ConfigDialog : public QWidget
 	/// Randomness for the slideshow
 	void setRandom(bool random);
         bool random() const;
+	/// Smooth scaling
+	void setSmoothScaling(bool smooth);
+	bool smoothScaling();
 	/// Set a shadow for the frame
 	void setShadow(bool round);
         bool shadow() const;

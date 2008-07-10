@@ -78,6 +78,8 @@ class Frame : public Plasma::Applet
         bool m_frame;
         /// If true, the frame will have rounded corners
         bool m_roundCorners;
+        /// If true, smooth scaling (better visual results, but more cpu intensive) is used for resizing
+        bool m_smoothScaling;
         /// If true, the picture will have a drop shadow.
         bool m_shadow;
 	/// PoTD

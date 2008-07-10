@@ -98,6 +98,7 @@ void Frame::init()
     m_frame = cg.readEntry("frame", false);
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
+    m_smoothScaling = cg.readEntry("smoothScaling", true);
     m_slideShow = cg.readEntry("slideshow", false);
     m_random = cg.readEntry("random", false);
     m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
@@ -198,6 +199,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
 
     m_configDialog->setRoundCorners( m_roundCorners );
+    m_configDialog->setSmoothScaling( m_smoothScaling );
     m_configDialog->setShadow(m_shadow);
     m_configDialog->setShowFrame(m_frame);
     m_configDialog->setFrameColor(m_frameColor);
@@ -231,6 +233,8 @@ void Frame::configAccepted()
     // Appearance
     m_roundCorners = m_configDialog->roundCorners();
     cg.writeEntry("roundCorners", m_roundCorners);
+    m_smoothScaling = m_configDialog->smoothScaling();
+    cg.writeEntry("smoothScaling", m_smoothScaling);
     m_shadow = m_configDialog->shadow();
     cg.writeEntry("shadow", m_shadow);
     m_frame = m_configDialog->showFrame();
@@ -365,8 +369,9 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
                                                     -m_swOutline, -m_swOutline); //Pretty useless.
     
+    Qt::TransformationMode transformationMode = m_smoothScaling ? Qt::SmoothTransformation : Qt::FastTransformation;
     //TODO check if correct
-    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
                       frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 

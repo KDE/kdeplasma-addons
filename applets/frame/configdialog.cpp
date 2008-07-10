@@ -130,3 +130,13 @@ void ConfigDialog::changePreview(const QString &path)
     Picture myPicture;
     previewPicture(myPicture.setPicture(KUrl(path)));
 }
+
+void ConfigDialog::setSmoothScaling(bool smooth)
+{
+    ui.smoothScaling->setChecked(smooth);
+}
+
+bool ConfigDialog::smoothScaling()
+{
+    return ui.smoothScaling->isChecked();
+}
