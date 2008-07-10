@@ -1,7 +1,5 @@
 project(konsoleprofilesapplet)
 
-include_directories(../libplasmaappletdialog)
-
 set(konsoleprofilesapplet_SRCS
     konsoleprofilesapplet.cpp)
 

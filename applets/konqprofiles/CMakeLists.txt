@@ -1,6 +1,5 @@
 project(konqprofilesapplet)
 
-include_directories(../libplasmaappletdialog)
 
 set(konqprofilesapplet_SRCS
     konqprofilesapplet.cpp)

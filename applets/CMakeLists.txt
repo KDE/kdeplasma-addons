@@ -10,7 +10,6 @@ endif(PLASMA_OPENGL_FOUND)
 if(QT_QTWEBKIT_FOUND)
   add_subdirectory(dict)
 endif(QT_QTWEBKIT_FOUND)
-add_subdirectory(libplasmaappletdialog)
 
 add_subdirectory(binary-clock)
 add_subdirectory(calculator)
