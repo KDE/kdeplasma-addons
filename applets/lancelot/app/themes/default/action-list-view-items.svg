@@ -720,7 +720,7 @@
          style="opacity:1;fill:url(#linearGradient3311);fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99534882" />
     </g>
     <g
-       id="normal-topleft"
+       id="topleft"
        inkscape:label="#g3229"
        transform="matrix(0.25,0,0,0.25,23.688081,-43.601025)"
        style="fill:#ffffff;fill-opacity:1">
@@ -750,7 +750,7 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="normal-top"
+       id="top"
        transform="matrix(14.999958,0,0,0.25,-2887.4426,-43.578979)"
        inkscape:label="#g3233"
        style="fill:#ffffff;fill-opacity:1">
@@ -770,7 +770,7 @@
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.50000000000000000;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99534882000000002" />
     </g>
     <g
-       id="normal-topright"
+       id="topright"
        inkscape:label="#g3237"
        transform="matrix(0.25,0,0,0.25,146.68774,-43.601023)"
        style="fill:#ffffff;fill-opacity:1">
@@ -801,7 +801,7 @@
     </g>
     <g
        transform="matrix(-0.25,0,0,-0.25,247.38574,170.67425)"
-       id="normal-bottomright"
+       id="bottomright"
        inkscape:label="#g3241"
        style="fill:#ffffff;fill-opacity:1">
       <path
@@ -831,7 +831,7 @@
     </g>
     <g
        transform="matrix(-14.999958,0,0,-0.25,3164.5163,170.6522)"
-       id="normal-bottom"
+       id="bottom"
        inkscape:label="#g3247"
        style="fill:#ffffff;fill-opacity:1">
       <rect
@@ -851,7 +851,7 @@
     </g>
     <g
        transform="matrix(-0.25,0,0,-0.25,124.38608,170.67424)"
-       id="normal-bottomleft"
+       id="bottomleft"
        inkscape:label="#g3253"
        style="fill:#ffffff;fill-opacity:1">
       <path
@@ -880,7 +880,7 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="normal-left"
+       id="left"
        transform="matrix(0,-1.8749994,0.25,0,-24.078289,438.78498)"
        inkscape:label="#g3259"
        style="fill:#ffffff;fill-opacity:1">
@@ -901,7 +901,7 @@
     </g>
     <g
        transform="matrix(0,1.8749994,-0.25,0,295.15236,-317.71176)"
-       id="normal-right"
+       id="right"
        inkscape:label="#g3265"
        style="fill:#ffffff;fill-opacity:1">
       <rect
@@ -921,7 +921,7 @@
     </g>
     <g
        transform="matrix(0,-1.8749994,14.999958,0,-5598.3766,438.78498)"
-       id="normal-center"
+       id="center"
        inkscape:label="#g3271"
        style="fill:#ffffff;fill-opacity:1">
       <rect

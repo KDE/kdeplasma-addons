@@ -25,21 +25,26 @@
 namespace Lancelot
 {
 
-class D_ExtenderButton : public ExtenderButton {
-public:
-    void paint(QPainter * painter,
-        const QStyleOptionGraphicsItem * option, QWidget * widget)
-    {
-        // painter->fillRect(QRectF(QPointF(), size()), QBrush(QColor(0,0,0)));
-        ExtenderButton::paint(painter, option, widget);
-    }
-
-    D_ExtenderButton(QGraphicsItem * parent = 0)
-        : ExtenderButton(parent) {}
-};
 
 class ScrollBar::Private {
 public:
+    class ScrollBarItem: public BasicWidget {
+    public:
+        ScrollBarItem(QGraphicsItem * parent, ScrollBar::Private * parentd)
+            : BasicWidget(parent), d(parentd)
+        {
+        }
+
+    protected:
+        L_Override virtual void groupUpdated()
+        {
+            d->setItemSizeHints();
+        }
+
+    private:
+        ScrollBar::Private * d;
+    };
+
     Private(ScrollBar * parent)
       : minimum(0),
         maximum(100),
@@ -49,13 +54,14 @@ public:
         pageSize(10),
         orientation(Qt::Vertical),
         activationMethod(ExtenderActivate),
+        validating(false),
         q(parent)
     {
-        upButton   = new D_ExtenderButton(parent);
-        downButton = new D_ExtenderButton(parent);
-        upBar      = new D_ExtenderButton(parent);
-        downBar    = new D_ExtenderButton(parent);
-        handle     = new D_ExtenderButton(parent);
+        upButton   = new ScrollBarItem(parent, this);
+        downButton = new ScrollBarItem(parent, this);
+        upBar      = new ScrollBarItem(parent, this);
+        downBar    = new ScrollBarItem(parent, this);
+        handle     = new ScrollBarItem(parent, this);
 
         connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
         connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
@@ -67,6 +73,29 @@ public:
         downTimer.setInterval(100);
         downTimer.setSingleShot(false);
         connect(&downTimer, SIGNAL(timeout()), parent, SLOT(stepIncrease()));
+
+        upButton->setZValue(2);
+        downButton->setZValue(2);
+        handle->setZValue(1);
+
+        // Icons
+        if (!scrollbarIconUp) {
+            scrollbarIconUp = new Plasma::Svg(q);
+            scrollbarIconLeft = new Plasma::Svg(q);
+            scrollbarIconDown = new Plasma::Svg(q);
+            scrollbarIconRight = new Plasma::Svg(q);
+
+            scrollbarIconUp->setImagePath("lancelot/scroll-bar-button-up-icon");
+            scrollbarIconLeft->setImagePath("lancelot/scroll-bar-button-left-icon");
+            scrollbarIconDown->setImagePath("lancelot/scroll-bar-button-down-icon");
+            scrollbarIconRight->setImagePath("lancelot/scroll-bar-button-right-icon");
+
+            upButton->setIconSize(QSize(8, 8));
+            downButton->setIconSize(QSize(8, 8));
+
+            upButton->setIconInSvg(scrollbarIconUp);
+            downButton->setIconInSvg(scrollbarIconDown);
+        }
     }
 
     ~Private()
@@ -94,29 +123,135 @@ public:
 
     void invalidate()
     {
+        if (validating) {
+            return;
+        }
+        validating = true;
+
+        setItemSizeHints();
+
         QRectF geometry = orientateRect(q->geometry());
         geometry.moveTopLeft(QPointF(0, 0));
 
         QRectF itemRect = geometry;
 
-        itemRect.setHeight(itemRect.width());
+        // seting the up button's position
+        itemRect.setHeight(
+                (orientation == Qt::Horizontal) ?
+                    (upButton->preferredSize().width()) :
+                    (upButton->preferredSize().height())
+                );
         upButton->setGeometry(orientateRect(itemRect));
 
+        // seting the down button's position
+        itemRect.setHeight(
+                (orientation == Qt::Horizontal) ?
+                    (downButton->preferredSize().width()) :
+                    (downButton->preferredSize().height())
+                );
         itemRect.moveBottom(geometry.bottom());
         downButton->setGeometry(orientateRect(itemRect));
 
         positionScroll();
+        validating = false;
+    }
+
+    // This macro is used in setItemSizeHints function. It gets margins of a PanelSvg
+    // that is used to paint the specified object. If Svg is NULL, margins are set to a fixed size.
+    // Macro sets left, top, right and bottom variables that need to be defined as qreal before
+    // invoking the macro
+    #define GetMargins(object) \
+        if (object && object->group() && object->group()->backgroundSvg()) { \
+            object->group()->backgroundSvg()->getMargins(left, top, right, bottom); \
+            kDebug() << object->group()->name() << "margins retrieved from Svg"; \
+        } else { \
+            left = top = right = bottom = 8; \
+            kDebug() << object->group()->name() << "margins set to fixed default size"; \
+        }
+
+    // This macro sets the minimum and preferred sizes of a specified object.
+    // The variable size needs to be declared QSizeF before invoking this macro
+    #define SetSizes(object) \
+        object->setMinimumSize(size); \
+        object->setPreferredSize(size); \
+        kDebug() << size;
+
+    // This macro increases preferredSize according to preset size
+    // variable depending on the scrollbar orientation
+    #define UpdatePreferredSize() \
+        if (orientation == Qt::Horizontal) { \
+            preferredSize.setWidth(preferredSize.width() + size.width()); \
+            preferredSize.setHeight(qMax(preferredSize.height(), size.height())); \
+        } else { \
+            preferredSize.setHeight(preferredSize.height() + size.height()); \
+            preferredSize.setWidth(qMax(preferredSize.width(), size.width())); \
+        } \
+        kDebug() << " calculated size " << left << top << right << bottom << size << preferredSize;
+
+    void setItemSizeHints()
+    {
+        qreal left, top, right, bottom;
+        preferredSize = QSizeF(0, 0);
+        QSizeF size;
+        kDebug() << "#########################";
+
+        GetMargins(upButton);
+        size = QSizeF(left + right, top + bottom);
+        SetSizes(upButton);
+        UpdatePreferredSize();
+
+        GetMargins(downButton);
+        size = QSizeF(left + right, top + bottom);
+        SetSizes(downButton);
+        UpdatePreferredSize();
+
+        GetMargins(upBar);
+        size = QSizeF(
+                ((orientation == Qt::Horizontal) ? (left + right) : 0),
+                ((orientation == Qt::Vertical)   ? (top + bottom) : 0)
+                );
+        SetSizes(upBar);
+
+        GetMargins(downBar);
+        size = QSizeF(
+                ((orientation == Qt::Horizontal) ? (left + right) : 0),
+                ((orientation == Qt::Vertical)   ? (top + bottom) : 0)
+                );
+        SetSizes(downBar);
+
+        GetMargins(handle);
+        size = QSizeF(
+                ((orientation == Qt::Horizontal) ? (left + right) : 0),
+                ((orientation == Qt::Vertical)   ? (top + bottom) : 0)
+                );
+        SetSizes(handle);
+        UpdatePreferredSize();
+
+        kDebug() << " - calculated size " << preferredSize;
+        q->updateGeometry();
     }
 
     void positionScroll()
     {
         QRectF geometry = orientateRect(q->geometry());
+        kDebug() << geometry;
         geometry.moveTopLeft(QPointF(0, 0));
 
-        geometry.setTop(geometry.top() + geometry.width());
-        geometry.setBottom(geometry.bottom() - geometry.width());
+        // TODO: This should be changed to load sizes from upButton and downButton
+        geometry.setTop(geometry.top() +
+                ((orientation == Qt::Horizontal) ?
+                    (upButton->preferredSize().width()) :
+                    (upButton->preferredSize().height())
+                ));
+        geometry.setBottom(geometry.bottom() -
+                ((orientation == Qt::Horizontal) ?
+                    (downButton->preferredSize().width()) :
+                    (downButton->preferredSize().height())
+                ));
+        kDebug() << geometry;
 
         if (minimum >= maximum) {
+            handle->setPreferredSize(orientateRect(geometry).size());
             handle->setGeometry(orientateRect(geometry));
             upBar->setGeometry(QRectF());
             downBar->setGeometry(QRectF());
@@ -139,14 +274,17 @@ public:
         itemRect.setHeight(
                 diff * ((value - minimum) / (qreal)(maximum - minimum))
                 );
+        upBar->setPreferredSize(orientateRect(itemRect).size());
         upBar->setGeometry(orientateRect(itemRect));
 
         itemRect.setTop(itemRect.bottom());
         itemRect.setHeight(handleSize);
+        handle->setPreferredSize(orientateRect(itemRect).size());
         handle->setGeometry(orientateRect(itemRect));
 
         itemRect.setTop(itemRect.bottom());
         itemRect.setBottom(geometry.bottom());
+        downBar->setPreferredSize(orientateRect(itemRect).size());
         downBar->setGeometry(orientateRect(itemRect));
     }
 
@@ -156,20 +294,32 @@ public:
     int viewSize;
     int stepSize;
     int pageSize;
+    QSizeF preferredSize;
 
     Qt::Orientation orientation;
     ActivationMethod activationMethod;
+    bool validating;
 
-    ExtenderButton * upButton;
-    ExtenderButton * downButton;
-    ExtenderButton * upBar;
-    ExtenderButton * downBar;
-    ExtenderButton * handle;
+    BasicWidget * upButton;
+    BasicWidget * downButton;
+    BasicWidget * upBar;
+    BasicWidget * downBar;
+    BasicWidget * handle;
 
     QTimer downTimer, upTimer;
 
     ScrollBar * q;
+
+    static Plasma::Svg * scrollbarIconUp;
+    static Plasma::Svg * scrollbarIconLeft;
+    static Plasma::Svg * scrollbarIconDown;
+    static Plasma::Svg * scrollbarIconRight;
 };
+
+Plasma::Svg * ScrollBar::Private::scrollbarIconUp = NULL;
+Plasma::Svg * ScrollBar::Private::scrollbarIconLeft = NULL;
+Plasma::Svg * ScrollBar::Private::scrollbarIconDown = NULL;
+Plasma::Svg * ScrollBar::Private::scrollbarIconRight = NULL;
 
 ScrollBar::ScrollBar(QGraphicsItem * parent)
   : Widget(parent), d(new Private(this))
@@ -336,6 +486,7 @@ void ScrollBar::setGroup(WidgetGroup * g)
             d->handle->setGroupByName(group()->name() + "-HandleHorizontal");
             break;
     }
+    d->invalidate();
 }
 
 void ScrollBar::stepIncrease()
@@ -424,6 +575,25 @@ void ScrollBar::groupUpdated()
     if (group()->hasProperty("ActivationMethod")) {
         setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
     }
+    d->setItemSizeHints();
+}
+
+QSizeF ScrollBar::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    QSizeF result;
+    switch (which) {
+        case Qt::MaximumSize:
+            result = MAX_WIDGET_SIZE;
+            break;
+        default:
+            result = d->preferredSize;
+            break;
+    }
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    kDebug() << "sizeHint " << which << result;
+    return result;
 }
 
 } // namespace Lancelot

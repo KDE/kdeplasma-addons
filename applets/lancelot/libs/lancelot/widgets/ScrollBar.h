@@ -186,6 +186,8 @@ Q_SIGNALS:
 
 protected:
     L_Override virtual void groupUpdated();
+    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 private:
     class Private;

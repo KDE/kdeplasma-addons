@@ -96,12 +96,15 @@ public:
             right = 0;
             if (itemPositions[FullBorderLayout::TopRight]) {
                 right = qMax(right, itemPositions[FullBorderLayout::TopRight]->preferredSize().width());
+                kDebug() << "rgt " << itemPositions[FullBorderLayout::TopRight]->preferredSize();
             }
             if (itemPositions[FullBorderLayout::Right]) {
                 right = qMax(right, itemPositions[FullBorderLayout::Right]->preferredSize().width());
+                kDebug() << "rgt " << itemPositions[FullBorderLayout::Right]->preferredSize();
             }
             if (itemPositions[FullBorderLayout::BottomRight]) {
                 right = qMax(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
+                kDebug() << "rgt " << itemPositions[FullBorderLayout::BottomRight]->preferredSize();
             }
         }
         kDebug() << "Border sizes are "
@@ -129,68 +132,69 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
 
     QRectF effectiveRect = geometry();
     qreal left = 0, top = 0, right = 0, bottom = 0;
-    // getContentsMargins(&left, &top, &right, &bottom);
+    getContentsMargins(&left, &top, &right, &bottom);
     effectiveRect.adjust(+left, +top, -right, -bottom);
 
     kDebug() << left << " " << top << " ";
     kDebug() << geometry() << " " << rect << " " << effectiveRect;
 
-    qreal topMargin, bottomMargin, leftMargin, rightMargin;
-    d->calculateBorderSizes(topMargin, bottomMargin, leftMargin, rightMargin);
+    qreal topBorder, bottomBorder, leftBorder, rightBorder;
+    d->calculateBorderSizes(topBorder, bottomBorder, leftBorder, rightBorder);
+    kDebug() << "Borders :" << topBorder << bottomBorder << leftBorder << rightBorder;
 
     QRectF itemRect;
 
     itemRect = effectiveRect;
-    itemRect.setSize(QSizeF(leftMargin, topMargin));
+    itemRect.setSize(QSizeF(leftBorder, topBorder));
 
     if (d->itemPositions[TopLeft]) {
         d->itemPositions[TopLeft]->setGeometry(itemRect);
     }
 
-    itemRect.setLeft(effectiveRect.left() + leftMargin);
-    itemRect.setWidth(effectiveRect.width() - leftMargin - rightMargin);
+    itemRect.setLeft(effectiveRect.left() + leftBorder);
+    itemRect.setWidth(effectiveRect.width() - leftBorder - rightBorder);
 
     if (d->itemPositions[Top]) {
         d->itemPositions[Top]->setGeometry(itemRect);
     }
 
-    itemRect.setWidth(rightMargin);
+    itemRect.setWidth(rightBorder);
     itemRect.moveRight(effectiveRect.right());
 
     if (d->itemPositions[TopRight]) {
         d->itemPositions[TopRight]->setGeometry(itemRect);
     }
 
-    itemRect.setTop(effectiveRect.top() + topMargin);
-    itemRect.setHeight(effectiveRect.height() - topMargin - bottomMargin);
+    itemRect.setTop(effectiveRect.top() + topBorder);
+    itemRect.setHeight(effectiveRect.height() - topBorder - bottomBorder);
 
     if (d->itemPositions[Right]) {
         d->itemPositions[Right]->setGeometry(itemRect);
     }
 
-    itemRect.setHeight(bottomMargin);
+    itemRect.setHeight(bottomBorder);
     itemRect.moveBottom(effectiveRect.bottom());
 
     if (d->itemPositions[BottomRight]) {
         d->itemPositions[BottomRight]->setGeometry(itemRect);
     }
 
-    itemRect.setLeft(effectiveRect.left() + leftMargin);
-    itemRect.setWidth(effectiveRect.width() - leftMargin - rightMargin);
+    itemRect.setLeft(effectiveRect.left() + leftBorder);
+    itemRect.setWidth(effectiveRect.width() - leftBorder - rightBorder);
 
     if (d->itemPositions[Bottom]) {
         d->itemPositions[Bottom]->setGeometry(itemRect);
     }
 
     itemRect.setLeft(effectiveRect.left());
-    itemRect.setWidth(leftMargin);
+    itemRect.setWidth(leftBorder);
 
     if (d->itemPositions[BottomLeft]) {
         d->itemPositions[BottomLeft]->setGeometry(itemRect);
     }
 
-    itemRect.setTop(effectiveRect.top() + topMargin);
-    itemRect.setHeight(effectiveRect.height() - topMargin - bottomMargin);
+    itemRect.setTop(effectiveRect.top() + topBorder);
+    itemRect.setHeight(effectiveRect.height() - topBorder - bottomBorder);
 
     if (d->itemPositions[Left]) {
         d->itemPositions[Left]->setGeometry(itemRect);
@@ -198,8 +202,8 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
 
     itemRect = effectiveRect;
     itemRect.adjust(
-            leftMargin, topMargin,
-            - rightMargin, - bottomMargin
+            leftBorder, topBorder,
+            - rightBorder, - bottomBorder
             );
 
     if (d->itemPositions[Center]) {

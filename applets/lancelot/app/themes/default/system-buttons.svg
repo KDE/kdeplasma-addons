@@ -811,7 +811,7 @@
          style="opacity:1;fill:url(#linearGradient3311);fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99534882" />
     </g>
     <g
-       id="normal-topleft"
+       id="topleft"
        inkscape:label="#g3229"
        transform="translate(-116.85898,-333.51364)">
       <path
@@ -840,7 +840,7 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="normal-top"
+       id="top"
        transform="matrix(14.999958,0,0,1,-2887.4426,-333.42546)"
        inkscape:label="#g3233">
       <rect
@@ -859,7 +859,7 @@
          style="opacity:1;fill:#c8daf0;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99534882" />
     </g>
     <g
-       id="normal-topright"
+       id="topright"
        inkscape:label="#g3237"
        transform="translate(-8.859317,-333.51364)">
       <path
@@ -889,7 +889,7 @@
     </g>
     <g
        transform="matrix(-1,0,0,-1,393.9328,454.58686)"
-       id="normal-bottomright"
+       id="bottomright"
        inkscape:label="#g3241">
       <path
          sodipodi:end="4.712389"
@@ -918,7 +918,7 @@
     </g>
     <g
        transform="matrix(-14.999958,0,0,-1,3164.5163,454.49868)"
-       id="normal-bottom"
+       id="bottom"
        inkscape:label="#g3247">
       <rect
          y="378.46198"
@@ -937,7 +937,7 @@
     </g>
     <g
        transform="matrix(-1,0,0,-1,285.93314,454.58686)"
-       id="normal-bottomleft"
+       id="bottomleft"
        inkscape:label="#g3253">
       <path
          sodipodi:type="arc"
@@ -965,7 +965,7 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="normal-left"
+       id="left"
        transform="matrix(0,-1.8749994,1,0,-307.92477,438.78498)"
        inkscape:label="#g3259">
       <rect
@@ -985,7 +985,7 @@
     </g>
     <g
        transform="matrix(0,1.8749994,-1,0,584.99884,-317.71176)"
-       id="normal-right"
+       id="right"
        inkscape:label="#g3265">
       <rect
          y="378.46198"
@@ -1004,7 +1004,7 @@
     </g>
     <g
        transform="matrix(0,-1.8749994,14.999958,0,-5598.3766,438.78498)"
-       id="normal-center"
+       id="center"
        inkscape:label="#g3271">
       <rect
          y="378.46198"

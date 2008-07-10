@@ -52,7 +52,7 @@ LancelotTestWindow::LancelotTestWindow()
     // Test area - begin ####################################
     Lancelot::FlipLayout < Lancelot::FullBorderLayout > * mainLayout;
     mainLayout = new Lancelot::FlipLayout < Lancelot::FullBorderLayout >();
-    mainLayout->setFlip(Plasma::HorizontalFlip);
+    //mainLayout->setFlip(Plasma::HorizontalFlip);
 
     Lancelot::ExtenderButton * button;
 
@@ -66,7 +66,7 @@ LancelotTestWindow::LancelotTestWindow()
     button->setGroupByName("SystemButtons");
     button->setCheckable(true);
     button->setChecked(true);
-    mainLayout->addItem(button, Lancelot::FullBorderLayout::BottomRight);
+    //mainLayout->addItem(button /*, Lancelot::FullBorderLayout::BottomRight */);
     m_corona->addItem(button);
 
     /*
@@ -97,8 +97,8 @@ LancelotTestWindow::LancelotTestWindow()
     sb->setMaximum(200);
     sb->setViewSize(40);
     sb->setValue(30);
-    sb->setGeometry(QRectF(0, 0, 10, 200));
-    // mainLayout->addItem(sb, Lancelot::FullBorderLayout::Left);
+    // sb->setGeometry(QRectF(0, 0, 26, 200));
+    mainLayout->addItem(sb, Lancelot::FullBorderLayout::Right);
 
     QTimeLine * timeLine = new QTimeLine(5000, this);
     timeLine->setFrameRange(100, 300);
@@ -114,6 +114,7 @@ LancelotTestWindow::LancelotTestWindow()
     // Test area - end   ####################################
 
     // Starting...
+    mainLayout->setGeometry(QRectF(8, 8, 400, 300));
     mainLayout->setGeometry(QRectF(8, 8, 400, 300));
     instance->activateAll();
 

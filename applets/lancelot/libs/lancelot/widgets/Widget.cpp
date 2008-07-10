@@ -169,7 +169,7 @@ void Widget::paintBackground(QPainter * painter) {
     } else if (d->hover) {
         element = "active";
     } else {
-        element = "normal";
+        element = QString(); // was "normal" - removing prefix for this state
     }
 
     paintBackground(painter, element);
@@ -241,7 +241,10 @@ QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
             result = QSizeF();
             break;
     }
-    return result.boundedTo(constraint);
+    if (constraint != QSizeF(-1, -1)) {
+        result = result.boundedTo(constraint);
+    }
+    return result;
 }
 
 bool Widget::isDown()
