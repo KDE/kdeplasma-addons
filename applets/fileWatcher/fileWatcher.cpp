@@ -39,6 +39,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       config_dialog(0)
 {
+  setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
   resize(400, 400);
 }
@@ -57,7 +58,7 @@ void FileWatcher::init()
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
   textDocument->setMaximumBlockCount(cg.readEntry("maxRows", 5) + 1);
-
+  textItem->setTextWidth(geometry().width()-2);
   textItem->update();
 
   if (path.isEmpty()) {
