@@ -33,7 +33,7 @@ public:
     ~ConverterRunner();
 
     void match(Plasma::RunnerContext &context);
-    void exec(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
 private:
     Unit* unitType(const QString& type);

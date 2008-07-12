@@ -96,13 +96,13 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
     context.addMatches(term, matches);
 }
 
-void ContactsRunner::exec(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void ContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context);
     QString address = match.data().toString();
     QString name = match.text();
 
-    kDebug() << "exec name '" << name << "' with address '" << address << "'";
+    kDebug() << "run name '" << name << "' with address '" << address << "'";
     
     KToolInvocation::invokeMailer(address);
 }
