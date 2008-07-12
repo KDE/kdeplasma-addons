@@ -35,7 +35,7 @@ class ContactsRunner : public Plasma::AbstractRunner {
         ~ContactsRunner();
 
         void match(Plasma::RunnerContext &context);
-        void exec(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+        void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
     private:
         KABC::AddressBook *m_book;

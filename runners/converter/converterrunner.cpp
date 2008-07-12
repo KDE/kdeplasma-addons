@@ -199,7 +199,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     context.addMatch(term, match);
 }
 
-void ConverterRunner::exec(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
     QApplication::clipboard()->setText(match.data().toString());
