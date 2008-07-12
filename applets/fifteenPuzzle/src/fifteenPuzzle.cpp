@@ -34,6 +34,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   board = new Fifteen(this);
   QGraphicsLinearLayout * lay = new QGraphicsLinearLayout(this);
   lay->addItem(board);
+  lay->setContentsMargins(0,0,0,0);
   setLayout(lay);
   board->resize(192, 192); // 48 * 4 = 192
   resize(board->geometry().size());
