@@ -2,6 +2,7 @@
 Name=Contacts
 Name[ca]=Contactes
 Name[da]=Kontakter
+Name[de]=Kontakte
 Name[el]=Επαφές
 Name[es]=Contactos
 Name[et]=Kontaktid
@@ -28,6 +29,7 @@ Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
 Comment[ca]=Cerca entrades a la llibreta d'adreces
 Comment[da]=Find indgange i din adressebog
+Comment[de]=Findet Einträge in Ihrem Adressbuch
 Comment[el]=Αναζητά καταχωρήσεις στο βιβλίο διευθύνσεών σας
 Comment[es]=Buscar entradas en su libreta de direcciones
 Comment[et]=Kirjete otsimine aadressiraamatust

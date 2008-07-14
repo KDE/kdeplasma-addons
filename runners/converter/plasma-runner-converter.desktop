@@ -2,6 +2,7 @@
 Name=Unit Converter
 Name[ca]=Conversor d'unitats
 Name[da]=Enhedskonvertering
+Name[de]=Einheiten-Umwandler
 Name[el]=Μετατροπέας μονάδων
 Name[es]=Conversor de unidades
 Name[et]=Ühikute teisendaja
@@ -28,6 +29,7 @@ Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[ca]=Converteix valors a diferents unitats
 Comment[da]=Konvertér værdier til andre enheder
+Comment[de]=Rechnet Werte in verschiedene Einheiten um
 Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες
 Comment[es]=Convierte valores a diferentes unidades
 Comment[et]=Väärtuste teisendamine erinevatesse ühikutesse

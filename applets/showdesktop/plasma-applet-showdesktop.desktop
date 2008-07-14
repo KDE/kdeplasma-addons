@@ -2,6 +2,7 @@
 Name=Show Desktop
 Name[ca]=Mostra l'escriptori
 Name[da]=Vis desktop
+Name[de]=Arbeitsfläche anzeigen
 Name[el]=Εμφάνιση επιφάνειας εργασίας
 Name[es]=Mostrar escritorio
 Name[et]=Töölaua näitamine
@@ -29,6 +30,7 @@ Name[zh_TW]=顯示桌面
 Comment=Lets you show the desktop
 Comment[ca]=Us permet veure l'escriptori
 Comment[da]=Lader dig vise desktoppen
+Comment[de]=Blendet Anwendungsfenster aus und zeigt die Arbeitsfläche an
 Comment[el]=Επιτρέπει την εμφάνιση της επιφάνειας εργασίας
 Comment[es]=Le permite mostrar el escritorio
 Comment[et]=Võimaldab näidata töölauda
