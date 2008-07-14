@@ -29,12 +29,14 @@
 #include "binaryclock.h"
 
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    : ClockApplet(parent, args),
       m_showSeconds(true),
       m_showOffLeds(true),
       m_showGrid(true),
       m_time(0, 0)
 {
+    KGlobal::locale()->insertCatalog("libplasmaclock");
+
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
 }

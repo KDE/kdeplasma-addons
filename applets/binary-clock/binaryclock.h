@@ -23,6 +23,8 @@
 
 #include <Plasma/Applet>
 
+#include <clockapplet.h>
+
 class QTime;
 class QColor;
 
@@ -33,12 +35,12 @@ namespace Ui {
     class clockConfig;
 }
 
-class BinaryClock : public Plasma::Applet
+class BinaryClock : public ClockApplet
 {
     Q_OBJECT
     public:
         BinaryClock(QObject *parent, const QVariantList &args);
-        ~BinaryClock();
+        virtual ~BinaryClock();
 
         void init();
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
