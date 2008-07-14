@@ -29,7 +29,6 @@
 #include <QTextCursor>
 
 #include <KConfigDialog>
-#include <KMessageBox>
 
 #include <Plasma/Theme>
 
@@ -86,9 +85,7 @@ void FileWatcher::loadFile(const QString& path)
 
   file->setFileName(path);
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text)){
-    KMessageBox::error(0, i18n("Could not open file: %1", path));
-    setConfigurationRequired(true);
-
+    setConfigurationRequired(true, i18n("Could not open file: %1", path));
     return;
   }
 
