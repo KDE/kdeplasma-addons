@@ -1,27 +1,6 @@
 <ui version="4.0" >
  <class>fuzzyClockConfig</class>
  <widget class="QWidget" name="fuzzyClockConfig" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>420</width>
-    <height>478</height>
-   </rect>
-  </property>
-  <property name="minimumSize" >
-   <size>
-    <width>420</width>
-    <height>478</height>
-   </size>
-  </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <widget class="QTabWidget" name="ClockTab" >
-     <property name="currentIndex" >
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="AppearanceTab" >
       <property name="geometry" >
        <rect>
         <x>0</x>
@@ -202,36 +181,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="TimezonesTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>400</width>
-        <height>433</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Timezones</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_2" >
-       <item row="0" column="0" >
-        <widget class="QCheckBox" name="useLocalTimeZone" >
-         <property name="text" >
-          <string>Use &amp;local timezone</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <widget class="KTimeZoneWidget" name="timeZones" >
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
-  </layout>
- </widget>
  <customwidgets>
   <customwidget>
    <class>KColorCombo</class>
@@ -275,22 +224,6 @@
     <hint type="destinationlabel" >
      <x>369</x>
      <y>53</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>useLocalTimeZone</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>timeZones</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>209</x>
-     <y>53</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>209</x>
-     <y>239</y>
     </hint>
    </hints>
   </connection>

@@ -1,4 +1,4 @@
-project(plasma-fuzzy-clock)
+project(fuzzy-clock)
 
 set(fuzzyclock_SRCS fuzzyClock.cpp)
 

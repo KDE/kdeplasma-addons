@@ -31,8 +31,9 @@
 #include "ui_fuzzyClockConfig.h"
 #include <ui_calendar.h>
 
+#include <clockapplet.h>
 
-class Clock : public Plasma::Applet
+class Clock : public ClockApplet
 {
     Q_OBJECT
     public:
@@ -52,12 +53,13 @@ Qt::Orientations expandingDirections() const;
 
     protected slots:
 //         void acceptedTimeStringState(bool);
-        void configAccepted();
         void showCalendar(QGraphicsSceneMouseEvent *event);
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
-        void createConfigurationInterface(KConfigDialog *parent);
+        void createClockConfigurationInterface(KConfigDialog *parent);
+        void clockConfigAccepted();
+        void changeEngineTimezone(QString oldTimezone, QString newTimezone);
 
     private:
         void calculateTimeString();
@@ -73,10 +75,6 @@ Qt::Orientations expandingDirections() const;
         QSizeF m_minimumContentSize;
 
         bool m_configUpdated;
-
-        KTimeZone m_timezone;
-        KTimeZone m_localTimezone;
-        bool m_useLocalTimezone;
 
         QString m_timeString;
         QString m_dateString;

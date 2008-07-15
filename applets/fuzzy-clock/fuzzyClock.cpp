@@ -40,7 +40,7 @@
 
 
 Clock::Clock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    : ClockApplet(parent, args),
       m_oldContentSize(QSizeF (0,0)),
       m_adjustToHeight(1),
       m_fontColor(Qt::white),
@@ -59,13 +59,16 @@ Clock::Clock(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
+Clock::~Clock()
+{
+}
+
 void Clock::init()
 {
     m_contentSize = geometry().size();
 
     kDebug() << "The first content's size [geometry().size()] we get, init() called: " << geometry().size();
 
-    m_localTimezone = KSystemTimeZones::local();
     m_locale = KGlobal::locale();
 
     KConfigGroup cg = config();
@@ -74,9 +77,6 @@ void Clock::init()
     m_showDate = cg.readEntry("showDate", true);
     m_showYear = cg.readEntry("showYear",false);
     m_showDay = cg.readEntry("showDay",true);
-
-    m_useLocalTimezone = cg.readEntry("useLocalTimezone",true);
-    m_timezone = KSystemTimeZones::zone ( cg.readEntry("timezone", m_localTimezone.name() ));
 
     m_fuzzyness = cg.readEntry("fuzzyness", 1);
 
@@ -94,12 +94,8 @@ void Clock::init()
     m_margin = 2;
     m_verticalSpacing = 2;
 
-    if( m_timezone.name().isEmpty() ) {
-        m_timezone = m_localTimezone;
-    }
-
     Plasma::DataEngine* timeEngine = dataEngine("time");
-    timeEngine->connectSource(m_timezone.name(), this, 6000, Plasma::AlignToMinute);
+    timeEngine->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
 }
 
 Qt::Orientations Clock::expandingDirections() const
@@ -217,21 +213,12 @@ void Clock::showCalendar(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void Clock::createConfigurationInterface(KConfigDialog *parent)
+void Clock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     parent->addPage(widget, parent->windowTitle(), icon());
-
-    ui.useLocalTimeZone->setChecked( m_useLocalTimezone );
-    //FIXME: There are several bugs in KTimeZones. 1. Even though the correct zone is selected debug-output states "no such zon: 'nameofZone'"
-    //2. If one opens the settings the first time setSelected does not work. It only does the second time settings are opened.
-    //3. If the sorting is set to true the widget does not return any values.
-    ui.timeZones->setSelected( m_timezone.name(), true );
-    ui.timeZones->setEnabled( !m_useLocalTimezone );
 
     ui.fuzzynessSlider->setSliderPosition( m_fuzzyness );
     ui.showTimezone->setChecked( m_showTimezone );
@@ -243,16 +230,12 @@ void Clock::createConfigurationInterface(KConfigDialog *parent)
     ui.fontTimeBold->setChecked(m_fontTimeBold);
     ui.fontTime->setCurrentFont(m_fontTime);
     ui.fontColor->setColor(m_fontColor);
-
-     //Set focus to this widget, oxygen's colour for selected items in a non-focused widgets are not readable.
-    ui.timeZones->setFocus( Qt::OtherFocusReason );
 }
 
-void Clock::configAccepted()
+void Clock::clockConfigAccepted()
 {
     KConfigGroup cg = config();
     QGraphicsItem::update();
-    QStringList tzs = ui.timeZones->selection();
 
     m_fontTime = ui.fontTime->currentFont();
     cg.writeEntry("fontTime", m_fontTime);
@@ -271,37 +254,6 @@ void Clock::configAccepted()
     m_fuzzyness = ui.fuzzynessSlider->value();
     cg.writeEntry("fuzzyness", m_fuzzyness);
 
-    //save timezone even though we do not use it to allow the user to switch back easily.
-    QString unusedTimezone = m_timezone.name();
-
-    if ( ui.useLocalTimeZone->isChecked() ) { //use local timezone
-        dataEngine("time")->disconnectSource(m_timezone.name(), this);
-
-        m_timezone = m_localTimezone;
-        dataEngine("time")->connectSource(m_timezone.name(), this);
-    } else if ( !tzs.isEmpty() ) {
-        QString tz = tzs.at(0);
-
-        if ( tz != m_timezone.name() ) {//A different timezone was selected.
-            dataEngine("time")->disconnectSource(m_timezone.name(), this);
-            m_timezone = KSystemTimeZones::zone ( tz );
-            dataEngine("time")->connectSource(m_timezone.name(), this);
-        }
-    } else if ( m_timezone.name() != m_localTimezone.name() ) { //No timezone was selected and m_timezone is not the local timezone -> no time would show up.
-        dataEngine("time")->disconnectSource(m_timezone.name(), this);
-        m_timezone = m_localTimezone;
-        dataEngine("time")->connectSource(m_timezone.name(), this);
-    }
-
-    if ( ui.useLocalTimeZone->isChecked() ) { //save non-local timezone
-        cg.writeEntry("timezone", unusedTimezone);
-    } else {
-        cg.writeEntry("timezone", m_timezone.name());
-    }
-
-    m_useLocalTimezone = ui.useLocalTimeZone->isChecked();
-    cg.writeEntry("useLocalTimezone", m_useLocalTimezone);
-
     m_showDate = ui.showDate->isChecked();
     cg.writeEntry("showDate", m_showDate);
     m_showYear = ui.showYear->isChecked();
@@ -317,9 +269,7 @@ void Clock::configAccepted()
     m_showTimezone = ui.showTimezone->isChecked();
     cg.writeEntry("showTimezone", m_showTimezone);
 
-    kDebug() << "New timezone: " << m_timezone.name();
-
-    dataEngine("time")->connectSource(m_timezone.name(), this, 6000, Plasma::AlignToMinute);
+    dataEngine("time")->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
 
     m_configUpdated = true;
     updateConstraints();
@@ -327,8 +277,10 @@ void Clock::configAccepted()
     emit configNeedsSaving();
 }
 
-Clock::~Clock()
+void Clock::changeEngineTimezone(QString oldTimezone, QString newTimezone)
 {
+    dataEngine("time")->disconnectSource(oldTimezone, this);
+    dataEngine("time")->connectSource(newTimezone, this, 6000, Plasma::AlignToMinute);
 }
 
 void Clock::calculateDateString()
@@ -368,7 +320,7 @@ void Clock::calculateDateString()
 //     }
 
     if( m_showTimezone == true ) {
-        m_timezoneString = '(' + m_timezone.name() + ')';
+        m_timezoneString = '(' + currentTimezone() + ')';
     }
 }
 
