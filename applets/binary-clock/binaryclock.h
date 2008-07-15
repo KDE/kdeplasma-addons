@@ -49,11 +49,9 @@ class BinaryClock : public ClockApplet
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
-    protected slots:
-        void configAccepted();
-
     protected:
-        void createConfigurationInterface(KConfigDialog *parent);
+        void createClockConfigurationInterface(KConfigDialog *parent);
+        void clockConfigAccepted();
 
     private slots:
         void updateColors();
@@ -67,8 +65,6 @@ class BinaryClock : public ClockApplet
         bool m_showSeconds;
         bool m_showOffLeds;
         bool m_showGrid;
-
-        QString m_timezone;
 
         QColor m_ledsColor;
         QColor m_offLedsColor;

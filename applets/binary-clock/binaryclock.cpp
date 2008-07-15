@@ -44,10 +44,10 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
 void BinaryClock::init()
 {
     KConfigGroup cg = config();
-    m_timezone = cg.readEntry("timezone", "Local");
     m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
     m_showGrid = cg.readEntry("showGrid", m_showGrid);
     m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
+    setCurrentTimezone(cg.readEntry("timezone", localTimezone()));
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
@@ -98,9 +98,9 @@ void BinaryClock::connectToEngine()
     Plasma::DataEngine* timeEngine = dataEngine("time");
 
     if (m_showSeconds) {
-        timeEngine->connectSource(m_timezone, this, 500);
+        timeEngine->connectSource(currentTimezone(), this, 500);
     } else {
-        timeEngine->connectSource(m_timezone, this, 6000, Plasma::AlignToMinute);
+        timeEngine->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
     }
 }
 
@@ -121,24 +121,22 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
     update();
 }
 
-void BinaryClock::createConfigurationInterface(KConfigDialog *parent)
+void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     parent->addPage(widget, parent->windowTitle(), icon());
 
-    ui.timeZones->setSelected(m_timezone, true);
-    ui.timeZones->setEnabled(m_timezone != "Local");
-    ui.localTimeZone->setChecked(m_timezone == "Local");
+    ui.timeZones->setSelected(currentTimezone(), true);
+    ui.timeZones->setEnabled(currentTimezone() != "Local");
+    ui.localTimeZone->setChecked(currentTimezone() == "Local");
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
 }
 
-void BinaryClock::configAccepted()
+void BinaryClock::clockConfigAccepted()
 {
     KConfigGroup cg = config();
     m_showSeconds = ui.showSecondHandCheckBox->isChecked();
@@ -148,25 +146,6 @@ void BinaryClock::configAccepted()
     cg.writeEntry("showSeconds", m_showSeconds);
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
-
-    QStringList tzs = ui.timeZones->selection();
-
-    if (ui.localTimeZone->checkState() == Qt::Checked) {
-        dataEngine("time")->disconnectSource(m_timezone, this);
-        m_timezone = "Local";
-        cg.writeEntry("timezone", m_timezone);
-    } else if (tzs.count() > 0) {
-        //TODO: support multiple timezones
-        QString tz = tzs.at(0);
-        if (tz != m_timezone) {
-            dataEngine("time")->disconnectSource(m_timezone, this);
-            m_timezone = tz;
-        }
-    } else if (m_timezone != "Local") {
-        dataEngine("time")->disconnectSource(m_timezone, this);
-        m_timezone = "Local";
-        cg.writeEntry("timezone", m_timezone);
-    }
 
     connectToEngine();
     constraintsEvent(Plasma::AllConstraints);
