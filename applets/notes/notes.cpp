@@ -61,7 +61,6 @@ void Notes::init()
     m_textEdit->setMinimumSize(QSize(0, 0));
     m_layout = new QGraphicsLinearLayout(this);
     m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
-    m_textEdit->nativeWidget()->setTextBackgroundColor(QColor(0,0,0,0));
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
     m_layout->addItem(m_textEdit);
 
