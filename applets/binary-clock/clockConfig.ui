@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>463</width>
     <height>300</height>
    </rect>
   </property>
@@ -18,14 +18,20 @@
   <layout class="QVBoxLayout" >
    <item>
     <widget class="QGroupBox" name="groupBox" >
+     <property name="minimumSize" >
+      <size>
+       <width>548</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="title" >
-      <string>Appearance</string>
+      <string/>
      </property>
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" name="gridLayout" >
-      <item row="0" column="0" >
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
        <widget class="QCheckBox" name="showSecondHandCheckBox" >
         <property name="toolTip" >
          <string>Show the second leds</string>
@@ -38,7 +44,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
+      <item>
        <widget class="QCheckBox" name="showGridCheckBox" >
         <property name="toolTip" >
          <string>Show the grid</string>
@@ -51,7 +57,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0" >
+      <item>
        <widget class="QCheckBox" name="showOffLedsCheckBox" >
         <property name="toolTip" >
          <string>Show the off leds</string>
@@ -64,10 +70,28 @@
         </property>
        </widget>
       </item>
+      <item>
+       <spacer name="verticalSpacer" >
+        <property name="orientation" >
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0" >
+         <size>
+          <width>20</width>
+          <height>190</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </item>
   </layout>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox</zorder>
  </widget>
  <resources/>
  <connections/>
