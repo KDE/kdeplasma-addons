@@ -25,14 +25,12 @@
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QHttp>
-#include <QTimer>
 #include <QImage>
 #include <QPixmap>
 
 #include <KDebug>
 #include <KUrl>
 #include <ksocketfactory.h>
-#include <KCodecs>
 #include <KUrl>
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
