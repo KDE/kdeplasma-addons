@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>400</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="minimumSize" >
@@ -24,8 +24,8 @@
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" >
-      <item>
+     <layout class="QGridLayout" name="gridLayout" >
+      <item row="0" column="0" >
        <widget class="QCheckBox" name="showSecondHandCheckBox" >
         <property name="toolTip" >
          <string>Show the second leds</string>
@@ -38,7 +38,7 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="1" column="0" >
        <widget class="QCheckBox" name="showGridCheckBox" >
         <property name="toolTip" >
          <string>Show the grid</string>
@@ -51,7 +51,7 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="2" column="0" >
        <widget class="QCheckBox" name="showOffLedsCheckBox" >
         <property name="toolTip" >
          <string>Show the off leds</string>
@@ -67,76 +67,8 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_2" >
-     <property name="title" >
-      <string>Timezones</string>
-     </property>
-     <property name="flat" >
-      <bool>true</bool>
-     </property>
-     <layout class="QVBoxLayout" >
-      <item>
-       <widget class="QCheckBox" name="localTimeZone" >
-        <property name="text" >
-         <string>Use &amp;local timezone</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="KTimeZoneWidget" name="timeZones" >
-        <property name="minimumSize" >
-         <size>
-          <width>300</width>
-          <height>0</height>
-         </size>
-        </property>
-        <column>
-         <property name="text" >
-          <string>Area</string>
-         </property>
-        </column>
-        <column>
-         <property name="text" >
-          <string>Region</string>
-         </property>
-        </column>
-        <column>
-         <property name="text" >
-          <string>Comment</string>
-         </property>
-        </column>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KTimeZoneWidget</class>
-   <extends>QTreeWidget</extends>
-   <header>ktimezonewidget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>localTimeZone</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>timeZones</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>199</x>
-     <y>177</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>199</x>
-     <y>289</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

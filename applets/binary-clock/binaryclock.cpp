@@ -126,11 +126,8 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage(widget, parent->windowTitle(), icon());
+    parent->addPage(widget, i18n("General"), icon());
 
-    ui.timeZones->setSelected(currentTimezone(), true);
-    ui.timeZones->setEnabled(currentTimezone() != "Local");
-    ui.localTimeZone->setChecked(currentTimezone() == "Local");
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
