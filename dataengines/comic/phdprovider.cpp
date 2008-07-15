@@ -19,7 +19,6 @@
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
 #include <QtNetwork/QHttp>
-#include <QtNetwork/QHttpRequestHeader>
 
 #include <KUrl>
 

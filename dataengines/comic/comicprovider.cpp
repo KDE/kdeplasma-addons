@@ -18,7 +18,6 @@
 
 #include "comicprovider.h"
 
-#include <KUrl>
 
 class ComicProvider::Private
 {

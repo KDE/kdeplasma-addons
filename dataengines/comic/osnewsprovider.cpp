@@ -25,7 +25,6 @@
 #include <QtGui/QImage>
 #include <QHash>
 #include <QtNetwork/QHttp>
-#include <QtNetwork/QHttpRequestHeader>
 
 //Kde
 #include <KUrl>
