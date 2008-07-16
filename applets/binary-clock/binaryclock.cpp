@@ -47,7 +47,7 @@ void BinaryClock::init()
     m_showGrid = cg.readEntry("showGrid", m_showGrid);
     m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
 
-    m_customLedsColor = cg.readEntry("customLedsColor", false);
+    m_customOnLedsColor = cg.readEntry("customOnLedsColor", false);
     m_customOffLedsColor = cg.readEntry("customOffLedsColor", false);
     m_customGridColor = cg.readEntry("customGridColor", false);
 
@@ -139,11 +139,11 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
 
-    ui.onLedsCustomColorCheckBox->setChecked(m_customLedsColor);
+    ui.onLedsCustomColorCheckBox->setChecked(m_customOnLedsColor);
     ui.offLedsCustomColorCheckBox->setChecked(m_customOffLedsColor);
     ui.gridCustomColorCheckBox->setChecked(m_customGridColor);
 
-    ui.onLedsCustomColorCombo->setColor(m_ledsColor);
+    ui.onLedsCustomColorCombo->setColor(m_onLedsColor);
     ui.offLedsCustomColorCombo->setColor(m_offLedsColor);
     ui.gridCustomColorCombo->setColor(m_gridColor);
 }
@@ -155,12 +155,12 @@ void BinaryClock::clockConfigAccepted()
     m_showGrid = ui.showGridCheckBox->isChecked();
     m_showOffLeds = ui.showOffLedsCheckBox->isChecked();
 
-    m_customLedsColor = ui.onLedsCustomColorCheckBox->isChecked();
+    m_customOnLedsColor = ui.onLedsCustomColorCheckBox->isChecked();
     m_customOffLedsColor = ui.offLedsCustomColorCheckBox->isChecked();
     m_customGridColor = ui.gridCustomColorCheckBox->isChecked();
 
-    if (m_customLedsColor){
-         m_ledsColor = ui.onLedsCustomColorCombo->color();
+    if (m_customOnLedsColor){
+         m_onLedsColor = ui.onLedsCustomColorCombo->color();
     }
 
     if (m_customOffLedsColor){
@@ -175,11 +175,11 @@ void BinaryClock::clockConfigAccepted()
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
 
-    cg.writeEntry("customLedsColor", m_customLedsColor);
+    cg.writeEntry("customOnLedsColor", m_customOnLedsColor);
     cg.writeEntry("customOffLedsColor", m_customOffLedsColor);
     cg.writeEntry("customGridColor", m_customGridColor);
 
-    cg.writeEntry("ledsColor", m_ledsColor);
+    cg.writeEntry("onLedsColor", m_onLedsColor);
     cg.writeEntry("offLedsColor", m_offLedsColor);
     cg.writeEntry("gridColor", m_gridColor);
 
@@ -207,20 +207,20 @@ void BinaryClock::updateColors()
 {
     KConfigGroup cg = config();
 
-    m_ledsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    m_onLedsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
 
-    if (m_customLedsColor){
-        m_ledsColor = cg.readEntry("ledsColor", m_ledsColor);
+    if (m_customOnLedsColor){
+        m_onLedsColor = cg.readEntry("onLedsColor", m_onLedsColor);
     }
 
-    m_offLedsColor = QColor(m_ledsColor);
+    m_offLedsColor = QColor(m_onLedsColor);
     m_offLedsColor.setAlpha(40);
 
     if (m_customOffLedsColor){
         m_offLedsColor = cg.readEntry("offLedsColor", m_offLedsColor);
     }
 
-    m_gridColor = QColor(m_ledsColor);
+    m_gridColor = QColor(m_onLedsColor);
     m_gridColor.setAlpha(60);
 
     if (m_customGridColor){
@@ -259,7 +259,7 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
     for (int i = 0; i < dots; i++) {
         for (int j = 0; j < 4; j++) {
             if (timeDigits[i] & (1 << (3 - j))) {
-                p->fillRect(xPos + (i * (rectSize + 1)), yPos + (j * (rectSize + 1)), rectSize, rectSize, m_ledsColor);
+                p->fillRect(xPos + (i * (rectSize + 1)), yPos + (j * (rectSize + 1)), rectSize, rectSize, m_onLedsColor);
             } else if (m_showOffLeds) {
                 p->fillRect(xPos + (i * (rectSize + 1)), yPos + (j * (rectSize + 1)), rectSize, rectSize, m_offLedsColor);
             }
