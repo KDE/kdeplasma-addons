@@ -84,11 +84,13 @@ void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
         qreal borderHeight = top + bottom;
         qreal borderWidth = left + right;
         if (formFactor() == Plasma::Vertical) {
-            setMaximumHeight(getHeightFromWidth(contentsRect().width()) + borderHeight);
+            setMaximumHeight(getHeightFromWidth((int) contentsRect().width()) + borderHeight);
+
         } else if (formFactor() == Plasma::Horizontal) {
-            setMaximumWidth(getWidthFromHeight(contentsRect().height()) + borderWidth);
+            setMaximumWidth(getWidthFromHeight((int) contentsRect().height()) + borderWidth);
+
         } else {
-            resize(getWidthFromHeight(contentsRect().height()) + borderWidth, contentsRect().height() + borderHeight);
+            resize(getWidthFromHeight((int) contentsRect().height()) + borderWidth, contentsRect().height() + borderHeight);
         }
     }
 }
