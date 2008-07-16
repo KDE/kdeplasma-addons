@@ -25,14 +25,13 @@
 
 #include <clockapplet.h>
 
+#include "ui_clockConfig.h"
+
 class QTime;
 class QColor;
 
 namespace Plasma {
     class DataEngine;
-}
-namespace Ui {
-    class clockConfig;
 }
 
 class BinaryClock : public ClockApplet

@@ -18,15 +18,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "binaryclock.h"
+
 #include <QPainter>
 
 #include <KConfigDialog>
 
 #include <Plasma/DataEngine>
 #include <Plasma/Theme>
-
-#include "ui_clockConfig.h"
-#include "binaryclock.h"
 
 BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
     : ClockApplet(parent, args),
