@@ -143,9 +143,10 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.offLedsCustomColorCheckBox->setChecked(m_customOffLedsColor);
     ui.gridCustomColorCheckBox->setChecked(m_customGridColor);
 
-    ui.onLedsCustomColorCombo->setColor(m_onLedsColor);
-    ui.offLedsCustomColorCombo->setColor(m_offLedsColor);
-    ui.gridCustomColorCombo->setColor(m_gridColor);
+    KConfigGroup cg = config();
+    ui.onLedsCustomColorCombo->setColor(cg.readEntry("onLedsColor", m_onLedsColor));
+    ui.offLedsCustomColorCombo->setColor(cg.readEntry("offLedsColor", m_offLedsColor));
+    ui.gridCustomColorCombo->setColor(cg.readEntry("gridColor", m_gridColor));
 }
 
 void BinaryClock::clockConfigAccepted()
@@ -179,12 +180,14 @@ void BinaryClock::clockConfigAccepted()
     cg.writeEntry("customOffLedsColor", m_customOffLedsColor);
     cg.writeEntry("customGridColor", m_customGridColor);
 
-    cg.writeEntry("onLedsColor", m_onLedsColor);
-    cg.writeEntry("offLedsColor", m_offLedsColor);
-    cg.writeEntry("gridColor", m_gridColor);
+    cg.writeEntry("onLedsColor", ui.onLedsCustomColorCombo->color());
+    cg.writeEntry("offLedsColor", ui.offLedsCustomColorCombo->color());
+    cg.writeEntry("gridColor", ui.gridCustomColorCombo->color());
 
     dataEngine("time")->disconnectSource(currentTimezone(), this);
     connectToEngine();
+
+    updateColors();
 
     constraintsEvent(Plasma::AllConstraints);
     update();
