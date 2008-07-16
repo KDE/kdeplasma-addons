@@ -144,12 +144,24 @@ void BinaryClock::clockConfigAccepted()
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
 
+    dataEngine("time")->disconnectSource(currentTimezone(), this);
     connectToEngine();
     constraintsEvent(Plasma::AllConstraints);
     update();
     emit configNeedsSaving();
 }
 
+void BinaryClock::changeEngineTimezone(QString oldTimezone, QString newTimezone)
+{
+    dataEngine("time")->disconnectSource(oldTimezone, this);
+
+    Plasma::DataEngine* timeEngine = dataEngine("time");
+    if (m_showSeconds) {
+        timeEngine->connectSource(newTimezone, this, 500);
+    } else {
+        timeEngine->connectSource(newTimezone, this, 6000, Plasma::AlignToMinute);
+    }
+}
 
 void BinaryClock::updateColors()
 {

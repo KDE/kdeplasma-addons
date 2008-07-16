@@ -40,7 +40,7 @@ class BinaryClock : public ClockApplet
     Q_OBJECT
     public:
         BinaryClock(QObject *parent, const QVariantList &args);
-        virtual ~BinaryClock();
+        ~BinaryClock();
 
         void init();
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
@@ -52,6 +52,7 @@ class BinaryClock : public ClockApplet
     protected:
         void createClockConfigurationInterface(KConfigDialog *parent);
         void clockConfigAccepted();
+        void changeEngineTimezone(QString oldTimezone, QString newTimezone);
 
     private slots:
         void updateColors();
