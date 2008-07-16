@@ -44,7 +44,6 @@ class Clock : public ClockApplet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect);
         void setPath(const QString&);
 //         QSizeF contentSizeHint() const;
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 Qt::Orientations expandingDirections() const;
 
@@ -53,7 +52,6 @@ Qt::Orientations expandingDirections() const;
 
     protected slots:
 //         void acceptedTimeStringState(bool);
-        void showCalendar(QGraphicsSceneMouseEvent *event);
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
@@ -103,7 +101,6 @@ Qt::Orientations expandingDirections() const;
         bool m_showDay;
         QTime m_time;
         QDate m_date;
-        Plasma::Dialog *m_calendar;
         KLocale *m_locale;
         QVBoxLayout *m_layout;
 
@@ -113,7 +110,6 @@ Qt::Orientations expandingDirections() const;
 
         /// Designer Config file
         Ui::fuzzyClockConfig ui;
-        Ui::calendar m_calendarUi;
 
         QStringList hourNames;
         QList<KLocalizedString> normalFuzzy;

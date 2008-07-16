@@ -50,7 +50,6 @@ Clock::Clock(QObject *parent, const QVariantList &args)
       m_showDate(false),
       m_showYear(false),
       m_showDay(false),
-      m_calendar(0),
       m_layout(0)
 {
     setHasConfigurationInterface(true);
@@ -178,38 +177,6 @@ void Clock::dataUpdated(const QString& source, const Plasma::DataEngine::Data &d
 
         //request to get painted.
         update();
-    }
-}
-
-void Clock::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->buttons() == Qt::LeftButton && rect().contains(event->pos())) {
-        showCalendar(event);
-    } else {
-        event->ignore();
-    }
-}
-
-void Clock::showCalendar(QGraphicsSceneMouseEvent *event)
-{
-    if (m_calendar == 0) {
-        m_calendar = new Plasma::Dialog();
-        //m_calendar->setStyleSheet("{ border : 0px }"); // FIXME: crashes
-        m_layout = new QVBoxLayout();
-        m_layout->setSpacing(0);
-        m_layout->setMargin(0);
-
-        m_calendarUi.setupUi(m_calendar);
-        m_calendar->setLayout(m_layout);
-        m_calendar->setWindowFlags(Qt::Popup);
-        m_calendar->adjustSize();
-    }
-
-    if (m_calendar->isVisible()) {
-        m_calendar->hide();
-    } else {
-        m_calendar->position(event, boundingRect(), mapToScene(boundingRect().topLeft()));
-        m_calendar->show();
     }
 }
 
