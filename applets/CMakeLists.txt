@@ -28,4 +28,4 @@ add_subdirectory(nowplaying)
 add_subdirectory(showdashboard)
 add_subdirectory(showdesktop)
 add_subdirectory(twitter)
-
+add_subdirectory(charselect)
