@@ -227,7 +227,7 @@ void BinaryClock::updateColors()
     m_gridColor.setAlpha(60);
 
     if (m_customGridColor){
-        m_offLedsColor = cg.readEntry("offLedsColor", m_offLedsColor);
+        m_gridColor = cg.readEntry("gridColor", m_gridColor);
     }
 
     update();
