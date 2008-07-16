@@ -194,7 +194,7 @@ void BinaryClock::clockConfigAccepted()
     emit configNeedsSaving();
 }
 
-void BinaryClock::changeEngineTimezone(QString oldTimezone, QString newTimezone)
+void BinaryClock::changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone)
 {
     dataEngine("time")->disconnectSource(oldTimezone, this);
 

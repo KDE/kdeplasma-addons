@@ -244,7 +244,7 @@ void Clock::clockConfigAccepted()
     emit configNeedsSaving();
 }
 
-void Clock::changeEngineTimezone(QString oldTimezone, QString newTimezone)
+void Clock::changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone)
 {
     dataEngine("time")->disconnectSource(oldTimezone, this);
     dataEngine("time")->connectSource(newTimezone, this, 6000, Plasma::AlignToMinute);
