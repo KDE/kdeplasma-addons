@@ -58,13 +58,13 @@
    <item>
     <widget class="QGroupBox" name="ColorsGroupBox" >
      <property name="title" >
-      <string>Colors</string>
+      <string>Custom Colors</string>
      </property>
      <layout class="QGridLayout" name="gridLayout" >
       <item row="0" column="0" >
        <widget class="QCheckBox" name="onLedsCustomColorCheckBox" >
         <property name="text" >
-         <string>On leds custom color</string>
+         <string>Use on leds custom color</string>
         </property>
        </widget>
       </item>
@@ -78,7 +78,7 @@
       <item row="1" column="0" >
        <widget class="QCheckBox" name="offLedsCustomColorCheckBox" >
         <property name="text" >
-         <string>Off leds custom color</string>
+         <string>Use off leds custom color</string>
         </property>
        </widget>
       </item>
@@ -92,7 +92,7 @@
       <item row="2" column="0" >
        <widget class="QCheckBox" name="gridCustomColorCheckBox" >
         <property name="text" >
-         <string>Grid custom color</string>
+         <string>Use grid custom color</string>
         </property>
        </widget>
       </item>
