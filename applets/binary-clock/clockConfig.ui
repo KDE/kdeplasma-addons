@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>463</width>
+    <width>470</width>
     <height>300</height>
    </rect>
   </property>
@@ -15,84 +15,168 @@
     <height>300</height>
    </size>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="minimumSize" >
-      <size>
-       <width>548</width>
-       <height>0</height>
-      </size>
+    <widget class="QCheckBox" name="showSecondHandCheckBox" >
+     <property name="toolTip" >
+      <string>Show the second leds</string>
      </property>
+     <property name="whatsThis" >
+      <string>Check this if you want to display second leds in order to see the seconds.</string>
+     </property>
+     <property name="text" >
+      <string>Show &amp;seconds</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showGridCheckBox" >
+     <property name="toolTip" >
+      <string>Show the grid</string>
+     </property>
+     <property name="whatsThis" >
+      <string>Check this if you want to see a grid around leds.</string>
+     </property>
+     <property name="text" >
+      <string>Show grid</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showOffLedsCheckBox" >
+     <property name="toolTip" >
+      <string>Show the off leds</string>
+     </property>
+     <property name="whatsThis" >
+      <string>Check this if you want to see off leds.</string>
+     </property>
+     <property name="text" >
+      <string>Show off leds</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="ColorsGroupBox" >
      <property name="title" >
-      <string/>
+      <string>Colors</string>
      </property>
-     <property name="flat" >
-      <bool>true</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <item>
-       <widget class="QCheckBox" name="showSecondHandCheckBox" >
-        <property name="toolTip" >
-         <string>Show the second leds</string>
-        </property>
-        <property name="whatsThis" >
-         <string>Check this if you want to display second leds in order to see the seconds.</string>
-        </property>
+     <layout class="QGridLayout" name="gridLayout" >
+      <item row="0" column="0" >
+       <widget class="QCheckBox" name="onLedsCustomColorCheckBox" >
         <property name="text" >
-         <string>Show &amp;seconds</string>
+         <string>On leds custom color</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="showGridCheckBox" >
-        <property name="toolTip" >
-         <string>Show the grid</string>
-        </property>
-        <property name="whatsThis" >
-         <string>Check this if you want to see a grid around leds.</string>
-        </property>
-        <property name="text" >
-         <string>Show grid</string>
+      <item row="0" column="1" >
+       <widget class="KColorCombo" name="onLedsCustomColorCombo" >
+        <property name="enabled" >
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="showOffLedsCheckBox" >
-        <property name="toolTip" >
-         <string>Show the off leds</string>
-        </property>
-        <property name="whatsThis" >
-         <string>Check this if you want to see off leds.</string>
-        </property>
+      <item row="1" column="0" >
+       <widget class="QCheckBox" name="offLedsCustomColorCheckBox" >
         <property name="text" >
-         <string>Show off leds</string>
+         <string>Off leds custom color</string>
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="verticalSpacer" >
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
+      <item row="1" column="1" >
+       <widget class="KColorCombo" name="offLedsCustomColorCombo" >
+        <property name="enabled" >
+         <bool>false</bool>
         </property>
-        <property name="sizeType" >
-         <enum>QSizePolicy::Minimum</enum>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QCheckBox" name="gridCustomColorCheckBox" >
+        <property name="text" >
+         <string>Grid custom color</string>
         </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>20</width>
-          <height>190</height>
-         </size>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="KColorCombo" name="gridCustomColorCombo" >
+        <property name="enabled" >
+         <bool>false</bool>
         </property>
-       </spacer>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
+   <item>
+    <spacer name="verticalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>70</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox</zorder>
  </widget>
+  <customwidgets>
+  <customwidget>
+   <class>KColorCombo</class>
+   <extends>QComboBox</extends>
+   <header>kcolorcombo.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>onLedsCustomColorCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>onLedsCustomColorCombo</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>122</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>346</x>
+     <y>131</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>offLedsCustomColorCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>offLedsCustomColorCombo</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>122</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>346</x>
+     <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gridCustomColorCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>gridCustomColorCombo</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>122</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>346</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

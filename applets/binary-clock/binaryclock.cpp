@@ -47,6 +47,11 @@ void BinaryClock::init()
     m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
     m_showGrid = cg.readEntry("showGrid", m_showGrid);
     m_showOffLeds = cg.readEntry("showOffLeds", m_showOffLeds);
+
+    m_customLedsColor = cg.readEntry("customLedsColor", false);
+    m_customOffLedsColor = cg.readEntry("customOffLedsColor", false);
+    m_customGridColor = cg.readEntry("customGridColor", false);
+
     setCurrentTimezone(cg.readEntry("timezone", localTimezone()));
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
@@ -83,6 +88,7 @@ void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
         getContentsMargins(&left, &top, &right, &bottom);
         qreal borderHeight = top + bottom;
         qreal borderWidth = left + right;
+
         if (formFactor() == Plasma::Vertical) {
             setMaximumHeight(getHeightFromWidth((int) contentsRect().width()) + borderHeight);
 
@@ -133,6 +139,14 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
+
+    ui.onLedsCustomColorCheckBox->setChecked(m_customLedsColor);
+    ui.offLedsCustomColorCheckBox->setChecked(m_customOffLedsColor);
+    ui.gridCustomColorCheckBox->setChecked(m_customGridColor);
+
+    ui.onLedsCustomColorCombo->setColor(m_ledsColor);
+    ui.offLedsCustomColorCombo->setColor(m_offLedsColor);
+    ui.gridCustomColorCombo->setColor(m_gridColor);
 }
 
 void BinaryClock::clockConfigAccepted()
@@ -142,12 +156,37 @@ void BinaryClock::clockConfigAccepted()
     m_showGrid = ui.showGridCheckBox->isChecked();
     m_showOffLeds = ui.showOffLedsCheckBox->isChecked();
 
+    m_customLedsColor = ui.onLedsCustomColorCheckBox->isChecked();
+    m_customOffLedsColor = ui.offLedsCustomColorCheckBox->isChecked();
+    m_customGridColor = ui.gridCustomColorCheckBox->isChecked();
+
+    if (m_customLedsColor){
+         m_ledsColor = ui.onLedsCustomColorCombo->color();
+    }
+
+    if (m_customOffLedsColor){
+         m_offLedsColor = ui.offLedsCustomColorCombo->color();
+    }
+
+    if (m_customGridColor){
+         m_gridColor = ui.gridCustomColorCombo->color();
+    }
+
     cg.writeEntry("showSeconds", m_showSeconds);
     cg.writeEntry("showGrid", m_showGrid);
     cg.writeEntry("showOffLeds", m_showOffLeds);
 
+    cg.writeEntry("customLedsColor", m_customLedsColor);
+    cg.writeEntry("customOffLedsColor", m_customOffLedsColor);
+    cg.writeEntry("customGridColor", m_customGridColor);
+
+    cg.writeEntry("ledsColor", m_ledsColor);
+    cg.writeEntry("offLedsColor", m_offLedsColor);
+    cg.writeEntry("gridColor", m_gridColor);
+
     dataEngine("time")->disconnectSource(currentTimezone(), this);
     connectToEngine();
+
     constraintsEvent(Plasma::AllConstraints);
     update();
     emit configNeedsSaving();
@@ -167,11 +206,27 @@ void BinaryClock::changeEngineTimezone(QString oldTimezone, QString newTimezone)
 
 void BinaryClock::updateColors()
 {
+    KConfigGroup cg = config();
+
     m_ledsColor = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+
+    if (m_customLedsColor){
+        m_ledsColor = cg.readEntry("ledsColor", m_ledsColor);
+    }
+
     m_offLedsColor = QColor(m_ledsColor);
     m_offLedsColor.setAlpha(40);
+
+    if (m_customOffLedsColor){
+        m_offLedsColor = cg.readEntry("offLedsColor", m_offLedsColor);
+    }
+
     m_gridColor = QColor(m_ledsColor);
     m_gridColor.setAlpha(60);
+
+    if (m_customGridColor){
+        m_offLedsColor = cg.readEntry("offLedsColor", m_offLedsColor);
+    }
 
     update();
 }

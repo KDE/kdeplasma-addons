@@ -67,6 +67,10 @@ class BinaryClock : public ClockApplet
         bool m_showOffLeds;
         bool m_showGrid;
 
+        bool m_customLedsColor;
+        bool m_customOffLedsColor;
+        bool m_customGridColor;
+
         QColor m_ledsColor;
         QColor m_offLedsColor;
         QColor m_gridColor;
