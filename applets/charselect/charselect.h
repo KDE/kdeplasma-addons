@@ -20,14 +20,14 @@
 #ifndef CHARSELECT_H
 #define CHARSELECT_H
 
-#include <plasmaappletdialog.h>
+#include <Plasma/PopupApplet>
 
 class KCharSelect;
 class QGraphicsGridLayout;
 class KLineEdit;
 class KPushButton;
 
-class CharSelectApplet : public PlasmaAppletDialog
+class CharSelectApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
@@ -35,15 +35,13 @@ public:
     virtual ~CharSelectApplet();
 
     virtual QWidget *widget();
-    virtual void initMinimumSize();
 
 public slots:
     void slotAddToClipboard();
     void slotCharSelect( const QChar &c );
-protected:
-    void initialize();
 
 private:
+    QWidget *m_mainWidget;
     KCharSelect *m_charselect;
     QGraphicsGridLayout *m_layout;
     KLineEdit *m_lineEdit;

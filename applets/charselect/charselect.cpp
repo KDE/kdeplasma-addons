@@ -28,44 +28,40 @@
 #include "charselect.h"
 
 CharSelectApplet::CharSelectApplet(QObject *parent, const QVariantList &args)
-    : PlasmaAppletDialog(parent, args)
+    : Plasma::PopupApplet(parent, args),
+      m_mainWidget(0)
 {
+    setIcon("accessories-character-map");
 }
 
 
 CharSelectApplet::~CharSelectApplet()
 {
-}
-
-void CharSelectApplet::initMinimumSize()
-{
-    m_minimumSize = QSize( 400, 350 );
+    delete m_mainWidget;
 }
 
 QWidget *CharSelectApplet::widget()
 {
-    QWidget *widget = new QWidget;
-    QGridLayout *layout = new QGridLayout;
-    widget->setLayout( layout );
+    if (!m_mainWidget) {
+        m_mainWidget = new QWidget;
+        QGridLayout *layout = new QGridLayout(m_mainWidget);
 
-    m_charselect = new KCharSelect(0L, KCharSelect::CharacterTable|KCharSelect::FontCombo);
-    connect( m_charselect, SIGNAL( charSelected(const QChar &) ), this, SLOT( slotCharSelect( const QChar& ) ) );
-    layout->addWidget( m_charselect, 0, 0, 1, 2);
+        m_charselect = new KCharSelect(m_mainWidget, KCharSelect::CharacterTable|KCharSelect::FontCombo);
+        m_charselect->setMinimumSize(300, 250);
+        connect( m_charselect, SIGNAL( charSelected(const QChar &) ), this, SLOT( slotCharSelect( const QChar& ) ) );
+        layout->addWidget( m_charselect, 0, 0, 1, 2);
 
-    m_lineEdit = new KLineEdit;
-    m_lineEdit->setReadOnly( true );
-    layout->addWidget( m_lineEdit, 1, 0 );
+        m_lineEdit = new KLineEdit(m_mainWidget);
+        m_lineEdit->setReadOnly( true );
+        layout->addWidget( m_lineEdit, 1, 0 );
 
-    m_addToClipboard = new KPushButton;
-    m_addToClipboard->setText( i18n( "&Add to Clipboard" ) );
-    connect( m_addToClipboard, SIGNAL( clicked() ), this, SLOT( slotAddToClipboard() ) );
-    layout->addWidget( m_addToClipboard, 1, 1 );
-    return widget;
-}
+        m_addToClipboard = new KPushButton(m_mainWidget);
+        m_addToClipboard->setText( i18n( "&Add to Clipboard" ) );
+        connect( m_addToClipboard, SIGNAL( clicked() ), this, SLOT( slotAddToClipboard() ) );
+        layout->addWidget( m_addToClipboard, 1, 1 );
+    }
 
-void CharSelectApplet::initialize()
-{
-    m_icon = new Plasma::Icon(KIcon("accessories-character-map"), QString(), this);
+    return m_mainWidget;
 }
 
 void CharSelectApplet::slotAddToClipboard()

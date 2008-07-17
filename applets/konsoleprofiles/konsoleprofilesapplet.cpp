@@ -33,7 +33,17 @@
 #include <KGlobalSettings>
 
 KonsoleProfilesApplet::KonsoleProfilesApplet(QObject *parent, const QVariantList &args)
-    : PlasmaAppletDialog(parent, args), m_listView( 0 )
+    : Plasma::PopupApplet(parent, args), m_listView( 0 )
+{
+    setIcon("utilities-terminal");
+}
+
+KonsoleProfilesApplet::~KonsoleProfilesApplet()
+{
+    delete m_listView;
+}
+
+void KonsoleProfilesApplet::init()
 {
     KDirWatch *dirwatch = new KDirWatch( this );
     QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
@@ -44,20 +54,11 @@ KonsoleProfilesApplet::KonsoleProfilesApplet(QObject *parent, const QVariantList
     connect( dirwatch, SIGNAL(dirty (const QString &) ), this, SLOT( slotUpdateSessionMenu() ) );
 }
 
-KonsoleProfilesApplet::~KonsoleProfilesApplet()
-{
-}
-
-void KonsoleProfilesApplet::initialize()
-{
-    m_icon = new Plasma::Icon(KIcon("utilities-terminal"), QString(), this);
-}
-
 QWidget *KonsoleProfilesApplet::widget()
 {
     if ( !m_listView )
     {
-        m_listView= new QTreeView(m_dialog);
+        m_listView = new QTreeView();
         m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
         m_listView->setRootIsDecorated(false);
         m_listView->setHeaderHidden(true);
@@ -112,14 +113,11 @@ void KonsoleProfilesApplet::initSessionFiles()
 
 void KonsoleProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
-    if ( m_closePopup )
-        m_dialog->hide();
+    hidePopup();
     QStringList args;
     args<<"--profile"<<index.data(ProfilesName).toString();
     KToolInvocation::kdeinitExec("konsole", args);
-
 }
 
-
-
 #include "konsoleprofilesapplet.moc"
+

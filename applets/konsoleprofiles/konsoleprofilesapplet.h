@@ -20,7 +20,7 @@
 #ifndef _KONSOLEPROFILESAPPLET_H_
 #define _KONSOLEPROFILESAPPLET_H_
 
-#include <plasmaappletdialog.h>
+#include <Plasma/PopupApplet>
 
 class QTreeView;
 class QGraphicsProxyWidget;
@@ -28,7 +28,7 @@ class QStandardItemModel;
 class QModelIndex;
 class QGraphicsLinearLayout;
 
-class KonsoleProfilesApplet : public PlasmaAppletDialog
+class KonsoleProfilesApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
@@ -46,7 +46,7 @@ protected slots:
 
 protected:
     void initSessionFiles();
-    void initialize();
+    void init();
 private:
     QTreeView *m_listView;
     QStandardItemModel *m_konsoleModel;

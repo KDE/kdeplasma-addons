@@ -32,7 +32,7 @@
 #include <kio/global.h>
 
 KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args)
-    : PlasmaAppletDialog(parent, args), m_listView( 0 )
+    : Plasma::PopupApplet(parent, args), m_listView( 0 )
 {
     KDirWatch *dirwatch = new KDirWatch( this );
     QStringList lst = KGlobal::dirs()->findDirs( "data", "konqueror/profiles/" );
@@ -41,22 +41,19 @@ KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args
         dirwatch->addDir( lst[i] );
     }
     connect( dirwatch, SIGNAL(dirty (const QString &) ), this, SLOT( slotUpdateKonqProfiles() ) );
+    setIcon("konqueror");
 }
 
 KonqProfilesApplet::~KonqProfilesApplet()
 {
-}
-
-void KonqProfilesApplet::initialize()
-{
-    m_icon = new Plasma::Icon(KIcon("konqueror"), QString(), this);
+    delete m_listView;
 }
 
 QWidget *KonqProfilesApplet::widget()
 {
     if ( !m_listView )
     {
-        m_listView= new QTreeView(m_dialog);
+        m_listView= new QTreeView();
         m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
         m_listView->setRootIsDecorated(false);
         m_listView->setHeaderHidden(true);
@@ -111,14 +108,11 @@ void KonqProfilesApplet::initSessionFiles()
 
 void KonqProfilesApplet::slotOnItemClicked(const QModelIndex &index)
 {
-    if ( m_closePopup )
-        m_dialog->hide();
+    hidePopup();
     QStringList args;
     args<<"--profile"<<index.data(ProfilesName).toString();
     KToolInvocation::kdeinitExec("konqueror", args);
-
 }
 
-
-
 #include "konqprofilesapplet.moc"
+
