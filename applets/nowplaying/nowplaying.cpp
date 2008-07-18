@@ -27,6 +27,7 @@
 #include <Plasma/Label>
 
 #include <QGraphicsGridLayout>
+#include <QLabel>
 
 NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -53,12 +54,19 @@ NowPlaying::~NowPlaying()
 void NowPlaying::init()
 {
     m_layout = new QGraphicsGridLayout;
+    m_layout->setColumnStretchFactor(0, 0);
+    m_layout->setColumnSpacing(0, 10);
+    m_layout->setColumnAlignment(0, Qt::AlignRight);
 
     // set up labels
     m_artistLabel->setText(i18nc("For a song or other music", "Artist:"));
+    m_artistLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_titleLabel->setText(i18nc("For a song or other music", "Title:"));
+    m_titleLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_albumLabel->setText(i18nc("For a song or other music", "Album:"));
+    m_albumLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_timeLabel->setText(i18nc("Position in a song", "Time:"));
+    m_timeLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     // create layout
     // TODO: make this configurable
@@ -70,22 +78,6 @@ void NowPlaying::init()
     m_layout->addItem(m_albumText, 2, 1);
     m_layout->addItem(m_timeLabel, 3, 0);
     m_layout->addItem(m_timeText, 3, 1);
-
-    // calculate the left col width (why can't QGraphicsGridLayout just do this?)
-    // DISABLED: for some reason the Labels aren't returning a sensible width
-    //           if they did, maybe we could just use setColumnStretchFactor(0,0)?
-    qreal width = 0;
-    for (int i = 0; i < m_layout->rowCount(); i++) {
-        QGraphicsLayoutItem* item = m_layout->itemAt(i, 0);
-        if (item) {
-            width = qMax(width, item->preferredWidth());
-        }
-    }
-    kDebug() << "Preferred width is" << width;
-    //m_layout->setColumnFixedWidth(0, width + 5);
-    // instead:
-    m_layout->setColumnStretchFactor(0, 1);
-    m_layout->setColumnStretchFactor(1, 2);
 
     setLayout(m_layout);
 
