@@ -64,18 +64,53 @@ void Notes::init()
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
     m_layout->addItem(m_textEdit);
 
+    QAction *tmpAction = new QAction(i18n("White"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "white");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Black"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "black");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Red"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "red");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Orange"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "orange");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Yellow"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "yellow");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Green"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "green");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Blue"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "blue");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    tmpAction = new QAction(i18n("Pink"), this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", "pink");
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+
     m_autoFont = false;
 
     KConfigGroup cg = config();
+    m_color = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
     m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
+    //m_textEdit->nativeWidget()->setClickMessage(m_defaultText);
 
     QString text = cg.readEntry("autoSave", QString());
     if (! text.isEmpty()) {
         m_textEdit->nativeWidget()->setPlainText(text);
     } else {
-        m_textEdit->nativeWidget()->setPlainText(m_defaultText);
+        //m_textEdit->nativeWidget()->setPlainText(m_defaultText);
     }
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
@@ -130,6 +165,19 @@ void Notes::saveNote()
     emit configNeedsSaving();
 }
 
+void Notes::changeColor()
+{
+    QAction *action = dynamic_cast<QAction*> (sender());
+    if (!action || action->property("color").type() != QVariant::String) return;
+    m_color = action->property("color").toString();
+    update();
+}
+
+QList<QAction*> Notes::contextualActions()
+{
+    return m_colorActions;
+}
+
 void Notes::paintInterface(QPainter *p,
                            const QStyleOptionGraphicsItem *option,
                            const QRect &contentsRect)
@@ -137,7 +185,7 @@ void Notes::paintInterface(QPainter *p,
     Q_UNUSED(option);
 
     m_notes_theme.resize(geometry().size());
-    m_notes_theme.paint(p, contentsRect);
+    m_notes_theme.paint(p, contentsRect, m_color + "-notes");
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)

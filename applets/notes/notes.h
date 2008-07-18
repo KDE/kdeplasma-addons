@@ -45,6 +45,7 @@ class Notes : public Plasma::Applet
         Notes(QObject *parent, const QVariantList &args);
         ~Notes();
         void init();
+        QList<QAction*> contextualActions();
         void paintInterface(QPainter *painter,
                             const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);
@@ -59,6 +60,7 @@ class Notes : public Plasma::Applet
     private Q_SLOTS:
         void saveNote();
         void delayedSaveNote();
+        void changeColor();
 
     private:
         int fontSize();
@@ -70,6 +72,10 @@ class Notes : public Plasma::Applet
         QTimer m_saveTimer;
         QFont m_font;
         QColor m_textColor;
+        QString m_color;
+
+        QList<QAction*> m_colorActions;
+
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
         Plasma::TextEdit *m_textEdit;
