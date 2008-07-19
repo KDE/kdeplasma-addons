@@ -39,7 +39,7 @@ QWidget *Calendar::widget()
     if ( !m_datePicker )
     {
         m_datePicker =  new KDatePicker();
-        m_datePicker->resize( 320, 320 );
+        m_datePicker->setMinimumSize( 280, 280 );
     }
     return m_datePicker;
 }
