@@ -22,10 +22,13 @@
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
+#include <plasma/service.h>
 
 class QGraphicsGridLayout;
+class QGraphicsLinearLayout;
 namespace Plasma {
     class Label;
+    class Icon;
 }
 
 class NowPlaying : public Plasma::Applet
@@ -44,6 +47,12 @@ public slots:
     void playerAdded(const QString &name);
     void playerRemoved(const QString &name);
 
+private slots:
+    void playpause();
+    void stop();
+    void prev();
+    void next();
+
 private:
     void findPlayer();
 
@@ -54,6 +63,7 @@ private:
         NoPlayer
     };
     QString m_watchingPlayer;
+    Plasma::Service* m_controller;
     State m_state;
 
     Plasma::Label* m_artistLabel;
@@ -66,7 +76,14 @@ private:
     Plasma::Label* m_albumText;
     Plasma::Label* m_timeText;
 
-    QGraphicsGridLayout* m_layout;
+    Plasma::Icon* m_playpause;
+    Plasma::Icon* m_stop;
+    Plasma::Icon* m_prev;
+    Plasma::Icon* m_next;
+
+    QGraphicsLinearLayout* m_layout;
+    QGraphicsGridLayout* m_textPanel;
+    QGraphicsLinearLayout* m_buttonPanel;
 };
 
 K_EXPORT_PLASMA_APPLET(nowplaying, NowPlaying)
