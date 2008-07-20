@@ -25,5 +25,5 @@ install(
     )
 
 install(
-    FILES notes.svg
+    FILES notes.svgz
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)

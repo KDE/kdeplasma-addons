@@ -11,6 +11,6 @@ install(TARGETS plasma_applet_twitter DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-twitter-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES
-    twitter.svg
+    twitter.svgz
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 

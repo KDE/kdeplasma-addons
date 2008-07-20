@@ -13,5 +13,5 @@ install(TARGETS plasma_applet_luna
 install(FILES plasma-applet-luna.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES luna.svg
+install(FILES luna.svgz
 	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
