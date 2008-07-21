@@ -52,6 +52,7 @@ Clock::Clock(QObject *parent, const QVariantList &args)
       m_showDay(false),
       m_layout(0)
 {
+    KGlobal::locale()->insertCatalog("libplasmaclock");
     setHasConfigurationInterface(true);
     setBackgroundHints(Plasma::Applet::DefaultBackground);
     //If we do not set this, the user has to press CTRL when shrinking the plasmoid on the desktop beyond a certain size.
