@@ -183,9 +183,9 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     
     KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
     foreach (const KService::Ptr &service, services) {
-	const QString *service_name = new QString ( service->name() );
-	const QVariant *service_identifier = new QVariant ( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
-	m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), *service_name, *service_identifier );
+	const QString service_name( service->name() );
+	const QVariant service_identifier( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
+	m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), service_name, service_identifier );
     }
 
     parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
