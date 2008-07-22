@@ -36,8 +36,7 @@
 #include "fileWatcherConfig.h"
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-      config_dialog(0)
+    : Plasma::Applet(parent, args)
 {
   setHasConfigurationInterface(true);
   resize(400, 400);
@@ -150,7 +149,7 @@ void FileWatcher::maxRowsChanged(int rows)
 
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
 {
-    config_dialog = new FileWatcherConfig(parent);
+    FileWatcherConfig* config_dialog = new FileWatcherConfig(parent);
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     parent->addPage(config_dialog, parent->windowTitle(), icon());

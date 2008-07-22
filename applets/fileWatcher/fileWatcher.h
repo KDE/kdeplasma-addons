@@ -27,7 +27,6 @@ class QFileSystemWatcher;
 class QTextDocument;
 class QGraphicsTextItem;
 
-class FileWatcherConfig;
 
 class FileWatcher : public Plasma::Applet
 {
@@ -57,7 +56,6 @@ class FileWatcher : public Plasma::Applet
 
     QFile *file;
     QFileSystemWatcher *watcher;
-    FileWatcherConfig *config_dialog;
     QGraphicsTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
