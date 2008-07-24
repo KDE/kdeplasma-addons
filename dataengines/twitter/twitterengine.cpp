@@ -52,6 +52,8 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
 
 TwitterEngine::~TwitterEngine()
 {
+    delete m_anonHttp;
+    delete m_http;
 }
 
 void TwitterEngine::setStatus(const QString &status)
