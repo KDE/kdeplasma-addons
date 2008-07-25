@@ -21,20 +21,25 @@
  */
 
 #include "nowplaying.h"
+#include "controls.h"
 
 
 #include <Plasma/Theme>
 #include <Plasma/Label>
-#include <Plasma/Icon>
 
 #include <QGraphicsGridLayout>
 #include <QGraphicsLinearLayout>
 #include <QLabel>
 
+
+K_EXPORT_PLASMA_APPLET(nowplaying, NowPlaying)
+
+
 NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_controller(0),
       m_state(NoPlayer),
+      m_caps(NoCaps),
       m_artistLabel(new Plasma::Label),
       m_titleLabel(new Plasma::Label),
       m_albumLabel(new Plasma::Label),
@@ -43,15 +48,22 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_titleText(new Plasma::Label),
       m_albumText(new Plasma::Label),
       m_timeText(new Plasma::Label),
-      m_playpause(new Plasma::Icon),
-      m_stop(new Plasma::Icon),
-      m_prev(new Plasma::Icon),
-      m_next(new Plasma::Icon),
-      m_textPanel(0)
+      m_textPanel(0),
+      m_buttonPanel(new Controls)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 165);
     setMinimumSize(100, 30);
+
+    connect(m_buttonPanel, SIGNAL(play()), this, SLOT(play()));
+    connect(m_buttonPanel, SIGNAL(pause()), this, SLOT(pause()));
+    connect(m_buttonPanel, SIGNAL(stop()), this, SLOT(stop()));
+    connect(m_buttonPanel, SIGNAL(previous()), this, SLOT(prev()));
+    connect(m_buttonPanel, SIGNAL(next()), this, SLOT(next()));
+    connect(this, SIGNAL(stateChanged(State)),
+            m_buttonPanel, SLOT(stateChanged(State)));
+    connect(this, SIGNAL(capsChanged(Caps)),
+            m_buttonPanel, SLOT(setCaps(Caps)));
 }
 
 NowPlaying::~NowPlaying()
@@ -85,30 +97,9 @@ void NowPlaying::init()
     m_textPanel->addItem(m_timeLabel, 3, 0);
     m_textPanel->addItem(m_timeText, 3, 1);
 
-
-    // set up buttons
-    m_playpause->setIcon("media-playback-start");
-    connect(m_playpause, SIGNAL(clicked()), this, SLOT(playpause()));
-    m_stop->setIcon("media-playback-stop");
-    connect(m_stop, SIGNAL(clicked()), this, SLOT(stop()));
-    m_prev->setIcon("media-skip-backward");
-    connect(m_prev, SIGNAL(clicked()), this, SLOT(prev()));
-    m_next->setIcon("media-skip-forward");
-    connect(m_next, SIGNAL(clicked()), this, SLOT(next()));
-
-    m_buttonPanel = new QGraphicsLinearLayout(Qt::Horizontal);
-    // adding stretches -> segfault
-    //m_buttonPanel->addStretch(1);
-    m_buttonPanel->addItem(m_prev);
-    m_buttonPanel->addItem(m_playpause);
-    m_buttonPanel->addItem(m_stop);
-    m_buttonPanel->addItem(m_next);
-    //m_buttonPanel->addStretch(1);
-
-
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_textPanel);
-    m_layout->addItem(m_buttonPanel);
+    m_layout->addItem(m_buttonPanel->widget());
 
     setLayout(m_layout);
 
@@ -140,15 +131,18 @@ void NowPlaying::dataUpdated(const QString &name,
         findPlayer();
         return;
     }
+
+    State newstate;
     if (data["State"].toString() == "playing") {
-        m_state = Playing;
-        m_playpause->setIcon("media-playback-pause");
+        newstate = Playing;
     } else if (data["State"].toString() == "paused") {
-        m_state = Paused;
-        m_playpause->setIcon("media-playback-start");
+        newstate = Paused;
     } else {
-        m_state = Stopped;
-        m_playpause->setIcon("media-playback-start");
+        newstate = Stopped;
+    }
+    if (newstate != m_state) {
+        emit stateChanged(newstate);
+        m_state = newstate;
     }
 
     m_artistText->setText(data["Artist"].toString());
@@ -166,10 +160,26 @@ void NowPlaying::dataUpdated(const QString &name,
         m_timeText->setText(QString());
     }
 
-    m_playpause->setVisible(data["Can play"].toBool() || data["Can pause"].toBool());
-    m_stop->setVisible(data["Can stop"].toBool());
-    m_prev->setVisible(data["Can skip backward"].toBool());
-    m_next->setVisible(data["Can skip forward"].toBool());
+    Caps newcaps = NoCaps;
+    if (data["Can play"].toBool()) {
+        newcaps |= CanPlay;
+    }
+    if (data["Can pause"].toBool()) {
+        newcaps |= CanPause;
+    }
+    if (data["Can stop"].toBool()) {
+        newcaps |= CanStop;
+    }
+    if (data["Can skip backward"].toBool()) {
+        newcaps |= CanGoPrevious;
+    }
+    if (data["Can skip forward"].toBool()) {
+        newcaps |= CanGoNext;
+    }
+    if (newcaps != m_caps) {
+        emit capsChanged(newcaps);
+        m_caps = newcaps;
+    }
 
     update();
 }
@@ -198,29 +208,32 @@ void NowPlaying::findPlayer()
     kDebug() << "Looking for players.  Possibilities:" << players;
     if (players.isEmpty()) {
         m_state = NoPlayer;
+        m_caps = NoCaps;
         m_watchingPlayer.clear();
         m_controller = 0;
+
+        emit stateChanged(m_state);
+        emit capsChanged(m_caps);
         update();
     } else {
         m_watchingPlayer = players.first();
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
         kDebug() << "Installing" << m_watchingPlayer << "as watched player";
-        dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 500);
+        dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 999);
     }
 }
 
-void NowPlaying::playpause()
+void NowPlaying::play()
 {
-    if (m_state == Playing) {
-        m_playpause->setIcon("media-playback-start");
-        if (m_controller) {
-            m_controller->startOperationCall(m_controller->operationDescription("pause"));
-        }
-    } else {
-        m_playpause->setIcon("media-playback-pause");
-        if (m_controller) {
-            m_controller->startOperationCall(m_controller->operationDescription("play"));
-        }
+    if (m_controller) {
+        m_controller->startOperationCall(m_controller->operationDescription("play"));
+    }
+}
+
+void NowPlaying::pause()
+{
+    if (m_controller) {
+        m_controller->startOperationCall(m_controller->operationDescription("pause"));
     }
 }
 

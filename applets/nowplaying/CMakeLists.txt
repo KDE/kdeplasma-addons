@@ -4,7 +4,8 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
 set(nowplaying_SRCS
-    nowplaying.cpp)
+    nowplaying.cpp
+    controls.cpp)
 
 kde4_add_plugin(plasma_applet_nowplaying ${nowplaying_SRCS})
 target_link_libraries(plasma_applet_nowplaying  ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS})

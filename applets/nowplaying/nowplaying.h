@@ -30,6 +30,25 @@ namespace Plasma {
     class Label;
     class Icon;
 }
+class Controls;
+
+enum State {
+    Playing,
+    Paused,
+    Stopped,
+    NoPlayer
+};
+
+enum CapsFlags {
+    NoCaps = 0,
+    CanPlay = 1,
+    CanPause = 2,
+    CanStop = 4,
+    CanGoPrevious = 8,
+    CanGoNext = 16
+};
+Q_DECLARE_FLAGS(Caps, CapsFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Caps)
 
 class NowPlaying : public Plasma::Applet
 {
@@ -41,6 +60,10 @@ public:
     void init();
     void constraintsUpdated(Plasma::Constraints);
 
+signals:
+    void stateChanged(State state);
+    void capsChanged(Caps caps);
+
 public slots:
     void dataUpdated(const QString &name,
                      const Plasma::DataEngine::Data &data);
@@ -48,7 +71,8 @@ public slots:
     void playerRemoved(const QString &name);
 
 private slots:
-    void playpause();
+    void play();
+    void pause();
     void stop();
     void prev();
     void next();
@@ -56,15 +80,10 @@ private slots:
 private:
     void findPlayer();
 
-    enum State {
-        Playing,
-        Paused,
-        Stopped,
-        NoPlayer
-    };
     QString m_watchingPlayer;
     Plasma::Service* m_controller;
     State m_state;
+    Caps m_caps;
 
     Plasma::Label* m_artistLabel;
     Plasma::Label* m_titleLabel;
@@ -76,16 +95,9 @@ private:
     Plasma::Label* m_albumText;
     Plasma::Label* m_timeText;
 
-    Plasma::Icon* m_playpause;
-    Plasma::Icon* m_stop;
-    Plasma::Icon* m_prev;
-    Plasma::Icon* m_next;
-
     QGraphicsLinearLayout* m_layout;
     QGraphicsGridLayout* m_textPanel;
-    QGraphicsLinearLayout* m_buttonPanel;
+    Controls* m_buttonPanel;
 };
-
-K_EXPORT_PLASMA_APPLET(nowplaying, NowPlaying)
 
 #endif // NOWPLAYING_H
