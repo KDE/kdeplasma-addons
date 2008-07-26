@@ -59,7 +59,7 @@ void GarfieldProvider::Private::imageRequestFinished( bool error )
 GarfieldProvider::GarfieldProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QString( "http://images.ucomics.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
+    KUrl url( QString( "http://picayune.uclick.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
 
     d->mHttp->setHost( url.host() );
