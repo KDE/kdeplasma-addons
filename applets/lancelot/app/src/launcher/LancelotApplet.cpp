@@ -17,8 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "LancelotApplet.moc"
-
 #include "LancelotApplet.h"
 #include "KDebug"
 #include "KIcon"
@@ -175,6 +173,8 @@ void LancelotApplet::saveConfig()
 
 void LancelotApplet::applyConfig()
 {
+    d->layout->setContentsMargins(0, 0, 0, 0);
+    d->layout->setSpacing(0);
     if (d->showCategories) {
         d->createCategoriesButtons();
     } else {
@@ -183,6 +183,7 @@ void LancelotApplet::applyConfig()
     emit configNeedsSaving();
     d->resize();
     update();
+    setAspectRatioMode(Plasma::KeepAspectRatio);
 }
 
 void LancelotApplet::init()
@@ -246,4 +247,6 @@ void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
     }
     d->resize();
 }
+
+#include "LancelotApplet.moc"
 
