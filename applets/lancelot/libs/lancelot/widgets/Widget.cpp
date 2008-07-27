@@ -184,7 +184,7 @@ void Widget::paintBackground(QPainter * painter, const QString & element) {
         svg->setElementPrefix(element);
         kDebug() << "Background prefix " << svg->hasElementPrefix(element);
         svg->resizePanel(size());
-        svg->paintPanel(painter, QRectF(QPointF(), size())); //, element);
+        svg->paintPanel(painter); //, element);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;
