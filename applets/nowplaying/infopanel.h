@@ -16,50 +16,46 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA  02110-1301  USA
  */
-#ifndef CONTROLS_H
-#define CONTROLS_H
+#ifndef INFOPANEL_H
+#define INFOPANEL_H
 
 #include <QGraphicsWidget>
-
-#include "nowplaying.h"
+#include <QMap>
+#include <QString>
 
 namespace Plasma {
-    class Icon;
+    class Label;
 }
-class QGraphicsLayout;
+class QGraphicsLayoutItem;
+class QGraphicsGridLayout;
 
-class Controls : public QGraphicsWidget
+class InfoPanel : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
-    Controls();
-    ~Controls();
+    InfoPanel();
+    ~InfoPanel();
 
 public slots:
-    void stateChanged(State state);
-    void setCaps(Caps caps);
-
-signals:
-    void play();
-    void pause();
-    void stop();
-    void previous();
-    void next();
-
-private slots:
-    void playPauseClicked();
+    void updateMetadata(const QMap<QString,QString>& metadata);
 
 private:
-    Plasma::Icon* m_playpause;
-    Plasma::Icon* m_stop;
-    Plasma::Icon* m_prev;
-    Plasma::Icon* m_next;
+    void updateLabels();
 
-    QGraphicsLinearLayout* m_layout;
+    Plasma::Label* m_artistLabel;
+    Plasma::Label* m_titleLabel;
+    Plasma::Label* m_albumLabel;
+    Plasma::Label* m_timeLabel;
 
-    State m_state;
-    Caps m_caps;
+    Plasma::Label* m_artistText;
+    Plasma::Label* m_titleText;
+    Plasma::Label* m_albumText;
+    Plasma::Label* m_timeText;
+
+    QGraphicsGridLayout* m_layout;
+    QMap<QString,QString> m_metadata;
 };
 
-#endif // CONTROLS_H
+
+#endif // INFOPANEL_H

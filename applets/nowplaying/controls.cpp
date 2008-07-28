@@ -24,39 +24,20 @@ Controls::Controls()
 
     setCaps(NoCaps);
 
-    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Horizontal);
+    QGraphicsLinearLayout* m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
     // adding stretches -> segfault
-    //layout->addStretch(1);
-    layout->addItem(m_prev);
-    layout->addItem(m_playpause);
-    layout->addItem(m_stop);
-    layout->addItem(m_next);
-    //layout->addStretch(1);
+    //m_layout->addStretch(1);
+    m_layout->addItem(m_prev);
+    m_layout->addItem(m_playpause);
+    m_layout->addItem(m_stop);
+    m_layout->addItem(m_next);
+    //m_layout->addStretch(1);
 
-    m_layout = layout;
+    setLayout(m_layout);
 }
 
 Controls::~Controls()
 {
-    // FIXME: mem leak if the widget isn't on a canvas, vs. crash if it is...
-    // delete m_layout;
-    if (!m_playpause->scene()) {
-        delete m_playpause;
-    }
-    if (!m_stop->scene()) {
-        delete m_stop;
-    }
-    if (!m_prev->scene()) {
-        delete m_prev;
-    }
-    if (!m_next->scene()) {
-        delete m_next;
-    }
-}
-
-QGraphicsLayoutItem* Controls::widget() const
-{
-    return m_layout;
 }
 
 void Controls::playPauseClicked()

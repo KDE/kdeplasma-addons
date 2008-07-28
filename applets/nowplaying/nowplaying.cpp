@@ -22,7 +22,7 @@
 
 #include "nowplaying.h"
 #include "controls.h"
-
+#include "infopanel.h"
 
 #include <Plasma/Theme>
 #include <Plasma/Label>
@@ -40,15 +40,9 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_controller(0),
       m_state(NoPlayer),
       m_caps(NoCaps),
-      m_artistLabel(new Plasma::Label),
-      m_titleLabel(new Plasma::Label),
-      m_albumLabel(new Plasma::Label),
-      m_timeLabel(new Plasma::Label),
-      m_artistText(new Plasma::Label),
-      m_titleText(new Plasma::Label),
-      m_albumText(new Plasma::Label),
-      m_timeText(new Plasma::Label),
-      m_textPanel(0),
+      m_volume(0),
+      m_length(0),
+      m_textPanel(new InfoPanel),
       m_buttonPanel(new Controls)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -64,6 +58,9 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
             m_buttonPanel, SLOT(stateChanged(State)));
     connect(this, SIGNAL(capsChanged(Caps)),
             m_buttonPanel, SLOT(setCaps(Caps)));
+
+    connect(this, SIGNAL(metadataChanged(QMap<QString,QString>)),
+            m_textPanel, SLOT(updateMetadata(QMap<QString,QString>)));
 }
 
 NowPlaying::~NowPlaying()
@@ -72,34 +69,9 @@ NowPlaying::~NowPlaying()
 
 void NowPlaying::init()
 {
-    // set up labels
-    m_textPanel = new QGraphicsGridLayout;
-    m_textPanel->setColumnStretchFactor(0, 0);
-    m_textPanel->setColumnSpacing(0, 10);
-    m_textPanel->setColumnAlignment(0, Qt::AlignRight);
-
-    m_artistLabel->setText(i18nc("For a song or other music", "Artist:"));
-    m_artistLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    m_titleLabel->setText(i18nc("For a song or other music", "Title:"));
-    m_titleLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    m_albumLabel->setText(i18nc("For a song or other music", "Album:"));
-    m_albumLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    m_timeLabel->setText(i18nc("Position in a song", "Time:"));
-    m_timeLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-    // TODO: make this configurable
-    m_textPanel->addItem(m_artistLabel, 0, 0);
-    m_textPanel->addItem(m_artistText, 0, 1);
-    m_textPanel->addItem(m_titleLabel, 1, 0);
-    m_textPanel->addItem(m_titleText, 1, 1);
-    m_textPanel->addItem(m_albumLabel, 2, 0);
-    m_textPanel->addItem(m_albumText, 2, 1);
-    m_textPanel->addItem(m_timeLabel, 3, 0);
-    m_textPanel->addItem(m_timeText, 3, 1);
-
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_textPanel);
-    m_layout->addItem(m_buttonPanel->widget());
+    m_layout->addItem(m_buttonPanel);
 
     setLayout(m_layout);
 
@@ -145,19 +117,51 @@ void NowPlaying::dataUpdated(const QString &name,
         m_state = newstate;
     }
 
-    m_artistText->setText(data["Artist"].toString());
-    m_albumText->setText(data["Album"].toString());
-    m_titleText->setText(data["Title"].toString());
-
+    QString timeText;
     int length = data["Length"].toInt();
+    if (length != m_length) {
+        m_length = length;
+        if (length == 0) {
+            emit positionChanged(0);
+        }
+        emit lengthChanged(m_length);
+    }
     if (length != 0) {
         int pos = data["Position"].toInt();
-        m_timeText->setText(QString::number(pos / 60) + ':' +
-                             QString::number(pos % 60).rightJustified(2, '0') + " / " +
-                             QString::number(length / 60) + ':' +
-                             QString::number(length % 60).rightJustified(2, '0'));
-    } else {
-        m_timeText->setText(QString());
+        timeText = QString::number(pos / 60) + ':' +
+                   QString::number(pos % 60).rightJustified(2, '0') + " / " +
+                   QString::number(length / 60) + ':' +
+                   QString::number(length % 60).rightJustified(2, '0');
+        // we assume it's changed
+        emit positionChanged(pos);
+    }
+
+    QMap<QString,QString> metadata;
+    metadata["Artist"] = data["Artist"].toString();
+    metadata["Album"] = data["Album"].toString();
+    metadata["Title"] = data["Title"].toString();
+    metadata["Time"] = timeText;
+    metadata["Track number"] = QString::number(data["Track number"].toInt());
+    metadata["Comment"] = data["Comment"].toString();
+    metadata["Genre"] = data["Genre"].toString();
+
+    // the time should usually have changed
+    emit metadataChanged(metadata);
+
+    if (data["Volume"].toDouble() != m_volume) {
+        m_volume = data["Volume"].toDouble();
+        emit volumeChanged(m_volume * 100);
+    }
+
+    // used for seeing when the track has changed
+    QString track = metadata["Artist"] + " - " + metadata["Title"];
+
+    // assume the artwork didn't change unless the track did
+    if (track != m_track) {
+        m_track = track;
+
+        m_artwork = data["Artwork"].value<QPixmap>();
+        emit coverChanged(m_artwork);
     }
 
     Caps newcaps = NoCaps;

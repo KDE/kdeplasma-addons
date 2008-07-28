@@ -24,6 +24,8 @@
 #include <plasma/dataengine.h>
 #include <plasma/service.h>
 
+#include <QPixmap>
+
 class QGraphicsGridLayout;
 class QGraphicsLinearLayout;
 namespace Plasma {
@@ -31,6 +33,7 @@ namespace Plasma {
     class Icon;
 }
 class Controls;
+class InfoPanel;
 
 enum State {
     Playing,
@@ -63,6 +66,11 @@ public:
 signals:
     void stateChanged(State state);
     void capsChanged(Caps caps);
+    void metadataChanged(const QMap<QString,QString>& metadata);
+    void coverChanged(const QPixmap& picture);
+    void volumeChanged(int volumePercent);
+    void positionChanged(int position);
+    void lengthChanged(int length);
 
 public slots:
     void dataUpdated(const QString &name,
@@ -85,18 +93,13 @@ private:
     State m_state;
     Caps m_caps;
 
-    Plasma::Label* m_artistLabel;
-    Plasma::Label* m_titleLabel;
-    Plasma::Label* m_albumLabel;
-    Plasma::Label* m_timeLabel;
-
-    Plasma::Label* m_artistText;
-    Plasma::Label* m_titleText;
-    Plasma::Label* m_albumText;
-    Plasma::Label* m_timeText;
+    qreal m_volume;
+    int m_length;
+    QString m_track;
+    QPixmap m_artwork;
 
     QGraphicsLinearLayout* m_layout;
-    QGraphicsGridLayout* m_textPanel;
+    InfoPanel* m_textPanel;
     Controls* m_buttonPanel;
 };
 
