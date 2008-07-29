@@ -28,6 +28,7 @@ public:
     {
         m_sizer = ColumnLayout::ColumnSizer::create(ColumnSizer::ColumnSizer::GoldenSizer);
     }
+
     void init(int size)
     {
         m_size = size;
@@ -48,6 +49,7 @@ public:
             return m_sizer->size();
         }
     }
+
 private:
     ColumnLayout::ColumnSizer * m_sizer;
     int m_size;
@@ -79,8 +81,12 @@ public:
         listsLayout->setColumnCount(13);
         listsLayout->setSizer(new PassagewayViewSizer());
 
+        buttonsLayout->setSpacing(0.0);
+
         next(Step("", QIcon(), entranceModel));
         next(Step("", QIcon(), atlasModel));
+
+        lists.at(0)->setExtenderPosition(Lancelot::LeftExtender);
     }
 
     ~Private()
@@ -135,7 +141,10 @@ public:
             new ActionListView(step->model, parent);
 
         button->setIconSize(QSize(24, 24));
-        button->setAlignment(Qt::AlignLeft);
+        button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        kDebug() << parent->group()->name() + "-Button grepme";
+        button->setGroupByName(parent->group()->name() + "-Button");
+        button->setExtenderPosition(Lancelot::LeftExtender);
 
         list->setExtenderPosition(RightExtender);
 
@@ -171,12 +180,14 @@ public:
 PassagewayView::PassagewayView(QGraphicsItem * parent)
     : Panel(parent), d(new Private(NULL, NULL, this))
 {
+    setGroupByName("PassagewayView");
 }
 
 PassagewayView::PassagewayView(PassagewayViewModel * entranceModel,
     PassagewayViewModel * atlasModel, QGraphicsItem * parent)
     : Panel(parent), d(new Private(entranceModel, atlasModel, this))
 {
+    setGroupByName("PassagewayView");
 }
 
 void PassagewayView::pathButtonActivated()
@@ -190,17 +201,21 @@ void PassagewayView::pathButtonActivated()
 
 void PassagewayView::listItemActivated(int index)
 {
-    for (int i = d->lists.size() - 1; i >= 0; --i) {
-        if (d->lists.at(i) == sender()) {
-            d->back(d->lists.size() - i - 1);
+    int activatedListIndex = d->lists.indexOf((ActionListView *)sender());
+    if (activatedListIndex == 0) {
+        // something in the entrance is clicked
+        // we don't want to remove the first level
+        // of atlas as well
+        d->back(d->lists.size() - activatedListIndex - 2);
+    } else {
+        d->back(d->lists.size() - activatedListIndex - 1);
+    }
 
-            PassagewayViewModel * model = d->path.at(i)->model;
-            if (model) {
-                model = model->child(index);
-                if (model) {
-                    d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
-                }
-            }
+    PassagewayViewModel * model = d->path.at(activatedListIndex)->model;
+    if (model) {
+        model = model->child(index);
+        if (model) {
+            d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
         }
     }
 }
@@ -252,6 +267,15 @@ void PassagewayView::setAtlasIcon(QIcon icon)
     if (d->lists.size() < 2) return;
     d->path.at(1)->icon = icon;
     d->buttons.at(1)->setIcon(icon);
+}
+
+void PassagewayView::setGroup(WidgetGroup * g)
+{
+    Widget::setGroup(g);
+
+    foreach (ExtenderButton * button, d->buttons) {
+        button->setGroupByName(group()->name() + "-Button");
+    }
 }
 
 } // namespace Lancelot

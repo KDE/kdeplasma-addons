@@ -68,6 +68,8 @@ public:
     void setAtlasTitle(const QString & title);
     void setAtlasIcon(QIcon icon);
 
+    L_Override virtual void setGroup(WidgetGroup * group = NULL);
+
 protected Q_SLOTS:
     virtual void listItemActivated(int index);
     virtual void pathButtonActivated();
