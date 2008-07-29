@@ -1,9 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
-Name[et]=Sümbolivalija
 Comment=Character selector applet
-Comment[et]=Sümbolite valimise aplett
 Type=Service
 Icon=accessories-character-map
 ServiceTypes=Plasma/Applet

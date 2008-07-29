@@ -1,14 +1,6 @@
 [Desktop Entry]
 Name=Calendar
-Name[pt]=Calendário
-Name[pt_BR]=Calendário
-Name[sv]=Kalender
-Name[uk]=Календар
 Comment=A calendar
-Comment[pt]=Um calendário
-Comment[pt_BR]=Um calendário
-Comment[sv]=En kalender
-Comment[uk]=Календар
 Type=Service
 Icon=view-pim-calendar
 X-KDE-ServiceTypes=Plasma/Applet
