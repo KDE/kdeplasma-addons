@@ -43,7 +43,7 @@ public:
         if (m_size <= 2) return 1.0 / m_size;
         if (m_pass) {
             m_pass = false;
-            return 0.01;
+            return 0.0;
         } else {
             return m_sizer->size();
         }

@@ -205,11 +205,6 @@ LancelotWindow::LancelotWindow()
     m_root->setGroupByName("RootPanel");
     m_corona->addItem(m_root);
 
-    /* Dirty hack to get an edit box before Qt 4.4 :: begin */
-    // _m_view = m_view;
-    // _m_root = m_root;
-    /* Dirty hack to get an edit box before Qt 4.4 :: end */
-
     setupUi(m_root);
     m_root->setLayoutItem(layoutMain);
 
@@ -226,6 +221,12 @@ LancelotWindow::LancelotWindow()
         Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
     );
     editSearch->nativeWidget()->installEventFilter(this);
+
+    passagewayApplications->setEntranceTitle(i18n("Favorites"));
+    passagewayApplications->setEntranceIcon(KIcon("favorites"));
+    passagewayApplications->setAtlasTitle(i18n("Applications"));
+    passagewayApplications->setAtlasIcon(KIcon("applications-other"));
+    /* End TODO */
 
     instance->activateAll();
 
@@ -306,11 +307,11 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     m_resizeDirection = None;
     m_hideTimer.stop();
 
-    resizeWindow();
     if (isVisible()) {
         // We are exiting because we do not want to move already opened window
         // because most probably it is just invoked from the same applet and
         // needs to show only another category
+        resizeWindow();
         return;
     }
 
@@ -349,13 +350,16 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
 
     layoutMain->setFlip(flip);
     layoutSections->setFlip(flip);
+    resizeWindow();
 
     instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
             (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
     ));
     instance->group("SystemButtons")->notifyUpdated();
 
-    //resizeWindow();
+    if (m_showingFull) {
+        sectionActivated("applications");
+    }
 
     move(x, y);
     show();
@@ -363,6 +367,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     KWindowSystem::forceActiveWindow(winId());
     editSearch->setFocus();
     editSearch->setText(QString());
+
 }
 
 void LancelotWindow::resizeWindow()
@@ -420,11 +425,11 @@ QStringList LancelotWindow::sectionIcons()
 void LancelotWindow::sectionActivated(const QString & item)
 {
     foreach (Lancelot::ExtenderButton * button, sectionButtons) {
-        // button->setChecked(false);
+        button->setChecked(false);
     }
 
     if (sectionButtons.contains(item)) {
-         // sectionButtons[item]->setChecked(true);
+        sectionButtons[item]->setChecked(true);
     }
 
     layoutCenter->show(item);

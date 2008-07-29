@@ -112,12 +112,16 @@ public:
                 item->setVisible(false);
             } else {
                 qreal itemWidth = sizer->size() * width;
-                newGeometry.setWidth(itemWidth);
-                item->setGeometry(newGeometry);
-                if (!item->isVisible()) {
-                    item->setVisible(true);
+                if (itemWidth != 0) {
+                    newGeometry.setWidth(itemWidth);
+                    item->setGeometry(newGeometry);
+                    if (!item->isVisible()) {
+                        item->setVisible(true);
+                    }
+                    newGeometry.moveLeft(newGeometry.left() + itemWidth);
+                } else {
+                    item->setVisible(false);
                 }
-                newGeometry.moveLeft(newGeometry.left() + itemWidth);
             }
         }
     }
