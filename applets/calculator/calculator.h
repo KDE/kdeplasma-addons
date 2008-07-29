@@ -21,7 +21,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <plasma/applet.h>
+#include <plasma/popupapplet.h>
 
 class QLabel;
 class QAction;
@@ -33,15 +33,13 @@ namespace Plasma
     class PushButton;
 }
 
-class CalculatorApplet : public Plasma::Applet
+class CalculatorApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
 
 public:
     CalculatorApplet( QObject *parent, const QVariantList &args );
     ~CalculatorApplet();
-
-    void init();
 
     virtual QList<QAction*> contextualActions();
 
@@ -61,7 +59,6 @@ private Q_SLOTS:
 
 protected:
     virtual void keyPressEvent ( QKeyEvent * event );
-    void constraintsEvent(Plasma::Constraints constraints);
 
 private:
     double sum;
@@ -69,6 +66,7 @@ private:
     enum {NumDigitButtons = 10, MaxInputLength=10};
     enum calcOperator { calcNone, calcPlus, calcMinus, calcMult, calcDiv};
 
+    virtual QGraphicsWidget *graphicsWidget();
     bool calculate(double newValue, calcOperator oldOperator);
 
     QString inputText;
@@ -86,8 +84,8 @@ private:
     Plasma::PushButton *mButtonEquals;
     Plasma::PushButton *mButtonClear;
     Plasma::PushButton *mButtonAllClear;
+    QGraphicsWidget *m_widget;
     QGraphicsGridLayout *m_layout;
-    QGraphicsProxyWidget *m_proxy;
     QList<QAction *> actions;
 };
 
