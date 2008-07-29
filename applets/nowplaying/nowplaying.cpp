@@ -24,12 +24,10 @@
 #include "controls.h"
 #include "infopanel.h"
 
-#include <Plasma/Theme>
-#include <Plasma/Label>
+#include <Plasma/Slider>
 
 #include <QGraphicsGridLayout>
 #include <QGraphicsLinearLayout>
-#include <QLabel>
 
 
 K_EXPORT_PLASMA_APPLET(nowplaying, NowPlaying)
@@ -43,7 +41,9 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_volume(0),
       m_length(0),
       m_textPanel(new InfoPanel),
-      m_buttonPanel(new Controls)
+      m_buttonPanel(new Controls),
+      m_volumeSlider(new Plasma::Slider(Qt::Vertical)),
+      m_positionSlider(new Plasma::Slider(Qt::Horizontal))
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 165);
@@ -61,6 +61,26 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
 
     connect(this, SIGNAL(metadataChanged(QMap<QString,QString>)),
             m_textPanel, SLOT(updateMetadata(QMap<QString,QString>)));
+
+    m_volumeSlider->setMinimum(0);
+    m_volumeSlider->setMaximum(100);
+    m_volumeSlider->setValue(0);
+    connect(this, SIGNAL(volumeChanged(int)),
+            m_volumeSlider, SLOT(setValue(int)));
+    connect(m_volumeSlider, SIGNAL(sliderMoved(int)),
+            this, SLOT(setVolume(int)));
+    m_volumeSlider->setEnabled(false);
+
+    m_positionSlider->setMinimum(0);
+    m_positionSlider->setMaximum(0);
+    m_positionSlider->setValue(0);
+    connect(this, SIGNAL(positionChanged(int)),
+            m_positionSlider, SLOT(setValue(int)));
+    connect(this, SIGNAL(lengthChanged(int)),
+            m_positionSlider, SLOT(setMaximum(int)));
+    connect(m_positionSlider, SIGNAL(sliderMoved(int)),
+            this, SLOT(setPosition(int)));
+    m_positionSlider->setEnabled(false);
 }
 
 NowPlaying::~NowPlaying()
@@ -69,9 +89,11 @@ NowPlaying::~NowPlaying()
 
 void NowPlaying::init()
 {
-    m_layout = new QGraphicsLinearLayout(Qt::Vertical);
-    m_layout->addItem(m_textPanel);
-    m_layout->addItem(m_buttonPanel);
+    m_layout = new QGraphicsGridLayout();
+    m_layout->addItem(m_textPanel, 0, 0);
+    m_layout->addItem(m_buttonPanel, 1, 0);
+    m_layout->addItem(m_positionSlider, 2, 0);
+    m_layout->addItem(m_volumeSlider, 0, 1, 3, 1); // rowspan, colspan
 
     setLayout(m_layout);
 
@@ -148,6 +170,8 @@ void NowPlaying::dataUpdated(const QString &name,
     // the time should usually have changed
     emit metadataChanged(metadata);
 
+    // TODO: we should set a tooltip with the timeText on the position slider
+
     if (data["Volume"].toDouble() != m_volume) {
         m_volume = data["Volume"].toDouble();
         emit volumeChanged(m_volume * 100);
@@ -180,9 +204,17 @@ void NowPlaying::dataUpdated(const QString &name,
     if (data["Can skip forward"].toBool()) {
         newcaps |= CanGoNext;
     }
+    if (data["Can seek"].toBool()) {
+        newcaps |= CanSeek;
+    }
+    if (data["Can set volume"].toBool()) {
+        newcaps |= CanSetVolume;
+    }
     if (newcaps != m_caps) {
         emit capsChanged(newcaps);
         m_caps = newcaps;
+        m_positionSlider->setEnabled(m_caps & CanSeek);
+        m_volumeSlider->setEnabled(m_caps & CanSetVolume);
     }
 
     update();
@@ -218,6 +250,8 @@ void NowPlaying::findPlayer()
 
         emit stateChanged(m_state);
         emit capsChanged(m_caps);
+        m_positionSlider->setEnabled(false);
+        m_volumeSlider->setEnabled(false);
         update();
     } else {
         m_watchingPlayer = players.first();
@@ -259,6 +293,25 @@ void NowPlaying::next()
 {
     if (m_controller) {
         m_controller->startOperationCall(m_controller->operationDescription("next"));
+    }
+}
+
+void NowPlaying::setVolume(int volumePercent)
+{
+    qreal volume = ((qreal)qBound(0, volumePercent, 100)) / 100;
+    if (m_controller) {
+        KConfigGroup op = m_controller->operationDescription("volume");
+        op.writeEntry("level", volume);
+        m_controller->startOperationCall(op);
+    }
+}
+
+void NowPlaying::seek(int position)
+{
+    if (m_controller) {
+        KConfigGroup op = m_controller->operationDescription("seek");
+        op.writeEntry("seconds", position);
+        m_controller->startOperationCall(op);
     }
 }
 

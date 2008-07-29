@@ -29,8 +29,7 @@
 class QGraphicsGridLayout;
 class QGraphicsLinearLayout;
 namespace Plasma {
-    class Label;
-    class Icon;
+    class Slider;
 }
 class Controls;
 class InfoPanel;
@@ -48,7 +47,9 @@ enum CapsFlags {
     CanPause = 2,
     CanStop = 4,
     CanGoPrevious = 8,
-    CanGoNext = 16
+    CanGoNext = 16,
+    CanSeek = 32,
+    CanSetVolume = 64
 };
 Q_DECLARE_FLAGS(Caps, CapsFlags)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Caps)
@@ -84,6 +85,8 @@ private slots:
     void stop();
     void prev();
     void next();
+    void setVolume(int volumePercent);
+    void seek(int position);
 
 private:
     void findPlayer();
@@ -98,9 +101,11 @@ private:
     QString m_track;
     QPixmap m_artwork;
 
-    QGraphicsLinearLayout* m_layout;
+    QGraphicsGridLayout* m_layout;
     InfoPanel* m_textPanel;
     Controls* m_buttonPanel;
+    Plasma::Slider* m_volumeSlider;
+    Plasma::Slider* m_positionSlider;
 };
 
 #endif // NOWPLAYING_H
