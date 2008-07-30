@@ -68,6 +68,7 @@ class Notes : public Plasma::Applet
         bool m_autoFont;
         bool m_checkSpelling;
         void updateTextGeometry();
+        void addColor(const QString &id, const QString &colorName);
 
         QTimer m_saveTimer;
         QFont m_font;

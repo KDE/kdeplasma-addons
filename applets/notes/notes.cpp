@@ -64,38 +64,17 @@ void Notes::init()
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
     m_layout->addItem(m_textEdit);
 
-    QAction *tmpAction = new QAction(i18n("White"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "white");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Black"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "black");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Red"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "red");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Orange"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "orange");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Yellow"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "yellow");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Green"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "green");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Blue"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "blue");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
-    tmpAction = new QAction(i18n("Pink"), this);
-    m_colorActions.append(tmpAction);
-    tmpAction->setProperty("color", "pink");
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
+    addColor("white", i18n("White"));
+    addColor("black", i18n("Black"));
+    addColor("red", i18n("Red"));
+    addColor("orange", i18n("Orange"));
+    addColor("yellow", i18n("Yellow"));
+    addColor("green", i18n("Green"));
+    addColor("blue", i18n("Blue"));
+    addColor("pink", i18n("Pink"));
+    QAction *separator = new QAction(this);
+    separator->setSeparator(true);
+    m_colorActions.append(separator);
 
     m_autoFont = false;
 
@@ -163,6 +142,14 @@ void Notes::saveNote()
     cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toPlainText());
     //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
+}
+
+void Notes::addColor(const QString &id, const QString &colorName)
+{
+    QAction *tmpAction = new QAction(colorName, this);
+    m_colorActions.append(tmpAction);
+    tmpAction->setProperty("color", id);
+    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
 }
 
 void Notes::changeColor()
