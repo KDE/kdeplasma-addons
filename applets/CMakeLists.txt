@@ -1,8 +1,6 @@
-MESSAGE(STATUS "Some Applets have been disabled from the build for now until API changes are in")
-
 if(PLASMA_OPENGL_FOUND)
   MESSAGE(STATUS "libplasma supports OpenGL applets")
-  #add_subdirectory(bluemarble)
+  add_subdirectory(bluemarble)
 else(PLASMA_OPENGL_FOUND)
      MESSAGE(STATUS "libplasma doesn't support OpenGL applets")
 endif(PLASMA_OPENGL_FOUND)
