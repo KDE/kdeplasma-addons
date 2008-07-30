@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
+Name[pt_BR]=Seletor de caracteres
+Name[uk]=Таблиця символів
 Comment=Character selector applet
+Comment[pt_BR]=Miniaplicativo seletor de caracteres
+Comment[uk]=Аплет для вибору символів
 Type=Service
 Icon=accessories-character-map
 ServiceTypes=Plasma/Applet
