@@ -16,7 +16,6 @@ TODO: (a) Speed up
 TODO: (a) Configuration
 
 Library:
-TODO: (h) convert to WoC
 TODO: (e) check for memory leaks related to Private
 TODO: (a) switch groups to QMetaObject and properties
 TODO: (m) add margin features to layouts
@@ -27,8 +26,7 @@ TODO: (e) move the groups mechanism away from Widget
 TODO: (a) create new lists (scroll panes...)
 TODO: (a) add menu widget
 
-Applet:
-TODO: (m) fix the hovering
+Launcher Applet:
 
-Parts:
+Parts Applet:
 TODO: (h) Make it :)
