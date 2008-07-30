@@ -7,7 +7,7 @@ set(twitter_engine_SRCS
 
 kde4_add_plugin(plasma_engine_twitter ${twitter_engine_SRCS})
 target_link_libraries(plasma_engine_twitter ${KDE4_KIO_LIBS}
-${PLASMA_LIBS} ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS} ${QT_QTGUI_LIBRARY})
+${PLASMA_LIBS} ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS})
 
 install(TARGETS plasma_engine_twitter DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-twitter.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
