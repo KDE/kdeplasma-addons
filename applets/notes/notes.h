@@ -80,7 +80,6 @@ class Notes : public Plasma::Applet
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
         Plasma::TextEdit *m_textEdit;
-        QString m_defaultText;
         Ui::config ui;
 
         QSizeF m_size;

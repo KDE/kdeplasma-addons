@@ -56,7 +56,6 @@ void Notes::init()
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
 
-    m_defaultText = i18n("Welcome to the Notes Plasmoid! Type your notes here...");
     m_textEdit = new Plasma::TextEdit();
     m_textEdit->setMinimumSize(QSize(0, 0));
     m_layout = new QGraphicsLinearLayout(this);
@@ -83,14 +82,13 @@ void Notes::init()
     // color must be before setPlainText("foo")
     m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
-    //m_textEdit->nativeWidget()->setClickMessage(m_defaultText);
+    #ifdef KTEXTEDIT_CLICKMSG_SUPPORT
+    m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
+    #endif
 
     QString text = cg.readEntry("autoSave", QString());
-    if (! text.isEmpty()) {
-        m_textEdit->nativeWidget()->setPlainText(text);
-    } else {
-        //m_textEdit->nativeWidget()->setPlainText(m_defaultText);
-    }
+    m_textEdit->nativeWidget()->setPlainText(text);
+
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
