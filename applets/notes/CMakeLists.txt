@@ -12,7 +12,7 @@ kde4_add_ui_files(notes_SRCS config.ui)
 
 kde4_add_plugin(plasma_applet_notes ${notes_SRCS})
 target_link_libraries(plasma_applet_notes
-            ${PLASMA_LIBS} ${KDE4_KIO_LIBS}
+            ${PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY}
             )
 install(
     TARGETS plasma_applet_notes

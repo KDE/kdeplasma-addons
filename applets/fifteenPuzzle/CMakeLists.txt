@@ -10,7 +10,7 @@ qt4_add_resources(fifteenPuzzle_SRCS resources.qrc)
 kde4_add_ui_files(fifteenPuzzle_SRCS src/fifteenPuzzleConfig.ui )
 kde4_add_plugin(plasma_applet_fifteenPuzzle ${fifteenPuzzle_SRCS})
 
-target_link_libraries(plasma_applet_fifteenPuzzle ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(plasma_applet_fifteenPuzzle ${PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY})
 
 
 install(TARGETS plasma_applet_fifteenPuzzle DESTINATION ${PLUGIN_INSTALL_DIR})

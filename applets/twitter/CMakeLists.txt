@@ -5,7 +5,7 @@ set(twitter_SRCS
     twitter.cpp)
 
 kde4_add_plugin(plasma_applet_twitter ${twitter_SRCS})
-target_link_libraries(plasma_applet_twitter ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(plasma_applet_twitter ${PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY})
 
 install(TARGETS plasma_applet_twitter DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-twitter-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
