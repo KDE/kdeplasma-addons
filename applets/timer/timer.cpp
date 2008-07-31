@@ -168,22 +168,6 @@ void Timer::slotCountDone()
 
         KToolInvocation::kdeinitExec(command, args);
     }
-
-    if (view()->hasFocus()) return;
-
-    QDBusMessage aMessage = QDBusMessage::createMethodCall("org.kde.plasma", "/App", "", "toggleDashboard");
-    QDBusConnection::sessionBus().send(aMessage);
-
-    view()->grabKeyboard();
-    view()->grabMouse();
-
-    QTimer::singleShot(3000, this, SLOT(slotReleaseKeyboardAndMouse()));
-}
-
-void Timer::slotReleaseKeyboardAndMouse()
-{
-    view()->releaseMouse();
-    view()->releaseKeyboard();
 }
 
 void Timer::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *)

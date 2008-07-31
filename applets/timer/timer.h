@@ -54,7 +54,6 @@ class Timer : public Plasma::Applet
     private slots:
         void updateTimer();
         void slotCountDone();
-        void slotReleaseKeyboardAndMouse();
         void startTimer();
         void stopTimer();
         void resetTimer();
