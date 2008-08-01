@@ -14,6 +14,7 @@ TODO: (m) Switch menu instead of searching for SESSIONS
 TODO: (m) Switch to new lists
 TODO: (a) Speed up
 TODO: (a) Configuration
+TODO: (e) Switch 'Log out' <-> 'Switch user' (should I?)
 
 Library:
 TODO: (e) check for memory leaks related to Private
