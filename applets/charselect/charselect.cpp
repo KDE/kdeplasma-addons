@@ -44,6 +44,7 @@ QWidget *CharSelectApplet::widget()
 {
     if (!m_mainWidget) {
         m_mainWidget = new QWidget;
+        m_mainWidget->setAttribute(Qt::WA_NoSystemBackground);
         QGridLayout *layout = new QGridLayout(m_mainWidget);
 
         m_charselect = new KCharSelect(m_mainWidget, KCharSelect::CharacterTable|KCharSelect::FontCombo);
