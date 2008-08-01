@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Show Dashboard
+Name=Show Widget Dashboard
 Name[ca]=Mostra el tauler
 Name[da]=Vis instrumentbræt
 Name[de]=Dashboard anzeigen
@@ -31,7 +31,7 @@ Name[uk]=Показати панель приладів
 Name[x-test]=xxShow Dashboardxx
 Name[zh_CN]=显示部件板
 Name[zh_TW]=顯示儀表板
-Comment=Lets you show the dashboard
+Comment=Shows the widget dashboard above your other windows when clicked
 Comment[ca]=Us permet veure el tauler
 Comment[da]=Lader dig vise instrumentbrættet
 Comment[de]=Zeigt das Dashboard an
