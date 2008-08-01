@@ -1,7 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[uk]=Таймер
 Comment=A timer plasmoid.
+Comment[uk]=Плазмоїд таймера.
 Type=Service
 Icon=chronometer
 ServiceTypes=Plasma/Applet
