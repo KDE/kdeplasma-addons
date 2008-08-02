@@ -2,10 +2,12 @@
 Encoding=UTF-8
 Name=Character Selector
 Name[pt_BR]=Seletor de caracteres
+Name[tr]=Karakter Seçici
 Name[uk]=Таблиця символів
 Name[zh_TW]=字元選擇器
 Comment=Character selector applet
 Comment[pt_BR]=Miniaplicativo seletor de caracteres
+Comment[tr]=Karakter seçme programcığı
 Comment[uk]=Аплет для вибору символів
 Comment[zh_TW]=字元選擇器小程式
 Type=Service

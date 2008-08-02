@@ -1,9 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[tr]=Zamanlayıcı
 Name[uk]=Таймер
+Name[zh_TW]=計時器
 Comment=A timer plasmoid.
+Comment[tr]=Zamanlayıcı plasma programcığı.
 Comment[uk]=Плазмоїд таймера.
+Comment[zh_TW]=計時器元件。
 Type=Service
 Icon=chronometer
 ServiceTypes=Plasma/Applet
