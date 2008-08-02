@@ -1,0 +1,144 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.kmail.kmail">
+    <signal name="unreadCountChanged">
+    </signal>
+    <method name="checkMail">
+    </method>
+    <method name="openReader">
+    </method>
+    <method name="compactAllFolders">
+    </method>
+    <method name="pauseBackgroundJobs">
+    </method>
+    <method name="resumeBackgroundJobs">
+    </method>
+    <method name="stopNetworkJobs">
+    </method>
+    <method name="resumeNetworkJobs">
+    </method>
+    <method name="folderList">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="accounts">
+      <arg type="as" direction="out"/>
+    </method>
+    <method name="checkAccount">
+      <arg name="account" type="s" direction="in"/>
+    </method>
+    <method name="selectFolder">
+      <arg name="folder" type="s" direction="in"/>
+    </method>
+    <method name="getFolder">
+      <arg type="s" direction="out"/>
+      <arg name="vpath" type="s" direction="in"/>
+    </method>
+    <method name="canQueryClose">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="setDefaultTransport">
+      <arg name="transport" type="s" direction="in"/>
+    </method>
+    <method name="timeOfLastMessageCountChange">
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="dbusAddMessage">
+      <arg type="i" direction="out"/>
+      <arg name="foldername" type="s" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+      <arg name="MsgStatusFlags" type="s" direction="in"/>
+    </method>
+    <method name="dbusAddMessage">
+      <arg type="i" direction="out"/>
+      <arg name="foldername" type="s" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+    </method>
+    <method name="dbusAddMessage_fastImport">
+      <arg type="i" direction="out"/>
+      <arg name="foldername" type="s" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+      <arg name="MsgStatusFlags" type="s" direction="in"/>
+    </method>
+    <method name="dbusAddMessage_fastImport">
+      <arg type="i" direction="out"/>
+      <arg name="foldername" type="s" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+    </method>
+    <method name="dbusResetAddMessage">
+    </method>
+    <method name="sendCertificate">
+      <arg type="i" direction="out"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="certData" type="ay" direction="in"/>
+    </method>
+    <method name="handleCommandLine">
+      <arg type="b" direction="out"/>
+      <arg name="noArgsOpensReader" type="b" direction="in"/>
+    </method>
+    <method name="debugScheduler">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="openComposer">
+      <arg type="i" direction="out"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="cc" type="s" direction="in"/>
+      <arg name="bcc" type="s" direction="in"/>
+      <arg name="subject" type="s" direction="in"/>
+      <arg name="body" type="s" direction="in"/>
+      <arg name="hidden" type="b" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+      <arg name="attachmentPaths" type="as" direction="in"/>
+      <arg name="customHeaders" type="as" direction="in"/>
+    </method>
+    <method name="openComposer">
+      <arg type="i" direction="out"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="cc" type="s" direction="in"/>
+      <arg name="bcc" type="s" direction="in"/>
+      <arg name="subject" type="s" direction="in"/>
+      <arg name="body" type="s" direction="in"/>
+      <arg name="hidden" type="b" direction="in"/>
+      <arg name="attachName" type="s" direction="in"/>
+      <arg name="attachCte" type="ay" direction="in"/>
+      <arg name="attachData" type="ay" direction="in"/>
+      <arg name="attachType" type="ay" direction="in"/>
+      <arg name="attachSubType" type="ay" direction="in"/>
+      <arg name="attachParamAttr" type="ay" direction="in"/>
+      <arg name="attachParamValue" type="s" direction="in"/>
+      <arg name="attachContDisp" type="ay" direction="in"/>
+      <arg name="attachCharset" type="ay" direction="in"/>
+    </method>
+    <method name="openComposer">
+      <arg type="o" direction="out"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="cc" type="s" direction="in"/>
+      <arg name="bcc" type="s" direction="in"/>
+      <arg name="subject" type="s" direction="in"/>
+      <arg name="body" type="s" direction="in"/>
+      <arg name="hidden" type="b" direction="in"/>
+    </method>
+    <method name="newMessage">
+      <arg type="o" direction="out"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="cc" type="s" direction="in"/>
+      <arg name="bcc" type="s" direction="in"/>
+      <arg name="hidden" type="b" direction="in"/>
+      <arg name="useFolderId" type="b" direction="in"/>
+      <arg name="messageFile" type="s" direction="in"/>
+      <arg name="attachURL" type="s" direction="in"/>
+    </method>
+    <method name="showMail">
+      <arg type="b" direction="out"/>
+      <arg name="serialNumber" type="u" direction="in"/>
+      <arg name="messageId" type="s" direction="in"/>
+    </method>
+    <method name="getFrom">
+      <arg type="s" direction="out"/>
+      <arg name="serialNumber" type="u" direction="in"/>
+    </method>
+    <method name="debugSernum">
+      <arg type="s" direction="out"/>
+      <arg name="serialNumber" type="u" direction="in"/>
+    </method>
+  </interface>
+</node>
