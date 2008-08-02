@@ -55,16 +55,22 @@ set(plasma_lancelot_client_SRCS
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${screensaver_xml} screensaver_interface)
 
-set(krunner_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.krunner.Interface.xml)
-qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${krunner_xml} krunner_interface)
+# set(krunner_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.krunner.Interface.xml)
+# qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${krunner_xml} krunner_interface)
 
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
 
 set(kmail_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.kmail.xml)
+if (NOT EXISTS ${kmail_xml})
+  set(kmail_xml external/org.kde.kmail.kmail.xml)
+endif (NOT EXISTS ${kmail_xml})
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kmail_xml} kmail_interface)
 
 set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
+if (NOT EXISTS ${kopete_xml})
+  set(kopete_xml external/org.kde.Kopete.xml)
+endif (NOT EXISTS ${kopete_xml})
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kopete_xml} kopete_interface)
 
 set(lancelot_xml org.kde.lancelot.xml)

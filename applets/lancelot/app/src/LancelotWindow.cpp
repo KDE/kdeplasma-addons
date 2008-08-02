@@ -32,7 +32,7 @@
 #include <kworkspace/kworkspace.h>
 #include "ksmserver_interface.h"
 #include "screensaver_interface.h"
-#include "krunner_interface.h"
+// #include "krunner_interface.h"
 
 #include "models/Devices.h"
 #include "models/Places.h"

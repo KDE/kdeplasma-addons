@@ -125,10 +125,8 @@ public:
             buttonsLayout->removeItem(button);
             listsLayout->pop();
 
-            //delete button;  // TODO: Find a way to do this
-            //delete list;    // TODO: Find a way to do this
-            button->hide();
-            list->hide();
+            delete button;  // TODO: Find a way to do this
+            delete list;    // TODO: Find a way to do this
         }
     }
 
