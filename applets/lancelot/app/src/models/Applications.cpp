@@ -19,6 +19,7 @@
  */
 
 #include "Applications.h"
+#include "FavoriteApplications.h"
 
 #include <kstandarddirs.h>
 #include <kservicegroup.h>
@@ -162,6 +163,35 @@ QString Applications::modelTitle() const
 QIcon Applications::modelIcon() const
 {
     return m_icon;
+}
+
+bool Applications::hasContextActions(int index) const
+{
+    return !isCategory(index);
+}
+
+void Applications::setContextActions(int index, QMenu * menu)
+{
+    if (isCategory(index)) {
+        return;
+    }
+
+    menu->addAction(KIcon("list-add"), i18n("Add to favorites"))
+        ->setData(QVariant(0));
+}
+
+void Applications::contextActivate(int index, QAction * context)
+{
+    if (!context) {
+        return;
+    }
+
+    int appIndex = index - m_submodels.size();
+    kDebug() << appIndex << m_items.size();
+    if (context->data().toInt() == 0) {
+        FavoriteApplications::instance()
+            ->addFavorite(m_items.at(appIndex).desktopFile);
+    }
 }
 
 } // namespace Models

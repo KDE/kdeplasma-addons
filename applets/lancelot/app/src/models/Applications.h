@@ -32,19 +32,23 @@ public:
     Applications(QString root = "", QString title = "", QIcon icon = QIcon());
     virtual ~Applications();
 
-    QString title(int index) const;
-    QString description(int index) const;
-    QIcon icon(int index) const;
-    bool isCategory(int index) const;
+    L_Override virtual QString title(int index) const;
+    L_Override virtual QString description(int index) const;
+    L_Override virtual QIcon icon(int index) const;
+    L_Override virtual bool isCategory(int index) const;
 
-    int size() const;
+    L_Override virtual int size() const;
 
-    PassagewayViewModel * child(int index);
-    QString modelTitle() const;
-    QIcon modelIcon()  const;
+    L_Override virtual PassagewayViewModel * child(int index);
+    L_Override virtual QString modelTitle() const;
+    L_Override virtual QIcon modelIcon()  const;
+
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
 
 public slots:
-    void activate(int index);
+    virtual void activate(int index);
 
 private:
     void load();

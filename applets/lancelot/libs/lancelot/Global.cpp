@@ -206,10 +206,11 @@ void WidgetGroup::load(bool full)
             delete d->backgroundSvg;
         }
 
-        kDebug() << "Svg Location " << d->confGroupTheme->readEntry("background.svg");
+        kDebug() << "SVG Location " << d->confGroupTheme->readEntry("background.svg");
         d->backgroundSvg = new Plasma::PanelSvg(NULL);
         d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
-        kDebug() << "Svg " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal-center");
+
+        kDebug() << "SVG " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal-center");
         kDebug() << d->backgroundSvg->hasElement("center");
         d->ownsBackgroundSvg = true;
     }

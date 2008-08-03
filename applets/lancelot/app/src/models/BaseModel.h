@@ -37,11 +37,15 @@ protected:
     virtual void activate(int index);
     virtual void load() = 0;
 
-    void addService(const QString & service);
-    void addService(const KService::Ptr & service);
+    bool addService(const QString & service);
+    bool addService(const KService::Ptr & service);
 
-    void addUrl(const QString & url);
-    void addUrl(const KUrl & url);
+    void addServices(const QStringList & services);
+
+    bool addUrl(const QString & url);
+    bool addUrl(const KUrl & url);
+
+    void addUrls(const QStringList & urls);
 
     void hideLancelotWindow();
     void changeLancelotSearchString(const QString & string);

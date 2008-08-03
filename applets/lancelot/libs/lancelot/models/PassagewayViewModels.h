@@ -43,17 +43,20 @@ public:
             QString title = QString(), QIcon icon = QIcon());
 
     // PassagewayViewModel
-    PassagewayViewModel * child(int index);
-    QString modelTitle() const;
-    QIcon modelIcon()  const;
+    L_Override virtual PassagewayViewModel * child(int index);
+    L_Override virtual QString modelTitle() const;
+    L_Override virtual QIcon modelIcon()  const;
 
     // ActionListViewModel
-    QString title(int index) const;
-    QString description(int index) const;
-    QIcon icon(int index) const;
-    bool isCategory(int index) const;
+    L_Override virtual QString title(int index) const;
+    L_Override virtual QString description(int index) const;
+    L_Override virtual QIcon icon(int index) const;
+    L_Override virtual bool isCategory(int index) const;
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
 
-    int size() const;
+    L_Override virtual int size() const;
 
 Q_SIGNALS:
     void itemActivated(int index);

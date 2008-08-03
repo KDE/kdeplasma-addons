@@ -56,34 +56,55 @@ void BaseModel::changeLancelotSearchString(const QString & string)
     LancelotApplication::search(string);
 }
 
-void BaseModel::addService(const QString & serviceName)
+void BaseModel::addServices(const QStringList & serviceNames)
 {
-    const KService::Ptr service = KService::serviceByStorageId(serviceName);
-    addService(service);
-}
-
-void BaseModel::addService(const KService::Ptr & service)
-{
-    if (service) {
-        QString genericName = service->genericName();
-        QString appName = service->name();
-
-        add(
-            genericName.isEmpty() ? appName : genericName,
-            genericName.isEmpty() ? "" : appName,
-            KIcon(service->icon()),
-            service->entryPath()
-        );
+    foreach (const QString & serviceAlternatives, serviceNames) {
+        foreach (const QString & serviceName, serviceAlternatives.split("|")) {
+            if (addService(serviceName)) {
+                break;
+            }
+        }
     }
 }
 
-void BaseModel::addUrl(const QString & url)
+bool BaseModel::addService(const QString & serviceName)
 {
-    const KUrl kurl(url);
-    addUrl(kurl);
+    const KService::Ptr service = KService::serviceByStorageId(serviceName);
+    return addService(service);
 }
 
-void BaseModel::addUrl(const KUrl & url)
+bool BaseModel::addService(const KService::Ptr & service)
+{
+    if (!service) {
+        return false;
+    }
+
+    QString genericName = service->genericName();
+    QString appName = service->name();
+
+    add(
+        genericName.isEmpty() ? appName : genericName,
+        genericName.isEmpty() ? "" : appName,
+        KIcon(service->icon()),
+        service->entryPath()
+    );
+    return true;
+}
+
+void BaseModel::addUrls(const QStringList & urls)
+{
+    foreach (const QString & url, urls) {
+        addUrl(url);
+    }
+}
+
+bool BaseModel::addUrl(const QString & url)
+{
+    const KUrl kurl(url);
+    return addUrl(kurl);
+}
+
+bool BaseModel::addUrl(const KUrl & url)
 {
     kDebug() << url;
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
@@ -93,10 +114,8 @@ void BaseModel::addUrl(const KUrl & url)
         // first look in the KDE service database to see if this file is a service,
         // otherwise represent it as a generic .desktop file
 
-        const KService::Ptr service = KService::serviceByDesktopPath(url.path());
-        if (service) {
-            kDebug() << "Local desktop file - Service";
-            return addService(service);
+        if (addService(url.path())) {
+            return true;
         }
 
         kDebug() << "Local desktop file - Application " << url.path();
@@ -120,6 +139,8 @@ void BaseModel::addUrl(const KUrl & url)
             url.url()
         );
     }
+
+    return true;
 }
 
 } // namespace Models

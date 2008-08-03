@@ -22,6 +22,7 @@
 #include <cmath>
 #include <KDebug>
 #include <QIcon>
+#include <QAction>
 
 #define SCROLL_BUTTON_WIDTH 66
 #define SCROLL_BUTTON_HEIGHT 19
@@ -35,6 +36,15 @@ namespace Lancelot {
 // ActionListView::ScrollButton
 
 #define itemHeightFromIndex(A) ((m_model->isCategory(A)) ? m_categoryItemHeight : m_currentItemHeight)
+ActionListView::ItemButton::ItemButton(ActionListView * parent)
+    : Lancelot::ExtenderButton("", "", parent), m_parent(parent)
+{
+}
+
+void ActionListView::ItemButton::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
+{
+    m_parent->itemContext(this);
+}
 
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
   : BasicWidget("", "", parent), m_list(list), m_direction(direction)
@@ -105,6 +115,33 @@ void ActionListView::itemActivated(int index) {
     if (!m_model) return;
     m_model->activated(index);
     emit activated(index);
+}
+
+void ActionListView::itemContext(ActionListView::ItemButton * button)
+{
+    int buttonIndex = m_topButtonIndex;
+    kDebug() << buttonIndex;
+
+    QPair < Lancelot::ExtenderButton *, int > pair;
+    foreach (pair, m_buttons) {
+        if (pair.first == button) {
+            itemContextRequested(buttonIndex);
+            return;
+        }
+        ++ buttonIndex;
+    }
+}
+
+void ActionListView::itemContextRequested(int index)
+{
+    if (!m_model->hasContextActions(index)) {
+        return;
+    }
+
+    QMenu menu;
+    m_model->setContextActions(index, &menu);
+
+    m_model->contextActivate(index, menu.exec(QCursor::pos()));
 }
 
 ActionListView::~ActionListView()
@@ -405,8 +442,9 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button->setEnabled(true);
         button->show();
     } else {
-        button = new Lancelot::ExtenderButton(
-            "", "", this);
+        button = new ItemButton(this);
+            //Lancelot::ExtenderButton(
+            //"", "", this);
 
         button->setInnerOrientation(Qt::Horizontal);
         button->setExtenderPosition(m_extenderPosition);

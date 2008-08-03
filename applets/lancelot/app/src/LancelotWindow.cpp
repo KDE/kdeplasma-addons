@@ -557,7 +557,7 @@ void LancelotWindow::setupModels()
 
      passagewayApplications->setEntranceModel(
          new Lancelot::PassagewayViewModelProxy(
-             new Models::FavoriteApplications(), i18n("Favorites"), KIcon("favorites")
+             Models::FavoriteApplications::instance(), i18n("Favorites"), KIcon("favorites")
          )
      );
      passagewayApplications->setAtlasModel(new Models::Applications());

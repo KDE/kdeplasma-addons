@@ -67,6 +67,21 @@ QString PassagewayViewModelProxy::title(int index) const
     return m_model->title(index);
 }
 
+bool PassagewayViewModelProxy::hasContextActions(int index) const
+{
+    return m_model->hasContextActions(index);
+}
+
+void PassagewayViewModelProxy::setContextActions(int index, QMenu * menu)
+{
+    m_model->setContextActions(index, menu);
+}
+
+void PassagewayViewModelProxy::contextActivate(int index, QAction * context)
+{
+    m_model->contextActivate(index, context);
+}
+
 QString PassagewayViewModelProxy::description(int index) const
 {
     return m_model->description(index);

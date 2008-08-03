@@ -44,14 +44,39 @@ QIcon ActionListViewModel::icon(int index) const
     return QIcon();
 }
 
-bool ActionListViewModel::isCategory(int index) const {
+bool ActionListViewModel::isCategory(int index) const
+{
     Q_UNUSED(index);
     return false;
 }
 
-void ActionListViewModel::activated(int index) {
+void ActionListViewModel::activated(int index)
+{
     activate(index);
     emit itemActivated(index);
+}
+
+bool ActionListViewModel::hasContextActions(int index) const
+{
+    Q_UNUSED(index);
+    return false;
+}
+
+void ActionListViewModel::setContextActions(int index, QMenu * menu)
+{
+    Q_UNUSED(index);
+    Q_UNUSED(menu);
+}
+
+void ActionListViewModel::contextActivate(int index, QAction * context)
+{
+    Q_UNUSED(index);
+    Q_UNUSED(context);
+}
+
+void ActionListViewModel::activate(int index)
+{
+    Q_UNUSED(index);
 }
 
 // StandardActionListViewModel
@@ -123,6 +148,11 @@ void StandardActionListViewModel::removeAt(int index)
 {
     m_items.removeAt(index);
     emit itemDeleted(index);
+}
+
+StandardActionListViewModel::Item StandardActionListViewModel::itemAt(int index)
+{
+    return m_items.at(index);
 }
 
 // MergedActionListViewModel
@@ -235,6 +265,36 @@ QString MergedActionListViewModel::title(int index) const
     if (model == -1) return "Error";
     if (modelIndex == -1) return m_modelsMetadata.at(model).first;
     return m_models.at(model)->title(modelIndex);
+}
+
+bool MergedActionListViewModel::hasContextActions(int index) const
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return false;
+    if (modelIndex == -1) return false;
+    return m_models.at(model)->hasContextActions(modelIndex);
+}
+
+void MergedActionListViewModel::setContextActions(int index, QMenu * menu)
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return;
+    if (modelIndex == -1) return;
+    m_models.at(model)->setContextActions(modelIndex, menu);
+}
+
+void MergedActionListViewModel::contextActivate(int index, QAction * context)
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return;
+    if (modelIndex == -1) return;
+    return m_models.at(model)->contextActivate(modelIndex, context);
 }
 
 void MergedActionListViewModel::toChildCoordinates(int index, int & model, int & modelIndex) const

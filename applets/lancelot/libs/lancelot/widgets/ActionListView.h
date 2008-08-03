@@ -35,6 +35,12 @@
 namespace Lancelot
 {
 
+/*
+ * Notice: Classes in this file are not going to stay ABI nor API compatible,
+ * and will possibly be replaced in the future. That is the reason for which
+ * the classes are not in d-ptr pattern nor documented.
+ */
+
 class LANCELOT_EXPORT_DEPRECATED ActionListView : public Lancelot::Widget
 {
     Q_OBJECT
@@ -79,6 +85,7 @@ Q_SIGNALS:
 protected slots:
     void scrollTimer();
     void itemActivated(int index);
+    void itemContextRequested(int index);
 
     void modelUpdated();
     void modelItemInserted(int index);
@@ -105,6 +112,15 @@ private:
         ActionListView::ScrollDirection m_direction;
     };
 
+    class ItemButton : public Lancelot::ExtenderButton {
+        public:
+            ItemButton(ActionListView * parent);
+            void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+
+        private:
+            ActionListView * m_parent;
+    };
+
     ActionListViewModel * m_model;
     WidgetGroup * m_itemsGroup;
     WidgetGroup * m_categoriesGroup;
@@ -117,6 +133,8 @@ private:
 
     ExtenderPosition m_extenderPosition;
     ScrollButton * scrollButtonUp, * scrollButtonDown;
+
+    void itemContext(ItemButton * button);
 
     void scroll(ScrollDirection direction);
     void scrollBy(int ammount);

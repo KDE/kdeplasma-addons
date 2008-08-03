@@ -27,11 +27,23 @@ namespace Models {
 class FavoriteApplications : public BaseModel {
     Q_OBJECT
 public:
-    FavoriteApplications();
-    virtual ~FavoriteApplications();
+    static FavoriteApplications * instance();
+
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
+
+    bool addFavorite(QString url);
 
 protected:
     void load();
+    void save();
+    void loadDefaultApplications();
+
+private:
+    FavoriteApplications();
+    virtual ~FavoriteApplications();
+    static FavoriteApplications * m_instance;
 
 };
 

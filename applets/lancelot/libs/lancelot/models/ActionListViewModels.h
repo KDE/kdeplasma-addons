@@ -26,43 +26,140 @@
 #include <QString>
 #include <QIcon>
 #include <QVariant>
+#include <QMenu>
+#include <QAction>
 
 namespace Lancelot
 {
 
+/*
+ * Notice: Classes in this file are not going to stay ABI nor API compatible,
+ * and will possibly be replaced in the future. That is the reason for which
+ * the classes are not in d-ptr pattern.
+ */
+
+/**
+ * This class represents data model for ActionListView widgets.
+ */
 class LANCELOT_EXPORT ActionListViewModel: public QObject {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of ActionListViewModel
+     */
     ActionListViewModel();
+
+    /**
+     * Destroys this ActionListViewModel
+     */
     virtual ~ActionListViewModel();
 
+    /**
+     * @param index index of the item
+     * @returns title for the specified item
+     */
     virtual QString title(int index) const = 0;
+
+    /**
+     * @param index index of the item
+     * @returns description of the specified item
+     */
     virtual QString description(int index) const;
+
+    /**
+     * @param index index of the item
+     * @returns icon for the specified item
+     */
     virtual QIcon icon(int index) const;
+
+    /**
+     * @param index index of the item
+     * @returns whether the item represents a category
+     */
     virtual bool isCategory(int index) const;
 
+    /**
+     * @returns the number of items in model
+     */
     virtual int size() const = 0;
 
+    /**
+     * @returns whether the specified item has context actions
+     * @param index index of the item
+     */
+    virtual bool hasContextActions(int index) const;
+
+    /**
+     * Adds actions ofr the specifies item to menu
+     * @param index index of the item
+     * @param menu menu to add the actions to
+     */
+    virtual void setContextActions(int index, QMenu * menu);
+
+    /**
+     * Method for handling context menu actions
+     * @param index of the activated item
+     * @param context index of the context action
+     */
+    virtual void contextActivate(int index, QAction * context);
+
 public slots:
+    /**
+     * Activates the specified element
+     * @param index of the element that should be activated
+     */
     void activated(int index);
 
 Q_SIGNALS:
+    /**
+     * This signal is emitted when an item is activated
+     * @param index of the activated element
+     */
     void itemActivated(int index);
 
+    /**
+     * This signal is emitted when the model is updated and the update
+     * is too complex to explain using itemInserted, itemDeleted and
+     * itemAltered methods
+     */
     void updated();
+
+    /**
+     * This signal is emitted when an item is inserted into the model
+     * @param index place where the new item is inserted
+     */
     void itemInserted(int index);
+
+    /**
+     * This signal is emitted when an item is deleted from the model
+     * @param index index of the deleted item
+     */
     void itemDeleted(int index);
+
+    /**
+     * This signal is emitted when an item is altered
+     * @param index index of the altered item
+     */
     void itemAltered(int index);
 
 protected:
-    /** Models should reimplement this function. It is invoked when
-     *  an item is activated, before the itemActivated signal is emitted */
-    virtual void activate(int index) { Q_UNUSED(index); };
+    /**
+     * Models should reimplement this function. It is invoked when
+     * an item is activated, before the itemActivated signal is emitted
+     * @param index of the item that is activated
+     */
+    virtual void activate(int index);
 };
 
+/**
+ * A basic implementation of ActionListViewModel
+ */
 class LANCELOT_EXPORT StandardActionListViewModel: public ActionListViewModel {
     Q_OBJECT
 protected:
+    /**
+     * This class represents an item in the list model.
+     */
     class LANCELOT_EXPORT Item {
     public:
         Item(QString itemTitle, QString itemDescription, QIcon itemIcon, QVariant itemData)
@@ -75,22 +172,66 @@ protected:
     };
 
 public:
+    /**
+     * Creates a new instance of StandardActionListViewModel
+     */
     StandardActionListViewModel();
+
+    /**
+     * Destroys this StandardActionListViewModel
+     */
     virtual ~StandardActionListViewModel();
 
-    virtual QString title(int index) const;
-    virtual QString description(int index) const;
-    virtual QIcon icon(int index) const;
-    virtual bool isCategory(int index) const;
+    L_Override virtual QString title(int index) const;
+    L_Override virtual QString description(int index) const;
+    L_Override virtual QIcon icon(int index) const;
+    L_Override virtual bool isCategory(int index) const;
 
-    virtual int size() const;
+    L_Override virtual int size() const;
 
+    /**
+     * Adds a new item into the model
+     * @param item new item
+     */
     void add(const Item & item);
+
+    /**
+     * Adds a new item into the model
+     * @param title the title for the new item
+     * @param description the description of the new item
+     * @param icon the icon for the new item
+     * @param data data for the new item. Not shown to user
+     */
     void add(const QString & title, const QString & description, QIcon icon, const QVariant & data);
 
+    /**
+     * Replaces existing item at specified index with a new one
+     * @param index index of the item to be replaced
+     * @param item new item
+     */
+
     void set(int index, const Item & item);
+    /**
+     * Replaces existing item at specified index with a new one
+     * @param index index of the item to be replaced
+     * @param title the title for the new item
+     * @param description the description of the new item
+     * @param icon the icon for the new item
+     * @param data data for the new item. Not shown to user
+     */
     void set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data);
+
+    /**
+     * Removes an item
+     * @param index index of the item to remove
+     */
     void removeAt(int index);
+
+    /**
+     * @returns the specified item
+     * @param index index of the item to return
+     */
+    Item itemAt(int index);
 
 protected:
 
@@ -98,29 +239,58 @@ protected:
 
 };
 
+/**
+ * This class implements a model that merges a list
+ * of other models. Titles in the sub-models are represented
+ * as categories in the merged one.
+ */
 class LANCELOT_EXPORT MergedActionListViewModel: public ActionListViewModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of MergedActionListViewModel
+     */
     MergedActionListViewModel();
+
+    /**
+     * Destroys this MergedActionListViewModel
+     */
     virtual ~MergedActionListViewModel();
 
+    /**
+     * Adds a model to the list
+     * @param icon icon for the model
+     * @param title title of the model
+     * @param model model to add
+     */
     void addModel(QIcon icon, const QString & title, ActionListViewModel * model);
 
+    /**
+     * @returns number of the models
+     */
     int modelCount() const;
 
-    // ActionListViewModel methods
+    L_Override virtual QString title(int index) const;
+    L_Override virtual QString description(int index) const;
+    L_Override virtual QIcon icon(int index) const;
+    L_Override virtual bool isCategory(int index) const;
+    L_Override virtual int size() const;
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
 
-    virtual QString title(int index) const;
-    virtual QString description(int index) const;
-    virtual QIcon icon(int index) const;
-    virtual bool isCategory(int index) const;
-    virtual int size() const;
-
+    /**
+     * @returns whether the empty models are hidden
+     */
     bool hideEmptyModels() const;
+
+    /**
+     * Sets whether the empty models should be hidden
+     */
     void setHideEmptyModels(bool hide);
 
 protected:
-    virtual void activate(int index);
+    L_Override virtual void activate(int index);
 
 private:
     void toChildCoordinates(int index, int & model, int & modelIndex) const;
@@ -135,7 +305,6 @@ private slots:
     void modelItemInserted(int index);
     void modelItemDeleted(int index);
     void modelItemAltered(int index);
-
 
 Q_SIGNALS:
     void itemActivated(int index);
