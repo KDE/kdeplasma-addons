@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[uk]=Показати панель приладів віджета
 Comment=Shows the widget dashboard above your other windows when clicked
+Comment[uk]=Показує панель приладів віджета над іншими вікнами після клацання
 Icon=dashboard-show
 Type=Service
 ServiceTypes=Plasma/Applet
