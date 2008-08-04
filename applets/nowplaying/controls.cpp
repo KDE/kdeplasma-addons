@@ -15,12 +15,16 @@ Controls::Controls()
 {
     m_playpause->setIcon("media-playback-start");
     connect(m_playpause, SIGNAL(clicked()), this, SLOT(playPauseClicked()));
+    m_playpause->setMinimumSize(m_playpause->sizeFromIconSize(16));
     m_stop->setIcon("media-playback-stop");
     connect(m_stop, SIGNAL(clicked()), this, SIGNAL(stop()));
+    m_stop->setMinimumSize(m_stop->sizeFromIconSize(16));
     m_prev->setIcon("media-skip-backward");
     connect(m_prev, SIGNAL(clicked()), this, SIGNAL(previous()));
+    m_prev->setMinimumSize(m_prev->sizeFromIconSize(16));
     m_next->setIcon("media-skip-forward");
     connect(m_next, SIGNAL(clicked()), this, SIGNAL(next()));
+    m_next->setMinimumSize(m_next->sizeFromIconSize(16));
 
     setCaps(NoCaps);
 

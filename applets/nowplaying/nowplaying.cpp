@@ -46,8 +46,8 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_positionSlider(new Plasma::Slider(Qt::Horizontal))
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    resize(300, 165);
-    setMinimumSize(100, 30);
+    resize(300, 200);
+    setMinimumSize(300, 200);
 
     connect(m_buttonPanel, SIGNAL(play()), this, SLOT(play()));
     connect(m_buttonPanel, SIGNAL(pause()), this, SLOT(pause()));
