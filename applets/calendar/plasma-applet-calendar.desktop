@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Calendar
+Name[gl]=Calendario
 Name[pt]=Calendário
 Name[pt_BR]=Calendário
 Name[tr]=Takvim
 Name[uk]=Календар
 Name[zh_TW]=日曆
 Comment=A calendar
+Comment[gl]=Un calendario
 Comment[pt_BR]=Um calendário
 Comment[tr]=Bir takvim
 Comment[uk]=Календар

@@ -1,10 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[gl]=Temporizador
 Name[tr]=Zamanlayıcı
 Name[uk]=Таймер
 Name[zh_TW]=計時器
 Comment=A timer plasmoid.
+Comment[gl]=Un plasmoide cun temporizador.
 Comment[tr]=Zamanlayıcı plasma programcığı.
 Comment[uk]=Плазмоїд таймера.
 Comment[zh_TW]=計時器元件。
