@@ -86,7 +86,7 @@ private slots:
     void prev();
     void next();
     void setVolume(int volumePercent);
-    void seek(int position);
+    void setPosition(int position);
 
 private:
     void findPlayer();

@@ -306,7 +306,7 @@ void NowPlaying::setVolume(int volumePercent)
     }
 }
 
-void NowPlaying::seek(int position)
+void NowPlaying::setPosition(int position)
 {
     if (m_controller) {
         KConfigGroup op = m_controller->operationDescription("seek");
