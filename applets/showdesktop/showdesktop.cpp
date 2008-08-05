@@ -49,6 +49,7 @@ void ShowDesktop::init()
 
     Plasma::Icon *icon = new Plasma::Icon(KIcon("user-desktop"), QString(), this);
     layout->addItem(icon);
+    registerAsDragHandle(icon);
     connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));
 
     NETRootInfo info(QX11Info::display(), NET::Supported);

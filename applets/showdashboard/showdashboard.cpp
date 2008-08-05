@@ -46,6 +46,7 @@ void ShowDashboard::init()
     layout->setSpacing(0);
 
     Plasma::Icon *icon = new Plasma::Icon(KIcon("dashboard-show"), QString(), this);
+    registerAsDragHandle(icon);
     layout->addItem(icon);
 
     setAspectRatioMode(Plasma::ConstrainedSquare);
