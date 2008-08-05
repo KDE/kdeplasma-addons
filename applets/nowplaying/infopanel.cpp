@@ -23,8 +23,9 @@
 #include <QGraphicsGridLayout>
 #include <QLabel>
 
-InfoPanel::InfoPanel()
-    : m_artistLabel(new Plasma::Label),
+InfoPanel::InfoPanel(QGraphicsWidget *parent)
+    : QGraphicsWidget(parent),
+      m_artistLabel(new Plasma::Label),
       m_titleLabel(new Plasma::Label),
       m_albumLabel(new Plasma::Label),
       m_timeLabel(new Plasma::Label),

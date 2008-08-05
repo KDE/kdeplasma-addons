@@ -33,7 +33,7 @@ class Controls : public QGraphicsWidget
     Q_OBJECT
 
 public:
-    Controls();
+    Controls(QGraphicsWidget *parent = 0);
     ~Controls();
 
 public slots:

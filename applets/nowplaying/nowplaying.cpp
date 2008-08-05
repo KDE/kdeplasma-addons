@@ -42,8 +42,8 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_length(0),
       m_textPanel(new InfoPanel),
       m_buttonPanel(new Controls),
-      m_volumeSlider(new Plasma::Slider(Qt::Vertical)),
-      m_positionSlider(new Plasma::Slider(Qt::Horizontal))
+      m_volumeSlider(new Plasma::Slider(this)),
+      m_positionSlider(new Plasma::Slider(this))
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 200);
@@ -62,6 +62,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     connect(this, SIGNAL(metadataChanged(QMap<QString,QString>)),
             m_textPanel, SLOT(updateMetadata(QMap<QString,QString>)));
 
+    m_volumeSlider->setOrientation(Qt::Vertical);
     m_volumeSlider->setMinimum(0);
     m_volumeSlider->setMaximum(100);
     m_volumeSlider->setValue(0);
@@ -71,6 +72,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
             this, SLOT(setVolume(int)));
     m_volumeSlider->setEnabled(false);
 
+    m_positionSlider->setOrientation(Qt::Vertical);
     m_positionSlider->setMinimum(0);
     m_positionSlider->setMaximum(0);
     m_positionSlider->setValue(0);

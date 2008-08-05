@@ -34,7 +34,7 @@ class InfoPanel : public QGraphicsWidget
     Q_OBJECT
 
 public:
-    InfoPanel();
+    InfoPanel(QGraphicsWidget *parent = 0);
     ~InfoPanel();
 
 public slots:

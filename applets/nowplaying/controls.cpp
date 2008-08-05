@@ -4,8 +4,9 @@
 #include <QGraphicsLinearLayout>
 #include <KDebug>
 
-Controls::Controls()
-    : m_playpause(new Plasma::Icon),
+Controls::Controls(QGraphicsWidget *parent)
+    : QGraphicsWidget(parent),
+      m_playpause(new Plasma::Icon),
       m_stop(new Plasma::Icon),
       m_prev(new Plasma::Icon),
       m_next(new Plasma::Icon),
