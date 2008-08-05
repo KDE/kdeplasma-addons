@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
+Name[et]=Sümbolivalija
 Name[gl]=Selector de caracteres
 Name[pt_BR]=Seletor de caracteres
 Name[tr]=Karakter Seçici
 Name[uk]=Таблиця символів
 Name[zh_TW]=字元選擇器
 Comment=Character selector applet
+Comment[et]=Sümboli valimise aplett
 Comment[gl]=Applet de selección de caracteres
 Comment[pt_BR]=Miniaplicativo seletor de caracteres
 Comment[tr]=Karakter seçme programcığı

@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[et]=Vidinate Dashboardi näitamine
 Name[gl]=Mostrar o widget Dashboard
 Name[uk]=Показати панель приладів віджета
 Name[zh_TW]=顯示元件儀表板
 Comment=Shows the widget dashboard above your other windows when clicked
+Comment[et]=Vidinate dashboardi näitamine teiste akende kohal klõpsamisel
 Comment[gl]=Mostar o widget dashboard sobre as outras fiestras cando o prema
 Comment[uk]=Показує панель приладів віджета над іншими вікнами після клацання
 Comment[zh_TW]=點擊時在您其它的視窗上方顯示元件儀表板
