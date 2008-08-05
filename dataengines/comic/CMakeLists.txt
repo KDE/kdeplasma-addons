@@ -62,15 +62,17 @@ install( FILES pics/plasma_comic_garfield.png DESTINATION ${DATA_INSTALL_DIR}/pl
 
 #### next ####
 
-set( comic_osnews_provider_SRCS
-     osnewsprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_osnewsprovider ${comic_osnews_provider_SRCS} )
-target_link_libraries( plasma_comic_osnewsprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
-install( TARGETS plasma_comic_osnewsprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES osnewsprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_osnews.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+if(Boost_FOUND)
+   include_directories (${Boost_INCLUDE_DIR})
+   set( comic_osnews_provider_SRCS
+        osnewsprovider.cpp
+   )
+   kde4_add_plugin( plasma_comic_osnewsprovider ${comic_osnews_provider_SRCS} )
+   target_link_libraries( plasma_comic_osnewsprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
+   install( TARGETS plasma_comic_osnewsprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+   install( FILES osnewsprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+   install( FILES pics/plasma_comic_osnews.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+endif(Boost_FOUND)
 
 #### next ####
 

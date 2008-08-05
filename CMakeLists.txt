@@ -6,7 +6,7 @@ include(MacroOptionalAddSubdirectory)
 
 find_package(Plasma REQUIRED)
 find_package(KdepimLibs REQUIRED)
-
+find_package(Boost)
 macro_optional_find_package(OpenGL)
 macro_log_feature(OPENGL_FOUND "OpenGL" "API for developing portable, interactive 2D and 3D graphics applications" "http://mesa3d.sourceforge.net" FALSE "" "STRONGLY RECOMMENDED: The 3D hardware acceleration available through the OpenGL API is used in applications ranging from graphics and modellers to screensavers and video players.")
 
