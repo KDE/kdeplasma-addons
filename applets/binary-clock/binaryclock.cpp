@@ -42,6 +42,7 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
 
 void BinaryClock::init()
 {
+    ClockApplet::init();
     KConfigGroup cg = config();
     m_showSeconds = cg.readEntry("showSeconds", m_showSeconds);
     m_showGrid = cg.readEntry("showGrid", m_showGrid);

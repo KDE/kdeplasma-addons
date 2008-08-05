@@ -65,6 +65,7 @@ Clock::~Clock()
 
 void Clock::init()
 {
+    ClockApplet::init();
     m_contentSize = geometry().size();
 
     kDebug() << "The first content's size [geometry().size()] we get, init() called: " << geometry().size();
