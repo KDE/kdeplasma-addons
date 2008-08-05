@@ -564,7 +564,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
         kDebug() << "needed height: " << m_contentSize.height() << "fixed height forced on us: " << geometry().size().height();
         //FIXME: it was resizing to size() itself
-        //resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
+        resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
     } else {
         //add margins
         resize ( m_contentSize + QSizeF(size()-contentsRect().size()) );
@@ -651,6 +651,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
         kDebug() << "We want to have: \nwidth: < " << geometry().size().width() - 2*m_margin << "\nheight < " << (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse;
 
+        //If we are in a horizontal panel, we ignore the width constraints, since we want to become as wide as it is needed in order to use the user-set height.
         while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) || m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
     
             //decrease pointSize
@@ -671,6 +672,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
     //if the minimal width is larger than the actual size -> force minimal needed width
     if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
+            kDebug() << "Current minimal-width is too large for our needs. Since we are in a panel, we give that space back until we need it again.";
             setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
         }
 
@@ -679,20 +681,25 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
     if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
             kDebug() << "The width we got was too big, we need less, so lets resize.";
             resize ( m_minimumContentSize + (size() - contentsRect().size()) );
+            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
         }
 
+    //Since panels only give us the space needed if we force them to do so, we have to set the minimum-size to whatever size we want. The user chose to use more width than with the default-font, so it should be ok.
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
         kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
 
         resize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
+        setMinimumSize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
     } else if ( formFactor() == Plasma::Vertical ) {
         kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
 
         resize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
+        setMinimumSize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
     }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
         //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
         kDebug() << "we set the minimum size needed as the size we want";
         resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
+        setMinimumSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
     }
 }
 }
