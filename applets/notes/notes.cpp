@@ -33,6 +33,8 @@
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
     , m_notes_theme(this)
+    , m_layout(0)
+    , m_textEdit(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
@@ -110,13 +112,14 @@ void Notes::constraintsEvent(Plasma::Constraints constraints)
 
 void Notes::updateTextGeometry()
 {
-    const qreal xpad = geometry().width() / 15;
-    const qreal ypad = geometry().height() / 15;
-    m_layout->setSpacing(xpad);
-    m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
-    m_font.setPointSize(fontSize());
-    m_textEdit->nativeWidget()->setFont(m_font);
-    
+    if (m_layout) {
+        const qreal xpad = geometry().width() / 15;
+        const qreal ypad = geometry().height() / 15;
+        m_layout->setSpacing(xpad);
+        m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
+        m_font.setPointSize(fontSize());
+        m_textEdit->nativeWidget()->setFont(m_font);
+    }
 }
 
 int Notes::fontSize()
