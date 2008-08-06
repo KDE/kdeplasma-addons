@@ -2,6 +2,7 @@
 Name=Calendar
 Name[et]=Kalender
 Name[gl]=Calendario
+Name[oc]=Calendièr
 Name[pt]=Calendário
 Name[pt_BR]=Calendário
 Name[tr]=Takvim
@@ -10,6 +11,7 @@ Name[zh_TW]=日曆
 Comment=A calendar
 Comment[et]=Kalender
 Comment[gl]=Un calendario
+Comment[pt]=Um calendário
 Comment[pt_BR]=Um calendário
 Comment[tr]=Bir takvim
 Comment[uk]=Календар
