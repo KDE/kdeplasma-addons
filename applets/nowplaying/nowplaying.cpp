@@ -72,7 +72,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
             this, SLOT(setVolume(int)));
     m_volumeSlider->setEnabled(false);
 
-    m_positionSlider->setOrientation(Qt::Vertical);
+    m_positionSlider->setOrientation(Qt::Horizontal);
     m_positionSlider->setMinimum(0);
     m_positionSlider->setMaximum(0);
     m_positionSlider->setValue(0);
