@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=Calendar
 Name[et]=Kalender
+Name[ga]=Féilire
 Name[gl]=Calendario
+Name[nds]=Kalenner
 Name[oc]=Calendièr
 Name[pt]=Calendário
 Name[pt_BR]=Calendário
@@ -10,7 +12,9 @@ Name[uk]=Календар
 Name[zh_TW]=日曆
 Comment=A calendar
 Comment[et]=Kalender
+Comment[ga]=Féilire
 Comment[gl]=Un calendario
+Comment[nds]=En Kalenner
 Comment[pt]=Um calendário
 Comment[pt_BR]=Um calendário
 Comment[tr]=Bir takvim
