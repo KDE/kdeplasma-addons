@@ -24,7 +24,9 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
+#include <QPainter>
 
+#include <KSvgRenderer>
 #include <KDebug>
 
 #include "plasma/animator.h"
@@ -37,7 +39,6 @@ Fifteen::Fifteen(QGraphicsItem *parent)
   m_pixmaps.resize(16);
   m_pieces.resize(16);
   m_splitPixmap = false;
-  m_pixmap = QPixmap(":/images/greensquare.svg");
   m_numerals = true;
 
   shuffle();
@@ -154,8 +155,16 @@ void Fifteen::setSplitPixmap(QString path)
 
 void Fifteen::setIdentical()
 {
+  KSvgRenderer renderer(QLatin1String(":/images/greensquare.svgz"));
+  QPixmap pixmap(renderer.defaultSize());
+  pixmap.fill(Qt::transparent);
+  QPainter painter(&pixmap);
+  renderer.render(&painter);
+  painter.end(); 
+ 
+  m_pixmap = pixmap;
+
   m_splitPixmap = false;
-  m_pixmap = QPixmap(":/images/greensquare.svg");
   updatePixmaps();
 }
 
