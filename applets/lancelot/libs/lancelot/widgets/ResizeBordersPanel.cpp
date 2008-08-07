@@ -164,6 +164,7 @@ public:
 ResizeBordersPanel::ResizeBordersPanel(QGraphicsItem * parent)
     : Panel(parent), d(new Private(this))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
 ResizeBordersPanel::~ResizeBordersPanel()

@@ -87,6 +87,8 @@ ActionListView::ActionListView(QGraphicsItem * parent)
 
     connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
     m_scrollTimer.setSingleShot(false);
+
+    L_WIDGET_SET_INITIALIZED;
 }
 
 ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent)
@@ -109,6 +111,7 @@ ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * pare
 
     connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
     m_scrollTimer.setSingleShot(false);
+    L_WIDGET_SET_INITIALIZED;
 }
 
 void ActionListView::itemActivated(int index) {

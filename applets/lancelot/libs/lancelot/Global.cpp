@@ -207,6 +207,7 @@ void WidgetGroup::load(bool full)
         }
 
         kDebug() << "SVG Location " << d->confGroupTheme->readEntry("background.svg");
+        kDebug() << "SVG Location " << Plasma::Theme::defaultTheme()->imagePath(d->confGroupTheme->readEntry("background.svg"));
         d->backgroundSvg = new Plasma::PanelSvg(NULL);
         d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
 
@@ -237,6 +238,15 @@ public:
 
     ~Private()
     {
+        kDebug() << widgets.count();
+        Widget * widget;
+        while (!widgets.empty()) {
+            widget = widgets.takeFirst();
+            delete widget;
+        }
+        foreach (WidgetGroup * group, groups) {
+            delete group;
+        }
         delete confLancelot;
         delete confTheme;
     }
@@ -329,9 +339,17 @@ KConfig * Instance::config()
 
 void Instance::addWidget(Widget * widget)
 {
+    kDebug() << (void *)widget;
     if (widget == NULL) return;
     if (d->widgets.contains(widget)) return;
     d->widgets.append(widget);
+}
+
+void Instance::removeWidget(Widget * widget)
+{
+    if (widget == NULL) return;
+    if (!d->widgets.contains(widget)) return;
+    d->widgets.removeAll(widget);
 }
 
 WidgetGroup * Instance::group(const QString & name)

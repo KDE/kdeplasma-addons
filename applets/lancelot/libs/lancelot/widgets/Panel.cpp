@@ -108,18 +108,21 @@ Panel::Panel(QIcon icon, QString title, QGraphicsItem * parent)
   : Widget(parent), d(new Private(icon, title, this))
 {
     setGroupByName("Panel");
+    L_WIDGET_SET_INITIALIZED;
 }
 
 Panel::Panel(QString title, QGraphicsItem * parent)
   : Widget(parent), d(new Private(title, this))
 {
     setGroupByName("Panel");
+    L_WIDGET_SET_INITIALIZED;
 }
 
 Panel::Panel(QGraphicsItem * parent)
   : Widget(parent), d(new Private(this))
 {
     setGroupByName("Panel");
+    L_WIDGET_SET_INITIALIZED;
 }
 
 Panel::~Panel()

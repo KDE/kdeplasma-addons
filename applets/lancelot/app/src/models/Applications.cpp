@@ -145,7 +145,7 @@ void Applications::activate(int index)
     kDebug() << " activated passed ";
 
     new KRun(KUrl(m_items.at(index - m_submodels.size()).desktopFile), 0);
-    LancelotApplication::hide(true);
+    ApplicationConnector::instance()->hide(true);
 }
 
 Lancelot::PassagewayViewModel * Applications::child(int index)

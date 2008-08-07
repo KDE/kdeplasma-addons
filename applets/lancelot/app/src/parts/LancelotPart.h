@@ -25,22 +25,27 @@
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ActionListView.h>
 
-
-class LancelotPart : /*public Lancelot::WidgetCore,*/ public Plasma::Applet
+class LancelotPart : public Plasma::Applet
 {
     //Q_OBJECT
 public:
     LancelotPart(QObject * parent, const QVariantList &args);
     ~LancelotPart();
 
-    QSizeF contentSizeHint() const;
-    void setGeometry(const QRectF & geometry);
+    void init();
+    bool load(const QString & data);
 
+    void saveConfig(const QString & data);
+    bool loadConfig();
 protected:
 
 private:
-    Lancelot::Instance * instance;
-    Lancelot::ActionListView * list;
+    Lancelot::Instance * m_instance;
+    Lancelot::ActionListView * m_list;
+    Lancelot::ActionListViewModel * m_model;
+    bool m_deleteModel;
+    QGraphicsLayout * m_layout;
+    QString m_cmdarg;
 
 };
 

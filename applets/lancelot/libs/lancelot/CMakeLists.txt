@@ -52,7 +52,7 @@ set(lancelot_LIB_SRCS
 
         widgets/ActionListView.cpp
         widgets/PassagewayView.cpp
-        widgets/WidgetPositioner.cpp
+        # widgets/WidgetPositioner.cpp
 
         # # widgets/CustomListView.cpp
 

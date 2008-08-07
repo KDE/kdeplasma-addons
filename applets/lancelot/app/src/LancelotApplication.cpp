@@ -36,6 +36,7 @@
 #include <lancelot/Global.h>
 #include "LancelotWindow.h"
 #include "LancelotApplication.h"
+#include "models/BaseModel.h"
 
 #include "lancelotadaptor.h"
 
@@ -89,6 +90,16 @@ void LancelotApplication::init()
                 );
     }
 
+    Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
+    kDebug() << "Connecting ApplicationConnector to self";
+    connect(
+            ac, SIGNAL(doSearch(QString)),
+            this, SLOT(search(QString))
+    );
+    connect(
+            ac, SIGNAL(doHide(bool)),
+            this, SLOT(hide(bool))
+    );
 }
 
 LancelotApplication::~LancelotApplication()

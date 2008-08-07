@@ -32,6 +32,37 @@
 
 namespace Models {
 
+ApplicationConnector * ApplicationConnector::m_instance = NULL;
+
+ApplicationConnector * ApplicationConnector::instance()
+{
+    if (m_instance == NULL) {
+        m_instance = new ApplicationConnector();
+    }
+    return m_instance;
+}
+
+void ApplicationConnector::search(const QString & search)
+{
+    emit doSearch(search);
+}
+
+bool ApplicationConnector::hide(bool immediate)
+{
+    emit doHide(immediate);
+}
+
+ApplicationConnector::ApplicationConnector()
+{
+
+}
+
+ApplicationConnector::~ApplicationConnector()
+{
+
+}
+
+
 BaseModel::BaseModel()
 {
 }
@@ -48,12 +79,12 @@ void BaseModel::activate(int index)
 
 void BaseModel::hideLancelotWindow()
 {
-    LancelotApplication::hide(true);
+    ApplicationConnector::instance()->hide(true);
 }
 
 void BaseModel::changeLancelotSearchString(const QString & string)
 {
-    LancelotApplication::search(string);
+    ApplicationConnector::instance()->search(string);
 }
 
 void BaseModel::addServices(const QStringList & serviceNames)

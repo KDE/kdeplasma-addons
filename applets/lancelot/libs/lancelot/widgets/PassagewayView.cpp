@@ -179,6 +179,7 @@ PassagewayView::PassagewayView(QGraphicsItem * parent)
     : Panel(parent), d(new Private(NULL, NULL, this))
 {
     setGroupByName("PassagewayView");
+    L_WIDGET_SET_INITIALIZED;
 }
 
 PassagewayView::PassagewayView(PassagewayViewModel * entranceModel,
@@ -186,6 +187,7 @@ PassagewayView::PassagewayView(PassagewayViewModel * entranceModel,
     : Panel(parent), d(new Private(entranceModel, atlasModel, this))
 {
     setGroupByName("PassagewayView");
+    L_WIDGET_SET_INITIALIZED;
 }
 
 void PassagewayView::pathButtonActivated()

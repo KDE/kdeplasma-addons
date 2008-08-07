@@ -78,14 +78,16 @@ Comment[zh_CN]=桌面上 Lancelot 菜单的部件
 Comment[zh_TW]=桌面上的 Lancelot 選單部件
 Type=Service
 
+X-Plasma-DropMimeTypes=application/x-lancelot-part
+
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_lancelot_part
 X-KDE-PluginInfo-Author=Ivan Cukic
 X-KDE-PluginInfo-Email=ivan.cukic+kde@gmail.com
-X-KDE-PluginInfo-Name=plasma_applet_lancelot_part
+X-KDE-PluginInfo-Name=lancelot_part
 X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Website=http://plasma.kde.org/
-X-KDE-PluginInfo-Category=Windows and Tasks
+X-KDE-PluginInfo-Website=http://lancelot.fomentgroup.org/
+X-KDE-PluginInfo-Category=Miscellaneous
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true

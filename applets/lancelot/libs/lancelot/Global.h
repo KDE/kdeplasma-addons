@@ -203,6 +203,11 @@ public:
     void addWidget(Widget * widget);
 
     /**
+     * Removes a widget from instance
+     */
+    void removeWidget(Widget * widget);
+
+    /**
      * @returns a pointer to the theme configuration file
      */
     KConfig * theme();

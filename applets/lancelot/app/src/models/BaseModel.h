@@ -27,6 +27,24 @@
 
 namespace Models {
 
+class ApplicationConnector: public QObject {
+    Q_OBJECT
+public:
+    static ApplicationConnector * instance();
+    void search(const QString & search);
+    bool hide(bool immediate = false);
+
+Q_SIGNALS:
+    void doSearch(const QString & search);
+    bool doHide(bool immediate);
+
+private:
+    ApplicationConnector();
+    ~ApplicationConnector();
+
+    static ApplicationConnector * m_instance;
+};
+
 class BaseModel : public Lancelot::StandardActionListViewModel {
     Q_OBJECT
 public:

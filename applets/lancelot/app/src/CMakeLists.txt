@@ -109,26 +109,26 @@ install(TARGETS lancelot-menu ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # Lancelot Part Applet
 
-# set(plasma_applet_lancelot_part_SRCS
-#   ${plasma_lancelot_widgets_SRCS}
-#   ${plasma_lancelot_models_SRCS}
-#   ${plasma_lancelot_application_SRCS}
-#   parts/LancelotPart.cpp
-# )
-#
-# kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
-#
-# target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} taskmanager)
-#
-# install(
-#   TARGETS plasma_applet_lancelot_part
-#   DESTINATION ${PLUGIN_INSTALL_DIR}
-# )
-#
-# install(
-#   FILES parts/plasma-applet-lancelot-part.desktop
-#   DESTINATION ${SERVICES_INSTALL_DIR}
-# )
+set(plasma_applet_lancelot_part_SRCS
+  ${plasma_lancelot_widgets_SRCS}
+  ${plasma_lancelot_models_SRCS}
+  # ${plasma_lancelot_application_SRCS}
+  parts/LancelotPart.cpp
+)
+
+kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
+
+target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} taskmanager)
+
+install(
+  TARGETS plasma_applet_lancelot_part
+  DESTINATION ${PLUGIN_INSTALL_DIR}
+)
+
+install(
+  FILES parts/plasma-applet-lancelot-part.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+)
 
 # Lancelot Main Applet
 

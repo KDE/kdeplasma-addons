@@ -258,6 +258,7 @@ LancelotWindow::LancelotWindow()
 
 LancelotWindow::~LancelotWindow()
 {
+    delete instance;
 }
 
 void LancelotWindow::loadConfig()
