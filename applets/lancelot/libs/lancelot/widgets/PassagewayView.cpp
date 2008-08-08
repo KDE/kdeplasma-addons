@@ -147,6 +147,7 @@ public:
         list->setExtenderPosition(RightExtender);
 
         buttons.append(button);
+        button->setZValue((qreal)buttons.count());
         lists.append(list);
         path.append(step);
 

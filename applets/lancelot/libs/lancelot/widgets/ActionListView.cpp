@@ -24,7 +24,7 @@
 #include <QIcon>
 #include <QAction>
 
-#define SCROLL_BUTTON_WIDTH 66
+#define SCROLL_BUTTON_WIDTH 33
 #define SCROLL_BUTTON_HEIGHT 19
 
 #define SCROLL_AMMOUNT 6
@@ -33,9 +33,9 @@
 
 namespace Lancelot {
 
-// ActionListView::ScrollButton
-
 #define itemHeightFromIndex(A) ((m_model->isCategory(A)) ? m_categoryItemHeight : m_currentItemHeight)
+
+// ActionListView::ItemButton
 ActionListView::ItemButton::ItemButton(ActionListView * parent)
     : Lancelot::ExtenderButton("", "", parent), m_parent(parent)
 {
@@ -46,6 +46,7 @@ void ActionListView::ItemButton::contextMenuEvent(QGraphicsSceneContextMenuEvent
     m_parent->itemContext(this);
 }
 
+// ActionListView::ScrollButton
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
   : BasicWidget("", "", parent), m_list(list), m_direction(direction)
 {
@@ -156,16 +157,23 @@ ActionListView::~ActionListView()
 
 void ActionListView::positionScrollButtons()
 {
-    if (!scrollButtonUp) {
-        scrollButtonUp = new ScrollButton(Up, this);
-        scrollButtonDown = new ScrollButton(Down, this);
+    kDebug() << "SCROLL buttons positioning";
 
-        //addChild(scrollButtonUp);
+    if (!scrollButtonUp) {
+        kDebug() << "SCROLL Creating the buttons";
+        scrollButtonUp = new ScrollButton(Up, this, this);
+        scrollButtonDown = new ScrollButton(Down, this, this);
+
+        scrollButtonUp->setMinimumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
+        scrollButtonUp->setPreferredSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
+        scrollButtonUp->setMaximumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonUp->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonUp->setZValue(100);
         scrollButtonUp->show();
 
-        //addChild(scrollButtonDown);
+        scrollButtonDown->setMinimumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
+        scrollButtonDown->setPreferredSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
+        scrollButtonDown->setMaximumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonDown->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonDown->setZValue(100);
         scrollButtonDown->show();
