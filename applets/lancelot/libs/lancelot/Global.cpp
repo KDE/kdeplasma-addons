@@ -20,6 +20,7 @@
 #include "Global.h"
 #include "widgets/Widget.h"
 #include <KDebug>
+#include <KGlobal>
 #include <plasma/theme.h>
 #include <KStandardDirs>
 
@@ -232,7 +233,7 @@ class Instance::Private {
 public:
     Private()
       : processGroupChanges(false),
-        confLancelot(NULL),
+        confMain(NULL),
         confTheme(NULL)
     {}
 
@@ -247,7 +248,7 @@ public:
         foreach (WidgetGroup * group, groups) {
             delete group;
         }
-        delete confLancelot;
+        delete confMain;
         delete confTheme;
     }
 
@@ -261,7 +262,7 @@ public:
     QMap < QString, WidgetGroup * > groups;
 
     bool processGroupChanges : 1;
-    KConfig * confLancelot;
+    KConfig * confMain;
     KConfig * confTheme;
 
     void loadAllGroups()
@@ -298,14 +299,18 @@ void Instance::deactivateAll() {
 Instance::Instance()
   : d(new Private)
 {
-    // TODO: Allow other applications to be privileged
-    // if (Instance::d->hasApplication) {
-    //    Plasma::Theme::defaultTheme()->setApplication("Lancelot");
-    // }
-    d->confLancelot = new KConfig("lancelotrc");
+    QString app = KGlobal::mainComponent().componentName();
+    if (app == "lancelot") {
+        app = "";
+    } else {
+        app += "-";
+    }
 
-    // TODO: If Plasma::Theme supports file(), alter the following code
-    QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/theme.config";
+    d->confMain = new KConfig("lancelot" + app + "rc");
+
+    QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
+    kDebug() << "Config: lancelot" + app + "rc, Theme:" << search;
+
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
         kDebug() << "Can not find lancelot theme, using default theme.config which may lead to problems";
@@ -334,7 +339,7 @@ KConfig * Instance::theme()
 
 KConfig * Instance::config()
 {
-    return d->confLancelot;
+    return d->confMain;
 }
 
 void Instance::addWidget(Widget * widget)

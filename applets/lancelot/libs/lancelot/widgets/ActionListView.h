@@ -73,6 +73,10 @@ public:
     void setItemsGroupByName(const QString & group);
     WidgetGroup * itemsGroup();
 
+    void setCategoriesGroup(WidgetGroup * group = NULL);
+    void setCategoriesGroupByName(const QString & group);
+    WidgetGroup * categoriesGroup();
+
     void wheelEvent(QGraphicsSceneWheelEvent * event);
 
     L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
@@ -86,6 +90,7 @@ protected slots:
     void scrollTimer();
     void itemActivated(int index);
     void itemContextRequested(int index);
+    void itemDragRequested(int index, QWidget * widget);
 
     void modelUpdated();
     void modelItemInserted(int index);
@@ -116,6 +121,7 @@ private:
         public:
             ItemButton(ActionListView * parent);
             void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+            void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
         private:
             ActionListView * m_parent;
@@ -135,6 +141,7 @@ private:
     ScrollButton * scrollButtonUp, * scrollButtonDown;
 
     void itemContext(ItemButton * button);
+    void itemDrag(ItemButton * button, QWidget * widget);
 
     void scroll(ScrollDirection direction);
     void scrollBy(int ammount);

@@ -144,6 +144,7 @@ public:
         button->setGroupByName(parent->group()->name() + "-Button");
         button->setExtenderPosition(Lancelot::LeftExtender);
 
+        list->setCategoriesGroupByName("ActionListView-CategoriesPass");
         list->setExtenderPosition(RightExtender);
 
         buttons.append(button);
@@ -276,6 +277,10 @@ void PassagewayView::setGroup(WidgetGroup * g)
 
     foreach (ExtenderButton * button, d->buttons) {
         button->setGroupByName(group()->name() + "-Button");
+    }
+
+    foreach (ActionListView * list, d->lists) {
+        list->setGroupByName(group()->name() + "-List");
     }
 }
 

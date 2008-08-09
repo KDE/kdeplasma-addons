@@ -1,5 +1,7 @@
 project(LancelotMenu)
 
+find_package(SharedMimeInfo REQUIRED)
+
 # Moved up level
 # add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
@@ -18,6 +20,7 @@ include_directories(
 # Lancelot data models files
 set(plasma_lancelot_models_SRCS
   models/BaseModel.cpp
+  models/BaseMergedModel.cpp
   models/FolderModel.cpp
 
   models/FavoriteApplications.cpp
@@ -38,6 +41,7 @@ set(plasma_lancelot_models_SRCS
 set(plasma_lancelot_application_SRCS
   LancelotApplication.cpp
   LancelotWindow.cpp
+  Serializator.cpp
   QtDisplay.cpp
 )
 
@@ -114,6 +118,7 @@ set(plasma_applet_lancelot_part_SRCS
   ${plasma_lancelot_models_SRCS}
   # ${plasma_lancelot_application_SRCS}
   parts/LancelotPart.cpp
+  Serializator.cpp
 )
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
@@ -129,6 +134,13 @@ install(
   FILES parts/plasma-applet-lancelot-part.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
 )
+
+install(
+  FILES parts/lancelotpart-mime.xml
+  DESTINATION ${XDG_MIME_INSTALL_DIR}
+)
+update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
+
 
 # Lancelot Main Applet
 

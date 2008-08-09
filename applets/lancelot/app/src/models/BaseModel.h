@@ -20,7 +20,6 @@
 #ifndef LANCELOTAPP_MODELS_BASEMODEL_H_
 #define LANCELOTAPP_MODELS_BASEMODEL_H_
 
-#include "../LancelotApplication.h"
 #include <lancelot/models/ActionListViewModels.h>
 #include <KService>
 #include <KUrl>

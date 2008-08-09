@@ -23,6 +23,7 @@
 #include <lancelot/lancelot_export.h>
 
 #include <QPair>
+#include <QMimeData>
 #include <QString>
 #include <QIcon>
 #include <QVariant>
@@ -71,6 +72,12 @@ public:
      * @returns icon for the specified item
      */
     virtual QIcon icon(int index) const;
+
+    /**
+     * @param index index of the item
+     * @returns mime data for the specified item
+     */
+    virtual QMimeData * mimeData(int index) const;
 
     /**
      * @param index index of the item
@@ -152,7 +159,8 @@ protected:
 };
 
 /**
- * A basic implementation of ActionListViewModel
+ * A basic implementation of ActionListViewModel. Doesn't provide mimeData
+ * for drag and drop.
  */
 class LANCELOT_EXPORT StandardActionListViewModel: public ActionListViewModel {
     Q_OBJECT
@@ -270,9 +278,18 @@ public:
      */
     int modelCount() const;
 
+    /**
+     * @returns mime data for the specified model
+     * Reimplement this function if you want to support dragging
+     * the models inside the MergedActionListViewModel by
+     * dragging their caption items.
+     */
+    virtual QMimeData * modelMimeData(int index) const;
+
     L_Override virtual QString title(int index) const;
     L_Override virtual QString description(int index) const;
     L_Override virtual QIcon icon(int index) const;
+    L_Override virtual QMimeData * mimeData(int index) const;
     L_Override virtual bool isCategory(int index) const;
     L_Override virtual int size() const;
     L_Override virtual bool hasContextActions(int index) const;

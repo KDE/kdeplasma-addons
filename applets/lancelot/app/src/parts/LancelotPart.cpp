@@ -24,9 +24,17 @@
 #include <QGraphicsLayout>
 #include <QDataStream>
 
-#include "../src/models/Places.h"
-#include "../src/models/FavoriteApplications.h"
-#include "../src/models/Devices.h"
+#include "../models/Devices.h"
+#include "../models/Places.h"
+#include "../models/SystemServices.h"
+#include "../models/RecentDocuments.h"
+#include "../models/OpenDocuments.h"
+#include "../models/NewDocuments.h"
+#include "../models/FolderModel.h"
+#include "../models/FavoriteApplications.h"
+#include "../models/Applications.h"
+#include "../models/Runner.h"
+#include "../Serializator.h"
 
 class FullLayout: public QGraphicsLayout {
 public:
@@ -108,28 +116,30 @@ void LancelotPart::init()
     resize(200, 300);
     bool loaded;
     loaded = loadConfig();
-    if (!loaded) {
-        loaded = load(m_cmdarg);
+
+    if (!loaded && !m_cmdarg.isEmpty()) {
+        QFile file(QUrl(m_cmdarg).toLocalFile());
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&file);
+            while (!in.atEnd()) {
+                QString line = in.readLine().trimmed();
+                loaded = load(line);
+                if (loaded) {
+                    saveConfig(line);
+                    break;
+                }
+            }
+        }
     }
 
     if (!loaded) {
+        setFailedToLaunch(true, i18n("Lancelot part definition not found"));
     }
 }
 
 bool LancelotPart::load(const QString & input)
 {
-    QStringList lines = input.split("\n");
-    QMap < QString, QString > data;
-
-    kDebug() << input;
-
-    foreach (QString line, lines) {
-        if (line.isEmpty()) continue;
-        QStringList lineParts = line.split("=");
-        data[lineParts[0]] = lineParts[1];
-    }
-
-    kDebug() << data;
+    QMap < QString, QString > data = Serializator::deserialize(input);
 
     if (!data.contains("version")) {
         return false;
@@ -143,19 +153,28 @@ bool LancelotPart::load(const QString & input)
             if (m_model && m_deleteModel) {
                 delete m_model;
             }
-            if (modelID == "FavoriteApplications") {
+            m_deleteModel = true;
+            m_model = NULL;
+
+            if (modelID == "Places") {
+                m_model = new Models::Places();
+            } else if (modelID == "System") {
+                m_model = new Models::SystemServices();
+            } else if (modelID == "Devices/Removable") {
+                m_model = new Models::Devices(Models::Devices::Removable);
+            } else if (modelID == "Devices/Fixed") {
+                m_model = new Models::Devices(Models::Devices::Fixed);
+            } else if (modelID == "NewDocuments") {
+                m_model = new Models::NewDocuments();
+            } else if (modelID == "OpenDocuments") {
+                m_model = new Models::OpenDocuments();
+            } else if (modelID =="RecentDocuments") {
+                m_model = new Models::RecentDocuments();
+            } else if (modelID == "FavoriteApplications") {
                 m_model = Models::FavoriteApplications::instance();
                 m_deleteModel = false;
-                loaded = true;
-            } else if (modelID == "Devices") {
-                m_model = new Models::Devices();
-                m_deleteModel = true;
-                loaded = true;
-            } else if (modelID == "Places") {
-                m_model = new Models::Places();
-                m_deleteModel = true;
-                loaded = true;
             }
+            loaded = (m_model != NULL);
             m_list->setModel(m_model);
         }
     }
@@ -165,8 +184,11 @@ bool LancelotPart::load(const QString & input)
 
 LancelotPart::~LancelotPart()
 {
-    m_layout->removeAt(0);
-    delete m_list;
+    if (!hasFailedToLaunch()) {
+        m_layout->removeAt(0);
+        delete m_model;
+        delete m_list;
+    }
     delete m_instance;
 }
 
@@ -174,12 +196,12 @@ void LancelotPart::saveConfig(const QString & data)
 {
     KConfigGroup kcg = config();
     kcg.writeEntry("partData", data);
+    kcg.sync();
 }
 
 bool LancelotPart::loadConfig()
 {
     KConfigGroup kcg = config();
-    kDebug() << kcg.entryMap();
 
     QString data = kcg.readEntry("partData", QString());
     if (data.isEmpty()) {

@@ -78,7 +78,7 @@ Comment[zh_CN]=桌面上 Lancelot 菜单的部件
 Comment[zh_TW]=桌面上的 Lancelot 選單部件
 Type=Service
 
-X-Plasma-DropMimeTypes=application/x-lancelot-part
+X-Plasma-DropMimeTypes=text/x-lancelotpart
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_lancelot_part

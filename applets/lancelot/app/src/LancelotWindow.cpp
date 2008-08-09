@@ -32,7 +32,7 @@
 #include <kworkspace/kworkspace.h>
 #include "ksmserver_interface.h"
 #include "screensaver_interface.h"
-// #include "krunner_interface.h"
+#include <Serializator.h>
 
 #include "models/Devices.h"
 #include "models/Places.h"
@@ -44,6 +44,8 @@
 #include "models/FavoriteApplications.h"
 #include "models/Applications.h"
 #include "models/Runner.h"
+
+#include "models/BaseMergedModel.h"
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
 
@@ -57,7 +59,7 @@
 #define HIDE_TIMER_INTERVAL 1500
 #define SEARCH_TIMER_INTERVAL 300
 
-#define Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+#define Merged(A) ((Models::BaseMergedModel *)(A))
 
 // Transparent QGV
 
@@ -518,27 +520,27 @@ void LancelotWindow::setupModels()
 
      // Groups:
 
-     m_modelGroups["ComputerLeft"]   = new Lancelot::MergedActionListViewModel();
-     m_modelGroups["DocumentsLeft"]  = new Lancelot::MergedActionListViewModel();
-     m_modelGroups["ContactsLeft"]   = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["ComputerLeft"]   = new Models::BaseMergedModel();
+     m_modelGroups["DocumentsLeft"]  = new Models::BaseMergedModel();
+     m_modelGroups["ContactsLeft"]   = new Models::BaseMergedModel();
 
-     m_modelGroups["ComputerRight"]  = new Lancelot::MergedActionListViewModel();
-     m_modelGroups["DocumentsRight"] = new Lancelot::MergedActionListViewModel();
-     m_modelGroups["ContactsRight"]  = new Lancelot::MergedActionListViewModel();
+     m_modelGroups["ComputerRight"]  = new Models::BaseMergedModel();
+     m_modelGroups["DocumentsRight"] = new Models::BaseMergedModel();
+     m_modelGroups["ContactsRight"]  = new Models::BaseMergedModel();
 
      // Assignments: Model - Group:
      // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
 
-     Merged(m_modelGroups["ComputerLeft"])->addModel  (QIcon(), i18n("Places"),           m_models["Places"]);
-     Merged(m_modelGroups["ComputerLeft"])->addModel  (QIcon(), i18n("System"),           m_models["SystemServices"]);
+     Merged(m_modelGroups["ComputerLeft"])->addModel ("Places", QIcon(), i18n("Places"), m_models["Places"]);
+     Merged(m_modelGroups["ComputerLeft"])->addModel ("System", QIcon(), i18n("System"), m_models["SystemServices"]);
 
-     Merged(m_modelGroups["ComputerRight"])->addModel (QIcon(), i18n("Removable"),        m_models["Devices/Removable"]);
-     Merged(m_modelGroups["ComputerRight"])->addModel (QIcon(), i18n("Fixed"),            m_models["Devices/Fixed"]);
+     Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Removable", QIcon(), i18n("Removable"), m_models["Devices/Removable"]);
+     Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Fixed", QIcon(), i18n("Fixed"), m_models["Devices/Fixed"]);
 
-     Merged(m_modelGroups["DocumentsLeft"])->addModel (QIcon(), i18n("New:"),             m_models["NewDocuments"]);
+     Merged(m_modelGroups["DocumentsLeft"])->addModel ("NewDocuments", QIcon(), i18n("New:"), m_models["NewDocuments"]);
 
-     Merged(m_modelGroups["DocumentsRight"])->addModel(QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
-     Merged(m_modelGroups["DocumentsRight"])->addModel(QIcon(), i18n("Open documents"),   m_models["OpenDocuments"]);
+     Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18n("Open documents"), m_models["OpenDocuments"]);
+     Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
 
      m_modelGroups["SearchLeft"] = m_models["Runner"];
 

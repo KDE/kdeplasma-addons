@@ -44,6 +44,11 @@ QIcon ActionListViewModel::icon(int index) const
     return QIcon();
 }
 
+QMimeData * ActionListViewModel::mimeData(int index) const
+{
+    return NULL;
+}
+
 bool ActionListViewModel::isCategory(int index) const
 {
     Q_UNUSED(index);
@@ -235,6 +240,21 @@ QIcon MergedActionListViewModel::icon(int index) const
     if (model == -1) return QIcon();
     if (modelIndex == -1) return m_modelsMetadata.at(model).second;
     return m_models.at(model)->icon(modelIndex);
+}
+
+QMimeData * MergedActionListViewModel::mimeData(int index) const
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return NULL;
+    if (modelIndex == -1) return modelMimeData(model);
+    return m_models.at(model)->mimeData(modelIndex);
+}
+
+QMimeData * MergedActionListViewModel::modelMimeData(int index) const
+{
+    return NULL;
 }
 
 bool MergedActionListViewModel::isCategory(int index) const

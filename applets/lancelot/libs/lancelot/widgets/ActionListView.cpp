@@ -46,6 +46,12 @@ void ActionListView::ItemButton::contextMenuEvent(QGraphicsSceneContextMenuEvent
     m_parent->itemContext(this);
 }
 
+void ActionListView::ItemButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    m_parent->itemDrag(this, event->widget());
+    ExtenderButton::mousePressEvent(event);
+}
+
 // ActionListView::ScrollButton
 ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
   : BasicWidget("", "", parent), m_list(list), m_direction(direction)
@@ -124,7 +130,6 @@ void ActionListView::itemActivated(int index) {
 void ActionListView::itemContext(ActionListView::ItemButton * button)
 {
     int buttonIndex = m_topButtonIndex;
-    kDebug() << buttonIndex;
 
     QPair < Lancelot::ExtenderButton *, int > pair;
     foreach (pair, m_buttons) {
@@ -148,6 +153,35 @@ void ActionListView::itemContextRequested(int index)
     m_model->contextActivate(index, menu.exec(QCursor::pos()));
 }
 
+
+void ActionListView::itemDrag(ActionListView::ItemButton * button, QWidget * widget)
+{
+    int buttonIndex = m_topButtonIndex;
+
+    QPair < Lancelot::ExtenderButton *, int > pair;
+    foreach (pair, m_buttons) {
+        if (pair.first == button) {
+            itemDragRequested(buttonIndex, widget);
+            return;
+        }
+        ++ buttonIndex;
+    }
+}
+
+void ActionListView::itemDragRequested(int index, QWidget * widget)
+{
+    kDebug();
+    QMimeData * data = m_model->mimeData(index);
+    kDebug() << (void *)data;
+    if (data == NULL) {
+        return;
+    }
+
+    QDrag * drag = new QDrag(widget);
+    drag->setMimeData(data);
+    drag->start();
+}
+
 ActionListView::~ActionListView()
 {
     deleteAllButtons();
@@ -157,10 +191,8 @@ ActionListView::~ActionListView()
 
 void ActionListView::positionScrollButtons()
 {
-    kDebug() << "SCROLL buttons positioning";
 
     if (!scrollButtonUp) {
-        kDebug() << "SCROLL Creating the buttons";
         scrollButtonUp = new ScrollButton(Up, this, this);
         scrollButtonDown = new ScrollButton(Down, this, this);
 
@@ -400,6 +432,25 @@ void ActionListView::setItemsGroup(WidgetGroup * group)
 
 WidgetGroup * ActionListView::itemsGroup() {
     return m_itemsGroup;
+}
+
+void ActionListView::setCategoriesGroupByName(const QString & group) {
+    setCategoriesGroup(instance()->group(group));
+}
+
+void ActionListView::setCategoriesGroup(WidgetGroup * group)
+{
+    if (group == NULL) {
+        group = instance()->defaultGroup();
+    }
+
+    if (group == m_categoriesGroup) return;
+
+    m_categoriesGroup = group;
+}
+
+WidgetGroup * ActionListView::categoriesGroup() {
+    return m_categoriesGroup;
 }
 
 void ActionListView::setExtenderPosition(ExtenderPosition position)

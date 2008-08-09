@@ -45,14 +45,21 @@ private slots:
     void taskRemoved(TaskPtr task);
 
 private:
+    class SupportedTask {
+    public:
+        SupportedTask(const QString & classPattern = 0,
+                const QString & documentNameExtractor = 0);
+        QRegExp m_classPattern;
+        QRegExp m_documentNameExtractor;
+    };
+
     void connectTask(TaskPtr task);
     bool setDataForTask(TaskPtr task);
 
     int indexOf(WId wid);
 
     QMap <WId, TaskPtr > m_tasks;
-    QSet <QString> m_classes;
-    QRegExp m_rx;
+    QList <SupportedTask> m_supportedTasks;
 };
 
 } // namespace Models

@@ -23,10 +23,28 @@
 
 namespace Models {
 
-OpenDocuments::OpenDocuments()
-  : m_rx("([^-]+) - ([^-]*)")
+OpenDocuments::SupportedTask::SupportedTask(const QString & classPattern,
+        const QString & documentNameExtractor)
+    : m_classPattern(classPattern), m_documentNameExtractor(documentNameExtractor)
 {
-    m_classes << "kate" << "kwrite" << "kedit" << "VCLSalFrame" << "gimp" << "krita";
+}
+
+OpenDocuments::OpenDocuments()
+{
+    m_supportedTasks
+        // KDE applications
+        << SupportedTask("kate", "([^-]+) - ([^-]*)")
+        << SupportedTask("kwrite", "([^-]+) - ([^-]*)")
+        << SupportedTask("krita.*", "([^-]+) - ([^-]*)")
+
+        // OpenOffice.org
+        << SupportedTask("VCLSalFrame.*", "([^-]+) - ([^-]*)")
+
+        // Other
+        << SupportedTask("gimp.*", "([^-]+) - ([^-]*)")
+        << SupportedTask("inkscape.*", "([^-]+) - ([^-]*)")
+        << SupportedTask("gvim.*", "([^-]+) [(][^)]*[)] - ([^-]*)")
+        ;
 
     load();
 }
@@ -91,7 +109,20 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 {
     Q_ASSERT(task);
 
-    if (!m_classes.contains(task->className())) return false;
+    kDebug() << task->className() << task->classClass();
+    QRegExp * extractor = NULL;
+    QString className = task->className();
+
+    SupportedTask st;
+    foreach (st, m_supportedTasks) {
+        if (st.m_classPattern.exactMatch(task->className())) {
+            extractor = & st.m_documentNameExtractor;
+            break;
+        }
+    }
+    if (extractor == NULL) {
+        return false;
+    }
 
     int index = indexOf(task->window());
     if (index == -1) {
@@ -104,9 +135,9 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
     QString title = task->visibleName();
     QString description;
-    if (m_rx.exactMatch(task->visibleName())) {
-        title = m_rx.cap(1);
-        description = m_rx.cap(2);
+    if (extractor->exactMatch(title)) {
+        title = extractor->cap(1);
+        description = extractor->cap(2);
     }
 
     QIcon icon = QIcon(task->icon(32, 32));
