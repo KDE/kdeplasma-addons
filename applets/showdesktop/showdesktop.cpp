@@ -56,10 +56,10 @@ void ShowDesktop::init()
     Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipManager::ToolTipContent toolTipData;
     toolTipData.mainText = i18n("Show the Desktop");
-    toolTipData.subText = i18n("Reduce all openings windows and show the Desktop");
+    toolTipData.subText = i18n("Minimize all open windows and show the Desktop");
     toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));
     Plasma::ToolTipManager::self()->setToolTipContent(this, toolTipData);
-    
+
     NETRootInfo info(QX11Info::display(), NET::Supported);
     m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
 
