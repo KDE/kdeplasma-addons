@@ -28,6 +28,7 @@
 // KDE
 #include <KIcon>
 #include <plasma/widgets/icon.h>
+#include <plasma/tooltipmanager.h>
 #include <KIconLoader>
 
 
@@ -49,6 +50,11 @@ void ShowDashboard::init()
     registerAsDragHandle(icon);
     layout->addItem(icon);
 
+    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    toolTipData.mainText = i18n("Show your Plasma Dashboard");
+    toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));
+    Plasma::ToolTipManager::self()->setToolTipContent(this, toolTipData);
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
     connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));

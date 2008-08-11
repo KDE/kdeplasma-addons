@@ -18,6 +18,7 @@
 #include "showdesktop.h"
 #include <plasma/widgets/icon.h>
 #include <plasma/containment.h>
+#include <plasma/tooltipmanager.h>
 #include <KIcon>
 #include <kwindowsystem.h>
 #include <netwm.h>
@@ -52,6 +53,13 @@ void ShowDesktop::init()
     registerAsDragHandle(icon);
     connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));
 
+    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    toolTipData.mainText = i18n("Show the Desktop");
+    toolTipData.subText = i18n("Reduce all openings windows and show the Desktop");
+    toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));
+    Plasma::ToolTipManager::self()->setToolTipContent(this, toolTipData);
+    
     NETRootInfo info(QX11Info::display(), NET::Supported);
     m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
 
