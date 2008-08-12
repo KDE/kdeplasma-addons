@@ -39,8 +39,8 @@ BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& 
     KGlobal::locale()->insertCatalog("krunner_browserhistoryrunner");
     setObjectName(i18n("Browser History"));
     m_icon = KIcon("view-history");
-    // What is this about? The API doc
-    setIgnoredTypes(Plasma::RunnerContext::FileSystem);
+    // What is this about? The API doc isn't exactly clear ...
+    //setIgnoredTypes(Plasma::RunnerContext::FileSystem);
     m_history = loadHistory();
 }
 
@@ -63,34 +63,29 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
         return;
     }
     if (m_time.elapsed() > UPDATE_INTERVAL) {
-        //kDebug() << "===========TIME:" << m_time.elapsed() << "[" << UPDATE_INTERVAL << "]";
         loadHistory();
     }
     foreach (const QString &historyitem, m_history) {
         // Filter out error pages, and match ...
         if (!historyitem.startsWith("error:/") && historyitem.contains(term, Qt::CaseInsensitive)) {
-            kDebug() << "MATCH:" << term << historyitem;
             Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::CompletionMatch);
+            match.setType(Plasma::QueryMatch::PossibleMatch);
             match.setRelevance(0.5);
             match.setIcon(m_icon);
             match.setData(historyitem);
             match.setText(historyitem);
             context.addMatch(term, match);
-            kDebug() << "addMatch" << match.data().toString();
         }
     }
 }
 
 void BrowserHistoryRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
-    kDebug() << "run run run run run run run run run run";
     Q_UNUSED(context)
     QString location = match.data().toString();
-    kDebug() << location;
+    kDebug() << "Browse to " << location;
     if (!location.isEmpty()) {
         KToolInvocation::invokeBrowser(location);
-        kDebug() << "BLA" << location;
     }
 }
 
