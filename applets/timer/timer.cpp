@@ -161,11 +161,10 @@ void Timer::slotCountDone()
         KPassivePopup::message(m_message, (QWidget *) 0);
     }
 
-    if (m_runCommand){
+    if (m_runCommand && !m_command.isEmpty()){
         QStringList args = KShell::splitArgs(m_command);
         QString command = args[0];
         args.removeFirst();
-
         KToolInvocation::kdeinitExec(command, args);
     }
 }
