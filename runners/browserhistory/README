@@ -1,0 +1,16 @@
+Browser history runner
+========================
+This Runner loads Konqueror's history from its
+config file. KRunner's query is matched against
+these items.
+
+Open
+=====
+- What is the setIgnoredTypes() call about?
+- Is there a way to get notified on updates to
+  the browser's history, rather than reloading
+  the config file?
+- Do we want Firefox's history as well?
+
+--
+sebas@kde.org
