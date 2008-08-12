@@ -53,7 +53,9 @@ QStringList BrowserHistoryRunner::loadHistory()
     m_time.restart();
     KConfig *konq_config = new KConfig("konq_history", KConfig::NoGlobals);
     KConfigGroup locationBarGroup( konq_config, "Location Bar" );
-    return locationBarGroup.readPathEntry( "ComboContents", QStringList() );
+    QStringList lstHistory = locationBarGroup.readPathEntry( "ComboContents", QStringList() );
+    delete konq_config;
+    return lstHistory;
 }
 
 void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
