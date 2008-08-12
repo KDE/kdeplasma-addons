@@ -41,6 +41,6 @@ class BrowserHistoryRunner : public Plasma::AbstractRunner {
         QTime m_time;
 };
 
-K_EXPORT_PLASMA_RUNNER(krunner_browserhistory, BrowserHistoryRunner)
+K_EXPORT_PLASMA_RUNNER(browserhistory, BrowserHistoryRunner)
 
 #endif
