@@ -39,12 +39,12 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     Q_UNUSED(args);
     // set the name shown after the result in krunner window
     setObjectName(i18n("Contacts"));
-    
+
     m_book = KABC::StdAddressBook::self();
     m_book->load();
 
     m_icon = KIcon("internet-mail");
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File | 
+    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
 }
 
@@ -88,7 +88,11 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 		match.setIcon(m_icon);
 
 	    match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
-	    match.setData(a.preferredEmail());
+        if (!a.realName().isEmpty()) {
+            match.setData(a.realName() + "<" + a.preferredEmail() + ">");
+        } else {
+            match.setData(a.preferredEmail());
+        }
             matches.append(match);
 	}
     }
@@ -103,7 +107,7 @@ void ContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::Que
     QString name = match.text();
 
     kDebug() << "run name '" << name << "' with address '" << address << "'";
-    
+
     KToolInvocation::invokeMailer(address);
 }
 
