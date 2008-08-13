@@ -6,10 +6,10 @@
 
 Controls::Controls(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      m_playpause(new Plasma::Icon),
-      m_stop(new Plasma::Icon),
-      m_prev(new Plasma::Icon),
-      m_next(new Plasma::Icon),
+      m_playpause(new Plasma::Icon(this)),
+      m_stop(new Plasma::Icon(this)),
+      m_prev(new Plasma::Icon(this)),
+      m_next(new Plasma::Icon(this)),
       m_layout(0),
       m_state(NoPlayer),
       m_caps(NoCaps)

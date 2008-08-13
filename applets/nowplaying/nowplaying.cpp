@@ -99,11 +99,16 @@ void NowPlaying::init()
 
     setLayout(m_layout);
 
-    connect(dataEngine("nowplaying"), SIGNAL(sourceAdded(QString)),
-            SLOT(playerAdded(QString)));
-    connect(dataEngine("nowplaying"), SIGNAL(sourceRemoved(QString)),
-            SLOT(playerRemoved(QString)));
-
+    Plasma::DataEngine* nowPlayingEngine = dataEngine("nowplaying");
+    if ( nowPlayingEngine )
+    {
+        connect(nowPlayingEngine, SIGNAL(sourceAdded(QString)),
+                SLOT(playerAdded(QString)));
+        connect(nowPlayingEngine, SIGNAL(sourceRemoved(QString)),
+                SLOT(playerRemoved(QString)));
+    }
+    else
+        kDebug()<<" We can not get now playing engine";
     findPlayer();
 }
 
