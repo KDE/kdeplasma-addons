@@ -78,7 +78,7 @@ void SlideShow::addDir(const QString &path)
 	return;
     }
     foreach (const QString &imageFile, dir.entryList(QDir::Files)) {
-	    addImage(path + "/" + imageFile);
+	    addImage(path + '/' + imageFile);
     }
     KRandomSequence randomSequence;
     indexList.clear();
@@ -94,7 +94,7 @@ void SlideShow::addRecursiveDir(const QString &path)
     QDir dir(path);
 
     foreach (const QString &subDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-        addRecursiveDir(path + "/" + subDir);
+        addRecursiveDir(path + '/' + subDir);
     }
 }
 
@@ -123,3 +123,4 @@ KUrl SlideShow::getUrl()
 	    return KUrl("Default");
     }
 }
+
