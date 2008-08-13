@@ -56,17 +56,9 @@
          </size>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>454</width>
-           <height>230</height>
-          </rect>
-         </property>
          <layout class="QGridLayout" >
           <item row="0" column="0" >
            <layout class="QHBoxLayout" >
@@ -171,14 +163,6 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_3" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>454</width>
-           <height>230</height>
-          </rect>
-         </property>
          <layout class="QVBoxLayout" name="verticalLayout" >
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout" >
@@ -268,7 +252,7 @@
                <enum>QDateTimeEdit::HourSection</enum>
               </property>
               <property name="displayFormat" >
-               <string comment="(qtdt-format) Please do not change the quotes (') and translate only the content of the quotes.">hh 'Hours' mm 'Mins' ss 'Secs'</string>
+               <string comment="(qtdt-format) Please do not change the quotes (') and translate only the content of the quotes." >hh 'Hours' mm 'Mins' ss 'Secs'</string>
               </property>
               <property name="time" >
                <time>
@@ -297,37 +281,31 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_2" >
-         <property name="geometry" >
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>454</width>
-           <height>230</height>
-          </rect>
-         </property>
-         <widget class="QComboBox" name="potdComboBox" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>30</y>
-            <width>271</width>
-            <height>27</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QLabel" name="selectPoTDlabel" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>158</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>Select Picture of the day source:</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_2" >
+          <item>
+           <widget class="QLabel" name="selectPoTDlabel" >
+            <property name="text" >
+             <string>Select Picture of the day source:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="potdComboBox" />
+          </item>
+          <item>
+           <spacer name="verticalSpacer" >
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>103</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
