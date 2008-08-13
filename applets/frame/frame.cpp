@@ -165,7 +165,7 @@ void Frame::addDir()
         if (!m_slideShowPaths.contains(path)) {
             m_configDialog->ui.slideShowDirList->addItem(path);
         }
-        m_configDialog->ui.removeDirButton->setEnabled(true);
+        updateButtons();
     }
 }
 
@@ -174,11 +174,18 @@ void Frame::removeDir()
     int row = m_configDialog->ui.slideShowDirList->currentRow();
     if (row != -1) {
         m_configDialog->ui.slideShowDirList->takeItem(row);
-        if (m_configDialog->ui.slideShowDirList->count() == 0) {
-            m_configDialog->ui.removeDirButton->setEnabled(false);
-        }
+        updateButtons();
     }
 }
+
+void Frame::updateButtons()
+{
+    int row = m_configDialog->ui.slideShowDirList->currentRow();
+    m_configDialog->ui.removeDirButton->setEnabled(row != -1);
+
+}
+
+
 
 void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
@@ -207,6 +214,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
 
     connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
+    connect(m_configDialog->ui.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
 
     m_configDialog->setRoundCorners( m_roundCorners );
     m_configDialog->setSmoothScaling( m_smoothScaling );
@@ -301,8 +309,10 @@ void Frame::initSlideShow()
     } else if (m_potd) {
 	Plasma::DataEngine *engine = dataEngine( "potd" );
 	if ( !engine )
+        {
+            kDebug()<<" Engine potd can't be created";
 	    return;
-
+        }
 	QDate mCurrentDate = QDate::currentDate();
 	const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
 

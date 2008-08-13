@@ -61,6 +61,7 @@ class Frame : public Plasma::Applet
     private Q_SLOTS:
         void addDir();
         void removeDir();
+        void updateButtons();
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
