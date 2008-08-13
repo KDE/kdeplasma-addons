@@ -101,7 +101,7 @@ void BlueMarble::initializeGL()
     kDebug() ;
     initGL();
     if (!GLShader::fragmentShaderSupported()) {
-        setFailedToLaunch(true, "OpenGL Shaders not supported");
+        setFailedToLaunch(true, i18n("OpenGL Shaders not supported"));
         return;
     }
 
@@ -170,7 +170,7 @@ void BlueMarble::paintGLInterface(QPainter *, const QStyleOptionGraphicsItem *)
 
     glCullFace(GL_BACK);
     checkGLError("paint 5");
-    gluSphere(mSphere, earthRadius, earthDetailLevel, earthDetailLevel);
+   gluSphere(mSphere, earthRadius, earthDetailLevel, earthDetailLevel);
 
     mShader->unbind();
 }
