@@ -29,6 +29,7 @@
 #include <QCheckBox>
 #include <QTimer>
 #include <QFileInfo>
+#include <QStandardItemModel>
 
 #include <KDebug>
 #include <KConfigDialog>
@@ -73,7 +74,7 @@ void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &da
     const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
 
     QImage _picture = data[ identifier ].value<QImage>();
-    
+
     if ( !_picture.isNull() ) {
 	m_picture = _picture;
 	resize(contentSizeHint());
@@ -180,13 +181,20 @@ void Frame::removeDir()
 void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
     m_configDialog = new ConfigDialog( parent );
-    
+
     KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
     foreach (const KService::Ptr &service, services) {
 	const QString service_name( service->name() );
 	const QVariant service_identifier( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
 	m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), service_name, service_identifier );
     }
+
+    QStandardItemModel* model = static_cast<QStandardItemModel*>( m_configDialog->ui.pictureComboBox->model() );
+    QStandardItem* item = model->item( 2 );
+    if ( services.isEmpty() )
+        item->setFlags( item->flags() & ~Qt::ItemIsEnabled );
+    else
+        item->setFlags( item->flags() | Qt::ItemIsEnabled );
 
     parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     parent->addPage( m_configDialog, parent->windowTitle(), icon() );
@@ -295,16 +303,16 @@ void Frame::initSlideShow()
 
 	QDate mCurrentDate = QDate::currentDate();
 	const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
-    
+
 	engine->disconnectSource( identifier, this );
 	engine->connectSource( identifier, this );
-    
+
 	const Plasma::DataEngine::Data data = engine->query( identifier );
     } else {
 	    m_mySlideShow->setImage(m_currentUrl.path());
 	    m_slideShowTimer->stop();
     }
-    
+
     if (!m_potd)
 	updatePicture();
 }
@@ -362,13 +370,13 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     m_pixmapCache = QPixmap(contentsSize);
     m_pixmapCache.fill(Qt::transparent);
 
-    
+
     int roundingFactor = 12 * m_roundCorners;
     int swRoundness = roundingFactor + m_frameOutline / 2 * m_frame * m_roundCorners;
 
     QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
                                                     -m_swOutline, -m_swOutline); //Pretty useless.
-    
+
     Qt::TransformationMode transformationMode = m_smoothScaling ? Qt::SmoothTransformation : Qt::FastTransformation;
     //TODO check if correct
     QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
