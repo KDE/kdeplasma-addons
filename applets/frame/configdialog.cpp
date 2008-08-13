@@ -93,7 +93,7 @@ bool ConfigDialog::showFrame() const
     return ui.frameCheckBox->isChecked();
 }
 
-void ConfigDialog::setFrameColor(QColor frameColor)
+void ConfigDialog::setFrameColor(const QColor& frameColor)
 {
     ui.changeFrameColor->setColor(frameColor);
 }
@@ -103,7 +103,7 @@ QColor ConfigDialog::frameColor() const
     return ui.changeFrameColor->color();
 }
 
-void ConfigDialog::setCurrentUrl(KUrl currentUrl)
+void ConfigDialog::setCurrentUrl(const KUrl& currentUrl)
 {
     ui.picRequester->setUrl(currentUrl);
 }
@@ -136,7 +136,8 @@ void ConfigDialog::setSmoothScaling(bool smooth)
     ui.smoothScaling->setChecked(smooth);
 }
 
-bool ConfigDialog::smoothScaling()
+bool ConfigDialog::smoothScaling() const
 {
     return ui.smoothScaling->isChecked();
 }
+

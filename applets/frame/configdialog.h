@@ -37,7 +37,7 @@ class ConfigDialog : public QWidget
         bool random() const;
 	/// Smooth scaling
 	void setSmoothScaling(bool smooth);
-	bool smoothScaling();
+	bool smoothScaling() const;
 	/// Set a shadow for the frame
 	void setShadow(bool round);
         bool shadow() const;
@@ -45,10 +45,10 @@ class ConfigDialog : public QWidget
 	void setShowFrame(bool show);
 	bool showFrame() const;
 	/// Frame Color
-	void setFrameColor(QColor frameColor);
+	void setFrameColor(const QColor& frameColor);
 	QColor frameColor() const;
 	// Static Picture
-	void setCurrentUrl(KUrl currentUrl);
+	void setCurrentUrl(const KUrl& currentUrl);
 	KUrl currentUrl() const;
         /// Designer Config file
         Ui::config ui;
