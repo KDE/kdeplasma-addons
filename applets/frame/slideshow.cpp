@@ -20,6 +20,7 @@
 #include <QDir>
 #include <KUrl>
 #include <KRandomSequence>
+#include <KDebug>
 
 #include "picture.h"
 #include "slideshow.h"

@@ -27,6 +27,7 @@
 #include <KUrl>
 
 #include <klocalizedstring.h>
+#include <plasma/theme.h>
 
 
 Picture::Picture()

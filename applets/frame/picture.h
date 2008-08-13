@@ -23,15 +23,13 @@
 
 #include <QImage>
 
-#include <plasma/theme.h>
-
 class KUrl;
 
 /**
  * @brief Picture choice
  * @author Anne-Marie Mahfouf <annma@kde.org>
  *
- * This class handles the choice of the picture and 
+ * This class handles the choice of the picture and
  * makes it ready for the Frame class to paint this picture.
  */
 
@@ -40,18 +38,18 @@ class Picture
     public:
 	Picture();
 	~Picture();
-	/** 
-	* Set Default picture with written message @p message if no picture or folder was choosen 
+	/**
+	* Set Default picture with written message @p message if no picture or folder was choosen
 	* by the user
 	**/
 	QImage defaultPicture(const QString &message);
-	/** 
-	* Set picture from location @p currentUrl 
+	/**
+	* Set picture from location @p currentUrl
 	**/
 	QImage setPicture(const KUrl &currentUrl);
 
     private:
-        QImage getPicture(){return m_picture;};
+        QImage getPicture() const {return m_picture;};
 	QImage m_picture;
 	/// Maximum Picture Dimension
         static const int m_maxDimension=800;
