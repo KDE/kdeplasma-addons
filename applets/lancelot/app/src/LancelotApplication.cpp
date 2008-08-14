@@ -64,7 +64,6 @@ bool LancelotApplication::event(QEvent * e)
         hide(true);
     }
     return KUniqueApplication::event(e);
-
 }
 
 void LancelotApplication::init()

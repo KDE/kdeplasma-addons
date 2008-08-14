@@ -17,28 +17,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
-#define LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#ifndef LANCELOTAPP_MODELS_CONTACTSKOPETE_H_
+#define LANCELOTAPP_MODELS_CONTACTSKOPETE_H_
 
-#include <lancelot/models/ActionListViewModels.h>
+#include "kopete_interface.h"
+#include "BaseModel.h"
 
 namespace Models {
 
-class BaseMergedModel: public Lancelot::MergedActionListViewModel {
+class ContactsKopete : public BaseModel {
+    Q_OBJECT
 public:
-    BaseMergedModel();
-    ~BaseMergedModel();
+    ContactsKopete();
+    ~ContactsKopete();
 
-    void addModel(const QString & id, QIcon icon,
-            const QString & title, ActionListViewModel * model);
-    L_Override virtual QMimeData * modelMimeData(int index) const;
-    L_Override virtual void setModelDropActions(int index,
-            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    void timerEvent(QTimerEvent * event);
+
+protected:
+    void activate(int index);
+    void load();
 
 private:
-    QList < QString > m_modelIDs;
+    org::kde::Kopete * m_interface;
+    QBasicTimer m_timer;
+    QString m_kopeteAvatarsDir;
+    bool m_kopeteRunning;
 };
 
 } // namespace Models
 
-#endif // LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#endif // LANCELOTAPP_MODELS_CONTACTSKOPETE_H_
+
+

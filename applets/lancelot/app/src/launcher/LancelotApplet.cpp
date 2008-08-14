@@ -70,6 +70,7 @@ public:
         Lancelot::HoverIcon * button = new Lancelot::HoverIcon(KIcon(mainIcon), "", q);
         layout->addItem(button);
         connect(button, SIGNAL(activated()), q, SLOT(showLancelot()));
+        connect(button, SIGNAL(clicked()), q, SLOT(showLancelot()));
         button->setActivationMethod(clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
 
         buttons << button;

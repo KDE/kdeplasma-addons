@@ -142,14 +142,14 @@
                     <item:layout name="layoutPanelComputer" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listComputerLeft" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+                            extenderPosition="Left"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
                             name="listComputerRight" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
+                            extenderPosition="Right"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -169,14 +169,14 @@
                     <item:layout name="layoutPanelContacts" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listContactsLeft" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+                            extenderPosition="Left"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
                             name="listContactsRight" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
+                            extenderPosition="Right"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -196,14 +196,14 @@
                     <item:layout name="layoutPanelDocuments" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listDocumentsLeft" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Left-Items" extenderPosition="Left"
+                            extenderPosition="Left"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
                         />
                         <item:widget
                             name="listDocumentsRight" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Right-Items" extenderPosition="Right"
+                            extenderPosition="Right"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -223,7 +223,7 @@
                     <item:layout name="layoutPanelSearch" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listSearchLeft" type="Lancelot::ActionListView"
-                            itemsGroup="ActionListView-Left-Items" extenderPosition="Right"
+                            extenderPosition="Right"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"

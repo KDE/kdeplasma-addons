@@ -23,6 +23,7 @@
 #include <KGlobal>
 #include <plasma/theme.h>
 #include <KStandardDirs>
+#include <QMutex>
 
 namespace Lancelot
 {
@@ -257,6 +258,8 @@ public:
     // TODO: Warning! When threading comes around this approach will break...
     // it'll need mutexes, or something else...
     static Instance * activeInstance;
+    static Instance * activeInstanceStack; // we support only one item in the stack - courtesy of Mutex
+    static QMutex activeInstanceLock;
 
     QList< Widget * > widgets;
     QMap < QString, WidgetGroup * > groups;
@@ -274,6 +277,8 @@ public:
 };
 
 Instance * Instance::Private::activeInstance = NULL;
+Instance * Instance::Private::activeInstanceStack = NULL;
+QMutex Instance::Private::activeInstanceLock;
 bool Instance::Private::hasApplication = false;
 
 Instance * Instance::activeInstance()
@@ -281,9 +286,19 @@ Instance * Instance::activeInstance()
     return Instance::Private::activeInstance;
 }
 
-void Instance::setActiveInstance(Instance * instance)
+void Instance::setActiveInstanceAndLock(Instance * instance)
 {
+    Instance::Private::activeInstanceLock.lock();
+    Instance::Private::activeInstanceStack =
+        Instance::Private::activeInstance;
     Instance::Private::activeInstance = instance;
+}
+
+void Instance::releaseActiveInstanceLock()
+{
+    Instance::Private::activeInstance =
+        Instance::Private::activeInstanceStack;
+    Instance::Private::activeInstanceLock.unlock();
 }
 
 void Instance::activateAll() {

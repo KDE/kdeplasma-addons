@@ -80,6 +80,20 @@ public:
     virtual QMimeData * mimeData(int index) const;
 
     /**
+     * This function is invoked when a data is dropped
+     * @param index index of the dragged item
+     * @param action invoked drop action
+     */
+    virtual void dataDropped(int index, Qt::DropAction action);
+
+    /**
+     * @param index index of the item to be dragged
+     * @param actions supported drop actions
+     * @param defaultAction default drop action
+     */
+    virtual void setDropActions(int index, Qt::DropActions & actions, Qt::DropAction & defaultAction);
+
+    /**
      * @param index index of the item
      * @returns whether the item represents a category
      */
@@ -239,7 +253,13 @@ public:
      * @returns the specified item
      * @param index index of the item to return
      */
-    Item itemAt(int index);
+    Item & itemAt(int index);
+
+    /**
+     * Clears all items
+     * @param emitUpdated should the updated signal be emitted
+     */
+    void clear(bool emitUpdated = true);
 
 protected:
 
@@ -274,6 +294,18 @@ public:
     void addModel(QIcon icon, const QString & title, ActionListViewModel * model);
 
     /**
+     * @returns model with the specified index
+     * @param index index of the model to return
+     */
+    ActionListViewModel * modelAt(int index);
+
+    /**
+     * Removes a model from the list
+     * @param index index of the model to remove
+     */
+    void removeModel(int index);
+
+    /**
      * @returns number of the models
      */
     int modelCount() const;
@@ -286,10 +318,56 @@ public:
      */
     virtual QMimeData * modelMimeData(int index) const;
 
+    /**
+     * This function is invoked when a model is dragged and dropped.
+     * Reimplement this function if you want to support dragging
+     * the models inside the MergedActionListViewModel by
+     * dragging their caption items.
+     */
+    virtual void modelDataDropped(int index, Qt::DropAction action);
+
+    /**
+     * @param index index of the model to be dragged
+     * @param actions supported drop actions
+     * @param defaultAction default drop action
+     * Reimplement this function if you want to support dragging
+     * the models inside the MergedActionListViewModel by
+     * dragging their caption items.
+     */
+    virtual void setModelDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+
+    /**
+     * @returns whether the model has context actions
+     * @param index model for which context menu is tested
+     * Reimplement this function if you want to support context
+     * menus for models when user right clicks the captio item
+     */
+    virtual bool hasModelContextActions(int index) const;
+
+    /**
+     * Sets the actions for the context menu
+     * @param index model for which context menu should be set
+     * Reimplement this function if you want to support context
+     * menus for models when user right clicks the captio item
+     */
+    virtual void setModelContextActions(int index, QMenu * menu);
+
+    /**
+     * Activates the context for the specified model
+     * @param index model index
+     * @param activated action
+     * Reimplement this function if you want to support context
+     * menus for models when user right clicks the captio item
+     */
+    virtual void modelContextActivate(int index, QAction * context);
+
     L_Override virtual QString title(int index) const;
     L_Override virtual QString description(int index) const;
     L_Override virtual QIcon icon(int index) const;
     L_Override virtual QMimeData * mimeData(int index) const;
+    L_Override virtual void dataDropped(int index, Qt::DropAction action);
+    L_Override virtual void setDropActions(int index, Qt::DropActions & actions, Qt::DropAction & defaultAction);
     L_Override virtual bool isCategory(int index) const;
     L_Override virtual int size() const;
     L_Override virtual bool hasContextActions(int index) const;

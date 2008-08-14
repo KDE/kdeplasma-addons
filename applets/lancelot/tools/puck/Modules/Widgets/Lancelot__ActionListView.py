@@ -18,7 +18,10 @@ class Lancelot__ActionListViewHandler(Lancelot__Widget.Lancelot__WidgetHandler):
     def setup(self):
         setup = Lancelot__Widget.Lancelot__WidgetHandler.setup(self)
 
-        
+
+        if self.hasAttribute('extenderPosition'):
+            setup += self.attribute('name') \
+                  + '->setExtenderPosition(Lancelot::' + self.attribute('extenderPosition') + 'Extender);'
 
         return setup;
 

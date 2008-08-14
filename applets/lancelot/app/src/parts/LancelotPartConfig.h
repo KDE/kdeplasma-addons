@@ -17,28 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
-#define LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#ifndef LANCELOT_LAUNCHER_APPLET_CONFIG_H_
+#define LANCELOT_LAUNCHER_APPLET_CONFIG_H_
 
-#include <lancelot/models/ActionListViewModels.h>
+#include <ui_LancelotPartConfigBase.h>
+#include <lancelot/lancelot.h>
 
-namespace Models {
-
-class BaseMergedModel: public Lancelot::MergedActionListViewModel {
+class LancelotPartConfig: public Ui::LancelotPartConfigBase {
 public:
-    BaseMergedModel();
-    ~BaseMergedModel();
+    void setupUi(QWidget * widget);
 
-    void addModel(const QString & id, QIcon icon,
-            const QString & title, ActionListViewModel * model);
-    L_Override virtual QMimeData * modelMimeData(int index) const;
-    L_Override virtual void setModelDropActions(int index,
-            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    bool iconClickActivation() const;
+    QString icon() const;
 
-private:
-    QList < QString > m_modelIDs;
+    bool contentsClickActivation() const;
+    Lancelot::ExtenderPosition contentsExtenderPosition() const;
+
+    void setIconClickActivation(bool value);
+    void setIcon(const QString & icon);
+
+    void setContentsClickActivation(bool value);
+    void setContentsExtenderPosition(Lancelot::ExtenderPosition position);
+
+    QButtonGroup * qbgIcon;
+    QButtonGroup * qbgContents;
+    QButtonGroup * qbgContentsExtenderPosition;
 };
 
-} // namespace Models
-
-#endif // LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#endif /* LANCELOT_LAUNCHER_APPLET_CONFIG_H_ */

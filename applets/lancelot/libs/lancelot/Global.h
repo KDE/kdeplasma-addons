@@ -238,10 +238,15 @@ public:
     static Instance * activeInstance();
 
     /**
-     * Sets the active instance
+     * Sets the active instance and locks the mutex for it
      * @param instance new active instance
      */
-    static void setActiveInstance(Instance * instance);
+    static void setActiveInstanceAndLock(Instance * instance);
+
+    /**
+     * Releases the lock on the active instance
+     */
+    static void releaseActiveInstanceLock();
 
     // TODO: Replace the following finctions, and move them into the
     // Instance itself.

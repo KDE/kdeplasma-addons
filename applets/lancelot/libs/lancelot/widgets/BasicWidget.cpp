@@ -47,7 +47,7 @@ namespace Lancelot
 class BasicWidget::Private {
     public:
     Private(BasicWidget * parent, QString title = QString(), QString description = QString())
-      : icon(QIcon()), iconInSvg(NULL), iconSize(32, 32),
+      : icon(QIcon()), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
@@ -55,18 +55,19 @@ class BasicWidget::Private {
     }
 
     Private(BasicWidget * parent, QIcon icon, QString title, QString description)
-      : icon(icon), iconInSvg(NULL), iconSize(32, 32),
+      : icon(icon), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
         init(parent);
     }
 
-    Private(BasicWidget * parent, Plasma::Svg * icon, QString title, QString description)
-      : icon(QIcon()), iconInSvg(icon), iconSize(32, 32),
+    Private(BasicWidget * parent, const Plasma::Svg & icon, QString title, QString description)
+      : icon(QIcon()), iconSize(32, 32),
         innerOrientation(Qt::Horizontal), alignment(Qt::AlignCenter),
         title(title), description(description)
     {
+        iconInSvg.setImagePath(icon.imagePath());
         init(parent);
     }
 
@@ -78,7 +79,7 @@ class BasicWidget::Private {
     }
 
     QIcon icon;
-    Plasma::Svg * iconInSvg;
+    Plasma::Svg iconInSvg;
     QSize iconSize;
     Qt::Orientation innerOrientation;
 
@@ -111,7 +112,7 @@ BasicWidget::BasicWidget(QIcon icon, QString title,
     L_WIDGET_SET_INITIALIZED;
 }
 
-BasicWidget::BasicWidget(Plasma::Svg * icon, QString title,
+BasicWidget::BasicWidget(const Plasma::Svg & icon, QString title,
         QString description, QGraphicsItem * parent)
   : Widget(parent),
     d(new Private(this, icon, title, description))
@@ -137,6 +138,8 @@ void BasicWidget::paint(QPainter * painter,
 
 void BasicWidget::paintForeground(QPainter * painter)
 {
+    if (!L_WIDGET_IS_INITIALIZED) return;
+
     QPainter * _painter = painter;
 
     QPixmap foreground(size().toSize().width(), size().toSize().height());
@@ -161,7 +164,7 @@ void BasicWidget::paintForeground(QPainter * painter)
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect         = QRectF(0, 0, d->iconSize.width(), d->iconSize.height());
 
-    if (d->icon.isNull() && !d->iconInSvg) iconRect = QRectF(0, 0, 0, 0);
+    if (d->icon.isNull() && !d->iconInSvg.isValid()) iconRect = QRectF(0, 0, 0, 0);
 
     // painter->setFont(titleFont)); // NOT NEEDED
     QRectF titleRect        = painter->boundingRect(widgetRect,
@@ -187,7 +190,7 @@ void BasicWidget::paintForeground(QPainter * painter)
         float top = WIDGET_PADDING, height =
             iconRect.height() + titleRect.height() + descriptionRect.height();
 
-        if ((!d->icon.isNull() || d->iconInSvg) && !(d->title.isEmpty() && d->description.isEmpty()))
+        if ((!d->icon.isNull() || d->iconInSvg.isValid()) && !(d->title.isEmpty() && d->description.isEmpty()))
             height += WIDGET_PADDING;
 
         if (d->alignment & Qt::AlignVCenter)
@@ -195,14 +198,14 @@ void BasicWidget::paintForeground(QPainter * painter)
         if (d->alignment & Qt::AlignBottom)
             top = widgetRect.height() - height + WIDGET_PADDING;
 
-        if (!d->icon.isNull() || d->iconInSvg) { // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg.isValid()) { // using real painter...
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
             if (!d->icon.isNull()) {
                 d->icon.paint(_painter, rect);
             } else {
-                d->iconInSvg->resize(d->iconSize);
-                d->iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
+                d->iconInSvg.resize(d->iconSize);
+                d->iconInSvg.paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
             }
             top += d->iconSize.height() + WIDGET_PADDING;
         }
@@ -242,7 +245,7 @@ void BasicWidget::paintForeground(QPainter * painter)
 
         if ((widgetRect.width() < width) || (d->alignment & Qt::AlignLeft)) {
             iconRect.moveLeft(WIDGET_PADDING);
-            titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg) ? iconRect.width() + WIDGET_PADDING : 0));
+            titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg.isValid()) ? iconRect.width() + WIDGET_PADDING : 0));
             descriptionRect.setWidth(titleRect.width());
         } else if (d->alignment & Qt::AlignHCenter) {
             iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width) / 2);
@@ -252,7 +255,7 @@ void BasicWidget::paintForeground(QPainter * painter)
         titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
         descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
 
-        if (!d->icon.isNull() || d->iconInSvg) {  // using real painter...
+        if (!d->icon.isNull() || d->iconInSvg.isValid()) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
             if (!d->icon.isNull()) {
                 QIcon::Mode mode;
@@ -266,8 +269,8 @@ void BasicWidget::paintForeground(QPainter * painter)
 
                 d->icon.paint(_painter, rect, Qt::AlignCenter, mode, QIcon::Off);
             } else {
-                d->iconInSvg->resize(d->iconSize);
-                d->iconInSvg->paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive"); //TODO: add disabled state
+                d->iconInSvg.resize(d->iconSize);
+                d->iconInSvg.paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive"); //TODO: add disabled state
             }
         }
 
@@ -328,13 +331,13 @@ QIcon BasicWidget::icon() const
     return d->icon;
 }
 
-void BasicWidget::setIconInSvg(Plasma::Svg * icon)
+void BasicWidget::setIconInSvg(const Plasma::Svg & icon)
 {
-    d->iconInSvg = icon;
+    d->iconInSvg.setImagePath(icon.imagePath());
     update();
 }
 
-Plasma::Svg * BasicWidget::iconInSvg() const
+Plasma::Svg & BasicWidget::iconInSvg() const
 {
     return d->iconInSvg;
 }

@@ -48,8 +48,16 @@ void ActionListView::ItemButton::contextMenuEvent(QGraphicsSceneContextMenuEvent
 
 void ActionListView::ItemButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-    m_parent->itemDrag(this, event->widget());
+    m_mousePos = event->pos();
     ExtenderButton::mousePressEvent(event);
+}
+
+void ActionListView::ItemButton::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+        m_parent->itemDrag(this, event->widget());
+    }
+    ExtenderButton::mouseMoveEvent(event);
 }
 
 // ActionListView::ScrollButton
@@ -179,7 +187,13 @@ void ActionListView::itemDragRequested(int index, QWidget * widget)
 
     QDrag * drag = new QDrag(widget);
     drag->setMimeData(data);
-    drag->start();
+
+    Qt::DropActions actions;
+    Qt::DropAction defaultAction;
+    m_model->setDropActions(index, actions, defaultAction);
+
+    Qt::DropAction dropAction = drag->exec(actions, defaultAction);
+    m_model->dataDropped(index, dropAction);
 }
 
 ActionListView::~ActionListView()
@@ -193,8 +207,10 @@ void ActionListView::positionScrollButtons()
 {
 
     if (!scrollButtonUp) {
+        Instance::setActiveInstanceAndLock(group()->instance());
         scrollButtonUp = new ScrollButton(Up, this, this);
         scrollButtonDown = new ScrollButton(Down, this, this);
+        Instance::releaseActiveInstanceLock();
 
         scrollButtonUp->setMinimumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
         scrollButtonUp->setPreferredSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
@@ -396,15 +412,6 @@ void ActionListView::modelItemAltered(int index)
     }
 }
 
-/*void ActionListView::paintWidget(QPainter * painter,
-        const QStyleOptionGraphicsItem * option, QWidget * widget)
-{
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-    Q_UNUSED(painter);
-    //painter->fillRect(QRectF(QPointF(0, 0), size()), QBrush(QColor(100, 100, 200, 100)));
-}*/
-
 void ActionListView::setItemsGroupByName(const QString & group) {
     setItemsGroup(instance()->group(group));
 }
@@ -504,9 +511,9 @@ Lancelot::ExtenderButton * ActionListView::createButton()
         button->setEnabled(true);
         button->show();
     } else {
+        Instance::setActiveInstanceAndLock(group()->instance());
         button = new ItemButton(this);
-            //Lancelot::ExtenderButton(
-            //"", "", this);
+        Instance::releaseActiveInstanceLock();
 
         button->setInnerOrientation(Qt::Horizontal);
         button->setExtenderPosition(m_extenderPosition);
@@ -551,18 +558,31 @@ void ActionListView::initialButtonsCreation() {
     m_initialButtonsCreationRunning = true;
     calculateItemHeight();
 
+    kDebug() << "Model is sized" << m_model->size();
+    kDebug() << "Item height is " << m_currentItemHeight;
+
     deleteAllButtons();
-    if (!m_model) return;
+    if (!m_model) {
+        m_initialButtonsCreationRunning = false;
+        return;
+    }
 
     int listHeight = qRound(geometry().height());
+    kDebug() << "and list height is " << listHeight;
 
-    if (!addButton(End)) return; // The model is empty or something else is wrong
+    if (!addButton(End)) {
+        // The model is empty or something else is wrong
+        m_initialButtonsCreationRunning = false;
+        return;
+    }
+    kDebug() << "Added a 1st button";
 
     bool buttonCreated;
     while (
         (m_buttons.last().second < listHeight)
         && (m_buttons.size() <= m_model->size())
         && (buttonCreated = addButton(End))) {
+        kDebug() << "Added a button";
     }
     // If buttonCreated is true, it means that we haven't reached
     // the end of the model, but we have made one more button than we need
@@ -703,4 +723,3 @@ void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = 
 int ActionListView::categoryItemHeight() { return m_categoryItemHeight; }
 
 } // namespace Lancelot
-

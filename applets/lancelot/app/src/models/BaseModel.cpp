@@ -49,7 +49,7 @@ void ApplicationConnector::search(const QString & search)
 
 bool ApplicationConnector::hide(bool immediate)
 {
-    emit doHide(immediate);
+    return emit doHide(immediate);
 }
 
 ApplicationConnector::ApplicationConnector()

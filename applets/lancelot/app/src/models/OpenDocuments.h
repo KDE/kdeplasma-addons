@@ -39,7 +39,7 @@ protected:
     void activate(int index);
     void load();
 
-private slots:
+private Q_SLOTS:
     void taskChanged();
     void taskAdded(TaskPtr task);
     void taskRemoved(TaskPtr task);

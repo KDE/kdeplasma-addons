@@ -17,28 +17,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
-#define LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#ifndef LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H_
+#define LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H_
 
-#include <lancelot/models/ActionListViewModels.h>
+#include "../models/BaseMergedModel.h"
 
 namespace Models {
 
-class BaseMergedModel: public Lancelot::MergedActionListViewModel {
+class PartsMergedModel: public BaseMergedModel {
+    Q_OBJECT
 public:
-    BaseMergedModel();
-    ~BaseMergedModel();
+    PartsMergedModel();
+    ~PartsMergedModel();
 
-    void addModel(const QString & id, QIcon icon,
-            const QString & title, ActionListViewModel * model);
-    L_Override virtual QMimeData * modelMimeData(int index) const;
+    L_Override virtual bool hasModelContextActions(int index) const;
+    L_Override virtual void setModelContextActions(int index, QMenu * menu);
+    L_Override virtual void modelContextActivate(int index, QAction * context);
     L_Override virtual void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    L_Override virtual void modelDataDropped(int index, Qt::DropAction action);
 
-private:
-    QList < QString > m_modelIDs;
+Q_SIGNALS:
+    void removeModelRequested(int index);
 };
 
 } // namespace Models
 
-#endif // LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#endif // LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H_
+
+

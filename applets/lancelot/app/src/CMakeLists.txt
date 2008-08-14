@@ -34,6 +34,9 @@ set(plasma_lancelot_models_SRCS
   models/OpenDocuments.cpp
   models/NewDocuments.cpp
 
+  models/ContactsKopete.cpp
+  models/MessagesKmail.cpp
+
   models/Runner.cpp
 )
 
@@ -69,13 +72,19 @@ set(kmail_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.kmail.xml)
 if (NOT EXISTS ${kmail_xml})
   set(kmail_xml external/org.kde.kmail.kmail.xml)
 endif (NOT EXISTS ${kmail_xml})
-qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kmail_xml} kmail_interface)
+qt4_add_dbus_interface(plasma_lancelot_models_SRCS ${kmail_xml} kmail_interface)
+
+set(kmail_folder_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.kmail.folder.xml)
+if (NOT EXISTS ${kmail_folder_xml})
+  set(kmail_folder_xml external/org.kde.kmail.folder.xml)
+endif (NOT EXISTS ${kmail_folder_xml})
+qt4_add_dbus_interface(plasma_lancelot_models_SRCS ${kmail_folder_xml} kmailfolder_interface)
 
 set(kopete_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.Kopete.xml)
 if (NOT EXISTS ${kopete_xml})
   set(kopete_xml external/org.kde.Kopete.xml)
 endif (NOT EXISTS ${kopete_xml})
-qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${kopete_xml} kopete_interface)
+qt4_add_dbus_interface(plasma_lancelot_models_SRCS ${kopete_xml} kopete_interface)
 
 set(lancelot_xml org.kde.lancelot.xml)
 qt4_add_dbus_interface(plasma_lancelot_client_SRCS ${lancelot_xml} lancelot_interface)
@@ -118,7 +127,14 @@ set(plasma_applet_lancelot_part_SRCS
   ${plasma_lancelot_models_SRCS}
   # ${plasma_lancelot_application_SRCS}
   parts/LancelotPart.cpp
+  parts/PartsMergedModel.cpp
+  parts/LancelotPartConfig.cpp
   Serializator.cpp
+)
+
+kde4_add_ui_files(
+  plasma_applet_lancelot_part_SRCS
+  parts/LancelotPartConfigBase.ui
 )
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})

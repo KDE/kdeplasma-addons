@@ -49,6 +49,19 @@ QMimeData * ActionListViewModel::mimeData(int index) const
     return NULL;
 }
 
+void ActionListViewModel::dataDropped(int index, Qt::DropAction action)
+{
+    Q_UNUSED(index);
+    Q_UNUSED(action);
+}
+
+void ActionListViewModel::setDropActions(int index, Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    Q_UNUSED(index);
+    actions = Qt::IgnoreAction;
+    defaultAction = Qt::IgnoreAction;
+}
+
 bool ActionListViewModel::isCategory(int index) const
 {
     Q_UNUSED(index);
@@ -155,9 +168,17 @@ void StandardActionListViewModel::removeAt(int index)
     emit itemDeleted(index);
 }
 
-StandardActionListViewModel::Item StandardActionListViewModel::itemAt(int index)
+void StandardActionListViewModel::clear(bool emitUpdated)
 {
-    return m_items.at(index);
+    m_items.clear();
+    if (emitUpdated) {
+        emit updated();
+    }
+}
+
+StandardActionListViewModel::Item & StandardActionListViewModel::itemAt(int index)
+{
+    return m_items[index];
 }
 
 // MergedActionListViewModel
@@ -252,9 +273,58 @@ QMimeData * MergedActionListViewModel::mimeData(int index) const
     return m_models.at(model)->mimeData(modelIndex);
 }
 
+void MergedActionListViewModel::dataDropped(int index, Qt::DropAction action)
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return;
+    if (modelIndex == -1) return modelDataDropped(model, action);
+    return m_models.at(model)->dataDropped(modelIndex, action);
+}
+
+void MergedActionListViewModel::modelDataDropped(int index, Qt::DropAction action)
+{
+    Q_UNUSED(index);
+    Q_UNUSED(action);
+}
+
+void MergedActionListViewModel::setDropActions(int index, Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    int model, modelIndex;
+    toChildCoordinates(index, model, modelIndex);
+
+    if (model == -1) return;
+    if (modelIndex == -1) return setModelDropActions(model, actions, defaultAction);
+    return m_models.at(model)->setDropActions(modelIndex, actions, defaultAction);
+}
+
+void MergedActionListViewModel::setModelDropActions(int index,
+        Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    Q_UNUSED(index);
+    actions = Qt::IgnoreAction;
+    defaultAction = Qt::IgnoreAction;
+}
+
 QMimeData * MergedActionListViewModel::modelMimeData(int index) const
 {
     return NULL;
+}
+
+bool MergedActionListViewModel::hasModelContextActions(int index) const
+{
+    return false;
+}
+
+void MergedActionListViewModel::setModelContextActions(int index, QMenu * menu)
+{
+    // do nothing
+}
+
+void MergedActionListViewModel::modelContextActivate(int index, QAction * context)
+{
+    // do nothing
 }
 
 bool MergedActionListViewModel::isCategory(int index) const
@@ -293,7 +363,7 @@ bool MergedActionListViewModel::hasContextActions(int index) const
     toChildCoordinates(index, model, modelIndex);
 
     if (model == -1) return false;
-    if (modelIndex == -1) return false;
+    if (modelIndex == -1) return hasModelContextActions(model);
     return m_models.at(model)->hasContextActions(modelIndex);
 }
 
@@ -303,7 +373,7 @@ void MergedActionListViewModel::setContextActions(int index, QMenu * menu)
     toChildCoordinates(index, model, modelIndex);
 
     if (model == -1) return;
-    if (modelIndex == -1) return;
+    if (modelIndex == -1) return setModelContextActions(model, menu);
     m_models.at(model)->setContextActions(modelIndex, menu);
 }
 
@@ -313,8 +383,8 @@ void MergedActionListViewModel::contextActivate(int index, QAction * context)
     toChildCoordinates(index, model, modelIndex);
 
     if (model == -1) return;
-    if (modelIndex == -1) return;
-    return m_models.at(model)->contextActivate(modelIndex, context);
+    if (modelIndex == -1) return modelContextActivate(model, context);
+    m_models.at(model)->contextActivate(modelIndex, context);
 }
 
 void MergedActionListViewModel::toChildCoordinates(int index, int & model, int & modelIndex) const
@@ -371,6 +441,24 @@ void MergedActionListViewModel::addModel(QIcon icon, const QString & title, Acti
 
     if (m_hideEmptyModels && model->size() == 0) return; // We will not show empty models
 
+    kDebug() << "Emitting update()";
+    emit updated();
+}
+
+ActionListViewModel * MergedActionListViewModel::modelAt(int index)
+{
+    return m_models.at(index);
+}
+
+void MergedActionListViewModel::removeModel(int index)
+{
+    if (index < 0 || index >= m_models.size()) {
+        return;
+    }
+
+    ActionListViewModel * model = m_models.takeAt(index);
+    m_modelsMetadata.removeAt(index);
+    model->disconnect(this);
     emit updated();
 }
 

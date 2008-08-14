@@ -86,7 +86,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(Plasma::Svg * icon, QString title = QString(),
+    BasicWidget(const Plasma::Svg & icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
@@ -108,13 +108,13 @@ public:
     /**
      * @returns icon of this Lancelot::BasicWidget
      */
-    Plasma::Svg * iconInSvg() const;
+    Plasma::Svg & iconInSvg() const;
 
     /**
      * Sets icon of this Lancelot::BasicWidget
      * @param svg new icon
      */
-    void setIconInSvg(Plasma::Svg * svg);
+    void setIconInSvg(const Plasma::Svg & svg);
 
     /**
      * @returns icon size of this Lancelot::BasicWidget

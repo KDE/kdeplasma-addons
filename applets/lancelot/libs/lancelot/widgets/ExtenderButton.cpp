@@ -30,7 +30,7 @@ namespace Lancelot {
 // Inner class ExtenderObject
 class ExtenderObject : public BasicWidget {
 public:
-    ExtenderObject(Plasma::Svg * icon,
+    ExtenderObject(const Plasma::Svg & icon,
             ExtenderButton * parent)
       : BasicWidget(icon, "", "")
     {
@@ -47,61 +47,6 @@ public:
     }
 };
 
-
-//
-/* class ExtenderObject : public BasicWidget {
-public:
-    ExtenderObject(Plasma::Svg * icon,
-            ExtenderButton * parent)
-      : BasicWidget(icon, "", ""),
-        m_parent(parent)
-    {
-        setParentItem(parent);
-        setInnerOrientation(Qt::Vertical);
-        setAlignment(Qt::AlignCenter);
-    }
-
-    void hoverEnterEvent(QGraphicsSceneHoverEvent * event)
-    {
-        // TODO: Replace this with signals/slots
-        BasicWidget::hoverEnterEvent(event);
-        startTimer();
-    }
-
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
-    {
-        // TODO: Replace this with signals/slots
-        BasicWidget::hoverLeaveEvent(event);
-        stopTimer();
-    }
-
-    static QBasicTimer timer;
-
-    void startTimer()
-    {
-        timer.start(ACTIVATION_TIME, m_parent);
-    }
-
-    void stopTimer()
-    {
-        timer.stop();
-    }
-
-    void paint(QPainter * painter,
-            const QStyleOptionGraphicsItem * option, QWidget * widget)
-    {
-        if (Plasma::PanelSvg * svg = group()->backgroundSvg()) {
-            svg->setEnabledBorders(borders);
-        }
-        BasicWidget::paint(painter, option, widget);
-    }
-
-    Plasma::PanelSvg::EnabledBorders borders;
-
-private:
-    ExtenderButton * m_parent;
-};*/
-
 // ExtenderButton
 class ExtenderButton::Private {
 public:
@@ -113,9 +58,8 @@ public:
         checkable(false),
         checked(false)
     {
-        if (!extenderIconSvg) {
-            extenderIconSvg = new Plasma::Svg(q);
-            extenderIconSvg->setImagePath("lancelot/extender-button-icon");
+        if (!extenderIconSvg.isValid()) {
+            extenderIconSvg.setImagePath("lancelot/extender-button-icon");
         }
 
         extender = new ExtenderObject(extenderIconSvg, parent);
@@ -197,7 +141,7 @@ public:
     ExtenderPosition extenderPosition;
     ActivationMethod activationMethod;
 
-    static Plasma::Svg * extenderIconSvg;
+    static Plasma::Svg extenderIconSvg;
     Plasma::PanelSvg::EnabledBorders borders;
 
     ExtenderObject * extender;
@@ -207,24 +151,7 @@ public:
 
 };
 
-Plasma::Svg * ExtenderButton::Private::extenderIconSvg = NULL;
-// QBasicTimer ExtenderObject::timer = QBasicTimer();
-
-/*void ExtenderButton::timerEvent(QTimerEvent * event)
-{
-    if (event->timerId() == ExtenderObject::timer.timerId()) {
-        d->extender->stopTimer();
-        toggle();
-        d->extender->hide();
-        // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
-        hoverLeaveEvent(0);
-        d->extender->hoverLeaveEvent(0);
-
-        // Sending the activate signal
-        activate();
-    }
-    QObject::timerEvent(event);
-}*/
+Plasma::Svg ExtenderButton::Private::extenderIconSvg;
 
 ExtenderButton::ExtenderButton(QGraphicsItem * parent)
   : BasicWidget(parent),
@@ -255,7 +182,7 @@ ExtenderButton::ExtenderButton(QIcon icon, QString title,
     L_WIDGET_SET_INITIALIZED;
 }
 
-ExtenderButton::ExtenderButton(Plasma::Svg * icon, QString title,
+ExtenderButton::ExtenderButton(const Plasma::Svg & icon, QString title,
         QString description, QGraphicsItem * parent)
   : BasicWidget(icon, title, description, parent),
     d(new Private(this))

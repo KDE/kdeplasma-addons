@@ -85,7 +85,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(Plasma::Svg * icon, QString title = QString(),
+    ExtenderButton(const Plasma::Svg & icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**

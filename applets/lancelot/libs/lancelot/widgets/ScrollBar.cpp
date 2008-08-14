@@ -79,16 +79,11 @@ public:
         handle->setZValue(1);
 
         // Icons
-        if (!scrollbarIconUp) {
-            scrollbarIconUp = new Plasma::Svg(q);
-            scrollbarIconLeft = new Plasma::Svg(q);
-            scrollbarIconDown = new Plasma::Svg(q);
-            scrollbarIconRight = new Plasma::Svg(q);
-
-            scrollbarIconUp->setImagePath("lancelot/scroll-bar-button-up-icon");
-            scrollbarIconLeft->setImagePath("lancelot/scroll-bar-button-left-icon");
-            scrollbarIconDown->setImagePath("lancelot/scroll-bar-button-down-icon");
-            scrollbarIconRight->setImagePath("lancelot/scroll-bar-button-right-icon");
+        if (!scrollbarIconUp.isValid()) {
+            scrollbarIconUp.setImagePath("lancelot/scroll-bar-button-up-icon");
+            scrollbarIconLeft.setImagePath("lancelot/scroll-bar-button-left-icon");
+            scrollbarIconDown.setImagePath("lancelot/scroll-bar-button-down-icon");
+            scrollbarIconRight.setImagePath("lancelot/scroll-bar-button-right-icon");
 
             upButton->setIconSize(QSize(8, 8));
             downButton->setIconSize(QSize(8, 8));
@@ -310,16 +305,16 @@ public:
 
     ScrollBar * q;
 
-    static Plasma::Svg * scrollbarIconUp;
-    static Plasma::Svg * scrollbarIconLeft;
-    static Plasma::Svg * scrollbarIconDown;
-    static Plasma::Svg * scrollbarIconRight;
+    static Plasma::Svg scrollbarIconUp;
+    static Plasma::Svg scrollbarIconLeft;
+    static Plasma::Svg scrollbarIconDown;
+    static Plasma::Svg scrollbarIconRight;
 };
 
-Plasma::Svg * ScrollBar::Private::scrollbarIconUp = NULL;
-Plasma::Svg * ScrollBar::Private::scrollbarIconLeft = NULL;
-Plasma::Svg * ScrollBar::Private::scrollbarIconDown = NULL;
-Plasma::Svg * ScrollBar::Private::scrollbarIconRight = NULL;
+Plasma::Svg ScrollBar::Private::scrollbarIconUp;
+Plasma::Svg ScrollBar::Private::scrollbarIconLeft;
+Plasma::Svg ScrollBar::Private::scrollbarIconDown;
+Plasma::Svg ScrollBar::Private::scrollbarIconRight;
 
 ScrollBar::ScrollBar(QGraphicsItem * parent)
   : Widget(parent), d(new Private(this))

@@ -44,6 +44,8 @@
 #include "models/FavoriteApplications.h"
 #include "models/Applications.h"
 #include "models/Runner.h"
+#include "models/ContactsKopete.h"
+#include "models/MessagesKmail.h"
 
 #include "models/BaseMergedModel.h"
 
@@ -386,6 +388,7 @@ void LancelotWindow::resizeWindow()
 void LancelotWindow::focusOutEvent(QFocusEvent * event) {
     Q_UNUSED(event);
     hide();
+    QWidget::focusOutEvent(event);
 }
 
 void LancelotWindow::leaveEvent(QEvent * event) {
@@ -516,6 +519,9 @@ void LancelotWindow::setupModels()
      m_models["RecentDocuments"]   = new Models::RecentDocuments();
      m_models["OpenDocuments"]     = new Models::OpenDocuments();
 
+     m_models["Contacts"]          = new Models::ContactsKopete();
+     m_models["Messages"]          = new Models::MessagesKmail();
+
      m_models["Runner"]            = new Models::Runner();
 
      // Groups:
@@ -542,18 +548,21 @@ void LancelotWindow::setupModels()
      Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18n("Open documents"), m_models["OpenDocuments"]);
      Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
 
+     Merged(m_modelGroups["ContactsLeft"])->addModel("Messages", QIcon(), i18n("Unread messages"), m_models["Messages"]);
+     Merged(m_modelGroups["ContactsRight"])->addModel("Contacts", QIcon(), i18n("Contacts"), m_models["Contacts"]);
+
      m_modelGroups["SearchLeft"] = m_models["Runner"];
 
      // Assignments: ListView - Group
 
      listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
      listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
-     //listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
+     listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
      listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
 
      listComputerRight->setModel(m_modelGroups["ComputerRight"]);
      listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
-     //listContactsRight->setModel(m_modelGroups["ContactsRight"]);
+     listContactsRight->setModel(m_modelGroups["ContactsRight"]);
      //listSearchRight->setModel(m_modelGroups["SearchRight"]);
 
      // Applications passageview

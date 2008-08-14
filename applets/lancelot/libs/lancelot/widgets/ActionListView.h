@@ -122,9 +122,11 @@ private:
             ItemButton(ActionListView * parent);
             void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
             void mousePressEvent(QGraphicsSceneMouseEvent * event);
+            void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
 
         private:
             ActionListView * m_parent;
+            QPointF m_mousePos;
     };
 
     ActionListViewModel * m_model;

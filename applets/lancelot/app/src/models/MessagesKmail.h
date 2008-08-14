@@ -17,28 +17,43 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
-#define LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#ifndef LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
+#define LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
 
-#include <lancelot/models/ActionListViewModels.h>
+#include "kmail_interface.h"
+#include "kmailfolder_interface.h"
+#include <taskmanager/taskmanager.h>
+#include "BaseModel.h"
+
+using TaskManager::TaskPtr;
 
 namespace Models {
 
-class BaseMergedModel: public Lancelot::MergedActionListViewModel {
+class MessagesKmail : public BaseModel {
+    Q_OBJECT
 public:
-    BaseMergedModel();
-    ~BaseMergedModel();
+    MessagesKmail();
+    ~MessagesKmail();
 
-    void addModel(const QString & id, QIcon icon,
-            const QString & title, ActionListViewModel * model);
-    L_Override virtual QMimeData * modelMimeData(int index) const;
-    L_Override virtual void setModelDropActions(int index,
-            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    void timerEvent(QTimerEvent * event);
+
+protected:
+    void activate(int index);
+    void load();
+
+private Q_SLOTS:
+    void unreadCountChanged();
 
 private:
-    QList < QString > m_modelIDs;
+    org::kde::kmail::kmail * m_interface;
+    org::kde::kmail::folder * m_folderinterface;
+    QBasicTimer m_timer;
+    QString m_kopeteAvatarsDir;
+    bool m_kmailRunning;
 };
 
 } // namespace Models
 
-#endif // LANCELOTAPP_MODELS_BASEMERGEDMODEL_H_
+#endif // LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
+
+

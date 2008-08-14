@@ -1,0 +1,176 @@
+<ui version="4.0" >
+ <class>LancelotPartConfigBase</class>
+ <widget class="QWidget" name="LancelotPartConfigBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>471</width>
+    <height>291</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2" >
+   <item>
+    <widget class="QGroupBox" name="panelContents" >
+     <property name="title" >
+      <string>Contents behavior</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <widget class="QRadioButton" name="radioContentsActivationClick" >
+        <property name="text" >
+         <string>Click to activate items</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioContentsActivationExtender" >
+        <property name="text" >
+         <string>Use no-click interface</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="panelContentsExtenderPosition" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="title" >
+         <string>Extender position</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout" >
+         <item>
+          <widget class="QRadioButton" name="radioContentsExtenderPositionLeft" >
+           <property name="text" >
+            <string>Left</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioContentsExtenderPositionRight" >
+           <property name="text" >
+            <string>Right</string>
+           </property>
+           <property name="checked" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="panelIcon" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title" >
+      <string>Applet icon</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2" >
+      <item>
+       <widget class="KIconButton" name="iconChooser" >
+        <property name="minimumSize" >
+         <size>
+          <width>64</width>
+          <height>64</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>20000</width>
+          <height>64</height>
+         </size>
+        </property>
+        <property name="baseSize" >
+         <size>
+          <width>64</width>
+          <height>64</height>
+         </size>
+        </property>
+        <property name="icon" >
+         <string>lancelot-part</string>
+        </property>
+        <property name="iconSize" >
+         <number>48</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3" >
+        <item>
+         <widget class="QRadioButton" name="radioIconActivationClick" >
+          <property name="text" >
+           <string>Show contents on &amp;click</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioIconActivationHover" >
+          <property name="text" >
+           <string>Show contents on icon &amp;hover (after a predefined interval of time)</string>
+          </property>
+          <property name="checked" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>radioContentsActivationExtender</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>panelContentsExtenderPosition</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>435</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>434</x>
+     <y>118</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioContentsActivationClick</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>panelContentsExtenderPosition</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>408</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>406</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
