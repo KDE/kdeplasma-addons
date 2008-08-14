@@ -28,10 +28,8 @@
 namespace Models {
 
 Runner::Runner(QString search)
-    : m_searchString(search)
+    : m_searchString(search), valid(false)
 {
-    // m_runners = Plasma::AbstractRunner::load(this);
-
     m_runnerManager = new Plasma::RunnerManager(this);
     connect(
         m_runnerManager, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
@@ -61,6 +59,7 @@ void Runner::setSearchString(const QString & search)
             KIcon("help-hint"),
             QVariant()
         );
+        valid = false;
     } else {
         m_runnerManager->launchQuery(search);
     }
@@ -71,18 +70,29 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 {
     m_items.clear();
 
-    QList < Plasma::QueryMatch > matches = m;
-    QMutableListIterator < Plasma::QueryMatch > newMatchIt(matches);
-
-    // first pass: we try and match up items with existing ids (match persisitence)
-    while (newMatchIt.hasNext()) {
-        Plasma::QueryMatch match = newMatchIt.next();
+    if (m.count() == 0) {
         add(
-            match.text(),
-            match.subtext(),
-            match.icon(),
-            match.id()
+            i18n("No matches found"),
+            i18n("No matches found for current search"),
+            KIcon("help-hint"),
+            QVariant()
         );
+        valid = false;
+    } else {
+        QList < Plasma::QueryMatch > matches = m;
+        QMutableListIterator < Plasma::QueryMatch > newMatchIt(matches);
+
+        // first pass: we try and match up items with existing ids (match persisitence)
+        while (newMatchIt.hasNext()) {
+            Plasma::QueryMatch match = newMatchIt.next();
+            add(
+                match.text(),
+                match.subtext(),
+                match.icon(),
+                match.id()
+            );
+        }
+        valid = true;
     }
 }
 
@@ -92,6 +102,7 @@ void Runner::load()
 
 void Runner::activate(int index)
 {
+    if (!valid) return;
     m_runnerManager->run(m_items[index].data.value< QString >());
     hideLancelotWindow();
 }
