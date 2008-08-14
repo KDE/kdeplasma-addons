@@ -258,7 +258,7 @@ public:
     // TODO: Warning! When threading comes around this approach will break...
     // it'll need mutexes, or something else...
     static Instance * activeInstance;
-    static Instance * activeInstanceStack; // we support only one item in the stack - courtesy of Mutex
+    static QList < Instance * > activeInstanceStack;
     static QMutex activeInstanceLock;
 
     QList< Widget * > widgets;
@@ -277,8 +277,8 @@ public:
 };
 
 Instance * Instance::Private::activeInstance = NULL;
-Instance * Instance::Private::activeInstanceStack = NULL;
-QMutex Instance::Private::activeInstanceLock;
+QList < Instance * > Instance::Private::activeInstanceStack;
+QMutex Instance::Private::activeInstanceLock(QMutex::Recursive);
 bool Instance::Private::hasApplication = false;
 
 Instance * Instance::activeInstance()
@@ -289,15 +289,15 @@ Instance * Instance::activeInstance()
 void Instance::setActiveInstanceAndLock(Instance * instance)
 {
     Instance::Private::activeInstanceLock.lock();
-    Instance::Private::activeInstanceStack =
-        Instance::Private::activeInstance;
+    Instance::Private::activeInstanceStack
+        .append(Instance::Private::activeInstance);
     Instance::Private::activeInstance = instance;
 }
 
 void Instance::releaseActiveInstanceLock()
 {
     Instance::Private::activeInstance =
-        Instance::Private::activeInstanceStack;
+        Instance::Private::activeInstanceStack.takeLast();
     Instance::Private::activeInstanceLock.unlock();
 }
 

@@ -45,6 +45,7 @@ protected:
 private:
     QString m_searchString;
     Plasma::RunnerManager * m_runnerManager;
+    bool valid : 1;
 };
 
 } // namespace Models
