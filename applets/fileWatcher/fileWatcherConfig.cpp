@@ -40,7 +40,7 @@ FileWatcherConfig::FileWatcherConfig(QWidget *parent)
   QObject::connect(ui.sb_maxRows, SIGNAL(valueChanged(int)), this, SLOT(maxRowsValueChanged(int)));
 }
 
-void FileWatcherConfig::setPath(QString path)
+void FileWatcherConfig::setPath(const QString& path)
 {
   urlRequester->setPath(path);
 }

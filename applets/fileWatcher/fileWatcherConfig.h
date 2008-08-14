@@ -31,7 +31,7 @@ class FileWatcherConfig : public QWidget
   public:
     FileWatcherConfig(QWidget *parent = 0);
 
-    void setPath(QString path);
+    void setPath(const QString& path);
     void setTextColor(const QColor &color);
     void setFont(const QFont &f);
     void setMaxRows(int rows);

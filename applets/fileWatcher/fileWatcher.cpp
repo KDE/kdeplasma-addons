@@ -108,7 +108,7 @@ void FileWatcher::newData()
   //Slight speed optimization hack for bigger files.
   //Doing this is faster than doing unnecessary insertText()
   QString data = textStream->readAll();
-  QStringList list = data.split("\n", QString::SkipEmptyParts);
+  QStringList list = data.split('\n', QString::SkipEmptyParts);
 
   int rows = list.size() - textDocument->maximumBlockCount();
 
