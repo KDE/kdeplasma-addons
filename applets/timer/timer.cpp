@@ -84,6 +84,36 @@ void Timer::init()
     m_resetAction = new QAction(i18n("Reset"), this);
     m_resetAction->setEnabled(false);
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
+    createMenuAction();
+}
+
+void Timer::createMenuAction()
+{
+    //necessary when we change predefined timer in config dialogbox
+    actions.clear();
+    qDeleteAll( actions );
+    actions.append(m_startAction);
+    actions.append(m_stopAction);
+    actions.append(m_resetAction);
+
+    QAction *separator0 = new QAction(this);
+    separator0->setSeparator(true);
+    actions.append(separator0);
+
+    QAction *action = 0;
+
+    const QStringList::Iterator end =  m_predefinedTimers.end();
+    lstActionTimer = new QActionGroup(this);
+    for (QStringList::Iterator it = m_predefinedTimers.begin(); it != end; ++it) {
+        action = new QAction(*it, this);
+        action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::TIME_FORMAT)));
+        lstActionTimer->addAction(action);
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(startTimerFromAction()));
+        actions.append(action);
+    }
+    QAction *separator1 = new QAction(this);
+    separator1->setSeparator(true);
+    actions.append(separator1);
 }
 
 void Timer::createConfigurationInterface(KConfigDialog *parent)
@@ -133,6 +163,7 @@ void Timer::configAccepted()
     m_command = ui.commandLineEdit->text();
     cg.writeEntry("command", m_command);
 
+    createMenuAction();
     emit configNeedsSaving();
 }
 
@@ -217,33 +248,7 @@ void Timer::mousePressEvent(QGraphicsSceneMouseEvent *)
 
 QList<QAction*> Timer::contextualActions()
 {
-    QList<QAction*> actions;
-    actions.append(m_startAction);
-    actions.append(m_stopAction);
-    actions.append(m_resetAction);
-
-    //FIXME: Probably here I have a small memory leak
-    QAction *separator0 = new QAction(this);
-    separator0->setSeparator(true);
-    actions.append(separator0);
-
-    QAction *action = 0;
-
-    //FIXME: Probably here I have a small memory leak
-    const QStringList::Iterator end =  m_predefinedTimers.end();
-    for (QStringList::Iterator it = m_predefinedTimers.begin(); it != end; ++it) {
-        action = new QAction(*it, this);
-        action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::TIME_FORMAT)));
-        action->setEnabled(!m_running);
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(startTimerFromAction()));
-        actions.append(action);
-    }
-
-    //FIXME: Probably here I have a small memory leak
-    QAction *separator1 = new QAction(this);
-    separator1->setSeparator(true);
-    actions.append(separator1);
-
+    lstActionTimer->setEnabled( !m_running );
     return actions;
 }
 

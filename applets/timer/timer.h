@@ -31,6 +31,7 @@
 class QGraphicsSceneMouseEvent;
 class QMenu;
 class CustomTimeEditor;
+class QActionGroup;
 
 class Timer : public Plasma::Applet
 {
@@ -50,7 +51,7 @@ class Timer : public Plasma::Applet
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
-
+        void createMenuAction();
     private slots:
         void updateTimer();
         void slotCountDone();
@@ -76,7 +77,8 @@ class Timer : public Plasma::Applet
         QString m_message;
         bool m_runCommand;
         QString m_command;
-
+        QList<QAction *>actions;
+        QActionGroup *lstActionTimer;
     protected slots:
         void configAccepted();
 };
