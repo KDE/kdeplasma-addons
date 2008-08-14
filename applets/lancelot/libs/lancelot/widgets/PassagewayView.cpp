@@ -72,6 +72,14 @@ public:
             NodeLayout::NodeCoordinate(1, 0, 0, 32)
         );
 
+        ExtenderButton * spacer =
+            new ExtenderButton(parent);
+        spacer->setGroupByName("PassagewayView-Spacer");
+        spacer->setMaximumSize(QSizeF(EXTENDER_SIZE, 32));
+        spacer->setPreferredSize(QSizeF(EXTENDER_SIZE, 32));
+        spacer->setMinimumSize(QSizeF(EXTENDER_SIZE, 32));
+        buttonsLayout->addItem(spacer);
+
         layout->addItem(
             listsLayout = new ColumnLayout(),
             NodeLayout::NodeCoordinate(0, 0, 0, 32),
@@ -133,10 +141,12 @@ public:
     void next(Step newStep)
     {
         Step * step = new Step(newStep);
+        Instance::setActiveInstanceAndLock(parent->group()->instance());
         ExtenderButton * button =
             new ExtenderButton(step->icon, step->title, "", parent);
         ActionListView * list   =
             new ActionListView(step->model, parent);
+        Instance::releaseActiveInstanceLock();
 
         button->setIconSize(QSize(24, 24));
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
