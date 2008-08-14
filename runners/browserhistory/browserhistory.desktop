@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Webbrowser History
+Name[ja]=ウェブブラウザの履歴
+Name[nds]=Nettkieker-Vörgeschicht
+Name[pt]=Histórico do Navegador Web
+Name[pt_BR]=Histórico do Navegador Web
+Name[uk]=Історія переглядача Тенет
 Comment=Searches in Konqueror's history
+Comment[ja]=Konqueror の履歴を検索します
+Comment[nds]=Söcht binnen Konqueror sien Vörgeschicht
+Comment[pt]=Pesquisa no histórico do Konqueror
+Comment[pt_BR]=Pesquisa no histórico do Konqueror
+Comment[uk]=Пошук у історії перегляду у Konqueror
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
