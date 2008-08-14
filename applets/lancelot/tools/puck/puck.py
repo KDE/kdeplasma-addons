@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-#
 #  Copyright (C) 2007 Ivan Cukic <ivan.cukic+nymph@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or modify
@@ -17,7 +16,6 @@
 #  License along with this program; if not, write to the
 #  Free Software Foundation, Inc.,
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-#
 
 import sys, os
 
