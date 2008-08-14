@@ -296,5 +296,12 @@ void LancelotApplet::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     d->offline = false;
 }
 
+QList< QAction * > LancelotApplet::contextualActions()
+{
+    d->offline = true;
+    d->lancelot->hide(true);
+    return Plasma::Applet::contextualActions();
+}
+
 #include "LancelotApplet.moc"
 

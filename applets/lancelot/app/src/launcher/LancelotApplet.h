@@ -34,6 +34,7 @@ public:
     ~LancelotApplet();
 
     void init();
+    virtual QList< QAction * > contextualActions();
 
 protected Q_SLOTS:
     void showLancelot();
