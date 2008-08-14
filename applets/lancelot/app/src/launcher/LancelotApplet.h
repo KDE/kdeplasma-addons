@@ -37,13 +37,16 @@ public:
 
 protected Q_SLOTS:
     void showLancelot();
+    void toggleLancelot();
     void showLancelotSection(const QString & section);
+    void toggleLancelotSection(const QString & section);
     void configAccepted();
 
 protected:
-    void createConfigurationInterface(KConfigDialog *parent);
+    virtual void createConfigurationInterface(KConfigDialog *parent);
     virtual void constraintsEvent(Plasma::Constraints
             constraints);
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 protected Q_SLOTS:
     void applyConfig();

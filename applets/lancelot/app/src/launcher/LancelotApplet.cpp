@@ -38,7 +38,7 @@ public:
     Private(LancelotApplet * parent)
       : q(parent),
         layout(new QGraphicsLinearLayout(parent)),
-        lancelot(NULL)
+        lancelot(NULL), offline(false)
     {
         q->setLayout(layout);
         lancelot = new org::kde::lancelot::App(
@@ -70,7 +70,7 @@ public:
         Lancelot::HoverIcon * button = new Lancelot::HoverIcon(KIcon(mainIcon), "", q);
         layout->addItem(button);
         connect(button, SIGNAL(activated()), q, SLOT(showLancelot()));
-        connect(button, SIGNAL(clicked()), q, SLOT(showLancelot()));
+        connect(button, SIGNAL(clicked()), q, SLOT(toggleLancelot()));
         button->setActivationMethod(clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
 
         buttons << button;
@@ -101,6 +101,13 @@ public:
                 );
 
                 signalMapper.setMapping(button, replyIDs.value().at(i));
+
+                connect(
+                    button, SIGNAL(clicked()),
+                    & signalMapperToggle, SLOT(map())
+                );
+
+                signalMapperToggle.setMapping(button, replyIDs.value().at(i));
 
                 layout->addItem(button);
                 button->setActivationMethod(clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
@@ -136,10 +143,13 @@ public:
     bool clickActivation;
 
     QSignalMapper signalMapper;
+    QSignalMapper signalMapperToggle;
     LancelotApplet * q;
     QList < Lancelot::HoverIcon * > buttons;
     QGraphicsLinearLayout * layout;
     org::kde::lancelot::App * lancelot;
+
+    bool offline;
 };
 
 LancelotApplet::LancelotApplet(QObject * parent,
@@ -148,6 +158,7 @@ LancelotApplet::LancelotApplet(QObject * parent,
 {
     setHasConfigurationInterface(true);
     setBackgroundHints(NoBackground);
+    setAcceptsHoverEvents(true);
 }
 
 LancelotApplet::~LancelotApplet()
@@ -189,6 +200,8 @@ void LancelotApplet::applyConfig()
 
 void LancelotApplet::init()
 {
+    kDebug();
+
     setAcceptsHoverEvents(true);
     loadConfig();
     applyConfig();
@@ -196,20 +209,48 @@ void LancelotApplet::init()
         & d->signalMapper, SIGNAL(mapped(const QString &)),
         this, SLOT(showLancelotSection(const QString &))
     );
+    connect(
+        & d->signalMapperToggle, SIGNAL(mapped(const QString &)),
+        this, SLOT(toggleLancelotSection(const QString &))
+    );
 }
 
 void LancelotApplet::showLancelot()
 {
-    kDebug();
+    if (d->offline) return;
+
     QPoint position = popupPosition(QSize());
     d->lancelot->show(position.x(), position.y());
 }
 
+void LancelotApplet::toggleLancelot()
+{
+    if (d->lancelot->isShowing()) {
+        d->lancelot->hide(true);
+        d->offline = true;
+    } else {
+        d->offline = false;
+        showLancelot();
+    }
+}
+
 void LancelotApplet::showLancelotSection(const QString & section)
 {
-    kDebug();
+    if (d->offline) return;
+
     QPoint position = popupPosition(QSize());
     d->lancelot->showItem(position.x(), position.y(), section);
+}
+
+void LancelotApplet::toggleLancelotSection(const QString & section)
+{
+    if (d->lancelot->isShowing()) {
+        d->lancelot->hide(true);
+        d->offline = true;
+    } else {
+        d->offline = false;
+        showLancelotSection(section);
+    }
 }
 
 void LancelotApplet::configAccepted()
@@ -247,6 +288,12 @@ void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
         }
     }
     d->resize();
+}
+
+void LancelotApplet::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+{
+    Q_UNUSED(event);
+    d->offline = false;
 }
 
 #include "LancelotApplet.moc"

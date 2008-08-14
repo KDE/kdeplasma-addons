@@ -139,6 +139,12 @@ bool LancelotApplication::showCentered()
     return true;
 }
 
+bool LancelotApplication::isShowing()
+{
+    if (!m_application) return false;
+    return !(LancelotApplication::m_application->window->isHidden());
+}
+
 bool LancelotApplication::show(int x, int y)
 {
     if (!m_application) return false;

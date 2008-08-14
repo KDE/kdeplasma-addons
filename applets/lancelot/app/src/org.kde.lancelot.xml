@@ -23,6 +23,9 @@
       <arg type="b" direction="out"/>
       <arg name="string" type="s" direction="in"/>
     </method>
+    <method name="isShowing">
+      <arg type="b" direction="out"/>
+    </method>
     <method name="addClient">
       <arg type="i" direction="out"/>
     </method>

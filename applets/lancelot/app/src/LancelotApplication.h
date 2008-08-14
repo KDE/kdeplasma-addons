@@ -45,6 +45,8 @@ public Q_SLOTS:
     static bool hide(bool immediate = false);
     static bool search(const QString & string);
 
+    static bool isShowing();
+
     int addClient();
     bool removeClient(int id);
 
