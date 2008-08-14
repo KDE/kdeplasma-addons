@@ -77,7 +77,7 @@ void ContactsKopete::load()
         m_kopeteRunning = true;
         m_timer.start(UPDATE_INTERVAL, this);
 
-        QDBusReply < QStringList > contacts = m_interface->contacts();
+        QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
         if (!contacts.isValid()) {
             return;
         }
@@ -94,12 +94,6 @@ void ContactsKopete::load()
             // Retrieving contact name
             QDBusReply < QString > contactName = m_interface->getDisplayName(contactID);
             if (!contactName.isValid()) {
-                continue;
-            }
-
-            // Checking whether the contact is online
-            QDBusReply < bool > contactOnline = m_interface->isContactOnline(contactName.value());
-            if (!contactOnline.isValid() || !contactOnline.value()) {
                 continue;
             }
 
