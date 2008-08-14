@@ -230,7 +230,8 @@ QList<QAction*> Timer::contextualActions()
     QAction *action = 0;
 
     //FIXME: Probably here I have a small memory leak
-    for (QStringList::Iterator it = m_predefinedTimers.begin(); it != m_predefinedTimers.end(); ++it) {
+    const QStringList::Iterator end =  m_predefinedTimers.end();
+    for (QStringList::Iterator it = m_predefinedTimers.begin(); it != end; ++it) {
         action = new QAction(*it, this);
         action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::TIME_FORMAT)));
         action->setEnabled(!m_running);
