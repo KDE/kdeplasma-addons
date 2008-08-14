@@ -89,7 +89,7 @@ ActionListView::ActionListView(QGraphicsItem * parent)
     m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
     m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
     m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
-    m_initialButtonsCreationRunning(false)
+    m_initialButtonsCreationRunning(false), m_categoriesActivable(false)
 {
     setGroupByName("ActionListView");
     m_itemsGroup = instance()->group("ActionListView-Items");
@@ -378,7 +378,7 @@ void ActionListView::setModel(ActionListViewModel * model)
     update();
 }
 
-ActionListViewModel * ActionListView::model()
+ActionListViewModel * ActionListView::model() const
 {
     return m_model;
 }
@@ -437,11 +437,13 @@ void ActionListView::setItemsGroup(WidgetGroup * group)
     }
 }
 
-WidgetGroup * ActionListView::itemsGroup() {
+WidgetGroup * ActionListView::itemsGroup() const
+{
     return m_itemsGroup;
 }
 
-void ActionListView::setCategoriesGroupByName(const QString & group) {
+void ActionListView::setCategoriesGroupByName(const QString & group)
+{
     setCategoriesGroup(instance()->group(group));
 }
 
@@ -456,7 +458,8 @@ void ActionListView::setCategoriesGroup(WidgetGroup * group)
     m_categoriesGroup = group;
 }
 
-WidgetGroup * ActionListView::categoriesGroup() {
+WidgetGroup * ActionListView::categoriesGroup() const
+{
     return m_categoriesGroup;
 }
 
@@ -497,9 +500,19 @@ void ActionListView::setExtenderPosition(ExtenderPosition position)
     }
 }
 
-ExtenderPosition ActionListView::extenderPosition()
+ExtenderPosition ActionListView::extenderPosition() const
 {
     return m_extenderPosition;
+}
+
+void ActionListView::setCategoriesActivable(bool value)
+{
+    m_categoriesActivable = value;
+}
+
+bool ActionListView::categoriesActivable() const
+{
+    return m_categoriesActivable;
 }
 
 Lancelot::ExtenderButton * ActionListView::createButton()
@@ -508,7 +521,7 @@ Lancelot::ExtenderButton * ActionListView::createButton()
 
     if (!m_buttonsLimbo.empty()) {
         button = m_buttonsLimbo.takeFirst();
-        button->setEnabled(true);
+        button->setExtenderPosition(m_extenderPosition);
         button->show();
     } else {
         Instance::setActiveInstanceAndLock(group()->instance());
@@ -620,11 +633,13 @@ bool ActionListView::addButton(ListTail where) {
     if (m_model->isCategory(itemIndex)) {
         button->setIconSize(QSize(m_categoryItemHeight, m_categoryItemHeight));
         button->setGroup(m_categoriesGroup);
+        if (!m_categoriesActivable) {
+            button->setExtenderPosition(Lancelot::NoExtender);
+        }
     } else {
         button->setGroup(m_itemsGroup);
     }
     button->setLayout(NULL);
-    // button->setEnabled(!m_model->isCategory(itemIndex));
     m_signalMapper.setMapping(button, itemIndex);
 
     int itemHeight = itemHeightFromIndex(itemIndex);
@@ -711,15 +726,15 @@ void ActionListView::wheelEvent ( QGraphicsSceneWheelEvent * event ) {
 }
 
 void ActionListView::setMinimumItemHeight(int height) { m_minimumItemHeight = height; }
-int ActionListView::minimumItemHeight() { return m_minimumItemHeight; }
+int ActionListView::minimumItemHeight() const { return m_minimumItemHeight; }
 
 void ActionListView::setMaximumItemHeight(int height) { m_maximumItemHeight = height; }
-int ActionListView::maximumItemHeight() { return m_maximumItemHeight; }
+int ActionListView::maximumItemHeight() const { return m_maximumItemHeight; }
 
 void ActionListView::setPreferredItemHeight(int height) { m_preferredItemHeight = height; }
-int ActionListView::preferredItemHeight() { return m_preferredItemHeight; }
+int ActionListView::preferredItemHeight() const { return m_preferredItemHeight; }
 
 void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = height; }
-int ActionListView::categoryItemHeight() { return m_categoryItemHeight; }
+int ActionListView::categoryItemHeight() const { return m_categoryItemHeight; }
 
 } // namespace Lancelot

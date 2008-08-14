@@ -88,6 +88,7 @@ public:
 
         listsLayout->setColumnCount(13);
         listsLayout->setSizer(new PassagewayViewSizer());
+        listsLayout->setColumnCount(3);
 
         buttonsLayout->setSpacing(0.0);
 
@@ -95,6 +96,8 @@ public:
         next(Step("", QIcon(), atlasModel));
 
         lists.at(0)->setExtenderPosition(Lancelot::LeftExtender);
+        lists.at(0)->setCategoriesActivable(false);
+        lists.at(1)->setCategoriesActivable(true);
     }
 
     ~Private()
@@ -126,15 +129,21 @@ public:
     void back(int steps)
     {
         for (int i = 0; i < steps; ++i) {
+            if (buttons.size() > 2) {
+                buttons.at(buttons.size() - 3)->setGroupByName(parent->group()->name() + "-InactiveButton");
+                buttons.at(buttons.size() - 3)->setExtenderPosition(Lancelot::NoExtender);
+            }
             ExtenderButton * button = buttons.takeLast();
+
             ActionListView * list   = lists.takeLast();
             path.takeLast();
 
             buttonsLayout->removeItem(button);
+            layout->activate();
             listsLayout->pop();
 
-            delete button;  // TODO: Find a way to do this
-            delete list;    // TODO: Find a way to do this
+            delete button;
+            delete list;
         }
     }
 
@@ -150,15 +159,22 @@ public:
 
         button->setIconSize(QSize(24, 24));
         button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        kDebug() << parent->group()->name() + "-Button grepme";
-        button->setGroupByName(parent->group()->name() + "-Button");
-        button->setExtenderPosition(Lancelot::LeftExtender);
 
-        list->setCategoriesGroupByName("ActionListView-CategoriesPass");
-        list->setExtenderPosition(RightExtender);
+        button->setGroupByName(parent->group()->name() + "-InactiveButton");
+        button->setExtenderPosition(Lancelot::NoExtender);
 
         buttons.append(button);
         button->setZValue((qreal)buttons.count());
+
+        if (buttons.size() > 2) {
+            buttons.at(buttons.size() - 3)->setGroupByName(parent->group()->name() + "-Button");
+            buttons.at(buttons.size() - 3)->setExtenderPosition(Lancelot::LeftExtender);
+        }
+
+        list->setCategoriesGroupByName("ActionListView-CategoriesPass");
+        list->setExtenderPosition(RightExtender);
+        list->setCategoriesActivable(true);
+
         lists.append(list);
         path.append(step);
 
@@ -285,8 +301,14 @@ void PassagewayView::setGroup(WidgetGroup * g)
 {
     Widget::setGroup(g);
 
+    int i = d->buttons.size();
     foreach (ExtenderButton * button, d->buttons) {
-        button->setGroupByName(group()->name() + "-Button");
+        --i;
+        if (i < 2) {
+            button->setGroupByName(group()->name() + "-InactiveButton");
+        } else {
+            button->setGroupByName(group()->name() + "-Button");
+        }
     }
 
     foreach (ActionListView * list, d->lists) {

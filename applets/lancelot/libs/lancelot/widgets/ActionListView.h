@@ -53,29 +53,32 @@ public:
     virtual ~ActionListView();
 
     void setModel(ActionListViewModel * model);
-    ActionListViewModel * model();
+    ActionListViewModel * model() const;
 
     void setMinimumItemHeight(int height);
     void setMaximumItemHeight(int height);
     void setPreferredItemHeight(int height);
 
-    int minimumItemHeight();
-    int maximumItemHeight();
-    int preferredItemHeight();
+    int minimumItemHeight() const;
+    int maximumItemHeight() const;
+    int preferredItemHeight() const;
+
+    void setCategoriesActivable(bool value);
+    bool categoriesActivable() const;
 
     void setCategoryItemHeight(int height);
-    int categoryItemHeight();
+    int categoryItemHeight() const;
 
     void setExtenderPosition(ExtenderPosition position);
-    ExtenderPosition extenderPosition();
+    ExtenderPosition extenderPosition() const;
 
     void setItemsGroup(WidgetGroup * group = NULL);
     void setItemsGroupByName(const QString & group);
-    WidgetGroup * itemsGroup();
+    WidgetGroup * itemsGroup() const;
 
     void setCategoriesGroup(WidgetGroup * group = NULL);
     void setCategoriesGroupByName(const QString & group);
-    WidgetGroup * categoriesGroup();
+    WidgetGroup * categoriesGroup() const;
 
     void wheelEvent(QGraphicsSceneWheelEvent * event);
 
@@ -160,6 +163,8 @@ private:
     QTransform m_bottomButtonScale;
 
     QSignalMapper m_signalMapper;
+
+    bool m_categoriesActivable;
 
     bool m_initialButtonsCreationRunning;
     void initialButtonsCreation();

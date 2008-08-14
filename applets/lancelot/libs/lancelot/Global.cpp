@@ -329,8 +329,9 @@ Instance::Instance()
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
         kDebug() << "Can not find lancelot theme, using default theme.config which may lead to problems";
-        Plasma::Theme::defaultTheme()->setThemeName("default");
-        search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/theme.config";
+        // Plasma::Theme::defaultTheme()->setThemeName("default");
+        // search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/theme.config";
+        search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
     }
     if (path == "") {
