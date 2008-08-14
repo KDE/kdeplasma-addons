@@ -32,7 +32,7 @@ class Fifteen : public QGraphicsWidget
 
   public slots:
     void piecePressed(QGraphicsItem *item);
-    void setSplitPixmap(QString path);
+    void setSplitPixmap(const QString& path);
     void setIdentical();
     void setNumerals(bool show);
     void shuffle();

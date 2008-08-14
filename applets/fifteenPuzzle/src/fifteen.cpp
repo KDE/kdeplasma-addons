@@ -146,7 +146,7 @@ void Fifteen::setNumerals(bool show)
   updateNumerals();
 }
 
-void Fifteen::setSplitPixmap(QString path)
+void Fifteen::setSplitPixmap(const QString& path)
 {
   m_pixmap = QPixmap(path);
   m_splitPixmap = true;
@@ -160,8 +160,8 @@ void Fifteen::setIdentical()
   pixmap.fill(Qt::transparent);
   QPainter painter(&pixmap);
   renderer.render(&painter);
-  painter.end(); 
- 
+  painter.end();
+
   m_pixmap = pixmap;
 
   m_splitPixmap = false;
