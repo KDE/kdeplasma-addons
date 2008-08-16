@@ -65,6 +65,7 @@ Comment[zh_CN]=将所给值转换为不同的单位
 Comment[zh_TW]=將數值轉換不同的單位
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
+Icon=kruler
 X-KDE-Library=krunner_converterrunner
 X-KDE-PluginInfo-Author=Petri Damstén
 X-KDE-PluginInfo-Email=damu@iki.fi
