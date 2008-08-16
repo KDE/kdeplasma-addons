@@ -20,6 +20,7 @@ Comment[uk]=Пошук у історії перегляду у Konqueror
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
+Icon=view-history
 X-KDE-Library=krunner_browserhistory
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org

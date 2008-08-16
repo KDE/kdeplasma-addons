@@ -65,6 +65,7 @@ Comment[zh_CN]=在地址簿里查找条目
 Comment[zh_TW]=找到通訊錄中的聯絡人
 ServiceTypes=Plasma/Runner
 Type=Service
+Icon=internet-mail
 X-KDE-Library=krunner_contacts
 X-KDE-PluginInfo-Author=Teemu Rytilahti
 X-KDE-PluginInfo-Email=tpr@iki.fi
