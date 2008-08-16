@@ -50,7 +50,7 @@ PlasmaAppletDialog::~PlasmaAppletDialog()
 
 void PlasmaAppletDialog::initMinimumSize()
 {
-    m_minimumSize = QSize( 150, 150 );
+    m_minimumSize = QSize( 300, 300 );
 }
 
 void PlasmaAppletDialog::initialize()
