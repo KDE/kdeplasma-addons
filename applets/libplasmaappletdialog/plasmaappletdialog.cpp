@@ -95,8 +95,9 @@ void PlasmaAppletDialog::constraintsEvent(Plasma::Constraints constraints)
                 m_proxy->show();
             }
 
+            m_icon->setVisible(false);
             m_layout->addItem(m_proxy);
-            setMinimumSize( m_minimumSize.width(), m_minimumSize.height());
+            setMinimumSize( 100, 100);
             break;
         case Plasma::Horizontal:
         case Plasma::Vertical:
@@ -128,6 +129,11 @@ void PlasmaAppletDialog::constraintsEvent(Plasma::Constraints constraints)
 
 void PlasmaAppletDialog::slotOpenDialog()
 {
+    if (!m_dialog) {
+      // applet is on desktop
+      return;
+    }
+
     if (m_dialog->isVisible()) {
         m_dialog->hide();
     } else {
