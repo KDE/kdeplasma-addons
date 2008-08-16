@@ -28,7 +28,7 @@
 namespace Models {
 
 MessagesKmail::MessagesKmail()
-    : m_interface(NULL)
+    : m_interface(NULL), m_kmailRunning(false), m_dataValid(false)
 {
     m_interface = new org::kde::kmail::kmail(
             "org.kde.kmail", "/KMail", QDBusConnection::sessionBus());
@@ -44,7 +44,9 @@ MessagesKmail::MessagesKmail()
     load();
 }
 
-void MessagesKmail::timerEvent(QTimerEvent * event) {
+void MessagesKmail::timerEvent(QTimerEvent * event)
+{
+    kDebug() << "Poll";
     if (event->timerId() == m_timer.timerId()) {
         if (m_kmailRunning != !m_interface->isValid()) {
             m_kmailRunning = m_interface->isValid();
@@ -66,7 +68,15 @@ MessagesKmail::~MessagesKmail()
 
 void MessagesKmail::activate(int index)
 {
-    KRun::runCommand("kontact --module kmailplugin", NULL);
+    if (m_dataValid) {
+        m_interface->selectFolder(m_items.at(index).data.toString());
+    }
+
+    if (m_interface->isValid()) {
+        KRun::runCommand("kmail", NULL);
+    } else {
+        BaseModel::activate(index);
+    }
     hideLancelotWindow();
 }
 
@@ -76,14 +86,20 @@ void MessagesKmail::load()
     kDebug();
 
     if (!m_interface->isValid()) {
-        addService("kmail");
+        QStringList services;
+        services << "kontact|kmail";
+        addServices(services);
         itemAt(0).title = i18n("Mail client");
         itemAt(0).description = i18n("Mail client is not running");
+        m_dataValid = false;
+        m_kmailRunning = false;
     } else {
         QDBusReply < QStringList > folders = m_interface->folderList();
         if (!folders.isValid()) {
+            m_kmailRunning = false;
             return;
         }
+        m_kmailRunning = true;
 
         foreach (QString folder, folders.value()) {
             kDebug() << folder;
@@ -119,7 +135,10 @@ void MessagesKmail::load()
                );
         }
 
+        m_dataValid = true;
+
         if (size() == 0) {
+            m_dataValid = false;
             add(i18n("No unread mail"), "", KIcon("mail-folder-inbox"), QVariant());
         }
 

@@ -24,6 +24,7 @@
 #include <KConfigDialog>
 #include <QString>
 #include "LancelotAppletConfig.h"
+#include "../LancelotConfig.h"
 
 class LancelotApplet: public Plasma::Applet
 {
@@ -59,6 +60,7 @@ private:
     Private * const d;
 
     LancelotAppletConfig m_config;
+    LancelotConfig       m_configMenu;
 };
 
 K_EXPORT_PLASMA_APPLET(lancelot-launcher, LancelotApplet)

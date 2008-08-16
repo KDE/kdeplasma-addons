@@ -27,6 +27,7 @@
 #include <KConfigGroup>
 
 #include <KIcon>
+#include "LancelotConfig.h"
 #include "ui_LancelotWindowBase.h"
 
 class CustomGraphicsView;
@@ -113,7 +114,12 @@ private Q_SLOTS:
     // delay to avoid dead-locks.
     void systemDoLock();
     void systemDoLogout();
-    //void systemDoSwitchUser();
+
+    void lancelotContext();
+    void saveConfig();
+    void showAboutDialog();
+
+    void hideImmediate();
 
 public:
     /**
@@ -130,6 +136,23 @@ public:
      * Returns a list of available sections - their icons
      */
     QStringList sectionIcons();
+
+public Q_SLOTS:
+    /**
+     * Opens the configure shortcuts dialog
+     */
+    void configureShortcuts();
+
+    /**
+     * Opens the configure menu dialog
+     */
+    void configureMenu();
+
+    /**
+     * Call this when an external application changes
+     * the configuration
+     */
+    void configurationChanged();
 
 protected:
     /**
@@ -155,6 +178,11 @@ protected:
      */
     void loadConfig();
 
+    /**
+     * Sets up the actions
+     */
+    void setupActions();
+
     void focusOutEvent (QFocusEvent * event);
     void leaveEvent    (QEvent      * event);
     void enterEvent    (QEvent      * event);
@@ -174,6 +202,7 @@ private:
     bool                  m_showingFull;
 
     QSignalMapper       * m_sectionsSignalMapper;
+    KActionCollection * m_actionCollection;
 
     QMap < QString, Lancelot::ActionListViewModel * > m_models;
     QMap < QString, Lancelot::ActionListViewModel * > m_modelGroups;
@@ -182,6 +211,9 @@ private:
     KConfigGroup          m_mainConfig;
 
     Lancelot::Instance  * instance;
+
+    LancelotConfig m_configUi;
+    QWidget * m_configWidget;
 
 // Resize related code
 protected:

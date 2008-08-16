@@ -25,13 +25,11 @@
 #include <QDBusReply>
 #include <QGraphicsLinearLayout>
 
-// #include <plasma/widgets/icon.h>
 #include <lancelot/widgets/HoverIcon.h>
 
 #include <lancelot/lancelot.h>
 #include "lancelot_interface.h"
-// #include <lancelot/Global.h>
-// #include <lancelot/widgets/ExtenderButton.h>
+#include "../LancelotConfig.h"
 
 class LancelotApplet::Private {
 public:
@@ -148,6 +146,7 @@ public:
     QList < Lancelot::HoverIcon * > buttons;
     QGraphicsLinearLayout * layout;
     org::kde::lancelot::App * lancelot;
+    QAction * actionConfigureShortcuts;
 
     bool offline;
 };
@@ -159,6 +158,13 @@ LancelotApplet::LancelotApplet(QObject * parent,
     setHasConfigurationInterface(true);
     setBackgroundHints(NoBackground);
     setAcceptsHoverEvents(true);
+
+    d->actionConfigureShortcuts = new QAction(
+            KIcon("configure-shortcuts"),
+            i18n("Configure Shortcuts..."),
+            parent);
+    connect (d->actionConfigureShortcuts, SIGNAL(triggered(bool)),
+            d->lancelot, SLOT(configureShortcuts()));
 }
 
 LancelotApplet::~LancelotApplet()
@@ -181,6 +187,8 @@ void LancelotApplet::saveConfig()
     kcg.writeEntry("icon", d->mainIcon);
     kcg.writeEntry("activate", (d->clickActivation?"click":"hover"));
     save(kcg);
+
+    m_configMenu.saveConfig();
 }
 
 void LancelotApplet::applyConfig()
@@ -260,21 +268,29 @@ void LancelotApplet::configAccepted()
     d->clickActivation = m_config.clickActivation();
     applyConfig();
     saveConfig();
+    d->lancelot->configurationChanged();
 }
 
 void LancelotApplet::createConfigurationInterface(KConfigDialog * parent)
 {
-    QWidget * widget = new QWidget();
-    m_config.setupUi(widget);
+    QWidget * appletConfig = new QWidget(parent);
+    m_config.setupUi(appletConfig);
 
     m_config.setShowCategories(d->showCategories);
     m_config.setIcon(d->mainIcon);
     m_config.setClickActivation(d->clickActivation);
+    parent->addPage(appletConfig, i18n("Applet"),
+            "application-x-plasma", i18n("Lancelot Launcher Applet"));
+
+    QWidget * menuConfig = new QWidget(parent);
+    m_configMenu.setupUi(menuConfig);
+    m_configMenu.loadConfig();
+    parent->addPage(menuConfig, i18n("Menu"),
+            "lancelot", i18n("Lancelot Menu"));
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, parent->windowTitle(), icon());
 }
 
 void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
@@ -300,7 +316,9 @@ QList< QAction * > LancelotApplet::contextualActions()
 {
     d->offline = true;
     d->lancelot->hide(true);
-    return Plasma::Applet::contextualActions();
+    QList < QAction * > result = Plasma::Applet::contextualActions();
+    result << d->actionConfigureShortcuts;
+    return result;
 }
 
 #include "LancelotApplet.moc"

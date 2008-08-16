@@ -25,11 +25,6 @@
 #include <QtDBus>
 
 #include <KAction>
-#include <KActionCollection>
-#include <KStandardAction>
-#include <KAuthorized>
-//#include <KGlobalAccel>
-//#include <KGlobalSettings>
 #include <KLocale>
 
 
@@ -39,19 +34,22 @@
 #include "models/BaseModel.h"
 
 #include "lancelotadaptor.h"
+#include "AboutData.h"
 
 #include "QtDisplay.h"
 
 LancelotApplication * LancelotApplication::m_application = NULL;
 
 LancelotApplication::LancelotApplication(int argc, char **argv)
-    : KUniqueApplication(argc, argv), window(0), m_clientsNumber(0), m_lastID(-1)
+    : KUniqueApplication(argc, argv), window(0),
+    m_clientsNumber(0), m_lastID(-1)
 {
     init();
 }
 
 LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, Qt::HANDLE colormap, bool configUnique)
-    : KUniqueApplication(display, visual, colormap, configUnique), window(0), m_clientsNumber(0), m_lastID(-1)
+    : KUniqueApplication(display, visual, colormap, configUnique), window(0),
+    m_clientsNumber(0), m_lastID(-1)
 {
     init();
 }
@@ -76,19 +74,6 @@ void LancelotApplication::init()
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
 
-    m_actionCollection = new KActionCollection(this);
-    KAction * a = 0;
-
-    if ( KAuthorized::authorizeKAction("show_lancelot")) {
-        a = m_actionCollection->addAction(i18n("Lancelot"), this);
-        a->setText(i18n("Lancelot"));
-        a->setGlobalShortcut(KShortcut(Qt::ALT + Qt::Key_F5));
-        connect(
-                a, SIGNAL(triggered(bool)),
-                this, SLOT(showCentered())
-                );
-    }
-
     Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
     kDebug() << "Connecting ApplicationConnector to self";
     connect(
@@ -109,20 +94,8 @@ int LancelotApplication::main(int argc, char **argv)
 {
     KLocale::setMainCatalog("lancelot");
 
-    KCmdLineArgs::init(argc, argv,
-        new KAboutData(
-            QByteArray("lancelot"),
-            QByteArray(""),
-            ki18n("Lancelot"),
-            QByteArray("0.5"),
-            ki18n("Next generation application launcher"),
-            KAboutData::License_GPL,
-            ki18n("(C) 2007 Ivan Čukić"),
-            KLocalizedString(),
-            QByteArray(""),
-            QByteArray("ivan(dot)cukic(at)kdemail(dot)com")
-        )
-    );
+    KAboutData * about = new AboutData();
+    KCmdLineArgs::init(argc, argv, about);
 
     QtDisplay * dpy = new QtDisplay();
 
@@ -206,3 +179,16 @@ QStringList LancelotApplication::sectionIcons()
     if (!window) return QStringList();
     return window->sectionIcons();
 }
+
+void LancelotApplication::configureShortcuts()
+{
+    if (!window) return;
+    window->configureShortcuts();
+}
+
+void LancelotApplication::configurationChanged()
+{
+    if (!window) return;
+    window->configurationChanged();
+}
+

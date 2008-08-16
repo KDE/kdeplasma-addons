@@ -68,7 +68,13 @@ public:
     void setAtlasTitle(const QString & title);
     void setAtlasIcon(QIcon icon);
 
+    void setActivationMethod(ActivationMethod value);
+    ActivationMethod activationMethod() const;
+
+    void setColumnLimit(int limit);
+
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
+    L_Override virtual void groupUpdated();
 
 protected Q_SLOTS:
     virtual void listItemActivated(int index);

@@ -1,0 +1,101 @@
+<ui version="4.0" >
+ <class>LancelotConfigBase</class>
+ <widget class="QWidget" name="LancelotConfigBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>358</width>
+    <height>333</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>LancelotConfigBase</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupActivation" >
+     <property name="title" >
+      <string>Activation method</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <item>
+       <widget class="QRadioButton" name="radioActivationClick" >
+        <property name="toolTip" >
+         <string>Choose this option if you like to click. Every interface item will be activated only by clicking it.</string>
+        </property>
+        <property name="text" >
+         <string>Click on everything</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioActivationClassic" >
+        <property name="toolTip" >
+         <string>Choose this option if you want the menu to behave like the standard application launchers. In order to launch applications, you should click on them. Section buttons are activated by hovering.</string>
+        </property>
+        <property name="text" >
+         <string>Classical menu</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioActivationNoClick" >
+        <property name="toolTip" >
+         <string>Choose this option if you want to avoid clicking. Section buttons are activated by hovering. Applications are launched by hovering the button extenders.</string>
+        </property>
+        <property name="text" >
+         <string>No-click activation</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupAppBrowser" >
+     <property name="title" >
+      <string>Application browser</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
+      <item>
+       <widget class="QRadioButton" name="radioAppBrowserNoColumnLimit" >
+        <property name="text" >
+         <string>No column number limit</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioAppBrowserTwoColumnLimit" >
+        <property name="text" >
+         <string>Limit to two columns</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

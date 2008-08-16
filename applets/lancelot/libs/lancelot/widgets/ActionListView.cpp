@@ -488,6 +488,8 @@ void ActionListView::setExtenderPosition(ExtenderPosition position)
     QPair < ExtenderButton *, int > pair;
     foreach(pair, m_buttons) {
         pair.first->setExtenderPosition(position);
+        pair.first->setActivationMethod(
+                (position == NoExtender)?ClickActivate:ExtenderActivate);
         pair.first->setGeometry(
             QRectF(left, pair.first->geometry().top(),
                    width, pair.first->geometry().height())
@@ -497,6 +499,10 @@ void ActionListView::setExtenderPosition(ExtenderPosition position)
     ExtenderButton * button;
     foreach(button, m_buttonsLimbo) {
         button->setExtenderPosition(position);
+        button->setActivationMethod(
+                (position == NoExtender)?ClickActivate:ExtenderActivate);
+        pair.first->setActivationMethod(
+                (position == NoExtender)?ClickActivate:ExtenderActivate);
     }
 }
 
@@ -722,6 +728,18 @@ void ActionListView::wheelEvent ( QGraphicsSceneWheelEvent * event ) {
 
     for (int i = 0; i < SCROLL_AMMOUNT; i++) {
         scrollBy(m_scrollDirection * SCROLL_AMMOUNT);
+    }
+}
+
+void ActionListView::groupUpdated()
+{
+    Widget::groupUpdated();
+
+    kDebug() << group()->name();
+
+    if (group()->hasProperty("ExtenderPosition")) {
+        kDebug() << "ExtenderPosition" << group()->property("ExtenderPosition").toInt();
+        setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
     }
 }
 

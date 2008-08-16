@@ -86,9 +86,7 @@ public:
             NodeLayout::NodeCoordinate(1, 1, 0, 0)
         );
 
-        listsLayout->setColumnCount(13);
         listsLayout->setSizer(new PassagewayViewSizer());
-        listsLayout->setColumnCount(3);
 
         buttonsLayout->setSpacing(0.0);
 
@@ -155,6 +153,7 @@ public:
             new ExtenderButton(step->icon, step->title, "", parent);
         ActionListView * list   =
             new ActionListView(step->model, parent);
+        list->setGroupByName(parent->group()->name() + "-Atlas");
         Instance::releaseActiveInstanceLock();
 
         button->setIconSize(QSize(24, 24));
@@ -168,11 +167,9 @@ public:
 
         if (buttons.size() > 2) {
             buttons.at(buttons.size() - 3)->setGroupByName(parent->group()->name() + "-Button");
-            buttons.at(buttons.size() - 3)->setExtenderPosition(Lancelot::LeftExtender);
         }
 
         list->setCategoriesGroupByName("ActionListView-CategoriesPass");
-        list->setExtenderPosition(RightExtender);
         list->setCategoriesActivable(true);
 
         lists.append(list);
@@ -311,8 +308,64 @@ void PassagewayView::setGroup(WidgetGroup * g)
         }
     }
 
+    i = 0;
     foreach (ActionListView * list, d->lists) {
-        list->setGroupByName(group()->name() + "-List");
+        if (i++ == 0) {
+            list->setGroupByName(group()->name() + "-Entrance");
+        } else {
+            list->setGroupByName(group()->name() + "-Atlas");
+        }
+    }
+}
+
+void PassagewayView::setActivationMethod(ActivationMethod value)
+{
+    if (value == Lancelot::ClickActivate) {
+        group()->instance()->group(group()->name() + "-Entrance")
+            ->setProperty("ExtenderPosition", NoExtender);
+        group()->instance()->group(group()->name() + "-Atlas")
+            ->setProperty("ExtenderPosition", NoExtender);
+        group()->instance()->group(group()->name() + "-Button")
+            ->setProperty("ExtenderPosition", NoExtender);
+        group()->instance()->group(group()->name() + "-Button")
+            ->setProperty("ActivationMethod", ClickActivate);
+    } else {
+        group()->instance()->group(group()->name() + "-Entrance")
+            ->setProperty("ExtenderPosition", LeftExtender);
+        group()->instance()->group(group()->name() + "-Atlas")
+            ->setProperty("ExtenderPosition", RightExtender);
+        group()->instance()->group(group()->name() + "-Button")
+            ->setProperty("ExtenderPosition", LeftExtender);
+        group()->instance()->group(group()->name() + "-Button")
+            ->setProperty("ActivationMethod", ExtenderActivate);
+    }
+    group()->instance()->group(group()->name() + "-Entrance")
+        ->notifyUpdated();
+    group()->instance()->group(group()->name() + "-Atlas")
+        ->notifyUpdated();
+    group()->instance()->group(group()->name() + "-Button")
+        ->notifyUpdated();
+}
+
+ActivationMethod PassagewayView::activationMethod() const
+{
+
+}
+
+void PassagewayView::setColumnLimit(int limit)
+{
+    d->listsLayout->setColumnCount(limit);
+}
+
+void PassagewayView::groupUpdated()
+{
+    Panel::groupUpdated();
+
+    kDebug() << group()->name() << "ActivationMethod"
+        << group()->hasProperty("ActivationMethod");
+    if (group()->hasProperty("ActivationMethod")) {
+        kDebug() << "ActivationMethod " << (ActivationMethod)(group()->property("ActivationMethod").toInt());
+        setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
     }
 }
 

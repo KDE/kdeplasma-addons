@@ -79,6 +79,7 @@ void ContactsKopete::load()
 
         QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
         if (!contacts.isValid()) {
+            m_kopeteRunning = false;
             return;
         }
 

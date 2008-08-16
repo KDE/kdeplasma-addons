@@ -24,6 +24,12 @@
 #include <QStyleOptionGraphicsItem>
 
 #include <KRecentDocument>
+#include <KActionCollection>
+#include <KStandardAction>
+#include <KAuthorized>
+#include <KGlobalAccel>
+#include <KShortcutsDialog>
+#include <KConfigDialog>
 #include <plasma/animator.h>
 
 #include <QtDBus/QDBusInterface>
@@ -53,6 +59,8 @@
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
+#include <KAboutApplicationDialog>
+#include <KCmdLineArgs>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500
@@ -183,13 +191,13 @@ LancelotWindow::LancelotWindow()
     m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
     m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
     instance(NULL), m_resizeDirection(None),
-    m_mainSize(mainWidthDefault, windowHeightDefault)
+    m_mainSize(mainWidthDefault, windowHeightDefault), m_configWidget(NULL)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
 
-    connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hide()));
+    connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hideImmediate()));
     m_hideTimer.setInterval(HIDE_TIMER_INTERVAL);
     m_hideTimer.setSingleShot(true);
 
@@ -252,25 +260,21 @@ LancelotWindow::LancelotWindow()
     connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
     connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
 
+    connect(buttonLancelotContext,  SIGNAL(activated()), this, SLOT(lancelotContext()));
+
     connect(editSearch->widget(),
         SIGNAL(textChanged(const QString &)),
         this, SLOT(search(const QString &))
     );
 
     loadConfig();
+    setupActions();
 }
 
 LancelotWindow::~LancelotWindow()
 {
+    delete m_configWidget;
     delete instance;
-}
-
-void LancelotWindow::loadConfig()
-{
-    m_mainSize = QSize(
-        m_mainConfig.readEntry("width",  mainWidthDefault),
-        m_mainConfig.readEntry("height", windowHeightDefault)
-    );
 }
 
 void LancelotWindow::lancelotShow(int x, int y)
@@ -295,6 +299,7 @@ void LancelotWindow::lancelotShowItem(int x, int y, const QString & name)
 void LancelotWindow::lancelotHide(bool immediate)
 {
     if (immediate) {
+        editSearch->setText(QString());
         hide();
         return;
     }
@@ -357,10 +362,24 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     layoutSections->setFlip(flip);
     resizeWindow();
 
-    instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
-            (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
-    ));
+    if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
+        instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
+                (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
+        ));
+        instance->group("SystemButtons")
+            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+    } else {
+        instance->group("SystemButtons")
+            ->setProperty("ExtenderPosition", QVariant(Lancelot::NoExtender));
+        instance->group("SystemButtons")
+            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+    }
+    instance->group("LancelotContext")->setProperty("ExtenderPosition",
+            instance->group("SystemButtons")->property("ExtenderPosition"));
+    instance->group("LancelotContext")->setProperty("ActivationMethod",
+            instance->group("SystemButtons")->property("ActivationMethod"));
     instance->group("SystemButtons")->notifyUpdated();
+    instance->group("LancelotContext")->notifyUpdated();
 
     if (m_showingFull) {
         sectionActivated("applications");
@@ -371,7 +390,6 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     KWindowSystem::forceActiveWindow(winId());
     editSearch->setFocus();
-    editSearch->setText(QString());
 
 }
 
@@ -387,7 +405,7 @@ void LancelotWindow::resizeWindow()
 
 void LancelotWindow::focusOutEvent(QFocusEvent * event) {
     Q_UNUSED(event);
-    hide();
+    lancelotHide(true);
     QWidget::focusOutEvent(event);
 }
 
@@ -455,13 +473,13 @@ void LancelotWindow::search(const QString & string)
 
 void LancelotWindow::systemLock()
 {
-    hide();
+    lancelotHide(true);
     QTimer::singleShot(500, this, SLOT(systemDoLock()));
 }
 
 void LancelotWindow::systemLogout()
 {
-    hide();
+    lancelotHide(true);
     QTimer::singleShot(500, this, SLOT(systemDoLogout()));
 }
 
@@ -491,21 +509,8 @@ void LancelotWindow::systemDoLogout()
 
 void LancelotWindow::systemSwitchUser()
 {
-    //  // For now, we do not use systems switch function, but rather
-    //  // SESSIONS runner...
-    //  // hide();
-    //  // QTimer::singleShot(500, this, SLOT(systemDoSwitchUser()));
     search("SESSIONS");
 }
-
-//  void LancelotWindow::systemDoSwitchUser()
-//  {
-//      org::kde::krunner::Interface krunner("org.kde.krunner", "/Interface", QDBusConnection::sessionBus());
-//
-//      if (krunner.isValid()) {
-//          krunner.switchUser();
-//      }
-//  }
 
 void LancelotWindow::setupModels()
 {
@@ -651,6 +656,214 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         }
     }
     return QWidget::eventFilter(object, event);
+}
+
+void LancelotWindow::setupActions()
+{
+    m_actionCollection = new KActionCollection(this);
+    KAction * a = 0;
+
+    if (KAuthorized::authorizeKAction("show_lancelot")) {
+        a = m_actionCollection->addAction(i18n("Lancelot"), this);
+        a->setText(i18n("Open Lancelot menu"));
+        a->setGlobalShortcut(KShortcut(Qt::ALT + Qt::Key_F5));
+        a->setIcon(KIcon("lancelot"));
+        kDebug() << "connect" <<
+        connect(
+                a, SIGNAL(triggered(bool)),
+                this, SLOT(lancelotShowCentered())
+                );
+    }
+
+    QStringList sIDs = sectionIDs();
+    QStringList sNames = sectionNames();
+    QStringList sIcons = sectionIcons();
+    for (int i = 0; i < sIDs.size(); i++) {
+        a = m_actionCollection->addAction(sIDs.at(i), this);
+        a->setText(sNames.at(i));
+        a->setIcon(KIcon(sIcons.at(i)));
+        a->setShortcut(Qt::ALT + Qt::Key_1 + i);
+        connect(
+                a, SIGNAL(triggered(bool)),
+                m_sectionsSignalMapper, SLOT(map())
+                );
+        m_sectionsSignalMapper->setMapping(a, sIDs.at(i));
+    }
+    m_actionCollection->readSettings();
+    m_actionCollection->associateWidget(this);
+}
+
+void LancelotWindow::configureShortcuts()
+{
+    lancelotHide(true);
+    KShortcutsDialog::configure(m_actionCollection);
+}
+
+void LancelotWindow::configurationChanged()
+{
+    kDebug();
+    loadConfig();
+}
+
+void LancelotWindow::loadConfig()
+{
+    kDebug();
+    kDebug() << "Lancelot::PassagewayView group ...";
+    kDebug() << "passagewayApplications" <<
+        passagewayApplications->group()->name();
+
+    m_mainSize = QSize(
+        m_mainConfig.readEntry("width",  mainWidthDefault),
+        m_mainConfig.readEntry("height", windowHeightDefault)
+    );
+
+    if (m_configWidget == NULL) {
+        m_configWidget = new QWidget();
+        m_configUi.setupUi(m_configWidget);
+    }
+    m_configUi.loadConfig();
+
+    bool sectionNoClick = true;
+    bool listsNoClick = true;
+    bool systemNoClick = true;
+
+    switch (m_configUi.activationMethod()) {
+        case LancelotConfig::Click:
+            sectionNoClick = false;
+            listsNoClick = false;
+            systemNoClick = false;
+            break;
+        case LancelotConfig::Classic:
+            listsNoClick = false;
+            systemNoClick = false;
+            break;
+        case LancelotConfig::NoClick:
+            break;
+    }
+
+    if (systemNoClick) {
+        instance->group("SystemButtons")->setProperty("ExtenderPosition",
+                (layoutMain->flip() & Plasma::VerticalFlip)
+                    ? (Lancelot::TopExtender) : (Lancelot::BottomExtender)
+        );
+        instance->group("SystemButtons")
+            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+    } else {
+        instance->group("SystemButtons")
+            ->setProperty("ExtenderPosition", QVariant(Lancelot::NoExtender));
+        instance->group("SystemButtons")
+            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+    }
+
+    instance->group("LancelotContext")->setProperty("ExtenderPosition",
+            instance->group("SystemButtons")->property("ExtenderPosition"));
+    instance->group("LancelotContext")->setProperty("ActivationMethod",
+            instance->group("SystemButtons")->property("ActivationMethod"));
+    instance->group("SystemButtons")->notifyUpdated();
+    instance->group("LancelotContext")->notifyUpdated();
+
+    if (sectionNoClick) {
+        instance->group("SectionButtons")
+            ->setProperty("ActivationMethod", Lancelot::HoverActivate);
+    } else {
+        instance->group("SectionButtons")
+            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+    }
+    instance->group("SectionButtons")->notifyUpdated();
+
+    if (listsNoClick) {
+        instance->group("ActionListView-Left")
+            ->setProperty("ExtenderPosition", Lancelot::LeftExtender);
+        instance->group("ActionListView-Right")
+            ->setProperty("ExtenderPosition", Lancelot::RightExtender);
+        instance->group("PassagewayView")
+            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+    } else {
+        instance->group("ActionListView-Left")
+            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
+        instance->group("ActionListView-Right")
+            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
+        instance->group("PassagewayView")
+            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+    }
+    instance->group("ActionListView-Left")->notifyUpdated();
+    instance->group("ActionListView-Right")->notifyUpdated();
+    instance->group("PassagewayView")->notifyUpdated();
+
+    if (m_configUi.appbrowserColumnLimitted()) {
+        passagewayApplications->setColumnLimit(2);
+    } else {
+        passagewayApplications->setColumnLimit(22); // TODO: Temp
+    }
+}
+
+void LancelotWindow::lancelotContext()
+{
+    QMenu menu;
+    connect(
+            menu.addAction(KIcon("configure-shortcuts"),
+                i18n("Configure Shortcuts...")), SIGNAL(triggered(bool)),
+            this, SLOT(configureShortcuts()));
+
+    connect(
+            menu.addAction(KIcon("configure"),
+                i18n("Configure Lancelot menu...")), SIGNAL(triggered(bool)),
+            this, SLOT(configureMenu()));
+
+    connect(
+            menu.addAction(KIcon("lancelot"),
+                i18n("About Lancelot")), SIGNAL(triggered(bool)),
+            this, SLOT(showAboutDialog()));
+
+    menu.exec(QCursor::pos());
+}
+
+void LancelotWindow::configureMenu()
+{
+    lancelotHide(true);
+    const QString dialogID = "LancelotMenyConfigurationDialog";
+    KConfigDialog * dialog;
+
+    if (dialog = KConfigDialog::exists(dialogID)) {
+        KWindowSystem::setOnDesktop(dialog->winId(), KWindowSystem::currentDesktop());
+        dialog->show();
+        KWindowSystem::activateWindow(dialog->winId());
+        return;
+    }
+
+    KConfigSkeleton * nullManager = new KConfigSkeleton(0);
+    dialog = new KConfigDialog(this, dialogID, nullManager);
+    dialog->setFaceType(KPageDialog::Auto);
+    dialog->setWindowTitle(i18n("Configure Lancelot menu"));
+    dialog->setAttribute(Qt::WA_DeleteOnClose, false);
+    dialog->addPage(m_configWidget, i18n("Configure Lancelot menu"), "lancelot");
+    dialog->showButton(KDialog::Apply, false); // To follow the current Plasma applet style
+    dialog->show();
+    connect(dialog, SIGNAL(applyClicked()), this, SLOT( saveConfig()));
+    connect(dialog, SIGNAL(okClicked()),    this, SLOT( saveConfig()));
+}
+
+void LancelotWindow::saveConfig()
+{
+    m_configUi.saveConfig();
+    loadConfig();
+}
+
+void LancelotWindow::showAboutDialog()
+{
+    lancelotHide(true);
+    kDebug() << "Abot";
+
+    KAboutApplicationDialog * about = new KAboutApplicationDialog(
+            KCmdLineArgs::aboutData()
+            );
+    about->setAttribute(Qt::WA_DeleteOnClose, true);
+    about->show();
+}
+
+void LancelotWindow::hideImmediate()
+{
+    lancelotHide(true);
 }
 
 #include "LancelotWindow.moc"

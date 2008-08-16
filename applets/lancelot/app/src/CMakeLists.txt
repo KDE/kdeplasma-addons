@@ -45,7 +45,9 @@ set(plasma_lancelot_application_SRCS
   LancelotApplication.cpp
   LancelotWindow.cpp
   Serializator.cpp
+  LancelotConfig.cpp
   QtDisplay.cpp
+  AboutData.cpp
 )
 
 plasmaui_add_ui_files(plasma_lancelot_application_SRCS
@@ -97,9 +99,13 @@ set(
   plasma_lancelot_SRCS
   main.cpp
 
-  ${plasma_lancelot_widgets_SRCS}
   ${plasma_lancelot_models_SRCS}
   ${plasma_lancelot_application_SRCS}
+)
+
+kde4_add_ui_files(
+  plasma_lancelot_SRCS
+  ui/LancelotConfigBase.ui
 )
 
 kde4_add_executable(lancelot-menu ${plasma_lancelot_SRCS})
@@ -123,9 +129,7 @@ install(TARGETS lancelot-menu ${INSTALL_TARGETS_DEFAULT_ARGS} )
 # Lancelot Part Applet
 
 set(plasma_applet_lancelot_part_SRCS
-  ${plasma_lancelot_widgets_SRCS}
   ${plasma_lancelot_models_SRCS}
-  # ${plasma_lancelot_application_SRCS}
   parts/LancelotPart.cpp
   parts/PartsMergedModel.cpp
   parts/LancelotPartConfig.cpp
@@ -161,15 +165,20 @@ update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
 # Lancelot Main Applet
 
 set(plasma_applet_lancelot_launcher_SRCS
-  ${plasma_lancelot_widgets_SRCS}
   ${plasma_lancelot_client_SRCS}
   launcher/LancelotApplet.cpp
   launcher/LancelotAppletConfig.cpp
+  LancelotConfig.cpp
 )
 
 kde4_add_ui_files(
   plasma_applet_lancelot_launcher_SRCS
   launcher/LancelotAppletConfigBase.ui
+)
+
+kde4_add_ui_files(
+  plasma_applet_lancelot_launcher_SRCS
+  ui/LancelotConfigBase.ui
 )
 
 kde4_add_plugin(plasma_applet_lancelot_launcher ${plasma_applet_lancelot_launcher_SRCS})

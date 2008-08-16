@@ -142,7 +142,6 @@
                     entranceIcon="favorite"
                     atlasTitle="Applications"
                     atlasIcon="applications-other"
-                    group="InnerPanel"
 
                     Lancelot__CardLayout:cardName="applications"
                 >
@@ -161,6 +160,8 @@
                         <item:widget
                             name="listComputerLeft" type="Lancelot::ActionListView"
                             extenderPosition="Left"
+                            group="ActionListView-Left"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
@@ -168,6 +169,8 @@
                         <item:widget
                             name="listComputerRight" type="Lancelot::ActionListView"
                             extenderPosition="Right"
+                            group="ActionListView-Right"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -188,6 +191,8 @@
                         <item:widget
                             name="listContactsLeft" type="Lancelot::ActionListView"
                             extenderPosition="Left"
+                            group="ActionListView-Left"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
@@ -195,6 +200,8 @@
                         <item:widget
                             name="listContactsRight" type="Lancelot::ActionListView"
                             extenderPosition="Right"
+                            group="ActionListView-Right"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -215,6 +222,8 @@
                         <item:widget
                             name="listDocumentsLeft" type="Lancelot::ActionListView"
                             extenderPosition="Left"
+                            group="ActionListView-Left"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "0.5, 1, -2, 0"
@@ -222,6 +231,8 @@
                         <item:widget
                             name="listDocumentsRight" type="Lancelot::ActionListView"
                             extenderPosition="Right"
+                            group="ActionListView-Right"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0.5, 0"
                             Lancelot__NodeLayout:bottomRight = "1, 1, 2, 0"
@@ -242,6 +253,8 @@
                         <item:widget
                             name="listSearchLeft" type="Lancelot::ActionListView"
                             extenderPosition="Right"
+                            group="ActionListView-Right"
+                            itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"
                             Lancelot__NodeLayout:bottomRight = "1.0, 1, 0, 0"
@@ -266,7 +279,7 @@
                     iconSize="24, 24"
 
                     Lancelot__NodeLayout:topLeft     = "0, 0, 0, SYSTEM_PADDING"
-                    Lancelot__NodeLayout:bottomRight = "1.0 / 3.0, 1, -2, - SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "1.0 / 3.0, 1, - SYSTEM_HEIGHT * (1.0 / 3.0) - 6, - SYSTEM_PADDING"
                 />
                 <item:widget
                     name="buttonSystemLogout" type="Lancelot::ExtenderButton"
@@ -278,8 +291,8 @@
                     extenderPosition="Bottom"
                     iconSize="24, 24"
 
-                    Lancelot__NodeLayout:topLeft     = "1.0 / 3.0, 0, 1, SYSTEM_PADDING"
-                    Lancelot__NodeLayout:bottomRight = "2.0 / 3.0, 1, -1, - SYSTEM_PADDING"
+                    Lancelot__NodeLayout:topLeft     = "1.0 / 3.0, 0, - SYSTEM_HEIGHT * (1.0 / 3.0) - 3, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "2.0 / 3.0, 1, - SYSTEM_HEIGHT * (2.0 / 3.0) - 5, - SYSTEM_PADDING"
                 />
                 <item:widget
                     name="buttonSystemSwitchUser" type="Lancelot::ExtenderButton"
@@ -291,7 +304,19 @@
                     extenderPosition="Bottom"
                     iconSize="24, 24"
 
-                    Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, 2, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, - SYSTEM_HEIGHT * (2.0 / 3.0) - 2, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "1, 0, - SYSTEM_HEIGHT - 6, SYSTEM_PADDING"
+                />
+                <item:widget
+                    name="buttonLancelotContext" type="Lancelot::ExtenderButton"
+
+                    icon="lancelot"
+                    group="LancelotContext"
+                    activationMethod="Extender"
+                    extenderPosition="Bottom"
+                    iconSize="24, 24"
+
+                    Lancelot__NodeLayout:topLeft     = "1, 0, 2 - SYSTEM_HEIGHT - SYSTEM_PADDING, SYSTEM_PADDING"
                     Lancelot__NodeLayout:bottomRight = "1, 1, 0, - SYSTEM_PADDING"
                 />
             </item:layout>

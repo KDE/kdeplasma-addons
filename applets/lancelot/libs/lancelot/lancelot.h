@@ -74,7 +74,7 @@ enum ActivationMethod {
 //        }
 
 #define L_WIDGET_IS_INITIALIZED  L_isInitialized()
-#define L_WIDGET_SET_INITIALIZED L_setInitialized(); updateGeometry(); \
+#define L_WIDGET_SET_INITIALIZED L_setInitialized(); groupUpdated(); updateGeometry(); \
     kDebug() << "initialized" << (void*)this << "of class" << metaObject()->className();
 #define L_WIDGET_UNSET_INITIALIZED  L_isInitialized()
 

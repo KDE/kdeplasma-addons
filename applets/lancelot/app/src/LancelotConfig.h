@@ -17,44 +17,42 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
-#define LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
+#ifndef LANCELOTCONFIG_H_
+#define LANCELOTCONFIG_H_
 
-#include "kmail_interface.h"
-#include "kmailfolder_interface.h"
-#include <taskmanager/taskmanager.h>
-#include "BaseModel.h"
+#include "ui_LancelotConfigBase.h"
+#include <KConfig>
+#include <KConfigGroup>
+#include <QButtonGroup>
 
-using TaskManager::TaskPtr;
-
-namespace Models {
-
-class MessagesKmail : public BaseModel {
-    Q_OBJECT
+class LancelotConfig: public Ui::LancelotConfigBase {
 public:
-    MessagesKmail();
-    ~MessagesKmail();
+    LancelotConfig();
 
-    void timerEvent(QTimerEvent * event);
+    void setupUi(QWidget * widget);
 
-protected:
-    void activate(int index);
-    void load();
+    void loadConfig();
+    void saveConfig();
 
-private Q_SLOTS:
-    void unreadCountChanged();
+    enum ActivationMethod {
+        Click = 0,
+        Classic = 1,
+        NoClick = 2
+    };
 
-private:
-    org::kde::kmail::kmail * m_interface;
-    org::kde::kmail::folder * m_folderinterface;
-    QBasicTimer m_timer;
-    QString m_kopeteAvatarsDir;
-    bool m_kmailRunning : 1;
-    bool m_dataValid : 1;
+    ActivationMethod activationMethod();
+    void setActivationMethod(ActivationMethod method);
+
+    bool appbrowserColumnLimitted();
+    void setAppbrowserColumnLimitted(bool value);
+
+    QButtonGroup * qbgActivationMethod;
+    QButtonGroup * qbgAppbrowserColumnLimit;
+
+    KConfig      m_config;
+    KConfigGroup m_mainConfig;
 };
 
-} // namespace Models
-
-#endif // LANCELOTAPP_MODELS_MESSAGESKMAIL_H_
+#endif // LANCELOTCONFIG_H_
 
 

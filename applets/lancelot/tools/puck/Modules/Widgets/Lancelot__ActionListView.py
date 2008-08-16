@@ -18,6 +18,13 @@ class Lancelot__ActionListViewHandler(Lancelot__Widget.Lancelot__WidgetHandler):
     def setup(self):
         setup = Lancelot__Widget.Lancelot__WidgetHandler.setup(self)
 
+        if self.hasAttribute('itemsGroup'):
+            setup += self.attribute('name') \
+                  + '->setItemsGroupByName("' + self.attribute('itemsGroup') + '");'
+
+        if self.hasAttribute('categoriesGroup'):
+            setup += self.attribute('name') \
+                  + '->setItemsGroupByName("' + self.attribute('categoriesGroup') + '");'
 
         if self.hasAttribute('extenderPosition'):
             setup += self.attribute('name') \

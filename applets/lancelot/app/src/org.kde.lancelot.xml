@@ -26,6 +26,10 @@
     <method name="isShowing">
       <arg type="b" direction="out"/>
     </method>
+    <method name="configureShortcuts">
+    </method>
+    <method name="configurationChanged">
+    </method>
     <method name="addClient">
       <arg type="i" direction="out"/>
     </method>
