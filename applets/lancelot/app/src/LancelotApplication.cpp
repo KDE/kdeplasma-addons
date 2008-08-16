@@ -56,8 +56,6 @@ LancelotApplication::LancelotApplication (Display * display, Qt::HANDLE visual, 
 
 bool LancelotApplication::event(QEvent * e)
 {
-    kDebug() << (void *) e;
-    kDebug() << e;
     if (e->type() == QEvent::ApplicationDeactivate) {
         hide(true);
     }
@@ -75,7 +73,6 @@ void LancelotApplication::init()
     dbus.registerObject("/Lancelot", this);
 
     Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
-    kDebug() << "Connecting ApplicationConnector to self";
     connect(
             ac, SIGNAL(doSearch(QString)),
             this, SLOT(search(QString))
@@ -100,7 +97,6 @@ int LancelotApplication::main(int argc, char **argv)
     QtDisplay * dpy = new QtDisplay();
 
     LancelotApplication::m_application = new LancelotApplication(dpy->display(),dpy->visual(),dpy->colormap());
-    Lancelot::Instance::setHasApplication(true);
 
     return LancelotApplication::m_application->exec();
 }

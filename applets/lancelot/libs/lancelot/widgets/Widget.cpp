@@ -52,10 +52,6 @@ Widget::Widget(QGraphicsItem * parent)
 Widget::~Widget()
 {
     L_WIDGET_UNSET_INITIALIZED;
-    kDebug() << "Destroying widget" << (void *)this
-             << "with private" << (void *)d
-             << "and group" << (void *)d->group;
-    L_debug();
     if (d->group != NULL) {
         d->group->instance()->removeWidget(this);
         d->group->removeWidget(this, false);
@@ -97,8 +93,6 @@ void Widget::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
     if (d->down && (event->button() == Qt::LeftButton)) {
         d->down = false;
-        kDebug();
-        L_debug();
         emit released();
         emit clicked();
     } else {
@@ -166,7 +160,8 @@ void Widget::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
     paintBackground(painter);
 }
 
-void Widget::paintBackground(QPainter * painter) {
+void Widget::paintBackground(QPainter * painter)
+{
     if (!d->group) return;
 
     QString element;
@@ -183,16 +178,13 @@ void Widget::paintBackground(QPainter * painter) {
     paintBackground(painter, element);
 }
 
-void Widget::paintBackground(QPainter * painter, const QString & element) {
+void Widget::paintBackground(QPainter * painter, const QString & element)
+{
     if (!d->group) return;
 
     // Background Painting
     if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
-        kDebug() << "Background SVG " << svg->isValid();
-        kDebug() << "Background SVG " << svg->imagePath();
-        kDebug() << "Background prefix " << element;
         svg->setElementPrefix(element);
-        kDebug() << "Background prefix " << svg->hasElementPrefix(element);
         svg->resizePanel(size());
         svg->paintPanel(painter); // API change since 4.1
 
@@ -216,8 +208,6 @@ void Widget::geometryUpdated()
 
 void Widget::setGeometry(const QRectF & rect)
 {
-    kDebug() << L_WIDGET_IS_INITIALIZED;
-    L_debug();
     if (L_WIDGET_IS_INITIALIZED) {
         QGraphicsWidget::setGeometry(rect);
         geometryUpdated();

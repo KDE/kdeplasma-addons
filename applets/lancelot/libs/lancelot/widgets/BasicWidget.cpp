@@ -350,9 +350,6 @@ void BasicWidget::setTitle(const QString & title)
 
 QString BasicWidget::title() const
 {
-    kDebug() << L_WIDGET_IS_INITIALIZED;
-    L_debug();
-
     return d->title;
 }
 
@@ -414,8 +411,6 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
     }
-    // kDebug() << L_metaObject()->className();
-    // kDebug() << "sizeHint " << which << result << title();
     return result;
 }
 

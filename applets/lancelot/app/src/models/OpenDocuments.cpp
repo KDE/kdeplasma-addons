@@ -109,7 +109,7 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 {
     Q_ASSERT(task);
 
-    kDebug() << task->className() << task->classClass();
+    // kDebug() << task->className() << task->classClass();
     QRegExp * extractor = NULL;
     QString className = task->className();
 

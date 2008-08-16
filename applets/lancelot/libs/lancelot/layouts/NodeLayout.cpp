@@ -134,7 +134,6 @@ public:
             result.setHeight(item->preferredSize().height());
             result.moveTop(result.top() - items[item].second.yr * result.height());
         }
-        kDebug() << result << geometry;
         return result;
     }
 
@@ -201,7 +200,6 @@ QSizeF NodeLayout::sizeHint(Qt::SizeHint which,
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
     }
-    kDebug() << "sizeHint " << which << result;
     return result;
 }
 

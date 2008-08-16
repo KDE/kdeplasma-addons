@@ -46,7 +46,6 @@ MessagesKmail::MessagesKmail()
 
 void MessagesKmail::timerEvent(QTimerEvent * event)
 {
-    kDebug() << "Poll";
     if (event->timerId() == m_timer.timerId()) {
         if (m_kmailRunning != !m_interface->isValid()) {
             m_kmailRunning = m_interface->isValid();
@@ -83,7 +82,6 @@ void MessagesKmail::activate(int index)
 void MessagesKmail::load()
 {
     clear(false);
-    kDebug();
 
     if (!m_interface->isValid()) {
         QStringList services;
@@ -102,8 +100,6 @@ void MessagesKmail::load()
         m_kmailRunning = true;
 
         foreach (QString folder, folders.value()) {
-            kDebug() << folder;
-
             QDBusReply < QString > rfolder = m_interface->getFolder(folder);
             if (!rfolder.isValid() || rfolder.value().isEmpty()) {
                 continue;

@@ -47,7 +47,6 @@ QString Serializator::serialize(const QMap < QString , QString > data)
 QMap < QString , QString > Serializator::deserialize(const QString & data)
 {
     QMap < QString , QString > result;
-    kDebug() << data;
 
     QStringList items = data.split("&");
     foreach (const QString & item, items) {

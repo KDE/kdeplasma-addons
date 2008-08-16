@@ -128,7 +128,6 @@ public:
         } else {
             size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
             size = QSizeF(size.height() * buttons.count(), size.height());
-            kDebug() << size;
             layout->setPreferredSize(size);
             q->resize(size);
         }
@@ -208,8 +207,6 @@ void LancelotApplet::applyConfig()
 
 void LancelotApplet::init()
 {
-    kDebug();
-
     setAcceptsHoverEvents(true);
     loadConfig();
     applyConfig();

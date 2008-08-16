@@ -186,6 +186,11 @@ public:
     virtual ~Instance();
 
     /**
+     * @returns whether the instance is activated
+     */
+    bool isActivated();
+
+    /**
      * Removes the event processing inhibitions and activates
      * all widgets that belong to this instance.
      */

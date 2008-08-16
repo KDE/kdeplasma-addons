@@ -211,6 +211,7 @@ LancelotWindow::LancelotWindow()
     m_layout->addWidget(m_view);
 
     instance = new Lancelot::Instance();
+    instance->setHasApplication(true);
 
     m_root = new Lancelot::ResizeBordersPanel();
 
@@ -233,6 +234,7 @@ LancelotWindow::LancelotWindow()
         Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
     );
     editSearch->nativeWidget()->installEventFilter(this);
+    m_view->installEventFilter(this);
 
     passagewayApplications->setEntranceTitle(i18n("Favorites"));
     passagewayApplications->setEntranceIcon(KIcon("favorites"));
@@ -240,7 +242,7 @@ LancelotWindow::LancelotWindow()
     passagewayApplications->setAtlasIcon(KIcon("applications-other"));
     /* End TODO */
 
-    instance->activateAll();
+    // instance->activateAll();
 
     m_sectionsSignalMapper = new QSignalMapper(this);
     connect (m_sectionsSignalMapper,
@@ -267,6 +269,7 @@ LancelotWindow::LancelotWindow()
         this, SLOT(search(const QString &))
     );
 
+    instance->activateAll();
     loadConfig();
     setupActions();
 }
@@ -494,8 +497,6 @@ void LancelotWindow::systemDoLock()
 
 void LancelotWindow::systemDoLogout()
 {
-    kDebug() << "Do Logout!!!";
-
     org::kde::KSMServerInterface smserver("org.kde.ksmserver", "/KSMServer", QDBusConnection::sessionBus());
 
     if (smserver.isValid()) {
@@ -647,8 +648,7 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
 
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
-    kDebug() << event;
-    if (object == editSearch->nativeWidget() && event->type() == QEvent::KeyPress) {
+    if (/* object == editSearch->nativeWidget() &&*/ event->type() == QEvent::KeyPress) {
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
         if (keyEvent->key() == Qt::Key_Escape) {
             lancelotHide(true);
@@ -668,7 +668,6 @@ void LancelotWindow::setupActions()
         a->setText(i18n("Open Lancelot menu"));
         a->setGlobalShortcut(KShortcut(Qt::ALT + Qt::Key_F5));
         a->setIcon(KIcon("lancelot"));
-        kDebug() << "connect" <<
         connect(
                 a, SIGNAL(triggered(bool)),
                 this, SLOT(lancelotShowCentered())
@@ -701,17 +700,11 @@ void LancelotWindow::configureShortcuts()
 
 void LancelotWindow::configurationChanged()
 {
-    kDebug();
     loadConfig();
 }
 
 void LancelotWindow::loadConfig()
 {
-    kDebug();
-    kDebug() << "Lancelot::PassagewayView group ...";
-    kDebug() << "passagewayApplications" <<
-        passagewayApplications->group()->name();
-
     m_mainSize = QSize(
         m_mainConfig.readEntry("width",  mainWidthDefault),
         m_mainConfig.readEntry("height", windowHeightDefault)
@@ -802,17 +795,17 @@ void LancelotWindow::lancelotContext()
     QMenu menu;
     connect(
             menu.addAction(KIcon("configure-shortcuts"),
-                i18n("Configure Shortcuts...")), SIGNAL(triggered(bool)),
+                i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
             this, SLOT(configureShortcuts()));
 
     connect(
             menu.addAction(KIcon("configure"),
-                i18n("Configure Lancelot menu...")), SIGNAL(triggered(bool)),
+                i18n("Configure &Lancelot menu...")), SIGNAL(triggered(bool)),
             this, SLOT(configureMenu()));
 
     connect(
             menu.addAction(KIcon("lancelot"),
-                i18n("About Lancelot")), SIGNAL(triggered(bool)),
+                i18n("&About Lancelot")), SIGNAL(triggered(bool)),
             this, SLOT(showAboutDialog()));
 
     menu.exec(QCursor::pos());
@@ -852,7 +845,6 @@ void LancelotWindow::saveConfig()
 void LancelotWindow::showAboutDialog()
 {
     lancelotHide(true);
-    kDebug() << "Abot";
 
     KAboutApplicationDialog * about = new KAboutApplicationDialog(
             KCmdLineArgs::aboutData()

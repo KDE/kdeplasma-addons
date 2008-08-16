@@ -158,18 +158,15 @@ public:
     #define GetMargins(object) \
         if (object && object->group() && object->group()->backgroundSvg()) { \
             object->group()->backgroundSvg()->getMargins(left, top, right, bottom); \
-            kDebug() << object->group()->name() << "margins retrieved from Svg"; \
         } else { \
             left = top = right = bottom = 8; \
-            kDebug() << object->group()->name() << "margins set to fixed default size"; \
         }
 
     // This macro sets the minimum and preferred sizes of a specified object.
     // The variable size needs to be declared QSizeF before invoking this macro
     #define SetSizes(object) \
         object->setMinimumSize(size); \
-        object->setPreferredSize(size); \
-        kDebug() << size;
+        object->setPreferredSize(size);
 
     // This macro increases preferredSize according to preset size
     // variable depending on the scrollbar orientation
@@ -180,15 +177,13 @@ public:
         } else { \
             preferredSize.setHeight(preferredSize.height() + size.height()); \
             preferredSize.setWidth(qMax(preferredSize.width(), size.width())); \
-        } \
-        kDebug() << " calculated size " << left << top << right << bottom << size << preferredSize;
+        }
 
     void setItemSizeHints()
     {
         qreal left, top, right, bottom;
         preferredSize = QSizeF(0, 0);
         QSizeF size;
-        kDebug() << "#########################";
 
         GetMargins(upButton);
         size = QSizeF(left + right, top + bottom);
@@ -222,14 +217,12 @@ public:
         SetSizes(handle);
         UpdatePreferredSize();
 
-        kDebug() << " - calculated size " << preferredSize;
         q->updateGeometry();
     }
 
     void positionScroll()
     {
         QRectF geometry = orientateRect(q->geometry());
-        kDebug() << geometry;
         geometry.moveTopLeft(QPointF(0, 0));
 
         // TODO: This should be changed to load sizes from upButton and downButton
@@ -243,7 +236,6 @@ public:
                     (downButton->preferredSize().width()) :
                     (downButton->preferredSize().height())
                 ));
-        kDebug() << geometry;
 
         if (minimum >= maximum) {
             handle->setPreferredSize(orientateRect(geometry).size());
@@ -464,7 +456,6 @@ void ScrollBar::setGeometry(const QRectF & geometry)
 void ScrollBar::setGroup(WidgetGroup * g)
 {
     Widget::setGroup(g);
-    kDebug() << group()->name();
     switch (d->orientation) {
         case Qt::Vertical:
             d->upButton->setGroupByName(group()->name() + "-UpButton");
@@ -587,7 +578,6 @@ QSizeF ScrollBar::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
     }
-    kDebug() << "sizeHint " << which << result;
     return result;
 }
 

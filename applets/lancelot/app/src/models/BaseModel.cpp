@@ -137,7 +137,6 @@ bool BaseModel::addUrl(const QString & url)
 
 bool BaseModel::addUrl(const KUrl & url)
 {
-    kDebug() << url;
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
         // .desktop files may be services (type field == 'Application' or 'Service')
         // or they may be other types such as links.
@@ -149,10 +148,8 @@ bool BaseModel::addUrl(const KUrl & url)
             return true;
         }
 
-        kDebug() << "Local desktop file - Application " << url.path();
         KDesktopFile desktopFile(url.path());
         KUrl desktopUrl(desktopFile.readUrl());
-        kDebug() << desktopUrl;
 
         add(
             QFileInfo(url.path()).baseName(),
@@ -162,7 +159,6 @@ bool BaseModel::addUrl(const KUrl & url)
             url.url()
         );
     } else {
-        kDebug() << "Normal URL";
         add(
             QFileInfo(url.path()).baseName(),
             url.isLocalFile() ? url.path() : url.prettyUrl(),

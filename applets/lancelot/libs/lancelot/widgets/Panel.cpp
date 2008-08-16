@@ -224,7 +224,6 @@ QSizeF Panel::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
     }
-    kDebug() << "sizeHint " << which << result;
     return result;
 }
 

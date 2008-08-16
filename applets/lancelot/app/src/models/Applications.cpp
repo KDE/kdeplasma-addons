@@ -78,7 +78,6 @@ void Applications::load()
             data.name = service->name();
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
-            kDebug() << data.desktopFile;
 
             m_items.append(data);
         } else if (p->isType(KST_KServiceGroup)) {
@@ -138,11 +137,8 @@ int Applications::size() const
 
 void Applications::activate(int index)
 {
-    kDebug() << " activated ";
-
     if (index >= size()) return;
     if (index < m_submodels.size()) return;
-    kDebug() << " activated passed ";
 
     new KRun(KUrl(m_items.at(index - m_submodels.size()).desktopFile), 0);
     ApplicationConnector::instance()->hide(true);
@@ -187,7 +183,6 @@ void Applications::contextActivate(int index, QAction * context)
     }
 
     int appIndex = index - m_submodels.size();
-    kDebug() << appIndex << m_items.size();
     if (context->data().toInt() == 0) {
         FavoriteApplications::instance()
             ->addFavorite(m_items.at(appIndex).desktopFile);

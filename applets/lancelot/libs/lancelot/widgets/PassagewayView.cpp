@@ -361,10 +361,7 @@ void PassagewayView::groupUpdated()
 {
     Panel::groupUpdated();
 
-    kDebug() << group()->name() << "ActivationMethod"
-        << group()->hasProperty("ActivationMethod");
     if (group()->hasProperty("ActivationMethod")) {
-        kDebug() << "ActivationMethod " << (ActivationMethod)(group()->property("ActivationMethod").toInt());
         setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
     }
 }

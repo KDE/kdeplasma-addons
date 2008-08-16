@@ -441,7 +441,6 @@ void MergedActionListViewModel::addModel(QIcon icon, const QString & title, Acti
 
     if (m_hideEmptyModels && model->size() == 0) return; // We will not show empty models
 
-    kDebug() << "Emitting update()";
     emit updated();
 }
 

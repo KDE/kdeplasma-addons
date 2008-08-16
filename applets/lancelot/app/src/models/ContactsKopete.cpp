@@ -99,7 +99,6 @@ void ContactsKopete::load()
             }
 
             QString avatarPath = m_kopeteAvatarsDir + "/" + account + "/" + contactID + ".png";
-            kDebug() << avatarPath;
             add(contactName.value(), contactID,
                     KIcon(
                         (QFile::exists(avatarPath))?avatarPath:"user-online"

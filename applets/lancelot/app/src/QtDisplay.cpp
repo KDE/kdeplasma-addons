@@ -36,7 +36,6 @@ QtDisplay::QtDisplay(char * display, int screen)
 void QtDisplay::testDisplay()
 {
     if (!_dpyPtr) {
-        //kDebug("Can't open display :%p", _dpyPtr);
         exit(1);
     }
 

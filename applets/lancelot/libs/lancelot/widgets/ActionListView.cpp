@@ -129,7 +129,8 @@ ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * pare
     L_WIDGET_SET_INITIALIZED;
 }
 
-void ActionListView::itemActivated(int index) {
+void ActionListView::itemActivated(int index)
+{
     if (!m_model) return;
     m_model->activated(index);
     emit activated(index);
@@ -178,9 +179,7 @@ void ActionListView::itemDrag(ActionListView::ItemButton * button, QWidget * wid
 
 void ActionListView::itemDragRequested(int index, QWidget * widget)
 {
-    kDebug();
     QMimeData * data = m_model->mimeData(index);
-    kDebug() << (void *)data;
     if (data == NULL) {
         return;
     }
@@ -257,11 +256,13 @@ void ActionListView::scroll(ScrollDirection direction)
     }
 }
 
-void ActionListView::scrollTimer() {
+void ActionListView::scrollTimer()
+{
     scrollBy(m_scrollDirection * SCROLL_AMMOUNT);
 }
 
-void ActionListView::scrollBy(int scrollAmmount) {
+void ActionListView::scrollBy(int scrollAmmount)
+{
     if (!m_model || m_buttons.size() == 0 || m_scrollTimes == 0) {
         m_scrollTimer.stop();
         return;
@@ -412,7 +413,8 @@ void ActionListView::modelItemAltered(int index)
     }
 }
 
-void ActionListView::setItemsGroupByName(const QString & group) {
+void ActionListView::setItemsGroupByName(const QString & group)
+{
     setItemsGroup(instance()->group(group));
 }
 
@@ -496,14 +498,6 @@ void ActionListView::setExtenderPosition(ExtenderPosition position)
         );
     }
 
-    ExtenderButton * button;
-    foreach(button, m_buttonsLimbo) {
-        button->setExtenderPosition(position);
-        button->setActivationMethod(
-                (position == NoExtender)?ClickActivate:ExtenderActivate);
-        pair.first->setActivationMethod(
-                (position == NoExtender)?ClickActivate:ExtenderActivate);
-    }
 }
 
 ExtenderPosition ActionListView::extenderPosition() const
@@ -572,13 +566,11 @@ void ActionListView::deleteAllButtons()
     }
 }
 
-void ActionListView::initialButtonsCreation() {
+void ActionListView::initialButtonsCreation()
+{
     if (m_initialButtonsCreationRunning) return;
     m_initialButtonsCreationRunning = true;
     calculateItemHeight();
-
-    kDebug() << "Model is sized" << m_model->size();
-    kDebug() << "Item height is " << m_currentItemHeight;
 
     deleteAllButtons();
     if (!m_model) {
@@ -587,21 +579,18 @@ void ActionListView::initialButtonsCreation() {
     }
 
     int listHeight = qRound(geometry().height());
-    kDebug() << "and list height is " << listHeight;
 
     if (!addButton(End)) {
         // The model is empty or something else is wrong
         m_initialButtonsCreationRunning = false;
         return;
     }
-    kDebug() << "Added a 1st button";
 
     bool buttonCreated;
     while (
         (m_buttons.last().second < listHeight)
         && (m_buttons.size() <= m_model->size())
         && (buttonCreated = addButton(End))) {
-        kDebug() << "Added a button";
     }
     // If buttonCreated is true, it means that we haven't reached
     // the end of the model, but we have made one more button than we need
@@ -614,7 +603,8 @@ void ActionListView::initialButtonsCreation() {
     scrollTimer();
 }
 
-bool ActionListView::addButton(ListTail where) {
+bool ActionListView::addButton(ListTail where)
+{
     if (!m_model) return false;
 
     if (m_buttons.empty()) {
@@ -720,7 +710,8 @@ int ActionListView::calculateItemHeight()
     return m_currentItemHeight = items;
 }
 
-void ActionListView::wheelEvent ( QGraphicsSceneWheelEvent * event ) {
+void ActionListView::wheelEvent(QGraphicsSceneWheelEvent * event)
+{
     if (event->delta() > 0)
         m_scrollDirection = Up;
     else
@@ -735,10 +726,7 @@ void ActionListView::groupUpdated()
 {
     Widget::groupUpdated();
 
-    kDebug() << group()->name();
-
     if (group()->hasProperty("ExtenderPosition")) {
-        kDebug() << "ExtenderPosition" << group()->property("ExtenderPosition").toInt();
         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
     }
 }

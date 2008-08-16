@@ -89,7 +89,6 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
 {
     d->instance = instance;
     d->name = name;
-    kDebug() << "Group-" + name << " " << d->instance->theme()->name();
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
 }
 
@@ -176,15 +175,12 @@ void WidgetGroup::load(bool full)
     WidgetGroup * group;
 
     if (!d->confGroupTheme->exists()) {
-        kDebug() << "Config group doesn't exist : " << d->confGroupTheme->name();
-
         group = d->instance->defaultGroup();
         if (group == this) return;
 
         d->copyFrom(group->d);
         return;
     }
-    kDebug() << "Config group EXISTS : " << d->confGroupTheme->name();
 
     group = d->instance->group(d->confGroupTheme->readEntry("parent", "Default"));
     if (group != this) {
@@ -208,23 +204,24 @@ void WidgetGroup::load(bool full)
             delete d->backgroundSvg;
         }
 
-        kDebug() << "SVG Location " << d->confGroupTheme->readEntry("background.svg");
-        kDebug() << "SVG Location " << Plasma::Theme::defaultTheme()->imagePath(d->confGroupTheme->readEntry("background.svg"));
         d->backgroundSvg = new Plasma::PanelSvg(NULL);
         d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
 
-        kDebug() << "SVG " << d->backgroundSvg->isValid() << " " << d->backgroundSvg->hasElement("normal-center");
-        kDebug() << d->backgroundSvg->hasElement("center");
         d->ownsBackgroundSvg = true;
     }
 
     notifyUpdated();
 }
 
-void WidgetGroup::notifyUpdated() {
-    kDebug() << "Widget::Group" << d->name;
+void WidgetGroup::notifyUpdated()
+{
+    if (!d->instance->isActivated()) {
+        return;
+    }
+
     foreach (Widget * widget, d->widgets) {
-        widget->groupUpdated();
+        if (widget->L_isInitialized())
+            widget->groupUpdated();
     }
 }
 
@@ -240,7 +237,6 @@ public:
 
     ~Private()
     {
-        kDebug() << widgets.count();
         Widget * widget;
         while (!widgets.empty()) {
             widget = widgets.takeFirst();
@@ -301,14 +297,21 @@ void Instance::releaseActiveInstanceLock()
     Instance::Private::activeInstanceLock.unlock();
 }
 
-void Instance::activateAll() {
+void Instance::activateAll()
+{
     d->processGroupChanges = true;
 
     d->loadAllGroups();
 }
 
-void Instance::deactivateAll() {
+void Instance::deactivateAll()
+{
     d->processGroupChanges = false;
+}
+
+bool Instance::isActivated()
+{
+    return d->processGroupChanges;
 }
 
 Instance::Instance()
@@ -324,20 +327,15 @@ Instance::Instance()
     d->confMain = new KConfig("lancelot" + app + "rc");
 
     QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
-    kDebug() << "Config: lancelot" + app + "rc, Theme:" << search;
 
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
-        kDebug() << "Can not find lancelot theme, using default theme.config which may lead to problems";
-        // Plasma::Theme::defaultTheme()->setThemeName("default");
-        // search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/theme.config";
         search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
     }
     if (path == "") {
         path = "lancelotrc";
     }
-    kDebug() << "Theme " << path;
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;
@@ -360,7 +358,6 @@ KConfig * Instance::config()
 
 void Instance::addWidget(Widget * widget)
 {
-    kDebug() << (void *)widget;
     if (widget == NULL) return;
     if (d->widgets.contains(widget)) return;
     d->widgets.append(widget);
@@ -380,7 +377,6 @@ WidgetGroup * Instance::group(const QString & name)
         groupName = "Default";
     }
 
-    kDebug() << "Creating a group named " << groupName;
     if (!d->groups.contains(groupName)) {
         WidgetGroup * group = new WidgetGroup(this, groupName);
         if (d->processGroupChanges) {

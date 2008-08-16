@@ -96,23 +96,14 @@ public:
             right = 0;
             if (itemPositions[FullBorderLayout::TopRight]) {
                 right = qMax(right, itemPositions[FullBorderLayout::TopRight]->preferredSize().width());
-                kDebug() << "rgt " << itemPositions[FullBorderLayout::TopRight]->preferredSize();
             }
             if (itemPositions[FullBorderLayout::Right]) {
                 right = qMax(right, itemPositions[FullBorderLayout::Right]->preferredSize().width());
-                kDebug() << "rgt " << itemPositions[FullBorderLayout::Right]->preferredSize();
             }
             if (itemPositions[FullBorderLayout::BottomRight]) {
                 right = qMax(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
-                kDebug() << "rgt " << itemPositions[FullBorderLayout::BottomRight]->preferredSize();
             }
         }
-        kDebug() << "Border sizes are "
-            << sizes[FullBorderLayout::LeftBorder]
-            << sizes[FullBorderLayout::TopBorder]
-            << sizes[FullBorderLayout::RightBorder]
-            << sizes[FullBorderLayout::BottomBorder];
-        kDebug() << "Border sizes are " << left << top << right << bottom;
     }
 };
 
@@ -135,12 +126,8 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
     getContentsMargins(&left, &top, &right, &bottom);
     effectiveRect.adjust(+left, +top, -right, -bottom);
 
-    kDebug() << left << " " << top << " ";
-    kDebug() << geometry() << " " << rect << " " << effectiveRect;
-
     qreal topBorder, bottomBorder, leftBorder, rightBorder;
     d->calculateBorderSizes(topBorder, bottomBorder, leftBorder, rightBorder);
-    kDebug() << "Borders :" << topBorder << bottomBorder << leftBorder << rightBorder;
 
     QRectF itemRect;
 
