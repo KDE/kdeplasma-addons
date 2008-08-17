@@ -155,26 +155,10 @@ LancelotPart::LancelotPart(QObject *parent, const QVariantList &args)
     m_model(NULL), m_icon(NULL), m_dialog(NULL), m_widget(NULL),
     m_scene(NULL), m_wasConstrained(false)
 {
-    m_instance = new Lancelot::Instance();
-    m_layout = new FullLayout(this);
-
-    m_list = new Lancelot::ActionListView();
-    m_model = new Models::PartsMergedModel();
-    m_list->setModel(m_model);
-
-    setLayout(m_layout);
-    setupAppletUi(true);
-
-    m_instance->activateAll();
-
     if (args.size() > 0) {
         m_cmdarg = args[0].toString();
     }
 
-    connect(
-            m_model, SIGNAL(removeModelRequested(int)),
-            this, SLOT(removeModel(int))
-           );
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
 }
@@ -240,6 +224,25 @@ bool LancelotPart::loadFromList(const QStringList & list)
 
 void LancelotPart::init()
 {
+    // Setting up UI
+    m_instance = new Lancelot::Instance();
+    m_layout = new FullLayout(this);
+
+    m_list = new Lancelot::ActionListView();
+    m_model = new Models::PartsMergedModel();
+    m_list->setModel(m_model);
+
+    setLayout(m_layout);
+    setupAppletUi(true);
+
+    m_instance->activateAll();
+
+    connect(
+            m_model, SIGNAL(removeModelRequested(int)),
+            this, SLOT(removeModel(int))
+           );
+
+    // Loading data
     bool loaded = loadConfig();
     kDebug() << "loaded from config " << loaded;
     if (!loaded && (m_dialog == NULL)) {
@@ -250,6 +253,9 @@ void LancelotPart::init()
     if (!loaded && !m_cmdarg.isEmpty()) {
         loadFromFile(m_cmdarg);
     }
+
+    resize(size());
+    m_layout->activate();
 }
 
 bool LancelotPart::load(const QString & input)

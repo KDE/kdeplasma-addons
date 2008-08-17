@@ -149,9 +149,6 @@ public:
             m_parent->m_corona->
                 setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
 
-            //layoutMain->setGeometry(QRectF(0, 0, newSize.width(), newSize.height()));
-            //layoutMain->updateGeometry();
-
             m_parent->m_root->
                 setGeometry(QRect(QPoint(), newSize));
 
@@ -641,8 +638,12 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
             newWindowPosition.ry() += diff.y();
         }
 
-        move(newWindowPosition);
-        resizeWindow();
+        QSize newSize = m_mainSize;
+        if (m_showingFull) {
+            newSize.rwidth() += sectionsWidth;
+        }
+
+        setGeometry(QRect(newWindowPosition, newSize));
     }
     QWidget::mouseMoveEvent(e);
 }

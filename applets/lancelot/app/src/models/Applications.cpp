@@ -110,7 +110,7 @@ void Applications::load()
                 model->load();
                 // TODO: Find a way to delete the remaining
                 // items in submodelsOld - can't delete now
-                // because some acion list coult use the model
+                // because some action list could use the model
             }
 
             // appName = serviceGroup->comment();
