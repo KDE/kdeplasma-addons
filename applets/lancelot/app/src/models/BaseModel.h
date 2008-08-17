@@ -57,12 +57,12 @@ protected:
     bool addService(const QString & service);
     bool addService(const KService::Ptr & service);
 
-    void addServices(const QStringList & services);
+    int addServices(const QStringList & services);
 
     bool addUrl(const QString & url);
     bool addUrl(const KUrl & url);
 
-    void addUrls(const QStringList & urls);
+    int addUrls(const QStringList & urls);
 
     void hideLancelotWindow();
     void changeLancelotSearchString(const QString & string);

@@ -86,9 +86,13 @@ void MessagesKmail::load()
     if (!m_interface->isValid()) {
         QStringList services;
         services << "kontact|kmail";
-        addServices(services);
-        itemAt(0).title = i18n("Mail client");
-        itemAt(0).description = i18n("Mail client is not running");
+        if (addServices(services) != 0) {
+            itemAt(0).title = i18n("Mail client");
+            itemAt(0).description = i18n("Mail client is not running");
+        } else {
+            add(i18n("Unable to find KMail"), "",
+                    KIcon("mail-folder-inbox"), QVariant("http://kontact.kde.org"));
+        }
         m_dataValid = false;
         m_kmailRunning = false;
     } else {

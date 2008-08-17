@@ -87,15 +87,18 @@ void BaseModel::changeLancelotSearchString(const QString & string)
     ApplicationConnector::instance()->search(string);
 }
 
-void BaseModel::addServices(const QStringList & serviceNames)
+int BaseModel::addServices(const QStringList & serviceNames)
 {
+    int result = 0;
     foreach (const QString & serviceAlternatives, serviceNames) {
         foreach (const QString & serviceName, serviceAlternatives.split("|")) {
             if (addService(serviceName)) {
+                ++result;
                 break;
             }
         }
     }
+    return result;
 }
 
 bool BaseModel::addService(const QString & serviceName)
@@ -122,11 +125,15 @@ bool BaseModel::addService(const KService::Ptr & service)
     return true;
 }
 
-void BaseModel::addUrls(const QStringList & urls)
+int BaseModel::addUrls(const QStringList & urls)
 {
+    int result = 0;
     foreach (const QString & url, urls) {
-        addUrl(url);
+        if (addUrl(url)) {
+            ++result;
+        }
     }
+    return result;
 }
 
 bool BaseModel::addUrl(const QString & url)
