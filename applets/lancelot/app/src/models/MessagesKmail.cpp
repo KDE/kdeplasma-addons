@@ -91,7 +91,7 @@ void MessagesKmail::load()
             itemAt(0).description = i18n("Mail client is not running");
         } else {
             add(i18n("Unable to find KMail"), "",
-                    KIcon("mail-folder-inbox"), QVariant("http://kontact.kde.org"));
+                    KIcon("application-x-executable"), QVariant("http://kontact.kde.org"));
         }
         m_dataValid = false;
         m_kmailRunning = false;
