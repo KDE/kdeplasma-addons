@@ -154,6 +154,11 @@ public Q_SLOTS:
      */
     void configurationChanged();
 
+    /**
+     * Starts the menu editor
+     */
+    void showMenuEditor();
+
 protected:
     /**
      * Resizes window and relayouts everything.

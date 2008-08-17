@@ -30,6 +30,8 @@
     </method>
     <method name="configurationChanged">
     </method>
+    <method name="showMenuEditor">
+    </method>
     <method name="addClient">
       <arg type="i" direction="out"/>
     </method>

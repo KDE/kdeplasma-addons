@@ -46,8 +46,11 @@ public:
     L_Override virtual void setContextActions(int index, QMenu * menu);
     L_Override virtual void contextActivate(int index, QAction * context);
 
-public slots:
+public Q_SLOTS:
     virtual void activate(int index);
+
+private Q_SLOTS:
+    void sycocaUpdated();
 
 private:
     void load();
@@ -66,7 +69,6 @@ private:
     QString m_root;
     QString m_title;
     QIcon m_icon;
-    bool m_loaded;
 };
 
 } // namespace Models

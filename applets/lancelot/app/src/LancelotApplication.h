@@ -51,6 +51,7 @@ public Q_SLOTS:
 
     void configureShortcuts();
     void configurationChanged();
+    void showMenuEditor();
 
     int addClient();
     bool removeClient(int id);

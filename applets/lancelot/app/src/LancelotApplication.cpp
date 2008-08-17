@@ -188,3 +188,9 @@ void LancelotApplication::configurationChanged()
     window->configurationChanged();
 }
 
+void LancelotApplication::showMenuEditor()
+{
+    if (!window) return;
+    window->showMenuEditor();
+}
+

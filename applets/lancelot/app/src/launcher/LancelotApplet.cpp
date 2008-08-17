@@ -145,7 +145,7 @@ public:
     QList < Lancelot::HoverIcon * > buttons;
     QGraphicsLinearLayout * layout;
     org::kde::lancelot::App * lancelot;
-    QAction * actionConfigureShortcuts;
+    QList < QAction * > actions;
 
     bool offline;
 };
@@ -158,12 +158,19 @@ LancelotApplet::LancelotApplet(QObject * parent,
     setBackgroundHints(NoBackground);
     setAcceptsHoverEvents(true);
 
-    d->actionConfigureShortcuts = new QAction(
+    QAction * action;
+    d->actions.append(action = new QAction(
             KIcon("configure-shortcuts"),
             i18n("Configure Shortcuts..."),
-            parent);
-    connect (d->actionConfigureShortcuts, SIGNAL(triggered(bool)),
-            d->lancelot, SLOT(configureShortcuts()));
+            parent));
+    connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(configureShortcuts()));
+
+    d->actions.append(action = new QAction(
+            KIcon(),
+            i18n("Menu Editor"),
+            parent));
+    connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
+
 }
 
 LancelotApplet::~LancelotApplet()
@@ -314,7 +321,7 @@ QList< QAction * > LancelotApplet::contextualActions()
     d->offline = true;
     d->lancelot->hide(true);
     QList < QAction * > result = Plasma::Applet::contextualActions();
-    result << d->actionConfigureShortcuts;
+    result << d->actions;
     return result;
 }
 

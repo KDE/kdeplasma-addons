@@ -28,13 +28,16 @@
 #include <KUrl>
 #include <KDebug>
 #include <KIcon>
+#include <KSycoca>
 // Applications
 
 namespace Models {
 
 Applications::Applications(QString root, QString title, QIcon icon):
-    m_root(root), m_title(title), m_icon(icon), m_loaded(false)
+    m_root(root), m_title(title), m_icon(icon)
 {
+    connect(KSycoca::self(), SIGNAL(databaseChanged()),
+            this, SLOT(sycocaUpdated()));
     load();
 }
 
@@ -52,14 +55,14 @@ void Applications::clear()
 
 void Applications::load()
 {
-    if (m_loaded) clear();
-    m_loaded = true;
-
     KServiceGroup::Ptr root = KServiceGroup::group(m_root);
     if (!root || !root->isValid())
         return;
 
     KServiceGroup::List list = root->entries();
+    m_items.clear();
+    QList < Applications * > submodelsOld = m_submodels;
+    m_submodels.clear();
 
     // application name <-> service map for detecting duplicate entries
     QHash<QString,KService::Ptr> existingServices;
@@ -87,15 +90,33 @@ void Applications::load()
             if (serviceGroup->noDisplay() || serviceGroup->childCount() == 0)
                 continue;
 
-            m_submodels.append(new Applications(
-                serviceGroup->relPath(),
-                serviceGroup->caption(),
-                KIcon(serviceGroup->icon())
-            ));
+            bool found = false;
+            Applications * model;
+            foreach (model, submodelsOld) {
+                if (serviceGroup->relPath() == model->m_root) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                m_submodels.append(new Applications(
+                    serviceGroup->relPath(),
+                    serviceGroup->caption(),
+                    KIcon(serviceGroup->icon())
+                ));
+            } else {
+                submodelsOld.removeAll(model);
+                m_submodels.append(model);
+                model->load();
+                // TODO: Find a way to delete the remaining
+                // items in submodelsOld - can't delete now
+                // because some acion list coult use the model
+            }
 
             // appName = serviceGroup->comment();
         }
     }
+    emit updated();
 }
 
 QString Applications::title(int index) const
@@ -186,6 +207,13 @@ void Applications::contextActivate(int index, QAction * context)
     if (context->data().toInt() == 0) {
         FavoriteApplications::instance()
             ->addFavorite(m_items.at(appIndex).desktopFile);
+    }
+}
+
+void Applications::sycocaUpdated()
+{
+    if (KSycoca::self()->isChanged("services")) {
+        load();
     }
 }
 

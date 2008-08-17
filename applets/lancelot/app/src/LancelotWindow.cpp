@@ -30,6 +30,7 @@
 #include <KGlobalAccel>
 #include <KShortcutsDialog>
 #include <KConfigDialog>
+#include <KProcess>
 #include <plasma/animator.h>
 
 #include <QtDBus/QDBusInterface>
@@ -794,6 +795,11 @@ void LancelotWindow::lancelotContext()
 {
     QMenu menu;
     connect(
+            menu.addAction(KIcon(),
+                i18n("Menu Editor")), SIGNAL(triggered(bool)),
+            this, SLOT(showMenuEditor()));
+
+    connect(
             menu.addAction(KIcon("configure-shortcuts"),
                 i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
             this, SLOT(configureShortcuts()));
@@ -851,6 +857,11 @@ void LancelotWindow::showAboutDialog()
             );
     about->setAttribute(Qt::WA_DeleteOnClose, true);
     about->show();
+}
+
+void LancelotWindow::showMenuEditor()
+{
+    KProcess::execute("kmenuedit");
 }
 
 void LancelotWindow::hideImmediate()
