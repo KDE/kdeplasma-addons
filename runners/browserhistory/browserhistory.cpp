@@ -75,7 +75,8 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
             match.setRelevance(0.5);
             match.setIcon(m_icon);
             match.setData(historyitem);
-            match.setText(historyitem);
+            QString text = historyitem;
+            match.setText(text.replace("http://", ""));
             context.addMatch(term, match);
         }
     }
