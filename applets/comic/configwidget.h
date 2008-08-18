@@ -23,6 +23,7 @@
 #include <QtGui/QWidget>
 
 class ComicModel;
+class QCheckBox;
 class QComboBox;
 
 class ConfigWidget : public QWidget
@@ -34,8 +35,12 @@ class ConfigWidget : public QWidget
         void setComicIdentifier( const QString &comic );
         QString comicIdentifier() const;
 
+        void setShowComicUrl( bool show );
+        bool showComicUrl() const;
+
     private:
         QComboBox *mComicIdentifier;
+        QCheckBox *mShowComicUrl;
         ComicModel *mModel;
 };
 

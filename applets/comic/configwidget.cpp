@@ -20,10 +20,10 @@
 #include "configwidget.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QCheckBox>
 
 #include <KLocale>
 #include <KServiceTypeTrader>
@@ -94,8 +94,11 @@ ConfigWidget::ConfigWidget( QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
+    mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
+
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
+    layout->addWidget( mShowComicUrl, 1, 0, 1, 2 );
 
     mModel = new ComicModel( this );
     mComicIdentifier->setModel( mModel );
@@ -120,4 +123,14 @@ QString ConfigWidget::comicIdentifier() const
 {
     const QModelIndex index = mModel->index( mComicIdentifier->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
+}
+
+void ConfigWidget::setShowComicUrl( bool show )
+{
+    mShowComicUrl->setChecked( show );
+}
+
+bool ConfigWidget::showComicUrl() const
+{
+    return mShowComicUrl->isChecked();
 }

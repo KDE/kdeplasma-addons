@@ -39,7 +39,7 @@ class ComicApplet : public Plasma::Applet
         ~ComicApplet();
 
         void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
-	void init();
+        void init();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
@@ -70,6 +70,7 @@ class ComicApplet : public Plasma::Applet
         bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;
+        bool mShowComicUrl;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)

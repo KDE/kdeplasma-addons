@@ -36,7 +36,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mCurrentDate( QDate::currentDate() ),
       mShowPreviousButton( true ),
-      mShowNextButton( false )
+      mShowNextButton( false ),
+      mShowComicUrl( false )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
@@ -57,6 +58,8 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
+    setCursor( Qt::ArrowCursor );
+
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
@@ -76,6 +79,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
     mConfigWidget = new ConfigWidget( parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
+    mConfigWidget->setShowComicUrl( mShowComicUrl );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
@@ -87,6 +91,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 void ComicApplet::applyConfig()
 {
     mComicIdentifier = mConfigWidget->comicIdentifier();
+    mShowComicUrl = mConfigWidget->showComicUrl();
 
     saveConfig();
 
@@ -97,12 +102,14 @@ void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
     mComicIdentifier = cg.readEntry( "comic", "garfield" );
+    mShowComicUrl = cg.readEntry( "showComicUrl", false );
 }
 
 void ComicApplet::saveConfig()
 {
     KConfigGroup cg = config();
     cg.writeEntry( "comic", mComicIdentifier );
+    cg.writeEntry( "showComicUrl", mShowComicUrl );
 }
 
 void ComicApplet::slotNextDay()
@@ -147,7 +154,7 @@ void ComicApplet::updateSize()
         int rightArea = mShowNextButton ? s_arrowWidth : 0;
         qreal aspectRatio = qreal(size.height()) / size.width();
         qreal imageHeight = aspectRatio * ( geometry().width() - leftArea - rightArea );
-        int bottomArea = Plasma::Theme::defaultTheme()->fontMetrics().height();
+        int bottomArea = ( mShowComicUrl ? Plasma::Theme::defaultTheme()->fontMetrics().height() : 0 );
         resize( geometry().width(), imageHeight + bottomArea );
     }
 }
@@ -155,7 +162,7 @@ void ComicApplet::updateSize()
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
     int urlHeight = 0;
-    if ( !mWebsiteUrl.isEmpty() ) {
+    if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         urlHeight = fm.height();
         int height = contentRect.bottom() - urlHeight;
@@ -207,6 +214,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     Plasma::DataEngine *engine = dataEngine( "comic" );
     if ( !engine )
         return;
+
+    setCursor( Qt::WaitCursor );
 
     const QString identifier = mComicIdentifier + ':' + identifierSuffix;
 
