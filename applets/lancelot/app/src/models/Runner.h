@@ -34,6 +34,10 @@ public:
 
     QString searchString();
 
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
+
 public Q_SLOTS:
     void setSearchString(const QString & search);
     void setQueryMatches(const QList<Plasma::QueryMatch> &matches);

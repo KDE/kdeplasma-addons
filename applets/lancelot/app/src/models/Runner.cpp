@@ -22,6 +22,8 @@
 #include <KDebug>
 #include <KIcon>
 #include <KLocalizedString>
+#include <KStandardDirs>
+#include "FavoriteApplications.h"
 
 #include <plasma/abstractrunner.h>
 
@@ -85,11 +87,18 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
         // first pass: we try and match up items with existing ids (match persisitence)
         while (newMatchIt.hasNext()) {
             Plasma::QueryMatch match = newMatchIt.next();
+            kDebug() << match.id() << match.runner()->id() << match.runner()->objectName();
+            QStringList data;
+            data << match.id();
+            data << match.runner()->id();
+            data << match.data().toString();
+            kDebug() << data;
+
             add(
                 match.text(),
                 match.subtext(),
                 match.icon(),
-                match.id()
+                data
             );
         }
         valid = true;
@@ -103,9 +112,40 @@ void Runner::load()
 void Runner::activate(int index)
 {
     if (!valid) return;
-    m_runnerManager->run(m_items[index].data.value< QString >());
+    m_runnerManager->run(m_items[index].data.value< QStringList >().at(0));
     changeLancelotSearchString(QString());
     hideLancelotWindow();
+}
+
+bool Runner::hasContextActions(int index) const
+{
+    if (!valid) return false;
+    kDebug() << m_items[index].data.value< QString >();
+    return (m_items[index].data.value< QStringList >().at(1) == "Application");
+}
+
+void Runner::setContextActions(int index, QMenu * menu)
+{
+    if (!valid) return;
+
+    if (m_items[index].data.value< QStringList >().at(1) == "Application") {
+        menu->addAction(KIcon("list-add"), i18n("Add to favorites"))
+            ->setData(QVariant(0));
+    }
+}
+
+void Runner::contextActivate(int index, QAction * context)
+{
+    if (!valid || !context) return;
+
+    if (context->data().toInt() == 0) {
+        KService::Ptr service = KService::serviceByStorageId(
+                m_items[index].data.value< QStringList >().at(2));
+        if (service) {
+;           FavoriteApplications::instance()
+                ->addFavorite(service->entryPath());
+        }
+    }
 }
 
 } // namespace Models
