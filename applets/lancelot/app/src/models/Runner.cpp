@@ -84,7 +84,6 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
         QList < Plasma::QueryMatch > matches = m;
         QMutableListIterator < Plasma::QueryMatch > newMatchIt(matches);
 
-        // first pass: we try and match up items with existing ids (match persisitence)
         while (newMatchIt.hasNext()) {
             Plasma::QueryMatch match = newMatchIt.next();
             kDebug() << match.id() << match.runner()->id() << match.runner()->objectName();

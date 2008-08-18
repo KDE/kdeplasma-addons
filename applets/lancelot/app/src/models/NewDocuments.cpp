@@ -22,6 +22,7 @@
 namespace Models {
 
 NewDocuments::NewDocuments()
+    : BaseModel(true)
 {
     load();
 }

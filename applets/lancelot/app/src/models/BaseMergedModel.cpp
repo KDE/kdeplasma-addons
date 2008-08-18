@@ -66,8 +66,9 @@ QMimeData * BaseMergedModel::modelMimeData(int index) const
     out.flush();
 
     QMimeData * data = new QMimeData();
-    data->setData("text/uri-list", KUrl(file.fileName()).url().toAscii());
-    data->setData("text/plain", KUrl(file.fileName()).url().toAscii());
+    QByteArray urlData = KUrl(file.fileName()).url().toAscii();
+    data->setData("text/uri-list", urlData);
+    data->setData("text/plain", urlData);
     file.close();
 
     return data;

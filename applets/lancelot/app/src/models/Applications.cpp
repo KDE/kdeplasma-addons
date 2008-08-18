@@ -165,6 +165,21 @@ void Applications::activate(int index)
     ApplicationConnector::instance()->hide(true);
 }
 
+QMimeData * Applications::mimeData(int index) const
+{
+    if (index >= size()) return NULL;
+    if (index < m_submodels.size()) return NULL;
+
+    return BaseModel::mimeForUrl(m_items.at(index - m_submodels.size()).desktopFile);
+}
+
+void Applications::setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    actions = Qt::CopyAction;
+    defaultAction = Qt::CopyAction;
+}
+
 Lancelot::PassagewayViewModel * Applications::child(int index)
 {
     if (index >= m_submodels.size())

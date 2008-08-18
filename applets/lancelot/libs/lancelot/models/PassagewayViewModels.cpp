@@ -107,5 +107,16 @@ void PassagewayViewModelProxy::activate(int index)
     m_model->activated(index);
 }
 
+QMimeData * PassagewayViewModelProxy::mimeData(int index) const
+{
+    return m_model->mimeData(index);
+}
+
+void PassagewayViewModelProxy::setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    m_model->setDropActions(index, actions, defaultAction);
+}
+
 } // namespace Lancelot
 

@@ -30,6 +30,7 @@ namespace Models {
 FavoriteApplications * FavoriteApplications::m_instance = NULL;
 
 FavoriteApplications::FavoriteApplications()
+    : BaseModel(true)
 {
     load();
 }

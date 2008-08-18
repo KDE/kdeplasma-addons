@@ -26,6 +26,7 @@
 namespace Models {
 
 Places::Places()
+    : BaseModel(true)
 {
     load();
 }

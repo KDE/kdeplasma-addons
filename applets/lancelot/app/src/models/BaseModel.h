@@ -47,8 +47,12 @@ private:
 class BaseModel : public Lancelot::StandardActionListViewModel {
     Q_OBJECT
 public:
-    BaseModel();
+    BaseModel(bool enableDefaultDnD = false);
     virtual ~BaseModel();
+
+    L_Override virtual QMimeData * mimeData(int index) const;
+    L_Override virtual void setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
 protected:
     virtual void activate(int index);
@@ -66,6 +70,16 @@ protected:
 
     void hideLancelotWindow();
     void changeLancelotSearchString(const QString & string);
+
+public:
+    static QMimeData * mimeForUrl(const KUrl & url);
+    static QMimeData * mimeForUrl(const QString & url);
+
+    static QMimeData * mimeForService(const KService::Ptr & service);
+    static QMimeData * mimeForService(const QString & service);
+
+private:
+    bool m_enableDefaultDnD;
 };
 
 } // namespace Models

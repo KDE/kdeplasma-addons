@@ -22,6 +22,7 @@
 namespace Models {
 
 SystemServices::SystemServices()
+    : BaseModel(true)
 {
     load();
 }

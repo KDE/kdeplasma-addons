@@ -27,7 +27,7 @@ namespace Models {
 KDirWatch * FolderModel::m_dirWatch = NULL;
 
 FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
-    : m_dirPath(dirPath), m_sort(sort)
+    : BaseModel(true), m_dirPath(dirPath), m_sort(sort)
 {
     if (!m_dirPath.endsWith(QDir::separator())) {
         m_dirPath += QDir::separator();

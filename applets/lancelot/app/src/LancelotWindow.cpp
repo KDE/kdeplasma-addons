@@ -570,7 +570,6 @@ void LancelotWindow::setupModels()
      //listSearchRight->setModel(m_modelGroups["SearchRight"]);
 
      // Applications passageview
-
      passagewayApplications->setEntranceModel(
          new Lancelot::PassagewayViewModelProxy(
              Models::FavoriteApplications::instance(), i18n("Favorites"), KIcon("favorites")

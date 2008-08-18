@@ -63,7 +63,8 @@ ApplicationConnector::~ApplicationConnector()
 }
 
 
-BaseModel::BaseModel()
+BaseModel::BaseModel(bool enableDefaultDnD)
+    : m_enableDefaultDnD(enableDefaultDnD)
 {
 }
 
@@ -175,6 +176,53 @@ bool BaseModel::addUrl(const KUrl & url)
     }
 
     return true;
+}
+
+QMimeData * BaseModel::mimeForUrl(const KUrl & url)
+{
+    QMimeData * data = new QMimeData();
+    kDebug() << url.url();
+    data->setData("text/uri-list", url.url().toAscii());
+    data->setData("text/plain", url.url().toAscii());
+    return data;
+}
+
+QMimeData * BaseModel::mimeData(int index) const
+{
+    if (!m_enableDefaultDnD) {
+        kDebug() << "Requested mime for index" << index
+            << "but we don't support DnD";
+        return NULL;
+    }
+
+    kDebug() << "Requested mime for index" << index;
+    return BaseModel::mimeForUrl(m_items.at(index).data.toString());
+}
+
+void BaseModel::setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    actions = Qt::CopyAction;
+    defaultAction = Qt::CopyAction;
+}
+
+
+QMimeData * BaseModel::mimeForUrl(const QString & url)
+{
+    return mimeForUrl(KUrl(url));
+}
+
+QMimeData * BaseModel::mimeForService(const KService::Ptr & service)
+{
+    if (!service) return NULL;
+
+    return mimeForUrl(service->entryPath());
+}
+
+QMimeData * BaseModel::mimeForService(const QString & serviceName)
+{
+    const KService::Ptr service = KService::serviceByStorageId(serviceName);
+    return mimeForService(service);
 }
 
 } // namespace Models

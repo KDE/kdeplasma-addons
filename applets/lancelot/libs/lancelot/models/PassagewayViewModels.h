@@ -55,6 +55,9 @@ public:
     L_Override virtual bool hasContextActions(int index) const;
     L_Override virtual void setContextActions(int index, QMenu * menu);
     L_Override virtual void contextActivate(int index, QAction * context);
+    L_Override virtual QMimeData * mimeData(int index) const;
+    L_Override virtual void setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
     L_Override virtual int size() const;
 
