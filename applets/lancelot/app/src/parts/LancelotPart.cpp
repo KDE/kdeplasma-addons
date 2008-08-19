@@ -27,6 +27,7 @@
 #include <QDataStream>
 #include <plasma/panelsvg.h>
 
+#include "../models/BaseModel.h"
 #include "../models/Devices.h"
 #include "../models/Places.h"
 #include "../models/SystemServices.h"
@@ -53,6 +54,8 @@ public:
         setFrameStyle(QFrame::NoFrame);
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+        setCacheMode(QGraphicsView::CacheBackground);
 
         m_bg.setImagePath("dialogs/background");
         m_bg.setEnabledBorders(Plasma::PanelSvg::NoBorder);
@@ -394,6 +397,10 @@ void LancelotPart::setupAppletUi(bool force)
             m_dialog = new Plasma::Dialog();
             m_dialog->setFocusPolicy(Qt::NoFocus);
             m_dialog->setWindowFlags(Qt::Popup);
+            connect(
+                    Models::ApplicationConnector::instance(), SIGNAL(doHide(bool)),
+                    m_dialog, SLOT(hide())
+                );
 
             QVBoxLayout * layout = new QVBoxLayout(m_dialog);
             layout->setSpacing(0);
@@ -445,7 +452,7 @@ void LancelotPart::setupAppletUi(bool force)
 
 void LancelotPart::iconActivated()
 {
-    m_dialog->move(popupPosition(m_widget->sizeHint()));
+    m_dialog->move(popupPosition(m_dialog->sizeHint()));
     m_dialog->show();
 }
 
@@ -505,7 +512,7 @@ void LancelotPart::applyConfig()
         m_icon->setIcon(kcg.readEntry("iconLocation", "lancelot-part"));
     }
 
-    if (kcg.readEntry("contentsClickActivation", m_dialog == NULL)) {
+    if (!kcg.readEntry("contentsClickActivation", m_dialog == NULL)) {
         m_list->setExtenderPosition(
                 (Lancelot::ExtenderPosition)
                 kcg.readEntry("contentsExtenderPosition",

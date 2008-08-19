@@ -235,6 +235,7 @@ void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
     d->extender->setVisible(false);
     d->timer.stop();
+    d->extender->hoverLeaveEvent(event);
     BasicWidget::hoverLeaveEvent(event);
 }
 

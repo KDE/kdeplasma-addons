@@ -56,6 +56,8 @@ void ActionListView::ItemButton::mouseMoveEvent(QGraphicsSceneMouseEvent * event
 {
     if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
         m_parent->itemDrag(this, event->widget());
+        mouseReleaseEvent(event);
+        hoverLeaveEvent(NULL);
     }
     ExtenderButton::mouseMoveEvent(event);
 }

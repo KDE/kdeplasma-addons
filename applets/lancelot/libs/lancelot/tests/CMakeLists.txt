@@ -2,7 +2,7 @@ project(LancelotTests)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
-include(PlasmaUIMacros)
+# include(PlasmaUIMacros)
 
 include_directories(
    ${CMAKE_SOURCE_DIR}
