@@ -77,6 +77,24 @@ void Widget::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     update();
 }
 
+void Widget::setHovered(bool value)
+{
+    if (!L_WIDGET_IS_INITIALIZED) {
+        return ;
+    }
+    d->hover = value;
+    update();
+}
+
+void Widget::setDown(bool value)
+{
+    if (!L_WIDGET_IS_INITIALIZED) {
+        return ;
+    }
+    d->down = value;
+    update();
+}
+
 void Widget::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     if (event->button() == Qt::LeftButton) {

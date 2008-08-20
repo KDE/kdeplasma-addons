@@ -162,6 +162,20 @@ protected:
      */
     virtual void geometryUpdated();
 
+    /**
+     * Sets whether the widget is hovered. This function exists
+     * only as a hack if you need a way to artificially force
+     * this value.
+     */
+    void setHovered(bool value);
+
+    /**
+     * Sets whether the widget is down (pressed). This function exists
+     * only as a hack if you need a way to artificially force
+     * this value.
+     */
+    void setDown(bool value);
+
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
