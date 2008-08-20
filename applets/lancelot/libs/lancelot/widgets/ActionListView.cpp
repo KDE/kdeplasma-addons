@@ -54,11 +54,11 @@ void ActionListView::ItemButton::mousePressEvent(QGraphicsSceneMouseEvent * even
 
 void ActionListView::ItemButton::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
-    if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
-        m_parent->itemDrag(this, event->widget());
-        setDown(false);
-    }
     ExtenderButton::mouseMoveEvent(event);
+    if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+        setDown(false);
+        m_parent->itemDrag(this, event->widget());
+    }
 }
 
 // ActionListView::ScrollButton
