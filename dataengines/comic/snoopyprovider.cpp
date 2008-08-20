@@ -61,9 +61,9 @@ void SnoopyProvider::Private::pageRequestFinished( bool err )
     const QString data = QString::fromUtf8( mHttp->readAll() );
 
     const int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
+    const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
 
-    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1.gif" ).arg( sub ) );
+    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1" ).arg( sub ) );
 
     mImageHttp = new QHttp( "snoopy.com", 80, mParent );
     mImageHttp->setHost( url.host() );
