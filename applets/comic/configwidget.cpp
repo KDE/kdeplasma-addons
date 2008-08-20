@@ -29,6 +29,7 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
+
 class ComicModel : public QAbstractListModel
 {
     public:
@@ -41,6 +42,8 @@ class ComicModel : public QAbstractListModel
                                        service->name(),
                                        QPixmap( KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) ) ) );
             }
+
+            qSort( mComics );
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -73,6 +76,11 @@ class ComicModel : public QAbstractListModel
                 ComicEntry( const QString &_identifier, const QString &_title, const QPixmap &_icon )
                     : identifier( _identifier ), title( _title ), icon( _icon )
                 {
+                }
+
+                bool operator<( const ComicEntry &other ) const
+                {
+                    return (title < other.title);
                 }
 
                 QString identifier;
