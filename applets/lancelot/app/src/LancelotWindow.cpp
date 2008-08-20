@@ -160,7 +160,8 @@ public:
     void startResizing()
     {
         m_cache = new QPixmap(size());
-        render(& QPainter(m_cache));
+        QPainter p(m_cache);
+        render(&p);
         m_resizing = true;
     }
 
@@ -188,8 +189,10 @@ LancelotWindow::LancelotWindow()
     : m_root(NULL), m_view(NULL), m_corona(NULL), m_layout(NULL),
     m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
     m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
-    instance(NULL), m_resizeDirection(None),
-    m_mainSize(mainWidthDefault, windowHeightDefault), m_configWidget(NULL)
+    instance(NULL), 
+    m_configWidget(0),
+    m_resizeDirection(None),
+    m_mainSize(mainWidthDefault, windowHeightDefault)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
@@ -823,7 +826,7 @@ void LancelotWindow::configureMenu()
     const QString dialogID = "LancelotMenyConfigurationDialog";
     KConfigDialog * dialog;
 
-    if (dialog = KConfigDialog::exists(dialogID)) {
+    if ((dialog = KConfigDialog::exists(dialogID))) {
         KWindowSystem::setOnDesktop(dialog->winId(), KWindowSystem::currentDesktop());
         dialog->show();
         KWindowSystem::activateWindow(dialog->winId());
