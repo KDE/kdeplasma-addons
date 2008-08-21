@@ -76,9 +76,9 @@ void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &da
     QImage _picture = data[ identifier ].value<QImage>();
 
     if ( !_picture.isNull() ) {
-	m_picture = _picture;
-	resize(contentSizeHint());
-	m_pixmapCache = QPixmap();
+        m_picture = _picture;
+        resize(contentSizeHint());
+        m_pixmapCache = QPixmap();
         prepareGeometryChange();
         updateGeometry();
         update();
@@ -303,30 +303,30 @@ void Frame::configAccepted()
 void Frame::initSlideShow()
 {
     if (m_slideShow) {
-	    m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
-            m_mySlideShow->setRandom(m_random);
-	    m_slideShowTimer->start();
+        m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
+        m_mySlideShow->setRandom(m_random);
+        m_slideShowTimer->start();
     } else if (m_potd) {
-	Plasma::DataEngine *engine = dataEngine( "potd" );
-	if ( !engine )
+        Plasma::DataEngine *engine = dataEngine( "potd" );
+        if ( !engine )
         {
             kDebug()<<" Engine potd can't be created";
-	    return;
+            return;
         }
-	QDate mCurrentDate = QDate::currentDate();
-	const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
+        QDate mCurrentDate = QDate::currentDate();
+        const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
 
-	engine->disconnectSource( identifier, this );
-	engine->connectSource( identifier, this );
+        engine->disconnectSource( identifier, this );
+        engine->connectSource( identifier, this );
 
-	const Plasma::DataEngine::Data data = engine->query( identifier );
+        const Plasma::DataEngine::Data data = engine->query( identifier );
     } else {
-	    m_mySlideShow->setImage(m_currentUrl.path());
-	    m_slideShowTimer->stop();
+        m_mySlideShow->setImage(m_currentUrl.path());
+        m_slideShowTimer->stop();
     }
 
     if (!m_potd)
-	updatePicture();
+        updatePicture();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -344,7 +344,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
     // If the url is a local directory start slideshowmode
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
-    	m_slideShowPaths.append(droppedUrl.path());
+        m_slideShowPaths.append(droppedUrl.path());
         if (!m_slideShow) {
             m_slideShow = true;
         }
