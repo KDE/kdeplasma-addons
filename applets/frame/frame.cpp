@@ -68,14 +68,14 @@ Frame::~Frame()
     delete m_mySlideShow;
 }
 
-void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &data )
+void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     QDate mCurrentDate = QDate::currentDate();
-    const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
+    const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
 
-    QImage _picture = data[ identifier ].value<QImage>();
+    QImage _picture = data[identifier].value<QImage>();
 
-    if ( !_picture.isNull() ) {
+    if (!_picture.isNull()) {
         m_picture = _picture;
         resize(contentSizeHint());
         m_pixmapCache = QPixmap();
@@ -88,7 +88,7 @@ void Frame::dataUpdated( const QString &name, const Plasma::DataEngine::Data &da
 void Frame::init()
 {
     bool frameReceivedUrlArgs = false;
-    if (m_currentUrl != KUrl("Default") ) {
+    if (m_currentUrl != KUrl("Default")) {
         frameReceivedUrlArgs = true;
     }
 
@@ -149,8 +149,10 @@ QSizeF Frame::contentSizeHint() const {
 
 void Frame::updatePicture()
 {
-    if ( !m_picture.isNull() ) {
-        m_picture = m_mySlideShow->getImage();
+    QImage newImage = m_mySlideShow->getImage();
+
+    if (!newImage.isNull()) {
+        m_picture = newImage;
         resize(contentSizeHint());
         m_pixmapCache = QPixmap();
         update();
@@ -308,8 +310,7 @@ void Frame::initSlideShow()
         m_slideShowTimer->start();
     } else if (m_potd) {
         Plasma::DataEngine *engine = dataEngine( "potd" );
-        if ( !engine )
-        {
+        if (!engine) {
             kDebug()<<" Engine potd can't be created";
             return;
         }
@@ -325,8 +326,9 @@ void Frame::initSlideShow()
         m_slideShowTimer->stop();
     }
 
-    if (!m_potd)
+    if (!m_potd) {
         updatePicture();
+    }
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)

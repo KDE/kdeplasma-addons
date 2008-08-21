@@ -64,7 +64,7 @@ void SlideShow::setImage(const QString &imagePath)
 void SlideShow::addImage(const QString &imagePath)
 {
     if (!m_pictures.contains(imagePath)) {
-	    m_pictures.append(imagePath);
+        m_pictures.append(imagePath);
     }
 }
 
@@ -113,7 +113,7 @@ KUrl SlideShow::getUrl()
 	    if(useRandom) {
 		    randomInt++;
 		    index = indexList[randomInt%m_pictures.count()];
-		    kDebug() << "Random was selected and the index was: " << index << " out of " << m_pictures.count() << " images" << endl;
+		    //kDebug() << "Random was selected and the index was: " << index << " out of " << m_pictures.count() << " images" << endl;
 	    } else {
 		    index = m_slideNumber++ % m_pictures.count();
 	    }
