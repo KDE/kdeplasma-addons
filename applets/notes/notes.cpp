@@ -20,8 +20,10 @@
 
 #include "notes.h"
 
+#include <QFile>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
+#include <QTextStream>
 
 #include <KGlobalSettings>
 #include <KConfigDialog>
@@ -44,6 +46,27 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     m_saveTimer.setSingleShot(true);
     connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
     resize(256, 256);
+
+    m_textEdit = new Plasma::TextEdit(this);
+    m_textEdit->setMinimumSize(QSize(0, 0));
+    m_layout = new QGraphicsLinearLayout(this);
+    m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
+    m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
+    m_layout->addItem(m_textEdit);
+
+    if (args.count() > 0) {
+        QFile f(args.at(0).toString());
+
+        if (f.open(QIODevice::ReadOnly)) {
+            QTextStream t(&f);
+            m_textEdit->nativeWidget()->setPlainText(t.readAll());
+            f.close();
+        }
+    } else {
+#ifdef KTEXTEDIT_CLICKMSG_SUPPORT
+        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
+#endif
+    }
 }
 
 Notes::~Notes()
@@ -57,13 +80,6 @@ void Notes::init()
 {
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
-
-    m_textEdit = new Plasma::TextEdit();
-    m_textEdit->setMinimumSize(QSize(0, 0));
-    m_layout = new QGraphicsLinearLayout(this);
-    m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
-    m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
-    m_layout->addItem(m_textEdit);
 
     addColor("white", i18n("White"));
     addColor("black", i18n("Black"));
@@ -84,12 +100,11 @@ void Notes::init()
     // color must be before setPlainText("foo")
     m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
-    #ifdef KTEXTEDIT_CLICKMSG_SUPPORT
-    m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
-    #endif
 
     QString text = cg.readEntry("autoSave", QString());
-    m_textEdit->nativeWidget()->setPlainText(text);
+    if (!text.isEmpty()) {
+        m_textEdit->nativeWidget()->setPlainText(text);
+    }
 
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
     m_autoFont = cg.readEntry("autoFont", true);

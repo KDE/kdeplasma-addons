@@ -77,6 +77,7 @@ Comment[zh_TW]=類似 Postit 的便條紙程式
 Icon=knotes
 Type=Service
 
+X-Plasma-DropMimeTypes=text/plain,text/richtext
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_notes
 X-KDE-PluginInfo-Author=Lukas Kropatschek
