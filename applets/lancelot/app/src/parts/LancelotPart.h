@@ -60,6 +60,7 @@ private:
     bool load(const QString & data);
     bool loadFromFile(const QString & url);
     bool loadFromList(const QStringList & list);
+    bool loadDirectory(const QString & url);
 
     void saveConfig();
     bool loadConfig();

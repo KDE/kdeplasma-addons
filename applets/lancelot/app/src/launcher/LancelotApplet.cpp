@@ -134,6 +134,16 @@ public:
         layout->updateGeometry();
     }
 
+    void toggleHide()
+    {
+        if (waitClick.isActive()) {
+            waitClick.stop();
+        } else {
+            lancelot->hide(true);
+            offline = true;
+        }
+    }
+
     bool showingCategories;
     bool showCategories;
     QString mainIcon;
@@ -148,6 +158,7 @@ public:
     QList < QAction * > actions;
 
     bool offline;
+    QTimer waitClick;
 };
 
 LancelotApplet::LancelotApplet(QObject * parent,
@@ -171,6 +182,8 @@ LancelotApplet::LancelotApplet(QObject * parent,
             parent));
     connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
 
+    d->waitClick.setInterval(1000); // 1 sec
+    d->waitClick.setSingleShot(true);
 }
 
 LancelotApplet::~LancelotApplet()
@@ -231,15 +244,22 @@ void LancelotApplet::showLancelot()
 {
     if (d->offline) return;
 
+    d->waitClick.start();
     QPoint position = popupPosition(QSize());
     d->lancelot->show(position.x(), position.y());
 }
 
 void LancelotApplet::toggleLancelot()
 {
+    // If lancelot is not shown, we are going to show it
+    // If it is shown, then we try to detect the accidental
+    // toggle invocation - if the menu was not shown for
+    // at least a second, then we suppose it is an accident.
+    // Nevertheless, we stop the timer if it was accidental
+    // because it is less likely that two accidental invocations
+    // would come in a row
     if (d->lancelot->isShowing()) {
-        d->lancelot->hide(true);
-        d->offline = true;
+        d->toggleHide();
     } else {
         d->offline = false;
         showLancelot();
@@ -250,6 +270,7 @@ void LancelotApplet::showLancelotSection(const QString & section)
 {
     if (d->offline) return;
 
+    d->waitClick.start();
     QPoint position = popupPosition(QSize());
     d->lancelot->showItem(position.x(), position.y(), section);
 }
@@ -257,8 +278,7 @@ void LancelotApplet::showLancelotSection(const QString & section)
 void LancelotApplet::toggleLancelotSection(const QString & section)
 {
     if (d->lancelot->isShowing()) {
-        d->lancelot->hide(true);
-        d->offline = true;
+        d->toggleHide();
     } else {
         d->offline = false;
         showLancelotSection(section);

@@ -45,6 +45,11 @@ PassagewayViewModelProxy::PassagewayViewModelProxy(ActionListViewModel * model, 
             this,  SIGNAL( updated()          ));
 }
 
+QMimeData * PassagewayViewModel::modelMimeData()
+{
+    return NULL;
+}
+
 // PassagewayViewModel
 PassagewayViewModel * PassagewayViewModelProxy::child(int index)
 {

@@ -49,6 +49,7 @@ public:
     L_Override virtual QMimeData * mimeData(int index) const;
     L_Override virtual void setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    L_Override virtual QMimeData * modelMimeData();
 
 public Q_SLOTS:
     virtual void activate(int index);

@@ -52,7 +52,7 @@ void PartsMergedModel::modelContextActivate(int index, QAction * context)
     }
 
     if (context->data().toInt() == 0) {
-        removeModel(index);
+        emit removeModelRequested(index);
     }
 }
 

@@ -22,8 +22,8 @@
 
 #include "BaseModel.h"
 #include <QDir>
-
-class KDirWatch;
+#include <KDirLister>
+#include <KFileItem>
 
 namespace Models {
 
@@ -37,12 +37,14 @@ protected:
     void load();
 
 private:
-    static KDirWatch * m_dirWatch;
+    KDirLister * m_dirLister;
     QString m_dirPath;
     QDir::SortFlags m_sort;
 
 private Q_SLOTS:
-    void dirty(const QString & dirPath);
+    void clear();
+    void deleteItem(const KFileItem & fileItem);
+    void newItems(const KFileItemList & items);
 };
 
 } // namespace Models

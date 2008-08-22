@@ -73,7 +73,6 @@ public:
     virtual void setVisible(bool visible)
     {
         if (visible) {
-            kDebug() << "Size" << size();
             m_list->setPreferredSize(QSizeF(size()));
             m_list->setMinimumSize(QSizeF(size()));
             m_list->setGeometry(QRectF(
@@ -175,8 +174,12 @@ void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
 
     QString file = event->mimeData()->data("text/uri-list");
     KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
+    if (!mimeptr) {
+        event->setAccepted(false);
+        return;
+    }
     QString mime = mimeptr->name();
-    event->setAccepted(mime == "text/x-lancelotpart");
+    event->setAccepted(mime == "text/x-lancelotpart" || mime == "inode/directory");
 }
 
 void LancelotPart::dropEvent(QGraphicsSceneDragDropEvent * event)
@@ -188,16 +191,23 @@ void LancelotPart::dropEvent(QGraphicsSceneDragDropEvent * event)
 
     QString file = event->mimeData()->data("text/uri-list");
     KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
+    if (!mimeptr) {
+        event->setAccepted(false);
+        return;
+    }
     QString mime = mimeptr->name();
-    event->setAccepted(mime == "text/x-lancelotpart");
+    event->setAccepted(mime == "text/x-lancelotpart" || mime == "inode/directory");
 
-    loadFromFile(file);
+    if (mime == "inode/directory") {
+        loadDirectory(file);
+    } else {
+        loadFromFile(file);
+    }
 }
 
 bool LancelotPart::loadFromFile(const QString & url)
 {
     bool loaded = false;
-
     QFile file(QUrl(url).toLocalFile());
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
@@ -210,6 +220,16 @@ bool LancelotPart::loadFromFile(const QString & url)
     }
 
     return loaded;
+}
+
+bool LancelotPart::loadDirectory(const QString & url)
+{
+    QMap < QString, QString > data;
+    data["version"]     = "1.0";
+    data["type"]        = "list";
+    data["model"]       = "Folder " + url;
+    kDebug() << data;
+    return load(Serializator::serialize(data));
 }
 
 bool LancelotPart::loadFromList(const QStringList & list)
@@ -254,7 +274,11 @@ void LancelotPart::init()
     }
 
     if (!loaded && !m_cmdarg.isEmpty()) {
-        loadFromFile(m_cmdarg);
+        if (QFileInfo(QUrl(m_cmdarg).toLocalFile()).isDir()) {
+            loadDirectory(m_cmdarg);
+        } else {
+            loadFromFile(m_cmdarg);
+        }
     }
 
     resize(size());
@@ -306,6 +330,13 @@ bool LancelotPart::load(const QString & input)
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
                 m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::instance());
+            } else if (modelID.startsWith("Folder ")) {
+                modelID.remove(0, 7);
+                m_model->addModel(modelID,
+                        QIcon(),
+                        modelID,
+                        model = new Models::FolderModel(modelID));
+                m_models.append(model);
             }
             loaded = (model != NULL);
         }
@@ -501,10 +532,8 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
 void LancelotPart::applyConfig()
 {
     KConfigGroup kcg = config();
-    kDebug();
 
     if (m_icon != NULL) {
-        kDebug() << "Setting icon";
         m_icon->setActivationMethod(
                 kcg.readEntry("iconClickActivation", true) ?
                 (Lancelot::ClickActivate) : (Lancelot::HoverActivate)

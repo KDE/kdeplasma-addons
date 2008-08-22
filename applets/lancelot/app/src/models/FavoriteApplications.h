@@ -21,6 +21,7 @@
 #define LANCELOTAPP_MODELS_FAVORITE_APPLICATIONS_H_
 
 #include "BaseModel.h"
+#include <lancelot/models/PassagewayViewModels.h>
 
 namespace Models {
 
@@ -34,6 +35,14 @@ public:
     L_Override virtual void contextActivate(int index, QAction * context);
 
     bool addFavorite(QString url);
+
+    class PassagewayViewProxy: public Lancelot::PassagewayViewModelProxy {
+    public:
+        PassagewayViewProxy();
+        virtual ~PassagewayViewProxy();
+
+        L_Override virtual QMimeData * modelMimeData();
+    };
 
 protected:
     void load();

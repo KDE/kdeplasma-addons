@@ -45,6 +45,23 @@ public:
     {
         BasicWidget::hoverLeaveEvent(event);
     }
+
+    void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget)
+    {
+        Q_UNUSED(option);
+        Q_UNUSED(widget);
+
+        if (Plasma::PanelSvg * svg = group()->backgroundSvg()) {
+            svg->setEnabledBorders(borders);
+        }
+
+        BasicWidget::paint(painter, option, widget);
+    }
+
+public:
+    Plasma::PanelSvg::EnabledBorders borders;
+
 };
 
 // ExtenderButton
@@ -94,7 +111,7 @@ public:
         if (!extender) return;
         QRectF geometry = QRectF(QPointF(0, 0), q->size());
 
-        Plasma::PanelSvg::EnabledBorders extender_borders = Plasma::PanelSvg::AllBorders;
+        extender->borders = Plasma::PanelSvg::AllBorders;
         borders = Plasma::PanelSvg::AllBorders;
 
         switch (extenderPosition) {
@@ -102,35 +119,31 @@ public:
             geometry.setHeight(EXTENDER_SIZE);
             geometry.moveTop(- EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::TopBorder;
-            extender_borders &= ~ Plasma::PanelSvg::BottomBorder;
+            extender->borders &= ~ Plasma::PanelSvg::BottomBorder;
             break;
         case BottomExtender:
             geometry.moveTop(geometry.bottom());
             geometry.setHeight(EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::BottomBorder;
-            extender_borders &= ~ Plasma::PanelSvg::TopBorder;
+            extender->borders &= ~ Plasma::PanelSvg::TopBorder;
             break;
         case LeftExtender:
             geometry.setWidth(EXTENDER_SIZE);
             geometry.moveLeft(- EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::LeftBorder;
-            extender_borders &= ~ Plasma::PanelSvg::RightBorder;
+            extender->borders &= ~ Plasma::PanelSvg::RightBorder;
             break;
         case RightExtender:
             geometry.moveLeft(geometry.right());
             geometry.setWidth(EXTENDER_SIZE);
             borders &= ~ Plasma::PanelSvg::RightBorder;
-            extender_borders &= ~ Plasma::PanelSvg::LeftBorder;
+            extender->borders &= ~ Plasma::PanelSvg::LeftBorder;
             break;
         case NoExtender:
             break;
         }
         extender->setGeometry(geometry);
         extender->setPreferredSize(geometry.size());
-
-        if (Plasma::PanelSvg * svg = extender->group()->backgroundSvg()) {
-            svg->setEnabledBorders(extender_borders);
-        }
 
         // qreal left, top, right, bottom;
         // q->getContentsMargins(&left, &top, &right, &bottom);

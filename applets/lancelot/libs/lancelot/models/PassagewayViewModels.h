@@ -33,7 +33,9 @@ public:
     virtual ~PassagewayViewModel();
     virtual PassagewayViewModel * child(int index) = 0;
     virtual QString modelTitle() const = 0;
-    virtual QIcon modelIcon()  const = 0;
+    virtual QIcon modelIcon() const = 0;
+
+    virtual QMimeData * modelMimeData();
 };
 
 class LANCELOT_EXPORT PassagewayViewModelProxy: public PassagewayViewModel {

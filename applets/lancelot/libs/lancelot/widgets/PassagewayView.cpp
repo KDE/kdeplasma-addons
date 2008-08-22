@@ -19,6 +19,8 @@
 
 #include "PassagewayView.h"
 
+#include <QWidget>
+
 namespace Lancelot
 {
 
@@ -55,7 +57,6 @@ private:
     int m_size;
     bool m_pass;
 };
-
 
 class PassagewayView::Private {
 public:
@@ -124,6 +125,35 @@ public:
         PassagewayViewModel * model;
     };
 
+    class BreadcrumbItem : public Lancelot::ExtenderButton {
+        public:
+            BreadcrumbItem(QIcon icon, QString title, QString description,
+                    QGraphicsItem * parent, PassagewayView::Private * parent_private)
+                : Lancelot::ExtenderButton(icon, title, description, parent),
+                  d(parent_private)
+            {
+            }
+
+            void mousePressEvent(QGraphicsSceneMouseEvent * event)
+            {
+                m_mousePos = event->pos();
+                ExtenderButton::mousePressEvent(event);
+            }
+
+            void mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+            {
+                ExtenderButton::mouseMoveEvent(event);
+                if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+                    setDown(false);
+                    d->startDrag(this);
+                }
+            }
+
+        private:
+            PassagewayView::Private * d;
+            QPointF m_mousePos;
+    };
+
     void back(int steps)
     {
         for (int i = 0; i < steps; ++i) {
@@ -150,7 +180,7 @@ public:
         Step * step = new Step(newStep);
         Instance::setActiveInstanceAndLock(parent->group()->instance());
         ExtenderButton * button =
-            new ExtenderButton(step->icon, step->title, "", parent);
+            new BreadcrumbItem(step->icon, step->title, QString(), parent, this);
         ActionListView * list   =
             new ActionListView(step->model, parent);
         list->setGroupByName(parent->group()->name() + "-Atlas");
@@ -188,6 +218,33 @@ public:
             parent, SLOT(pathButtonActivated())
         );
     }
+
+    void startDrag(BreadcrumbItem * item)
+    {
+        int index = buttons.indexOf(item, 0);
+        if (index == -1) {
+            return;
+        }
+
+        QMimeData * data = path.at(index)->model->modelMimeData();
+        if (!data) {
+            return;
+        }
+
+        // QMimeData * data = new QMimeData();
+        // data->setData("text/uri-list", m_dragUrl.toAscii());
+        // data->setData("text/plain", m_dragUrl.toAscii());
+
+        QWidget * widget = NULL;
+        if (item->scene() && item->scene()->views().size() > 0) {
+            widget = item->scene()->views().at(0);
+        }
+
+        QDrag * drag = new QDrag(widget);
+        drag->setMimeData(data);
+        drag->exec();
+    }
+
 
     QList < Step * > path;
     QList < ExtenderButton * > buttons;

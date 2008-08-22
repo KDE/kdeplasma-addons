@@ -189,8 +189,8 @@ LancelotWindow::LancelotWindow()
     : m_root(NULL), m_view(NULL), m_corona(NULL), m_layout(NULL),
     m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
     m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
-    instance(NULL), 
-    m_configWidget(0),
+    instance(NULL),
+    m_configWidget(NULL),
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault)
 {
@@ -235,6 +235,8 @@ LancelotWindow::LancelotWindow()
         Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
     );
     editSearch->nativeWidget()->installEventFilter(this);
+    editSearch->setFocusPolicy(Qt::WheelFocus);
+    editSearch->nativeWidget()->setFocusPolicy(Qt::WheelFocus);
     m_view->installEventFilter(this);
 
     passagewayApplications->setEntranceTitle(i18n("Favorites"));
@@ -393,6 +395,10 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     KWindowSystem::forceActiveWindow(winId());
+
+    //editSearch->clearFocus();
+    //m_view->setFocus();
+    editSearch->nativeWidget()->setFocus();
     editSearch->setFocus();
 
 }
@@ -574,9 +580,7 @@ void LancelotWindow::setupModels()
 
      // Applications passageview
      passagewayApplications->setEntranceModel(
-         new Lancelot::PassagewayViewModelProxy(
-             Models::FavoriteApplications::instance(), i18n("Favorites"), KIcon("favorites")
-         )
+         new Models::FavoriteApplications::PassagewayViewProxy()
      );
      passagewayApplications->setAtlasModel(new Models::Applications());
 

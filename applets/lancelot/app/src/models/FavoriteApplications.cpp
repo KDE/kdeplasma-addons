@@ -24,6 +24,8 @@
 #include <KConfigGroup>
 #include <KStandardDirs>
 #include <KDebug>
+#include <KTemporaryFile>
+#include "../Serializator.h"
 
 namespace Models {
 
@@ -132,6 +134,44 @@ void FavoriteApplications::contextActivate(int index, QAction * context)
         removeAt(index);
         save();
     }
+}
+
+FavoriteApplications::PassagewayViewProxy::PassagewayViewProxy()
+    : PassagewayViewModelProxy(Models::FavoriteApplications::instance(),
+            i18n("Favorites"), KIcon("favorites"))
+{
+}
+
+FavoriteApplications::PassagewayViewProxy::~PassagewayViewProxy()
+{
+}
+
+QMimeData * FavoriteApplications::PassagewayViewProxy::modelMimeData()
+{
+    QMap < QString , QString > map;
+    map["version"] = "1.0";
+    map["type"]    = "list";
+    map["model"]   = "FavoriteApplications";
+
+    KTemporaryFile file;
+    file.setAutoRemove(false);
+    file.setSuffix(".lancelotpart");
+
+    if (!file.open()) {
+        return NULL;
+    }
+
+    QTextStream out(&file);
+    out << Serializator::serialize(map).toAscii();
+    out.flush();
+
+    QMimeData * data = new QMimeData();
+    QByteArray urlData = KUrl(file.fileName()).url().toAscii();
+    data->setData("text/uri-list", urlData);
+    data->setData("text/plain", urlData);
+    file.close();
+
+    return data;
 }
 
 } // namespace Models

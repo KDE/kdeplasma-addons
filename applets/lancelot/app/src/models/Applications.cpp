@@ -168,7 +168,11 @@ void Applications::activate(int index)
 QMimeData * Applications::mimeData(int index) const
 {
     if (index >= size()) return NULL;
-    if (index < m_submodels.size()) return NULL;
+    if (index < m_submodels.size()) {
+        kDebug() << m_submodels.at(index)->m_root;
+        return BaseModel::mimeForUrl("applications:/" +
+            m_submodels.at(index)->m_root);
+    }
 
     return BaseModel::mimeForUrl(m_items.at(index - m_submodels.size()).desktopFile);
 }
@@ -230,6 +234,11 @@ void Applications::sycocaUpdated()
     if (KSycoca::self()->isChanged("services")) {
         load();
     }
+}
+
+QMimeData * Applications::modelMimeData()
+{
+    return BaseModel::mimeForUrl("applications:/" + m_root);
 }
 
 } // namespace Models

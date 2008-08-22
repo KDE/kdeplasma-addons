@@ -18,13 +18,10 @@
  */
 
 #include "FolderModel.h"
-#include <KDirWatch>
-#include <QDir>
 #include <KDebug>
+#include <KIcon>
 
 namespace Models {
-
-KDirWatch * FolderModel::m_dirWatch = NULL;
 
 FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
     : BaseModel(true), m_dirPath(dirPath), m_sort(sort)
@@ -33,39 +30,54 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
         m_dirPath += QDir::separator();
     }
 
-    if (m_dirWatch == NULL) {
-        m_dirWatch = new KDirWatch();
-    }
+    m_dirLister = new KDirLister();
+    connect(m_dirLister, SIGNAL(clear()),
+              this, SLOT(clear()));
+    connect(m_dirLister, SIGNAL(deleteItem(const KFileItem &)),
+              this, SLOT(deleteItem(const KFileItem &)));
+    connect(m_dirLister, SIGNAL(newItems(const KFileItemList &)),
+              this, SLOT(newItems(const KFileItemList &)));
 
-    m_dirWatch->addDir(m_dirPath);
-
-    connect (m_dirWatch, SIGNAL(dirty(const QString &)), this, SLOT(dirty(const QString &)));
-
-    load();
+    m_dirLister->openUrl(KUrl(m_dirPath), KDirLister::Keep);
 }
 
 FolderModel::~FolderModel()
 {
+    delete m_dirLister;
 }
 
 void FolderModel::load()
 {
-    m_items.clear();
-
-    QStringList files = QDir(m_dirPath).entryList(
-        QDir::Files | QDir::NoDotAndDotDot,
-        m_sort
-    );
-
-    foreach (const QString & file, files) {
-        addUrl(m_dirPath + file);
-    }
 }
 
-void FolderModel::dirty(const QString & dirPath)
+void FolderModel::clear()
 {
-    if (m_dirPath == dirPath) {
-        load();
+    clear();
+}
+
+void FolderModel::deleteItem(const KFileItem & fileItem)
+{
+}
+
+void FolderModel::newItems(const KFileItemList &items)
+{
+    foreach (KFileItem item, items) {
+        if (item.isDesktopFile()) {
+           addUrl(item.url());
+        } else {
+            kDebug() <<
+                item.name() <<
+                item.mimeComment() <<
+                item.iconName() <<
+                item.url();
+
+            add(
+                item.name(),
+                item.mimeComment(),
+                KIcon(item.iconName()),
+                item.url().url()
+            );
+        }
     }
 }
 
