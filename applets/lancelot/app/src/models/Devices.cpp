@@ -34,6 +34,8 @@
 #include <solid/devicenotifier.h>
 #include <solid/storageaccess.h>
 #include <solid/storagedrive.h>
+#include <solid/opticaldrive.h>
+#include <solid/opticaldisc.h>
 
 namespace Models {
 
@@ -178,6 +180,49 @@ void Devices::activate(int index)
     KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
 
     hideLancelotWindow();
+}
+
+bool Devices::hasContextActions(int index) const
+{
+    Q_UNUSED(index);
+    return true;
+}
+
+void Devices::setContextActions(int index, QMenu * menu)
+{
+    if (index > m_items.size() - 1) return;
+
+    QString udi = m_items.at(index).data.toString();
+    Solid::Device device(udi);
+
+    if (device.is<Solid::OpticalDisc>()) {
+        menu->addAction(KIcon("media-eject"), i18n("Eject"))
+            ->setData(QVariant(0));
+    } else {
+        menu->addAction(KIcon("media-eject"), i18n("Unmount"))
+            ->setData(QVariant(0));
+    }
+}
+
+void Devices::contextActivate(int index, QAction * context)
+{
+    if (!context) {
+        return;
+    }
+
+    QString udi = m_items.at(index).data.toString();
+    Solid::Device device(udi);
+
+    if (device.is<Solid::OpticalDisc>()) {
+        Solid::OpticalDrive *drive = device.parent().as<Solid::OpticalDrive>();
+        drive->eject();
+    } else {
+        Solid::StorageAccess *access = device.as<Solid::StorageAccess>();
+
+        if (access->isAccessible()) {
+            access->teardown();
+        }
+    }
 }
 
 void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)

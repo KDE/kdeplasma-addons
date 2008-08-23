@@ -38,6 +38,10 @@ public:
     Devices(Type filter = All);
     virtual ~Devices();
 
+    L_Override virtual bool hasContextActions(int index) const;
+    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void contextActivate(int index, QAction * context);
+
 private slots:
     void deviceRemoved(const QString & udi);
     void deviceAdded(const QString & udi);
