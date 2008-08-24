@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=3D Earth Model
+Name=Blue Marble
 Name[ca]=Model terraqui 3D
 Name[cs]=3D model Země
 Name[csb]=Mòdel Zemi w 3D
@@ -38,7 +38,7 @@ Name[wa]=Li modele e 3D
 Name[x-test]=xx3D Earth Modelxx
 Name[zh_CN]=三维地球模型
 Name[zh_TW]=立體地球模型
-Comment=Shows Earth on your desktop
+Comment=3D model of the Earth
 Comment[ca]=Mostra la terra a l'escriptori
 Comment[cs]=Ukáže Zemi na vaší pracovní ploše
 Comment[csb]=Pòkażë Zemiã na twòjim pùlce
@@ -74,7 +74,7 @@ Comment[th]=แสดงลูกโลกบนพื้นที่ทำง�
 Comment[tr]=Masaüstünde Dünya görüntüler
 Comment[uk]=Показує Землю на вашій стільниці
 Comment[wa]=Mostere li daegn so vosse sicribanne
-Comment[x-test]=xxShows Earth on your desktopxx
+Comment[x-test]=xx3D model of the Earthxx
 Comment[zh_CN]=在您的桌面上显示地球
 Comment[zh_TW]=在您的桌面上顯示地球
 Icon=world

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Konsole Profiles Applet
+Name=Konsole Profiles
 Name[ca]=Miniaplicació de perfils del Konsole
 Name[da]=Applet til Konsole-profiler
 Name[de]=Konsole-Profile
@@ -31,7 +31,7 @@ Name[uk]=Аплет профілів Konsole
 Name[x-test]=xxKonsole Profiles Appletxx
 Name[zh_CN]=Konsole 配置集小程序
 Name[zh_TW]=Konsole 設定檔小程式
-Comment=Konsole Profiles Launcher
+Comment=List and launch Konsole profiles
 Comment[ca]=Executador de perfils del Konsole
 Comment[da]=Start Konsole-profiler
 Comment[de]=Konsole-Profil-Starter

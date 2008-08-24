@@ -37,7 +37,7 @@ Name[x-test]=xxFuzzy Clockxx
 Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
-Comment=A simple fuzzy clock
+Comment=Time displayed in a less precise format
 Comment[ca]=Un rellotge aproximat senzill
 Comment[da]=Et simpelt upræcist ur
 Comment[de]=Eine einfache umgangssprachliche Uhr

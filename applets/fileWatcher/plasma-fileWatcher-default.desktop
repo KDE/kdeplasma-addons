@@ -37,6 +37,7 @@ Name[wa]=Riwaiteu di fitchî
 Name[x-test]=xxFile Watcherxx
 Name[zh_CN]=文件观察器
 Name[zh_TW]=檔案監看器
+Comment=Watch for changes in specified files
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 Icon=application-octet-stream
