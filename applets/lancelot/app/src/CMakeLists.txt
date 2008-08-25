@@ -143,7 +143,7 @@ kde4_add_ui_files(
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
 
-target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} taskmanager)
+target_link_libraries(plasma_applet_lancelot_part ${PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS} taskmanager)
 
 install(
   TARGETS plasma_applet_lancelot_part
