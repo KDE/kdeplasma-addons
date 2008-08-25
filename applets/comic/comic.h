@@ -27,6 +27,7 @@
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
+#include <solid/networking.h>
 
 class ConfigWidget;
 
@@ -49,6 +50,7 @@ class ComicApplet : public Plasma::Applet
         void slotNextDay();
         void slotPreviousDay();
         void applyConfig();
+        void networkStatusChanged( Solid::Networking::Status );
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );

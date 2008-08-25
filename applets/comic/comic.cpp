@@ -48,7 +48,13 @@ void ComicApplet::init()
 {
     loadConfig();
 
-    updateComic();
+    Solid::Networking::Status status = Solid::Networking::status();
+    if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
+        updateComic();
+
+    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
+             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+
     updateButtons();
 }
 
@@ -96,6 +102,12 @@ void ComicApplet::applyConfig()
     saveConfig();
 
     updateComic();
+}
+
+void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
+{
+    if ( status == Solid::Networking::Connected )
+        updateComic();
 }
 
 void ComicApplet::loadConfig()
