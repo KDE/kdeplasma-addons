@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Calendar
+Name[es]=Calendario
 Name[et]=Kalender
 Name[ga]=Féilire
 Name[gl]=Calendario
@@ -15,19 +16,6 @@ Name[tr]=Takvim
 Name[uk]=Календар
 Name[zh_TW]=日曆
 Comment=View and pick dates from the calendar
-Comment[et]=Kalender
-Comment[ga]=Féilire
-Comment[gl]=Un calendario
-Comment[ja]=カレンダー
-Comment[km]=ប្រតិទិន
-Comment[nds]=En Kalenner
-Comment[nn]=Ein kalender
-Comment[pt]=Um calendário
-Comment[pt_BR]=Um calendário
-Comment[sv]=En kalender
-Comment[tr]=Bir takvim
-Comment[uk]=Календар
-Comment[zh_TW]=日曆
 Type=Service
 Icon=view-pim-calendar
 X-KDE-ServiceTypes=Plasma/Applet

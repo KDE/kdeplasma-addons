@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[es]=Cronómetro
 Name[et]=Taimer
 Name[ga]=Uaineadóir
 Name[gl]=Temporizador
@@ -15,19 +16,6 @@ Name[tr]=Zamanlayıcı
 Name[uk]=Таймер
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
-Comment[et]=Taimeri plasmoid
-Comment[ga]=Plasmoid uaineadóra
-Comment[gl]=Un plasmoide cun temporizador
-Comment[ja]=タイマー・プラズモイド
-Comment[km]=ប្លាស្ម៉យ​កម្មវិធី​កំណត់​ពេលវេលា ។
-Comment[nds]=En Weckklock-Lüttprogramm
-Comment[nn]=Eit tidsur for nedteljing
-Comment[pt]=Um plasmóide de cronómetro
-Comment[pt_BR]=Um plasmóide de cronómetro
-Comment[sv]=En tidtagningsplasmoid
-Comment[tr]=Zamanlayıcı plasma programcığı
-Comment[uk]=Плазмоїд таймера
-Comment[zh_TW]=計時器元件。
 Type=Service
 Icon=chronometer
 ServiceTypes=Plasma/Applet

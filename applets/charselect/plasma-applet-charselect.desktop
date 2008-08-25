@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
+Name[es]=Selector de caracteres
 Name[et]=Sümbolivalija
 Name[ga]=Roghnóir Carachtar
 Name[gl]=Selector de caracteres
@@ -15,19 +16,6 @@ Name[tr]=Karakter Seçici
 Name[uk]=Таблиця символів
 Name[zh_TW]=字元選擇器
 Comment=View, select, and copy characters from a font collection
-Comment[et]=Sümboli valimise aplett
-Comment[ga]=Feidhmchláirín roghnaithe carachtar
-Comment[gl]=Applet de selección de caracteres
-Comment[ja]=文字を選択するアプレット
-Comment[km]=អាប់ភ្លេត​កម្មវិធី​ជ្រើស​តួអក្សរ
-Comment[nds]=Tekenköör-Lüttprogramm
-Comment[nn]=Teiknval
-Comment[pt]='Applet' de selecção de caracteres
-Comment[pt_BR]=Miniaplicativo seletor de caracteres
-Comment[sv]=Miniprogram med teckenväljare
-Comment[tr]=Karakter seçme programcığı
-Comment[uk]=Аплет для вибору символів
-Comment[zh_TW]=字元選擇器小程式
 Type=Service
 Icon=accessories-character-map
 ServiceTypes=Plasma/Applet

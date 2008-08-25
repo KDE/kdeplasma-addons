@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[es]=Mostrar componente de cuadro de mandos
 Name[et]=Vidinate Dashboardi näitamine
 Name[ga]=Taispeáin Painéal na nGiuirléidí
 Name[gl]=Mostrar o widget do cadro de control
@@ -13,18 +14,6 @@ Name[tr]=Programcık Kontrol Panelini Göster
 Name[uk]=Показати панель приладів віджета
 Name[zh_TW]=顯示元件儀表板
 Comment=Show the Plasma widget dashboard above other windows
-Comment[et]=Vidinate dashboardi näitamine teiste akende kohal klõpsamisel
-Comment[ga]=Taispeáin painéal na ngiuirléidí os cionn na bhfuinneog eile nuair a chliceálann tú é
-Comment[gl]=Mostar o widget do cadro de control sobre as outras fiestras cando o prema
-Comment[km]=បង្ហាញ​ផ្ទាំងគ្រប់គ្រង​​​ធាតុក្រាហ្វិក​ខាង​លើ​បង្អួច​ផ្សេង​របស់​អ្នក​នៅ​ពេល​ចុច
-Comment[nds]=Wiest dat Lüttprogramm-Klockpaneel vör Dien anner Finstern
-Comment[nn]=Vis kontrollpulten over andre vindauge når han vert trykt på
-Comment[pt]=Mostrar o quadro do elemento acima das outras janelas quando carregar nele
-Comment[pt_BR]=Mostrar o quadro do elemento acima das outras janelas quando carregar nele
-Comment[sv]=Visar den grafiska instrumentpanelkomponenten ovanför andra fönster när den klickas
-Comment[tr]=Tıklandığında diğer pencerelerin üzerinde programcık kontrol panelini gösterir
-Comment[uk]=Показує панель приладів віджета над іншими вікнами після клацання
-Comment[zh_TW]=點擊時在您其它的視窗上方顯示元件儀表板
 Icon=dashboard-show
 Type=Service
 ServiceTypes=Plasma/Applet

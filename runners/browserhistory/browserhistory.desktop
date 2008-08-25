@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Webbrowser History
+Name[es]=Historial del navegador web
 Name[et]=Veebibrauseri ajalugu
 Name[ga]=Stair Bhrabhsála
 Name[gl]=Historial de navegación web
@@ -10,7 +11,9 @@ Name[pt]=Histórico do Navegador Web
 Name[pt_BR]=Histórico do Navegador Web
 Name[sv]=Webbläsningshistorik
 Name[uk]=Історія переглядача Тенет
+Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
+Comment[es]=Busca en el historial de Konqueror
 Comment[et]=Otsing Konquerori ajaloos
 Comment[ga]=Cuardaigh i stair Konqueror
 Comment[gl]=Procura no historial de Konqueror
@@ -21,6 +24,7 @@ Comment[pt]=Pesquisa no histórico do Konqueror
 Comment[pt_BR]=Pesquisa no histórico do Konqueror
 Comment[sv]=Söker i Konquerors historik
 Comment[uk]=Пошук у історії перегляду у Konqueror
+Comment[zh_TW]=搜尋 Konqueror 的歷史紀錄
 
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
