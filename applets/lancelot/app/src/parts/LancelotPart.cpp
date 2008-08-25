@@ -67,7 +67,7 @@ public:
         painter->setCompositionMode(QPainter::CompositionMode_Source);
         painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
         m_bg.resizePanel(rect.size());
-        m_bg.paintPanel(painter); // Api change since 4.1
+        m_bg.paintPanel(painter); // Api change since 4.1 IGNORE_DIFF
     }
 
     virtual void setVisible(bool visible)
