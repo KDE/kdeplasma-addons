@@ -124,3 +124,39 @@ install( TARGETS plasma_comic_shithappensprovider DESTINATION ${PLUGIN_INSTALL_D
 install( FILES shithappensprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_shithappens.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
 install( FILES pics/plasma_comic_shithappens-header.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_cad_provider_SRCS
+     cadprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_cadprovider ${comic_cad_provider_SRCS} )
+target_link_libraries( plasma_comic_cadprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_cadprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES cadprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_cad.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_calvinandhobbes_provider_SRCS
+     calvinandhobbesprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_calvinandhobbesprovider ${comic_calvinandhobbes_provider_SRCS} )
+target_link_libraries( plasma_comic_calvinandhobbesprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_calvinandhobbesprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES calvinandhobbesprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_calvinandhobbes.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_nichtlustig_provider_SRCS
+     nichtlustigprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_nichtlustigprovider ${comic_nichtlustig_provider_SRCS} )
+target_link_libraries( plasma_comic_nichtlustigprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_nichtlustigprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES nichtlustigprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_nichtlustig.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )

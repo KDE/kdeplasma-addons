@@ -17,30 +17,30 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHITHAPPENSPROVIDER_H
-#define SHITHAPPENSPROVIDER_H
+#ifndef CADPROVIDER_H
+#define CADPROVIDER_H
 
 #include "comicprovider.h"
 
 /**
- * This class provides the comic strip image for http://ruthe.de.
+ * This class provides the comic strip image for http://cad-comic.com.
  */
-class ShitHappensProvider : public ComicProvider
+class CadProvider : public ComicProvider
 {
     Q_OBJECT
 
     public:
         /**
-         * Creates a new ShitHappens provider.
+         * Creates a new ctrl+alt+del provider.
          *
          * @param parent The parent object.
          */
-        ShitHappensProvider( QObject *parent, const QVariantList& );
+        CadProvider( QObject *parent, const QVariantList& );
 
         /**
-         * Destroys the ShitHappens provider.
+         * Destroys the ctrl+alt+del provider.
          */
-        ~ShitHappensProvider();
+        ~CadProvider();
 
         /**
          * Sets the Http to the Website of the comic (either a concrete
@@ -80,7 +80,6 @@ class ShitHappensProvider : public ComicProvider
          * Returns the identifier of the previous comic.
          */
         virtual QString previousIdentifier() const;
-
 
     protected:
         virtual void pageRetrieved( int id, const QByteArray &data );

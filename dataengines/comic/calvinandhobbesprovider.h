@@ -17,36 +17,30 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHITHAPPENSPROVIDER_H
-#define SHITHAPPENSPROVIDER_H
+#ifndef CALVINANDHOBBESPROVIDER_H
+#define CALVINANDHOBBESPROVIDER_H
 
 #include "comicprovider.h"
 
 /**
- * This class provides the comic strip image for http://ruthe.de.
+ * This class provides the comic strip image for calvinandhobbes.com.
  */
-class ShitHappensProvider : public ComicProvider
+class CalvinAndHobbesProvider : public ComicProvider
 {
     Q_OBJECT
 
     public:
         /**
-         * Creates a new ShitHappens provider.
+         * Creates a new calvinandhobbes provider.
          *
          * @param parent The parent object.
          */
-        ShitHappensProvider( QObject *parent, const QVariantList& );
+        CalvinAndHobbesProvider( QObject *parent, const QVariantList& );
 
         /**
-         * Destroys the ShitHappens provider.
+         * Destroys the calvinandhobbes provider.
          */
-        ~ShitHappensProvider();
-
-        /**
-         * Sets the Http to the Website of the comic (either a concrete
-         * date exluding the currentDate or a generic Url)
-         */
-        void setWebsiteHttp();
+        ~CalvinAndHobbesProvider();
 
         /**
          * Returns the identifier type.
@@ -70,17 +64,6 @@ class ShitHappensProvider : public ComicProvider
          * Returns the website of the comic.
          */
         virtual KUrl websiteUrl() const;
-
-        /**
-         * Returns the identifier of the next comic.
-         */
-        virtual QString nextIdentifier() const;
-
-        /**
-         * Returns the identifier of the previous comic.
-         */
-        virtual QString previousIdentifier() const;
-
 
     protected:
         virtual void pageRetrieved( int id, const QByteArray &data );
