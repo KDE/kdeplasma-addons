@@ -20,6 +20,7 @@
 
 #include "comic.h"
 
+#include <QtCore/QTimer>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
@@ -47,6 +48,11 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 void ComicApplet::init()
 {
     loadConfig();
+
+    mCurrentDay = QDate::currentDate();
+    mDateChangedTimer = new QTimer( this );
+    connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
+    mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
     Solid::Networking::Status status = Solid::Networking::status();
     if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
@@ -108,6 +114,14 @@ void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
 {
     if ( status == Solid::Networking::Connected )
         updateComic();
+}
+
+void ComicApplet::checkDayChanged()
+{
+    if ( mCurrentDay != QDate::currentDate() || mImage.isNull() )
+        updateComic();
+
+    mCurrentDay = QDate::currentDate();
 }
 
 void ComicApplet::loadConfig()

@@ -30,6 +30,7 @@
 #include <solid/networking.h>
 
 class ConfigWidget;
+class QTimer;
 
 class ComicApplet : public Plasma::Applet
 {
@@ -51,6 +52,7 @@ class ComicApplet : public Plasma::Applet
         void slotPreviousDay();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
+        void checkDayChanged();
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
@@ -64,6 +66,7 @@ class ComicApplet : public Plasma::Applet
 
         QImage mImage;
         QDate mCurrentDate;
+        QDate mCurrentDay;
         QUrl mWebsiteUrl;
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
@@ -73,6 +76,7 @@ class ComicApplet : public Plasma::Applet
         bool mShowPreviousButton;
         bool mShowNextButton;
         bool mShowComicUrl;
+        QTimer *mDateChangedTimer;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)
