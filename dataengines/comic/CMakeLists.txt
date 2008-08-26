@@ -17,7 +17,7 @@ set(comic_provider_core_SRCS
 )
 
 kde4_add_library( plasmacomicprovidercore SHARED ${comic_provider_core_SRCS} )
-target_link_libraries( plasmacomicprovidercore ${KDE4_KDEUI_LIBS} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( plasmacomicprovidercore ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} )
 set_target_properties( 
    plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1
    ${KDE4_DISABLE_PROPERTY_}LINK_INTERFACE_LIBRARIES "${KDE4_KDECORE_LIBS}"
@@ -34,7 +34,7 @@ set( comic_dilbert_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_dilbertprovider ${comic_dilbert_provider_SRCS} )
-target_link_libraries( plasma_comic_dilbertprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+target_link_libraries( plasma_comic_dilbertprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS})
 install( TARGETS plasma_comic_dilbertprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES dilbertprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_dilbert.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -46,7 +46,7 @@ set( comic_userfriendly_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_userfriendlyprovider ${comic_userfriendly_provider_SRCS} )
-target_link_libraries( plasma_comic_userfriendlyprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( plasma_comic_userfriendlyprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
 install( TARGETS plasma_comic_userfriendlyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES userfriendlyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_userfriendly.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -58,7 +58,7 @@ set( comic_garfield_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_garfieldprovider ${comic_garfield_provider_SRCS} )
-target_link_libraries( plasma_comic_garfieldprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+target_link_libraries( plasma_comic_garfieldprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS})
 install( TARGETS plasma_comic_garfieldprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES garfieldprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_garfield.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -83,7 +83,7 @@ set( comic_snoopy_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_snoopyprovider ${comic_snoopy_provider_SRCS} )
-target_link_libraries( plasma_comic_snoopyprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( plasma_comic_snoopyprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
 install( TARGETS plasma_comic_snoopyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES snoopyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_snoopy.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -95,7 +95,7 @@ set( comic_xkcd_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_xkcdprovider ${comic_xkcd_provider_SRCS} )
-target_link_libraries( plasma_comic_xkcdprovider plasmacomicprovidercore ${QT_QTNETWORK_LIBRARY} ${QT_QTGUI_LIBRARY} )
+target_link_libraries( plasma_comic_xkcdprovider plasmacomicprovidercore ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} )
 install( TARGETS plasma_comic_xkcdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES xkcdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_xkcd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -107,7 +107,7 @@ set( comic_phd_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_phdprovider ${comic_phd_provider_SRCS} )
-target_link_libraries( plasma_comic_phdprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( plasma_comic_phdprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
 install( TARGETS plasma_comic_phdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES phdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_phd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
@@ -119,7 +119,7 @@ set( comic_shithappens_provider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_shithappensprovider ${comic_shithappens_provider_SRCS} )
-target_link_libraries( plasma_comic_shithappensprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( plasma_comic_shithappensprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
 install( TARGETS plasma_comic_shithappensprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES shithappensprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_shithappens.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )

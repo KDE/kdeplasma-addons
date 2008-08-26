@@ -18,7 +18,8 @@
 
 #include "comicprovider.h"
 
-#include <QtNetwork/QHttp>
+#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 
 class ComicProvider::Private
 {
@@ -29,19 +30,18 @@ class ComicProvider::Private
         {
         }
 
-        void jobDone( bool error )
+        void jobDone( KJob *job )
         {
-            QHttp *http = qobject_cast<QHttp*>( mParent->sender() );
-            if ( !http )
-                return;
-
-            if ( error ) {
-                mParent->pageError( http->property( "uid" ).toInt(), http->errorString() );
+            if ( job->error() ) {
+                mParent->pageError( job->property( "uid" ).toInt(), job->errorText() );
             } else {
-                mParent->pageRetrieved( http->property( "uid" ).toInt(), http->readAll() );
+                KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>( job );
+                if ( job )
+                    mParent->pageRetrieved( job->property( "uid" ).toInt(), storedJob->data() );
+                else {
+                    qDebug( "error!!!!!!!!!!!!!!!!");
+                }
             }
-
-            http->deleteLater();
         }
 
         ComicProvider *mParent;
@@ -115,21 +115,22 @@ QString ComicProvider::requestedString() const
 
 void ComicProvider::requestPage( const QString &host, int port, const QString &path, int id, const MetaInfos &infos )
 {
-    QHttp *http = new QHttp( host, port, this );
-    http->setProperty( "uid", id );
-    connect( http, SIGNAL( done( bool ) ), this, SLOT( jobDone( bool ) ) );
+    KUrl url;
+    url.setProtocol( "http" );
+    url.setHost( host );
+    url.setPort( port );
+    url.setPath( path );
 
-    if ( infos.isEmpty() ) {
-        http->get( path );
-    } else {
-        QHttpRequestHeader header( "GET", path );
+    KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
+    job->setProperty( "uid", id );
+    connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
+
+    if ( !infos.isEmpty() ) {
         QMapIterator<QString, QString> it( infos );
         while ( it.hasNext() ) {
             it.next();
-            header.setValue( it.key(), it.value() );
+            job->addMetaData( it.key(), it.value() );
         }
-
-        http->request( header );
     }
 }
 
