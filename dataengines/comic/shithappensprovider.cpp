@@ -67,13 +67,16 @@ void ShitHappensProvider::setWebsiteHttp()
 
         d->mModifiedId = d->mMaxId - d->mRequestedId;
 
-        url.setPath( QString( "/gallery/cpg1410/displayimage.php?album=4&pos=%1" )
-                            .arg( d->mModifiedId ) );
+        url.setPath( "/gallery/cpg1410/displayimage.php" );
+        url.addQueryItem( "album", "4" );
+        url.addQueryItem( "pos", QString::number( d->mModifiedId ) );
     } else {
-        url.setPath( QString( "/gallery/cpg1410/displayimage.php?album=4&pos=0" ) );
+        url.setPath( "/gallery/cpg1410/displayimage.php" );
+        url.addQueryItem( "album", "4" );
+        url.addQueryItem( "pos", "0" );
     }
 
-    requestPage( "ruthe.de", 80, url.path(), Private::PageRequest );
+    requestPage( url, Private::PageRequest );
 }
 
 ShitHappensProvider::~ShitHappensProvider()
@@ -149,7 +152,7 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
             }
         }
 
-        requestPage( "ruthe.de", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
     } else if ( id == Private::ImageRequest ) {
         const QString headerRelLoc( "plasma-comic/plasma_comic_shithappens-header.png" );
         const QImage header( KStandardDirs::locate( "data", headerRelLoc ) );

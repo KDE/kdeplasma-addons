@@ -39,7 +39,7 @@ CalvinAndHobbesProvider::CalvinAndHobbesProvider( QObject *parent, const QVarian
     KUrl url( QString( "http://picayune.uclick.com/comics/ch/%1/ch%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
 
-    requestPage( "picayune.uclick.com", 80, url.path(), 0 );
+    requestPage( url, 0 );
 }
 
 CalvinAndHobbesProvider::~CalvinAndHobbesProvider()

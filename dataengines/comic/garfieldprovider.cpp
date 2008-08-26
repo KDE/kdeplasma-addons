@@ -38,7 +38,7 @@ GarfieldProvider::GarfieldProvider( QObject *parent, const QVariantList &args )
     KUrl url( QString( "http://picayune.uclick.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
 
-    requestPage( "picayune.uclick.com", 80, url.path(), 0 );
+    requestPage( url, 0 );
 }
 
 GarfieldProvider::~GarfieldProvider()

@@ -49,7 +49,7 @@ UnshelvedProvider::UnshelvedProvider( QObject *parent, const QVariantList &args 
     KUrl url( QString( "http://www.unshelved.com/strips/%1.gif" )
                 .arg( date.toString( "yyyyMMdd" ) ) );
 
-    requestPage( "unshelved.com", 80, url.path(), 0 );
+    requestPage( url, 0 );
 }
 
 UnshelvedProvider::~UnshelvedProvider()

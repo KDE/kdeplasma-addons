@@ -45,7 +45,7 @@ SnoopyProvider::SnoopyProvider( QObject *parent, const QVariantList &args )
     KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
                 .arg( requestedDate().toString( "yyyyMMdd" ) ) );
 
-    requestPage( "snoopy.com", 80, url.path(), Private::PageRequest );
+    requestPage( url, Private::PageRequest );
 }
 
 SnoopyProvider::~SnoopyProvider()
@@ -87,7 +87,7 @@ void SnoopyProvider::pageRetrieved( int id, const QByteArray &rawData )
 
         KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1" ).arg( sub ) );
 
-        requestPage( "snoopy.com", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );
         emit finished( this );

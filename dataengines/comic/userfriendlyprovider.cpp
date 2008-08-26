@@ -42,7 +42,7 @@ class UserFriendlyProvider::Private
 UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
-    QString path( QString( "/cartoons/?id=" ) + requestedDate().toString( "yyyyMMdd" ) );
+    KUrl url( QString( "http://ars.userfriendly.org/cartoons/?id=" ) + requestedDate().toString( "yyyyMMdd" ) );
 
     MetaInfos infos;
     infos.insert( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
@@ -55,7 +55,7 @@ UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList 
                                    .arg( requestedDate().addDays( -1 ).toString( "yyyyMMdd" ) ) );
     infos.insert( "Connection", "Keep-Alive" );
 
-    requestPage( "ars.userfriendly.org", 80, path, Private::PageRequest, infos );
+    requestPage( url, Private::PageRequest, infos );
 }
 
 UserFriendlyProvider::~UserFriendlyProvider()
@@ -95,9 +95,9 @@ void UserFriendlyProvider::pageRetrieved( int id, const QByteArray &rawData )
         const int pos = exp.indexIn( data ) + pattern.length();
         const QString sub = data.mid( pos, data.indexOf( ' ', pos ) - pos - 1 );
 
-        KUrl url( QString( "http://www.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
+        KUrl url( QString( "http://ars.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
 
-        requestPage( "ars.userfriendly.org", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );
         emit finished( this );

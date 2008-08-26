@@ -56,7 +56,7 @@ XkcdProvider::XkcdProvider( QObject *parent, const QVariantList &args )
         baseUrl.setPath( QString::number( d->mRequestedId ) + '/' );
     }
 
-    requestPage( "xkcd.com", 80, baseUrl.path(), Private::PageRequest );
+    requestPage( baseUrl, Private::PageRequest );
 }
 
 XkcdProvider::~XkcdProvider()
@@ -115,7 +115,7 @@ void XkcdProvider::pageRetrieved( int id, const QByteArray &rawData )
 
         KUrl url( QString( "http://imgs.xkcd.com/comics/%1" ).arg( sub ) );
 
-        requestPage( "imgs.xkcd.com", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
 
         // search the id of this comic if it was not specified
         if ( d->mRequestedId < 1 ) {

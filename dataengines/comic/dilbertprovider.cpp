@@ -53,7 +53,7 @@ DilbertProvider::DilbertProvider( QObject *parent, const QVariantList &args )
     infos.insert( "Host", "dilbert.com" );
     infos.insert( "Connection", "Keep-Alive" );
 
-    requestPage( "dilbert.com", 80, url.path(), Private::PageRequest, infos );
+    requestPage( url, Private::PageRequest, infos );
 }
 
 DilbertProvider::~DilbertProvider()
@@ -101,7 +101,7 @@ void DilbertProvider::pageRetrieved( int id, const QByteArray &rawData )
             url = KUrl( QString( "http://dilbert.com/img/v1/404.gif" ) );
         }
 
-        requestPage( "dilbert.com", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );
         emit finished( this );

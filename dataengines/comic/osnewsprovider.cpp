@@ -93,7 +93,7 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
 
         if ( !mPageUrl.isEmpty() ) {
             KUrl url( imgUrl );
-            mParent->requestPage( "www.osnews.com", 80, url.path(), 0 );
+            mParent->requestPage( url, 0 );
         } else {
             // this should never happen
             emit mParent->error( mParent );

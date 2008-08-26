@@ -59,14 +59,16 @@ CadProvider::CadProvider( QObject *parent, const QVariantList &args )
 
 void CadProvider::setWebsiteHttp()
 {
-    KUrl url ( QString("http://cad-comic.com/" ) );
+    KUrl url( QString( "http://cad-comic.com/" ) );
 
     if ( d->mFindNewDate )
         url.setPath( QString( "/comic.php" ) );
-    else
-        url.setPath( QString( "/comic.php?d=%1" ).arg( d->mUsedDate.toString( "yyyyMMdd" ) ) );
+    else {
+        url.setPath( "/comic.php" );
+        url.addQueryItem( "d", d->mUsedDate.toString( "yyyyMMdd" ) );
+    }
 
-    requestPage( "cad-comic.com", 80, url.path(), Private::PageRequest );
+    requestPage( url, Private::PageRequest );
 }
 
 CadProvider::~CadProvider()
@@ -128,6 +130,7 @@ void CadProvider::pageRetrieved( int id, const QByteArray &rawData )
         } else
             url = KUrl( QString( "http://cad-comic.com/comics/20080704.jpg" ) );
 
+
         QRegExp expPrev( "/comic\\.php\\?d=" + patternDate + "\"><img src=\"/_common/images/comicnav/back1\\.jpg" );
         const int posPrev = expPrev.indexIn( data );
 
@@ -140,7 +143,7 @@ void CadProvider::pageRetrieved( int id, const QByteArray &rawData )
         if ( posNext > -1 )
             d->mNextDate = QDate::fromString( expNext.cap( 1 ), "yyyyMMdd" );
 
-        requestPage( "cad-comic.com", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
 
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );

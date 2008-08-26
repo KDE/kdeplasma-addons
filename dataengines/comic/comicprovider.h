@@ -136,13 +136,11 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * websites or images from the web. It encapsulates the HTTP
          * handling and calls pageRetrieved() or pageError() on success or error.
          *
-         * @param host The host to access.
-         * @param port The port to access.
-         * @param path The path to the object to be fetched.
+         * @param url The url to access.
          * @param id A unique id that identifies this request.
          * @param infos A list of meta informations passed to http.
          */
-        void requestPage( const QString &host, int port, const QString &path, int id, const MetaInfos &infos = MetaInfos() );
+        void requestPage( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
 
         /**
          * This method is called whenever a request done by requestPage() was successfull.

@@ -66,7 +66,7 @@ void NichtLustigProvider::setWebsiteHttp()
     else
         url.setPath( QString( "/toondb/%1.html" ).arg( d->mUsedDate.toString( "yyMMdd" ) ) );
 
-    requestPage( "nicht-lustig.de", 80, url.path(), Private::PageRequest );
+    requestPage( url, Private::PageRequest );
 }
 
 NichtLustigProvider::~NichtLustigProvider()
@@ -140,7 +140,7 @@ void NichtLustigProvider::pageRetrieved( int id, const QByteArray &rawData )
         if ( posNext > -1 )
             d->mNextDate = QDate::fromString( "20" + expNext.cap( 1 ), "yyyyMMdd" );
 
-        requestPage( "nicht-lustig.de", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
 
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );

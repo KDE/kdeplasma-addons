@@ -53,12 +53,13 @@ PhdProvider::PhdProvider( QObject *parent, const QVariantList &args )
     KUrl baseUrl( QString( "http://www.phdcomics.com/" ) );
 
     if ( d->mRequestedId > 0 ) {
-        baseUrl.setPath( QString("/comics/archive.php?comicid=%1").arg( d->mRequestedId ) );
+        baseUrl.setPath( "/comics/archive.php" );
+        baseUrl.addQueryItem( "comicid", QString::number( d->mRequestedId ) );
     } else {
-        baseUrl.setPath("/comics/archive.php");
+        baseUrl.setPath( "/comics/archive.php" );
     }
 
-    requestPage( "www.phdcomics.com", 80, baseUrl.path(), Private::PageRequest );
+    requestPage( baseUrl, Private::PageRequest );
 }
 
 PhdProvider::~PhdProvider()
@@ -117,7 +118,7 @@ void PhdProvider::pageRetrieved( int id, const QByteArray &rawData )
 
         KUrl url( QString( "http://www.phdcomics.com/comics/archive/phd%1" ).arg( sub ) );
 
-        requestPage( "www.phdcomics.com", 80, url.path(), Private::ImageRequest );
+        requestPage( url, Private::ImageRequest );
 
         // search the id of this comic if it was not specified
         if ( d->mRequestedId < 1 ) {

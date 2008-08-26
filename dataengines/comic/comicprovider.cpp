@@ -36,11 +36,7 @@ class ComicProvider::Private
                 mParent->pageError( job->property( "uid" ).toInt(), job->errorText() );
             } else {
                 KIO::StoredTransferJob *storedJob = qobject_cast<KIO::StoredTransferJob*>( job );
-                if ( job )
-                    mParent->pageRetrieved( job->property( "uid" ).toInt(), storedJob->data() );
-                else {
-                    qDebug( "error!!!!!!!!!!!!!!!!");
-                }
+                mParent->pageRetrieved( job->property( "uid" ).toInt(), storedJob->data() );
             }
         }
 
@@ -113,14 +109,8 @@ QString ComicProvider::requestedString() const
     return d->mRequestedId;
 }
 
-void ComicProvider::requestPage( const QString &host, int port, const QString &path, int id, const MetaInfos &infos )
+void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )
 {
-    KUrl url;
-    url.setProtocol( "http" );
-    url.setHost( host );
-    url.setPort( port );
-    url.setPath( path );
-
     KIO::StoredTransferJob *job = KIO::storedGet( url, KIO::NoReload, KIO::HideProgressInfo );
     job->setProperty( "uid", id );
     connect( job, SIGNAL( result( KJob* ) ), this, SLOT( jobDone( KJob* ) ) );
