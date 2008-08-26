@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=kcm_krunner_spellcheck
+X-KDE-ParentComponents=krunner_spellcheck
+X-KDE-PluginKeyword=kcm_krunner_spellcheck
+
+Name=Spell Checker Runner
+Name[es]=Ejecutable del comprobador de deletreo
+Name[et]=Õigekirja kontrolli käivitaja
+Name[ga]=Feidhmitheoir an Litreora
+Name[gl]=Execución de correción ortográfica
+Name[km]=កម្មវិធី​រត់​កម្មវិធី​ពិនិត្យ​អក្ខរាវិរុទ្ធ
+Name[nds]=Schriefwiesprööv-Dreger
+Name[pt]=Execução da Verificação Ortográfica
+Name[pt_BR]=Execução da Verificação Ortográfica
+Name[sv]=Utför stavningskontroll
+Name[uk]=Виконання перевірки правопису
+Name[zh_TW]=拼字檢查器執行者
