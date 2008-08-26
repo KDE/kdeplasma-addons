@@ -18,15 +18,33 @@
 
 #include "comicprovider.h"
 
+#include <QtNetwork/QHttp>
 
 class ComicProvider::Private
 {
     public:
-        Private()
-            : mIsCurrent( false )
+        Private( ComicProvider *parent )
+            : mParent( parent ),
+              mIsCurrent( false )
         {
         }
 
+        void jobDone( bool error )
+        {
+            QHttp *http = qobject_cast<QHttp*>( mParent->sender() );
+            if ( !http )
+                return;
+
+            if ( error ) {
+                mParent->pageError( http->property( "uid" ).toInt(), http->errorString() );
+            } else {
+                mParent->pageRetrieved( http->property( "uid" ).toInt(), http->readAll() );
+            }
+
+            http->deleteLater();
+        }
+
+        ComicProvider *mParent;
         QDate mRequestedDate;
         int mRequestedNumber;
         QString mRequestedId;
@@ -34,7 +52,7 @@ class ComicProvider::Private
 };
 
 ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
-    : QObject( parent ), d( new Private )
+    : QObject( parent ), d( new Private( this ) )
 {
     Q_ASSERT( args.count() == 2 );
 
@@ -93,6 +111,34 @@ int ComicProvider::requestedNumber() const
 QString ComicProvider::requestedString() const
 {
     return d->mRequestedId;
+}
+
+void ComicProvider::requestPage( const QString &host, int port, const QString &path, int id, const MetaInfos &infos )
+{
+    QHttp *http = new QHttp( host, port, this );
+    http->setProperty( "uid", id );
+    connect( http, SIGNAL( done( bool ) ), this, SLOT( jobDone( bool ) ) );
+
+    if ( infos.isEmpty() ) {
+        http->get( path );
+    } else {
+        QHttpRequestHeader header( "GET", path );
+        QMapIterator<QString, QString> it( infos );
+        while ( it.hasNext() ) {
+            it.next();
+            header.setValue( it.key(), it.value() );
+        }
+
+        http->request( header );
+    }
+}
+
+void ComicProvider::pageRetrieved( int, const QByteArray& )
+{
+}
+
+void ComicProvider::pageError( int, const QString& )
+{
 }
 
 #include "comicprovider.moc"

@@ -17,7 +17,7 @@ set(comic_provider_core_SRCS
 )
 
 kde4_add_library( plasmacomicprovidercore SHARED ${comic_provider_core_SRCS} )
-target_link_libraries( plasmacomicprovidercore ${KDE4_KDEUI_LIBS} )
+target_link_libraries( plasmacomicprovidercore ${KDE4_KDEUI_LIBS} ${QT_QTNETWORK_LIBRARY} )
 set_target_properties( 
    plasmacomicprovidercore PROPERTIES VERSION 1.0.0 SOVERSION 1
    ${KDE4_DISABLE_PROPERTY_}LINK_INTERFACE_LIBRARIES "${KDE4_KDECORE_LIBS}"

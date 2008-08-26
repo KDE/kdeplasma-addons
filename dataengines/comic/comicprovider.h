@@ -129,9 +129,42 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         int requestedNumber() const;
         QString requestedString() const;
 
+        typedef QMap<QString, QString> MetaInfos;
+
+        /**
+         * This method should be used by all comic providers to request
+         * websites or images from the web. It encapsulates the HTTP
+         * handling and calls pageRetrieved() or pageError() on success or error.
+         *
+         * @param host The host to access.
+         * @param port The port to access.
+         * @param path The path to the object to be fetched.
+         * @param id A unique id that identifies this request.
+         * @param infos A list of meta informations passed to http.
+         */
+        void requestPage( const QString &host, int port, const QString &path, int id, const MetaInfos &infos = MetaInfos() );
+
+        /**
+         * This method is called whenever a request done by requestPage() was successfull.
+         *
+         * @param id The unique identifier of that request.
+         * @param data The data of the fetched object.
+         */
+        virtual void pageRetrieved( int id, const QByteArray &data );
+
+        /**
+         * This method is called whenever a request done by requestPage() has failed.
+         *
+         * @param id The unique identifier of that request.
+         * @param message The error message.
+         */
+        virtual void pageError( int id, const QString &message );
+
     private:
         class Private;
         Private* const d;
+
+        Q_PRIVATE_SLOT( d, void jobDone( bool ) );
 };
 
 #endif

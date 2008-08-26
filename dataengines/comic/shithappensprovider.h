@@ -28,32 +28,31 @@
 class ShitHappensProvider : public ComicProvider
 {
     Q_OBJECT
-    
+
     public:
-        
         /**
         * Creates a new ShitHappens provider.
         *
         * @param parent The parent object.
         */
         ShitHappensProvider( QObject *parent, const QVariantList& );
-        
+
         /**
         * Destroys the ctrl+alt+del provider.
         */
         ~ShitHappensProvider();
-        
+
         /**
         * Sets the Http to the Website of the comic (either a concrete
         * date exluding the currentDate or a generic Url)
         */
         void setWebsiteHttp();
-        
+
         /**
         * Returns the identifier type.
         */
         IdentifierType identifierType() const;
-        
+
         /**
         * Returns the requested image.
         *
@@ -61,34 +60,35 @@ class ShitHappensProvider : public ComicProvider
         *       finished() signal has been emitted.
         */
         virtual QImage image() const;
-        
+
         /**
         * Returns the identifier of the comic request (name + date).
         */
         virtual QString identifier() const;
-        
+
         /**
         * Returns the website of the comic.
         */
         virtual KUrl websiteUrl() const;
-        
+
         /**
         * Returns the identifier of the next comic.
         */
         virtual QString nextIdentifier() const;
-        
+
         /**
         * Returns the identifier of the previous comic.
         */
         virtual QString previousIdentifier() const;
-        
-        
+
+
+    protected:
+        virtual void pageRetrieved( int id, const QByteArray &data );
+        virtual void pageError( int id, const QString &errorMessage );
+
     private:
         class Private;
         Private* const d;
-        
-        Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
-        Q_PRIVATE_SLOT( d, void imageRequestFinished( bool ) )
 };
 
 #endif

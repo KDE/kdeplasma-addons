@@ -64,11 +64,13 @@ class GarfieldProvider : public ComicProvider
          */
         virtual KUrl websiteUrl() const;
 
+    protected:
+        virtual void pageRetrieved( int id, const QByteArray &data );
+        virtual void pageError( int id, const QString &errorMessage );
+
     private:
       class Private;
       Private* const d;
-
-      Q_PRIVATE_SLOT( d, void imageRequestFinished( bool ) )
 };
 
 #endif

@@ -65,12 +65,13 @@ class XkcdProvider : public ComicProvider
 
         virtual QString previousIdentifier() const;
 
+    protected:
+        virtual void pageRetrieved( int id, const QByteArray &data );
+        virtual void pageError( int id, const QString &errorMessage );
+
     private:
       class Private;
       Private* const d;
-
-      Q_PRIVATE_SLOT( d, void pageRequestFinished( bool ) )
-      Q_PRIVATE_SLOT( d, void imageRequestFinished( bool ) )
 };
 
 #endif

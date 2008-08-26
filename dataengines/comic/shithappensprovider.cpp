@@ -20,7 +20,6 @@
 #include <QtCore/QRegExp>
 #include <QtGui/QPainter>
 #include <QtGui/QImage>
-#include <QtNetwork/QHttp>
 
 #include <KUrl>
 #include <KStandardDirs>
@@ -32,104 +31,26 @@ COMICPROVIDER_EXPORT_PLUGIN( ShitHappensProvider, "ShitHappensProvider", "" )
 class ShitHappensProvider::Private
 {
     public:
-        Private( ShitHappensProvider *parent )
-            : mParent( parent ), mGotMaxId ( false )
+        enum RequestType
         {
-            mHttp = new QHttp( "ruthe.com", 80, mParent );
-            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
+            PageRequest,
+            ImageRequest
+        };
+        Private()
+            : mGotMaxId ( false )
+        {
         }
 
-        void pageRequestFinished( bool );
-        void imageRequestFinished( bool );
-
-        ShitHappensProvider *mParent;
         QImage mImage;
         int mRequestedId;
         int mMaxId;
         int mModifiedId;
         bool mGotMaxId;
-
-        QHttp *mHttp;
-        QHttp *mImageHttp;
 };
 
-void ShitHappensProvider::Private::pageRequestFinished( bool err )
-{
-    if ( err ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    const QString data = QString::fromUtf8( mHttp->readAll() );
-
-    KUrl url;
-
-    if ( !mGotMaxId ) {
-        QRegExp expMaxId( "\\b\\w+\\b (\\d+)/(\\d+)" );
-        const int pos = expMaxId.indexIn( data );
-
-        if ( pos > -1 ) {
-            mMaxId = expMaxId.cap( 2 ).toInt();
-            mGotMaxId = true;
-            mParent->setWebsiteHttp();
-            return;
-        } else {
-            emit mParent->error( mParent );
-            return;
-        }
-    } else {
-        QRegExp exp( "<img src=\"albums/userpics/(\\d+)/normal_strip_(\\d+)(\\S*\\d*)\\.jpg\"" );
-        const int pos = exp.indexIn( data );
-
-        if ( pos > -1 ) {
-            url = KUrl( QString( "http://ruthe.de/gallery/cpg1410/albums/userpics/%1/strip_%2%3.jpg" )
-            .arg( exp.cap( 1 ) ).arg( exp.cap( 2 ) ).arg( exp.cap( 3 ) ) );
-        } else {
-            url = KUrl( QString( "http://ruthe.de/bilder/shit_happens_header.gif" ) );
-        }
-    }
-
-    mImageHttp = new QHttp( "ruthe.de", 80, mParent );
-    mImageHttp->setHost( url.host() );
-    mImageHttp->get( url.path() );
-
-    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-}
-
-void ShitHappensProvider::Private::imageRequestFinished( bool error )
-{
-    if ( error ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    QString headerRelLoc( "plasma-comic/plasma_comic_shithappens-header.png" );
-    QImage header( KStandardDirs::locate( "data",  headerRelLoc) );
-    QImage comic = QImage::fromData( mImageHttp->readAll() );
-
-    int spaceTop = 8;
-    int spaceMid = 20;
-    int spaceBot = 13;
-
-    int height = header.height() + comic.height() + spaceTop + spaceMid + spaceBot;
-    int width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
-
-    mImage = QImage( QSize(width, height), QImage::Format_RGB32 );
-    mImage.fill( header.pixel( QPoint( 0, 0 ) ) );
-
-    QPainter painter( &mImage );
-
-    // center and draw the Images
-    const QPoint headerPos( ( ( width - header.width() ) / 2 ), spaceTop );
-    const QPoint comicPos( ( ( width - comic.width() ) / 2 ), spaceTop + header.height() + spaceMid );
-    painter.drawImage( headerPos, header );
-    painter.drawImage( comicPos, comic );
-
-    emit mParent->finished( mParent );
-}
 
 ShitHappensProvider::ShitHappensProvider( QObject *parent, const QVariantList &args )
-    : ComicProvider( parent, args ), d( new Private( this ) )
+    : ComicProvider( parent, args ), d( new Private )
 {
     d->mRequestedId = requestedNumber();
 
@@ -152,8 +73,7 @@ void ShitHappensProvider::setWebsiteHttp()
         url.setPath( QString( "/gallery/cpg1410/displayimage.php?album=4&pos=0" ) );
     }
 
-    d->mHttp->setHost( url.host() );
-    d->mHttp->get( url.path() );
+    requestPage( "ruthe.de", 80, url.path(), Private::PageRequest );
 }
 
 ShitHappensProvider::~ShitHappensProvider()
@@ -195,6 +115,71 @@ QString ShitHappensProvider::previousIdentifier() const
         return QString::number( d->mRequestedId - 1 );
 
     return QString();
+}
+
+void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
+{
+    if ( id == Private::PageRequest ) {
+        const QString data = QString::fromUtf8( rawData );
+
+        KUrl url;
+
+        if ( !d->mGotMaxId ) {
+            QRegExp expMaxId( "\\b\\w+\\b (\\d+)/(\\d+)" );
+            const int pos = expMaxId.indexIn( data );
+
+            if ( pos > -1 ) {
+                d->mMaxId = expMaxId.cap( 2 ).toInt();
+                d->mGotMaxId = true;
+                setWebsiteHttp();
+                return;
+            } else {
+                emit error( this );
+                return;
+            }
+        } else {
+            QRegExp exp( "<img src=\"albums/userpics/(\\d+)/normal_strip_(\\d+)(\\S*\\d*)\\.jpg\"" );
+            const int pos = exp.indexIn( data );
+
+            if ( pos > -1 ) {
+                url = KUrl( QString( "http://ruthe.de/gallery/cpg1410/albums/userpics/%1/strip_%2%3.jpg" )
+                                    .arg( exp.cap( 1 ) ).arg( exp.cap( 2 ) ).arg( exp.cap( 3 ) ) );
+            } else {
+                url = KUrl( QString( "http://ruthe.de/bilder/shit_happens_header.gif" ) );
+            }
+        }
+
+        requestPage( "ruthe.de", 80, url.path(), Private::ImageRequest );
+    } else if ( id == Private::ImageRequest ) {
+        const QString headerRelLoc( "plasma-comic/plasma_comic_shithappens-header.png" );
+        const QImage header( KStandardDirs::locate( "data", headerRelLoc ) );
+        const QImage comic = QImage::fromData( rawData );
+
+        const int spaceTop = 8;
+        const int spaceMid = 20;
+        const int spaceBot = 13;
+
+        const int height = header.height() + comic.height() + spaceTop + spaceMid + spaceBot;
+        const int width = (header.width() >= comic.width()) ? header.width() : comic.width();
+
+        d->mImage = QImage( QSize( width, height ), QImage::Format_RGB32 );
+        d->mImage.fill( header.pixel( QPoint( 0, 0 ) ) );
+
+        QPainter painter( &(d->mImage) );
+
+        // center and draw the Images
+        const QPoint headerPos( ( ( width - header.width() ) / 2 ), spaceTop );
+        const QPoint comicPos( ( ( width - comic.width() ) / 2 ), spaceTop + header.height() + spaceMid );
+        painter.drawImage( headerPos, header );
+        painter.drawImage( comicPos, comic );
+
+        emit finished( this );
+    }
+}
+
+void ShitHappensProvider::pageError( int, const QString& )
+{
+    emit error( this );
 }
 
 #include "shithappensprovider.moc"

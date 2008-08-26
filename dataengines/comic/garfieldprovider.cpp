@@ -19,7 +19,6 @@
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
-#include <QtNetwork/QHttp>
 
 #include <KUrl>
 
@@ -30,40 +29,16 @@ COMICPROVIDER_EXPORT_PLUGIN( GarfieldProvider, "GarfieldProvider", "" )
 class GarfieldProvider::Private
 {
     public:
-        Private( GarfieldProvider *parent )
-          : mParent( parent )
-        {
-            mHttp = new QHttp( "images.ucomics.com", 80, mParent );
-            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-        }
-
-        void imageRequestFinished( bool );
-
-        GarfieldProvider *mParent;
         QImage mImage;
-
-        QHttp *mHttp;
 };
 
-void GarfieldProvider::Private::imageRequestFinished( bool error )
-{
-    if ( error ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    mImage = QImage::fromData( mHttp->readAll() );
-    emit mParent->finished( mParent );
-}
-
 GarfieldProvider::GarfieldProvider( QObject *parent, const QVariantList &args )
-    : ComicProvider( parent, args ), d( new Private( this ) )
+    : ComicProvider( parent, args ), d( new Private )
 {
     KUrl url( QString( "http://picayune.uclick.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
 
-    d->mHttp->setHost( url.host() );
-    d->mHttp->get( url.path() );
+    requestPage( "picayune.uclick.com", 80, url.path(), 0 );
 }
 
 GarfieldProvider::~GarfieldProvider()
@@ -89,6 +64,18 @@ QString GarfieldProvider::identifier() const
 KUrl GarfieldProvider::websiteUrl() const
 {
     return QString( "http://www.gocomics.com/garfield/%1/" ).arg( requestedDate().toString( "yyyy/MM/dd" ) );
+}
+
+void GarfieldProvider::pageRetrieved( int, const QByteArray &data )
+{
+    d->mImage = QImage::fromData( data );
+
+    emit finished( this );
+}
+
+void GarfieldProvider::pageError( int, const QString& )
+{
+    emit error( this );
 }
 
 #include "garfieldprovider.moc"

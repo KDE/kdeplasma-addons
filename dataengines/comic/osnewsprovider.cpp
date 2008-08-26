@@ -18,20 +18,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-//Qt
+// Qt
 #include <QtCore/QDate>
 #include <QtCore/QDateTime>
+#include <QtCore/QHash>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
-#include <QHash>
-#include <QtNetwork/QHttp>
 
-//Kde
+// KDE
 #include <KUrl>
 #include <syndication/item.h>
-#include <KDebug>
 
-//own
 #include "osnewsprovider.h"
 
 COMICPROVIDER_EXPORT_PLUGIN( OsNewsProvider, "OsNewsProvider", "" )
@@ -44,7 +41,6 @@ class OsNewsProvider::Private
         {
         }
 
-        void imageRequestFinished( bool );
         void processRss( Syndication::Loader*, Syndication::FeedPtr, Syndication::ErrorCode );
 
         OsNewsProvider *mParent;
@@ -56,21 +52,8 @@ class OsNewsProvider::Private
 
         Syndication::Loader *mLoader;
 
-        QHttp *mImageHttp;
-
         KUrl mPageUrl;
 };
-
-void OsNewsProvider::Private::imageRequestFinished( bool error )
-{
-    if ( error ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    mImage = QImage::fromData( mImageHttp->readAll() );
-    emit mParent->finished( mParent );
-}
 
 void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::FeedPtr feed, Syndication::ErrorCode error )
 {
@@ -104,25 +87,15 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
             }
         }
 
-        kDebug() << "Comic webpage found: " << mPageUrl;
-        kDebug() << "Comic webpage found desc: " << description;
-
         const int start = description.indexOf( "http://" );
         const int end = description.indexOf ( "\"", start );
         const QString imgUrl = description.mid( start, end - start );
-        kDebug() << "imgUrl: " << imgUrl;
 
         if ( !mPageUrl.isEmpty() ) {
-
             KUrl url( imgUrl );
-
-            mImageHttp = new QHttp( "www.osnews.com", 80, mParent );
-            mImageHttp->setHost( url.host() );
-            mImageHttp->get( url.path() );
-
-            mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
+            mParent->requestPage( "www.osnews.com", 80, url.path(), 0 );
         } else {
-            //this should never happen
+            // this should never happen
             emit mParent->error( mParent );
         }
     }
@@ -174,5 +147,18 @@ QString OsNewsProvider::identifier() const
 {
     return QString( "osnews:%1" ).arg( requestedDate().toString( Qt::ISODate ) );
 }
+
+void OsNewsProvider::pageRetrieved( int, const QByteArray &data )
+{
+    d->mImage = QImage::fromData( data );
+
+    emit finished( this );
+}
+
+void OsNewsProvider::pageError( int, const QString& )
+{
+    emit error( this );
+}
+
 
 #include "osnewsprovider.moc"
