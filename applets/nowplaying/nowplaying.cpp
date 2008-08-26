@@ -37,7 +37,6 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_controller(0),
       m_state(NoPlayer),
-      m_caps(NoCaps),
       m_volume(0),
       m_length(0),
       m_textPanel(new InfoPanel),
@@ -56,8 +55,8 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     connect(m_buttonPanel, SIGNAL(next()), this, SLOT(next()));
     connect(this, SIGNAL(stateChanged(State)),
             m_buttonPanel, SLOT(stateChanged(State)));
-    connect(this, SIGNAL(capsChanged(Caps)),
-            m_buttonPanel, SLOT(setCaps(Caps)));
+    connect(this, SIGNAL(controllerChanged(Plasma::Service*)),
+            m_buttonPanel, SLOT(setController(Plasma::Service*)));
 
     connect(this, SIGNAL(metadataChanged(QMap<QString,QString>)),
             m_textPanel, SLOT(updateMetadata(QMap<QString,QString>)));
@@ -195,35 +194,6 @@ void NowPlaying::dataUpdated(const QString &name,
         emit coverChanged(m_artwork);
     }
 
-    Caps newcaps = NoCaps;
-    if (data["Can play"].toBool()) {
-        newcaps |= CanPlay;
-    }
-    if (data["Can pause"].toBool()) {
-        newcaps |= CanPause;
-    }
-    if (data["Can stop"].toBool()) {
-        newcaps |= CanStop;
-    }
-    if (data["Can skip backward"].toBool()) {
-        newcaps |= CanGoPrevious;
-    }
-    if (data["Can skip forward"].toBool()) {
-        newcaps |= CanGoNext;
-    }
-    if (data["Can seek"].toBool()) {
-        newcaps |= CanSeek;
-    }
-    if (data["Can set volume"].toBool()) {
-        newcaps |= CanSetVolume;
-    }
-    if (newcaps != m_caps) {
-        emit capsChanged(newcaps);
-        m_caps = newcaps;
-        m_positionSlider->setEnabled(m_caps & CanSeek);
-        m_volumeSlider->setEnabled(m_caps & CanSetVolume);
-    }
-
     update();
 }
 
@@ -251,18 +221,22 @@ void NowPlaying::findPlayer()
     kDebug() << "Looking for players.  Possibilities:" << players;
     if (players.isEmpty()) {
         m_state = NoPlayer;
-        m_caps = NoCaps;
         m_watchingPlayer.clear();
         m_controller = 0;
 
         emit stateChanged(m_state);
-        emit capsChanged(m_caps);
+        emit controllerChanged(0);
         m_positionSlider->setEnabled(false);
         m_volumeSlider->setEnabled(false);
         update();
     } else {
         m_watchingPlayer = players.first();
+
         m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
+        m_controller->associateWidget(m_positionSlider, "seek");
+        m_controller->associateWidget(m_volumeSlider, "volume");
+        emit controllerChanged(m_controller);
+
         kDebug() << "Installing" << m_watchingPlayer << "as watched player";
         dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 999);
     }

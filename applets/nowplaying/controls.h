@@ -38,7 +38,7 @@ public:
 
 public slots:
     void stateChanged(State state);
-    void setCaps(Caps caps);
+    void setController(Plasma::Service* controller);
 
 signals:
     void play();
@@ -59,7 +59,7 @@ private:
     QGraphicsLinearLayout* m_layout;
 
     State m_state;
-    Caps m_caps;
+    Plasma::Service* m_controller;
 };
 
 #endif // CONTROLS_H

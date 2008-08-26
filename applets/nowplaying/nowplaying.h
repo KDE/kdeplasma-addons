@@ -66,7 +66,7 @@ public:
 
 signals:
     void stateChanged(State state);
-    void capsChanged(Caps caps);
+    void controllerChanged(Plasma::Service* controller);
     void metadataChanged(const QMap<QString,QString>& metadata);
     void coverChanged(const QPixmap& picture);
     void volumeChanged(int volumePercent);
@@ -94,7 +94,6 @@ private:
     QString m_watchingPlayer;
     Plasma::Service* m_controller;
     State m_state;
-    Caps m_caps;
 
     qreal m_volume;
     int m_length;

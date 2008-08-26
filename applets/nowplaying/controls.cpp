@@ -11,8 +11,7 @@ Controls::Controls(QGraphicsWidget *parent)
       m_prev(new Plasma::Icon(this)),
       m_next(new Plasma::Icon(this)),
       m_layout(0),
-      m_state(NoPlayer),
-      m_caps(NoCaps)
+      m_state(NoPlayer)
 {
     m_playpause->setIcon("media-playback-start");
     connect(m_playpause, SIGNAL(clicked()), this, SLOT(playPauseClicked()));
@@ -26,8 +25,6 @@ Controls::Controls(QGraphicsWidget *parent)
     m_next->setIcon("media-skip-forward");
     connect(m_next, SIGNAL(clicked()), this, SIGNAL(next()));
     m_next->setMinimumSize(m_next->sizeFromIconSize(16));
-
-    setCaps(NoCaps);
 
     QGraphicsLinearLayout* m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
     // adding stretches -> segfault
@@ -63,29 +60,39 @@ void Controls::stateChanged(State state)
     if (m_state != state) {
         if (state == Playing) {
             m_playpause->setIcon("media-playback-pause");
-            m_playpause->setEnabled(m_caps & CanPause);
+            m_controller->associateWidget(m_playpause, "pause");
         } else {
             m_playpause->setIcon("media-playback-start");
-            m_playpause->setEnabled(m_caps & CanPlay);
+            m_controller->associateWidget(m_playpause, "play");
         }
+        /* Probably not needed
         if (state == NoPlayer) {
-            setCaps(NoCaps);
+            setController(0);
         }
+        */
         m_state = state;
     }
 }
 
-void Controls::setCaps(Caps caps)
+void Controls::setController(Plasma::Service* controller)
 {
-    m_prev->setEnabled(caps & CanGoPrevious);
-    m_next->setEnabled(caps & CanGoNext);
-    m_stop->setEnabled(caps & CanStop);
-    if (m_state == Playing) {
-        m_playpause->setEnabled(caps & CanPause);
+    m_controller = controller;
+
+    if (!controller) {
+        m_prev->setEnabled(false);
+        m_next->setEnabled(false);
+        m_stop->setEnabled(false);
+        m_playpause->setEnabled(false);
     } else {
-        m_playpause->setEnabled(caps & CanPlay);
+        controller->associateWidget(m_prev, "previous");
+        controller->associateWidget(m_next, "next");
+        controller->associateWidget(m_stop, "stop");
+        if (m_state == Playing) {
+            controller->associateWidget(m_playpause, "pause");
+        } else {
+            controller->associateWidget(m_playpause, "play");
+        }
     }
-    m_caps = caps;
 }
 
 // vim: sw=4 sts=4 et tw=100
