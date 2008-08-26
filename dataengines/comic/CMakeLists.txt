@@ -160,3 +160,16 @@ target_link_libraries( plasma_comic_nichtlustigprovider plasmacomicprovidercore 
 install( TARGETS plasma_comic_nichtlustigprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES nichtlustigprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_nichtlustig.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_unshelved_provider_SRCS
+     unshelvedprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_unshelvedprovider ${comic_unshelved_provider_SRCS} )
+target_link_libraries( plasma_comic_unshelvedprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_unshelvedprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES unshelvedprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_unshelved.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
