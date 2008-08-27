@@ -30,6 +30,7 @@
 #include <solid/networking.h>
 
 class ConfigWidget;
+class FullViewWidget;
 class QTimer;
 
 class ComicApplet : public Plasma::Applet
@@ -58,6 +59,7 @@ class ComicApplet : public Plasma::Applet
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
+        void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
 
     private:
         void updateComic( const QString &identifierSuffix = QString() );
@@ -80,6 +82,7 @@ class ComicApplet : public Plasma::Applet
         bool mShowComicUrl;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
+        FullViewWidget *mFullViewWidget;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)

@@ -34,6 +34,7 @@
 #include <plasma/theme.h>
 
 #include "configwidget.h"
+#include "fullviewwidget.h"
 
 static const int s_arrowWidth = 30;
 
@@ -70,6 +71,9 @@ void ComicApplet::init()
     QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
+
+    mFullViewWidget = new FullViewWidget();
+    mFullViewWidget->hide();
 }
 
 ComicApplet::~ComicApplet()
@@ -158,7 +162,7 @@ void ComicApplet::slotPreviousDay()
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
-    if ( event->button() == Qt::LeftButton ) { //&& geometry().contains( event->pos() ) ) {
+    if ( event->button() == Qt::LeftButton ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
         const QRectF rect = contentsRect();
@@ -168,15 +172,28 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
         } else if ( mShowNextButton && event->pos().x() > (rect.right() - s_arrowWidth) &&
                                        event->pos().x() < rect.right() ) {
             slotNextDay();
-        //link clicked
         } else if ( !mWebsiteUrl.isEmpty() &&
                     event->pos().y() > (rect.bottom() - fm.height()) &&
                     event->pos().x() > (rect.right() - fm.width( mWebsiteUrl.host() ) - s_arrowWidth) ) {
+            // link clicked
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
+        }
+    } else if ( event->button() == Qt::MidButton ) {
+        if ( !mFullViewWidget->isVisible() ) {
+            mFullViewWidget->setImage( mImage );
+            mFullViewWidget->adaptPosition( mapToScene( 0, 0 ).toPoint() );
+            mFullViewWidget->show();
         }
     }
 
     event->ignore();
+}
+
+void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
+{
+    mFullViewWidget->hide();
+
+    Applet::mouseReleaseEvent( event );
 }
 
 void ComicApplet::updateSize()
