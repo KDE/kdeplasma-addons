@@ -21,11 +21,15 @@
 #include "comic.h"
 
 #include <QtCore/QTimer>
+#include <QtGui/QAction>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
 #include <KConfigDialog>
+#include <KFileDialog>
+#include <KIO/NetAccess>
 #include <KRun>
+#include <KTemporaryFile>
 
 #include <plasma/theme.h>
 
@@ -62,6 +66,10 @@ void ComicApplet::init()
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
 
     updateButtons();
+
+    QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
+    mActions.append( action );
+    connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
 }
 
 ComicApplet::~ComicApplet()
@@ -235,6 +243,11 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->restore();
 }
 
+QList<QAction*> ComicApplet::contextualActions()
+{
+    return mActions;
+}
+
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
     Plasma::DataEngine *engine = dataEngine( "comic" );
@@ -262,6 +275,25 @@ void ComicApplet::updateButtons()
         mShowPreviousButton = false;
     else
         mShowPreviousButton = true;
+}
+
+void ComicApplet::slotSaveComicAs()
+{
+    KTemporaryFile tempFile;
+
+    if ( !tempFile.open() )
+        return;
+
+    // save image to temporary file
+    mImage.save( tempFile.fileName(), "PNG" );
+
+    KUrl srcUrl( tempFile.fileName() );
+
+    KUrl destUrl = KFileDialog::getSaveUrl( KUrl(), "*.png" );
+    if ( !destUrl.isValid() )
+        return;
+
+    KIO::NetAccess::file_copy( srcUrl, destUrl );
 }
 
 #include "comic.moc"

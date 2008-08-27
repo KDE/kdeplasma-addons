@@ -40,8 +40,9 @@ class ComicApplet : public Plasma::Applet
         ComicApplet( QObject *parent, const QVariantList &args );
         ~ComicApplet();
 
-        void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
         void init();
+        void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
+        virtual QList<QAction*> contextualActions();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
@@ -50,6 +51,7 @@ class ComicApplet : public Plasma::Applet
     private Q_SLOTS:
         void slotNextDay();
         void slotPreviousDay();
+        void slotSaveComicAs();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
@@ -77,6 +79,7 @@ class ComicApplet : public Plasma::Applet
         bool mShowNextButton;
         bool mShowComicUrl;
         QTimer *mDateChangedTimer;
+        QList<QAction*> mActions;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)
