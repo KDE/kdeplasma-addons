@@ -38,6 +38,9 @@ Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
 Comment=Time displayed in a less precise format
+Comment[et]=Aja näitamine mitte nii täpsel kujul
+Comment[nds]=Tiet, wiest in en nich so akraat Formaat
+Comment[zh_TW]=以較不精確的方式顯示時間
 
 Icon=chronometer
 Type=Service

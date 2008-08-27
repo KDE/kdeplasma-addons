@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Blue Marble
+Name[et]=Sinine Marble
+Name[nds]=Blaag Planet
 Comment=3D model of the Earth
+Comment[et]=Maa ruumiline mudel
+Comment[ga]=Samhail 3T den Domhan
+Comment[nds]=3D-Modell vun de Eer
+Comment[zh_TW]=地球的立體模型
 Icon=world
 Type=Service
 

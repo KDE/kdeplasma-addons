@@ -1,6 +1,13 @@
 [Desktop Entry]
 Name=Konsole Profiles
+Name[et]=Konsooli profiilid
+Name[ga]=Próifílí Konsole
+Name[nds]=Konsole-Profilen
+Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
+Comment[et]=Konsooli profiilide näitamine ja käivitamine
+Comment[nds]=Konsole-Profilen oplisten un opropen
+Comment[zh_TW]=列出並啟動 Konsole 設定檔
 Type=Service
 Icon=utilities-terminal
 X-KDE-ServiceTypes=Plasma/Applet
