@@ -23,19 +23,59 @@
 #define NOTES_HEADER
 
 #include <QTimer>
+#include <KTextEdit>
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
+#include <Plasma/TextEdit>
 
 #include "ui_config.h"
 
 class QGraphicsLinearLayout;
 class QSizeF;
+class QContextMenuEvent;
+class QGraphicsWidget;
 
 namespace Plasma
 {
     class TextEdit;
 }
+
+/**
+ * @short Notes Version von KTextEdit
+ *
+ * This is just a little subclass of KTextEdit which provides a customized context menu and the ability to save its content into a file
+ *
+ * @see QTextEdit
+ * @author Björn Ruberg <bjoern@ruberg-wegener.de>
+ */
+class NotesTextEdit : public KTextEdit {
+    Q_OBJECT
+
+    public:
+	NotesTextEdit(QWidget *parent = 0);
+	~NotesTextEdit();
+	virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
+
+    public slots:
+	virtual void saveToFile();
+};
+
+/**
+ * @short Notes Version von KTextEdit
+ *
+ * This is a Plasma::TextEdit which uses NotesTextEdit as native widget
+ *
+ * @see QTextEdit
+ * @author Björn Ruberg <bjoern@ruberg-wegener.de>
+ */
+class PlasmaTextEdit : public Plasma::TextEdit {
+    Q_OBJECT
+
+    public:
+      PlasmaTextEdit(QGraphicsWidget *parent = 0);
+      ~PlasmaTextEdit();
+};
 
 class Notes : public Plasma::Applet
 {

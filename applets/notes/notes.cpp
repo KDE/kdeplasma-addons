@@ -23,20 +23,86 @@
 #include <QFile>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
+#include <QMenu>
+#include <QScrollBar>
 #include <QTextStream>
 
+#include <KAction>
+#include <KFileDialog>
+#include <KMessageBox>
 #include <KGlobalSettings>
 #include <KConfigDialog>
 #include <KConfigGroup>
+#include <KStandardAction>
 #include <KTextEdit>
 
 #include <Plasma/TextEdit>
+NotesTextEdit::NotesTextEdit( QWidget *parent ): KTextEdit( parent )
+{
+}
+
+NotesTextEdit::~NotesTextEdit()
+{
+}
+
+/**
+ * Customize the context menu
+ */
+void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
+{
+    QMenu *popup = mousePopupMenu();
+    popup->addSeparator();
+    popup->addAction(KStandardAction::saveAs(this, SLOT(saveToFile()), this));
+    popup->exec(event->globalPos());
+    delete popup;
+}
+
+/**
+ * Use notesTextEdit as native widget instead of KTextEdit
+ */
+PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
+    : Plasma::TextEdit(parent)
+{
+    QWidget *w = nativeWidget();
+    NotesTextEdit* native = new NotesTextEdit;
+    connect(native, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
+    setWidget(native);
+    delete w;
+    native->setAttribute(Qt::WA_NoSystemBackground);
+}
+
+PlasmaTextEdit::~PlasmaTextEdit()
+{
+}
+
+/**
+ * Save content to file
+ */
+void NotesTextEdit::saveToFile()
+{
+    QString fileName = KFileDialog::getSaveFileName();
+
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    QFile file(fileName);
+    
+    if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
+        KMessageBox::information(this, file.errorString(), i18n("Unable to open file"));
+        return;
+    }
+    
+    QTextStream out(&file);
+    out << toPlainText();
+    file.close();
+}
 
 Notes::Notes(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
-    , m_notes_theme(this)
-    , m_layout(0)
-    , m_textEdit(0)
+    : Plasma::Applet(parent, args),
+      m_notes_theme(this),
+      m_layout(0),
+      m_textEdit(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
@@ -47,7 +113,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
     resize(256, 256);
 
-    m_textEdit = new Plasma::TextEdit(this);
+    m_textEdit = new PlasmaTextEdit(this);
     m_textEdit->setMinimumSize(QSize(0, 0));
     m_layout = new QGraphicsLinearLayout(this);
     m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
@@ -71,7 +137,6 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
 Notes::~Notes()
 {
-    //FIXME is it really ok to save from here?
     saveNote();
     delete m_textEdit;
 }
@@ -104,6 +169,11 @@ void Notes::init()
     QString text = cg.readEntry("autoSave", QString());
     if (!text.isEmpty()) {
         m_textEdit->nativeWidget()->setPlainText(text);
+    }
+
+    int scrollValue = cg.readEntry("scrollValue").toInt();
+    if (scrollValue) {
+        m_textEdit->nativeWidget()->verticalScrollBar()->setValue(scrollValue);
     }
 
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
@@ -156,6 +226,7 @@ void Notes::saveNote()
 {
     KConfigGroup cg = config();
     cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toPlainText());
+    cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
     //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
 }
