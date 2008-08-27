@@ -108,6 +108,7 @@ void KonsoleProfilesApplet::initSessionFiles()
         }
 
     }
+    m_konsoleModel->sort( 0 );
 }
 
 void KonsoleProfilesApplet::slotOnItemClicked(const QModelIndex &index)
