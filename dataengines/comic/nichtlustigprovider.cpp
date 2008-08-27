@@ -123,7 +123,6 @@ void NichtLustigProvider::pageRetrieved( int id, const QByteArray &rawData )
                 return;
             }
 
-            QString sub = exp.cap( 1 );
             url = KUrl( QString( "http://nicht-lustig.de/comics/full/%1.jpg" )
                                 .arg( d->mUsedDate.toString( "yyMMdd" ) ) );
         }

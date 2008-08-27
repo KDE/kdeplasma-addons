@@ -43,12 +43,6 @@ class CadProvider : public ComicProvider
         ~CadProvider();
 
         /**
-         * Sets the Http to the Website of the comic (either a concrete
-         * date exluding the currentDate or a generic Url)
-         */
-        void setWebsiteHttp();
-
-        /**
          * Returns the identifier type.
          */
         IdentifierType identifierType() const;

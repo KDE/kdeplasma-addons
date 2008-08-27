@@ -52,14 +52,9 @@ class CadProvider::Private
 CadProvider::CadProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
-
-    setWebsiteHttp();
-}
-
-void CadProvider::setWebsiteHttp()
-{
     KUrl url( QString( "http://cad-comic.com/" ) );
+
+    d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
 
     if ( d->mFindNewDate )
         url.setPath( QString( "/comic.php" ) );
@@ -111,25 +106,21 @@ void CadProvider::pageRetrieved( int id, const QByteArray &rawData )
     if ( id == Private::PageRequest ) {
         const QString data = QString::fromUtf8( rawData );
         const QString patternDate( "(((19|20)\\d\\d)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))" );
-        QRegExp exp( "(" + patternDate + "\\.jpg)");
-        const int pos = exp.indexIn( data );
+
+        QRegExp expDate( "(" + patternDate + "\\.jpg)" );
+        const int posDate = expDate.indexIn( data );
 
         KUrl url;
 
-        if ( pos > -1 ) {
+        if ( posDate > -1 ) {
             if ( d->mFindNewDate ) {
-                d->mUsedDate =  QDate::fromString( exp.cap( 2 ), "yyyyMMdd" );
+                d->mUsedDate =  QDate::fromString( expDate.cap( 2 ), "yyyyMMdd" );
                 d->mFindNewDate = false;
-                setWebsiteHttp();
-                return;
             }
 
-            QString sub = exp.cap( 1 );
             url = KUrl( QString( "http://cad-comic.com/comics/%1.jpg" )
                                 .arg( d->mUsedDate.toString( "yyyyMMdd" ) ) );
-        } else
-            url = KUrl( QString( "http://cad-comic.com/comics/20080704.jpg" ) );
-
+        }
 
         QRegExp expPrev( "/comic\\.php\\?d=" + patternDate + "\"><img src=\"/_common/images/comicnav/back1\\.jpg" );
         const int posPrev = expPrev.indexIn( data );
