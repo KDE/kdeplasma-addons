@@ -104,6 +104,7 @@ void KonqProfilesApplet::initSessionFiles()
         }
 
     }
+    m_konqModel->sort( 0 );
 }
 
 void KonqProfilesApplet::slotOnItemClicked(const QModelIndex &index)
