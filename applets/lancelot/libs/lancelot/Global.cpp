@@ -237,16 +237,6 @@ public:
 
     ~Private()
     {
-        Widget * widget;
-        while (!widgets.empty()) {
-            widget = widgets.takeFirst();
-            delete widget;
-        }
-        foreach (WidgetGroup * group, groups) {
-            delete group;
-        }
-        delete confMain;
-        delete confTheme;
     }
 
     static bool hasApplication;
@@ -343,6 +333,17 @@ Instance::Instance()
 
 Instance::~Instance()
 {
+    Widget * widget;
+    while (!d->widgets.empty()) {
+        widget = d->widgets.takeFirst();
+        delete widget;
+    }
+    foreach (WidgetGroup * group, d->groups) {
+        delete group;
+    }
+    delete d->confMain;
+    delete d->confTheme;
+ 
     delete d;
 }
 
