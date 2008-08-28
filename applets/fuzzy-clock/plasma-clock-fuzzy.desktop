@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Fuzzy Clock
 Name[ca]=Rellotge aproximat
+Name[cs]=Nejasné hodiny
 Name[da]=Upræcist ur
 Name[de]=Umgangssprachliche Uhr
 Name[el]=Ασαφές ρολόι
@@ -38,6 +39,7 @@ Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
 Comment=Time displayed in a less precise format
+Comment[cs]=Zobrazení času v nejasném formátu
 Comment[et]=Aja näitamine mitte nii täpsel kujul
 Comment[nds]=Tiet, wiest in en nich so akraat Formaat
 Comment[zh_TW]=以較不精確的方式顯示時間

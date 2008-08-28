@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Show Desktop
 Name[ca]=Mostra l'escriptori
+Name[cs]=Zobrazit plochu
 Name[da]=Vis desktop
 Name[de]=Arbeitsfläche anzeigen
 Name[el]=Εμφάνιση επιφάνειας εργασίας
@@ -33,6 +34,7 @@ Name[x-test]=xxShow Desktopxx
 Name[zh_CN]=显示桌面
 Name[zh_TW]=顯示桌面
 Comment=Show the Plasma desktop
+Comment[cs]=Zobrazení plochy Plasmy
 Comment[et]=Plasma töölaua näitamine
 Comment[ga]=Taispeáin an deasc Plasma
 Comment[nds]=Den Plasma-Schriefdisch wiesen

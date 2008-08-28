@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Calendar
+Name[cs]=Kalendář
 Name[es]=Calendario
 Name[et]=Kalender
 Name[ga]=Féilire
@@ -16,6 +17,7 @@ Name[tr]=Takvim
 Name[uk]=Календар
 Name[zh_TW]=行事曆
 Comment=View and pick dates from the calendar
+Comment[cs]=Zobrazení a výběr dat z kalendáře
 Comment[et]=Kalendri näitamine ja kuupäevade valimine
 Comment[ga]=Amharc ar agus roghnaigh dátaí ón fhéilire
 Comment[nds]=Daten binnen den Kalenner ankieken un utsöken

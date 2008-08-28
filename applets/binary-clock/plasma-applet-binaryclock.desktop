@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Binary Clock
 Name[ca]=Rellotge binari
+Name[cs]=Binární hodiny
 Name[da]=Binært ur
 Name[de]=Binäruhr
 Name[el]=Δυαδικό ρολόι
@@ -36,6 +37,7 @@ Name[x-test]=xxBinary Clockxx
 Name[zh_CN]=二进制时钟
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in binary format
+Comment[cs]=Zobrazení času v binárním formátu
 Comment[et]=Aja näitamine binaarkujul
 Comment[ga]=An t-am i bhformáid dhénártha
 Comment[nds]=Tiet in Bineerformaat wiest

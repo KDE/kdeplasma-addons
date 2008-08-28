@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Webbrowser History
+Name[cs]=Historie prohlížeče
 Name[es]=Historial del navegador web
 Name[et]=Veebibrauseri ajalugu
 Name[ga]=Stair Bhrabhsála
@@ -13,6 +14,7 @@ Name[sv]=Webbläsningshistorik
 Name[uk]=Історія переглядача Тенет
 Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
+Comment[cs]=Vyhledávání v historii prohlížeče Konqueror
 Comment[es]=Busca en el historial de Konqueror
 Comment[et]=Otsing Konquerori ajaloos
 Comment[ga]=Cuardaigh i stair Konqueror

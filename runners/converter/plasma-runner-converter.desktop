@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Unit Converter
 Name[ca]=Conversor d'unitats
+Name[cs]=Převod jednotek
 Name[da]=Enhedskonvertering
 Name[de]=Einheiten-Umwandler
 Name[el]=Μετατροπέας μονάδων
@@ -33,6 +34,7 @@ Name[zh_CN]=单位转换器
 Name[zh_TW]=單位轉換器
 Comment=Convert values to different units
 Comment[ca]=Converteix valors a diferents unitats
+Comment[cs]=Převod jednotek
 Comment[da]=Konvertér værdier til andre enheder
 Comment[de]=Rechnet Werte in verschiedene Einheiten um
 Comment[el]=Μετατρέπει τιμές σε διάφορες μονάδες

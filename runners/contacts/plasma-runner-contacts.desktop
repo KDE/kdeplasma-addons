@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Contacts
 Name[ca]=Contactes
+Name[cs]=Kontakty
 Name[da]=Kontakter
 Name[de]=Kontakte
 Name[el]=Επαφές
@@ -33,6 +34,7 @@ Name[zh_CN]=联系人
 Name[zh_TW]=聯絡人
 Comment=Finds entries in your address book
 Comment[ca]=Cerca entrades a la llibreta d'adreces
+Comment[cs]=Vyhledávání položek v adresáři
 Comment[da]=Find indgange i din adressebog
 Comment[de]=Findet Einträge in Ihrem Adressbuch
 Comment[el]=Αναζητά καταχωρήσεις στο βιβλίο διευθύνσεών σας

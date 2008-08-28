@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Comic Data Engine
 Name[ca]=Motor de dades de còmics
+Name[cs]=Komiksová datová část
 Name[csb]=Mòtór pòdôwków kòmiksów
 Name[da]=Datamotor til tegneserier
 Name[de]=Comic-Datentreiber
@@ -37,6 +38,7 @@ Name[zh_CN]=连环画数据引擎
 Name[zh_TW]=漫畫資料引擎
 Comment=Data Engine for comic strips
 Comment[ca]=Motor de dades per a tires còmiques
+Comment[cs]=Datová část pro komiksové proužky
 Comment[csb]=Mòtór pòdôwków dlô kòmiksowëch sztripków
 Comment[da]=Datamotor til tegneseriestriber
 Comment[de]=Datentreiber für Comic-Strips

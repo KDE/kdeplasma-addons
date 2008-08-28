@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[cs]=Zobrazit přístrojovou desku
 Name[es]=Mostrar componente de cuadro de mandos
 Name[et]=Vidinate Dashboardi näitamine
 Name[ga]=Taispeáin Painéal na nGiuirléidí
@@ -14,6 +15,7 @@ Name[tr]=Programcık Kontrol Panelini Göster
 Name[uk]=Показати панель приладів віджета
 Name[zh_TW]=顯示元件儀表板
 Comment=Show the Plasma widget dashboard above other windows
+Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
 Comment[et]=Plasma vidinate dashboardi näitamine teiste akende kohal
 Comment[ga]=Taispeáin painéal na ngiuirléidí Plasma os cionn na bhfuinneog eile
 Comment[nds]=Dat Lüttprogramm-Klockpaneel vöran Dien anner Finstern wiesen

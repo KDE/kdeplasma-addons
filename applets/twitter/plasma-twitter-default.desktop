@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Twitter Microblogging
 Name[ca]=Twitter microblogging
+Name[cs]=Twitter mikroblogování
 Name[csb]=Mikrobloggòwanié Twitter
 Name[da]=Twitter mikroblogging
 Name[el]=Μικροϊστολόγιο Twitter
@@ -28,6 +29,7 @@ Name[uk]=Міні-журнал Twitter
 Name[x-test]=xxTwitter Microbloggingxx
 Name[zh_CN]=Twitter 微博客
 Comment=Update your Twitter status and display your timeline.
+Comment[cs]=Umožní aktualizaci stavu v síti Twitter a zobrazí historii.
 Comment[et]=Võimaldab uuendada oma Twitteri olekut ja vaadata ajatelge.
 Comment[ga]=Nuashonrú do stádas Twitter agus taispeáin do líne ama.
 Comment[nds]=Den Twitter-Status opfrischen un de Tietlien wiesen.

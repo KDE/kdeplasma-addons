@@ -38,6 +38,7 @@ Name[x-test]=xxFile Watcherxx
 Name[zh_CN]=文件观察器
 Name[zh_TW]=檔案監看器
 Comment=Watch for changes in specified files
+Comment[cs]=Sledování změn v zadaných souborech
 Comment[et]=Määratud failide muutuste jälgimine
 Comment[nds]=Angeven Dateien op Ännern beluern
 Comment[zh_TW]=監看指定檔案的變化

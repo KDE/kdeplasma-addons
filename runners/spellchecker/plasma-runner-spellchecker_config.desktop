@@ -7,3 +7,6 @@ X-KDE-ParentComponents=krunner_spellcheck
 X-KDE-PluginKeyword=kcm_krunner_spellcheck
 
 Name=Spell Checker Runner
+Name[cs]=Kontrola pravopisu
+Name[nds]=Schriefwiesprööv-Dreger
+Name[zh_TW]=拼字檢查執行器

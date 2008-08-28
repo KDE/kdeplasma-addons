@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Konsole Profiles
+Name[cs]=Profily Konsole
 Name[et]=Konsooli profiilid
 Name[ga]=Próifílí Konsole
 Name[nds]=Konsole-Profilen
 Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
+Comment[cs]=Seznam a spouštění profilů Konsole
 Comment[et]=Konsooli profiilide näitamine ja käivitamine
 Comment[nds]=Konsole-Profilen oplisten un opropen
 Comment[zh_TW]=列出並啟動 Konsole 設定檔

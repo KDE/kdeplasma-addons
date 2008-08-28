@@ -7,4 +7,10 @@ X-KDE-PlasmaComicProvider-Identifier=unshelved
 Icon=plasma_comic_unshelved
 
 Name=Unshelved Comics
+Name[cs]=Nezařazené
+Name[nds]=Comics, de dat nich bi'n Koopmann gifft
+Name[zh_TW]=Unshelved 漫畫
 Comment=Unshelved Comics
+Comment[cs]=Nezařazené
+Comment[nds]=Comics, de dat nich bi'n Koopmann gifft
+Comment[zh_TW]=Unshelved 漫畫

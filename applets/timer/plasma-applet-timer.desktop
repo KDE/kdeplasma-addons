@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[cs]=Stopky
 Name[es]=Cronómetro
 Name[et]=Taimer
 Name[ga]=Uaineadóir
@@ -16,6 +17,7 @@ Name[tr]=Zamanlayıcı
 Name[uk]=Таймер
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
+Comment[cs]=Odpočítávání událostí
 Comment[et]=Määratud ajavahemiku mõõtmine
 Comment[nds]=De Tiet över en angeven Tiet daaltellen
 Comment[zh_TW]=倒數計時
