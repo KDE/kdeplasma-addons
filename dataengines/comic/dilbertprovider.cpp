@@ -93,7 +93,7 @@ void DilbertProvider::Private::imageRequestFinished( bool error )
 DilbertProvider::DilbertProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
-    KUrl url( QString( "http://dilbert.com/strips/comic/%1/" )
+    KUrl url( QString( "http://dilbert.com/fast/%1/" )
                 .arg( requestedDate().toString( "yyyy-MM-dd" ) ) );
 
     QHttpRequestHeader header( "GET", url.path() );
