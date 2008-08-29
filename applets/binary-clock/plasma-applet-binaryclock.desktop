@@ -41,6 +41,7 @@ Comment[cs]=Zobrazení času v binárním formátu
 Comment[et]=Aja näitamine binaarkujul
 Comment[ga]=An t-am i bhformáid dhénártha
 Comment[nds]=Tiet in Bineerformaat wiest
+Comment[uk]=Час, показаний у двійковому форматі
 Comment[zh_TW]=以二進位格式顯示時間
 Icon=chronometer
 Type=Service

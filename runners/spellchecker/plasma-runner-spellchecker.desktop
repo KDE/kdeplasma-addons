@@ -2,10 +2,12 @@
 Name=Spell Checker Runner
 Name[cs]=Kontrola pravopisu
 Name[nds]=Schriefwiesprööv-Dreger
+Name[uk]=Виконання перевірки правопису
 Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
 Comment[cs]=Kontrola pravopisu
 Comment[nds]=De Schriefwies vun en Woort pröven
+Comment[uk]=Перевірте правопис слова
 Comment[zh_TW]=檢查拼字
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service

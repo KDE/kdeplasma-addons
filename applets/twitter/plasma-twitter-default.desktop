@@ -33,6 +33,7 @@ Comment[cs]=Umožní aktualizaci stavu v síti Twitter a zobrazí historii.
 Comment[et]=Võimaldab uuendada oma Twitteri olekut ja vaadata ajatelge.
 Comment[ga]=Nuashonrú do stádas Twitter agus taispeáin do líne ama.
 Comment[nds]=Den Twitter-Status opfrischen un de Tietlien wiesen.
+Comment[uk]=Оновіть ваш стан Twitter і перегляньте ваш графік.
 Comment[zh_TW]=讓您更新您的 Twitter 狀態與顯示您的時間線。
 Type=Service
 ServiceTypes=Plasma/Applet

@@ -19,6 +19,7 @@ Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
 Comment[et]=Plasma vidinate dashboardi näitamine teiste akende kohal
 Comment[ga]=Taispeáin painéal na ngiuirléidí Plasma os cionn na bhfuinneog eile
 Comment[nds]=Dat Lüttprogramm-Klockpaneel vöran Dien anner Finstern wiesen
+Comment[uk]=Показує панель приладів Плазми над іншими вікнами після клацання
 Comment[zh_TW]=在其它的視窗上方顯示元件儀表板
 Icon=dashboard-show
 Type=Service
