@@ -149,6 +149,7 @@ public:
     L_Override virtual void setGeometry(const QRectF & geometry);
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
+    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
 public Q_SLOTS:
     /**

@@ -654,6 +654,37 @@ QSizeF ScrollBar::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     return result;
 }
 
+void ScrollBar::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (event->button() == Qt::MidButton) {
+
+        int position = (d->orientation == Qt::Horizontal) ?
+            (event->pos().x()) : (event->pos().y());
+
+        int minPos = (d->orientation == Qt::Horizontal) ?
+            (d->upButton->size().width() + d->handleSlideSize / 2) :
+            (d->upButton->size().height() + d->handleSlideSize / 2);
+
+        int maxPos = (d->orientation == Qt::Horizontal) ?
+            (size().width() - d->downButton->size().width() - d->handleSlideSize / 2) :
+            (size().height() - d->downButton->size().height() - d->handleSlideSize / 2);
+
+        if (position > maxPos) {
+            position = maxPos;
+        } else if (position < minPos) {
+            position = minPos;
+        }
+
+        setValue(
+                d->minimum +
+                ((position - minPos) / (qreal) (maxPos - minPos)) *
+                (d->maximum - d->minimum)
+                );
+        event->accept();
+    }
+    Widget::mouseMoveEvent(event);
+}
+
 } // namespace Lancelot
 
 // #include "ScrollBar.moc"
