@@ -41,8 +41,47 @@ public:
             d->setItemSizeHints();
         }
 
-    private:
+    protected:
         ScrollBar::Private * d;
+    };
+
+    class ScrollBarHandle: public ScrollBarItem {
+    public:
+        ScrollBarHandle(QGraphicsItem * parent, ScrollBar::Private * parentd)
+            : ScrollBarItem(parent, parentd)
+        {
+        }
+
+    protected:
+        // L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * e)
+        // {
+        //     kDebug();
+        //     ScrollBarItem::mousePressEvent(e);
+        // }
+
+        L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * e)
+        {
+            ScrollBarItem::mouseMoveEvent(e);
+            QPointF orig = e->buttonDownPos(Qt::LeftButton);
+            kDebug() << orig << e->pos();
+            if (orig.isNull()) {
+                return;
+            }
+
+            orig = e->pos() - orig;
+            d->handleMoved(
+                (d->orientation == Qt::Horizontal)?(orig.x()):(orig.y())
+            );
+        }
+
+        // L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * e)
+        // {
+        //     kDebug();
+        //     ScrollBarItem::mouseReleaseEvent(e);
+        // }
+
+    private:
+
     };
 
     Private(ScrollBar * parent)
@@ -52,6 +91,7 @@ public:
         viewSize(10),
         stepSize(5),
         pageSize(10),
+        handleSlideSize(0),
         orientation(Qt::Vertical),
         activationMethod(ExtenderActivate),
         validating(false),
@@ -61,7 +101,7 @@ public:
         downButton = new ScrollBarItem(parent, this);
         upBar      = new ScrollBarItem(parent, this);
         downBar    = new ScrollBarItem(parent, this);
-        handle     = new ScrollBarItem(parent, this);
+        handle     = new ScrollBarHandle(parent, this);
 
         connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
         connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
@@ -222,6 +262,13 @@ public:
         kDebug() << preferredSize;
     }
 
+    void handleMoved(int ammount)
+    {
+        q->setValue(value + (ammount / (qreal)handleSlideSize)
+                * (maximum - minimum)
+                );
+    }
+
     void positionScroll()
     {
         QRectF geometry = orientateRect(q->geometry());
@@ -256,6 +303,7 @@ public:
         }
 
         diff = geometry.height() - handleSize;
+        handleSlideSize = diff;
 
         QRectF itemRect = geometry;
 
@@ -283,6 +331,7 @@ public:
     int viewSize;
     int stepSize;
     int pageSize;
+    int handleSlideSize;
     QSizeF preferredSize;
 
     Qt::Orientation orientation;
@@ -455,6 +504,15 @@ void ScrollBar::setOrientation(Qt::Orientation value)
 Qt::Orientation ScrollBar::orientation() const
 {
     return d->orientation;
+}
+
+void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
+{
+    if (event->delta() < 0) {
+        pageIncrease();
+    } else {
+        pageDecrease();
+    }
 }
 
 void ScrollBar::setGeometry(const QRectF & g)
