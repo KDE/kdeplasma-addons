@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-Library=plasma_comic_boondocksprovider
+X-KDE-PlasmaComicProvider-SuffixType=Date
+X-KDE-PlasmaComicProvider-Identifier=boondocks
+Icon=plasma_comic_boondocks
+
+Name=The Boondocks
+Comment=The Boondocks
