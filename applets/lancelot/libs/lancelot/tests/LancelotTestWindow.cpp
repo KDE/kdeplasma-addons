@@ -24,6 +24,8 @@
 #include <QGraphicsView>
 #include <QStyleOptionGraphicsItem>
 #include <KDebug>
+#include <KLineEdit>
+#include <Plasma/LineEdit>
 
 #include "../widgets/Widget.h"
 #include "../widgets/ExtenderButton.h"
@@ -50,74 +52,39 @@ LancelotTestWindow::LancelotTestWindow()
     instance = new Instance();
 
     // Test area - begin ####################################
-    Lancelot::FlipLayout < Lancelot::FullBorderLayout > * mainLayout;
-    mainLayout = new Lancelot::FlipLayout < Lancelot::FullBorderLayout >();
-    //mainLayout->setFlip(Plasma::HorizontalFlip);
+    QGraphicsWidget * m_root = new QGraphicsWidget();
+    Lancelot::FullBorderLayout * m_layout = new Lancelot::FullBorderLayout();
+    m_root->setLayout(m_layout);
+    m_root->setGeometry(QRectF(0, 0, 400, 400));
+    m_corona->addItem(m_root);
 
-    Lancelot::ExtenderButton * button;
+    Lancelot::ExtenderButton * eb = new Lancelot::ExtenderButton(m_root);
+    m_layout->addItem(eb, Lancelot::FullBorderLayout::Center);
 
-    button = new Lancelot::ExtenderButton("TL");
-    button->setGroupByName("SystemButtons");
-    button->setCheckable(true);
-    mainLayout->addItem(button, Lancelot::FullBorderLayout::TopLeft);
-    m_corona->addItem(button);
+    Lancelot::ScrollBar * sbH = new Lancelot::ScrollBar(m_root);
+    sbH->setMinimum(100);
+    sbH->setMaximum(200);
+    sbH->setViewSize(40);
+    sbH->setValue(30);
+    sbH->setOrientation(Qt::Horizontal);
+    m_layout->addItem(sbH, Lancelot::FullBorderLayout::Top);
 
-    button = new Lancelot::ExtenderButton("BR");
-    button->setGroupByName("SystemButtons");
-    button->setCheckable(true);
-    button->setChecked(true);
-    //mainLayout->addItem(button /*, Lancelot::FullBorderLayout::BottomRight */);
-    m_corona->addItem(button);
+    Lancelot::ScrollBar * sbV = new Lancelot::ScrollBar(m_root);
+    sbV->setMinimum(100);
+    sbV->setMaximum(200);
+    sbV->setViewSize(40);
+    sbV->setValue(30);
+    sbV->setOrientation(Qt::Horizontal);
+    sbV->setOrientation(Qt::Vertical);
+    m_layout->addItem(sbV, Lancelot::FullBorderLayout::Right);
 
-    /*
-    Lancelot::NodeLayout * centerLayout;
-    centerLayout = new Lancelot::NodeLayout();
-    mainLayout->addItem(centerLayout, Lancelot::FullBorderLayout::Center);
-
-    button = new Lancelot::ExtenderButton("ND1");
-    button->setGroupByName("SystemButtons");
-    centerLayout->addItem(button,
-            Lancelot::NodeLayout::NodeCoordinate(),
-            Lancelot::NodeLayout::NodeCoordinate(0.5, 0.5)
-            );
-    m_corona->addItem(button);
-
-    button = new Lancelot::ExtenderButton("ND2");
-    button->setGroupByName("SystemButtons");
-    centerLayout->addItem(button,
-            Lancelot::NodeLayout::NodeCoordinate(0.5, 0.5),
-            Lancelot::NodeLayout::NodeCoordinate(1, 1)
-            );
-    m_corona->addItem(button);
-    */
-
-    Lancelot::ScrollBar * sb = new Lancelot::ScrollBar();
-    m_corona->addItem(sb);
-    sb->setMinimum(100);
-    sb->setMaximum(200);
-    sb->setViewSize(40);
-    sb->setValue(30);
-    // sb->setGeometry(QRectF(0, 0, 26, 200));
-    mainLayout->addItem(sb, Lancelot::FullBorderLayout::Right);
-
-    QTimeLine * timeLine = new QTimeLine(5000, this);
-    timeLine->setFrameRange(100, 300);
-    connect(timeLine, SIGNAL(frameChanged(int)), sb, SLOT(setValue(int)));
-    timeLine->setLoopCount(0);
-
-/*
-    Lancelot::ScrollPane * scrollpane;
-    scrollpane = new Lancelot::ScrollPane();
-    mainLayout->addItem(scrollpane);
-    m_corona->addItem(scrollpane);*/
+    Plasma::LineEdit * le = new Plasma::LineEdit(m_root);
+    m_layout->addItem(le, Lancelot::FullBorderLayout::Bottom);
 
     // Test area - end   ####################################
 
     // Starting...
-    mainLayout->setGeometry(QRectF(8, 8, 400, 300));
-    mainLayout->setGeometry(QRectF(8, 8, 400, 300));
     instance->activateAll();
-
 }
 
 LancelotTestWindow::~LancelotTestWindow()

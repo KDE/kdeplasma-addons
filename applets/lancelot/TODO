@@ -1,33 +1,51 @@
+difficulty
 e - easy
 m - medium
 a - advanced
 h - hard
 
+priority:
+l - low
+m - medium
+h - high
+
+Format:
+TODO: <id> <priority> (<difficulty>)
+
 Menu:
-TODO: (m) Themes and configuration for resize borders
-TODO: (m) Resize to work ... better
-TODO: (a) Finish PassagewayView (clicking, categories)
-TODO: (a) Keyboard: Keyboard navigation
-TODO: (a) Contacts section
-TODO: (m) Search history
-TODO: (m) Switch menu instead of searching for SESSIONS
-TODO: (m) Switch to new lists
-TODO: (a) Speed up
-TODO: (a) Configuration
-TODO: (e) Switch 'Log out' <-> 'Switch user' (should I?)
+TODO: M01 l (m) Themes and configuration for resize borders
+TODO: M02 l (m) Resize to work ... better
+TODO: M04 h (a) Keyboard: Keyboard navigation (depends on M08)
+TODO: M06 m (m) Search history
+TODO: M07 m (m) Switch menu instead of searching for SESSIONS (depends on L07)
+TODO: M08 h (m) Switch to new lists (depends on L06)
+TODO: M09   (a) Speed up
+TODO: M12 m (a) switch list models to DataEngines and Services (depends on L08)
+TODO: M13 h (m) plug-ins for contacts (maybe more?) (depends on M12)
+TODO: M15 m (m) Reorder the favourites (depends L06)
+TODO: M14   (e) Return PassagewayView to start on menu show
 
 Library:
-TODO: (e) check for memory leaks related to Private
-TODO: (a) switch groups to QMetaObject and properties
-TODO: (m) add margin features to layouts
-TODO: (m) add propper size hints to layouts and widgets
-TODO: (e) move the groups mechanism away from Widget
-          so that ordinary plasma widgets could be extended
-          when needed. Add groups support to HoverIcon
-TODO: (a) create new lists (scroll panes...)
-TODO: (a) add menu widget
+TODO: L01   (e) check for memory leaks related to Private
+TODO: L02 l (a) switch groups to QMetaObject and properties (post 1.0)
+TODO: L03 l (m) add margin features to layouts
+TODO: L04 l (m) add proper size hints to layouts and widgets
+TODO: L05 l (m) move the groups mechanism away from Widget
+             so that ordinary plasma widgets could be extended
+             when needed. Add groups support to HoverIcon
+TODO: L06 h (a) create new lists (scroll panes...) (post 1.0)
+TODO: L07 m (a) add menu widget
+TODO: L08 m (a) switch list models to DataEngines and Services (post 1.0)
 
 Launcher Applet:
+None
 
 Parts Applet:
-TODO: (h) Make it :)
+None
+
+Feature requests:
+ - width of categories section changeable - maybe
+ - places to load from dolphin - interesting, but problematic
+ - more descriptive descriptions (KDE3 vs KDE4) - not likely
+ - web history - page titles - interesting
+ - Switch 'Log out' <-> 'Switch user' - maybe

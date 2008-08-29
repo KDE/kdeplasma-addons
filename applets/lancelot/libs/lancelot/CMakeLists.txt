@@ -117,4 +117,4 @@ install(FILES
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 
 # tests
-# add_subdirectory(tests)
+add_subdirectory(tests)

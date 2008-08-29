@@ -126,6 +126,7 @@ public:
         setItemSizeHints();
 
         QRectF geometry = orientateRect(q->geometry());
+        kDebug() << geometry;
         geometry.moveTopLeft(QPointF(0, 0));
 
         QRectF itemRect = geometry;
@@ -218,6 +219,7 @@ public:
         UpdatePreferredSize();
 
         q->updateGeometry();
+        kDebug() << preferredSize;
     }
 
     void positionScroll()
@@ -317,6 +319,8 @@ ScrollBar::ScrollBar(QGraphicsItem * parent)
     // so the following method will not just exit,
     // but will set the necessary connections.
     setActivationMethod(HoverActivate);
+
+    L_WIDGET_SET_INITIALIZED;
 }
 
 ScrollBar::~ScrollBar()
@@ -433,6 +437,17 @@ void ScrollBar::setOrientation(Qt::Orientation value)
         return;
     }
     d->orientation = value;
+
+    if (value == Qt::Horizontal) {
+        d->upButton->setIconInSvg  (d->scrollbarIconLeft);
+        d->downButton->setIconInSvg(d->scrollbarIconRight);
+    } else {
+        d->upButton->setIconInSvg  (d->scrollbarIconUp);
+        d->downButton->setIconInSvg(d->scrollbarIconDown);
+    }
+    d->upButton->setIconSize(QSize(8, 8));
+    d->downButton->setIconSize(QSize(8, 8));
+
     setGroup(group());
     d->invalidate();
 }
@@ -442,14 +457,13 @@ Qt::Orientation ScrollBar::orientation() const
     return d->orientation;
 }
 
-void ScrollBar::setGeometry(qreal x, qreal y, qreal w, qreal h)
+void ScrollBar::setGeometry(const QRectF & g)
 {
-    setGeometry(QRectF(x, y, w, h));
-}
-
-void ScrollBar::setGeometry(const QRectF & geometry)
-{
-    Widget::setGeometry(geometry);
+    if ((g.width() == 0) || (g.height() == 0)) return ;
+    kDebug() << g;
+    kDebug() << geometry();
+    Widget::setGeometry(g);
+    kDebug() << Widget::geometry();
     d->invalidate();
 }
 
@@ -578,6 +592,7 @@ QSizeF ScrollBar::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     if (constraint != QSizeF(-1, -1)) {
         result = result.boundedTo(constraint);
     }
+    kDebug() << result;
     return result;
 }
 
