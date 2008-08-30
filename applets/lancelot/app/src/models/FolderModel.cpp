@@ -63,14 +63,8 @@ void FolderModel::newItems(const KFileItemList &items)
 {
     foreach (KFileItem item, items) {
         if (item.isDesktopFile()) {
-           addUrl(item.url());
+            addUrl(item.url());
         } else {
-            kDebug() <<
-                item.name() <<
-                item.mimeComment() <<
-                item.iconName() <<
-                item.url();
-
             add(
                 item.name(),
                 item.mimeComment(),

@@ -41,6 +41,53 @@
 
 using namespace Lancelot;
 
+class ScrollableWidget: public Lancelot::Widget, public Lancelot::Scrollable {
+public:
+    ScrollableWidget(QGraphicsItem * parent = 0)
+        : Lancelot::Widget(parent)
+    {
+        //
+    }
+
+    L_Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+    {
+        painter->fillRect(
+                QRectF(QPointF(-2, -2), size() + QSizeF(4, 4)),
+                QBrush(QColor(100, 100, 100))
+                );
+
+        painter->drawText(
+                QPointF(30, 50),
+                "Rect: " + QString::number(view.left()) +
+                ", " + QString::number(view.top()) +
+                ": " + QString::number(view.width()) +
+                " x " + QString::number(view.height()) +
+                ""
+                );
+    }
+
+    L_Override virtual QSizeF fullSize() const
+    {
+        return QSizeF(400, 400);
+    }
+
+    L_Override virtual void viewportChanged(QRectF viewport)
+    {
+        view = viewport;
+        update();
+    }
+
+    L_Override virtual qreal scrollUnit(Qt::Orientation direction)
+    {
+        Q_UNUSED(direction);
+        return 10;
+    }
+
+private:
+    QRectF view;
+};
+
 LancelotTestWindow::LancelotTestWindow()
     : QGraphicsView()
 {
@@ -77,6 +124,10 @@ LancelotTestWindow::LancelotTestWindow()
     sbV->setOrientation(Qt::Horizontal);
     sbV->setOrientation(Qt::Vertical);
     m_layout->addItem(sbV, Lancelot::FullBorderLayout::Right);
+
+    Lancelot::ScrollPane * sp = new Lancelot::ScrollPane(m_root);
+    m_layout->addItem(sp);
+    sp->setScrollableWidget(new ScrollableWidget(sp));
 
     Plasma::LineEdit * le = new Plasma::LineEdit(m_root);
     m_layout->addItem(le, Lancelot::FullBorderLayout::Bottom);

@@ -103,6 +103,9 @@ public:
         downBar    = new ScrollBarItem(parent, this);
         handle     = new ScrollBarHandle(parent, this);
 
+        upBar->setMinimumSize(QSizeF(0, 0));
+        downBar->setMinimumSize(QSizeF(0, 0));
+
         connect(upBar, SIGNAL(clicked()), parent, SLOT(pageDecrease()));
         connect(downBar, SIGNAL(clicked()), parent, SLOT(pageIncrease()));
 
@@ -206,7 +209,6 @@ public:
     // This macro sets the minimum and preferred sizes of a specified object.
     // The variable size needs to be declared QSizeF before invoking this macro
     #define SetSizes(object) \
-        object->setMinimumSize(size); \
         object->setPreferredSize(size);
 
     // This macro increases preferredSize according to preset size

@@ -117,6 +117,9 @@ bool BaseModel::addService(const KService::Ptr & service)
     QString genericName = service->genericName();
     QString appName = service->name();
 
+    kDebug() << service->icon();
+    kDebug() << genericName;
+    kDebug() << appName;
     add(
         genericName.isEmpty() ? appName : genericName,
         genericName.isEmpty() ? "" : appName,
@@ -145,6 +148,7 @@ bool BaseModel::addUrl(const QString & url)
 
 bool BaseModel::addUrl(const KUrl & url)
 {
+    kDebug() << url;
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
         // .desktop files may be services (type field == 'Application' or 'Service')
         // or they may be other types such as links.
@@ -152,12 +156,17 @@ bool BaseModel::addUrl(const KUrl & url)
         // first look in the KDE service database to see if this file is a service,
         // otherwise represent it as a generic .desktop file
 
-        if (addService(url.path())) {
+        KDesktopFile desktopFile(url.path());
+        kDebug() << "Is local desktop file" << desktopFile.readType();
+
+        if ((desktopFile.readType() == "Service" || desktopFile.readType() == "Application")
+                && addService(url.path())) {
             return true;
         }
 
-        KDesktopFile desktopFile(url.path());
         KUrl desktopUrl(desktopFile.readUrl());
+
+        kDebug() << desktopFile.readIcon();
 
         add(
             QFileInfo(url.path()).baseName(),

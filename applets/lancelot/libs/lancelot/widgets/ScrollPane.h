@@ -126,6 +126,13 @@ public:
      */
     virtual QSizeF currentViewportSize() const;
 
+public Q_SLOTS:
+    /**
+     * Call this slot when the scrollable widget updates
+     * its side
+     */
+    void scrollableWidgetSizeUpdated();
+
 private:
     class Private;
     Private * const d;

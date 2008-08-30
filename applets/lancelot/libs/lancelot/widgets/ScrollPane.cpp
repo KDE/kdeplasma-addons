@@ -63,6 +63,13 @@ ScrollPane * Scrollable::scrollPane() const
 
 class ScrollPane::Private {
 public:
+    Private()
+        : widget(NULL), layout(NULL),
+          vertical(NULL), horizontal(NULL)
+    {
+
+    }
+
     Scrollable   * widget;
     FullBorderLayout * layout;
     ScrollBar * vertical;
@@ -75,8 +82,6 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
     setFlag(QGraphicsItem::ItemClipsChildrenToShape);
 
     d->layout = new FullBorderLayout(this);
-    d->layout->setSize(SCROLLBAR_WIDTH, FullBorderLayout::RightBorder);
-    d->layout->setSize(SCROLLBAR_WIDTH, FullBorderLayout::BottomBorder);
 
     d->vertical   = new ScrollBar(this);
     d->vertical->setOrientation(Qt::Vertical);
@@ -85,9 +90,10 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
 
     d->layout->addItem(d->vertical, FullBorderLayout::Right);
     d->layout->addItem(d->horizontal, FullBorderLayout::Bottom);
-    d->layout->addItem(new Widget(this));
+    // d->layout->addItem(new Widget(this));
 
     setLayout(d->layout);
+    L_WIDGET_SET_INITIALIZED;
 }
 
 ScrollPane::~ScrollPane()
@@ -98,6 +104,10 @@ ScrollPane::~ScrollPane()
 void ScrollPane::setScrollableWidget(Scrollable * widget)
 {
     d->widget = widget;
+    d->layout->addItem(
+            dynamic_cast<QGraphicsWidget *>(widget),
+            FullBorderLayout::Center);
+    scrollableWidgetSizeUpdated();
 }
 
 QSizeF ScrollPane::maximumViewportSize() const
@@ -108,6 +118,19 @@ QSizeF ScrollPane::maximumViewportSize() const
 QSizeF ScrollPane::currentViewportSize() const
 {
     return size();
+}
+
+void ScrollPane::scrollableWidgetSizeUpdated()
+{
+    if (!d->widget) {
+        return;
+    }
+
+    d->horizontal->setMinimum(0);
+    d->horizontal->setMaximum(d->widget->fullSize().width());
+
+    d->vertical->setMinimum(0);
+    d->vertical->setMaximum(d->widget->fullSize().height());
 }
 
 } // namespace Lancelot
