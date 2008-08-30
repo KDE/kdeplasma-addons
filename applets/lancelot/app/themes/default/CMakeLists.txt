@@ -1,4 +1,4 @@
-FILE(GLOB lancelot_svgs *.svgz)
+FILE(GLOB lancelot_svgs *.svgz) # IGNORE_DIFF
 install( FILES ${lancelot_svgs}  DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/lancelot/ )
 
 FILE(GLOB lancelot_configs *.config)
