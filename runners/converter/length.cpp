@@ -80,6 +80,9 @@ Length::Length()
     m_units[i18n("mile")]          = i18n("miles");
     m_units[i18n("ml")]            = i18n("miles");
     m_units[i18n("miles")]         = 1609.344;
+    m_units[i18n("nautical mile")] = i18n("nautical miles");
+    m_units[i18n("nmi")]           = i18n("nautical miles");
+    m_units[i18n("nautical miles")] = 1852.0;
 
     m_units[i18n("light-year")]    = "lightyears";
     m_units[i18n("light-years")]   = "lightyears";
