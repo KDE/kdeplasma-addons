@@ -5,6 +5,7 @@ set(krunner_converterrunner_SRCS
     volume.cpp
     temperature.cpp
     simpleunit.cpp
+    speed.cpp
 )
 
 kde4_add_plugin(krunner_converterrunner ${krunner_converterrunner_SRCS})

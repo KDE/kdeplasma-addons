@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ *   Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,6 +23,7 @@
 #include "area.h"
 #include "volume.h"
 #include "temperature.h"
+#include "speed.h"
 
 #define CONVERSION_CHAR '>'
 
@@ -127,8 +128,9 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     m_units.append(new Area);
     m_units.append(new Volume);
     m_units.append(new Temperature);
+    m_units.append(new ::Speed); // There is Plasma::AbstractRunner::Speed
     //can not ignore commands: we have things like m4
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File | 
+    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
 
 }
