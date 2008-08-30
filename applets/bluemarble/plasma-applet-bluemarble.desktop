@@ -2,11 +2,15 @@
 Name=Blue Marble
 Name[et]=Sinine Marble
 Name[nds]=Blaag Planet
+Name[pt]=Esfera Azul
+Name[pt_BR]=Esfera Azul
 Comment=3D model of the Earth
 Comment[cs]=3D model Země
 Comment[et]=Maa ruumiline mudel
 Comment[ga]=Samhail 3T den Domhan
 Comment[nds]=3D-Modell vun de Eer
+Comment[pt]=Modelo 3D da Terra
+Comment[pt_BR]=Modelo 3D da Terra
 Comment[uk]=Просторова модель Землі
 Comment[zh_TW]=地球的立體模型
 Icon=world
