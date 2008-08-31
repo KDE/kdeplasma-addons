@@ -41,10 +41,13 @@ Name[zh_TW]=模糊時鐘
 Comment=Time displayed in a less precise format
 Comment[cs]=Zobrazení času v nejasném formátu
 Comment[et]=Aja näitamine mitte nii täpsel kujul
+Comment[gl]=Mostra a hora nun formato impreciso
 Comment[nds]=Tiet, wiest in en nich so akraat Formaat
 Comment[pt]=Hora mostrada num formato menos exacto
-Comment[pt_BR]=Hora mostrada num formato menos exacto
+Comment[pt_BR]=Horário mostrado em formato menos preciso
+Comment[sv]=Tidvisning med ett mindre exakt format
 Comment[uk]=Час, показаний у менш точному форматі
+Comment[zh_CN]=以不精确格式显示的时间
 Comment[zh_TW]=以較不精確的方式顯示時間
 
 Icon=chronometer

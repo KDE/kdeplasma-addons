@@ -7,4 +7,10 @@ X-KDE-PlasmaComicProvider-Identifier=boondocks
 Icon=plasma_comic_boondocks
 
 Name=The Boondocks
+Name[gl]=Os Boondocks
+Name[pt_BR]=Os Boondocks
+Name[sv]=Bystan
 Comment=The Boondocks
+Comment[gl]=Os Boondocks
+Comment[pt_BR]=Os Boondocks
+Comment[sv]=Bystan
