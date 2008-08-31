@@ -46,7 +46,7 @@ public:
     virtual ~CustomListItem();
 
     virtual void setSelected(bool selected = true) = 0;
-    virtual bool isSelected() = 0;
+    virtual bool isSelected() const = 0;
 };
 
 /**
