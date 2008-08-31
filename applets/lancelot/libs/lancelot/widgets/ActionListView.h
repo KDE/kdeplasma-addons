@@ -20,6 +20,15 @@
 #ifndef LANCELOT_ACTION_LIST_VIEW_H_
 #define LANCELOT_ACTION_LIST_VIEW_H_
 
+#ifndef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
+//    #define LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
+#endif
+
+#ifdef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
+    #include <lancelot/widgets/ActionListView2.h>
+    #define ActionListView ActionListView2
+#else
+
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
@@ -181,5 +190,6 @@ private:
 
 } // namespace Lancelot
 
+#endif
 #endif /* LANCELOT_ACTION_LIST_VIEW_H_ */
 

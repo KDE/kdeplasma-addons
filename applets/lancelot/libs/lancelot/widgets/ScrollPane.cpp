@@ -102,10 +102,8 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
     d->centerContainer->setAcceptsHoverEvents(true);
     d->centerContainer->setFlag(QGraphicsItem::ItemClipsChildrenToShape);
 
-    kDebug() << "Connect" <<
     connect (d->vertical, SIGNAL(valueChanged(int)),
             this, SLOT(scrollVertical(int)));
-    kDebug() << "Connect" <<
     connect (d->horizontal, SIGNAL(valueChanged(int)),
             this, SLOT(scrollHorizontal(int)));
 
@@ -130,7 +128,12 @@ ScrollPane::~ScrollPane()
 
 void ScrollPane::setScrollableWidget(Scrollable * widget)
 {
+    if (d->widget == widget) {
+        return;
+    }
+
     d->widget = widget;
+
     QGraphicsWidget * qgw = dynamic_cast<QGraphicsWidget *>(widget);
     if (qgw) {
         qgw->setParentItem(d->centerContainer);
@@ -210,8 +213,9 @@ void ScrollPane::setGeometry(const QRectF & rect)
     if (geometry() == rect) {
         return;
     }
-
+    kDebug() << rect;
     Widget::setGeometry(rect);
+    kDebug() << geometry();
     scrollableWidgetSizeUpdated();
     d->updateViewport();
 }

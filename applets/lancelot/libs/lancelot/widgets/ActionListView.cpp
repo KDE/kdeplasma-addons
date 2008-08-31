@@ -18,6 +18,9 @@
  */
 
 #include "ActionListView.h"
+
+#ifndef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
+
 #include <QLinkedListIterator>
 #include <cmath>
 #include <KDebug>
@@ -740,3 +743,5 @@ void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = 
 int ActionListView::categoryItemHeight() const { return m_categoryItemHeight; }
 
 } // namespace Lancelot
+
+#endif

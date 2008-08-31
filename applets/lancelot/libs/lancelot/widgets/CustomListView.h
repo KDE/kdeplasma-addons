@@ -94,6 +94,18 @@ public:
     L_Override virtual void viewportChanged(QRectF viewport);
     L_Override virtual qreal scrollUnit(Qt::Orientation direction);
 
+    L_Override virtual void paint(QPainter * painter,
+            const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+    {
+        painter->fillRect(
+                QRectF(QPointF(), size()),
+                QBrush(QColor(250, 100, 100, 50))
+                );
+        painter->fillRect(
+                QRectF(QPointF(5, 5), size() - QSizeF(10, 10)),
+                QBrush(QColor(100, 100, 100, 50))
+                );
+    }
 protected Q_SLOTS:
     void modelItemInserted(int position);
     void modelItemRemoved(int position);
@@ -118,6 +130,8 @@ public:
             QGraphicsItem * parent = NULL);
 
     virtual ~CustomListView();
+
+    CustomList * list() const;
 
 private:
     class Private;

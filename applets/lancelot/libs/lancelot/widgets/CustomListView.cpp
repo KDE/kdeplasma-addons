@@ -76,9 +76,11 @@ public:
 
     void recreateItems()
     {
+        kDebug() << "entered" << model << factory;
         if (!model || !factory) {
             return;
         }
+        kDebug() << "go! need:" << model->size() << "items";
 
         freeAllItems();
         qreal top = 0;
@@ -92,11 +94,12 @@ public:
                 continue;
             }
 
+            kDebug() << "adding";
             item->setParentItem(q);
-            item->setGeometry(QRectF(
-                QPointF(0, top),
-                item->preferredSize()
-            ));
+            item->setGeometry(0, top,
+                    viewportSize.width(), item->preferredHeight()
+            );
+            kDebug() << "item geometry" << item->geometry();
             top += item->preferredHeight();
         }
     }
@@ -111,7 +114,8 @@ public:
             position = 0;
         }
 
-        QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * > (factory->itemForIndex(position));
+        QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
+            (factory->itemForIndex(position));
 
         if (!item) {
             return;
@@ -170,6 +174,13 @@ public:
         }
     }
 
+    void updateItemSizes()
+    {
+        foreach (QGraphicsWidget * item, items) {
+            item->resize(viewportSize.width(), item->size().height());
+        }
+    }
+
     CustomList * q;
     CustomListItemFactory * factory;
     AbstractListModel * model;
@@ -204,6 +215,7 @@ void CustomList::setItemFactory(CustomListItemFactory * factory)
     }
 
     d->factory = factory;
+    d->recreateItems();
 }
 
 CustomListItemFactory * CustomList::itemFactory() const
@@ -226,6 +238,8 @@ void CustomList::setModel(AbstractListModel * m)
             this, SLOT(modelItemAltered(int)));
     connect(m, SIGNAL(updated(int)),
             this, SLOT(modelUpdated(int)));
+
+    d->recreateItems();
 }
 
 AbstractListModel * CustomList::model() const
@@ -245,14 +259,22 @@ QSizeF CustomList::fullSize() const
 void CustomList::viewportChanged(QRectF viewport)
 {
     if (d->viewportSize != viewport.size()) {
+        kDebug() << "size changed" << d->viewportSize <<
+            viewport.size();
+
         d->viewportSize = viewport.size();
+        resize(d->viewportSize.width(), fullSize().height());
+        d->updateItemSizes();
     }
     if (d->viewportOrigin != viewport.topLeft()) {
+        kDebug() << "origin changed" << d->viewportOrigin <<
+            viewport.topLeft();
         d->viewportOrigin = viewport.topLeft();
-        setGeometry(QRectF(
-                - d->viewportOrigin,
-                geometry().size()
-            ));
+        //setGeometry(QRectF(
+        //        - d->viewportOrigin,
+        //        geometry().size()
+        //    ));
+        setPos(- d->viewportOrigin);
     }
 }
 
@@ -297,8 +319,9 @@ public:
 };
 
 CustomListView::CustomListView(QGraphicsItem * parent)
-    : ScrollPane(parent), d(new Private(NULL, this))
+    : ScrollPane(parent), d(new Private(new CustomList(this), this))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
 CustomListView::CustomListView(CustomListItemFactory * factory,
@@ -306,11 +329,17 @@ CustomListView::CustomListView(CustomListItemFactory * factory,
     : ScrollPane(parent),
       d(new Private(new CustomList(factory, model, this), this))
 {
+    L_WIDGET_SET_INITIALIZED;
 }
 
 CustomListView::~CustomListView()
 {
     delete d;
+}
+
+CustomList * CustomListView::list() const
+{
+    return d->list;
 }
 
 } // namespace Lancelot
