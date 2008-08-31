@@ -298,7 +298,7 @@ public:
 
         qreal diff;
 
-        qreal handleSize = geometry.height() * (viewSize / (qreal)(maximum - minimum));
+        qreal handleSize = geometry.height() * (viewSize / (qreal)(maximum - minimum + viewSize));
         diff = 2 * geometry.width();
         if (handleSize < diff) {
             handleSize = diff;
@@ -510,16 +510,15 @@ Qt::Orientation ScrollBar::orientation() const
 
 void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
 {
-    if (event->delta() < 0) {
-        pageIncrease();
-    } else {
-        pageDecrease();
-    }
+    setValue(value() - (d->stepSize * event->delta() / 40));
+    event->accept();
 }
 
 void ScrollBar::setGeometry(const QRectF & g)
 {
-    if ((g.width() == 0) || (g.height() == 0)) return ;
+    if ((g == geometry()) || (g.width() == 0) || (g.height() == 0)) {
+        return;
+    }
     kDebug() << g;
     kDebug() << geometry();
     Widget::setGeometry(g);

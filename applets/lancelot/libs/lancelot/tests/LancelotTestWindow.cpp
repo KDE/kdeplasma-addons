@@ -47,13 +47,18 @@ public:
         : Lancelot::Widget(parent)
     {
         //
+        setGeometry(QRectF(QPointF(), fullSize()));
     }
 
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
     {
         painter->fillRect(
-                QRectF(QPointF(-2, -2), size() + QSizeF(4, 4)),
+                QRectF(QPointF(), size()),
+                QBrush(QColor(250, 100, 100))
+                );
+        painter->fillRect(
+                QRectF(QPointF(5, 5), size() - QSizeF(10, 10)),
                 QBrush(QColor(100, 100, 100))
                 );
 
@@ -65,16 +70,29 @@ public:
                 " x " + QString::number(view.height()) +
                 ""
                 );
+        painter->drawText(
+                QPointF(30, 80) - geometry().topLeft(),
+                "Rect: " + QString::number(view.left()) +
+                ", " + QString::number(view.top()) +
+                ": " + QString::number(view.width()) +
+                " x " + QString::number(view.height()) +
+                ""
+                );
     }
 
     L_Override virtual QSizeF fullSize() const
     {
-        return QSizeF(400, 400);
+        // return QSizeF(384, 354); // perfect fit - no scrolls
+        // return QSizeF(392, 362); // perfect fit - no scrolls
+        // return QSizeF(300, 600); // vertical
+        // return QSizeF(600, 300); // horizontal
+        return QSizeF(600, 600); // both
     }
 
     L_Override virtual void viewportChanged(QRectF viewport)
     {
         view = viewport;
+        setGeometry(QRectF(- viewport.topLeft(), fullSize()));
         update();
     }
 
@@ -105,27 +123,9 @@ LancelotTestWindow::LancelotTestWindow()
     m_root->setGeometry(QRectF(0, 0, 400, 400));
     m_corona->addItem(m_root);
 
-    Lancelot::ExtenderButton * eb = new Lancelot::ExtenderButton(m_root);
-    m_layout->addItem(eb, Lancelot::FullBorderLayout::Center);
-
-    Lancelot::ScrollBar * sbH = new Lancelot::ScrollBar(m_root);
-    sbH->setMinimum(100);
-    sbH->setMaximum(200);
-    sbH->setViewSize(40);
-    sbH->setValue(30);
-    sbH->setOrientation(Qt::Horizontal);
-    m_layout->addItem(sbH, Lancelot::FullBorderLayout::Top);
-
-    Lancelot::ScrollBar * sbV = new Lancelot::ScrollBar(m_root);
-    sbV->setMinimum(100);
-    sbV->setMaximum(200);
-    sbV->setViewSize(40);
-    sbV->setValue(30);
-    sbV->setOrientation(Qt::Horizontal);
-    sbV->setOrientation(Qt::Vertical);
-    m_layout->addItem(sbV, Lancelot::FullBorderLayout::Right);
-
     Lancelot::ScrollPane * sp = new Lancelot::ScrollPane(m_root);
+    // sp->clearFlag(ScrollPane::ClipScrollable);
+    sp->setFlag(ScrollPane::HoverShowScrollbars);
     m_layout->addItem(sp);
     sp->setScrollableWidget(new ScrollableWidget(sp));
 

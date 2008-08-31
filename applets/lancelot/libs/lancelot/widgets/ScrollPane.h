@@ -90,11 +90,18 @@ private:
  * @author Ivan Cukic
  */
 class LANCELOT_EXPORT ScrollPane: public Lancelot::Widget {
+    Q_OBJECT
 
     L_WIDGET
     L_INCLUDE(lancelot/widgets/ScrollPane.h)
 
 public:
+    enum Flag {
+        ClipScrollable = 1,
+        HoverShowScrollbars = 2
+    };
+    Q_DECLARE_FLAGS(Flags, Flag);
+
     /**
      * Creates a new Lancelot::ScrollPane
      * @param parent parent item
@@ -111,20 +118,44 @@ public:
      * ScrollPane
      * @param widget widget implementing the Scrollable interface
      */
-    virtual void setScrollableWidget(Scrollable * widget);
+    void setScrollableWidget(Scrollable * widget);
 
     /**
      * @returns the maximum size that this ScrollPane widget
      * can provide without scrolling.
      */
-    virtual QSizeF maximumViewportSize() const;
+    QSizeF maximumViewportSize() const;
 
     /**
      * @returns the current size of this ScrollPane widget.
      *   It equals maximumViewportSize() minus the sizes
      *   of the scrolling controls
      */
-    virtual QSizeF currentViewportSize() const;
+    QSizeF currentViewportSize() const;
+
+    /**
+     * Turns the specified flag on
+     */
+    void setFlag(Flag flag);
+
+    /**
+     * Turns the specified flag off
+     */
+    void clearFlag(Flag flag);
+
+    /**
+     * @returns active flags
+     */
+    Flags flags() const;
+
+    /**
+     * Sets all flags
+     */
+    void setFlags(Flags flags);
+
+    L_Override virtual void setGeometry(const QRectF & rect);
+    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 public Q_SLOTS:
     /**
@@ -133,12 +164,24 @@ public Q_SLOTS:
      */
     void scrollableWidgetSizeUpdated();
 
+    /**
+     * Scrolls the view horizontally to the specified value
+     */
+    void scrollHorizontal(int value);
+
+    /**
+     * Scrolls the view vertically to the specified value
+     */
+    void scrollVertical(int value);
+
 private:
     class Private;
     Private * const d;
 };
 
 } // namespace Lancelot
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Lancelot::ScrollPane::Flags);
 
 #endif // LANCELOT_SCROLL_PANE_H_
 

@@ -48,12 +48,14 @@ void LancelotConfig::loadConfig()
             (LancelotConfig::ActivationMethod)
             m_mainConfig.readEntry("activationMethod", (int)NoClick));
     setAppbrowserColumnLimitted(m_mainConfig.readEntry("appbrowserColumnLimitted", false));
+    setAppbrowserReset(m_mainConfig.readEntry("appbrowserReset", true));
 }
 
 void LancelotConfig::saveConfig()
 {
     m_mainConfig.writeEntry("activationMethod", (int)activationMethod());
     m_mainConfig.writeEntry("appbrowserColumnLimitted", appbrowserColumnLimitted());
+    m_mainConfig.writeEntry("appbrowserReset", appbrowserReset());
     m_mainConfig.sync();
 }
 
@@ -81,6 +83,16 @@ void LancelotConfig::setActivationMethod(LancelotConfig::ActivationMethod method
         radioActivationNoClick->click();
         break;
     }
+}
+
+bool LancelotConfig::appbrowserReset()
+{
+    return (checkAppBrowserReset->isChecked());
+}
+
+void LancelotConfig::setAppbrowserReset(bool value)
+{
+    checkAppBrowserReset->setChecked(value);
 }
 
 bool LancelotConfig::appbrowserColumnLimitted()

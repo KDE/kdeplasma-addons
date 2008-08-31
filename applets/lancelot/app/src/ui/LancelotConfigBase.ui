@@ -62,6 +62,20 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2" >
       <item>
+       <widget class="QCheckBox" name="checkAppBrowserReset" >
+        <property name="text" >
+         <string>Reset the browser to show Favorites on menu open</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Column number limit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QRadioButton" name="radioAppBrowserNoColumnLimit" >
         <property name="text" >
          <string>No column number limit</string>

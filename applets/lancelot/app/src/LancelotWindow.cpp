@@ -306,6 +306,9 @@ void LancelotWindow::lancelotHide(bool immediate)
 {
     if (immediate) {
         editSearch->setText(QString());
+        if (m_configUi.appbrowserReset()) {
+            passagewayApplications->reset();
+        }
         hide();
         return;
     }

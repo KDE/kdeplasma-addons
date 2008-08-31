@@ -232,11 +232,6 @@ void Widget::setGeometry(const QRectF & rect)
     }
 }
 
-void Widget::setGeometry(qreal x, qreal y, qreal w, qreal h)
-{
-    Widget::setGeometry(QRectF(x, y, w, h));
-}
-
 QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
 {
     QSizeF result;

@@ -414,6 +414,13 @@ void PassagewayView::setColumnLimit(int limit)
     d->listsLayout->setColumnCount(limit);
 }
 
+void PassagewayView::reset()
+{
+    if (d->lists.size() > 2) {
+        d->back(d->lists.size() - 2);
+    }
+}
+
 void PassagewayView::groupUpdated()
 {
     Panel::groupUpdated();

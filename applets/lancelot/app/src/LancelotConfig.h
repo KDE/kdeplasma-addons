@@ -46,6 +46,9 @@ public:
     bool appbrowserColumnLimitted();
     void setAppbrowserColumnLimitted(bool value);
 
+    bool appbrowserReset();
+    void setAppbrowserReset(bool value);
+
     QButtonGroup * qbgActivationMethod;
     QButtonGroup * qbgAppbrowserColumnLimit;
 

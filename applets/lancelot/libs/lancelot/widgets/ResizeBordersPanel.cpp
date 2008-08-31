@@ -172,11 +172,6 @@ ResizeBordersPanel::~ResizeBordersPanel()
     delete d;
 }
 
-void ResizeBordersPanel::setGeometry(qreal x, qreal y, qreal w, qreal h)
-{
-    setGeometry(QRectF(x, y, w, h));
-}
-
 void ResizeBordersPanel::setGeometry(const QRectF & geometry)
 {
     Panel::setGeometry(geometry);

@@ -29,61 +29,93 @@
 
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ExtenderButton.h>
-#include <lancelot/widgets/ActionListViewModels.h>
+#include <lancelot/widgets/ScrollPane.h>
+
+#include <lancelot/models/CustomListModels.h>
 
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT CustomListViewItem: public Lancelot::Widget
-{
-    Q_OBJECT
+/**
+ * All classes that are going to be used in the CustomList
+ * must subclass this and QGraphicsWidget.
+ */
+class LANCELOT_EXPORT CustomListItem {
 public:
-    virtual void setItemSelected(bool selected) = 0;
-    virtual bool isItemSelected() const = 0;
-    virtual ~CustomListViewItem() {};
+    CustomListItem();
+    virtual ~CustomListItem();
 
-public Q_SIGNALS:
-    void itemActivated();
-
+    virtual void setSelected(bool selected = true) = 0;
+    virtual bool isSelected() = 0;
 };
 
-class LANCELOT_EXPORT CustomListViewItemFactory
-{
+/**
+ * Interface that manages the list model and serves as an interface
+ * between the actual data model and CustomList.
+ * Subclasses are responsible for creating and destroying list
+ * items. All items must subclass QGraphicsWidget and implement
+ * the CustomListItem interface.
+ */
+class LANCELOT_EXPORT CustomListItemFactory {
 public:
-    virtual CustomListViewItem * itemForIndex(int index) = 0;
-    virtual void freeItem(CustomListViewItem * item) = 0;
-    virtual ~CustomListViewItemFactory() {};
+    CustomListItemFactory();
+    virtual ~CustomListItemFactory();
+
+    virtual CustomListItem * itemForIndex(int index) = 0;
+    virtual int itemHeight(int index, Qt::SizeHint which) const = 0;
+
+    virtual void freeItem(CustomListItem * item) = 0;
+    virtual void freeAllItems() = 0;
 };
 
-class LANCELOT_EXPORT CustomListView: public Widget
-{
+/**
+ * Class that does the layouting of items in the list.
+ * The list implements the Scrollable interface. Supports
+ * resizing items to best fit scroll pane viewport.
+ * It doesn't scroll by itself.
+ */
+class LANCELOT_EXPORT CustomList: public QGraphicsWidget, public Scrollable {
     Q_OBJECT
-
 public:
-    CustomListView(QString name, ActionListViewModel * model = 0, QGraphicsItem * parent = 0);
-    virtual ~CustomListView();
+    CustomList(QGraphicsItem * parent = NULL);
+    CustomList(CustomListItemFactory * factory,
+            AbstractListModel * model,
+            QGraphicsItem * parent = NULL);
 
-    void setModel(ActionListViewModel * model);
-    ActionListViewModel * model() const;
+    virtual ~CustomList();
 
-    void setItemFactory(CustomListViewItemFactory * factory);
-    CustomListViewItemFactory * itemFactory() const;
+    void setItemFactory(CustomListItemFactory * factory);
+    CustomListItemFactory * itemFactory() const;
 
-    void updateGeometry();
+    void setModel(AbstractListModel * model);
+    AbstractListModel * model() const;
 
-    void wheelEvent ( QGraphicsSceneWheelEvent * event );
+    L_Override virtual QSizeF fullSize() const;
+    L_Override virtual void viewportChanged(QRectF viewport);
+    L_Override virtual qreal scrollUnit(Qt::Orientation direction);
 
-Q_SIGNALS:
-    void activated(int index);
-
-protected slots:
-    void scrollTimer();
-    void itemActivated(int index);
-
+protected Q_SLOTS:
+    void modelItemInserted(int position);
+    void modelItemRemoved(int position);
+    void modelItemAltered(int position);
     void modelUpdated();
-    void modelItemInserted(int index);
-    void modelItemDeleted(int index);
-    void modelItemAltered(int index);
+
+private:
+    class Private;
+    Private * const d;
+};
+
+/**
+ * Wrapper around the CustomList which implements the actual
+ * scrolling.
+ */
+class LANCELOT_EXPORT CustomListView: public ScrollPane {
+    Q_OBJECT
+public:
+    CustomListView(QGraphicsItem * parent = NULL);
+    CustomListView(CustomList * list, QGraphicsItem * parent = NULL);
+
+    virtual ~CustomListView();
 
 private:
     class Private;

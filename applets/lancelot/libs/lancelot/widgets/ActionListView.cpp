@@ -337,11 +337,6 @@ void ActionListView::scrollBy(int scrollAmmount)
 
 }
 
-void ActionListView::setGeometry(qreal x, qreal y, qreal w, qreal h)
-{
-    setGeometry(QRectF(x, y, w, h));
-}
-
 void ActionListView::setGeometry(const QRectF & geometry)
 {
     if (!geometry.isValid() || geometry.isEmpty() || this->geometry() == geometry) {

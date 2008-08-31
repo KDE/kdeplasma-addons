@@ -72,6 +72,7 @@ public:
     ActivationMethod activationMethod() const;
 
     void setColumnLimit(int limit);
+    void reset();
 
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();

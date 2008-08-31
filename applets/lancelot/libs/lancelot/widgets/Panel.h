@@ -125,7 +125,6 @@ public:
      */
     qreal borderSize(Plasma::MarginEdge edge);
 
-    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
     L_Override virtual void setGeometry(const QRectF & geometry);
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
     // L_Override virtual void groupUpdated();

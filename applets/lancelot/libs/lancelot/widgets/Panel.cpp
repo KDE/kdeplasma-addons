@@ -169,11 +169,6 @@ QSize Panel::iconSize() const
     return d->titleWidget.iconSize();
 }
 
-void Panel::setGeometry(qreal x, qreal y, qreal w, qreal h)
-{
-    setGeometry(QRectF(x, y, w, h));
-}
-
 void Panel::setGeometry(const QRectF & geometry)
 {
     Widget::setGeometry(geometry);

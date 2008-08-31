@@ -97,7 +97,6 @@ public:
     bool isDown();
 
     L_Override virtual void setGeometry(const QRectF & rect);
-    L_Override virtual void setGeometry(qreal x, qreal y, qreal w, qreal h);
 
 protected:
     L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
