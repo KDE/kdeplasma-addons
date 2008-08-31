@@ -21,5 +21,14 @@
 
 namespace Lancelot {
 
+AbstractListModel::AbstractListModel()
+{
+}
+
+AbstractListModel::~AbstractListModel()
+{
+}
+
 } // namespace Lancelot
+
 

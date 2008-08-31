@@ -1,5 +1,3 @@
-# Adds KDE definitions so that libLancelot could be built independently
-# from the rest of the kdeplasmoids module
 project(liblancelot)
 
 find_package(KDE4 REQUIRED)
@@ -54,6 +52,7 @@ set(lancelot_LIB_SRCS
         widgets/PassagewayView.cpp
 
         widgets/CustomListView.cpp
+        widgets/ActionListView2.cpp
 
         # Layouts
         layouts/FullBorderLayout.cpp

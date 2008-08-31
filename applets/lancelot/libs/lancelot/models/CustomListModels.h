@@ -20,20 +20,51 @@
 #ifndef LANCELOT_CUSTOM_LIST_VIEW_MODELS_H_
 #define LANCELOT_CUSTOM_LIST_VIEW_MODELS_H_
 
+#include <lancelot/lancelot_export.h>
+
 #include <QObject>
 
 namespace Lancelot {
 
-class AbstractListModel: public QObject {
+/**
+ * The most abstract list interface
+ */
+class LANCELOT_EXPORT AbstractListModel: public QObject {
     Q_OBJECT
 public:
-    virtual int count() const = 0;
+    AbstractListModel();
+    virtual ~AbstractListModel();
+
+    /**
+     * @returns the number of items in model
+     */
+    virtual int size() const = 0;
 
 Q_SIGNALS:
-    void itemInserted(int position);
-    void itemRemoved(int position);
-    void itemAltered(int position);
+    /**
+     * This signal is emitted when the model is updated and the update
+     * is too complex to explain using itemInserted, itemDeleted and
+     * itemAltered methods
+     */
     void updated();
+
+    /**
+     * This signal is emitted when an item is inserted into the model
+     * @param index place where the new item is inserted
+     */
+    void itemInserted(int index);
+
+    /**
+     * This signal is emitted when an item is deleted from the model
+     * @param index index of the deleted item
+     */
+    void itemDeleted(int index);
+
+    /**
+     * This signal is emitted when an item is altered
+     * @param index index of the altered item
+     */
+    void itemAltered(int index);
 };
 
 } // namespace Lancelot

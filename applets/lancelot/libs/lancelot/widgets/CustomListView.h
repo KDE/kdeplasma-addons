@@ -62,9 +62,9 @@ public:
     virtual ~CustomListItemFactory();
 
     virtual CustomListItem * itemForIndex(int index) = 0;
+    virtual void freeItem(int index) = 0;
     virtual int itemHeight(int index, Qt::SizeHint which) const = 0;
 
-    virtual void freeItem(CustomListItem * item) = 0;
     virtual void freeAllItems() = 0;
 };
 
@@ -113,7 +113,9 @@ class LANCELOT_EXPORT CustomListView: public ScrollPane {
     Q_OBJECT
 public:
     CustomListView(QGraphicsItem * parent = NULL);
-    CustomListView(CustomList * list, QGraphicsItem * parent = NULL);
+    CustomListView(CustomListItemFactory * factory,
+            AbstractListModel * model,
+            QGraphicsItem * parent = NULL);
 
     virtual ~CustomListView();
 

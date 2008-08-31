@@ -58,7 +58,7 @@ public:
         sizes[Qt::MinimumSize]   = 0;
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
-        for (int i = 0; i < model->count(); i++) {
+        for (int i = 0; i < model->size(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
             sizes[Qt::PreferredSize] +=
@@ -83,7 +83,7 @@ public:
         freeAllItems();
         qreal top = 0;
 
-        for (int i = 0; i < model->count(); i++) {
+        for (int i = 0; i < model->size(); i++) {
             QGraphicsWidget * item =
                 dynamic_cast < QGraphicsWidget * >
                 (factory->itemForIndex(i));
@@ -148,7 +148,7 @@ public:
 
         qreal shift = items.at(position)->
             geometry().height();
-        factory->freeItem((CustomListItem *)(items.takeAt(position)));
+        factory->freeItem(position);
 
         for (int i = position; i < items.size(); i++) {
             items.at(i)->moveBy(0, - shift);
@@ -157,14 +157,13 @@ public:
 
     void invalidateItem(int position)
     {
-        if (!model || !factory || position >= items.size() || position < 0) {
+        if (!model || !factory || position + 1 >= items.size() || position < 0) {
             return;
         }
 
         qreal shift =
             items.at(position + 1)->geometry().top() -
             items.at(position)->geometry().bottom();
-        factory->freeItem((CustomListItem *)(items.takeAt(position)));
 
         for (int i = position; i < items.size(); i++) {
             items.at(i)->moveBy(0, - shift);
@@ -291,6 +290,7 @@ public:
     Private(CustomList * l, CustomListView * parent)
         : list(l)
     {
+        parent->setScrollableWidget(list);
     }
 
     CustomList * list;
@@ -301,8 +301,10 @@ CustomListView::CustomListView(QGraphicsItem * parent)
 {
 }
 
-CustomListView::CustomListView(CustomList * list, QGraphicsItem * parent)
-    : ScrollPane(parent), d(new Private(list, this))
+CustomListView::CustomListView(CustomListItemFactory * factory,
+        AbstractListModel * model, QGraphicsItem * parent)
+    : ScrollPane(parent),
+      d(new Private(new CustomList(factory, model, this), this))
 {
 }
 
