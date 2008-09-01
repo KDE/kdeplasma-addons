@@ -100,7 +100,7 @@ public:
         ClipScrollable = 1,
         HoverShowScrollbars = 2
     };
-    Q_DECLARE_FLAGS(Flags, Flag);
+    Q_DECLARE_FLAGS(Flags, Flag)
 
     /**
      * Creates a new Lancelot::ScrollPane
@@ -181,7 +181,7 @@ private:
 
 } // namespace Lancelot
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Lancelot::ScrollPane::Flags);
+Q_DECLARE_OPERATORS_FOR_FLAGS(Lancelot::ScrollPane::Flags)
 
 #endif // LANCELOT_SCROLL_PANE_H_
 
