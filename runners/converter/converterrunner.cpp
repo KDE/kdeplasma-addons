@@ -24,6 +24,7 @@
 #include "volume.h"
 #include "temperature.h"
 #include "speed.h"
+#include "mass.h"
 
 #define CONVERSION_CHAR '>'
 
@@ -129,6 +130,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     m_units.append(new Volume);
     m_units.append(new Temperature);
     m_units.append(new ::Speed); // There is Plasma::AbstractRunner::Speed
+    m_units.append(new Mass);
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
