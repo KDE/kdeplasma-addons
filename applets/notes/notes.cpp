@@ -87,12 +87,12 @@ void NotesTextEdit::saveToFile()
     }
 
     QFile file(fileName);
-    
+
     if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
         KMessageBox::information(this, file.errorString(), i18n("Unable to open file"));
         return;
     }
-    
+
     QTextStream out(&file);
     out << toPlainText();
     file.close();
@@ -259,12 +259,13 @@ void Notes::paintInterface(QPainter *p,
     Q_UNUSED(option);
 
     m_notes_theme.resize(geometry().size());
+    kDebug() << "notes.svgz hasElement(" << m_color << "yellow-notes)" << m_notes_theme.hasElement("green-notes");
     m_notes_theme.paint(p, contentsRect, m_color + "-notes");
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
 {
-    QWidget *widget = new QWidget(parent); 
+    QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage(widget, parent->windowTitle(), "notes");
@@ -314,7 +315,7 @@ void Notes::configAccepted()
         cg.writeEntry("textcolor", m_textColor);
 	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
 	m_textEdit->nativeWidget()->selectAll();
-        m_textEdit->nativeWidget()->setTextColor(m_textColor); 
+        m_textEdit->nativeWidget()->setTextColor(m_textColor);
 	m_textEdit->nativeWidget()->setTextCursor(textCursor);
     }
 

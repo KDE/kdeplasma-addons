@@ -24,13 +24,12 @@
 
 #include <KDebug>
 #include <KStandardDirs>
+#include <KDirWatch>
 #include <KToolInvocation>
 #include <KIcon>
 #include <KConfig>
 #include <KConfigGroup>
 
-// Update history at most every 30 seconds
-#define UPDATE_INTERVAL 30000
 
 BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
@@ -39,23 +38,28 @@ BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& 
     KGlobal::locale()->insertCatalog("krunner_browserhistoryrunner");
     setObjectName(i18n("Browser History"));
     m_icon = KIcon("view-history");
-    // What is this about? The API doc isn't exactly clear ...
-    //setIgnoredTypes(Plasma::RunnerContext::FileSystem);
-    m_history = loadHistory();
+
+    loadHistory();
+
+    // listen for changes to the list of recent documents
+    KDirWatch *historyWatch = new KDirWatch(this);
+    historyWatch->addFile(KStandardDirs::locate("config", "konq_history"));
+    connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadHistory()));
+    connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadHistory()));
+    connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadHistory()));
 }
 
 BrowserHistoryRunner::~BrowserHistoryRunner()
 {
 }
 
-QStringList BrowserHistoryRunner::loadHistory()
+void BrowserHistoryRunner::loadHistory()
 {
-    m_time.restart();
     KConfig *konq_config = new KConfig("konq_history", KConfig::NoGlobals);
     KConfigGroup locationBarGroup( konq_config, "Location Bar" );
     QStringList lstHistory = locationBarGroup.readPathEntry( "ComboContents", QStringList() );
     delete konq_config;
-    return lstHistory;
+    m_history = lstHistory;
 }
 
 void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
@@ -64,9 +68,7 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
     if (term.length() < 3) {
         return;
     }
-    if (m_time.elapsed() > UPDATE_INTERVAL) {
-        loadHistory();
-    }
+
     foreach (const QString &historyitem, m_history) {
         // Filter out error pages, and match ...
         if (!historyitem.startsWith("error:/") && historyitem.contains(term, Qt::CaseInsensitive)) {

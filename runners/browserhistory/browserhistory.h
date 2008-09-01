@@ -34,11 +34,12 @@ class BrowserHistoryRunner : public Plasma::AbstractRunner {
         void match(Plasma::RunnerContext &context);
         void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
+    private Q_SLOTS:
+        void loadHistory();
+
     private:
-        QStringList loadHistory();
         KIcon m_icon;
         QStringList m_history;
-        QTime m_time;
 };
 
 K_EXPORT_PLASMA_RUNNER(browserhistory, BrowserHistoryRunner)
