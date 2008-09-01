@@ -45,7 +45,7 @@ K_GLOBAL_STATIC(ConverterSingleton, s_instance)
 
 Converter::Converter(QObject* parent)
 : QObject(parent)
-, d(new Converter::Private)
+, d(/*new Converter::Private*/0)
 {
     new Length(this);
     new Area(this);
@@ -57,7 +57,7 @@ Converter::Converter(QObject* parent)
 
 Converter::~Converter()
 {
-    delete d;
+    //delete d;
 }
 
 Converter* Converter::self()
