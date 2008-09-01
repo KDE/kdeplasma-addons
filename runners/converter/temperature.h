@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,15 +20,15 @@
 
 #include "unit.h"
 
-class Temperature : public Unit
+class Temperature : public UnitCategory
 {
 public:
-    Temperature() {};
-    virtual ~Temperature() {};
+    Temperature(QObject* parent = 0);
 
+    virtual QStringList units();
+    virtual QString name();
     virtual bool hasUnit(const QString &unit);
-    virtual QString convert(const QString &value, const QString &from,
-                            const QString &to, QVariant* data);
+    virtual Value convert(const Value& value, const QString& toUnit = QString());
 };
 
 #endif

@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,7 +19,6 @@
 #define CONVERTRUNNER_H
 
 #include <plasma/abstractrunner.h>
-#include "unit.h"
 
 /**
  * This class converts values to differemt units.
@@ -34,10 +33,6 @@ public:
 
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
-
-private:
-    Unit* unitType(const QString& type);
-    QList<Unit*> m_units;
 };
 
 K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)

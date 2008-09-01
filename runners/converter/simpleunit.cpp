@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,10 +17,24 @@
 
 #include "simpleunit.h"
 #include <QVariant>
-#include <kdebug.h>
+#include <KDebug>
 
-SimpleUnit::SimpleUnit()
+SimpleUnit::SimpleUnit(QObject* parent)
+: UnitCategory(parent)
 {
+}
+
+QStringList SimpleUnit::units()
+{
+    QStringList result;
+
+    foreach (const QString& unit, m_units.keys()) {
+        // Only return basic units
+        if  (m_units[unit].type() == QVariant::Double) {
+            result << unit;
+        }
+    }
+    return result;
 }
 
 bool SimpleUnit::hasUnit(const QString &unit)
@@ -28,12 +42,11 @@ bool SimpleUnit::hasUnit(const QString &unit)
     return m_units.contains(unit);
 }
 
-QString SimpleUnit::convert(const QString &value, const QString &from,
-                        const QString &to, QVariant* data)
+Value SimpleUnit::convert(const Value& value, const QString& to)
 {
     QString unit;
-    *data = value.toDouble() * toDouble(from, &unit) / toDouble(to, &unit);
-    return QString("%1 %2").arg(data->toString()).arg(unit);
+    QVariant data = value.number.toDouble() * toDouble(value.unit, &unit) / toDouble(to, &unit);
+    return Value(data, unit);
 }
 
 double SimpleUnit::toDouble(const QString &unit, QString *unitString)

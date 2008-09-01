@@ -15,21 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VOLUME_H
-#define VOLUME_H
+#include "unit.h"
 
-#include "simpleunit.h"
-
-class Volume : public SimpleUnit
+Value::Value()
 {
-public:
-    Volume(QObject* parent = 0);
-    virtual bool hasUnit(const QString &unit);
-    virtual QString name();
+}
 
-protected:
-    QString replace(const QString &unit);
-    virtual double toDouble(const QString &unit, QString *unitString);
-};
+Value::Value(const QVariant& n, const QString& u)
+: number(n)
+, unit(u)
+{
+}
 
-#endif
+bool Value::isValid()
+{
+    return (number.isValid() && !unit.isEmpty());
+}
+
+QString Value::toString()
+{
+    return number.toString() + " " + unit;
+}
+
+UnitCategory::UnitCategory(QObject* parent)
+: QObject(parent)
+{
+}
+
+UnitCategory::~UnitCategory()
+{
+}
+
+#include "unit.moc"

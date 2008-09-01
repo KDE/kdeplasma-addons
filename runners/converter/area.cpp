@@ -1,6 +1,6 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
- * 
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
@@ -16,11 +16,14 @@
  */
 
 #include "area.h"
-#include <kdebug.h>
-#include <klocale.h>
+#include <KDebug>
+#include <KLocale>
 
-Area::Area()
+Area::Area(QObject* parent)
+: SimpleUnit(parent)
 {
+    setObjectName("area");
+
     m_default = "m\xb2";
 
     m_units[i18n("square meter")]         = "m\xb2";
@@ -65,25 +68,30 @@ Area::Area()
     m_units[i18n("sq foot")]              = i18n("square feet");
     m_units[i18n("sq ft")]                = i18n("square feet");
     m_units[i18n("sq feet")]              = i18n("square feet");
-    m_units[i18n("feet\xc2\xb2")]             = i18n("square feet");
-    m_units[i18n("ft\xc2\xb2")]               = i18n("square feet");
+    m_units[i18n("feet\xc2\xb2")]         = i18n("square feet");
+    m_units[i18n("ft\xc2\xb2")]           = i18n("square feet");
     m_units[i18n("square feet")]          = 0.09290304;
     m_units[i18n("square inch")]          = i18n("square inches");
     m_units[i18n("square in")]            = i18n("square inches");
     m_units[i18n("sq inches")]            = i18n("square inches");
     m_units[i18n("sq inch")]              = i18n("square inches");
     m_units[i18n("sq in")]                = i18n("square inches");
-    m_units[i18n("inch\xc2\xb2")]             = i18n("square inches");
-    m_units[i18n("in\xc2\xb2")]               = i18n("square inches");
+    m_units[i18n("inch\xc2\xb2")]         = i18n("square inches");
+    m_units[i18n("in\xc2\xb2")]           = i18n("square inches");
     m_units[i18n("square inches")]        = 0.00064516;
     m_units[i18n("square mile")]          = i18n("square mile");
     m_units[i18n("square mi")]            = i18n("square mile");
     m_units[i18n("sq miles")]             = i18n("square mile");
     m_units[i18n("sq mile")]              = i18n("square mile");
     m_units[i18n("sq mi")]                = i18n("square mile");
-    m_units[i18n("mile\xc2\xb2")]             = i18n("square mile");
-    m_units[i18n("mi\xc2\xb2")]               = i18n("square mile");
+    m_units[i18n("mile\xc2\xb2")]         = i18n("square mile");
+    m_units[i18n("mi\xc2\xb2")]           = i18n("square mile");
     m_units[i18n("square miles")]         = 2589988.110336;
+}
+
+QString Area::name()
+{
+    return i18n("Area");
 }
 
 bool Area::hasUnit(const QString &unit)

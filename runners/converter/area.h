@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,8 +23,9 @@
 class Area : public SimpleUnit
 {
 public:
-    Area();
+    Area(QObject* parent = 0);
     virtual bool hasUnit(const QString &unit);
+    virtual QString name();
 
 protected:
     QString replace(const QString &unit);

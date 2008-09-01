@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 3007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,11 +16,14 @@
  */
 
 #include "volume.h"
-#include <kdebug.h>
-#include <klocale.h>
+#include <KDebug>
+#include <KLocale>
 
-Volume::Volume()
+Volume::Volume(QObject* parent)
+: SimpleUnit(parent)
 {
+    setObjectName("volume");
+
     m_default = "m\xb3";
 
     m_units[i18n("cubic meter")]          = "m\xb3";
@@ -87,24 +90,24 @@ Volume::Volume()
     m_units[i18n("cu foot")]              = i18n("cubic feet");
     m_units[i18n("cu ft")]                = i18n("cubic feet");
     m_units[i18n("cu feet")]              = i18n("cubic feet");
-    m_units[i18n("feet\xc2\xb3")]             = i18n("cubic feet");
-    m_units[i18n("ft\xc2\xb3")]               = i18n("cubic feet");
+    m_units[i18n("feet\xc2\xb3")]         = i18n("cubic feet");
+    m_units[i18n("ft\xc2\xb3")]           = i18n("cubic feet");
     m_units[i18n("cubic feet")]           = 0.028316846592;
     m_units[i18n("cubic inch")]           = i18n("cubic inches");
     m_units[i18n("cubic in")]             = i18n("cubic inches");
     m_units[i18n("cu inches")]            = i18n("cubic inches");
     m_units[i18n("cu inch")]              = i18n("cubic inches");
     m_units[i18n("cu in")]                = i18n("cubic inches");
-    m_units[i18n("inch\xc2\xb3")]             = i18n("cubic inches");
-    m_units[i18n("in\xc2\xb3")]               = i18n("cubic inches");
+    m_units[i18n("inch\xc2\xb3")]         = i18n("cubic inches");
+    m_units[i18n("in\xc2\xb3")]           = i18n("cubic inches");
     m_units[i18n("cubic inches")]         = 0.000016387064;
     m_units[i18n("cubic mile")]           = i18n("cubic mile");
     m_units[i18n("cubic mi")]             = i18n("cubic mile");
     m_units[i18n("cu miles")]             = i18n("cubic mile");
     m_units[i18n("cu mile")]              = i18n("cubic mile");
     m_units[i18n("cu mi")]                = i18n("cubic mile");
-    m_units[i18n("mile\xc2\xb3")]             = i18n("cubic mile");
-    m_units[i18n("mi\xc2\xb3")]               = i18n("cubic mile");
+    m_units[i18n("mile\xc2\xb3")]         = i18n("cubic mile");
+    m_units[i18n("mi\xc2\xb3")]           = i18n("cubic mile");
     m_units[i18n("cubic miles")]          = 4168181825.440579584;
 
     m_units[i18n("oz.fl.")]               = i18n("fluid ounces");
@@ -127,6 +130,11 @@ Volume::Volume()
     m_units[i18n("pints (imperial)")]     = 0.00056826125;
 }
 
+QString Volume::name()
+{
+    return i18n("Volume");
+}
+
 bool Volume::hasUnit(const QString &unit)
 {
     return SimpleUnit::hasUnit(replace(unit));
@@ -145,4 +153,3 @@ double Volume::toDouble(const QString &unit, QString *unitString)
 {
     return SimpleUnit::toDouble(replace(unit), unitString);
 }
-

@@ -1,6 +1,6 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
-
+ * Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
@@ -13,15 +13,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  */
 
 #include "length.h"
-#include <kdebug.h>
-#include <klocale.h>
+#include <KDebug>
+#include <KLocale>
 
-Length::Length()
+Length::Length(QObject* parent)
+: SimpleUnit(parent)
 {
+    setObjectName("length");
+
     m_default = "m";
 
     m_units[i18n("meter")]         = "m";
@@ -61,7 +63,7 @@ Length::Length()
     m_units["pm"]                  = 1E-12;
 
     m_units[i18n("femtometer")]    = 1E-15;
-    m_units[i18n("femtometer")]    = 1E-15; 
+    m_units[i18n("femtometer")]    = 1E-15;
     m_units["fm"]                  = 1E-15;
     m_units["am"]                  = 1E-18;
     m_units["zm"]                  = 1E-21;
@@ -92,4 +94,9 @@ Length::Length()
     m_units[i18n("parsecs")]       = 1E+16;
     m_units[i18n("astronomical unit")]  = "astronomical units";
     m_units[i18n("astronomical units")] = 149597870691.0;
+}
+
+QString Length::name()
+{
+    return i18n("Length");
 }

@@ -1,6 +1,6 @@
 /*
- *   Copyright (C) 2008 Petri Damstén <damu@iki.fi>
-
+ * Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
@@ -19,8 +19,11 @@
 #include "speed.h"
 #include <KLocale>
 
-Speed::Speed()
+Speed::Speed(QObject* parent)
+: SimpleUnit(parent)
 {
+    setObjectName("speed");
+
     m_default = "m/s";
 
     m_units["ms"]                            = "m/s";
@@ -46,4 +49,9 @@ Speed::Speed()
 
     m_units[i18n("speed of light")]          = "c";
     m_units["c"]                             = 299792458.0;
+}
+
+QString Speed::name()
+{
+    return i18n("Speed");
 }

@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,15 +21,14 @@
 #include "unit.h"
 #include <QHash>
 
-class SimpleUnit : public Unit
+class SimpleUnit : public UnitCategory
 {
 public:
-    SimpleUnit();
-    virtual ~SimpleUnit() {};
+    SimpleUnit(QObject* parent = 0);
 
+    virtual QStringList units();
     virtual bool hasUnit(const QString &unit);
-    virtual QString convert(const QString &value, const QString &from,
-                            const QString &to, QVariant* data);
+    virtual Value convert(const Value& value, const QString& to);
 
 protected:
     QHash<QString, QVariant> m_units;

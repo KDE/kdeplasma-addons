@@ -1,7 +1,7 @@
 /*
- *   Copyright (C) 2008 Petri Damstén <damu@iki.fi>
- *   Copyright (C) 2008 Kristof Bal <kristof.bal@gmail.com>
-
+ * Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2008 Kristof Bal <kristof.bal@gmail.com>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
@@ -14,14 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  */
 
 #include "mass.h"
-#include <klocale.h>
+#include <KLocale>
 
-Mass::Mass()
+Mass::Mass(QObject* parent)
+: SimpleUnit(parent)
 {
+    setObjectName("mass");
+
     m_default = "g";
 
     m_units[i18n("gram")]         = "g";
@@ -64,4 +66,9 @@ Mass::Mass()
 	//used a lot in industry (aircraft engines for example)
 	m_units[i18n("kilonewton")]   = "kN";
     m_units["kN"]                 = 1000000.0/9.81;
+}
+
+QString Mass::name()
+{
+    return i18n("Mass");
 }

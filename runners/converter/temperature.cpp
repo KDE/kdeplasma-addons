@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,28 +16,44 @@
  */
 
 #include "temperature.h"
-#include <kdebug.h>
+#include <KDebug>
+#include <KLocale>
+
+Temperature::Temperature(QObject* parent)
+: UnitCategory(parent)
+{
+    setObjectName("temperature");
+};
+
+QString Temperature::name()
+{
+    return i18n("Temperature");
+};
 
 bool Temperature::hasUnit(const QString &unit)
 {
     return (QString("KFC").indexOf(unit) != -1);
 }
 
-QString Temperature::convert(const QString &value, const QString &from,
-                        const QString &to, QVariant* data)
+QStringList Temperature::units()
 {
-    QString toUnit = (to.isEmpty())? "K" :to;
-    double temp = value.toDouble();
+    return QStringList() << "\xb0""C" << "\xb0""F" << "\xb0""K";
+}
 
-    if (from == "C") {
+Value Temperature::convert(const Value& value, const QString& toUnit)
+{
+    QString to = (toUnit.isEmpty())? "K" : toUnit;
+    double temp = value.number.toDouble();
+
+    if (value.unit.contains("C")) {
         temp += 273.15;
-    } else if (from == "F"){
+    } else if (value.unit.contains("F")){
         temp = ((temp - 32.0) / 1.8) + 273.15;
     }
-    if (toUnit == "C") {
+    if (to.contains("C")) {
         temp -= 273.15;
-    } else if (toUnit == "F"){
+    } else if (to.contains("F")){
         temp = ((temp - 273.15) * 1.8) + 32.0;
     }
-    return QString("%1 %2").arg(temp).arg(toUnit);
+    return Value(temp, to);
 }

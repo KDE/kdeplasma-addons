@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,12 +19,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <KIcon>
-#include "length.h"
-#include "area.h"
-#include "volume.h"
-#include "temperature.h"
-#include "speed.h"
-#include "mass.h"
+#include <converter.h>
 
 #define CONVERSION_CHAR '>'
 
@@ -125,12 +120,6 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     Q_UNUSED(args)
     setObjectName(i18n("Converter"));
 
-    m_units.append(new Length);
-    m_units.append(new Area);
-    m_units.append(new Volume);
-    m_units.append(new Temperature);
-    m_units.append(new ::Speed); // There is Plasma::AbstractRunner::Speed
-    m_units.append(new Mass);
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
@@ -139,19 +128,6 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
 
 ConverterRunner::~ConverterRunner()
 {
-    foreach (Unit *unit, m_units) {
-        delete unit;
-    }
-}
-
-Unit* ConverterRunner::unitType(const QString& type)
-{
-    foreach (Unit *unit, m_units) {
-        if (unit->hasUnit(type)) {
-            return unit;
-        }
-    }
-    return 0;
 }
 
 void ConverterRunner::match(Plasma::RunnerContext &context)
@@ -163,7 +139,6 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 
     StringParser cmd(term);
     QString unit1;
-    Unit *converter;
     QString value;
     QString unit2;
 
@@ -184,23 +159,17 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     if (!s.isEmpty() && !separators.contains(s)) {
         unit1 += ' ' + s;
     }
-    converter = unitType(unit1);
-    if (!converter) {
-        return;
-    }
     cmd.pass(separators);
     unit2 = cmd.rest();
-    if (!unit2.isEmpty() && !converter->hasUnit(unit2)) {
-        return;
+    Value v = Converter::self()->convert(Value(value, unit1), unit2);
+    if (v.isValid()) {
+        Plasma::QueryMatch match(this);
+        match.setType(Plasma::QueryMatch::InformationalMatch);
+        match.setIcon(KIcon("kruler"));
+        match.setText(v.toString());
+        match.setData(v.number);
+        context.addMatch(term, match);
     }
-    QVariant data;
-    QString result = converter->convert(value, unit1, unit2, &data);
-    Plasma::QueryMatch match(this);
-    match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon("kruler"));
-    match.setText(result);
-    match.setData(data);
-    context.addMatch(term, match);
 }
 
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)

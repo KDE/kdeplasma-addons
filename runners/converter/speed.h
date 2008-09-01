@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,7 +23,8 @@
 class Speed : public SimpleUnit
 {
 public:
-    Speed();
+    Speed(QObject* parent = 0);
+    virtual QString name();
 };
 
 #endif
