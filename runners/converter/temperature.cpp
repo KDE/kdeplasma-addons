@@ -23,12 +23,12 @@ Temperature::Temperature(QObject* parent)
 : UnitCategory(parent)
 {
     setObjectName("temperature");
-};
+}
 
 QString Temperature::name()
 {
     return i18n("Temperature");
-};
+}
 
 bool Temperature::hasUnit(const QString &unit)
 {
