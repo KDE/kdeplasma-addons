@@ -85,7 +85,7 @@ UnitCategory* Converter::categoryForUnit(const QString& unit)
         }
     }
     return 0;
-};
+}
 
 UnitCategory* Converter::category(const QString& category)
 {
