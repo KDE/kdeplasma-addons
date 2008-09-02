@@ -20,11 +20,11 @@
 #include "CustomListView.h"
 #include <KDebug>
 #include <KIcon>
+#include <lancelot/models/ActionListViewModels.h>
 
-namespace Lancelot
-{
+namespace Lancelot {
 
-// CustomListItem interface
+//> CustomListItem interface
 CustomListItem::CustomListItem()
 {
 }
@@ -32,8 +32,9 @@ CustomListItem::CustomListItem()
 CustomListItem::~CustomListItem()
 {
 }
+//<
 
-// CustomListItemFactory
+//> CustomListItemFactory
 CustomListItemFactory::CustomListItemFactory()
 {
 }
@@ -41,23 +42,205 @@ CustomListItemFactory::CustomListItemFactory()
 CustomListItemFactory::~CustomListItemFactory()
 {
 }
+//<
 
-// CustomList
+//> CustomList
 class CustomList::Private {
 public:
     Private(CustomList * parent = NULL,
             CustomListItemFactory * f = NULL,
             AbstractListModel * m = NULL)
-        : q(parent), factory(f), model(m)
+        : q(parent), factory(f), model(m), scale(-1)
     {
         recreateItems();
     }
 
-    void calculateSizes()
+    #define returnIfModelNotSet if (!model || !factory) return
+
+    QGraphicsWidget * itemForIndex(int position) //>
+    {
+        QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
+            (factory->itemForIndex(position));
+
+        if (item) {
+            item->setParentItem(q);
+            items.insert(position, item);
+        }
+        return item;
+    } //<
+
+    void recreateItems() //>
+    {
+        returnIfModelNotSet;
+
+        freeAllItems();
+        for (int i = 0; i < model->size(); i++) {
+            itemForIndex(i);
+        }
+
+        positionItems();
+    } //<
+
+    void freeAllItems() //>
+    {
+        returnIfModelNotSet;
+
+        factory->freeAllItems();
+        items.clear();
+    } //<
+
+    void positionItems(int startPosition = 0) //>
+    {
+        if (startPosition < 0 || startPosition > items.size()) {
+            return;
+        }
+
+        qreal top(0);
+
+        if (startPosition != 0) {
+            top = items.at(startPosition - 1)->geometry().bottom();
+        }
+
+        for (int i = startPosition; i < items.size(); i++) {
+            int height = (int) (
+                    (scale > 0) ?
+                        (items.at(i)->maximumHeight() * scale) :
+                        (items.at(i)->preferredHeight())
+                    );
+
+            items.at(i)->setGeometry(
+                0, top,
+                viewport.width(), height
+                );
+            top += height;
+        }
+
+        if (items.size() > 0) {
+           q->resize(viewport.width(),
+                    items.last()->geometry().bottom());
+        } else {
+            q->resize(0, 0);
+        }
+
+        updateSizeInfo();
+    } //<
+
+    void updateWidth() //>
+    {
+        foreach (QGraphicsWidget * item, items) {
+            item->resize(
+                    viewport.width(),
+                    item->size().height());
+        }
+    } //<
+
+    void insertItem(int position) //>
+    {
+        returnIfModelNotSet;
+        itemForIndex(position);
+        positionItems(position);
+    } //<
+
+    void removeItem(int position) //>
+    {
+        returnIfModelNotSet;
+
+        if (position < 0 || position >= items.size()) {
+            return;
+        }
+
+        factory->freeItem(position);
+
+        positionItems(position);
+    } //<
+
+    void updateItem(int position) //>
+    {
+        positionItems(position);
+    } //<
+
+    void updateSizeInfo() //>
     {
         sizes[Qt::MinimumSize]   = 0;
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
+
+        if (!model) {
+            return;
+        }
+
+        for (int i = 0; i < model->size(); i++) {
+            sizes[Qt::MinimumSize] +=
+                factory->itemHeight(i, Qt::MinimumSize);
+            sizes[Qt::PreferredSize] +=
+                factory->itemHeight(i, Qt::PreferredSize);
+            sizes[Qt::MaximumSize] +=
+                factory->itemHeight(i, Qt::MaximumSize);
+            kDebug() << "scale" << factory->itemHeight(i, Qt::MinimumSize)
+                                << factory->itemHeight(i, Qt::MaximumSize)
+                                << factory->itemHeight(i, Qt::PreferredSize);
+        }
+        kDebug() << "scale" << sizes[Qt::MinimumSize]
+                            << sizes[Qt::MaximumSize]
+                            << sizes[Qt::PreferredSize];
+
+        if (sizes[Qt::MinimumSize] > viewport.height()) {
+            scale = -1;
+        } else {
+            if (sizes[Qt::MaximumSize] < viewport.height()) {
+                scale = 1;
+            } else {
+                scale = viewport.height() /
+                    (qreal) sizes[Qt::MaximumSize];
+            }
+        }
+        kDebug() << "scale" << scale <<
+                viewport.height() <<
+                sizes[Qt::MaximumSize] <<
+                ((ActionListViewModel *)model)->title(0);
+
+        if (q && q->scrollPane()) {
+            q->scrollPane()->scrollableWidgetSizeUpdated();
+        }
+    } //<
+
+    void viewportOriginUpdated() //>
+    {
+        QTransform transform;
+        foreach (QGraphicsWidget * item, items) {
+            QRectF itemGeometry = item->geometry();
+            if (viewport.intersects(itemGeometry)) {
+                item->show();
+                transform.reset();
+                if (!viewport.contains(itemGeometry)) {
+                    QRectF clip = viewport.intersect(itemGeometry);
+                    transform.translate(0, clip.top() -
+                            itemGeometry.top());
+                    transform.scale(1, clip.height() /
+                            itemGeometry.height());
+                }
+                item->setTransform(transform);
+            } else {
+                item->hide();
+            }
+        }
+    } //<
+
+    void viewportSizeUpdated() //>
+    {
+        positionItems();
+    } //<
+
+    void calculateSizes() //>
+    {
+        sizes[Qt::MinimumSize]   = 0;
+        sizes[Qt::PreferredSize] = 0;
+        sizes[Qt::MaximumSize]   = 0;
+
+        if (!model) {
+            return;
+        }
+
         for (int i = 0; i < model->size(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
@@ -66,128 +249,20 @@ public:
             sizes[Qt::MaximumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
         }
-    }
+    } //<
 
-    void freeAllItems()
-    {
-        factory->freeAllItems();
-        items.clear();
-    }
-
-    void recreateItems()
-    {
-        kDebug() << "entered" << model << factory;
-        if (!model || !factory) {
-            return;
-        }
-        kDebug() << "go! need:" << model->size() << "items";
-
-        freeAllItems();
-        qreal top = 0;
-
-        for (int i = 0; i < model->size(); i++) {
-            QGraphicsWidget * item =
-                dynamic_cast < QGraphicsWidget * >
-                (factory->itemForIndex(i));
-
-            if (!item) {
-                continue;
-            }
-
-            kDebug() << "adding";
-            item->setParentItem(q);
-            item->setGeometry(0, top,
-                    viewportSize.width(), item->preferredHeight()
-            );
-            kDebug() << "item geometry" << item->geometry();
-            top += item->preferredHeight();
-        }
-    }
-
-    void insertItem(int position)
-    {
-        if (!model || !factory) {
-            return;
-        }
-
-        if (position < 0) {
-            position = 0;
-        }
-
-        QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
-            (factory->itemForIndex(position));
-
-        if (!item) {
-            return;
-        }
-
-        qreal top = 0;
-        if (position >= items.size()) {
-            if (items.size() > 0) {
-                top = items.last()->geometry().bottom();
-            }
-        } else {
-            top = items.at(position)->geometry().top();
-        }
-
-        item->setParentItem(q);
-        item->setGeometry(QRectF(
-            QPointF(0, top),
-            item->preferredSize()
-        ));
-        items.insert(position, item);
-
-        top = item->preferredHeight();
-
-        for (int i = position + 1; i < items.size(); i++) {
-            items.at(i)->moveBy(0, top);
-        }
-    }
-
-    void removeItem(int position)
-    {
-        if (!model || !factory || position >= items.size() || position < 0) {
-            return;
-        }
-
-        qreal shift = items.at(position)->
-            geometry().height();
-        factory->freeItem(position);
-
-        for (int i = position; i < items.size(); i++) {
-            items.at(i)->moveBy(0, - shift);
-        }
-    }
-
-    void invalidateItem(int position)
-    {
-        if (!model || !factory || position + 1 >= items.size() || position < 0) {
-            return;
-        }
-
-        qreal shift =
-            items.at(position + 1)->geometry().top() -
-            items.at(position)->geometry().bottom();
-
-        for (int i = position; i < items.size(); i++) {
-            items.at(i)->moveBy(0, - shift);
-        }
-    }
-
-    void updateItemSizes()
-    {
-        foreach (QGraphicsWidget * item, items) {
-            item->resize(viewportSize.width(), item->size().height());
-        }
-    }
-
+    //> Variable Declarations
     CustomList * q;
+
     CustomListItemFactory * factory;
     AbstractListModel * model;
+
     QList < QGraphicsWidget * > items;
     QMap < Qt::SizeHint, int > sizes;
-    QSizeF viewportSize;
-    QPointF viewportOrigin;
+
+    QRectF viewport;
+    qreal scale;
+    //<
 };
 
 CustomList::CustomList(QGraphicsItem * parent)
@@ -223,7 +298,7 @@ CustomListItemFactory * CustomList::itemFactory() const
     return d->factory;
 }
 
-void CustomList::setModel(AbstractListModel * m)
+void CustomList::setModel(AbstractListModel * m) //>
 {
     if (d->model) {
         disconnect(d->model, NULL, this, NULL);
@@ -232,51 +307,50 @@ void CustomList::setModel(AbstractListModel * m)
 
     connect(m, SIGNAL(itemInserted(int)),
             this, SLOT(modelItemInserted(int)));
-    connect(m, SIGNAL(itemRemoved(int)),
-            this, SLOT(modelItemRemoved(int)));
+    connect(m, SIGNAL(itemDeleted(int)),
+            this, SLOT(modelItemDeleted(int)));
     connect(m, SIGNAL(itemAltered(int)),
             this, SLOT(modelItemAltered(int)));
-    connect(m, SIGNAL(updated(int)),
-            this, SLOT(modelUpdated(int)));
+    connect(m, SIGNAL(updated()),
+            this, SLOT(modelUpdated()));
 
     d->recreateItems();
-}
+} //<
 
 AbstractListModel * CustomList::model() const
 {
     return d->model;
 }
 
-QSizeF CustomList::fullSize() const
+QSizeF CustomList::fullSize() const //>
 {
-    if (d->viewportSize.height() < d->sizes[Qt::MinimumSize]) {
-        return QSizeF(0, d->sizes[Qt::PreferredSize]);
+    d->updateSizeInfo();
+
+    /*if (d->scale > 0) {
+        if (d->items.isEmpty()) {
+            return QSizeF(0, 0);
+        } else {
+            return QSizeF(0, d->items.last()->geometry().bottom()); // d->scale * d->sizes[Qt::MaximumSize]);
+        }
     } else {
-        return QSizeF(0, d->viewportSize.height());
-    }
-}
+        return QSizeF(0, d->sizes[Qt::PreferredSize]);
+    }*/
+    return size();
+} //<
 
-void CustomList::viewportChanged(QRectF viewport)
+void CustomList::viewportChanged(QRectF viewport) //>
 {
-    if (d->viewportSize != viewport.size()) {
-        kDebug() << "size changed" << d->viewportSize <<
-            viewport.size();
-
-        d->viewportSize = viewport.size();
-        resize(d->viewportSize.width(), fullSize().height());
-        d->updateItemSizes();
+    if (d->viewport.size() != viewport.size()) {
+        d->viewport = viewport;
+        resize(d->viewport.width(), fullSize().height());
+        d->viewportSizeUpdated();
     }
-    if (d->viewportOrigin != viewport.topLeft()) {
-        kDebug() << "origin changed" << d->viewportOrigin <<
-            viewport.topLeft();
-        d->viewportOrigin = viewport.topLeft();
-        //setGeometry(QRectF(
-        //        - d->viewportOrigin,
-        //        geometry().size()
-        //    ));
-        setPos(- d->viewportOrigin);
+    if (d->viewport.topLeft() != viewport.topLeft()) {
+        d->viewport = viewport;
+        setPos(- d->viewport.topLeft());
+        d->viewportOriginUpdated();
     }
-}
+} //<
 
 qreal CustomList::scrollUnit(Qt::Orientation direction)
 {
@@ -286,27 +360,25 @@ qreal CustomList::scrollUnit(Qt::Orientation direction)
 void CustomList::modelItemInserted(int position)
 {
     d->insertItem(position);
-    d->calculateSizes();
 }
 
-void CustomList::modelItemRemoved(int position)
+void CustomList::modelItemDeleted(int position)
 {
     d->removeItem(position);
-    d->calculateSizes();
 }
 
 void CustomList::modelItemAltered(int position)
 {
-    d->invalidateItem(position);
-    d->calculateSizes();
+    d->updateItem(position);
 }
 
 void CustomList::modelUpdated()
 {
-    d->calculateSizes();
+    d->recreateItems();
 }
+//<
 
-// CustomListView
+//> CustomListView
 class CustomListView::Private {
 public:
     Private(CustomList * l, CustomListView * parent)
@@ -341,6 +413,8 @@ CustomList * CustomListView::list() const
 {
     return d->list;
 }
+
+//<
 
 } // namespace Lancelot
 

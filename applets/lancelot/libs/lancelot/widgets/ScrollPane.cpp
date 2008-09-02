@@ -210,10 +210,10 @@ void ScrollPane::scrollableWidgetSizeUpdated()
 
 void ScrollPane::setGeometry(const QRectF & rect)
 {
-    if (geometry() == rect) {
+    if (geometry() == rect || rect.isEmpty()) {
         return;
     }
-    kDebug() << rect;
+
     Widget::setGeometry(rect);
     kDebug() << geometry();
     scrollableWidgetSizeUpdated();
@@ -297,6 +297,15 @@ void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     }
     if (d->layout->size(FullBorderLayout::BottomBorder) != 0) {
         d->horizontal->hide();
+    }
+}
+
+void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event)
+{
+    if (event->modifiers() & Qt::ControlModifier) {
+        d->horizontal->wheelEvent(event);
+    } else {
+        d->vertical->wheelEvent(event);
     }
 }
 

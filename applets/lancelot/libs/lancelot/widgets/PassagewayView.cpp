@@ -21,8 +21,7 @@
 
 #include <QWidget>
 
-namespace Lancelot
-{
+namespace Lancelot {
 
 class PassagewayViewSizer: public ColumnLayout::ColumnSizer {
 public:

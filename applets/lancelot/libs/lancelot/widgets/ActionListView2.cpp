@@ -21,46 +21,49 @@
 
 namespace Lancelot {
 
+//> ActionListView2Item
 class ActionListView2Item: public ExtenderButton, public CustomListItem {
 public:
-    ActionListView2Item()
+    ActionListView2Item() //>
         : ExtenderButton(), m_selected(false)
     {
         L_WIDGET_SET_INITIALIZED;
-    }
+    } //<
 
     ~ActionListView2Item()
     {
     }
 
-    L_Override virtual void setSelected(bool selected = true)
+    L_Override virtual void setSelected(bool selected = true) //>
     {
         m_selected = selected;
-    }
+    } //<
 
-    L_Override virtual bool isSelected() const
+    L_Override virtual bool isSelected() const //>
     {
         return m_selected;
-    }
+    } //<
 
-    L_Override virtual void paint(QPainter * painter,
-            const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
-    {
-        painter->fillRect(
-                QRectF(QPointF(), size()),
-                QBrush(QColor(250, 200, 100))
-                );
-        painter->fillRect(
-                QRectF(QPointF(5, 5), size() - QSizeF(10, 10)),
-                QBrush(QColor(100, 200, 100))
-                );
-        ExtenderButton::paint(painter, option, widget);
-    }
+    // L_Override virtual void paint(QPainter * painter,
+    //         const QStyleOptionGraphicsItem * option, QWidget * widget = 0) //>
+    // {
+    //     painter->fillRect(
+    //             QRectF(QPointF(), size()),
+    //             QBrush(QColor(250, 200, 100, 100))
+    //             );
+    //     painter->fillRect(
+    //             QRectF(QPointF(5, 5), size() - QSizeF(10, 10)),
+    //             QBrush(QColor(100, 200, 100, 100))
+    //             );
+    //     ExtenderButton::paint(painter, option, widget);
+    // } //<
 
 private:
     bool m_selected;
 };
+//<
 
+//> ActionListView2ItemFactory
 class ActionListView2ItemFactory: public CustomListItemFactory {
 public:
     ActionListView2ItemFactory(ActionListViewModel * model)
@@ -73,8 +76,12 @@ public:
         freeAllItems();
     }
 
-    L_Override virtual CustomListItem * itemForIndex(int index)
+    L_Override virtual CustomListItem * itemForIndex(int index) //>
     {
+        if (m_items[index]) {
+            return m_items[index];
+        }
+
         ActionListView2Item * item = new ActionListView2Item();
         item->setTitle(m_model->title(index));
         item->setDescription(m_model->description(index));
@@ -82,65 +89,67 @@ public:
         item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
         item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
         item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
-        kDebug() << index << m_model->title(index);
+        item->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        item->setGroupByName("ActionListView-Items");
+        m_items[index] = item;
         return item;
-    }
+    } //<
 
-    L_Override virtual int itemHeight(int index, Qt::SizeHint which) const
+    L_Override virtual int itemHeight(int index, Qt::SizeHint which) const //>
     {
         if (m_model->isCategory(index)) {
             switch (which) {
                 case Qt::MinimumSize:
                     return 20;
                 case Qt::MaximumSize:
-                    return 40;
+                    return 20;
                 default:
-                    return 30;
+                    return 20;
             }
         } else {
             switch (which) {
                 case Qt::MinimumSize:
-                    return 30;
+                    return 40;
                 case Qt::MaximumSize:
                     return 70;
                 default:
-                    return 50;
+                    return 55;
             }
         }
-    }
+    } //<
 
-    L_Override virtual void freeItem(int index)
+    L_Override virtual void freeItem(int index) //>
     {
-        if (m_items[index] != NULL) {
-            delete m_items[index];
-            m_items[index] = NULL;
-        }
-    }
+        // if (m_items[index] != NULL) {
+        //     delete m_items[index];
+        //     m_items[index] = NULL;
+        // }
+    } //<
 
-    L_Override virtual void freeAllItems()
+    L_Override virtual void freeAllItems() //>
     {
-        foreach (ActionListView2Item * item, m_items) {
-            delete item;
-        }
-    }
+        //foreach (ActionListView2Item * item, m_items) {
+        //    delete item;
+        //}
+    } //<
 
-    void setModel(ActionListViewModel * model)
+    void setModel(ActionListViewModel * model) //>
     {
         m_model = model;
-    }
+    } //<
 
-    ActionListViewModel * model()
+    ActionListViewModel * model() //>
     {
         return m_model;
-    }
+    } //<
 
 private:
     ActionListViewModel * m_model;
-    QList < ActionListView2Item * > m_items;
+    QMap < int, ActionListView2Item * > m_items;
 };
+//<
 
-// ActionListView2
-
+//> ActionListView2
 class ActionListView2::Private {
 public:
     Private()
@@ -159,6 +168,9 @@ public:
 ActionListView2::ActionListView2(QGraphicsItem * parent)
     : CustomListView(parent), d(new Private())
 {
+    setFlag(ScrollPane::HoverShowScrollbars);
+    clearFlag(ScrollPane::ClipScrollable);
+
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -167,6 +179,9 @@ ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * pa
       d(new Private())
 {
     d->itemFactory = (ActionListView2ItemFactory *) list()->itemFactory();
+    setFlag(ScrollPane::HoverShowScrollbars);
+    clearFlag(ScrollPane::ClipScrollable);
+
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -194,5 +209,6 @@ ActionListViewModel * ActionListView2::model() const
     }
     return d->itemFactory->model();
 }
+//<
 
 } // namespace Lancelot
