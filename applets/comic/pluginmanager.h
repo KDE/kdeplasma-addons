@@ -22,6 +22,7 @@
 #define PLUGINMANAGER_H
 
 #include <QtGui/QPixmap>
+#include <QtCore/QMap>
 
 class ComicEntry
 {
