@@ -33,12 +33,10 @@ class QHttp;
  * Twitter Data Engine
  *
  * This engine provides access to twitter.com timelines.
- * There are three types of timeline you can connect to:
- * Timeline
+ * There are two types of timeline you can connect to:
  * Timeline:<user>
  * TimelineWithFriends:<user>
  *
- * Timeline is the public timeline that shows tweets from all twitter users.
  * Timeline:<user> shows only the tweets of that user. it currently requires a password.
  * TimelineWithFriends:<user> shows the normal timeline of that user and their
  * friends. it requires a password to be configured for the user.
@@ -54,46 +52,19 @@ class QHttp;
 class TwitterEngine : public Plasma::DataEngine
 {
     Q_OBJECT
-    Q_PROPERTY(QString status READ status WRITE setStatus)
-    Q_PROPERTY(Plasma::DataEngine::Data config READ config WRITE setConfig)
 
     public:
         TwitterEngine(QObject* parent, const QVariantList& args);
         ~TwitterEngine();
 
-        QString status() const;
-        void setStatus(const QString& refresh);
-        Plasma::DataEngine::Data config() const;
-        void setConfig(const Plasma::DataEngine::Data& config);
-
-        enum UpdateType { Timeline=1, UserTimeline, UserTimelineWithFriends, UserImage, Post, UserInfo };
+        Plasma::Service* serviceForSource(const QString &name);
 
     protected:
         //from DataEngine
         bool sourceRequestEvent(const QString &name);
 
     protected slots:
-        void requestFinished(int id, bool error);
-        void anonRequestFinished(int id, bool error);
-        bool updateSourceEvent(const QString &source);
-
-    private:
-        void updateTimeline();
-        void updateUser(const QString &who);
-        void updateUserWithFriends(const QString &who);
-        void getUserImage( const QString &who, const KUrl& url );
-        void getUserInfo( const QString &who );
-        void parseStatuses(QDomNodeList items, const QString& source);
-        void parseUserInfo(const QDomDocument &info);
-
-        QString m_status;
-        QHttp* m_http;
-        QHttp* m_anonHttp;
-        QMap<int,UpdateType> m_pendingRequests;
-        QMap<int,UpdateType> m_pendingAnonRequests;
-        QMap<int,QString> m_pendingNames;
-        QMap<QString,KUrl> m_userImages;
-        Plasma::DataEngine::Data m_config;
+        bool updateSourceEvent(const QString &name);
 };
 
 K_EXPORT_PLASMA_DATAENGINE(twitter, TwitterEngine)

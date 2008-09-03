@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="auth">
+        <entry name="password" type="String">
+            <label>The log in password for the account.</label>
+        </entry>
+    </group>
+
+    <group name="update">
+        <entry name="password" type="String">
+            <label>The log in password for the account.</label>
+        </entry>
+        <entry name="tweet" type="String">
+            <label>The tweet text</label>
+        </entry>
+    </group>
+</kcfg>
