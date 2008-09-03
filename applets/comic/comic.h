@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
+ *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -75,11 +76,15 @@ class ComicApplet : public Plasma::Applet
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
+        QString mComicAuthor;
+        QString mComicTitle;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;
         bool mShowComicUrl;
+        bool mShowComicAuthor;
+        bool mShowComicTitle;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         FullViewWidget *mFullViewWidget;

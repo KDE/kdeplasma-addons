@@ -4,6 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_cadprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=cad
+X-KDE-PlasmaComicProvider-ComicAuthor=Tim Buckley
 Icon=plasma_comic_cad
 
 Name=Ctrl+Alt+Del

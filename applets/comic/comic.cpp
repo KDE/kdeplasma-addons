@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
+ *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -35,6 +36,7 @@
 
 #include "configwidget.h"
 #include "fullviewwidget.h"
+#include "pluginmanager.h"
 
 static const int s_arrowWidth = 30;
 
@@ -43,7 +45,9 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mCurrentDate( QDate::currentDate() ),
       mShowPreviousButton( true ),
       mShowNextButton( false ),
-      mShowComicUrl( false )
+      mShowComicUrl( false ),
+      mShowComicAuthor( false ),
+      mShowComicTitle( false )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
@@ -88,6 +92,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+    mComicAuthor = PluginManager::Instance()->comicAuthor( mComicIdentifier );
+    mComicTitle = PluginManager::Instance()->comicTitle( mComicIdentifier );
 
     updateButtons();
 
@@ -104,6 +110,8 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget = new ConfigWidget( parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
+    mConfigWidget->setShowComicAuthor( mShowComicAuthor );
+    mConfigWidget->setShowComicTitle( mShowComicTitle );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
@@ -116,6 +124,8 @@ void ComicApplet::applyConfig()
 {
     mComicIdentifier = mConfigWidget->comicIdentifier();
     mShowComicUrl = mConfigWidget->showComicUrl();
+    mShowComicAuthor = mConfigWidget->showComicAuthor();
+    mShowComicTitle = mConfigWidget->showComicTitle();
 
     saveConfig();
 
@@ -141,6 +151,8 @@ void ComicApplet::loadConfig()
     KConfigGroup cg = config();
     mComicIdentifier = cg.readEntry( "comic", "garfield" );
     mShowComicUrl = cg.readEntry( "showComicUrl", false );
+    mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
+    mShowComicTitle = cg.readEntry( "showComicTitle", false );
 }
 
 void ComicApplet::saveConfig()
@@ -148,6 +160,8 @@ void ComicApplet::saveConfig()
     KConfigGroup cg = config();
     cg.writeEntry( "comic", mComicIdentifier );
     cg.writeEntry( "showComicUrl", mShowComicUrl );
+    cg.writeEntry( "showComicAuthor", mShowComicAuthor );
+    cg.writeEntry( "showComicTitle", mShowComicTitle );
 }
 
 void ComicApplet::slotNextDay()
@@ -205,13 +219,36 @@ void ComicApplet::updateSize()
         int rightArea = mShowNextButton ? s_arrowWidth : 0;
         qreal aspectRatio = qreal(size.height()) / size.width();
         qreal imageHeight = aspectRatio * ( geometry().width() - leftArea - rightArea );
-        int bottomArea = ( mShowComicUrl ? Plasma::Theme::defaultTheme()->fontMetrics().height() : 0 );
-        resize( geometry().width(), imageHeight + bottomArea );
+        int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
+        int topArea = ( ( mShowComicAuthor || mShowComicTitle ) ? fmHeight : 0 );
+        int bottomArea = ( mShowComicUrl ? fmHeight : 0 );
+        resize( geometry().width(), imageHeight + topArea + bottomArea );
     }
 }
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
+    QString tempTop;
+
+    if ( mShowComicTitle ) {
+        tempTop = mComicTitle;
+//         tempTop += ( ( !mStripTitle.isEmpty() && !mComicTitle.isEmpty() ) ? " - " : "" );
+//         tempTop += mStripTitle;
+    }
+    if ( mShowComicAuthor && !mComicAuthor.isEmpty() ) {
+        tempTop = ( !tempTop.isEmpty() ? mComicAuthor + ": " + tempTop : mComicAuthor );
+    }
+
+    int topHeight = 0;
+    if ( ( mShowComicAuthor || mShowComicTitle ) && !tempTop.isEmpty() ) {
+        QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
+        topHeight = fm.height();
+        int height = contentRect.top();
+        p->setPen( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
+        p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
+                    Qt::AlignCenter, tempTop );
+    }
+    
     int urlHeight = 0;
     if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
@@ -253,8 +290,8 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         rightImageGap = s_arrowWidth;
     }
 
-    QRect imageRect( contentRect.x() + leftImageGap, contentRect.y(),
-                     contentRect.width() - (leftImageGap + rightImageGap), contentRect.height() - urlHeight );
+    QRect imageRect( contentRect.x() + leftImageGap, contentRect.y() + topHeight,
+                     contentRect.width() - (leftImageGap + rightImageGap), contentRect.height() - urlHeight - topHeight );
     p->drawImage( imageRect, mImage );
 
     p->restore();

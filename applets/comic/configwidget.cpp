@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
+ *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -27,7 +28,8 @@
 
 #include <KLocale>
 #include <KServiceTypeTrader>
-#include <KStandardDirs>
+
+#include "pluginmanager.h"
 
 
 class ComicModel : public QAbstractListModel
@@ -36,14 +38,7 @@ class ComicModel : public QAbstractListModel
         ComicModel( QObject *parent = 0 )
             : QAbstractListModel( parent )
         {
-            KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
-            Q_FOREACH ( const KService::Ptr &service, services ) {
-                mComics << ComicEntry( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
-                                       service->name(),
-                                       QPixmap( KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) ) ) );
-            }
-
-            qSort( mComics );
+            mComics = PluginManager::Instance()->comics();
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -70,23 +65,6 @@ class ComicModel : public QAbstractListModel
         }
 
     private:
-        class ComicEntry
-        {
-            public:
-                ComicEntry( const QString &_identifier, const QString &_title, const QPixmap &_icon )
-                    : identifier( _identifier ), title( _title ), icon( _icon )
-                {
-                }
-
-                bool operator<( const ComicEntry &other ) const
-                {
-                    return (title < other.title);
-                }
-
-                QString identifier;
-                QString title;
-                QPixmap icon;
-        };
 
         QList<ComicEntry> mComics;
 };
@@ -102,11 +80,15 @@ ConfigWidget::ConfigWidget( QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
+    mShowComicAuthor = new QCheckBox( i18n( "Show Comic Author" ), this );
+    mShowComicTitle = new QCheckBox( i18n( "Show Comic Title" ), this );
     mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
-    layout->addWidget( mShowComicUrl, 1, 0, 1, 2 );
+    layout->addWidget( mShowComicAuthor, 1, 0, 1, 2 );
+    layout->addWidget( mShowComicTitle, 2, 0, 1, 2 );
+    layout->addWidget( mShowComicUrl, 3, 0, 1, 2 );
 
     mModel = new ComicModel( this );
     mComicIdentifier->setModel( mModel );
@@ -141,4 +123,24 @@ void ConfigWidget::setShowComicUrl( bool show )
 bool ConfigWidget::showComicUrl() const
 {
     return mShowComicUrl->isChecked();
+}
+
+void ConfigWidget::setShowComicAuthor( bool show )
+{
+    mShowComicAuthor->setChecked( show );
+}
+
+bool ConfigWidget::showComicAuthor() const
+{
+    return mShowComicAuthor->isChecked();
+}
+
+void ConfigWidget::setShowComicTitle( bool show )
+{
+    mShowComicTitle->setChecked( show );
+}
+
+bool ConfigWidget::showComicTitle() const
+{
+    return mShowComicTitle->isChecked();
 }

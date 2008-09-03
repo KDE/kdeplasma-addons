@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
+ *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -37,10 +38,16 @@ class ConfigWidget : public QWidget
 
         void setShowComicUrl( bool show );
         bool showComicUrl() const;
+        void setShowComicAuthor( bool show );
+        bool showComicAuthor() const;
+        void setShowComicTitle( bool show );
+        bool showComicTitle() const;
 
     private:
         QComboBox *mComicIdentifier;
         QCheckBox *mShowComicUrl;
+        QCheckBox *mShowComicAuthor;
+        QCheckBox *mShowComicTitle;
         ComicModel *mModel;
 };
 

@@ -3,7 +3,8 @@ project(plasma-comic)
 set(comic_SRCS
     comic.cpp
     configwidget.cpp
-    fullviewwidget.cpp)
+    fullviewwidget.cpp
+    pluginmanager.cpp)
 
 kde4_add_plugin(plasma_applet_comic ${comic_SRCS})
 target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS})

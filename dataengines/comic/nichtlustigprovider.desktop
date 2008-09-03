@@ -4,6 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_nichtlustigprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=nichtlustig
+X-KDE-PlasmaComicProvider-ComicAuthor=Joscha Sauer
 Icon=plasma_comic_nichtlustig
 
 Name=NICHTLUSTIG

@@ -4,6 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_phdprovider
 X-KDE-PlasmaComicProvider-SuffixType=Number
 X-KDE-PlasmaComicProvider-Identifier=phd
+X-KDE-PlasmaComicProvider-ComicAuthor=Jorge Cham
 Icon=plasma_comic_phd
 
 Name=PhD Comics

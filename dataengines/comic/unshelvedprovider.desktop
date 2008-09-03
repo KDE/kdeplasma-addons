@@ -4,6 +4,7 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_unshelvedprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=unshelved
+X-KDE-PlasmaComicProvider-ComicAuthor=Bill Barnes, Gene Ambaum
 Icon=plasma_comic_unshelved
 
 Name=Unshelved Comics
