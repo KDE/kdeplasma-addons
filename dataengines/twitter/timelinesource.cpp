@@ -96,6 +96,7 @@ Plasma::Service* TimelineSource::createService()
 void TimelineSource::setPassword(const QString &password)
 {
     m_url.setPass(password);
+    update();
 }
 
 QString TimelineSource::password() const
@@ -110,7 +111,7 @@ QString TimelineSource::account() const
 
 void TimelineSource::update()
 {
-    if (m_job) {
+    if (m_job || (!account().isEmpty() && password().isEmpty())) {
         // We are already performing a fetch, let's not bother starting over
         return;
     }
