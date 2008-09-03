@@ -29,7 +29,7 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
 {
     Q_UNUSED(args)
     KGlobal::locale()->insertCatalog("krunner_spellcheckrunner");
-    setObjectName(i18n("Spell Checker"));
+    setObjectName("Spell Checker");
     setSpeed(AbstractRunner::SlowSpeed);
 
     reloadConfiguration();

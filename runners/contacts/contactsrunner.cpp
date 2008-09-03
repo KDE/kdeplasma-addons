@@ -37,8 +37,7 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    // set the name shown after the result in krunner window
-    setObjectName(i18n("Contacts"));
+    setObjectName("Contacts");
 
     m_book = KABC::StdAddressBook::self();
     m_book->load();

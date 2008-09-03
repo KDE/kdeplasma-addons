@@ -35,8 +35,7 @@ BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& 
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    KGlobal::locale()->insertCatalog("krunner_browserhistoryrunner");
-    setObjectName(i18n("Browser History"));
+    setObjectName("Browser History");
     m_icon = KIcon("view-history");
 
     loadHistory();

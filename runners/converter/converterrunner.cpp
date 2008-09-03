@@ -118,7 +118,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args)
-    setObjectName(i18n("Converter"));
+    setObjectName("Converter");
 
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
