@@ -66,7 +66,6 @@ protected:
     Plasma::ServiceJob* createJob(const QString &operation, QMap<QString, QVariant> &parameters);
 
 private:
-    QString m_who;
     TimelineSource *m_source;
 };
 
