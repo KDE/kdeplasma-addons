@@ -89,8 +89,10 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
     }
 
     provider = qobject_cast<ComicProvider*>( service->createInstance<QObject>( this, args ) );
+    if (!provider)
+    	return false;
+    
     provider->setIsCurrent( isCurrentComic );
-
     connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
     connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
 
