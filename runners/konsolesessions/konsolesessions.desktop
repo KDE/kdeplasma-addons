@@ -1,0 +1,26 @@
+[Desktop Entry]
+Name=Konsole Sessions
+Name[nds]=Konsole-Törns
+Name[pt]=Sessões do Konsole
+Name[pt_BR]=Sessões do Konsole
+Name[sv]=Terminal-sessioner
+Name[uk]=Сеанси Konsole
+Name[zh_TW]=Konsole 工作階段
+Comment=Matches Konsole Sessions
+Comment[nds]=Kiekt na Konsole-Törns
+Comment[pt]=Corresponde às Sessões do Konsole
+Comment[pt_BR]=Corresponde às Sessões do Konsole
+Comment[sv]=Matchar terminal-sessioner
+Comment[uk]=Порівнює сеанси Konsole
+Comment[zh_TW]=符合 Konsole 工作階段
+Icon=utilities-terminal
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_konsolesessions
+X-KDE-PluginInfo-Author=Laurent Montel
+X-KDE-PluginInfo-Email=montel@kde.org
+X-KDE-PluginInfo-Name=konsolesessions
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
