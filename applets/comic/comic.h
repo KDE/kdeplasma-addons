@@ -78,6 +78,8 @@ class ComicApplet : public Plasma::Applet
         QString mPreviousIdentifierSuffix;
         QString mComicAuthor;
         QString mComicTitle;
+        QString mStripTitle;
+        QString mAdditionalText;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;

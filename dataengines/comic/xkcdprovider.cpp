@@ -40,6 +40,8 @@ class XkcdProvider::Private
         }
 
         QImage mImage;
+        QString mStripTitle;
+        QString mAdditionalText;
         bool mHasNextComic;
         int mRequestedId;
 };
@@ -102,6 +104,16 @@ QString XkcdProvider::previousIdentifier() const
    }
 }
 
+QString XkcdProvider::stripTitle() const
+{
+    return d->mStripTitle;
+}
+
+QString XkcdProvider::additionalText() const
+{
+    return d->mAdditionalText;
+}
+
 void XkcdProvider::pageRetrieved( int id, const QByteArray &rawData )
 {
     if ( id == Private::PageRequest ) {
@@ -133,6 +145,15 @@ void XkcdProvider::pageRetrieved( int id, const QByteArray &rawData )
         const QRegExp nextExp( nextPattern );
 
         d->mHasNextComic = (nextExp.indexIn( data ) == -1);
+
+        //find the tooltip and the strip title of the comic
+        const QString toolStripPattern( "src=\"http://imgs.xkcd.com/comics/\\w+\\.png\" title=\"(.+)\" alt=\"(.+)\"" );
+        QRegExp toolStripExp ( toolStripPattern );
+        toolStripExp.setMinimal( true );
+        if ( toolStripExp.indexIn ( data ) > 1 ) {
+            d->mAdditionalText = toolStripExp.cap ( 1 );
+            d->mStripTitle = toolStripExp.cap ( 2 );
+        }
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );
         emit finished( this );

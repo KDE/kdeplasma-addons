@@ -120,6 +120,8 @@ void ComicEngine::finished( ComicProvider *provider )
     setData( identifier, "Website Url", provider->websiteUrl() );
     setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
     setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
+    setData( identifier, "Additional text", provider->additionalText() );
+    setData( identifier, "Strip title", provider->stripTitle() );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
@@ -131,6 +133,12 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "websiteUrl" ] = provider->websiteUrl().prettyUrl();
         info[ "nextIdentifier" ] = provider->nextIdentifier();
         info[ "previousIdentifier" ] = provider->previousIdentifier();
+        if ( !provider->additionalText().isEmpty() ) {
+            info[ "additionalText" ] = provider->additionalText();
+        }
+        if ( !provider->stripTitle().isEmpty() ) {
+            info[ "stripTitle" ] = provider->stripTitle();
+        }
 
         CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
     }

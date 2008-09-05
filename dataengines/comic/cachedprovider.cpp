@@ -77,6 +77,18 @@ QString CachedProvider::previousIdentifier() const
     return settings.value( "previousIdentifier", QString() ).toString();
 }
 
+QString CachedProvider::stripTitle() const
+{
+    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "stripTitle", QString() ).toString();
+}
+
+QString CachedProvider::additionalText() const
+{
+    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "additionalText", QString() ).toString();
+}
+
 void CachedProvider::triggerFinished()
 {
     emit finished( this );

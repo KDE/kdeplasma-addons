@@ -75,6 +75,16 @@ class CachedProvider : public ComicProvider
         virtual QString previousIdentifier() const;
 
         /**
+        * Returns the title of the strip.
+        */
+        virtual QString stripTitle() const;
+
+        /**
+         * Returns additionalText of the comic.
+         */
+        virtual QString additionalText() const;
+
+        /**
          * Returns whether a comic with the given @p identifier is cached.
          */
         static bool isCached( const QString &identifier );

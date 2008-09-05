@@ -32,7 +32,8 @@
 #include <KRun>
 #include <KTemporaryFile>
 
-#include <plasma/theme.h>
+#include <Plasma/Theme>
+#include <plasma/tooltipmanager.h>
 
 #include "configwidget.h"
 #include "fullviewwidget.h"
@@ -56,6 +57,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
 void ComicApplet::init()
 {
+    Plasma::ToolTipManager::self()->registerWidget(this);
     loadConfig();
 
     mCurrentDay = QDate::currentDate();
@@ -92,6 +94,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+    mStripTitle = data[ "Strip title" ].toString();
+    mAdditionalText = data[ "Additional text" ].toString();
     mComicAuthor = PluginManager::Instance()->comicAuthor( mComicIdentifier );
     mComicTitle = PluginManager::Instance()->comicTitle( mComicIdentifier );
 
@@ -228,12 +232,13 @@ void ComicApplet::updateSize()
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
+    Plasma::ToolTipManager::ToolTipContent toolTipData;
     QString tempTop;
 
     if ( mShowComicTitle ) {
         tempTop = mComicTitle;
-//         tempTop += ( ( !mStripTitle.isEmpty() && !mComicTitle.isEmpty() ) ? " - " : "" );
-//         tempTop += mStripTitle;
+        tempTop += ( ( !mStripTitle.isEmpty() && !mComicTitle.isEmpty() ) ? " - " : "" );
+        tempTop += mStripTitle;
     }
     if ( mShowComicAuthor && !mComicAuthor.isEmpty() ) {
         tempTop = ( !tempTop.isEmpty() ? mComicAuthor + ": " + tempTop : mComicAuthor );
@@ -248,7 +253,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
                     Qt::AlignCenter, tempTop );
     }
-    
+
     int urlHeight = 0;
     if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
@@ -295,6 +300,8 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->drawImage( imageRect, mImage );
 
     p->restore();
+    toolTipData.mainText += mAdditionalText;
+    Plasma::ToolTipManager::self()->setToolTipContent(this,toolTipData);
 }
 
 QList<QAction*> ComicApplet::contextualActions()

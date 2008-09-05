@@ -84,6 +84,16 @@ QString ComicProvider::previousIdentifier() const
     return QString();
 }
 
+QString ComicProvider::stripTitle() const
+{
+    return QString();
+}
+
+QString ComicProvider::additionalText() const
+{
+    return QString();
+}
+
 void ComicProvider::setIsCurrent( bool value )
 {
     d->mIsCurrent = value;

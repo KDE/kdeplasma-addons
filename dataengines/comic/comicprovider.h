@@ -99,6 +99,17 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual QString previousIdentifier() const;
 
         /**
+        * Returns the title of the strip.
+        */
+        virtual QString stripTitle() const;
+
+        /**
+         * Returns additionalText of the comic.
+         */
+        virtual QString additionalText() const;
+
+
+        /**
          * Set whether this request is for the current comic (only used internally).
          */
         void setIsCurrent( bool value );
