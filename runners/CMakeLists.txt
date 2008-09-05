@@ -1,4 +1,8 @@
 add_subdirectory(browserhistory)
 add_subdirectory(contacts)
 add_subdirectory(converter)
+add_subdirectory(konquerorsessions)
+if(NOT WIN32)
+ add_subdirectory(konsolesessions)
+endif(NOT WIN32)
 add_subdirectory(spellchecker)
