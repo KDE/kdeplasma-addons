@@ -1,18 +1,6 @@
 [Desktop Entry]
 Name=Konqueror Sessions
-Name[nds]=Konqueror-Törns
-Name[pt]=Sessões do Konqueror
-Name[pt_BR]=Sessões do Konqueror
-Name[sv]=Konqueror-sessioner
-Name[uk]=Сеанси Konqueror
-Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
-Comment[nds]=Kiekt na Konqueror-Törns
-Comment[pt]=Corresponde às Sessões do Konqueror
-Comment[pt_BR]=Corresponde às Sessões do Konqueror
-Comment[sv]=Matchar Konqueror-sessioner
-Comment[uk]=Порівнює сеанси Konqueror
-Comment[zh_TW]=符合 Konqueror 工作階段
 Icon=konqueror
 
 X-KDE-ServiceTypes=Plasma/Runner
