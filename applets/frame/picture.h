@@ -49,10 +49,8 @@ class Picture
 	QImage setPicture(const KUrl &currentUrl);
 
     private:
-        QImage getPicture() const {return m_picture;};
+	QImage getPicture() const {return m_picture;};
 	QImage m_picture;
-	/// Maximum Picture Dimension
-        static const int m_maxDimension=800;
 
 };
 

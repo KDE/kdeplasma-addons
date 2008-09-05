@@ -83,7 +83,7 @@ void SlideShow::addDir(const QString &path)
     KRandomSequence randomSequence;
     indexList.clear();
     //get the number of sounds then shuffle it: each number will be taken once then the sequence will come back
-    for (uint j = 0; j < m_pictures.count(); j++) 
+    for (int j = 0; j < m_pictures.count(); j++) 
 	indexList.append(j);
     randomSequence.randomize(indexList);
 }
