@@ -88,7 +88,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         args << "Number" << parts[ 1 ].toInt();
     }
 
-    provider = qobject_cast<ComicProvider*>( service->createInstance<QObject>( this, args ) );
+    provider = service->createInstance<ComicProvider>( this, args );
     if (!provider)
     	return false;
     
