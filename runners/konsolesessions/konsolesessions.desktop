@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Konsole Sessions
+Name[gl]=Sesións de Konsole
+Name[pt]=Sessões do Konsole
+Name[pt_BR]=Sessões do Konsole
+Name[sv]=Terminalsessioner
+Name[uk]=Сеанси Konsole
 Comment=Matches Konsole Sessions
+Comment[gl]=Fai parella coas sesión de Konsole
+Comment[pt]=Corresponder às Sessões do Konsole
+Comment[pt_BR]=Corresponder às Sessões do Konsole
+Comment[sv]=Matchar terminalsessioner
+Comment[uk]=Порівнює сеанси Konsole
 Icon=utilities-terminal
 
 X-KDE-ServiceTypes=Plasma/Runner
