@@ -72,13 +72,8 @@ QImage Picture::setPicture(const KUrl &currentUrl)
         if (tempImage.isNull()){
             m_picture = defaultPicture(i18nc("Error", "Error loading image"));
             return m_picture;
-        } else { // Load success! Scale the image if it is too big	    
-            if (tempImage.width() > m_maxDimension || tempImage.height() > m_maxDimension) {
-                m_picture = tempImage.scaled(m_maxDimension,m_maxDimension,
-                                             Qt::KeepAspectRatio,Qt::SmoothTransformation);
-            } else {
-                m_picture = tempImage;
-            }
+        } else { 
+            m_picture = tempImage;
             return m_picture;
         }
     }
