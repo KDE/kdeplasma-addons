@@ -1,9 +1,15 @@
 [Desktop Entry]
 Name=Places
+Name[pt]=Locais
+Name[pt_BR]=Locais
+Name[uk]=Місця
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=user-home
 Comment=Open Devices and Folder Bookmarks
+Comment[pt]=Abrir os Dispositivos e Favoritos das Pastas
+Comment[pt_BR]=Abrir os dispositivos e os favoritos das pastas
+Comment[uk]=Відкрийте закладки пристроїв і тек
 X-KDE-Library=krunner_placesrunner
 X-KDE-PluginInfo-Author=David Edmundson
 X-KDE-PluginInfo-Email=kde@davidedmundson.co.uk
