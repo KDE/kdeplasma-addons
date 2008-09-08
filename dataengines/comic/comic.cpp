@@ -28,7 +28,7 @@
 #include "cachedprovider.h"
 
 ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
-    : Plasma::DataEngine( parent, args ), mEmptySuffix(false)
+    : Plasma::DataEngine( parent, args ), mEmptySuffix( false )
 {
     setPollingInterval( 0 );
 
@@ -89,10 +89,11 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
     }
 
     provider = service->createInstance<ComicProvider>( this, args );
-    if (!provider)
-    	return false;
-    
+    if ( !provider )
+        return false;
+
     provider->setIsCurrent( isCurrentComic );
+
     connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
     connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
 

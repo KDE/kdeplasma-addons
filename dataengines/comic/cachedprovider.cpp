@@ -104,7 +104,7 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
     const QString path = identifierToPath( identifier );
 
     if ( !info.isEmpty() ) {
-        QSettings settings( path+".conf", QSettings::IniFormat );
+        QSettings settings( path + ".conf", QSettings::IniFormat );
 
         for ( Settings::const_iterator i = info.constBegin();
               i != info.constEnd(); ++i) {

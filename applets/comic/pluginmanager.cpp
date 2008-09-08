@@ -25,7 +25,7 @@
 
 ComicEntry::ComicEntry( const QString &_identifier, const QString &_title,
                         const QString &_comicAuthor, const QPixmap &_icon )
-: identifier( _identifier ), title( _title ), comicAuthor( _comicAuthor ), icon( _icon )
+    : identifier( _identifier ), title( _title ), comicAuthor( _comicAuthor ), icon( _icon )
 {
 }
 

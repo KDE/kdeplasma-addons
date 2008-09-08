@@ -66,8 +66,8 @@ class XkcdProvider : public ComicProvider
         virtual QString previousIdentifier() const;
 
         /**
-        * Returns title of this strip.
-        */
+         * Returns title of this strip.
+         */
         virtual QString stripTitle() const;
 
         /**

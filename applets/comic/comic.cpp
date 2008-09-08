@@ -57,7 +57,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
 void ComicApplet::init()
 {
-    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::self()->registerWidget( this );
+
     loadConfig();
 
     mCurrentDay = QDate::currentDate();
@@ -144,7 +145,7 @@ void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
 
 void ComicApplet::checkDayChanged()
 {
-    if ( mCurrentDay != QDate::currentDate() || mImage.isNull() )
+    if ( (mCurrentDay != QDate::currentDate()) || mImage.isNull() )
         updateComic();
 
     mCurrentDay = QDate::currentDate();
@@ -196,7 +197,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             // link clicked
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
         }
-    } else if ( event->button() == Qt::MidButton ) {
+    } else if ( event->button() == Qt::MidButton ) { // handle full view
         if ( !mFullViewWidget->isVisible() ) {
             mFullViewWidget->setImage( mImage );
             mFullViewWidget->adaptPosition( mapToScene( 0, 0 ).toPoint() );
@@ -249,7 +250,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         topHeight = fm.height();
         int height = contentRect.top();
-        p->setPen( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
+        p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
         p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
                     Qt::AlignCenter, tempTop );
     }
@@ -259,7 +260,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         urlHeight = fm.height();
         int height = contentRect.bottom() - urlHeight;
-        p->setPen( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
+        p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
         p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
                      Qt::AlignRight, mWebsiteUrl.host() );
     }
@@ -276,7 +277,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle - 15 ) );
         arrow.setPoint( 2, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle + 15 ) );
 
-        p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
+        p->setBrush( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
         p->drawPolygon( arrow );
 
         leftImageGap = s_arrowWidth;
@@ -289,7 +290,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         arrow.setPoint( 1, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15 ) );
         arrow.setPoint( 2, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle + 15 ) );
 
-        p->setBrush( Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor) );
+        p->setBrush( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
         p->drawPolygon( arrow );
 
         rightImageGap = s_arrowWidth;
@@ -300,8 +301,9 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->drawImage( imageRect, mImage );
 
     p->restore();
+
     toolTipData.mainText += mAdditionalText;
-    Plasma::ToolTipManager::self()->setToolTipContent(this,toolTipData);
+    Plasma::ToolTipManager::self()->setToolTipContent( this, toolTipData );
 }
 
 QList<QAction*> ComicApplet::contextualActions()
