@@ -38,6 +38,7 @@ FileWatcherConfig::FileWatcherConfig(QWidget *parent)
   QObject::connect(ui.pb_font, SIGNAL(clicked()), this, SLOT(fontPressed()));
   QObject::connect(ui.pb_fontColor, SIGNAL(clicked()), this, SLOT(fontColorPressed()));
   QObject::connect(ui.sb_maxRows, SIGNAL(valueChanged(int)), this, SLOT(maxRowsValueChanged(int)));
+  QObject::connect(ui.chb_autoResize, SIGNAL(stateChanged(int)), this, SLOT(autoResizeStateChanged(int)));
 }
 
 void FileWatcherConfig::setPath(const QString& path)
@@ -60,9 +61,19 @@ void FileWatcherConfig::setMaxRows(int rows)
   ui.sb_maxRows->setValue(rows);
 }
 
+void FileWatcherConfig::setAutoResizeFlag(bool state)
+{
+  ui.chb_autoResize->setChecked(state);
+}
+
 void FileWatcherConfig::maxRowsValueChanged(int rows)
 {
   emit maxRowsChanged(rows); 
+}
+
+void FileWatcherConfig::autoResizeStateChanged(int state)
+{
+  emit autoResizeChanged(state);
 }
 
 void FileWatcherConfig::fontPressed()

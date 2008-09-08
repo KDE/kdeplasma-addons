@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>250</width>
-    <height>180</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -46,6 +46,15 @@
           </property>
          </widget>
         </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBoxSettings" >
+       <property name="title" >
+        <string>Size settings</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2" >
         <item>
          <layout class="QHBoxLayout" >
           <item>
@@ -67,7 +76,40 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="Line" name="line" >
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout" >
+          <item>
+           <widget class="QCheckBox" name="chb_autoResize" />
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="MinimumExpanding" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Auto resize, according
+to the text content</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
+       <zorder></zorder>
+       <zorder>line</zorder>
       </widget>
      </item>
     </layout>

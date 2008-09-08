@@ -35,7 +35,8 @@
 #include "fileWatcherConfig.h"
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      m_autoResize(false)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
@@ -47,6 +48,7 @@ void FileWatcher::init()
   file = new QFile(this);
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
+  textItem->moveBy(eBorderSize,eBorderSize);
   textDocument = textItem->document();
   textStream = 0;
 
@@ -55,9 +57,10 @@ void FileWatcher::init()
   QString path = cg.readEntry("path", QString());
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
-  textDocument->setMaximumBlockCount(cg.readEntry("maxRows", 5) + 1);
-  textItem->setTextWidth(geometry().width()-2);
+  textDocument->setMaximumBlockCount(cg.readEntry("maxRows", 5));
   textItem->update();
+
+  m_autoResize = cg.readEntry("autoResize",false);
 
   if (path.isEmpty()) {
       setConfigurationRequired(true, i18n("Select a file to watch."));
@@ -115,13 +118,31 @@ void FileWatcher::newData()
   if ( rows < 0)
     rows = 0;
 
+  // go throught the lines of readed block
   for (int i = rows; i < list.size(); i++){
+    //insert new block befor line, but skip insertion on beginning of document
+    //becouse we don't want empty space on first line
+    if (cursor.position() != 0){
+      cursor.insertBlock();
+    }
     cursor.insertText(list.at(i));
-    cursor.insertBlock();
   }
 
   cursor.endEditBlock();
-  updateGeometry();
+
+  //if is set flag to resize, resize also plasma widget
+  if (m_autoResize == true){
+    doAutoResize();
+  }
+
+}
+
+void FileWatcher::doAutoResize()
+{
+  //resize widget only if is document not empty
+  if (textItem->document()->isEmpty() == false){
+    resize(textItem->boundingRect().width() + eBorderSize*2,textItem->boundingRect().height() + eBorderSize*2);
+  }
 }
 
 void FileWatcher::newPath(const QString& path)
@@ -144,8 +165,19 @@ void FileWatcher::maxRowsChanged(int rows)
   m_tmpMaxRows = rows;
 }
 
+void FileWatcher::autoResizeChanged(int state)
+{
+  if (state == Qt::Checked){
+    m_tmpAutoResize = true;
+  }
+  else{
+    m_tmpAutoResize = false;
+  }
+}
+
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
 {
+    //create dialog UI, pointer to dialog is used in configAccepted, to get user settings
     FileWatcherConfig* config_dialog = new FileWatcherConfig(parent);
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
@@ -158,6 +190,7 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     QObject::connect(config_dialog, SIGNAL(maxRowsChanged(int)), this, SLOT(maxRowsChanged(int)));
     QObject::connect(config_dialog, SIGNAL(fontChanged(QFont)), this, SLOT(fontChanged(QFont)));
     QObject::connect(config_dialog, SIGNAL(fontColorChanged(QColor)), this, SLOT(fontColorChanged(QColor)));
+    QObject::connect(config_dialog, SIGNAL(autoResizeChanged(int)),this, SLOT(autoResizeChanged(int)));
 
     m_tmpPath = file->fileName();
     config_dialog->setPath(m_tmpPath);
@@ -165,8 +198,10 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     config_dialog->setTextColor(m_tmpColor);
     m_tmpFont = textItem->font();
     config_dialog->setFont(m_tmpFont);
-    m_tmpMaxRows = textDocument->maximumBlockCount() - 1;
+    m_tmpMaxRows = textDocument->maximumBlockCount();
     config_dialog->setMaxRows(m_tmpMaxRows);
+    m_tmpAutoResize = m_autoResize;
+    config_dialog->setAutoResizeFlag(m_tmpAutoResize);
 }
 
 void FileWatcher::configAccepted()
@@ -181,8 +216,11 @@ void FileWatcher::configAccepted()
     textItem->setFont(m_tmpFont);
     cg.writeEntry("font", m_tmpFont);
 
-    textDocument->setMaximumBlockCount(m_tmpMaxRows + 1);
+    textDocument->setMaximumBlockCount(m_tmpMaxRows);
     cg.writeEntry("maxRows", m_tmpMaxRows);
+
+    m_autoResize = m_tmpAutoResize;
+    cg.writeEntry("autoResize", m_autoResize);
 
     textItem->update();
     loadFile(m_tmpPath);

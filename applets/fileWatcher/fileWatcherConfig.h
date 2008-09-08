@@ -35,6 +35,7 @@ class FileWatcherConfig : public QWidget
     void setTextColor(const QColor &color);
     void setFont(const QFont &f);
     void setMaxRows(int rows);
+    void setAutoResizeFlag(bool state);
 
   private slots:
     void returnPressed(const QString& path);
@@ -42,6 +43,7 @@ class FileWatcherConfig : public QWidget
     void fontPressed();
     void fontColorPressed();
     void maxRowsValueChanged(int rows);
+    void autoResizeStateChanged(int state);
 
   private:
     Ui::fileWatcherConfig ui;
@@ -54,6 +56,7 @@ class FileWatcherConfig : public QWidget
     void fontColorChanged(QColor);
     void newFile(const QString& path);
     void maxRowsChanged(int rows);
+    void autoResizeChanged(int state);
 };
 
 #endif

@@ -50,9 +50,12 @@ class FileWatcher : public Plasma::Applet
     void fontColorChanged(const QColor& color);
     void newPath(const QString& path);
     void maxRowsChanged(int);
+    void autoResizeChanged(int state);
 
   private:
     void loadFile(const QString& path);
+    //resize plasma applet to textItem size and use eBorderSize for borders
+    void doAutoResize();
 
     QFile *file;
     QFileSystemWatcher *watcher;
@@ -64,6 +67,11 @@ class FileWatcher : public Plasma::Applet
     QFont m_tmpFont;
     QString m_tmpPath;
     int m_tmpMaxRows;
+    bool m_tmpAutoResize;
+
+    bool m_autoResize;
+    //distance between text and plasma widget
+    enum { eBorderSize = 5 };
 };
 
 K_EXPORT_PLASMA_APPLET(fileWatcher, FileWatcher)
