@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Twitter Data Engine
+Name=Twitter
 Name[ca]=Motor de dades del Twitter
 Name[cs]=Datová část pro Twitter
 Name[csb]=Mòtór pòdôwków Twitter
@@ -39,4 +39,12 @@ X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
 X-KDE-Library=plasma_engine_twitter
-X-Plasma-EngineName=twitter
+
+X-KDE-PluginInfo-Author=
+X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-Name=twitter
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+

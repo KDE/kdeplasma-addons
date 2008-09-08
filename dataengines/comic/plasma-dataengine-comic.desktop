@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Comic Data Engine
+Name=Comic Strips
 Name[ca]=Motor de dades de còmics
 Name[cs]=Komiksová datová část
 Name[csb]=Mòtór pòdôwków kòmiksów
@@ -77,4 +77,12 @@ X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=face-smile-big
 X-KDE-Library=plasma_engine_comic
-X-Plasma-EngineName=comic
+
+X-KDE-PluginInfo-Author=
+X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-Name=comic
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+
