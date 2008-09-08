@@ -29,46 +29,47 @@ class MalvadosProvider : public ComicProvider
 {
     Q_OBJECT
     public:
-        MalvadosProvider(QObject *parent, const QVariantList &args);
+        MalvadosProvider( QObject *parent, const QVariantList &args );
         ~MalvadosProvider();
-    
+
         /**
-        * Returns the type of identifier that is used by this
-        * comic provider.
-        */
+         * Returns the type of identifier that is used by this
+         * comic provider.
+         */
         IdentifierType identifierType() const;
-    
+
         /**
-        * Returns the url of the website where the comic of that particular date resides.
-        */
+         * Returns the url of the website where the comic of that particular date resides.
+         */
         KUrl websiteUrl() const;
-    
+
         /**
-        * Returns the requested image.
-        *
-        * Note: This method returns only a valid image after the
-        *       finished() signal has been emitted.
-        */
+         * Returns the requested image.
+         *
+         * Note: This method returns only a valid image after the
+         *       finished() signal has been emitted.
+         */
         QImage image() const;
-    
+
         /**
-        * Returns the identifier of the comic request.
-        */
+         * Returns the identifier of the comic request.
+         */
         QString identifier() const;
-    
+
         /**
-        * Returns the identifier of the next comic (default: date of next day).
-        */
+         * Returns the identifier of the next comic (default: date of next day).
+         */
         QString nextIdentifier() const;
-    
+
         /**
-        * Returns the identifier of the previous comic (default: date of previous day).
-        */
+         * Returns the identifier of the previous comic (default: date of previous day).
+         */
         QString previousIdentifier() const;
+
     protected:
-	    void pageRetrieved( int id, const QByteArray &rawData );
-	    void pageError( int id, const QString &message );
-    
+        void pageRetrieved( int id, const QByteArray &rawData );
+        void pageError( int id, const QString &message );
+
     private:
         class Private;
         Private* const d;
