@@ -41,6 +41,18 @@ install( FILES pics/plasma_comic_dilbert.png DESTINATION ${DATA_INSTALL_DIR}/pla
 
 #### next ####
 
+set( comic_malvados_provider_SRCS
+     malvadosprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_malvadosprovider ${comic_malvados_provider_SRCS} )
+target_link_libraries( plasma_comic_malvadosprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+install( TARGETS plasma_comic_malvadosprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES malvadosprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_malvados.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
 set( comic_userfriendly_provider_SRCS
      userfriendlyprovider.cpp
 )
