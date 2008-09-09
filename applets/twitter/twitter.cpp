@@ -79,7 +79,7 @@ void Twitter::init()
 
     m_engine = dataEngine("twitter");
     if (! m_engine->isValid()) {
-        setFailedToLaunch(true, "Failed to load twitter DataEngine");
+        setFailedToLaunch(true, i18n("Failed to load twitter DataEngine"));
         return;
     }
 
