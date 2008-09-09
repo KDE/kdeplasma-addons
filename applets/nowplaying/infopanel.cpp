@@ -25,14 +25,14 @@
 
 InfoPanel::InfoPanel(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      m_artistLabel(new Plasma::Label),
-      m_titleLabel(new Plasma::Label),
-      m_albumLabel(new Plasma::Label),
-      m_timeLabel(new Plasma::Label),
-      m_artistText(new Plasma::Label),
-      m_titleText(new Plasma::Label),
-      m_albumText(new Plasma::Label),
-      m_timeText(new Plasma::Label),
+      m_artistLabel(new Plasma::Label(this)),
+      m_titleLabel(new Plasma::Label(this)),
+      m_albumLabel(new Plasma::Label(this)),
+      m_timeLabel(new Plasma::Label(this)),
+      m_artistText(new Plasma::Label(this)),
+      m_titleText(new Plasma::Label(this)),
+      m_albumText(new Plasma::Label(this)),
+      m_timeText(new Plasma::Label(this)),
       m_layout(new QGraphicsGridLayout)
 {
     m_layout->setColumnStretchFactor(0, 0);
