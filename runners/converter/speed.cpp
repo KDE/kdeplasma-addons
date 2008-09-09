@@ -35,6 +35,13 @@ Speed::Speed(QObject* parent)
 
     m_units[i18n("miles per hour")]          = i18n("mph");
     m_units["mph"]                           = 0.44704;
+	m_units[i18n("foot per second")]         = "fps";
+	m_units[i18n("feet per second")]         = "fps";
+	m_units[i18n("ft/s")]                    = "fps";
+	m_units["fps"]                           = 0.3048;
+	m_units[i18n("inch per second")]         = "ips";
+	m_units[i18n("in/s")]                    = "ips";
+	m_units["ips"]                           = 0.0254;
 
     m_units[i18n("knot")]                    = "kt";
     m_units[i18n("knots")]                   = "kt";
