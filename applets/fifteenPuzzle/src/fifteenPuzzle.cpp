@@ -98,10 +98,17 @@ void FifteenPuzzle::configAccepted()
   imagePath = configDialog->ui.urlRequester->url().path();
   showNumerals = configDialog->ui.cb_showNumerals->isChecked();
 
-  cg.writeEntry("UsePlainPieces", usePlainPieces);
-  cg.writeEntry("ImagePath", imagePath);
+  if ( !imagePath.isEmpty() )
+  {
+      cg.writeEntry("UsePlainPieces", usePlainPieces);
+      cg.writeEntry("ImagePath", imagePath);
+  }
+  else
+  {
+      usePlainPieces = true;
+      cg.writeEntry("UsePlainPieces", true);
+  }
   cg.writeEntry("ShowNumerals", showNumerals);
-
   updateBoard();
 
   emit configNeedsSaving();
