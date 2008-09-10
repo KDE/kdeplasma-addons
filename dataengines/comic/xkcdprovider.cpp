@@ -147,7 +147,7 @@ void XkcdProvider::pageRetrieved( int id, const QByteArray &rawData )
         d->mHasNextComic = (nextExp.indexIn( data ) == -1);
 
         //find the tooltip and the strip title of the comic
-        const QString toolStripPattern( "src=\"http://imgs.xkcd.com/comics/\\w+\\.png\" title=\"(.+)\" alt=\"(.+)\"" );
+        const QString toolStripPattern( "src=\"http://imgs.xkcd.com/comics/.+\" title=\"(.+)\" alt=\"(.+)\"" );
         QRegExp toolStripExp ( toolStripPattern );
         toolStripExp.setMinimal( true );
         if ( toolStripExp.indexIn ( data ) > 1 ) {
