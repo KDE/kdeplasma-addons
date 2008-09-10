@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Spell Checker Runner
 Name[cs]=Kontrola pravopisu
+Name[el]=Εκτελεστής ορθογραφικού ελέγχου
 Name[et]=Õigekirja kontrollimise käivitaja
 Name[gl]=Executor de comprobación da ortografía
 Name[nds]=Schriefwiesprööv-Dreger
@@ -12,6 +13,7 @@ Name[zh_CN]=拼写检查运行器
 Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
 Comment[cs]=Kontrola pravopisu
+Comment[el]=Ορθογραφικός έλεγχος μιας λέξης
 Comment[et]=Sõnade õigekirja kontroll
 Comment[gl]=Comproba a ortografía dunha palabra
 Comment[nds]=De Schriefwies vun en Woort pröven

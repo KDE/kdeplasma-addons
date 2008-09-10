@@ -39,6 +39,7 @@ Name[zh_CN]=文件观察器
 Name[zh_TW]=檔案監看器
 Comment=Watch for changes in specified files
 Comment[cs]=Sledování změn v zadaných souborech
+Comment[el]=Παρακολούθηση τροποποιήσεων σε καθορισμένα αρχεία
 Comment[et]=Määratud failide muutuste jälgimine
 Comment[gl]=Vixía as modificacións en ficheiros específicos
 Comment[nds]=Angeven Dateien op Ännern beluern

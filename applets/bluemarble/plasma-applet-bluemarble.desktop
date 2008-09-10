@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Blue Marble
+Name[el]=Γαλάζιο μάρμαρο
 Name[et]=Sinine Marble
 Name[nds]=Blaag Planet
 Name[pt]=Esfera Azul
@@ -7,6 +8,7 @@ Name[pt_BR]=Globo azul
 Name[zh_CN]=蓝色桌面地球仪
 Comment=3D model of the Earth
 Comment[cs]=3D model Země
+Comment[el]=3Δ μοντέλο της Γης
 Comment[et]=Maa ruumiline mudel
 Comment[ga]=Samhail 3T den Domhan
 Comment[gl]=Modelo en 3D da terra

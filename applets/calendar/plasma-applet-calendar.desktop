@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Calendar
 Name[cs]=Kalendář
+Name[el]=Ημερολόγιο
 Name[es]=Calendario
 Name[et]=Kalender
 Name[ga]=Féilire
@@ -19,6 +20,7 @@ Name[zh_CN]=日历
 Name[zh_TW]=行事曆
 Comment=View and pick dates from the calendar
 Comment[cs]=Zobrazení a výběr dat z kalendáře
+Comment[el]=Προβολή και επιλογή ημερομηνιών από το ημερολόγιο
 Comment[et]=Kalendri näitamine ja kuupäevade valimine
 Comment[ga]=Amharc ar agus roghnaigh dátaí ón fhéilire
 Comment[gl]=Ve e escolle datas do calendario

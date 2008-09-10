@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Konqueror Profiles
 Name[cs]=Profily Konqueroru
+Name[el]=Προφίλ Konqueror
 Name[et]=Konquerori profiilid
 Name[ga]=Próifílí Konqueror
 Name[gl]=Perfís de Konqueror
@@ -13,6 +14,7 @@ Name[zh_CN]=Konqueror 配置集
 Name[zh_TW]=Konqueror 設定檔
 Comment=List and launch Konqueror profiles
 Comment[cs]=Seznam a spouštění profilů Konqueroru
+Comment[el]=Εμφάνιση και εκτέλεση προφίλ του Konqueror
 Comment[et]=Konquerori profiilide näitamine ja käivitamine
 Comment[gl]=Enumera e inicia perfís de Konqueror
 Comment[nds]=Konqueror-Profilen oplisten un opropen

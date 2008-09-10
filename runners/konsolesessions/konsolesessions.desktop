@@ -1,13 +1,17 @@
 [Desktop Entry]
 Name=Konsole Sessions
+Name[el]=Συνεδρίες Konsole
 Name[gl]=Sesións de Konsole
+Name[nds]=Konsole-Törns
 Name[pt]=Sessões do Konsole
 Name[pt_BR]=Sessões do Konsole
 Name[sv]=Terminalsessioner
 Name[uk]=Сеанси Konsole
 Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
+Comment[el]=Αντιστοίχιση συνεδριών Konsole
 Comment[gl]=Fai parella coas sesión de Konsole
+Comment[nds]=Kiekt na passen Konsole-Törns
 Comment[pt]=Corresponder às Sessões do Konsole
 Comment[pt_BR]=Corresponder às sessões do Konsole
 Comment[sv]=Matchar terminalsessioner

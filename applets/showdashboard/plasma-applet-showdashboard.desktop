@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
 Name[cs]=Zobrazit přístrojovou desku
+Name[el]=Εμφάνιση πίνακα συστατικών
 Name[es]=Mostrar componente de cuadro de mandos
 Name[et]=Vidinate Dashboardi näitamine
 Name[ga]=Taispeáin Painéal na nGiuirléidí
@@ -17,6 +18,7 @@ Name[zh_CN]=显示部件板
 Name[zh_TW]=顯示元件儀表板
 Comment=Show the Plasma widget dashboard above other windows
 Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
+Comment[el]=Εμφάνιση του πίνακα συστατικών plasma πάνω από τα άλλα παράθυρα
 Comment[et]=Plasma vidinate dashboardi näitamine teiste akende kohal
 Comment[ga]=Taispeáin painéal na ngiuirléidí Plasma os cionn na bhfuinneog eile
 Comment[gl]=Mostra o widget do cadro de control sobre as outras fiestras

@@ -1,13 +1,17 @@
 [Desktop Entry]
 Name=Konqueror Sessions
+Name[el]=Συνεδρίες Konqueror
 Name[gl]=Sesións de Konqueror
+Name[nds]=Konqueror-Törns
 Name[pt]=Sessões do Konqueror
 Name[pt_BR]=Sessões do Konqueror
 Name[sv]=Konquerorsessioner
 Name[uk]=Сеанси Konqueror
 Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
+Comment[el]=Αντιστοίχιση συνεδριών Konqueror
 Comment[gl]=Fai parella coas sesión de Konqueror
+Comment[nds]=Kiekt na passen Konqueror-Törns
 Comment[pt]=Corresponder às Sessões do Konqueror
 Comment[pt_BR]=Corresponder às sessões do Konqueror
 Comment[sv]=Matchar Konquerorsessioner

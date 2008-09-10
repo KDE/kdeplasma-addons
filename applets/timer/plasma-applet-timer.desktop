@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Timer
 Name[cs]=Stopky
+Name[el]=Χρονόμετρο
 Name[es]=Cronómetro
 Name[et]=Taimer
 Name[ga]=Uaineadóir
@@ -19,6 +20,7 @@ Name[zh_CN]=计时器
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
 Comment[cs]=Odpočítávání událostí
+Comment[el]=Αντίστροφη μέτρηση για συγκεκριμένο χρονικό διάστημα
 Comment[et]=Määratud ajavahemiku mõõtmine
 Comment[gl]=Conta atrás durante un tempo especificado
 Comment[nds]=De Tiet över en angeven Tiet daaltellen
