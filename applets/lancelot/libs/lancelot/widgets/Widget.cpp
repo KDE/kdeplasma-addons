@@ -46,6 +46,7 @@ Widget::Widget(QGraphicsItem * parent)
     Instance::activeInstance()->addWidget(this);
     setGroup(NULL);
     // d->group = Instance::activeInstance()->defaultGroup();
+    setFlag(QGraphicsItem::ItemClipsToShape);
     L_WIDGET_SET_INITIALIZED;
 }
 

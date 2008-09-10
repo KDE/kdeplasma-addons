@@ -25,6 +25,7 @@
 #include <plasma/corona.h>
 #include <KConfig>
 #include <KConfigGroup>
+#include <QEvent>
 
 #include <KIcon>
 #include "LancelotConfig.h"
@@ -191,6 +192,7 @@ protected:
     void focusOutEvent (QFocusEvent * event);
     void leaveEvent    (QEvent      * event);
     void enterEvent    (QEvent      * event);
+    void customEvent   (QEvent      * event);
 
 private:
     Lancelot::ResizeBordersPanel * m_root;
@@ -219,6 +221,8 @@ private:
 
     LancelotConfig m_configUi;
     QWidget * m_configWidget;
+
+    int resetPWA;
 
 // Resize related code
 protected:

@@ -48,8 +48,8 @@ public:
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model() const;
 
-    void setCategoriesActivable(bool value) {};
-    bool categoriesActivable() const {};
+    void setCategoriesActivable(bool value);
+    bool categoriesActivable() const;
 
     void setExtenderPosition(ExtenderPosition position) {};
     ExtenderPosition extenderPosition() const {};

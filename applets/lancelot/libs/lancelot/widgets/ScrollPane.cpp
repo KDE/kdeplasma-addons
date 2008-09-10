@@ -137,8 +137,8 @@ void ScrollPane::setScrollableWidget(Scrollable * widget)
     QGraphicsWidget * qgw = dynamic_cast<QGraphicsWidget *>(widget);
     if (qgw) {
         qgw->setParentItem(d->centerContainer);
-        scrollableWidgetSizeUpdated();
         d->updateViewport();
+        scrollableWidgetSizeUpdated();
     }
 }
 
@@ -174,10 +174,14 @@ void ScrollPane::scrollableWidgetSizeUpdated()
 
     if (!hasHorizontal) {
         d->horizontal->setValue(0);
+        d->horizontal->setMinimum(0);
+        d->horizontal->setMaximum(0);
         d->layout->setSize(0, FullBorderLayout::BottomBorder);
     }
     if (!hasVertical) {
         d->vertical->setValue(0);
+        d->vertical->setMinimum(0);
+        d->vertical->setMaximum(0);
         d->layout->setSize(0, FullBorderLayout::RightBorder);
     }
 
@@ -216,8 +220,8 @@ void ScrollPane::setGeometry(const QRectF & rect)
 
     Widget::setGeometry(rect);
     kDebug() << geometry();
-    scrollableWidgetSizeUpdated();
     d->updateViewport();
+    scrollableWidgetSizeUpdated();
 }
 
 void ScrollPane::scrollHorizontal(int value)

@@ -194,6 +194,8 @@ LancelotWindow::LancelotWindow()
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault)
 {
+    resetPWA = QEvent::registerEventType();
+
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
@@ -302,12 +304,18 @@ void LancelotWindow::lancelotShowItem(int x, int y, const QString & name)
     showWindow(x, y);
 }
 
+void LancelotWindow::customEvent(QEvent * event) {
+    if (event->type() == resetPWA) {
+        passagewayApplications->reset();
+    }
+}
+
 void LancelotWindow::lancelotHide(bool immediate)
 {
     if (immediate) {
         editSearch->setText(QString());
         if (m_configUi.appbrowserReset()) {
-            passagewayApplications->reset();
+            QApplication::postEvent(this, new QEvent((QEvent::Type)resetPWA));
         }
         hide();
         return;

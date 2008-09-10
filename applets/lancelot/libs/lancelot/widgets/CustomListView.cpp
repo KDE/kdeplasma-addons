@@ -123,6 +123,7 @@ public:
         }
 
         updateSizeInfo();
+        viewportOriginUpdated();
     } //<
 
     void updateWidth() //>
@@ -206,6 +207,13 @@ public:
 
     void viewportOriginUpdated() //>
     {
+        // Due to strange Qt behaviour
+        // which shows items when show() is
+        // invoked although the parent is hidden
+        if (!q->isVisible()) {
+            return;
+        }
+
         QTransform transform;
         foreach (QGraphicsWidget * item, items) {
             QRectF itemGeometry = item->geometry();
@@ -229,6 +237,7 @@ public:
     void viewportSizeUpdated() //>
     {
         positionItems();
+        updateWidth();
     } //<
 
     void calculateSizes() //>

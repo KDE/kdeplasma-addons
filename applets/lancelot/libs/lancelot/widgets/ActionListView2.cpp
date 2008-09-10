@@ -67,7 +67,7 @@ private:
 class ActionListView2ItemFactory: public CustomListItemFactory {
 public:
     ActionListView2ItemFactory(ActionListViewModel * model)
-        : m_model(model)
+        : m_model(model), m_categoriesActivable(false)
     {
     }
 
@@ -90,7 +90,18 @@ public:
         item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
         item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
         item->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        item->setGroupByName("ActionListView-Items");
+
+        if (m_model->isCategory(index)) {
+            if (m_categoriesActivable) {
+                item->setGroupByName("ActionListView-CategoriesPass");
+            } else {
+                item->setGroupByName("ActionListView-Categories");
+            }
+            item->setIconSize(QSize(20, 20));
+        } else {
+            item->setGroupByName("ActionListView-Items");
+        }
+
         m_items[index] = item;
         return item;
     } //<
@@ -102,9 +113,9 @@ public:
                 case Qt::MinimumSize:
                     return 20;
                 case Qt::MaximumSize:
-                    return 20;
+                    return 35;
                 default:
-                    return 20;
+                    return 27;
             }
         } else {
             switch (which) {
@@ -114,6 +125,30 @@ public:
                     return 70;
                 default:
                     return 55;
+            }
+        }
+    } //<
+
+    bool categoriesActivable() const //>
+    {
+        return m_categoriesActivable;
+    } //<
+
+    void setCategoriesActivable(bool value) //>
+    {
+        if (value == m_categoriesActivable) {
+            return;
+        }
+
+        m_categoriesActivable = value;
+
+        for (int i = 0; i < m_items.size(); i++) {
+            if (m_model->isCategory(i)) {
+                if (m_categoriesActivable) {
+                    m_items[i]->setGroupByName("ActionListView-CategoriesPass");
+                } else {
+                    m_items[i]->setGroupByName("ActionListView-Categories");
+                }
             }
         }
     } //<
@@ -146,6 +181,7 @@ public:
 private:
     ActionListViewModel * m_model;
     QMap < int, ActionListView2Item * > m_items;
+    bool m_categoriesActivable : 1;
 };
 //<
 
@@ -188,6 +224,21 @@ ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * pa
 ActionListView2::~ActionListView2()
 {
     delete d;
+}
+
+void ActionListView2::setCategoriesActivable(bool value)
+{
+    if (d->itemFactory) {
+        d->itemFactory->setCategoriesActivable(value);
+    }
+}
+
+bool ActionListView2::categoriesActivable() const
+{
+    if (d->itemFactory) {
+        return d->itemFactory->categoriesActivable();
+    }
+    return false;
 }
 
 void ActionListView2::setModel(ActionListViewModel * model)
