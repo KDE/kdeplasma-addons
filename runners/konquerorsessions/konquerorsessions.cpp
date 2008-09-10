@@ -95,7 +95,7 @@ void KonquerorSessions::match(Plasma::RunnerContext &context)
             i.next();
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
-            match.setRelevance(1.0);
+            match.setRelevance(0.8);
             match.setIcon(m_icon);
             match.setData(i.key());
             match.setText("Konqueror: " + i.value());
