@@ -37,15 +37,14 @@ class ShitHappensProvider::Private
             ImageRequest
         };
         Private()
-            : mGotMaxId ( false )
+            : mPreviousId ( 0 ), mNextId ( 0 )
         {
         }
 
         QImage mImage;
         int mRequestedId;
-        int mMaxId;
-        int mModifiedId;
-        bool mGotMaxId;
+        int mPreviousId;
+        int mNextId;
 };
 
 
@@ -54,26 +53,14 @@ ShitHappensProvider::ShitHappensProvider( QObject *parent, const QVariantList &a
 {
     d->mRequestedId = requestedNumber();
 
-    setWebsiteHttp();
-}
+    KUrl url( QString( "http://www.ruthe.de/" ) );
 
-void ShitHappensProvider::setWebsiteHttp()
-{
-    KUrl url( QString( "http://ruthe.de/" ) );
-
-    if ( d->mGotMaxId ) {
-        if ( ( d->mRequestedId < 1 ) || ( d->mRequestedId > d->mMaxId ) )
-            d->mRequestedId = d->mMaxId;
-
-        d->mModifiedId = d->mMaxId - d->mRequestedId;
-
-        url.setPath( "/gallery/cpg1410/displayimage.php" );
-        url.addQueryItem( "album", "4" );
-        url.addQueryItem( "pos", QString::number( d->mModifiedId ) );
-    } else {
-        url.setPath( "/gallery/cpg1410/displayimage.php" );
-        url.addQueryItem( "album", "4" );
-        url.addQueryItem( "pos", "0" );
+    if ( d->mRequestedId ) {
+        url.setPath( "/frontend/index.php" );
+        url.addQueryItem( "pic", QString::number( d->mRequestedId ) );
+    }
+    else {
+        url.setPath( "/frontend/" );
     }
 
     requestPage( url, Private::PageRequest );
@@ -101,23 +88,26 @@ QString ShitHappensProvider::identifier() const
 
 KUrl ShitHappensProvider::websiteUrl() const
 {
-    return QString( "http://www.ruthe.de/" );
+    return QString( "http://www.ruthe.de/frontend/index.php?pic=%1&sort=name&order=DESC" )
+    .arg( d->mRequestedId );
 }
 
 QString ShitHappensProvider::nextIdentifier() const
 {
-    if ( d->mRequestedId < d->mMaxId )
-        return QString::number( d->mRequestedId + 1 );
-
-    return QString();
+    if ( d->mNextId > 1 ) {
+        return QString::number( d->mNextId );
+    } else {
+        return QString();
+    }
 }
 
 QString ShitHappensProvider::previousIdentifier() const
 {
-    if ( d->mRequestedId > 1 )
-        return QString::number( d->mRequestedId - 1 );
-
-    return QString();
+    if ( d->mPreviousId > 0 ) {
+        return QString::number( d->mPreviousId );
+    } else {
+        return QString();
+    }
 }
 
 void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
@@ -125,31 +115,40 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
     if ( id == Private::PageRequest ) {
         const QString data = QString::fromUtf8( rawData );
 
+        const QString pattern( "<img src=\"(cartoons/strip_\\d+\\.jpg)\"" );
+        QRegExp exp( pattern );
+        const int pos = exp.indexIn( data );
+
         KUrl url;
 
-        if ( !d->mGotMaxId ) {
-            QRegExp expMaxId( "\\b\\w+\\b (\\d+)/(\\d+)" );
-            const int pos = expMaxId.indexIn( data );
+        if ( pos > -1 ) {
+            url = KUrl( QString( "http://www.ruthe.de/frontend/%1"  ).arg( exp.cap( 1 ) ) );
+            // get the current id
+            if ( !d->mRequestedId ) {
+                const QString patternId( "<a href=\"archiv.php\\?sort=name&order=DESC&id=(\\d+)\".*\"><img src=\"bilder/arch.gif\"" );
+                QRegExp expId( patternId );
+                const int posId = expId.indexIn( data );
 
-            if ( pos > -1 ) {
-                d->mMaxId = expMaxId.cap( 2 ).toInt();
-                d->mGotMaxId = true;
-                setWebsiteHttp();
-                return;
-            } else {
-                emit error( this );
-                return;
+                if ( posId > -1 ) {
+                    d->mRequestedId = expId.cap( 1 ).toInt();
+                }
             }
-        } else {
-            QRegExp exp( "<img src=\"albums/userpics/(\\d+)/normal_strip_(\\d+)(\\S*\\d*)\\.jpg\"" );
-            const int pos = exp.indexIn( data );
+        }
 
-            if ( pos > -1 ) {
-                url = KUrl( QString( "http://ruthe.de/gallery/cpg1410/albums/userpics/%1/strip_%2%3.jpg" )
-                                    .arg( exp.cap( 1 ) ).arg( exp.cap( 2 ) ).arg( exp.cap( 3 ) ) );
-            } else {
-                url = KUrl( QString( "http://ruthe.de/bilder/shit_happens_header.gif" ) );
-            }
+        // get previous id
+        const QString patternPrevious( "<a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/back.gif\"" );
+        QRegExp expPrevious ( patternPrevious );
+        const int posPrevious = expPrevious.indexIn( data );
+        if ( posPrevious > -1 ) {
+            d->mPreviousId = expPrevious.cap( 1 ).toInt();
+        }
+
+        // get next id
+        const QString patternNext( "<a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/weiter.gif\"" );
+        QRegExp expNext ( patternNext );
+        const int posNext = expNext.indexIn( data );
+        if ( posNext > -1 ) {
+            d->mNextId = expNext.cap( 1 ).toInt();
         }
 
         requestPage( url, Private::ImageRequest );
