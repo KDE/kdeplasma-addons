@@ -59,6 +59,16 @@ class OsNewsProvider : public ComicProvider
 
         virtual QString previousIdentifier() const;
 
+        /**
+        * Returns title of this strip.
+        */
+        virtual QString stripTitle() const;
+
+        /**
+        * Returns additionalText of the comic (the tooltip of the image).
+        */
+        virtual QString additionalText() const;
+
     protected:
         virtual void pageRetrieved( int id, const QByteArray &data );
         virtual void pageError( int id, const QString &errorMessage );

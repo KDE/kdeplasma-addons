@@ -47,7 +47,8 @@ class OsNewsProvider::Private
         QDate mCurrentDate;
         QDate mPreviousDate;
         QDate mNextDate;
-        QString mTitle;
+        QString mStripTitle;
+        QString mAdditionalText;
         QImage mImage;
 
         Syndication::Loader *mLoader;
@@ -76,10 +77,14 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
             if ( tempDate <= mParent->requestedDate() ) {
                 if ( mPageUrl.isEmpty() ) {
                     mPageUrl = item->link();
-                    mTitle = item->title();
+                    mStripTitle = item->title();
                     description = item->description();
                     mCurrentDate = tempDate;
                     mNextDate = tempNextDate;
+
+                    const int start = description.indexOf( "title=\"") + 7;
+                    const int end = description.indexOf( "\"", start );
+                    mAdditionalText = description.mid( start, end - start );
                 } else {
                     mPreviousDate = tempDate;;
                     break;
@@ -136,6 +141,16 @@ QString OsNewsProvider::nextIdentifier() const
 QString OsNewsProvider::previousIdentifier() const
 {
     return d->mPreviousDate.toString( Qt::ISODate );
+}
+
+QString OsNewsProvider::stripTitle() const
+{
+    return d->mStripTitle;
+}
+
+QString OsNewsProvider::additionalText() const
+{
+    return d->mAdditionalText;
 }
 
 QImage OsNewsProvider::image() const
