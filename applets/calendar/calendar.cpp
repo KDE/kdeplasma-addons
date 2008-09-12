@@ -26,7 +26,7 @@
 Calendar::Calendar(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args), m_datePicker( 0 )
 {
-    setIcon("view-pim-calendar");
+    setPopupIcon("view-pim-calendar");
 }
 
 Calendar::~Calendar()

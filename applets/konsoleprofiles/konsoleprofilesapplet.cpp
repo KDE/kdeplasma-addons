@@ -35,7 +35,7 @@
 KonsoleProfilesApplet::KonsoleProfilesApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args), m_listView( 0 )
 {
-    setIcon("utilities-terminal");
+    setPopupIcon("utilities-terminal");
 }
 
 KonsoleProfilesApplet::~KonsoleProfilesApplet()

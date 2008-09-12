@@ -41,7 +41,7 @@ KonqProfilesApplet::KonqProfilesApplet(QObject *parent, const QVariantList &args
         dirwatch->addDir( lst[i] );
     }
     connect( dirwatch, SIGNAL(dirty (const QString &) ), this, SLOT( slotUpdateKonqProfiles() ) );
-    setIcon("konqueror");
+    setPopupIcon("konqueror");
 }
 
 KonqProfilesApplet::~KonqProfilesApplet()

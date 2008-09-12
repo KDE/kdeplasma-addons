@@ -44,7 +44,7 @@ CalculatorApplet::CalculatorApplet( QObject *parent, const QVariantList &args )
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300,300);
     setMinimumSize(50,50);
-    setIcon("accessories-calculator");
+    setPopupIcon("accessories-calculator");
 }
 
 QGraphicsWidget *CalculatorApplet::graphicsWidget()

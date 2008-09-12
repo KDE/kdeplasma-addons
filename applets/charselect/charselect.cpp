@@ -31,7 +31,7 @@ CharSelectApplet::CharSelectApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_mainWidget(0)
 {
-    setIcon("accessories-character-map");
+    setPopupIcon("accessories-character-map");
 }
 
 
