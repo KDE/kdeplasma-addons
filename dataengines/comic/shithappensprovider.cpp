@@ -144,7 +144,7 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
         }
 
         // get next id
-        const QString patternNext( "<a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/weiter.gif\"" );
+        const QString patternNext( "<div align=\"right\"><a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/weiter.gif\"" );
         QRegExp expNext ( patternNext );
         const int posNext = expNext.indexIn( data );
         if ( posNext > -1 ) {
