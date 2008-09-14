@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Places
 Name[el]=Τοποθεσίες
+Name[gl]=Lugares
 Name[nds]=Steden
 Name[pt]=Locais
 Name[pt_BR]=Locais
@@ -12,6 +13,7 @@ Type=Service
 Icon=user-home
 Comment=Open Devices and Folder Bookmarks
 Comment[el]=Άνοιγμα σελιδοδεικτών συσκευών και φακέλων
+Comment[gl]=Abre os marcadores de dispositivos e cartafoles
 Comment[nds]=Reedschappen un Leestekenornern opmaken
 Comment[pt]=Abrir os Dispositivos e Favoritos das Pastas
 Comment[pt_BR]=Abrir os dispositivos e os favoritos das pastas
