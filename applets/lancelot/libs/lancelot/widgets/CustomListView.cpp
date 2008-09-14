@@ -20,7 +20,7 @@
 #include "CustomListView.h"
 #include <KDebug>
 #include <KIcon>
-#include <lancelot/models/ActionListViewModels.h>
+// #include <lancelot/models/ActionListViewModels.h>
 
 namespace Lancelot {
 
@@ -48,14 +48,13 @@ CustomListItemFactory::~CustomListItemFactory()
 class CustomList::Private {
 public:
     Private(CustomList * parent = NULL,
-            CustomListItemFactory * f = NULL,
-            AbstractListModel * m = NULL)
-        : q(parent), factory(f), model(m), scale(-1)
+            CustomListItemFactory * f = NULL)
+        : q(parent), factory(f), scale(-1)
     {
-        recreateItems();
+        positionItems();
     }
 
-    #define returnIfModelNotSet if (!model || !factory) return
+    #define returnIfFactoryNotSet if (!factory) return
 
     QGraphicsWidget * itemForIndex(int position) //>
     {
@@ -64,60 +63,44 @@ public:
 
         if (item) {
             item->setParentItem(q);
-            items.insert(position, item);
         }
         return item;
     } //<
 
-    void recreateItems() //>
-    {
-        returnIfModelNotSet;
-
-        freeAllItems();
-        for (int i = 0; i < model->size(); i++) {
-            itemForIndex(i);
-        }
-
-        positionItems();
-    } //<
-
-    void freeAllItems() //>
-    {
-        returnIfModelNotSet;
-
-        factory->freeAllItems();
-        items.clear();
-    } //<
-
     void positionItems(int startPosition = 0) //>
     {
-        if (startPosition < 0 || startPosition > items.size()) {
+        returnIfFactoryNotSet;
+
+        if (startPosition < 0 || startPosition > factory->itemCount()) {
             return;
         }
 
         qreal top(0);
 
         if (startPosition != 0) {
-            top = items.at(startPosition - 1)->geometry().bottom();
+            top = itemForIndex(startPosition - 1)->geometry().bottom();
         }
 
-        for (int i = startPosition; i < items.size(); i++) {
+        QGraphicsWidget * item;
+        for (int i = startPosition; i < factory->itemCount(); i++) {
+            item = itemForIndex(i);
+
             int height = (int) (
                     (scale > 0) ?
-                        (items.at(i)->maximumHeight() * scale) :
-                        (items.at(i)->preferredHeight())
+                        (item->maximumHeight() * scale) :
+                        (item->preferredHeight())
                     );
 
-            items.at(i)->setGeometry(
+            item->setGeometry(
                 0, top,
                 viewport.width(), height
                 );
             top += height;
         }
 
-        if (items.size() > 0) {
+        if (factory->itemCount() > 0) {
            q->resize(viewport.width(),
-                    items.last()->geometry().bottom());
+                    item->geometry().bottom());
         } else {
             q->resize(0, 0);
         }
@@ -128,36 +111,12 @@ public:
 
     void updateWidth() //>
     {
-        foreach (QGraphicsWidget * item, items) {
+        for (int i = 0; i < factory->itemCount(); i++) {
+            QGraphicsWidget * item = itemForIndex(i);
             item->resize(
                     viewport.width(),
                     item->size().height());
         }
-    } //<
-
-    void insertItem(int position) //>
-    {
-        returnIfModelNotSet;
-        itemForIndex(position);
-        positionItems(position);
-    } //<
-
-    void removeItem(int position) //>
-    {
-        returnIfModelNotSet;
-
-        if (position < 0 || position >= items.size()) {
-            return;
-        }
-
-        factory->freeItem(position);
-
-        positionItems(position);
-    } //<
-
-    void updateItem(int position) //>
-    {
-        positionItems(position);
     } //<
 
     void updateSizeInfo() //>
@@ -166,11 +125,9 @@ public:
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
 
-        if (!model) {
-            return;
-        }
+        returnIfFactoryNotSet;
 
-        for (int i = 0; i < model->size(); i++) {
+        for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
             sizes[Qt::PreferredSize] +=
@@ -195,10 +152,6 @@ public:
                     (qreal) sizes[Qt::MaximumSize];
             }
         }
-        kDebug() << "scale" << scale <<
-                viewport.height() <<
-                sizes[Qt::MaximumSize] <<
-                ((ActionListViewModel *)model)->title(0);
 
         if (q && q->scrollPane()) {
             q->scrollPane()->scrollableWidgetSizeUpdated();
@@ -215,7 +168,8 @@ public:
         }
 
         QTransform transform;
-        foreach (QGraphicsWidget * item, items) {
+        for (int i = 0; i < factory->itemCount(); i++) {
+            QGraphicsWidget * item = itemForIndex(i);
             QRectF itemGeometry = item->geometry();
             if (viewport.intersects(itemGeometry)) {
                 item->show();
@@ -246,11 +200,9 @@ public:
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
 
-        if (!model) {
-            return;
-        }
+        returnIfFactoryNotSet;
 
-        for (int i = 0; i < model->size(); i++) {
+        for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
             sizes[Qt::PreferredSize] +=
@@ -264,9 +216,7 @@ public:
     CustomList * q;
 
     CustomListItemFactory * factory;
-    AbstractListModel * model;
 
-    QList < QGraphicsWidget * > items;
     QMap < Qt::SizeHint, int > sizes;
 
     QRectF viewport;
@@ -280,9 +230,9 @@ CustomList::CustomList(QGraphicsItem * parent)
 }
 
 CustomList::CustomList(
-        CustomListItemFactory * factory, AbstractListModel * model,
+        CustomListItemFactory * factory,
         QGraphicsItem * parent)
-    : QGraphicsWidget(parent), d(new Private(this, factory, model))
+    : QGraphicsWidget(parent), d(new Private(this, factory))
 {
 }
 
@@ -291,15 +241,29 @@ CustomList::~CustomList()
     delete d;
 }
 
-void CustomList::setItemFactory(CustomListItemFactory * factory)
+void CustomList::setItemFactory(CustomListItemFactory * f)
 {
     // Releasing the old factory
     if (d->factory) {
-        d->freeAllItems();
+        disconnect(d->factory, NULL, this, NULL);
     }
 
-    d->factory = factory;
-    d->recreateItems();
+    if (!f) {
+        return;
+    }
+
+    d->factory = f;
+
+    connect(f, SIGNAL(itemInserted(int)),
+            this, SLOT(factoryItemInserted(int)));
+    connect(f, SIGNAL(itemDeleted(int)),
+            this, SLOT(factoryItemDeleted(int)));
+    connect(f, SIGNAL(itemAltered(int)),
+            this, SLOT(factoryItemAltered(int)));
+    connect(f, SIGNAL(updated()),
+            this, SLOT(factoryUpdated()));
+
+    d->positionItems();
 }
 
 CustomListItemFactory * CustomList::itemFactory() const
@@ -307,43 +271,9 @@ CustomListItemFactory * CustomList::itemFactory() const
     return d->factory;
 }
 
-void CustomList::setModel(AbstractListModel * m) //>
-{
-    if (d->model) {
-        disconnect(d->model, NULL, this, NULL);
-    }
-    d->model = m;
-
-    connect(m, SIGNAL(itemInserted(int)),
-            this, SLOT(modelItemInserted(int)));
-    connect(m, SIGNAL(itemDeleted(int)),
-            this, SLOT(modelItemDeleted(int)));
-    connect(m, SIGNAL(itemAltered(int)),
-            this, SLOT(modelItemAltered(int)));
-    connect(m, SIGNAL(updated()),
-            this, SLOT(modelUpdated()));
-
-    d->recreateItems();
-} //<
-
-AbstractListModel * CustomList::model() const
-{
-    return d->model;
-}
-
 QSizeF CustomList::fullSize() const //>
 {
     d->updateSizeInfo();
-
-    /*if (d->scale > 0) {
-        if (d->items.isEmpty()) {
-            return QSizeF(0, 0);
-        } else {
-            return QSizeF(0, d->items.last()->geometry().bottom()); // d->scale * d->sizes[Qt::MaximumSize]);
-        }
-    } else {
-        return QSizeF(0, d->sizes[Qt::PreferredSize]);
-    }*/
     return size();
 } //<
 
@@ -366,24 +296,24 @@ qreal CustomList::scrollUnit(Qt::Orientation direction)
     return 20;
 }
 
-void CustomList::modelItemInserted(int position)
+void CustomList::factoryItemInserted(int position)
 {
-    d->insertItem(position);
+    d->positionItems(position);
 }
 
-void CustomList::modelItemDeleted(int position)
+void CustomList::factoryItemDeleted(int position)
 {
-    d->removeItem(position);
+    d->positionItems(position);
 }
 
-void CustomList::modelItemAltered(int position)
+void CustomList::factoryItemAltered(int position)
 {
-    d->updateItem(position);
+    d->positionItems(position);
 }
 
-void CustomList::modelUpdated()
+void CustomList::factoryUpdated()
 {
-    d->recreateItems();
+    d->positionItems();
 }
 //<
 
@@ -406,9 +336,9 @@ CustomListView::CustomListView(QGraphicsItem * parent)
 }
 
 CustomListView::CustomListView(CustomListItemFactory * factory,
-        AbstractListModel * model, QGraphicsItem * parent)
+        QGraphicsItem * parent)
     : ScrollPane(parent),
-      d(new Private(new CustomList(factory, model, this), this))
+      d(new Private(new CustomList(factory, this), this))
 {
     L_WIDGET_SET_INITIALIZED;
 }

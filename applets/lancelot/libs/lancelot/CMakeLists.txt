@@ -62,7 +62,6 @@ set(lancelot_LIB_SRCS
         layouts/FlipLayout.cpp
 
         # Models
-        models/CustomListModels.cpp
         models/ActionListViewModels.cpp
         models/PassagewayViewModels.cpp
 )

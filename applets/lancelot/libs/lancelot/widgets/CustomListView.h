@@ -31,8 +31,6 @@
 #include <lancelot/widgets/ExtenderButton.h>
 #include <lancelot/widgets/ScrollPane.h>
 
-#include <lancelot/models/CustomListModels.h>
-
 namespace Lancelot
 {
 
@@ -56,16 +54,55 @@ public:
  * items. All items must subclass QGraphicsWidget and implement
  * the CustomListItem interface.
  */
-class LANCELOT_EXPORT CustomListItemFactory {
+class LANCELOT_EXPORT CustomListItemFactory: public QObject {
+    Q_OBJECT;
 public:
     CustomListItemFactory();
     virtual ~CustomListItemFactory();
 
+    /**
+     * @returns number of items
+     */
+    virtual int itemCount() const = 0;
+
+    /**
+     * @returns an item for the specified index
+     * @param index index
+     */
     virtual CustomListItem * itemForIndex(int index) = 0;
-    virtual void freeItem(int index) = 0;
+
+    /**
+     * @returns the height hint for the specified item
+     * @param index index of the item
+     * @param which which hint to return
+     */
     virtual int itemHeight(int index, Qt::SizeHint which) const = 0;
 
-    virtual void freeAllItems() = 0;
+Q_SIGNALS:
+    /**
+     * This signal is emitted when the model is updated and the update
+     * is too complex to explain using itemInserted, itemDeleted and
+     * itemAltered methods
+     */
+    void updated();
+
+    /**
+     * This signal is emitted when an item is inserted into the model
+     * @param index place where the new item is inserted
+     */
+    void itemInserted(int index);
+
+    /**
+     * This signal is emitted when an item is deleted from the model
+     * @param index index of the deleted item
+     */
+    void itemDeleted(int index);
+
+    /**
+     * This signal is emitted when an item is altered
+     * @param index index of the altered item
+     */
+    void itemAltered(int index);
 };
 
 /**
@@ -79,7 +116,6 @@ class LANCELOT_EXPORT CustomList: public QGraphicsWidget, public Scrollable {
 public:
     CustomList(QGraphicsItem * parent = NULL);
     CustomList(CustomListItemFactory * factory,
-            AbstractListModel * model,
             QGraphicsItem * parent = NULL);
 
     virtual ~CustomList();
@@ -87,30 +123,15 @@ public:
     void setItemFactory(CustomListItemFactory * factory);
     CustomListItemFactory * itemFactory() const;
 
-    void setModel(AbstractListModel * model);
-    AbstractListModel * model() const;
-
     L_Override virtual QSizeF fullSize() const;
     L_Override virtual void viewportChanged(QRectF viewport);
     L_Override virtual qreal scrollUnit(Qt::Orientation direction);
 
-    // L_Override virtual void paint(QPainter * painter,
-    //         const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
-    // {
-    //     painter->fillRect(
-    //             QRectF(QPointF(), size()),
-    //             QBrush(QColor(250, 100, 100, 50))
-    //             );
-    //     painter->fillRect(
-    //             QRectF(QPointF(5, 5), size() - QSizeF(10, 10)),
-    //             QBrush(QColor(100, 100, 100, 50))
-    //             );
-    // }
 protected Q_SLOTS:
-    void modelItemInserted(int position);
-    void modelItemDeleted(int position);
-    void modelItemAltered(int position);
-    void modelUpdated();
+    void factoryItemInserted(int position);
+    void factoryItemDeleted(int position);
+    void factoryItemAltered(int position);
+    void factoryUpdated();
 
 private:
     class Private;
@@ -126,7 +147,6 @@ class LANCELOT_EXPORT CustomListView: public ScrollPane {
 public:
     CustomListView(QGraphicsItem * parent = NULL);
     CustomListView(CustomListItemFactory * factory,
-            AbstractListModel * model,
             QGraphicsItem * parent = NULL);
 
     virtual ~CustomListView();

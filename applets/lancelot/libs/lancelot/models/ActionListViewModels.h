@@ -21,7 +21,6 @@
 #define LANCELOT_ACTION_LIST_VIEW_MODELS_H_
 
 #include <lancelot/lancelot_export.h>
-#include <lancelot/models/CustomListModels.h>
 
 #include <QPair>
 #include <QMimeData>
@@ -43,7 +42,7 @@ namespace Lancelot
 /**
  * This class represents data model for ActionListView widgets.
  */
-class LANCELOT_EXPORT ActionListViewModel: public AbstractListModel {
+class LANCELOT_EXPORT ActionListViewModel: public QObject {
     Q_OBJECT
 public:
     /**
@@ -138,6 +137,31 @@ Q_SIGNALS:
      * @param index of the activated element
      */
     void itemActivated(int index);
+
+    /**
+     * This signal is emitted when the model is updated and the update
+     * is too complex to explain using itemInserted, itemDeleted and
+     * itemAltered methods
+     */
+    void updated();
+
+    /**
+     * This signal is emitted when an item is inserted into the model
+     * @param index place where the new item is inserted
+     */
+    void itemInserted(int index);
+
+    /**
+     * This signal is emitted when an item is deleted from the model
+     * @param index index of the deleted item
+     */
+    void itemDeleted(int index);
+
+    /**
+     * This signal is emitted when an item is altered
+     * @param index index of the altered item
+     */
+    void itemAltered(int index);
 
 protected:
     /**
