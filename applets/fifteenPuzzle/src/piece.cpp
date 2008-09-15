@@ -29,17 +29,49 @@
 
 #include <KDebug>
 
-Piece::Piece(int size, int id, QGraphicsItem *parent)
-    : QGraphicsPixmapItem(parent)
+Piece::Piece(int id, QGraphicsItem *parent, Plasma::Svg *svg, int gamePos)
+    : QGraphicsItem(parent)
 {
-  m_size = size;
   m_id = id;
   m_numeral = true;
+  m_gamePos = gamePos;
+  m_svg = svg;
 }
 
 int Piece::getId()
 {
   return m_id;
+}
+
+int Piece::getGameX()
+{
+  return m_gamePos % 4;
+}
+
+int Piece::getGameY()
+{
+  return m_gamePos / 4;
+}
+
+int Piece::getGamePos()
+{
+  return m_gamePos;
+}
+
+void Piece::setGamePos(int gamePos)
+{
+  m_gamePos = gamePos;
+}
+
+void Piece::setSize(QSizeF size)
+{
+  prepareGeometryChange();
+  m_size = size;
+}
+
+void Piece::setSplitImage(bool splitPixmap)
+{
+  m_splitPixmap = splitPixmap;
 }
 
 void Piece::showNumeral(bool show)
@@ -50,15 +82,26 @@ void Piece::showNumeral(bool show)
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                   QWidget *widget)
 {
+  Q_UNUSED(option);
+  Q_UNUSED(widget);
+
   if (m_id == 0) {
     return;
   }
 
-  QGraphicsPixmapItem::paint(painter, option, widget);
+  if (m_splitPixmap) {
+    m_svg->paint(painter, QPointF(0, 0), "piece_" + QString::number(m_id));
+  } else {
+    // here we assume that the svg has already been resized correctly by Fifteen::updatePixmaps()
+    m_svg->paint(painter, QPointF(0, 0));
+  }
 
   if (!m_numeral) {
     return;
   }
+
+  int width = m_size.width();
+  int height = m_size.height();
 
   QFont font = painter->font();
   font.setBold(true);
@@ -72,15 +115,20 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
   pen.setColor(QColor(0, 0, 0, 90));
   painter->setPen(pen);
-  painter->drawText(((m_size / 2) - m.width(text) / 2) + 2,
-                    ((m_size / 2) + m.ascent() / 2) + 2,
+  painter->drawText(((width / 2) - m.width(text) / 2) + 2,
+                    ((height / 2) + m.ascent() / 2) + 2,
                     text);
 
   pen.setColor(QColor(Qt::white));
   painter->setPen(pen);
-  painter->drawText((m_size / 2) - m.width(text) / 2,
-                    (m_size / 2) + m.ascent() / 2,
+  painter->drawText((width / 2) - m.width(text) / 2,
+                    (height / 2) + m.ascent() / 2,
                     text);
+}
+
+QRectF Piece::boundingRect() const
+{
+  return QRectF(QPointF(0, 0), m_size);
 }
 
 void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)

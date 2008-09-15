@@ -41,12 +41,12 @@ class FifteenPuzzle : public Plasma::Applet
     void updateBoard();
     void createMenu();
 
-    Fifteen *board;
-    FifteenPuzzleConfig *configDialog;
-    QList<QAction *> actions;
-    bool usePlainPieces;
-    QString imagePath;
-    bool showNumerals;
+    Fifteen *m_board;
+    FifteenPuzzleConfig *m_configDialog;
+    QList<QAction *> m_actions;
+    bool m_usePlainPieces;
+    QString m_imagePath;
+    bool m_showNumerals;
 
   private slots:
     void createConfigurationInterface(KConfigDialog *parent);

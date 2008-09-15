@@ -26,22 +26,26 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 
-#include <KSvgRenderer>
 #include <KDebug>
 
 #include "plasma/animator.h"
 
-static const int SIZE = 48;
-
 Fifteen::Fifteen(QGraphicsItem *parent)
     : QGraphicsWidget(parent)
 {
-  m_pixmaps.resize(16);
   m_pieces.resize(16);
   m_splitPixmap = false;
   m_numerals = true;
 
+  m_svg = new Plasma::Svg();
+  m_svg->setImagePath(QLatin1String(":/images/greensquare.svgz"));
   shuffle();
+}
+
+Fifteen::~Fifteen()
+{
+  qDeleteAll(m_pieces);
+  delete m_svg;
 }
 
 void Fifteen::clearPieces()
@@ -53,7 +57,7 @@ void Fifteen::clearPieces()
 void Fifteen::shuffle()
 {
   qsrand(time(0));
-  clearPieces();
+  qDeleteAll(m_pieces);
   m_pieces.fill(NULL);
   int numPiecesLeft = 16;
   for (int i = 0; i < 16; ++i) {
@@ -74,9 +78,8 @@ void Fifteen::shuffle()
     }
     //kDebug() << "rand" << randIndex << rand;
 
-    m_pieces[rand] = new Piece(SIZE, i, this);
-    m_pieces[rand]->hide();
-    QObject::connect(m_pieces[rand], SIGNAL(pressed(QGraphicsItem*)), this, SLOT(piecePressed(QGraphicsItem*)));
+    m_pieces[rand] = new Piece(i, this, m_svg, rand);
+    QObject::connect(m_pieces[rand], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
 
     if (i == 0) {
       m_blank = m_pieces[rand];
@@ -93,11 +96,19 @@ void Fifteen::shuffle()
       b = 0;
     }
     qSwap(m_pieces[a], m_pieces[b]);
+
+    // also swap the gamePos of the pieces
+    int aPos = m_pieces[a]->getGamePos();
+    m_pieces[a]->setGamePos(m_pieces[b]->getGamePos());
+    m_pieces[b]->setGamePos(aPos);
   }
 
-  updatePixmaps();
-  updateNumerals();
-  drawPieces();
+  updatePieces();
+}
+
+void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+  updatePieces();
 }
 
 bool Fifteen::isSolvable()
@@ -131,122 +142,112 @@ bool Fifteen::isSolvable()
   return odd_even_solvable == odd_even_permutations;
 }
 
-void Fifteen::updateNumerals()
+void Fifteen::setShowNumerals(bool show)
 {
+  m_numerals = show;
+  updatePieces();
+}
+
+void Fifteen::setSplitImage(const QString& path)
+{
+  m_svg->setImagePath(path);
+  m_splitPixmap = true;
+  updatePieces();
+}
+
+void Fifteen::setIdentical()
+{
+  m_splitPixmap = false;
+  updatePieces();
+
+  // if the pieces are identical then numerals are needed
+  m_numerals = true;
+  updatePieces();
+}
+
+void Fifteen::updatePieces()
+{
+  QSizeF size = contentsRect().size();
+  int width = size.width() / 4;
+  int height = size.height() / 4;
+
+  if (m_splitPixmap) {
+    m_svg->resize(size);
+  } else {
+    m_svg->resize(width, height);
+  }
+
   for (int i = 0; i < 16; ++i) {
     m_pieces[i]->showNumeral(m_numerals);
+    m_pieces[i]->setSplitImage(m_splitPixmap);
+    m_pieces[i]->setSize(QSizeF(width, height));
+    m_pieces[i]->setPos(m_pieces[i]->getGameX() * width, m_pieces[i]->getGameY() * height);
   }
 
   update();
 }
 
-void Fifteen::setNumerals(bool show)
+void Fifteen::piecePressed(Piece *item)
 {
-  m_numerals = show;
-  updateNumerals();
-}
+  int ix = item->getGameX();
+  int iy = item->getGameY();
+  int bx = m_blank->getGameX();
+  int by = m_blank->getGameY();
 
-void Fifteen::setSplitPixmap(const QString& path)
-{
-  m_pixmap = QPixmap(path);
-  m_splitPixmap = true;
-  updatePixmaps();
-}
-
-void Fifteen::setIdentical()
-{
-  KSvgRenderer renderer(QLatin1String(":/images/greensquare.svgz"));
-  QPixmap pixmap(renderer.defaultSize());
-  pixmap.fill(Qt::transparent);
-  QPainter painter(&pixmap);
-  renderer.render(&painter);
-  painter.end();
-
-  m_pixmap = pixmap;
-
-  m_splitPixmap = false;
-  updatePixmaps();
-}
-
-void Fifteen::updatePixmaps()
-{
-  QPixmap pixmap;
-
-  if (!m_splitPixmap) {
-    pixmap = m_pixmap.scaled(SIZE, SIZE);
-    m_pixmaps.fill(pixmap);
-  }
-  else {
-    pixmap = m_pixmap.scaled(SIZE * 4, SIZE * 4);
-    int x = 0;
-    int y = 0;
-
-    for (int i = 1; i < 16; ++i) {
-      if ((i - 1) % 4 == 0 && i != 1) {
-        x = 0;
-        y = y + SIZE;
+  if (ix == bx && iy != by) {
+    if (iy > by) {
+      for (; by < iy; by++) {
+        // swap the piece at ix,by+1 with blank
+        swapPieceWithBlank(itemAt(ix, by + 1));
       }
-      m_pixmaps[i] = pixmap.copy(x, y, SIZE, SIZE);
-      x += SIZE;
+    }
+    else if (iy < by) {
+      for (; by > iy; by--) {
+        // swap the piece at ix,by-1 with blank
+        swapPieceWithBlank(itemAt(ix, by - 1));
+      }
     }
   }
-
-  for (int i = 0; i < 16; ++i) {
-    m_pieces[i]->setPixmap(m_pixmaps[m_pieces[i]->getId()]);
-  }
-}
-
-void Fifteen::piecePressed(QGraphicsItem *item)
-{
-  if (isAdjacent(item, m_blank)) {
-    QPointF pos = item->pos();
-    Plasma::Animator::self()->moveItem(item, Plasma::Animator::SlideInMovement, m_blank->pos().toPoint());
-    m_blank->setPos(pos);
-  }
-}
-
-bool Fifteen::isAdjacent(QGraphicsItem *a, QGraphicsItem *b)
-{
-  qreal ax = a->pos().x();
-  qreal ay = a->pos().y();
-
-  qreal bx = b->pos().x();
-  qreal by = b->pos().y();
-
-  /*
-  qDebug() << "ax:" << ax << "ay:" << ay;
-  qDebug() << "bx:" << bx << "by:" << by;
-  */
-
-  // Left
-  if (ax + SIZE == bx && ay == by)
-    return true;
-  // Right
-  if (ax - SIZE == bx && ay == by)
-    return true;
-  // Above
-  if (ay + SIZE == by && ax == bx)
-    return true;
-  // Below
-  if (ay - SIZE == by && ax == bx)
-    return true;
-
-  return false;
-}
-
-void Fifteen::drawPieces()
-{
-  int x = 0;
-  int y = 0;
-
-  for (int i = 0; i < 16; ++i) {
-    if (i % 4 == 0 && i != 0) {
-      x = 0;
-      y = y + SIZE;
+  else if (iy == by && ix != bx) {
+    if (ix > bx) {
+      for (; bx < ix; bx++) {
+        // swap the piece at bx+1,iy with blank
+        swapPieceWithBlank(itemAt(bx + 1, iy));
+      }
     }
-
-    m_pieces.at(i)->setPos(x, y);
-    m_pieces.at(i)->show();
-    x += SIZE;
+    else if (ix < bx) {
+      for (; bx > ix; bx--) {
+        // swap the piece at bx-1,iy with blank
+        swapPieceWithBlank(itemAt(bx - 1, iy));
+      }
+    }
   }
 }
+
+Piece* Fifteen::itemAt(int gameX, int gameY)
+{
+  int gamePos = (gameY * 4) + gameX;
+  for (int i = 0; i < 16; i++) {
+    if (m_pieces[i]->getGamePos() == gamePos) {
+      return m_pieces[i];
+    }
+  }
+  return NULL;
+}
+
+void Fifteen::swapPieceWithBlank(Piece *item)
+{
+  int width = contentsRect().size().width() / 4;
+  int height = contentsRect().size().height() / 4;
+
+  // swap widget positions
+  QPointF pos = QPointF(item->getGameX() * width, item->getGameY() * height);
+  Plasma::Animator::self()->moveItem(item, Plasma::Animator::FastSlideInMovement, m_blank->pos().toPoint());
+  m_blank->setPos(pos);
+
+  // swap game positions
+  int blankPos = m_blank->getGamePos();
+  m_blank->setGamePos(item->getGamePos());
+  item->setGamePos(blankPos);
+}
+

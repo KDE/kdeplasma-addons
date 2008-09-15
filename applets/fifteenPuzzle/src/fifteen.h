@@ -22,6 +22,8 @@
 
 #include <QGraphicsWidget>
 
+#include <Plasma/Svg>
+
 #include "piece.h"
 
 class Fifteen : public QGraphicsWidget
@@ -29,26 +31,30 @@ class Fifteen : public QGraphicsWidget
   Q_OBJECT
   public:
     Fifteen(QGraphicsItem *parent = 0);
+    ~Fifteen();
+    void updatePieces();
 
   public slots:
-    void piecePressed(QGraphicsItem *item);
-    void setSplitPixmap(const QString& path);
+    void piecePressed(Piece *item);
+    void setSplitImage(const QString& path);
     void setIdentical();
-    void setNumerals(bool show);
+    void setShowNumerals(bool show);
     void shuffle();
+
+  protected:
+    void resizeEvent(QGraphicsSceneResizeEvent * event);
 
   private:
     void drawPieces();
-    bool isAdjacent(QGraphicsItem *a, QGraphicsItem *b);
-    void updatePixmaps();
+    Piece* itemAt(int gameX, int gameY);
+    void swapPieceWithBlank(Piece *item);
     void clearPieces();
-    void updateNumerals();
     bool isSolvable();
 
     QVector<Piece *> m_pieces;
-    QVector<QPixmap> m_pixmaps;
-    QGraphicsItem *m_blank;
+    Piece *m_blank;
     bool m_splitPixmap;
+    Plasma::Svg *m_svg;
     QPixmap m_pixmap;
     bool m_numerals;
 };

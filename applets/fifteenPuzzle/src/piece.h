@@ -23,27 +23,38 @@
 #include <QGraphicsItem>
 #include <QObject>
 
+#include <Plasma/Svg>
 
-class Piece : public QObject, public QGraphicsPixmapItem
+class Piece : public QObject, public QGraphicsItem
 {
   Q_OBJECT
 
   public:
-    Piece(int size, int id, QGraphicsItem * parent);
+    Piece(int id, QGraphicsItem * parent, Plasma::Svg *svg, int gamePos);
     int getId();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
     void showNumeral(bool show);
+    int getGameX();
+    int getGameY();
+    int getGamePos();
+    void setGamePos(int gamePos);
+    void setSize(QSizeF size);
+    void setSplitImage(bool splitPixmap);
 
   private:
     int m_id;
-    int m_size;
     bool m_numeral;
+    int m_gamePos;
+    bool m_splitPixmap;
+    QSizeF m_size;
+    Plasma::Svg *m_svg;
 
   protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
   signals:
-    void pressed(QGraphicsItem *item);
+    void pressed(Piece *item);
 };
 
 #endif
