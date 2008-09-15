@@ -104,10 +104,6 @@ class Twitter : public Plasma::Applet
          */
         bool enterWalletFolder(const QString &folder);
         /**
-         * sets name & password and updates stuff
-         */
-        void setAuth();
-        /**
          * disable the UI until user is authenticated
          */
         void setAuthRequired(bool auth);
@@ -137,6 +133,7 @@ class Twitter : public Plasma::Applet
         bool m_includeFriends;
 
         Plasma::DataEngine *m_engine;
+        Plasma::Service *m_service;
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;

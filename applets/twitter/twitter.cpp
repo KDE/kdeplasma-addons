@@ -48,6 +48,7 @@
 #include <Plasma/Svg>
 #include <Plasma/Theme>
 #include <Plasma/DataEngine>
+#include <Plasma/Service>
 #include <Plasma/Flash>
 #include <Plasma/Icon>
 #include <Plasma/TextEdit>
@@ -56,7 +57,10 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_lastTweet(0), m_wallet(0), m_walletWait(None),
+      m_service(0),
+      m_lastTweet(0),
+      m_wallet(0),
+      m_walletWait(None),
       m_colorScheme(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -131,7 +135,7 @@ void Twitter::init()
     m_layout->addStretch();
 
     //hook up some sources
-    m_engine->connectSource("LatestImage", this);
+    m_engine->connectSource("UserImages", this);
     m_engine->connectSource("Error:UserImages", this);
     m_engine->connectSource("Error", this);
 
@@ -141,7 +145,7 @@ void Twitter::init()
             m_walletWait = Read;
             getWallet();
         } else { //use config value
-            setAuth();
+            downloadHistory();
         }
     }else{
         setAuthRequired(true);
@@ -189,10 +193,10 @@ void Twitter::readWallet(bool success)
 {
     //kDebug();
     QString pwd;
-    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) 
+    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))
             && (m_wallet->readPassword(m_username, pwd) == 0)) {
         m_password = pwd;
-        setAuth();
+        downloadHistory();
     } else {
         kDebug() << "failed to read password";
     }
@@ -211,15 +215,6 @@ bool Twitter::enterWalletFolder(const QString &folder)
         return false;
     }
     return true;
-}
-
-void Twitter::setAuth()
-{
-    Plasma::DataEngine::Data conf = m_engine->property("config").value<Plasma::DataEngine::Data>();
-    conf[m_username] = m_password;
-    m_engine->setProperty("config", QVariant::fromValue(conf));
-//     m_statusEdit->setVisible( !( m_username.isEmpty() || m_password.isEmpty() ) );
-    downloadHistory();
 }
 
 void Twitter::setAuthRequired(bool required)
@@ -272,32 +267,31 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         m_lastTweet = maxId;
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
         showTweets();
-    } else if (source == "LatestImage") {
-        QString user = data.begin().key();
-        if (user.isEmpty()) {
-            return;
-        }
-        QPixmap pm = data[user].value<QPixmap>();
-        if( !pm.isNull() ) {
-            if( user == m_username ) {
-                QAction *profile = new QAction(QIcon(pm), m_username, this);
-                profile->setData(m_username);
-                
-                QSizeF iconSize = m_icon->sizeFromIconSize(48);
-                m_icon->setAction(profile);
-                m_icon->setMinimumSize( iconSize );
-                m_icon->setMaximumSize( iconSize );
-                connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
+    } else if (source == "UserImages") {
+        foreach (QString user, data.keys()) {
+            QPixmap pm = data[user].value<QPixmap>();
+
+            if( !pm.isNull() ) {
+                if( user == m_username ) {
+                    QAction *profile = new QAction(QIcon(pm), m_username, this);
+                    profile->setData(m_username);
+
+                    QSizeF iconSize = m_icon->sizeFromIconSize(48);
+                    m_icon->setAction(profile);
+                    m_icon->setMinimumSize( iconSize );
+                    m_icon->setMaximumSize( iconSize );
+                    connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
+                }
+                m_pictureMap[user] = pm;
+                //TODO it would be nice to check whether the updated image is actually in use
+                showTweets();
             }
-            m_pictureMap[user] = pm;
-            //TODO it would be nice to check whether the updated image is actually in use
-            showTweets();
         }
     } else if (source.startsWith("Error")) {
         QString desc = data["description"].toString();
 
         if (desc == "Authentication required"){
-            setAuthRequired(true);            
+            setAuthRequired(true);
         }
 
         m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
@@ -518,7 +512,7 @@ void Twitter::configAccepted()
         //TODO we only *need* to wipe the map if name or includeFriends changed
         m_tweetMap.clear();
         m_lastTweet=0;
-        setAuth();
+        downloadHistory();
 
         emit configNeedsSaving();
     }
@@ -529,6 +523,7 @@ void Twitter::configAccepted()
 Twitter::~Twitter()
 {
     delete m_colorScheme;
+    delete m_service;
 }
 
 void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
@@ -578,8 +573,14 @@ bool Twitter::eventFilter(QObject *obj, QEvent *event)
 
 void Twitter::updateStatus()
 {
-    QString status = m_username + ':' + m_statusEdit->nativeWidget()->toPlainText();
-    m_engine->setProperty( "status", status );
+    QString status = m_statusEdit->nativeWidget()->toPlainText();
+
+    m_service = m_engine->serviceForSource(m_curTimeline);
+    KConfigGroup cg = m_service->operationDescription("update");
+    cg.writeEntry("password", m_password);
+    cg.writeEntry("status", status);
+    m_service->startOperationCall(cg);
+
     m_statusEdit->nativeWidget()->setPlainText("");
 }
 
@@ -615,6 +616,11 @@ void Twitter::downloadHistory()
     kDebug() << "Connecting to source " << query;
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
+
+    m_service = m_engine->serviceForSource(query);
+    KConfigGroup cg = m_service->operationDescription("auth");
+    cg.writeEntry("password", m_password);
+    m_service->startOperationCall(cg);
 }
 
 void Twitter::openProfile()

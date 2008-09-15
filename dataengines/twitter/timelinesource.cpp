@@ -39,7 +39,7 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
 
 void TweetJob::start()
 {
-    KIO::Job *job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
+    KIO::Job *job = KIO::http_post(m_url, 0, KIO::HideProgressInfo);
     connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
@@ -179,6 +179,8 @@ bool TimelineSource::endElement(const QString &namespaceURI, const QString &loca
 
     QString tag = localName.toLower();
 
+    m_cdata = m_cdata.trimmed();
+
     if (tag == "status") {
         if (!m_id.isEmpty()) {
             QVariant v;
@@ -188,7 +190,8 @@ bool TimelineSource::endElement(const QString &namespaceURI, const QString &loca
         }
 
         m_tempData.clear();
-    } else if (tag == "id") {
+    //if id is not empty we are in the id of the user, ignoring it
+    } else if (tag == "id" && m_id.isEmpty()) {
         m_id = m_cdata;
     } else if (tag == "text") {
         m_tempData["Status"] = m_cdata;

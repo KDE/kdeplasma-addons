@@ -83,7 +83,7 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 {
     kDebug() << name;
     //right now it only makes sense to do an update on timelines
-    if (!name.startsWith("Timeline:")) {
+    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:")) {
         return false;
     }
 

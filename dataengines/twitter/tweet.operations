@@ -12,7 +12,7 @@
         <entry name="password" type="String">
             <label>The log in password for the account.</label>
         </entry>
-        <entry name="tweet" type="String">
+        <entry name="status" type="String">
             <label>The tweet text</label>
         </entry>
     </group>
