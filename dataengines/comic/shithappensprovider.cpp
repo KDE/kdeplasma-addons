@@ -103,11 +103,14 @@ QString ShitHappensProvider::nextIdentifier() const
 
 QString ShitHappensProvider::previousIdentifier() const
 {
-    if ( d->mPreviousId > 0 ) {
-        return QString::number( d->mPreviousId );
-    } else {
-        return QString();
+    if ( ( d->mPreviousId > 0 ) ) {
+        // no Previous ID for the first comic
+        if ( ( d->mNextId == 0 ) || ( d->mPreviousId < d->mNextId ) ) {
+            return QString::number( d->mPreviousId );
+        }
     }
+
+    return QString();
 }
 
 void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )

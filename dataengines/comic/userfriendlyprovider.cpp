@@ -38,7 +38,6 @@ class UserFriendlyProvider::Private
         QImage mImage;
 };
 
-
 UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
@@ -87,15 +86,17 @@ KUrl UserFriendlyProvider::websiteUrl() const
 void UserFriendlyProvider::pageRetrieved( int id, const QByteArray &rawData )
 {
     if ( id == Private::PageRequest ) {
-        const QString pattern( "<img border=\"0\" src=\"http://www.userfriendly.org/cartoons/archives/" );
-        const QRegExp exp( pattern );
-
         const QString data = QString::fromUtf8( rawData );
+        const QString pattern( "<img border=\"0\" src=\"http://www.userfriendly.org/cartoons/archives/(.*)\"" );
+        QRegExp exp( pattern );
+        exp.setMinimal( true );
+        const int pos = exp.indexIn( data );
 
-        const int pos = exp.indexIn( data ) + pattern.length();
-        const QString sub = data.mid( pos, data.indexOf( ' ', pos ) - pos - 1 );
+        KUrl url;
 
-        KUrl url( QString( "http://ars.userfriendly.org/cartoons/archives/%1" ).arg( sub ) );
+        if ( pos > -1 ) {
+            url = KUrl( QString( "http://ars.userfriendly.org/cartoons/archives/%1" ).arg( exp.cap( 1 ) ) );
+        }
 
         requestPage( url, Private::ImageRequest );
     } else if ( id == Private::ImageRequest ) {

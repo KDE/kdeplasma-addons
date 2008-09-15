@@ -115,22 +115,25 @@ void ExtraLifeProvider::pageRetrieved( int id, const QByteArray &rawData )
         const QString year( "((19|20)\\d\\d)" );
         const QString month( "(0[1-9]|1[012])" );
         const QString day( "(0[1-9]|[12][0-9]|3[01])" );
-
-        QRegExp exp( "strips/(" + month + "-" + day + "-" + year + ")\\.jpg" );
+        QRegExp exp( "<img src=\"strips/(.*)\">" );
+        exp.setMinimal( true );
         const int pos = exp.indexIn( data );
 
         KUrl url;
 
         if ( pos > -1 ) {
             if ( d->mFindNewDate ) {
-                d->mUsedDate =  QDate::fromString( exp.cap( 1 ), "MM-dd-yyyy" );
-                d->mFindNewDate = false;
-                setWebsiteHttp();
+                QRegExp expNoDate( "strips/(" + month + "-" + day + "-" + year + ")\\.jpg" );
+                const int posNoDate = expNoDate.indexIn( data );
+                if ( posNoDate > -1 ) {
+                    d->mUsedDate =  QDate::fromString( expNoDate.cap( 1 ), "MM-dd-yyyy" );
+                    d->mFindNewDate = false;
+                    setWebsiteHttp();
+                }
                 return;
             }
 
-            url = KUrl( QString( "http://myextralife.com/strips/%1.jpg" )
-            .arg( d->mUsedDate.toString( "MM-dd-yyyy" ) ) );
+            url = KUrl( QString( "http://myextralife.com/strips/%1" ).arg( exp.cap( 1 ) ) );
         }
 
         const QString patternDate( "(" + year + "-" + month + "-" + day + ")" );
