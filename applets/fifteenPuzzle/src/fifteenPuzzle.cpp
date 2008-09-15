@@ -29,6 +29,8 @@
 //Plasma
 #include <Plasma/Theme>
 
+static const char defaultImage[] = ":/images/greensquare.svgz";
+
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_configDialog(0)
 {
@@ -112,13 +114,8 @@ void FifteenPuzzle::configAccepted()
 
 void FifteenPuzzle::updateBoard()
 {
-  if (m_usePlainPieces) {
-    m_board->setIdentical();
-  }
-  else {
-    m_board->setSplitImage(m_imagePath);
-    m_board->setShowNumerals(m_showNumerals);
-  }
+  m_board->setShowNumerals(m_showNumerals);
+  m_board->setImage(m_usePlainPieces ? QLatin1String(defaultImage) : m_imagePath, m_usePlainPieces);
 }
 
 void FifteenPuzzle::createMenu()

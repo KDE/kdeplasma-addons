@@ -38,7 +38,6 @@ Fifteen::Fifteen(QGraphicsItem *parent)
   m_numerals = true;
 
   m_svg = new Plasma::Svg();
-  m_svg->setImagePath(QLatin1String(":/images/greensquare.svgz"));
   shuffle();
 }
 
@@ -148,20 +147,11 @@ void Fifteen::setShowNumerals(bool show)
   updatePieces();
 }
 
-void Fifteen::setSplitImage(const QString& path)
+void Fifteen::setImage(const QString &path, bool identicalPieces)
 {
   m_svg->setImagePath(path);
-  m_splitPixmap = true;
-  updatePieces();
-}
-
-void Fifteen::setIdentical()
-{
-  m_splitPixmap = false;
-  updatePieces();
-
-  // if the pieces are identical then numerals are needed
-  m_numerals = true;
+  m_splitPixmap = !identicalPieces && m_svg->hasElement("piece_0");
+  m_numerals = m_numerals || identicalPieces;
   updatePieces();
 }
 

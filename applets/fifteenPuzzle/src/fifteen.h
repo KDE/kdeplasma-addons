@@ -36,8 +36,7 @@ class Fifteen : public QGraphicsWidget
 
   public slots:
     void piecePressed(Piece *item);
-    void setSplitImage(const QString& path);
-    void setIdentical();
+    void setImage(const QString &path, bool identicalPieces);
     void setShowNumerals(bool show);
     void shuffle();
 
