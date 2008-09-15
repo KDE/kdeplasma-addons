@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Comic Strips
+Name[gl]=Banda deseñada
 Name[nds]=Comics
 Name[pt]=Bandas Desenhadas
 Name[pt_BR]=Tirinhas
 Name[sv]=Tecknad serie
 Name[uk]=Комічна стрічка
+Name[zh_CN]=连环画
 Comment=Data Engine for comic strips
 Comment[ca]=Motor de dades per a tires còmiques
 Comment[cs]=Datová část pro komiksové proužky

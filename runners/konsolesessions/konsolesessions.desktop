@@ -7,6 +7,7 @@ Name[pt]=Sessões do Konsole
 Name[pt_BR]=Sessões do Konsole
 Name[sv]=Terminalsessioner
 Name[uk]=Сеанси Konsole
+Name[zh_CN]=Konsole 会话
 Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Konsole
@@ -16,6 +17,7 @@ Comment[pt]=Corresponder às Sessões do Konsole
 Comment[pt_BR]=Corresponder às sessões do Konsole
 Comment[sv]=Matchar terminalsessioner
 Comment[uk]=Порівнює сеанси Konsole
+Comment[zh_CN]=匹配 Konsole 会话
 Comment[zh_TW]=符合 Konsole 工作階段
 Icon=utilities-terminal
 
