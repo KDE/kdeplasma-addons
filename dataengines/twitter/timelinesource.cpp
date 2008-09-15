@@ -45,6 +45,8 @@ void TweetJob::start()
 
 void TweetJob::result(KJob *job)
 {
+    setError(job->error());
+    setErrorText(job->errorText());
     setResult(!job->error());
 }
 
