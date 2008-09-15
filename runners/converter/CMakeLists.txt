@@ -24,7 +24,7 @@ set(plasmaconverter_HEADERS
 kde4_add_library(plasmaconverter SHARED ${plasmaconverter_LIB_SRCS})
 target_link_libraries(plasmaconverter ${KDE4_KDECORE_LIBS})
 set_target_properties(plasmaconverter PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-install(TARGETS plasmaconverter DESTINATION ${LIB_INSTALL_DIR})
+install(TARGETS plasmaconverter ${INSTALL_TARGETS_DEFAULT_ARGS})
 #install(FILES ${plasmaconverter_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
 
 kde4_add_plugin(krunner_converter ${krunner_converter_SRCS})
