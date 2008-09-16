@@ -52,6 +52,8 @@
 #include <Plasma/Flash>
 #include <Plasma/Icon>
 #include <Plasma/TextEdit>
+#include <Plasma/Frame>
+#include <Plasma/ServiceJob>
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
@@ -90,7 +92,7 @@ void Twitter::init()
     //ui setup
     m_layout = new QGraphicsLinearLayout( Qt::Vertical );
     setLayout( m_layout );
-    m_layout->setSpacing( 0 );
+    m_layout->setSpacing( 3 );
 
     QGraphicsLinearLayout *flashLayout = new QGraphicsLinearLayout( Qt::Horizontal );
     m_flash = new Plasma::Flash( this );
@@ -105,10 +107,11 @@ void Twitter::init()
     flashLayout->setItemSpacing( 0, 175 );
     m_layout->addItem( flashLayout );
 
-    m_headerLayout = new QGraphicsLinearLayout( Qt::Horizontal );
+    Plasma::Frame *headerFrame = new Plasma::Frame(this);
+    m_headerLayout = new QGraphicsLinearLayout( Qt::Horizontal, headerFrame );
     m_headerLayout->setContentsMargins( 5, 5, 5, 10 );
     m_headerLayout->setSpacing( 5 );
-    m_layout->addItem( m_headerLayout );
+    m_layout->addItem( headerFrame );
 
 
     m_icon = new Plasma::Icon( this );
@@ -119,10 +122,15 @@ void Twitter::init()
     m_icon->setMaximumSize( iconSize );
     m_headerLayout->addItem( m_icon );
 
+    Plasma::Frame *statusEditFrame = new Plasma::Frame(this);
+    statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
+    QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit();
     m_statusEdit->nativeWidget()->setFrameShape( QFrame::NoFrame );
     m_statusEdit->nativeWidget()->setTextBackgroundColor( QColor(0,0,0,0) );
     m_statusEdit->nativeWidget()->viewport()->setAutoFillBackground( false );
+    connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
+    statusEditLayout->addItem(m_statusEdit);
 
     //FIXME: m_statusEdit->setTextColor( m_colorScheme->foreground().color() );
     // seems to have no effect
@@ -130,8 +138,9 @@ void Twitter::init()
     editPal.setColor(QPalette::Text, m_colorScheme->foreground().color());
     m_statusEdit->nativeWidget()->setPalette(editPal);
     m_statusEdit->nativeWidget()->installEventFilter(this);
-    m_headerLayout->addItem( m_statusEdit );
+    m_headerLayout->addItem( statusEditFrame );
 
+    m_layout->addStretch();
     m_layout->addStretch();
 
     //hook up some sources
@@ -305,10 +314,11 @@ void Twitter::showTweets()
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
     while( m_tweetWidgets.size() < m_historySize ) {
-        QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal );
+        Plasma::Frame *tweetFrame = new Plasma::Frame(this);
+        QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
         tweetLayout->setContentsMargins( 0, 5, 0, 5 );
         tweetLayout->setSpacing( 5 );
-        m_layout->insertItem( m_layout->count()-1, tweetLayout );
+        m_layout->insertItem( m_layout->count()-1, tweetFrame );
 
         KTextBrowser *c = new KTextBrowser();
         QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget( this );
@@ -338,7 +348,7 @@ void Twitter::showTweets()
         tweetLayout->updateGeometry();
 
         Tweet t;
-        t.layout = tweetLayout;
+        t.frame = tweetFrame;
         t.icon = icon;
         t.content = c;
         t.contentProxy = proxy;
@@ -349,10 +359,10 @@ void Twitter::showTweets()
     //clear out tweet widgets if there are too many
     while( m_tweetWidgets.size() > m_historySize ) {
         Tweet t = m_tweetWidgets[m_tweetWidgets.size()-1];
-        m_layout->removeItem( t.layout );
+        m_layout->removeItem( t.frame );
         delete t.icon;
         delete t.content;
-        delete t.layout;
+        delete t.frame;
         m_tweetWidgets.removeAt( m_tweetWidgets.size()-1 );
     }
 
@@ -388,6 +398,9 @@ void Twitter::showTweets()
                 .arg( m_colorScheme->foreground().color().name()).arg( status );
         html += "</table>";
         t.content->setHtml( html );
+        t.content->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
+                                            .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
+                                            .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
         t.content->document()->setTextWidth(t.content->width());
         t.content->setMinimumHeight(t.content->document()->size().height());
         t.content->update();
@@ -532,20 +545,12 @@ void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option
 
     m_theme->resize();
     m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
-
-    foreach( const Tweet &t, m_tweetWidgets ) {
-        QRectF tweetRect(contentsRect.x(), t.layout->geometry().y(), contentsRect.width(), t.layout->geometry().height());
-        m_theme->paint( p, tweetRect, "tweet" );
-    }
-    QRectF headerRect(contentsRect.x(), m_headerLayout->geometry().y(), contentsRect.width(), m_headerLayout->geometry().height()-5);
-    m_theme->paint( p, headerRect, "tweet" );
-
-    p->setRenderHints( QPainter::Antialiasing | QPainter::SmoothPixmapTransform );
-    p->translate(0.5, 0.5);
-    p->setPen( m_colorScheme->shade( KColorScheme::LightShade ) );
-    p->drawRoundedRect( m_statusEdit->geometry(), 5, 5 );
 }
 
+void Twitter::editTextChanged()
+{
+    m_flash->flash( i18np("1 character left", "%1 characters left", 140-m_statusEdit->nativeWidget()->toPlainText().length()), 2000 );
+}
 
 bool Twitter::eventFilter(QObject *obj, QEvent *event)
 {
@@ -575,6 +580,7 @@ void Twitter::updateStatus()
 {
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
+    delete m_service;
     m_service = m_engine->serviceForSource(m_curTimeline);
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
@@ -617,16 +623,25 @@ void Twitter::downloadHistory()
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
 
+    delete m_service;
     m_service = m_engine->serviceForSource(query);
     KConfigGroup cg = m_service->operationDescription("auth");
     cg.writeEntry("password", m_password);
     m_service->startOperationCall(cg);
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
+}
+
+void Twitter::serviceFinished(Plasma::ServiceJob *job)
+{
+    if (job->error()) {
+        m_flash->flash(job->errorString(), 2000);
+    }
 }
 
 void Twitter::openProfile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
-    
+
     if (action) {
         KRun::runUrl( KUrl("http://www.twitter.com/" + action->data().toString()), "text/html", 0 );
     }

@@ -47,10 +47,12 @@ namespace Plasma
     class Icon;
     class TextEdit;
     class WebContent;
+    class Frame;
+    class ServiceJob;
 }
 
 struct Tweet {
-    QGraphicsLinearLayout *layout;
+    Plasma::Frame *frame;
     Plasma::Icon *icon;
     KTextBrowser *content;
     QGraphicsProxyWidget *contentProxy;
@@ -87,6 +89,8 @@ class Twitter : public Plasma::Applet
         void updateStatus();
         void downloadHistory();
         void openProfile();
+        void editTextChanged();
+        void serviceFinished(Plasma::ServiceJob *job);
 
         void showTweets();
 
