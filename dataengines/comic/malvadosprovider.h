@@ -33,6 +33,12 @@ class MalvadosProvider : public ComicProvider
         ~MalvadosProvider();
 
         /**
+        * Sets the Http to the Website of the comic (either a concrete
+        * date exluding the currentDate or a generic Url)
+        */
+        void setWebsiteHttp();
+
+        /**
          * Returns the type of identifier that is used by this
          * comic provider.
          */

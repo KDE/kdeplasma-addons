@@ -42,6 +42,7 @@ class UnshelvedProvider::Private
 UnshelvedProvider::UnshelvedProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setFirstStripDate( QDate( 2002, 02, 16 ) );
     // as unshelved.com seem to publish their comic quite late the day
     // we fake it here by always showing the comic of the day before...
     const QDate date = requestedDate().addDays( -1 );

@@ -1,5 +1,6 @@
 /*
 *   Copyright (C) 2008 Hugo Parente Lima <hugo.pl@gmail.com>
+*   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License version 2 as
@@ -20,46 +21,46 @@
 
 #include <QtGui/QImage>
 
-#define MALVADOS_URL "http://www.malvados.com.br/"
-#define MALVADOS_COMIC_IMAGE "tirinha%1.gif"
-#define MALVADOS_COMIC_HTML "index%1.html"
-
 COMICPROVIDER_EXPORT_PLUGIN( MalvadosProvider, "MalvadosProvider", "" )
 
 class MalvadosProvider::Private
 {
     public:
-
         enum RequestType
         {
-            PageRequest, // requesting index.html (a frameset).
-            PageSubRequest, // requesting the html in main frame.
-            ImageRequest, // requesting the comic.
-            CheckNextRequest // requesting the html of the next comic, just to check if it exists.
+            PageRequest,
+            ImageRequest
         };
 
         Private()
-            : mComicId( 0 ), mHasNext( false )
+            : mComicId( 0 ), mMaxId( 0 )
         {
         }
 
         QImage mImage;
         int mComicId;
-        bool mHasNext;
+        int mMaxId;
 };
 
 MalvadosProvider::MalvadosProvider( QObject* parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
     d->mComicId = requestedNumber();
-    KUrl url( MALVADOS_URL );
 
-    if ( d->mComicId > 0 ) {
-        url.setPath( QString( MALVADOS_COMIC_IMAGE ).arg( d->mComicId ) );
-        requestPage( url, Private::ImageRequest );
+    setWebsiteHttp();
+}
+
+void MalvadosProvider::setWebsiteHttp()
+{
+    KUrl url( QString( "http://www.malvados.com.br/" ) );
+
+    if ( d->mMaxId ) {
+        url.setPath( QString( "/index%1.html" ).arg( d->mComicId ) );
     } else {
-        requestPage( url, Private::PageRequest );
+        url.setPath( "/index.html" );
     }
+
+    requestPage( url, Private::PageRequest );
 }
 
 MalvadosProvider::~MalvadosProvider()
@@ -74,7 +75,7 @@ ComicProvider::IdentifierType MalvadosProvider::identifierType() const
 
 KUrl MalvadosProvider::websiteUrl() const
 {
-    return KUrl( MALVADOS_URL );
+    return QString( "http://www.malvados.com.br/index%1.html" ).arg( d->mComicId );
 }
 
 QImage MalvadosProvider::image() const
@@ -84,55 +85,54 @@ QImage MalvadosProvider::image() const
 
 QString MalvadosProvider::identifier() const
 {
-    return QString( "malvados:%1" ).arg( requestedNumber() );
+    return QString( "malvados:%1" ).arg( d->mComicId );
 }
 
 QString MalvadosProvider::nextIdentifier() const
 {
-    return d->mHasNext ? QString::number( d->mComicId + 1 ) : QString();
+    return ( ( d->mComicId < d->mMaxId ) ? QString::number( d->mComicId + 1 ) : QString() );
 }
 
 QString MalvadosProvider::previousIdentifier() const
 {
-    return QString::number( d->mComicId - 1 );
+    return ( ( d->mComicId > firstStripNumber() ) ? QString::number( d->mComicId - 1 ) : QString() );
 }
 
 void MalvadosProvider::pageRetrieved( int id, const QByteArray &rawData )
 {
-    KUrl url( MALVADOS_URL );
-
-    if ( id == Private::ImageRequest ) {
-        d->mImage = QImage::fromData( rawData );
-        if ( requestedNumber() > 0 ) {
-            // ok, we have the comic, let check if the next comic exists
-            url.setPath( QString( MALVADOS_COMIC_HTML ).arg( d->mComicId + 1 ) );
-            requestPage( url, Private::CheckNextRequest );
-        } else {
-            emit finished( this );
-        }
-    } else {
-        QRegExp regex( "index(\\d+)\\.html\"" );
+    if ( id == Private::PageRequest ) {
         const QString data = QString::fromLatin1( rawData );
-        bool comicFound = regex.indexIn( data ) >= 0;
 
-        if ( id == Private::CheckNextRequest ) {
-            d->mHasNext = comicFound;
-            emit finished( this );
-        } else {
-            if ( comicFound ) {
-                d->mComicId = regex.cap( 1 ).toInt();
-                url.setPath( QString( MALVADOS_COMIC_IMAGE ).arg( d->mComicId ) );
-                requestPage( url, Private::ImageRequest );
-            } else if ( id != Private::PageSubRequest ) {
-                // Andre Dahmer is drunk, so it put something in the main page.
-                QRegExp otherIndexRegex( "name=\"mainFrame\"\\s+src=\"([\\w\\.]+)\"", Qt::CaseInsensitive );
-                otherIndexRegex.indexIn( data );
-                url.setPath( otherIndexRegex.cap( 1 ) );
-                requestPage( url, Private::PageSubRequest );
-            } else {
-                emit error( this );
+        if ( !d->mMaxId ) {
+            const QString pattern( "<frame name=\"mainFrame\" src=\"index(\\d+).html\">" );
+            QRegExp exp( pattern );
+            const int pos = exp.indexIn( data );
+
+            if ( pos > -1 ) {
+                d->mMaxId = exp.cap( 1 ).toInt();
             }
+            if ( !d->mComicId ) {
+                d->mComicId = d->mMaxId;
+            }
+
+            setWebsiteHttp();
+            return;
         }
+
+        const QString pattern( "<div align=\"center\">.*<img src=\"(.+)\"" );
+        QRegExp exp ( pattern );
+        exp.setMinimal( true );
+        const int pos = exp.indexIn( data );
+
+        if ( pos > -1 ) {
+            KUrl url( QString( "http://www.malvados.com.br/%1" )
+            .arg( exp.cap( 1 ) ) );
+
+            requestPage( url, Private::ImageRequest );
+        }
+    } else if ( id == Private::ImageRequest ) {
+        d->mImage = QImage::fromData( rawData );
+        emit finished( this );
     }
 }
 
