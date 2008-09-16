@@ -33,6 +33,7 @@
 class ConfigWidget;
 class FullViewWidget;
 class QTimer;
+class QAction;
 
 class ComicApplet : public Plasma::Applet
 {
@@ -53,6 +54,8 @@ class ComicApplet : public Plasma::Applet
     private Q_SLOTS:
         void slotNextDay();
         void slotPreviousDay();
+        void slotFirstDay();
+        void slotCurrentDay();
         void slotSaveComicAs();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
@@ -65,6 +68,7 @@ class ComicApplet : public Plasma::Applet
     private:
         void updateComic( const QString &identifierSuffix = QString() );
         void updateButtons();
+        void updateContextMenu();
         void loadConfig();
         void saveConfig();
         void updateSize();
@@ -76,6 +80,7 @@ class ComicApplet : public Plasma::Applet
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
+        QString mFirstDayIdentifierSuffix;
         QString mComicAuthor;
         QString mComicTitle;
         QString mStripTitle;
@@ -90,6 +95,8 @@ class ComicApplet : public Plasma::Applet
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         FullViewWidget *mFullViewWidget;
+        QAction *mActionGoFirst;
+        QAction *mActionGoLast;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)

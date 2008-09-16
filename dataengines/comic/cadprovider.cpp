@@ -48,10 +48,10 @@ class CadProvider::Private
         QDate mNextDate;
 };
 
-
 CadProvider::CadProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
+    setFirstStripDate( QDate( 2002, 10, 23 ) );
     KUrl url( QString( "http://cad-comic.com/" ) );
 
     d->mFindNewDate = (d->mUsedDate == QDate::currentDate());

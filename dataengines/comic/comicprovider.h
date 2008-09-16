@@ -94,9 +94,15 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual QString nextIdentifier() const;
 
         /**
-         * Returns the identifier of the previous comic (default: date of previous day).
+         * Returns the identifier of the previous comic (default: date of previous day
+         * as long).
          */
         virtual QString previousIdentifier() const;
+
+        /**
+         * Returns the identifier of the first strip.
+         */
+        virtual QString firstStripIdentifier() const;
 
         /**
          * Returns the title of the strip.
@@ -107,7 +113,6 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * Returns additionalText of the comic.
          */
         virtual QString additionalText() const;
-
 
         /**
          * Set whether this request is for the current comic (only used internally).
@@ -137,8 +142,19 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
 
     protected:
         QDate requestedDate() const;
+        QDate firstStripDate() const;
+        void setFirstStripDate( const QDate &date );
         int requestedNumber() const;
+
+        /**
+         * Returns the number of the first strip (default: 1 )
+         */
+        int firstStripNumber() const;
+
+        void setFirstStripNumber( int number );
+
         QString requestedString() const;
+        QString requestedComicName() const;
 
         typedef QMap<QString, QString> MetaInfos;
 

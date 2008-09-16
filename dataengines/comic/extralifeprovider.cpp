@@ -52,6 +52,7 @@ class ExtraLifeProvider::Private
 ExtraLifeProvider::ExtraLifeProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
+    setFirstStripDate( QDate( 2001, 06, 17 ) );
     d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
 
     setWebsiteHttp();
@@ -115,7 +116,7 @@ void ExtraLifeProvider::pageRetrieved( int id, const QByteArray &rawData )
         const QString year( "((19|20)\\d\\d)" );
         const QString month( "(0[1-9]|1[012])" );
         const QString day( "(0[1-9]|[12][0-9]|3[01])" );
-        QRegExp exp( "<img src=\"strips/(.*)\">" );
+        QRegExp exp( "<img src=\"strips/(.+)\">" );
         exp.setMinimal( true );
         const int pos = exp.indexIn( data );
 

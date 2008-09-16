@@ -41,6 +41,7 @@ class UserFriendlyProvider::Private
 UserFriendlyProvider::UserFriendlyProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setFirstStripDate( QDate( 1997, 11, 17 ) );
     KUrl url( QString( "http://ars.userfriendly.org/cartoons/?id=" ) + requestedDate().toString( "yyyyMMdd" ) );
 
     MetaInfos infos;

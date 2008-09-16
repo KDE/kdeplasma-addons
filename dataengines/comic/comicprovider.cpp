@@ -26,7 +26,8 @@ class ComicProvider::Private
     public:
         Private( ComicProvider *parent )
             : mParent( parent ),
-              mIsCurrent( false )
+              mIsCurrent( false ),
+              mFirstStripNumber( 1 )
         {
         }
 
@@ -41,10 +42,13 @@ class ComicProvider::Private
         }
 
         ComicProvider *mParent;
-        QDate mRequestedDate;
-        int mRequestedNumber;
         QString mRequestedId;
+        QString mRequestedComicName;
         bool mIsCurrent;
+        QDate mRequestedDate;
+        QDate mFirstStripDate;
+        int mRequestedNumber;
+        int mFirstStripNumber;
 };
 
 ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
@@ -57,8 +61,12 @@ ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
         d->mRequestedDate = args[ 1 ].toDate();
     else if ( type == "Number" )
         d->mRequestedNumber = args[ 1 ].toInt();
-    else if ( type == "String" )
+    else if ( type == "String" ) {
         d->mRequestedId = args[ 1 ].toString();
+
+        int index = d->mRequestedId.indexOf( ':' );
+        d->mRequestedComicName = d->mRequestedId.mid( 0, index );
+    }
     else
         Q_ASSERT( false && "Invalid type passed to comic provider" );
 }
@@ -78,7 +86,7 @@ QString ComicProvider::nextIdentifier() const
 
 QString ComicProvider::previousIdentifier() const
 {
-    if ( identifierType() == DateIdentifier )
+    if ( ( identifierType() == DateIdentifier ) && ( !firstStripDate().isValid() || d->mRequestedDate > firstStripDate() ) )
         return d->mRequestedDate.addDays( -1 ).toString( Qt::ISODate );
 
     return QString();
@@ -109,6 +117,37 @@ QDate ComicProvider::requestedDate() const
     return d->mRequestedDate;
 }
 
+QDate ComicProvider::firstStripDate() const
+{
+    return d->mFirstStripDate;
+}
+
+void ComicProvider::setFirstStripDate( const QDate &date )
+{
+    d->mFirstStripDate = date;
+}
+
+int ComicProvider::firstStripNumber() const
+{
+    return d->mFirstStripNumber;
+}
+
+void ComicProvider::setFirstStripNumber( int number )
+{
+    d->mFirstStripNumber = number;
+}
+
+QString ComicProvider::firstStripIdentifier() const
+{
+    if ( ( identifierType() == DateIdentifier ) && d->mFirstStripDate.isValid() ) {
+        return d->mFirstStripDate.toString( Qt::ISODate );
+    } else if ( identifierType() == NumberIdentifier ) {
+        return QString::number( d->mFirstStripNumber );
+    }
+
+    return QString();
+}
+
 int ComicProvider::requestedNumber() const
 {
     return d->mRequestedNumber;
@@ -117,6 +156,11 @@ int ComicProvider::requestedNumber() const
 QString ComicProvider::requestedString() const
 {
     return d->mRequestedId;
+}
+
+QString ComicProvider::requestedComicName() const
+{
+    return d->mRequestedComicName;
 }
 
 void ComicProvider::requestPage( const KUrl &url, int id, const MetaInfos &infos )

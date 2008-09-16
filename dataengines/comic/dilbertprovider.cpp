@@ -41,6 +41,7 @@ class DilbertProvider::Private
 DilbertProvider::DilbertProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setFirstStripDate( QDate ( 1994, 01, 01 ) );
     KUrl url( QString( "http://dilbert.com/fast/%1/" )
                 .arg( requestedDate().toString( "yyyy-MM-dd" ) ) );
 

@@ -35,6 +35,7 @@ class GarfieldProvider::Private
 GarfieldProvider::GarfieldProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setFirstStripDate( QDate( 1978, 06, 19 ) );
     KUrl url( QString( "http://picayune.uclick.com/comics/ga/%1/ga%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
 

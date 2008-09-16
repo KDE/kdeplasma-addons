@@ -19,7 +19,6 @@
 #include <QtCore/QDate>
 
 #include <KUrl>
-#include <KDebug>
 
 #include <KServiceTypeTrader>
 
@@ -125,6 +124,7 @@ void ComicEngine::finished( ComicProvider *provider )
     setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
     setData( identifier, "Additional text", provider->additionalText() );
     setData( identifier, "Strip title", provider->stripTitle() );
+    setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
@@ -136,6 +136,11 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "websiteUrl" ] = provider->websiteUrl().prettyUrl();
         info[ "nextIdentifier" ] = provider->nextIdentifier();
         info[ "previousIdentifier" ] = provider->previousIdentifier();
+
+        //data that should be only written if available
+        if ( !provider->firstStripIdentifier().isEmpty() ) {
+            info[ "firstStripIdentifier" ] = provider->firstStripIdentifier();
+        }
         if ( !provider->additionalText().isEmpty() ) {
             info[ "additionalText" ] = provider->additionalText();
         }

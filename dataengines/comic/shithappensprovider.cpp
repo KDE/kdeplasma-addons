@@ -128,7 +128,7 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
             url = KUrl( QString( "http://www.ruthe.de/frontend/%1"  ).arg( exp.cap( 1 ) ) );
             // get the current id
             if ( !d->mRequestedId ) {
-                const QString patternId( "<a href=\"archiv.php\\?sort=name&order=DESC&id=(\\d+)\".*\"><img src=\"bilder/arch.gif\"" );
+                const QString patternId( "<a href=\"archiv.php\\?sort=name&order=DESC&id=(\\d+)\".+\"><img src=\"bilder/arch.gif\"" );
                 QRegExp expId( patternId );
                 const int posId = expId.indexIn( data );
 
@@ -139,7 +139,7 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
         }
 
         // get previous id
-        const QString patternPrevious( "<a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/back.gif\"" );
+        const QString patternPrevious( "<a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".+\"><img src=\"bilder/back.gif\"" );
         QRegExp expPrevious ( patternPrevious );
         const int posPrevious = expPrevious.indexIn( data );
         if ( posPrevious > -1 ) {
@@ -147,7 +147,7 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
         }
 
         // get next id
-        const QString patternNext( "<div align=\"right\"><a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".*\"><img src=\"bilder/weiter.gif\"" );
+        const QString patternNext( "<div align=\"right\"><a href=\"index.php\\?pic=(\\d+)&sort=name&order=DESC\".+\"><img src=\"bilder/weiter.gif\"" );
         QRegExp expNext ( patternNext );
         const int posNext = expNext.indexIn( data );
         if ( posNext > -1 ) {

@@ -75,6 +75,14 @@ void ComicApplet::init()
 
     updateButtons();
 
+    mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "&Jump to first Strip" ), this );
+    mActions.append( mActionGoFirst );
+    connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
+
+    mActionGoLast = new QAction( KIcon( "go-last" ), i18n( "&Jump to current Strip" ), this );
+    mActions.append( mActionGoLast );
+    connect( mActionGoLast, SIGNAL( triggered( bool ) ), this, SLOT( slotCurrentDay() ) );
+
     QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
@@ -95,12 +103,14 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+    mFirstDayIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
     mAdditionalText = data[ "Additional text" ].toString();
     mComicAuthor = PluginManager::Instance()->comicAuthor( mComicIdentifier );
     mComicTitle = PluginManager::Instance()->comicTitle( mComicIdentifier );
 
     updateButtons();
+    updateContextMenu();
 
     if ( !mImage.isNull() ) {
         updateSize();
@@ -177,6 +187,16 @@ void ComicApplet::slotNextDay()
 void ComicApplet::slotPreviousDay()
 {
     updateComic( mPreviousIdentifierSuffix );
+}
+
+void ComicApplet::slotFirstDay()
+{
+    updateComic( mFirstDayIdentifierSuffix );
+}
+
+void ComicApplet::slotCurrentDay()
+{
+    updateComic( QString() );
 }
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
@@ -329,15 +349,22 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
 void ComicApplet::updateButtons()
 {
-    if ( mNextIdentifierSuffix.isNull() )
+    if ( mNextIdentifierSuffix.isEmpty() )
         mShowNextButton = false;
     else
         mShowNextButton = true;
 
-    if ( mPreviousIdentifierSuffix.isNull() )
+    if ( mPreviousIdentifierSuffix.isEmpty() )
         mShowPreviousButton = false;
     else
         mShowPreviousButton = true;
+}
+
+void ComicApplet::updateContextMenu()
+{
+    mActionGoFirst->setVisible( !mFirstDayIdentifierSuffix.isEmpty() );
+    mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
+    mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
 }
 
 void ComicApplet::slotSaveComicAs()
