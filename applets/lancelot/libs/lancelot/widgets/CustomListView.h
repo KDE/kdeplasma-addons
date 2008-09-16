@@ -55,7 +55,7 @@ public:
  * the CustomListItem interface.
  */
 class LANCELOT_EXPORT CustomListItemFactory: public QObject {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CustomListItemFactory();
     virtual ~CustomListItemFactory();

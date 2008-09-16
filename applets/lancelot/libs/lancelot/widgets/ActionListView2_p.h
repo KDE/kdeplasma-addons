@@ -50,7 +50,7 @@ private:
 
 //> ActionListView2ItemFactory
 class ActionListView2ItemFactory: public CustomListItemFactory {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     ActionListView2ItemFactory(ActionListViewModel * model);
     ~ActionListView2ItemFactory();
