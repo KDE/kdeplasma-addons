@@ -405,7 +405,7 @@ void PassagewayView::setActivationMethod(ActivationMethod value)
 
 ActivationMethod PassagewayView::activationMethod() const
 {
-
+   return Lancelot::ClickActivate;
 }
 
 void PassagewayView::setColumnLimit(int limit)
