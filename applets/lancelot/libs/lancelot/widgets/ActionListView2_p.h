@@ -29,6 +29,7 @@
 #include <QIcon>
 
 #include <lancelot/widgets/CustomListView.h>
+#include <lancelot/widgets/ActionListView2.h>
 #include <lancelot/models/ActionListViewModels.h>
 
 namespace Lancelot
