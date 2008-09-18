@@ -85,6 +85,11 @@ class CachedProvider : public ComicProvider
         virtual QString stripTitle() const;
 
         /**
+         * Returns the author of the comic.
+         */
+        virtual QString comicAuthor() const;
+
+        /**
          * Returns additionalText of the comic.
          */
         virtual QString additionalText() const;

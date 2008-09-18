@@ -4,7 +4,6 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_garfieldprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=garfield
-X-KDE-PlasmaComicProvider-ComicAuthor=Jim Davis
 Icon=plasma_comic_garfield
 
 Name=Garfield

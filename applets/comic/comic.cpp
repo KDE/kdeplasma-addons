@@ -106,7 +106,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mFirstDayIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
     mAdditionalText = data[ "Additional text" ].toString();
-    mComicAuthor = PluginManager::Instance()->comicAuthor( mComicIdentifier );
+    mComicAuthor = data[ "Comic Author" ].toString();
     mComicTitle = PluginManager::Instance()->comicTitle( mComicIdentifier );
 
     updateButtons();

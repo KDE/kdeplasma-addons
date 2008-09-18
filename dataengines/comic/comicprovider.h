@@ -105,6 +105,11 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual QString firstStripIdentifier() const;
 
         /**
+         * Returns the author of the comic.
+         */
+        virtual QString comicAuthor() const;
+
+        /**
          * Returns the title of the strip.
          */
         virtual QString stripTitle() const;
@@ -144,6 +149,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         QDate requestedDate() const;
         QDate firstStripDate() const;
         void setFirstStripDate( const QDate &date );
+        void setComicAuthor( const QString &author );
         int requestedNumber() const;
 
         /**

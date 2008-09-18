@@ -36,6 +36,7 @@ class DoonesburyProvider::Private
 DoonesburyProvider::DoonesburyProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Garry Trudeau" );
     setFirstStripDate( QDate( 1970, 10, 26 ) );
     KUrl url( QString( "http://picayune.uclick.com/comics/db/%1/db%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );

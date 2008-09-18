@@ -50,6 +50,7 @@ class XkcdProvider::Private
 XkcdProvider::XkcdProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Randall Munroe" );
     d->mRequestedId = requestedNumber();
 
     KUrl baseUrl( QString( "http://xkcd.com/" ) );

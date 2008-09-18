@@ -4,7 +4,6 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_osnewsprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=osnews
-X-KDE-PlasmaComicProvider-ComicAuthor=Thom Holwerda
 Icon=plasma_comic_osnews
 
 Name=OSNews

@@ -4,7 +4,6 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_extralifeprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
 X-KDE-PlasmaComicProvider-Identifier=extralife
-X-KDE-PlasmaComicProvider-ComicAuthor=Scott Johnson
 Icon=plasma_comic_extralife
 
 Name=EXTRALIFE

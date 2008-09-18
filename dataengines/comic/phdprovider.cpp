@@ -48,6 +48,7 @@ class PhdProvider::Private
 PhdProvider::PhdProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Jorge Cham" );
     d->mRequestedId = requestedNumber();
 
     KUrl baseUrl( QString( "http://www.phdcomics.com/" ) );

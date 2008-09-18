@@ -42,6 +42,7 @@ class SnoopyProvider::Private
 SnoopyProvider::SnoopyProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Charles M. Schulz" );
     KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
                 .arg( requestedDate().toString( "yyyyMMdd" ) ) );
 

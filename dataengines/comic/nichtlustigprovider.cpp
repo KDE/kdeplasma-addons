@@ -52,6 +52,7 @@ class NichtLustigProvider::Private
 NichtLustigProvider::NichtLustigProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
+    setComicAuthor( "Joscha Sauer" );
     setFirstStripDate( QDate( 2002, 01, 27 ) );
     d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
 

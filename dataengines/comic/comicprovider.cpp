@@ -44,6 +44,7 @@ class ComicProvider::Private
         ComicProvider *mParent;
         QString mRequestedId;
         QString mRequestedComicName;
+        QString mComicAuthor;
         bool mIsCurrent;
         QDate mRequestedDate;
         QDate mFirstStripDate;
@@ -120,6 +121,16 @@ QDate ComicProvider::requestedDate() const
 QDate ComicProvider::firstStripDate() const
 {
     return d->mFirstStripDate;
+}
+
+QString ComicProvider::comicAuthor() const
+{
+    return d->mComicAuthor;
+}
+
+void ComicProvider::setComicAuthor( const QString &author )
+{
+    d->mComicAuthor = author;
 }
 
 void ComicProvider::setFirstStripDate( const QDate &date )

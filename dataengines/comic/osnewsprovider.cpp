@@ -109,6 +109,7 @@ void OsNewsProvider::Private::processRss( Syndication::Loader*, Syndication::Fee
 OsNewsProvider::OsNewsProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private( this ) )
 {
+    setComicAuthor( "Thom Holwerda" );
     KUrl url( "http://osnews.com/files/comics.xml" );
 
     d->mLoader = Syndication::Loader::create();

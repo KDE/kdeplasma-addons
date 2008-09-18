@@ -4,7 +4,6 @@ X-KDE-ServiceTypes=PlasmaComic/Plugin
 X-KDE-Library=plasma_comic_xkcdprovider
 X-KDE-PlasmaComicProvider-SuffixType=Number
 X-KDE-PlasmaComicProvider-Identifier=xkcd
-X-KDE-PlasmaComicProvider-ComicAuthor=Randall Munroe
 Icon=plasma_comic_xkcd
 
 Name=XKCD

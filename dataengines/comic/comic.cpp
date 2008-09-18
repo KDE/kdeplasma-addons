@@ -122,6 +122,7 @@ void ComicEngine::finished( ComicProvider *provider )
     setData( identifier, "Website Url", provider->websiteUrl() );
     setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
     setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
+    setData( identifier, "Comic Author", provider->comicAuthor() );
     setData( identifier, "Additional text", provider->additionalText() );
     setData( identifier, "Strip title", provider->stripTitle() );
     setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
@@ -138,6 +139,9 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "previousIdentifier" ] = provider->previousIdentifier();
 
         //data that should be only written if available
+        if ( !provider->comicAuthor().isEmpty() ) {
+            info[ "comicAuthor" ] = provider->comicAuthor();
+        }
         if ( !provider->firstStripIdentifier().isEmpty() ) {
             info[ "firstStripIdentifier" ] = provider->firstStripIdentifier();
         }

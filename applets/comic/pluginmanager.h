@@ -27,13 +27,12 @@
 class ComicEntry
 {
     public:
-        ComicEntry( const QString &_identifier, const QString &_title, const QString &_comicAuthor, const QPixmap &_icon );
+        ComicEntry( const QString &_identifier, const QString &_title, const QPixmap &_icon );
 
         bool operator<( const ComicEntry &other ) const;
 
         QString identifier;
         QString title;
-        QString comicAuthor;
         QPixmap icon;
 };
 
@@ -44,7 +43,6 @@ class PluginManager
         static PluginManager* Instance();
 
         QList<ComicEntry> comics() const;
-        QString comicAuthor( const QString &identifier ) const;
         QString comicTitle( const QString &identifier ) const;
 
     private:

@@ -23,9 +23,8 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
-ComicEntry::ComicEntry( const QString &_identifier, const QString &_title,
-                        const QString &_comicAuthor, const QPixmap &_icon )
-    : identifier( _identifier ), title( _title ), comicAuthor( _comicAuthor ), icon( _icon )
+ComicEntry::ComicEntry( const QString &_identifier, const QString &_title, const QPixmap &_icon )
+    : identifier( _identifier ), title( _title ), icon( _icon )
 {
 }
 
@@ -40,7 +39,6 @@ PluginManager::PluginManager()
     Q_FOREACH ( const KService::Ptr &service, services ) {
         mComics << ComicEntry( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
                                 service->name(),
-                                service->property( "X-KDE-PlasmaComicProvider-ComicAuthor", QVariant::String ).toString(),
                                 QPixmap( KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) ) ) );
     }
 
@@ -60,12 +58,6 @@ PluginManager* PluginManager::Instance()
 QList<ComicEntry> PluginManager::comics() const
 {
     return mComics;
-}
-
-QString PluginManager::comicAuthor( const QString &identifier ) const
-{
-    int index =  map[ identifier ];
-    return mComics.at( index ).comicAuthor;
 }
 
 QString PluginManager::comicTitle( const QString &identifier ) const

@@ -29,7 +29,8 @@ class MalvadosProvider::Private
         enum RequestType
         {
             PageRequest,
-            ImageRequest
+            ImageRequest,
+            PageSubRequest
         };
 
         Private()
@@ -45,6 +46,7 @@ class MalvadosProvider::Private
 MalvadosProvider::MalvadosProvider( QObject* parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "André Dahmer" );
     d->mComicId = requestedNumber();
 
     setWebsiteHttp();
@@ -100,16 +102,35 @@ QString MalvadosProvider::previousIdentifier() const
 
 void MalvadosProvider::pageRetrieved( int id, const QByteArray &rawData )
 {
-    if ( id == Private::PageRequest ) {
+    if ( ( id == Private::PageRequest ) || ( id == Private::PageSubRequest ) ) {
         const QString data = QString::fromLatin1( rawData );
 
         if ( !d->mMaxId ) {
-            const QString pattern( "<frame name=\"mainFrame\" src=\"index(\\d+).html\">" );
+            QString pattern;
+
+            if ( id == Private::PageRequest ) {
+                pattern = QString( "<frame name=\"mainFrame\" src=\"index(\\d+).html\">" );
+            } else if ( id == Private::PageSubRequest ) {
+                pattern = QString ( "index(\\d+)" );
+            }
+
             QRegExp exp( pattern );
             const int pos = exp.indexIn( data );
 
             if ( pos > -1 ) {
                 d->mMaxId = exp.cap( 1 ).toInt();
+            // handles the case when the author did not publish a comic ( is drunk etc. )
+            } else {
+                const QString pattern( "<frame name=\"mainFrame\" src=\"(.+\\.html)\">" );
+                QRegExp exp( pattern );
+                const int pos = exp.indexIn( data );
+                if ( pos > -1 ) {
+                    KUrl url( QString( "http://www.malvados.com.br/%1" ).arg( exp.cap( 1 ) ) );
+                    requestPage( url, Private::PageSubRequest );
+                    return;
+                } else {
+                    emit error( this );
+                }
             }
             if ( !d->mComicId ) {
                 d->mComicId = d->mMaxId;

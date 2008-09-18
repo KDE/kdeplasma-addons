@@ -51,6 +51,7 @@ class ShitHappensProvider::Private
 ShitHappensProvider::ShitHappensProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Ralph Ruthe" );
     d->mRequestedId = requestedNumber();
 
     KUrl url( QString( "http://www.ruthe.de/" ) );
