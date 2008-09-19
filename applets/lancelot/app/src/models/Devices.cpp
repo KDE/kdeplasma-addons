@@ -146,9 +146,12 @@ void Devices::load()
     QList<Solid::Device> deviceList =
         Solid::Device::listFromType(Solid::DeviceInterface::StorageAccess, QString());
 
+    setEmitInhibited(true);
     foreach(const Solid::Device & device, deviceList) {
         addDevice(device);
     }
+    setEmitInhibited(false);
+    emit updated();
 }
 
 void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)

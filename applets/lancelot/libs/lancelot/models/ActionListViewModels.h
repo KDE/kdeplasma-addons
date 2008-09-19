@@ -37,6 +37,8 @@ namespace Lancelot
  * Notice: Classes in this file are not going to stay ABI nor API compatible,
  * and will possibly be replaced in the future. That is the reason for which
  * the classes are not in d-ptr pattern.
+ *
+ * TODO: Refactor and convert to d-ptr
  */
 
 /**
@@ -257,13 +259,25 @@ public:
 
     /**
      * Clears all items
-     * @param emitUpdated should the updated signal be emitted
      */
-    void clear(bool emitUpdated = true);
+    void clear();
 
 protected:
+    /**
+     * Sets whether emit signals should be inhibited
+     * @param value value
+     */
+    void setEmitInhibited(bool value);
+
+    /**
+     * @returns whether emit signals are inhibited
+     */
+    bool emitInhibited() const;
 
     QList < Item > m_items;
+
+private:
+    bool m_sendEmits;
 
 };
 

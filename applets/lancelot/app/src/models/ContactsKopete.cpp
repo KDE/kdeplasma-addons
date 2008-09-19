@@ -65,7 +65,8 @@ void ContactsKopete::activate(int index)
 
 void ContactsKopete::load()
 {
-    clear(false);
+    setEmitInhibited(true);
+    clear();
 
     if (!m_interface->isValid()) {
             m_kopeteRunning = false;
@@ -115,6 +116,7 @@ void ContactsKopete::load()
             add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
         }
     }
+    setEmitInhibited(false);
     emit updated();
 }
 

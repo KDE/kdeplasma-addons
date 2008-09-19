@@ -81,7 +81,8 @@ void MessagesKmail::activate(int index)
 
 void MessagesKmail::load()
 {
-    clear(false);
+    setEmitInhibited(true);
+    clear();
 
     if (!m_interface->isValid()) {
         QStringList services;
@@ -143,6 +144,7 @@ void MessagesKmail::load()
         }
 
     }
+    setEmitInhibited(false);
     emit updated();
 }
 

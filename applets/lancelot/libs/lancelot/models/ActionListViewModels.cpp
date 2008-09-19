@@ -100,11 +100,22 @@ void ActionListViewModel::activate(int index)
 // StandardActionListViewModel
 
 StandardActionListViewModel::StandardActionListViewModel()
+    : m_sendEmits(true)
 {
 }
 
 StandardActionListViewModel::~StandardActionListViewModel()
 {
+}
+
+void StandardActionListViewModel::setEmitInhibited(bool value)
+{
+    m_sendEmits = !value;
+}
+
+bool StandardActionListViewModel::emitInhibited() const
+{
+    return !m_sendEmits;
 }
 
 QString StandardActionListViewModel::title(int index) const
@@ -139,39 +150,42 @@ int StandardActionListViewModel::size() const
 void StandardActionListViewModel::add(const Item & item)
 {
     m_items.append(item);
-    emit itemInserted(m_items.size() - 1);
+    if (m_sendEmits) {
+        emit itemInserted(m_items.size() - 1);
+    }
 }
 
 void StandardActionListViewModel::add(const QString & title, const QString & description, QIcon icon, const QVariant & data)
 {
-    m_items.append(Item(title, description, icon, data));
-    emit itemInserted(m_items.size() - 1);
+    add(Item(title, description, icon, data));
 }
 
 void StandardActionListViewModel::set(int index, const Item & item)
 {
     if (index >= m_items.size()) return;
     m_items[index] = item;
-    emit itemAltered(index);
+    if (m_sendEmits) {
+        emit itemAltered(index);
+    }
 }
 
 void StandardActionListViewModel::set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data)
 {
-    if (index >= m_items.size()) return;
-    m_items[index] = Item(title, description, icon, data);
-    emit itemAltered(index);
+    set(index, Item(title, description, icon, data));
 }
 
 void StandardActionListViewModel::removeAt(int index)
 {
     m_items.removeAt(index);
-    emit itemDeleted(index);
+    if (m_sendEmits) {
+        emit itemDeleted(index);
+    }
 }
 
-void StandardActionListViewModel::clear(bool emitUpdated)
+void StandardActionListViewModel::clear()
 {
     m_items.clear();
-    if (emitUpdated) {
+    if (m_sendEmits) {
         emit updated();
     }
 }

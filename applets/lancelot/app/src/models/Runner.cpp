@@ -54,7 +54,7 @@ void Runner::setSearchString(const QString & search)
     m_searchString = search.trimmed();
 
     if (m_searchString.isEmpty()) {
-        m_items.clear();
+        clear();
         add(
             i18n("Search string is empty"),
             i18n("Enter something to search for"),
@@ -70,7 +70,8 @@ void Runner::setSearchString(const QString & search)
 // Code taken from KRunner Runner::setQueryMatches
 void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 {
-    m_items.clear();
+    setEmitInhibited(true);
+    clear();
 
     if (m.count() == 0) {
         add(
@@ -102,6 +103,8 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
         }
         valid = true;
     }
+    setEmitInhibited(false);
+    emit updated();
 }
 
 void Runner::load()
