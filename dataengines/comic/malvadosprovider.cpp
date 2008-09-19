@@ -119,6 +119,9 @@ void MalvadosProvider::pageRetrieved( int id, const QByteArray &rawData )
 
             if ( pos > -1 ) {
                 d->mMaxId = exp.cap( 1 ).toInt();
+            // no infinite calls!
+            } else if ( id == Private::PageSubRequest ) {
+                emit error( this );
             // handles the case when the author did not publish a comic ( is drunk etc. )
             } else {
                 const QString pattern( "<frame name=\"mainFrame\" src=\"(.+\\.html)\">" );
