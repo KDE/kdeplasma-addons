@@ -1,26 +1,24 @@
 /*
- *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License version 2 as
- *   published by the Free Software Foundation
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+*   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License version 2 as
+*   published by the Free Software Foundation
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 
 #include <QtCore/QDate>
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
-#include <QtNetwork/QHttp>
-#include <QtNetwork/QHttpRequestHeader>
 
 #include <KUrl>
 
@@ -31,76 +29,23 @@ COMICPROVIDER_EXPORT_PLUGIN( SnoopyProvider, "SnoopyProvider", "" )
 class SnoopyProvider::Private
 {
     public:
-        Private( SnoopyProvider *parent )
-          : mParent( parent )
+        enum RequestType
         {
-            mHttp = new QHttp( "snoopy.com", 80, mParent );
-            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
-        }
+            PageRequest,
+            ImageRequest
+        };
 
-        void pageRequestFinished( bool );
-        void imageRequestFinished( bool );
-        void parsePage();
-
-        SnoopyProvider *mParent;
         QImage mImage;
-
-        QHttp *mHttp;
-        QHttp *mImageHttp;
 };
 
-void SnoopyProvider::Private::pageRequestFinished( bool err )
-{
-    if ( err ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    const QString pattern( "<IMG SRC=\"/comics/peanuts/archive/images/peanuts" );
-    const QRegExp exp( pattern );
-
-    const QString data = QString::fromUtf8( mHttp->readAll() );
-
-    const int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos );
-
-    KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1.gif" ).arg( sub ) );
-
-    mImageHttp = new QHttp( "snoopy.com", 80, mParent );
-    mImageHttp->setHost( url.host() );
-    mImageHttp->get( url.path() );
-
-    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-}
-
-void SnoopyProvider::Private::imageRequestFinished( bool error )
-{
-    if ( error ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    mImage = QImage::fromData( mImageHttp->readAll() );
-    emit mParent->finished( mParent );
-}
 
 SnoopyProvider::SnoopyProvider( QObject *parent, const QVariantList &args )
-    : ComicProvider( parent, args ), d( new Private( this ) )
+: ComicProvider( parent, args ), d( new Private )
 {
     KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
-                .arg( requestedDate().toString( "yyyyMMdd" ) ) );
+    .arg( requestedDate().toString( "yyyyMMdd" ) ) );
 
-    QHttpRequestHeader header( "GET", url.path() );
-    header.setValue( "User-Agent", "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.6 (like Gecko)" );
-    header.setValue( "Accept", "text/html, image/jpeg, image/png, text/*, image/*, */*" );
-    header.setValue( "Accept-Encoding", "deflate" );
-    header.setValue( "Accept-Charset", "iso-8859-15, utf-8;q=0.5, *;q=0.5" );
-    header.setValue( "Accept-Language", "en" );
-    header.setValue( "Host", "snoopy.com" );
-    header.setValue( "Connection", "Keep-Alive" );
-
-    d->mHttp->setHost( url.host() );
-    d->mHttp->request( header );
+    requestPage( url, Private::PageRequest );
 }
 
 SnoopyProvider::~SnoopyProvider()
@@ -126,7 +71,32 @@ QString SnoopyProvider::identifier() const
 KUrl SnoopyProvider::websiteUrl() const
 {
     return QString( "http://snoopy.com/comics/peanuts/archive/peanuts-%1.html" )
-             .arg( requestedDate().toString( "yyyyMMdd" ) );
+    .arg( requestedDate().toString( "yyyyMMdd" ) );
+}
+
+void SnoopyProvider::pageRetrieved( int id, const QByteArray &rawData )
+{
+    if ( id == Private::PageRequest ) {
+        const QString pattern( "<IMG SRC=\"/comics/peanuts/archive/images/peanuts" );
+        const QRegExp exp( pattern );
+
+        const QString data = QString::fromUtf8( rawData );
+
+        const int pos = exp.indexIn( data ) + pattern.length();
+        const QString sub = data.mid( pos, data.indexOf( '"', pos ) - pos );
+
+        KUrl url( QString( "http://snoopy.com/comics/peanuts/archive/images/peanuts%1" ).arg( sub ) );
+
+        requestPage( url, Private::ImageRequest );
+    } else if ( id == Private::ImageRequest ) {
+        d->mImage = QImage::fromData( rawData );
+        emit finished( this );
+    }
+}
+
+void SnoopyProvider::pageError( int, const QString& )
+{
+    emit error( this );
 }
 
 #include "snoopyprovider.moc"

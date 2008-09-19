@@ -1,28 +1,25 @@
 /*
- *   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License version 2 as
- *   published by the Free Software Foundation
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+*   Copyright (C) 2007 Tobias Koenig <tokoe@kde.org>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License version 2 as
+*   published by the Free Software Foundation
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 
 #include <QtCore/QRegExp>
 #include <QtGui/QImage>
-#include <QtNetwork/QHttp>
-#include <QtNetwork/QHttpRequestHeader>
 
 #include <KUrl>
-#include <KDebug>
 
 #include "xkcdprovider.h"
 
@@ -31,80 +28,25 @@ COMICPROVIDER_EXPORT_PLUGIN( XkcdProvider, "XkcdProvider", "" )
 class XkcdProvider::Private
 {
     public:
-        Private( XkcdProvider *parent )
-          : mParent( parent ), mHasNextComic( false )
+        enum RequestType
         {
-            mHttp = new QHttp( "xkcd.com", 80, mParent );
-            connect( mHttp, SIGNAL( done( bool ) ), mParent, SLOT( pageRequestFinished( bool ) ) );
+            PageRequest,
+            ImageRequest
+        };
+
+        Private()
+        : mHasNextComic( false )
+        {
         }
 
-        void pageRequestFinished( bool );
-        void imageRequestFinished( bool );
-        void parsePage();
-
-        XkcdProvider *mParent;
         QImage mImage;
         bool mHasNextComic;
         int mRequestedId;
-
-        QHttp *mHttp;
-        QHttp *mImageHttp;
 };
 
-void XkcdProvider::Private::pageRequestFinished( bool err )
-{
-    if ( err ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    const QString pattern( "<img src=\"http://imgs.xkcd.com/comics/" );
-    const QRegExp exp( pattern );
-
-    const QString data = QString::fromUtf8( mHttp->readAll() );
-
-    const int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos + 4 );
-
-    KUrl url( QString( "http://imgs.xkcd.com/comics/%1" ).arg( sub ) );
-
-    mImageHttp = new QHttp( "imgs.xkcd.com", 80, mParent );
-    mImageHttp->setHost( url.host() );
-    mImageHttp->get( url.path() );
-
-    mParent->connect( mImageHttp, SIGNAL( done( bool ) ), mParent, SLOT( imageRequestFinished( bool ) ) );
-
-    // search the id of this comic if it was not specified
-    if ( mRequestedId < 1 ) {
-        const QString idPattern( "http://xkcd.com/(\\d+)/" );
-        QRegExp idExp( idPattern );
-
-        if ( idExp.indexIn( data ) > -1 ) {
-            mRequestedId = idExp.cap( 1 ).toInt();
-        }
-    }
-
-
-    // now search if there is a next comic
-    const QString nextPattern( "href=\"#\"" );
-    const QRegExp nextExp( nextPattern );
-
-    mHasNextComic = (nextExp.indexIn( data ) == -1);
-}
-
-void XkcdProvider::Private::imageRequestFinished( bool error )
-{
-    if ( error ) {
-        emit mParent->error( mParent );
-        return;
-    }
-
-    mImage = QImage::fromData( mImageHttp->readAll() );
-    emit mParent->finished( mParent );
-}
 
 XkcdProvider::XkcdProvider( QObject *parent, const QVariantList &args )
-    : ComicProvider( parent, args ), d( new Private( this ) )
+: ComicProvider( parent, args ), d( new Private )
 {
     d->mRequestedId = requestedNumber();
 
@@ -114,8 +56,7 @@ XkcdProvider::XkcdProvider( QObject *parent, const QVariantList &args )
         baseUrl.setPath( QString::number( d->mRequestedId ) + '/' );
     }
 
-    d->mHttp->setHost( baseUrl.host() );
-    d->mHttp->get( baseUrl.path() );
+    requestPage( baseUrl, Private::PageRequest );
 }
 
 XkcdProvider::~XkcdProvider()
@@ -145,20 +86,62 @@ KUrl XkcdProvider::websiteUrl() const
 
 QString XkcdProvider::nextIdentifier() const
 {
-   if ( d->mHasNextComic ) {
-       return QString::number( d->mRequestedId + 1 );
-   } else {
-       return QString();
-   }
+    if ( d->mHasNextComic ) {
+        return QString::number( d->mRequestedId + 1 );
+    } else {
+        return QString();
+    }
 }
 
 QString XkcdProvider::previousIdentifier() const
 {
-   if ( d->mRequestedId > 1 ) {
-       return QString::number( d->mRequestedId - 1 );
-   } else {
-       return QString();
-   }
+    if ( d->mRequestedId > 1 ) {
+        return QString::number( d->mRequestedId - 1 );
+    } else {
+        return QString();
+    }
+}
+
+void XkcdProvider::pageRetrieved( int id, const QByteArray &rawData )
+{
+    if ( id == Private::PageRequest ) {
+        const QString pattern( "<img src=\"http://imgs.xkcd.com/comics/" );
+        const QRegExp exp( pattern );
+
+        const QString data = QString::fromUtf8( rawData );
+
+        const int pos = exp.indexIn( data ) + pattern.length();
+        const QString sub = data.mid( pos, data.indexOf( '.', pos ) - pos + 4 );
+
+        KUrl url( QString( "http://imgs.xkcd.com/comics/%1" ).arg( sub ) );
+
+        requestPage( url, Private::ImageRequest );
+
+        // search the id of this comic if it was not specified
+        if ( d->mRequestedId < 1 ) {
+            const QString idPattern( "http://xkcd.com/(\\d+)/" );
+            QRegExp idExp( idPattern );
+
+            if ( idExp.indexIn( data ) > -1 ) {
+                d->mRequestedId = idExp.cap( 1 ).toInt();
+            }
+        }
+
+
+        // now search if there is a next comic
+        const QString nextPattern( "href=\"#\"" );
+        const QRegExp nextExp( nextPattern );
+
+        d->mHasNextComic = (nextExp.indexIn( data ) == -1);
+    } else if ( id == Private::ImageRequest ) {
+        d->mImage = QImage::fromData( rawData );
+        emit finished( this );
+    }
+}
+
+void XkcdProvider::pageError( int, const QString& )
+{
+    emit error( this );
 }
 
 #include "xkcdprovider.moc"
