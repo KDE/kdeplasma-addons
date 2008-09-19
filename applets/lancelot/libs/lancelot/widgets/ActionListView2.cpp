@@ -61,19 +61,17 @@ ActionListView2ItemFactory::~ActionListView2ItemFactory()
 
 void ActionListView2ItemFactory::reload()
 {
+    while (m_items.size() > m_model->size()) {
+        kDebug() << "deleting one";
+        delete m_items.takeLast();
+    }
+
     kDebug() << "reloading the items";
     for (int i = 0; i < m_model->size(); i++) {
         itemForIndex(i, true);
     }
 
-    kDebug() << "model size:" << m_model->size()
-             << "items size:" << m_items.size();
-    for (int i = m_model->size(); i <= m_items.size(); i++) {
-        kDebug() << "deleting one";
-        delete m_items.takeLast();
-    }
-    kDebug() << "model size:" << m_model->size()
-             << "items size:" << m_items.size();
+    emit updated();
 }
 
 CustomListItem * ActionListView2ItemFactory::itemForIndex(int index)
@@ -211,12 +209,13 @@ ActionListViewModel * ActionListView2ItemFactory::model() //>
 
 void ActionListView2ItemFactory::modelUpdated()
 {
+    kDebug();
     reload();
 }
 
 void ActionListView2ItemFactory::modelItemInserted(int index)
 {
-    kDebug();
+    kDebug() << m_model->title(index);
     m_items.insert(index, NULL);
     itemForIndex(index, true);
     emit itemInserted(index);
