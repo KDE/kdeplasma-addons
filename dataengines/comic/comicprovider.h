@@ -162,7 +162,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         class Private;
         Private* const d;
 
-        Q_PRIVATE_SLOT( d, void jobDone( KJob* ) );
+        Q_PRIVATE_SLOT( d, void jobDone( KJob* ) )
 };
 
 #endif
