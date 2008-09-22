@@ -66,13 +66,6 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    Solid::Networking::Status status = Solid::Networking::status();
-    if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
-        updateComic();
-
-    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
-             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
-
     updateButtons();
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "&Jump to first Strip" ), this );
@@ -89,6 +82,13 @@ void ComicApplet::init()
 
     mFullViewWidget = new FullViewWidget();
     mFullViewWidget->hide();
+
+    Solid::Networking::Status status = Solid::Networking::status();
+    if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
+        updateComic();
+
+    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
+             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
 }
 
 ComicApplet::~ComicApplet()
