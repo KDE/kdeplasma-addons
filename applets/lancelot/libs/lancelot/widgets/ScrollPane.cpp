@@ -119,7 +119,9 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
 
 ScrollPane::~ScrollPane()
 {
-    delete d->layout;
+    // delete d->layout;
+    setLayout(NULL);
+
     delete d->horizontal;
     delete d->vertical;
     delete d->centerContainer;

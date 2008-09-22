@@ -53,9 +53,7 @@ ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * mod
 
 ActionListView2ItemFactory::~ActionListView2ItemFactory()
 {
-    foreach (ActionListView2Item * item, m_items) {
-        delete item;
-    }
+    qDeleteAll(m_items);
     m_items.clear();
 }
 
@@ -97,6 +95,8 @@ CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
             kDebug() << "Extending items list to fit item";
         }
         m_items[index] = item;
+        connect(item, SIGNAL(activated()),
+                this, SLOT(itemActivated()));
     }
 
     if (reload) {
@@ -121,6 +121,20 @@ CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
     }
 
     return item;
+} //<
+
+void ActionListView2ItemFactory::itemActivated() //>
+{
+    if (!sender()) {
+        return;
+    }
+
+    int index = m_items.indexOf((Lancelot::ActionListView2Item *)sender());
+    if (index != -1) {
+        m_model->activated(index);
+        emit activated(index);
+    }
+
 } //<
 
 int ActionListView2ItemFactory::itemCount() const //>
@@ -215,24 +229,43 @@ void ActionListView2ItemFactory::modelUpdated()
 
 void ActionListView2ItemFactory::modelItemInserted(int index)
 {
-    kDebug() << m_model->title(index);
-    m_items.insert(index, NULL);
-    itemForIndex(index, true);
-    emit itemInserted(index);
+    kDebug();
+    if (index < 0 || index > m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        reload();
+    } else {
+        m_items.insert(index, NULL);
+        itemForIndex(index, true);
+        emit itemInserted(index);
+    }
 }
 
 void ActionListView2ItemFactory::modelItemDeleted(int index)
 {
     kDebug();
-    delete m_items.takeAt(index);
-    emit itemDeleted(index);
+    if (index < 0 || index >= m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        reload();
+    } else {
+        delete m_items.takeAt(index);
+        emit itemDeleted(index);
+    }
 }
 
 void ActionListView2ItemFactory::modelItemAltered(int index)
 {
     kDebug();
-    itemForIndex(index, true);
-    emit itemAltered(index);
+    kDebug();
+    if (index < 0 || index >= m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        reload();
+    } else {
+        itemForIndex(index, true);
+        emit itemAltered(index);
+    }
 }
 //<
 
@@ -261,6 +294,10 @@ ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * pa
       d(new Private())
 {
     d->itemFactory = (ActionListView2ItemFactory *) list()->itemFactory();
+    connect(
+            d->itemFactory, SIGNAL(activated(int)),
+            this, SIGNAL(activated(int)));
+
     setFlag(ScrollPane::HoverShowScrollbars);
     clearFlag(ScrollPane::ClipScrollable);
 

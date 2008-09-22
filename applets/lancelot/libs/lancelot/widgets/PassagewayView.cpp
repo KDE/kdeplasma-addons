@@ -104,15 +104,9 @@ public:
         delete listsLayout;
         delete layout;
 
-        foreach(ExtenderButton * button, buttons) {
-            delete button;
-        }
-        foreach(ActionListView * list, lists) {
-            delete list;
-        }
-        foreach(Step * step, path) {
-            delete step;
-        }
+        qDeleteAll(buttons);
+        qDeleteAll(lists);
+        qDeleteAll(path);
     }
 
     class Step {
@@ -169,6 +163,7 @@ public:
             layout->activate();
             listsLayout->pop();
 
+            list->setVisible(false);
             delete button;
             delete list;
         }

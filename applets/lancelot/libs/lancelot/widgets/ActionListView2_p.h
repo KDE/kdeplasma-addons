@@ -78,6 +78,10 @@ private Q_SLOTS:
     void modelItemInserted(int index);
     void modelItemDeleted(int index);
     void modelItemAltered(int index);
+    void itemActivated();
+
+Q_SIGNALS:
+    void activated(int index);
 
 private:
     ActionListViewModel * m_model;
