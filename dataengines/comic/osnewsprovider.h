@@ -27,7 +27,7 @@
 #include <syndication/feed.h>
 
 /**
- * This class provides the comic strip image for penny-arcade.com.
+ * This class provides the comic strip image for osnews.com.
  */
 class OsNewsProvider : public ComicProvider
 {
@@ -46,27 +46,47 @@ class OsNewsProvider : public ComicProvider
          */
         ~OsNewsProvider();
 
-        //Reimplementations
+        /**
+         * Returns the identifier type.
+         */
         IdentifierType identifierType() const;
 
+        /**
+         * Returns the requested image.
+         *
+         * Note: This method returns only a valid image after the
+         *       finished() signal has been emitted.
+         */
         virtual QImage image() const;
 
+        /**
+         * Returns the identifier of the comic request.
+         */
         virtual QString identifier() const;
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
 
+        /**
+         * Returns the identifier of the next comic.
+         */
         virtual QString nextIdentifier() const;
 
+        /**
+         * Returns the identifier of the previous comic.
+         */
         virtual QString previousIdentifier() const;
 
         /**
-        * Returns title of this strip.
-        */
+         * Returns title of this strip.
+         */
         virtual QString stripTitle() const;
 
         /**
-        * Returns additionalText of the comic (the tooltip of the image).
-        */
+         * Returns additionalText of the comic (the tooltip of the image).
+         */
         virtual QString additionalText() const;
 
     protected:
@@ -74,12 +94,12 @@ class OsNewsProvider : public ComicProvider
         virtual void pageError( int id, const QString &errorMessage );
 
     private:
-      class Private;
-      Private* const d;
+        class Private;
+        Private* const d;
 
-      Q_PRIVATE_SLOT( d, void processRss(Syndication::Loader* loader,
-                           Syndication::FeedPtr feed,
-                           Syndication::ErrorCode error) )
+        Q_PRIVATE_SLOT( d, void processRss(Syndication::Loader* loader,
+                                           Syndication::FeedPtr feed,
+                                           Syndication::ErrorCode error) )
 };
 
 #endif

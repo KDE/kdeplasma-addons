@@ -59,10 +59,19 @@ class PhdProvider : public ComicProvider
          */
         virtual QString identifier() const;
 
+        /**
+         * Returns the website of the comic.
+         */
         virtual KUrl websiteUrl() const;
 
+        /**
+         * Returns the identifier of the next comic.
+         */
         virtual QString nextIdentifier() const;
 
+        /**
+         * Returns the identifier of the previous comic.
+         */
         virtual QString previousIdentifier() const;
 
     protected:

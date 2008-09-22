@@ -146,21 +146,52 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         void error( ComicProvider *provider );
 
     protected:
+        /**
+         * Returns the date identifier that was requested by the applet.
+         */
         QDate requestedDate() const;
-        QDate firstStripDate() const;
-        void setFirstStripDate( const QDate &date );
-        void setComicAuthor( const QString &author );
+
+        /**
+         * Returns the numeric identifier that was requested by the applet.
+         */
         int requestedNumber() const;
 
         /**
-         * Returns the number of the first strip (default: 1 )
+         * Returns the string identifier that was requested by the applet.
+         */
+        QString requestedString() const;
+
+        /**
+         * @internal
+         *
+         * Returns the comic name of the string identifier that was requested by the applet.
+         */
+        QString requestedComicName() const;
+
+        /**
+         * Returns the date of the first available comic strip.
+         */
+        QDate firstStripDate() const;
+
+        /**
+         * Sets the date of the first available comic strip.
+         */
+        void setFirstStripDate( const QDate &date );
+
+        /**
+         * Returns the number of the first available comic strip (default: 1 ).
          */
         int firstStripNumber() const;
 
+        /**
+         * Sets the number of the first available comic strip.
+         */
         void setFirstStripNumber( int number );
 
-        QString requestedString() const;
-        QString requestedComicName() const;
+        /**
+         * Sets the name of the comic author.
+         */
+        void setComicAuthor( const QString &author );
 
         typedef QMap<QString, QString> MetaInfos;
 
