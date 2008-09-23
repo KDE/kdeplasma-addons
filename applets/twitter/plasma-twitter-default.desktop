@@ -39,6 +39,7 @@ Comment[pt]=Permite-lhe alterar o seu estado no Twitter e mostrar a sua linha te
 Comment[pt_BR]=Atualizar o status do Twitter e mostrar a sua linha-do-tempo.
 Comment[sv]=Uppdatera din Twitter-status och visa ditt schema.
 Comment[uk]=Оновіть ваш стан Twitter і перегляньте ваш графік.
+Comment[x-test]=xxUpdate your Twitter status and display your timeline.xx
 Comment[zh_CN]=可以让您更新您的 Twitter 状态并且显示您的时间线。
 Comment[zh_TW]=讓您更新您的 Twitter 狀態與顯示您的時間線。
 Type=Service

@@ -13,6 +13,7 @@ Name[pt]=Histórico do Navegador Web
 Name[pt_BR]=Histórico do navegador Web
 Name[sv]=Webbläsningshistorik
 Name[uk]=Історія переглядача Тенет
+Name[x-test]=xxWebbrowser Historyxx
 Name[zh_CN]=网页浏览器历史
 Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
@@ -29,6 +30,7 @@ Comment[pt]=Pesquisa no histórico do Konqueror
 Comment[pt_BR]=Pesquisas no histórico do Konqueror
 Comment[sv]=Söker i Konquerors historik
 Comment[uk]=Пошук у історії перегляду у Konqueror
+Comment[x-test]=xxSearches in Konqueror's historyxx
 Comment[zh_CN]=在 Konqueror 历史中搜索
 Comment[zh_TW]=搜尋 Konqueror 的歷史紀錄
 

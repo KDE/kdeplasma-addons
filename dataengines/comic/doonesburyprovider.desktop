@@ -7,4 +7,6 @@ X-KDE-PlasmaComicProvider-Identifier=doonesbury
 Icon=plasma_comic_doonesbury
 
 Name=Doonesbury
+Name[x-test]=xxDoonesburyxx
 Comment=Doonesbury
+Comment[x-test]=xxDoonesburyxx

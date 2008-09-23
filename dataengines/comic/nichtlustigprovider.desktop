@@ -7,4 +7,6 @@ X-KDE-PlasmaComicProvider-Identifier=nichtlustig
 Icon=plasma_comic_nichtlustig
 
 Name=NICHTLUSTIG
+Name[x-test]=xxNICHTLUSTIGxx
 Comment=NICHTLUSTIG
+Comment[x-test]=xxNICHTLUSTIGxx

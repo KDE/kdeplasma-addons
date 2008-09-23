@@ -7,4 +7,6 @@ X-KDE-PlasmaComicProvider-Identifier=malvados
 Icon=plasma_comic_malvados
 
 Name=Malvados
+Name[x-test]=xxMalvadosxx
 Comment=Malvados
+Comment[x-test]=xxMalvadosxx

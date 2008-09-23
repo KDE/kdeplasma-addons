@@ -9,5 +9,7 @@ Icon=plasma_comic_cad
 
 Name=Ctrl+Alt+Del
 Name[nds]=Strg+Alt+Entf
+Name[x-test]=xxCtrl+Alt+Delxx
 Comment=Ctrl+Alt+Del
 Comment[nds]=Strg+Alt+Entf
+Comment[x-test]=xxCtrl+Alt+Delxx
