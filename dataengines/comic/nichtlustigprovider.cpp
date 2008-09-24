@@ -37,13 +37,14 @@ class NichtLustigProvider::Private
         };
 
         Private( NichtLustigProvider *parent )
-            : mUsedDate( parent->requestedDate() )
+            : mUsedDate( parent->requestedDate() ), mDifferentMainPage( false )
         {
         }
 
         QImage mImage;
         QDate mUsedDate;
         bool mFindNewDate;
+        bool mDifferentMainPage; // in the case a book is announced
         QDate mPreviousDate;
         QDate mNextDate;
 };
@@ -63,10 +64,15 @@ void NichtLustigProvider::setWebsiteHttp()
 {
     KUrl url( QString( "http://nicht-lustig.de/" ) );
 
-    if ( d->mFindNewDate )
-        url.setPath( QString( "/main.html" ) );
-    else
+    if ( d->mFindNewDate ) {
+        if ( d->mDifferentMainPage ) {
+            url.setPath( QString( "/main2.html" ) );
+        } else {
+            url.setPath( QString( "/main.html" ) );
+        }
+    } else {
         url.setPath( QString( "/toondb/%1.html" ).arg( d->mUsedDate.toString( "yyMMdd" ) ) );
+    }
 
     requestPage( url, Private::PageRequest );
 }
@@ -127,6 +133,10 @@ void NichtLustigProvider::pageRetrieved( int id, const QByteArray &rawData )
 
             url = KUrl( QString( "http://nicht-lustig.de/comics/full/%1.jpg" )
                                 .arg( d->mUsedDate.toString( "yyMMdd" ) ) );
+        } else {
+            d->mDifferentMainPage = true;
+            setWebsiteHttp();
+            return;
         }
 
         QRegExp expPrev( "id=\"links\"><a href=\"" + patternDate +  "\\.html\"" );

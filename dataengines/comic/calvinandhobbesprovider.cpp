@@ -36,6 +36,7 @@ class CalvinAndHobbesProvider::Private
 CalvinAndHobbesProvider::CalvinAndHobbesProvider( QObject *parent, const QVariantList &args )
     : ComicProvider( parent, args ), d( new Private )
 {
+    setComicAuthor( "Bill Watterson" );
     setFirstStripDate( QDate( 1985, 11, 17 ) );
     KUrl url( QString( "http://picayune.uclick.com/comics/ch/%1/ch%2.gif" ).arg( requestedDate().toString( "yyyy" ) )
                                                                           .arg( requestedDate().toString( "yyMMdd" ) ) );
