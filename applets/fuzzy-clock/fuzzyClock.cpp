@@ -337,9 +337,13 @@ void Clock::calculateDateString()
             return;
         }
 
-    const QString day = m_date.toString("dd");
-    const QString month = m_date.toString("MMM");
-    const QString year = m_date.toString("yyyy");
+    KLocale tmpLocale(*KGlobal::locale());
+    tmpLocale.setDateFormat("%e"); // day number of the month
+    QString day = tmpLocale.formatDate(m_date);
+    tmpLocale.setDateFormat("%b"); // short form of the month
+    QString month = tmpLocale.formatDate(m_date);
+    tmpLocale.setDateFormat("%Y"); // the year with four digits
+    QString year = tmpLocale.formatDate(m_date);
 
     //Copied from the digital-clock
     if (m_showDate) {
