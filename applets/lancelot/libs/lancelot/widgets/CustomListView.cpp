@@ -52,6 +52,10 @@ public:
         : q(parent), factory(f), scale(-1)
     {
         positionItems();
+        margins[Plasma::TopMargin] = 0;
+        margins[Plasma::LeftMargin] = 0;
+        margins[Plasma::RightMargin] = 0;
+        margins[Plasma::BottomMargin] = 0;
     }
 
     #define returnIfFactoryNotSet if (!factory) return
@@ -75,7 +79,13 @@ public:
             return;
         }
 
-        qreal top(0);
+        qreal old_scale = scale;
+        updateSizeInfo();
+        if (old_scale != scale) {
+            startPosition = 0;
+        }
+
+        qreal top(margins[Plasma::TopMargin]);
 
         if (startPosition != 0) {
             top = itemForIndex(startPosition - 1)->geometry().bottom();
@@ -92,15 +102,17 @@ public:
                     );
 
             item->setGeometry(
-                0, top,
-                viewport.width(), height
+                margins[Plasma::LeftMargin], top,
+                viewport.width() - margins[Plasma::LeftMargin]
+                                 - margins[Plasma::RightMargin],
+                height
                 );
             top += height;
         }
 
         if (factory->itemCount() > 0) {
            q->resize(viewport.width(),
-                    item->geometry().bottom());
+                    item->geometry().bottom() + margins[Plasma::BottomMargin]);
         } else {
             q->resize(0, 0);
         }
@@ -114,7 +126,8 @@ public:
         for (int i = 0; i < factory->itemCount(); i++) {
             QGraphicsWidget * item = itemForIndex(i);
             item->resize(
-                    viewport.width(),
+                    viewport.width() - margins[Plasma::LeftMargin]
+                                 - margins[Plasma::RightMargin],
                     item->size().height());
         }
     } //<
@@ -134,13 +147,7 @@ public:
                 factory->itemHeight(i, Qt::PreferredSize);
             sizes[Qt::MaximumSize] +=
                 factory->itemHeight(i, Qt::MaximumSize);
-            kDebug() << "scale" << factory->itemHeight(i, Qt::MinimumSize)
-                                << factory->itemHeight(i, Qt::MaximumSize)
-                                << factory->itemHeight(i, Qt::PreferredSize);
         }
-        kDebug() << "scale" << sizes[Qt::MinimumSize]
-                            << sizes[Qt::MaximumSize]
-                            << sizes[Qt::PreferredSize];
 
         if (sizes[Qt::MinimumSize] > viewport.height()) {
             scale = -1;
@@ -214,13 +221,11 @@ public:
 
     //> Variable Declarations
     CustomList * q;
-
     CustomListItemFactory * factory;
-
     QMap < Qt::SizeHint, int > sizes;
-
     QRectF viewport;
     qreal scale;
+    QMap < Plasma::MarginEdge, qreal > margins;
     //<
 };
 
@@ -232,8 +237,9 @@ CustomList::CustomList(QGraphicsItem * parent)
 CustomList::CustomList(
         CustomListItemFactory * factory,
         QGraphicsItem * parent)
-    : QGraphicsWidget(parent), d(new Private(this, factory))
+    : QGraphicsWidget(parent), d(new Private(this))
 {
+    setItemFactory(factory);
 }
 
 CustomList::~CustomList()
@@ -298,6 +304,7 @@ qreal CustomList::scrollUnit(Qt::Orientation direction)
 
 void CustomList::factoryItemInserted(int position)
 {
+    kDebug() << position;
     d->positionItems(position);
 }
 
@@ -315,6 +322,18 @@ void CustomList::factoryUpdated()
 {
     d->positionItems();
 }
+
+void CustomList::setMargin(Plasma::MarginEdge margin, qreal value)
+{
+    d->margins[margin] = value;
+    d->positionItems();
+}
+
+qreal CustomList::margin(Plasma::MarginEdge margin)
+{
+    return d->margins[margin];
+}
+
 //<
 
 //> CustomListView

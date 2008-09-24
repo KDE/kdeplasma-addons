@@ -53,12 +53,6 @@ public:
         }
 
     protected:
-        // L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * e)
-        // {
-        //     kDebug();
-        //     ScrollBarItem::mousePressEvent(e);
-        // }
-
         L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * e)
         {
             ScrollBarItem::mouseMoveEvent(e);
@@ -73,14 +67,6 @@ public:
                 (d->orientation == Qt::Horizontal)?(orig.x()):(orig.y())
             );
         }
-
-        // L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * e)
-        // {
-        //     kDebug();
-        //     ScrollBarItem::mouseReleaseEvent(e);
-        // }
-
-    private:
 
     };
 
@@ -308,13 +294,16 @@ public:
         handleSlideSize = diff;
 
         QRectF itemRect = geometry;
+        QRectF itemExpandedRect;
 
         // up bar
         itemRect.setHeight(
                 diff * ((value - minimum) / (qreal)(maximum - minimum))
                 );
-        upBar->setPreferredSize(orientateRect(itemRect).size());
-        upBar->setGeometry(orientateRect(itemRect));
+        itemExpandedRect = itemRect;
+        itemExpandedRect.setHeight(itemExpandedRect.height() + 10);
+        upBar->setPreferredSize(orientateRect(itemExpandedRect).size());
+        upBar->setGeometry(orientateRect(itemExpandedRect));
 
         itemRect.setTop(itemRect.bottom());
         itemRect.setHeight(handleSize);
@@ -323,8 +312,10 @@ public:
 
         itemRect.setTop(itemRect.bottom());
         itemRect.setBottom(geometry.bottom());
-        downBar->setPreferredSize(orientateRect(itemRect).size());
-        downBar->setGeometry(orientateRect(itemRect));
+        itemExpandedRect = itemRect;
+        itemExpandedRect.setTop(itemExpandedRect.top() - 10);
+        downBar->setPreferredSize(orientateRect(itemExpandedRect).size());
+        downBar->setGeometry(orientateRect(itemExpandedRect));
     }
 
     int minimum;
@@ -484,9 +475,6 @@ int ScrollBar::pageSize() const
 
 void ScrollBar::setOrientation(Qt::Orientation value)
 {
-    if (d->orientation == value) {
-        return;
-    }
     d->orientation = value;
 
     if (value == Qt::Horizontal) {

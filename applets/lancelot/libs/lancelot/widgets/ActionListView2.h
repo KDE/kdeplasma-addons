@@ -51,8 +51,8 @@ public:
     void setCategoriesActivable(bool value);
     bool categoriesActivable() const;
 
-    void setExtenderPosition(ExtenderPosition position) {};
-    ExtenderPosition extenderPosition() const {};
+    void setExtenderPosition(ExtenderPosition position);
+    ExtenderPosition extenderPosition() const;
 
     void setItemsGroup(WidgetGroup * group = NULL) {};
     void setItemsGroupByName(const QString & group) {};
@@ -63,7 +63,8 @@ public:
     WidgetGroup * categoriesGroup() const {};
 
     // L_Override virtual void setGroup(WidgetGroup * group = NULL);
-    // L_Override virtual void groupUpdated();
+    L_Override virtual void groupUpdated();
+
 Q_SIGNALS:
     void activated(int index);
 

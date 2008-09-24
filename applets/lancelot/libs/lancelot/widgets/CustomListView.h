@@ -120,6 +120,9 @@ public:
 
     virtual ~CustomList();
 
+    void setMargin(Plasma::MarginEdge margin, qreal value);
+    qreal margin(Plasma::MarginEdge margin);
+
     void setItemFactory(CustomListItemFactory * factory);
     CustomListItemFactory * itemFactory() const;
 

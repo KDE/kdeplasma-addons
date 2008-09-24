@@ -163,9 +163,8 @@ public:
             layout->activate();
             listsLayout->pop();
 
-            list->setVisible(false);
-            delete button;
-            delete list;
+            button->deleteLater();
+            list->deleteLater();
         }
     }
 
@@ -278,6 +277,11 @@ void PassagewayView::pathButtonActivated()
 void PassagewayView::listItemActivated(int index)
 {
     int activatedListIndex = d->lists.indexOf((ActionListView *)sender());
+
+    if (activatedListIndex == -1) {
+        return;
+    }
+
     if (activatedListIndex == 0) {
         // something in the entrance is clicked
         // we don't want to remove the first level
@@ -286,6 +290,8 @@ void PassagewayView::listItemActivated(int index)
     } else {
         d->back(d->lists.size() - activatedListIndex - 1);
     }
+
+    kDebug() << activatedListIndex;
 
     PassagewayViewModel * model = d->path.at(activatedListIndex)->model;
     if (model) {

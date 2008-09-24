@@ -124,7 +124,7 @@ LancelotTestWindow::LancelotTestWindow()
     m_corona->addItem(m_root);
 
     Lancelot::ScrollPane * sp = new Lancelot::ScrollPane(m_root);
-    // sp->clearFlag(ScrollPane::ClipScrollable);
+    sp->clearFlag(ScrollPane::ClipScrollable);
     sp->setFlag(ScrollPane::HoverShowScrollbars);
     m_layout->addItem(sp);
     sp->setScrollableWidget(new ScrollableWidget(sp));

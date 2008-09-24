@@ -23,8 +23,8 @@
 namespace Lancelot {
 
 //> ActionListView2Item
-ActionListView2Item::ActionListView2Item()
-    : ExtenderButton(), m_selected(false)
+ActionListView2Item::ActionListView2Item(ActionListView2ItemFactory * factory)
+    : ExtenderButton(), m_selected(false), m_factory(factory)
 {
     L_WIDGET_SET_INITIALIZED;
 }
@@ -42,22 +42,28 @@ bool ActionListView2Item::isSelected() const
 {
     return m_selected;
 }
+
+void ActionListView2Item::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
+{
+    m_factory->itemContext(this);
+}
+
 //<
 
 //> ActionListView2ItemFactory
-ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model)
-    : m_model(NULL), m_categoriesActivable(false)
+ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model) //>
+    : m_model(NULL), m_categoriesActivable(false), m_extenderPosition(NoExtender)
 {
     setModel(model);
-}
+} //<
 
-ActionListView2ItemFactory::~ActionListView2ItemFactory()
+ActionListView2ItemFactory::~ActionListView2ItemFactory() //>
 {
     qDeleteAll(m_items);
     m_items.clear();
-}
+} //<
 
-void ActionListView2ItemFactory::reload()
+void ActionListView2ItemFactory::reload() //>
 {
     while (m_items.size() > m_model->size()) {
         kDebug() << "deleting one";
@@ -70,12 +76,12 @@ void ActionListView2ItemFactory::reload()
     }
 
     emit updated();
-}
+} //<
 
-CustomListItem * ActionListView2ItemFactory::itemForIndex(int index)
+CustomListItem * ActionListView2ItemFactory::itemForIndex(int index) //>
 {
     return itemForIndex(index, false);
-}
+} //<
 
 CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
         bool reload) //>
@@ -88,7 +94,8 @@ CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
         item = m_items[index];
     } else {
         kDebug() << "Creating new one";
-        item = new ActionListView2Item();
+        item = new ActionListView2Item(this);
+        item->setExtenderPosition(m_extenderPosition);
         reload = true;
         while (index >= m_items.size()) {
             m_items.append(NULL);
@@ -221,27 +228,28 @@ ActionListViewModel * ActionListView2ItemFactory::model() //>
     return m_model;
 } //<
 
-void ActionListView2ItemFactory::modelUpdated()
+void ActionListView2ItemFactory::modelUpdated() //>
 {
     kDebug();
     reload();
-}
+} //<
 
-void ActionListView2ItemFactory::modelItemInserted(int index)
+void ActionListView2ItemFactory::modelItemInserted(int index) //>
 {
-    kDebug();
     if (index < 0 || index > m_items.size()) {
         // If we get an illegal notification, do
         // a full reload
+        kDebug() << "illegal -> reloading: " << index;
         reload();
     } else {
         m_items.insert(index, NULL);
         itemForIndex(index, true);
+        kDebug() << "emit itemInserted" << index;
         emit itemInserted(index);
     }
-}
+} //<
 
-void ActionListView2ItemFactory::modelItemDeleted(int index)
+void ActionListView2ItemFactory::modelItemDeleted(int index) //>
 {
     kDebug();
     if (index < 0 || index >= m_items.size()) {
@@ -252,9 +260,9 @@ void ActionListView2ItemFactory::modelItemDeleted(int index)
         delete m_items.takeAt(index);
         emit itemDeleted(index);
     }
-}
+} //<
 
-void ActionListView2ItemFactory::modelItemAltered(int index)
+void ActionListView2ItemFactory::modelItemAltered(int index) //>
 {
     kDebug();
     kDebug();
@@ -266,30 +274,66 @@ void ActionListView2ItemFactory::modelItemAltered(int index)
         itemForIndex(index, true);
         emit itemAltered(index);
     }
-}
+} //<
+
+void ActionListView2ItemFactory::setExtenderPosition(ExtenderPosition position) //>
+{
+    if (position == TopExtender) {
+        position = LeftExtender;
+    }
+
+    if (position == BottomExtender) {
+        position = RightExtender;
+    }
+
+    m_extenderPosition = position;
+    foreach (ActionListView2Item * item, m_items) {
+        item->setExtenderPosition(position);
+    }
+} //<
+
+ExtenderPosition ActionListView2ItemFactory::extenderPosition() const //>
+{
+    return m_extenderPosition;
+} //<
+
+void ActionListView2ItemFactory::itemContext(ActionListView2Item * sender) //>
+{
+    int index = m_items.indexOf(sender);
+    if (index < 0 || index >= m_model->size() ||
+            !m_model->hasContextActions(index)) {
+        return;
+    }
+
+    QMenu menu;
+    m_model->setContextActions(index, &menu);
+    m_model->contextActivate(index, menu.exec(QCursor::pos()));
+
+} //<
+
 //<
 
 //> ActionListView2
-ActionListView2::Private::Private()
+ActionListView2::Private::Private() //>
     : itemFactory(NULL)
 {
-}
+} //<
 
-ActionListView2::Private::~Private()
+ActionListView2::Private::~Private() //>
 {
     delete itemFactory;
-}
+} //<
 
-ActionListView2::ActionListView2(QGraphicsItem * parent)
+ActionListView2::ActionListView2(QGraphicsItem * parent) //>
     : CustomListView(parent), d(new Private())
 {
     setFlag(ScrollPane::HoverShowScrollbars);
     clearFlag(ScrollPane::ClipScrollable);
 
     L_WIDGET_SET_INITIALIZED;
-}
+} //<
 
-ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * parent)
+ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * parent) //>
     : CustomListView(new ActionListView2ItemFactory(model), parent),
       d(new Private())
 {
@@ -302,29 +346,29 @@ ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * pa
     clearFlag(ScrollPane::ClipScrollable);
 
     L_WIDGET_SET_INITIALIZED;
-}
+} //<
 
-ActionListView2::~ActionListView2()
+ActionListView2::~ActionListView2() //>
 {
     delete d;
-}
+} //<
 
-void ActionListView2::setCategoriesActivable(bool value)
+void ActionListView2::setCategoriesActivable(bool value) //>
 {
     if (d->itemFactory) {
         d->itemFactory->setCategoriesActivable(value);
     }
-}
+} //<
 
-bool ActionListView2::categoriesActivable() const
+bool ActionListView2::categoriesActivable() const //>
 {
     if (d->itemFactory) {
         return d->itemFactory->categoriesActivable();
     }
     return false;
-}
+} //<
 
-void ActionListView2::setModel(ActionListViewModel * model)
+void ActionListView2::setModel(ActionListViewModel * model) //>
 {
     if (!d->itemFactory) {
         d->itemFactory = new ActionListView2ItemFactory(model);
@@ -332,15 +376,53 @@ void ActionListView2::setModel(ActionListViewModel * model)
     } else {
         d->itemFactory->setModel(model);
     }
-}
+} //<
 
-ActionListViewModel * ActionListView2::model() const
+ActionListViewModel * ActionListView2::model() const //>
 {
     if (!d->itemFactory) {
         return NULL;
     }
     return d->itemFactory->model();
-}
+} //<
+
+void ActionListView2::setExtenderPosition(ExtenderPosition position) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    d->itemFactory->setExtenderPosition(position);
+
+    if (d->itemFactory->extenderPosition() == LeftExtender) {
+        list()->setMargin(Plasma::LeftMargin, EXTENDER_SIZE);
+        list()->setMargin(Plasma::RightMargin, 0);
+    } else if (d->itemFactory->extenderPosition() == RightExtender) {
+        list()->setMargin(Plasma::LeftMargin, 0);
+        list()->setMargin(Plasma::RightMargin, EXTENDER_SIZE);
+    } else {
+        list()->setMargin(Plasma::LeftMargin, 0);
+        list()->setMargin(Plasma::RightMargin, 0);
+    }
+
+} //<
+
+ExtenderPosition ActionListView2::extenderPosition() const //>
+{
+    if (!d->itemFactory) {
+        return NoExtender;
+    }
+    return d->itemFactory->extenderPosition();
+} //<
+
+void ActionListView2::groupUpdated() //>
+{
+    Widget::groupUpdated();
+
+    if (group()->hasProperty("ExtenderPosition")) {
+        setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
+    }
+} //<
+
 //<
 
 } // namespace Lancelot
