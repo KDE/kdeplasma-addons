@@ -504,14 +504,20 @@ void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
 
 void ScrollBar::setGeometry(const QRectF & g)
 {
-    if ((g == geometry()) || (g.width() == 0) || (g.height() == 0)) {
+    if (g.isEmpty()) {
         return;
     }
-    kDebug() << g;
-    kDebug() << geometry();
+
+    if (g.size() == geometry().size()) {
+        setPos(g.topLeft());
+        return;
+    }
+
+    QRectF old = geometry();
     Widget::setGeometry(g);
-    kDebug() << Widget::geometry();
-    d->invalidate();
+    if (old != geometry()) {
+        d->invalidate();
+    }
 }
 
 void ScrollBar::setGroup(WidgetGroup * g)
@@ -538,11 +544,13 @@ void ScrollBar::setGroup(WidgetGroup * g)
 
 void ScrollBar::stepIncrease()
 {
+    kDebug() << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$+";
     setValue(value() + d->stepSize);
 }
 
 void ScrollBar::stepDecrease()
 {
+    kDebug() << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-";
     setValue(value() - d->stepSize);
 }
 
