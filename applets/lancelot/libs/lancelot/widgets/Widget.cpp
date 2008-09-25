@@ -205,7 +205,7 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
     if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
         svg->setElementPrefix(element);
         svg->resizePanel(size());
-        svg->paintPanel(painter); // API change since 4.1 IGNORE_DIFF
+        svg->paintPanel(painter);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;
