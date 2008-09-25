@@ -78,6 +78,12 @@ private:
 template <typename SuperLayout>
 class FlipLayout : public SuperLayout {
 public:
+    FlipLayout(QGraphicsLayoutItem * parent = NULL)
+        : SuperLayout(parent)
+    {
+
+    }
+
     void setFlip(Plasma::Flip flip)
     {
         FlipLayoutManager::instance()->setFlip(this, flip);

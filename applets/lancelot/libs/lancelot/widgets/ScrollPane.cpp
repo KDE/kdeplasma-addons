@@ -23,6 +23,7 @@
 #include "ScrollBar.h"
 #include "Widget.h"
 #include <lancelot/layouts/FullBorderLayout.h>
+#include <lancelot/layouts/FlipLayout.h>
 
 namespace Lancelot
 {
@@ -78,7 +79,7 @@ public:
 
     ScrollPane * q;
     Scrollable * widget;
-    FullBorderLayout * layout;
+    FlipLayout < FullBorderLayout > * layout;
     ScrollBar * vertical;
     ScrollBar * horizontal;
     QGraphicsWidget * centerContainer;
@@ -89,7 +90,8 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
     : Widget(parent), d(new Private(this))
 {
     setAcceptsHoverEvents(true);
-    d->layout = new FullBorderLayout(this);
+    d->layout = new FlipLayout < FullBorderLayout > (this);
+    // d->layout->setParentLayoutItem(this);
 
     d->vertical   = new ScrollBar(this);
     d->vertical->setOrientation(Qt::Vertical);
@@ -313,6 +315,11 @@ void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event)
     } else {
         d->vertical->wheelEvent(event);
     }
+}
+
+void ScrollPane::setFlip(Plasma::Flip flip)
+{
+    d->layout->setFlip(flip);
 }
 
 } // namespace Lancelot

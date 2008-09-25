@@ -153,6 +153,11 @@ public:
      */
     void setFlags(Flags flags);
 
+    /**
+     * Flips the layout of the scrollbars
+     */
+    void setFlip(Plasma::Flip flip);
+
     L_Override virtual void setGeometry(const QRectF & rect);
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);

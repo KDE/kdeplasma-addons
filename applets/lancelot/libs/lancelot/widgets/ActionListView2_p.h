@@ -47,9 +47,12 @@ public:
     L_Override virtual bool isSelected() const;
 
     L_Override virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
 
 private:
     bool m_selected;
+    QPointF m_mousePos;
     ActionListView2ItemFactory * m_factory;
 };
 //<
@@ -77,6 +80,7 @@ public:
     ExtenderPosition extenderPosition() const;
 
     void itemContext(ActionListView2Item * sender);
+    void itemDrag(ActionListView2Item * sender, QWidget * widget);
 
 private:
     void reload();

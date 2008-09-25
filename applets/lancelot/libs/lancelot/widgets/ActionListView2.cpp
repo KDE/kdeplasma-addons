@@ -48,6 +48,21 @@ void ActionListView2Item::contextMenuEvent(QGraphicsSceneContextMenuEvent * even
     m_factory->itemContext(this);
 }
 
+void ActionListView2Item::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    m_mousePos = event->pos();
+    ExtenderButton::mousePressEvent(event);
+}
+
+void ActionListView2Item::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+{
+    ExtenderButton::mouseMoveEvent(event);
+    if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+        setDown(false);
+        m_factory->itemDrag(this, event->widget());
+    }
+}
+
 //<
 
 //> ActionListView2ItemFactory
@@ -311,6 +326,29 @@ void ActionListView2ItemFactory::itemContext(ActionListView2Item * sender) //>
 
 } //<
 
+void ActionListView2ItemFactory::itemDrag(ActionListView2Item * sender, QWidget * widget) //>
+{
+    int index = m_items.indexOf(sender);
+    if (index < 0 || index >= m_model->size()) {
+        return;
+    }
+
+    QMimeData * data = m_model->mimeData(index);
+    if (data == NULL) {
+        return;
+    }
+
+    QDrag * drag = new QDrag(widget);
+    drag->setMimeData(data);
+
+    Qt::DropActions actions;
+    Qt::DropAction defaultAction;
+    m_model->setDropActions(index, actions, defaultAction);
+
+    Qt::DropAction dropAction = drag->exec(actions, defaultAction);
+    m_model->dataDropped(index, dropAction);
+
+} //<
 //<
 
 //> ActionListView2
@@ -396,12 +434,15 @@ void ActionListView2::setExtenderPosition(ExtenderPosition position) //>
     if (d->itemFactory->extenderPosition() == LeftExtender) {
         list()->setMargin(Plasma::LeftMargin, EXTENDER_SIZE);
         list()->setMargin(Plasma::RightMargin, 0);
+        setFlip(Plasma::NoFlip);
     } else if (d->itemFactory->extenderPosition() == RightExtender) {
         list()->setMargin(Plasma::LeftMargin, 0);
         list()->setMargin(Plasma::RightMargin, EXTENDER_SIZE);
+        setFlip(Plasma::HorizontalFlip);
     } else {
         list()->setMargin(Plasma::LeftMargin, 0);
         list()->setMargin(Plasma::RightMargin, 0);
+        setFlip(Plasma::NoFlip);
     }
 
 } //<
