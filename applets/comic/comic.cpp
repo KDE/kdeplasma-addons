@@ -93,6 +93,7 @@ void ComicApplet::init()
 
 ComicApplet::~ComicApplet()
 {
+    delete mFullViewWidget;
 }
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
