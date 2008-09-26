@@ -50,7 +50,7 @@ class PluginManager
 
     private:
         PluginManager();
-        PluginManager(const PluginManager& rhs);
+        PluginManager( const PluginManager& rhs );
 
         QList<ComicEntry> mComics;
         QMap<QString, int> map;

@@ -55,7 +55,7 @@ NichtLustigProvider::NichtLustigProvider( QObject *parent, const QVariantList &a
 {
     setComicAuthor( "Joscha Sauer" );
     setFirstStripDate( QDate( 2002, 01, 27 ) );
-    d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
+    d->mFindNewDate = ( d->mUsedDate == QDate::currentDate() );
 
     setWebsiteHttp();
 }

@@ -31,7 +31,7 @@ ComicEntry::ComicEntry( const QString &_identifier, const QString &_title,
 
 bool ComicEntry::operator<( const ComicEntry &other ) const
 {
-    return (title < other.title);
+    return ( title < other.title );
 }
 
 PluginManager::PluginManager()
@@ -46,7 +46,7 @@ PluginManager::PluginManager()
 
     qSort( mComics );
 
-    for (int i = 0; i < mComics.size(); ++i) {
+    for ( int i = 0; i < mComics.size(); ++i ) {
         map.insert( mComics.at( i ).identifier, i );
     }
 }

@@ -135,7 +135,7 @@ void PhdProvider::pageRetrieved( int id, const QByteArray &rawData )
         const QString nextPattern( "images/next_button.gif" );
         const QRegExp nextExp( nextPattern );
 
-        d->mHasNextComic = (nextExp.indexIn( data ) != -1);
+        d->mHasNextComic = ( nextExp.indexIn( data ) != -1 );
     } else if ( id == Private::ImageRequest ) {
         d->mImage = QImage::fromData( rawData );
         emit finished( this );

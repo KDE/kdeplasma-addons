@@ -97,9 +97,9 @@ class OsNewsProvider : public ComicProvider
         class Private;
         Private* const d;
 
-        Q_PRIVATE_SLOT( d, void processRss(Syndication::Loader* loader,
+        Q_PRIVATE_SLOT( d, void processRss( Syndication::Loader* loader,
                                            Syndication::FeedPtr feed,
-                                           Syndication::ErrorCode error) )
+                                           Syndication::ErrorCode error ) )
 };
 
 #endif

@@ -60,6 +60,6 @@ class ComicEngine : public Plasma::DataEngine
         QMap<QString, KService::Ptr> mFactories;
 };
 
-K_EXPORT_PLASMA_DATAENGINE(comic, ComicEngine)
+K_EXPORT_PLASMA_DATAENGINE( comic, ComicEngine )
 
 #endif

@@ -166,12 +166,12 @@ void ShitHappensProvider::pageRetrieved( int id, const QByteArray &rawData )
         const int spaceBot = 13;
 
         const int height = header.height() + comic.height() + spaceTop + spaceMid + spaceBot;
-        const int width = (header.width() >= comic.width()) ? header.width() : comic.width();
+        const int width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
 
         d->mImage = QImage( QSize( width, height ), QImage::Format_RGB32 );
         d->mImage.fill( header.pixel( QPoint( 0, 0 ) ) );
 
-        QPainter painter( &(d->mImage) );
+        QPainter painter( &( d->mImage ) );
 
         // center and draw the Images
         const QPoint headerPos( ( ( width - header.width() ) / 2 ), spaceTop );

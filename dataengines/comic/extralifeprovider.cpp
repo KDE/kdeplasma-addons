@@ -54,7 +54,7 @@ ExtraLifeProvider::ExtraLifeProvider( QObject *parent, const QVariantList &args 
 {
     setComicAuthor( "Scott Johnson" );
     setFirstStripDate( QDate( 2001, 06, 17 ) );
-    d->mFindNewDate = (d->mUsedDate == QDate::currentDate());
+    d->mFindNewDate = ( d->mUsedDate == QDate::currentDate() );
 
     setWebsiteHttp();
 }
