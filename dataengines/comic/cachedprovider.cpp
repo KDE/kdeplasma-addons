@@ -122,9 +122,8 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
         QSettings settings( path + ".conf", QSettings::IniFormat );
         QSettings settingsMain( pathMain + ".conf", QSettings::IniFormat );
 
-        for ( Settings::const_iterator i = info.constBegin();
-              i != info.constEnd(); ++i) {
-                if( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "comicAuthor" ) ) {
+        for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
+                if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "comicAuthor" ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );

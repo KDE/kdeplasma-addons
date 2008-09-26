@@ -111,7 +111,7 @@ void MalvadosProvider::pageRetrieved( int id, const QByteArray &rawData )
             if ( id == Private::PageRequest ) {
                 pattern = QString( "<frame name=\"mainFrame\" src=\"index(\\d+).html\">" );
             } else if ( id == Private::PageSubRequest ) {
-                pattern = QString ( "index(\\d+)" );
+                pattern = QString( "index(\\d+)" );
             }
 
             QRegExp exp( pattern );
