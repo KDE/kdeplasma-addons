@@ -126,6 +126,7 @@ void ComicEngine::finished( ComicProvider *provider )
     setData( identifier, "Additional text", provider->additionalText() );
     setData( identifier, "Strip title", provider->stripTitle() );
     setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
+    setData( identifier, "Identifier", provider->identifier() );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic

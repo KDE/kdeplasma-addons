@@ -83,12 +83,14 @@ ConfigWidget::ConfigWidget( QWidget *parent )
     mShowComicAuthor = new QCheckBox( i18n( "Show Comic Author" ), this );
     mShowComicTitle = new QCheckBox( i18n( "Show Comic Title" ), this );
     mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
+    mShowComicIdentifier = new QCheckBox( i18n( "Show Comic Identifier" ), this );
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
     layout->addWidget( mShowComicAuthor, 1, 0, 1, 2 );
     layout->addWidget( mShowComicTitle, 2, 0, 1, 2 );
     layout->addWidget( mShowComicUrl, 3, 0, 1, 2 );
+    layout->addWidget( mShowComicIdentifier, 4, 0, 1, 2 );
 
     mModel = new ComicModel( this );
     mComicIdentifier->setModel( mModel );
@@ -143,4 +145,14 @@ void ConfigWidget::setShowComicTitle( bool show )
 bool ConfigWidget::showComicTitle() const
 {
     return mShowComicTitle->isChecked();
+}
+
+void ConfigWidget::setShowComicIdentifier( bool show )
+{
+    mShowComicIdentifier->setChecked( show );
+}
+
+bool ConfigWidget::showComicIdentifier() const
+{
+    return mShowComicIdentifier->isChecked();
 }

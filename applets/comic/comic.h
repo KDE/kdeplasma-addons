@@ -52,6 +52,7 @@ class ComicApplet : public Plasma::Applet
         void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
+        void slotChosenDay( const QDate &date );
         void slotNextDay();
         void slotPreviousDay();
         void slotFirstDay();
@@ -74,8 +75,8 @@ class ComicApplet : public Plasma::Applet
         void updateSize();
 
         QImage mImage;
-        QDate mCurrentDate;
         QDate mCurrentDay;
+        QDate mIdentifierSuffixDate;
         QUrl mWebsiteUrl;
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
@@ -85,6 +86,9 @@ class ComicApplet : public Plasma::Applet
         QString mComicTitle;
         QString mStripTitle;
         QString mAdditionalText;
+        QString mSuffixType;
+        QString mShownIdentifierSuffix;
+        int mIdentifierSuffixNum;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;
@@ -92,11 +96,13 @@ class ComicApplet : public Plasma::Applet
         bool mShowComicUrl;
         bool mShowComicAuthor;
         bool mShowComicTitle;
+        bool mShowComicIdentifier;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
+        QMap< QString, int > mMaxStripNum;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)

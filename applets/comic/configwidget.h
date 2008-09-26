@@ -42,12 +42,15 @@ class ConfigWidget : public QWidget
         bool showComicAuthor() const;
         void setShowComicTitle( bool show );
         bool showComicTitle() const;
+        void setShowComicIdentifier( bool show );
+        bool showComicIdentifier() const;
 
     private:
         QComboBox *mComicIdentifier;
         QCheckBox *mShowComicUrl;
         QCheckBox *mShowComicAuthor;
         QCheckBox *mShowComicTitle;
+        QCheckBox *mShowComicIdentifier;
         ComicModel *mModel;
 };
 
