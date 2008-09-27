@@ -71,7 +71,7 @@ class ChooseStripNumDialog : public KDialog
             QLabel *label = new QLabel( i18n( "&Strip Number:" ), widget );
             label->setBuddy( numInput );
             topLayout->addWidget( label );
-            topLayout->addWidget( numInput) ;
+            topLayout->addWidget( numInput ) ;
             // A little bit extra space
             topLayout->addSpacing( spacingHint() );
             topLayout->addStretch( 10 );
@@ -287,6 +287,8 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     if ( event->button() == Qt::LeftButton ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
+        int tempLeftArrowWidth = ( mShowPreviousButton ? s_arrowWidth : 0 );
+        int tempRightArrowWidth = ( !mNextIdentifierSuffix.isEmpty() ? s_arrowWidth : 0 );
 
         const QRectF rect = contentsRect();
         if ( mShowPreviousButton && event->pos().x() > rect.left() &&
@@ -297,13 +299,13 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             slotNextDay();
         } else if ( !mWebsiteUrl.isEmpty() && mShowComicUrl &&
                     event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - s_arrowWidth) ) {
+                    event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - tempRightArrowWidth ) ) {
             // link clicked
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
         } else if ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier &&
                     event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.left() + s_arrowWidth ) &&
-                    event->pos().x() < ( rect.left() + s_arrowWidth + fm.width( mShownIdentifierSuffix ) ) ) {
+                    event->pos().x() > ( rect.left() + tempLeftArrowWidth ) &&
+                    event->pos().x() < ( rect.left() + tempLeftArrowWidth + fm.width( mShownIdentifierSuffix ) ) ) {
             // identifierSuffix clicked clicked
             if ( mSuffixType == "Number" ) {
                 ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mMaxStripNum[ mComicIdentifier ] );
