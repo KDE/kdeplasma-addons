@@ -39,6 +39,7 @@ namespace Lancelot
 class ActionListView2ItemFactory;
 
 class ActionListView2Item: public ExtenderButton, public CustomListItem {
+    Q_OBJECT;
 public:
     ActionListView2Item(ActionListView2ItemFactory * factory);
     ~ActionListView2Item();
@@ -51,9 +52,12 @@ public:
     L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
 
 private:
-    bool m_selected;
     QPointF m_mousePos;
     ActionListView2ItemFactory * m_factory;
+
+private Q_SLOTS:
+    void select();
+    void deselect();
 };
 //<
 
@@ -82,6 +86,10 @@ public:
     void itemContext(ActionListView2Item * sender);
     void itemDrag(ActionListView2Item * sender, QWidget * widget);
 
+    void activateSelectedItem();
+    void selectRelItem(int rel);
+    void activate(int index);
+
 private:
     void reload();
 
@@ -100,6 +108,9 @@ private:
     QList < ActionListView2Item * > m_items;
     bool m_categoriesActivable : 1;
     ExtenderPosition m_extenderPosition;
+
+    ActionListView2Item * m_selectedItem;
+    friend class ActionListView2Item;
 };
 //<
 

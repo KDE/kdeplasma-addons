@@ -24,8 +24,12 @@ namespace Lancelot {
 
 //> ActionListView2Item
 ActionListView2Item::ActionListView2Item(ActionListView2ItemFactory * factory)
-    : ExtenderButton(), m_selected(false), m_factory(factory)
+    : ExtenderButton(), m_factory(factory)
 {
+    connect(this, SIGNAL(mouseHoverEnter()),
+            this, SLOT(select()));
+    connect(this, SIGNAL(mouseLeaveEnter()),
+            this, SLOT(deselect()));
     L_WIDGET_SET_INITIALIZED;
 }
 
@@ -33,14 +37,40 @@ ActionListView2Item::~ActionListView2Item()
 {
 }
 
+void ActionListView2Item::select()
+{
+    setSelected(true);
+}
+
+void ActionListView2Item::deselect()
+{
+    setSelected(false);
+    m_factory->m_selectedItem = NULL;
+}
+
 void ActionListView2Item::setSelected(bool selected)
 {
-    m_selected = selected;
+    setHovered(selected);
+
+    if (!selected) {
+        if (m_factory->m_selectedItem == this) {
+            m_factory->m_selectedItem = NULL;
+        }
+    } else {
+        if (m_factory->m_selectedItem == this) {
+            return;
+        } else {
+            if (m_factory->m_selectedItem) {
+                m_factory->m_selectedItem->setSelected(false);
+            }
+            m_factory->m_selectedItem = this;
+        }
+    }
 }
 
 bool ActionListView2Item::isSelected() const
 {
-    return m_selected;
+    return m_factory->m_selectedItem == this;
 }
 
 void ActionListView2Item::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
@@ -67,7 +97,8 @@ void ActionListView2Item::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 
 //> ActionListView2ItemFactory
 ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model) //>
-    : m_model(NULL), m_categoriesActivable(false), m_extenderPosition(NoExtender)
+    : m_model(NULL), m_categoriesActivable(false),
+      m_extenderPosition(NoExtender), m_selectedItem(NULL)
 {
     setModel(model);
 } //<
@@ -151,12 +182,17 @@ void ActionListView2ItemFactory::itemActivated() //>
         return;
     }
 
-    int index = m_items.indexOf((Lancelot::ActionListView2Item *)sender());
-    if (index != -1) {
-        m_model->activated(index);
-        emit activated(index);
-    }
+    activate(m_items.indexOf(
+                (Lancelot::ActionListView2Item *)sender()));
+} //<
 
+void ActionListView2ItemFactory::activate(int index) //>
+{
+    if (index < 0 || index >= m_model->size()) {
+        return;
+    }
+    m_model->activated(index);
+    emit activated(index);
 } //<
 
 int ActionListView2ItemFactory::itemCount() const //>
@@ -349,6 +385,49 @@ void ActionListView2ItemFactory::itemDrag(ActionListView2Item * sender, QWidget 
     m_model->dataDropped(index, dropAction);
 
 } //<
+
+void ActionListView2ItemFactory::activateSelectedItem() //>
+{
+    kDebug() << (void *) m_selectedItem;
+    if (!m_selectedItem) {
+        return;
+    }
+
+    kDebug() << m_items.indexOf(m_selectedItem);
+    activate(m_items.indexOf(m_selectedItem));
+} //<
+
+void ActionListView2ItemFactory::selectRelItem(int rel) //>
+{
+    int index;
+    if (!m_selectedItem) {
+        index == -1;
+    } else {
+        index = m_items.indexOf(m_selectedItem);
+    }
+
+    if (index == -1) {
+        if (rel == 1) {
+            index = 0;
+        } else {
+            index = m_items.count() - 1;
+        }
+    } else {
+        if (rel == 1) {
+            index++;
+            if (index >= m_items.count()) {
+                index = 0;
+            }
+        } else {
+            index--;
+            if (index < 0) {
+                index = m_items.count() - 1;
+            }
+        }
+    }
+    m_items.at(index)->setSelected();
+} //<
+
 //<
 
 //> ActionListView2
@@ -367,6 +446,7 @@ ActionListView2::ActionListView2(QGraphicsItem * parent) //>
 {
     setFlag(ScrollPane::HoverShowScrollbars);
     clearFlag(ScrollPane::ClipScrollable);
+    setFocusPolicy(Qt::WheelFocus);
 
     L_WIDGET_SET_INITIALIZED;
 } //<
@@ -382,6 +462,7 @@ ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * pa
 
     setFlag(ScrollPane::HoverShowScrollbars);
     clearFlag(ScrollPane::ClipScrollable);
+    setFocusPolicy(Qt::WheelFocus);
 
     L_WIDGET_SET_INITIALIZED;
 } //<
@@ -461,6 +542,23 @@ void ActionListView2::groupUpdated() //>
 
     if (group()->hasProperty("ExtenderPosition")) {
         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
+    }
+} //<
+
+void ActionListView2::keyPressEvent(QKeyEvent * event) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+
+    kDebug() << event->key() << Qt::Key_Enter;
+    if (event->key() == Qt::Key_Return ||
+        event->key() == Qt::Key_Enter) {
+        d->itemFactory->activateSelectedItem();
+    } else if (event->key() == Qt::Key_Down) {
+        d->itemFactory->selectRelItem(+1);
+    } else if (event->key() == Qt::Key_Up) {
+        d->itemFactory->selectRelItem(-1);
     }
 } //<
 

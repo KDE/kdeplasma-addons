@@ -64,6 +64,7 @@ public:
 
     // L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();
+    L_Override virtual void keyPressEvent(QKeyEvent * event);
 
 Q_SIGNALS:
     void activated(int index);
