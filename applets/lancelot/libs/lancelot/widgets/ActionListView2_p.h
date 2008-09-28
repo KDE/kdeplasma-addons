@@ -39,7 +39,7 @@ namespace Lancelot
 class ActionListView2ItemFactory;
 
 class ActionListView2Item: public ExtenderButton, public CustomListItem {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     ActionListView2Item(ActionListView2ItemFactory * factory);
     ~ActionListView2Item();
