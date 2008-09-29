@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=PlasmaComic/Plugin
+X-KDE-ServiceType=Plasma/Comic
 Comment=Plugin for Plasma Comic Engine
 Comment[ca]=Connector per al motor de còmics del plasma
 Comment[cs]=Modul pro Plasma komiksy
@@ -40,5 +40,5 @@ Comment[zh_TW]=Plasma 漫畫引擎外掛程式
 [PropertyDef::X-KDE-PlasmaComicProvider-SuffixType]
 Type=QString
 
-[PropertyDef::X-KDE-PlasmaComicProvider-Identifier]
+[PropertyDef::X-KDE-PluginInfo-Name]
 Type=QString

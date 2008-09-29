@@ -71,6 +71,12 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual IdentifierType identifierType() const = 0;
 
         /**
+         * Returns the type of identifier that is used by this
+         * comic provider.
+         */
+        virtual QString suffixType() const;
+
+        /**
          * Returns the url of the website where the comic of that particular date resides.
          */
         virtual KUrl websiteUrl() const = 0;
@@ -118,6 +124,16 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * Returns additionalText of the comic.
          */
         virtual QString additionalText() const;
+
+        /**
+         * Returns the identifier for the comic
+         */
+        virtual QString pluginName() const;
+
+        /**
+         * Returns the name for the comic
+         */
+        virtual QString name() const;
 
         /**
          * Set whether this request is for the current comic (only used internally).

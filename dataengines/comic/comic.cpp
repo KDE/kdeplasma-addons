@@ -17,10 +17,11 @@
  */
 
 #include <QtCore/QDate>
+#include <QFileInfo>
 
 #include <KUrl>
-
 #include <KServiceTypeTrader>
+#include <KStandardDirs>
 
 #include "comic.h"
 
@@ -31,9 +32,9 @@ ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
 {
     setPollingInterval( 0 );
 
-    KService::List services = KServiceTypeTrader::self()->query( "PlasmaComic/Plugin" );
+    KService::List services = KServiceTypeTrader::self()->query( "Plasma/Comic" );
     Q_FOREACH ( const KService::Ptr &service, services ) {
-        mFactories.insert( service->property( "X-KDE-PlasmaComicProvider-Identifier", QVariant::String ).toString(),
+        mFactories.insert( service->property( "X-KDE-PluginInfo-Name", QVariant::String ).toString(),
                            service );
     }
 }
@@ -48,55 +49,71 @@ void ComicEngine::init()
 
 bool ComicEngine::updateSourceEvent( const QString &identifier )
 {
-    // check whether it is cached already...
-    if ( CachedProvider::isCached( identifier ) ) {
-        QVariantList args;
-        args << "String" << identifier;
+    if ( identifier == "providers" ) {
+        KService::List services = KServiceTypeTrader::self()->query( "Plasma/Comic" );
+        foreach ( const KService::Ptr &service, services ) {
+            QStringList data;
+            data << service->name();
+            QFileInfo file( service->icon() );
+            if ( file.isRelative() ) {
+                data << KStandardDirs::locate( "data", QString( "plasma-comic/%1.png" ).arg( service->icon() ) );
+            } else {
+                data << service->icon();
+            }
+            setData( identifier, service->property( "X-KDE-PluginInfo-Name", QVariant::String ).toString(), data );
+        }
+        return true;
+    } else {
+        // check whether it is cached already...
+        if ( CachedProvider::isCached( identifier ) ) {
+            QVariantList args;
+            args << "String" << identifier;
 
-        ComicProvider *provider = new CachedProvider( this, args );
+            ComicProvider *provider = new CachedProvider( this, args );
+            connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
+            connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
+            return true;
+        }
+
+        // ... start a new query otherwise
+        const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
+
+        //: are mandatory
+        if ( parts.count() < 2 )
+            return false;
+
+        if ( !mFactories.contains( parts[ 0 ] ) )
+            return false;
+
+        const KService::Ptr service = mFactories[ parts[ 0 ] ];
+
+        bool isCurrentComic = parts[ 1 ].isEmpty();
+
+        QVariantList args;
+        ComicProvider *provider = 0;
+
+        const QString type = service->property( "X-KDE-PlasmaComicProvider-SuffixType", QVariant::String ).toString();
+        if ( type == "Date" ) {
+            QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
+            if ( !date.isValid() )
+                date = QDate::currentDate();
+
+            args << "Date" << date;
+        } else if ( type == "Number" ) {
+            args << "Number" << parts[ 1 ].toInt();
+        }
+        args << service->storageId();
+
+        provider = service->createInstance<ComicProvider>( this, args );
+        if ( !provider )
+            return false;
+
+        provider->setIsCurrent( isCurrentComic );
+
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
         connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
         return true;
     }
-
-    // ... start a new query otherwise
-    const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
-
-    //: are mandatory
-    if ( parts.count() < 2 )
-        return false;
-
-    if ( !mFactories.contains( parts[ 0 ] ) )
-        return false;
-
-    const KService::Ptr service = mFactories[ parts[ 0 ] ];
-
-    bool isCurrentComic = parts[ 1 ].isEmpty();
-
-    QVariantList args;
-    ComicProvider *provider = 0;
-
-    const QString type = service->property( "X-KDE-PlasmaComicProvider-SuffixType", QVariant::String ).toString();
-    if ( type == "Date" ) {
-        QDate date = QDate::fromString( parts[ 1 ], Qt::ISODate );
-        if ( !date.isValid() )
-            date = QDate::currentDate();
-
-        args << "Date" << date;
-    } else if ( type == "Number" ) {
-        args << "Number" << parts[ 1 ].toInt();
-    }
-
-    provider = service->createInstance<ComicProvider>( this, args );
-    if ( !provider )
-        return false;
-
-    provider->setIsCurrent( isCurrentComic );
-
-    connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
-    connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
-
-    return true;
 }
 
 bool ComicEngine::sourceRequestEvent( const QString &identifier )
@@ -127,6 +144,8 @@ void ComicEngine::finished( ComicProvider *provider )
     setData( identifier, "Strip title", provider->stripTitle() );
     setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
     setData( identifier, "Identifier", provider->identifier() );
+    setData( identifier, "Title", provider->name() );
+    setData( identifier, "SuffixType", provider->suffixType() );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
@@ -138,6 +157,8 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "websiteUrl" ] = provider->websiteUrl().prettyUrl();
         info[ "nextIdentifier" ] = provider->nextIdentifier();
         info[ "previousIdentifier" ] = provider->previousIdentifier();
+        info[ "title" ] = provider->name();
+        info[ "suffixType" ] = provider->suffixType();
 
         //data that should be only written if available
         if ( !provider->comicAuthor().isEmpty() ) {
@@ -155,7 +176,6 @@ void ComicEngine::finished( ComicProvider *provider )
 
         CachedProvider::storeInCache( provider->identifier(), provider->image(), info );
     }
-
     provider->deleteLater();
 }
 

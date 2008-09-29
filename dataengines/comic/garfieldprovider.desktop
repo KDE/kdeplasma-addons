@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-ServiceTypes=Plasma/Comic
 X-KDE-Library=plasma_comic_garfieldprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
-X-KDE-PlasmaComicProvider-Identifier=garfield
+X-KDE-PluginInfo-Name=garfield
 Icon=plasma_comic_garfield
 
 Name=Garfield

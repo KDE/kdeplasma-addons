@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-ServiceTypes=Plasma/Comic
 X-KDE-Library=plasma_comic_calvinandhobbesprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
-X-KDE-PlasmaComicProvider-Identifier=calvinandhobbes
+X-KDE-PluginInfo-Name=calvinandhobbes
 Icon=plasma_comic_calvinandhobbes
 
 Name=Calvin and Hobbes

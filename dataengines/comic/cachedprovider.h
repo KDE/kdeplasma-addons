@@ -52,6 +52,12 @@ class CachedProvider : public ComicProvider
         IdentifierType identifierType() const;
 
         /**
+         * Returns the type of identifier that is used by this
+         * comic provider.
+         */
+        virtual QString suffixType() const;
+
+        /**
          * Returns the requested image.
          *
          * Note: This method returns only a valid image after the
@@ -93,6 +99,11 @@ class CachedProvider : public ComicProvider
          * Returns additionalText of the comic.
          */
         virtual QString additionalText() const;
+
+        /**
+         * Returns the name for the comic
+         */
+        virtual QString name() const;
 
         /**
          * Returns whether a comic with the given @p identifier is cached.

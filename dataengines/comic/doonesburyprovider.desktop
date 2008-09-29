@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceTypes=PlasmaComic/Plugin
+X-KDE-ServiceTypes=Plasma/Comic
 X-KDE-Library=plasma_comic_doonesburyprovider
 X-KDE-PlasmaComicProvider-SuffixType=Date
-X-KDE-PlasmaComicProvider-Identifier=doonesbury
+X-KDE-PluginInfo-Name=doonesbury
 Icon=plasma_comic_doonesbury
 
 Name=Doonesbury

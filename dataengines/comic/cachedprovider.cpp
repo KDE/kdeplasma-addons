@@ -101,6 +101,18 @@ QString CachedProvider::additionalText() const
     return settings.value( "additionalText", QString() ).toString();
 }
 
+QString CachedProvider::suffixType() const
+{
+    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "suffixType", QString() ).toString();
+}
+
+QString CachedProvider::name() const
+{
+    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "title", QString() ).toString();
+}
+
 void CachedProvider::triggerFinished()
 {
     emit finished( this );
@@ -123,7 +135,8 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
         QSettings settingsMain( pathMain + ".conf", QSettings::IniFormat );
 
         for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
-                if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "comicAuthor" ) ) {
+                if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "comicAuthor" ) ||
+                     ( i.key() == "title" ) || ( i.key() == "suffixType" ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );
