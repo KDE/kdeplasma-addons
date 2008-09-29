@@ -22,15 +22,17 @@
 #define CONFIGWIDGET_H
 
 #include <QtGui/QWidget>
+#include <Plasma/DataEngine>
 
 class ComicModel;
 class QCheckBox;
 class QComboBox;
+class QSortFilterProxyModel;
 
 class ConfigWidget : public QWidget
 {
     public:
-        ConfigWidget( QWidget *parent );
+        ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *parent );
         ~ConfigWidget();
 
         void setComicIdentifier( const QString &comic );
@@ -52,6 +54,7 @@ class ConfigWidget : public QWidget
         QCheckBox *mShowComicTitle;
         QCheckBox *mShowComicIdentifier;
         ComicModel *mModel;
+        QSortFilterProxyModel *mProxyModel;
 };
 
 #endif

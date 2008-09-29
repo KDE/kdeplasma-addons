@@ -21,24 +21,23 @@
 #include "configwidget.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
 
 #include <KLocale>
+#include <KIcon>
 #include <KServiceTypeTrader>
-
-#include "pluginmanager.h"
-
 
 class ComicModel : public QAbstractListModel
 {
     public:
-        ComicModel( QObject *parent = 0 )
+        ComicModel( const Plasma::DataEngine::Data &comics, QObject *parent = 0 )
             : QAbstractListModel( parent )
         {
-            mComics = PluginManager::Instance()->comics();
+            mComics = comics;
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -51,26 +50,26 @@ class ComicModel : public QAbstractListModel
 
         virtual QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const
         {
-            if ( !index.isValid() || index.row() >= mComics.count() )
+            if ( !index.isValid() || index.row() >= mComics.keys().count() )
                 return QVariant();
 
-            if ( role == Qt::DisplayRole )
-                return mComics[ index.row() ].title;
-            else if ( role == Qt::DecorationRole )
-                return mComics[ index.row() ].icon;
-            else if ( role == Qt::UserRole )
-                return mComics[ index.row() ].identifier;
-            else
+            if ( role == Qt::DisplayRole ) {
+                return mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 0 ];
+            } else if ( role == Qt::DecorationRole ) {
+                return KIcon(mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 1 ]);
+            } else if ( role == Qt::UserRole ) {
+                return mComics.keys()[ index.row() ];
+            } else {
                 return QVariant();
+            }
         }
 
     private:
-
-        QList<ComicEntry> mComics;
+        Plasma::DataEngine::Data mComics;
 };
 
 
-ConfigWidget::ConfigWidget( QWidget *parent )
+ConfigWidget::ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *parent )
     : QWidget( parent )
 {
     QGridLayout *layout = new QGridLayout( this );
@@ -92,8 +91,11 @@ ConfigWidget::ConfigWidget( QWidget *parent )
     layout->addWidget( mShowComicUrl, 3, 0, 1, 2 );
     layout->addWidget( mShowComicIdentifier, 4, 0, 1, 2 );
 
-    mModel = new ComicModel( this );
-    mComicIdentifier->setModel( mModel );
+    mModel = new ComicModel( comics, this );
+    mProxyModel = new QSortFilterProxyModel( this );
+    mProxyModel->setSourceModel( mModel );
+    mProxyModel->sort(0, Qt::AscendingOrder);
+    mComicIdentifier->setModel( mProxyModel );
 }
 
 ConfigWidget::~ConfigWidget()
@@ -102,8 +104,8 @@ ConfigWidget::~ConfigWidget()
 
 void ConfigWidget::setComicIdentifier( const QString &comic )
 {
-    for ( int i = 0; i < mModel->rowCount(); ++i ) {
-        const QModelIndex index = mModel->index( i, 0 );
+  for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+        const QModelIndex index = mProxyModel->index( i, 0 );
         if ( index.data( Qt::UserRole ).toString() == comic ) {
             mComicIdentifier->setCurrentIndex( i );
             break;
@@ -113,7 +115,7 @@ void ConfigWidget::setComicIdentifier( const QString &comic )
 
 QString ConfigWidget::comicIdentifier() const
 {
-    const QModelIndex index = mModel->index( mComicIdentifier->currentIndex(), 0 );
+    const QModelIndex index = mProxyModel->index( mComicIdentifier->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
 }
 

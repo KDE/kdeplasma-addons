@@ -41,7 +41,6 @@
 
 #include "configwidget.h"
 #include "fullviewwidget.h"
-#include "pluginmanager.h"
 
 static const int s_arrowWidth = 30;
 
@@ -137,6 +136,8 @@ void ComicApplet::init()
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+
+    mComics = dataEngine( "comic" )->query( "providers" );
 }
 
 ComicApplet::~ComicApplet()
@@ -156,8 +157,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mStripTitle = data[ "Strip title" ].toString();
     mAdditionalText = data[ "Additional text" ].toString();
     mComicAuthor = data[ "Comic Author" ].toString();
-    mComicTitle = PluginManager::Instance()->comicTitle( mComicIdentifier );
-    mSuffixType = PluginManager::Instance()->suffixType( mComicIdentifier );
+    mComicTitle = data[ "Title" ].toString();
+    mSuffixType = data[ "SuffixType" ].toString();
 
     QString temp = data[ "Identifier" ].toString();
     int index = temp.indexOf( ':' );
@@ -184,7 +185,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
-    mConfigWidget = new ConfigWidget( parent );
+    mConfigWidget = new ConfigWidget( mComics, parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );

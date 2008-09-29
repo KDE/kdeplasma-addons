@@ -102,6 +102,7 @@ class ComicApplet : public Plasma::Applet
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
+        Plasma::DataEngine::Data mComics;
         QMap< QString, int > mMaxStripNum;
 };
 
