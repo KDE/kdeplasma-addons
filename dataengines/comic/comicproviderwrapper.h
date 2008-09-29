@@ -36,12 +36,12 @@ class ImageWrapper : public QObject
         Q_PROPERTY( QImage image READ image )
         Q_PROPERTY( QByteArray rawData READ rawData WRITE setRawData )
     public:
-        QImage image() { return QImage::fromData( ba ); };
-        QByteArray rawData() { return ba; };
-        void setRawData( const QByteArray &rawData ) { ba = rawData; };
+        QImage image() const;
+        QByteArray rawData() const;
+        void setRawData( const QByteArray &rawData );
 
     private:
-        QByteArray ba;
+        QByteArray mData;
 };
 
 class ComicProviderWrapper : public QObject

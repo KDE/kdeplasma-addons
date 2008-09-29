@@ -22,7 +22,7 @@
 #include "comicprovider.h"
 #include "comicproviderwrapper.h"
 
-#include <QImage>
+#include <QtGui/QImage>
 #include <KUrl>
 #include "Plasma/PackageStructure"
 
@@ -30,6 +30,7 @@ class ComicProviderKross : public ComicProvider
 {
         friend class ComicProviderWrapper;
         Q_OBJECT
+
     public:
         ComicProviderKross( QObject *parent, const QVariantList &args );
         virtual ~ComicProviderKross();

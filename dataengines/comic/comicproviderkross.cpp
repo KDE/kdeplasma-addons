@@ -24,8 +24,7 @@ COMICPROVIDER_EXPORT_PLUGIN( ComicProviderKross, "ComicProviderKross", "" )
 Plasma::PackageStructure::Ptr ComicProviderKross::m_packageStructure( 0 );
 
 ComicProviderKross::ComicProviderKross( QObject *parent, const QVariantList &args )
-: ComicProvider( parent, args )
-, m_wrapper( this )
+    : ComicProvider( parent, args ), m_wrapper( this )
 {
 }
 
@@ -55,7 +54,7 @@ QString ComicProviderKross::identifier() const
 
 QString ComicProviderKross::nextIdentifier() const
 {
-    QString result = m_wrapper.nextIdentifier();
+    const QString result = m_wrapper.nextIdentifier();
     if ( !m_wrapper.functionCalled() ) {
         return ComicProvider::nextIdentifier();
     }
@@ -64,7 +63,7 @@ QString ComicProviderKross::nextIdentifier() const
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    QString result = m_wrapper.previousIdentifier();
+    const QString result = m_wrapper.previousIdentifier();
     if ( !m_wrapper.functionCalled() ) {
         return ComicProvider::previousIdentifier();
     }
@@ -73,7 +72,7 @@ QString ComicProviderKross::previousIdentifier() const
 
 QString ComicProviderKross::firstStripIdentifier() const
 {
-    QString result = m_wrapper.firstStripIdentifier();
+    const QString result = m_wrapper.firstStripIdentifier();
     if ( !m_wrapper.functionCalled() ) {
         return ComicProvider::firstStripIdentifier();
     }

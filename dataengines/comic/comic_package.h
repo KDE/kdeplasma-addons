@@ -23,8 +23,8 @@
 
 class ComicPackage : public Plasma::PackageStructure
 {
-public:
-    explicit ComicPackage( QObject *parent = 0, QVariantList args = QVariantList() );
+    public:
+        explicit ComicPackage( QObject *parent = 0, QVariantList args = QVariantList() );
 };
 
 #endif

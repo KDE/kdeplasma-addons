@@ -30,11 +30,27 @@
 
 QStringList ComicProviderWrapper::m_extensions;
 
+QImage ImageWrapper::image() const
+{
+    return QImage::fromData( mData );
+}
+
+QByteArray ImageWrapper::rawData() const
+{
+    return mData;
+}
+
+void ImageWrapper::setRawData( const QByteArray &rawData )
+{
+    mData = rawData;
+}
+
+
 ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
-: QObject( parent )
-, m_action( 0 )
-, m_provider( parent )
-, m_useDefaultImageHandler( true )
+    : QObject( parent ),
+      m_action( 0 ),
+      m_provider( parent ),
+      m_useDefaultImageHandler( true )
 {
     QTimer::singleShot( 0, this, SLOT( init() ) );
 }
@@ -45,8 +61,7 @@ ComicProviderWrapper::~ComicProviderWrapper()
 
 void ComicProviderWrapper::init()
 {
-    QString path = KStandardDirs::locate( "data",
-            "plasma/comics/" + m_provider->pluginName() + "/" );
+    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + m_provider->pluginName() + "/" );
     Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
     structure->setPath( path );
     Plasma::Package *package = new Plasma::Package( path, structure );
@@ -54,8 +69,8 @@ void ComicProviderWrapper::init()
     if ( package->isValid() ) {
         // package->filePath( "mainscript" ) returns empty if it does not exist
         // We want to test extensions supported by kross with mainscript
-        QString mainscript = package->path() + structure->contentsPrefix() +
-                             structure->path( "mainscript" );
+        const QString mainscript = package->path() + structure->contentsPrefix() +
+                                   structure->path( "mainscript" );
 
         QFileInfo info( mainscript );
         for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {

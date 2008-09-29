@@ -17,7 +17,7 @@
  */
 
 #include <QtCore/QDate>
-#include <QFileInfo>
+#include <QtCore/QFileInfo>
 
 #include <KUrl>
 #include <KServiceTypeTrader>
