@@ -60,6 +60,7 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 Twitter::Twitter(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_service(0),
+      m_profileService(0),
       m_lastTweet(0),
       m_wallet(0),
       m_walletWait(None),
@@ -629,6 +630,17 @@ void Twitter::downloadHistory()
     cg.writeEntry("password", m_password);
     m_service->startOperationCall(cg);
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
+
+    //get the profile to retrieve the user icon
+    QString profileQuery(QString("Profile:%1").arg(m_username));
+    m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
+
+    delete m_profileService;
+    Plasma::Service *m_profileService = m_engine->serviceForSource(profileQuery);
+    KConfigGroup profileConf = m_profileService->operationDescription("auth");
+    profileConf.writeEntry("password", m_password);
+    m_profileService->startOperationCall(profileConf);
+    connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 }
 
 void Twitter::serviceFinished(Plasma::ServiceJob *job)

@@ -71,15 +71,22 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
-TimelineSource::TimelineSource(const QString &who, bool includeFriends, QObject* parent)
+TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObject* parent)
     : Plasma::DataContainer(parent),
       m_job(0)
 {
     // set up the url
-    if (includeFriends) {
+    switch (requestType) {
+    case Profile:
+        m_url = KUrl(QString("http://twitter.com/users/show/%1.xml").arg(who));
+        break;
+    case TimelineWithFriends:
         m_url = KUrl("http://twitter.com/statuses/friends_timeline.xml");
-    } else {
+        break;
+    case Timeline:
+    default:
         m_url = KUrl("http://twitter.com/statuses/user_timeline.xml");
+        break;
     }
 
     m_url.setUser(who);

@@ -74,7 +74,13 @@ class TimelineSource : public Plasma::DataContainer, QXmlDefaultHandler
     Q_OBJECT
 
 public:
-    TimelineSource(const QString &who, bool includeFriends, QObject* parent);
+    enum RequestType {
+        Timeline = 0,
+        TimelineWithFriends,
+        Profile
+    };
+
+    TimelineSource(const QString &who, RequestType requestType, QObject* parent);
     ~TimelineSource();
 
     void update();

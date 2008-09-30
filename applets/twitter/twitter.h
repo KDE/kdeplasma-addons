@@ -138,6 +138,7 @@ class Twitter : public Plasma::Applet
 
         Plasma::DataEngine *m_engine;
         Plasma::Service *m_service;
+        Plasma::Service *m_profileService;
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;

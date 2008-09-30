@@ -54,7 +54,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
 
-    if (!name.startsWith("Timeline")) {
+    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:")  && !name.startsWith("Profile:")) {
         return false;
     }
 
@@ -83,29 +83,28 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 {
     kDebug() << name;
     //right now it only makes sense to do an update on timelines
-    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:")) {
+    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:") && !name.startsWith("Profile:")) {
         return false;
     }
 
-    bool includeFriends = false;
     QStringList tokens = name.split(':');
     if (tokens.count() != 2) {
         return false;
     }
 
+    TimelineSource::RequestType requestType = TimelineSource::Timeline;
+
     QString who = tokens.at(1);
     if (tokens.at(0) == "TimelineWithFriends") {
-        includeFriends = true;
+        requestType = TimelineSource::TimelineWithFriends;
+    } else if (tokens.at(0) == "Profile") {
+        requestType = TimelineSource::Profile;
     }
-
-    // Get own image for the case that the timeline has no own tweet
-    //FIXME
-    //getUserInfo(who);
 
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
 
     if (!source) {
-        source = new TimelineSource(who, includeFriends, this);
+        source = new TimelineSource(who, requestType, this);
         source->setObjectName(name);
         addSource(source);
     }
