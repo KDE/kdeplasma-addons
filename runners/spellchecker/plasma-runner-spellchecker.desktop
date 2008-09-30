@@ -27,6 +27,7 @@ Comment[zh_CN]=检查单词拼写
 Comment[zh_TW]=檢查拼字
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
+Icon=tools-check-spelling
 X-KDE-Library=krunner_spellcheckrunner
 X-KDE-PluginInfo-Author=Ryan P. Bitanga
 X-KDE-PluginInfo-Email=ryan.bitanga@gmail.com
