@@ -23,7 +23,7 @@
 
 #include <QImage>
 
-class KUrl;
+#include <KUrl>
 
 /**
  * @brief Picture choice
@@ -35,22 +35,24 @@ class KUrl;
 
 class Picture
 {
-    public:
-	Picture();
-	~Picture();
-	/**
-	* Set Default picture with written message @p message if no picture or folder was choosen
-	* by the user
-	**/
-	QImage defaultPicture(const QString &message);
-	/**
-	* Set picture from location @p currentUrl
-	**/
-	QImage setPicture(const KUrl &currentUrl);
+public:
+    Picture();
+    ~Picture();
+    /**
+    * Set Default picture with written message @p message if no picture or folder was choosen
+    * by the user
+    **/
+    QImage defaultPicture(const QString &message);
+    /**
+    * Set picture from location @p currentUrl
+    **/
+    QImage setPicture(const KUrl &currentUrl);
 
-    private:
-	QImage getPicture() const {return m_picture;};
-	QImage m_picture;
+private:
+    QImage getPicture() const {
+        return m_picture;
+    };
+    QImage m_picture;
 
 };
 

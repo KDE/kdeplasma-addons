@@ -22,6 +22,7 @@
 #ifndef FRAME_H
 #define FRAME_H
 
+#include <QAction>
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsItem>
@@ -39,72 +40,77 @@ class SlideShow;
 class Frame : public Plasma::Applet
 {
     Q_OBJECT
-    public:
-        Frame(QObject *parent, const QVariantList &args);
-        ~Frame();
+public:
+    Frame(QObject *parent, const QVariantList &args);
+    ~Frame();
 
-        void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                            const QRect &contentsRect);
-        void init();
-        QSizeF contentSizeHint() const;
+    void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                        const QRect &contentsRect);
+    void init();
+    QSizeF contentSizeHint() const;
+    virtual QList<QAction*> contextualActions();
 
-    public slots:
-        void createConfigurationInterface( KConfigDialog *parent );
-	void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
+public slots:
+    void createConfigurationInterface(KConfigDialog *parent);
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
-    protected Q_SLOTS:
-        void dropEvent(QGraphicsSceneDragDropEvent *event);
-        void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-        void configAccepted();
-        void updatePicture();
+protected Q_SLOTS:
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void configAccepted();
+    void updatePicture();
+    void slotOpenPicture();
 
-    private Q_SLOTS:
-        void addDir();
-        void removeDir();
-        void updateButtons();
+private Q_SLOTS:
+    void addDir();
+    void removeDir();
+    void updateButtons();
 
-    protected:
-        void constraintsEvent(Plasma::Constraints constraints);
+protected:
+    void constraintsEvent(Plasma::Constraints constraints);
+    void createMenu();
 
-    private:
-        void paintCache(const QStyleOptionGraphicsItem *option,
-                        const QSize &contentsSize);
-        void initSlideShow();
+private:
+    void paintCache(const QStyleOptionGraphicsItem *option,
+                    const QSize &contentsSize);
+    void initSlideShow();
 
-        /// The current color of the frame
-        QColor m_frameColor;
-	/// Configuration dialog
-        ConfigDialog *m_configDialog; 
-        /// true if the user wants a frame. If false, there's only the black border around the picture
-        bool m_frame;
-        /// If true, the frame will have rounded corners
-        bool m_roundCorners;
-        /// If true, smooth scaling (better visual results, but more cpu intensive) is used for resizing
-        bool m_smoothScaling;
-        /// If true, the picture will have a drop shadow.
-        bool m_shadow;
-	/// PoTD
-	QString m_potdProvider;
-	bool m_potd;
-        /// Stores the current picture URL when slideShow is false. Wikipedia Picture of the Day is default.
-        KUrl m_currentUrl;
-        /// The current slideshow folder
-        QStringList m_slideShowPaths;
-        unsigned int m_slideNumber;
-        QTimer *m_slideShowTimer;
-        int m_slideshowTime;
-        /// The current picture
-        QImage m_picture;
-        /// Off-Screen pixmap
-        QPixmap m_pixmapCache;
-        /// Frame & shadow outline thickness
-        int m_frameOutline;
-        int m_swOutline;
-        /// Slideshow
-        bool m_slideShow;
-        bool m_random;
-        bool m_recursiveSlideShow;
-        SlideShow* m_mySlideShow;
+    /// The current color of the frame
+    QColor m_frameColor;
+    /// Configuration dialog
+    ConfigDialog *m_configDialog;
+    /// true if the user wants a frame. If false, there's only the black border around the picture
+    bool m_frame;
+    /// If true, the frame will have rounded corners
+    bool m_roundCorners;
+    /// If true, smooth scaling (better visual results, but more cpu intensive) is used for resizing
+    bool m_smoothScaling;
+    /// If true, the picture will have a drop shadow.
+    bool m_shadow;
+    /// PoTD
+    QString m_potdProvider;
+    bool m_potd;
+    /// Stores the current picture URL when slideShow is false. Wikipedia Picture of the Day is default.
+    KUrl m_currentUrl;
+    /// The current slideshow folder
+    QStringList m_slideShowPaths;
+    unsigned int m_slideNumber;
+    QTimer *m_slideShowTimer;
+    int m_slideshowTime;
+    /// The current picture
+    QImage m_picture;
+    /// Off-Screen pixmap
+    QPixmap m_pixmapCache;
+    /// The action list for the context menu
+    QList<QAction*> m_actions;
+    /// Frame & shadow outline thickness
+    int m_frameOutline;
+    int m_swOutline;
+    /// Slideshow
+    bool m_slideShow;
+    bool m_random;
+    bool m_recursiveSlideShow;
+    SlideShow* m_mySlideShow;
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)

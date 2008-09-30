@@ -25,43 +25,43 @@
 class ConfigDialog : public QWidget
 {
     Q_OBJECT
-    public:
-        ConfigDialog( QWidget *parent );
-        ~ConfigDialog();
-	// Appearance
-	/// Round corners for the frame
-	void setRoundCorners(bool round);
-        bool roundCorners() const;
-	/// Randomness for the slideshow
-	void setRandom(bool random);
-        bool random() const;
-	/// Smooth scaling
-	void setSmoothScaling(bool smooth);
-	bool smoothScaling() const;
-	/// Set a shadow for the frame
-	void setShadow(bool round);
-        bool shadow() const;
-	/// Show the frame or not
-	void setShowFrame(bool show);
-	bool showFrame() const;
-	/// Frame Color
-	void setFrameColor(const QColor& frameColor);
-	QColor frameColor() const;
-	// Static Picture
-	void setCurrentUrl(const KUrl& currentUrl);
-	KUrl currentUrl() const;
-        /// Designer Config file
-        Ui::config ui;
-	/// Image Preview
-	QLabel *m_preview;
-	/// Allow to preview each new chosen picture
-	void previewPicture(const QImage &pix);
+public:
+    ConfigDialog(QWidget *parent);
+    ~ConfigDialog();
+    // Appearance
+    /// Round corners for the frame
+    void setRoundCorners(bool round);
+    bool roundCorners() const;
+    /// Randomness for the slideshow
+    void setRandom(bool random);
+    bool random() const;
+    /// Smooth scaling
+    void setSmoothScaling(bool smooth);
+    bool smoothScaling() const;
+    /// Set a shadow for the frame
+    void setShadow(bool round);
+    bool shadow() const;
+    /// Show the frame or not
+    void setShowFrame(bool show);
+    bool showFrame() const;
+    /// Frame Color
+    void setFrameColor(const QColor& frameColor);
+    QColor frameColor() const;
+    // Static Picture
+    void setCurrentUrl(const KUrl& currentUrl);
+    KUrl currentUrl() const;
+    /// Designer Config file
+    Ui::config ui;
+    /// Image Preview
+    QLabel *m_preview;
+    /// Allow to preview each new chosen picture
+    void previewPicture(const QImage &pix);
 
 private slots:
-	/// Update preview when URL changes via the file dialog
-	void changePreview(const KUrl &);
-	/// Update preview when URL changes via the combobox
-	void changePreview(const QString &);
+    /// Update preview when URL changes via the file dialog
+    void changePreview(const KUrl &);
+    /// Update preview when URL changes via the combobox
+    void changePreview(const QString &);
 
 };
 

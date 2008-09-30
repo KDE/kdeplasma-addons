@@ -30,27 +30,29 @@ class KUrl;
 
 class SlideShow
 {
-	public:
-		SlideShow();
-		~SlideShow();
-		
-		void setDirs(const QStringList &slideShowPaths, bool recursive = false);
-		void setImage(const QString &imagePath);
-		void setRandom(bool);
-		QImage getImage();
-		
-	private:
-		QStringList m_pictures;
-		QStringList m_filters;
-		int m_slideNumber;
-		bool useRandom;
-		
-		void addImage(const QString &imagePath);
-		void addDir(const QString &path);
-		void addRecursiveDir(const QString &path);
-		KUrl getUrl();
-		QList<int> indexList;
-		int randomInt;
+public:
+    SlideShow();
+    ~SlideShow();
+
+    void setDirs(const QStringList &slideShowPaths, bool recursive = false);
+    void setImage(const QString &imagePath);
+    void setRandom(bool);
+    QImage getImage();
+    KUrl getCurrentUrl();
+
+private:
+    QStringList m_pictures;
+    QStringList m_filters;
+    int m_slideNumber;
+    bool useRandom;
+
+    void addImage(const QString &imagePath);
+    void addDir(const QString &path);
+    void addRecursiveDir(const QString &path);
+    KUrl getUrl();
+    QList<int> indexList;
+    int randomInt;
+    KUrl currentUrl;
 
 };
 

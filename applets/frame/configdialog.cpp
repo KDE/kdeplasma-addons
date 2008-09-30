@@ -24,11 +24,11 @@
 #include "configdialog.h"
 #include "picture.h"
 
-ConfigDialog::ConfigDialog( QWidget *parent )
-    : QWidget( parent )
+ConfigDialog::ConfigDialog(QWidget *parent)
+        : QWidget(parent)
 {
     ui.setupUi(this);
-    
+
     ui.addDirButton->setIcon(KIcon("list-add"));
     ui.removeDirButton->setIcon(KIcon("list-remove"));
     ui.slideShowDelay->setMinimumTime(QTime(0, 0, 1)); // minimum to 1 second
@@ -38,15 +38,15 @@ ConfigDialog::ConfigDialog( QWidget *parent )
     // Geometry of "display" part of monitor image: (23,14)-[151x115]
     ui.monitorLabel->setPixmap(QPixmap(monitorPath));
     ui.monitorLabel->setWhatsThis(i18n(
-        "This picture of a monitor contains a preview of "
-        "the picture you currently have in your frame."));
+                                      "This picture of a monitor contains a preview of "
+                                      "the picture you currently have in your frame."));
     m_preview = new QLabel(ui.monitorLabel);
     m_preview->setScaledContents(true);
-    m_preview->setGeometry(23,14,151,115);
+    m_preview->setGeometry(23, 14, 151, 115);
     m_preview->show();
 
-    connect(ui.picRequester, SIGNAL(urlSelected(const KUrl & )), this, SLOT(changePreview(const KUrl &)));
-    connect(ui.picRequester->comboBox(), SIGNAL(activated(const QString & )), this, SLOT(changePreview(const QString &)));
+    connect(ui.picRequester, SIGNAL(urlSelected(const KUrl &)), this, SLOT(changePreview(const KUrl &)));
+    connect(ui.picRequester->comboBox(), SIGNAL(activated(const QString &)), this, SLOT(changePreview(const QString &)));
 }
 
 ConfigDialog::~ConfigDialog()
@@ -115,7 +115,7 @@ KUrl ConfigDialog::currentUrl() const
 
 void ConfigDialog::previewPicture(const QImage &image)
 {
-    QImage scaledImage = image.scaled(QRect(23,14,151,115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    QImage scaledImage = image.scaled(QRect(23, 14, 151, 115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
     m_preview->setPixmap(QPixmap::fromImage(scaledImage));
 }
 

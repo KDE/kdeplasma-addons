@@ -34,6 +34,7 @@
 #include <KDebug>
 #include <KConfigDialog>
 #include <KSharedConfig>
+#include <KRun>
 #include <KUrl>
 #include <KDirSelectDialog>
 #include <KServiceTypeTrader>
@@ -47,8 +48,8 @@
 #include "slideshow.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-      m_configDialog( 0 )
+        : Plasma::Applet(parent, args),
+        m_configDialog(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -56,7 +57,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setCacheMode(QGraphicsItem::NoCache);
     resize(400, 300);
     m_mySlideShow = new SlideShow();
-    if ( args.count() ) {
+    if (args.count()) {
         m_currentUrl = args.value(0).toString();
     } else {
         m_currentUrl = KUrl("Default");
@@ -123,6 +124,38 @@ void Frame::init()
         cg.writeEntry("url", m_currentUrl);
         emit configNeedsSaving();
     }
+
+    createMenu();
+}
+
+void Frame::createMenu()
+{
+    if (m_slideShow || m_currentUrl.path() != "Default") {
+        kDebug() << "Current path: " << m_currentUrl.path();
+        QAction* openPicture = new QAction(SmallIcon("image-x-generic"),i18n("&Open picture..."), this);
+        m_actions.append(openPicture);
+        connect(openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
+    }
+}
+
+QList<QAction*> Frame::contextualActions()
+{
+  return m_actions;
+}
+
+void Frame::slotOpenPicture()
+{
+    KUrl url;
+
+    if (m_slideShow) {
+        url = m_mySlideShow->getCurrentUrl();
+    } else {
+        url = m_currentUrl;
+    }
+
+    if (url.path() != "Default") {
+        KRun* startUrl = new KRun(url, 0);
+    }
 }
 
 void Frame::constraintsEvent(Plasma::Constraints constraints)
@@ -132,14 +165,15 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-QSizeF Frame::contentSizeHint() const {
+QSizeF Frame::contentSizeHint() const
+{
     if (!m_picture.isNull()) {
         QSizeF sizeHint;
         qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
         if (m_picture.width() > m_picture.height()) {
-            sizeHint = QSizeF( maxSize, (maxSize / m_picture.width()) * m_picture.height() );
+            sizeHint = QSizeF(maxSize, (maxSize / m_picture.width()) * m_picture.height());
         } else {
-            sizeHint = QSizeF( (maxSize / m_picture.height()) * m_picture.width(), maxSize );
+            sizeHint = QSizeF((maxSize / m_picture.height()) * m_picture.width(), maxSize);
         }
         return sizeHint;
     } else {
@@ -191,50 +225,50 @@ void Frame::updateButtons()
 
 void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
-    m_configDialog = new ConfigDialog( parent );
+    m_configDialog = new ConfigDialog(parent);
 
-    KService::List services = KServiceTypeTrader::self()->query( "PlasmaPoTD/Plugin");
-    foreach (const KService::Ptr &service, services) {
-	const QString service_name( service->name() );
-	const QVariant service_identifier( service->property( "X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String ).toString() );
-	m_configDialog->ui.potdComboBox->insertItem( m_configDialog->ui.potdComboBox->count(), service_name, service_identifier );
+    KService::List services = KServiceTypeTrader::self()->query("PlasmaPoTD/Plugin");
+    foreach(const KService::Ptr &service, services) {
+        const QString service_name(service->name());
+        const QVariant service_identifier(service->property("X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String).toString());
+        m_configDialog->ui.potdComboBox->insertItem(m_configDialog->ui.potdComboBox->count(), service_name, service_identifier);
     }
 
-    QStandardItemModel* model = static_cast<QStandardItemModel*>( m_configDialog->ui.pictureComboBox->model() );
-    QStandardItem* item = model->item( 2 );
-    if ( services.isEmpty() )
-        item->setFlags( item->flags() & ~Qt::ItemIsEnabled );
+    QStandardItemModel* model = static_cast<QStandardItemModel*>(m_configDialog->ui.pictureComboBox->model());
+    QStandardItem* item = model->item(2);
+    if (services.isEmpty())
+        item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
     else
-        item->setFlags( item->flags() | Qt::ItemIsEnabled );
+        item->setFlags(item->flags() | Qt::ItemIsEnabled);
 
-    parent->setButtons(  KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage( m_configDialog, parent->windowTitle(), icon() );
-    parent->setDefaultButton( KDialog::Ok );
-    parent->showButtonSeparator( true );
-    connect( parent, SIGNAL( applyClicked() ), this, SLOT( configAccepted() ) );
-    connect( parent, SIGNAL( okClicked() ), this, SLOT( configAccepted() ) );
+    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    parent->addPage(m_configDialog, parent->windowTitle(), icon());
+    parent->setDefaultButton(KDialog::Ok);
+    parent->showButtonSeparator(true);
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
     connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
     connect(m_configDialog->ui.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
 
-    m_configDialog->setRoundCorners( m_roundCorners );
-    m_configDialog->setSmoothScaling( m_smoothScaling );
+    m_configDialog->setRoundCorners(m_roundCorners);
+    m_configDialog->setSmoothScaling(m_smoothScaling);
     m_configDialog->setShadow(m_shadow);
     m_configDialog->setShowFrame(m_frame);
     m_configDialog->setFrameColor(m_frameColor);
 
     if (m_slideShow)
-	m_configDialog->ui.pictureComboBox->setCurrentIndex(1);
+        m_configDialog->ui.pictureComboBox->setCurrentIndex(1);
     else if (m_potd)
-	m_configDialog->ui.pictureComboBox->setCurrentIndex(2);
+        m_configDialog->ui.pictureComboBox->setCurrentIndex(2);
     else
-	m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
+        m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
 
     m_configDialog->ui.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
     m_configDialog->ui.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
 
-    m_configDialog->ui.potdComboBox->setCurrentIndex( m_configDialog->ui.potdComboBox->findData(m_potdProvider) );
+    m_configDialog->ui.potdComboBox->setCurrentIndex(m_configDialog->ui.potdComboBox->findData(m_potdProvider));
 
     m_configDialog->setCurrentUrl(m_currentUrl);
     m_configDialog->ui.slideShowDirList->clear();
@@ -262,16 +296,15 @@ void Frame::configAccepted()
     m_frameColor = m_configDialog->frameColor();
     cg.writeEntry("frameColor", m_frameColor);
 
-    if (m_configDialog->ui.pictureComboBox->currentIndex() == 1)
-    {
-	m_slideShow = true;
-	m_potd = false;
+    if (m_configDialog->ui.pictureComboBox->currentIndex() == 1) {
+        m_slideShow = true;
+        m_potd = false;
     }  else if (m_configDialog->ui.pictureComboBox->currentIndex() == 2)   {
-	m_slideShow = false;
-	m_potd = true;
+        m_slideShow = false;
+        m_potd = true;
     }  else {
-	m_slideShow = false;
-	m_potd = false;
+        m_slideShow = false;
+        m_potd = false;
     }
 
     m_random = m_configDialog->random();
@@ -297,6 +330,9 @@ void Frame::configAccepted()
     cg.writeEntry("potdProvider", m_potdProvider);
     cg.writeEntry("potd", m_potd);
 
+    // Creates the menu if the settings have changed from "Default" to sth. else
+    createMenu();
+
     initSlideShow();
 
     emit configNeedsSaving();
@@ -309,18 +345,18 @@ void Frame::initSlideShow()
         m_mySlideShow->setRandom(m_random);
         m_slideShowTimer->start();
     } else if (m_potd) {
-        Plasma::DataEngine *engine = dataEngine( "potd" );
+        Plasma::DataEngine *engine = dataEngine("potd");
         if (!engine) {
-            kDebug()<<" Engine potd can't be created";
+            kDebug() << " Engine potd can't be created";
             return;
         }
         QDate mCurrentDate = QDate::currentDate();
-        const QString identifier = m_potdProvider + ':' + mCurrentDate.toString( Qt::ISODate );
+        const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
 
-        engine->disconnectSource( identifier, this );
-        engine->connectSource( identifier, this );
+        engine->disconnectSource(identifier, this);
+        engine->connectSource(identifier, this);
 
-        const Plasma::DataEngine::Data data = engine->query( identifier );
+        const Plasma::DataEngine::Data data = engine->query(identifier);
     } else {
         m_mySlideShow->setImage(m_currentUrl.path());
         m_slideShowTimer->stop();
@@ -369,7 +405,7 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
                            const QRect &rect)
 {
     if (m_pixmapCache.isNull() ||
-        geometry().toRect().size() != m_pixmapCache.size()) {
+            geometry().toRect().size() != m_pixmapCache.size()) {
         updateGeometry();
         paintCache(option, geometry().toRect().size());
     }
@@ -389,13 +425,13 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
     int swRoundness = roundingFactor + m_frameOutline / 2 * m_frame * m_roundCorners;
 
     QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
-                                                    -m_swOutline, -m_swOutline); //Pretty useless.
+                      -m_swOutline, -m_swOutline); //Pretty useless.
 
     Qt::TransformationMode transformationMode = m_smoothScaling ? Qt::SmoothTransformation : Qt::FastTransformation;
     //TODO check if correct
     QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
-                      frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
+                             frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 
     QPainter *p = new QPainter(&m_pixmapCache);
     QRect shadowRect;
@@ -423,7 +459,7 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
             p->setOpacity(0.7 * exp(-(i / (double)(m_swOutline / 3))));
             QPainterPath tr = Plasma::PaintUtils::roundedRectangle(shadowRect, swRoundness + i);
             p->drawPath(tr);
-            shadowRect.adjust(-1, -1, +1, +1);
+            shadowRect.adjust(-1, -1, + 1, + 1);
         }
     }
 
