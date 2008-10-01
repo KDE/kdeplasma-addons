@@ -1,6 +1,15 @@
 [Desktop Entry]
 Name=Comic
+Name[pt]=Banda Desenhada
+Name[pt_BR]=Banda Desenhada
+Name[uk]=Жарти
+Name[zh_TW]=漫畫
 Comment=Comic Package Structure
+Comment[nds]=Comic-Paketstruktuur
+Comment[pt]=Estrutura do Pacote de Banda Desenhada
+Comment[pt_BR]=Estrutura do Pacote de Banda Desenhada
+Comment[uk]=Структура пакунка жартів
+Comment[zh_TW]=漫畫套件結構
 Type=Service
 X-KDE-ServiceTypes=Plasma/PackageStructure
 

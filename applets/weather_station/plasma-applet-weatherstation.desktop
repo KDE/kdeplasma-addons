@@ -1,16 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=LCD Weather Station
-Name[el]=Μετεωρολογικός σταθμός LCD
-Name[es]=Estación del clima de cristal líquido
-Name[gl]=Parte meteorolóxico estilo LCD
-Name[nds]=LCD-Wederhuus
-Name[pt]=Estação Meteorológica LCD
-Name[pt_BR]=Estação Meteorológica LCD
-Name[sv]=Väderstation
-Name[uk]=Метеорологічна станція на дисплеї
-Name[x-test]=xxLCD Weather Stationxx
-Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
 Type=Service
 Icon=browser
