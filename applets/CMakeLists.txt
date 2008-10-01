@@ -7,6 +7,7 @@ endif(PLASMA_OPENGL_FOUND)
 
 if(QT_QTWEBKIT_FOUND)
   add_subdirectory(dict)
+  add_subdirectory(news)
 endif(QT_QTWEBKIT_FOUND)
 
 add_subdirectory(binary-clock)
@@ -31,3 +32,4 @@ add_subdirectory(timer)
 add_subdirectory(twitter)
 add_subdirectory(charselect)
 add_subdirectory(calendar)
+add_subdirectory(weather_station)
