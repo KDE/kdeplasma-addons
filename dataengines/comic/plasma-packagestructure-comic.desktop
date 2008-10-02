@@ -1,13 +1,14 @@
 [Desktop Entry]
 Name=Comic
 Name[pt]=Banda Desenhada
-Name[pt_BR]=Banda Desenhada
+Name[pt_BR]=Tirinha
 Name[uk]=Жарти
 Name[zh_TW]=漫畫
 Comment=Comic Package Structure
+Comment[gl]=Estrutura de paquete comic
 Comment[nds]=Comic-Paketstruktuur
 Comment[pt]=Estrutura do Pacote de Banda Desenhada
-Comment[pt_BR]=Estrutura do Pacote de Banda Desenhada
+Comment[pt_BR]=Estrutura do pacote de tirinha
 Comment[uk]=Структура пакунка жартів
 Comment[zh_TW]=漫畫套件結構
 Type=Service

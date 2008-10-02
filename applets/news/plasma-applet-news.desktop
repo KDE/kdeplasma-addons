@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=News
+Name[gl]=Novas
+Name[nds]=Narichten
+Name[pt]=Notícias
+Name[pt_BR]=Notícias
+Name[uk]=Новини
+Name[zh_TW]=新聞
 Comment=Show news from various sources.
+Comment[gl]=Mostra as novas de varias fontes.
+Comment[nds]=Narichten ut en Reeg Borns wiesen
+Comment[pt]=Mostrar notícias de várias fontes.
+Comment[pt_BR]=Mostra notícias de várias fontes.
+Comment[uk]=Показати новини з різноманітних джерел.
+Comment[zh_TW]=顯示不同的來源的新聞
 Type=Service
 Icon=application-rss+xml
 ServiceTypes=Plasma/Applet
