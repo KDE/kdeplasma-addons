@@ -153,12 +153,15 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
             return;
         }
     }
+
     QStringList separators;
-    separators << QString(CONVERSION_CHAR) << i18nc("amount of <unit1> in <unit2>", "in");
+    separators << QString(CONVERSION_CHAR) << i18nc("amount of <unit1> in <unit2>", "in")
+               << i18nc("amount of <unit1> as <unit2>", "as");
     QString s = cmd.get(StringParser::GetString);
     if (!s.isEmpty() && !separators.contains(s)) {
         unit1 += ' ' + s;
     }
+
     cmd.pass(separators);
     unit2 = cmd.rest();
     Value v = Converter::self()->convert(Value(value, unit1), unit2);
