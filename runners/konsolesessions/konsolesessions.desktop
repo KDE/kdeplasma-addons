@@ -2,6 +2,7 @@
 Name=Konsole Sessions
 Name[el]=Συνεδρίες Konsole
 Name[gl]=Sesións de Konsole
+Name[ja]=Konsole セッション
 Name[nds]=Konsole-Törns
 Name[pt]=Sessões do Konsole
 Name[pt_BR]=Sessões do Konsole
@@ -13,6 +14,7 @@ Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Konsole
 Comment[gl]=Fai parella coas sesión de Konsole
+Comment[ja]=Konsole のセッションを探します
 Comment[nds]=Kiekt na passen Konsole-Törns
 Comment[pt]=Corresponder às Sessões do Konsole
 Comment[pt_BR]=Corresponder às sessões do Konsole

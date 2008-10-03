@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=LCD Weather Station
 Name[gl]=Estación meteorolóxica LCD
+Name[ja]=LCD 気象レポート
 Name[nds]=LCD-Wederstatschoon
 Name[pt]=Estação Meteorológica LCD
 Name[pt_BR]=Estação meteorológica LCD
@@ -9,6 +10,7 @@ Name[uk]=Метеорологічна станція на дисплеї
 Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
 Comment[gl]=Boletíns meteorolóxicos cun estilo de pantalla LCD
+Comment[ja]=LCD 表示による気象レポート
 Comment[nds]=Wederberichten mit en LCD-Dorstellstil
 Comment[pt]=Boletins meteorológicos com um estilo de visualização LCD
 Comment[pt_BR]=Informações meteorológicas com um estilo de visualização LCD
