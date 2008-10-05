@@ -105,7 +105,7 @@ void Frame::init()
     m_random = cg.readEntry("random", false);
     m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
-    m_slideshowTime = cg.readEntry("slideshow time", 10); // default to 10 seconds
+    m_slideshowTime = cg.readEntry("slideshow time", 300); // default to 5 minutes
     m_currentUrl = cg.readEntry("url", m_currentUrl);
     m_potdProvider = cg.readEntry("potdProvider", "");
     m_potd = cg.readEntry("potd", false);
