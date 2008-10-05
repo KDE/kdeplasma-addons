@@ -218,10 +218,7 @@ void Frame::updateButtons()
 {
     int row = m_configDialog->ui.slideShowDirList->currentRow();
     m_configDialog->ui.removeDirButton->setEnabled(row != -1);
-
 }
-
-
 
 void Frame::createConfigurationInterface(KConfigDialog *parent)
 {
@@ -258,12 +255,13 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->setShowFrame(m_frame);
     m_configDialog->setFrameColor(m_frameColor);
 
-    if (m_slideShow)
+    if (m_slideShow) {
         m_configDialog->ui.pictureComboBox->setCurrentIndex(1);
-    else if (m_potd)
+    } else if (m_potd) {
         m_configDialog->ui.pictureComboBox->setCurrentIndex(2);
-    else
+    } else {
         m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
+    }
 
     m_configDialog->ui.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
     m_configDialog->ui.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
