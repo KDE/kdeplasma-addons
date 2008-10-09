@@ -3,6 +3,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PLASMA_INCLUDE_DIR})
 
 set(twitter_SRCS
     twitter.cpp)
+kde4_add_ui_files(twitter_SRCS configuration.ui)
 
 kde4_add_plugin(plasma_applet_twitter ${twitter_SRCS})
 target_link_libraries(plasma_applet_twitter ${PLASMA_LIBS} ${KDE4_KIO_LIBS})

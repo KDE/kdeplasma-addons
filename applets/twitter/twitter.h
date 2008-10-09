@@ -26,6 +26,8 @@
 #include <Plasma/Applet>
 #include <Plasma/DataEngine>
 
+#include "ui_configuration.h"
+
 class KLineEdit;
 class KTextEdit;
 class KTextBrowser;
@@ -151,6 +153,7 @@ class Twitter : public Plasma::Applet
         WalletWait m_walletWait;
 
         KColorScheme *m_colorScheme;
+        Ui::TwitterConfig configUi;
 };
 
 K_EXPORT_PLASMA_APPLET(twitter, Twitter)

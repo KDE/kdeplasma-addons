@@ -426,52 +426,24 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     connect( parent, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
 
     QWidget *configWidget = new QWidget();
+    configUi.setupUi(configWidget);
 
-    m_usernameEdit = new KLineEdit( configWidget );
-    m_passwordEdit = new KLineEdit( configWidget );
-    m_historySizeSpinBox = new QSpinBox( configWidget );
-    m_historySizeSpinBox->setSuffix(i18n(" tweets"));
-    m_historyRefreshSpinBox = new QSpinBox( configWidget );
-    m_historyRefreshSpinBox->setSuffix(i18n(" minutes"));
-    m_checkIncludeFriends = new QCheckBox( configWidget );
-
-    QLabel *usernameLabel = new QLabel( i18n("User name:"), configWidget );
-    QLabel *passwordLabel = new QLabel( i18n("Password:"), configWidget );
-    QLabel *historyLabel = new QLabel( i18n("Timeline size:"), configWidget );
-    QLabel *historyRefreshLabel = new QLabel( i18n("Timeline refresh:"), configWidget );
-    QLabel *friendsLabel = new QLabel( i18n("Show messages of friends:"), configWidget );
-
-    m_passwordEdit->setPasswordMode( true );
-
-    QGridLayout *layout = new QGridLayout( configWidget );
-    layout->addWidget( usernameLabel, 0, 0 );
-    layout->addWidget( m_usernameEdit, 0, 1 );
-    layout->addWidget( passwordLabel, 1, 0 );
-    layout->addWidget( m_passwordEdit, 1, 1 );
-    layout->addWidget( historyLabel, 2, 0 );
-    layout->addWidget( m_historySizeSpinBox, 2, 1 );
-    layout->addWidget( historyRefreshLabel, 3, 0 );
-    layout->addWidget( m_historyRefreshSpinBox, 3, 1 );
-    layout->addWidget( friendsLabel, 4, 0);
-    layout->addWidget( m_checkIncludeFriends, 4, 1 );
-
-    m_usernameEdit->setText( m_username );
-    m_passwordEdit->setText( m_password );
-    m_historySizeSpinBox->setValue( m_historySize );
-    m_historyRefreshSpinBox->setValue( m_historyRefresh );
-    m_checkIncludeFriends->setCheckState( m_includeFriends ? Qt::Checked : Qt::Unchecked );
+    configUi.usernameEdit->setText(m_username);
+    configUi.passwordEdit->setText(m_password);
+    configUi.historySizeSpinBox->setValue(m_historySize);
+    configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
+    configUi.checkIncludeFriends->setCheckState(m_includeFriends ? Qt::Checked : Qt::Unchecked);
 
     parent->addPage(configWidget, parent->windowTitle(), icon());
-
 }
 
 void Twitter::configAccepted()
 {
-    QString username = m_usernameEdit->text();
-    QString password = m_passwordEdit->text();
-    int historyRefresh = m_historyRefreshSpinBox->value();
-    int historySize = m_historySizeSpinBox->value();
-    bool includeFriends = (m_checkIncludeFriends->checkState() == Qt::Checked);
+    QString username = configUi.usernameEdit->text();
+    QString password = configUi.passwordEdit->text();
+    int historyRefresh = configUi.historyRefreshSpinBox->value();
+    int historySize = configUi.historySizeSpinBox->value();
+    bool includeFriends = configUi.checkIncludeFriends->isChecked();
     bool changed = false;
 
     KConfigGroup cg = config();
