@@ -169,20 +169,20 @@ void Twitter::getWallet()
         //user must be a dumbass. kill that old attempt.
         delete m_wallet;
     }
+
     QGraphicsView *v = view();
-    WId w;
-    if (!v) {
-        kDebug() << "eek! no view!";
-        w=0;
-    } else {
-        w=v->winId();
+    WId w = 0;
+    if (v) {
+        w = v->winId();
     }
-    m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),
-            w, KWallet::Wallet::Asynchronous );
+
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
+                                           w, KWallet::Wallet::Asynchronous);
+
     if (m_walletWait == Write) {
-        connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( writeWallet(bool) ) );
+        connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(writeWallet(bool)));
     } else {
-        connect( m_wallet, SIGNAL( walletOpened(bool) ), SLOT( readWallet(bool) ) );
+        connect(m_wallet, SIGNAL(walletOpened(bool)), SLOT(readWallet(bool)));
     }
 }
 
@@ -235,7 +235,7 @@ void Twitter::setAuthRequired(bool required)
 
 void Twitter::writeConfigPassword()
 {
-    kDebug();
+    //kDebug();
     if (KMessageBox::warningYesNo(0, i18n("Failed to access kwallet. Store password in config file instead?"))
             == KMessageBox::Yes) {
         KConfigGroup cg = config();
@@ -245,7 +245,7 @@ void Twitter::writeConfigPassword()
 
 void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << source;
+    //kDebug() << source;
     if (data.isEmpty()) {
         if (source.startsWith("Error")) {
             m_flash->kill(); //FIXME only clear it if it was showing an error msg
@@ -566,7 +566,7 @@ void Twitter::updateStatus()
 //what this really means now is 'reconnect to the timeline source'
 void Twitter::downloadHistory()
 {
-    kDebug() ;
+    //kDebug() ;
     if (m_username.isEmpty() || m_password.isEmpty()) {
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
@@ -583,6 +583,7 @@ void Twitter::downloadHistory()
     } else {
         query = QString("Timeline:%1");
     }
+
     query = query.arg(m_username);
     if (m_curTimeline != query) {
         //ditch the old one, if needed
@@ -592,7 +593,8 @@ void Twitter::downloadHistory()
         }
         m_curTimeline = query;
     }
-    kDebug() << "Connecting to source " << query;
+
+    //kDebug() << "Connecting to source " << query << "with refresh rate" << m_historyRefresh * 60 * 1000;
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
 
