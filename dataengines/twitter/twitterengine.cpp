@@ -39,7 +39,7 @@ TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     addSource(ImageSource::self());
-    setMinimumPollingInterval(2 * 1000);
+    setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
 }
 
 TwitterEngine::~TwitterEngine()
