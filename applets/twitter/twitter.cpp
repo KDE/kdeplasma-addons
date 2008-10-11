@@ -278,7 +278,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
         showTweets();
     } else if (source == "UserImages") {
-        foreach (QString user, data.keys()) {
+        foreach (const QString &user, data.keys()) {
             QPixmap pm = data[user].value<QPixmap>();
 
             if( !pm.isNull() ) {

@@ -97,7 +97,7 @@ void WeatherConfig::setData(const ConfigData& data)
     }
 
     pluginComboList->clear();
-    foreach(const QVariant item, c.ionPlugins) {
+    foreach(const QVariant &item, c.ionPlugins) {
         QStringList pluginInfo = item.toString().split("|");
         if (pluginInfo.count() > 1) {
             pluginComboList->addItem(pluginInfo[0], pluginInfo[1]);
@@ -358,7 +358,7 @@ void WeatherConfig::showAddPlaceDialog(const QStringList& tokens)
     m_amodel->setColumnCount(1);
     aui.foundPlacesTreeView->header()->setResizeMode(QHeaderView::ResizeToContents);
 
-    foreach(const QString item, tokens) {
+    foreach(const QString &item, tokens) {
         if (item.contains("place")) {
             placeflag = true;
             continue;

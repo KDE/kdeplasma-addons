@@ -97,7 +97,7 @@ const QStringList& ComicProviderWrapper::extensions() const
         QStringList list;
         QString wildcards;
 
-        foreach( QString interpretername, Kross::Manager::self().interpreters() ) {
+        foreach( const QString &interpretername, Kross::Manager::self().interpreters() ) {
             info = Kross::Manager::self().interpreterInfo( interpretername );
             wildcards = info->wildcard();
             wildcards.replace( "*", "" );

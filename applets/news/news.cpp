@@ -298,7 +298,7 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
         if (urls.count() > 0) {
             event->accept();
             m_feeds.clear();
-            foreach (KUrl feed, urls) {
+            foreach (const KUrl &feed, urls) {
                 m_feeds << feed.prettyUrl();
             }
             m_interval = 30;
@@ -322,7 +322,7 @@ void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         html += QString(HEADER_LINE).arg(data["link"].toString())
                                     .arg(data["title"].toString());
 
-        foreach (QVariant tmp, items) {
+        foreach (const QVariant &tmp, items) {
             QMap<QString, QVariant> item = tmp.toMap();
             if (item["time"].toUInt() != 0) {
                 columns = 2;
