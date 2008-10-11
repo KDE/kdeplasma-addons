@@ -161,10 +161,10 @@ QString ComicProviderWrapper::additionalText()
 
 void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
 {
-    if ( m_useDefaultImageHandler && id == Image ) {
+    if ( m_useDefaultImageHandler && id == imageEnum() ) {
         m_image = QImage::fromData( data );
         emit m_provider->finished( m_provider );
-    } else if ( id == Image ) {
+    } else if ( id == imageEnum() ) {
         m_krossImage.setRawData( data );
         callFunction( "pageRetrieved", QVariantList() << id <<
                       qVariantFromValue( qobject_cast<QObject*>( &m_krossImage ) ) );
