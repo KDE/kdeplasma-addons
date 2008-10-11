@@ -40,6 +40,7 @@ Paste::Paste(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(200, 300);
+    setPopupIcon("edit-paste");
 }
 
 Paste::~Paste()
