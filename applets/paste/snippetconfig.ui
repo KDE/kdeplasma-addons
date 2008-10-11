@@ -1,0 +1,145 @@
+<ui version="4.0" >
+ <author>Petri Damstén</author>
+ <class>SnippetConfig</class>
+ <widget class="QWidget" name="SnippetConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>562</width>
+    <height>433</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Configure Paste Snippets</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_3" >
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2" >
+     <item>
+      <widget class="QLabel" name="textsLabel" >
+       <property name="text" >
+        <string>&amp;Texts:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>list</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="list" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3" >
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2" >
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout" >
+         <item>
+          <widget class="QLabel" name="nameLabel" >
+           <property name="text" >
+            <string>&amp;Name:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>nameEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="nameEdit" />
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="KIconButton" name="iconButton" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="textLabel" >
+       <property name="text" >
+        <string>Text to be &amp;pasted:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>textEdit</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textEdit" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="lineWrapMode" >
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="acceptRichText" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addMacroButton" >
+       <property name="text" >
+        <string>&amp;Add macro</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" >
+       <item>
+        <widget class="QPushButton" name="addButton" >
+         <property name="text" >
+          <string>&amp;Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="removeButton" >
+         <property name="text" >
+          <string>&amp;Remove</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>list</tabstop>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>iconButton</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>removeButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

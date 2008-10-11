@@ -1,0 +1,99 @@
+<ui version="4.0" >
+ <class>AutoPasteConfig</class>
+ <widget class="QWidget" name="AutoPasteConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QCheckBox" name="autoPasteCheckBox" >
+       <property name="text" >
+        <string>Paste text automatically with:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KKeySequenceWidget" name="pasteKeyButton" />
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="appsLabel" >
+     <property name="text" >
+      <string>Use &amp;special keys for these apps:</string>
+     </property>
+     <property name="buddy" >
+      <cstring>appsTreeView</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeView" name="appsTreeView" >
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights" >
+      <bool>true</bool>
+     </property>
+     <property name="itemsExpandable" >
+      <bool>false</bool>
+     </property>
+     <property name="sortingEnabled" >
+      <bool>true</bool>
+     </property>
+     <property name="expandsOnDoubleClick" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item>
+      <widget class="QPushButton" name="addButton" >
+       <property name="text" >
+        <string>&amp;Add</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="editButton" >
+       <property name="text" >
+        <string>&amp;Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="removeButton" >
+       <property name="text" >
+        <string>&amp;Remove</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KKeySequenceWidget</class>
+   <extends>QWidget</extends>
+   <header>kkeysequencewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>autoPasteCheckBox</tabstop>
+  <tabstop>appsTreeView</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>editButton</tabstop>
+  <tabstop>removeButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

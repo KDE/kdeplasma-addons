@@ -1,0 +1,39 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Paste
+Name[el]=Επικόλληση
+Name[es]=Pegar
+Name[gl]=Apegar
+Name[nds]=Infögen
+Name[pt]=Colar
+Name[pt_BR]=Colar
+Name[sv]=Klistra in
+Name[uk]=Вставити
+Name[x-test]=xxPastexx
+Name[zh_TW]=貼上
+Comment=Paste text snippets
+Comment[el]=Επικόλληση δειγμάτων κειμένου
+Comment[es]=Pegar segmentos de texto
+Comment[gl]=Apega retallos de texto
+Comment[nds]=Textsnippels infögen
+Comment[pt]=Colar excertos de texto
+Comment[pt_BR]=Colar excertos de texto
+Comment[sv]=Klistra in textsnuttar
+Comment[uk]=Вставка уривків тексту
+Comment[x-test]=xxPaste text snippetsxx
+Comment[zh_TW]=貼上文字片段
+Type=Service
+Icon=edit-paste
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_paste
+X-KDE-PluginInfo-Author=Petri Damstén
+X-KDE-PluginInfo-Email=damu@iki.fi
+X-KDE-PluginInfo-Name=paste
+X-KDE-PluginInfo-Version=0.2
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
