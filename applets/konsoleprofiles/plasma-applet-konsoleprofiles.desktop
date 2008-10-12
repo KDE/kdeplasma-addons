@@ -2,6 +2,7 @@
 Name=Konsole Profiles
 Name[cs]=Profily Konsole
 Name[el]=Προφίλ Konsole
+Name[es]=Perfiles de Konsole
 Name[et]=Konsooli profiilid
 Name[ga]=Próifílí Konsole
 Name[gl]=Perfís de Konsole
@@ -17,6 +18,7 @@ Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
 Comment[cs]=Seznam a spouštění profilů Konsole
 Comment[el]=Εμφάνιση και εκτέλεση προφίλ της Konsole
+Comment[es]=Muestra e inicia perfiles de Konsole
 Comment[et]=Konsooli profiilide näitamine ja käivitamine
 Comment[gl]=Enumera e inicia perfís de Konsole
 Comment[ja]=Konsole のプロファイルを起動します

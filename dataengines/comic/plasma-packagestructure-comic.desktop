@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Comic
+Name[es]=Tebeos
 Name[ja]=漫画
 Name[pt]=Banda Desenhada
 Name[pt_BR]=Tirinha
@@ -7,6 +8,7 @@ Name[sv]=Serie
 Name[uk]=Жарти
 Name[zh_TW]=漫畫
 Comment=Comic Package Structure
+Comment[es]=Paquete de estructura de tebeos
 Comment[gl]=Estrutura de paquete comic
 Comment[nds]=Comic-Paketstruktuur
 Comment[pt]=Estrutura do Pacote de Banda Desenhada

@@ -1,27 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Paste
-Name[el]=Επικόλληση
-Name[es]=Pegar
-Name[gl]=Apegar
-Name[nds]=Infögen
-Name[pt]=Colar
-Name[pt_BR]=Colar
-Name[sv]=Klistra in
-Name[uk]=Вставити
-Name[x-test]=xxPastexx
-Name[zh_TW]=貼上
 Comment=Paste text snippets
-Comment[el]=Επικόλληση δειγμάτων κειμένου
-Comment[es]=Pegar segmentos de texto
-Comment[gl]=Apega retallos de texto
-Comment[nds]=Textsnippels infögen
-Comment[pt]=Colar excertos de texto
-Comment[pt_BR]=Colar excertos de texto
-Comment[sv]=Klistra in textsnuttar
-Comment[uk]=Вставка уривків тексту
-Comment[x-test]=xxPaste text snippetsxx
-Comment[zh_TW]=貼上文字片段
 Type=Service
 Icon=edit-paste
 ServiceTypes=Plasma/Applet

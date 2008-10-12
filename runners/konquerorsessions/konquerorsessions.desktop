@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Konqueror Sessions
 Name[el]=Συνεδρίες Konqueror
+Name[es]=Sesiones de Konqueror
 Name[gl]=Sesións de Konqueror
 Name[ja]=Konqueror セッション
 Name[nds]=Konqueror-Törns
@@ -13,6 +14,7 @@ Name[zh_CN]=Konqueror 会话
 Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Konqueror
+Comment[es]=Sesiones de Konqueror coincidentes
 Comment[gl]=Fai parella coas sesión de Konqueror
 Comment[ja]=Konqueror のセッションを探します
 Comment[nds]=Kiekt na passen Konqueror-Törns

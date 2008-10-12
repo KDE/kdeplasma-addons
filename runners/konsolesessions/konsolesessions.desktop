@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Konsole Sessions
 Name[el]=Συνεδρίες Konsole
+Name[es]=Sesiones de Konsole
 Name[gl]=Sesións de Konsole
 Name[ja]=Konsole セッション
 Name[nds]=Konsole-Törns
@@ -13,6 +14,7 @@ Name[zh_CN]=Konsole 会话
 Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Konsole
+Comment[es]=Sesiones de Konsole coincidentes
 Comment[gl]=Fai parella coas sesión de Konsole
 Comment[ja]=Konsole のセッションを探します
 Comment[nds]=Kiekt na passen Konsole-Törns

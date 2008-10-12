@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=News
+Name[es]=Noticias
 Name[gl]=Novas
 Name[ja]=ニュース
 Name[nds]=Narichten
@@ -10,6 +11,7 @@ Name[sv]=Nyheter
 Name[uk]=Новини
 Name[zh_TW]=新聞
 Comment=Show news from various sources.
+Comment[es]=Muestra noticias de varias fuentes.
 Comment[gl]=Mostra as novas de varias fontes.
 Comment[ja]=さまざまなソースからニュースを表示します
 Comment[nds]=Narichten ut en Reeg Borns wiesen

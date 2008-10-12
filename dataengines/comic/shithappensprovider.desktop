@@ -7,11 +7,13 @@ X-KDE-PluginInfo-Name=shithappens
 Icon=plasma_comic_shithappens
 
 Name=Shit Happens!
+Name[es]=¡Qué pasa!
 Name[gl]=Hai que roelo!
 Name[nds]=Schiet kummt vör!
 Name[x-test]=xxShit Happens!xx
 Name[zh_TW]=壞事會發生
 Comment=Shit Happens!
+Comment[es]=¡Qué pasa!
 Comment[gl]=Hai que roelo!
 Comment[nds]=Schiet kummt vör!
 Comment[x-test]=xxShit Happens!xx

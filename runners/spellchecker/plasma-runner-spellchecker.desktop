@@ -2,6 +2,7 @@
 Name=Spell Checker Runner
 Name[cs]=Kontrola pravopisu
 Name[el]=Εκτελεστής ορθογραφικού ελέγχου
+Name[es]=Ejecutar revisión ortográfica
 Name[et]=Õigekirja kontrollimise käivitaja
 Name[gl]=Executor de comprobación da ortografía
 Name[ja]=スペルチェッカー
@@ -16,6 +17,7 @@ Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
 Comment[cs]=Kontrola pravopisu
 Comment[el]=Ορθογραφικός έλεγχος μιας λέξης
+Comment[es]=Comprobar la ortografía de una palabra
 Comment[et]=Sõnade õigekirja kontroll
 Comment[gl]=Comproba a ortografía dunha palabra
 Comment[ja]=単語のスペルをチェックします

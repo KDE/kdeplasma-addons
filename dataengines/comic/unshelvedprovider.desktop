@@ -8,6 +8,7 @@ Icon=plasma_comic_unshelved
 
 Name=Unshelved Comics
 Name[cs]=Nezařazené
+Name[es]=Tebeos sin guardar
 Name[et]=Unshelved
 Name[nds]=Comics, de dat nich bi'n Koopmann gifft
 Name[x-test]=xxUnshelved Comicsxx
@@ -15,6 +16,7 @@ Name[zh_CN]=Unshelved 连环画
 Name[zh_TW]=Unshelved 漫畫
 Comment=Unshelved Comics
 Comment[cs]=Nezařazené
+Comment[es]=Tebeos sin guardar
 Comment[et]=Unshelved
 Comment[nds]=Comics, de dat nich bi'n Koopmann gifft
 Comment[x-test]=xxUnshelved Comicsxx
