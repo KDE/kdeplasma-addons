@@ -31,6 +31,7 @@ class QGraphicsProxyWidget;
 namespace Plasma
 {
     class PushButton;
+    class Label;
 }
 
 class CalculatorApplet : public Plasma::PopupApplet
@@ -74,7 +75,7 @@ private:
     calcOperator previousMulDivOperation;
     bool waitingForDigit;
 
-    QLabel      *mOutputDisplay;
+    Plasma::Label      *mOutputDisplay;
     Plasma::PushButton *mButtonDigit[10];
     Plasma::PushButton *mButtonDecimal;
     Plasma::PushButton *mButtonAdd;
