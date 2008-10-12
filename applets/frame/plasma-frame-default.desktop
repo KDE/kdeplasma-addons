@@ -75,7 +75,7 @@ Comment[wa]=Håynêye les fotos k' vos veyoz voltî
 Comment[x-test]=xxDisplay your favorite picturesxx
 Comment[zh_CN]=显示您喜欢的图片
 Comment[zh_TW]=顯示您最愛的圖片
-Icon=image-jpeg2000
+Icon=view-preview
 Type=Service
 X-Plasma-DropMimeTypes=image/jpeg,image/png
 

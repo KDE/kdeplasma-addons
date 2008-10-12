@@ -24,7 +24,7 @@ Comment[uk]=Просторова модель Землі
 Comment[x-test]=xx3D model of the Earthxx
 Comment[zh_CN]=三维地球模型
 Comment[zh_TW]=地球的立體模型
-Icon=world
+Icon=applications-internet
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
