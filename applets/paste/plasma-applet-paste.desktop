@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Paste
+Name[pt]=Colar
+Name[pt_BR]=Colar
+Name[sv]=Klistra in
+Name[uk]=Вставка
+Name[zh_TW]=貼上
 Comment=Paste text snippets
+Comment[pt]=Colar excertos de texto
+Comment[pt_BR]=Colar os fragmentos de texto
+Comment[sv]=Klistra in textsnuttar
+Comment[uk]=Вставка уривків тексту
+Comment[zh_TW]=貼上文字片段
 Type=Service
 Icon=edit-paste
 ServiceTypes=Plasma/Applet
