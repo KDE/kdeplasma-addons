@@ -271,10 +271,21 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, parent->windowTitle(), "notes");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+
+    QButtonGroup *fontSizeGroup = new QButtonGroup();
+    fontSizeGroup->addButton(ui.autoFont);
+    fontSizeGroup->addButton(ui.customFont);
+
     ui.textColorButton->setColor(m_textColor);
-    ui.textFontButton->setFont(m_textEdit->nativeWidget()->font());
+    ui.fontStyleComboBox->setCurrentFont(m_textEdit->nativeWidget()->font());
+    ui.fontBoldCheckBox->setChecked(m_textEdit->nativeWidget()->font().bold());
+    ui.fontItalicCheckBox->setChecked(m_textEdit->nativeWidget()->font().italic());
     ui.autoFont->setChecked(m_autoFont);
+    ui.autoFontPercent->setEnabled(m_autoFont);
+    ui.customFont->setChecked(!m_autoFont);
+    ui.customFontSizeSpinBox->setEnabled(!m_autoFont);
     ui.autoFontPercent->setValue(m_autoFontPercent);
+    ui.customFontSizeSpinBox->setValue(20);
     ui.checkSpelling->setChecked(m_checkSpelling);
 }
 
@@ -283,7 +294,10 @@ void Notes::configAccepted()
     KConfigGroup cg = config();
     bool changed = false;
 
-    QFont newFont = ui.textFontButton->font();
+    QFont newFont = ui.fontStyleComboBox->currentFont();
+    newFont.setBold(ui.fontBoldCheckBox->isChecked());
+    newFont.setItalic(ui.fontItalicCheckBox->isChecked());
+    newFont.setPointSize(ui.customFontSizeSpinBox->value());
     if (m_font != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
