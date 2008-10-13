@@ -112,6 +112,8 @@ class Notes : public Plasma::Applet
 
         QTimer m_saveTimer;
         QFont m_font;
+        int m_customFontSize;
+        bool m_useThemeColor;
         QColor m_textColor;
         QString m_color;
 

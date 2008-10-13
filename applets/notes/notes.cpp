@@ -177,8 +177,11 @@ void Notes::init()
     }
 
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
+    m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
+
+    m_useThemeColor = cg.readEntry("useThemeColor", true);
 
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
@@ -213,7 +216,7 @@ int Notes::fontSize()
         int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100);
         return qMax(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
     } else {
-        return m_font.pointSize();
+        return m_customFontSize;
     }
 }
 
@@ -285,7 +288,9 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     ui.customFont->setChecked(!m_autoFont);
     ui.customFontSizeSpinBox->setEnabled(!m_autoFont);
     ui.autoFontPercent->setValue(m_autoFontPercent);
-    ui.customFontSizeSpinBox->setValue(20);
+    ui.customFontSizeSpinBox->setValue(m_customFontSize);
+    ui.useThemeColor->setChecked(m_useThemeColor);
+    ui.useCustomColor->setChecked(!m_useThemeColor);
     ui.checkSpelling->setChecked(m_checkSpelling);
 }
 
@@ -297,13 +302,19 @@ void Notes::configAccepted()
     QFont newFont = ui.fontStyleComboBox->currentFont();
     newFont.setBold(ui.fontBoldCheckBox->isChecked());
     newFont.setItalic(ui.fontItalicCheckBox->isChecked());
-    newFont.setPointSize(ui.customFontSizeSpinBox->value());
     if (m_font != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
         m_font = newFont;
         m_font.setPointSize(fontSize());
         m_textEdit->nativeWidget()->setFont(newFont);
+    }
+
+    if (m_customFontSize != ui.customFontSizeSpinBox->value()) {
+        changed = true;
+        m_customFontSize = ui.customFontSizeSpinBox->value();
+        cg.writeEntry("customFontSize", m_customFontSize);
+        m_font.setPointSize(fontSize());
     }
 
     if (m_autoFont != ui.autoFont->isChecked()) {
@@ -320,6 +331,13 @@ void Notes::configAccepted()
         if (m_autoFont) {
             m_font.setPointSize(fontSize());
         }
+    }
+
+    //TODO
+    if (m_useThemeColor != ui.useThemeColor->isChecked()) {
+        changed = true;
+        m_useThemeColor = ui.useThemeColor->isChecked();
+        cg.writeEntry("useThemeColor", m_useThemeColor);
     }
 
     QColor newColor = ui.textColorButton->color();
