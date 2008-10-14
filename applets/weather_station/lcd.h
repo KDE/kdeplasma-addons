@@ -119,7 +119,6 @@ public:
      */
     QString label(int index) const;
 
-protected:
     /**
      * Reimplemented from QGraphicsWidget
      */

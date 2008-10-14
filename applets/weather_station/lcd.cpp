@@ -18,13 +18,13 @@
  */
 
 #include "lcd.h"
-#include <KDebug>
-#include <KFilterDev>
-#include <KSvgRenderer>
 #include <QPainter>
 #include <QDir>
 #include <QGraphicsLinearLayout>
 #include <QDomDocument>
+#include <KDebug>
+#include <KFilterDev>
+#include <KSvgRenderer>
 #include <Plasma/Theme>
 
 class LCD::Private
@@ -37,7 +37,7 @@ class LCD::Private
         KSvgRenderer svg;
         QStringList items;
         bool dirty;
-        QImage img;
+        QPixmap img;
         QMap<QString, QStringList> groups;
         QStringList labels;
         QList<QColor> colors;
@@ -139,11 +139,15 @@ class LCD::Private
         void updateImage()
         {
             if (l->size().toSize() != img.size()) {
-                img = QImage(l->size().toSize(), QImage::Format_ARGB32);
+                img = QPixmap(l->size().toSize());
             }
             img.fill(Qt::transparent);
 
             QPainter p(&img);
+
+            p.setRenderHint(QPainter::TextAntialiasing, true);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
             p.scale(l->size().width() / svg.defaultSize().width(),
                     l->size().height() / svg.defaultSize().height());
@@ -220,7 +224,6 @@ class LCD::Private
                     p->setPen(QPen(colors[index]));
                 }
                 p->setFont(fitText(p, text, elementRect));
-                p->setRenderHint(QPainter::TextAntialiasing, true);
                 if (elementRect.width() > elementRect.height()) {
                     p->drawText(elementRect, align, text);
                 } else {
@@ -295,7 +298,7 @@ void LCD::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *wi
     if (d->dirty || size().toSize() != d->img.size()) {
         d->updateImage();
     }
-    p->drawImage(0, 0, d->img);
+    p->drawPixmap(0, 0, d->img);
 }
 
 void LCD::setDigit(const QString &name, QChar digit, bool dot)

@@ -16,16 +16,17 @@
  */
 
 #include "weatherstation.h"
-#include "lcd.h"
-#include "weatherconfig.h"
-#include <plasma/containment.h>
-#include <plasma/theme.h>
+#include <QGraphicsLinearLayout>
+#include <QPainter>
 #include <KConfigDialog>
 #include <KConfigGroup>
-#include <QGraphicsLinearLayout>
+#include <Plasma/Containment>
+#include <Plasma/Theme>
+#include "lcd.h"
+#include "weatherconfig.h"
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_layout(0), m_lcd(0)
+    : Plasma::PopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
 {
     setHasConfigurationInterface(true);
     resize(250, 350);
@@ -37,15 +38,14 @@ WeatherStation::~WeatherStation()
 
 void WeatherStation::init()
 {
-    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    m_layout = new QGraphicsLinearLayout(this);
-    m_layout->setContentsMargins(0, 0, 0, 0);
-    m_layout->setSpacing(0);
-    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-
     m_lcd = new LCD(this);
-    m_layout->addItem(m_lcd);
-    setLayout(m_layout);
+    m_lcd->setSvg("weatherstation/lcd");
+    // So we don't show in panel
+    m_lcd->setMinimumSize(m_lcd->preferredSize() / 2);
+
+    m_lcdPanel = new LCD(this);
+    m_lcdPanel->setSvg("weatherstation/lcd_panel");
+    m_lcdPanel->hide();
 
     //m_lcd->setItemOn("under_construction");
 
@@ -67,8 +67,7 @@ void WeatherStation::init()
         c.placeList[place] = placeInfo;
         //kDebug() << place << placeInfo.ion << placeConfig.readEntry("data");
     }
-
-    constraintsUpdated(Plasma::FormFactorConstraint);
+    setLCDIcon();
     connectToEngine();
 }
 
@@ -95,36 +94,21 @@ void WeatherStation::connectToEngine()
     }
 }
 
+QGraphicsWidget* WeatherStation::graphicsWidget()
+{
+    return m_lcd;
+}
+
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);
     setTemperature(data["Temperature"].toString(), data["Temperature Unit"].toInt());
-    if (formFactor() != Plasma::Horizontal && formFactor() != Plasma::Vertical) {
-        setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
-                    data["Pressure Tendency"].toString());
-        setHumidity(data["Humidity"].toString());
-        setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
-                data["Wind Direction"].toString());
-        m_lcd->setLabel(0, data["Credit"].toString());
-    }
-}
-
-void WeatherStation::constraintsUpdated(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
-        switch (formFactor()) {
-        case Plasma::Planar:
-        case Plasma::MediaCenter:
-            setAspectRatioMode(Plasma::IgnoreAspectRatio);
-            m_lcd->setSvg("weatherstation/lcd");
-            break;
-        case Plasma::Horizontal:
-        case Plasma::Vertical:
-            setAspectRatioMode(Plasma::Square);
-            m_lcd->setSvg("weatherstation/lcd_panel");
-            break;
-        }
-    }
+    setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
+                data["Pressure Tendency"].toString());
+    setHumidity(data["Humidity"].toString());
+    setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
+            data["Wind Direction"].toString());
+    m_lcd->setLabel(0, data["Credit"].toString());
 }
 
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
@@ -167,6 +151,17 @@ void WeatherStation::configAccepted()
     connectToEngine();
 }
 
+void WeatherStation::setLCDIcon()
+{
+    kDebug() << size();
+    m_lcdPanel->resize(size());
+    QPixmap pixmap(size().toSize());
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    m_lcdPanel->paint(&painter, 0, 0);
+    setPopupIcon(QIcon(pixmap));
+}
+
 void WeatherStation::setPressure(const QString& pressure, int unit,
                                  const QString& tendency)
 {
@@ -206,6 +201,14 @@ void WeatherStation::setTemperature(const QString& temperature, int unit)
 {
     m_lcd->setGroup("temp_unit", QStringList() << WeatherUtils::getUnitString(unit, true));
     m_lcd->setNumber("temperature", temperature);
+
+    QString temp(temperature);
+    m_lcdPanel->setGroup("temp_unit", QStringList() << WeatherUtils::getUnitString(unit, true));
+    if (temperature.length() > 3 && temperature[temperature.length() - 2] == '.') {
+        temp = temperature.mid(0, temperature.length() - 2);
+    }
+    m_lcdPanel->setNumber("temperature", temp);
+    setLCDIcon();
 }
 
 void WeatherStation::setHumidity(QString humidity)

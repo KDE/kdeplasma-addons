@@ -18,8 +18,8 @@
 #ifndef WEATHERSTATION_HEADER
 #define WEATHERSTATION_HEADER
 
-#include <weatherconfig.h>
-#include <Plasma/Applet>
+#include "weatherconfig.h"
+#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 #include <plasma/weather/weatherutils.h>
 
@@ -27,7 +27,7 @@ class LCD;
 class QGraphicsLinearLayout;
 class WeatherConfig;
 
-class WeatherStation : public Plasma::Applet
+class WeatherStation : public Plasma::PopupApplet
 {
     Q_OBJECT
     public:
@@ -35,8 +35,8 @@ class WeatherStation : public Plasma::Applet
         ~WeatherStation();
 
         virtual void init();
-        virtual void constraintsUpdated(Plasma::Constraints constraints);
         virtual void createConfigurationInterface(KConfigDialog *parent);
+        virtual QGraphicsWidget *graphicsWidget();
 
     public slots:
         void configAccepted();
@@ -44,6 +44,7 @@ class WeatherStation : public Plasma::Applet
 
     protected:
         void connectToEngine();
+        void setLCDIcon();
 
         void setWind(const QString& speed, int unit, const QString& direction);
         void setPressure(const QString& pressure, int unit, const QString& tendency);
@@ -53,8 +54,8 @@ class WeatherStation : public Plasma::Applet
         QString getUnitString(int unit);
 
     private:
-        QGraphicsLinearLayout *m_layout;
         LCD *m_lcd;
+        LCD *m_lcdPanel;
         WeatherConfig *m_weatherConfig;
         ConfigData c;
 };
