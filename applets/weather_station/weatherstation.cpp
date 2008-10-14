@@ -44,7 +44,6 @@ void WeatherStation::init()
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     m_lcd = new LCD(this);
-    m_lcd->setSvg("weatherstation/lcd");
     m_layout->addItem(m_lcd);
     setLayout(m_layout);
 
@@ -99,12 +98,14 @@ void WeatherStation::connectToEngine()
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);
-    setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
-                data["Pressure Tendency"].toString());
     setTemperature(data["Temperature"].toString(), data["Temperature Unit"].toInt());
-    setHumidity(data["Humidity"].toString());
-    setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
-            data["Wind Direction"].toString());
+    if (formFactor() != Plasma::Horizontal && formFactor() != Plasma::Vertical) {
+        setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
+                    data["Pressure Tendency"].toString());
+        setHumidity(data["Humidity"].toString());
+        setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
+                data["Wind Direction"].toString());
+    }
 }
 
 void WeatherStation::constraintsUpdated(Plasma::Constraints constraints)
@@ -113,11 +114,13 @@ void WeatherStation::constraintsUpdated(Plasma::Constraints constraints)
         switch (formFactor()) {
         case Plasma::Planar:
         case Plasma::MediaCenter:
-            setAspectRatioMode(Plasma::IgnoreAspectRatio);
+            setAspectRatioMode(Plasma::KeepAspectRatio);
+            m_lcd->setSvg("weatherstation/lcd");
             break;
         case Plasma::Horizontal:
         case Plasma::Vertical:
             setAspectRatioMode(Plasma::Square);
+            m_lcd->setSvg("weatherstation/lcd_panel");
             break;
         }
     }

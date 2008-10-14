@@ -23,4 +23,5 @@ install(FILES plasma-applet-weatherstation.desktop
 
 install(FILES
     lcd.svg
+    lcd_panel.svgz
     DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/weatherstation/)
