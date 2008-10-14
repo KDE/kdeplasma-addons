@@ -155,7 +155,7 @@ class LCD::Private
 
         void parseXml()
         {
-            QIODevice *device = KFilterDev::deviceForFile(content);
+            QIODevice *device = KFilterDev::deviceForFile(content, "application/x-gzip");
             QDomDocument doc;
 
             doc.setContent(device);
