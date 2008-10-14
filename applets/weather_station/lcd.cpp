@@ -39,6 +39,8 @@ class LCD::Private
         bool dirty;
         QImage img;
         QMap<QString, QStringList> groups;
+        QStringList labels;
+        QList<QColor> colors;
 
         static const QString A;
         static const QString B;
@@ -150,6 +152,9 @@ class LCD::Private
             foreach (const QString& item, items) {
                 paint(&p, item);
             }
+            for (int i = 0; i < labels.count(); ++i) {
+                text(&p, i);
+            }
             dirty = false;
         }
 
@@ -163,12 +168,22 @@ class LCD::Private
             int pos;
             lists << doc.elementsByTagName("g");
             lists << doc.elementsByTagName("path");
+            lists << doc.elementsByTagName("rect");
             foreach (const QDomNodeList& list, lists) {
                 for (int i = 0; i < list.count(); ++i) {
                     QDomElement element = list.item(i).toElement();
                     QString id = element.attribute("id");
                     if ((pos = id.lastIndexOf(':')) > -1) {
                         groups[id.left(pos)] << id.mid(pos + 1);
+                    } else if (id.startsWith("label")) {
+                        int i = id.mid(5).toInt();
+                        QRegExp rx("fill:([#0-9]+)");
+                        if (rx.indexIn(element.attribute("style")) > -1) {
+                            while (colors.count() <= i) {
+                                colors << QColor();
+                            }
+                            colors[i] = QColor(rx.cap(1));
+                        }
                     }
                 }
             }
@@ -176,6 +191,54 @@ class LCD::Private
             delete device;
         }
 
+        QFont fitText(QPainter *p, const QString& text, const QRectF& rect)
+        {
+            QFont result = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+
+            while (result.pointSizeF() > 0.0) {
+                QFontMetrics fm(result, p->device());
+                QSizeF size = fm.tightBoundingRect(text).size();
+                //kDebug() << size << rect.size() << result.pointSizeF();
+                if (size.width() <= rect.size().width() && size.height() <= rect.size().height()) {
+                    break;
+                }
+                result.setPointSizeF(result.pointSizeF() - 0.5);
+            }
+            return result;
+        }
+
+        void text(QPainter *p, int index)
+        {
+            QString elementID = QString("label%1").arg(index);
+            QString text = labels[index];
+
+            if (svg.elementExists(elementID)) {
+                QRectF elementRect = svg.boundsOnElement(elementID);
+                Qt::Alignment align = Qt::AlignCenter;
+
+                if (colors.count() > index) {
+                    p->setPen(QPen(colors[index]));
+                }
+                p->setFont(fitText(p, text, elementRect));
+                p->setRenderHint(QPainter::TextAntialiasing, true);
+                if (elementRect.width() > elementRect.height()) {
+                    p->drawText(elementRect, align, text);
+                } else {
+                    p->save();
+                    QPointF rotateCenter(
+                            elementRect.left() + elementRect.width() / 2,
+                            elementRect.top() + elementRect.height() / 2);
+                    p->translate(rotateCenter);
+                    p->rotate(-90);
+                    p->translate(elementRect.height() / -2,
+                                elementRect.width() / -2);
+                    QRectF r(0, 0, elementRect.height(), elementRect.width());
+                    p->drawText(r, align, text);
+                    p->restore();
+                }
+                //p->drawRect(elementRect);
+            }
+        }
 };
 
 QMap<QChar, QStringList> LCD::Private::sevenSegmentDigits;
@@ -302,6 +365,19 @@ void LCD::setItemOff(const QString &name)
         d->dirty = true;
         update();
     }
+}
+
+void LCD::setLabel(int index, const QString &text)
+{
+    while (d->labels.count() <= index) {
+        d->labels << QString();
+    }
+    d->labels[index] = text;
+}
+
+QString LCD::label(int index) const
+{
+    return d->labels[index];
 }
 
 #include "lcd.moc"

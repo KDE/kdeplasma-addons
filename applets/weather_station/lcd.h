@@ -106,6 +106,19 @@ public:
      */
     void setItemOn(const QString &name);
 
+    /**
+     * Set text label for the meter
+     * @param index label index.
+     * @param text text for the label.
+     */
+    void setLabel(int index, const QString &text);
+
+    /**
+     * @param index label index
+     * @return text label for the meter
+     */
+    QString label(int index) const;
+
 protected:
     /**
      * Reimplemented from QGraphicsWidget
