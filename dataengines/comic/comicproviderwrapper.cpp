@@ -62,29 +62,32 @@ ComicProviderWrapper::~ComicProviderWrapper()
 void ComicProviderWrapper::init()
 {
     const QString path = KStandardDirs::locate( "data", "plasma/comics/" + m_provider->pluginName() + "/" );
-    Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
-    structure->setPath( path );
-    Plasma::Package *package = new Plasma::Package( path, structure );
+    kDebug() << path;
+    if (!path.isEmpty()) {
+        Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
+        structure->setPath( path );
+        Plasma::Package *package = new Plasma::Package( path, structure );
 
-    if ( package->isValid() ) {
-        // package->filePath( "mainscript" ) returns empty if it does not exist
-        // We want to test extensions supported by kross with mainscript
-        const QString mainscript = package->path() + structure->contentsPrefix() +
-                                   structure->path( "mainscript" );
+        if ( package->isValid() ) {
+            // package->filePath( "mainscript" ) returns empty if it does not exist
+            // We want to test extensions supported by kross with mainscript
+            const QString mainscript = package->path() + structure->contentsPrefix() +
+                                    structure->path( "mainscript" );
 
-        QFileInfo info( mainscript );
-        for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {
-            info.setFile( mainscript + extensions().value( i ) );
-        }
-        if ( info.exists() ) {
-            m_action = new Kross::Action( parent(), m_provider->pluginName() );
-            if ( m_action ) {
-                m_action->addObject( this, "comic" );
-                m_action->setFile( info.filePath() );
-                m_action->trigger();
-                m_functions = m_action->functionNames();
+            QFileInfo info( mainscript );
+            for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {
+                info.setFile( mainscript + extensions().value( i ) );
+            }
+            if ( info.exists() ) {
+                m_action = new Kross::Action( parent(), m_provider->pluginName() );
+                if ( m_action ) {
+                    m_action->addObject( this, "comic" );
+                    m_action->setFile( info.filePath() );
+                    m_action->trigger();
+                    m_functions = m_action->functionNames();
 
-                callFunction( "init" );
+                    callFunction( "init" );
+                }
             }
         }
     }
