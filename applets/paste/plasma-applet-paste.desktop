@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Paste
+Name[nds]=Infögen
 Name[pt]=Colar
 Name[pt_BR]=Colar
 Name[sv]=Klistra in
 Name[uk]=Вставка
 Name[zh_TW]=貼上
 Comment=Paste text snippets
+Comment[nds]=Textsnippels infögen
 Comment[pt]=Colar excertos de texto
 Comment[pt_BR]=Colar os fragmentos de texto
 Comment[sv]=Klistra in textsnuttar
