@@ -105,6 +105,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
         setHumidity(data["Humidity"].toString());
         setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
                 data["Wind Direction"].toString());
+        m_lcd->setLabel(0, data["Credit"].toString());
     }
 }
 
@@ -114,7 +115,7 @@ void WeatherStation::constraintsUpdated(Plasma::Constraints constraints)
         switch (formFactor()) {
         case Plasma::Planar:
         case Plasma::MediaCenter:
-            setAspectRatioMode(Plasma::KeepAspectRatio);
+            setAspectRatioMode(Plasma::IgnoreAspectRatio);
             m_lcd->setSvg("weatherstation/lcd");
             break;
         case Plasma::Horizontal:
