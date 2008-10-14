@@ -21,7 +21,7 @@ Comment[sv]=Väderrapport visad med LCD-stil
 Comment[uk]=Прогнози погоди на маленькому диплеї
 Comment[zh_TW]=以 LCD 風格顯示氣象報告
 Type=Service
-Icon=browser
+Icon=weather-clouds
 ServiceTypes=Plasma/Applet
 
 X-KDE-Library=plasma_applet_weatherstation
