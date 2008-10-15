@@ -86,12 +86,15 @@ Length::Length(QObject* parent)
     m_units[i18n("nmi")]           = i18n("nautical miles");
     m_units[i18n("nautical miles")] = 1852.0;
 
+    m_units[i18n("ly")]            = "lightyears";
     m_units[i18n("light-year")]    = "lightyears";
     m_units[i18n("light-years")]   = "lightyears";
     m_units[i18n("lightyear")]     = "lightyears";
     m_units[i18n("lightyears")]    = 9460730472580800.0;
+    m_units[i18n("pc")]            = "parsecs";
     m_units[i18n("parsec")]        = "parsecs";
-    m_units[i18n("parsecs")]       = 1E+16;
+    m_units[i18n("parsecs")]       = 3.085678E+16;
+    m_units[i18n("au")]            = "astronomical units";
     m_units[i18n("astronomical unit")]  = "astronomical units";
     m_units[i18n("astronomical units")] = 149597870691.0;
 }
