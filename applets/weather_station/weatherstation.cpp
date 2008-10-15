@@ -172,15 +172,12 @@ void WeatherStation::setPressure(const QString& pressure, int unit,
     qreal t = tendency.toDouble();
     QStringList current;
 
-    if (unit == WeatherUtils::Inches) {
-        p = WeatherUtils::convert(p, WeatherUtils::Inches, WeatherUtils::Kilopascals);
-        t = WeatherUtils::convert(t, WeatherUtils::Inches, WeatherUtils::Kilopascals);
+    if (unit == WeatherUtils::Millibars) {
+        unit = WeatherUtils::Hectopascals;
     }
-    if (unit == WeatherUtils::Hectopascals) {
-        p /= 10.0;
-        t /= 10.0;
-    }
-    //kDebug() << p << t;
+    p = WeatherUtils::convert(p, unit, WeatherUtils::Kilopascals);
+    t = WeatherUtils::convert(t, unit, WeatherUtils::Kilopascals);
+    //kDebug() << p << t << unit <<  WeatherUtils::getUnitString(unit, true);
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
     if (p > 103.0) {
