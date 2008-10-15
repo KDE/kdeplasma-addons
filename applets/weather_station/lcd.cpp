@@ -51,6 +51,8 @@ class LCD::Private
         static const QString G;
         static const QString DP;
         static QMap<QChar, QStringList> sevenSegmentDigits;
+        qreal xScale;
+        qreal yScale;
 
         Private(LCD* lcd) : l(lcd), dirty(false)
         {
@@ -136,6 +138,13 @@ class LCD::Private
             svg.render(p, item, r);
         }
 
+        QRectF scaledRect(const QString& item)
+        {
+            QRectF r = svg.boundsOnElement(item);
+            r.setRect(r.x() * xScale, r.y() * yScale, r.width() * xScale, r.height() * yScale);
+            return r;
+        }
+
         void updateImage()
         {
             if (l->size().toSize() != img.size()) {
@@ -145,10 +154,13 @@ class LCD::Private
 
             QPainter p(&img);
 
+            xScale = l->size().width() / svg.defaultSize().width();
+            yScale = l->size().height() / svg.defaultSize().height();
             p.setRenderHint(QPainter::TextAntialiasing, true);
             p.setRenderHint(QPainter::Antialiasing, true);
             p.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
+            p.save();
             p.scale(l->size().width() / svg.defaultSize().width(),
                     l->size().height() / svg.defaultSize().height());
 
@@ -156,6 +168,7 @@ class LCD::Private
             foreach (const QString& item, items) {
                 paint(&p, item);
             }
+            p.restore();
             for (int i = 0; i < labels.count(); ++i) {
                 text(&p, i);
             }
@@ -217,7 +230,7 @@ class LCD::Private
             QString text = labels[index];
 
             if (svg.elementExists(elementID)) {
-                QRectF elementRect = svg.boundsOnElement(elementID);
+                QRectF elementRect = scaledRect(elementID);
                 Qt::Alignment align = Qt::AlignCenter;
 
                 if (colors.count() > index) {
