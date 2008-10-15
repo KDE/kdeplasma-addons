@@ -120,6 +120,11 @@ public:
     QString label(int index) const;
 
     /**
+     * @return lcd as pixmap
+     */
+    QPixmap toPixmap();
+
+    /**
      * Reimplemented from QGraphicsWidget
      */
     void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);

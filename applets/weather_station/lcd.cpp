@@ -396,4 +396,12 @@ QString LCD::label(int index) const
     return d->labels[index];
 }
 
+QPixmap LCD::toPixmap()
+{
+    if (d->dirty || size().toSize() != d->img.size()) {
+        d->updateImage();
+    }
+    return d->img;
+}
+
 #include "lcd.moc"

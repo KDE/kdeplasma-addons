@@ -153,13 +153,10 @@ void WeatherStation::configAccepted()
 
 void WeatherStation::setLCDIcon()
 {
-    kDebug() << size();
-    m_lcdPanel->resize(size());
-    QPixmap pixmap(size().toSize());
-    pixmap.fill(Qt::transparent);
-    QPainter painter(&pixmap);
-    m_lcdPanel->paint(&painter, 0, 0);
-    setPopupIcon(QIcon(pixmap));
+    if (m_lcdPanel->size().toSize() != size().toSize()) {
+        m_lcdPanel->resize(size());
+    }
+    setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
 void WeatherStation::setPressure(const QString& pressure, int unit,
