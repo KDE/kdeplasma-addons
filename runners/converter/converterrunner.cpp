@@ -167,8 +167,8 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     Value v = Converter::self()->convert(Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::InformationalMatch);
-        match.setIcon(KIcon("kruler"));
+        match.setType(Plasma::QueryMatch::ExactMatch);
+        match.setIcon(KIcon("edit-copy"));
         match.setText(v.toString());
         match.setData(v.number);
         context.addMatch(term, match);
