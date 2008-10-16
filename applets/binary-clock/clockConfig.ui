@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
-    <height>300</height>
+    <width>586</width>
+    <height>349</height>
    </rect>
   </property>
   <property name="minimumSize" >
@@ -15,34 +15,84 @@
     <height>300</height>
    </size>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <item>
-    <widget class="QCheckBox" name="showSecondHandCheckBox" >
-     <property name="toolTip" >
-      <string>Show the second leds</string>
-     </property>
-     <property name="whatsThis" >
-      <string>Check this if you want to display second leds in order to see the seconds.</string>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="Appearance" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text" >
-      <string>Show &amp;seconds</string>
+      <string>Appearance</string>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QCheckBox" name="showGridCheckBox" >
-     <property name="toolTip" >
-      <string>Show the grid</string>
-     </property>
-     <property name="whatsThis" >
-      <string>Check this if you want to see a grid around leds.</string>
-     </property>
+   <item row="1" column="1" >
+    <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>Show grid</string>
+      <string>Active LEDs:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="3" column="4" >
+    <layout class="QHBoxLayout" name="horizontalLayout_3" >
+     <item>
+      <widget class="QRadioButton" name="onLedsCustomColorRadioButton" >
+       <property name="text" >
+        <string>Use custom on leds color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KColorButton" name="onLedsCustomColorButton" />
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="2" >
+    <spacer name="verticalSpacer_3" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>7</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="0" colspan="2" >
+    <widget class="QLabel" name="label_4" >
+     <property name="text" >
+      <string>Inactive LEDs:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2" colspan="3" >
     <widget class="QCheckBox" name="showOffLedsCheckBox" >
      <property name="toolTip" >
       <string>Show the off leds</string>
@@ -51,62 +101,159 @@
       <string>Check this if you want to see off leds.</string>
      </property>
      <property name="text" >
-      <string>Show off leds</string>
+      <string>Show</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QGroupBox" name="ColorsGroupBox" >
-     <property name="title" >
-      <string>Custom Colors</string>
+   <item row="6" column="4" >
+    <widget class="QRadioButton" name="offLedsDefaultColorRadioButton" >
+     <property name="text" >
+      <string>Use theme color</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout" >
-      <item row="0" column="0" >
-       <widget class="QCheckBox" name="onLedsCustomColorCheckBox" >
-        <property name="text" >
-         <string>Use on leds custom color</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="KColorCombo" name="onLedsCustomColorCombo" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" >
-       <widget class="QCheckBox" name="offLedsCustomColorCheckBox" >
-        <property name="text" >
-         <string>Use off leds custom color</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" >
-       <widget class="KColorCombo" name="offLedsCustomColorCombo" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" >
-       <widget class="QCheckBox" name="gridCustomColorCheckBox" >
-        <property name="text" >
-         <string>Use grid custom color</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" >
-       <widget class="KColorCombo" name="gridCustomColorCombo" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
-   <item>
+   <item row="7" column="4" >
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item>
+      <widget class="QRadioButton" name="offLedsCustomColorRadioButton" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text" >
+        <string>Use custom off leds color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KColorButton" name="offLedsCustomColorButton" />
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="8" column="2" colspan="2" >
+    <spacer name="verticalSpacer_2" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>7</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="9" column="0" colspan="2" >
+    <widget class="QLabel" name="label_3" >
+     <property name="text" >
+      <string>Grid:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2" colspan="3" >
+    <widget class="QCheckBox" name="showGridCheckBox" >
+     <property name="toolTip" >
+      <string>Show the grid</string>
+     </property>
+     <property name="whatsThis" >
+      <string>Check this if you want to see a grid around leds.</string>
+     </property>
+     <property name="text" >
+      <string>Show</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="4" >
+    <widget class="QRadioButton" name="gridDefaultColorRadioButton" >
+     <property name="text" >
+      <string>Use theme color</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="4" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QRadioButton" name="gridCustomColorRadioButton" >
+       <property name="text" >
+        <string>Use custom grid color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KColorButton" name="gridCustomColorButton" />
+     </item>
+     <item>
+      <spacer name="horizontalSpacer" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="12" column="0" >
+    <spacer name="verticalSpacer_4" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="13" column="0" >
+    <widget class="QLabel" name="label_6" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Information</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="3" colspan="2" >
     <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -114,67 +261,161 @@
      <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
-       <height>70</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>
    </item>
+   <item row="2" column="4" >
+    <widget class="QRadioButton" name="onLedsDefaultColorRadioButton" >
+     <property name="text" >
+      <string>Use theme color</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1" >
+    <widget class="QLabel" name="showSecondsLabel" >
+     <property name="text" >
+      <string>Seconds:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="2" colspan="3" >
+    <widget class="QCheckBox" name="showSecondHandCheckBox" >
+     <property name="toolTip" >
+      <string>Show the second leds</string>
+     </property>
+     <property name="whatsThis" >
+      <string>Check this if you want to display second leds in order to see the seconds.</string>
+     </property>
+     <property name="text" >
+      <string>Show</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
-  <customwidgets>
+ <customwidgets>
   <customwidget>
-   <class>KColorCombo</class>
-   <extends>QComboBox</extends>
-   <header>kcolorcombo.h</header>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections>
   <connection>
-   <sender>onLedsCustomColorCheckBox</sender>
+   <sender>onLedsDefaultColorRadioButton</sender>
    <signal>toggled(bool)</signal>
-   <receiver>onLedsCustomColorCombo</receiver>
-   <slot>setEnabled(bool)</slot>
+   <receiver>onLedsCustomColorButton</receiver>
+   <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>122</x>
-     <y>131</y>
+     <x>558</x>
+     <y>55</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>346</x>
-     <y>131</y>
+     <x>423</x>
+     <y>82</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>offLedsCustomColorCheckBox</sender>
+   <sender>offLedsDefaultColorRadioButton</sender>
    <signal>toggled(bool)</signal>
-   <receiver>offLedsCustomColorCombo</receiver>
-   <slot>setEnabled(bool)</slot>
+   <receiver>offLedsCustomColorButton</receiver>
+   <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>122</x>
-     <y>163</y>
+     <x>566</x>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>346</x>
-     <y>163</y>
+     <x>424</x>
+     <y>172</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>gridCustomColorCheckBox</sender>
+   <sender>gridDefaultColorRadioButton</sender>
    <signal>toggled(bool)</signal>
-   <receiver>gridCustomColorCombo</receiver>
+   <receiver>gridCustomColorButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>547</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>395</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showOffLedsCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>offLedsDefaultColorRadioButton</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>122</x>
-     <y>195</y>
+     <x>164</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>346</x>
-     <y>195</y>
+     <x>184</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showOffLedsCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>offLedsCustomColorRadioButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>296</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>296</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showGridCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>gridDefaultColorRadioButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>165</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>191</x>
+     <y>238</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showGridCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>gridCustomColorRadioButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>264</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>256</x>
+     <y>268</y>
     </hint>
    </hints>
   </connection>

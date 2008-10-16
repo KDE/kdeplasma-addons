@@ -140,14 +140,26 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.showGridCheckBox->setChecked(m_showGrid);
     ui.showOffLedsCheckBox->setChecked(m_showOffLeds);
 
-    ui.onLedsCustomColorCheckBox->setChecked(m_customOnLedsColor);
-    ui.offLedsCustomColorCheckBox->setChecked(m_customOffLedsColor);
-    ui.gridCustomColorCheckBox->setChecked(m_customGridColor);
+    QButtonGroup *onLedsGroup = new QButtonGroup(widget);
+    onLedsGroup->addButton(ui.onLedsDefaultColorRadioButton);
+    onLedsGroup->addButton(ui.onLedsCustomColorRadioButton);
+
+    QButtonGroup *offLedsGroup = new QButtonGroup(widget);
+    offLedsGroup->addButton(ui.offLedsDefaultColorRadioButton);
+    offLedsGroup->addButton(ui.offLedsCustomColorRadioButton);
+
+    ui.onLedsDefaultColorRadioButton->setChecked(!m_customOnLedsColor);
+    ui.offLedsDefaultColorRadioButton->setChecked(!m_customOffLedsColor);
+    ui.gridDefaultColorRadioButton->setChecked(!m_customGridColor);
+
+    ui.onLedsCustomColorRadioButton->setChecked(m_customOnLedsColor);
+    ui.offLedsCustomColorRadioButton->setChecked(m_customOffLedsColor);
+    ui.gridCustomColorRadioButton->setChecked(m_customGridColor);
 
     KConfigGroup cg = config();
-    ui.onLedsCustomColorCombo->setColor(cg.readEntry("onLedsColor", m_onLedsColor));
-    ui.offLedsCustomColorCombo->setColor(cg.readEntry("offLedsColor", m_offLedsColor));
-    ui.gridCustomColorCombo->setColor(cg.readEntry("gridColor", m_gridColor));
+    ui.onLedsCustomColorButton->setColor(cg.readEntry("onLedsColor", m_onLedsColor));
+    ui.offLedsCustomColorButton->setColor(cg.readEntry("offLedsColor", m_offLedsColor));
+    ui.gridCustomColorButton->setColor(cg.readEntry("gridColor", m_gridColor));
 }
 
 void BinaryClock::clockConfigAccepted()
@@ -157,20 +169,20 @@ void BinaryClock::clockConfigAccepted()
     m_showGrid = ui.showGridCheckBox->isChecked();
     m_showOffLeds = ui.showOffLedsCheckBox->isChecked();
 
-    m_customOnLedsColor = ui.onLedsCustomColorCheckBox->isChecked();
-    m_customOffLedsColor = ui.offLedsCustomColorCheckBox->isChecked();
-    m_customGridColor = ui.gridCustomColorCheckBox->isChecked();
+    m_customOnLedsColor = ui.onLedsCustomColorRadioButton->isChecked();
+    m_customOffLedsColor = ui.offLedsCustomColorRadioButton->isChecked();
+    m_customGridColor = ui.gridCustomColorRadioButton->isChecked();
 
     if (m_customOnLedsColor){
-         m_onLedsColor = ui.onLedsCustomColorCombo->color();
+         m_onLedsColor = ui.onLedsCustomColorButton->color();
     }
 
     if (m_customOffLedsColor){
-         m_offLedsColor = ui.offLedsCustomColorCombo->color();
+         m_offLedsColor = ui.offLedsCustomColorButton->color();
     }
 
     if (m_customGridColor){
-         m_gridColor = ui.gridCustomColorCombo->color();
+         m_gridColor = ui.gridCustomColorButton->color();
     }
 
     cg.writeEntry("showSeconds", m_showSeconds);
@@ -181,9 +193,9 @@ void BinaryClock::clockConfigAccepted()
     cg.writeEntry("customOffLedsColor", m_customOffLedsColor);
     cg.writeEntry("customGridColor", m_customGridColor);
 
-    cg.writeEntry("onLedsColor", ui.onLedsCustomColorCombo->color());
-    cg.writeEntry("offLedsColor", ui.offLedsCustomColorCombo->color());
-    cg.writeEntry("gridColor", ui.gridCustomColorCombo->color());
+    cg.writeEntry("onLedsColor", ui.onLedsCustomColorButton->color());
+    cg.writeEntry("offLedsColor", ui.offLedsCustomColorButton->color());
+    cg.writeEntry("gridColor", ui.gridCustomColorButton->color());
 
     dataEngine("time")->disconnectSource(currentTimezone(), this);
     connectToEngine();
