@@ -263,7 +263,6 @@ void Notes::paintInterface(QPainter *p,
     Q_UNUSED(option);
 
     m_notes_theme.resize(geometry().size());
-    kDebug() << "notes.svgz hasElement(" << m_color << "yellow-notes)" << m_notes_theme.hasElement("green-notes");
     m_notes_theme.paint(p, contentsRect, m_color + "-notes");
 }
 
@@ -276,7 +275,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    QButtonGroup *fontSizeGroup = new QButtonGroup();
+    QButtonGroup *fontSizeGroup = new QButtonGroup(widget);
     fontSizeGroup->addButton(ui.autoFont);
     fontSizeGroup->addButton(ui.customFont);
 
