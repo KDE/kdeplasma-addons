@@ -34,6 +34,11 @@ class ConfigWidget;
 class FullViewWidget;
 class QTimer;
 class QAction;
+class FadingItem;
+namespace Plasma {
+    class Frame;
+    class PushButton;
+}
 
 class ComicApplet : public Plasma::Applet
 {
@@ -61,10 +66,14 @@ class ComicApplet : public Plasma::Applet
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
+        void scaleToContent();
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
+        void hoverEnterEvent( QGraphicsSceneHoverEvent* );
+        void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
+        void constraintsEvent( Plasma::Constraints constraints );
 
     private:
         void updateComic( const QString &identifierSuffix = QString() );
@@ -73,6 +82,7 @@ class ComicApplet : public Plasma::Applet
         void loadConfig();
         void saveConfig();
         void updateSize();
+        void buttonBar();
 
         QImage mImage;
         QDate mCurrentDay;
@@ -102,8 +112,13 @@ class ComicApplet : public Plasma::Applet
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
-        Plasma::DataEngine::Data mComics;
         QMap< QString, int > mMaxStripNum;
+        Plasma::Frame *mFrame;
+        FadingItem *mFadingItem;
+        Plasma::PushButton *mPrevButton;
+        Plasma::PushButton *mNextButton;
+        QSizeF mIdealSize;
+        bool mArrowsOnHover;
 };
 
 K_EXPORT_PLASMA_APPLET(comic, ComicApplet)

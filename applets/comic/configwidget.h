@@ -28,11 +28,13 @@ class ComicModel;
 class QCheckBox;
 class QComboBox;
 class QSortFilterProxyModel;
+class QPushButton;
 
 class ConfigWidget : public QWidget
 {
+        Q_OBJECT
     public:
-        ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *parent );
+        ConfigWidget( Plasma::DataEngine *engine, QWidget *parent );
         ~ConfigWidget();
 
         void setComicIdentifier( const QString &comic );
@@ -46,6 +48,11 @@ class ConfigWidget : public QWidget
         bool showComicTitle() const;
         void setShowComicIdentifier( bool show );
         bool showComicIdentifier() const;
+        void setArrowsOnHover( bool arrows );
+        bool arrowsOnHover() const;
+
+    protected slots:
+        void getNewStuff();
 
     private:
         QComboBox *mComicIdentifier;
@@ -53,7 +60,10 @@ class ConfigWidget : public QWidget
         QCheckBox *mShowComicAuthor;
         QCheckBox *mShowComicTitle;
         QCheckBox *mShowComicIdentifier;
+        QCheckBox *mShowArrowsOnHover;
+        QPushButton *mNewStuff;
         ComicModel *mModel;
+        Plasma::DataEngine *mEngine;
         QSortFilterProxyModel *mProxyModel;
 };
 

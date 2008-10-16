@@ -26,16 +26,23 @@
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
+#include <QtGui/QPushButton>
 
 #include <KLocale>
 #include <KIcon>
 #include <KServiceTypeTrader>
+#include <KNS/Engine>
 
 class ComicModel : public QAbstractListModel
 {
     public:
         ComicModel( const Plasma::DataEngine::Data &comics, QObject *parent = 0 )
             : QAbstractListModel( parent )
+        {
+            setComics(comics);
+        }
+
+        void setComics( const Plasma::DataEngine::Data &comics )
         {
             mComics = comics;
         }
@@ -69,8 +76,8 @@ class ComicModel : public QAbstractListModel
 };
 
 
-ConfigWidget::ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *parent )
-    : QWidget( parent )
+ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
+    : QWidget( parent ), mEngine(engine)
 {
     QGridLayout *layout = new QGridLayout( this );
     layout->setMargin( 0 );
@@ -83,6 +90,11 @@ ConfigWidget::ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *par
     mShowComicTitle = new QCheckBox( i18n( "Show Comic Title" ), this );
     mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
     mShowComicIdentifier = new QCheckBox( i18n( "Show Comic Identifier" ), this );
+    mShowArrowsOnHover = new QCheckBox( i18n( "Show Arrows Only on Hover" ), this );
+    mNewStuff = new QPushButton(this);
+    mNewStuff->setToolTip(i18n("Download new comics"));
+    mNewStuff->setText(i18n("Get New Comics..."));
+    connect( mNewStuff, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
@@ -90,8 +102,11 @@ ConfigWidget::ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *par
     layout->addWidget( mShowComicTitle, 2, 0, 1, 2 );
     layout->addWidget( mShowComicUrl, 3, 0, 1, 2 );
     layout->addWidget( mShowComicIdentifier, 4, 0, 1, 2 );
+    layout->addWidget( mShowArrowsOnHover, 5, 0, 1, 2 );
+    layout->addWidget( mNewStuff, 6, 1 );
+    layout->setRowStretch( 7, 1.0 );
 
-    mModel = new ComicModel( comics, this );
+    mModel = new ComicModel( mEngine->query("providers"), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
     mProxyModel->sort(0, Qt::AscendingOrder);
@@ -100,6 +115,17 @@ ConfigWidget::ConfigWidget( const Plasma::DataEngine::Data &comics, QWidget *par
 
 ConfigWidget::~ConfigWidget()
 {
+}
+
+void ConfigWidget::getNewStuff()
+{
+    KNS::Engine engine( this );
+    if ( engine.init( "comic.knsrc" ) ) {
+        KNS::Entry::List entries = engine.downloadDialogModal( this );
+        if (entries.size() > 0) {
+            mModel->setComics( mEngine->query( "providers" ) );
+        }
+    }
 }
 
 void ConfigWidget::setComicIdentifier( const QString &comic )
@@ -158,3 +184,15 @@ bool ConfigWidget::showComicIdentifier() const
 {
     return mShowComicIdentifier->isChecked();
 }
+
+void ConfigWidget::setArrowsOnHover( bool arrows )
+{
+    return mShowArrowsOnHover->setChecked( arrows );
+}
+
+bool ConfigWidget::arrowsOnHover() const
+{
+    return mShowArrowsOnHover->isChecked();
+}
+
+#include "configwidget.moc"

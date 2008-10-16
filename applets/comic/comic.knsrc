@@ -1,0 +1,6 @@
+[KNewStuff2]
+ProvidersUrl=http://download.kde.org/khotnewstuff/plasmacomics-providers.xml
+ChecksumPolicy=ifpossible
+SignaturePolicy=ifpossible
+StandardResource=tmp
+InstallationCommand=plasmapkg -t comic -i %f

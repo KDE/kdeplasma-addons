@@ -27,8 +27,10 @@
 #include <QtGui/QLabel>
 #include <QtGui/QPainter>
 #include <QtGui/QVBoxLayout>
+#include <QtGui/QGraphicsLinearLayout>
 
 #include <KConfigDialog>
+#include <KPushButton>
 #include <KDatePicker>
 #include <KFileDialog>
 #include <KIO/NetAccess>
@@ -37,10 +39,13 @@
 #include <KTemporaryFile>
 
 #include <Plasma/Theme>
+#include <Plasma/Frame>
+#include <Plasma/PushButton>
 #include <plasma/tooltipmanager.h>
 
 #include "configwidget.h"
 #include "fullviewwidget.h"
+#include "fadingitem.h"
 
 static const int s_arrowWidth = 30;
 
@@ -95,7 +100,12 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
       mShowComicTitle( false ),
-      mShowComicIdentifier( false )
+      mShowComicIdentifier( false ),
+      mFrame( 0 ),
+      mFadingItem( 0 ),
+      mPrevButton( 0 ),
+      mNextButton( 0 ),
+      mArrowsOnHover( false )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
@@ -113,6 +123,7 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
+    buttonBar();
     updateButtons();
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "&Jump to first Strip" ), this );
@@ -127,6 +138,10 @@ void ComicApplet::init()
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
 
+    action = new QAction( i18n( "Scale to &Content" ), this );
+    mActions.append( action );
+    connect( action, SIGNAL( triggered( bool ) ), this , SLOT( scaleToContent() ) );
+
     mFullViewWidget = new FullViewWidget();
     mFullViewWidget->hide();
 
@@ -136,8 +151,6 @@ void ComicApplet::init()
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
-
-    mComics = dataEngine( "comic" )->query( "providers" );
 }
 
 ComicApplet::~ComicApplet()
@@ -185,12 +198,13 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
-    mConfigWidget = new ConfigWidget( mComics, parent );
+    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
     mConfigWidget->setShowComicTitle( mShowComicTitle );
     mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
+    mConfigWidget->setArrowsOnHover( mArrowsOnHover );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
@@ -202,16 +216,24 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 void ComicApplet::applyConfig()
 {
     bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier() );
+    bool checkButtonBar = ( mArrowsOnHover != mConfigWidget->arrowsOnHover() );
     mComicIdentifier = mConfigWidget->comicIdentifier();
     mShowComicUrl = mConfigWidget->showComicUrl();
     mShowComicAuthor = mConfigWidget->showComicAuthor();
     mShowComicTitle = mConfigWidget->showComicTitle();
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
+    mArrowsOnHover = mConfigWidget->arrowsOnHover();
 
     saveConfig();
 
     if ( differentComic ) {
         updateComic();
+    }
+    if ( checkButtonBar ) {
+        buttonBar();
+        updateButtons();
+        constraintsEvent( Plasma::SizeConstraint );
+        update();
     }
 }
 
@@ -237,6 +259,7 @@ void ComicApplet::loadConfig()
     mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
+    mArrowsOnHover = cg.readEntry( "arrowsOnHover", false );
 }
 
 void ComicApplet::saveConfig()
@@ -247,6 +270,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showComicAuthor", mShowComicAuthor );
     cg.writeEntry( "showComicTitle", mShowComicTitle );
     cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
+    cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -292,11 +316,11 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
         int tempRightArrowWidth = ( !mNextIdentifierSuffix.isEmpty() ? s_arrowWidth : 0 );
 
         const QRectF rect = contentsRect();
-        if ( mShowPreviousButton && event->pos().x() > rect.left() &&
-                                    event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
+        if ( mShowPreviousButton && !mArrowsOnHover && event->pos().x() > rect.left() &&
+             event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
             slotPreviousDay();
-        } else if ( mShowNextButton && event->pos().x() > ( rect.right() - s_arrowWidth ) &&
-                                       event->pos().x() < rect.right() ) {
+        } else if ( mShowNextButton && !mArrowsOnHover && event->pos().x() < rect.right() &&
+                    event->pos().x() > ( rect.right() - s_arrowWidth ) ) {
             slotNextDay();
         } else if ( !mWebsiteUrl.isEmpty() && mShowComicUrl &&
                     event->pos().y() > ( rect.bottom() - fm.height() ) &&
@@ -346,8 +370,8 @@ void ComicApplet::updateSize()
     if ( !mImage.isNull() && mImage.size().width() > 0 ) {
         // Set height for given width keeping image aspect ratio
         const QSize size = mImage.size();
-        int leftArea = mShowPreviousButton ? s_arrowWidth : 0;
-        int rightArea = mShowNextButton ? s_arrowWidth : 0;
+        int leftArea = (mShowPreviousButton && !mArrowsOnHover) ? s_arrowWidth : 0;
+        int rightArea = (mShowNextButton && !mArrowsOnHover) ? s_arrowWidth : 0;
         qreal aspectRatio = qreal( size.height() ) / size.width();
         qreal imageHeight = aspectRatio * ( geometry().width() - leftArea - rightArea );
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
@@ -417,7 +441,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
 
     int leftImageGap = 0;
     int buttonMiddle = ( contentRect.height() / 2 ) + contentRect.top();
-    if ( mShowPreviousButton ) {
+    if ( mShowPreviousButton && !mArrowsOnHover ) {
         QPolygon arrow( 3 );
         arrow.setPoint( 0, QPoint( contentRect.left() + 3, buttonMiddle ) );
         arrow.setPoint( 1, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle - 15 ) );
@@ -430,7 +454,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     }
 
     int rightImageGap = 0;
-    if ( mShowNextButton ) {
+    if ( mShowNextButton && !mArrowsOnHover ) {
         QPolygon arrow( 3 );
         arrow.setPoint( 0, QPoint( contentRect.right() - 3, buttonMiddle ) );
         arrow.setPoint( 1, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15 ) );
@@ -448,6 +472,9 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->drawImage( imageRect, mImage );
 
     p->restore();
+
+    mIdealSize = size() - contentsRect().size() +
+                 mImage.size() + QSizeF( leftImageGap + rightImageGap, urlHeight + topHeight );
 
     toolTipData.mainText += mAdditionalText;
     Plasma::ToolTipManager::self()->setToolTipContent( this, toolTipData );
@@ -469,7 +496,6 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
     engine->disconnectSource( identifier, this );
     engine->connectSource( identifier, this );
-
     const Plasma::DataEngine::Data data = engine->query( identifier );
 }
 
@@ -484,6 +510,11 @@ void ComicApplet::updateButtons()
         mShowPreviousButton = false;
     else
         mShowPreviousButton = true;
+
+    if ( mArrowsOnHover ) {
+        mNextButton->setEnabled( mShowNextButton );
+        mPrevButton->setEnabled( mShowPreviousButton );
+    }
 }
 
 void ComicApplet::updateContextMenu()
@@ -510,6 +541,69 @@ void ComicApplet::slotSaveComicAs()
         return;
 
     KIO::NetAccess::file_copy( srcUrl, destUrl );
+}
+
+void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
+{
+    if ( constraints && Plasma::SizeConstraint && mArrowsOnHover ) {
+        qreal left, top, right, bottom;
+        getContentsMargins( &left, &top, &right, &bottom );
+        QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
+                           size().height() - mFrame->size().height() - ( bottom / 2 ) );
+        mFrame->setPos( buttons );
+    }
+}
+
+void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
+{
+    Q_UNUSED( event );
+    if ( mArrowsOnHover ) {
+        mFadingItem->showItem();
+    }
+}
+
+void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
+{
+    Q_UNUSED( event );
+    if ( mArrowsOnHover ) {
+        mFadingItem->hideItem();
+    }
+}
+
+void ComicApplet::scaleToContent()
+{
+    resize( mIdealSize );
+}
+
+void ComicApplet::buttonBar()
+{
+    if ( mArrowsOnHover ) {
+        mFrame = new Plasma::Frame( this );
+        QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
+        mPrevButton = new Plasma::PushButton( mFrame );
+        mPrevButton->nativeWidget()->setIcon( KIcon("arrow-left") );
+        mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
+        mPrevButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+        connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
+        l->addItem( mPrevButton );
+        mNextButton = new Plasma::PushButton( mFrame );
+        mNextButton->nativeWidget()->setIcon( KIcon("arrow-right") );
+        mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
+        mNextButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+        connect( mNextButton, SIGNAL( clicked() ), this , SLOT( slotNextDay() ) );
+        l->addItem( mNextButton );
+        mFrame->setLayout( l );
+        mFrame->setFrameShadow( Plasma::Frame::Raised );
+        // To get correct frame size in constraintsEvent
+        l->activate();
+        mFrame->hide();
+        mFadingItem = new FadingItem( mFrame );
+        mFadingItem->hide();
+    } else {
+        delete mFrame;
+        mFrame = 0;
+    }
+    setAcceptsHoverEvents( mArrowsOnHover );
 }
 
 #include "comic.moc"
