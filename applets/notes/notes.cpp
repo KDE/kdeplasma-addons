@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 Lukas Kropatschek <lukas.krop@kdemail.net>         *
  *   Copyright (C) 2008 Sebastian Kügler <sebas@kde.org>                   *
+ *   Copyright (C) 2008 Davide Bettio <davide.bettio@kdemail.net>
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -292,6 +293,15 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     ui.useThemeColor->setChecked(m_useThemeColor);
     ui.useCustomColor->setChecked(!m_useThemeColor);
     ui.checkSpelling->setChecked(m_checkSpelling);
+
+    for (int i = 0; i < m_colorActions.size(); i++){
+        QString text = m_colorActions[i]->text();
+        if (!text.isEmpty()){
+            ui.notesColorComboBox->insertItem(i, text);
+            if (m_colorActions[i]->property("color").toString() == m_color)
+                ui.notesColorComboBox->setCurrentIndex(i);
+        }
+    }
 }
 
 void Notes::configAccepted()
@@ -357,6 +367,13 @@ void Notes::configAccepted()
         m_checkSpelling = spellCheck;
         cg.writeEntry("checkSpelling", m_checkSpelling);
         m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
+    }
+
+    QString tmpColor = m_colorActions[ui.notesColorComboBox->currentIndex()]->property("color").toString();
+    if (tmpColor != m_color){
+        m_color = tmpColor;
+        cg.writeEntry("color", tmpColor);
+        changed = true;
     }
 
     if (changed) {
