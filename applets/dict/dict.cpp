@@ -21,18 +21,17 @@
 #include "dict.h"
 
 #include <QGraphicsProxyWidget>
-#include <QTime>
-#include <QTimer>
-#include <QtWebKit/QWebView>
 #include <QGraphicsLinearLayout>
+#include <QTimer>
+#include <QWebView>
 
-#include <KConfigDialog>
 #include <KDebug>
 #include <KIcon>
 #include <KLineEdit>
 #include <KStandardDirs>
 
 #include <Plasma/Animator>
+#include <Plasma/DataEngine>
 #include <Plasma/Icon>
 #include <Plasma/LineEdit>
 
