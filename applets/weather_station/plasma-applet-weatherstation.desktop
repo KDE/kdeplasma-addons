@@ -1,9 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=LCD Weather Station
+Name[el]=Μετεωρολογικός σταθμός LCD
 Name[es]=Estación meteorológica LCD
 Name[gl]=Estación meteorolóxica LCD
 Name[ja]=LCD 気象レポート
+Name[km]=ស្ថានីយ​អាកាសធាតុ​ LCD
 Name[nds]=LCD-Wederstatschoon
 Name[pt]=Estação Meteorológica LCD
 Name[pt_BR]=Estação meteorológica LCD
@@ -13,9 +15,11 @@ Name[uk]=Метеорологічна станція на дисплеї
 Name[x-test]=xxLCD Weather Stationxx
 Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
+Comment[el]=Αναφορά καιρού με στυλ εμφάνισης LCD
 Comment[es]=Informe meteorológico con un estilo de pantalla LCD
 Comment[gl]=Boletíns meteorolóxicos cun estilo de pantalla LCD
 Comment[ja]=LCD 表示による気象レポート
+Comment[km]=របាយការណ៍​អាកាស​ធាតុ​ជា​មួយ​នឹង​រចនាប័ទ្ម​បង្ហាញ LCD
 Comment[nds]=Wederberichten mit en LCD-Dorstellstil
 Comment[pt]=Boletins meteorológicos com um estilo de visualização LCD
 Comment[pt_BR]=Informações meteorológicas com um estilo de visualização LCD

@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=News
+Name[el]=Ειδήσεις
 Name[es]=Noticias
 Name[gl]=Novas
 Name[ja]=ニュース
+Name[km]=ព័ត៌មាន​
 Name[nds]=Narichten
 Name[pt]=Notícias
 Name[pt_BR]=Notícias
@@ -13,9 +15,11 @@ Name[uk]=Новини
 Name[x-test]=xxNewsxx
 Name[zh_TW]=新聞
 Comment=Show news from various sources.
+Comment[el]=Εμφάνιση ειδήσεων από διάφορες πηγές.
 Comment[es]=Muestra noticias de varias fuentes.
 Comment[gl]=Mostra as novas de varias fontes.
 Comment[ja]=さまざまなソースからニュースを表示します
+Comment[km]=បង្ហាញ​ព័ត៌មាន​ពី​ប្រភព​ផ្សេងៗ ។
 Comment[nds]=Narichten ut en Reeg Borns wiesen
 Comment[pt]=Mostrar notícias de várias fontes.
 Comment[pt_BR]=Mostra notícias de várias fontes.

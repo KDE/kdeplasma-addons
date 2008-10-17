@@ -1,7 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Paste
+Name[el]=Επικόλληση
 Name[gl]=Apegar
+Name[km]=បិទភ្ជាប់
 Name[nds]=Infögen
 Name[pt]=Colar
 Name[pt_BR]=Colar
@@ -11,7 +13,9 @@ Name[uk]=Вставка
 Name[x-test]=xxPastexx
 Name[zh_TW]=貼上
 Comment=Paste text snippets
+Comment[el]=Επικόλληση δειγμάτων κειμένου
 Comment[gl]=Apega retallos de texto
+Comment[km]=បិទភ្ជាប់​ snippets អត្ថបទ
 Comment[nds]=Textsnippels infögen
 Comment[pt]=Colar excertos de texto
 Comment[pt_BR]=Colar os fragmentos de texto
