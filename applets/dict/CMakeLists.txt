@@ -6,9 +6,6 @@ INCLUDE_DIRECTORIES(
 set(dict_SRCS
     dict.cpp)
 
-
-kde4_add_ui_files(dict_SRCS config.ui )
-
 kde4_add_plugin(plasma_applet_dict ${dict_SRCS})
 target_link_libraries(plasma_applet_dict ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS}
 	${QT_QTWEBKIT_LIBRARY})

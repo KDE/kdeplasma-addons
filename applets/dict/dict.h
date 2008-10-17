@@ -23,7 +23,6 @@
 
 #include <Plasma/Applet>
 #include <Plasma/DataEngine>
-#include "ui_config.h"
 
 class QTimer;
 class QLineEdit;
@@ -58,11 +57,7 @@ class Dict : public Plasma::Applet
 
     protected slots:
 //         void acceptedTimeStringState(bool);
-        void configAccepted();
         void define();
-
-    protected:
-        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
         QString wnToHtml(const QString& text);
@@ -79,7 +74,6 @@ class Dict : public Plasma::Applet
         //Plasma::Flash *m_flash;
         QStringList m_defList;
         QStringList::iterator m_i;
-        Ui::config ui;
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
         Plasma::Icon *m_icon;

@@ -43,7 +43,6 @@ Dict::Dict(QObject *parent, const QVariantList &args)
       //m_flash(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    setHasConfigurationInterface(true);
     resize(500,200);
 }
 
@@ -202,19 +201,6 @@ QString Dict::wnToHtml(const QString &text)
     return def;
 }
 
-void Dict::createConfigurationInterface(KConfigDialog *parent)
-{
-    QWidget *widget = new QWidget();
-    ui.setupUi(widget);
-    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, parent->windowTitle(), icon());
-
-    ui.timeoutSpinBox->setValue(m_autoDefineTimeout);
-    kDebug() << "SHOW config dialog";
-}
-
 void Dict::define()
 {
     if (m_timer->isActive()) {
@@ -240,19 +226,6 @@ void Dict::define()
     }
 
     updateConstraints();
-}
-
-void Dict::configAccepted()
-{
-    KConfigGroup cg = config();
-
-    m_autoDefineTimeout = ui.timeoutSpinBox->value();
-    cg.writeEntry("autoDefineTimeout", m_autoDefineTimeout);
-    m_timer->setInterval(m_autoDefineTimeout);
-
-    updateConstraints();
-
-    emit configNeedsSaving();
 }
 
 Dict::~Dict()
