@@ -114,16 +114,6 @@ void Dict::linkDefine(const QString &text)
     define();
 }
 
-void Dict::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
-        //updateGeometry();
-    }
-    if (constraints & Plasma::SizeConstraint) {
-        updateGeometry();
-    }
-}
-
 void Dict::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source);

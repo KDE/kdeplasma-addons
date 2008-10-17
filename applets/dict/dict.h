@@ -48,7 +48,6 @@ class Dict : public Plasma::Applet
 
     void init();
         void setPath(const QString&);
-        void constraintsEvent(Plasma::Constraints);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
