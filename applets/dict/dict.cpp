@@ -36,6 +36,8 @@
 #include <Plasma/Icon>
 #include <Plasma/LineEdit>
 
+#define AUTO_DEFINE_TIMEOUT 500
+
 using namespace Plasma;
 
 Dict::Dict(QObject *parent, const QVariantList &args)
@@ -50,7 +52,6 @@ void Dict::init()
 {
     KConfigGroup cg = config();
 
-    m_autoDefineTimeout = cg.readEntry("autoDefineTimeout", 500);
     m_wordEdit = new LineEdit;
     m_wordEdit->nativeWidget()->setClearButtonShown( true );
     m_wordEdit->nativeWidget()->setClickMessage(i18n("Enter word to define here"));
@@ -75,7 +76,7 @@ void Dict::init()
 
 //  Timer for auto-define
     m_timer = new QTimer(this);
-    m_timer->setInterval(m_autoDefineTimeout);
+    m_timer->setInterval(AUTO_DEFINE_TIMEOUT);
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(define()));
 

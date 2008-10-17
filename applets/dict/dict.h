@@ -66,7 +66,6 @@ class Dict : public Plasma::Applet
         QLineEdit *m_wordChooser;
         QString m_word;
         QTimer* m_timer;
-        int m_autoDefineTimeout;
         //QGraphicsPixmapItem *m_graphicsIcon; 
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_horLayout;
