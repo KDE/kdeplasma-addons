@@ -31,7 +31,6 @@
 #include <KStandardDirs>
 
 #include <Plasma/Animator>
-#include <Plasma/DataEngine>
 #include <Plasma/Icon>
 #include <Plasma/LineEdit>
 

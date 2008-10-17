@@ -22,6 +22,7 @@
 #define DICT_H
 
 #include <Plasma/Applet>
+#include <Plasma/DataEngine>
 
 class QTimer;
 class QLineEdit;
@@ -34,7 +35,6 @@ class KLineEdit;
 
 namespace Plasma
 {
-    class DataEngine;
     class Icon;
     class LineEdit;
 }
