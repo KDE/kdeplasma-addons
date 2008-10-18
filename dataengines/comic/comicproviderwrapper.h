@@ -28,6 +28,9 @@
 namespace Kross {
     class Action;
 }
+namespace Plasma {
+    class Package;
+}
 class ComicProviderKross;
 
 class ImageWrapper : public QObject
@@ -37,11 +40,12 @@ class ImageWrapper : public QObject
         Q_PROPERTY( QByteArray rawData READ rawData WRITE setRawData )
     public:
         QImage image() const;
+        void setImage( const QImage &image );
         QByteArray rawData() const;
         void setRawData( const QByteArray &rawData );
 
     private:
-        QByteArray mData;
+        QImage mImage;
 };
 
 class ComicProviderWrapper : public QObject
@@ -49,11 +53,17 @@ class ComicProviderWrapper : public QObject
         Q_OBJECT
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
+        Q_ENUMS( PositionType )
         Q_PROPERTY( QString firstStripDate READ firstStripDate WRITE setFirstStripDate )
         Q_PROPERTY( int firstStripNumber READ firstStripNumber WRITE setFirstStripNumber )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
-        Q_PROPERTY( bool useDefaultImageHandler READ useDefaultImageHandler WRITE setUseDefaultImageHandler )
     public:
+        enum PositionType {
+            Left = 0,
+            Top,
+            Right,
+            Bottom
+        };
         enum RequestType {
             Page = 0,
             Image,
@@ -99,6 +109,7 @@ class ComicProviderWrapper : public QObject
         int requestedNumber() const;
         QString requestedString() const;
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
+        void addHeader( const QString &name, PositionType position = Top );
 
         void init();
 
@@ -107,14 +118,13 @@ class ComicProviderWrapper : public QObject
         const QStringList& extensions() const;
 
     private:
-        Kross::Action *m_action;
-        ComicProviderKross *m_provider;
-        QStringList m_functions;
-        bool m_funcFound;
-        bool m_useDefaultImageHandler;
-        QImage m_image;
-        ImageWrapper m_krossImage;
-        static QStringList m_extensions;
+        Kross::Action *mAction;
+        ComicProviderKross *mProvider;
+        QStringList mFunctions;
+        bool mFuncFound;
+        ImageWrapper mKrossImage;
+        static QStringList mExtensions;
+        Plasma::Package *mPackage;
 };
 
 #endif

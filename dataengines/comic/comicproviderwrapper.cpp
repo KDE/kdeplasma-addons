@@ -21,6 +21,8 @@
 #include "comicprovider.h"
 
 #include <QTimer>
+#include <QBuffer>
+#include <QPainter>
 #include <KDebug>
 #include <KStandardDirs>
 #include <Plasma/Package>
@@ -28,63 +30,71 @@
 #include <kross/core/interpreter.h>
 #include <kross/core/manager.h>
 
-QStringList ComicProviderWrapper::m_extensions;
+QStringList ComicProviderWrapper::mExtensions;
 
 QImage ImageWrapper::image() const
 {
-    return QImage::fromData( mData );
+    return mImage;
+}
+
+void ImageWrapper::setImage( const QImage &image )
+{
+    mImage = image;
 }
 
 QByteArray ImageWrapper::rawData() const
 {
-    return mData;
+    QByteArray data;
+    QBuffer buffer( &data );
+    mImage.save( &buffer );
+    return data;
 }
 
 void ImageWrapper::setRawData( const QByteArray &rawData )
 {
-    mData = rawData;
+    mImage = QImage::fromData( rawData );
 }
 
 
 ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
     : QObject( parent ),
-      m_action( 0 ),
-      m_provider( parent ),
-      m_useDefaultImageHandler( true )
+      mAction( 0 ),
+      mProvider( parent ),
+      mPackage( 0 )
 {
     QTimer::singleShot( 0, this, SLOT( init() ) );
 }
 
 ComicProviderWrapper::~ComicProviderWrapper()
 {
+    delete mPackage;
 }
 
 void ComicProviderWrapper::init()
 {
-    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + m_provider->pluginName() + "/" );
-    kDebug() << path;
+    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + "/" );
     if (!path.isEmpty()) {
         Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
         structure->setPath( path );
-        Plasma::Package *package = new Plasma::Package( path, structure );
+        mPackage = new Plasma::Package( path, structure );
 
-        if ( package->isValid() ) {
+        if ( mPackage->isValid() ) {
             // package->filePath( "mainscript" ) returns empty if it does not exist
             // We want to test extensions supported by kross with mainscript
-            const QString mainscript = package->path() + structure->contentsPrefix() +
-                                    structure->path( "mainscript" );
+            const QString mainscript = mPackage->path() + structure->contentsPrefix() +
+                                       structure->path( "mainscript" );
 
             QFileInfo info( mainscript );
             for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {
                 info.setFile( mainscript + extensions().value( i ) );
             }
             if ( info.exists() ) {
-                m_action = new Kross::Action( parent(), m_provider->pluginName() );
-                if ( m_action ) {
-                    m_action->addObject( this, "comic" );
-                    m_action->setFile( info.filePath() );
-                    m_action->trigger();
-                    m_functions = m_action->functionNames();
+                mAction = new Kross::Action( parent(), mProvider->pluginName() );
+                if ( mAction ) {
+                    mAction->addObject( this, "comic" );
+                    mAction->setFile( info.filePath() );
+                    mAction->trigger();
+                    mFunctions = mAction->functionNames();
 
                     callFunction( "init" );
                 }
@@ -95,7 +105,7 @@ void ComicProviderWrapper::init()
 
 const QStringList& ComicProviderWrapper::extensions() const
 {
-    if ( m_extensions.isEmpty() ) {
+    if ( mExtensions.isEmpty() ) {
         Kross::InterpreterInfo* info;
         QStringList list;
         QString wildcards;
@@ -104,10 +114,10 @@ const QStringList& ComicProviderWrapper::extensions() const
             info = Kross::Manager::self().interpreterInfo( interpretername );
             wildcards = info->wildcard();
             wildcards.replace( "*", "" );
-            m_extensions << wildcards.split( " " );
+            mExtensions << wildcards.split( " " );
         }
     }
-    return m_extensions;
+    return mExtensions;
 }
 
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType()
@@ -122,14 +132,13 @@ KUrl ComicProviderWrapper::websiteUrl()
 
 QImage ComicProviderWrapper::image()
 {
-    if ( m_useDefaultImageHandler ) {
-        return m_image;
-    }
     ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( "image" ).value<QObject*>() );
-    if ( img ) {
+    if ( functionCalled() && img ) {
+        kDebug();
         return img->image();
     }
-    return QImage();
+    kDebug() << "default" << mKrossImage.image().size();
+    return mKrossImage.image();
 }
 
 QString ComicProviderWrapper::identifier()
@@ -164,13 +173,11 @@ QString ComicProviderWrapper::additionalText()
 
 void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
 {
-    if ( m_useDefaultImageHandler && id == Image ) {
-        m_image = QImage::fromData( data );
-        emit m_provider->finished( m_provider );
-    } else if ( id == Image ) {
-        m_krossImage.setRawData( data );
+    if ( id == Image ) {
+        mKrossImage.setRawData( data );
         callFunction( "pageRetrieved", QVariantList() << id <<
-                      qVariantFromValue( qobject_cast<QObject*>( &m_krossImage ) ) );
+                      qVariantFromValue( qobject_cast<QObject*>( &mKrossImage ) ) );
+        finished();
     } else {
         callFunction( "pageRetrieved", QVariantList() << id << data );
     }
@@ -180,63 +187,64 @@ void ComicProviderWrapper::pageError( int id, const QString &message )
 {
     callFunction( "pageError", QVariantList() << id << message );
     if ( !functionCalled() ) {
-        emit m_provider->error( m_provider );
+        emit mProvider->error( mProvider );
     }
 }
 
 QString ComicProviderWrapper::firstStripDate() const
 {
-    return m_provider->firstStripDate().toString( Qt::ISODate );
+    return mProvider->firstStripDate().toString( Qt::ISODate );
 }
 
 void ComicProviderWrapper::setFirstStripDate( const QString &date )
 {
-    m_provider->setFirstStripDate( QDate::fromString( date, Qt::ISODate ) );
+    mProvider->setFirstStripDate( QDate::fromString( date, Qt::ISODate ) );
 }
 
 int ComicProviderWrapper::firstStripNumber() const
 {
-    return m_provider->firstStripNumber();
+    return mProvider->firstStripNumber();
 }
 
 void ComicProviderWrapper::setFirstStripNumber( int number )
 {
-    m_provider->setFirstStripNumber( number );
+    mProvider->setFirstStripNumber( number );
 }
 
 QString ComicProviderWrapper::comicAuthor() const
 {
-    return m_provider->comicAuthor();
+    return mProvider->comicAuthor();
 }
 
 void ComicProviderWrapper::setComicAuthor( const QString &author )
 {
-    m_provider->setComicAuthor( author );
+    mProvider->setComicAuthor( author );
 }
 
 void ComicProviderWrapper::finished() const
 {
-    emit m_provider->finished( m_provider );
+    kDebug();
+    emit mProvider->finished( mProvider );
 }
 
 void ComicProviderWrapper::error() const
 {
-    emit m_provider->error( m_provider );
+    emit mProvider->error( mProvider );
 }
 
 QString ComicProviderWrapper::requestedDate() const
 {
-    return m_provider->requestedDate().toString( Qt::ISODate );
+    return mProvider->requestedDate().toString( Qt::ISODate );
 }
 
 int ComicProviderWrapper::requestedNumber() const
 {
-    return m_provider->requestedNumber();
+    return mProvider->requestedNumber();
 }
 
 QString ComicProviderWrapper::requestedString() const
 {
-    return m_provider->requestedString();
+    return mProvider->requestedString();
 }
 
 void ComicProviderWrapper::requestPage( const QString &url, int id, const QVariantMap &infos )
@@ -246,33 +254,77 @@ void ComicProviderWrapper::requestPage( const QString &url, int id, const QVaria
     foreach ( const QString& key, infos.keys() ) {
         map[key] = infos[key].toString();
     }
-    m_provider->requestPage( KUrl( url ), id, map );
+    mProvider->requestPage( KUrl( url ), id, map );
 }
 
 bool ComicProviderWrapper::functionCalled() const
 {
-    return m_funcFound;
+    return mFuncFound;
 }
 
 QVariant ComicProviderWrapper::callFunction( const QString &name, const QVariantList &args )
 {
-    if ( m_action ) {
-        m_funcFound = m_functions.contains( name );
-        if ( m_funcFound ) {
-            return m_action->callFunction( name, args );
+    if ( mAction ) {
+        mFuncFound = mFunctions.contains( name );
+        if ( mFuncFound ) {
+            return mAction->callFunction( name, args );
         }
     }
     return QVariant();
 }
 
-void ComicProviderWrapper::setUseDefaultImageHandler( bool useDefaultImageHandler )
+void ComicProviderWrapper::addHeader( const QString &name, PositionType position )
 {
-    m_useDefaultImageHandler = useDefaultImageHandler;
-}
+    const QString headerRelLoc( mPackage->filePath( "images", name ) );
+    const QImage header( headerRelLoc );
+    const QImage comic = mKrossImage.image();
+    int height = 0;
+    int width = 0;
 
-bool ComicProviderWrapper::useDefaultImageHandler() const
-{
-    return m_useDefaultImageHandler;
+    switch (position) {
+    case Top:
+    case Bottom:
+        height = header.height() + comic.height();
+        width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
+        break;
+    case Left:
+    case Right:
+        height = ( header.height() >= comic.height() ) ? header.height() : comic.height();
+        width = header.width() + comic.width();
+        break;
+    }
+
+    QImage image = QImage( QSize( width, height ), QImage::Format_RGB32 );
+    image.fill( header.pixel( QPoint( 0, 0 ) ) );
+
+    QPainter painter( &image );
+
+    // center and draw the Images
+    QPoint headerPos;
+    QPoint comicPos;
+
+    switch (position) {
+    case Top:
+        headerPos = QPoint( ( ( width - header.width() ) / 2 ), 0 );
+        comicPos = QPoint( ( ( width - comic.width() ) / 2 ), header.height() );
+        break;
+    case Bottom:
+        headerPos = QPoint( ( ( width - header.width() ) / 2 ), comic.height() );
+        comicPos = QPoint( ( ( width - comic.width() ) / 2 ), 0 );
+        break;
+    case Left:
+        headerPos = QPoint( 0, ( ( height - header.height() ) / 2 ) );
+        comicPos = QPoint( header.width(), ( ( height - comic.height() ) / 2 ) );
+        break;
+    case Right:
+        headerPos = QPoint( comic.width(), ( ( height - header.height() ) / 2 ) );
+        comicPos = QPoint( 0, ( ( height - comic.height() ) / 2 ) );
+        break;
+    }
+    kDebug() << width << height << headerPos << comicPos;
+    painter.drawImage( headerPos, header );
+    painter.drawImage( comicPos, comic );
+    mKrossImage.setImage( image );
 }
 
 #include "comicproviderwrapper.moc"
