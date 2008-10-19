@@ -101,6 +101,8 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             args << "Date" << date;
         } else if ( type == "Number" ) {
             args << "Number" << parts[ 1 ].toInt();
+        } else if ( type == "String" ) {
+            args << "String" << parts[ 1 ];
         }
         args << service->storageId();
 
