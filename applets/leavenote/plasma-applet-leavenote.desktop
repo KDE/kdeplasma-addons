@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=Leave A Note
+Name[gl]=Deixa unha nota
+Name[nds]=En Notiz dorlaten
+Name[pt]=Deixar uma Nota
+Name[pt_BR]=Deixar uma Nota
+Name[sv]=Lämna ett meddelande
+Name[uk]=Залиш запис
+Name[x-test]=xxLeave A Notexx
+Name[zh_TW]=留下字條
+Icon=knotes
+Comment=Leave notes for the user while they are away
+Comment[gl]=Deixa notas para o usuario mentras está ausente
+Comment[nds]=Notizen för Brukers dorlaten, bides se annerwegens sünd
+Comment[pt]=Deixar notas para o utilizador na sua ausência
+Comment[pt_BR]=Deixar notas para o utilizador na sua ausência
+Comment[sv]=Lämna meddelanden till användare medan de är borta
+Comment[uk]=Залиште повідомлення користувачам, які зараз недоступні
+Comment[x-test]=xxLeave notes for the user while they are awayxx
+Comment[zh_TW]=在使用者離開時留字條給他
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_leavenote
+X-KDE-PluginInfo-Author=Christian Weilbach
+X-KDE-PluginInfo-Email=dunsens@web.de
+X-KDE-PluginInfo-Name=leavenote
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Miscellaneous
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

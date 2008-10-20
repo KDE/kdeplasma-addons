@@ -1,0 +1,11 @@
+This is a basic plasmoid to notify you about
+new messages from any service you have running.
+This is particularly useful and designed for locked
+screen with the plasma-overlay so you don't have to
+unlock just to check if you got new messages (mail,im,
+any other service, ...).
+It uses DBus and only adds information for apps that are
+running (it checks for the dbus interface). At the moment
+sadly only kmail notifies over DBus for new messages.
+Hopefully Kopete can be added soon.
+Hack on it as you like.

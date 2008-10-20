@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=Incoming Message
+Name[gl]=Mensaxe entrante
+Name[nds]=Ankamen Naricht
+Name[pt]=Mensagem Recebida
+Name[pt_BR]=Mensagem Recebida
+Name[sv]=Inkommande meddelanden
+Name[uk]=Вхідне повідомлення
+Name[x-test]=xxIncoming Messagexx
+Name[zh_TW]=進來的訊息
+Icon=mail-message-new
+Comment=Notification of new messages
+Comment[gl]=Notificación de novas mensaxes
+Comment[nds]=Bescheden över niege Narichten
+Comment[pt]=Notificação de mensagens novas
+Comment[pt_BR]=Notificação de mensagens novas
+Comment[sv]=Underrättelse om nya meddelanden
+Comment[uk]=Інформує про нові повідомлення
+Comment[x-test]=xxNotification of new messagesxx
+Comment[zh_TW]=新訊息的通知
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_incomingmsg
+X-KDE-PluginInfo-Author=Christian Weilbach
+X-KDE-PluginInfo-Email=dunsens@web.de
+X-KDE-PluginInfo-Name=incomingmsg
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Miscellaneous
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

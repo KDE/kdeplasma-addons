@@ -1,0 +1,48 @@
+<ui version="4.0" >
+ <class>leavenoteConfig</class>
+ <widget class="QWidget" name="leavenoteConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>130</width>
+    <height>80</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>150</horstretch>
+    <verstretch>80</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>130</width>
+    <height>80</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>300</width>
+    <height>80</height>
+   </size>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QCheckBox" name="useKNotesCheckBox" >
+     <property name="toolTip" >
+      <string>Use KNotes to create notes if it is installed.</string>
+     </property>
+     <property name="text" >
+      <string>Use KNotes.</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

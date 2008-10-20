@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/octet-stream;inode/directory;
+Actions=Preview;
+
+[Desktop Action Preview]
+Name=Preview this file
+Name[gl]=Antever este ficheiro
+Name[nds]=Disse Datei vörweg wiesen
+Name[pt]=Antever este ficheiro
+Name[pt_BR]=Antever este ficheiro
+Name[sv]=Förhandsgranska filen
+Name[uk]=Перегляд цього файла
+Name[x-test]=xxPreview this filexx
+Name[zh_TW]=預覽此檔案
+Icon=previewer
+Exec=qdbus org.kde.plasma /Previewer org.kde.Previewer.openFile %u

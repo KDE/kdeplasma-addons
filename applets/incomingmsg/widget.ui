@@ -1,0 +1,89 @@
+<ui version="4.0" >
+ <class>incomingmsgConfig</class>
+ <widget class="QWidget" name="incomingmsgConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>159</width>
+    <height>191</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QLabel" name="topLabel" >
+     <property name="lineWidth" >
+      <number>1</number>
+     </property>
+     <property name="text" >
+      <string>Show these apss if they are running:</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showKMail" >
+     <property name="text" >
+      <string>KMail</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showXChat" >
+     <property name="text" >
+      <string>XChat</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showKopete" >
+     <property name="text" >
+      <string>Kopete</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="showPidgin" >
+     <property name="text" >
+      <string>Pidgin</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="4" margin="4" />
+ <includes/>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX" >
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY" >
+   <number>10</number>
+  </property>
+  <property name="gridSnapX" >
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY" >
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible" >
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
