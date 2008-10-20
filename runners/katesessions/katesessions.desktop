@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=Kate Sessions
+Name[es]=Sesiones de Kate
+Name[gl]=Sesións de Kate
+Name[nds]=Kate-Törns
+Name[pt]=Sessões do Kate
+Name[pt_BR]=Sessões do Kate
+Name[sv]=Kate-sessioner
+Name[uk]=Сеанси Kate
+Name[x-test]=xxKate Sessionsxx
+Name[zh_TW]=Kate 工作階段
+Comment=Matches Kate Sessions
+Comment[es]=Coincide con las sesiones de Kate
+Comment[gl]=Procura sesións de Kate
+Comment[nds]=Kiekt na Kate-Törns
+Comment[pt]=Corresponde às Sessões do Kate
+Comment[pt_BR]=Corresponde às Sessões do Kate
+Comment[sv]=Matchar Kate-sessioner
+Comment[uk]=Порівнює сеанси Kate
+Comment[x-test]=xxMatches Kate Sessionsxx
+Comment[zh_TW]=符合 Kate 工作階段
+Icon=kate
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+TryExec=kate
+X-KDE-Library=krunner_katesessions
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=katesessions
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
