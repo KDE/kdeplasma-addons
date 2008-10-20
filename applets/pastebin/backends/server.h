@@ -25,7 +25,7 @@
 
 class PastebinServer : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     PastebinServer();
