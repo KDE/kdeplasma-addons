@@ -1,16 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=BbalL
-Name[x-test]=xxBbalLxx
 Comment=A bouncy ball for plasma
-Comment[gl]=Unha bóla a rebotar para plasma
-Comment[nds]=En jumpen Ball för Plasma
-Comment[pt]=Uma bola saltitante para o Plasma
-Comment[pt_BR]=Uma bola saltitante para o Plasma
-Comment[sv]=En studsande boll för Plasma
-Comment[uk]=М’ячик-стрибунець для плазми
-Comment[x-test]=xxA bouncy ball for plasmaxx
-Comment[zh_TW]=Plasma 上的彈跳球遊戲
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=bball
