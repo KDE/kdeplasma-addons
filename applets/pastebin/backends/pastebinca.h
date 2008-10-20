@@ -28,7 +28,7 @@
 
 class PastebinCAServer : public PastebinServer
 {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     PastebinCAServer();
