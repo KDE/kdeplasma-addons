@@ -1,0 +1,33 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Life
+Name[el]=Ζωή
+Name[ga]=Cluiche "Life"
+Name[km]=ជីវិត
+Name[pl]=Długość życia
+Name[x-test]=xxLifexx
+Comment= Conway's Game of Life applet
+Comment[el]=Μικροεφαρμογή του παιχνιδιού της Ζωής του Conway
+Comment[et]=Conway elumängu aplett
+Comment[gl]=Applet do xogo da vida de Conway
+Comment[km]= អាប់ភ្លេត​ល្បែង​ជីវិត​របស់ Conway
+Comment[pt]='Applet' do Jogo da Vida de Conway
+Comment[pt_BR]=Miniaplicativo do Jogo da Vida de Conway
+Comment[sv]=Miniprogram med Conways Game of Life
+Comment[tr]= Conway'in Hayatın Oyunu programcığı
+Comment[uk]=Аплет гри "Life" (Життя), вигаданої Конвеєм
+Comment[x-test]=xx Conway's Game of Life appletxx
+Icon=chronometer
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_life
+X-KDE-PluginInfo-Author=Davide Bettio
+X-KDE-PluginInfo-Email=davide.bettio@kdemail.net
+X-KDE-PluginInfo-Name=life
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Fun and Games
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
