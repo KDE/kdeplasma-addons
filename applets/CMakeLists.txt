@@ -27,6 +27,8 @@ add_subdirectory(luna)
 add_subdirectory(notes)
 add_subdirectory(nowplaying)
 add_subdirectory(showdashboard)
+if(NOT WIN32)
 add_subdirectory(showdesktop)
+endif(NOT WIN32)
 add_subdirectory(twitter)
 
