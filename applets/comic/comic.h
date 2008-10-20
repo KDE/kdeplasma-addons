@@ -67,6 +67,7 @@ class ComicApplet : public Plasma::Applet
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
         void scaleToContent();
+        void buttonBar();
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
@@ -82,7 +83,6 @@ class ComicApplet : public Plasma::Applet
         void loadConfig();
         void saveConfig();
         void updateSize();
-        void buttonBar();
 
         QImage mImage;
         QDate mCurrentDay;

@@ -123,9 +123,6 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    buttonBar();
-    updateButtons();
-
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "&Jump to first Strip" ), this );
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
@@ -151,6 +148,11 @@ void ComicApplet::init()
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+
+    // Otherwise buttons show on plasma start
+    if ( mArrowsOnHover ) {
+        QTimer::singleShot( 0, this, SLOT( buttonBar() ) );
+    }
 }
 
 ComicApplet::~ComicApplet()
@@ -511,7 +513,7 @@ void ComicApplet::updateButtons()
     else
         mShowPreviousButton = true;
 
-    if ( mArrowsOnHover ) {
+    if ( mNextButton && mPrevButton ) {
         mNextButton->setEnabled( mShowNextButton );
         mPrevButton->setEnabled( mShowPreviousButton );
     }
@@ -545,7 +547,7 @@ void ComicApplet::slotSaveComicAs()
 
 void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 {
-    if ( constraints && Plasma::SizeConstraint && mArrowsOnHover ) {
+    if ( constraints && Plasma::SizeConstraint && mFrame ) {
         qreal left, top, right, bottom;
         getContentsMargins( &left, &top, &right, &bottom );
         QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
@@ -557,7 +559,7 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
     Q_UNUSED( event );
-    if ( mArrowsOnHover ) {
+    if ( mFadingItem ) {
         mFadingItem->showItem();
     }
 }
@@ -565,7 +567,7 @@ void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 {
     Q_UNUSED( event );
-    if ( mArrowsOnHover ) {
+    if ( mFadingItem ) {
         mFadingItem->hideItem();
     }
 }
@@ -599,9 +601,14 @@ void ComicApplet::buttonBar()
         mFrame->hide();
         mFadingItem = new FadingItem( mFrame );
         mFadingItem->hide();
+        // Set frame position
+        constraintsEvent( Plasma::SizeConstraint );
     } else {
         delete mFrame;
         mFrame = 0;
+        mPrevButton = 0;
+        mNextButton = 0;
+        mFadingItem = 0;
     }
     setAcceptsHoverEvents( mArrowsOnHover );
 }
