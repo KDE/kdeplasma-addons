@@ -1,0 +1,8 @@
+[feeds]
+Latest KDE News=http://www.kde.org/dotkdeorg.rdf
+Latest KDE Applications=http://www.kde.org/dot/kde-apps-content.rdf
+Planet KDE=http://planetKDE.org/rss20.xml
+KDE-Look.org Content=http://www.kde.org/kde-look-content.rdf
+Slashdot=http://rss.slashdot.org/Slashdot/slashdot
+KernelTrap=http://kerneltrap.org/node/feed
+Linux Today=http://www.linuxtoday.com/biglt.rss

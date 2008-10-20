@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=RSSNOW
+Name[x-test]=xxRSSNOWxx
+Comment=Show news from various sources
+Comment[gl]=Mostra novas de varias fontes.
+Comment[nds]=Narichten vun verscheden Borns wiesen
+Comment[pt]=Mostra as notícias de várias fontes
+Comment[pt_BR]=Mostra as notícias de várias fontes
+Comment[sv]=Visa nyheter från olika källor
+Comment[uk]=Показати новини від різноманітних джерел
+Comment[x-test]=xxShow news from various sourcesxx
+Comment[zh_TW]=顯示不同的來源的新聞
+Type=Service
+Icon=application-rss+xml
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_rssnow
+X-KDE-PluginInfo-Author=Rob Scheepmaker
+X-KDE-PluginInfo-Email=r.scheepmaker@student.utwente.nl
+X-KDE-PluginInfo-Name=rssnow
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
