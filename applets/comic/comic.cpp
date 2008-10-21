@@ -479,7 +479,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
                  mImage.size() + QSizeF( leftImageGap + rightImageGap, urlHeight + topHeight );
 
     toolTipData.mainText += mAdditionalText;
-    Plasma::ToolTipManager::self()->setToolTipContent( this, toolTipData );
+    Plasma::ToolTipManager::self()->setContent( this, toolTipData );
 }
 
 QList<QAction*> ComicApplet::contextualActions()

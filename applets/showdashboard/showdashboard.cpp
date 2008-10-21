@@ -54,7 +54,7 @@ void ShowDashboard::init()
     Plasma::ToolTipManager::ToolTipContent toolTipData;
     toolTipData.mainText = i18n("Show the Plasma Dashboard");
     toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));
-    Plasma::ToolTipManager::self()->setToolTipContent(this, toolTipData);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
     connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
