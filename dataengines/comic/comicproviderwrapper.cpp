@@ -32,6 +32,12 @@
 
 QStringList ComicProviderWrapper::mExtensions;
 
+ImageWrapper::ImageWrapper( QObject *parent, const QImage &image )
+: QObject( parent )
+, mImage( image )
+{
+}
+
 QImage ImageWrapper::image() const
 {
     return mImage;
@@ -55,6 +61,176 @@ void ImageWrapper::setRawData( const QByteArray &rawData )
     mImage = QImage::fromData( rawData );
 }
 
+DateWrapper::DateWrapper( QObject *parent, const QDate &date )
+: QObject( parent )
+, mDate( date )
+{
+}
+
+QDate DateWrapper::date() const
+{
+    return mDate;
+}
+
+void DateWrapper::setDate( const QDate &date )
+{
+    mDate = date;
+}
+
+QDate DateWrapper::fromVariant( const QVariant &variant )
+{
+    if ( variant.type() == QVariant::Date || variant.type() == QVariant::DateTime ) {
+        return variant.toDate();
+    } else if ( variant.type() == QVariant::String ) {
+        return QDate::fromString( variant.toString(), Qt::ISODate );
+    } else if ( variant.type() == QVariant::String ) {
+        DateWrapper* dw = qobject_cast<DateWrapper*>( variant.value<QObject*>() );
+        if (dw) {
+            return dw->date();
+        }
+    }
+    return QDate();
+}
+
+QObject* DateWrapper::addDays( int ndays )
+{
+    return new DateWrapper( this, mDate.addDays( ndays ) );
+}
+
+QObject* DateWrapper::addMonths( int nmonths )
+{
+    return new DateWrapper( this, mDate.addMonths( nmonths ) );
+}
+
+QObject* DateWrapper::addYears( int nyears )
+{
+    return new DateWrapper( this, mDate.addYears( nyears ) );
+}
+
+int DateWrapper::day() const
+{
+    return mDate.day();
+}
+
+int DateWrapper::dayOfWeek() const
+{
+    return mDate.dayOfWeek();
+}
+
+int DateWrapper::dayOfYear() const
+{
+    return mDate.dayOfYear();
+}
+
+int DateWrapper::daysInMonth() const
+{
+    return mDate.daysInMonth();
+}
+
+int DateWrapper::daysInYear() const
+{
+    return mDate.daysInYear();
+}
+
+int DateWrapper::daysTo( const QVariant d ) const
+{
+    return mDate.daysTo( fromVariant( d ) );
+}
+
+bool DateWrapper::isNull() const
+{
+    return mDate.isNull();
+}
+
+bool DateWrapper::isValid() const
+{
+    return mDate.isValid();
+}
+
+int DateWrapper::month() const
+{
+    return mDate.month();
+}
+
+bool DateWrapper::setDate( int year, int month, int day )
+{
+    return mDate.setDate( year, month, day );
+}
+
+int DateWrapper::toJulianDay() const
+{
+    return mDate.toJulianDay();
+}
+
+QString DateWrapper::toString( const QString &format ) const
+{
+    return mDate.toString( format );
+}
+
+QString DateWrapper::toString( int format ) const
+{
+    return mDate.toString( ( Qt::DateFormat )format );
+}
+
+int DateWrapper::weekNumber() const
+{
+    return mDate.weekNumber();
+}
+
+int DateWrapper::year() const
+{
+    return mDate.year();
+}
+
+QObject* DateWrapper::currentDate()
+{
+    return new DateWrapper( this, QDate::currentDate() );
+}
+
+QObject* DateWrapper::fromJulianDay( int jd )
+{
+    return new DateWrapper( this, QDate::fromJulianDay( jd ) );
+}
+
+QObject* DateWrapper::fromString( const QString &string, int format )
+{
+    return new DateWrapper( this, QDate::fromString( string, ( Qt::DateFormat )format ) );
+}
+
+QObject* DateWrapper::fromString( const QString &string, const QString &format )
+{
+    return new DateWrapper( this, QDate::fromString( string, format ) );
+}
+
+bool DateWrapper::isLeapYear ( int year )
+{
+    return QDate::isLeapYear( year );
+}
+
+bool DateWrapper::isValid ( int year, int month, int day )
+{
+    return QDate::isValid( year, month, day );
+}
+
+QString DateWrapper::longDayName ( int weekday )
+{
+    return QDate::longDayName( weekday );
+}
+
+QString DateWrapper::longMonthName ( int month )
+{
+    return QDate::longMonthName( month );
+}
+
+QString DateWrapper::shortDayName ( int weekday )
+{
+    return QDate::shortDayName( weekday );
+}
+
+QString DateWrapper::shortMonthName ( int month )
+{
+    return QDate::shortMonthName( month );
+}
 
 ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
     : QObject( parent ),
@@ -134,10 +310,8 @@ QImage ComicProviderWrapper::image()
 {
     ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( "image" ).value<QObject*>() );
     if ( functionCalled() && img ) {
-        kDebug();
         return img->image();
     }
-    kDebug() << "default" << mKrossImage.image().size();
     return mKrossImage.image();
 }
 
@@ -191,14 +365,15 @@ void ComicProviderWrapper::pageError( int id, const QString &message )
     }
 }
 
-QString ComicProviderWrapper::firstStripDate() const
+QVariant ComicProviderWrapper::firstStripDate()
 {
-    return mProvider->firstStripDate().toString( Qt::ISODate );
+    return QVariant::fromValue( qobject_cast<QObject*>(
+            new DateWrapper( this, mProvider->firstStripDate() ) ) );
 }
 
-void ComicProviderWrapper::setFirstStripDate( const QString &date )
+void ComicProviderWrapper::setFirstStripDate( const QVariant &date )
 {
-    mProvider->setFirstStripDate( QDate::fromString( date, Qt::ISODate ) );
+    mProvider->setFirstStripDate( DateWrapper::fromVariant( date ) );
 }
 
 int ComicProviderWrapper::firstStripNumber() const
@@ -223,7 +398,6 @@ void ComicProviderWrapper::setComicAuthor( const QString &author )
 
 void ComicProviderWrapper::finished() const
 {
-    kDebug();
     emit mProvider->finished( mProvider );
 }
 
@@ -232,9 +406,9 @@ void ComicProviderWrapper::error() const
     emit mProvider->error( mProvider );
 }
 
-QString ComicProviderWrapper::requestedDate() const
+QObject* ComicProviderWrapper::requestedDate()
 {
-    return mProvider->requestedDate().toString( Qt::ISODate );
+    return new DateWrapper( this, mProvider->requestedDate() );
 }
 
 int ComicProviderWrapper::requestedNumber() const
@@ -321,7 +495,6 @@ void ComicProviderWrapper::addHeader( const QString &name, PositionType position
         comicPos = QPoint( 0, ( ( height - comic.height() ) / 2 ) );
         break;
     }
-    kDebug() << width << height << headerPos << comicPos;
     painter.drawImage( headerPos, header );
     painter.drawImage( comicPos, comic );
     mKrossImage.setImage( image );

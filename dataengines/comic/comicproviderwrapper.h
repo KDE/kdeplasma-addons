@@ -36,9 +36,11 @@ class ComicProviderKross;
 class ImageWrapper : public QObject
 {
         Q_OBJECT
-        Q_PROPERTY( QImage image READ image )
+        Q_PROPERTY( QImage image READ image WRITE setImage )
         Q_PROPERTY( QByteArray rawData READ rawData WRITE setRawData )
     public:
+        ImageWrapper( QObject *parent = 0, const QImage &image = QImage() );
+
         QImage image() const;
         void setImage( const QImage &image );
         QByteArray rawData() const;
@@ -48,13 +50,59 @@ class ImageWrapper : public QObject
         QImage mImage;
 };
 
+class DateWrapper : public QObject
+{
+        Q_OBJECT
+        Q_PROPERTY( QDate date READ date WRITE setDate )
+    public:
+        DateWrapper( QObject *parent = 0, const QDate &date = QDate() );
+
+        QDate date() const;
+        void setDate( const QDate &date );
+        static QDate fromVariant( const QVariant &variant );
+
+    public slots:
+        QObject* addDays( int ndays );
+        QObject* addMonths( int nmonths );
+        QObject* addYears( int nyears );
+        int day() const;
+        int dayOfWeek() const;
+        int dayOfYear() const;
+        int daysInMonth() const;
+        int daysInYear() const;
+        int daysTo( const QVariant d ) const;
+        bool isNull() const;
+        bool isValid() const;
+        int month() const;
+        bool setDate( int year, int month, int day );
+        int toJulianDay() const;
+        QString toString( const QString &format ) const;
+        QString toString( int format = 0 ) const;
+        int weekNumber() const;
+        int year() const;
+        QObject* currentDate();
+        QObject* fromJulianDay( int jd );
+        QObject* fromString( const QString & string, int format = Qt::TextDate );
+        QObject* fromString( const QString & string, const QString & format );
+        bool isLeapYear ( int year );
+        bool isValid ( int year, int month, int day );
+        QString longDayName ( int weekday );
+        QString longMonthName ( int month );
+        QString shortDayName ( int weekday );
+        QString shortMonthName ( int month );
+
+    private:
+        QDate mDate;
+};
+
 class ComicProviderWrapper : public QObject
 {
         Q_OBJECT
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
-        Q_PROPERTY( QString firstStripDate READ firstStripDate WRITE setFirstStripDate )
+        Q_ENUMS( DateType )
+        Q_PROPERTY( QVariant firstStripDate READ firstStripDate WRITE setFirstStripDate )
         Q_PROPERTY( int firstStripNumber READ firstStripNumber WRITE setFirstStripNumber )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
     public:
@@ -74,6 +122,14 @@ class ComicProviderWrapper : public QObject
             NumberIdentifier = ComicProvider::NumberIdentifier,
             StringIdentifier = ComicProvider::StringIdentifier
         };
+        enum DateType {
+            TextDate = Qt::TextDate,
+            ISODate = Qt::ISODate,
+            SystemLocaleShortDate = Qt::SystemLocaleShortDate,
+            SystemLocaleLongDate = Qt::SystemLocaleLongDate,
+            DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
+            DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
+        };
 
         ComicProviderWrapper( ComicProviderKross *parent );
         ~ComicProviderWrapper();
@@ -90,8 +146,8 @@ class ComicProviderWrapper : public QObject
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
 
-        QString firstStripDate() const;
-        void setFirstStripDate( const QString &date );
+        QVariant firstStripDate();
+        void setFirstStripDate( const QVariant &date );
         int firstStripNumber() const;
         void setFirstStripNumber( int number );
         QString comicAuthor() const;
@@ -105,7 +161,7 @@ class ComicProviderWrapper : public QObject
         void finished() const;
         void error() const;
 
-        QString requestedDate() const;
+        QObject* requestedDate();
         int requestedNumber() const;
         QString requestedString() const;
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
