@@ -5,117 +5,265 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>250</width>
-    <height>280</height>
+    <width>584</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Configure File Watcher</string>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <layout class="QVBoxLayout" >
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" colspan="2" >
+    <widget class="QLabel" name="label_4" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>File</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <spacer name="horizontalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>13</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="2" >
+    <widget class="QLabel" name="label_2" >
+     <property name="text" >
+      <string>File:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3" >
+    <widget class="QLabel" name="label_5" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Font</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" >
+    <spacer name="horizontalSpacer_2" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>13</width>
+       <height>22</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="1" colspan="2" >
+    <widget class="QLabel" name="label_6" >
+     <property name="text" >
+      <string>Font:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="3" >
+    <widget class="KFontRequester" name="fontRequester" />
+   </item>
+   <item row="6" column="1" colspan="2" >
+    <widget class="QLabel" name="label_7" >
+     <property name="text" >
+      <string>Color:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
-      <layout class="QHBoxLayout" >
-       <item>
-        <widget class="QLabel" name="label_2" >
-         <property name="text" >
-          <string>File:</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="KColorButton" name="fontColorButton" />
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox" >
-       <property name="title" >
-        <string>Styling</string>
+      <spacer name="horizontalSpacer_3" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
        </property>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QPushButton" name="pb_font" >
-          <property name="text" >
-           <string>Font</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pb_fontColor" >
-          <property name="text" >
-           <string>Text Color</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="groupBoxSettings" >
-       <property name="title" >
-        <string>Size settings</string>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2" >
-        <item>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLabel" name="label" >
-            <property name="text" >
-             <string>Max rows:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="sb_maxRows" >
-            <property name="minimum" >
-             <number>1</number>
-            </property>
-            <property name="value" >
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line" >
-          <property name="orientation" >
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout" >
-          <item>
-           <widget class="QCheckBox" name="chb_autoResize" />
-          </item>
-          <item>
-           <widget class="QLabel" name="label_3" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Preferred" hsizetype="MinimumExpanding" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text" >
-             <string>Auto resize, according
-to the text content</string>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-       <zorder></zorder>
-       <zorder>line</zorder>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
+   <item row="12" column="3" >
+    <spacer name="verticalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>389</width>
+       <height>71</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="2" >
+    <spacer name="verticalSpacer_2" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="2" >
+    <spacer name="verticalSpacer_3" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="0" >
+    <widget class="QLabel" name="label_3" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Size and Rows</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2" colspan="2" >
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Max rows:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="maxRowsSpinBox" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimum" >
+        <number>1</number>
+       </property>
+       <property name="value" >
+        <number>5</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="2" colspan="2" >
+    <widget class="QCheckBox" name="autoResizeCheckBox" >
+     <property name="text" >
+      <string>Auto resize, according to the text content</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3" >
+    <widget class="KUrlRequester" name="pathUrlRequester" />
+   </item>
+   <item row="5" column="2" >
+    <spacer name="verticalSpacer_4" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>4</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KFontRequester</class>
+   <extends>QWidget</extends>
+   <header>kfontrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

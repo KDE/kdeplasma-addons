@@ -32,8 +32,6 @@
 
 #include <Plasma/Theme>
 
-#include "fileWatcherConfig.h"
-
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_autoResize(false)
@@ -145,82 +143,39 @@ void FileWatcher::doAutoResize()
   }
 }
 
-void FileWatcher::newPath(const QString& path)
-{
-  m_tmpPath = path;
-}
-
-void FileWatcher::fontColorChanged(const QColor& color)
-{
-  m_tmpColor = color;
-}
-
-void FileWatcher::fontChanged(const QFont& font)
-{
-  m_tmpFont = font;
-}
-
-void FileWatcher::maxRowsChanged(int rows)
-{
-  m_tmpMaxRows = rows;
-}
-
-void FileWatcher::autoResizeChanged(int state)
-{
-  if (state == Qt::Checked){
-    m_tmpAutoResize = true;
-  }
-  else{
-    m_tmpAutoResize = false;
-  }
-}
-
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
 {
-    //create dialog UI, pointer to dialog is used in configAccepted, to get user settings
-    FileWatcherConfig* config_dialog = new FileWatcherConfig(parent);
-
-    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage(config_dialog, parent->windowTitle(), icon());
-    parent->showButtonSeparator(true);
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    parent->addPage(widget, i18n("General"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    QObject::connect(config_dialog, SIGNAL(newFile(const QString&)), this, SLOT(newPath(const QString&)));
-    QObject::connect(config_dialog, SIGNAL(maxRowsChanged(int)), this, SLOT(maxRowsChanged(int)));
-    QObject::connect(config_dialog, SIGNAL(fontChanged(QFont)), this, SLOT(fontChanged(QFont)));
-    QObject::connect(config_dialog, SIGNAL(fontColorChanged(QColor)), this, SLOT(fontColorChanged(QColor)));
-    QObject::connect(config_dialog, SIGNAL(autoResizeChanged(int)),this, SLOT(autoResizeChanged(int)));
-
-    m_tmpPath = file->fileName();
-    config_dialog->setPath(m_tmpPath);
-    m_tmpColor = textItem->defaultTextColor();
-    config_dialog->setTextColor(m_tmpColor);
-    m_tmpFont = textItem->font();
-    config_dialog->setFont(m_tmpFont);
-    m_tmpMaxRows = textDocument->maximumBlockCount();
-    config_dialog->setMaxRows(m_tmpMaxRows);
-    m_tmpAutoResize = m_autoResize;
-    config_dialog->setAutoResizeFlag(m_tmpAutoResize);
+    ui.pathUrlRequester->setPath(file->fileName());
+    ui.fontRequester->setFont(m_tmpFont);
+    ui.fontColorButton->setColor(textItem->defaultTextColor());
+    ui.maxRowsSpinBox->setValue(textDocument->maximumBlockCount());
 }
 
 void FileWatcher::configAccepted()
 {
     KConfigGroup cg = config();
 
-    cg.writePathEntry("path", m_tmpPath);
+    QFileInfo file(ui.pathUrlRequester->url().toLocalFile());
+    if (file.isFile()){
+        m_tmpPath = file.absoluteFilePath();
+        cg.writePathEntry("path", file.absoluteFilePath());
+    }
 
-    textItem->setDefaultTextColor(m_tmpColor);
-    cg.writeEntry("textColor", m_tmpColor);
+    textItem->setFont(ui.fontRequester->font());
+    cg.writeEntry("font", ui.fontRequester->font());
 
-    textItem->setFont(m_tmpFont);
-    cg.writeEntry("font", m_tmpFont);
+    textItem->setDefaultTextColor(ui.fontColorButton->color());
+    cg.writeEntry("textColor", ui.fontColorButton->color());
 
-    textDocument->setMaximumBlockCount(m_tmpMaxRows);
-    cg.writeEntry("maxRows", m_tmpMaxRows);
-
-    m_autoResize = m_tmpAutoResize;
-    cg.writeEntry("autoResize", m_autoResize);
+    textDocument->setMaximumBlockCount(ui.maxRowsSpinBox->value());
+    cg.writeEntry("maxRows", ui.maxRowsSpinBox->value());
 
     textItem->update();
     loadFile(m_tmpPath);
