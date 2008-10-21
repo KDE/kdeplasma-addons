@@ -29,7 +29,6 @@
 #include <plasma/dataengine.h>
 #include <plasma/dialog.h>
 #include "ui_fuzzyClockConfig.h"
-#include <ui_calendar.h>
 
 #include <libplasmaclock/clockapplet.h>
 
