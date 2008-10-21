@@ -40,6 +40,9 @@ class FileWatcher : public Plasma::Applet
 
     void init();
 
+  protected:
+    void constraintsEvent(Plasma::Constraints constraints);
+
   protected slots:
     void configAccepted();
 
@@ -59,13 +62,8 @@ class FileWatcher : public Plasma::Applet
     QTextStream *textStream;
     QTextDocument *textDocument;
 
-    QColor m_tmpColor;
-    QFont m_tmpFont;
     QString m_tmpPath;
-    int m_tmpMaxRows;
-    bool m_tmpAutoResize;
 
-    bool m_autoResize;
     //distance between text and plasma widget
     enum { eBorderSize = 5 };
 

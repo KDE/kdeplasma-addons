@@ -33,8 +33,7 @@
 #include <Plasma/Theme>
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-      m_autoResize(false)
+    : Plasma::Applet(parent, args)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
@@ -55,10 +54,9 @@ void FileWatcher::init()
   QString path = cg.readEntry("path", QString());
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
-  textDocument->setMaximumBlockCount(cg.readEntry("maxRows", 5));
+  QFontMetrics metrics(textItem->font());
+  textDocument->setMaximumBlockCount(geometry().height() / metrics.height());
   textItem->update();
-
-  m_autoResize = cg.readEntry("autoResize",false);
 
   if (path.isEmpty()) {
       setConfigurationRequired(true, i18n("Select a file to watch."));
@@ -71,6 +69,19 @@ void FileWatcher::init()
 FileWatcher::~FileWatcher()
 {
   delete textStream;
+}
+
+void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
+{
+    QFontMetrics metrics(textItem->font());
+    textDocument->setMaximumBlockCount((size().height() - 10) / metrics.height());
+
+    textDocument->clear();
+    textItem->update();
+    if (textStream){
+        textStream->seek(0);
+        newData();
+    }
 }
 
 void FileWatcher::loadFile(const QString& path)
@@ -127,20 +138,6 @@ void FileWatcher::newData()
   }
 
   cursor.endEditBlock();
-
-  //if is set flag to resize, resize also plasma widget
-  if (m_autoResize == true){
-    doAutoResize();
-  }
-
-}
-
-void FileWatcher::doAutoResize()
-{
-  //resize widget only if is document not empty
-  if (textItem->document()->isEmpty() == false){
-    resize(textItem->boundingRect().width() + eBorderSize*2,textItem->boundingRect().height() + eBorderSize*2);
-  }
 }
 
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
@@ -153,9 +150,8 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     ui.pathUrlRequester->setPath(file->fileName());
-    ui.fontRequester->setFont(m_tmpFont);
+    ui.fontRequester->setFont(textItem->font());
     ui.fontColorButton->setColor(textItem->defaultTextColor());
-    ui.maxRowsSpinBox->setValue(textDocument->maximumBlockCount());
 }
 
 void FileWatcher::configAccepted()
@@ -173,9 +169,6 @@ void FileWatcher::configAccepted()
 
     textItem->setDefaultTextColor(ui.fontColorButton->color());
     cg.writeEntry("textColor", ui.fontColorButton->color());
-
-    textDocument->setMaximumBlockCount(ui.maxRowsSpinBox->value());
-    cg.writeEntry("maxRows", ui.maxRowsSpinBox->value());
 
     textItem->update();
     loadFile(m_tmpPath);
