@@ -298,7 +298,19 @@ const QStringList& ComicProviderWrapper::extensions() const
 
 ComicProvider::IdentifierType ComicProviderWrapper::identifierType()
 {
-    return ( ComicProvider::IdentifierType )callFunction( "identifierType" ).toInt();
+    ComicProvider::IdentifierType result = ( ComicProvider::IdentifierType )callFunction( "identifierType" ).toInt();
+    if ( ! functionCalled() ) {
+        const QString type = mProvider->description().property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
+        if ( type == "Date" ) {
+            result = ComicProvider::DateIdentifier;
+        } else if ( type == "Number" ) {
+            result = ComicProvider::NumberIdentifier;
+        } else if ( type == "String" ) {
+            result = ComicProvider::StringIdentifier;
+        }
+    }
+    kDebug() << result;
+    return result;
 }
 
 KUrl ComicProviderWrapper::websiteUrl()
@@ -317,7 +329,23 @@ QImage ComicProviderWrapper::image()
 
 QString ComicProviderWrapper::identifier()
 {
-    return callFunction( "identifier" ).toString();
+    QString result = callFunction( "identifier" ).toString();
+    if ( ! functionCalled() ) {
+        result = mProvider->pluginName() + ':';
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            result += mProvider->requestedDate().toString( Qt::ISODate );
+            break;
+        case NumberIdentifier:
+            result += QString::number( mProvider->requestedNumber() );
+            break;
+        case StringIdentifier:
+            result += mProvider->requestedString();
+            break;
+        }
+    }
+    kDebug() << result;
+    return result;
 }
 
 QString ComicProviderWrapper::nextIdentifier()

@@ -21,8 +21,8 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QObject>
-
-#include <kpluginfactory.h>
+#include <KPluginInfo>
+#include <KPluginFactory>
 
 #include "plasma_comic_export.h"
 
@@ -134,6 +134,11 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          * Returns the name for the comic
          */
         virtual QString name() const;
+
+        /**
+         * Returns the plugin info for the comic
+         */
+        KPluginInfo description() const;
 
         /**
          * Set whether this request is for the current comic (only used internally).

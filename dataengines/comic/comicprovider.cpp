@@ -19,7 +19,6 @@
 #include "comicprovider.h"
 
 #include <KDebug>
-#include <KPluginInfo>
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
 
@@ -30,7 +29,7 @@ class ComicProvider::Private
             : mParent( parent ),
               mIsCurrent( false ),
               mFirstStripNumber( 1 ),
-              mcomicDescription(service)
+              mComicDescription(service)
         {
         }
 
@@ -53,7 +52,7 @@ class ComicProvider::Private
         QDate mFirstStripDate;
         int mRequestedNumber;
         int mFirstStripNumber;
-        KPluginInfo mcomicDescription;
+        KPluginInfo mComicDescription;
 };
 
 ComicProvider::ComicProvider( QObject *parent, const QVariantList &args )
@@ -204,26 +203,31 @@ void ComicProvider::pageError( int, const QString& )
 
 QString ComicProvider::pluginName() const
 {
-    if ( !d->mcomicDescription.isValid() ) {
+    if ( !d->mComicDescription.isValid() ) {
         return QString();
     }
-    return d->mcomicDescription.pluginName();
+    return d->mComicDescription.pluginName();
 }
 
 QString ComicProvider::name() const
 {
-    if ( !d->mcomicDescription.isValid() ) {
+    if ( !d->mComicDescription.isValid() ) {
         return QString();
     }
-    return d->mcomicDescription.name();
+    return d->mComicDescription.name();
 }
 
 QString ComicProvider::suffixType() const
 {
-    if ( !d->mcomicDescription.isValid() ) {
+    if ( !d->mComicDescription.isValid() ) {
         return QString();
     }
-    return d->mcomicDescription.property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
+    return d->mComicDescription.property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
+}
+
+KPluginInfo ComicProvider::description() const
+{
+    return d->mComicDescription;
 }
 
 #include "comicprovider.moc"
