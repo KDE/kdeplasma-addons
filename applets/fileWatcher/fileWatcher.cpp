@@ -32,31 +32,39 @@
 
 #include <Plasma/Theme>
 
+#define BORDER_SIZE 5
+
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
   setBackgroundHints(TranslucentBackground);
-  resize(400, 400);
+  resize(400, 200);
+}
+
+FileWatcher::~FileWatcher()
+{
+  delete textStream;
 }
 
 void FileWatcher::init()
 {
   file = new QFile(this);
+  textStream = 0;
   watcher = new QFileSystemWatcher(this);
   textItem = new QGraphicsTextItem(this);
-  textItem->moveBy(eBorderSize,eBorderSize);
+  textItem->moveBy(BORDER_SIZE, BORDER_SIZE);
   textDocument = textItem->document();
-  textStream = 0;
 
   KConfigGroup cg = config();
 
   QString path = cg.readEntry("path", QString());
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
-  QFontMetrics metrics(textItem->font());
-  textDocument->setMaximumBlockCount(geometry().height() / metrics.height());
+
+  updateRows();
+
   textItem->update();
 
   if (path.isEmpty()) {
@@ -66,23 +74,24 @@ void FileWatcher::init()
   }
 }
 
-
-FileWatcher::~FileWatcher()
+void FileWatcher::updateRows()
 {
-  delete textStream;
+    QFontMetrics metrics(textItem->font());
+    textDocument->setMaximumBlockCount((int) (size().height() - 10) / metrics.height());
+
+    if (textStream){
+        textDocument->clear();
+        textItem->update();
+        textStream->seek(0);
+        newData();
+    }
 }
 
 void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
 {
-    QFontMetrics metrics(textItem->font());
-    textDocument->setMaximumBlockCount((size().height() - 10) / metrics.height());
+    Q_UNUSED(constraints);
 
-    textDocument->clear();
-    textItem->update();
-    if (textStream){
-        textStream->seek(0);
-        newData();
-    }
+    updateRows();
 }
 
 void FileWatcher::loadFile(const QString& path)

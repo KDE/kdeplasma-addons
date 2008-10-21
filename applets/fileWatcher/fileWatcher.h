@@ -53,8 +53,7 @@ class FileWatcher : public Plasma::Applet
 
   private:
     void loadFile(const QString& path);
-    //resize plasma applet to textItem size and use eBorderSize for borders
-    void doAutoResize();
+    void updateRows();
 
     QFile *file;
     QFileSystemWatcher *watcher;
@@ -63,9 +62,6 @@ class FileWatcher : public Plasma::Applet
     QTextDocument *textDocument;
 
     QString m_tmpPath;
-
-    //distance between text and plasma widget
-    enum { eBorderSize = 5 };
 
     Ui::fileWatcherConfig ui;
 };
