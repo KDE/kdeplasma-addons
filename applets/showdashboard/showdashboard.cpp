@@ -51,7 +51,7 @@ void ShowDashboard::init()
     layout->addItem(icon);
 
     Plasma::ToolTipManager::self()->registerWidget(this);
-    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    Plasma::ToolTipManager::Content toolTipData;
     toolTipData.mainText = i18n("Show the Plasma Dashboard");
     toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);

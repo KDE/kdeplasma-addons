@@ -54,7 +54,7 @@ void ShowDesktop::init()
     connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));
 
     Plasma::ToolTipManager::self()->registerWidget(this);
-    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    Plasma::ToolTipManager::Content toolTipData;
     toolTipData.mainText = i18n("Show the Desktop");
     toolTipData.subText = i18n("Minimize all open windows and show the Desktop");
     toolTipData.image = icon->icon().pixmap(IconSize(KIconLoader::Desktop));

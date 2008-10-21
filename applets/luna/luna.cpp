@@ -140,7 +140,7 @@ const QRect &contentsRect)
 
 void Luna::calcStatus(time_t time)
 {
-    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    Plasma::ToolTipManager::Content toolTipData;
 
     uint lun = 0;
     time_t last_new = 0;

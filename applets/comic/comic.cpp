@@ -386,7 +386,7 @@ void ComicApplet::updateSize()
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
     // get the text at top
-    Plasma::ToolTipManager::ToolTipContent toolTipData;
+    Plasma::ToolTipManager::Content toolTipData;
     QString tempTop;
 
     if ( mShowComicTitle ) {

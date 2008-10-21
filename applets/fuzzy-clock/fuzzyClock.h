@@ -31,7 +31,7 @@
 #include "ui_fuzzyClockConfig.h"
 #include <ui_calendar.h>
 
-#include <clockapplet.h>
+#include <libplasmaclock/clockapplet.h>
 
 class Clock : public ClockApplet
 {
