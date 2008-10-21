@@ -1,7 +1,15 @@
 [Desktop Entry]
 Name=Incoming Message
+Name[pt]=Mensagem Recebida
+Name[pt_BR]=Mensagem Recebida
+Name[sv]=Inkommande meddelande
+Name[uk]=Вхідне повідомлення
 Icon=mail-message-new
 Comment=Notification of new messages
+Comment[pt]=Notificação de mensagens novas
+Comment[pt_BR]=Notificação de mensagens novas
+Comment[sv]=Underrättele om nytt meddelande
+Comment[uk]=Інформує про нові повідомлення
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet

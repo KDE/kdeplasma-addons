@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=RSSNOW
 Comment=Show news from various sources
+Comment[pt]=Mostrar notícias de várias fontes
+Comment[pt_BR]=Mostrar notícias de várias fontes
+Comment[sv]=Visa nyheter från olika källor
+Comment[uk]=Показати новини від різноманітних джерел
 Type=Service
 Icon=application-rss+xml
 ServiceTypes=Plasma/Applet

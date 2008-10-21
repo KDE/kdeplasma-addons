@@ -1,7 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Life
+Name[pt]=Vida
+Name[pt_BR]=Vida
+Name[uk]=Термін використання
 Comment= Conway's Game of Life applet
+Comment[pt]='Applet' do Jogo da Vida da Conway
+Comment[pt_BR]='Applet' do Jogo da Vida da Conway
+Comment[sv]=Miniprogram med Conways Game of Life
+Comment[uk]=Аплет гри "Life" (Життя), вигаданої Конвеєм
 Icon=chronometer
 Type=Service
 

@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Previewer
+Name[pt]=Antevisão
+Name[pt_BR]=Antevisão
+Name[sv]=Förhandsgranskning
+Name[uk]=Переглядач
 Comment=Quickly preview a variety of files
+Comment[pt]=Antevê rapidamente uma variedade de ficheiros
+Comment[pt_BR]=Antevê rapidamente uma variedade de ficheiros
+Comment[sv]=Snabb förhandsgranskning av en mängd olika filer
+Comment[uk]=Засіб для швидкого перегляду низки файлів
 Type=Service
 Icon=previewer
 

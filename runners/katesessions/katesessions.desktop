@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Kate Sessions
+Name[pt]=Sessões do Kate
+Name[pt_BR]=Sessões do Kate
+Name[sv]=Kate-sessioner
+Name[uk]=Сеанси Kate
 Comment=Matches Kate Sessions
+Comment[pt]=Corresponder às Sessões do Kate
+Comment[pt_BR]=Corresponder às Sessões do Kate
+Comment[sv]=Matchar Kate-sessioner
+Comment[uk]=Порівнює сеанси Kate
 Icon=kate
 
 X-KDE-ServiceTypes=Plasma/Runner
