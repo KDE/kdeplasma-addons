@@ -37,6 +37,7 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
+  setBackgroundHints(TranslucentBackground);
   resize(400, 400);
 }
 
