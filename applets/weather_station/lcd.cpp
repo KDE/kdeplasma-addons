@@ -212,7 +212,7 @@ class LCD::Private
         {
             QFont result = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
 
-            while (result.pointSizeF() > 0.0) {
+            while (result.pointSizeF() - 0.5  > 0.0) {
                 QFontMetrics fm(result, p->device());
                 QSizeF size = fm.tightBoundingRect(text).size();
                 //kDebug() << size << rect.size() << result.pointSizeF();
