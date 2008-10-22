@@ -35,7 +35,7 @@ set( plasma_comic_krossprovider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_krossprovider ${plasma_comic_krossprovider_SRCS} )
-target_link_libraries( plasma_comic_krossprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KROSSCORE_LIBS} ${PLASMA_LIBS} ${KDE4_SYNDICATION_LIBS} )
+target_link_libraries( plasma_comic_krossprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KROSSCORE_LIBS} ${PLASMA_LIBS} )
 install( TARGETS plasma_comic_krossprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 set(comicpackage_SRCS
@@ -47,3 +47,161 @@ kde4_add_plugin( plasma_packagestructure_comic ${comicpackage_SRCS} )
 target_link_libraries( plasma_packagestructure_comic plasma ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} )
 install( TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES plasma-packagestructure-comic.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
+########### plugins ###############
+
+set( comic_dilbert_provider_SRCS
+     dilbertprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_dilbertprovider ${comic_dilbert_provider_SRCS} )
+target_link_libraries( plasma_comic_dilbertprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS})
+install( TARGETS plasma_comic_dilbertprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES dilbertprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_dilbert.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_malvados_provider_SRCS
+     malvadosprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_malvadosprovider ${comic_malvados_provider_SRCS} )
+target_link_libraries( plasma_comic_malvadosprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+install( TARGETS plasma_comic_malvadosprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES malvadosprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_malvados.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_userfriendly_provider_SRCS
+     userfriendlyprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_userfriendlyprovider ${comic_userfriendly_provider_SRCS} )
+target_link_libraries( plasma_comic_userfriendlyprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_userfriendlyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES userfriendlyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_userfriendly.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_garfield_provider_SRCS
+     garfieldprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_garfieldprovider ${comic_garfield_provider_SRCS} )
+target_link_libraries( plasma_comic_garfieldprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS})
+install( TARGETS plasma_comic_garfieldprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES garfieldprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_garfield.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+if( Boost_FOUND )
+    include_directories(${Boost_INCLUDE_DIR})
+    set( comic_osnews_provider_SRCS
+         osnewsprovider.cpp
+    )
+
+    kde4_add_plugin( plasma_comic_osnewsprovider ${comic_osnews_provider_SRCS} )
+    target_link_libraries( plasma_comic_osnewsprovider plasmacomicprovidercore ${KDE4_SYNDICATION_LIBS} )
+    install( TARGETS plasma_comic_osnewsprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+    install( FILES osnewsprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+    install( FILES pics/plasma_comic_osnews.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+endif( Boost_FOUND )
+#### next ####
+
+set( comic_snoopy_provider_SRCS
+     snoopyprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_snoopyprovider ${comic_snoopy_provider_SRCS} )
+target_link_libraries( plasma_comic_snoopyprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_snoopyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES snoopyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_snoopy.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_xkcd_provider_SRCS
+     xkcdprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_xkcdprovider ${comic_xkcd_provider_SRCS} )
+target_link_libraries( plasma_comic_xkcdprovider plasmacomicprovidercore ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} )
+install( TARGETS plasma_comic_xkcdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES xkcdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_xkcd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+#### next ####
+
+set( comic_phd_provider_SRCS
+     phdprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_phdprovider ${comic_phd_provider_SRCS} )
+target_link_libraries( plasma_comic_phdprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_phdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES phdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_phd.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_shithappens_provider_SRCS
+     shithappensprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_shithappensprovider ${comic_shithappens_provider_SRCS} )
+target_link_libraries( plasma_comic_shithappensprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_shithappensprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES shithappensprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_shithappens.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+install( FILES pics/plasma_comic_shithappens-header.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_cad_provider_SRCS
+     cadprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_cadprovider ${comic_cad_provider_SRCS} )
+target_link_libraries( plasma_comic_cadprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_cadprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES cadprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_cad.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_nichtlustig_provider_SRCS
+     nichtlustigprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_nichtlustigprovider ${comic_nichtlustig_provider_SRCS} )
+target_link_libraries( plasma_comic_nichtlustigprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_nichtlustigprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES nichtlustigprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_nichtlustig.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+### next ####
+
+set( comic_unshelved_provider_SRCS
+     unshelvedprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_unshelvedprovider ${comic_unshelved_provider_SRCS} )
+target_link_libraries( plasma_comic_unshelvedprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_unshelvedprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES unshelvedprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_unshelved.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
+
+## next ####
+
+set( comic_extralife_provider_SRCS
+extralifeprovider.cpp
+)
+
+kde4_add_plugin( plasma_comic_extralifeprovider ${comic_extralife_provider_SRCS} )
+target_link_libraries( plasma_comic_extralifeprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
+install( TARGETS plasma_comic_extralifeprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
+install( FILES extralifeprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES pics/plasma_comic_extralife.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
