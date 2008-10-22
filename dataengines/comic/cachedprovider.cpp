@@ -103,13 +103,13 @@ QString CachedProvider::additionalText() const
 
 QString CachedProvider::suffixType() const
 {
-    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    QSettings settings( identifierToPath ( requestedComicName() ) + ".conf", QSettings::IniFormat );
     return settings.value( "suffixType", QString() ).toString();
 }
 
 QString CachedProvider::name() const
 {
-    QSettings settings( identifierToPath ( requestedString() ) + ".conf", QSettings::IniFormat );
+    QSettings settings( identifierToPath ( requestedComicName() ) + ".conf", QSettings::IniFormat );
     return settings.value( "title", QString() ).toString();
 }
 
