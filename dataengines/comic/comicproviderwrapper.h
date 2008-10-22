@@ -80,6 +80,18 @@ class DateWrapper : public QObject
         QString toString( int format = 0 ) const;
         int weekNumber() const;
         int year() const;
+
+    private:
+        QDate mDate;
+};
+
+class StaticDateWrapper : public QObject
+{
+        Q_OBJECT
+    public:
+        StaticDateWrapper( QObject *parent = 0 );
+
+    public slots:
         QObject* currentDate();
         QObject* fromJulianDay( int jd );
         QObject* fromString( const QString & string, int format = Qt::TextDate );
@@ -90,9 +102,6 @@ class DateWrapper : public QObject
         QString longMonthName ( int month );
         QString shortDayName ( int weekday );
         QString shortMonthName ( int month );
-
-    private:
-        QDate mDate;
 };
 
 class ComicProviderWrapper : public QObject

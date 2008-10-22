@@ -182,52 +182,57 @@ int DateWrapper::year() const
     return mDate.year();
 }
 
-QObject* DateWrapper::currentDate()
+StaticDateWrapper::StaticDateWrapper( QObject *parent )
+: QObject( parent )
+{
+}
+
+QObject* StaticDateWrapper::currentDate()
 {
     return new DateWrapper( this, QDate::currentDate() );
 }
 
-QObject* DateWrapper::fromJulianDay( int jd )
+QObject* StaticDateWrapper::fromJulianDay( int jd )
 {
     return new DateWrapper( this, QDate::fromJulianDay( jd ) );
 }
 
-QObject* DateWrapper::fromString( const QString &string, int format )
+QObject* StaticDateWrapper::fromString( const QString &string, int format )
 {
     return new DateWrapper( this, QDate::fromString( string, ( Qt::DateFormat )format ) );
 }
 
-QObject* DateWrapper::fromString( const QString &string, const QString &format )
+QObject* StaticDateWrapper::fromString( const QString &string, const QString &format )
 {
     return new DateWrapper( this, QDate::fromString( string, format ) );
 }
 
-bool DateWrapper::isLeapYear ( int year )
+bool StaticDateWrapper::isLeapYear ( int year )
 {
     return QDate::isLeapYear( year );
 }
 
-bool DateWrapper::isValid ( int year, int month, int day )
+bool StaticDateWrapper::isValid ( int year, int month, int day )
 {
     return QDate::isValid( year, month, day );
 }
 
-QString DateWrapper::longDayName ( int weekday )
+QString StaticDateWrapper::longDayName ( int weekday )
 {
     return QDate::longDayName( weekday );
 }
 
-QString DateWrapper::longMonthName ( int month )
+QString StaticDateWrapper::longMonthName ( int month )
 {
     return QDate::longMonthName( month );
 }
 
-QString DateWrapper::shortDayName ( int weekday )
+QString StaticDateWrapper::shortDayName ( int weekday )
 {
     return QDate::shortDayName( weekday );
 }
 
-QString DateWrapper::shortMonthName ( int month )
+QString StaticDateWrapper::shortMonthName ( int month )
 {
     return QDate::shortMonthName( month );
 }
@@ -268,6 +273,7 @@ void ComicProviderWrapper::init()
                 mAction = new Kross::Action( parent(), mProvider->pluginName() );
                 if ( mAction ) {
                     mAction->addObject( this, "comic" );
+                    mAction->addObject( new StaticDateWrapper( this ), "date" );
                     mAction->setFile( info.filePath() );
                     mAction->trigger();
                     mFunctions = mAction->functionNames();
@@ -309,7 +315,6 @@ ComicProvider::IdentifierType ComicProviderWrapper::identifierType()
             result = ComicProvider::StringIdentifier;
         }
     }
-    kDebug() << result;
     return result;
 }
 
@@ -344,7 +349,6 @@ QString ComicProviderWrapper::identifier()
             break;
         }
     }
-    kDebug() << result;
     return result;
 }
 
