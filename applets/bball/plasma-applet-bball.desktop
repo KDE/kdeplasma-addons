@@ -2,10 +2,13 @@
 Encoding=UTF-8
 Name=BbalL
 Comment=A bouncy ball for plasma
+Comment[el]=Μια αναπηδούμενη μπάλα για το plasma
+Comment[gl]=Unha bóla a rebotar para plasma
 Comment[pt]=Uma bola saltitante para o Plasma
 Comment[pt_BR]=Uma bola saltitante para o Plasma
 Comment[sv]=En studsande boll för Plasma
 Comment[uk]=М’ячик-стрибунець для плазми
+Comment[zh_TW]=Plasma 上的彈跳球遊戲
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=bball
