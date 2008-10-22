@@ -88,7 +88,17 @@ class DateWrapper : public QObject
 class StaticDateWrapper : public QObject
 {
         Q_OBJECT
+        Q_ENUMS( DateType )
     public:
+        enum DateType {
+            TextDate = Qt::TextDate,
+            ISODate = Qt::ISODate,
+            SystemLocaleShortDate = Qt::SystemLocaleShortDate,
+            SystemLocaleLongDate = Qt::SystemLocaleLongDate,
+            DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
+            DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
+        };
+
         StaticDateWrapper( QObject *parent = 0 );
 
     public slots:
@@ -110,7 +120,6 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
-        Q_ENUMS( DateType )
         Q_PROPERTY( QVariant firstStripDate READ firstStripDate WRITE setFirstStripDate )
         Q_PROPERTY( int firstStripNumber READ firstStripNumber WRITE setFirstStripNumber )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
@@ -130,14 +139,6 @@ class ComicProviderWrapper : public QObject
             DateIdentifier   = ComicProvider::DateIdentifier,
             NumberIdentifier = ComicProvider::NumberIdentifier,
             StringIdentifier = ComicProvider::StringIdentifier
-        };
-        enum DateType {
-            TextDate = Qt::TextDate,
-            ISODate = Qt::ISODate,
-            SystemLocaleShortDate = Qt::SystemLocaleShortDate,
-            SystemLocaleLongDate = Qt::SystemLocaleLongDate,
-            DefaultLocaleShortDate = Qt::DefaultLocaleShortDate,
-            DefaultLocaleLongDate = Qt::DefaultLocaleLongDate
         };
 
         ComicProviderWrapper( ComicProviderKross *parent );
