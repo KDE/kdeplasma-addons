@@ -29,6 +29,7 @@
 #include <QTextCursor>
 
 #include <KConfigDialog>
+#include <KMimeType>
 
 #include <Plasma/Theme>
 
@@ -103,6 +104,12 @@ void FileWatcher::loadFile(const QString& path)
   textDocument->clear();
   watcher->removePaths(watcher->files());
   file->close();
+
+  KMimeType::Ptr mimeType = KMimeType::findByFileContent(path);
+  if (!mimeType->name().contains("text")) {
+    setConfigurationRequired(true, i18n("Cannot watch non-text file: %1", path));
+    return;
+  }
 
   file->setFileName(path);
   if (!file->open(QIODevice::ReadOnly | QIODevice::Text)){
