@@ -172,18 +172,6 @@ install( FILES pics/plasma_comic_cad.png DESTINATION ${DATA_INSTALL_DIR}/plasma-
 
 ### next ####
 
-set( comic_calvinandhobbes_provider_SRCS
-     calvinandhobbesprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_calvinandhobbesprovider ${comic_calvinandhobbes_provider_SRCS} )
-target_link_libraries( plasma_comic_calvinandhobbesprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
-install( TARGETS plasma_comic_calvinandhobbesprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES calvinandhobbesprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_calvinandhobbes.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
-
-### next ####
-
 set( comic_nichtlustig_provider_SRCS
      nichtlustigprovider.cpp
 )
@@ -206,7 +194,7 @@ install( TARGETS plasma_comic_unshelvedprovider DESTINATION ${PLUGIN_INSTALL_DIR
 install( FILES unshelvedprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_unshelved.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
 
-### next ####
+## next ####
 
 set( comic_extralife_provider_SRCS
 extralifeprovider.cpp
@@ -217,27 +205,3 @@ target_link_libraries( plasma_comic_extralifeprovider plasmacomicprovidercore ${
 install( TARGETS plasma_comic_extralifeprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES extralifeprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_extralife.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
-
-### next ####
-
-set( comic_doonesbury_provider_SRCS
-doonesburyprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_doonesburyprovider ${comic_doonesbury_provider_SRCS} )
-target_link_libraries( plasma_comic_doonesburyprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
-install( TARGETS plasma_comic_doonesburyprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES doonesburyprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_doonesbury.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
-
-### next ####
-
-set( comic_boondocks_provider_SRCS
-boondocksprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_boondocksprovider ${comic_boondocks_provider_SRCS} )
-target_link_libraries( plasma_comic_boondocksprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
-install( TARGETS plasma_comic_boondocksprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES boondocksprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_boondocks.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
