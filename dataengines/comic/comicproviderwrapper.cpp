@@ -83,7 +83,7 @@ QDate DateWrapper::fromVariant( const QVariant &variant )
         return variant.toDate();
     } else if ( variant.type() == QVariant::String ) {
         return QDate::fromString( variant.toString(), Qt::ISODate );
-    } else if ( variant.type() == QVariant::String ) {
+    } else {
         DateWrapper* dw = qobject_cast<DateWrapper*>( variant.value<QObject*>() );
         if (dw) {
             return dw->date();
