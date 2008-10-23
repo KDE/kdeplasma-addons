@@ -160,18 +160,6 @@ install( FILES pics/plasma_comic_shithappens-header.png DESTINATION ${DATA_INSTA
 
 ### next ####
 
-set( comic_cad_provider_SRCS
-     cadprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_cadprovider ${comic_cad_provider_SRCS} )
-target_link_libraries( plasma_comic_cadprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
-install( TARGETS plasma_comic_cadprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES cadprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_cad.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
-
-### next ####
-
 set( comic_nichtlustig_provider_SRCS
      nichtlustigprovider.cpp
 )
@@ -193,15 +181,3 @@ target_link_libraries( plasma_comic_unshelvedprovider plasmacomicprovidercore ${
 install( TARGETS plasma_comic_unshelvedprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES unshelvedprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES pics/plasma_comic_unshelved.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
-
-## next ####
-
-set( comic_extralife_provider_SRCS
-extralifeprovider.cpp
-)
-
-kde4_add_plugin( plasma_comic_extralifeprovider ${comic_extralife_provider_SRCS} )
-target_link_libraries( plasma_comic_extralifeprovider plasmacomicprovidercore ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} )
-install( TARGETS plasma_comic_extralifeprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
-install( FILES extralifeprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES pics/plasma_comic_extralife.png DESTINATION ${DATA_INSTALL_DIR}/plasma-comic )
