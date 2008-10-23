@@ -49,7 +49,8 @@
 
 Frame::Frame(QObject *parent, const QVariantList &args)
         : Plasma::Applet(parent, args),
-        m_configDialog(0)
+        m_configDialog(0),
+        m_openPicture(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -125,22 +126,31 @@ void Frame::init()
         emit configNeedsSaving();
     }
 
-    createMenu();
+    m_menuPresent = false;
+    updateMenu();
 }
 
-void Frame::createMenu()
+void Frame::updateMenu()
 {
-    if (m_slideShow || m_currentUrl.path() != "Default") {
+    if (!m_menuPresent && !m_potd && m_currentUrl.path() != "Default") {
         kDebug() << "Current path: " << m_currentUrl.path();
-        QAction* openPicture = new QAction(SmallIcon("image-x-generic"),i18n("&Open picture..."), this);
-        m_actions.append(openPicture);
-        connect(openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
+        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open picture..."), this);
+        m_actions.append(m_openPicture);
+        connect(m_openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
+        m_menuPresent = true;
+    } else {
+        if (m_menuPresent && m_potd) {
+            m_actions.removeAll(m_openPicture);
+            delete m_openPicture;
+            m_openPicture = 0;
+            m_menuPresent = false;
+        }
     }
 }
 
 QList<QAction*> Frame::contextualActions()
 {
-  return m_actions;
+    return m_actions;
 }
 
 void Frame::slotOpenPicture()
@@ -329,7 +339,7 @@ void Frame::configAccepted()
     cg.writeEntry("potd", m_potd);
 
     // Creates the menu if the settings have changed from "Default" to sth. else
-    createMenu();
+    updateMenu();
 
     initSlideShow();
 

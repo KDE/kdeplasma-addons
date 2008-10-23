@@ -68,7 +68,7 @@ private Q_SLOTS:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
-    void createMenu();
+    void updateMenu();
 
 private:
     void paintCache(const QStyleOptionGraphicsItem *option,
@@ -103,11 +103,13 @@ private:
     QPixmap m_pixmapCache;
     /// The action list for the context menu
     QList<QAction*> m_actions;
+    QAction* m_openPicture;
     /// Frame & shadow outline thickness
     int m_frameOutline;
     int m_swOutline;
     /// Slideshow
     bool m_slideShow;
+    bool m_menuPresent;
     bool m_random;
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
