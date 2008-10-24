@@ -23,6 +23,7 @@
 #include <QTimer>
 #include <QBuffer>
 #include <QPainter>
+#include <KUrl>
 #include <KDebug>
 #include <KStandardDirs>
 #include <Plasma/Package>
@@ -302,25 +303,18 @@ const QStringList& ComicProviderWrapper::extensions() const
     return mExtensions;
 }
 
-ComicProvider::IdentifierType ComicProviderWrapper::identifierType()
+ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
 {
-    ComicProvider::IdentifierType result = ( ComicProvider::IdentifierType )callFunction( "identifierType" ).toInt();
-    if ( ! functionCalled() ) {
-        const QString type = mProvider->description().property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
-        if ( type == "Date" ) {
-            result = ComicProvider::DateIdentifier;
-        } else if ( type == "Number" ) {
-            result = ComicProvider::NumberIdentifier;
-        } else if ( type == "String" ) {
-            result = ComicProvider::StringIdentifier;
-        }
+    ComicProvider::IdentifierType result = ComicProvider::StringIdentifier;
+    const QString type = mProvider->description().property( "X-KDE-PlasmaComicProvider-SuffixType" ).toString();
+    if ( type == "Date" ) {
+        result = ComicProvider::DateIdentifier;
+    } else if ( type == "Number" ) {
+        result = ComicProvider::NumberIdentifier;
+    } else if ( type == "String" ) {
+        result = ComicProvider::StringIdentifier;
     }
     return result;
-}
-
-KUrl ComicProviderWrapper::websiteUrl()
-{
-    return KUrl( callFunction( "websiteUrl" ).toString() );
 }
 
 QImage ComicProviderWrapper::image()
@@ -332,49 +326,162 @@ QImage ComicProviderWrapper::image()
     return mKrossImage.image();
 }
 
-QString ComicProviderWrapper::identifier()
+QString ComicProviderWrapper::identifierToString(const QVariant &identifier) const
 {
-    QString result = callFunction( "identifier" ).toString();
-    if ( ! functionCalled() ) {
-        result = mProvider->pluginName() + ':';
-        switch ( identifierType() ) {
-        case DateIdentifier:
-            result += mProvider->requestedDate().toString( Qt::ISODate );
-            break;
-        case NumberIdentifier:
-            result += QString::number( mProvider->requestedNumber() );
-            break;
-        case StringIdentifier:
-            result += mProvider->requestedString();
-            break;
-        }
+    if ( identifierType() == ComicProvider::DateIdentifier ) {
+        return identifier.toDate().toString(Qt::ISODate);
+    }
+    return identifier.toString();
+}
+
+QVariant ComicProviderWrapper::identifierToScript(const QVariant &identifier)
+{
+    if ( identifierType() == ComicProvider::DateIdentifier) {
+        return QVariant::fromValue( qobject_cast<QObject*>( new DateWrapper( this, identifier.toDate() ) ) );
+    }
+    return identifier;
+}
+
+QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier ) const
+{
+    QVariant result;
+    switch ( identifierType() ) {
+    case DateIdentifier:
+        result = DateWrapper::fromVariant( identifier );
+        break;
+    case NumberIdentifier:
+        result = identifier.toInt();
+        break;
+    case StringIdentifier:
+        result = identifier.toString();
+        break;
     }
     return result;
 }
 
-QString ComicProviderWrapper::nextIdentifier()
+QVariant ComicProviderWrapper::identifierWithDefault() const
 {
-    return callFunction( "nextIdentifier" ).toString();
+    if ( mIdentifier.isNull() ) {
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            return mProvider->requestedDate();
+        case NumberIdentifier:
+            return mProvider->requestedNumber();
+        case StringIdentifier:
+            return mProvider->requestedString();
+        }
+    }
+    return mIdentifier;
 }
 
-QString ComicProviderWrapper::previousIdentifier()
+QString ComicProviderWrapper::comicAuthor() const
 {
-    return callFunction( "previousIdentifier" ).toString();
+    return mProvider->comicAuthor();
 }
 
-QString ComicProviderWrapper::firstStripIdentifier()
+void ComicProviderWrapper::setComicAuthor( const QString &author )
 {
-    return callFunction( "firstStripIdentifier" ).toString();
+    mProvider->setComicAuthor( author );
 }
 
-QString ComicProviderWrapper::stripTitle()
+QString ComicProviderWrapper::websiteUrl()
 {
-    return callFunction( "stripTitle" ).toString();
+    return mWebsiteUrl;
+}
+
+void ComicProviderWrapper::setWebsiteUrl( const QString &websiteUrl )
+{
+    mWebsiteUrl = websiteUrl;
+}
+
+QString ComicProviderWrapper::title()
+{
+    return mTitle;
+}
+
+void ComicProviderWrapper::setTitle( const QString &title )
+{
+    mTitle = title;
 }
 
 QString ComicProviderWrapper::additionalText()
 {
-    return callFunction( "additionalText" ).toString();
+    return mAdditionalText;
+}
+
+void ComicProviderWrapper::setAdditionalText( const QString &additionalText )
+{
+    mAdditionalText = additionalText;
+}
+
+QVariant ComicProviderWrapper::identifier()
+{
+    return identifierToScript( identifierWithDefault() );
+}
+
+void ComicProviderWrapper::setIdentifier( const QVariant &identifier )
+{
+    mIdentifier = identifierFromScript( identifier );
+}
+
+QVariant ComicProviderWrapper::nextIdentifier()
+{
+    return identifierToScript( mNextIdentifier );
+}
+
+void ComicProviderWrapper::setNextIdentifier( const QVariant &nextIdentifier )
+{
+    mNextIdentifier = identifierFromScript( nextIdentifier );
+}
+
+QVariant ComicProviderWrapper::previousIdentifier()
+{
+    return identifierToScript( mPreviousIdentifier );
+}
+
+void ComicProviderWrapper::setPreviousIdentifier( const QVariant &previousIdentifier )
+{
+    mPreviousIdentifier = identifierFromScript( previousIdentifier );
+}
+
+QVariant ComicProviderWrapper::firstIdentifier()
+{
+    return identifierToScript( mFirstIdentifier );
+}
+
+void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
+{
+    switch ( identifierType() ) {
+    case DateIdentifier:
+        mProvider->setFirstStripDate( DateWrapper::fromVariant(firstIdentifier) );
+        break;
+    case NumberIdentifier:
+        mProvider->setFirstStripNumber( firstIdentifier.toInt() );
+        break;
+    case StringIdentifier:
+        break;
+    }
+    mFirstIdentifier = identifierFromScript( firstIdentifier );
+}
+
+QString ComicProviderWrapper::identifierString() const
+{
+    return mProvider->pluginName() + ':' + identifierToString( identifierWithDefault() );
+}
+
+QString ComicProviderWrapper::firstIdentifierString() const
+{
+    return identifierToString( mFirstIdentifier );
+}
+
+QString ComicProviderWrapper::nextIdentifierString() const
+{
+    return identifierToString( mNextIdentifier );
+}
+
+QString ComicProviderWrapper::previousIdentifierString() const
+{
+    return identifierToString( mPreviousIdentifier );
 }
 
 void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
@@ -397,60 +504,22 @@ void ComicProviderWrapper::pageError( int id, const QString &message )
     }
 }
 
-QVariant ComicProviderWrapper::firstStripDate()
-{
-    return QVariant::fromValue( qobject_cast<QObject*>(
-            new DateWrapper( this, mProvider->firstStripDate() ) ) );
-}
-
-void ComicProviderWrapper::setFirstStripDate( const QVariant &date )
-{
-    mProvider->setFirstStripDate( DateWrapper::fromVariant( date ) );
-}
-
-int ComicProviderWrapper::firstStripNumber() const
-{
-    return mProvider->firstStripNumber();
-}
-
-void ComicProviderWrapper::setFirstStripNumber( int number )
-{
-    mProvider->setFirstStripNumber( number );
-}
-
-QString ComicProviderWrapper::comicAuthor() const
-{
-    return mProvider->comicAuthor();
-}
-
-void ComicProviderWrapper::setComicAuthor( const QString &author )
-{
-    mProvider->setComicAuthor( author );
-}
-
 void ComicProviderWrapper::finished() const
 {
+    kDebug() << QString( "Author" ).leftJustified( 22, '.' ) << comicAuthor();
+    kDebug() << QString( "Website URL" ).leftJustified( 22, '.' ) << mWebsiteUrl;
+    kDebug() << QString( "Title" ).leftJustified( 22, '.' ) << mTitle;
+    kDebug() << QString( "Additional Text" ).leftJustified( 22, '.' ) << mAdditionalText;
+    kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << identifierString();
+    kDebug() << QString( "First Identifier" ).leftJustified( 22, '.' ) << firstIdentifierString();
+    kDebug() << QString( "Next Identifier" ).leftJustified( 22, '.' ) << nextIdentifierString();
+    kDebug() << QString( "Previous Identifier" ).leftJustified( 22, '.' ) << previousIdentifierString();
     emit mProvider->finished( mProvider );
 }
 
 void ComicProviderWrapper::error() const
 {
     emit mProvider->error( mProvider );
-}
-
-QObject* ComicProviderWrapper::requestedDate()
-{
-    return new DateWrapper( this, mProvider->requestedDate() );
-}
-
-int ComicProviderWrapper::requestedNumber() const
-{
-    return mProvider->requestedNumber();
-}
-
-QString ComicProviderWrapper::requestedString() const
-{
-    return mProvider->requestedString();
 }
 
 void ComicProviderWrapper::requestPage( const QString &url, int id, const QVariantMap &infos )

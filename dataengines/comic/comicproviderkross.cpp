@@ -49,13 +49,13 @@ QImage ComicProviderKross::image() const
 
 QString ComicProviderKross::identifier() const
 {
-    return m_wrapper.identifier();
+    return m_wrapper.identifierString();
 }
 
 QString ComicProviderKross::nextIdentifier() const
 {
-    const QString result = m_wrapper.nextIdentifier();
-    if ( !m_wrapper.functionCalled() ) {
+    const QString result = m_wrapper.nextIdentifierString();
+    if ( result.isEmpty() ) {
         return ComicProvider::nextIdentifier();
     }
     return result;
@@ -63,8 +63,8 @@ QString ComicProviderKross::nextIdentifier() const
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    const QString result = m_wrapper.previousIdentifier();
-    if ( !m_wrapper.functionCalled() ) {
+    const QString result = m_wrapper.previousIdentifierString();
+    if ( result.isEmpty() ) {
         return ComicProvider::previousIdentifier();
     }
     return result;
@@ -72,8 +72,8 @@ QString ComicProviderKross::previousIdentifier() const
 
 QString ComicProviderKross::firstStripIdentifier() const
 {
-    const QString result = m_wrapper.firstStripIdentifier();
-    if ( !m_wrapper.functionCalled() ) {
+    const QString result = m_wrapper.firstIdentifierString();
+    if ( result.isEmpty() ) {
         return ComicProvider::firstStripIdentifier();
     }
     return result;
@@ -81,7 +81,7 @@ QString ComicProviderKross::firstStripIdentifier() const
 
 QString ComicProviderKross::stripTitle() const
 {
-    return m_wrapper.stripTitle();
+    return m_wrapper.title();
 }
 
 QString ComicProviderKross::additionalText() const

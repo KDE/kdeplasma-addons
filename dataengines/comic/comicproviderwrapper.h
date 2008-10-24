@@ -21,7 +21,6 @@
 
 #include "comicprovider.h"
 
-#include <KUrl>
 #include <QImage>
 #include <QByteArray>
 
@@ -120,9 +119,14 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
-        Q_PROPERTY( QVariant firstStripDate READ firstStripDate WRITE setFirstStripDate )
-        Q_PROPERTY( int firstStripNumber READ firstStripNumber WRITE setFirstStripNumber )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
+        Q_PROPERTY( QString websiteUrl READ websiteUrl WRITE setWebsiteUrl )
+        Q_PROPERTY( QString title READ title WRITE setTitle )
+        Q_PROPERTY( QString additionalText READ additionalText WRITE setAdditionalText )
+        Q_PROPERTY( QVariant identifier READ identifier WRITE setIdentifier )
+        Q_PROPERTY( QVariant nextIdentifier READ nextIdentifier WRITE setNextIdentifier )
+        Q_PROPERTY( QVariant previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier )
+        Q_PROPERTY( QVariant firstIdentifier READ firstIdentifier WRITE setFirstIdentifier )
     public:
         enum PositionType {
             Left = 0,
@@ -144,36 +148,37 @@ class ComicProviderWrapper : public QObject
         ComicProviderWrapper( ComicProviderKross *parent );
         ~ComicProviderWrapper();
 
-        ComicProvider::IdentifierType identifierType();
-        KUrl websiteUrl();
+        ComicProvider::IdentifierType identifierType() const;
         QImage image();
-        QString identifier();
-        QString nextIdentifier();
-        QString previousIdentifier();
-        QString firstStripIdentifier();
-        QString stripTitle();
-        QString additionalText();
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
 
-        QVariant firstStripDate();
-        void setFirstStripDate( const QVariant &date );
-        int firstStripNumber() const;
-        void setFirstStripNumber( int number );
         QString comicAuthor() const;
         void setComicAuthor( const QString &author );
-        void setUseDefaultImageHandler( bool useDefaultImageHandler );
-        bool useDefaultImageHandler() const;
+        QString websiteUrl();
+        void setWebsiteUrl( const QString &websiteUrl );
+        QString title();
+        void setTitle( const QString &title );
+        QString additionalText();
+        void setAdditionalText( const QString &additionalText );
+        QVariant identifier();
+        void setIdentifier( const QVariant &identifier );
+        QVariant nextIdentifier();
+        void setNextIdentifier( const QVariant &nextIdentifier );
+        QVariant previousIdentifier();
+        void setPreviousIdentifier( const QVariant &previousIdentifier );
+        QVariant firstIdentifier();
+        void setFirstIdentifier( const QVariant &firstIdentifier );
 
-        bool functionCalled() const;
+        QString identifierString() const;
+        QString firstIdentifierString() const;
+        QString nextIdentifierString() const;
+        QString previousIdentifierString() const;
 
     public slots:
         void finished() const;
         void error() const;
 
-        QObject* requestedDate();
-        int requestedNumber() const;
-        QString requestedString() const;
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
         void addHeader( const QString &name, PositionType position = Top );
 
@@ -182,6 +187,11 @@ class ComicProviderWrapper : public QObject
     protected:
         QVariant callFunction( const QString &name, const QVariantList &args = QVariantList() );
         const QStringList& extensions() const;
+        bool functionCalled() const;
+        QString identifierToString(const QVariant &identifier) const;
+        QVariant identifierToScript(const QVariant &identifier);
+        QVariant identifierFromScript(const QVariant &identifier) const;
+        QVariant identifierWithDefault() const;
 
     private:
         Kross::Action *mAction;
@@ -191,6 +201,14 @@ class ComicProviderWrapper : public QObject
         ImageWrapper mKrossImage;
         static QStringList mExtensions;
         Plasma::Package *mPackage;
+
+        QString mWebsiteUrl;
+        QString mTitle;
+        QString mAdditionalText;
+        QVariant mIdentifier;
+        QVariant mNextIdentifier;
+        QVariant mPreviousIdentifier;
+        QVariant mFirstIdentifier;
 };
 
 #endif
