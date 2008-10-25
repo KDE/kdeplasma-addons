@@ -2,6 +2,7 @@
 Name=Kate Sessions
 Name[el]=Συνεδρίες Kate
 Name[gl]=Sesións de Konsole
+Name[ja]=Kate セッション
 Name[pt]=Sessões do Kate
 Name[pt_BR]=Sessões do Kate
 Name[sv]=Kate-sessioner
@@ -10,6 +11,7 @@ Name[zh_TW]=Kate 工作階段
 Comment=Matches Kate Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Kate
 Comment[gl]=Fai parella coas sesión de Konsole
+Comment[ja]=Kate のセッションを探します
 Comment[pt]=Corresponder às Sessões do Kate
 Comment[pt_BR]=Corresponder às Sessões do Kate
 Comment[sv]=Matchar Kate-sessioner
