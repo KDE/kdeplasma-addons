@@ -329,7 +329,7 @@ QImage ComicProviderWrapper::image()
 QString ComicProviderWrapper::identifierToString(const QVariant &identifier) const
 {
     if ( identifierType() == ComicProvider::DateIdentifier ) {
-        return identifier.toDate().toString(Qt::ISODate);
+        return identifier.toDate().toString( Qt::ISODate );
     }
     return identifier.toString();
 }
@@ -353,7 +353,7 @@ QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier 
         result = identifier.toInt();
         break;
     case StringIdentifier:
-        result = identifier.toString();
+        result = stringFromScript( identifier.toString() );
         break;
     }
     return result;
@@ -374,6 +374,16 @@ QVariant ComicProviderWrapper::identifierWithDefault() const
     return mIdentifier;
 }
 
+QString ComicProviderWrapper::stringFromScript(const QString &string) const
+{
+    // Seems that we get utf8 from qtscript
+    // TODO Fix this in kross?
+    if ( mAction && mAction->interpreter() == "qtscript" ) {
+        return QString::fromUtf8( string.toAscii().constData() );
+    }
+    return string;
+}
+
 QString ComicProviderWrapper::comicAuthor() const
 {
     return mProvider->comicAuthor();
@@ -381,7 +391,7 @@ QString ComicProviderWrapper::comicAuthor() const
 
 void ComicProviderWrapper::setComicAuthor( const QString &author )
 {
-    mProvider->setComicAuthor( author );
+    mProvider->setComicAuthor( stringFromScript( author ) );
 }
 
 QString ComicProviderWrapper::websiteUrl()
@@ -401,7 +411,7 @@ QString ComicProviderWrapper::title()
 
 void ComicProviderWrapper::setTitle( const QString &title )
 {
-    mTitle = title;
+    mTitle = stringFromScript( title );
 }
 
 QString ComicProviderWrapper::additionalText()
@@ -411,7 +421,7 @@ QString ComicProviderWrapper::additionalText()
 
 void ComicProviderWrapper::setAdditionalText( const QString &additionalText )
 {
-    mAdditionalText = additionalText;
+    mAdditionalText = stringFromScript( additionalText );
 }
 
 QVariant ComicProviderWrapper::identifier()

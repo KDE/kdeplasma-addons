@@ -192,6 +192,7 @@ class ComicProviderWrapper : public QObject
         QVariant identifierToScript(const QVariant &identifier);
         QVariant identifierFromScript(const QVariant &identifier) const;
         QVariant identifierWithDefault() const;
+        QString stringFromScript(const QString &string) const;
 
     private:
         Kross::Action *mAction;
