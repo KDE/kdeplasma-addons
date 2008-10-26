@@ -144,10 +144,10 @@ void FileWatcher::newData()
   if ( rows < 0)
     rows = 0;
 
-  // go throught the lines of readed block
+  // go through the lines of readed block
   for (int i = rows; i < list.size(); i++){
-    //insert new block befor line, but skip insertion on beginning of document
-    //becouse we don't want empty space on first line
+    // insert new block before line, but skip insertion on beginning of document
+    // because we don't want empty space on first line
     if (cursor.position() != 0){
       cursor.insertBlock();
     }

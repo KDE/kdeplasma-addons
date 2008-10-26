@@ -430,7 +430,7 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
             }
         }
 
-        //TODO: seperate this and use a timer to update fuzzyDate
+        //TODO: separate this and use a timer to update fuzzyDate
         //every minute.
         for (int i = 0; i < m_list->size(); i++) {
             uint timestamp = m_list->at(i).time;

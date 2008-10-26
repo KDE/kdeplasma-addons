@@ -250,9 +250,9 @@ public:
         kDebug() << preferredSize;
     }
 
-    void handleMoved(int ammount)
+    void handleMoved(int amount)
     {
-        q->setValue(value + (ammount / (qreal)handleSlideSize)
+        q->setValue(value + (amount / (qreal)handleSlideSize)
                 * (maximum - minimum)
                 );
     }

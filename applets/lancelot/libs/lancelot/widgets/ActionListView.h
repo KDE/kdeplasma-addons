@@ -158,7 +158,7 @@ private:
     void itemDrag(ItemButton * button, QWidget * widget);
 
     void scroll(ScrollDirection direction);
-    void scrollBy(int ammount);
+    void scrollBy(int amount);
     ScrollDirection m_scrollDirection;
     QTimer m_scrollTimer;
     int m_scrollInterval;

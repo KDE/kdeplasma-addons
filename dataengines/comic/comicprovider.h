@@ -160,7 +160,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         void finished( ComicProvider *provider );
 
         /**
-         * This signal is emitted whenever an error has occured.
+         * This signal is emitted whenever an error has occurred.
          *
          * @param provider The provider which emitted the signal.
          */
@@ -223,12 +223,12 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
          *
          * @param url The url to access.
          * @param id A unique id that identifies this request.
-         * @param infos A list of meta informations passed to http.
+         * @param infos A list of meta information passed to http.
          */
         void requestPage( const KUrl &url, int id, const MetaInfos &infos = MetaInfos() );
 
         /**
-         * This method is called whenever a request done by requestPage() was successfull.
+         * This method is called whenever a request done by requestPage() was successful.
          *
          * @param id The unique identifier of that request.
          * @param data The data of the fetched object.

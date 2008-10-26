@@ -33,7 +33,7 @@ namespace Lancelot
 {
 
 /**
- * Provides a common appeareance with an icon, title
+ * Provides a common appearance with an icon, title
  * and a description. %Layout can be vertical or
  * horizontal.
  *

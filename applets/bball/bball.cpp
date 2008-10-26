@@ -399,7 +399,7 @@ void bballApplet::paintInterface (QPainter * p, const QStyleOptionGraphicsItem *
   Q_UNUSED (option);
   Q_UNUSED( contentsRect );
 
-//INFO - Not needed, if ball is still plasma doesnt paint, and if this is in it messes up repaintting if, for example, the mouse is hovered over it.
+// INFO - Not needed, if ball is still plasma does not paint, and if this is in it messes up repaintting if, for example, the mouse is hovered over it.
 //  if (m_x_vel == 0 and m_y_vel == 0 and not m_mouse_pressed)
 //  {
 //   return;

@@ -366,7 +366,7 @@ void CalculatorApplet::slotAddClicked()
 {
     double currentValue = inputText.toDouble();
 
-    //We need to prevent the rounding that is occuring here!
+    //We need to prevent the rounding that is occurring here!
 
     //kDebug() << "'+' was clixed, parsed to: " << currentValue << endl;
 

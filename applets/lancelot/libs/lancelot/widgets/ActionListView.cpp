@@ -478,7 +478,7 @@ void ActionListView::setExtenderPosition(ExtenderPosition position)
     switch (position) {
     case LeftExtender:
         left = EXTENDER_SIZE;
-        // break; // We neet to have width -= EXTENDER_SIZE for Left too
+        // break; // We need to have width -= EXTENDER_SIZE for Left too
     case RightExtender:
         width -= EXTENDER_SIZE;
         break;
@@ -667,7 +667,7 @@ bool ActionListView::addButton(ListTail where)
     switch (m_extenderPosition) {
     case LeftExtender:
         left = EXTENDER_SIZE;
-        // break; // We neet to have width -= EXTENDER_SIZE for Left too
+        // break; // We need to have width -= EXTENDER_SIZE for Left too
     case RightExtender:
         width -= EXTENDER_SIZE;
         break;

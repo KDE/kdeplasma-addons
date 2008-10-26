@@ -39,7 +39,7 @@ public:
     Picture();
     ~Picture();
     /**
-    * Set Default picture with written message @p message if no picture or folder was choosen
+    * Set Default picture with written message @p message if no picture or folder was chosen
     * by the user
     **/
     QImage defaultPicture(const QString &message);
