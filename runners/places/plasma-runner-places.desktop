@@ -2,6 +2,7 @@
 Name=Places
 Name[el]=Τοποθεσίες
 Name[es]=Lugares
+Name[fr]=Emplacements
 Name[gl]=Lugares
 Name[ja]=場所
 Name[km]=កន្លែង
@@ -21,6 +22,7 @@ Icon=user-home
 Comment=Open Devices and Folder Bookmarks
 Comment[el]=Άνοιγμα σελιδοδεικτών συσκευών και φακέλων
 Comment[es]=Abrir dispositivos y carpetas de marcadores
+Comment[fr]=Ouvre les emplacements et les dossiers de signets
 Comment[gl]=Abre os marcadores de dispositivos e cartafoles
 Comment[ja]=デバイスやブックマークされたフォルダを開きます
 Comment[km]=បើក​ឧបករណ៍ និង​ចំណាំ​របស់​ថត

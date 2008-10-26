@@ -8,6 +8,7 @@ Comment[pt]=Uma bola saltitante para o Plasma
 Comment[pt_BR]=Uma bola saltitante para o Plasma
 Comment[sv]=En studsande boll för Plasma
 Comment[uk]=М’ячик-стрибунець для плазми
+Comment[zh_CN]=一个 plasma 的弹球
 Comment[zh_TW]=Plasma 上的彈跳球遊戲
 Type=Service
 ServiceTypes=Plasma/Applet

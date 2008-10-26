@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Comic
 Name[es]=Tebeos
+Name[fr]=Bande dessinée
 Name[ja]=漫画
 Name[km]=កំប្លែង
 Name[pt]=Banda Desenhada
@@ -14,6 +15,7 @@ Name[zh_TW]=漫畫
 Comment=Comic Package Structure
 Comment[el]=Δομή πακέτου Comic
 Comment[es]=Paquete de estructura de tebeos
+Comment[fr]=Structure de paquetage de bande dessinée
 Comment[gl]=Estrutura de paquete comic
 Comment[km]=រចនាប័ទ្ម​កញ្ចប់​កំប្លែង
 Comment[nds]=Comic-Paketstruktuur
