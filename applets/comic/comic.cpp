@@ -150,10 +150,7 @@ void ComicApplet::init()
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
 
-    // Otherwise buttons show on plasma start
-    if ( mArrowsOnHover ) {
-        QTimer::singleShot( 0, this, SLOT( buttonBar() ) );
-    }
+    setAcceptsHoverEvents( mArrowsOnHover );
 }
 
 ComicApplet::~ComicApplet()
@@ -233,9 +230,8 @@ void ComicApplet::applyConfig()
         updateComic();
     }
     if ( checkButtonBar ) {
+        setAcceptsHoverEvents( mArrowsOnHover );
         buttonBar();
-        updateButtons();
-        constraintsEvent( Plasma::SizeConstraint );
         update();
     }
 }
@@ -560,6 +556,7 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
     Q_UNUSED( event );
+    buttonBar();
     if ( mFadingItem ) {
         mFadingItem->showItem();
     }
@@ -581,29 +578,33 @@ void ComicApplet::scaleToContent()
 void ComicApplet::buttonBar()
 {
     if ( mArrowsOnHover ) {
-        mFrame = new Plasma::Frame( this );
-        QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
-        mPrevButton = new Plasma::PushButton( mFrame );
-        mPrevButton->nativeWidget()->setIcon( KIcon("arrow-left") );
-        mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-        mPrevButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
-        connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
-        l->addItem( mPrevButton );
-        mNextButton = new Plasma::PushButton( mFrame );
-        mNextButton->nativeWidget()->setIcon( KIcon("arrow-right") );
-        mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-        mNextButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
-        connect( mNextButton, SIGNAL( clicked() ), this , SLOT( slotNextDay() ) );
-        l->addItem( mNextButton );
-        mFrame->setLayout( l );
-        mFrame->setFrameShadow( Plasma::Frame::Raised );
-        // To get correct frame size in constraintsEvent
-        l->activate();
-        mFrame->hide();
-        mFadingItem = new FadingItem( mFrame );
-        mFadingItem->hide();
-        // Set frame position
-        constraintsEvent( Plasma::SizeConstraint );
+        if ( !mFrame ) {
+            kDebug();
+            mFrame = new Plasma::Frame( this );
+            QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
+            mPrevButton = new Plasma::PushButton( mFrame );
+            mPrevButton->nativeWidget()->setIcon( KIcon("arrow-left") );
+            mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
+            mPrevButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+            connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
+            l->addItem( mPrevButton );
+            mNextButton = new Plasma::PushButton( mFrame );
+            mNextButton->nativeWidget()->setIcon( KIcon("arrow-right") );
+            mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
+            mNextButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+            connect( mNextButton, SIGNAL( clicked() ), this , SLOT( slotNextDay() ) );
+            l->addItem( mNextButton );
+            mFrame->setLayout( l );
+            mFrame->setFrameShadow( Plasma::Frame::Raised );
+            // To get correct frame size in constraintsEvent
+            l->activate();
+            mFrame->hide();
+            mFadingItem = new FadingItem( mFrame );
+            mFadingItem->hide();
+            updateButtons();
+            // Set frame position
+            constraintsEvent( Plasma::SizeConstraint );
+        }
     } else {
         delete mFrame;
         mFrame = 0;
@@ -611,7 +612,6 @@ void ComicApplet::buttonBar()
         mNextButton = 0;
         mFadingItem = 0;
     }
-    setAcceptsHoverEvents( mArrowsOnHover );
 }
 
 #include "comic.moc"
