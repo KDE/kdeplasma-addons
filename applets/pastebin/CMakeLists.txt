@@ -4,6 +4,7 @@ set(pastebin_SRCS
   backends/server.cpp
   backends/pastebinca.cpp
   backends/pastebincom.cpp
+  backends/imagebinca.cpp
   pastebin.cpp)
 
 kde4_add_ui_files(pastebin_SRCS pastebinConfig.ui)

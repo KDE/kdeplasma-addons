@@ -35,36 +35,40 @@ namespace Plasma
 
 class Pastebin : public Plasma::Applet
 {
-    Q_OBJECT
-    public:
-        Pastebin(QObject *parent, const QVariantList &args);
-        ~Pastebin();
+    Q_OBJECT;
+public:
+    Pastebin(QObject *parent, const QVariantList &args);
+    ~Pastebin();
 
-        void init();
-        void setServer(int backend);
+    void init();
+    void setTextServer(int backend);
+    void setImageServer(int backend);
 
-    enum { PASTEBINCA, PASTEBINCOM };
+    enum textServers { PASTEBINCA, PASTEBINCOM };
+    enum imageServers { IMAGEBINCA };
 
-    public slots:
-        void configAccepted();
+public slots:
+    void configAccepted();
 
-    protected slots:
-        void showResults(const QString &url);
-        void openLink(const QString &link);
+protected slots:
+    void showResults(const QString &url);
+    void openLink(const QString &link);
 
-    protected:
-        void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-        void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-        void dropEvent(QGraphicsSceneDragDropEvent *event);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        void createConfigurationInterface(KConfigDialog *parent);
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void createConfigurationInterface(KConfigDialog *parent);
 
-    private:
-        Plasma::Label *m_displayEdit;
-        PastebinServer *m_server;
-        Ui::pastebinConfig ui;
-        int m_backend;
-        QString m_text;
+private:
+    Plasma::Label *m_displayEdit;
+    PastebinServer *m_text_server;
+    PastebinServer *m_image_server;
+    Ui::pastebinConfig ui;
+    int m_text_backend;
+    int m_image_backend;
+    QString m_text;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)
