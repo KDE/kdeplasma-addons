@@ -353,7 +353,7 @@ QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier 
         result = identifier.toInt();
         break;
     case StringIdentifier:
-        result = stringFromScript( identifier.toString() );
+        result = identifier.toString();
         break;
     }
     return result;
@@ -374,16 +374,6 @@ QVariant ComicProviderWrapper::identifierWithDefault() const
     return mIdentifier;
 }
 
-QString ComicProviderWrapper::stringFromScript(const QString &string) const
-{
-    // Seems that we get utf8 from qtscript
-    // TODO Fix this in kross?
-    if ( mAction && mAction->interpreter() == "qtscript" ) {
-        return QString::fromUtf8( string.toAscii().constData() );
-    }
-    return string;
-}
-
 QString ComicProviderWrapper::comicAuthor() const
 {
     return mProvider->comicAuthor();
@@ -391,7 +381,7 @@ QString ComicProviderWrapper::comicAuthor() const
 
 void ComicProviderWrapper::setComicAuthor( const QString &author )
 {
-    mProvider->setComicAuthor( stringFromScript( author ) );
+    mProvider->setComicAuthor( author );
 }
 
 QString ComicProviderWrapper::websiteUrl()
@@ -411,7 +401,7 @@ QString ComicProviderWrapper::title()
 
 void ComicProviderWrapper::setTitle( const QString &title )
 {
-    mTitle = stringFromScript( title );
+    mTitle = title;
 }
 
 QString ComicProviderWrapper::additionalText()
@@ -421,7 +411,7 @@ QString ComicProviderWrapper::additionalText()
 
 void ComicProviderWrapper::setAdditionalText( const QString &additionalText )
 {
-    mAdditionalText = stringFromScript( additionalText );
+    mAdditionalText = additionalText;
 }
 
 QVariant ComicProviderWrapper::identifier()
