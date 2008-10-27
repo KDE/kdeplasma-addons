@@ -326,17 +326,9 @@ QImage ComicProviderWrapper::image()
     return mKrossImage.image();
 }
 
-QString ComicProviderWrapper::identifierToString(const QVariant &identifier) const
-{
-    if ( identifierType() == ComicProvider::DateIdentifier ) {
-        return identifier.toDate().toString( Qt::ISODate );
-    }
-    return identifier.toString();
-}
-
 QVariant ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 {
-    if ( identifierType() == ComicProvider::DateIdentifier) {
+    if ( identifierType() == ComicProvider::DateIdentifier && identifier.type() != QVariant::Bool ) {
         return QVariant::fromValue( qobject_cast<QObject*>( new DateWrapper( this, identifier.toDate() ) ) );
     }
     return identifier;
@@ -344,17 +336,19 @@ QVariant ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 
 QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier ) const
 {
-    QVariant result;
-    switch ( identifierType() ) {
-    case DateIdentifier:
-        result = DateWrapper::fromVariant( identifier );
-        break;
-    case NumberIdentifier:
-        result = identifier.toInt();
-        break;
-    case StringIdentifier:
-        result = identifier.toString();
-        break;
+    QVariant result = identifier;
+    if ( identifier.type() != QVariant::Bool ) {
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            result = DateWrapper::fromVariant( identifier );
+            break;
+        case NumberIdentifier:
+            result = identifier.toInt();
+            break;
+        case StringIdentifier:
+            result = identifier.toString();
+            break;
+        }
     }
     return result;
 }
@@ -384,7 +378,7 @@ void ComicProviderWrapper::setComicAuthor( const QString &author )
     mProvider->setComicAuthor( author );
 }
 
-QString ComicProviderWrapper::websiteUrl()
+QString ComicProviderWrapper::websiteUrl() const
 {
     return mWebsiteUrl;
 }
@@ -394,7 +388,7 @@ void ComicProviderWrapper::setWebsiteUrl( const QString &websiteUrl )
     mWebsiteUrl = websiteUrl;
 }
 
-QString ComicProviderWrapper::title()
+QString ComicProviderWrapper::title() const
 {
     return mTitle;
 }
@@ -404,7 +398,7 @@ void ComicProviderWrapper::setTitle( const QString &title )
     mTitle = title;
 }
 
-QString ComicProviderWrapper::additionalText()
+QString ComicProviderWrapper::additionalText() const
 {
     return mAdditionalText;
 }
@@ -464,24 +458,24 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
     mFirstIdentifier = identifierFromScript( firstIdentifier );
 }
 
-QString ComicProviderWrapper::identifierString() const
+QVariant ComicProviderWrapper::identifierVariant() const
 {
-    return mProvider->pluginName() + ':' + identifierToString( identifierWithDefault() );
+    return identifierWithDefault();
 }
 
-QString ComicProviderWrapper::firstIdentifierString() const
+QVariant ComicProviderWrapper::firstIdentifierVariant() const
 {
-    return identifierToString( mFirstIdentifier );
+    return mFirstIdentifier;
 }
 
-QString ComicProviderWrapper::nextIdentifierString() const
+QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
-    return identifierToString( mNextIdentifier );
+    return mNextIdentifier;
 }
 
-QString ComicProviderWrapper::previousIdentifierString() const
+QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
-    return identifierToString( mPreviousIdentifier );
+    return mPreviousIdentifier;
 }
 
 void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
@@ -510,10 +504,10 @@ void ComicProviderWrapper::finished() const
     kDebug() << QString( "Website URL" ).leftJustified( 22, '.' ) << mWebsiteUrl;
     kDebug() << QString( "Title" ).leftJustified( 22, '.' ) << mTitle;
     kDebug() << QString( "Additional Text" ).leftJustified( 22, '.' ) << mAdditionalText;
-    kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << identifierString();
-    kDebug() << QString( "First Identifier" ).leftJustified( 22, '.' ) << firstIdentifierString();
-    kDebug() << QString( "Next Identifier" ).leftJustified( 22, '.' ) << nextIdentifierString();
-    kDebug() << QString( "Previous Identifier" ).leftJustified( 22, '.' ) << previousIdentifierString();
+    kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << mIdentifier;
+    kDebug() << QString( "First Identifier" ).leftJustified( 22, '.' ) << mFirstIdentifier;
+    kDebug() << QString( "Next Identifier" ).leftJustified( 22, '.' ) << mNextIdentifier;
+    kDebug() << QString( "Previous Identifier" ).leftJustified( 22, '.' ) << mPreviousIdentifier;
     emit mProvider->finished( mProvider );
 }
 

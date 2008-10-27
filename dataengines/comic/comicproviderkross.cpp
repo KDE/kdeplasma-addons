@@ -47,15 +47,33 @@ QImage ComicProviderKross::image() const
     return m_wrapper.image();
 }
 
+QString ComicProviderKross::identifierToString( const QVariant &identifier, bool *notSpecified ) const
+{
+    QString result;
+
+    if ( !identifier.isNull() && identifier.type() != QVariant::Bool ) {
+        if ( identifierType() == ComicProvider::DateIdentifier ) {
+            result = identifier.toDate().toString( Qt::ISODate );
+        } else {
+            result = identifier.toString();
+        }
+    }
+    if ( notSpecified ) {
+        *notSpecified = identifier.isNull();
+    }
+    return result;
+}
+
 QString ComicProviderKross::identifier() const
 {
-    return m_wrapper.identifierString();
+    return pluginName() + ':' + identifierToString( m_wrapper.identifierVariant() );
 }
 
 QString ComicProviderKross::nextIdentifier() const
 {
-    const QString result = m_wrapper.nextIdentifierString();
-    if ( result.isEmpty() ) {
+    bool notSpecified;
+    const QString result = identifierToString( m_wrapper.nextIdentifierVariant(), &notSpecified );
+    if ( notSpecified ) {
         return ComicProvider::nextIdentifier();
     }
     return result;
@@ -63,8 +81,9 @@ QString ComicProviderKross::nextIdentifier() const
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    const QString result = m_wrapper.previousIdentifierString();
-    if ( result.isEmpty() ) {
+    bool notSpecified;
+    const QString result = identifierToString( m_wrapper.previousIdentifierVariant(), &notSpecified );
+    if ( notSpecified ) {
         return ComicProvider::previousIdentifier();
     }
     return result;
@@ -72,8 +91,9 @@ QString ComicProviderKross::previousIdentifier() const
 
 QString ComicProviderKross::firstStripIdentifier() const
 {
-    const QString result = m_wrapper.firstIdentifierString();
-    if ( result.isEmpty() ) {
+    bool notSpecified;
+    const QString result = identifierToString( m_wrapper.firstIdentifierVariant(), &notSpecified );
+    if ( notSpecified ) {
         return ComicProvider::firstStripIdentifier();
     }
     return result;

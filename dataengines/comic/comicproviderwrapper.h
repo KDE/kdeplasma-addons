@@ -155,11 +155,11 @@ class ComicProviderWrapper : public QObject
 
         QString comicAuthor() const;
         void setComicAuthor( const QString &author );
-        QString websiteUrl();
+        QString websiteUrl() const;
         void setWebsiteUrl( const QString &websiteUrl );
-        QString title();
+        QString title() const;
         void setTitle( const QString &title );
-        QString additionalText();
+        QString additionalText() const;
         void setAdditionalText( const QString &additionalText );
         QVariant identifier();
         void setIdentifier( const QVariant &identifier );
@@ -170,10 +170,10 @@ class ComicProviderWrapper : public QObject
         QVariant firstIdentifier();
         void setFirstIdentifier( const QVariant &firstIdentifier );
 
-        QString identifierString() const;
-        QString firstIdentifierString() const;
-        QString nextIdentifierString() const;
-        QString previousIdentifierString() const;
+        QVariant identifierVariant() const;
+        QVariant firstIdentifierVariant() const;
+        QVariant nextIdentifierVariant() const;
+        QVariant previousIdentifierVariant() const;
 
     public slots:
         void finished() const;
