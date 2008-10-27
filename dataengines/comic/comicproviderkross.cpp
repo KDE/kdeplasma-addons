@@ -47,7 +47,7 @@ QImage ComicProviderKross::image() const
     return m_wrapper.image();
 }
 
-QString ComicProviderKross::identifierToString( const QVariant &identifier, bool *notSpecified ) const
+QString ComicProviderKross::identifierToString( const QVariant &identifier ) const
 {
     QString result;
 
@@ -57,9 +57,6 @@ QString ComicProviderKross::identifierToString( const QVariant &identifier, bool
         } else {
             result = identifier.toString();
         }
-    }
-    if ( notSpecified ) {
-        *notSpecified = identifier.isNull();
     }
     return result;
 }
@@ -71,32 +68,17 @@ QString ComicProviderKross::identifier() const
 
 QString ComicProviderKross::nextIdentifier() const
 {
-    bool notSpecified;
-    const QString result = identifierToString( m_wrapper.nextIdentifierVariant(), &notSpecified );
-    if ( notSpecified ) {
-        return ComicProvider::nextIdentifier();
-    }
-    return result;
+    return identifierToString( m_wrapper.nextIdentifierVariant() );
 }
 
 QString ComicProviderKross::previousIdentifier() const
 {
-    bool notSpecified;
-    const QString result = identifierToString( m_wrapper.previousIdentifierVariant(), &notSpecified );
-    if ( notSpecified ) {
-        return ComicProvider::previousIdentifier();
-    }
-    return result;
+    return  identifierToString( m_wrapper.previousIdentifierVariant() );
 }
 
 QString ComicProviderKross::firstStripIdentifier() const
 {
-    bool notSpecified;
-    const QString result = identifierToString( m_wrapper.firstIdentifierVariant(), &notSpecified );
-    if ( notSpecified ) {
-        return ComicProvider::firstStripIdentifier();
-    }
-    return result;
+    return identifierToString( m_wrapper.firstIdentifierVariant() );
 }
 
 QString ComicProviderKross::stripTitle() const

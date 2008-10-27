@@ -279,6 +279,7 @@ void ComicProviderWrapper::init()
                     mAction->trigger();
                     mFunctions = mAction->functionNames();
 
+                    setIdentifierToDefault();
                     callFunction( "init" );
                 }
             }
@@ -353,19 +354,21 @@ QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier 
     return result;
 }
 
-QVariant ComicProviderWrapper::identifierWithDefault() const
+void ComicProviderWrapper::setIdentifierToDefault()
 {
-    if ( mIdentifier.isNull() ) {
-        switch ( identifierType() ) {
-        case DateIdentifier:
-            return mProvider->requestedDate();
-        case NumberIdentifier:
-            return mProvider->requestedNumber();
-        case StringIdentifier:
-            return mProvider->requestedString();
-        }
+    switch ( identifierType() ) {
+    case DateIdentifier:
+        mIdentifier = mProvider->requestedDate();
+        mLastIdentifier = QDate::currentDate();
+        break;
+    case NumberIdentifier:
+        mIdentifier = mProvider->requestedNumber();
+        mFirstIdentifier = 1;
+        break;
+    case StringIdentifier:
+        mIdentifier = mProvider->requestedString();
+        break;
     }
-    return mIdentifier;
 }
 
 QString ComicProviderWrapper::comicAuthor() const
@@ -410,7 +413,7 @@ void ComicProviderWrapper::setAdditionalText( const QString &additionalText )
 
 QVariant ComicProviderWrapper::identifier()
 {
-    return identifierToScript( identifierWithDefault() );
+    return identifierToScript( mIdentifier );
 }
 
 void ComicProviderWrapper::setIdentifier( const QVariant &identifier )
@@ -458,9 +461,19 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
     mFirstIdentifier = identifierFromScript( firstIdentifier );
 }
 
+QVariant ComicProviderWrapper::lastIdentifier()
+{
+    return identifierToScript( mLastIdentifier );
+}
+
+void ComicProviderWrapper::setLastIdentifier( const QVariant &lastIdentifier )
+{
+    mLastIdentifier = identifierFromScript( lastIdentifier );
+}
+
 QVariant ComicProviderWrapper::identifierVariant() const
 {
-    return identifierWithDefault();
+    return mIdentifier;
 }
 
 QVariant ComicProviderWrapper::firstIdentifierVariant() const
@@ -468,13 +481,54 @@ QVariant ComicProviderWrapper::firstIdentifierVariant() const
     return mFirstIdentifier;
 }
 
+QVariant ComicProviderWrapper::lastIdentifierVariant() const
+{
+    return mLastIdentifier;
+}
+
 QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
+    if ( mNextIdentifier.isNull() && !mLastIdentifier.isNull() ) {
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            if ( mIdentifier.toDate() < mLastIdentifier.toDate() ) {
+                return mIdentifier.toDate().addDays( 1 );
+            } else {
+                return false;
+            }
+        case NumberIdentifier:
+            if ( mIdentifier.toInt() < mLastIdentifier.toInt() ) {
+                return mIdentifier.toInt() + 1;
+            } else {
+                return false;
+            }
+        case StringIdentifier:
+            break;
+        }
+    }
     return mNextIdentifier;
 }
 
 QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
+    if ( mPreviousIdentifier.isNull() && !mFirstIdentifier.isNull() ) {
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            if ( mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
+                return mIdentifier.toDate().addDays( -1 );
+            } else {
+                return false;
+            }
+        case NumberIdentifier:
+            if ( mIdentifier.toInt() > mFirstIdentifier.toInt() ) {
+                return mIdentifier.toInt() - 1;
+            } else {
+                return false;
+            }
+        case StringIdentifier:
+            break;
+        }
+    }
     return mPreviousIdentifier;
 }
 
@@ -506,6 +560,7 @@ void ComicProviderWrapper::finished() const
     kDebug() << QString( "Additional Text" ).leftJustified( 22, '.' ) << mAdditionalText;
     kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << mIdentifier;
     kDebug() << QString( "First Identifier" ).leftJustified( 22, '.' ) << mFirstIdentifier;
+    kDebug() << QString( "Last Identifier" ).leftJustified( 22, '.' ) << mLastIdentifier;
     kDebug() << QString( "Next Identifier" ).leftJustified( 22, '.' ) << mNextIdentifier;
     kDebug() << QString( "Previous Identifier" ).leftJustified( 22, '.' ) << mPreviousIdentifier;
     emit mProvider->finished( mProvider );

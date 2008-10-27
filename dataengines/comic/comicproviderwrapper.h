@@ -127,6 +127,7 @@ class ComicProviderWrapper : public QObject
         Q_PROPERTY( QVariant nextIdentifier READ nextIdentifier WRITE setNextIdentifier )
         Q_PROPERTY( QVariant previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier )
         Q_PROPERTY( QVariant firstIdentifier READ firstIdentifier WRITE setFirstIdentifier )
+        Q_PROPERTY( QVariant lastIdentifier READ lastIdentifier WRITE setLastIdentifier )
     public:
         enum PositionType {
             Left = 0,
@@ -169,9 +170,12 @@ class ComicProviderWrapper : public QObject
         void setPreviousIdentifier( const QVariant &previousIdentifier );
         QVariant firstIdentifier();
         void setFirstIdentifier( const QVariant &firstIdentifier );
+        QVariant lastIdentifier();
+        void setLastIdentifier( const QVariant &lastIdentifier );
 
         QVariant identifierVariant() const;
         QVariant firstIdentifierVariant() const;
+        QVariant lastIdentifierVariant() const;
         QVariant nextIdentifierVariant() const;
         QVariant previousIdentifierVariant() const;
 
@@ -188,10 +192,9 @@ class ComicProviderWrapper : public QObject
         QVariant callFunction( const QString &name, const QVariantList &args = QVariantList() );
         const QStringList& extensions() const;
         bool functionCalled() const;
-        QString identifierToString(const QVariant &identifier) const;
         QVariant identifierToScript(const QVariant &identifier);
         QVariant identifierFromScript(const QVariant &identifier) const;
-        QVariant identifierWithDefault() const;
+        void setIdentifierToDefault();
 
     private:
         Kross::Action *mAction;
@@ -209,6 +212,7 @@ class ComicProviderWrapper : public QObject
         QVariant mNextIdentifier;
         QVariant mPreviousIdentifier;
         QVariant mFirstIdentifier;
+        QVariant mLastIdentifier;
 };
 
 #endif
