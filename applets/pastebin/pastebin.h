@@ -35,7 +35,7 @@ namespace Plasma
 
 class Pastebin : public Plasma::Applet
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     Pastebin(QObject *parent, const QVariantList &args);
     ~Pastebin();
