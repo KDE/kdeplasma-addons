@@ -253,7 +253,7 @@ void ComicApplet::checkDayChanged()
 void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
-    mComicIdentifier = cg.readEntry( "comic", "garfield" );
+    mComicIdentifier = cg.readEntry( "comic", "" );
     mShowComicUrl = cg.readEntry( "showComicUrl", false );
     mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
@@ -490,12 +490,15 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     if ( !engine )
         return;
 
-    setCursor( Qt::WaitCursor );
-    const QString identifier = mComicIdentifier + ':' + identifierSuffix;
+    setConfigurationRequired( mComicIdentifier.isEmpty() );
+    if ( !mComicIdentifier.isEmpty() ) {
+        setCursor( Qt::WaitCursor );
+        const QString identifier = mComicIdentifier + ':' + identifierSuffix;
 
-    engine->disconnectSource( identifier, this );
-    engine->connectSource( identifier, this );
-    const Plasma::DataEngine::Data data = engine->query( identifier );
+        engine->disconnectSource( identifier, this );
+        engine->connectSource( identifier, this );
+        const Plasma::DataEngine::Data data = engine->query( identifier );
+    }
 }
 
 void ComicApplet::updateButtons()
@@ -579,7 +582,6 @@ void ComicApplet::buttonBar()
 {
     if ( mArrowsOnHover ) {
         if ( !mFrame ) {
-            kDebug();
             mFrame = new Plasma::Frame( this );
             QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
             mPrevButton = new Plasma::PushButton( mFrame );
