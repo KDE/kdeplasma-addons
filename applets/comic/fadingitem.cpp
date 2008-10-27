@@ -96,8 +96,9 @@ void FadingItem::showItem()
 void FadingItem::hideItem()
 {
     mShowing = false;
-    parentItem()->hide();
+    updatePixmap();
     mOpacity = 1.0;
+    parentItem()->hide();
     show();
     Plasma::Animator::self()->customAnimation( 25, 100, Plasma::Animator::EaseInCurve,
                                                this, "updateFade" );
