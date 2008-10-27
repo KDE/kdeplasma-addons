@@ -38,6 +38,7 @@ class FadingItem;
 namespace Plasma {
     class Frame;
     class PushButton;
+    class Svg;
 }
 
 class ComicApplet : public Plasma::Applet
@@ -117,6 +118,7 @@ class ComicApplet : public Plasma::Applet
         FadingItem *mFadingItem;
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
+        Plasma::Svg *mSvg;
         QSizeF mIdealSize;
         bool mArrowsOnHover;
 };

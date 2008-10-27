@@ -42,6 +42,7 @@
 #include <Plasma/Frame>
 #include <Plasma/PushButton>
 #include <plasma/tooltipmanager.h>
+#include <Plasma/Svg>
 
 #include "configwidget.h"
 #include "fullviewwidget.h"
@@ -106,6 +107,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFadingItem( 0 ),
       mPrevButton( 0 ),
       mNextButton( 0 ),
+      mSvg( 0 ),
       mArrowsOnHover( false )
 {
     setHasConfigurationInterface( true );
@@ -118,6 +120,10 @@ void ComicApplet::init()
     Plasma::ToolTipManager::self()->registerWidget( this );
 
     loadConfig();
+
+    mSvg = new Plasma::Svg(this);
+    mSvg->setImagePath("widgets/arrows");
+    mSvg->setContainsMultipleImages(true);
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -441,26 +447,14 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     int leftImageGap = 0;
     int buttonMiddle = ( contentRect.height() / 2 ) + contentRect.top();
     if ( mShowPreviousButton && !mArrowsOnHover ) {
-        QPolygon arrow( 3 );
-        arrow.setPoint( 0, QPoint( contentRect.left() + 3, buttonMiddle ) );
-        arrow.setPoint( 1, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle - 15 ) );
-        arrow.setPoint( 2, QPoint( contentRect.left() + s_arrowWidth - 5, buttonMiddle + 15 ) );
-
-        p->setBrush( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
-        p->drawPolygon( arrow );
+        mSvg->paint( p, contentRect.left() + 5, buttonMiddle - 15, s_arrowWidth, 30, "left-arrow");
 
         leftImageGap = s_arrowWidth;
     }
 
     int rightImageGap = 0;
     if ( mShowNextButton && !mArrowsOnHover ) {
-        QPolygon arrow( 3 );
-        arrow.setPoint( 0, QPoint( contentRect.right() - 3, buttonMiddle ) );
-        arrow.setPoint( 1, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15 ) );
-        arrow.setPoint( 2, QPoint( contentRect.right() - s_arrowWidth + 5, buttonMiddle + 15 ) );
-
-        p->setBrush( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
-        p->drawPolygon( arrow );
+        mSvg->paint( p, contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15, s_arrowWidth, 30, "right-arrow");
 
         rightImageGap = s_arrowWidth;
     }
