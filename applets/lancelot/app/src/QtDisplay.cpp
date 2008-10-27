@@ -19,6 +19,10 @@
 
 #include "QtDisplay.h"
 
+#include "config-lancelot.h"
+
+#ifdef LANCELOT_HAVE_COMPOSITING
+
 QtDisplay::QtDisplay(char * display, int screen)
 {
     _displayPtr = display;
@@ -87,4 +91,4 @@ void QtDisplay::setupXRender()
 
 }
 
-#include "QtDisplay.moc"
+#endif // LANCELOT_HAVE_COMPOSITING

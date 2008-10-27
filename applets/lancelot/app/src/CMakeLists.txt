@@ -5,6 +5,26 @@ find_package(SharedMimeInfo REQUIRED)
 # Moved up level
 # add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
+#########################################################
+# Checking for Composite Begin                          #
+#########################################################
+
+message ("Composite libraries?")
+if( X11_Xcomposite_FOUND AND X11_Xdamage_FOUND )
+    set( LANCELOT_HAVE_COMPOSITING 1 )
+    message ("Composite libraries found")
+endif( X11_Xcomposite_FOUND AND X11_Xdamage_FOUND )
+
+configure_file(config-lancelot.h.cmake
+   ${CMAKE_CURRENT_BINARY_DIR}/config-lancelot.h )
+
+#########################################################
+# Checking for Composite End                            #
+#########################################################
+
+
+
+
 include(PlasmaUIMacros)
 
 include_directories(

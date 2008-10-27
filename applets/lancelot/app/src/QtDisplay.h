@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2005,2006,2007 by Siraj Razick <siraj@kde.org>
+ *   Copyright (C) 2007 by Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -19,6 +20,10 @@
 
 #ifndef QT_DISPLAY
 #define QT_DISPLAY
+
+#include "config-lancelot.h"
+
+#ifdef LANCELOT_HAVE_COMPOSITING
 
 #include <QTextStream>
 #include <QImage>
@@ -44,8 +49,7 @@
  display
  **/
 
-class QtDisplay : public QObject {
-    Q_OBJECT
+class QtDisplay {
 public:
     QtDisplay(char * display = 0, int screen = 0);
     ~QtDisplay();
@@ -66,5 +70,7 @@ private:
 
 };
 
-#endif
+#endif // LANCELOT_HAVE_COMPOSITING
+
+#endif // QT_DISPLAY
 

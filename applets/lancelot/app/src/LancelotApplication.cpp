@@ -94,9 +94,17 @@ int LancelotApplication::main(int argc, char **argv)
     KAboutData * about = new AboutData();
     KCmdLineArgs::init(argc, argv, about);
 
+#ifdef LANCELOT_HAVE_COMPOSITING
     QtDisplay * dpy = new QtDisplay();
-
-    LancelotApplication::m_application = new LancelotApplication(dpy->display(),dpy->visual(),dpy->colormap());
+    LancelotApplication::m_application =
+        new LancelotApplication(
+                dpy->display(),
+                dpy->visual(),
+                dpy->colormap());
+#else
+    LancelotApplication::m_application =
+        new LancelotApplication(argc, argv);
+#endif // LANCELOT_HAVE_COMPOSITING
 
     return LancelotApplication::m_application->exec();
 }

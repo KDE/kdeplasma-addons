@@ -28,7 +28,7 @@ ActionListView2Item::ActionListView2Item(ActionListView2ItemFactory * factory)
 {
     connect(this, SIGNAL(mouseHoverEnter()),
             this, SLOT(select()));
-    connect(this, SIGNAL(mouseLeaveEnter()),
+    connect(this, SIGNAL(mouseHoverLeave()),
             this, SLOT(deselect()));
     L_WIDGET_SET_INITIALIZED;
 }
@@ -56,6 +56,7 @@ void ActionListView2Item::setSelected(bool selected)
         if (m_factory->m_selectedItem == this) {
             m_factory->m_selectedItem = NULL;
         }
+        hoverLeaveEvent(NULL);
     } else {
         if (m_factory->m_selectedItem == this) {
             return;
@@ -65,6 +66,7 @@ void ActionListView2Item::setSelected(bool selected)
             }
             m_factory->m_selectedItem = this;
         }
+        hoverEnterEvent(NULL);
     }
 }
 
