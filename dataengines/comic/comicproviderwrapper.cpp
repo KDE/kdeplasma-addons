@@ -354,6 +354,34 @@ QVariant ComicProviderWrapper::identifierFromScript( const QVariant &identifier 
     return result;
 }
 
+void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
+{
+    switch ( identifierType() ) {
+    case DateIdentifier:
+        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toDate() < mFirstIdentifier.toDate() ) {
+            *identifier = mFirstIdentifier;
+        }
+        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toDate() > mLastIdentifier.toDate() ) {
+            *identifier = mLastIdentifier;
+        }
+        break;
+    case NumberIdentifier:
+        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toInt() < mFirstIdentifier.toInt() ) {
+            *identifier = mFirstIdentifier;
+        }
+        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toInt() > mLastIdentifier.toInt() ) {
+            *identifier = mLastIdentifier;
+        }
+        break;
+    case StringIdentifier:
+        break;
+    }
+}
+
 void ComicProviderWrapper::setIdentifierToDefault()
 {
     switch ( identifierType() ) {
@@ -419,6 +447,7 @@ QVariant ComicProviderWrapper::identifier()
 void ComicProviderWrapper::setIdentifier( const QVariant &identifier )
 {
     mIdentifier = identifierFromScript( identifier );
+    checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::nextIdentifier()
@@ -459,6 +488,7 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
         break;
     }
     mFirstIdentifier = identifierFromScript( firstIdentifier );
+    checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::lastIdentifier()
@@ -469,6 +499,7 @@ QVariant ComicProviderWrapper::lastIdentifier()
 void ComicProviderWrapper::setLastIdentifier( const QVariant &lastIdentifier )
 {
     mLastIdentifier = identifierFromScript( lastIdentifier );
+    checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::identifierVariant() const
