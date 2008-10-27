@@ -101,6 +101,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowComicAuthor( false ),
       mShowComicTitle( false ),
       mShowComicIdentifier( false ),
+      mFullViewWidget( 0 ),
       mFrame( 0 ),
       mFadingItem( 0 ),
       mPrevButton( 0 ),
