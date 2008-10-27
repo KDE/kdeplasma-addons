@@ -21,6 +21,7 @@
 #include "configwidget.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
@@ -77,7 +78,7 @@ class ComicModel : public QAbstractListModel
 
 
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
-    : QWidget( parent ), mEngine(engine)
+    : QWidget( parent ), mEngine( engine )
 {
     QGridLayout *layout = new QGridLayout( this );
     layout->setMargin( 0 );
@@ -106,11 +107,14 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     layout->addWidget( mNewStuff, 6, 1 );
     layout->setRowStretch( 7, 1.0 );
 
-    mModel = new ComicModel( mEngine->query("providers"), this );
+    mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
     mProxyModel->sort(0, Qt::AscendingOrder);
     mComicIdentifier->setModel( mProxyModel );
+    if ( mModel->rowCount() < 1 ) {
+        QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
+    }
 }
 
 ConfigWidget::~ConfigWidget()
