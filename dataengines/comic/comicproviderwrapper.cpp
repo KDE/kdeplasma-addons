@@ -519,7 +519,8 @@ QVariant ComicProviderWrapper::lastIdentifierVariant() const
 
 QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
-    if ( mNextIdentifier.isNull() && !mLastIdentifier.isNull() ) {
+    // Only use automatic result when user has not set previous nor next identifier
+    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() && !mLastIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
             if ( mIdentifier.toDate() < mLastIdentifier.toDate() ) {
@@ -542,7 +543,8 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
 
 QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
-    if ( mPreviousIdentifier.isNull() && !mFirstIdentifier.isNull() ) {
+    // Only use automatic result when user has not set previous nor next identifier
+    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() && !mFirstIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
             if ( mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
