@@ -97,6 +97,7 @@ void Twitter::init()
 
     QGraphicsLinearLayout *flashLayout = new QGraphicsLinearLayout( Qt::Horizontal );
     m_flash = new Plasma::Flash( this );
+    m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
     m_flash->setColor( Qt::gray );
     QFont fnt = qApp->font();
