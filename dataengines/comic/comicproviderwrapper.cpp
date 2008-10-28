@@ -519,17 +519,17 @@ QVariant ComicProviderWrapper::lastIdentifierVariant() const
 
 QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
-    // Only use automatic result when user has not set previous nor next identifier
-    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() && !mLastIdentifier.isNull() ) {
+    if ( mNextIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
-            if ( mIdentifier.toDate() < mLastIdentifier.toDate() ) {
+            if ( ( mLastIdentifier.isNull() && mIdentifier.toDate() < QDate::currentDate() ) ||
+                 ( !mLastIdentifier.isNull() && mIdentifier.toDate() < mLastIdentifier.toDate() ) ) {
                 return mIdentifier.toDate().addDays( 1 );
             } else {
                 return false;
             }
         case NumberIdentifier:
-            if ( mIdentifier.toInt() < mLastIdentifier.toInt() ) {
+            if ( mLastIdentifier.isNull() || mIdentifier.toInt() < mLastIdentifier.toInt() ) {
                 return mIdentifier.toInt() + 1;
             } else {
                 return false;
@@ -543,17 +543,17 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
 
 QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
-    // Only use automatic result when user has not set previous nor next identifier
-    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() && !mFirstIdentifier.isNull() ) {
+    if ( mPreviousIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
-            if ( mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
+            if ( mFirstIdentifier.isNull() || mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
                 return mIdentifier.toDate().addDays( -1 );
             } else {
                 return false;
             }
         case NumberIdentifier:
-            if ( mIdentifier.toInt() > mFirstIdentifier.toInt() ) {
+            if ( ( mFirstIdentifier.isNull() && mIdentifier.toInt() > 1 ) ||
+                 ( !mFirstIdentifier.isNull() && mIdentifier.toInt() > mFirstIdentifier.toInt() ) ) {
                 return mIdentifier.toInt() - 1;
             } else {
                 return false;
