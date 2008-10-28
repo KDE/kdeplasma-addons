@@ -519,7 +519,8 @@ QVariant ComicProviderWrapper::lastIdentifierVariant() const
 
 QVariant ComicProviderWrapper::nextIdentifierVariant() const
 {
-    if ( mNextIdentifier.isNull() ) {
+    //either handle both previousIdentifier and nextIdentifier or handle none
+    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
             if ( ( mLastIdentifier.isNull() && mIdentifier.toDate() < QDate::currentDate() ) ||
@@ -543,7 +544,8 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
 
 QVariant ComicProviderWrapper::previousIdentifierVariant() const
 {
-    if ( mPreviousIdentifier.isNull() ) {
+    //either handle both previousIdentifier and nextIdentifier or handle none
+    if ( mPreviousIdentifier.isNull() && mNextIdentifier.isNull() ) {
         switch ( identifierType() ) {
         case DateIdentifier:
             if ( mFirstIdentifier.isNull() || mIdentifier.toDate() > mFirstIdentifier.toDate() ) {
