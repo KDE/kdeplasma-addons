@@ -492,6 +492,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         engine->disconnectSource( identifier, this );
         engine->connectSource( identifier, this );
         const Plasma::DataEngine::Data data = engine->query( identifier );
+        setConfigurationRequired( data[ "Error" ].toBool() );
     }
 }
 
