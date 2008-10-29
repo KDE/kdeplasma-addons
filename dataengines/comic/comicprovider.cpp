@@ -29,7 +29,7 @@ class ComicProvider::Private
             : mParent( parent ),
               mIsCurrent( false ),
               mFirstStripNumber( 1 ),
-              mComicDescription(service)
+              mComicDescription( service )
         {
         }
 

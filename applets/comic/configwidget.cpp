@@ -22,17 +22,17 @@
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
+#include <QtGui/QSortFilterProxyModel>
 
 #include <KLocale>
 #include <KIcon>
-#include <KServiceTypeTrader>
 #include <KNS/Engine>
+#include <KServiceTypeTrader>
 
 class ComicModel : public QAbstractListModel
 {
@@ -40,7 +40,7 @@ class ComicModel : public QAbstractListModel
         ComicModel( const Plasma::DataEngine::Data &comics, QObject *parent = 0 )
             : QAbstractListModel( parent )
         {
-            setComics(comics);
+            setComics( comics );
         }
 
         void setComics( const Plasma::DataEngine::Data &comics )
@@ -64,7 +64,7 @@ class ComicModel : public QAbstractListModel
             if ( role == Qt::DisplayRole ) {
                 return mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 0 ];
             } else if ( role == Qt::DecorationRole ) {
-                return KIcon(mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 1 ]);
+                return KIcon( mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 1 ] );
             } else if ( role == Qt::UserRole ) {
                 return mComics.keys()[ index.row() ];
             } else {
@@ -92,9 +92,9 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
     mShowComicIdentifier = new QCheckBox( i18n( "Show Comic Identifier" ), this );
     mShowArrowsOnHover = new QCheckBox( i18n( "Show Arrows Only on Hover" ), this );
-    mNewStuff = new QPushButton(this);
-    mNewStuff->setToolTip(i18n("Download new comics"));
-    mNewStuff->setText(i18n("Get New Comics..."));
+    mNewStuff = new QPushButton( this );
+    mNewStuff->setToolTip( i18n( "Download new comics" ) );
+    mNewStuff->setText( i18n( "Get New Comics..." ) );
     connect( mNewStuff, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
     layout->addWidget( label, 0, 0 );
@@ -110,7 +110,7 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
-    mProxyModel->sort(0, Qt::AscendingOrder);
+    mProxyModel->sort( 0, Qt::AscendingOrder );
     mComicIdentifier->setModel( mProxyModel );
     if ( mModel->rowCount() < 1 ) {
         QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
@@ -126,7 +126,7 @@ void ConfigWidget::getNewStuff()
     KNS::Engine engine( this );
     if ( engine.init( "comic.knsrc" ) ) {
         KNS::Entry::List entries = engine.downloadDialogModal( this );
-        if (entries.size() > 0) {
+        if ( entries.size() > 0 ) {
             mModel->setComics( mEngine->query( "providers" ) );
         }
     }

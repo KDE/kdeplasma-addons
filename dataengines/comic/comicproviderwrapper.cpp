@@ -86,7 +86,7 @@ QDate DateWrapper::fromVariant( const QVariant &variant )
         return QDate::fromString( variant.toString(), Qt::ISODate );
     } else {
         DateWrapper* dw = qobject_cast<DateWrapper*>( variant.value<QObject*>() );
-        if (dw) {
+        if ( dw ) {
             return dw->date();
         }
     }
@@ -255,7 +255,7 @@ ComicProviderWrapper::~ComicProviderWrapper()
 void ComicProviderWrapper::init()
 {
     const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + "/" );
-    if (!path.isEmpty()) {
+    if ( !path.isEmpty() ) {
         Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
         structure->setPath( path );
         mPackage = new Plasma::Package( path, structure );
@@ -327,7 +327,7 @@ QImage ComicProviderWrapper::image()
     return mKrossImage.image();
 }
 
-QVariant ComicProviderWrapper::identifierToScript(const QVariant &identifier)
+QVariant ComicProviderWrapper::identifierToScript( const QVariant &identifier )
 {
     if ( identifierType() == ComicProvider::DateIdentifier && identifier.type() != QVariant::Bool ) {
         return QVariant::fromValue( qobject_cast<QObject*>( new DateWrapper( this, identifier.toDate() ) ) );
@@ -479,7 +479,7 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
 {
     switch ( identifierType() ) {
     case DateIdentifier:
-        mProvider->setFirstStripDate( DateWrapper::fromVariant(firstIdentifier) );
+        mProvider->setFirstStripDate( DateWrapper::fromVariant( firstIdentifier ) );
         break;
     case NumberIdentifier:
         mProvider->setFirstStripNumber( firstIdentifier.toInt() );
@@ -640,17 +640,17 @@ void ComicProviderWrapper::addHeader( const QString &name, PositionType position
     int height = 0;
     int width = 0;
 
-    switch (position) {
-    case Top:
-    case Bottom:
-        height = header.height() + comic.height();
-        width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
-        break;
-    case Left:
-    case Right:
-        height = ( header.height() >= comic.height() ) ? header.height() : comic.height();
-        width = header.width() + comic.width();
-        break;
+    switch ( position ) {
+        case Top:
+        case Bottom:
+            height = header.height() + comic.height();
+            width = ( header.width() >= comic.width() ) ? header.width() : comic.width();
+            break;
+        case Left:
+        case Right:
+            height = ( header.height() >= comic.height() ) ? header.height() : comic.height();
+            width = header.width() + comic.width();
+            break;
     }
 
     QImage image = QImage( QSize( width, height ), QImage::Format_RGB32 );
@@ -662,23 +662,23 @@ void ComicProviderWrapper::addHeader( const QString &name, PositionType position
     QPoint headerPos;
     QPoint comicPos;
 
-    switch (position) {
-    case Top:
-        headerPos = QPoint( ( ( width - header.width() ) / 2 ), 0 );
-        comicPos = QPoint( ( ( width - comic.width() ) / 2 ), header.height() );
-        break;
-    case Bottom:
-        headerPos = QPoint( ( ( width - header.width() ) / 2 ), comic.height() );
-        comicPos = QPoint( ( ( width - comic.width() ) / 2 ), 0 );
-        break;
-    case Left:
-        headerPos = QPoint( 0, ( ( height - header.height() ) / 2 ) );
-        comicPos = QPoint( header.width(), ( ( height - comic.height() ) / 2 ) );
-        break;
-    case Right:
-        headerPos = QPoint( comic.width(), ( ( height - header.height() ) / 2 ) );
-        comicPos = QPoint( 0, ( ( height - comic.height() ) / 2 ) );
-        break;
+    switch ( position ) {
+        case Top:
+            headerPos = QPoint( ( ( width - header.width() ) / 2 ), 0 );
+            comicPos = QPoint( ( ( width - comic.width() ) / 2 ), header.height() );
+            break;
+        case Bottom:
+            headerPos = QPoint( ( ( width - header.width() ) / 2 ), comic.height() );
+            comicPos = QPoint( ( ( width - comic.width() ) / 2 ), 0 );
+            break;
+        case Left:
+            headerPos = QPoint( 0, ( ( height - header.height() ) / 2 ) );
+            comicPos = QPoint( header.width(), ( ( height - comic.height() ) / 2 ) );
+            break;
+        case Right:
+            headerPos = QPoint( comic.width(), ( ( height - header.height() ) / 2 ) );
+            comicPos = QPoint( 0, ( ( height - comic.height() ) / 2 ) );
+            break;
     }
     painter.drawImage( headerPos, header );
     painter.drawImage( comicPos, comic );

@@ -31,14 +31,15 @@
 #include <solid/networking.h>
 
 class ConfigWidget;
+class FadingItem;
 class FullViewWidget;
 class QTimer;
 class QAction;
-class FadingItem;
+
 namespace Plasma {
-    class Frame;
-    class PushButton;
-    class Svg;
+class Frame;
+class PushButton;
+class Svg;
 }
 
 class ComicApplet : public Plasma::Applet
@@ -123,6 +124,6 @@ class ComicApplet : public Plasma::Applet
         bool mArrowsOnHover;
 };
 
-K_EXPORT_PLASMA_APPLET(comic, ComicApplet)
+K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
 
 #endif

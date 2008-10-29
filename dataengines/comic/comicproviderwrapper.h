@@ -192,8 +192,8 @@ class ComicProviderWrapper : public QObject
         QVariant callFunction( const QString &name, const QVariantList &args = QVariantList() );
         const QStringList& extensions() const;
         bool functionCalled() const;
-        QVariant identifierToScript(const QVariant &identifier);
-        QVariant identifierFromScript(const QVariant &identifier) const;
+        QVariant identifierToScript( const QVariant &identifier );
+        QVariant identifierFromScript( const QVariant &identifier ) const;
         void setIdentifierToDefault();
         void checkIdentifier( QVariant *identifier );
 

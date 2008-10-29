@@ -23,18 +23,18 @@
 
 #include <QtCore/QTimer>
 #include <QtGui/QAction>
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QLabel>
 #include <QtGui/QPainter>
 #include <QtGui/QVBoxLayout>
-#include <QtGui/QGraphicsLinearLayout>
 
 #include <KConfigDialog>
-#include <KPushButton>
 #include <KDatePicker>
 #include <KFileDialog>
 #include <KIO/NetAccess>
 #include <knuminput.h>
+#include <KPushButton>
 #include <KRun>
 #include <KTemporaryFile>
 
@@ -55,7 +55,8 @@ static const int s_arrowWidth = 30;
 class ChooseStripNumDialog : public KDialog
 {
     public:
-        ChooseStripNumDialog( QWidget *parent, int current, int max ) : KDialog( parent )
+        ChooseStripNumDialog( QWidget *parent, int current, int max )
+            : KDialog( parent )
         {
             setCaption( i18n( "Go to Strip" ) );
             setButtons( Ok | Cancel );
@@ -121,9 +122,9 @@ void ComicApplet::init()
 
     loadConfig();
 
-    mSvg = new Plasma::Svg(this);
-    mSvg->setImagePath("widgets/arrows");
-    mSvg->setContainsMultipleImages(true);
+    mSvg = new Plasma::Svg( this );
+    mSvg->setImagePath( "widgets/arrows" );
+    mSvg->setContainsMultipleImages( true );
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -583,15 +584,15 @@ void ComicApplet::buttonBar()
             mFrame = new Plasma::Frame( this );
             QGraphicsLinearLayout *l = new QGraphicsLinearLayout();
             mPrevButton = new Plasma::PushButton( mFrame );
-            mPrevButton->nativeWidget()->setIcon( KIcon("arrow-left") );
+            mPrevButton->nativeWidget()->setIcon( KIcon( "arrow-left" ) );
             mPrevButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-            mPrevButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+            mPrevButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
             connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
             l->addItem( mPrevButton );
             mNextButton = new Plasma::PushButton( mFrame );
-            mNextButton->nativeWidget()->setIcon( KIcon("arrow-right") );
+            mNextButton->nativeWidget()->setIcon( KIcon( "arrow-right" ) );
             mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-            mNextButton->setMaximumSize( IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar) );
+            mNextButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
             connect( mNextButton, SIGNAL( clicked() ), this , SLOT( slotNextDay() ) );
             l->addItem( mNextButton );
             mFrame->setLayout( l );
