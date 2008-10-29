@@ -44,6 +44,6 @@ set(comicpackage_SRCS
 )
 
 kde4_add_plugin( plasma_packagestructure_comic ${comicpackage_SRCS} )
-target_link_libraries( plasma_packagestructure_comic plasma ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} )
+target_link_libraries( plasma_packagestructure_comic ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS} )
 install( TARGETS plasma_packagestructure_comic DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES plasma-packagestructure-comic.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
