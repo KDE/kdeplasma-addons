@@ -31,12 +31,7 @@ ComicEngine::ComicEngine( QObject* parent, const QVariantList& args )
     : Plasma::DataEngine( parent, args ), mEmptySuffix( false )
 {
     setPollingInterval( 0 );
-
-    KService::List services = KServiceTypeTrader::self()->query( "Plasma/Comic" );
-    Q_FOREACH ( const KService::Ptr &service, services ) {
-        mFactories.insert( service->property( "X-KDE-PluginInfo-Name", QVariant::String ).toString(),
-                           service );
-    }
+    updateFactories();
 }
 
 ComicEngine::~ComicEngine()
@@ -45,6 +40,16 @@ ComicEngine::~ComicEngine()
 
 void ComicEngine::init()
 {
+}
+
+void ComicEngine::updateFactories()
+{
+    mFactories.clear();
+    KService::List services = KServiceTypeTrader::self()->query( "Plasma/Comic" );
+    Q_FOREACH ( const KService::Ptr &service, services ) {
+        mFactories.insert( service->property( "X-KDE-PluginInfo-Name", QVariant::String ).toString(),
+                           service );
+    }
 }
 
 bool ComicEngine::updateSourceEvent( const QString &identifier )
@@ -79,12 +84,18 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
 
         //: are mandatory
-        if ( parts.count() < 2 )
+        if ( parts.count() < 2 ) {
+            setData( identifier, "Error", true );
             return false;
-
-        if ( !mFactories.contains( parts[ 0 ] ) )
-            return false;
-
+        }
+        if ( !mFactories.contains( parts[ 0 ] ) ) {
+            // User might have installed more from GHNS
+            updateFactories();
+            if ( !mFactories.contains( parts[ 0 ] ) ) {
+                setData( identifier, "Error", true );
+                return false;
+            }
+        }
         const KService::Ptr service = mFactories[ parts[ 0 ] ];
 
         bool isCurrentComic = parts[ 1 ].isEmpty();
@@ -107,9 +118,10 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         args << service->storageId();
 
         provider = service->createInstance<ComicProvider>( this, args );
-        if ( !provider )
+        if ( !provider ) {
+            setData( identifier, "Error", true );
             return false;
-
+        }
         provider->setIsCurrent( isCurrentComic );
 
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
