@@ -35,7 +35,7 @@ class FeedData;
 namespace Plasma
 {
   // namespace Plasma
-  class Icon;
+  class IconWidget;
   class Svg;
 }
 
@@ -112,8 +112,8 @@ private:
     QList<SingleFeedItem *> *m_activeitemlist;
     QMap<QString, KIcon *> m_feedIcons;
 
-    Plasma::Icon *m_left;
-    Plasma::Icon *m_right;
+    Plasma::IconWidget *m_left;
+    Plasma::IconWidget *m_right;
 
     bool m_hovered;
 };

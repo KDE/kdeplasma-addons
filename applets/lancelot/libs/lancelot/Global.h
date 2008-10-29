@@ -27,7 +27,7 @@
 #include <QVariant>
 #include <KConfig>
 #include <KConfigGroup>
-#include <plasma/panelsvg.h>
+#include <plasma/framesvg.h>
 
 #include <lancelot/lancelot_export.h>
 
@@ -92,9 +92,9 @@ public:
     /**
      * Background SVG image is one of the common properties, so
      * a direct function that accesses it is provided
-     * @returns the pointer to Plasma::PanelSvg object
+     * @returns the pointer to Plasma::FrameSvg object
      */
-    Plasma::PanelSvg * backgroundSvg() const;
+    Plasma::FrameSvg * backgroundSvg() const;
 
     /**
      * Background color is one of the common properties, so a direct

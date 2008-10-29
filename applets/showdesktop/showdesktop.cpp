@@ -16,7 +16,7 @@
  */
 
 #include "showdesktop.h"
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <plasma/containment.h>
 #include <plasma/tooltipmanager.h>
 #include <KIcon>
@@ -48,7 +48,7 @@ void ShowDesktop::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    Plasma::Icon *icon = new Plasma::Icon(KIcon("user-desktop"), QString(), this);
+    Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("user-desktop"), QString(), this);
     layout->addItem(icon);
     registerAsDragHandle(icon);
     connect(icon, SIGNAL(clicked()), this, SLOT(pressed()));

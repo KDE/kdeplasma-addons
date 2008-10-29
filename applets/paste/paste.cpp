@@ -30,7 +30,7 @@
 #include <KColorScheme>
 #include <KConfigDialog>
 
-#include <Plasma/Icon>
+#include <Plasma/IconWidget>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 

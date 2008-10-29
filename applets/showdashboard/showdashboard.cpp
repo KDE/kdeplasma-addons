@@ -27,7 +27,7 @@
 
 // KDE
 #include <KIcon>
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <plasma/tooltipmanager.h>
 #include <KIconLoader>
 
@@ -46,7 +46,7 @@ void ShowDashboard::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    Plasma::Icon *icon = new Plasma::Icon(KIcon("dashboard-show"), QString(), this);
+    Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("dashboard-show"), QString(), this);
     registerAsDragHandle(icon);
     layout->addItem(icon);
 

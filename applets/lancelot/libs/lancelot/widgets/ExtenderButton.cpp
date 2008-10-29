@@ -52,7 +52,7 @@ public:
         Q_UNUSED(option);
         Q_UNUSED(widget);
 
-        if (Plasma::PanelSvg * svg = group()->backgroundSvg()) {
+        if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
             svg->setEnabledBorders(borders);
         }
 
@@ -60,7 +60,7 @@ public:
     }
 
 public:
-    Plasma::PanelSvg::EnabledBorders borders;
+    Plasma::FrameSvg::EnabledBorders borders;
 
 };
 
@@ -111,33 +111,33 @@ public:
         if (!extender) return;
         QRectF geometry = QRectF(QPointF(0, 0), q->size());
 
-        extender->borders = Plasma::PanelSvg::AllBorders;
-        borders = Plasma::PanelSvg::AllBorders;
+        extender->borders = Plasma::FrameSvg::AllBorders;
+        borders = Plasma::FrameSvg::AllBorders;
 
         switch (extenderPosition) {
         case TopExtender:
             geometry.setHeight(EXTENDER_SIZE);
             geometry.moveTop(- EXTENDER_SIZE);
-            borders &= ~ Plasma::PanelSvg::TopBorder;
-            extender->borders &= ~ Plasma::PanelSvg::BottomBorder;
+            borders &= ~ Plasma::FrameSvg::TopBorder;
+            extender->borders &= ~ Plasma::FrameSvg::BottomBorder;
             break;
         case BottomExtender:
             geometry.moveTop(geometry.bottom());
             geometry.setHeight(EXTENDER_SIZE);
-            borders &= ~ Plasma::PanelSvg::BottomBorder;
-            extender->borders &= ~ Plasma::PanelSvg::TopBorder;
+            borders &= ~ Plasma::FrameSvg::BottomBorder;
+            extender->borders &= ~ Plasma::FrameSvg::TopBorder;
             break;
         case LeftExtender:
             geometry.setWidth(EXTENDER_SIZE);
             geometry.moveLeft(- EXTENDER_SIZE);
-            borders &= ~ Plasma::PanelSvg::LeftBorder;
-            extender->borders &= ~ Plasma::PanelSvg::RightBorder;
+            borders &= ~ Plasma::FrameSvg::LeftBorder;
+            extender->borders &= ~ Plasma::FrameSvg::RightBorder;
             break;
         case RightExtender:
             geometry.moveLeft(geometry.right());
             geometry.setWidth(EXTENDER_SIZE);
-            borders &= ~ Plasma::PanelSvg::RightBorder;
-            extender->borders &= ~ Plasma::PanelSvg::LeftBorder;
+            borders &= ~ Plasma::FrameSvg::RightBorder;
+            extender->borders &= ~ Plasma::FrameSvg::LeftBorder;
             break;
         case NoExtender:
             break;
@@ -155,7 +155,7 @@ public:
     ActivationMethod activationMethod;
 
     static Plasma::Svg extenderIconSvg;
-    Plasma::PanelSvg::EnabledBorders borders;
+    Plasma::FrameSvg::EnabledBorders borders;
 
     ExtenderObject * extender;
     QTimer timer;
@@ -303,11 +303,11 @@ void ExtenderButton::paint(QPainter * painter,
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (Plasma::PanelSvg * svg = group()->backgroundSvg()) {
+    if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
         if (isHovered() && (d->extenderPosition != NoExtender)) {
             svg->setEnabledBorders(d->borders);
         } else {
-            svg->setEnabledBorders(Plasma::PanelSvg::AllBorders);
+            svg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
         }
     }
 

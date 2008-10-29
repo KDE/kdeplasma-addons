@@ -24,7 +24,7 @@
 #include <KLineEdit>
 #include <KPushButton>
 #include <QGridLayout>
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include "charselect.h"
 
 CharSelectApplet::CharSelectApplet(QObject *parent, const QVariantList &args)

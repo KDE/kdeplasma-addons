@@ -49,8 +49,8 @@
 #include <Plasma/Theme>
 #include <Plasma/DataEngine>
 #include <Plasma/Service>
-#include <Plasma/Flash>
-#include <Plasma/Icon>
+#include <Plasma/FlashingLabel>
+#include <Plasma/IconWidget>
 #include <Plasma/TextEdit>
 #include <Plasma/Frame>
 #include <Plasma/ServiceJob>
@@ -96,7 +96,7 @@ void Twitter::init()
     m_layout->setSpacing( 3 );
 
     QGraphicsLinearLayout *flashLayout = new QGraphicsLinearLayout( Qt::Horizontal );
-    m_flash = new Plasma::Flash( this );
+    m_flash = new Plasma::FlashingLabel( this );
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
     m_flash->setColor( Qt::gray );
@@ -116,7 +116,7 @@ void Twitter::init()
     m_layout->addItem( headerFrame );
 
 
-    m_icon = new Plasma::Icon( this );
+    m_icon = new Plasma::IconWidget( this );
     m_icon->setIcon( KIcon( "user-identity" ) );
     m_icon->setText( m_username );
     QSizeF iconSize = m_icon->sizeFromIconSize(48);
@@ -334,12 +334,12 @@ void Twitter::showTweets()
         c->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
         c->setReadOnly(true);
 
-        Plasma::Icon *icon = new Plasma::Icon( this );
+        Plasma::IconWidget *icon = new Plasma::IconWidget( this );
         QSizeF iconSize = icon->sizeFromIconSize(30);
         icon->setMinimumSize( iconSize );
         icon->setMaximumSize( iconSize );
 
-        Plasma::Icon *favIcon = new Plasma::Icon( this );
+        Plasma::IconWidget *favIcon = new Plasma::IconWidget( this );
         QSizeF favIconSize = icon->sizeFromIconSize(16);
         favIcon->setMinimumSize( favIconSize );
         favIcon->setMaximumSize( favIconSize );

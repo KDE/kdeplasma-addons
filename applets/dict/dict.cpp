@@ -31,7 +31,7 @@
 #include <KStandardDirs>
 
 #include <Plasma/Animator>
-#include <Plasma/Icon>
+#include <Plasma/IconWidget>
 #include <Plasma/LineEdit>
 
 #define AUTO_DEFINE_TIMEOUT 500
@@ -62,7 +62,7 @@ void Dict::init()
     m_defBrowserProxy->hide();
 //  Icon in upper-left corner
 	QString iconpath = KStandardDirs::locate("icon", "oxygen/scalable/apps/accessories-dictionary.svgz");
-    m_icon = new Plasma::Icon(this);
+    m_icon = new Plasma::IconWidget(this);
     m_icon->setSvg(iconpath);
 
 //  Position lineedits

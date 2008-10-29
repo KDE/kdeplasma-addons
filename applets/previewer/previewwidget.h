@@ -26,7 +26,7 @@
 
 namespace Plasma{
 class ScrollBar;
-class PanelSvg;
+class FrameSvg;
 class Svg;
 }
 
@@ -108,7 +108,7 @@ class PreviewWidget : public QGraphicsWidget
        QStyleOptionViewItemV4 m_option;
        QRect m_previewRect;
        bool m_layoutIsValid;
-       Plasma::PanelSvg *m_panel;
+       Plasma::FrameSvg *m_panel;
        Plasma::Svg *m_logo;
        KUrl m_hoveredUrl;
        QList<QUrl> m_previewHistory;

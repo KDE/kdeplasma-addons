@@ -34,7 +34,7 @@
 #include <QList>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <plasma/animator.h>
 #define BTN_SIZE 20
 
@@ -53,8 +53,8 @@ Scroller::Scroller(QGraphicsItem *parent) :
         m_list(new QList<FeedData>()),
         m_itemlist(new QList<SingleFeedItem *>()),
         m_activeitemlist(new QList<SingleFeedItem *>()),
-        m_left(new Plasma::Icon(this)),
-        m_right(new Plasma::Icon(this))
+        m_left(new Plasma::IconWidget(this)),
+        m_right(new Plasma::IconWidget(this))
 {
 
     setAcceptedMouseButtons(Qt::LeftButton);

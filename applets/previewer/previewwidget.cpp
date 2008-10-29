@@ -36,7 +36,7 @@
 
 // Plasma
 #include <Plasma/Animator>
-#include <Plasma/PanelSvg>
+#include <Plasma/FrameSvg>
 #include <Plasma/ScrollBar>
 #include <Plasma/Svg>
 #include <Plasma/Theme>
@@ -62,7 +62,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
     setupOptionViewItem();
 
     // let's draw the top border of the applet
-    m_panel = new Plasma::PanelSvg(this);
+    m_panel = new Plasma::FrameSvg(this);
     m_panel->setImagePath("dialogs/background");
 
     m_logo = new Plasma::Svg(this);
@@ -480,10 +480,10 @@ void PreviewWidget::paint(QPainter *painter,
         painter->setClipRegion(clipRegion);
     }
 
-    m_panel->setEnabledBorders(Plasma::PanelSvg::AllBorders);
-    m_panel->resizePanel(QSize(contentsRect.width(), s_topBorder + m_itemsRect.height() + bottomBorderHeight()));
+    m_panel->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    m_panel->resizeFrame(QSize(contentsRect.width(), s_topBorder + m_itemsRect.height() + bottomBorderHeight()));
 
-    m_panel->paintPanel(painter);
+    m_panel->paintFrame(painter);
     painter->restore();
 
     m_logo->paint(painter, QRect(10, 5, s_logoSize, s_logoSize));

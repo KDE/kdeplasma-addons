@@ -21,7 +21,7 @@
 #define LANCELOT_PARTS_H
 
 #include <plasma/applet.h>
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <plasma/dialog.h>
 #include <KConfigDialog>
 #include <lancelot/Global.h>

@@ -45,8 +45,8 @@ namespace KWallet
 namespace Plasma
 {
     class Svg;
-    class Flash;
-    class Icon;
+    class FlashingLabel;
+    class IconWidget;
     class TextEdit;
     class WebContent;
     class Frame;
@@ -55,10 +55,10 @@ namespace Plasma
 
 struct Tweet {
     Plasma::Frame *frame;
-    Plasma::Icon *icon;
+    Plasma::IconWidget *icon;
     KTextBrowser *content;
     QGraphicsProxyWidget *contentProxy;
-    Plasma::Icon *favIcon;
+    Plasma::IconWidget *favIcon;
 };
 
 class Twitter : public Plasma::Applet
@@ -121,8 +121,8 @@ class Twitter : public Plasma::Applet
         Plasma::Svg *m_theme;
         Plasma::TextEdit *m_statusEdit;
         Plasma::WebContent *m_historyEdit;
-        Plasma::Flash *m_flash;
-        Plasma::Icon *m_icon;
+        Plasma::FlashingLabel *m_flash;
+        Plasma::IconWidget *m_icon;
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_headerLayout;
 

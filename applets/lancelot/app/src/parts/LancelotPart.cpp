@@ -25,7 +25,7 @@
 #include <QGraphicsLayoutItem>
 #include <QGraphicsLayout>
 #include <QDataStream>
-#include <plasma/panelsvg.h>
+#include <plasma/framesvg.h>
 
 #include "../models/BaseModel.h"
 #include "../models/Devices.h"
@@ -58,7 +58,7 @@ public:
         setCacheMode(QGraphicsView::CacheBackground);
 
         m_bg.setImagePath("dialogs/background");
-        m_bg.setEnabledBorders(Plasma::PanelSvg::NoBorder);
+        m_bg.setEnabledBorders(Plasma::FrameSvg::NoBorder);
     }
 
     void drawBackground(QPainter * painter, const QRectF & rect)
@@ -66,8 +66,8 @@ public:
         Q_UNUSED(rect);
         painter->setCompositionMode(QPainter::CompositionMode_Source);
         painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
-        m_bg.resizePanel(rect.size());
-        m_bg.paintPanel(painter);
+        m_bg.resizeFrame(rect.size());
+        m_bg.paintFrame(painter);
     }
 
     virtual void setVisible(bool visible)
@@ -85,7 +85,7 @@ public:
 
 private:
     Lancelot::ActionListView * m_list;
-    Plasma::PanelSvg m_bg;
+    Plasma::FrameSvg m_bg;
 
 };
 

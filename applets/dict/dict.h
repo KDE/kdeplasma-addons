@@ -35,7 +35,7 @@ class KLineEdit;
 
 namespace Plasma
 {
-    class Icon;
+    class IconWidget;
     class LineEdit;
 }
 
@@ -74,7 +74,7 @@ class Dict : public Plasma::Applet
         QStringList::iterator m_i;
         QWebView *m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
-        Plasma::Icon *m_icon;
+        Plasma::IconWidget *m_icon;
 };
 
 K_EXPORT_PLASMA_APPLET(dict, Dict)

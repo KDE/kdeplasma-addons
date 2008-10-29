@@ -59,21 +59,21 @@ QBasicTimer HoverIcon::Private::timer = QBasicTimer();
 // }
 
 HoverIcon::HoverIcon(QGraphicsItem * parent)
-  : Plasma::Icon(parent),
+  : Plasma::IconWidget(parent),
     d(new Private(this))
 {
 
 }
 
 HoverIcon::HoverIcon(const QString & text, QGraphicsItem * parent)
-  : Plasma::Icon(text, parent),
+  : Plasma::IconWidget(text, parent),
     d(new Private(this))
 {
 
 }
 
 HoverIcon::HoverIcon(const QIcon & icon, const QString & text, QGraphicsItem * parent)
-  : Plasma::Icon(icon, text, parent),
+  : Plasma::IconWidget(icon, text, parent),
     d(new Private(this))
 {
 
@@ -92,7 +92,7 @@ void HoverIcon::timerEvent(QTimerEvent * event)
             emit activated();
         }
     }
-    Plasma::Icon::timerEvent(event);
+    Plasma::IconWidget::timerEvent(event);
 }
 
 void HoverIcon::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
@@ -100,13 +100,13 @@ void HoverIcon::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     if (d->activationMethod == HoverActivate) {
         d->startTimer();
     }
-    Plasma::Icon::hoverEnterEvent(event);
+    Plasma::IconWidget::hoverEnterEvent(event);
 }
 
 void HoverIcon::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
     d->stopTimer();
-    Plasma::Icon::hoverLeaveEvent(event);
+    Plasma::IconWidget::hoverLeaveEvent(event);
 }
 
 void HoverIcon::setActivationMethod(ActivationMethod method)

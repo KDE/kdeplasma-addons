@@ -24,7 +24,7 @@
 #include "nowplaying.h"
 
 namespace Plasma {
-    class Icon;
+    class IconWidget;
 }
 class QGraphicsLayout;
 
@@ -51,10 +51,10 @@ private slots:
     void playPauseClicked();
 
 private:
-    Plasma::Icon* m_playpause;
-    Plasma::Icon* m_stop;
-    Plasma::Icon* m_prev;
-    Plasma::Icon* m_next;
+    Plasma::IconWidget* m_playpause;
+    Plasma::IconWidget* m_stop;
+    Plasma::IconWidget* m_prev;
+    Plasma::IconWidget* m_next;
 
     QGraphicsLinearLayout* m_layout;
 

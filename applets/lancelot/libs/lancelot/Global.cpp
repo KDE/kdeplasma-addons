@@ -60,7 +60,7 @@ public:
 
     ColorScheme foregroundColor;
     ColorScheme backgroundColor;
-    Plasma::PanelSvg * backgroundSvg;
+    Plasma::FrameSvg * backgroundSvg;
 
     bool hasBackgroundColor : 1;
     bool ownsBackgroundSvg : 1;
@@ -143,7 +143,7 @@ QString WidgetGroup::name() const
     return d->name;
 }
 
-Plasma::PanelSvg * WidgetGroup::backgroundSvg() const
+Plasma::FrameSvg * WidgetGroup::backgroundSvg() const
 {
     return d->backgroundSvg;
 }
@@ -204,7 +204,7 @@ void WidgetGroup::load(bool full)
             delete d->backgroundSvg;
         }
 
-        d->backgroundSvg = new Plasma::PanelSvg(NULL);
+        d->backgroundSvg = new Plasma::FrameSvg(NULL);
         d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
 
         d->ownsBackgroundSvg = true;

@@ -39,7 +39,7 @@
 #include <kio/global.h>
 #include <kio/job.h>
 
-#include <plasma/widgets/flash.h>
+#include <plasma/widgets/flashinglabel.h>
 #include <plasma/widgets/label.h>
 
 using namespace Plasma;

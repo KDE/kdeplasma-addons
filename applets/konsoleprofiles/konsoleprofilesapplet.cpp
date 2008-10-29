@@ -20,7 +20,7 @@
 #include "konsoleprofilesapplet.h"
 #include <QTreeView>
 #include <KStandardDirs>
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsGridLayout>
 #include <QStandardItemModel>

@@ -20,7 +20,7 @@
 #ifndef LANCELOT_HOVER_ICON_H_
 #define LANCELOT_HOVER_ICON_H_
 
-#include <plasma/widgets/icon.h>
+#include <plasma/widgets/iconwidget.h>
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/Widget.h>
@@ -35,7 +35,7 @@ namespace Lancelot
  *
  * @author Ivan Cukic
  */
-class LANCELOT_EXPORT HoverIcon: public Plasma::Icon {
+class LANCELOT_EXPORT HoverIcon: public Plasma::IconWidget {
     Q_OBJECT
 
     Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )

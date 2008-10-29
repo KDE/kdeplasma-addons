@@ -1,15 +1,15 @@
 #include "controls.h"
 
-#include <Plasma/Icon>
+#include <Plasma/IconWidget>
 #include <QGraphicsLinearLayout>
 #include <KDebug>
 
 Controls::Controls(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      m_playpause(new Plasma::Icon(this)),
-      m_stop(new Plasma::Icon(this)),
-      m_prev(new Plasma::Icon(this)),
-      m_next(new Plasma::Icon(this)),
+      m_playpause(new Plasma::IconWidget(this)),
+      m_stop(new Plasma::IconWidget(this)),
+      m_prev(new Plasma::IconWidget(this)),
+      m_next(new Plasma::IconWidget(this)),
       m_layout(0),
       m_state(NoPlayer)
 {

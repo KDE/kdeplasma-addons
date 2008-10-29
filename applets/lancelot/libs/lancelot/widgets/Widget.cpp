@@ -202,10 +202,10 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
     if (!d->group) return;
 
     // Background Painting
-    if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
+    if (Plasma::FrameSvg * svg = d->group->backgroundSvg()) {
         svg->setElementPrefix(element);
-        svg->resizePanel(size());
-        svg->paintPanel(painter);
+        svg->resizeFrame(size());
+        svg->paintFrame(painter);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;
@@ -244,7 +244,7 @@ QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
             result = MAX_WIDGET_SIZE;
             break;
         case Qt::PreferredSize:
-            if (Plasma::PanelSvg * svg = d->group->backgroundSvg()) {
+            if (Plasma::FrameSvg * svg = d->group->backgroundSvg()) {
                 result = QSizeF(
                     svg->marginSize(Plasma::LeftMargin) +
                     svg->marginSize(Plasma::RightMargin),
