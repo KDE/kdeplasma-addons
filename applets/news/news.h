@@ -23,7 +23,7 @@
 #include "ui_config.h"
 
 namespace Plasma {
-  class WebContent;
+  class WebView;
 }
 class QGraphicsLinearLayout;
 
@@ -62,7 +62,7 @@ class News : public Plasma::Applet
         bool m_showDescriptions;
         Ui::config ui;
         QMap<QString, QString> m_defaultFeeds;
-        Plasma::WebContent* m_news;
+        Plasma::WebView* m_news;
         QGraphicsLinearLayout* m_layout;
         QString m_cssDir;
         Plasma::DataEngine::Data m_dataCache;

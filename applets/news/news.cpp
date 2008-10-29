@@ -33,7 +33,7 @@
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
-#include <Plasma/WebContent>
+#include <Plasma/WebView>
 
 #define BEGIN "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" \
 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" \
@@ -100,7 +100,7 @@ void News::init()
     m_layout->setSpacing(0);
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
-    m_news = new Plasma::WebContent(this);
+    m_news = new Plasma::WebView(this);
     connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
             this, SLOT(linkActivated(const QUrl&)));
     m_news->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
