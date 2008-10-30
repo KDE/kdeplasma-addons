@@ -488,7 +488,7 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
         break;
     }
     mFirstIdentifier = identifierFromScript( firstIdentifier );
-    checkIdentifier( &mIdentifier );
+//     checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::lastIdentifier()
@@ -499,7 +499,7 @@ QVariant ComicProviderWrapper::lastIdentifier()
 void ComicProviderWrapper::setLastIdentifier( const QVariant &lastIdentifier )
 {
     mLastIdentifier = identifierFromScript( lastIdentifier );
-    checkIdentifier( &mIdentifier );
+//     checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::identifierVariant() const
