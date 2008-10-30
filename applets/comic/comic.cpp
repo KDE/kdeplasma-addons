@@ -156,8 +156,6 @@ void ComicApplet::init()
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
-
-    setAcceptsHoverEvents( mArrowsOnHover );
 }
 
 ComicApplet::~ComicApplet()
@@ -237,7 +235,6 @@ void ComicApplet::applyConfig()
         updateComic();
     }
     if ( checkButtonBar ) {
-        setAcceptsHoverEvents( mArrowsOnHover );
         buttonBar();
         update();
     }
@@ -557,11 +554,12 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
-    Q_UNUSED( event );
     buttonBar();
     if ( mFadingItem ) {
         mFadingItem->showItem();
     }
+
+    Applet::hoverEnterEvent( event );
 }
 
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
@@ -570,6 +568,8 @@ void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
     if ( mFadingItem ) {
         mFadingItem->hideItem();
     }
+
+    Applet::hoverLeaveEvent( event );
 }
 
 void ComicApplet::scaleToContent()
