@@ -25,10 +25,18 @@ ComicPackage::ComicPackage( QObject *parent, QVariantList args )
     : Plasma::PackageStructure( parent, "Comic" )
 {
     Q_UNUSED( args )
-    // copy the main applet structure
-    Plasma::PackageStructure::operator=( *Plasma::Applet::packageStructure() );
+    addDirectoryDefinition( "images", "images", i18n( "Images" ) );
+    QStringList mimetypes;
+    mimetypes << "image/svg+xml" << "image/png" << "image/jpeg";
+    setMimetypes( "images", mimetypes );
+
+    addDirectoryDefinition( "scripts", "code", i18n( "Executable Scripts" ) );
+    mimetypes.clear();
+    mimetypes << "text/*";
+    setMimetypes( "scripts", mimetypes );
+
+    addFileDefinition( "mainscript", "code/main", i18n( "Main Script File" ) );
 
     setDefaultPackageRoot( "plasma/comics/" );
     setServicePrefix( "plasma-comic-" );
-    setRequired( "mainscript", false ); // So we can test for .py, .rb etc.
 }
