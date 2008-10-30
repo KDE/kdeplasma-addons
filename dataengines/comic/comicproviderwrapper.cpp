@@ -368,8 +368,9 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
         }
         break;
     case NumberIdentifier:
+        //do not handle "0" as this could be a call for the most recent comic
         if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toInt() < mFirstIdentifier.toInt() ) {
+             identifier->toInt() < mFirstIdentifier.toInt() -1 ) {
             *identifier = mFirstIdentifier;
         }
         if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
@@ -488,7 +489,7 @@ void ComicProviderWrapper::setFirstIdentifier( const QVariant &firstIdentifier )
         break;
     }
     mFirstIdentifier = identifierFromScript( firstIdentifier );
-//     checkIdentifier( &mIdentifier );
+    checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::lastIdentifier()
@@ -499,7 +500,7 @@ QVariant ComicProviderWrapper::lastIdentifier()
 void ComicProviderWrapper::setLastIdentifier( const QVariant &lastIdentifier )
 {
     mLastIdentifier = identifierFromScript( lastIdentifier );
-//     checkIdentifier( &mIdentifier );
+    checkIdentifier( &mIdentifier );
 }
 
 QVariant ComicProviderWrapper::identifierVariant() const
