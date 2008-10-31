@@ -445,7 +445,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     int leftImageGap = 0;
     int buttonMiddle = ( contentRect.height() / 2 ) + contentRect.top();
     if ( mShowPreviousButton && !mArrowsOnHover ) {
-        mSvg->paint( p, contentRect.left() + 5, buttonMiddle - 15, s_arrowWidth, 30, "left-arrow");
+        mSvg->paint( p, contentRect.left() - 5, buttonMiddle - 15, s_arrowWidth, 30, "left-arrow");
 
         leftImageGap = s_arrowWidth;
     }
