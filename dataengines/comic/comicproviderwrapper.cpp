@@ -23,6 +23,7 @@
 #include <QTimer>
 #include <QBuffer>
 #include <QPainter>
+#include <QTextCodec>
 #include <KUrl>
 #include <KDebug>
 #include <KStandardDirs>
@@ -256,15 +257,13 @@ void ComicProviderWrapper::init()
 {
     const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + "/" );
     if ( !path.isEmpty() ) {
-        Plasma::PackageStructure::Ptr structure = ComicProviderKross::packageStructure();
-        structure->setPath( path );
-        mPackage = new Plasma::Package( path, structure );
+        mPackage = new Plasma::Package( path, ComicProviderKross::packageStructure() );
 
         if ( mPackage->isValid() ) {
             // package->filePath( "mainscript" ) returns empty if it does not exist
             // We want to test extensions supported by kross with mainscript
-            const QString mainscript = mPackage->path() + structure->contentsPrefix() +
-                                       structure->path( "mainscript" );
+            const QString mainscript = mPackage->path() + mPackage->structure()->contentsPrefix() +
+                                       mPackage->structure()->path( "mainscript" );
 
             QFileInfo info( mainscript );
             for ( int i = 0; i < extensions().count() && !info.exists(); ++i ) {
@@ -576,7 +575,11 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
                       qVariantFromValue( qobject_cast<QObject*>( &mKrossImage ) ) );
         finished();
     } else {
-        callFunction( "pageRetrieved", QVariantList() << id << data );
+        QTextCodec *codec = QTextCodec::codecForHtml( data );
+        kDebug() << codec->name();
+        QString html = codec->toUnicode( data );
+
+        callFunction( "pageRetrieved", QVariantList() << id << html );
     }
 }
 
