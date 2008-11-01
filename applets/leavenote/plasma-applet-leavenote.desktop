@@ -2,6 +2,7 @@
 Name=Leave A Note
 Name[el]=Γράψτε μια σημείωση
 Name[gl]=Deixa unha nota
+Name[nl]=Notitie achterlaten
 Name[pt]=Deixar uma Nota
 Name[pt_BR]=Deixar uma nota
 Name[sv]=Lämna ett meddelande
@@ -12,6 +13,7 @@ Icon=knotes
 Comment=Leave notes for the user while they are away
 Comment[el]=Γράψτε σημειώσεις σε χρήστες όταν αυτοί βρίσκονται εκτός
 Comment[gl]=Deixa notas para o usuario mentras está ausente
+Comment[nl]=Notities achterlaten voor de gebruiker wanneer hij weg is
 Comment[pt]=Deixar notas para o utilizador na sua ausência
 Comment[pt_BR]=Deixar notas para o usuário na sua ausência
 Comment[sv]=Lämna ett meddelande till användaren vid frånvaro

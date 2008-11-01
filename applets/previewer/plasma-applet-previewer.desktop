@@ -2,6 +2,7 @@
 Name=Previewer
 Name[el]=Προβολέας προεπισκόπησης
 Name[gl]=Antevisor
+Name[nl]=Voorvertoning
 Name[pt]=Antevisão
 Name[pt_BR]=Visualizador
 Name[sv]=Förhandsgranskning
@@ -11,6 +12,7 @@ Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
 Comment[el]=Γρήγορη προεπισκόπηση διαφόρων αρχείων
 Comment[gl]=Antevé rapidamente diversos ficheiros
+Comment[nl]=Snel verschillende bestanden voorvertonen
 Comment[pt]=Antevê rapidamente uma variedade de ficheiros
 Comment[pt_BR]=Visualização rápida de uma variedade de arquivos
 Comment[sv]=Snabb förhandsgranskning av en mängd olika filer

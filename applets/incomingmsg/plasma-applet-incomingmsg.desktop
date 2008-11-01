@@ -2,6 +2,7 @@
 Name=Incoming Message
 Name[el]=Εισερχόμενο μήνυμα
 Name[gl]=Mensaxe entrante
+Name[nl]=Inkomend bericht
 Name[pt]=Mensagem Recebida
 Name[pt_BR]=Mensagem recebida
 Name[sv]=Inkommande meddelande
@@ -12,6 +13,7 @@ Icon=mail-message-new
 Comment=Notification of new messages
 Comment[el]=Ειδοποίηση νέων μηνυμάτων
 Comment[gl]=Notificación de novas mensaxes
+Comment[nl]=Notificatie van nieuwe berichten
 Comment[pt]=Notificação de mensagens novas
 Comment[pt_BR]=Notificação de novas mensagens
 Comment[sv]=Underrättele om nytt meddelande
