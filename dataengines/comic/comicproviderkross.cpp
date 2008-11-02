@@ -44,7 +44,7 @@ KUrl ComicProviderKross::websiteUrl() const
 
 QImage ComicProviderKross::image() const
 {
-    return m_wrapper.image();
+    return m_wrapper.comicImage();
 }
 
 QString ComicProviderKross::identifierToString( const QVariant &identifier ) const

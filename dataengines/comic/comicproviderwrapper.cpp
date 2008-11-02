@@ -319,7 +319,7 @@ ComicProvider::IdentifierType ComicProviderWrapper::identifierType() const
     return result;
 }
 
-QImage ComicProviderWrapper::image()
+QImage ComicProviderWrapper::comicImage()
 {
     ImageWrapper* img = qobject_cast<ImageWrapper*>( callFunction( "image" ).value<QObject*>() );
     if ( functionCalled() && img ) {
@@ -715,6 +715,11 @@ void ComicProviderWrapper::combine( const QVariant &image, PositionType position
     painter.drawImage( headerPos, header );
     painter.drawImage( comicPos, comic );
     mKrossImage->setImage( img );
+}
+
+QObject* ComicProviderWrapper::image()
+{
+    return qobject_cast<QObject*>( mKrossImage );
 }
 
 #include "comicproviderwrapper.moc"

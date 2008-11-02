@@ -150,7 +150,7 @@ class ComicProviderWrapper : public QObject
         ~ComicProviderWrapper();
 
         ComicProvider::IdentifierType identifierType() const;
-        QImage image();
+        QImage comicImage();
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
 
@@ -185,6 +185,7 @@ class ComicProviderWrapper : public QObject
 
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
         void combine( const QVariant &image, PositionType position = Top );
+        QObject* image();
 
         void init();
 
