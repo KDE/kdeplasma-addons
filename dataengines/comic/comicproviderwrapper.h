@@ -184,7 +184,7 @@ class ComicProviderWrapper : public QObject
         void error() const;
 
         void requestPage( const QString &url, int id, const QVariantMap &infos = QVariantMap() );
-        void addHeader( const QString &name, PositionType position = Top );
+        void combine( const QVariant &image, PositionType position = Top );
 
         void init();
 
@@ -202,7 +202,7 @@ class ComicProviderWrapper : public QObject
         ComicProviderKross *mProvider;
         QStringList mFunctions;
         bool mFuncFound;
-        ImageWrapper mKrossImage;
+        ImageWrapper *mKrossImage;
         static QStringList mExtensions;
         Plasma::Package *mPackage;
 
@@ -214,6 +214,7 @@ class ComicProviderWrapper : public QObject
         QVariant mPreviousIdentifier;
         QVariant mFirstIdentifier;
         QVariant mLastIdentifier;
+        int mRequests;
 };
 
 #endif

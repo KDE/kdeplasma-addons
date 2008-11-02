@@ -243,7 +243,9 @@ ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
     : QObject( parent ),
       mAction( 0 ),
       mProvider( parent ),
-      mPackage( 0 )
+      mKrossImage( 0 ),
+      mPackage( 0 ),
+      mRequests( 0 )
 {
     QTimer::singleShot( 0, this, SLOT( init() ) );
 }
@@ -323,7 +325,10 @@ QImage ComicProviderWrapper::image()
     if ( functionCalled() && img ) {
         return img->image();
     }
-    return mKrossImage.image();
+    if ( mKrossImage ) {
+        return mKrossImage->image();
+    }
+    return QImage();
 }
 
 QVariant ComicProviderWrapper::identifierToScript( const QVariant &identifier )
@@ -569,14 +574,17 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
 
 void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
 {
+    --mRequests;
     if ( id == Image ) {
-        mKrossImage.setRawData( data );
+        ImageWrapper *img = new ImageWrapper( this, QImage::fromData( data ) );
+        mKrossImage = img;
         callFunction( "pageRetrieved", QVariantList() << id <<
-                      qVariantFromValue( qobject_cast<QObject*>( &mKrossImage ) ) );
-        finished();
+                      qVariantFromValue( qobject_cast<QObject*>( mKrossImage ) ) );
+        if ( mRequests < 1 ) { // Don't finish if we still have pageRequests
+            finished();
+        }
     } else {
         QTextCodec *codec = QTextCodec::codecForHtml( data );
-        kDebug() << codec->name();
         QString html = codec->toUnicode( data );
 
         callFunction( "pageRetrieved", QVariantList() << id << html );
@@ -585,6 +593,7 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
 
 void ComicProviderWrapper::pageError( int id, const QString &message )
 {
+    --mRequests;
     callFunction( "pageError", QVariantList() << id << message );
     if ( !functionCalled() ) {
         emit mProvider->error( mProvider );
@@ -618,6 +627,7 @@ void ComicProviderWrapper::requestPage( const QString &url, int id, const QVaria
         map[key] = infos[key].toString();
     }
     mProvider->requestPage( KUrl( url ), id, map );
+    ++mRequests;
 }
 
 bool ComicProviderWrapper::functionCalled() const
@@ -636,11 +646,29 @@ QVariant ComicProviderWrapper::callFunction( const QString &name, const QVariant
     return QVariant();
 }
 
-void ComicProviderWrapper::addHeader( const QString &name, PositionType position )
+void ComicProviderWrapper::combine( const QVariant &image, PositionType position )
 {
-    const QString headerRelLoc( mPackage->filePath( "images", name ) );
-    const QImage header( headerRelLoc );
-    const QImage comic = mKrossImage.image();
+    if (!mKrossImage) {
+        return;
+    }
+
+    QImage header;
+    if ( image.type() == QVariant::String ) {
+        const QString path( mPackage->filePath( "images", image.toString() ) );
+        if ( QFile::exists( path ) ) {
+            header = QImage( path );
+        } else {
+            return;
+        }
+    } else {
+        ImageWrapper* img = qobject_cast<ImageWrapper*>( image.value<QObject*>() );
+        if ( img ) {
+            header = img->image();
+        } else {
+            return;
+        }
+    }
+    const QImage comic = mKrossImage->image();
     int height = 0;
     int width = 0;
 
@@ -657,10 +685,10 @@ void ComicProviderWrapper::addHeader( const QString &name, PositionType position
             break;
     }
 
-    QImage image = QImage( QSize( width, height ), QImage::Format_RGB32 );
-    image.fill( header.pixel( QPoint( 0, 0 ) ) );
+    QImage img = QImage( QSize( width, height ), QImage::Format_RGB32 );
+    img.fill( header.pixel( QPoint( 0, 0 ) ) );
 
-    QPainter painter( &image );
+    QPainter painter( &img );
 
     // center and draw the Images
     QPoint headerPos;
@@ -686,7 +714,7 @@ void ComicProviderWrapper::addHeader( const QString &name, PositionType position
     }
     painter.drawImage( headerPos, header );
     painter.drawImage( comicPos, comic );
-    mKrossImage.setImage( image );
+    mKrossImage->setImage( img );
 }
 
 #include "comicproviderwrapper.moc"
