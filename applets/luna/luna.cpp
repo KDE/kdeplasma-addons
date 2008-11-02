@@ -140,7 +140,7 @@ const QRect &contentsRect)
 
 void Luna::calcStatus(time_t time)
 {
-    Plasma::ToolTipManager::Content toolTipData;
+    Plasma::ToolTipContent toolTipData;
 
     uint lun = 0;
     time_t last_new = 0;
@@ -187,7 +187,7 @@ void Luna::calcStatus(time_t time)
 
     if ( fm.daysTo( now ) == 0 ) {
         counter = 14;
-        toolTipData.mainText = i18n( "Full Moon" );
+        toolTipData.setMainText( i18n( "Full Moon" ) );
         return;
     } else if ( counter <= 15 && counter >= 13 ) {
         counter = 14 + fm.daysTo( now );
@@ -230,7 +230,7 @@ void Luna::calcStatus(time_t time)
 
     switch (counter) {
     case 0:
-        toolTipData.mainText = i18n("New Moon");
+        toolTipData.setMainText( i18n("New Moon") );
         return;
     case 1:
     case 2:
@@ -238,10 +238,10 @@ void Luna::calcStatus(time_t time)
     case 4:
     case 5:
     case 6:
-        toolTipData.mainText = i18np("Waxing Crescent (New Moon was yesterday)", "Waxing Crescent (%1 days since New Moon)", counter );
+        toolTipData.setMainText( i18np("Waxing Crescent (New Moon was yesterday)", "Waxing Crescent (%1 days since New Moon)", counter ) );
         break;
     case 7:
-        toolTipData.mainText = i18n("First Quarter");
+        toolTipData.setMainText( i18n("First Quarter") );
         break;
     case 8:
     case 9:
@@ -249,7 +249,7 @@ void Luna::calcStatus(time_t time)
     case 11:
     case 12:
     case 13:
-        toolTipData.mainText = i18np( "Waxing Gibbous (Tomorrow is Full Moon)", "Waxing Gibbous (%1 days to Full Moon)", -fm.daysTo( now ) );
+        toolTipData.setMainText( i18np( "Waxing Gibbous (Tomorrow is Full Moon)", "Waxing Gibbous (%1 days to Full Moon)", -fm.daysTo( now ) ) );
         break;
     case 14:
         assert( false );
@@ -260,10 +260,10 @@ void Luna::calcStatus(time_t time)
     case 18:
     case 19:
     case 20:
-        toolTipData.mainText = i18np("Waning Gibbous (Yesterday was Full Moon)", "Waning Gibbous (%1 days since Full Moon)", fm.daysTo( now ) );
+        toolTipData.setMainText( i18np("Waning Gibbous (Yesterday was Full Moon)", "Waning Gibbous (%1 days since Full Moon)", fm.daysTo( now ) ) );
         break;
     case 21:
-        toolTipData.mainText = i18n("Last Quarter");
+        toolTipData.setMainText( i18n("Last Quarter") );
         break;
     case 22:
     case 23:
@@ -273,12 +273,12 @@ void Luna::calcStatus(time_t time)
     case 27:
     case 28:
         kDebug() << "nn.days " << ln.daysTo( now ) << " " << nn.daysTo( now );
-        toolTipData.mainText = i18np("Waning Crescent (Tomorrow is New Moon)", "Waning Crescent (%1 days to New Moon)", -nn.daysTo( now ) );
+        toolTipData.setMainText( i18np("Waning Crescent (Tomorrow is New Moon)", "Waning Crescent (%1 days to New Moon)", -nn.daysTo( now ) ) );
         break;
     default:
         kFatal() << "coolo can't count\n";
     }
-    Plasma::ToolTipManager::self()->setContent(this,toolTipData);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 }
 
 #include "luna.moc"
