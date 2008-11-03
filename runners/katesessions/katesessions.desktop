@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Kate Sessions
 Name[el]=Συνεδρίες Kate
+Name[fr]=Sessions Kate
 Name[gl]=Sesións de Konsole
 Name[ja]=Kate セッション
 Name[nl]=Katesessies
@@ -12,6 +13,7 @@ Name[zh_CN]=Kate 会话
 Name[zh_TW]=Kate 工作階段
 Comment=Matches Kate Sessions
 Comment[el]=Αντιστοίχιση συνεδριών Kate
+Comment[fr]=Retrouve des sessions Kate
 Comment[gl]=Fai parella coas sesión de Konsole
 Comment[ja]=Kate のセッションを探します
 Comment[nl]=Zoekt Katesessies

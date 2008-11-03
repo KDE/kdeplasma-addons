@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Paste
 Name[el]=Επικόλληση
+Name[fr]=Colleur
 Name[gl]=Apegar
 Name[km]=បិទភ្ជាប់
 Name[nds]=Infögen
@@ -16,6 +17,7 @@ Name[zh_CN]=粘贴
 Name[zh_TW]=貼上
 Comment=Paste text snippets
 Comment[el]=Επικόλληση δειγμάτων κειμένου
+Comment[fr]=Colle des bouts de texte
 Comment[gl]=Apega retallos de texto
 Comment[km]=បិទភ្ជាប់​ snippets អត្ថបទ
 Comment[nds]=Textsnippels infögen

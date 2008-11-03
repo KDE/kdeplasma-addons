@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Incoming Message
 Name[el]=Εισερχόμενο μήνυμα
+Name[fr]=Message entrant
 Name[gl]=Mensaxe entrante
 Name[nl]=Inkomend bericht
 Name[pt]=Mensagem Recebida
@@ -12,6 +13,7 @@ Name[zh_TW]=進來的訊息
 Icon=mail-message-new
 Comment=Notification of new messages
 Comment[el]=Ειδοποίηση νέων μηνυμάτων
+Comment[fr]=Notification de nouveaux messages
 Comment[gl]=Notificación de novas mensaxes
 Comment[nl]=Notificatie van nieuwe berichten
 Comment[pt]=Notificação de mensagens novas
