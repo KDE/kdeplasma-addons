@@ -2,5 +2,7 @@
 ProvidersUrl=http://download.kde.org/khotnewstuff/plasmacomics-providers.xml
 ChecksumPolicy=ifpossible
 SignaturePolicy=ifpossible
-StandardResource=tmp
-InstallationCommand=plasmapkg -t comic -i %f
+TargetDir=plasma/comics
+Uncompress=never
+InstallationCommand=plasmapkg -t comic -u %f
+UninstallCommand=plasmapkg -t comic -r %f
