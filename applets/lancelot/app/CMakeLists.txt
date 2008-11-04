@@ -5,7 +5,7 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
-find_package(Plasma REQUIRED)
+
 
 # Finding Lancelot package needed for future - when the libLancelot
 # becomes a separate project. It is only temporarily here

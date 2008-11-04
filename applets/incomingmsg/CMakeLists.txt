@@ -4,7 +4,7 @@ project(plasma-incomingmsg)
 # Find the required Libaries
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
-find_package(Plasma REQUIRED)
+
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(
@@ -21,7 +21,7 @@ kde4_add_ui_files(incomingmsg_SRCS widget.ui)
 kde4_add_plugin(plasma_applet_incomingmsg ${incomingmsg_SRCS})
 
 target_link_libraries(plasma_applet_incomingmsg
-                      ${QT_QTNETWORK_LIBRARY} ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
+                      ${QT_QTNETWORK_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
 
 install(TARGETS plasma_applet_incomingmsg
         DESTINATION ${PLUGIN_INSTALL_DIR})

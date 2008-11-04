@@ -4,7 +4,7 @@ project(previewer)
 # Find the required Libaries
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
-find_package(Plasma REQUIRED)
+
  
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(
@@ -28,7 +28,7 @@ kde4_add_plugin(plasma_applet_previewer ${previewer_SRCS} ${Previewer_SRCS})
 
 
 target_link_libraries(plasma_applet_previewer
-                      ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBS} ${QT_QTDBUS_LIBRARY})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBS} ${QT_QTDBUS_LIBRARY})
  
 
 install(TARGETS plasma_applet_previewer

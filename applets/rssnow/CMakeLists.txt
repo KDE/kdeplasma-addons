@@ -1,6 +1,6 @@
 project(plasma-rssnow)
 find_package(KDE4 REQUIRED)
-find_package(Plasma REQUIRED)
+
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
@@ -16,7 +16,7 @@ set(news_SRCS
 kde4_add_ui_files(news_SRCS config.ui)
 
 kde4_add_plugin(plasma_applet_rssnow ${news_SRCS})
-target_link_libraries(plasma_applet_rssnow ${PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS})
+target_link_libraries(plasma_applet_rssnow ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS})
 
 install(TARGETS plasma_applet_rssnow DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-rssnow.desktop DESTINATION ${SERVICES_INSTALL_DIR})

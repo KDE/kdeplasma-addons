@@ -4,7 +4,6 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include(MacroOptionalAddSubdirectory)
 
-find_package(Plasma REQUIRED)
 find_package(KdepimLibs REQUIRED)
 find_package(Boost)
 

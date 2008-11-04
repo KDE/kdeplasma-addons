@@ -16,7 +16,7 @@ set(kolourpicker_SRCS
 )
 
 kde4_add_plugin(plasma_applet_kolourpicker ${kolourpicker_SRCS})
-target_link_libraries(plasma_applet_kolourpicker ${PLASMA_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(plasma_applet_kolourpicker ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})
 if(KOLOURPICKER_X11_LIB)
    target_link_libraries(plasma_applet_kolourpicker ${X11_X11_LIB})
 endif(KOLOURPICKER_X11_LIB)

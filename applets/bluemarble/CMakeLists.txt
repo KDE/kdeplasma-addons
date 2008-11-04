@@ -7,7 +7,7 @@ set(bluemarble_SRCS
     kwinglutils_funcs.cpp)
 
 kde4_add_plugin(plasma_applet_bluemarble ${bluemarble_SRCS})
-target_link_libraries(plasma_applet_bluemarble ${PLASMA_LIBS} GLU ${KDE4_KDEUI_LIBS} ${QT_QTOPENGL_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY})
+target_link_libraries(plasma_applet_bluemarble ${KDE4_PLASMA_LIBS} GLU ${KDE4_KDEUI_LIBS} ${QT_QTOPENGL_LIBRARY} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY})
 
 
 install(TARGETS plasma_applet_bluemarble DESTINATION ${PLUGIN_INSTALL_DIR})

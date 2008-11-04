@@ -15,7 +15,7 @@ kde4_add_ui_files(weatherstation_SRCS
 
 kde4_add_plugin(plasma_applet_weatherstation ${weatherstation_SRCS})
 target_link_libraries(plasma_applet_weatherstation
-    ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${PLASMA_LIBS} weather_ion )
+    ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_PLASMA_LIBS} weather_ion )
 
 install(TARGETS plasma_applet_weatherstation DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-weatherstation.desktop

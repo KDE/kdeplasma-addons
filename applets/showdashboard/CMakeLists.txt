@@ -11,7 +11,7 @@ set(showdashboard_SRCS showdashboard.cpp)
 
 kde4_add_plugin(plasma_applet_showdashboard ${showdashboard_SRCS})
 target_link_libraries(plasma_applet_showdashboard
-                       ${PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
+                       ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
  
 install(TARGETS plasma_applet_showdashboard
          DESTINATION ${PLUGIN_INSTALL_DIR})

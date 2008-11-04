@@ -4,7 +4,7 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
-find_package(Plasma REQUIRED)
+
 
 ########### define variables ##########
 
@@ -72,7 +72,7 @@ target_link_libraries(
    lancelot
    ${KDE4_KIO_LIBS}
    ${KDE4_KFILE_LIBS}
-   ${PLASMA_LIBS}
+   ${KDE4_PLASMA_LIBS}
 )
 
 set_target_properties(lancelot PROPERTIES VERSION 0.5.0 SOVERSION 0)

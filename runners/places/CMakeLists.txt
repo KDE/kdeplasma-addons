@@ -9,7 +9,7 @@ target_link_libraries(
     ${KDE4_KFILE_LIBS}
     ${KDE4_SOLID_LIBS}
     ${KDE4_KIO_LIBS}
-    ${PLASMA_LIBS}
+    ${KDE4_PLASMA_LIBS}
     )
 
 install(TARGETS krunner_placesrunner DESTINATION ${PLUGIN_INSTALL_DIR} )
