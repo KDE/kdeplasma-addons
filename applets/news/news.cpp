@@ -76,6 +76,7 @@ News::News(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
     setHasConfigurationInterface(true);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(QSize(370, 440));
     // The default width is OK, we can benefit from more vertical space
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
