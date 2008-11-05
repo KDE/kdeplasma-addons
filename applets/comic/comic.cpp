@@ -165,7 +165,7 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
-    setCursor( Qt::ArrowCursor );
+    setBusy( false );
 
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
@@ -483,7 +483,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
     setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() ) {
-        setCursor( Qt::WaitCursor );
+        setBusy( true );
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
 
         engine->disconnectSource( identifier, this );
@@ -491,7 +491,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         const Plasma::DataEngine::Data data = engine->query( identifier );
         if ( data[ "Error" ].toBool() ) {
             setConfigurationRequired( true );
-            setCursor( Qt::ArrowCursor );
+            setBusy( false );
         }
     }
 }
