@@ -1,5 +1,5 @@
 project(plasma-twitter)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PLASMA_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} )
 
 set(twitter_SRCS
     twitter.cpp)

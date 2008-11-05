@@ -1,5 +1,5 @@
 project(plasma-showdesktop)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PLASMA_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} )
 
 set(showdesktop_SRCS
     showdesktop.cpp

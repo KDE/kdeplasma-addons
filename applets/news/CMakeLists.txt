@@ -1,6 +1,6 @@
 project(plasma-news)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PLASMA_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} )
 
 set(news_SRCS
     news.cpp

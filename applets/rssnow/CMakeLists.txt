@@ -4,7 +4,7 @@ find_package(KDE4 REQUIRED)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${PLASMA_INCLUDE_DIR} ${KDE4_INCLUDES})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}  ${KDE4_INCLUDES})
 
 set(news_SRCS
     news.cpp
