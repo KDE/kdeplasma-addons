@@ -174,6 +174,8 @@ public:
             return;
         }
 
+        kDebug() << viewport;
+
         QTransform transform;
         for (int i = 0; i < factory->itemCount(); i++) {
             QGraphicsWidget * item = itemForIndex(i);
@@ -286,14 +288,15 @@ QSizeF CustomList::fullSize() const //>
 void CustomList::viewportChanged(QRectF viewport) //>
 {
     if (d->viewport.size() != viewport.size()) {
-        d->viewport = viewport;
+        d->viewport.setSize(viewport.size());
         resize(d->viewport.width(), fullSize().height());
         d->viewportSizeUpdated();
     }
     if (d->viewport.topLeft() != viewport.topLeft()) {
         d->viewport = viewport;
-        setPos(- d->viewport.topLeft());
         d->viewportOriginUpdated();
+        kDebug() << viewport.topLeft();
+        setPos(- d->viewport.topLeft());
     }
 } //<
 

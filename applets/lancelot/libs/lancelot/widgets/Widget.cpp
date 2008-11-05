@@ -52,6 +52,7 @@ Widget::Widget(QGraphicsItem * parent)
 
 Widget::~Widget()
 {
+    kDebug() << (void *)this << " is being deleted!";
     L_WIDGET_UNSET_INITIALIZED;
     if (d->group != NULL) {
         d->group->instance()->removeWidget(this);
@@ -62,6 +63,9 @@ Widget::~Widget()
 
 void Widget::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 {
+    if (!L_WIDGET_IS_INITIALIZED || d->hover) {
+        return ;
+    }
     if (!isEnabled()) return;
     d->hover = true;
     QGraphicsWidget::hoverEnterEvent(event);
@@ -71,19 +75,23 @@ void Widget::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 
 void Widget::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
+    if (!L_WIDGET_IS_INITIALIZED || !(d->hover)) {
+        return ;
+    }
     if (!isEnabled()) return;
     d->hover = false;
-    QGraphicsWidget::hoverEnterEvent(event);
+    QGraphicsWidget::hoverLeaveEvent(event);
     emit mouseHoverLeave();
     update();
 }
 
 void Widget::setHovered(bool value)
 {
-    if (!L_WIDGET_IS_INITIALIZED) {
+    if (!L_WIDGET_IS_INITIALIZED || d->hover == value) {
         return ;
     }
     d->hover = value;
+    kDebug() << (void *)this << " is being hovered!";
     update();
 }
 

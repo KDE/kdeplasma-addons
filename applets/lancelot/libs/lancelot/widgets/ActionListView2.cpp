@@ -115,7 +115,9 @@ void ActionListView2ItemFactory::reload() //>
 {
     while (m_items.size() > m_model->size()) {
         kDebug() << "deleting one";
-        delete m_items.takeLast();
+        ActionListView2Item * item = m_items.takeLast();
+        item->hide();
+        item->deleteLater();
     }
 
     kDebug() << "reloading the items";
