@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Comic Strips
+Name[de]=Comics
 Name[es]=Tira cómica
 Name[fr]=Bandes dessinées
 Name[gl]=Banda deseñada
@@ -20,7 +21,7 @@ Comment[ca]=Motor de dades per a tires còmiques
 Comment[cs]=Datová část pro komiksové proužky
 Comment[csb]=Mòtór pòdôwków dlô kòmiksowëch sztripków
 Comment[da]=Datamotor til tegneseriestriber
-Comment[de]=Datentreiber für Comic-Strips
+Comment[de]=Datentreiber für Comics
 Comment[el]=Μηχανή δεδομένων για κόμικς
 Comment[es]=Motor de datos para tiras cómicas
 Comment[et]=Koomiksi andmete mootor

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Previewer
+Name[de]=Vorschau
 Name[el]=Προβολέας προεπισκόπησης
 Name[fr]=Prévisualiseur
 Name[gl]=Antevisor
@@ -12,6 +13,7 @@ Name[uk]=Переглядач
 Name[zh_CN]=预览器
 Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
+Comment[de]=Vorschau für eine Vielzahl Dateien anzeigen
 Comment[el]=Γρήγορη προεπισκόπηση διαφόρων αρχείων
 Comment[fr]=Aperçu rapide de divers fichiers
 Comment[gl]=Antevé rapidamente diversos ficheiros

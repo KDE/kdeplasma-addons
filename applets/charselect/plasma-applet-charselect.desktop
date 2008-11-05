@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Character Selector
 Name[cs]=Výběr znaků
+Name[de]=Tabelle zur Zeichenauswahl
 Name[el]=Επιλογέας χαρακτήρων
 Name[es]=Selector de caracteres
 Name[et]=Sümbolivalija
@@ -24,6 +25,7 @@ Name[zh_CN]=字符选择器
 Name[zh_TW]=字元選擇器
 Comment=View, select, and copy characters from a font collection
 Comment[cs]=Zobrazení, výběr a kopírování znaků z kolekce písem
+Comment[de]=Zeichen aus einer Sammlung ansehen, auswählen oder kopieren
 Comment[el]=Προβολή, επιλογή και αντιγραφή χαρακτήρων από μια συλλογή γραμματοσειράς
 Comment[es]=Ver, seleccionar y copiar caracteres de una colección de tipos de letra
 Comment[et]=Fondikogude märkide näitamine, valimine ja kopeerimine

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Konqueror Sessions
+Name[de]=Konqueror-Sitzungen
 Name[el]=Συνεδρίες Konqueror
 Name[es]=Sesiones de Konqueror
 Name[fr]=Sessions Konqueror
@@ -17,6 +18,7 @@ Name[x-test]=xxKonqueror Sessionsxx
 Name[zh_CN]=Konqueror 会话
 Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
+Comment[de]=Findet Konqueror-Sitzungen
 Comment[el]=Αντιστοίχιση συνεδριών Konqueror
 Comment[es]=Sesiones de Konqueror coincidentes
 Comment[fr]=Retrouve des sessions Konqueror

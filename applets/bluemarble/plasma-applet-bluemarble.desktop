@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Blue Marble
+Name[de]=Blaue Murmel
 Name[el]=Γαλάζιο μάρμαρο
 Name[es]=Planeta azul
 Name[et]=Sinine Marble
@@ -12,6 +13,7 @@ Name[x-test]=xxBlue Marblexx
 Name[zh_CN]=蓝色桌面地球仪
 Comment=3D model of the Earth
 Comment[cs]=3D model Země
+Comment[de]=3D-Modell der Erde
 Comment[el]=3Δ μοντέλο της Γης
 Comment[es]=Modelo en 3D de la Tierra
 Comment[et]=Maa ruumiline mudel

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Places
+Name[de]=Orte
 Name[el]=Τοποθεσίες
 Name[es]=Lugares
 Name[fr]=Emplacements
@@ -21,6 +22,7 @@ X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=user-home
 Comment=Open Devices and Folder Bookmarks
+Comment[de]=Geräte- und Ordner-Bookmarks öffnen
 Comment[el]=Άνοιγμα σελιδοδεικτών συσκευών και φακέλων
 Comment[es]=Abrir dispositivos y carpetas de marcadores
 Comment[fr]=Ouvre les emplacements et les dossiers de signets

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Leave A Note
+Name[de]=Nachricht hinterlassen
 Name[el]=Γράψτε μια σημείωση
 Name[fr]=Laisse un mot
 Name[gl]=Deixa unha nota
@@ -13,17 +14,6 @@ Name[zh_CN]=留便笺
 Name[zh_TW]=留下字條
 Icon=knotes
 Comment=Leave notes for users while they are away
-Comment[el]=Γράψτε σημειώσεις σε χρήστες όταν αυτοί βρίσκονται εκτός
-Comment[fr]=Laisse des notes pour l'utilisateur tant qu'ils sont ailleurs
-Comment[gl]=Deixa notas para o usuario mentras está ausente
-Comment[nds]=Notizen för Brukers dorlaten, bides se annerwegens sünd
-Comment[nl]=Notities achterlaten voor de gebruiker wanneer hij weg is
-Comment[pt]=Deixar notas para o utilizador na sua ausência
-Comment[pt_BR]=Deixar notas para o usuário na sua ausência
-Comment[sv]=Lämna ett meddelande till användaren vid frånvaro
-Comment[uk]=Залиште повідомлення користувачам, які зараз недоступні
-Comment[zh_CN]=离开时留便笺给用户
-Comment[zh_TW]=在使用者離開時留字條給他
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet

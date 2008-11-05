@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=LCD Weather Station
+Name[de]=LCD-Wetterstation
 Name[el]=Μετεωρολογικός σταθμός LCD
 Name[es]=Estación meteorológica LCD
 Name[fr]=Station météo LCD
@@ -18,6 +19,7 @@ Name[x-test]=xxLCD Weather Stationxx
 Name[zh_CN]=液晶气象站
 Name[zh_TW]=LCD 氣象站
 Comment=Weather reports with an LCD display style
+Comment[de]=Wetterberichte im LCD-Stil
 Comment[el]=Αναφορά καιρού με στυλ εμφάνισης LCD
 Comment[es]=Informe meteorológico con un estilo de pantalla LCD
 Comment[fr]=Affiche des bulletins météo avec un style LCD
