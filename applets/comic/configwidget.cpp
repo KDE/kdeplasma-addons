@@ -46,6 +46,7 @@ class ComicModel : public QAbstractListModel
         void setComics( const Plasma::DataEngine::Data &comics )
         {
             mComics = comics;
+            reset();
         }
 
         virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
@@ -127,14 +128,16 @@ void ConfigWidget::getNewStuff()
     if ( engine.init( "comic.knsrc" ) ) {
         KNS::Entry::List entries = engine.downloadDialogModal( this );
         if ( entries.size() > 0 ) {
+            QString tmp = comicIdentifier();
             mModel->setComics( mEngine->query( "providers" ) );
+            setComicIdentifier( tmp );
         }
     }
 }
 
 void ConfigWidget::setComicIdentifier( const QString &comic )
 {
-  for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+    for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
         const QModelIndex index = mProxyModel->index( i, 0 );
         if ( index.data( Qt::UserRole ).toString() == comic ) {
             mComicIdentifier->setCurrentIndex( i );
