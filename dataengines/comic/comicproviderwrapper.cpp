@@ -374,11 +374,10 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
     case NumberIdentifier:
         //if the identifier is 0 make it the lastIdentifier
         if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toInt() < mFirstIdentifier.toInt() -1 ) {
+             identifier->toInt() < mFirstIdentifier.toInt() && identifier->toInt() ) {
             *identifier = mFirstIdentifier;
-        }
-        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-           ( identifier->toInt() > mLastIdentifier.toInt() || !identifier->toInt() ) ) {
+        } else if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
+           ( identifier->toInt() > mLastIdentifier.toInt() || ( identifier->toInt() == 0 ) ) ) {
             *identifier = mLastIdentifier;
         }
         break;
