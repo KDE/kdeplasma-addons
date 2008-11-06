@@ -36,6 +36,9 @@ public:
 
     virtual QWidget *widget();
 
+protected:
+    void constraintsEvent(Plasma::Constraints);
+
 public slots:
     void slotAddToClipboard();
     void slotCharSelect( const QChar &c );

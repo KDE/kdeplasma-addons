@@ -40,6 +40,16 @@ CharSelectApplet::~CharSelectApplet()
     delete m_mainWidget;
 }
 
+void CharSelectApplet::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::StartupCompletedConstraint) {
+        if (size().width() < widget()->size().width() || 
+             size().height() < widget()->size().height()) {
+            resize(widget()->size());
+        }
+    }
+}
+
 QWidget *CharSelectApplet::widget()
 {
     if (!m_mainWidget) {
