@@ -1,7 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Eyes
+Name[el]=Μάτια
+Name[nds]=Ogen
+Name[pt]=Olhos
+Name[pt_BR]=Olhos
+Name[sv]=Ögon
+Name[uk]=Очі
 Comment=XEyes clone
+Comment[el]=Κλώνος του XEyes
+Comment[nds]=XEyes-Kloon
+Comment[pt]=Clone do XEyes
+Comment[pt_BR]=Clone do XEyes
+Comment[sv]=Klon av Xeyes
+Comment[uk]=Клон XEyes
 Icon=xeyes
 Type=Service
 ServiceTypes=Plasma/Applet

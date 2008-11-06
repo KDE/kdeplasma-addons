@@ -14,6 +14,13 @@ Name[zh_CN]=留便笺
 Name[zh_TW]=留下字條
 Icon=knotes
 Comment=Leave notes for users while they are away
+Comment[de]=Abwesenden Benutzern eine Nachricht hinterlassen
+Comment[el]=Γράψτε σημειώσεις σε χρήστες όταν αυτοί βρίσκονται εκτός
+Comment[nds]=Notizen för Brukers dorlaten, bides se annerwegens sünd
+Comment[pt]=Deixar notas para os utilizadores na sua ausência
+Comment[pt_BR]=Deixar as notas para os usuários em suas ausências
+Comment[sv]=Lämna meddelanden till användare medan de är borta
+Comment[uk]=Залиште повідомлення користувачам, які зараз недоступні
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
