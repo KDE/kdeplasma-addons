@@ -93,7 +93,7 @@ class ComicApplet : public Plasma::Applet
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
-        QString mFirstDayIdentifierSuffix;
+        QString mFirstIdentifierSuffix;
         QString mComicAuthor;
         QString mComicTitle;
         QString mStripTitle;
@@ -114,6 +114,7 @@ class ComicApplet : public Plasma::Applet
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
+        QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;

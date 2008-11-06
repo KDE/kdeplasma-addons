@@ -55,7 +55,7 @@ static const int s_arrowWidth = 30;
 class ChooseStripNumDialog : public KDialog
 {
     public:
-        ChooseStripNumDialog( QWidget *parent, int current, int max )
+        ChooseStripNumDialog( QWidget *parent, int current, int min, int max )
             : KDialog( parent )
         {
             setCaption( i18n( "Go to Strip" ) );
@@ -69,7 +69,7 @@ class ChooseStripNumDialog : public KDialog
             topLayout->setMargin( 0 );
             topLayout->setSpacing( spacingHint() );
             numInput = new KIntNumInput( current, widget );
-            numInput->setRange( 1, max );
+            numInput->setRange( min, max );
             numInput->setEditFocus( true );
             numInput->setSliderEnabled( true );
             numInput->setValue( current );
@@ -171,7 +171,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
-    mFirstDayIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
+    mFirstIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
     mAdditionalText = data[ "Additional text" ].toString();
     mComicAuthor = data[ "Comic Author" ].toString();
@@ -179,13 +179,15 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mSuffixType = data[ "SuffixType" ].toString();
 
     QString temp = data[ "Identifier" ].toString();
-    int index = temp.indexOf( ':' );
-    temp = temp.mid( index + 1 );
+    temp = temp.remove( mComicIdentifier + ':' );
     if ( mSuffixType == "Number" ) {
         mIdentifierSuffixNum = temp.toInt();
         if ( mMaxStripNum[ mComicIdentifier ] < mIdentifierSuffixNum ) {
             mMaxStripNum[ mComicIdentifier ] = mIdentifierSuffixNum;
         }
+
+        temp = mFirstIdentifierSuffix.remove( mComicIdentifier + ':' );
+        mFirstStripNum[ mComicIdentifier ] = temp.toInt();
     } else if ( mSuffixType == "Date" ) {
         mIdentifierSuffixDate = QDate::fromString( temp, "yyyy-MM-dd" );
     }
@@ -280,7 +282,7 @@ void ComicApplet::slotChosenDay( const QDate &date )
 {
     if ( mSuffixType == "Date" ) {
         if ( date <= mCurrentDay ) {
-            QDate temp = QDate::fromString( mFirstDayIdentifierSuffix, "yyyy-MM-dd" );
+            QDate temp = QDate::fromString( mFirstIdentifierSuffix, "yyyy-MM-dd" );
             if ( temp.isValid() && date >= temp ) {
                 updateComic( date.toString( "yyyy-MM-dd" ) );
                 // even update if there is not first day identifierSuffix
@@ -303,7 +305,7 @@ void ComicApplet::slotPreviousDay()
 
 void ComicApplet::slotFirstDay()
 {
-    updateComic( mFirstDayIdentifierSuffix );
+    updateComic( mFirstIdentifierSuffix );
 }
 
 void ComicApplet::slotCurrentDay()
@@ -336,7 +338,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
                     event->pos().x() < ( rect.left() + tempLeftArrowWidth + fm.width( mShownIdentifierSuffix ) ) ) {
             // identifierSuffix clicked clicked
             if ( mSuffixType == "Number" ) {
-                ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mMaxStripNum[ mComicIdentifier ] );
+                ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
                 if ( pageDialog.exec() == QDialog::Accepted ) {
                     updateComic( QString::number( pageDialog.getStripNumber() ) );
                 }
@@ -516,7 +518,7 @@ void ComicApplet::updateButtons()
 
 void ComicApplet::updateContextMenu()
 {
-    mActionGoFirst->setVisible( !mFirstDayIdentifierSuffix.isEmpty() );
+    mActionGoFirst->setVisible( !mFirstIdentifierSuffix.isEmpty() );
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
     mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
 }
