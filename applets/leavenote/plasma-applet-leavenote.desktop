@@ -21,6 +21,7 @@ Comment[pt]=Deixar notas para os utilizadores na sua ausência
 Comment[pt_BR]=Deixar as notas para os usuários em suas ausências
 Comment[sv]=Lämna meddelanden till användare medan de är borta
 Comment[uk]=Залиште повідомлення користувачам, які зараз недоступні
+Comment[zh_TW]=在使用者離開時留字條給他
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
