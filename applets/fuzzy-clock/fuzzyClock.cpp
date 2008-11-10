@@ -161,13 +161,17 @@ void Clock::dataUpdated(const QString& source, const Plasma::DataEngine::Data &d
         return;
     }
 
+    if (Plasma::ToolTipManager::self()->isVisible(this)) {
+        updateTipContent();
+    }
+
     m_lastTimeSeen = m_time;
 
     calculateDateString();
     calculateTimeString();
 
     //The timestring changed.
-    if( m_timeString != m_lastTimeStringSeen || m_dateString != m_lastDateStringSeen ) {
+    if (m_timeString != m_lastTimeStringSeen || m_dateString != m_lastDateStringSeen) {
 
         //The size might have changed
         calculateSize();
