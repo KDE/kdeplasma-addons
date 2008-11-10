@@ -1,17 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Eyes
+Name[de]=Augen
 Name[el]=Μάτια
+Name[gl]=Ollos
 Name[nds]=Ogen
+Name[nl]=Ogen
 Name[pt]=Olhos
 Name[pt_BR]=Olhos
+Name[ru]=Глазки
 Name[sv]=Ögon
 Name[uk]=Очі
 Comment=XEyes clone
+Comment[de]=XEyes-Klon
 Comment[el]=Κλώνος του XEyes
+Comment[gl]=Clone do XEyes
 Comment[nds]=XEyes-Kloon
+Comment[nl]=Kloon van XEyes
 Comment[pt]=Clone do XEyes
 Comment[pt_BR]=Clone do XEyes
+Comment[ru]=Аналог программы XEyes
 Comment[sv]=Klon av Xeyes
 Comment[uk]=Клон XEyes
 Comment[zh_TW]=XEyes 的複製品
