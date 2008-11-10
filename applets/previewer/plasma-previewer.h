@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PREVIEWER_HEADER
-#define PREVIEWER_HEADER
+#ifndef PREVIEWER_H
+#define PREVIEWER_H
 
 
 #include <QWidget>
@@ -76,8 +76,6 @@ class Previewer : public Plasma::PopupApplet
         void dropEvent(QGraphicsSceneDragDropEvent *);
         void setupActions();
         void setupPreviewDialog();
-//         void mousePressEvent(QGraphicsSceneMouseEvent *event);  // implements mouse click as done for libplasmaclock
-//         void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         void constraintsEvent(Plasma::Constraints);
 
     private:
