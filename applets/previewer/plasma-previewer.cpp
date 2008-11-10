@@ -344,7 +344,7 @@ QString Previewer::currentFile()
 
 void Previewer::openUrls(KUrl::List list)
 {
-    foreach (const KUrl url, list) {
+    foreach (const KUrl &url, list) {
         KMimeType::Ptr mimeType = KMimeType::findByUrl(url, 0, true);
         if (mimeType->is("inode/directory")) {
             QDir dir(url.pathOrUrl());
