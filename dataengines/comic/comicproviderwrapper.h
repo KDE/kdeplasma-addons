@@ -121,6 +121,7 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( PositionType )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
         Q_PROPERTY( QString websiteUrl READ websiteUrl WRITE setWebsiteUrl )
+        Q_PROPERTY( QString shopUrl READ shopUrl WRITE setShopUrl )
         Q_PROPERTY( QString title READ title WRITE setTitle )
         Q_PROPERTY( QString additionalText READ additionalText WRITE setAdditionalText )
         Q_PROPERTY( QVariant identifier READ identifier WRITE setIdentifier )
@@ -158,6 +159,10 @@ class ComicProviderWrapper : public QObject
         void setComicAuthor( const QString &author );
         QString websiteUrl() const;
         void setWebsiteUrl( const QString &websiteUrl );
+        //shopUrl will be completely implemented for KDE 4.3
+        //you can use it now, but without effect on the provided data
+        QString shopUrl() const;
+        void setShopUrl( const QString &shopUrl );
         QString title() const;
         void setTitle( const QString &title );
         QString additionalText() const;
@@ -208,6 +213,7 @@ class ComicProviderWrapper : public QObject
         Plasma::Package *mPackage;
 
         QString mWebsiteUrl;
+        QString mShopUrl;
         QString mTitle;
         QString mAdditionalText;
         QVariant mIdentifier;

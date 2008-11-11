@@ -423,6 +423,16 @@ void ComicProviderWrapper::setWebsiteUrl( const QString &websiteUrl )
     mWebsiteUrl = websiteUrl;
 }
 
+QString ComicProviderWrapper::shopUrl() const
+{
+    return mShopUrl;
+}
+
+void ComicProviderWrapper::setShopUrl( const QString &shopUrl )
+{
+    mShopUrl = shopUrl;
+}
+
 QString ComicProviderWrapper::title() const
 {
     return mTitle;
