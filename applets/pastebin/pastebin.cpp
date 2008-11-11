@@ -47,7 +47,7 @@ using namespace Plasma;
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_text_server(0), m_image_server(0),
       m_text_backend(0), m_image_backend(0),
-      m_text(i18n("Drag text here to post to server"))
+      m_text(i18n("Drag text/image here to post to server"))
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
