@@ -85,8 +85,8 @@ void KonqProfilesApplet::slotUpdateKonqProfiles()
 
 void KonqProfilesApplet::initSessionFiles()
 {
-    QStringList list = KGlobal::dirs()->findAllResources( "data", "konqueror/profiles/*", KStandardDirs::NoDuplicates );
-    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
+    const QStringList list = KGlobal::dirs()->findAllResources( "data", "konqueror/profiles/*", KStandardDirs::NoDuplicates );
+    for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
     {
         QFileInfo info( *it );
         QString profileName = KIO::decodeFileName( info.baseName() );

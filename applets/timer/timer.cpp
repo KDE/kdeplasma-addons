@@ -102,9 +102,9 @@ void Timer::createMenuAction()
 
     QAction *action = 0;
 
-    const QStringList::Iterator end =  m_predefinedTimers.end();
+    QStringList::const_iterator end =  m_predefinedTimers.constEnd();
     lstActionTimer = new QActionGroup(this);
-    for (QStringList::const_iterator it = m_predefinedTimers.begin(); it != end; ++it) {
+    for (QStringList::const_iterator it = m_predefinedTimers.constBegin(); it != end; ++it) {
         action = new QAction(*it, this);
         action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::TIME_FORMAT)));
         lstActionTimer->addAction(action);

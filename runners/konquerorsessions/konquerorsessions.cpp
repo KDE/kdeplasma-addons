@@ -59,8 +59,8 @@ KonquerorSessions::~KonquerorSessions()
 void KonquerorSessions::loadSessions()
 {
     QStringList list = KGlobal::dirs()->findAllResources( "data", "konqueror/profiles/*", KStandardDirs::NoDuplicates );
-    QStringList::ConstIterator end = list.end();
-    for (QStringList::ConstIterator it = list.begin(); it != end; ++it) {
+    QStringList::ConstIterator end = list.constEnd();
+    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it) {
         QFileInfo info(*it);
         QString profileName = KIO::decodeFileName(info.baseName());
 

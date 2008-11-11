@@ -322,7 +322,7 @@ void Kolourpicker::clearHistory(bool save)
 {
     m_historyButton->setEnabled(false);
     m_historyButton->nativeWidget()->QPushButton::setIcon(ColorIcon(Qt::gray));
-    QHash<QColor, QAction *>::ConstIterator it = m_menus.begin(), itEnd = m_menus.end();
+    QHash<QColor, QAction *>::ConstIterator it = m_menus.constBegin(), itEnd = m_menus.constEnd();
     for ( ; it != itEnd; ++it )
     {
         m_historyMenu->removeAction(*it);
@@ -345,8 +345,8 @@ void Kolourpicker::installFilter()
 
 void Kolourpicker::addColor(const QColor &color, bool save)
 {
-    QHash<QColor, QAction *>::ConstIterator it = m_menus.find(color);
-    if (it != m_menus.end())
+    QHash<QColor, QAction *>::ConstIterator it = m_menus.constFind(color);
+    if (it != m_menus.constEnd())
         return;
 
     KMenu *newmenu = buildMenuForColor(color);
