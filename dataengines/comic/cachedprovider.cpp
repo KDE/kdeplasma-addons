@@ -30,7 +30,7 @@ static QString identifierToPath( const QString &identifier )
 {
     const QString dataDir = KStandardDirs::locateLocal( "data", "plasma_engine_comic/" );
 
-    return QString( dataDir + identifier );
+    return QString( dataDir + QUrl::toPercentEncoding( identifier ) );
 }
 
 
