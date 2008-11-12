@@ -94,6 +94,7 @@ class Twitter : public Plasma::Applet
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
 
+        void themeChanged();
         void showTweets();
 
     protected:

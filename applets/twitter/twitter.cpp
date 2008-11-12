@@ -74,6 +74,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 void Twitter::init()
 {
     m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/twitter");
     //config stuff
@@ -308,6 +309,13 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
     }
     updateGeometry();
+}
+
+void Twitter::themeChanged()
+{
+    delete m_colorScheme;
+    m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+    showTweets();
 }
 
 void Twitter::showTweets()
