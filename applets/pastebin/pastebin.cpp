@@ -216,8 +216,10 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
                     image.save(&buffer, "JPEG");
                     stream.writeRawData(data, data.size());
 
-                    QUrl postImage(tempFile.fileName());
-                    m_imageServer->post(postImage.path());
+                    QUrl t(tempFile.fileName());
+                    tempFile.close();
+
+                    m_imageServer->post(t.path());
 
                 }
                 else {

@@ -28,6 +28,7 @@
 #include <kurl.h>
 #include <krandom.h>
 #include <kapplication.h>
+#include <KDebug>
 
 #include "imagebinca.h"
 
@@ -114,7 +115,7 @@ bool ImagebinCAServer::addFile(const QString& name,const QString& path)
     str += name.toAscii();
     str += "\"; ";
     str += "filename=\"";
-    str += QFile::encodeName(KUrl(path).fileName());
+    str += QFile::encodeName(KUrl(path).fileName()).replace(".tmp", ".jpg");
     str += "\"";
     str += "\r\n";
     str += "Content-Type: ";
