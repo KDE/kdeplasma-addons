@@ -140,6 +140,7 @@ void Pastebin::configAccepted()
 
 void Pastebin::showResults(const QString &url)
 {
+    setBusy(false);
     m_text = i18n("Successfully posted to: <a href=\"%1\">%2</a><p>"
                   "Drag text/image here to post to server", url, url);
     m_displayEdit->setText(m_text);
@@ -169,7 +170,8 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
         bool image = false;
 
         m_text = event->mimeData()->text();
-        m_displayEdit->setText(i18n("Sending content..."));
+        m_displayEdit->setText("");
+        setBusy(true);
 
         QUrl test_path(event->mimeData()->text());
         if (QFile::exists(test_path.path())) {
