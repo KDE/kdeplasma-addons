@@ -52,7 +52,7 @@ void ImagebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
     }
 
     QString url(data);
-    url.replace("You can find this at ","");
+    url.replace("You can find this at ", "");
     emit postFinished(url);
 }
 

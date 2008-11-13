@@ -29,12 +29,14 @@
 #include <QMimeData>
 #include <QUrl>
 #include <QFile>
+#include <QBuffer>
 
 #include <KDebug>
 #include <KLocale>
 #include <KConfigDialog>
 #include <KToolInvocation>
 #include <kmimetype.h>
+#include <ktemporaryfile.h>
 
 #include <kio/global.h>
 #include <kio/job.h>
@@ -45,8 +47,8 @@
 using namespace Plasma;
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_text_server(0), m_image_server(0),
-      m_text_backend(0), m_image_backend(0),
+    : Plasma::Applet(parent, args), m_textServer(0), m_imageServer(0),
+      m_textBackend(0), m_imageBackend(0),
       m_text(i18n("Drag text/image here to post to server"))
 {
     setAcceptDrops(true);
@@ -65,45 +67,45 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 Pastebin::~Pastebin()
 {
     delete m_displayEdit;
-    delete m_text_server;
-    delete m_image_server;
+    delete m_textServer;
+    delete m_imageServer;
 }
 
 void Pastebin::setImageServer(int backend)
 {
-    if (m_image_server)
-        delete m_image_server;
+    if (m_imageServer)
+        delete m_imageServer;
 
     switch(backend) {
 
     case Pastebin::IMAGEBINCA:
-        m_image_server = static_cast<ImagebinCAServer*>(new ImagebinCAServer());
+        m_imageServer = static_cast<ImagebinCAServer*>(new ImagebinCAServer());
         break;
     }
 
-    m_image_backend = backend;
-    connect(m_image_server, SIGNAL(postFinished(QString)),
+    m_imageBackend = backend;
+    connect(m_imageServer, SIGNAL(postFinished(QString)),
             this, SLOT(showResults(QString)));
 }
 
 void Pastebin::setTextServer(int backend)
 {
-    if (m_text_server)
-        delete m_text_server;
+    if (m_textServer)
+        delete m_textServer;
 
     switch(backend) {
 
     case Pastebin::PASTEBINCA:
-        m_text_server = static_cast<PastebinCAServer*>(new PastebinCAServer());
+        m_textServer = static_cast<PastebinCAServer*>(new PastebinCAServer());
         break;
 
     case Pastebin::PASTEBINCOM:
-        m_text_server = static_cast<PastebinCOMServer*>(new PastebinCOMServer());
+        m_textServer = static_cast<PastebinCOMServer*>(new PastebinCOMServer());
         break;
     }
 
-    m_text_backend = backend;
-    connect(m_text_server, SIGNAL(postFinished(QString)),
+    m_textBackend = backend;
+    connect(m_textServer, SIGNAL(postFinished(QString)),
             this, SLOT(showResults(QString)));
 }
 
@@ -122,8 +124,8 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     ui.setupUi(widget);
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     parent->addPage(widget, parent->windowTitle(), Applet::icon());
-    ui.textServer->setCurrentIndex(m_text_backend);
-    ui.imageServer->setCurrentIndex(m_image_backend);
+    ui.textServer->setCurrentIndex(m_textBackend);
+    ui.imageServer->setCurrentIndex(m_imageBackend);
 }
 
 void Pastebin::configAccepted()
@@ -166,26 +168,63 @@ void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+
     if (event->mimeData()->objectName() != QString("Pastebin-applet")) {
         bool image = false;
+        bool validPath = false;
 
         m_text = event->mimeData()->text();
         m_displayEdit->setText("");
         setBusy(true);
 
-        QUrl test_path(event->mimeData()->text());
-        if (QFile::exists(test_path.path())) {
-            KMimeType::Ptr type = KMimeType::findByPath(test_path.path());
+        QUrl testPath(m_text);
+        validPath = QFile::exists(testPath.path());
+
+        if (validPath) {
+            KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
 
             if (type->name().indexOf("image/") != -1) {
                 image = true;
             }
         }
+        else {
+            if (event->mimeData()->hasImage()) {
+                image = true;
+            }
+        }
 
         if (!image) {
-            m_text_server->post(m_text);
+            // upload text
+            m_textServer->post(m_text);
         } else {
-            m_image_server->post(test_path.path());
+            //upload image
+            if (validPath) {
+                m_imageServer->post(testPath.path());
+            }
+            else {
+                KTemporaryFile tempFile;
+                if (tempFile.open()) {
+                    tempFile.setAutoRemove(false);
+
+                    QDataStream stream(&tempFile);
+
+                    QByteArray data;
+                    QBuffer buffer(&data);
+                    buffer.open(QIODevice::ReadWrite);
+
+                    QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
+                    image.save(&buffer, "JPEG");
+                    stream.writeRawData(data, data.size());
+
+                    QUrl postImage(tempFile.fileName());
+                    m_imageServer->post(postImage.path());
+
+                }
+                else {
+                    setBusy(false);
+                }
+
+            }
         }
 
         event->acceptProposedAction();

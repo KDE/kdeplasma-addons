@@ -63,11 +63,11 @@ protected:
 
 private:
     Plasma::Label *m_displayEdit;
-    PastebinServer *m_text_server;
-    PastebinServer *m_image_server;
+    PastebinServer *m_textServer;
+    PastebinServer *m_imageServer;
     Ui::pastebinConfig ui;
-    int m_text_backend;
-    int m_image_backend;
+    int m_textBackend;
+    int m_imageBackend;
     QString m_text;
 };
 
