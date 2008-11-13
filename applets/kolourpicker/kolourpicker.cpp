@@ -22,14 +22,14 @@
 #include <qmimedata.h>
 #include <qpainter.h>
 #include <qpixmap.h>
-#include <kpushbutton.h>
+#include <qtoolbutton.h>
 
 #include <kdebug.h>
 #include <kicon.h>
 #include <klocale.h>
 #include <kmenu.h>
 
-#include <plasma/widgets/pushbutton.h>
+#include <plasma/widgets/toolbutton.h>
 
 #include <config-kolourpicker.h>
 
@@ -141,38 +141,6 @@ ColorIcon::ColorIcon(const QColor &color)
 {
 }
 
-
-class PickerButton : public Plasma::PushButton
-{
-    public:
-        PickerButton(QGraphicsWidget *parent = 0);
-
-        void adaptToFormFactor(Plasma::FormFactor formFactor);
-};
-
-PickerButton::PickerButton(QGraphicsWidget *parent)
-    : Plasma::PushButton(parent)
-{
-}
-
-void PickerButton::adaptToFormFactor(Plasma::FormFactor formFactor)
-{
-    switch (formFactor)
-    {
-    case Plasma::Planar:
-    case Plasma::MediaCenter:
-        setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        break;
-    case Plasma::Horizontal:
-        setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
-        break;
-    case Plasma::Vertical:
-        setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
-        break;
-    }
-}
-
-
 Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_grabWidget(0)
 {
@@ -184,15 +152,19 @@ Kolourpicker::Kolourpicker(QObject *parent, const QVariantList &args)
     mainlay->setSpacing(4);
     mainlay->setContentsMargins(0.0, 0.0, 0.0, 0.0);
 
-    m_grabButton = new PickerButton(this);
+    m_grabButton = new Plasma::ToolButton(this);
+    m_grabButton->setMinimumSize(20, 20);
     mainlay->addItem(m_grabButton);
     m_grabButton->nativeWidget()->setIcon(KIcon("color-picker"));
+    m_grabButton->nativeWidget()->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     connect(m_grabButton, SIGNAL(clicked()), this, SLOT(grabClicked()));
 
-    m_historyButton = new PickerButton(this);
+    m_historyButton = new Plasma::ToolButton(this);
+    m_historyButton->setMinimumSize(20, 20);
     mainlay->addItem(m_historyButton);
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->QPushButton::setIcon(ColorIcon(Qt::gray));
+    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
+    m_historyButton->nativeWidget()->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     connect(m_historyButton, SIGNAL(clicked()), this, SLOT(historyClicked()));
 
     KMenu *menu = new KMenu();
@@ -228,11 +200,12 @@ void Kolourpicker::constraintsEvent(Plasma::Constraints constraints)
         } else {
             setBackgroundHints(Plasma::Applet::NoBackground);
         }
-        m_grabButton->adaptToFormFactor(formFactor());
-        m_historyButton->adaptToFormFactor(formFactor());
+    }
 
+    if (constraints & Plasma::FormFactorConstraint ||
+        constraints & Plasma::SizeConstraint) {
         QGraphicsLinearLayout *l = dynamic_cast<QGraphicsLinearLayout *>(layout());
-        if (formFactor() == Plasma::Horizontal) {
+        if (formFactor() == Plasma::Horizontal && size().height() < 40) {
             l->setOrientation(Qt::Horizontal);
         } else {
             l->setOrientation(Qt::Vertical);
@@ -321,7 +294,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
 void Kolourpicker::clearHistory(bool save)
 {
     m_historyButton->setEnabled(false);
-    m_historyButton->nativeWidget()->QPushButton::setIcon(ColorIcon(Qt::gray));
+    m_historyButton->nativeWidget()->setIcon(ColorIcon(Qt::gray));
     QHash<QColor, QAction *>::ConstIterator it = m_menus.constBegin(), itEnd = m_menus.constEnd();
     for ( ; it != itEnd; ++it )
     {
@@ -356,7 +329,7 @@ void Kolourpicker::addColor(const QColor &color, bool save)
     act->setText(QString("%1, %2, %3").arg(color.red()).arg(color.green()).arg(color.blue()));
     connect(newmenu, SIGNAL(triggered(QAction*)), this, SLOT(colorActionTriggered(QAction*)));
     m_historyMenu->insertMenu(m_historyMenu->actions().at(1), newmenu);
-    m_historyButton->nativeWidget()->QPushButton::setIcon(colorIcon);
+    m_historyButton->nativeWidget()->setIcon(colorIcon);
     m_menus.insert(color, act);
     m_colors.append(color.name());
     m_historyButton->setEnabled(true);

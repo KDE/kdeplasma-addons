@@ -18,7 +18,10 @@
 class QMenu;
 class QWidget;
 
-class PickerButton;
+namespace Plasma
+{
+    class ToolButton;
+} // namespace Plasma
 
 class Kolourpicker : public Plasma::Applet
 {
@@ -47,8 +50,8 @@ class Kolourpicker : public Plasma::Applet
         void addColor(const QColor &color, bool save = true);
         void saveData(KConfigGroup &cg);
 
-        PickerButton *m_grabButton;
-        PickerButton *m_historyButton;
+        Plasma::ToolButton *m_grabButton;
+        Plasma::ToolButton *m_historyButton;
         QMenu *m_historyMenu;
         QHash<QColor, QAction *> m_menus;
         QStringList m_colors;
