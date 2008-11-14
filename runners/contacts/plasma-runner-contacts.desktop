@@ -74,6 +74,6 @@ X-KDE-Library=krunner_contacts
 X-KDE-PluginInfo-Author=Teemu Rytilahti
 X-KDE-PluginInfo-Email=tpr@iki.fi
 X-KDE-PluginInfo-Name=kabccontacts
-X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true
