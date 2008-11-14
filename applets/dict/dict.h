@@ -1,22 +1,22 @@
-/***************************************************************************
- *   Copyright (C) 2007 by Thomas Georgiou <TAGeorgiou@gmail.com>          *
- *   Copyright (C) 2007 by Jeff Cooper <weirdsox11@gmail.com>              *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
- ***************************************************************************/
+/*
+ *   Copyright (C) 2008 Nick Shaforostoff <shaforostoff@kde.ru>
+ *
+ *   based on work by:
+ *   Copyright (C) 2007 Thomas Georgiou <TAGeorgiou@gmail.com> and Jeff Cooper <weirdsox11@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation; either version 2 of 
+ *   the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef DICT_H
 #define DICT_H
@@ -25,13 +25,12 @@
 #include <Plasma/DataEngine>
 
 class QTimer;
-class QLineEdit;
+class CheckableStringListModel;
 
-class QWebView;
+class QTextBrowser;
+class KTextBrowser;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
-
-class KLineEdit;
 
 namespace Plasma
 {
@@ -39,12 +38,12 @@ namespace Plasma
     class LineEdit;
 }
 
-class Dict : public Plasma::Applet
+class DictApplet: public Plasma::Applet
 {
     Q_OBJECT
     public:
-        Dict(QObject *parent, const QVariantList &args);
-        ~Dict();
+        DictApplet(QObject *parent, const QVariantList &args);
+        ~DictApplet();
 
     void init();
         void setPath(const QString&);
@@ -55,28 +54,32 @@ class Dict : public Plasma::Applet
         void linkDefine(const QString &word);
 
     protected slots:
-//         void acceptedTimeStringState(bool);
         void define();
+        void configAccepted();
+
+    protected:
+        void createConfigurationInterface(KConfigDialog *parent);
 
     private:
-        QString wnToHtml(const QString& text);
-
-        QVariant m_thedef;
-        QLineEdit *m_wordChooser;
-        QString m_word;
+        QString m_source;
         QTimer* m_timer;
-        //QGraphicsPixmapItem *m_graphicsIcon; 
+        QString m_dataEngine;
+        //QGraphicsPixmapItem *m_graphicsIcon;
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_horLayout;
         Plasma::LineEdit *m_wordEdit;
         //Plasma::Flash *m_flash;
-        QStringList m_defList;
-        QStringList::iterator m_i;
-        QWebView *m_defBrowser;
+//         QTextBrowser* m_defBrowser;
+        KTextBrowser* m_defBrowser;
         QGraphicsProxyWidget *m_defBrowserProxy;
         Plasma::IconWidget *m_icon;
+
+//         QList< QPair<QString, bool> > m_dicts;
+        QPointer<CheckableStringListModel> m_dictsModel;
+        QStringList m_dicts;
+        QHash<QString,bool> m_activeDicts;
 };
 
-K_EXPORT_PLASMA_APPLET(dict, Dict)
+K_EXPORT_PLASMA_APPLET(qstardict, DictApplet)
 
 #endif
