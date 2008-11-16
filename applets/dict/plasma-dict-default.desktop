@@ -41,6 +41,10 @@ Name[x-test]=xxDictionaryxx
 Name[zh_CN]=词典
 Name[zh_TW]=字典
 Comment=Look up the meaning of words and their translation into different languages
+Comment[el]=Αναζήτηση σημασίας λέξεων και της μετάφρασής τους σε διάφορες γλώσσες
+Comment[nds]=De Verkloren vun Wöör un ehr Översetten na verscheden Spraken naslaan
+Comment[sv]=Slå upp betydelsen hos ord och deras översättning till olika språk
+Comment[uk]=Погляньте на значення слів та на їх переклад іншими мовами
 Type=Service
 Icon=accessories-dictionary
 
