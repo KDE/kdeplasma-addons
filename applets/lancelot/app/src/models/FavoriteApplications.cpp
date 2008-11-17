@@ -120,7 +120,7 @@ bool FavoriteApplications::hasContextActions(int index) const
 void FavoriteApplications::setContextActions(int index, QMenu * menu)
 {
     Q_UNUSED(index);
-    menu->addAction(KIcon("list-remove"), i18n("Remove from favorites"))
+    menu->addAction(KIcon("list-remove"), i18n("Remove From Favorites"))
         ->setData(QVariant(0));
 }
 

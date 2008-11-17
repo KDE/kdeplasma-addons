@@ -30,7 +30,7 @@ AutoPasteConfig::AutoPasteConfig(QWidget *parent)
     editButton->setIcon(KIcon("list-edit"));
     pasteKeyButton->setClearButtonShown(false);
     appsTreeView->setModel(&m_appModel);
-    m_appModel.setHorizontalHeaderLabels(QStringList() << i18n("Application") << i18n("Paste key"));
+    m_appModel.setHorizontalHeaderLabels(QStringList() << i18n("Application") << i18n("Paste Key"));
     connect(addButton, SIGNAL(clicked()), this, SLOT(addClicked()));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editClicked()));

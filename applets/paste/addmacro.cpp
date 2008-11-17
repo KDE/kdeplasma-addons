@@ -29,7 +29,7 @@
 AddMacro::AddMacro(QWidget* parent)
 : KDialog(parent), m_params(0)
 {
-    setCaption(i18n("Add macro"));
+    setCaption(i18n("Add Macro"));
     setButtons(KDialog::Ok | KDialog::Cancel);
 
     m_widget = new QWidget(this);

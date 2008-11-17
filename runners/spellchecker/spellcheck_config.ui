@@ -19,7 +19,7 @@
       <item>
        <widget class="QCheckBox" name="m_requireTriggerWord" >
         <property name="text" >
-         <string>&amp;Require Trigger Word</string>
+         <string>&amp;Require trigger word</string>
         </property>
        </widget>
       </item>

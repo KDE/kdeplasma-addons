@@ -114,7 +114,7 @@ void Previewer::setupActions()
 
     m_actions << open;
 
-    KAction *onTop = new KAction(i18n("Preview dialog always on top"), this);
+    KAction *onTop = new KAction(i18n("Preview Dialog Always on Top"), this);
     onTop->setCheckable(true);
     onTop->setChecked(true);
     connect(onTop, SIGNAL(toggled(bool)), this, SLOT(stayOnTop(bool)));
@@ -127,7 +127,7 @@ void Previewer::setupActions()
     m_recents = new KMenu();
     m_recents->setIcon(KIcon("document-open-recent"));
     QAction *r_action = m_recents->menuAction();
-    r_action->setText(i18n("Recently opened"));
+    r_action->setText(i18n("Recently Opened"));
     m_actions<<r_action;
 }
 
@@ -252,7 +252,7 @@ void Previewer::removeCurrentFromHistory()
     kDebug() << index;
 
     if (index != -1 && KMessageBox::questionYesNo(m_dialog, i18n("Are you sure you want to remove:\n%1", cur.pathOrUrl()), 
-                                                  i18n("Deleting file")) == KMessageBox::Yes) {
+                                                  i18n("Deleting File")) == KMessageBox::Yes) {
         closeFile(false);
         delete m_part;
         m_part = 0;

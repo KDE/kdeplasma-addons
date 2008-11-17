@@ -13,7 +13,7 @@
    <item>
     <widget class="QGroupBox" name="panelContents" >
      <property name="title" >
-      <string>Contents behavior</string>
+      <string>Contents Behavior</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout" >
       <item>
@@ -39,7 +39,7 @@
          <bool>false</bool>
         </property>
         <property name="title" >
-         <string>Extender position</string>
+         <string>Extender Position</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout" >
          <item>
@@ -74,7 +74,7 @@
       </sizepolicy>
      </property>
      <property name="title" >
-      <string>Applet icon</string>
+      <string>Applet Icon</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2" >
       <item>

@@ -100,7 +100,7 @@
      <item>
       <widget class="QPushButton" name="addMacroButton" >
        <property name="text" >
-        <string>&amp;Add macro</string>
+        <string>&amp;Add Macro...</string>
        </property>
       </widget>
      </item>

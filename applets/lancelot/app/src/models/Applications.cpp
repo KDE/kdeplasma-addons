@@ -212,7 +212,7 @@ void Applications::setContextActions(int index, QMenu * menu)
         return;
     }
 
-    menu->addAction(KIcon("list-add"), i18n("Add to favorites"))
+    menu->addAction(KIcon("list-add"), i18n("Add to Favorites"))
         ->setData(QVariant(0));
 }
 

@@ -34,7 +34,7 @@
       <string>Use KNotes to create notes if it is installed.</string>
      </property>
      <property name="text" >
-      <string>Use KNotes.</string>
+      <string>Use KNotes</string>
      </property>
      <property name="checked" >
       <bool>true</bool>

@@ -131,7 +131,7 @@ void Runner::setContextActions(int index, QMenu * menu)
     if (!valid) return;
 
     if (m_items[index].data.value< QStringList >().at(1) == "Application") {
-        menu->addAction(KIcon("list-add"), i18n("Add to favorites"))
+        menu->addAction(KIcon("list-add"), i18n("Add to Favorites"))
             ->setData(QVariant(0));
     }
 }

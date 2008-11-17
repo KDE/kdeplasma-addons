@@ -13,7 +13,7 @@
    <item>
     <widget class="QGroupBox" name="groupActivation" >
      <property name="title" >
-      <string>Activation method</string>
+      <string>Activation Method</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3" >
       <item>
@@ -55,7 +55,7 @@
    <item>
     <widget class="QGroupBox" name="groupAppBrowser" >
      <property name="title" >
-      <string>Application browser</string>
+      <string>Application Browser</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2" >
       <item>
@@ -68,7 +68,7 @@
       <item>
        <widget class="QLabel" name="label" >
         <property name="text" >
-         <string>Column number limit</string>
+         <string>Column Number Limit</string>
         </property>
        </widget>
       </item>

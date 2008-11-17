@@ -88,11 +88,11 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
-    mShowComicAuthor = new QCheckBox( i18n( "Show Comic Author" ), this );
-    mShowComicTitle = new QCheckBox( i18n( "Show Comic Title" ), this );
-    mShowComicUrl = new QCheckBox( i18n( "Show Comic Url" ), this );
-    mShowComicIdentifier = new QCheckBox( i18n( "Show Comic Identifier" ), this );
-    mShowArrowsOnHover = new QCheckBox( i18n( "Show Arrows Only on Hover" ), this );
+    mShowComicAuthor = new QCheckBox( i18n( "Show comic author" ), this );
+    mShowComicTitle = new QCheckBox( i18n( "Show comic title" ), this );
+    mShowComicUrl = new QCheckBox( i18n( "Show comic url" ), this );
+    mShowComicIdentifier = new QCheckBox( i18n( "Show comic identifier" ), this );
+    mShowArrowsOnHover = new QCheckBox( i18n( "Show arrows only on hover" ), this );
     mNewStuff = new QPushButton( this );
     mNewStuff->setToolTip( i18n( "Download new comics" ) );
     mNewStuff->setText( i18n( "Get New Comics..." ) );

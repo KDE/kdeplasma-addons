@@ -44,17 +44,17 @@ PasteMacroExpander& PasteMacroExpander::instance()
 PasteMacroExpander::PasteMacroExpander(QWidget *parent) : QObject(parent)
 {
     m_macros["exec"] = QVariantList()
-            << i18n("Execute command and get output")
+            << i18n("Execute Command And Get Output")
             << QVariant::fromValue(MacroParam(i18n("Command"), MacroParam::Url));
     m_macros["date"] = QVariantList()
-            << i18n("Current date");
+            << i18n("Current Date");
     m_macros["time"] = QVariantList()
-            << i18n("Current time");
+            << i18n("Current Time");
     m_macros["file"] = QVariantList()
-            << i18n("Insert file contents")
+            << i18n("Insert File Contents")
             << QVariant::fromValue(MacroParam(i18n("File"), MacroParam::Url));
     m_macros["password"] = QVariantList()
-            << i18n("Random password")
+            << i18n("Random Password")
             << QVariant::fromValue(MacroParam(i18n("Character count"), MacroParam::Int))
             << QVariant::fromValue(MacroParam(i18n("Lowercase letters"), MacroParam::Boolean))
             << QVariant::fromValue(MacroParam(i18n("Uppercase letters"), MacroParam::Boolean))

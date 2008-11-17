@@ -134,7 +134,7 @@ void Frame::updateMenu()
 {
     if (!m_menuPresent && !m_potd && m_currentUrl.path() != "Default") {
         kDebug() << "Current path: " << m_currentUrl.path();
-        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open picture..."), this);
+        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
         m_actions.append(m_openPicture);
         connect(m_openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
         m_menuPresent = true;
