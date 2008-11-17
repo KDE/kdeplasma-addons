@@ -29,6 +29,9 @@
 #include <klocalizedstring.h>
 #include <plasma/theme.h>
 
+#ifdef HAVE_KEXIV2
+#include <libkexiv2/kexiv2.h>
+#endif
 
 Picture::Picture()
 {
@@ -74,7 +77,24 @@ QImage Picture::setPicture(const KUrl &currentUrl)
             m_picture = defaultPicture(i18nc("Error", "Error loading image"));
             return m_picture;
         } else {
+#ifdef HAVE_KEXIV2
+            KExiv2Iface::KExiv2 exif(currentUrl.path());
+            QMatrix m;
+            switch (exif.getImageOrientation()) {
+                case KExiv2Iface::KExiv2::ORIENTATION_HFLIP: m_picture = tempImage.mirrored(true, false); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_180: m_picture = tempImage.mirrored(true, true); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_VFLIP: m_picture = tempImage.mirrored(false, true); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_90: m.rotate(90); m_picture = tempImage.transformed(m); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP: m.rotate(90); m.scale(-1.0,1.0); 
+                                                      m_picture = tempImage.transformed(m); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP: m.rotate(90); m.scale(1.0,-1.0); 
+                                                      m_picture = tempImage.transformed(m); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_270: m.rotate(270);  m_picture = tempImage.transformed(m); break;
+                default: m_picture = tempImage;
+            }
+#else
             m_picture = tempImage;
+#endif
             return m_picture;
         }
     }
