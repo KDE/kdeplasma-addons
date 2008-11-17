@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=BbalL
+Name[x-test]=xxBbalLxx
 Comment=A bouncy ball for plasma
 Comment[de]=Ein Springball für Plasma
 Comment[el]=Μια αναπηδούμενη μπάλα για το plasma
@@ -14,6 +15,7 @@ Comment[ru]=Попрыгунчик для Plasma
 Comment[sv]=En studsande boll för Plasma
 Comment[tr]=Plasma için bir zıplayan top
 Comment[uk]=М’ячик-стрибунець для плазми
+Comment[x-test]=xxA bouncy ball for plasmaxx
 Comment[zh_CN]=一个 plasma 的弹球
 Comment[zh_TW]=Plasma 上的彈跳球遊戲
 Type=Service

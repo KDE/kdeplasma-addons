@@ -31,6 +31,7 @@ Comment[ru]=Отображение новостей из различных ис
 Comment[sv]=Visa nyheter från olika källor
 Comment[tr]=Çeşitli kaynaklardan haberleri göster
 Comment[uk]=Показати новини від різноманітних джерел
+Comment[x-test]=xxShow news from various sourcesxx
 Comment[zh_CN]=从多个来源显示新闻
 Comment[zh_TW]=顯示不同的來源的新聞
 Type=Service
