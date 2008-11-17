@@ -55,7 +55,7 @@ void ImagebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
     QString url(data);
     url.replace("You can find this at ", "");
     url.replace(QRegExp("<p><a href=([^<]*)>"), "");
-    url.replace(QRegExp("</a></p>"), "");
+    url.replace("</a></p>", "");
 
     emit postFinished(url);
 }
