@@ -13,7 +13,7 @@ set(news_SRCS
     scroller.cpp
 )
 
-kde4_add_ui_files(news_SRCS config.ui)
+kde4_add_ui_files(news_SRCS config.ui feedsConfig.ui)
 
 kde4_add_plugin(plasma_applet_rssnow ${news_SRCS})
 target_link_libraries(plasma_applet_rssnow ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS})

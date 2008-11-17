@@ -27,6 +27,7 @@
 
 //Own
 #include "ui_config.h"
+#include "ui_feedsConfig.h"
 #include "header.h"
 #include "feeddata.h"
 
@@ -81,6 +82,7 @@ class News : public Plasma::Applet
         QGraphicsLinearLayout  *m_layout;
         Header              *m_header;
         Ui::config          ui;
+        Ui::feedsConfig     feedsUi;
 
         QMap<QString, QString>    m_defaultFeeds;
         QMap<QString, QString> akregatorFeeds();

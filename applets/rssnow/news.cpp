@@ -123,23 +123,25 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     //an url in the combobox.
     QWidget *widget = new QWidget(0);
     ui.setupUi(widget);
+    QWidget *fWidget = new QWidget(0);
+    feedsUi.setupUi(fWidget);
     connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
-    connect(ui.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
-    connect(ui.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
-    connect(ui.feedList, SIGNAL( itemSelectionChanged ()), this, SLOT(slotItemChanged()));
-    connect(ui.feedComboBox->lineEdit(), SIGNAL( textChanged( const QString& ) ), this, SLOT( slotChangeText(const QString& ) ) );
-    ui.removeFeed->setEnabled( false );
+    connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
+    connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
+    connect(feedsUi.feedList, SIGNAL( itemSelectionChanged ()), this, SLOT(slotItemChanged()));
+    connect(feedsUi.feedComboBox->lineEdit(), SIGNAL( textChanged( const QString& ) ), this, SLOT( slotChangeText(const QString& ) ) );
+    feedsUi.removeFeed->setEnabled( false );
     KConfig feedsFile(QString("news/feeds"), KConfig::FullConfig, "data");
     m_defaultFeeds = feedsFile.group("feeds").entryMap();
-    ui.addFeed->setEnabled( false );
-    ui.feedComboBox->clear();
-    ui.feedList->clear();
+    feedsUi.addFeed->setEnabled( false );
+    feedsUi.feedComboBox->clear();
+    feedsUi.feedList->clear();
     foreach (const QString& name, m_defaultFeeds.keys()) {
-        ui.feedComboBox->addItem(name);
+        feedsUi.feedComboBox->addItem(name);
     }
 
     foreach (const QString& name, akregatorFeeds().values()) {
-        ui.feedComboBox->addItem(name);
+        feedsUi.feedComboBox->addItem(name);
     }
 
     ui.intervalSpinBox->setValue(m_interval);
@@ -161,47 +163,48 @@ void News::createConfigurationInterface(KConfigDialog *parent)
         ui.showDropTarget->setCheckState(Qt::Unchecked);
     }
 
-    ui.feedList->addItems(m_feedlist);
-    parent->addPage(widget, i18n("Configure News"));
+    feedsUi.feedList->addItems(m_feedlist);
+    parent->addPage(widget, i18n("General"), icon());
+    parent->addPage(fWidget, i18n("Feeds"), icon());
 }
 
 void News::slotChangeText( const QString& text )
 {
-    ui.addFeed->setEnabled( !text.isEmpty() );
+    feedsUi.addFeed->setEnabled( !text.isEmpty() );
 }
 
 void News::slotItemChanged()
 {
-    ui.removeFeed->setEnabled( ( !ui.feedList->selectedItems ().isEmpty() ) );
+    feedsUi.removeFeed->setEnabled( ( !feedsUi.feedList->selectedItems ().isEmpty() ) );
 }
 
 void News::addFeed()
 {
-    if (!ui.feedComboBox->currentText().isEmpty()) {
-        QString url = ui.feedComboBox->currentText();
+    if (!feedsUi.feedComboBox->currentText().isEmpty()) {
+        QString url = feedsUi.feedComboBox->currentText();
         if (m_defaultFeeds.keys().contains(url)) {
             url = m_defaultFeeds[url];
         }
         bool found = false;
-        for (int i = 0; i < ui.feedList->count(); i++) {
-            QString feed = ui.feedList->item(i)->text();
+        for (int i = 0; i < feedsUi.feedList->count(); i++) {
+            QString feed = feedsUi.feedList->item(i)->text();
             if (feed == url) {
                 found = true;
             }
         }
         if (!found) {
-            ui.feedList->addItem(url);
+            feedsUi.feedList->addItem(url);
         }
     }
 }
 
 void News::removeFeed()
 {
-    int row = ui.feedList->currentRow();
+    int row = feedsUi.feedList->currentRow();
     if (row != -1) {
-        ui.feedList->takeItem(row);
-        if (ui.feedList->count() == 0) {
-            ui.removeFeed->setEnabled(false);
+        feedsUi.feedList->takeItem(row);
+        if (feedsUi.feedList->count() == 0) {
+            feedsUi.removeFeed->setEnabled(false);
         }
     }
 }
@@ -217,8 +220,8 @@ void News::configAccepted()
 
     m_feedlist.clear();
     QString feed;
-    for (int i = 0; i < ui.feedList->count(); i++) {
-        feed = ui.feedList->item(i)->text();
+    for (int i = 0; i < feedsUi.feedList->count(); i++) {
+        feed = feedsUi.feedList->item(i)->text();
         if (m_defaultFeeds.keys().contains(feed)) {
             feed = m_defaultFeeds[feed];
         }
