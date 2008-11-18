@@ -189,9 +189,8 @@ protected:
      */
     void setupActions();
 
-    void focusOutEvent (QFocusEvent * event);
-    void leaveEvent    (QEvent      * event);
-    void enterEvent    (QEvent      * event);
+    void leaveEvent(QEvent * event);
+    void enterEvent(QEvent * event);
 
 private:
     Lancelot::ResizeBordersPanel * m_root;
@@ -208,7 +207,7 @@ private:
     bool                  m_showingFull;
 
     QSignalMapper       * m_sectionsSignalMapper;
-    KActionCollection * m_actionCollection;
+    KActionCollection   * m_actionCollection;
 
     QMap < QString, Lancelot::ActionListViewModel * > m_models;
     QMap < QString, Lancelot::ActionListViewModel * > m_modelGroups;
@@ -227,6 +226,8 @@ protected:
     void mouseReleaseEvent (QMouseEvent * event);
     void mouseMoveEvent    (QMouseEvent * event);
 
+    void sendKeyEvent      (QKeyEvent * event);
+
 private:
     enum BaseDirection {
         None = 0,
@@ -241,6 +242,10 @@ private:
     QPoint          m_originalWindowPosition;
     QSize           m_originalMainSize;
     QSize           m_mainSize;
+
+    QList < QGraphicsWidget * > m_focusList;
+    int m_focusIndex;
+    bool m_skipEvent;
 
     friend class CustomGraphicsView;
 };

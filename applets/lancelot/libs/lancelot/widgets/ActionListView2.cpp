@@ -482,6 +482,19 @@ void ActionListView2ItemFactory::selectRelItem(int rel) //>
             }
         }
     }
+
+    int oindex = index;
+    while (m_model->isCategory(index)) {
+        index += rel;
+        if (index == oindex) return;
+
+        if (index < 0) {
+            index = m_items.count();
+        } else if (index >= m_items.count()) {
+            index = 0;
+        }
+    }
+
     m_items.at(index)->setSelected();
 } //<
 

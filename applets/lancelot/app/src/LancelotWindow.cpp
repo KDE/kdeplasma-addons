@@ -192,7 +192,8 @@ LancelotWindow::LancelotWindow()
     instance(NULL),
     m_configWidget(NULL),
     m_resizeDirection(None),
-    m_mainSize(mainWidthDefault, windowHeightDefault)
+    m_mainSize(mainWidthDefault, windowHeightDefault),
+    m_skipEvent(false)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
@@ -416,12 +417,6 @@ void LancelotWindow::resizeWindow()
     m_view->resize(newSize);
 }
 
-void LancelotWindow::focusOutEvent(QFocusEvent * event) {
-    Q_UNUSED(event);
-    lancelotHide(true);
-    QWidget::focusOutEvent(event);
-}
-
 void LancelotWindow::leaveEvent(QEvent * event) {
     Q_UNUSED(event);
     m_hovered = false;
@@ -467,6 +462,24 @@ void LancelotWindow::sectionActivated(const QString & item)
 
     if (sectionButtons.contains(item)) {
         sectionButtons[item]->setChecked(true);
+    }
+
+    m_focusList.clear();
+    m_focusIndex = 0;
+    kDebug() << item;
+    if (item == "search") {
+        m_focusList << listSearchLeft;
+    } else if (item == "applications") {
+        m_focusList << passagewayApplications;
+    } else if (item == "computer") {
+        m_focusList << listComputerLeft;
+        m_focusList << listComputerRight;
+    } else if (item == "contacts") {
+        m_focusList << listContactsLeft;
+        m_focusList << listContactsRight;
+    } else if (item == "documents") {
+        m_focusList << listDocumentsLeft;
+        m_focusList << listDocumentsRight;
     }
 
     layoutCenter->show(item);
@@ -657,14 +670,69 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
     QWidget::mouseMoveEvent(e);
 }
 
+void LancelotWindow::sendKeyEvent(QKeyEvent * event)
+{
+    // We get this twice for every keypress... ???
+    m_skipEvent = !m_skipEvent;
+    if (!m_skipEvent) {
+        return;
+    }
+
+    if (passagewayApplications == m_focusList.at(m_focusIndex)) {
+
+    } else {
+        Lancelot::ActionListView * list =
+            (Lancelot::ActionListView *) m_focusList.at(m_focusIndex);
+        list->keyPressEvent(event);
+    }
+}
+
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
-    if (/* object == editSearch->nativeWidget() &&*/ event->type() == QEvent::KeyPress) {
+    if (event->type() == QEvent::KeyPress) {
+        bool pass = false;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-        if (keyEvent->key() == Qt::Key_Escape) {
-            lancelotHide(true);
-            return true;
+        switch (keyEvent->key()) {
+            case Qt::Key_Escape:
+                lancelotHide(true);
+            case Qt::Key_Tab:
+                return true;
+            case Qt::Key_Up:
+            case Qt::Key_Down:
+                sendKeyEvent(keyEvent);
+                break;
+            case Qt::Key_Left:
+                m_focusIndex--;
+                break;
+            case Qt::Key_Right:
+                m_focusIndex++;
+                break;
+            default:
+                pass = true;
         }
+
+        if (m_focusIndex < 0) {
+            m_focusIndex = 0;
+            pass = true;
+        } else if (m_focusIndex >= m_focusList.size()) {
+            m_focusIndex = m_focusList.size() - 1;
+            pass = true;
+        }
+        if (pass) {
+            sendKeyEvent(keyEvent);
+        }
+
+        if (m_focusList.at(m_focusIndex) == listSearchLeft) kDebug() << " listSearchLeft";
+        if (m_focusList.at(m_focusIndex) == passagewayApplications) kDebug() << " passagewayApplications";
+        if (m_focusList.at(m_focusIndex) == listComputerLeft) kDebug() << " listComputerLeft";
+        if (m_focusList.at(m_focusIndex) == listComputerRight) kDebug() << " listComputerRight";
+        if (m_focusList.at(m_focusIndex) == listContactsLeft) kDebug() << " listContactsLeft";
+        if (m_focusList.at(m_focusIndex) == listContactsRight) kDebug() << " listContactsRight";
+        if (m_focusList.at(m_focusIndex) == listDocumentsLeft) kDebug() << " listDocumentsLeft";
+        if (m_focusList.at(m_focusIndex) == listDocumentsRight) kDebug() << " listDocumentsRight";
+
+        editSearch->nativeWidget()->setFocus();
+        editSearch->setFocus();
     }
     return QWidget::eventFilter(object, event);
 }
