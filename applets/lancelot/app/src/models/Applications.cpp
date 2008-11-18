@@ -66,7 +66,7 @@ void Applications::load()
 
     // application name <-> service map for detecting duplicate entries
     QHash<QString,KService::Ptr> existingServices;
-    for (KServiceGroup::List::ConstIterator it = list.begin(); it != list.end(); ++it) {
+    for (KServiceGroup::List::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         ApplicationData data;
 
         const KSycocaEntry::Ptr p = (*it);
