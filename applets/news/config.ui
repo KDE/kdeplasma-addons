@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>404</width>
-    <height>261</height>
+    <width>449</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -15,8 +15,37 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <item>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" colspan="2" >
+    <widget class="QLabel" name="label_4" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>News</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <spacer name="horizontalSpacer_2" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>25</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" >
     <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
       <widget class="QLabel" name="label_2" >
@@ -65,7 +94,7 @@
      </item>
     </layout>
    </item>
-   <item>
+   <item row="2" column="1" >
     <spacer name="verticalSpacer_2" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -81,28 +110,41 @@
      </property>
     </spacer>
    </item>
-   <item>
+   <item row="3" column="0" colspan="2" >
+    <widget class="QLabel" name="label_3" >
+     <property name="font" >
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Information</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" >
     <widget class="QCheckBox" name="timestampCheckBox" >
      <property name="text" >
       <string>Show timestamps</string>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="5" column="1" >
     <widget class="QCheckBox" name="titlesCheckBox" >
      <property name="text" >
       <string>Show titles</string>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="6" column="1" >
     <widget class="QCheckBox" name="descriptionsCheckBox" >
      <property name="text" >
       <string>Show descriptions</string>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="8" column="1" >
     <widget class="QLabel" name="label" >
      <property name="font" >
       <font>
@@ -123,7 +165,7 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item row="9" column="1" >
     <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -132,6 +174,22 @@
       <size>
        <width>20</width>
        <height>60</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="1" >
+    <spacer name="verticalSpacer_3" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>5</height>
       </size>
      </property>
     </spacer>
