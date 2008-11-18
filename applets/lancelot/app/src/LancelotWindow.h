@@ -214,6 +214,7 @@ private:
 
     KConfig               m_config;
     KConfigGroup          m_mainConfig;
+    QString               m_activeSection;
 
     Lancelot::Instance  * instance;
 

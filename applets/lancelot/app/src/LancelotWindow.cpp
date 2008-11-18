@@ -456,6 +456,12 @@ QStringList LancelotWindow::sectionIcons()
 
 void LancelotWindow::sectionActivated(const QString & item)
 {
+    if (item == m_activeSection) {
+        return;
+    }
+
+    m_activeSection = item;
+
     foreach (Lancelot::ExtenderButton * button, sectionButtons) {
         button->setChecked(false);
     }
@@ -704,6 +710,13 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
                 lancelotHide(true);
             case Qt::Key_Tab:
                 return true;
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+                if (m_activeSection == "search") {
+                    if (listSearchLeft->selectedIndex() == -1) {
+                        listSearchLeft->initialSelection();
+                    }
+                }
             case Qt::Key_Up:
             case Qt::Key_Down:
                 sendKeyEvent(keyEvent);
