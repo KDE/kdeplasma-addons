@@ -5,8 +5,9 @@ Name[gl]=Apegar
 Name[pt]=Colagem
 Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
+Comment=Paste text/images to a remote server
 Type=Service
-Icon=accessories-pastebin
+Icon=edit-paste
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_pastebin
