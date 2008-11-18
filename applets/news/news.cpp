@@ -203,7 +203,8 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     QWidget *fWidget = new QWidget(0);
     feedsUi.setupUi(fWidget);
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage(widget, parent->windowTitle(), "application-rss+xml");
+    parent->addPage(widget, i18n("General"), icon());
+    parent->addPage(fWidget, i18n("Feeds"), "application-rss+xml");
 
     connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(const QString&)),
             this, SLOT(feedTextChanged(const QString&)));
