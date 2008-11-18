@@ -200,21 +200,23 @@ void News::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
+    QWidget *fWidget = new QWidget(0);
+    feedsUi.setupUi(fWidget);
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     parent->addPage(widget, parent->windowTitle(), "application-rss+xml");
 
-    connect(ui.feedComboBox, SIGNAL(editTextChanged(const QString&)),
+    connect(feedsUi.feedComboBox, SIGNAL(editTextChanged(const QString&)),
             this, SLOT(feedTextChanged(const QString&)));
     connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
-    connect(ui.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
-    connect(ui.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
+    connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
+    connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
 
     m_defaultFeeds = akregatorFeeds();
-    ui.feedComboBox->clear();
+    feedsUi.feedComboBox->clear();
     feedTextChanged(QString());
-    ui.feedList->clear();
+    feedsUi.feedList->clear();
     foreach (const QString& name, m_defaultFeeds.keys()) {
-        ui.feedComboBox->addItem(name);
+        feedsUi.feedComboBox->addItem(name);
     }
 
     ui.intervalSpinBox->setValue(m_interval);
@@ -223,42 +225,42 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     ui.titlesCheckBox->setChecked(m_showTitles);
     ui.descriptionsCheckBox->setChecked(m_showDescriptions);
 
-    ui.feedList->addItems(m_feeds);
+    feedsUi.feedList->addItems(m_feeds);
 }
 
 void News::feedTextChanged(const QString& text)
 {
-    ui.addFeed->setEnabled(!text.isEmpty());
+    feedsUi.addFeed->setEnabled(!text.isEmpty());
 }
 
 void News::addFeed()
 {
-    if (!ui.feedComboBox->currentText().isEmpty()) {
-        QString url = ui.feedComboBox->currentText();
+    if (!feedsUi.feedComboBox->currentText().isEmpty()) {
+        QString url = feedsUi.feedComboBox->currentText();
         if (m_defaultFeeds.keys().contains(url)) {
             url = m_defaultFeeds[url];
         }
         bool found = false;
-        for (int i = 0; i < ui.feedList->count(); i++) {
-            QString feed = ui.feedList->item(i)->text();
+        for (int i = 0; i < feedsUi.feedList->count(); i++) {
+            QString feed = feedsUi.feedList->item(i)->text();
             if (feed == url) {
                 found = true;
             }
         }
         if (!found) {
-            ui.feedList->addItem(url);
+            feedsUi.feedList->addItem(url);
         }
-        ui.removeFeed->setEnabled(true);
+        feedsUi.removeFeed->setEnabled(true);
     }
 }
 
 void News::removeFeed()
 {
-    int row = ui.feedList->currentRow();
+    int row = feedsUi.feedList->currentRow();
     if (row != -1) {
-        ui.feedList->takeItem(row);
-        if (ui.feedList->count() == 0) {
-            ui.removeFeed->setEnabled(false);
+        feedsUi.feedList->takeItem(row);
+        if (feedsUi.feedList->count() == 0) {
+            feedsUi.removeFeed->setEnabled(false);
         }
     }
 }
@@ -272,8 +274,8 @@ void News::configAccepted()
 
     m_feeds.clear();
     QString feed;
-    for (int i = 0; i < ui.feedList->count(); i++) {
-        feed = ui.feedList->item(i)->text();
+    for (int i = 0; i < feedsUi.feedList->count(); i++) {
+        feed = feedsUi.feedList->item(i)->text();
         if (m_defaultFeeds.keys().contains(feed)) {
             feed = m_defaultFeeds[feed];
         }

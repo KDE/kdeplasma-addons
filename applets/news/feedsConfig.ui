@@ -1,0 +1,102 @@
+<ui version="4.0" >
+ <class>feedsConfig</class>
+ <widget class="QWidget" name="feedsConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>502</width>
+    <height>228</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QLabel" name="label_1" >
+       <property name="text" >
+        <string>&amp;Add a feed:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>feedComboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KHistoryComboBox" name="feedComboBox" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="autoCompletion" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0" >
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="KListWidget" name="feedList" />
+     </item>
+     <item>
+      <layout class="QGridLayout" name="_2" >
+       <property name="spacing" >
+        <number>1</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="KPushButton" name="addFeed" >
+         <property name="text" >
+          <string>Add Feed</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="KPushButton" name="removeFeed" >
+         <property name="text" >
+          <string>Remove Feed</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KHistoryComboBox</class>
+   <extends>KComboBox</extends>
+   <header>khistorycombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

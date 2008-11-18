@@ -6,7 +6,7 @@ set(news_SRCS
     news.cpp
 )
 
-kde4_add_ui_files(news_SRCS config.ui)
+kde4_add_ui_files(news_SRCS config.ui feedsConfig.ui)
 
 kde4_add_plugin(plasma_applet_news ${news_SRCS})
 target_link_libraries(plasma_applet_news ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${QT_QTWEBKIT_LIBRARY})

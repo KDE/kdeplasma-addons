@@ -21,6 +21,7 @@
 #include <Plasma/Applet>
 #include <Plasma/DataEngine>
 #include "ui_config.h"
+#include "ui_feedsConfig.h"
 
 namespace Plasma {
   class WebView;
@@ -61,6 +62,7 @@ class News : public Plasma::Applet
         bool m_showTitles;
         bool m_showDescriptions;
         Ui::config ui;
+        Ui::feedsConfig feedsUi;
         QMap<QString, QString> m_defaultFeeds;
         Plasma::WebView* m_news;
         QGraphicsLinearLayout* m_layout;
