@@ -53,6 +53,7 @@ public:
 
 private:
     QPointF m_mousePos;
+    bool m_inSetSelected;
     ActionListView2ItemFactory * m_factory;
 
 private Q_SLOTS:
@@ -65,7 +66,7 @@ private Q_SLOTS:
 class ActionListView2ItemFactory: public CustomListItemFactory {
     Q_OBJECT
 public:
-    ActionListView2ItemFactory(ActionListViewModel * model);
+    ActionListView2ItemFactory(ActionListViewModel * model, Instance * instance);
     ~ActionListView2ItemFactory();
 
     L_Override virtual CustomListItem * itemForIndex(int index);
@@ -74,8 +75,6 @@ public:
     L_Override int itemCount() const;
     L_Override virtual int itemHeight(int index, Qt::SizeHint which) const;
 
-    bool categoriesActivable() const;
-    void setCategoriesActivable(bool value);
 
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model();
@@ -88,7 +87,15 @@ public:
 
     void activateSelectedItem();
     void selectRelItem(int rel);
+    void setSelectedItem(ActionListView2Item * item, bool selected = true);
     void activate(int index);
+
+    void setItemExtender(int index);
+
+    void setItemsGroup(WidgetGroup * group = NULL);
+    WidgetGroup * itemsGroup() const;
+    void setCategoriesGroup(WidgetGroup * group = NULL);
+    WidgetGroup * categoriesGroup() const;
 
 private:
     void reload();
@@ -106,8 +113,11 @@ Q_SIGNALS:
 private:
     ActionListViewModel * m_model;
     QList < ActionListView2Item * > m_items;
-    bool m_categoriesActivable : 1;
     ExtenderPosition m_extenderPosition;
+
+    WidgetGroup * m_itemsGroup;
+    WidgetGroup * m_categoriesGroup;
+    Instance * m_instance;
 
     ActionListView2Item * m_selectedItem;
     friend class ActionListView2Item;

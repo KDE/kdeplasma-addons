@@ -23,6 +23,7 @@ TODO: M09   (a) Speed up
 TODO: M12 m (a) switch list models to DataEngines and Services (depends on L08)
 TODO: M13 h (m) plug-ins for contacts (maybe more?) (depends on M12)
 TODO: M15 m (m) Reorder the favourites (depends L06)
+TODOL M16 m (e) Run as administrator context menu
 
 Library:
 TODO: L01   (e) check for memory leaks related to Private

@@ -322,5 +322,25 @@ void ScrollPane::setFlip(Plasma::Flip flip)
     d->layout->setFlip(flip);
 }
 
+void ScrollPane::scrollTo(QRectF rect)
+{
+    QSizeF viewportSize = currentViewportSize();
+    QSizeF scrollableSize = d->widget->fullSize();
+
+    // Vertical scroll
+    if (d->vertical->value() > rect.top()) {
+        scrollVertical(rect.top());
+    } else if (d->vertical->value() + viewportSize.height() < rect.bottom()) {
+        scrollVertical(rect.top());
+    }
+
+    // Horizontal scroll
+    if (d->horizontal->value() > rect.top()) {
+        scrollHorizontal(rect.top());
+    } else if (d->horizontal->value() + viewportSize.height() < rect.bottom()) {
+        scrollHorizontal(rect.top());
+    }
+}
+
 } // namespace Lancelot
 

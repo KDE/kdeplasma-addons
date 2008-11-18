@@ -72,22 +72,27 @@ public:
 
     /**
      * @param the name of the property
-     * @returns whether this group has the specified property
-     *          set
+     * @returns whether this group has the specified property set
      */
     bool hasProperty(const QString & property) const;
 
     /**
      * @param the name of the property
-     * @returns the value of the specified property set
+     * @returns the value of the specified property
      */
     QVariant property(const QString & property) const;
 
     /**
-     * Sets the value of the specified property set
+     * Sets the value of the specified property
      * @param the name of the property
      */
     void setProperty(const QString & property, const QVariant & value);
+
+    /**
+     * Clears the value of the specified property
+     * @param the name of the property
+     */
+    void clearProperty(const QString & property);
 
     /**
      * Background SVG image is one of the common properties, so

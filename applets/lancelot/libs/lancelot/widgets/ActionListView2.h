@@ -48,19 +48,16 @@ public:
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model() const;
 
-    void setCategoriesActivable(bool value);
-    bool categoriesActivable() const;
-
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
 
-    void setItemsGroup(WidgetGroup * group = NULL) {};
-    void setItemsGroupByName(const QString & group) {};
-    WidgetGroup * itemsGroup() const {};
+    void setItemsGroup(WidgetGroup * group = NULL);
+    void setItemsGroupByName(const QString & group);
+    WidgetGroup * itemsGroup() const;
 
-    void setCategoriesGroup(WidgetGroup * group = NULL) {};
-    void setCategoriesGroupByName(const QString & group) {};
-    WidgetGroup * categoriesGroup() const {};
+    void setCategoriesGroup(WidgetGroup * group = NULL);
+    void setCategoriesGroupByName(const QString & group);
+    WidgetGroup * categoriesGroup() const;
 
     // L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();

@@ -158,6 +158,12 @@ public:
      */
     void setFlip(Plasma::Flip flip);
 
+    /**
+     * Ensures that the specified area is visible.
+     * @param rect area
+     */
+    void scrollTo(QRectF rect);
+
     L_Override virtual void setGeometry(const QRectF & rect);
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);

@@ -24,7 +24,7 @@ namespace Lancelot {
 
 //> ActionListView2Item
 ActionListView2Item::ActionListView2Item(ActionListView2ItemFactory * factory)
-    : ExtenderButton(), m_factory(factory)
+    : ExtenderButton(), m_factory(factory), m_inSetSelected(false)
 {
     connect(this, SIGNAL(mouseHoverEnter()),
             this, SLOT(select()));
@@ -50,24 +50,19 @@ void ActionListView2Item::deselect()
 
 void ActionListView2Item::setSelected(bool selected)
 {
+    if (m_inSetSelected) return;
+    m_inSetSelected = true;
+
     setHovered(selected);
 
+    m_factory->setSelectedItem(this, selected);
+
     if (!selected) {
-        if (m_factory->m_selectedItem == this) {
-            m_factory->m_selectedItem = NULL;
-        }
         hoverLeaveEvent(NULL);
     } else {
-        if (m_factory->m_selectedItem == this) {
-            return;
-        } else {
-            if (m_factory->m_selectedItem) {
-                m_factory->m_selectedItem->setSelected(false);
-            }
-            m_factory->m_selectedItem = this;
-        }
         hoverEnterEvent(NULL);
     }
+    m_inSetSelected = false;
 }
 
 bool ActionListView2Item::isSelected() const
@@ -98,10 +93,14 @@ void ActionListView2Item::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 //<
 
 //> ActionListView2ItemFactory
-ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model) //>
-    : m_model(NULL), m_categoriesActivable(false),
-      m_extenderPosition(NoExtender), m_selectedItem(NULL)
+ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model, Instance * instance) //>
+    : m_model(NULL),
+      m_extenderPosition(NoExtender), m_selectedItem(NULL),
+      m_itemsGroup(NULL), m_categoriesGroup(NULL),
+      m_instance(instance)
 {
+    setItemsGroup(NULL);
+    setCategoriesGroup(NULL);
     setModel(model);
 } //<
 
@@ -145,13 +144,15 @@ CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
     } else {
         kDebug() << "Creating new one";
         item = new ActionListView2Item(this);
-        item->setExtenderPosition(m_extenderPosition);
+        item->setGroup((m_model->isCategory(index))
+                ? m_categoriesGroup : m_itemsGroup);
         reload = true;
         while (index >= m_items.size()) {
             m_items.append(NULL);
             kDebug() << "Extending items list to fit item";
         }
         m_items[index] = item;
+        setItemExtender(index);
         connect(item, SIGNAL(activated()),
                 this, SLOT(itemActivated()));
     }
@@ -166,18 +167,63 @@ CustomListItem * ActionListView2ItemFactory::itemForIndex(int index,
         item->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
         if (m_model->isCategory(index)) {
-            if (m_categoriesActivable) {
-                item->setGroupByName("ActionListView-CategoriesPass");
-            } else {
-                item->setGroupByName("ActionListView-Categories");
-            }
+            item->setGroup(m_categoriesGroup);
             item->setIconSize(QSize(20, 20));
         } else {
-            item->setGroupByName("ActionListView-Items");
+            item->setGroup(m_itemsGroup);
         }
     }
 
     return item;
+} //<
+
+void ActionListView2ItemFactory::setItemsGroup(WidgetGroup * group) //>
+{
+    if (group == NULL) {
+        group = m_instance->group("ActionListView-Items");
+    }
+
+    if (group == m_itemsGroup) return;
+
+    m_itemsGroup = group;
+
+    int i = 0;
+    foreach(ActionListView2Item * item, m_items) {
+        if (!(m_model->isCategory(i))) {
+            item->setGroup(group);
+        }
+        i++;
+    }
+}
+
+WidgetGroup * ActionListView2ItemFactory::itemsGroup() const //>
+{
+    return m_itemsGroup;
+} //<
+
+void ActionListView2ItemFactory::setCategoriesGroup(WidgetGroup * group) //>
+{
+    if (group == NULL) {
+        group = m_instance->group("ActionListView-Categories");
+    }
+
+    if (group == m_itemsGroup) return;
+
+    m_categoriesGroup = group;
+
+    int i = 0;
+    foreach(ActionListView2Item * item, m_items) {
+        if (m_model->isCategory(i)) {
+            item->setGroup(group);
+            setItemExtender(i);
+        }
+        i++;
+    }
+}
+
+WidgetGroup * ActionListView2ItemFactory::categoriesGroup() const //>
+{
+    return m_categoriesGroup;
 } //<
 
 void ActionListView2ItemFactory::itemActivated() //>
@@ -227,30 +273,6 @@ int ActionListView2ItemFactory::itemHeight(int index, Qt::SizeHint which) const 
                 return 70;
             default:
                 return 55;
-        }
-    }
-} //<
-
-bool ActionListView2ItemFactory::categoriesActivable() const //>
-{
-    return m_categoriesActivable;
-} //<
-
-void ActionListView2ItemFactory::setCategoriesActivable(bool value) //>
-{
-    if (value == m_categoriesActivable) {
-        return;
-    }
-
-    m_categoriesActivable = value;
-
-    for (int i = 0; i < m_items.size(); i++) {
-        if (m_model->isCategory(i)) {
-            if (m_categoriesActivable) {
-                m_items[i]->setGroupByName("ActionListView-CategoriesPass");
-            } else {
-                m_items[i]->setGroupByName("ActionListView-Categories");
-            }
         }
     }
 } //<
@@ -342,8 +364,28 @@ void ActionListView2ItemFactory::setExtenderPosition(ExtenderPosition position) 
     }
 
     m_extenderPosition = position;
-    foreach (ActionListView2Item * item, m_items) {
-        item->setExtenderPosition(position);
+    for (int i = 0; i < m_items.count(); i++) {
+        setItemExtender(i);
+    }
+} //<
+
+void ActionListView2ItemFactory::setItemExtender(int index) //>
+{
+    ActionListView2Item * item = m_items.at(index);
+    if (m_model->isCategory(index)) kDebug() << "####"
+        << m_categoriesGroup->name()
+        << m_categoriesGroup->hasProperty("ExtenderPosition")
+        << m_categoriesGroup->property("ExtenderPosition")
+        << QVariant(NoExtender);
+    if (m_model->isCategory(index)
+            && m_categoriesGroup->hasProperty("ExtenderPosition")
+            && m_categoriesGroup->property("ExtenderPosition") == QVariant(NoExtender)) {
+        item->setExtenderPosition(NoExtender);
+        kDebug() << "#### no extender for " + m_model->title(index);
+    } else {
+        item->setExtenderPosition(m_extenderPosition);
+        if (m_model->isCategory(index)) kDebug() << "####"
+                << " yes extender for " + m_model->title(index);
     }
 } //<
 
@@ -401,12 +443,23 @@ void ActionListView2ItemFactory::activateSelectedItem() //>
     activate(m_items.indexOf(m_selectedItem));
 } //<
 
+void ActionListView2ItemFactory::setSelectedItem(ActionListView2Item * item, bool selected) //>
+{
+    if (m_selectedItem == item && !selected) {
+        m_selectedItem = false;
+    } else if (m_selectedItem != item && selected) {
+        if (m_selectedItem) {
+            m_selectedItem->setSelected(false);
+        }
+        m_selectedItem = item;
+        m_selectedItem->setSelected(true);
+    }
+} //<
+
 void ActionListView2ItemFactory::selectRelItem(int rel) //>
 {
-    int index;
-    if (!m_selectedItem) {
-        index == -1;
-    } else {
+    int index = -1;
+    if (m_selectedItem) {
         index = m_items.indexOf(m_selectedItem);
     }
 
@@ -456,10 +509,11 @@ ActionListView2::ActionListView2(QGraphicsItem * parent) //>
 } //<
 
 ActionListView2::ActionListView2(ActionListViewModel * model, QGraphicsItem * parent) //>
-    : CustomListView(new ActionListView2ItemFactory(model), parent),
+    : CustomListView(parent),
       d(new Private())
 {
-    d->itemFactory = (ActionListView2ItemFactory *) list()->itemFactory();
+    setModel(model);
+    // d->itemFactory = (ActionListView2ItemFactory *) list()->itemFactory();
     connect(
             d->itemFactory, SIGNAL(activated(int)),
             this, SIGNAL(activated(int)));
@@ -476,25 +530,10 @@ ActionListView2::~ActionListView2() //>
     delete d;
 } //<
 
-void ActionListView2::setCategoriesActivable(bool value) //>
-{
-    if (d->itemFactory) {
-        d->itemFactory->setCategoriesActivable(value);
-    }
-} //<
-
-bool ActionListView2::categoriesActivable() const //>
-{
-    if (d->itemFactory) {
-        return d->itemFactory->categoriesActivable();
-    }
-    return false;
-} //<
-
 void ActionListView2::setModel(ActionListViewModel * model) //>
 {
     if (!d->itemFactory) {
-        d->itemFactory = new ActionListView2ItemFactory(model);
+        d->itemFactory = new ActionListView2ItemFactory(model, instance());
         list()->setItemFactory(d->itemFactory);
     } else {
         d->itemFactory->setModel(model);
@@ -540,9 +579,58 @@ ExtenderPosition ActionListView2::extenderPosition() const //>
     return d->itemFactory->extenderPosition();
 } //<
 
+void ActionListView2::setItemsGroup(WidgetGroup * group) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+
+    d->itemFactory->setItemsGroup(group);
+} //<
+
+void ActionListView2::setItemsGroupByName(const QString & group) //>
+{
+    setItemsGroup(instance()->group(group));
+} //<
+
+WidgetGroup * ActionListView2::itemsGroup() const //>
+{
+    if (!d->itemFactory) {
+        return NULL;
+    }
+
+    return d->itemFactory->itemsGroup();
+} //<
+
+void ActionListView2::setCategoriesGroup(WidgetGroup * group) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+
+    d->itemFactory->setCategoriesGroup(group);
+} //<
+
+void ActionListView2::setCategoriesGroupByName(const QString & group) //>
+{
+    setCategoriesGroup(instance()->group(group));
+} //<
+
+WidgetGroup * ActionListView2::categoriesGroup() const //>
+{
+    if (!d->itemFactory) {
+        return NULL;
+    }
+
+    return d->itemFactory->categoriesGroup();
+} //<
+
 void ActionListView2::groupUpdated() //>
 {
     Widget::groupUpdated();
+
+    instance()->group("ActionListView-Categories")
+        ->setProperty("ExtenderPosition", QVariant(NoExtender));
 
     if (group()->hasProperty("ExtenderPosition")) {
         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));

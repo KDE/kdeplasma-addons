@@ -94,8 +94,8 @@ public:
         next(Step("", QIcon(), atlasModel));
 
         lists.at(0)->setExtenderPosition(Lancelot::LeftExtender);
-        lists.at(0)->setCategoriesActivable(false);
-        lists.at(1)->setCategoriesActivable(true);
+        // lists.at(0)->setCategoriesActivable(false);
+        // lists.at(1)->setCategoriesActivable(true);
     }
 
     ~Private()
@@ -193,7 +193,7 @@ public:
         }
 
         list->setCategoriesGroupByName("ActionListView-CategoriesPass");
-        list->setCategoriesActivable(true);
+        //list->setCategoriesActivable(true);
 
         lists.append(list);
         path.append(step);

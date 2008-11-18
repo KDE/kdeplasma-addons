@@ -90,10 +90,12 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
     d->instance = instance;
     d->name = name;
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
+    qDebug() << "Created group " << d->name;
 }
 
 WidgetGroup::~WidgetGroup()
 {
+    qDebug() << "Destroyed group " << d->name;
     delete d;
 }
 
@@ -138,6 +140,11 @@ void WidgetGroup::setProperty(const QString & property, const QVariant & value)
     d->properties[property] = value;
 }
 
+void WidgetGroup::clearProperty(const QString & property)
+{
+    d->properties.remove(property);
+}
+
 QString WidgetGroup::name() const
 {
     return d->name;
@@ -164,6 +171,7 @@ const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
 void WidgetGroup::load(bool full)
 {
     if (d->loaded && !full) return;
+    qDebug() << "Reloading group " << d->name << full << d->loaded;
     d->loaded = true;
 
     d->hasBackgroundColor = false;
@@ -343,7 +351,7 @@ Instance::~Instance()
     }
     delete d->confMain;
     delete d->confTheme;
- 
+
     delete d;
 }
 
