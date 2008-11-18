@@ -62,7 +62,7 @@ public:
     Private(PassagewayViewModel * entranceModel,
             PassagewayViewModel * atlasModel,
             PassagewayView * p)
-      : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p)
+      : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p), focusIndex(0)
     {
         parent->setLayout(layout = new NodeLayout());
 
@@ -92,10 +92,11 @@ public:
 
         next(Step("", QIcon(), entranceModel));
         next(Step("", QIcon(), atlasModel));
+        focusIndex = 0;
 
         lists.at(0)->setExtenderPosition(Lancelot::LeftExtender);
-        // lists.at(0)->setCategoriesActivable(false);
-        // lists.at(1)->setCategoriesActivable(true);
+        lists.at(0)->setCategoriesActivable(false);
+        lists.at(1)->setCategoriesActivable(true);
     }
 
     ~Private()
@@ -193,9 +194,16 @@ public:
         }
 
         list->setCategoriesGroupByName("ActionListView-CategoriesPass");
-        //list->setCategoriesActivable(true);
+        list->setCategoriesActivable(true);
 
+        // if (lists.count() > 0) {
+        //     lists.last()->clearSelection();
+        // }
+
+        focusIndex = lists.count();
         lists.append(list);
+
+        list->initialSelection();
         path.append(step);
 
         buttonsLayout->addItem(button);
@@ -242,6 +250,7 @@ public:
     QList < Step * > path;
     QList < ExtenderButton * > buttons;
     QList < ActionListView * > lists;
+    int focusIndex;
 
     NodeLayout          * layout;
     ColumnLayout::ColumnSizer   * sizer;
@@ -274,26 +283,26 @@ void PassagewayView::pathButtonActivated()
     }
 }
 
-void PassagewayView::listItemActivated(int index)
+void PassagewayView::listItemActivated(int index, int listIndex)
 {
-    int activatedListIndex = d->lists.indexOf((ActionListView *)sender());
+    if (listIndex == -1) {
+        listIndex = d->lists.indexOf((ActionListView *)sender());
+    }
 
-    if (activatedListIndex == -1) {
+    if (listIndex == -1) {
         return;
     }
 
-    if (activatedListIndex == 0) {
+    if (listIndex == 0) {
         // something in the entrance is clicked
         // we don't want to remove the first level
         // of atlas as well
-        d->back(d->lists.size() - activatedListIndex - 2);
+        d->back(d->lists.size() - listIndex - 2);
     } else {
-        d->back(d->lists.size() - activatedListIndex - 1);
+        d->back(d->lists.size() - listIndex - 1);
     }
 
-    kDebug() << activatedListIndex;
-
-    PassagewayViewModel * model = d->path.at(activatedListIndex)->model;
+    PassagewayViewModel * model = d->path.at(listIndex)->model;
     if (model) {
         model = model->child(index);
         if (model) {
@@ -416,6 +425,7 @@ void PassagewayView::setColumnLimit(int limit)
 
 void PassagewayView::reset()
 {
+    d->focusIndex = 0;
     if (d->lists.size() > 2) {
         d->back(d->lists.size() - 2);
     }
@@ -427,6 +437,74 @@ void PassagewayView::groupUpdated()
 
     if (group()->hasProperty("ActivationMethod")) {
         setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
+    }
+}
+
+void PassagewayView::clearSelection()
+{
+
+}
+
+void PassagewayView::keyPressEvent(QKeyEvent * event)
+{
+    // We should open a submenu on right arrow pressed,
+    // but not activate item if not a submenu
+    if (event->key() == Qt::Key_Right) {
+        PassagewayViewModel * model = d->path.at(d->focusIndex)->model;
+        int index = d->lists.at(d->focusIndex)->selectedIndex();
+        if (index >= 0 && model && (model = model->child(index))) {
+            // d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
+            listItemActivated(index, d->focusIndex);
+            return;
+        }
+    }
+
+    // And we should shift left if user moved left
+    if (event->key() == Qt::Key_Left) {
+        if (d->focusIndex < d->lists.count() - 1 && d->focusIndex != 0) {
+            d->back(1);
+        }
+    }
+
+    // Normal handling
+    bool pass = false;
+    int oindex = d->focusIndex;
+
+    switch (event->key()) {
+        case Qt::Key_Up:
+        case Qt::Key_Down:
+            d->lists.at(d->focusIndex)->keyPressEvent(event);
+            break;
+        case Qt::Key_Left:
+            d->focusIndex--;
+            break;
+        case Qt::Key_Right:
+            d->focusIndex++;
+            break;
+        default:
+            pass = true;
+    }
+
+
+    if (d->focusIndex < 0) {
+        d->focusIndex = 0;
+        pass = true;
+    } else if (d->focusIndex >= d->lists.size()) {
+        d->focusIndex = d->lists.size() - 1;
+        pass = true;
+    }
+
+    if (oindex != d->focusIndex) {
+        if (oindex == 0 || oindex > d->focusIndex) {
+            d->lists.at(oindex)->clearSelection();
+        }
+        if (d->focusIndex == 0 || oindex < d->focusIndex) {
+            d->lists.at(d->focusIndex)->initialSelection();
+        }
+    }
+
+    if (pass) {
+        d->lists.at(d->focusIndex)->keyPressEvent(event);
     }
 }
 

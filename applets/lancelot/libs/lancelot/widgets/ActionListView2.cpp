@@ -364,6 +364,11 @@ void ActionListView2ItemFactory::setExtenderPosition(ExtenderPosition position) 
     }
 
     m_extenderPosition = position;
+    updateExtenderPosition();
+} //<
+
+void ActionListView2ItemFactory::updateExtenderPosition() //>
+{
     for (int i = 0; i < m_items.count(); i++) {
         setItemExtender(i);
     }
@@ -372,20 +377,10 @@ void ActionListView2ItemFactory::setExtenderPosition(ExtenderPosition position) 
 void ActionListView2ItemFactory::setItemExtender(int index) //>
 {
     ActionListView2Item * item = m_items.at(index);
-    if (m_model->isCategory(index)) kDebug() << "####"
-        << m_categoriesGroup->name()
-        << m_categoriesGroup->hasProperty("ExtenderPosition")
-        << m_categoriesGroup->property("ExtenderPosition")
-        << QVariant(NoExtender);
-    if (m_model->isCategory(index)
-            && m_categoriesGroup->hasProperty("ExtenderPosition")
-            && m_categoriesGroup->property("ExtenderPosition") == QVariant(NoExtender)) {
+    if (m_model->isCategory(index) && !m_categoriesActivable) {
         item->setExtenderPosition(NoExtender);
-        kDebug() << "#### no extender for " + m_model->title(index);
     } else {
         item->setExtenderPosition(m_extenderPosition);
-        if (m_model->isCategory(index)) kDebug() << "####"
-                << " yes extender for " + m_model->title(index);
     }
 } //<
 
@@ -443,10 +438,18 @@ void ActionListView2ItemFactory::activateSelectedItem() //>
     activate(m_items.indexOf(m_selectedItem));
 } //<
 
+void ActionListView2ItemFactory::clearSelection() //>
+{
+    if (m_selectedItem) {
+        setSelectedItem(m_selectedItem, false);
+    }
+}
+
 void ActionListView2ItemFactory::setSelectedItem(ActionListView2Item * item, bool selected) //>
 {
     if (m_selectedItem == item && !selected) {
-        m_selectedItem = false;
+        m_selectedItem->setSelected(false);
+        m_selectedItem = NULL;
     } else if (m_selectedItem != item && selected) {
         if (m_selectedItem) {
             m_selectedItem->setSelected(false);
@@ -483,19 +486,23 @@ void ActionListView2ItemFactory::selectRelItem(int rel) //>
         }
     }
 
-    int oindex = index;
-    while (m_model->isCategory(index)) {
-        index += rel;
-        if (index == oindex) return;
+    if (!m_categoriesActivable) {
+        int oindex = index;
+        while (m_model->isCategory(index)) {
+            index += rel;
+            if (index == oindex) return;
 
-        if (index < 0) {
-            index = m_items.count();
-        } else if (index >= m_items.count()) {
-            index = 0;
+            if (index < 0) {
+                index = m_items.count() - 1;
+            } else if (index >= m_items.count()) {
+                index = 0;
+            }
         }
     }
 
-    m_items.at(index)->setSelected();
+    if (index >= 0 && index < m_items.count()) {
+        m_items.at(index)->setSelected();
+    }
 } //<
 
 //<
@@ -642,9 +649,6 @@ void ActionListView2::groupUpdated() //>
 {
     Widget::groupUpdated();
 
-    instance()->group("ActionListView-Categories")
-        ->setProperty("ExtenderPosition", QVariant(NoExtender));
-
     if (group()->hasProperty("ExtenderPosition")) {
         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
     }
@@ -665,6 +669,37 @@ void ActionListView2::keyPressEvent(QKeyEvent * event) //>
     } else if (event->key() == Qt::Key_Up) {
         d->itemFactory->selectRelItem(-1);
     }
+} //<
+
+void ActionListView2::clearSelection() //>
+{
+    d->itemFactory->clearSelection();
+} //<
+
+void ActionListView2::initialSelection() //>
+{
+    d->itemFactory->clearSelection();
+    d->itemFactory->selectRelItem(+1);
+} //<
+
+int ActionListView2::selectedIndex() const //>
+{
+    if (!d->itemFactory->m_selectedItem) {
+        return -1;
+    }
+
+    return d->itemFactory->m_items.indexOf(d->itemFactory->m_selectedItem);
+} //>
+
+bool ActionListView2::areCategoriesActivable() const //>
+{
+    return d->itemFactory->m_categoriesActivable;
+} //<
+
+void ActionListView2::setCategoriesActivable(bool value) //>
+{
+    d->itemFactory->m_categoriesActivable = value;
+    d->itemFactory->updateExtenderPosition();
 } //<
 
 //<

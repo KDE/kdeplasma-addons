@@ -74,11 +74,14 @@ public:
     void setColumnLimit(int limit);
     void reset();
 
+    void clearSelection();
+
     L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();
+    L_Override virtual void keyPressEvent(QKeyEvent * event);
 
 protected Q_SLOTS:
-    virtual void listItemActivated(int index);
+    virtual void listItemActivated(int itemIndex, int listIndex = -1);
     virtual void pathButtonActivated();
 
 private:

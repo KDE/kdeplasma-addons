@@ -59,6 +59,13 @@ public:
     void setCategoriesGroupByName(const QString & group);
     WidgetGroup * categoriesGroup() const;
 
+    bool areCategoriesActivable() const;
+    void setCategoriesActivable(bool value);
+
+    void clearSelection();
+    void initialSelection();
+    int selectedIndex() const;
+
     // L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();
     L_Override virtual void keyPressEvent(QKeyEvent * event);

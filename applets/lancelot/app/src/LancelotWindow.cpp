@@ -464,6 +464,14 @@ void LancelotWindow::sectionActivated(const QString & item)
         sectionButtons[item]->setChecked(true);
     }
 
+    if (m_focusIndex >= 0 && m_focusIndex < m_focusList.count()) {
+        if (m_focusList.at(m_focusIndex) != passagewayApplications) {
+            ((Lancelot::ActionListView *) m_focusList.at(m_focusIndex))->clearSelection();
+        } else {
+            ((Lancelot::PassagewayView *) m_focusList.at(m_focusIndex))->clearSelection();
+        }
+    }
+
     m_focusList.clear();
     m_focusIndex = 0;
     kDebug() << item;
@@ -679,11 +687,9 @@ void LancelotWindow::sendKeyEvent(QKeyEvent * event)
     }
 
     if (passagewayApplications == m_focusList.at(m_focusIndex)) {
-
+        ((Lancelot::PassagewayView *) m_focusList.at(m_focusIndex))->keyPressEvent(event);
     } else {
-        Lancelot::ActionListView * list =
-            (Lancelot::ActionListView *) m_focusList.at(m_focusIndex);
-        list->keyPressEvent(event);
+        ((Lancelot::ActionListView *) m_focusList.at(m_focusIndex))->keyPressEvent(event);
     }
 }
 
@@ -691,6 +697,7 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
     if (event->type() == QEvent::KeyPress) {
         bool pass = false;
+        int oindex = m_focusIndex;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
         switch (keyEvent->key()) {
             case Qt::Key_Escape:
@@ -718,18 +725,20 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
             m_focusIndex = m_focusList.size() - 1;
             pass = true;
         }
+
+        if (oindex != m_focusIndex) {
+            if (m_focusList.at(oindex) != passagewayApplications) {
+                ((Lancelot::ActionListView *) m_focusList.at(oindex))->clearSelection();
+            }
+            if (m_focusList.at(m_focusIndex) != passagewayApplications) {
+                ((Lancelot::ActionListView *) m_focusList.at(m_focusIndex))->initialSelection();
+            }
+        }
+
         if (pass) {
             sendKeyEvent(keyEvent);
         }
 
-        if (m_focusList.at(m_focusIndex) == listSearchLeft) kDebug() << " listSearchLeft";
-        if (m_focusList.at(m_focusIndex) == passagewayApplications) kDebug() << " passagewayApplications";
-        if (m_focusList.at(m_focusIndex) == listComputerLeft) kDebug() << " listComputerLeft";
-        if (m_focusList.at(m_focusIndex) == listComputerRight) kDebug() << " listComputerRight";
-        if (m_focusList.at(m_focusIndex) == listContactsLeft) kDebug() << " listContactsLeft";
-        if (m_focusList.at(m_focusIndex) == listContactsRight) kDebug() << " listContactsRight";
-        if (m_focusList.at(m_focusIndex) == listDocumentsLeft) kDebug() << " listDocumentsLeft";
-        if (m_focusList.at(m_focusIndex) == listDocumentsRight) kDebug() << " listDocumentsRight";
 
         editSearch->nativeWidget()->setFocus();
         editSearch->setFocus();

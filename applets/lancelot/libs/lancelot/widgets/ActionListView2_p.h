@@ -96,6 +96,8 @@ public:
     WidgetGroup * itemsGroup() const;
     void setCategoriesGroup(WidgetGroup * group = NULL);
     WidgetGroup * categoriesGroup() const;
+    void clearSelection();
+    void updateExtenderPosition();
 
 private:
     void reload();
@@ -119,8 +121,11 @@ private:
     WidgetGroup * m_categoriesGroup;
     Instance * m_instance;
 
+    bool m_categoriesActivable;
+
     ActionListView2Item * m_selectedItem;
     friend class ActionListView2Item;
+    friend class ActionListView2;
 };
 //<
 
