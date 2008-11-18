@@ -6,20 +6,5 @@ Actions=Preview;
 
 [Desktop Action Preview]
 Name=Preview This File
-Name[de]=Vorschau für diese Datei anzeigen
-Name[el]=Προεπισκόπηση του αρχείου αυτού
-Name[fr]=Prévisualiser ce fichier
-Name[gl]=Antever este ficheiro
-Name[nds]=Disse Datei vörweg wiesen
-Name[nl]=Dit bestand voorvertonen
-Name[pt]=Antever este ficheiro
-Name[pt_BR]=Visualizar este arquivo
-Name[ru]=Просматировать этот файл
-Name[sv]=Förhandsgranska filen
-Name[tr]=Bu dosyayı önizle
-Name[uk]=Перегляд цього файла
-Name[x-test]=xxPreview this filexx
-Name[zh_CN]=预览此文件
-Name[zh_TW]=預覽此檔案
 Icon=previewer
 Exec=qdbus org.kde.plasma /Previewer org.kde.Previewer.openFile %u
