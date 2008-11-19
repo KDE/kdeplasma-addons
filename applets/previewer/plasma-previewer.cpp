@@ -251,16 +251,26 @@ void Previewer::removeCurrentFromHistory()
     int index = m_previewHistory.indexOf(cur);
     kDebug() << index;
 
-    if (index != -1 && KMessageBox::questionYesNo(m_dialog, i18n("Are you sure you want to remove:\n%1", cur.pathOrUrl()), 
-                                                  i18n("Deleting File")) == KMessageBox::Yes) {
+    m_dialog->setWindowFlags(Qt::FramelessWindowHint);
+    m_dialog->show();
+
+    int buttonCode = KMessageBox::questionYesNo(m_dialog, i18n("Are you sure you want to remove:\n%1", cur.pathOrUrl()), 
+                                                  i18n("Deleting File"));
+
+    m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
+
+    if (index != -1 && buttonCode == KMessageBox::Yes) {
         closeFile(false);
         delete m_part;
         m_part = 0;
         m_dialog->hide();
         removeRecent(index);
         KIO::del(cur);
+        m_previewWidget->setItemsList(m_previewHistory);
+        return;
     }
-    m_previewWidget->setItemsList(m_previewHistory);
+
+    m_dialog->show();
 }
 
 void Previewer::dropEvent(QGraphicsSceneDragDropEvent *event)
