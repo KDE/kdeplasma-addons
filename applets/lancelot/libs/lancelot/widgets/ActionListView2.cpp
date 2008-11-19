@@ -97,7 +97,7 @@ ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * mod
     : m_model(NULL),
       m_extenderPosition(NoExtender), m_selectedItem(NULL),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
-      m_instance(instance)
+      m_instance(instance), m_categoriesActivable(false)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
