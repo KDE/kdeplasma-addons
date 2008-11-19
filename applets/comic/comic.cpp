@@ -147,9 +147,6 @@ void ComicApplet::init()
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( scaleToContent() ) );
 
-    mFullViewWidget = new FullViewWidget();
-    mFullViewWidget->hide();
-
     Solid::Networking::Status status = Solid::Networking::status();
     if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
         updateComic();
@@ -195,10 +192,14 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     updateButtons();
     updateContextMenu();
 
+    Plasma::ToolTipContent toolTipData;
+    if ( !mAdditionalText.isEmpty() ) {
+        toolTipData = Plasma::ToolTipContent( mAdditionalText, QString() );
+    }
+    Plasma::ToolTipManager::self()->setContent( this, toolTipData );
+
     if ( !mImage.isNull() ) {
         updateSize();
-        prepareGeometryChange();
-        updateGeometry();
         update();
     }
 }
@@ -353,6 +354,10 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             }
         }
     } else if ( event->button() == Qt::MidButton ) { // handle full view
+        if ( !mFullViewWidget ) {
+            mFullViewWidget = new FullViewWidget();
+        }
+
         if ( !mFullViewWidget->isVisible() ) {
             mFullViewWidget->setImage( mImage );
             mFullViewWidget->adaptPosition( mapToScene( 0, 0 ).toPoint() );
@@ -365,7 +370,9 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 
 void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 {
-    mFullViewWidget->hide();
+    if (mFullViewWidget) {
+        mFullViewWidget->hide();
+    }
 
     Applet::mouseReleaseEvent( event );
 }
@@ -467,9 +474,6 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
 
     mIdealSize = size() - contentsRect().size() +
                  mImage.size() + QSizeF( leftImageGap + rightImageGap, urlHeight + topHeight );
-
-    Plasma::ToolTipContent toolTipData(mAdditionalText, QString());
-    Plasma::ToolTipManager::self()->setContent( this, toolTipData );
 }
 
 QList<QAction*> ComicApplet::contextualActions()
