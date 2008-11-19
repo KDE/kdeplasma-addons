@@ -101,6 +101,7 @@ QGraphicsWidget* WeatherStation::graphicsWidget()
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
+    //kDebug() << data;
     Q_UNUSED(source);
     setTemperature(data["Temperature"].toString(), data["Temperature Unit"].toInt());
     setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
@@ -162,19 +163,30 @@ void WeatherStation::setLCDIcon()
 void WeatherStation::setPressure(const QString& pressure, int unit,
                                  const QString& tendency)
 {
-    // TODO Convert "Current Conditions" to picture instead of using pressure
-    // It seems that those are just strings that come from weather source so
-    // it might be hard to convert them to a picture.
+    // TODO Use "Condition Icon" in 4.3 for this
     qreal p = pressure.toDouble();
-    qreal t = tendency.toDouble();
     QStringList current;
 
+    // pressure
     if (unit == WeatherUtils::Millibars) {
         unit = WeatherUtils::Hectopascals;
     }
-    p = WeatherUtils::convert(p, unit, WeatherUtils::Kilopascals);
-    t = WeatherUtils::convert(t, unit, WeatherUtils::Kilopascals);
-    //kDebug() << p << t << unit <<  WeatherUtils::getUnitString(unit, true);
+    if (unit != WeatherUtils::Kilopascals) {
+        p = WeatherUtils::convert(p, unit, WeatherUtils::Kilopascals);
+    }
+
+    // tendency
+    qreal t = tendency.toDouble();
+    if (t != 0.0) {
+        if (unit != WeatherUtils::Kilopascals) {
+            t = WeatherUtils::convert(t, unit, WeatherUtils::Kilopascals);
+        }
+    } else if (tendency == "rising") {
+        t = 0.75;
+    } else if (tendency == "falling") {
+        t = -0.75;
+    }
+    //kDebug() << pressure << p << tendency << t << unit <<  WeatherUtils::getUnitString(unit, true);
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
     if (p > 103.0) {
