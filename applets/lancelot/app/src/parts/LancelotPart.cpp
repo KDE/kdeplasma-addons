@@ -447,6 +447,10 @@ void LancelotPart::setupAppletUi(bool force)
                     m_icon, SIGNAL(activated()),
                     this, SLOT(iconActivated())
                    );
+            connect(
+                    m_icon, SIGNAL(clicked()),
+                    this, SLOT(iconActivated())
+                   );
 
             m_dialog->setLayout(layout);
             m_dialog->adjustSize();
