@@ -72,6 +72,7 @@ Frame::~Frame()
 
 void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
+    Q_UNUSED(name);
     QDate mCurrentDate = QDate::currentDate();
     const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
 
@@ -164,7 +165,7 @@ void Frame::slotOpenPicture()
     }
 
     if (url.path() != "Default") {
-        KRun* startUrl = new KRun(url, 0);
+        new KRun(url, 0);
     }
 }
 
