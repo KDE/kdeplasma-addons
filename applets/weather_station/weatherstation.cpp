@@ -259,12 +259,17 @@ void WeatherStation::setWind(const QString& speed, int fromUnit, const QString& 
             toUnit = WeatherUtils::MetersPerSecond;
             break;
     }
+    if (fromUnit == WeatherUtils::KilometersAnHour) {
+        fromUnit = WeatherUtils::Kilometers;
+    }
 
     double windSpeed;
     if(fromUnit != toUnit)
         windSpeed = WeatherUtils::convert(speed.toDouble(), fromUnit, toUnit);
     else
         windSpeed = speed.toDouble();
+
+    //kDebug() << speed << windSpeed << fromUnit << dir << direction;
 
     QString unit(WeatherUtils::getUnitString(toUnit, true));
     m_lcd->setNumber("wind_speed", QString::number(windSpeed, 'f', 1));
