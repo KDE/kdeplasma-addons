@@ -215,7 +215,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage( mConfigWidget, parent->windowTitle(), icon() );
+    parent->addPage( mConfigWidget, i18n("General"), icon() );
 
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );

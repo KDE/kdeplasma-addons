@@ -102,7 +102,7 @@ void Luna::createConfigurationInterface(KConfigDialog *parent)
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, parent->windowTitle(), icon());
+    parent->addPage(widget, i18n("General"), icon());
 
     ui.northenRadio->setChecked(northHemisphere);
     ui.southernRadio->setChecked(!northHemisphere);

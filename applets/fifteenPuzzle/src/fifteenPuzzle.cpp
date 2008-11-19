@@ -83,7 +83,7 @@ void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
   parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
   connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-  parent->addPage(m_configDialog, parent->windowTitle(), icon());
+  parent->addPage(m_configDialog, i18n("General"), icon());
 
   if (m_usePlainPieces) {
     m_configDialog->ui.rb_identical->setChecked(true);

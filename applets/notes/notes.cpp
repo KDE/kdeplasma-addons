@@ -271,7 +271,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage(widget, parent->windowTitle(), "notes");
+    parent->addPage(widget, i18n("General"), "notes");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 

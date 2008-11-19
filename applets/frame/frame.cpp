@@ -250,7 +250,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
         item->setFlags(item->flags() | Qt::ItemIsEnabled);
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage(m_configDialog, parent->windowTitle(), icon());
+    parent->addPage(m_configDialog, i18n("General"), icon());
     parent->setDefaultButton(KDialog::Ok);
     parent->showButtonSeparator(true);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));

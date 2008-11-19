@@ -443,7 +443,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
     configUi.checkIncludeFriends->setCheckState(m_includeFriends ? Qt::Checked : Qt::Unchecked);
 
-    parent->addPage(configWidget, parent->windowTitle(), icon());
+    parent->addPage(configWidget, i18n("General"), icon());
 }
 
 void Twitter::configAccepted()

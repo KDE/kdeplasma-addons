@@ -123,7 +123,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     QWidget *widget = new QWidget;
     ui.setupUi(widget);
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, parent->windowTitle(), Applet::icon());
+    parent->addPage(widget, i18n("General"), Applet::icon());
     ui.textServer->setCurrentIndex(m_textBackend);
     ui.imageServer->setCurrentIndex(m_imageBackend);
 }

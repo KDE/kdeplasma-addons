@@ -333,7 +333,7 @@ void IncomingMsg::createConfigurationInterface(KConfigDialog *dialog)
     connect(dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    dialog->addPage(widget, dialog->windowTitle(), icon());
+    dialog->addPage(widget, i18n("General"), icon());
 }
 
 
