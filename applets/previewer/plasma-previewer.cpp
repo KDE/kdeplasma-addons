@@ -149,11 +149,14 @@ void Previewer::setupPreviewDialog()
 void Previewer::stayOnTop(bool top)
 {
     setupPreviewDialog();
+    bool visibility = m_dialog->isVisible();
     if (top) {
         m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
     } else {
         m_dialog->setWindowFlags(Qt::FramelessWindowHint);
     }
+
+    m_dialog->setVisible(visibility);
 }
 
 void Previewer::openFile(KUrl u)
