@@ -6,6 +6,11 @@ Name[pt]=Colagem
 Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
 Comment=Paste text/images to a remote server
+Comment[el]=Επικόλληση κειμένου/εικόνων σε έναν απομακρυσμένο εξυπηρετητή
+Comment[pt]=Colar o texto/imagens num servidor remoto
+Comment[pt_BR]=Colar o texto/imagens para um servidor remoto
+Comment[sv]=Klistra in text eller bilder på en fjärrserver
+Comment[uk]=Викласти текст/зображення на віддалений сервер
 Type=Service
 Icon=edit-paste
 
