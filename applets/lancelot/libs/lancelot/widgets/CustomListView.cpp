@@ -79,9 +79,10 @@ public:
             return;
         }
 
-        qreal old_scale = scale;
-        updateSizeInfo();
-        if (old_scale != scale) {
+        if (updateSizeInfo()) {
+            // viewportSizeUpdated();
+            // viewportOriginUpdated();
+            // return;
             startPosition = 0;
         }
 
@@ -111,7 +112,7 @@ public:
         }
 
         if (factory->itemCount() > 0) {
-           q->resize(viewport.width(),
+            q->resize(viewport.width(),
                     item->geometry().bottom() + margins[Plasma::BottomMargin]);
         } else {
             q->resize(0, 0);
@@ -132,13 +133,15 @@ public:
         }
     } //<
 
-    void updateSizeInfo() //>
+    bool updateSizeInfo() //>
     {
+        QMap < Qt::SizeHint, int > osizes = sizes;
+
         sizes[Qt::MinimumSize]   = 0;
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
 
-        returnIfFactoryNotSet;
+        returnIfFactoryNotSet false;
 
         for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
@@ -160,9 +163,11 @@ public:
             }
         }
 
-        if (q && q->scrollPane()) {
+        if (q && q->scrollPane() && osizes != sizes) {
             q->scrollPane()->scrollableWidgetSizeUpdated();
         }
+
+        return osizes != sizes;
     } //<
 
     void viewportOriginUpdated() //>
@@ -201,24 +206,6 @@ public:
     {
         positionItems();
         updateWidth();
-    } //<
-
-    void calculateSizes() //>
-    {
-        sizes[Qt::MinimumSize]   = 0;
-        sizes[Qt::PreferredSize] = 0;
-        sizes[Qt::MaximumSize]   = 0;
-
-        returnIfFactoryNotSet;
-
-        for (int i = 0; i < factory->itemCount(); i++) {
-            sizes[Qt::MinimumSize] +=
-                factory->itemHeight(i, Qt::MinimumSize);
-            sizes[Qt::PreferredSize] +=
-                factory->itemHeight(i, Qt::PreferredSize);
-            sizes[Qt::MaximumSize] +=
-                factory->itemHeight(i, Qt::MinimumSize);
-        }
     } //<
 
     //> Variable Declarations

@@ -158,10 +158,12 @@ QSizeF ScrollPane::currentViewportSize() const
 
 void ScrollPane::scrollableWidgetSizeUpdated()
 {
+    kDebug() << "st1";
     if (!d->widget) {
         return;
     }
 
+    kDebug() << "st2";
     d->layout->setAutoSize(FullBorderLayout::RightBorder);
     d->layout->setAutoSize(FullBorderLayout::BottomBorder);
 
@@ -172,6 +174,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     if (hasVertical   = d->widget->fullSize().height() > maximumViewportSize().height()) {
         hasHorizontal = d->widget->fullSize().width() > currentViewportSize().width();
     }
+    kDebug() << "st3" << hasHorizontal << hasVertical;
 
     d->horizontal->setVisible(hasHorizontal);
     d->vertical->setVisible(hasVertical);
@@ -223,6 +226,7 @@ void ScrollPane::setGeometry(const QRectF & rect)
     }
 
     Widget::setGeometry(rect);
+
     kDebug() << geometry();
     d->updateViewport();
     scrollableWidgetSizeUpdated();
