@@ -225,6 +225,7 @@ void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
         event->accept();
         break;
     }
+    case Qt::Key_Asterisk:
     case Qt::Key_multiply:
     {
         mButtonMultiply->nativeWidget()->animateClick();
@@ -298,6 +299,7 @@ void CalculatorApplet::keyPressEvent ( QKeyEvent * event )
         break;
     }
     case Qt::Key_Comma:
+    case Qt::Key_Period:
     {
         mButtonDecimal->nativeWidget()->animateClick();
         event->accept();
