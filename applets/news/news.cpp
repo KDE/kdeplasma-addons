@@ -102,6 +102,7 @@ void News::init()
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     m_news = new Plasma::WebView(this);
+    m_news->setPreferredSize(370, 440);
     connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
             this, SLOT(linkActivated(const QUrl&)));
     m_news->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
