@@ -55,7 +55,7 @@ LeaveNote::LeaveNote(QObject *parent, const QVariantList &args)
     // this will get us the standard applet background, for free!
     setBackgroundHints(NoBackground);
     resize(340, 250);
-    setMinimumSize(300, 200); // replace with correct numbers
+    //setMinimumSize(300, 200); // replace with correct numbers
 }
 
 LeaveNote::~LeaveNote()
@@ -78,8 +78,9 @@ void LeaveNote::init()
     mLabel->setStyleSheet("color: black");
     mTextEdit = new Plasma::TextEdit(this);
     mTextEdit->setMinimumSize(QSize(0, 0));
-    mTextEdit->nativeWidget()->setAcceptRichText(false);
+    mTextEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
     mTextEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
+    mTextEdit->nativeWidget()->setAcceptRichText(false);
     connect(mTextEdit, SIGNAL(textChanged()), SLOT(slotLimitMessageLength()));
 
     mSendButton = new Plasma::PushButton(this);
@@ -117,13 +118,19 @@ void LeaveNote::constraintsEvent(Plasma::Constraints constraints)
                                     .08*geometry().width(),
                                     .08*geometry().height());
     }
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Horizontal) {
+            mLayout->setOrientation(Qt::Horizontal);
+        } else {
+            mLayout->setOrientation(Qt::Vertical);
+        }
+    }
 }
 
 void LeaveNote::createConfigurationInterface(KConfigDialog *dialog)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    dialog->setMainWidget(widget);
 
     KConfigGroup cg = config();
     ui.useKNotesCheckBox->setChecked(cg.readEntry("useKNotes", true));
@@ -150,8 +157,9 @@ bool LeaveNote::checkKNotesDBusInterface()
     QDBusReply<QString>reply = knotesDBusTest.call("Introspect");
 
     bool valid = reply.isValid();
-    if (!valid)
+    if (!valid) {
         kDebug() << "KNotes DBus interface test error: " << reply.error();
+    }
 
     return valid;
 }
