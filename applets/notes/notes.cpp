@@ -64,12 +64,17 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
 PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
     : Plasma::TextEdit(parent)
 {
-    QWidget *w = nativeWidget();
+    KTextEdit *w = nativeWidget();
     NotesTextEdit* native = new NotesTextEdit;
+    //FIXME: we need a way to just add actions without changing the native widget under its feet
+    if (native->verticalScrollBar() && w->verticalScrollBar()) {
+        native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
+    }
     connect(native, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
     setWidget(native);
     delete w;
     native->setAttribute(Qt::WA_NoSystemBackground);
+
 }
 
 PlasmaTextEdit::~PlasmaTextEdit()
