@@ -58,7 +58,6 @@ IncomingMsg::IncomingMsg(QObject *parent, const QVariantList &args)
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
     resize(300, 80);
-    setMinimumSize(200, 80);
 }
 
 IncomingMsg::~IncomingMsg()
