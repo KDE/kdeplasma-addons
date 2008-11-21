@@ -321,7 +321,6 @@ void IncomingMsg::createConfigurationInterface(KConfigDialog *dialog)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    dialog->setMainWidget(widget);
 
     KConfigGroup cg = config();
     ui.showKMail->setChecked(cg.readEntry("showKMail", true));
