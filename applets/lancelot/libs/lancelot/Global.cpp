@@ -213,8 +213,9 @@ void WidgetGroup::load(bool full)
         }
 
         d->backgroundSvg = new Plasma::FrameSvg(NULL);
-        d->backgroundSvg->setImagePath(d->confGroupTheme->readEntry("background.svg"));
-
+        d->backgroundSvg->setImagePath(
+            Plasma::Theme::defaultTheme()->imagePath(
+                d->confGroupTheme->readEntry("background.svg")));
         d->ownsBackgroundSvg = true;
     }
 
@@ -325,6 +326,7 @@ Instance::Instance()
     d->confMain = new KConfig("lancelot" + app + "rc");
 
     QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
+    kDebug() << search;
 
     QString path =  KStandardDirs::locate( "data", search );
     if (path == "") {
@@ -334,6 +336,7 @@ Instance::Instance()
     if (path == "") {
         path = "lancelotrc";
     }
+    kDebug() << path;
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;
