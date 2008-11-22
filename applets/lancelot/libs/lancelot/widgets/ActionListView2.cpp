@@ -24,7 +24,7 @@ namespace Lancelot {
 
 //> ActionListView2Item
 ActionListView2Item::ActionListView2Item(ActionListView2ItemFactory * factory)
-    : ExtenderButton(), m_factory(factory), m_inSetSelected(false)
+    : ExtenderButton(), m_inSetSelected(false), m_factory(factory)
 {
     connect(this, SIGNAL(mouseHoverEnter()),
             this, SLOT(select()));
@@ -95,9 +95,10 @@ void ActionListView2Item::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 //> ActionListView2ItemFactory
 ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model, Instance * instance) //>
     : m_model(NULL),
-      m_extenderPosition(NoExtender), m_selectedItem(NULL),
+      m_extenderPosition(NoExtender),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
-      m_instance(instance), m_categoriesActivable(false)
+      m_instance(instance), m_categoriesActivable(false),
+      m_selectedItem(NULL)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
