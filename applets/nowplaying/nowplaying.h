@@ -78,9 +78,6 @@ public slots:
     void playerAdded(const QString &name);
     void playerRemoved(const QString &name);
 
-protected:
-    QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
-
 private slots:
     void play();
     void pause();

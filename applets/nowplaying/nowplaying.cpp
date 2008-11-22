@@ -170,12 +170,6 @@ void NowPlaying::layoutHorizontal()
     }
 }
 
-QSizeF NowPlaying::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
-{
-    kDebug() << "Asked for size hint" << which << "with constraint" << constraint;
-    return Applet::sizeHint(which, constraint);
-}
-
 void NowPlaying::constraintsUpdated(Plasma::Constraints constraints)
 {
     kDebug() << "Constraints:" << constraints;
