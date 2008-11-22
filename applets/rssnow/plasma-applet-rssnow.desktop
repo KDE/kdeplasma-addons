@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=RSSNOW
+Name[it]=RSSORA
 Name[x-test]=xxRSSNOWxx
 Comment=Show news from various sources
 Comment[de]=Neuigkeiten aus verschiedenen Quellen anzeigen
 Comment[el]=Εμφάνιση ειδήσεων από διάφορες πηγές.
 Comment[fr]=Affiche des brèves depuis diverses sources
 Comment[gl]=Mostra as novas de varias fontes.
+Comment[it]=Mostra notizie da varie fonti
 Comment[ja]=さまざまなソースからニュースを表示します
 Comment[nds]=Narichten vun verscheden Borns wiesen
 Comment[nl]=Toont nieuws van verschillende bronnen
