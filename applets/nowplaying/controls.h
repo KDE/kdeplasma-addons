@@ -43,7 +43,7 @@ public:
         NextButton = 8,
         AllButtons = 15
     };
-    Q_DECLARE_FLAGS(Buttons, Button);
+    Q_DECLARE_FLAGS(Buttons, Button)
 
     Controls(QGraphicsWidget *parent = 0);
     ~Controls();
@@ -77,6 +77,6 @@ private:
     Plasma::Service* m_controller;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Controls::Buttons);
+Q_DECLARE_OPERATORS_FOR_FLAGS(Controls::Buttons)
 
 #endif // CONTROLS_H
