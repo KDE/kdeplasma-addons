@@ -71,7 +71,6 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
-    resize(200, 350);
     setPopupIcon("microblogging");
 }
 

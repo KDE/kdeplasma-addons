@@ -82,7 +82,6 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
 
     setHasConfigurationInterface(engineChoice);
     setPopupIcon("accessories-dictionary");
-    setMinimumSize(500,200);
 }
 
 DictApplet::~DictApplet()
