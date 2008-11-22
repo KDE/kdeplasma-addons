@@ -55,6 +55,7 @@ public:
             m_d->updateChildren();
         }
 
+        /*
         void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
         {
             Q_UNUSED(widget);
@@ -105,7 +106,7 @@ public:
                     }
                 }
             }
-        }
+        } */
 
         int m_position;
         ResizeBordersPanel::Private * m_d;
