@@ -1,4 +1,0 @@
-This directory contains COMPRESSED SVG files
-but with .svg extension instead of .svgz
-because libplasma in KDE 4.1 has no support
-for .svgz (Plasma::Theme)
