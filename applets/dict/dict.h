@@ -21,7 +21,7 @@
 #ifndef DICT_H
 #define DICT_H
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 
 class QTimer;
@@ -38,14 +38,14 @@ namespace Plasma
     class LineEdit;
 }
 
-class DictApplet: public Plasma::Applet
+class DictApplet: public Plasma::PopupApplet
 {
     Q_OBJECT
     public:
         DictApplet(QObject *parent, const QVariantList &args);
         ~DictApplet();
 
-    void init();
+        QGraphicsWidget *graphicsWidget();
         void setPath(const QString&);
 
     public slots:
@@ -65,6 +65,7 @@ class DictApplet: public Plasma::Applet
         QTimer* m_timer;
         QString m_dataEngine;
         //QGraphicsPixmapItem *m_graphicsIcon;
+        QGraphicsWidget *m_graphicsWidget;
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_horLayout;
         Plasma::LineEdit *m_wordEdit;

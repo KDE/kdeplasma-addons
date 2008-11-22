@@ -70,8 +70,9 @@ const char* translationCSS =
 
 
 DictApplet::DictApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::PopupApplet(parent, args)
     , m_dictsModel(0)
+    , m_graphicsWidget(0)
       //m_flash(0)
 {
     const char* dataEngines[]={"dict","qstardict"};
@@ -80,8 +81,8 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     m_dataEngine=dataEngines[int(engineChoice)];
 
     setHasConfigurationInterface(engineChoice);
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    resize(500,200);
+    setPopupIcon("accessories-dictionary");
+    setMinimumSize(500,200);
 }
 
 DictApplet::~DictApplet()
@@ -89,8 +90,12 @@ DictApplet::~DictApplet()
     m_defBrowser->deleteLater();
 }
 
-void DictApplet::init()
+QGraphicsWidget *DictApplet::graphicsWidget()
 {
+    if (m_graphicsWidget) {
+        return m_graphicsWidget;
+    }
+
     m_wordEdit = new LineEdit(this);
     m_wordEdit->nativeWidget()->setClearButtonShown( true );
     m_wordEdit->nativeWidget()->setClickMessage(i18n("Enter word to define here"));
@@ -127,7 +132,6 @@ void DictApplet::init()
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_horLayout);
     m_layout->addItem(m_defBrowserProxy);
-    setLayout(m_layout);
 
     m_source.clear();
     dataEngine(m_dataEngine)->connectSource(m_source, this);
@@ -158,6 +162,11 @@ void DictApplet::init()
     QStringList activeDictNames = cg.readEntry("ActiveDictionaries", QStringList());
     for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i)
         m_activeDicts[*i]=activeDictNames.contains(*i);
+
+    m_graphicsWidget = new QGraphicsWidget(this);
+    m_graphicsWidget->setLayout(m_layout);
+    m_graphicsWidget->setPreferredSize(500, 200);
+    return m_graphicsWidget;
 }
 
 
