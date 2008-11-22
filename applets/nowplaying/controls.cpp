@@ -26,16 +26,10 @@ Controls::Controls(QGraphicsWidget *parent)
     connect(m_next, SIGNAL(clicked()), this, SIGNAL(next()));
     m_next->setMinimumSize(m_next->sizeFromIconSize(16));
 
-    QGraphicsLinearLayout* m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
-    // adding stretches -> segfault
-    //m_layout->addStretch(1);
-    m_layout->addItem(m_prev);
-    m_layout->addItem(m_playpause);
-    m_layout->addItem(m_stop);
-    m_layout->addItem(m_next);
-    //m_layout->addStretch(1);
-
+    m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
     setLayout(m_layout);
+
+    setDisplayedButtons(AllButtons);
 }
 
 Controls::~Controls()
@@ -93,6 +87,56 @@ void Controls::setController(Plasma::Service* controller)
             controller->associateWidget(m_playpause, "play");
         }
     }
+}
+
+Controls::Buttons Controls::displayedButtons() const
+{
+    Buttons result;
+    if (m_prev->layout() == m_layout)
+    {
+        result |= PreviousButton;
+    }
+    if (m_next->layout() == m_layout)
+    {
+        result |= NextButton;
+    }
+    if (m_playpause->layout() == m_layout)
+    {
+        result |= PlayPauseButton;
+    }
+    if (m_stop->layout() == m_layout)
+    {
+        result |= StopButton;
+    }
+    return result;
+}
+
+static void showHideButton(QGraphicsLinearLayout* layout,
+                           QGraphicsWidget* button,
+                           bool show)
+{
+    if (show)
+    {
+        button->show();
+        layout->addItem(button);
+    }
+    else
+    {
+        button->hide();
+    }
+}
+
+void Controls::setDisplayedButtons(Buttons buttons)
+{
+    while (m_layout->count() != 0)
+    {
+        m_layout->removeAt(0);
+    }
+    showHideButton(m_layout, m_prev, (buttons & PreviousButton));
+    showHideButton(m_layout, m_playpause, (buttons & PlayPauseButton));
+    showHideButton(m_layout, m_stop, (buttons & StopButton));
+    showHideButton(m_layout, m_next, (buttons & NextButton));
+    m_layout->invalidate();
 }
 
 // vim: sw=4 sts=4 et tw=100

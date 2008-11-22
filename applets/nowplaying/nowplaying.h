@@ -26,8 +26,7 @@
 
 #include <QPixmap>
 
-class QGraphicsGridLayout;
-class QGraphicsLinearLayout;
+class QGraphicsLayout;
 namespace Plasma {
     class Slider;
 }
@@ -79,6 +78,9 @@ public slots:
     void playerAdded(const QString &name);
     void playerRemoved(const QString &name);
 
+protected:
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+
 private slots:
     void play();
     void pause();
@@ -90,17 +92,25 @@ private slots:
 
 private:
     void findPlayer();
+    void layoutPlanar();
+    void layoutHorizontal();
 
     QString m_watchingPlayer;
     Plasma::Service* m_controller;
     State m_state;
+    enum CurrentLayoutType
+    {
+        NoLayout,
+        PlanarLayout,
+        HorizontalLayout
+    };
+    CurrentLayoutType m_currentLayout;
 
     qreal m_volume;
     int m_length;
     QString m_track;
     QPixmap m_artwork;
 
-    QGraphicsGridLayout* m_layout;
     InfoPanel* m_textPanel;
     Controls* m_buttonPanel;
     Plasma::Slider* m_volumeSlider;

@@ -37,6 +37,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_controller(0),
       m_state(NoPlayer),
+      m_currentLayout(NoLayout),
       m_volume(0),
       m_length(0),
       m_textPanel(new InfoPanel),
@@ -90,14 +91,18 @@ NowPlaying::~NowPlaying()
 
 void NowPlaying::init()
 {
-    m_layout = new QGraphicsGridLayout();
-    m_layout->addItem(m_textPanel, 0, 0);
-    m_layout->addItem(m_buttonPanel, 1, 0);
-    m_layout->addItem(m_positionSlider, 2, 0);
-    m_layout->addItem(m_volumeSlider, 0, 1, 3, 1); // rowspan, colspan
-
-    setLayout(m_layout);
-
+    switch (formFactor())
+    {
+        case Plasma::Horizontal:
+            layoutHorizontal();
+            break;
+        case Plasma::Vertical:
+            layoutHorizontal(); // FIXME
+            break;
+        default:
+            layoutPlanar();
+            break;
+    }
     Plasma::DataEngine* nowPlayingEngine = dataEngine("nowplaying");
     if ( nowPlayingEngine )
     {
@@ -111,10 +116,91 @@ void NowPlaying::init()
     findPlayer();
 }
 
+void NowPlaying::layoutPlanar()
+{
+    if (m_currentLayout != PlanarLayout)
+    {
+        setMinimumSize(300, 200);
+        setAspectRatioMode(Plasma::IgnoreAspectRatio);
+
+        QGraphicsGridLayout* layout = new QGraphicsGridLayout();
+        m_textPanel->show();
+        layout->addItem(m_textPanel, 0, 0);
+        m_buttonPanel->show();
+        m_buttonPanel->setDisplayedButtons(Controls::AllButtons);
+        layout->addItem(m_buttonPanel, 1, 0);
+        m_positionSlider->show();
+        layout->addItem(m_positionSlider, 2, 0);
+        m_volumeSlider->show();
+        layout->addItem(m_volumeSlider, 0, 1, 3, 1); // rowspan, colspan
+
+        QGraphicsLayout* oldLayout = this->layout();
+        setLayout(layout);
+        delete oldLayout;
+
+        m_currentLayout = PlanarLayout;
+    }
+}
+
+void NowPlaying::layoutHorizontal()
+{
+    if (m_currentLayout != HorizontalLayout)
+    {
+        setMinimumSize(20, 10);
+        resize(preferredHeight() * 2, preferredHeight());
+        kDebug() << "preferredHeight():" << preferredHeight();
+        kDebug() << "preferredSize():" << preferredSize();
+        setAspectRatioMode(Plasma::KeepAspectRatio);
+
+        m_textPanel->hide();
+        m_positionSlider->hide();
+        m_volumeSlider->hide();
+
+        QGraphicsLinearLayout* layout = new QGraphicsLinearLayout();
+        m_buttonPanel->show();
+        kDebug() << "m_buttonPanel->preferredSize():" << m_buttonPanel->preferredSize();
+        m_buttonPanel->setDisplayedButtons(Controls::PlayPauseButton | Controls::NextButton);
+        layout->addItem(m_buttonPanel);
+
+        QGraphicsLayout* oldLayout = this->layout();
+        setLayout(layout);
+        delete oldLayout;
+
+        m_currentLayout = HorizontalLayout;
+    }
+}
+
+QSizeF NowPlaying::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
+{
+    kDebug() << "Asked for size hint" << which << "with constraint" << constraint;
+    return Applet::sizeHint(which, constraint);
+}
+
 void NowPlaying::constraintsUpdated(Plasma::Constraints constraints)
 {
-    // FIXME: we should probably change to everything in one
-    // or two lines if we're horizonal
+    kDebug() << "Constraints:" << constraints;
+    kDebug() << "Maximum size:" << maximumSize();
+    kDebug() << "Preferred size:" << preferredSize();
+    if (constraints & Plasma::FormFactorConstraint)
+    {
+        switch (formFactor())
+        {
+            case Plasma::Horizontal:
+                layoutHorizontal();
+                break;
+            case Plasma::Vertical:
+                layoutHorizontal(); // FIXME
+                break;
+            default:
+                layoutPlanar();
+                break;
+        }
+    }
+    if (constraints & Plasma::SizeConstraint && formFactor() == Plasma::Horizontal)
+    {
+        resize(preferredHeight() * 2, preferredHeight());
+        setAspectRatioMode(Plasma::KeepAspectRatio);
+    }
 }
 
 void NowPlaying::dataUpdated(const QString &name,

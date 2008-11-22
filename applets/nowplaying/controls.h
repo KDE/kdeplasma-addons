@@ -20,21 +20,36 @@
 #define CONTROLS_H
 
 #include <QGraphicsWidget>
+#include <QFlags>
 
 #include "nowplaying.h"
 
 namespace Plasma {
     class IconWidget;
 }
-class QGraphicsLayout;
+class QGraphicsLinearLayout;
 
 class Controls : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
+    enum Button
+    {
+        NoButtons = 0,
+        PlayPauseButton = 1,
+        StopButton = 2,
+        PreviousButton = 4,
+        NextButton = 8,
+        AllButtons = 15
+    };
+    Q_DECLARE_FLAGS(Buttons, Button);
+
     Controls(QGraphicsWidget *parent = 0);
     ~Controls();
+
+    Buttons displayedButtons() const;
+    void setDisplayedButtons(Buttons buttons);
 
 public slots:
     void stateChanged(State state);
@@ -61,5 +76,7 @@ private:
     State m_state;
     Plasma::Service* m_controller;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Controls::Buttons);
 
 #endif // CONTROLS_H
