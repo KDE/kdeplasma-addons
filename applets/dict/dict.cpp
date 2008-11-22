@@ -71,8 +71,8 @@ const char* translationCSS =
 
 DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args)
-    , m_dictsModel(0)
     , m_graphicsWidget(0)
+    , m_dictsModel(0)
       //m_flash(0)
 {
     const char* dataEngines[]={"dict","qstardict"};
@@ -276,7 +276,7 @@ public:
             return QVariant();
         return i18n("Dictionary");
     }
-    Qt::DropActions supportedDropActions(){return Qt::MoveAction;}
+    Qt::DropActions supportedDropActions() const {return Qt::MoveAction;}
     Qt::ItemFlags flags(const QModelIndex& index) const
     {
         if (!index.isValid())
