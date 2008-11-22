@@ -23,7 +23,7 @@
 
 #include <QMap>
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 
 #include "ui_configuration.h"
@@ -61,16 +61,16 @@ struct Tweet {
     Plasma::IconWidget *favIcon;
 };
 
-class Twitter : public Plasma::Applet
+class Twitter : public Plasma::PopupApplet
 {
     Q_OBJECT
     public:
         Twitter(QObject *parent, const QVariantList &args);
         ~Twitter();
         void init();
+        void constraintsEvent(Plasma::Constraints constraints);
+        QGraphicsWidget *graphicsWidget();
 
-        void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                            const QRect &contentsRect);
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
@@ -100,6 +100,8 @@ class Twitter : public Plasma::Applet
     protected:
         QString timeDescription( const QDateTime &dt );
         bool eventFilter(QObject *obj, QEvent *event);
+        void popupEvent(bool show);
+        void focusInEvent(QFocusEvent *event);
 
     private:
         /**
@@ -119,6 +121,11 @@ class Twitter : public Plasma::Applet
          */
         void writeConfigPassword();
 
+        /**
+         * generates and sets the popup icon
+         */
+        void paintIcon();
+
         Plasma::Svg *m_theme;
         Plasma::TextEdit *m_statusEdit;
         Plasma::WebContent *m_historyEdit;
@@ -126,6 +133,7 @@ class Twitter : public Plasma::Applet
         Plasma::IconWidget *m_icon;
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_headerLayout;
+        QGraphicsWidget *m_graphicsWidget;
 
         KLineEdit *m_usernameEdit;
         KLineEdit *m_passwordEdit;
@@ -137,6 +145,7 @@ class Twitter : public Plasma::Applet
         QString m_password;
         int m_historySize;
         int m_historyRefresh;
+        int m_newTweets;
         bool m_includeFriends;
 
         Plasma::DataEngine *m_engine;

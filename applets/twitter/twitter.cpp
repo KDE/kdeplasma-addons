@@ -51,6 +51,7 @@
 #include <Plasma/Service>
 #include <Plasma/FlashingLabel>
 #include <Plasma/IconWidget>
+#include <Plasma/SvgWidget>
 #include <Plasma/TextEdit>
 #include <Plasma/Frame>
 #include <Plasma/ServiceJob>
@@ -58,7 +59,9 @@
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 Twitter::Twitter(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    : Plasma::PopupApplet(parent, args),
+      m_graphicsWidget(0),
+      m_newTweets(0),
       m_service(0),
       m_profileService(0),
       m_lastTweet(0),
@@ -69,14 +72,74 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
     resize(200, 350);
+    setPopupIcon("microblogging");
 }
 
 void Twitter::init()
 {
-    m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+    m_flash = new Plasma::FlashingLabel( this );
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/twitter");
+    m_theme->setContainsMultipleImages(true);
+}
+
+void Twitter::constraintsEvent(Plasma::Constraints constraints)
+{
+    //i am an icon?
+    if (layout()->itemAt(0) != m_graphicsWidget) {
+        paintIcon();
+    }
+}
+
+void Twitter::paintIcon()
+{
+    QPixmap icon(size().toSize());
+    icon.fill(Qt::transparent);
+    QPainter p(&icon);
+    m_theme->paint(&p, contentsRect(), "icon");
+    if (m_newTweets > 0) {
+        QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+        QFontMetrics fm(font);
+        QRect textRect(fm.boundingRect(QString::number(m_newTweets)));
+        textRect.moveBottomRight(boundingRect().bottomRight().toPoint());
+
+        QColor c(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor));
+        c.setAlphaF(0.6);
+
+        p.setBrush(c);
+        p.drawEllipse(textRect);
+
+        p.setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+        p.drawText(textRect,QString::number(m_newTweets));
+    }
+    p.end();
+    setPopupIcon(icon);
+}
+
+void Twitter::popupEvent(bool show)
+{
+    if (show) {
+        m_newTweets = 0;
+        paintIcon();
+    }
+}
+
+void Twitter::focusInEvent(QFocusEvent *event)
+{
+    m_statusEdit->setFocus();
+}
+
+QGraphicsWidget *Twitter::graphicsWidget()
+{
+    if (m_graphicsWidget) {
+        return m_graphicsWidget;
+    }
+
+    m_graphicsWidget = new QGraphicsWidget(this);
+    m_graphicsWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+
     //config stuff
     KConfigGroup cg = config();
     m_username = cg.readEntry( "username" );
@@ -88,16 +151,15 @@ void Twitter::init()
     m_engine = dataEngine("twitter");
     if (! m_engine->isValid()) {
         setFailedToLaunch(true, i18n("Failed to load twitter DataEngine"));
-        return;
+        return m_graphicsWidget;
     }
 
     //ui setup
-    m_layout = new QGraphicsLinearLayout( Qt::Vertical );
-    setLayout( m_layout );
+    m_layout = new QGraphicsLinearLayout( Qt::Vertical, m_graphicsWidget );
     m_layout->setSpacing( 3 );
 
     QGraphicsLinearLayout *flashLayout = new QGraphicsLinearLayout( Qt::Horizontal );
-    m_flash = new Plasma::FlashingLabel( this );
+
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
     m_flash->setColor( Qt::gray );
@@ -106,8 +168,17 @@ void Twitter::init()
     QFontMetrics fm( fnt );
     m_flash->setFont( fnt );
     m_flash->flash( "", 20000 );
-    flashLayout->addItem( m_flash );
-    flashLayout->setItemSpacing( 0, 175 );
+    m_flash->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    QGraphicsLinearLayout *titleLayout = new QGraphicsLinearLayout( Qt::Vertical );
+    Plasma::SvgWidget *svgTitle = new Plasma::SvgWidget(m_theme, "twitter", this);
+    svgTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    svgTitle->setPreferredSize(75, 14);
+    titleLayout->addItem(svgTitle);
+
+    flashLayout->addItem(m_flash);
+    flashLayout->setStretchFactor(m_flash, 2);
+    flashLayout->addItem( titleLayout );
     m_layout->addItem( flashLayout );
 
     Plasma::Frame *headerFrame = new Plasma::Frame(this);
@@ -162,6 +233,8 @@ void Twitter::init()
     }else{
         setAuthRequired(true);
     }
+
+    return m_graphicsWidget;
 }
 
 void Twitter::getWallet()
@@ -277,7 +350,9 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
             }
         }
         m_lastTweet = maxId;
-        m_flash->flash( i18np( "1 new tweet", "%1 new tweets", qMin(newCount, m_historySize) ), 20*1000 );
+        m_newTweets = qMin(newCount, m_historySize);
+        paintIcon();
+        m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
         showTweets();
     } else if (source == "UserImages") {
         foreach (const QString &user, data.keys()) {
@@ -385,7 +460,7 @@ void Twitter::showTweets()
 
         QAction *profile = new QAction(QIcon(m_pictureMap[user]), QString(), this);
         profile->setData(user);
-        
+
         Tweet t = m_tweetWidgets[i];
         t.icon->setAction(profile);
         QSizeF iconSize = t.icon->sizeFromIconSize(30);
@@ -424,7 +499,16 @@ void Twitter::showTweets()
     }
     qreal left, top, right, bottom;
     getContentsMargins(&left, &top, &right, &bottom);
-    resize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
+    //this line break things, strange
+    //m_graphicsWidget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize));
+    m_graphicsWidget->setPreferredSize(m_layout->sizeHint(Qt::PreferredSize));
+    //are we complete?
+    if (layout()->itemAt(0) == m_graphicsWidget) {
+        //resize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
+        setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left+right, top+bottom));
+        setPreferredSize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
+        resize(preferredSize());
+    }
     updateGeometry();
 }
 
@@ -519,14 +603,6 @@ Twitter::~Twitter()
 {
     delete m_colorScheme;
     delete m_service;
-}
-
-void Twitter::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
-{
-    Q_UNUSED(option);
-
-    m_theme->resize();
-    m_theme->paint( p, QRect(contentsRect.x()+contentsRect.width()-75, m_flash->geometry().y(), 75, 14), "twitter" );
 }
 
 void Twitter::editTextChanged()
