@@ -41,10 +41,12 @@ void Controls::playPauseClicked()
     if (m_state == Playing) {
         m_state = Paused;
         m_playpause->setIcon("media-playback-start");
+        m_controller->associateWidget(m_playpause, "play");
         emit pause();
     } else {
         m_state = Playing;
         m_playpause->setIcon("media-playback-pause");
+        m_controller->associateWidget(m_playpause, "pause");
         emit play();
     }
 }
