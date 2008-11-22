@@ -18,7 +18,7 @@
 #ifndef NEWS_HEADER
 #define NEWS_HEADER
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 #include "ui_config.h"
 #include "ui_feedsConfig.h"
@@ -28,14 +28,14 @@ namespace Plasma {
 }
 class QGraphicsLinearLayout;
 
-class News : public Plasma::Applet
+class News : public Plasma::PopupApplet
 {
     Q_OBJECT
     public:
         News(QObject *parent, const QVariantList &args);
         ~News();
 
-        virtual void init();
+        QGraphicsWidget *graphicsWidget();
 
     public slots:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
@@ -66,6 +66,7 @@ class News : public Plasma::Applet
         QMap<QString, QString> m_defaultFeeds;
         Plasma::WebView* m_news;
         QGraphicsLinearLayout* m_layout;
+        QGraphicsWidget *m_graphicsWidget;
         QString m_cssDir;
         Plasma::DataEngine::Data m_dataCache;
 };

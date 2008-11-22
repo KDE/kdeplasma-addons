@@ -73,21 +73,26 @@
             "body { margin:0px; background-color:%3 }\n"
 
 News::News(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::PopupApplet(parent, args),
+      m_graphicsWidget(0)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    resize(QSize(370, 440));
-    // The default width is OK, we can benefit from more vertical space
-    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+
+    setPopupIcon("application-rss+xml");
 }
 
 News::~News()
 {
 }
 
-void News::init()
+
+QGraphicsWidget *News::graphicsWidget()
 {
+    if (m_graphicsWidget) {
+        return m_graphicsWidget;
+    }
+
     KConfigGroup cg = config();
     m_interval = cg.readEntry("interval", 30);
     m_showTimestamps = cg.readEntry("showTimestamps", true);
@@ -96,24 +101,32 @@ void News::init()
 
     m_feeds = cg.readEntry("feeds", QStringList("http://www.kde.org/dotkdeorg.rdf"));
 
-    m_layout = new QGraphicsLinearLayout(this);
+    m_layout = new QGraphicsLinearLayout();
     m_layout->setContentsMargins(0, 0, 0, 0);
     m_layout->setSpacing(0);
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     m_news = new Plasma::WebView(this);
-    m_news->setPreferredSize(370, 440);
+    m_news->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
     connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
             this, SLOT(linkActivated(const QUrl&)));
     m_news->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
     m_layout->addItem(m_news);
-    setLayout(m_layout);
+
 
     setAcceptDrops(true);
     makeStylesheet();
     connectToEngine();
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(makeStylesheet()));
+
+    m_graphicsWidget = new QGraphicsWidget(this);
+    m_graphicsWidget->setLayout(m_layout);
+    m_graphicsWidget->setPreferredSize(370,440);
+    //a tiny minimum size, a panel 48px high is enough to display the whole applet
+    m_graphicsWidget->setMinimumSize(150, 48);
+
+    return m_graphicsWidget;
 }
 
 void News::connectToEngine()
@@ -366,6 +379,7 @@ void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
                                      .arg(item["link"].toString())
                                      .arg(line);
             }
+
             ++i;
         }
         html += END_TABLE;
