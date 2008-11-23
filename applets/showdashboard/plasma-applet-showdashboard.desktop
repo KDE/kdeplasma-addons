@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
 Name[cs]=Zobrazit přístrojovou desku
+Name[de]=Widget-Dashboard anzeigen
 Name[el]=Εμφάνιση πίνακα συστατικών
 Name[es]=Mostrar componente de cuadro de mandos
 Name[et]=Vidinate Dashboardi näitamine
@@ -24,6 +25,7 @@ Name[zh_CN]=显示部件板
 Name[zh_TW]=顯示元件儀表板
 Comment=Show the Plasma widget dashboard above other windows
 Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
+Comment[de]=Das Widget-Dashbord über anderen Fenstern anzeigen
 Comment[el]=Εμφάνιση του πίνακα συστατικών plasma πάνω από τα άλλα παράθυρα
 Comment[es]=Muestra el widgte de Plasma del cuadro de mandos sobre las demás ventanas
 Comment[et]=Plasma vidinate dashboardi näitamine teiste akende kohal

@@ -6,6 +6,7 @@ Actions=Preview;
 
 [Desktop Action Preview]
 Name=Preview This File
+Name[de]=Vorschau für diese Datei anzeigen
 Name[el]=Προεπισκόπηση του αρχείου αυτού
 Name[it]=Anteprima di questo file
 Name[nds]=Disse Datei vörankieken
