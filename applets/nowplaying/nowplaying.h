@@ -61,7 +61,7 @@ public:
     NowPlaying(QObject *parent, const QVariantList &args);
     ~NowPlaying();
     void init();
-    void constraintsUpdated(Plasma::Constraints);
+    void constraintsEvent(Plasma::Constraints);
 
 signals:
     void stateChanged(State state);

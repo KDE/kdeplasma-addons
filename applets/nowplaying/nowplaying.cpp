@@ -45,9 +45,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
       m_volumeSlider(new Plasma::Slider(this)),
       m_positionSlider(new Plasma::Slider(this))
 {
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    resize(300, 200);
-    setMinimumSize(300, 200);
+    resize(300, 200); // ideal planar size
 
     connect(m_buttonPanel, SIGNAL(play()), this, SLOT(play()));
     connect(m_buttonPanel, SIGNAL(pause()), this, SLOT(pause()));
@@ -120,8 +118,8 @@ void NowPlaying::layoutPlanar()
 {
     if (m_currentLayout != PlanarLayout)
     {
-        setMinimumSize(300, 200);
         setAspectRatioMode(Plasma::IgnoreAspectRatio);
+        setMinimumSize(300, 200);
 
         QGraphicsGridLayout* layout = new QGraphicsGridLayout();
         m_textPanel->show();
@@ -146,11 +144,7 @@ void NowPlaying::layoutHorizontal()
 {
     if (m_currentLayout != HorizontalLayout)
     {
-        setMinimumSize(20, 10);
-        resize(preferredHeight() * 2, preferredHeight());
-        kDebug() << "preferredHeight():" << preferredHeight();
-        kDebug() << "preferredSize():" << preferredSize();
-        setAspectRatioMode(Plasma::KeepAspectRatio);
+        setMinimumSize(QSizeF());
 
         m_textPanel->hide();
         m_positionSlider->hide();
@@ -158,23 +152,33 @@ void NowPlaying::layoutHorizontal()
 
         QGraphicsLinearLayout* layout = new QGraphicsLinearLayout();
         m_buttonPanel->show();
-        kDebug() << "m_buttonPanel->preferredSize():" << m_buttonPanel->preferredSize();
         m_buttonPanel->setDisplayedButtons(Controls::PlayPauseButton | Controls::NextButton);
+        kDebug() << "Button Panel Preferred Size:" << m_buttonPanel->preferredSize();
+        kDebug() << "Button Panel Minimum Size:" << m_buttonPanel->minimumSize();
         layout->addItem(m_buttonPanel);
 
         QGraphicsLayout* oldLayout = this->layout();
+        kDebug() << "Minimum size before changing layout" << minimumSize();
+        kDebug() << "Preferred size before changing layout" << preferredSize();
         setLayout(layout);
+        kDebug() << "Minimum size after changing layout" << minimumSize();
+        kDebug() << "Preferred size after changing layout" << preferredSize();
         delete oldLayout;
 
         m_currentLayout = HorizontalLayout;
+
+        updateGeometry();
+        kDebug() << "Minimum size after updating geometry" << minimumSize();
+        kDebug() << "Preferred size after updating geometry" << preferredSize();
     }
 }
 
-void NowPlaying::constraintsUpdated(Plasma::Constraints constraints)
+void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
 {
     kDebug() << "Constraints:" << constraints;
     kDebug() << "Maximum size:" << maximumSize();
     kDebug() << "Preferred size:" << preferredSize();
+    kDebug() << "Minimum size:" << minimumSize();
     if (constraints & Plasma::FormFactorConstraint)
     {
         switch (formFactor())
@@ -190,11 +194,31 @@ void NowPlaying::constraintsUpdated(Plasma::Constraints constraints)
                 break;
         }
     }
+    /*
     if (constraints & Plasma::SizeConstraint && formFactor() == Plasma::Horizontal)
     {
         resize(preferredHeight() * 2, preferredHeight());
         setAspectRatioMode(Plasma::KeepAspectRatio);
     }
+    */
+
+        kDebug() << "minimumSize():" << minimumSize();
+        kDebug() << "preferredSize():" << preferredSize();
+        kDebug() << "maximumSize():" << maximumSize();
+        QSizePolicy policy(sizePolicy());
+        qreal left, top, right, bottom;
+        getContentsMargins(&left, &top, &right, &bottom);
+        kDebug() << "sizePolicy():"
+                 << "\n    horizontalPolicy:" << policy.horizontalPolicy()
+                 << "\n    horizontalStretch:" << policy.horizontalStretch()
+                 << "\n    verticalPolicy:" << policy.verticalPolicy()
+                 << "\n    verticalStretch:" << policy.verticalStretch()
+                 << "\n    expandingDirections:" << policy.expandingDirections()
+                 << "\n    hasHeightForWidth:" << policy.hasHeightForWidth()
+                 << "\n    contentsMargins:" << left << top << right << bottom;
+        kDebug() << "backgroundHints():" << backgroundHints();
+        kDebug() << "contentsRect():" << contentsRect();
+        kDebug() << "boundingRect():" << boundingRect();
 }
 
 void NowPlaying::dataUpdated(const QString &name,

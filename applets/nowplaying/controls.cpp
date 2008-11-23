@@ -10,7 +10,6 @@ Controls::Controls(QGraphicsWidget *parent)
       m_stop(new Plasma::IconWidget(this)),
       m_prev(new Plasma::IconWidget(this)),
       m_next(new Plasma::IconWidget(this)),
-      m_layout(0),
       m_state(NoPlayer)
 {
     m_playpause->setIcon("media-playback-start");
@@ -25,9 +24,6 @@ Controls::Controls(QGraphicsWidget *parent)
     m_next->setIcon("media-skip-forward");
     connect(m_next, SIGNAL(clicked()), this, SIGNAL(next()));
     m_next->setMinimumSize(m_next->sizeFromIconSize(16));
-
-    m_layout = new QGraphicsLinearLayout(Qt::Horizontal);
-    setLayout(m_layout);
 
     setDisplayedButtons(AllButtons);
 }
@@ -94,19 +90,19 @@ void Controls::setController(Plasma::Service* controller)
 Controls::Buttons Controls::displayedButtons() const
 {
     Buttons result;
-    if (m_prev->layout() == m_layout)
+    if (m_prev->isVisible())
     {
         result |= PreviousButton;
     }
-    if (m_next->layout() == m_layout)
+    if (m_next->isVisible())
     {
         result |= NextButton;
     }
-    if (m_playpause->layout() == m_layout)
+    if (m_playpause->isVisible())
     {
         result |= PlayPauseButton;
     }
-    if (m_stop->layout() == m_layout)
+    if (m_stop->isVisible())
     {
         result |= StopButton;
     }
@@ -121,6 +117,8 @@ static void showHideButton(QGraphicsLinearLayout* layout,
     {
         button->show();
         layout->addItem(button);
+        kDebug() << "Button minimum size:" << button->minimumSize();
+        kDebug() << "Button preferred size:" << button->preferredSize();
     }
     else
     {
@@ -130,15 +128,24 @@ static void showHideButton(QGraphicsLinearLayout* layout,
 
 void Controls::setDisplayedButtons(Buttons buttons)
 {
-    while (m_layout->count() != 0)
-    {
-        m_layout->removeAt(0);
-    }
-    showHideButton(m_layout, m_prev, (buttons & PreviousButton));
-    showHideButton(m_layout, m_playpause, (buttons & PlayPauseButton));
-    showHideButton(m_layout, m_stop, (buttons & StopButton));
-    showHideButton(m_layout, m_next, (buttons & NextButton));
-    m_layout->invalidate();
+    kDebug() << "Minimum size before changing buttons:" << minimumSize();
+
+    setLayout(0);
+    kDebug() << "Layout:" << (QObject*)layout();
+    delete layout();
+
+    QGraphicsLinearLayout* newLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+
+    newLayout->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    showHideButton(newLayout, m_prev, (buttons & PreviousButton));
+    showHideButton(newLayout, m_playpause, (buttons & PlayPauseButton));
+    showHideButton(newLayout, m_stop, (buttons & StopButton));
+    showHideButton(newLayout, m_next, (buttons & NextButton));
+    //newLayout->addStretch();
+    setLayout(newLayout);
+
+    kDebug() << "Minimum size after changing buttons:" << minimumSize();
 }
 
 // vim: sw=4 sts=4 et tw=100
