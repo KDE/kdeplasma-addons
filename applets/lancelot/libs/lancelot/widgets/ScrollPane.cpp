@@ -170,9 +170,9 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     bool hasHorizontal;
     bool hasVertical;
 
-    hasHorizontal = d->widget->fullSize().width() > maximumViewportSize().width();
-    if (hasVertical   = d->widget->fullSize().height() > maximumViewportSize().height()) {
-        hasHorizontal = d->widget->fullSize().width() > currentViewportSize().width();
+    hasHorizontal = d->widget->sizeFor(currentViewportSize()).width() > maximumViewportSize().width();
+    if (hasVertical   = d->widget->sizeFor(currentViewportSize()).height() > maximumViewportSize().height()) {
+        hasHorizontal = d->widget->sizeFor(currentViewportSize()).width() > currentViewportSize().width();
     }
     kDebug() << "st3" << hasHorizontal << hasVertical;
 
@@ -197,7 +197,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     if (hasHorizontal) {
         viewportSize = currentViewportSize().width();
         d->horizontal->setMinimum(0);
-        d->horizontal->setMaximum(d->widget->fullSize().width() - viewportSize);
+        d->horizontal->setMaximum(d->widget->sizeFor(currentViewportSize()).width() - viewportSize);
         d->horizontal->setViewSize(viewportSize);
         d->horizontal->setPageSize(viewportSize);
         d->horizontal->setStepSize(d->widget->scrollUnit(Qt::Horizontal));
@@ -209,7 +209,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     if (hasVertical) {
         viewportSize = currentViewportSize().height();
         d->vertical->setMinimum(0);
-        d->vertical->setMaximum(d->widget->fullSize().height() - viewportSize);
+        d->vertical->setMaximum(d->widget->sizeFor(currentViewportSize()).height() - viewportSize);
         d->vertical->setViewSize(viewportSize);
         d->vertical->setPageSize(viewportSize);
         d->vertical->setStepSize(d->widget->scrollUnit(Qt::Vertical));
@@ -329,7 +329,7 @@ void ScrollPane::setFlip(Plasma::Flip flip)
 void ScrollPane::scrollTo(QRectF rect)
 {
     QSizeF viewportSize = currentViewportSize();
-    QSizeF scrollableSize = d->widget->fullSize();
+    QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
 
     // Vertical scroll
     if (d->vertical->value() > rect.top()) {

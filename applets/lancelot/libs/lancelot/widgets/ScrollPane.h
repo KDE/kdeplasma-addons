@@ -45,9 +45,12 @@ public:
     virtual ~Scrollable();
 
     /**
-     * @returns the size of the Scrollable widget
+     * @returns the desired size of the Scrollable widget
+     * when the container provides it with a specified
+     * viewport size
+     * @arg viewportSize viewport size
      */
-    virtual QSizeF fullSize() const = 0;
+    virtual QSizeF sizeFor(QSizeF viewportSize) const = 0;
 
     /**
      * Sets the currently displayed area.

@@ -26,7 +26,7 @@ include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}
         ${KDE4_INCLUDES}
-        
+
         ${LANCELOT_INCLUDE_DIR}
 )
 
@@ -115,4 +115,4 @@ install(FILES
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 
 # tests
-add_subdirectory(tests)
+# add_subdirectory(tests)

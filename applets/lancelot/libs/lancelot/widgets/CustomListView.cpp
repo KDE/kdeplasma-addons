@@ -266,8 +266,9 @@ CustomListItemFactory * CustomList::itemFactory() const
     return d->factory;
 }
 
-QSizeF CustomList::fullSize() const //>
+QSizeF CustomList::sizeFor(QSizeF viewportSize) const //>
 {
+#warning Make this work properly
     d->updateSizeInfo();
     return size();
 } //<
@@ -276,7 +277,7 @@ void CustomList::viewportChanged(QRectF viewport) //>
 {
     if (d->viewport.size() != viewport.size()) {
         d->viewport.setSize(viewport.size());
-        resize(d->viewport.width(), fullSize().height());
+        resize(d->viewport.width(), sizeFor(viewport.size()).height());
         d->viewportSizeUpdated();
     }
     if (d->viewport.topLeft() != viewport.topLeft()) {
