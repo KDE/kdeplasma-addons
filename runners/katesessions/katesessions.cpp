@@ -27,7 +27,13 @@
 #include <KIcon>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KUrl>
+#include <KStringHandler>
+#include <QFile>
 
+bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) {
+    return KStringHandler::naturalCompare(s1,s2)==-1;
+}
 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
@@ -61,13 +67,19 @@ void KateSessions::loadSessions()
     // Should we add a match for this option or would that clutter the matches too much?
     QStringList sessions = QStringList();
     const QStringList list = KGlobal::dirs()->findAllResources( "data", "kate/sessions/*.katesession", KStandardDirs::NoDuplicates );
+    KUrl url;
     for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
     {
-        KConfig _config( *it, KConfig::SimpleConfig );
+/*        KConfig _config( *it, KConfig::SimpleConfig );
         KConfigGroup config(&_config, "General" );
-        QString name =  config.readEntry( "Name" );
+        QString name =  config.readEntry( "Name" );*/
+        url.setPath(*it);
+        QString name=url.fileName();
+        name = QUrl::fromPercentEncoding(QFile::encodeName(url.fileName()));
+        name.chop(12);///.katesession==12
         sessions.append( name );
     }
+    qSort(sessions.begin(),sessions.end(),katesessions_runner_compare_sessions);
     m_sessions = sessions;
 }
 
