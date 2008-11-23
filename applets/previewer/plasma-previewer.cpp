@@ -362,15 +362,12 @@ void Previewer::openUrls(KUrl::List list)
         if (mimeType->is("inode/directory")) {
             QDir dir(url.pathOrUrl());
             dir.setFilter(QDir::NoDotAndDotDot | QDir::AllEntries);
-            QString basePath = dir.path();
-
-            if (!basePath.endsWith(QDir::separator())) {
-                basePath.append(QDir::separator());
-            }
 
             QStringList entries = dir.entryList();
             foreach (const QString &entry, entries) {
-                addPreview(basePath + entry);
+                KUrl u = url;
+                u.addPath(entry);
+                addPreview(u);
             }
         } else {
             // this avoids items that cannot have a part
