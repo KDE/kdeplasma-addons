@@ -29,7 +29,7 @@ namespace Lancelot
 {
 
 // Scrollable interface common functions implementation
-
+//>
 class Scrollable::Private {
 public:
     ScrollPane * pane;
@@ -57,10 +57,11 @@ ScrollPane * Scrollable::scrollPane() const
 {
     return d->pane;
 }
+//<
 
 // ScrollPane implementation
 
-class ScrollPane::Private {
+class ScrollPane::Private { //>
 public:
     Private(ScrollPane * parent)
         : q(parent), widget(NULL), layout(NULL),
@@ -84,9 +85,9 @@ public:
     ScrollBar * horizontal;
     QGraphicsWidget * centerContainer;
     Flags flags;
-};
+}; //<
 
-ScrollPane::ScrollPane(QGraphicsItem * parent)
+ScrollPane::ScrollPane(QGraphicsItem * parent) //>
     : Widget(parent), d(new Private(this))
 {
     setAcceptsHoverEvents(true);
@@ -117,9 +118,9 @@ ScrollPane::ScrollPane(QGraphicsItem * parent)
 
     setLayout(d->layout);
     L_WIDGET_SET_INITIALIZED;
-}
+} //<
 
-ScrollPane::~ScrollPane()
+ScrollPane::~ScrollPane() //>
 {
     // delete d->layout;
     setLayout(NULL);
@@ -128,9 +129,9 @@ ScrollPane::~ScrollPane()
     delete d->vertical;
     delete d->centerContainer;
     delete d;
-}
+} //<
 
-void ScrollPane::setScrollableWidget(Scrollable * widget)
+void ScrollPane::setScrollableWidget(Scrollable * widget) //>
 {
     if (d->widget == widget) {
         return;
@@ -141,40 +142,39 @@ void ScrollPane::setScrollableWidget(Scrollable * widget)
     QGraphicsWidget * qgw = dynamic_cast<QGraphicsWidget *>(widget);
     if (qgw) {
         qgw->setParentItem(d->centerContainer);
-        d->updateViewport();
-        scrollableWidgetSizeUpdated();
+        scrollableWidgetSizeUpdateNeeded();
     }
-}
+} //<
 
-QSizeF ScrollPane::maximumViewportSize() const
+QSizeF ScrollPane::maximumViewportSize() const //>
 {
     return size();
-}
+} //<
 
-QSizeF ScrollPane::currentViewportSize() const
+QSizeF ScrollPane::currentViewportSize() const //>
 {
     return d->centerContainer->size();
-}
+} //<
 
-void ScrollPane::scrollableWidgetSizeUpdated()
+void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
 {
-    kDebug() << "st1";
     if (!d->widget) {
         return;
     }
 
-    kDebug() << "st2";
     d->layout->setAutoSize(FullBorderLayout::RightBorder);
     d->layout->setAutoSize(FullBorderLayout::BottomBorder);
 
     bool hasHorizontal;
     bool hasVertical;
 
-    hasHorizontal = d->widget->sizeFor(currentViewportSize()).width() > maximumViewportSize().width();
-    if (hasVertical   = d->widget->sizeFor(currentViewportSize()).height() > maximumViewportSize().height()) {
-        hasHorizontal = d->widget->sizeFor(currentViewportSize()).width() > currentViewportSize().width();
+    QSizeF testSize = maximumViewportSize();
+    QSizeF neededSize = d->widget->sizeFor(testSize);
+    hasHorizontal = neededSize.width()  > testSize.width();
+    hasVertical   = neededSize.height() > testSize.height();
+    if (hasVertical) {
+        hasHorizontal = d->widget->sizeFor(currentViewportSize()).width()  > testSize.width();
     }
-    kDebug() << "st3" << hasHorizontal << hasVertical;
 
     d->horizontal->setVisible(hasHorizontal);
     d->vertical->setVisible(hasVertical);
@@ -185,6 +185,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
         d->horizontal->setMaximum(0);
         d->layout->setSize(0, FullBorderLayout::BottomBorder);
     }
+
     if (!hasVertical) {
         d->vertical->setValue(0);
         d->vertical->setMinimum(0);
@@ -195,6 +196,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     int viewportSize;
 
     if (hasHorizontal) {
+        kDebug() << "Showing horizontal scrollbar";
         viewportSize = currentViewportSize().width();
         d->horizontal->setMinimum(0);
         d->horizontal->setMaximum(d->widget->sizeFor(currentViewportSize()).width() - viewportSize);
@@ -207,6 +209,7 @@ void ScrollPane::scrollableWidgetSizeUpdated()
     }
 
     if (hasVertical) {
+        kDebug() << "Showing vertical scrollbar";
         viewportSize = currentViewportSize().height();
         d->vertical->setMinimum(0);
         d->vertical->setMaximum(d->widget->sizeFor(currentViewportSize()).height() - viewportSize);
@@ -217,53 +220,49 @@ void ScrollPane::scrollableWidgetSizeUpdated()
             d->vertical->hide();
         }
     }
-}
 
-void ScrollPane::setGeometry(const QRectF & rect)
+    d->updateViewport();
+} //<
+
+void ScrollPane::setGeometry(const QRectF & rect) //>
 {
-    if (geometry() == rect || rect.isEmpty()) {
-        return;
-    }
-
     Widget::setGeometry(rect);
 
-    kDebug() << geometry();
-    d->updateViewport();
-    scrollableWidgetSizeUpdated();
-}
+    scrollableWidgetSizeUpdateNeeded();
+} //<
 
-void ScrollPane::scrollHorizontal(int value)
+void ScrollPane::scrollHorizontal(int value) //>
 {
     kDebug() << value;
     d->horizontal->setValue(value);
     d->updateViewport();
-}
+} //<
 
-void ScrollPane::scrollVertical(int value)
+void ScrollPane::scrollVertical(int value) //>
 {
     kDebug() << value;
     d->vertical->setValue(value);
     d->updateViewport();
-}
+} //<
 
-void ScrollPane::setFlag(Flag flag)
+void ScrollPane::setFlag(Flag flag) //>
 {
     d->flags |= flag;
     setFlags(d->flags);
-}
+} //<
 
-void ScrollPane::clearFlag(Flag flag)
+void ScrollPane::clearFlag(Flag flag) //>
 {
     d->flags &= ~ flag;
     setFlags(d->flags);
-}
+} //<
 
-ScrollPane::Flags ScrollPane::flags() const
+ScrollPane::Flags ScrollPane::flags() const //>
 {
     return d->flags;
-}
+} //<
 
-void ScrollPane::setFlags(Flags flags)
+void ScrollPane::setFlags(Flags flags) //>
 {
     d->flags = flags;
     if (d->flags & ClipScrollable) {
@@ -277,9 +276,9 @@ void ScrollPane::setFlags(Flags flags)
         d->horizontal->hide();
         d->vertical->hide();
     }
-}
+} //<
 
-void ScrollPane::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
+void ScrollPane::hoverEnterEvent(QGraphicsSceneHoverEvent * event) //>
 {
     kDebug();
     Widget::hoverEnterEvent(event);
@@ -293,9 +292,9 @@ void ScrollPane::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
     if (d->layout->size(FullBorderLayout::BottomBorder) != 0) {
         d->horizontal->setVisible(true);
     }
-}
+} //<
 
-void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
 {
     kDebug();
     Widget::hoverLeaveEvent(event);
@@ -310,23 +309,23 @@ void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     if (d->layout->size(FullBorderLayout::BottomBorder) != 0) {
         d->horizontal->hide();
     }
-}
+} //<
 
-void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event)
+void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event) //>
 {
     if (event->modifiers() & Qt::ControlModifier) {
         d->horizontal->wheelEvent(event);
     } else {
         d->vertical->wheelEvent(event);
     }
-}
+} //<
 
-void ScrollPane::setFlip(Plasma::Flip flip)
+void ScrollPane::setFlip(Plasma::Flip flip) //>
 {
     d->layout->setFlip(flip);
-}
+} //<
 
-void ScrollPane::scrollTo(QRectF rect)
+void ScrollPane::scrollTo(QRectF rect) //>
 {
     QSizeF viewportSize = currentViewportSize();
     QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
@@ -344,7 +343,7 @@ void ScrollPane::scrollTo(QRectF rect)
     } else if (d->horizontal->value() + viewportSize.height() < rect.bottom()) {
         scrollHorizontal(rect.top());
     }
-}
+} //<
 
 } // namespace Lancelot
 

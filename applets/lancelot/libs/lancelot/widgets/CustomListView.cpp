@@ -47,16 +47,14 @@ CustomListItemFactory::~CustomListItemFactory()
 //> CustomList
 class CustomList::Private {
 public:
-    Private(CustomList * parent = NULL,
-            CustomListItemFactory * f = NULL)
-        : q(parent), factory(f), scale(-1)
+    Private(CustomList * parent = NULL, CustomListItemFactory * f = NULL) //>
+        : q(parent), factory(f), scale(-1), sizeUpdate(false)
     {
-        positionItems();
         margins[Plasma::TopMargin] = 0;
         margins[Plasma::LeftMargin] = 0;
         margins[Plasma::RightMargin] = 0;
         margins[Plasma::BottomMargin] = 0;
-    }
+    } //<
 
     #define returnIfFactoryNotSet if (!factory) return
 
@@ -77,13 +75,6 @@ public:
 
         if (startPosition < 0 || startPosition > factory->itemCount()) {
             return;
-        }
-
-        if (updateSizeInfo()) {
-            // viewportSizeUpdated();
-            // viewportOriginUpdated();
-            // return;
-            startPosition = 0;
         }
 
         qreal top(margins[Plasma::TopMargin]);
@@ -111,29 +102,19 @@ public:
             top += height;
         }
 
+        /*
         if (factory->itemCount() > 0) {
             q->resize(viewport.width(),
                     item->geometry().bottom() + margins[Plasma::BottomMargin]);
         } else {
             q->resize(0, 0);
         }
+        */
 
-        updateSizeInfo();
         viewportOriginUpdated();
     } //<
 
-    void updateWidth() //>
-    {
-        for (int i = 0; i < factory->itemCount(); i++) {
-            QGraphicsWidget * item = itemForIndex(i);
-            item->resize(
-                    viewport.width() - margins[Plasma::LeftMargin]
-                                 - margins[Plasma::RightMargin],
-                    item->size().height());
-        }
-    } //<
-
-    bool updateSizeInfo() //>
+    void updateSizeInfo() //>
     {
         QMap < Qt::SizeHint, int > osizes = sizes;
 
@@ -141,7 +122,7 @@ public:
         sizes[Qt::PreferredSize] = 0;
         sizes[Qt::MaximumSize]   = 0;
 
-        returnIfFactoryNotSet false;
+        returnIfFactoryNotSet;
 
         for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
@@ -152,32 +133,23 @@ public:
                 factory->itemHeight(i, Qt::MaximumSize);
         }
 
-        if (sizes[Qt::MinimumSize] > viewport.height()) {
-            scale = -1;
-        } else {
-            if (sizes[Qt::MaximumSize] < viewport.height()) {
-                scale = 1;
-            } else {
-                scale = viewport.height() /
-                    (qreal) sizes[Qt::MaximumSize];
-            }
-        }
-
         if (q && q->scrollPane() && osizes != sizes) {
-            q->scrollPane()->scrollableWidgetSizeUpdated();
+            sizeUpdate = true;
+            q->scrollPane()->scrollableWidgetSizeUpdateNeeded();
+            sizeUpdate = false;
         }
-
-        return osizes != sizes;
     } //<
 
     void viewportOriginUpdated() //>
     {
+        returnIfFactoryNotSet;
+
         // Due to strange Qt behaviour
         // which shows items when show() is
         // invoked although the parent is hidden
-        if (!q->isVisible()) {
-            return;
-        }
+        // if (!q->isVisible()) {
+        //    return;
+        // }
 
         kDebug() << viewport;
 
@@ -186,7 +158,9 @@ public:
             QGraphicsWidget * item = itemForIndex(i);
             QRectF itemGeometry = item->geometry();
             if (viewport.intersects(itemGeometry)) {
-                item->show();
+                if (q->isVisible()) {
+                    item->show();
+                }
                 transform.reset();
                 if (!viewport.contains(itemGeometry)) {
                     QRectF clip = viewport.intersect(itemGeometry);
@@ -202,12 +176,6 @@ public:
         }
     } //<
 
-    void viewportSizeUpdated() //>
-    {
-        positionItems();
-        updateWidth();
-    } //<
-
     //> Variable Declarations
     CustomList * q;
     CustomListItemFactory * factory;
@@ -215,28 +183,27 @@ public:
     QRectF viewport;
     qreal scale;
     QMap < Plasma::MarginEdge, qreal > margins;
+    bool sizeUpdate : 1;
     //<
 };
 
-CustomList::CustomList(QGraphicsItem * parent)
+CustomList::CustomList(QGraphicsItem * parent) //>
     : QGraphicsWidget(parent), d(new Private(this))
 {
-}
+} //<
 
-CustomList::CustomList(
-        CustomListItemFactory * factory,
-        QGraphicsItem * parent)
+CustomList::CustomList(CustomListItemFactory * factory, QGraphicsItem * parent) //>
     : QGraphicsWidget(parent), d(new Private(this))
 {
     setItemFactory(factory);
-}
+} //<
 
-CustomList::~CustomList()
+CustomList::~CustomList() //>
 {
     delete d;
-}
+} //<
 
-void CustomList::setItemFactory(CustomListItemFactory * f)
+void CustomList::setItemFactory(CustomListItemFactory * f) //>
 {
     // Releasing the old factory
     if (d->factory) {
@@ -258,72 +225,87 @@ void CustomList::setItemFactory(CustomListItemFactory * f)
     connect(f, SIGNAL(updated()),
             this, SLOT(factoryUpdated()));
 
-    d->positionItems();
-}
+    d->updateSizeInfo();
+} //<
 
-CustomListItemFactory * CustomList::itemFactory() const
+CustomListItemFactory * CustomList::itemFactory() const //>
 {
     return d->factory;
-}
+} //<
 
 QSizeF CustomList::sizeFor(QSizeF viewportSize) const //>
 {
-#warning Make this work properly
-    d->updateSizeInfo();
-    return size();
+    QSizeF result = viewportSize;
+    if (result.height() < d->sizes[Qt::MinimumSize]) {
+        result.setHeight(d->sizes[Qt::PreferredSize]);
+    } else if (result.height() > d->sizes[Qt::MaximumSize]) {
+        result.setHeight(d->sizes[Qt::MaximumSize]);
+    }
+    return result;
 } //<
 
 void CustomList::viewportChanged(QRectF viewport) //>
 {
-    if (d->viewport.size() != viewport.size()) {
+    if (d->sizeUpdate || d->viewport.size() != viewport.size()) {
+        if (d->sizes[Qt::MinimumSize] > d->viewport.height()) {
+            d->scale = -1;
+        } else {
+            if (d->sizes[Qt::MaximumSize] < d->viewport.height()) {
+                d->scale = 1;
+            } else {
+                d->scale = d->viewport.height() /
+                    (qreal) d->sizes[Qt::MaximumSize];
+            }
+        }
+
         d->viewport.setSize(viewport.size());
         resize(d->viewport.width(), sizeFor(viewport.size()).height());
-        d->viewportSizeUpdated();
-    }
-    if (d->viewport.topLeft() != viewport.topLeft()) {
+        d->positionItems();
+        d->viewportOriginUpdated();
+    } else if (d->viewport.topLeft() != viewport.topLeft()) {
         d->viewport = viewport;
         d->viewportOriginUpdated();
-        kDebug() << viewport.topLeft();
         setPos(- d->viewport.topLeft());
     }
+
+    d->viewport = viewport;
 } //<
 
-qreal CustomList::scrollUnit(Qt::Orientation direction)
+qreal CustomList::scrollUnit(Qt::Orientation direction) //>
 {
     return 20;
-}
+} //<
 
-void CustomList::factoryItemInserted(int position)
+void CustomList::factoryItemInserted(int position) //>
 {
-    kDebug() << position;
-    d->positionItems(position);
-}
+    d->updateSizeInfo();
+} //<
 
-void CustomList::factoryItemDeleted(int position)
+void CustomList::factoryItemDeleted(int position) //>
 {
-    d->positionItems(position);
-}
+    d->updateSizeInfo();
+} //<
 
-void CustomList::factoryItemAltered(int position)
+void CustomList::factoryItemAltered(int position) //>
 {
-    d->positionItems(position);
-}
+    d->updateSizeInfo();
+} //<
 
-void CustomList::factoryUpdated()
+void CustomList::factoryUpdated() //>
 {
-    d->positionItems();
-}
+    d->updateSizeInfo();
+} //<
 
-void CustomList::setMargin(Plasma::MarginEdge margin, qreal value)
+void CustomList::setMargin(Plasma::MarginEdge margin, qreal value) //>
 {
     d->margins[margin] = value;
-    d->positionItems();
-}
+    d->updateSizeInfo();
+} //<
 
-qreal CustomList::margin(Plasma::MarginEdge margin)
+qreal CustomList::margin(Plasma::MarginEdge margin) //>
 {
     return d->margins[margin];
-}
+} //<
 
 //<
 

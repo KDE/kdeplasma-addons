@@ -177,7 +177,7 @@ public Q_SLOTS:
      * Call this slot when the scrollable widget updates
      * its side
      */
-    void scrollableWidgetSizeUpdated();
+    void scrollableWidgetSizeUpdateNeeded();
 
     /**
      * Scrolls the view horizontally to the specified value
