@@ -252,8 +252,8 @@
                     <item:layout name="layoutPanelSearch" type="Lancelot::NodeLayout">
                         <item:widget
                             name="listSearchLeft" type="Lancelot::ActionListView"
-                            extenderPosition="Right"
-                            group="ActionListView-Right"
+                            extenderPosition="Left"
+                            group="ActionListView-Left"
                             itemsGroup="ActionListView-Items"
 
                             Lancelot__NodeLayout:topLeft     = "0, 0"

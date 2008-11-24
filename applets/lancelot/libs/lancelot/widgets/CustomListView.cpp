@@ -269,11 +269,11 @@ void CustomList::viewportChanged(QRectF viewport) //>
         resize(d->viewport.width(), sizeFor(viewport.size()).height());
         d->positionItems();
         d->viewportOriginUpdated();
-    } else if (d->viewport.topLeft() != viewport.topLeft()) {
+    } //else if (d->viewport.topLeft() != viewport.topLeft()) {
         d->viewport = viewport;
         d->viewportOriginUpdated();
         setPos(- d->viewport.topLeft());
-    }
+    ///}
 
     d->viewport = viewport;
 } //<

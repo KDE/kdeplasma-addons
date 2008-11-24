@@ -495,7 +495,7 @@ void PassagewayView::keyPressEvent(QKeyEvent * event)
     }
 
     if (oindex != d->focusIndex) {
-        if (oindex == 0 || oindex > d->focusIndex) {
+        if ((oindex == 0 || oindex > d->focusIndex) && oindex < d->lists.count()) {
             d->lists.at(oindex)->clearSelection();
         }
         if (d->focusIndex == 0 || oindex < d->focusIndex) {
