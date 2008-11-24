@@ -279,6 +279,7 @@ void Luna::calcStatus(time_t time)
         kFatal() << "coolo can't count\n";
     }
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
+    update();
 }
 
 #include "luna.moc"
