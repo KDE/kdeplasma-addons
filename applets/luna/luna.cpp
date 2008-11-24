@@ -297,6 +297,7 @@ void Luna::calcStatus(time_t time)
     #if 0
     setToolTip(toolTipData);
     #endif
+    update();
 }
 
 #include "luna.moc"
