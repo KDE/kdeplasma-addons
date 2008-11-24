@@ -35,10 +35,12 @@
 
 ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
-    , m_book(0)
 {
     Q_UNUSED(args);
     setObjectName("Contacts");
+
+    m_book = KABC::StdAddressBook::self(true /*asynchronous*/);
+    m_book->asyncLoad();
 
     m_icon = KIcon("internet-mail");
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
@@ -47,16 +49,6 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
 
 ContactsRunner::~ContactsRunner()
 {
-}
-
-KABC::AddressBook* ContactsRunner::book()
-{
-    if(! m_book) {
-        // try to delay loading all resources of the users standard address book synchronously as long as possible.
-        m_book = KABC::StdAddressBook::self();
-        m_book->load();
-    }
-    return m_book;
 }
 
 void ContactsRunner::match(Plasma::RunnerContext &context)
@@ -69,7 +61,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 
     QList<Plasma::QueryMatch> matches;
 
-    foreach(const KABC::Addressee &a, book()->allAddressees()) {
+    foreach(const KABC::Addressee &a, m_book->allAddressees()) {
 	if(a.realName().contains(term, Qt::CaseInsensitive) || a.preferredEmail().contains(term, Qt::CaseInsensitive)) {
 	    kDebug() << "Possible match: " << a.realName() << " <" << a.preferredEmail() << ">";
 	    Plasma::QueryMatch match(this);
