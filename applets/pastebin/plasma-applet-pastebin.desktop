@@ -2,6 +2,7 @@
 Name=Pastebin
 Name[el]=Κάδος επικόλλησης
 Name[gl]=Apegar
+Name[nn]=Teksttavle
 Name[pt]=Colagem
 Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
@@ -11,6 +12,7 @@ Comment[el]=Επικόλληση κειμένου/εικόνων σε έναν �
 Comment[it]=Incolla testo/immagini su un server remoto
 Comment[nds]=Text oder Biller op en feern Server infögen
 Comment[nl]=Tekst/afbeeldingen plakken op een externe server
+Comment[nn]=Kopier tekst og bilete til tenar
 Comment[pt]=Colar o texto/imagens num servidor remoto
 Comment[pt_BR]=Colar o texto/imagens para um servidor remoto
 Comment[sv]=Klistra in text eller bilder på en fjärrserver
