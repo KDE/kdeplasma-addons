@@ -40,7 +40,6 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     setObjectName("Contacts");
 
     m_book = KABC::StdAddressBook::self(true /*asynchronous*/);
-    m_book->asyncLoad();
 
     m_icon = KIcon("internet-mail");
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
