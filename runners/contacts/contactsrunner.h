@@ -38,6 +38,8 @@ class ContactsRunner : public Plasma::AbstractRunner {
         void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
 
     private:
+        KABC::AddressBook* book();
+
         KABC::AddressBook *m_book;
         KIcon m_icon;
 };
