@@ -66,6 +66,11 @@ public:
      */
     static FlipLayoutManager * instance();
 
+    /**
+     * Implementation of the actual flipping
+     */
+    void setGeometry(QGraphicsLayout * layout) const;
+
 private:
     FlipLayoutManager();
     ~FlipLayoutManager();
@@ -99,41 +104,10 @@ public:
         return FlipLayoutManager::instance()->flip(this);
     }
 
-    L_Override virtual void setGeometry(const QRectF & geometry)
+    L_Override virtual void setGeometry(const QRectF & rect)
     {
-        SuperLayout::setGeometry(geometry);
-        QRectF rect = SuperLayout::geometry();
-
-        int count = SuperLayout::count();
-
-        if (flip() == Plasma::NoFlip) {
-            return;
-        }
-
-        QRectF childGeometry;
-        for (int i = 0; i < count; i++) {
-            QGraphicsLayoutItem * item = SuperLayout::itemAt(i);
-
-            if (!item) continue;
-
-            childGeometry = item->geometry();
-            if (flip() & Plasma::HorizontalFlip) {
-                // 2 * rect.left() - twice because we already have one
-                // value of rect.left() inside the childGeometry.left()
-                childGeometry.moveLeft(
-                    2 * rect.left()       + rect.width()
-                      - childGeometry.left()  - childGeometry.width()
-                );
-            }
-            if (flip() & Plasma::VerticalFlip) {
-                // 2 * rect.top() - same reason as aforemontioned
-                childGeometry.moveTop(
-                    2 * rect.top()      + rect.height()
-                      - childGeometry.top() - childGeometry.height()
-                );
-            }
-            item->setGeometry(childGeometry);
-        }
+        SuperLayout::setGeometry(rect);
+        FlipLayoutManager::instance()->setGeometry(this);
     }
 
 };

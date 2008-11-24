@@ -20,6 +20,8 @@
 #include "FlipLayout.h"
 #include <QSet>
 #include <QMap>
+#include <KDebug>
+#include <QGraphicsWidget>
 
 namespace Lancelot
 {
@@ -85,6 +87,32 @@ Plasma::Flip FlipLayoutManager::flip(const QGraphicsLayout * layout) const
         return d->flips[l];
     }
     return 0;
+}
+
+void FlipLayoutManager::setGeometry(QGraphicsLayout * layout) const
+{
+    int count = layout->count();
+    QRectF rect = layout->geometry();
+
+    if (flip(layout) == Plasma::NoFlip) {
+        return;
+    }
+
+    QRectF childGeometry;
+    for (int i = 0; i < count; i++) {
+        QGraphicsLayoutItem * item = layout->itemAt(i);
+
+        if (!item) continue;
+
+        childGeometry = item->geometry();
+        if (flip(layout) & Plasma::HorizontalFlip) {
+            childGeometry.moveLeft(rect.left() + rect.right() - childGeometry.right());
+        }
+        if (flip(layout) & Plasma::VerticalFlip) {
+            childGeometry.moveTop(rect.top() + rect.bottom() - childGeometry.bottom());
+        }
+        item->setGeometry(childGeometry);
+    }
 }
 
 }

@@ -20,6 +20,7 @@
 #include "ColumnLayout.h"
 #include <QList>
 #include <QGraphicsWidget>
+#include <KDebug>
 
 #define GOLDEN_SIZE  0.381966011250105  // 1 / (1 + phi); phi = (sqrt(5) + 1) / 2
 
@@ -115,6 +116,7 @@ public:
                 if (itemWidth != 0) {
                     newGeometry.setWidth(itemWidth);
                     item->setGeometry(newGeometry);
+                    kDebug() << newGeometry;
                     if (!item->isVisible()) {
                         item->setVisible(true);
                     }

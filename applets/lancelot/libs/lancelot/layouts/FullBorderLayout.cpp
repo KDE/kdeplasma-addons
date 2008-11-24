@@ -20,6 +20,7 @@
 #include "FullBorderLayout.h"
 #include <lancelot/lancelot.h>
 #include <KDebug>
+#include <QGraphicsWidget>
 
 namespace Lancelot {
 
@@ -120,6 +121,7 @@ FullBorderLayout::~FullBorderLayout()
 void FullBorderLayout::setGeometry(const QRectF & rect)
 {
     QGraphicsLayout::setGeometry(rect);
+    kDebug() << rect;
 
     QRectF effectiveRect = geometry();
     qreal left = 0, top = 0, right = 0, bottom = 0;
@@ -156,6 +158,7 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
     itemRect.setHeight(effectiveRect.height() - topBorder - bottomBorder);
 
     if (d->itemPositions[Right]) {
+        kDebug() << "right" << itemRect;
         d->itemPositions[Right]->setGeometry(itemRect);
     }
 
@@ -194,6 +197,7 @@ void FullBorderLayout::setGeometry(const QRectF & rect)
             );
 
     if (d->itemPositions[Center]) {
+        kDebug() << "center" << itemRect;
         d->itemPositions[Center]->setGeometry(itemRect);
     }
 }

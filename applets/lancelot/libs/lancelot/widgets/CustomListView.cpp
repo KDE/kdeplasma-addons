@@ -124,6 +124,7 @@ public:
 
         returnIfFactoryNotSet;
 
+        kDebug() << factory->itemCount();
         for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
@@ -133,8 +134,13 @@ public:
                 factory->itemHeight(i, Qt::MaximumSize);
         }
 
+        kDebug()
+            << (void *)q
+            << (void *)q->scrollPane()
+            << sizes << osizes;
         if (q && q->scrollPane() && osizes != sizes) {
             sizeUpdate = true;
+            kDebug() << "calling scrollableWidgetSizeUpdateNeeded";
             q->scrollPane()->scrollableWidgetSizeUpdateNeeded();
             sizeUpdate = false;
         }
@@ -246,6 +252,7 @@ QSizeF CustomList::sizeFor(QSizeF viewportSize) const //>
 
 void CustomList::viewportChanged(QRectF viewport) //>
 {
+    kDebug();
     if (d->sizeUpdate || d->viewport.size() != viewport.size()) {
         if (d->sizes[Qt::MinimumSize] > d->viewport.height()) {
             d->scale = -1;
@@ -278,21 +285,25 @@ qreal CustomList::scrollUnit(Qt::Orientation direction) //>
 
 void CustomList::factoryItemInserted(int position) //>
 {
+    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemDeleted(int position) //>
 {
+    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemAltered(int position) //>
 {
+    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryUpdated() //>
 {
+    kDebug();
     d->updateSizeInfo();
 } //<
 

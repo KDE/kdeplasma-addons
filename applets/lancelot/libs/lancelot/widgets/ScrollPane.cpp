@@ -138,6 +138,7 @@ void ScrollPane::setScrollableWidget(Scrollable * widget) //>
     }
 
     d->widget = widget;
+    widget->setScrollPane(this);
 
     QGraphicsWidget * qgw = dynamic_cast<QGraphicsWidget *>(widget);
     if (qgw) {
