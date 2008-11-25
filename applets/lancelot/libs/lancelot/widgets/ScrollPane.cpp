@@ -339,10 +339,10 @@ void ScrollPane::scrollTo(QRectF rect) //>
     }
 
     // Horizontal scroll
-    if (d->horizontal->value() > rect.top()) {
-        scrollHorizontal(rect.top());
-    } else if (d->horizontal->value() + viewportSize.height() < rect.bottom()) {
-        scrollHorizontal(rect.top());
+    if (d->horizontal->value() > rect.left()) {
+        scrollHorizontal(rect.left());
+    } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
+        scrollVertical(rect.right() - viewportSize.width());
     }
 } //<
 

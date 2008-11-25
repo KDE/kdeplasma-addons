@@ -33,11 +33,14 @@ NewDocuments::~NewDocuments()
 
 void NewDocuments::load()
 {
-    addService("ooo-writer");
-    addService("ooo-impress");
-    addService("ooo-calc");
-    addService("inkscape");
-    addService("gimp");
+    QStringList applications;
+    applications
+        << "ooo-writer|writer|kword"
+        << "ooo-impress|impress|kpresenter"
+        << "ooo-calc|calc|kspread"
+        << "inkscape|karbon"
+        << "gimp|krita";
+    addServices(applications);
 }
 
 } // namespace Models

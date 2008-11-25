@@ -223,9 +223,10 @@ void MergedActionListViewModel::modelItemInserted(int modelIndex)
     fromChildCoordinates(index, model, modelIndex);
 
     if (m_hideEmptyModels && m->size() == 1) {
-        emit itemInserted(index - 1); // We insert the model name too // TODO: Check if this really works
+        modelUpdated();
+    } else {
+        emit itemInserted(index);
     }
-    emit itemInserted(index);
 }
 
 void MergedActionListViewModel::modelItemDeleted(int modelIndex)
@@ -240,9 +241,10 @@ void MergedActionListViewModel::modelItemDeleted(int modelIndex)
     fromChildCoordinates(index, model, modelIndex);
 
     if (m_hideEmptyModels && m->size() == 0) {
-        emit itemDeleted(index + 1); // We delete the model name too // TODO: Check if this really works
+        modelUpdated();
+    } else {
+        emit itemDeleted(index);
     }
-    emit itemDeleted(index);
 }
 
 void MergedActionListViewModel::modelItemAltered(int modelIndex)
