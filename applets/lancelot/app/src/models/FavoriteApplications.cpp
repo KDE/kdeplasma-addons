@@ -153,6 +153,12 @@ QMimeData * FavoriteApplications::PassagewayViewProxy::modelMimeData()
     map["type"]    = "list";
     map["model"]   = "FavoriteApplications";
 
+    QMimeData * data = new QMimeData();
+    data->setData("text/x-lancelotpart", Serializator::serialize(map).toAscii());
+    return data;
+
+    /* We don't need this hack anymore in 4.2
+     * (the code is now a part of plasma shell)
     KTemporaryFile file;
     file.setAutoRemove(false);
     file.setSuffix(".lancelotpart");
@@ -171,7 +177,7 @@ QMimeData * FavoriteApplications::PassagewayViewProxy::modelMimeData()
     data->setData("text/plain", urlData);
     file.close();
 
-    return data;
+    return data;*/
 }
 
 } // namespace Models

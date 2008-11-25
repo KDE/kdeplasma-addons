@@ -167,6 +167,11 @@ LancelotPart::LancelotPart(QObject *parent, const QVariantList &args)
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
 {
+    if (event->mimeData()->hasFormat("text/x-lancelotpart")) {
+        event->setAccepted(true);
+        return;
+    }
+
     if (!event->mimeData()->hasFormat("text/uri-list")) {
         event->setAccepted(false);
         return;
@@ -184,6 +189,13 @@ void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
 
 void LancelotPart::dropEvent(QGraphicsSceneDragDropEvent * event)
 {
+    if (event->mimeData()->hasFormat("text/x-lancelotpart")) {
+        event->setAccepted(true);
+        QString data = event->mimeData()->data("text/x-lancelotpart");
+        load(data);
+        return;
+    }
+
     if (!event->mimeData()->hasFormat("text/uri-list")) {
         event->setAccepted(false);
         return;

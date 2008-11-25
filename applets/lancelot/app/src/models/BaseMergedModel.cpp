@@ -54,6 +54,12 @@ QMimeData * BaseMergedModel::modelMimeData(int index) const
     map["type"]    = "list";
     map["model"]   = m_modelIDs.at(index);
 
+    QMimeData * data = new QMimeData();
+    data->setData("text/x-lancelotpart", Serializator::serialize(map).toAscii());
+    return data;
+
+    /* We don't need this hack anymore in 4.2
+     * (the code is now a part of plasma shell)
     KTemporaryFile file;
     file.setAutoRemove(false);
     file.setSuffix(".lancelotpart");
@@ -71,7 +77,7 @@ QMimeData * BaseMergedModel::modelMimeData(int index) const
     data->setData("text/plain", urlData);
     file.close();
 
-    return data;
+    return data;*/
 }
 
 void BaseMergedModel::setModelDropActions(int index, Qt::DropActions & actions,
