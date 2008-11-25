@@ -24,8 +24,6 @@
 #include <Plasma/Svg>
 
 class Plasma::DataEngine;
-
-class KDialog;
 class Ui::lifeConfig;
 
 class Life : public Plasma::Applet
@@ -40,7 +38,7 @@ class Life : public Plasma::Applet
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
 
     public slots:
-        void showConfigurationInterface();
+        void createConfigurationInterface(KConfigDialog *parent);
 
     protected slots:
         void configAccepted();
@@ -67,7 +65,6 @@ class Life : public Plasma::Applet
 
         int gensCounter;
 
-        KDialog *m_dialog;
         Ui::lifeConfig ui;
         QTimer timer;
 };

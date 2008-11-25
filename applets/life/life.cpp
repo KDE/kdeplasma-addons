@@ -25,7 +25,7 @@
 
 #include <Plasma/Svg>
 #include <Plasma/Theme>
-#include <KDialog>
+#include <KConfigDialog>
 #include <KDebug>
 
 #include "ui_lifeConfig.h"
@@ -33,7 +33,6 @@
 
 Life::Life(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-    m_dialog(0),
     timer(this)
 {
     setHasConfigurationInterface(true);
@@ -88,18 +87,13 @@ void Life::updateGame()
     update();
 }
 
-void Life::showConfigurationInterface()
+void Life::createConfigurationInterface(KConfigDialog *parent)
 {
-    if (m_dialog == 0) {
-        m_dialog = new KDialog;
-        m_dialog->setCaption( i18nc("@title:window","Configure Life") );
-        ui.setupUi(m_dialog->mainWidget());
-        m_dialog->mainWidget()->layout()->setMargin(0);
-        m_dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-
-        connect( m_dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-        connect( m_dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
-    }
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 
     ui.verticalCells->setValue(cellsArrayHeight - 2);
     ui.horizontalCells->setValue(cellsArrayWidth - 2);
@@ -111,8 +105,6 @@ void Life::showConfigurationInterface()
 
     ui.verticalCells->setMaximum(maxCells);
     ui.horizontalCells->setMaximum(maxCells);
-
-    m_dialog->show();
 }
 
 void Life::configAccepted()
