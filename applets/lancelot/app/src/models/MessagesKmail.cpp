@@ -104,7 +104,7 @@ void MessagesKmail::load()
         }
         m_kmailRunning = true;
 
-        foreach (QString folder, folders.value()) {
+        foreach (const QString& folder, folders.value()) {
             QDBusReply < QString > rfolder = m_interface->getFolder(folder);
             if (!rfolder.isValid() || rfolder.value().isEmpty()) {
                 continue;

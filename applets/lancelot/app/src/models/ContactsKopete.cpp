@@ -88,7 +88,7 @@ void ContactsKopete::load()
             return;
         }
 
-        foreach (QString contact, contacts.value()) {
+        foreach (const QString& contact, contacts.value()) {
             QStringList contactParts = contact.split(":");
             if (contactParts.size() != 3) {
                 continue;

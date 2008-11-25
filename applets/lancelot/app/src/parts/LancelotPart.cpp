@@ -248,7 +248,7 @@ bool LancelotPart::loadFromList(const QStringList & list)
 {
     bool loaded = false;
 
-    foreach (QString line, list) {
+    foreach (const QString& line, list) {
         if (load(line)) {
             loaded = true;
         }
