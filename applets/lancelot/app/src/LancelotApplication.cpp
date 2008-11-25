@@ -26,7 +26,7 @@
 
 #include <KAction>
 #include <KLocale>
-
+#include <KCrash>
 
 #include <lancelot/Global.h>
 #include "LancelotWindow.h"
@@ -67,6 +67,7 @@ void LancelotApplication::init()
     window = new LancelotWindow();
 
     setQuitOnLastWindowClosed(false);
+    KCrash::setFlags(KCrash::AutoRestart);
 
     new AppAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
