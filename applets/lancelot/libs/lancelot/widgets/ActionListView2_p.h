@@ -66,7 +66,7 @@ private Q_SLOTS:
 class ActionListView2ItemFactory: public CustomListItemFactory {
     Q_OBJECT
 public:
-    ActionListView2ItemFactory(ActionListViewModel * model, Instance * instance);
+    ActionListView2ItemFactory(ActionListViewModel * model, ActionListView2 * view, Instance * instance);
     ~ActionListView2ItemFactory();
 
     L_Override virtual CustomListItem * itemForIndex(int index);
@@ -120,6 +120,7 @@ private:
     WidgetGroup * m_itemsGroup;
     WidgetGroup * m_categoriesGroup;
     Instance * m_instance;
+    ActionListView2 * m_view;
 
     bool m_categoriesActivable;
 

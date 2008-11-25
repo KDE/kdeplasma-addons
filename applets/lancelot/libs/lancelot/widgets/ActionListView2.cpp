@@ -60,8 +60,10 @@ void ActionListView2Item::setSelected(bool selected)
     if (!selected) {
         hoverLeaveEvent(NULL);
     } else {
+        m_factory->m_view->scrollTo(geometry());
         hoverEnterEvent(NULL);
     }
+
     m_inSetSelected = false;
 }
 
@@ -72,6 +74,7 @@ bool ActionListView2Item::isSelected() const
 
 void ActionListView2Item::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
 {
+    Q_UNUSED(event);
     m_factory->itemContext(this);
 }
 
@@ -93,12 +96,12 @@ void ActionListView2Item::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 //<
 
 //> ActionListView2ItemFactory
-ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model, Instance * instance) //>
+ActionListView2ItemFactory::ActionListView2ItemFactory(ActionListViewModel * model, ActionListView2 * view, Instance * instance) //>
     : m_model(NULL),
       m_extenderPosition(NoExtender),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
-      m_instance(instance), m_categoriesActivable(false),
-      m_selectedItem(NULL)
+      m_instance(instance), m_view(view),
+      m_categoriesActivable(false), m_selectedItem(NULL)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
@@ -554,7 +557,7 @@ ActionListView2::~ActionListView2() //>
 void ActionListView2::setModel(ActionListViewModel * model) //>
 {
     if (!d->itemFactory) {
-        d->itemFactory = new ActionListView2ItemFactory(model, instance());
+        d->itemFactory = new ActionListView2ItemFactory(model, this, instance());
         list()->setItemFactory(d->itemFactory);
     } else {
         d->itemFactory->setModel(model);
