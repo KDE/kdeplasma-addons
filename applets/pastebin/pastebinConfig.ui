@@ -1,96 +1,48 @@
 <ui version="4.0" >
  <class>pastebinConfig</class>
  <widget class="QWidget" name="pastebinConfig" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>320</width>
-    <height>74</height>
-   </rect>
-  </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
-  <property name="minimumSize" >
-   <size>
-    <width>320</width>
-    <height>74</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>320</width>
-    <height>74</height>
-   </size>
-  </property>
   <property name="windowTitle" >
    <string>Pastebin Config Dialog</string>
   </property>
-  <widget class="QLabel" name="textServerLabel" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>101</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Pastebin server:</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="textServer" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>5</y>
-     <width>207</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text" >
-     <string>Pastebin.ca</string>
-    </property>
+  <layout class="QFormLayout" name="formLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="textServerLabel" >
+     <property name="text" >
+      <string>Pastebin server:</string>
+     </property>
+    </widget>
    </item>
-   <item>
-    <property name="text" >
-     <string>Pastebin.com</string>
-    </property>
+   <item row="0" column="1" >
+    <widget class="QComboBox" name="textServer" >
+     <item>
+      <property name="text" >
+       <string>Pastebin.ca</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Pastebin.com</string>
+      </property>
+     </item>
+    </widget>
    </item>
-  </widget>
-  <widget class="QComboBox" name="imageServer" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>40</y>
-     <width>207</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text" >
-     <string>Imagebin.ca</string>
-    </property>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="imageServerLabel" >
+     <property name="text" >
+      <string>Imagebin server:</string>
+     </property>
+    </widget>
    </item>
-  </widget>
-  <widget class="QLabel" name="imageServerLabel" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>43</y>
-     <width>101</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Imagebin server:</string>
-   </property>
-  </widget>
+   <item row="1" column="1" >
+    <widget class="QComboBox" name="imageServer" >
+     <item>
+      <property name="text" >
+       <string>Imagebin.ca</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
