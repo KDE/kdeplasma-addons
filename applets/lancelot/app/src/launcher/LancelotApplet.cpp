@@ -227,6 +227,7 @@ void LancelotApplet::applyConfig()
 
 void LancelotApplet::init()
 {
+    d->lancelot->addClient();
     setAcceptsHoverEvents(true);
     loadConfig();
     applyConfig();
