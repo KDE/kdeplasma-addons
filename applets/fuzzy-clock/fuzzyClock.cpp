@@ -190,7 +190,6 @@ void Clock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     parent->addPage(widget, i18n("General"), icon());
 
     ui.fuzzynessSlider->setSliderPosition( m_fuzzyness );

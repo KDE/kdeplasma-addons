@@ -313,7 +313,6 @@ void LancelotApplet::createConfigurationInterface(KConfigDialog * parent)
     parent->addPage(menuConfig, i18n("Menu"),
             "lancelot", i18n("Lancelot Menu"));
 
-    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 }

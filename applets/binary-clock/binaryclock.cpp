@@ -137,7 +137,6 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage(widget, i18n("General"), icon());
 
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);

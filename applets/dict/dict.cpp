@@ -322,7 +322,6 @@ void DictApplet::createConfigurationInterface(KConfigDialog *parent)
     m_dictsModel=new CheckableStringListModel(parent,m_dicts,m_activeDicts);
     widget->setModel(m_dictsModel);
 
-//     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage(widget, parent->windowTitle(), Applet::icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));

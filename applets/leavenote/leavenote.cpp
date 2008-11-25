@@ -135,7 +135,6 @@ void LeaveNote::createConfigurationInterface(KConfigDialog *dialog)
     KConfigGroup cg = config();
     ui.useKNotesCheckBox->setChecked(cg.readEntry("useKNotes", true));
 
-    dialog->setButtons(KDialog::Ok | KDialog::Cancel);  // | KDialog::Apply
     connect(dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 

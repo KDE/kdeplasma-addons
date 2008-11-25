@@ -124,7 +124,6 @@ void Timer::createConfigurationInterface(KConfigDialog *parent)
     QWidget *predefinedTimersWidget = new QWidget();
     predefinedTimersUi.setupUi(predefinedTimersWidget);
 
-    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage(widget, i18n("General"), icon());
     parent->addPage(predefinedTimersWidget, i18n("Predefined Timers"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));

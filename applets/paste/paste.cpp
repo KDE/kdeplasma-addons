@@ -69,7 +69,6 @@ void Paste::createConfigurationInterface(KConfigDialog *parent)
             m_autoPasteConfig, SLOT(setData(const ConfigData&)));
     m_autoPasteConfig->setData(cfg);
 
-    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     parent->addPage(m_snippetConfig, i18n("Texts"), "accessories-text-editor");
     parent->addPage(m_autoPasteConfig, i18n("Automatic Paste"), "edit-paste");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));

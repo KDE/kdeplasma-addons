@@ -327,7 +327,6 @@ void IncomingMsg::createConfigurationInterface(KConfigDialog *dialog)
     ui.showKopete->setChecked(cg.readEntry("showKopete", true));
     ui.showPidgin->setChecked(cg.readEntry("showPidgin", true));
 
-    dialog->setButtons(KDialog::Ok | KDialog::Cancel);  // | KDialog::Apply
     connect(dialog, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(dialog, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 

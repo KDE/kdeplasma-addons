@@ -513,7 +513,6 @@ void Twitter::showTweets()
 
 void Twitter::createConfigurationInterface(KConfigDialog *parent)
 {
-    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     connect( parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
     connect( parent, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
 
