@@ -71,7 +71,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
-    setPopupIcon("microblogging");
+    setPopupIcon("view-pim-journal");
 }
 
 void Twitter::init()
@@ -85,31 +85,37 @@ void Twitter::init()
 void Twitter::constraintsEvent(Plasma::Constraints constraints)
 {
     //i am an icon?
-    if (layout()->itemAt(0) != m_graphicsWidget) {
+    if ((constraints|Plasma::SizeConstraint || constraints|Plasma::FormFactorConstraint) &&
+        layout()->itemAt(0) != m_graphicsWidget) {
         paintIcon();
     }
 }
 
 void Twitter::paintIcon()
 {
-    QPixmap icon(size().toSize());
-    icon.fill(Qt::transparent);
+    int size = qMin(contentsRect().width(), contentsRect().height());
+
+    QPixmap icon = KIconLoader::global()->loadIcon("view-pim-journal", KIconLoader::NoGroup, size);
     QPainter p(&icon);
-    m_theme->paint(&p, contentsRect(), "icon");
+    //4.3: a notification system for popupapplets would be cool
     if (m_newTweets > 0) {
         QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
         QFontMetrics fm(font);
         QRect textRect(fm.boundingRect(QString::number(m_newTweets)));
-        textRect.moveBottomRight(boundingRect().bottomRight().toPoint());
+        int textSize = qMax(textRect.width(), textRect.height());
+        textRect.setSize(QSize(textSize, textSize));
+        textRect.moveBottomRight(icon.rect().bottomRight());
 
         QColor c(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor));
         c.setAlphaF(0.6);
 
         p.setBrush(c);
+        p.setPen(Qt::NoPen);
+        p.setRenderHints(QPainter::Antialiasing);
         p.drawEllipse(textRect);
 
         p.setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-        p.drawText(textRect,QString::number(m_newTweets));
+        p.drawText(textRect, Qt::AlignCenter, QString::number(m_newTweets));
     }
     p.end();
     setPopupIcon(icon);
@@ -125,6 +131,8 @@ void Twitter::popupEvent(bool show)
 
 void Twitter::focusInEvent(QFocusEvent *event)
 {
+    Q_UNUSED(event);
+
     m_statusEdit->setFocus();
 }
 
