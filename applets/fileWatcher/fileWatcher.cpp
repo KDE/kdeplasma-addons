@@ -108,7 +108,7 @@ void FileWatcher::loadFile(const QString& path)
   file->close();
 
   KMimeType::Ptr mimeType = KMimeType::findByFileContent(path);
-  if (!mimeType->name().contains("text")) {
+  if (!(mimeType->name().contains("text") || mimeType->name().contains("empty"))) {
     setConfigurationRequired(true, i18n("Cannot watch non-text file: %1", path));
     return;
   }
