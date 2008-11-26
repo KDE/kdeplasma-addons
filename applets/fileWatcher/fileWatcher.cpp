@@ -58,6 +58,8 @@ void FileWatcher::init()
   textItem->moveBy(BORDER_SIZE, BORDER_SIZE);
   textDocument = textItem->document();
 
+  QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(loadFile(QString)));
+
   KConfigGroup cg = config();
 
   QString path = cg.readEntry("path", QString());
@@ -125,7 +127,6 @@ void FileWatcher::loadFile(const QString& path)
   newData();
 
   watcher->addPath(path);
-  QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(newData()));
 }
 
 void FileWatcher::newData()

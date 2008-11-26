@@ -48,11 +48,11 @@ class FileWatcher : public Plasma::Applet
 
   private slots:
     void newData();
+    void loadFile(const QString& path);
 
     void createConfigurationInterface(KConfigDialog *parent);
 
   private:
-    void loadFile(const QString& path);
     void updateRows();
 
     QFile *file;
