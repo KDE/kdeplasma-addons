@@ -38,6 +38,7 @@
 #include <KUrl>
 #include <KDirSelectDialog>
 #include <KServiceTypeTrader>
+#include <kglobalsettings.h>
 
 #include <plasma/paintutils.h>
 
@@ -388,6 +389,10 @@ void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
+    if (droppedUrl.protocol() == "desktop") {
+	KUrl tmpUrl = KGlobalSettings::desktopPath() + droppedUrl.path();
+	droppedUrl = tmpUrl;
+	}
     // If the url is a local directory start slideshowmode
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
         m_slideShowPaths.append(droppedUrl.path());
