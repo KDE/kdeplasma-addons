@@ -92,9 +92,9 @@ void FileWatcher::updateRows()
 
 void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
 {
-    Q_UNUSED(constraints);
-
-    updateRows();
+    if (constraints & Plasma::SizeConstraint){
+        updateRows();
+    }
 }
 
 void FileWatcher::loadFile(const QString& path)
