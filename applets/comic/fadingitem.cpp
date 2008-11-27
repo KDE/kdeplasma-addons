@@ -23,10 +23,14 @@
 #include <KDebug>
 #include <Plasma/Animator>
 
-FadingItem::FadingItem( QGraphicsItem *parent ) : QGraphicsItem( parent ), mOpacity( 0.0 )
+FadingItem::FadingItem( QGraphicsItem *parent )
+    : QGraphicsItem( parent ),
+      mOpacity( 0.0 ),
+      mAnimId( 0 ),
+      mShowing( false )
 {
     connect( Plasma::Animator::self(), SIGNAL( customAnimationFinished( int ) ),
-             this , SLOT( animFinished() ));
+             this , SLOT( animFinished( int ) ));
 }
 
 void FadingItem::updatePixmap()
@@ -73,8 +77,12 @@ void FadingItem::updateFade( qreal progress )
     update();
 }
 
-void FadingItem::animFinished()
+void FadingItem::animFinished( int animId )
 {
+    if ( animId != mAnimId ) {
+        return;
+    }
+
     if ( mShowing ) {
         parentItem()->show();
         hide();
@@ -85,23 +93,31 @@ void FadingItem::animFinished()
 
 void FadingItem::showItem()
 {
+    if ( mAnimId ) {
+        Plasma::Animator::self()->stopCustomAnimation( mAnimId );
+    }
+
     mShowing = true;
     updatePixmap();
     mOpacity = 0.0;
     show();
-    Plasma::Animator::self()->customAnimation( 25, 100, Plasma::Animator::EaseInCurve,
-                                               this, "updateFade" );
+    mAnimId = Plasma::Animator::self()->customAnimation( 25, 100, Plasma::Animator::EaseInCurve,
+                                                          this, "updateFade" );
 }
 
 void FadingItem::hideItem()
 {
+    if ( mAnimId ) {
+        Plasma::Animator::self()->stopCustomAnimation( mAnimId );
+    }
+
     mShowing = false;
     updatePixmap();
     mOpacity = 1.0;
     parentItem()->hide();
     show();
-    Plasma::Animator::self()->customAnimation( 25, 100, Plasma::Animator::EaseInCurve,
-                                               this, "updateFade" );
+    mAnimId = Plasma::Animator::self()->customAnimation( 25, 100, Plasma::Animator::EaseInCurve,
+                                                          this, "updateFade" );
 }
 
 #include "fadingitem.moc"

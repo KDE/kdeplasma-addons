@@ -37,11 +37,12 @@ class FadingItem : public QObject, public QGraphicsItem
 
     protected slots:
         void updateFade( qreal progress );
-        void animFinished();
+        void animFinished( int animId );
 
     private:
         QPixmap mParent;
         qreal mOpacity;
+        int mAnimId;
         bool mShowing;
 };
 
