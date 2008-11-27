@@ -33,7 +33,9 @@
 
 #include <Plasma/Theme>
 
-#define BORDER_SIZE 5
+#include "fileWatcherTextItem.h"
+
+#define BORDER_SIZE 7
 
 FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
@@ -54,8 +56,9 @@ void FileWatcher::init()
   file = new QFile(this);
   textStream = 0;
   watcher = new QFileSystemWatcher(this);
-  textItem = new QGraphicsTextItem(this);
+  textItem = new FileWatcherTextItem(this);
   textItem->moveBy(BORDER_SIZE, BORDER_SIZE);
+  textItem->setSize((int) size().width() - BORDER_SIZE*2, (int) size().height() - BORDER_SIZE*2);
   textDocument = textItem->document();
 
   QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(loadFile(QString)));
@@ -93,6 +96,7 @@ void FileWatcher::updateRows()
 void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::SizeConstraint){
+        textItem->setSize((int) size().width() - BORDER_SIZE*2, (int) size().height() - BORDER_SIZE*2);
         updateRows();
     }
 }

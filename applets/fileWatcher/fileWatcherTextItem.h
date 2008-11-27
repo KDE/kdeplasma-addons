@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by Jesper Thomschutz <jesperht@yahoo.com>          *
+ *   Copyright (C) 2008 by Davide Bettio <davide.bettio@kdemail.net>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,55 +17,26 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef FILEWATCHER_H
-#define FILEWATCHER_H
 
-#include <Plasma/Applet>
+#ifndef FILEWATCHERTEXTITEM_H
+#define FILEWATCHERTEXTITEM_H
 
-#include "ui_fileWatcherConfig.h"
+#include <QGraphicsTextItem>
 
-class QFile;
-class QFileSystemWatcher;
-class QTextDocument;
-class FileWatcherTextItem;
-
-
-class FileWatcher : public Plasma::Applet
+class FileWatcherTextItem : public QGraphicsTextItem
 {
   Q_OBJECT
 
   public:
-    FileWatcher(QObject *parent, const QVariantList &args);
-    ~FileWatcher();
-
-    void init();
+      FileWatcherTextItem(QGraphicsItem * parent = 0);
+      void setSize(int w, int h);
 
   protected:
-    void constraintsEvent(Plasma::Constraints constraints);
-
-  protected slots:
-    void configAccepted();
-
-  private slots:
-    void newData();
-    void loadFile(const QString& path);
-
-    void createConfigurationInterface(KConfigDialog *parent);
+      virtual QRectF boundingRect() const;
 
   private:
-    void updateRows();
-
-    QFile *file;
-    QFileSystemWatcher *watcher;
-    FileWatcherTextItem *textItem;
-    QTextStream *textStream;
-    QTextDocument *textDocument;
-
-    QString m_tmpPath;
-
-    Ui::fileWatcherConfig ui;
+      int m_w;
+      int m_h;
 };
-
-K_EXPORT_PLASMA_APPLET(fileWatcher, FileWatcher)
 
 #endif
