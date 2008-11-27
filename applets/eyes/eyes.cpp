@@ -47,7 +47,6 @@ Eyes::Eyes(QObject *parent, const QVariantList &args)
     leftPupil->setElementID("leftPupil");
 
     timerId = startTimer(50);
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
 Eyes::~Eyes()
