@@ -83,7 +83,7 @@ void FileWatcher::init()
 void FileWatcher::updateRows()
 {
     QFontMetrics metrics(textItem->font());
-    textDocument->setMaximumBlockCount((int) (size().height() - 10) / metrics.height());
+    textDocument->setMaximumBlockCount((int) (size().height() - BORDER_SIZE*2) / metrics.height());
 
     if (textStream){
         textDocument->clear();
