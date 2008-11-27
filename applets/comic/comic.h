@@ -75,6 +75,7 @@ class ComicApplet : public Plasma::Applet
         void mousePressEvent( QGraphicsSceneMouseEvent* );
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
         void hoverEnterEvent( QGraphicsSceneHoverEvent* );
+        void hoverMoveEvent( QGraphicsSceneHoverEvent * );
         void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
         void constraintsEvent( Plasma::Constraints constraints );
 

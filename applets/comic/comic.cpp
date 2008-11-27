@@ -566,6 +566,26 @@ void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
     Applet::hoverEnterEvent( event );
 }
 
+void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
+{
+    if ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) {
+        QRectF rect = contentsRect();
+        QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
+        int tempRightArrowWidth = ( !mNextIdentifierSuffix.isEmpty() ? s_arrowWidth : 0 );
+
+        if ( event->pos().y() > ( rect.bottom() - fm.height() ) &&
+             event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - tempRightArrowWidth ) ) {
+            // link clicked
+            setCursor( Qt::PointingHandCursor );
+            return;
+        }
+    }
+
+    if ( hasCursor() ) {
+        unsetCursor();
+    }
+}
+
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 {
     Q_UNUSED( event );
