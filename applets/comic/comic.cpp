@@ -264,7 +264,8 @@ void ComicApplet::loadConfig()
     mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
-    mArrowsOnHover = cg.readEntry( "arrowsOnHover", false );
+    mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
+    buttonBar();
 }
 
 void ComicApplet::saveConfig()
@@ -558,8 +559,8 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
-    buttonBar();
-    if ( mFadingItem ) {
+    if ( mFadingItem && !mWebsiteUrl.isEmpty() ) {
+        kDebug() << "wtf?!";
         mFadingItem->showItem();
     }
 
@@ -588,8 +589,8 @@ void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
 
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 {
-    Q_UNUSED( event );
-    if ( mFadingItem ) {
+    if ( mFadingItem && mFadingItem->isVisible() ) {
+        kDebug() << "wtf";
         mFadingItem->hideItem();
     }
 
