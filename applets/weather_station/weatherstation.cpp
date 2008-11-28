@@ -180,9 +180,9 @@ void WeatherStation::setPressure(const QString& pressure, int unit,
         if (unit != WeatherUtils::Kilopascals) {
             t = WeatherUtils::convert(t, unit, WeatherUtils::Kilopascals);
         }
-    } else if (tendency == "rising") {
+    } else if (tendency.toLower() == "rising") {
         t = 0.75;
-    } else if (tendency == "falling") {
+    } else if (tendency.toLower() == "falling") {
         t = -0.75;
     }
     //kDebug() << pressure << p << tendency << t << unit <<  WeatherUtils::getUnitString(unit, true);
