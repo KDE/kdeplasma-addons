@@ -58,7 +58,7 @@ void FileWatcher::init()
   watcher = new QFileSystemWatcher(this);
   textItem = new FileWatcherTextItem(this);
   textItem->moveBy(BORDER_SIZE, BORDER_SIZE);
-  textItem->setSize((int) size().width() - BORDER_SIZE*2, (int) size().height() - BORDER_SIZE*2);
+  textItem->setSize((int) contentsRect().width() - BORDER_SIZE*2, (int) contentsRect().height() - BORDER_SIZE*2);
   textDocument = textItem->document();
 
   QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(loadFile(QString)));
@@ -83,7 +83,7 @@ void FileWatcher::init()
 void FileWatcher::updateRows()
 {
     QFontMetrics metrics(textItem->font());
-    textDocument->setMaximumBlockCount((int) (size().height() - BORDER_SIZE*2) / metrics.height());
+    textDocument->setMaximumBlockCount((int) (contentsRect().height() - BORDER_SIZE*2) / metrics.height());
 
     if (textStream){
         textDocument->clear();
@@ -96,7 +96,7 @@ void FileWatcher::updateRows()
 void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::SizeConstraint){
-        textItem->setSize((int) size().width() - BORDER_SIZE*2, (int) size().height() - BORDER_SIZE*2);
+        textItem->setSize((int) contentsRect().width() - BORDER_SIZE*2, (int) contentsRect().height() - BORDER_SIZE*2);
         updateRows();
     }
 }
