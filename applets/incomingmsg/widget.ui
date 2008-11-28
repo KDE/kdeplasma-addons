@@ -1,30 +1,38 @@
 <ui version="4.0" >
  <class>incomingmsgConfig</class>
  <widget class="QWidget" name="incomingmsgConfig" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>159</width>
-    <height>191</height>
-   </rect>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <item>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" colspan="2" >
     <widget class="QLabel" name="topLabel" >
-     <property name="lineWidth" >
-      <number>1</number>
-     </property>
      <property name="text" >
       <string>Show these apss if they are running:</string>
      </property>
-     <property name="wordWrap" >
-      <bool>true</bool>
-     </property>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0" >
+    <spacer name="horizontalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" >
     <widget class="QCheckBox" name="showKMail" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text" >
       <string>KMail</string>
      </property>
@@ -33,18 +41,14 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QCheckBox" name="showXChat" >
-     <property name="text" >
-      <string>XChat</string>
-     </property>
-     <property name="checked" >
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
+   <item row="2" column="1" >
     <widget class="QCheckBox" name="showKopete" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text" >
       <string>Kopete</string>
      </property>
@@ -53,8 +57,14 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item row="3" column="1" >
     <widget class="QCheckBox" name="showPidgin" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text" >
       <string>Pidgin</string>
      </property>
@@ -63,10 +73,38 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="1" >
+    <widget class="QCheckBox" name="showXChat" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>XChat</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" >
+    <spacer name="verticalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="4" margin="4" />
- <includes/>
  <resources/>
  <connections/>
  <designerdata>
