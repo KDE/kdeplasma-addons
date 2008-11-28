@@ -55,7 +55,7 @@ void FileWatcher::init()
   textStream = 0;
   watcher = new QFileSystemWatcher(this);
   textItem = new FileWatcherTextItem(this);
-  textItem->moveBy((int) contentsRect().x(), (int) contentsRect().y());
+  textItem->moveBy(contentsRect().x(), contentsRect().y());
   textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());
   textDocument = textItem->document();
 
