@@ -167,8 +167,8 @@ void WeatherStation::setPressure(const QString& pressure, int unit,
     QStringList current;
 
     // pressure
-    if (unit == WeatherUtils::Millibars) {
-        unit = WeatherUtils::Hectopascals;
+    if (unit == WeatherUtils::Hectopascals) {
+        unit = WeatherUtils::Millibars;
     }
     if (unit != WeatherUtils::Kilopascals) {
         p = WeatherUtils::convert(p, unit, WeatherUtils::Kilopascals);
