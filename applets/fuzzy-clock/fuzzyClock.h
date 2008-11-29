@@ -86,6 +86,7 @@ Qt::Orientations expandingDirections() const;
         int m_adjustToHeight;
         QColor m_fontColor;
         bool m_fontTimeBold;
+        bool m_fontTimeItalic;
 
         QFont m_fontTime;
         QFont m_fontDate;

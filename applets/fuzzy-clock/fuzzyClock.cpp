@@ -45,6 +45,7 @@ Clock::Clock(QObject *parent, const QVariantList &args)
       m_adjustToHeight(1),
       m_fontColor(Qt::white),
       m_fontTimeBold(false),
+      m_fontTimeItalic(false),
       m_fontTime(KGlobalSettings::smallestReadableFont()),
       m_showTimezone(false),
       m_showDate(false),
@@ -84,8 +85,10 @@ void Clock::init()
     m_fontTime = cg.readEntry("fontTime", KGlobalSettings::smallestReadableFont());
     m_fontColor = cg.readEntry("fontColor", m_fontColor);
     m_fontTimeBold = cg.readEntry("fontTimeBold", true);
+    m_fontTimeItalic = cg.readEntry("fontTimeItalic", false);
 
     m_fontTime.setBold(m_fontTimeBold);
+    m_fontTime.setItalic(m_fontTimeItalic);
 
     m_adjustToHeight = cg.readEntry("adjustToHeight", 1);
 
@@ -200,6 +203,7 @@ void Clock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.adjustToHeight->setSliderPosition( m_adjustToHeight );
 
     ui.fontTimeBold->setChecked(m_fontTimeBold);
+    ui.fontTimeItalic->setChecked(m_fontTimeItalic);
     ui.fontTime->setCurrentFont(m_fontTime);
     ui.fontColor->setColor(m_fontColor);
 }
@@ -221,7 +225,11 @@ void Clock::clockConfigAccepted()
     m_fontTimeBold = ui.fontTimeBold->isChecked();
     cg.writeEntry("fontTimeBold", m_fontTimeBold);
 
+    m_fontTimeItalic = ui.fontTimeItalic->isChecked();
+    cg.writeEntry("fontTimeItalic", m_fontTimeItalic);
+
     m_fontTime.setBold(m_fontTimeBold);
+    m_fontTime.setItalic(m_fontTimeItalic);
 
     m_fuzzyness = ui.fuzzynessSlider->value();
     cg.writeEntry("fuzzyness", m_fuzzyness);
