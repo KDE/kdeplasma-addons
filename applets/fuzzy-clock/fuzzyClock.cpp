@@ -30,10 +30,13 @@
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsSceneMouseEvent>
 
+#include <Plasma/Theme>
+
 #include <KDebug>
 #include <KLocale>
 #include <KSharedConfig>
 #include <KConfigDialog>
+#include <KColorScheme>
 
 #include <KSystemTimeZones>
 
@@ -43,6 +46,7 @@ Clock::Clock(QObject *parent, const QVariantList &args)
     : ClockApplet(parent, args),
       m_oldContentSize(QSizeF (0,0)),
       m_adjustToHeight(1),
+      m_useCustomFontColor(false),
       m_fontColor(Qt::white),
       m_fontTimeBold(false),
       m_fontTimeItalic(false),
@@ -83,7 +87,12 @@ void Clock::init()
     m_fuzzyness = cg.readEntry("fuzzyness", 1);
 
     m_fontTime = cg.readEntry("fontTime", KGlobalSettings::smallestReadableFont());
-    m_fontColor = cg.readEntry("fontColor", m_fontColor);
+    m_useCustomFontColor = cg.readEntry("useCustomFontColor", false);
+    if (m_useCustomFontColor){
+        m_fontColor = cg.readEntry("fontColor", m_fontColor);
+    }else{
+        m_fontColor = KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme()).foreground().color();
+    }
     m_fontTimeBold = cg.readEntry("fontTimeBold", true);
     m_fontTimeItalic = cg.readEntry("fontTimeItalic", false);
 
@@ -206,6 +215,7 @@ void Clock::createClockConfigurationInterface(KConfigDialog *parent)
     ui.fontTimeItalic->setChecked(m_fontTimeItalic);
     ui.fontTime->setCurrentFont(m_fontTime);
     ui.fontColor->setColor(m_fontColor);
+    ui.useCustomFontColor->setChecked(m_useCustomFontColor);
 }
 
 void Clock::clockConfigAccepted()
@@ -219,8 +229,14 @@ void Clock::clockConfigAccepted()
     //In case adjustToHeight was disabled we have to reset the point-size of fontTime
     m_fontTime.setPointSize ( m_fontDate.pointSize() );
 
-    m_fontColor = ui.fontColor->color();
-    cg.writeEntry("fontColor", m_fontColor);
+    m_useCustomFontColor = ui.useCustomFontColor->isChecked();
+    cg.writeEntry("useCustomFontColor", m_useCustomFontColor);
+    if (m_useCustomFontColor) {
+        m_fontColor = ui.fontColor->color();
+    } else {
+        m_fontColor = KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme()).foreground().color();
+    }
+    cg.writeEntry("fontColor", ui.fontColor->color());
 
     m_fontTimeBold = ui.fontTimeBold->isChecked();
     cg.writeEntry("fontTimeBold", m_fontTimeBold);

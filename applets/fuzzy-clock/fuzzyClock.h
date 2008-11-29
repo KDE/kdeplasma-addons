@@ -84,6 +84,7 @@ Qt::Orientations expandingDirections() const;
         QSizeF m_subtitleStringSize;
 
         int m_adjustToHeight;
+        bool m_useCustomFontColor;
         QColor m_fontColor;
         bool m_fontTimeBold;
         bool m_fontTimeItalic;
