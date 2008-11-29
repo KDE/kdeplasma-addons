@@ -83,7 +83,6 @@ void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &dat
         m_picture = _picture;
         resize(contentSizeHint());
         m_pixmapCache = QPixmap();
-        prepareGeometryChange();
         updateGeometry();
         update();
     }
@@ -172,8 +171,14 @@ void Frame::slotOpenPicture()
 
 void Frame::constraintsEvent(Plasma::Constraints constraints)
 {
+    
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(Plasma::Applet::NoBackground);
+	//If the plasmoid is floating, make sure aspect ratio of picture equals
+	//aspect ratio of geometry.
+        if ((constraints & Plasma::LocationConstraint) && (location() == Plasma::Floating)) {
+            resize(contentSizeHint());
+	}
     }
 }
 
@@ -201,6 +206,7 @@ void Frame::updatePicture()
         m_picture = newImage;
         resize(contentSizeHint());
         m_pixmapCache = QPixmap();
+        updateGeometry();
         update();
     }
 }
@@ -291,7 +297,6 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
 
 void Frame::configAccepted()
 {
-    prepareGeometryChange();
     KConfigGroup cg = config();
     // Appearance
     m_roundCorners = m_configDialog->roundCorners();
@@ -399,7 +404,8 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 	}
     // If the url is a local directory start slideshowmode
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
-        m_slideShowPaths.append(droppedUrl.path());
+        m_slideShowPaths.clear();
+	m_slideShowPaths.append(droppedUrl.path());
         if (!m_slideShow) {
             m_slideShow = true;
         }
