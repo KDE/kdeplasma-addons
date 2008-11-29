@@ -354,7 +354,11 @@ void Frame::initSlideShow()
         m_mySlideShow->setRandom(m_random);
         m_slideShowTimer->start();
     } else if (m_potd) {
-        Plasma::DataEngine *engine = dataEngine("potd");
+	if(m_slideShowTimer->isActive()) {
+	    m_slideShowTimer->stop();
+	}
+        
+	Plasma::DataEngine *engine = dataEngine("potd");
         if (!engine) {
             kDebug() << " Engine potd can't be created";
             return;
@@ -405,6 +409,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
             m_slideShow = false;
         }
     }
+    m_potd = false;
     initSlideShow();
 
     KConfigGroup cg = config();
