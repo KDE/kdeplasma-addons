@@ -51,6 +51,7 @@ Qt::Orientations expandingDirections() const;
 
     protected slots:
 //         void acceptedTimeStringState(bool);
+           void updateColors();
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);

@@ -109,6 +109,8 @@ void Clock::init()
 
     Plasma::DataEngine* timeEngine = dataEngine("time");
     timeEngine->connectSource(currentTimezone(), this, 6000, Plasma::AlignToMinute);
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateColors()));
 }
 
 Qt::Orientations Clock::expandingDirections() const
@@ -692,6 +694,14 @@ void Clock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
             m_timeString,
             QTextOption(Qt::AlignHCenter)
             );
+}
+
+void Clock::updateColors()
+{
+    if (!m_useCustomFontColor) {
+        m_fontColor = KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme()).foreground().color();
+        update();
+    }
 }
 
 #include "fuzzyClock.moc"
