@@ -21,26 +21,14 @@
 
 #include "fuzzyClock.h"
 
-#include <math.h>
-
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
 #include <QFontMetrics>
-#include <KGlobalSettings>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QGraphicsSceneMouseEvent>
+#include <QPainter>
+
+#include <KColorScheme>
+#include <KConfigDialog>
+#include <KDebug>
 
 #include <Plasma/Theme>
-
-#include <KDebug>
-#include <KLocale>
-#include <KSharedConfig>
-#include <KConfigDialog>
-#include <KColorScheme>
-
-#include <KSystemTimeZones>
-
-
 
 Clock::Clock(QObject *parent, const QVariantList &args)
     : ClockApplet(parent, args),

@@ -20,17 +20,16 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-#include <QTime>
-#include <QDate>
-#include <KTimeZone>
-#include <KLocalizedString>
-
-#include <plasma/applet.h>
-#include <plasma/dataengine.h>
-#include <plasma/dialog.h>
-#include "ui_fuzzyClockConfig.h"
+#include <Plasma/DataEngine>
 
 #include <libplasmaclock/clockapplet.h>
+
+#include "ui_fuzzyClockConfig.h"
+
+class QTime;
+class QDate;
+
+class KLocalizedString;
 
 class Clock : public ClockApplet
 {
