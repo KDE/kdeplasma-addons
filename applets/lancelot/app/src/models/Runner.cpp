@@ -115,6 +115,7 @@ void Runner::activate(int index)
 {
     if (!valid) return;
     m_runnerManager->run(m_items[index].data.value< QStringList >().at(0));
+    m_runnerManager->reset();
     changeLancelotSearchString(QString());
     hideLancelotWindow();
 }

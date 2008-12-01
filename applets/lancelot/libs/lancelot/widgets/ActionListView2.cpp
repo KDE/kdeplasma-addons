@@ -452,7 +452,9 @@ void ActionListView2ItemFactory::clearSelection() //>
 void ActionListView2ItemFactory::setSelectedItem(ActionListView2Item * item, bool selected) //>
 {
     if (m_selectedItem == item && !selected) {
-        m_selectedItem->setSelected(false);
+        if (m_selectedItem) {
+            m_selectedItem->setSelected(false);
+        }
         m_selectedItem = NULL;
     } else if (m_selectedItem != item && selected) {
         if (m_selectedItem) {
