@@ -81,10 +81,13 @@ void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &dat
 
     if (!_picture.isNull()) {
         m_picture = _picture;
-        resize(contentSizeHint());
         m_pixmapCache = QPixmap();
-        updateGeometry();
-        update();
+	QSizeF sizeHint = contentSizeHint();
+	if (geometry().size() != sizeHint) {
+            resize(sizeHint); 
+	} else {        
+            update();
+	}
     }
 }
 
@@ -174,24 +177,42 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
     
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(Plasma::Applet::NoBackground);
-	//If the plasmoid is floating, make sure aspect ratio of picture equals
-	//aspect ratio of geometry.
-        if ((constraints & Plasma::LocationConstraint) && (location() == Plasma::Floating)) {
-            resize(contentSizeHint());
+	m_pixmapCache = QPixmap();
+	if (formFactor() == Plasma::Horizontal) {
+	     m_frameOutline = 0;
+             m_swOutline = 4;
+	} else if (formFactor() == Plasma::Vertical) {
+	     m_frameOutline = 0;
+             m_swOutline = 4;
+        } else {
+	     m_frameOutline = 8;
+             m_swOutline = 8;
+	     //Restore widget geometry to image proportions
+	     resize(contentSizeHint());
 	}
+    }  
+    
+    if (constraints & Plasma::SizeConstraint) {   
+        //If on panel, keep geometry to 4:3 ratio
+        if(formFactor() == Plasma::Vertical) {
+            setMinimumSize(QSizeF(0, boundingRect().width()/1.33));
+            setMaximumSize(QSizeF(-1, boundingRect().width()/1.33));
+        } else if(formFactor() == Plasma::Horizontal) {
+            setMinimumSize(QSizeF(boundingRect().height()*1.33,0));
+            setMaximumSize(QSizeF(boundingRect().height()*1.33,-1));
+        } else { 
+            setMinimumSize(QSizeF());
+            setMaximumSize(QSizeF());
+        }
     }
 }
 
 QSizeF Frame::contentSizeHint() const
 {
-    if (!m_picture.isNull()) {
-        QSizeF sizeHint;
+    if (!m_picture.isNull() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
+        QSizeF sizeHint = m_picture.size();
         qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
-        if (m_picture.width() > m_picture.height()) {
-            sizeHint = QSizeF(maxSize, (maxSize / m_picture.width()) * m_picture.height());
-        } else {
-            sizeHint = QSizeF((maxSize / m_picture.height()) * m_picture.width(), maxSize);
-        }
+        sizeHint.scale(maxSize, maxSize, Qt::KeepAspectRatio);
         return sizeHint;
     } else {
         return geometry().size();
@@ -204,10 +225,13 @@ void Frame::updatePicture()
 
     if (!newImage.isNull()) {
         m_picture = newImage;
-        resize(contentSizeHint());
         m_pixmapCache = QPixmap();
-        updateGeometry();
-        update();
+	QSizeF sizeHint = contentSizeHint();
+	if (geometry().size() != sizeHint) {
+            resize(sizeHint); 
+	} else {        
+            update();
+	}
     }
 }
 
@@ -430,7 +454,7 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
 {
     if (m_pixmapCache.isNull() ||
             geometry().toRect().size() != m_pixmapCache.size()) {
-        updateGeometry();
+	    //kDebug() << "Paint cache!!!";
         paintCache(option, geometry().toRect().size());
     }
 
