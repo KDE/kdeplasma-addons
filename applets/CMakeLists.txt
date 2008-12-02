@@ -1,10 +1,14 @@
+
+# this works also for the weatherutils include dir, but should be done properly, Alex
+include_directories(${PLASMACLOCK_INCLUDE_DIR})
+
 if(PLASMA_OPENGL_FOUND)
-  MESSAGE(STATUS "libplasma supports OpenGL applets")
+  message(STATUS "libplasma supports OpenGL applets")
   if(NOT WIN32)
     add_subdirectory(bluemarble)
   endif(NOT WIN32)
 else(PLASMA_OPENGL_FOUND)
-  MESSAGE(STATUS "libplasma doesn't support OpenGL applets")
+  message(STATUS "libplasma doesn't support OpenGL applets")
 endif(PLASMA_OPENGL_FOUND)
 
 add_subdirectory(bball)
