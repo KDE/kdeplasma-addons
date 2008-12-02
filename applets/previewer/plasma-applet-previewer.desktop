@@ -2,6 +2,7 @@
 Name=Previewer
 Name[de]=Vorschau
 Name[el]=Προβολέας προεπισκόπησης
+Name[et]=Eelvaatlus
 Name[fr]=Prévisualiseur
 Name[gl]=Antevisor
 Name[it]=Visualizzatore di anteprime
@@ -22,6 +23,7 @@ Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
 Comment[de]=Vorschau für eine Vielzahl Dateien anzeigen
 Comment[el]=Γρήγορη προεπισκόπηση διαφόρων αρχείων
+Comment[et]=Paljude failitüüpide kiire eelvaatlus
 Comment[fr]=Aperçu rapide de divers fichiers
 Comment[gl]=Antevé rapidamente diversos ficheiros
 Comment[it]=Mostra velocemente le anteprime di diversi file
