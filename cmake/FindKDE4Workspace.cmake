@@ -18,14 +18,18 @@
 
 if(KDE4_FOUND)
 
-   # check for the plasmaclock library from kdebase/workspace
-   # currently used in applets/fuzzy-clock and applets/binary-clock, Alex
-   find_path(KDE4WORKSPACE_INCLUDE_DIR libplasmaclock/clockapplet.h HINTS ${KDE4_INCLUDE_DIR})
 
    find_library(KDE4WORKSPACE_PLASMACLOCK_LIBRARY plasmaclock HINTS ${KDE4_LIB_DIR})
-   find_library(KDE4WORKSPACE_WEATHERION_LIBRARY weather_ion HINTS ${KDE4_LIB_DIR})
-   find_library(KDE4WORKSPACE_TASKMANAGER_LIBRARY taskmanager HINTS ${KDE4_LIB_DIR})
-   find_library(KDE4WORKSPACE_KSCREENSAVER_LIBRARY kscreensaver HINTS ${KDE4_LIB_DIR})
+
+   get_filename_component(_KDE4WORKSPACE_LIBRARY_DIR "${KDE4WORKSPACE_PLASMACLOCK_LIBRARY}" PATH)
+   get_filename_component(_KDE4WORKSPACE_PREFIX "${KDE4WORKSPACE_LIBRARY_DIR}" PATH)
+
+   find_library(KDE4WORKSPACE_WEATHERION_LIBRARY weather_ion HINTS "${_KDE4WORKSPACE_LIBRARY_DIR}" "${KDE4_LIB_DIR}")
+   find_library(KDE4WORKSPACE_TASKMANAGER_LIBRARY taskmanager HINTS "${_KDE4WORKSPACE_LIBRARY_DIR}" "${KDE4_LIB_DIR}")
+   find_library(KDE4WORKSPACE_KSCREENSAVER_LIBRARY kscreensaver HINTS "${_KDE4WORKSPACE_LIBRARY_DIR}" "${KDE4_LIB_DIR}")
+
+
+   find_path(KDE4WORKSPACE_INCLUDE_DIR libplasmaclock/clockapplet.h HINTS "${_KDE4WORKSPACE_PREFIX}/include" ${KDE4_INCLUDE_DIR})
 
    mark_as_advanced(KDE4WORKSPACE_INCLUDE_DIR 
                     KDE4WORKSPACE_PLASMACLOCK_LIBRARY
@@ -33,7 +37,7 @@ if(KDE4_FOUND)
                     KDE4WORKSPACE_TASKMANAGER_LIBRARY
                     KDE4WORKSPACE_KSCREENSAVER_LIBRARY)
 
-endif(NOT KDE4_FOUND)
+endif(KDE4_FOUND)
 
 include(FindPackageHandleStandardArgs)
 
@@ -42,4 +46,5 @@ find_package_handle_standard_args(KDE4WORKSPACE
                                   KDE4WORKSPACE_INCLUDE_DIR 
                                   KDE4WORKSPACE_PLASMACLOCK_LIBRARY 
                                   KDE4WORKSPACE_WEATHERION_LIBRARY 
-                                  KDE4WORKSPACE_TASKMANAGER_LIBRARY)
+                                  KDE4WORKSPACE_TASKMANAGER_LIBRARY
+                                  KDE4WORKSPACE_KSCREENSAVER_LIBRARY )
