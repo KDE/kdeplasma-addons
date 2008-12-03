@@ -7,6 +7,7 @@
 #  KDE4WORKSPACE_PLASMACLOCK_LIBRARY - the plasmaclock library
 #  KDE4WORKSPACE_WEATHERION_LIBRARY - the weather_ion library
 #  KDE4WORKSPACE_TASKMANAGER_LIBRARY - the taskmanager library
+#  KDE4WORKSPACE_KSCREENSAVER_LIBRARY - the taskmanager library
 
 
 # Copyright (c) 2008, Alexander Neundorf, <neundorf@kde.org>
@@ -19,16 +20,18 @@ if(KDE4_FOUND)
 
    # check for the plasmaclock library from kdebase/workspace
    # currently used in applets/fuzzy-clock and applets/binary-clock, Alex
-   find_path(KDE4WORKSPACE_INCLUDE_DIR libplasmaclock/clockapplet.h PATHS ${KDE4_INCLUDE_DIR})
+   find_path(KDE4WORKSPACE_INCLUDE_DIR libplasmaclock/clockapplet.h HINTS ${KDE4_INCLUDE_DIR})
 
-   find_library(KDE4WORKSPACE_PLASMACLOCK_LIBRARY plasmaclock PATHS ${KDE4_LIB_DIR})
-   find_library(KDE4WORKSPACE_WEATHERION_LIBRARY weather_ion PATHS ${KDE4_LIB_DIR})
-   find_library(KDE4WORKSPACE_TASKMANAGER_LIBRARY taskmanager PATHS ${KDE4_LIB_DIR})
+   find_library(KDE4WORKSPACE_PLASMACLOCK_LIBRARY plasmaclock HINTS ${KDE4_LIB_DIR})
+   find_library(KDE4WORKSPACE_WEATHERION_LIBRARY weather_ion HINTS ${KDE4_LIB_DIR})
+   find_library(KDE4WORKSPACE_TASKMANAGER_LIBRARY taskmanager HINTS ${KDE4_LIB_DIR})
+   find_library(KDE4WORKSPACE_KSCREENSAVER_LIBRARY kscreensaver HINTS ${KDE4_LIB_DIR})
 
    mark_as_advanced(KDE4WORKSPACE_INCLUDE_DIR 
                     KDE4WORKSPACE_PLASMACLOCK_LIBRARY
                     KDE4WORKSPACE_WEATHERION_LIBRARY
-                    KDE4WORKSPACE_TASKMANAGER_LIBRARY)
+                    KDE4WORKSPACE_TASKMANAGER_LIBRARY
+                    KDE4WORKSPACE_KSCREENSAVER_LIBRARY)
 
 endif(NOT KDE4_FOUND)
 
