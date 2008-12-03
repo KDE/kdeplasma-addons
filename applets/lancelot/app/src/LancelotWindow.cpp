@@ -405,6 +405,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     editSearch->nativeWidget()->setFocus();
     editSearch->setFocus();
 
+
 }
 
 void LancelotWindow::resizeWindow()
@@ -415,6 +416,8 @@ void LancelotWindow::resizeWindow()
     }
     resize(newSize);
     m_view->resize(newSize);
+    m_root->group()->backgroundSvg()->resizeFrame(newSize);
+    setMask(m_root->group()->backgroundSvg()->mask());
 }
 
 void LancelotWindow::leaveEvent(QEvent * event) {
