@@ -134,6 +134,7 @@ class Twitter : public Plasma::PopupApplet
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_headerLayout;
         QGraphicsWidget *m_graphicsWidget;
+        QPixmap m_popupIcon;
 
         KLineEdit *m_usernameEdit;
         KLineEdit *m_passwordEdit;

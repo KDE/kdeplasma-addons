@@ -94,9 +94,19 @@ void Twitter::constraintsEvent(Plasma::Constraints constraints)
 void Twitter::paintIcon()
 {
     int size = qMin(contentsRect().width(), contentsRect().height());
+    if (size < 1) {
+        size = KIconLoader::SizeSmall;
+    }
 
-    QPixmap icon = KIconLoader::global()->loadIcon("view-pim-journal", KIconLoader::NoGroup, size);
+    QPixmap icon(size, size);
+    if (m_popupIcon.isNull()) {
+        icon = KIconLoader::global()->loadIcon("view-pim-journal", KIconLoader::NoGroup, size);
+    } else {
+        icon.fill(Qt::transparent);
+    }
+
     QPainter p(&icon);
+    p.drawPixmap(icon.rect(), m_popupIcon, m_popupIcon.rect());
     //4.3: a notification system for popupapplets would be cool
     if (m_newTweets > 0) {
         QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
@@ -118,6 +128,7 @@ void Twitter::paintIcon()
         p.drawText(textRect, Qt::AlignCenter, QString::number(m_newTweets));
     }
     p.end();
+
     setPopupIcon(icon);
 }
 
@@ -358,9 +369,9 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         }
         m_lastTweet = maxId;
         m_newTweets = qMin(newCount, m_historySize);
-        paintIcon();
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
         showTweets();
+        paintIcon();
     } else if (source == "UserImages") {
         foreach (const QString &user, data.keys()) {
             QPixmap pm = data[user].value<QPixmap>();
@@ -465,6 +476,10 @@ void Twitter::showTweets()
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
+        if (i == 0) {
+            m_popupIcon = m_pictureMap[user];
+        }
+
         QAction *profile = new QAction(QIcon(m_pictureMap[user]), QString(), this);
         profile->setData(user);
 
@@ -480,7 +495,7 @@ void Twitter::showTweets()
             sourceString = i18n(" from %1", tweetData.value( "Source" ).toString());
         }
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
-        html += QString("<tr><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
+        html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
                 .arg(timeDescription( tweetData.value( "Date" ).toDateTime() )).arg( sourceString);
         QString status = tweetData.value( "Status" ).toString();
 
@@ -494,7 +509,7 @@ void Twitter::showTweets()
                                             .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
         t.content->document()->setTextWidth(t.content->width());
-        t.content->setMinimumHeight(t.content->document()->size().height());
+        t.content->setMinimumSize(t.content->document()->size().toSize());
         t.content->update();
 
         if( !favIcon.isNull() ) {
@@ -504,6 +519,7 @@ void Twitter::showTweets()
         ++i;
         --pos;
     }
+
     qreal left, top, right, bottom;
     getContentsMargins(&left, &top, &right, &bottom);
     //this line break things, strange
@@ -516,7 +532,7 @@ void Twitter::showTweets()
         setPreferredSize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
         resize(preferredSize());
     }
-    updateGeometry();
+    adjustSize();
 }
 
 void Twitter::createConfigurationInterface(KConfigDialog *parent)
