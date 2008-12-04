@@ -296,7 +296,8 @@ void Clock::calculateDateString()
                                 "%1 %2", day, month);
         }
         if (m_showDay) {
-            QString weekday = QDate::shortDayName(m_date.dayOfWeek());
+            tmpLocale.setDateFormat("%a"); // short weekday
+            QString weekday = tmpLocale.formatDate(m_date);
             m_dateString = i18nc("@label Day of the week with date: "
                                 "%1 short day name, %2 short date",
                                 "%1, %2", weekday, m_dateString);
