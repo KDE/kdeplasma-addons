@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Twitter
+Name[th]=ทวีตเตอร์
 Name[x-test]=xxTwitterxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
