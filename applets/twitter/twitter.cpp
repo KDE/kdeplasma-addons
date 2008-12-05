@@ -628,7 +628,7 @@ Twitter::~Twitter()
 
 void Twitter::editTextChanged()
 {
-    m_flash->flash( i18np("1 character left", "%1 characters left", 140-m_statusEdit->nativeWidget()->toPlainText().length()), 2000 );
+    m_flash->flash( i18np("%1 character left", "%1 characters left", 140-m_statusEdit->nativeWidget()->toPlainText().length()), 2000 );
 }
 
 bool Twitter::eventFilter(QObject *obj, QEvent *event)
