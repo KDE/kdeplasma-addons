@@ -50,7 +50,7 @@ Mass::Mass(QObject* parent)
     m_units[i18n("tonne")]        = "t";
     m_units["t"]                  = 1000000.0;
 	
-	//I guess it's usefull...
+	//I guess it's useful...
 	m_units[i18n("carat")]        = "CD";
 	m_units[i18n("carats")]       = "CD";
 	m_units["CD"]                 = 0.2;
