@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CONVERTRUNNER_H
-#define CONVERTRUNNER_H
+#ifndef CONVERTERRUNNER_H
+#define CONVERTERRUNNER_H
 
 #include <plasma/abstractrunner.h>
 
 /**
- * This class converts values to differemt units.
+ * This class converts values to different units.
  */
 class ConverterRunner : public Plasma::AbstractRunner
 {
