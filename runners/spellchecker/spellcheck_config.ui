@@ -36,7 +36,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="m_triggerWord" />
+         <widget class="KLineEdit" name="m_triggerWord" />
         </item>
        </layout>
       </item>
