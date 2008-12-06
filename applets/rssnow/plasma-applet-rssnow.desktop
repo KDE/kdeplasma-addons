@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=RSSNOW
 Name[it]=RSSORA
+Name[sr]=РСС‑одмах
+Name[sr@latin]=RSS‑odmah
 Name[x-test]=xxRSSNOWxx
 Comment=Show news from various sources
 Comment[de]=Neuigkeiten aus verschiedenen Quellen anzeigen
@@ -17,6 +19,8 @@ Comment[nn]=Vis nyheiter frå ulike kjelder
 Comment[pt]=Mostrar notícias de várias fontes
 Comment[pt_BR]=Mostrar notícias de várias fontes
 Comment[ru]=Отображение новостей из различных источников
+Comment[sr]=Приказује вести из различитих извора
+Comment[sr@latin]=Prikazuje vesti iz različitih izvora
 Comment[sv]=Visa nyheter från olika källor
 Comment[th]=แสดงข่าวต่าง ๆ จากแหล่งข่าวหลาย ๆ ที่
 Comment[tr]=Çeşitli kaynaklardan haberleri göster
