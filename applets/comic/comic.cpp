@@ -576,7 +576,6 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
     if ( mFadingItem && !mWebsiteUrl.isEmpty() ) {
-        kDebug() << "wtf?!";
         mFadingItem->showItem();
     }
 
@@ -606,7 +605,6 @@ void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 {
     if ( mFadingItem && mFadingItem->isVisible() ) {
-        kDebug() << "wtf";
         mFadingItem->hideItem();
     }
 
