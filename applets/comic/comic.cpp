@@ -382,8 +382,8 @@ void ComicApplet::updateSize()
     if ( !mImage.isNull() && mImage.size().width() > 0 ) {
         // Set height for given width keeping image aspect ratio
         const QSize size = mImage.size();
-        int leftArea = (mShowPreviousButton && !mArrowsOnHover) ? s_arrowWidth : 0;
-        int rightArea = (mShowNextButton && !mArrowsOnHover) ? s_arrowWidth : 0;
+        int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
+        int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         qreal aspectRatio = qreal( size.height() ) / size.width();
         qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
