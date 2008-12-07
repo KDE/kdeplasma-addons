@@ -385,11 +385,12 @@ void ComicApplet::updateSize()
         int leftArea = (mShowPreviousButton && !mArrowsOnHover) ? s_arrowWidth : 0;
         int rightArea = (mShowNextButton && !mArrowsOnHover) ? s_arrowWidth : 0;
         qreal aspectRatio = qreal( size.height() ) / size.width();
-        qreal imageHeight = aspectRatio * ( geometry().width() - leftArea - rightArea );
+        qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
         int topArea = ( ( mShowComicAuthor || mShowComicTitle ) ? fmHeight : 0 );
         int bottomArea = ( mShowComicUrl || mShowComicIdentifier ? fmHeight : 0 );
-        resize( geometry().width(), imageHeight + topArea + bottomArea );
+        int margin = geometry().height() - contentsRect().height();
+        resize( geometry().width(), imageHeight + topArea + bottomArea + margin );
     }
 }
 
