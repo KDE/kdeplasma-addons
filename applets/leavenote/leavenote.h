@@ -88,7 +88,7 @@ private:
 };
 
 // This is the command that links your applet to the .desktop file
-K_EXPORT_PLASMA_APPLET(LeaveNote, LeaveNote)
+K_EXPORT_PLASMA_APPLET(leavenote, LeaveNote)
 #endif
 
 void verboseLog(QString);
