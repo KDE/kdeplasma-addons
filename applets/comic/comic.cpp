@@ -144,8 +144,13 @@ void ComicApplet::init()
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
 
     action = new QAction( i18n( "Scale to &Content" ), this );
-    mActions.append( action );
-    connect( action, SIGNAL( triggered( bool ) ), this , SLOT( scaleToContent() ) );
+    mActionScaleContent = action;
+    mActionScaleContent->setCheckable( true );
+    KConfigGroup cg = config();
+    bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+    mActionScaleContent->setChecked( checked );
+    mActions.append( mActionScaleContent );
+    connect( mActionScaleContent, SIGNAL( triggered( bool ) ), this , SLOT( slotScaleToContent() ) );
 
     Solid::Networking::Status status = Solid::Networking::status();
     if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
@@ -380,17 +385,29 @@ void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 void ComicApplet::updateSize()
 {
     if ( !mImage.isNull() && mImage.size().width() > 0 ) {
-        // Set height for given width keeping image aspect ratio
         const QSize size = mImage.size();
         int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
-        qreal aspectRatio = qreal( size.height() ) / size.width();
-        qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
         int topArea = ( ( mShowComicAuthor || mShowComicTitle ) ? fmHeight : 0 );
         int bottomArea = ( mShowComicUrl || mShowComicIdentifier ? fmHeight : 0 );
-        int margin = geometry().height() - contentsRect().height();
-        resize( geometry().width(), imageHeight + topArea + bottomArea + margin );
+
+        KConfigGroup cg = config();
+        bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+        mActionScaleContent->setChecked( checked );
+        if ( checked ) {
+            const QSizeF idealSize = geometry().size() - contentsRect().size() +
+                 size + QSizeF( leftArea + rightArea, topArea + bottomArea );
+
+            resize( idealSize );
+        } else {
+            // Set height for given width keeping image aspect ratio
+            qreal aspectRatio = qreal( size.height() ) / size.width();
+            qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
+            int margin = geometry().height() - contentsRect().height();
+
+            resize( geometry().width(), imageHeight + topArea + bottomArea + margin );
+        }
     }
 }
 
@@ -472,9 +489,6 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->drawImage( imageRect, mImage );
 
     p->restore();
-
-    mIdealSize = size() - contentsRect().size() +
-                 mImage.size() + QSizeF( leftImageGap + rightImageGap, urlHeight + topHeight );
 }
 
 QList<QAction*> ComicApplet::contextualActions()
@@ -598,9 +612,12 @@ void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
     Applet::hoverLeaveEvent( event );
 }
 
-void ComicApplet::scaleToContent()
+void ComicApplet::slotScaleToContent()
 {
-    resize( mIdealSize );
+    KConfigGroup cg = config();
+    cg.writeEntry( "scaleToContent_" + mComicIdentifier, mActionScaleContent->isChecked() );
+
+    updateSize();
 }
 
 void ComicApplet::buttonBar()

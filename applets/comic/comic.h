@@ -65,10 +65,10 @@ class ComicApplet : public Plasma::Applet
         void slotFirstDay();
         void slotCurrentDay();
         void slotSaveComicAs();
+        void slotScaleToContent();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
-        void scaleToContent();
         void buttonBar();
 
     protected:
@@ -115,6 +115,7 @@ class ComicApplet : public Plasma::Applet
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
+        QAction *mActionScaleContent;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         Plasma::Frame *mFrame;
@@ -122,7 +123,6 @@ class ComicApplet : public Plasma::Applet
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
         Plasma::Svg *mSvg;
-        QSizeF mIdealSize;
         bool mArrowsOnHover;
 };
 
