@@ -146,6 +146,7 @@ void ComicApplet::init()
     action = new QAction( i18n( "Scale to &Content" ), this );
     mActionScaleContent = action;
     mActionScaleContent->setCheckable( true );
+    mActionScaleContent->setIcon( KIcon( "zoom-original" ) );
     KConfigGroup cg = config();
     bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mActionScaleContent->setChecked( checked );
