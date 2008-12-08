@@ -5,7 +5,7 @@
    <item row="0" column="0" colspan="2" >
     <widget class="QLabel" name="topLabel" >
      <property name="text" >
-      <string>Show these apss if they are running:</string>
+      <string>Show these applications if they are running:</string>
      </property>
     </widget>
    </item>
