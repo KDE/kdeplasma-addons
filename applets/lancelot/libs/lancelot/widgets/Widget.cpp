@@ -198,8 +198,6 @@ void Widget::paintBackground(QPainter * painter)
         element = "down";
     } else if (d->hover) {
         element = "active";
-    } else {
-        element = QString(); // was "normal" - removing prefix for this state
     }
 
     paintBackground(painter, element);
