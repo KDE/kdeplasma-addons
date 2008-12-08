@@ -83,7 +83,7 @@ private slots:
 };
 
 // This is the command that links your applet to the .desktop file
-K_EXPORT_PLASMA_APPLET(IncomingMsg, IncomingMsg)
+K_EXPORT_PLASMA_APPLET(incomingmsg, IncomingMsg)
 #endif
 
 
