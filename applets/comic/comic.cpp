@@ -38,6 +38,7 @@
 #include <KRun>
 #include <KTemporaryFile>
 
+#include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/Frame>
 #include <Plasma/PushButton>
@@ -386,28 +387,52 @@ void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 void ComicApplet::updateSize()
 {
     if ( !mImage.isNull() && mImage.size().width() > 0 ) {
-        const QSize size = mImage.size();
+        QSizeF containmentSize = QSizeF();
+        if ( containment() ) {
+            containmentSize = containment()->size();
+        }
+
         int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
         int topArea = ( ( mShowComicAuthor || mShowComicTitle ) ? fmHeight : 0 );
         int bottomArea = ( mShowComicUrl || mShowComicIdentifier ? fmHeight : 0 );
+        const QSizeF idealSize = geometry().size() - contentsRect().size() +
+                 mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea );
+
+        // Set height for given width keeping image aspect ratio
+        qreal aspectRatio = qreal( mImage.size().height() ) / mImage.size().width();
+        qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
+        int marginX = geometry().width() - contentsRect().width();
+        int marginY = geometry().height() - contentsRect().height();
+        const QSizeF aspectSize = QSizeF( geometry().width(), imageHeight + topArea + bottomArea + marginY );
 
         KConfigGroup cg = config();
         bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
         mActionScaleContent->setChecked( checked );
+        //uses the idealSize, as long as it is not larger, than the containment
         if ( checked ) {
-            const QSizeF idealSize = geometry().size() - contentsRect().size() +
-                 size + QSizeF( leftArea + rightArea, topArea + bottomArea );
-
-            resize( idealSize );
+            if ( !containmentSize.isValid() || ( idealSize.width() <= containmentSize.width() &&
+                 idealSize.height() <= containmentSize.height() ) ) {
+                mActionScaleContent->setEnabled( true );
+                resize( idealSize );
+                return;
+            } else {
+                mActionScaleContent->setEnabled( false );
+            }
         } else {
-            // Set height for given width keeping image aspect ratio
-            qreal aspectRatio = qreal( size.height() ) / size.width();
-            qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
-            int margin = geometry().height() - contentsRect().height();
+            mActionScaleContent->setEnabled( true );
+        }
 
-            resize( geometry().width(), imageHeight + topArea + bottomArea + margin );
+        //use aspectSize or something smaller than the containment
+        if ( !containmentSize.isValid() || ( aspectSize.height() <= containmentSize.height() ) ) {
+            resize( aspectSize );
+        } else {
+            //use the current application height instead
+            if ( aspectSize.height() > containmentSize.height() ) {
+                qreal imageWidth = ( contentsRect().height() - topArea - bottomArea ) / aspectRatio;
+                resize( imageWidth + leftArea + rightArea + marginX, geometry().height() );
+            }
         }
     }
 }
