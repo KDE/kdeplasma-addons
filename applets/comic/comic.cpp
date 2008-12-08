@@ -147,11 +147,9 @@ void ComicApplet::init()
 
     action = new QAction( i18n( "Scale to &Content" ), this );
     mActionScaleContent = action;
-    mActionScaleContent->setCheckable( true );
     mActionScaleContent->setIcon( KIcon( "zoom-original" ) );
-    KConfigGroup cg = config();
-    bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
-    mActionScaleContent->setChecked( checked );
+    mActionScaleContent->setCheckable( true );
+    mActionScaleContent->setChecked( mScaleComic );
     mActions.append( mActionScaleContent );
     connect( mActionScaleContent, SIGNAL( triggered( bool ) ), this , SLOT( slotScaleToContent() ) );
 
@@ -242,6 +240,10 @@ void ComicApplet::applyConfig()
     saveConfig();
 
     if ( differentComic ) {
+        KConfigGroup cg = config();
+        mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+        mActionScaleContent->setChecked( mScaleComic );
+
         updateComic();
     }
     if ( checkButtonBar ) {
@@ -273,6 +275,8 @@ void ComicApplet::loadConfig()
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
+    mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+
     buttonBar();
 }
 
@@ -407,11 +411,8 @@ void ComicApplet::updateSize()
         int marginY = geometry().height() - contentsRect().height();
         const QSizeF aspectSize = QSizeF( geometry().width(), imageHeight + topArea + bottomArea + marginY );
 
-        KConfigGroup cg = config();
-        bool checked = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
-        mActionScaleContent->setChecked( checked );
         //uses the idealSize, as long as it is not larger, than the containment
-        if ( checked ) {
+        if ( mScaleComic ) {
             if ( !containmentSize.isValid() || ( idealSize.width() <= containmentSize.width() &&
                  idealSize.height() <= containmentSize.height() ) ) {
                 mActionScaleContent->setEnabled( true );
@@ -649,8 +650,10 @@ void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 
 void ComicApplet::slotScaleToContent()
 {
+    mScaleComic = mActionScaleContent->isChecked();
+
     KConfigGroup cg = config();
-    cg.writeEntry( "scaleToContent_" + mComicIdentifier, mActionScaleContent->isChecked() );
+    cg.writeEntry( "scaleToContent_" + mComicIdentifier,  mScaleComic );
 
     updateSize();
 }
