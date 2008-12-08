@@ -324,10 +324,9 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     if ( event->button() == Qt::LeftButton ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-        int tempLeftArrowWidth = ( mShowPreviousButton ? s_arrowWidth : 0 );
-        int tempRightArrowWidth = ( !mNextIdentifierSuffix.isEmpty() ? s_arrowWidth : 0 );
-
         const QRectF rect = contentsRect();
+        const int indentation = s_arrowWidth;
+
         if ( mShowPreviousButton && !mArrowsOnHover && event->pos().x() > rect.left() &&
              event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
             slotPreviousDay();
@@ -336,13 +335,14 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             slotNextDay();
         } else if ( !mWebsiteUrl.isEmpty() && mShowComicUrl &&
                     event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - tempRightArrowWidth ) ) {
+                    event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - indentation ) &&
+                    event->pos().x() < ( rect.right() - indentation ) ) {
             // link clicked
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
         } else if ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier &&
                     event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.left() + tempLeftArrowWidth ) &&
-                    event->pos().x() < ( rect.left() + tempLeftArrowWidth + fm.width( mShownIdentifierSuffix ) ) ) {
+                    event->pos().x() > ( rect.left() + indentation ) &&
+                    event->pos().x() < ( rect.left() + indentation + fm.width( mShownIdentifierSuffix ) ) ) {
             // identifierSuffix clicked clicked
             if ( mSuffixType == "Number" ) {
                 ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
@@ -446,21 +446,21 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
 
     // create the text at bottom
     int urlHeight = 0;
+    const int indentation = s_arrowWidth;
     if ( ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) ||
          ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         urlHeight = fm.height();
         int height = contentRect.bottom() - urlHeight;
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
-        int arrowWidth = ( mShowNextButton ? s_arrowWidth : 0 );
-        if ( mShowComicUrl ) {
-            p->drawText( QRectF( contentRect.left(), height, contentRect.width() - arrowWidth, fm.height() ),
+
+        if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
+            p->drawText( QRectF( contentRect.left(), height, contentRect.width() - indentation, fm.height() ),
                          Qt::AlignRight, mWebsiteUrl.host() );
         }
 
         if ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier ) {
-            arrowWidth = ( mShowPreviousButton ? s_arrowWidth : 0 );
-            p->drawText( QRectF( contentRect.left() + arrowWidth , height, contentRect.width() - arrowWidth,
+            p->drawText( QRectF( contentRect.left() + indentation , height, contentRect.width() - indentation,
                                  fm.height() ), Qt::AlignLeft, mShownIdentifierSuffix );
         }
     }
@@ -587,10 +587,11 @@ void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
     if ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) {
         QRectF rect = contentsRect();
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-        int tempRightArrowWidth = ( !mNextIdentifierSuffix.isEmpty() ? s_arrowWidth : 0 );
+        const int indentation = s_arrowWidth;
 
         if ( event->pos().y() > ( rect.bottom() - fm.height() ) &&
-             event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - tempRightArrowWidth ) ) {
+             event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - indentation ) &&
+             event->pos().x() < ( rect.right() - indentation ) ) {
             // link clicked
             setCursor( Qt::PointingHandCursor );
             return;
