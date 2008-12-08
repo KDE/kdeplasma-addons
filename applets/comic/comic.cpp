@@ -442,6 +442,8 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         mShownIdentifierSuffix = "# " + QString::number( mIdentifierSuffixNum );
     } else if ( ( mSuffixType == "Date" ) && mIdentifierSuffixDate.isValid() ) {
         mShownIdentifierSuffix = mIdentifierSuffixDate.toString( "yyyy-MM-dd" );
+    } else {
+        mShownIdentifierSuffix = QString();
     }
 
     // create the text at bottom
@@ -583,13 +585,23 @@ void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 
 void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
 {
-    if ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) {
+    if ( mShowComicUrl || mShowComicIdentifier ) {
         QRectF rect = contentsRect();
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
-        if ( event->pos().y() > ( rect.bottom() - fm.height() ) &&
+        if ( mShowComicUrl && !mWebsiteUrl.isEmpty() &&
+             event->pos().y() > ( rect.bottom() - fm.height() ) &&
              event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - s_indentation ) &&
              event->pos().x() < ( rect.right() - s_indentation ) ) {
+            // link clicked
+            setCursor( Qt::PointingHandCursor );
+            return;
+        }
+
+        if ( mShowComicIdentifier && !mShownIdentifierSuffix.isEmpty() &&
+             event->pos().y() > ( rect.bottom() - fm.height() ) &&
+             event->pos().x() > ( rect.left() + s_indentation ) &&
+             event->pos().x() < ( rect.left() + fm.width( mShownIdentifierSuffix ) + s_indentation ) ) {
             // link clicked
             setCursor( Qt::PointingHandCursor );
             return;
