@@ -66,6 +66,7 @@ class ComicApplet : public Plasma::Applet
         void slotCurrentDay();
         void slotSaveComicAs();
         void slotScaleToContent();
+        void slotSizeChanged();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
@@ -118,6 +119,8 @@ class ComicApplet : public Plasma::Applet
         QAction *mActionScaleContent;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
+        QSizeF mMaxSize;
+        QSizeF mLastSize;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
         Plasma::PushButton *mPrevButton;

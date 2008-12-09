@@ -38,7 +38,6 @@
 #include <KRun>
 #include <KTemporaryFile>
 
-#include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/Frame>
 #include <Plasma/PushButton>
@@ -159,6 +158,8 @@ void ComicApplet::init()
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+
+    connect( this, SIGNAL( geometryChanged() ), this, SLOT( slotSizeChanged() ) );
 }
 
 ComicApplet::~ComicApplet()
@@ -276,6 +277,8 @@ void ComicApplet::loadConfig()
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+    mMaxSize = cg.readEntry( "maxSize", geometry().size() );
+    mLastSize = mMaxSize;
 
     buttonBar();
 }
@@ -324,6 +327,16 @@ void ComicApplet::slotFirstDay()
 void ComicApplet::slotCurrentDay()
 {
     updateComic( QString() );
+}
+
+void ComicApplet::slotSizeChanged()
+{
+    if ( geometry().size() != mLastSize ) {
+        mMaxSize = geometry().size();
+
+        KConfigGroup cg = config();
+        cg.writeEntry( "maxSize", mMaxSize );
+    }
 }
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
@@ -391,11 +404,6 @@ void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 void ComicApplet::updateSize()
 {
     if ( !mImage.isNull() && mImage.size().width() > 0 ) {
-        QSizeF containmentSize = QSizeF();
-        if ( containment() ) {
-            containmentSize = containment()->size();
-        }
-
         int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
@@ -404,19 +412,23 @@ void ComicApplet::updateSize()
         const QSizeF idealSize = geometry().size() - contentsRect().size() +
                  mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea );
 
-        // Set height for given width keeping image aspect ratio
-        qreal aspectRatio = qreal( mImage.size().height() ) / mImage.size().width();
-        qreal imageHeight =  aspectRatio * ( contentsRect().width() - leftArea - rightArea );
+        qreal finalWidth = mMaxSize.width();
+        qreal finalHeight = mMaxSize.height();
         int marginX = geometry().width() - contentsRect().width();
         int marginY = geometry().height() - contentsRect().height();
+        int reservedWidth = leftArea + rightArea + marginX;
+        int reservedHeight = topArea + bottomArea + marginY;
+        qreal aspectRatio = qreal( mImage.size().height() ) / mImage.size().width();
+        qreal imageHeight =  aspectRatio * ( mMaxSize.width() - reservedWidth );
         const QSizeF aspectSize = QSizeF( geometry().width(), imageHeight + topArea + bottomArea + marginY );
 
-        //uses the idealSize, as long as it is not larger, than the containment
+        // uses the idealSize, as long as it is not larger, than the containment
         if ( mScaleComic ) {
-            if ( !containmentSize.isValid() || ( idealSize.width() <= containmentSize.width() &&
-                 idealSize.height() <= containmentSize.height() ) ) {
+            if ( idealSize.width() <= mMaxSize.width() &&
+                 idealSize.height() <= mMaxSize.height() ) {
                 mActionScaleContent->setEnabled( true );
-                resize( idealSize );
+                mLastSize = idealSize;
+                resize( mLastSize );
                 return;
             } else {
                 mActionScaleContent->setEnabled( false );
@@ -425,16 +437,16 @@ void ComicApplet::updateSize()
             mActionScaleContent->setEnabled( true );
         }
 
-        //use aspectSize or something smaller than the containment
-        if ( !containmentSize.isValid() || ( aspectSize.height() <= containmentSize.height() ) ) {
-            resize( aspectSize );
+        // set height (width) for given width (height) keeping image aspect ratio
+        if ( imageHeight <= mMaxSize.height() ) {
+            finalHeight = imageHeight + reservedHeight;
         } else {
-            //use the current application height instead
-            if ( aspectSize.height() > containmentSize.height() ) {
-                qreal imageWidth = ( contentsRect().height() - topArea - bottomArea ) / aspectRatio;
-                resize( imageWidth + leftArea + rightArea + marginX, geometry().height() );
-            }
+            qreal imageWidth = ( mMaxSize.height() - reservedHeight ) / aspectRatio;
+            finalWidth = imageWidth + reservedWidth;
         }
+
+        mLastSize = QSizeF( finalWidth, finalHeight );
+        resize( mLastSize );
     }
 }
 
