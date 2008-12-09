@@ -518,10 +518,10 @@
      showgrid="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1024"
-     inkscape:window-height="690"
-     inkscape:window-x="0"
-     inkscape:window-y="0" />
+     inkscape:window-width="1680"
+     inkscape:window-height="993"
+     inkscape:window-x="-5"
+     inkscape:window-y="-3" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -537,6 +537,13 @@
      inkscape:label="Livello 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:13;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2797"
+       width="1578.5433"
+       height="1087.4409"
+       x="-89.889252"
+       y="249.936" />
     <g
        id="0"
        inkscape:label="#g2388">
