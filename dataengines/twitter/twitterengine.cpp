@@ -48,7 +48,7 @@ TwitterEngine::~TwitterEngine()
 
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
-    kDebug() << name;
+    //kDebug() << name;
     if (name == "UserImages") {
         // these are updated by the engine itself, not consumers
         return true;
@@ -81,7 +81,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //always returns false becaues everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
-    kDebug() << name;
+    //kDebug() << name;
     //right now it only makes sense to do an update on timelines
     if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:") && !name.startsWith("Profile:")) {
         return false;

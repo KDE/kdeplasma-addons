@@ -123,9 +123,11 @@ void TimelineSource::update()
 {
     if (m_job || (!account().isEmpty() && password().isEmpty())) {
         // We are already performing a fetch, let's not bother starting over
+        //kDebug() << "already updating....." << account() << password();
         return;
     }
 
+    //kDebug() << "starting an update";
     // Create a KIO job to get the data from the web service
     m_job = KIO::get(m_url, KIO::Reload, KIO::HideProgressInfo);
     connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
@@ -142,24 +144,27 @@ void TimelineSource::recv(KIO::Job*, const QByteArray& data)
 void TimelineSource::result(KJob *job)
 {
     if (job != m_job) {
+        //kDebug() << "fail! job is not our job!";
         return;
     }
 
     removeAllData();
     if (job->error()) {
+        //kDebug() << "job error!";
         // TODO: error handling
     } else {
-        //kDebug() << "done!" << m_data;
+        //kDebug() << "done!" << data().count() << m_xml;
         QXmlSimpleReader reader;
         reader.setContentHandler(this);
         reader.setErrorHandler(this);
         QBuffer input(&m_xml);
         QXmlInputSource source(&input);
         reader.parse(&source, false);
-        m_xml.clear();
+        //kDebug() << "parsing through .." << data().count();
     }
 
     checkForUpdate();
+    m_xml.clear();
     m_job = 0;
 }
 
@@ -192,6 +197,7 @@ bool TimelineSource::endElement(const QString &namespaceURI, const QString &loca
         if (!m_id.isEmpty()) {
             QVariant v;
             v.setValue(m_tempData);
+            //kDebug() << "setting data" << m_id << v;
             setData(m_id, v);
             m_id.clear();
         }
