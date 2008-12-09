@@ -13,9 +13,9 @@
    height="478.26294"
    id="svg2385"
    sodipodi:version="0.32"
-   inkscape:version="0.45+devel"
+   inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="soccer_ball.svg"
+   sodipodi:docname="football.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    style="enable-background:new"
    inkscape:export-filename="/media/daten/artwork/fuszball/soccer_ball.png"
@@ -96,15 +96,6 @@
          offset="1"
          id="stop3540" />
     </linearGradient>
-    <filter
-       inkscape:collect="always"
-       id="filter3168">
-      <feBlend
-         inkscape:collect="always"
-         mode="lighten"
-         in2="BackgroundImage"
-         id="feBlend3170" />
-    </filter>
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3100"
@@ -178,14 +169,14 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7841484"
      inkscape:cx="346.77359"
-     inkscape:cy="471.70435"
+     inkscape:cy="165.63983"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="975"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="10"
      height="449.16989px"
      width="450.17px" />
   <metadata
