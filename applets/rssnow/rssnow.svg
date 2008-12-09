@@ -13,7 +13,7 @@
    height="96"
    id="svg2637"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1+0.46pre1"
+   inkscape:version="0.46"
    version="1.0"
    sodipodi:docname="rssnow.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
@@ -33,55 +33,12 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="946"
-     inkscape:window-x="0"
-     inkscape:window-y="0" />
+     inkscape:window-width="1680"
+     inkscape:window-height="993"
+     inkscape:window-x="-5"
+     inkscape:window-y="-3" />
   <defs
-     id="defs2639">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-50 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       id="perspective13" />
-    <inkscape:perspective
-       id="perspective2955"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="-50 : 600 : 1"
-       sodipodi:type="inkscape:persp3d" />
-    <inkscape:perspective
-       id="perspective2645"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="-50 : 600 : 1"
-       sodipodi:type="inkscape:persp3d" />
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-50 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       id="perspective2654" />
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-50 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       id="perspective2706" />
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-50 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       id="perspective2918" />
-  </defs>
+     id="defs2639" />
   <metadata
      id="metadata2642">
     <rdf:RDF>

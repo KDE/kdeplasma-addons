@@ -13,7 +13,7 @@
    height="20"
    id="svg2514"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1+0.46pre1"
+   inkscape:version="0.46"
    version="1.0"
    sodipodi:docname="right.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
@@ -35,32 +35,10 @@
      showgrid="false"
      inkscape:window-width="640"
      inkscape:window-height="672"
-     inkscape:window-x="630"
+     inkscape:window-x="0"
      inkscape:window-y="0" />
   <defs
-     id="defs2516">
-    <inkscape:perspective
-       id="perspective2602"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="-50 : 600 : 1"
-       sodipodi:type="inkscape:persp3d" />
-    <inkscape:perspective
-       id="perspective2522"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="-50 : 600 : 1"
-       sodipodi:type="inkscape:persp3d" />
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-50 : 600 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="700 : 600 : 1"
-       inkscape:persp3d-origin="300 : 400 : 1"
-       id="perspective2588" />
-  </defs>
+     id="defs2516" />
   <metadata
      id="metadata2519">
     <rdf:RDF>
@@ -78,15 +56,7 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <image
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
-AAAbrwAAG68BXhqRHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAENSURB
-VDiNrdMtS0NRHAfgZ9fZBBHxC0wUQWxmm9Fu3QlDFCxiHGqzqMkXHJwumP0CfgDzgoZFm2lBUMO9
-g6vb9O5ef3DK4X+e815rNpsz2EMLDeXygltc1jPstCQ0SGNgJNnK/iutxPA2D9ErCTaSEZ33WMEJ
-+pOKo0Axxn6M8TiD7yqDObgXY9zGBp4qgzn4EevSC3ytDGboR4yxg2Wc470SmIPfYowHWMNDZTCX
-Wta+pT6pEkKYw5H0hw2NLwyGEKawI32f8+PqCoEhhE1cYPWv2l/BEMISzrBVZOKxYAhhFm3sY7oo
-Ng4M0rNamAQaJEH3R1+7LIZugk7JwaPSqeMan9jFYknoGVe4+QIDYjsI1hBa1gAAAABJRU5ErkJg
-gg==
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz AAAbrwAAG68BXhqRHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAENSURB VDiNrdMtS0NRHAfgZ9fZBBHxC0wUQWxmm9Fu3QlDFCxiHGqzqMkXHJwumP0CfgDzgoZFm2lBUMO9 g6vb9O5ef3DK4X+e815rNpsz2EMLDeXygltc1jPstCQ0SGNgJNnK/iutxPA2D9ErCTaSEZ33WMEJ +pOKo0Axxn6M8TiD7yqDObgXY9zGBp4qgzn4EevSC3ytDGboR4yxg2Wc470SmIPfYowHWMNDZTCX Wta+pT6pEkKYw5H0hw2NLwyGEKawI32f8+PqCoEhhE1cYPWv2l/BEMISzrBVZOKxYAhhFm3sY7oo Ng4M0rNamAQaJEH3R1+7LIZugk7JwaPSqeMan9jFYknoGVe4+QIDYjsI1hBa1gAAAABJRU5ErkJg gg== "
        width="20"
        height="20"
        id="right"
