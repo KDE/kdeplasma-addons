@@ -14,7 +14,7 @@ install(TARGETS plasma_applet_bball
 install(FILES plasma-applet-bball.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES bball.svg football.svg bounce.ogg
+install(FILES bball.svgz football.svgz bounce.ogg
 	DESTINATION ${DATA_INSTALL_DIR}/bball/)
 
 kde4_install_icons(${ICON_INSTALL_DIR})
