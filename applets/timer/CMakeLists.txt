@@ -29,5 +29,5 @@ install(TARGETS plasma_applet_timer
 install(FILES plasma-applet-timer.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES timer.svg
+install(FILES timer.svgz
 	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
