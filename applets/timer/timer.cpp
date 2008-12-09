@@ -71,6 +71,22 @@ void Timer::init()
     m_runCommand = cg.readEntry("runCommand", false);
     m_command = cg.readEntry("command", "");
 
+    // Timers are kept non-localized in the config, to work across language changes.
+    QStringList localizedTimers;
+    foreach (QString timer, m_predefinedTimers) {
+        localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
+    }
+    m_predefinedTimers = localizedTimers;
+
+    // Choose graphical separator based on the text one.
+    m_separatorBasename = QString("separator");
+    QString textSeparator = CustomTimeEditor::timerSeparator().remove(' ');
+    if (textSeparator == QString('.')) {
+        m_separatorBasename += 'B';
+    } else if (textSeparator == QString(' ')) {
+        m_separatorBasename += 'C';
+    }
+
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
 
     m_startAction = new QAction(i18n("Start"), this);
@@ -106,7 +122,7 @@ void Timer::createMenuAction()
     lstActionTimer = new QActionGroup(this);
     for (QStringList::const_iterator it = m_predefinedTimers.constBegin(); it != end; ++it) {
         action = new QAction(*it, this);
-        action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::TIME_FORMAT)));
+        action->setProperty("seconds", QTime(0, 0, 0).secsTo(QTime::fromString(*it, CustomTimeEditor::toLocalizedTimer(CustomTimeEditor::TIME_FORMAT))));
         lstActionTimer->addAction(action);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(startTimerFromAction()));
         actions.append(action);
@@ -148,7 +164,11 @@ void Timer::configAccepted()
     KConfigGroup cg = config();
 
     m_predefinedTimers = predefinedTimersUi.defaulttimers->items();
-    cg.writePathEntry("predefinedTimers", m_predefinedTimers);
+    QStringList unlocalizedTimers;
+    foreach (QString timer, m_predefinedTimers) {
+        unlocalizedTimers.append(CustomTimeEditor::fromLocalizedTimer(timer));
+    }
+    cg.writePathEntry("predefinedTimers", unlocalizedTimers);
 
     m_showMessage = ui.showMessageCheckBox->isChecked();
     cg.writeEntry("showMessage", m_showMessage);
@@ -339,12 +359,12 @@ void Timer::paintInterface(QPainter *p,
     m_svg->paint(p, QRectF(x, y, w, h), QString::number(hours / 10) + suffix);
     m_svg->paint(p, QRectF(x + w, y, w, h), QString::number(hours % 10) + suffix);
 
-    m_svg->paint(p, QRectF(x + (w * 2), y, w/2, h), "separator" + suffix);
+    m_svg->paint(p, QRectF(x + (w * 2), y, w/2, h), m_separatorBasename + suffix);
 
     m_svg->paint(p, QRectF(x + (w * 2) + (w/2), y, w, h), QString::number(mins / 10) + suffix);
     m_svg->paint(p, QRectF(x + (w * 3) + (w/2), y, w, h), QString::number(mins % 10) + suffix);
 
-    m_svg->paint(p, QRectF(x + (w * 4) + (w/2), y, w/2, h), "separator" + suffix);
+    m_svg->paint(p, QRectF(x + (w * 4) + (w/2), y, w/2, h), m_separatorBasename + suffix);
 
     m_svg->paint(p, QRectF(x + (w * 5), y, w, h), QString::number(seconds / 10) + suffix);
     m_svg->paint(p, QRectF(x + (w * 6), y, w, h), QString::number(seconds % 10) + suffix);

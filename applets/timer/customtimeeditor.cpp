@@ -20,6 +20,7 @@
 #include "customtimeeditor.h"
 #include <QTimeEdit>
 #include <klineedit.h>
+#include <klocale.h>
 
 const QString CustomTimeEditor::TIME_FORMAT("hh:mm:ss");
 
@@ -27,7 +28,7 @@ CustomTimeEditor::CustomTimeEditor()
     : QObject()
 {
     timeEdit=new QTimeEdit();
-    timeEdit->setDisplayFormat(TIME_FORMAT);
+    timeEdit->setDisplayFormat(toLocalizedTimer(TIME_FORMAT));
     editor=new KLineEdit();
     customEditor=new KEditListBox::CustomEditor(timeEdit, editor);
     connect(timeEdit, SIGNAL(timeChanged( const QTime& )), this, SLOT(setEdit(const QTime&) ));
@@ -49,7 +50,7 @@ CustomTimeEditor::~CustomTimeEditor()
  */
 void CustomTimeEditor::setEdit(const QTime &time)
 {
-    editor->setText(time.toString() );
+    editor->setText(toLocalizedTimer(time.toString()));
 }
 
 #include "customtimeeditor.moc"
@@ -60,4 +61,46 @@ void CustomTimeEditor::setEdit(const QTime &time)
 KEditListBox::CustomEditor *CustomTimeEditor::getCustomEditor()
 {
     return customEditor;
+}
+
+/*!
+    \fn CustomTimeEditor::timerSeparator()
+ */
+QString CustomTimeEditor::timerSeparator()
+{
+    return i18nc("separator of hours:minutes:seconds in timer strings", ":");
+}
+
+/*!
+    \fn CustomTimeEditor::toLocalizedTimer(const QString &timer)
+ */
+QString CustomTimeEditor::toLocalizedTimer(const QString &timer)
+{
+    QString separator = timerSeparator();
+    int p1 = timer.indexOf(':');
+    if (p1 < 0) {
+        return timer;
+    }
+    int p2 = timer.indexOf(':', p1 + 1);
+    if (p2 < 0) {
+        return timer;
+    }
+    return timer.left(p1) + separator + timer.mid(p1 + 1, p2 - p1 - 1) + separator + timer.mid(p2 + 1);
+}
+
+/*!
+    \fn CustomTimeEditor::fromLocalizedTimer(const QString &timer)
+ */
+QString CustomTimeEditor::fromLocalizedTimer(const QString &timer)
+{
+    QString separator = timerSeparator();
+    int p1 = timer.indexOf(separator);
+    if (p1 < 0) {
+        return timer;
+    }
+    int p2 = timer.indexOf(separator, p1 + 1);
+    if (p2 < 0) {
+        return timer;
+    }
+    return timer.left(p1) + ':' + timer.mid(p1 + 1, p2 - p1 - 1) + ':' + timer.mid(p2 + 1);
 }

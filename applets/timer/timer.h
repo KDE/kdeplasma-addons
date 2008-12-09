@@ -79,6 +79,7 @@ class Timer : public Plasma::Applet
         QString m_command;
         QList<QAction *>actions;
         QActionGroup *lstActionTimer;
+        QString m_separatorBasename;
     protected slots:
         void configAccepted();
 };

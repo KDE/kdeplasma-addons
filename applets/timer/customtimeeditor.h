@@ -36,6 +36,9 @@ public:
 
     ~CustomTimeEditor();
     KEditListBox::CustomEditor *getCustomEditor();
+    static QString timerSeparator();
+    static QString toLocalizedTimer(const QString &timer);
+    static QString fromLocalizedTimer(const QString &timer);
     static const QString TIME_FORMAT;
 private:
     QTimeEdit* timeEdit;

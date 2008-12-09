@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +13,19 @@
    height="1052.3622047"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.46"
    sodipodi:docname="timer.svg"
    sodipodi:docbase="/home/kde-devel/working/playground/base/plasma/applets/timer"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective172" />
     <linearGradient
        id="linearGradient3493">
       <stop
@@ -507,7 +514,7 @@
      inkscape:cx="372.04724"
      inkscape:cy="346.32616"
      inkscape:document-units="px"
-     inkscape:current-layer="separator_1"
+     inkscape:current-layer="layer1"
      showgrid="true"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -1164,6 +1171,94 @@
            y="442.08881"
            x="199.02405"
            sodipodi:role="line">:</tspan></text>
+    </g>
+    <g
+       id="separatorB_1"
+       inkscape:label="#g3536"
+       transform="translate(-134.80315,175.1705)">
+      <rect
+         y="324.28006"
+         x="200"
+         height="163.08212"
+         width="45"
+         id="rect2561"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-opacity:1" />
+      <text
+         id="text2563"
+         y="442.08881"
+         x="199.02405"
+         style="font-size:144px;font-style:normal;font-weight:normal;fill:#eb0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan2565"
+           y="442.08881"
+           x="199.02405"
+           sodipodi:role="line">.</tspan></text>
+    </g>
+    <g
+       id="separatorB"
+       inkscape:label="#g3536"
+       transform="translate(-196.19095,181.74775)">
+      <rect
+         y="324.28006"
+         x="200"
+         height="163.08212"
+         width="45"
+         id="rect2569"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-opacity:1" />
+      <text
+         id="text2571"
+         y="442.08881"
+         x="199.02405"
+         style="font-size:144px;font-style:normal;font-weight:normal;fill:#ebebeb;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan2573"
+           y="442.08881"
+           x="199.02405"
+           sodipodi:role="line">.</tspan></text>
+    </g>
+    <g
+       id="separatorC"
+       inkscape:label="#g3536"
+       transform="translate(-193.99853,354.94902)">
+      <rect
+         y="324.28006"
+         x="200"
+         height="163.08212"
+         width="45"
+         id="rect2577"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-opacity:1" />
+      <text
+         id="text2579"
+         y="442.08881"
+         x="199.02405"
+         style="font-size:144px;font-style:normal;font-weight:normal;fill:#ebebeb;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan2581"
+           y="442.08881"
+           x="199.02405"
+           sodipodi:role="line"> </tspan></text>
+    </g>
+    <g
+       id="separatorC_1"
+       inkscape:label="#g3536"
+       transform="translate(-134.80314,350.56418)">
+      <rect
+         y="324.28006"
+         x="200"
+         height="163.08212"
+         width="45"
+         id="rect2585"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-opacity:1" />
+      <text
+         id="text2587"
+         y="442.08881"
+         x="199.02405"
+         style="font-size:144px;font-style:normal;font-weight:normal;fill:#eb0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan2589"
+           y="442.08881"
+           x="199.02405"
+           sodipodi:role="line"> </tspan></text>
     </g>
   </g>
 </svg>
