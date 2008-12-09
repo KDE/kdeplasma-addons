@@ -42,7 +42,7 @@ Comment[uk]=Аплет гри "Life" (Життя), вигаданої Конве
 Comment[x-test]=xx Conway's Game of Life appletxx
 Comment[zh_CN]= 生命小程序的 Conway 游戏
 Comment[zh_TW]=Conway 的生命遊戲小程式
-Icon=chronometer
+#Icon=chronometer //TODO: missing icon
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
