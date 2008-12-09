@@ -246,6 +246,8 @@ void ComicApplet::applyConfig()
         mActionScaleContent->setChecked( mScaleComic );
 
         updateComic();
+    } else {
+        updateSize();
     }
     if ( checkButtonBar ) {
         buttonBar();
