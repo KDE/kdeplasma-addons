@@ -25,29 +25,26 @@
 
 #include <QPainter>
 
-#include <plasma/tooltipmanager.h>
+#include <KConfigDialog>
+#include <KDebug>
+
 #include <Plasma/Svg>
 #include <Plasma/Theme>
-#include <KDebug>
-#include <KConfigDialog>
+#include <Plasma/ToolTipManager>
 
 #include "phases.cpp"
 
-
-
 Luna::Luna(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      counter(-1)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::ConstrainedSquare);
     resize(QSize(82, 82));
-
-    counter = -1;
 }
 
 void Luna::init()
 {
-    Plasma::ToolTipManager::self()->registerWidget(this);
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/luna");
     m_theme->setContainsMultipleImages(true);
@@ -57,9 +54,9 @@ void Luna::init()
         return;
     }
 
-    KConfigGroup cg = config();
+    Plasma::ToolTipManager::self()->registerWidget(this);
 
-    northHemisphere = cg.readEntry("northHemisphere", true);
+    northHemisphere = config().readEntry("northHemisphere", true);
 
     connectToEngine();
 }
@@ -97,11 +94,9 @@ void Luna::createConfigurationInterface(KConfigDialog *parent)
 
 void Luna::configAccepted()
 {
-    KConfigGroup cg = config();
-
     northHemisphere = ui.northenRadio->isChecked();
 
-    cg.writeEntry("northHemisphere", northHemisphere);
+    config().writeEntry("northHemisphere", northHemisphere);
 
     update();
 
