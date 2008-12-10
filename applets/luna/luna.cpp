@@ -103,8 +103,7 @@ void Luna::configAccepted()
     emit configNeedsSaving();
 }
 
-void Luna::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
-const QRect &contentsRect)
+void Luna::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 {
     Q_UNUSED(option)
 
@@ -214,6 +213,7 @@ void Luna::calcStatus(time_t time)
     case 0:
         toolTipData.setMainText( i18n("New Moon") );
         return;
+
     case 1:
     case 2:
     case 3:
@@ -222,9 +222,11 @@ void Luna::calcStatus(time_t time)
     case 6:
         toolTipData.setMainText( i18np("Waxing Crescent (New Moon was yesterday)", "Waxing Crescent (%1 days since New Moon)", counter ) );
         break;
+
     case 7:
         toolTipData.setMainText( i18n("First Quarter") );
         break;
+
     case 8:
     case 9:
     case 10:
@@ -233,9 +235,11 @@ void Luna::calcStatus(time_t time)
     case 13:
         toolTipData.setMainText( i18np( "Waxing Gibbous (Tomorrow is Full Moon)", "Waxing Gibbous (%1 days to Full Moon)", -fm.daysTo( now ) ) );
         break;
+
     case 14:
         assert( false );
         break;
+
     case 15:
     case 16:
     case 17:
@@ -244,9 +248,11 @@ void Luna::calcStatus(time_t time)
     case 20:
         toolTipData.setMainText( i18np("Waning Gibbous (Yesterday was Full Moon)", "Waning Gibbous (%1 days since Full Moon)", fm.daysTo( now ) ) );
         break;
+
     case 21:
         toolTipData.setMainText( i18n("Last Quarter") );
         break;
+
     case 22:
     case 23:
     case 24:
@@ -257,9 +263,11 @@ void Luna::calcStatus(time_t time)
         kDebug() << "nn.days " << ln.daysTo( now ) << " " << nn.daysTo( now );
         toolTipData.setMainText( i18np("Waning Crescent (Tomorrow is New Moon)", "Waning Crescent (%1 days to New Moon)", -nn.daysTo( now ) ) );
         break;
+
     default:
         kFatal() << "coolo can't count\n";
     }
+
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     update();
 }
