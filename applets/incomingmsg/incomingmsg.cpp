@@ -367,7 +367,7 @@ void IncomingMsg::slotNewEvolutionMail()
 {
     KIcon icon("evolution");
     mEvolutionIconLabel->nativeWidget()->setPixmap(icon.pixmap(32, 32));
-    mEvolutionLabel->setText(i18n("Your Evolution mail has changed."));
+    mEvolutionLabel->setText(i18n("Your Evolution mail count has changed."));
 }
 
 void IncomingMsg::slotNewKMailMail()
