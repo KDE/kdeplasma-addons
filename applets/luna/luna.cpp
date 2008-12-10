@@ -40,8 +40,7 @@ Luna::Luna(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::ConstrainedSquare);
-    size = 82;
-    resize(QSize(size, size));
+    resize(QSize(82, 82));
 
     counter = -1;
 }
@@ -68,17 +67,6 @@ void Luna::init()
 Luna::~Luna()
 {
     delete m_theme;
-}
-
-void Luna::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::SizeConstraint) {
-        if (formFactor() == Plasma::Horizontal) {
-            setMinimumWidth(geometry().height());
-        } else if (formFactor() == Plasma::Vertical) {
-            setMinimumHeight((int)geometry().width());
-        }
-    }
 }
 
 void Luna::connectToEngine()

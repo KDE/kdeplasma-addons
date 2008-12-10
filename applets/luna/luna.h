@@ -44,7 +44,6 @@ class Luna : public Plasma::Applet
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
-        void constraintsEvent(Plasma::Constraints constraints);
 
     private:
         void connectToEngine();
@@ -52,8 +51,6 @@ class Luna : public Plasma::Applet
 
         int counter;
         bool northHemisphere;
-
-	int size;
 
         Plasma::Svg *m_theme;
         Ui::lunaConfig ui;
