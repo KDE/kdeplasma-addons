@@ -235,7 +235,7 @@ void Luna::calcStatus(time_t time)
         #if 0
         toolTipData.mainText = i18n("New Moon");
         #endif
-        return;
+        break;
     case 1:
     case 2:
     case 3:
