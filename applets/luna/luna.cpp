@@ -212,7 +212,7 @@ void Luna::calcStatus(time_t time)
     switch (counter) {
     case 0:
         toolTipData.setMainText( i18n("New Moon") );
-        return;
+        break;
 
     case 1:
     case 2:
