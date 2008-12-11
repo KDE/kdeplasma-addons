@@ -263,8 +263,8 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
     int appletWidth = (int) contentsRect.width();
     int dots = m_showSeconds ? 6 : 4;
 
-    int rectSize = qMax(1, (appletHeight - 3) / 4);
-    int yPos = ((appletHeight % rectSize) / 2) + contentsRect.topLeft().y();
+    int rectSize = qMax(1, qMin((appletHeight - 3) / 4, (appletWidth - 3) / dots));
+    int yPos = ((appletHeight - 4 * rectSize) / 2) + contentsRect.topLeft().y();
     int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect.topLeft().x();
 
     const QString hours = m_time.toString("HH");
