@@ -194,13 +194,12 @@ void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
                 break;
         }
     }
-    /*
+
     if (constraints & Plasma::SizeConstraint && formFactor() == Plasma::Horizontal)
     {
-        resize(preferredHeight() * 2, preferredHeight());
-        setAspectRatioMode(Plasma::KeepAspectRatio);
+        setPreferredSize(contentsRect().height() * 2, contentsRect().height());
+//        setAspectRatioMode(Plasma::KeepAspectRatio);
     }
-    */
 
         kDebug() << "minimumSize():" << minimumSize();
         kDebug() << "preferredSize():" << preferredSize();
