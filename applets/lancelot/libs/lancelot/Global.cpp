@@ -216,6 +216,7 @@ void WidgetGroup::load(bool full)
         d->backgroundSvg->setImagePath(
             Plasma::Theme::defaultTheme()->imagePath(
                 d->confGroupTheme->readEntry("background.svg")));
+        d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
     }
 
