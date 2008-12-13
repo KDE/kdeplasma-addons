@@ -510,12 +510,15 @@ void Twitter::showTweets()
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
         t.content->document()->setTextWidth(t.content->width());
         t.content->setMinimumSize(t.content->document()->size().toSize());
+        t.content->setMaximumHeight(t.content->minimumSize().height());
+
         t.content->update();
 
         //FIXME: this hopefully would get useless in QGL of 4.5
         qreal left, top, right, bottom;
         t.frame->getContentsMargins(&left, &top, &right, &bottom);
         t.frame->setMinimumHeight(t.content->size().height() + top + bottom);
+        t.frame->setPreferredHeight(t.frame->minimumHeight());
 
         if( !favIcon.isNull() ) {
             t.favIcon->setIcon( QIcon(favIcon) );
@@ -532,7 +535,6 @@ void Twitter::showTweets()
     m_graphicsWidget->setPreferredSize(m_layout->sizeHint(Qt::PreferredSize));
     //are we complete?
     if (layout()->itemAt(0) == m_graphicsWidget) {
-        //resize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
         setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left+right, top+bottom));
         setPreferredSize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
         resize(preferredSize());
