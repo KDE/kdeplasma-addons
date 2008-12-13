@@ -371,7 +371,6 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         m_newTweets = qMin(newCount, m_historySize);
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
         showTweets();
-        paintIcon();
     } else if (source == "UserImages") {
         foreach (const QString &user, data.keys()) {
             QPixmap pm = data[user].value<QPixmap>();
@@ -418,6 +417,7 @@ void Twitter::showTweets()
     // Add more tweetWidgets if there are not enough
     while( m_tweetWidgets.size() < m_historySize ) {
         Plasma::Frame *tweetFrame = new Plasma::Frame(this);
+
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
         tweetLayout->setContentsMargins( 0, 5, 0, 5 );
         tweetLayout->setSpacing( 5 );
@@ -510,7 +510,13 @@ void Twitter::showTweets()
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
         t.content->document()->setTextWidth(t.content->width());
         t.content->setMinimumSize(t.content->document()->size().toSize());
+        t.content->setMaximumSize(t.content->minimumSize());
         t.content->update();
+
+        //FIXME: this hopefully would get useless in QGL of 4.5
+        qreal left, top, right, bottom;
+        t.frame->getContentsMargins(&left, &top, &right, &bottom);
+        t.frame->setMinimumHeight(t.content->size().height() + top + bottom);
 
         if( !favIcon.isNull() ) {
             t.favIcon->setIcon( QIcon(favIcon) );
@@ -531,6 +537,8 @@ void Twitter::showTweets()
         setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left+right, top+bottom));
         setPreferredSize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
         resize(preferredSize());
+    } else {
+        paintIcon();
     }
 }
 
