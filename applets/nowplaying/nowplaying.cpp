@@ -175,10 +175,6 @@ void NowPlaying::layoutHorizontal()
 
 void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
 {
-    kDebug() << "Constraints:" << constraints;
-    kDebug() << "Maximum size:" << maximumSize();
-    kDebug() << "Preferred size:" << preferredSize();
-    kDebug() << "Minimum size:" << minimumSize();
     if (constraints & Plasma::FormFactorConstraint)
     {
         switch (formFactor())
@@ -195,29 +191,20 @@ void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
         }
     }
 
-    if (constraints & Plasma::SizeConstraint && formFactor() == Plasma::Horizontal)
+    if (constraints & Plasma::SizeConstraint)
     {
-        setPreferredSize(contentsRect().height() * 2, contentsRect().height());
-//        setAspectRatioMode(Plasma::KeepAspectRatio);
+        switch (formFactor())
+        {
+            case Plasma::Horizontal:
+                setPreferredSize(contentsRect().height() * 2, contentsRect().height());
+                break;
+            case Plasma::Vertical:
+                setPreferredSize(contentsRect().width(), contentsRect().width() / 2);
+                break;
+            default:
+                break;
+        }
     }
-
-        kDebug() << "minimumSize():" << minimumSize();
-        kDebug() << "preferredSize():" << preferredSize();
-        kDebug() << "maximumSize():" << maximumSize();
-        QSizePolicy policy(sizePolicy());
-        qreal left, top, right, bottom;
-        getContentsMargins(&left, &top, &right, &bottom);
-        kDebug() << "sizePolicy():"
-                 << "\n    horizontalPolicy:" << policy.horizontalPolicy()
-                 << "\n    horizontalStretch:" << policy.horizontalStretch()
-                 << "\n    verticalPolicy:" << policy.verticalPolicy()
-                 << "\n    verticalStretch:" << policy.verticalStretch()
-                 << "\n    expandingDirections:" << policy.expandingDirections()
-                 << "\n    hasHeightForWidth:" << policy.hasHeightForWidth()
-                 << "\n    contentsMargins:" << left << top << right << bottom;
-        kDebug() << "backgroundHints():" << backgroundHints();
-        kDebug() << "contentsRect():" << contentsRect();
-        kDebug() << "boundingRect():" << boundingRect();
 }
 
 void NowPlaying::dataUpdated(const QString &name,
