@@ -114,7 +114,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
-    setAspectRatioMode( Plasma::KeepAspectRatio );
+    setAspectRatioMode( Plasma::IgnoreAspectRatio );
 }
 
 void ComicApplet::init()
