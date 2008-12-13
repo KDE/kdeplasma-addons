@@ -510,7 +510,6 @@ void Twitter::showTweets()
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
         t.content->document()->setTextWidth(t.content->width());
         t.content->setMinimumSize(t.content->document()->size().toSize());
-        t.content->setMaximumSize(t.content->minimumSize());
         t.content->update();
 
         //FIXME: this hopefully would get useless in QGL of 4.5
