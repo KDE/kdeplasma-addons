@@ -487,12 +487,12 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     }
 
     // create the text at bottom
-    int urlHeight = 0;
+    int bottomHeight = 0;
     if ( ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) ||
          ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-        urlHeight = fm.height();
-        int height = contentRect.bottom() - urlHeight;
+        bottomHeight = fm.height();
+        int height = contentRect.bottom() - bottomHeight;
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
 
         if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
@@ -515,19 +515,19 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     if ( mShowPreviousButton && !mArrowsOnHover ) {
         mSvg->paint( p, contentRect.left() - 5, buttonMiddle - 15, s_arrowWidth, 30, "left-arrow");
 
-        leftImageGap = s_arrowWidth;
+        leftImageGap += s_arrowWidth;
     }
 
     int rightImageGap = 0;
     if ( mShowNextButton && !mArrowsOnHover ) {
         mSvg->paint( p, contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15, s_arrowWidth, 30, "right-arrow");
 
-        rightImageGap = s_arrowWidth;
+        rightImageGap += s_arrowWidth;
     }
 
     QRect imageRect( contentRect.x() + leftImageGap, contentRect.y() + topHeight,
                      contentRect.width() - ( leftImageGap + rightImageGap ),
-                     contentRect.height() - urlHeight - topHeight );
+                     contentRect.height() - bottomHeight - topHeight );
     p->drawImage( imageRect, mImage );
 
     p->restore();
