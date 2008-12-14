@@ -537,10 +537,10 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
                      contentRect.height() - bottomHeight - topHeight );
     p->drawImage( mImageRect, mImage );
 
-     // reposition of the hovering icons
-     if ( mArrowsOnHover && ( geometry().size() == mLastSize ) ) {
-         constraintsEvent( Plasma::SizeConstraint );
-     }
+    // reposition of the hovering icons
+    if ( mArrowsOnHover && ( geometry().size() == mLastSize ) ) {
+        constraintsEvent( Plasma::SizeConstraint );
+    }
     p->restore();
 }
 
@@ -619,7 +619,7 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
     if ( constraints && Plasma::SizeConstraint && mFrame ) {
         qreal bottom = mImageRect.bottom();
         QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
-                           bottom - mFrame->size().height() - 5 );
+                         bottom - mFrame->size().height() - 5 );
         mFrame->setPos( buttons );
     }
 }
