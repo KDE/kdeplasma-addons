@@ -23,8 +23,14 @@
 #include <Plasma/Applet>
 #include <Plasma/Svg>
 
-class Plasma::DataEngine;
-class Ui::lifeConfig;
+namespace Plasma
+{
+    class DataEngine;
+}
+namespace Ui
+{
+    class lifeConfig;
+}
 
 class Life : public Plasma::Applet
 {
