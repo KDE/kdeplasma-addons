@@ -525,10 +525,10 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         rightImageGap += s_arrowWidth;
     }
 
-    QRect imageRect( contentRect.x() + leftImageGap, contentRect.y() + topHeight,
+    mImageRect = QRect( contentRect.x() + leftImageGap, contentRect.y() + topHeight,
                      contentRect.width() - ( leftImageGap + rightImageGap ),
                      contentRect.height() - bottomHeight - topHeight );
-    p->drawImage( imageRect, mImage );
+    p->drawImage( mImageRect, mImage );
 
      // reposition of the hovering icons
      if ( mArrowsOnHover && ( geometry().size() == mLastSize ) ) {

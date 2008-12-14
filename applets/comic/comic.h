@@ -121,6 +121,7 @@ class ComicApplet : public Plasma::Applet
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
         QSizeF mLastSize;
+        QRect mImageRect;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
         Plasma::PushButton *mPrevButton;
