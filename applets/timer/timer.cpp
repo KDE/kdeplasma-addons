@@ -73,7 +73,7 @@ void Timer::init()
 
     // Timers are kept non-localized in the config, to work across language changes.
     QStringList localizedTimers;
-    foreach (QString timer, m_predefinedTimers) {
+    foreach (const QString &timer, m_predefinedTimers) {
         localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
     }
     m_predefinedTimers = localizedTimers;
@@ -165,7 +165,7 @@ void Timer::configAccepted()
 
     m_predefinedTimers = predefinedTimersUi.defaulttimers->items();
     QStringList unlocalizedTimers;
-    foreach (QString timer, m_predefinedTimers) {
+    foreach (const QString &timer, m_predefinedTimers) {
         unlocalizedTimers.append(CustomTimeEditor::fromLocalizedTimer(timer));
     }
     cg.writePathEntry("predefinedTimers", unlocalizedTimers);

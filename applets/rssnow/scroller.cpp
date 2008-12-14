@@ -394,7 +394,7 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
 
         QVariantList items = data["items"].toList();
 
-        foreach (QVariant tmp, items) {
+        foreach (const QVariant &tmp, items) {
             QMap<QString, QVariant> item = tmp.toMap();
             QString title = item["title"].toString();
             QString url = item["link"].toString();
