@@ -409,8 +409,15 @@ void ComicApplet::updateSize()
         int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? s_arrowWidth : 0;
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
-        int topArea = ( ( mShowComicAuthor || mShowComicTitle ) ? fmHeight : 0 );
-        int bottomArea = ( mShowComicUrl || mShowComicIdentifier ? fmHeight : 0 );
+        int topArea = ( ( ( mShowComicAuthor && mComicAuthor.isEmpty() ) ||
+                          ( mShowComicTitle && ( !mStripTitle.isEmpty() || !mComicTitle.isEmpty() ) ) ) ? fmHeight : 0 );
+        bool hasComicIdentifier = false;
+        if ( ( ( mSuffixType == "Number" ) && ( mIdentifierSuffixNum != -1  ) ) ||
+             ( ( mSuffixType == "Date" ) && mIdentifierSuffixDate.isValid() ) ) {
+            hasComicIdentifier = true;
+        }
+        int bottomArea = ( ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) || ( mShowComicIdentifier && hasComicIdentifier ) ? fmHeight : 0 );
+
         const QSizeF idealSize = geometry().size() - contentsRect().size() +
                  mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea );
 
