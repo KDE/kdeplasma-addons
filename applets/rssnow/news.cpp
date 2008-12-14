@@ -348,8 +348,8 @@ void News::constraintsEvent(Plasma::Constraints constraints)
         if (formFactor() == Plasma::Horizontal) {
             int minSize = (m_feedlist.size() * m_scrollerList.first()->minimumSize().height());
             kDebug() << "minimum size to contain all scrollers: " << minSize;
-            if (geometry().height() < minSize) {
-                //group all feeds together so it can fit:
+            if (geometry().height() < minSize && m_feedlist.count() > 1) {
+                //group all feeds together so it can fit (only a single time):
                 QString allfeeds;
                 foreach (QString feed, m_feedlist) {
                     if (!feed.endsWith(" ")) {
