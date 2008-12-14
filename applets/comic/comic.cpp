@@ -612,7 +612,7 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
     if ( constraints && Plasma::SizeConstraint && mFrame ) {
         qreal bottom = mImageRect.bottom();
         QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
-                           bottom - mFrame->size().height()/2 - 5 );
+                           bottom - mFrame->size().height() - 5 );
         mFrame->setPos( buttons );
     }
 }
