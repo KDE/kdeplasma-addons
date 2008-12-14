@@ -271,6 +271,9 @@ public:
     }
     QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const
     {
+        Q_UNUSED(section)
+        Q_UNUSED(orientation)
+
         if (role!=Qt::DisplayRole)
             return QVariant();
         return i18n("Dictionary");
