@@ -57,7 +57,7 @@ QWidget *CharSelectApplet::widget()
         m_mainWidget->setAttribute(Qt::WA_NoSystemBackground);
         QGridLayout *layout = new QGridLayout(m_mainWidget);
 
-        m_charselect = new KCharSelect(m_mainWidget, KCharSelect::CharacterTable|KCharSelect::FontCombo);
+        m_charselect = new KCharSelect(m_mainWidget, 0, KCharSelect::CharacterTable|KCharSelect::FontCombo);
         m_charselect->setMinimumSize(300, 250);
         connect( m_charselect, SIGNAL( charSelected(const QChar &) ), this, SLOT( slotCharSelect( const QChar& ) ) );
         layout->addWidget( m_charselect, 0, 0, 1, 2);
