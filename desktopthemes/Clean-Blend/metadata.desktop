@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Clean Blend
 Comment=Clean simple theme that blends nicely with the default colour scheme
+Comment[nds]=Oprüümt eenfach Muster, dat sik smuck na't Standard-Klöörschema topasst
+Comment[pt]=Um tema simples e limpo que se funde razoavelmente com o esquema de cores por omissão
+Comment[pt_BR]=Um tema simples e limpo que se funde razoavelmente com o esquema de cores por omissão
+Comment[sv]=Rent enkelt tema som smälter samman snyggt med det normala färgschemat
+Comment[uk]=Проста чиста тема, у якій чудово гармоніюють кольори типової схеми кольорів
+Comment[zh_TW]=乾淨、簡單的主題，與預設顏色機制搭得很好
 
 X-KDE-PluginInfo-Author=Sean Wilson
 X-KDE-PluginInfo-Email=suseux@gmail.com
