@@ -415,7 +415,7 @@ void Twitter::showTweets()
     prepareGeometryChange();
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
-    while( m_tweetWidgets.size() < m_historySize ) {
+    while (m_tweetWidgets.size() < m_historySize) {
         Plasma::Frame *tweetFrame = new Plasma::Frame(this);
 
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );

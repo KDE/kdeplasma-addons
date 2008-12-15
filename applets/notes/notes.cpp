@@ -381,7 +381,7 @@ void Notes::configAccepted()
 
     if (changed) {
         updateTextGeometry();
-	update();
+        update();
         emit configNeedsSaving();
     }
 }
