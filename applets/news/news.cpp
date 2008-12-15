@@ -35,42 +35,44 @@
 #include <Plasma/Theme>
 #include <Plasma/WebView>
 
-#define BEGIN "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" \
-"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" \
-"\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n" \
-"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" \
-"<head>\n" \
-" <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" \
-" <link rel=\"stylesheet\" type=\"text/css\" href=\"news.css\" />\n" \
-" <title>Plasma News</title>\n" \
-"</head>\n" \
-"<body>\n"
+static const char *BEGIN = 
+"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
+"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\""
+"\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+"<head>\n"
+" <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+" <link rel=\"stylesheet\" type=\"text/css\" href=\"news.css\" />\n"
+" <title>Plasma News</title>\n"
+"</head>\n"
+"<body>\n";
 
-#define BEGIN_TABLE "<table>\n"
-#define HEADER_LINE "<tr class=\"header_line\">" \
-                    "<td colspan=\"2\" class=\"header\"><a href=\"%1\">%2</a></td></tr>\n"
-#define DATE_LINE   "<tr class=\"date_line\"><td colspan=\"2\" class=\"date\">%1</td></tr>\n"
-#define LINE        "<tr class=\"line-%1\">" \
-                    "<td colspan=\"2\" class=\"text\"><a href=\"%2\">%3</a></td></tr>\n"
-#define TIME_LINE   "<tr class=\"line-%1\"><td class=\"time\">%2</td>" \
-                    "<td class=\"text\"><a href=\"%3\">%4</a></td></tr>\n"
-#define TITLE       "<span class=\"title\">%1</span>"
-#define TITLE_DESC  "<span class=\"title_with_description\">%1</span><br/>"
-#define DESCRIPTION "<span class=\"description\">%1</span>"
-#define END_TABLE   "</table>\n"
-#define END         "</body>\n</html>\n"
+static const char *BEGIN_TABLE = "<table>\n";
+static const char *HEADER_LINE = "<tr class=\"header_line\">"
+                                 "<td colspan=\"2\" class=\"header\"><a href=\"%1\">%2</a></td></tr>\n";
+static const char *DATE_LINE   = "<tr class=\"date_line\"><td colspan=\"2\" class=\"date\">%1</td></tr>\n";
+static const char *LINE        = "<tr class=\"line-%1\">"
+                                 "<td colspan=\"2\" class=\"text\"><a href=\"%2\">%3</a></td></tr>\n";
+static const char *TIME_LINE   = "<tr class=\"line-%1\"><td class=\"time\">%2</td>"
+                                 "<td class=\"text\"><a href=\"%3\">%4</a></td></tr>\n";
+static const char *TITLE       = "<span class=\"title\">%1</span>";
+static const char *TITLE_DESC  = "<span class=\"title_with_description\">%1</span><br/>";
+static const char *DESCRIPTION = "<span class=\"description\">%1</span>";
+static const char *END_TABLE   = "</table>\n";
+static const char *END         = "</body>\n</html>\n";
 
-#define CSS ".header { font-size:11pt; font-weight:bold; color:%1; background-color:%2; }\n" \
-            ".date { font-size:10pt; font-weight:bold; color:%1; background-color:%2; }\n" \
-            ".line-0 { font-size:10pt; color:%1; background-color:%3; }\n" \
-            ".line-1 { font-size:10pt; color:%1; background-color:%4; }\n" \
-            ".time, .title, .description { }\n" \
-            ".text { width:100%; }\n" \
-            ".title_with_description { font-weight:bold; }\n" \
-            "a { text-decoration:none; color:%1 }\n" \
-            "table { width:100%; border-spacing:0px; }\n" \
-            "td { vertical-align: top; }\n" \
-            "body { margin:0px; background-color:%3 }\n"
+static const char *CSS =
+            ".header { font-size:11pt; font-weight:bold; color:%1; background-color:%2; }\n"
+            ".date { font-size:10pt; font-weight:bold; color:%1; background-color:%2; }\n"
+            ".line-0 { font-size:10pt; color:%1; background-color:%3; }\n"
+            ".line-1 { font-size:10pt; color:%1; background-color:%4; }\n"
+            ".time, .title, .description { }\n"
+            ".text { width:100%; }\n"
+            ".title_with_description { font-weight:bold; }\n"
+            "a { text-decoration:none; color:%1 }\n"
+            "table { width:100%; border-spacing:0px; }\n"
+            "td { vertical-align: top; }\n"
+            "body { margin:0px; background-color:%3 }\n";
 
 News::News(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
