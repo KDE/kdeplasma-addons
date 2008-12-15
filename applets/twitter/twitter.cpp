@@ -76,7 +76,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
 
 void Twitter::init()
 {
-    m_flash = new Plasma::FlashingLabel( this );
+    m_flash = new Plasma::FlashingLabel(this);
     m_theme = new Plasma::Svg(this);
     m_theme->setImagePath("widgets/twitter");
     m_theme->setContainsMultipleImages(true);
@@ -206,9 +206,9 @@ QGraphicsWidget *Twitter::graphicsWidget()
     m_layout->addItem( headerFrame );
 
 
-    m_icon = new Plasma::IconWidget( this );
-    m_icon->setIcon( KIcon( "user-identity" ) );
-    m_icon->setText( m_username );
+    m_icon = new Plasma::IconWidget(this);
+    m_icon->setIcon(KIcon("user-identity"));
+    m_icon->setText(m_username);
     QSizeF iconSize = m_icon->sizeFromIconSize(48);
     m_icon->setMinimumSize( iconSize );
     m_icon->setMaximumSize( iconSize );
@@ -217,7 +217,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
     Plasma::Frame *statusEditFrame = new Plasma::Frame(this);
     statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
-    m_statusEdit = new Plasma::TextEdit();
+    m_statusEdit = new Plasma::TextEdit(this);
     m_statusEdit->nativeWidget()->setFrameShape( QFrame::NoFrame );
     m_statusEdit->nativeWidget()->setTextBackgroundColor( QColor(0,0,0,0) );
     m_statusEdit->nativeWidget()->viewport()->setAutoFillBackground( false );
@@ -424,7 +424,7 @@ void Twitter::showTweets()
         m_layout->insertItem( m_layout->count()-1, tweetFrame );
 
         KTextBrowser *c = new KTextBrowser();
-        QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget( this );
+        QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(tweetFrame);
         proxy->setWidget( c );
         c->setCursor( Qt::ArrowCursor );
         c->setFrameShape(QFrame::NoFrame);
@@ -435,19 +435,19 @@ void Twitter::showTweets()
         c->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
         c->setReadOnly(true);
 
-        Plasma::IconWidget *icon = new Plasma::IconWidget( this );
+        Plasma::IconWidget *icon = new Plasma::IconWidget(tweetFrame);
         QSizeF iconSize = icon->sizeFromIconSize(30);
         icon->setMinimumSize( iconSize );
         icon->setMaximumSize( iconSize );
 
-        Plasma::IconWidget *favIcon = new Plasma::IconWidget( this );
+        Plasma::IconWidget *favIcon = new Plasma::IconWidget(tweetFrame);
         QSizeF favIconSize = icon->sizeFromIconSize(16);
         favIcon->setMinimumSize( favIconSize );
         favIcon->setMaximumSize( favIconSize );
 
-        tweetLayout->addItem( icon );
-        tweetLayout->addItem( proxy );
-        tweetLayout->addItem( favIcon );
+        tweetLayout->addItem(icon);
+        tweetLayout->addItem(proxy);
+        tweetLayout->addItem(favIcon);
         tweetLayout->updateGeometry();
 
         Tweet t;
@@ -459,19 +459,21 @@ void Twitter::showTweets()
 
         m_tweetWidgets.append( t );
     }
+
     //clear out tweet widgets if there are too many
-    while( m_tweetWidgets.size() > m_historySize ) {
-        Tweet t = m_tweetWidgets[m_tweetWidgets.size()-1];
-        m_layout->removeItem( t.frame );
-        delete t.icon;
-        delete t.content;
+    while (m_tweetWidgets.size() > m_historySize) {
+        Tweet t = m_tweetWidgets[m_tweetWidgets.size() - 1];
+        m_layout->removeItem(t.frame);
+        QAction *iconAction = t.icon->action();
+        t.icon->setAction(0);
+        delete iconAction;
         delete t.frame;
-        m_tweetWidgets.removeAt( m_tweetWidgets.size()-1 );
+        m_tweetWidgets.removeAt(m_tweetWidgets.size() - 1);
     }
 
     int i = 0;
     int pos = m_tweetMap.keys().size() - 1;
-    while(i < m_historySize && pos >= 0 ) {
+    while (i < m_historySize && pos >= 0) {
         Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
@@ -491,9 +493,11 @@ void Twitter::showTweets()
         connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
 
         QString sourceString;
-        if( favIcon.isNull() ) {
+
+        if (favIcon.isNull()) {
             sourceString = i18n(" from %1", tweetData.value( "Source" ).toString());
         }
+
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
         html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
                 .arg(timeDescription( tweetData.value( "Date" ).toDateTime() )).arg( sourceString);
@@ -637,7 +641,7 @@ Twitter::~Twitter()
 
 void Twitter::editTextChanged()
 {
-    m_flash->flash( i18np("%1 character left", "%1 characters left", 140-m_statusEdit->nativeWidget()->toPlainText().length()), 2000 );
+    m_flash->flash(i18np("%1 character left", "%1 characters left", 140 - m_statusEdit->nativeWidget()->toPlainText().length()), 2000);
 }
 
 bool Twitter::eventFilter(QObject *obj, QEvent *event)
