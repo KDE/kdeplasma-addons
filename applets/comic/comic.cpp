@@ -736,6 +736,24 @@ void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
             setCursor( Qt::PointingHandCursor );
             return;
         }
+
+        // hovering over the previous button
+        if ( !mArrowsOnHover && mShowPreviousButton &&
+             event->pos().y() > rect.top() &&
+             event->pos().x() > rect.left() &&
+             event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
+            setCursor( Qt::PointingHandCursor );
+            return;
+        }
+
+        // hovering over the next button
+        if ( !mArrowsOnHover && mShowNextButton &&
+             event->pos().y() > rect.top() &&
+             event->pos().x() > ( rect.right() - s_arrowWidth ) &&
+             event->pos().x() < rect.right() ) {
+            setCursor( Qt::PointingHandCursor );
+            return;
+        }
     }
 
     if ( hasCursor() ) {
