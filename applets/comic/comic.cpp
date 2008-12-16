@@ -350,9 +350,24 @@ void ComicApplet::slotSizeChanged()
         mScrollBarVert->setValue( 0 );
         mScrollBarHoriz->setValue( 0 );
 
+        updateScrollBars();
+
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
     }
+}
+
+void ComicApplet::updateScrollBars()
+{
+    const int scrollWidthSpace = mScrollBarVert->preferredSize().width() + s_scrollMargin;
+    const int scrollHeightSpace = mScrollBarHoriz->preferredSize().height() + s_scrollMargin;
+
+    bool hasScrollBarHoriz = mIdealSize.width() > mMaxSize.width();
+    bool hasScrollBarVert = mIdealSize.height() + hasScrollBarHoriz * scrollHeightSpace  > mMaxSize.height();
+    hasScrollBarHoriz = mIdealSize.width() + hasScrollBarVert * scrollWidthSpace > mMaxSize.width();
+
+    mScrollBarVert->setVisible( hasScrollBarVert );
+    mScrollBarHoriz->setVisible( hasScrollBarHoriz );
 }
 
 void ComicApplet::slotScroll()
@@ -437,8 +452,8 @@ void ComicApplet::updateSize()
         }
         int bottomArea = ( ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) || ( mShowComicIdentifier && hasComicIdentifier ) ? fmHeight : 0 );
 
-        const QSizeF idealSize = geometry().size() - contentsRect().size() +
-                 mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea );
+        mIdealSize = QSizeF( geometry().size() - contentsRect().size() +
+                 mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea ) );
 
         qreal finalWidth = mMaxSize.width();
         qreal finalHeight = mMaxSize.height();
@@ -449,20 +464,18 @@ void ComicApplet::updateSize()
         mScrollBarVert->setValue( 0 );
         mScrollBarHoriz->setValue( 0 );
 
-        // uses the idealSize, as long as it is not larger, than the maximum size
+        // uses the mIdealSize, as long as it is not larger, than the maximum size
         if ( mScaleComic ) {
-            // check if scrollbars are needed --> idealSize > mMaxSize
+            updateScrollBars();
+
             const int scrollWidthSpace = mScrollBarVert->preferredSize().width() + s_scrollMargin;
             const int scrollHeightSpace = mScrollBarHoriz->preferredSize().height() + s_scrollMargin;
-            bool hasScrollBarHoriz = idealSize.width() > mMaxSize.width();
-            bool hasScrollBarVert = idealSize.height() + hasScrollBarHoriz * scrollHeightSpace  > mMaxSize.height();
-            hasScrollBarHoriz = idealSize.width() + hasScrollBarVert * scrollWidthSpace > mMaxSize.width();
 
-            mScrollBarVert->setVisible( hasScrollBarVert );
-            mScrollBarHoriz->setVisible( hasScrollBarHoriz );
+            bool hasScrollBarHoriz = mScrollBarHoriz->isVisible();
+            bool hasScrollBarVert = mScrollBarVert->isVisible();
 
-            finalWidth = hasScrollBarHoriz ? mMaxSize.width() : idealSize.width() + hasScrollBarVert * scrollWidthSpace;
-            finalHeight = hasScrollBarVert ? mMaxSize.height() : idealSize.height() + hasScrollBarHoriz * scrollHeightSpace;
+            finalWidth = hasScrollBarHoriz ? mMaxSize.width() : mIdealSize.width() + hasScrollBarVert * scrollWidthSpace;
+            finalHeight = hasScrollBarVert ? mMaxSize.height() : mIdealSize.height() + hasScrollBarHoriz * scrollHeightSpace;
 
             mLastSize = QSizeF( finalWidth, finalHeight );
         } else {

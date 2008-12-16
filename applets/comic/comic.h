@@ -91,6 +91,7 @@ class ComicApplet : public Plasma::Applet
         void loadConfig();
         void saveConfig();
         void updateSize();
+        void updateScrollBars();
 
         QImage mImage;
         QDate mCurrentDay;
@@ -125,6 +126,7 @@ class ComicApplet : public Plasma::Applet
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
         QSizeF mLastSize;
+        QSizeF mIdealSize;
         QRect mImageRect;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
