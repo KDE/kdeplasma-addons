@@ -355,13 +355,13 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         int newCount = 0;
         uint maxId = m_lastTweet;
         foreach (const QString &id, data.keys()) {
-            uint i=id.toUInt();
+            uint i = id.toUInt();
             if (i > m_lastTweet) {
                 newCount++;
                 QVariant v = data.value(id);
                 //Warning: This function is not available with MSVC 6
                 Plasma::DataEngine::Data t = v.value<Plasma::DataEngine::Data>();
-                m_tweetMap[id] = t;
+                m_tweetMap[i] = t;
                 if (i > maxId) {
                     maxId = i;
                 }
@@ -472,9 +472,9 @@ void Twitter::showTweets()
     }
 
     int i = 0;
-    int pos = m_tweetMap.keys().size() - 1;
-    while (i < m_historySize && pos >= 0) {
-        Plasma::DataEngine::Data tweetData = m_tweetMap[m_tweetMap.keys()[pos]];
+    QMap<uint, Plasma::DataEngine::Data>::const_iterator it = m_tweetMap.constEnd();
+    while (i < m_historySize && it != m_tweetMap.constBegin()) {
+        Plasma::DataEngine::Data tweetData = *(--it);
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
@@ -529,7 +529,6 @@ void Twitter::showTweets()
         }
 
         ++i;
-        --pos;
     }
 
     qreal left, top, right, bottom;

@@ -155,7 +155,7 @@ class Twitter : public Plasma::PopupApplet
         QString m_curTimeline;
 
         QMap< QString, QPixmap > m_pictureMap;
-        QMap< QString, Plasma::DataEngine::Data > m_tweetMap;
+        QMap< uint, Plasma::DataEngine::Data > m_tweetMap;
         QList< Tweet > m_tweetWidgets;
 
         uint m_lastTweet;
