@@ -120,4 +120,9 @@ void FadingItem::hideItem()
                                                           this, "updateFade" );
 }
 
+bool FadingItem::isVisible()
+{
+    return mShowing;
+}
+
 #include "fadingitem.moc"

@@ -34,6 +34,7 @@ class FadingItem : public QObject, public QGraphicsItem
                              QWidget *widget = 0 );
         void showItem();
         void hideItem();
+        bool isVisible();
 
     protected slots:
         void updateFade( qreal progress );
