@@ -41,6 +41,7 @@
 #include <Plasma/Theme>
 #include <Plasma/Frame>
 #include <Plasma/PushButton>
+#include <Plasma/ScrollBar>
 #include <plasma/tooltipmanager.h>
 #include <Plasma/Svg>
 
@@ -50,6 +51,7 @@
 
 static const int s_arrowWidth = 30;
 static const int s_indentation = s_arrowWidth;
+static const int s_scrollMargin = 2;
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
 //BEGIN choose a strip dialog
@@ -115,6 +117,16 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     setHasConfigurationInterface( true );
     resize( 480, 160 );
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
+
+    mScrollBarVert = new Plasma::ScrollBar( this );
+    connect( mScrollBarVert, SIGNAL( valueChanged( int ) ), this, SLOT( slotScroll() ) );
+    mScrollBarVert->setSingleStep( 80 );
+    mScrollBarVert->hide();
+    mScrollBarHoriz = new Plasma::ScrollBar( this );
+    mScrollBarHoriz->setOrientation( Qt::Horizontal );
+    connect( mScrollBarHoriz, SIGNAL( valueChanged( int ) ), this, SLOT( slotScroll() ) );
+    mScrollBarHoriz->setSingleStep( 80 );
+    mScrollBarHoriz->hide();
 }
 
 void ComicApplet::init()
@@ -335,10 +347,17 @@ void ComicApplet::slotSizeChanged()
 {
     if ( geometry().size() != mLastSize ) {
         mMaxSize = geometry().size();
+        mScrollBarVert->setValue( 0 );
+        mScrollBarHoriz->setValue( 0 );
 
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
     }
+}
+
+void ComicApplet::slotScroll()
+{
+    update( mImageRect );
 }
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
@@ -423,38 +442,50 @@ void ComicApplet::updateSize()
 
         qreal finalWidth = mMaxSize.width();
         qreal finalHeight = mMaxSize.height();
-        int marginX = geometry().width() - contentsRect().width();
-        int marginY = geometry().height() - contentsRect().height();
-        int reservedWidth = leftArea + rightArea + marginX;
-        int reservedHeight = topArea + bottomArea + marginY;
-        qreal aspectRatio = qreal( mImage.size().height() ) / mImage.size().width();
-        qreal imageHeight =  aspectRatio * ( mMaxSize.width() - reservedWidth );
-        const QSizeF aspectSize = QSizeF( geometry().width(), imageHeight + topArea + bottomArea + marginY );
 
-        // uses the idealSize, as long as it is not larger, than the containment
+        // hide all scrollbars and check later if they are needed
+        mScrollBarVert->hide();
+        mScrollBarHoriz->hide();
+        mScrollBarVert->setValue( 0 );
+        mScrollBarHoriz->setValue( 0 );
+
+        // uses the idealSize, as long as it is not larger, than the maximum size
         if ( mScaleComic ) {
-            if ( idealSize.width() <= mMaxSize.width() &&
-                 idealSize.height() <= mMaxSize.height() ) {
-                mActionScaleContent->setEnabled( true );
-                mLastSize = idealSize;
-                resize( mLastSize );
-                return;
+            // check if scrollbars are needed --> idealSize > mMaxSize
+            const int scrollWidthSpace = mScrollBarVert->preferredSize().width() + s_scrollMargin;
+            const int scrollHeightSpace = mScrollBarHoriz->preferredSize().height() + s_scrollMargin;
+            bool hasScrollBarHoriz = idealSize.width() > mMaxSize.width();
+            bool hasScrollBarVert = idealSize.height() + hasScrollBarHoriz * scrollHeightSpace  > mMaxSize.height();
+            hasScrollBarHoriz = idealSize.width() + hasScrollBarVert * scrollWidthSpace > mMaxSize.width();
+
+            mScrollBarVert->setVisible( hasScrollBarVert );
+            mScrollBarHoriz->setVisible( hasScrollBarHoriz );
+
+            finalWidth = hasScrollBarHoriz ? mMaxSize.width() : idealSize.width() + hasScrollBarVert * scrollWidthSpace;
+            finalHeight = hasScrollBarVert ? mMaxSize.height() : idealSize.height() + hasScrollBarHoriz * scrollHeightSpace;
+
+            mLastSize = QSizeF( finalWidth, finalHeight );
+        } else {
+            int marginX = geometry().width() - contentsRect().width();
+            int marginY = geometry().height() - contentsRect().height();
+            int reservedWidth = leftArea + rightArea + marginX;
+            int reservedHeight = topArea + bottomArea + marginY;
+            qreal aspectRatio = qreal( mImage.size().height() ) / mImage.size().width();
+            qreal imageHeight =  aspectRatio * ( mMaxSize.width() - reservedWidth );
+            const QSizeF aspectSize = QSizeF( geometry().width(), imageHeight + topArea + bottomArea + marginY );
+
+
+            // set height (width) for given width (height) keeping image aspect ratio
+            if ( imageHeight <= mMaxSize.height() ) {
+                finalHeight = imageHeight + reservedHeight;
             } else {
-                mActionScaleContent->setEnabled( false );
+                qreal imageWidth = ( mMaxSize.height() - reservedHeight ) / aspectRatio;
+                finalWidth = imageWidth + reservedWidth;
             }
-        } else {
-            mActionScaleContent->setEnabled( true );
+
+            mLastSize = QSizeF( finalWidth, finalHeight );
         }
 
-        // set height (width) for given width (height) keeping image aspect ratio
-        if ( imageHeight <= mMaxSize.height() ) {
-            finalHeight = imageHeight + reservedHeight;
-        } else {
-            qreal imageWidth = ( mMaxSize.height() - reservedHeight ) / aspectRatio;
-            finalWidth = imageWidth + reservedWidth;
-        }
-
-        mLastSize = QSizeF( finalWidth, finalHeight );
         resize( mLastSize );
     }
 }
@@ -498,7 +529,7 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     if ( ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) ||
          ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier ) ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-        bottomHeight = fm.height();
+        bottomHeight += fm.height();
         int height = contentRect.bottom() - bottomHeight;
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
 
@@ -517,6 +548,11 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     p->setRenderHint( QPainter::Antialiasing );
     p->setRenderHint( QPainter::SmoothPixmapTransform );
 
+    const int scrollBarWidth = mScrollBarVert->preferredSize().width();
+    const int scrollBarHeight = mScrollBarHoriz->preferredSize().height();
+    int rightImageGap = mScrollBarVert->isVisible() ? scrollBarWidth + s_scrollMargin : 0;
+    bottomHeight += mScrollBarHoriz->isVisible() ? scrollBarHeight + s_scrollMargin : 0;
+
     int leftImageGap = 0;
     int buttonMiddle = ( contentRect.height() / 2 ) + contentRect.top();
     if ( mShowPreviousButton && !mArrowsOnHover ) {
@@ -525,28 +561,72 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         leftImageGap += s_arrowWidth;
     }
 
-    int rightImageGap = 0;
     if ( mShowNextButton && !mArrowsOnHover ) {
         mSvg->paint( p, contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15, s_arrowWidth, 30, "right-arrow");
 
         rightImageGap += s_arrowWidth;
     }
 
-    mImageRect = QRect( contentRect.x() + leftImageGap, contentRect.y() + topHeight,
-                     contentRect.width() - ( leftImageGap + rightImageGap ),
-                     contentRect.height() - bottomHeight - topHeight );
-    p->drawImage( mImageRect, mImage );
+    mImageRect = QRect( contentRect.x() + leftImageGap,
+                        contentRect.y() + topHeight,
+                        contentRect.width() - leftImageGap - rightImageGap,
+                        contentRect.height() - bottomHeight - topHeight );
+
+    if ( mScrollBarVert->isVisible() ) {
+        QRect scrollVert = QRect( contentRect.right() - rightImageGap + s_scrollMargin,
+                                  contentRect.top() + topHeight + s_scrollMargin,
+                                  scrollBarWidth,
+                                  contentRect.height() - topHeight - bottomHeight - 2 * s_scrollMargin );
+
+        mScrollBarVert->setGeometry( scrollVert );
+        mScrollBarVert->setRange( 0, mImage.height() - mImageRect.height() );
+        mScrollBarVert->setPageStep( mImageRect.height() );
+    }
+    if ( mScrollBarHoriz->isVisible() ) {
+        QRect scrollHoriz = QRect( contentRect.left() + leftImageGap + s_scrollMargin,
+                                   contentRect.bottom() - bottomHeight + s_scrollMargin,
+                                   contentRect.width() - leftImageGap - rightImageGap - 2 * s_scrollMargin,
+                                   scrollBarHeight );
+
+        mScrollBarHoriz->setGeometry( scrollHoriz );
+        mScrollBarHoriz->setRange( 0, mImage.width() - mImageRect.width() );
+        mScrollBarHoriz->setPageStep( mImageRect.width() );
+    }
+
+    if ( mScaleComic ) {
+        QRect shownImageRect = QRect( mScrollBarHoriz->value(), mScrollBarVert->value(), mImageRect.width(), mImageRect.height() );
+
+        p->drawImage( mImageRect, mImage, shownImageRect );
+    } else {
+        p->drawImage( mImageRect, mImage );
+    }
 
     // reposition of the hovering icons
     if ( mArrowsOnHover && ( geometry().size() == mLastSize ) ) {
         constraintsEvent( Plasma::SizeConstraint );
     }
+
     p->restore();
 }
 
 QList<QAction*> ComicApplet::contextualActions()
 {
     return mActions;
+}
+
+void ComicApplet::wheelEvent( QGraphicsSceneWheelEvent *event )
+{
+    const int numDegrees = event->delta() / 8;
+    const int numSteps = numDegrees / 15;
+
+    if ( mScrollBarVert->isVisible() ) {
+        const int scroll = mScrollBarVert->singleStep();
+        mScrollBarVert->setValue( mScrollBarVert->value() - numSteps * scroll );
+    } else if ( mScrollBarHoriz->isVisible() ) {
+        const int scroll = mScrollBarHoriz->singleStep();
+        mScrollBarHoriz->setValue( mScrollBarHoriz->value() - numSteps * scroll );
+    }
+    QGraphicsItem::wheelEvent( event );
 }
 
 void ComicApplet::updateComic( const QString &identifierSuffix )

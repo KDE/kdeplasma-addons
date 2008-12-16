@@ -35,10 +35,12 @@ class FadingItem;
 class FullViewWidget;
 class QTimer;
 class QAction;
+class QGraphicsSceneWheelEvent;
 
 namespace Plasma {
 class Frame;
 class PushButton;
+class ScrollBar;
 class Svg;
 }
 
@@ -67,6 +69,7 @@ class ComicApplet : public Plasma::Applet
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotSizeChanged();
+        void slotScroll();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
@@ -75,6 +78,7 @@ class ComicApplet : public Plasma::Applet
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
+        void wheelEvent( QGraphicsSceneWheelEvent* );
         void hoverEnterEvent( QGraphicsSceneHoverEvent* );
         void hoverMoveEvent( QGraphicsSceneHoverEvent * );
         void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
@@ -126,6 +130,8 @@ class ComicApplet : public Plasma::Applet
         FadingItem *mFadingItem;
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
+        Plasma::ScrollBar *mScrollBarVert;
+        Plasma::ScrollBar *mScrollBarHoriz;
         Plasma::Svg *mSvg;
         bool mArrowsOnHover;
 };
