@@ -130,7 +130,7 @@ kde4_add_ui_files(
 
 kde4_add_executable(lancelot-menu ${plasma_lancelot_SRCS})
 
-target_link_libraries(lancelot-menu ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_SOLID_LIBS} ${KDE4WORKSPACE_TASKMANAGER_LIBRARY})
+target_link_libraries(lancelot-menu ${KDE4_KIO_LIBS} ${KDE4_PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_SOLID_LIBS} ${KDE4WORKSPACE_TASKMANAGER_LIBRARY})
 if(LANCELOT_HAVE_COMPOSITING)
 target_link_libraries(lancelot-menu ${X11_Xrender_LIB} ${X11_X11_LIB})
 endif(LANCELOT_HAVE_COMPOSITING)
