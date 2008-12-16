@@ -59,6 +59,8 @@ Qt::Orientations expandingDirections() const;
         void changeEngineTimezone(const QString &oldTimezone, const QString &newTimezone);
 
     private:
+        void initFuzzyTimeStrings();
+
         void calculateTimeString();
         void calculateDateString();
         void calculateSize();
@@ -112,9 +114,10 @@ Qt::Orientations expandingDirections() const;
         /// Designer Config file
         Ui::fuzzyClockConfig ui;
 
-        QStringList hourNames;
-        QList<KLocalizedString> normalFuzzy;
-        QStringList dayTime;
+        QStringList m_hourNames;
+        QList<KLocalizedString> m_normalFuzzy;
+        QStringList m_dayTime;
+        QStringList m_weekTime;
 
         int m_margin;
         int m_verticalSpacing;

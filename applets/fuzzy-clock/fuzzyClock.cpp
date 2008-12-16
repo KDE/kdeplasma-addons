@@ -59,6 +59,9 @@ Clock::~Clock()
 void Clock::init()
 {
     ClockApplet::init();
+
+    initFuzzyTimeStrings();
+
     m_contentSize = geometry().size();
 
     kDebug() << "The first content's size [geometry().size()] we get, init() called: " << geometry().size();
@@ -315,18 +318,9 @@ void Clock::calculateDateString()
     }
 }
 
-void Clock::calculateTimeString()
+void Clock::initFuzzyTimeStrings()
 {
-    if (!m_time.isValid()) {
-        return;
-    }
-
-    const int hours = m_time.hour();
-// int hours = 1;
-    const int minutes = m_time.minute();
-// int minutes = 0;
-
-    hourNames   << i18nc("hour in the messages below","one")
+    m_hourNames   << i18nc("hour in the messages below","one")
                 << i18nc("hour in the messages below","two")
                 << i18nc("hour in the messages below","three")
                 << i18nc("hour in the messages below","four")
@@ -339,8 +333,7 @@ void Clock::calculateTimeString()
                 << i18nc("hour in the messages below","eleven")
                 << i18nc("hour in the messages below","twelve");
 
-
-    normalFuzzy << ki18nc("%1 the hour translated above","%1 o'clock")
+    m_normalFuzzy << ki18nc("%1 the hour translated above","%1 o'clock")
                 << ki18nc("%1 the hour translated above","five past %1")
                 << ki18nc("%1 the hour translated above","ten past %1")
                 << ki18nc("%1 the hour translated above","quarter past %1")
@@ -354,15 +347,32 @@ void Clock::calculateTimeString()
                 << ki18nc("%1 the hour translated above","five to %1")
                 << ki18nc("%1 the hour translated above","%1 o'clock");
 
+    m_dayTime << i18n("Night")
+            << i18n("Early morning") << i18n("Morning") << i18n("Almost noon")
+            << i18n("Noon") << i18n("Afternoon") << i18n("Evening")
+            << i18n("Late evening");
+
+    m_weekTime << i18n("Start of week")
+               << i18n("Middle of week")
+               << i18n("End of week")
+               << i18n("Weekend!");
+}
+
+void Clock::calculateTimeString()
+{
+    if (!m_time.isValid()) {
+        return;
+    }
+
+    const int hours = m_time.hour();
+// int hours = 1;
+    const int minutes = m_time.minute();
+// int minutes = 0;
+
     bool upcaseFirst = i18nc("Whether to uppercase the first letter of "
                              "completed fuzzy time strings above: "
                              "translate as 1 if yes, 0 if no.",
                              "1") != QString('0');
-
-    dayTime << i18n("Night")
-            << i18n("Early morning") << i18n("Morning") << i18n("Almost noon")
-            << i18n("Noon") << i18n("Afternoon") << i18n("Evening")
-            << i18n("Late evening");
 
     //Create time-string
     QString newTimeString;
@@ -394,28 +404,31 @@ void Clock::calculateTimeString()
             realHour = 12 - ((hours + deltaHour) % 12 + 1);
         }
 
-        newTimeString = normalFuzzy[sector].subs(hourNames[realHour]).toString();
+        newTimeString = m_normalFuzzy[sector].subs(m_hourNames[realHour]).toString();
         if (upcaseFirst) {
             newTimeString.replace(0, 1, QString(newTimeString.at(0).toUpper()));
         }
     } else if (m_fuzzyness == 3) {
-        newTimeString = dayTime[hours / 3];
+        newTimeString = m_dayTime[hours / 3];
     } else {
         //Timezones not yet implemented: int dow = QDateTime::currentDateTime().addSecs(TZoffset).date().dayOfWeek();
         int dow = QDateTime::currentDateTime().date().dayOfWeek();
 
+        int weekStrIdx;
         if (dow == 1) {
-            newTimeString = i18n("Start of week");
+            weekStrIdx = 0;
         }
         else if (dow >= 2 && dow <= 4) {
-            newTimeString = i18n("Middle of week");
+            weekStrIdx = 1;
         }
         else if (dow == 5) {
-            newTimeString = i18n("End of week");
+            weekStrIdx = 2;
         }
         else {
-            newTimeString = i18n("Weekend!");
+            weekStrIdx = 3;
         }
+
+        newTimeString = m_weekTime[weekStrIdx];
     }
 
     m_timeString = newTimeString;
