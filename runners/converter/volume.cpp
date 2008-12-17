@@ -59,6 +59,7 @@ Volume::Volume(QObject* parent)
 
     m_units[i18n("liter")]                = "l";
     m_units[i18n("liters")]               = "l";
+	m_units["L"]                          = "l";
     m_units[i18n("centiliter")]           = "cl";
     m_units[i18n("centiliters")]          = "cl";
     m_units[i18n("milliliter")]           = "ml";
