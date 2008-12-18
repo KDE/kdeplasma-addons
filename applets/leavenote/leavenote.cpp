@@ -124,6 +124,11 @@ void LeaveNote::constraintsEvent(Plasma::Constraints constraints)
         } else {
             mLayout->setOrientation(Qt::Vertical);
         }
+        if (formFactor() == Plasma::Planar) {
+            setMinimumSize(10,10);
+            setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+            resize(340, 250);
+        }
     }
 }
 
