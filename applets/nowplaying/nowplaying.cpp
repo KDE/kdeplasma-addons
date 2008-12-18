@@ -165,7 +165,6 @@ void NowPlaying::layoutHorizontal()
 
         m_currentLayout = HorizontalLayout;
 
-        updateGeometry();
         kDebug() << "Minimum size after updating geometry" << minimumSize();
         kDebug() << "Preferred size after updating geometry" << preferredSize();
     }
