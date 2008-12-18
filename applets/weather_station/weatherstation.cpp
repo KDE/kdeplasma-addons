@@ -240,26 +240,31 @@ void WeatherStation::setWind(const QString& speed, int fromUnit, const QString& 
     }
 
     int toUnit;
+    int stringUnit;
     switch (c.weatherWindFormat) {
         case ConfigData::Kilometers:
             toUnit = WeatherUtils::Kilometers;
+            stringUnit = WeatherUtils::KilometersAnHour;
             break;
         case ConfigData::Miles:
             toUnit = WeatherUtils::Miles;
+            stringUnit = WeatherUtils::MilesAnHour;
             break;
         case ConfigData::Knots:
-            toUnit = WeatherUtils::Knots;
+            stringUnit = toUnit = WeatherUtils::Knots;
             break;
         case ConfigData::Beaufort:
-            toUnit = WeatherUtils::Beaufort;
+            stringUnit = toUnit = WeatherUtils::Beaufort;
             break;
         case ConfigData::MetersPerSecond:
         default:
-            toUnit = WeatherUtils::MetersPerSecond;
+            stringUnit = toUnit = WeatherUtils::MetersPerSecond;
             break;
     }
     if (fromUnit == WeatherUtils::KilometersAnHour) {
         fromUnit = WeatherUtils::Kilometers;
+    } else if (fromUnit == WeatherUtils::MilesAnHour) {
+        fromUnit = WeatherUtils::Miles;
     }
 
     double windSpeed;
@@ -268,9 +273,9 @@ void WeatherStation::setWind(const QString& speed, int fromUnit, const QString& 
     else
         windSpeed = speed.toDouble();
 
-    //kDebug() << speed << windSpeed << fromUnit << dir << direction;
-
-    QString unit(WeatherUtils::getUnitString(toUnit, true));
+    QString unit(WeatherUtils::getUnitString(stringUnit, true));
+    //kDebug() << speed << windSpeed << fromUnit << toUnit << dir << direction
+    //         << QString::number(windSpeed, 'f', 1) << unit;
     m_lcd->setNumber("wind_speed", QString::number(windSpeed, 'f', 1));
     m_lcd->setGroup("wind_unit", QStringList() << unit);
 }
