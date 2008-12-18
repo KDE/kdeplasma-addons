@@ -101,17 +101,22 @@ void NowPlaying::init()
             layoutPlanar();
             break;
     }
+
     Plasma::DataEngine* nowPlayingEngine = dataEngine("nowplaying");
-    if ( nowPlayingEngine )
+
+    if (nowPlayingEngine)
     {
         connect(nowPlayingEngine, SIGNAL(sourceAdded(QString)),
                 SLOT(playerAdded(QString)));
         connect(nowPlayingEngine, SIGNAL(sourceRemoved(QString)),
                 SLOT(playerRemoved(QString)));
+
+        findPlayer();
     }
     else
-        kDebug()<<" We can not get now playing engine";
-    findPlayer();
+    {
+        kDebug() << "Now Playing engine not found";
+    }
 }
 
 void NowPlaying::layoutPlanar()
@@ -132,7 +137,6 @@ void NowPlaying::layoutPlanar()
         m_volumeSlider->show();
         layout->addItem(m_volumeSlider, 0, 1, 3, 1); // rowspan, colspan
 
-        QGraphicsLayout* oldLayout = this->layout();
         setLayout(layout);
 
         m_currentLayout = PlanarLayout;
@@ -156,7 +160,6 @@ void NowPlaying::layoutHorizontal()
         kDebug() << "Button Panel Minimum Size:" << m_buttonPanel->minimumSize();
         layout->addItem(m_buttonPanel);
 
-        QGraphicsLayout* oldLayout = this->layout();
         kDebug() << "Minimum size before changing layout" << minimumSize();
         kDebug() << "Preferred size before changing layout" << preferredSize();
         setLayout(layout);
@@ -164,9 +167,6 @@ void NowPlaying::layoutHorizontal()
         kDebug() << "Preferred size after changing layout" << preferredSize();
 
         m_currentLayout = HorizontalLayout;
-
-        kDebug() << "Minimum size after updating geometry" << minimumSize();
-        kDebug() << "Preferred size after updating geometry" << preferredSize();
     }
 }
 
