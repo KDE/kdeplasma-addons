@@ -60,39 +60,49 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 
     QList<Plasma::QueryMatch> matches;
 
-    foreach(const KABC::Addressee &a, m_book->allAddressees()) {
-	if(a.realName().contains(term, Qt::CaseInsensitive) || a.preferredEmail().contains(term, Qt::CaseInsensitive)) {
-	    kDebug() << "Possible match: " << a.realName() << " <" << a.preferredEmail() << ">";
-	    Plasma::QueryMatch match(this);
-	    match.setType(Plasma::QueryMatch::PossibleMatch);
+    foreach (const KABC::Addressee &a, m_book->allAddressees()) {
+        bool matchedName = a.realName().contains(term, Qt::CaseInsensitive);
+        bool matchedMail = false;
 
-	    if(!a.photo().isEmpty()) {
-		QIcon icon;
-		/* TODO it isn't anymore possible to use url as a photo for an user?
-		if(a.photo().isIntern()) {
-		*/
-		    icon = QIcon(QPixmap::fromImage(a.photo().data()));
-		/*}
-		else {
-		    KURL url = KUrl(a.photo().url());
-		    kDebug() << "photo url: " << url.prettyUrl() << endl;
-		    if(url.isLocalFile()) {
-			icon = QIcon(url);
-		    }
-		}*/
-		match.setIcon(icon);
-	    }
-	    else
-		match.setIcon(m_icon);
-
-	    match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
-        if (!a.realName().isEmpty()) {
-            match.setData(a.realName() + "<" + a.preferredEmail() + ">");
-        } else {
-            match.setData(a.preferredEmail());
+        if (!matchedName) {
+            // Name didn't match, so lets try the name portion of the email address
+            int indexOf = a.preferredEmail().indexOf(term, Qt::CaseInsensitive);
+            matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf('@');
         }
+
+        if (matchedName || matchedMail) {
+            //kDebug() << "Possible match: " << a.realName() << " <" << a.preferredEmail() << ">";
+            Plasma::QueryMatch match(this);
+
+            //TODO: exact match if the name is exact? =)
+            match.setType(Plasma::QueryMatch::PossibleMatch);
+
+            if(!a.photo().isEmpty()) {
+                /* TODO it isn't anymore possible to use url as a photo for an user?
+                   if(a.photo().isIntern()) {
+                  }
+                  else {
+                      KURL url = KUrl(a.photo().url());
+                      kDebug() << "photo url: " << url.prettyUrl() << endl;
+                      if(url.isLocalFile()) {
+                        icon = QIcon(url);
+                    }
+                  }*/
+                QIcon icon(QPixmap::fromImage(a.photo().data()));
+                match.setIcon(icon);
+            } else {
+                match.setIcon(m_icon);
+            }
+
+            match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
+
+            if (!a.realName().isEmpty()) {
+                match.setData(a.realName() + "<" + a.preferredEmail() + ">");
+            } else {
+                match.setData(a.preferredEmail());
+            }
             matches.append(match);
-	}
+        }
     }
 
     context.addMatches(term, matches);
