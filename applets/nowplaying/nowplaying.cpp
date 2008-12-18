@@ -134,7 +134,6 @@ void NowPlaying::layoutPlanar()
 
         QGraphicsLayout* oldLayout = this->layout();
         setLayout(layout);
-        delete oldLayout;
 
         m_currentLayout = PlanarLayout;
     }
@@ -163,7 +162,6 @@ void NowPlaying::layoutHorizontal()
         setLayout(layout);
         kDebug() << "Minimum size after changing layout" << minimumSize();
         kDebug() << "Preferred size after changing layout" << preferredSize();
-        delete oldLayout;
 
         m_currentLayout = HorizontalLayout;
 
