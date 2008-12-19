@@ -132,7 +132,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonAdd->setVisible( true );
 
         mButtonSubtract = new Plasma::PushButton(m_widget);
-        mButtonSubtract->setText( i18nc("The - button of the calculator", "-") );
+        mButtonSubtract->setText( i18nc("The − button of the calculator", "−") );
         mButtonSubtract->setMinimumSize(buttonX,buttonY);
         mButtonSubtract->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonSubtract, 2, 3 );
@@ -141,7 +141,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonSubtract->setVisible( true );
 
         mButtonMultiply = new Plasma::PushButton(m_widget);
-        mButtonMultiply->setText( i18nc("The X button of the calculator", "X") );
+        mButtonMultiply->setText( i18nc("The × button of the calculator", "×") );
         mButtonMultiply->setMinimumSize(buttonX,buttonY);
         mButtonMultiply->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
         m_layout->addItem( mButtonMultiply, 1, 2 );
@@ -150,7 +150,7 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         mButtonMultiply->setVisible( true );
 
         mButtonDivide = new Plasma::PushButton(m_widget);
-        mButtonDivide->setText( i18nc("The / button of the calculator", "/") );
+        mButtonDivide->setText( i18nc("The ∕ button of the calculator", "∕") );
         mButtonDivide->setMinimumSize(buttonX,buttonY);
         mButtonDivide->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 
