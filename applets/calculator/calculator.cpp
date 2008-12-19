@@ -334,7 +334,7 @@ void CalculatorApplet::slotDigitClicked()
 
     inputText += QString::number(newDigit);
 
-    if (!inputText.contains('.')) {
+    if (!inputText.contains(KGlobal::locale()->decimalSymbol())) {
       //If there is no decimal, then we need to reformat the number
       double currentValue = inputText.toDouble();
       QString localizedString = KGlobal::locale()->formatNumber(currentValue, 0);
@@ -353,12 +353,12 @@ void CalculatorApplet::slotDecimalClicked()
 
     if (waitingForDigit) {
         inputText = '0';
-	mOutputDisplay->setText(inputText);
+        mOutputDisplay->setText(inputText);
     }
-    //TODO use locale comma
-    if (!inputText.contains('.')) {
-        inputText += '.';
-	mOutputDisplay->setText(mOutputDisplay->text()+'.');
+
+    if (!inputText.contains(KGlobal::locale()->decimalSymbol())) {
+        inputText += KGlobal::locale()->decimalSymbol();
+        mOutputDisplay->setText(mOutputDisplay->text()+KGlobal::locale()->decimalSymbol());
     }
 
     waitingForDigit = false;
@@ -453,17 +453,17 @@ void CalculatorApplet::slotEqualsClicked()
     }
 
     //We use the 'g' formatted to figure out whether this if an integer
-    inputText = QString::number(sum, 'f', 6);
+    inputText = KGlobal::locale()->formatNumber(sum, 6);
 
-    QString leftSide  = inputText.left(inputText.indexOf('.'));
+    QString leftSide  = inputText.left(inputText.indexOf(KGlobal::locale()->decimalSymbol()));
     if (leftSide.size()>3)
       leftSide = KGlobal::locale()->formatNumber(leftSide.toDouble(), 0);
 
-    QString rightSide = inputText.right(inputText.size()-inputText.indexOf('.'));
+    QString rightSide = inputText.right(inputText.size()-inputText.indexOf(KGlobal::locale()->decimalSymbol()));
     while (rightSide.size() > 1 && rightSide.endsWith('0')) {
       rightSide = rightSide.left(rightSide.size()-1);
     }
-    if (rightSide.endsWith('.'))
+    if (rightSide.endsWith(KGlobal::locale()->decimalSymbol()))
       rightSide.clear();
     mOutputDisplay->setText(leftSide+rightSide);
 
