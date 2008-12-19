@@ -76,6 +76,7 @@ class News : public Plasma::Applet
         bool                m_animations;
         bool                m_logo;
         bool                m_showdroptarget;
+        bool                m_collapsed;
 
         int                 m_maxAge;
 

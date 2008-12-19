@@ -43,7 +43,8 @@
 #include <plasma/containment.h>
 
 News::News(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      m_collapsed(false)
 {
     setHasConfigurationInterface(true);
     setBackgroundHints(DefaultBackground);
@@ -344,11 +345,11 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
 void News::constraintsEvent(Plasma::Constraints constraints)
 {
     kDebug() << "constrainsUpdated : " << constraints;
-//    if (constraints & Plasma::FormFactorConstraint) {
+    if (constraints & Plasma::FormFactorConstraint || constraints & Plasma::SizeConstraint ) {
         if (formFactor() == Plasma::Horizontal) {
-            int minSize = (m_feedlist.size() * m_scrollerList.first()->minimumSize().height());
+            int minSize = (m_feedlist.size() * m_scrollerList.first()->minimumSize().height()) + m_header->size().height();
             kDebug() << "minimum size to contain all scrollers: " << minSize;
-            if (geometry().height() < minSize && m_feedlist.count() > 1) {
+            if (geometry().height() < minSize && !m_collapsed) {
                 //group all feeds together so it can fit (only a single time):
                 QString allfeeds;
                 foreach (QString feed, m_feedlist) {
@@ -360,12 +361,15 @@ void News::constraintsEvent(Plasma::Constraints constraints)
                 kDebug() << "allfeeds = " << allfeeds;
                 m_feedlist.clear();
                 m_feedlist.append(allfeeds);
+                m_showdroptarget = false;
+                m_logo = false;
+                m_collapsed = true;
+                updateScrollers();
             } else {
                 //TODO: restore default settings.
             }
-            updateScrollers();
         }
-//    }
+    }
 }
 
 QMap<QString, QString> News::akregatorFeeds()
