@@ -116,7 +116,7 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
 {
     m_weatherConfig = new WeatherConfig(parent);
     m_weatherConfig->setData(c);
-    parent->addPage(m_weatherConfig, i18n("Weather"), "browser");
+    parent->addPage(m_weatherConfig, i18n("Weather"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 }
