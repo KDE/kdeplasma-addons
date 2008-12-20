@@ -23,10 +23,8 @@
 
 #include <plasma/popupapplet.h>
 
-class QLabel;
 class QAction;
 class QGraphicsGridLayout;
-class QGraphicsProxyWidget;
 
 namespace Plasma
 {
