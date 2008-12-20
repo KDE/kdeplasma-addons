@@ -19,8 +19,6 @@
 
 #include "browserhistory.h"
 
-#include <QDBusInterface>
-#include <QDBusReply>
 
 #include <KDebug>
 #include <KStandardDirs>
