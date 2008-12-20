@@ -32,7 +32,6 @@
 #include <KLocale>
 #include <KIcon>
 #include <KNS/Engine>
-#include <KServiceTypeTrader>
 
 class ComicModel : public QAbstractListModel
 {
