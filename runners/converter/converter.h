@@ -19,11 +19,10 @@
 #define CONVERTER_H
 
 #include "unit.h"
-
-#include <KGlobal>
+#include "plasmaconverter_export.h"
 #include <QtCore/QVariant>
 
-class KDE_EXPORT Converter : public QObject
+class PLASMACONVERTER_EXPORT Converter : public QObject
 {
     Q_OBJECT
 public:

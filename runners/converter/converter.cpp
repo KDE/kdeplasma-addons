@@ -22,6 +22,7 @@
 #include "temperature.h"
 #include "speed.h"
 #include "mass.h"
+#include <KGlobal>
 
 class Converter::Private
 {

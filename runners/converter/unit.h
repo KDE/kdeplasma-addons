@@ -18,12 +18,12 @@
 #ifndef UNITCATEGORY_H
 #define UNITCATEGORY_H
 
-#include <KGlobal>
 #include <QString>
 #include <QVariant>
 #include <QStringList>
+#include "plasmaconverter_export.h"
 
-class KDE_EXPORT Value
+class PLASMACONVERTER_EXPORT Value
 {
 public:
     Value();

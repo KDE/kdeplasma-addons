@@ -19,6 +19,7 @@ set(plasmaconverter_LIB_SRCS
 set(plasmaconverter_HEADERS
     converter.h
     unit.h
+    plasmaconverter_export.h
 )
 
 kde4_add_library(plasmaconverter SHARED ${plasmaconverter_LIB_SRCS})
