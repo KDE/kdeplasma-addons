@@ -28,6 +28,7 @@
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusConnectionInterface>
 #include <QtDBus/QDBusReply>
 #include <QtGui/QFontMetrics>
 #include <QtGui/QFrame>
@@ -201,11 +202,8 @@ void IncomingMsg::initLayout()
     // we need to hook it up first. this first call is not only for interface testing but also for
     // setup.
     if (mShowXChat) {
-        QDBusInterface xchatDBusTest("org.xchat.service", "/org/xchat/Remote", "org.xchat.plugin");
-        QDBusReply<void> xchatReply = xchatDBusTest.call("HookPrint", "Channel Msg Hilight", 0, 0);
-        if (!xchatReply.isValid())
-            kDebug() << "XChat DBus interface test error: " << xchatReply.error();
-        else {
+        QDBusReply<bool> reply = QDBusConnection::sessionBus().interface()->isServiceRegistered("org.xchat.service");
+        if (reply.isValid() && reply.value()){
             QDBusConnection mDBus = QDBusConnection::sessionBus();
             if (!mDBus.connect("org.xchat.service", "/org/xchat/Remote",
                                "org.xchat.plugin", "PrintSignal",
