@@ -350,7 +350,9 @@ void ComicApplet::slotSizeChanged()
         mScrollBarVert->setValue( 0 );
         mScrollBarHoriz->setValue( 0 );
 
-        updateScrollBars();
+        if ( mActionScaleContent->isChecked() ) {
+            updateScrollBars();
+        }
 
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
