@@ -633,11 +633,11 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
         kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
 
-        setMinimumSize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
+        setMinimumSize ( QSizeF(m_minimumContentSize.width(), 0) );
     } else if ( formFactor() == Plasma::Vertical ) {
         kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
 
-        setMinimumSize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
+        setMinimumSize ( QSizeF(0, m_minimumContentSize.height()) );
     }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
         //if the minimal width is larger than the actual size -> force minimal needed width
         if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
