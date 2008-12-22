@@ -119,16 +119,14 @@ void Clock::constraintsEvent(Plasma::Constraints constraints)
 {
     kDebug() << "constraintsEvent() called";
 
-    if ( (m_oldContentSize.toSize() != geometry().size() && m_oldContentSize.toSize() != QSize (0,0)) || m_configUpdated == true ) { //The size changed or config was updated
-        kDebug() << "The content's size [geometry().size()] changed! old: " << m_oldContentSize << "new: " << geometry().size();
+    if (constraints & Plasma::SizeConstraint || constraints & Plasma::FormFactorConstraint) {
+        if ( (m_oldContentSize.toSize() != geometry().size() && m_oldContentSize.toSize() != QSize (0,0)) || m_configUpdated == true ) { //The size changed or config was updated
+            kDebug() << "The content's size [geometry().size()] changed! old: " << m_oldContentSize << "new: " << geometry().size();
 
-        if ( m_configUpdated ) {
-            calculateDateString();
-            calculateTimeString();
-        }
-
-        //Contraints have changed, e.g. size.
-        if (constraints & Plasma::SizeConstraint) {
+            if ( m_configUpdated ) {
+                calculateDateString();
+                calculateTimeString();
+            }
 
             kDebug() << "Constraints changed: " << constraints;
 
@@ -142,12 +140,12 @@ void Clock::constraintsEvent(Plasma::Constraints constraints)
                 calculateSize();
             }
 
-        kDebug() << "The new size has been calculated and set.\nneeded m_contenSize (if not in panel): " << m_contentSize << "\nactual content's size [geometry().size()] is: " << geometry().size() << "\nminimumSize() needed (in panel): " << minimumSize();
+            kDebug() << "The new size has been calculated and set.\nneeded m_contenSize (if not in panel): " << m_contentSize << "\nactual content's size [geometry().size()] is: " << geometry().size() << "\nminimumSize() needed (in panel): " << minimumSize();
 
-        m_oldContentSize = geometry().size();
-        m_configUpdated = false;
+            m_oldContentSize = geometry().size();
+            m_configUpdated = false;
 
-        update();
+            update();
         }
     }
 }
@@ -625,27 +623,27 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
     kDebug() << "Set new minimumSize: geometry().size() " << geometry().size() << "\nm_minimumContentSize: " << m_minimumContentSize;
 
-    //if the minimal width is larger than the actual size -> force minimal needed width
-    if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
-            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
-        }
-
     //if the width given by the panel is too wide, e.g. when switching from panel at the right to panel at the bottom we get some 600 as width
     //However: If we are in a vertical panel, we should use the width given.
     if( m_timeStringSize.width() + m_margin*2 < geometry().size().width() && formFactor() != Plasma::Vertical ) {
             kDebug() << "The width we got was too big, we need less, so lets resize.";
-            resize ( m_minimumContentSize + (size() - contentsRect().size()) );
+            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
         }
 
     if ( formFactor() == Plasma::Horizontal ) { //if we are on the panel we are forced to accept the given height.
         kDebug() << "needed height: " << m_minimumContentSize.height() << "[horizontal panel] fixed height forced on us: " << geometry().size().height() << " adding margin-left/-right of: " << m_margin << "width is going to be set resize( " << m_minimumContentSize.width() << "," << geometry().size().height() << ")";
 
-        resize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
+        setMinimumSize ( QSizeF ( m_minimumContentSize.width(),geometry().size().height() ) );
     } else if ( formFactor() == Plasma::Vertical ) {
         kDebug() << "needed width: " << m_minimumContentSize.width() << "[vertical panel] fixed width forced on us: " << geometry().size().width() << " adding margin left/right of: " << m_margin;
 
-        resize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
+        setMinimumSize ( QSizeF ( geometry().size().width(),m_minimumContentSize.height() ) );
     }else { //FIXME: In case this height does not fit the content -> disable timezone (and date)
+        //if the minimal width is larger than the actual size -> force minimal needed width
+        if( m_fontTime.pointSize() <= m_fontDate.pointSize() ) {
+            setMinimumSize ( m_minimumContentSize + (size() - contentsRect().size()) );
+        }
+
         //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
         kDebug() << "we set the minimum size needed as the size we want";
         resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
