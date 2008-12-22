@@ -208,6 +208,9 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
         mIdentifierSuffixDate = QDate::fromString( temp, "yyyy-MM-dd" );
     }
 
+    // strip has been loaded, so its scaling-settings should be used
+    mScaleComic = mActionScaleContent->isChecked();
+
     updateButtons();
     updateContextMenu();
 
@@ -254,8 +257,10 @@ void ComicApplet::applyConfig()
 
     if ( differentComic ) {
         KConfigGroup cg = config();
-        mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
-        mActionScaleContent->setChecked( mScaleComic );
+        // assign mScaleComic the moment the new strip has been loaded (dataUpdated) as up to this point
+        // the old one should be still shown with its scaling settings
+        bool scaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+        mActionScaleContent->setChecked( scaleComic );
 
         updateComic();
     } else {
