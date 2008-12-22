@@ -350,12 +350,16 @@ void ComicApplet::slotCurrentDay()
 
 void ComicApplet::slotSizeChanged()
 {
+    // if the applet was resized manually by the user
     if ( geometry().size() != mLastSize ) {
         mMaxSize = geometry().size();
         mScrollBarVert->setValue( 0 );
         mScrollBarHoriz->setValue( 0 );
 
-        if ( mActionScaleContent->isChecked() ) {
+        // if the current shown (!) -- not the one that
+        // might be currently loaded -- strip is shown at
+        // its original size, check if scrollbars are needed
+        if ( mScaleComic ) {
             updateScrollBars();
         }
 
