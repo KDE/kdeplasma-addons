@@ -27,6 +27,7 @@
 #include <QPainter>
 
 #include <KDebug>
+#include <KGlobalSettings>
 
 #include "plasma/animator.h"
 
@@ -107,6 +108,34 @@ void Fifteen::shuffle()
 
 void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
+  QSizeF size = contentsRect().size();
+  int width = size.width() / 4;
+  int height = size.height() / 4;
+
+  QString test = "99";
+  QFont f = font();
+  int smallest = KGlobalSettings::smallestReadableFont().pixelSize();
+  int fontSize = 14;
+  f.setBold(true);
+  f.setPixelSize(fontSize);
+  
+  QFontMetrics fm(f);
+  QRect rect = fm.boundingRect(test);
+  while (rect.width() > width - 2 || rect.height() > height - 2) {
+    --fontSize;
+    f.setPixelSize(fontSize);
+
+    if (fontSize <= smallest) {
+        f = KGlobalSettings::smallestReadableFont();
+        break;
+    }
+
+    fm = QFontMetrics(f);
+    rect = fm.boundingRect(test);
+  }
+
+  m_font = f;
+
   updatePieces();
 }
 
@@ -172,6 +201,7 @@ void Fifteen::updatePieces()
     m_pieces[i]->setSplitImage(m_splitPixmap);
     m_pieces[i]->setSize(QSizeF(width, height));
     m_pieces[i]->setPos(m_pieces[i]->getGameX() * width, m_pieces[i]->getGameY() * height);
+    m_pieces[i]->setFont(m_font);
   }
 
   update();

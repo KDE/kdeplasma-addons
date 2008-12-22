@@ -53,6 +53,7 @@ class Fifteen : public QGraphicsWidget
     QVector<Piece *> m_pieces;
     Piece *m_blank;
     Plasma::Svg *m_svg;
+    QFont m_font;
     bool m_splitPixmap;
     bool m_numerals;
 };

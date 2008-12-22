@@ -20,6 +20,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <QFont>
 #include <QGraphicsItem>
 #include <QObject>
 
@@ -41,6 +42,7 @@ class Piece : public QObject, public QGraphicsItem
     void setGamePos(int gamePos);
     void setSize(QSizeF size);
     void setSplitImage(bool splitPixmap);
+    void setFont(const QFont &font);
 
   private:
     int m_id;
@@ -48,6 +50,7 @@ class Piece : public QObject, public QGraphicsItem
     int m_gamePos;
     bool m_splitPixmap;
     QSizeF m_size;
+    QFont m_font;
     Plasma::Svg *m_svg;
 
   protected:

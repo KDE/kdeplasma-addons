@@ -74,6 +74,11 @@ void Piece::setSplitImage(bool splitPixmap)
   m_splitPixmap = splitPixmap;
 }
 
+void Piece::setFont(const QFont &font)
+{
+  m_font = font;
+}
+
 void Piece::showNumeral(bool show)
 {
   m_numeral = show;
@@ -103,12 +108,9 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
   int width = m_size.width();
   int height = m_size.height();
 
-  QFont font = painter->font();
-  font.setBold(true);
-  font.setPointSize(14);
-  painter->setFont(font);
+  painter->setFont(m_font);
 
-  QFontMetrics m(font);
+  QFontMetrics m(m_font);
   QString text = QString::number(m_id);
 
   QPen pen = painter->pen();
