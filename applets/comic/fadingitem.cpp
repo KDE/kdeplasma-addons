@@ -120,7 +120,7 @@ void FadingItem::hideItem()
                                                           this, "updateFade" );
 }
 
-bool FadingItem::isVisible()
+bool FadingItem::isVisible() const
 {
     return mShowing;
 }
