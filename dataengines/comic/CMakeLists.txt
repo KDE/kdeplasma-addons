@@ -5,7 +5,7 @@ set(comic_engine_SRCS
 )
 
 kde4_add_plugin(plasma_engine_comic ${comic_engine_SRCS})
-target_link_libraries(plasma_engine_comic plasmacomicprovidercore ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasma_engine_comic plasmacomicprovidercore ${KDE4_KDEUI_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_PLASMA_LIBS})
 
 install(TARGETS plasma_engine_comic DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-comic.desktop DESTINATION ${SERVICES_INSTALL_DIR} )

@@ -164,9 +164,7 @@ void ComicApplet::init()
     mActions.append( mActionScaleContent );
     connect( mActionScaleContent, SIGNAL( triggered( bool ) ), this , SLOT( slotScaleToContent() ) );
 
-    Solid::Networking::Status status = Solid::Networking::status();
-    if ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown )
-        updateComic();
+    updateComic();
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );

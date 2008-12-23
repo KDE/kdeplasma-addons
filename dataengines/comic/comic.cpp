@@ -19,9 +19,12 @@
 #include <QtCore/QDate>
 #include <QtCore/QFileInfo>
 
+// #include <KIO/NetAccess>
 #include <KUrl>
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
+
+#include <solid/networking.h>
 
 #include "comic.h"
 
@@ -78,6 +81,13 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
             connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
             return true;
+        }
+
+        // check if there is a connection
+        Solid::Networking::Status status = Solid::Networking::status();
+        if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
+            setData( identifier, "Error", true );
+            return false;
         }
 
         // ... start a new query otherwise
