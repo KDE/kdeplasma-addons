@@ -19,7 +19,6 @@
 #include <QtCore/QDate>
 #include <QtCore/QFileInfo>
 
-// #include <KIO/NetAccess>
 #include <KUrl>
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
