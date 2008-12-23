@@ -82,13 +82,6 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             return true;
         }
 
-        // check if there is a connection
-        Solid::Networking::Status status = Solid::Networking::status();
-        if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
-            setData( identifier, "Error", true );
-            return false;
-        }
-
         // ... start a new query otherwise
         const QStringList parts = identifier.split( ':', QString::KeepEmptyParts );
 
@@ -105,6 +98,14 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
                 return false;
             }
         }
+
+        // check if there is a connection
+        Solid::Networking::Status status = Solid::Networking::status();
+        if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
+            setData( identifier, "Error", true );
+            return false;
+        }
+
         const KService::Ptr service = mFactories[ parts[ 0 ] ];
 
         bool isCurrentComic = parts[ 1 ].isEmpty();
