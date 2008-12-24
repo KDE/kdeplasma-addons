@@ -61,6 +61,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     layout->addItem(m_displayEdit);
+    setBackgroundHints(TranslucentBackground);
     resize(200,200);
 }
 
