@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Comic
 Name[cs]=Komiks
-Name[es]=Tebeos
+Name[es]=Cómic
 Name[et]=Koomiks
 Name[fi]=Sarjakuva
 Name[fr]=Bande dessinée
@@ -26,7 +26,7 @@ Name[zh_CN]=连环画
 Name[zh_TW]=漫畫
 Comment=Comic Package Structure
 Comment[el]=Δομή πακέτου Comic
-Comment[es]=Paquete de estructura de tebeos
+Comment[es]=Estructura del paquete de cómics
 Comment[et]=Koomiksipaketi struktuur
 Comment[fi]=Sarjakuvapaketin rakenne
 Comment[fr]=Structure de paquetage de bande dessinée

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Comic Strips
 Name[de]=Comics
-Name[es]=Tira cómica
+Name[es]=Tiras de cómic
 Name[et]=Koomiksid
 Name[fi]=Sarjakuvat
 Name[fr]=Bandes dessinées
@@ -33,7 +33,7 @@ Comment[csb]=Mòtór pòdôwków dlô kòmiksowëch sztripków
 Comment[da]=Datamotor til tegneseriestriber
 Comment[de]=Datentreiber für Comics
 Comment[el]=Μηχανή δεδομένων για κόμικς
-Comment[es]=Motor de datos para tiras cómicas
+Comment[es]=Motor de datos para tiras de cómic
 Comment[et]=Koomiksi andmete mootor
 Comment[fi]=Tietomoottori sarjakuville
 Comment[fr]=Moteur de données pour bandes dessinées
