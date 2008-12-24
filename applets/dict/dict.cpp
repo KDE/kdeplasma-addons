@@ -82,6 +82,7 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
 
     setHasConfigurationInterface(engineChoice);
     setPopupIcon("accessories-dictionary");
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
 DictApplet::~DictApplet()
