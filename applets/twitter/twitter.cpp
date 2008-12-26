@@ -160,11 +160,11 @@ QGraphicsWidget *Twitter::graphicsWidget()
 
     //config stuff
     KConfigGroup cg = config();
-    m_username = cg.readEntry( "username" );
-    m_password = KStringHandler::obscure( cg.readEntry( "password" ) );
-    m_historySize = cg.readEntry( "historySize", 2 );
-    m_historyRefresh = cg.readEntry( "historyRefresh", 5 );
-    m_includeFriends = cg.readEntry( "includeFriends", true );
+    m_username = cg.readEntry("username");
+    m_password = KStringHandler::obscure(cg.readEntry("password"));
+    m_historySize = cg.readEntry("historySize", 2);
+    m_historyRefresh = cg.readEntry("historyRefresh", 5);
+    m_includeFriends = cg.readEntry("includeFriends", true);
 
     m_engine = dataEngine("twitter");
     if (! m_engine->isValid()) {
@@ -282,8 +282,13 @@ void Twitter::getWallet()
 void Twitter::writeWallet(bool success)
 {
     //kDebug();
-    if (!(success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))
-                && (m_wallet->writePassword(m_username, m_password) == 0))) {
+    if (success &&
+        enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
+        (m_wallet->writePassword(m_username, m_password) == 0)) {
+        KConfigGroup cg = config();
+        cg.deleteEntry("password");
+        emit configNeedsSaving();
+    } else {
         kDebug() << "failed to write password";
         writeConfigPassword();
     }
@@ -296,13 +301,18 @@ void Twitter::readWallet(bool success)
 {
     //kDebug();
     QString pwd;
-    if (success && enterWalletFolder(QString::fromLatin1("Plasma-Twitter"))
-            && (m_wallet->readPassword(m_username, pwd) == 0)) {
+    if (success &&
+        enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
+        (m_wallet->readPassword(m_username, pwd) == 0)) {
         m_password = pwd;
         downloadHistory();
-    } else {
+    } else if (m_password.isEmpty()) {
+        //FIXME: when out of string freeze, tell the user WHY they need
+        //       to configure the widget;
+        setConfigurationRequired(true);
         kDebug() << "failed to read password";
     }
+
     m_walletWait = None;
     delete m_wallet;
     m_wallet = 0;
@@ -590,11 +600,7 @@ void Twitter::configAccepted()
     //then the user is a dumbass.
     //we're going to ignore that, which drops the read attempt
     //I hope that doesn't cause trouble.
-    //XXX if there's a value in the config, the wallet will never be read
-    //if a user saves their password in the config and later changes their mind
-    //then they might not understand that they have to delete the password from plasma-appletsrc
-    //FIXME if the username is blank, don't connect to the engine, set needsconfiguring, etc
-    if (! m_username.isEmpty() && (changed || m_password.isEmpty())) {
+    if (!m_username.isEmpty() && (changed || m_password.isEmpty())) {
         //a change in name *or* pass means we need to update the wallet
         //if the user doesn't set a password, see if it's already in our wallet
         m_walletWait = m_password.isEmpty() ? Read : Write;
@@ -629,7 +635,7 @@ void Twitter::configAccepted()
         emit configNeedsSaving();
     }
 
-    setAuthRequired(m_username.isEmpty() || m_password.isEmpty());
+    setAuthRequired(m_username.isEmpty());
 }
 
 Twitter::~Twitter()
