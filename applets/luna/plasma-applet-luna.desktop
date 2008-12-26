@@ -2,6 +2,7 @@
 Name=Luna
 Name[fr]=Lune
 Name[gl]=Lúa
+Name[he]=ירח
 Name[ko]=달
 Name[nn]=Månefaseindikator
 Name[oc]=Tai
@@ -22,6 +23,7 @@ Comment[et]=Kuufaaside näitamine vastavalt sinu asukohale
 Comment[fi]=Näyttää kuuvaiheet tietystä sijainnista katsottuna
 Comment[fr]=Affiche les phases de la lune visibles à votre adresse
 Comment[gl]=Mostra as fases da lúa na súa localización
+Comment[he]=מציג שלבים של הירח לפי המיקום שלך
 Comment[it]=Mostra le fasi lunari nella tua posizione
 Comment[ja]=お住まいの場所の月の満ち欠けを表示します
 Comment[km]=បង្ហាញ​ដំណើរ​ព្រះ​ច័ន្ទ​សម្រាប់​ទីតាំង​របស់អ្នក
