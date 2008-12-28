@@ -7,6 +7,7 @@ X-KDE-ParentComponents=krunner_spellcheck
 X-KDE-PluginKeyword=kcm_krunner_spellcheck
 
 Name=Spell Checker Runner
+Name[ca]=Execució de la comprovació ortogràfica
 Name[cs]=Kontrola pravopisu
 Name[de]=Rechtschreibprüfung
 Name[el]=Εκτελεστής ορθογραφικού ελέγχου

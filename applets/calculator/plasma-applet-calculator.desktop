@@ -40,6 +40,7 @@ Name[x-test]=xxCalculatorxx
 Name[zh_CN]=计算器
 Name[zh_TW]=計算機
 Comment=Calculate simple sums
+Comment[ca]=Calcula sumes senzilles
 Comment[cs]=Jednoduché sčítání
 Comment[de]=Für kleine Rechenaufgaben
 Comment[el]=Υπολογισμός απλών πράξεων

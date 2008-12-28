@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spell Checker Runner
+Name[ca]=Execució de la comprovació ortogràfica
 Name[cs]=Kontrola pravopisu
 Name[de]=Rechtschreibprüfung
 Name[el]=Εκτελεστής ορθογραφικού ελέγχου
@@ -29,6 +30,7 @@ Name[x-test]=xxSpell Checker Runnerxx
 Name[zh_CN]=拼写检查运行器
 Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
+Comment[ca]=Comprova l'ortografia d'una paraula
 Comment[cs]=Kontrola pravopisu
 Comment[de]=Rechtschreibung eines Wortes überprüfen
 Comment[el]=Ορθογραφικός έλεγχος μιας λέξης

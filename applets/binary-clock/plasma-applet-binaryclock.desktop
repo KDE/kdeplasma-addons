@@ -40,6 +40,7 @@ Name[x-test]=xxBinary Clockxx
 Name[zh_CN]=二进制时钟
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in binary format
+Comment[ca]=L'hora mostrada en format binari
 Comment[cs]=Zobrazení času v binárním formátu
 Comment[de]=Zeitanzeige im Binärformat
 Comment[el]=Εμφάνιση της ώρας σε δυαδική μορφή.

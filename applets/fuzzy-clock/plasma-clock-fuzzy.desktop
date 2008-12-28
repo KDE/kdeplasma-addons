@@ -41,6 +41,7 @@ Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
 Comment=Time displayed in a less precise format
+Comment[ca]=L'hora mostrada en un format aproximat
 Comment[cs]=Zobrazení času v nejasném formátu
 Comment[de]=Zeigt die Zeit weniger genau an
 Comment[el]=Εμφάνιση ώρας σε μια λιγότερο ακριβή μορφή

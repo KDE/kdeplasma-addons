@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Kate Sessions
+Name[ca]=Sessions del Kate
 Name[de]=Kate-Sitzungen
 Name[el]=Συνεδρίες Kate
 Name[es]=Sesiones de Kate
@@ -30,6 +31,7 @@ Name[x-test]=xxKate Sessionsxx
 Name[zh_CN]=Kate 会话
 Name[zh_TW]=Kate 工作階段
 Comment=Matches Kate Sessions
+Comment[ca]=Coincideix amb les sessions del Kate
 Comment[de]=Findet Kate-Sitzungen
 Comment[el]=Αντιστοίχιση συνεδριών Kate
 Comment[et]=Kate seansid

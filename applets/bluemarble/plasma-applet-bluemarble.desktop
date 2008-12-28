@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Blue Marble
+Name[ca]=Esfera blava
 Name[de]=Mutter Erde
 Name[el]=Γαλάζιο μάρμαρο
 Name[es]=Planeta azul
@@ -21,6 +22,7 @@ Name[wa]=Bleu Mârbre
 Name[x-test]=xxBlue Marblexx
 Name[zh_CN]=蓝色桌面地球仪
 Comment=3D model of the Earth
+Comment[ca]=Model 3D de la Terra
 Comment[cs]=3D model Země
 Comment[de]=3D-Modell der Erde
 Comment[el]=3Δ μοντέλο της Γης

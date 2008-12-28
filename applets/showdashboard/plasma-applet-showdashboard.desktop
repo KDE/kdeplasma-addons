@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Show Widget Dashboard
+Name[ca]=Mostra el tauler d'estris
 Name[cs]=Zobrazit přístrojovou desku
 Name[de]=Widget-Dashboard anzeigen
 Name[el]=Εμφάνιση πίνακα συστατικών
@@ -32,6 +33,7 @@ Name[x-test]=xxShow Widget Dashboardxx
 Name[zh_CN]=显示部件板
 Name[zh_TW]=顯示元件儀表板
 Comment=Show the Plasma widget dashboard above other windows
+Comment[ca]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres
 Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
 Comment[de]=Das Widget-Dashbord über anderen Fenstern anzeigen
 Comment[el]=Εμφάνιση του πίνακα συστατικών plasma πάνω από τα άλλα παράθυρα

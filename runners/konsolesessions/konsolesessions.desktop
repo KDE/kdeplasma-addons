@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Konsole Sessions
+Name[ca]=Sessions del Konsole
 Name[de]=Konsole-Sitzungen
 Name[el]=Συνεδρίες Konsole
 Name[es]=Sesiones de Konsole
@@ -30,6 +31,7 @@ Name[x-test]=xxKonsole Sessionsxx
 Name[zh_CN]=Konsole 会话
 Name[zh_TW]=Konsole 工作階段
 Comment=Matches Konsole Sessions
+Comment[ca]=Coincideix amb les sessions del Konsole
 Comment[de]=Findet Konsole-Sitzungen
 Comment[el]=Αντιστοίχιση συνεδριών Konsole
 Comment[et]=Konsooli seansid

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Leave A Note
+Name[ca]=Deixa una nota
 Name[cs]=Zanechat vzkaz
 Name[de]=Nachricht hinterlassen
 Name[el]=Γράψτε μια σημείωση
@@ -34,6 +35,7 @@ Name[zh_CN]=留便笺
 Name[zh_TW]=留下字條
 Icon=knotes
 Comment=Leave notes for users while they are away
+Comment[ca]=Deixa notes pels usuaris que no hi son
 Comment[de]=Abwesenden Benutzern eine Nachricht hinterlassen
 Comment[el]=Γράψτε σημειώσεις σε χρήστες όταν αυτοί βρίσκονται εκτός
 Comment[es]=Dejar notas para usuarios mientras están ausentes

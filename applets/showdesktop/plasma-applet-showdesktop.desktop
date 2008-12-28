@@ -41,6 +41,7 @@ Name[x-test]=xxShow Desktopxx
 Name[zh_CN]=显示桌面
 Name[zh_TW]=顯示桌面
 Comment=Show the Plasma desktop
+Comment[ca]=Mostra l'escriptori Plasma
 Comment[cs]=Zobrazení plochy Plasmy
 Comment[de]=Die Plasma-Arbeitsfläche anzeigen
 Comment[el]=Εμφάνιση της επιφάνειας εργασίας plasma

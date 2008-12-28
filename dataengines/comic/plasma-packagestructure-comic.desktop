@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Comic
+Name[ca]=Còmic
 Name[cs]=Komiks
 Name[es]=Cómic
 Name[et]=Koomiks
@@ -26,6 +27,7 @@ Name[x-test]=xxComicxx
 Name[zh_CN]=连环画
 Name[zh_TW]=漫畫
 Comment=Comic Package Structure
+Comment[ca]=Estructura de paquet de còmic
 Comment[de]=Comic-Paketstruktur
 Comment[el]=Δομή πακέτου Comic
 Comment[es]=Estructura del paquete de cómics
