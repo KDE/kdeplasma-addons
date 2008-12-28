@@ -157,7 +157,6 @@ void ComicApplet::init()
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
 
     mActionScaleContent = new QAction( KIcon( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
-    mActions.append( mActionScaleContent );
     mActionScaleContent->setCheckable( true );
     mActionScaleContent->setChecked( mScaleComic );
     mActions.append( mActionScaleContent );
