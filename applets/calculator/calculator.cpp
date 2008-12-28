@@ -511,7 +511,7 @@ bool CalculatorApplet::calculate(double newValue, calcOperator oldOperator)
         if (newValue != 0.0)
             factor /= newValue;
         else {
-            handleError(i18n("ERROR: DIV BY O"));
+            handleError(i18n("ERROR: DIV BY 0"));
             return false;
         }
         break;
