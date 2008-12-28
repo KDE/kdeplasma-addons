@@ -140,11 +140,12 @@ void News::connectToEngine()
             QString feedstring;
 
             foreach (const QString& feed, m_feeds) {
-                QByteArray ba = QUrl::toPercentEncoding(feed, ":/");
+                QByteArray ba = QUrl::toPercentEncoding(feed, ":/&?=");
                 feedstring.append(ba);
                 feedstring.append(" ");
             }
             m_feedstring = feedstring;
+            kDebug() << feedstring;
             engine->connectSource(feedstring, this, m_interval * 60 * 1000);
         }
         else
@@ -295,7 +296,7 @@ void News::configAccepted()
         if (m_defaultFeeds.keys().contains(feed)) {
             feed = m_defaultFeeds[feed];
         }
-        m_feeds << feed;
+        m_feeds.append(feed);
     }
 
     KConfigGroup cg = config();
