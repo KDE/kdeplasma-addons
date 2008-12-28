@@ -91,7 +91,7 @@ UnitCategory* Converter::categoryForUnit(const QString& unit)
 UnitCategory* Converter::category(const QString& category)
 {
     QList<UnitCategory*> units = findChildren<UnitCategory*>(category);
-    if (units.count() > 0) {
+    if (!units.isEmpty()) {
         return units[0];
     }
     return 0;
