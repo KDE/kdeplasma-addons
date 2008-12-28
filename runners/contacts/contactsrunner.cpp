@@ -82,7 +82,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
                    if(a.photo().isIntern()) {
                   }
                   else {
-                      KURL url = KUrl(a.photo().url());
+                      KURL url(a.photo().url());
                       kDebug() << "photo url: " << url.prettyUrl() << endl;
                       if(url.isLocalFile()) {
                         icon = QIcon(url);
@@ -97,7 +97,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             match.setText(i18nc("Open the default mail program to mail someone", "Mail to %1", a.realName()));
 
             if (!a.realName().isEmpty()) {
-                match.setData(a.realName() + "<" + a.preferredEmail() + ">");
+                match.setData(a.realName() + '<' + a.preferredEmail() + '>');
             } else {
                 match.setData(a.preferredEmail());
             }
