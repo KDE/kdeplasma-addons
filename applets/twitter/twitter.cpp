@@ -531,7 +531,7 @@ void Twitter::showTweets()
         //FIXME: this hopefully would get useless in QGL of 4.5
         qreal left, top, right, bottom;
         t.frame->getContentsMargins(&left, &top, &right, &bottom);
-        t.frame->setMinimumHeight(t.content->size().height() + top + bottom);
+        t.frame->setMinimumHeight(qMax(t.content->size().height(), int(t.icon->geometry().bottom())) + top + bottom);
         t.frame->setPreferredHeight(t.frame->minimumHeight());
 
         if( !favIcon.isNull() ) {
