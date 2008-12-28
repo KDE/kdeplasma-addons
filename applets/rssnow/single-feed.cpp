@@ -95,8 +95,7 @@ void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
     // FIXME: either remove since we use a hardcoded background
     // or adjust the background color of the svg as well due to theme
     // settings
-    //    p->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    p->setPen(QColor("white"));
+    p->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     font.setBold(true);
     p->setFont(font);
     QString text;
