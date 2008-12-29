@@ -19,6 +19,7 @@
 #include "infopanel.h"
 
 #include <Plasma/Label>
+#include <Plasma/Theme>
 
 #include <QGraphicsGridLayout>
 #include <QLabel>
@@ -73,9 +74,13 @@ void InfoPanel::updateMetadata(const QMap<QString,QString>& metadata)
 
 void InfoPanel::updateLabels()
 {
-    m_artistText->setText(m_metadata["Artist"]);
-    m_albumText->setText(m_metadata["Album"]);
-    m_titleText->setText(m_metadata["Title"]);
+    Plasma::Theme *theme = Plasma::Theme::defaultTheme();
+    QFont font = theme->font(Plasma::Theme::DefaultFont);
+    QFontMetricsF fm(font);
+
+    m_artistText->setText(fm.elidedText(m_metadata["Artist"], Qt::ElideMiddle, m_artistText->size().width()));
+    m_albumText->setText(fm.elidedText(m_metadata["Album"], Qt::ElideMiddle, m_artistText->size().width()));
+    m_titleText->setText(fm.elidedText(m_metadata["Title"], Qt::ElideMiddle, m_artistText->size().width()));
     m_timeText->setText(m_metadata["Time"]);
 
     // dirty hack to make sure the Artist: label is in line
