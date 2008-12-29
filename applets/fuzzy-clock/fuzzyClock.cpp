@@ -23,6 +23,7 @@
 
 #include <QFontMetrics>
 #include <QPainter>
+#include <QFontInfo>
 
 #include <KColorScheme>
 #include <KConfigDialog>
@@ -455,6 +456,13 @@ m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
 m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
 
 int minimumWantedSize = KGlobalSettings::smallestReadableFont().pointSize();
+if (formFactor() == Plasma::Horizontal) {
+    QFont font(m_fontTime);
+    font.setPixelSize(size().height()/2);
+    QFontInfo fi(font);
+    minimumWantedSize = fi.pointSize();
+}
+
 
 if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
     kDebug() << "Plasmoid wider than the timestring";
