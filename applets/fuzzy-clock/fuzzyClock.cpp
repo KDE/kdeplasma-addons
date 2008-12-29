@@ -454,6 +454,8 @@ QFontMetrics m_fmDate ( m_fontDate );
 m_dateStringSize = QSizeF ( m_fmDate.width( m_dateString ), m_fmDate.height() );
 m_timezoneStringSize = QSizeF( m_fmDate.width( m_timezoneString ), m_fmDate.height() );
 
+int minimumWantedSize = KGlobalSettings::smallestReadableFont().pointSize();
+
 if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) { //plasmoid wider than timestring
     kDebug() << "Plasmoid wider than the timestring";
     if( m_showDate == true && m_showTimezone == true ) { //date + timezone enabled
@@ -497,12 +499,14 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
         kDebug() << "New minimumContentSize(): " << minimumSize();
     }
 
-    //Make the timestring fit the plasmoid since it is bigger than smallestReadable
-    m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), KGlobalSettings::smallestReadableFont().pointSize()) );
+    //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
+    m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
 
     m_fmTime = QFontMetrics( m_fontTime );
 
-    while ( ( m_fmTime.width( m_timeString ) > contentsRect().size().width() - 2*m_margin || m_fmTime.height() > contentsRect().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
+    while ( ( m_fmTime.width( m_timeString ) > contentsRect().size().width() - 2*m_margin ||
+              m_fmTime.height() > contentsRect().size().height() - m_subtitleStringSize.height() - m_verticalSpacing ) &&
+              m_fontTime.pointSize() > minimumWantedSize) {
 
         //decrease pointSize
         m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
@@ -526,7 +530,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
 } else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
 
-    kDebug() << "Plasmoid is in a panel or too small for the timestring, we are using smallestReadable as pointSize";
+    kDebug() << "Plasmoid is in a panel or too small for the timestring, we are using minimumWantedSize as pointSize";
 
     if ( m_showDate == true && m_showTimezone == true ) { //Date + timezone enabled
         kDebug() << "Date + timezone enabled";
@@ -596,8 +600,8 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
         //FIXME: if the clock is the only applet on a vertical panel and returns 0 via expandingDirections(), it still gets the full height of the panel as recommended height, i.e. on a vertical panel width a height of 800, geometry().size().height() does not return 48 but some huge value. Unless this is fixed in plasma, the while-loop will take a while.
 
-        //Make the timestring fit the plasmoid since it is bigger than smallestReadable
-        m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), KGlobalSettings::smallestReadableFont().pointSize()) );
+        //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
+        m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
     
         m_fmTime = QFontMetrics( m_fontTime );
     
@@ -605,7 +609,9 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
         kDebug() << "We want to have: \nwidth: < " << geometry().size().width() - 2*m_margin << "\nheight < " << (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse;
 
-        while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) || m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) && m_fontTime.pointSize() > KGlobalSettings::smallestReadableFont().pointSize() ) {
+        while ( ( ( m_fmTime.width( m_timeString ) > geometry().size().width() - 2*m_margin && formFactor() != Plasma::Horizontal ) ||
+                 m_fmTime.height() > (geometry().size().height() - m_subtitleStringSize.height() - m_verticalSpacing)*heightToUse ) &&
+                 m_fontTime.pointSize() > minimumWantedSize) {
     
             //decrease pointSize
             m_fontTime.setPointSize(m_fontTime.pointSize() - 1);
