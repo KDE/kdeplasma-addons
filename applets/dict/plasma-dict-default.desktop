@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Dictionary
+Name[ar]=قاموس
 Name[ca]=Diccionari
 Name[cs]=Slovník
 Name[csb]=Slowôrz
@@ -43,6 +44,7 @@ Name[x-test]=xxDictionaryxx
 Name[zh_CN]=词典
 Name[zh_TW]=字典
 Comment=Look up the meaning of words and their translation into different languages
+Comment[ar]=انظر معاني الكلمات و ترجمتها بلغات مختلفة
 Comment[ca]=Cerca el signficat de paraules i la seva traducció en diferents idiomes
 Comment[de]=Die Bedeutung von Wörtern und ihre Übersetzung in verschiedene Sprachen nachschlagen
 Comment[el]=Αναζήτηση σημασίας λέξεων και της μετάφρασής τους σε διάφορες γλώσσες
@@ -60,6 +62,7 @@ Comment[nl]=Zoek de betekenis van woorden en hun vertaling in verschillende tale
 Comment[nn]=Slå opp ordtydingar og omsetjingar
 Comment[pt]=Procurar o significado das palavras e das suas traduções em várias línguas
 Comment[pt_BR]=Procurar o significado das palavras e das suas traduções em diferentes idiomas
+Comment[ro]=Caută semnificația cuvintelor și traducerea acestora în diferite limbi
 Comment[sl]=Poiščite pomen besed in njihov prevod v druge jezike
 Comment[sv]=Slå upp betydelsen hos ord och deras översättning till olika språk
 Comment[th]=ค้นหาความหมายของคำและการแปลความหมายในภาษาต่าง ๆ

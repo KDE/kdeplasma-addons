@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Binary Clock
+Name[ar]=ساعة ثنائية
 Name[ca]=Rellotge binari
 Name[cs]=Binární hodiny
 Name[da]=Binært ur
@@ -18,7 +19,7 @@ Name[ja]=バイナリ時計
 Name[km]=នាឡិកា​គោលពីរ
 Name[ko]=바이너리 시계
 Name[lt]=Dvejetainis laikrodis
-Name[lv]=Binārais pulkstenis
+Name[lv]=Binārs pulkstenis
 Name[nds]=Bineerklock
 Name[nl]=Binaire klok
 Name[nn]=Binærklokke
@@ -40,6 +41,7 @@ Name[x-test]=xxBinary Clockxx
 Name[zh_CN]=二进制时钟
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in binary format
+Comment[ar]=الوقت يظهر بالتنسيق الثنائي
 Comment[ca]=L'hora mostrada en format binari
 Comment[cs]=Zobrazení času v binárním formátu
 Comment[de]=Zeitanzeige im Binärformat

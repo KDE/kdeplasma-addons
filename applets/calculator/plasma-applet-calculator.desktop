@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Calculator
+Name[ar]=آلة حاسبة
 Name[ca]=Calculadora
 Name[cs]=Kalkulačka
 Name[da]=Lommeregner
@@ -40,6 +41,7 @@ Name[x-test]=xxCalculatorxx
 Name[zh_CN]=计算器
 Name[zh_TW]=計算機
 Comment=Calculate simple sums
+Comment[ar]=احسب عمليات جمع بسيطة
 Comment[ca]=Calcula sumes senzilles
 Comment[cs]=Jednoduché sčítání
 Comment[de]=Für kleine Rechenaufgaben

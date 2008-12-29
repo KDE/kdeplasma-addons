@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Comic Strip
+Name[ar]=شريط هزلي
 Name[ca]=Tira còmica
 Name[cs]=Komiksový proužek
 Name[csb]=Kòmiksowi sztrépk
@@ -39,6 +40,7 @@ Name[x-test]=xxComic Stripxx
 Name[zh_CN]=连环画
 Name[zh_TW]=漫畫
 Comment=View comic strips from the Internet
+Comment[ar]=اعرض شرائط هزلية من الإنترنت
 Comment[ca]=Mostra una tira còmica des d'internet
 Comment[cs]=Ukáže komiksový proužek z internetu
 Comment[de]=Comics aus dem Internet anzeigen

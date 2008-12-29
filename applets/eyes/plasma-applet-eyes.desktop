@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Eyes
+Name[ar]=أعين
 Name[ca]=Ulls
 Name[cs]=Oči
 Name[de]=Augen
@@ -32,6 +33,7 @@ Name[wa]=Ouys
 Name[x-test]=xxEyesxx
 Name[zh_CN]=眼睛
 Comment=XEyes clone
+Comment[ar]=مستنسخ XEyes
 Comment[ca]=Clon de l'XEyes
 Comment[cs]=Klon XEyes
 Comment[de]=XEyes-Klon

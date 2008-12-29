@@ -7,7 +7,8 @@ X-KDE-ParentComponents=krunner_spellcheck
 X-KDE-PluginKeyword=kcm_krunner_spellcheck
 
 Name=Spell Checker Runner
-Name[ca]=Execució de la comprovació ortogràfica
+Name[ar]=مشغل المدقق الإملائي
+Name[ca]=Execució de la verificació ortogràfica
 Name[cs]=Kontrola pravopisu
 Name[de]=Rechtschreibprüfung
 Name[el]=Εκτελεστής ορθογραφικού ελέγχου
@@ -27,6 +28,7 @@ Name[nn]=Stavekontroll
 Name[pa]=ਸਪੈਲ ਚੈਕਰ ਰਨਰ
 Name[pt]=Execução de Ortografia
 Name[pt_BR]=Execução da verificação ortográfica
+Name[ro]=Lansator verificare ortografică
 Name[ru]=Проверка орфографии
 Name[sv]=Utför stavningskontroll
 Name[th]=ผู้ตัวตรวจคำสะกด

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Character Selector
+Name[ar]=منتق الأحرف
 Name[ca]=Selector de caràcters
 Name[cs]=Výběr znaků
 Name[de]=Tabelle zur Zeichenauswahl
@@ -36,6 +37,7 @@ Name[x-test]=xxCharacter Selectorxx
 Name[zh_CN]=字符选择器
 Name[zh_TW]=字元選擇器
 Comment=View, select, and copy characters from a font collection
+Comment[ar]=أظهر، واختر، و انسخ محارف من مجموعة الخط
 Comment[ca]=Mostra, selecciona i copia caràcters d'una col·lecció de tipus de lletra
 Comment[cs]=Zobrazení, výběr a kopírování znaků z kolekce písem
 Comment[de]=Zeichen aus einer Sammlung ansehen, auswählen oder kopieren

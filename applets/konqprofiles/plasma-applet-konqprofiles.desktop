@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Konqueror Profiles
+Name[ar]=تشكيلة الكونيكور
 Name[ca]=Perfils del Konqueror
 Name[cs]=Profily Konqueroru
 Name[de]=Konqueror-Profile
@@ -36,6 +37,7 @@ Name[x-test]=xxKonqueror Profilesxx
 Name[zh_CN]=Konqueror 配置集
 Name[zh_TW]=Konqueror 設定檔
 Comment=List and launch Konqueror profiles
+Comment[ar]=تعرض و تطلق تشكيلات الكونكيور
 Comment[ca]=Llista i executa els perfils del Konqueror
 Comment[cs]=Seznam a spouštění profilů Konqueroru
 Comment[de]=Konqueror-Profile anzeigen und starten

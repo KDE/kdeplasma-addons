@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Incoming Message
+Name[ar]=رسالة قادمة
 Name[ca]=Missatge entrant
 Name[cs]=Příchozí zpráva
 Name[de]=Eingehende Nachricht
@@ -35,6 +36,7 @@ Name[zh_CN]=接收消息
 Name[zh_TW]=進來的訊息
 Icon=mail-message-new
 Comment=Notification of new messages
+Comment[ar]=إخطار الرسائل الجديدة
 Comment[ca]=Notificació de missatges nous
 Comment[de]=Benachrichtigung über neue Nachrichten
 Comment[el]=Ειδοποίηση νέων μηνυμάτων

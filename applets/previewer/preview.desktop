@@ -6,6 +6,7 @@ Actions=Preview;
 
 [Desktop Action Preview]
 Name=Preview This File
+Name[ar]=عاين هذا الملف
 Name[ca]=Vista prèvia d'aquest fitxer
 Name[de]=Vorschau für diese Datei anzeigen
 Name[el]=Προεπισκόπηση του αρχείου αυτού

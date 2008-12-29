@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Previewer
+Name[ar]=المعاين
 Name[ca]=Previsualitzador
 Name[de]=Vorschau
 Name[el]=Προβολέας προεπισκόπησης
@@ -32,6 +33,7 @@ Name[x-test]=xxPreviewerxx
 Name[zh_CN]=预览器
 Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
+Comment[ar]=عاين مختلف الملفات بسرعة
 Comment[ca]=Vista prèvia ràpida d'una varietat de fitxers
 Comment[de]=Vorschau für eine Vielzahl Dateien anzeigen
 Comment[el]=Γρήγορη προεπισκόπηση διαφόρων αρχείων

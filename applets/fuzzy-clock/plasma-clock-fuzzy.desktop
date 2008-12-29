@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Fuzzy Clock
+Name[ar]=ساعة تقريبية
 Name[ca]=Rellotge aproximat
 Name[cs]=Nejasné hodiny
 Name[da]=Upræcist ur
@@ -41,6 +42,7 @@ Name[zh_CN]=模糊时钟
 Name[zh_TW]=模糊時鐘
 
 Comment=Time displayed in a less precise format
+Comment[ar]=الوقت يظهر بتنسيق أقل دقة
 Comment[ca]=L'hora mostrada en un format aproximat
 Comment[cs]=Zobrazení času v nejasném formátu
 Comment[de]=Zeigt die Zeit weniger genau an

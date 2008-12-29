@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Timer
+Name[ar]=مؤقت
 Name[ca]=Temporitzador
 Name[cs]=Stopky
 Name[el]=Χρονόμετρο
@@ -32,6 +33,7 @@ Name[x-test]=xxTimerxx
 Name[zh_CN]=计时器
 Name[zh_TW]=計時器
 Comment=Countdown over a specified time period
+Comment[ar]=قم بالعد التنازلي خلال فترة زمنية محددة
 Comment[ca]=Compte enrere durant un període de temps especificat
 Comment[cs]=Odpočítávání událostí
 Comment[de]=Einen bestimmten Zeitabschnitt zurückzählen
@@ -50,6 +52,7 @@ Comment[nl]=Aftellen over een bepaalde periode
 Comment[nn]=Nedteljing til spesielle tidspunkt
 Comment[pt]=Contagem decrescente para um determinado período
 Comment[pt_BR]=Contagem decrescente de um período de tempo especificado
+Comment[ro]=Cronometrează pentru o anumită perioadă
 Comment[ru]=Обратный отчёт на выбранный период времени
 Comment[sl]=Odštevajte preko določenega časovnega obdobja 
 Comment[sv]=Nerräkning under ett angivet tidsintervall

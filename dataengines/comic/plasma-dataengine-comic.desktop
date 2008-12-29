@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Comic Strips
+Name[ar]=شرائط هزلية
 Name[ca]=Tires còmiques
 Name[de]=Comics
 Name[es]=Tiras de cómic
@@ -29,6 +30,7 @@ Name[x-test]=xxComic Stripsxx
 Name[zh_CN]=连环画
 Name[zh_TW]=漫畫
 Comment=Data Engine for comic strips
+Comment[ar]=محركات بيانات للشرائط الهزلية
 Comment[ca]=Motor de dades per a tires còmiques
 Comment[cs]=Datová část pro komiksové proužky
 Comment[csb]=Mòtór pòdôwków dlô kòmiksowëch sztripków

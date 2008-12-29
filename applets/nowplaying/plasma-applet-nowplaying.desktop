@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Now Playing
+Name[ar]=المشغل الآن
 Name[ca]=Ara s'està escoltant
 Name[cs]=Nyní se hraje
 Name[da]=Afspiller nu
@@ -42,6 +43,7 @@ Name[zh_CN]=现在收听
 Name[zh_TW]=現正播放
 
 Comment=Displays currently playing audio
+Comment[ar]=اظهر الملفات الصوتية التي تعمل حاليا
 Comment[ca]=Mostra la reproducció actual d'àudio
 Comment[cs]=Zobrazení informací o právě přehrávaných skladbách
 Comment[da]=Viser musik som aktuelt afspilles 

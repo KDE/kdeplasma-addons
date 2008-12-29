@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Picture Frame
+Name[ar]=إطار الصورة
 Name[ca]=Marc de fotografia
 Name[cs]=Rámeček obrázku
 Name[csb]=Ramka òbrazu
@@ -40,6 +41,7 @@ Name[x-test]=xxPicture Framexx
 Name[zh_CN]=桌面像框
 Name[zh_TW]=圖片框架
 Comment=Display your favorite pictures
+Comment[ar]=اعرض صورك المفضلة
 Comment[ca]=Mostra les fotografies preferides
 Comment[cs]=Zobrazit vaše oblíbené obrázky
 Comment[csb]=Wëskrzëni swòj lubòtny òbrôzk

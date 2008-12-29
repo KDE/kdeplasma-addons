@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=File Watcher
+Name[ar]=مراقب الملفات
 Name[ca]=Vigilant de fitxers
 Name[cs]=Sledování souborů
 Name[csb]=Òbzérôcz lopka
@@ -40,6 +41,7 @@ Name[x-test]=xxFile Watcherxx
 Name[zh_CN]=文件观察器
 Name[zh_TW]=檔案監看器
 Comment=Watch for changes in specified files
+Comment[ar]=راقب التغييرات في ملفات محددة
 Comment[ca]=Vigila de canvis en els fitxers especificats
 Comment[cs]=Sledování změn v zadaných souborech
 Comment[de]=Dateien auf Änderungen überwachen
@@ -59,6 +61,7 @@ Comment[nl]=Volg bepaalde bestanden en hun wijzigingen
 Comment[nn]=Overvak filer etter endringar
 Comment[pt]=Vigiar as modificações nos ficheiros indicados
 Comment[pt_BR]=Monitore por alterações nos arquivos especificados
+Comment[ro]=Urmărește fișierele specificate după modificări
 Comment[ru]=Прослеживание изменений в выбранных файлах
 Comment[sl]=Opazujte, če pride do sprememb v določenih datotekah
 Comment[sr]=Пратите промене у одређеним фајловима

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Twitter Microblogging
+Name[ar]=التدوين المصغر تويتر
 Name[ca]=Twitter microblogging
 Name[cs]=Twitter mikroblogování
 Name[csb]=Mikrobloggòwanié Twitter
@@ -30,6 +31,7 @@ Name[uk]=Міні-журнал Twitter
 Name[x-test]=xxTwitter Microbloggingxx
 Name[zh_CN]=Twitter 微博客
 Comment=Update your Twitter status and display your timeline.
+Comment[ar]=حدث حالتك على تويتر و اعرض خط وقتك.
 Comment[ca]=Us permet actualitzar l'estat al Twitter i mostrar la línia de temps.
 Comment[cs]=Umožní aktualizaci stavu v síti Twitter a zobrazí historii.
 Comment[de]=Ihren Twitter-Status aktualisieren. Siehe http://www.twitter.com für weitere Informationen.
@@ -50,6 +52,7 @@ Comment[nl]=Hiermee kunt u uw Twitter-status bijwerken en uw tijdslijn weergeven
 Comment[nn]=Oppdater Twitter-status og vis tidslinja
 Comment[pt]=Permite-lhe alterar o seu estado no Twitter e mostrar a sua linha temporal.
 Comment[pt_BR]=Atualizar o status do Twitter e mostrar a sua linha do tempo.
+Comment[ro]=Actualizați starea pe Twitter și afișați-vă parcursul.
 Comment[ru]=Обновление вашего статуса и отображение шкалы времени в Twitter
 Comment[sl]=Posodobite svoje stanje na Twitterju in prikažite časovnico.
 Comment[sv]=Uppdatera din Twitter-status och visa ditt schema.

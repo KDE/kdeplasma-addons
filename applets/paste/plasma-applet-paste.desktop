@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Paste
+Name[ar]=الصق
 Name[ca]=Enganxa
 Name[cs]=Vložit
 Name[de]=Einfügen
@@ -34,6 +35,7 @@ Name[x-test]=xxPastexx
 Name[zh_CN]=粘贴
 Name[zh_TW]=貼上
 Comment=Paste text snippets
+Comment[ar]=الصق قطع من النص
 Comment[ca]=Enganxa retalls de text
 Comment[de]=Textschnipsel einfügen
 Comment[el]=Επικόλληση δειγμάτων κειμένου

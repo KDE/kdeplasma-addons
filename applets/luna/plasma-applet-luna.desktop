@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Luna
+Name[ar]=لونا
 Name[fr]=Lune
 Name[gl]=Lúa
 Name[he]=ירח
@@ -15,6 +16,7 @@ Name[uk]=Луна
 Name[x-test]=xxLunaxx
 Name[zh_CN]=月相
 Comment=Display moon phases for your location
+Comment[ar]=أظهر أطوار القمر في المكان الذي انت فيه
 Comment[ca]=Mostra les fases de la lluna per a la vostra ubicació
 Comment[cs]=Zobrazení fází měsíce
 Comment[de]=Mondphasen für Ihren Standort anzeigen

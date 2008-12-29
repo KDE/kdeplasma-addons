@@ -2,6 +2,7 @@
 Icon=lancelot
 
 Name=Lancelot Launcher
+Name[ar]=مطلق لانسيلوت
 Name[ca]=Executador del Lancelot
 Name[cs]=Spouštěč Lancelot
 Name[csb]=Zrëszôcz Lancelot
@@ -42,6 +43,7 @@ Name[zh_CN]=Lancelot 启动器
 Name[zh_TW]=Lancelot 應用程式啟動器
 
 Comment=Launcher to start applications
+Comment[ar]=قائمة بدء التطبيقات
 Comment[ca]=Executador per a iniciar aplicacions
 Comment[cs]=Spouštěč aplikací
 Comment[csb]=Zrëszocz programów

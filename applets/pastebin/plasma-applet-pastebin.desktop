@@ -1,15 +1,18 @@
 [Desktop Entry]
 Name=Pastebin
+Name[ar]=سلة اللصق
 Name[el]=Κάδος επικόλλησης
 Name[gl]=Apegar
 Name[nn]=Teksttavle
 Name[pt]=Colagem
+Name[ro]=Coș de lipire
 Name[sr]=корпа налепака
 Name[sr@latin]=korpa nalepaka
 Name[th]=ถังแปะ (Pastebin)
 Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
 Comment=Paste text/images to a remote server
+Comment[ar]=الصق نص/صور في خادم بعيد
 Comment[ca]=Enganxa text/imatges en un servidor remot
 Comment[de]=Text und Bilder auf einen entfernten Server hochladen
 Comment[el]=Επικόλληση κειμένου/εικόνων σε έναν απομακρυσμένο εξυπηρετητή
@@ -27,6 +30,7 @@ Comment[nl]=Tekst/afbeeldingen plakken op een externe server
 Comment[nn]=Kopier tekst og bilete til tenar på nettet
 Comment[pt]=Colar o texto/imagens num servidor remoto
 Comment[pt_BR]=Colar o texto/imagens para um servidor remoto
+Comment[ro]=Lipește text/imagini spre un server distant
 Comment[sr]=Налепљује текст и слике на удаљени сервер
 Comment[sr@latin]=Nalepljuje tekst i slike na udaljeni server
 Comment[sv]=Klistra in text eller bilder på en fjärrserver

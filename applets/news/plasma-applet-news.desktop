@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=News
+Name[ar]=أخبار
 Name[ca]=Notícies
 Name[cs]=Novinky
 Name[el]=Ειδήσεις
@@ -34,6 +35,7 @@ Name[x-test]=xxNewsxx
 Name[zh_CN]=新闻
 Name[zh_TW]=新聞
 Comment=Show news from various sources
+Comment[ar]=أظهر الأخبار من مصادر متعددة
 Comment[ca]=Mostra les notícies de diverses fonts
 Comment[de]=Neuigkeiten aus verschiedenen Quellen anzeigen
 Comment[el]=Εμφάνιση ειδήσεων από διάφορες πηγές.

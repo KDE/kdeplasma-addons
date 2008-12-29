@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Notes
+Name[ar]=ملاحظات
 Name[be]=Заметкі
 Name[cs]=Poznámky
 Name[csb]=Nadczidczi
@@ -40,6 +41,7 @@ Name[x-test]=xxNotesxx
 Name[zh_CN]=便笺
 Name[zh_TW]=便條
 Comment=Desktop sticky notes
+Comment[ar]=ملاحظات لاصقة على سطح المكتب
 Comment[ca]=Notes adherents d'escriptori
 Comment[cs]=Lepící poznámkové papírky na plochu
 Comment[de]=Klebezettel für die Arbeitsfläche
