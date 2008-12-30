@@ -54,7 +54,7 @@ public:
     QString unit;
 };
 
-class KDE_EXPORT UnitCategory : public QObject
+class PLASMACONVERTER_EXPORT UnitCategory : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name)
