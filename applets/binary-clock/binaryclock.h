@@ -23,7 +23,7 @@
 
 #include <Plasma/Applet>
 
-#include <libplasmaclock/clockapplet.h>
+#include <plasmaclock/clockapplet.h>
 
 #include "ui_clockConfig.h"
 
