@@ -37,6 +37,10 @@
 
 #include <stdlib.h>
 
+#ifdef Q_CC_MSVC
+#include <iso646.h>
+#endif
+
 const int ball_size = 100;
 const int ball_radius = ball_size / 2;
 const int ball_circum = (int) (2.0 * 3.14158 * ball_radius);
