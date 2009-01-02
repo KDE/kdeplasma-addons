@@ -323,7 +323,7 @@ void PreviewWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 void PreviewWidget::calculateRects()
 {
     QRect rect = contentsRect().toRect();
-    const int scrollBarWidth = m_scrollBar->isVisible() ? m_scrollBar->preferredSize().width() : 0;
+    const int scrollBarWidth = m_scrollBar->isVisible() ? int(m_scrollBar->preferredSize().width()) : 0;
     const int itemWidth = iconSize().width() * 2;
     const int itemRectWidth = itemWidth + scrollBarWidth + (s_spacing * 2) +
                               (scrollBarWidth > 0 ?  2 : 0);
@@ -359,13 +359,13 @@ void PreviewWidget::calculateRects()
 void PreviewWidget::expandingSlot(qreal progress)
 {
     const int min = s_topBorder + bottomBorderHeight();
-    if (qFuzzyCompare(1.0, progress)) {
+    if (qFuzzyCompare(qreal(1.0), progress)) {
         m_animId = -1;
 
         if (m_closeStatus) {
             m_animationHeight = min;
         } else {
-            m_animationHeight = size().height() - min;
+            m_animationHeight = int(size().height()) - min;
 
             // show the scroll bar again if necessary
             if (!m_items.isEmpty() && (m_items.last().bottom() > m_itemsRect.bottom() ||
@@ -376,7 +376,7 @@ void PreviewWidget::expandingSlot(qreal progress)
     } else {
         m_animationHeight = qMax(qreal(min),
                                  min - 1 + ((size().height() - min)  * 
-                                            (m_closeStatus ? 1.0 - progress : progress)));
+                                            (m_closeStatus ? qreal(1.0) - progress : progress)));
     }
 
     calculateRects();
