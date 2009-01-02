@@ -100,7 +100,7 @@ class ChooseStripNumDialog : public KDialog
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mIdentifierSuffixNum( -1 ),
-      mShowPreviousButton( true ),
+      mShowPreviousButton( false ),
       mShowNextButton( false ),
       mShowComicUrl( false ),
       mShowComicAuthor( false ),
@@ -178,6 +178,15 @@ ComicApplet::~ComicApplet()
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
     setBusy( false );
+
+    if ( data[ "Error" ].toBool() ) {
+        if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+            updateComic( data[ "Previous identifier suffix" ].toString() );
+        } else {
+            setConfigurationRequired( true );
+            return;
+        }
+    }
 
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
@@ -664,8 +673,12 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         engine->connectSource( identifier, this );
         const Plasma::DataEngine::Data data = engine->query( identifier );
         if ( data[ "Error" ].toBool() ) {
-            setConfigurationRequired( true );
-            setBusy( false );
+            if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+                updateComic( data[ "Previous identifier suffix" ].toString() );
+            } else {
+                setConfigurationRequired( true );
+            }
+             setBusy( false );
         }
     }
 }
