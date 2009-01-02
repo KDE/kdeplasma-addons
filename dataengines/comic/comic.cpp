@@ -153,6 +153,16 @@ void ComicEngine::finished( ComicProvider *provider )
 {
     // sets the data
     setComicData( provider );
+    if ( provider->image().isNull() ) {
+        QString identifier( provider->identifier() );
+        if ( provider->isCurrent() )
+            identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
+
+        setData( identifier, "Error", true );
+        setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+        provider->deleteLater();
+        return;
+    }
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
@@ -203,8 +213,13 @@ void ComicEngine::error( ComicProvider *provider )
         identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
 
     setData( identifier, "Error", true );
-    // sets the previousIdentifier to the identifier of a strip that has been cached before
-    setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+
+    // if there was an error loading the last cached comic strip, do not return its id anymore
+    if ( lastCachedIdentifier( identifier ) !=
+         provider->identifier().mid( provider->identifier().indexOf( ':' ) + 1 ) ) {
+        // sets the previousIdentifier to the identifier of a strip that has been cached before
+        setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+    }
     setData( identifier, "Next identifier suffix", QString() );
 
     provider->deleteLater();
