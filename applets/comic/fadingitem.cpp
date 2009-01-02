@@ -61,7 +61,7 @@ void FadingItem::paint( QPainter *painter, const QStyleOptionGraphicsItem *optio
     QPainter tempPainter( &temp );
     QColor color = Qt::black;
 
-    color.setAlphaF( qMin( mOpacity, 0.99 ) );
+    color.setAlphaF( qMin( mOpacity, qreal(0.99) ) );
     tempPainter.setCompositionMode( QPainter::CompositionMode_DestinationIn );
     tempPainter.fillRect( mParent.rect(), color );
     painter->drawPixmap( QPoint( 0, 0 ), temp );
