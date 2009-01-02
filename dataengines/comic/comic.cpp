@@ -18,6 +18,7 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QFileInfo>
+#include <QtCore/QSettings>
 
 #include <KUrl>
 #include <KServiceTypeTrader>
@@ -103,6 +104,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         Solid::Networking::Status status = Solid::Networking::status();
         if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
             setData( identifier, "Error", true );
+            setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
             return false;
         }
 
@@ -149,27 +151,8 @@ bool ComicEngine::sourceRequestEvent( const QString &identifier )
 
 void ComicEngine::finished( ComicProvider *provider )
 {
-    QString identifier( provider->identifier() );
-
-    /**
-     * Requests for the current day have no suffix (date or id)
-     * set initially, so we have to remove the 'faked' suffix
-     * here again to not confuse the applet.
-     */
-    if ( provider->isCurrent() )
-        identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
-
-    setData( identifier, "Image", provider->image() );
-    setData( identifier, "Website Url", provider->websiteUrl() );
-    setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
-    setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
-    setData( identifier, "Comic Author", provider->comicAuthor() );
-    setData( identifier, "Additional text", provider->additionalText() );
-    setData( identifier, "Strip title", provider->stripTitle() );
-    setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
-    setData( identifier, "Identifier", provider->identifier() );
-    setData( identifier, "Title", provider->name() );
-    setData( identifier, "SuffixType", provider->suffixType() );
+    // sets the data
+    setComicData( provider );
 
     // store in cache if it's not the response of a CachedProvider,
     // if there is a valid image and if there is a next comic
@@ -183,6 +166,7 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "previousIdentifier" ] = provider->previousIdentifier();
         info[ "title" ] = provider->name();
         info[ "suffixType" ] = provider->suffixType();
+        info[ "lastCachedStripIdentifier" ] = provider->identifier().mid( provider->identifier().indexOf( ':' ) + 1 );
 
         //data that should be only written if available
         if ( !provider->comicAuthor().isEmpty() ) {
@@ -205,9 +189,61 @@ void ComicEngine::finished( ComicProvider *provider )
 
 void ComicEngine::error( ComicProvider *provider )
 {
-    setData( provider->identifier(), QImage() );
+    // sets the data
+    setComicData( provider );
+
+    QString identifier( provider->identifier() );
+
+    /**
+     * Requests for the current day have no suffix (date or id)
+     * set initially, so we have to remove the 'faked' suffix
+     * here again to not confuse the applet.
+     */
+    if ( provider->isCurrent() )
+        identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
+
+    setData( identifier, "Error", true );
+    // sets the previousIdentifier to the identifier of a strip that has been cached before
+    setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+    setData( identifier, "Next identifier suffix", QString() );
 
     provider->deleteLater();
+}
+
+void ComicEngine::setComicData( ComicProvider *provider )
+{
+    QString identifier( provider->identifier() );
+
+    /**
+     * Requests for the current day have no suffix (date or id)
+     * set initially, so we have to remove the 'faked' suffix
+     * here again to not confuse the applet.
+     */
+    if ( provider->isCurrent() )
+        identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
+
+    setData( identifier, "Image", provider->image() );
+    setData( identifier, "Website Url", provider->websiteUrl() );
+    setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
+    setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
+    setData( identifier, "Comic Author", provider->comicAuthor() );
+    setData( identifier, "Additional text", provider->additionalText() );
+    setData( identifier, "Strip title", provider->stripTitle() );
+    setData( identifier, "First strip identifier suffix", provider->firstStripIdentifier() );
+    setData( identifier, "Identifier", provider->identifier() );
+    setData( identifier, "Title", provider->name() );
+    setData( identifier, "SuffixType", provider->suffixType() );
+}
+
+QString ComicEngine::lastCachedIdentifier( const QString &identifier ) const
+{
+        QString id = identifier.left( identifier.indexOf( ':' ) );
+        QString data = KStandardDirs::locateLocal( "data", "plasma_engine_comic/" );
+        data += QUrl::toPercentEncoding( id );
+        QSettings settings( data + ".conf", QSettings::IniFormat );
+        QString previousIdentifier = settings.value( "lastCachedStripIdentifier", QString() ).toString();
+
+        return previousIdentifier;
 }
 
 #include "comic.moc"

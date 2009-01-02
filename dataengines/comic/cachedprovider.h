@@ -86,6 +86,11 @@ class CachedProvider : public ComicProvider
         virtual QString firstStripIdentifier() const;
 
         /**
+         * Returns the identifier of the last cached strip.
+         */
+        QString lastCachedStripIdentifier() const;
+
+        /**
          * Returns the title of the strip.
          */
         virtual QString stripTitle() const;

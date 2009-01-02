@@ -83,6 +83,12 @@ QString CachedProvider::firstStripIdentifier() const
     return settings.value( "firstStripIdentifier", QString() ).toString();
 }
 
+QString CachedProvider::lastCachedStripIdentifier() const
+{
+    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "lastCachedStripIdentifier", QString() ).toString();
+}
+
 QString CachedProvider::comicAuthor() const
 {
     QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
@@ -135,8 +141,8 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
         QSettings settingsMain( pathMain + ".conf", QSettings::IniFormat );
 
         for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
-                if ( ( i.key() == "firstStripIdentifier" ) ||
-                     ( i.key() == "title" ) || ( i.key() == "suffixType" ) ) {
+                if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "title" ) ||
+                     ( i.key() == "lastCachedStripIdentifier" ) || ( i.key() == "suffixType" ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );

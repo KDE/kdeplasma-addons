@@ -58,6 +58,8 @@ class ComicEngine : public Plasma::DataEngine
 
     private:
         bool mEmptySuffix;
+        void setComicData( ComicProvider *provider );
+        QString lastCachedIdentifier( const QString &identifier ) const;
         QMap<QString, KService::Ptr> mFactories;
 };
 
