@@ -733,6 +733,9 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
         qreal bottom = mImageRect.bottom();
         QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
                          bottom - mFrame->size().height() - 5 );
+        if ( buttons.y() < 0 || buttons.y() > size().height() ) {
+            buttons.setY( contentsRect().bottom() - mFrame->size().height() - 5 );
+        }
         mFrame->setPos( buttons );
     }
 }
