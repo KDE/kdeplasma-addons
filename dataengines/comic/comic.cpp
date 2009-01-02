@@ -154,13 +154,7 @@ void ComicEngine::finished( ComicProvider *provider )
     // sets the data
     setComicData( provider );
     if ( provider->image().isNull() ) {
-        QString identifier( provider->identifier() );
-        if ( provider->isCurrent() )
-            identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
-
-        setData( identifier, "Error", true );
-        setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
-        provider->deleteLater();
+        error( provider );
         return;
     }
 
