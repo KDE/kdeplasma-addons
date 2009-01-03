@@ -422,6 +422,9 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
                 connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
                 calendar->show();
             }
+        } else if ( mouseCursorInside( mRects[ Image ], eventPos ) && ( geometry().size() != mLastSize ) ) {
+            // only update the size by clicking on the image-rect if the user manual resized the applet
+            updateSize();
         }
     } else if ( event->button() == Qt::MidButton ) { // handle full view
         if ( !mFullViewWidget ) {
