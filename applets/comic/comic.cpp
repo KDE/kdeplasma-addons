@@ -646,10 +646,11 @@ QList<QAction*> ComicApplet::contextualActions()
 
 void ComicApplet::wheelEvent( QGraphicsSceneWheelEvent *event )
 {
+    const QPointF eventPos = event->pos();
     const int numDegrees = event->delta() / 8;
     const int numSteps = numDegrees / 15;
 
-    if ( mScrollBarVert->isVisible() ) {
+    if ( mScrollBarVert->isVisible() && !mouseCursorInside( mRects[ ScrollBarHoriz ], eventPos ) ) {
         const int scroll = mScrollBarVert->singleStep();
         mScrollBarVert->setValue( mScrollBarVert->value() - numSteps * scroll );
     } else if ( mScrollBarHoriz->isVisible() ) {
