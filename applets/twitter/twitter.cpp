@@ -241,15 +241,13 @@ QGraphicsWidget *Twitter::graphicsWidget()
     m_engine->connectSource("Error", this);
 
     //set things in motion
-    if(! m_username.isEmpty()) {
-        if (m_password.isEmpty()) {
-            m_walletWait = Read;
-            getWallet();
-        } else { //use config value
-            downloadHistory();
-        }
-    }else{
+    if (m_username.isEmpty()) {
         setAuthRequired(true);
+    } else if (m_password.isEmpty()) {
+        m_walletWait = Read;
+        getWallet();
+    } else { //use config value
+        downloadHistory();
     }
 
     return m_graphicsWidget;
@@ -341,8 +339,7 @@ void Twitter::writeConfigPassword()
     //kDebug();
     if (KMessageBox::warningYesNo(0, i18n("Failed to access kwallet. Store password in config file instead?"))
             == KMessageBox::Yes) {
-        KConfigGroup cg = config();
-        cg.writeEntry( "password", KStringHandler::obscure(m_password) );
+        config().writeEntry("password", KStringHandler::obscure(m_password));
     }
 }
 
@@ -558,8 +555,8 @@ void Twitter::showTweets()
 
 void Twitter::createConfigurationInterface(KConfigDialog *parent)
 {
-    connect( parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()) );
-    connect( parent, SIGNAL(okClicked()), this, SLOT(configAccepted()) );
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
