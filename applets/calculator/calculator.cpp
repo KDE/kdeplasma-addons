@@ -455,24 +455,25 @@ void CalculatorApplet::slotEqualsClicked()
     //We use the 'g' formatted to figure out whether this if an integer
     inputText = KGlobal::locale()->formatNumber(sum, 6);
 
-    QString leftSide  = inputText.left(inputText.indexOf(KGlobal::locale()->decimalSymbol()));
-    if (leftSide.size()>3)
-      leftSide = KGlobal::locale()->formatNumber(leftSide.toDouble(), 0);
+    int decimalIndex = inputText.indexOf(KGlobal::locale()->decimalSymbol());
 
-    QString rightSide = inputText.right(inputText.size()-inputText.indexOf(KGlobal::locale()->decimalSymbol()));
-    while (rightSide.size() > 1 && rightSide.endsWith('0')) {
-      rightSide = rightSide.left(rightSide.size()-1);
+    if (decimalIndex != -1) {
+        while (inputText.size() > decimalIndex && inputText.endsWith('0')) {
+            inputText = inputText.left(inputText.size() - 1);
+        }
+
+        if (inputText.endsWith(KGlobal::locale()->decimalSymbol())) {
+            inputText = inputText.left(inputText.size() - 1);
+        }
     }
-    if (rightSide.endsWith(KGlobal::locale()->decimalSymbol()))
-      rightSide.clear();
-    mOutputDisplay->setText(leftSide+rightSide);
+
+    mOutputDisplay->setText(inputText);
 
     sum = 0.0;
     factor = 0;
-    previousAddSubOperation=calcNone;
-    previousMulDivOperation=calcNone;
+    previousAddSubOperation = calcNone;
+    previousMulDivOperation = calcNone;
     waitingForDigit = true;
-
 }
 
 void CalculatorApplet::slotClearClicked()
