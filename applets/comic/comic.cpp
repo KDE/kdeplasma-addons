@@ -397,23 +397,16 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     if ( event->button() == Qt::LeftButton ) {
         QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
         const QRectF rect = contentsRect();
+        const QPointF eventPos = event->pos();
 
-        if ( mShowPreviousButton && !mArrowsOnHover && event->pos().x() > rect.left() &&
-             event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
+        if ( mouseCursorInside( mRects[ PreviousButton ], eventPos ) ) {
             slotPreviousDay();
-        } else if ( mShowNextButton && !mArrowsOnHover && event->pos().x() < rect.right() &&
-                    event->pos().x() > ( rect.right() - s_arrowWidth ) ) {
+        } else if ( mouseCursorInside( mRects[ NextButton ], eventPos ) ) {
             slotNextDay();
-        } else if ( !mWebsiteUrl.isEmpty() && mShowComicUrl &&
-                    event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - s_indentation ) &&
-                    event->pos().x() < ( rect.right() - s_indentation ) ) {
+        } else if ( mouseCursorInside( mRects[ WebsiteURL ], eventPos ) ) {
             // link clicked
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
-        } else if ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier &&
-                    event->pos().y() > ( rect.bottom() - fm.height() ) &&
-                    event->pos().x() > ( rect.left() + s_indentation ) &&
-                    event->pos().x() < ( rect.left() + s_indentation + fm.width( mShownIdentifierSuffix ) ) ) {
+        } else if ( mouseCursorInside( mRects[ Identifier ], eventPos ) ) {
             // identifierSuffix clicked clicked
             if ( mSuffixType == "Number" ) {
                 ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
@@ -522,6 +515,8 @@ void ComicApplet::updateSize()
 
 void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, const QRect &contentRect )
 {
+    mRects.clear();
+
     // get the text at top
     QString tempTop;
 
@@ -541,8 +536,8 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         topHeight = fm.height();
         int height = contentRect.top();
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
-        p->drawText( QRectF( contentRect.left(), height, contentRect.width(), fm.height() ),
-                     Qt::AlignCenter, tempTop );
+        mRects[ Top ] = QRectF( contentRect.left(), height, contentRect.width(), fm.height() );
+        p->drawText( mRects[ Top ], Qt::AlignCenter, tempTop );
     }
 
     // get the correct identifier suffix
@@ -564,13 +559,15 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
 
         if ( !mWebsiteUrl.isEmpty() && mShowComicUrl ) {
-            p->drawText( QRectF( contentRect.left(), height, contentRect.width() - s_indentation, fm.height() ),
-                         Qt::AlignRight, mWebsiteUrl.host() );
+            mRects[ WebsiteURL ] = QRectF( contentRect.right() - s_indentation - fm.width( mWebsiteUrl.host() ), height,
+                                         fm.width( mWebsiteUrl.host() ), fm.height() );
+            p->drawText( mRects[ WebsiteURL ], Qt::AlignRight, mWebsiteUrl.host() );
         }
 
         if ( !mShownIdentifierSuffix.isEmpty() && mShowComicIdentifier ) {
-            p->drawText( QRectF( contentRect.left() + s_indentation , height, contentRect.width() - s_indentation,
-                                 fm.height() ), Qt::AlignLeft, mShownIdentifierSuffix );
+            mRects[ Identifier ] = QRectF( contentRect.left() + s_indentation , height,
+                                         fm.width( mShownIdentifierSuffix ), fm.height() );
+            p->drawText( mRects[ Identifier ], Qt::AlignLeft, mShownIdentifierSuffix );
         }
     }
 
@@ -586,12 +583,14 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     int leftImageGap = 0;
     int buttonMiddle = ( contentRect.height() / 2 ) + contentRect.top();
     if ( mShowPreviousButton && !mArrowsOnHover ) {
+        mRects[ PreviousButton ] = QRectF( contentRect.left(), contentRect.top(), + s_arrowWidth, contentRect.height() );
         mSvg->paint( p, contentRect.left() - 5, buttonMiddle - 15, s_arrowWidth, 30, "left-arrow");
 
         leftImageGap += s_arrowWidth;
     }
 
     if ( mShowNextButton && !mArrowsOnHover ) {
+        mRects[ NextButton ] = QRectF( contentRect.right() - s_arrowWidth, contentRect.top(), + s_arrowWidth, contentRect.height() );
         mSvg->paint( p, contentRect.right() - s_arrowWidth + 5, buttonMiddle - 15, s_arrowWidth, 30, "right-arrow");
 
         rightImageGap += s_arrowWidth;
@@ -601,24 +600,25 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
                         contentRect.y() + topHeight,
                         contentRect.width() - leftImageGap - rightImageGap,
                         contentRect.height() - bottomHeight - topHeight );
+    mRects[ Image ] = mImageRect;
 
     if ( mScrollBarVert->isVisible() ) {
-        QRect scrollVert = QRect( contentRect.right() - rightImageGap + s_scrollMargin,
+        mRects[ ScrollBarVert ] = QRect( contentRect.right() - rightImageGap + s_scrollMargin,
                                   contentRect.top() + topHeight + s_scrollMargin,
                                   scrollBarWidth,
                                   contentRect.height() - topHeight - bottomHeight - 2 * s_scrollMargin );
 
-        mScrollBarVert->setGeometry( scrollVert );
+        mScrollBarVert->setGeometry( mRects[ ScrollBarVert ] );
         mScrollBarVert->setRange( 0, mImage.height() - mImageRect.height() );
         mScrollBarVert->setPageStep( mImageRect.height() );
     }
     if ( mScrollBarHoriz->isVisible() ) {
-        QRect scrollHoriz = QRect( contentRect.left() + leftImageGap + s_scrollMargin,
+        mRects[ ScrollBarHoriz ] = QRect( contentRect.left() + leftImageGap + s_scrollMargin,
                                    contentRect.bottom() - bottomHeight + s_scrollMargin,
                                    contentRect.width() - leftImageGap - rightImageGap - 2 * s_scrollMargin,
                                    scrollBarHeight );
 
-        mScrollBarHoriz->setGeometry( scrollHoriz );
+        mScrollBarHoriz->setGeometry( mRects[ ScrollBarHoriz ] );
         mScrollBarHoriz->setRange( 0, mImage.width() - mImageRect.width() );
         mScrollBarHoriz->setPageStep( mImageRect.width() );
     }
@@ -750,50 +750,21 @@ void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
     Applet::hoverEnterEvent( event );
 }
 
-void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event )
+void ComicApplet::hoverMoveEvent( QGraphicsSceneHoverEvent *event  )
 {
-    if ( mShowComicUrl || mShowComicIdentifier ) {
-        QRectF rect = contentsRect();
-        QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
+    QRectF rect = contentsRect();
+    const QPointF eventPos = event->pos();
+    QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
 
-        if ( mShowComicUrl && !mWebsiteUrl.isEmpty() &&
-             event->pos().y() > ( rect.bottom() - fm.height() ) &&
-             event->pos().x() > ( rect.right() - fm.width( mWebsiteUrl.host() ) - s_indentation ) &&
-             event->pos().x() < ( rect.right() - s_indentation ) ) {
-            // link clicked
-            setCursor( Qt::PointingHandCursor );
-            return;
-        }
-
-        if ( mShowComicIdentifier && !mShownIdentifierSuffix.isEmpty() &&
-             event->pos().y() > ( rect.bottom() - fm.height() ) &&
-             event->pos().x() > ( rect.left() + s_indentation ) &&
-             event->pos().x() < ( rect.left() + fm.width( mShownIdentifierSuffix ) + s_indentation ) ) {
-            // link clicked
-            setCursor( Qt::PointingHandCursor );
-            return;
-        }
-
-        // hovering over the previous button
-        if ( !mArrowsOnHover && mShowPreviousButton &&
-             event->pos().y() > rect.top() &&
-             event->pos().x() > rect.left() &&
-             event->pos().x() < ( rect.left() + s_arrowWidth ) ) {
-            setCursor( Qt::PointingHandCursor );
-            return;
-        }
-
-        // hovering over the next button
-        if ( !mArrowsOnHover && mShowNextButton &&
-             event->pos().y() > rect.top() &&
-             event->pos().x() > ( rect.right() - s_arrowWidth ) &&
-             event->pos().x() < rect.right() ) {
-            setCursor( Qt::PointingHandCursor );
-            return;
-        }
-    }
-
-    if ( hasCursor() ) {
+    if ( mouseCursorInside( mRects[ WebsiteURL ], eventPos ) ) {
+        setCursor( Qt::PointingHandCursor );
+    } else if ( mouseCursorInside( mRects[ Identifier ], eventPos ) ) {
+        setCursor( Qt::PointingHandCursor );
+    } else if ( mouseCursorInside( mRects[ PreviousButton ], eventPos ) ) {
+        setCursor( Qt::PointingHandCursor );
+    } else if ( mouseCursorInside( mRects[ NextButton ], eventPos ) ) {
+        setCursor( Qt::PointingHandCursor );
+    } else if ( hasCursor() ) {
         unsetCursor();
     }
 }
@@ -815,6 +786,19 @@ void ComicApplet::slotScaleToContent()
     cg.writeEntry( "scaleToContent_" + mComicIdentifier,  mScaleComic );
 
     updateSize();
+}
+
+bool ComicApplet::mouseCursorInside( const QRectF &rect, const QPointF &position )
+{
+    if ( !position.isNull() && rect.isValid() &&
+         position.y() > rect.top() &&
+         position.y() < rect.bottom() &&
+         position.x() > rect.left() &&
+         position.x() < rect.right() ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void ComicApplet::buttonBar()

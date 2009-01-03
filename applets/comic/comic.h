@@ -92,6 +92,10 @@ class ComicApplet : public Plasma::Applet
         void saveConfig();
         void updateSize();
         void updateScrollBars();
+        bool mouseCursorInside( const QRectF &rect, const QPointF &position );
+
+        enum Rects { Top, WebsiteURL, Identifier, PreviousButton,
+                     NextButton, ScrollBarVert, ScrollBarHoriz, Image };
 
         QImage mImage;
         QDate mCurrentDay;
@@ -122,6 +126,7 @@ class ComicApplet : public Plasma::Applet
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
         QAction *mActionScaleContent;
+        QHash< Rects, QRectF > mRects;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
