@@ -2,14 +2,14 @@
 # this works also for the weatherutils include dir, but should be done properly, Alex
 include_directories(${PLASMACLOCK_INCLUDE_DIR})
 
-if(PLASMA_OPENGL_FOUND)
+if(KDE4_PLASMA_OPENGL_FOUND)
   message(STATUS "libplasma supports OpenGL applets")
   if(NOT WIN32)
     add_subdirectory(bluemarble)
   endif(NOT WIN32)
-else(PLASMA_OPENGL_FOUND)
+else(KDE4_PLASMA_OPENGL_FOUND)
   message(STATUS "libplasma doesn't support OpenGL applets")
-endif(PLASMA_OPENGL_FOUND)
+endif(KDE4_PLASMA_OPENGL_FOUND)
 
 add_subdirectory(bball)
 add_subdirectory(binary-clock)
