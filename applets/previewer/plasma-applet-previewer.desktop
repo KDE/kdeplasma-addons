@@ -2,6 +2,7 @@
 Name=Previewer
 Name[ar]=المعاين
 Name[ca]=Previsualitzador
+Name[da]=Forhåndsviser
 Name[de]=Vorschau
 Name[el]=Προβολέας προεπισκόπησης
 Name[es]=Previsualizador
@@ -35,6 +36,7 @@ Name[zh_TW]=預覽器
 Comment=Quickly preview a variety of files
 Comment[ar]=عاين مختلف الملفات بسرعة
 Comment[ca]=Vista prèvia ràpida d'una varietat de fitxers
+Comment[da]=Hurtig forhåndsvisning af mange slags filer
 Comment[de]=Vorschau für eine Vielzahl Dateien anzeigen
 Comment[el]=Γρήγορη προεπισκόπηση διαφόρων αρχείων
 Comment[es]=Previsualizar rápidamente una variedad de archivos
