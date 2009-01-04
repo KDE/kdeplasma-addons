@@ -244,9 +244,11 @@ QGraphicsWidget *Twitter::graphicsWidget()
     if (m_username.isEmpty()) {
         setAuthRequired(true);
     } else if (m_password.isEmpty()) {
+        kDebug() << "started, password is not in config file, trying wallet";
         m_walletWait = Read;
         getWallet();
     } else { //use config value
+        kDebug() << "password was in config file, using that to get twitter history";
         downloadHistory();
     }
 
@@ -256,10 +258,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
 void Twitter::getWallet()
 {
     //TODO: maybe Plasma in general should handle the wallet
-    if (m_wallet) {
-        //user must be a dumbass. kill that old attempt.
-        delete m_wallet;
-    }
+    delete m_wallet;
 
     QGraphicsView *v = view();
     WId w = 0;
@@ -267,6 +266,7 @@ void Twitter::getWallet()
         w = v->winId();
     }
 
+    kDebug() << "opening wallet";
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(),
                                            w, KWallet::Wallet::Asynchronous);
 
@@ -279,15 +279,15 @@ void Twitter::getWallet()
 
 void Twitter::writeWallet(bool success)
 {
-    //kDebug();
+    kDebug() << success;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
         (m_wallet->writePassword(m_username, m_password) == 0)) {
-        KConfigGroup cg = config();
-        cg.deleteEntry("password");
+        kDebug() << "successfully put password in wallet, removing from config file";
+        config().deleteEntry("password");
         emit configNeedsSaving();
     } else {
-        kDebug() << "failed to write password";
+        kDebug() << "failed to store password in wallet, putting into config file instead";
         writeConfigPassword();
     }
     m_walletWait = None;
@@ -297,11 +297,12 @@ void Twitter::writeWallet(bool success)
 
 void Twitter::readWallet(bool success)
 {
-    //kDebug();
+    kDebug() << success;
     QString pwd;
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
         (m_wallet->readPassword(m_username, pwd) == 0)) {
+        kDebug() << "successfully retreived password from wallet";
         m_password = pwd;
         downloadHistory();
     } else if (m_password.isEmpty()) {
@@ -325,6 +326,8 @@ bool Twitter::enterWalletFolder(const QString &folder)
         kDebug() << "failed to open folder" << folder;
         return false;
     }
+
+    kDebug() << "wallet now on folder" << folder;
     return true;
 }
 
@@ -337,6 +340,7 @@ void Twitter::setAuthRequired(bool required)
 void Twitter::writeConfigPassword()
 {
     //kDebug();
+    //TODO: don't use "Yes" and "No", but replace with meaningful labels!
     if (KMessageBox::warningYesNo(0, i18n("Failed to access kwallet. Store password in config file instead?"))
             == KMessageBox::Yes) {
         config().writeEntry("password", KStringHandler::obscure(m_password));
