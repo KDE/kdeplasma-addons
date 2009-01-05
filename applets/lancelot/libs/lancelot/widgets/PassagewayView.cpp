@@ -203,7 +203,7 @@ public:
         focusIndex = lists.count();
         lists.append(list);
 
-        list->initialSelection();
+        // list->initialSelection();
         path.append(step);
 
         buttonsLayout->addItem(button);
