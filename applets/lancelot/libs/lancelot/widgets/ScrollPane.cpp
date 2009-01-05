@@ -23,7 +23,7 @@
 #include "ScrollBar.h"
 #include "Widget.h"
 #include <lancelot/layouts/FullBorderLayout.h>
-#include <lancelot/layouts/FlipLayout.h>
+// #include <lancelot/layouts/FlipLayout.h>
 
 namespace Lancelot
 {
@@ -80,7 +80,7 @@ public:
 
     ScrollPane * q;
     Scrollable * widget;
-    FlipLayout < FullBorderLayout > * layout;
+    /*FlipLayout <*/ FullBorderLayout /*>*/ * layout;
     ScrollBar * vertical;
     ScrollBar * horizontal;
     QGraphicsWidget * centerContainer;
@@ -91,7 +91,7 @@ ScrollPane::ScrollPane(QGraphicsItem * parent) //>
     : Widget(parent), d(new Private(this))
 {
     setAcceptsHoverEvents(true);
-    d->layout = new FlipLayout < FullBorderLayout > (this);
+    d->layout = new /*FlipLayout <*/ FullBorderLayout /*>*/ (this);
     // d->layout->setParentLayoutItem(this);
 
     d->vertical   = new ScrollBar(this);
@@ -323,7 +323,17 @@ void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event) //>
 
 void ScrollPane::setFlip(Plasma::Flip flip) //>
 {
-    d->layout->setFlip(flip);
+    if (flip & Plasma::HorizontalFlip) {
+        // TODO: Replace this with a real removeItem(...)
+        d->layout->addItem(NULL, FullBorderLayout::Right);
+        d->layout->addItem(d->vertical, FullBorderLayout::Left);
+
+    } else {
+        d->layout->addItem(NULL, FullBorderLayout::Left);
+        d->layout->addItem(d->vertical, FullBorderLayout::Right);
+
+    }
+    // d->layout->setFlip(flip);
 } //<
 
 void ScrollPane::scrollTo(QRectF rect) //>
