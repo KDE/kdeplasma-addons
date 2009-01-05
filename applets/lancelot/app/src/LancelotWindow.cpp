@@ -591,7 +591,7 @@ void LancelotWindow::setupModels()
 
      Merged(m_modelGroups["DocumentsLeft"])->addModel ("NewDocuments", QIcon(), i18n("New:"), m_models["NewDocuments"]);
 
-     Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18n("Open documents"), m_models["OpenDocuments"]);
+     Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18nc("@title Title of a list of documents that are open", "Open documents"), m_models["OpenDocuments"]);
      Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
 
      Merged(m_modelGroups["ContactsLeft"])->addModel("Messages", QIcon(), i18n("Unread messages"), m_models["Messages"]);
