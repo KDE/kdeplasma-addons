@@ -18,6 +18,7 @@
 #include "simpleunit.h"
 #include <QVariant>
 #include <KDebug>
+#include <KLocale>
 
 SimpleUnit::SimpleUnit(QObject* parent)
 : UnitCategory(parent)
@@ -62,5 +63,28 @@ double SimpleUnit::toDouble(const QString &unit, QString *unitString) const
     } else {
         *unitString = multiplier.toString();
         return m_units[*unitString].toDouble();
+    }
+}
+
+void SimpleUnit::addSIUnit(const QString& unit, const QString& single, const QString& plural)
+{
+    static const QStringList prefixes = QStringList() <<
+            i18n("yotta") << i18n("zetta") << i18n("exa") << i18n("peta") << i18n("tera") <<
+            i18n("giga") << i18n("mega") << i18n("kilo") << i18n("hecto") << i18n("deca") <<
+            "" << i18n("deci") << i18n("centi") << i18n("milli") << i18n("micro") <<
+            i18n("nano") << i18n("pico") << i18n("femto") << i18n("atto") << i18n("zepto") <<
+            i18n("yocto");
+    static const QStringList symbols = QStringList() <<
+            "Y" << "Z" << "E" << "P" << "T" << "G" << "M" << "k" << "h" << "da" << "" << "d" <<
+            "c" << "m" << "\xb5" << "n" << "p" << "f" << "a" << "z" << "y";
+    static const QList<double> decimals = QList<double>() <<
+            1.0E+24 << 1.0E+21 << 1.0E+18 << 1.0E+15 << 1.0E+12 << 1.0E+9 << 1.0E+6 << 1.0E+3 <<
+            1.0E+2 << 1.0E+1 << 1.0 << 1.0E-1 << 1.0E-2 << 1.0E-3 << 1.0E-6 << 1.0E-9 <<
+            1.0E-12 << 1.0E-15 << 1.0E-18 << 1.0E-21 << 1.0E-24;
+
+    for (int i = 0; i < prefixes.count(); ++i) {
+            m_units[prefixes[i] + single] = symbols[i] + unit;
+            m_units[prefixes[i] + plural] = symbols[i] + unit;
+            m_units[symbols[i] + unit]    = decimals[i];
     }
 }

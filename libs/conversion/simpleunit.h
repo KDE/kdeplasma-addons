@@ -35,6 +35,7 @@ protected:
     QHash<QString, QVariant> m_units;
     QString m_default;
 
+    void addSIUnit(const QString& unit, const QString& single, const QString& plural);
     virtual double toDouble(const QString &unit, QString *unitString) const;
 };
 
