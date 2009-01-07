@@ -113,7 +113,6 @@ class ComicApplet : public Plasma::Applet
         QString mShownIdentifierSuffix;
         QString mCurrentIdentifierSuffix;
         QString mStoredIdentifierSuffix;
-        int mIdentifierSuffixNum;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;

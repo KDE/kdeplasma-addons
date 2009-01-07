@@ -99,7 +99,6 @@ class ChooseStripNumDialog : public KDialog
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
-      mIdentifierSuffixNum( -1 ),
       mShowPreviousButton( false ),
       mShowNextButton( false ),
       mShowComicUrl( false ),
@@ -214,10 +213,11 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     KConfigGroup cg = config();
     mShownIdentifierSuffix = "";
     if ( mSuffixType == "Number" ) {
-        mIdentifierSuffixNum = mCurrentIdentifierSuffix.toInt();
-        if ( mMaxStripNum[ mComicIdentifier ] < mIdentifierSuffixNum ) {
-            mMaxStripNum[ mComicIdentifier ] = mIdentifierSuffixNum;
-            cg.writeEntry( "maxStripNum_" + mComicIdentifier, mIdentifierSuffixNum );
+        mShownIdentifierSuffix = "# " + mCurrentIdentifierSuffix;
+        int tempNum = mCurrentIdentifierSuffix.toInt();
+        if ( mMaxStripNum[ mComicIdentifier ] < tempNum ) {
+            mMaxStripNum[ mComicIdentifier ] = tempNum;
+            cg.writeEntry( "maxStripNum_" + mComicIdentifier, mMaxStripNum[ mComicIdentifier ] );
         }
 
         temp = mFirstIdentifierSuffix.remove( mComicIdentifier + ':' );
@@ -434,14 +434,14 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
         } else if ( mouseCursorInside( mRects[ Identifier ], eventPos ) ) {
             // identifierSuffix clicked clicked
             if ( mSuffixType == "Number" ) {
-                ChooseStripNumDialog pageDialog( 0, mIdentifierSuffixNum, mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
+                ChooseStripNumDialog pageDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
                 if ( pageDialog.exec() == QDialog::Accepted ) {
                     updateComic( QString::number( pageDialog.getStripNumber() ) );
                 }
             } else if ( mSuffixType == "Date" ) {
                 static KDatePicker *calendar = new KDatePicker();
                 calendar->setMinimumSize( calendar->sizeHint() );
-                calendar->setDate( QDate::fromString( mShownIdentifierSuffix, "yyyy-MM-dd" ) );
+                calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
 
                 connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
                 connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
@@ -483,12 +483,8 @@ void ComicApplet::updateSize()
         int fmHeight = Plasma::Theme::defaultTheme()->fontMetrics().height();
         int topArea = ( ( ( mShowComicAuthor && mComicAuthor.isEmpty() ) ||
                           ( mShowComicTitle && ( !mStripTitle.isEmpty() || !mComicTitle.isEmpty() ) ) ) ? fmHeight : 0 );
-        bool hasComicIdentifier = false;
-        if ( ( ( mSuffixType == "Number" ) && ( mIdentifierSuffixNum != -1  ) ) ||
-             !mShownIdentifierSuffix.isEmpty() ) {
-            hasComicIdentifier = true;
-        }
-        int bottomArea = ( ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) || ( mShowComicIdentifier && hasComicIdentifier ) ? fmHeight : 0 );
+        int bottomArea = ( ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) ||
+                           ( mShowComicIdentifier && !mShownIdentifierSuffix.isEmpty() ) ? fmHeight : 0 );
 
         mIdealSize = QSizeF( geometry().size() - contentsRect().size() +
                  mImage.size() + QSizeF( leftArea + rightArea, topArea + bottomArea ) );
@@ -566,11 +562,6 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
         p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ) );
         mRects[ Top ] = QRectF( contentRect.left(), height, contentRect.width(), fm.height() );
         p->drawText( mRects[ Top ], Qt::AlignCenter, tempTop );
-    }
-
-    // get the correct identifier suffix
-    if ( ( mSuffixType == "Number" ) && ( mIdentifierSuffixNum != -1  ) ) {
-        mShownIdentifierSuffix = "# " + QString::number( mIdentifierSuffixNum );
     }
 
     // create the text at bottom
