@@ -33,7 +33,7 @@ add_subdirectory(rssnow)
 add_subdirectory(showdashboard)
 add_subdirectory(timer)
 add_subdirectory(twitter)
-add_subdirectory(weather_station)
+add_subdirectory(weatherstation)
 add_subdirectory(eyes)
 
 if(QT_QTWEBKIT_FOUND)
