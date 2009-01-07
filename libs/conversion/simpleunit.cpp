@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007-2009 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -83,8 +83,10 @@ void SimpleUnit::addSIUnit(const QString& unit, const QString& single, const QSt
             1.0E-12 << 1.0E-15 << 1.0E-18 << 1.0E-21 << 1.0E-24;
 
     for (int i = 0; i < prefixes.count(); ++i) {
-            m_units[prefixes[i] + single] = symbols[i] + unit;
-            m_units[prefixes[i] + plural] = symbols[i] + unit;
-            m_units[symbols[i] + unit]    = decimals[i];
+        m_units[prefixes[i] + single] = symbols[i] + unit;
+        m_units[prefixes[i] + plural] = symbols[i] + unit;
+        m_units[symbols[i] + unit]    = decimals[i];
     }
+    // u == micro
+    m_units['u' + unit] = "\xb5" + unit;
 }
