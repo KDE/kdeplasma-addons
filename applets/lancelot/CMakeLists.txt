@@ -1,6 +1,6 @@
 # cmake_minimum_required(VERSION 2.6)
 find_package(KDE4 REQUIRED)
-
+KDE4_NO_ENABLE_FINAL(lancelot)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 # Profiling build type
