@@ -42,8 +42,9 @@ Pressure::Pressure(QObject* parent)
     m_units["atm"]                = 101325.0;
     m_units[i18n("pound-force per square inch")] = "psi";
     m_units["psi"]                = 6894.76;
+    // http://en.wikipedia.org/wiki/InHg
     m_units[i18n("inches of mercury")] = "inHg";
-    m_units["inHg"]               = 3386.389;
+    m_units["inHg"]               = 3386.389; // at 0 °C
 }
 
 QString Pressure::name() const
