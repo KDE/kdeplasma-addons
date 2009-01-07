@@ -68,6 +68,7 @@ class ComicApplet : public Plasma::Applet
         void slotCurrentDay();
         void slotSaveComicAs();
         void slotScaleToContent();
+        void slotStorePosition();
         void slotSizeChanged();
         void slotScroll();
         void applyConfig();
@@ -111,6 +112,8 @@ class ComicApplet : public Plasma::Applet
         QString mAdditionalText;
         QString mSuffixType;
         QString mShownIdentifierSuffix;
+        QString mCurrentIdentifierSuffix;
+        QString mStoredIdentifierSuffix;
         int mIdentifierSuffixNum;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
@@ -126,6 +129,7 @@ class ComicApplet : public Plasma::Applet
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
         QAction *mActionScaleContent;
+        QAction *mActionStorePosition;
         QHash< Rects, QRectF > mRects;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;

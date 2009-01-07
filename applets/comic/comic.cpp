@@ -162,7 +162,13 @@ void ComicApplet::init()
     mActions.append( mActionScaleContent );
     connect( mActionScaleContent, SIGNAL( triggered( bool ) ), this , SLOT( slotScaleToContent() ) );
 
-    updateComic();
+    mActionStorePosition = new QAction( KIcon( "go-home" ), i18nc( "@option:check Context menu of comic image", "Store current &Position" ), this);
+    mActionStorePosition->setCheckable( true );
+    mActionStorePosition->setChecked( !mStoredIdentifierSuffix.isEmpty() );
+    mActions.append( mActionStorePosition );
+    connect( mActionStorePosition, SIGNAL( triggered( bool ) ), this, SLOT( slotStorePosition() ) );
+
+    updateComic( mStoredIdentifierSuffix );
 
     connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
              this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
@@ -200,11 +206,17 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mSuffixType = data[ "SuffixType" ].toString();
 
     QString temp = data[ "Identifier" ].toString();
-    temp = temp.remove( mComicIdentifier + ':' );
+    mCurrentIdentifierSuffix = temp.remove( mComicIdentifier + ':' );
+
+    //call the slot to check if the position needs to be saved
+    slotStorePosition();
+
+    KConfigGroup cg = config();
     if ( mSuffixType == "Number" ) {
-        mIdentifierSuffixNum = temp.toInt();
+        mIdentifierSuffixNum = mCurrentIdentifierSuffix.toInt();
         if ( mMaxStripNum[ mComicIdentifier ] < mIdentifierSuffixNum ) {
             mMaxStripNum[ mComicIdentifier ] = mIdentifierSuffixNum;
+            cg.writeEntry( "maxStripNum_" + mComicIdentifier, mIdentifierSuffixNum );
         }
 
         temp = mFirstIdentifierSuffix.remove( mComicIdentifier + ':' );
@@ -263,12 +275,15 @@ void ComicApplet::applyConfig()
 
     if ( differentComic ) {
         KConfigGroup cg = config();
+        mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
+        mActionStorePosition->setChecked( !mStoredIdentifierSuffix.isEmpty() );
+
         // assign mScaleComic the moment the new strip has been loaded (dataUpdated) as up to this point
         // the old one should be still shown with its scaling settings
         bool scaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
         mActionScaleContent->setChecked( scaleComic );
 
-        updateComic();
+        updateComic( mStoredIdentifierSuffix );
     } else {
         updateSize();
     }
@@ -281,13 +296,13 @@ void ComicApplet::applyConfig()
 void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
 {
     if ( status == Solid::Networking::Connected )
-        updateComic();
+        updateComic( mStoredIdentifierSuffix );
 }
 
 void ComicApplet::checkDayChanged()
 {
     if ( ( mCurrentDay != QDate::currentDate() ) || mImage.isNull() )
-        updateComic();
+        updateComic( mStoredIdentifierSuffix );
 
     mCurrentDay = QDate::currentDate();
 }
@@ -302,6 +317,8 @@ void ComicApplet::loadConfig()
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
+    mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
+    mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
 
@@ -352,6 +369,13 @@ void ComicApplet::slotFirstDay()
 void ComicApplet::slotCurrentDay()
 {
     updateComic( QString() );
+}
+
+void ComicApplet::slotStorePosition()
+{
+    KConfigGroup cg = config();
+    mStoredIdentifierSuffix = mActionStorePosition->isChecked() ? mCurrentIdentifierSuffix : "";
+    cg.writeEntry( "storedPosition_" + mComicIdentifier, mStoredIdentifierSuffix );
 }
 
 void ComicApplet::slotSizeChanged()
