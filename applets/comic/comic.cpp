@@ -144,11 +144,11 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
-    mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "&Jump to first Strip" ), this );
+    mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
 
-    mActionGoLast = new QAction( KIcon( "go-last" ), i18n( "&Jump to current Strip" ), this );
+    mActionGoLast = new QAction( KIcon( "go-last" ), i18n( "Jump to &current Strip" ), this );
     mActions.append( mActionGoLast );
     connect( mActionGoLast, SIGNAL( triggered( bool ) ), this, SLOT( slotCurrentDay() ) );
 
@@ -690,15 +690,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
 void ComicApplet::updateButtons()
 {
-    if ( mNextIdentifierSuffix.isEmpty() )
-        mShowNextButton = false;
-    else
-        mShowNextButton = true;
-
-    if ( mPreviousIdentifierSuffix.isEmpty() )
-        mShowPreviousButton = false;
-    else
-        mShowPreviousButton = true;
+    mShowNextButton = !mNextIdentifierSuffix.isEmpty();
+    mShowPreviousButton = !mPreviousIdentifierSuffix.isEmpty();
 
     if ( mNextButton && mPrevButton ) {
         mNextButton->setEnabled( mShowNextButton );
