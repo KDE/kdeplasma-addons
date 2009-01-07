@@ -212,6 +212,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     slotStorePosition();
 
     KConfigGroup cg = config();
+    mShownIdentifierSuffix = "";
     if ( mSuffixType == "Number" ) {
         mIdentifierSuffixNum = mCurrentIdentifierSuffix.toInt();
         if ( mMaxStripNum[ mComicIdentifier ] < mIdentifierSuffixNum ) {
@@ -221,8 +222,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
         temp = mFirstIdentifierSuffix.remove( mComicIdentifier + ':' );
         mFirstStripNum[ mComicIdentifier ] = temp.toInt();
-    } else if ( mSuffixType == "Date" ) {
-        mIdentifierSuffixDate = QDate::fromString( temp, "yyyy-MM-dd" );
+    } else if ( mSuffixType == "Date" && QDate::fromString( temp, "yyyy-MM-dd" ).isValid() ) {
+        mShownIdentifierSuffix = mCurrentIdentifierSuffix;
     }
 
     // strip has been loaded, so its scaling-settings should be used
@@ -440,7 +441,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             } else if ( mSuffixType == "Date" ) {
                 static KDatePicker *calendar = new KDatePicker();
                 calendar->setMinimumSize( calendar->sizeHint() );
-                calendar->setDate( mIdentifierSuffixDate );
+                calendar->setDate( QDate::fromString( mShownIdentifierSuffix, "yyyy-MM-dd" ) );
 
                 connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
                 connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
@@ -484,7 +485,7 @@ void ComicApplet::updateSize()
                           ( mShowComicTitle && ( !mStripTitle.isEmpty() || !mComicTitle.isEmpty() ) ) ) ? fmHeight : 0 );
         bool hasComicIdentifier = false;
         if ( ( ( mSuffixType == "Number" ) && ( mIdentifierSuffixNum != -1  ) ) ||
-             ( ( mSuffixType == "Date" ) && mIdentifierSuffixDate.isValid() ) ) {
+             !mShownIdentifierSuffix.isEmpty() ) {
             hasComicIdentifier = true;
         }
         int bottomArea = ( ( mShowComicUrl && !mWebsiteUrl.isEmpty() ) || ( mShowComicIdentifier && hasComicIdentifier ) ? fmHeight : 0 );
@@ -570,10 +571,6 @@ void ComicApplet::paintInterface( QPainter *p, const QStyleOptionGraphicsItem*, 
     // get the correct identifier suffix
     if ( ( mSuffixType == "Number" ) && ( mIdentifierSuffixNum != -1  ) ) {
         mShownIdentifierSuffix = "# " + QString::number( mIdentifierSuffixNum );
-    } else if ( ( mSuffixType == "Date" ) && mIdentifierSuffixDate.isValid() ) {
-        mShownIdentifierSuffix = mIdentifierSuffixDate.toString( "yyyy-MM-dd" );
-    } else {
-        mShownIdentifierSuffix = QString();
     }
 
     // create the text at bottom

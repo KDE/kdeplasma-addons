@@ -100,7 +100,6 @@ class ComicApplet : public Plasma::Applet
 
         QImage mImage;
         QDate mCurrentDay;
-        QDate mIdentifierSuffixDate;
         QUrl mWebsiteUrl;
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
