@@ -16,13 +16,19 @@
  */
 
 #include "converter.h"
+#include "unit.h"
+
 #include "length.h"
 #include "area.h"
 #include "volume.h"
 #include "temperature.h"
 #include "speed.h"
 #include "mass.h"
+
 #include <KGlobal>
+
+namespace Conversion
+{
 
 class Converter::Private
 {
@@ -68,7 +74,7 @@ Converter* Converter::self()
 
 Value Converter::convert(const Value& value, const QString& toUnit)
 {
-    UnitCategory* unit = categoryForUnit(value.unit);
+    UnitCategory* unit = categoryForUnit(value.unit());
     if (!unit) {
         return Value();
     }
@@ -100,6 +106,8 @@ UnitCategory* Converter::category(const QString& category)
 QList<UnitCategory*> Converter::categories()
 {
     return findChildren<UnitCategory*>();
+}
+
 }
 
 #include "converter.moc"

@@ -15,35 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef TEMPERATURE_H
+#define TEMPERATURE_H
+
 #include "unit.h"
+#include "value.h"
 
-Value::Value()
+class Temperature : public Conversion::UnitCategory
 {
-}
+public:
+    Temperature(QObject* parent = 0);
 
-Value::Value(const QVariant& n, const QString& u)
-: number(n)
-, unit(u)
-{
-}
+    virtual QStringList units() const;
+    virtual QString name() const;
+    virtual bool hasUnit(const QString &unit) const;
+    virtual Conversion::Value convert(const Conversion::Value& value, const QString& toUnit = QString()) const;
+};
 
-bool Value::isValid()
-{
-    return (number.isValid() && !unit.isEmpty());
-}
-
-QString Value::toString()
-{
-    return number.toString() + " " + unit;
-}
-
-UnitCategory::UnitCategory(QObject* parent)
-: QObject(parent)
-{
-}
-
-UnitCategory::~UnitCategory()
-{
-}
-
-#include "unit.moc"
+#endif

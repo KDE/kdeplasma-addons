@@ -25,29 +25,29 @@ Temperature::Temperature(QObject* parent)
     setObjectName("temperature");
 }
 
-QString Temperature::name()
+QString Temperature::name() const
 {
     return i18n("Temperature");
 }
 
-bool Temperature::hasUnit(const QString &unit)
+bool Temperature::hasUnit(const QString &unit) const
 {
     return (QString("KFC").indexOf(unit) != -1);
 }
 
-QStringList Temperature::units()
+QStringList Temperature::units() const
 {
     return QStringList() << "\xb0""C" << "\xb0""F" << "\xb0""K";
 }
 
-Value Temperature::convert(const Value& value, const QString& toUnit)
+Conversion::Value Temperature::convert(const Conversion::Value& value, const QString& toUnit) const
 {
     QString to = (toUnit.isEmpty())? "K" : toUnit;
-    double temp = value.number.toDouble();
+    double temp = value.number().toDouble();
 
-    if (value.unit.contains("C")) {
+    if (value.unit().contains("C")) {
         temp += 273.15;
-    } else if (value.unit.contains("F")){
+    } else if (value.unit().contains("F")){
         temp = ((temp - 32.0) / 1.8) + 273.15;
     }
     if (to.contains("C")) {
@@ -55,5 +55,5 @@ Value Temperature::convert(const Value& value, const QString& toUnit)
     } else if (to.contains("F")){
         temp = ((temp - 273.15) * 1.8) + 32.0;
     }
-    return Value(temp, to);
+    return Conversion::Value(temp, to);
 }

@@ -19,7 +19,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <KIcon>
-#include <converter.h>
+#include <conversion/converter.h>
 
 #define CONVERSION_CHAR '>'
 
@@ -167,13 +167,14 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
     unit2 = cmd.rest();
 
-    Value v = Converter::self()->convert(Value(value, unit1), unit2);
+    Conversion::Value v =
+            Conversion::Converter::self()->convert(Conversion::Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::ExactMatch);
         match.setIcon(KIcon("edit-copy"));
         match.setText(v.toString());
-        match.setData(v.number);
+        match.setData(v.number());
         context.addMatch(term, match);
     }
 }

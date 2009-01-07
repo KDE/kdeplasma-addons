@@ -49,12 +49,12 @@ Mass::Mass(QObject* parent)
     m_units[i18n("tons")]         = "t";
     m_units[i18n("tonne")]        = "t";
     m_units["t"]                  = 1000000.0;
-	
+
 	//I guess it's useful...
 	m_units[i18n("carat")]        = "CD";
 	m_units[i18n("carats")]       = "CD";
 	m_units["CD"]                 = 0.2;
-	
+
     //http://en.wikipedia.org/wiki/Pound_(mass)#International_pound
     m_units[i18n("pound")]        = "lb";
     m_units[i18n("pounds")]       = "lb";
@@ -73,7 +73,7 @@ Mass::Mass(QObject* parent)
     m_units["kN"]                 = 1000000.0/9.81;
 }
 
-QString Mass::name()
+QString Mass::name() const
 {
     return i18n("Mass");
 }

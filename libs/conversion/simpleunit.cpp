@@ -24,7 +24,7 @@ SimpleUnit::SimpleUnit(QObject* parent)
 {
 }
 
-QStringList SimpleUnit::units()
+QStringList SimpleUnit::units() const
 {
     QStringList result;
 
@@ -37,19 +37,19 @@ QStringList SimpleUnit::units()
     return result;
 }
 
-bool SimpleUnit::hasUnit(const QString &unit)
+bool SimpleUnit::hasUnit(const QString &unit) const
 {
     return m_units.contains(unit);
 }
 
-Value SimpleUnit::convert(const Value& value, const QString& to)
+Conversion::Value SimpleUnit::convert(const Conversion::Value& value, const QString& to) const
 {
     QString unit;
-    QVariant data = value.number.toDouble() * toDouble(value.unit, &unit) / toDouble(to, &unit);
-    return Value(data, unit);
+    QVariant data = value.number().toDouble() * toDouble(value.unit(), &unit) / toDouble(to, &unit);
+    return Conversion::Value(data, unit);
 }
 
-double SimpleUnit::toDouble(const QString &unit, QString *unitString)
+double SimpleUnit::toDouble(const QString &unit, QString *unitString) const
 {
     if (unit.isEmpty()) {
         *unitString = m_default;

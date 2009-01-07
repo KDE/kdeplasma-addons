@@ -15,49 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UNITCATEGORY_H
-#define UNITCATEGORY_H
+#ifndef CONVERSION_UNITCATEGORY_H
+#define CONVERSION_UNITCATEGORY_H
 
+#include "value.h"
 #include <QString>
 #include <QVariant>
 #include <QStringList>
-#include "plasmaconverter_export.h"
+#include "plasmaconversion_export.h"
 
-class PLASMACONVERTER_EXPORT Value
+namespace Conversion
 {
-public:
-    Value();
-    Value(const QVariant& n, const QString& u);
 
-    /**
-     * Check if value is valid.
-     *
-     * @return True if value is valid
-     **/
-    bool isValid();
-
-    /**
-     * Convert value to a string
-     *
-     * @return value as string
-     **/
-    QString toString();
-
-    /**
-     * Number part of the value
-     **/
-    QVariant number;
-
-    /**
-     * Unit part of the value
-     **/
-    QString unit;
-};
-
-class PLASMACONVERTER_EXPORT UnitCategory : public QObject
+class PLASMACONVERSION_EXPORT UnitCategory : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name)
+    Q_PROPERTY(QStringList units READ units)
 public:
     explicit UnitCategory(QObject* parent = 0);
     virtual ~UnitCategory();
@@ -67,21 +41,21 @@ public:
      *
      * @return Translated name for category.
      **/
-    virtual QString name() = 0;
+    virtual QString name() const = 0;
 
     /**
      * Check if unit category has a unit.
      *
      * @return True if unit is found
      **/
-    virtual bool hasUnit(const QString &unit) = 0;
+    virtual bool hasUnit(const QString &unit) const = 0;
 
     /**
      * Return units in this category.
      *
      * @return list of units.
      **/
-    virtual QStringList units() = 0;
+    virtual QStringList units() const = 0;
 
     /**
      * Convert value to another unit.
@@ -90,7 +64,9 @@ public:
      * @param toUnit unit to convert to. If empty default unit is used.
      * @return converted value
      **/
-    virtual Value convert(const Value& value, const QString& toUnit = QString()) = 0;
+    virtual Value convert(const Value& value, const QString& toUnit = QString()) const = 0;
 };
+
+} // Conversion namespace
 
 #endif

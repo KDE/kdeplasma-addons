@@ -15,20 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TEMPERATURE_H
-#define TEMPERATURE_H
+#ifndef VOLUME_H
+#define VOLUME_H
 
-#include "unit.h"
+#include "simpleunit.h"
 
-class Temperature : public UnitCategory
+class Volume : public SimpleUnit
 {
 public:
-    Temperature(QObject* parent = 0);
+    Volume(QObject* parent = 0);
+    virtual bool hasUnit(const QString &unit) const;
+    virtual QString name() const;
 
-    virtual QStringList units();
-    virtual QString name();
-    virtual bool hasUnit(const QString &unit);
-    virtual Value convert(const Value& value, const QString& toUnit = QString());
+protected:
+    QString replace(const QString &unit) const;
+    virtual double toDouble(const QString &unit, QString *unitString) const;
 };
 
 #endif

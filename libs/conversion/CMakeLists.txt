@@ -1,0 +1,27 @@
+project(conversion)
+
+set(conversion_LIB_SRCS
+    converter.cpp
+    value.cpp
+    unit.cpp
+    simpleunit.cpp
+    length.cpp
+    area.cpp
+    volume.cpp
+    temperature.cpp
+    speed.cpp
+    mass.cpp
+)
+
+set(conversion_HEADERS
+    converter.h
+    value.h
+    unit.h
+    plasmaconversion_export.h
+)
+
+kde4_add_library(conversion SHARED ${conversion_LIB_SRCS})
+target_link_libraries(conversion ${KDE4_KDECORE_LIBS})
+set_target_properties(conversion PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+install(TARGETS conversion ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES ${conversion_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/conversion COMPONENT Devel)

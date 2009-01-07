@@ -99,7 +99,7 @@ Length::Length(QObject* parent)
     m_units[i18n("astronomical units")] = 149597870691.0;
 }
 
-QString Length::name()
+QString Length::name() const
 {
     return i18n("Length");
 }

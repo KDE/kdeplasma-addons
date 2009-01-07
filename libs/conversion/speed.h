@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,26 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SIMPLEUNIT_H
-#define SIMPLEUNIT_H
+#ifndef SPEED_H
+#define SPEED_H
 
-#include "unit.h"
-#include <QHash>
+#include "simpleunit.h"
 
-class SimpleUnit : public UnitCategory
+class Speed : public SimpleUnit
 {
 public:
-    SimpleUnit(QObject* parent = 0);
-
-    virtual QStringList units();
-    virtual bool hasUnit(const QString &unit);
-    virtual Value convert(const Value& value, const QString& to);
-
-protected:
-    QHash<QString, QVariant> m_units;
-    QString m_default;
-
-    virtual double toDouble(const QString &unit, QString *unitString);
+    Speed(QObject* parent = 0);
+    virtual QString name() const;
 };
 
 #endif

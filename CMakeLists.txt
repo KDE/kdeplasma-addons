@@ -14,11 +14,12 @@ macro_optional_find_package(OpenGL)
 macro_log_feature(OPENGL_FOUND "OpenGL" "API for developing portable, interactive 2D and 3D graphics applications" "http://mesa3d.sourceforge.net" FALSE "" "STRONGLY RECOMMENDED: The 3D hardware acceleration available through the OpenGL API is used in applications ranging from graphics and modellers to screensavers and video players.")
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories (${KDE4_INCLUDES} 
+include_directories (${KDE4_INCLUDES}
                      ${KDE4WORKSPACE_INCLUDE_DIR}
-                     ${KDEPIMLIBS_INCLUDE_DIR} )
+                     ${KDEPIMLIBS_INCLUDE_DIR}
+                     ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
-
+add_subdirectory(libs)
 add_subdirectory(applets)
 add_subdirectory(dataengines)
 add_subdirectory(runners)

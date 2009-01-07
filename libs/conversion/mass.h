@@ -25,7 +25,7 @@ class Mass : public SimpleUnit
 {
 public:
     Mass(QObject* parent = 0);
-    virtual QString name();
+    virtual QString name() const;
 };
 
 #endif

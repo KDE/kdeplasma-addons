@@ -58,7 +58,7 @@ Speed::Speed(QObject* parent)
     m_units["c"]                             = 299792458.0;
 }
 
-QString Speed::name()
+QString Speed::name() const
 {
     return i18n("Speed");
 }

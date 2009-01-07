@@ -89,17 +89,17 @@ Area::Area(QObject* parent)
     m_units[i18n("square miles")]         = 2589988.110336;
 }
 
-QString Area::name()
+QString Area::name() const
 {
     return i18n("Area");
 }
 
-bool Area::hasUnit(const QString &unit)
+bool Area::hasUnit(const QString &unit) const
 {
     return SimpleUnit::hasUnit(replace(unit));
 }
 
-QString Area::replace(const QString &unit)
+QString Area::replace(const QString &unit) const
 {
     QString result = unit;
     result.replace("/-2", "\xb2");
@@ -108,7 +108,7 @@ QString Area::replace(const QString &unit)
     return result;
 }
 
-double Area::toDouble(const QString &unit, QString *unitString)
+double Area::toDouble(const QString &unit, QString *unitString) const
 {
     return SimpleUnit::toDouble(replace(unit), unitString);
 }

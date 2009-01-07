@@ -15,21 +15,56 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef AREA_H
-#define AREA_H
+#include "value.h"
 
-#include "simpleunit.h"
+namespace Conversion
+{
 
-class Area : public SimpleUnit
+class Value::Private
 {
 public:
-    Area(QObject* parent = 0);
-    virtual bool hasUnit(const QString &unit);
-    virtual QString name();
+    Private(const QVariant& n = QVariant(), const QString& u = QString())
+    : number(n)
+    , unit(u)
+    {
+    };
 
-protected:
-    QString replace(const QString &unit);
-    virtual double toDouble(const QString &unit, QString *unitString);
+    ~Private()
+    {
+    };
+
+    QVariant number;
+    QString unit;
 };
 
-#endif
+Value::Value()
+: d(new Value::Private())
+{
+}
+
+Value::Value(const QVariant& n, const QString& u)
+: d(new Value::Private(n, u))
+{
+}
+
+bool Value::isValid() const
+{
+    return (d->number.isValid() && !d->unit.isEmpty());
+}
+
+QString Value::toString() const
+{
+    return d->number.toString() + " " + d->unit;
+}
+
+QVariant Value::number() const
+{
+    return d->number;
+}
+
+QString Value::unit() const
+{
+    return d->unit;
+}
+
+}

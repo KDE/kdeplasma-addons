@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 Petri Damstén <damu@iki.fi>
+ * Copyright (C) 2007,2008 Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,16 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SPEED_H
-#define SPEED_H
+#include "unit.h"
 
-#include "simpleunit.h"
-
-class Speed : public SimpleUnit
+namespace Conversion
 {
-public:
-    Speed(QObject* parent = 0);
-    virtual QString name();
-};
 
-#endif
+UnitCategory::UnitCategory(QObject* parent)
+: QObject(parent)
+{
+}
+
+UnitCategory::~UnitCategory()
+{
+}
+
+}
+
+#include "unit.moc"

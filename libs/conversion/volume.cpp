@@ -131,17 +131,17 @@ Volume::Volume(QObject* parent)
     m_units[i18n("pints (imperial)")]     = 0.00056826125;
 }
 
-QString Volume::name()
+QString Volume::name() const
 {
     return i18n("Volume");
 }
 
-bool Volume::hasUnit(const QString &unit)
+bool Volume::hasUnit(const QString &unit) const
 {
     return SimpleUnit::hasUnit(replace(unit));
 }
 
-QString Volume::replace(const QString &unit)
+QString Volume::replace(const QString &unit) const
 {
     QString result = unit;
     result.replace("/-3", "\xb3");
@@ -150,7 +150,7 @@ QString Volume::replace(const QString &unit)
     return result;
 }
 
-double Volume::toDouble(const QString &unit, QString *unitString)
+double Volume::toDouble(const QString &unit, QString *unitString) const
 {
     return SimpleUnit::toDouble(replace(unit), unitString);
 }

@@ -15,21 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VOLUME_H
-#define VOLUME_H
+#ifndef SIMPLEUNIT_H
+#define SIMPLEUNIT_H
 
-#include "simpleunit.h"
+#include "value.h"
+#include "unit.h"
+#include <QHash>
 
-class Volume : public SimpleUnit
+class SimpleUnit : public Conversion::UnitCategory
 {
 public:
-    Volume(QObject* parent = 0);
-    virtual bool hasUnit(const QString &unit);
-    virtual QString name();
+    SimpleUnit(QObject* parent = 0);
+
+    virtual QStringList units() const;
+    virtual bool hasUnit(const QString &unit) const;
+    virtual Conversion::Value convert(const Conversion::Value& value, const QString& to) const;
 
 protected:
-    QString replace(const QString &unit);
-    virtual double toDouble(const QString &unit, QString *unitString);
+    QHash<QString, QVariant> m_units;
+    QString m_default;
+
+    virtual double toDouble(const QString &unit, QString *unitString) const;
 };
 
 #endif

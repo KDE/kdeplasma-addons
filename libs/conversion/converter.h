@@ -15,14 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CONVERTER_H
-#define CONVERTER_H
+#ifndef CONVERSION_CONVERTER_H
+#define CONVERSION_CONVERTER_H
 
-#include "unit.h"
-#include "plasmaconverter_export.h"
+#include "value.h"
+#include "plasmaconversion_export.h"
 #include <QtCore/QVariant>
 
-class PLASMACONVERTER_EXPORT Converter : public QObject
+namespace Conversion
+{
+
+class UnitCategory;
+
+class PLASMACONVERSION_EXPORT Converter : public QObject
 {
     Q_OBJECT
 public:
@@ -72,5 +77,7 @@ private:
     class Private;
     Private* const d;
 };
+
+} // Conversion namespace
 
 #endif
