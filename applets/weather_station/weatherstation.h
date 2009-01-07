@@ -1,5 +1,5 @@
 /*
- * Copyright 2008  Petri Damsten <damu@iki.fi>
+ * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -26,6 +26,7 @@
 class LCD;
 class QGraphicsLinearLayout;
 class WeatherConfig;
+namespace Conversion { class Value; }
 
 class WeatherStation : public Plasma::PopupApplet
 {
@@ -46,18 +47,23 @@ class WeatherStation : public Plasma::PopupApplet
         void connectToEngine();
         void setLCDIcon();
 
-        void setWind(const QString& speed, int unit, const QString& direction);
-        void setPressure(const QString& pressure, int unit, const QString& tendency);
-        void setTemperature(const QString& temperature, int unit);
+        void setWind(const QString& speed, const QString& unit, const QString& direction);
+        void setPressure(const QString& pressure, const QString& unit, const QString& tendency);
+        void setTemperature(const QString& temperature, const QString& unit);
         void setHumidity(QString humidity);
 
-        QString getUnitString(int unit);
+        QString fitValue(const Conversion::Value& value, int digits);
 
     private:
         LCD *m_lcd;
         LCD *m_lcdPanel;
         WeatherConfig *m_weatherConfig;
-        ConfigData c;
+        Plasma::DataEngine *m_weatherEngine;
+        QString m_temperatureUnit;
+        QString m_speedUnit;
+        QString m_pressureUnit;
+        int m_updateInterval;
+        QString m_source;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)

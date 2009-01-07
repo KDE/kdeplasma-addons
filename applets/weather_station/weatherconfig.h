@@ -1,91 +1,94 @@
-/***************************************************************************
- *   Copyright (C) 2007-2008 by Shawn Starr <shawn.starr@rogers.com>       *
- *                      2008 by Petri Damsten <damu@iki.fi>                *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
- ***************************************************************************/
+/*
+ * Copyright 2009  Petri Damstén <damu@iki.fi>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef WEATHERCONFIG_HEADER
 #define WEATHERCONFIG_HEADER
 
 #include <Plasma/DataEngine>
+#include <KDialog>
 #include <QWidget>
-#include <QStandardItemModel>
-#include "ui_weatherConfig.h"
-#include "ui_weatherAddPlace.h"
+#include "ui_weatherconfig.h"
+#include "ui_weatherconfigsearch.h"
+#include "ui_weatherconfiglist.h"
 
-class KDialog;
-
-class ConfigData
+class WeatherConfigList : public KDialog, public Ui::WeatherConfigList
 {
-    public:
-        enum WindFormat { Kilometers = 0, MetersPerSecond, Miles, Knots, Beaufort };
+    Q_OBJECT
+public:
+    WeatherConfigList(QWidget *parent = 0);
+    virtual ~WeatherConfigList();
 
-        ConfigData() : weatherUpdateTime(30), weatherWindFormat(0), weatherEngine(0) {};
+    void setList(const QStringList& list);
+    QString selected();
 
-        struct PlaceInfo {
-            QString place;
-            QString ion;
-        };
-        QMap<QString, PlaceInfo> placeList;
-        QMap<QString, QString> extraData;
-        Plasma::DataEngine::Data ionPlugins;
-        int weatherUpdateTime;
-        int weatherWindFormat;
-        Plasma::DataEngine *weatherEngine;
+protected slots:
+    void okPressed();
 };
 
-class WeatherConfig : public QWidget, public Ui::weatherConfig
+class WeatherConfigSearch : public KDialog, public Ui::WeatherConfigSearch
+{
+    Q_OBJECT
+public:
+    WeatherConfigSearch(QWidget *parent = 0);
+    virtual ~WeatherConfigSearch();
+
+    void setDataEngine(Plasma::DataEngine* dataengine);
+    void setSource(const QString& source);
+    QString source();
+    QString nameForPlugin(const QString& plugin);
+
+public slots:
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+
+protected slots:
+    void searchPressed();
+
+private:
+    Plasma::DataEngine* m_dataengine;
+    WeatherConfigList m_listDlg;
+    QString m_source;
+};
+
+class WeatherConfig : public QWidget, public Ui::WeatherConfig
 {
     Q_OBJECT
 public:
     WeatherConfig(QWidget *parent = 0);
     virtual ~WeatherConfig() {};
 
-    void setData(const ConfigData& data);
-    void getData(ConfigData* data);
+    void setDataEngine(Plasma::DataEngine* dataengine);
+    void setSource(const QString& source);
+    void setUpdateInterval(int interval);
+    void setTemperatureUnit(const QString& unit);
+    void setPressureUnit(const QString& unit);
+    void setSpeedUnit(const QString& unit);
 
-public slots:
-    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-    void pluginChanged(int idx);
-
-protected:
-    void validate(const QString& source, const QVariant& data);
-    void showAddPlaceDialog(const QStringList& tokens);
-    
+    QString source();
+    int updateInterval();
+    QString temperatureUnit();
+    QString pressureUnit();
+    QString speedUnit();
 
 protected slots:
-    void removePlace();
-    void placeEditChanged(const QString& text);
-    void getValidation();
-    void activeTreeItem(const QModelIndex& index);
-    void addPlace();
-    void cancelAddClicked();
-    void selectPlace();
+    void changePressed();
 
 private:
-    QStandardItemModel *m_cmodel;
-    QStandardItemModel *m_amodel;
-    QList<QStandardItem *> m_items;
-    QStandardItem *m_selectedItem;
-    QString m_activeValidation;
-    KDialog *m_addDialog;
-    Ui::weatherAddPlace aui;
-
-    ConfigData c;
+    WeatherConfigSearch m_searchDlg;
+    QString m_source;
 };
 
 #endif // WEATHERCONFIG_HEADER

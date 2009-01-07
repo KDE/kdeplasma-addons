@@ -1,5 +1,5 @@
 /*
- * Copyright 2008  Petri Damsten <damu@iki.fi>
+ * Copyright 2008-2009  Petri Damstén <damu@iki.fi>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,6 +22,8 @@
 #include <KConfigGroup>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
+#include <conversion/converter.h>
+#include <math.h>
 #include "lcd.h"
 #include "weatherconfig.h"
 
@@ -50,47 +52,32 @@ void WeatherStation::init()
     //m_lcd->setItemOn("under_construction");
 
     KConfigGroup cfg = config();
+
     if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
-        c.weatherWindFormat = cfg.readEntry("windFormat", (int)ConfigData::Kilometers);
+        m_temperatureUnit = cfg.readEntry("temperatureUnit", "C");
+        m_speedUnit = cfg.readEntry("speedUnit", "ms");
+        m_pressureUnit = cfg.readEntry("pressureUnit", "hPa");
     } else {
-        c.weatherWindFormat = cfg.readEntry("windFormat", (int)ConfigData::Miles);
+        m_temperatureUnit = cfg.readEntry("temperatureUnit", "F");
+        m_speedUnit = cfg.readEntry("speedUnit", "mph");
+        m_pressureUnit = cfg.readEntry("pressureUnit", "mb");
     }
-    c.weatherUpdateTime = cfg.readEntry("updateWeather", 30);
-    c.weatherEngine = dataEngine("weather");
-    c.ionPlugins = c.weatherEngine->query("ions");
-    ConfigData::PlaceInfo placeInfo;
-    foreach(const QString& place, cfg.groupList()) {
-        KConfigGroup placeConfig(&cfg, place);
-        placeInfo.place = place;
-        placeInfo.ion = placeConfig.readEntry("ion");
-        c.extraData[place] = placeConfig.readEntry("data");
-        c.placeList[place] = placeInfo;
-        //kDebug() << place << placeInfo.ion << placeConfig.readEntry("data");
-    }
+    m_updateInterval = cfg.readEntry("updateWeather", 30);
+    m_source = cfg.readEntry("source", "");
+    m_weatherEngine = dataEngine("weather");
     setLCDIcon();
     connectToEngine();
 }
 
 void WeatherStation::connectToEngine()
 {
-    if (c.placeList.isEmpty()) {
+    if (m_source.isEmpty()) {
         setConfigurationRequired(true);
     } else {
         m_lcd->setNumber("temperature", "Load");
         m_lcd->setNumber("humidity", "ing");
-
-        // we support only one place
-        const ConfigData::PlaceInfo& info = c.placeList[c.placeList.keys()[0]];
-        //kDebug() << c.placeList.keys();
-        QString source;
-        if (c.extraData[info.place].isEmpty()) {
-            source = QString("%1|weather|%2").arg(info.ion).arg(info.place);
-        } else {
-            source = QString("%1|weather|%2|%3")
-                    .arg(info.ion).arg(info.place).arg(c.extraData[info.place]);
-        }
-        //kDebug() << source;
-        c.weatherEngine->connectSource(source, this, c.weatherUpdateTime * 60 * 1000);
+        //kDebug() << m_source;
+        m_weatherEngine->connectSource(m_source, this, m_updateInterval * 60 * 1000);
     }
 }
 
@@ -99,23 +86,15 @@ QGraphicsWidget* WeatherStation::graphicsWidget()
     return m_lcd;
 }
 
-void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
-{
-    //kDebug() << data;
-    Q_UNUSED(source);
-    setTemperature(data["Temperature"].toString(), data["Temperature Unit"].toInt());
-    setPressure(data["Pressure"].toString(), data["Pressure Unit"].toInt(),
-                data["Pressure Tendency"].toString());
-    setHumidity(data["Humidity"].toString());
-    setWind(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt(),
-            data["Wind Direction"].toString());
-    m_lcd->setLabel(0, data["Credit"].toString());
-}
-
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
 {
     m_weatherConfig = new WeatherConfig(parent);
-    m_weatherConfig->setData(c);
+    m_weatherConfig->setDataEngine(m_weatherEngine);
+    m_weatherConfig->setSource(m_source);
+    m_weatherConfig->setUpdateInterval(m_updateInterval);
+    m_weatherConfig->setTemperatureUnit(m_temperatureUnit);
+    m_weatherConfig->setSpeedUnit(m_speedUnit);
+    m_weatherConfig->setPressureUnit(m_pressureUnit);
     parent->addPage(m_weatherConfig, i18n("Weather"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -124,29 +103,17 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
 void WeatherStation::configAccepted()
 {
     setConfigurationRequired(false);
-    foreach(const ConfigData::PlaceInfo& info, c.placeList) {
-        c.weatherEngine->disconnectSource(
-                QString("%1|weather|%2").arg(info.ion).arg(info.place), this);
+    if (!m_source.isEmpty()) {
+        m_weatherEngine->disconnectSource(m_source, this);
     }
 
     KConfigGroup cfg = config();
+    cfg.writeEntry("temperatureUnit", m_temperatureUnit = m_weatherConfig->temperatureUnit());
+    cfg.writeEntry("speedUnit", m_speedUnit = m_weatherConfig->speedUnit());
+    cfg.writeEntry("pressureUnit", m_pressureUnit = m_weatherConfig->pressureUnit());
+    cfg.writeEntry("updateInterval", m_updateInterval = m_weatherConfig->updateInterval());
+    cfg.writeEntry("source", m_source = m_weatherConfig->source());
 
-    foreach(const QString& place, cfg.groupList()) {
-        KConfigGroup placeConfig(&cfg, place);
-        placeConfig.deleteGroup();
-    }
-
-    m_weatherConfig->getData(&c);
-    cfg.writeEntry("updateWeather", c.weatherUpdateTime);
-    cfg.writeEntry("windFormat", c.weatherWindFormat);
-
-    foreach(const ConfigData::PlaceInfo& info, c.placeList) {
-        KConfigGroup placeConfig(&cfg, info.place);
-        placeConfig.writeEntry("ion", info.ion);
-        if (!c.extraData[info.place].isEmpty()) {
-            placeConfig.writeEntry("data", c.extraData[info.place]);
-        }
-    }
     emit configNeedsSaving();
     connectToEngine();
 }
@@ -159,33 +126,54 @@ void WeatherStation::setLCDIcon()
     setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
-void WeatherStation::setPressure(const QString& pressure, int unit,
+void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
+{
+    //kDebug() << data << source;
+    Q_UNUSED(source);
+    if (data.isEmpty()) {
+        return;
+    }
+    setTemperature(data["Temperature"].toString(),
+                   WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
+    setPressure(data["Pressure"].toString(),
+                WeatherUtils::getUnitString(data["Pressure Unit"].toInt()),
+                data["Pressure Tendency"].toString());
+    setHumidity(data["Humidity"].toString());
+    setWind(data["Wind Speed"].toString(),
+            WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true),
+            data["Wind Direction"].toString());
+    m_lcd->setLabel(0, data["Credit"].toString());
+}
+
+QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
+{
+    double v = value.number().toDouble();
+    int mainDigits = (int)floor(log(fabs(v))) + 1;
+    int precision = 0;
+
+    if (mainDigits < 3 && mainDigits + (v < 0)?1:0 + 1 < digits) {
+        precision = 1;
+    }
+    return QString::number(v, 'f', precision);
+}
+
+void WeatherStation::setPressure(const QString& pressure, const QString& unit,
                                  const QString& tendency)
 {
     // TODO Use "Condition Icon" in 4.3 for this
-    qreal p = pressure.toDouble();
     QStringList current;
+    qreal p = Conversion::Converter::self()->convert(
+            Conversion::Value(pressure, unit), "kPa").number().toDouble();
+    qreal t;
 
-    // pressure
-    if (unit == WeatherUtils::Hectopascals) {
-        unit = WeatherUtils::Millibars;
-    }
-    if (unit != WeatherUtils::Kilopascals) {
-        p = WeatherUtils::convert(p, unit, WeatherUtils::Kilopascals);
-    }
-
-    // tendency
-    qreal t = tendency.toDouble();
-    if (t != 0.0) {
-        if (unit != WeatherUtils::Kilopascals) {
-            t = WeatherUtils::convert(t, unit, WeatherUtils::Kilopascals);
-        }
-    } else if (tendency.toLower() == "rising") {
+    if (tendency.toLower() == "rising") {
         t = 0.75;
     } else if (tendency.toLower() == "falling") {
         t = -0.75;
+    } else {
+        t = Conversion::Converter::self()->convert(
+                Conversion::Value(tendency, unit), "kPa").number().toDouble();
     }
-    //kDebug() << pressure << p << tendency << t << unit <<  WeatherUtils::getUnitString(unit, true);
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
     if (p > 103.0) {
@@ -197,22 +185,22 @@ void WeatherStation::setPressure(const QString& pressure, int unit,
     } else {
         current << "rain" << "heavy_rain";
     }
+
+    QString s = fitValue(Conversion::Converter::self()->convert(
+            Conversion::Value(pressure, unit), m_pressureUnit), 5);
     m_lcd->setGroup("weather", current);
-    m_lcd->setNumber("pressure", pressure);
-    m_lcd->setGroup("pressure_unit", QStringList() << WeatherUtils::getUnitString(unit, true));
+    m_lcd->setNumber("pressure", s);
+    m_lcd->setGroup("pressure_unit", QStringList() << m_pressureUnit);
 }
 
-void WeatherStation::setTemperature(const QString& temperature, int unit)
+void WeatherStation::setTemperature(const QString& temperature, const QString& unit)
 {
-    m_lcd->setGroup("temp_unit", QStringList() << WeatherUtils::getUnitString(unit, true));
-    m_lcd->setNumber("temperature", temperature);
-
-    QString temp(temperature);
-    m_lcdPanel->setGroup("temp_unit", QStringList() << WeatherUtils::getUnitString(unit, true));
-    if (temperature.length() > 3 && temperature[temperature.length() - 2] == '.') {
-        temp = temperature.mid(0, temperature.length() - 2);
-    }
-    m_lcdPanel->setNumber("temperature", temp);
+    Conversion::Value v = Conversion::Converter::self()->convert(
+            Conversion::Value(temperature, unit), m_temperatureUnit);
+    m_lcd->setGroup("temp_unit", QStringList() << m_temperatureUnit);
+    m_lcdPanel->setGroup("temp_unit", QStringList() << m_temperatureUnit);
+    m_lcd->setNumber("temperature", fitValue(v , 4));
+    m_lcdPanel->setNumber("temperature", fitValue(v , 3));
     setLCDIcon();
 }
 
@@ -222,62 +210,19 @@ void WeatherStation::setHumidity(QString humidity)
     m_lcd->setNumber("humidity", humidity);
 }
 
-void WeatherStation::setWind(const QString& speed, int fromUnit, const QString& dir)
+void WeatherStation::setWind(const QString& speed, const QString& unit, const QString& dir)
 {
-    QString direction(dir);
-    bool dirInDegrees = false;
-    int dirDegrees = direction.toInt(&dirInDegrees);
+    QString s = fitValue(Conversion::Converter::self()->convert(
+            Conversion::Value(speed, unit), m_speedUnit), 3);
 
-    if (direction == "N/A") {
+    if (dir == "N/A") {
         m_lcd->setGroup("wind", m_lcd->groupItems("wind"));
-    } else if(dirInDegrees) {
-        direction = WeatherUtils::degreesToCardinal(dirDegrees);
-        if(!direction.isEmpty()) {
-            m_lcd->setGroup("wind", QStringList() << direction);
-        }
     } else {
-        m_lcd->setGroup("wind", QStringList() << direction);
+        m_lcd->setGroup("wind", QStringList() << dir);
     }
 
-    int toUnit;
-    int stringUnit;
-    switch (c.weatherWindFormat) {
-        case ConfigData::Kilometers:
-            toUnit = WeatherUtils::Kilometers;
-            stringUnit = WeatherUtils::KilometersAnHour;
-            break;
-        case ConfigData::Miles:
-            toUnit = WeatherUtils::Miles;
-            stringUnit = WeatherUtils::MilesAnHour;
-            break;
-        case ConfigData::Knots:
-            stringUnit = toUnit = WeatherUtils::Knots;
-            break;
-        case ConfigData::Beaufort:
-            stringUnit = toUnit = WeatherUtils::Beaufort;
-            break;
-        case ConfigData::MetersPerSecond:
-        default:
-            stringUnit = toUnit = WeatherUtils::MetersPerSecond;
-            break;
-    }
-    if (fromUnit == WeatherUtils::KilometersAnHour) {
-        fromUnit = WeatherUtils::Kilometers;
-    } else if (fromUnit == WeatherUtils::MilesAnHour) {
-        fromUnit = WeatherUtils::Miles;
-    }
-
-    double windSpeed;
-    if(fromUnit != toUnit)
-        windSpeed = WeatherUtils::convert(speed.toDouble(), fromUnit, toUnit);
-    else
-        windSpeed = speed.toDouble();
-
-    QString unit(WeatherUtils::getUnitString(stringUnit, true));
-    //kDebug() << speed << windSpeed << fromUnit << toUnit << dir << direction
-    //         << QString::number(windSpeed, 'f', 1) << unit;
-    m_lcd->setNumber("wind_speed", QString::number(windSpeed, 'f', 1));
-    m_lcd->setGroup("wind_unit", QStringList() << unit);
+    m_lcd->setNumber("wind_speed", s);
+    m_lcd->setGroup("wind_unit", QStringList() << m_speedUnit);
 }
 
 #include "weatherstation.moc"

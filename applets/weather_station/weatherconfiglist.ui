@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>weatherAddPlace</class>
- <widget class="QWidget" name="weatherAddPlace" >
+ <class>WeatherConfigList</class>
+ <widget class="QWidget" name="WeatherConfigList" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -20,33 +20,33 @@
   </property>
   <layout class="QVBoxLayout" >
    <item>
-    <widget class="QLabel" name="label" >
+    <widget class="QLabel" name="listLabel" >
      <property name="text" >
-      <string>Found places</string>
+      <string>&amp;Found multiple places:</string>
+     </property>
+     <property name="buddy" >
+      <cstring>list</cstring>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QTreeView" name="foundPlacesTreeView" >
+    <widget class="QListWidget" name="list" >
      <property name="editTriggers" >
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <property name="alternatingRowColors" >
       <bool>true</bool>
      </property>
-     <property name="selectionMode" >
-      <enum>QAbstractItemView::MultiSelection</enum>
-     </property>
-     <property name="rootIsDecorated" >
-      <bool>false</bool>
-     </property>
-     <property name="itemsExpandable" >
-      <bool>false</bool>
-     </property>
      <property name="sortingEnabled" >
       <bool>true</bool>
      </property>
-     <property name="animated" >
+     <property name="rootIsDecorated" stdset="0" >
+      <bool>false</bool>
+     </property>
+     <property name="itemsExpandable" stdset="0" >
+      <bool>false</bool>
+     </property>
+     <property name="animated" stdset="0" >
       <bool>true</bool>
      </property>
     </widget>
