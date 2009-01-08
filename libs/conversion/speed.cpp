@@ -17,7 +17,14 @@
  */
 
 #include "speed.h"
+#include <math.h>
 #include <KLocale>
+
+class Beaufort : public Complex
+{
+    double toDefault(double value) const { return 0.836 * pow(value, 3.0 / 2.0); };
+    double fromDefault(double value) const { return pow(value / 0.836, 2.0 / 3.0); };
+};
 
 Speed::Speed(QObject* parent)
 : SimpleUnit(parent)
@@ -56,6 +63,10 @@ Speed::Speed(QObject* parent)
 
     m_units[i18n("speed of light")]          = "c";
     m_units["c"]                             = 299792458.0;
+
+    // http://en.wikipedia.org/wiki/Beaufort_scale
+    m_units[i18n("beaufort")]                = "bft";
+    m_units["bft"]                           = QVariant::fromValue(static_cast<Complex*>(new Beaufort()));
 }
 
 QString Speed::name() const
