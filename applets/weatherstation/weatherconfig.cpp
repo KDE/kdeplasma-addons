@@ -174,6 +174,7 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     speedComboBox->addItem(i18n("Kilometer per Hour km/h"), "kmh");
     speedComboBox->addItem(i18n("Miles per Hour mph"), "mph");
     speedComboBox->addItem(i18n("Knots kt"), "kt");
+    speedComboBox->addItem(i18n("Beaufort scale bft"), "bft");
     connect(changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
 }
 
