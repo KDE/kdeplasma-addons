@@ -29,7 +29,7 @@ Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
 TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parameters, QObject *parent)
     : Plasma::ServiceJob(source->account(), "update", parameters, parent),
-      m_url("http://twitter.com/statuses/update.xml")
+      m_url(source->serviceBaseUrl(), "statuses/update.xml")
 {
     m_url.addQueryItem("status", parameters.value("status").toString());
     m_url.addQueryItem("source", "kdetwitter");
@@ -75,21 +75,29 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
     : Plasma::DataContainer(parent),
       m_job(0)
 {
+    //who should be something like user@twitter.com, if there isn't any @, twitter.com will be the default
+    QStringList account = who.split("@");
+    if (account.count() == 2){
+        m_serviceBaseUrl = KUrl(account.at(1));
+    }else{
+        m_serviceBaseUrl = KUrl("http://twitter.com/");
+    }
+
     // set up the url
     switch (requestType) {
     case Profile:
-        m_url = KUrl(QString("http://twitter.com/users/show/%1.xml").arg(who));
+        m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(account.at(0)));
         break;
     case TimelineWithFriends:
-        m_url = KUrl("http://twitter.com/statuses/friends_timeline.xml");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/friends_timeline.xml");
         break;
     case Timeline:
     default:
-        m_url = KUrl("http://twitter.com/statuses/user_timeline.xml");
+        m_url = KUrl(m_serviceBaseUrl, "statuses/user_timeline.xml");
         break;
     }
 
-    m_url.setUser(who);
+    m_url.setUser(account.at(0));
     // .. and now actually get the data
     update();
 }
@@ -117,6 +125,11 @@ QString TimelineSource::password() const
 QString TimelineSource::account() const
 {
     return m_url.user();
+}
+
+KUrl TimelineSource::serviceBaseUrl() const
+{
+    return m_serviceBaseUrl;
 }
 
 void TimelineSource::update()

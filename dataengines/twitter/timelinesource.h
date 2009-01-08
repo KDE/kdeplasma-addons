@@ -87,6 +87,7 @@ public:
     void setPassword(const QString &password);
     QString account() const;
     QString password() const;
+    KUrl serviceBaseUrl() const;
 
     Plasma::Service *createService();
 
@@ -102,6 +103,7 @@ private slots:
 
 private:
     KUrl m_url;
+    KUrl m_serviceBaseUrl;
     QByteArray m_xml;
     QString m_cdata;
     Plasma::DataEngine::Data m_tempData;
