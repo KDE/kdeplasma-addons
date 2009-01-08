@@ -12,6 +12,7 @@ set(conversion_LIB_SRCS
     speed.cpp
     mass.cpp
     pressure.cpp
+    energy.cpp
 )
 
 set(conversion_HEADERS

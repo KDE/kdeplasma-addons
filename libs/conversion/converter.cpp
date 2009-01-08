@@ -25,6 +25,7 @@
 #include "speed.h"
 #include "mass.h"
 #include "pressure.h"
+#include "energy.h"
 
 #include <KGlobal>
 
@@ -62,6 +63,7 @@ Converter::Converter(QObject* parent)
     new Speed(this);
     new Mass(this);
     new Pressure(this);
+    new Energy(this);
 }
 
 Converter::~Converter()
