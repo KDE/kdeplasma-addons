@@ -26,48 +26,7 @@ Length::Length(QObject* parent)
 
     m_default = "m";
 
-    m_units[i18n("meter")]         = "m";
-    m_units[i18n("meters")]        = "m";
-    m_units["m"]                   = 1.0;
-    m_units[i18n("kilometer")]     = "km";
-    m_units[i18n("kilometers")]    = "km";
-    m_units["km"]                  = 1000.0;
-    m_units[i18n("decimeter")]     = "dm";
-    m_units[i18n("decimeters")]    = "dm";
-    m_units["dm"]                  = 0.1;
-    m_units[i18n("centimeter")]    = "cm";
-    m_units[i18n("centimeters")]   = "cm";
-    m_units["cm"]                  = 0.01;
-    m_units[i18n("millimeter")]    = "mm";
-    m_units[i18n("millimeters")]   = "mm";
-    m_units["mm"]                  = 0.001;
-    m_units[i18n("micrometer")]    = "µm";
-    m_units[i18n("micrometers")]   = "µm";
-    m_units["µm"]                  = 0.000001;
-    m_units[i18n("nanometer")]     = "nm";
-    m_units[i18n("nanometers")]    = "nm";
-    m_units["nm"]                  = 0.000000001;
-
-    m_units["Ym"]                  = 1E+24;
-    m_units["Zm"]                  = 1E+21;
-    m_units["Em"]                  = 1E+18;
-    m_units["Pm"]                  = 1E+15;
-    m_units["Tm"]                  = 1E+12;
-    m_units["Gm"]                  = 1E+9;
-    m_units["Mm"]                  = 1E+6;
-    m_units["hm"]                  = 1E+2;
-    m_units["dam"]                 = 1E+1;
-
-    m_units[i18n("picometer")]     = 1E-12;
-    m_units[i18n("picometers")]    = 1E-12;
-    m_units["pm"]                  = 1E-12;
-
-    m_units[i18n("femtometer")]    = 1E-15;
-    m_units[i18n("femtometer")]    = 1E-15;
-    m_units["fm"]                  = 1E-15;
-    m_units["am"]                  = 1E-18;
-    m_units["zm"]                  = 1E-21;
-    m_units["ym"]                  = 1E-24;
+    addSIUnit(m_default, i18n("meter"), i18n("meters"));
 
     m_units[i18n("inch")]          = i18n("inches");
     m_units[i18n("in")]            = i18n("inches");

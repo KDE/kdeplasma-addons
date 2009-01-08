@@ -26,25 +26,8 @@ Mass::Mass(QObject* parent)
 
     m_default = "g";
 
-    m_units[i18n("gram")]         = "g";
-    m_units[i18n("grams")]        = "g";
-    m_units["g"]                  = 1.0;
-	m_units[i18n("kilogram")]     = "kg";
-    m_units[i18n("kilograms")]    = "kg";
-    m_units["kg"]                 = 1000.0;
-    m_units[i18n("decigram")]     = "dg";
-    m_units[i18n("decigrams")]    = "dg";
-    m_units["dg"]                 = 0.1;
-    m_units[i18n("centigram")]    = "cg";
-    m_units[i18n("centigrams")]   = "cg";
-    m_units["cg"]                 = 0.01;
-    m_units[i18n("milligram")]    = "mg";
-    m_units[i18n("milligrams")]   = "mg";
-    m_units["mg"]                 = 0.001;
-    m_units[i18n("microgram")]    = "\xb5g";
-    m_units[i18n("micrograms")]   = "\xb5g";
-    m_units["ug"]                 = "\xb5g";
-    m_units["\xb5g"]              = 0.000001;
+    addSIUnit(m_default, i18n("gram"), i18n("grams"));
+
     m_units[i18n("ton")]          = "t";
     m_units[i18n("tons")]         = "t";
     m_units[i18n("tonne")]        = "t";
