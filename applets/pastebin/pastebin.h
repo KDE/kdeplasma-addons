@@ -45,7 +45,7 @@ public:
     void setImageServer(int backend);
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
-    enum imageServers { IMAGEBINCA };
+    enum imageServers { IMAGEBINCA, IMAGESHACK };
 
 public slots:
     void configAccepted();

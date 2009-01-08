@@ -82,6 +82,10 @@ void Pastebin::setImageServer(int backend)
     case Pastebin::IMAGEBINCA:
         m_imageServer = static_cast<ImagebinCAServer*>(new ImagebinCAServer());
         break;
+
+    case Pastebin::IMAGESHACK:
+        m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer());
+	break;
     }
 
     m_imageBackend = backend;

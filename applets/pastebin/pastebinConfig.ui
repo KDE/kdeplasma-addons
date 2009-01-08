@@ -40,6 +40,11 @@
        <string>Imagebin.ca</string>
       </property>
      </item>
+     <item>
+      <property name="text" >
+       <string>Imageshack.us</string>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>
