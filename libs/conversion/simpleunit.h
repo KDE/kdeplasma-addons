@@ -21,11 +21,23 @@
 #include "value.h"
 #include "unit.h"
 #include <QHash>
+#include <KDebug>
+
+class Complex
+{
+public:
+    Complex() {};
+    virtual ~Complex() {};
+    virtual double toDefault(double) const { return 0.0; };
+    virtual double fromDefault(double) const { return 0.0; };
+};
+Q_DECLARE_METATYPE(Complex*)
 
 class SimpleUnit : public Conversion::UnitCategory
 {
 public:
     SimpleUnit(QObject* parent = 0);
+    virtual ~SimpleUnit();
 
     virtual QStringList units() const;
     virtual bool hasUnit(const QString &unit) const;
@@ -36,7 +48,9 @@ protected:
     QString m_default;
 
     void addSIUnit(const QString& unit, const QString& single, const QString& plural);
-    virtual double toDouble(const QString &unit, QString *unitString) const;
+    QString checkUnit(const QString& unit) const;
+    virtual double toDefault(double value, const QString &unit) const;
+    virtual double fromDefault(double value, const QString &unit) const;
 };
 
 #endif

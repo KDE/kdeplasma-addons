@@ -25,6 +25,15 @@ SimpleUnit::SimpleUnit(QObject* parent)
 {
 }
 
+SimpleUnit::~SimpleUnit()
+{
+    foreach (const QString& key, m_units.keys()) {
+        if (m_units[key].userType() == qMetaTypeId<Complex*>()) {
+            delete m_units[key].value<Complex*>();
+        }
+    }
+}
+
 QStringList SimpleUnit::units() const
 {
     QStringList result;
@@ -45,25 +54,41 @@ bool SimpleUnit::hasUnit(const QString &unit) const
 
 Conversion::Value SimpleUnit::convert(const Conversion::Value& value, const QString& to) const
 {
-    QString unit;
-    QVariant data = value.number().toDouble() * toDouble(value.unit(), &unit) / toDouble(to, &unit);
-    return Conversion::Value(data, unit);
+    QString unit = checkUnit(to);
+    double v = fromDefault(toDefault(value.number().toDouble(), checkUnit(value.unit())), unit);
+    return Conversion::Value(v, unit);
 }
 
-double SimpleUnit::toDouble(const QString &unit, QString *unitString) const
+QString SimpleUnit::checkUnit(const QString& unit) const
 {
     if (unit.isEmpty()) {
-        *unitString = m_default;
-    } else {
-        *unitString = unit;
+        return m_default;
+    } else if (m_units[unit].userType() == QVariant::String) {
+        return m_units[unit].toString();
     }
-    QVariant multiplier = m_units[*unitString];
+    return unit;
+}
+
+double SimpleUnit::toDefault(double value, const QString &unit) const
+{
+    QVariant multiplier = m_units[unit];
+    if (multiplier.userType() == QVariant::Double) {
+        return value * multiplier.toDouble();
+    } else if (multiplier.userType() == qMetaTypeId<Complex*>()) {
+        return multiplier.value<Complex*>()->toDefault(value);
+    }
+    return 0.0;
+}
+
+double SimpleUnit::fromDefault(double value, const QString &unit) const
+{
+    QVariant multiplier = m_units[unit];
     if (multiplier.type() == QVariant::Double) {
-        return multiplier.toDouble();
-    } else {
-        *unitString = multiplier.toString();
-        return m_units[*unitString].toDouble();
+        return value / multiplier.toDouble();
+    } else if (multiplier.userType() == qMetaTypeId<Complex*>()) {
+        return multiplier.value<Complex*>()->fromDefault(value);
     }
+    return 0.0;
 }
 
 void SimpleUnit::addSIUnit(const QString& unit, const QString& single, const QString& plural)

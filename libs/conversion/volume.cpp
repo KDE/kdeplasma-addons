@@ -150,7 +150,12 @@ QString Volume::replace(const QString &unit) const
     return result;
 }
 
-double Volume::toDouble(const QString &unit, QString *unitString) const
+double Volume::toDefault(double value, const QString &unit) const
 {
-    return SimpleUnit::toDouble(replace(unit), unitString);
+    return SimpleUnit::toDefault(value, replace(unit));
+}
+
+double Volume::fromDefault(double value, const QString &unit) const
+{
+    return SimpleUnit::fromDefault(value, replace(unit));
 }

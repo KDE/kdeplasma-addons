@@ -29,7 +29,8 @@ public:
 
 protected:
     QString replace(const QString &unit) const;
-    virtual double toDouble(const QString &unit, QString *unitString) const;
+    virtual double toDefault(double value, const QString &unit) const;
+    virtual double fromDefault(double value, const QString &unit) const;
 };
 
 #endif
