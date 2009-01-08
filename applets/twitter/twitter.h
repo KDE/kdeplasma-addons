@@ -136,12 +136,6 @@ class Twitter : public Plasma::PopupApplet
         QGraphicsWidget *m_graphicsWidget;
         QPixmap m_popupIcon;
 
-        KLineEdit *m_usernameEdit;
-        KLineEdit *m_passwordEdit;
-        QSpinBox *m_historySizeSpinBox;
-        QSpinBox *m_historyRefreshSpinBox;
-        QCheckBox *m_checkIncludeFriends;
-
         QString m_username;
         QString m_password;
         int m_historySize;
