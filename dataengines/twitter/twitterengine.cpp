@@ -87,18 +87,18 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         return false;
     }
 
-    QStringList tokens = name.split(':');
-    if (tokens.count() != 2) {
-        return false;
-    }
+    TimelineSource::RequestType requestType;
 
-    TimelineSource::RequestType requestType = TimelineSource::Timeline;
-
-    QString who = tokens.at(1);
-    if (tokens.at(0) == "TimelineWithFriends") {
+    QString who = name;
+    if (name.startsWith("TimelineWithFriends:")) {
         requestType = TimelineSource::TimelineWithFriends;
-    } else if (tokens.at(0) == "Profile") {
+        who.remove("TimelineWithFriends:");
+    } else if (name.startsWith("Profile:")) {
         requestType = TimelineSource::Profile;
+        who.remove("Profile:");
+    }else{
+        requestType = TimelineSource::Timeline;
+        who.remove("Timeline:");
     }
 
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
