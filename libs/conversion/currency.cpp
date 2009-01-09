@@ -40,6 +40,58 @@ Currency::Currency(QObject* parent)
     m_units[i18n("euro")]         = m_default;
     m_units[m_default]            = 1.0;
 
+    // Static rates
+    m_units[i18n("austria")]      = "ATS";
+    m_units[i18n("schilling")]    = "ATS";
+    m_units["ATS"]                = 1.0 / 13.7603;
+    m_units[i18n("belgium")]      = "BEF";
+    m_units[i18n("franc")]        = "BEF";
+    m_units["BEF"]                = 1.0 / 40.3399;
+    m_units[i18n("netherlands")]  = "NLG";
+    m_units[i18n("guilder")]      = "NLG";
+    m_units["NLG"]                = 1.0 / 2.20371;
+    m_units[i18n("finland")]      = "FIM";
+    m_units[i18n("markka")]       = "FIM";
+    m_units["mk"]                 = "FIM";
+    m_units["FIM"]                = 1.0 / 5.94573;
+    m_units[i18n("france")]       = "FRF";
+    m_units[i18n("franc")]        = "FRF";
+    m_units["FRF"]                = 1.0 / 6.55957;
+    m_units[i18n("germany")]      = "DEM";
+    m_units[i18n("mark")]         = "DEM";
+    m_units["DEM"]                = 1.0 / 1.95583;
+    m_units[i18n("ireland")]      = "IEP";
+    m_units[i18n("irish pound")]  = "IEP";
+    m_units["IEP"]                = 1.0 / 0.787564;
+    m_units[i18n("italy")]        = "ITL";
+    m_units[i18n("lira")]         = "ITL";
+    m_units["ITL"]                = 1.0 / 1936.27;
+    m_units[i18n("luxembourg")]   = "LUF";
+    m_units[i18n("franc")]        = "LUF";
+    m_units["LUF"]                = 1.0 / 40.3399;
+    m_units[i18n("portugal")]     = "PTE";
+    m_units[i18n("escudo")]       = "PTE";
+    m_units["PTE"]                = 1.0 / 200.482;
+    m_units[i18n("spain")]        = "ESP";
+    m_units[i18n("peseta")]       = "ESP";
+    m_units["ESP"]                = 1.0 / 166.386;
+    m_units[i18n("greece")]       = "GRD";
+    m_units[i18n("drachma")]      = "GRD";
+    m_units["GRD"]                = 1.0 / 340.750;
+    m_units[i18n("slovenia")]     = "SIT";
+    m_units[i18n("tolar")]        = "SIT";
+    m_units["SIT"]                = 1.0 / 239.640;
+    m_units[i18n("cyprus")]       = "CYP";
+    m_units[i18n("cypriot pound")]= "CYP";
+    m_units["CYP"]                = 1.0 / 0.585274;
+    m_units[i18n("malta")]        = "MTL";
+    m_units[i18n("maltese lira")] = "MTL";
+    m_units["MTL"]                = 1.0 / 0.429300;
+    m_units[i18n("slovakia")]     = "SKK";
+    m_units[i18n("koruna")]       = "SKK";
+    m_units["SKK"]                = 1.0 / 30.1260;
+
+    // From ECB
     m_units[i18n("usa")]          = "$";
     m_units[i18n("dollar")]       = "$";
     m_units["USD"]                = "$";
@@ -154,11 +206,10 @@ QString Currency::name() const
 
 Conversion::Value Currency::convert(const Conversion::Value& value, const QString& to)
 {
-    QFileInfo info(m_cache);
-
     static QMutex mutex;
 
     mutex.lock();
+    QFileInfo info(m_cache);
     if (!info.exists() || info.lastModified().secsTo(QDateTime::currentDateTime()) > 86400) {
         Solid::Networking::Status status = Solid::Networking::status();
         if (status == Solid::Networking::Connected || status == Solid::Networking::Unknown ) {
