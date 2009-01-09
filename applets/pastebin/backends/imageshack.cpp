@@ -55,8 +55,8 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
 
     QString url(data);
 
-    url.remove(QRegExp(".*<image_link>"));
-    url.remove(QRegExp("</image_link>.*"));
+    url.remove(QRegExp(".*<done_page>"));
+    url.remove(QRegExp("</done_page>.*"));
 
     emit postFinished(url);
 }
