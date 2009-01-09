@@ -128,14 +128,14 @@ void WeatherStation::setLCDIcon()
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << data << source;
+    //kDebug() << source << data;
     Q_UNUSED(source);
     if (data.isEmpty()) {
         return;
     }
     setTemperature(data["Temperature"].toString(),
                    WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
-    setPressure(data["Pressure"].toString(),
+    setPressure(data["Condition Icon"].toString(), data["Pressure"].toString(),
                 WeatherUtils::getUnitString(data["Pressure Unit"].toInt()),
                 data["Pressure Tendency"].toString());
     setHumidity(data["Humidity"].toString());
@@ -157,11 +157,57 @@ QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
     return QString::number(v, 'f', precision);
 }
 
-void WeatherStation::setPressure(const QString& pressure, const QString& unit,
-                                 const QString& tendency)
+QStringList WeatherStation::fromCondition(const QString& condition)
 {
-    // TODO Use "Condition Icon" in 4.3 for this
-    QStringList current;
+    QStringList result;
+
+    if (condition == "weather-clear-night") {
+        result << "moon";
+    } else if (condition == "weather-clear") {
+        result << "sun";
+    } else if (condition == "weather-clouds-night" ||
+               condition == "weather-few-clouds-night") {
+        result << "half_moon" << "lower_cloud";
+    } else if (condition == "weather-clouds" ||
+               condition == "weather-few-clouds") {
+        result << "half_sun" << "lower_cloud";
+    } else if (condition == "weather-hail") {
+        result << "cloud" << "cloud_flash_hole" << "hail";
+    } else if (condition == "weather-many-clouds") {
+        result << "cloud" << "cloud_flash_hole";
+    } else if (condition == "weather-mist") {
+        result << "cloud" << "cloud_flash_hole";
+    } else if (condition == "weather-showers-day" ||
+               condition == "weather-showers-night") {
+        result << "cloud" << "cloud_flash_hole" << "water_drop";
+    } else if (condition == "weather-showers") {
+        result << "cloud" << "cloud_flash_hole" << "water_drop" << "water_drops";
+    } else if (condition == "weather-showers-scattered-day" ||
+               condition == "weather-showers-scattered-night" ||
+               condition == "weather-showers-scattered") {
+        result << "cloud" << "cloud_flash_hole" << "water_drops";
+    } else if (condition == "weather-snow") {
+        result << "cloud" << "cloud_flash_hole" << "snow_flake" << "snow_flakes";
+    } else if (condition == "weather-snow-rain") {
+        result << "cloud" << "cloud_flash_hole" << "snow_flake" << "water_drops";
+    } else if (condition == "weather-snow-scattered-day" ||
+               condition == "weather-snow-scattered-night" ||
+               condition == "weather-snow-scattered") {
+        result << "cloud" << "cloud_flash_hole" << "snow_flakes";
+    } else if (condition == "weather-storm-day") {
+    } else if (condition == "weather-storm-night") {
+    } else if (condition == "weather-storm") {
+        result << "cloud" << "flash" << "water_drops";
+    }
+    //kDebug() << result;
+    return result;
+}
+
+QStringList WeatherStation::fromPressure(const QString& pressure, const QString& unit,
+                                         const QString& tendency)
+{
+    QStringList result;
+
     qreal p = Conversion::Converter::self()->convert(
             Conversion::Value(pressure, unit), "kPa").number().toDouble();
     qreal t;
@@ -177,18 +223,32 @@ void WeatherStation::setPressure(const QString& pressure, const QString& unit,
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
     if (p > 103.0) {
-        current << "sun";
+        result << "sun";
     } else if (p > 100.0) {
-        current << "change";
+        result << "half_sun" << "lower_cloud";
     } else if (p > 99.0) {
-        current << "rain";
+        result << "cloud" << "cloud_flash_hole" << "water_drop";
     } else {
-        current << "rain" << "heavy_rain";
+        result << "cloud" << "cloud_flash_hole" << "water_drop" << "water_drops";
     }
+    //kDebug() << result;
+    return result;
+}
+
+void WeatherStation::setPressure(const QString& condition, const QString& pressure,
+                                 const QString& unit, const QString& tendency)
+{
+    QStringList current;
+    if (!condition.isEmpty() && condition != "weather-none-available") {
+        current = fromCondition(condition);
+    }
+    if (current.size() == 0) {
+        current = fromPressure(pressure, unit, tendency);
+    }
+    m_lcd->setGroup("weather", current);
 
     QString s = fitValue(Conversion::Converter::self()->convert(
             Conversion::Value(pressure, unit), m_pressureUnit), 5);
-    m_lcd->setGroup("weather", current);
     m_lcd->setNumber("pressure", s);
     m_lcd->setGroup("pressure_unit", QStringList() << m_pressureUnit);
 }

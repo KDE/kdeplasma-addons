@@ -48,11 +48,15 @@ class WeatherStation : public Plasma::PopupApplet
         void setLCDIcon();
 
         void setWind(const QString& speed, const QString& unit, const QString& direction);
-        void setPressure(const QString& pressure, const QString& unit, const QString& tendency);
+        void setPressure(const QString& condition, const QString& pressure,
+                         const QString& unit, const QString& tendency);
         void setTemperature(const QString& temperature, const QString& unit);
         void setHumidity(QString humidity);
 
         QString fitValue(const Conversion::Value& value, int digits);
+        QStringList fromCondition(const QString& condition);
+        QStringList fromPressure(const QString& pressure, const QString& unit,
+                                 const QString& tendency);
 
     private:
         LCD *m_lcd;
