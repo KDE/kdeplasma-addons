@@ -41,7 +41,7 @@ public:
 
     virtual QStringList units() const;
     virtual bool hasUnit(const QString &unit) const;
-    virtual Conversion::Value convert(const Conversion::Value& value, const QString& to) const;
+    virtual Conversion::Value convert(const Conversion::Value& value, const QString& to);
 
 protected:
     QHash<QString, QVariant> m_units;

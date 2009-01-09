@@ -56,6 +56,16 @@ public:
      **/
     QString unit() const;
 
+    /**
+     * Set value description
+     **/
+    void setDescription(const QString& desc);
+
+    /**
+     * @return value description
+     **/
+    QString description() const;
+
 private:
     class Private;
     Private* const d;

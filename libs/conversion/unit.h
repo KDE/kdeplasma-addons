@@ -64,7 +64,7 @@ public:
      * @param toUnit unit to convert to. If empty default unit is used.
      * @return converted value
      **/
-    virtual Value convert(const Value& value, const QString& toUnit = QString()) const = 0;
+    virtual Value convert(const Value& value, const QString& toUnit = QString()) = 0;
 };
 
 } // Conversion namespace

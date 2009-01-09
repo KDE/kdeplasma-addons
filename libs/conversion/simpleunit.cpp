@@ -52,7 +52,7 @@ bool SimpleUnit::hasUnit(const QString &unit) const
     return m_units.contains(unit);
 }
 
-Conversion::Value SimpleUnit::convert(const Conversion::Value& value, const QString& to) const
+Conversion::Value SimpleUnit::convert(const Conversion::Value& value, const QString& to)
 {
     QString unit = checkUnit(to);
     double v = fromDefault(toDefault(value.number().toDouble(), checkUnit(value.unit())), unit);

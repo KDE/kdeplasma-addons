@@ -35,6 +35,7 @@ public:
 
     QVariant number;
     QString unit;
+    QString description;
 };
 
 Value::Value()
@@ -65,6 +66,16 @@ QVariant Value::number() const
 QString Value::unit() const
 {
     return d->unit;
+}
+
+QString Value::description() const
+{
+    return d->description;
+}
+
+void Value::setDescription(const QString& description)
+{
+    d->description = description;
 }
 
 }
