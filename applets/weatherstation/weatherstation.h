@@ -21,7 +21,7 @@
 #include "weatherconfig.h"
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
-#include <plasma/weather/weatherutils.h>
+#include <conversion/value.h>
 
 class LCD;
 class QGraphicsLinearLayout;
@@ -47,16 +47,16 @@ class WeatherStation : public Plasma::PopupApplet
         void connectToEngine();
         void setLCDIcon();
 
-        void setWind(const QString& speed, const QString& unit, const QString& direction);
-        void setPressure(const QString& condition, const QString& pressure,
-                         const QString& unit, const QString& tendency);
-        void setTemperature(const QString& temperature, const QString& unit);
+        void setWind(const Conversion::Value& speed, const QString& direction);
+        void setPressure(const QString& condition, const Conversion::Value& pressure,
+                         const QString& tendency, const Conversion::Value& temperature);
+        void setTemperature(const Conversion::Value& temperature);
         void setHumidity(QString humidity);
 
         QString fitValue(const Conversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
-        QStringList fromPressure(const QString& pressure, const QString& unit,
-                                 const QString& tendency);
+        QStringList fromPressure(const Conversion::Value& pressure, const QString& tendency,
+                                 const Conversion::Value& temperature);
 
     private:
         LCD *m_lcd;

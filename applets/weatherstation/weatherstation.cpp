@@ -22,6 +22,7 @@
 #include <KConfigGroup>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
+#include <plasma/weather/weatherutils.h>
 #include <conversion/converter.h>
 #include <math.h>
 #include "lcd.h"
@@ -133,14 +134,16 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     if (data.isEmpty()) {
         return;
     }
-    setTemperature(data["Temperature"].toString(),
-                   WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
-    setPressure(data["Condition Icon"].toString(), data["Pressure"].toString(),
-                WeatherUtils::getUnitString(data["Pressure Unit"].toInt()),
-                data["Pressure Tendency"].toString());
+    Conversion::Value temp = Conversion::Value(data["Temperature"],
+                             WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
+    setTemperature(temp);
+    setPressure(data["Condition Icon"].toString(),
+                Conversion::Value(data["Pressure"],
+                    WeatherUtils::getUnitString(data["Pressure Unit"].toInt())),
+                data["Pressure Tendency"].toString(), temp);
     setHumidity(data["Humidity"].toString());
-    setWind(data["Wind Speed"].toString(),
-            WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true),
+    setWind(Conversion::Value(data["Wind Speed"],
+            WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
             data["Wind Direction"].toString());
     m_lcd->setLabel(0, data["Credit"].toString());
 }
@@ -203,13 +206,14 @@ QStringList WeatherStation::fromCondition(const QString& condition)
     return result;
 }
 
-QStringList WeatherStation::fromPressure(const QString& pressure, const QString& unit,
-                                         const QString& tendency)
+QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, const QString& tendency,
+                                         const Conversion::Value& temperature)
 {
     QStringList result;
 
-    qreal p = Conversion::Converter::self()->convert(
-            Conversion::Value(pressure, unit), "kPa").number().toDouble();
+
+    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number().toDouble();
+    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number().toDouble();
     qreal t;
 
     if (tendency.toLower() == "rising") {
@@ -218,45 +222,60 @@ QStringList WeatherStation::fromPressure(const QString& pressure, const QString&
         t = -0.75;
     } else {
         t = Conversion::Converter::self()->convert(
-                Conversion::Value(tendency, unit), "kPa").number().toDouble();
+                Conversion::Value(tendency, pressure.unit()), "kPa").number().toDouble();
     }
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
+    // Moon 22:00 -> 6:00
+    QString sunOrMoon = (((QDateTime::currentDateTime().time().hour() + 2) % 24) <= 8) ?
+                        "moon" : "sun";
     if (p > 103.0) {
-        result << "sun";
+        result << sunOrMoon;
     } else if (p > 100.0) {
-        result << "half_sun" << "lower_cloud";
+        result << "half_" + sunOrMoon << "lower_cloud";
     } else if (p > 99.0) {
-        result << "cloud" << "cloud_flash_hole" << "water_drop";
+        result << "cloud" << "cloud_flash_hole";
+        if (temp > 1.0) {
+            result << "water_drop";
+        } else if (temp < -1.0)  {
+            result << "snow_flake";
+        } else {
+            result << "water_drop" << "snow_flakes";
+        }
     } else {
-        result << "cloud" << "cloud_flash_hole" << "water_drop" << "water_drops";
+        result << "cloud" << "cloud_flash_hole";
+        if (temp > 1.0) {
+            result << "water_drop" << "water_drops";
+        } else if (temp < -1.0)  {
+            result<< "snow_flake" << "snow_flakes";
+        } else {
+            result<< "water_drop" << "snow_flakes";
+        }
     }
     //kDebug() << result;
     return result;
 }
 
-void WeatherStation::setPressure(const QString& condition, const QString& pressure,
-                                 const QString& unit, const QString& tendency)
+void WeatherStation::setPressure(const QString& condition, const Conversion::Value& pressure,
+                                 const QString& tendency, const Conversion::Value& temperature)
 {
     QStringList current;
     if (!condition.isEmpty() && condition != "weather-none-available") {
         current = fromCondition(condition);
     }
     if (current.size() == 0) {
-        current = fromPressure(pressure, unit, tendency);
+        current = fromPressure(pressure, tendency, temperature);
     }
     m_lcd->setGroup("weather", current);
 
-    QString s = fitValue(Conversion::Converter::self()->convert(
-            Conversion::Value(pressure, unit), m_pressureUnit), 5);
+    QString s = fitValue(Conversion::Converter::self()->convert(pressure, m_pressureUnit), 5);
     m_lcd->setNumber("pressure", s);
     m_lcd->setGroup("pressure_unit", QStringList() << m_pressureUnit);
 }
 
-void WeatherStation::setTemperature(const QString& temperature, const QString& unit)
+void WeatherStation::setTemperature(const Conversion::Value& temperature)
 {
-    Conversion::Value v = Conversion::Converter::self()->convert(
-            Conversion::Value(temperature, unit), m_temperatureUnit);
+    Conversion::Value v = Conversion::Converter::self()->convert(temperature, m_temperatureUnit);
     m_lcd->setGroup("temp_unit", QStringList() << m_temperatureUnit);
     m_lcdPanel->setGroup("temp_unit", QStringList() << m_temperatureUnit);
     m_lcd->setNumber("temperature", fitValue(v , 4));
@@ -270,10 +289,9 @@ void WeatherStation::setHumidity(QString humidity)
     m_lcd->setNumber("humidity", humidity);
 }
 
-void WeatherStation::setWind(const QString& speed, const QString& unit, const QString& dir)
+void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
 {
-    QString s = fitValue(Conversion::Converter::self()->convert(
-            Conversion::Value(speed, unit), m_speedUnit), 3);
+    QString s = fitValue(Conversion::Converter::self()->convert(speed, m_speedUnit), 3);
 
     if (dir == "N/A") {
         m_lcd->setGroup("wind", m_lcd->groupItems("wind"));
