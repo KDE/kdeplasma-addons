@@ -160,6 +160,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
 
     //config stuff
     KConfigGroup cg = config();
+    m_serviceUrl = cg.readEntry("serviceUrl", "http://twitter.com/");
     m_username = cg.readEntry("username");
     m_password = KStringHandler::obscure(cg.readEntry("password"));
     m_historySize = cg.readEntry("historySize", 2);
@@ -565,6 +566,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
 
+    configUi.serviceUrlEdit->setText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
     configUi.historySizeSpinBox->setValue(m_historySize);
@@ -576,6 +578,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
 
 void Twitter::configAccepted()
 {
+    QString serviceUrl = configUi.serviceUrlEdit->text();
     QString username = configUi.usernameEdit->text();
     QString password = configUi.passwordEdit->text();
     int historyRefresh = configUi.historyRefreshSpinBox->value();
@@ -584,6 +587,13 @@ void Twitter::configAccepted()
     bool changed = false;
 
     KConfigGroup cg = config();
+
+    if (m_serviceUrl != serviceUrl) {
+        changed = true;
+        m_serviceUrl = serviceUrl;
+        cg.writeEntry( "serviceUrl", m_serviceUrl );
+    }
+
 
     if (m_username != username) {
         changed = true;
@@ -704,12 +714,12 @@ void Twitter::downloadHistory()
 
     QString query;
     if( m_includeFriends) {
-        query = QString("TimelineWithFriends:%1");
+        query = QString("TimelineWithFriends:%1@%2");
     } else {
-        query = QString("Timeline:%1");
+        query = QString("Timeline:%1@%2");
     }
 
-    query = query.arg(m_username);
+    query = query.arg(m_username, m_serviceUrl);
     if (m_curTimeline != query) {
         //ditch the old one, if needed
         if (!m_curTimeline.isEmpty()) {
@@ -731,7 +741,7 @@ void Twitter::downloadHistory()
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 
     //get the profile to retrieve the user icon
-    QString profileQuery(QString("Profile:%1").arg(m_username));
+    QString profileQuery(QString("Profile:%1@%2").arg(m_username, m_serviceUrl));
     m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
 
     delete m_profileService;
