@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <KIcon>
+#include <KToolInvocation>
 #include <conversion/converter.h>
 
 #define CONVERSION_CHAR '>'
@@ -177,12 +178,28 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         match.setData(v.number());
         context.addMatch(term, match);
     }
+    if (!v.description().isEmpty()) {
+        QStringList desc = v.description().split('|');
+        Plasma::QueryMatch match(this);
+        match.setType(Plasma::QueryMatch::ExactMatch);
+        match.setIcon(KIcon("document-open-remote"));
+        match.setText(desc[0]);
+        if (desc.size() > 1) {
+            match.setData(desc[1]);
+        }
+        context.addMatch(term, match);
+    }
 }
 
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QApplication::clipboard()->setText(match.data().toString());
+    QString data = match.data().toString();
+    if (data.startsWith("http://")) {
+        KToolInvocation::invokeBrowser(data);
+    } else {
+        QApplication::clipboard()->setText(data);
+    }
 }
 
 #include "converterrunner.moc"
