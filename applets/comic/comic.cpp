@@ -264,6 +264,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
     parent->addPage( mConfigWidget, i18n("General"), icon() );
 
+    connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
 }
@@ -422,6 +423,10 @@ void ComicApplet::slotSizeChanged()
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
     }
+}
+
+void ComicApplet::slotShowMaxSize() {
+    resize( mMaxSize );
 }
 
 void ComicApplet::updateScrollBars()

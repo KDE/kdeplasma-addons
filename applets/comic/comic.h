@@ -72,6 +72,7 @@ class ComicApplet : public Plasma::Applet
         void slotStorePosition();
         void slotSizeChanged();
         void slotScroll();
+        void slotShowMaxSize();
         void applyConfig();
         void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();

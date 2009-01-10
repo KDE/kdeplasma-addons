@@ -101,6 +101,10 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     groupBox->setLayout( vbox );
 
     mShowArrowsOnHover = new QCheckBox( i18n( "Show arrows only on hover" ), this );
+    mMaxSize = new QPushButton( this );
+    mMaxSize->setToolTip( i18n( "Shows the maximum size of the applet, resizing it changes the maximum size." ) );
+    mMaxSize->setText( i18n( "Maximum size of the applet" ) );
+    connect( mMaxSize, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
     mNewStuff = new QPushButton( this );
     mNewStuff->setToolTip( i18n( "Download new comics" ) );
     mNewStuff->setText( i18n( "Get New Comics..." ) );
@@ -110,8 +114,9 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     layout->addWidget( mComicIdentifier, 0, 1 );
     layout->addWidget( groupBox, 1, 0, 1, 2 );
     layout->addWidget( mShowArrowsOnHover, 2, 0, 1, 2 );
-    layout->addWidget( mNewStuff, 3, 1 );
-    layout->setRowStretch( 4, 1.0 );
+    layout->addWidget( mMaxSize, 3, 1);
+    layout->addWidget( mNewStuff, 4, 1 );
+    layout->setRowStretch( 5, 1.0 );
 
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );

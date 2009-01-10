@@ -51,6 +51,10 @@ class ConfigWidget : public QWidget
         void setArrowsOnHover( bool arrows );
         bool arrowsOnHover() const;
 
+    Q_SIGNALS:
+        void maxSizeClicked();
+
+
     protected slots:
         void getNewStuff();
 
@@ -61,6 +65,7 @@ class ConfigWidget : public QWidget
         QCheckBox *mShowComicTitle;
         QCheckBox *mShowComicIdentifier;
         QCheckBox *mShowArrowsOnHover;
+        QPushButton *mMaxSize;
         QPushButton *mNewStuff;
         ComicModel *mModel;
         Plasma::DataEngine *mEngine;
