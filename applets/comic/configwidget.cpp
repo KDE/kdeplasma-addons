@@ -25,6 +25,7 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
+#include <QtGui/QGroupBox>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 #include <QtGui/QSortFilterProxyModel>
@@ -87,10 +88,18 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     QLabel *label = new QLabel( i18n( "Comic:" ), this );
     label->setBuddy( mComicIdentifier );
 
+    QGroupBox *groupBox = new QGroupBox( i18n( "Aditional Information" ) );
     mShowComicAuthor = new QCheckBox( i18n( "Show comic author" ), this );
     mShowComicTitle = new QCheckBox( i18n( "Show comic title" ), this );
     mShowComicUrl = new QCheckBox( i18n( "Show comic url" ), this );
     mShowComicIdentifier = new QCheckBox( i18n( "Show comic identifier" ), this );
+    QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget( mShowComicAuthor );
+    vbox->addWidget( mShowComicTitle );
+    vbox->addWidget( mShowComicUrl );
+    vbox->addWidget( mShowComicIdentifier );
+    groupBox->setLayout( vbox );
+
     mShowArrowsOnHover = new QCheckBox( i18n( "Show arrows only on hover" ), this );
     mNewStuff = new QPushButton( this );
     mNewStuff->setToolTip( i18n( "Download new comics" ) );
@@ -99,13 +108,10 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
 
     layout->addWidget( label, 0, 0 );
     layout->addWidget( mComicIdentifier, 0, 1 );
-    layout->addWidget( mShowComicAuthor, 1, 0, 1, 2 );
-    layout->addWidget( mShowComicTitle, 2, 0, 1, 2 );
-    layout->addWidget( mShowComicUrl, 3, 0, 1, 2 );
-    layout->addWidget( mShowComicIdentifier, 4, 0, 1, 2 );
-    layout->addWidget( mShowArrowsOnHover, 5, 0, 1, 2 );
-    layout->addWidget( mNewStuff, 6, 1 );
-    layout->setRowStretch( 7, 1.0 );
+    layout->addWidget( groupBox, 1, 0, 1, 2 );
+    layout->addWidget( mShowArrowsOnHover, 2, 0, 1, 2 );
+    layout->addWidget( mNewStuff, 3, 1 );
+    layout->setRowStretch( 4, 1.0 );
 
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
