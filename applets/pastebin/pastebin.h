@@ -52,6 +52,7 @@ public slots:
 
 protected slots:
     void showResults(const QString &url);
+    void showErrors();
     void openLink(const QString &link);
 
 protected:

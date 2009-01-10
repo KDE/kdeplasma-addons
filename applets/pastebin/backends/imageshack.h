@@ -50,6 +50,9 @@ protected:
 
 public slots:
     void readKIOData(KIO::Job *job, const QByteArray &data);
+
+private:
+    bool first;
 };
 
 #endif

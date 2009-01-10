@@ -34,6 +34,7 @@ public:
 
 Q_SIGNALS:
     void postFinished(const QString &data);
+    void postError();
 
 protected:
     const QString m_server;

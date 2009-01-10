@@ -48,7 +48,11 @@ protected:
     const QString m_server;
 
 public slots:
+    void finished(KJob *job);
     void readKIOData(KIO::Job *job, const QByteArray &data);
+
+private:
+    QByteArray _data;
 };
 
 #endif

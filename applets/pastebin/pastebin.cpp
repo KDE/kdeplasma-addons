@@ -91,6 +91,8 @@ void Pastebin::setImageServer(int backend)
     m_imageBackend = backend;
     connect(m_imageServer, SIGNAL(postFinished(QString)),
             this, SLOT(showResults(QString)));
+    connect(m_imageServer, SIGNAL(postError()),
+            this, SLOT(showErrors()));
 }
 
 void Pastebin::setTextServer(int backend)
@@ -112,6 +114,8 @@ void Pastebin::setTextServer(int backend)
     m_textBackend = backend;
     connect(m_textServer, SIGNAL(postFinished(QString)),
             this, SLOT(showResults(QString)));
+    connect(m_textServer, SIGNAL(postError()),
+            this, SLOT(showErrors()));
 }
 
 void Pastebin::init()
@@ -152,6 +156,14 @@ void Pastebin::showResults(const QString &url)
                   "Drag text/image here to post to server", url, url);
     m_displayEdit->setText(m_text);
     QApplication::clipboard()->setText(url);
+}
+
+void Pastebin::showErrors()
+{
+    setBusy(false);
+    m_text = i18n("Error during post. Try again."
+                  "Drag text/image here to post to server");
+    m_displayEdit->setText(m_text);
 }
 
 void Pastebin::openLink(const QString &link)

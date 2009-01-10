@@ -34,6 +34,21 @@ PastebinCAServer::~PastebinCAServer()
 {
 }
 
+void PastebinCAServer::finished(KJob *job)
+{
+    Q_UNUSED(job);
+
+    if (_data.length() == 0) {
+        emit postError();
+        return;
+    }
+
+    QString url(_data);
+    url.replace("SUCCESS:","");
+    url.prepend(QString("%1/").arg(m_server));
+    emit postFinished(url);
+}
+
 void PastebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job);
@@ -42,10 +57,7 @@ void PastebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
         return;
     }
 
-    QString url(data);
-    url.replace("SUCCESS:","");
-    url.prepend(QString("%1/").arg(m_server));
-    emit postFinished(url);
+    _data.append(data);
 }
 
 void PastebinCAServer::post(QString content)
@@ -59,8 +71,12 @@ void PastebinCAServer::post(QString content)
     QString url("/quiet-paste.php");
     url.prepend(m_server);
 
+    _data.clear();
+
     KIO::TransferJob *tf = KIO::http_post(KUrl(url),bytearray,KIO::HideProgressInfo);
     tf->addMetaData("content-type","Content-Type: application/x-www-form-urlencoded");
     connect(tf, SIGNAL(data(KIO::Job*, const QByteArray&)),
             this, SLOT(readKIOData(KIO::Job*, const QByteArray&)));
+
+    connect(tf, SIGNAL(result(KJob *)), this, SLOT(finished(KJob *)));
 }

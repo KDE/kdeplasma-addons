@@ -37,6 +37,7 @@ ImageshackServer::ImageshackServer()
     : PastebinServer(),
       m_server("http://imageshack.us")
 {
+    first = true;
     m_boundary  = "----------";
     m_boundary += KRandom::randomString(42 + 13).toAscii();
 }
@@ -49,16 +50,27 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job);
 
+    if (!first) {
+        return;
+    }
+
     if (data.length() == 0) {
+        emit postError();
         return;
     }
 
     QString url(data);
+    QRegExp re(".*<done_page>([^<]+)</done_page>.*");
+    if (!re.exactMatch(url)) {
+        emit postError();
+        return;
+    }
+    QString pasteUrl = re.cap(1);
 
-    url.remove(QRegExp(".*<done_page>"));
-    url.remove(QRegExp("</done_page>.*"));
-
-    emit postFinished(url);
+    // little dirty hack to avoid emiting the
+    // second redirection of imageshack.us
+    first = false;
+    emit postFinished(pasteUrl);
 }
 
 // taken from flickr KIPI Plugin
@@ -151,6 +163,7 @@ void ImageshackServer::post(QString content)
     addFile("fileupload", content);
     finish();
 
+    first = true;
     KIO::TransferJob *tf = KIO::http_post(url, m_buffer, KIO::HideProgressInfo);
 
     tf->addMetaData("content-type","Content-Type: multipart/form-data; boundary=" + m_boundary);

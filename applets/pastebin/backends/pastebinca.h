@@ -23,6 +23,7 @@
 
 #include <kio/global.h>
 #include <kio/job.h>
+#include <kjob.h>
 
 #include "server.h"
 
@@ -44,7 +45,11 @@ protected:
     const QByteArray m_apikey;
 
 public slots:
+    void finished(KJob *job);
     void readKIOData(KIO::Job *job, const QByteArray &data);
+
+private:
+    QByteArray _data;
 };
 
 #endif

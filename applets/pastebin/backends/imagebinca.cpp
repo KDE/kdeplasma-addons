@@ -44,6 +44,28 @@ ImagebinCAServer::~ImagebinCAServer()
 {
 }
 
+void ImagebinCAServer::finished(KJob *job)
+{
+    Q_UNUSED(job);
+
+    if (_data.length() == 0) {
+        kDebug() << "Error!!! " << _data;
+        emit postError();
+        return;
+    }
+
+    QString url(_data);
+    QRegExp re("<p>You can find this at <a href='([^<]+)'>([^<]+)</a></p>");
+    if (!re.exactMatch(url)) {
+        emit postError();
+        return;
+    }
+    QString pasteUrl = re.cap(1);
+
+    emit postFinished(pasteUrl);
+}
+
+
 void ImagebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job);
@@ -52,12 +74,7 @@ void ImagebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
         return;
     }
 
-    QString url(data);
-    url.replace("You can find this at ", "");
-    url.replace(QRegExp("<p><a href=([^<]*)>"), "");
-    url.replace("</a></p>", "");
-
-    emit postFinished(url);
+    _data.append(data);
 }
 
 // taken from flickr KIPI Plugin
@@ -156,10 +173,14 @@ void ImagebinCAServer::post(QString content)
     addFile("f", content);
     finish();
 
+    _data.clear();
+
     KIO::TransferJob *tf = KIO::http_post(url, m_buffer, KIO::HideProgressInfo);
 
     tf->addMetaData("content-type","Content-Type: multipart/form-data; boundary=" + m_boundary);
 
     connect(tf, SIGNAL(data(KIO::Job*, const QByteArray&)),
             this, SLOT(readKIOData(KIO::Job*, const QByteArray&)));
+
+    connect(tf, SIGNAL(result(KJob *)), this, SLOT(finished(KJob *)));
 }
