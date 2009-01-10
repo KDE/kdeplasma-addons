@@ -81,48 +81,15 @@ class ComicModel : public QAbstractListModel
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     : QWidget( parent ), mEngine( engine )
 {
-    QGridLayout *layout = new QGridLayout( this );
-    layout->setMargin( 0 );
-    mComicIdentifier = new QComboBox( this );
-
-    QLabel *label = new QLabel( i18n( "Comic:" ), this );
-    label->setBuddy( mComicIdentifier );
-
-    QGroupBox *groupBox = new QGroupBox( i18n( "Aditional Information" ) );
-    mShowComicAuthor = new QCheckBox( i18n( "Show comic author" ), this );
-    mShowComicTitle = new QCheckBox( i18n( "Show comic title" ), this );
-    mShowComicUrl = new QCheckBox( i18n( "Show comic url" ), this );
-    mShowComicIdentifier = new QCheckBox( i18n( "Show comic identifier" ), this );
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget( mShowComicAuthor );
-    vbox->addWidget( mShowComicTitle );
-    vbox->addWidget( mShowComicUrl );
-    vbox->addWidget( mShowComicIdentifier );
-    groupBox->setLayout( vbox );
-
-    mShowArrowsOnHover = new QCheckBox( i18n( "Show arrows only on hover" ), this );
-    mMaxSize = new QPushButton( this );
-    mMaxSize->setToolTip( i18n( "Shows the maximum size of the applet, resizing it changes the maximum size." ) );
-    mMaxSize->setText( i18n( "Maximum size of the applet" ) );
-    connect( mMaxSize, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
-    mNewStuff = new QPushButton( this );
-    mNewStuff->setToolTip( i18n( "Download new comics" ) );
-    mNewStuff->setText( i18n( "Get New Comics..." ) );
-    connect( mNewStuff, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
-
-    layout->addWidget( label, 0, 0 );
-    layout->addWidget( mComicIdentifier, 0, 1 );
-    layout->addWidget( groupBox, 1, 0, 1, 2 );
-    layout->addWidget( mShowArrowsOnHover, 2, 0, 1, 2 );
-    layout->addWidget( mMaxSize, 3, 1);
-    layout->addWidget( mNewStuff, 4, 1 );
-    layout->setRowStretch( 5, 1.0 );
+    ui.setupUi( this );
+    connect( ui.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
+    connect( ui.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
     mProxyModel->sort( 0, Qt::AscendingOrder );
-    mComicIdentifier->setModel( mProxyModel );
+    ui.comboBox_comic->setModel( mProxyModel );
     if ( mModel->rowCount() < 1 ) {
         QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
     }
@@ -150,7 +117,7 @@ void ConfigWidget::setComicIdentifier( const QString &comic )
     for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
         const QModelIndex index = mProxyModel->index( i, 0 );
         if ( index.data( Qt::UserRole ).toString() == comic ) {
-            mComicIdentifier->setCurrentIndex( i );
+            ui.comboBox_comic->setCurrentIndex( i );
             break;
         }
     }
@@ -158,58 +125,58 @@ void ConfigWidget::setComicIdentifier( const QString &comic )
 
 QString ConfigWidget::comicIdentifier() const
 {
-    const QModelIndex index = mProxyModel->index( mComicIdentifier->currentIndex(), 0 );
+    const QModelIndex index = mProxyModel->index( ui.comboBox_comic->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
 }
 
 void ConfigWidget::setShowComicUrl( bool show )
 {
-    mShowComicUrl->setChecked( show );
+    ui.checkBox_url->setChecked( show );
 }
 
 bool ConfigWidget::showComicUrl() const
 {
-    return mShowComicUrl->isChecked();
+    return ui.checkBox_url->isChecked();
 }
 
 void ConfigWidget::setShowComicAuthor( bool show )
 {
-    mShowComicAuthor->setChecked( show );
+    ui.checkBox_author->setChecked( show );
 }
 
 bool ConfigWidget::showComicAuthor() const
 {
-    return mShowComicAuthor->isChecked();
+    return ui.checkBox_author->isChecked();
 }
 
 void ConfigWidget::setShowComicTitle( bool show )
 {
-    mShowComicTitle->setChecked( show );
+    ui.checkBox_title->setChecked( show );
 }
 
 bool ConfigWidget::showComicTitle() const
 {
-    return mShowComicTitle->isChecked();
+    return ui.checkBox_title->isChecked();
 }
 
 void ConfigWidget::setShowComicIdentifier( bool show )
 {
-    mShowComicIdentifier->setChecked( show );
+    ui.checkBox_identifier->setChecked( show );
 }
 
 bool ConfigWidget::showComicIdentifier() const
 {
-    return mShowComicIdentifier->isChecked();
+    return ui.checkBox_identifier->isChecked();
 }
 
 void ConfigWidget::setArrowsOnHover( bool arrows )
 {
-    return mShowArrowsOnHover->setChecked( arrows );
+    return ui.checkBox_arrows->setChecked( arrows );
 }
 
 bool ConfigWidget::arrowsOnHover() const
 {
-    return mShowArrowsOnHover->isChecked();
+    return ui.checkBox_arrows->isChecked();
 }
 
 #include "configwidget.moc"

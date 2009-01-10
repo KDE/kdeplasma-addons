@@ -21,6 +21,8 @@
 #ifndef CONFIGWIDGET_H
 #define CONFIGWIDGET_H
 
+#include "ui_config.h"
+
 #include <QtGui/QWidget>
 #include <Plasma/DataEngine>
 
@@ -59,14 +61,7 @@ class ConfigWidget : public QWidget
         void getNewStuff();
 
     private:
-        QComboBox *mComicIdentifier;
-        QCheckBox *mShowComicUrl;
-        QCheckBox *mShowComicAuthor;
-        QCheckBox *mShowComicTitle;
-        QCheckBox *mShowComicIdentifier;
-        QCheckBox *mShowArrowsOnHover;
-        QPushButton *mMaxSize;
-        QPushButton *mNewStuff;
+        Ui::config ui;
         ComicModel *mModel;
         Plasma::DataEngine *mEngine;
         QSortFilterProxyModel *mProxyModel;
