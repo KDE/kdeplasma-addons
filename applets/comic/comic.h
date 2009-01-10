@@ -123,6 +123,8 @@ class ComicApplet : public Plasma::Applet
         bool mShowComicAuthor;
         bool mShowComicTitle;
         bool mShowComicIdentifier;
+        bool mArrowsOnHover;
+        bool mMiddleClick;
         QTimer *mDateChangedTimer;
         QList<QAction*> mActions;
         FullViewWidget *mFullViewWidget;
@@ -145,7 +147,6 @@ class ComicApplet : public Plasma::Applet
         Plasma::ScrollBar *mScrollBarVert;
         Plasma::ScrollBar *mScrollBarHoriz;
         Plasma::Svg *mSvg;
-        bool mArrowsOnHover;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )

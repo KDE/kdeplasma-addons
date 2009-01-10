@@ -105,13 +105,14 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mShowComicAuthor( false ),
       mShowComicTitle( false ),
       mShowComicIdentifier( false ),
+      mArrowsOnHover( true ),
+      mMiddleClick( true ),
       mFullViewWidget( 0 ),
       mFrame( 0 ),
       mFadingItem( 0 ),
       mPrevButton( 0 ),
       mNextButton( 0 ),
-      mSvg( 0 ),
-      mArrowsOnHover( false )
+      mSvg( 0 )
 {
     setHasConfigurationInterface( true );
     resize( 480, 160 );
@@ -261,6 +262,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowComicTitle( mShowComicTitle );
     mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
+    mConfigWidget->setMiddleClick( mMiddleClick );
 
     parent->addPage( mConfigWidget, i18n("General"), icon() );
 
@@ -279,6 +281,7 @@ void ComicApplet::applyConfig()
     mShowComicTitle = mConfigWidget->showComicTitle();
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
+    mMiddleClick = mConfigWidget->middleClick();
 
     saveConfig();
 
@@ -325,6 +328,7 @@ void ComicApplet::loadConfig()
     mShowComicTitle = cg.readEntry( "showComicTitle", false );
     mShowComicIdentifier = cg.readEntry( "showComicIdentifier", false );
     mArrowsOnHover = cg.readEntry( "arrowsOnHover", true );
+    mMiddleClick = cg.readEntry( "middleClick", true );
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
@@ -343,6 +347,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showComicTitle", mShowComicTitle );
     cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
+    cg.writeEntry( "middleClick", mMiddleClick );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -468,7 +473,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             // only update the size by clicking on the image-rect if the user manual resized the applet
             updateSize();
         }
-    } else if ( event->button() == Qt::MidButton ) { // handle full view
+    } else if ( ( event->button() == Qt::MidButton ) && mMiddleClick ) { // handle full view
         if ( !mFullViewWidget ) {
             mFullViewWidget = new FullViewWidget();
         }

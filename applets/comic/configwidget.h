@@ -52,6 +52,8 @@ class ConfigWidget : public QWidget
         bool showComicIdentifier() const;
         void setArrowsOnHover( bool arrows );
         bool arrowsOnHover() const;
+        void setMiddleClick( bool checked );
+        bool middleClick() const;
 
     Q_SIGNALS:
         void maxSizeClicked();

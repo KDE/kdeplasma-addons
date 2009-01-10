@@ -183,4 +183,14 @@ bool ConfigWidget::arrowsOnHover() const
     return ui.checkBox_arrows->isChecked();
 }
 
+void ConfigWidget::setMiddleClick( bool checked )
+{
+    ui.checkBox_middle->setChecked( checked );
+}
+
+bool ConfigWidget::middleClick() const
+{
+    return ui.checkBox_middle->isChecked();
+}
+
 #include "configwidget.moc"
