@@ -524,7 +524,7 @@ void Twitter::showTweets()
         t.content->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
                                             .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
-        t.content->document()->setTextWidth(t.content->width());
+        t.content->document()->setTextWidth(qMax(200,t.content->width()));
         t.content->setMinimumSize(t.content->document()->size().toSize());
         t.content->setMaximumHeight(t.content->minimumSize().height());
 
