@@ -66,6 +66,7 @@ class ComicApplet : public Plasma::Applet
         void slotPreviousDay();
         void slotFirstDay();
         void slotCurrentDay();
+        void slotGoJump();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotStorePosition();
@@ -126,6 +127,7 @@ class ComicApplet : public Plasma::Applet
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
+        QAction *mActionGoJump;
         QAction *mActionScaleContent;
         QAction *mActionStorePosition;
         QHash< Rects, QRectF > mRects;

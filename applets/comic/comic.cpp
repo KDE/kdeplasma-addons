@@ -151,6 +151,10 @@ void ComicApplet::init()
     mActions.append( mActionGoLast );
     connect( mActionGoLast, SIGNAL( triggered( bool ) ), this, SLOT( slotCurrentDay() ) );
 
+    mActionGoJump = new QAction( KIcon( "go-jump" ), i18n( "Jump to Strip ..." ), this );
+    mActions.append( mActionGoJump );
+    connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
+
     QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
@@ -203,6 +207,9 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mComicAuthor = data[ "Comic Author" ].toString();
     mComicTitle = data[ "Title" ].toString();
     mSuffixType = data[ "SuffixType" ].toString();
+
+    bool isEnabled = ( mSuffixType == "String" ) ? false : true;
+    mActionGoJump->setEnabled( isEnabled );
 
     QString temp = data[ "Identifier" ].toString();
     mCurrentIdentifierSuffix = temp.remove( mComicIdentifier + ':' );
@@ -372,6 +379,24 @@ void ComicApplet::slotCurrentDay()
     updateComic( QString() );
 }
 
+void ComicApplet::slotGoJump()
+{
+    if ( mSuffixType == "Number" ) {
+        ChooseStripNumDialog pageDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
+        if ( pageDialog.exec() == QDialog::Accepted ) {
+            updateComic( QString::number( pageDialog.getStripNumber() ) );
+        }
+    } else if ( mSuffixType == "Date" ) {
+        static KDatePicker *calendar = new KDatePicker();
+        calendar->setMinimumSize( calendar->sizeHint() );
+        calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
+
+        connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        calendar->show();
+    }
+}
+
 void ComicApplet::slotStorePosition()
 {
     KConfigGroup cg = config();
@@ -433,20 +458,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             KRun::runUrl( mWebsiteUrl, "text/html", 0 );
         } else if ( mouseCursorInside( mRects[ Identifier ], eventPos ) ) {
             // identifierSuffix clicked clicked
-            if ( mSuffixType == "Number" ) {
-                ChooseStripNumDialog pageDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
-                if ( pageDialog.exec() == QDialog::Accepted ) {
-                    updateComic( QString::number( pageDialog.getStripNumber() ) );
-                }
-            } else if ( mSuffixType == "Date" ) {
-                static KDatePicker *calendar = new KDatePicker();
-                calendar->setMinimumSize( calendar->sizeHint() );
-                calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
-
-                connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-                connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-                calendar->show();
-            }
+            slotGoJump();
         } else if ( mouseCursorInside( mRects[ Image ], eventPos ) && ( geometry().size() != mLastSize ) ) {
             // only update the size by clicking on the image-rect if the user manual resized the applet
             updateSize();
