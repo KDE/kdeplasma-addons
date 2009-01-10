@@ -114,11 +114,15 @@ void ConfigWidget::getNewStuff()
 
 void ConfigWidget::setComicIdentifier( const QString &comic )
 {
-    for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-        const QModelIndex index = mProxyModel->index( i, 0 );
-        if ( index.data( Qt::UserRole ).toString() == comic ) {
-            ui.comboBox_comic->setCurrentIndex( i );
-            break;
+    if ( comic.isEmpty() && ui.comboBox_comic->count() > 0 ) {
+        ui.comboBox_comic->setCurrentIndex( 0 );
+    } else {
+        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+            const QModelIndex index = mProxyModel->index( i, 0 );
+            if ( index.data( Qt::UserRole ).toString() == comic ) {
+                ui.comboBox_comic->setCurrentIndex( i );
+                break;
+            }
         }
     }
 }
