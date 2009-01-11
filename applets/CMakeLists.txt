@@ -42,7 +42,7 @@ if(QT_QTWEBKIT_FOUND)
 endif(QT_QTWEBKIT_FOUND)
 
 if(NOT WIN32)
-	#add_subdirectory(lancelot)
+  add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)
   add_subdirectory(leavenote)
   add_subdirectory(showdesktop)
