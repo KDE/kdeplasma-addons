@@ -3,7 +3,7 @@ include_directories( ${KDE4_INCLUDES} )
 
 set(fileWatcher_SRCS fileWatcher.cpp fileWatcherTextItem.cpp)
 
-kde4_add_ui_files(fileWatcher_SRCS fileWatcherConfig.ui )
+kde4_add_ui_files(fileWatcher_SRCS fileWatcherConfig.ui filtersConfig.ui)
 kde4_add_plugin(plasma_applet_fileWatcher ${fileWatcher_SRCS})
 
 target_link_libraries(plasma_applet_fileWatcher ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS})

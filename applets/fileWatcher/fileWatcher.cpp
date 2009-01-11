@@ -67,6 +67,10 @@ void FileWatcher::init()
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
 
+  m_filter = cg.readEntry("filter", QString());
+  m_showOnlyMatches = cg.readEntry("showOnlyMatches", false);
+  m_useRegularExpressions = cg.readEntry("useRegularExpressions", false);
+
   updateRows();
 
   textItem->update();
@@ -140,7 +144,18 @@ void FileWatcher::newData()
   //Slight speed optimization hack for bigger files.
   //Doing this is faster than doing unnecessary insertText()
   QString data = textStream->readAll();
-  QStringList list = data.split('\n', QString::SkipEmptyParts);
+  QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
+  QStringList list;
+  
+  if (m_showOnlyMatches){
+        for (int i = 0; i < tmpList.size(); i++){
+            if (tmpList.at(i).contains(m_filter)){
+                list.insert(list.size(), tmpList.at(i));
+        }
+  }
+  }else{
+      list = tmpList;
+  }
 
   int rows = list.size() - textDocument->maximumBlockCount();
 
@@ -154,6 +169,7 @@ void FileWatcher::newData()
     if (cursor.position() != 0){
       cursor.insertBlock();
     }
+
     cursor.insertText(list.at(i));
   }
 
@@ -171,6 +187,15 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     ui.pathUrlRequester->setPath(file->fileName());
     ui.fontRequester->setFont(textItem->font());
     ui.fontColorButton->setColor(textItem->defaultTextColor());
+
+    widget = new QWidget();
+    filtersUi.setupUi(widget);
+    parent->addPage(widget, i18n("Filters"), icon());
+
+    filtersUi.filterLineEdit->setText(m_filter);
+    filtersUi.showOnlyMatchesCheckBox->setChecked(m_showOnlyMatches);
+    filtersUi.useRegularExpressionsRadioButton->setChecked(m_useRegularExpressions);
+
 }
 
 void FileWatcher::configAccepted()
@@ -188,6 +213,15 @@ void FileWatcher::configAccepted()
 
     textItem->setDefaultTextColor(ui.fontColorButton->color());
     cg.writeEntry("textColor", ui.fontColorButton->color());
+
+    m_filter = filtersUi.filterLineEdit->text();
+    cg.writeEntry("filter", m_filter);
+
+    m_showOnlyMatches = filtersUi.showOnlyMatchesCheckBox->isChecked();
+    cg.writeEntry("showOnlyMatches", m_showOnlyMatches);
+
+    m_useRegularExpressions = filtersUi.useRegularExpressionsRadioButton->isChecked();
+    cg.writeEntry("useRegularExpressions", m_showOnlyMatches);
 
     textItem->update();
     loadFile(m_tmpPath);

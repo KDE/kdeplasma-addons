@@ -23,6 +23,7 @@
 #include <Plasma/Applet>
 
 #include "ui_fileWatcherConfig.h"
+#include "ui_filtersConfig.h"
 
 class QFile;
 class QFileSystemWatcher;
@@ -63,7 +64,12 @@ class FileWatcher : public Plasma::Applet
 
     QString m_tmpPath;
 
+    QString m_filter;
+    bool m_showOnlyMatches;
+    bool m_useRegularExpressions;
+
     Ui::fileWatcherConfig ui;
+    Ui::filtersConfig filtersUi;
 };
 
 K_EXPORT_PLASMA_APPLET(fileWatcher, FileWatcher)
