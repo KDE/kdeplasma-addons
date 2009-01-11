@@ -258,6 +258,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>serviceUrlEdit</tabstop>
   <tabstop>usernameEdit</tabstop>
   <tabstop>passwordEdit</tabstop>
   <tabstop>historySizeSpinBox</tabstop>
