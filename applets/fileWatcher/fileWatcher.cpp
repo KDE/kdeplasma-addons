@@ -149,10 +149,10 @@ void FileWatcher::newData()
   
   if (m_showOnlyMatches){
         for (int i = 0; i < tmpList.size(); i++){
-            if (tmpList.at(i).contains(m_filter)){
+            if (tmpList.at(i).contains(QRegExp(m_filter, Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
                 list.insert(list.size(), tmpList.at(i));
+            }
         }
-  }
   }else{
       list = tmpList;
   }
@@ -221,7 +221,7 @@ void FileWatcher::configAccepted()
     cg.writeEntry("showOnlyMatches", m_showOnlyMatches);
 
     m_useRegularExpressions = filtersUi.useRegularExpressionsRadioButton->isChecked();
-    cg.writeEntry("useRegularExpressions", m_showOnlyMatches);
+    cg.writeEntry("useRegularExpressions", m_useRegularExpressions);
 
     textItem->update();
     loadFile(m_tmpPath);
