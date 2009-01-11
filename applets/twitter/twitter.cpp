@@ -573,7 +573,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     configUi.passwordEdit->setText(m_password);
     configUi.historySizeSpinBox->setValue(m_historySize);
     configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
-    configUi.checkIncludeFriends->setCheckState(m_includeFriends ? Qt::Checked : Qt::Unchecked);
+    configUi.checkIncludeFriends->setChecked(m_includeFriends);
 
     parent->addPage(configWidget, i18n("General"), icon());
 }
