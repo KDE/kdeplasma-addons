@@ -223,9 +223,6 @@
    <item row="4" column="2" >
     <widget class="QLineEdit" name="usernameEdit" />
    </item>
-   <item row="1" column="2" >
-    <widget class="QLineEdit" name="serviceUrlEdit" />
-   </item>
    <item row="1" column="1" >
     <widget class="QLabel" name="label_9" >
      <property name="text" >
@@ -255,8 +252,22 @@
      </property>
     </spacer>
    </item>
+   <item row="1" column="2" >
+    <widget class="KComboBox" name="serviceUrlCombo" >
+     <property name="editable" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>serviceUrlEdit</tabstop>
   <tabstop>usernameEdit</tabstop>

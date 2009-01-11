@@ -566,7 +566,9 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
 
-    configUi.serviceUrlEdit->setText(m_serviceUrl);
+    configUi.serviceUrlCombo->addItem("http://twitter.com/");
+    configUi.serviceUrlCombo->addItem("http://identi.ca/api/");
+    configUi.serviceUrlCombo->setEditText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
     configUi.historySizeSpinBox->setValue(m_historySize);
@@ -578,7 +580,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
 
 void Twitter::configAccepted()
 {
-    QString serviceUrl = configUi.serviceUrlEdit->text();
+    QString serviceUrl = configUi.serviceUrlCombo->currentText();
     QString username = configUi.usernameEdit->text();
     QString password = configUi.passwordEdit->text();
     int historyRefresh = configUi.historyRefreshSpinBox->value();
