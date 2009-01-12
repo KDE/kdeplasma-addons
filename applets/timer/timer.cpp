@@ -30,7 +30,7 @@
 
 #include <KApplication>
 #include <KConfigDialog>
-#include <KPassivePopup>
+#include <KNotification>
 #include <KShell>
 #include <KToolInvocation>
 
@@ -208,7 +208,7 @@ void Timer::slotCountDone()
 {
     if (m_showMessage){
         //TODO: probably something with an OK button is better.
-        KPassivePopup::message(m_message, (QWidget *) 0);
+        KNotification::event(KNotification::Notification, m_message);
     }
 
     if (m_runCommand && !m_command.isEmpty()){
