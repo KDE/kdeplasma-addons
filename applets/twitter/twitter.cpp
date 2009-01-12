@@ -766,7 +766,10 @@ void Twitter::openProfile()
     QAction *action = qobject_cast<QAction *>(sender());
 
     if (action) {
-        KRun::runUrl( KUrl("http://www.twitter.com/" + action->data().toString()), "text/html", 0 );
+        QString url = m_serviceUrl;
+        url.remove("api/");
+
+        KRun::runUrl( KUrl(KUrl(url), action->data().toString()), "text/html", 0 );
     }
 }
 
