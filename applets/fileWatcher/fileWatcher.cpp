@@ -148,22 +148,19 @@ void FileWatcher::newData()
   QStringList list;
   
   if (m_showOnlyMatches){
-        for (int i = 0; i < tmpList.size(); i++){
+        for (int i = tmpList.size() - 1; i >= 0; i--){
             if (tmpList.at(i).contains(QRegExp(m_filter, Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
-                list.insert(list.size(), tmpList.at(i));
+                list.insert(0, tmpList.at(i));
             }
+
+            if (list.size() == textDocument->maximumBlockCount()) break;
         }
   }else{
       list = tmpList;
   }
 
-  int rows = list.size() - textDocument->maximumBlockCount();
-
-  if ( rows < 0)
-    rows = 0;
-
   // go through the lines of readed block
-  for (int i = rows; i < list.size(); i++){
+  for (int i = 0; i < list.size(); i++){
     // insert new block before line, but skip insertion on beginning of document
     // because we don't want empty space on first line
     if (cursor.position() != 0){
