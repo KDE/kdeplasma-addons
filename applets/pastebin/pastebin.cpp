@@ -34,7 +34,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KConfigDialog>
-#include <KToolInvocation>
+#include <KRun>
 #include <kmimetype.h>
 #include <ktemporaryfile.h>
 
@@ -168,7 +168,7 @@ void Pastebin::showErrors()
 
 void Pastebin::openLink(const QString &link)
 {
-    KToolInvocation::invokeBrowser(link);
+    KRun::runUrl( KUrl(link), "text/html", 0 );
 }
 
 void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
