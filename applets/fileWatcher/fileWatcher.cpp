@@ -141,22 +141,25 @@ void FileWatcher::newData()
   cursor.movePosition(QTextCursor::End);
   cursor.beginEditBlock();
 
+  QStringList list;
+
+  {
   //Slight speed optimization hack for bigger files.
   //Doing this is faster than doing unnecessary insertText()
-  QString data = textStream->readAll();
-  QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
-  QStringList list;
+    QString data = textStream->readAll();
+    QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
   
-  if (m_showOnlyMatches){
-        for (int i = tmpList.size() - 1; i >= 0; i--){
-            if (tmpList.at(i).contains(QRegExp(m_filter, Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
-                list.insert(0, tmpList.at(i));
-            }
+    if (m_showOnlyMatches){
+            for (int i = tmpList.size() - 1; i >= 0; i--){
+                if (tmpList.at(i).contains(QRegExp(m_filter, Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
+                    list.insert(0, tmpList.at(i));
+                }
 
-            if (list.size() == textDocument->maximumBlockCount()) break;
-        }
-  }else{
-      list = tmpList;
+                if (list.size() == textDocument->maximumBlockCount()) break;
+             }
+    }else{
+        list = tmpList;
+    }
   }
 
   // go through the lines of readed block
