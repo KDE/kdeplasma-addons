@@ -144,8 +144,8 @@ void FileWatcher::newData()
   QStringList list;
 
   {
-  //Slight speed optimization hack for bigger files.
-  //Doing this is faster than doing unnecessary insertText()
+    //Slight speed optimization hack for bigger files.
+    //Doing this is faster than doing unnecessary insertText()
     QString data = textStream->readAll();
     QStringList tmpList = data.split('\n', QString::SkipEmptyParts);
   
