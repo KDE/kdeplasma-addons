@@ -172,7 +172,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
             Conversion::Converter::self()->convert(Conversion::Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::ExactMatch);
+        match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(KIcon("edit-copy"));
         match.setText(v.toString());
         match.setData(v.number());
