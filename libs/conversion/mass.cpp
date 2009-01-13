@@ -26,34 +26,34 @@ Mass::Mass(QObject* parent)
 
     m_default = "g";
 
-    addSIUnit(m_default, i18n("gram"), i18n("grams"));
+    addSIUnit(m_default, i18nc("mass unit", "gram"), i18n("grams"));
 
-    m_units[i18n("ton")]          = "t";
-    m_units[i18n("tons")]         = "t";
-    m_units[i18n("tonne")]        = "t";
-    m_units["t"]                  = 1000000.0;
+    m_units[i18nc("mass unit", "ton")]          = "t";
+    m_units[i18nc("mass unit", "tons")]         = "t";
+    m_units[i18nc("mass unit", "tonne")]        = "t";
+    m_units["t"]                  		= 1000000.0;
 
 	//I guess it's useful...
-	m_units[i18n("carat")]        = "CD";
-	m_units[i18n("carats")]       = "CD";
-	m_units["CD"]                 = 0.2;
+	m_units[i18nc("mass unit", "carat")]    = "CD";
+	m_units[i18nc("mass unit", "carats")]   = "CD";
+	m_units["CD"]                 		= 0.2;
 
     //http://en.wikipedia.org/wiki/Pound_(mass)#International_pound
-    m_units[i18n("pound")]        = "lb";
-    m_units[i18n("pounds")]       = "lb";
-    m_units["lb"]                 = 453.592;
+    m_units[i18nc("mass unit", "pound")]        = "lb";
+    m_units[i18nc("mass unit", "pounds")]       = "lb";
+    m_units[i18nc("mass unit: pounds", "lb")]   = 453.592;
     //International avoirdupois ounce
-    m_units[i18n("ounce")]        = "oz";
-    m_units[i18n("ounces")]       = "oz";
-    m_units["oz"]                 = 28.349523125;
-    m_units[i18n("troy ounce")]   = "t oz";
-    m_units[i18n("troy ounces")]  = "t oz";
-    m_units["t oz"]               = 31.1034768;
-    m_units[i18n("newton")]       = "N";       //on earth
-    m_units["N"]                  = 1000.0/9.81;
+    m_units[i18nc("mass unit", "ounce")]        = "oz";
+    m_units[i18nc("mass unit", "ounces")]       = "oz";
+    m_units["oz"]                 		= 28.349523125;
+    m_units[i18nc("mass unit", "troy ounce")]   = "t oz";
+    m_units[i18nc("mass unit", "troy ounces")]  = "t oz";
+    m_units["t oz"]               		= 31.1034768;
+    m_units[i18nc("mass unit", "newton")]       = "N";       //on earth
+    m_units["N"]                  		= 1000.0/9.81;
 	//used a lot in industry (aircraft engines for example)
-	m_units[i18n("kilonewton")]   = "kN";
-    m_units["kN"]                 = 1000000.0/9.81;
+    m_units[i18nc("mass unit", "kilonewton")]   = "kN";
+    m_units["kN"]                 		= 1000000.0/9.81;
 }
 
 QString Mass::name() const
