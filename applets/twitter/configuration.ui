@@ -269,7 +269,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>serviceUrlEdit</tabstop>
+  <tabstop>serviceUrlCombo</tabstop>
   <tabstop>usernameEdit</tabstop>
   <tabstop>passwordEdit</tabstop>
   <tabstop>historySizeSpinBox</tabstop>
