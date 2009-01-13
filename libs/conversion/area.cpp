@@ -26,23 +26,23 @@ Area::Area(QObject* parent)
 
     m_default = "m\xb2";
 
-    m_units[i18n("square meter")]         = "m\xb2";
-    m_units[i18n("square meters")]        = "m\xb2";
-    m_units["m\xb2"]                      = 1.0;
-    m_units[i18n("square kilometer")]     = "km\xb2";
-    m_units[i18n("square kilometers")]    = "km\xb2";
-    m_units["km\xb2"]                     = 1E+6;
-    m_units[i18n("square centimeter")]    = "cm\xb2";
-    m_units[i18n("square centimeters")]   = "cm\xb2";
-    m_units["cm\xb2"]                     = 1E-4;
-    m_units[i18n("square millimeter")]    = "mm\xb2";
-    m_units[i18n("square millimeters")]   = "mm\xb2";
-    m_units["mm\xb2"]                     = 1E-6;
+    m_units[i18nc("area unit", "square meter")]         = "m\xb2";
+    m_units[i18nc("area unit", "square meters")]        = "m\xb2";
+    m_units["m\xb2"]                      		= 1.0;
+    m_units[i18nc("area unit", "square kilometer")]     = "km\xb2";
+    m_units[i18nc("area unit", "square kilometers")]    = "km\xb2";
+    m_units["km\xb2"]                     		= 1E+6;
+    m_units[i18nc("area unit", "square centimeter")]    = "cm\xb2";
+    m_units[i18nc("area unit", "square centimeters")]   = "cm\xb2";
+    m_units["cm\xb2"]                     		= 1E-4;
+    m_units[i18nc("area unit", "square millimeter")]    = "mm\xb2";
+    m_units[i18nc("area unit", "square millimeters")]   = "mm\xb2";
+    m_units["mm\xb2"]                     		= 1E-6;
 
-    m_units[i18n("hectares")]             = "hm\xb2";
-    m_units[i18n("hectare")]              = "hm\xb2";
-    m_units[i18n("hectometer")]           = "hm\xb2";
-    m_units[i18n("hectometers")]          = "hm\xb2";
+    m_units[i18nc("area unit", "hectares")]             = "hm\xb2";
+    m_units[i18nc("area unit", "hectare")]              = "hm\xb2";
+    m_units[i18nc("area unit", "hectometer")]           = "hm\xb2";
+    m_units[i18nc("area unit", "hectometers")]          = "hm\xb2";
     m_units["hm\xb2"]                     = 1E+4;
 
     m_units["Ym\xb2"]                     = 1E+48;
@@ -62,31 +62,31 @@ Area::Area(QObject* parent)
     m_units["zm\xb2"]                     = 1E-42;
     m_units["ym\xb2"]                     = 1E-48;
 
-    m_units[i18n("acre")]                 = 4046.9;
-    m_units[i18n("square foot")]          = i18n("square feet");
-    m_units[i18n("square ft")]            = i18n("square feet");
-    m_units[i18n("sq foot")]              = i18n("square feet");
-    m_units[i18n("sq ft")]                = i18n("square feet");
-    m_units[i18n("sq feet")]              = i18n("square feet");
-    m_units[i18n("feet\xc2\xb2")]         = i18n("square feet");
-    m_units[i18n("ft\xc2\xb2")]           = i18n("square feet");
-    m_units[i18n("square feet")]          = 0.09290304;
-    m_units[i18n("square inch")]          = i18n("square inches");
-    m_units[i18n("square in")]            = i18n("square inches");
-    m_units[i18n("sq inches")]            = i18n("square inches");
-    m_units[i18n("sq inch")]              = i18n("square inches");
-    m_units[i18n("sq in")]                = i18n("square inches");
-    m_units[i18n("inch\xc2\xb2")]         = i18n("square inches");
-    m_units[i18n("in\xc2\xb2")]           = i18n("square inches");
-    m_units[i18n("square inches")]        = 0.00064516;
-    m_units[i18n("square mile")]          = i18n("square mile");
-    m_units[i18n("square mi")]            = i18n("square mile");
-    m_units[i18n("sq miles")]             = i18n("square mile");
-    m_units[i18n("sq mile")]              = i18n("square mile");
-    m_units[i18n("sq mi")]                = i18n("square mile");
-    m_units[i18n("mile\xc2\xb2")]         = i18n("square mile");
-    m_units[i18n("mi\xc2\xb2")]           = i18n("square mile");
-    m_units[i18n("square miles")]         = 2589988.110336;
+    m_units[i18nc("area unit", "acre")]                 		= 4046.9;
+    m_units[i18nc("area unit", "square foot")]          		= i18n("square feet");
+    m_units[i18nc("area unit: square foot", "square ft")]            	= i18n("square feet");
+    m_units[i18nc("area unit: square foot", "sq foot")]              	= i18n("square feet");
+    m_units[i18nc("area unit: square foot", "sq ft")]                	= i18n("square feet");
+    m_units[i18nc("area unit: square feet", "sq feet")]              	= i18n("square feet");
+    m_units[i18nc("area unit: square feet", "feet\xc2\xb2")]          	= i18n("square feet");
+    m_units[i18nc("area unit: square feet", "ft\xc2\xb2")]           	= i18n("square feet");
+    m_units[i18nc("area unit", "square feet")]          		= 0.09290304;
+    m_units[i18nc("area unit", "square inch")]          		= i18n("square inches");
+    m_units[i18nc("area unit: square inch", "square in")]            	= i18n("square inches");
+    m_units[i18nc("area unit: square inch", "sq inches")]            	= i18n("square inches");
+    m_units[i18nc("area unit: square inch", "sq inch")]              	= i18n("square inches");
+    m_units[i18nc("area unit: square inch", "sq in")]                	= i18n("square inches");
+    m_units[i18nc("area unit: square inches", "inch\xc2\xb2")]         	= i18n("square inches");
+    m_units[i18nc("area unit: square inches", "in\xc2\xb2")]           	= i18n("square inches");
+    m_units[i18nc("area unit", "square inches")]        		= 0.00064516;
+    m_units[i18nc("area unit", "square mile")]          		= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "square mi")]            	= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "sq miles")]             	= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "sq mile")]              	= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "sq mi")]                	= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "mile\xc2\xb2")]         	= i18n("square mile");
+    m_units[i18nc("area unit: square miles", "mi\xc2\xb2")]           	= i18n("square mile");
+    m_units[i18nc("area unit", "square miles")]         		= 2589988.110336;
 }
 
 QString Area::name() const
