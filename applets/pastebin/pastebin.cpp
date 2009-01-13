@@ -49,7 +49,7 @@ using namespace Plasma;
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_textServer(0), m_imageServer(0),
       m_textBackend(0), m_imageBackend(0),
-      m_text(i18n("Drag text/image here to post to server"))
+      m_text(i18n("Drop text or images on me to upload them to Pastebin."))
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -153,7 +153,8 @@ void Pastebin::showResults(const QString &url)
 {
     setBusy(false);
     m_text = i18n("Successfully posted to: <a href=\"%1\">%2</a><p>"
-                  "Drag text/image here to post to server", url, url);
+                  "Drop text or images on me to upload them to Pastebin.",
+                  url, url);
     m_displayEdit->setText(m_text);
     QApplication::clipboard()->setText(url);
 }
@@ -161,8 +162,8 @@ void Pastebin::showResults(const QString &url)
 void Pastebin::showErrors()
 {
     setBusy(false);
-    m_text = i18n("Error during post. Try again."
-                  "Drag text/image here to post to server");
+    m_text = i18n("Error during uploading! Please try again.<p>"
+                  "Drop text or images on me to upload them to Pastebin.");
     m_displayEdit->setText(m_text);
 }
 
