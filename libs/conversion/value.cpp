@@ -48,6 +48,11 @@ Value::Value(const QVariant& n, const QString& u)
 {
 }
 
+Value::~Value()
+{
+   delete d;
+}
+
 bool Value::isValid() const
 {
     return (d->number.isValid() && !d->unit.isEmpty());

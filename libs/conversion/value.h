@@ -31,7 +31,7 @@ class PLASMACONVERSION_EXPORT Value
 public:
     Value();
     Value(const QVariant& n, const QString& u);
-
+    ~Value();
     /**
      * Check if value is valid.
      *
