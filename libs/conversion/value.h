@@ -20,7 +20,6 @@
 
 #include <QString>
 #include <QVariant>
-#include <QStringList>
 #include "plasmaconversion_export.h"
 
 namespace Conversion

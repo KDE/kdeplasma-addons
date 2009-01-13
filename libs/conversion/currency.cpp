@@ -23,8 +23,6 @@
 #include <KLocale>
 #include <KProcess>
 #include <KStandardDirs>
-#include <KIO/Job>
-#include <KIO/NetAccess>
 #include <Solid/Networking>
 
 static const char* URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
