@@ -17,13 +17,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "slideshow.h"
+
 #include <QDir>
-#include <KUrl>
 #include <KRandomSequence>
 #include <KDebug>
 
 #include "picture.h"
-#include "slideshow.h"
 #include <stdlib.h>
 
 SlideShow::SlideShow()

@@ -21,6 +21,8 @@
  *
  */
 
+#include "leavenote.h"
+
 #include <QtCore/QProcess>
 #include <QtCore/QHash>
 #include <QtDBus/QDBusInterface>
@@ -41,8 +43,6 @@
 #include <KPushButton>
 #include <KTextEdit>
 #include <KLocale>
-
-#include "leavenote.h"
 
 #define MAX_CHAR 1000
 

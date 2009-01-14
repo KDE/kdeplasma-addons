@@ -17,18 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_WIDGET_H_
-#define LANCELOT_WIDGET_H_
+#ifndef LANCELOT_WIDGET_H
+#define LANCELOT_WIDGET_H
 
-#include <KDebug>
+#include <KDE/KDebug>
 
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>
 
 #include <lancelot/Global.h>
 
-#include <QtGui>
-#include <QGraphicsWidget>
+#include <QtGui/QGraphicsWidget>
 
 namespace Lancelot
 {
@@ -194,5 +193,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_WIDGET_H_ */
+#endif /* LANCELOT_WIDGET_H */
 

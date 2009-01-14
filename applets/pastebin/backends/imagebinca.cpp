@@ -19,6 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "imagebinca.h"
+
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
@@ -29,8 +31,6 @@
 #include <krandom.h>
 #include <kapplication.h>
 #include <KDebug>
-
-#include "imagebinca.h"
 
 ImagebinCAServer::ImagebinCAServer()
     : PastebinServer(),

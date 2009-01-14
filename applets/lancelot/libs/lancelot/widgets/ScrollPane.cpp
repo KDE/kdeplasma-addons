@@ -17,9 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <KDebug>
-
 #include "ScrollPane.h"
+
+#include <KDebug>
+#include <QGraphicsSceneWheelEvent>
+
 #include "ScrollBar.h"
 #include "Widget.h"
 #include <lancelot/layouts/FullBorderLayout.h>

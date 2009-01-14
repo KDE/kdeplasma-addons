@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_
-#define LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_
+#ifndef LANCELOTAPP_MODELS_RECENTDOCUMENTS_H
+#define LANCELOTAPP_MODELS_RECENTDOCUMENTS_H
 
 #include "FolderModel.h"
 #include <KDirWatch>
@@ -34,4 +34,4 @@ public:
 
 } // namespace Models
 
-#endif /* LANCELOTAPP_MODELS_RECENTDOCUMENTS_H_ */
+#endif /* LANCELOTAPP_MODELS_RECENTDOCUMENTS_H */

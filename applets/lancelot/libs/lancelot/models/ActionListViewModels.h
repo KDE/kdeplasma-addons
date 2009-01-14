@@ -17,18 +17,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_ACTION_LIST_VIEW_MODELS_H_
-#define LANCELOT_ACTION_LIST_VIEW_MODELS_H_
+#ifndef LANCELOT_ACTION_LIST_VIEW_MODELS_H
+#define LANCELOT_ACTION_LIST_VIEW_MODELS_H
 
 #include <lancelot/lancelot_export.h>
 
-#include <QPair>
-#include <QMimeData>
-#include <QString>
-#include <QIcon>
-#include <QVariant>
-#include <QMenu>
-#include <QAction>
+#include <QtCore/QPair>
+#include <QtCore/QMimeData>
+#include <QtCore/QString>
+#include <QtGui/QIcon>
+#include <QtCore/QVariant>
+#include <QtGui/QMenu>
+#include <QtGui/QAction>
 
 namespace Lancelot
 {
@@ -419,5 +419,5 @@ private slots:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_ACTION_LIST_VIEW_MODELS_H_ */
+#endif /* LANCELOT_ACTION_LIST_VIEW_MODELS_H */
 

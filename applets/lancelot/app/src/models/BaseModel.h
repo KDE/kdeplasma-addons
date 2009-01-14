@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_BASEMODEL_H_
-#define LANCELOTAPP_MODELS_BASEMODEL_H_
+#ifndef LANCELOTAPP_MODELS_BASEMODEL_H
+#define LANCELOTAPP_MODELS_BASEMODEL_H
 
 #include <lancelot/models/ActionListViewModels.h>
 #include <KService>
@@ -84,4 +84,4 @@ private:
 
 } // namespace Models
 
-#endif /* LANCELOTAPP_MODELS_BASEMODEL_H_ */
+#endif /* LANCELOTAPP_MODELS_BASEMODEL_H */

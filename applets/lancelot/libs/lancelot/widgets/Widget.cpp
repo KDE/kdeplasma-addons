@@ -17,11 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <QVariant>
 #include "Widget.h"
+
+#include <QVariant>
 #include "Global.h"
 #include <lancelot/lancelot.h>
 #include <KDebug>
+
+#include <QtGui/QGraphicsSceneMouseEvent>
+#include <QtGui/QPainter>
 
 namespace Lancelot {
 

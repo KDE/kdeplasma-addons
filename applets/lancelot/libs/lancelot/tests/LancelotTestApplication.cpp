@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "LancelotTestApplication.h"
+
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <KDebug>
@@ -27,7 +29,6 @@
 
 #include <lancelot/Global.h>
 #include "LancelotTestWindow.h"
-#include "LancelotTestApplication.h"
 
 LancelotTestApplication * LancelotTestApplication::m_application = NULL;
 

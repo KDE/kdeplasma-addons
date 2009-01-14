@@ -19,6 +19,8 @@
 
 #include "HoverIcon.h"
 
+#include <QBasicTimer>
+
 #define ACTIVATION_TIME 300
 
 namespace Lancelot

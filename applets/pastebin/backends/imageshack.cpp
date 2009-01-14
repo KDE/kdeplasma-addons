@@ -20,6 +20,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "imageshack.h"
+
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
@@ -30,8 +32,6 @@
 #include <krandom.h>
 #include <kapplication.h>
 #include <KDebug>
-
-#include "imageshack.h"
 
 ImageshackServer::ImageshackServer()
     : PastebinServer(),

@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_EXPORT_H_
-#define LANCELOT_EXPORT_H_
+#ifndef LANCELOT_EXPORT_H
+#define LANCELOT_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
@@ -46,5 +46,5 @@
 // Extra data needed by PUCK module generator. Does nothing otherwise
 #define L_EXTRA(A)
 
-#endif // LANCELOT_EXPORT_H_
+#endif // LANCELOT_EXPORT_H
 

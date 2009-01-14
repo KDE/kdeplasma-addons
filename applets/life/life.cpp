@@ -17,19 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "life.h"
+
 #include <assert.h>
 #include <cstdlib>
 
 #include <QPainter>
-#include <QTimer>
 
 #include <Plasma/Svg>
 #include <Plasma/Theme>
 #include <KConfigDialog>
 #include <KDebug>
-
-#include "ui_lifeConfig.h"
-#include "life.h"
 
 Life::Life(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),

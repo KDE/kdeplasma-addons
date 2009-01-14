@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_LAUNCHER_APPLET_H_
-#define LANCELOT_LAUNCHER_APPLET_H_
+#ifndef LANCELOT_APPLET_H
+#define LANCELOT_APPLET_H
 
 #include <plasma/applet.h>
 #include <KConfigDialog>

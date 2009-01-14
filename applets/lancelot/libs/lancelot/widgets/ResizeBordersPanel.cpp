@@ -17,9 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "ResizeBordersPanel.h"
+
 #include <KDebug>
 
-#include "ResizeBordersPanel.h"
 #include "Widget.h"
 
 #define COLOR 255,0,0

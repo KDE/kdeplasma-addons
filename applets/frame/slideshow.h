@@ -17,16 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef SLIDESHOW_H_
-#define SLIDESHOW_H_
+#ifndef SLIDESHOW_H
+#define SLIDESHOW_H
 
 #include <QString>
 #include <QStringList>
 #include <QImage>
 #include <math.h>
 #include <iostream>
-
-class KUrl;
+#include <KUrl>
 
 class SlideShow
 {
@@ -56,4 +55,4 @@ private:
 
 };
 
-#endif /*SLIDESHOW_H_*/
+#endif /*SLIDESHOW_H*/

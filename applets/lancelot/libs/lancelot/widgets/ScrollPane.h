@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_SCROLL_PANE_H_
-#define LANCELOT_SCROLL_PANE_H_
+#ifndef LANCELOT_SCROLL_PANE_H
+#define LANCELOT_SCROLL_PANE_H
 
 #include <lancelot/lancelot_export.h>
 
@@ -198,5 +198,5 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Lancelot::ScrollPane::Flags)
 
-#endif // LANCELOT_SCROLL_PANE_H_
+#endif // LANCELOT_SCROLL_PANE_H
 

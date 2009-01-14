@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "pastebincom.h"
+
 #include <KDebug>
 #include <QUrl>
-
-#include "pastebincom.h"
 
 PastebinCOMServer::PastebinCOMServer()
     : PastebinServer(),

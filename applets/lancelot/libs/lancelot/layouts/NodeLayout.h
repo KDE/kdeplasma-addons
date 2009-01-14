@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_NODE_LAYOUT_H_
-#define LANCELOT_NODE_LAYOUT_H_
+#ifndef LANCELOT_NODE_LAYOUT_H
+#define LANCELOT_NODE_LAYOUT_H
 
 #include <QtCore/QMap>
 #include <cmath>
@@ -116,5 +116,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_NODE_LAYOUT_H_ */
+#endif /* LANCELOT_NODE_LAYOUT_H */
 

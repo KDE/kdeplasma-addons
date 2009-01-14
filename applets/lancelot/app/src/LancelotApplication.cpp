@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "LancelotApplication.h"
+
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <KLocale>
@@ -25,12 +27,10 @@
 #include <QtDBus>
 
 #include <KAction>
-#include <KLocale>
 #include <KCrash>
 
 #include <lancelot/Global.h>
 #include "LancelotWindow.h"
-#include "LancelotApplication.h"
 #include "models/BaseModel.h"
 
 #include "lancelotadaptor.h"

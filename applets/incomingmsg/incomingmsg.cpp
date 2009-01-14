@@ -48,13 +48,15 @@
 
 IncomingMsg::IncomingMsg(QObject *parent, const QVariantList &args)
         : Plasma::Applet(parent, args),
-        mEvolutionLabel(0), mEvolutionIconLabel(0),
-        mKMailLabel(0), mKMailIconLabel(0),
-        mXChatLabel(0), mXChatIconLabel(0),
-        mKopeteLabel(0), mKopeteIconLabel(0),
-        mPidginLabel(0), mPidginIconLabel(0),
-        mLayout(0), mEvolutionLayout(0), mKMailLayout(0), mXChatLayout(0), mKopeteLayout(0),
-        mPidginLayout(0)
+          mEvolutionLabel(0), mEvolutionIconLabel(0),
+          mKMailLabel(0), mKMailIconLabel(0),
+          mXChatLabel(0), mXChatIconLabel(0),
+          mKopeteLabel(0), mKopeteIconLabel(0),
+          mPidginLabel(0), mPidginIconLabel(0),
+          mErrorLabel(0), mLayout(0),
+          mEvolutionLayout(0), mKMailLayout(0),
+          mXChatLayout(0), mKopeteLayout(0),
+          mPidginLayout(0)
 {
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
@@ -93,38 +95,8 @@ void IncomingMsg::init()
     initLayout();
 }
 
-void IncomingMsg::initLayout()
+void IncomingMsg::initEvolutionLayout()
 {
-    delete mKMailLayout;
-    mKMailLayout = 0;
-    delete mKMailIconLabel;
-    mKMailIconLabel = 0;
-    delete mKMailLabel;
-    mKMailLabel = 0;
-
-    delete mXChatLayout;
-    mXChatLayout = 0;
-    delete mXChatIconLabel;
-    mXChatIconLabel = 0;
-    delete mXChatLabel;
-    mXChatLabel = 0;
-
-    delete mKopeteLayout;
-    mKopeteLayout = 0;
-    delete mKopeteIconLabel;
-    mKopeteIconLabel = 0;
-    delete mKopeteLabel;
-    mKopeteLabel = 0;
-
-    delete mPidginLayout;
-    mPidginLayout = 0;
-    delete mPidginIconLabel;
-    mPidginIconLabel = 0;
-    delete mPidginLabel;
-    mPidginLabel = 0;
-
-    mLayout = new QGraphicsLinearLayout(Qt::Vertical);
-
     /* test for the evolution dbus interface */
     // TODO find out why evolution does not expose dbus on a kde session here
 //    QDBusInterface evolutionDBusTest( "org.freedesktop.Notification",
@@ -160,7 +132,10 @@ void IncomingMsg::initLayout()
 //            mLayout->addItem(mEvolutionLayout);
 //        }
 //    }
+}
 
+void IncomingMsg::initKMailLayout()
+{
     /* test for the kmail dbus interface */
     if (mShowKMail) {
         QDBusInterface kmailDBusTest("org.kde.kmail", "/KMail", "org.freedesktop.DBus.Introspectable");
@@ -183,9 +158,10 @@ void IncomingMsg::initLayout()
                 mKMailIconLabel->setMinimumWidth(32);
                 mKMailIconLabel->setMinimumHeight(32);
                 KIconEffect effect;
-                mKMailIconLabel->nativeWidget()->setPixmap(
-                    effect.apply(icon.pixmap(32, 32), KIconEffect::ToGray, 1, QColor(), QColor(), true)
-                );
+                mKMailIconLabel->nativeWidget()->setPixmap(effect.apply(icon.pixmap(32, 32),
+                                                                        KIconEffect::ToGray, 1,
+                                                                        QColor(), QColor(), true)
+                                                           );
 
                 mKMailLayout->addItem(mKMailIconLabel);
                 mKMailLayout->addItem(mKMailLabel);
@@ -195,7 +171,10 @@ void IncomingMsg::initLayout()
             }
         }
     }
+}
 
+void IncomingMsg::initXChatLayout()
+{
     /* test for the xchat dbus interface */
     // do not really understand how this interface works
     // got this working code from http://arstechnica.com/reviews/hardware/tux-droid-review.ars/3
@@ -230,7 +209,10 @@ void IncomingMsg::initLayout()
             }
         }
     }
+}
 
+void IncomingMsg::initKopeteLayout()
+{
     /* test for the kopete dbus interface */
     if (mShowKopete) {
         QDBusInterface kopeteDBusTest("org.kde.kopete", "/kopete", "org.freedesktop.DBus.Introspectable");
@@ -265,7 +247,10 @@ void IncomingMsg::initLayout()
             }
         }
     }
+}
 
+void IncomingMsg::initPidginLayout()
+{
     /* test for the pidgin dbus interface */
     // FIXME introspect does not work here with qdbus trying sth. else
     if (mShowPidgin) {
@@ -302,13 +287,56 @@ void IncomingMsg::initLayout()
             }
         }
     }
+}
+
+void IncomingMsg::initLayout()
+{
+    delete mKMailLayout;
+    mKMailLayout = NULL;
+    delete mKMailIconLabel;
+    mKMailIconLabel = NULL;
+    delete mKMailLabel;
+    mKMailLabel = NULL;
+
+    delete mXChatLayout;
+    mXChatLayout = NULL;
+    delete mXChatIconLabel;
+    mXChatIconLabel = NULL;
+    delete mXChatLabel;
+    mXChatLabel = NULL;
+
+    delete mKopeteLayout;
+    mKopeteLayout = NULL;
+    delete mKopeteIconLabel;
+    mKopeteIconLabel = NULL;
+    delete mKopeteLabel;
+    mKopeteLabel = NULL;
+
+    delete mPidginLayout;
+    mPidginLayout = NULL;
+    delete mPidginIconLabel;
+    mPidginIconLabel = NULL;
+    delete mPidginLabel;
+    mPidginLabel = NULL;
+
+    delete mErrorLabel;
+    mErrorLabel = NULL;
+
+    delete mLayout;
+    mLayout = new QGraphicsLinearLayout(Qt::Vertical);
+
+    //initEvolutionLayout();
+    initKMailLayout();
+    initXChatLayout();
+    initKopeteLayout();
+    initPidginLayout();
 
     if (!mLayout->count()) {
-        Plasma::Label *errorLabel = new Plasma::Label();
-        errorLabel->setText(i18n("No running messaging apps found. Supported apps are %1, %2, %3, %4.",
-                                 QString("KMail"), QString("XChat"), QString("Kopete"),
-                                 QString("Pidgin")));
-        mLayout->addItem(errorLabel);
+        mErrorLabel = new Plasma::Label();
+        mErrorLabel->setText(i18n("No running messaging apps found. Supported apps are %1, %2, %3, %4.",
+                                  QString("KMail"), QString("XChat"), QString("Kopete"),
+                                  QString("Pidgin")));
+        mLayout->addItem(mErrorLabel);
     }
 
     setLayout(mLayout);

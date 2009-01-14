@@ -17,17 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_CARD_LAYOUT_H_
-#define LANCELOT_CARD_LAYOUT_H_
+#ifndef LANCELOT_CARD_LAYOUT_H
+#define LANCELOT_CARD_LAYOUT_H
 
 #include <lancelot/lancelot_export.h>
 
 #include <cmath>
-#include <QMap>
+#include <QtCore/QMap>
 
-#include <QGraphicsLayout>
-#include <QGraphicsLayoutItem>
-#include <QGraphicsWidget>
+#include <QtGui/QGraphicsLayout>
+#include <QtGui/QGraphicsLayoutItem>
+#include <QtGui/QGraphicsWidget>
 
 namespace Lancelot
 {
@@ -98,5 +98,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_CARD_LAYOUT_H_ */
+#endif /* LANCELOT_CARD_LAYOUT_H */
 

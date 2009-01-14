@@ -17,8 +17,8 @@
  */
 
 // Here we avoid loading the header multiple times
-#ifndef Leavemsg_HEADER
-#define Leavemsg_HEADER
+#ifndef LEAVENOTE_H
+#define LEAVENOTE_H
 
 #include <QHash>
 #include <QTimer>
@@ -89,6 +89,6 @@ private:
 
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(leavenote, LeaveNote)
-#endif
+#endif /* LEAVENOTE_H */
 
 void verboseLog(QString);

@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_LAUNCHER_APPLET_CONFIG_H_
-#define LANCELOT_LAUNCHER_APPLET_CONFIG_H_
+#ifndef LANCELOT_PART_CONFIG_H
+#define LANCELOT_PART_CONFIG_H
 
 #include <ui_LancelotPartConfigBase.h>
 #include <lancelot/lancelot.h>

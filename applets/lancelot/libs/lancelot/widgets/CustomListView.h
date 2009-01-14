@@ -17,13 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_CUSTOM_LIST_VIEW_H_
-#define LANCELOT_CUSTOM_LIST_VIEW_H_
+#ifndef LANCELOT_CUSTOM_LIST_VIEW_H
+#define LANCELOT_CUSTOM_LIST_VIEW_H
 
 #include <lancelot/lancelot_export.h>
 
-#include <QtGui>
-#include <QtCore>
 #include <KDebug>
 #include <KIcon>
 
@@ -163,5 +161,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_CUSTOM_LIST_VIEW_H_ */
+#endif /* LANCELOT_CUSTOM_LIST_VIEW_H */
 

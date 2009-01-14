@@ -20,6 +20,9 @@
 #include "PassagewayView.h"
 
 #include <QWidget>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
+#include <QApplication>
 
 namespace Lancelot {
 

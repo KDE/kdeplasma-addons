@@ -17,15 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_PANEL_H_
-#define LANCELOT_PANEL_H_
+#ifndef LANCELOT_PANEL_H
+#define LANCELOT_PANEL_H
 
 #include <lancelot/lancelot_export.h>
 #include <plasma/plasma.h>
 
 #include <lancelot/widgets/Widget.h>
 
-#include <QIcon>
+#include <QtGui/QIcon>
 
 namespace Lancelot
 {
@@ -141,5 +141,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_PANEL_H_*/
+#endif /* LANCELOT_PANEL_H */
 

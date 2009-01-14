@@ -17,11 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "configdialog.h"
+
 #include <KComboBox>
 #include <KLocale>
 #include <KStandardDirs>
 
-#include "configdialog.h"
 #include "picture.h"
 
 ConfigDialog::ConfigDialog(QWidget *parent)

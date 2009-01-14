@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LIBLANCELOT_H_
-#define LIBLANCELOT_H_
+#ifndef LIBLANCELOT_H
+#define LIBLANCELOT_H
 
 #include <QWidget>
 #include <QMetaObject>
@@ -80,5 +80,5 @@ enum ActivationMethod {
 
 } // namespace Lancelot
 
-#endif // LIBLANCELOT_H_
+#endif // LIBLANCELOT_H
 

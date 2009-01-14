@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_RESIZE_BORDERS_PANEL_H_
-#define LANCELOT_RESIZE_BORDERS_PANEL_H_
+#ifndef LANCELOT_RESIZE_BORDERS_PANEL_H
+#define LANCELOT_RESIZE_BORDERS_PANEL_H
 
 #include <lancelot/lancelot_export.h>
 
@@ -58,5 +58,5 @@ private:
 
 } // namespace Lancelot
 
-#endif // LANCELOT_RESIZE_BORDERS_PANEL_H_
+#endif // LANCELOT_RESIZE_BORDERS_PANEL_H
 

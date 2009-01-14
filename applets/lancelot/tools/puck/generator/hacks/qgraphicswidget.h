@@ -1,3 +1,5 @@
+#ifndef LANCELOT_QGRAPHICS_WIDGET_H
+#define LANCELOT_QGRAPHICS_WIDGET_H
 
 class Q_GUI_EXPORT QGraphicsWidget : public QGraphicsLayoutItem
 {
@@ -11,4 +13,5 @@ class Q_GUI_EXPORT QGraphicsWidget : public QGraphicsLayoutItem
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible)
     Q_PROPERTY(Qt::WindowFlags windowFlags READ windowFlags WRITE setWindowFlags)
     Q_PROPERTY(QString windowTitle READ windowTitle WRITE setWindowTitle)
-}
+};
+#endif /* LANCELOT_QGRAPHICS_WIDGET_H */

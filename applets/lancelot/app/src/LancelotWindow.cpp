@@ -22,6 +22,8 @@
 
 #include <QGraphicsItem>
 #include <QStyleOptionGraphicsItem>
+#include <QGraphicsView>
+#include <QDesktopWidget>
 
 #include <KRecentDocument>
 #include <KActionCollection>

@@ -22,6 +22,9 @@
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
+#include <QTimer>
+
+#include "ui_lifeConfig.h"
 
 namespace Plasma
 {

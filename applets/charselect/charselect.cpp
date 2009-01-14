@@ -17,6 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "charselect.h"
 
 #include <QClipboard>
 #include <QApplication>
@@ -25,7 +26,6 @@
 #include <KPushButton>
 #include <QGridLayout>
 #include <plasma/widgets/iconwidget.h>
-#include "charselect.h"
 
 CharSelectApplet::CharSelectApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),

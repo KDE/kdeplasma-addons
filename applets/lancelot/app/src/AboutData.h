@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_ABOUT_DATA_H_
-#define LANCELOTAPP_ABOUT_DATA_H_
+#ifndef LANCELOTAPP_ABOUT_DATA_H
+#define LANCELOTAPP_ABOUT_DATA_H
 
 #include <KAboutData>
 
@@ -27,6 +27,6 @@ public:
     AboutData();
 };
 
-#endif // LANCELOTAPP_ABOUT_DATA_H_
+#endif // LANCELOTAPP_ABOUT_DATA_H
 
 

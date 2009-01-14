@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_HOVER_ICON_H_
-#define LANCELOT_HOVER_ICON_H_
+#ifndef LANCELOT_HOVER_ICON_H
+#define LANCELOT_HOVER_ICON_H
 
 #include <plasma/widgets/iconwidget.h>
 #include <lancelot/lancelot.h>
@@ -98,6 +98,6 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_HOVER_ICON_H_ */
+#endif /* LANCELOT_HOVER_ICON_H */
 
 

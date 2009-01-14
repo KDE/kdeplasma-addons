@@ -1,3 +1,5 @@
+#ifndef LANCELOT_QGRAPHICS_LAYOUT_ITEM_H
+#define LANCELOT_QGRAPHICS_LAYOUT_ITEM_H
 
 class Q_GUI_EXPORT QGraphicsLayoutItem
 {
@@ -13,5 +15,5 @@ class Q_GUI_EXPORT QGraphicsLayoutItem
     Q_PROPERTY ( qreal preferredWidth READ preferredWidth WRITE setPreferredWidth )
     Q_PROPERTY ( qreal preferredHeight READ preferredHeight WRITE setPreferredHeight )
 
-}
-
+};
+#endif /* LANCELOT_QGRAPHICS_LAYOUT_ITEM_H */

@@ -51,6 +51,12 @@ protected:
     void createConfigurationInterface(KConfigDialog *parent);
     void constraintsEvent(Plasma::Constraints);
 
+    void initEvolutionLayout();
+    void initKMailLayout();
+    void initXChatLayout();
+    void initKopeteLayout();
+    void initPidginLayout();
+
 protected slots:
     void configAccepted();
 
@@ -58,19 +64,15 @@ private:
     void initLayout();
     // text labels
     Plasma::Label *mEvolutionLabel, *mEvolutionIconLabel,
-    *mKMailLabel, *mKMailIconLabel,
-    *mXChatLabel, *mXChatIconLabel,
-    *mKopeteLabel, *mKopeteIconLabel,
-    *mPidginLabel, *mPidginIconLabel;
+        *mKMailLabel, *mKMailIconLabel, *mXChatLabel,
+        *mXChatIconLabel, *mKopeteLabel, *mKopeteIconLabel,
+        *mPidginLabel, *mPidginIconLabel, *mErrorLabel;
 
-    QGraphicsLinearLayout *mLayout,
-    *mEvolutionLayout,
-    *mKMailLayout,
-    *mXChatLayout,
-    *mKopeteLayout,
-    *mPidginLayout;
-    bool mShowKMail, mShowXChat, mShowKopete,
-    mShowPidgin;
+    QGraphicsLinearLayout *mLayout, *mEvolutionLayout,
+        *mKMailLayout, *mXChatLayout, *mKopeteLayout,
+        *mPidginLayout;
+
+    bool mShowKMail, mShowXChat, mShowKopete, mShowPidgin;
 
     Ui::incomingmsgConfig ui;
 

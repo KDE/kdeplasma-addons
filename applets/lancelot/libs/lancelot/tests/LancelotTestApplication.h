@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPPLICATION_H_
-#define LANCELOTAPPLICATION_H_
+#ifndef LANCELOT_TEST_APPLICATION_H
+#define LANCELOT_TEST_APPLICATION_H
 
 #include <kuniqueapplication.h>
 #include <QTimer>
@@ -46,4 +46,4 @@ protected:
 
 };
 
-#endif /*LANCELOTAPPLICATION_H_*/
+#endif /*LANCELOT_TEST_APPLICATION_H*/

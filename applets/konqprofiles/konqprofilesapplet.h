@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA          *
  ***************************************************************************/
 
-#ifndef _KONQPROFILESAPPLET_H_
-#define _KONQPROFILESAPPLET_H_
+#ifndef KONQPROFILESAPPLET_H
+#define KONQPROFILESAPPLET_H
 
 
 #include <Plasma/PopupApplet>

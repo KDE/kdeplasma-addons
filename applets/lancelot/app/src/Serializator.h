@@ -17,6 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#ifndef LANCELOT_SERIALIZATOR_H
+#define LANCELOT_SERIALIZATOR_H
+
 #include <QMap>
 
 class Serializator {
@@ -24,4 +27,4 @@ public:
     static QString serialize(const QMap < QString , QString > data);
     static QMap < QString , QString > deserialize(const QString & data);
 };
-
+#endif /* LANCELOT_SERIALIZATOR_H */

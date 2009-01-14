@@ -22,6 +22,7 @@
 #include <QRectF>
 #include <KDebug>
 #include <QIcon>
+#include <QTimer>
 
 #define ACTIVATION_TIME 300
 

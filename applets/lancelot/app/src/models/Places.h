@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_PLACES_H_
-#define LANCELOTAPP_MODELS_PLACES_H_
+#ifndef LANCELOTAPP_MODELS_PLACES_H
+#define LANCELOTAPP_MODELS_PLACES_H
 
 #include "BaseModel.h"
 
@@ -36,4 +36,4 @@ protected:
 
 } // namespace Models
 
-#endif /* LANCELOTAPP_MODELS_PLACES_H_ */
+#endif /* LANCELOTAPP_MODELS_PLACES_H */

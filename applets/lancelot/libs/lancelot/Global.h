@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_GLOBAL_H_
-#define LANCELOT_GLOBAL_H_
+#ifndef LANCELOT_GLOBAL_H
+#define LANCELOT_GLOBAL_H
 
 #include <QColor>
 #include <QString>
@@ -277,5 +277,5 @@ private:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_GLOBAL_H_ */
+#endif /* LANCELOT_GLOBAL_H */
 

@@ -21,6 +21,8 @@
 #include <KDebug>
 
 #include "ExtenderButton.h"
+#include <QTimer>
+#include <QGraphicsSceneMouseEvent>
 
 namespace Lancelot
 {

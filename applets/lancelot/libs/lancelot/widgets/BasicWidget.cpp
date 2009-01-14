@@ -22,6 +22,7 @@
 #include <cmath>
 #include "Global.h"
 #include <lancelot/lancelot.h>
+#include <QtGui/QPainter>
 
 #define WIDGET_PADDING 8
 
