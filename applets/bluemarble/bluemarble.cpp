@@ -170,7 +170,7 @@ void BlueMarble::paintGLInterface(QPainter *, const QStyleOptionGraphicsItem *)
 
     glCullFace(GL_BACK);
     checkGLError("paint 5");
-   gluSphere(mSphere, earthRadius, earthDetailLevel, earthDetailLevel);
+    gluSphere(mSphere, earthRadius, earthDetailLevel, earthDetailLevel);
 
     mShader->unbind();
 }
