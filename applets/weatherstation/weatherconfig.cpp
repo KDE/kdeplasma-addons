@@ -166,10 +166,10 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     temperatureComboBox->addItem(i18n("Celsius \302\260C"), "C");
     temperatureComboBox->addItem(i18n("Fahrenheit \302\260F"), "F");
     temperatureComboBox->addItem(i18n("Kelvin K"), "K");
-    pressureComboBox->addItem(i18n("Hehtopascals hPa"), "hPa");
+    pressureComboBox->addItem(i18n("Hectopascals hPa"), "hPa");
     pressureComboBox->addItem(i18n("Kilopascals kPa"), "kPa");
     pressureComboBox->addItem(i18n("Millibars mbar"), "mbar");
-    pressureComboBox->addItem(i18n("Inches of Mergury inHg"), "inHg");
+    pressureComboBox->addItem(i18n("Inches of Mercury inHg"), "inHg");
     speedComboBox->addItem(i18n("Meters per Second m/s"), "ms");
     speedComboBox->addItem(i18n("Kilometer per Hour km/h"), "kmh");
     speedComboBox->addItem(i18n("Miles per Hour mph"), "mph");
