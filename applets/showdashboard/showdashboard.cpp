@@ -57,6 +57,7 @@ void ShowDashboard::init()
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
     connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleShowDashboard(bool)));
+    connect(this, SIGNAL(activate()), this, SLOT(toggleShowDashboard()));
 }
 
 void ShowDashboard::toggleShowDashboard(bool pressed)
@@ -64,6 +65,12 @@ void ShowDashboard::toggleShowDashboard(bool pressed)
     if (!pressed) {
         return;
     }
+
+    toggleShowDashboard();
+}
+
+void ShowDashboard::toggleShowDashboard()
+{
     QDBusInterface plasmaApp( "org.kde.plasma", "/App" );
     plasmaApp.call( "toggleDashboard" );
 }

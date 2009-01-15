@@ -36,6 +36,7 @@ class ShowDashboard : public Plasma::Applet
 
     protected slots:
         void toggleShowDashboard(bool);
+        void toggleShowDashboard();
 };
 
 K_EXPORT_PLASMA_APPLET(showdashboard, ShowDashboard)
