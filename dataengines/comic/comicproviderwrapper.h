@@ -38,7 +38,7 @@ class ImageWrapper : public QObject
         Q_PROPERTY( QImage image READ image WRITE setImage )
         Q_PROPERTY( QByteArray rawData READ rawData WRITE setRawData )
     public:
-        ImageWrapper( QObject *parent = 0, const QImage &image = QImage() );
+        explicit ImageWrapper( QObject *parent = 0, const QImage &image = QImage() );
 
         QImage image() const;
         void setImage( const QImage &image );
@@ -54,7 +54,7 @@ class DateWrapper : public QObject
         Q_OBJECT
         Q_PROPERTY( QDate date READ date WRITE setDate )
     public:
-        DateWrapper( QObject *parent = 0, const QDate &date = QDate() );
+        explicit DateWrapper( QObject *parent = 0, const QDate &date = QDate() );
 
         QDate date() const;
         void setDate( const QDate &date );

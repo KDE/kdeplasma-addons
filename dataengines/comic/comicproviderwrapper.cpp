@@ -257,7 +257,7 @@ ComicProviderWrapper::~ComicProviderWrapper()
 
 void ComicProviderWrapper::init()
 {
-    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + "/" );
+    const QString path = KStandardDirs::locate( "data", "plasma/comics/" + mProvider->pluginName() + '/' );
     if ( !path.isEmpty() ) {
         mPackage = new Plasma::Package( path, ComicProviderKross::packageStructure() );
 
@@ -298,8 +298,8 @@ const QStringList& ComicProviderWrapper::extensions() const
         foreach( const QString &interpretername, Kross::Manager::self().interpreters() ) {
             info = Kross::Manager::self().interpreterInfo( interpretername );
             wildcards = info->wildcard();
-            wildcards.replace( "*", "" );
-            mExtensions << wildcards.split( " " );
+            wildcards.replace( '*', "" );
+            mExtensions << wildcards.split( ' ' );
         }
     }
     return mExtensions;

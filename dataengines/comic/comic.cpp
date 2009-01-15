@@ -16,6 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "comic.h"
+
 #include <QtCore/QDate>
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
@@ -25,8 +27,6 @@
 #include <KStandardDirs>
 
 #include <solid/networking.h>
-
-#include "comic.h"
 
 #include "cachedprovider.h"
 

@@ -30,10 +30,13 @@
 #include <KDebug>
 #include <KUrl>
 #include <ksocketfactory.h>
-#include <KUrl>
 
 #include "timelinesource.h"
 #include "imagesource.h"
+
+const QString TwitterEngine::timelinePrefix("Timeline:");
+const QString TwitterEngine::timelineWithFriendsPrefix("TimelineWithFriends:");
+const QString TwitterEngine::profilePrefix("Profile:");
 
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
@@ -54,7 +57,7 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
 
-    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:")  && !name.startsWith("Profile:")) {
+    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)  && !name.startsWith(profilePrefix)) {
         return false;
     }
 
@@ -83,22 +86,22 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
 {
     //kDebug() << name;
     //right now it only makes sense to do an update on timelines
-    if (!name.startsWith("Timeline:") && !name.startsWith("TimelineWithFriends:") && !name.startsWith("Profile:")) {
+    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix) && !name.startsWith(profilePrefix)) {
         return false;
     }
 
     TimelineSource::RequestType requestType;
 
     QString who = name;
-    if (name.startsWith("TimelineWithFriends:")) {
+    if (name.startsWith(timelineWithFriendsPrefix)) {
         requestType = TimelineSource::TimelineWithFriends;
-        who.remove("TimelineWithFriends:");
-    } else if (name.startsWith("Profile:")) {
+        who.remove(timelineWithFriendsPrefix);
+    } else if (name.startsWith(profilePrefix)) {
         requestType = TimelineSource::Profile;
-        who.remove("Profile:");
+        who.remove(profilePrefix);
     }else{
         requestType = TimelineSource::Timeline;
-        who.remove("Timeline:");
+        who.remove(timelinePrefix);
     }
 
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));

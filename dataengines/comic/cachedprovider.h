@@ -37,7 +37,7 @@ class CachedProvider : public ComicProvider
          * @param identifier The identifier of the cached comic.
          * @param parent The parent object.
          */
-        CachedProvider( QObject *parent, const QVariantList &args = QVariantList() );
+        explicit CachedProvider( QObject *parent, const QVariantList &args = QVariantList() );
 
         /**
          * Destroys the cached provider.

@@ -76,7 +76,7 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
       m_job(0)
 {
     //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
-    QStringList account = who.split("@");
+    QStringList account = who.split('@');
     if (account.count() == 2){
         m_serviceBaseUrl = KUrl(account.at(1));
     }else{

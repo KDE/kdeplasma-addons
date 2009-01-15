@@ -16,6 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "cachedprovider.h"
+
 #include <QtCore/QFile>
 #include <QtCore/QSettings>
 #include <QtCore/QTimer>
@@ -24,7 +26,6 @@
 #include <kstandarddirs.h>
 #include <KUrl>
 
-#include "cachedprovider.h"
 
 static QString identifierToPath( const QString &identifier )
 {
