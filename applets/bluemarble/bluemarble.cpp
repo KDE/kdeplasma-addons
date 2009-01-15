@@ -16,10 +16,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "bluemarble.h"
-
 // has to be first
 #include "kwinglutils.h"
+
+#include "bluemarble.h" //krazy:exclude=includes
 
 #include <QGraphicsSceneMouseEvent>
 
