@@ -118,27 +118,28 @@ static QPointF pupilPos( const QRectF &eyesRect, const QPointF &mousePos)
             return mousePos;
         }
     }
-    
+
     const qreal a = eyesRect.width() / 2;
     const qreal b = eyesRect.height() / 2;
-    
     const qreal tan_alpha = vect.y() / vect.x();
-    
+
     /* 
         the pupil need to be on the intersection between the line
            y = x * tan_alpha
         and the ellipse
            x^2/a^2 + y^2/b^2 
     */
-  
+
     qreal x = a*b / sqrt(b*b + a*a * tan_alpha*tan_alpha);
-    if (vect.x() < 0)
+    if (vect.x() < 0) {
         x = -x;
+    }
     const qreal y = x*tan_alpha;
-    
-    if (abs_vect < x*x+y*y) 
+
+    if (abs_vect < (x * x) + (y * y)) {
         return mousePos;
-    
+    }
+
     return eyesRect.center() + QPointF(x, y);
 }
 
@@ -148,9 +149,9 @@ void Eyes::timerEvent(QTimerEvent *e)
         Plasma::Applet::timerEvent(e);
         return;
     }
-    
+
     QPoint absMousePos = QCursor::pos();
-    
+
     if (absMousePos == previousMousePos) {
         if (timerInterval > 300)
             return;
@@ -159,13 +160,13 @@ void Eyes::timerEvent(QTimerEvent *e)
         timerId = startTimer(timerInterval);
         return;
     }
-    
+
     if (timerInterval != 50) {
         timerInterval = 50;
         killTimer(timerId);
         timerId = startTimer(timerInterval);
     }
-    
+
     QGraphicsView *myview = view();
     if (!myview) {
         return;
