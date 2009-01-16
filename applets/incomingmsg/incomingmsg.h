@@ -61,7 +61,9 @@ protected slots:
     void configAccepted();
 
 private:
+    void clearLayout();
     void initLayout();
+
     // text labels
     Plasma::Label *mEvolutionLabel, *mEvolutionIconLabel,
         *mKMailLabel, *mKMailIconLabel, *mXChatLabel,

@@ -289,7 +289,7 @@ void IncomingMsg::initPidginLayout()
     }
 }
 
-void IncomingMsg::initLayout()
+void IncomingMsg::clearLayout()
 {
     delete mKMailLayout;
     mKMailLayout = NULL;
@@ -321,8 +321,10 @@ void IncomingMsg::initLayout()
 
     delete mErrorLabel;
     mErrorLabel = NULL;
+}
 
-    delete mLayout;
+void IncomingMsg::initLayout()
+{
     mLayout = new QGraphicsLinearLayout(Qt::Vertical);
 
     //initEvolutionLayout();
@@ -373,6 +375,7 @@ void IncomingMsg::configAccepted()
     cg.writeEntry("showKopete", ui.showKopete->isChecked());
     cg.writeEntry("showPidgin", ui.showPidgin->isChecked());
 
+    clearLayout();
     initLayout();
 }
 
