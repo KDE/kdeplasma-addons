@@ -40,7 +40,7 @@ class LANCELOT_EXPORT ActionListView2 : public CustomListView
 
 public:
     ActionListView2(QGraphicsItem * parent = 0);
-    ActionListView2(ActionListViewModel * model, QGraphicsItem * parent = 0);
+    explicit ActionListView2(ActionListViewModel * model, QGraphicsItem * parent = 0);
     virtual ~ActionListView2();
 
     void setModel(ActionListViewModel * model);

@@ -118,7 +118,7 @@ private:
 
     class ScrollButton : public Lancelot::BasicWidget {
     public:
-        ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
+        explicit ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
         void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 

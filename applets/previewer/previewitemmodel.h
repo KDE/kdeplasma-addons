@@ -27,7 +27,7 @@ class PreviewItemModel : public QAbstractListModel
    Q_OBJECT
 
    public:
-      PreviewItemModel(const QList<QUrl> &urls, QObject *parent = 0)
+      explicit PreviewItemModel(const QList<QUrl> &urls, QObject *parent = 0)
          : QAbstractListModel(parent), urlList(urls) {}
       
       int rowCount(const QModelIndex &parent = QModelIndex()) const;

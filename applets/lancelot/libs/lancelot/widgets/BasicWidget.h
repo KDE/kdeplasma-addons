@@ -66,7 +66,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QString title, QString description = QString(),
+    explicit BasicWidget(QString title, QString description = QString(),
             QGraphicsItem * parent = 0);
 
     /**
@@ -76,7 +76,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(QIcon icon, QString title = QString(),
+    explicit BasicWidget(QIcon icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
@@ -86,7 +86,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    BasicWidget(const Plasma::Svg & icon, QString title = QString(),
+    explicit BasicWidget(const Plasma::Svg & icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**

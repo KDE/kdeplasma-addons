@@ -46,7 +46,7 @@ private Q_SLOTS:
 private:
     class SupportedTask {
     public:
-        SupportedTask(const QString & classPattern = 0,
+        explicit SupportedTask(const QString & classPattern = 0,
                 const QString & documentNameExtractor = 0);
         QRegExp m_classPattern;
         QRegExp m_documentNameExtractor;

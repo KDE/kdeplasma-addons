@@ -41,7 +41,7 @@ public:
 class LANCELOT_EXPORT PassagewayViewModelProxy: public PassagewayViewModel {
     Q_OBJECT
 public:
-    PassagewayViewModelProxy(ActionListViewModel * model,
+    explicit PassagewayViewModelProxy(ActionListViewModel * model,
             QString title = QString(), QIcon icon = QIcon());
 
     // PassagewayViewModel

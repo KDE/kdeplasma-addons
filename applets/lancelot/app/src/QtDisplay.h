@@ -51,7 +51,7 @@
 
 class QtDisplay {
 public:
-    QtDisplay(char * display = 0, int screen = 0);
+    explicit QtDisplay(char * display = 0, int screen = 0);
     virtual ~QtDisplay();
     virtual void testDisplay();
     void setupXRender();

@@ -59,7 +59,7 @@ public:
      * @param title the title of the widget
      * @param parent parent item
      */
-    Panel(QIcon icon, QString title = QString(),
+    explicit Panel(QIcon icon, QString title = QString(),
             QGraphicsItem * parent = 0);
 
     /**
@@ -67,7 +67,7 @@ public:
      * @param title the title of the widget
      * @param parent parent item
      */
-    Panel(QString title, QGraphicsItem * parent = 0);
+    explicit Panel(QString title, QGraphicsItem * parent = 0);
 
     /**
      * Destroys Lancelot::Panel

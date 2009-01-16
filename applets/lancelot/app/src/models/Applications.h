@@ -28,7 +28,7 @@ namespace Models {
 class Applications : public Lancelot::PassagewayViewModel {
     Q_OBJECT
 public:
-    Applications(QString root = "", QString title = "", QIcon icon = QIcon());
+    explicit Applications(QString root = "", QString title = "", QIcon icon = QIcon());
     virtual ~Applications();
 
     L_Override virtual QString title(int index) const;

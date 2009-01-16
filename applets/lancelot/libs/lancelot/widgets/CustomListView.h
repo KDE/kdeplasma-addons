@@ -113,7 +113,7 @@ class LANCELOT_EXPORT CustomList: public QGraphicsWidget, public Scrollable {
     Q_OBJECT
 public:
     CustomList(QGraphicsItem * parent = NULL);
-    CustomList(CustomListItemFactory * factory,
+    explicit CustomList(CustomListItemFactory * factory,
             QGraphicsItem * parent = NULL);
 
     virtual ~CustomList();
@@ -147,7 +147,7 @@ class LANCELOT_EXPORT CustomListView: public ScrollPane {
     Q_OBJECT
 public:
     CustomListView(QGraphicsItem * parent = NULL);
-    CustomListView(CustomListItemFactory * factory,
+    explicit CustomListView(CustomListItemFactory * factory,
             QGraphicsItem * parent = NULL);
 
     virtual ~CustomListView();

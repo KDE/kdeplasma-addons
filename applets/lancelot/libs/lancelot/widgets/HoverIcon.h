@@ -55,7 +55,7 @@ public:
      * @param text title
      * @param parent parent item
      */
-    HoverIcon(const QString & text, QGraphicsItem * parent = 0);
+    explicit HoverIcon(const QString & text, QGraphicsItem * parent = 0);
 
     /**
      * Creates a new Lancelot::HoverIcon

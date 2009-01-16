@@ -62,7 +62,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QString title, QString description = QString(),
+    explicit ExtenderButton(QString title, QString description = QString(),
             QGraphicsItem * parent = 0);
 
     /**
@@ -72,7 +72,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(QIcon icon, QString title = QString(),
+    explicit ExtenderButton(QIcon icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**
@@ -82,7 +82,7 @@ public:
      * @param description the description of the widget
      * @param parent parent item
      */
-    ExtenderButton(const Plasma::Svg & icon, QString title = QString(),
+    explicit ExtenderButton(const Plasma::Svg & icon, QString title = QString(),
             QString description = QString(), QGraphicsItem * parent = 0);
 
     /**

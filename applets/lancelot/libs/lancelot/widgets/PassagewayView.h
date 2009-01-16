@@ -54,7 +54,7 @@ class LANCELOT_EXPORT PassagewayView : public Lancelot::Panel
 
 public:
     PassagewayView(QGraphicsItem * parent = 0);
-    PassagewayView(PassagewayViewModel * entranceModel,
+    explicit PassagewayView(PassagewayViewModel * entranceModel,
             PassagewayViewModel * atlasModel = 0, QGraphicsItem * parent = 0);
     virtual ~PassagewayView();
 

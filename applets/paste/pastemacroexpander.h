@@ -33,7 +33,7 @@ public:
         Url
     };
 
-    MacroParam(const QString& n = QString(), ParamType t = String) : name(n), type(t) {};
+    explicit MacroParam(const QString& n = QString(), ParamType t = String) : name(n), type(t) {};
     QString name;
     ParamType type;
 };

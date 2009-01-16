@@ -30,7 +30,7 @@ namespace Models {
 class FolderModel : public BaseModel {
     Q_OBJECT
 public:
-    FolderModel(QString dirPath, QDir::SortFlags sort = QDir::NoSort);
+    explicit FolderModel(QString dirPath, QDir::SortFlags sort = QDir::NoSort);
     virtual ~FolderModel();
 
 protected:
