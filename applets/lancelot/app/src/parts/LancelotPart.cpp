@@ -356,7 +356,7 @@ bool LancelotPart::load(const QString & input)
 
     if (loaded) {
         if (!m_data.isEmpty()) {
-            m_data += "\n";
+            m_data += '\n';
         }
         m_data += input;
         saveConfig();
@@ -393,7 +393,7 @@ bool LancelotPart::loadConfig()
     if (data.isEmpty()) {
         return false;
     }
-    return loadFromList(data.split("\n"));
+    return loadFromList(data.split('\n'));
 }
 
 void LancelotPart::removeModel(int index)
@@ -404,7 +404,7 @@ void LancelotPart::removeModel(int index)
         delete model;
     }
 
-    QStringList configs = m_data.split("\n");
+    QStringList configs = m_data.split('\n');
     configs.removeAt(index);
     m_data = configs.join("\n");
 

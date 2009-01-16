@@ -128,7 +128,7 @@ void MessagesKmail::load()
             QDBusReply < QString > ricon = m_folderinterface->normalIconPath();
             KIcon icon;
             add(
-                    name.value() + " (" + QString::number(unread) + ")", path,
+                    name.value() + " (" + QString::number(unread) + ')', path,
                     KIcon(
                             (ricon.isValid() && !ricon.value().isEmpty())
                             ? (ricon.value()) : "mail-folder-inbox"

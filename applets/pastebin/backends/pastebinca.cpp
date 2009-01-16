@@ -44,7 +44,7 @@ void PastebinCAServer::finished(KJob *job)
     }
 
     QString url(_data);
-    url.replace("SUCCESS:","");
+    url.remove("SUCCESS:");
     url.prepend(QString("%1/").arg(m_server));
     emit postFinished(url);
 }

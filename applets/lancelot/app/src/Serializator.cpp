@@ -34,11 +34,11 @@ QString Serializator::serialize(const QMap < QString , QString > data)
         i.next();
 
         if (!result.isEmpty()) {
-            result += "&";
+            result += '&';
         }
 
         result +=
-            QUrl::toPercentEncoding(i.key()) + "=" +
+            QUrl::toPercentEncoding(i.key()) + '=' +
             QUrl::toPercentEncoding(i.value());
     }
     return result;
@@ -48,9 +48,9 @@ QMap < QString , QString > Serializator::deserialize(const QString & data)
 {
     QMap < QString , QString > result;
 
-    QStringList items = data.split("&");
+    QStringList items = data.split('&');
     foreach (const QString & item, items) {
-        QStringList broken = item.split("=");
+        QStringList broken = item.split('=');
         if (broken.size() != 2) {
             continue;
         }

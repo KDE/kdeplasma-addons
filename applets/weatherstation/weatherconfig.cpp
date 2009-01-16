@@ -133,7 +133,7 @@ void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
     if (m_dataengine) {
         QVariantList plugins = m_dataengine->query("ions").values();
         foreach (const QVariant& plugin, plugins) {
-            QStringList pluginInfo = plugin.toString().split("|");
+            QStringList pluginInfo = plugin.toString().split('|');
             providerComboBox->addItem(pluginInfo[0], pluginInfo[1]);
         }
     }

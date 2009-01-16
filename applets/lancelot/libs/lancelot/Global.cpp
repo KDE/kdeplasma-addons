@@ -321,7 +321,7 @@ Instance::Instance()
     if (app == "lancelot") {
         app = "";
     } else {
-        app += "-";
+        app += '-';
     }
 
     d->confMain = new KConfig("lancelot" + app + "rc");

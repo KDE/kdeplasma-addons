@@ -92,7 +92,7 @@ int BaseModel::addServices(const QStringList & serviceNames)
 {
     int result = 0;
     foreach (const QString & serviceAlternatives, serviceNames) {
-        foreach (const QString & serviceName, serviceAlternatives.split("|")) {
+        foreach (const QString & serviceName, serviceAlternatives.split('|')) {
             if (addService(serviceName)) {
                 ++result;
                 break;

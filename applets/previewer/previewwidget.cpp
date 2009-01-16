@@ -494,7 +494,7 @@ void PreviewWidget::paint(QPainter *painter,
     painter->setFont(font);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     painter->drawText(QRect(39, 3, contentsRect.width() - 39, 30), Qt::AlignBottom | Qt::AlignLeft,
-                      " " + i18n("Previewer"));
+                      ' ' + i18n("Previewer"));
     QFontMetrics fm(font);
     int length = fm.width(i18n("Previewer") + "  ");
     font.setBold(false);

@@ -285,7 +285,7 @@ void WeatherStation::setTemperature(const Conversion::Value& temperature)
 
 void WeatherStation::setHumidity(QString humidity)
 {
-    humidity.replace("%", "");
+    humidity.remove('%');
     m_lcd->setNumber("humidity", humidity);
 }
 

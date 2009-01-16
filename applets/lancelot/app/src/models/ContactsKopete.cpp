@@ -89,7 +89,7 @@ void ContactsKopete::load()
         }
 
         foreach (const QString& contact, contacts.value()) {
-            QStringList contactParts = contact.split(":");
+            QStringList contactParts = contact.split(':');
             if (contactParts.size() != 3) {
                 continue;
             }
@@ -103,7 +103,7 @@ void ContactsKopete::load()
                 continue;
             }
 
-            QString avatarPath = m_kopeteAvatarsDir + "/" + account + "/" + contactID + ".png";
+            QString avatarPath = m_kopeteAvatarsDir + '/' + account + '/' + contactID + ".png";
             add(contactName.value(), contactID,
                     KIcon(
                         (QFile::exists(avatarPath))?avatarPath:"user-online"

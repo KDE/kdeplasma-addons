@@ -325,7 +325,7 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
                     if (m_showdroptarget && (i == (m_layout->count() - 1))) {
                         m_feedlist.append(feeds);
                     } else {
-                        if (!m_feedlist[i-start].endsWith(" ")) {
+                        if (!m_feedlist[i-start].endsWith(' ')) {
                             m_feedlist[i-start].append(" ");
                         }
                         m_feedlist[i-start].append(feeds);
@@ -353,7 +353,7 @@ void News::constraintsEvent(Plasma::Constraints constraints)
                 //group all feeds together so it can fit (only a single time):
                 QString allfeeds;
                 foreach (QString feed, m_feedlist) {
-                    if (!feed.endsWith(" ")) {
+                    if (!feed.endsWith(' ')) {
                         feed.append(" ");
                     }
                     allfeeds.append(feed);

@@ -351,7 +351,7 @@ void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
             }
             uint timeStamp = item["time"].toUInt();
             QString title = item["title"].toString();
-            QString description = item["description"].toString().replace(QRegExp("<[^>]*>"), "");
+            QString description = item["description"].toString().remove(QRegExp("<[^>]*>"));
             QString line;
 
             if (title != 0 && m_showTitles) {
