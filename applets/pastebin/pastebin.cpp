@@ -41,31 +41,29 @@
 #include <kio/global.h>
 #include <kio/job.h>
 
-#include <plasma/widgets/flashinglabel.h>
-#include <plasma/widgets/label.h>
-
-using namespace Plasma;
-
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_textServer(0), m_imageServer(0),
-      m_textBackend(0), m_imageBackend(0),
-      m_text(i18n("Drop text or images on me to upload them to Pastebin."))
+      m_textBackend(0), m_imageBackend(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
+    m_resultsLabel = new DraggableLabel(this);
+    m_resultsLabel->setVisible(false);
     m_displayEdit = new Plasma::Label(this);
-    m_displayEdit->setText(m_text);
+    m_displayEdit->setText(i18n("Drop text or images on me to upload them to Pastebin."));
     m_displayEdit->setAcceptDrops(false);
-    connect(m_displayEdit, SIGNAL(linkActivated(QString)),
-            this, SLOT(openLink(QString)));
+    m_displayEdit->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
+    registerAsDragHandle(m_displayEdit);
+    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     layout->addItem(m_displayEdit);
-    setBackgroundHints(TranslucentBackground);
-    resize(200,200);
+    layout->addItem(m_resultsLabel);
+    resize(200, 200);
 }
 
 Pastebin::~Pastebin()
@@ -101,8 +99,7 @@ void Pastebin::setImageServer(int backend)
 
 void Pastebin::setTextServer(int backend)
 {
-    if (m_textServer)
-        delete m_textServer;
+    delete m_textServer;
 
     switch(backend) {
 
@@ -189,19 +186,20 @@ void Pastebin::showResults(const QString &url)
     setBusy(false);
     timer->stop();
 
-    m_text = i18n("Successfully posted to: <a href=\"%1\">%2</a><p>"
-                  "Drop text or images on me to upload them to Pastebin.",
-                  url, url);
-    m_displayEdit->setText(m_text);
+    m_displayEdit->setVisible(true);
+    m_resultsLabel->setVisible(true);
+    m_resultsLabel->m_url = url;
+    m_resultsLabel->setText(i18n("Successfully uploaded to: <a href=\"%1\">%2</a><p>", url, url));
     QApplication::clipboard()->setText(url);
 }
 
 void Pastebin::showErrors()
 {
     setBusy(false);
-    m_text = i18n("Error during uploading! Please try again.<p>"
-                  "Drop text or images on me to upload them to Pastebin.");
-    m_displayEdit->setText(m_text);
+    m_displayEdit->setVisible(true);
+    m_resultsLabel->setVisible(true);
+    m_resultsLabel->setText(i18n("Error during uploading! Please try again."));
+    m_resultsLabel->m_url = KUrl();
 }
 
 void Pastebin::openLink(const QString &link)
@@ -223,17 +221,17 @@ void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-
     if (event->mimeData()->objectName() != QString("Pastebin-applet")) {
         bool image = false;
         bool validPath = false;
 
-        m_text = event->mimeData()->text();
-        m_displayEdit->setText("");
+        QString text = event->mimeData()->text();
         setBusy(true);
         timer->start(20000);
 
-        QUrl testPath(m_text);
+        m_displayEdit->setVisible(false);
+        m_resultsLabel->setVisible(false);
+        QUrl testPath(text);
         validPath = QFile::exists(testPath.path());
 
         if (validPath) {
@@ -251,7 +249,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         if (!image) {
             // upload text
-            m_textServer->post(m_text);
+            m_textServer->post(text);
         } else {
             //upload image
             if (validPath) {
@@ -290,15 +288,32 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
     }
 }
 
-void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
+DraggableLabel::DraggableLabel(QGraphicsWidget *parent)
+    : Plasma::Label(parent)
 {
-    QMimeData *data = new QMimeData;
-    data->setText(m_text);
-    data->setObjectName("Pastebin-applet");
+}
 
-    QDrag *drag = new QDrag(event->widget());
-    drag->setMimeData(data);
-    drag->start();
+void DraggableLabel::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
+        Plasma::Label::mousePressEvent(event);
+    } else {
+        event->accept();
+    }
+}
+
+void DraggableLabel::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    int distance = (event->buttonDownPos(Qt::LeftButton) - event->pos().toPoint()).toPoint().manhattanLength();
+    if (distance > KGlobalSettings::dndEventDelay()) {
+        QMimeData *data = new QMimeData;
+        data->setText(m_url.prettyUrl());
+        data->setObjectName("Pastebin-applet");
+
+        QDrag *drag = new QDrag(event->widget());
+        drag->setMimeData(data);
+        drag->start();
+    }
 }
 
 

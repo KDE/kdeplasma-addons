@@ -27,14 +27,21 @@
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
 
-#include <plasma/applet.h>
+#include <Plasma/Applet>
+#include <Plasma/Label>
 
 #include <QTimer>
 
-namespace Plasma
+class DraggableLabel : public Plasma::Label
 {
-    class Label;
-}
+public:
+    explicit DraggableLabel(QGraphicsWidget *parent);
+    KUrl m_url;
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+};
 
 class Pastebin : public Plasma::Applet
 {
@@ -62,17 +69,16 @@ protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void createConfigurationInterface(KConfigDialog *parent);
 
 private:
+    DraggableLabel *m_resultsLabel;
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
     PastebinServer *m_imageServer;
 
     int m_textBackend;
     int m_imageBackend;
-    QString m_text;
 
     QTimer *timer;
 
