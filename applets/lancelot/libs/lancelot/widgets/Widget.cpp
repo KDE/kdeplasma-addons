@@ -214,7 +214,10 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
     // Background Painting
     if (Plasma::FrameSvg * svg = d->group->backgroundSvg()) {
         svg->setElementPrefix(element);
-        svg->resizeFrame(size());
+        if (svg->size() != size().toSize()) {
+            svg->resizeFrame(size().toSize());
+        }
+        svg->clearCache();
         svg->paintFrame(painter);
 
     } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
