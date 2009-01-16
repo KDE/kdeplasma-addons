@@ -126,7 +126,7 @@ public:
      */
     virtual void contextActivate(int index, QAction * context);
 
-public slots:
+public Q_SLOTS:
     /**
      * Activates the specified element
      * @param index of the element that should be activated
@@ -408,7 +408,7 @@ private:
     QList< QPair< QString, QIcon > > m_modelsMetadata;
     bool m_hideEmptyModels;
 
-private slots:
+private Q_SLOTS:
     // listen to model changes
     void modelUpdated();
     void modelItemInserted(int index);

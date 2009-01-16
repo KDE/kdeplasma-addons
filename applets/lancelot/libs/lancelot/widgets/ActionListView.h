@@ -96,7 +96,7 @@ public:
 Q_SIGNALS:
     void activated(int index);
 
-protected slots:
+protected Q_SLOTS:
     void scrollTimer();
     void itemActivated(int index);
     void itemContextRequested(int index);

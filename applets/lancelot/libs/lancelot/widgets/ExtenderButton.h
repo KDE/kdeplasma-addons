@@ -138,7 +138,7 @@ public:
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
-public slots:
+public Q_SLOTS: 
     /**
      * Sets whether the button is checked.
      * Has no effect if button is not checkable.
@@ -169,7 +169,7 @@ protected:
     L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
-protected slots:
+protected Q_SLOTS:
     void activate();
 
 private:
