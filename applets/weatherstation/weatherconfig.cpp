@@ -93,7 +93,7 @@ void WeatherConfigSearch::dataUpdated(const QString &source, const Plasma::DataE
                     places[result[i + 1]] = result[i + 3];
                     i += 4;
                 } else {
-                    places[result[i + 1]] = QString();
+                    places[result[i + 1]].clear();
                     i += 2;
                 }
             }
