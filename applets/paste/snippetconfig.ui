@@ -55,7 +55,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="nameEdit" />
+          <widget class="KLineEdit" name="nameEdit" />
          </item>
         </layout>
        </item>
@@ -82,7 +82,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit" >
+      <widget class="KTextEdit" name="textEdit" >
        <property name="sizePolicy" >
         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
          <horstretch>0</horstretch>
@@ -90,7 +90,7 @@
         </sizepolicy>
        </property>
        <property name="lineWrapMode" >
-        <enum>QTextEdit::NoWrap</enum>
+        <enum>KTextEdit::NoWrap</enum>
        </property>
        <property name="acceptRichText" >
         <bool>false</bool>

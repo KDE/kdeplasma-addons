@@ -50,7 +50,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="filterLineEdit" />
+      <widget class="KLineEdit" name="filterLineEdit" />
      </item>
     </layout>
    </item>

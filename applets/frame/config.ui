@@ -29,7 +29,7 @@
      </property>
      <layout class="QVBoxLayout" >
       <item>
-       <widget class="QComboBox" name="pictureComboBox" >
+       <widget class="KComboBox" name="pictureComboBox" >
         <item>
          <property name="text" >
           <string>Image</string>
@@ -290,7 +290,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="potdComboBox" />
+           <widget class="KComboBox" name="potdComboBox" />
           </item>
           <item>
            <spacer name="verticalSpacer" >

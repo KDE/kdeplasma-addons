@@ -21,7 +21,7 @@
 #include <pastemacroexpander.h>
 #include <KDialog>
 
-class QComboBox;
+class KComboBox;
 class QVBoxLayout;
 
 class AddMacro : public KDialog
@@ -37,7 +37,7 @@ protected slots:
     void currentIndexChanged(int index);
 
 private:
-    QComboBox* m_macrosComboBox;
+    KComboBox* m_macrosComboBox;
     QVBoxLayout* m_layout;
     QWidget* m_widget;
     QWidget* m_params;

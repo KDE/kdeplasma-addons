@@ -20,7 +20,7 @@
 
 #include "Devices.h"
 
-#include <QMessageBox>
+#include <KMessageBox>
 #include <KRun>
 #include <KLocalizedString>
 
@@ -238,7 +238,7 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
     access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
 
     if (!access || !access->isAccessible()) {
-        QMessageBox::critical(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
+        KMessageBox::error(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
         return;
     }
 

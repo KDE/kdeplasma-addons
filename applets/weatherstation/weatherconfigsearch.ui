@@ -24,7 +24,7 @@
     </widget>
    </item>
    <item row="0" column="1" >
-    <widget class="QLineEdit" name="cityLineEdit" />
+    <widget class="KLineEdit" name="cityLineEdit" />
    </item>
    <item row="1" column="0" >
     <widget class="QLabel" name="providerLabel" >
@@ -57,7 +57,7 @@
  <customwidgets>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QComboBox</extends>
+   <extends>KComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>

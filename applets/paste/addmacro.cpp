@@ -18,10 +18,10 @@
 #include "addmacro.h"
 #include <fixx11h.h>
 #include <QVBoxLayout>
-#include <QComboBox>
+#include <KComboBox>
 #include <QLabel>
 #include <QCheckBox>
-#include <QLineEdit>
+#include <KLineEdit>
 #include <QSpinBox>
 #include <KUrlRequester>
 #include <KLocale>
@@ -39,7 +39,7 @@ AddMacro::AddMacro(QWidget* parent)
     m_layout->setMargin(0);
     m_layout->setSpacing(spacingHint());
 
-    m_macrosComboBox = new QComboBox(m_widget);
+    m_macrosComboBox = new KComboBox(m_widget);
     const QMap<QString, QVariantList>& macros = PasteMacroExpander::instance().macros();
     foreach (const QString& macro, macros.keys()) {
         m_macrosComboBox->addItem(macros[macro][0].toString(), macro);
@@ -77,7 +77,7 @@ void AddMacro::currentIndexChanged(int index)
             }
             case MacroParam::String:
                 layout->addWidget(new QLabel(param.name + ':', m_params));
-                layout->addWidget(w = new QLineEdit(m_params));
+                layout->addWidget(w = new KLineEdit(m_params));
                 break;
             case MacroParam::Url:
                 layout->addWidget(new QLabel(param.name + ':'));
@@ -111,7 +111,7 @@ QString AddMacro::macro()
             }
             case MacroParam::String:
             {
-                QLineEdit* w = m_params->findChildren<QLineEdit*>(param.name)[0];
+                KLineEdit* w = m_params->findChildren<KLineEdit*>(param.name)[0];
                 values.append(w->text());
                 break;
             }

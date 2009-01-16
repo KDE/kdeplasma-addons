@@ -189,7 +189,7 @@
     </widget>
    </item>
    <item row="6" column="1" >
-    <widget class="QComboBox" name="temperatureComboBox" >
+    <widget class="KComboBox" name="temperatureComboBox" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
        <horstretch>0</horstretch>
@@ -218,7 +218,7 @@
     </widget>
    </item>
    <item row="7" column="1" >
-    <widget class="QComboBox" name="pressureComboBox" >
+    <widget class="KComboBox" name="pressureComboBox" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
        <horstretch>0</horstretch>
@@ -247,7 +247,7 @@
     </widget>
    </item>
    <item row="8" column="1" >
-    <widget class="QComboBox" name="speedComboBox" >
+    <widget class="KComboBox" name="speedComboBox" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
        <horstretch>0</horstretch>

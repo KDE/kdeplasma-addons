@@ -49,7 +49,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_comic" >
+           <widget class="KComboBox" name="comboBox_comic" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
               <horstretch>0</horstretch>
