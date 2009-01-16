@@ -39,7 +39,7 @@
 
 namespace Models {
 
-#define StringCoalesce(A, B) (A == "")?(B):(A)
+#define StringCoalesce(A, B) (A.isEmpty())?(B):(A)
 
 Devices::Devices(Type filter)
     : m_filter(filter)

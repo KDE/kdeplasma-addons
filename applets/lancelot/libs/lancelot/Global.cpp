@@ -330,11 +330,11 @@ Instance::Instance()
     kDebug() << search;
 
     QString path =  KStandardDirs::locate( "data", search );
-    if (path == "") {
+    if (path.isEmpty()) {
         search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
     }
-    if (path == "") {
+    if (path.isEmpty()) {
         path = "lancelotrc";
     }
     kDebug() << path;
@@ -386,7 +386,7 @@ void Instance::removeWidget(Widget * widget)
 WidgetGroup * Instance::group(const QString & name)
 {
     QString groupName = name;
-    if (groupName == "") {
+    if (groupName.isEmpty()) {
         groupName = "Default";
     }
 
