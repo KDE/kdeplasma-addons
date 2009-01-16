@@ -9,6 +9,8 @@ set(pastebin_SRCS
   pastebin.cpp)
 
 kde4_add_ui_files(pastebin_SRCS pastebinConfig.ui)
+kde4_add_ui_files(pastebin_SRCS pastebinServersConfig.ui)
+
 kde4_add_plugin(plasma_applet_pastebin ${pastebin_SRCS})
 target_link_libraries(plasma_applet_pastebin ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 

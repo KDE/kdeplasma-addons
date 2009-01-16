@@ -28,16 +28,17 @@ class PastebinServer : public QObject
     Q_OBJECT
 
 public:
-    PastebinServer();
     virtual ~PastebinServer();
     virtual void post(QString content) = 0;
 
-Q_SIGNALS:
+signals:
     void postFinished(const QString &data);
     void postError();
 
 protected:
-    const QString m_server;
+    // abstract class
+    PastebinServer();
+    QString m_server;
 
 };
 

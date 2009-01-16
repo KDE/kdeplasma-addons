@@ -33,10 +33,11 @@
 #include <kapplication.h>
 #include <KDebug>
 
-ImageshackServer::ImageshackServer()
-    : PastebinServer(),
-      m_server("http://imageshack.us")
+ImageshackServer::ImageshackServer(KConfigGroup config)
+    : PastebinServer()
 {
+    m_server = config.readEntry("imageshack", "http://imageshack.us");
+
     first = true;
     m_boundary  = "----------";
     m_boundary += KRandom::randomString(42 + 13).toAscii();

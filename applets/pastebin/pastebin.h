@@ -22,6 +22,7 @@
 
 #include "backends/backends.h"
 #include "ui_pastebinConfig.h"
+#include "ui_pastebinServersConfig.h"
 
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
@@ -75,7 +76,8 @@ private:
 
     QTimer *timer;
 
-    Ui::pastebinConfig ui;
+    Ui::pastebinConfig uiConfig;
+    Ui::pastebinServersConfig uiServers;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)

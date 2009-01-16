@@ -20,26 +20,22 @@
 #ifndef PASTEBINCOM_H
 #define PASTEBINCOM_H
 
+#include "server.h"
+
+#include <KConfigDialog>
+
 #include <kio/global.h>
 #include <kio/job.h>
-
-#include "server.h"
 
 class PastebinCOMServer : public PastebinServer
 {
     Q_OBJECT
 
 public:
-    PastebinCOMServer();
-    ~PastebinCOMServer();
+    PastebinCOMServer(KConfigGroup config);
+    virtual ~PastebinCOMServer();
 
-    void post(QString content);
-
-signals:
-    void postFinished(const QString &data);
-
-protected:
-    const QString m_server;
+    virtual void post(QString content);
 
 public slots:
     void result(KIO::Job *job, const KUrl &url);

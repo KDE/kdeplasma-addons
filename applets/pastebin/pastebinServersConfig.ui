@@ -1,0 +1,110 @@
+<ui version="4.0" >
+ <class>pastebinServersConfig</class>
+ <widget class="QWidget" name="pastebinServersConfig" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>346</width>
+    <height>174</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>346</width>
+    <height>174</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>346</width>
+    <height>174</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Pastebin Server Config Dialog</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>341</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout" >
+    <property name="sizeConstraint" >
+     <enum>QLayout::SetMaximumSize</enum>
+    </property>
+    <item row="0" column="0" >
+     <widget class="QLabel" name="label" >
+      <property name="text" >
+       <string>Pastebin.ca:</string>
+      </property>
+      <property name="alignment" >
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" >
+     <widget class="QLabel" name="label_2" >
+      <property name="text" >
+       <string>Pastebin.com:</string>
+      </property>
+      <property name="alignment" >
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" >
+     <widget class="KLineEdit" name="pastebinca" />
+    </item>
+    <item row="1" column="2" >
+     <widget class="KLineEdit" name="pastebincom" />
+    </item>
+    <item row="3" column="0" >
+     <widget class="QLabel" name="label_3" >
+      <property name="text" >
+       <string>ImageShack.us:</string>
+      </property>
+      <property name="alignment" >
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" >
+     <widget class="QLabel" name="label_6" >
+      <property name="text" >
+       <string>Imagebin.ca:</string>
+      </property>
+      <property name="alignment" >
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2" >
+     <widget class="KLineEdit" name="imagebinca" />
+    </item>
+    <item row="3" column="2" >
+     <widget class="KLineEdit" name="imageshack" />
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

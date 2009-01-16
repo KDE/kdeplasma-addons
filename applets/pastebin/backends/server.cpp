@@ -21,7 +21,6 @@
 #include "server.h"
 
 PastebinServer::PastebinServer()
-    : m_server("")
 {
 }
 

@@ -22,10 +22,10 @@
 #include <KDebug>
 #include <QUrl>
 
-PastebinCOMServer::PastebinCOMServer()
-    : PastebinServer(),
-      m_server("http://pastebin.com")
+PastebinCOMServer::PastebinCOMServer(KConfigGroup config)
+    : PastebinServer()
 {
+    m_server = config.readEntry("pastebincom", "http://pastebin.com");
 }
 
 PastebinCOMServer::~PastebinCOMServer()

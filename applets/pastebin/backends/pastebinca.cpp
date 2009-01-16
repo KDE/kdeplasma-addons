@@ -23,11 +23,11 @@
 #include <KDebug>
 #include <QUrl>
 
-PastebinCAServer::PastebinCAServer()
+PastebinCAServer::PastebinCAServer(KConfigGroup config)
     : PastebinServer(),
-      m_server("http://pastebin.ca"),
       m_apikey("AnGWmLlrReJCCJOUMOMpHViBTFkFZxre")
 {
+    m_server = config.readEntry("pastebinca", "http://pastebin.ca");
 }
 
 PastebinCAServer::~PastebinCAServer()

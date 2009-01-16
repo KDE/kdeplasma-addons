@@ -32,10 +32,11 @@
 #include <kapplication.h>
 #include <KDebug>
 
-ImagebinCAServer::ImagebinCAServer()
-    : PastebinServer(),
-      m_server("http://imagebin.ca")
+ImagebinCAServer::ImagebinCAServer(KConfigGroup config)
+    : PastebinServer()
 {
+    m_server = config.readEntry("imagebinca", "http://imagebin.ca");
+
     m_boundary  = "----------";
     m_boundary += KRandom::randomString(42 + 13).toAscii();
 }

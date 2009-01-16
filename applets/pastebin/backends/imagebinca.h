@@ -21,31 +21,31 @@
 #ifndef IMAGEBINCA_H
 #define IMAGEBINCA_H
 
+#include "server.h"
+
+#include <KConfigDialog>
+
 #include <kio/global.h>
 #include <kio/job.h>
 
-#include "server.h"
 
 class ImagebinCAServer : public PastebinServer
 {
     Q_OBJECT
 
 public:
-    ImagebinCAServer();
-    ~ImagebinCAServer();
+    ImagebinCAServer(KConfigGroup config);
+    virtual ~ImagebinCAServer();
 
-    void post(QString content);
+    virtual void post(QString content);
+
     void finish();
     bool addPair(const QString& name, const QString& value);
     bool addFile(const QString& name,const QString& path);
 
-signals:
-    void postFinished(const QString &data);
-
 protected:
     QByteArray m_buffer;
     QByteArray m_boundary;
-    const QString m_server;
 
 public slots:
     void finished(KJob *job);

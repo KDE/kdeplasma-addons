@@ -84,11 +84,11 @@ void Pastebin::setImageServer(int backend)
     switch(backend) {
 
     case Pastebin::IMAGEBINCA:
-        m_imageServer = static_cast<ImagebinCAServer*>(new ImagebinCAServer());
+        m_imageServer = static_cast<ImagebinCAServer*>(new ImagebinCAServer(config()));
         break;
 
     case Pastebin::IMAGESHACK:
-        m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer());
+        m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer(config()));
 	break;
     }
 
@@ -107,11 +107,11 @@ void Pastebin::setTextServer(int backend)
     switch(backend) {
 
     case Pastebin::PASTEBINCA:
-        m_textServer = static_cast<PastebinCAServer*>(new PastebinCAServer());
+        m_textServer = static_cast<PastebinCAServer*>(new PastebinCAServer(config()));
         break;
 
     case Pastebin::PASTEBINCOM:
-        m_textServer = static_cast<PastebinCOMServer*>(new PastebinCOMServer());
+        m_textServer = static_cast<PastebinCOMServer*>(new PastebinCOMServer(config()));
         break;
     }
 
@@ -133,21 +133,52 @@ void Pastebin::init()
 
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 {
-    QWidget *widget = new QWidget;
-    ui.setupUi(widget);
+    KConfigGroup cg = config();
+
+    QWidget *general = new QWidget();
+    uiConfig.setupUi(general);
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, i18n("General"), Applet::icon());
-    ui.textServer->setCurrentIndex(m_textBackend);
-    ui.imageServer->setCurrentIndex(m_imageBackend);
+    parent->addPage(general, i18n("General"), Applet::icon());
+
+    uiConfig.textServer->setCurrentIndex(m_textBackend);
+    uiConfig.imageServer->setCurrentIndex(m_imageBackend);
+
+    QWidget *servers = new QWidget();
+    uiServers.setupUi(servers);
+    parent->addPage(servers, i18n("Servers"), Applet::icon());
+
+    QString pastebincaURL = cg.readEntry("pastebinca", "http://pastebin.ca");
+    uiServers.pastebinca->setText(pastebincaURL);
+
+    QString pastebincomURL = cg.readEntry("pastebincom", "http://pastebin.com");
+    uiServers.pastebincom->setText(pastebincomURL);
+
+    QString imagebincaURL = cg.readEntry("imagebinca", "http://imagebin.ca");
+    uiServers.imagebinca->setText(imagebincaURL);
+
+    QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
+    uiServers.imageshack->setText(imageshackURL);
 }
 
 void Pastebin::configAccepted()
 {
     KConfigGroup cg = config();
-    int textBackend = ui.textServer->currentIndex();
-    int imageBackend = ui.imageServer->currentIndex();
+    int textBackend = uiConfig.textServer->currentIndex();
+    int imageBackend = uiConfig.imageServer->currentIndex();
+
+    QString pastebincaURL = uiServers.pastebinca->text();
+    QString pastebincomURL = uiServers.pastebincom->text();
+    QString imagebincaURL = uiServers.imagebinca->text();
+    QString imageshackURL = uiServers.imageshack->text();
+
     cg.writeEntry("TextBackend", textBackend);
     cg.writeEntry("ImageBackend", imageBackend);
+
+    cg.writeEntry("pastebinca", pastebincaURL);
+    cg.writeEntry("pastebincom", pastebincomURL);
+    cg.writeEntry("imagebinca", imagebincaURL);
+    cg.writeEntry("imageshack", imageshackURL);
+
     setTextServer(textBackend);
     setImageServer(imageBackend);
     emit configNeedsSaving();

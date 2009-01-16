@@ -21,27 +21,25 @@
 #ifndef PASTEBINCA_H
 #define PASTEBINCA_H
 
+#include "server.h"
+
+#include <KConfigDialog>
+
 #include <kio/global.h>
 #include <kio/job.h>
 #include <kjob.h>
-
-#include "server.h"
 
 class PastebinCAServer : public PastebinServer
 {
     Q_OBJECT
 
 public:
-    PastebinCAServer();
-    ~PastebinCAServer();
+    PastebinCAServer(KConfigGroup config);
+    virtual ~PastebinCAServer();
 
-    void post(QString content);
-
-signals:
-    void postFinished(const QString &data);
+    virtual void post(QString content);
 
 protected:
-    const QString m_server;
     const QByteArray m_apikey;
 
 public slots:
