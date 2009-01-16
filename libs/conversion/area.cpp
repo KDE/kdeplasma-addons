@@ -104,7 +104,7 @@ QString Area::replace(const QString &unit) const
     QString result = unit;
     result.replace("/-2", "\xb2");
     result.replace("^2", "\xb2");
-    result.replace("2", "\xb2");
+    result.replace('2', "\xb2");
     return result;
 }
 

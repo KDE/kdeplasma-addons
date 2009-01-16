@@ -146,7 +146,7 @@ QString Volume::replace(const QString &unit) const
     QString result = unit;
     result.replace("/-3", "\xb3");
     result.replace("^3", "\xb3");
-    result.replace("3", "\xb3");
+    result.replace('3', "\xb3");
     return result;
 }
 

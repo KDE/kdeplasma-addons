@@ -32,3 +32,4 @@ UnitCategory::~UnitCategory()
 }
 
 #include "unit.moc"
+

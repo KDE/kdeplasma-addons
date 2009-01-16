@@ -60,7 +60,7 @@ bool Value::isValid() const
 
 QString Value::toString() const
 {
-    return d->number.toString() + " " + d->unit;
+    return d->number.toString() + ' ' + d->unit;
 }
 
 QVariant Value::number() const

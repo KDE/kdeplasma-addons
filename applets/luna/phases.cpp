@@ -232,7 +232,7 @@ double moonphase(double k, int phi)
   O = torad(O);
 
   /* all those planetary arguments, too! */
-  for (i=1; i<=14; i++)
+  for (i=1; i<=14; ++i)
     A[i] = torad(A[i]);
 
   /* ok, we have all the parameters, let's apply them to the JDE.
