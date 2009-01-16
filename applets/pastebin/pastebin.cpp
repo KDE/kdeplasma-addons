@@ -59,6 +59,9 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     connect(m_displayEdit, SIGNAL(linkActivated(QString)),
             this, SLOT(openLink(QString)));
 
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
+
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     layout->addItem(m_displayEdit);
     setBackgroundHints(TranslucentBackground);
@@ -70,6 +73,7 @@ Pastebin::~Pastebin()
     delete m_displayEdit;
     delete m_textServer;
     delete m_imageServer;
+    delete timer;
 }
 
 void Pastebin::setImageServer(int backend)
@@ -152,6 +156,8 @@ void Pastebin::configAccepted()
 void Pastebin::showResults(const QString &url)
 {
     setBusy(false);
+    timer->stop();
+
     m_text = i18n("Successfully posted to: <a href=\"%1\">%2</a><p>"
                   "Drop text or images on me to upload them to Pastebin.",
                   url, url);
@@ -194,6 +200,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
         m_text = event->mimeData()->text();
         m_displayEdit->setText("");
         setBusy(true);
+        timer->start(20000);
 
         QUrl testPath(m_text);
         validPath = QFile::exists(testPath.path());
@@ -242,6 +249,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
                 }
                 else {
                     setBusy(false);
+                    timer->stop();
                 }
 
             }
@@ -261,6 +269,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
     drag->setMimeData(data);
     drag->start();
 }
+
 
 #include "pastebin.moc"
 

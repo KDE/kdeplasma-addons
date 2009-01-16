@@ -20,13 +20,15 @@
 #ifndef PASTEBIN_H
 #define PASTEBIN_H
 
+#include "backends/backends.h"
+#include "ui_pastebinConfig.h"
+
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
 
 #include <plasma/applet.h>
 
-#include "backends/backends.h"
-#include "ui_pastebinConfig.h"
+#include <QTimer>
 
 namespace Plasma
 {
@@ -66,10 +68,14 @@ private:
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
     PastebinServer *m_imageServer;
-    Ui::pastebinConfig ui;
+
     int m_textBackend;
     int m_imageBackend;
     QString m_text;
+
+    QTimer *timer;
+
+    Ui::pastebinConfig ui;
 };
 
 K_EXPORT_PLASMA_APPLET(pastebin, Pastebin)
