@@ -303,7 +303,7 @@ void Twitter::readWallet(bool success)
     if (success &&
         enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
         (m_wallet->readPassword(m_username, pwd) == 0)) {
-        kDebug() << "successfully retreived password from wallet";
+        kDebug() << "successfully retrieved password from wallet";
         m_password = pwd;
         downloadHistory();
     } else if (m_password.isEmpty()) {
