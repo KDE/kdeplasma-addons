@@ -29,7 +29,7 @@ class Panel::Private {
 public:
     Private(QIcon icon, QString title, Panel * parent)
       : layoutItem(NULL),
-        hasTitle(title != QString()),
+        hasTitle(!title.isEmpty()),
         titleWidget(icon, title, "", parent),
         q(parent)
     {
@@ -38,7 +38,7 @@ public:
 
     Private(QString title, Panel * parent)
       : layoutItem(NULL),
-        hasTitle(title != QString()),
+        hasTitle(!title.isEmpty()),
         titleWidget(title, "", parent),
         q(parent)
     {
