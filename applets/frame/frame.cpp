@@ -275,10 +275,13 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
 
     QStandardItemModel* model = static_cast<QStandardItemModel*>(m_configDialog->ui.pictureComboBox->model());
     QStandardItem* item = model->item(2);
-    if (services.isEmpty())
-        item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
-    else
-        item->setFlags(item->flags() | Qt::ItemIsEnabled);
+
+    if (item) {
+        if (services.isEmpty())
+            item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+        else
+            item->setFlags(item->flags() | Qt::ItemIsEnabled);
+    }
 
     parent->addPage(m_configDialog, i18n("General"), icon());
     parent->setDefaultButton(KDialog::Ok);
