@@ -161,7 +161,7 @@ QSizeF ScrollPane::currentViewportSize() const //>
 
 void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
 {
-    if (!d->widget) {
+    if (!d->widget || !layout()) {
         return;
     }
 
