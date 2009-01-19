@@ -39,7 +39,6 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
     Q_UNUSED(args);
-    KGlobal::locale()->insertCatalog("krunner_katesessions");
     setObjectName("Kate Sessions");
     m_icon = KIcon("kate");
 
