@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/krunner_contacts.pot
+$XGETTEXT *.cpp -o $podir/plasma_runner_contacts.pot
