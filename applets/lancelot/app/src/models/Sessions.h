@@ -17,45 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_RUNNER_H
-#define LANCELOTAPP_MODELS_RUNNER_H
+#ifndef LANCELOTAPP_MODELS_SESSION_H
+#define LANCELOTAPP_MODELS_SESSION_H
 
 #include "BaseModel.h"
 #include <plasma/runnermanager.h>
 #include <plasma/querymatch.h>
+#include "Runner.h"
+
+#include <kworkspace/kdisplaymanager.h>
 
 namespace Models {
 
-class Runner : public BaseModel {
+class Sessions: public BaseModel {
     Q_OBJECT
 public:
-    Runner(QString search = QString());
-    virtual ~Runner();
+    Sessions();
+    virtual ~Sessions();
 
-    QString searchString() const;
-
-    QString runnerName() const;
-    void setRunnerName(const QString & name);
-
-    L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, QMenu * menu);
-    L_Override virtual void contextActivate(int index, QAction * context);
-
-public Q_SLOTS:
-    void setSearchString(const QString & search);
-    void setQueryMatches(const QList<Plasma::QueryMatch> &matches);
-
-protected:
-    void activate(int index);
     void load();
+    void activate(int index);
 
 private:
-    QString m_searchString;
-    QString m_runnerName;
-    Plasma::RunnerManager * m_runnerManager;
-    bool valid : 1;
+    KDisplayManager dm;
 };
 
 } // namespace Models
 
-#endif /* LANCELOTAPP_MODELS_DEVICES_H */
+#endif /* LANCELOTAPP_MODELS_SESSION_H */

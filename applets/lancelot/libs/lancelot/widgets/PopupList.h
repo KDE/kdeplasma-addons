@@ -31,8 +31,10 @@
 
 namespace Lancelot {
 
+class ActionListView;
+
 /**
- * The widget that pops up in its own window
+ * The list that pops up in its own window
  *
  * @author Ivan Cukic
  */
@@ -50,6 +52,39 @@ public:
      * Destroys Lancelot::PopupList
      */
     virtual ~PopupList();
+
+    /**
+     * @returns the pointer to the ActionListView widget
+     * contained by this PopupList
+     */
+    ActionListView * list() const;
+
+    /**
+     * Sets the timer for auto-closing when the popup
+     * is not hovered.
+     * @param timeout in milliseconds
+     */
+    void setCloseTimeout(int timeout);
+
+    /**
+     * @returns the timeout
+     */
+    int closeTimeout() const;
+
+protected:
+    L_Override void showEvent(QShowEvent * event);
+
+    L_Override void enterEvent(QEvent * event);
+    L_Override void leaveEvent(QEvent * event);
+    L_Override void timerEvent(QTimerEvent * event);
+
+public Q_SLOTS:
+    /**
+     * Updates the size of the PopupList to
+     * match the size of the list (depending on
+     * the numbers of items in the list).
+     */
+    void updateSize();
 
 private:
     class Private;

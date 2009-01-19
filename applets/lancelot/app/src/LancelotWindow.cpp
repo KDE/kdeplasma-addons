@@ -53,13 +53,13 @@
 #include "models/FavoriteApplications.h"
 #include "models/Applications.h"
 #include "models/Runner.h"
+#include "models/Sessions.h"
 #include "models/ContactsKopete.h"
 #include "models/MessagesKmail.h"
 
 #include "models/BaseMergedModel.h"
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
-#include <lancelot/widgets/PopupWidget.h>
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
@@ -196,7 +196,8 @@ LancelotWindow::LancelotWindow()
     m_configWidget(NULL),
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault),
-    m_skipEvent(false)
+    m_skipEvent(false),
+    menuSwitchUser(NULL)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
@@ -280,20 +281,6 @@ LancelotWindow::LancelotWindow()
     loadConfig();
     setupActions();
 
-    /* testing */
-    /*
-    Lancelot::PopupWidget * popup = new Lancelot::PopupWidget();
-    QGraphicsScene * scene = new QGraphicsScene();
-
-    Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
-            "Title", "Description");
-    scene->addItem(button);
-    button->setGroupByName("SystemButtons");
-    button->setExtenderPosition(Lancelot::NoExtender);
-    popup->setGraphicsWidget(button);
-    // popup->resize(200, 400);
-    popup->show();
-    */
 }
 
 LancelotWindow::~LancelotWindow()
@@ -568,7 +555,30 @@ void LancelotWindow::systemDoLogout()
 
 void LancelotWindow::systemSwitchUser()
 {
-    search("SESSIONS");
+    if (!menuSwitchUser) {
+        menuSwitchUser = new Lancelot::PopupList();
+        menuSwitchUser->resize(200, 200);
+        menuSwitchUser->setWindowFlags(Qt::Popup | Qt::WindowStaysOnTopHint);
+        menuSwitchUser->list()->setModel(new Models::Sessions());
+        Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
+        connect(
+                ac, SIGNAL(doHide(bool)),
+                menuSwitchUser, SLOT(close())
+        );
+    }
+
+    menuSwitchUser->updateSize();
+
+    QRect g = buttonSystemSwitchUser->geometry().toRect();
+    g.moveTopLeft(g.topLeft() + geometry().topLeft());
+
+    if (layoutMain->flip() & Plasma::VerticalFlip) {
+        menuSwitchUser->move(g.bottomLeft());
+    } else {
+        menuSwitchUser->move(g.topLeft() - QPoint(0, menuSwitchUser->geometry().height()));
+    }
+
+    menuSwitchUser->show();
 }
 
 void LancelotWindow::setupModels()

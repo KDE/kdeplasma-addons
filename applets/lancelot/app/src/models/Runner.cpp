@@ -44,9 +44,19 @@ Runner::~Runner()
 {
 }
 
-QString Runner::searchString()
+QString Runner::searchString() const
 {
     return m_searchString;
+}
+
+QString Runner::runnerName() const
+{
+    return m_runnerName;
+}
+
+void Runner::setRunnerName(const QString & name)
+{
+    m_runnerName = name;
 }
 
 void Runner::setSearchString(const QString & search)
@@ -63,7 +73,11 @@ void Runner::setSearchString(const QString & search)
         );
         valid = false;
     } else {
-        m_runnerManager->launchQuery(search);
+        if (m_runnerName.isEmpty()) {
+            m_runnerManager->launchQuery(search);
+        } else {
+            m_runnerManager->launchQuery(search, m_runnerName);
+        }
     }
 }
 

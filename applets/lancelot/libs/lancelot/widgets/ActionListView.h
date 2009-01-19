@@ -64,7 +64,9 @@ public:
     void initialSelection();
     int selectedIndex() const;
 
-    // L_Override virtual void setGroup(WidgetGroup * group = NULL);
+    void setItemHeight(int height, Qt::SizeHint which);
+    void setCategoryHeight(int height, Qt::SizeHint which);
+
     L_Override virtual void groupUpdated();
     L_Override virtual void keyPressEvent(QKeyEvent * event);
 

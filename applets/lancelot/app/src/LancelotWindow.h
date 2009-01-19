@@ -33,6 +33,8 @@
 #include "LancelotConfig.h"
 #include "ui_LancelotWindowBase.h"
 
+#include <lancelot/widgets/PopupList.h>
+
 class CustomGraphicsView;
 
 namespace Lancelot {
@@ -249,6 +251,9 @@ private:
     QList < QGraphicsWidget * > m_focusList;
     int m_focusIndex;
     bool m_skipEvent;
+
+    // Additional widgets
+    Lancelot::PopupList * menuSwitchUser;
 
     friend class CustomGraphicsView;
 };

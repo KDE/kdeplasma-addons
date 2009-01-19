@@ -163,9 +163,17 @@ void BasicWidget::paintForeground(QPainter * painter)
     descriptionFont.setPointSize(descriptionFont.pointSize() - 2);
 
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
-    QRectF iconRect         = QRectF(0, 0, d->iconSize.width(), d->iconSize.height());
+    QRectF iconRect;
 
-    if (d->icon.isNull() && !d->iconInSvg.isValid()) iconRect = QRectF(0, 0, 0, 0);
+    if (!d->icon.isNull() || d->iconInSvg.isValid()) {
+        iconRect = QRectF(QPointF(), d->iconSize);
+        if (iconRect.width() > geometry().width()) {
+            iconRect.setWidth(geometry().width());
+        }
+        if (iconRect.height() > geometry().height()) {
+            iconRect.setHeight(geometry().height());
+        }
+    }
 
     // painter->setFont(titleFont)); // NOT NEEDED
     QRectF titleRect        = painter->boundingRect(widgetRect,
@@ -205,7 +213,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             if (!d->icon.isNull()) {
                 d->icon.paint(_painter, rect);
             } else {
-                d->iconInSvg.resize(d->iconSize);
+                d->iconInSvg.resize(rect.size());
                 d->iconInSvg.paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
             }
             top += d->iconSize.height() + WIDGET_PADDING;

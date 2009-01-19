@@ -73,7 +73,6 @@ public:
     L_Override int itemCount() const;
     L_Override virtual int itemHeight(int index, Qt::SizeHint which) const;
 
-
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model();
 
@@ -96,6 +95,9 @@ public:
     WidgetGroup * categoriesGroup() const;
     void clearSelection();
     void updateExtenderPosition();
+
+    void setItemHeight(int height, Qt::SizeHint which);
+    void setCategoryHeight(int height, Qt::SizeHint which);
 
 private:
     void reload();
@@ -121,6 +123,9 @@ private:
     ActionListView * m_view;
 
     bool m_categoriesActivable;
+
+    QMap < Qt::SizeHint, int > m_itemHeight;
+    QMap < Qt::SizeHint, int > m_categoryHeight;
 
     ActionListViewItem * m_selectedItem;
     friend class ActionListViewItem;

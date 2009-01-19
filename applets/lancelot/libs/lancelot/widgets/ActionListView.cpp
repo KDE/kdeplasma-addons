@@ -109,6 +109,14 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListViewModel * model
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
     setModel(model);
+
+    m_categoryHeight[Qt::MinimumSize] = 20;
+    m_categoryHeight[Qt::MaximumSize] = 35;
+    m_categoryHeight[Qt::PreferredSize] = 27;
+
+    m_itemHeight[Qt::MinimumSize] = 40;
+    m_itemHeight[Qt::MaximumSize] = 70;
+    m_itemHeight[Qt::PreferredSize] = 55;
 } //<
 
 ActionListViewItemFactory::~ActionListViewItemFactory() //>
@@ -261,26 +269,36 @@ int ActionListViewItemFactory::itemCount() const //>
     }
 } //<
 
+void ActionListViewItemFactory::setItemHeight(int height, Qt::SizeHint which)
+{
+    m_itemHeight[which] = height;
+    foreach (ActionListViewItem * item, m_items) {
+        int index = m_items.indexOf(item);
+        item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
+        item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
+        item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
+    }
+    emit updated();
+}
+
+void ActionListViewItemFactory::setCategoryHeight(int height, Qt::SizeHint which)
+{
+    m_categoryHeight[which] = height;
+    foreach (ActionListViewItem * item, m_items) {
+        int index = m_items.indexOf(item);
+        item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
+        item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
+        item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
+    }
+    emit updated();
+}
+
 int ActionListViewItemFactory::itemHeight(int index, Qt::SizeHint which) const //>
 {
     if (m_model->isCategory(index)) {
-        switch (which) {
-            case Qt::MinimumSize:
-                return 20;
-            case Qt::MaximumSize:
-                return 35;
-            default:
-                return 27;
-        }
+        return m_categoryHeight[which];
     } else {
-        switch (which) {
-            case Qt::MinimumSize:
-                return 40;
-            case Qt::MaximumSize:
-                return 70;
-            default:
-                return 55;
-        }
+        return m_itemHeight[which];
     }
 } //<
 
@@ -576,6 +594,22 @@ ActionListViewModel * ActionListView::model() const //>
     }
     return d->itemFactory->model();
 } //<
+
+void ActionListView::setItemHeight(int height, Qt::SizeHint which)
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    return d->itemFactory->setItemHeight(height, which);
+}
+
+void ActionListView::setCategoryHeight(int height, Qt::SizeHint which)
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    return d->itemFactory->setCategoryHeight(height, which);
+}
 
 void ActionListView::setExtenderPosition(ExtenderPosition position) //>
 {
