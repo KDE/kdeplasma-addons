@@ -24,7 +24,7 @@
 #include <kdemacros.h>
 
 #ifndef PLASMACONVERSION_EXPORT
-# if defined(MAKE_PLASMACONVERSION_LIB)
+# if defined(MAKE_CONVERSION_LIB)
    /* We are building this library */
 #  define PLASMACONVERSION_EXPORT KDE_EXPORT
 # else
