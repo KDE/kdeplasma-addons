@@ -18,171 +18,405 @@
  */
 
 #include "ActionListView.h"
+#include "ActionListView_p.h"
 
-#ifndef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
-
-#include <QLinkedListIterator>
-#include <cmath>
-#include <KDebug>
-#include <QIcon>
-#include <QAction>
-
-#define SCROLL_BUTTON_WIDTH 33
-#define SCROLL_BUTTON_HEIGHT 19
-
-#define SCROLL_AMMOUNT 6
-#define SCROLL_INTERVAL 10
-#define MAX_LIMBO_SIZE 5
+#include <QGraphicsSceneMouseEvent>
+#include <QApplication>
 
 namespace Lancelot {
 
-#define itemHeightFromIndex(A) ((m_model->isCategory(A)) ? m_categoryItemHeight : m_currentItemHeight)
+//> ActionListViewItem
+ActionListViewItem::ActionListViewItem(ActionListViewItemFactory * factory)
+    : ExtenderButton(), m_inSetSelected(false), m_factory(factory)
+{
+    connect(this, SIGNAL(mouseHoverEnter()),
+            this, SLOT(select()));
+    connect(this, SIGNAL(mouseHoverLeave()),
+            this, SLOT(deselect()));
+    L_WIDGET_SET_INITIALIZED;
+}
 
-// ActionListView::ItemButton
-ActionListView::ItemButton::ItemButton(ActionListView * parent)
-    : Lancelot::ExtenderButton("", "", parent), m_parent(parent)
+ActionListViewItem::~ActionListViewItem()
 {
 }
 
-void ActionListView::ItemButton::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
+void ActionListViewItem::select()
 {
-    m_parent->itemContext(this);
+    setSelected(true);
 }
 
-void ActionListView::ItemButton::mousePressEvent(QGraphicsSceneMouseEvent * event)
+void ActionListViewItem::deselect()
+{
+    setSelected(false);
+    m_factory->m_selectedItem = NULL;
+}
+
+void ActionListViewItem::setSelected(bool selected)
+{
+    if (m_inSetSelected) return;
+    m_inSetSelected = true;
+
+    setHovered(selected);
+
+    m_factory->setSelectedItem(this, selected);
+
+    if (!selected) {
+        hoverLeaveEvent(NULL);
+    } else {
+        m_factory->m_view->scrollTo(geometry());
+        hoverEnterEvent(NULL);
+    }
+
+    m_inSetSelected = false;
+}
+
+bool ActionListViewItem::isSelected() const
+{
+    return m_factory->m_selectedItem == this;
+}
+
+void ActionListViewItem::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
+{
+    Q_UNUSED(event);
+    m_factory->itemContext(this);
+}
+
+void ActionListViewItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     m_mousePos = event->pos();
     ExtenderButton::mousePressEvent(event);
 }
 
-void ActionListView::ItemButton::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     ExtenderButton::mouseMoveEvent(event);
     if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
         setDown(false);
-        m_parent->itemDrag(this, event->widget());
+        m_factory->itemDrag(this, event->widget());
     }
 }
 
-// ActionListView::ScrollButton
-ActionListView::ScrollButton::ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list, QGraphicsItem * parent)
-  : BasicWidget("", "", parent), m_list(list), m_direction(direction)
+//<
+
+//> ActionListViewItemFactory
+ActionListViewItemFactory::ActionListViewItemFactory(ActionListViewModel * model, ActionListView * view, Instance * instance) //>
+    : m_model(NULL),
+      m_extenderPosition(NoExtender),
+      m_itemsGroup(NULL), m_categoriesGroup(NULL),
+      m_instance(instance), m_view(view),
+      m_categoriesActivable(false), m_selectedItem(NULL)
 {
-    setAcceptsHoverEvents(true);
-}
-
-void ActionListView::ScrollButton::hoverEnterEvent (QGraphicsSceneHoverEvent * event)
-{
-    if (isHovered()) return;
-    m_list->m_scrollTimes = -1;
-    m_list->scroll(m_direction);
-    BasicWidget::hoverEnterEvent(event);
-}
-
-void ActionListView::ScrollButton::hoverLeaveEvent (QGraphicsSceneHoverEvent * event)
-{
-    if (!isHovered()) return;
-    m_list->m_scrollTimes = -1;
-    m_list->scroll(ActionListView::No);
-    BasicWidget::hoverLeaveEvent(event);
-}
-
-// ActionListView
-ActionListView::ActionListView(QGraphicsItem * parent)
-  : Widget(parent), m_model(NULL),
-    m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
-    m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
-    m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
-    m_initialButtonsCreationRunning(false), m_categoriesActivable(false)
-{
-    setGroupByName("ActionListView");
-    m_itemsGroup = instance()->group("ActionListView-Items");
-    m_categoriesGroup = instance()->group("ActionListView-Categories");
-
-    setAcceptsHoverEvents(true);
-
-    connect(&m_signalMapper, SIGNAL(mapped(int)),
-                 this, SLOT(itemActivated(int)));
-
-    connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
-    m_scrollTimer.setSingleShot(false);
-
-    L_WIDGET_SET_INITIALIZED;
-}
-
-ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent)
-  : Widget(parent), m_model(NULL),
-    m_minimumItemHeight(32), m_maximumItemHeight(64), m_preferredItemHeight(48), m_categoryItemHeight(24),
-    m_extenderPosition(NoExtender), scrollButtonUp(NULL), scrollButtonDown(NULL),
-    m_scrollDirection(No), m_scrollInterval(0), m_scrollTimes(-1), m_topButtonIndex(0), m_signalMapper(this),
-    m_initialButtonsCreationRunning(false)
-{
-    setGroupByName("ActionListView");
-    m_itemsGroup = instance()->group("ActionListView-Items");
-    m_categoriesGroup = instance()->group("ActionListView-Categories");
-
-    setAcceptsHoverEvents(true);
-
+    setItemsGroup(NULL);
+    setCategoriesGroup(NULL);
     setModel(model);
+} //<
 
-    connect(&m_signalMapper, SIGNAL(mapped(int)),
-                 this, SLOT(itemActivated(int)));
+ActionListViewItemFactory::~ActionListViewItemFactory() //>
+{
+    qDeleteAll(m_items);
+    m_items.clear();
+} //<
 
-    connect ( & m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimer()));
-    m_scrollTimer.setSingleShot(false);
-    L_WIDGET_SET_INITIALIZED;
+void ActionListViewItemFactory::reload() //>
+{
+    while (m_items.size() > m_model->size()) {
+        kDebug() << "deleting one";
+        ActionListViewItem * item = m_items.takeLast();
+        item->hide();
+        item->deleteLater();
+    }
+
+    kDebug() << "reloading the items";
+    for (int i = 0; i < m_model->size(); i++) {
+        itemForIndex(i, true);
+    }
+
+    emit updated();
+} //<
+
+CustomListItem * ActionListViewItemFactory::itemForIndex(int index) //>
+{
+    return itemForIndex(index, false);
+} //<
+
+CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
+        bool reload) //>
+{
+    ActionListViewItem * item;
+    kDebug() << "req index:" << index
+             << "items size:" << m_items.size()
+             << "model size:" << m_model->size();
+    if (index < m_items.size() && m_items[index]) {
+        item = m_items[index];
+    } else {
+        kDebug() << "Creating new one";
+        item = new ActionListViewItem(this);
+        item->setGroup((m_model->isCategory(index))
+                ? m_categoriesGroup : m_itemsGroup);
+        reload = true;
+        while (index >= m_items.size()) {
+            m_items.append(NULL);
+            kDebug() << "Extending items list to fit item";
+        }
+        m_items[index] = item;
+        setItemExtender(index);
+        connect(item, SIGNAL(activated()),
+                this, SLOT(itemActivated()));
+    }
+
+    if (reload) {
+        item->setTitle(m_model->title(index));
+        item->setDescription(m_model->description(index));
+        item->setIcon(m_model->icon(index));
+        item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
+        item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
+        item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
+        item->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        if (m_model->isCategory(index)) {
+            item->setGroup(m_categoriesGroup);
+            item->setIconSize(QSize(20, 20));
+        } else {
+            item->setGroup(m_itemsGroup);
+        }
+    }
+
+    return item;
+} //<
+
+void ActionListViewItemFactory::setItemsGroup(WidgetGroup * group) //>
+{
+    if (group == NULL) {
+        group = m_instance->group("ActionListView-Items");
+    }
+
+    if (group == m_itemsGroup) return;
+
+    m_itemsGroup = group;
+
+    int i = 0;
+    foreach(ActionListViewItem * item, m_items) {
+        if (!(m_model->isCategory(i))) {
+            item->setGroup(group);
+        }
+        i++;
+    }
 }
 
-void ActionListView::itemActivated(int index)
+WidgetGroup * ActionListViewItemFactory::itemsGroup() const //>
 {
-    if (!m_model) return;
+    return m_itemsGroup;
+} //<
+
+void ActionListViewItemFactory::setCategoriesGroup(WidgetGroup * group) //>
+{
+    if (group == NULL) {
+        group = m_instance->group("ActionListView-Categories");
+    }
+
+    if (group == m_itemsGroup) return;
+
+    m_categoriesGroup = group;
+
+    int i = 0;
+    foreach(ActionListViewItem * item, m_items) {
+        if (m_model->isCategory(i)) {
+            item->setGroup(group);
+            setItemExtender(i);
+        }
+        i++;
+    }
+}
+
+WidgetGroup * ActionListViewItemFactory::categoriesGroup() const //>
+{
+    return m_categoriesGroup;
+} //<
+
+void ActionListViewItemFactory::itemActivated() //>
+{
+    if (!sender()) {
+        return;
+    }
+
+    activate(m_items.indexOf(
+                (Lancelot::ActionListViewItem *)sender()));
+} //<
+
+void ActionListViewItemFactory::activate(int index) //>
+{
+    if (index < 0 || index >= m_model->size()) {
+        return;
+    }
     m_model->activated(index);
     emit activated(index);
-}
+} //<
 
-void ActionListView::itemContext(ActionListView::ItemButton * button)
+int ActionListViewItemFactory::itemCount() const //>
 {
-    int buttonIndex = m_topButtonIndex;
-
-    QPair < Lancelot::ExtenderButton *, int > pair;
-    foreach (pair, m_buttons) {
-        if (pair.first == button) {
-            itemContextRequested(buttonIndex);
-            return;
-        }
-        ++ buttonIndex;
+    if (m_model) {
+        return m_model->size();
+    } else {
+        return 0;
     }
-}
+} //<
 
-void ActionListView::itemContextRequested(int index)
+int ActionListViewItemFactory::itemHeight(int index, Qt::SizeHint which) const //>
 {
-    if (!m_model->hasContextActions(index)) {
+    if (m_model->isCategory(index)) {
+        switch (which) {
+            case Qt::MinimumSize:
+                return 20;
+            case Qt::MaximumSize:
+                return 35;
+            default:
+                return 27;
+        }
+    } else {
+        switch (which) {
+            case Qt::MinimumSize:
+                return 40;
+            case Qt::MaximumSize:
+                return 70;
+            default:
+                return 55;
+        }
+    }
+} //<
+
+void ActionListViewItemFactory::setModel(ActionListViewModel * model) //>
+{
+    if (m_model) {
+        disconnect(m_model, NULL, this, NULL);
+    }
+
+    if (!model) {
+        return;
+    }
+
+    m_model = model;
+
+    connect(model, SIGNAL(itemInserted(int)),
+            this, SLOT(modelItemInserted(int)));
+    connect(model, SIGNAL(itemDeleted(int)),
+            this, SLOT(modelItemDeleted(int)));
+    connect(model, SIGNAL(itemAltered(int)),
+            this, SLOT(modelItemAltered(int)));
+    connect(model, SIGNAL(updated()),
+            this, SLOT(modelUpdated()));
+
+} //<
+
+ActionListViewModel * ActionListViewItemFactory::model() //>
+{
+    return m_model;
+} //<
+
+void ActionListViewItemFactory::modelUpdated() //>
+{
+    kDebug();
+    reload();
+} //<
+
+void ActionListViewItemFactory::modelItemInserted(int index) //>
+{
+    if (index < 0 || index > m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        kDebug() << "illegal -> reloading: " << index;
+        reload();
+    } else {
+        m_items.insert(index, NULL);
+        itemForIndex(index, true);
+        kDebug() << "emit itemInserted" << index;
+        emit itemInserted(index);
+    }
+} //<
+
+void ActionListViewItemFactory::modelItemDeleted(int index) //>
+{
+    kDebug();
+    if (index < 0 || index >= m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        reload();
+    } else {
+        delete m_items.takeAt(index);
+        emit itemDeleted(index);
+    }
+} //<
+
+void ActionListViewItemFactory::modelItemAltered(int index) //>
+{
+    kDebug();
+    kDebug();
+    if (index < 0 || index >= m_items.size()) {
+        // If we get an illegal notification, do
+        // a full reload
+        reload();
+    } else {
+        itemForIndex(index, true);
+        emit itemAltered(index);
+    }
+} //<
+
+void ActionListViewItemFactory::setExtenderPosition(ExtenderPosition position) //>
+{
+    if (position == TopExtender) {
+        position = LeftExtender;
+    }
+
+    if (position == BottomExtender) {
+        position = RightExtender;
+    }
+
+    m_extenderPosition = position;
+    updateExtenderPosition();
+} //<
+
+void ActionListViewItemFactory::updateExtenderPosition() //>
+{
+    for (int i = 0; i < m_items.count(); i++) {
+        setItemExtender(i);
+    }
+} //<
+
+void ActionListViewItemFactory::setItemExtender(int index) //>
+{
+    ActionListViewItem * item = m_items.at(index);
+    if (m_model->isCategory(index) && !m_categoriesActivable) {
+        item->setExtenderPosition(NoExtender);
+    } else {
+        item->setExtenderPosition(m_extenderPosition);
+    }
+} //<
+
+ExtenderPosition ActionListViewItemFactory::extenderPosition() const //>
+{
+    return m_extenderPosition;
+} //<
+
+void ActionListViewItemFactory::itemContext(ActionListViewItem * sender) //>
+{
+    int index = m_items.indexOf(sender);
+    if (index < 0 || index >= m_model->size() ||
+            !m_model->hasContextActions(index)) {
         return;
     }
 
     QMenu menu;
     m_model->setContextActions(index, &menu);
-
     m_model->contextActivate(index, menu.exec(QCursor::pos()));
-}
 
+} //<
 
-void ActionListView::itemDrag(ActionListView::ItemButton * button, QWidget * widget)
+void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * widget) //>
 {
-    int buttonIndex = m_topButtonIndex;
-
-    QPair < Lancelot::ExtenderButton *, int > pair;
-    foreach (pair, m_buttons) {
-        if (pair.first == button) {
-            itemDragRequested(buttonIndex, widget);
-            return;
-        }
-        ++ buttonIndex;
+    int index = m_items.indexOf(sender);
+    if (index < 0 || index >= m_model->size()) {
+        return;
     }
-}
 
-void ActionListView::itemDragRequested(int index, QWidget * widget)
-{
     QMimeData * data = m_model->mimeData(index);
     if (data == NULL) {
         return;
@@ -197,551 +431,286 @@ void ActionListView::itemDragRequested(int index, QWidget * widget)
 
     Qt::DropAction dropAction = drag->exec(actions, defaultAction);
     m_model->dataDropped(index, dropAction);
-}
 
-ActionListView::~ActionListView()
+} //<
+
+void ActionListViewItemFactory::activateSelectedItem() //>
 {
-    deleteAllButtons();
-    delete scrollButtonUp;
-    delete scrollButtonDown;
-}
-
-void ActionListView::positionScrollButtons()
-{
-
-    if (!scrollButtonUp) {
-        Instance::setActiveInstanceAndLock(group()->instance());
-        scrollButtonUp = new ScrollButton(Up, this, this);
-        scrollButtonDown = new ScrollButton(Down, this, this);
-        Instance::releaseActiveInstanceLock();
-
-        scrollButtonUp->setMinimumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonUp->setPreferredSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonUp->setMaximumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonUp->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonUp->setZValue(100);
-        scrollButtonUp->show();
-
-        scrollButtonDown->setMinimumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonDown->setPreferredSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonDown->setMaximumSize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonDown->resize(SCROLL_BUTTON_WIDTH, SCROLL_BUTTON_HEIGHT);
-        scrollButtonDown->setZValue(100);
-        scrollButtonDown->show();
-
-        scrollButtonUp->setGroupByName(group()->name() + "-Scroll-Up");
-        scrollButtonDown->setGroupByName(group()->name() + "-Scroll-Down");
-
+    kDebug() << (void *) m_selectedItem;
+    if (!m_selectedItem) {
+        return;
     }
 
-    float left = (size().width() - EXTENDER_SIZE - SCROLL_BUTTON_WIDTH) / 2;
-    if (m_extenderPosition == LeftExtender) left += EXTENDER_SIZE;
+    kDebug() << m_items.indexOf(m_selectedItem);
+    activate(m_items.indexOf(m_selectedItem));
+} //<
 
-    scrollButtonUp->setPos(left, 0);
-    scrollButtonDown->setPos(left, size().height() - SCROLL_BUTTON_HEIGHT);
-}
-
-void ActionListView::setGroup(WidgetGroup * g)
+void ActionListViewItemFactory::clearSelection() //>
 {
-    Widget::setGroup(g);
-    if (scrollButtonUp) {
-        scrollButtonUp->setGroupByName(group()->name() + "-Scroll-Up");
-        scrollButtonDown->setGroupByName(group()->name() + "-Scroll-Down");
+    if (m_selectedItem) {
+        setSelectedItem(m_selectedItem, false);
     }
 }
 
-void ActionListView::scroll(ScrollDirection direction)
+void ActionListViewItemFactory::setSelectedItem(ActionListViewItem * item, bool selected) //>
 {
-    m_scrollDirection = direction;
-    if (direction != No) {
-        m_scrollTimer.start(m_scrollInterval = SCROLL_INTERVAL);
+    if (m_selectedItem == item && !selected) {
+        if (m_selectedItem) {
+            m_selectedItem->setSelected(false);
+        }
+        m_selectedItem = NULL;
+    } else if (m_selectedItem != item && selected) {
+        if (m_selectedItem) {
+            m_selectedItem->setSelected(false);
+        }
+        m_selectedItem = item;
+        m_selectedItem->setSelected(true);
+    }
+} //<
+
+void ActionListViewItemFactory::selectRelItem(int rel) //>
+{
+    int index = -1;
+    if (m_selectedItem) {
+        index = m_items.indexOf(m_selectedItem);
+    }
+
+    if (index == -1) {
+        if (rel == 1) {
+            index = 0;
+        } else {
+            index = m_items.count() - 1;
+        }
     } else {
-        m_scrollTimer.stop();
-    }
-}
-
-void ActionListView::scrollTimer()
-{
-    scrollBy(m_scrollDirection * SCROLL_AMMOUNT);
-}
-
-void ActionListView::scrollBy(int scrollAmmount)
-{
-    if (!m_model || m_buttons.size() == 0 || m_scrollTimes == 0) {
-        m_scrollTimer.stop();
-        return;
-    }
-
-    if (m_scrollTimes > 0) --m_scrollTimes;
-
-    if (m_scrollDirection == Up && m_buttons.first().second >= 0) {
-        if (m_topButtonIndex <= 0) {
-            scroll(No);
-            return;
+        if (rel == 1) {
+            index++;
+            if (index >= m_items.count()) {
+                index = 0;
+            }
         } else {
-            m_buttons.first().first->setTransform(QTransform());
-            addButton(Start);
+            index--;
+            if (index < 0) {
+                index = m_items.count() - 1;
+            }
         }
     }
 
-    if (m_scrollDirection == Down
-        && itemHeightFromIndex(m_topButtonIndex + m_buttons.size() - 1)
-            + m_buttons.last().second <= geometry().height()) {
-        if (m_topButtonIndex + m_buttons.size() >= m_model->size()) {
-            scroll(No);
-            return;
-        } else {
-            m_buttons.last().first->setTransform(QTransform());
-            addButton(End);
+    if (!m_categoriesActivable) {
+        int oindex = index;
+        while (m_model->isCategory(index)) {
+            index += rel;
+            if (index == oindex) return;
+
+            if (index < 0) {
+                index = m_items.count() - 1;
+            } else if (index >= m_items.count()) {
+                index = 0;
+            }
         }
     }
 
-    QPair < ExtenderButton *, int > pair;
-    QMutableListIterator< QPair < ExtenderButton *, int > > i(m_buttons);
-    while (i.hasNext()) {
-        pair = i.next();
-        pair.second += scrollAmmount;
-        pair.first->setGeometry(
-            pair.first->geometry().translated(0, scrollAmmount)
-        );
-        i.setValue(pair);
+    if (index >= 0 && index < m_items.count()) {
+        m_items.at(index)->setSelected();
     }
+} //<
 
-    // Delete buttons that are not needed
-    while (m_buttons.size() > 1) {
-        if (m_buttons.at(1).second <= 0) {
-            deleteButton(Start);
-        } else break;
-    }
+//<
 
-    while (m_buttons.size() > 1) {
-        if (m_buttons.last().second >= geometry().height()) {
-            deleteButton(End);
-        } else break;
-    }
-
-    // Scale first and last button as needed
-    int partHeight = m_buttons.first().second;
-    int height = itemHeightFromIndex(m_topButtonIndex);
-    qreal scale = (qreal)(height + partHeight) / height;
-    m_topButtonScale.reset();
-    m_topButtonScale.translate(0, - partHeight);
-    m_topButtonScale.scale(1, scale);
-
-    m_buttons.first().first->setTransform(m_topButtonScale);
-
-    /*int*/ partHeight = qRound(geometry().height()) - m_buttons.last().second;
-    /*int*/ height = itemHeightFromIndex(m_topButtonIndex + m_buttons.size() - 1);
-    /*qreal*/ scale = qMin(qreal(1.0), (qreal)(partHeight) / height);
-    m_bottomButtonScale.reset();
-    m_bottomButtonScale.scale(1, scale);
-
-    m_buttons.last().first->setTransform(m_bottomButtonScale);
-
-}
-
-void ActionListView::setGeometry(const QRectF & geometry)
+//> ActionListView
+ActionListView::Private::Private() //>
+    : itemFactory(NULL)
 {
-    if (!geometry.isValid() || geometry.isEmpty() || this->geometry() == geometry) {
+} //<
+
+ActionListView::Private::~Private() //>
+{
+    delete itemFactory;
+} //<
+
+ActionListView::ActionListView(QGraphicsItem * parent) //>
+    : CustomListView(parent), d(new Private())
+{
+    setFlag(ScrollPane::HoverShowScrollbars);
+    clearFlag(ScrollPane::ClipScrollable);
+    setFocusPolicy(Qt::WheelFocus);
+
+    L_WIDGET_SET_INITIALIZED;
+} //<
+
+ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent) //>
+    : CustomListView(parent),
+      d(new Private())
+{
+    setModel(model);
+    // d->itemFactory = (ActionListViewItemFactory *) list()->itemFactory();
+    connect(
+            d->itemFactory, SIGNAL(activated(int)),
+            this, SIGNAL(activated(int)));
+
+    setFlag(ScrollPane::HoverShowScrollbars);
+    clearFlag(ScrollPane::ClipScrollable);
+    setFocusPolicy(Qt::WheelFocus);
+
+    L_WIDGET_SET_INITIALIZED;
+} //<
+
+ActionListView::~ActionListView() //>
+{
+    delete d;
+} //<
+
+void ActionListView::setModel(ActionListViewModel * model) //>
+{
+    if (!d->itemFactory) {
+        d->itemFactory = new ActionListViewItemFactory(model, this, instance());
+        list()->setItemFactory(d->itemFactory);
+    } else {
+        d->itemFactory->setModel(model);
+    }
+} //<
+
+ActionListViewModel * ActionListView::model() const //>
+{
+    if (!d->itemFactory) {
+        return NULL;
+    }
+    return d->itemFactory->model();
+} //<
+
+void ActionListView::setExtenderPosition(ExtenderPosition position) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    d->itemFactory->setExtenderPosition(position);
+
+    if (d->itemFactory->extenderPosition() == LeftExtender) {
+        list()->setMargin(Plasma::LeftMargin, EXTENDER_SIZE);
+        list()->setMargin(Plasma::RightMargin, 0);
+        setFlip(Plasma::NoFlip);
+    } else if (d->itemFactory->extenderPosition() == RightExtender) {
+        list()->setMargin(Plasma::LeftMargin, 0);
+        list()->setMargin(Plasma::RightMargin, EXTENDER_SIZE);
+        setFlip(Plasma::HorizontalFlip);
+    } else {
+        list()->setMargin(Plasma::LeftMargin, 0);
+        list()->setMargin(Plasma::RightMargin, 0);
+        setFlip(Plasma::NoFlip);
+    }
+
+} //<
+
+ExtenderPosition ActionListView::extenderPosition() const //>
+{
+    if (!d->itemFactory) {
+        return NoExtender;
+    }
+    return d->itemFactory->extenderPosition();
+} //<
+
+void ActionListView::setItemsGroup(WidgetGroup * group) //>
+{
+    if (!d->itemFactory) {
         return;
     }
 
-    Widget::setGeometry(geometry);
-    positionScrollButtons();
+    d->itemFactory->setItemsGroup(group);
+} //<
 
-    if (!m_model) return;
-
-    initialButtonsCreation();
-}
-
-void ActionListView::setModel(ActionListViewModel * model)
-{
-    if (!model) return;
-
-    if (m_model) {
-        // disconnencting from old model
-        disconnect ( m_model, 0, this, 0 );
-    }
-
-    m_model = model;
-
-    connect(m_model, SIGNAL(updated()),
-            this, SLOT(modelUpdated()));
-    connect(m_model, SIGNAL(itemInserted(int)),
-            this, SLOT(modelItemInserted(int)));
-    connect(m_model, SIGNAL(itemDeleted(int)),
-            this, SLOT(modelItemDeleted(int)));
-    connect(m_model, SIGNAL(itemAltered(int)),
-            this, SLOT(modelItemAltered(int)));
-
-    initialButtonsCreation();
-    update();
-}
-
-ActionListViewModel * ActionListView::model() const
-{
-    return m_model;
-}
-
-// TODO: Model updates
-void ActionListView::modelUpdated()
-{
-    initialButtonsCreation();
-}
-
-void ActionListView::modelItemInserted(int index)
-{
-    Q_UNUSED(index);
-    modelUpdated();
-}
-
-void ActionListView::modelItemDeleted(int index)
-{
-    Q_UNUSED(index);
-    modelUpdated();
-}
-
-void ActionListView::modelItemAltered(int index)
-{
-    // TODO: What if an item became a category, or vice versa?
-    int buttonIndex = index - m_topButtonIndex;
-    if (buttonIndex >= 0 && buttonIndex < m_buttons.size()) {
-        m_buttons.at(buttonIndex).first->setTitle(m_model->title(index));
-        m_buttons.at(buttonIndex).first->setDescription(m_model->description(index));
-        m_buttons.at(buttonIndex).first->setIcon(m_model->icon(index));
-    }
-}
-
-void ActionListView::setItemsGroupByName(const QString & group)
+void ActionListView::setItemsGroupByName(const QString & group) //>
 {
     setItemsGroup(instance()->group(group));
-}
+} //<
 
-void ActionListView::setItemsGroup(WidgetGroup * group)
+WidgetGroup * ActionListView::itemsGroup() const //>
 {
-    if (group == NULL) {
-        group = instance()->defaultGroup();
+    if (!d->itemFactory) {
+        return NULL;
     }
 
-    if (group == m_itemsGroup) return;
+    return d->itemFactory->itemsGroup();
+} //<
 
-    m_itemsGroup = group;
-
-    QPair < ExtenderButton *, int > pair;
-    foreach(pair, m_buttons) {
-        pair.first->setGroup(group);
-    }
-
-    ExtenderButton * button;
-    foreach(button, m_buttonsLimbo) {
-        button->setGroup(group);
-    }
-}
-
-WidgetGroup * ActionListView::itemsGroup() const
+void ActionListView::setCategoriesGroup(WidgetGroup * group) //>
 {
-    return m_itemsGroup;
-}
+    if (!d->itemFactory) {
+        return;
+    }
 
-void ActionListView::setCategoriesGroupByName(const QString & group)
+    d->itemFactory->setCategoriesGroup(group);
+} //<
+
+void ActionListView::setCategoriesGroupByName(const QString & group) //>
 {
     setCategoriesGroup(instance()->group(group));
-}
+} //<
 
-void ActionListView::setCategoriesGroup(WidgetGroup * group)
+WidgetGroup * ActionListView::categoriesGroup() const //>
 {
-    if (group == NULL) {
-        group = instance()->defaultGroup();
+    if (!d->itemFactory) {
+        return NULL;
     }
 
-    if (group == m_categoriesGroup) return;
+    return d->itemFactory->categoriesGroup();
+} //<
 
-    m_categoriesGroup = group;
-}
-
-WidgetGroup * ActionListView::categoriesGroup() const
-{
-    return m_categoriesGroup;
-}
-
-void ActionListView::setExtenderPosition(ExtenderPosition position)
-{
-    if (position == TopExtender) position = LeftExtender;
-    if (position == BottomExtender) position = RightExtender;
-
-    if (m_extenderPosition == position) return;
-    m_extenderPosition = position;
-
-    int left = 0;
-    qreal width = geometry().width();
-
-    switch (position) {
-    case LeftExtender:
-        left = EXTENDER_SIZE;
-        // break; // We need to have width -= EXTENDER_SIZE for Left too
-    case RightExtender:
-        width -= EXTENDER_SIZE;
-        break;
-    default:
-        break;
-    }
-
-    QPair < ExtenderButton *, int > pair;
-    foreach(pair, m_buttons) {
-        pair.first->setExtenderPosition(position);
-        pair.first->setActivationMethod(
-                (position == NoExtender)?ClickActivate:ExtenderActivate);
-        pair.first->setGeometry(
-            QRectF(left, pair.first->geometry().top(),
-                   width, pair.first->geometry().height())
-        );
-    }
-
-}
-
-ExtenderPosition ActionListView::extenderPosition() const
-{
-    return m_extenderPosition;
-}
-
-void ActionListView::setCategoriesActivable(bool value)
-{
-    m_categoriesActivable = value;
-}
-
-bool ActionListView::categoriesActivable() const
-{
-    return m_categoriesActivable;
-}
-
-Lancelot::ExtenderButton * ActionListView::createButton()
-{
-    Lancelot::ExtenderButton * button;
-
-    if (!m_buttonsLimbo.empty()) {
-        button = m_buttonsLimbo.takeFirst();
-        button->setExtenderPosition(m_extenderPosition);
-        button->show();
-    } else {
-        Instance::setActiveInstanceAndLock(group()->instance());
-        button = new ItemButton(this);
-        Instance::releaseActiveInstanceLock();
-
-        button->setInnerOrientation(Qt::Horizontal);
-        button->setExtenderPosition(m_extenderPosition);
-        button->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-
-        connect(button, SIGNAL(activated()), &m_signalMapper, SLOT(map()));
-    }
-    return button;
-}
-
-void ActionListView::deleteButton(ListTail where)
-{
-    ExtenderButton * button;
-    if (where == Start) {
-        button = m_buttons.takeFirst().first;
-        ++m_topButtonIndex;
-    } else {
-        button = m_buttons.takeLast().first;
-    }
-
-    if (m_buttonsLimbo.count() >= MAX_LIMBO_SIZE) {
-        delete button;
-        return;
-    } else {
-        m_buttonsLimbo.append(button);
-        button->hide();
-    }
-}
-
-void ActionListView::deleteAllButtons()
-{
-    while (!m_buttons.empty()) {
-        delete m_buttons.takeLast().first;
-    }
-    while (!m_buttonsLimbo.empty()) {
-        delete m_buttonsLimbo.takeFirst();
-    }
-}
-
-void ActionListView::initialButtonsCreation()
-{
-    if (m_initialButtonsCreationRunning) return;
-    m_initialButtonsCreationRunning = true;
-    calculateItemHeight();
-
-    deleteAllButtons();
-    if (!m_model) {
-        m_initialButtonsCreationRunning = false;
-        return;
-    }
-
-    int listHeight = qRound(geometry().height());
-
-    if (!addButton(End)) {
-        // The model is empty or something else is wrong
-        m_initialButtonsCreationRunning = false;
-        return;
-    }
-
-    bool buttonCreated;
-    while (
-        (m_buttons.last().second < listHeight)
-        && (m_buttons.size() <= m_model->size())
-        && (buttonCreated = addButton(End))) {
-    }
-    // If buttonCreated is true, it means that we haven't reached
-    // the end of the model, but we have made one more button than we need
-    // and that button is outside the listview. Move it to the limbo
-    // for further use.
-    if (buttonCreated) deleteButton(End);
-
-    m_initialButtonsCreationRunning = false;
-
-    scrollTimer();
-}
-
-bool ActionListView::addButton(ListTail where)
-{
-    if (!m_model) return false;
-
-    if (m_buttons.empty()) {
-        where = End;
-    }
-
-    // Get index (in model) of the element that is to be added
-    int itemIndex;
-    if (where == Start) {
-        itemIndex = m_topButtonIndex - 1;
-        if (itemIndex < 0) return false;
-    } else {
-        itemIndex = m_topButtonIndex + m_buttons.size();
-        if (itemIndex >= m_model->size()) return false;
-    }
-
-    // Create and initialize the button for the item
-    ExtenderButton * button = createButton();
-    button->setTitle(m_model->title(itemIndex));
-    button->setDescription(m_model->description(itemIndex));
-    button->setIcon(m_model->icon(itemIndex));
-    if (m_model->isCategory(itemIndex)) {
-        button->setIconSize(QSize(m_categoryItemHeight, m_categoryItemHeight));
-        button->setGroup(m_categoriesGroup);
-        if (!m_categoriesActivable) {
-            button->setExtenderPosition(Lancelot::NoExtender);
-        }
-    } else {
-        button->setGroup(m_itemsGroup);
-    }
-    button->setLayout(NULL);
-    m_signalMapper.setMapping(button, itemIndex);
-
-    int itemHeight = itemHeightFromIndex(itemIndex);
-
-    // Place the button where needed
-    int buttonTop;
-    if (m_buttons.empty()) {
-        // If the buttons list is empty, we are adding the element on the top
-        buttonTop = 0;
-        m_buttons.append(QPair < ExtenderButton *, int > (button, buttonTop));
-
-    } else if (where == Start) {
-        // Adding the element in front of the first element
-        buttonTop = m_buttons.first().second - itemHeight;
-        m_buttons.prepend(QPair < ExtenderButton *, int > (button, buttonTop));
-        --m_topButtonIndex;
-
-    } else {
-        // Adding the element after the last element
-        buttonTop = m_buttons.last().second +
-            itemHeightFromIndex(m_topButtonIndex + m_buttons.size() - 1)
-        ;
-        m_buttons.append(QPair < ExtenderButton *, int > (button, buttonTop));
-
-    }
-
-    int left = 0;
-    qreal width = geometry().width();
-
-    switch (m_extenderPosition) {
-    case LeftExtender:
-        left = EXTENDER_SIZE;
-        // break; // We need to have width -= EXTENDER_SIZE for Left too
-    case RightExtender:
-        width -= EXTENDER_SIZE;
-        break;
-    default:
-        break;
-    }
-
-    button->setPreferredSize(QSizeF(width, itemHeight));
-    button->setGeometry(QRectF(left, buttonTop, width, itemHeight));
-
-    return true;
-}
-
-int ActionListView::calculateItemHeight()
-{
-    if (!m_model) return m_currentItemHeight = 0;
-
-    int listHeight = qRound(geometry().height());
-    int categoriesHeight = 0, items = 0;
-    for (int i = 0; i < m_model->size(); i++) {
-        if (m_model->isCategory(i)) {
-            categoriesHeight += m_categoryItemHeight;
-        } else {
-            ++items;
-        }
-        if (categoriesHeight + items * m_minimumItemHeight > listHeight) {
-            return m_currentItemHeight = m_preferredItemHeight;
-        }
-    }
-
-    if (items == 0) return 0;
-
-    // items is from now on projected height for an item
-    items = (listHeight - categoriesHeight) / items;
-
-    if (items > m_maximumItemHeight)
-        return m_currentItemHeight = m_maximumItemHeight;
-
-    return m_currentItemHeight = items;
-}
-
-void ActionListView::wheelEvent(QGraphicsSceneWheelEvent * event)
-{
-    if (event->delta() > 0)
-        m_scrollDirection = Up;
-    else
-        m_scrollDirection = Down;
-
-    for (int i = 0; i < SCROLL_AMMOUNT; i++) {
-        scrollBy(m_scrollDirection * SCROLL_AMMOUNT);
-    }
-}
-
-void ActionListView::groupUpdated()
+void ActionListView::groupUpdated() //>
 {
     Widget::groupUpdated();
 
     if (group()->hasProperty("ExtenderPosition")) {
         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
     }
-}
+} //<
 
-void ActionListView::setMinimumItemHeight(int height) { m_minimumItemHeight = height; }
-int ActionListView::minimumItemHeight() const { return m_minimumItemHeight; }
+void ActionListView::keyPressEvent(QKeyEvent * event) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
 
-void ActionListView::setMaximumItemHeight(int height) { m_maximumItemHeight = height; }
-int ActionListView::maximumItemHeight() const { return m_maximumItemHeight; }
+    kDebug() << event->key() << Qt::Key_Enter;
+    if (event->key() == Qt::Key_Return ||
+        event->key() == Qt::Key_Enter) {
+        d->itemFactory->activateSelectedItem();
+    } else if (event->key() == Qt::Key_Down) {
+        d->itemFactory->selectRelItem(+1);
+    } else if (event->key() == Qt::Key_Up) {
+        d->itemFactory->selectRelItem(-1);
+    }
+} //<
 
-void ActionListView::setPreferredItemHeight(int height) { m_preferredItemHeight = height; }
-int ActionListView::preferredItemHeight() const { return m_preferredItemHeight; }
+void ActionListView::clearSelection() //>
+{
+    d->itemFactory->clearSelection();
+} //<
 
-void ActionListView::setCategoryItemHeight(int height) { m_categoryItemHeight = height; }
-int ActionListView::categoryItemHeight() const { return m_categoryItemHeight; }
+void ActionListView::initialSelection() //>
+{
+    d->itemFactory->clearSelection();
+    d->itemFactory->selectRelItem(+1);
+} //<
+
+int ActionListView::selectedIndex() const //>
+{
+    if (!d->itemFactory->m_selectedItem) {
+        return -1;
+    }
+
+    return d->itemFactory->m_items.indexOf(d->itemFactory->m_selectedItem);
+} //>
+
+bool ActionListView::areCategoriesActivable() const //>
+{
+    return d->itemFactory->m_categoriesActivable;
+} //<
+
+void ActionListView::setCategoriesActivable(bool value) //>
+{
+    d->itemFactory->m_categoriesActivable = value;
+    d->itemFactory->updateExtenderPosition();
+} //<
+
+//<
 
 } // namespace Lancelot
-
-#endif

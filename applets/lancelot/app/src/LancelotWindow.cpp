@@ -59,6 +59,7 @@
 #include "models/BaseMergedModel.h"
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
+#include <lancelot/widgets/PopupWidget.h>
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
@@ -278,6 +279,21 @@ LancelotWindow::LancelotWindow()
     instance->activateAll();
     loadConfig();
     setupActions();
+
+    /* testing */
+    /*
+    Lancelot::PopupWidget * popup = new Lancelot::PopupWidget();
+    QGraphicsScene * scene = new QGraphicsScene();
+
+    Lancelot::ExtenderButton * button = new Lancelot::ExtenderButton(
+            "Title", "Description");
+    scene->addItem(button);
+    button->setGroupByName("SystemButtons");
+    button->setExtenderPosition(Lancelot::NoExtender);
+    popup->setGraphicsWidget(button);
+    // popup->resize(200, 400);
+    popup->show();
+    */
 }
 
 LancelotWindow::~LancelotWindow()

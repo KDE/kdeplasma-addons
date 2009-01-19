@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_ACTION_LIST_VIEW2_PH
-#define LANCELOT_ACTION_LIST_VIEW2_PH
+#ifndef LANCELOT_ACTION_LIST_VIEW_PH
+#define LANCELOT_ACTION_LIST_VIEW_PH
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
@@ -27,20 +27,20 @@
 #include <QIcon>
 
 #include <lancelot/widgets/CustomListView.h>
-#include <lancelot/widgets/ActionListView2.h>
+#include <lancelot/widgets/ActionListView.h>
 #include <lancelot/models/ActionListViewModels.h>
 
 namespace Lancelot
 {
 
-//> ActionListView2Item
-class ActionListView2ItemFactory;
+//> ActionListViewItem
+class ActionListViewItemFactory;
 
-class ActionListView2Item: public ExtenderButton, public CustomListItem {
+class ActionListViewItem: public ExtenderButton, public CustomListItem {
     Q_OBJECT
 public:
-    ActionListView2Item(ActionListView2ItemFactory * factory);
-    ~ActionListView2Item();
+    ActionListViewItem(ActionListViewItemFactory * factory);
+    ~ActionListViewItem();
 
     L_Override virtual void setSelected(bool selected = true);
     L_Override virtual bool isSelected() const;
@@ -52,7 +52,7 @@ public:
 private:
     QPointF m_mousePos;
     bool m_inSetSelected;
-    ActionListView2ItemFactory * m_factory;
+    ActionListViewItemFactory * m_factory;
 
 private Q_SLOTS:
     void select();
@@ -60,12 +60,12 @@ private Q_SLOTS:
 };
 //<
 
-//> ActionListView2ItemFactory
-class ActionListView2ItemFactory: public CustomListItemFactory {
+//> ActionListViewItemFactory
+class ActionListViewItemFactory: public CustomListItemFactory {
     Q_OBJECT
 public:
-    ActionListView2ItemFactory(ActionListViewModel * model, ActionListView2 * view, Instance * instance);
-    ~ActionListView2ItemFactory();
+    ActionListViewItemFactory(ActionListViewModel * model, ActionListView * view, Instance * instance);
+    ~ActionListViewItemFactory();
 
     L_Override virtual CustomListItem * itemForIndex(int index);
     L_Override virtual CustomListItem * itemForIndex(int index,
@@ -80,12 +80,12 @@ public:
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
 
-    void itemContext(ActionListView2Item * sender);
-    void itemDrag(ActionListView2Item * sender, QWidget * widget);
+    void itemContext(ActionListViewItem * sender);
+    void itemDrag(ActionListViewItem * sender, QWidget * widget);
 
     void activateSelectedItem();
     void selectRelItem(int rel);
-    void setSelectedItem(ActionListView2Item * item, bool selected = true);
+    void setSelectedItem(ActionListViewItem * item, bool selected = true);
     void activate(int index);
 
     void setItemExtender(int index);
@@ -112,33 +112,33 @@ Q_SIGNALS:
 
 private:
     ActionListViewModel * m_model;
-    QList < ActionListView2Item * > m_items;
+    QList < ActionListViewItem * > m_items;
     ExtenderPosition m_extenderPosition;
 
     WidgetGroup * m_itemsGroup;
     WidgetGroup * m_categoriesGroup;
     Instance * m_instance;
-    ActionListView2 * m_view;
+    ActionListView * m_view;
 
     bool m_categoriesActivable;
 
-    ActionListView2Item * m_selectedItem;
-    friend class ActionListView2Item;
-    friend class ActionListView2;
+    ActionListViewItem * m_selectedItem;
+    friend class ActionListViewItem;
+    friend class ActionListView;
 };
 //<
 
-//> ActionListView2
-class ActionListView2::Private {
+//> ActionListView
+class ActionListView::Private {
 public:
     Private();
     ~Private();
 
-    ActionListView2ItemFactory * itemFactory;
+    ActionListViewItemFactory * itemFactory;
 };
 //<
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_ACTION_LIST_VIEW2_PH */
+#endif /* LANCELOT_ACTION_LIST_VIEW_PH */
 

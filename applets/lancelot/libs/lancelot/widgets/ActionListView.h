@@ -20,35 +20,19 @@
 #ifndef LANCELOT_ACTION_LIST_VIEW_H
 #define LANCELOT_ACTION_LIST_VIEW_H
 
-#ifndef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
-    #define LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
-#endif
-
-#ifdef LANCELOT_ACTION_LIST_VIEW2_OVERRIDE
-    #include <lancelot/widgets/ActionListView2.h>
-    #define ActionListView ActionListView2
-#else
-
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
-#include <KDE/KDebug>
-#include <QtGui/QIcon>
+#include <KDebug>
+#include <QIcon>
 
-#include <lancelot/widgets/Widget.h>
-#include <lancelot/widgets/ExtenderButton.h>
+#include <lancelot/widgets/CustomListView.h>
 #include <lancelot/models/ActionListViewModels.h>
 
 namespace Lancelot
 {
 
-/*
- * Notice: Classes in this file are not going to stay ABI nor API compatible,
- * and will possibly be replaced in the future. That is the reason for which
- * the classes are not in d-ptr pattern nor documented.
- */
-
-class LANCELOT_EXPORT_DEPRECATED ActionListView : public Lancelot::Widget
+class LANCELOT_EXPORT ActionListView : public CustomListView
 {
     Q_OBJECT
     L_WIDGET
@@ -56,25 +40,11 @@ class LANCELOT_EXPORT_DEPRECATED ActionListView : public Lancelot::Widget
 
 public:
     ActionListView(QGraphicsItem * parent = 0);
-    ActionListView(ActionListViewModel * model, QGraphicsItem * parent = 0);
+    explicit ActionListView(ActionListViewModel * model, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
 
     void setModel(ActionListViewModel * model);
     ActionListViewModel * model() const;
-
-    void setMinimumItemHeight(int height);
-    void setMaximumItemHeight(int height);
-    void setPreferredItemHeight(int height);
-
-    int minimumItemHeight() const;
-    int maximumItemHeight() const;
-    int preferredItemHeight() const;
-
-    void setCategoriesActivable(bool value);
-    bool categoriesActivable() const;
-
-    void setCategoryItemHeight(int height);
-    int categoryItemHeight() const;
 
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
@@ -87,107 +57,26 @@ public:
     void setCategoriesGroupByName(const QString & group);
     WidgetGroup * categoriesGroup() const;
 
-    void wheelEvent(QGraphicsSceneWheelEvent * event);
+    bool areCategoriesActivable() const;
+    void setCategoriesActivable(bool value);
 
-    L_Override virtual void setGeometry(const QRectF & geometry);
-    L_Override virtual void setGroup(WidgetGroup * group = NULL);
+    void clearSelection();
+    void initialSelection();
+    int selectedIndex() const;
+
+    // L_Override virtual void setGroup(WidgetGroup * group = NULL);
     L_Override virtual void groupUpdated();
+    L_Override virtual void keyPressEvent(QKeyEvent * event);
 
 Q_SIGNALS:
     void activated(int index);
 
-protected Q_SLOTS:
-    void scrollTimer();
-    void itemActivated(int index);
-    void itemContextRequested(int index);
-    void itemDragRequested(int index, QWidget * widget);
-
-    void modelUpdated();
-    void modelItemInserted(int index);
-    void modelItemDeleted(int index);
-    void modelItemAltered(int index);
-
 private:
-    enum ScrollDirection {
-        Up = 1, No = 0, Down = -1
-    };
-
-    enum ListTail {
-        Start = 0, End = 1
-    };
-
-    class ScrollButton : public Lancelot::BasicWidget {
-    public:
-        explicit ScrollButton (ActionListView::ScrollDirection direction, ActionListView * list = NULL, QGraphicsItem * parent = NULL);
-        void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-
-    private:
-        ActionListView * m_list;
-        ActionListView::ScrollDirection m_direction;
-    };
-
-    class ItemButton : public Lancelot::ExtenderButton {
-        public:
-            ItemButton(ActionListView * parent);
-            void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
-            void mousePressEvent(QGraphicsSceneMouseEvent * event);
-            void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-
-        private:
-            ActionListView * m_parent;
-            QPointF m_mousePos;
-    };
-
-    ActionListViewModel * m_model;
-    WidgetGroup * m_itemsGroup;
-    WidgetGroup * m_categoriesGroup;
-
-    int m_minimumItemHeight;
-    int m_maximumItemHeight;
-    int m_preferredItemHeight;
-    int m_categoryItemHeight;
-    int m_currentItemHeight;
-
-    ExtenderPosition m_extenderPosition;
-    ScrollButton * scrollButtonUp, * scrollButtonDown;
-
-    void itemContext(ItemButton * button);
-    void itemDrag(ItemButton * button, QWidget * widget);
-
-    void scroll(ScrollDirection direction);
-    void scrollBy(int amount);
-    ScrollDirection m_scrollDirection;
-    QTimer m_scrollTimer;
-    int m_scrollInterval;
-    int m_scrollTimes;
-
-    int m_topButtonIndex;
-    QList< QPair < ExtenderButton *, int > > m_buttons;
-    QList< ExtenderButton * > m_buttonsLimbo; // Buttons that are no longer needed, but not deleted
-
-    QTransform m_topButtonScale;
-    QTransform m_bottomButtonScale;
-
-    QSignalMapper m_signalMapper;
-
-    bool m_categoriesActivable;
-
-    bool m_initialButtonsCreationRunning;
-    void initialButtonsCreation();
-
-    void positionScrollButtons();
-    Lancelot::ExtenderButton * createButton();
-    void deleteAllButtons();
-    bool addButton(ListTail where);
-    void deleteButton(ListTail where);
-    int calculateItemHeight();
-
-    friend class ScrollButton;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Lancelot
 
-#endif
 #endif /* LANCELOT_ACTION_LIST_VIEW_H */
 
