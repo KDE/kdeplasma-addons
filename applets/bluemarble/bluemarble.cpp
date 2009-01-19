@@ -36,7 +36,6 @@
 BlueMarble::BlueMarble(QObject *parent, const QVariantList &args)
     : Plasma::GLApplet(parent, args)
 {
-    setHasConfigurationInterface(false);
     setAcceptsHoverEvents(true);
 
     mDayTexture = 0;
