@@ -31,7 +31,7 @@ public:
     ~PartsMergedModel();
 
     L_Override virtual bool hasModelContextActions(int index) const;
-    L_Override virtual void setModelContextActions(int index, QMenu * menu);
+    L_Override virtual void setModelContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override virtual void modelContextActivate(int index, QAction * context);
     L_Override virtual void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);

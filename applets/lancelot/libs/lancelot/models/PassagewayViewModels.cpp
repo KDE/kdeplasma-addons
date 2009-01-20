@@ -77,7 +77,7 @@ bool PassagewayViewModelProxy::hasContextActions(int index) const
     return m_model->hasContextActions(index);
 }
 
-void PassagewayViewModelProxy::setContextActions(int index, QMenu * menu)
+void PassagewayViewModelProxy::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     m_model->setContextActions(index, menu);
 }

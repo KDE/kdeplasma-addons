@@ -34,6 +34,7 @@
 #include "ui_LancelotWindowBase.h"
 
 #include <lancelot/widgets/PopupList.h>
+#include <lancelot/widgets/PopupMenu.h>
 
 class CustomGraphicsView;
 
@@ -254,6 +255,7 @@ private:
 
     // Additional widgets
     Lancelot::PopupList * menuSwitchUser;
+    Lancelot::PopupMenu * menuLancelotContext;
 
     friend class CustomGraphicsView;
 };

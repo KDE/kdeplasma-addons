@@ -117,7 +117,7 @@ bool FavoriteApplications::hasContextActions(int index) const
     return true;
 }
 
-void FavoriteApplications::setContextActions(int index, QMenu * menu)
+void FavoriteApplications::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     Q_UNUSED(index);
     menu->addAction(KIcon("list-remove"), i18n("Remove From Favorites"))

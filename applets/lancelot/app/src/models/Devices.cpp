@@ -191,7 +191,7 @@ bool Devices::hasContextActions(int index) const
     return true;
 }
 
-void Devices::setContextActions(int index, QMenu * menu)
+void Devices::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     if (index > m_items.size() - 1) return;
 

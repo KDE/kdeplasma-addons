@@ -422,7 +422,7 @@ void ActionListViewItemFactory::itemContext(ActionListViewItem * sender) //>
         return;
     }
 
-    QMenu menu;
+    Lancelot::PopupMenu menu;
     m_model->setContextActions(index, &menu);
     m_model->contextActivate(index, menu.exec(QCursor::pos()));
 

@@ -141,7 +141,7 @@ bool Runner::hasContextActions(int index) const
     return (m_items[index].data.value< QStringList >().at(1) == "Application");
 }
 
-void Runner::setContextActions(int index, QMenu * menu)
+void Runner::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     if (!valid) return;
 

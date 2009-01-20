@@ -31,7 +31,7 @@ public:
     static FavoriteApplications * instance();
 
     L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override virtual void contextActivate(int index, QAction * context);
 
     bool addFavorite(QString url);

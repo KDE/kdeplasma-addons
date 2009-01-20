@@ -60,6 +60,7 @@
 #include "models/BaseMergedModel.h"
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
+#include <lancelot/widgets/PopupMenu.h>
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
@@ -197,7 +198,8 @@ LancelotWindow::LancelotWindow()
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault),
     m_skipEvent(false),
-    menuSwitchUser(NULL)
+    menuSwitchUser(NULL),
+    menuLancelotContext(NULL)
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
@@ -558,7 +560,6 @@ void LancelotWindow::systemSwitchUser()
     if (!menuSwitchUser) {
         menuSwitchUser = new Lancelot::PopupList();
         menuSwitchUser->resize(200, 200);
-        menuSwitchUser->setWindowFlags(Qt::Popup | Qt::WindowStaysOnTopHint);
         menuSwitchUser->list()->setModel(new Models::Sessions());
         Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
         connect(
@@ -924,28 +925,32 @@ void LancelotWindow::loadConfig()
 
 void LancelotWindow::lancelotContext()
 {
-    QMenu menu;
-    connect(
-            menu.addAction(KIcon(),
-                i18n("Menu Editor")), SIGNAL(triggered(bool)),
-            this, SLOT(showMenuEditor()));
+    if (!menuLancelotContext) {
+        menuLancelotContext = new Lancelot::PopupMenu();
 
-    connect(
-            menu.addAction(KIcon("configure-shortcuts"),
-                i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
-            this, SLOT(configureShortcuts()));
+        connect(
+                menuLancelotContext->addAction(KIcon(),
+                    i18n("Menu Editor")), SIGNAL(triggered(bool)),
+                this, SLOT(showMenuEditor()));
 
-    connect(
-            menu.addAction(KIcon("configure"),
-                i18n("Configure &Lancelot menu...")), SIGNAL(triggered(bool)),
-            this, SLOT(configureMenu()));
+        connect(
+                menuLancelotContext->addAction(KIcon("configure-shortcuts"),
+                    i18n("Configure &Shortcuts...")), SIGNAL(triggered(bool)),
+                this, SLOT(configureShortcuts()));
 
-    connect(
-            menu.addAction(KIcon("lancelot"),
-                i18n("&About Lancelot")), SIGNAL(triggered(bool)),
-            this, SLOT(showAboutDialog()));
+        connect(
+                menuLancelotContext->addAction(KIcon("configure"),
+                    i18n("Configure &Lancelot menu...")), SIGNAL(triggered(bool)),
+                this, SLOT(configureMenu()));
 
-    menu.exec(QCursor::pos());
+        connect(
+                menuLancelotContext->addAction(KIcon("lancelot"),
+                    i18n("&About Lancelot")), SIGNAL(triggered(bool)),
+                this, SLOT(showAboutDialog()));
+    }
+
+    //menuLancelotContext->show();
+    menuLancelotContext->exec(QCursor::pos());
 }
 
 void LancelotWindow::configureMenu()

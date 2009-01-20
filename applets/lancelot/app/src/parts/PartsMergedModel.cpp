@@ -38,7 +38,7 @@ bool PartsMergedModel::hasModelContextActions(int index) const
     return true;
 }
 
-void PartsMergedModel::setModelContextActions(int index, QMenu * menu)
+void PartsMergedModel::setModelContextActions(int index, Lancelot::PopupMenu * menu)
 {
     Q_UNUSED(index);
     menu->addAction(KIcon("list-remove"), i18n("Remove this"))

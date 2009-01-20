@@ -54,6 +54,7 @@ set(lancelot_LIB_SRCS
         widgets/CustomListView.cpp
 
         widgets/PopupList.cpp
+        widgets/PopupMenu.cpp
 
         # Layouts
         layouts/FullBorderLayout.cpp
@@ -104,6 +105,7 @@ install(FILES
    widgets/WidgetPositioner.h
    widgets/HoverIcon.h
    widgets/PopupList.h
+   widgets/PopupMenu.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets COMPONENT Devel)
 
 install(FILES

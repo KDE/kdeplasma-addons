@@ -58,6 +58,7 @@ PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
   : Plasma::Dialog(parent, f),
     d(new Private(this))
 {
+    setWindowFlags(Qt::Popup | Qt::WindowStaysOnTopHint);
 }
 
 PopupList::~PopupList()

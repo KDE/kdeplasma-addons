@@ -55,7 +55,7 @@ public:
     L_Override virtual QIcon icon(int index) const;
     L_Override virtual bool isCategory(int index) const;
     L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override virtual void contextActivate(int index, QAction * context);
     L_Override virtual QMimeData * mimeData(int index) const;
     L_Override virtual void setDropActions(int index,

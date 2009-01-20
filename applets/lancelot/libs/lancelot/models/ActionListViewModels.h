@@ -21,13 +21,14 @@
 #define LANCELOT_ACTION_LIST_VIEW_MODELS_H
 
 #include <lancelot/lancelot_export.h>
+#include <lancelot/widgets/PopupMenu.h>
 
 #include <QtCore/QPair>
 #include <QtCore/QMimeData>
 #include <QtCore/QString>
 #include <QtGui/QIcon>
 #include <QtCore/QVariant>
-#include <QtGui/QMenu>
+// #include <QtGui/QMenu>
 #include <QtGui/QAction>
 
 namespace Lancelot
@@ -117,7 +118,7 @@ public:
      * @param index index of the item
      * @param menu menu to add the actions to
      */
-    virtual void setContextActions(int index, QMenu * menu);
+    virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
 
     /**
      * Method for handling context menu actions
@@ -365,7 +366,7 @@ public:
      * Reimplement this function if you want to support context
      * menus for models when user right clicks the captio item
      */
-    virtual void setModelContextActions(int index, QMenu * menu);
+    virtual void setModelContextActions(int index, Lancelot::PopupMenu * menu);
 
     /**
      * Activates the context for the specified model
@@ -385,7 +386,7 @@ public:
     L_Override virtual bool isCategory(int index) const;
     L_Override virtual int size() const;
     L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, QMenu * menu);
+    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override virtual void contextActivate(int index, QAction * context);
 
     /**

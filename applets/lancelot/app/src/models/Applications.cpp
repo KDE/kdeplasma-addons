@@ -206,7 +206,7 @@ bool Applications::hasContextActions(int index) const
     return !isCategory(index);
 }
 
-void Applications::setContextActions(int index, QMenu * menu)
+void Applications::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     if (isCategory(index)) {
         return;

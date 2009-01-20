@@ -27,7 +27,7 @@ AboutData::AboutData()
             QByteArray("1.5"),
             ki18n("Next generation application launcher"),
             KAboutData::License_GPL,
-            ki18n("(C) 2007 Ivan Čukić"),
+            ki18n("(C) 2007-2009 Ivan Čukić"),
             KLocalizedString()
         )
 {

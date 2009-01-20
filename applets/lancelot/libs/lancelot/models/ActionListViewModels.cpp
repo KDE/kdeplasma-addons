@@ -80,7 +80,7 @@ bool ActionListViewModel::hasContextActions(int index) const
     return false;
 }
 
-void ActionListViewModel::setContextActions(int index, QMenu * menu)
+void ActionListViewModel::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     Q_UNUSED(index);
     Q_UNUSED(menu);
@@ -333,7 +333,7 @@ bool MergedActionListViewModel::hasModelContextActions(int index) const
     return false;
 }
 
-void MergedActionListViewModel::setModelContextActions(int index, QMenu * menu)
+void MergedActionListViewModel::setModelContextActions(int index, Lancelot::PopupMenu * menu)
 {
     // do nothing
 }
@@ -383,7 +383,7 @@ bool MergedActionListViewModel::hasContextActions(int index) const
     return m_models.at(model)->hasContextActions(modelIndex);
 }
 
-void MergedActionListViewModel::setContextActions(int index, QMenu * menu)
+void MergedActionListViewModel::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     int model, modelIndex;
     toChildCoordinates(index, model, modelIndex);
