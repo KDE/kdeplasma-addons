@@ -21,7 +21,8 @@
 #include <lancelot/widgets/ActionListView.h>
 #include <QBasicTimer>
 
-#define ITEM_HEIGHT 32
+#define ITEM_HEIGHT 24
+#define ICON_SIZE QSize(16, 16)
 
 namespace Lancelot {
 
@@ -84,6 +85,9 @@ void PopupList::showEvent(QShowEvent * event)
     d->list->setCategoryHeight(ITEM_HEIGHT, Qt::MinimumSize);
     d->list->setCategoryHeight(ITEM_HEIGHT, Qt::PreferredSize);
     d->list->setCategoryHeight(ITEM_HEIGHT, Qt::MaximumSize);
+
+    d->list->setItemIconSize(ICON_SIZE);
+    d->list->setCategoryIconSize(ICON_SIZE);
 
     Plasma::Dialog::showEvent(event);
     d->timer.stop();

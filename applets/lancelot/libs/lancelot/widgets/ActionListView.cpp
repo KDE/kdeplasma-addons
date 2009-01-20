@@ -104,7 +104,8 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListViewModel * model
       m_extenderPosition(NoExtender),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
       m_instance(instance), m_view(view),
-      m_categoriesActivable(false), m_selectedItem(NULL)
+      m_categoriesActivable(false), m_selectedItem(NULL),
+      m_itemIconSize(32, 32), m_categoryIconSize(20, 20)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
@@ -183,9 +184,12 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
 
         if (m_model->isCategory(index)) {
             item->setGroup(m_categoriesGroup);
-            item->setIconSize(QSize(20, 20));
+            item->setIconSize(m_categoryIconSize);
+            kDebug() << "Icon size is" << m_categoryIconSize << "for" << item->title();
         } else {
             item->setGroup(m_itemsGroup);
+            item->setIconSize(m_itemIconSize);
+            kDebug() << "Icon size is" << m_itemIconSize << "for" << item->title();
         }
     }
 
@@ -289,6 +293,35 @@ void ActionListViewItemFactory::setCategoryHeight(int height, Qt::SizeHint which
         item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
         item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
         item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
+    }
+    emit updated();
+}
+
+void ActionListViewItemFactory::setItemIconSize(QSize size)
+{
+    m_itemIconSize = size;
+
+    int i = 0;
+    foreach (ActionListViewItem * item, m_items) {
+        if (!m_model->isCategory(i)) {
+            kDebug() << "Icon size is" << m_itemIconSize << "for" << item->title();
+            item->setIconSize(size);
+        }
+        i++;
+    }
+    emit updated();
+}
+
+void ActionListViewItemFactory::setCategoryIconSize(QSize size)
+{
+    m_categoryIconSize = size;
+
+    int i = 0;
+    foreach (ActionListViewItem * item, m_items) {
+        if (m_model->isCategory(i)) {
+            item->setIconSize(size);
+        }
+        i++;
     }
     emit updated();
 }
@@ -609,6 +642,22 @@ void ActionListView::setCategoryHeight(int height, Qt::SizeHint which)
         return;
     }
     return d->itemFactory->setCategoryHeight(height, which);
+}
+
+void ActionListView::setItemIconSize(QSize size)
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    return d->itemFactory->setItemIconSize(size);
+}
+
+void ActionListView::setCategoryIconSize(QSize size)
+{
+    if (!d->itemFactory) {
+        return;
+    }
+    return d->itemFactory->setCategoryIconSize(size);
 }
 
 void ActionListView::setExtenderPosition(ExtenderPosition position) //>

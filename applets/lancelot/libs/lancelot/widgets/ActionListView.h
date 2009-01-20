@@ -1,4 +1,5 @@
 /*
+    QAction * chosenAction;
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -66,6 +67,8 @@ public:
 
     void setItemHeight(int height, Qt::SizeHint which);
     void setCategoryHeight(int height, Qt::SizeHint which);
+    void setItemIconSize(QSize size);
+    void setCategoryIconSize(QSize size);
 
     L_Override virtual void groupUpdated();
     L_Override virtual void keyPressEvent(QKeyEvent * event);

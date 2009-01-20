@@ -98,6 +98,8 @@ public:
 
     void setItemHeight(int height, Qt::SizeHint which);
     void setCategoryHeight(int height, Qt::SizeHint which);
+    void setItemIconSize(QSize size);
+    void setCategoryIconSize(QSize size);
 
 private:
     void reload();
@@ -126,6 +128,8 @@ private:
 
     QMap < Qt::SizeHint, int > m_itemHeight;
     QMap < Qt::SizeHint, int > m_categoryHeight;
+    QSize m_itemIconSize;
+    QSize m_categoryIconSize;
 
     ActionListViewItem * m_selectedItem;
     friend class ActionListViewItem;
