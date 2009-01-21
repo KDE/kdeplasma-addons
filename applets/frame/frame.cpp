@@ -402,7 +402,8 @@ void Frame::initSlideShow()
         engine->connectSource(identifier, this);
 
         const Plasma::DataEngine::Data data = engine->query(identifier);
-    } else {
+    } else { //no slideshow so no random stuff
+        m_mySlideShow->setRandom(false);
         m_mySlideShow->setImage(m_currentUrl.path());
         m_slideShowTimer->stop();
     }
