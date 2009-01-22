@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_SESSION_H
-#define LANCELOTAPP_MODELS_SESSION_H
+#ifndef LANCELOTAPP_MODELS_SESSIONS_H
+#define LANCELOTAPP_MODELS_SESSIONS_H
 
 #include "BaseModel.h"
 #include <plasma/runnermanager.h>
@@ -44,4 +44,4 @@ private:
 
 } // namespace Models
 
-#endif /* LANCELOTAPP_MODELS_SESSION_H */
+#endif /* LANCELOTAPP_MODELS_SESSIONS_H */

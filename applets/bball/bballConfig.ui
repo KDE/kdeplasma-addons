@@ -14,7 +14,7 @@
   </property>
   <layout class="QVBoxLayout" >
    <item>
-    <widget class="QTabWidget" name="tabWidget" >
+    <widget class="KTabWidget" name="tabWidget" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
        <horstretch>0</horstretch>
@@ -276,6 +276,12 @@
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

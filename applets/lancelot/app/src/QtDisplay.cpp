@@ -19,7 +19,7 @@
 
 #include "QtDisplay.h"
 
-#include "config-lancelot.h"
+#include <config-lancelot.h>
 
 #ifdef LANCELOT_HAVE_COMPOSITING
 

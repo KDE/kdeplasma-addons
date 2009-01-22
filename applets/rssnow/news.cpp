@@ -352,11 +352,11 @@ void News::constraintsEvent(Plasma::Constraints constraints)
             if (geometry().height() < minSize && !m_collapsed) {
                 //group all feeds together so it can fit (only a single time):
                 QString allfeeds;
-                foreach (QString feed, m_feedlist) {
-                    if (!feed.endsWith(' ')) {
-                        feed.append(" ");
-                    }
+                foreach (const QString &feed, m_feedlist) {
                     allfeeds.append(feed);
+                    if (!feed.endsWith(' ')) {
+                        allfeeds.append(" ");
+                    }
                 }
                 kDebug() << "allfeeds = " << allfeeds;
                 m_feedlist.clear();

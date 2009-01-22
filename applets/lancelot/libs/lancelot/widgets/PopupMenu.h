@@ -45,7 +45,7 @@ public:
      * Creates a new Lancelot::PopupMenu
      * @param parent parent item
      */
-    PopupMenu(QWidget * parent = 0, Qt::WindowFlags f =  Qt::Window);
+    explicit PopupMenu(QWidget * parent = 0, Qt::WindowFlags f =  Qt::Window);
 
     /**
      * Destroys Lancelot::PopupMenu

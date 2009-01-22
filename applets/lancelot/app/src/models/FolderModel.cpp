@@ -61,7 +61,7 @@ void FolderModel::deleteItem(const KFileItem & fileItem)
 
 void FolderModel::newItems(const KFileItemList &items)
 {
-    foreach (KFileItem item, items) {
+    foreach (const KFileItem &item, items) {
         if (item.isDesktopFile()) {
             addUrl(item.url());
         } else {

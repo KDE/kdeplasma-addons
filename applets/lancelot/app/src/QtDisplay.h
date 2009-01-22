@@ -21,7 +21,7 @@
 #ifndef QT_DISPLAY
 #define QT_DISPLAY
 
-#include "config-lancelot.h"
+#include <config-lancelot.h>
 
 #ifdef LANCELOT_HAVE_COMPOSITING
 

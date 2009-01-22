@@ -24,8 +24,8 @@
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
-#include <KDebug>
-#include <QIcon>
+#include <KDE/KDebug>
+#include <QtGui/QIcon>
 
 #include <lancelot/widgets/CustomListView.h>
 #include <lancelot/models/ActionListViewModels.h>

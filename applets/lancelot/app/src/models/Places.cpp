@@ -40,9 +40,9 @@ void Places::load()
     // We don't want to use addUrl, because of the icons
     add(
         i18n("Home Folder"),
-        getenv("HOME"),
+        qgetenv("HOME"),
         KIcon("user-home"),
-        getenv("HOME")
+        qgetenv("HOME")
     );
 
     add(

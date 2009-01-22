@@ -46,7 +46,7 @@ public:
      * Creates a new Lancelot::PopupList
      * @param parent parent item
      */
-    PopupList(QWidget * parent = 0, Qt::WindowFlags f =  Qt::Window);
+    explicit PopupList(QWidget * parent = 0, Qt::WindowFlags f =  Qt::Window);
 
     /**
      * Destroys Lancelot::PopupList

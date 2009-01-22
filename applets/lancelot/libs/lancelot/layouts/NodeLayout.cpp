@@ -159,7 +159,7 @@ public:
 
             QSizeF size;
 
-            foreach (Qt::SizeHint which, sizeHintCache.keys()) {
+            foreach (const Qt::SizeHint &which, sizeHintCache.keys()) {
                 size = item->effectiveSizeHint(which);
                 size.scale(
                     1 / qMin(scaled.width(), qreal(1.0)),

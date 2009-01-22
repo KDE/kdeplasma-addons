@@ -110,17 +110,16 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
     Q_ASSERT(task);
 
     // kDebug() << task->className() << task->classClass();
-    QRegExp * extractor = NULL;
+    QRegExp extractor;
     QString className = task->className();
 
-    SupportedTask st;
-    foreach (st, m_supportedTasks) {
+    foreach (const SupportedTask &st, m_supportedTasks) {
         if (st.m_classPattern.exactMatch(task->className())) {
-            extractor = & st.m_documentNameExtractor;
+            extractor = st.m_documentNameExtractor;
             break;
         }
     }
-    if (extractor == NULL) {
+    if (extractor.isEmpty()) {
         return false;
     }
 
@@ -135,9 +134,9 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
     QString title = task->visibleName();
     QString description;
-    if (extractor->exactMatch(title)) {
-        title = extractor->cap(1);
-        description = extractor->cap(2);
+    if (extractor.exactMatch(title)) {
+        title = extractor.cap(1);
+        description = extractor.cap(2);
     }
 
     QIcon icon = QIcon(task->icon(32, 32));
