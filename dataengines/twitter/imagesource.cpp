@@ -23,24 +23,6 @@
 
 #include <KIO/Job>
 
-class ImageSourceSingleton
-{
-public:
-    ImageSourceSingleton()
-        : self(0)
-    {
-    }
-
-    ImageSource self;
-};
-
-K_GLOBAL_STATIC(ImageSourceSingleton, privateImageSourceSelf)
-
-ImageSource* ImageSource::self()
-{
-    return &privateImageSourceSelf->self;
-}
-
 ImageSource::ImageSource(QObject* parent)
     : Plasma::DataContainer(parent)
 {
@@ -75,7 +57,7 @@ void ImageSource::result(KJob *job)
     if (job->error()) {
         // TODO: error handling
     } else {
-        //kDebug() << "done!" << m_data;
+        //kDebug() << "done!" << m_jobData;
         QImage img;
         img.loadFromData(m_jobData.value(job));
         setData(m_jobs.value(job), img);

@@ -39,6 +39,7 @@ namespace KIO
 } // namespace KIO
 
 class TimelineSource;
+class ImageSource;
 
 class TweetJob : public Plasma::ServiceJob
 {
@@ -96,6 +97,8 @@ public:
     bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
     bool characters(const QString &ch);
     bool fatalError(const QXmlParseException & exception);
+    ImageSource *imageSource() const;
+    void setImageSource(ImageSource *);
 
 private slots:
     void recv(KIO::Job*, const QByteArray& data);
@@ -104,6 +107,7 @@ private slots:
 private:
     KUrl m_url;
     KUrl m_serviceBaseUrl;
+    ImageSource *m_imageSource;
     QByteArray m_xml;
     QString m_cdata;
     Plasma::DataEngine::Data m_tempData;

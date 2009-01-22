@@ -139,6 +139,7 @@ class Twitter : public Plasma::PopupApplet
         QString m_username;
         QString m_password;
         QString m_serviceUrl;
+        QString m_imageQuery;
         int m_historySize;
         int m_historyRefresh;
         int m_newTweets;

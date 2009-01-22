@@ -28,6 +28,7 @@
 class QDomDocument;
 class QDomNodeList;
 class QHttp;
+class ImageSource;
 
 /**
  * Twitter Data Engine
@@ -70,6 +71,7 @@ class TwitterEngine : public Plasma::DataEngine
 	static const QString timelinePrefix;
 	static const QString timelineWithFriendsPrefix;
 	static const QString profilePrefix;
+        ImageSource *m_imageSource;
 
 };
 

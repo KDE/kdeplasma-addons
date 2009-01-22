@@ -237,9 +237,9 @@ QGraphicsWidget *Twitter::graphicsWidget()
     m_layout->addStretch();
 
     //hook up some sources
-    m_engine->connectSource("UserImages", this);
-    m_engine->connectSource("Error:UserImages", this);
-    m_engine->connectSource("Error", this);
+    m_imageQuery = "UserImages:"+m_serviceUrl;
+    m_engine->connectSource(m_imageQuery, this);
+
 
     //set things in motion
     if (m_username.isEmpty()) {
@@ -383,7 +383,7 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         m_newTweets = qMin(newCount, m_historySize);
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
         showTweets();
-    } else if (source == "UserImages") {
+    } else if (source == m_imageQuery) {
         foreach (const QString &user, data.keys()) {
             QPixmap pm = data[user].value<QPixmap>();
 
@@ -590,6 +590,8 @@ void Twitter::configAccepted()
 
     KConfigGroup cg = config();
 
+    m_engine->disconnectSource(m_imageQuery, this);
+
     if (m_serviceUrl != serviceUrl) {
         changed = true;
         m_serviceUrl = serviceUrl;
@@ -604,6 +606,10 @@ void Twitter::configAccepted()
         m_icon->setText( m_username );
         cg.writeEntry( "username", m_username );
     }
+
+    m_imageQuery = "UserImages:"+m_serviceUrl;
+    m_engine->connectSource(m_imageQuery, this);
+
 
     if (m_password != password) {
         changed = true;
@@ -744,6 +750,8 @@ void Twitter::downloadHistory()
 
     //get the profile to retrieve the user icon
     QString profileQuery(QString("Profile:%1@%2").arg(m_username, m_serviceUrl));
+
+    m_engine->connectSource(m_imageQuery, this);
     m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
 
     delete m_profileService;

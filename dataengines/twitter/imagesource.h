@@ -41,7 +41,6 @@ class ImageSource : public Plasma::DataContainer
 Q_OBJECT
 
 public:
-    static ImageSource* self();
     ImageSource(QObject* parent);
     ~ImageSource();
 

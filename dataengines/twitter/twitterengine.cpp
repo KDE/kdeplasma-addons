@@ -41,7 +41,6 @@ const QString TwitterEngine::profilePrefix("Profile:");
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
-    addSource(ImageSource::self());
     setMinimumPollingInterval(2 * 60 * 1000); // 2 minutes minimum
 }
 
@@ -52,7 +51,7 @@ TwitterEngine::~TwitterEngine()
 bool TwitterEngine::sourceRequestEvent(const QString &name)
 {
     //kDebug() << name;
-    if (name == "UserImages") {
+    if (name.startsWith("UserImages:")) {
         // these are updated by the engine itself, not consumers
         return true;
     }
@@ -72,6 +71,7 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
     if (!source) {
         return Plasma::DataEngine::serviceForSource(name);
     }
+
 
     Plasma::Service *service = source->createService();
     service->setParent(this);
@@ -104,13 +104,35 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
         who.remove(timelinePrefix);
     }
 
+    //we want just the service url to index the UserImages source
+    QString serviceBaseUrl;
+    QStringList account = who.split('@');
+    if (account.count() == 2){
+        serviceBaseUrl = account.at(1);
+    }else{
+        serviceBaseUrl = "http://twitter.com/";
+    }
+
+    ImageSource *imageSource = dynamic_cast<ImageSource*>(containerForSource("UserImages:"+serviceBaseUrl));
+
+    if (!imageSource) {
+        imageSource = new ImageSource(this);
+
+        imageSource->setObjectName("UserImages:"+serviceBaseUrl);
+        addSource(imageSource);
+    }
+
+
     TimelineSource *source = dynamic_cast<TimelineSource*>(containerForSource(name));
 
     if (!source) {
         source = new TimelineSource(who, requestType, this);
         source->setObjectName(name);
+        source->setImageSource(imageSource);
+
         addSource(source);
     }
+
 
     source->update();
     return false;

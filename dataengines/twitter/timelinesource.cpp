@@ -224,14 +224,15 @@ bool TimelineSource::endElement(const QString &namespaceURI, const QString &loca
     } else if (tag == "profile_image_url") {
         m_tempData["ImageUrl"] = m_cdata;
         if (m_tempData.contains("User")) {
+
             KUrl url(m_cdata);
-            ImageSource::self()->loadImage(m_tempData["User"].toString(), url);
+            m_imageSource->loadImage(m_tempData["User"].toString(), url);
         }
     } else if (tag == "screen_name") {
         m_tempData["User"] = m_cdata;
         if (m_tempData.contains("ImageUrl")) {
             KUrl url(m_tempData["ImageUrl"].toString());
-            ImageSource::self()->loadImage(m_cdata, url);
+            m_imageSource->loadImage(m_cdata, url);
         }
     } else if (tag == "source") {
         m_tempData["Source"] = m_cdata;
@@ -257,6 +258,16 @@ bool TimelineSource::fatalError(const QXmlParseException &exception)
     m_tempData.clear();
     m_id.clear();
     return false;
+}
+
+void TimelineSource::setImageSource(ImageSource *source)
+{
+    m_imageSource = source;
+}
+
+ImageSource *TimelineSource::imageSource() const
+{
+    return m_imageSource;
 }
 
 #include <timelinesource.moc>
