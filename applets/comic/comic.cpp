@@ -241,9 +241,9 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     updateContextMenu();
 
     Plasma::ToolTipContent toolTipData;
-    toolTipData.setAutohide( false );
     if ( !mAdditionalText.isEmpty() ) {
         toolTipData = Plasma::ToolTipContent( mAdditionalText, QString() );
+        toolTipData.setAutohide( false );
     }
     Plasma::ToolTipManager::self()->setContent( this, toolTipData );
 
