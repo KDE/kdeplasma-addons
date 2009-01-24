@@ -297,7 +297,7 @@ void ComicApplet::applyConfig()
 
         updateComic( mStoredIdentifierSuffix );
     } else {
-        updateSize();
+        updateComic( mCurrentIdentifierSuffix );
     }
     if ( checkButtonBar ) {
         buttonBar();
