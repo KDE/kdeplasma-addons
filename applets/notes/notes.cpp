@@ -202,6 +202,14 @@ void Notes::constraintsEvent(Plasma::Constraints constraints)
     if (constraints & Plasma::SizeConstraint) {
         updateTextGeometry();
     }
+
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
+            setAspectRatioMode(Plasma::ConstrainedSquare);
+        } else {
+            setAspectRatioMode(Plasma::IgnoreAspectRatio);
+        }
+    }
 }
 
 void Notes::updateTextGeometry()
