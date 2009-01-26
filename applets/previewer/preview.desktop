@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
-MimeType=application/octet-stream
+MimeType=application/octet-stream;
 Actions=Preview;
 
 [Desktop Action Preview]
