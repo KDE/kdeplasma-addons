@@ -119,6 +119,7 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
+        Q_PROPERTY( QString textCodec READ textCodec WRITE setTextCodec )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
         Q_PROPERTY( QString websiteUrl READ websiteUrl WRITE setWebsiteUrl )
         Q_PROPERTY( QString shopUrl READ shopUrl WRITE setShopUrl )
@@ -155,6 +156,8 @@ class ComicProviderWrapper : public QObject
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
 
+        QString textCodec() const;
+        void setTextCodec( const QString &textCodec );
         QString comicAuthor() const;
         void setComicAuthor( const QString &author );
         QString websiteUrl() const;
@@ -212,6 +215,7 @@ class ComicProviderWrapper : public QObject
         static QStringList mExtensions;
         Plasma::Package *mPackage;
 
+        QByteArray mTextCodec;
         QString mWebsiteUrl;
         QString mShopUrl;
         QString mTitle;

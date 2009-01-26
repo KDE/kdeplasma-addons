@@ -403,6 +403,16 @@ void ComicProviderWrapper::setIdentifierToDefault()
     }
 }
 
+QString ComicProviderWrapper::textCodec() const
+{
+    return QString( mTextCodec );
+}
+
+void ComicProviderWrapper::setTextCodec( const QString &textCodec )
+{
+    mTextCodec = textCodec.toAscii();
+}
+
 QString ComicProviderWrapper::comicAuthor() const
 {
     return mProvider->comicAuthor();
@@ -593,7 +603,13 @@ void ComicProviderWrapper::pageRetrieved( int id, const QByteArray &data )
             finished();
         }
     } else {
-        QTextCodec *codec = QTextCodec::codecForHtml( data );
+        QTextCodec *codec = 0;
+        if ( !mTextCodec.isEmpty() ) {
+            codec = QTextCodec::codecForName( mTextCodec );
+        }
+        if ( !codec ) {
+            codec = QTextCodec::codecForHtml( data );
+        }
         QString html = codec->toUnicode( data );
 
         callFunction( "pageRetrieved", QVariantList() << id << html );
