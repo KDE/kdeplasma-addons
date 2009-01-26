@@ -64,7 +64,7 @@ class FileWatcher : public Plasma::Applet
 
     QString m_tmpPath;
 
-    QString m_filter;
+    QStringList m_filters;
     bool m_showOnlyMatches;
     bool m_useRegularExpressions;
 

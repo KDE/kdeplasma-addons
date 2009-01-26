@@ -67,7 +67,7 @@ void FileWatcher::init()
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
 
-  m_filter = cg.readEntry("filter", QString());
+  m_filters = cg.readEntry("filters", (QStringList() << ""));
   m_showOnlyMatches = cg.readEntry("showOnlyMatches", false);
   m_useRegularExpressions = cg.readEntry("useRegularExpressions", false);
 
@@ -151,8 +151,10 @@ void FileWatcher::newData()
   
     if (m_showOnlyMatches){
             for (int i = tmpList.size() - 1; i >= 0; i--){
-                if (tmpList.at(i).contains(QRegExp(m_filter, Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
-                    list.insert(0, tmpList.at(i));
+                for (int j = 0; j < m_filters.size(); j++){
+                    if (tmpList.at(i).contains(QRegExp(m_filters.at(j), Qt::CaseSensitive, m_useRegularExpressions ? QRegExp::RegExp : QRegExp::FixedString))){
+                        list.insert(0, tmpList.at(i));
+                    }
                 }
 
                 if (list.size() == textDocument->maximumBlockCount()) break;
@@ -192,7 +194,7 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     filtersUi.setupUi(widget);
     parent->addPage(widget, i18n("Filters"), icon());
 
-    filtersUi.filterLineEdit->setText(m_filter);
+    filtersUi.filterLineEdit->setText(m_filters.at(0));
     filtersUi.showOnlyMatchesCheckBox->setChecked(m_showOnlyMatches);
     filtersUi.useRegularExpressionsRadioButton->setChecked(m_useRegularExpressions);
 
@@ -214,8 +216,9 @@ void FileWatcher::configAccepted()
     textItem->setDefaultTextColor(ui.fontColorButton->color());
     cg.writeEntry("textColor", ui.fontColorButton->color());
 
-    m_filter = filtersUi.filterLineEdit->text();
-    cg.writeEntry("filter", m_filter);
+    m_filters.clear();
+    m_filters << filtersUi.filterLineEdit->text();
+    cg.writeEntry("filter", m_filters);
 
     m_showOnlyMatches = filtersUi.showOnlyMatchesCheckBox->isChecked();
     cg.writeEntry("showOnlyMatches", m_showOnlyMatches);
