@@ -67,7 +67,7 @@ void FileWatcher::init()
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
 
-  m_filters = cg.readEntry("filters", (QStringList() << ""));
+  m_filters = cg.readEntry("filters", QStringList());
   m_showOnlyMatches = cg.readEntry("showOnlyMatches", false);
   m_useRegularExpressions = cg.readEntry("useRegularExpressions", false);
 
@@ -194,7 +194,7 @@ void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
     filtersUi.setupUi(widget);
     parent->addPage(widget, i18n("Filters"), icon());
 
-    filtersUi.filterLineEdit->setText(m_filters.at(0));
+    filtersUi.filtersListBox->setItems(m_filters);
     filtersUi.showOnlyMatchesCheckBox->setChecked(m_showOnlyMatches);
     filtersUi.useRegularExpressionsRadioButton->setChecked(m_useRegularExpressions);
 
@@ -216,9 +216,8 @@ void FileWatcher::configAccepted()
     textItem->setDefaultTextColor(ui.fontColorButton->color());
     cg.writeEntry("textColor", ui.fontColorButton->color());
 
-    m_filters.clear();
-    m_filters << filtersUi.filterLineEdit->text();
-    cg.writeEntry("filter", m_filters);
+    m_filters = filtersUi.filtersListBox->items();
+    cg.writeEntry("filters", m_filters);
 
     m_showOnlyMatches = filtersUi.showOnlyMatchesCheckBox->isChecked();
     cg.writeEntry("showOnlyMatches", m_showOnlyMatches);
