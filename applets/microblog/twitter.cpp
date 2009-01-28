@@ -160,7 +160,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
 
     //config stuff
     KConfigGroup cg = config();
-    m_serviceUrl = cg.readEntry("serviceUrl", "http://twitter.com/");
+    m_serviceUrl = cg.readEntry("serviceUrl", "http://identi.ca/api/");
     m_username = cg.readEntry("username");
     m_password = KStringHandler::obscure(cg.readEntry("password"));
     m_historySize = cg.readEntry("historySize", 2);
@@ -566,8 +566,8 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
 
-    configUi.serviceUrlCombo->addItem("http://twitter.com/");
     configUi.serviceUrlCombo->addItem("http://identi.ca/api/");
+    configUi.serviceUrlCombo->addItem("http://twitter.com/");
     configUi.serviceUrlCombo->setEditText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
