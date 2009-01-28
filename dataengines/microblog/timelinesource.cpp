@@ -32,7 +32,7 @@ TweetJob::TweetJob(TimelineSource *source, const QMap<QString, QVariant> &parame
       m_url(source->serviceBaseUrl(), "statuses/update.xml")
 {
     m_url.addQueryItem("status", parameters.value("status").toString());
-    m_url.addQueryItem("source", "kdetwitter");
+    m_url.addQueryItem("source", "kdemicroblog");
     m_url.setUser(source->account());
     m_url.setPass(source->password());
 }
