@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Twitter Microblogging
+Name=Microblogging
 Name[ar]=التدوين المصغر تويتر
 Name[ca]=Twitter microblogging
 Name[cs]=Twitter mikroblogování
@@ -30,7 +30,7 @@ Name[tr]=Twitter mikro günlük
 Name[uk]=Міні-журнал Twitter
 Name[x-test]=xxTwitter Microbloggingxx
 Name[zh_CN]=Twitter 微博客
-Comment=Update your Twitter status and display your timeline.
+Comment=Update and view your microblog status on either identi.ca or Twitter.
 Comment[ar]=حدث حالتك على تويتر و اعرض خط وقتك.
 Comment[ca]=Us permet actualitzar l'estat al Twitter i mostrar la línia de temps.
 Comment[cs]=Umožní aktualizaci stavu v síti Twitter a zobrazí historii.
@@ -68,7 +68,7 @@ Comment[zh_TW]=讓您更新您的 Twitter 狀態與顯示您的時間線。
 Type=Service
 ServiceTypes=Plasma/Applet
 
-X-KDE-Library=plasma_applet_twitter
+X-KDE-Library=plasma_applet_microblog
 X-KDE-PluginInfo-Author=André Duffeck
 X-KDE-PluginInfo-Email=andre@duffeck.de
 X-KDE-PluginInfo-Name=twitter

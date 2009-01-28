@@ -1,16 +1,16 @@
 [Desktop Entry]
-Name=Twitter
+Name=Microblogging
 Name[ar]=تويتر
 Name[th]=ทวีตเตอร์
 Name[x-test]=xxTwitterxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
-X-KDE-Library=plasma_engine_twitter
+X-KDE-Library=plasma_engine_microblog
 
 X-KDE-PluginInfo-Author=
 X-KDE-PluginInfo-Email=
-X-KDE-PluginInfo-Name=twitter
+X-KDE-PluginInfo-Name=microblog
 X-KDE-PluginInfo-Version=
 X-KDE-PluginInfo-Website=
 X-KDE-PluginInfo-Category=

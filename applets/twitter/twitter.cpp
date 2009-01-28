@@ -167,7 +167,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
     m_historyRefresh = cg.readEntry("historyRefresh", 5);
     m_includeFriends = cg.readEntry("includeFriends", true);
 
-    m_engine = dataEngine("twitter");
+    m_engine = dataEngine("microblog");
     if (! m_engine->isValid()) {
         setFailedToLaunch(true, i18n("Failed to load twitter DataEngine"));
         return m_graphicsWidget;
@@ -190,7 +190,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
     m_flash->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     QGraphicsLinearLayout *titleLayout = new QGraphicsLinearLayout( Qt::Vertical );
-    Plasma::SvgWidget *svgTitle = new Plasma::SvgWidget(m_theme, "twitter", this);
+    Plasma::SvgWidget *svgTitle = new Plasma::SvgWidget(m_theme, "microblog", this);
     svgTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     svgTitle->setPreferredSize(75, 14);
     titleLayout->addItem(svgTitle);
