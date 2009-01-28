@@ -1,2 +1,2 @@
 add_subdirectory(comic)
-add_subdirectory(twitter)
+add_subdirectory(microblog)
