@@ -261,6 +261,9 @@ void Notes::changeColor()
     QAction *action = dynamic_cast<QAction*> (sender());
     if (!action || action->property("color").type() != QVariant::String) return;
     m_color = action->property("color").toString();
+    KConfigGroup cg = config(); 
+    cg.writeEntry("color", m_color); 
+    emit configNeedsSaving(); 
     update();
 }
 
