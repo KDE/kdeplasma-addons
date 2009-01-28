@@ -1,5 +1,6 @@
 /*
  *   Copyright 2007,2008 by Alex Merry <alex.merry@kdemail.net>
+ *   Copyright 2008 by Tony Murray <murraytony@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -23,6 +24,7 @@
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 #include <plasma/service.h>
+#include <Plasma/ToolTipManager>
 
 #include <QPixmap>
 
@@ -77,6 +79,7 @@ public slots:
                      const Plasma::DataEngine::Data &data);
     void playerAdded(const QString &name);
     void playerRemoved(const QString &name);
+    void toolTipAboutToShow();
 
 private slots:
     void play();
@@ -105,7 +108,8 @@ private:
 
     qreal m_volume;
     int m_length;
-    QString m_track;
+    QString m_artist;
+    QString m_title;
     QPixmap m_artwork;
 
     InfoPanel* m_textPanel;

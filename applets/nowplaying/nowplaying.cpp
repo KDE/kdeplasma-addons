@@ -1,5 +1,6 @@
 /*
  *   Copyright 2007,2008 by Alex Merry <alex.merry@kdemail.net>
+ *   Copyright 2008 by Tony Murray <murraytony@gmail.com>
  *
  *   Some code (text size calculation) taken from clock applet:
  *   Copyright 2007 by Sebastian Kuegler <sebas@kde.org>
@@ -126,6 +127,8 @@ void NowPlaying::layoutPlanar()
         setAspectRatioMode(Plasma::IgnoreAspectRatio);
         setMinimumSize(300, 200);
 
+        Plasma::ToolTipManager::self()->unregisterWidget(this);
+
         QGraphicsGridLayout* layout = new QGraphicsGridLayout();
         m_textPanel->show();
         layout->addItem(m_textPanel, 0, 0);
@@ -159,6 +162,8 @@ void NowPlaying::layoutHorizontal()
         kDebug() << "Button Panel Preferred Size:" << m_buttonPanel->preferredSize();
         kDebug() << "Button Panel Minimum Size:" << m_buttonPanel->minimumSize();
         layout->addItem(m_buttonPanel);
+
+        Plasma::ToolTipManager::self()->registerWidget(this);
 
         kDebug() << "Minimum size before changing layout" << minimumSize();
         kDebug() << "Preferred size before changing layout" << preferredSize();
@@ -271,17 +276,33 @@ void NowPlaying::dataUpdated(const QString &name,
     }
 
     // used for seeing when the track has changed
-    QString track = metadata["Artist"] + " - " + metadata["Title"];
-
-    // assume the artwork didn't change unless the track did
-    if (track != m_track) {
-        m_track = track;
+    if ((metadata["Title"] != m_title) || (metadata["Artist"] != m_artist))
+    {
+        m_title = metadata["Title"];
+        m_artist = metadata["Artist"];
 
         m_artwork = data["Artwork"].value<QPixmap>();
         emit coverChanged(m_artwork);
+        if(Plasma::ToolTipManager::self()->isVisible(this)) {
+            toolTipAboutToShow();
+        }
     }
 
     update();
+}
+
+void NowPlaying::toolTipAboutToShow()
+{
+    Plasma::ToolTipContent toolTip;
+    if (m_state == Playing || m_state == Paused) {
+        toolTip.setMainText(m_title);
+        toolTip.setSubText(i18nc("song performer, displayed below the song title", "by %1", m_artist));
+        toolTip.setImage(m_artwork.scaled(QSize(50,50),Qt::KeepAspectRatio));
+    } else {
+        toolTip.setMainText(i18n("No current track."));
+    }
+
+    Plasma::ToolTipManager::self()->setContent(this, toolTip);
 }
 
 void NowPlaying::playerAdded(const QString &name)
