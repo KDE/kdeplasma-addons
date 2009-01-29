@@ -381,6 +381,11 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
         }
         m_lastTweet = maxId;
         m_newTweets = qMin(newCount, m_historySize);
+
+        if (m_newTweets > 0) {
+            emit activate();
+        }
+
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
         showTweets();
     } else if (source == m_imageQuery) {
