@@ -29,10 +29,18 @@ WeatherConfigSearch::WeatherConfigSearch(QWidget *parent)
     setButtonText(KDialog::User1, i18n("&Search..."));
     setDefaultButton(KDialog::User1);
     connect(this, SIGNAL(user1Clicked()), this, SLOT(searchPressed()));
+    connect(cityLineEdit, SIGNAL(textChanged(const QString&)),
+            this, SLOT(textChanged(const QString&)));
+    textChanged(QString());
 }
 
 WeatherConfigSearch::~WeatherConfigSearch()
 {
+}
+
+void WeatherConfigSearch::textChanged(const QString& txt)
+{
+    enableButton(KDialog::User1, !txt.isEmpty());
 }
 
 void WeatherConfigSearch::searchPressed()
@@ -101,6 +109,7 @@ void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
             QStringList pluginInfo = plugin.toString().split('|');
             providerComboBox->addItem(pluginInfo[0], pluginInfo[1]);
         }
+        providerComboBox->setCurrentIndex(providerComboBox->findData("bbcukmet"));
     }
 }
 

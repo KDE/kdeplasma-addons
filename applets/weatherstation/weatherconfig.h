@@ -42,6 +42,7 @@ public slots:
 
 protected slots:
     void searchPressed();
+    void textChanged(const QString& txt);
 
 private:
     Plasma::DataEngine* m_dataengine;
