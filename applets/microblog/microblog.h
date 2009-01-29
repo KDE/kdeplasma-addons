@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef TWITTER_H
-#define TWITTER_H
+#ifndef MICROBLOG_H
+#define MICROBLOG_H
 
 #include <QMap>
 
@@ -61,12 +61,12 @@ struct Tweet {
     Plasma::IconWidget *favIcon;
 };
 
-class Twitter : public Plasma::PopupApplet
+class MicroBlog : public Plasma::PopupApplet
 {
     Q_OBJECT
     public:
-        Twitter(QObject *parent, const QVariantList &args);
-        ~Twitter();
+        MicroBlog(QObject *parent, const QVariantList &args);
+        ~MicroBlog();
         void init();
         void constraintsEvent(Plasma::Constraints constraints);
         QGraphicsWidget *graphicsWidget();
@@ -163,6 +163,6 @@ class Twitter : public Plasma::PopupApplet
         Ui::TwitterConfig configUi;
 };
 
-K_EXPORT_PLASMA_APPLET(twitter, Twitter)
+K_EXPORT_PLASMA_APPLET(microblog, MicroBlog)
 
 #endif

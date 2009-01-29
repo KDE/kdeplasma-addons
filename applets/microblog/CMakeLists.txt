@@ -2,7 +2,7 @@ project(plasma-microblog)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} )
 
 set(microblog_SRCS
-    twitter.cpp)
+    microblog.cpp)
 kde4_add_ui_files(microblog_SRCS configuration.ui)
 
 kde4_add_plugin(plasma_applet_microblog ${microblog_SRCS})

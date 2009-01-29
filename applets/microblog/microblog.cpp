@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "twitter.h"
+#include "microblog.h"
 
 #include <QApplication>
 #include <QGridLayout>
@@ -58,7 +58,7 @@
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
-Twitter::Twitter(QObject *parent, const QVariantList &args)
+MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_graphicsWidget(0),
       m_newTweets(0),
@@ -74,7 +74,7 @@ Twitter::Twitter(QObject *parent, const QVariantList &args)
     setPopupIcon("view-pim-journal");
 }
 
-void Twitter::init()
+void MicroBlog::init()
 {
     m_flash = new Plasma::FlashingLabel(this);
     m_theme = new Plasma::Svg(this);
@@ -82,7 +82,7 @@ void Twitter::init()
     m_theme->setContainsMultipleImages(true);
 }
 
-void Twitter::constraintsEvent(Plasma::Constraints constraints)
+void MicroBlog::constraintsEvent(Plasma::Constraints constraints)
 {
     //i am an icon?
     if ((constraints|Plasma::SizeConstraint || constraints|Plasma::FormFactorConstraint) &&
@@ -91,7 +91,7 @@ void Twitter::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void Twitter::paintIcon()
+void MicroBlog::paintIcon()
 {
     int size = qMin(contentsRect().width(), contentsRect().height());
     if (size < 1) {
@@ -132,7 +132,7 @@ void Twitter::paintIcon()
     setPopupIcon(icon);
 }
 
-void Twitter::popupEvent(bool show)
+void MicroBlog::popupEvent(bool show)
 {
     if (show) {
         m_newTweets = 0;
@@ -140,14 +140,14 @@ void Twitter::popupEvent(bool show)
     }
 }
 
-void Twitter::focusInEvent(QFocusEvent *event)
+void MicroBlog::focusInEvent(QFocusEvent *event)
 {
     Q_UNUSED(event);
 
     m_statusEdit->setFocus();
 }
 
-QGraphicsWidget *Twitter::graphicsWidget()
+QGraphicsWidget *MicroBlog::graphicsWidget()
 {
     if (m_graphicsWidget) {
         return m_graphicsWidget;
@@ -256,7 +256,7 @@ QGraphicsWidget *Twitter::graphicsWidget()
     return m_graphicsWidget;
 }
 
-void Twitter::getWallet()
+void MicroBlog::getWallet()
 {
     //TODO: maybe Plasma in general should handle the wallet
     delete m_wallet;
@@ -278,11 +278,11 @@ void Twitter::getWallet()
     }
 }
 
-void Twitter::writeWallet(bool success)
+void MicroBlog::writeWallet(bool success)
 {
     kDebug() << success;
     if (success &&
-        enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
+        enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
         (m_wallet->writePassword(m_username, m_password) == 0)) {
         kDebug() << "successfully put password in wallet, removing from config file";
         config().deleteEntry("password");
@@ -296,12 +296,12 @@ void Twitter::writeWallet(bool success)
     m_wallet = 0;
 }
 
-void Twitter::readWallet(bool success)
+void MicroBlog::readWallet(bool success)
 {
     kDebug() << success;
     QString pwd;
     if (success &&
-        enterWalletFolder(QString::fromLatin1("Plasma-Twitter")) &&
+        enterWalletFolder(QString::fromLatin1("Plasma-MicroBlog")) &&
         (m_wallet->readPassword(m_username, pwd) == 0)) {
         kDebug() << "successfully retrieved password from wallet";
         m_password = pwd;
@@ -318,7 +318,7 @@ void Twitter::readWallet(bool success)
     m_wallet = 0;
 }
 
-bool Twitter::enterWalletFolder(const QString &folder)
+bool MicroBlog::enterWalletFolder(const QString &folder)
 {
     //TODO: seems a bit silly to have a function just for this here
     //why doesn't kwallet have this itself?
@@ -332,13 +332,13 @@ bool Twitter::enterWalletFolder(const QString &folder)
     return true;
 }
 
-void Twitter::setAuthRequired(bool required)
+void MicroBlog::setAuthRequired(bool required)
 {
     setConfigurationRequired(required);
     m_statusEdit->setEnabled(!required);
 }
 
-void Twitter::writeConfigPassword()
+void MicroBlog::writeConfigPassword()
 {
     //kDebug();
     //TODO: don't use "Yes" and "No", but replace with meaningful labels!
@@ -348,7 +348,7 @@ void Twitter::writeConfigPassword()
     }
 }
 
-void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
+void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     //kDebug() << source;
     if (data.isEmpty()) {
@@ -415,14 +415,14 @@ void Twitter::dataUpdated(const QString& source, const Plasma::DataEngine::Data 
     updateGeometry();
 }
 
-void Twitter::themeChanged()
+void MicroBlog::themeChanged()
 {
     delete m_colorScheme;
     m_colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
     showTweets();
 }
 
-void Twitter::showTweets()
+void MicroBlog::showTweets()
 {
     prepareGeometryChange();
     // Adjust the number of the TweetWidgets if the configuration has changed
@@ -558,7 +558,7 @@ void Twitter::showTweets()
     }
 }
 
-void Twitter::createConfigurationInterface(KConfigDialog *parent)
+void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 {
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -578,7 +578,7 @@ void Twitter::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(configWidget, i18n("General"), icon());
 }
 
-void Twitter::configAccepted()
+void MicroBlog::configAccepted()
 {
     QString serviceUrl = configUi.serviceUrlCombo->currentText();
     QString username = configUi.usernameEdit->text();
@@ -657,18 +657,18 @@ void Twitter::configAccepted()
     setAuthRequired(m_username.isEmpty());
 }
 
-Twitter::~Twitter()
+MicroBlog::~MicroBlog()
 {
     delete m_colorScheme;
     delete m_service;
 }
 
-void Twitter::editTextChanged()
+void MicroBlog::editTextChanged()
 {
     m_flash->flash(i18np("%1 character left", "%1 characters left", 140 - m_statusEdit->nativeWidget()->toPlainText().length()), 2000);
 }
 
-bool Twitter::eventFilter(QObject *obj, QEvent *event)
+bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj == m_statusEdit->nativeWidget()) {
         //FIXME:it's nevessary this eventfilter to intercept keypresses in
@@ -692,7 +692,7 @@ bool Twitter::eventFilter(QObject *obj, QEvent *event)
     }
 }
 
-void Twitter::updateStatus()
+void MicroBlog::updateStatus()
 {
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
@@ -707,7 +707,7 @@ void Twitter::updateStatus()
 }
 
 //what this really means now is 'reconnect to the timeline source'
-void Twitter::downloadHistory()
+void MicroBlog::downloadHistory()
 {
     //kDebug() ;
     if (m_username.isEmpty() || m_password.isEmpty()) {
@@ -762,14 +762,14 @@ void Twitter::downloadHistory()
     connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 }
 
-void Twitter::serviceFinished(Plasma::ServiceJob *job)
+void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
 {
     if (job->error()) {
         m_flash->flash(job->errorString(), 2000);
     }
 }
 
-void Twitter::openProfile()
+void MicroBlog::openProfile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
 
@@ -781,7 +781,7 @@ void Twitter::openProfile()
     }
 }
 
-QString Twitter::timeDescription( const QDateTime &dt )
+QString MicroBlog::timeDescription( const QDateTime &dt )
 {
     int diff = dt.secsTo( QDateTime::currentDateTime() );
     QString desc;
@@ -800,4 +800,4 @@ QString Twitter::timeDescription( const QDateTime &dt )
     return desc;
 }
 
-#include "twitter.moc"
+#include "microblog.moc"
