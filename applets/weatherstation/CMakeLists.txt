@@ -8,7 +8,6 @@ set(weatherstation_SRCS
 
 kde4_add_ui_files(weatherstation_SRCS
     weatherconfig.ui
-    weatherconfiglist.ui
     weatherconfigsearch.ui
 )
 

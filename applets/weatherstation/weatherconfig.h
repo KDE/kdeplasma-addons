@@ -25,20 +25,6 @@
 #include "ui_weatherconfigsearch.h"
 #include "ui_weatherconfiglist.h"
 
-class WeatherConfigList : public KDialog, public Ui::WeatherConfigList
-{
-    Q_OBJECT
-public:
-    WeatherConfigList(QWidget *parent = 0);
-    virtual ~WeatherConfigList();
-
-    void setList(const QStringList& list);
-    QString selected();
-
-protected slots:
-    void okPressed();
-};
-
 class WeatherConfigSearch : public KDialog, public Ui::WeatherConfigSearch
 {
     Q_OBJECT
@@ -59,7 +45,6 @@ protected slots:
 
 private:
     Plasma::DataEngine* m_dataengine;
-    WeatherConfigList m_listDlg;
     QString m_source;
 };
 

@@ -17,47 +17,11 @@
 
 #include "weatherconfig.h"
 #include <KMessageBox>
-
-WeatherConfigList::WeatherConfigList(QWidget *parent)
-    : KDialog(parent)
-{
-    setupUi(mainWidget());
-    connect(this, SIGNAL(okClicked()), this, SLOT(okPressed()));
-}
-
-WeatherConfigList::~WeatherConfigList()
-{
-}
-
-void WeatherConfigList::setList(const QStringList& values)
-{
-    list->clear();
-    list->addItems(values);
-}
-
-void WeatherConfigList::okPressed()
-{
-    QListWidgetItem* item = list->currentItem();
-    if (!item) {
-        KMessageBox::error(this, i18n("Please select one place."));
-    } else {
-        accept();
-    }
-}
-
-QString WeatherConfigList::selected()
-{
-    QListWidgetItem* item = list->currentItem();
-    if (item) {
-        return item->text();
-    }
-    return QString();
-}
+#include <KInputDialog>
 
 WeatherConfigSearch::WeatherConfigSearch(QWidget *parent)
     : KDialog(parent)
     , m_dataengine(0)
-    , m_listDlg(this)
 {
     setupUi(mainWidget());
     setButtons(KDialog::User1 | KDialog::Cancel);
@@ -100,11 +64,12 @@ void WeatherConfigSearch::dataUpdated(const QString &source, const Plasma::DataE
         }
         QString place;
         if (result[2] == "multiple") {
-            m_listDlg.setList(places.keys());
-            if (m_listDlg.exec() == QDialog::Rejected) {
+            QStringList selected = KInputDialog::getItemList(i18n("Weather station:"),
+                    i18n("Found multiple places:"), places.keys());
+            if (selected.isEmpty()) {
                 return;
             }
-            place = m_listDlg.selected();
+            place = selected[0];
         } else {
             place = places.keys()[0];
         }
