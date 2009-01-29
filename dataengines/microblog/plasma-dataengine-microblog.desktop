@@ -1,8 +1,5 @@
 [Desktop Entry]
 Name=Microblogging
-Name[ar]=تويتر
-Name[th]=ทวีตเตอร์
-Name[x-test]=xxTwitterxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
