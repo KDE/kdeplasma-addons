@@ -130,6 +130,11 @@ class CachedProvider : public ComicProvider
          */
         virtual KUrl websiteUrl() const;
 
+        /**
+         * Returns the shop website of the comic.
+         */
+        virtual KUrl shopUrl() const;
+
     private Q_SLOTS:
         void triggerFinished();
 };

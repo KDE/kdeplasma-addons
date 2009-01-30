@@ -26,6 +26,7 @@
 #include <QtCore/QStringList>
 #include <QtGui/QImage>
 
+#include <KUrl>
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 #include <solid/networking.h>
@@ -69,6 +70,7 @@ class ComicApplet : public Plasma::Applet
         void slotGoJump();
         void slotSaveComicAs();
         void slotScaleToContent();
+        void slotShop();
         void slotStorePosition();
         void slotSizeChanged();
         void slotScroll();
@@ -102,7 +104,8 @@ class ComicApplet : public Plasma::Applet
 
         QImage mImage;
         QDate mCurrentDay;
-        QUrl mWebsiteUrl;
+        KUrl mWebsiteUrl;
+        KUrl mShopUrl;
         QString mComicIdentifier;
         QString mNextIdentifierSuffix;
         QString mPreviousIdentifierSuffix;
@@ -132,6 +135,7 @@ class ComicApplet : public Plasma::Applet
         QAction *mActionGoLast;
         QAction *mActionGoJump;
         QAction *mActionScaleContent;
+        QAction *mActionShop;
         QAction *mActionStorePosition;
         QHash< Rects, QRectF > mRects;
         QMap< QString, int > mFirstStripNum;

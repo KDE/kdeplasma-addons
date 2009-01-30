@@ -39,6 +39,7 @@ class ComicProviderKross : public ComicProvider
 
         virtual IdentifierType identifierType() const;
         virtual KUrl websiteUrl() const;
+        virtual KUrl shopUrl() const;
         virtual QImage image() const;
         virtual QString identifier() const;
         virtual QString nextIdentifier() const;

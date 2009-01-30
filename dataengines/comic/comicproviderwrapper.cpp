@@ -629,6 +629,7 @@ void ComicProviderWrapper::finished() const
 {
     kDebug() << QString( "Author" ).leftJustified( 22, '.' ) << comicAuthor();
     kDebug() << QString( "Website URL" ).leftJustified( 22, '.' ) << mWebsiteUrl;
+    kDebug() << QString( "Shop URL" ).leftJustified( 22, '.' ) << mShopUrl;
     kDebug() << QString( "Title" ).leftJustified( 22, '.' ) << mTitle;
     kDebug() << QString( "Additional Text" ).leftJustified( 22, '.' ) << mAdditionalText;
     kDebug() << QString( "Identifier" ).leftJustified( 22, '.' ) << mIdentifier;

@@ -82,6 +82,11 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual KUrl websiteUrl() const = 0;
 
         /**
+         * Returns the url of the website where the comic has a shop.
+         */
+        virtual KUrl shopUrl() const;
+
+        /**
          * Returns the requested image.
          *
          * Note: This method returns only a valid image after the

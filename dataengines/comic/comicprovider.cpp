@@ -21,6 +21,7 @@
 #include <KDebug>
 #include <KIO/Job>
 #include <KIO/StoredTransferJob>
+#include <KUrl>
 
 class ComicProvider::Private
 {
@@ -228,6 +229,11 @@ QString ComicProvider::suffixType() const
 KPluginInfo ComicProvider::description() const
 {
     return d->mComicDescription;
+}
+
+KUrl ComicProvider::shopUrl() const
+{
+    return KUrl();
 }
 
 #include "comicprovider.moc"

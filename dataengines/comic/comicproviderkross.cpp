@@ -42,6 +42,11 @@ KUrl ComicProviderKross::websiteUrl() const
     return m_wrapper.websiteUrl();
 }
 
+KUrl ComicProviderKross::shopUrl() const
+{
+    return m_wrapper.shopUrl();
+}
+
 QImage ComicProviderKross::image() const
 {
     return m_wrapper.comicImage();

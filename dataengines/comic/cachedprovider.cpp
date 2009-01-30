@@ -143,7 +143,8 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
 
         for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
                 if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "title" ) ||
-                     ( i.key() == "lastCachedStripIdentifier" ) || ( i.key() == "suffixType" ) ) {
+                     ( i.key() == "lastCachedStripIdentifier" ) || ( i.key() == "suffixType" ) ||
+                     ( i.key() == "shopUrl" ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );
@@ -158,6 +159,12 @@ KUrl CachedProvider::websiteUrl() const
 {
     QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
     return KUrl( settings.value( "websiteUrl", QString() ).toString() );
+}
+
+KUrl CachedProvider::shopUrl() const
+{
+    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
+    return KUrl( settings.value( "shopUrl", QString() ).toString() );
 }
 
 #include "cachedprovider.moc"

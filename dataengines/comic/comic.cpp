@@ -166,6 +166,7 @@ void ComicEngine::finished( ComicProvider *provider )
         CachedProvider::Settings info;
 
         info[ "websiteUrl" ] = provider->websiteUrl().prettyUrl();
+        info[ "shopUrl" ] = provider->shopUrl().prettyUrl();
         info[ "nextIdentifier" ] = provider->nextIdentifier();
         info[ "previousIdentifier" ] = provider->previousIdentifier();
         info[ "title" ] = provider->name();
@@ -233,6 +234,7 @@ void ComicEngine::setComicData( ComicProvider *provider )
 
     setData( identifier, "Image", provider->image() );
     setData( identifier, "Website Url", provider->websiteUrl() );
+    setData( identifier, "Shop Url", provider->shopUrl() );
     setData( identifier, "Next identifier suffix", provider->nextIdentifier() );
     setData( identifier, "Previous identifier suffix", provider->previousIdentifier() );
     setData( identifier, "Comic Author", provider->comicAuthor() );

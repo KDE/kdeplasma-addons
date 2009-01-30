@@ -156,6 +156,11 @@ void ComicApplet::init()
     mActions.append( mActionGoJump );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
+    mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
+    mActionShop->setEnabled( false );
+    mActions.append( mActionShop );
+    connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
+
     QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
     mActions.append( action );
     connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
@@ -200,6 +205,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
+    mShopUrl = data[ "Shop Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
     mFirstIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
@@ -450,6 +456,11 @@ void ComicApplet::updateScrollBars()
 void ComicApplet::slotScroll()
 {
     update( mImageRect );
+}
+
+void ComicApplet::slotShop()
+{
+    KRun::runUrl( mShopUrl, "text/html", 0 );
 }
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
@@ -738,6 +749,7 @@ void ComicApplet::updateContextMenu()
     mActionGoFirst->setVisible( !mFirstIdentifierSuffix.isEmpty() );
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
     mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
+    mActionShop->setEnabled( mShopUrl.isValid() );
 }
 
 void ComicApplet::slotSaveComicAs()
