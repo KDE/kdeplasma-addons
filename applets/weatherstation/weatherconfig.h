@@ -23,7 +23,6 @@
 #include <QWidget>
 #include "ui_weatherconfig.h"
 #include "ui_weatherconfigsearch.h"
-#include "ui_weatherconfiglist.h"
 
 class WeatherConfigSearch : public KDialog, public Ui::WeatherConfigSearch
 {
