@@ -115,7 +115,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mSvg( 0 )
 {
     setHasConfigurationInterface( true );
-    resize( 480, 160 );
+    resize( 600, 250 );
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
     mScrollBarVert = new Plasma::ScrollBar( this );
@@ -215,8 +215,6 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mComicTitle = data[ "Title" ].toString();
     mSuffixType = data[ "SuffixType" ].toString();
 
-    bool isEnabled = ( mSuffixType == "String" ) ? false : true;
-    mActionGoJump->setEnabled( isEnabled );
 
     QString temp = data[ "Identifier" ].toString();
     mCurrentIdentifierSuffix = temp.remove( mComicIdentifier + ':' );
@@ -501,7 +499,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 
 void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 {
-    if (mFullViewWidget) {
+    if ( mFullViewWidget ) {
         mFullViewWidget->hide();
     }
 
@@ -728,7 +726,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
             } else {
                 setConfigurationRequired( true );
             }
-             setBusy( false );
+            setBusy( false );
         }
     }
 }
@@ -750,6 +748,7 @@ void ComicApplet::updateContextMenu()
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
     mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
     mActionShop->setEnabled( mShopUrl.isValid() );
+    mActionGoJump->setEnabled( mSuffixType != "String" );
 }
 
 void ComicApplet::slotSaveComicAs()
