@@ -136,7 +136,7 @@ Currency::Currency(QObject* parent)
     m_units[i18n("switzerland")]  = "CHF";
     m_units[i18n("franc")]        = "CHF";
     m_units["CHF"]                = 1E99;
-    m_units[i18n("Norway")]       = "NOK";
+    m_units[i18n("norway")]       = "NOK";
     m_units[i18n("norwegian krone")] = "NOK";
     m_units["NOK"]                = 1E99;
     m_units[i18n("croatia")]      = "HRK";
