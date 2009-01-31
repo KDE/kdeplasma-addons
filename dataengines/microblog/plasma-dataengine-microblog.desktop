@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
+Name[ga]=Micreabhlagadóireacht
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im

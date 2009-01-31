@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
+Name[ga]=Micreabhlagadóireacht
 Comment=Update and view your microblog status.
 Type=Service
 ServiceTypes=Plasma/Applet
