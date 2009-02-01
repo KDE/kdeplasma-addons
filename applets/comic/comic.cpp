@@ -311,8 +311,11 @@ void ComicApplet::applyConfig()
 
 void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
 {
-    if ( status == Solid::Networking::Connected )
+    //check if there is a connection and if there a comic has been selected
+    if ( ( status == Solid::Networking::Connected ) && !mComicIdentifier.isEmpty() ) {
+        setConfigurationRequired( false );
         updateComic( mStoredIdentifierSuffix );
+    }
 }
 
 void ComicApplet::checkDayChanged()
