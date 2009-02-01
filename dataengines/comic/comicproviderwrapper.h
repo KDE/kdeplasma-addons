@@ -162,8 +162,6 @@ class ComicProviderWrapper : public QObject
         void setComicAuthor( const QString &author );
         QString websiteUrl() const;
         void setWebsiteUrl( const QString &websiteUrl );
-        //shopUrl will be completely implemented for KDE 4.3
-        //you can use it now, but without effect on the provided data
         QString shopUrl() const;
         void setShopUrl( const QString &shopUrl );
         QString title() const;
