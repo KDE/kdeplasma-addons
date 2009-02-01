@@ -163,7 +163,7 @@ KUrl CachedProvider::websiteUrl() const
 
 KUrl CachedProvider::shopUrl() const
 {
-    QSettings settings( identifierToPath( requestedString() ) + ".conf", QSettings::IniFormat );
+    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
     return KUrl( settings.value( "shopUrl", QString() ).toString() );
 }
 
