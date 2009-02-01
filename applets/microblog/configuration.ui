@@ -73,9 +73,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
       <widget class="QSpinBox" name="historySizeSpinBox" >
-       <property name="suffix" >
-        <string> messages</string>
-       </property>
        <property name="maximum" >
         <number>20</number>
        </property>
@@ -116,9 +113,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2" >
      <item>
       <widget class="QSpinBox" name="historyRefreshSpinBox" >
-       <property name="suffix" >
-        <string> minutes</string>
-       </property>
        <property name="minimum" >
         <number>2</number>
        </property>

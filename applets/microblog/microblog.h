@@ -93,6 +93,7 @@ class MicroBlog : public Plasma::PopupApplet
         void openProfile();
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
+        void updateSuffix();
 
         void themeChanged();
         void showTweets();
