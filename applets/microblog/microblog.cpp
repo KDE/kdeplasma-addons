@@ -562,8 +562,8 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 {
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSuffix()));
-    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSuffix()));
+    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
+    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
 
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
@@ -576,15 +576,15 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
     configUi.historySizeSpinBox->setValue(m_historySize);
     configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
     configUi.checkIncludeFriends->setChecked(m_includeFriends);
-    emit updateSuffix();
+    emit updateSpinBoxSuffix();
 
     parent->addPage(configWidget, i18n("General"), icon());
 }
 
-void MicroBlog::updateSuffix()
+void MicroBlog::updateSpinBoxSuffix()
 {
-    configUi.historySizeSpinBox->setSuffix(i18np(" message", " messages", m_historySize));
-    configUi.historyRefreshSpinBox->setSuffix(i18np(" minute", "minutes", m_historyRefresh));
+    configUi.historySizeSpinBox->setSuffix(i18np(" message", " messages", configUi.historySizeSpinBox->value()));
+    configUi.historyRefreshSpinBox->setSuffix(i18np(" minute", " minutes", configUi.historyRefreshSpinBox->value()));
 }
 
 void MicroBlog::configAccepted()

@@ -131,6 +131,9 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
     connect(feedsUi.feedList, SIGNAL( itemSelectionChanged ()), this, SLOT(slotItemChanged()));
     connect(feedsUi.feedComboBox->lineEdit(), SIGNAL( textChanged( const QString& ) ), this, SLOT( slotChangeText(const QString& ) ) );
+    connect(ui.maxAge, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
+    connect(ui.switchInterval, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
+    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
     feedsUi.removeFeed->setEnabled( false );
     KConfig feedsFile(QString("news/feeds"), KConfig::FullConfig, "data");
     m_defaultFeeds = feedsFile.group("feeds").entryMap();
@@ -148,6 +151,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     ui.intervalSpinBox->setValue(m_interval);
     ui.switchInterval->setValue(m_switchInterval);
     ui.maxAge->setValue(m_maxAge);
+    emit updateSpinBoxSuffix();
     if (m_logo) {
         ui.logo->setCheckState(Qt::Checked);
     } else {
@@ -167,6 +171,13 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     feedsUi.feedList->addItems(m_feedlist);
     parent->addPage(widget, i18n("General"), icon());
     parent->addPage(fWidget, i18n("Feeds"), icon());
+}
+
+void News::updateSpinBoxSuffix()
+{
+    ui.maxAge->setSuffix(i18np(" hour", " hours", ui.maxAge->value()));
+    ui.switchInterval->setSuffix(i18np(" second", " seconds", ui.switchInterval->value()));
+    ui.intervalSpinBox->setSuffix(i18np(" minute", " minutes", ui.intervalSpinBox->value()));
 }
 
 void News::slotChangeText( const QString& text )

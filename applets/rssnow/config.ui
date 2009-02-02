@@ -88,9 +88,6 @@
    </item>
    <item row="8" column="4" >
     <widget class="KIntSpinBox" name="maxAge" >
-     <property name="suffix" >
-      <string> hours</string>
-     </property>
      <property name="maximum" >
       <number>525600</number>
      </property>
@@ -98,9 +95,6 @@
    </item>
    <item row="7" column="4" >
     <widget class="KIntSpinBox" name="switchInterval" >
-     <property name="suffix" >
-      <string> seconds</string>
-     </property>
      <property name="minimum" >
       <number>1</number>
      </property>
@@ -114,9 +108,6 @@
    </item>
    <item row="6" column="4" >
     <widget class="KIntSpinBox" name="intervalSpinBox" >
-     <property name="suffix" >
-      <string> minutes</string>
-     </property>
      <property name="minimum" >
       <number>1</number>
      </property>
@@ -131,7 +122,7 @@
    <item row="6" column="3" >
     <widget class="QLabel" name="label_2" >
      <property name="text" >
-      <string>Update &amp;interval:</string>
+      <string>Update interval:</string>
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
