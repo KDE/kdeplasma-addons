@@ -369,7 +369,7 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
             *identifier = mFirstIdentifier;
         }
         if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-             ( !mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate() ) {
+             ( !mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate() ) ) {
             *identifier = mLastIdentifier;
         }
         break;
