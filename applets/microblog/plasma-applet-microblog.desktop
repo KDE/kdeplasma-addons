@@ -2,9 +2,12 @@
 Name=Microblogging
 Name[ga]=Micreabhlagadóireacht
 Name[sv]=Mikrowebbjournal
+Name[tr]=Mikro günlük
 Name[uk]=Міні-журнал
 Comment=Update and view your microblog status.
+Comment[ro]=Actualizați și vizualizați-vă starea pe microblog.
 Comment[sv]=Uppdatera och visa status för mikrowebbjournal
+Comment[tr]=Mikrogünlük durumunuzu güncelleyin ve görüntüleyin
 Comment[uk]=Оновіть і перегляньте ваш стан у міні-журналі.
 Type=Service
 ServiceTypes=Plasma/Applet

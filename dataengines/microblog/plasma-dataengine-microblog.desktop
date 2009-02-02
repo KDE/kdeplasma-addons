@@ -2,6 +2,7 @@
 Name=Microblogging
 Name[ga]=Micreabhlagadóireacht
 Name[sv]=Mikrowebbjournal
+Name[tr]=Mikro günlük
 Name[uk]=Міні-журнал
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
