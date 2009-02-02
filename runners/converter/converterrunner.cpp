@@ -18,9 +18,12 @@
 #include "converterrunner.h"
 #include <QApplication>
 #include <QClipboard>
+#include <QSet>
 #include <KIcon>
+#include <KDebug>
 #include <KToolInvocation>
 #include <conversion/converter.h>
+#include <conversion/unit.h>
 
 #define CONVERSION_CHAR '>'
 
@@ -168,8 +171,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
     unit2 = cmd.rest();
 
-    Conversion::Value v =
-            Conversion::Converter::self()->convert(Conversion::Value(value, unit1), unit2);
+    Conversion::UnitCategory* category = Conversion::Converter::self()->categoryForUnit(unit1);
+    if (!category)
+        return;
+    Conversion::Value v = category->convert(Conversion::Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
@@ -177,11 +182,28 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         match.setText(v.toString());
         match.setData(v.number());
         context.addMatch(term, match);
+    } else if (!unit2.isEmpty()) {
+        QStringList units = category->allUnits();
+        QSet<Conversion::Unit*> matchingUnits;
+        foreach (const QString& s, units) {
+            if (s.startsWith(unit2)) {
+                matchingUnits << category->unit(s);
+            }
+        }
+        foreach (const Conversion::Unit* u, matchingUnits) {
+            v = category->convert(Conversion::Value(value, unit1), u->symbol());
+            Plasma::QueryMatch match(this);
+            match.setType(Plasma::QueryMatch::InformationalMatch);
+            match.setIcon(KIcon("edit-copy"));
+            match.setText(v.toString());
+            match.setData(v.number());
+            context.addMatch(term, match);
+        }
     }
     if (!v.description().isEmpty()) {
         QStringList desc = v.description().split('|');
         Plasma::QueryMatch match(this);
-        match.setType(Plasma::QueryMatch::ExactMatch);
+        match.setType(Plasma::QueryMatch::PossibleMatch);
         match.setIcon(KIcon("document-open-remote"));
         match.setText(desc[0]);
         if (desc.size() > 1) {
