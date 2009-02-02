@@ -26,6 +26,62 @@
 namespace Conversion
 {
 
+class PLASMACONVERSION_EXPORT Complex
+{
+public:
+    Complex() {};
+    virtual ~Complex() {};
+    virtual double toDefault(double) const = 0;
+    virtual double fromDefault(double) const = 0;
+};
+
+class PLASMACONVERSION_EXPORT Unit : public QObject
+{
+public:
+    explicit Unit(QObject* parent, const QString& singular, const QString& plural,
+                  const QString& symbol, double multiplier,
+                  const QStringList& synonyms = QStringList());
+    explicit Unit(QObject* parent, const QString& singular, const QString& plural,
+                  const QString& symbol, const Complex* multiplier,
+                  const QStringList& synonyms = QStringList());
+    virtual ~Unit();
+    /**
+     * @return translated name for unit.
+     **/
+    QString singular() const;
+
+    /**
+     * @return translated name for unit (plural).
+     **/
+    QString plural() const;
+
+    /**
+     * @return symbol for the unit.
+     **/
+    QString symbol() const;
+
+    /**
+     * @return unit multiplier.
+     **/
+    double multiplier() const;
+
+    /**
+     * Set unit multiplier.
+     **/
+    void setMultiplier(double multiplier);
+
+protected:
+    double toDefault(double value) const;
+    double fromDefault(double value) const;
+
+private:
+    friend class UnitCategory;
+    class Private;
+    Private* const d;
+};
+
+#define U(n, p, s, m, sy) (new Conversion::Unit(this, n, p, s, m, QStringList() sy))
+
 class PLASMACONVERSION_EXPORT UnitCategory : public QObject
 {
     Q_OBJECT
@@ -40,21 +96,42 @@ public:
      *
      * @return Translated name for category.
      **/
-    virtual QString name() const = 0;
+    QString name() const;
+
+    /**
+     * Returns default unit.
+     *
+     * @return default unit.
+     **/
+    QString defaultUnit() const;
 
     /**
      * Check if unit category has a unit.
      *
      * @return True if unit is found
      **/
-    virtual bool hasUnit(const QString &unit) const = 0;
+    bool hasUnit(const QString &unit) const;
+
+    /**
+     * Return unit for string.
+     *
+     * @return Pointer to unit class.
+     **/
+    Unit* unit(const QString& s) const;
 
     /**
      * Return units in this category.
      *
+     * @return Translated list of units.
+     **/
+    QStringList units() const;
+
+    /**
+     * Return all unit names, short names and unit synonyms in this category.
+     *
      * @return list of units.
      **/
-    virtual QStringList units() const = 0;
+    QStringList allUnits() const;
 
     /**
      * Convert value to another unit.
@@ -63,7 +140,20 @@ public:
      * @param toUnit unit to convert to. If empty default unit is used.
      * @return converted value
      **/
-    virtual Value convert(const Value& value, const QString& toUnit = QString()) = 0;
+    virtual Value convert(const Value& value, const QString& toUnit = QString());
+
+protected:
+    void addSIUnit(const QString& symbol, const QString& single, const QString& plural,
+                   uint multiplier = 1, double shift = 1.0);
+    void setName(const QString& name);
+    void setDefaultUnit(const QString& defaultUnit);
+    void addUnitName(const QString& name);
+    void addUnitMapValues(Unit* unit, const QStringList& names);
+
+private:
+    friend class Unit;
+    class Private;
+    Private* const d;
 };
 
 } // Conversion namespace

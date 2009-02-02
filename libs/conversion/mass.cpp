@@ -20,43 +20,24 @@
 #include <KLocale>
 
 Mass::Mass(QObject* parent)
-: SimpleUnit(parent)
+: Conversion::UnitCategory(parent)
 {
     setObjectName("mass");
+    setName(i18n("Mass"));
+    setDefaultUnit("g");
+    addSIUnit(defaultUnit(), i18nc("mass unit", "gram"), i18n("grams"));
 
-    m_default = "g";
-
-    addSIUnit(m_default, i18nc("mass unit", "gram"), i18n("grams"));
-
-    m_units[i18nc("mass unit", "ton")]          = "t";
-    m_units[i18nc("mass unit", "tons")]         = "t";
-    m_units[i18nc("mass unit", "tonne")]        = "t";
-    m_units["t"]                  		= 1000000.0;
-
-	//I guess it's useful...
-	m_units[i18nc("mass unit", "carat")]    = "CD";
-	m_units[i18nc("mass unit", "carats")]   = "CD";
-	m_units["CD"]                 		= 0.2;
-
+    U(i18nc("mass unit", "ton"), i18nc("mass unit", "tons"), "t", 1000000.0,
+        << i18nc("mass unit", "tonne"));
+    //I guess it's useful...
+    U(i18nc("mass unit", "carat"), i18nc("mass unit", "carats"), "CD", 0.2, );
     //http://en.wikipedia.org/wiki/Pound_(mass)#International_pound
-    m_units[i18nc("mass unit", "pound")]        = "lb";
-    m_units[i18nc("mass unit", "pounds")]       = "lb";
-    m_units[i18nc("mass unit: pounds", "lb")]   = 453.592;
+    U(i18nc("mass unit", "pound"), i18nc("mass unit", "pounds"),
+        i18nc("mass unit: pounds", "lb"), 453.592, );
     //International avoirdupois ounce
-    m_units[i18nc("mass unit", "ounce")]        = "oz";
-    m_units[i18nc("mass unit", "ounces")]       = "oz";
-    m_units["oz"]                 		= 28.349523125;
-    m_units[i18nc("mass unit", "troy ounce")]   = "t oz";
-    m_units[i18nc("mass unit", "troy ounces")]  = "t oz";
-    m_units["t oz"]               		= 31.1034768;
-    m_units[i18nc("mass unit", "newton")]       = "N";       //on earth
-    m_units["N"]                  		= 1000.0/9.81;
+    U(i18nc("mass unit", "ounce"), i18nc("mass unit", "ounces"), "oz", 28.349523125, );
+    U(i18nc("mass unit", "troy ounce"), i18nc("mass unit", "troy ounces"), "t oz", 31.1034768, );
+    U(i18nc("mass unit", "newton"), i18nc("mass unit", "newtons"), "N", 1000.0/9.81, ); //on earth
 	//used a lot in industry (aircraft engines for example)
-    m_units[i18nc("mass unit", "kilonewton")]   = "kN";
-    m_units["kN"]                 		= 1000000.0/9.81;
-}
-
-QString Mass::name() const
-{
-    return i18n("Mass");
+    U(i18nc("mass unit", "kilonewton"), i18nc("mass unit", "kilonewton"), "kN", 1000000.0/9.81, );
 }

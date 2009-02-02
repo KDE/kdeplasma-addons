@@ -83,4 +83,11 @@ void Value::setDescription(const QString& description)
     d->description = description;
 }
 
+Value& Value::operator=(const Value& value)
+{
+    d->number = value.number();
+    d->unit = value.unit();
+    return *this;
+}
+
 }

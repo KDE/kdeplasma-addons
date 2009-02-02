@@ -19,35 +19,27 @@
 #include <KLocale>
 
 Pressure::Pressure(QObject* parent)
-: SimpleUnit(parent)
+: Conversion::UnitCategory(parent)
 {
     setObjectName("pressure");
+    setName(i18n("Pressure"));
+    setDefaultUnit("Pa");
 
-    m_default = "Pa";
-
-    addSIUnit(m_default, i18n("pascal"), i18n("pascals"));
-
-    m_units["bar"]                = 100000.0;
-    m_units[i18n("millibar")]     = "mbar";
-    m_units[i18n("millibars")]    = "mbar";
-    m_units["mb"]                 = "mbar";
-    m_units["mbar"]               = 100.0;
-    m_units[i18n("decibar")]      = "dbar";
-    m_units[i18n("decibars")]     = "dbar";
-    m_units["dbar"]               = 10000.0;
-    m_units["Torr"]               = 133.322;
-    m_units[i18n("technical atmosphere")] = "at";
-    m_units["at"]                 = 98066.5;
-    m_units[i18n("atmosphere")]   = "atm";
-    m_units["atm"]                = 101325.0;
-    m_units[i18n("pound-force per square inch")] = "psi";
-    m_units["psi"]                = 6894.76;
+    addSIUnit(defaultUnit(), i18nc("pressure unit","pascal"), i18nc("pressure unit","pascals"));
+    U(i18nc("pressure unit","bar"), i18nc("pressure unit","bars"), i18nc("pressure unit","bar"), 100000.0, );
+    U(i18nc("pressure unit","millibar"), i18nc("pressure unit","millibars"),
+        i18nc("pressure unit millibar","mbar"), 100.0, << "mb");
+    U(i18nc("pressure unit","decibar"), i18nc("pressure unit","decibars"),
+        i18nc("pressure unit decibar","dbar"), 10000.0, );
+    U(i18nc("pressure unit","torr"), i18nc("pressure unit","torrs"),
+        i18nc("pressure unit","torr"), 133.322, );
+    U(i18nc("pressure unit","technical atmosphere"), i18nc("pressure unit","technical atmospheres"),
+        i18nc("pressure unit technical atmosphere","at"), 98066.5, );
+    U(i18nc("pressure unit","atmosphere"), i18nc("pressure unit","atmospheres"),
+        i18nc("pressure unit atmosphere","atm"), 101325.0, );
+    U(i18nc("pressure unit","pound-force per square inch"), i18nc("pressure unit","pound-force per square inch"),
+        i18nc("pressure unit pound-force per square inch","psi"), 6894.76, );
     // http://en.wikipedia.org/wiki/InHg
-    m_units[i18n("inches of mercury")] = "inHg";
-    m_units["inHg"]               = 3386.389; // at 0 °C
-}
-
-QString Pressure::name() const
-{
-    return i18n("Pressure");
+    U(i18nc("pressure unit","inches of mercury"), i18nc("pressure unit","inches of mercury"),
+        i18nc("pressure unit inches of mercury","inHg"), 3386.389, << "in\""); // at 0 °C
 }

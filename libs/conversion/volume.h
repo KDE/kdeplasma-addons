@@ -18,19 +18,12 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Volume : public SimpleUnit
+class Volume : public Conversion::UnitCategory
 {
 public:
     Volume(QObject* parent = 0);
-    virtual bool hasUnit(const QString &unit) const;
-    virtual QString name() const;
-
-protected:
-    QString replace(const QString &unit) const;
-    virtual double toDefault(double value, const QString &unit) const;
-    virtual double fromDefault(double value, const QString &unit) const;
 };
 
 #endif

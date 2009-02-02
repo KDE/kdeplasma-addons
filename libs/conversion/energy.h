@@ -18,13 +18,12 @@
 #ifndef ENERGY_H
 #define ENERGY_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Energy : public SimpleUnit
+class Energy : public Conversion::UnitCategory
 {
 public:
     Energy(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

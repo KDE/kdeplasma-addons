@@ -18,13 +18,12 @@
 #ifndef CURRENCY_H
 #define CURRENCY_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Currency : public SimpleUnit
+class Currency : public Conversion::UnitCategory
 {
 public:
     Currency(QObject* parent = 0);
-    virtual QString name() const;
     virtual Conversion::Value convert(const Conversion::Value& value, const QString& to);
 private:
     QString m_cache;

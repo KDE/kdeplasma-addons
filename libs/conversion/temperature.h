@@ -18,14 +18,12 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
-#include "simpleunit.h"
-#include "value.h"
+#include "unit.h"
 
-class Temperature : public SimpleUnit
+class Temperature : public Conversion::UnitCategory
 {
 public:
     Temperature(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

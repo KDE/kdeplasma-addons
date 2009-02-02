@@ -18,13 +18,12 @@
 #ifndef PRESSURE_H
 #define PRESSURE_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Pressure : public SimpleUnit
+class Pressure : public Conversion::UnitCategory
 {
 public:
     Pressure(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

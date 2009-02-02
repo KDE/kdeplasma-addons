@@ -16,146 +16,39 @@
  */
 
 #include "volume.h"
-#include <KDebug>
 #include <KLocale>
 
 Volume::Volume(QObject* parent)
-: SimpleUnit(parent)
+: Conversion::UnitCategory(parent)
 {
     setObjectName("volume");
+    setName(i18n("Volume"));
+    setDefaultUnit("m\xb3");
 
-    m_default = "m\xb3";
+    addSIUnit("m\xb3", i18nc("area unit","meter"), i18nc("area unit","meters"), 3);
+    addSIUnit("l", i18n("liter"), i18n("liters"), 1, 1000.0);
 
-    m_units[i18n("cubic meter")]          = "m\xb3";
-    m_units[i18n("cubic meters")]         = "m\xb3";
-    m_units["m\xb3"]                      = 1.0;
-    m_units[i18n("cubic kilometer")]      = "km\xb3";
-    m_units[i18n("cubic kilometers")]     = "km\xb3";
-    m_units["km\xb3"]                     = 1E+9;
-    m_units[i18n("cubic centimeter")]     = "cm\xb3";
-    m_units[i18n("cubic centimeters")]    = "cm\xb3";
-    m_units["cm\xb3"]                     = 1E-6;
-    m_units[i18n("cubic millimeter")]     = "mm\xb3";
-    m_units[i18n("cubic millimeters")]    = "mm\xb3";
-    m_units["mm\xb3"]                     = 1E-9;
+    U(i18n("cubic foot"), i18n("cubic feet"), i18n("ft\xc2\xb3"), 0.028316846592,
+        << i18n("cubic ft") << i18n("cu foot") << i18n("cu ft")
+        << i18n("cu feet") << i18n("feet\xc2\xb3"));
 
-    m_units["Ym\xb3"]                     = 1E+72;
-    m_units["Zm\xb3"]                     = 1E+63;
-    m_units["Em\xb3"]                     = 1E+54;
-    m_units["Pm\xb3"]                     = 1E+45;
-    m_units["Tm\xb3"]                     = 1E+36;
-    m_units["Gm\xb3"]                     = 1E+27;
-    m_units["Mm\xb3"]                     = 1E+18;
-    m_units["hm\xb3"]                     = 1E+6;
-    m_units["dam\xb3"]                    = 1E+3;
-    m_units["dm\xb3"]                     = 1E-3;
-    m_units["µm\xb3"]                     = 1E-18;
-    m_units["nm\xb3"]                     = 1E-27;
-    m_units["pm\xb3"]                     = 1E-36;
-    m_units["fm\xb3"]                     = 1E-45;
-    m_units["am\xb3"]                     = 1E-54;
-    m_units["zm\xb3"]                     = 1E-63;
-    m_units["ym\xb3"]                     = 1E-72;
+    U(i18n("cubic inch"), i18n("cubic inches"), i18n("in\xc2\xb3"), 0.000016387064,
+        << i18n("cubic inch") << i18n("cubic in") << i18n("cu inches")
+        << i18n("cu inch") << i18n("cu in") << i18n("inch\xc2\xb3"));
 
-    m_units[i18n("liter")]                = "l";
-    m_units[i18n("liters")]               = "l";
-	m_units["L"]                          = "l";
-    m_units[i18n("centiliter")]           = "cl";
-    m_units[i18n("centiliters")]          = "cl";
-    m_units[i18n("milliliter")]           = "ml";
-    m_units[i18n("milliliters")]          = "ml";
-    m_units["Yl"]                         = 1E+21;
-    m_units["Zl"]                         = 1E+18;
-    m_units["El"]                         = 1E+15;
-    m_units["Pl"]                         = 1E+12;
-    m_units["Tl"]                         = 1E+9;
-    m_units["Gl"]                         = 1E+6;
-    m_units["Ml"]                         = 1E+3;
-    m_units["kl"]                         = 1.0;
-    m_units["hl"]                         = 1E-1;
-    m_units["dal"]                        = 1E-2;
-    m_units["l"]                          = 1E-3;
-    m_units["dl"]                         = 1E-4;
-    m_units["cl"]                         = 1E-5;
-    m_units["ml"]                         = 1E-6;
-    m_units["µl"]                         = 1E-9;
-    m_units["nl"]                         = 1E-12;
-    m_units["pl"]                         = 1E-15;
-    m_units["fl"]                         = 1E-18;
-    m_units["al"]                         = 1E-21;
-    m_units["zl"]                         = 1E-24;
-    m_units["yl"]                         = 1E-27;
+    U(i18n("cubic mile"), i18n("cubic miles"), i18n("mi\xc2\xb3"), 4168181825.440579584,
+        << i18n("cubic mile") << i18n("cubic mi") << i18n("cu miles") << i18n("cu mile")
+        << i18n("cu mi") << i18n("mile\xc2\xb3"));
 
-    m_units[i18n("cubic foot")]           = i18n("cubic feet");
-    m_units[i18n("cubic ft")]             = i18n("cubic feet");
-    m_units[i18n("cu foot")]              = i18n("cubic feet");
-    m_units[i18n("cu ft")]                = i18n("cubic feet");
-    m_units[i18n("cu feet")]              = i18n("cubic feet");
-    m_units[i18n("feet\xc2\xb3")]         = i18n("cubic feet");
-    m_units[i18n("ft\xc2\xb3")]           = i18n("cubic feet");
-    m_units[i18n("cubic feet")]           = 0.028316846592;
-    m_units[i18n("cubic inch")]           = i18n("cubic inches");
-    m_units[i18n("cubic in")]             = i18n("cubic inches");
-    m_units[i18n("cu inches")]            = i18n("cubic inches");
-    m_units[i18n("cu inch")]              = i18n("cubic inches");
-    m_units[i18n("cu in")]                = i18n("cubic inches");
-    m_units[i18n("inch\xc2\xb3")]         = i18n("cubic inches");
-    m_units[i18n("in\xc2\xb3")]           = i18n("cubic inches");
-    m_units[i18n("cubic inches")]         = 0.000016387064;
-    m_units[i18n("cubic mile")]           = i18n("cubic mile");
-    m_units[i18n("cubic mi")]             = i18n("cubic mile");
-    m_units[i18n("cu miles")]             = i18n("cubic mile");
-    m_units[i18n("cu mile")]              = i18n("cubic mile");
-    m_units[i18n("cu mi")]                = i18n("cubic mile");
-    m_units[i18n("mile\xc2\xb3")]         = i18n("cubic mile");
-    m_units[i18n("mi\xc2\xb3")]           = i18n("cubic mile");
-    m_units[i18n("cubic miles")]          = 4168181825.440579584;
+    U(i18n("fluid ounce"), i18n("fluid ounces"), i18n("fl.oz."), 0.00002957353,
+        << i18n("oz.fl.") << i18n("oz. fl.") << i18n("fl. oz.")
+        << i18n("fl oz") << i18n("fluid ounce"));
 
-    m_units[i18n("oz.fl.")]               = i18n("fluid ounces");
-    m_units[i18n("oz. fl.")]              = i18n("fluid ounces");
-    m_units[i18n("fl.oz.")]               = i18n("fluid ounces");
-    m_units[i18n("fl. oz.")]              = i18n("fluid ounces");
-    m_units[i18n("fl oz")]                = i18n("fluid ounces");
-    m_units[i18n("fluid ounce")]          = i18n("fluid ounces");
-    m_units[i18n("fluid ounces")]         = 0.00002957353;
-    m_units[i18n("cp")]                   = i18n("cups");
-    m_units[i18n("cup")]                  = i18n("cups");
-    m_units[i18n("cups")]                 = 0.0002365882;
-    m_units[i18n("gal")]                  = i18n("gallons (U.S. liquid)");
-    m_units[i18n("gallon")]               = i18n("gallons (U.S. liquid)");
-    m_units[i18n("gallons")]              = i18n("gallons (U.S. liquid)");
-    m_units[i18n("gallons (U.S. liquid)")] = 0.003785412;
+    U(i18n("cup"), i18n("cups"), i18n("cp"), 0.0002365882, );
 
-    m_units[i18n("pint")]                 = i18n("pints (imperial)");
-    m_units[i18n("pints")]                = i18n("pints (imperial)");
-    m_units[i18n("pints (imperial)")]     = 0.00056826125;
-}
+    U(i18n("gallon (U.S. liquid)"), i18n("gallons (U.S. liquid)"), i18n("gal"), 0.003785412,
+        << i18n("gallon") << i18n("gallons"));
 
-QString Volume::name() const
-{
-    return i18n("Volume");
-}
-
-bool Volume::hasUnit(const QString &unit) const
-{
-    return SimpleUnit::hasUnit(replace(unit));
-}
-
-QString Volume::replace(const QString &unit) const
-{
-    QString result = unit;
-    result.replace("/-3", "\xb3");
-    result.replace("^3", "\xb3");
-    result.replace('3', "\xb3");
-    return result;
-}
-
-double Volume::toDefault(double value, const QString &unit) const
-{
-    return SimpleUnit::toDefault(value, replace(unit));
-}
-
-double Volume::fromDefault(double value, const QString &unit) const
-{
-    return SimpleUnit::fromDefault(value, replace(unit));
+    U(i18n("pint (imperial)"), i18n("pints (imperial)"), "pt", 0.00056826125,
+        << i18n("pint") << i18n("pints") << "p");
 }

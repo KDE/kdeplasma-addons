@@ -18,13 +18,12 @@
 #ifndef SPEED_H
 #define SPEED_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Speed : public SimpleUnit
+class Speed : public Conversion::UnitCategory
 {
 public:
     Speed(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

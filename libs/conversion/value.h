@@ -65,6 +65,8 @@ public:
      **/
     QString description() const;
 
+    Value& operator=(const Value&);
+
 private:
     class Private;
     Private* const d;

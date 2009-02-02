@@ -18,19 +18,12 @@
 #ifndef AREA_H
 #define AREA_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Area : public SimpleUnit
+class Area : public Conversion::UnitCategory
 {
 public:
     Area(QObject* parent = 0);
-    virtual bool hasUnit(const QString &unit) const;
-    virtual QString name() const;
-
-protected:
-    QString replace(const QString &unit) const;
-    virtual double toDefault(double value, const QString &unit) const;
-    virtual double fromDefault(double value, const QString &unit) const;
 };
 
 #endif

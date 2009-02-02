@@ -19,37 +19,37 @@
 #include <KDebug>
 #include <KLocale>
 
-class Celsius : public Complex
+class Celsius : public Conversion::Complex
 {
     double toDefault(double value) const { return value + 273.15; };
     double fromDefault(double value) const { return value - 273.15; };
 };
 
-class Fahrenheit : public Complex
+class Fahrenheit : public Conversion::Complex
 {
     double toDefault(double value) const { return (value + 459.67) * 5.0 / 9.0; };
     double fromDefault(double value) const { return (value * 9.0 / 5.0) - 459.67; };
 };
 
-class Delisle : public Complex
+class Delisle : public Conversion::Complex
 {
     double toDefault(double value) const { return 373.15 - (value * 2.0 / 3.0); };
     double fromDefault(double value) const { return (373.15 - value) * 3.0 / 2.0; };
 };
 
-class Newton : public Complex
+class Newton : public Conversion::Complex
 {
     double toDefault(double value) const { return (value * 100.0 / 33.0) + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 33.0 / 100.0; };
 };
 
-class Reaumur : public Complex
+class Reaumur : public Conversion::Complex
 {
     double toDefault(double value) const { return (value * 5.0 / 4.0) + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 4.0 / 5.0; };
 };
 
-class Romer : public Complex
+class Romer : public Conversion::Complex
 {
     double toDefault(double value) const { return (value - 7.5) * 40.0 / 21.0 + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 21.0 / 40.0 + 7.5; };
@@ -57,52 +57,20 @@ class Romer : public Complex
 
 
 Temperature::Temperature(QObject* parent)
-: SimpleUnit(parent)
+: Conversion::UnitCategory(parent)
 {
     setObjectName("temperature");
+    setName(i18n("Temperature"));
+    setDefaultUnit("K");
 
-    m_default = "K";
-
-    m_units[i18n("kelvin")]       = "K";
-    m_units[i18n("kelvins")]      = "K";
-    m_units["K"]                  = 1.0;
-    m_units[i18n("celsius")]      = "\xb0""C";
-    m_units[i18n("celsiuses")]    = "\xb0""C";
-    m_units["C"]                  = "\xb0""C";
-    m_units["\xb0""C"]            = QVariant::fromValue(static_cast<Complex*>(new Celsius()));
-    m_units[i18n("fahrenheit")]   = "\xb0""F";
-    m_units[i18n("fahrenheits")]  = "\xb0""F";
-    m_units["F"]                  = "\xb0""F";
-    m_units["\xb0""F"]            = QVariant::fromValue(static_cast<Complex*>(new Fahrenheit()));
-    m_units[i18n("rankine")]      = "\xb0""R";
-    m_units[i18n("rankines")]     = "\xb0""R";
-    m_units["R"]                  = "\xb0""R";
-    m_units["\xb0""R"]            = 5.0 / 9.0;
-    m_units[i18n("delisle")]      = "\xb0""De";
-    m_units[i18n("delisles")]     = "\xb0""De";
-    m_units["De"]                 = "\xb0""De";
-    m_units["\xb0""De"]           = QVariant::fromValue(static_cast<Complex*>(new Delisle()));
-    m_units[i18n("newton")]       = "\xb0""N";
-    m_units[i18n("newtons")]      = "\xb0""N";
-    m_units["N"]                  = "\xb0""N";
-    m_units["\xb0""N"]            = QVariant::fromValue(static_cast<Complex*>(new Newton()));
-    m_units[i18n("r\xe9""aumur")] = "\xb0""R\xe9";
-    m_units[i18n("r\xe9""aumurs")]= "\xb0""R\xe9";
-    m_units[i18n("reaumur")]      = "\xb0""R\xe9";
-    m_units[i18n("reaumurs")]     = "\xb0""R\xe9";
-    m_units["Re"]                 = "\xb0""R\xe9";
-    m_units["R\xe9"]              = "\xb0""R\xe9";
-    m_units["\xb0""R\xe9"]        = QVariant::fromValue(static_cast<Complex*>(new Reaumur()));
-    m_units[i18n("r\xf8mer")]     = "\xb0""R\xf8";
-    m_units[i18n("r\xf8mer")]     = "\xb0""R\xf8";
-    m_units[i18n("romer")]        = "\xb0""R\xf8";
-    m_units[i18n("romers")]       = "\xb0""R\xf8";
-    m_units["Ro"]                 = "\xb0""R\xf8";
-    m_units["R\xf8"]              = "\xb0""R\xf8";
-    m_units["\xb0""R\xf8"]        = QVariant::fromValue(static_cast<Complex*>(new Romer()));
-}
-
-QString Temperature::name() const
-{
-    return i18n("Temperature");
+    U(i18n("kelvin"), i18n("kelvins"), "K", 1.0, );
+    U(i18n("celsius"), i18n("celsiuses"), "\xb0""C", new Celsius(), << "C");
+    U(i18n("fahrenheit"), i18n("fahrenheits"), "\xb0""F", new Fahrenheit(), << "F");
+    U(i18n("rankine"), i18n("rankines"), "\xb0""R", 5.0 / 9.0, << "R");
+    U(i18n("delisle"), i18n("delisles"), "\xb0""De", new Delisle(), << "De");
+    U(i18n("newton"), i18n("newtons"), "\xb0""N", new Newton(), << "N");
+    U(i18n("r\xe9""aumur"), i18n("r\xe9""aumurs"), "\xb0""R\xe9", new Reaumur(),
+        << i18n("reaumur") << i18n("reaumurs") << "Re" << "R\xe9");
+    U(i18n("r\xf8mer"), i18n("r\xf8mer"), "\xb0""R\xf8", new Romer(),
+        << i18n("romer") << i18n("romers") << "Ro" << "R\xf8");
 }

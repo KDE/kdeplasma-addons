@@ -4,7 +4,6 @@ set(conversion_LIB_SRCS
     converter.cpp
     value.cpp
     unit.cpp
-    simpleunit.cpp
     length.cpp
     area.cpp
     volume.cpp

@@ -27,8 +27,8 @@
 #include "pressure.h"
 #include "energy.h"
 #include "currency.h"
-
 #include <KGlobal>
+#include <KDebug>
 
 namespace Conversion
 {
@@ -82,9 +82,6 @@ Value Converter::convert(const Value& value, const QString& toUnit)
 {
     UnitCategory* unit = categoryForUnit(value.unit());
     if (!unit) {
-        return Value();
-    }
-    if (!toUnit.isEmpty() && !unit->hasUnit(toUnit)) {
         return Value();
     }
     return unit->convert(value, toUnit);

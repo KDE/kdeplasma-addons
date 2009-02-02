@@ -19,13 +19,12 @@
 #ifndef MASS_H
 #define MASS_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Mass : public SimpleUnit
+class Mass : public Conversion::UnitCategory
 {
 public:
     Mass(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

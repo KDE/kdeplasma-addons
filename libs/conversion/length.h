@@ -18,13 +18,12 @@
 #ifndef LENGTH_H
 #define LENGTH_H
 
-#include "simpleunit.h"
+#include "unit.h"
 
-class Length : public SimpleUnit
+class Length : public Conversion::UnitCategory
 {
 public:
     Length(QObject* parent = 0);
-    virtual QString name() const;
 };
 
 #endif

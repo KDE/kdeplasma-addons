@@ -19,26 +19,14 @@
 #include <KLocale>
 
 Energy::Energy(QObject* parent)
-: SimpleUnit(parent)
+: Conversion::UnitCategory(parent)
 {
     setObjectName("energy");
+    setName(i18n("Energy"));
+    setDefaultUnit("J");
+    addSIUnit(defaultUnit(), i18n("joule"), i18n("joules"));
 
-    m_default = "J";
-
-    addSIUnit(m_default, i18n("joule"), i18n("joules"));
-
-    m_units[i18n("electronvolt")]  = "eV";
-    m_units[i18n("electronvolts")] = "eV";
-    m_units["eV"]                  = 1.60217653E-19;
-    m_units[i18n("rydberg")]       = "Ry";
-    m_units[i18n("rydbergs")]      = "Ry";
-    m_units["Ry"]                  = 2.179872E-18;
-    m_units[i18n("kilocalorie")]   = "kcal";
-    m_units[i18n("kilocalories")]  = "kcal";
-    m_units["kcal"]                = 4186.8;
-}
-
-QString Energy::name() const
-{
-    return i18n("Energy");
+    U(i18n("electronvolt"), i18n("electronvolts"), "eV", 1.60217653E-19, );
+    U(i18n("rydberg"), i18n("rydbergs"), "Ry", 2.179872E-18, );
+    U(i18n("kilocalorie"), i18n("kilocalories"), "kcal", 4186.8, );
 }
