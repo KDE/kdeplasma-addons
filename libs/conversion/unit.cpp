@@ -219,9 +219,7 @@ void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const
         double d = decimals[i] / shift;
         for (uint j = 1; j < multiplier; ++j) {
             d *= decimals[i];
-            kDebug() << j << d;
         }
-        kDebug() << prefix + prefixes[i] + single << list << d;
         new Unit(this, prefix + prefixes[i] + single, prefix + prefixes[i] + plural,
                  symbols[i] + symbol, d, list);
     }
