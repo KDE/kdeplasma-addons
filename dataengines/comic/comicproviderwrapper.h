@@ -119,6 +119,7 @@ class ComicProviderWrapper : public QObject
         Q_ENUMS( IdentifierType )
         Q_ENUMS( RequestType )
         Q_ENUMS( PositionType )
+        Q_PROPERTY( bool identifierSpecified READ identifierSpecified )
         Q_PROPERTY( QString textCodec READ textCodec WRITE setTextCodec )
         Q_PROPERTY( QString comicAuthor READ comicAuthor WRITE setComicAuthor )
         Q_PROPERTY( QString websiteUrl READ websiteUrl WRITE setWebsiteUrl )
@@ -156,6 +157,7 @@ class ComicProviderWrapper : public QObject
         void pageRetrieved( int id, const QByteArray &data );
         void pageError( int id, const QString &message );
 
+        bool identifierSpecified() const;
         QString textCodec() const;
         void setTextCodec( const QString &textCodec );
         QString comicAuthor() const;
@@ -224,6 +226,7 @@ class ComicProviderWrapper : public QObject
         QVariant mFirstIdentifier;
         QVariant mLastIdentifier;
         int mRequests;
+        bool mIdentifierSpecified;
 };
 
 #endif

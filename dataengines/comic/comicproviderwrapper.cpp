@@ -245,7 +245,8 @@ ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
       mProvider( parent ),
       mKrossImage( 0 ),
       mPackage( 0 ),
-      mRequests( 0 )
+      mRequests( 0 ),
+      mIdentifierSpecified( false )
 {
     QTimer::singleShot( 0, this, SLOT( init() ) );
 }
@@ -280,6 +281,7 @@ void ComicProviderWrapper::init()
                     mAction->trigger();
                     mFunctions = mAction->functionNames();
 
+                    mIdentifierSpecified = !mProvider->isCurrent();
                     setIdentifierToDefault();
                     callFunction( "init" );
                 }
@@ -367,21 +369,24 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
             *identifier = mFirstIdentifier;
         }
         if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toDate() > mLastIdentifier.toDate() ) {
+             ( !mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate() ) {
             *identifier = mLastIdentifier;
         }
         break;
     case NumberIdentifier:
-        //if the identifier is 0 make it the lastIdentifier
         if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toInt() < mFirstIdentifier.toInt() && identifier->toInt() ) {
+             identifier->toInt() < mFirstIdentifier.toInt() ) {
             *identifier = mFirstIdentifier;
         } else if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-           ( identifier->toInt() > mLastIdentifier.toInt() || ( identifier->toInt() == 0 ) ) ) {
+           ( !mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt() ) ) {
             *identifier = mLastIdentifier;
         }
         break;
     case StringIdentifier:
+        if ( !mLastIdentifier.isNull() && !mLastIdentifier.toString().isEmpty() &&
+             !mIdentifierSpecified ) {
+            *identifier = mLastIdentifier;
+        }
         break;
     }
 }
@@ -401,6 +406,11 @@ void ComicProviderWrapper::setIdentifierToDefault()
         mIdentifier = mProvider->requestedString();
         break;
     }
+}
+
+bool ComicProviderWrapper::identifierSpecified() const
+{
+    return mIdentifierSpecified;
 }
 
 QString ComicProviderWrapper::textCodec() const
