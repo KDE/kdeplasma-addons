@@ -150,6 +150,7 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     speedComboBox->addItem(i18n("Knots kt"), "kt");
     speedComboBox->addItem(i18n("Beaufort scale bft"), "bft");
     connect(changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
+    connect(updateIntervalSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateInterval(int)));
 }
 
 void WeatherConfig::changePressed()
@@ -180,6 +181,7 @@ void WeatherConfig::setSource(const QString& source)
 void WeatherConfig::setUpdateInterval(int interval)
 {
     updateIntervalSpinBox->setValue(interval);
+    updateIntervalSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", interval));
 }
 
 void WeatherConfig::setTemperatureUnit(const QString& unit)

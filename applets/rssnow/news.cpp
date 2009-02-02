@@ -176,8 +176,8 @@ void News::createConfigurationInterface(KConfigDialog *parent)
 void News::updateSpinBoxSuffix()
 {
     ui.maxAge->setSuffix(i18np(" hour", " hours", ui.maxAge->value()));
-    ui.switchInterval->setSuffix(i18np(" second", " seconds", ui.switchInterval->value()));
-    ui.intervalSpinBox->setSuffix(i18np(" minute", " minutes", ui.intervalSpinBox->value()));
+    ui.switchInterval->setSuffix(QString(" ") + i18np("second", "seconds", ui.switchInterval->value()));
+    ui.intervalSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", ui.intervalSpinBox->value()));
 }
 
 void News::slotChangeText( const QString& text )

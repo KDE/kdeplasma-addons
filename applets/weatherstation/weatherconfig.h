@@ -57,7 +57,6 @@ public:
 
     void setDataEngine(Plasma::DataEngine* dataengine);
     void setSource(const QString& source);
-    void setUpdateInterval(int interval);
     void setTemperatureUnit(const QString& unit);
     void setPressureUnit(const QString& unit);
     void setSpeedUnit(const QString& unit);
@@ -67,6 +66,9 @@ public:
     QString temperatureUnit();
     QString pressureUnit();
     QString speedUnit();
+
+public slots:
+    void setUpdateInterval(int interval);
 
 protected slots:
     void changePressed();
