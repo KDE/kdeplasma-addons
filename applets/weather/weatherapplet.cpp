@@ -68,7 +68,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
     m_titleFrame = 0;
     m_setupLayout = 0;
     m_optionChanged = false;
-    m_currentSource.clear();
     setPopupIcon("weather-not-available");
 }
 
@@ -256,7 +255,6 @@ void WeatherApplet::getValidation()
         foreach (const QString& source, weatherEngine->sources()) {
             if (source != "ions") {
                 weatherEngine->disconnectSource(source, this);
-                m_extraData.clear();
             }
         }
 
@@ -446,6 +444,7 @@ void WeatherApplet::validate(const QString& source, const QVariant& data)
         if (tokens[2] == QString("single") || tokens[2] == QString("multiple")) {
             m_activeValidation = source;
             m_items.clear();
+            m_extraData.clear();
 
             foreach(const QString& val, tokens) {
                 if (val.contains("place")) {
@@ -486,7 +485,6 @@ void WeatherApplet::validate(const QString& source, const QVariant& data)
         KMessageBox::error(0, i18n("The applet was not able to contact the server, please try again later"));
         return;
     } else {
-        m_currentSource = source;
         KMessageBox::error(0, i18n("The place '%1' is not valid. The data source is not able to find this place.", tokens[3]), i18n("Invalid Place"));
         return;
     }
@@ -1218,7 +1216,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
             }
        }
     } else {
-        m_currentSource.clear();
         m_currentData = data;
         //setVisibleLayout(true);
         //setBusy(true);
