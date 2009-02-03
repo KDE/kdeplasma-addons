@@ -70,8 +70,8 @@ Temperature::Temperature(QObject* parent)
     U(i18n("rankine"), i18n("rankines"), "\xb0""R", 5.0 / 9.0, << "R");
     U(i18n("delisle"), i18n("delisles"), "\xb0""De", new Delisle(), << "De");
     U(i18n("newton"), i18n("newtons"), "\xb0""N", new Newton(), << "N");
-    U(i18n("r\xe9""aumur"), i18n("r\xe9""aumurs"), "\xb0""R\xe9", new Reaumur(),
+    U(i18n("réaumur"), i18n("réaumurs"), "\xb0""R\xe9", new Reaumur(),
         << i18n("reaumur") << i18n("reaumurs") << "Re" << "R\xe9");
-    U(i18n("r\xf8mer"), i18n("r\xf8mer"), "\xb0""R\xf8", new Romer(),
+    U(i18n("rømer"), i18n("rømer"), "\xb0""R\xf8", new Romer(),
         << i18n("romer") << i18n("romers") << "Ro" << "R\xf8");
 }
