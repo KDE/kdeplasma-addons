@@ -35,8 +35,7 @@ public:
     {
     };
     QString name;
-    QString defaultUnit;
-    QStringList unitNames;
+    Unit* defaultUnit;
     QMap<QString, Unit*> unitMap;
     QString description;
     KUrl url;
@@ -52,9 +51,9 @@ UnitCategory::~UnitCategory()
 {
 }
 
-QStringList UnitCategory::units() const
+QList<Unit*> UnitCategory::units() const
 {
-    return d->unitNames;
+    return findChildren<Unit*>();
 }
 
 QStringList UnitCategory::allUnits() const
@@ -69,10 +68,18 @@ bool UnitCategory::hasUnit(const QString &unit) const
 
 Conversion::Value UnitCategory::convert(const Conversion::Value& value, const QString& toUnit)
 {
-    if ((toUnit.isEmpty() || d->unitMap.keys().contains(toUnit)) && value.unit().isValid()) {
-        const Unit* to = d->unitMap[toUnit.isEmpty() ? defaultUnit() : toUnit];
-        double v = to->fromDefault(value.unit().toDefault(value.number()));
-        return Conversion::Value(v, to);
+    if ((toUnit.isEmpty() || d->unitMap.keys().contains(toUnit)) && value.unit()->isValid()) {
+        const Unit* to = toUnit.isEmpty() ? defaultUnit() : d->unitMap[toUnit];
+        return convert(value, to);
+    }
+    return Value();
+}
+
+Conversion::Value UnitCategory::convert(const Conversion::Value& value, const Unit* toUnit)
+{
+    if (toUnit) {
+        double v = toUnit->fromDefault(value.unit()->toDefault(value.number()));
+        return Conversion::Value(v, toUnit);
     }
     return Value();
 }
@@ -118,14 +125,12 @@ void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const
         for (uint j = 1; j < multiplier; ++j) {
             d *= decimals[i];
         }
-        new Unit(this, prefix + prefixes[i] + single, prefix + prefixes[i] + plural,
-                 symbols[i] + symbol, d, list);
+        Unit* u = new Unit(this, prefix + prefixes[i] + single, prefix + prefixes[i] + plural,
+                           symbols[i] + symbol, d, list);
+        if (prefixes[i].isEmpty()) {
+            setDefaultUnit(u);
+        }
     }
-}
-
-void UnitCategory::addUnitName(const QString& name)
-{
-    d->unitNames << name;
 }
 
 void UnitCategory::addUnitMapValues(Unit* unit, const QStringList& names)
@@ -153,12 +158,12 @@ void UnitCategory::setName(const QString& name)
     d->name = name;
 }
 
-void UnitCategory::setDefaultUnit(const QString& defaultUnit)
+void UnitCategory::setDefaultUnit(Unit* defaultUnit)
 {
     d->defaultUnit = defaultUnit;
 }
 
-QString UnitCategory::defaultUnit() const
+Unit* UnitCategory::defaultUnit() const
 {
     return d->defaultUnit;
 }

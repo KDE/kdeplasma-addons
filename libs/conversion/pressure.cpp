@@ -25,9 +25,8 @@ Pressure::Pressure(QObject* parent)
 {
     setObjectName("pressure");
     setName(i18n("Pressure"));
-    setDefaultUnit("Pa");
 
-    addSIUnit(defaultUnit(), i18nc("pressure unit","pascal"), i18nc("pressure unit","pascals"));
+    addSIUnit("Pa", i18nc("pressure unit","pascal"), i18nc("pressure unit","pascals"));
     U(i18nc("pressure unit","bar"), i18nc("pressure unit","bars"), i18nc("pressure unit","bar"), 100000.0, );
     U(i18nc("pressure unit","millibar"), i18nc("pressure unit","millibars"),
         i18nc("pressure unit millibar","mbar"), 100.0, << "mb");

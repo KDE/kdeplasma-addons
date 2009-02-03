@@ -25,7 +25,6 @@ Volume::Volume(QObject* parent)
 {
     setObjectName("volume");
     setName(i18n("Volume"));
-    setDefaultUnit("m\xb3");
 
     addSIUnit("m\xb3", i18nc("area unit","meter"), i18nc("area unit","meters"), 3);
     addSIUnit("l", i18n("liter"), i18n("liters"), 1, 1000.0);

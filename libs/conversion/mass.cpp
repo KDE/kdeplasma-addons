@@ -26,8 +26,7 @@ Mass::Mass(QObject* parent)
 {
     setObjectName("mass");
     setName(i18n("Mass"));
-    setDefaultUnit("g");
-    addSIUnit(defaultUnit(), i18nc("mass unit", "gram"), i18n("grams"));
+    addSIUnit("g", i18nc("mass unit", "gram"), i18n("grams"));
 
     U(i18nc("mass unit", "ton"), i18nc("mass unit", "tons"), "t", 1000000.0,
         << i18nc("mass unit", "tonne"));

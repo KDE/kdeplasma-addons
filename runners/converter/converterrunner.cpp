@@ -200,12 +200,12 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
             context.addMatch(term, match);
         }
     }
-    if (v.isValid() && !v.unit().category()->description().isEmpty()) {
+    if (v.isValid() && !v.unit()->category()->description().isEmpty()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
         match.setIcon(KIcon("document-open-remote"));
-        match.setText(v.unit().category()->description());
-        match.setData(v.unit().category()->url().prettyUrl());
+        match.setText(v.unit()->category()->description());
+        match.setData(v.unit()->category()->url().prettyUrl());
         context.addMatch(term, match);
     }
 }

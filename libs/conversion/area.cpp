@@ -25,8 +25,6 @@ Area::Area(QObject* parent)
 {
     setObjectName("area");
     setName(i18n("Area"));
-    setDefaultUnit("m\xb2");
-
     addSIUnit("m\xb2", i18nc("area unit","meter"), i18nc("area unit","meters"), 2);
     addUnitMapValues(unit("hm\xb2"), QStringList() << i18nc("area unit", "hectares")
             << i18nc("area unit", "hectare"));

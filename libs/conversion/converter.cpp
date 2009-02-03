@@ -82,7 +82,7 @@ Converter* Converter::self()
 
 Value Converter::convert(const Value& value, const QString& toUnit) const
 {
-    UnitCategory* category = value.unit().category();
+    UnitCategory* category = value.unit()->category();
     if (!category) {
         return Value();
     }

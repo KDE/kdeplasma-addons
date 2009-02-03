@@ -26,9 +26,8 @@ Length::Length(QObject* parent)
 {
     setObjectName("length");
     setName(i18n("Length"));
-    setDefaultUnit("m");
 
-    addSIUnit(defaultUnit(), i18nc("length unit","meter"), i18nc("length unit","meters"));
+    addSIUnit("m", i18nc("length unit","meter"), i18nc("length unit","meters"));
     U(i18nc("length unit","inch"), i18nc("length unit","inches"),
         i18nc("length unit: inch","in"), 0.0254, << "\"");
     U(i18nc("length unit","foot"), i18nc("length unit","feet"),

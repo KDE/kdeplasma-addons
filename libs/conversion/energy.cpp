@@ -25,8 +25,7 @@ Energy::Energy(QObject* parent)
 {
     setObjectName("energy");
     setName(i18n("Energy"));
-    setDefaultUnit("J");
-    addSIUnit(defaultUnit(), i18n("joule"), i18n("joules"));
+    addSIUnit("J", i18n("joule"), i18n("joules"));
 
     U(i18n("electronvolt"), i18n("electronvolts"), "eV", 1.60217653E-19, );
     U(i18n("rydberg"), i18n("rydbergs"), "Ry", 2.179872E-18, );

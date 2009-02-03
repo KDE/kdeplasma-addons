@@ -32,9 +32,8 @@ Speed::Speed(QObject* parent)
 {
     setObjectName("speed");
     setName(i18n("Speed"));
-    setDefaultUnit("m/s");
 
-    U(i18n("meter per second"), i18n("meters per second"), "m/s", 1.0, << "ms");
+    setDefaultUnit(U(i18n("meter per second"), i18n("meters per second"), "m/s", 1.0, << "ms"));
     U(i18n("kilometer per second"), i18n("kilometers per second"), "km/h", 1.0 / 3.6, << "kmh");
     U(i18n("mile per hour"), i18n("miles per hour"), "mph", 0.44704, );
     U(i18n("foot per second"), i18n("feet per second"), i18n("ft/s"), 0.3048, << "ft/sec" << "fps");

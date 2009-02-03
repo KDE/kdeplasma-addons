@@ -34,7 +34,6 @@ class PLASMACONVERSION_EXPORT UnitCategory : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name)
-    Q_PROPERTY(QStringList units READ units)
 public:
     explicit UnitCategory(QObject* parent = 0);
     virtual ~UnitCategory();
@@ -65,7 +64,7 @@ public:
      *
      * @return default unit.
      **/
-    QString defaultUnit() const;
+    Unit* defaultUnit() const;
 
     /**
      * Check if unit category has a unit.
@@ -84,9 +83,9 @@ public:
     /**
      * Return units in this category.
      *
-     * @return Translated list of units.
+     * @return list of units.
      **/
-    QStringList units() const;
+    QList<Unit*> units() const;
 
     /**
      * Return all unit names, short names and unit synonyms in this category.
@@ -102,13 +101,14 @@ public:
      * @param toUnit unit to convert to. If empty default unit is used.
      * @return converted value
      **/
-    virtual Value convert(const Value& value, const QString& toUnit = QString());
+    Value convert(const Value& value, const QString& toUnit = QString());
+    virtual Value convert(const Value& value, const Unit* toUnit);
 
 protected:
     void addSIUnit(const QString& symbol, const QString& single, const QString& plural,
                    uint multiplier = 1, double shift = 1.0);
     void setName(const QString& name);
-    void setDefaultUnit(const QString& defaultUnit);
+    void setDefaultUnit(Unit* defaultUnit);
     void addUnitName(const QString& name);
     void addUnitMapValues(Unit* unit, const QStringList& names);
     void setDescription(const QString& desc);

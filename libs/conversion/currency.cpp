@@ -35,11 +35,10 @@ Currency::Currency(QObject* parent)
 {
     setObjectName("currency");
     setName(i18n("Currency"));
-    setDefaultUnit("EUR");
     setDescription("From ECB");
     setUrl(KUrl("http://www.ecb.int/stats/exchange/eurofxref/html/index.en.html"));
 
-    U(i18n("euro"), i18n("euros"), defaultUnit(), 1.0, << QString::fromUtf8("€"));
+    setDefaultUnit(U(i18n("euro"), i18n("euros"), "EUR", 1.0, << QString::fromUtf8("€")));
 
     // Static rates
     U(i18n("schilling"), i18n("schillings"), "ATS", 1.0 / 13.7603, << i18n("austria"));
@@ -98,7 +97,7 @@ Currency::Currency(QObject* parent)
     m_update = true;
 }
 
-Conversion::Value Currency::convert(const Conversion::Value& value, const QString& to)
+Conversion::Value Currency::convert(const Conversion::Value& value, const Conversion::Unit* to)
 {
     static QMutex mutex;
 

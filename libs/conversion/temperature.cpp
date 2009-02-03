@@ -63,9 +63,8 @@ Temperature::Temperature(QObject* parent)
 {
     setObjectName("temperature");
     setName(i18n("Temperature"));
-    setDefaultUnit("K");
 
-    U(i18n("kelvin"), i18n("kelvins"), "K", 1.0, );
+    setDefaultUnit(U(i18n("kelvin"), i18n("kelvins"), "K", 1.0, ));
     U(i18n("celsius"), i18n("celsiuses"), "\xb0""C", new Celsius(), << "C");
     U(i18n("fahrenheit"), i18n("fahrenheits"), "\xb0""F", new Fahrenheit(), << "F");
     U(i18n("rankine"), i18n("rankines"), "\xb0""R", 5.0 / 9.0, << "R");

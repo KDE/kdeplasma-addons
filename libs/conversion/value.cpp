@@ -51,11 +51,6 @@ Value::Value(double n, const Unit* u)
 {
 }
 
-Value::Value(double n, const Unit& u)
-: d(new Value::Private(n, &u))
-{
-}
-
 Value::Value(double n, const QString& u)
 : d(new Value::Private(n, Conversion::Converter::self()->unit(u)))
 {
@@ -92,18 +87,18 @@ double Value::number() const
     return d->number;
 }
 
-const Unit& Value::unit() const
+const Unit* Value::unit() const
 {
     if (!d->unit) {
         d->unit = new Unit();
     }
-    return *d->unit;
+    return d->unit;
 }
 
 Value& Value::operator=(const Value& value)
 {
     d->number = value.number();
-    d->unit = &value.unit();
+    d->unit = value.unit();
     return *this;
 }
 

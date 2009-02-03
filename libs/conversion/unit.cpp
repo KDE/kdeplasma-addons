@@ -59,7 +59,6 @@ Unit::Unit(QObject* parent, const QString& singular, const QString& plural, cons
 {
     UnitCategory* uc = category();
     if (uc) {
-        uc->addUnitName(singular);
         uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
     }
     d->multiplier = multiplier;
@@ -75,7 +74,6 @@ Unit::Unit(QObject* parent, const QString& singular, const QString& plural, cons
 {
     UnitCategory* uc = category();
     if (uc) {
-        uc->addUnitName(singular);
         uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
     }
     d->complex = complex;

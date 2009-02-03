@@ -26,7 +26,9 @@ class Currency : public Conversion::UnitCategory
 {
 public:
     Currency(QObject* parent = 0);
-    virtual Conversion::Value convert(const Conversion::Value& value, const QString& to);
+    virtual Conversion::Value convert(const Conversion::Value& value,
+                                      const Conversion::Unit* to);
+
 private:
     QString m_cache;
     bool m_update;
