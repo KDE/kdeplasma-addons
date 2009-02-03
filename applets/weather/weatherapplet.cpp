@@ -548,10 +548,12 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     connect(uui.tempOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
     connect(uui.pressureOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
     connect(uui.visibilityOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
+    connect(ui.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
     KConfigGroup generalConfig = config();
 
     ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
+    emit updateSpinBoxSuffix(m_weatherUpdateTime);
     ui.locationEdit->clear();
     ui.validatedPlaceLabel->setText(m_activePlace);
     uui.windOptionsComboList->setCurrentIndex(uui.windOptionsComboList->findData(m_weatherWindFormat));
@@ -561,6 +563,10 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     m_optionChanged = false;
 }
 
+void WeatherApplet::updateSpinBoxSuffix(int interval)
+{
+    ui.weatherUpdateSpin->setSuffix(QString(" ") + i18np("minute", "minutes", interval));
+}
 
 void WeatherApplet::showAddPlaceDialog(const QStringList& tokens)
 {

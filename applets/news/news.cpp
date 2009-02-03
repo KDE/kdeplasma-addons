@@ -227,7 +227,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
     connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
-    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
+    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
     m_defaultFeeds = akregatorFeeds();
     feedsUi.feedComboBox->clear();
@@ -238,7 +238,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     }
 
     ui.intervalSpinBox->setValue(m_interval);
-    emit updateSpinBoxSuffix();
+    emit updateSpinBoxSuffix(m_interval);
 
     ui.timestampCheckBox->setChecked(m_showTimestamps);
     ui.titlesCheckBox->setChecked(m_showTitles);
@@ -247,9 +247,9 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     feedsUi.feedList->addItems(m_feeds);
 }
 
-void News::updateSpinBoxSuffix()
+void News::updateSpinBoxSuffix(int interval)
 {
-    ui.intervalSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", ui.intervalSpinBox->value()));
+    ui.intervalSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", interval));
 }
 
 void News::feedTextChanged(const QString& text)
