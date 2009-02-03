@@ -1,9 +1,13 @@
 [Desktop Entry]
 Name=Microblogging
+Name[et]=Mikroblogimine
 Name[ga]=Micreabhlagadóireacht
+Name[pt]=Micro-blog
+Name[pt_BR]=Micro-blog
 Name[sv]=Mikrowebbjournal
 Name[tr]=Mikro günlük
 Name[uk]=Міні-журнал
+Name[zh_CN]=微博客
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im

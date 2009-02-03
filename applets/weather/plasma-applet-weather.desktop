@@ -1,25 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast
-Name[cs]=Předpověď počasí
-Name[ga]=Réamhaisnéis Aimsire
-Name[gl]=Parte meteorolóxico
-Name[lt]=Orų prognozė
-Name[pt]=Previsão Meteorológica
-Name[pt_BR]=Previsão do tempo
-Name[ru]=Прогноз погоды
-Name[sv]=Väderrapport
-Name[uk]=Прогноз погоди
 Comment=Displays Weather information
-Comment[cs]=Zobrazit informace o počasí
-Comment[ga]=Taispeáin faisnéis aimsire
-Comment[gl]=Mostra información meteorolóxica
-Comment[lt]=Rodo informacija apie orus
-Comment[pt]=Mostra informações meteorológicas
-Comment[pt_BR]=Exibe informações meteorológicas
-Comment[ru]=Показать информацию о погоде
-Comment[sv]=Visar information om vädret
-Comment[uk]=Показує інформацію про погоду
 Icon=weather-clear
 Type=Service
 ServiceTypes=Plasma/Applet
