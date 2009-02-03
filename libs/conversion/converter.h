@@ -45,7 +45,7 @@ public:
      * @param toUnit unit to convert to. If empty default unit is used.
      * @return converted value
      **/
-    Value convert(const Value& value, const QString& toUnit = QString());
+    Value convert(const Value& value, const QString& toUnit = QString()) const;
 
     /**
      * Find unit category for unit.
@@ -53,7 +53,15 @@ public:
      * @param unit unit to find category for.
      * @return unit category for unit
      **/
-    UnitCategory* categoryForUnit(const QString& unit);
+    UnitCategory* categoryForUnit(const QString& unit) const;
+
+    /**
+     * Find unit for string unit.
+     *
+     * @param unit unit string to find unit for.
+     * @return unit for string unit
+     **/
+    Unit* unit(const QString& unit) const;
 
     /**
      * Find unit category.
@@ -61,14 +69,14 @@ public:
      * @param category name of the category to find (length, area, mass, etc.).
      * @return unit category named category or 0.
      **/
-    UnitCategory* category(const QString& category);
+    UnitCategory* category(const QString& category) const;
 
     /**
      * Returns a list of all unit categories.
      *
      * @return list of unit categories.
      **/
-    QList<UnitCategory*> categories();
+    QList<UnitCategory*> categories() const;
 
 private:
     friend class ConverterSingleton;

@@ -20,13 +20,14 @@
 #ifndef CONVERSION_UNIT_H
 #define CONVERSION_UNIT_H
 
-#include "value.h"
 #include <QString>
 #include <QStringList>
 #include "plasmaconversion_export.h"
 
 namespace Conversion
 {
+
+class UnitCategory;
 
 class PLASMACONVERSION_EXPORT Complex
 {
@@ -40,6 +41,7 @@ public:
 class PLASMACONVERSION_EXPORT Unit : public QObject
 {
 public:
+    Unit();
     explicit Unit(QObject* parent, const QString& singular, const QString& plural,
                   const QString& symbol, double multiplier,
                   const QStringList& synonyms = QStringList());
@@ -63,6 +65,11 @@ public:
     QString symbol() const;
 
     /**
+     * @return singular or plural based on value.
+     **/
+    QString toString(double value) const;
+
+    /**
      * @return unit multiplier.
      **/
     double multiplier() const;
@@ -71,6 +78,16 @@ public:
      * Set unit multiplier.
      **/
     void setMultiplier(double multiplier);
+
+    /**
+     * @return unit category.
+     **/
+    UnitCategory* category() const;
+
+    /**
+     * @return if unit is valid.
+     **/
+    bool isValid() const;
 
 protected:
     double toDefault(double value) const;

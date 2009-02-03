@@ -80,16 +80,16 @@ Converter* Converter::self()
     return &s_instance->self;
 }
 
-Value Converter::convert(const Value& value, const QString& toUnit)
+Value Converter::convert(const Value& value, const QString& toUnit) const
 {
-    UnitCategory* unit = categoryForUnit(value.unit());
-    if (!unit) {
+    UnitCategory* category = value.unit().category();
+    if (!category) {
         return Value();
     }
-    return unit->convert(value, toUnit);
+    return category->convert(value, toUnit);
 }
 
-UnitCategory* Converter::categoryForUnit(const QString& unit)
+UnitCategory* Converter::categoryForUnit(const QString& unit) const
 {
     foreach (UnitCategory* u, categories()) {
         if (u->hasUnit(unit)) {
@@ -99,7 +99,18 @@ UnitCategory* Converter::categoryForUnit(const QString& unit)
     return 0;
 }
 
-UnitCategory* Converter::category(const QString& category)
+Unit* Converter::unit(const QString& unit) const
+{
+    foreach (UnitCategory* u, categories()) {
+        Unit* unitClass = u->unit(unit);
+        if (unitClass) {
+            return unitClass;
+        }
+    }
+    return 0;
+}
+
+UnitCategory* Converter::category(const QString& category) const
 {
     QList<UnitCategory*> units = findChildren<UnitCategory*>(category);
     if (!units.isEmpty()) {
@@ -108,7 +119,7 @@ UnitCategory* Converter::category(const QString& category)
     return 0;
 }
 
-QList<UnitCategory*> Converter::categories()
+QList<UnitCategory*> Converter::categories() const
 {
     return findChildren<UnitCategory*>();
 }

@@ -150,7 +150,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
 
 QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
 {
-    double v = value.number().toDouble();
+    double v = value.number();
     int mainDigits = (int)floor(log(fabs(v))) + 1;
     int precision = 0;
 
@@ -212,8 +212,8 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, cons
     QStringList result;
 
 
-    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number().toDouble();
-    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number().toDouble();
+    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number();
+    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number();
     qreal t;
 
     if (tendency.toLower() == "rising") {
@@ -222,7 +222,7 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, cons
         t = -0.75;
     } else {
         t = Conversion::Converter::self()->convert(
-                Conversion::Value(tendency, pressure.unit()), "kPa").number().toDouble();
+                Conversion::Value(tendency.toDouble(), pressure.unit()), "kPa").number();
     }
     p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 

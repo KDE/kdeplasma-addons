@@ -38,7 +38,8 @@ public:
     QString defaultUnit;
     QStringList unitNames;
     QMap<QString, Unit*> unitMap;
-
+    QString description;
+    KUrl url;
 };
 
 UnitCategory::UnitCategory(QObject* parent)
@@ -68,15 +69,10 @@ bool UnitCategory::hasUnit(const QString &unit) const
 
 Conversion::Value UnitCategory::convert(const Conversion::Value& value, const QString& toUnit)
 {
-    if ((toUnit.isEmpty() || d->unitMap.keys().contains(toUnit)) && d->unitMap.keys().contains(value.unit())) {
+    if ((toUnit.isEmpty() || d->unitMap.keys().contains(toUnit)) && value.unit().isValid()) {
         const Unit* to = d->unitMap[toUnit.isEmpty() ? defaultUnit() : toUnit];
-        const Unit* from = d->unitMap[value.unit()];
-        double v = to->fromDefault(from->toDefault(value.number().toDouble()));
-        if (v == 1.0) {
-            return Conversion::Value(v, to->singular());
-        } else {
-            return Conversion::Value(v, to->plural());
-        }
+        double v = to->fromDefault(value.unit().toDefault(value.number()));
+        return Conversion::Value(v, to);
     }
     return Value();
 }
@@ -165,6 +161,26 @@ void UnitCategory::setDefaultUnit(const QString& defaultUnit)
 QString UnitCategory::defaultUnit() const
 {
     return d->defaultUnit;
+}
+
+QString UnitCategory::description() const
+{
+    return d->description;
+}
+
+void UnitCategory::setDescription(const QString& description)
+{
+    d->description = description;
+}
+
+KUrl UnitCategory::url() const
+{
+    return d->url;
+}
+
+void UnitCategory::setUrl(const KUrl& url)
+{
+    d->url = url;
 }
 
 }

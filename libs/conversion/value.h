@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QVariant>
+#include "unit.h"
 #include "plasmaconversion_export.h"
 
 namespace Conversion
@@ -31,8 +32,12 @@ class PLASMACONVERSION_EXPORT Value
 {
 public:
     Value();
+    Value(double n, const Unit* u);
+    Value(double n, const Unit& u);
+    Value(double n, const QString& u);
     Value(const QVariant& n, const QString& u);
     ~Value();
+
     /**
      * Check if value is valid.
      *
@@ -50,22 +55,12 @@ public:
     /**
      * Number part of the value
      **/
-    QVariant number() const;
+    double number() const;
 
     /**
      * Unit part of the value
      **/
-    QString unit() const;
-
-    /**
-     * Set value description
-     **/
-    void setDescription(const QString& desc);
-
-    /**
-     * @return value description
-     **/
-    QString description() const;
+    const Unit& unit() const;
 
     Value& operator=(const Value&);
 

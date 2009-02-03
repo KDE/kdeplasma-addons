@@ -18,6 +18,8 @@
  */
 
 #include "value.h"
+#include "converter.h"
+#include <KDebug>
 
 namespace Conversion
 {
@@ -25,7 +27,7 @@ namespace Conversion
 class Value::Private
 {
 public:
-    Private(const QVariant& n = QVariant(), const QString& u = QString())
+    Private(double n = 0.0, const Unit* u = 0)
     : number(n)
     , unit(u)
     {
@@ -35,9 +37,8 @@ public:
     {
     };
 
-    QVariant number;
-    QString unit;
-    QString description;
+    double number;
+    const Unit* unit;
 };
 
 Value::Value()
@@ -45,50 +46,64 @@ Value::Value()
 {
 }
 
-Value::Value(const QVariant& n, const QString& u)
+Value::Value(double n, const Unit* u)
 : d(new Value::Private(n, u))
+{
+}
+
+Value::Value(double n, const Unit& u)
+: d(new Value::Private(n, &u))
+{
+}
+
+Value::Value(double n, const QString& u)
+: d(new Value::Private(n, Conversion::Converter::self()->unit(u)))
+{
+}
+
+Value::Value(const QVariant& n, const QString& u)
+: d(new Value::Private(n.toDouble(), Conversion::Converter::self()->unit(u)))
 {
 }
 
 Value::~Value()
 {
-   delete d;
+    if (d->unit->parent() == 0) {
+        delete d->unit;
+    }
+    delete d;
 }
 
 bool Value::isValid() const
 {
-    return (d->number.isValid() && !d->unit.isEmpty());
+    return (d->unit != 0 && d->unit->isValid());
 }
 
 QString Value::toString() const
 {
-    return d->number.toString() + ' ' + d->unit;
+    if (isValid()) {
+        return QString("%1 %2").arg(d->number).arg(d->unit->toString(d->number));
+    }
+    return QString();
 }
 
-QVariant Value::number() const
+double Value::number() const
 {
     return d->number;
 }
 
-QString Value::unit() const
+const Unit& Value::unit() const
 {
-    return d->unit;
-}
-
-QString Value::description() const
-{
-    return d->description;
-}
-
-void Value::setDescription(const QString& description)
-{
-    d->description = description;
+    if (!d->unit) {
+        d->unit = new Unit();
+    }
+    return *d->unit;
 }
 
 Value& Value::operator=(const Value& value)
 {
     d->number = value.number();
-    d->unit = value.unit();
+    d->unit = &value.unit();
     return *this;
 }
 

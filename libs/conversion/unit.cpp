@@ -46,12 +46,18 @@ public:
     const Complex* complex;
 };
 
+Unit::Unit()
+: QObject(0)
+, d(new Unit::Private)
+{
+}
+
 Unit::Unit(QObject* parent, const QString& singular, const QString& plural, const QString& symbol,
            double multiplier, const QStringList& synonyms)
 : QObject(parent)
 , d(new Unit::Private)
 {
-    UnitCategory* uc = dynamic_cast<UnitCategory*>(parent);
+    UnitCategory* uc = category();
     if (uc) {
         uc->addUnitName(singular);
         uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
@@ -67,7 +73,7 @@ Unit::Unit(QObject* parent, const QString& singular, const QString& plural, cons
 : QObject(parent)
 , d(new Unit::Private)
 {
-    UnitCategory* uc = dynamic_cast<UnitCategory*>(parent);
+    UnitCategory* uc = category();
     if (uc) {
         uc->addUnitName(singular);
         uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
@@ -80,6 +86,11 @@ Unit::Unit(QObject* parent, const QString& singular, const QString& plural, cons
 
 Unit::~Unit()
 {
+}
+
+UnitCategory* Unit::category() const
+{
+    return dynamic_cast<UnitCategory*>(parent());
 }
 
 QString Unit::singular() const
@@ -123,6 +134,19 @@ double Unit::fromDefault(double value) const
     } else {
         return value / d->multiplier;
     }
+}
+
+QString Unit::toString(double value) const
+{
+    if (value == 1.0) {
+        return singular();
+    }
+    return plural();
+}
+
+bool Unit::isValid() const
+{
+    return !d->singular.isEmpty();
 }
 
 }

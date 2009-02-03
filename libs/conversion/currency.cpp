@@ -36,6 +36,8 @@ Currency::Currency(QObject* parent)
     setObjectName("currency");
     setName(i18n("Currency"));
     setDefaultUnit("EUR");
+    setDescription("From ECB");
+    setUrl(KUrl("http://www.ecb.int/stats/exchange/eurofxref/html/index.en.html"));
 
     U(i18n("euro"), i18n("euros"), defaultUnit(), 1.0, << QString::fromUtf8("€"));
 
@@ -143,6 +145,5 @@ Conversion::Value Currency::convert(const Conversion::Value& value, const QStrin
         }
     }
     Conversion::Value v = Conversion::UnitCategory::convert(value, to);
-    v.setDescription("From ECB|http://www.ecb.int/stats/exchange/eurofxref/html/index.en.html");
     return v;
 }

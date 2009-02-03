@@ -24,6 +24,7 @@
 #include "unit.h"
 #include <QString>
 #include <QStringList>
+#include <KUrl>
 #include "plasmaconversion_export.h"
 
 namespace Conversion
@@ -44,6 +45,20 @@ public:
      * @return Translated name for category.
      **/
     QString name() const;
+
+    /**
+     * Set value description
+     **/
+
+    /**
+     * @return unit category description
+     **/
+    QString description() const;
+
+    /**
+     * @return unit category url for description
+     **/
+    KUrl url() const;
 
     /**
      * Returns default unit.
@@ -96,6 +111,8 @@ protected:
     void setDefaultUnit(const QString& defaultUnit);
     void addUnitName(const QString& name);
     void addUnitMapValues(Unit* unit, const QStringList& names);
+    void setDescription(const QString& desc);
+    void setUrl(const KUrl& url);
 
 private:
     friend class Unit;
