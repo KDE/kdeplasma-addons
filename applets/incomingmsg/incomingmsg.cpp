@@ -385,9 +385,14 @@ void IncomingMsg::constraintsEvent(Plasma::Constraints constraints)
                     constraints & Plasma::FormFactorConstraint)) {
         QRectF layoutRectF = mLayout->geometry();
         QRectF appletRectF = geometry();
-        if (layoutRectF.height() > appletRectF.height()) {
-            appletRectF.setHeight(layoutRectF.height() + 10);
-            setGeometry(appletRectF);
+        appletRectF.setHeight(layoutRectF.height() + 10);
+
+        if (formFactor() == Plasma::Vertical) {
+            setMinimumSize(0, appletRectF.height());
+        } else if (formFactor() == Plasma::Horizontal) {
+            setMinimumSize(appletRectF.width(), 0);
+        } else if (layoutRectF.height() > appletRectF.height()) {
+            setMinimumSize(appletRectF.size());
         }
     }
 }
