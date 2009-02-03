@@ -20,7 +20,7 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Volume : public Conversion::UnitCategory
 {

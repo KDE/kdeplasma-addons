@@ -20,7 +20,7 @@
 #ifndef SPEED_H
 #define SPEED_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Speed : public Conversion::UnitCategory
 {

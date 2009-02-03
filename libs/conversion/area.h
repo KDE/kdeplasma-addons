@@ -20,7 +20,7 @@
 #ifndef AREA_H
 #define AREA_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Area : public Conversion::UnitCategory
 {

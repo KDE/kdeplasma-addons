@@ -21,7 +21,7 @@
 #ifndef MASS_H
 #define MASS_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Mass : public Conversion::UnitCategory
 {

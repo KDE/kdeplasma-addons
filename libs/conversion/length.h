@@ -20,7 +20,7 @@
 #ifndef LENGTH_H
 #define LENGTH_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Length : public Conversion::UnitCategory
 {

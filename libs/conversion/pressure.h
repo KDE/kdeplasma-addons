@@ -20,7 +20,7 @@
 #ifndef PRESSURE_H
 #define PRESSURE_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Pressure : public Conversion::UnitCategory
 {

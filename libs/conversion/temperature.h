@@ -20,7 +20,7 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Temperature : public Conversion::UnitCategory
 {

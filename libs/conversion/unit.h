@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CONVERSION_UNITCATEGORY_H
-#define CONVERSION_UNITCATEGORY_H
+#ifndef CONVERSION_UNIT_H
+#define CONVERSION_UNIT_H
 
 #include "value.h"
 #include <QString>
@@ -83,80 +83,6 @@ private:
 };
 
 #define U(n, p, s, m, sy) (new Conversion::Unit(this, n, p, s, m, QStringList() sy))
-
-class PLASMACONVERSION_EXPORT UnitCategory : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(QString name READ name)
-    Q_PROPERTY(QStringList units READ units)
-public:
-    explicit UnitCategory(QObject* parent = 0);
-    virtual ~UnitCategory();
-
-    /**
-     * Returns name for the unit category.
-     *
-     * @return Translated name for category.
-     **/
-    QString name() const;
-
-    /**
-     * Returns default unit.
-     *
-     * @return default unit.
-     **/
-    QString defaultUnit() const;
-
-    /**
-     * Check if unit category has a unit.
-     *
-     * @return True if unit is found
-     **/
-    bool hasUnit(const QString &unit) const;
-
-    /**
-     * Return unit for string.
-     *
-     * @return Pointer to unit class.
-     **/
-    Unit* unit(const QString& s) const;
-
-    /**
-     * Return units in this category.
-     *
-     * @return Translated list of units.
-     **/
-    QStringList units() const;
-
-    /**
-     * Return all unit names, short names and unit synonyms in this category.
-     *
-     * @return list of units.
-     **/
-    QStringList allUnits() const;
-
-    /**
-     * Convert value to another unit.
-     *
-     * @param value value to convert
-     * @param toUnit unit to convert to. If empty default unit is used.
-     * @return converted value
-     **/
-    virtual Value convert(const Value& value, const QString& toUnit = QString());
-
-protected:
-    void addSIUnit(const QString& symbol, const QString& single, const QString& plural,
-                   uint multiplier = 1, double shift = 1.0);
-    void setName(const QString& name);
-    void setDefaultUnit(const QString& defaultUnit);
-    void addUnitName(const QString& name);
-    void addUnitMapValues(Unit* unit, const QStringList& names);
-
-private:
-    friend class Unit;
-    class Private;
-    Private* const d;
-};
 
 } // Conversion namespace
 

@@ -20,7 +20,7 @@
 #ifndef ENERGY_H
 #define ENERGY_H
 
-#include "unit.h"
+#include "unitcategory.h"
 
 class Energy : public Conversion::UnitCategory
 {

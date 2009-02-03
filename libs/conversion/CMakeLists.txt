@@ -4,6 +4,7 @@ set(conversion_LIB_SRCS
     converter.cpp
     value.cpp
     unit.cpp
+    unitcategory.cpp
     length.cpp
     area.cpp
     volume.cpp
@@ -19,6 +20,7 @@ set(conversion_HEADERS
     converter.h
     value.h
     unit.h
+    unitcategory.h
     plasmaconversion_export.h
 )
 

@@ -23,7 +23,7 @@
 #include <KDebug>
 #include <KToolInvocation>
 #include <conversion/converter.h>
-#include <conversion/unit.h>
+#include <conversion/unitcategory.h>
 
 #define CONVERSION_CHAR '>'
 
