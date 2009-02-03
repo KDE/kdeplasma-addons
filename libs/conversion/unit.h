@@ -41,7 +41,7 @@ public:
 class PLASMACONVERSION_EXPORT Unit : public QObject
 {
 public:
-    Unit();
+    Unit(QObject* parent = 0);
     explicit Unit(QObject* parent, const QString& singular, const QString& plural,
                   const QString& symbol, double multiplier,
                   const QStringList& synonyms = QStringList());

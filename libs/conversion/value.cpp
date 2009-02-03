@@ -63,9 +63,6 @@ Value::Value(const QVariant& n, const QString& u)
 
 Value::~Value()
 {
-    if (d->unit->parent() == 0) {
-        delete d->unit;
-    }
     delete d;
 }
 
@@ -90,7 +87,7 @@ double Value::number() const
 const Unit* Value::unit() const
 {
     if (!d->unit) {
-        d->unit = new Unit();
+        d->unit = new Unit(Conversion::Converter::self());
     }
     return d->unit;
 }

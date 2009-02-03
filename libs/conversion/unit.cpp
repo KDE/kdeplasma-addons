@@ -46,8 +46,8 @@ public:
     const Complex* complex;
 };
 
-Unit::Unit()
-: QObject(0)
+Unit::Unit(QObject* parent)
+: QObject(parent)
 , d(new Unit::Private)
 {
 }
