@@ -650,15 +650,23 @@ void WeatherApplet::getWeather()
     }
 }
 
-QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = true)
+QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = true, bool degreesOnly = false)
 {
     if (rounded) {
         long tempNumber = qRound(WeatherUtils::convertTemperature(value.toDouble(), type, format));
         QString unitType = WeatherUtils::getUnitString(format, false);
-        return i18nc("temperature, unit", "%1%2", tempNumber, unitType);
+        if (degreesOnly) {
+            return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
+        } else {
+            return i18nc("temperature, unit", "%1%2", tempNumber, unitType);
+        }
     }
     else {
-        return i18nc("temperature, unit", "%1%2", QString::number(WeatherUtils::convertTemperature(value.toDouble(), type, format), 'f', 1), WeatherUtils::getUnitString(format, false));
+        if (degreesOnly) {
+            return i18nc("temperature, unit", "%1%2", QString::number(WeatherUtils::convertTemperature(value.toDouble(), type, format), 'f', 1), WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
+        } else {
+            return i18nc("temperature, unit", "%1%2", QString::number(WeatherUtils::convertTemperature(value.toDouble(), type, format), 'f', 1), WeatherUtils::getUnitString(format, false));
+        }
     }
 
     return QString();
@@ -876,13 +884,18 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (data["Windchill"] != "N/A" && data["Windchill"].toString().isEmpty() == false) {
        QStandardItem *dataWindchill = new QStandardItem();
-       dataWindchill->setText(i18nc("windchill, unit","Windchill: %1%2", data["Windchill"].toString(), QChar(176)));
+       
+       // Use temperature unit to convert windchill temperature we only show degrees symbol not actual temperature unit
+       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(m_weatherTempFormat, data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
        m_detailsModel->appendRow(dataWindchill);
     }
 
     if (data["Humidex"] != "N/A" && data["Humidex"].toString().isEmpty() == false) {
         QStandardItem *dataHumidex = new QStandardItem();
-        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1%2", data["Humidex"].toString(), QChar(176)));
+
+        // Use temperature unit to convert humidex temperature we only show degrees symbol not actual temperature unit
+        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(m_weatherTempFormat, data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
+
         m_detailsModel->appendRow(dataHumidex);
     }
 

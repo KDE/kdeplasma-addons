@@ -134,7 +134,7 @@ private:
 
     void setVisibleLayout(bool val);
     void clearLayout(void);
-    QString convertTemperature(int format, QString value, int type, bool rounded);
+    QString convertTemperature(int format, QString value, int type, bool rounded, bool degreesOnly);
 };
 
 K_EXPORT_PLASMA_APPLET(weather, WeatherApplet)
