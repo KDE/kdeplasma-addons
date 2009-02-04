@@ -562,11 +562,12 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 {
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
-    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
 
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
+
+    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
+    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
 
     configUi.serviceUrlCombo->addItem("http://identi.ca/api/");
     configUi.serviceUrlCombo->addItem("http://twitter.com/");
