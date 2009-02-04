@@ -106,6 +106,7 @@ void MicroBlog::paintIcon()
     }
 
     QPainter p(&icon);
+    p.setRenderHints(QPainter::SmoothPixmapTransform);
     p.drawPixmap(icon.rect(), m_popupIcon, m_popupIcon.rect());
     //4.3: a notification system for popupapplets would be cool
     if (m_newTweets > 0) {
