@@ -71,7 +71,7 @@ void ShowDashboard::toggleShowDashboard(bool pressed)
 
 void ShowDashboard::toggleShowDashboard()
 {
-    QDBusInterface plasmaApp( "org.kde.plasma", "/App" );
+    QDBusInterface plasmaApp( "org.kde.plasma-desktop", "/App" );
     plasmaApp.call( "toggleDashboard" );
 }
 
