@@ -7,6 +7,7 @@ Name[pt_BR]=Micro-blog
 Name[sv]=Mikrowebbjournal
 Name[tr]=Mikro günlük
 Name[uk]=Міні-журнал
+Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Comment=Update and view your microblog status.
 Comment[et]=Oma mikroblogioleku uuendamine ja vaatamine.
@@ -16,7 +17,9 @@ Comment[ro]=Actualizați și vizualizați-vă starea pe microblog.
 Comment[sv]=Uppdatera och visa status för mikrowebbjournal
 Comment[tr]=Mikrogünlük durumunuzu güncelleyin ve görüntüleyin
 Comment[uk]=Оновіть і перегляньте ваш стан у міні-журналі.
+Comment[x-test]=xxUpdate and view your microblog status.xx
 Comment[zh_CN]=更新并浏览您的微博客状态
+Comment[zh_TW]=更新並檢視您的 microblog 狀態。
 Type=Service
 ServiceTypes=Plasma/Applet
 
