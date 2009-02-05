@@ -116,8 +116,8 @@ Conversion::Value Currency::convert(const Conversion::Value& value, const Conver
                 m_update = true;
             }
             */
-            QFile::remove(m_cache);
-            if (KProcess::execute(QStringList() << "kioclient" << "copy" << URL << m_cache) == 0) {
+            kDebug() << "Removed previous cache:" << QFile::remove(m_cache);
+            if (KProcess::execute(QStringList() << "kioclient" << "copy" << "--noninteractive" << URL << m_cache) == 0) {
                 m_update = true;
             }
         }
