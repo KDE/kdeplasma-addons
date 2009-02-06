@@ -192,7 +192,7 @@ class LCD::Private
                     QString id = element.attribute("id");
                     if ((pos = id.lastIndexOf(':')) > -1) {
                         groups[id.left(pos)] << id.mid(pos + 1);
-                    } else if (id.startsWith("label")) {
+                    } else if (id.startsWith(QLatin1String("label"))) {
                         int i = id.mid(5).toInt();
                         QRegExp rx("fill:([#0-9]+)");
                         if (rx.indexIn(element.attribute("style")) > -1) {
