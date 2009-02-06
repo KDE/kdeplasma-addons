@@ -248,6 +248,13 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
         }
 
         if (!image) {
+            if (validPath) {
+                QFile file(testPath.path());
+                file.open(QIODevice::ReadOnly);
+                QTextStream in(&file);
+                text = in.readAll();
+            }
+
             // upload text
             m_textServer->post(text);
         } else {
