@@ -2,6 +2,7 @@
 Name=Microblogging
 Name[et]=Mikroblogimine
 Name[ga]=Micreabhlagadóireacht
+Name[nds]=Mikronettdagbook
 Name[pt]=Micro-blog
 Name[pt_BR]=Micro-blog
 Name[sv]=Mikrowebbjournal
@@ -11,6 +12,7 @@ Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Comment=Update and view your microblog status.
 Comment[et]=Oma mikroblogioleku uuendamine ja vaatamine.
+Comment[nds]=Dien Mikronettdaagbook-Status opfrischen un ankieken
 Comment[pt]=Actualizar e ver o estado do seu micro-blog.
 Comment[pt_BR]=Actualizar e ver o estado do seu micro-blog.
 Comment[ro]=Actualizați și vizualizați-vă starea pe microblog.
