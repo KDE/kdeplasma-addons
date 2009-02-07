@@ -238,7 +238,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     }
 
     ui.intervalSpinBox->setValue(m_interval);
-    emit updateSpinBoxSuffix(m_interval);
+    updateSpinBoxSuffix(m_interval);
 
     ui.timestampCheckBox->setChecked(m_showTimestamps);
     ui.titlesCheckBox->setChecked(m_showTitles);

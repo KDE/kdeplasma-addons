@@ -553,7 +553,7 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     KConfigGroup generalConfig = config();
 
     ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    emit updateSpinBoxSuffix(m_weatherUpdateTime);
+    updateSpinBoxSuffix(m_weatherUpdateTime);
     ui.locationEdit->clear();
     ui.validatedPlaceLabel->setText(m_activePlace);
     uui.windOptionsComboList->setCurrentIndex(uui.windOptionsComboList->findData(m_weatherWindFormat));

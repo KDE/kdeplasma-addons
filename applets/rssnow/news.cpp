@@ -151,7 +151,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     ui.intervalSpinBox->setValue(m_interval);
     ui.switchInterval->setValue(m_switchInterval);
     ui.maxAge->setValue(m_maxAge);
-    emit updateSpinBoxSuffix();
+    updateSpinBoxSuffix();
     if (m_logo) {
         ui.logo->setCheckState(Qt::Checked);
     } else {

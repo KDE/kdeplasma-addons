@@ -578,6 +578,7 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
     configUi.historySizeSpinBox->setValue(m_historySize);
     configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
     configUi.checkIncludeFriends->setChecked(m_includeFriends);
+    updateSpinBoxSuffix();
 
     parent->addPage(configWidget, i18n("General"), icon());
 }
