@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
+Name[es]=Microblogs
 Name[et]=Mikroblogimine
 Name[ga]=Micreabhlagadóireacht
 Name[nds]=Mikronettdagbook
@@ -11,7 +12,9 @@ Name[uk]=Міні-журнал
 Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Comment=Update and view your microblog status.
+Comment[es]=Actualizar y ver el estado de su microblog.
 Comment[et]=Oma mikroblogioleku uuendamine ja vaatamine.
+Comment[ga]=Nuashonraigh agus féach ar do stádas micreabhlagadóireachta.
 Comment[nds]=Dien Mikronettdaagbook-Status opfrischen un ankieken
 Comment[pt]=Actualizar e ver o estado do seu micro-blog.
 Comment[pt_BR]=Actualizar e ver o estado do seu micro-blog.

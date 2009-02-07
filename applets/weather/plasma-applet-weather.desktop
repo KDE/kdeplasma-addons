@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast
+Name[es]=Previsión metereológica
 Name[ga]=Réamhaisnéis Aimsire
 Name[nds]=Wederbericht
 Name[pt]=Previsão Meteorológica
@@ -11,6 +12,7 @@ Name[x-test]=xxWeather Forecastxx
 Name[zh_CN]=天气预报
 Name[zh_TW]=氣象預報
 Comment=Displays Weather information
+Comment[es]=Muestra información meteorológica
 Comment[ga]=Taispeáin faisnéis aimsire
 Comment[nds]=Wiest Weder-Informatschonen
 Comment[pt]=Mostra informações meteorológicas
