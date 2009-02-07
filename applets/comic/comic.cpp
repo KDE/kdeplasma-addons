@@ -437,7 +437,8 @@ void ComicApplet::slotSizeChanged()
     }
 }
 
-void ComicApplet::slotShowMaxSize() {
+void ComicApplet::slotShowMaxSize()
+{
     resize( mMaxSize );
 }
 
