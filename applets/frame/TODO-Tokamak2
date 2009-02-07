@@ -4,6 +4,9 @@ TODO for KDE 4.3
 ****** Tokamak 2 - Porto - February 2009 *******
 *******          annma@kde.org          ********
 
+Reference: http://drop.io/annmakde/asset/frame-pdf
+
+***************************************************
 
 Junior Job (very easy)
 ----------------------
@@ -46,6 +49,7 @@ http://api.kde.org/4.x-api/kdelibs-apidocs/threadweaver/html/index.html
 and maybe cache the next picture or a batch of next pictures.
 
 Profiling tools: valgrind, callgrind, KCacheGrind (in kdesdk module)
+Profile it through "plasmoidviewer frame"
 Doc: http://blog.bepointbe.be/index.php/2008/10/19/30-a-bit-of-plasma-profiling
 
 
