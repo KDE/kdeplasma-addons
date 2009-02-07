@@ -364,22 +364,23 @@ void ComicProviderWrapper::checkIdentifier( QVariant *identifier )
 {
     switch ( identifierType() ) {
     case DateIdentifier:
-        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
-             identifier->toDate() < mFirstIdentifier.toDate() ) {
-            *identifier = mFirstIdentifier;
-        }
         if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
              ( !mIdentifierSpecified || identifier->toDate() > mLastIdentifier.toDate() ) ) {
             *identifier = mLastIdentifier;
         }
+        if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
+             identifier->toDate() < mFirstIdentifier.toDate() ) {
+            *identifier = mFirstIdentifier;
+        }
         break;
     case NumberIdentifier:
+        if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
+           ( !mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt() ) ) {
+            *identifier = mLastIdentifier;
+        }
         if ( !mFirstIdentifier.isNull() && !identifier->isNull() &&
              identifier->toInt() < mFirstIdentifier.toInt() ) {
             *identifier = mFirstIdentifier;
-        } else if ( !mLastIdentifier.isNull() && !identifier->isNull() &&
-           ( !mIdentifierSpecified || identifier->toInt() > mLastIdentifier.toInt() ) ) {
-            *identifier = mLastIdentifier;
         }
         break;
     case StringIdentifier:
