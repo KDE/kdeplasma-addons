@@ -1,0 +1,70 @@
+TODO for KDE 4.3
+----------------
+
+****** Tokamak 2 - Porto - February 2009 *******
+*******          annma@kde.org          ********
+
+
+Junior Job (very easy)
+----------------------
+Display picture name as a configuration option for static pictures
+- in Settings dialog: add an option then 2 options: picture name or full path
+
+see frametest-url.tar.gz for starter
+see http://bugs.kde.org/show_bug.cgi?id=173831
+
+
+Junior Job (very easy)
+----------------------
+Match Settings dialog with Desktop Configuration dialog as
+indicated in the pdf of Picture Frame for 4.3
+
+
+Junior Job (easy)
+-----------------
+Add Previous, Play/Pause, Next buttons in Slideshow mode to allow to skip
+or play/pause the slideshow
+
+see frametest-buttons.tar.gz for starter
+
+Annma: get a proper SVG pic from Nuno to do so
+
+
+Junior Job (not assessed)
+------------------------
+Set a fixed point for the Picture to always been drawn from there.
+See bug http://bugs.kde.org/show_bug.cgi?id=183315
+
+Another wish
+http://bugs.kde.org/show_bug.cgi?id=179960
+
+
+Speed up code (advanced)
+------------------------
+When reading pictures, use ThreadWaever
+http://api.kde.org/4.x-api/kdelibs-apidocs/threadweaver/html/index.html
+and maybe cache the next picture or a batch of next pictures.
+
+Profiling tools: valgrind, callgrind, KCacheGrind (in kdesdk module)
+Doc: http://blog.bepointbe.be/index.php/2008/10/19/30-a-bit-of-plasma-profiling
+
+
+
+PoTD engine (Matías Szeftel) (arlekin on IRC)
+----------------------------
+- see what providers are still active and what to add
+- credits: what to display to fullfill the proper credits requierements
+- GHNS access: how to make packages
+		where to put the KNS xml file (ftp.kde.org?)
+		write a HowTo add a new provider
+
+- cache picture until midnight then get the new picture
+- General Image Engine for comic and frame
+arlekin and mat69
+
+http://www.starobserver.org/ Another APOD
+
+Potential problems from using Kinetics
+
+- click to flip picture is also triggered by drop -> make a smal area as the click-to-flip?
+- do not call update()
