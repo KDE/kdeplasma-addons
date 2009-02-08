@@ -531,12 +531,6 @@ void MicroBlog::showTweets()
 
         t.content->update();
 
-        //FIXME: this hopefully would get useless in QGL of 4.5
-        qreal left, top, right, bottom;
-        t.frame->getContentsMargins(&left, &top, &right, &bottom);
-        t.frame->setMinimumHeight(qMax(t.content->size().height(), int(t.icon->geometry().bottom())) + top + bottom);
-        t.frame->setPreferredHeight(t.frame->minimumHeight());
-
         if( !favIcon.isNull() ) {
             t.favIcon->setIcon( QIcon(favIcon) );
         }
@@ -550,11 +544,7 @@ void MicroBlog::showTweets()
     m_graphicsWidget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize));
     m_graphicsWidget->setPreferredSize(m_layout->sizeHint(Qt::PreferredSize));
     //are we complete?
-    if (layout()->itemAt(0) == m_graphicsWidget) {
-        setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left+right, top+bottom));
-        setPreferredSize(m_layout->sizeHint(Qt::PreferredSize) + QSizeF(left+right, top+bottom));
-        resize(preferredSize());
-    } else {
+    if (layout()->itemAt(0) != m_graphicsWidget) {
         paintIcon();
     }
 }
