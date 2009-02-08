@@ -25,10 +25,20 @@ indicated in the pdf of Picture Frame for 4.3
 
 Junior Job (easy)
 -----------------
+Based on frametest-back.tar.gz code, improve the displayed metadata for
+the picture properties, based on what is displayed by GWenView.
+
+see frametest-back.tar.gz at 
+http://drop.io/annmakde/asset/frametest-back-tar-gz
+
+
+Junior Job (easy)
+-----------------
 Add Previous, Play/Pause, Next buttons in Slideshow mode to allow to skip
 or play/pause the slideshow
 
 see frametest-buttons.tar.gz for starter
+http://drop.io/annmakde/asset/frametest-buttons-tar-gz
 
 Annma: get a proper SVG pic from Nuno to do so
 
