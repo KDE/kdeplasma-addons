@@ -538,11 +538,6 @@ void MicroBlog::showTweets()
         ++i;
     }
 
-    qreal left, top, right, bottom;
-    getContentsMargins(&left, &top, &right, &bottom);
-    //this line break things, strange
-    m_graphicsWidget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize));
-    m_graphicsWidget->setPreferredSize(m_layout->sizeHint(Qt::PreferredSize));
     //are we complete?
     if (layout()->itemAt(0) != m_graphicsWidget) {
         paintIcon();
