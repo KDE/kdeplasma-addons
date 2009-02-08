@@ -31,7 +31,7 @@
 #include <lancelot/widgets/PassagewayView.h>
 #include <lancelot/layouts/ColumnLayout.h>
 
-#include <lancelot/models/PassagewayViewModels.h>
+#include <lancelot/models/ActionTreeModel.h>
 #include <lancelot/models/ActionListModel.h>
 
 #include <lancelot/layouts/NodeLayout.h>
@@ -54,17 +54,17 @@ class LANCELOT_EXPORT PassagewayView : public Lancelot::Panel
 
 public:
     PassagewayView(QGraphicsItem * parent = 0);
-    explicit PassagewayView(PassagewayViewModel * entranceModel,
-            PassagewayViewModel * atlasModel = 0, QGraphicsItem * parent = 0);
+    explicit PassagewayView(ActionTreeModel * entranceModel,
+            ActionTreeModel * atlasModel = 0, QGraphicsItem * parent = 0);
     virtual ~PassagewayView();
 
     // Entrance
-    void setEntranceModel(PassagewayViewModel * model);
+    void setEntranceModel(ActionTreeModel * model);
     void setEntranceTitle(const QString & title);
     void setEntranceIcon(QIcon icon);
 
     // Atlas
-    void setAtlasModel(PassagewayViewModel * model);
+    void setAtlasModel(ActionTreeModel * model);
     void setAtlasTitle(const QString & title);
     void setAtlasIcon(QIcon icon);
 

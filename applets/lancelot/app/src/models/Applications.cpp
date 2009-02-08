@@ -184,7 +184,7 @@ void Applications::setDropActions(int index,
     defaultAction = Qt::CopyAction;
 }
 
-Lancelot::PassagewayViewModel * Applications::child(int index)
+Lancelot::ActionTreeModel * Applications::child(int index)
 {
     if (index >= m_submodels.size())
         return NULL;

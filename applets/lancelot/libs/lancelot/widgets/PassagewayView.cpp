@@ -62,8 +62,8 @@ private:
 
 class PassagewayView::Private {
 public:
-    Private(PassagewayViewModel * entranceModel,
-            PassagewayViewModel * atlasModel,
+    Private(ActionTreeModel * entranceModel,
+            ActionTreeModel * atlasModel,
             PassagewayView * p)
       : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p), focusIndex(0)
     {
@@ -115,11 +115,11 @@ public:
 
     class Step {
     public:
-        Step(QString t, QIcon i, PassagewayViewModel * m)
+        Step(QString t, QIcon i, ActionTreeModel * m)
             : title(t), icon(i), model(m) {};
         QString title;
         QIcon icon;
-        PassagewayViewModel * model;
+        ActionTreeModel * model;
     };
 
     class BreadcrumbItem : public Lancelot::ExtenderButton {
@@ -269,8 +269,8 @@ PassagewayView::PassagewayView(QGraphicsItem * parent)
     L_WIDGET_SET_INITIALIZED;
 }
 
-PassagewayView::PassagewayView(PassagewayViewModel * entranceModel,
-    PassagewayViewModel * atlasModel, QGraphicsItem * parent)
+PassagewayView::PassagewayView(ActionTreeModel * entranceModel,
+    ActionTreeModel * atlasModel, QGraphicsItem * parent)
     : Panel(parent), d(new Private(entranceModel, atlasModel, this))
 {
     setGroupByName("PassagewayView");
@@ -305,7 +305,7 @@ void PassagewayView::listItemActivated(int index, int listIndex)
         d->back(d->lists.size() - listIndex - 1);
     }
 
-    PassagewayViewModel * model = d->path.at(listIndex)->model;
+    ActionTreeModel * model = d->path.at(listIndex)->model;
     if (model) {
         model = model->child(index);
         if (model) {
@@ -320,7 +320,7 @@ PassagewayView::~PassagewayView()
 }
 
 // Entrance
-void PassagewayView::setEntranceModel(PassagewayViewModel * model)
+void PassagewayView::setEntranceModel(ActionTreeModel * model)
 {
     if (d->lists.size() < 2) return;
     d->path.at(0)->model = model;
@@ -342,7 +342,7 @@ void PassagewayView::setEntranceIcon(QIcon icon)
 }
 
 // Atlas
-void PassagewayView::setAtlasModel(PassagewayViewModel * model)
+void PassagewayView::setAtlasModel(ActionTreeModel * model)
 {
     if (d->lists.size() < 2) return;
     d->path.at(1)->model = model;
@@ -453,7 +453,7 @@ void PassagewayView::keyPressEvent(QKeyEvent * event)
     // We should open a submenu on right arrow pressed,
     // but not activate item if not a submenu
     if (event->key() == Qt::Key_Right) {
-        PassagewayViewModel * model = d->path.at(d->focusIndex)->model;
+        ActionTreeModel * model = d->path.at(d->focusIndex)->model;
         int index = d->lists.at(d->focusIndex)->selectedIndex();
         if (index >= 0 && model && (model = model->child(index))) {
             // d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));

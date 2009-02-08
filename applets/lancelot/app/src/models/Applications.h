@@ -21,11 +21,11 @@
 #define LANCELOTAPP_MODELS_APPLICATIONS_H
 
 #include "BaseModel.h"
-#include <lancelot/models/PassagewayViewModels.h>
+#include <lancelot/models/ActionTreeModel.h>
 
 namespace Models {
 
-class Applications : public Lancelot::PassagewayViewModel {
+class Applications : public Lancelot::ActionTreeModel {
     Q_OBJECT
 public:
     explicit Applications(QString root = "", QString title = "", QIcon icon = QIcon());
@@ -38,7 +38,7 @@ public:
 
     L_Override virtual int size() const;
 
-    L_Override virtual PassagewayViewModel * child(int index);
+    L_Override virtual ActionTreeModel * child(int index);
     L_Override virtual QString modelTitle() const;
     L_Override virtual QIcon modelIcon()  const;
 

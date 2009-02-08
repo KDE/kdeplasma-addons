@@ -36,14 +36,14 @@ namespace Models {
 SystemActions * SystemActions::m_instance = NULL;
 
 SystemActions::SystemActions()
-    : StandardPassagewayViewModel(NULL)
+    : StandardActionTreeModel(NULL)
 {
     kDebug() << "1 created model on" << (void *) m_root;
     kDebug() << "m_instance is" << (void *) m_instance;
 }
 
 SystemActions::SystemActions(Item * root)
-    : StandardPassagewayViewModel(root)
+    : StandardActionTreeModel(root)
 {
     kDebug() << "2 creating model on" << (void *) root;
     kDebug() << "2 created model on" << (void *) m_root;
@@ -67,7 +67,7 @@ SystemActions * SystemActions::instance()
 void SystemActions::load()
 {
     //
-    StandardPassagewayViewModel::Item item(i18n("Leave"), QString(), QIcon(), "leave");
+    StandardActionTreeModel::Item item(i18n("Leave"), QString(), QIcon(), "leave");
     item.children << Item(i18n("Log Out"), QString(), QIcon(), "log-out");
     item.children << Item(i18n("Reboot"), QString(), QIcon(), "reboot");
     item.children << Item(i18n("Shut Down"), QString(), QIcon(), "poweroff");
@@ -86,12 +86,12 @@ void SystemActions::load()
     emit updated();
 }
 
-Lancelot::StandardPassagewayViewModel * SystemActions::createChild(int index)
+Lancelot::StandardActionTreeModel * SystemActions::createChild(int index)
 {
     Item * childItem = & (m_root->children.value(index));
     kDebug() << "Creating child whose index is" << index;
     kDebug() << "Child is" << (void*) childItem << childItem->title;
-    Lancelot::StandardPassagewayViewModel * model =
+    Lancelot::StandardActionTreeModel * model =
             new SystemActions(childItem);
     kDebug() << "Confirm" << model->modelTitle();
     return model;

@@ -17,74 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOT_PASSAGEWAY_VIEW_MODELS_H
-#define LANCELOT_PASSAGEWAY_VIEW_MODELS_H
+#ifndef LANCELOT_STANDARD_ACTION_TREE_MODEL_H
+#define LANCELOT_STANDARD_ACTION_TREE_MODEL_H
 
 #include <lancelot/lancelot_export.h>
 
-#include "ActionListModel.h"
+#include "ActionTreeModel.h"
 
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT PassagewayViewModel: public ActionListModel {
-public:
-    PassagewayViewModel();
-    virtual ~PassagewayViewModel();
-    virtual PassagewayViewModel * child(int index) = 0;
-    virtual QString modelTitle() const = 0;
-    virtual QIcon modelIcon() const = 0;
-
-    virtual QMimeData * modelMimeData();
-};
-
-class LANCELOT_EXPORT PassagewayViewModelProxy: public PassagewayViewModel {
-    Q_OBJECT
-public:
-    explicit PassagewayViewModelProxy(ActionListModel * model,
-            QString title = QString(), QIcon icon = QIcon());
-
-    ActionListModel * model() const;
-
-    // PassagewayViewModel
-    L_Override virtual PassagewayViewModel * child(int index);
-    L_Override virtual QString modelTitle() const;
-    L_Override virtual QIcon modelIcon()  const;
-
-    // ActionListModel
-    L_Override virtual QString title(int index) const;
-    L_Override virtual QString description(int index) const;
-    L_Override virtual QIcon icon(int index) const;
-    L_Override virtual bool isCategory(int index) const;
-    L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override virtual void contextActivate(int index, QAction * context);
-    L_Override virtual QMimeData * mimeData(int index) const;
-    L_Override virtual void setDropActions(int index,
-            Qt::DropActions & actions, Qt::DropAction & defaultAction);
-
-    L_Override virtual int size() const;
-
-Q_SIGNALS:
-    void itemActivated(int index);
-
-    void updated();
-    void itemInserted(int index);
-    void itemDeleted(int index);
-    void itemAltered(int index);
-
-protected:
-    /** Models should reimplement this function. It is invoked when
-     *  an item is activated, before the itemActivated signal is emitted */
-    void activate(int index);
-
-private:
-    ActionListModel * m_model;
-    QString m_modelTitle;
-    QIcon m_modelIcon;
-};
-
-class LANCELOT_EXPORT StandardPassagewayViewModel: public PassagewayViewModel {
+class LANCELOT_EXPORT StandardActionTreeModel: public ActionTreeModel {
 protected:
     /**
      * This class represents an item in the list model.
@@ -106,19 +49,19 @@ protected:
     };
 
     Item * m_root;
-    QHash < Item * , StandardPassagewayViewModel * > childModels;
-    StandardPassagewayViewModel(Item * root);
+    QHash < Item * , StandardActionTreeModel * > childModels;
+    StandardActionTreeModel(Item * root);
 
-    virtual StandardPassagewayViewModel * createChild(int index) = 0;
+    virtual StandardActionTreeModel * createChild(int index) = 0;
 
 
 public:
-    StandardPassagewayViewModel();
+    StandardActionTreeModel();
 
-    virtual ~StandardPassagewayViewModel();
+    virtual ~StandardActionTreeModel();
 
-    // PassagewayViewModel
-    L_Override virtual PassagewayViewModel * child(int index);
+    // ActionTreeModel
+    L_Override virtual ActionTreeModel * child(int index);
     L_Override virtual QString modelTitle() const;
     L_Override virtual QIcon modelIcon()  const;
 
@@ -183,5 +126,5 @@ public:
 
 } // namespace Lancelot
 
-#endif /* LANCELOT_PASSAGEWAY_VIEW_MODELS_H */
+#endif /* LANCELOT_STANDARD_ACTION_TREE_MODEL_H */
 

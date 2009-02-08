@@ -137,7 +137,7 @@ void FavoriteApplications::contextActivate(int index, QAction * context)
 }
 
 FavoriteApplications::PassagewayViewProxy::PassagewayViewProxy()
-    : PassagewayViewModelProxy(Models::FavoriteApplications::instance(),
+    : ActionTreeModelProxy(Models::FavoriteApplications::instance(),
             i18n("Favorites"), KIcon("favorites"))
 {
 }

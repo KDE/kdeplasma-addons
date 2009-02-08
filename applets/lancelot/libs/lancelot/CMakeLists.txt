@@ -68,8 +68,12 @@ set(lancelot_LIB_SRCS
         models/StandardActionListModel.cpp
         models/MergedActionListModel.cpp
 
+        models/ActionTreeModel.cpp
+        models/StandardActionTreeModel.cpp
+        models/ActionTreeModelProxy.cpp
+
         # models/ActionListViewModels.cpp
-        models/PassagewayViewModels.cpp
+        # models/PassagewayViewModels.cpp
 )
 
 kde4_add_library(lancelot SHARED ${lancelot_LIB_SRCS})
@@ -122,8 +126,12 @@ install(FILES
    models/StandardActionListModel.h
    models/MergedActionListModel.h
 
+   models/ActionTreeModel.cpp
+   models/StandardActionTreeModel.cpp
+   models/ActionTreeModelProxy.cpp
+
    # models/ActionListViewModels.h
-   models/PassagewayViewModels.h
+   # models/PassagewayViewModels.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 
 # tests

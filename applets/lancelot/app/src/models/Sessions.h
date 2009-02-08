@@ -20,7 +20,7 @@
 #ifndef LANCELOTAPP_MODELS_SESSIONS_H
 #define LANCELOTAPP_MODELS_SESSIONS_H
 
-#include <lancelot/models/PassagewayViewModels.h>
+#include <lancelot/models/StandardActionTreeModel.h>
 #include "BaseModel.h"
 #include <plasma/runnermanager.h>
 #include <plasma/querymatch.h>
@@ -30,7 +30,7 @@
 
 namespace Models {
 
-class SystemActions: public Lancelot::StandardPassagewayViewModel {
+class SystemActions: public Lancelot::StandardActionTreeModel {
     Q_OBJECT
 public:
     static SystemActions * instance();
@@ -38,7 +38,7 @@ public:
     ~SystemActions();
 
     L_Override void load();
-    L_Override StandardPassagewayViewModel * createChild(int index);
+    L_Override StandardActionTreeModel * createChild(int index);
 
 private:
     explicit SystemActions(Item * root);
