@@ -112,7 +112,7 @@ public:
      * @returns the specified item
      * @param index index of the item to return
      */
-    Item & itemAt(int index);
+    const Item & itemAt(int index) const;
 
     /**
      * Clears all items
@@ -131,10 +131,10 @@ protected:
      */
     bool emitInhibited() const;
 
-    QList < Item > m_items;
 
 private:
-    bool m_sendEmits;
+    class Private;
+    Private * const d;
 
 };
 

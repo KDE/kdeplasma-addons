@@ -125,7 +125,7 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
     int index = indexOf(task->window());
     if (index == -1) {
-        index = m_items.size();
+        index = size();
         add (
             "", "", QIcon(), uint(task->window())
         );
@@ -148,6 +148,14 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
 int OpenDocuments::indexOf(WId wid)
 {
+    for (int i = size() - 1; i >= 0; i--) {
+        const Item * item = & itemAt(i);
+        if (item->data.toUInt() == wid) {
+            return i;
+        }
+    }
+
+    /*
     QListIterator<Item> i(m_items);
     int index = 0;
 
@@ -158,6 +166,7 @@ int OpenDocuments::indexOf(WId wid)
         }
         ++index;
     }
+    */
 
     return -1;
 }
@@ -165,7 +174,7 @@ int OpenDocuments::indexOf(WId wid)
 void OpenDocuments::activate(int index)
 {
     bool valid = true;
-    WId wid = m_items.at(index).data.toUInt(&valid);
+    WId wid = itemAt(index).data.toUInt(&valid);
     if (valid && m_tasks.contains(wid)) {
         m_tasks[wid]->activate();
     }

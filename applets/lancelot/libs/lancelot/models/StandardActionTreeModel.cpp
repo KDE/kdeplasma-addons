@@ -22,106 +22,120 @@
 namespace Lancelot
 {
 
+class StandardActionTreeModel::Private {
+public:
+    Item * root;
+    bool deleteRoot;
+    QHash < Item * , StandardActionTreeModel * > childModels;
+};
+
 StandardActionTreeModel::StandardActionTreeModel()
-    : ActionTreeModel(), m_root(NULL)
+    : ActionTreeModel(), d(new Private())
 {
-    kDebug() << "##################" << (void *) this;
-    if (!m_root) {
-        m_root = new Item();
-    }
-    kDebug() << "##################" << (void *) m_root;
+    d->root = new Item();
+    d->deleteRoot = true;
 }
 
 StandardActionTreeModel::StandardActionTreeModel(Item * root)
-    : ActionTreeModel(), m_root(root)
+    : ActionTreeModel(), d(new Private())
 {
-    if (!m_root) {
-        m_root = new Item();
+    if (!root) {
+        d->root = new Item();
+        d->deleteRoot = true;
+    } else {
+        d->root = root;
     }
-    kDebug() << "##################" << (void *) m_root;
 }
 
 StandardActionTreeModel::~StandardActionTreeModel()
 {
-    qDeleteAll(childModels);
-    delete m_root;
+    qDeleteAll(d->childModels);
+    if (d->deleteRoot) {
+        delete d->root;
+    }
+    delete d;
+}
+
+StandardActionTreeModel::Item * StandardActionTreeModel::root() const
+{
+    return d->root;
 }
 
 ActionTreeModel * StandardActionTreeModel::child(int index)
 {
-    if (index < 0 || index >= m_root->children.size()) {
+    if (index < 0 || index >= d->root->children.size()) {
         return NULL;
     }
 
-    Item * childItem = & m_root->children.value(index);
+    Item * childItem = & d->root->children.value(index);
 
     if (childItem->children.size() == 0) {
         return NULL;
     }
 
-    if (!childModels.contains(childItem)) {
-        childModels[childItem] = // new StandardActionTreeModel(childItem);
+    if (!d->childModels.contains(childItem)) {
+        d->childModels[childItem] = // new StandardActionTreeModel(childItem);
             createChild(index);
     }
 
-    return childModels[childItem];
+    return d->childModels[childItem];
 }
 
 bool StandardActionTreeModel::isCategory(int index) const
 {
-    if (index < 0 || index >= m_root->children.size()) {
+    if (index < 0 || index >= d->root->children.size()) {
         return false;
     }
 
-    return m_root->children.at(index).children.size() != 0;
+    return d->root->children.at(index).children.size() != 0;
 }
 
 QString StandardActionTreeModel::modelTitle() const
 {
-    return m_root->title;
+    return d->root->title;
 }
 
 QIcon StandardActionTreeModel::modelIcon() const
 {
-    return m_root->icon;
+    return d->root->icon;
 }
 
 QString StandardActionTreeModel::title(int index) const
 {
-    if (index < 0 || index >= m_root->children.size()) {
+    if (index < 0 || index >= d->root->children.size()) {
         return QString();
     }
 
-    return m_root->children.at(index).title;
+    return d->root->children.at(index).title;
 }
 
 QString StandardActionTreeModel::description(int index) const
 {
-    if (index < 0 || index >= m_root->children.size()) {
+    if (index < 0 || index >= d->root->children.size()) {
         return QString();
     }
 
-    return m_root->children.at(index).description;
+    return d->root->children.at(index).description;
 }
 
 QIcon StandardActionTreeModel::icon(int index) const
 {
-    if (index < 0 || index >= m_root->children.size()) {
+    if (index < 0 || index >= d->root->children.size()) {
         return QIcon();
     }
 
-    return m_root->children.at(index).icon;
+    return d->root->children.at(index).icon;
 }
 
 int StandardActionTreeModel::size() const
 {
     kDebug() << (void *) this;
-    return m_root->children.size();
+    return d->root->children.size();
 }
 
 void StandardActionTreeModel::add(const Item & item, Item * parent)
 {
-    if (parent == NULL) parent = m_root;
+    if (parent == NULL) parent = d->root;
 
     parent->children << item;
 }
@@ -133,7 +147,7 @@ void StandardActionTreeModel::add(const QString & title, const QString & descrip
 
 void StandardActionTreeModel::set(int index, const Item & item, Item * parent)
 {
-    if (parent == NULL) parent = m_root;
+    if (parent == NULL) parent = d->root;
     if (index < 0 || index >= parent->children.size()) return;
 
     parent->children[index] = item;
@@ -146,19 +160,19 @@ void StandardActionTreeModel::set(int index, const QString & title, const QStrin
 
 void StandardActionTreeModel::removeAt(int index, Item * parent)
 {
-    if (parent == NULL) parent = m_root;
+    if (parent == NULL) parent = d->root;
     parent->children.removeAt(index);
 }
 
 void StandardActionTreeModel::clear(Item * parent)
 {
-    if (parent == NULL) parent = m_root;
+    if (parent == NULL) parent = d->root;
     parent->children.clear();
 }
 
 StandardActionTreeModel::Item & StandardActionTreeModel::itemAt(int index, Item * parent)
 {
-    if (parent == NULL) parent = m_root;
+    if (parent == NULL) parent = d->root;
     return parent->children[index];
 }
 

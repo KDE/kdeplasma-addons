@@ -48,10 +48,9 @@ protected:
         QList < Item > children;
     };
 
-    Item * m_root;
-    QHash < Item * , StandardActionTreeModel * > childModels;
     StandardActionTreeModel(Item * root);
 
+    Item * root() const;
     virtual StandardActionTreeModel * createChild(int index) = 0;
 
 
@@ -121,6 +120,10 @@ public:
      * Clears all items
      */
     void clear(Item * parent = NULL);
+
+private:
+    class Private;
+    Private * const d;
 
 };
 

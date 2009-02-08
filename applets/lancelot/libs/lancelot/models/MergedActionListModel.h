@@ -148,19 +148,16 @@ public:
 protected:
     L_Override virtual void activate(int index);
 
-private:
-    void toChildCoordinates(int index, int & model, int & modelIndex) const;
-    void fromChildCoordinates(int & index, int model, int modelIndex) const;
-    QList < ActionListModel * > m_models;
-    QList < QPair < QString, QIcon > > m_modelsMetadata;
-    bool m_hideEmptyModels;
-
-private Q_SLOTS:
+protected Q_SLOTS:
     // listen to model changes
     void modelUpdated();
     void modelItemInserted(int index);
     void modelItemDeleted(int index);
     void modelItemAltered(int index);
+
+private:
+    class Private;
+    Private * const d;
 
 };
 

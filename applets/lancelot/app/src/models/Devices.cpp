@@ -58,6 +58,17 @@ Devices::~Devices()
 
 void Devices::deviceRemoved(const QString & udi)
 {
+    for (int i = size() - 1; i >= 0; i--) {
+        const Item * item = & itemAt(i);
+        if (item->data.toString() == udi) {
+            removeAt(i);
+            // TODO: m_udis.removeAll(udi);
+            emit itemDeleted(i);
+            return;
+        }
+    }
+
+    /*
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -71,7 +82,7 @@ void Devices::deviceRemoved(const QString & udi)
         }
         ++index;
     }
-
+    */
 }
 
 void Devices::deviceAdded(const QString & udi)
@@ -124,6 +135,16 @@ void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
     //    return;
     //}
 
+    for (int i = size() - 1; i >= 0; i--) {
+        Item * item = const_cast < Item * > (& itemAt(i));
+        if (item->data.toString() == udi) {
+            item->description = StringCoalesce(access->filePath(), i18n("Unmounted"));
+            emit itemDeleted(i);
+            return;
+        }
+    }
+
+    /*
     QMutableListIterator<Item> i(m_items);
     int index = 0;
 
@@ -137,7 +158,7 @@ void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
 
     m_items[index].description = StringCoalesce(access->filePath(), i18n("Unmounted"));
     emit itemAltered(index);
-
+    */
 }
 
 
@@ -164,9 +185,9 @@ void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize,
 
 void Devices::activate(int index)
 {
-    if (index > m_items.size() - 1) return;
+    if (index > size() - 1) return;
 
-    QString udi = m_items.at(index).data.toString();
+    QString udi = itemAt(index).data.toString();
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
 
     if (!access) return;
@@ -193,9 +214,9 @@ bool Devices::hasContextActions(int index) const
 
 void Devices::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
-    if (index > m_items.size() - 1) return;
+    if (index > size() - 1) return;
 
-    QString udi = m_items.at(index).data.toString();
+    QString udi = itemAt(index).data.toString();
     Solid::Device device(udi);
 
     if (device.is<Solid::OpticalDisc>()) {
@@ -213,7 +234,7 @@ void Devices::contextActivate(int index, QAction * context)
         return;
     }
 
-    QString udi = m_items.at(index).data.toString();
+    QString udi = itemAt(index).data.toString();
     Solid::Device device(udi);
 
     if (device.is<Solid::OpticalDisc>()) {

@@ -22,9 +22,20 @@
 namespace Lancelot
 {
 
+class ActionTreeModelProxy::Private {
+public:
+    ActionListModel * model;
+    QString modelTitle;
+    QIcon modelIcon;
+};
+
 ActionTreeModelProxy::ActionTreeModelProxy(ActionListModel * model, QString title, QIcon icon)
-    : m_model(model), m_modelTitle(title), m_modelIcon(icon)
+    : d(new Private())
 {
+    d->model = model;
+    d->modelTitle = title;
+    d->modelIcon = icon;
+
     connect(model, SIGNAL( itemActivated(int) ),
             this,  SIGNAL( itemActivated(int) ));
     connect(model, SIGNAL( itemInserted(int)  ),
@@ -37,9 +48,14 @@ ActionTreeModelProxy::ActionTreeModelProxy(ActionListModel * model, QString titl
             this,  SIGNAL( updated()          ));
 }
 
+ActionTreeModelProxy::~ActionTreeModelProxy()
+{
+    delete d;
+}
+
 ActionListModel * ActionTreeModelProxy::model() const
 {
-    return m_model;
+    return d->model;
 }
 
 QMimeData * ActionTreeModel::modelMimeData()
@@ -55,69 +71,69 @@ ActionTreeModel * ActionTreeModelProxy::child(int index)
 
 QString ActionTreeModelProxy::modelTitle() const
 {
-    return m_modelTitle;
+    return d->modelTitle;
 }
 
 QIcon ActionTreeModelProxy::modelIcon()  const
 {
-    return m_modelIcon;
+    return d->modelIcon;
 }
 
 // ActionListModel
 QString ActionTreeModelProxy::title(int index) const
 {
-    return m_model->title(index);
+    return d->model->title(index);
 }
 
 bool ActionTreeModelProxy::hasContextActions(int index) const
 {
-    return m_model->hasContextActions(index);
+    return d->model->hasContextActions(index);
 }
 
 void ActionTreeModelProxy::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
-    m_model->setContextActions(index, menu);
+    d->model->setContextActions(index, menu);
 }
 
 void ActionTreeModelProxy::contextActivate(int index, QAction * context)
 {
-    m_model->contextActivate(index, context);
+    d->model->contextActivate(index, context);
 }
 
 QString ActionTreeModelProxy::description(int index) const
 {
-    return m_model->description(index);
+    return d->model->description(index);
 }
 
 QIcon ActionTreeModelProxy::icon(int index) const
 {
-    return m_model->icon(index);
+    return d->model->icon(index);
 }
 
 bool ActionTreeModelProxy::isCategory(int index) const
 {
-    return m_model->isCategory(index);
+    return d->model->isCategory(index);
 }
 
 int ActionTreeModelProxy::size() const
 {
-    return m_model->size();
+    return d->model->size();
 }
 
 void ActionTreeModelProxy::activate(int index)
 {
-    m_model->activated(index);
+    d->model->activated(index);
 }
 
 QMimeData * ActionTreeModelProxy::mimeData(int index) const
 {
-    return m_model->mimeData(index);
+    return d->model->mimeData(index);
 }
 
 void ActionTreeModelProxy::setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction)
 {
-    m_model->setDropActions(index, actions, defaultAction);
+    d->model->setDropActions(index, actions, defaultAction);
 }
 
 } // namespace Lancelot

@@ -68,7 +68,7 @@ MessagesKmail::~MessagesKmail()
 void MessagesKmail::activate(int index)
 {
     if (m_dataValid) {
-        m_interface->selectFolder(m_items.at(index).data.toString());
+        m_interface->selectFolder(itemAt(index).data.toString());
     }
 
     if (m_interface->isValid()) {
@@ -87,9 +87,11 @@ void MessagesKmail::load()
     if (!m_interface->isValid()) {
         QStringList services;
         services << "kontact|kmail";
+
         if (addServices(services) != 0) {
-            itemAt(0).title = i18n("Mail client");
-            itemAt(0).description = i18n("Mail client is not running");
+            Item * item = const_cast < Item * > (& itemAt(0));
+            item->title = i18n("Mail client");
+            item->description = i18n("Mail client is not running");
         } else {
             add(i18n("Unable to find KMail"), "",
                     KIcon("application-x-executable"), QVariant("http://kontact.kde.org"));

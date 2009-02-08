@@ -32,6 +32,7 @@ class LANCELOT_EXPORT ActionTreeModelProxy: public ActionTreeModel {
 public:
     explicit ActionTreeModelProxy(ActionListModel * model,
             QString title = QString(), QIcon icon = QIcon());
+    ~ActionTreeModelProxy();
 
     ActionListModel * model() const;
 
@@ -63,14 +64,11 @@ Q_SIGNALS:
     void itemAltered(int index);
 
 protected:
-    /** Models should reimplement this function. It is invoked when
-     *  an item is activated, before the itemActivated signal is emitted */
-    void activate(int index);
+    L_Override void activate(int index);
 
 private:
-    ActionListModel * m_model;
-    QString m_modelTitle;
-    QIcon m_modelIcon;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Lancelot

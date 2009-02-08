@@ -71,9 +71,11 @@ void ContactsKopete::load()
     if (!m_interface->isValid()) {
             m_kopeteRunning = false;
             m_timer.start(CHECK_RUNNING_INTERVAL, this);
+
             if (addService("kopete")) {
-                itemAt(0).title = i18n("Messaging client");
-                itemAt(0).description = i18n("Messaging client is not running");
+                Item * item = const_cast < Item * > (& itemAt(0));
+                item->title = i18n("Messaging client");
+                item->description = i18n("Messaging client is not running");
             } else {
                 add(i18n("Unable to find Kopete"), "",
                         KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));

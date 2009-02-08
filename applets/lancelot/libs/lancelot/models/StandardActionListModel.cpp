@@ -21,41 +21,49 @@
 
 namespace Lancelot {
 
+class StandardActionListModel::Private {
+public:
+    bool sendEmits;
+    QList < Item > items;
+};
+
 StandardActionListModel::StandardActionListModel()
-    : m_sendEmits(true)
+    : d(new Private())
 {
+    d->sendEmits = true;
 }
 
 StandardActionListModel::~StandardActionListModel()
 {
+    delete d;
 }
 
 void StandardActionListModel::setEmitInhibited(bool value)
 {
-    m_sendEmits = !value;
+    d->sendEmits = !value;
 }
 
 bool StandardActionListModel::emitInhibited() const
 {
-    return !m_sendEmits;
+    return !d->sendEmits;
 }
 
 QString StandardActionListModel::title(int index) const
 {
-    if (index >= m_items.size()) return "";
-    return m_items.at(index).title;
+    if (index >= d->items.size()) return "";
+    return d->items.at(index).title;
 }
 
 QString StandardActionListModel::description(int index) const
 {
-    if (index >= m_items.size()) return "";
-    return m_items.at(index).description;
+    if (index >= d->items.size()) return "";
+    return d->items.at(index).description;
 }
 
 QIcon StandardActionListModel::icon(int index) const
 {
-    if (index >= m_items.size()) return QIcon();
-    return m_items.at(index).icon;
+    if (index >= d->items.size()) return QIcon();
+    return d->items.at(index).icon;
 }
 
 bool StandardActionListModel::isCategory(int index) const
@@ -66,14 +74,14 @@ bool StandardActionListModel::isCategory(int index) const
 
 int StandardActionListModel::size() const
 {
-    return m_items.size();
+    return d->items.size();
 }
 
 void StandardActionListModel::add(const Item & item)
 {
-    m_items.append(item);
-    if (m_sendEmits) {
-        emit itemInserted(m_items.size() - 1);
+    d->items.append(item);
+    if (d->sendEmits) {
+        emit itemInserted(d->items.size() - 1);
     }
 }
 
@@ -84,9 +92,9 @@ void StandardActionListModel::add(const QString & title, const QString & descrip
 
 void StandardActionListModel::set(int index, const Item & item)
 {
-    if (index < 0 || index >= m_items.size()) return;
-    m_items[index] = item;
-    if (m_sendEmits) {
+    if (index < 0 || index >= d->items.size()) return;
+    d->items[index] = item;
+    if (d->sendEmits) {
         emit itemAltered(index);
     }
 }
@@ -98,23 +106,23 @@ void StandardActionListModel::set(int index, const QString & title, const QStrin
 
 void StandardActionListModel::removeAt(int index)
 {
-    m_items.removeAt(index);
-    if (m_sendEmits) {
+    d->items.removeAt(index);
+    if (d->sendEmits) {
         emit itemDeleted(index);
     }
 }
 
 void StandardActionListModel::clear()
 {
-    m_items.clear();
-    if (m_sendEmits) {
+    d->items.clear();
+    if (d->sendEmits) {
         emit updated();
     }
 }
 
-StandardActionListModel::Item & StandardActionListModel::itemAt(int index)
+const StandardActionListModel::Item & StandardActionListModel::itemAt(int index) const
 {
-    return m_items[index];
+    return d->items[index];
 }
 
 } // namespace Lancelot

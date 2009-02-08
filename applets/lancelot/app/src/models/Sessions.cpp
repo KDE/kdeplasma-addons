@@ -38,15 +38,15 @@ SystemActions * SystemActions::m_instance = NULL;
 SystemActions::SystemActions()
     : StandardActionTreeModel(NULL)
 {
-    kDebug() << "1 created model on" << (void *) m_root;
+    kDebug() << "1 created model on" << (void *) root();
     kDebug() << "m_instance is" << (void *) m_instance;
 }
 
-SystemActions::SystemActions(Item * root)
-    : StandardActionTreeModel(root)
+SystemActions::SystemActions(Item * r)
+    : StandardActionTreeModel(r)
 {
-    kDebug() << "2 creating model on" << (void *) root;
-    kDebug() << "2 created model on" << (void *) m_root;
+    kDebug() << "2 creating model on" << (void *) r;
+    kDebug() << "2 created model on" << (void *) root();
 }
 
 SystemActions::~SystemActions()
@@ -88,7 +88,7 @@ void SystemActions::load()
 
 Lancelot::StandardActionTreeModel * SystemActions::createChild(int index)
 {
-    Item * childItem = & (m_root->children.value(index));
+    Item * childItem = & (root()->children.value(index));
     kDebug() << "Creating child whose index is" << index;
     kDebug() << "Child is" << (void*) childItem << childItem->title;
     Lancelot::StandardActionTreeModel * model =
@@ -143,7 +143,7 @@ void Sessions::load()
 
 void Sessions::activate(int index)
 {
-    QString data = m_items.at(index).data.toString();
+    QString data = itemAt(index).data.toString();
     kDebug() << data;
 
     if (data.isEmpty()) {

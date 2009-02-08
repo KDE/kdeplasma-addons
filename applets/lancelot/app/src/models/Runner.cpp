@@ -128,7 +128,7 @@ void Runner::load()
 void Runner::activate(int index)
 {
     if (!valid) return;
-    m_runnerManager->run(m_items[index].data.value< QStringList >().at(0));
+    m_runnerManager->run(itemAt(index).data.value< QStringList >().at(0));
     m_runnerManager->reset();
     changeLancelotSearchString(QString());
     hideLancelotWindow();
@@ -137,15 +137,15 @@ void Runner::activate(int index)
 bool Runner::hasContextActions(int index) const
 {
     if (!valid) return false;
-    kDebug() << m_items[index].data.value< QString >();
-    return (m_items[index].data.value< QStringList >().at(1) == "Application");
+    //kDebug() << m_items[index].data.value< QString >();
+    return (itemAt(index).data.value< QStringList >().at(1) == "Application");
 }
 
 void Runner::setContextActions(int index, Lancelot::PopupMenu * menu)
 {
     if (!valid) return;
 
-    if (m_items[index].data.value< QStringList >().at(1) == "Application") {
+    if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
         menu->addAction(KIcon("list-add"), i18n("Add to Favorites"))
             ->setData(QVariant(0));
     }
@@ -157,7 +157,7 @@ void Runner::contextActivate(int index, QAction * context)
 
     if (context->data().toInt() == 0) {
         KService::Ptr service = KService::serviceByStorageId(
-                m_items[index].data.value< QStringList >().at(2));
+                itemAt(index).data.value< QStringList >().at(2));
         if (service) {
 ;           FavoriteApplications::instance()
                 ->addFavorite(service->entryPath());

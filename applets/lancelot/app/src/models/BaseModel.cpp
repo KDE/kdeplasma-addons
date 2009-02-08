@@ -74,7 +74,7 @@ BaseModel::~BaseModel()
 
 void BaseModel::activate(int index)
 {
-    new KRun(KUrl(m_items.at(index).data.toString()), 0);
+    new KRun(KUrl(itemAt(index).data.toString()), 0);
     hideLancelotWindow();
 }
 
@@ -198,7 +198,7 @@ QMimeData * BaseModel::mimeData(int index) const
     }
 
     kDebug() << "Requested mime for index" << index;
-    return BaseModel::mimeForUrl(m_items.at(index).data.toString());
+    return BaseModel::mimeForUrl(itemAt(index).data.toString());
 }
 
 void BaseModel::setDropActions(int index,
