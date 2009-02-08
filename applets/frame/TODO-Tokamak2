@@ -7,8 +7,7 @@ TODO for KDE 4.3
 Reference: http://drop.io/annmakde/asset/frame-pdf
 
 ***************************************************
-
-Junior Job (very easy)
+1) Junior Job (very easy)
 ----------------------
 Display picture name as a configuration option for static pictures
 - in Settings dialog: add an option then 2 options: picture name or full path
@@ -17,13 +16,13 @@ see frametest-url.tar.gz for starter
 see http://bugs.kde.org/show_bug.cgi?id=173831
 
 
-Junior Job (very easy)
+2) Junior Job (very easy)
 ----------------------
 Match Settings dialog with Desktop Configuration dialog as
 indicated in the pdf of Picture Frame for 4.3
 
 
-Junior Job (easy)
+3) Junior Job (easy)
 -----------------
 Based on frametest-back.tar.gz code, improve the displayed metadata for
 the picture properties, based on what is displayed by GWenView.
@@ -31,8 +30,11 @@ the picture properties, based on what is displayed by GWenView.
 see frametest-back.tar.gz at 
 http://drop.io/annmakde/asset/frametest-back-tar-gz
 
+For 4.4: user interaction with Nepomuk metadata, add, remove and change 
+tags,comment and rating.
 
-Junior Job (easy)
+
+4) Junior Job (easy)
 -----------------
 Add Previous, Play/Pause, Next buttons in Slideshow mode to allow to skip
 or play/pause the slideshow
@@ -43,7 +45,7 @@ http://drop.io/annmakde/asset/frametest-buttons-tar-gz
 Annma: get a proper SVG pic from Nuno to do so
 
 
-Junior Job (not assessed)
+5) Junior Job (not assessed)
 ------------------------
 Set a fixed point for the Picture to always been drawn from there.
 See bug http://bugs.kde.org/show_bug.cgi?id=183315
@@ -52,29 +54,34 @@ Another wish
 http://bugs.kde.org/show_bug.cgi?id=179960
 
 
-Junior Job (not assessed)
+6) Junior Job (not assessed)
 -------------------------
 Add transitions effects to the Slideshow mode
 see http://bugs.kde.org/show_bug.cgi?id=161645
 
 
-Speed up code (advanced)
-------------------------
+7) Speed up code (advanced) and clean code
+------------------------------------------
 When reading pictures, use ThreadWaever
 http://api.kde.org/4.x-api/kdelibs-apidocs/threadweaver/html/index.html
 and cache the next picture (the QImage) or a batch of next pictures.
 
 Note: have a look at Desktop Wallpapers in Slideshow mode which already caches the 
-pictures.
+pictures. See in kdebase/workspace/plasma/wallpapers/ the classes Image and RenderThread
 
 Profiling tools: valgrind, callgrind, KCacheGrind (in kdesdk module)
+You need valgrind from your distribution and KCacheGrind from your KDE source
+(trunk or your distro).
 Profile it using "plasmoidviewer frame"
 Doc: http://blog.bepointbe.be/index.php/2008/10/19/30-a-bit-of-plasma-profiling
 
+Clean: separate the "get picture" part from the "paint picture"
+Add doc comment in .h files.
+Give better names and optimize code.
 
 
-PoTD engine (Matías Szeftel) (arlekin on IRC)
-----------------------------
+8) PoTD engine (Matías Szeftel) (arlekin on IRC)
+-------------------------------
 - see what providers are still active and what to add
 - credits: what to display to fullfill the proper credits requierements
 - GHNS access: how to make packages
@@ -82,10 +89,16 @@ PoTD engine (Matías Szeftel) (arlekin on IRC)
 		write a HowTo add a new provider
 
 - cache picture until midnight then get the new picture
+- check about networking? (Solid?) (same problem with Comic: when teh network 
+isnot available, then the pic is never displayed as the existent network is 
+not checked)
 - General Image Engine for comic and frame
-arlekin and mat69
+==> arlekin and mat69
 
-http://www.starobserver.org/ Another APOD
+http://www.starobserver.org/   => Another APOD
+
+
+9) Integrate Crystal
 
 
 Potential problems from using Kinetics
