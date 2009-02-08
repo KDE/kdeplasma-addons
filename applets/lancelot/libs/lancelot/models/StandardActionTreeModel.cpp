@@ -35,7 +35,7 @@ StandardActionTreeModel::Item::Item(QString itemTitle,
         QString itemDescription, QIcon itemIcon, QVariant itemData)
     : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData)
 {
-};
+}
 
 StandardActionTreeModel::Item::~Item()
 {

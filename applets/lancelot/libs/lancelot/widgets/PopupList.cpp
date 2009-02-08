@@ -40,8 +40,7 @@ PopupList::Private::Private(PopupList * parent)
     scene->addItem(list);
     parent->setGraphicsWidget(list);
     parent->resize(256, 384);
-
-};
+}
 
 void PopupList::Private::connectSignals()
 {
