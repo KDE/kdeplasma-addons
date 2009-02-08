@@ -22,20 +22,22 @@ Match Settings dialog with Desktop Configuration dialog as
 indicated in the pdf of Picture Frame for 4.3
 
 
-3) Junior Job (easy)
------------------
+3) Junior Job (medium) (Nepomuk, Strigi and EXIF)
+-----------------------
 Based on frametest-back.tar.gz code, improve the displayed metadata for
 the picture properties, based on what is displayed by GWenView.
 
 see frametest-back.tar.gz at 
 http://drop.io/annmakde/asset/frametest-back-tar-gz
 
+Get all data from Nepomuk & Strigi. If Exif data is not in Nepomuk, thenget it from EXIF 
+and save it in Nepomuk so next time it is there.
 For 4.4: user interaction with Nepomuk metadata, add, remove and change 
 tags,comment and rating.
 
 
 4) Junior Job (easy)
------------------
+--------------------
 Add Previous, Play/Pause, Next buttons in Slideshow mode to allow to skip
 or play/pause the slideshow
 
@@ -45,22 +47,33 @@ http://drop.io/annmakde/asset/frametest-buttons-tar-gz
 Annma: get a proper SVG pic from Nuno to do so
 
 
-5) Junior Job (not assessed)
+5) Junior Job (easy) (using Solid)
+-----------------------
+Implement for Comic - put a patch on kdereviewboard http://reviewboard.kde.org/
+Problem: when you are not connected, the comic displays nothing and never
+checks further the state of connection.
+- check about networking (see 
+http://api.kde.org/4.x-api/kdelibs-apidocs/solid/html/tutorial4.html) 
+to check status (if connected or not) then if not: use 
+http://api.kde.org/4.x-api/kdelibs-apidocs/solid/html/classSolid_1_1Networking_1_1Notifier.html
+Solid::Networking::Notifier and signal void   statusChanged (Solid::Networking::Status status)
+to get the picture.
+
+
+6) Junior Job (not assessed)
 ------------------------
 Set a fixed point for the Picture to always been drawn from there.
 See bug http://bugs.kde.org/show_bug.cgi?id=183315
 
-Another wish
-http://bugs.kde.org/show_bug.cgi?id=179960
 
-
-6) Junior Job (not assessed)
+7) Junior Job (not assessed)
 -------------------------
 Add transitions effects to the Slideshow mode
+Use Kinetic
 see http://bugs.kde.org/show_bug.cgi?id=161645
 
 
-7) Speed up code (advanced) and clean code
+8) Speed up code (advanced) and clean code
 ------------------------------------------
 When reading pictures, use ThreadWaever
 http://api.kde.org/4.x-api/kdelibs-apidocs/threadweaver/html/index.html
@@ -80,7 +93,7 @@ Add doc comment in .h files.
 Give better names and optimize code.
 
 
-8) PoTD engine (Matías Szeftel) (arlekin on IRC)
+9) PoTD engine (Matías Szeftel) (arlekin on IRC)
 -------------------------------
 - see what providers are still active and what to add
 - credits: what to display to fullfill the proper credits requierements
@@ -89,19 +102,27 @@ Give better names and optimize code.
 		write a HowTo add a new provider
 
 - cache picture until midnight then get the new picture
-- check about networking? (Solid?) (same problem with Comic: when teh network 
-isnot available, then the pic is never displayed as the existent network is 
-not checked)
+
 - General Image Engine for comic and frame
 ==> arlekin and mat69
 
 http://www.starobserver.org/   => Another APOD
 
 
-9) Integrate Crystal
+10) Integrate Crystal
+---------------------
+crystal is in playground/base/plasma/applets
+and needs /playground/base/neopmuk-kde
+Use Wikimedia classes to get data from Wikimedia websites for example
+a batch of pictures from wikimedia-commons.
 
+
+-------------------------------------
 
 Potential problems from using Kinetics
 
 - click to flip picture is also triggered by drop -> make a smal area as the click-to-flip?
 - do not call update()
+
+- Another wish (not researched yet)
+http://bugs.kde.org/show_bug.cgi?id=179960
