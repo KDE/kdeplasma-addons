@@ -67,7 +67,7 @@ void LancelotApplication::init()
     window = new LancelotWindow();
 
     setQuitOnLastWindowClosed(false);
-    // KCrash::setFlags(KCrash::AutoRestart);
+    KCrash::setFlags(KCrash::AutoRestart);
 
     new AppAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
