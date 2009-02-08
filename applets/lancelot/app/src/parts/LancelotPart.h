@@ -71,7 +71,7 @@ private:
     Lancelot::Instance * m_instance;
     Lancelot::ActionListView * m_list;
     Models::PartsMergedModel * m_model;
-    QList < Lancelot::ActionListViewModel * > m_models;
+    QList < Lancelot::ActionListModel * > m_models;
 
     QGraphicsLayout * m_layout;
     QString m_cmdarg;

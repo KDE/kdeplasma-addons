@@ -33,6 +33,71 @@
 
 namespace Models {
 
+SystemActions * SystemActions::m_instance = NULL;
+
+SystemActions::SystemActions()
+    : StandardPassagewayViewModel(NULL)
+{
+    kDebug() << "1 created model on" << (void *) m_root;
+    kDebug() << "m_instance is" << (void *) m_instance;
+}
+
+SystemActions::SystemActions(Item * root)
+    : StandardPassagewayViewModel(root)
+{
+    kDebug() << "2 creating model on" << (void *) root;
+    kDebug() << "2 created model on" << (void *) m_root;
+}
+
+SystemActions::~SystemActions()
+{
+}
+
+SystemActions * SystemActions::instance()
+{
+    kDebug() << (void *) m_instance;
+    if (!m_instance) {
+        m_instance = new SystemActions();
+        m_instance->load();
+    }
+    kDebug() << (void *) m_instance;
+    return m_instance;
+}
+
+void SystemActions::load()
+{
+    //
+    StandardPassagewayViewModel::Item item(i18n("Leave"), QString(), QIcon(), "leave");
+    item.children << Item(i18n("Log Out"), QString(), QIcon(), "log-out");
+    item.children << Item(i18n("Reboot"), QString(), QIcon(), "reboot");
+    item.children << Item(i18n("Shut Down"), QString(), QIcon(), "poweroff");
+    item.children << Item(i18n("Suspend to Disk"), QString(), QIcon(), "suspend-disk");
+    item.children << Item(i18n("Suspend to RAM"), QString(), QIcon(), "suspend-ram");
+    add(item);
+
+    add(i18n("1"), i18n("1"), QIcon(), "1");
+    add(i18n("2"), i18n("1"), QIcon(), "2");
+    add(i18n("3"), i18n("1"), QIcon(), "3");
+    add(i18n("4"), i18n("1"), QIcon(), "4");
+    add(i18n("5"), i18n("1"), QIcon(), "5");
+    add(i18n("6"), i18n("1"), QIcon(), "6");
+    add(i18n("7"), i18n("1"), QIcon(), "7");
+    add(i18n("8"), i18n("1"), QIcon(), "8");
+    emit updated();
+}
+
+Lancelot::StandardPassagewayViewModel * SystemActions::createChild(int index)
+{
+    Item * childItem = & (m_root->children.value(index));
+    kDebug() << "Creating child whose index is" << index;
+    kDebug() << "Child is" << (void*) childItem << childItem->title;
+    Lancelot::StandardPassagewayViewModel * model =
+            new SystemActions(childItem);
+    kDebug() << "Confirm" << model->modelTitle();
+    return model;
+}
+
+// Sessions
 Sessions::Sessions()
     : BaseModel()
 {
@@ -71,7 +136,7 @@ void Sessions::load()
         add(
                 i18n("Display manager error"), QString(),
                 KIcon("dialog-warning"),
-                QString()
+                QString("display-manager-error")
            );
     }
 }
@@ -87,7 +152,14 @@ void Sessions::activate(int index)
 
     hideLancelotWindow();
 
-    if (data == "switch-user") {
+    if (data == "display-manager-error") {
+        KMessageBox::error(
+                0,
+                i18n("<p>Lancelot can not find your display manager. "
+                     "This means that it not able to retrieve the list of currently "
+                     "running sessions, or start a new one.</p>"),
+                i18n("Display manager error"));
+    } else if (data == "switch-user") {
         //TODO: update this message when it changes
         // in sessionrunner
         int result = KMessageBox::warningContinueCancel(

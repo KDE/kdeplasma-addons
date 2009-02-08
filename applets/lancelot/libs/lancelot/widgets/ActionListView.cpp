@@ -99,7 +99,7 @@ void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 //<
 
 //> ActionListViewItemFactory
-ActionListViewItemFactory::ActionListViewItemFactory(ActionListViewModel * model, ActionListView * view, Instance * instance) //>
+ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, ActionListView * view, Instance * instance) //>
     : m_model(NULL),
       m_extenderPosition(NoExtender),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
@@ -335,7 +335,7 @@ int ActionListViewItemFactory::itemHeight(int index, Qt::SizeHint which) const /
     }
 } //<
 
-void ActionListViewItemFactory::setModel(ActionListViewModel * model) //>
+void ActionListViewItemFactory::setModel(ActionListModel * model) //>
 {
     if (m_model) {
         disconnect(m_model, NULL, this, NULL);
@@ -358,7 +358,7 @@ void ActionListViewItemFactory::setModel(ActionListViewModel * model) //>
 
 } //<
 
-ActionListViewModel * ActionListViewItemFactory::model() //>
+ActionListModel * ActionListViewItemFactory::model() //>
 {
     return m_model;
 } //<
@@ -588,7 +588,7 @@ ActionListView::ActionListView(QGraphicsItem * parent) //>
     L_WIDGET_SET_INITIALIZED;
 } //<
 
-ActionListView::ActionListView(ActionListViewModel * model, QGraphicsItem * parent) //>
+ActionListView::ActionListView(ActionListModel * model, QGraphicsItem * parent) //>
     : CustomListView(parent),
       d(new Private())
 {
@@ -610,7 +610,7 @@ ActionListView::~ActionListView() //>
     delete d;
 } //<
 
-void ActionListView::setModel(ActionListViewModel * model) //>
+void ActionListView::setModel(ActionListModel * model) //>
 {
     if (!d->itemFactory) {
         d->itemFactory = new ActionListViewItemFactory(model, this, instance());
@@ -620,7 +620,7 @@ void ActionListView::setModel(ActionListViewModel * model) //>
     }
 } //<
 
-ActionListViewModel * ActionListView::model() const //>
+ActionListModel * ActionListView::model() const //>
 {
     if (!d->itemFactory) {
         return NULL;

@@ -29,7 +29,7 @@ namespace Lancelot {
 class PopupList::Private {
 public:
     Private(PopupList * parent)
-        : closeTimeout(2000)
+        : closeTimeout(1000)
     {
         scene = new QGraphicsScene();
         list = new ActionListView();

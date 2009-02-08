@@ -20,7 +20,7 @@
 #ifndef LANCELOTAPP_MODELS_BASEMODEL_H
 #define LANCELOTAPP_MODELS_BASEMODEL_H
 
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/StandardActionListModel.h>
 #include <KService>
 #include <KUrl>
 
@@ -44,7 +44,7 @@ private:
     static ApplicationConnector * m_instance;
 };
 
-class BaseModel : public Lancelot::StandardActionListViewModel {
+class BaseModel : public Lancelot::StandardActionListModel {
     Q_OBJECT
 public:
     BaseModel(bool enableDefaultDnD = false);

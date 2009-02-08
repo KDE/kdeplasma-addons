@@ -27,7 +27,7 @@
 namespace Models {
 
 BaseMergedModel::BaseMergedModel()
-    : Lancelot::MergedActionListViewModel()
+    : Lancelot::MergedActionListModel()
 {
 
 }
@@ -37,10 +37,10 @@ BaseMergedModel::~BaseMergedModel()
 }
 
 void BaseMergedModel::addModel(const QString & id, QIcon icon,
-        const QString & title, ActionListViewModel * model)
+        const QString & title, ActionListModel * model)
 {
     m_modelIDs.append(id);
-    Lancelot::MergedActionListViewModel::addModel(icon, title, model);
+    Lancelot::MergedActionListModel::addModel(icon, title, model);
 }
 
 QMimeData * BaseMergedModel::modelMimeData(int index) const

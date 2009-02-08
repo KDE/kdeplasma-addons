@@ -39,7 +39,7 @@
 class CustomGraphicsView;
 
 namespace Lancelot {
-    class ActionListViewModel;
+    class ActionListModel;
     class ResizeBordersPanel;
 }
 
@@ -214,8 +214,8 @@ private:
     QSignalMapper       * m_sectionsSignalMapper;
     KActionCollection   * m_actionCollection;
 
-    QMap < QString, Lancelot::ActionListViewModel * > m_models;
-    QMap < QString, Lancelot::ActionListViewModel * > m_modelGroups;
+    QMap < QString, Lancelot::ActionListModel * > m_models;
+    QMap < QString, Lancelot::ActionListModel * > m_modelGroups;
 
     KConfig               m_config;
     KConfigGroup          m_mainConfig;

@@ -19,7 +19,7 @@
 
 #include "PopupMenu.h"
 #include <lancelot/widgets/ActionListView.h>
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/StandardActionListModel.h>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QSignalMapper>
@@ -30,7 +30,7 @@ namespace Lancelot {
 
 // ActionsModel
 class ActionsModel:
-    public StandardActionListViewModel {
+    public StandardActionListModel {
 public:
     ActionsModel();
     ~ActionsModel();

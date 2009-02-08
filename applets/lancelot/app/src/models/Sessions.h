@@ -20,6 +20,7 @@
 #ifndef LANCELOTAPP_MODELS_SESSIONS_H
 #define LANCELOTAPP_MODELS_SESSIONS_H
 
+#include <lancelot/models/PassagewayViewModels.h>
 #include "BaseModel.h"
 #include <plasma/runnermanager.h>
 #include <plasma/querymatch.h>
@@ -28,6 +29,23 @@
 #include <kworkspace/kdisplaymanager.h>
 
 namespace Models {
+
+class SystemActions: public Lancelot::StandardPassagewayViewModel {
+    Q_OBJECT
+public:
+    static SystemActions * instance();
+
+    ~SystemActions();
+
+    L_Override void load();
+    L_Override StandardPassagewayViewModel * createChild(int index);
+
+private:
+    explicit SystemActions(Item * root);
+    explicit SystemActions();
+
+    static SystemActions * m_instance;
+};
 
 class Sessions: public BaseModel {
     Q_OBJECT
@@ -40,6 +58,7 @@ public:
 
 private:
     KDisplayManager dm;
+
 };
 
 } // namespace Models

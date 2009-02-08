@@ -20,17 +20,17 @@
 #ifndef LANCELOTAPP_MODELS_BASEMERGEDMODEL_H
 #define LANCELOTAPP_MODELS_BASEMERGEDMODEL_H
 
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/MergedActionListModel.h>
 
 namespace Models {
 
-class BaseMergedModel: public Lancelot::MergedActionListViewModel {
+class BaseMergedModel: public Lancelot::MergedActionListModel {
 public:
     BaseMergedModel();
     ~BaseMergedModel();
 
     void addModel(const QString & id, QIcon icon,
-            const QString & title, ActionListViewModel * model);
+            const QString & title, ActionListModel * model);
     L_Override virtual QMimeData * modelMimeData(int index) const;
     L_Override virtual void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);

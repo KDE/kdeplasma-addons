@@ -28,7 +28,7 @@
 #include <QtGui/QIcon>
 
 #include <lancelot/widgets/CustomListView.h>
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/ActionListModel.h>
 
 namespace Lancelot
 {
@@ -41,11 +41,11 @@ class LANCELOT_EXPORT ActionListView : public CustomListView
 
 public:
     ActionListView(QGraphicsItem * parent = 0);
-    explicit ActionListView(ActionListViewModel * model, QGraphicsItem * parent = 0);
+    explicit ActionListView(ActionListModel * model, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
 
-    void setModel(ActionListViewModel * model);
-    ActionListViewModel * model() const;
+    void setModel(ActionListModel * model);
+    ActionListModel * model() const;
 
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;

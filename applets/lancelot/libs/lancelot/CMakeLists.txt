@@ -64,7 +64,11 @@ set(lancelot_LIB_SRCS
         layouts/FlipLayout.cpp
 
         # Models
-        models/ActionListViewModels.cpp
+        models/ActionListModel.cpp
+        models/StandardActionListModel.cpp
+        models/MergedActionListModel.cpp
+
+        # models/ActionListViewModels.cpp
         models/PassagewayViewModels.cpp
 )
 
@@ -114,7 +118,11 @@ install(FILES
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/layouts COMPONENT Devel)
 
 install(FILES
-   models/ActionListViewModels.h
+   models/ActionListModel.h
+   models/StandardActionListModel.h
+   models/MergedActionListModel.h
+
+   # models/ActionListViewModels.h
    models/PassagewayViewModels.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 

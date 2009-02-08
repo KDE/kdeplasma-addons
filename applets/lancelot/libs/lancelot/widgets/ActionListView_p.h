@@ -28,7 +28,7 @@
 
 #include <lancelot/widgets/CustomListView.h>
 #include <lancelot/widgets/ActionListView.h>
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/ActionListModel.h>
 
 namespace Lancelot
 {
@@ -64,7 +64,7 @@ private Q_SLOTS:
 class ActionListViewItemFactory: public CustomListItemFactory {
     Q_OBJECT
 public:
-    ActionListViewItemFactory(ActionListViewModel * model, ActionListView * view, Instance * instance);
+    ActionListViewItemFactory(ActionListModel * model, ActionListView * view, Instance * instance);
     ~ActionListViewItemFactory();
 
     L_Override virtual CustomListItem * itemForIndex(int index);
@@ -73,8 +73,8 @@ public:
     L_Override int itemCount() const;
     L_Override virtual int itemHeight(int index, Qt::SizeHint which) const;
 
-    void setModel(ActionListViewModel * model);
-    ActionListViewModel * model();
+    void setModel(ActionListModel * model);
+    ActionListModel * model();
 
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
@@ -115,7 +115,7 @@ Q_SIGNALS:
     void activated(int index);
 
 private:
-    ActionListViewModel * m_model;
+    ActionListModel * m_model;
     QList < ActionListViewItem * > m_items;
     ExtenderPosition m_extenderPosition;
 

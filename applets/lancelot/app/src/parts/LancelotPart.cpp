@@ -310,7 +310,7 @@ bool LancelotPart::load(const QString & input)
     if (data["version"] <= "1.0") {
         if (data["type"] == "list") {
             QString modelID = data["model"];
-            Lancelot::ActionListViewModel * model = NULL;
+            Lancelot::ActionListModel * model = NULL;
 
             if (modelID == "Places") {
                 m_model->addModel(modelID, QIcon(), i18n("Places"), model = new Models::Places());
@@ -398,7 +398,7 @@ bool LancelotPart::loadConfig()
 
 void LancelotPart::removeModel(int index)
 {
-    Lancelot::ActionListViewModel * model = m_model->modelAt(index);
+    Lancelot::ActionListModel * model = m_model->modelAt(index);
     m_model->removeModel(index);
     if (m_models.contains(model)) {
         delete model;

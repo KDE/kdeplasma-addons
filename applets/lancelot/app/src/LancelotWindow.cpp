@@ -610,7 +610,7 @@ void LancelotWindow::setupModels()
      m_modelGroups["ContactsRight"]  = new Models::BaseMergedModel();
 
      // Assignments: Model - Group:
-     // defined Merged(A) ((Lancelot::MergedActionListViewModel *)(A))
+     // defined Merged(A) ((Lancelot::MergedActionListModel *)(A))
 
      Merged(m_modelGroups["ComputerLeft"])->addModel ("Places", QIcon(), i18n("Places"), m_models["Places"]);
      Merged(m_modelGroups["ComputerLeft"])->addModel ("System", QIcon(), i18n("System"), m_models["SystemServices"]);
@@ -645,6 +645,9 @@ void LancelotWindow::setupModels()
          new Models::FavoriteApplications::PassagewayViewProxy()
      );
      passagewayApplications->setAtlasModel(new Models::Applications());
+     //
+     //kDebug() << "Instance creating";
+     //passagewayApplications->setAtlasModel(Models::SystemActions::instance());
 
 }
 
@@ -904,6 +907,8 @@ void LancelotWindow::loadConfig()
             ->setProperty("ExtenderPosition", Lancelot::RightExtender);
         instance->group("PassagewayView")
             ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+        instance->group("PopupList")
+            ->setProperty("ExtenderPosition", Lancelot::RightExtender);
     } else {
         instance->group("ActionListView-Left")
             ->setProperty("ExtenderPosition", Lancelot::NoExtender);
@@ -911,6 +916,8 @@ void LancelotWindow::loadConfig()
             ->setProperty("ExtenderPosition", Lancelot::NoExtender);
         instance->group("PassagewayView")
             ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+        instance->group("PopupList")
+            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
     }
     instance->group("ActionListView-Left")->notifyUpdated();
     instance->group("ActionListView-Right")->notifyUpdated();

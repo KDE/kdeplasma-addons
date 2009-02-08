@@ -32,7 +32,7 @@
 #include <lancelot/layouts/ColumnLayout.h>
 
 #include <lancelot/models/PassagewayViewModels.h>
-#include <lancelot/models/ActionListViewModels.h>
+#include <lancelot/models/ActionListModel.h>
 
 #include <lancelot/layouts/NodeLayout.h>
 #include <QtGui/QGraphicsLinearLayout>

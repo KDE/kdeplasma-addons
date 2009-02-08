@@ -20,7 +20,6 @@
 #include "CustomListView.h"
 #include <KDebug>
 #include <KIcon>
-// #include <lancelot/models/ActionListViewModels.h>
 
 namespace Lancelot {
 
