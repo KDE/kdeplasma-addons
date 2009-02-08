@@ -337,6 +337,8 @@ int ActionListViewItemFactory::itemHeight(int index, Qt::SizeHint which) const /
 
 void ActionListViewItemFactory::setModel(ActionListModel * model) //>
 {
+    ActionListModel * oldmodel = m_model;
+
     if (m_model) {
         disconnect(m_model, NULL, this, NULL);
     }
@@ -356,8 +358,9 @@ void ActionListViewItemFactory::setModel(ActionListModel * model) //>
     connect(model, SIGNAL(updated()),
             this, SLOT(modelUpdated()));
 
-    modelUpdated();
-
+    if (oldmodel) {
+        modelUpdated();
+    }
 } //<
 
 ActionListModel * ActionListViewItemFactory::model() //>
