@@ -37,15 +37,16 @@ protected:
         Item(QString itemTitle = QString(),
              QString itemDescription = QString(),
              QIcon itemIcon = QIcon(),
-             QVariant itemData = QVariant())
-          : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData) {};
+             QVariant itemData = QVariant());
+
+        ~Item();
 
         QString title;
         QString description;
         QIcon icon;
         QVariant data;
 
-        QList < Item > children;
+        QList < Item * > children;
     };
 
     StandardActionTreeModel(Item * root);
@@ -76,7 +77,7 @@ public:
      * Adds a new item into the model
      * @param item new item
      */
-    void add(const Item & item, Item * parent = NULL);
+    void add(Item * item, Item * parent = NULL);
 
     /**
      * Adds a new item into the model
@@ -92,8 +93,8 @@ public:
      * @param index index of the item to be replaced
      * @param item new item
      */
+    void set(int index, Item * item, Item * parent = NULL);
 
-    void set(int index, const Item & item, Item * parent = NULL);
     /**
      * Replaces existing item at specified index with a new one
      * @param index index of the item to be replaced
@@ -114,7 +115,7 @@ public:
      * @returns the specified item
      * @param index index of the item to return
      */
-    Item & itemAt(int index, Item * parent = NULL);
+    Item * itemAt(int index, Item * parent = NULL);
 
     /**
      * Clears all items

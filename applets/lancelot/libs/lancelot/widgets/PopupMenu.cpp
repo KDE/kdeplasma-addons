@@ -21,7 +21,6 @@
 #include <lancelot/widgets/ActionListView.h>
 #include <lancelot/models/StandardActionListModel.h>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QSignalMapper>
 
 #define ITEM_HEIGHT 32
@@ -91,7 +90,7 @@ PopupMenu::PopupMenu(QWidget * parent, Qt::WindowFlags f)
   : PopupList(parent, f),
     d(new Private(this))
 {
-    list()->setModel(d->model = new ActionsModel());
+    setModel(d->model = new ActionsModel());
     connect(&d->mapper, SIGNAL(mapped(int)),
              this, SLOT(actionChosen(int)));
 
@@ -113,31 +112,8 @@ QAction * PopupMenu::addAction(const QIcon & icon, const QString & title)
 
 QAction * PopupMenu::exec(const QPoint & p, QAction * action)
 {
-    updateSize();
     d->chosenAction = NULL;
-
-    QRect g = geometry();
-    g.moveTopLeft(p);
-
-    QRect screen = QApplication::desktop()->screenGeometry(
-        QApplication::desktop()->screenNumber(p)
-        );
-
-    if (g.right() > screen.right()) {
-        g.moveRight(screen.right());
-    } else if (g.left() < screen.left()) {
-        g.moveLeft(screen.left());
-    }
-
-    if (g.bottom() > screen.bottom()) {
-        g.moveBottom(screen.bottom());
-    } else if (g.top() < screen.top()) {
-        g.moveTop(screen.top());
-    }
-
-    setGeometry(g);
-
-    show();
+    PopupList::exec(p);
 
     while (isVisible()) {
         QApplication::processEvents();

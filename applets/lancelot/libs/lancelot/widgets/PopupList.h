@@ -32,6 +32,7 @@
 namespace Lancelot {
 
 class ActionListView;
+class ActionListModel;
 
 /**
  * The list that pops up in its own window
@@ -53,11 +54,11 @@ public:
      */
     virtual ~PopupList();
 
-    /**
-     * @returns the pointer to the ActionListView widget
-     * contained by this PopupList
-     */
-    ActionListView * list() const;
+    // /**
+    //  * @returns the pointer to the ActionListView widget
+    //  * contained by this PopupList
+    //  */
+    // ActionListView * list() const;
 
     /**
      * Sets the timer for auto-closing when the popup
@@ -71,6 +72,17 @@ public:
      */
     int closeTimeout() const;
 
+    /**
+     * Sets the model for the popup list. You can use
+     * ActionTreeModel as well as ActionListModel
+     */
+    void setModel(ActionListModel * model);
+
+    /**
+     *
+     */
+    void exec(const QPoint & p);
+
 protected:
     L_Override void showEvent(QShowEvent * event);
 
@@ -79,11 +91,6 @@ protected:
     L_Override void timerEvent(QTimerEvent * event);
 
 public Q_SLOTS:
-    /**
-     * Updates the size of the PopupList to
-     * match the size of the list (depending on
-     * the numbers of items in the list).
-     */
     void updateSize();
 
 private:

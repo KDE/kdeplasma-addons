@@ -66,35 +66,63 @@ SystemActions * SystemActions::instance()
 
 void SystemActions::load()
 {
-    //
-    StandardActionTreeModel::Item item(i18n("Leave"), QString(), QIcon(), "leave");
-    item.children << Item(i18n("Log Out"), QString(), QIcon(), "log-out");
-    item.children << Item(i18n("Reboot"), QString(), QIcon(), "reboot");
-    item.children << Item(i18n("Shut Down"), QString(), QIcon(), "poweroff");
-    item.children << Item(i18n("Suspend to Disk"), QString(), QIcon(), "suspend-disk");
-    item.children << Item(i18n("Suspend to RAM"), QString(), QIcon(), "suspend-ram");
+    add(i18n("Lock Session"), QString(), KIcon("system-lock-screen"), "lock-screen");
+
+    StandardActionTreeModel::Item * item;
+
+    item = new StandardActionTreeModel::Item(i18n("Leave"), QString(), KIcon("system-shutdown"), "leave");
+    item->children << new Item(i18n("Log Out"), QString(), KIcon("system-log-out"), "log-out");
+    item->children << new Item(i18n("Reboot"), QString(), KIcon("system-restart"), "reboot");
+    item->children << new Item(i18n("Shut Down"), QString(), KIcon("system-shutdown"), "poweroff");
+    item->children << new Item(i18n("Suspend to Disk"), QString(), KIcon("system-suspend-hibernate"), "suspend-disk");
+    item->children << new Item(i18n("Suspend to RAM"), QString(), KIcon("system-suspend"), "suspend-ram");
     add(item);
 
-    add(i18n("1"), i18n("1"), QIcon(), "1");
-    add(i18n("2"), i18n("1"), QIcon(), "2");
-    add(i18n("3"), i18n("1"), QIcon(), "3");
-    add(i18n("4"), i18n("1"), QIcon(), "4");
-    add(i18n("5"), i18n("1"), QIcon(), "5");
-    add(i18n("6"), i18n("1"), QIcon(), "6");
-    add(i18n("7"), i18n("1"), QIcon(), "7");
-    add(i18n("8"), i18n("1"), QIcon(), "8");
+    switchUserModel = new Lancelot::ActionTreeModelProxy(
+            new Sessions()
+            );
+    add(i18n("Switch User"), QString(), KIcon("system-switch-user"), "switch-user");
+
     emit updated();
 }
 
 Lancelot::StandardActionTreeModel * SystemActions::createChild(int index)
 {
-    Item * childItem = & (root()->children.value(index));
+    Item * childItem = root()->children.value(index);
     kDebug() << "Creating child whose index is" << index;
     kDebug() << "Child is" << (void*) childItem << childItem->title;
     Lancelot::StandardActionTreeModel * model =
             new SystemActions(childItem);
     kDebug() << "Confirm" << model->modelTitle();
     return model;
+}
+
+bool SystemActions::isCategory(int index) const
+{
+    if (index < 0 || index >= root()->children.size()) {
+        return false;
+    }
+
+    if (root()->children.at(index)->data.toString()
+            == "switch-user") {
+        return true;
+    }
+
+    return Lancelot::StandardActionTreeModel::isCategory(index);
+}
+
+Lancelot::ActionTreeModel * SystemActions::child(int index)
+{
+    if (index < 0 || index >= root()->children.size()) {
+        return NULL;
+    }
+
+    if (root()->children.at(index)->data.toString()
+            == "switch-user") {
+        return switchUserModel;
+    }
+
+    return Lancelot::StandardActionTreeModel::child(index);
 }
 
 // Sessions

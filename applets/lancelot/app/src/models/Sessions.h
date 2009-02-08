@@ -21,6 +21,7 @@
 #define LANCELOTAPP_MODELS_SESSIONS_H
 
 #include <lancelot/models/StandardActionTreeModel.h>
+#include <lancelot/models/ActionTreeModelProxy.h>
 #include "BaseModel.h"
 #include <plasma/runnermanager.h>
 #include <plasma/querymatch.h>
@@ -39,10 +40,14 @@ public:
 
     L_Override void load();
     L_Override StandardActionTreeModel * createChild(int index);
+    L_Override bool isCategory(int index) const;
+    L_Override Lancelot::ActionTreeModel * child(int index);
 
 private:
     explicit SystemActions(Item * root);
     explicit SystemActions();
+
+    Lancelot::ActionTreeModelProxy * switchUserModel;
 
     static SystemActions * m_instance;
 };

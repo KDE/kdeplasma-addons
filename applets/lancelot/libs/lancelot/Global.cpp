@@ -19,7 +19,6 @@
 
 #include "Global.h"
 #include "widgets/Widget.h"
-#include <KDebug>
 #include <KGlobal>
 #include <plasma/theme.h>
 #include <KStandardDirs>
@@ -90,12 +89,10 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
     d->instance = instance;
     d->name = name;
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
-    qDebug() << "Created group " << d->name;
 }
 
 WidgetGroup::~WidgetGroup()
 {
-    qDebug() << "Destroyed group " << d->name;
     delete d;
 }
 
@@ -171,7 +168,6 @@ const WidgetGroup::ColorScheme * WidgetGroup::foregroundColor() const
 void WidgetGroup::load(bool full)
 {
     if (d->loaded && !full) return;
-    qDebug() << "Reloading group " << d->name << full << d->loaded;
     d->loaded = true;
 
     d->hasBackgroundColor = false;
@@ -327,7 +323,6 @@ Instance::Instance()
     d->confMain = new KConfig("lancelot" + app + "rc");
 
     QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
-    kDebug() << search;
 
     QString path =  KStandardDirs::locate( "data", search );
     if (path.isEmpty()) {
@@ -337,7 +332,6 @@ Instance::Instance()
     if (path.isEmpty()) {
         path = "lancelotrc";
     }
-    kDebug() << path;
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;

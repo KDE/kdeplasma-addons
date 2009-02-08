@@ -356,6 +356,8 @@ void ActionListViewItemFactory::setModel(ActionListModel * model) //>
     connect(model, SIGNAL(updated()),
             this, SLOT(modelUpdated()));
 
+    modelUpdated();
+
 } //<
 
 ActionListModel * ActionListViewItemFactory::model() //>

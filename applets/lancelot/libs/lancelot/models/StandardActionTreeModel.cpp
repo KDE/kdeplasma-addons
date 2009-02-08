@@ -18,6 +18,8 @@
  */
 
 #include "StandardActionTreeModel.h"
+#include <KDebug>
+#include <iostream>
 
 namespace Lancelot
 {
@@ -28,6 +30,17 @@ public:
     bool deleteRoot;
     QHash < Item * , StandardActionTreeModel * > childModels;
 };
+
+StandardActionTreeModel::Item::Item(QString itemTitle,
+        QString itemDescription, QIcon itemIcon, QVariant itemData)
+    : title(itemTitle), description(itemDescription), icon(itemIcon), data(itemData)
+{
+};
+
+StandardActionTreeModel::Item::~Item()
+{
+    qDeleteAll(children);
+}
 
 StandardActionTreeModel::StandardActionTreeModel()
     : ActionTreeModel(), d(new Private())
@@ -49,8 +62,8 @@ StandardActionTreeModel::StandardActionTreeModel(Item * root)
 
 StandardActionTreeModel::~StandardActionTreeModel()
 {
-    qDeleteAll(d->childModels);
     if (d->deleteRoot) {
+        qDeleteAll(d->childModels);
         delete d->root;
     }
     delete d;
@@ -67,7 +80,7 @@ ActionTreeModel * StandardActionTreeModel::child(int index)
         return NULL;
     }
 
-    Item * childItem = & d->root->children.value(index);
+    Item * childItem = d->root->children.value(index);
 
     if (childItem->children.size() == 0) {
         return NULL;
@@ -87,7 +100,15 @@ bool StandardActionTreeModel::isCategory(int index) const
         return false;
     }
 
-    return d->root->children.at(index).children.size() != 0;
+    // std::cout << "###  index # " << index << "\n";
+    // std::cout << "         d # " << (void *)d << "\n";
+    // std::cout << "   d->root # " << (void *)d->root << "\n";
+    // std::cout << "  children # " << d->root->children.size() << "\n\n";
+    // foreach (Item i, d->root->children) {
+    //     std::cout << qPrintable(i.title) << "\n";
+    // }
+
+    return d->root->children.at(index)->children.size() != 0;
 }
 
 QString StandardActionTreeModel::modelTitle() const
@@ -106,7 +127,7 @@ QString StandardActionTreeModel::title(int index) const
         return QString();
     }
 
-    return d->root->children.at(index).title;
+    return d->root->children.at(index)->title;
 }
 
 QString StandardActionTreeModel::description(int index) const
@@ -115,7 +136,7 @@ QString StandardActionTreeModel::description(int index) const
         return QString();
     }
 
-    return d->root->children.at(index).description;
+    return d->root->children.at(index)->description;
 }
 
 QIcon StandardActionTreeModel::icon(int index) const
@@ -124,7 +145,7 @@ QIcon StandardActionTreeModel::icon(int index) const
         return QIcon();
     }
 
-    return d->root->children.at(index).icon;
+    return d->root->children.at(index)->icon;
 }
 
 int StandardActionTreeModel::size() const
@@ -133,7 +154,7 @@ int StandardActionTreeModel::size() const
     return d->root->children.size();
 }
 
-void StandardActionTreeModel::add(const Item & item, Item * parent)
+void StandardActionTreeModel::add(Item * item, Item * parent)
 {
     if (parent == NULL) parent = d->root;
 
@@ -142,20 +163,21 @@ void StandardActionTreeModel::add(const Item & item, Item * parent)
 
 void StandardActionTreeModel::add(const QString & title, const QString & description, QIcon icon, const QVariant & data, Item * parent)
 {
-    add(Item(title, description, icon, data), parent);
+    add(new Item(title, description, icon, data), parent);
 }
 
-void StandardActionTreeModel::set(int index, const Item & item, Item * parent)
+void StandardActionTreeModel::set(int index, Item * item, Item * parent)
 {
     if (parent == NULL) parent = d->root;
     if (index < 0 || index >= parent->children.size()) return;
 
+    delete parent->children[index];
     parent->children[index] = item;
 }
 
 void StandardActionTreeModel::set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data, Item * parent)
 {
-    set(index, Item(title, description, icon, data), parent);
+    set(index, new Item(title, description, icon, data), parent);
 }
 
 void StandardActionTreeModel::removeAt(int index, Item * parent)
@@ -170,7 +192,7 @@ void StandardActionTreeModel::clear(Item * parent)
     parent->children.clear();
 }
 
-StandardActionTreeModel::Item & StandardActionTreeModel::itemAt(int index, Item * parent)
+StandardActionTreeModel::Item * StandardActionTreeModel::itemAt(int index, Item * parent)
 {
     if (parent == NULL) parent = d->root;
     return parent->children[index];

@@ -18,42 +18,61 @@
  */
 
 #include "PopupList.h"
-#include <lancelot/widgets/ActionListView.h>
-#include <QBasicTimer>
+#include "PopupList_p.h"
+#include <KMessageBox>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)
 
 namespace Lancelot {
 
-class PopupList::Private {
-public:
-    Private(PopupList * parent)
-        : closeTimeout(1000)
-    {
-        scene = new QGraphicsScene();
-        list = new ActionListView();
-        connect(list->list()->itemFactory(), SIGNAL(updated()), parent, SLOT(updateSize()));
-        connect(list->list()->itemFactory(), SIGNAL(itemInserted(int)), parent, SLOT(updateSize()));
-        connect(list->list()->itemFactory(), SIGNAL(itemDeleted(int)), parent, SLOT(updateSize()));
-        connect(list->list()->itemFactory(), SIGNAL(itemAltered(int)), parent, SLOT(updateSize()));
+PopupList::Private::Private(PopupList * parent)
+    : closeTimeout(1000),
+      listModel(NULL),
+      treeModel(NULL),
+      q(parent)
+{
+    scene = new QGraphicsScene();
+    list = new ActionListView();
 
-        scene->addItem(list);
-        parent->setGraphicsWidget(list);
-        parent->resize(256, 384);
-    };
+    scene->addItem(list);
+    parent->setGraphicsWidget(list);
+    parent->resize(256, 384);
 
-    ~Private()
-    {
-        delete list;
-        delete scene;
-    }
-
-    ActionListView * list;
-    QGraphicsScene * scene;
-    QBasicTimer timer;
-    int closeTimeout;
 };
+
+void PopupList::Private::connectSignals()
+{
+    connect(list->list()->itemFactory(), SIGNAL(updated()),
+            q, SLOT(updateSize()));
+    connect(list->list()->itemFactory(), SIGNAL(itemInserted(int)),
+            q, SLOT(updateSize()));
+    connect(list->list()->itemFactory(), SIGNAL(itemDeleted(int)),
+            q, SLOT(updateSize()));
+    connect(list->list()->itemFactory(), SIGNAL(itemAltered(int)),
+            q, SLOT(updateSize()));
+    connect(list->list()->itemFactory(), SIGNAL(activated(int)),
+            this, SLOT(listItemActivated(int)));
+}
+
+PopupList::Private::~Private()
+{
+    delete list;
+    delete scene;
+}
+
+void PopupList::Private::listItemActivated(int index)
+{
+    qDebug() << "listItemActivated"
+        << "tree" << (void *) treeModel
+        << "list" << (void *) listModel;
+    if (treeModel && treeModel->isCategory(index)) {
+        qDebug() << treeModel->isCategory(index);
+        list->setModel(treeModel->child(index));
+    }
+}
 
 PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
   : Plasma::Dialog(parent, f),
@@ -67,10 +86,26 @@ PopupList::~PopupList()
     delete d;
 }
 
-ActionListView * PopupList::list() const
+void PopupList::setModel(ActionListModel * model)
 {
-    return d->list;
+    if (!model) {
+        return;
+    }
+
+    d->treeModel = dynamic_cast < ActionTreeModel * > (model);
+
+    if (!d->treeModel) {
+        d->listModel = model;
+    }
+
+    d->list->setModel(model);
+    d->connectSignals();
 }
+
+// ActionListView * PopupList::list() const
+// {
+//     return d->list;
+// }
 
 void PopupList::showEvent(QShowEvent * event)
 {
@@ -91,14 +126,6 @@ void PopupList::showEvent(QShowEvent * event)
 
     Plasma::Dialog::showEvent(event);
     d->timer.stop();
-}
-
-void PopupList::updateSize()
-{
-    int left, top, right, bottom;
-    getContentsMargins(&left, &top, &right, &bottom);
-    resize(width(), d->list->list()->
-            itemFactory()->itemCount() * ITEM_HEIGHT + top + bottom);
 }
 
 void PopupList::setCloseTimeout(int timeout)
@@ -132,6 +159,40 @@ void PopupList::timerEvent(QTimerEvent * event)
         d->timer.stop();
     }
     Plasma::Dialog::timerEvent(event);
+}
+
+void PopupList::updateSize()
+{
+    d->list->resize(256, d->list->list()->
+            itemFactory()->itemCount() * ITEM_HEIGHT);
+}
+
+void PopupList::exec(const QPoint & p)
+{
+    updateSize();
+
+    QRect g = geometry();
+    g.moveTopLeft(p);
+
+    QRect screen = QApplication::desktop()->screenGeometry(
+            QApplication::desktop()->screenNumber(p)
+        );
+
+    if (g.right() > screen.right()) {
+        g.moveRight(screen.right());
+    } else if (g.left() < screen.left()) {
+        g.moveLeft(screen.left());
+    }
+
+    if (g.bottom() > screen.bottom()) {
+        g.moveBottom(screen.bottom());
+    } else if (g.top() < screen.top()) {
+        g.moveTop(screen.top());
+    }
+
+    setGeometry(g);
+
+    show();
 }
 
 } // namespace Lancelot

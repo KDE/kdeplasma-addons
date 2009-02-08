@@ -560,7 +560,8 @@ void LancelotWindow::systemSwitchUser()
     if (!menuSwitchUser) {
         menuSwitchUser = new Lancelot::PopupList();
         menuSwitchUser->resize(200, 200);
-        menuSwitchUser->list()->setModel(new Models::Sessions());
+        // menuSwitchUser->setModel(new Models::Sessions());
+        menuSwitchUser->setModel(Models::SystemActions::instance());
         Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
         connect(
                 ac, SIGNAL(doHide(bool)),
@@ -645,10 +646,6 @@ void LancelotWindow::setupModels()
          new Models::FavoriteApplications::PassagewayViewProxy()
      );
      passagewayApplications->setAtlasModel(new Models::Applications());
-     //
-     //kDebug() << "Instance creating";
-     //passagewayApplications->setAtlasModel(Models::SystemActions::instance());
-
 }
 
 // Resizing:
