@@ -89,6 +89,8 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
     d->instance = instance;
     d->name = name;
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
+    qDebug() << "Creating group: " << name <<
+        d->confGroupTheme->isValid();
 }
 
 WidgetGroup::~WidgetGroup()

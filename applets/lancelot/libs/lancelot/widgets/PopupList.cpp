@@ -25,6 +25,7 @@
 
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)
+#define MENU_WIDTH 200
 
 namespace Lancelot {
 
@@ -39,7 +40,7 @@ PopupList::Private::Private(PopupList * parent)
 
     scene->addItem(list);
     parent->setGraphicsWidget(list);
-    parent->resize(256, 384);
+    parent->resize(MENU_WIDTH, 384);
 }
 
 void PopupList::Private::connectSignals()
@@ -95,6 +96,13 @@ void PopupList::setModel(ActionListModel * model)
 
     if (!d->treeModel) {
         d->listModel = model;
+        d->list->setCategoriesGroup(Instance::activeInstance()
+                ->group("PopupList-CategoriesPass"));
+    } else {
+        d->listModel = NULL;
+        d->list->setCategoriesActivable(true);
+        d->list->setCategoriesGroup(Instance::activeInstance()
+                ->group("PopupList-CategoriesPass"));
     }
 
     d->list->setModel(model);
@@ -111,6 +119,8 @@ void PopupList::showEvent(QShowEvent * event)
     d->list->setGroupByName("PopupList");
     d->list->setItemsGroup(Instance::activeInstance()
             ->group("PopupList-Items"));
+    d->list->setCategoriesGroup(Instance::activeInstance()
+            ->group("PopupList-Categories"));
 
     d->list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
     d->list->setItemHeight(ITEM_HEIGHT, Qt::PreferredSize);
@@ -162,7 +172,7 @@ void PopupList::timerEvent(QTimerEvent * event)
 
 void PopupList::updateSize()
 {
-    d->list->resize(256, d->list->list()->
+    d->list->resize(MENU_WIDTH, d->list->list()->
             itemFactory()->itemCount() * ITEM_HEIGHT);
 }
 

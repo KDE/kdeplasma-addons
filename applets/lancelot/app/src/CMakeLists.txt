@@ -22,9 +22,6 @@ configure_file(config-lancelot.h.cmake
 # Checking for Composite End                            #
 #########################################################
 
-
-
-
 include(PlasmaUIMacros)
 
 include_directories(
@@ -131,7 +128,16 @@ kde4_add_ui_files(
 
 kde4_add_executable(lancelot-menu ${plasma_lancelot_SRCS})
 
-target_link_libraries(lancelot-menu ${KDE4_KIO_LIBS} ${KDE4_PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_SOLID_LIBS} ${KDE4WORKSPACE_TASKMANAGER_LIBRARY} kworkspace)
+target_link_libraries(
+    lancelot-menu
+    ${KDE4_KIO_LIBS}
+    ${KDE4_PLASMA_LIBS}
+    ${LANCELOT_LIBS}
+    ${KDE4_SOLID_LIBS}
+    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
+    solidcontrol
+    kworkspace)
+
 if(LANCELOT_HAVE_COMPOSITING)
 target_link_libraries(lancelot-menu ${X11_Xrender_LIB} ${X11_X11_LIB})
 endif(LANCELOT_HAVE_COMPOSITING)
@@ -168,7 +174,15 @@ kde4_add_ui_files(
 
 kde4_add_plugin(plasma_applet_lancelot_part ${plasma_applet_lancelot_part_SRCS})
 
-target_link_libraries(plasma_applet_lancelot_part ${KDE4_PLASMA_LIBS} ${LANCELOT_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS} ${KDE4WORKSPACE_TASKMANAGER_LIBRARY} kworkspace)
+target_link_libraries(
+    plasma_applet_lancelot_part
+    ${KDE4_PLASMA_LIBS}
+    ${LANCELOT_LIBS}
+    ${KDE4_KIO_LIBS}
+    ${KDE4_SOLID_LIBS}
+    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
+    solidcontrol
+    kworkspace)
 
 install(
   TARGETS plasma_applet_lancelot_part

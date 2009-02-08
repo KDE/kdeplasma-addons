@@ -29,6 +29,10 @@
 #include <KMessageBox>
 #include <QDBusInterface>
 
+#include <KJob>
+#include <kworkspace/kworkspace.h>
+#include <solid/control/powermanager.h>
+
 #include <plasma/abstractrunner.h>
 
 namespace Models {
@@ -70,12 +74,18 @@ void SystemActions::load()
 
     StandardActionTreeModel::Item * item;
 
-    item = new StandardActionTreeModel::Item(i18n("Leave"), QString(), KIcon("system-shutdown"), "leave");
-    item->children << new Item(i18n("Log Out"), QString(), KIcon("system-log-out"), "log-out");
-    item->children << new Item(i18n("Reboot"), QString(), KIcon("system-restart"), "reboot");
-    item->children << new Item(i18n("Shut Down"), QString(), KIcon("system-shutdown"), "poweroff");
-    item->children << new Item(i18n("Suspend to Disk"), QString(), KIcon("system-suspend-hibernate"), "suspend-disk");
-    item->children << new Item(i18n("Suspend to RAM"), QString(), KIcon("system-suspend"), "suspend-ram");
+    item = new StandardActionTreeModel::Item(i18n("Leave"),
+            QString(), KIcon("system-shutdown"), "leave");
+    item->children << new Item(i18n("Log Out"),
+            QString(), KIcon("system-log-out"), "log-out");
+    item->children << new Item(i18n("Reboot"),
+            QString(), KIcon("system-restart"), "reboot");
+    item->children << new Item(i18n("Shut Down"),
+            QString(), KIcon("system-shutdown"), "poweroff");
+    item->children << new Item(i18n("Suspend to Disk"),
+            QString(), KIcon("system-suspend-hibernate"), "suspend-disk");
+    item->children << new Item(i18n("Suspend to RAM"),
+            QString(), KIcon("system-suspend"), "suspend-ram");
     add(item);
 
     switchUserModel = new Lancelot::ActionTreeModelProxy(
@@ -123,6 +133,55 @@ Lancelot::ActionTreeModel * SystemActions::child(int index)
     }
 
     return Lancelot::StandardActionTreeModel::child(index);
+}
+
+void SystemActions::activate(int index)
+{
+    if (index < 0 || index >= root()->children.size()) {
+        return;
+    }
+
+    KWorkSpace::ShutdownConfirm confirm = KWorkSpace::ShutdownConfirmDefault;
+    KWorkSpace::ShutdownType type = KWorkSpace::ShutdownTypeNone;
+
+    QString cmd = root()->children.at(index)->data.toString();
+
+    // KWorkSpace related
+
+    if (cmd == "log-out") {
+        type = KWorkSpace::ShutdownTypeLogout;
+    } else if (cmd == "reboot") {
+        type = KWorkSpace::ShutdownTypeReboot;
+    } else if (cmd == "poweroff") {
+        type = KWorkSpace::ShutdownTypeHalt;
+    }
+
+    if (type != KWorkSpace::ShutdownTypeNone) {
+        ApplicationConnector::instance()->hide(true);
+        KWorkSpace::requestShutDown(confirm, type);
+        return;
+    }
+
+    // Solid related
+
+    KJob * job = NULL;
+    Solid::Control::PowerManager::SuspendMethod method =
+        Solid::Control::PowerManager::UnknownSuspendMethod;
+
+    if (cmd == "suspend-disk") {
+        method = Solid::Control::PowerManager::ToDisk;
+    } else if (cmd == "suspend-ram") {
+        method = Solid::Control::PowerManager::ToRam;
+    }
+
+    if (method) {
+        ApplicationConnector::instance()->hide(true);
+        job = Solid::Control::PowerManager::suspend(method);
+        if (job) {
+            job->start();
+        }
+        return;
+    }
 }
 
 // Sessions
@@ -213,7 +272,8 @@ void Sessions::activate(int index)
             return;
         }
 
-        QDBusInterface screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", "org.freedesktop.ScreenSaver");
+        QDBusInterface screensaver("org.freedesktop.ScreenSaver",
+                "/ScreenSaver", "org.freedesktop.ScreenSaver");
         screensaver.call( "Lock" );
 
         dm.startReserve();

@@ -43,6 +43,8 @@ public:
     L_Override bool isCategory(int index) const;
     L_Override Lancelot::ActionTreeModel * child(int index);
 
+    void activate(int index);
+
 private:
     explicit SystemActions(Item * root);
     explicit SystemActions();
@@ -63,7 +65,6 @@ public:
 
 private:
     KDisplayManager dm;
-
 };
 
 } // namespace Models

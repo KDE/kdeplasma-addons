@@ -586,6 +586,7 @@ ActionListView::Private::~Private() //>
 ActionListView::ActionListView(QGraphicsItem * parent) //>
     : CustomListView(parent), d(new Private())
 {
+    setModel(NULL);
     setFlag(ScrollPane::HoverShowScrollbars);
     clearFlag(ScrollPane::ClipScrollable);
     setFocusPolicy(Qt::WheelFocus);
