@@ -30,8 +30,14 @@ the picture properties, based on what is displayed by GWenView.
 see frametest-back.tar.gz at 
 http://drop.io/annmakde/asset/frametest-back-tar-gz
 
-Get all data from Nepomuk & Strigi. If Exif data is not in Nepomuk, thenget it from EXIF 
+Get all data from Nepomuk & Strigi. If Exif data is not in Nepomuk, then get it from EXIF 
 and save it in Nepomuk so next time it is there.
+Resources:
+http://xesam.org/specs/xesam-ontology-0.95.book.pdf - page 29
+http://api.kde.org/kdesupport-api/kdesupport-apidocs/soprano/html/namespaceSoprano_1_1Vocabulary_1_1Xesam.html
+http://www.semanticdesktop.org/ontologies/nexif/
+http://www.semanticdesktop.org/ontologies/2007/03/22/nfo/#Image
+
 For 4.4: user interaction with Nepomuk metadata, add, remove and change 
 tags,comment and rating.
 
@@ -69,7 +75,10 @@ See bug http://bugs.kde.org/show_bug.cgi?id=183315
 7) Junior Job (not assessed)
 -------------------------
 Add transitions effects to the Slideshow mode
-Use Kinetic
+Use Qt 4.5 (current qt-copy and trunk) and Kinetic
+use: git clone git://labs.trolltech.com/qt/kinetic
+http://labs.trolltech.com/blogs/2008/11/06/welcome-to-kinetic/
+
 see http://bugs.kde.org/show_bug.cgi?id=161645
 
 
