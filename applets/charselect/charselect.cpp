@@ -46,6 +46,7 @@ void CharSelectApplet::constraintsEvent(Plasma::Constraints constraints)
         if (size().width() < widget()->size().width() || 
              size().height() < widget()->size().height()) {
             resize(widget()->size());
+            emit appletTransformedItself();
         }
     }
 }

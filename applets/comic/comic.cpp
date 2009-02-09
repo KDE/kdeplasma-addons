@@ -440,6 +440,7 @@ void ComicApplet::slotSizeChanged()
 void ComicApplet::slotShowMaxSize()
 {
     resize( mMaxSize );
+    emit appletTransformedItself();
 }
 
 void ComicApplet::updateScrollBars()
@@ -569,6 +570,7 @@ void ComicApplet::updateSize()
         }
 
         resize( mLastSize );
+        emit appletTransformedItself();
     }
 }
 

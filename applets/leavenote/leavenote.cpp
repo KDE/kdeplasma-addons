@@ -128,6 +128,7 @@ void LeaveNote::constraintsEvent(Plasma::Constraints constraints)
             setMinimumSize(10,10);
             setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
             resize(340, 250);
+            emit appletTransformedItself();
         }
     }
 }

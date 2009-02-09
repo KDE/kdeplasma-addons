@@ -85,6 +85,7 @@ void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &dat
 	QSizeF sizeHint = contentSizeHint();
 	if (geometry().size() != sizeHint) {
             resize(sizeHint); 
+            emit appletTransformedItself();
 	} else {        
             update();
 	}
@@ -189,6 +190,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
              m_swOutline = 8;
 	     //Restore widget geometry to image proportions
 	     resize(contentSizeHint());
+	     emit appletTransformedItself();
 	}
     }  
     

@@ -534,6 +534,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
     } else {
         //add margins
         resize ( m_contentSize + QSizeF(size()-contentsRect().size()) );
+        emit appletTransformedItself();
     }
 
 } else { //in a panel or timestring wider than plasmoid -> change size to the minimal needed space, i.e. the timestring will not increase in point-size OR plasmoid in Panel.
@@ -667,6 +668,7 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
         //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
         kDebug() << "we set the minimum size needed as the size we want";
         resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
+        emit appletTransformedItself();
     }
 }
 }

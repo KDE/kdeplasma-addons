@@ -97,6 +97,7 @@ void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
 
         } else {
             resize(getWidthFromHeight((int) contentsRect().height()) + borderWidth, contentsRect().height() + borderHeight);
+            emit appletTransformedItself();
         }
     }
 }
