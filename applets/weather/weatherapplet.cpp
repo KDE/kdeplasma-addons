@@ -166,7 +166,7 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 
     m_titlePanel->addItem(m_locationLabel, 0, 0, 1, 3);
     m_titlePanel->addItem(m_tempLabel, 0, 3);
-    m_titlePanel->addItem(m_conditionsLabel, 1, 1);
+    m_titlePanel->addItem(m_conditionsLabel, 1, 0);
     m_titlePanel->addItem(m_windIcon, 1, 2);
     m_titlePanel->addItem(m_forecastTemps, 1, 3);
 
@@ -209,6 +209,8 @@ WeatherApplet::~WeatherApplet()
     if (m_addDialog) {
         delete m_addDialog;
     }
+
+    destroyLayout();
 }
 
 void WeatherApplet::toolTipAboutToShow()
@@ -295,7 +297,7 @@ QList<QAction*> WeatherApplet::contextualActions()
     return actions;
 }
 
-void WeatherApplet::clearLayout()
+void WeatherApplet::destroyLayout()
 {
     if (m_bottomLayout) {
         if (m_fiveDaysModel) {
@@ -312,17 +314,17 @@ void WeatherApplet::clearLayout()
          }
 
          if (m_fiveDaysView) {
-             kDebug() << "Delete the Plasma::WeatherView";
+             kDebug() << "Delete the Plasma::m_fiveDaysView";
              delete m_fiveDaysView;
              m_fiveDaysView = 0;
-             kDebug() << "Finished deleting Plasma::WeatherView";
+             kDebug() << "Finished deleting Plasma::m_fiveDaysView";
          }
 
          if (m_detailsView) {
-             kDebug() << "Delete the Plasma::WeatherView";
+             kDebug() << "Delete the Plasma::m_detailsView";
              delete m_detailsView;
              m_detailsView = 0;
-             kDebug() << "Finished dleeting Plasma::WeatherView";
+             kDebug() << "Finished deleting Plasma::m_detailsView";
          }
 
         kDebug() << "Deleting Plasma::TabBar";
@@ -674,8 +676,6 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
 
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
-    clearLayout();
-
     m_locationLabel->setText(data["Place"].toString());
     QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split("|"); // Get current time period of day
 
@@ -742,10 +742,15 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (m_tabBar->count() > 0) {
         // If we have items in tab clean it up first
-        for (int i = 0; i < m_tabBar->count(); i++) {
-             kDebug() << "Destroying Tab: " << i;
-             m_tabBar->removeTab(i);
+        while (m_tabBar->count()) {
+             m_tabBar->removeTab(0);
         }
+    }
+
+    // Do some cleanup on WeatherView
+    if (m_fiveDaysView) {
+        delete m_fiveDaysView;
+        m_fiveDaysView = 0;
     }
 
     // If we have a 5 day forecast, display it
@@ -804,7 +809,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                 fiveDayIcon->setIcon(KIcon(fiveDayTokens[1]));
                 fiveDayIcon->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
                 fiveDayIcon->setDrawBackground(false);
-
+                fiveDayIcon->hide();
                 QStandardItem *iconItem = new QStandardItem(fiveDayIcon->icon(), NULL);
 
                 if (fiveDayTokens[5] != "N/U") {
@@ -844,6 +849,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             }
 
         }
+
 
         if (dayItems.count() > 0) {
             m_fiveDaysModel->appendRow(dayItems);
@@ -1075,7 +1081,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
             validate(source, data["validate"]);
             if (isBusy()) {
                 setVisibleLayout(false);
-                clearLayout();
                 setBusy(false);
                 setConfigurationRequired(true);
             }
@@ -1131,7 +1136,6 @@ void WeatherApplet::configAccepted()
         getWeather();
     } else {
         setVisibleLayout(false);
-        clearLayout();
         setConfigurationRequired(true);
     }
 }
