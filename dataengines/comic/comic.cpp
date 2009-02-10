@@ -24,8 +24,6 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
-#include <solid/networking.h>
-
 #include "comic.h"
 
 #include "cachedprovider.h"
@@ -43,6 +41,16 @@ ComicEngine::~ComicEngine()
 
 void ComicEngine::init()
 {
+    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
+             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
+}
+
+void ComicEngine::networkStatusChanged( Solid::Networking::Status status )
+{
+    if ( ( status == Solid::Networking::Connected || status == Solid::Networking::Unknown ) &&
+         !mIdentifierError.isEmpty() ) {
+        sourceRequestEvent( mIdentifierError );
+    }
 }
 
 void ComicEngine::updateFactories()
@@ -103,9 +111,10 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         // check if there is a connection
         Solid::Networking::Status status = Solid::Networking::status();
         if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
+            mIdentifierError = identifier;
             setData( identifier, "Error", true );
             setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
-            return false;
+            return true;
         }
 
         const KService::Ptr service = mFactories[ parts[ 0 ] ];
@@ -136,6 +145,9 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         }
         provider->setIsCurrent( isCurrentComic );
 
+        // only busy for downloading the comic
+        emit isBusy( true );
+
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
         connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
         return true;
@@ -156,6 +168,12 @@ void ComicEngine::finished( ComicProvider *provider )
     if ( provider->image().isNull() ) {
         error( provider );
         return;
+    }
+
+    // different comic -- with no error yet -- has been chosen, old error is invalidated
+    QString temp = mIdentifierError.left( mIdentifierError.indexOf( ':' ) + 1 );
+    if ( !mIdentifierError.isEmpty() && provider->identifier().indexOf( temp ) == -1 ) {
+        mIdentifierError = QString();
     }
 
     // store in cache if it's not the response of a CachedProvider,
@@ -197,6 +215,7 @@ void ComicEngine::error( ComicProvider *provider )
     setComicData( provider );
 
     QString identifier( provider->identifier() );
+    mIdentifierError = identifier;
 
     /**
      * Requests for the current day have no suffix (date or id)
@@ -242,6 +261,9 @@ void ComicEngine::setComicData( ComicProvider *provider )
     setData( identifier, "Identifier", provider->identifier() );
     setData( identifier, "Title", provider->name() );
     setData( identifier, "SuffixType", provider->suffixType() );
+    setData( identifier, "Error", false );
+
+    emit isBusy( false );
 }
 
 QString ComicEngine::lastCachedIdentifier( const QString &identifier ) const

@@ -23,12 +23,10 @@
 #define COMIC_H
 
 #include <QtCore/QDate>
-#include <QtCore/QStringList>
 #include <QtGui/QImage>
 
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
-#include <solid/networking.h>
 
 class ConfigWidget;
 class FadingItem;
@@ -71,7 +69,6 @@ class ComicApplet : public Plasma::Applet
         void slotSizeChanged();
         void slotScroll();
         void applyConfig();
-        void networkStatusChanged( Solid::Networking::Status );
         void checkDayChanged();
         void buttonBar();
 
@@ -133,6 +130,7 @@ class ComicApplet : public Plasma::Applet
         QSizeF mLastSize;
         QSizeF mIdealSize;
         QRect mImageRect;
+        Plasma::DataEngine *mEngine;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
         Plasma::PushButton *mPrevButton;
