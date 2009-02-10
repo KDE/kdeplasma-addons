@@ -30,6 +30,9 @@ the picture properties, based on what is displayed by GWenView.
 see frametest-back.tar.gz at 
 http://drop.io/annmakde/asset/frametest-back-tar-gz
 
+Make a dataengine to get the metadata from the file (so that could be
+reused by other apps)
+
 Get all data from Nepomuk & Strigi. If Exif data is not in Nepomuk, then get it from EXIF 
 and save it in Nepomuk so next time it is there.
 Resources:
@@ -100,6 +103,11 @@ Doc: http://blog.bepointbe.be/index.php/2008/10/19/30-a-bit-of-plasma-profiling
 Clean: separate the "get picture" part from the "paint picture"
 Add doc comment in .h files.
 Give better names and optimize code.
+
+Scaling: get the ratio of the frame and compare with the picture size. If close: use
+smoothTransform, if too much to scale use a less demanding transform
+
+Get the 2 pictures into 2 children applets.
 
 
 9) PoTD engine (Matías Szeftel) (arlekin on IRC)
