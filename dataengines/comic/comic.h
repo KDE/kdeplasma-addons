@@ -20,6 +20,7 @@
 #define COMIC_DATAENGINE_H
 
 #include "plasma/dataengine.h"
+#include <solid/networking.h>
 
 class ComicProvider;
 
@@ -44,6 +45,9 @@ class ComicEngine : public Plasma::DataEngine
         ComicEngine( QObject* parent, const QVariantList& args );
         ~ComicEngine();
 
+    Q_SIGNALS:
+        void isBusy( bool busy );
+
     protected:
         void init();
         bool sourceRequestEvent( const QString &identifier );
@@ -55,11 +59,13 @@ class ComicEngine : public Plasma::DataEngine
     private Q_SLOTS:
         void finished( ComicProvider* );
         void error( ComicProvider* );
+        void networkStatusChanged( Solid::Networking::Status );
 
     private:
         bool mEmptySuffix;
         void setComicData( ComicProvider *provider );
         QString lastCachedIdentifier( const QString &identifier ) const;
+        QString mIdentifierError;
         QMap<QString, KService::Ptr> mFactories;
 };
 

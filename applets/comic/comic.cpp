@@ -108,6 +108,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mFullViewWidget( 0 ),
+      mEngine( 0 ),
       mFrame( 0 ),
       mFadingItem( 0 ),
       mPrevButton( 0 ),
@@ -177,12 +178,12 @@ void ComicApplet::init()
     mActions.append( mActionStorePosition );
     connect( mActionStorePosition, SIGNAL( triggered( bool ) ), this, SLOT( slotStorePosition() ) );
 
-    updateComic( mStoredIdentifierSuffix );
-
-    connect( Solid::Networking::notifier(), SIGNAL( statusChanged( Solid::Networking::Status ) ),
-             this, SLOT( networkStatusChanged( Solid::Networking::Status ) ) );
-
     connect( this, SIGNAL( geometryChanged() ), this, SLOT( slotSizeChanged() ) );
+
+    mEngine = dataEngine( "comic" );
+    connect( mEngine, SIGNAL( isBusy( bool ) ), this, SLOT( setBusy( bool ) ) );
+
+    updateComic( mStoredIdentifierSuffix );
 }
 
 ComicApplet::~ComicApplet()
@@ -192,15 +193,13 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
-    setBusy( false );
-
     if ( data[ "Error" ].toBool() ) {
         if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
             updateComic( data[ "Previous identifier suffix" ].toString() );
         } else {
             setConfigurationRequired( true );
-            return;
         }
+        return;
     }
 
     mImage = data[ "Image" ].value<QImage>();
@@ -306,15 +305,6 @@ void ComicApplet::applyConfig()
     if ( checkButtonBar ) {
         buttonBar();
         update();
-    }
-}
-
-void ComicApplet::networkStatusChanged( Solid::Networking::Status status )
-{
-    //check if there is a connection and if there a comic has been selected
-    if ( ( status == Solid::Networking::Connected ) && !mComicIdentifier.isEmpty() ) {
-        setConfigurationRequired( false );
-        updateComic( mStoredIdentifierSuffix );
     }
 }
 
@@ -714,26 +704,19 @@ void ComicApplet::wheelEvent( QGraphicsSceneWheelEvent *event )
 
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
-    Plasma::DataEngine *engine = dataEngine( "comic" );
-    if ( !engine )
-        return;
+    mEngine = dataEngine( "comic" );
 
-    setConfigurationRequired( mComicIdentifier.isEmpty() );
-    if ( !mComicIdentifier.isEmpty() ) {
-        setBusy( true );
+    if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
+        mEngine->disconnectSource( identifier, this );
+        mEngine->connectSource( identifier, this );
+        const Plasma::DataEngine::Data data = mEngine->query( identifier );
 
-        engine->disconnectSource( identifier, this );
-        engine->connectSource( identifier, this );
-        const Plasma::DataEngine::Data data = engine->query( identifier );
-        if ( data[ "Error" ].toBool() ) {
-            if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
-                updateComic( data[ "Previous identifier suffix" ].toString() );
-            } else {
-                setConfigurationRequired( true );
-            }
-            setBusy( false );
+        if ( data[ "Error" ].toBool() && data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+            setConfigurationRequired( true );
         }
+    } else {
+        setConfigurationRequired( true );
     }
 }
 
