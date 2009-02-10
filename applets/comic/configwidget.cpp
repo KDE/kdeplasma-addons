@@ -193,4 +193,14 @@ bool ConfigWidget::middleClick() const
     return ui.checkBox_middle->isChecked();
 }
 
+void ConfigWidget::setReloadTime( int minutes )
+{
+    ui.spinBox_Reload->setValue( minutes );
+}
+
+int ConfigWidget::reloadTime() const
+{
+    return ui.spinBox_Reload->value();
+}
+
 #include "configwidget.moc"

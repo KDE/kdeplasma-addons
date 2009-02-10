@@ -145,6 +145,9 @@ void ComicApplet::init()
     connect( mDateChangedTimer, SIGNAL( timeout() ), this, SLOT( checkDayChanged() ) );
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
+    mReloadTimer = new QTimer( this );
+    connect( mReloadTimer, SIGNAL( timeout() ), this, SLOT( slotReload() ) );
+
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
     mActions.append( mActionGoFirst );
     connect( mActionGoFirst, SIGNAL( triggered( bool ) ), this, SLOT( slotFirstDay() ) );
@@ -266,6 +269,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
+    mConfigWidget->setReloadTime( mReloadTime );
 
     parent->addPage( mConfigWidget, i18n("General"), icon() );
 
@@ -285,6 +289,13 @@ void ComicApplet::applyConfig()
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
+    mReloadTime = mConfigWidget->reloadTime();
+
+    if ( !mReloadTime ) {
+        mReloadTimer->stop();
+    } else {
+        mReloadTimer->start( mReloadTime * 1000 * 60 );
+    }
 
     saveConfig();
 
@@ -331,6 +342,7 @@ void ComicApplet::loadConfig()
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
+    mReloadTime = cg.readEntry( "reloadTime", 0 );
 
     buttonBar();
 }
@@ -345,6 +357,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
+    cg.writeEntry( "reloadTime", mReloadTime );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -380,6 +393,11 @@ void ComicApplet::slotFirstDay()
 void ComicApplet::slotCurrentDay()
 {
     updateComic( QString() );
+}
+
+void ComicApplet::slotReload()
+{
+    updateComic( mStoredIdentifierSuffix );
 }
 
 void ComicApplet::slotGoJump()
@@ -430,7 +448,7 @@ void ComicApplet::slotSizeChanged()
 void ComicApplet::slotShowMaxSize()
 {
     resize( mMaxSize );
-    emit appletTransformedItself();
+//     emit appletTransformedItself();
 }
 
 void ComicApplet::updateScrollBars()
@@ -560,7 +578,7 @@ void ComicApplet::updateSize()
         }
 
         resize( mLastSize );
-        emit appletTransformedItself();
+//         emit appletTransformedItself();
     }
 }
 

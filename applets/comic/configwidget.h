@@ -54,6 +54,8 @@ class ConfigWidget : public QWidget
         bool arrowsOnHover() const;
         void setMiddleClick( bool checked );
         bool middleClick() const;
+        void setReloadTime( int minutes );
+        int reloadTime() const;
 
     Q_SIGNALS:
         void maxSizeClicked();

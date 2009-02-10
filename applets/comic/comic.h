@@ -66,6 +66,7 @@ class ComicApplet : public Plasma::Applet
         void slotFirstDay();
         void slotCurrentDay();
         void slotGoJump();
+        void slotReload();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotShop();
@@ -126,6 +127,7 @@ class ComicApplet : public Plasma::Applet
         bool mArrowsOnHover;
         bool mMiddleClick;
         QTimer *mDateChangedTimer;
+        QTimer *mReloadTimer;
         QList<QAction*> mActions;
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
@@ -149,6 +151,7 @@ class ComicApplet : public Plasma::Applet
         Plasma::ScrollBar *mScrollBarVert;
         Plasma::ScrollBar *mScrollBarHoriz;
         Plasma::Svg *mSvg;
+        int mReloadTime;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
