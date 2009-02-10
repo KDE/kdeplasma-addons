@@ -448,7 +448,7 @@ void ComicApplet::slotSizeChanged()
 void ComicApplet::slotShowMaxSize()
 {
     resize( mMaxSize );
-//     emit appletTransformedItself();
+    emit appletTransformedItself();
 }
 
 void ComicApplet::updateScrollBars()
@@ -578,7 +578,7 @@ void ComicApplet::updateSize()
         }
 
         resize( mLastSize );
-//         emit appletTransformedItself();
+        emit appletTransformedItself();
     }
 }
 
@@ -724,6 +724,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 {
     mEngine = dataEngine( "comic" );
 
+    setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
         mEngine->disconnectSource( identifier, this );
