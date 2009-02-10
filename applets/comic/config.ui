@@ -41,7 +41,7 @@
              </sizepolicy>
             </property>
             <property name="text" >
-             <string>Comic:</string>
+             <string>&amp;Comic:</string>
             </property>
             <property name="buddy" >
              <cstring>comboBox_comic</cstring>
@@ -63,7 +63,7 @@
         <item>
          <widget class="QCheckBox" name="checkBox_middle" >
           <property name="text" >
-           <string>Middle-click on the comic to show it at its original size</string>
+           <string>&amp;Middle-click on the comic to show it at its original size</string>
           </property>
           <property name="checked" >
            <bool>true</bool>
@@ -94,7 +94,7 @@
              <string>Download new comics</string>
             </property>
             <property name="text" >
-             <string>Get New Comics...</string>
+             <string>&amp;Get New Comics...</string>
             </property>
            </widget>
           </item>
@@ -116,10 +116,6 @@
        </layout>
       </item>
      </layout>
-     <zorder>label</zorder>
-     <zorder>comboBox_comic</zorder>
-     <zorder>gridLayoutWidget</zorder>
-     <zorder></zorder>
     </widget>
    </item>
    <item>
@@ -144,17 +140,14 @@
              <item>
               <widget class="QCheckBox" name="checkBox_author" >
                <property name="text" >
-                <string>Show comic author</string>
+                <string>Show comic &amp;author</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="checkBox_title" >
-               <property name="toolTip" >
-                <string>Use smooth scaling when resizing pictures. Usually pictures look better this way, but it takes more time to load them.</string>
-               </property>
                <property name="text" >
-                <string>Show comic title</string>
+                <string>Show comic &amp;title</string>
                </property>
               </widget>
              </item>
@@ -167,7 +160,7 @@
                 </sizepolicy>
                </property>
                <property name="text" >
-                <string>Show comic url</string>
+                <string>Show comic &amp;url</string>
                </property>
                <property name="checked" >
                 <bool>false</bool>
@@ -177,20 +170,19 @@
              <item>
               <widget class="QCheckBox" name="checkBox_identifier" >
                <property name="text" >
-                <string>Show comic identifier</string>
+                <string>Show comic &amp;identifier</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
           </layout>
-          <zorder></zorder>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="checkBox_arrows" >
           <property name="text" >
-           <string>Show arrows only on hover</string>
+           <string>Show arrows only on &amp;hover</string>
           </property>
           <property name="checked" >
            <bool>true</bool>
@@ -202,7 +194,7 @@
           <item>
            <widget class="QPushButton" name="pushButton_Size" >
             <property name="text" >
-             <string>Maximum size of the applet</string>
+             <string>Maximum &amp;size of the applet</string>
             </property>
            </widget>
           </item>
@@ -240,10 +232,14 @@
     </spacer>
    </item>
   </layout>
-  <zorder>groupBox_2</zorder>
-  <zorder>groupBox</zorder>
-  <zorder></zorder>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
