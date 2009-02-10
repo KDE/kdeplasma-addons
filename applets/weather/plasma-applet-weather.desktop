@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Weather Forecast
 Name[es]=Previsión metereológica
+Name[et]=Ilmateade
 Name[eu]=Eguraldi iragarpena
 Name[ga]=Réamhaisnéis Aimsire
 Name[nds]=Wederbericht
@@ -15,6 +16,7 @@ Name[zh_CN]=天气预报
 Name[zh_TW]=氣象預報
 Comment=Displays Weather information
 Comment[es]=Muestra información meteorológica
+Comment[et]=Ilmateade
 Comment[eu]=Eguraldiaren gaineko informazioa bistaratu
 Comment[ga]=Taispeáin faisnéis aimsire
 Comment[nds]=Wiest Weder-Informatschonen
