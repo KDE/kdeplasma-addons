@@ -144,17 +144,14 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
         path = Plasma::PaintUtils::roundedRectangle(backgroundRectToClip, radius);
 
 
-        painter->save();
-
-
-        painter->setClipRect(backgroundRect);
+        QPainterPath clipPath;
+        clipPath.addRect(backgroundRect);
+        path = path.intersected(clipPath);
 
         painter->setRenderHint(QPainter::Antialiasing);
         painter->setPen(Qt::NoPen);
         painter->setBrush(backgroundColor);
         painter->drawPath(path);
-
-        painter->restore();
     }
 
     if (index.row() == 0 && d->hasHeader) {
