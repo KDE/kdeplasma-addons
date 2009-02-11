@@ -23,6 +23,8 @@
 #include <QtGui/QImage>
 #include <QtGui/QWidget>
 
+class QWheelEvent;
+
 class FullViewWidget : public QWidget
 {
     public:
@@ -35,9 +37,11 @@ class FullViewWidget : public QWidget
     protected:
         virtual void paintEvent( QPaintEvent* );
         virtual void mousePressEvent( QMouseEvent* );
+        virtual void wheelEvent( QWheelEvent* );
 
     private:
         QImage mImage;
+        QRect mDesktopSize;
 };
 
 #endif

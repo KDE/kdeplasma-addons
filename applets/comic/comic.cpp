@@ -710,7 +710,8 @@ void ComicApplet::wheelEvent( QGraphicsSceneWheelEvent *event )
     const int numDegrees = event->delta() / 8;
     const int numSteps = numDegrees / 15;
 
-    if ( mScrollBarVert->isVisible() && !mouseCursorInside( mRects[ ScrollBarHoriz ], eventPos ) ) {
+    if ( mScrollBarVert->isVisible() && !mouseCursorInside( mRects[ ScrollBarHoriz ], eventPos ) &&
+         ( event->modifiers() != Qt::AltModifier ) ) {
         const int scroll = mScrollBarVert->singleStep();
         mScrollBarVert->setValue( mScrollBarVert->value() - numSteps * scroll );
     } else if ( mScrollBarHoriz->isVisible() ) {
