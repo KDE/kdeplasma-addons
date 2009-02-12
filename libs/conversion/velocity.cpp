@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "speed.h"
+#include "velocity.h"
 #include <math.h>
 #include <KLocale>
 
@@ -27,11 +27,11 @@ class Beaufort : public Conversion::Complex
     double fromDefault(double value) const { return pow(value / 0.836, 2.0 / 3.0); };
 };
 
-Speed::Speed(QObject* parent)
+Velocity::Velocity(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
-    setObjectName("speed");
-    setName(i18n("Speed"));
+    setObjectName("velocity");
+    setName(i18n("Velocity"));
 
     setDefaultUnit(U(i18n("meter per second"), i18n("meters per second"), "m/s", 1.0, << "ms"));
     U(i18n("kilometer per hour"), i18n("kilometers per hour"), "km/h", 1.0 / 3.6, << "kmh");

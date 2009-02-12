@@ -9,7 +9,7 @@ set(conversion_LIB_SRCS
     area.cpp
     volume.cpp
     temperature.cpp
-    speed.cpp
+    velocity.cpp
     mass.cpp
     pressure.cpp
     energy.cpp

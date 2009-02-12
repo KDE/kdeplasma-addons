@@ -24,7 +24,7 @@
 #include "area.h"
 #include "volume.h"
 #include "temperature.h"
-#include "speed.h"
+#include "velocity.h"
 #include "mass.h"
 #include "pressure.h"
 #include "energy.h"
@@ -63,7 +63,7 @@ Converter::Converter(QObject* parent)
     new Area(this);
     new Volume(this);
     new Temperature(this);
-    new Speed(this);
+    new Velocity(this);
     new Mass(this);
     new Pressure(this);
     new Energy(this);

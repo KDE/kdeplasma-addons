@@ -17,15 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SPEED_H
-#define SPEED_H
+#ifndef VELOCITY_H
+#define VELOCITY_H
 
 #include "unitcategory.h"
 
-class Speed : public Conversion::UnitCategory
+class Velocity : public Conversion::UnitCategory
 {
 public:
-    Speed(QObject* parent = 0);
+    Velocity(QObject* parent = 0);
 };
 
 #endif
