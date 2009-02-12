@@ -32,4 +32,7 @@ Time::Time(QObject* parent)
     U(i18n("day"), i18n("days"), "d", 24.0 * 60.0 * 60.0, );
     U(i18n("week"), i18n("weeks"), "", 7.0 * 24.0 * 60.0 * 60.0, );
     U(i18n("julian year"), i18n("julian years"), "a", 365.25 * 24.0 * 60.0 * 60.0, );
+	U(i18n("leap year"), i18n("leap years"), "", 366 * 24.0 * 60.0 * 60.0, );
+	//Let's say we call that a normal year
+	U(i18n("year"), i18n("year"), "y", 365 * 24.0 * 60.0 * 60.0, );
 }

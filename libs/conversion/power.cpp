@@ -27,5 +27,5 @@ Power::Power(QObject* parent)
     setName(i18n("Power"));
     addSIUnit("W", i18n("watt"), i18n("watts"));
 
-    U(i18n("horsepower"), i18n("horsepowers"), "hp", 735.49875, );
+    U(i18n("horsepower"), i18n("horsepowers"), i18nc("horsepower", "hp"), 735.49875, );
 }
