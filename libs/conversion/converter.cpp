@@ -29,6 +29,7 @@
 #include "pressure.h"
 #include "energy.h"
 #include "currency.h"
+#include "power.h"
 #include <KGlobal>
 #include <KDebug>
 
@@ -68,6 +69,7 @@ Converter::Converter(QObject* parent)
     new Pressure(this);
     new Energy(this);
     new Currency(this);
+    new Power(this);
 }
 
 Converter::~Converter()

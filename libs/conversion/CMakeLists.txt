@@ -14,6 +14,7 @@ set(conversion_LIB_SRCS
     pressure.cpp
     energy.cpp
     currency.cpp
+    power.cpp
 )
 
 set(conversion_HEADERS
