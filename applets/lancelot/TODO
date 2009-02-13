@@ -15,15 +15,13 @@ TODO: <id> <priority> (<difficulty>)
 Menu:
 TODO: M01 l (m) Themes and configuration for resize borders
 TODO: M02 l (m) Resize to work ... better
-TODO: M04 h (a) Keyboard: Keyboard navigation (depends on M08)
 TODO: M06 m (m) Search history
-TODO: M07 m (m) Switch menu instead of searching for SESSIONS (depends on L07)
-TODO: M08 h (m) Switch to new lists (depends on L06)
+IN PROGRESS: M07 m (m) Switch menu instead of searching for SESSIONS (depends on L07)
 TODO: M09   (a) Speed up
 TODO: M12 m (a) switch list models to DataEngines and Services (depends on L08)
 TODO: M13 h (m) plug-ins for contacts (maybe more?) (depends on M12)
-TODO: M15 m (m) Reorder the favourites (depends L06)
-TODOL M16 m (e) Run as administrator context menu
+TODO: M15 m (m) Reorder the favourites
+TODO: M16 m (e) Run as administrator context menu
 
 Library:
 TODO: L01   (e) check for memory leaks related to Private
@@ -33,8 +31,6 @@ TODO: L04 l (m) add proper size hints to layouts and widgets
 TODO: L05 l (m) move the groups mechanism away from Widget
              so that ordinary plasma widgets could be extended
              when needed. Add groups support to HoverIcon
-TODO: L06 h (a) create new lists (scroll panes...) (post 1.0)
-TODO: L07 m (a) add menu widget
 TODO: L08 m (a) switch list models to DataEngines and Services (post 1.0)
 
 Launcher Applet:
@@ -48,5 +44,22 @@ Feature requests:
  - places to load from dolphin - interesting, but problematic
  - more descriptive descriptions (KDE3 vs KDE4) - not likely
  - web history - page titles - interesting
- - Switch 'Log out' <-> 'Switch user' - maybe
- - Choose which of the system buttons to show - maybe
+ - Choose which of the system buttons to show - IN PROGRESS
+ - hover-activation feedback animation - yes
+ - choose which categories to show in the applet - yes
+ - clear documents history - yes
+ - tooltips for items that are too long to display - yes
+ - menu sorting - yes
+ - rearanging favorites by DnD - most probably
+ - remove timeout for hover-activation of categories - not likely
+ - mail message titles/senders - probably
+ - extenders in passageway view to overlap next list - possibly
+ - status of mails in the contacts icon - possibly
+ - return to the applications when the search string is empty - yes
+ - higlight the path in passageway view (not only the breadcrumb) - yes
+ - add to panel/desktop action - probably
+ - choosing the applications in documents section - yes
+ - choosing the applications in computer section - maybe (possibly not through GUI)
+ - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
+ - advanced parts widget: list mode, icons mode, ..., search bar...
+
