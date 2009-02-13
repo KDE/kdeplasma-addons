@@ -27,6 +27,7 @@ Energy::Energy(QObject* parent)
     setName(i18n("Energy"));
     addSIUnit("J", i18n("joule"), i18n("joules"));
 
+    U(i18n("guideline daily amount"), i18n("guideline daily amount"), "GDA", 2000 * 4186.8, );
     U(i18n("electronvolt"), i18n("electronvolts"), "eV", 1.60217653E-19, );
     U(i18n("rydberg"), i18n("rydbergs"), "Ry", 2.179872E-18, );
     U(i18n("kilocalorie"), i18n("kilocalories"), "kcal", 4186.8, );
