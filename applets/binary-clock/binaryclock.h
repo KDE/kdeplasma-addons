@@ -76,6 +76,7 @@ class BinaryClock : public ClockApplet
 
         QTime m_lastTimeSeen;
         QTime m_time;
+        int m_updateIndex;
 
         Ui::clockConfig ui;
 };

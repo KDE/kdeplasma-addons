@@ -21,6 +21,7 @@
 #include "binaryclock.h"
 
 #include <QPainter>
+#include <QStyleOptionGraphicsItem>
 
 #include <KConfigDialog>
 
@@ -32,7 +33,9 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
       m_showSeconds(true),
       m_showOffLeds(true),
       m_showGrid(true),
-      m_time(0, 0)
+      m_lastTimeSeen(10, 42, 43),
+      m_time(0, 0, 0),
+      m_updateIndex(0)
 {
     KGlobal::locale()->insertCatalog("libplasmaclock");
 
@@ -123,6 +126,12 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
         m_time.second() == m_lastTimeSeen.second()) {
         // avoid unnecessary repaints
         return;
+    }else if (m_time.minute() != m_lastTimeSeen.minute()){
+        m_updateIndex = 0;
+    }else if ((m_time.second() / 10) != (m_lastTimeSeen.second() / 10)){
+        m_updateIndex = 4;
+    }else if ((m_time.second() % 10) != (m_lastTimeSeen.second() % 10)){
+        m_updateIndex = 5;
     }
 
     if (Plasma::ToolTipManager::self()->isVisible(this)) {
@@ -131,7 +140,17 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
 
     m_lastTimeSeen = m_time;
 
-    update();
+    int appletHeight = (int) contentsRect().height();
+    int appletWidth = (int) contentsRect().width();
+    int dots = m_showSeconds ? 6 : 4;
+
+    int rectSize = qMax(1, qMin((appletHeight - 3) / 4, (appletWidth - 3) / dots));
+    int yPos = ((appletHeight - 4 * rectSize) / 2) + contentsRect().topLeft().y();
+    int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect().topLeft().x();
+    update(xPos + (m_updateIndex * (rectSize + 1)),
+           contentsRect().y(),
+           (dots * (rectSize + 1)) - (m_updateIndex * (rectSize + 1)),
+           contentsRect().height());
 }
 
 void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
@@ -254,9 +273,21 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                                  const QRect &contentsRect)
 {
     Q_UNUSED(option);
+#if 0
+    kDebug() << option->exposedRect << "\n";
+    if (m_updateIndex != 0){
+        p->fillRect(option->exposedRect, Qt::red);
+    }else{
+        p->fillRect(option->exposedRect, Qt::yellow);
+    }
+#endif
 
     if (! m_time.isValid()) {
         return;
+    }
+
+    if (option->exposedRect.width() >= contentsRect.width()){
+        m_updateIndex = 0;
     }
 
     QSizeF m_size = contentsRect.size();
@@ -276,7 +307,7 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                           minutes[0].toAscii(), minutes[1].toAscii(),
                           seconds[0].toAscii(), seconds[1].toAscii()};
 
-    for (int i = 0; i < dots; i++) {
+    for (int i = m_updateIndex; i < dots; i++) {
         for (int j = 0; j < 4; j++) {
             if (timeDigits[i] & (1 << (3 - j))) {
                 p->fillRect(xPos + (i * (rectSize + 1)), yPos + (j * (rectSize + 1)), rectSize, rectSize, m_onLedsColor);
@@ -291,7 +322,7 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
         p->drawRect((xPos - 1), (yPos - 1),
                     (dots * (rectSize + 1)), (4 * (rectSize + 1)) );
 
-        for (int i = 1; i < dots; i++) {
+        for (int i = m_updateIndex + 1; i < dots; i++) {
             for (int j = 0; j < 4; j++) {
                p->drawLine((xPos + (i * (rectSize + 1)) - 1), (yPos + (j * (rectSize + 1))),
                            (xPos + (i * (rectSize + 1)) - 1), (yPos + (j * (rectSize + 1)) + rectSize - 1) );
@@ -303,6 +334,8 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
                         (xPos + (dots * (rectSize + 1)) - 2), (yPos + (j * (rectSize + 1)) - 1) );
         }
     }
+
+    m_updateIndex = 0;
 }
 
 #include "binaryclock.moc"
