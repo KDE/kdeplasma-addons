@@ -272,16 +272,6 @@ void BinaryClock::updateColors()
 void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
                                  const QRect &contentsRect)
 {
-    Q_UNUSED(option);
-#if 0
-    kDebug() << option->exposedRect << "\n";
-    if (m_updateIndex != 0){
-        p->fillRect(option->exposedRect, Qt::red);
-    }else{
-        p->fillRect(option->exposedRect, Qt::yellow);
-    }
-#endif
-
     if (! m_time.isValid()) {
         return;
     }
@@ -299,13 +289,9 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
     int yPos = ((appletHeight - 4 * rectSize) / 2) + contentsRect.topLeft().y();
     int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect.topLeft().x();
 
-    const QString hours = m_time.toString("HH");
-    const QString minutes = m_time.toString("mm");
-    const QString seconds = m_time.toString("ss");
-
-    char timeDigits[6] = {hours[0].toAscii(), hours[1].toAscii(),
-                          minutes[0].toAscii(), minutes[1].toAscii(),
-                          seconds[0].toAscii(), seconds[1].toAscii()};
+    char timeDigits[6] = {m_time.hour() / 10, m_time.hour() % 10,
+                          m_time.minute() / 10, m_time.minute() % 10,
+                          m_time.second() / 10, m_time.second() % 10};
 
     for (int i = m_updateIndex; i < dots; i++) {
         for (int j = 0; j < 4; j++) {
