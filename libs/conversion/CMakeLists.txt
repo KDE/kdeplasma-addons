@@ -16,6 +16,7 @@ set(conversion_LIB_SRCS
     currency.cpp
     power.cpp
     timeunit.cpp
+    fuel_efficiency.cpp
 )
 
 set(conversion_HEADERS

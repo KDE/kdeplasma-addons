@@ -31,6 +31,7 @@
 #include "currency.h"
 #include "power.h"
 #include "timeunit.h"
+#include "fuel_efficiency.h"
 #include <KGlobal>
 #include <KDebug>
 
@@ -72,6 +73,7 @@ Converter::Converter(QObject* parent)
     new Currency(this);
     new Power(this);
     new Time(this);
+    new FuelEfficiency(this);
 }
 
 Converter::~Converter()
