@@ -25,13 +25,14 @@ TODO: M16 m (e) Run as administrator context menu
 
 Library:
 TODO: L01   (e) check for memory leaks related to Private
-TODO: L02 l (a) switch groups to QMetaObject and properties (post 1.0)
+TODO: L02 l (a) switch groups to QMetaObject and properties
+TODO: L02 l (a) switch groups names to enums and integers
 TODO: L03 l (m) add margin features to layouts
 TODO: L04 l (m) add proper size hints to layouts and widgets
 TODO: L05 l (m) move the groups mechanism away from Widget
              so that ordinary plasma widgets could be extended
              when needed. Add groups support to HoverIcon
-TODO: L08 m (a) switch list models to DataEngines and Services (post 1.0)
+TODO: L08 m (a) switch list models to DataEngines and Services
 
 Launcher Applet:
 None
