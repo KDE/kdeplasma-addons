@@ -23,6 +23,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QApplication>
+#include <climits>
 
 namespace Lancelot {
 
@@ -68,12 +69,16 @@ public:
       : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p), focusIndex(0)
     {
         parent->setLayout(layout = new NodeLayout());
+        layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
+        layout->setMaximumSize(INT_MAX, INT_MAX);
 
         layout->addItem(
             buttonsLayout = new QGraphicsLinearLayout(Qt::Horizontal),
             NodeLayout::NodeCoordinate(0, 0, 0, 0),
             NodeLayout::NodeCoordinate(1, 0, 0, 32)
         );
+        buttonsLayout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
+        buttonsLayout->setMaximumSize(INT_MAX, INT_MAX);
 
         ExtenderButton * spacer =
             new ExtenderButton(parent);
@@ -90,6 +95,8 @@ public:
         );
 
         listsLayout->setSizer(new PassagewayViewSizer());
+        listsLayout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
+        listsLayout->setMaximumSize(INT_MAX, INT_MAX);
 
         buttonsLayout->setSpacing(0.0);
 
@@ -164,7 +171,10 @@ public:
             path.takeLast();
 
             buttonsLayout->removeItem(button);
-            layout->activate();
+
+            // This really shouldn't be needed :(
+            buttonsLayout->setGeometry(buttonsLayout->geometry());
+
             listsLayout->pop();
 
             button->deleteLater();
@@ -199,18 +209,18 @@ public:
         list->setCategoriesGroupByName("ActionListView-CategoriesPass");
         list->setCategoriesActivable(true);
 
-        // if (lists.count() > 0) {
-        //     lists.last()->clearSelection();
-        // }
-
         focusIndex = lists.count();
         lists.append(list);
 
-        // list->initialSelection();
         path.append(step);
 
         buttonsLayout->addItem(button);
         listsLayout->push(list);
+
+        // This really shouldn't be needed :(
+        buttonsLayout->setGeometry(buttonsLayout->geometry());
+        listsLayout->setGeometry(listsLayout->geometry());
+
 
         QObject::connect(
             list, SIGNAL(activated(int)),

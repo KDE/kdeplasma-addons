@@ -324,7 +324,10 @@ Instance::Instance()
 
     d->confMain = new KConfig("lancelot" + app + "rc");
 
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(true);
+    qDebug() << "What is the plasma theme: " << Plasma::Theme::defaultTheme()->themeName();
     QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
+    qDebug() << "Trying:" << search;
 
     QString path =  KStandardDirs::locate( "data", search );
     if (path.isEmpty()) {
@@ -334,6 +337,8 @@ Instance::Instance()
     if (path.isEmpty()) {
         path = "lancelotrc";
     }
+
+    qDebug() << "Using theme:" << path;
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;
