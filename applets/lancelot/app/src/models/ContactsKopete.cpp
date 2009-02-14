@@ -56,7 +56,8 @@ ContactsKopete::~ContactsKopete()
 void ContactsKopete::activate(int index)
 {
     if (m_kopeteRunning) {
-        m_interface->sendMessage(title(index), "");
+        // m_interface->sendMessage(title(index), "");
+        m_interface->openChat(title(index));
     } else {
         BaseModel::activate(index);
     }
