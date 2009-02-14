@@ -67,35 +67,36 @@ QImage Picture::defaultPicture(const QString &message)
 
 QImage Picture::setPicture(const KUrl &currentUrl)
 {
-    QImage m_picture;
+    QImage image;
     if (currentUrl.path() == "Default") {
-        m_picture = defaultPicture(i18nc("Info", "Put your photo here or drop a folder to start a slideshow"));
-        return m_picture;
+        image = defaultPicture(i18nc("Info", "Put your photo here or drop a folder to start a slideshow"));
+        return image;
     } else {
         QImage tempImage(currentUrl.path());
         if (tempImage.isNull()) {
-            m_picture = defaultPicture(i18nc("Error", "Error loading image"));
-            return m_picture;
+            image = defaultPicture(i18nc("Error", "Error loading image"));
+            return image;
         } else {
 #ifdef HAVE_KEXIV2
             KExiv2Iface::KExiv2 exif(currentUrl.path());
             QMatrix m;
             switch (exif.getImageOrientation()) {
-                case KExiv2Iface::KExiv2::ORIENTATION_HFLIP: m_picture = tempImage.mirrored(true, false); break;
-                case KExiv2Iface::KExiv2::ORIENTATION_ROT_180: m_picture = tempImage.mirrored(true, true); break;
-                case KExiv2Iface::KExiv2::ORIENTATION_VFLIP: m_picture = tempImage.mirrored(false, true); break;
-                case KExiv2Iface::KExiv2::ORIENTATION_ROT_90: m.rotate(90); m_picture = tempImage.transformed(m); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_HFLIP: image = tempImage.mirrored(true, false); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_180: image = tempImage.mirrored(true, true); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_VFLIP: image = tempImage.mirrored(false, true); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_90: m.rotate(90); image = tempImage.transformed(m); break;
                 case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP: m.rotate(90); m.scale(-1.0,1.0); 
-                                                      m_picture = tempImage.transformed(m); break;
+                                                      image = tempImage.transformed(m); break;
                 case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP: m.rotate(90); m.scale(1.0,-1.0); 
-                                                      m_picture = tempImage.transformed(m); break;
-                case KExiv2Iface::KExiv2::ORIENTATION_ROT_270: m.rotate(270);  m_picture = tempImage.transformed(m); break;
-                default: m_picture = tempImage;
+                                                      image = tempImage.transformed(m); break;
+                case KExiv2Iface::KExiv2::ORIENTATION_ROT_270: m.rotate(270);  image = tempImage.transformed(m); break;
+                default: image = tempImage;
             }
 #else
-            m_picture = tempImage;
+            image = tempImage;
 #endif
-            return m_picture;
+            return image;
         }
     }
 }
+
