@@ -47,6 +47,15 @@ class LANCELOT_EXPORT Widget : public QGraphicsWidget {
 
 public:
     /**
+     * Widget related properties
+     */
+    enum Property {
+        WholeColorBackground = 1,
+        SvgBackground = 2,
+        UserProperty = 16
+    };
+
+    /**
      * Creates a new Lancelot::Widget
      * @param parent parent item
      */

@@ -211,7 +211,7 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
 {
     if (!d->group) return;
 
-    // Background Painting
+    // Svg Background Painting
     if (Plasma::FrameSvg * svg = d->group->backgroundSvg()) {
         svg->setElementPrefix(element);
         if (svg->size() != size().toSize()) {
@@ -220,7 +220,15 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
         svg->clearCache();
         svg->paintFrame(painter);
 
-    } else if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
+        return;
+    }
+
+    // If we don't have SVG, should we paint a rectangle?
+    if (!group()->hasProperty(WholeColorBackground)) {
+        return;
+    }
+
+    if (const WidgetGroup::ColorScheme * scheme = d->group->backgroundColor()) {
         const QColor * color;
         if (!isEnabled()) {
             color = & (scheme->disabled);

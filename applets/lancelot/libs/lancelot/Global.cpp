@@ -19,6 +19,7 @@
 
 #include "Global.h"
 #include "widgets/Widget.h"
+#include "widgets/BasicWidget.h"
 #include <KGlobal>
 #include <plasma/theme.h>
 #include <KStandardDirs>
@@ -32,7 +33,7 @@ class WidgetGroup::Private {
 public:
     Private()
       : confGroupTheme(NULL), instance(NULL), name(QString()), backgroundSvg(NULL),
-       hasBackgroundColor(false), ownsBackgroundSvg(false), loaded(false)
+        ownsBackgroundSvg(false), loaded(false)
        // TODO : Add caching?
        //cachedBackgroundNormal(NULL), cachedBackgroundActive(NULL), cachedBackgroundDisabled(NULL)
     {}
@@ -55,13 +56,16 @@ public:
     QString name;
     QMap < QString, QVariant > properties;
 
+    // TODO: rename when finished removing
+    // QString properties
+    QMap < int, QVariant > int_properties;
+
     QList < Widget * > widgets;
 
     ColorScheme foregroundColor;
     ColorScheme backgroundColor;
     Plasma::FrameSvg * backgroundSvg;
 
-    bool hasBackgroundColor : 1;
     bool ownsBackgroundSvg : 1;
     bool loaded : 1;
 
@@ -70,9 +74,9 @@ public:
         if (this == d) return;
 
         properties = d->properties;
+        int_properties = d->int_properties;
 
         foregroundColor = d->foregroundColor;
-        hasBackgroundColor = d->hasBackgroundColor;
         backgroundColor = d->backgroundColor;
 
         if (ownsBackgroundSvg) {
@@ -124,6 +128,26 @@ void WidgetGroup::removeWidget(Widget * widget, bool setDefaultGroup)
     }
 }
 
+bool WidgetGroup::hasProperty(int property) const
+{
+    return d->int_properties.contains(property);
+}
+
+QVariant WidgetGroup::property(int property) const
+{
+    return d->int_properties.value(property);
+}
+
+void WidgetGroup::setProperty(int property, const QVariant & value)
+{
+    d->int_properties[property] = value;
+}
+
+void WidgetGroup::clearProperty(int property)
+{
+    d->int_properties.remove(property);
+}
+
 bool WidgetGroup::hasProperty(const QString & property) const
 {
     return d->properties.contains(property);
@@ -156,7 +180,8 @@ Plasma::FrameSvg * WidgetGroup::backgroundSvg() const
 
 const WidgetGroup::ColorScheme * WidgetGroup::backgroundColor() const
 {
-    if (!d->hasBackgroundColor) {
+    if (!hasProperty(Widget::WholeColorBackground) &&
+        !hasProperty(BasicWidget::TextColorBackground)) {
         return NULL;
     }
     return & d->backgroundColor;
@@ -172,7 +197,9 @@ void WidgetGroup::load(bool full)
     if (d->loaded && !full) return;
     d->loaded = true;
 
-    d->hasBackgroundColor = false;
+    d->properties.clear();
+    d->int_properties.clear();
+
     if (d->ownsBackgroundSvg) {
         delete d->backgroundSvg;
     }
@@ -200,8 +227,12 @@ void WidgetGroup::load(bool full)
     d->foregroundColor.disabled = d->confGroupTheme->readEntry("foreground.color.disabled", d->foregroundColor.disabled);
 
     QString type = d->confGroupTheme->readEntry("background.type", "none");
-    if (type == "color") {
-        d->hasBackgroundColor       = true;
+    if (type == "color" || type == "color-compact") {
+        if (type == "color") {
+            setProperty(Widget::WholeColorBackground, 1);
+        } else {
+            setProperty(BasicWidget::TextColorBackground, 1);
+        }
         d->backgroundColor.normal   = d->confGroupTheme->readEntry("background.color.normal",   d->backgroundColor.normal);
         d->backgroundColor.active   = d->confGroupTheme->readEntry("background.color.active",   d->backgroundColor.active);
         d->backgroundColor.disabled = d->confGroupTheme->readEntry("background.color.disabled", d->backgroundColor.disabled);
@@ -210,12 +241,18 @@ void WidgetGroup::load(bool full)
             delete d->backgroundSvg;
         }
 
+        setProperty(Widget::SvgBackground, 1);
         d->backgroundSvg = new Plasma::FrameSvg(NULL);
         d->backgroundSvg->setImagePath(
             Plasma::Theme::defaultTheme()->imagePath(
                 d->confGroupTheme->readEntry("background.svg")));
         d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
+    }
+
+    if (!d->confGroupTheme->readEntry(
+                "foreground.blurtextshadow", QString()).isEmpty()) {
+        setProperty(BasicWidget::BlurTextShadow, 1);
     }
 
     notifyUpdated();

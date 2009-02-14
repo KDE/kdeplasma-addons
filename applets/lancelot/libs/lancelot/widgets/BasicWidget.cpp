@@ -23,6 +23,7 @@
 #include "Global.h"
 #include <lancelot/lancelot.h>
 #include <QtGui/QPainter>
+#include <plasma/paintutils.h>
 
 #define WIDGET_PADDING 8
 
@@ -150,13 +151,15 @@ void BasicWidget::paintForeground(QPainter * painter)
     QPainter fpainter(&foreground);
     painter = &fpainter;
 
+    QColor fgColor;
     if (!isEnabled()) {
-        painter->setPen(QPen(group()->foregroundColor()->disabled));
+        fgColor = group()->foregroundColor()->disabled;
     } else if (isHovered()) {
-        painter->setPen(QPen(group()->foregroundColor()->active));
+        fgColor = group()->foregroundColor()->active;
     } else {
-        painter->setPen(QPen(group()->foregroundColor()->normal));
+        fgColor = group()->foregroundColor()->normal;
     }
+    painter->setPen(QPen(fgColor));
 
     QFont titleFont = painter->font();
     QFont descriptionFont = painter->font();
@@ -222,8 +225,10 @@ void BasicWidget::paintForeground(QPainter * painter)
         if (!d->title.isEmpty()) {
             titleRect.moveTop(top);
             painter->setFont(titleFont);
-            painter->drawText(titleRect,
-                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title);
+            // painter->drawText(titleRect,
+            //        Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title);
+            drawText(painter, titleRect,
+                   Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title);
             top += titleRect.height();
         }
 
@@ -231,7 +236,9 @@ void BasicWidget::paintForeground(QPainter * painter)
             descriptionRect.moveTop(top);
 
             painter->setFont(descriptionFont);
-            painter->drawText(descriptionRect,
+            // painter->drawText(descriptionRect,
+            //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description);
+            drawText(painter, descriptionRect,
                     Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description);
         }
     } else {
@@ -285,7 +292,9 @@ void BasicWidget::paintForeground(QPainter * painter)
 
         if (!d->title.isEmpty()) {
             painter->setFont(titleFont);
-            painter->drawText(titleRect,
+            // painter->drawText(titleRect,
+            //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title);
+            drawText(painter, titleRect,
                     Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title);
         }
 
@@ -297,7 +306,9 @@ void BasicWidget::paintForeground(QPainter * painter)
                 painter->setPen(QPen(clr));
             }
             painter->setFont(descriptionFont);
-            painter->drawText(descriptionRect,
+            // painter->drawText(descriptionRect,
+            //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->description);
+            drawText(painter, descriptionRect,
                     Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->description);
         }
     }
@@ -421,6 +432,68 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
         result = result.boundedTo(constraint);
     }
     return result;
+}
+
+void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int flags, const QString & text)
+{
+    if (text.isEmpty()) {
+        return;
+    }
+
+    static const int radius = 2;
+    if (group()->hasProperty(BlurTextShadow)) {
+        QColor textColor = painter->pen().color();
+        QColor shadowColor;
+        if (textColor.valueF() * textColor.alphaF() > 0.4) {
+            shadowColor = Qt::black;
+        } else {
+            shadowColor = Qt::white;
+        }
+
+        QPixmap result = Plasma::PaintUtils::shadowText(
+                text, textColor, shadowColor,
+                QPoint(0, 0), radius);
+
+        if (group()->hasProperty(TextColorBackground)) {
+            QColor bgColor;
+            if (!isEnabled()) {
+                bgColor = group()->backgroundColor()->disabled;
+            } else if (isHovered()) {
+                bgColor = group()->backgroundColor()->active;
+            } else {
+                bgColor = group()->backgroundColor()->normal;
+            }
+            painter->setRenderHint(QPainter::Antialiasing);
+            QRectF frect = QRectF(rectangle.topLeft(), result.size());
+            painter->fillPath(
+                    Plasma::PaintUtils::roundedRectangle(
+                        frect, 2 * radius), QBrush(bgColor)
+                    );
+        }
+
+        painter->drawPixmap(rectangle.topLeft(), result);
+    } else {
+        if (group()->hasProperty(TextColorBackground)) {
+            QColor bgColor;
+            if (!isEnabled()) {
+                bgColor = group()->backgroundColor()->disabled;
+            } else if (isHovered()) {
+                bgColor = group()->backgroundColor()->active;
+            } else {
+                bgColor = group()->backgroundColor()->normal;
+            }
+            painter->setRenderHint(QPainter::Antialiasing);
+            QRectF frect = painter->boundingRect(rectangle,
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, text);
+            frect.adjust(- radius, - radius, radius, radius);
+            painter->fillPath(
+                    Plasma::PaintUtils::roundedRectangle(
+                     frect, 2*radius), QBrush(bgColor)
+                    );
+        }
+        painter->drawText(rectangle,
+                Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, text);
+    }
 }
 
 } // namespace Lancelot

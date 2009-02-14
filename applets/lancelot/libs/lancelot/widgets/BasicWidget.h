@@ -55,6 +55,14 @@ class LANCELOT_EXPORT BasicWidget: public Lancelot::Widget {
 
 public:
     /**
+     * BasicWidget related properties
+     */
+    enum Property {
+        BlurTextShadow = Widget::UserProperty,
+        TextColorBackground,
+        UserProperty = Widget::UserProperty + 16
+    };
+    /**
      * Creates a new Lancelot::BasicWidget
      * @param parent parent item
      */
@@ -172,11 +180,19 @@ public:
     void setDescription(const QString & description);
 
 protected:
+
     /**
      * Common implementation of icon/text/description
      * rendering
      */
     void paintForeground(QPainter * painter);
+
+    /**
+     * Common implementation of text painting
+     * @see QPainter::drawText
+     */
+    void drawText(QPainter * painter, const QRectF & rectangle, int flags,
+            const QString & text);
 
     L_Override virtual void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);

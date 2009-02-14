@@ -71,6 +71,31 @@ public:
     };
 
     /**
+     * @param property the ID of the property
+     * @returns whether this group has the specified property set
+     */
+    bool hasProperty(int property) const;
+
+    /**
+     * @param property the ID of the property
+     * @returns the value of the specified property
+     */
+    QVariant property(int property) const;
+
+    /**
+     * Sets the value of the specified property
+     * @param property the ID of the property
+     * @param value value to assign to the property
+     */
+    void setProperty(int property, const QVariant & value);
+
+    /**
+     * Clears the value of the specified property
+     * @param property the ID of the property
+     */
+    void clearProperty(int property);
+
+    /**
      * @param the name of the property
      * @returns whether this group has the specified property set
      */
