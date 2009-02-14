@@ -29,7 +29,7 @@
 #include "ui_weatherAddPlace.h"
 
 class KDialog;
-class KAction;
+//class KAction;
 class QStandardItemModel;
 class QStandardItem;
 class QGraphicsLinearLayout;
@@ -78,7 +78,7 @@ protected slots:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
-    QList<QAction*> contextualActions();
+    //QList<QAction*> contextualActions();
 
 private:
     Plasma::DataEngine *weatherEngine;
@@ -121,7 +121,7 @@ private:
     Plasma::WeatherView *m_fiveDaysView;
     Plasma::WeatherView *m_detailsView;
 
-    KAction *m_actionUpdateNow;
+    //KAction *m_actionUpdateNow;
 
     // Layout
     int m_setupLayout;

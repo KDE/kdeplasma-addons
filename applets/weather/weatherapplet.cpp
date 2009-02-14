@@ -25,7 +25,7 @@
 #include <KDialog>
 #include <KConfigDialog>
 #include <KLocale>
-#include <KAction>
+//#include <KAction>
 #include <QStandardItemModel>
 #include <QPushButton>
 #include <QPainter>
@@ -105,8 +105,8 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     m_weatherUpdateTime = generalConfig.readEntry("updateWeather", 30);
 
     // "Update Now" contextual action
-    m_actionUpdateNow = new KAction(i18n("&Update Now"), this);
-    connect(m_actionUpdateNow, SIGNAL(triggered()), this, SLOT(getWeather()));
+    //m_actionUpdateNow = new KAction(i18n("&Update Now"), this);
+    //connect(m_actionUpdateNow, SIGNAL(triggered()), this, SLOT(getWeather()));
 
     // Connect to weather engine.
     weatherEngine = dataEngine("weather");
@@ -284,6 +284,7 @@ void WeatherApplet::weatherNoticeLink(const QString& url)
     KRun::runUrl(KUrl(url), "text/html", 0);
 }
 
+/*
 QList<QAction*> WeatherApplet::contextualActions()
 {
     QList<QAction*> actions;
@@ -296,6 +297,7 @@ QList<QAction*> WeatherApplet::contextualActions()
 
     return actions;
 }
+*/
 
 void WeatherApplet::destroyLayout()
 {
@@ -485,6 +487,9 @@ void WeatherApplet::validate(const QString& source, const QVariant& data)
 
     } else if (tokens[1] == "timeout") {
         KMessageBox::error(0, i18n("The applet was not able to contact the server, please try again later"));
+        return;
+    } else if (tokens[1] == "malformed") {
+        KMessageBox::error(0 ,i18n("The data source received a malformed string and was not able to process your request"));
         return;
     } else {
         KMessageBox::error(0, i18n("The place '%1' is not valid. The data source is not able to find this place.", tokens[3]), i18n("Invalid Place"));
