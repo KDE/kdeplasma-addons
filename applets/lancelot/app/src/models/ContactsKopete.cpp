@@ -22,7 +22,7 @@
 #include <KStandardDirs>
 #include <KDebug>
 
-#define UPDATE_INTERVAL 30000
+#define UPDATE_INTERVAL 15000
 #define CHECK_RUNNING_INTERVAL 5000
 
 namespace Models {

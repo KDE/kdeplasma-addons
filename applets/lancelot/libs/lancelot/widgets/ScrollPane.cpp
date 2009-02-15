@@ -229,8 +229,10 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
 
 void ScrollPane::setGeometry(const QRectF & rect) //>
 {
+    QRectF old_geometry = geometry();
     Widget::setGeometry(rect);
 
+    if (rect == old_geometry) return ;
     scrollableWidgetSizeUpdateNeeded();
 } //<
 

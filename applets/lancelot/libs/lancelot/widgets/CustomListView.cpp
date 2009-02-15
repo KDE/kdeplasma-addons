@@ -163,9 +163,9 @@ public:
             QGraphicsWidget * item = itemForIndex(i);
             QRectF itemGeometry = item->geometry();
             if (viewport.intersects(itemGeometry)) {
-                if (q->isVisible()) {
+                //if (q->isVisible()) {
                     item->show();
-                }
+                //}
                 transform.reset();
                 if (!viewport.contains(itemGeometry)) {
                     QRectF clip = viewport.intersect(itemGeometry);

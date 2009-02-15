@@ -31,6 +31,35 @@ public:
     {
     }
 
+    void _hide(QGraphicsWidget * widget) {
+        // since Qt has some strange bug (or it
+        // just doesn't behave as it should,
+        // this is a temporary solution
+        // so instead of hiding the item,
+        // we are moving it somewhere
+        // out of bounds
+        // this is a very dirty hack!
+
+        QRectF g = widget->geometry();
+        if (g.left() < 0) {
+            return;
+        }
+        g.moveRight(- g.left());
+        widget->setGeometry(g);
+    }
+
+    void _show(QGraphicsWidget * widget) {
+        // see the comment in _hide
+
+        QRectF g = widget->geometry();
+        if (g.left() >= 0) {
+            return;
+        }
+
+        g.moveLeft(- g.right());
+        widget->setGeometry(g);
+    }
+
     void relayout()
     {
         QRectF g = q->geometry();
@@ -40,9 +69,11 @@ public:
         }
 
         foreach (QGraphicsWidget * l, widgets) {
-            l->show();
+            _show(l);
             l->setGeometry(g);
-            if (shown != l) l->hide();
+            if (shown != l) {
+                _hide(l);
+            }
         }
     }
 
@@ -107,6 +138,7 @@ void CardLayout::addItem(QGraphicsWidget * widget, const QString & id)
     if (widget) {
         d->widgets[id] = widget;
         // widget->hide(); // BUGS in QT
+        d->_hide(widget);
     } else {
         d->removeItem(id);
     }
@@ -142,17 +174,17 @@ void CardLayout::show(const QString & id)
     if (!d->widgets.contains(id)) return;
     if (d->shown == d->widgets[id]) return;
     if (d->shown) {
-        d->shown->hide();
+        d->_hide(d->shown);
     }
     d->shown = d->widgets[id];
     d->shown->setGeometry(geometry());
-    d->shown->show();
+    d->_show(d->shown);
 }
 
 void CardLayout::hideAll()
 {
     if (!d->shown) return;
-    d->shown->hide();
+    d->_hide(d->shown);
     d->shown = NULL;
 }
 
