@@ -60,12 +60,14 @@ public:
     void setTemperatureUnit(const QString& unit);
     void setPressureUnit(const QString& unit);
     void setSpeedUnit(const QString& unit);
+    void setBackground(bool background);
 
     QString source();
     int updateInterval();
     QString temperatureUnit();
     QString pressureUnit();
     QString speedUnit();
+    bool background();
 
 public slots:
     void setUpdateInterval(int interval);

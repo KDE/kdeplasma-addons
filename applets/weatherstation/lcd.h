@@ -125,6 +125,11 @@ public:
     QPixmap toPixmap();
 
     /**
+     * Clear all items
+     */
+    void clear();
+
+    /**
      * Reimplemented from QGraphicsWidget
      */
     void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);

@@ -224,4 +224,14 @@ QString WeatherConfig::speedUnit()
     return speedComboBox->itemData(speedComboBox->currentIndex()).toString();
 }
 
+void WeatherConfig::setBackground(bool background)
+{
+    backgroundCheckBox->setCheckState(background ? Qt::Checked : Qt::Unchecked);
+}
+
+bool WeatherConfig::background()
+{
+    return (backgroundCheckBox->checkState() == Qt::Checked);
+}
+
 #include "weatherconfig.moc"

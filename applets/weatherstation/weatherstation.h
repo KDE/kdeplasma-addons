@@ -46,6 +46,7 @@ class WeatherStation : public Plasma::PopupApplet
     protected:
         void connectToEngine();
         void setLCDIcon();
+        void setBackground();
 
         void setWind(const Conversion::Value& speed, const QString& direction);
         void setPressure(const QString& condition, const Conversion::Value& pressure,
@@ -68,6 +69,7 @@ class WeatherStation : public Plasma::PopupApplet
         QString m_pressureUnit;
         int m_updateInterval;
         QString m_source;
+        bool m_useBackground;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)

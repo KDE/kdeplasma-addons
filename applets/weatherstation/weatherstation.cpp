@@ -65,6 +65,9 @@ void WeatherStation::init()
     }
     m_updateInterval = cfg.readEntry("updateWeather", 30);
     m_source = cfg.readEntry("source", "");
+    m_useBackground = cfg.readEntry("background", true);
+    setBackground();
+
     m_weatherEngine = dataEngine("weather");
     setLCDIcon();
     connectToEngine();
@@ -87,6 +90,20 @@ QGraphicsWidget* WeatherStation::graphicsWidget()
     return m_lcd;
 }
 
+void WeatherStation::setBackground()
+{
+    m_lcd->clear();
+    if (m_useBackground) {
+        m_lcd->setItemOn("lcd_background");
+    }
+    m_lcd->setItemOn("background");
+    m_lcdPanel->clear();
+    if (m_useBackground) {
+        m_lcdPanel->setItemOn("lcd_background");
+    }
+    m_lcdPanel->setItemOn("background");
+}
+
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
 {
     m_weatherConfig = new WeatherConfig(parent);
@@ -96,6 +113,7 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
     m_weatherConfig->setTemperatureUnit(m_temperatureUnit);
     m_weatherConfig->setSpeedUnit(m_speedUnit);
     m_weatherConfig->setPressureUnit(m_pressureUnit);
+    m_weatherConfig->setBackground(m_useBackground);
     parent->addPage(m_weatherConfig, i18n("Weather"), icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -114,6 +132,8 @@ void WeatherStation::configAccepted()
     cfg.writeEntry("pressureUnit", m_pressureUnit = m_weatherConfig->pressureUnit());
     cfg.writeEntry("updateInterval", m_updateInterval = m_weatherConfig->updateInterval());
     cfg.writeEntry("source", m_source = m_weatherConfig->source());
+    cfg.writeEntry("background", m_useBackground = m_weatherConfig->background());
+    setBackground();
 
     emit configNeedsSaving();
     connectToEngine();
@@ -210,8 +230,6 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, cons
                                          const Conversion::Value& temperature)
 {
     QStringList result;
-
-
     qreal temp = Conversion::Converter::self()->convert(temperature, "C").number();
     qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number();
     qreal t;
@@ -291,6 +309,7 @@ void WeatherStation::setHumidity(QString humidity)
 
 void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
 {
+    //kDebug() << speed.number() << speed.unit()->symbol() << dir;
     QString s = fitValue(Conversion::Converter::self()->convert(speed, m_speedUnit), 3);
 
     if (dir == "N/A") {

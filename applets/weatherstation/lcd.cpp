@@ -164,7 +164,6 @@ class LCD::Private
             p.scale(l->size().width() / svg.defaultSize().width(),
                     l->size().height() / svg.defaultSize().height());
 
-            paint(&p, "background");
             foreach (const QString& item, items) {
                 paint(&p, item);
             }
@@ -361,6 +360,11 @@ void LCD::setGroup(const QString &name, const QStringList& on)
             setItemOff(name + ':' + item);
         }
     }
+}
+
+void LCD::clear()
+{
+    d->items.clear();
 }
 
 void LCD::setItemOn(const QString &name)
