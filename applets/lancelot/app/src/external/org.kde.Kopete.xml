@@ -72,7 +72,7 @@
       <arg name="message" type="s" direction="in"/>
     </method>
     <method name="sendMessage">
-      <arg name="displayName" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
       <arg name="message" type="s" direction="in"/>
     </method>
     <method name="addContact">
@@ -91,17 +91,29 @@
       <arg name="displayName" type="s" direction="in"/>
     </method>
     <method name="sendFile">
-      <arg name="displayName" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
       <arg name="fileUrl" type="s" direction="in"/>
     </method>
     <method name="getDisplayName">
-      <arg name="contactID" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
       <arg type="s" direction="out"/>
     </method>
     <method name="isContactOnline">
-      <arg name="displayName" type="s" direction="in"/>
+      <arg name="contactId" type="s" direction="in"/>
       <arg type="b" direction="out"/>
     </method>
-
+	<method name="openChat">
+      <arg name="contactID" type="s" direction="in"/>
+    </method>
+    <!-- contactProperties is an experimental method that might be removed before KDE 4.2 --> 
+    <method name="contactProperties">
+      <arg type="a{sv}" direction="out"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+      <arg name="contactId" type="s" direction="in"/>
+    </method>
+    <!-- contactChanged is an experimental signal that might be removed before KDE 4.2 --> 
+	<signal name="contactChanged">
+      <arg name="contactID" type="s"/>
+    </signal>    
   </interface>
 </node>
