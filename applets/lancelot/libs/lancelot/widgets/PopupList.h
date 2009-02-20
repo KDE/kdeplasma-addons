@@ -44,6 +44,16 @@ class LANCELOT_EXPORT PopupList: public Plasma::Dialog {
 
 public:
     /**
+     * This enum represents behaviour patterns when an
+     * item with a submenu is activated
+     */
+    enum SublevelOpenAction {
+        NoAction = 0, ///< Do nothing
+        PopupNew,     ///< Pops a new list
+        OpenInside    ///< Opens the sublist inside the current one
+    };
+
+    /**
      * Creates a new Lancelot::PopupList
      * @param parent parent item
      */
@@ -73,13 +83,25 @@ public:
     int closeTimeout() const;
 
     /**
+     * Sets the action for opening a sublevel
+     * @param action new action
+     */
+    void setSublevelOpenAction(SublevelOpenAction action);
+
+    /**
+     * @returns action for opening a sublevel
+     */
+    SublevelOpenAction sublevelOpenAction() const;
+
+    /**
      * Sets the model for the popup list. You can use
      * ActionTreeModel as well as ActionListModel
      */
     void setModel(ActionListModel * model);
 
     /**
-     *
+     * Pops out the list
+     * @param p pop-up location
      */
     void exec(const QPoint & p);
 
@@ -91,6 +113,9 @@ protected:
     L_Override void timerEvent(QTimerEvent * event);
 
 public Q_SLOTS:
+    /**
+     * Requests the PopupList to be resized depending on the number of items
+     */
     void updateSize();
 
 private:

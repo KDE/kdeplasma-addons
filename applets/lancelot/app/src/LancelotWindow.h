@@ -127,6 +127,8 @@ private Q_SLOTS:
 
     void hideImmediate();
 
+    void focusChanged(QWidget * old, QWidget * now);
+
 public:
     /**
      * Returns a list of available sections - their IDs

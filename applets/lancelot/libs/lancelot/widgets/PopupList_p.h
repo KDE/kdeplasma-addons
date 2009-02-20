@@ -40,6 +40,8 @@ public:
     ActionListModel * listModel;
     ActionTreeModel * treeModel;
 
+    PopupList::SublevelOpenAction openAction;
+
     QBasicTimer timer;
     int closeTimeout;
 

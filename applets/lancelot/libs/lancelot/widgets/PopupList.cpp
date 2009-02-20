@@ -69,8 +69,16 @@ void PopupList::Private::listItemActivated(int index)
         << "tree" << (void *) treeModel
         << "list" << (void *) listModel;
     if (treeModel && treeModel->isCategory(index)) {
-        qDebug() << treeModel->isCategory(index);
-        list->setModel(treeModel->child(index));
+        switch (openAction) {
+            case OpenInside:
+                list->setModel(treeModel->child(index));
+                break;
+            case PopupNew:
+                break;
+            default:
+                break;
+                // nothing
+        }
     }
 }
 
@@ -145,6 +153,16 @@ void PopupList::setCloseTimeout(int timeout)
 int PopupList::closeTimeout() const
 {
     return d->closeTimeout;
+}
+
+PopupList::SublevelOpenAction PopupList::sublevelOpenAction() const
+{
+    return d->openAction;
+}
+
+void PopupList::setSublevelOpenAction(SublevelOpenAction action)
+{
+    d->openAction = action;
 }
 
 void PopupList::enterEvent(QEvent * event)

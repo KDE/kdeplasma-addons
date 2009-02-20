@@ -283,6 +283,21 @@ LancelotWindow::LancelotWindow()
     loadConfig();
     setupActions();
 
+    connect(QApplication::instance(), SIGNAL(focusChanged(QWidget *, QWidget *)),
+            this, SLOT(focusChanged(QWidget *, QWidget *)));
+}
+
+void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
+{
+    // We have to return the focus to the QGraphicsView
+    // since it handles the keyboard, the universe
+    // and everything
+    if (now == this) {
+        m_view->setFocus();
+        editSearch->nativeWidget()->setFocus();
+        editSearch->setFocus();
+    }
+
 }
 
 LancelotWindow::~LancelotWindow()
