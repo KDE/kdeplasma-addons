@@ -82,13 +82,13 @@ void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &dat
     if (!_picture.isNull()) {
         m_picture = _picture;
         m_pixmapCache = QPixmap();
-	QSizeF sizeHint = contentSizeHint();
-	if (geometry().size() != sizeHint) {
+        QSizeF sizeHint = contentSizeHint();
+        if (geometry().size() != sizeHint) {
             resize(sizeHint); 
             emit appletTransformedItself();
-	} else {        
+        } else {
             update();
-	}
+        }
     }
 }
 
@@ -175,25 +175,24 @@ void Frame::slotOpenPicture()
 
 void Frame::constraintsEvent(Plasma::Constraints constraints)
 {
-    
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(Plasma::Applet::NoBackground);
-	m_pixmapCache = QPixmap();
-	if (formFactor() == Plasma::Horizontal) {
-	     m_frameOutline = 0;
-             m_swOutline = 4;
-	} else if (formFactor() == Plasma::Vertical) {
-	     m_frameOutline = 0;
-             m_swOutline = 4;
+        m_pixmapCache = QPixmap();
+        if (formFactor() == Plasma::Horizontal) {
+            m_frameOutline = 0;
+            m_swOutline = 4;
+        } else if (formFactor() == Plasma::Vertical) {
+            m_frameOutline = 0;
+            m_swOutline = 4;
         } else {
-	     m_frameOutline = 8;
-             m_swOutline = 8;
-	     //Restore widget geometry to image proportions
-	     resize(contentSizeHint());
-	     emit appletTransformedItself();
-	}
-    }  
-    
+            m_frameOutline = 8;
+            m_swOutline = 8;
+            //Restore widget geometry to image proportions
+            resize(contentSizeHint());
+            emit appletTransformedItself();
+        }
+    }
+
     if (constraints & Plasma::SizeConstraint) {   
         //If on panel, keep geometry to 4:3 ratio
         if(formFactor() == Plasma::Vertical) {
@@ -228,12 +227,12 @@ void Frame::updatePicture()
     if (!newImage.isNull()) {
         m_picture = newImage;
         m_pixmapCache = QPixmap();
-	QSizeF sizeHint = contentSizeHint();
-	if (geometry().size() != sizeHint) {
-            resize(sizeHint); 
-	} else {        
+        QSizeF sizeHint = contentSizeHint();
+        if (geometry().size() != sizeHint) {
+            resize(sizeHint);
+        } else {
             update();
-	}
+        }
     }
 }
 
@@ -388,11 +387,11 @@ void Frame::initSlideShow()
         m_mySlideShow->setRandom(m_random);
         m_slideShowTimer->start();
     } else if (m_potd) {
-	if(m_slideShowTimer->isActive()) {
-	    m_slideShowTimer->stop();
-	}
-        
-	Plasma::DataEngine *engine = dataEngine("potd");
+        if (m_slideShowTimer->isActive()) {
+            m_slideShowTimer->stop();
+        }
+
+        Plasma::DataEngine *engine = dataEngine("potd");
         if (!engine) {
             kDebug() << " Engine potd can't be created";
             return;
@@ -429,13 +428,13 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
     if (droppedUrl.protocol() == "desktop") {
-	KUrl tmpUrl = KGlobalSettings::desktopPath() + droppedUrl.path();
-	droppedUrl = tmpUrl;
-	}
+        KUrl tmpUrl = KGlobalSettings::desktopPath() + droppedUrl.path();
+        droppedUrl = tmpUrl;
+    }
     // If the url is a local directory start slideshowmode
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
         m_slideShowPaths.clear();
-	m_slideShowPaths.append(droppedUrl.path());
+        m_slideShowPaths.append(droppedUrl.path());
         if (!m_slideShow) {
             m_slideShow = true;
         }
@@ -458,9 +457,8 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
                            const QRect &rect)
 {
-    if (m_pixmapCache.isNull() ||
-            geometry().toRect().size() != m_pixmapCache.size()) {
-	    //kDebug() << "Paint cache!!!";
+    if (m_pixmapCache.isNull() || geometry().toRect().size() != m_pixmapCache.size()) {
+        //kDebug() << "Paint cache!!!";
         paintCache(option, geometry().toRect().size());
     }
 
