@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Author:  Olivier Goffart   2009 -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+  <g>
+
+        <ellipse id="leftEye" fill="white" stroke="black"
+                rx="100%"  ry="100%"  cx="50%" cy="50%" stroke-width="17%"  />
+
+        <ellipse id="rightEye" fill="white" stroke="black"
+                rx="100%"  ry="100%"  cx="50%" cy="50%" stroke-width="17%"  />
+
+        <ellipse id="leftPupil" fill="black"
+                rx="100%"  ry="100%"  cx="50%" cy="50%"  />
+
+        <ellipse id="rightPupil" fill="black"
+                rx="100%"  ry="100%"  cx="50%" cy="50%" />
+  </g>
+</svg>

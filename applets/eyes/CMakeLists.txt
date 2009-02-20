@@ -13,5 +13,5 @@ install(TARGETS plasma_applet_eyes
 install(FILES plasma-applet-eyes.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install(FILES eyes.svgz
+install(FILES eyes.svg
 	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
