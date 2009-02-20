@@ -826,17 +826,20 @@ void LancelotWindow::configurationChanged()
 
 void LancelotWindow::loadConfig()
 {
+    // Non configurable options
     m_mainSize = QSize(
         m_mainConfig.readEntry("width",  mainWidthDefault),
         m_mainConfig.readEntry("height", windowHeightDefault)
     );
 
+    // Creating the config widget
     if (m_configWidget == NULL) {
         m_configWidget = new QWidget();
         m_configUi.setupUi(m_configWidget);
     }
     m_configUi.loadConfig();
 
+    // Loading activation method for groups
     bool sectionNoClick = true;
     bool listsNoClick = true;
     bool systemNoClick = true;
@@ -908,6 +911,7 @@ void LancelotWindow::loadConfig()
     instance->group("ActionListView-Right")->notifyUpdated();
     instance->group("PassagewayView")->notifyUpdated();
 
+    // PassagewayView settings
     if (m_configUi.appbrowserColumnLimitted()) {
         passagewayApplications->setColumnLimit(2);
     } else {
@@ -915,9 +919,20 @@ void LancelotWindow::loadConfig()
     }
 
     // Loading system buttons actions
-    systemButtonActions[buttonSystem1] = "lock-screen";
-    systemButtonActions[buttonSystem2] = "menu-leave";
-    systemButtonActions[buttonSystem3] = "menu-switch-user";
+
+    systemButtonActions[buttonSystem1] = m_configUi.systemButtonActions[m_configUi.buttonSystem1];
+    systemButtonActions[buttonSystem2] = m_configUi.systemButtonActions[m_configUi.buttonSystem2];
+    systemButtonActions[buttonSystem3] = m_configUi.systemButtonActions[m_configUi.buttonSystem3];
+
+    QHashIterator < Lancelot::ExtenderButton *, QString > i(systemButtonActions);
+    while (i.hasNext()) {
+        i.next();
+
+        i.key()->setTitle(Models::SystemActions::instance()->actionTitle(
+                    i.value()));
+        i.key()->setIcon(Models::SystemActions::instance()->actionIcon(
+                    i.value()));
+    }
 }
 
 void LancelotWindow::lancelotContext()

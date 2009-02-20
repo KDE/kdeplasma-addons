@@ -148,6 +148,15 @@ QIcon StandardActionTreeModel::icon(int index) const
     return d->root->children.at(index)->icon;
 }
 
+QVariant StandardActionTreeModel::data(int index) const
+{
+    if (index < 0 || index >= d->root->children.size()) {
+        return QVariant();
+    }
+
+    return d->root->children.at(index)->data;
+}
+
 int StandardActionTreeModel::size() const
 {
     kDebug() << (void *) this;

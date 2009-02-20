@@ -54,7 +54,6 @@ public:
     QString actionTitle(const QString & id) const;
     QIcon actionIcon(const QString & id) const;
 
-
     L_Override void load();
     L_Override StandardActionTreeModel * createChild(int index);
     L_Override bool isCategory(int index) const;

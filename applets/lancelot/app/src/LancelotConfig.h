@@ -24,8 +24,10 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <QButtonGroup>
+#include <QMenu>
 
-class LancelotConfig: public Ui::LancelotConfigBase {
+class LancelotConfig: public QObject, public Ui::LancelotConfigBase {
+    Q_OBJECT
 public:
     LancelotConfig();
 
@@ -52,8 +54,18 @@ public:
     QButtonGroup * qbgActivationMethod;
     QButtonGroup * qbgAppbrowserColumnLimit;
 
+    QHash < QPushButton *, QString > systemButtonActions;
+    QMenu * systemButtonActionsMenu;
+    QPushButton * clickedSystemButton;
+
     KConfig      m_config;
     KConfigGroup m_mainConfig;
+
+private Q_SLOTS:
+    void systemButtonClicked();
+    void systemButtonActionsMenuClicked();
+
+    void setButtonData(QPushButton * button);
 };
 
 #endif // LANCELOTCONFIG_H

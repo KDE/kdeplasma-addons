@@ -205,9 +205,11 @@ update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
 
 set(plasma_applet_lancelot_launcher_SRCS
   ${plasma_lancelot_client_SRCS}
+  ${plasma_lancelot_models_SRCS}
   launcher/LancelotApplet.cpp
   launcher/LancelotAppletConfig.cpp
   LancelotConfig.cpp
+  Serializator.cpp
 )
 
 kde4_add_ui_files(
@@ -227,6 +229,10 @@ target_link_libraries(
    ${KDE4_PLASMA_LIBS}
    ${LANCELOT_LIBS}
    ${KDE4_KIO_LIBS}
+   ${KDE4_SOLID_LIBS}
+   ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
+   solidcontrol
+   kworkspace
 )
 
 install(

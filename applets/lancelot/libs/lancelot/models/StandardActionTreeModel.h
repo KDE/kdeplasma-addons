@@ -73,6 +73,8 @@ public:
 
     L_Override virtual int size() const;
 
+    QVariant data(int index) const;
+
     /**
      * Adds a new item into the model
      * @param item new item
@@ -86,7 +88,8 @@ public:
      * @param icon the icon for the new item
      * @param data data for the new item. Not shown to user
      */
-    void add(const QString & title, const QString & description, QIcon icon, const QVariant & data, Item * parent = NULL);
+    void add(const QString & title, const QString & description,
+            QIcon icon, const QVariant & data, Item * parent = NULL);
 
     /**
      * Replaces existing item at specified index with a new one
@@ -103,7 +106,8 @@ public:
      * @param icon the icon for the new item
      * @param data data for the new item. Not shown to user
      */
-    void set(int index, const QString & title, const QString & description, QIcon icon, const QVariant & data, Item * parent = NULL);
+    void set(int index, const QString & title, const QString & description,
+            QIcon icon, const QVariant & data, Item * parent = NULL);
 
     /**
      * Removes an item

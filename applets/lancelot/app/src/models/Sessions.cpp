@@ -82,15 +82,30 @@ SystemActions * SystemActions::instance()
 Lancelot::ActionTreeModel * SystemActions::action(const QString & id)
 {
     qDebug() << "SystemActions::action" << id;
-    for (int i = 0; i < root()->children.size(); i++) {
-        qDebug() << "SystemActions::action" << root()->children.at(i)->data.toString();
-        if (id == root()->children.at(i)->data.toString()) {
-            qDebug() << "SystemActions::action" << isCategory(i);
-            if (isCategory(i)) return child(i);
+    QList < Lancelot::ActionTreeModel * > subs;
+    subs << this;
 
-            qDebug() << "SystemActions::action activate";
-            activate(i);
-            return NULL;
+    while (!subs.isEmpty()) {
+        Lancelot::StandardActionTreeModel * model =
+            dynamic_cast < Lancelot::StandardActionTreeModel * >
+                (subs.takeFirst());
+        if (!model) {
+            continue;
+        }
+
+        for (int i = 0; i < model->size(); i++) {
+            if (id == model->data(i).toString()) {
+                if (model->isCategory(i)) {
+                    return model->child(i);
+                }
+
+                model->activated(i);
+                return NULL;
+            } else {
+                if (model->isCategory(i)) {
+                    subs << model->child(i);
+                }
+            }
         }
     }
     return NULL;
