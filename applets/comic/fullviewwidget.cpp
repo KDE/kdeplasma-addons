@@ -70,20 +70,22 @@ void FullViewWidget::wheelEvent( QWheelEvent *event )
     const int scroll = numSteps * 30;
 
     QPoint futurePos = this->pos();
-    const int bufferSpace = 70;
-    //horizontal
-    if ( event->modifiers() == Qt::AltModifier ) {
-        futurePos += QPoint( scroll, 0 );
-        if ( ( bufferSpace >= futurePos.x() + width() - mDesktopSize.left() ) ||
-             ( bufferSpace >= mDesktopSize.right() - futurePos.x() ) ) {
-            return;
-        }
+
     //vertical
-    } else {
+    if ( ( mImage.height() > mDesktopSize.height() ) && ( event->modifiers() != Qt::AltModifier ) ) {
         futurePos += QPoint( 0, scroll );
-        if ( ( 70 >= futurePos.y() + height() - mDesktopSize.top() ) ||
-            ( 70 >= mDesktopSize.bottom() - futurePos.y() ) ) {
-            return;
+        if ( ( scroll > 0 ) && ( futurePos.y() > mDesktopSize.top() ) ) {
+            futurePos.setY( mDesktopSize.top() );
+        } else if ( ( scroll < 0 ) && ( futurePos.y() + height() < mDesktopSize.bottom() ) ) {
+            futurePos.setY( mDesktopSize.bottom() - height() );
+        }
+    //horizontal
+    } else if ( mImage.width() > mDesktopSize.width() ) {
+        futurePos += QPoint( scroll, 0 );
+        if ( ( scroll > 0 ) && ( futurePos.x() > mDesktopSize.left() ) ) {
+            futurePos.setX( mDesktopSize.left() );
+        } else if ( ( scroll < 0 ) && ( futurePos.x() + width() < mDesktopSize.right() ) ) {
+            futurePos.setX( mDesktopSize.right() - width() );
         }
     }
 
