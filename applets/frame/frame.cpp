@@ -313,6 +313,8 @@ void Frame::configAccepted()
     m_frameColor = m_configDialog->frameColor();
     cg.writeEntry("frameColor", m_frameColor);
 
+    bool wasPotd = m_potd;
+
     if (m_configDialog->ui.pictureComboBox->currentIndex() == 1) {
         m_slideShow = true;
         m_potd = false;
@@ -342,7 +344,15 @@ void Frame::configAccepted()
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
     cg.writeEntry("slideshow time", m_slideshowTime);
 
-    m_potdProvider = m_configDialog->ui.potdComboBox->itemData(m_configDialog->ui.potdComboBox->currentIndex()).toString();
+    QString potdProvider = m_configDialog->ui.potdComboBox->itemData(m_configDialog->ui.potdComboBox->currentIndex()).toString();
+
+    if ((wasPotd && !m_potd) || (m_potd && potdProvider != m_potdProvider)) {
+        // if we go from potd to no potd, or if the provider changes, then we first want to
+        // stop the potd engine
+        stopPotd();
+    }
+
+    m_potdProvider = potdProvider;
     cg.writeEntry("potdProvider", m_potdProvider);
     cg.writeEntry("potd", m_potd);
 
@@ -352,6 +362,15 @@ void Frame::configAccepted()
     initSlideShow();
 
     emit configNeedsSaving();
+}
+
+void Frame::stopPotd()
+{
+    Plasma::DataEngine *engine = dataEngine("potd");
+    QDate mCurrentDate = QDate::currentDate();
+    const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
+    engine->disconnectSource(identifier, m_mySlideShow);
+    m_potd = false;
 }
 
 void Frame::initSlideShow()
@@ -367,7 +386,6 @@ void Frame::initSlideShow()
         QDate mCurrentDate = QDate::currentDate();
         const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
 
-        engine->disconnectSource(identifier, m_mySlideShow);
         engine->connectSource(identifier, m_mySlideShow);
 
 //FIXME: why is there a manual kicking of the engine?        const Plasma::DataEngine::Data data = engine->query(identifier);
@@ -411,7 +429,8 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
             m_slideShow = false;
         }
     }
-    m_potd = false;
+
+    stopPotd();
     initSlideShow();
 
     KConfigGroup cg = config();

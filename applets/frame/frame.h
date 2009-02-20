@@ -69,8 +69,7 @@ protected:
     void updateMenu();
 
 private:
-    void paintCache(const QStyleOptionGraphicsItem *option,
-                    const QSize &contentsSize);
+    void stopPotd();
     void initSlideShow();
 
     /// The current color of the frame
