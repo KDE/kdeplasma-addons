@@ -238,8 +238,9 @@ bool TimelineSource::endElement(const QString &namespaceURI, const QString &loca
         m_tempData["Source"] = m_cdata;
     } else if (tag == "url") {
         m_tempData["Url"] = m_cdata;
+    } else if (tag == "created_at") {
+        m_tempData["Date"] = m_cdata;
     }
-
     m_cdata.clear();
     return true;
 }
