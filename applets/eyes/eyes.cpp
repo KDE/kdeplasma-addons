@@ -75,10 +75,11 @@ void Eyes::constraintsEvent(Plasma::Constraints constraints)
             setMaximumSize(QSizeF());
         }
 
-        penWidth = qMin(boundingRect().width() /2 , boundingRect().height() ) / 16;
+        double pupilSize = qMin( qMin(boundingRect().width()/2, boundingRect().height()) / 5,
+                                 (boundingRect().width()/2 + boundingRect().height()) / 12);
 
-        leftPupil->resize(penWidth*2, penWidth*2);
-        rightPupil->resize(penWidth*2, penWidth*2);
+        leftPupil->resize(pupilSize, pupilSize);
+        rightPupil->resize(pupilSize, pupilSize);
     }
     previousMousePos = QPoint(-1,-1);
 }
@@ -87,20 +88,11 @@ void Eyes::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
                         const QRect &contentsRect)
 {
     Q_UNUSED(option)
-    QBrush brush(Qt::white);
-    QPen pen(Qt::black);
-    pen.setWidth(10);
-
-    p->setBrush(Qt::white);
-    p->setPen(QPen(Qt::black, penWidth));
-
-    double penHalfWidth = penWidth/2 + 1;
-
     QRect rect = contentsRect;
     rect.setWidth(rect.width()/2 - 2);
-    m_svg->paint(p, rect.adjusted(penHalfWidth,penHalfWidth,-penHalfWidth,-penHalfWidth), "leftEye");
+    m_svg->paint(p, rect, "leftEye");
     rect.translate(rect.width() + 2*2 , 0);
-    m_svg->paint(p, rect.adjusted(penHalfWidth,penHalfWidth,-penHalfWidth,-penHalfWidth), "rightEye");
+    m_svg->paint(p, rect, "rightEye");
 }
 
 
@@ -177,16 +169,20 @@ void Eyes::timerEvent(QTimerEvent *e)
     //cursor position relative to the item coordonate
     QPointF mousePos = mapFromScene( myview->mapToScene( myview->mapFromGlobal( absMousePos ) ) );
 
-    const qreal padding = penWidth*3 + 4;
+    const QRectF bounding = boundingRect();
+    const qreal paddingX = bounding.width() / 9;
+    const qreal paddingY = bounding.height() / 5;
 
     QRectF eyesRect = boundingRect();
     // left pupil
     eyesRect.setWidth(eyesRect.width()/2 - 2);
-    leftPupil->setPos(pupilPos(eyesRect.adjusted(padding,padding,-padding,-padding), mousePos) - QPointF(penWidth,penWidth));
+    leftPupil->setPos(pupilPos(eyesRect.adjusted(paddingX,paddingY,-paddingX,-paddingY), mousePos)
+                           - leftPupil->boundingRect().center());
 
     //right pupil
     eyesRect.translate(eyesRect.width() + 2*2 , 0);
-    rightPupil->setPos(pupilPos(eyesRect.adjusted(padding,padding,-padding,-padding), mousePos) - QPointF(penWidth,penWidth));
+    rightPupil->setPos(pupilPos(eyesRect.adjusted(paddingX,paddingY,-paddingX,-paddingY), mousePos)
+                             - rightPupil->boundingRect().center());
 }
 
 

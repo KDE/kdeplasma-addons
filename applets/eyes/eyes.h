@@ -37,7 +37,6 @@ class Eyes : public Plasma::Applet
     protected:
         void timerEvent(QTimerEvent *);
         Plasma::SvgWidget *leftPupil, *rightPupil;
-        double penWidth;
         int timerId;
         int timerInterval;
         QPoint previousMousePos;
