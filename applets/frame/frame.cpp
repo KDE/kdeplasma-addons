@@ -40,7 +40,8 @@
 #include <KServiceTypeTrader>
 #include <kglobalsettings.h>
 
-#include <plasma/paintutils.h>
+#include <Plasma/PaintUtils>
+#include <Plasma/DataEngine>
 
 #include <math.h>
 
@@ -56,9 +57,9 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
     setAcceptsHoverEvents(true);
-    setCacheMode(QGraphicsItem::NoCache);
+    setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     resize(400, 300);
-    m_mySlideShow = new SlideShow();
+    m_mySlideShow = new SlideShow(this);
     if (args.count()) {
         m_currentUrl = args.value(0).toString();
     } else {
@@ -68,28 +69,6 @@ Frame::Frame(QObject *parent, const QVariantList &args)
 
 Frame::~Frame()
 {
-    delete m_mySlideShow;
-}
-
-void Frame::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
-{
-    Q_UNUSED(name);
-    QDate mCurrentDate = QDate::currentDate();
-    const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
-
-    QImage _picture = data[identifier].value<QImage>();
-
-    if (!_picture.isNull()) {
-        m_picture = _picture;
-        m_pixmapCache = QPixmap();
-        QSizeF sizeHint = contentSizeHint();
-        if (geometry().size() != sizeHint) {
-            resize(sizeHint); 
-            emit appletTransformedItself();
-        } else {
-            update();
-        }
-    }
 }
 
 void Frame::init()
@@ -121,9 +100,7 @@ void Frame::init()
     m_swOutline = 8;
 
     // Initialize the slideshow timer
-    m_slideShowTimer = new QTimer(this);
-    connect(m_slideShowTimer, SIGNAL(timeout()), this, SLOT(updatePicture()));
-    m_slideShowTimer->setInterval(m_slideshowTime * 1000);
+    connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(updatePicture()));
 
     initSlideShow();
     if (frameReceivedUrlArgs) {
@@ -163,7 +140,7 @@ void Frame::slotOpenPicture()
     KUrl url;
 
     if (m_slideShow) {
-        url = m_mySlideShow->getCurrentUrl();
+        url = m_mySlideShow->currentUrl();
     } else {
         url = m_currentUrl;
     }
@@ -177,7 +154,6 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(Plasma::Applet::NoBackground);
-        m_pixmapCache = QPixmap();
         if (formFactor() == Plasma::Horizontal) {
             m_frameOutline = 0;
             m_swOutline = 4;
@@ -191,9 +167,11 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             resize(contentSizeHint());
             emit appletTransformedItself();
         }
+
+        updatePicture();
     }
 
-    if (constraints & Plasma::SizeConstraint) {   
+    if (constraints & Plasma::SizeConstraint) {
         //If on panel, keep geometry to 4:3 ratio
         if(formFactor() == Plasma::Vertical) {
             setMinimumSize(QSizeF(0, boundingRect().width()/1.33));
@@ -210,11 +188,11 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 
 QSizeF Frame::contentSizeHint() const
 {
-    if (!m_picture.isNull() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
-        QSizeF sizeHint = m_picture.size();
-        qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
-        sizeHint.scale(maxSize, maxSize, Qt::KeepAspectRatio);
-        return sizeHint;
+    if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
+        const qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
+        QSize size = m_pictureSize;
+        size.scale(maxSize, maxSize, Qt::KeepAspectRatio);
+        return size;
     } else {
         return geometry().size();
     }
@@ -222,18 +200,15 @@ QSizeF Frame::contentSizeHint() const
 
 void Frame::updatePicture()
 {
-    QImage newImage = m_mySlideShow->getImage();
-
-    if (!newImage.isNull()) {
-        m_picture = newImage;
-        m_pixmapCache = QPixmap();
-        QSizeF sizeHint = contentSizeHint();
-        if (geometry().size() != sizeHint) {
-            resize(sizeHint);
-        } else {
-            update();
-        }
+    QImage picture = m_mySlideShow->image();
+    m_pictureSize = picture.size();
+    QSizeF sizeHint = contentSizeHint();
+    if (geometry().size() != sizeHint) {
+        resize(sizeHint);
+        emit appletTransformedItself();
     }
+
+    update();
 }
 
 void Frame::addDir()
@@ -318,7 +293,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->ui.slideShowDirList->addItems(m_slideShowPaths);
     m_configDialog->ui.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
     m_configDialog->ui.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
-    m_configDialog->previewPicture(m_picture);
+    m_configDialog->previewPicture(m_mySlideShow->image());
     m_configDialog->show();
     m_configDialog->raise();
 }
@@ -365,7 +340,6 @@ void Frame::configAccepted()
 
     QTime timerTime = m_configDialog->ui.slideShowDelay->time();
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
-    m_slideShowTimer->setInterval(m_slideshowTime * 1000);
     cg.writeEntry("slideshow time", m_slideshowTime);
 
     m_potdProvider = m_configDialog->ui.potdComboBox->itemData(m_configDialog->ui.potdComboBox->currentIndex()).toString();
@@ -382,31 +356,24 @@ void Frame::configAccepted()
 
 void Frame::initSlideShow()
 {
+    m_mySlideShow->setUpdateInterval(0);
+
     if (m_slideShow) {
         m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
         m_mySlideShow->setRandom(m_random);
-        m_slideShowTimer->start();
+        m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
     } else if (m_potd) {
-        if (m_slideShowTimer->isActive()) {
-            m_slideShowTimer->stop();
-        }
-
         Plasma::DataEngine *engine = dataEngine("potd");
-        if (!engine) {
-            kDebug() << " Engine potd can't be created";
-            return;
-        }
         QDate mCurrentDate = QDate::currentDate();
         const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
 
-        engine->disconnectSource(identifier, this);
-        engine->connectSource(identifier, this);
+        engine->disconnectSource(identifier, m_mySlideShow);
+        engine->connectSource(identifier, m_mySlideShow);
 
-        const Plasma::DataEngine::Data data = engine->query(identifier);
+//FIXME: why is there a manual kicking of the engine?        const Plasma::DataEngine::Data data = engine->query(identifier);
     } else { //no slideshow so no random stuff
         m_mySlideShow->setRandom(false);
         m_mySlideShow->setImage(m_currentUrl.path());
-        m_slideShowTimer->stop();
     }
 
     if (!m_potd) {
@@ -454,38 +421,37 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     emit configNeedsSaving();
 }
 
-void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option,
-                           const QRect &rect)
-{
-    if (m_pixmapCache.isNull() || geometry().toRect().size() != m_pixmapCache.size()) {
-        //kDebug() << "Paint cache!!!";
-        paintCache(option, geometry().toRect().size());
-    }
-
-    p->drawPixmap(rect, m_pixmapCache, rect);
-}
-
-void Frame::paintCache(const QStyleOptionGraphicsItem *option,
-                       const QSize &contentsSize)
+void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
 {
     Q_UNUSED(option);
-    m_pixmapCache = QPixmap(contentsSize);
-    m_pixmapCache.fill(Qt::transparent);
+    if (m_slideShow) {
+        // temporarily suspend the slideshow to allow time for loading the image
+        m_mySlideShow->setUpdateInterval(0);
+    }
 
+    QImage picture = m_mySlideShow->image();
+    const QSize contentsSize = rect.size();
+
+    if (picture.isNull()) {
+        if (m_slideShow) {
+            // unsuspend the slideshow to allow time for loading the image
+            m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
+        }
+        return;
+    }
 
     int roundingFactor = 12 * m_roundCorners;
     int swRoundness = roundingFactor + m_frameOutline / 2 * m_frame * m_roundCorners;
 
-    QRect frameRect = m_pixmapCache.rect().adjusted(m_swOutline, m_swOutline,
-                      -m_swOutline, -m_swOutline); //Pretty useless.
+    QRect frameRect(QPoint(0, 0), contentsSize);
+    frameRect.adjust(m_swOutline, m_swOutline, -m_swOutline, -m_swOutline); //Pretty useless.
 
     Qt::TransformationMode transformationMode = m_smoothScaling ? Qt::SmoothTransformation : Qt::FastTransformation;
     //TODO check if correct
-    QImage scaledImage = m_picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
+    QImage scaledImage = picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
     frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
                              frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
 
-    QPainter *p = new QPainter(&m_pixmapCache);
     QRect shadowRect;
     if (m_frame) {
         shadowRect = frameRect.adjusted(-m_frameOutline + 1, -m_frameOutline + 1,
@@ -545,7 +511,10 @@ void Frame::paintCache(const QStyleOptionGraphicsItem *option,
         p->drawPath(framePath);
     }
 
-    delete p;
+    if (m_slideShow) {
+        // unsuspend the slideshow to allow time for loading the image
+        m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
+    }
 }
 
 #include "frame.moc"

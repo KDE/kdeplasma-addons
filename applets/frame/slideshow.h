@@ -23,36 +23,57 @@
 #include <QString>
 #include <QStringList>
 #include <QImage>
-#include <math.h>
-#include <iostream>
+#include <QObject>
+
 #include <KUrl>
 
-class SlideShow
+#include <Plasma/DataEngine>
+
+class QTimer;
+
+class SlideShow : public QObject
 {
+    Q_OBJECT
+
 public:
-    SlideShow();
+    explicit SlideShow(QObject *parent);
     ~SlideShow();
 
     void setDirs(const QStringList &slideShowPaths, bool recursive = false);
     void setImage(const QString &imagePath);
     void setRandom(bool);
-    QImage getImage();
-    KUrl getCurrentUrl();
+    QImage image();
+    KUrl currentUrl();
+
+    void setUpdateInterval(int msec);
+
+public Q_SLOTS:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+
+Q_SIGNALS:
+    void pictureUpdated();
 
 private:
-    QStringList m_pictures;
-    QStringList m_filters;
-    int m_slideNumber;
-    bool useRandom;
-
     void addImage(const QString &imagePath);
     void addDir(const QString &path);
     void addRecursiveDir(const QString &path);
-    KUrl getUrl();
-    QList<int> indexList;
-    int randomInt;
-    KUrl currentUrl;
+    KUrl url();
 
+private Q_SLOTS:
+    void updatePicture();
+    void clearPicture();
+
+private:
+    QStringList m_picturePaths;
+    QStringList m_filters;
+    int m_slideNumber;
+    bool m_useRandom;
+
+    QList<int> m_indexList;
+    int m_randomInt;
+    KUrl m_currentUrl;
+    QTimer *m_timer;
+    QImage m_picture;
 };
 
 #endif /*SLIDESHOW_H*/

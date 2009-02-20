@@ -29,7 +29,6 @@
 #include <QColor>
 
 #include <plasma/applet.h>
-#include <plasma/dataengine.h>
 #include <plasma/animator.h>
 
 class ConfigDialog;
@@ -52,7 +51,6 @@ public:
 
 public slots:
     void createConfigurationInterface(KConfigDialog *parent);
-    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
 protected Q_SLOTS:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -95,12 +93,9 @@ private:
     /// The current slideshow folder
     QStringList m_slideShowPaths;
     unsigned int m_slideNumber;
-    QTimer *m_slideShowTimer;
     int m_slideshowTime;
-    /// The current picture
-    QImage m_picture;
-    /// Off-Screen pixmap
-    QPixmap m_pixmapCache;
+    /// The size of the current picture
+    QSize m_pictureSize;
     /// The action list for the context menu
     QList<QAction*> m_actions;
     QAction* m_openPicture;
