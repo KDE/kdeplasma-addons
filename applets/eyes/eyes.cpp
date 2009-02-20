@@ -111,9 +111,9 @@ static QPointF pupilPos( const QRectF &eyesRect, const QPointF &mousePos)
 
     if (qFuzzyCompare(vect.x() + 1 , qreal(1.0))) {
         if (vect.y() > eyesRect.height()/2) {
-            return eyesRect.center() + QPoint( 0, eyesRect.width()/2);
+            return eyesRect.center() + QPoint( 0, eyesRect.height()/2);
         } else if (vect.y() < -eyesRect.height()/2) {
-            return eyesRect.center() + QPoint( 0, -eyesRect.width()/2);
+            return eyesRect.center() + QPoint( 0, -eyesRect.height()/2);
         } else {
             return mousePos;
         }
