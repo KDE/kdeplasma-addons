@@ -20,9 +20,10 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include "ui_config.h"
+#include "ui_imageSettings.h"
+#include "ui_appearanceSettings.h"
 
-class ConfigDialog : public QWidget
+class ConfigDialog : public QObject
 {
     Q_OBJECT
 public:
@@ -51,9 +52,11 @@ public:
     void setCurrentUrl(const KUrl& currentUrl);
     KUrl currentUrl() const;
     /// Designer Config file
-    Ui::config ui;
+    Ui::ImageSettings imageUi;
+    Ui::AppearanceSettings appearanceUi;
+    QWidget *imageSettings;
+    QWidget *appearanceSettings;
     /// Image Preview
-    QLabel *m_preview;
     /// Allow to preview each new chosen picture
     void previewPicture(const QImage &pix);
 
@@ -63,6 +66,8 @@ private slots:
     /// Update preview when URL changes via the combobox
     void changePreview(const QString &);
 
+private:
+    QLabel *m_preview;
 };
 
 #endif

@@ -26,28 +26,32 @@
 #include "picture.h"
 
 ConfigDialog::ConfigDialog(QWidget *parent)
-        : QWidget(parent)
+        : QObject(parent)
 {
-    ui.setupUi(this);
+    appearanceSettings = new QWidget();
+    appearanceUi.setupUi(appearanceSettings);
 
-    ui.addDirButton->setIcon(KIcon("list-add"));
-    ui.removeDirButton->setIcon(KIcon("list-remove"));
-    ui.slideShowDelay->setMinimumTime(QTime(0, 0, 1)); // minimum to 1 second
+    imageSettings = new QWidget();
+    imageUi.setupUi(imageSettings);
+
+    imageUi.addDirButton->setIcon(KIcon("list-add"));
+    imageUi.removeDirButton->setIcon(KIcon("list-remove"));
+    imageUi.slideShowDelay->setMinimumTime(QTime(0, 0, 1)); // minimum to 1 second
 
     QString monitorPath = KStandardDirs::locate("data",  "kcontrol/pics/monitor.png");
     // Size of monitor image: 200x186
     // Geometry of "display" part of monitor image: (23,14)-[151x115]
-    ui.monitorLabel->setPixmap(QPixmap(monitorPath));
-    ui.monitorLabel->setWhatsThis(i18n(
+    imageUi.monitorLabel->setPixmap(QPixmap(monitorPath));
+    imageUi.monitorLabel->setWhatsThis(i18n(
                                       "This picture of a monitor contains a preview of "
                                       "the picture you currently have in your frame."));
-    m_preview = new QLabel(ui.monitorLabel);
+    m_preview = new QLabel(imageUi.monitorLabel);
     m_preview->setScaledContents(true);
     m_preview->setGeometry(23, 14, 151, 115);
     m_preview->show();
 
-    connect(ui.picRequester, SIGNAL(urlSelected(const KUrl &)), this, SLOT(changePreview(const KUrl &)));
-    connect(ui.picRequester->comboBox(), SIGNAL(activated(const QString &)), this, SLOT(changePreview(const QString &)));
+    connect(imageUi.picRequester, SIGNAL(urlSelected(const KUrl &)), this, SLOT(changePreview(const KUrl &)));
+    connect(imageUi.picRequester->comboBox(), SIGNAL(activated(const QString &)), this, SLOT(changePreview(const QString &)));
 }
 
 ConfigDialog::~ConfigDialog()
@@ -56,62 +60,62 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::setRoundCorners(bool round)
 {
-    ui.roundCheckBox->setChecked(round);
+    appearanceUi.roundCheckBox->setChecked(round);
 }
 
 bool ConfigDialog::roundCorners() const
 {
-    return ui.roundCheckBox->isChecked();
+    return appearanceUi.roundCheckBox->isChecked();
 }
 
 void ConfigDialog::setRandom(bool random)
 {
-    ui.randomCheckBox->setChecked(random);
+    imageUi.randomCheckBox->setChecked(random);
 }
 
 bool ConfigDialog::random() const
 {
-    return ui.randomCheckBox->isChecked();
+    return imageUi.randomCheckBox->isChecked();
 }
 
 void ConfigDialog::setShadow(bool shadow)
 {
-    ui.shadowCheckBox->setChecked(shadow);
+    appearanceUi.shadowCheckBox->setChecked(shadow);
 }
 
 bool ConfigDialog::shadow() const
 {
-    return ui.shadowCheckBox->isChecked();
+    return appearanceUi.shadowCheckBox->isChecked();
 }
 
 void ConfigDialog::setShowFrame(bool show)
 {
-    ui.frameCheckBox->setChecked(show);
+    appearanceUi.frameCheckBox->setChecked(show);
 }
 
 bool ConfigDialog::showFrame() const
 {
-    return ui.frameCheckBox->isChecked();
+    return appearanceUi.frameCheckBox->isChecked();
 }
 
 void ConfigDialog::setFrameColor(const QColor& frameColor)
 {
-    ui.changeFrameColor->setColor(frameColor);
+    appearanceUi.changeFrameColor->setColor(frameColor);
 }
 
 QColor ConfigDialog::frameColor() const
 {
-    return ui.changeFrameColor->color();
+    return appearanceUi.changeFrameColor->color();
 }
 
 void ConfigDialog::setCurrentUrl(const KUrl& currentUrl)
 {
-    ui.picRequester->setUrl(currentUrl);
+    imageUi.picRequester->setUrl(currentUrl);
 }
 
 KUrl ConfigDialog::currentUrl() const
 {
-    return ui.picRequester->url();
+    return imageUi.picRequester->url();
 }
 
 void ConfigDialog::previewPicture(const QImage &image)
@@ -134,11 +138,11 @@ void ConfigDialog::changePreview(const QString &path)
 
 void ConfigDialog::setSmoothScaling(bool smooth)
 {
-    ui.smoothScaling->setChecked(smooth);
+    appearanceUi.smoothScaling->setChecked(smooth);
 }
 
 bool ConfigDialog::smoothScaling() const
 {
-    return ui.smoothScaling->isChecked();
+    return appearanceUi.smoothScaling->isChecked();
 }
 

@@ -217,7 +217,7 @@ void Frame::addDir()
     if (dialog.exec()) {
         QString path = dialog.url().path();
         if (!m_slideShowPaths.contains(path)) {
-            m_configDialog->ui.slideShowDirList->addItem(path);
+            m_configDialog->imageUi.slideShowDirList->addItem(path);
         }
         updateButtons();
     }
@@ -225,17 +225,17 @@ void Frame::addDir()
 
 void Frame::removeDir()
 {
-    int row = m_configDialog->ui.slideShowDirList->currentRow();
+    int row = m_configDialog->imageUi.slideShowDirList->currentRow();
     if (row != -1) {
-        m_configDialog->ui.slideShowDirList->takeItem(row);
+        m_configDialog->imageUi.slideShowDirList->takeItem(row);
         updateButtons();
     }
 }
 
 void Frame::updateButtons()
 {
-    int row = m_configDialog->ui.slideShowDirList->currentRow();
-    m_configDialog->ui.removeDirButton->setEnabled(row != -1);
+    int row = m_configDialog->imageUi.slideShowDirList->currentRow();
+    m_configDialog->imageUi.removeDirButton->setEnabled(row != -1);
 }
 
 void Frame::createConfigurationInterface(KConfigDialog *parent)
@@ -246,10 +246,10 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     foreach(const KService::Ptr &service, services) {
         const QString service_name(service->name());
         const QVariant service_identifier(service->property("X-KDE-PlasmaPoTDProvider-Identifier", QVariant::String).toString());
-        m_configDialog->ui.potdComboBox->insertItem(m_configDialog->ui.potdComboBox->count(), service_name, service_identifier);
+        m_configDialog->imageUi.potdComboBox->insertItem(m_configDialog->imageUi.potdComboBox->count(), service_name, service_identifier);
     }
 
-    QStandardItemModel* model = static_cast<QStandardItemModel*>(m_configDialog->ui.pictureComboBox->model());
+    QStandardItemModel* model = static_cast<QStandardItemModel*>(m_configDialog->imageUi.pictureComboBox->model());
     QStandardItem* item = model->item(2);
 
     if (item) {
@@ -259,15 +259,16 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
             item->setFlags(item->flags() | Qt::ItemIsEnabled);
     }
 
-    parent->addPage(m_configDialog, i18n("General"), icon());
+    parent->addPage(m_configDialog->imageSettings, i18n("Image"), icon());
+    parent->addPage(m_configDialog->appearanceSettings, i18n("Appearance"), icon());
     parent->setDefaultButton(KDialog::Ok);
     parent->showButtonSeparator(true);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    connect(m_configDialog->ui.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
-    connect(m_configDialog->ui.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
-    connect(m_configDialog->ui.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
+    connect(m_configDialog->imageUi.removeDirButton, SIGNAL(clicked()), this, SLOT(removeDir()));
+    connect(m_configDialog->imageUi.addDirButton, SIGNAL(clicked()), this, SLOT(addDir()));
+    connect(m_configDialog->imageUi.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
 
     m_configDialog->setRoundCorners(m_roundCorners);
     m_configDialog->setSmoothScaling(m_smoothScaling);
@@ -276,26 +277,24 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->setFrameColor(m_frameColor);
 
     if (m_slideShow) {
-        m_configDialog->ui.pictureComboBox->setCurrentIndex(1);
+        m_configDialog->imageUi.pictureComboBox->setCurrentIndex(1);
     } else if (m_potd) {
-        m_configDialog->ui.pictureComboBox->setCurrentIndex(2);
+        m_configDialog->imageUi.pictureComboBox->setCurrentIndex(2);
     } else {
-        m_configDialog->ui.pictureComboBox->setCurrentIndex(0);
+        m_configDialog->imageUi.pictureComboBox->setCurrentIndex(0);
     }
 
-    m_configDialog->ui.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
-    m_configDialog->ui.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
+    m_configDialog->imageUi.randomCheckBox->setCheckState(m_random ? Qt::Checked : Qt::Unchecked);
+    m_configDialog->imageUi.recursiveCheckBox->setCheckState(m_recursiveSlideShow ? Qt::Checked : Qt::Unchecked);
 
-    m_configDialog->ui.potdComboBox->setCurrentIndex(m_configDialog->ui.potdComboBox->findData(m_potdProvider));
+    m_configDialog->imageUi.potdComboBox->setCurrentIndex(m_configDialog->imageUi.potdComboBox->findData(m_potdProvider));
 
     m_configDialog->setCurrentUrl(m_currentUrl);
-    m_configDialog->ui.slideShowDirList->clear();
-    m_configDialog->ui.slideShowDirList->addItems(m_slideShowPaths);
-    m_configDialog->ui.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
-    m_configDialog->ui.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
+    m_configDialog->imageUi.slideShowDirList->clear();
+    m_configDialog->imageUi.slideShowDirList->addItems(m_slideShowPaths);
+    m_configDialog->imageUi.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
+    m_configDialog->imageUi.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_configDialog->previewPicture(m_mySlideShow->image());
-    m_configDialog->show();
-    m_configDialog->raise();
 }
 
 void Frame::configAccepted()
@@ -315,10 +314,10 @@ void Frame::configAccepted()
 
     bool wasPotd = m_potd;
 
-    if (m_configDialog->ui.pictureComboBox->currentIndex() == 1) {
+    if (m_configDialog->imageUi.pictureComboBox->currentIndex() == 1) {
         m_slideShow = true;
         m_potd = false;
-    }  else if (m_configDialog->ui.pictureComboBox->currentIndex() == 2)   {
+    }  else if (m_configDialog->imageUi.pictureComboBox->currentIndex() == 2)   {
         m_slideShow = false;
         m_potd = true;
     }  else {
@@ -331,20 +330,20 @@ void Frame::configAccepted()
     m_currentUrl = m_configDialog->currentUrl();
     cg.writeEntry("url", m_currentUrl);
     cg.writeEntry("slideshow", m_slideShow);
-    m_recursiveSlideShow = m_configDialog->ui.recursiveCheckBox->checkState() == Qt::Checked ? true : false;
+    m_recursiveSlideShow = m_configDialog->imageUi.recursiveCheckBox->checkState() == Qt::Checked ? true : false;
     cg.writeEntry("recursive slideshow", m_recursiveSlideShow);
     m_slideShowPaths.clear();
     QStringList dirs;
-    for (int i = 0; i < m_configDialog->ui.slideShowDirList->count(); i++) {
-        m_slideShowPaths << m_configDialog->ui.slideShowDirList->item(i)->text();
+    for (int i = 0; i < m_configDialog->imageUi.slideShowDirList->count(); i++) {
+        m_slideShowPaths << m_configDialog->imageUi.slideShowDirList->item(i)->text();
     }
     cg.writeEntry("slideshow paths", m_slideShowPaths);
 
-    QTime timerTime = m_configDialog->ui.slideShowDelay->time();
+    QTime timerTime = m_configDialog->imageUi.slideShowDelay->time();
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
     cg.writeEntry("slideshow time", m_slideshowTime);
 
-    QString potdProvider = m_configDialog->ui.potdComboBox->itemData(m_configDialog->ui.potdComboBox->currentIndex()).toString();
+    QString potdProvider = m_configDialog->imageUi.potdComboBox->itemData(m_configDialog->imageUi.potdComboBox->currentIndex()).toString();
 
     if ((wasPotd && !m_potd) || (m_potd && potdProvider != m_potdProvider)) {
         // if we go from potd to no potd, or if the provider changes, then we first want to

@@ -12,7 +12,7 @@ set(frame_SRCS
     picture.cpp
     configdialog.cpp)
 
-kde4_add_ui_files(frame_SRCS config.ui )
+kde4_add_ui_files(frame_SRCS imageSettings.ui appearanceSettings.ui)
 
 macro_bool_to_01(KEXIV2_FOUND HAVE_KEXIV2)
 
