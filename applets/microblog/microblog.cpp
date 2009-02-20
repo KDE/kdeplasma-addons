@@ -182,7 +182,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
-    m_flash->setColor( Qt::gray );
+    m_flash->setColor( Plasma::Theme::TextColor );
     QFont fnt = qApp->font();
     fnt.setBold( true );
     QFontMetrics fm( fnt );
@@ -221,7 +221,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit(this);
     m_statusEdit->nativeWidget()->setFrameShape( QFrame::NoFrame );
-    m_statusEdit->nativeWidget()->setTextBackgroundColor( QColor(0,0,0,0) );
+    m_statusEdit->nativeWidget()->setTextBackgroundColor( Qt::transparent );
     m_statusEdit->nativeWidget()->viewport()->setAutoFillBackground( false );
     connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
     statusEditLayout->addItem(m_statusEdit);
@@ -442,7 +442,7 @@ void MicroBlog::showTweets()
         c->setCursor( Qt::ArrowCursor );
         c->setFrameShape(QFrame::NoFrame);
         c->setAttribute(Qt::WA_NoSystemBackground);
-        c->setTextBackgroundColor(QColor(0,0,0,0));
+        c->setTextBackgroundColor(Qt::transparent);
         c->viewport()->setAutoFillBackground(false);
         c->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
         c->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
