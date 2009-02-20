@@ -80,7 +80,7 @@ set(plasma_lancelot_client_SRCS
 #set(plasma_lancelot_dbus_SRCS)
 
 set(screensaver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.freedesktop.ScreenSaver.xml)
-qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${screensaver_xml} screensaver_interface)
+qt4_add_dbus_interface(plasma_lancelot_models_SRCS ${screensaver_xml} screensaver_interface)
 
 # set(krunner_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.krunner.Interface.xml)
 # qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${krunner_xml} krunner_interface)

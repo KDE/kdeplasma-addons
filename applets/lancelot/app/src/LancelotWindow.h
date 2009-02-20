@@ -99,27 +99,8 @@ protected Q_SLOTS:
      */
     void sectionActivated(const QString & item);
 
-    /**
-     * Locks the system session
-     */
-    void systemLock();
-
-    /**
-     * Opens the log out/shut down dialog
-     */
-    void systemLogout();
-
-    /**
-     * Opens the switch user dialog
-     */
-    void systemSwitchUser();
-
 private Q_SLOTS:
-    // The following function do the real work for the
-    // corresponding slots. They are invoked with a small
-    // delay to avoid dead-locks.
-    void systemDoLock();
-    void systemDoLogout();
+    void systemButtonClicked();
 
     void lancelotContext();
     void saveConfig();
@@ -207,6 +188,8 @@ private:
 
     Plasma::LineEdit    * editSearch;
 
+    QHash < Lancelot::ExtenderButton *, QString > systemButtonActions;
+
     QTimer                m_hideTimer;
     QString               m_searchString;
 
@@ -256,7 +239,7 @@ private:
     bool m_skipEvent;
 
     // Additional widgets
-    Lancelot::PopupList * menuSwitchUser;
+    Lancelot::PopupList * menuSystemButton;
     Lancelot::PopupMenu * menuLancelotContext;
 
     friend class CustomGraphicsView;

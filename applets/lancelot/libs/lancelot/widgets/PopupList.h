@@ -112,6 +112,14 @@ protected:
     L_Override void leaveEvent(QEvent * event);
     L_Override void timerEvent(QTimerEvent * event);
 
+    /**
+     * Pops out the list
+     * @param p pop-up location
+     * @param parent parent list
+     */
+    void exec(const QPoint & p, PopupList * parent);
+
+
 public Q_SLOTS:
     /**
      * Requests the PopupList to be resized depending on the number of items

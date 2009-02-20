@@ -26,6 +26,7 @@
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)
 #define MENU_WIDTH 200
+#define POPOFFSET 16
 
 namespace Lancelot {
 
@@ -33,6 +34,8 @@ PopupList::Private::Private(PopupList * parent)
     : closeTimeout(1000),
       listModel(NULL),
       treeModel(NULL),
+      child(NULL),
+      openAction(PopupList::PopupNew),
       q(parent)
 {
     scene = new QGraphicsScene();
@@ -74,6 +77,11 @@ void PopupList::Private::listItemActivated(int index)
                 list->setModel(treeModel->child(index));
                 break;
             case PopupNew:
+                if (!child) {
+                    child = new PopupList();
+                }
+                child->setModel(treeModel->child(index));
+                child->exec(QCursor::pos(), q);
                 break;
             default:
                 break;
@@ -182,8 +190,10 @@ void PopupList::leaveEvent(QEvent * event)
 void PopupList::timerEvent(QTimerEvent * event)
 {
     if (d->timer.timerId() == event->timerId()) {
-        close();
-        d->timer.stop();
+        if (!d->child || d->child->isHidden()) {
+            close();
+            d->timer.stop();
+        }
     }
     Plasma::Dialog::timerEvent(event);
 }
@@ -222,5 +232,31 @@ void PopupList::exec(const QPoint & p)
     show();
 }
 
+void PopupList::exec(const QPoint & p, PopupList * parent)
+{
+    updateSize();
+
+    QRect g = geometry();
+    g.moveTopLeft(p);
+
+    QRect screen = QApplication::desktop()->screenGeometry(
+            QApplication::desktop()->screenNumber(p)
+        );
+
+    g.moveLeft(parent->geometry().right() - POPOFFSET);
+    if (g.right() > screen.right()) {
+        g.moveRight(parent->geometry().left() + POPOFFSET);
+    }
+
+    if (g.bottom() > screen.bottom()) {
+        g.moveBottom(screen.bottom());
+    } else if (g.top() < screen.top()) {
+        g.moveTop(screen.top());
+    }
+
+    setGeometry(g);
+
+    show();
+}
 } // namespace Lancelot
 

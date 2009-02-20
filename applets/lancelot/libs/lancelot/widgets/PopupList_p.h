@@ -45,7 +45,8 @@ public:
     QBasicTimer timer;
     int closeTimeout;
 
-    const PopupList * q;
+    PopupList * child;
+    PopupList * q;
 
 public Q_SLOTS:
     void listItemActivated(int index);

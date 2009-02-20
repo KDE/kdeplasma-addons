@@ -39,8 +39,8 @@
 #include <QtDBus/QDBusReply>
 
 #include <kworkspace/kworkspace.h>
-#include "ksmserver_interface.h"
-#include "screensaver_interface.h"
+// #include "ksmserver_interface.h"
+// #include "screensaver_interface.h"
 #include <Serializator.h>
 
 #include "models/Devices.h"
@@ -198,7 +198,7 @@ LancelotWindow::LancelotWindow()
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault),
     m_skipEvent(false),
-    menuSwitchUser(NULL),
+    menuSystemButton(NULL),
     menuLancelotContext(NULL)
 {
     setFocusPolicy(Qt::WheelFocus);
@@ -268,9 +268,9 @@ LancelotWindow::LancelotWindow()
         m_sectionsSignalMapper->setMapping(i.value(), i.key());
     }
 
-    connect(buttonSystemLockScreen, SIGNAL(activated()), this, SLOT(systemLock()));
-    connect(buttonSystemLogout,     SIGNAL(activated()), this, SLOT(systemLogout()));
-    connect(buttonSystemSwitchUser, SIGNAL(activated()), this, SLOT(systemSwitchUser()));
+    connect(buttonSystem1, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
+    connect(buttonSystem2, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
+    connect(buttonSystem3, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
 
     connect(buttonLancelotContext,  SIGNAL(activated()), this, SLOT(lancelotContext()));
 
@@ -536,66 +536,39 @@ void LancelotWindow::search(const QString & string)
     sectionActivated("search");
 }
 
-void LancelotWindow::systemLock()
+void LancelotWindow::systemButtonClicked()
 {
-    lancelotHide(true);
-    QTimer::singleShot(500, this, SLOT(systemDoLock()));
-}
+    Lancelot::ExtenderButton * button =
+        static_cast < Lancelot::ExtenderButton * > (sender());
 
-void LancelotWindow::systemLogout()
-{
-    lancelotHide(true);
-    QTimer::singleShot(500, this, SLOT(systemDoLogout()));
-}
+    Lancelot::ActionTreeModel * model =
+        Models::SystemActions::instance()->action(systemButtonActions[button]);
 
-void LancelotWindow::systemDoLock()
-{
-    org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());
+    if (!model) return;
 
-    if (screensaver.isValid()) {
-        screensaver.Lock();
-    }
-}
-
-void LancelotWindow::systemDoLogout()
-{
-    org::kde::KSMServerInterface smserver("org.kde.ksmserver", "/KSMServer", QDBusConnection::sessionBus());
-
-    if (smserver.isValid()) {
-        smserver.logout(
-            KWorkSpace::ShutdownConfirmDefault,
-            KWorkSpace::ShutdownTypeDefault,
-            KWorkSpace::ShutdownModeDefault
-        );
-    }
-}
-
-void LancelotWindow::systemSwitchUser()
-{
-    if (!menuSwitchUser) {
-        menuSwitchUser = new Lancelot::PopupList();
-        menuSwitchUser->resize(200, 200);
-        // menuSwitchUser->setModel(new Models::Sessions());
-        menuSwitchUser->setModel(Models::SystemActions::instance());
+    if (!menuSystemButton) {
+        menuSystemButton = new Lancelot::PopupList();
+        menuSystemButton->resize(200, 200);
         Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
         connect(
                 ac, SIGNAL(doHide(bool)),
-                menuSwitchUser, SLOT(close())
+                menuSystemButton, SLOT(close())
         );
     }
 
-    menuSwitchUser->updateSize();
+    menuSystemButton->setModel(model);
+    menuSystemButton->updateSize();
 
-    QRect g = buttonSystemSwitchUser->geometry().toRect();
+    QRect g = button->geometry().toRect();
     g.moveTopLeft(g.topLeft() + geometry().topLeft());
 
     if (layoutMain->flip() & Plasma::VerticalFlip) {
-        menuSwitchUser->move(g.bottomLeft());
+        menuSystemButton->move(g.bottomLeft());
     } else {
-        menuSwitchUser->move(g.topLeft() - QPoint(0, menuSwitchUser->geometry().height()));
+        menuSystemButton->move(g.topLeft() - QPoint(0, menuSystemButton->geometry().height()));
     }
 
-    menuSwitchUser->show();
+    menuSystemButton->show();
 }
 
 void LancelotWindow::setupModels()
@@ -940,6 +913,11 @@ void LancelotWindow::loadConfig()
     } else {
         passagewayApplications->setColumnLimit(22); // TODO: Temp
     }
+
+    // Loading system buttons actions
+    systemButtonActions[buttonSystem1] = "lock-screen";
+    systemButtonActions[buttonSystem2] = "menu-leave";
+    systemButtonActions[buttonSystem3] = "menu-switch-user";
 }
 
 void LancelotWindow::lancelotContext()

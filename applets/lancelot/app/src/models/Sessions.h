@@ -38,6 +38,23 @@ public:
 
     ~SystemActions();
 
+    /**
+     * If the specified id represents an action, it
+     * will be executed and NULL will be returned.
+     * If it is a set of actions, pointer to the model
+     * will be returned.
+     */
+    Lancelot::ActionTreeModel * action(const QString & id);
+
+    /**
+     * @returns a list of action IDs
+     */
+    QStringList actions() const;
+
+    QString actionTitle(const QString & id) const;
+    QIcon actionIcon(const QString & id) const;
+
+
     L_Override void load();
     L_Override StandardActionTreeModel * createChild(int index);
     L_Override bool isCategory(int index) const;
