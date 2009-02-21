@@ -70,8 +70,6 @@ signals:
     void controllerChanged(Plasma::Service* controller);
     void metadataChanged(const QMap<QString,QString>& metadata);
     void coverChanged(const QPixmap& picture);
-    void volumeChanged(int volumePercent);
-    void positionChanged(int position);
     void lengthChanged(int length);
 
 public slots:
@@ -94,6 +92,7 @@ private:
     void findPlayer();
     void layoutPlanar();
     void layoutHorizontal();
+    void updatePositionSlider(int position);
 
     QString m_watchingPlayer;
     Plasma::Service* m_controller;

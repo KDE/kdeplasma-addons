@@ -65,9 +65,7 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     m_volumeSlider->setMinimum(0);
     m_volumeSlider->setMaximum(100);
     m_volumeSlider->setValue(0);
-    connect(this, SIGNAL(volumeChanged(int)),
-            m_volumeSlider, SLOT(setValue(int)));
-    connect(m_volumeSlider, SIGNAL(sliderMoved(int)),
+    connect(m_volumeSlider, SIGNAL(valueChanged(int)),
             this, SLOT(setVolume(int)));
     m_volumeSlider->setEnabled(false);
 
@@ -75,11 +73,9 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     m_positionSlider->setMinimum(0);
     m_positionSlider->setMaximum(0);
     m_positionSlider->setValue(0);
-    connect(this, SIGNAL(positionChanged(int)),
-            m_positionSlider, SLOT(setValue(int)));
     connect(this, SIGNAL(lengthChanged(int)),
             m_positionSlider, SLOT(setMaximum(int)));
-    connect(m_positionSlider, SIGNAL(sliderMoved(int)),
+    connect(m_positionSlider, SIGNAL(valueChanged(int)),
             this, SLOT(setPosition(int)));
     m_positionSlider->setEnabled(false);
 }
@@ -209,6 +205,13 @@ void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
+void NowPlaying::updatePositionSlider(int position)
+{
+    m_positionSlider->blockSignals(true);
+    m_positionSlider->setValue(position);
+    m_positionSlider->blockSignals(false);
+}
+
 void NowPlaying::dataUpdated(const QString &name,
                              const Plasma::DataEngine::Data &data)
 {
@@ -242,7 +245,7 @@ void NowPlaying::dataUpdated(const QString &name,
     if (length != m_length) {
         m_length = length;
         if (length == 0) {
-            emit positionChanged(0);
+            updatePositionSlider(0);
         }
         emit lengthChanged(m_length);
     }
@@ -253,7 +256,7 @@ void NowPlaying::dataUpdated(const QString &name,
                    QString::number(length / 60) + ':' +
                    QString::number(length % 60).rightJustified(2, '0');
         // we assume it's changed
-        emit positionChanged(pos);
+        updatePositionSlider(pos);
     }
 
     QMap<QString,QString> metadata;
@@ -272,7 +275,9 @@ void NowPlaying::dataUpdated(const QString &name,
 
     if (data["Volume"].toDouble() != m_volume) {
         m_volume = data["Volume"].toDouble();
-        emit volumeChanged(m_volume * 100);
+        m_volumeSlider->blockSignals(true);
+        m_volumeSlider->setValue(m_volume * 100);
+        m_volumeSlider->blockSignals(false);
     }
 
     // used for seeing when the track has changed
