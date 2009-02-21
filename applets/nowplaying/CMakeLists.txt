@@ -6,6 +6,7 @@ include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 set(nowplaying_SRCS
     nowplaying.cpp
     controls.cpp
+    albumart.cpp
     infopanel.cpp)
 
 kde4_add_plugin(plasma_applet_nowplaying ${nowplaying_SRCS})

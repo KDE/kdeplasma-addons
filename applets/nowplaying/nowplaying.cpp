@@ -60,6 +60,8 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
 
     connect(this, SIGNAL(metadataChanged(QMap<QString,QString>)),
             m_textPanel, SLOT(updateMetadata(QMap<QString,QString>)));
+    connect(this, SIGNAL(coverChanged(QPixmap)),
+            m_textPanel, SLOT(updateArtwork(QPixmap)));
 
     m_volumeSlider->setOrientation(Qt::Vertical);
     m_volumeSlider->setMinimum(0);

@@ -18,14 +18,20 @@
  */
 #include "infopanel.h"
 
+#include "albumart.h"
+
 #include <Plasma/Label>
 #include <Plasma/Theme>
 
 #include <QGraphicsGridLayout>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsWidget>
 #include <QLabel>
 
 InfoPanel::InfoPanel(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
+      m_artwork(new AlbumArt(this)),
       m_artistLabel(new Plasma::Label(this)),
       m_titleLabel(new Plasma::Label(this)),
       m_albumLabel(new Plasma::Label(this)),
@@ -34,8 +40,10 @@ InfoPanel::InfoPanel(QGraphicsWidget *parent)
       m_titleText(new Plasma::Label(this)),
       m_albumText(new Plasma::Label(this)),
       m_timeText(new Plasma::Label(this)),
+      m_barLayout(new QGraphicsLinearLayout),
       m_layout(new QGraphicsGridLayout)
 {
+
     m_layout->setColumnStretchFactor(0, 0);
     m_layout->setColumnSpacing(0, 10);
     m_layout->setColumnAlignment(0, Qt::AlignRight);
@@ -59,7 +67,10 @@ InfoPanel::InfoPanel(QGraphicsWidget *parent)
     m_layout->addItem(m_timeLabel, 3, 0);
     m_layout->addItem(m_timeText, 3, 1);
 
-    setLayout(m_layout);
+    m_barLayout->addItem(m_artwork);
+    m_barLayout->addItem(m_layout);
+
+    setLayout(m_barLayout);
 }
 
 InfoPanel::~InfoPanel()
@@ -85,7 +96,12 @@ void InfoPanel::updateLabels()
 
     // dirty hack to make sure the Artist: label is in line
     // FIXME: does this ever happen in plasma, or just in the plasmoidviewer?
-    m_layout->invalidate();
+    m_barLayout->invalidate();
+}
+
+void InfoPanel::updateArtwork(const QPixmap &artwork)
+{
+    m_artwork->setPixmap(artwork);
 }
 
 // vim: sw=4 sts=4 et tw=100

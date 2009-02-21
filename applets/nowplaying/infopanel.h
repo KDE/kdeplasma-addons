@@ -27,7 +27,10 @@ namespace Plasma {
     class Label;
 }
 class QGraphicsLayoutItem;
+class QGraphicsLinearLayout;
 class QGraphicsGridLayout;
+
+class AlbumArt;
 
 class InfoPanel : public QGraphicsWidget
 {
@@ -39,10 +42,12 @@ public:
 
 public slots:
     void updateMetadata(const QMap<QString,QString>& metadata);
+    void updateArtwork(const QPixmap &artwork);
 
 private:
     void updateLabels();
 
+    AlbumArt* m_artwork;
     Plasma::Label* m_artistLabel;
     Plasma::Label* m_titleLabel;
     Plasma::Label* m_albumLabel;
@@ -53,6 +58,7 @@ private:
     Plasma::Label* m_albumText;
     Plasma::Label* m_timeText;
 
+    QGraphicsLinearLayout *m_barLayout;
     QGraphicsGridLayout* m_layout;
     QMap<QString,QString> m_metadata;
 };
