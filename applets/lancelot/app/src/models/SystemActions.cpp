@@ -18,7 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "Sessions.h"
+#include "SystemActions.h"
+
 #include <KRun>
 #include <KDebug>
 #include <KIcon>

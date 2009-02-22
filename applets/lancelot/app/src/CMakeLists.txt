@@ -55,7 +55,7 @@ set(plasma_lancelot_models_SRCS
   models/MessagesKmail.cpp
 
   models/Runner.cpp
-  models/Sessions.cpp
+  models/SystemActions.cpp
 )
 
 # Lancelot application files

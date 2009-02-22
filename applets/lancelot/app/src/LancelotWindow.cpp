@@ -53,7 +53,7 @@
 #include "models/FavoriteApplications.h"
 #include "models/Applications.h"
 #include "models/Runner.h"
-#include "models/Sessions.h"
+#include "models/SystemActions.h"
 #include "models/ContactsKopete.h"
 #include "models/MessagesKmail.h"
 
@@ -533,7 +533,11 @@ void LancelotWindow::search(const QString & string)
     m_searchString = string;
 
     ((Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
-    sectionActivated("search");
+    if (m_searchString.isEmpty()) {
+        sectionActivated("applications");
+    } else {
+        sectionActivated("search");
+    }
 }
 
 void LancelotWindow::systemButtonClicked()

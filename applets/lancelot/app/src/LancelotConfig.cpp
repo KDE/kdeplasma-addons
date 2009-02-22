@@ -19,7 +19,7 @@
 
 #include "LancelotConfig.h"
 #include <KConfigGroup>
-#include "models/Sessions.h"
+#include "models/SystemActions.h"
 
 LancelotConfig::LancelotConfig()
     : systemButtonActionsMenu(NULL), clickedSystemButton(NULL),
