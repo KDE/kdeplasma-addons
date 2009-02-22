@@ -76,9 +76,9 @@ public:
 
     void clearSelection();
 
-    L_Override virtual void setGroup(WidgetGroup * group = NULL);
-    L_Override virtual void groupUpdated();
-    L_Override virtual void keyPressEvent(QKeyEvent * event);
+    L_Override void setGroup(WidgetGroup * group = NULL);
+    L_Override void groupUpdated();
+    L_Override void keyPressEvent(QKeyEvent * event);
 
 protected Q_SLOTS:
     virtual void listItemActivated(int itemIndex, int listIndex = -1);

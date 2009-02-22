@@ -61,8 +61,6 @@ public:
     bool areCategoriesActivable() const;
     void setCategoriesActivable(bool value);
 
-    void clearSelection();
-    void initialSelection();
     int selectedIndex() const;
 
     void setItemHeight(int height, Qt::SizeHint which);
@@ -70,8 +68,12 @@ public:
     void setItemIconSize(QSize size);
     void setCategoryIconSize(QSize size);
 
-    L_Override virtual void groupUpdated();
-    L_Override virtual void keyPressEvent(QKeyEvent * event);
+    L_Override void groupUpdated();
+    L_Override void keyPressEvent(QKeyEvent * event);
+
+public Q_SLOTS:
+    void clearSelection();
+    void initialSelection();
 
 Q_SIGNALS:
     void activated(int index);

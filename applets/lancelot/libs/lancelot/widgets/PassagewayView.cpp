@@ -158,8 +158,13 @@ public:
             QPointF m_mousePos;
     };
 
-    void back(int steps)
+    void back(int steps, bool deselectLast = true)
     {
+        qDebug() << "PassagewayView::Private::back:" << steps;
+        if (!steps) {
+            return;
+        }
+
         for (int i = 0; i < steps; ++i) {
             if (buttons.size() > 2) {
                 buttons.at(buttons.size() - 3)->setGroupByName(parent->group()->name() + "-InactiveButton");
@@ -180,10 +185,19 @@ public:
             button->deleteLater();
             list->deleteLater();
         }
+
+        if (focusIndex >= lists.size()) {
+            focusIndex = lists.size() - 1;
+        }
+
+        if (deselectLast) {
+            lists.last()->clearSelection();
+        }
     }
 
     void next(Step newStep)
     {
+        qDebug() << "PassagewayView::Private::next";
         Step * step = new Step(newStep);
         Instance::setActiveInstanceAndLock(parent->group()->instance());
         ExtenderButton * button =
@@ -310,9 +324,9 @@ void PassagewayView::listItemActivated(int index, int listIndex)
         // something in the entrance is clicked
         // we don't want to remove the first level
         // of atlas as well
-        d->back(d->lists.size() - listIndex - 2);
+        d->back(d->lists.size() - listIndex - 2, false);
     } else {
-        d->back(d->lists.size() - listIndex - 1);
+        d->back(d->lists.size() - listIndex - 1, false);
     }
 
     ActionTreeModel * model = d->path.at(listIndex)->model;
@@ -320,6 +334,8 @@ void PassagewayView::listItemActivated(int index, int listIndex)
         model = model->child(index);
         if (model) {
             d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
+        } else {
+            d->lists.at(listIndex)->clearSelection();
         }
     }
 }

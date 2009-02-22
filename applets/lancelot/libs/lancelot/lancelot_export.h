@@ -37,8 +37,8 @@
 # define LANCELOT_EXPORT_DEPRECATED KDE_DEPRECATED LANCELOT_EXPORT
 #endif
 
-// Override annotation. Does nothing.
-#define L_Override
+// Override annotation.
+#define L_Override virtual
 
 // Include annotation. Does nothing. Needed by PUCK module generator
 #define L_INCLUDE(A)

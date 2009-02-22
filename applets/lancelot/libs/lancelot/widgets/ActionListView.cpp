@@ -29,15 +29,30 @@ namespace Lancelot {
 ActionListViewItem::ActionListViewItem(ActionListViewItemFactory * factory)
     : ExtenderButton(), m_inSetSelected(false), m_factory(factory)
 {
-    connect(this, SIGNAL(mouseHoverEnter()),
+    //connect(this, SIGNAL(mouseHoverEnter()),
+    //        this, SLOT(select()));
+    //connect(this, SIGNAL(mouseHoverLeave()),
+    //        this, SLOT(deselect()));
+    connect(this, SIGNAL(activated()),
             this, SLOT(select()));
-    connect(this, SIGNAL(mouseHoverLeave()),
-            this, SLOT(deselect()));
     L_WIDGET_SET_INITIALIZED;
 }
 
 ActionListViewItem::~ActionListViewItem()
 {
+}
+
+void ActionListViewItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+        QWidget * widget) {
+    if (isSelected() && !isHovered()) {
+        if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
+            svg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+        }
+        paintBackground(painter, "active");
+        paintForeground(painter);
+    } else {
+        ExtenderButton::paint(painter, option, widget);
+    }
 }
 
 void ActionListViewItem::select()
@@ -56,7 +71,7 @@ void ActionListViewItem::setSelected(bool selected)
     if (m_inSetSelected) return;
     m_inSetSelected = true;
 
-    setHovered(selected);
+    // setHovered(selected);
 
     m_factory->setSelectedItem(this, selected);
 
@@ -67,6 +82,7 @@ void ActionListViewItem::setSelected(bool selected)
         hoverEnterEvent(NULL);
     }
 
+    update();
     m_inSetSelected = false;
 }
 

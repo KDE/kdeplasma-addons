@@ -125,13 +125,13 @@ public:
      */
     qreal borderSize(Plasma::MarginEdge edge);
 
-    L_Override virtual void setGeometry(const QRectF & geometry);
-    L_Override virtual void setGroup(WidgetGroup * group = NULL);
-    // L_Override virtual void groupUpdated();
+    L_Override void setGeometry(const QRectF & geometry);
+    L_Override void setGroup(WidgetGroup * group = NULL);
+    // L_Override void groupUpdated();
 
 protected:
-    // L_Override virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    // L_Override void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 private:

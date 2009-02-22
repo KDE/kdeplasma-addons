@@ -104,10 +104,10 @@ public:
      */
     bool isDown();
 
-    L_Override virtual void setGeometry(const QRectF & rect);
+    L_Override void setGeometry(const QRectF & rect);
 
 protected:
-    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 Q_SIGNALS:
@@ -183,13 +183,14 @@ protected:
      */
     void setDown(bool value);
 
-    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
-    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    L_Override virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void hideEvent(QHideEvent * event);
 
-    L_Override virtual void paint(QPainter * painter,
+    L_Override void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 private:

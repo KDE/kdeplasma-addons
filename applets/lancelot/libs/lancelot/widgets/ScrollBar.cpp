@@ -38,7 +38,7 @@ public:
         }
 
     protected:
-        L_Override virtual void groupUpdated()
+        L_Override void groupUpdated()
         {
             d->setItemSizeHints();
         }
@@ -55,7 +55,7 @@ public:
         }
 
     protected:
-        L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * e)
+        L_Override void mouseMoveEvent(QGraphicsSceneMouseEvent * e)
         {
             ScrollBarItem::mouseMoveEvent(e);
             QPointF orig = e->buttonDownPos(Qt::LeftButton);

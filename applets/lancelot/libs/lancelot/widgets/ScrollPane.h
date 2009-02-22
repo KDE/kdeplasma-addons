@@ -167,10 +167,10 @@ public:
      */
     void scrollTo(QRectF rect);
 
-    L_Override virtual void setGeometry(const QRectF & rect);
-    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    L_Override virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
+    L_Override void setGeometry(const QRectF & rect);
+    L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void wheelEvent(QGraphicsSceneWheelEvent * event);
 
 public Q_SLOTS:
     /**

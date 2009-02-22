@@ -104,7 +104,7 @@ public:
         return FlipLayoutManager::instance()->flip(this);
     }
 
-    L_Override virtual void setGeometry(const QRectF & rect)
+    L_Override void setGeometry(const QRectF & rect)
     {
         SuperLayout::setGeometry(rect);
         FlipLayoutManager::instance()->setGeometry(this);

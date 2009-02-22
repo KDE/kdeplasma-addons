@@ -39,17 +39,17 @@ public:
     ~LancelotPart();
 
     void init();
-    L_Override virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
-    L_Override virtual void dropEvent(QGraphicsSceneDragDropEvent * event);
+    L_Override void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
+    L_Override void dropEvent(QGraphicsSceneDragDropEvent * event);
 
-    L_Override virtual bool eventFilter(QObject * object, QEvent * event);
+    L_Override bool eventFilter(QObject * object, QEvent * event);
 
 private Q_SLOTS:
     void configAccepted();
 
 protected:
-    L_Override virtual void createConfigurationInterface(KConfigDialog *parent);
-    L_Override virtual void constraintsEvent(Plasma::Constraints
+    L_Override void createConfigurationInterface(KConfigDialog *parent);
+    L_Override void constraintsEvent(Plasma::Constraints
             constraints);
 
 private Q_SLOTS:

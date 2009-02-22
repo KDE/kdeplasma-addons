@@ -38,9 +38,9 @@ public:
     Devices(Type filter = All);
     virtual ~Devices();
 
-    L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override virtual void contextActivate(int index, QAction * context);
+    L_Override bool hasContextActions(int index) const;
+    L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
+    L_Override void contextActivate(int index, QAction * context);
 
 private slots:
     void deviceRemoved(const QString & udi);

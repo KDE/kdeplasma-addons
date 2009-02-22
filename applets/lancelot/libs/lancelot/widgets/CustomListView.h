@@ -124,9 +124,9 @@ public:
     void setItemFactory(CustomListItemFactory * factory);
     CustomListItemFactory * itemFactory() const;
 
-    L_Override virtual QSizeF sizeFor(QSizeF viewportSize) const;
-    L_Override virtual void viewportChanged(QRectF viewport);
-    L_Override virtual qreal scrollUnit(Qt::Orientation direction);
+    L_Override QSizeF sizeFor(QSizeF viewportSize) const;
+    L_Override void viewportChanged(QRectF viewport);
+    L_Override qreal scrollUnit(Qt::Orientation direction);
 
 protected Q_SLOTS:
     void factoryItemInserted(int position);

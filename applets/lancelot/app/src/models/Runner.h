@@ -37,9 +37,9 @@ public:
     QString runnerName() const;
     void setRunnerName(const QString & name);
 
-    L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override virtual void contextActivate(int index, QAction * context);
+    L_Override bool hasContextActions(int index) const;
+    L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
+    L_Override void contextActivate(int index, QAction * context);
 
 public Q_SLOTS:
     void setSearchString(const QString & search);

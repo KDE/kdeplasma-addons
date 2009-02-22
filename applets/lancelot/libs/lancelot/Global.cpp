@@ -301,8 +301,9 @@ public:
 
     void loadAllGroups()
     {
+        qDebug() << "Instance::Private::loadAllGroups()";
         foreach(WidgetGroup * group, groups) {
-            group->load();
+            group->load(true);
         }
     }
 };
@@ -379,6 +380,9 @@ Instance::Instance()
     d->confTheme = new KConfig(path);
 
     Instance::Private::activeInstance = this;
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
+            this, SLOT(activateAll()));
 }
 
 Instance::~Instance()

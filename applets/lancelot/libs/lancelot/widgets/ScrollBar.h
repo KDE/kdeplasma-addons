@@ -144,10 +144,10 @@ public:
      */
     Lancelot::ActivationMethod activationMethod() const;
 
-    L_Override virtual void setGeometry(const QRectF & geometry);
-    L_Override virtual void setGroup(WidgetGroup * group = NULL);
-    L_Override virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
-    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void setGeometry(const QRectF & geometry);
+    L_Override void setGroup(WidgetGroup * group = NULL);
+    L_Override void wheelEvent(QGraphicsSceneWheelEvent * event);
+    L_Override void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
 public Q_SLOTS:
     /**
@@ -184,8 +184,8 @@ Q_SIGNALS:
     void valueChanged(int value);
 
 protected:
-    L_Override virtual void groupUpdated();
-    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override void groupUpdated();
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 private:

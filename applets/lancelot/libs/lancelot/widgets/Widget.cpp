@@ -291,6 +291,13 @@ bool Widget::isDown()
     return d->down;
 }
 
+void Widget::hideEvent(QHideEvent * event)
+{
+    d->down = false;
+    d->hover = false;
+    QGraphicsWidget::hideEvent(event);
+}
+
 
 } // namespace Lancelot
 

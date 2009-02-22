@@ -30,12 +30,12 @@ public:
     PartsMergedModel();
     ~PartsMergedModel();
 
-    L_Override virtual bool hasModelContextActions(int index) const;
-    L_Override virtual void setModelContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override virtual void modelContextActivate(int index, QAction * context);
-    L_Override virtual void setModelDropActions(int index,
+    L_Override bool hasModelContextActions(int index) const;
+    L_Override void setModelContextActions(int index, Lancelot::PopupMenu * menu);
+    L_Override void modelContextActivate(int index, QAction * context);
+    L_Override void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
-    L_Override virtual void modelDataDropped(int index, Qt::DropAction action);
+    L_Override void modelDataDropped(int index, Qt::DropAction action);
 
 Q_SIGNALS:
     void removeModelRequested(int index);

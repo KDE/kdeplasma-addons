@@ -116,11 +116,11 @@ public:
      */
     qreal size(Border border);
 
-    L_Override virtual void setGeometry(const QRectF & rect);
-    L_Override virtual int count() const;
-    L_Override virtual QGraphicsLayoutItem * itemAt(int i) const;
-    L_Override virtual void removeAt(int index);
-    L_Override virtual QSizeF sizeHint(Qt::SizeHint which,
+    L_Override void setGeometry(const QRectF & rect);
+    L_Override int count() const;
+    L_Override QGraphicsLayoutItem * itemAt(int i) const;
+    L_Override void removeAt(int index);
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
 private:

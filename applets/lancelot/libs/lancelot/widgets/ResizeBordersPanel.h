@@ -49,7 +49,7 @@ public:
      */
     ~ResizeBordersPanel();
 
-    L_Override virtual void setGeometry(const QRectF & geometry);
+    L_Override void setGeometry(const QRectF & geometry);
 
 private:
     class Private;

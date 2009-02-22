@@ -42,12 +42,15 @@ public:
     ActionListViewItem(ActionListViewItemFactory * factory);
     ~ActionListViewItem();
 
-    L_Override virtual void setSelected(bool selected = true);
-    L_Override virtual bool isSelected() const;
+    L_Override void setSelected(bool selected = true);
+    L_Override bool isSelected() const;
 
-    L_Override virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
-    L_Override virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    L_Override virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+    L_Override void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    L_Override void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+
+    L_Override void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+        QWidget * widget);
 
 private:
     QPointF m_mousePos;
@@ -67,11 +70,11 @@ public:
     ActionListViewItemFactory(ActionListModel * model, ActionListView * view, Instance * instance);
     ~ActionListViewItemFactory();
 
-    L_Override virtual CustomListItem * itemForIndex(int index);
-    L_Override virtual CustomListItem * itemForIndex(int index,
+    L_Override CustomListItem * itemForIndex(int index);
+    L_Override CustomListItem * itemForIndex(int index,
             bool reload);
     L_Override int itemCount() const;
-    L_Override virtual int itemHeight(int index, Qt::SizeHint which) const;
+    L_Override int itemHeight(int index, Qt::SizeHint which) const;
 
     void setModel(ActionListModel * model);
     ActionListModel * model();

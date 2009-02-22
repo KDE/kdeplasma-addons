@@ -84,12 +84,12 @@ public:
      */
     Lancelot::ActivationMethod activationMethod();
 
-    // L_Override virtual void groupUpdated();
+    // L_Override void groupUpdated();
 
 protected:
-    L_Override virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
-    L_Override virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    L_Override virtual void timerEvent(QTimerEvent * event);
+    L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void timerEvent(QTimerEvent * event);
 
 private:
     class Private;

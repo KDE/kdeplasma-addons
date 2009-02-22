@@ -50,7 +50,7 @@ public:
         setGeometry(QRectF(QPointF(), fullSize()));
     }
 
-    L_Override virtual void paint(QPainter * painter,
+    L_Override void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
     {
         painter->fillRect(
@@ -80,7 +80,7 @@ public:
                 );
     }
 
-    L_Override virtual QSizeF fullSize() const
+    L_Override QSizeF fullSize() const
     {
         // return QSizeF(384, 354); // perfect fit - no scrolls
         // return QSizeF(392, 362); // perfect fit - no scrolls
@@ -89,14 +89,14 @@ public:
         return QSizeF(600, 600); // both
     }
 
-    L_Override virtual void viewportChanged(QRectF viewport)
+    L_Override void viewportChanged(QRectF viewport)
     {
         view = viewport;
         setGeometry(QRectF(- viewport.topLeft(), fullSize()));
         update();
     }
 
-    L_Override virtual qreal scrollUnit(Qt::Orientation direction)
+    L_Override qreal scrollUnit(Qt::Orientation direction)
     {
         Q_UNUSED(direction);
         return 10;

@@ -220,6 +220,7 @@ public:
      */
     bool isActivated();
 
+public Q_SLOTS:
     /**
      * Removes the event processing inhibitions and activates
      * all widgets that belong to this instance.
@@ -232,6 +233,7 @@ public:
      */
     void deactivateAll();
 
+public:
     /**
      * Adds a widget to instance
      */

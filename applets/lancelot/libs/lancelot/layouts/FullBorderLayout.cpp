@@ -121,8 +121,6 @@ FullBorderLayout::~FullBorderLayout()
 void FullBorderLayout::setGeometry(const QRectF & rect)
 {
     QGraphicsLayout::setGeometry(rect);
-    // WHATA HELL!?
-    qDebug() << "FullBorderLayout::setGeometry()";
 
     QRectF effectiveRect = geometry();
     qreal left = 0, top = 0, right = 0, bottom = 0;

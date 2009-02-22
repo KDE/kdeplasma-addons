@@ -37,23 +37,23 @@ public:
     ActionListModel * model() const;
 
     // ActionTreeModel
-    L_Override virtual ActionTreeModel * child(int index);
-    L_Override virtual QString modelTitle() const;
-    L_Override virtual QIcon modelIcon()  const;
+    L_Override ActionTreeModel * child(int index);
+    L_Override QString modelTitle() const;
+    L_Override QIcon modelIcon()  const;
 
     // ActionListModel
-    L_Override virtual QString title(int index) const;
-    L_Override virtual QString description(int index) const;
-    L_Override virtual QIcon icon(int index) const;
-    L_Override virtual bool isCategory(int index) const;
-    L_Override virtual bool hasContextActions(int index) const;
-    L_Override virtual void setContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override virtual void contextActivate(int index, QAction * context);
-    L_Override virtual QMimeData * mimeData(int index) const;
-    L_Override virtual void setDropActions(int index,
+    L_Override QString title(int index) const;
+    L_Override QString description(int index) const;
+    L_Override QIcon icon(int index) const;
+    L_Override bool isCategory(int index) const;
+    L_Override bool hasContextActions(int index) const;
+    L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
+    L_Override void contextActivate(int index, QAction * context);
+    L_Override QMimeData * mimeData(int index) const;
+    L_Override void setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
-    L_Override virtual int size() const;
+    L_Override int size() const;
 
 Q_SIGNALS:
     void itemActivated(int index);

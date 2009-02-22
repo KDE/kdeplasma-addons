@@ -63,12 +63,12 @@ public:
      */
     virtual ~StandardActionListModel();
 
-    L_Override virtual QString title(int index) const;
-    L_Override virtual QString description(int index) const;
-    L_Override virtual QIcon icon(int index) const;
-    L_Override virtual bool isCategory(int index) const;
+    L_Override QString title(int index) const;
+    L_Override QString description(int index) const;
+    L_Override QIcon icon(int index) const;
+    L_Override bool isCategory(int index) const;
 
-    L_Override virtual int size() const;
+    L_Override int size() const;
 
     /**
      * Adds a new item into the model

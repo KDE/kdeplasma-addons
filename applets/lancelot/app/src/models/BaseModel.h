@@ -50,8 +50,8 @@ public:
     BaseModel(bool enableDefaultDnD = false);
     virtual ~BaseModel();
 
-    L_Override virtual QMimeData * mimeData(int index) const;
-    L_Override virtual void setDropActions(int index,
+    L_Override QMimeData * mimeData(int index) const;
+    L_Override void setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
 protected:
