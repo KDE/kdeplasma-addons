@@ -22,43 +22,19 @@
 #include <KLocalizedString>
 #include <KDebug>
 #include <KIcon>
+#include <KStandardDirs>
 
 namespace Models {
 
 Places::Places()
-    : BaseModel(true)
+    : XbelModel(
+            KStandardDirs::locateLocal("data", "kfileplaces/bookmarks.xml")
+            )
 {
-    load();
 }
 
 Places::~Places()
 {
-}
-
-void Places::load()
-{
-    // We don't want to use addUrl, because of the icons
-    add(
-        i18n("Home Folder"),
-        qgetenv("HOME"),
-        KIcon("user-home"),
-        qgetenv("HOME")
-    );
-
-    add(
-        i18n("Root Folder"),
-        "/",
-        KIcon("folder-red"),
-        "/"
-    );
-
-    add(
-        i18n("Network Folders"),
-        "remote:/",
-        KIcon("folder-remote"),
-        "remote:/"
-    );
-
 }
 
 } // namespace Models

@@ -39,6 +39,7 @@ set(plasma_lancelot_models_SRCS
   models/BaseModel.cpp
   models/BaseMergedModel.cpp
   models/FolderModel.cpp
+  models/XbelModel.cpp
 
   models/FavoriteApplications.cpp
   models/Applications.cpp

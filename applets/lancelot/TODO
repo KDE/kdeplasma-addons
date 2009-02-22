@@ -46,9 +46,9 @@ Feature requests:
  - return to the applications when the search string is empty - FINISHED
  - higlight the path in passageway view (not only the breadcrumb) - FINISHED
  - clear documents history - FINISHED
+ - places to load from dolphin - FINISHED
 
  - width of categories section changeable - maybe
- - places to load from dolphin - interesting, but problematic
  - web history - page titles - interesting
  - hover activation for categories that are not in the last list of
      the PassagewayView - probably

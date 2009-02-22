@@ -20,18 +20,18 @@
 #ifndef LANCELOTAPP_MODELS_PLACES_H
 #define LANCELOTAPP_MODELS_PLACES_H
 
-#include "BaseModel.h"
+#include "XbelModel.h"
 
 namespace Models {
 
-class Places : public BaseModel {
+class Places : public XbelModel {
     Q_OBJECT
 public:
     Places();
     virtual ~Places();
 
-protected:
-    void load();
+// protected:
+//     void load();
 };
 
 } // namespace Models
