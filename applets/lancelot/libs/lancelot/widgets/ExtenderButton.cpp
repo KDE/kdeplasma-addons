@@ -25,6 +25,7 @@
 #include <QTimer>
 
 #define ACTIVATION_TIME 300
+#define EXTENDER_Z_VALUE 100000.0
 
 namespace Lancelot {
 
@@ -38,6 +39,7 @@ public:
         setParentItem(parent);
         setInnerOrientation(Qt::Vertical);
         setAlignment(Qt::AlignCenter);
+        setZValue(EXTENDER_Z_VALUE);
     }
 
     // Needed because of a Qt bug - making it public
@@ -243,6 +245,14 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
         d->timer.start();
     }
     BasicWidget::hoverEnterEvent(event);
+}
+
+void ExtenderButton::hideEvent(QHideEvent * event)
+{
+    d->extender->setVisible(false);
+    d->timer.stop();
+    d->extender->hoverLeaveEvent(NULL);
+    BasicWidget::hideEvent(event);
 }
 
 void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)

@@ -682,6 +682,22 @@ void ActionListView::setCategoryIconSize(QSize size)
     return d->itemFactory->setCategoryIconSize(size);
 }
 
+void ActionListView::setShowsExtendersOutside(bool value)
+{
+    d->showsExtendersOutside = value;
+    if (!d->itemFactory) {
+        return;
+    }
+    // relayouting:
+    setExtenderPosition(d->itemFactory->extenderPosition());
+}
+
+bool ActionListView::showsExtendersOutside() const
+{
+    return d->showsExtendersOutside;
+}
+
+
 void ActionListView::setExtenderPosition(ExtenderPosition position) //>
 {
     if (!d->itemFactory) {
@@ -690,12 +706,14 @@ void ActionListView::setExtenderPosition(ExtenderPosition position) //>
     d->itemFactory->setExtenderPosition(position);
 
     if (d->itemFactory->extenderPosition() == LeftExtender) {
-        list()->setMargin(Plasma::LeftMargin, EXTENDER_SIZE);
+        list()->setMargin(Plasma::LeftMargin,
+                d->showsExtendersOutside ? 0 : EXTENDER_SIZE);
         list()->setMargin(Plasma::RightMargin, 0);
         setFlip(Plasma::NoFlip);
     } else if (d->itemFactory->extenderPosition() == RightExtender) {
         list()->setMargin(Plasma::LeftMargin, 0);
-        list()->setMargin(Plasma::RightMargin, EXTENDER_SIZE);
+        list()->setMargin(Plasma::RightMargin,
+                d->showsExtendersOutside ? 0 : EXTENDER_SIZE);
         setFlip(Plasma::HorizontalFlip);
     } else {
         list()->setMargin(Plasma::LeftMargin, 0);

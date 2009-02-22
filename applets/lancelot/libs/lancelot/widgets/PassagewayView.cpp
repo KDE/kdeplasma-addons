@@ -161,18 +161,25 @@ public:
     void back(int steps, bool deselectLast = true)
     {
         qDebug() << "PassagewayView::Private::back:" << steps;
-        if (!steps) {
+        if (steps == 0) {
             return;
         }
 
         for (int i = 0; i < steps; ++i) {
+            if (lists.size() == 0) {
+                return;
+            }
+
             if (buttons.size() > 2) {
                 buttons.at(buttons.size() - 3)->setGroupByName(parent->group()->name() + "-InactiveButton");
                 buttons.at(buttons.size() - 3)->setExtenderPosition(Lancelot::NoExtender);
             }
             ExtenderButton * button = buttons.takeLast();
 
+            lists.last()->setShowsExtendersOutside(true);
             ActionListView * list   = lists.takeLast();
+            lists.last()->setShowsExtendersOutside(false);
+
             path.takeLast();
 
             buttonsLayout->removeItem(button);
@@ -224,7 +231,12 @@ public:
         list->setCategoriesActivable(true);
 
         focusIndex = lists.count();
+        if (lists.size() > 1) {
+            lists.last()->setShowsExtendersOutside(true);
+        }
         lists.append(list);
+        lists.last()->setShowsExtendersOutside(false);
+        lists.last()->setZValue(- lists.count());
 
         path.append(step);
 

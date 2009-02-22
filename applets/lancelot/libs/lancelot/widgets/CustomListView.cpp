@@ -334,6 +334,7 @@ public:
 CustomListView::CustomListView(QGraphicsItem * parent)
     : ScrollPane(parent), d(new Private(new CustomList(this), this))
 {
+    clearFlag(ClipScrollable);
     L_WIDGET_SET_INITIALIZED;
 }
 

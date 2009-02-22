@@ -68,6 +68,9 @@ public:
     void setItemIconSize(QSize size);
     void setCategoryIconSize(QSize size);
 
+    void setShowsExtendersOutside(bool value);
+    bool showsExtendersOutside() const;
+
     L_Override void groupUpdated();
     L_Override void keyPressEvent(QKeyEvent * event);
 

@@ -168,6 +168,7 @@ Q_SIGNALS:
 protected:
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hideEvent(QHideEvent * event);
 
 protected Q_SLOTS:
     void activate();

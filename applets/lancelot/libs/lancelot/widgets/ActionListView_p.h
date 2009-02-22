@@ -147,6 +147,7 @@ public:
     ~Private();
 
     ActionListViewItemFactory * itemFactory;
+    bool showsExtendersOutside : 1;
 };
 //<
 
