@@ -84,7 +84,7 @@ public:
         QGraphicsScene * scene,
         LancelotWindow * parent
     ) : QGraphicsView(scene, parent),
-        m_parent(parent), m_resizing(false),
+        q(parent), m_resizing(false),
         m_cache(NULL)
     {
         setWindowFlags(Qt::FramelessWindowHint);
@@ -130,7 +130,7 @@ public:
 
 #define passEvent(Event)                           \
     void Event(QMouseEvent *e) {                   \
-        m_parent->Event(e);                        \
+        q->Event(e);                        \
         QGraphicsView::Event(e);                   \
     }
 
@@ -150,34 +150,35 @@ public:
 
         if (!m_resizing) {
             resetCachedContent();
-            m_parent->m_corona->
+            q->m_corona->
                 setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
 
-            m_parent->m_root->
+            q->m_root->
                 setGeometry(QRect(QPoint(), newSize));
 
-            invalidateScene();
+            update();
+            q->setMask(q->m_root->group()->backgroundSvg()->mask());
+            // invalidateScene();
         }
-        update();
     }
 
     void startResizing()
     {
-        m_cache = new QPixmap(size());
-        QPainter p(m_cache);
-        render(&p);
-        m_resizing = true;
+        // m_cache = new QPixmap(size());
+        // QPainter p(m_cache);
+        // render(&p);
+        // m_resizing = true;
     }
 
     void stopResizing()
     {
-        m_resizing = false;
-        delete m_cache;
+        // m_resizing = false;
+        // delete m_cache;
         resize();
     }
 
 private:
-    LancelotWindow  * m_parent;
+    LancelotWindow  * q;
     QGraphicsWidget * m_root;
     QBrush            m_fgBrush;
 
