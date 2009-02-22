@@ -45,6 +45,7 @@ Feature requests:
  - extenders in passageway view to overlap next list - FINISHED
  - return to the applications when the search string is empty - FINISHED
  - higlight the path in passageway view (not only the breadcrumb) - FINISHED
+ - clear documents history - FINISHED
 
  - width of categories section changeable - maybe
  - places to load from dolphin - interesting, but problematic
@@ -53,7 +54,6 @@ Feature requests:
      the PassagewayView - probably
  - hover-activation feedback animation - yes
  - choose which categories to show in the applet - yes
- - clear documents history - yes
  - tooltips for items that are too long to display - yes
  - menu sorting - yes
  - rearanging favorites by DnD - most probably
