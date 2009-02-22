@@ -20,6 +20,8 @@
 #include "RecentDocuments.h"
 #include <KStandardDirs>
 #include <KDebug>
+#include <KIcon>
+#include <QVariant>
 
 namespace Models {
 
@@ -29,6 +31,51 @@ RecentDocuments::RecentDocuments()
 
 RecentDocuments::~RecentDocuments()
 {
+}
+
+bool RecentDocuments::hasContextActions(int index) const
+{
+    Q_UNUSED(index);
+    return true;
+}
+
+void RecentDocuments::setContextActions(int index, Lancelot::PopupMenu * menu)
+{
+    if (index > size() - 1) return;
+
+    menu->addAction(KIcon("edit-delete"), i18n("Remove this item"))
+        ->setData(QVariant(0));
+    menu->addAction(KIcon("edit-clear-history.png"), i18n("Clear documents history"))
+        ->setData(QVariant(1));
+}
+
+void RecentDocuments::contextActivate(int index, QAction * context)
+{
+    if (!context) {
+        return;
+    }
+
+    qDebug() << itemAt(index).data.toString();
+    KUrl url = KUrl(itemAt(index).data.toString());
+    qDebug() << url.fileName();
+    qDebug() << url.path();
+
+    int action = context->data().toInt();
+    switch (action) {
+        case 0:
+            // deleting this item
+            QFile::remove(url.path());
+            break;
+        case 1:
+            // clearing the list
+            foreach (QString file, QDir(m_dirPath).entryList(QDir::Files)) {
+                qDebug() << "deleting" << file <<
+                QFile::remove(m_dirPath + "/" + file);
+            }
+            break;
+    }
+
+    m_dirLister->updateDirectory(KUrl(m_dirPath));
 }
 
 } // namespace Models

@@ -57,6 +57,13 @@ void FolderModel::clear()
 
 void FolderModel::deleteItem(const KFileItem & fileItem)
 {
+    for (int i = 0; i < size(); i++) {
+        Item item = itemAt(i);
+
+        if (fileItem.url().url() == item.data.toString()) {
+            removeAt(i);
+        }
+    }
 }
 
 void FolderModel::newItems(const KFileItemList &items)

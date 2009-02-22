@@ -36,12 +36,12 @@ public:
 protected:
     void load();
 
-private:
+protected:
     KDirLister * m_dirLister;
     QString m_dirPath;
     QDir::SortFlags m_sort;
 
-private Q_SLOTS:
+protected Q_SLOTS:
     void clear();
     void deleteItem(const KFileItem & fileItem);
     void newItems(const KFileItemList & items);
