@@ -43,7 +43,8 @@
 Timer::Timer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_seconds(),
-      m_running(false)
+      m_running(false),
+      m_title("Timer")
 {
     resize(315, 125);
     setHasConfigurationInterface(true);
@@ -66,6 +67,8 @@ void Timer::init()
                                                        << "00:10:00" << "00:15:00" << "00:20:00"
                                                        << "00:25:00" << "00:30:00" << "00:45:00"
                                                        << "01:00:00");
+    m_showTitle = cg.readEntry("showTitle", false);
+    m_title = cg.readEntry("title", i18n("Timer"));
     m_showMessage = cg.readEntry("showMessage", true);
     m_message = cg.readEntry("message", i18n("Timer Timeout"));
     m_runCommand = cg.readEntry("runCommand", false);
@@ -145,12 +148,13 @@ void Timer::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
+    ui.showTitleCheckBox->setChecked(m_showTitle);
+    ui.titleLineEdit->setEnabled(m_showTitle);
+    ui.titleLineEdit->setText(m_title);
     ui.showMessageCheckBox->setChecked(m_showMessage);
-    ui.messageLabel->setEnabled(m_showMessage);
     ui.messageLineEdit->setEnabled(m_showMessage);
     ui.messageLineEdit->setText(m_message);
     ui.runCommandCheckBox->setChecked(m_runCommand);
-    ui.commandLabel->setEnabled(m_runCommand);
     ui.commandLineEdit->setEnabled(m_runCommand);
     ui.commandLineEdit->setText(m_command);
 
@@ -169,6 +173,12 @@ void Timer::configAccepted()
         unlocalizedTimers.append(CustomTimeEditor::fromLocalizedTimer(timer));
     }
     cg.writePathEntry("predefinedTimers", unlocalizedTimers);
+
+    m_showTitle = ui.showTitleCheckBox->isChecked();
+    cg.writeEntry("showTitle", m_showTitle);
+
+    m_title = ui.titleLineEdit->text();
+    cg.writeEntry("title", m_title);
 
     m_showMessage = ui.showMessageCheckBox->isChecked();
     cg.writeEntry("showMessage", m_showMessage);
@@ -208,7 +218,10 @@ void Timer::slotCountDone()
 {
     if (m_showMessage){
         //TODO: probably something with an OK button is better.
-        KNotification::event(KNotification::Notification, m_message);
+        if (m_showTitle)
+          KNotification::event(KNotification::Notification, m_title + " - " + m_message);
+        else
+          KNotification::event(KNotification::Notification, m_message);
     }
 
     if (m_runCommand && !m_command.isEmpty()){
@@ -368,6 +381,20 @@ void Timer::paintInterface(QPainter *p,
 
     m_svg->paint(p, QRectF(x + (w * 5), y, w, h), QString::number(seconds / 10) + suffix);
     m_svg->paint(p, QRectF(x + (w * 6), y, w, h), QString::number(seconds % 10) + suffix);
+
+    //Draw the title
+    if (m_showTitle) {
+        QFont font = this->font();
+        font.setPixelSize( y - 6 );                                //        Minor
+        QRect rectText( 0, 4, appletWidth, y - 2 );                //        adjustments
+        p->save();
+        p->setFont( font );
+        p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ));
+        p->drawText(rectText,
+                    Qt::AlignTop | Qt::AlignHCenter,
+                    m_title);
+        p->restore();
+    }
 }
 
 #include "timer.moc"

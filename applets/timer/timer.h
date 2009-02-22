@@ -73,6 +73,8 @@ class Timer : public Plasma::Applet
         Ui::timerConfig ui;
 
         QStringList m_predefinedTimers;
+        bool m_showTitle;
+        QString m_title;        
         bool m_showMessage;
         QString m_message;
         bool m_runCommand;
