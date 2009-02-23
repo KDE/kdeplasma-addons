@@ -150,6 +150,7 @@ void PopupList::showEvent(QShowEvent * event)
     d->list->setCategoryIconSize(ICON_SIZE);
 
     Plasma::Dialog::showEvent(event);
+    d->list->setFocus();
     d->timer.stop();
 }
 
@@ -258,5 +259,18 @@ void PopupList::exec(const QPoint & p, PopupList * parent)
 
     show();
 }
+
+bool PopupList::eventFilter(QObject * object, QEvent * event)
+{
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        qDebug() << "Pressed" << keyEvent;
+        if (keyEvent->key() == Qt::Key_Escape) {
+            close();
+        }
+    }
+    return Plasma::Dialog::eventFilter(object, event);
+}
+
 } // namespace Lancelot
 

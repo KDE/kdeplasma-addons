@@ -111,6 +111,7 @@ protected:
     L_Override void enterEvent(QEvent * event);
     L_Override void leaveEvent(QEvent * event);
     L_Override void timerEvent(QTimerEvent * event);
+    L_Override bool eventFilter(QObject * object, QEvent * event);
 
     /**
      * Pops out the list
