@@ -730,6 +730,7 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         bool pass = false;
         int oindex = m_focusIndex;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        qDebug() << "Pressed" << keyEvent;
         switch (keyEvent->key()) {
             case Qt::Key_Escape:
                 lancelotHide(true);

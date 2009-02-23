@@ -129,21 +129,21 @@ QStringList SystemActions::actions() const
 QString SystemActions::actionTitle(const QString & id) const
 {
     if (id == ID_MENU_LEAVE) {
-        return i18n("Leave");
+        return i18n("&Leave");
     } else if (id == ID_MENU_SWITCH_USER) {
-        return i18n("Switch User");
+        return i18n("Switch &User");
     } else if (id == ID_LOCK_SCREEN) {
-        return i18n("Lock Session");
+        return i18n("Loc&k Session");
     } else if (id == ID_LOGOUT) {
-        return i18n("Log Out");
+        return i18n("Log &Out");
     } else if (id == ID_REBOOT) {
-        return i18n("Reboot");
+        return i18n("Re&boot");
     } else if (id == ID_POWEROFF) {
-        return i18n("Shut Down");
+        return i18n("&Shut Down");
     } else if (id == ID_SUSPEND_DISK) {
-        return i18n("Suspend to Disk");
+        return i18n("Suspend to &Disk");
     } else if (id == ID_SUSPEND_RAM) {
-        return i18n("Suspend to RAM");
+        return i18n("Suspend to &RAM");
     }
 
     return QString();

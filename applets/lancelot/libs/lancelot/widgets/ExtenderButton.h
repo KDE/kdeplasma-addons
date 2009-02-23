@@ -137,6 +137,7 @@ public:
 
     L_Override void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    L_Override void setShortcutKey(const QString & key);
 
 public Q_SLOTS:
     /**

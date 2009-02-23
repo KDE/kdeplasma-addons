@@ -67,7 +67,7 @@
                     <item:widget
                         name="buttonSectionsDocuments" type="Lancelot::ExtenderButton"
 
-                        title="Documents"
+                        title="&amp;Documents"
                         icon="applications-office"
                         group="SectionButtons"
                         activationMethod="Hover"
@@ -81,7 +81,7 @@
                     <item:widget
                         name="buttonSectionsContacts" type="Lancelot::ExtenderButton"
 
-                        title="Contacts"
+                        title="&amp;Contacts"
                         icon="kontact"
                         group="SectionButtons"
                         activationMethod="Hover"
@@ -95,7 +95,7 @@
                     <item:widget
                         name="buttonSectionsComputer" type="Lancelot::ExtenderButton"
 
-                        title="Computer"
+                        title="Co&amp;mputer"
                         icon="computer-laptop"
                         group="SectionButtons"
                         activationMethod="Hover"
@@ -109,7 +109,7 @@
                     <item:widget
                         name="buttonSectionsApplications" type="Lancelot::ExtenderButton"
 
-                        title="Applications"
+                        title="&amp;Applications"
                         icon="applications-other"
                         group="SectionButtons"
                         activationMethod="Hover"

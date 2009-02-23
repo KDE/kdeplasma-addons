@@ -80,6 +80,23 @@ class BasicWidget::Private {
         parent->setGroupByName("BasicWidget");
     }
 
+    int shortcutPosition(const QString & text)
+    {
+        int index = 0;
+        while ((index = title.indexOf('&', index)) != -1) {
+            if (index == title.size() - 1) {
+                return -1;
+            }
+
+            if (title.at(index + 1) != '&') {
+                return index + 1;
+            }
+
+            index += 2;
+        }
+        return -1;
+    }
+
     QIcon icon;
     Plasma::Svg iconInSvg;
     QSize iconSize;
@@ -228,7 +245,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             // painter->drawText(titleRect,
             //        Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title);
             drawText(painter, titleRect,
-                   Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title);
+                   Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->title, true);
             top += titleRect.height();
         }
 
@@ -239,7 +256,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             // painter->drawText(descriptionRect,
             //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description);
             drawText(painter, descriptionRect,
-                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description);
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description, false);
         }
     } else {
         float /*left = WIDGET_PADDING,*/ width =
@@ -295,7 +312,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             // painter->drawText(titleRect,
             //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title);
             drawText(painter, titleRect,
-                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title);
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->title, true);
         }
 
         if (!d->description.isEmpty()) {
@@ -309,7 +326,7 @@ void BasicWidget::paintForeground(QPainter * painter)
             // painter->drawText(descriptionRect,
             //         Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->description);
             drawText(painter, descriptionRect,
-                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->description);
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, d->description, false);
         }
     }
 
@@ -365,7 +382,18 @@ Plasma::Svg & BasicWidget::iconInSvg() const
 void BasicWidget::setTitle(const QString & title)
 {
     d->title = title;
+
+    int pos = d->shortcutPosition(title);
+    if (pos > -1) {
+        setShortcutKey(title.at(pos));
+    }
+
     update();
+}
+
+void BasicWidget::setShortcutKey(const QString & key)
+{
+
 }
 
 QString BasicWidget::title() const
@@ -434,14 +462,23 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
     return result;
 }
 
-void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int flags, const QString & text)
+void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int flags, const QString & txt, bool shortcutEnabled)
 {
-    if (text.isEmpty()) {
+    if (txt.isEmpty()) {
         return;
     }
 
-    static const int radius = 2;
+    QString text = txt;
+    int shortcutPosition = d->shortcutPosition(text);
+    if (shortcutPosition > -1 && shortcutEnabled) {
+        text = text.remove(shortcutPosition - 1, 1);
+    } else {
+        shortcutEnabled = false;
+    }
+
+    int radius;
     if (group()->hasProperty(BlurTextShadow)) {
+        radius = 2;
         QColor textColor = painter->pen().color();
         QColor shadowColor;
         if (textColor.valueF() * textColor.alphaF() > 0.4) {
@@ -472,7 +509,9 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
         }
 
         painter->drawPixmap(rectangle.topLeft(), result);
+
     } else {
+        radius = 0;
         if (group()->hasProperty(TextColorBackground)) {
             QColor bgColor;
             if (!isEnabled()) {
@@ -494,6 +533,17 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
         painter->drawText(rectangle,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, text);
     }
+
+    if (shortcutEnabled) {
+        int width = painter->boundingRect(
+                rectangle,
+                Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine,
+                text.left(shortcutPosition - 1)).width();
+        painter->drawText(
+                QRectF(rectangle.topLeft() + QPoint(width + radius, radius), rectangle.size()),
+                QString('_'));
+    }
+
 }
 
 } // namespace Lancelot

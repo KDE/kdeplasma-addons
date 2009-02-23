@@ -179,6 +179,11 @@ public:
      */
     void setDescription(const QString & description);
 
+    /**
+     * Sets a shortcut key
+     */
+    virtual void setShortcutKey(const QString & key);
+
 protected:
 
     /**
@@ -192,7 +197,7 @@ protected:
      * @see QPainter::drawText
      */
     void drawText(QPainter * painter, const QRectF & rectangle, int flags,
-            const QString & text);
+            const QString & text, bool shortcutEnabled);
 
     L_Override void paint(QPainter * painter,
             const QStyleOptionGraphicsItem * option, QWidget * widget = 0);

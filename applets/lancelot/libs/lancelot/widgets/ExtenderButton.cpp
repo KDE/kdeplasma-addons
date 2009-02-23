@@ -23,6 +23,9 @@
 #include <KDebug>
 #include <QIcon>
 #include <QTimer>
+#include <QAction>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #define ACTIVATION_TIME 300
 #define EXTENDER_Z_VALUE 100000.0
@@ -76,7 +79,8 @@ public:
         extenderPosition(NoExtender),
         activationMethod(ClickActivate),
         checkable(false),
-        checked(false)
+        checked(false),
+        shortcut(NULL)
     {
         if (!extenderIconSvg.isValid()) {
             extenderIconSvg.setImagePath("lancelot/extender-button-icon");
@@ -153,6 +157,7 @@ public:
     }
 
     ExtenderButton * q;
+    QAction * shortcut;
 
     ExtenderPosition extenderPosition;
     ActivationMethod activationMethod;
@@ -365,6 +370,26 @@ void ExtenderButton::setCheckable(bool checkable)
 bool ExtenderButton::isCheckable()
 {
     return d->checkable;
+}
+
+void ExtenderButton::setShortcutKey(const QString & key)
+{
+    qDebug() << "Setting the key Alt +" << key << "for" << title();
+    if (key.isEmpty()) {
+        delete d->shortcut;
+        d->shortcut = NULL;
+    } else if (scene() && scene()->views().size()) {
+        if (!d->shortcut) {
+            d->shortcut = new QAction(this);
+            scene()->views().at(0)->addAction(d->shortcut);
+        }
+
+        d->shortcut->setShortcut("Alt+" + key);
+        // d->shortcut->setShortcutContext(Qt::ApplicationShortcut);
+        qDebug() << "set" << d->shortcut->shortcut();
+        connect(d->shortcut, SIGNAL(triggered()),
+                this, SIGNAL(activated()));
+    }
 }
 
 } // namespace Lancelot
