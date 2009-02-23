@@ -264,7 +264,6 @@ bool PopupList::eventFilter(QObject * object, QEvent * event)
 {
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-        qDebug() << "Pressed" << keyEvent;
         if (keyEvent->key() == Qt::Key_Escape) {
             close();
         }

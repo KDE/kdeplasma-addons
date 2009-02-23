@@ -476,9 +476,8 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
         shortcutEnabled = false;
     }
 
-    int radius;
+    static const int radius = 2;
     if (group()->hasProperty(BlurTextShadow)) {
-        radius = 2;
         QColor textColor = painter->pen().color();
         QColor shadowColor;
         if (textColor.valueF() * textColor.alphaF() > 0.4) {
@@ -510,8 +509,20 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
 
         painter->drawPixmap(rectangle.topLeft(), result);
 
+        if (shortcutEnabled) {
+            int width = painter->boundingRect(
+                    rectangle,
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine,
+                    text.left(shortcutPosition - 1)).width();
+            QPixmap result = Plasma::PaintUtils::shadowText(
+                    "_", textColor, shadowColor,
+                    QPoint(width, 0), radius);
+            painter->drawPixmap(rectangle.topLeft(), result);
+            // painter->drawText(
+            //         QRectF(rectangle.topLeft() + QPoint(width, 0), rectangle.size()),
+            //         QString('_'));
+        }
     } else {
-        radius = 0;
         if (group()->hasProperty(TextColorBackground)) {
             QColor bgColor;
             if (!isEnabled()) {
@@ -532,17 +543,18 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
         }
         painter->drawText(rectangle,
                 Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, text);
+
+        if (shortcutEnabled) {
+            int width = painter->boundingRect(
+                    rectangle,
+                    Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine,
+                    text.left(shortcutPosition - 1)).width();
+            painter->drawText(
+                    QRectF(rectangle.topLeft() + QPoint(width, 0), rectangle.size()),
+                    QString('_'));
+        }
     }
 
-    if (shortcutEnabled) {
-        int width = painter->boundingRect(
-                rectangle,
-                Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine,
-                text.left(shortcutPosition - 1)).width();
-        painter->drawText(
-                QRectF(rectangle.topLeft() + QPoint(width + radius, radius), rectangle.size()),
-                QString('_'));
-    }
 
 }
 
