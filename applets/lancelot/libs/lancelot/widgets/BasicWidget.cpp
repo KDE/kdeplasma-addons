@@ -516,8 +516,8 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
                     text.left(shortcutPosition - 1)).width();
             QPixmap result = Plasma::PaintUtils::shadowText(
                     "_", textColor, shadowColor,
-                    QPoint(width, 0), radius);
-            painter->drawPixmap(rectangle.topLeft(), result);
+                    QPoint(0, 0), radius);
+            painter->drawPixmap(rectangle.topLeft() + QPoint(width, 0), result);
             // painter->drawText(
             //         QRectF(rectangle.topLeft() + QPoint(width, 0), rectangle.size()),
             //         QString('_'));
