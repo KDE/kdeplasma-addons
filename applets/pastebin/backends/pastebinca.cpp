@@ -38,7 +38,7 @@ void PastebinCAServer::finished(KJob *job)
 {
     Q_UNUSED(job);
 
-    if (_data.length() == 0) {
+    if (_data.length() == 0 || _data.contains("FAIL")) {
         emit postError();
         return;
     }

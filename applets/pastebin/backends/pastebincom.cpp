@@ -35,6 +35,13 @@ PastebinCOMServer::~PastebinCOMServer()
 void PastebinCOMServer::result(KIO::Job *job, const KUrl &url)
 {
     Q_UNUSED(job);
+
+    if (url.url().contains("pastebin.php")) {
+        // we had an error
+        emit postError();
+        return;
+    }
+
     emit postFinished(url.url());
 }
 
