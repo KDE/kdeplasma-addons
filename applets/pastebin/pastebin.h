@@ -27,7 +27,7 @@
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/Label>
 
 #include <QTimer>
@@ -43,7 +43,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
-class Pastebin : public Plasma::Applet
+class Pastebin : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
@@ -53,6 +53,8 @@ public:
     void init();
     void setTextServer(int backend);
     void setImageServer(int backend);
+
+    QGraphicsWidget *graphicsWidget();
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
     enum imageServers { IMAGEBINCA, IMAGESHACK };
@@ -72,6 +74,8 @@ protected:
     void createConfigurationInterface(KConfigDialog *parent);
 
 private:
+    QGraphicsWidget *m_graphicsWidget;
+
     DraggableLabel *m_resultsLabel;
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;

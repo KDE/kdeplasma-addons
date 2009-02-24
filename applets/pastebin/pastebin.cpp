@@ -42,28 +42,17 @@
 #include <kio/job.h>
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_textServer(0), m_imageServer(0),
-      m_textBackend(0), m_imageBackend(0)
+    : Plasma::PopupApplet(parent, args), m_textServer(0),
+      m_imageServer(0), m_textBackend(0), m_imageBackend(0),
+      m_graphicsWidget(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    m_resultsLabel = new DraggableLabel(this);
-    m_resultsLabel->setVisible(false);
-    m_displayEdit = new Plasma::Label(this);
-    m_displayEdit->setText(i18n("Drop text or images on me to upload them to Pastebin."));
-    m_displayEdit->setAcceptDrops(false);
-    m_displayEdit->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
-    registerAsDragHandle(m_displayEdit);
-    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
+    setPopupIcon("edit-paste");
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
-
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical, this);
-    layout->addItem(m_displayEdit);
-    layout->addItem(m_resultsLabel);
-    resize(200, 200);
 }
 
 Pastebin::~Pastebin()
@@ -71,6 +60,7 @@ Pastebin::~Pastebin()
     delete m_displayEdit;
     delete m_textServer;
     delete m_imageServer;
+    delete m_graphicsWidget;
     delete timer;
 }
 
@@ -126,6 +116,31 @@ void Pastebin::init()
     int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
     setTextServer(textBackend);
     setImageServer(imageBackend);
+}
+
+QGraphicsWidget *Pastebin::graphicsWidget()
+{
+    if (m_graphicsWidget) {
+        return m_graphicsWidget;
+    }
+
+    m_resultsLabel = new DraggableLabel(this);
+    m_resultsLabel->setVisible(false);
+    m_displayEdit = new Plasma::Label(this);
+    m_displayEdit->setText(i18n("Drop text or images on me to upload them to Pastebin."));
+    m_displayEdit->setAcceptDrops(false);
+    m_displayEdit->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
+    registerAsDragHandle(m_displayEdit);
+    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
+
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical);
+    layout->addItem(m_displayEdit);
+    layout->addItem(m_resultsLabel);
+
+    m_graphicsWidget = new QGraphicsWidget(this);
+    m_graphicsWidget->setLayout(layout);
+    m_graphicsWidget->setPreferredSize(200, 200);
+    return m_graphicsWidget;
 }
 
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
