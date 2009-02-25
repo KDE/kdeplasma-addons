@@ -57,8 +57,9 @@ class WeatherStation : public Plasma::PopupApplet
 
         QString fitValue(const Conversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
-        QStringList fromPressure(const Conversion::Value& pressure, const QString& tendency,
+        QStringList fromPressure(const Conversion::Value& pressure, qreal tendency,
                                  const Conversion::Value& temperature);
+        qreal tendency(const Conversion::Value& pressure, const QString& tendency);
 
     private:
         LCD *m_lcd;

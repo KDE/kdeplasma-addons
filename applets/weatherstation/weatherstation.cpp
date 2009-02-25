@@ -230,14 +230,10 @@ QStringList WeatherStation::fromCondition(const QString& condition)
     return result;
 }
 
-QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, const QString& tendency,
-                                         const Conversion::Value& temperature)
+qreal WeatherStation::tendency(const Conversion::Value& pressure, const QString& tendency)
 {
-    QStringList result;
-    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number();
-    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number();
     qreal t;
-
+    
     if (tendency.toLower() == "rising") {
         t = 0.75;
     } else if (tendency.toLower() == "falling") {
@@ -246,7 +242,17 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, cons
         t = Conversion::Converter::self()->convert(
                 Conversion::Value(tendency.toDouble(), pressure.unit()), "kPa").number();
     }
-    p += t * 10; // This is completely unscientific so if anyone have a better formula for this :-)
+    return t;
+}
+
+QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, qreal tendency,
+                                         const Conversion::Value& temperature)
+{
+    QStringList result;
+    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number();
+    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number();
+
+    p += tendency * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
     // Moon 22:00 -> 6:00
     QString sunOrMoon = (((QDateTime::currentDateTime().time().hour() + 2) % 24) <= 8) ?
@@ -279,20 +285,29 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, cons
 }
 
 void WeatherStation::setPressure(const QString& condition, const Conversion::Value& pressure,
-                                 const QString& tendency, const Conversion::Value& temperature)
+                                 const QString& tendencyString, const Conversion::Value& temperature)
 {
     QStringList current;
+    qreal t = tendency(pressure, tendencyString);
     if (!condition.isEmpty() && condition != "weather-none-available") {
         current = fromCondition(condition);
     }
     if (current.size() == 0) {
-        current = fromPressure(pressure, tendency, temperature);
+        current = fromPressure(pressure, t, temperature);
     }
     m_lcd->setGroup("weather", current);
 
     QString s = fitValue(Conversion::Converter::self()->convert(pressure, m_pressureUnit), 5);
     m_lcd->setNumber("pressure", s);
     m_lcd->setGroup("pressure_unit", QStringList() << m_pressureUnit);
+
+    if (t > 0.0) {
+        m_lcd->setGroup("pressure_direction", QStringList() << "up");
+    } else if (t < 0.0) {
+        m_lcd->setGroup("pressure_direction", QStringList() << "down");
+    } else {
+        m_lcd->setGroup("pressure_direction", QStringList());
+    }
 }
 
 void WeatherStation::setTemperature(const Conversion::Value& temperature)
