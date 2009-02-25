@@ -42,6 +42,7 @@ class WeatherStation : public Plasma::PopupApplet
     public slots:
         void configAccepted();
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+        void clicked(const QString &name);
 
     protected:
         void connectToEngine();
@@ -70,6 +71,7 @@ class WeatherStation : public Plasma::PopupApplet
         int m_updateInterval;
         QString m_source;
         bool m_useBackground;
+        QString m_url;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)

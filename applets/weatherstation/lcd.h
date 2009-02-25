@@ -107,17 +107,23 @@ public:
     void setItemOn(const QString &name);
 
     /**
-     * Set text label for the meter
-     * @param index label index.
-     * @param text text for the label.
+     * Set svg element clickable (clicked is emitted)
+     * @param name name of the element
      */
-    void setLabel(int index, const QString &text);
+    void setItemClickable(const QString &name, bool clickable);
 
     /**
-     * @param index label index
+     * Set text label for the meter
+     * @param name name of the element.
+     * @param text text for the label.
+     */
+    void setLabel(const QString &name, const QString &text);
+
+    /**
+     * @param name name of the element
      * @return text label for the meter
      */
-    QString label(int index) const;
+    QString label(const QString &name) const;
 
     /**
      * @return lcd as pixmap
@@ -133,7 +139,14 @@ public:
      * Reimplemented from QGraphicsWidget
      */
     void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    
+signals:
+    void clicked(const QString &name);
 
+protected:
+    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    
 private:
     class Private;
     Private * const d;

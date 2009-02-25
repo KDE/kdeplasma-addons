@@ -21,7 +21,10 @@
 #include <QPainter>
 #include <QDir>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsSceneHoverEvent>
+#include <QGraphicsSceneMouseEvent>
 #include <QDomDocument>
+#include <QCursor>
 #include <KDebug>
 #include <KFilterDev>
 #include <KSvgRenderer>
@@ -35,12 +38,13 @@ class LCD::Private
         // We don't use Plasma::Svg here because it has some accuracy problems.
         // lcd numbers did not look good with that.
         KSvgRenderer svg;
-        QStringList items;
         bool dirty;
         QPixmap img;
+        QStringList items;
         QMap<QString, QStringList> groups;
-        QStringList labels;
-        QList<QColor> colors;
+        QHash<QString, QColor> colors;
+        QHash<QString, QString> labels;
+        QStringList clickable;
 
         static const QString A;
         static const QString B;
@@ -168,8 +172,8 @@ class LCD::Private
                 paint(&p, item);
             }
             p.restore();
-            for (int i = 0; i < labels.count(); ++i) {
-                text(&p, i);
+            foreach (const QString& label, labels.keys()) {
+                text(&p, label);
             }
             dirty = false;
         }
@@ -181,6 +185,7 @@ class LCD::Private
 
             doc.setContent(device);
             QList<QDomNodeList> lists;
+            QRegExp rx("fill:(#[0-9]+)");
             int pos;
             lists << doc.elementsByTagName("g");
             lists << doc.elementsByTagName("path");
@@ -191,14 +196,9 @@ class LCD::Private
                     QString id = element.attribute("id");
                     if ((pos = id.lastIndexOf(':')) > -1) {
                         groups[id.left(pos)] << id.mid(pos + 1);
-                    } else if (id.startsWith(QLatin1String("label"))) {
-                        int i = id.mid(5).toInt();
-                        QRegExp rx("fill:([#0-9]+)");
+                    } else if (element.tagName() == "rect") {
                         if (rx.indexIn(element.attribute("style")) > -1) {
-                            while (colors.count() <= i) {
-                                colors << QColor();
-                            }
-                            colors[i] = QColor(rx.cap(1));
+                            colors[id] = QColor(rx.cap(1));
                         }
                     }
                 }
@@ -223,18 +223,15 @@ class LCD::Private
             return result;
         }
 
-        void text(QPainter *p, int index)
+        void text(QPainter *p, const QString elementID)
         {
-            QString elementID = QString("label%1").arg(index);
-            QString text = labels[index];
+            QString text = labels[elementID];
 
             if (svg.elementExists(elementID)) {
                 QRectF elementRect = scaledRect(elementID);
                 Qt::Alignment align = Qt::AlignCenter;
 
-                if (colors.count() > index) {
-                    p->setPen(QPen(colors[index]));
-                }
+                p->setPen(QPen(colors[elementID]));
                 p->setFont(fitText(p, text, elementRect));
                 if (elementRect.width() > elementRect.height()) {
                     p->drawText(elementRect, align, text);
@@ -387,17 +384,14 @@ void LCD::setItemOff(const QString &name)
     }
 }
 
-void LCD::setLabel(int index, const QString &text)
+void LCD::setLabel(const QString &name, const QString &text)
 {
-    while (d->labels.count() <= index) {
-        d->labels << QString();
-    }
-    d->labels[index] = text;
+    d->labels[name] = text;
 }
 
-QString LCD::label(int index) const
+QString LCD::label(const QString &name) const
 {
-    return d->labels[index];
+    return d->labels[name];
 }
 
 QPixmap LCD::toPixmap()
@@ -406,6 +400,35 @@ QPixmap LCD::toPixmap()
         d->updateImage();
     }
     return d->img;
+}
+
+void LCD::setItemClickable(const QString &name, bool clickable)
+{
+    d->clickable.removeAll(name);
+    if (clickable) {
+        setAcceptHoverEvents(true);
+        d->clickable << name;
+    }
+}
+
+void LCD::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
+{
+    foreach (const QString& name, d->clickable) {
+        if (d->scaledRect(name).contains(event->pos())) {
+            setCursor(QCursor(Qt::PointingHandCursor));
+            return;
+        }
+    }
+    unsetCursor();
+}
+
+void LCD::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+    foreach (const QString& name, d->clickable) {
+        if (d->scaledRect(name).contains(event->pos())) {
+            emit clicked(name);
+        }
+    }
 }
 
 #include "lcd.moc"

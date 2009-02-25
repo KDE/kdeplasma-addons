@@ -20,6 +20,7 @@
 #include <QPainter>
 #include <KConfigDialog>
 #include <KConfigGroup>
+#include <KRun>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <plasma/weather/weatherutils.h>
@@ -45,6 +46,7 @@ void WeatherStation::init()
     m_lcd->setSvg("weatherstation/lcd");
     // So we don't show in panel
     m_lcd->setMinimumSize(m_lcd->preferredSize() / 2);
+    connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
 
     m_lcdPanel = new LCD(this);
     m_lcdPanel->setSvg("weatherstation/lcd_panel");
@@ -165,7 +167,9 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     setWind(Conversion::Value(data["Wind Speed"],
             WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
             data["Wind Direction"].toString());
-    m_lcd->setLabel(0, data["Credit"].toString());
+    m_lcd->setLabel("label0", data["Credit"].toString());
+    m_url = data["Credit Url"].toString();
+    m_lcd->setItemClickable("label0", !m_url.isEmpty());
 }
 
 QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
@@ -320,6 +324,12 @@ void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
 
     m_lcd->setNumber("wind_speed", s);
     m_lcd->setGroup("wind_unit", QStringList() << m_speedUnit);
+}
+
+void WeatherStation::clicked(const QString &name)
+{
+    Q_UNUSED(name)
+    KRun::runUrl(KUrl(m_url), "text/html", 0);
 }
 
 #include "weatherstation.moc"
