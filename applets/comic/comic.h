@@ -32,6 +32,7 @@
 class ConfigWidget;
 class FadingItem;
 class FullViewWidget;
+class KDatePicker;
 class QTimer;
 class QAction;
 class QGraphicsSceneWheelEvent;
@@ -152,6 +153,7 @@ class ComicApplet : public Plasma::Applet
         Plasma::ScrollBar *mScrollBarHoriz;
         Plasma::Svg *mSvg;
         int mReloadTime;
+        KDatePicker *mCalendar;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )

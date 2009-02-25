@@ -113,7 +113,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFadingItem( 0 ),
       mPrevButton( 0 ),
       mNextButton( 0 ),
-      mSvg( 0 )
+      mSvg( 0 ),
+      mCalendar( 0 )
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
@@ -192,6 +193,12 @@ void ComicApplet::init()
 ComicApplet::~ComicApplet()
 {
     delete mFullViewWidget;
+
+    if ( mCalendar ) {
+        mCalendar->hide();
+        disconnect( mCalendar, 0, 0, 0 );
+    }
+    delete mCalendar;
 }
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
@@ -408,13 +415,15 @@ void ComicApplet::slotGoJump()
             updateComic( QString::number( pageDialog.getStripNumber() ) );
         }
     } else if ( mSuffixType == "Date" ) {
-        static KDatePicker *calendar = new KDatePicker();
-        calendar->setMinimumSize( calendar->sizeHint() );
-        calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
+        if ( !mCalendar ) {
+            mCalendar = new KDatePicker();
+        }
+        mCalendar->setMinimumSize( mCalendar->sizeHint() );
+        mCalendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
 
-        connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-        connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-        calendar->show();
+        connect( mCalendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        connect( mCalendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        mCalendar->show();
     }
 }
 
