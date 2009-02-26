@@ -165,9 +165,11 @@ void News::makeStylesheet()
         QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
         QColor backgroundColor =
                 Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
-        QColor altBackgroundColor =
-                Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonBackgroundColor);
-
+        QColor altBackgroundColor = backgroundColor;
+        altBackgroundColor.setHsv(altBackgroundColor.hue(), altBackgroundColor.saturation(),
+                (altBackgroundColor.value() < 128)
+                ? backgroundColor.value() + 40 : backgroundColor.value() - 40,
+                altBackgroundColor.alpha());
         QString css = QString(CSS).arg(textColor.name())
                                 .arg(headerColor.name())
                                 .arg(backgroundColor.name())
