@@ -24,6 +24,27 @@
 #include "ui_weatherconfig.h"
 #include "ui_weatherconfigsearch.h"
 
+class WeatherValidator : public QObject
+{
+    Q_OBJECT
+public:
+    WeatherValidator(QWidget *parent = 0);
+    virtual ~WeatherValidator();
+
+    void validate(const QString& plugin, const QString& citybool, bool silent = false);
+    void setDataEngine(Plasma::DataEngine* dataengine);
+    
+signals:
+    void finished(const QString& source);
+    
+public slots:
+    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+
+private:
+    Plasma::DataEngine* m_dataengine;
+    bool m_silent;
+};
+
 class WeatherConfigSearch : public KDialog, public Ui::WeatherConfigSearch
 {
     Q_OBJECT
@@ -37,7 +58,7 @@ public:
     QString nameForPlugin(const QString& plugin);
 
 public slots:
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void finished(const QString &source);
 
 protected slots:
     void searchPressed();
@@ -45,6 +66,7 @@ protected slots:
 
 private:
     Plasma::DataEngine* m_dataengine;
+    WeatherValidator m_validator;
     QString m_source;
 };
 

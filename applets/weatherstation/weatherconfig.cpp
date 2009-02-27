@@ -19,6 +19,71 @@
 #include <KMessageBox>
 #include <KInputDialog>
 
+WeatherValidator::WeatherValidator(QWidget *parent)
+    : QObject(parent)
+    , m_dataengine(0)
+{
+}
+
+WeatherValidator::~WeatherValidator()
+{
+}
+
+void WeatherValidator::validate(const QString& plugin, const QString& city, bool silent)
+{
+    m_silent = silent;
+    QString validation = QString("%1|validate|%2").arg(plugin).arg(city);
+    m_dataengine->connectSource(validation, this);
+}
+
+void WeatherValidator::setDataEngine(Plasma::DataEngine* dataengine)
+{
+    m_dataengine = dataengine;
+}
+
+void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+{
+    m_dataengine->disconnectSource(source, this);
+    QStringList result = data["validate"].toString().split('|');
+    QString weatherSource;
+
+    if (result[1] == "valid") {
+        QMap<QString, QString> places;
+        int i = 3;
+        while (i < result.count()) {
+            if (result[i] == "place") {
+                if (i + 2 < result.count() && result[i + 2] == "extra") {
+                    places[result[i + 1]] = result[i + 3];
+                    i += 4;
+                } else {
+                    places[result[i + 1]].clear();
+                    i += 2;
+                }
+            }
+        }
+        QString place;
+        if (result[2] == "multiple" && !m_silent) {
+            QStringList selected = KInputDialog::getItemList(i18n("Weather station:"),
+                    i18n("Found multiple places:"), places.keys());
+            if (selected.isEmpty()) {
+                return;
+            }
+            place = selected[0];
+        } else {
+            place = places.keys()[0];
+        }
+        weatherSource = QString("%1|weather|%2").arg(result[0]).arg(place);
+        if (!places[place].isEmpty()) {
+            weatherSource += QString("|%1").arg(places[place]);
+        }
+    } else if (result[1] == "timeout" && !m_silent) {
+        KMessageBox::error(0, i18n("Timeout happened when trying to connect weather server."));
+    } else if (!m_silent) {
+        KMessageBox::error(0, i18n("Cannot find '%1'.", result[3]));
+    }
+    emit finished(weatherSource);
+}
+
 WeatherConfigSearch::WeatherConfigSearch(QWidget *parent)
     : KDialog(parent)
     , m_dataengine(0)
@@ -29,6 +94,8 @@ WeatherConfigSearch::WeatherConfigSearch(QWidget *parent)
     setButtonText(KDialog::User1, i18n("&Search..."));
     setDefaultButton(KDialog::User1);
     connect(this, SIGNAL(user1Clicked()), this, SLOT(searchPressed()));
+    connect(&m_validator, SIGNAL(finished(const QString&)),
+            this, SLOT(finished(const QString&)));
     connect(cityLineEdit, SIGNAL(textChanged(const QString&)),
             this, SLOT(textChanged(const QString&)));
     textChanged(QString());
@@ -47,49 +114,14 @@ void WeatherConfigSearch::searchPressed()
 {
     QString plugin = providerComboBox->itemData(providerComboBox->currentIndex()).toString();
     QString city = cityLineEdit->text();
-    QString validation = QString("%1|validate|%2").arg(plugin).arg(city);
-    m_dataengine->connectSource(validation, this);
+    m_validator.validate(plugin, city);
 }
 
-void WeatherConfigSearch::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void WeatherConfigSearch::finished(const QString &source)
 {
-    m_dataengine->disconnectSource(source, this);
-    QStringList result = data["validate"].toString().split('|');
-
-    if (result[1] == "valid") {
-        QMap<QString, QString> places;
-        int i = 3;
-        while (i < result.count()) {
-            if (result[i] == "place") {
-                if (i + 2 < result.count() && result[i + 2] == "extra") {
-                    places[result[i + 1]] = result[i + 3];
-                    i += 4;
-                } else {
-                    places[result[i + 1]].clear();
-                    i += 2;
-                }
-            }
-        }
-        QString place;
-        if (result[2] == "multiple") {
-            QStringList selected = KInputDialog::getItemList(i18n("Weather station:"),
-                    i18n("Found multiple places:"), places.keys());
-            if (selected.isEmpty()) {
-                return;
-            }
-            place = selected[0];
-        } else {
-            place = places.keys()[0];
-        }
-        m_source = QString("%1|weather|%2").arg(result[0]).arg(place);
-        if (!places[place].isEmpty()) {
-            m_source += QString("|%1").arg(places[place]);
-        }
+    if (!source.isEmpty()) {
+        m_source = source;
         accept();
-    } else if (result[1] == "timeout") {
-        KMessageBox::error(this, i18n("Timeout happened when trying to connect weather server."));
-    } else {
-        KMessageBox::error(this, i18n("Cannot find '%1'.", result[3]));
     }
 }
 
@@ -101,6 +133,7 @@ QString WeatherConfigSearch::nameForPlugin(const QString& plugin)
 void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
 {
     m_dataengine = dataengine;
+    m_validator.setDataEngine(dataengine);
 
     providerComboBox->clear();
     if (m_dataengine) {
