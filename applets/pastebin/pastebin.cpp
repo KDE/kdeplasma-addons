@@ -42,9 +42,8 @@
 #include <kio/job.h>
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args), m_textServer(0),
-      m_imageServer(0), m_textBackend(0), m_imageBackend(0),
-      m_graphicsWidget(0)
+    : Plasma::PopupApplet(parent, args),m_graphicsWidget(0), m_textServer(0),
+      m_imageServer(0), m_textBackend(0), m_imageBackend(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
