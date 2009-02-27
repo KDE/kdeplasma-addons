@@ -87,12 +87,14 @@ void ListForm::clicked(const QModelIndex &index)
 {
     QList<WId> windows = KWindowSystem::stackingOrder();
     KWindowInfo info;
+    static const QStringList classes =
+            QStringList() << "Plasma" << "Plasma-desktop" << "Plasmoidviewer";
 
     // Don't paste to plasma windows
     for (int i = windows.count() - 1; i >= 0; --i) {
         info = KWindowSystem::windowInfo(windows[i], 0, NET::WM2WindowClass);
         //kDebug() << info.windowClassClass();
-        if (info.windowClassClass() == "Plasma" || info.windowClassClass() == "Plasmoidviewer") {
+        if (classes.contains(info.windowClassClass())) {
             if (i > 0) {
                 continue;
             }
