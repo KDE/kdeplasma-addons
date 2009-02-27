@@ -30,10 +30,12 @@
 #include "weatherconfig.h"
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
+    : Plasma::PopupApplet(parent, args), m_lcd(0), m_lcdPanel(0), m_locationEngine(0)
 {
     setHasConfigurationInterface(true);
     resize(250, 350);
+    connect(&m_validator, SIGNAL(finished(const QString&)),
+            this, SLOT(finished(const QString&)));
 }
 
 WeatherStation::~WeatherStation()
@@ -71,6 +73,7 @@ void WeatherStation::init()
     setBackground();
 
     m_weatherEngine = dataEngine("weather");
+    m_validator.setDataEngine(m_weatherEngine);
     setLCDIcon();
     connectToEngine();
 }
@@ -78,12 +81,40 @@ void WeatherStation::init()
 void WeatherStation::connectToEngine()
 {
     if (m_source.isEmpty()) {
-        setConfigurationRequired(true);
+        m_locationEngine = dataEngine("geolocation");
+        if (m_locationEngine->isValid()) {
+            m_locationEngine->connectSource("location", this);
+            setBusy(true);
+        } else {
+            setConfigurationRequired(true);
+        }
     } else {
         m_lcd->setNumber("temperature", "Load");
         m_lcd->setNumber("humidity", "ing");
         //kDebug() << m_source;
         m_weatherEngine->connectSource(m_source, this, m_updateInterval * 60 * 1000);
+    }
+}
+
+void WeatherStation::tryCity(const QString& city)
+{
+    QString tmp = city.left(city.indexOf(','));
+    //kDebug() << city << tmp;
+    if (!tmp.isEmpty()) {
+        m_validator.validate("bbcukmet", tmp, true);
+        return;
+    }
+    setConfigurationRequired(true);
+}
+
+void WeatherStation::finished(const QString &source)
+{
+    setBusy(false);
+    if (!source.isEmpty()) {
+        m_source = source;
+        connectToEngine();
+    } else {
+        setConfigurationRequired(true);
     }
 }
 
@@ -152,7 +183,11 @@ void WeatherStation::setLCDIcon()
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
     //kDebug() << source << data;
-    Q_UNUSED(source);
+    if (source == "location") {
+        tryCity(data["city"].toString());
+        m_locationEngine->disconnectSource(source, this);
+        return;
+    }
     if (data.isEmpty()) {
         return;
     }
