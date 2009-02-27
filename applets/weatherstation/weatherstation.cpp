@@ -112,6 +112,9 @@ void WeatherStation::finished(const QString &source)
     setBusy(false);
     if (!source.isEmpty()) {
         m_source = source;
+        KConfigGroup cfg = config();
+        cfg.writeEntry("source", m_source);
+        emit configNeedsSaving();
         connectToEngine();
     } else {
         setConfigurationRequired(true);
