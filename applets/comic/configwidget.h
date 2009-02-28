@@ -21,7 +21,8 @@
 #ifndef CONFIGWIDGET_H
 #define CONFIGWIDGET_H
 
-#include "ui_config.h"
+#include "ui_appearanceSettings.h"
+#include "ui_comicSettings.h"
 
 #include <QtGui/QWidget>
 #include <Plasma/DataEngine>
@@ -57,6 +58,9 @@ class ConfigWidget : public QWidget
         void setReloadTime( int minutes );
         int reloadTime() const;
 
+        QWidget *comicSettings;
+        QWidget *appearanceSettings;
+
     Q_SIGNALS:
         void maxSizeClicked();
 
@@ -65,7 +69,8 @@ class ConfigWidget : public QWidget
         void getNewStuff();
 
     private:
-        Ui::config ui;
+        Ui::ComicSettings comicUi;
+        Ui::AppearanceSettings appearanceUi;
         ComicModel *mModel;
         Plasma::DataEngine *mEngine;
         QSortFilterProxyModel *mProxyModel;

@@ -81,15 +81,20 @@ class ComicModel : public QAbstractListModel
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     : QWidget( parent ), mEngine( engine )
 {
-    ui.setupUi( this );
-    connect( ui.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
-    connect( ui.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
+    comicSettings = new QWidget();
+    comicUi.setupUi( comicSettings );
+
+    appearanceSettings = new QWidget();
+    appearanceUi.setupUi( appearanceSettings );
+
+    connect( appearanceUi.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
+    connect( comicUi.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
     mProxyModel->sort( 0, Qt::AscendingOrder );
-    ui.comboBox_comic->setModel( mProxyModel );
+    comicUi.comboBox_comic->setModel( mProxyModel );
     if ( mModel->rowCount() < 1 ) {
         QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
     }
@@ -114,13 +119,13 @@ void ConfigWidget::getNewStuff()
 
 void ConfigWidget::setComicIdentifier( const QString &comic )
 {
-    if ( comic.isEmpty() && ui.comboBox_comic->count() > 0 ) {
-        ui.comboBox_comic->setCurrentIndex( 0 );
+    if ( comic.isEmpty() && comicUi.comboBox_comic->count() > 0 ) {
+        comicUi.comboBox_comic->setCurrentIndex( 0 );
     } else {
         for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
             const QModelIndex index = mProxyModel->index( i, 0 );
             if ( index.data( Qt::UserRole ).toString() == comic ) {
-                ui.comboBox_comic->setCurrentIndex( i );
+                comicUi.comboBox_comic->setCurrentIndex( i );
                 break;
             }
         }
@@ -129,78 +134,78 @@ void ConfigWidget::setComicIdentifier( const QString &comic )
 
 QString ConfigWidget::comicIdentifier() const
 {
-    const QModelIndex index = mProxyModel->index( ui.comboBox_comic->currentIndex(), 0 );
+    const QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
     return index.data( Qt::UserRole ).toString();
 }
 
 void ConfigWidget::setShowComicUrl( bool show )
 {
-    ui.checkBox_url->setChecked( show );
+    appearanceUi.checkBox_url->setChecked( show );
 }
 
 bool ConfigWidget::showComicUrl() const
 {
-    return ui.checkBox_url->isChecked();
+    return appearanceUi.checkBox_url->isChecked();
 }
 
 void ConfigWidget::setShowComicAuthor( bool show )
 {
-    ui.checkBox_author->setChecked( show );
+    appearanceUi.checkBox_author->setChecked( show );
 }
 
 bool ConfigWidget::showComicAuthor() const
 {
-    return ui.checkBox_author->isChecked();
+    return appearanceUi.checkBox_author->isChecked();
 }
 
 void ConfigWidget::setShowComicTitle( bool show )
 {
-    ui.checkBox_title->setChecked( show );
+    appearanceUi.checkBox_title->setChecked( show );
 }
 
 bool ConfigWidget::showComicTitle() const
 {
-    return ui.checkBox_title->isChecked();
+    return appearanceUi.checkBox_title->isChecked();
 }
 
 void ConfigWidget::setShowComicIdentifier( bool show )
 {
-    ui.checkBox_identifier->setChecked( show );
+    appearanceUi.checkBox_identifier->setChecked( show );
 }
 
 bool ConfigWidget::showComicIdentifier() const
 {
-    return ui.checkBox_identifier->isChecked();
+    return appearanceUi.checkBox_identifier->isChecked();
 }
 
 void ConfigWidget::setArrowsOnHover( bool arrows )
 {
-    return ui.checkBox_arrows->setChecked( arrows );
+    return appearanceUi.checkBox_arrows->setChecked( arrows );
 }
 
 bool ConfigWidget::arrowsOnHover() const
 {
-    return ui.checkBox_arrows->isChecked();
+    return appearanceUi.checkBox_arrows->isChecked();
 }
 
 void ConfigWidget::setMiddleClick( bool checked )
 {
-    ui.checkBox_middle->setChecked( checked );
+    comicUi.checkBox_middle->setChecked( checked );
 }
 
 bool ConfigWidget::middleClick() const
 {
-    return ui.checkBox_middle->isChecked();
+    return comicUi.checkBox_middle->isChecked();
 }
 
 void ConfigWidget::setReloadTime( int minutes )
 {
-    ui.spinBox_Reload->setValue( minutes );
+    comicUi.spinBox_Reload->setValue( minutes );
 }
 
 int ConfigWidget::reloadTime() const
 {
-    return ui.spinBox_Reload->value();
+    return comicUi.spinBox_Reload->value();
 }
 
 #include "configwidget.moc"

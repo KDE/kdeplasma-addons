@@ -357,7 +357,8 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setMiddleClick( mMiddleClick );
     mConfigWidget->setReloadTime( mReloadTime );
 
-    parent->addPage( mConfigWidget, i18n("General"), icon() );
+    parent->addPage( mConfigWidget->comicSettings, i18n( "Comic" ), icon() );
+    parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
 
     connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
