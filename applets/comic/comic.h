@@ -29,19 +29,19 @@
 #include <plasma/applet.h>
 #include <plasma/dataengine.h>
 
+class ArrowWidget;
 class ConfigWidget;
 class FadingItem;
 class FullViewWidget;
+class ImageWidget;
 class KDatePicker;
 class QTimer;
 class QAction;
-class QGraphicsSceneWheelEvent;
 
 namespace Plasma {
 class Frame;
+class Label;
 class PushButton;
-class ScrollBar;
-class Svg;
 }
 
 class ComicApplet : public Plasma::Applet
@@ -53,7 +53,6 @@ class ComicApplet : public Plasma::Applet
         ~ComicApplet();
 
         void init();
-        void paintInterface( QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect );
         virtual QList<QAction*> contextualActions();
 
     public Q_SLOTS:
@@ -73,18 +72,16 @@ class ComicApplet : public Plasma::Applet
         void slotShop();
         void slotStorePosition();
         void slotSizeChanged();
-        void slotScroll();
         void slotShowMaxSize();
         void applyConfig();
         void checkDayChanged();
         void buttonBar();
+        void createLayout();
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
-        void wheelEvent( QGraphicsSceneWheelEvent* );
         void hoverEnterEvent( QGraphicsSceneHoverEvent* );
-        void hoverMoveEvent( QGraphicsSceneHoverEvent * );
         void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
         void constraintsEvent( Plasma::Constraints constraints );
 
@@ -95,11 +92,6 @@ class ComicApplet : public Plasma::Applet
         void loadConfig();
         void saveConfig();
         void updateSize();
-        void updateScrollBars();
-        bool mouseCursorInside( const QRectF &rect, const QPointF &position );
-
-        enum Rects { Top, WebsiteURL, Identifier, PreviousButton,
-                     NextButton, ScrollBarVert, ScrollBarHoriz, Image };
 
         QImage mImage;
         QDate mCurrentDay;
@@ -137,7 +129,6 @@ class ComicApplet : public Plasma::Applet
         QAction *mActionScaleContent;
         QAction *mActionShop;
         QAction *mActionStorePosition;
-        QHash< Rects, QRectF > mRects;
         QMap< QString, int > mFirstStripNum;
         QMap< QString, int > mMaxStripNum;
         QSizeF mMaxSize;
@@ -147,11 +138,15 @@ class ComicApplet : public Plasma::Applet
         Plasma::DataEngine *mEngine;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
+        Plasma::Label *mLabelId;
+        Plasma::Label *mLabelTop;
+        Plasma::Label *mLabelUrl;
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
-        Plasma::ScrollBar *mScrollBarVert;
-        Plasma::ScrollBar *mScrollBarHoriz;
-        Plasma::Svg *mSvg;
+
+        ImageWidget *mImageWidget;
+        ArrowWidget *mLeftArrow;
+        ArrowWidget *mRightArrow;
         int mReloadTime;
         KDatePicker *mCalendar;
 };

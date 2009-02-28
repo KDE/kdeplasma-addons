@@ -4,7 +4,9 @@ set(comic_SRCS
     comic.cpp
     configwidget.cpp
     fullviewwidget.cpp
-    fadingitem.cpp)
+    fadingitem.cpp
+    imagewidget.cpp
+    arrowwidget.cpp)
 
 kde4_add_ui_files( comic_SRCS config.ui )
 
