@@ -42,19 +42,27 @@ void AlbumArt::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
 {
     Q_UNUSED(widget);
 
-    if (!m_pixmap.isNull())
-    {
-        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
-        qreal inverseScaleFactor = qMax(m_pixmap.width() / size().width(), m_pixmap.height() / size().height());
-        QRectF sourceRect = option->exposedRect;
-        sourceRect.setSize(sourceRect.size() * inverseScaleFactor);
-        painter->drawPixmap(option->exposedRect, m_pixmap, sourceRect);
+    if (m_pixmap.isNull())
+        return;
+
+    if (m_scaledPixmap.size() != size()) {
+        QSize scaledSize (m_pixmap.size());
+        scaledSize.scale (size().toSize(), Qt::KeepAspectRatio);
+
+        if (m_scaledPixmap.size() != scaledSize) {
+            // Faster smooth transformation if scaledSize is noticeably smaller than m_pixmap
+            m_scaledPixmap = m_pixmap.scaled(2 * scaledSize)
+                                     .scaled(scaledSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        }
     }
+
+    painter->drawPixmap(0, 0, m_scaledPixmap);
 }
 
 void AlbumArt::setPixmap(const QPixmap& pixmap)
 {
     m_pixmap = pixmap;
+    m_scaledPixmap = QPixmap();
     if (pixmap.isNull()) {
         hide();
         updateGeometry();

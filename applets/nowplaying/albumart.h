@@ -46,6 +46,7 @@ protected:
 
 private:
     QPixmap m_pixmap;
+    QPixmap m_scaledPixmap;
 };
 
 #endif // ALBUMART_H
