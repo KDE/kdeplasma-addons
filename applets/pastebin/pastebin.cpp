@@ -59,14 +59,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 
 Pastebin::~Pastebin()
 {
-    /*
-    delete m_displayEdit;
-    delete m_textServer;
-    delete m_imageServer;
-    delete m_graphicsWidget;
-    delete timer;
 
-    */
 }
 
 void Pastebin::setImageServer(int backend)
@@ -236,8 +229,7 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
     p->setRenderHint(QPainter::Antialiasing);
 
     // Draw background
-    QColor bg = QColor("black");
-    bg.setAlphaF(m_alpha * 0.5);
+    QColor bg = QColor(0, 0, 0, m_alpha * 127);
 
     p->setBrush(bg);
     p->drawRect(contentsRect);
@@ -263,20 +255,17 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
         QPainter painter;
         painter.begin(&pixmap);
 
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
         painter.drawPixmap(QPoint(0,0), iconpix);
 
-        // For testing ...
-        //painter.setBrush(QColor("green"));
-        painter.drawRect(iconpix.rect());
-
         painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha * 255));
+        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha * 254));
         painter.end();
-        p->drawPixmap(iconOrigin, pixmap);
 
+        // draw the pixmap
+        p->drawPixmap(iconOrigin, pixmap);
     } else {
         // FIXME: Works, but makes hw acceleration impossible, use above code path
-        //kDebug() << "using setOpacity ..." << pix_alpha;
         qreal o = p->opacity();
         p->setOpacity(pix_alpha);
         p->drawPixmap(iconOrigin, iconpix);
