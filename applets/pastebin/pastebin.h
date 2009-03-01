@@ -97,7 +97,7 @@ protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void createConfigurationInterface(KConfigDialog *parent);
     void paintPixmap(QPainter *painter, QPixmap &pixmap,
-                     const QRect &rect, qreal opacity = 1.0);
+                     const QRectF &rect, qreal opacity = 1.0);
 
 private Q_SLOTS:
     void animationUpdate(qreal progress);
@@ -120,6 +120,8 @@ private:
 
     QFont m_font;
     QColor m_fgColor;
+    QColor m_bgColor;
+    KIcon* m_icon;
     QGraphicsWidget *m_graphicsWidget;
 
     DraggableLabel *m_resultsLabel;

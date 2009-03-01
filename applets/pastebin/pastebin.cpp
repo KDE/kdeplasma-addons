@@ -75,7 +75,7 @@ void Pastebin::setImageServer(int backend)
 
     case Pastebin::IMAGESHACK:
         m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer(config()));
-	break;
+        break;
     }
 
     m_imageBackend = backend;
@@ -118,6 +118,8 @@ void Pastebin::init()
     setBackgroundHints(TranslucentBackground);
     m_actionState = Idle;
     m_interactionState = Waiting;
+    m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
+
     updateTheme();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
 
@@ -126,8 +128,10 @@ void Pastebin::init()
 void Pastebin::updateTheme()
 {
     m_font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+    m_font.setBold(true);
     m_fgColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-    kDebug() << "Color" << m_fgColor;
+    m_bgColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+    kDebug() << "Color" << m_bgColor << m_fgColor;
     update();
 }
 
@@ -194,7 +198,7 @@ void Pastebin::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
         int minSize = KGlobalSettings::smallestReadableFont().pointSize();
-        int dynSize = qMin(contentsRect().width(), contentsRect().height()) / 6;
+        int dynSize = qMax(1.0, qMin(contentsRect().width(), contentsRect().height()) / 4);
         kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
         m_font.setPointSize(qMax(minSize, dynSize));
     }
@@ -221,7 +225,7 @@ int Pastebin::iconSize()
     return s;
 }
 
-void Pastebin::paintPixmap(QPainter *painter, QPixmap &pixmap, const QRect &rect, qreal opacity)
+void Pastebin::paintPixmap(QPainter *painter, QPixmap &pixmap, const QRectF &rect, qreal opacity)
 {
     int size = pixmap.size().width();
     QPointF iconOrigin = QPointF(rect.left() + (rect.width() - size) / 2,
@@ -257,15 +261,38 @@ void Pastebin::paintPixmap(QPainter *painter, QPixmap &pixmap, const QRect &rect
 
 void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, const QRect &contentsRect)
 {
+    if (!contentsRect.isValid()) {
+        return;
+    }
+
+    p->setRenderHint(QPainter::SmoothPixmapTransform);
+    p->setRenderHint(QPainter::Antialiasing);
+
     // Fade in the icon on top of it
     int iconsize = iconSize();
-    KIcon m_icon = KIcon("edit-paste"); // TODO: make member (for caching)
-    QPixmap iconpix = m_icon.pixmap(QSize(iconsize, iconsize));
+    QPixmap iconpix = m_icon->pixmap(QSize(iconsize, iconsize));
     qreal pix_alpha = 1.0 - (0.5 * m_alpha); // Fading out to .5
 
-    paintPixmap(p, iconpix, contentsRect, pix_alpha);
+    QPointF iconOrigin = QPointF(contentsRect.left() + (contentsRect.width() - iconsize) / 2,
+                                 contentsRect.top() + (contentsRect.height() - iconsize) / 2);
+    QRectF iconRect = QRectF(iconOrigin, QSize(iconsize, iconsize));
+
+    paintPixmap(p, iconpix, iconRect, pix_alpha);
 
     p->setFont(m_font);
+    p->setPen(m_fgColor);
+
+    // Draw background
+    m_bgColor.setAlphaF(m_alpha * 0.5);
+    m_fgColor.setAlphaF(m_alpha * 0.3);
+
+    p->setBrush(m_bgColor);
+    p->setPen(m_fgColor);
+
+    qreal proportion = contentsRect.width() / contentsRect.height();
+    qreal round_radius = 35.0;
+    p->drawRoundedRect(contentsRect, round_radius / proportion, round_radius, Qt::RelativeSize);
+    m_fgColor.setAlphaF(m_alpha);
     p->setPen(m_fgColor);
     p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
 }
