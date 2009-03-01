@@ -179,21 +179,25 @@ void Pastebin::setActionState(ActionState state)
             break;
         case Idle:
             kDebug() << "Idle";
+            setBusy(false);
             toolTipData.setSubText(i18n("Idle"));
             toolTipData.setImage(KIcon("dialog-ok"));
             break;
         case IdleError:
             kDebug() << "IdleError";
+            setBusy(false);
             toolTipData.setSubText(i18n("Error during upload. Try again."));
             toolTipData.setImage(KIcon("dialog-ok"));
             break;
         case IdleSuccess:
             kDebug() << "IdleSuccess";
+            setBusy(false);
             toolTipData.setSubText(i18n("Successfully uploaded!"));
             toolTipData.setImage(KIcon("dialog-ok"));
             break;
         case Sending:
             kDebug() << "Sending";
+            setBusy(true);
             toolTipData.setSubText(i18n("Sending"));
             toolTipData.setImage(KIcon("dialog-ok"));
             break;
@@ -301,8 +305,10 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         return;
     }
 
-    p->setRenderHint(QPainter::SmoothPixmapTransform);
-    p->setRenderHint(QPainter::Antialiasing);
+    // BusyWidget is being shown
+    if (m_actionState == Sending) {
+        return;
+    }
 
     // Fade in the icon on top of it
     int iconsize = iconSize();
@@ -432,7 +438,6 @@ void Pastebin::configAccepted()
 
 void Pastebin::showResults(const QString &url)
 {
-    setBusy(false);
     timer->stop();
 
 //     m_resultsLabel->m_url = url;
@@ -443,8 +448,6 @@ void Pastebin::showResults(const QString &url)
 
 void Pastebin::showErrors()
 {
-    setBusy(false);
-
 //     m_resultsLabel->setText(i18n("Error during uploading! Please try again."));
 //     m_resultsLabel->m_url = KUrl();
     setActionState(IdleError);
@@ -484,7 +487,6 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
         bool validPath = false;
 
         QString text = event->mimeData()->text();
-        setBusy(true);
         setActionState(Sending);
         timer->start(20000);
 
@@ -541,7 +543,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
                 }
                 else {
-                    setBusy(false);
+                    setActionState(IdleError);
                     timer->stop();
                 }
 
