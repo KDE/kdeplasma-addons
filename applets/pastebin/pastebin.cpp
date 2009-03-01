@@ -43,6 +43,8 @@
 #include <kio/global.h>
 #include <kio/job.h>
 
+#include <Plasma/Theme>
+
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_graphicsWidget(0), m_textServer(0),
     m_imageServer(0), m_textBackend(0), m_imageBackend(0)
@@ -121,7 +123,48 @@ void Pastebin::init()
     setImageServer(imageBackend);
     resize(200, 200);
     setBackgroundHints(TranslucentBackground);
+    m_actionState = Idle;
+    m_interactionState = Waiting;
 
+}
+
+void Pastebin::updateTheme()
+{
+    m_font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+}
+
+void Pastebin::setInteractionState(InteractionState state)
+{
+
+    switch (state ) {
+
+        case Hovered:
+            kDebug() << "Hovered";
+            showOverlay(true);
+            break;
+        case Waiting:
+            kDebug() << "Waiting";
+            showOverlay(false);
+            break;
+        case DraggedOver:
+            kDebug() << "DraggedOver";
+            showOverlay(true);
+            break;
+        case Rejected:
+            kDebug() << "Rejected";
+            break;
+        default:
+            break;
+    }
+    m_interactionState = state;
+}
+
+void Pastebin::setActionState(ActionState state)
+{
+
+
+
+    m_actionState = state;
 }
 
 QGraphicsWidget *Pastebin::graphicsWidget()
@@ -147,6 +190,16 @@ QGraphicsWidget *Pastebin::graphicsWidget()
     m_graphicsWidget->setLayout(layout);
     m_graphicsWidget->setPreferredSize(200, 200);
     return m_graphicsWidget;
+}
+
+void Pastebin::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
+        int minSize = KGlobalSettings::smallestReadableFont().pointSize();
+        int dynSize = qMin(contentsRect().width(), contentsRect().height()) / 6;
+        kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
+        m_font.setPointSize(qMax(minSize, dynSize));
+    }
 }
 
 int Pastebin::iconSize()
@@ -194,7 +247,7 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
     QPointF iconOrigin = QPointF(contentsRect.left() + (contentsRect.width() - iconsize) / 2,
                                  contentsRect.top() + (contentsRect.height() - iconsize) / 2);
 
-    if (false && !p->paintEngine()->hasFeature(QPaintEngine::ConstantOpacity)) {
+    if (!p->paintEngine()->hasFeature(QPaintEngine::ConstantOpacity)) {
         // see http://techbase.kde.org/Development/Tutorials/Graphics/Performance#QPainter::setOpacity.28.29
         // Doesn't work yet ... but should be much faster on X11
         kDebug() << "new painter ..." << pix_alpha << iconpix.rect();
@@ -208,11 +261,11 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
         painter.drawPixmap(QPoint(0,0), iconpix);
 
         // For testing ...
-        painter.setBrush(QColor("green"));
+        //painter.setBrush(QColor("green"));
         painter.drawRect(iconpix.rect());
 
         painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha));
+        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha * 255));
         painter.end();
         p->drawPixmap(iconOrigin, pixmap);
 
@@ -224,18 +277,19 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
         p->drawPixmap(iconOrigin, iconpix);
         p->setOpacity(o);
     }
+    p->setFont(m_font);
+    p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
 }
 
 void Pastebin::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    showOverlay(true);
-    m_isHovered = true;
+    setInteractionState(Hovered);
     Applet::hoverEnterEvent(event);
 }
 
 void Pastebin::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    showOverlay(false);
+    setInteractionState(Waiting);
     Applet::hoverLeaveEvent(event);
 }
 
@@ -352,9 +406,19 @@ void Pastebin::openLink(const QString &link)
 
 void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
+    InteractionState istate = Rejected;
     if (event->mimeData()->hasFormat("text/plain")) {
         event->acceptProposedAction();
     }
+    foreach (const QString f, event->mimeData()->formats()) {
+        if (f.indexOf("image/") != -1) {
+            istate = DraggedOver;
+        }
+    }
+    if (event->mimeData()->hasImage()) {
+        istate = DraggedOver;
+    }
+    setInteractionState(istate);
 }
 
 void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)

@@ -56,11 +56,30 @@ public:
 
     void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                         const QRect &contents);
+    void constraintsEvent(Plasma::Constraints constraints);
 
     QGraphicsWidget *graphicsWidget();
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
     enum imageServers { IMAGEBINCA, IMAGESHACK };
+
+    enum InteractionState { /* What is the user doing, used for visual feedback on user actions */
+        Off = 0,            /* Not set */
+        Waiting = 1,        /* Applet hanging around idle */
+        Hovered = 2,        /* "empty" mouse over effect */
+        Rejected = 3,       /* unsuitable content is dragged over us */
+        DraggedOver = 5     /* suitable content is dragged over us */
+    };
+    //Q_DECLARE_FLAGS(InteractionStates, InteractionState)
+
+    enum ActionState {   /* What is the applet doing */
+        Unset = 0,       /* Not set */
+        Idle = 1,        /* The applet has been started but nothing done yet */
+        IdleError = 2,   /* The last action went wrong, but we're ready to give it another try */
+        IdleSuccess = 4, /* Last action succeeded */
+        Sending = 8      /* Sending data to the server, waiting for reply */
+    };
+    //Q_DECLARE_FLAGS(ActionStates, ActionState)
 
 public slots:
     void configAccepted();
@@ -81,15 +100,24 @@ protected:
 
 private Q_SLOTS:
     void animationUpdate(qreal progress);
+    void updateTheme();
 
 private:
     int iconSize();
     void showOverlay(bool show);
-    bool m_fadeIn;
+
+    void setInteractionState(InteractionState state);
+    void setActionState(ActionState state);
+
+    ActionState m_actionState;
+    InteractionState m_interactionState;
+
     bool m_isHovered;
+    bool m_fadeIn;
     int m_animId;
     qreal m_alpha;
 
+    QFont m_font;
     QGraphicsWidget *m_graphicsWidget;
 
     DraggableLabel *m_resultsLabel;
