@@ -214,7 +214,7 @@ void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::Qu
 {
     Q_UNUSED(context)
     QString data = match.data().toString();
-    if (data.startsWith("http://")) {
+    if (data.startsWith(QLatin1String("http://"))) {
         KToolInvocation::invokeBrowser(data);
     } else {
         QApplication::clipboard()->setText(data);
