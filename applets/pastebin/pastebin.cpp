@@ -125,12 +125,17 @@ void Pastebin::init()
     setBackgroundHints(TranslucentBackground);
     m_actionState = Idle;
     m_interactionState = Waiting;
+    updateTheme();
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
 
 }
 
 void Pastebin::updateTheme()
 {
     m_font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+    m_fgColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+    kDebug() << "Color" << m_fgColor;
+    update();
 }
 
 void Pastebin::setInteractionState(InteractionState state)
@@ -278,6 +283,7 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *optio
         p->setOpacity(o);
     }
     p->setFont(m_font);
+    p->setPen(m_fgColor);
     p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
 }
 

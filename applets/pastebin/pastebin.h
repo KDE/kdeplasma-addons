@@ -118,6 +118,7 @@ private:
     qreal m_alpha;
 
     QFont m_font;
+    QColor m_fgColor;
     QGraphicsWidget *m_graphicsWidget;
 
     DraggableLabel *m_resultsLabel;
