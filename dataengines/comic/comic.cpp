@@ -173,7 +173,7 @@ void ComicEngine::finished( ComicProvider *provider )
     // different comic -- with no error yet -- has been chosen, old error is invalidated
     QString temp = mIdentifierError.left( mIdentifierError.indexOf( ':' ) + 1 );
     if ( !mIdentifierError.isEmpty() && provider->identifier().indexOf( temp ) == -1 ) {
-        mIdentifierError = QString();
+        mIdentifierError.clear();
     }
 
     // store in cache if it's not the response of a CachedProvider,
