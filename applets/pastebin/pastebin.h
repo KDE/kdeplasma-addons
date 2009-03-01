@@ -27,7 +27,7 @@
 #include <KDE/KIO/TransferJob>
 #include <KDE/KIO/Job>
 
-#include <Plasma/PopupApplet>
+#include <Plasma/Applet>
 #include <Plasma/Label>
 
 #include <QTimer>
@@ -43,7 +43,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
-class Pastebin : public Plasma::PopupApplet
+class Pastebin : public Plasma::Applet
 {
     Q_OBJECT
 public:
@@ -54,6 +54,9 @@ public:
     void setTextServer(int backend);
     void setImageServer(int backend);
 
+    void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                        const QRect &contents);
+
     QGraphicsWidget *graphicsWidget();
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
@@ -62,7 +65,10 @@ public:
 public slots:
     void configAccepted();
 
-protected slots:
+
+protected Q_SLOTS:
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
     void showResults(const QString &url);
     void showErrors();
     void openLink(const QString &link);
@@ -73,7 +79,17 @@ protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void createConfigurationInterface(KConfigDialog *parent);
 
+private Q_SLOTS:
+    void animationUpdate(qreal progress);
+
 private:
+    int iconSize();
+    void showOverlay(bool show);
+    bool m_fadeIn;
+    bool m_isHovered;
+    int m_animId;
+    qreal m_alpha;
+
     QGraphicsWidget *m_graphicsWidget;
 
     DraggableLabel *m_resultsLabel;

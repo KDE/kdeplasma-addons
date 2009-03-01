@@ -30,6 +30,8 @@
 #include <QUrl>
 #include <QFile>
 #include <QBuffer>
+#include <QPainter>
+#include <QPaintEngine>
 
 #include <KDebug>
 #include <KLocale>
@@ -42,25 +44,27 @@
 #include <kio/job.h>
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args),m_graphicsWidget(0), m_textServer(0),
-      m_imageServer(0), m_textBackend(0), m_imageBackend(0)
+    : Plasma::Applet(parent, args), m_graphicsWidget(0), m_textServer(0),
+    m_imageServer(0), m_textBackend(0), m_imageBackend(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    setPopupIcon("edit-paste");
-
+    setAspectRatioMode(Plasma::KeepAspectRatio);
+    setMinimumSize(16, 16);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 }
 
 Pastebin::~Pastebin()
 {
+    /*
     delete m_displayEdit;
     delete m_textServer;
     delete m_imageServer;
     delete m_graphicsWidget;
     delete timer;
+
+    */
 }
 
 void Pastebin::setImageServer(int backend)
@@ -115,6 +119,9 @@ void Pastebin::init()
     int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
     setTextServer(textBackend);
     setImageServer(imageBackend);
+    resize(200, 200);
+    setBackgroundHints(TranslucentBackground);
+
 }
 
 QGraphicsWidget *Pastebin::graphicsWidget()
@@ -141,6 +148,128 @@ QGraphicsWidget *Pastebin::graphicsWidget()
     m_graphicsWidget->setPreferredSize(200, 200);
     return m_graphicsWidget;
 }
+
+int Pastebin::iconSize()
+{
+    // return the biggest fitting icon size from KIconLoader
+    int c = qMin(contentsRect().width(), contentsRect().height());
+    int s;
+    if (c >= KIconLoader::SizeEnormous) { // 128
+        s = KIconLoader::SizeEnormous;
+    } else if (c >= KIconLoader::SizeHuge) { // 64
+        s = KIconLoader::SizeHuge;
+    } else if (c >= KIconLoader::SizeLarge) { // 48
+        s = KIconLoader::SizeLarge;
+    } else if (c >= KIconLoader::SizeMedium) { // 32
+        s = KIconLoader::SizeMedium;
+    } else if (c >= KIconLoader::SizeSmallMedium) { // 32
+        s = KIconLoader::SizeSmallMedium;
+    } else { // 16
+        s = KIconLoader::SizeSmall;
+    }
+    return s;
+}
+
+void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
+{
+    Q_UNUSED( option );
+
+    p->setRenderHint(QPainter::SmoothPixmapTransform);
+    p->setRenderHint(QPainter::Antialiasing);
+
+    // Draw background
+    QColor bg = QColor("black");
+    bg.setAlphaF(m_alpha * 0.5);
+
+    p->setBrush(bg);
+    p->drawRect(contentsRect);
+    // Fade in the icon on top of it
+    int iconsize = iconSize();
+    KIcon m_icon = KIcon("edit-paste"); // TODO: make member (for caching)
+    QPixmap iconpix = m_icon.pixmap(QSize(iconsize, iconsize));
+
+    qreal pix_alpha = 1.0 - (0.5 * m_alpha); // Fading out to .5
+    //kDebug() << "A:" << pix_alpha;
+
+    QPointF iconOrigin = QPointF(contentsRect.left() + (contentsRect.width() - iconsize) / 2,
+                                 contentsRect.top() + (contentsRect.height() - iconsize) / 2);
+
+    if (false && !p->paintEngine()->hasFeature(QPaintEngine::ConstantOpacity)) {
+        // see http://techbase.kde.org/Development/Tutorials/Graphics/Performance#QPainter::setOpacity.28.29
+        // Doesn't work yet ... but should be much faster on X11
+        kDebug() << "new painter ..." << pix_alpha << iconpix.rect();
+
+        QPixmap pixmap(QSize(iconsize, iconsize));
+        pixmap.fill(Qt::transparent);
+
+        QPainter painter;
+        painter.begin(&pixmap);
+
+        painter.drawPixmap(QPoint(0,0), iconpix);
+
+        // For testing ...
+        painter.setBrush(QColor("green"));
+        painter.drawRect(iconpix.rect());
+
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha));
+        painter.end();
+        p->drawPixmap(iconOrigin, pixmap);
+
+    } else {
+        // FIXME: Works, but makes hw acceleration impossible, use above code path
+        //kDebug() << "using setOpacity ..." << pix_alpha;
+        qreal o = p->opacity();
+        p->setOpacity(pix_alpha);
+        p->drawPixmap(iconOrigin, iconpix);
+        p->setOpacity(o);
+    }
+}
+
+void Pastebin::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    showOverlay(true);
+    m_isHovered = true;
+    Applet::hoverEnterEvent(event);
+}
+
+void Pastebin::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    showOverlay(false);
+    Applet::hoverLeaveEvent(event);
+}
+
+void Pastebin::showOverlay(bool show)
+{
+    if (m_fadeIn == show) {
+        return;
+    }
+    m_fadeIn = show;
+    const int FadeInDuration = 400;
+
+    if (m_animId != -1) {
+        Plasma::Animator::self()->stopCustomAnimation(m_animId);
+    }
+    m_animId = Plasma::Animator::self()->customAnimation(40 / (1000 / FadeInDuration), FadeInDuration,
+                                                      Plasma::Animator::EaseOutCurve, this,
+                                                      "animationUpdate");
+}
+
+void Pastebin::animationUpdate(qreal progress)
+{
+    if (progress == 1) {
+        m_animId = -1;
+    }
+    if (!m_fadeIn) {
+        qreal new_alpha = m_fadeIn ? progress : 1 - progress;
+        m_alpha = qMin(new_alpha, m_alpha);
+    } else {
+        m_alpha = m_fadeIn ? progress : 1 - progress;
+    }
+    m_alpha = qMax(qreal(0.0), m_alpha);
+    update();
+}
+
 
 void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 {
