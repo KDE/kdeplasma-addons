@@ -37,6 +37,7 @@
 #include <KLocale>
 #include <KConfigDialog>
 #include <KToolInvocation>
+
 #include <kmimetype.h>
 #include <ktemporaryfile.h>
 
@@ -116,13 +117,14 @@ void Pastebin::init()
     setImageServer(imageBackend);
     resize(200, 200);
     setBackgroundHints(TranslucentBackground);
-    m_actionState = Idle;
-    m_interactionState = Waiting;
+    setActionState(Idle);
+    setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
 
     updateTheme();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
-
+    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 }
 
 void Pastebin::updateTheme()
@@ -137,7 +139,6 @@ void Pastebin::updateTheme()
 
 void Pastebin::setInteractionState(InteractionState state)
 {
-
     switch (state ) {
 
         case Hovered:
@@ -163,9 +164,44 @@ void Pastebin::setInteractionState(InteractionState state)
 
 void Pastebin::setActionState(ActionState state)
 {
+    toolTipData = Plasma::ToolTipContent();
+    toolTipData.setAutohide(true);
 
+    toolTipData.setMainText("Status of the applet");
 
+    //TODO: choose icons for each state
 
+    switch (state ) {
+        case Unset:
+            kDebug() << "Unset";
+            toolTipData.setSubText(i18n("Unset"));
+            toolTipData.setImage(KIcon("dialog-ok"));
+            break;
+        case Idle:
+            kDebug() << "Idle";
+            toolTipData.setSubText(i18n("Idle"));
+            toolTipData.setImage(KIcon("dialog-ok"));
+            break;
+        case IdleError:
+            kDebug() << "IdleError";
+            toolTipData.setSubText(i18n("Error during upload. Try again."));
+            toolTipData.setImage(KIcon("dialog-ok"));
+            break;
+        case IdleSuccess:
+            kDebug() << "IdleSuccess";
+            toolTipData.setSubText(i18n("Successfully uploaded!"));
+            toolTipData.setImage(KIcon("dialog-ok"));
+            break;
+        case Sending:
+            kDebug() << "Sending";
+            toolTipData.setSubText(i18n("Sending"));
+            toolTipData.setImage(KIcon("dialog-ok"));
+            break;
+        default:
+            break;
+    }
+
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     m_actionState = state;
 }
 
@@ -399,20 +435,19 @@ void Pastebin::showResults(const QString &url)
     setBusy(false);
     timer->stop();
 
-    m_displayEdit->setVisible(true);
-    m_resultsLabel->setVisible(true);
-    m_resultsLabel->m_url = url;
-    m_resultsLabel->setText(i18n("Successfully uploaded to: <a href=\"%1\">%2</a><p>", url, url));
+//     m_resultsLabel->m_url = url;
+//     m_resultsLabel->setText(i18n("Successfully uploaded to: <a href=\"%1\">%2</a><p>", url, url));
+    setActionState(IdleSuccess);
     QApplication::clipboard()->setText(url);
 }
 
 void Pastebin::showErrors()
 {
     setBusy(false);
-    m_displayEdit->setVisible(true);
-    m_resultsLabel->setVisible(true);
-    m_resultsLabel->setText(i18n("Error during uploading! Please try again."));
-    m_resultsLabel->m_url = KUrl();
+
+//     m_resultsLabel->setText(i18n("Error during uploading! Please try again."));
+//     m_resultsLabel->m_url = KUrl();
+    setActionState(IdleError);
 }
 
 void Pastebin::openLink(const QString &link)
@@ -450,10 +485,9 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         QString text = event->mimeData()->text();
         setBusy(true);
+        setActionState(Sending);
         timer->start(20000);
 
-        m_displayEdit->setVisible(false);
-        m_resultsLabel->setVisible(false);
         QUrl testPath(text);
         validPath = QFile::exists(testPath.path());
 
@@ -548,4 +582,3 @@ void DraggableLabel::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 
 #include "pastebin.moc"
-

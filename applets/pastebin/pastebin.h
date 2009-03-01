@@ -29,6 +29,7 @@
 
 #include <Plasma/Applet>
 #include <Plasma/Label>
+#include <plasma/tooltipmanager.h>
 
 #include <QTimer>
 
@@ -124,6 +125,7 @@ private:
     KIcon* m_icon;
     QGraphicsWidget *m_graphicsWidget;
 
+    Plasma::ToolTipContent toolTipData;
     DraggableLabel *m_resultsLabel;
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
