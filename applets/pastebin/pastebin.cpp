@@ -221,56 +221,50 @@ int Pastebin::iconSize()
     return s;
 }
 
-void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
+void Pastebin::paintPixmap(QPainter *painter, QPixmap &pixmap, const QRect &rect, qreal opacity)
 {
-    Q_UNUSED( option );
+    int size = pixmap.size().width();
+    QPointF iconOrigin = QPointF(rect.left() + (rect.width() - size) / 2,
+                                 rect.top() + (rect.height() - size) / 2);
 
-    p->setRenderHint(QPainter::SmoothPixmapTransform);
-    p->setRenderHint(QPainter::Antialiasing);
+    painter->setRenderHint(QPainter::SmoothPixmapTransform);
+    painter->setRenderHint(QPainter::Antialiasing);
 
-    // Draw background
-    QColor bg = QColor(0, 0, 0, m_alpha * 127);
+    if (!painter->paintEngine()->hasFeature(QPaintEngine::ConstantOpacity)) {
+        QPixmap temp(QSize(size, size));
+        temp.fill(Qt::transparent);
 
-    p->setBrush(bg);
-    p->drawRect(contentsRect);
+        QPainter p;
+        p.begin(&temp);
+
+        p.setCompositionMode(QPainter::CompositionMode_Source);
+        p.drawPixmap(QPoint(0,0), pixmap);
+
+        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        p.fillRect(pixmap.rect(), QColor(0, 0, 0, opacity * 254));
+        p.end();
+
+        // draw the pixmap
+        painter->drawPixmap(iconOrigin, temp);
+    } else {
+        // FIXME: Works, but makes hw acceleration impossible, use above code path
+        qreal old = painter->opacity();
+        painter->setOpacity(opacity);
+        painter->drawPixmap(iconOrigin, pixmap);
+        painter->setOpacity(old);
+    }
+}
+
+void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, const QRect &contentsRect)
+{
     // Fade in the icon on top of it
     int iconsize = iconSize();
     KIcon m_icon = KIcon("edit-paste"); // TODO: make member (for caching)
     QPixmap iconpix = m_icon.pixmap(QSize(iconsize, iconsize));
-
     qreal pix_alpha = 1.0 - (0.5 * m_alpha); // Fading out to .5
-    //kDebug() << "A:" << pix_alpha;
 
-    QPointF iconOrigin = QPointF(contentsRect.left() + (contentsRect.width() - iconsize) / 2,
-                                 contentsRect.top() + (contentsRect.height() - iconsize) / 2);
+    paintPixmap(p, iconpix, contentsRect, pix_alpha);
 
-    if (!p->paintEngine()->hasFeature(QPaintEngine::ConstantOpacity)) {
-        // see http://techbase.kde.org/Development/Tutorials/Graphics/Performance#QPainter::setOpacity.28.29
-        // Doesn't work yet ... but should be much faster on X11
-        kDebug() << "new painter ..." << pix_alpha << iconpix.rect();
-
-        QPixmap pixmap(QSize(iconsize, iconsize));
-        pixmap.fill(Qt::transparent);
-
-        QPainter painter;
-        painter.begin(&pixmap);
-
-        painter.setCompositionMode(QPainter::CompositionMode_Source);
-        painter.drawPixmap(QPoint(0,0), iconpix);
-
-        painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        painter.fillRect(iconpix.rect(), QColor(0, 0, 0, pix_alpha * 254));
-        painter.end();
-
-        // draw the pixmap
-        p->drawPixmap(iconOrigin, pixmap);
-    } else {
-        // FIXME: Works, but makes hw acceleration impossible, use above code path
-        qreal o = p->opacity();
-        p->setOpacity(pix_alpha);
-        p->drawPixmap(iconOrigin, iconpix);
-        p->setOpacity(o);
-    }
     p->setFont(m_font);
     p->setPen(m_fgColor);
     p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));

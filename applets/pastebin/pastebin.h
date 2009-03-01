@@ -84,7 +84,6 @@ public:
 public slots:
     void configAccepted();
 
-
 protected Q_SLOTS:
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
@@ -97,6 +96,8 @@ protected:
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void createConfigurationInterface(KConfigDialog *parent);
+    void paintPixmap(QPainter *painter, QPixmap &pixmap,
+                     const QRect &rect, qreal opacity = 1.0);
 
 private Q_SLOTS:
     void animationUpdate(qreal progress);
