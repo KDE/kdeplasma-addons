@@ -573,6 +573,21 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
         case StringIdentifier:
             break;
         }
+    //check if the nextIdentifier is correct
+    } else if ( !mNextIdentifier.isNull() ) {
+        //no nextIdentifier if mIdentifier == mLastIdentifier
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            if ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ) {
+                return false;
+            }
+        case NumberIdentifier:
+            if ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ) {
+                return false;
+            }
+        case StringIdentifier:
+            break;
+        }
     }
     return mNextIdentifier;
 }
@@ -593,6 +608,20 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
                  ( !mFirstIdentifier.isNull() && mIdentifier.toInt() > mFirstIdentifier.toInt() ) ) {
                 return mIdentifier.toInt() - 1;
             } else {
+                return false;
+            }
+        case StringIdentifier:
+            break;
+        }
+    } else if ( !mPreviousIdentifier.isNull() ) {
+        //no previousIdentifier if mIdentifier == mFirstIdentifier
+        switch ( identifierType() ) {
+        case DateIdentifier:
+            if ( !mFirstIdentifier.isNull() && ( mIdentifier.toDate() == mFirstIdentifier.toDate() ) ) {
+                return false;
+            }
+        case NumberIdentifier:
+            if ( !mFirstIdentifier.isNull() && ( mIdentifier.toInt() == mFirstIdentifier.toInt() ) ) {
                 return false;
             }
         case StringIdentifier:
