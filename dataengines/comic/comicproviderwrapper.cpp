@@ -582,11 +582,13 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
                  !mIdentifierSpecified ) {
                 return false;
             }
+            break;
         case NumberIdentifier:
             if ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ||
                  !mIdentifierSpecified ) {
                 return false;
             }
+            break;
         case StringIdentifier:
             if ( !mIdentifierSpecified ) {
                 return false;
@@ -625,10 +627,12 @@ QVariant ComicProviderWrapper::previousIdentifierVariant() const
             if ( !mFirstIdentifier.isNull() && ( mIdentifier.toDate() == mFirstIdentifier.toDate() ) ) {
                 return false;
             }
+            break;
         case NumberIdentifier:
             if ( !mFirstIdentifier.isNull() && ( mIdentifier.toInt() == mFirstIdentifier.toInt() ) ) {
                 return false;
             }
+            break;
         case StringIdentifier:
             break;
         }
