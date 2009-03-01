@@ -575,17 +575,22 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
         }
     //check if the nextIdentifier is correct
     } else if ( !mNextIdentifier.isNull() ) {
-        //no nextIdentifier if mIdentifier == mLastIdentifier
+        //no nextIdentifier if mIdentifier == mLastIdentifier or if no identifier has been specified
         switch ( identifierType() ) {
         case DateIdentifier:
-            if ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ) {
+            if ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ||
+                 !mIdentifierSpecified ) {
                 return false;
             }
         case NumberIdentifier:
-            if ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ) {
+            if ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ||
+                 !mIdentifierSpecified ) {
                 return false;
             }
         case StringIdentifier:
+            if ( !mIdentifierSpecified ) {
+                return false;
+            }
             break;
         }
     }
