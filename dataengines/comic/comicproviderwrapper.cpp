@@ -578,13 +578,13 @@ QVariant ComicProviderWrapper::nextIdentifierVariant() const
         //no nextIdentifier if mIdentifier == mLastIdentifier or if no identifier has been specified
         switch ( identifierType() ) {
         case DateIdentifier:
-            if ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ||
+            if ( ( !mLastIdentifier.isNull() && ( mIdentifier.toDate() == mLastIdentifier.toDate() ) ) ||
                  !mIdentifierSpecified ) {
                 return false;
             }
             break;
         case NumberIdentifier:
-            if ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ||
+            if ( ( !mLastIdentifier.isNull() && ( mIdentifier.toInt() == mLastIdentifier.toInt() ) ) ||
                  !mIdentifierSpecified ) {
                 return false;
             }
