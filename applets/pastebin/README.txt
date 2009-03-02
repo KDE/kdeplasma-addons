@@ -8,9 +8,9 @@
 
 
 TODO:
-- main display should be icon: paintInterface does this
-- overlay for hovering
-- different texts / icons for overlay: idle, succeeded, error, busy
-- tooltips updated with status (see overlay)
+- main display should be icon: paintInterface does this (DONE)
+- overlay for hovering (DONE)
+- different texts / icons for overlay: idle, succeeded, error, busy (DONE)
+- tooltips updated with status (see overlay) (DONE)
 - notification on success / error
-- click on it copies into Clipboard
+- click on it copies into Clipboard (Right now it opens the link, as it automatically copies to the clipboard)
