@@ -93,6 +93,7 @@ protected Q_SLOTS:
     void openLink(const QString &link);
 
 protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -103,6 +104,7 @@ protected:
 private Q_SLOTS:
     void animationUpdate(qreal progress);
     void updateTheme();
+    void resetActionState();
 
 private:
     int iconSize();
@@ -130,6 +132,7 @@ private:
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
     PastebinServer *m_imageServer;
+    QString m_url;
 
     int m_textBackend;
     int m_imageBackend;

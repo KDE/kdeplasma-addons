@@ -120,6 +120,9 @@ void Pastebin::init()
     setActionState(Idle);
     setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
+    //    m_resultsLabel = new DraggableLabel(this);
+    //    m_resultsLabel->setVisible(false);
+    //    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
 
     updateTheme();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
@@ -140,7 +143,6 @@ void Pastebin::updateTheme()
 void Pastebin::setInteractionState(InteractionState state)
 {
     switch (state ) {
-
         case Hovered:
             kDebug() << "Hovered";
             showOverlay(true);
@@ -175,31 +177,33 @@ void Pastebin::setActionState(ActionState state)
         case Unset:
             kDebug() << "Unset";
             toolTipData.setSubText(i18n("Unset"));
-            toolTipData.setImage(KIcon("dialog-ok"));
+            toolTipData.setImage(KIcon("edit-paste"));
             break;
         case Idle:
             kDebug() << "Idle";
             setBusy(false);
             toolTipData.setSubText(i18n("Idle"));
-            toolTipData.setImage(KIcon("dialog-ok"));
+            toolTipData.setImage(KIcon("edit-paste"));
             break;
         case IdleError:
             kDebug() << "IdleError";
             setBusy(false);
             toolTipData.setSubText(i18n("Error during upload. Try again."));
-            toolTipData.setImage(KIcon("dialog-ok"));
+            toolTipData.setImage(KIcon("dialog-cancel"));
+            QTimer::singleShot(5000, this, SLOT(resetActionState()));
             break;
         case IdleSuccess:
             kDebug() << "IdleSuccess";
             setBusy(false);
             toolTipData.setSubText(i18n("Successfully uploaded!"));
             toolTipData.setImage(KIcon("dialog-ok"));
+            QTimer::singleShot(5000, this, SLOT(resetActionState()));
             break;
         case Sending:
             kDebug() << "Sending";
             setBusy(true);
             toolTipData.setSubText(i18n("Sending"));
-            toolTipData.setImage(KIcon("dialog-ok"));
+            toolTipData.setImage(KIcon("view-history"));
             break;
         default:
             break;
@@ -312,17 +316,19 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
 
     // Fade in the icon on top of it
     int iconsize = iconSize();
-    QPixmap iconpix = m_icon->pixmap(QSize(iconsize, iconsize));
     qreal pix_alpha = 1.0 - (0.5 * m_alpha); // Fading out to .5
 
     QPointF iconOrigin = QPointF(contentsRect.left() + (contentsRect.width() - iconsize) / 2,
                                  contentsRect.top() + (contentsRect.height() - iconsize) / 2);
     QRectF iconRect = QRectF(iconOrigin, QSize(iconsize, iconsize));
 
-    paintPixmap(p, iconpix, iconRect, pix_alpha);
-
-    p->setFont(m_font);
-    p->setPen(m_fgColor);
+    if (m_actionState == IdleSuccess) {
+        QPixmap iconok = KIcon("dialog-ok").pixmap(QSize(iconsize, iconsize));
+        paintPixmap(p, iconok, iconRect, pix_alpha);
+    } else {
+        QPixmap iconpix = m_icon->pixmap(QSize(iconsize, iconsize));
+        paintPixmap(p, iconpix, iconRect, pix_alpha);
+    }
 
     // Draw background
     m_bgColor.setAlphaF(m_alpha * 0.5);
@@ -336,7 +342,16 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
     p->drawRoundedRect(contentsRect, round_radius / proportion, round_radius, Qt::RelativeSize);
     m_fgColor.setAlphaF(m_alpha);
     p->setPen(m_fgColor);
-    p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
+
+    if (m_actionState == IdleSuccess) {
+        QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+        font.setPointSize(KGlobalSettings::smallestReadableFont().pointSize());
+        p->setFont(font);
+        p->drawText(contentsRect, Qt::AlignCenter, m_url);
+    } else {
+        p->setFont(m_font);
+        p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
+    }
 }
 
 void Pastebin::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -439,9 +454,9 @@ void Pastebin::configAccepted()
 void Pastebin::showResults(const QString &url)
 {
     timer->stop();
-
-//     m_resultsLabel->m_url = url;
-//     m_resultsLabel->setText(i18n("Successfully uploaded to: <a href=\"%1\">%2</a><p>", url, url));
+    m_url = url;
+    //    m_resultsLabel->m_url = url;
+    //    m_resultsLabel->setText(i18n("<a href=\"%1\">%2</a><p>", url, url));
     setActionState(IdleSuccess);
     QApplication::clipboard()->setText(url);
 }
@@ -456,6 +471,21 @@ void Pastebin::showErrors()
 void Pastebin::openLink(const QString &link)
 {
     KToolInvocation::invokeBrowser(link);
+}
+
+void Pastebin::resetActionState()
+{
+    setActionState(Idle);
+    update();
+}
+
+void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
+        Plasma::Applet::mousePressEvent(event);
+    } else {
+        openLink(m_url);
+    }
 }
 
 void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
