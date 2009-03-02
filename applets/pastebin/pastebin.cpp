@@ -325,6 +325,9 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
     if (m_actionState == IdleSuccess) {
         QPixmap iconok = KIcon("dialog-ok").pixmap(QSize(iconsize, iconsize));
         paintPixmap(p, iconok, iconRect, pix_alpha);
+    } else if (m_actionState == IdleError) {
+        QPixmap iconok = KIcon("dialog-cancel").pixmap(QSize(iconsize, iconsize));
+        paintPixmap(p, iconok, iconRect, pix_alpha);
     } else {
         QPixmap iconpix = m_icon->pixmap(QSize(iconsize, iconsize));
         paintPixmap(p, iconpix, iconRect, pix_alpha);
@@ -348,6 +351,12 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         font.setPointSize(KGlobalSettings::smallestReadableFont().pointSize());
         p->setFont(font);
         p->drawText(contentsRect, Qt::AlignCenter, m_url);
+    } else if (m_actionState == IdleError) {
+        QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+        font.setPointSize(KGlobalSettings::smallestReadableFont().pointSize());
+        font.setBold(true);
+        p->setFont(font);
+        p->drawText(contentsRect, Qt::AlignCenter, i18n("Error: Try Again"));
     } else {
         p->setFont(m_font);
         p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
