@@ -1,5 +1,16 @@
 [Global]
 Name=Pastebin
+Name[ar]=سلة اللصق
+Name[el]=Κάδος επικόλλησης
+Name[gl]=Apegar
+Name[nn]=Teksttavle
+Name[pt]=Colagem
+Name[ro]=Coș de lipire
+Name[sr]=корпа налепака
+Name[sr@latin]=korpa nalepaka
+Name[th]=ถังแปะ (Pastebin)
+Name[uk]=Вставлячка
+Name[x-test]=xxPastebinxx
 IconName=edit-paste
 Comment=Pastebin Widget
 Version=1
