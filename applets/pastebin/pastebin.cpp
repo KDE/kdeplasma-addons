@@ -136,6 +136,7 @@ void Pastebin::updateTheme()
     m_font.setBold(true);
     m_fgColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
     m_bgColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+    m_linePen = QPen(m_fgColor);
     kDebug() << "Color" << m_bgColor << m_fgColor;
     update();
 }
@@ -145,6 +146,8 @@ void Pastebin::setInteractionState(InteractionState state)
     switch (state ) {
         case Hovered:
             kDebug() << "Hovered";
+            m_linePen.setStyle(Qt::DotLine);
+            m_linePen.setWidth(2);
             showOverlay(true);
             break;
         case Waiting:
@@ -153,6 +156,8 @@ void Pastebin::setInteractionState(InteractionState state)
             break;
         case DraggedOver:
             kDebug() << "DraggedOver";
+            m_linePen.setStyle(Qt::DashLine);
+            m_linePen.setWidth(4);
             showOverlay(true);
             break;
         case Rejected:
@@ -182,7 +187,7 @@ void Pastebin::setActionState(ActionState state)
         case Idle:
             kDebug() << "Idle";
             setBusy(false);
-            toolTipData.setSubText(i18n("Idle"));
+            toolTipData.setSubText(i18n("Drop a text or an image onto me to upload it to Pastebin"));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case IdleError:
@@ -190,14 +195,16 @@ void Pastebin::setActionState(ActionState state)
             setBusy(false);
             toolTipData.setSubText(i18n("Error during upload. Try again."));
             toolTipData.setImage(KIcon("dialog-cancel"));
-            QTimer::singleShot(5000, this, SLOT(resetActionState()));
+            // Notification ...
+            QTimer::singleShot(30000, this, SLOT(resetActionState()));
             break;
         case IdleSuccess:
             kDebug() << "IdleSuccess";
             setBusy(false);
-            toolTipData.setSubText(i18n("Successfully uploaded!"));
+            toolTipData.setSubText(i18n("Successfully uploaded to %1!", m_url));
             toolTipData.setImage(KIcon("dialog-ok"));
-            QTimer::singleShot(5000, this, SLOT(resetActionState()));
+            // Notification ...
+            QTimer::singleShot(30000, this, SLOT(resetActionState()));
             break;
         case Sending:
             kDebug() << "Sending";
@@ -243,7 +250,7 @@ void Pastebin::constraintsEvent(Plasma::Constraints constraints)
     if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
         int minSize = KGlobalSettings::smallestReadableFont().pointSize();
         int dynSize = qMax(1.0, qMin(contentsRect().width(), contentsRect().height()) / 4);
-        kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
+        //kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
         m_font.setPointSize(qMax(minSize, dynSize));
     }
 }
@@ -305,7 +312,7 @@ void Pastebin::paintPixmap(QPainter *painter, QPixmap &pixmap, const QRectF &rec
 
 void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, const QRect &contentsRect)
 {
-    if (!contentsRect.isValid()) {
+    if (!contentsRect.isValid() || isBusy()) {
         return;
     }
 
@@ -333,17 +340,34 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         paintPixmap(p, iconpix, iconRect, pix_alpha);
     }
 
+
     // Draw background
-    m_bgColor.setAlphaF(m_alpha * 0.5);
-    m_fgColor.setAlphaF(m_alpha * 0.3);
+    if (m_interactionState == DraggedOver) {
+        m_fgColor.setAlphaF(m_alpha);
+    } else if (m_interactionState == Hovered) {
+        m_fgColor.setAlphaF(m_alpha * 0.15);
+    } else {
+        // Whatever, as long as it goes down to 0
+        m_fgColor.setAlphaF(m_alpha * 0.15);
+    }
+    m_bgColor.setAlphaF(m_alpha * 0.3);
 
     p->setBrush(m_bgColor);
-    p->setPen(m_fgColor);
+    m_linePen.setColor(m_fgColor);
+    p->setPen(m_linePen);
+    p->setFont(m_font);
 
     qreal proportion = contentsRect.width() / contentsRect.height();
     qreal round_radius = 35.0;
     p->drawRoundedRect(contentsRect, round_radius / proportion, round_radius, Qt::RelativeSize);
-    m_fgColor.setAlphaF(m_alpha);
+
+    QString hoverText = i18n("Drop!");
+    if (m_interactionState == DraggedOver) {
+        m_fgColor.setAlphaF(m_alpha * 0.8);
+    } else if (m_interactionState == Hovered) {
+        m_fgColor.setAlphaF(m_alpha * 0.6);
+    }
+    p->drawText(contentsRect, Qt::AlignCenter, hoverText);
     p->setPen(m_fgColor);
 
     if (m_actionState == IdleSuccess) {
@@ -508,10 +532,15 @@ void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
             istate = DraggedOver;
         }
     }
-    if (event->mimeData()->hasImage()) {
+    if (event->mimeData()->hasImage() || event->mimeData()->hasText()) {
         istate = DraggedOver;
     }
     setInteractionState(istate);
+}
+
+void Pastebin::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    setInteractionState(Waiting);
 }
 
 void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)

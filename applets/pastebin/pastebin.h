@@ -32,6 +32,7 @@
 #include <plasma/tooltipmanager.h>
 
 #include <QTimer>
+#include <QPen>
 
 class DraggableLabel : public Plasma::Label
 {
@@ -95,6 +96,7 @@ protected Q_SLOTS:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void createConfigurationInterface(KConfigDialog *parent);
@@ -122,6 +124,7 @@ private:
     qreal m_alpha;
 
     QFont m_font;
+    QPen m_linePen;
     QColor m_fgColor;
     QColor m_bgColor;
     KIcon* m_icon;
