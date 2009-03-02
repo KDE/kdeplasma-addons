@@ -1,0 +1,10 @@
+[Global]
+Name=Pastebin
+IconName=edit-paste
+Comment=Pastebin Widget
+Version=1
+
+[Event/urlcopied]
+Name=Copied pastebin link
+Comment=The pastebin URL has been copied to the clipboard
+Action=Popup

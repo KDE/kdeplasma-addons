@@ -94,7 +94,8 @@ protected Q_SLOTS:
     void openLink(const QString &link);
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
@@ -107,6 +108,7 @@ private Q_SLOTS:
     void animationUpdate(qreal progress);
     void updateTheme();
     void resetActionState();
+    void copyToClipboard(const QString &url);
 
 private:
     int iconSize();

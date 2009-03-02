@@ -37,6 +37,7 @@
 #include <KLocale>
 #include <KConfigDialog>
 #include <KToolInvocation>
+#include <KNotification>
 
 #include <kmimetype.h>
 #include <ktemporaryfile.h>
@@ -492,7 +493,15 @@ void Pastebin::showResults(const QString &url)
     //    m_resultsLabel->m_url = url;
     //    m_resultsLabel->setText(i18n("<a href=\"%1\">%2</a><p>", url, url));
     setActionState(IdleSuccess);
+    copyToClipboard(url);
+}
+
+void Pastebin::copyToClipboard(const QString &url)
+{
     QApplication::clipboard()->setText(url);
+    kDebug() << "Copying:" << url;
+    QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
+    KNotification::event("urlcopied", i18nc("Notification when the pastebin applet has copied the URL to the clipboard", "%1 has been copied to your clipboard", url), pix, 0, KNotification::CloseOnTimeout);
 }
 
 void Pastebin::showErrors()
@@ -515,10 +524,22 @@ void Pastebin::resetActionState()
 
 void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    kDebug() << "press event";
     if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
         Plasma::Applet::mousePressEvent(event);
     } else {
         openLink(m_url);
+    }
+    if (event->button() == Qt::MidButton) {
+        // Now releasing the middlebutton click copies to clipboard
+        event->accept();
+    }
+}
+
+void Pastebin::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (!m_url.isEmpty() && event->button() == Qt::MidButton) {
+        copyToClipboard(m_url);
     }
 }
 
