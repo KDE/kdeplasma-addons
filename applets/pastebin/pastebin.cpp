@@ -117,7 +117,6 @@ void Pastebin::init()
     setTextServer(textBackend);
     setImageServer(imageBackend);
     resize(200, 200);
-    setBackgroundHints(TranslucentBackground);
     setActionState(Idle);
     setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
@@ -129,6 +128,8 @@ void Pastebin::init()
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
     Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
+    setBackgroundHints(NoBackground);
+
 }
 
 void Pastebin::updateTheme()

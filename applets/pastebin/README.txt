@@ -13,4 +13,6 @@ TODO:
 - different texts / icons for overlay: idle, succeeded, error, busy (DONE)
 - tooltips updated with status (see overlay) (DONE)
 - notification on success / error
-- click on it copies into Clipboard (Right now it opens the link, as it automatically copies to the clipboard)
+- middle click on it copies into Clipboard (DONE)
+- why does a background show up?
+- proper handling between text / applet's size, probably involves some QFontMetrics + setMinimumSize magic
