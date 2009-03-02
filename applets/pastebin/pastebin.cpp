@@ -159,7 +159,7 @@ void Pastebin::setInteractionState(InteractionState state)
         case DraggedOver:
             kDebug() << "DraggedOver";
             m_linePen.setStyle(Qt::DashLine);
-            m_linePen.setWidth(4);
+            m_linePen.setWidth(2);
             showOverlay(true);
             break;
         case Rejected:
