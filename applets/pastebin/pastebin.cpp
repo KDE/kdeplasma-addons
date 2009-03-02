@@ -218,6 +218,7 @@ void Pastebin::setActionState(ActionState state)
 
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     m_actionState = state;
+    update();
 }
 
 QGraphicsWidget *Pastebin::graphicsWidget()
