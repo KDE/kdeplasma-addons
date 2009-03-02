@@ -116,20 +116,27 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
     mLabelTop = new Plasma::Label( this );
+    mLabelTop->setMinimumWidth( 0 );
+    mLabelTop->nativeWidget()->setWordWrap( false );
     mLabelTop->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
     mLabelTop->setAlignment( Qt::AlignCenter );
     mLabelTop->hide();
 
     mImageWidget = new ImageWidget( this );
+    mImageWidget->setZValue( 0 );
     mImageWidget->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
     mImageWidget->hide();
 
     mLabelId = new Plasma::Label( this );
+    mLabelId->setMinimumWidth( 0 );
+    mLabelId->nativeWidget()->setWordWrap( false );
     mLabelId->nativeWidget()->setCursor( Qt::PointingHandCursor );
     mLabelId->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
     mLabelId->hide();
 
     mLabelUrl = new Plasma::Label( this );
+    mLabelUrl->setMinimumWidth( 0 );
+    mLabelId->nativeWidget()->setWordWrap( false );
     mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
     mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
     mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
@@ -578,6 +585,10 @@ void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 
 void ComicApplet::updateSize()
 {
+    //HACK to work around shortcomings in the layout code FIXME later
+    mLabelId->setPreferredWidth( mLabelId->nativeWidget()->sizeHint().width() );
+    mLabelUrl->setPreferredWidth( mLabelUrl->nativeWidget()->sizeHint().width() );
+
     int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? 30 + 1 : 0;
     int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mLeftArrow->preferredWidth() + 1 : 0;
     int topArea = ( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() ) ? mLabelTop->nativeWidget()->height() : 0;
@@ -593,11 +604,6 @@ void ComicApplet::updateSize()
     mLastSize = mImageWidget->preferredSize() + margins;
     mLastSize.setHeight( mLastSize.height() + topArea + bottomArea );
     mLastSize.setWidth( mLastSize.width() + leftArea + rightArea );
-
-    //HACK to work around shortcomings in the layout code FIXME later
-    QFontMetrics fm = Plasma::Theme::defaultTheme()->fontMetrics();
-    mLabelId->setMinimumWidth( fm.width( mLabelId->text() ) );
-    mLabelUrl->setMinimumWidth( fm.width( mLabelUrl->text() ) );
 
     createLayout();
     resize( mLastSize );
