@@ -28,6 +28,7 @@
 #include <QFontMetrics>
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 #include <QAction>
 #include <QLabel>
@@ -52,9 +53,12 @@
 #include <Plasma/FlashingLabel>
 #include <Plasma/IconWidget>
 #include <Plasma/SvgWidget>
+#include <Plasma/TextBrowser>
+#include <Plasma/ScrollWidget>
 #include <Plasma/TextEdit>
 #include <Plasma/Frame>
 #include <Plasma/ServiceJob>
+
 
 Q_DECLARE_METATYPE(Plasma::DataEngine::Data)
 
@@ -220,9 +224,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit(this);
-    m_statusEdit->nativeWidget()->setFrameShape( QFrame::NoFrame );
-    m_statusEdit->nativeWidget()->setTextBackgroundColor( Qt::transparent );
-    m_statusEdit->nativeWidget()->viewport()->setAutoFillBackground( false );
+
     connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
     statusEditLayout->addItem(m_statusEdit);
 
@@ -234,8 +236,12 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_statusEdit->nativeWidget()->installEventFilter(this);
     m_headerLayout->addItem( statusEditFrame );
 
-    m_layout->addStretch();
-    m_layout->addStretch();
+    m_scrollWidget = new Plasma::ScrollWidget(this);
+    m_tweetsWidget = new QGraphicsWidget;
+    m_scrollWidget->setWidget(m_tweetsWidget);
+    m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
+
+    m_layout->addItem(m_scrollWidget);
 
     //hook up some sources
     m_imageQuery = "UserImages:"+m_serviceUrl;
@@ -413,7 +419,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
 
         m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
     }
-    updateGeometry();
+    //updateGeometry();
 }
 
 void MicroBlog::themeChanged()
@@ -429,24 +435,21 @@ void MicroBlog::showTweets()
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
     while (m_tweetWidgets.size() < m_historySize) {
-        Plasma::Frame *tweetFrame = new Plasma::Frame(this);
+        Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
+        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
 
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
         tweetLayout->setContentsMargins( 0, 5, 0, 5 );
         tweetLayout->setSpacing( 5 );
-        m_layout->insertItem( m_layout->count()-1, tweetFrame );
+        //m_layout->insertItem( m_layout->count()-1, tweetFrame );
+        m_tweetsLayout->addItem(tweetFrame);
 
-        KTextBrowser *c = new KTextBrowser();
-        QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(tweetFrame);
-        proxy->setWidget( c );
-        c->setCursor( Qt::ArrowCursor );
-        c->setFrameShape(QFrame::NoFrame);
-        c->setAttribute(Qt::WA_NoSystemBackground);
-        c->setTextBackgroundColor(Qt::transparent);
-        c->viewport()->setAutoFillBackground(false);
-        c->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-        c->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-        c->setReadOnly(true);
+        Plasma::TextBrowser *tweetText = new Plasma::TextBrowser(tweetFrame);
+        tweetText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        tweetText->nativeWidget()->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        tweetText->nativeWidget()->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+        tweetText->nativeWidget()->setCursor( Qt::ArrowCursor );
 
         Plasma::IconWidget *icon = new Plasma::IconWidget(tweetFrame);
         QSizeF iconSize = icon->sizeFromIconSize(30);
@@ -459,15 +462,14 @@ void MicroBlog::showTweets()
         favIcon->setMaximumSize( favIconSize );
 
         tweetLayout->addItem(icon);
-        tweetLayout->addItem(proxy);
+        tweetLayout->addItem(tweetText);
         tweetLayout->addItem(favIcon);
-        tweetLayout->updateGeometry();
+
 
         Tweet t;
         t.frame = tweetFrame;
         t.icon = icon;
-        t.content = c;
-        t.contentProxy = proxy;
+        t.content = tweetText;
         t.favIcon = favIcon;
 
         m_tweetWidgets.append( t );
@@ -522,13 +524,11 @@ void MicroBlog::showTweets()
         html += QString( "<tr><td colspan='2'><font color='%1'>%2</font></td></tr>" )
                 .arg( m_colorScheme->foreground().color().name()).arg( status );
         html += "</table>";
-        t.content->setHtml( html );
-        t.content->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
+        t.content->setText( html );
+        t.content->nativeWidget()->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
                                             .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
                                             .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
-        t.content->document()->setTextWidth(qMax(200,t.content->width()));
-        t.content->setMinimumSize(t.content->document()->size().toSize());
-        t.content->setMaximumHeight(t.content->minimumSize().height());
+
 
         t.content->update();
 

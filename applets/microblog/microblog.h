@@ -51,13 +51,14 @@ namespace Plasma
     class WebContent;
     class Frame;
     class ServiceJob;
+    class TextBrowser;
+    class ScrollWidget;
 }
 
 struct Tweet {
     Plasma::Frame *frame;
     Plasma::IconWidget *icon;
-    KTextBrowser *content;
-    QGraphicsProxyWidget *contentProxy;
+    Plasma::TextBrowser *content;
     Plasma::IconWidget *favIcon;
 };
 
@@ -132,6 +133,9 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::WebContent *m_historyEdit;
         Plasma::FlashingLabel *m_flash;
         Plasma::IconWidget *m_icon;
+        Plasma::ScrollWidget *m_scrollWidget;
+        QGraphicsWidget *m_tweetsWidget;
+        QGraphicsLinearLayout *m_tweetsLayout;
         QGraphicsLinearLayout *m_layout;
         QGraphicsLinearLayout *m_headerLayout;
         QGraphicsWidget *m_graphicsWidget;
