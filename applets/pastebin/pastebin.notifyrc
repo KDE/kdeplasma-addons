@@ -13,9 +13,24 @@ Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
 IconName=edit-paste
 Comment=Pastebin Widget
+Comment[ga]=Giuirléid Pastebin
+Comment[pt]=Item de Colagem
+Comment[pt_BR]=Widget do Pastebin
+Comment[sv]=Grafisk Pastebin-komponent
+Comment[uk]=Віджет Pastebin
 Version=1
 
 [Event/urlcopied]
 Name=Copied pastebin link
+Name[ga]=Cóipeáladh nasc pastebin
+Name[pt]=Ligação do PasteBin copiada
+Name[pt_BR]=Link do pastebin copiado
+Name[sv]=Kopierade Pastebin-länk
+Name[uk]=Скопійоване посилання pastebin
 Comment=The pastebin URL has been copied to the clipboard
+Comment[ga]=Cóipeáladh URL pastebin go dtí an ghearrthaisce
+Comment[pt]=O URL do PasteBin foi copiado para a área de transferência
+Comment[pt_BR]=O URL do pastebin foi copiado para a área de transferência
+Comment[sv]=Pastebin-webbadressen har kopierats till klippbordet
+Comment[uk]=Адресу URL pastebin було скопійовано до буфера обміну даними
 Action=Popup
