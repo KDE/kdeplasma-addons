@@ -37,6 +37,17 @@
 #include <KRun>
 #include <KTemporaryFile>
 
+#include "config-nepomuk.h"
+#ifdef HAVE_NEPOMUK
+#include <Nepomuk/Resource>
+#include <Nepomuk/ResourceManager>
+#include <Nepomuk/Tag>
+#include <Nepomuk/Variant>
+
+#include <Soprano/Vocabulary/NAO>
+#include <Soprano/Vocabulary/Xesam>
+#endif
+
 #include <Plasma/Theme>
 #include <Plasma/Frame>
 #include <Plasma/Label>
@@ -154,6 +165,11 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mRightArrow->setCursor( Qt::PointingHandCursor );
     mRightArrow->hide();
     connect( mRightArrow, SIGNAL( clicked() ), this, SLOT( slotNextDay() ) );
+
+#ifdef HAVE_NEPOMUK
+    //for manually saving the comics
+    Nepomuk::ResourceManager::instance()->init();
+#endif
 }
 
 void ComicApplet::createLayout()
@@ -670,7 +686,34 @@ void ComicApplet::slotSaveComicAs()
     if ( !destUrl.isValid() )
         return;
 
+#ifdef HAVE_NEPOMUK
+    bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );
+    //store additional data using Nepomuk
+    if ( worked ) {
+        Nepomuk::Resource res( destUrl );
+        Nepomuk::Tag tag( i18n( "Comic" ) );
+
+        tag.setLabel( i18n( "Comic" ) );
+        res.addTag( tag );
+        if ( !mAdditionalText.isEmpty() ) {
+            res.setDescription( mAdditionalText );
+        }
+        if ( !mComicAuthor.isEmpty() ) {
+            res.setProperty( Soprano::Vocabulary::NAO::creator(), Nepomuk::Variant( mComicAuthor ) );
+        }
+        if ( ( mSuffixType == "Date" ) && !mShownIdentifierSuffix.isEmpty() ) {
+            res.setProperty( Soprano::Vocabulary::NAO::created(), Nepomuk::Variant( QDate::fromString( mShownIdentifierSuffix, Qt::ISODate ) ) );
+        }
+        if ( !mComicTitle.isEmpty() ) {
+            res.setProperty( Soprano::Vocabulary::Xesam::subject(), Nepomuk::Variant( mComicTitle ) );
+        }
+        if ( !mStripTitle.isEmpty() ) {
+            res.setProperty( Soprano::Vocabulary::Xesam::title(), Nepomuk::Variant( mStripTitle ) );
+        }
+    }
+#else
     KIO::NetAccess::file_copy( srcUrl, destUrl );
+#endif
 }
 
 void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
