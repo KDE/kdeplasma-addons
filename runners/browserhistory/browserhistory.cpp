@@ -67,6 +67,10 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
     }
 
     foreach (const QString &historyitem, m_history) {
+        if (!context.isValid()) {
+            return;
+        }
+
         // Filter out error pages, and match ...
         if (!historyitem.startsWith("error:/") && historyitem.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);

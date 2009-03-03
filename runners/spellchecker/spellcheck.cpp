@@ -62,13 +62,16 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         query = query.mid(len).trimmed();
     }
 
-    if (query.isEmpty()) {
+    if (query.size() < 3) {
         return;
     }
 
-
     QStringList suggestions;
     bool correct = m_speller.checkAndSuggest(query,suggestions);
+
+    if (!context.isValid()) {
+        return;
+    }
 
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);

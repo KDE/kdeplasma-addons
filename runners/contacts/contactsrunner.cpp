@@ -61,6 +61,10 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
     QList<Plasma::QueryMatch> matches;
 
     foreach (const KABC::Addressee &a, m_book->allAddressees()) {
+        if (!context.isValid()) {
+            return;
+        }
+
         bool matchedName = a.realName().contains(term, Qt::CaseInsensitive);
         bool matchedMail = false;
 

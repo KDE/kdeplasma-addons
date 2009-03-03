@@ -108,6 +108,10 @@ void KateSessions::match(Plasma::RunnerContext &context)
     }
 
     foreach (const QString &session, m_sessions) {
+        if (!context.isValid()) {
+            return;
+        }
+
         if (list_all || (!term.isEmpty() && session.contains(term, Qt::CaseInsensitive))) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);

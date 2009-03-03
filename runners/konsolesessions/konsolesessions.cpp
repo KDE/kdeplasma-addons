@@ -105,6 +105,10 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
         // so everybody else will suffer. And rightfully so! ;-)
         QHashIterator<QString, QString> i(m_sessions);
         while (i.hasNext()) {
+            if (!context.isValid()) {
+                return;
+            }
+
             i.next();
             if (i.value().contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
