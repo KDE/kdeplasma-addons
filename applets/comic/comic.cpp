@@ -255,9 +255,11 @@ void ComicApplet::init()
     mActions.append( mActionShop );
     connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
 
-    QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
-    mActions.append( action );
-    connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
+    if (isAllowed("FileDialog")) {
+        QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
+        mActions.append( action );
+        connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
+    }
 
     mActionScaleContent = new QAction( KIcon( "zoom-original" ), i18nc( "@option:check Context menu of comic image", "&Actual Size" ), this );
     mActionScaleContent->setCheckable( true );
