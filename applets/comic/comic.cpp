@@ -547,9 +547,6 @@ void ComicApplet::slotSizeChanged()
 
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
-    // reposition of the hovering icons
-    } else if ( mArrowsOnHover ) {
-        constraintsEvent( Plasma::SizeConstraint );
     }
 }
 
@@ -787,8 +784,6 @@ void ComicApplet::buttonBar()
             mFadingItem = new FadingItem( mFrame );
             mFadingItem->hide();
             updateButtons();
-            // Set frame position
-            constraintsEvent( Plasma::SizeConstraint );
         }
     } else {
         delete mFrame;
