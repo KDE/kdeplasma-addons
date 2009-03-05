@@ -73,6 +73,7 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args)
     , m_graphicsWidget(0)
     , m_dictsModel(0)
+    , m_wordEdit(0)
       //m_flash(0)
 {
     const char* dataEngines[]={"dict","qstardict"};
@@ -83,6 +84,8 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(engineChoice);
     setPopupIcon("accessories-dictionary");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
+
+    connect(this, SIGNAL(activate()), this, SLOT(focusEditor()));
 }
 
 DictApplet::~DictApplet()
@@ -166,6 +169,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_graphicsWidget = new QGraphicsWidget(this);
     m_graphicsWidget->setLayout(m_layout);
     m_graphicsWidget->setPreferredSize(500, 200);
+
     return m_graphicsWidget;
 }
 
@@ -350,6 +354,13 @@ void DictApplet::configAccepted()
 
     define();
     emit configNeedsSaving();
+}
+
+void DictApplet::focusEditor()
+{
+    if (m_wordEdit) {
+        m_wordEdit->setFocus(Qt::ShortcutFocusReason);
+    }
 }
 
 #include "dict.moc"

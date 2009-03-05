@@ -56,6 +56,7 @@ class DictApplet: public Plasma::PopupApplet
     protected slots:
         void define();
         void configAccepted();
+        void focusEditor();
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
