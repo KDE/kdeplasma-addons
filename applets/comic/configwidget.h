@@ -57,6 +57,8 @@ class ConfigWidget : public QWidget
         bool middleClick() const;
         void setReloadTime( int minutes );
         int reloadTime() const;
+        void setSmoothScaling( bool checked );
+        bool smoothScaling() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;

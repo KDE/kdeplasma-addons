@@ -119,6 +119,7 @@ class ComicApplet : public Plasma::Applet
         bool mShowComicIdentifier;
         bool mArrowsOnHover;
         bool mMiddleClick;
+        bool mSmothScaling;
         QTimer *mDateChangedTimer;
         QTimer *mReloadTimer;
         QList<QAction*> mActions;

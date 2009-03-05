@@ -26,7 +26,7 @@
 #include <Plasma/ScrollBar>
 
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mLastSize( QSizeF( 200, 200 ) )
+    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mSmoothScaling( true ), mLastSize( QSizeF( 200, 200 ) )
 {
     mScrollBarHoriz = new Plasma::ScrollBar( this );
     mScrollBarHoriz->setOrientation( Qt::Horizontal );
@@ -74,7 +74,10 @@ void ImageWidget::updateScrollBars()
 
 void ImageWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *option, QWidget* )
 {
-    p->setRenderHint( QPainter::SmoothPixmapTransform );
+    if ( mSmoothScaling ) {
+        p->setRenderHint( QPainter::SmoothPixmapTransform );
+    }
+
     QRect contentRect = this->rect().toRect();
 
     mImageRect = contentRect;
@@ -205,6 +208,12 @@ void ImageWidget::setAvailableSize( const QSizeF &available )
 
         setPreferredSize( mLastSize );
     }
+}
+
+void ImageWidget::setSmoothScaling( bool isSmooth )
+{
+    mSmoothScaling = isSmooth;
+    update( this->rect() );
 }
 
 #include "imagewidget.moc"

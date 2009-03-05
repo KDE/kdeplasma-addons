@@ -208,4 +208,14 @@ int ConfigWidget::reloadTime() const
     return comicUi.spinBox_Reload->value();
 }
 
+void ConfigWidget::setSmoothScaling( bool checked )
+{
+    appearanceUi.checkBox_smooth->setChecked( checked );
+}
+
+bool ConfigWidget::smoothScaling() const
+{
+    return appearanceUi.checkBox_smooth->isChecked();
+}
+
 #include "configwidget.moc"

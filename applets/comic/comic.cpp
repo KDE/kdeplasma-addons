@@ -353,6 +353,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mLabelId->setText( mShownIdentifierSuffix );
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );
+    mImageWidget->setSmoothScaling( mSmothScaling );
 
     updateButtons();
     updateContextMenu();
@@ -381,6 +382,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
     mConfigWidget->setReloadTime( mReloadTime );
+    mConfigWidget->setSmoothScaling( mSmothScaling );
 
     parent->addPage( mConfigWidget->comicSettings, i18n( "Comic" ), icon() );
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
@@ -402,6 +404,7 @@ void ComicApplet::applyConfig()
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
     mReloadTime = mConfigWidget->reloadTime();
+    mSmothScaling = mConfigWidget->smoothScaling();
 
     if ( !mReloadTime ) {
         mReloadTimer->stop();
@@ -455,6 +458,7 @@ void ComicApplet::loadConfig()
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
     mReloadTime = cg.readEntry( "reloadTime", 0 );
+    mSmothScaling = cg.readEntry( "smoothScaling", true );
 
     buttonBar();
 }
@@ -470,6 +474,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "reloadTime", mReloadTime );
+    cg.writeEntry( "smoothScaling", mSmothScaling );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
