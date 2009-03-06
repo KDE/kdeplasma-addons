@@ -1,7 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=UnitConverter
+Name[sv]=Enhetskonvertering
 Comment=Plasmoid for converting units
+Comment[ga]=Plasmóid a thiontaíonn aonaid
+Comment[pt_BR]=Plasmóide para converter unidades
+Comment[sv]=Plasmoid för att konvertera enheter
+Comment[uk]=Плазмоїд для перетворення одиниць виміру
 Type=Service
 Icon=accessories-calculator
 ServiceTypes=Plasma/Applet
