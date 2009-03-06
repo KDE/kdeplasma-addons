@@ -120,7 +120,7 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         pHeader->setText(i18n("Unit Converter"));
 
         Plasma::Label *pLabel = new Plasma::Label(this);
-        pLabel->nativeWidget()->setAlignment(Qt::AlignRight);
+        pLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         pLabel->setText(i18n("Convert:"));
         m_pCmbCategory = new Plasma::ComboBox(this);
         m_pCmbCategory->setZValue(2);
