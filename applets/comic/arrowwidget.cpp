@@ -28,7 +28,7 @@ static const int s_arrowWidth = 30;
 static const int s_arrowHeight = 30;
 
 ArrowWidget::ArrowWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mArrowName( "left-arrow" ), mDirection( left )
+    : QGraphicsWidget( parent, wFlags ), mArrowName( "left-arrow" ), mDirection( Plasma::Left )
 {
     setCacheMode( DeviceCoordinateCache );
     setPreferredWidth( s_arrowWidth );
@@ -41,17 +41,17 @@ ArrowWidget::~ArrowWidget()
 {
 }
 
-void ArrowWidget::setDirection( ArrowWidget::Direction direction )
+void ArrowWidget::setDirection( Plasma::Direction direction )
 {
     mDirection = direction;
-    if ( mDirection == left ) {
+    if ( mDirection == Plasma::Left ) {
         mArrowName = "left-arrow";
-    } else if ( mDirection == right ) {
+    } else if ( mDirection == Plasma::Right ) {
         mArrowName = "right-arrow";
     }
 }
 
-ArrowWidget::Direction ArrowWidget::direction() const
+Plasma::Direction ArrowWidget::direction() const
 {
     return mDirection;
 }

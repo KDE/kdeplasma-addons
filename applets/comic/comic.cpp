@@ -160,7 +160,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     connect( mLeftArrow, SIGNAL( clicked() ), this, SLOT( slotPreviousDay() ) );
 
     mRightArrow = new ArrowWidget( this );
-    mRightArrow->setDirection( ArrowWidget::right );
+    mRightArrow->setDirection( Plasma::Right );
     mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
     mRightArrow->setCursor( Qt::PointingHandCursor );
     mRightArrow->hide();
@@ -788,7 +788,8 @@ void ComicApplet::buttonBar()
             mFrame->hide();
             mFadingItem = new FadingItem( mFrame );
             mFadingItem->hide();
-            updateButtons();
+            // Set frame position
+            constraintsEvent( Plasma::SizeConstraint );
         }
     } else {
         delete mFrame;

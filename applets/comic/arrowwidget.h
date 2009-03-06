@@ -22,6 +22,8 @@
 
 #include <QGraphicsWidget>
 
+#include <Plasma/Plasma>
+
 class QGraphicsSceneMouseEvent;
 
 namespace Plasma {
@@ -38,9 +40,8 @@ class ArrowWidget : public QGraphicsWidget
         ~ArrowWidget();
 
         void paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget* widget = 0 );
-        enum Direction { left, right };
-        void setDirection( Direction direction );
-        Direction direction() const;
+        void setDirection( Plasma::Direction direction );
+        Plasma::Direction direction() const;
 
     Q_SIGNALS:
         void clicked();
@@ -50,7 +51,7 @@ class ArrowWidget : public QGraphicsWidget
 
     private:
         QString mArrowName;
-        Direction mDirection;
+        Plasma::Direction mDirection;
         Plasma::Svg *mArrow;
 };
 
