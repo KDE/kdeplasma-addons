@@ -26,7 +26,8 @@
 #include <Plasma/ScrollBar>
 
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mSmoothScaling( true ), mLastSize( QSizeF( 200, 200 ) )
+    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mTransformationMode( Qt::SmoothTransformation ),
+      mLastSize( QSizeF( 200, 200 ) )
 {
     mScrollBarHoriz = new Plasma::ScrollBar( this );
     mScrollBarHoriz->setOrientation( Qt::Horizontal );
@@ -74,40 +75,35 @@ void ImageWidget::updateScrollBars()
 
 void ImageWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *option, QWidget* )
 {
-    if ( mSmoothScaling ) {
-        p->setRenderHint( QPainter::SmoothPixmapTransform );
-    }
-
-    QRect contentRect = this->rect().toRect();
-
+    QRectF exposed = option->exposedRect;
+    QRectF contentRect = this->rect();
     mImageRect = contentRect;
-    const int scrollBarWidth = mScrollBarVert->preferredSize().width();
-    const int scrollBarHeight = mScrollBarHoriz->preferredSize().height();
-    if ( mScrollBarVert->isVisible() ) {
-        QRect rectScroll = QRect( contentRect.right() - scrollBarWidth + 1,
-                                  contentRect.top(),
-                                  scrollBarWidth,
-                                  contentRect.height() - mScrollBarHoriz->isVisible() * scrollBarHeight );
 
-        mScrollBarVert->setGeometry( rectScroll );
-        mImageRect.setRight( mImageRect.right() - scrollBarWidth );
-    }
-    if ( mScrollBarHoriz->isVisible() ) {
-        QRect rectScroll = QRect( contentRect.left(),
-                                  contentRect.bottom() - scrollBarHeight + 1,
-                                  contentRect.width() - mScrollBarVert->isVisible() * scrollBarWidth,
-                                  scrollBarHeight );
+    if ( !mIsScaled ) {
+        //check for scrollbars and calculate where they should be
+        const int scrollBarWidth = mScrollBarVert->preferredSize().width();
+        const int scrollBarHeight = mScrollBarHoriz->preferredSize().height();
+        if ( mScrollBarVert->isVisible() ) {
+            QRect rectScroll = QRect( contentRect.right() - scrollBarWidth,
+                                      contentRect.top(),
+                                      scrollBarWidth,
+                                      contentRect.height() - mScrollBarHoriz->isVisible() * scrollBarHeight );
 
-        mScrollBarHoriz->setGeometry( rectScroll );
-        mImageRect.setBottom( mImageRect.bottom() - scrollBarHeight );
-    }
+            mScrollBarVert->setGeometry( rectScroll );
+            mImageRect.setRight( mImageRect.right() - scrollBarWidth );
+        }
+        if ( mScrollBarHoriz->isVisible() ) {
+            QRect rectScroll = QRect( contentRect.left(),
+                                      contentRect.bottom() - scrollBarHeight,
+                                      contentRect.width() - mScrollBarVert->isVisible() * scrollBarWidth,
+                                      scrollBarHeight );
 
-    if ( mIsScaled ) {
-        p->drawImage( mImageRect, mImage );
-    } else {
+            mScrollBarHoriz->setGeometry( rectScroll );
+            mImageRect.setBottom( mImageRect.bottom() - scrollBarHeight );
+        }
         updateScrollBars();
 
-        QRectF exposed = option->exposedRect;
+        //adapt the exposed rect to only draw the parts of the image that are really needed
         if ( ( exposed.left() >= mImageRect.right() ) || ( exposed.top() >= mImageRect.bottom() ) ) {
             return;
         }
@@ -118,10 +114,18 @@ void ImageWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *option, QW
             exposed.setBottom( mImageRect.bottom() );
         }
 
-        QPoint scrollPos = QPoint( mScrollBarHoriz->value(), mScrollBarVert->value() );
-        QRect shownImageRect = QRect( scrollPos + exposed.topLeft().toPoint(), exposed.size().toSize() );
-        p->drawImage( exposed, mImage, shownImageRect );
+        //the displayed image has changed -- either a new one has been set, or it was just set to not scaled
+        if ( mDifferentImage ) {
+            mScaledImage = mImage;
+        }
+    } else if ( mDifferentImage || ( mScaledImage.size() != mImageRect.size() ) ) {
+        mScaledImage = mImage.scaled( mImageRect.size().toSize(), Qt::IgnoreAspectRatio, mTransformationMode );
+        mDifferentImage = false;
     }
+
+    QPoint scrollPos = mIsScaled ? QPoint() : QPoint( mScrollBarHoriz->value(), mScrollBarVert->value() );
+    QRectF shownImageRect = QRectF( scrollPos + exposed.topLeft(), exposed.size() );
+    p->drawImage( exposed, mScaledImage, shownImageRect );
 }
 
 void ImageWidget::resetScrollBars()
@@ -153,6 +157,7 @@ void ImageWidget::wheelEvent( QGraphicsSceneWheelEvent *event )
 void ImageWidget::setImage( const QImage &image )
 {
     mImage = image;
+    mDifferentImage = true;
     resetScrollBars();
     updateScrollBars();
 }
@@ -162,6 +167,7 @@ void ImageWidget::setScaled( bool isScaled )
     mIsScaled = isScaled;
     resetScrollBars();
     if ( !mIsScaled ) {
+        mDifferentImage = true;
         updateScrollBars();
     }
 }
@@ -212,7 +218,7 @@ void ImageWidget::setAvailableSize( const QSizeF &available )
 
 void ImageWidget::setSmoothScaling( bool isSmooth )
 {
-    mSmoothScaling = isSmooth;
+    mTransformationMode = isSmooth ? Qt::SmoothTransformation : Qt::FastTransformation;
     update( this->rect() );
 }
 

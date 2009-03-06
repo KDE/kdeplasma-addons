@@ -85,7 +85,7 @@
      <item>
       <widget class="QCheckBox" name="checkBox_smooth">
        <property name="text">
-        <string>Sm&amp;ooth Scaling:</string>
+        <string>Sm&amp;ooth Scaling</string>
        </property>
        <property name="checked">
         <bool>true</bool>

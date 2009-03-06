@@ -57,11 +57,13 @@ class ImageWidget : public QGraphicsWidget
         void resetScrollBars();
 
         bool mIsScaled;
-        bool mSmoothScaling;
+        bool mDifferentImage;
+        Qt::TransformationMode mTransformationMode;
         Plasma::ScrollBar *mScrollBarVert;
         Plasma::ScrollBar *mScrollBarHoriz;
         QImage mImage;
-        QRect mImageRect;
+        QImage mScaledImage;
+        QRectF mImageRect;
         QSizeF mAvailableSize;
         QSizeF mLastSize;
 };
