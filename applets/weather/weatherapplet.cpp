@@ -77,6 +77,8 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
         return m_graphicsWidget;
     }
 
+    m_graphicsWidget = new QGraphicsWidget(this);
+
     switch (formFactor()) {
     case Plasma::Horizontal:
     case Plasma::Vertical:
@@ -198,7 +200,6 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
         setConfigurationRequired(false);
     }
 
-    m_graphicsWidget = new QGraphicsWidget(this);
     m_graphicsWidget->setLayout(m_layout);
 
     return m_graphicsWidget;
