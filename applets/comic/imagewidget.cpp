@@ -29,6 +29,7 @@ ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
     : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mTransformationMode( Qt::SmoothTransformation ),
       mLastSize( QSizeF( 200, 200 ) )
 {
+    setCacheMode( DeviceCoordinateCache );
     mScrollBarHoriz = new Plasma::ScrollBar( this );
     mScrollBarHoriz->setOrientation( Qt::Horizontal );
     mScrollBarHoriz->setSingleStep( 80 );
