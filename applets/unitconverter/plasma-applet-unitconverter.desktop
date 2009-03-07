@@ -1,12 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=UnitConverter
+Name[nds]=Eenheitenwanneln
+Name[pt]=Conversor de Unidades
 Name[sv]=Enhetskonvertering
+Name[zh_CN]=单位转换器
 Comment=Plasmoid for converting units
 Comment[ga]=Plasmóid a thiontaíonn aonaid
+Comment[nds]=Plasma-Lüttprogramm för't Wanneln vun Eenheiten
+Comment[pt]=Plasmóide para converter unidades
 Comment[pt_BR]=Plasmóide para converter unidades
 Comment[sv]=Plasmoid för att konvertera enheter
 Comment[uk]=Плазмоїд для перетворення одиниць виміру
+Comment[zh_CN]=转换单位的 plasmoid
 Type=Service
 Icon=accessories-calculator
 ServiceTypes=Plasma/Applet
