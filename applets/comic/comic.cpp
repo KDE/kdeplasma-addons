@@ -147,7 +147,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
     mLabelUrl = new Plasma::Label( this );
     mLabelUrl->setMinimumWidth( 0 );
-    mLabelId->nativeWidget()->setWordWrap( false );
+    mLabelUrl->nativeWidget()->setWordWrap( false );
     mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
     mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
     mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
