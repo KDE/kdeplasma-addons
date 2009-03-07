@@ -154,16 +154,18 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl->hide();
 
     mLeftArrow = new ArrowWidget( this );
-    mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
+    mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding ) );
     mLeftArrow->setCursor( Qt::PointingHandCursor );
     mLeftArrow->hide();
+    mLeftArrow->setGeometry( QRectF( QPointF( 0, 0 ), mLeftArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
     connect( mLeftArrow, SIGNAL( clicked() ), this, SLOT( slotPreviousDay() ) );
 
     mRightArrow = new ArrowWidget( this );
     mRightArrow->setDirection( Plasma::Right );
-    mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
+    mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding ) );
     mRightArrow->setCursor( Qt::PointingHandCursor );
     mRightArrow->hide();
+    mRightArrow->setGeometry( QRectF( QPointF( 0, 0 ), mRightArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
     connect( mRightArrow, SIGNAL( clicked() ), this, SLOT( slotNextDay() ) );
 
 #ifdef HAVE_NEPOMUK
@@ -609,8 +611,9 @@ void ComicApplet::updateSize()
     mLabelId->setPreferredWidth( mLabelId->nativeWidget()->sizeHint().width() );
     mLabelUrl->setPreferredWidth( mLabelUrl->nativeWidget()->sizeHint().width() );
 
-    int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? 30 + 1 : 0;
-    int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mLeftArrow->preferredWidth() + 1 : 0;
+    //leftArea and rightArea are not completly correct when their size is smaller then the preferredSize
+    int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? mLeftArrow->size().width() + 1 : 0;
+    int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mRightArrow->size().width() + 1 : 0;
     int topArea = ( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() ) ? mLabelTop->nativeWidget()->height() : 0;
     int bottomArea = ( mShowComicUrl && !mLabelUrl->text().isEmpty() ) ? mLabelUrl->nativeWidget()->height() : 0;
     bottomArea = ( mShowComicIdentifier && !mLabelId->text().isEmpty() ) ? mLabelId->nativeWidget()->height() : bottomArea;

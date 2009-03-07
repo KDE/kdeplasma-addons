@@ -24,17 +24,16 @@
 
 #include <Plasma/Svg>
 
-static const int s_arrowWidth = 30;
-static const int s_arrowHeight = 30;
-
 ArrowWidget::ArrowWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mArrowName( "left-arrow" ), mDirection( Plasma::Left )
+    : QGraphicsWidget( parent, wFlags ), mDirection( Plasma::Left )
 {
     setCacheMode( DeviceCoordinateCache );
-    setPreferredWidth( s_arrowWidth );
+    setPreferredSize( 30, 30 );
+
     mArrow = new Plasma::Svg( this );
     mArrow->setImagePath( "widgets/arrows" );
     mArrow->setContainsMultipleImages( true );
+    setDirection( mDirection );
 }
 
 ArrowWidget::~ArrowWidget()
@@ -48,6 +47,10 @@ void ArrowWidget::setDirection( Plasma::Direction direction )
         mArrowName = "left-arrow";
     } else if ( mDirection == Plasma::Right ) {
         mArrowName = "right-arrow";
+    } else if ( mDirection == Plasma::Down ) {
+        mArrowName = "down-arrow";
+    } else if ( mDirection == Plasma::Up ) {
+        mArrowName = "up-arrow";
     }
 }
 
@@ -60,8 +63,20 @@ void ArrowWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget*
 {
     p->setRenderHint( QPainter::Antialiasing );
 
-    qreal buttonMiddle = ( rect().height() / 2 ) + rect().top();
-    mArrow->paint( p, rect().left(), buttonMiddle - s_arrowHeight / 2, s_arrowWidth, s_arrowHeight, mArrowName );
+    QRectF contentRect = this->rect();
+    qreal arrowWidth = preferredWidth();
+    qreal arrowHeight = preferredHeight();
+
+    //there is not enough space to paint the arrows at their preferred size, so scale them down and keep their aspect ratio
+    if ( ( arrowWidth > contentRect.width() ) || ( arrowHeight > contentRect.height() ) ) {
+        arrowWidth = ( contentRect.height() > contentRect.width() ) ? contentRect.width() : contentRect.height();
+        arrowHeight = arrowWidth;
+    }
+
+    qreal buttonLeft = contentRect.left() + ( contentRect.width() - arrowWidth ) / 2;
+    qreal buttonTop = contentRect.top() + ( contentRect.height() - arrowHeight ) / 2;
+
+    mArrow->paint( p, buttonLeft, buttonTop, arrowWidth, arrowHeight, mArrowName );
 }
 
 void ArrowWidget::mousePressEvent ( QGraphicsSceneMouseEvent *event )
