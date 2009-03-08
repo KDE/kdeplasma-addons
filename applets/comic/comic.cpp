@@ -697,7 +697,7 @@ void ComicApplet::updateContextMenu()
 {
     mActionGoFirst->setVisible( !mFirstIdentifierSuffix.isEmpty() );
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
-    mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
+    mActionGoLast->setEnabled( true );//always enabled to have some kind of refresh action
 }
 
 void ComicApplet::slotSaveComicAs()
