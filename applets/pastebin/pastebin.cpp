@@ -189,7 +189,7 @@ void Pastebin::setActionState(ActionState state)
         case Idle:
             kDebug() << "Idle";
             setBusy(false);
-            toolTipData.setSubText(i18n("Drop a text or an image onto me to upload it to Pastebin"));
+            toolTipData.setSubText(i18n("Drop a text or an image onto me to upload it to Pastebin."));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case IdleError:
@@ -203,7 +203,7 @@ void Pastebin::setActionState(ActionState state)
         case IdleSuccess:
             kDebug() << "IdleSuccess";
             setBusy(false);
-            toolTipData.setSubText(i18n("Successfully uploaded to %1!", m_url));
+            toolTipData.setSubText(i18n("Successfully uploaded to %1.", m_url));
             toolTipData.setImage(KIcon("dialog-ok"));
             // Notification ...
             QTimer::singleShot(30000, this, SLOT(resetActionState()));
@@ -211,7 +211,7 @@ void Pastebin::setActionState(ActionState state)
         case Sending:
             kDebug() << "Sending";
             setBusy(true);
-            toolTipData.setSubText(i18n("Sending"));
+            toolTipData.setSubText(i18n("Sending...."));
             toolTipData.setImage(KIcon("view-history"));
             break;
         default:

@@ -176,7 +176,7 @@ void bballApplet::configAccepted ()
   }
   else
   {
-    KMessageBox::error(0, i18n("Sorry, the given image could not be loaded. The image will not be changed."));
+    KMessageBox::error(0, i18n("The given image could not be loaded. The image will not be changed."));
   }
   m_overlay_enabled = ui.colourizeEnabled->checkState () == Qt::Checked;
   cg.writeEntry ("OverlayEnabled", m_overlay_enabled);
@@ -209,7 +209,7 @@ void bballApplet::configAccepted ()
     }
     else
     {
-      KMessageBox::error(0, i18n("Sorry, the given sound could not be loaded. The sound will not be changed."));
+      KMessageBox::error(0, i18n("The given sound could not be loaded. The sound will not be changed."));
     }
     m_sound_volume = ui.soundVolume->value ();
     cg.writeEntry ("SoundVolume", m_sound_volume);

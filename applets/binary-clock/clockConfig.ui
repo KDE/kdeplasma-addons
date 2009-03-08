@@ -44,7 +44,7 @@
      <item>
       <widget class="QRadioButton" name="onLedsCustomColorRadioButton" >
        <property name="text" >
-        <string>Use custom on leds color:</string>
+        <string>Use custom color for active LEDs:</string>
        </property>
       </widget>
      </item>
@@ -95,10 +95,10 @@
    <item row="5" column="2" colspan="3" >
     <widget class="QCheckBox" name="showOffLedsCheckBox" >
      <property name="toolTip" >
-      <string>Show the off leds</string>
+      <string>Show the inactive LEDs</string>
      </property>
      <property name="whatsThis" >
-      <string>Check this if you want to see off leds.</string>
+      <string>Check this if you want to see the inactive LEDs.</string>
      </property>
      <property name="text" >
       <string>Show</string>
@@ -126,7 +126,7 @@
         </sizepolicy>
        </property>
        <property name="text" >
-        <string>Use custom off leds color:</string>
+        <string>Use custom color for inactive LEDs:</string>
        </property>
       </widget>
      </item>
@@ -286,10 +286,10 @@
    <item row="14" column="2" colspan="3" >
     <widget class="QCheckBox" name="showSecondHandCheckBox" >
      <property name="toolTip" >
-      <string>Show the second leds</string>
+      <string>Show the seconds LEDs</string>
      </property>
      <property name="whatsThis" >
-      <string>Check this if you want to display second leds in order to see the seconds.</string>
+      <string>Check this if you want to display seconds LEDs in order to see the seconds.</string>
      </property>
      <property name="text" >
       <string>Show</string>
