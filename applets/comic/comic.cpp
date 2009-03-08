@@ -148,8 +148,10 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl = new Plasma::Label( this );
     mLabelUrl->setMinimumWidth( 0 );
     mLabelUrl->nativeWidget()->setWordWrap( false );
-    mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
-    mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
+    if (isAllowed("KRun")) {
+        mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
+        mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
+    }
     mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
     mLabelUrl->hide();
 
@@ -252,10 +254,14 @@ void ComicApplet::init()
     mActions.append( mActionGoJump );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
-    mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
-    mActionShop->setEnabled( false );
-    mActions.append( mActionShop );
-    connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
+    if (isAllowed("KRun")) {
+        mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
+        mActionShop->setEnabled( false );
+        mActions.append( mActionShop );
+        connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
+    } else {
+        mActionShop = 0;
+    }
 
     if (isAllowed("FileDialog")) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
@@ -572,8 +578,10 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     if ( event->button() == Qt::LeftButton ) {
         if ( mLabelUrl->isUnderMouse() ) {
-            // link clicked
-            KRun::runUrl( mWebsiteUrl, "text/html", 0 );
+            if (isAllowed("KRun")) {
+                // link clicked
+                KRun::runUrl( mWebsiteUrl, "text/html", 0 );
+            }
         } else if ( mLabelId->isUnderMouse() ) {
             // identifierSuffix clicked clicked
             slotGoJump();
@@ -673,7 +681,9 @@ void ComicApplet::updateContextMenu()
     mActionGoFirst->setVisible( !mFirstIdentifierSuffix.isEmpty() );
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
     mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
-    mActionShop->setEnabled( mShopUrl.isValid() );
+    if (mActionShop) {
+        mActionShop->setEnabled( mShopUrl.isValid() );
+    }
     mActionGoJump->setEnabled( mSuffixType != "String" );
 }
 
