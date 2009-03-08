@@ -115,6 +115,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mArrowsOnHover( true ),
       mMiddleClick( true ),
       mFullViewWidget( 0 ),
+      mActionShop( 0 ),
       mEngine( 0 ),
       mFrame( 0 ),
       mFadingItem( 0 ),
@@ -148,7 +149,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl = new Plasma::Label( this );
     mLabelUrl->setMinimumWidth( 0 );
     mLabelUrl->nativeWidget()->setWordWrap( false );
-    if (isAllowed("KRun")) {
+    if ( isAllowed( "KRun" ) ) {
         mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
         mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
     }
@@ -254,16 +255,14 @@ void ComicApplet::init()
     mActions.append( mActionGoJump );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
-    if (isAllowed("KRun")) {
+    if ( isAllowed( "KRun" ) ) {
         mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
         mActionShop->setEnabled( false );
         mActions.append( mActionShop );
         connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
-    } else {
-        mActionShop = 0;
     }
 
-    if (isAllowed("FileDialog")) {
+    if ( isAllowed( "FileDialog" ) ) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
         connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
@@ -578,7 +577,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
     if ( event->button() == Qt::LeftButton ) {
         if ( mLabelUrl->isUnderMouse() ) {
-            if (isAllowed("KRun")) {
+            if ( isAllowed( "KRun" ) ) {
                 // link clicked
                 KRun::runUrl( mWebsiteUrl, "text/html", 0 );
             }
@@ -680,7 +679,7 @@ void ComicApplet::updateContextMenu()
 {
     mActionGoFirst->setVisible( !mFirstIdentifierSuffix.isEmpty() );
     mActionGoFirst->setEnabled( !mPreviousIdentifierSuffix.isEmpty() );
-    mActionGoLast->setEnabled( !mNextIdentifierSuffix.isEmpty() );
+    mActionGoLast->setEnabled( true );//always enable to have some kind of refresh action
     if (mActionShop) {
         mActionShop->setEnabled( mShopUrl.isValid() );
     }
@@ -736,12 +735,8 @@ void ComicApplet::slotSaveComicAs()
 void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 {
     if ( constraints && Plasma::SizeConstraint && mFrame ) {
-        qreal bottom = mImageRect.bottom();
         QPointF buttons( ( size().width() - mFrame->size().width() ) / 2,
-                         bottom - mFrame->size().height() - 5 );
-        if ( buttons.y() < 0 || buttons.y() > size().height() ) {
-            buttons.setY( contentsRect().bottom() - mFrame->size().height() - 5 );
-        }
+                         contentsRect().bottom() - mFrame->size().height() - 5 );
         mFrame->setPos( buttons );
     }
 }

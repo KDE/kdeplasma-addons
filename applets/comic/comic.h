@@ -135,7 +135,6 @@ class ComicApplet : public Plasma::Applet
         QSizeF mMaxSize;
         QSizeF mLastSize;
         QSizeF mIdealSize;
-        QRect mImageRect;
         Plasma::DataEngine *mEngine;
         Plasma::Frame *mFrame;
         FadingItem *mFadingItem;
