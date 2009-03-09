@@ -75,8 +75,6 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     m_positionSlider->setMinimum(0);
     m_positionSlider->setMaximum(0);
     m_positionSlider->setValue(0);
-    connect(this, SIGNAL(lengthChanged(int)),
-            m_positionSlider, SLOT(setMaximum(int)));
     connect(m_positionSlider, SIGNAL(valueChanged(int)),
             this, SLOT(setPosition(int)));
     m_positionSlider->setEnabled(false);
@@ -246,10 +244,13 @@ void NowPlaying::dataUpdated(const QString &name,
     int length = data["Length"].toInt();
     if (length != m_length) {
         m_length = length;
+
+        m_positionSlider->blockSignals(true);
         if (length == 0) {
             updatePositionSlider(0);
         }
-        emit lengthChanged(m_length);
+        m_positionSlider->setMaximum(length);
+        m_positionSlider->blockSignals(false);
     }
     if (length != 0) {
         int pos = data["Position"].toInt();
