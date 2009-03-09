@@ -360,7 +360,11 @@ void WeatherStation::setTemperature(const Conversion::Value& temperature)
 
 void WeatherStation::setHumidity(QString humidity)
 {
-    humidity.remove('%');
+    if (humidity == "N/A") {
+        humidity = "-";
+    } else {
+        humidity.remove('%');
+    }
     m_lcd->setNumber("humidity", humidity);
 }
 
