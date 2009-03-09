@@ -145,9 +145,6 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         }
         provider->setIsCurrent( isCurrentComic );
 
-        // only busy for downloading the comic
-        emit isBusy( true );
-
         connect( provider, SIGNAL( finished( ComicProvider* ) ), this, SLOT( finished( ComicProvider* ) ) );
         connect( provider, SIGNAL( error( ComicProvider* ) ), this, SLOT( error( ComicProvider* ) ) );
         return true;
@@ -264,8 +261,6 @@ void ComicEngine::setComicData( ComicProvider *provider )
     setData( identifier, "Title", provider->name() );
     setData( identifier, "SuffixType", provider->suffixType() );
     setData( identifier, "Error", false );
-
-    emit isBusy( false );
 }
 
 QString ComicEngine::lastCachedIdentifier( const QString &identifier ) const

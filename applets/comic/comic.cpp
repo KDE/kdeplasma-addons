@@ -282,9 +282,6 @@ void ComicApplet::init()
 
     connect( this, SIGNAL( geometryChanged() ), this, SLOT( slotSizeChanged() ) );
 
-    mEngine = dataEngine( "comic" );
-    connect( mEngine, SIGNAL( isBusy( bool ) ), this, SLOT( setBusy( bool ) ) );
-
     updateComic( mStoredIdentifierSuffix );
 }
 
@@ -301,6 +298,7 @@ ComicApplet::~ComicApplet()
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
+    setBusy( false );
     if ( data[ "Error" ].toBool() ) {
         if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
             updateComic( data[ "Previous identifier suffix" ].toString() );
@@ -651,12 +649,14 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
 
     setConfigurationRequired( mComicIdentifier.isEmpty() );
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
+        setBusy( true );
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
         const Plasma::DataEngine::Data data = mEngine->query( identifier );
 
         if ( data[ "Error" ].toBool() && data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+            setBusy( false );
             setConfigurationRequired( true );
         }
     } else {

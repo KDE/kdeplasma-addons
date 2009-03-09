@@ -45,9 +45,6 @@ class ComicEngine : public Plasma::DataEngine
         ComicEngine( QObject* parent, const QVariantList& args );
         ~ComicEngine();
 
-    Q_SIGNALS:
-        void isBusy( bool busy );
-
     protected:
         void init();
         bool sourceRequestEvent( const QString &identifier );
