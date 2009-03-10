@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Web Browser History
+Name[et]=Veebibrauseri ajalugu
+Name[ga]=Stair Bhrabhsála
+Name[pt_BR]=Histórico do navegador da Internet
+Name[sv]=Webbläsningshistorik
+Name[uk]=Історія переглядача Тенет
 Comment=Searches in Konqueror's history
 Comment[ar]=تبحث في تاريخ الكونيكور
 Comment[ca]=Cerques a la història del Konqueror
