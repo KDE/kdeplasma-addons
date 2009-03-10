@@ -42,6 +42,7 @@ namespace Plasma {
 class Frame;
 class Label;
 class PushButton;
+class TabBar;
 }
 
 class ComicApplet : public Plasma::Applet
@@ -60,6 +61,7 @@ class ComicApplet : public Plasma::Applet
         void createConfigurationInterface( KConfigDialog *parent );
 
     private Q_SLOTS:
+        void slotTabChanged( int newIndex );
         void slotChosenDay( const QDate &date );
         void slotNextDay();
         void slotPreviousDay();
@@ -81,12 +83,15 @@ class ComicApplet : public Plasma::Applet
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
         void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
+        void wheelEvent( QGraphicsSceneWheelEvent* );
         void hoverEnterEvent( QGraphicsSceneHoverEvent* );
         void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
         void constraintsEvent( Plasma::Constraints constraints );
 
     private:
+        void changeComic( bool differentComic );
         void updateComic( const QString &identifierSuffix = QString() );
+        void updateTabBar();
         void updateButtons();
         void updateContextMenu();
         void loadConfig();
@@ -149,6 +154,13 @@ class ComicApplet : public Plasma::Applet
         ArrowWidget *mRightArrow;
         int mReloadTime;
         KDatePicker *mCalendar;
+
+        //Tabs
+        bool mShowTabBar;
+        int mNumTabs;
+        Plasma::TabBar *mTabBar;
+        QStringList mTabIdentifier;
+        QStringList mTabText;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )

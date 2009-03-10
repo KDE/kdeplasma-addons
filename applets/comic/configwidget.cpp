@@ -138,6 +138,12 @@ QString ConfigWidget::comicIdentifier() const
     return index.data( Qt::UserRole ).toString();
 }
 
+QString ConfigWidget::comicName() const
+{
+    const QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
+    return index.data( Qt::DisplayRole ).toString();
+}
+
 void ConfigWidget::setShowComicUrl( bool show )
 {
     appearanceUi.checkBox_url->setChecked( show );
@@ -216,6 +222,26 @@ void ConfigWidget::setSmoothScaling( bool checked )
 bool ConfigWidget::smoothScaling() const
 {
     return appearanceUi.checkBox_smooth->isChecked();
+}
+
+void ConfigWidget::setShowTabBar( bool show )
+{
+    appearanceUi.checkBox_tabBar->setChecked( show );
+}
+
+bool ConfigWidget::showTabBar() const
+{
+    return appearanceUi.checkBox_tabBar->isChecked();
+}
+
+void ConfigWidget::setNumTabs( int num )
+{
+    appearanceUi.spinBox_numTabs->setValue( num );
+}
+
+int ConfigWidget::numTabs() const
+{
+    return appearanceUi.spinBox_numTabs->value();
 }
 
 #include "configwidget.moc"

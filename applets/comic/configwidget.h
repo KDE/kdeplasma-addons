@@ -59,6 +59,11 @@ class ConfigWidget : public QWidget
         int reloadTime() const;
         void setSmoothScaling( bool checked );
         bool smoothScaling() const;
+        void setShowTabBar( bool show );
+        bool showTabBar() const;
+        void setNumTabs( int num );
+        int numTabs() const;
+        QString comicName() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;

@@ -143,15 +143,21 @@ void ImageWidget::wheelEvent( QGraphicsSceneWheelEvent *event )
     const int numDegrees = event->delta() / 8;
     const int numSteps = numDegrees / 15;
 
-    if ( mScrollBarVert->isVisible() && event->modifiers() != Qt::AltModifier &&
+    if ( mScrollBarVert->isVisible() && ( event->modifiers() == Qt::NoModifier ) &&
          !mScrollBarHoriz->isUnderMouse() ) {
         const int scroll = mScrollBarVert->singleStep();
         mScrollBarVert->setValue( mScrollBarVert->value() - numSteps * scroll );
-    } else if ( mScrollBarHoriz->isVisible() ) {
+
+        event->accept();
+        update( this->rect() );
+    } else if ( mScrollBarHoriz->isVisible() &&
+                ( ( event->modifiers() == Qt::AltModifier ) || ( event->modifiers() == Qt::NoModifier ) ) ) {
         const int scroll = mScrollBarHoriz->singleStep();
         mScrollBarHoriz->setValue( mScrollBarHoriz->value() - numSteps * scroll );
+
+        event->accept();
+        update( this->rect() );
     }
-    update( this->rect() );
     QGraphicsItem::wheelEvent( event );
 }
 
