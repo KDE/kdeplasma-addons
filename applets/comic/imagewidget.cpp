@@ -56,7 +56,7 @@ void ImageWidget::slotScroll()
 void ImageWidget::updateScrollBars()
 {
     if ( !mIsScaled ) {
-        QSize temp = this->size().toSize();
+        QSizeF temp = this->size();
         const int scrollWidthSpace = mScrollBarVert->preferredSize().width();
         const int scrollHeightSpace = mScrollBarHoriz->preferredSize().height();
 
