@@ -21,7 +21,6 @@
 #include "SystemActions.h"
 
 #include <KRun>
-#include <KDebug>
 #include <KIcon>
 #include <KLocalizedString>
 #include <KStandardDirs>
@@ -55,15 +54,11 @@ SystemActions::SystemActions()
     : StandardActionTreeModel(NULL),
       delayedActivateItemIndex(-1)
 {
-    kDebug() << "1 created model on" << (void *) root();
-    kDebug() << "m_instance is" << (void *) m_instance;
 }
 
 SystemActions::SystemActions(Item * r)
     : StandardActionTreeModel(r)
 {
-    kDebug() << "2 creating model on" << (void *) r;
-    kDebug() << "2 created model on" << (void *) root();
 }
 
 SystemActions::~SystemActions()
@@ -72,12 +67,10 @@ SystemActions::~SystemActions()
 
 SystemActions * SystemActions::instance()
 {
-    kDebug() << (void *) m_instance;
     if (!m_instance) {
         m_instance = new SystemActions();
         m_instance->load();
     }
-    kDebug() << (void *) m_instance;
     return m_instance;
 }
 
@@ -340,7 +333,6 @@ void Sessions::load()
 
         QString name = KDisplayManager::sess2Str(session);
 
-        kDebug() << session.session;
         add(
             name, QString(),
             KIcon(session.vt ? "utilities-terminal" : "user-identity"),
@@ -360,7 +352,6 @@ void Sessions::load()
 void Sessions::activate(int index)
 {
     QString data = itemAt(index).data.toString();
-    kDebug() << data;
 
     if (data.isEmpty()) {
         return;
