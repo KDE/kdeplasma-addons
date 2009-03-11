@@ -61,7 +61,11 @@ public:
 
     void activate(int index);
 
+private Q_SLOTS:
+    void delayedActivate();
+
 private:
+    int delayedActivateItemIndex;
     explicit SystemActions(Item * root);
     explicit SystemActions();
 

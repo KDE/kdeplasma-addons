@@ -52,7 +52,8 @@ namespace Models {
 SystemActions * SystemActions::m_instance = NULL;
 
 SystemActions::SystemActions()
-    : StandardActionTreeModel(NULL)
+    : StandardActionTreeModel(NULL),
+      delayedActivateItemIndex(-1)
 {
     kDebug() << "1 created model on" << (void *) root();
     kDebug() << "m_instance is" << (void *) m_instance;
@@ -238,10 +239,21 @@ Lancelot::ActionTreeModel * SystemActions::child(int index)
 void SystemActions::activate(int index)
 {
     if (index < 0 || index >= root()->children.size()) {
+        delayedActivateItemIndex = -1;
         return;
     }
 
-    QString cmd = root()->children.at(index)->data.toString();
+    delayedActivateItemIndex = index;
+    QTimer::singleShot(0, this, SLOT(delayedActivate()));
+}
+
+void SystemActions::delayedActivate()
+{
+    if (delayedActivateItemIndex < 0) {
+        return;
+    }
+
+    QString cmd = root()->children.at(delayedActivateItemIndex)->data.toString();
 
     if (cmd == ID_LOCK_SCREEN) {
         org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());

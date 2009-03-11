@@ -518,9 +518,6 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
                     "_", textColor, shadowColor,
                     QPoint(0, 0), radius);
             painter->drawPixmap(rectangle.topLeft() + QPoint(width, 0), result);
-            // painter->drawText(
-            //         QRectF(rectangle.topLeft() + QPoint(width, 0), rectangle.size()),
-            //         QString('_'));
         }
     } else {
         if (group()->hasProperty(TextColorBackground)) {
@@ -538,7 +535,7 @@ void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int fla
             frect.adjust(- radius, - radius, radius, radius);
             painter->fillPath(
                     Plasma::PaintUtils::roundedRectangle(
-                     frect, 2*radius), QBrush(bgColor)
+                        frect, 2*radius), QBrush(bgColor)
                     );
         }
         painter->drawText(rectangle,
