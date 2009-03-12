@@ -75,7 +75,13 @@ void LeaveNote::init()
 
     mLabel = new Plasma::Label(this);
     mLabel->setText(i18n("Leave me a note: "));
-    mLabel->setStyleSheet("color: black");
+    mLabel->setStyleSheet("font-weight: bold; color: black");
+
+    mCountLabel = new Plasma::Label(this);
+    mCountLabel->setStyleSheet("font-style: italic; color: black");
+    mMessageCounter = -1;
+    incrementMessageCount();
+
     mTextEdit = new Plasma::TextEdit(this);
     mTextEdit->setMinimumSize(QSize(0, 0));
     mTextEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
@@ -94,6 +100,8 @@ void LeaveNote::init()
     mLayout->addItem(mLabel);
     mLayout->addItem(mTextEdit);
     mLayout->addItem(mSendButton);
+    mLayout->addItem(mCountLabel);
+
     // FIXME Why does this not work?
     mLayout->setAlignment(mSendButton, Qt::AlignRight);
 
@@ -171,6 +179,8 @@ bool LeaveNote::checkKNotesDBusInterface()
 
 void LeaveNote::slotSend()
 {
+    incrementMessageCount();
+
     if (mTextEdit->nativeWidget()->toPlainText().isEmpty())
         return;
 
@@ -252,6 +262,12 @@ void LeaveNote::createNote(const QString& title, const QString& msg)
         widget->setLayout(layout);
         widget->show();
     }
+}
+
+void LeaveNote::incrementMessageCount()
+{
+    mMessageCounter++;
+    mCountLabel->setText(i18np("One unread message", "%1 unread messages", mMessageCounter));
 }
 
 #include "leavenote.moc"

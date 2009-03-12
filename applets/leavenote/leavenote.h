@@ -66,8 +66,11 @@ private:
 
     void createNote(const QString& title, const QString& msg);
     bool checkKNotesDBusInterface();
+    void incrementMessageCount();
+
     // text labels
     Plasma::Label *mLabel;
+    Plasma::Label *mCountLabel;
 
     // svg for theme
     Plasma::Svg mTheme;
@@ -85,10 +88,11 @@ private:
     bool mUseKNotes, mUseNotification;
 
     Ui::leavenoteConfig ui;
+
+    int mMessageCounter;
 };
 
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(leavenote, LeaveNote)
 #endif /* LEAVENOTE_H */
 
-void verboseLog(QString);
