@@ -25,6 +25,8 @@
 #include "ui_comicSettings.h"
 
 #include <QtGui/QWidget>
+#include <QTime>
+
 #include <Plasma/DataEngine>
 
 class ComicModel;
@@ -55,8 +57,8 @@ class ConfigWidget : public QWidget
         bool arrowsOnHover() const;
         void setMiddleClick( bool checked );
         bool middleClick() const;
-        void setReloadTime( int minutes );
-        int reloadTime() const;
+        void setTabSwitchTime( const QTime &time );
+        QTime tabSwitchTime() const;
         void setSmoothScaling( bool checked );
         bool smoothScaling() const;
         void setShowTabBar( bool show );

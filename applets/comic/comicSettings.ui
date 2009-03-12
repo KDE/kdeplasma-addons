@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>369</width>
-    <height>143</height>
+    <height>107</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -66,48 +66,12 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="toolTip">
-          <string>Stored positions are not ignored.</string>
-         </property>
-         <property name="text">
-          <string>&amp;Reload recent comic each ...</string>
-         </property>
-         <property name="buddy">
-          <cstring>spinBox_Reload</cstring>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBox_Reload">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="suffix">
-          <string> min</string>
-         </property>
-         <property name="maximum">
-          <number>600</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
       <spacer name="verticalSpacer_2">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Maximum</enum>
+        <enum>QSizePolicy::Fixed</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -164,7 +128,7 @@
  <customwidgets>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QComboBox</extends>
+   <extends></extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>

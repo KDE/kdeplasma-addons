@@ -122,8 +122,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFrame( 0 ),
       mFadingItem( 0 ),
       mPrevButton( 0 ),
-      mNextButton( 0 ),
-      mCalendar( 0 )
+      mNextButton( 0 )
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
@@ -252,6 +251,7 @@ void ComicApplet::init()
     mDateChangedTimer->setInterval( 5 * 60 * 1000 ); // every 5 minutes
 
     mReloadTimer = new QTimer( this );
+    slotStartTimer();
     connect( mReloadTimer, SIGNAL( timeout() ), this, SLOT( slotReload() ) );
 
     mActionGoFirst = new QAction( KIcon( "go-first" ), i18n( "Jump to &first Strip" ), this );
@@ -264,6 +264,8 @@ void ComicApplet::init()
 
     mActionGoJump = new QAction( KIcon( "go-jump" ), i18n( "Jump to Strip ..." ), this );
     mActions.append( mActionGoJump );
+    //stop the timer to avoid tab switching while interacting with the applet
+    connect( mActionGoJump, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
     if ( isAllowed( "KRun" ) ) {
@@ -276,6 +278,8 @@ void ComicApplet::init()
     if ( isAllowed( "FileDialog" ) ) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
+        //stop the timer to avoid tab switching while interacting with the applet
+        connect( action, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
         connect( action, SIGNAL( triggered( bool ) ), this , SLOT( slotSaveComicAs() ) );
     }
 
@@ -300,12 +304,6 @@ void ComicApplet::init()
 ComicApplet::~ComicApplet()
 {
     delete mFullViewWidget;
-
-    if ( mCalendar ) {
-        mCalendar->hide();
-        disconnect( mCalendar, 0, 0, 0 );
-    }
-    delete mCalendar;
 }
 
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
@@ -390,6 +388,9 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 {
+    //to not have tab switches while configurating things
+    mReloadTimer->stop();
+
     mConfigWidget = new ConfigWidget( dataEngine( "comic" ), parent );
     mConfigWidget->setComicIdentifier( mComicIdentifier );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
@@ -398,7 +399,8 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowComicIdentifier( mShowComicIdentifier );
     mConfigWidget->setArrowsOnHover( mArrowsOnHover );
     mConfigWidget->setMiddleClick( mMiddleClick );
-    mConfigWidget->setReloadTime( mReloadTime );
+    QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
+    mConfigWidget->setTabSwitchTime( time );
     mConfigWidget->setSmoothScaling( mSmothScaling );
     mConfigWidget->setShowTabBar( mShowTabBar );
     mConfigWidget->setNumTabs( mNumTabs );
@@ -409,6 +411,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
     connect( parent, SIGNAL( applyClicked() ), this, SLOT( applyConfig() ) );
     connect( parent, SIGNAL( okClicked() ), this, SLOT( applyConfig() ) );
+    connect( parent, SIGNAL( finished() ), this, SLOT( slotStartTimer() ) );
 }
 
 void ComicApplet::applyConfig()
@@ -422,18 +425,14 @@ void ComicApplet::applyConfig()
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
-    mReloadTime = mConfigWidget->reloadTime();
+    QTime time = mConfigWidget->tabSwitchTime();
+    mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
     mSmothScaling = mConfigWidget->smoothScaling();
     mShowTabBar = mConfigWidget->showTabBar();
     mNumTabs = mConfigWidget->numTabs();
     mComicTitle = mConfigWidget->comicName();
 
-    if ( !mReloadTime ) {
-        mReloadTimer->stop();
-    } else {
-        mReloadTimer->start( mReloadTime * 1000 * 60 );
-    }
-
+    slotStartTimer();
     updateTabBar();
     saveConfig();
 
@@ -519,7 +518,7 @@ void ComicApplet::loadConfig()
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
-    mReloadTime = cg.readEntry( "reloadTime", 0 );
+    mSwitchTabTime = cg.readEntry( "switchTabTime", 0 );
     mSmothScaling = cg.readEntry( "smoothScaling", true );
     mShowTabBar = cg.readEntry( "showTabBar", false );
     mNumTabs = cg.readEntry( "numTabs", 1 );
@@ -539,7 +538,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "showComicIdentifier", mShowComicIdentifier );
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
-    cg.writeEntry( "reloadTime", mReloadTime );
+    cg.writeEntry( "switchTabTime", mSwitchTabTime );
     cg.writeEntry( "smoothScaling", mSmothScaling );
     cg.writeEntry( "showTabBar", mShowTabBar );
     cg.writeEntry( "numTabs", mNumTabs );
@@ -584,7 +583,23 @@ void ComicApplet::slotCurrentDay()
 
 void ComicApplet::slotReload()
 {
-    updateComic( mStoredIdentifierSuffix );
+    int index = mTabBar->currentIndex();
+    int newIndex = ( index + 1 ) % mTabBar->count();
+
+    if ( index == newIndex ) {
+        changeComic( false );
+    } else {
+        mTabBar->setCurrentIndex( newIndex );
+    }
+}
+
+void ComicApplet::slotStartTimer()
+{
+    if ( mSwitchTabTime ) {
+        mReloadTimer->start( mSwitchTabTime * 1000 );
+    } else {
+        mReloadTimer->stop();
+    }
 }
 
 void ComicApplet::slotGoJump()
@@ -594,16 +609,17 @@ void ComicApplet::slotGoJump()
         if ( pageDialog.exec() == QDialog::Accepted ) {
             updateComic( QString::number( pageDialog.getStripNumber() ) );
         }
+        slotStartTimer();
     } else if ( mSuffixType == "Date" ) {
-        if ( !mCalendar ) {
-            mCalendar = new KDatePicker();
-        }
-        mCalendar->setMinimumSize( mCalendar->sizeHint() );
-        mCalendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
+        KDatePicker *calendar = new KDatePicker;
+        calendar->setAttribute( Qt::WA_DeleteOnClose );//to have destroyed emitted upon closing
+        calendar->setMinimumSize( calendar->sizeHint() );
+        calendar->setDate( QDate::fromString( mCurrentIdentifierSuffix, "yyyy-MM-dd" ) );
 
-        connect( mCalendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-        connect( mCalendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
-        mCalendar->show();
+        connect( calendar, SIGNAL( destroyed( QObject* ) ), this, SLOT( slotStartTimer() ) );
+        connect( calendar, SIGNAL( dateSelected( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        connect( calendar, SIGNAL( dateEntered( QDate ) ), this, SLOT( slotChosenDay( QDate ) ) );
+        calendar->show();
     }
 }
 
@@ -638,6 +654,7 @@ void ComicApplet::slotShop()
 
 void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
 {
+    slotStartTimer();
     if ( event->button() == Qt::LeftButton ) {
         if ( mLabelUrl->isUnderMouse() ) {
             if ( isAllowed( "KRun" ) ) {
@@ -676,6 +693,7 @@ void ComicApplet::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 }
 
 void ComicApplet::wheelEvent( QGraphicsSceneWheelEvent *event ) {
+    slotStartTimer();
     if ( mImageWidget->isUnderMouse() && ( event->modifiers() == Qt::ControlModifier ) ) {
         const QPointF eventPos = event->pos();
         const int numDegrees = event->delta() / 8;
@@ -789,8 +807,10 @@ void ComicApplet::slotSaveComicAs()
 {
     KTemporaryFile tempFile;
 
-    if ( !tempFile.open() )
+    if ( !tempFile.open() ) {
+        slotStartTimer();
         return;
+    }
 
     // save image to temporary file
     mImage.save( tempFile.fileName(), "PNG" );
@@ -798,8 +818,10 @@ void ComicApplet::slotSaveComicAs()
     KUrl srcUrl( tempFile.fileName() );
 
     KUrl destUrl = KFileDialog::getSaveUrl( KUrl(), "*.png" );
-    if ( !destUrl.isValid() )
+    if ( !destUrl.isValid() ) {
+        slotStartTimer();
         return;
+    }
 
 #ifdef HAVE_NEPOMUK
     bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );
@@ -829,6 +851,8 @@ void ComicApplet::slotSaveComicAs()
 #else
     KIO::NetAccess::file_copy( srcUrl, destUrl );
 #endif
+
+    slotStartTimer();
 }
 
 void ComicApplet::constraintsEvent( Plasma::Constraints constraints )

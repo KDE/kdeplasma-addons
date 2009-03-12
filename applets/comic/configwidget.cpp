@@ -204,14 +204,14 @@ bool ConfigWidget::middleClick() const
     return comicUi.checkBox_middle->isChecked();
 }
 
-void ConfigWidget::setReloadTime( int minutes )
+void ConfigWidget::setTabSwitchTime( const QTime &time )
 {
-    comicUi.spinBox_Reload->setValue( minutes );
+    appearanceUi.timeEdit_tabs->setTime( time );
 }
 
-int ConfigWidget::reloadTime() const
+QTime ConfigWidget::tabSwitchTime() const
 {
-    return comicUi.spinBox_Reload->value();
+    return appearanceUi.timeEdit_tabs->time();
 }
 
 void ConfigWidget::setSmoothScaling( bool checked )

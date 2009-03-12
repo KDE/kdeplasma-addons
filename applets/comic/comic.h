@@ -34,7 +34,6 @@ class ConfigWidget;
 class FadingItem;
 class FullViewWidget;
 class ImageWidget;
-class KDatePicker;
 class QTimer;
 class QAction;
 
@@ -69,6 +68,7 @@ class ComicApplet : public Plasma::Applet
         void slotCurrentDay();
         void slotGoJump();
         void slotReload();
+        void slotStartTimer();
         void slotSaveComicAs();
         void slotScaleToContent();
         void slotShop();
@@ -152,12 +152,11 @@ class ComicApplet : public Plasma::Applet
         ImageWidget *mImageWidget;
         ArrowWidget *mLeftArrow;
         ArrowWidget *mRightArrow;
-        int mReloadTime;
-        KDatePicker *mCalendar;
 
         //Tabs
         bool mShowTabBar;
         int mNumTabs;
+        int mSwitchTabTime;
         Plasma::TabBar *mTabBar;
         QStringList mTabIdentifier;
         QStringList mTabText;
