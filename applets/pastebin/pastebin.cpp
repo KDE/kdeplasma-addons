@@ -563,6 +563,7 @@ void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
 {
+    Q_UNUSED(event);
     setInteractionState(Waiting);
 }
 

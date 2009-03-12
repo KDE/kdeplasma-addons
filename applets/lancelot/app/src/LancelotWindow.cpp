@@ -290,6 +290,8 @@ LancelotWindow::LancelotWindow()
 
 void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
 {
+    Q_UNUSED(old);
+
     // We have to return the focus to the QGraphicsView
     // since it handles the keyboard, the universe
     // and everything

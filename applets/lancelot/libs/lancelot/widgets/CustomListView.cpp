@@ -279,23 +279,27 @@ void CustomList::viewportChanged(QRectF viewport) //>
 
 qreal CustomList::scrollUnit(Qt::Orientation direction) //>
 {
+    Q_UNUSED(direction);
     return 20;
 } //<
 
 void CustomList::factoryItemInserted(int position) //>
 {
+    Q_UNUSED(position);
     kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemDeleted(int position) //>
 {
+    Q_UNUSED(position);
     kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemAltered(int position) //>
 {
+    Q_UNUSED(position);
     kDebug();
     d->updateSizeInfo();
 } //<

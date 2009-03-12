@@ -98,6 +98,7 @@ public:
 
     void relayout(RelayoutType type = Clean)
     {
+        Q_UNUSED(type);
         if (items.size() == 0) return;
 
         int showItems   = qMin(items.size(), count);
@@ -163,6 +164,8 @@ ColumnLayout::ColumnSizer * ColumnLayout::sizer() const
 QSizeF ColumnLayout::sizeHint(Qt::SizeHint which,
         const QSizeF & constraint) const
 {
+    Q_UNUSED(which);
+    Q_UNUSED(constraint);
     return QSizeF();
 }
 
@@ -201,6 +204,7 @@ ColumnLayout::~ColumnLayout()
 
 void ColumnLayout::removeAt(int index)
 {
+    Q_UNUSED(index);
 }
 
 QGraphicsLayoutItem * ColumnLayout::itemAt(int i) const

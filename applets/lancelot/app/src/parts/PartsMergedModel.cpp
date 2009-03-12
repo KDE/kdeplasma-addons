@@ -35,6 +35,7 @@ PartsMergedModel::~PartsMergedModel()
 
 bool PartsMergedModel::hasModelContextActions(int index) const
 {
+    Q_UNUSED(index);
     return true;
 }
 
@@ -59,6 +60,7 @@ void PartsMergedModel::modelContextActivate(int index, QAction * context)
 void PartsMergedModel::setModelDropActions(int index, Qt::DropActions & actions,
         Qt::DropAction & defaultAction)
 {
+    Q_UNUSED(index);
     if (modelCount() <= 1) {
         actions = Qt::CopyAction;
         defaultAction = Qt::CopyAction;

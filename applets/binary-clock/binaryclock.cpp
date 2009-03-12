@@ -145,7 +145,6 @@ void BinaryClock::dataUpdated(const QString& source, const Plasma::DataEngine::D
     int dots = m_showSeconds ? 6 : 4;
 
     int rectSize = qMax(1, qMin((appletHeight - 3) / 4, (appletWidth - 3) / dots));
-    int yPos = ((appletHeight - 4 * rectSize) / 2) + contentsRect().topLeft().y();
     int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect().topLeft().x();
     update(xPos + (m_updateIndex * (rectSize + 1)),
            contentsRect().y(),

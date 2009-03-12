@@ -66,6 +66,7 @@ QMimeData * ActionTreeModel::modelMimeData()
 // ActionTreeModel
 ActionTreeModel * ActionTreeModelProxy::child(int index)
 {
+    Q_UNUSED(index);
     return NULL;
 }
 

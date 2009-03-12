@@ -83,6 +83,7 @@ QMimeData * BaseMergedModel::modelMimeData(int index) const
 void BaseMergedModel::setModelDropActions(int index, Qt::DropActions & actions,
         Qt::DropAction & defaultAction)
 {
+    Q_UNUSED(index);
     actions = Qt::CopyAction;
     defaultAction = Qt::CopyAction;
 }

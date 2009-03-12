@@ -75,6 +75,7 @@ class PopupMenu::Private {
 public:
     Private(PopupMenu * parent)
     {
+      Q_UNUSED(parent);
     };
 
     ~Private()
@@ -112,6 +113,7 @@ QAction * PopupMenu::addAction(const QIcon & icon, const QString & title)
 
 QAction * PopupMenu::exec(const QPoint & p, QAction * action)
 {
+    Q_UNUSED(action);
     d->chosenAction = NULL;
     PopupList::exec(p);
 

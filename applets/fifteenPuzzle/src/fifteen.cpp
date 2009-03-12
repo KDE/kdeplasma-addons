@@ -108,6 +108,8 @@ void Fifteen::shuffle()
 
 void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
+  Q_UNUSED(event);
+
   QSizeF size = contentsRect().size();
   int width = size.width() / 4;
   int height = size.height() / 4;

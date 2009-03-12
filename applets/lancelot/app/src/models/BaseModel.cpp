@@ -204,6 +204,7 @@ QMimeData * BaseModel::mimeData(int index) const
 void BaseModel::setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction)
 {
+    Q_UNUSED(index);
     actions = Qt::CopyAction;
     defaultAction = Qt::CopyAction;
 }

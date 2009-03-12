@@ -46,6 +46,7 @@ QIcon ActionListModel::icon(int index) const
 
 QMimeData * ActionListModel::mimeData(int index) const
 {
+    Q_UNUSED(index);
     return NULL;
 }
 

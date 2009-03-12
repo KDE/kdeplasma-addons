@@ -82,6 +82,8 @@ class BasicWidget::Private {
 
     int shortcutPosition(const QString & text)
     {
+        Q_UNUSED(text);
+
         int index = 0;
         while ((index = title.indexOf('&', index)) != -1) {
             if (index == title.size() - 1) {
@@ -393,7 +395,7 @@ void BasicWidget::setTitle(const QString & title)
 
 void BasicWidget::setShortcutKey(const QString & key)
 {
-
+  Q_UNUSED(key);
 }
 
 QString BasicWidget::title() const
@@ -464,6 +466,8 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
 
 void BasicWidget::drawText(QPainter * painter, const QRectF & rectangle, int flags, const QString & txt, bool shortcutEnabled)
 {
+    Q_UNUSED(flags);
+
     if (txt.isEmpty()) {
         return;
     }

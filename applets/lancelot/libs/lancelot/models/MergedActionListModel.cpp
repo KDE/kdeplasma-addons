@@ -162,21 +162,27 @@ void MergedActionListModel::setModelDropActions(int index,
 
 QMimeData * MergedActionListModel::modelMimeData(int index) const
 {
+    Q_UNUSED(index);
     return NULL;
 }
 
 bool MergedActionListModel::hasModelContextActions(int index) const
 {
+    Q_UNUSED(index);
     return false;
 }
 
 void MergedActionListModel::setModelContextActions(int index, Lancelot::PopupMenu * menu)
 {
+    Q_UNUSED(index);
+    Q_UNUSED(menu);
     // do nothing
 }
 
 void MergedActionListModel::modelContextActivate(int index, QAction * context)
 {
+    Q_UNUSED(index);
+    Q_UNUSED(context);
     // do nothing
 }
 

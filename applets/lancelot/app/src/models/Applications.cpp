@@ -180,6 +180,7 @@ QMimeData * Applications::mimeData(int index) const
 void Applications::setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction)
 {
+    Q_UNUSED(index);
     actions = Qt::CopyAction;
     defaultAction = Qt::CopyAction;
 }
