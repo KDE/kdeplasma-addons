@@ -75,12 +75,12 @@ class ExtenderButton::Private {
 public:
     Private(ExtenderButton * parent)
       : q(parent),
-        extender(NULL),
+        shortcut(NULL),
         extenderPosition(NoExtender),
         activationMethod(ClickActivate),
+        extender(NULL),
         checkable(false),
-        checked(false),
-        shortcut(NULL)
+        checked(false)
     {
         if (!extenderIconSvg.isValid()) {
             extenderIconSvg.setImagePath("lancelot/extender-button-icon");

@@ -120,8 +120,8 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, Ac
       m_extenderPosition(NoExtender),
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
       m_instance(instance), m_view(view),
-      m_categoriesActivable(false), m_selectedItem(NULL),
-      m_itemIconSize(32, 32), m_categoryIconSize(20, 20)
+      m_categoriesActivable(false), m_itemIconSize(32, 32),
+      m_categoryIconSize(20, 20), m_selectedItem(NULL)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);

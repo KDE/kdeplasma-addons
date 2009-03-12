@@ -618,6 +618,9 @@ void ScrollBar::setActivationMethod(ActivationMethod method)
                 &(d->downTimer), SLOT(stop())
                 );
             break;
+        case ExtenderActivate:
+            //Should not happen because of assignment above. Assert?
+            break; 
     }
 }
 

@@ -31,11 +31,11 @@
 namespace Lancelot {
 
 PopupList::Private::Private(PopupList * parent)
-    : closeTimeout(1000),
-      listModel(NULL),
+    : listModel(NULL),
       treeModel(NULL),
-      child(NULL),
       openAction(PopupList::PopupNew),
+      closeTimeout(1000),
+      child(NULL),
       q(parent)
 {
     scene = new QGraphicsScene();

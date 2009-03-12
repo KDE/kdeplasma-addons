@@ -66,7 +66,7 @@ public:
     Private(ActionTreeModel * entranceModel,
             ActionTreeModel * atlasModel,
             PassagewayView * p)
-      : layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p), focusIndex(0)
+      : focusIndex(0), layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p)
     {
         parent->setLayout(layout = new NodeLayout());
         layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
