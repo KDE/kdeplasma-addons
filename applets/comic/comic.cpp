@@ -125,6 +125,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mNextButton( 0 )
 {
     setHasConfigurationInterface( true );
+    setMinimumSize( QSizeF( 80, 40 ) );
     resize( 600, 250 );
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
@@ -161,7 +162,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl->hide();
 
     mLeftArrow = new ArrowWidget( this );
-    mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding ) );
+    mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
     mLeftArrow->setCursor( Qt::PointingHandCursor );
     mLeftArrow->hide();
     mLeftArrow->setGeometry( QRectF( QPointF( 0, 0 ), mLeftArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
@@ -169,7 +170,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 
     mRightArrow = new ArrowWidget( this );
     mRightArrow->setDirection( Plasma::Right );
-    mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding ) );
+    mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
     mRightArrow->setCursor( Qt::PointingHandCursor );
     mRightArrow->hide();
     mRightArrow->setGeometry( QRectF( QPointF( 0, 0 ), mRightArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
@@ -466,16 +467,23 @@ void ComicApplet::updateTabBar()
 {
     if ( mNumTabs > mTabBar->count() ) {
         for ( int i = mTabBar->count(); i < mNumTabs; ++i ) {
-            mTabIdentifier.append( mComicIdentifier );
-            mTabText.append( mComicTitle );
+            //initially mTabBar->count() always is 0, so we have to check if
+            //text should be appended
+            if ( mTabIdentifier.count() < mNumTabs ) {
+                mTabIdentifier.append( mComicIdentifier );
+            }
+            if ( mTabText.count() < mNumTabs ) {
+                mTabText.append( mComicTitle );
+            }
+
             mTabBar->addTab( mTabText.at( i ) );
         }
     } else if ( mNumTabs < mTabBar->count() ) {
         mTabBar->setCurrentIndex( 0 );
         for ( int i = mTabBar->count(); i > mNumTabs; --i ) {
             mTabBar->removeTab( i - 1 );
-            mTabIdentifier.removeAt( i - 1 );
-            mTabText.removeAt( i - 1 );
+            mTabIdentifier.removeLast();
+            mTabText.removeLast();
         }
     }
 
@@ -725,8 +733,8 @@ void ComicApplet::updateSize()
     mLabelUrl->setPreferredWidth( mLabelUrl->nativeWidget()->sizeHint().width() );
 
     //leftArea and rightArea are not completly correct when their size is smaller then the preferredSize
-    int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? mLeftArrow->size().width() + 1 : 0;
-    int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mRightArrow->size().width() + 1 : 0;
+    int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? mLeftArrow->preferredSize().width() + 1 : 0;
+    int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mRightArrow->preferredSize().width() + 1 : 0;
     int topArea = mShowTabBar ? mTabBar->nativeWidget()->height() + 5 : 0;
     topArea += ( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() ) ? mLabelTop->nativeWidget()->height() : 0;
     int bottomArea = ( mShowComicUrl && !mLabelUrl->text().isEmpty() ) ? mLabelUrl->nativeWidget()->height() : 0;
