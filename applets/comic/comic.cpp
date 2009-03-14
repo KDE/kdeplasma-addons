@@ -310,6 +310,7 @@ ComicApplet::~ComicApplet()
 void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &data )
 {
     setBusy( false );
+    slotStartTimer();
     if ( data[ "Error" ].toBool() ) {
         if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
             updateComic( data[ "Previous identifier suffix" ].toString() );
@@ -762,6 +763,9 @@ QList<QAction*> ComicApplet::contextualActions()
 
 void ComicApplet::updateComic( const QString &identifierSuffix )
 {
+    //always stop the timer when changing the comic, as not all clicks are caught by mousePressEvent here
+    mReloadTimer->stop();
+
     mEngine = dataEngine( "comic" );
 
     setConfigurationRequired( mComicIdentifier.isEmpty() );
@@ -783,9 +787,11 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         if ( data[ "Error" ].toBool() && data[ "Previous identifier suffix" ].toString().isEmpty() ) {
             setBusy( false );
             setConfigurationRequired( true );
+            slotStartTimer();
         }
     } else {
         setConfigurationRequired( true );
+        slotStartTimer();
     }
 }
 
