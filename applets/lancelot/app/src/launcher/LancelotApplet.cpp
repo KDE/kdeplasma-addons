@@ -32,6 +32,11 @@
 #include "lancelot_interface.h"
 #include "../LancelotConfig.h"
 
+#define SIZE_CMIN 16
+#define SIZE_CPREF 32
+#define SIZE_CMAX 64
+#define SPACING 8
+
 class LancelotApplet::Private {
 public:
     Private(LancelotApplet * parent)
@@ -119,21 +124,23 @@ public:
     void resize()
     {
          QSizeF size = q->size();
+         int buttonCount = (showCategories ? 4 : 1);
+         int sumSpacing = (buttonCount - 1) * SPACING;
 
          if (q->formFactor() == Plasma::Vertical) {
              layout->setMinimumSize(
-                     16, 16 * (showCategories?4:1));
+                     SIZE_CMIN,  SIZE_CMIN  * buttonCount + sumSpacing);
              layout->setPreferredSize(
-                     64, 64 * (showCategories?4:1));
+                     SIZE_CPREF, SIZE_CPREF * buttonCount + sumSpacing);
              layout->setMaximumSize(
-                     INT_MAX, 64 * (showCategories?4:1));
+                     INT_MAX,    SIZE_CMAX  * buttonCount + sumSpacing);
          } else if (q->formFactor() == Plasma::Horizontal) {
              layout->setMinimumSize(
-                     64 * (showCategories?4:1), 16);
+                     SIZE_CMIN  * buttonCount + sumSpacing, SIZE_CMIN);
              layout->setPreferredSize(
-                     64 * (showCategories?4:1), 64);
+                     SIZE_CPREF * buttonCount + sumSpacing, SIZE_CPREF);
              layout->setMaximumSize(
-                     64 * (showCategories?4:1), INT_MAX);
+                     SIZE_CMAX  * buttonCount + sumSpacing, INT_MAX);
          } else {
              size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
              size = QSizeF(size.height() * buttons.count(), size.height());
@@ -228,7 +235,7 @@ void LancelotApplet::saveConfig()
 void LancelotApplet::applyConfig()
 {
     d->layout->setContentsMargins(0, 0, 0, 0);
-    d->layout->setSpacing(0);
+    d->layout->setSpacing(SPACING);
     if (d->showCategories) {
         d->createCategoriesButtons();
     } else {
