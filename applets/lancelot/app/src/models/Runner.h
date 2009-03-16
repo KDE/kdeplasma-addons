@@ -21,6 +21,7 @@
 #define LANCELOTAPP_MODELS_RUNNER_H
 
 #include "BaseModel.h"
+#include <QBasicTimer>
 #include <plasma/runnermanager.h>
 #include <plasma/querymatch.h>
 
@@ -48,10 +49,12 @@ public Q_SLOTS:
 protected:
     void activate(int index);
     void load();
+    void timerEvent(QTimerEvent * event);
 
 private:
     QString m_searchString;
     QString m_runnerName;
+    QBasicTimer m_timer;
     Plasma::RunnerManager * m_runnerManager;
     bool valid : 1;
 };

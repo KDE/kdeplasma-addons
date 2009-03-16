@@ -27,6 +27,8 @@
 
 #include <plasma/abstractrunner.h>
 
+#define SLEEP 600
+
 namespace Models {
 
 Runner::Runner(QString search)
@@ -62,7 +64,12 @@ void Runner::setRunnerName(const QString & name)
 void Runner::setSearchString(const QString & search)
 {
     m_searchString = search.trimmed();
+    m_timer.start(SLEEP, this);
+}
 
+void Runner::timerEvent(QTimerEvent * event)
+{
+    m_timer.stop();
     if (m_searchString.isEmpty()) {
         clear();
         add(
@@ -74,9 +81,9 @@ void Runner::setSearchString(const QString & search)
         valid = false;
     } else {
         if (m_runnerName.isEmpty()) {
-            m_runnerManager->launchQuery(search);
+            m_runnerManager->launchQuery(m_searchString);
         } else {
-            m_runnerManager->launchQuery(search, m_runnerName);
+            m_runnerManager->launchQuery(m_searchString, m_runnerName);
         }
     }
 }
