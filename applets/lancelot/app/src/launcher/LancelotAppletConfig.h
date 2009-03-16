@@ -22,21 +22,34 @@
 
 #include <ui_LancelotAppletConfigBase.h>
 
-class LancelotAppletConfig: public Ui::LancelotAppletConfigBase {
+class LancelotAppletConfig: public QObject, Ui::LancelotAppletConfigBase {
+    Q_OBJECT
 public:
     void setupUi(QWidget * widget);
 
     bool showCategories() const;
+    bool showCategory(const QString & id) const;
     bool clickActivation() const;
+    QStringList showingCategories(bool value) const;
     QString icon() const;
 
     void setShowCategories(bool value);
+    void setShowingCategories(QStringList ids, bool value);
+
+    void setShowCategory(const QString & id, bool value);
+    void setShowAllCategories(bool value);
+
     void setClickActivation(bool value);
     void setIcon(const QString & icon);
 
     QButtonGroup * qbgIcons;
     QButtonGroup * qbgChooseIcon;
     QButtonGroup * qbgMenuActivation;
+
+    QMap < QString, QListWidgetItem * > categories;
+
+protected Q_SLOTS:
+    void updateCard();
 };
 
 #endif /* LANCELOT_LAUNCHER_APPLET_CONFIG_H_ */

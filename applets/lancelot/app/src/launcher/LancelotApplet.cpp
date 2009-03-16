@@ -93,38 +93,42 @@ public:
             // Error connecting to Lancelot via d-bus
             // setFailedToLaunch(true);
             return;
-        } else {
-            // Creating buttons...
-            for (int i = 0; i < replyIDs.value().size(); i++) {
-                Lancelot::HoverIcon * button = new Lancelot::HoverIcon(
-                    KIcon(replyIcons.value().at(i)), "", q);
-
-                connect(
-                    button, SIGNAL(activated()),
-                    & signalMapper, SLOT(map())
-                );
-
-                signalMapper.setMapping(button, replyIDs.value().at(i));
-
-                connect(
-                    button, SIGNAL(clicked()),
-                    & signalMapperToggle, SLOT(map())
-                );
-
-                signalMapperToggle.setMapping(button, replyIDs.value().at(i));
-
-                layout->addItem(button);
-                button->setActivationMethod(clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
-                buttons << button;
-            }
         }
 
+        // Creating buttons...
+        for (int i = 0; i < replyIDs.value().size(); i++) {
+            if (categsHide.contains(replyIDs.value().at(i))) {
+                continue;
+            }
+
+            Lancelot::HoverIcon * button = new Lancelot::HoverIcon(
+                KIcon(replyIcons.value().at(i)), "", q);
+
+            connect(
+                button, SIGNAL(activated()),
+                & signalMapper, SLOT(map())
+            );
+
+            signalMapper.setMapping(button, replyIDs.value().at(i));
+
+            connect(
+                button, SIGNAL(clicked()),
+                & signalMapperToggle, SLOT(map())
+            );
+
+            signalMapperToggle.setMapping(button, replyIDs.value().at(i));
+
+            layout->addItem(button);
+            button->setActivationMethod(clickActivation?(Lancelot::ClickActivate):(Lancelot::HoverActivate));
+
+            buttons << button;
+        }
     }
 
     void resize()
     {
          QSizeF size = q->size();
-         int buttonCount = (showCategories ? 4 : 1);
+         int buttonCount = buttons.size();  //(showCategories ? 4 : 1);
          int sumSpacing = (buttonCount - 1) * SPACING;
 
          if (q->formFactor() == Plasma::Vertical) {
@@ -164,6 +168,7 @@ public:
     bool showCategories;
     QString mainIcon;
     bool clickActivation;
+    QStringList categsHide;
 
     QSignalMapper signalMapper;
     QSignalMapper signalMapperToggle;
@@ -219,6 +224,7 @@ void LancelotApplet::loadConfig()
     d->showCategories =  (kcg.readEntry("show", "main") != "main");
     d->mainIcon = kcg.readEntry("icon", "lancelot");
     d->clickActivation = (kcg.readEntry("activate", "click") == "click");
+    d->categsHide = kcg.readEntry("hiddenCategories", QStringList());
 }
 
 void LancelotApplet::saveConfig()
@@ -227,6 +233,7 @@ void LancelotApplet::saveConfig()
     kcg.writeEntry("show", (d->showCategories?"categories":"main"));
     kcg.writeEntry("icon", d->mainIcon);
     kcg.writeEntry("activate", (d->clickActivation?"click":"hover"));
+    kcg.writeEntry("hiddenCategories", d->categsHide);
     save(kcg);
 
     m_configMenu.saveConfig();
@@ -313,6 +320,7 @@ void LancelotApplet::configAccepted()
     d->showCategories = m_config.showCategories();
     d->mainIcon = m_config.icon();
     d->clickActivation = m_config.clickActivation();
+    d->categsHide = m_config.showingCategories(false);
     applyConfig();
     saveConfig();
     d->lancelot->configurationChanged();
@@ -326,6 +334,7 @@ void LancelotApplet::createConfigurationInterface(KConfigDialog * parent)
     m_config.setShowCategories(d->showCategories);
     m_config.setIcon(d->mainIcon);
     m_config.setClickActivation(d->clickActivation);
+    m_config.setShowingCategories(d->categsHide, false);
     parent->addPage(appletConfig, i18n("Applet"),
             "application-x-plasma", i18n("Lancelot Launcher Applet"));
 

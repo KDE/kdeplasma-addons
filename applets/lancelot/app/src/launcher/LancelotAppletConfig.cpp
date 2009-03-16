@@ -18,6 +18,7 @@
  */
 
 #include "LancelotAppletConfig.h"
+#include "lancelot_interface.h"
 
 void LancelotAppletConfig::setupUi(QWidget * widget)
 {
@@ -40,6 +41,40 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
     qbgMenuActivation = new QButtonGroup(widget);
     qbgMenuActivation->addButton(radioActivationHover);
     qbgMenuActivation->addButton(radioActivationClick);
+
+    connect(radioShowCategories, SIGNAL(clicked()),
+            this, SLOT(updateCard()));
+    connect(radioShowMenuIconOnly, SIGNAL(clicked()),
+            this, SLOT(updateCard()));
+
+    org::kde::lancelot::App lancelot(
+            "org.kde.lancelot", "/Lancelot",
+            QDBusConnection::sessionBus()
+    );
+
+    QDBusReply<QStringList> replyIDs   = lancelot.sectionIDs();
+    QDBusReply<QStringList> replyNames = lancelot.sectionNames();
+    QDBusReply<QStringList> replyIcons = lancelot.sectionIcons();
+
+    if (!replyIDs.isValid() || !replyNames.isValid() || !replyIcons.isValid()) {
+        // Error connecting to Lancelot via d-bus
+        // setFailedToLaunch(true);
+        return;
+    }
+
+    for (int i = 0; i < replyIDs.value().size(); i++) {
+        QListWidgetItem * item = new QListWidgetItem(
+                KIcon(replyIcons.value().at(i)), replyNames.value().at(i));
+        item->setData(Qt::UserRole, replyIDs.value().at(i));
+        categories[replyIDs.value().at(i)] = item;
+        listSections->addItem(item);
+        item->setSelected(true);
+    }
+}
+
+bool LancelotAppletConfig::showCategory(const QString & id) const
+{
+    return categories.value(id)->isSelected();
 }
 
 bool LancelotAppletConfig::showCategories() const
@@ -50,6 +85,17 @@ bool LancelotAppletConfig::showCategories() const
 bool LancelotAppletConfig::clickActivation() const
 {
     return radioActivationClick->isChecked();
+}
+
+QStringList LancelotAppletConfig::showingCategories(bool value) const
+{
+    QStringList result;
+    foreach (QListWidgetItem * item, categories) {
+        if (item->isSelected() == value) {
+            result << item->data(Qt::UserRole).toString();
+        }
+    }
+    return result;
 }
 
 QString LancelotAppletConfig::icon() const
@@ -67,6 +113,26 @@ QString LancelotAppletConfig::icon() const
         return iconCustom->icon();
     }
     return "lancelot";
+}
+
+void LancelotAppletConfig::setShowAllCategories(bool value)
+{
+    foreach (QListWidgetItem * item, categories) {
+        item->setSelected(value);
+    }
+}
+
+void LancelotAppletConfig::setShowingCategories(QStringList ids, bool value)
+{
+    foreach (QString id, categories.keys()) {
+        QListWidgetItem * item = categories[id];
+        item->setSelected((ids.contains(id)) ? value : (!value));
+    }
+}
+
+void LancelotAppletConfig::setShowCategory(const QString & id, bool value)
+{
+    categories.value(id)->setSelected(value);
 }
 
 void LancelotAppletConfig::setShowCategories(bool value)
@@ -100,3 +166,14 @@ void LancelotAppletConfig::setIcon(const QString & icon)
         iconCustom->setIcon(icon);
     }
 }
+
+void LancelotAppletConfig::updateCard()
+{
+    if (radioShowCategories->isChecked()) {
+        stackedAppletButtons->setCurrentWidget(pageCategoriesChoose);
+    } else {
+        stackedAppletButtons->setCurrentWidget(pageAppletIconsChoose);
+    }
+}
+
+
