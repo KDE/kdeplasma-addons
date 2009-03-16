@@ -18,8 +18,9 @@
  */
 
 #include "LancelotApplet.h"
-#include "KDebug"
-#include "KIcon"
+#include <KDebug>
+#include <KIcon>
+#include <climits>
 
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -117,21 +118,29 @@ public:
 
     void resize()
     {
-        QSizeF size = q->size();
+         QSizeF size = q->size();
 
-        if (q->formFactor() == Plasma::Vertical) {
-            layout->setPreferredSize(size.width(), size.width() * (showCategories?4:1));
-            // q->resize(size.width(), size.width() * buttons.count());
-        } else if (q->formFactor() == Plasma::Horizontal) {
-            layout->setPreferredSize(size.height() * (showCategories?4:1), size.height());
-            // q->resize(size.height() * buttons.count(), size.height());
-        } else {
-            size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
-            size = QSizeF(size.height() * buttons.count(), size.height());
-            layout->setPreferredSize(size);
-            q->resize(size);
-        }
-        layout->updateGeometry();
+         if (q->formFactor() == Plasma::Vertical) {
+             layout->setMinimumSize(
+                     16, 16 * (showCategories?4:1));
+             layout->setPreferredSize(
+                     64, 64 * (showCategories?4:1));
+             layout->setMaximumSize(
+                     INT_MAX, 64 * (showCategories?4:1));
+         } else if (q->formFactor() == Plasma::Horizontal) {
+             layout->setMinimumSize(
+                     64 * (showCategories?4:1), 16);
+             layout->setPreferredSize(
+                     64 * (showCategories?4:1), 64);
+             layout->setMaximumSize(
+                     64 * (showCategories?4:1), INT_MAX);
+         } else {
+             size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
+             size = QSizeF(size.height() * buttons.count(), size.height());
+             layout->setPreferredSize(size);
+             q->resize(size);
+         }
+         layout->updateGeometry();
     }
 
     void toggleHide()
@@ -185,6 +194,12 @@ LancelotApplet::LancelotApplet(QObject * parent,
     d->waitClick.setInterval(1000); // 1 sec
     d->waitClick.setSingleShot(true);
 }
+
+// void LancelotApplet::paint(QPainter * p,
+//     const QStyleOptionGraphicsItem * options, QWidget * widget)
+// {
+//     p->fillRect(options->rect, QBrush(QColor()));
+// }
 
 LancelotApplet::~LancelotApplet()
 {

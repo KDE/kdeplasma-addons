@@ -23,6 +23,7 @@
 #include <plasma/applet.h>
 #include <KConfigDialog>
 #include <QString>
+#include <QPainter>
 #include "LancelotAppletConfig.h"
 #include "../LancelotConfig.h"
 
@@ -36,6 +37,8 @@ public:
 
     void init();
     virtual QList< QAction * > contextualActions();
+
+    // void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
 protected Q_SLOTS:
     void showLancelot();
