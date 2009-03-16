@@ -30,6 +30,7 @@
 
 namespace Lancelot {
 
+
 PopupList::Private::Private(PopupList * parent)
     : listModel(NULL),
       treeModel(NULL),
@@ -132,6 +133,7 @@ void PopupList::setModel(ActionListModel * model)
 
 void PopupList::showEvent(QShowEvent * event)
 {
+    d->list->setShowsExtendersOutside(false);
     d->list->setGroupByName("PopupList");
     d->list->setItemsGroup(Instance::activeInstance()
             ->group("PopupList-Items"));
@@ -201,8 +203,9 @@ void PopupList::timerEvent(QTimerEvent * event)
 
 void PopupList::updateSize()
 {
-    d->list->resize(MENU_WIDTH, d->list->list()->
-            itemFactory()->itemCount() * ITEM_HEIGHT);
+    d->list->resize(MENU_WIDTH, (d->list->list()->
+            itemFactory()->itemCount()) * ITEM_HEIGHT + 20);
+    // ^^^ 20 because Plasma::Dialog stopped working correctly
 }
 
 void PopupList::exec(const QPoint & p)
