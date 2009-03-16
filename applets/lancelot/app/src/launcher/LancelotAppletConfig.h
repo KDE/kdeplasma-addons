@@ -47,9 +47,12 @@ public:
     QButtonGroup * qbgMenuActivation;
 
     QMap < QString, QListWidgetItem * > categories;
+    QMap < QString, QListWidgetItem * > icons;
+    QString customIcon;
 
 protected Q_SLOTS:
     void updateCard();
+    void iconItemClicked();
 };
 
 #endif /* LANCELOT_LAUNCHER_APPLET_CONFIG_H_ */

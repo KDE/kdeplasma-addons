@@ -20,23 +20,15 @@
 #include "LancelotAppletConfig.h"
 #include "lancelot_interface.h"
 
+#include <KIconDialog>
+
 void LancelotAppletConfig::setupUi(QWidget * widget)
 {
     Ui::LancelotAppletConfigBase::setupUi(widget);
 
-    iconLancelot->setPixmap((new KIcon("lancelot"))->pixmap(48));
-    iconKDE->setPixmap((new KIcon("kde"))->pixmap(48));
-    iconStartHere->setPixmap((new KIcon("start-here"))->pixmap(48));
-
     qbgIcons = new QButtonGroup(widget);
     qbgIcons->addButton(radioShowCategories);
     qbgIcons->addButton(radioShowMenuIconOnly);
-
-    qbgChooseIcon = new QButtonGroup(widget);
-    qbgChooseIcon->addButton(radioIconLancelot);
-    qbgChooseIcon->addButton(radioIconKDE);
-    qbgChooseIcon->addButton(radioIconStartHere);
-    qbgChooseIcon->addButton(radioIconCustom);
 
     qbgMenuActivation = new QButtonGroup(widget);
     qbgMenuActivation->addButton(radioActivationHover);
@@ -46,6 +38,8 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
             this, SLOT(updateCard()));
     connect(radioShowMenuIconOnly, SIGNAL(clicked()),
             this, SLOT(updateCard()));
+    connect(listIcons, SIGNAL(itemClicked(QListWidgetItem *)),
+            this, SLOT(iconItemClicked()));
 
     org::kde::lancelot::App lancelot(
             "org.kde.lancelot", "/Lancelot",
@@ -56,6 +50,22 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
     QDBusReply<QStringList> replyNames = lancelot.sectionNames();
     QDBusReply<QStringList> replyIcons = lancelot.sectionIcons();
 
+    // showing icons
+    QListWidgetItem * item;
+    item = new QListWidgetItem(
+            KIcon("lancelot"), i18n("Lancelot"), listIcons);
+    icons["lancelot"] = item;
+    item = new QListWidgetItem(
+            KIcon("kde"), i18n("KDE Logo"), listIcons);
+    icons["kde"] = item;
+    item = new QListWidgetItem(
+            KIcon("start-here"), i18n("Start here"), listIcons);
+    icons["start-here"] = item;
+    item = new QListWidgetItem(
+            KIcon("unknown"), i18n("Custom"), listIcons);
+    icons["custom"] = item;
+
+    // showing categs
     if (!replyIDs.isValid() || !replyNames.isValid() || !replyIcons.isValid()) {
         // Error connecting to Lancelot via d-bus
         // setFailedToLaunch(true);
@@ -69,6 +79,21 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
         categories[replyIDs.value().at(i)] = item;
         listSections->addItem(item);
         item->setSelected(true);
+    }
+}
+
+void LancelotAppletConfig::iconItemClicked()
+{
+    if (!icons.contains("custom")) {
+        return;
+    }
+
+    if (icons["custom"]->isSelected()) {
+        QString newCustomIcon = KIconDialog::getIcon();
+        if (!newCustomIcon.isEmpty()) {
+            customIcon = newCustomIcon;
+            icons["custom"]->setIcon(KIcon(customIcon));
+        }
     }
 }
 
@@ -100,17 +125,14 @@ QStringList LancelotAppletConfig::showingCategories(bool value) const
 
 QString LancelotAppletConfig::icon() const
 {
-    if (radioIconLancelot->isChecked()) {
-        return "lancelot";
-    }
-    if (radioIconKDE->isChecked()) {
-        return "kde";
-    }
-    if (radioIconStartHere->isChecked()) {
-        return "start-here";
-    }
-    if (radioIconCustom->isChecked()) {
-        return iconCustom->icon();
+    foreach (QString id, icons.keys()) {
+        QListWidgetItem * item = icons[id];
+        if (item->isSelected()) {
+            if (id == "custom") {
+                return customIcon;
+            }
+            return id;
+        }
     }
     return "lancelot";
 }
@@ -155,16 +177,22 @@ void LancelotAppletConfig::setClickActivation(bool value)
 
 void LancelotAppletConfig::setIcon(const QString & icon)
 {
-    if (icon == "lancelot") {
-        radioIconLancelot->click();
-    } else if (icon == "kde") {
-        radioIconKDE->click();
-    } else if (icon == "start-here") {
-        radioIconStartHere->click();
-    } else {
-        radioIconCustom->click();
-        iconCustom->setIcon(icon);
+    bool found = false;
+    foreach (QString id, icons.keys()) {
+        QListWidgetItem * item = icons[id];
+        item->setSelected(id == icon);
+        if (id == icon) {
+            found = true;
+        }
     }
+
+    if (found || !icons.contains("custom")) {
+        return;
+    }
+
+    customIcon = icon;
+    icons["custom"]->setSelected(true);
+    icons["custom"]->setIcon(KIcon(customIcon));
 }
 
 void LancelotAppletConfig::updateCard()

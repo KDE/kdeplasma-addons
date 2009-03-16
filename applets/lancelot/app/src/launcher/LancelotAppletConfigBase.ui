@@ -52,7 +52,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="pageAppletIconsChoose">
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -64,147 +64,47 @@
             <property name="title">
              <string>Choose Icon</string>
             </property>
-            <layout class="QGridLayout">
-             <item row="0" column="0">
-              <widget class="QLabel" name="iconLancelot">
-               <property name="minimumSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QListWidget" name="listIcons">
+               <property name="styleSheet">
+                <string>.QListWidget {
+    background: rgba(0,0,0,0);
+}
+
+.QListWidget:item {
+    width: 80px;
+}</string>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>20000</width>
-                 <height>64</height>
-                </size>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="baseSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
                </property>
-               <property name="text">
-                <string/>
+               <property name="showDropIndicator" stdset="0">
+                <bool>false</bool>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::NoDragDrop</enum>
                </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="iconKDE">
-               <property name="minimumSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>20000</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="iconStartHere">
-               <property name="minimumSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>20000</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="KIconButton" name="iconCustom">
-               <property name="minimumSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>20000</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>64</width>
-                 <height>64</height>
-                </size>
-               </property>
-               <property name="icon">
-                <string>run</string>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
                </property>
                <property name="iconSize">
-                <number>48</number>
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="radioIconLancelot">
-               <property name="text">
-                <string>&amp;Lancelot</string>
+               <property name="spacing">
+                <number>8</number>
                </property>
-               <property name="checked">
+               <property name="viewMode">
+                <enum>QListView::IconMode</enum>
+               </property>
+               <property name="uniformItemSizes">
                 <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QRadioButton" name="radioIconKDE">
-               <property name="text">
-                <string>&amp;KDE Logo</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QRadioButton" name="radioIconStartHere">
-               <property name="text">
-                <string>&amp;Start Here</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QRadioButton" name="radioIconCustom">
-               <property name="text">
-                <string>Custo&amp;m</string>
                </property>
               </widget>
              </item>
@@ -228,7 +128,11 @@
               <widget class="QListWidget" name="listSections">
                <property name="styleSheet">
                 <string>.QListWidget {
-    background: rgba(0,0,0,0)
+    background: rgba(0,0,0,0);
+}
+
+.QListWidget:item {
+    width: 80px;
 }</string>
                </property>
                <property name="frameShape">
@@ -236,6 +140,9 @@
                </property>
                <property name="frameShadow">
                 <enum>QFrame::Plain</enum>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::NoDragDrop</enum>
                </property>
                <property name="selectionMode">
                 <enum>QAbstractItemView::MultiSelection</enum>
@@ -308,32 +215,8 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KIconButton</class>
-   <extends>QPushButton</extends>
-   <header>kicondialog.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>iconCustom</sender>
-   <signal>iconChanged(QString)</signal>
-   <receiver>radioIconCustom</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>361</x>
-     <y>163</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>360</x>
-     <y>206</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>updateCard()</slot>
  </slots>
