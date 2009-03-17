@@ -1,0 +1,6 @@
+Optimize
+- optimize: draw only the parts that changed (mem and swap don't update too often)
+
+Ideas
+- use oxygen colors, or the colors plasma or kcolorscheme provides
+- use KColorUtils::shade(col, KColorUtils(Dark/Light)) instead of QColor::lighter()/darker()
