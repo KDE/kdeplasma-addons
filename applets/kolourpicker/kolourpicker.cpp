@@ -124,6 +124,7 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
     QPixmap pix(size);
     pix.fill(QColor(0,0,0,0));
     QPainter p(&pix);
+    p.setRenderHint(QPainter::Antialiasing, true);
     paint(&p, pix.rect(), mode, state);
     p.end();
     return pix;
