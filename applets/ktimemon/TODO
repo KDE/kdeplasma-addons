@@ -1,0 +1,13 @@
+* port it to more platforms (what about remote monitoring?)
+
+* include some sort of support for SMP status (smaller bars?); also for
+  multiple swap partitions/files?
+
+* make it more flexible (plug-in concept?)
+
+* improve documentation (add images?), better internationalisation
+
+* add help button in configuration dialog
+
+* have some way of attaching watchdogs (e.g. if %idle > 90 for more than
+  10 seconds, do this or that (or pop up a dialog))

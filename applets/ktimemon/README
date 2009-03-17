@@ -1,0 +1,65 @@
+
+This is the CVS version of KTimemon. Check out the original authors
+homepage at 
+
+http://www.fortunecity.com/victorian/university/394/sw/ktimemon.html
+
+for more information. This version is based (despite the original readme
+below says) on KTimemon 0.3b and modified to compile under KDE 2.0 &
+Qt 2.0 by Dirk A. Mueller <dmuell@gmx.net>. 
+
+2006-04-08: version 0.3c, modified to add iowait display
+by Michael Blakeley <mike@blakeley.com>
+
+Credits go to the original author(s) Helmut & Martin Maierhofer for
+writing such a useful tool and allowing me to include it into CVS :-). 
+
+Please don't bother them with bugs, problems, etc. you may experience
+with this version. It's likely that they're my fault, so report them
+to dmuell@gmx.net. Thanks!
+
+original README attached below....
+
+========================================================================== 
+
+
+KTimemon 0.3a
+-------------
+
+KTimemon is a small but nifty system monitor, which can display information
+about CPU and memory/swap usage as well as ongoing paging/swapping and
+context switch activity. It is well integrated in KDE and can be
+configured graphically. For more information, see the associated
+documentation (before installation it can be found in ktimemon/doc/*.html)
+
+KTimemon works on Linux using the /proc filesystem, on Solaris using the
+kstat interface, and on Digital Unix (formerly known as DEC/OSF1) using
+the table() system call interface. If you can help me to port it to other
+platforms, please drop me a note!
+
+While I was able to test the system interface on Solaris and DEC/OSF1 in
+isolation, I could not test the whole application for lack of KDE on the
+machines I have access to. Hence I have no idea whether this thing
+actually compiles, let alone works on these platforms. The machines I tested
+were running DEC/OSF V4.0 and Solaris 2.5.1 respectively. If you get it to
+work (or not) on such a system, please let me know!
+
+
+Noteworthy changes from version 0.2:
+- Port to DEC/OSF1 and Solaris
+- Configurable mouse bindings
+- Slight rearrangement of memory information
+- Bars can be displayed vertically
+- Improved (actually working) configuration interface
+- Fixed a few bugs and doubtlessly introduced some more
+
+Version 0.3a has only minor improvements over 0.3:
+- New tooltips with numeric information about system load
+- Translation fixes
+
+Note that some of the configuration entry names have changed from version
+0.2 to 0.3, so you may want to delete your current configuration in 
+$(HOME)/.kde/share/config/ktimemonrc and start with a fresh installation
+if you are upgrading from 0.2
+
+Martin <m.maierhofer@tees.ac.uk>
