@@ -37,7 +37,6 @@ add_subdirectory(weatherstation)
 add_subdirectory(weather)
 add_subdirectory(eyes)
 add_subdirectory(unitconverter)
-add_subdirectory(ktimemon)
 
 if(QT_QTWEBKIT_FOUND)
   add_subdirectory(dict)
