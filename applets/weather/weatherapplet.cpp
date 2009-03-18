@@ -182,6 +182,8 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     m_titleFrame->setLayout(m_titlePanel);
     m_layout->addItem(m_titleFrame);
 
+    m_courtesyLabel->nativeWidget()->setWordWrap(false);
+    m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(creditLink(QString)));
 
     // If we have any weather observations set them up here.
@@ -724,13 +726,14 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     m_courtesyLabel->setText(data["Credit"].toString());
 
     if (!data["Credit Url"].toString().isEmpty()) {
-        QString creditUrl = QString("<A HREF=\"%1\">%2</A>").arg(data["Credit Url"].toString()).arg(data["Credit"].toString());
+        QString creditUrl = QString("<A HREF=\"%1\" ><FONT size=\"-0.5\" color=\"%2\">%3</FONT></A>").arg(data["Credit Url"].toString()).arg(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).rgb()).arg(data["Credit"].toString());
         m_courtesyLabel->nativeWidget()->setTextInteractionFlags(Qt::TextBrowserInteraction);
         //m_courtesyLabel->setAcceptHoverEvents(true);
         //m_courtesyLabel->nativeWidget()->setMouseTracking(true);
 
         m_courtesyLabel->setText(creditUrl);
     }
+
 
     if (data["Condition Icon"].toString() == "N/A") {
         m_currentIcon->setIcon(KIcon("weather-not-available"));
