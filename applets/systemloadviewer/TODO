@@ -1,6 +1,10 @@
 Optimize
 - optimize: draw only the parts that changed (mem and swap don't update too often)
+  -> probably not possible, as QStyleOptionGraphicsItem::exposedArea() contains what's visible (and usually the whole item is visible)
 
 Ideas
 - use oxygen colors, or the colors plasma or kcolorscheme provides
 - use KColorUtils::shade(col, KColorUtils(Dark/Light)) instead of QColor::lighter()/darker()
+  -> only if it's not slower
+- tooltip: show frequency of the processors
+- middle mouse button or in context menu: launch ksysguard
