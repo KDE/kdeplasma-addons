@@ -336,7 +336,7 @@ void CalculatorApplet::slotDigitClicked()
 
     if (!inputText.contains(KGlobal::locale()->decimalSymbol())) {
       //If there is no decimal, then we need to reformat the number
-      double currentValue = inputText.toDouble();
+      double currentValue = KGlobal::locale()->readNumber(inputText);
       QString localizedString = KGlobal::locale()->formatNumber(currentValue, 0);
       mOutputDisplay->setText(localizedString);
     } else {
@@ -366,7 +366,7 @@ void CalculatorApplet::slotDecimalClicked()
 
 void CalculatorApplet::slotAddClicked()
 {
-    double currentValue = inputText.toDouble();
+    double currentValue = KGlobal::locale()->readNumber(inputText);
 
     //We need to prevent the rounding that is occurring here!
 
@@ -385,7 +385,7 @@ void CalculatorApplet::slotAddClicked()
 
 void CalculatorApplet::slotSubtractClicked()
 {
-    double currentValue = inputText.toDouble();
+    double currentValue = KGlobal::locale()->readNumber(inputText);
 
     if (previousAddSubOperation!=calcNone) {
         calculate(currentValue, previousAddSubOperation);
@@ -400,7 +400,7 @@ void CalculatorApplet::slotSubtractClicked()
 
 void CalculatorApplet::slotMultiplyClicked()
 {
-    double currentValue = inputText.toDouble();
+    double currentValue = KGlobal::locale()->readNumber(inputText);
 
     if (previousMulDivOperation!=calcNone) {
         calculate(currentValue, previousMulDivOperation);
@@ -415,7 +415,7 @@ void CalculatorApplet::slotMultiplyClicked()
 
 void CalculatorApplet::slotDivideClicked()
 {
-    double currentValue = inputText.toDouble();
+    double currentValue = KGlobal::locale()->readNumber(inputText);
 
     if (previousMulDivOperation!=calcNone) {
         calculate(currentValue, previousMulDivOperation);
@@ -431,7 +431,7 @@ void CalculatorApplet::slotDivideClicked()
 void CalculatorApplet::slotEqualsClicked()
 {
     bool ok;
-    double currentValue = inputText.toDouble(&ok);
+    double currentValue = KGlobal::locale()->readNumber(inputText, &ok);
 
     if (ok == false) {
         handleError(i18n("ERROR"));
