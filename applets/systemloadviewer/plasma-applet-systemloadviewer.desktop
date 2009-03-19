@@ -1,7 +1,21 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=System Load Viewer
+Name[ga]=Amharcán Lód an Chórais
+Name[nds]=Systeemlastkieker
+Name[pt]=Visualizador da Carga do Sistema
+Name[pt_BR]=Visualizador da Carga do Sistema
+Name[sv]=Visning av systemlast
+Name[uk]=Перегляд навантаження на систему
+Name[zh_TW]=系統負載檢視器
 Comment=Tiny CPU/RAM/Swap monitor
+Comment[ga]=Monatóir Beag LAP/RAM/Babhtáil
+Comment[nds]=Lierlütt CPU-, RAM- un Utlagerspieker-Kieker
+Comment[pt]=Monitor minúsculo de CPU/RAM/Memória Virtual
+Comment[pt_BR]=Monitor minúsculo de CPU/RAM/Memória Virtual
+Comment[sv]=Mycket liten övervakning av processor, minne och växlingsutrymme
+Comment[uk]=Маленький переглядач навантаження Процесора/RAM/Swap
+Comment[zh_TW]=迷你 CPU/記憶體/置換空間監視器
 Icon=view-statistics
 Type=Service
 ServiceTypes=Plasma/Applet
