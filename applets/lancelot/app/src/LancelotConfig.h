@@ -24,6 +24,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <QButtonGroup>
+#include <QPushButton>
+#include <QHash>
 #include <QMenu>
 
 class LancelotConfig: public QObject, public Ui::LancelotConfigBase {
