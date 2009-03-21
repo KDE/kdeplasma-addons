@@ -53,7 +53,7 @@
    <item row="0" column="1" >
     <widget class="QLabel" name="label_6" >
      <property name="text" >
-      <string>&amp;Temperature unit</string>
+      <string>&amp;Temperature unit:</string>
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -76,7 +76,7 @@
    <item row="1" column="1" >
     <widget class="QLabel" name="label_5" >
      <property name="text" >
-      <string>&amp;Wind unit</string>
+      <string>&amp;Wind unit:</string>
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -99,7 +99,7 @@
    <item row="2" column="1" >
     <widget class="QLabel" name="label_8" >
      <property name="text" >
-      <string>&amp;Pressure unit</string>
+      <string>&amp;Pressure unit:</string>
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -122,7 +122,7 @@
    <item row="3" column="1" >
     <widget class="QLabel" name="label_7" >
      <property name="text" >
-      <string>&amp;Visibility unit</string>
+      <string>&amp;Visibility unit:</string>
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
