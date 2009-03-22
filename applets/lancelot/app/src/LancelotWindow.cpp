@@ -76,124 +76,8 @@
 
 #define Merged(A) ((Models::BaseMergedModel *)(A))
 
-// Transparent QGV
-
-class CustomGraphicsView : public QGraphicsView {
-public:
-    CustomGraphicsView(
-        QGraphicsScene * scene,
-        LancelotWindow * parent
-    ) : QGraphicsView(scene, parent),
-        q(parent), m_resizing(false),
-        m_cache(NULL)
-    {
-        setWindowFlags(Qt::FramelessWindowHint);
-        setFrameStyle(QFrame::NoFrame);
-        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-        m_fgBrush = QBrush(QColor(0, 0, 0, 200));
-    }
-
-    void drawItems (QPainter * painter, int numItems,
-            QGraphicsItem ** items, const QStyleOptionGraphicsItem * options )
-    {
-        if (m_resizing) {
-            painter->drawPixmap(0, 0, m_cache->scaled(size()));
-        } else {
-            QGraphicsView::drawItems(painter, numItems, items, options);
-        }
-    }
-
-    void drawBackground(QPainter * painter, const QRectF & rect)
-    {
-        Q_UNUSED(rect);
-        painter->setCompositionMode(QPainter::CompositionMode_Clear);
-        painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
-        painter->setCompositionMode(QPainter::CompositionMode_Source);
-    }
-
-    void drawForeground(QPainter * painter, const QRectF & rect)
-    {
-        if (m_resizing) {
-            painter->fillRect(rect, m_fgBrush);
-        }
-    }
-
-//    void drawItems(QPainter * painter, int numItems,
-//            QGraphicsItem ** items,  const QStyleOptionGraphicsItem * options)
-//    {
-//        if (!m_resizing) {
-//            QGraphicsView::drawItems(painter, numItems, items, options);
-//        }
-//    }
-
-#define passEvent(Event)                           \
-    void Event(QMouseEvent *e) {                   \
-        q->Event(e);                        \
-        QGraphicsView::Event(e);                   \
-    }
-
-    passEvent(mousePressEvent)
-    passEvent(mouseReleaseEvent)
-    passEvent(mouseMoveEvent)
-
-#undef passEvent
-
-    void resize(QSize newSize = QSize()) {
-
-        if (newSize == QSize()) {
-            newSize = size();
-        }
-
-        newSize = newSize.expandedTo(minimumSize());
-
-        QGraphicsView::resize(newSize.width(), newSize.height());
-
-        if (!m_resizing) {
-            resetCachedContent();
-            q->m_corona->
-                setSceneRect(QRectF(0, 0, newSize.width(), newSize.height()));
-
-            q->m_root->
-                setGeometry(QRect(QPoint(), newSize));
-
-            update();
-            invalidateScene();
-            q->setMask(q->m_root->group()->backgroundSvg()->mask());
-        }
-    }
-
-    void startResizing()
-    {
-        // m_cache = new QPixmap(size());
-        // QPainter p(m_cache);
-        // render(&p);
-        // m_resizing = true;
-    }
-
-    void stopResizing()
-    {
-        // m_resizing = false;
-        // delete m_cache;
-        resize();
-    }
-
-private:
-    LancelotWindow  * q;
-    QGraphicsWidget * m_root;
-    QBrush            m_fgBrush;
-
-    bool             m_resizing;
-    QPixmap        * m_cache;
-
-    friend class LancelotWindow;
-};
-
-// Window
-
 LancelotWindow::LancelotWindow()
-    : m_root(NULL), m_view(NULL), m_corona(NULL), m_layout(NULL),
+    : m_root(NULL), m_corona(NULL),
     m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
     m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
     instance(NULL),
@@ -206,6 +90,10 @@ LancelotWindow::LancelotWindow()
 {
     setFocusPolicy(Qt::WheelFocus);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);// | Qt::Popup);
+    setFrameStyle(QFrame::NoFrame);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove | NET::Sticky);
 
     connect(& m_hideTimer, SIGNAL(timeout()), this, SLOT(hideImmediate()));
@@ -214,18 +102,14 @@ LancelotWindow::LancelotWindow()
 
     m_corona = new Plasma::Corona(this);
 
-    m_layout = new QVBoxLayout(this);
-    m_layout->setContentsMargins (0, 0, 0, 0);
-    setLayout(m_layout);
-
-    m_view = new CustomGraphicsView(m_corona, this);
-    m_view->setMinimumSize(400, 300);
-    m_layout->addWidget(m_view);
+    setMinimumSize(400, 300);
+    setScene(m_corona);
 
     instance = new Lancelot::Instance();
     instance->setHasApplication(true);
 
     m_root = new Lancelot::ResizeBordersPanel();
+    installEventFilter(this);
 
     m_root->setGroupByName("RootPanel");
     m_corona->addItem(m_root);
@@ -248,7 +132,6 @@ LancelotWindow::LancelotWindow()
     editSearch->nativeWidget()->installEventFilter(this);
     editSearch->setFocusPolicy(Qt::WheelFocus);
     editSearch->nativeWidget()->setFocusPolicy(Qt::WheelFocus);
-    m_view->installEventFilter(this);
 
     passagewayApplications->setEntranceTitle(i18n("Favorites"));
     passagewayApplications->setEntranceIcon(KIcon("favorites"));
@@ -291,6 +174,23 @@ LancelotWindow::LancelotWindow()
             this, SLOT(focusChanged(QWidget *, QWidget *)));
 }
 
+// void LancelotWindow::paintEvent(QPaintEvent * event)
+// {
+//     if (m_resizeDirection == None) {
+//         QGraphicsView::paintEvent(event);
+//     } else {
+//         QPainter p(this);
+//         p.fillRect(geometry(), Qt::black);
+//     }
+// }
+
+void LancelotWindow::drawBackground(QPainter * painter, const QRectF & rect)
+{
+    painter->setCompositionMode(QPainter::CompositionMode_Clear);
+    painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
+    painter->setCompositionMode(QPainter::CompositionMode_Source);
+}
+
 void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
 {
     Q_UNUSED(old);
@@ -299,11 +199,9 @@ void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
     // since it handles the keyboard, the universe
     // and everything
     if (now == this) {
-        m_view->setFocus();
         editSearch->nativeWidget()->setFocus();
         editSearch->setFocus();
     }
-
 }
 
 LancelotWindow::~LancelotWindow()
@@ -429,11 +327,8 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     KWindowSystem::forceActiveWindow(winId());
 
     //editSearch->clearFocus();
-    //m_view->setFocus();
     editSearch->nativeWidget()->setFocus();
     editSearch->setFocus();
-
-
 }
 
 void LancelotWindow::resizeWindow()
@@ -443,25 +338,8 @@ void LancelotWindow::resizeWindow()
         newSize.rwidth() += sectionsWidth;
     }
     resize(newSize);
-    m_view->resize(newSize);
     m_root->group()->backgroundSvg()->resizeFrame(newSize);
     setMask(m_root->group()->backgroundSvg()->mask());
-}
-
-void LancelotWindow::leaveEvent(QEvent * event) {
-    Q_UNUSED(event);
-    m_hovered = false;
-    if (m_resizeDirection != None) {
-        m_hideTimer.start();
-    }
-    QWidget::leaveEvent(event);
-}
-
-void LancelotWindow::enterEvent(QEvent * event) {
-    Q_UNUSED(event);
-    m_hovered = true;
-    m_hideTimer.stop();
-    QWidget::enterEvent(event);
 }
 
 QStringList LancelotWindow::sectionIDs()
@@ -662,10 +540,9 @@ void LancelotWindow::mousePressEvent(QMouseEvent * e)
         m_originalMousePosition  = e->globalPos();
         m_originalWindowPosition = pos();
         m_originalMainSize       = m_mainSize;
-        m_view->startResizing();
     }
 
-    QWidget::mousePressEvent(e);
+    QGraphicsView::mousePressEvent(e);
 }
 
 void LancelotWindow::mouseReleaseEvent(QMouseEvent * e)
@@ -675,11 +552,8 @@ void LancelotWindow::mouseReleaseEvent(QMouseEvent * e)
         m_mainConfig.writeEntry("height", m_mainSize.height());
         m_mainConfig.sync();
         m_resizeDirection = None;
-
-        //resizeWindow();
-        m_view->stopResizing();
     }
-    QWidget::mouseReleaseEvent(e);
+    QGraphicsView::mouseReleaseEvent(e);
 }
 
 void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
@@ -709,9 +583,13 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
             newSize.rwidth() += sectionsWidth;
         }
 
+        newSize = newSize.expandedTo(minimumSize());
+
         setGeometry(QRect(newWindowPosition, newSize));
+
+        setMask(m_root->group()->backgroundSvg()->mask());
     }
-    QWidget::mouseMoveEvent(e);
+    QGraphicsView::mouseMoveEvent(e);
 }
 
 void LancelotWindow::sendKeyEvent(QKeyEvent * event)
@@ -1026,6 +904,19 @@ void LancelotWindow::showMenuEditor()
 void LancelotWindow::hideImmediate()
 {
     lancelotHide(true);
+}
+
+void LancelotWindow::resizeEvent(QResizeEvent * event)
+{
+    QWidget::resizeEvent(event);
+
+    m_corona->
+        setSceneRect(QRectF(QPointF(), event->size()));
+
+    m_root->
+        setGeometry(QRect(QPoint(), event->size()));
+
+    setMask(m_root->group()->backgroundSvg()->mask());
 }
 
 #include "LancelotWindow.moc"

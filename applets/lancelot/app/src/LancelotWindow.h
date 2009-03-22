@@ -36,8 +36,6 @@
 #include <lancelot/widgets/PopupList.h>
 #include <lancelot/widgets/PopupMenu.h>
 
-class CustomGraphicsView;
-
 namespace Lancelot {
     class ActionListModel;
     class ResizeBordersPanel;
@@ -48,7 +46,7 @@ namespace Plasma
     class LineEdit;
 }
 
-class LancelotWindow: public QWidget, public Ui::LancelotWindowBase
+class LancelotWindow: public QGraphicsView, public Ui::LancelotWindowBase
 {
     Q_OBJECT
 public:
@@ -177,14 +175,12 @@ protected:
      */
     void setupActions();
 
-    void leaveEvent(QEvent * event);
-    void enterEvent(QEvent * event);
+    // void paintEvent(QPaintEvent * event);
+    void drawBackground(QPainter * painter, const QRectF & rect);
 
 private:
     Lancelot::ResizeBordersPanel * m_root;
-    CustomGraphicsView  * m_view;
     Plasma::Corona      * m_corona;
-    QVBoxLayout         * m_layout;
 
     Plasma::LineEdit    * editSearch;
 
@@ -216,6 +212,7 @@ protected:
     void mousePressEvent   (QMouseEvent * event);
     void mouseReleaseEvent (QMouseEvent * event);
     void mouseMoveEvent    (QMouseEvent * event);
+    void resizeEvent       (QResizeEvent * event);
 
     void sendKeyEvent      (QKeyEvent * event);
 
@@ -241,8 +238,6 @@ private:
     // Additional widgets
     Lancelot::PopupList * menuSystemButton;
     Lancelot::PopupMenu * menuLancelotContext;
-
-    friend class CustomGraphicsView;
 };
 
 #endif /*LANCELOTWINDOW_H*/

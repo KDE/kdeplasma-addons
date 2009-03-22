@@ -57,7 +57,7 @@ void OpenDocuments::connectTask(TaskPtr task)
 {
     Q_ASSERT(task);
     connect(
-        task.constData(), SIGNAL(changed()),
+        task.constData(), SIGNAL(changed(TaskChanges)),
         this, SLOT(taskChanged())
     );
 }
