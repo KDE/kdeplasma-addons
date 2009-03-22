@@ -146,6 +146,8 @@ public:
             newSize = size();
         }
 
+        newSize = newSize.expandedTo(minimumSize());
+
         QGraphicsView::resize(newSize.width(), newSize.height());
 
         if (!m_resizing) {
@@ -157,8 +159,8 @@ public:
                 setGeometry(QRect(QPoint(), newSize));
 
             update();
+            invalidateScene();
             q->setMask(q->m_root->group()->backgroundSvg()->mask());
-            // invalidateScene();
         }
     }
 
@@ -217,6 +219,7 @@ LancelotWindow::LancelotWindow()
     setLayout(m_layout);
 
     m_view = new CustomGraphicsView(m_corona, this);
+    m_view->setMinimumSize(400, 300);
     m_layout->addWidget(m_view);
 
     instance = new Lancelot::Instance();
