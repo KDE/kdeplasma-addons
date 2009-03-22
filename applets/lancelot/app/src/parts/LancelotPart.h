@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2009 Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -20,18 +20,19 @@
 #ifndef LANCELOT_PARTS_H
 #define LANCELOT_PARTS_H
 
-#include <plasma/applet.h>
-#include <plasma/widgets/iconwidget.h>
-#include <plasma/dialog.h>
 #include <KConfigDialog>
+
+#include <plasma/applet.h>
+#include <plasma/popupapplet.h>
+
 #include <lancelot/Global.h>
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ActionListView.h>
-#include <lancelot/widgets/HoverIcon.h>
+
 #include "PartsMergedModel.h"
 #include "LancelotPartConfig.h"
 
-class LancelotPart : public Plasma::Applet
+class LancelotPart : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
@@ -49,12 +50,11 @@ private Q_SLOTS:
 
 protected:
     L_Override void createConfigurationInterface(KConfigDialog *parent);
-    L_Override void constraintsEvent(Plasma::Constraints
-            constraints);
+    L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
+    L_Override QGraphicsWidget * graphicsWidget();
 
 private Q_SLOTS:
     void removeModel(int index);
-    void iconActivated();
 
 private:
     bool load(const QString & data);
@@ -65,8 +65,6 @@ private:
     void saveConfig();
     bool loadConfig();
     void applyConfig();
-    void setupAppletUi(bool force = false);
-    void hidePopup();
 
     Lancelot::Instance * m_instance;
     Lancelot::ActionListView * m_list;
@@ -77,13 +75,7 @@ private:
     QString m_cmdarg;
     QString m_data;
 
-    Lancelot::HoverIcon * m_icon;
-    Plasma::Dialog * m_dialog;
-    QGraphicsView * m_widget;
-    QGraphicsScene * m_scene;
-
     LancelotPartConfig m_config;
-    bool m_wasConstrained : 1;
 };
 
 K_EXPORT_PLASMA_APPLET(lancelot-part, LancelotPart)

@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2009 Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -42,127 +42,18 @@
 #include "../models/MessagesKmail.h"
 #include "../Serializator.h"
 
-class PopupGraphicsView : public QGraphicsView {
-public:
-    PopupGraphicsView(
-        QGraphicsScene * scene,
-        Lancelot::ActionListView * list,
-        QWidget * parent
-    ) : QGraphicsView(scene, parent), m_list(list)
-    {
-        setWindowFlags(Qt::FramelessWindowHint);
-        setFrameStyle(QFrame::NoFrame);
-        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-        setCacheMode(QGraphicsView::CacheBackground);
-
-        m_bg.setImagePath("dialogs/background");
-        m_bg.setEnabledBorders(Plasma::FrameSvg::NoBorder);
-    }
-
-    void drawBackground(QPainter * painter, const QRectF & rect)
-    {
-        Q_UNUSED(rect);
-        painter->setCompositionMode(QPainter::CompositionMode_Source);
-        painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
-        m_bg.resizeFrame(rect.size());
-        m_bg.paintFrame(painter);
-    }
-
-    virtual void setVisible(bool visible)
-    {
-        if (visible) {
-            m_list->setPreferredSize(QSizeF(size()));
-            m_list->setMinimumSize(QSizeF(size()));
-            m_list->setGeometry(QRectF(
-                        QPointF(),
-                        QSizeF(size())
-                   ));
-        }
-        QGraphicsView::setVisible(visible);
-    }
-
-private:
-    Lancelot::ActionListView * m_list;
-    Plasma::FrameSvg m_bg;
-
-};
-
-class FullLayout: public QGraphicsLayout {
-public:
-    FullLayout(QGraphicsLayoutItem * parent = 0)
-        : QGraphicsLayout(parent)
-    {
-    }
-
-    virtual int count() const
-    {
-        return m_items.size();
-    }
-
-    void setGeometry(const QRectF & rect)
-    {
-        QGraphicsLayout::setGeometry(rect);
-        invalidate();
-    }
-
-    virtual void invalidate()
-    {
-        foreach (QGraphicsLayoutItem * item, m_items) {
-            item->setGeometry(geometry());
-            item->setPreferredSize(geometry().size());
-        }
-    }
-
-    void removeItem(QGraphicsLayoutItem * item)
-    {
-        m_items.removeAll(item);
-    }
-
-    virtual QGraphicsLayoutItem * itemAt(int i) const
-    {
-        if (i >= 0 && i < m_items.size()) {
-            return m_items.at(i);
-        }
-        return NULL;
-    }
-
-    virtual void removeAt(int i)
-    {
-        if (i >= 0 && i < m_items.size()) {
-            return m_items.removeAt(i);
-        }
-    }
-
-    void addItem(QGraphicsLayoutItem * item)
-    {
-        m_items.append(item);
-    }
-
-    virtual QSizeF sizeHint(Qt::SizeHint hint, const QSizeF & constraint) const
-    {
-        QSizeF size;
-        foreach (QGraphicsLayoutItem * item, m_items) {
-            size.expandedTo(item->effectiveSizeHint(hint, constraint));
-        }
-        return size;
-    }
-private:
-    QList< QGraphicsLayoutItem * > m_items;
-};
-
-LancelotPart::LancelotPart(QObject *parent, const QVariantList &args)
-  : Plasma::Applet(parent, args), m_instance(NULL), m_list(NULL),
-    m_model(NULL), m_icon(NULL), m_dialog(NULL), m_widget(NULL),
-    m_scene(NULL), m_wasConstrained(false)
+LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
+  : Plasma::PopupApplet(parent, args),
+    m_instance(NULL), m_list(NULL), m_model(NULL)
 {
     if (args.size() > 0) {
         m_cmdarg = args[0].toString();
     }
 
+    setMinimumSize(200, 300);
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
+    setPopupIcon("lancelot");
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -261,29 +152,22 @@ void LancelotPart::init()
 {
     // Setting up UI
     m_instance = new Lancelot::Instance();
-    m_layout = new FullLayout(this);
-
     m_list = new Lancelot::ActionListView();
+    m_list->setMinimumSize(150, 200);
+    m_list->setPreferredSize(250, 300);
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
-
-    setLayout(m_layout);
-    setupAppletUi(true);
 
     m_instance->activateAll();
 
     connect(
             m_model, SIGNAL(removeModelRequested(int)),
             this, SLOT(removeModel(int))
-           );
+    );
 
     // Loading data
     bool loaded = loadConfig();
     kDebug() << "loaded from config " << loaded;
-    if (!loaded && (m_dialog == NULL)) {
-        kDebug() << "resizing to the default size";
-        resize(200, 300);
-    }
 
     if (!loaded && !m_cmdarg.isEmpty()) {
         if (QFileInfo(QUrl(m_cmdarg).toLocalFile()).isDir()) {
@@ -292,9 +176,6 @@ void LancelotPart::init()
             loadFromFile(m_cmdarg);
         }
     }
-
-    resize(size());
-    m_layout->activate();
 }
 
 bool LancelotPart::load(const QString & input)
@@ -367,13 +248,6 @@ bool LancelotPart::load(const QString & input)
 
 LancelotPart::~LancelotPart()
 {
-    if (m_dialog != NULL) {
-        ((FullLayout *)m_layout)->removeItem(m_icon);
-        delete m_dialog;
-        delete m_icon;
-    }
-
-    ((FullLayout *)m_layout)->removeItem(m_list);
     delete m_model;
     delete m_instance;
 }
@@ -411,98 +285,6 @@ void LancelotPart::removeModel(int index)
     saveConfig();
 }
 
-void LancelotPart::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
-        setupAppletUi();
-    }
-
-    m_layout->updateGeometry();
-}
-
-void LancelotPart::setupAppletUi(bool force)
-{
-    bool isSizeConstrained = (
-            (formFactor() != Plasma::Planar) &&
-            (formFactor() != Plasma::MediaCenter)
-            );
-
-    if (!force && (m_wasConstrained == isSizeConstrained)) {
-        return;
-    }
-    m_wasConstrained = isSizeConstrained;
-
-    if (isSizeConstrained) {
-        ((FullLayout *) m_layout)->removeItem(m_list);
-        m_list->setParentItem(NULL);
-
-        if (m_dialog == NULL) {
-            m_dialog = new Plasma::Dialog();
-            m_dialog->setFocusPolicy(Qt::NoFocus);
-            m_dialog->setWindowFlags(Qt::Popup);
-            connect(
-                    Models::ApplicationConnector::instance(), SIGNAL(doHide(bool)),
-                    m_dialog, SLOT(hide())
-                );
-
-            QVBoxLayout * layout = new QVBoxLayout(m_dialog);
-            layout->setSpacing(0);
-            layout->setMargin(0);
-
-            m_scene = new QGraphicsScene(0, 0, 200, 300, m_dialog);
-
-            m_widget = new PopupGraphicsView(m_scene, m_list, m_dialog);
-            layout->addWidget(m_widget);
-
-            m_icon = new Lancelot::HoverIcon(KIcon("lancelot-part"), QString());
-            connect(
-                    m_icon, SIGNAL(activated()),
-                    this, SLOT(iconActivated())
-                   );
-            connect(
-                    m_icon, SIGNAL(clicked()),
-                    this, SLOT(iconActivated())
-                   );
-
-            m_dialog->setLayout(layout);
-            m_dialog->adjustSize();
-
-            m_dialog->installEventFilter(this);
-            m_widget->installEventFilter(this);
-        }
-
-        m_scene->addItem(m_list);
-
-        ((FullLayout *) m_layout)->addItem(m_icon);
-        m_icon->setParentItem(this);
-
-        setAspectRatioMode(Plasma::ConstrainedSquare);
-
-        setMinimumSize(QSizeF());
-    } else {
-        ((FullLayout *) m_layout)->removeItem(m_icon);
-
-        if (m_dialog != NULL) {
-            delete m_dialog;
-            delete m_icon;
-            m_dialog = NULL;
-            m_icon = NULL;
-        }
-        setMinimumSize(QSizeF(150, 200));
-        ((FullLayout *) m_layout)->addItem(m_list);
-        m_list->setParentItem(this);
-        setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    }
-
-    applyConfig();
-}
-
-void LancelotPart::iconActivated()
-{
-    m_dialog->move(popupPosition(m_dialog->sizeHint()));
-    m_dialog->show();
-}
-
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
     if (event->type() == QEvent::KeyPress) {
@@ -515,17 +297,11 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
     return Plasma::Applet::eventFilter(object, event);
 }
 
-void LancelotPart::hidePopup() {
-    if (m_dialog != NULL) {
-        m_dialog->hide();
-    }
-}
-
 void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
 {
     QWidget * widget = new QWidget();
     m_config.setupUi(widget);
-    m_config.panelIcon->setEnabled(m_dialog != NULL);
+    m_config.panelIcon->setVisible(m_list->parentItem() == NULL);
 
     KConfigGroup kcg = config();
     m_config.setIcon(
@@ -533,7 +309,7 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
     m_config.setIconClickActivation(
             kcg.readEntry("iconClickActivation", true));
     m_config.setContentsClickActivation(
-            kcg.readEntry("contentsClickActivation", m_dialog == NULL));
+            kcg.readEntry("contentsClickActivation", m_list->parentItem() == NULL));
     m_config.setContentsExtenderPosition(
             (Lancelot::ExtenderPosition)
             kcg.readEntry("contentsExtenderPosition",
@@ -549,21 +325,23 @@ void LancelotPart::applyConfig()
 {
     KConfigGroup kcg = config();
 
-    if (m_icon != NULL) {
-        m_icon->setActivationMethod(
-                kcg.readEntry("iconClickActivation", true) ?
-                (Lancelot::ClickActivate) : (Lancelot::HoverActivate)
-            );
-        m_icon->setIcon(kcg.readEntry("iconLocation", "lancelot-part"));
-    }
+    // m_list->parentItem()
 
-    if (!kcg.readEntry("contentsClickActivation", m_dialog == NULL)) {
-        m_list->setExtenderPosition(
-                (Lancelot::ExtenderPosition)
-                kcg.readEntry("contentsExtenderPosition",
-                (int)Lancelot::RightExtender));
+    // if (m_icon != NULL) {
+    //     m_icon->setActivationMethod(
+    //             kcg.readEntry("iconClickActivation", true) ?
+    //             (Lancelot::ClickActivate) : (Lancelot::HoverActivate)
+    //         );
+        setPopupIcon(kcg.readEntry("iconLocation", "lancelot-part"));
+    //}
+
+    if (!kcg.readEntry("contentsClickActivation", m_list->parentItem() == NULL)) {
+       m_list->setExtenderPosition(
+               (Lancelot::ExtenderPosition)
+               kcg.readEntry("contentsExtenderPosition",
+               (int)Lancelot::RightExtender));
     } else {
-        m_list->setExtenderPosition(Lancelot::NoExtender);
+     m_list->setExtenderPosition(Lancelot::NoExtender);
     }
 }
 
@@ -583,5 +361,17 @@ void LancelotPart::configAccepted()
     kcg.sync();
     applyConfig();
 }
+
+void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
+{
+    PopupApplet::resizeEvent(event);
+
+}
+
+QGraphicsWidget * LancelotPart::graphicsWidget()
+{
+    return m_list;
+}
+
 
 #include "LancelotPart.moc"
