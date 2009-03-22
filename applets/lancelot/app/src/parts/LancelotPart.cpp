@@ -26,6 +26,7 @@
 #include <QGraphicsLayout>
 #include <QDataStream>
 #include <plasma/framesvg.h>
+#include <plasma/widgets/iconwidget.h>
 
 #include "../models/BaseModel.h"
 #include "../models/Devices.h"
@@ -44,7 +45,8 @@
 
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
-    m_instance(NULL), m_list(NULL), m_model(NULL)
+    m_instance(NULL), m_list(NULL), m_model(NULL),
+    m_icon(NULL), m_dialog(NULL)
 {
     if (args.size() > 0) {
         m_cmdarg = args[0].toString();
@@ -53,7 +55,22 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
     setMinimumSize(200, 300);
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
-    setPopupIcon("lancelot");
+    setPopupIcon("lancelot-part");
+
+    foreach (QGraphicsItem * child, childItems()) {
+        Plasma::IconWidget * icon = dynamic_cast < Plasma::IconWidget * > (child);
+        if (icon) {
+            m_icon = icon;
+            m_icon->installEventFilter(this);
+        }
+    }
+
+    foreach (QObject * child, children()) {
+        Plasma::Dialog * dialog = dynamic_cast < Plasma::Dialog * > (child);
+        if (dialog) {
+            qDebug() << "it is a Plasma::Dialog";
+        }
+    }
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -261,6 +278,8 @@ void LancelotPart::saveConfig()
 
 bool LancelotPart::loadConfig()
 {
+    applyConfig();
+
     KConfigGroup kcg = config();
 
     QString data = kcg.readEntry("partData", QString());
@@ -287,6 +306,21 @@ void LancelotPart::removeModel(int index)
 
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
+    qDebug() << event->type();
+
+    if (event->type() == QEvent::ApplicationDeactivate ||
+        event->type() == QEvent::WindowDeactivate) {
+        hidePopup();
+    }
+
+    if (!m_iconClickActivation && object == m_icon) {
+        if (event->type() == QEvent::QEvent::GraphicsSceneHoverEnter) {
+            showPopup();
+        } else if (event->type() == QEvent::QEvent::GraphicsSceneHoverLeave) {
+
+        }
+    }
+
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
         if (keyEvent->key() == Qt::Key_Escape) {
@@ -325,15 +359,8 @@ void LancelotPart::applyConfig()
 {
     KConfigGroup kcg = config();
 
-    // m_list->parentItem()
-
-    // if (m_icon != NULL) {
-    //     m_icon->setActivationMethod(
-    //             kcg.readEntry("iconClickActivation", true) ?
-    //             (Lancelot::ClickActivate) : (Lancelot::HoverActivate)
-    //         );
-        setPopupIcon(kcg.readEntry("iconLocation", "lancelot-part"));
-    //}
+    setPopupIcon(kcg.readEntry("iconLocation", "lancelot-part"));
+    m_iconClickActivation = kcg.readEntry("iconClickActivation", true);
 
     if (!kcg.readEntry("contentsClickActivation", m_list->parentItem() == NULL)) {
        m_list->setExtenderPosition(
@@ -341,7 +368,7 @@ void LancelotPart::applyConfig()
                kcg.readEntry("contentsExtenderPosition",
                (int)Lancelot::RightExtender));
     } else {
-     m_list->setExtenderPosition(Lancelot::NoExtender);
+        m_list->setExtenderPosition(Lancelot::NoExtender);
     }
 }
 
@@ -365,13 +392,28 @@ void LancelotPart::configAccepted()
 void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
 {
     PopupApplet::resizeEvent(event);
+}
 
+void LancelotPart::popupEvent(bool show)
+{
+    PopupApplet::popupEvent(show);
+
+    if (!m_dialog) {
+        QGraphicsScene * scene = m_list->scene();
+        foreach (QGraphicsView * view, scene->views()) {
+            Plasma::Dialog * dialog = dynamic_cast < Plasma::Dialog * > (view->parent());
+            if (dialog) {
+                m_dialog = dialog;
+                m_dialog->installEventFilter(this);
+                view->installEventFilter(this);
+            }
+        }
+    }
 }
 
 QGraphicsWidget * LancelotPart::graphicsWidget()
 {
     return m_list;
 }
-
 
 #include "LancelotPart.moc"

@@ -52,6 +52,7 @@ protected:
     L_Override void createConfigurationInterface(KConfigDialog *parent);
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
     L_Override QGraphicsWidget * graphicsWidget();
+    L_Override void popupEvent(bool show);
 
 private Q_SLOTS:
     void removeModel(int index);
@@ -74,6 +75,9 @@ private:
     QGraphicsLayout * m_layout;
     QString m_cmdarg;
     QString m_data;
+    Plasma::IconWidget * m_icon;
+    Plasma::Dialog * m_dialog;
+    bool m_iconClickActivation;
 
     LancelotPartConfig m_config;
 };
