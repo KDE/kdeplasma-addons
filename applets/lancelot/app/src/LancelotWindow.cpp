@@ -916,7 +916,7 @@ void LancelotWindow::resizeEvent(QResizeEvent * event)
     m_root->
         setGeometry(QRect(QPoint(), event->size()));
 
-    setMask(m_root->group()->backgroundSvg()->mask());
+    resizeWindow();
 }
 
 #include "LancelotWindow.moc"
