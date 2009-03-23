@@ -48,6 +48,7 @@ Eyes::Eyes(QObject *parent, const QVariantList &args)
 
     timerId = startTimer(50);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
+    setHasConfigurationInterface(false);
 }
 
 Eyes::~Eyes()
