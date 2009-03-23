@@ -1,5 +1,15 @@
 project(systemloadviewer)
 
+# building separately or as part of kdebase ?
+if(NOT KDE4_FOUND)
+   find_package(KDE4 REQUIRED)
+
+   include_directories(
+   ${CMAKE_CURRENT_BINARY_DIR}
+   ${KDE4_INCLUDES} 
+   )
+endif(NOT KDE4_FOUND)
+
 set(systemloadviewer_SRCS
     systemloadviewer.cpp)
 

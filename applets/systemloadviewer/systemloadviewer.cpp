@@ -94,6 +94,7 @@ void SystemLoadViewer::reconnectCPUSources()
         sys_mon->connectSource("cpu/system/nice", this, m_updateInterval);
         sys_mon->connectSource("cpu/system/wait", this, m_updateInterval);
         sys_mon->connectSource("cpu/system/idle", this, m_updateInterval);
+        sys_mon->connectSource("cpu/system/clock", this, m_updateInterval);
 
     } else {
 
@@ -114,6 +115,7 @@ void SystemLoadViewer::reconnectCPUSources()
             sys_mon->connectSource(QString("cpu/cpu%1/nice").arg(i), this, m_updateInterval);
             sys_mon->connectSource(QString("cpu/cpu%1/wait").arg(i), this, m_updateInterval);
             sys_mon->connectSource(QString("cpu/cpu%1/idle").arg(i), this, m_updateInterval);
+            sys_mon->connectSource(QString("cpu/cpu%1/clock").arg(i), this, m_updateInterval);
 
         }
     }
@@ -142,6 +144,7 @@ void SystemLoadViewer::disconnectCPUSources()
         sys_mon->disconnectSource("cpu/system/nice", this);
         sys_mon->disconnectSource("cpu/system/wait", this);
         sys_mon->disconnectSource("cpu/system/idle", this);
+        sys_mon->disconnectSource("cpu/system/clock", this);
 
     } else {
 
@@ -152,6 +155,7 @@ void SystemLoadViewer::disconnectCPUSources()
             sys_mon->disconnectSource(QString("cpu/cpu%1/nice").arg(i), this);
             sys_mon->disconnectSource(QString("cpu/cpu%1/wait").arg(i), this);
             sys_mon->disconnectSource(QString("cpu/cpu%1/idle").arg(i), this);
+            sys_mon->disconnectSource(QString("cpu/cpu%1/clock").arg(i), this);
         }
     }
 }
@@ -166,7 +170,7 @@ void SystemLoadViewer::sourcesAdded(const QString &source)
 
         if (source.endsWith(QLatin1String("/user")) || source.endsWith(QLatin1String("/sys")) ||
             source.endsWith(QLatin1String("/nice")) || source.endsWith(QLatin1String("/wait")) ||
-            source.endsWith(QLatin1String("/idle")))
+            source.endsWith(QLatin1String("/idle")) || source.endsWith(QLatin1String("/clock")))
         {
             sys_mon->connectSource(source, this, m_updateInterval);
         }
@@ -175,7 +179,7 @@ void SystemLoadViewer::sourcesAdded(const QString &source)
 
         if (source.endsWith(QLatin1String("/user")) || source.endsWith(QLatin1String("/sys")) ||
             source.endsWith(QLatin1String("/nice")) || source.endsWith(QLatin1String("/wait")) ||
-            source.endsWith(QLatin1String("/idle")))
+            source.endsWith(QLatin1String("/idle")) || source.endsWith(QLatin1String("/clock")) )
         {
             sys_mon->connectSource(source, this, m_updateInterval);
         }
@@ -386,6 +390,8 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_cpuInfo[0].disk = (data["value"].toString().toDouble()) / 100;
         } else if (source.endsWith(QLatin1String("/idle"))) {
             m_cpuInfo[0].idle = (data["value"].toString().toDouble()) / 100;
+        } else if (source.endsWith(QLatin1String("/clock"))) {
+            m_cpuInfo[0].clock = (data["value"].toString().toDouble());
         }
     } else if (m_showMultiCPU && source.startsWith(QLatin1String("cpu/"))) {
         int cpu = source.split('/')[1].mid(3).toInt();
@@ -406,6 +412,8 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_cpuInfo[cpu].disk = (data["value"].toString().toDouble()) / 100;
         } else if (source.endsWith(QLatin1String("/idle"))) {
             m_cpuInfo[cpu].idle = (data["value"].toString().toDouble()) / 100;
+        } else if (source.endsWith(QLatin1String("/clock"))) {
+            m_cpuInfo[cpu].clock = (data["value"].toString().toDouble());
         }
     } else if (source.startsWith(QLatin1String("mem/swap/"))) {
         if (source.endsWith(QLatin1String("/used"))) {
@@ -582,28 +590,32 @@ void SystemLoadViewer::readConfig()
 
 void SystemLoadViewer::toolTipAboutToShow()
 {
-    double cpuIdle = 0;
+    QString  content = "";
+    int      cpuUsage;
 
+    // CPU Usage
     if (m_showMultiCPU) {
         for (uint i = 0; i < m_numCPUs; ++i) {
-            cpuIdle += m_cpuInfo[i].idle;
+            cpuUsage = qRound((1 - m_cpuInfo[i].idle) * 100);
+            content += i18n("CPU %1 Usage: %2% at %3 MHz<br />", i+1, cpuUsage, m_cpuInfo[i].clock);
         }
-        cpuIdle /= m_numCPUs;
     } else {
-        cpuIdle = m_cpuInfo[0].idle;
+        cpuUsage = qRound((1 - m_cpuInfo[0].idle) * 100);
+        content += i18n("CPU Usage: %1% at %2 MHz<br />", cpuUsage, m_cpuInfo[0].clock);
     }
 
-    const int cpuUsage = qRound((1 - cpuIdle) * 100);
+    // Memory Usage
     const int ramUsage = qRound((m_ramapps / m_ramtotal) * 100);
-    const int swapUsage = qRound((m_swapused / m_swaptotal) * 100);
+    content += i18n("Ram Usage: %1%<br />", ramUsage);
 
-    QString content = m_swapAvailable ?
-            i18n("CPU Usage: %1%<br />Ram Usage: %2%<br />Swap Usage: %3%",
-                cpuUsage, ramUsage, swapUsage) :
-            i18nc("not available means the system does not have swap", "CPU Usage: %1%<br />Ram Usage: %2%<br />Swap: not available",
-                cpuUsage, ramUsage);
-
-
+    // Swap Usage
+    if (m_swapAvailable) {
+        const int swapUsage = qRound((m_swapused / m_swaptotal) * 100);
+        content += i18n("Swap Usage: %1%", swapUsage);
+    } else {
+        content += i18nc("not available means the system does not have swap", "Swap: not available");
+    }
+        
     Plasma::ToolTipManager::self()->setContent(this,
         Plasma::ToolTipContent(i18n("System Load Viewer"), content));
 }
