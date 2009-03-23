@@ -120,9 +120,6 @@ void Pastebin::init()
     setActionState(Idle);
     setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
-    //    m_resultsLabel = new DraggableLabel(this);
-    //    m_resultsLabel->setVisible(false);
-    //    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
 
     updateTheme();
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
@@ -198,7 +195,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setSubText(i18n("Error during upload. Try again."));
             toolTipData.setImage(KIcon("dialog-cancel"));
             // Notification ...
-            QTimer::singleShot(30000, this, SLOT(resetActionState()));
+            QTimer::singleShot(15000, this, SLOT(resetActionState()));
             break;
         case IdleSuccess:
             kDebug() << "IdleSuccess";
@@ -206,7 +203,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setSubText(i18n("Successfully uploaded to %1.", m_url));
             toolTipData.setImage(KIcon("dialog-ok"));
             // Notification ...
-            QTimer::singleShot(30000, this, SLOT(resetActionState()));
+            QTimer::singleShot(15000, this, SLOT(resetActionState()));
             break;
         case Sending:
             kDebug() << "Sending";
@@ -221,31 +218,6 @@ void Pastebin::setActionState(ActionState state)
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
     m_actionState = state;
     update();
-}
-
-QGraphicsWidget *Pastebin::graphicsWidget()
-{
-    if (m_graphicsWidget) {
-        return m_graphicsWidget;
-    }
-
-    m_resultsLabel = new DraggableLabel(this);
-    m_resultsLabel->setVisible(false);
-    m_displayEdit = new Plasma::Label(this);
-    m_displayEdit->setText(i18n("Drop text or images on me to upload them to Pastebin."));
-    m_displayEdit->setAcceptDrops(false);
-    m_displayEdit->nativeWidget()->setTextInteractionFlags(Qt::NoTextInteraction);
-    registerAsDragHandle(m_displayEdit);
-    connect(m_resultsLabel, SIGNAL(linkActivated(QString)), this, SLOT(openLink(QString)));
-
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical);
-    layout->addItem(m_displayEdit);
-    layout->addItem(m_resultsLabel);
-
-    m_graphicsWidget = new QGraphicsWidget(this);
-    m_graphicsWidget->setLayout(layout);
-    m_graphicsWidget->setPreferredSize(200, 200);
-    return m_graphicsWidget;
 }
 
 void Pastebin::constraintsEvent(Plasma::Constraints constraints)
@@ -491,8 +463,6 @@ void Pastebin::showResults(const QString &url)
 {
     timer->stop();
     m_url = url;
-    //    m_resultsLabel->m_url = url;
-    //    m_resultsLabel->setText(i18n("<a href=\"%1\">%2</a><p>", url, url));
     setActionState(IdleSuccess);
     copyToClipboard(url);
 }
@@ -507,8 +477,6 @@ void Pastebin::copyToClipboard(const QString &url)
 
 void Pastebin::showErrors()
 {
-//     m_resultsLabel->setText(i18n("Error during uploading! Please try again."));
-//     m_resultsLabel->m_url = KUrl();
     setActionState(IdleError);
 }
 
@@ -525,15 +493,20 @@ void Pastebin::resetActionState()
 
 void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    kDebug() << "press event";
     if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
         Plasma::Applet::mousePressEvent(event);
     } else {
         openLink(m_url);
     }
     if (event->button() == Qt::MidButton) {
-        // Now releasing the middlebutton click copies to clipboard
-        event->accept();
+        if (m_actionState == Idle) {
+            // paste clipboard content
+            postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
+        }
+        else {
+            // Now releasing the middlebutton click copies to clipboard
+            event->accept();
+        }
     }
 }
 
@@ -575,102 +548,74 @@ void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     if (event->mimeData()->objectName() != QString("Pastebin-applet")) {
-        bool image = false;
-        bool validPath = false;
-
-        QString text = event->mimeData()->text();
-        setActionState(Sending);
-        timer->start(20000);
-
-        QUrl testPath(text);
-        validPath = QFile::exists(testPath.path());
-
-        if (validPath) {
-            KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
-
-            if (type->name().indexOf("image/") != -1) {
-                image = true;
-            }
-        }
-        else {
-            if (event->mimeData()->hasImage()) {
-                image = true;
-            }
-        }
-
-        if (!image) {
-            if (validPath) {
-                QFile file(testPath.path());
-                file.open(QIODevice::ReadOnly);
-                QTextStream in(&file);
-                text = in.readAll();
-            }
-
-            // upload text
-            m_textServer->post(text);
-        } else {
-            //upload image
-            if (validPath) {
-                m_imageServer->post(testPath.path());
-            }
-            else {
-                KTemporaryFile tempFile;
-                if (tempFile.open()) {
-                    tempFile.setAutoRemove(false);
-
-                    QDataStream stream(&tempFile);
-
-                    QByteArray data;
-                    QBuffer buffer(&data);
-                    buffer.open(QIODevice::ReadWrite);
-
-                    QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
-                    image.save(&buffer, "JPEG");
-                    stream.writeRawData(data, data.size());
-
-                    QUrl t(tempFile.fileName());
-                    tempFile.close();
-
-                    m_imageServer->post(t.path());
-
-                }
-                else {
-                    setActionState(IdleError);
-                    timer->stop();
-                }
-
-            }
-        }
-
+        QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
+        postContent(event->mimeData()->text(), image);
         event->acceptProposedAction();
     }
 }
 
-DraggableLabel::DraggableLabel(QGraphicsWidget *parent)
-    : Plasma::Label(parent)
+void Pastebin::postContent(QString text, QImage imageData)
 {
-}
+    bool image = false;
+    bool validPath = false;
 
-void DraggableLabel::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
-        Plasma::Label::mousePressEvent(event);
+    setActionState(Sending);
+    timer->start(20000);
+
+    QUrl testPath(text);
+    validPath = QFile::exists(testPath.path());
+
+    if (validPath) {
+        KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
+
+        if (type->name().indexOf("image/") != -1) {
+            image = true;
+        }
     } else {
-        event->accept();
+        if (!imageData.isNull()) {
+            image = true;
+        }
     }
-}
 
-void DraggableLabel::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    int distance = (event->buttonDownPos(Qt::LeftButton) - event->pos().toPoint()).toPoint().manhattanLength();
-    if (distance > KGlobalSettings::dndEventDelay()) {
-        QMimeData *data = new QMimeData;
-        data->setText(m_url.prettyUrl());
-        data->setObjectName("Pastebin-applet");
+    if (!image) {
+        if (validPath) {
+            QFile file(testPath.path());
+            file.open(QIODevice::ReadOnly);
+            QTextStream in(&file);
+            text = in.readAll();
+        }
 
-        QDrag *drag = new QDrag(event->widget());
-        drag->setMimeData(data);
-        drag->start();
+        // upload text
+        m_textServer->post(text);
+    } else {
+        //upload image
+        if (validPath) {
+            m_imageServer->post(testPath.path());
+        } else {
+            KTemporaryFile tempFile;
+            if (tempFile.open()) {
+                tempFile.setAutoRemove(false);
+
+                QDataStream stream(&tempFile);
+
+                QByteArray data;
+                QBuffer buffer(&data);
+                buffer.open(QIODevice::ReadWrite);
+
+                QImage image = imageData;
+                image.save(&buffer, "JPEG");
+                stream.writeRawData(data, data.size());
+
+                QUrl t(tempFile.fileName());
+                tempFile.close();
+
+                m_imageServer->post(t.path());
+
+            } else {
+                setActionState(IdleError);
+                timer->stop();
+            }
+        }
     }
 }
 

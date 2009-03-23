@@ -34,16 +34,6 @@
 #include <QTimer>
 #include <QPen>
 
-class DraggableLabel : public Plasma::Label
-{
-public:
-    explicit DraggableLabel(QGraphicsWidget *parent);
-    KUrl m_url;
-
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-};
 
 class Pastebin : public Plasma::Applet
 {
@@ -59,8 +49,6 @@ public:
     void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                         const QRect &contents);
     void constraintsEvent(Plasma::Constraints constraints);
-
-    QGraphicsWidget *graphicsWidget();
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
     enum imageServers { IMAGEBINCA, IMAGESHACK };
@@ -86,7 +74,7 @@ public:
 public slots:
     void configAccepted();
 
-protected Q_SLOTS:
+protected slots:
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
     void showResults(const QString &url);
@@ -104,7 +92,7 @@ protected:
     void paintPixmap(QPainter *painter, QPixmap &pixmap,
                      const QRectF &rect, qreal opacity = 1.0);
 
-private Q_SLOTS:
+private slots:
     void animationUpdate(qreal progress);
     void updateTheme();
     void resetActionState();
@@ -113,6 +101,7 @@ private Q_SLOTS:
 private:
     int iconSize();
     void showOverlay(bool show);
+    void postContent(QString text, QImage imageData);
 
     void setInteractionState(InteractionState state);
     void setActionState(ActionState state);
@@ -133,7 +122,6 @@ private:
     QGraphicsWidget *m_graphicsWidget;
 
     Plasma::ToolTipContent toolTipData;
-    DraggableLabel *m_resultsLabel;
     Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
     PastebinServer *m_imageServer;
