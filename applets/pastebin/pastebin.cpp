@@ -33,9 +33,11 @@
 #include <QPainter>
 #include <QPaintEngine>
 
+#include <KAction>
 #include <KDebug>
 #include <KLocale>
 #include <KConfigDialog>
+#include <KStandardAction>
 #include <KToolInvocation>
 #include <KNotification>
 
@@ -551,6 +553,32 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
         QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
         postContent(event->mimeData()->text(), image);
         event->acceptProposedAction();
+    }
+}
+
+QList<QAction*> Pastebin::contextualActions()
+{
+    if (m_contestualActions.isEmpty()){
+        KAction *paste = KStandardAction::paste(this);
+        connect(paste, SIGNAL(triggered(bool)), this, SLOT(postClipboard()));
+        m_contestualActions.append(paste);
+    
+        QAction *separator = new QAction(this);
+        separator->setSeparator(true);
+        m_contestualActions.append(separator);
+    }
+
+    return m_contestualActions;
+}
+
+void Pastebin::postClipboard()
+{
+    const QClipboard *clipboard = QApplication::clipboard();
+    const QMimeData *mimeData = clipboard->mimeData();
+
+    if (mimeData->objectName() != QString("Pastebin-applet")) {
+        QImage image = qvariant_cast<QImage>(mimeData->imageData());
+        postContent(mimeData->text(), image);
     }
 }
 

@@ -43,6 +43,7 @@ public:
     ~Pastebin();
 
     void init();
+    QList<QAction*> contextualActions();
     void setTextServer(int backend);
     void setImageServer(int backend);
 
@@ -80,6 +81,7 @@ protected slots:
     void showResults(const QString &url);
     void showErrors();
     void openLink(const QString &link);
+    void postClipboard();
 
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -131,6 +133,8 @@ private:
     int m_imageBackend;
 
     QTimer *timer;
+
+    QList<QAction *> m_contestualActions;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;
