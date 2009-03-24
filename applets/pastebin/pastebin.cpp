@@ -558,7 +558,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 QList<QAction*> Pastebin::contextualActions()
 {
-    if (m_contestualActions.isEmpty()){
+    if (m_contextualActions.isEmpty()){
         KAction *paste = KStandardAction::paste(this);
         connect(paste, SIGNAL(triggered(bool)), this, SLOT(postClipboard()));
         m_contestualActions.append(paste);
@@ -568,7 +568,7 @@ QList<QAction*> Pastebin::contextualActions()
         m_contestualActions.append(separator);
     }
 
-    return m_contestualActions;
+    return m_contextualActions;
 }
 
 void Pastebin::postClipboard()

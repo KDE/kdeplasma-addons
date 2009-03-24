@@ -134,7 +134,7 @@ private:
 
     QTimer *timer;
 
-    QList<QAction *> m_contestualActions;
+    QList<QAction *> m_contextualActions;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;
