@@ -43,19 +43,23 @@
 #include "../models/MessagesKmail.h"
 #include "../Serializator.h"
 
+#define ACTIVATION_TIME 300
+
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
     m_instance(NULL), m_list(NULL), m_model(NULL),
-    m_icon(NULL), m_dialog(NULL)
+    m_icon(NULL)
 {
     if (args.size() > 0) {
         m_cmdarg = args[0].toString();
     }
 
-    setMinimumSize(200, 300);
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
     setPopupIcon("lancelot-part");
+    setBackgroundHints(StandardBackground);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
+    // setPassivePopup(true);
 
     foreach (QGraphicsItem * child, childItems()) {
         Plasma::IconWidget * icon = dynamic_cast < Plasma::IconWidget * > (child);
@@ -65,12 +69,38 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
         }
     }
 
-    foreach (QObject * child, children()) {
-        Plasma::Dialog * dialog = dynamic_cast < Plasma::Dialog * > (child);
-        if (dialog) {
-            qDebug() << "it is a Plasma::Dialog";
+}
+
+void LancelotPart::init()
+{
+    qDebug() << "init";
+
+    // Setting up UI
+    m_instance = new Lancelot::Instance();
+    m_list = new Lancelot::ActionListView(this);
+    m_model = new Models::PartsMergedModel();
+    m_list->setModel(m_model);
+    m_instance->activateAll();
+
+    connect(
+            m_model, SIGNAL(removeModelRequested(int)),
+            this, SLOT(removeModel(int))
+    );
+
+    // Loading data
+    bool loaded = loadConfig();
+    kDebug() << "loaded from config " << loaded;
+
+    if (!loaded && !m_cmdarg.isEmpty()) {
+        if (QFileInfo(QUrl(m_cmdarg).toLocalFile()).isDir()) {
+            loadDirectory(m_cmdarg);
+        } else {
+            loadFromFile(m_cmdarg);
         }
     }
+
+    m_list->setMinimumSize(150, 200);
+    m_list->setPreferredSize(250, 300);
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -163,36 +193,6 @@ bool LancelotPart::loadFromList(const QStringList & list)
     }
 
     return loaded;
-}
-
-void LancelotPart::init()
-{
-    // Setting up UI
-    m_instance = new Lancelot::Instance();
-    m_list = new Lancelot::ActionListView();
-    m_list->setMinimumSize(150, 200);
-    m_list->setPreferredSize(250, 300);
-    m_model = new Models::PartsMergedModel();
-    m_list->setModel(m_model);
-
-    m_instance->activateAll();
-
-    connect(
-            m_model, SIGNAL(removeModelRequested(int)),
-            this, SLOT(removeModel(int))
-    );
-
-    // Loading data
-    bool loaded = loadConfig();
-    kDebug() << "loaded from config " << loaded;
-
-    if (!loaded && !m_cmdarg.isEmpty()) {
-        if (QFileInfo(QUrl(m_cmdarg).toLocalFile()).isDir()) {
-            loadDirectory(m_cmdarg);
-        } else {
-            loadFromFile(m_cmdarg);
-        }
-    }
 }
 
 bool LancelotPart::load(const QString & input)
@@ -304,31 +304,26 @@ void LancelotPart::removeModel(int index)
     saveConfig();
 }
 
+void LancelotPart::timerEvent(QTimerEvent * event)
+{
+    if (event->timerId() == m_timer.timerId()) {
+        m_timer.stop();
+        showPopup();
+    }
+    PopupApplet::timerEvent(event);
+}
+
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
-    qDebug() << event->type();
-
-    if (event->type() == QEvent::ApplicationDeactivate ||
-        event->type() == QEvent::WindowDeactivate) {
-        hidePopup();
-    }
-
     if (!m_iconClickActivation && object == m_icon) {
         if (event->type() == QEvent::QEvent::GraphicsSceneHoverEnter) {
-            showPopup();
+            m_timer.start(ACTIVATION_TIME, this);
         } else if (event->type() == QEvent::QEvent::GraphicsSceneHoverLeave) {
-
+            m_timer.stop();
         }
     }
 
-    if (event->type() == QEvent::KeyPress) {
-        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-        if (keyEvent->key() == Qt::Key_Escape) {
-            hidePopup();
-            return true;
-        }
-    }
-    return Plasma::Applet::eventFilter(object, event);
+    return Plasma::PopupApplet::eventFilter(object, event);
 }
 
 void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
@@ -394,25 +389,9 @@ void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
     PopupApplet::resizeEvent(event);
 }
 
-void LancelotPart::popupEvent(bool show)
-{
-    PopupApplet::popupEvent(show);
-
-    if (!m_dialog) {
-        QGraphicsScene * scene = m_list->scene();
-        foreach (QGraphicsView * view, scene->views()) {
-            Plasma::Dialog * dialog = dynamic_cast < Plasma::Dialog * > (view->parent());
-            if (dialog) {
-                m_dialog = dialog;
-                m_dialog->installEventFilter(this);
-                view->installEventFilter(this);
-            }
-        }
-    }
-}
-
 QGraphicsWidget * LancelotPart::graphicsWidget()
 {
+    qDebug() << "graphicsWidget" << (void *) m_list;
     return m_list;
 }
 
