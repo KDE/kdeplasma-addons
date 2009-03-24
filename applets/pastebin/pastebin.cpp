@@ -561,11 +561,11 @@ QList<QAction*> Pastebin::contextualActions()
     if (m_contextualActions.isEmpty()){
         KAction *paste = KStandardAction::paste(this);
         connect(paste, SIGNAL(triggered(bool)), this, SLOT(postClipboard()));
-        m_contestualActions.append(paste);
+        m_contextualActions.append(paste);
     
         QAction *separator = new QAction(this);
         separator->setSeparator(true);
-        m_contestualActions.append(separator);
+        m_contextualActions.append(separator);
     }
 
     return m_contextualActions;
