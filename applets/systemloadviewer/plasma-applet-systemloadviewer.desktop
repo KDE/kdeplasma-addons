@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=System Load Viewer
+Name[el]=Προβολέας φορτίου συστήματος
+Name[et]=Süsteemi koormuse näitaja
 Name[ga]=Amharcán Lód an Chórais
 Name[nds]=Systeemlastkieker
 Name[pt]=Visualizador da Carga do Sistema
@@ -10,6 +12,8 @@ Name[tr]=Sistem Yükü İzleyici
 Name[uk]=Перегляд навантаження на систему
 Name[zh_TW]=系統負載檢視器
 Comment=Tiny CPU/RAM/Swap monitor
+Comment[el]=Μικροσκοπική εποπτεία ΚΜΕ/RAM/Swap
+Comment[et]=Tilluke CPU/RAM-i/saaleala jälgija
 Comment[ga]=Monatóir Beag LAP/RAM/Babhtáil
 Comment[nds]=Lierlütt CPU-, RAM- un Utlagerspieker-Kieker
 Comment[pt]=Monitor minúsculo de CPU/RAM/Memória Virtual

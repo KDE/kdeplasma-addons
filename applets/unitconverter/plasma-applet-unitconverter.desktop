@@ -43,6 +43,7 @@ Name[x-test]=xxUnit Converterxx
 Name[zh_CN]=单位转换器
 Name[zh_TW]=單位轉換器
 Comment=Plasmoid for converting units
+Comment[el]=Πλασμοειδές για τη μετατροπή μονάδων
 Comment[et]=Ühikute teisendamise plasmoid
 Comment[ga]=Plasmóid a thiontaíonn aonaid
 Comment[ja]=単位を変換するプラズモイド
