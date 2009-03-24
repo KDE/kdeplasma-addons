@@ -1,77 +1,163 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>lifeConfig</class>
- <widget class="QWidget" name="lifeConfig" >
-  <property name="geometry" >
+ <widget class="QWidget" name="lifeConfig">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>193</height>
+    <width>593</width>
+    <height>409</height>
    </rect>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <widget class="QLabel" name="verticalCellsLabel" >
-     <property name="text" >
-      <string>Vertical cells number:</string>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Cells array</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" >
-    <widget class="KIntSpinBox" name="verticalCells" >
-     <property name="minimum" >
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="horizontalCellsLabel">
+     <property name="text">
+      <string>Horizontal cells:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QSlider" name="horizontalCells">
+     <property name="minimum">
       <number>3</number>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="horizontalCellsLabel" >
-     <property name="text" >
-      <string>Horizontal cells number:</string>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="KIntSpinBox" name="horizontalCells" >
-     <property name="minimum" >
-      <number>3</number>
+   <item row="3" column="0" colspan="3">
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Update and Restart</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="QLabel" name="stepIntervalLabel" >
-     <property name="text" >
-      <string>One generation each:</string>
+   <item row="4" column="3" colspan="2">
+    <widget class="KIntSpinBox" name="stepInterval">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="1" >
-    <widget class="KIntSpinBox" name="stepInterval" >
-     <property name="suffix" >
+     <property name="suffix">
       <string> sec</string>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <number>1</number>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" >
-    <widget class="QLabel" name="maxGensNumberLabel" >
-     <property name="text" >
-      <string>Restart game each:</string>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLabel" name="maxGensNumberLabel">
+     <property name="text">
+      <string>Restart game every:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="3" column="1" >
-    <widget class="KIntSpinBox" name="maxGensNumber" >
-     <property name="suffix" >
+   <item row="5" column="3" colspan="2">
+    <widget class="KIntSpinBox" name="maxGensNumber">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="suffix">
       <string> gens</string>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <number>10</number>
      </property>
-     <property name="maximum" >
+     <property name="maximum">
       <number>999999</number>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>83</width>
+       <height>244</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="3">
+    <widget class="QSlider" name="verticalCells">
+     <property name="minimum">
+      <number>3</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLabel" name="verticalCellsNumber">
+     <property name="text">
+      <string>Vertical cells:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QLabel" name="stepIntervalLabel">
+     <property name="text">
+      <string>Update every:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
