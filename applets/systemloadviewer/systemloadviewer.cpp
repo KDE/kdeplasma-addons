@@ -363,7 +363,7 @@ void SystemLoadViewer::configUpdated()
         m_freeResourceColor = uiColours.kcbFreeResourceColour->color();
         cg.writeEntry("colour_free_resource", m_freeResourceColor.name());
     }
-    if (uiColours.hsldrFreeResourceTransparency->value() != m_freeResourceColor.alpha()){
+    if (uiColours.hsldrFreeResourceTransparency->value() != (255 - m_freeResourceColor.alpha())){
         m_freeResourceColor.setAlpha(255 - uiColours.hsldrFreeResourceTransparency->value());
         cg.writeEntry("transparency_free_resource", m_freeResourceColor.alpha());        
     }
