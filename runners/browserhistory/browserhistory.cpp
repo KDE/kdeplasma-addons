@@ -56,6 +56,14 @@ void BrowserHistoryRunner::loadHistory()
     KConfigGroup locationBarGroup( konq_config, "Location Bar" );
     QStringList lstHistory = locationBarGroup.readPathEntry( "ComboContents", QStringList() );
     delete konq_config;
+
+    QMutableStringListIterator it(lstHistory);
+    while (it.hasNext()) {
+        if (it.next().startsWith("error:/")) {
+            it.remove();
+        }
+    }
+
     m_history = lstHistory;
 }
 
@@ -72,7 +80,7 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
         }
 
         // Filter out error pages, and match ...
-        if (!historyitem.startsWith("error:/") && historyitem.contains(term, Qt::CaseInsensitive)) {
+        if (historyitem.contains(term, Qt::CaseInsensitive)) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
             match.setRelevance(0.5);
