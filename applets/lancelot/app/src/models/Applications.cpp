@@ -36,8 +36,8 @@ namespace Models {
 Applications::Applications(QString root, QString title, QIcon icon):
     m_root(root), m_title(title), m_icon(icon)
 {
-    connect(KSycoca::self(), SIGNAL(databaseChanged()),
-            this, SLOT(sycocaUpdated()));
+    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
+            this, SLOT(sycocaUpdated(const QStringList &)));
     load();
 }
 
@@ -230,9 +230,9 @@ void Applications::contextActivate(int index, QAction * context)
     }
 }
 
-void Applications::sycocaUpdated()
+void Applications::sycocaUpdated(const QStringList & resources)
 {
-    if (KSycoca::self()->isChanged("services")) {
+    if (resources.contains("services")) {
         load();
     }
 }

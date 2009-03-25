@@ -69,6 +69,11 @@ void Runner::setSearchString(const QString & search)
 
 void Runner::timerEvent(QTimerEvent * event)
 {
+    BaseModel::timerEvent(event);
+    if (event->timerId() != m_timer.timerId()) {
+        return;
+    }
+
     m_timer.stop();
     if (m_searchString.isEmpty()) {
         clear();

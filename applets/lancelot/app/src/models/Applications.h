@@ -55,7 +55,7 @@ public Q_SLOTS:
     virtual void activate(int index);
 
 private Q_SLOTS:
-    void sycocaUpdated();
+    void sycocaUpdated(const QStringList & resources);
 
 private:
     void load();
