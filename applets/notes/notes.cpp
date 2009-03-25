@@ -38,6 +38,7 @@
 #include <KTextEdit>
 
 #include <Plasma/TextEdit>
+
 NotesTextEdit::NotesTextEdit( QWidget *parent ): KTextEdit( parent )
 {
 }
@@ -57,7 +58,39 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
     popup->exec(event->globalPos());
     delete popup;
 }
-
+/**
+ * Add to mousePressEvent a signal to change the edited line's background color
+ */
+void NotesTextEdit::mousePressEvent ( QMouseEvent * event )
+{
+    KTextEdit::mousePressEvent(event);
+    if(event->button()== Qt::LeftButton)
+      emit cursorMoved();
+}
+/**
+ * Same as mousePressEvent
+ */
+void NotesTextEdit::keyPressEvent ( QKeyEvent * event )
+{
+  KTextEdit::keyPressEvent(event);
+  switch(event->key())
+  {
+    case Qt::Key_Left : emit cursorMoved(); break;
+    case Qt::Key_Right : emit cursorMoved(); break;
+    case Qt::Key_Down : emit cursorMoved(); break;
+    case Qt::Key_Up : emit cursorMoved(); break;
+    default:break;
+  }
+}
+/**
+ * Add to the Note a signal to prevent from leaving the note and remove line background color
+ * when there is no focus on the plasmoid
+ */
+void NotesTextEdit::leaveEvent ( QEvent * event )
+{
+  KTextEdit::leaveEvent(event);
+  emit mouseUnhovered();
+}
 /**
  * Use notesTextEdit as native widget instead of KTextEdit
  */
@@ -71,6 +104,8 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
         native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
     }
     connect(native, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
+    connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
+    connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
     setWidget(native);
     delete w;
     native->setAttribute(Qt::WA_NoSystemBackground);
@@ -102,6 +137,24 @@ void NotesTextEdit::saveToFile()
     QTextStream out(&file);
     out << toPlainText();
     file.close();
+}
+/**
+* remove the background color of the last line edited when leaving
+*/
+void Notes::mouseUnhovered()
+{
+      QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+      QTextEdit::ExtraSelection textxtra;
+      textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+      textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+      textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+      textxtra.format.setBackground( Qt::transparent );
+
+      QList<QTextEdit::ExtraSelection> extras;
+      extras << textxtra;
+      m_textEdit->nativeWidget()->setExtraSelections( extras );
+
+      update();
 }
 
 Notes::Notes(QObject *parent, const QVariantList &args)
@@ -136,7 +189,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
         }
     } else {
 #ifdef KTEXTEDIT_CLICKMSG_SUPPORT
-        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid. Type your notes here...."));
+        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
 #endif
     }
 }
@@ -169,7 +222,8 @@ void Notes::init()
     KConfigGroup cg = config();
     m_color = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
-    m_textColor = cg.readEntry("textcolor", QColor(Qt::black));
+    m_textColor = cg.readEntry("textColor", QColor(Qt::black));
+    m_textBackgroundColor = cg.readEntry("textbBackgroundColor", QColor(Qt::yellow));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
 
     QString text = cg.readEntry("autoSave", QString());
@@ -188,11 +242,37 @@ void Notes::init()
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
 
     m_useThemeColor = cg.readEntry("useThemeColor", true);
+    m_useNoColor = cg.readEntry("useNoColor", true);
 
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
+    connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
+}
+
+/**
+* this function is called when you change the line you are editing
+* to change the background color
+*/
+void Notes::lineChanged()
+{
+    if(!m_useNoColor)
+    {
+      QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+      QTextEdit::ExtraSelection textxtra;
+      textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+      textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+      textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+      textxtra.format.setBackground( m_textBackgroundColor );
+
+      QList<QTextEdit::ExtraSelection> extras;
+      extras << textxtra;
+      m_textEdit->nativeWidget()->setExtraSelections( extras );
+
+      update();
+    }
 }
 
 void Notes::constraintsEvent(Plasma::Constraints constraints)
@@ -295,6 +375,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     fontSizeGroup->addButton(ui.customFont);
 
     ui.textColorButton->setColor(m_textColor);
+    ui.textBackgroundColorButton->setColor(m_textBackgroundColor);
     ui.fontStyleComboBox->setCurrentFont(m_textEdit->nativeWidget()->font());
     ui.fontBoldCheckBox->setChecked(m_textEdit->nativeWidget()->font().bold());
     ui.fontItalicCheckBox->setChecked(m_textEdit->nativeWidget()->font().italic());
@@ -304,8 +385,20 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     ui.customFontSizeSpinBox->setEnabled(!m_autoFont);
     ui.autoFontPercent->setValue(m_autoFontPercent);
     ui.customFontSizeSpinBox->setValue(m_customFontSize);
+
+    QButtonGroup *FontColorGroup = new QButtonGroup(widget);
+    FontColorGroup->addButton(ui.useThemeColor);
+    FontColorGroup->addButton(ui.useCustomColor);
     ui.useThemeColor->setChecked(m_useThemeColor);
     ui.useCustomColor->setChecked(!m_useThemeColor);
+
+
+    QButtonGroup *BackgroundColorGroup = new QButtonGroup(widget);
+    BackgroundColorGroup->addButton(ui.useNoColor);
+    BackgroundColorGroup->addButton(ui.useCustomBackgroundColor);
+    ui.useNoColor->setChecked(m_useNoColor);
+    ui.useCustomBackgroundColor->setChecked(!m_useNoColor);
+
     ui.checkSpelling->setChecked(m_checkSpelling);
 
     for (int i = 0; i < m_colorActions.size(); i++){
@@ -368,11 +461,36 @@ void Notes::configAccepted()
     if (m_textColor != newColor) {
         changed = true;
         m_textColor = newColor;
-        cg.writeEntry("textcolor", m_textColor);
+        cg.writeEntry("textColor", m_textColor);
 	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
 	m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
 	m_textEdit->nativeWidget()->setTextCursor(textCursor);
+    }
+
+    if (m_useNoColor != ui.useNoColor->isChecked()) {
+        changed = true;
+        m_useNoColor = ui.useNoColor->isChecked();
+        cg.writeEntry("useNoColor", m_useNoColor);
+	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+	QTextEdit::ExtraSelection textxtra;
+	textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+	textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+	textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+	textxtra.format.setBackground( Qt::transparent );
+
+	QList<QTextEdit::ExtraSelection> extras;
+	extras << textxtra;
+	m_textEdit->nativeWidget()->setExtraSelections( extras );
+
+	update();
+    }
+
+    QColor newBackgroundColor = ui.textBackgroundColorButton->color();
+    if (m_textBackgroundColor != newBackgroundColor) {
+        changed = true;
+        m_textBackgroundColor = newBackgroundColor;
+        cg.writeEntry("textBackgroundColor", m_textBackgroundColor);
     }
 
     bool spellCheck = ui.checkSpelling->isChecked();
@@ -386,7 +504,7 @@ void Notes::configAccepted()
     QString tmpColor = m_colorActions[ui.notesColorComboBox->currentIndex()]->property("color").toString();
     if (tmpColor != m_color){
         m_color = tmpColor;
-        cg.writeEntry("color", tmpColor);
+        cg.writeEntry("color", m_color);
         changed = true;
     }
 

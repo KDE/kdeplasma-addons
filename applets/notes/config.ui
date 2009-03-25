@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>408</height>
+    <width>626</width>
+    <height>512</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout" >
@@ -201,7 +201,7 @@
       <string>Use theme color</string>
      </property>
      <property name="checked" >
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -242,7 +242,86 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="0" >
+   <item row="10" column="2" >
+    <spacer name="verticalSpacer_7" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>383</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="11" column="1" >
+    <widget class="QLabel" name="fontBackgroundColorLabel" >
+     <property name="text" >
+      <string>Active Line Highlight Color:</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="2" >
+    <widget class="QRadioButton" name="useNoColor" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>Use no color</string>
+     </property>
+     <property name="checked" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="2" >
+    <layout class="QHBoxLayout" name="horizontalLayout_8" >
+     <item>
+      <widget class="QRadioButton" name="useCustomBackgroundColor" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text" >
+        <string>Use custom color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KColorButton" name="textBackgroundColorButton" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_6" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="13" column="0" >
     <spacer name="verticalSpacer_3" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -258,7 +337,7 @@
      </property>
     </spacer>
    </item>
-   <item row="11" column="0" >
+   <item row="14" column="0" >
     <widget class="QLabel" name="themeGroupLabel" >
      <property name="font" >
       <font>
@@ -271,7 +350,7 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="1" >
+   <item row="15" column="1" >
     <widget class="QLabel" name="notesColorLabel" >
      <property name="text" >
       <string>Notes color:</string>
@@ -281,7 +360,7 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="2" >
+   <item row="15" column="2" >
     <layout class="QHBoxLayout" name="horizontalLayout_6" >
      <item>
       <widget class="KComboBox" name="notesColorComboBox" >
@@ -314,7 +393,7 @@
      </item>
     </layout>
    </item>
-   <item row="13" column="0" >
+   <item row="16" column="0" >
     <spacer name="verticalSpacer_2" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -330,7 +409,7 @@
      </property>
     </spacer>
    </item>
-   <item row="14" column="0" colspan="2" >
+   <item row="17" column="0" colspan="2" >
     <widget class="QLabel" name="spellCheckLabel" >
      <property name="font" >
       <font>
@@ -343,14 +422,14 @@
      </property>
     </widget>
    </item>
-   <item row="15" column="1" >
+   <item row="18" column="1" >
     <widget class="QLabel" name="checkSpellingLabel" >
      <property name="text" >
       <string>Enable spell check:</string>
      </property>
     </widget>
    </item>
-   <item row="15" column="2" >
+   <item row="18" column="2" >
     <layout class="QHBoxLayout" name="horizontalLayout_5" >
      <item>
       <widget class="QCheckBox" name="checkSpelling" >
@@ -377,7 +456,7 @@
      </item>
     </layout>
    </item>
-   <item row="16" column="1" colspan="2" >
+   <item row="19" column="1" colspan="2" >
     <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -423,12 +502,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>170</x>
-     <y>153</y>
+     <x>407</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>261</x>
-     <y>153</y>
+     <x>494</x>
+     <y>200</y>
     </hint>
    </hints>
   </connection>
@@ -439,12 +518,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>144</x>
-     <y>193</y>
+     <x>381</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>224</x>
-     <y>190</y>
+     <x>468</x>
+     <y>164</y>
     </hint>
    </hints>
   </connection>
@@ -455,12 +534,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>130</x>
-     <y>264</y>
+     <x>367</x>
+     <y>270</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>224</x>
-     <y>259</y>
+     <x>472</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>useCustomBackgroundColor</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>textBackgroundColorButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>337</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>437</x>
+     <y>343</y>
     </hint>
    </hints>
   </connection>

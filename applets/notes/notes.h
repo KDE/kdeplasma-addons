@@ -56,6 +56,13 @@ class NotesTextEdit : public KTextEdit {
 	NotesTextEdit(QWidget *parent = 0);
 	~NotesTextEdit();
 	virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
+	void mousePressEvent ( QMouseEvent * event );
+	void keyPressEvent ( QKeyEvent * event );
+	void leaveEvent ( QEvent * event );
+
+    signals:
+	void cursorMoved();
+	void mouseUnhovered();
 
     public slots:
 	virtual void saveToFile();
@@ -71,6 +78,9 @@ class NotesTextEdit : public KTextEdit {
  */
 class PlasmaTextEdit : public Plasma::TextEdit {
     Q_OBJECT
+
+    signals:
+    void mouseUnhovered();
 
     public:
       PlasmaTextEdit(QGraphicsWidget *parent = 0);
@@ -101,6 +111,8 @@ class Notes : public Plasma::Applet
         void saveNote();
         void delayedSaveNote();
         void changeColor();
+	void lineChanged();
+	void mouseUnhovered();
 
     private:
         int fontSize();
@@ -114,14 +126,16 @@ class Notes : public Plasma::Applet
         QFont m_font;
         int m_customFontSize;
         bool m_useThemeColor;
+	bool m_useNoColor;
         QColor m_textColor;
+	QColor m_textBackgroundColor;
         QString m_color;
 
         QList<QAction*> m_colorActions;
 
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
-        Plasma::TextEdit *m_textEdit;
+        PlasmaTextEdit *m_textEdit;
         Ui::config ui;
 
         QSizeF m_size;
