@@ -407,6 +407,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setShowTabBar( mShowTabBar );
     mConfigWidget->setNumTabs( mNumTabs );
 
+    parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "Comic" ), icon() );
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
 
