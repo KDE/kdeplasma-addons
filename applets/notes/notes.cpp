@@ -1,4 +1,4 @@
-/***************************************************************************
+192/***************************************************************************
  *   Copyright (C) 2007 Lukas Kropatschek <lukas.krop@kdemail.net>         *
  *   Copyright (C) 2008 Sebastian Kügler <sebas@kde.org>                   *
  *   Copyright (C) 2008 Davide Bettio <davide.bettio@kdemail.net>
@@ -189,7 +189,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
         }
     } else {
 #ifdef KTEXTEDIT_CLICKMSG_SUPPORT
-        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
+        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid. Type your notes here...."));
 #endif
     }
 }
