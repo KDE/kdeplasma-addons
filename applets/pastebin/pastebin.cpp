@@ -573,13 +573,7 @@ QList<QAction*> Pastebin::contextualActions()
 
 void Pastebin::postClipboard()
 {
-    const QClipboard *clipboard = QApplication::clipboard();
-    const QMimeData *mimeData = clipboard->mimeData();
-
-    if (mimeData->objectName() != QString("Pastebin-applet")) {
-        QImage image = qvariant_cast<QImage>(mimeData->imageData());
-        postContent(mimeData->text(), image);
-    }
+    postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
 }
 
 void Pastebin::postContent(QString text, QImage imageData)
