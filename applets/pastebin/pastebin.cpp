@@ -57,7 +57,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::KeepAspectRatio);
     setMinimumSize(16, 16);
-    resize(64, 64);
+    resize(150, 150);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 }
