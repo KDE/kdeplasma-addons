@@ -206,12 +206,12 @@ bool ConfigWidget::middleClick() const
 
 void ConfigWidget::setTabSwitchTime( const QTime &time )
 {
-    appearanceUi.timeEdit_tabs->setTime( time );
+    comicUi.timeEdit_tabs->setTime( time );
 }
 
 QTime ConfigWidget::tabSwitchTime() const
 {
-    return appearanceUi.timeEdit_tabs->time();
+    return comicUi.timeEdit_tabs->time();
 }
 
 void ConfigWidget::setSmoothScaling( bool checked )
@@ -226,22 +226,22 @@ bool ConfigWidget::smoothScaling() const
 
 void ConfigWidget::setShowTabBar( bool show )
 {
-    appearanceUi.checkBox_tabBar->setChecked( show );
+    comicUi.checkBox_tabBar->setChecked( show );
 }
 
 bool ConfigWidget::showTabBar() const
 {
-    return appearanceUi.checkBox_tabBar->isChecked();
+    return comicUi.checkBox_tabBar->isChecked();
 }
 
 void ConfigWidget::setNumTabs( int num )
 {
-    appearanceUi.spinBox_numTabs->setValue( num );
+    comicUi.spinBox_numTabs->setValue( num );
 }
 
 int ConfigWidget::numTabs() const
 {
-    return appearanceUi.spinBox_numTabs->value();
+    return comicUi.spinBox_numTabs->value();
 }
 
 #include "configwidget.moc"

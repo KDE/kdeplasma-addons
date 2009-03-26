@@ -408,7 +408,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setNumTabs( mNumTabs );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
-    parent->addPage( mConfigWidget->comicSettings, i18n( "Comic" ), icon() );
+    parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon() );
     parent->addPage( mConfigWidget->appearanceSettings, i18n( "Appearance" ), "image" );
 
     connect( mConfigWidget, SIGNAL( maxSizeClicked() ), this, SLOT( slotShowMaxSize() ) );
