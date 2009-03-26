@@ -57,6 +57,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::KeepAspectRatio);
     setMinimumSize(16, 16);
+    resize(64, 64);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 }
@@ -118,7 +119,6 @@ void Pastebin::init()
     int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
     setTextServer(textBackend);
     setImageServer(imageBackend);
-    resize(200, 200);
     setActionState(Idle);
     setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
