@@ -1,7 +1,7 @@
-192/***************************************************************************
+/***************************************************************************
  *   Copyright (C) 2007 Lukas Kropatschek <lukas.krop@kdemail.net>         *
  *   Copyright (C) 2008 Sebastian Kügler <sebas@kde.org>                   *
- *   Copyright (C) 2008 Davide Bettio <davide.bettio@kdemail.net>
+ *   Copyright (C) 2008 Davide Bettio <davide.bettio@kdemail.net>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
