@@ -166,6 +166,7 @@ void ImageWidget::setImage( const QImage &image )
     mDifferentImage = true;
     resetScrollBars();
     updateScrollBars();
+    update( this->rect() );
 }
 
 void ImageWidget::setScaled( bool isScaled )
