@@ -148,6 +148,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelId->setMinimumWidth( 0 );
     mLabelId->nativeWidget()->setWordWrap( false );
     mLabelId->nativeWidget()->setCursor( Qt::PointingHandCursor );
+    mLabelId->nativeWidget()->setToolTip( i18n( "Jump to Strip ..." ) );
     mLabelId->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
     mLabelId->hide();
 
