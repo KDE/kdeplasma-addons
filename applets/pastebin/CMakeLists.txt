@@ -16,4 +16,4 @@ target_link_libraries(plasma_applet_pastebin ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LI
 
 install(TARGETS plasma_applet_pastebin DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-pastebin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES pastebin.notifyrc DESTINATION ${DATA_INSTALL_DIR})
+install(FILES pastebin.notifyrc DESTINATION ${DATA_INSTALL_DIR}/plasma_pastebin)

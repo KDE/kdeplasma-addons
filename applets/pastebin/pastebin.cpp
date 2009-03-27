@@ -474,7 +474,14 @@ void Pastebin::copyToClipboard(const QString &url)
     QApplication::clipboard()->setText(url);
     kDebug() << "Copying:" << url;
     QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
-    KNotification::event("urlcopied", i18nc("Notification when the pastebin applet has copied the URL to the clipboard", "%1 has been copied to your clipboard", url), pix, 0, KNotification::CloseOnTimeout);
+
+    KNotification *notify = new KNotification("urlcopied");
+    notify->setText(i18n("teste"));
+    notify->sendEvent();
+
+//     KNotification::event("urlcopied",
+//                          i18nc("Notification when the pastebin applet has copied the URL to the clipboard",
+//                                "%1 has been copied to your clipboard", url), pix, 0, KNotification::CloseOnTimeout);
 }
 
 void Pastebin::showErrors()
