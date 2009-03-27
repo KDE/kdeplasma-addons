@@ -50,6 +50,7 @@ void Life::init()
     getContentsMargins(&left, &top, &right, &bottom);
     setPreferredSize(cellsArrayWidth + left + right,
                      cellsArrayHeight + top + bottom);
+    setMinimumSize(cellsArrayWidth + left + right, cellsArrayHeight + top + bottom);
 
     initGame();
 
@@ -125,6 +126,7 @@ void Life::configAccepted()
         getContentsMargins(&left, &top, &right, &bottom);
         setPreferredSize(cellsArrayWidth + left + right,
                          cellsArrayHeight + top + bottom);
+        setMinimumSize(cellsArrayWidth + left + right, cellsArrayHeight + top + bottom);
     }
 
     stepInterval = ui.stepInterval->value();
