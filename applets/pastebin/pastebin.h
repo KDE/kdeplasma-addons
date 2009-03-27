@@ -80,7 +80,7 @@ protected slots:
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
     void showResults(const QString &url);
     void showErrors();
-    void openLink(const QString &link);
+    void openLink();
     void postClipboard();
 
 protected:

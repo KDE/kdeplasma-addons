@@ -477,12 +477,12 @@ void Pastebin::copyToClipboard(const QString &url)
 
     KNotification *notify = new KNotification("urlcopied");
     notify->setComponentData(KComponentData("plasma_pastebin"));
-    notify->setText(i18n("teste"));
+    notify->setText(i18nc("Notification when the pastebin applet has copied the URL to the clipboard",
+                          "%1 has been copied to your clipboard", url));
+    notify->setPixmap(pix);
+    notify->setActions(QStringList(i18n("Open browser")));
+    connect(notify, SIGNAL(action1Activated()), this, SLOT(openLink()));
     notify->sendEvent();
-
-//     KNotification::event("urlcopied",
-//                          i18nc("Notification when the pastebin applet has copied the URL to the clipboard",
-//                                "%1 has been copied to your clipboard", url), pix, 0, KNotification::CloseOnTimeout);
 }
 
 void Pastebin::showErrors()
@@ -490,9 +490,9 @@ void Pastebin::showErrors()
     setActionState(IdleError);
 }
 
-void Pastebin::openLink(const QString &link)
+void Pastebin::openLink()
 {
-    KToolInvocation::invokeBrowser(link);
+    KToolInvocation::invokeBrowser(m_url);
 }
 
 void Pastebin::resetActionState()
@@ -506,7 +506,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (m_url.isEmpty() || event->button() != Qt::LeftButton) {
         Plasma::Applet::mousePressEvent(event);
     } else {
-        openLink(m_url);
+        openLink();
     }
     if (event->button() == Qt::MidButton) {
         if (m_actionState == Idle) {
