@@ -33,6 +33,7 @@ Eyes::Eyes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args) , timerInterval(50),  previousMousePos(-1,-1)
 {
     resize(192, 128);
+    setHasConfigurationInterface(false);
 
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath("widgets/eyes");
