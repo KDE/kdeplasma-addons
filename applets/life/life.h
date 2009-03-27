@@ -43,7 +43,6 @@ class Life : public Plasma::Applet
         ~Life();
 
         void init();
-        Qt::Orientations expandingDirections() const;
         void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect& contentsRect);
 
     public slots:

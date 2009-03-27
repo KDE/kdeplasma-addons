@@ -34,7 +34,6 @@ Life::Life(QObject *parent, const QVariantList &args)
     timer(this)
 {
     setHasConfigurationInterface(true);
-    resize(128, 128);
 }
 
 void Life::init()
@@ -67,11 +66,6 @@ void Life::startUpdateTimer()
 {
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateGame()));
     timer.start(1000);
-}
-
-Qt::Orientations Life::expandingDirections() const
-{
-    return 0;
 }
 
 void Life::updateGame()
