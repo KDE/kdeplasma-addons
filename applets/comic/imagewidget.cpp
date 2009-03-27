@@ -26,8 +26,7 @@
 #include <Plasma/ScrollBar>
 
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mTransformationMode( Qt::SmoothTransformation ),
-      mLastSize( QSizeF( 200, 200 ) )
+    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mLastSize( QSizeF( 200, 200 ) )
 {
     setCacheMode( DeviceCoordinateCache );
     mScrollBarHoriz = new Plasma::ScrollBar( this );
@@ -120,7 +119,7 @@ void ImageWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *option, QW
             mScaledImage = mImage;
         }
     } else if ( mDifferentImage || ( mScaledImage.size() != mImageRect.size() ) ) {
-        mScaledImage = mImage.scaled( mImageRect.size().toSize(), Qt::IgnoreAspectRatio, mTransformationMode );
+        mScaledImage = mImage.scaled( mImageRect.size().toSize(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
         mDifferentImage = false;
     }
 
@@ -221,12 +220,6 @@ void ImageWidget::setAvailableSize( const QSizeF &available )
 
         setPreferredSize( mLastSize );
     }
-}
-
-void ImageWidget::setSmoothScaling( bool isSmooth )
-{
-    mTransformationMode = isSmooth ? Qt::SmoothTransformation : Qt::FastTransformation;
-    update( this->rect() );
 }
 
 #include "imagewidget.moc"

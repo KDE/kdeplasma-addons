@@ -59,8 +59,6 @@ class ConfigWidget : public QWidget
         bool middleClick() const;
         void setTabSwitchTime( const QTime &time );
         QTime tabSwitchTime() const;
-        void setSmoothScaling( bool checked );
-        bool smoothScaling() const;
         void setShowTabBar( bool show );
         bool showTabBar() const;
         void setNumTabs( int num );

@@ -371,7 +371,6 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mLabelId->setText( mShownIdentifierSuffix );
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );
-    mImageWidget->setSmoothScaling( mSmothScaling );
 
     updateButtons();
     updateContextMenu();
@@ -404,7 +403,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setMiddleClick( mMiddleClick );
     QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
     mConfigWidget->setTabSwitchTime( time );
-    mConfigWidget->setSmoothScaling( mSmothScaling );
     mConfigWidget->setShowTabBar( mShowTabBar );
     mConfigWidget->setNumTabs( mNumTabs );
 
@@ -431,7 +429,6 @@ void ComicApplet::applyConfig()
     mMiddleClick = mConfigWidget->middleClick();
     QTime time = mConfigWidget->tabSwitchTime();
     mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
-    mSmothScaling = mConfigWidget->smoothScaling();
     mShowTabBar = mConfigWidget->showTabBar();
     mNumTabs = mConfigWidget->numTabs();
     mComicTitle = mConfigWidget->comicName();
@@ -530,7 +527,6 @@ void ComicApplet::loadConfig()
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
     mSwitchTabTime = cg.readEntry( "switchTabTime", 0 );
-    mSmothScaling = cg.readEntry( "smoothScaling", true );
     mShowTabBar = cg.readEntry( "showTabBar", false );
     mNumTabs = cg.readEntry( "numTabs", 1 );
     mTabText = cg.readEntry( "tabText", QStringList() );
@@ -550,7 +546,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "arrowsOnHover", mArrowsOnHover );
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "switchTabTime", mSwitchTabTime );
-    cg.writeEntry( "smoothScaling", mSmothScaling );
     cg.writeEntry( "showTabBar", mShowTabBar );
     cg.writeEntry( "numTabs", mNumTabs );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );

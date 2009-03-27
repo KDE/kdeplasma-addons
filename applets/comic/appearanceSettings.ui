@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>240</height>
+    <height>215</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -20,7 +20,7 @@
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="11" column="1">
+   <item row="10" column="1">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Show comic &amp;title</string>
@@ -33,7 +33,7 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="1">
+   <item row="11" column="1">
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Show comic &amp;identifier</string>
@@ -46,7 +46,7 @@
      </property>
     </widget>
    </item>
-   <item row="13" column="1">
+   <item row="12" column="1">
     <widget class="QLabel" name="label_7">
      <property name="text">
       <string>Show comic &amp;author</string>
@@ -59,7 +59,7 @@
      </property>
     </widget>
    </item>
-   <item row="14" column="1">
+   <item row="13" column="1">
     <widget class="QLabel" name="label_8">
      <property name="text">
       <string>Show comic &amp;url</string>
@@ -72,7 +72,7 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="2">
+   <item row="10" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QCheckBox" name="checkBox_title">
@@ -99,7 +99,7 @@
      </item>
     </layout>
    </item>
-   <item row="12" column="2">
+   <item row="11" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QCheckBox" name="checkBox_identifier">
@@ -126,7 +126,7 @@
      </item>
     </layout>
    </item>
-   <item row="13" column="2">
+   <item row="12" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QCheckBox" name="checkBox_author">
@@ -153,7 +153,7 @@
      </item>
     </layout>
    </item>
-   <item row="14" column="2">
+   <item row="13" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QCheckBox" name="checkBox_url">
@@ -180,7 +180,7 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="label_3">
      <property name="font">
       <font>
@@ -197,46 +197,6 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Sm&amp;ooth Scaling:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>checkBox_smooth</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QCheckBox" name="checkBox_smooth">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item row="3" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Show arrows only on &amp;hover:</string>
@@ -249,7 +209,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="2">
+   <item row="2" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QCheckBox" name="checkBox_arrows">
@@ -276,7 +236,7 @@
      </item>
     </layout>
    </item>
-   <item row="15" column="1">
+   <item row="14" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -295,6 +255,22 @@
       <string>Maximum &amp;size of the widget</string>
      </property>
     </widget>
+   </item>
+   <item row="1" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>5</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

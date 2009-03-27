@@ -214,16 +214,6 @@ QTime ConfigWidget::tabSwitchTime() const
     return comicUi.timeEdit_tabs->time();
 }
 
-void ConfigWidget::setSmoothScaling( bool checked )
-{
-    appearanceUi.checkBox_smooth->setChecked( checked );
-}
-
-bool ConfigWidget::smoothScaling() const
-{
-    return appearanceUi.checkBox_smooth->isChecked();
-}
-
 void ConfigWidget::setShowTabBar( bool show )
 {
     comicUi.checkBox_tabBar->setChecked( show );
