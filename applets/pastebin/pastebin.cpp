@@ -360,7 +360,7 @@ void Pastebin::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *, con
         p->drawText(contentsRect, Qt::AlignCenter, i18n("Error: Try Again"));
     } else {
         p->setFont(m_font);
-        p->drawText(contentsRect, Qt::AlignCenter, i18n("Drop!"));
+        p->drawText(contentsRect, Qt::AlignCenter, hoverText);
     }
 }
 
