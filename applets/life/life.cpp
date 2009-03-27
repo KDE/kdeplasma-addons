@@ -151,36 +151,26 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
 {
     Q_UNUSED(option)
 
-    int x = contentsRect.x();
-    int y = contentsRect.y();
-    const int right = contentsRect.width() + contentsRect.x() - 1;
-    const int bottom = contentsRect.height() + contentsRect.y() - 1;
-    const qreal cellHeight = qMax(1, contentsRect.height() / cellsArrayHeight);
-    const qreal cellWidth = qMax(1, contentsRect.width() / cellsArrayWidth);
+    const int cellHeight = (int) qMax(1, contentsRect.height() / cellsArrayHeight);
+    const int cellWidth = (int) qMax(1, contentsRect.width() / cellsArrayWidth);
+    int y = contentsRect.y() + (contentsRect.height() - cellHeight * cellsArrayHeight) / 2;
+    const int x = contentsRect.x() + (contentsRect.width() - cellWidth * cellsArrayWidth) / 2;
 
-    for (int i = cellsArrayWidth + 1;
-         i < cellsArrayHeight * cellsArrayWidth - cellsArrayWidth;
-         i += ((i % cellsArrayWidth) != cellsArrayWidth - 2) ? 1 : 3) {
-        if (cells[i]) {
-            p->fillRect(x, y, cellWidth, cellHeight, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-        }
+    int k = 0;
+    int x1 = x;
+    for (int i = 0; i < cellsArrayHeight; i++){
+        for (int j = 0; j < cellsArrayWidth; j++){
+            k++;
 
-        bool nextRow = (i % cellsArrayWidth) == cellsArrayWidth - 2;
-        if (!nextRow && x + cellWidth > right) {
-            i = (((i / cellsArrayWidth) + 1) * cellsArrayWidth) - 2;
-            nextRow = true;
-        }
-
-        if (nextRow) {
-            x = contentsRect.x();
-            y += cellHeight;
-
-            if (y + cellHeight > bottom) {
-                break;
+            if (cells[k]) {
+                p->fillRect(x1, y, cellWidth, cellHeight, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
             }
-        } else {
-            x += cellWidth;
+
+            x1 += cellWidth;
         }
+
+        x1 = x;
+        y += cellHeight;
     }
 }
 
