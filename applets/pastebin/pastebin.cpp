@@ -476,6 +476,7 @@ void Pastebin::copyToClipboard(const QString &url)
     QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
 
     KNotification *notify = new KNotification("urlcopied");
+    notify->setComponentData(KComponentData("plasma_pastebin"));
     notify->setText(i18n("teste"));
     notify->sendEvent();
 
