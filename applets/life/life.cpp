@@ -162,7 +162,7 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
          i < cellsArrayHeight * cellsArrayWidth - cellsArrayWidth;
          i += ((i % cellsArrayWidth) != cellsArrayWidth - 2) ? 1 : 3) {
         if (cells[i]) {
-            p->fillRect(x, y, cellWidth, cellHeight, Qt::white);
+            p->fillRect(x, y, cellWidth, cellHeight, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
         }
 
         bool nextRow = (i % cellsArrayWidth) == cellsArrayWidth - 2;
