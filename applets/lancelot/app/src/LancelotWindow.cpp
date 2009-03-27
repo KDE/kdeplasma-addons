@@ -66,6 +66,7 @@
 #include <Plasma/LineEdit>
 #include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
+#include <KNotification>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500
@@ -172,6 +173,18 @@ LancelotWindow::LancelotWindow()
 
     connect(QApplication::instance(), SIGNAL(focusChanged(QWidget *, QWidget *)),
             this, SLOT(focusChanged(QWidget *, QWidget *)));
+
+    qDebug() << "creating the notification";
+    KNotification * notify = new KNotification("UsageLoggingOn", this);
+    notify->setText(i18n("Usage logging is activated."));
+    notify->setPixmap(KIcon("lancelot").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    notify->setActions(QStringList(i18n("Configure")));
+    connect(notify, SIGNAL(action1Activated()),
+        this, SLOT(configureMenu()), Qt::QueuedConnection);
+    connect(notify, SIGNAL(activated(unsigned int)),
+        this, SLOT(configureMenu()), Qt::QueuedConnection);
+    notify->sendEvent();
+
 }
 
 // void LancelotWindow::paintEvent(QPaintEvent * event)
@@ -856,8 +869,10 @@ void LancelotWindow::lancelotContext()
 
 void LancelotWindow::configureMenu()
 {
+    qDebug() << "LancelotWindow::configureMenu()";
+
     lancelotHide(true);
-    const QString dialogID = "LancelotMenyConfigurationDialog";
+    const QString dialogID = "LancelotMenuConfigurationDialog";
     KConfigDialog * dialog;
 
     if ((dialog = KConfigDialog::exists(dialogID))) {

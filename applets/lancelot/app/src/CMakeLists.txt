@@ -245,3 +245,5 @@ install(
   FILES launcher/plasma-applet-lancelot-launcher.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
 )
+
+install(FILES lancelot.notifyrc DESTINATION ${DATA_INSTALL_DIR}/lancelot)

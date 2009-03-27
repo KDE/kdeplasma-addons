@@ -82,6 +82,7 @@ void LancelotApplication::init()
             ac, SIGNAL(doHide(bool)),
             this, SLOT(hide(bool))
     );
+
 }
 
 LancelotApplication::~LancelotApplication()

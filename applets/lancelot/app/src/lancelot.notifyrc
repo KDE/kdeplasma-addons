@@ -1,0 +1,10 @@
+[Global]
+Name=Lancelot
+IconName=lancelot
+Comment=Lancelot Menu
+Version=1
+
+[Event/UsageLoggingOn]
+Name=Usage logging is activated
+Comment=Shown only on first launch. Notifies that the usage logging is turned 'on'.
+Action=Popup
