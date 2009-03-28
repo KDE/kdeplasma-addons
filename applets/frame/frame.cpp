@@ -115,7 +115,7 @@ void Frame::init()
 void Frame::updateMenu()
 {
     if (!m_menuPresent && !m_potd && m_currentUrl.path() != "Default") {
-        kDebug() << "Current path: " << m_currentUrl.path();
+        kDebug() << "Current url: " << m_currentUrl.url();
         m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
         m_actions.append(m_openPicture);
         connect(m_openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
@@ -179,7 +179,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
         } else if(formFactor() == Plasma::Horizontal) {
             setMinimumSize(QSizeF(boundingRect().height()*1.33,0));
             setMaximumSize(QSizeF(boundingRect().height()*1.33,-1));
-        } else { 
+        } else {
             setMinimumSize(QSizeF());
             setMaximumSize(QSizeF());
         }
@@ -215,7 +215,7 @@ void Frame::addDir()
 {
     KDirSelectDialog dialog(KUrl(), true);
     if (dialog.exec()) {
-        QString path = dialog.url().path();
+        QString path = dialog.url().url();
         if (!m_slideShowPaths.contains(path)) {
             m_configDialog->imageUi.slideShowDirList->addItem(path);
         }
@@ -390,7 +390,7 @@ void Frame::initSlideShow()
 //FIXME: why is there a manual kicking of the engine?        const Plasma::DataEngine::Data data = engine->query(identifier);
     } else { //no slideshow so no random stuff
         m_mySlideShow->setRandom(false);
-        m_mySlideShow->setImage(m_currentUrl.path());
+        m_mySlideShow->setImage(m_currentUrl.url());
     }
 
     if (!m_potd) {
@@ -411,6 +411,7 @@ void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     KUrl droppedUrl = (KUrl::List::fromMimeData(event->mimeData())).at(0);
+    kDebug() << "dropped URL" << droppedUrl.url();
     if (droppedUrl.protocol() == "desktop") {
         KUrl tmpUrl = KGlobalSettings::desktopPath() + droppedUrl.path();
         droppedUrl = tmpUrl;
@@ -423,6 +424,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
             m_slideShow = true;
         }
     } else {
+        kDebug() << "Remote URL" << droppedUrl.url();
         m_currentUrl = droppedUrl;
         if (m_slideShow) {
             m_slideShow = false;
