@@ -81,7 +81,7 @@ Comment[zh_CN]=快速预览多种文件
 Comment[zh_TW]=快速預覽各種檔案
 Type=Service
 Icon=previewer
-
+X-Plasma-DropMimeTypes=application/pdf,image/png
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_previewer
 X-KDE-PluginInfo-Author=Alessandro Diaferia
