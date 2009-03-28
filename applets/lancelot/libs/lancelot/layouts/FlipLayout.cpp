@@ -68,7 +68,11 @@ void FlipLayoutManager::setFlip(const QGraphicsLayout * layout, Plasma::Flip fli
 {
     QGraphicsLayout * l = const_cast<QGraphicsLayout *>(layout);
     d->globalFlipLayouts.remove(l);
-    d->flips[l] = flip;
+
+    if (d->flips[l] != flip) {
+        d->flips[l] = flip;
+        l->setGeometry(l->geometry());
+    }
 }
 
 void FlipLayoutManager::setUseGlobalFlip(const QGraphicsLayout * layout)
