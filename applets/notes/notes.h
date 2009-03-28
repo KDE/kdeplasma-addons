@@ -53,16 +53,19 @@ class NotesTextEdit : public KTextEdit {
     Q_OBJECT
 
     public:
-	NotesTextEdit(QWidget *parent = 0);
-	~NotesTextEdit();
-	virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
-	void mousePressEvent ( QMouseEvent * event );
-	void keyPressEvent ( QKeyEvent * event );
-	void leaveEvent ( QEvent * event );
+        NotesTextEdit(QWidget *parent = 0);
+        ~NotesTextEdit();
+        virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
+        void mousePressEvent ( QMouseEvent * event );
+        void keyPressEvent ( QKeyEvent * event );
+        void leaveEvent ( QEvent * event );
+        void wheelEvent ( QWheelEvent * event );
 
-    signals:
-	void cursorMoved();
-	void mouseUnhovered();
+    Q_SIGNALS:
+        void cursorMoved();
+        void mouseUnhovered();
+        void scrolledUp();
+        void scrolledDown();
 
     public slots:
 	virtual void saveToFile();
@@ -111,8 +114,10 @@ class Notes : public Plasma::Applet
         void saveNote();
         void delayedSaveNote();
         void changeColor();
-	void lineChanged();
-	void mouseUnhovered();
+        void lineChanged();
+        void mouseUnhovered();
+        void increaseFontSize();
+        void decreaseFontSize();
 
     private:
         int fontSize();
@@ -126,9 +131,10 @@ class Notes : public Plasma::Applet
         QFont m_font;
         int m_customFontSize;
         bool m_useThemeColor;
-	bool m_useNoColor;
+        bool m_useNoColor;
+        int m_wheelFontAdjustment;
         QColor m_textColor;
-	QColor m_textBackgroundColor;
+        QColor m_textBackgroundColor;
         QString m_color;
 
         QList<QAction*> m_colorActions;

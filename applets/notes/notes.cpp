@@ -82,6 +82,26 @@ void NotesTextEdit::keyPressEvent ( QKeyEvent * event )
     default:break;
   }
 }
+
+/**
+ * Scale text on wheel scrolling with control pressed
+ */
+void NotesTextEdit::wheelEvent ( QWheelEvent * event )
+{
+    if (event->modifiers() & Qt::ControlModifier ) {
+        if (event->orientation() == Qt::Horizontal) {
+            return;
+        } else {
+            if (event->delta() > 0) {
+                emit scrolledUp();
+            } else {
+                emit scrolledDown();
+            }
+        }
+        event->accept();
+    }
+}
+
 /**
  * Add to the Note a signal to prevent from leaving the note and remove line background color
  * when there is no focus on the plasmoid
@@ -106,6 +126,10 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
     connect(native, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
     connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
     connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
+
+    // scrollwheel + ctrl changes font size
+    connect(native, SIGNAL(scrolledUp()), parent, SLOT(increaseFontSize()));
+    connect(native, SIGNAL(scrolledDown()), parent, SLOT(decreaseFontSize()));
     setWidget(native);
     delete w;
     native->setAttribute(Qt::WA_NoSystemBackground);
@@ -159,6 +183,7 @@ void Notes::mouseUnhovered()
 
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
+      m_wheelFontAdjustment(0),
       m_notes_theme(this),
       m_layout(0),
       m_textEdit(0)
@@ -307,10 +332,25 @@ void Notes::updateTextGeometry()
 int Notes::fontSize()
 {
     if (m_autoFont) {
-        int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100);
+        int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100) + m_wheelFontAdjustment;
         return qMax(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
     } else {
-        return m_customFontSize;
+        return m_customFontSize + m_wheelFontAdjustment;
+    }
+}
+
+void Notes::increaseFontSize()
+{
+    m_wheelFontAdjustment++;
+    updateTextGeometry();
+}
+
+void Notes::decreaseFontSize()
+{
+
+    if (KGlobalSettings::smallestReadableFont().pointSize() < fontSize()) {
+        m_wheelFontAdjustment--;
+        updateTextGeometry();
     }
 }
 
@@ -341,9 +381,9 @@ void Notes::changeColor()
     QAction *action = dynamic_cast<QAction*> (sender());
     if (!action || action->property("color").type() != QVariant::String) return;
     m_color = action->property("color").toString();
-    KConfigGroup cg = config(); 
-    cg.writeEntry("color", m_color); 
-    emit configNeedsSaving(); 
+    KConfigGroup cg = config();
+    cg.writeEntry("color", m_color);
+    emit configNeedsSaving();
     update();
 }
 
@@ -462,28 +502,28 @@ void Notes::configAccepted()
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textColor", m_textColor);
-	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-	m_textEdit->nativeWidget()->selectAll();
+        QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+        m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
-	m_textEdit->nativeWidget()->setTextCursor(textCursor);
+        m_textEdit->nativeWidget()->setTextCursor(textCursor);
     }
 
     if (m_useNoColor != ui.useNoColor->isChecked()) {
         changed = true;
         m_useNoColor = ui.useNoColor->isChecked();
         cg.writeEntry("useNoColor", m_useNoColor);
-	QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-	QTextEdit::ExtraSelection textxtra;
-	textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
-	textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-	textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-	textxtra.format.setBackground( Qt::transparent );
+        QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+        QTextEdit::ExtraSelection textxtra;
+        textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+        textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+        textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+        textxtra.format.setBackground( Qt::transparent );
 
-	QList<QTextEdit::ExtraSelection> extras;
-	extras << textxtra;
-	m_textEdit->nativeWidget()->setExtraSelections( extras );
+        QList<QTextEdit::ExtraSelection> extras;
+        extras << textxtra;
+        m_textEdit->nativeWidget()->setExtraSelections( extras );
 
-	update();
+        update();
     }
 
     QColor newBackgroundColor = ui.textBackgroundColorButton->color();
