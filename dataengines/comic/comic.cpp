@@ -187,8 +187,10 @@ void ComicEngine::finished( ComicProvider *provider )
         info[ "title" ] = provider->name();
         info[ "suffixType" ] = provider->suffixType();
         info[ "lastCachedStripIdentifier" ] = provider->identifier().mid( provider->identifier().indexOf( ':' ) + 1 );
-        info[ "isLeftToRight" ] = provider->isLeftToRight();
-        info[ "isTopToBottom" ] = provider->isTopToBottom();
+        QString isLeftToRight;
+        QString isTopToBottom;
+        info[ "isLeftToRight" ] = isLeftToRight.setNum( provider->isLeftToRight() );
+        info[ "isTopToBottom" ] = isTopToBottom.setNum( provider->isTopToBottom() );
 
         //data that should be only written if available
         if ( !provider->comicAuthor().isEmpty() ) {

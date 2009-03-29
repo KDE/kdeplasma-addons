@@ -144,7 +144,8 @@ bool CachedProvider::storeInCache( const QString &identifier, const QImage &comi
         for ( Settings::const_iterator i = info.constBegin(); i != info.constEnd(); ++i ) {
                 if ( ( i.key() == "firstStripIdentifier" ) || ( i.key() == "title" ) ||
                      ( i.key() == "lastCachedStripIdentifier" ) || ( i.key() == "suffixType" ) ||
-                     ( i.key() == "shopUrl" ) ) {
+                     ( i.key() == "shopUrl" ) || ( i.key() == "isLeftToRight" ) ||
+                     ( i.key() == "isTopToBottom" ) ) {
                     settingsMain.setValue( i.key(), i.value() );
                 } else {
                     settings.setValue( i.key(), i.value() );
