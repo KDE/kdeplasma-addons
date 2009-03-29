@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
+    <width>527</width>
     <height>214</height>
    </rect>
   </property>
@@ -41,19 +41,6 @@
         <string>&amp;Get New Comics...</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -284,7 +271,7 @@
  <customwidgets>
   <customwidget>
    <class>KComboBox</class>
-   <extends></extends>
+   <extends>QComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
