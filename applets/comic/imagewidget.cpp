@@ -28,7 +28,7 @@
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
     : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mLastSize( QSizeF( 200, 200 ) )
 {
-    setCacheMode( DeviceCoordinateCache );
+    setCacheMode( ItemCoordinateCache );//TODO change back to DeviceCoordinateCache, when that works with Dashboard
     mScrollBarHoriz = new Plasma::ScrollBar( this );
     mScrollBarHoriz->setOrientation( Qt::Horizontal );
     mScrollBarHoriz->setSingleStep( 80 );
