@@ -26,7 +26,8 @@
 #include <Plasma/ScrollBar>
 
 ImageWidget::ImageWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mLastSize( QSizeF( 200, 200 ) )
+    : QGraphicsWidget( parent, wFlags ), mIsScaled( true ), mIsLeftToRight( true ),
+      mIsTopToBottom( true ), mLastSize( QSizeF( 200, 200 ) )
 {
     setCacheMode( ItemCoordinateCache );//TODO change back to DeviceCoordinateCache, when that works with Dashboard
     mScrollBarHoriz = new Plasma::ScrollBar( this );
@@ -132,8 +133,10 @@ void ImageWidget::resetScrollBars()
 {
     mScrollBarVert->hide();
     mScrollBarHoriz->hide();
-    mScrollBarVert->setValue( 0 );
-    mScrollBarHoriz->setValue( 0 );
+    int vertical = mIsTopToBottom ? 0 : mImage.height() - mImageRect.height();
+    int horizontal = mIsLeftToRight ? 0 : mImage.width() - mImageRect.width();
+    mScrollBarVert->setValue( vertical );
+    mScrollBarHoriz->setValue( horizontal );
 }
 
 void ImageWidget::wheelEvent( QGraphicsSceneWheelEvent *event )
@@ -222,5 +225,17 @@ void ImageWidget::setAvailableSize( const QSizeF &available )
         setPreferredSize( mLastSize );
     }
 }
+
+void ImageWidget::setIsLeftToRight( bool ltr )
+{
+    mIsLeftToRight = ltr;
+}
+
+void ImageWidget::setIsTopToBottom( bool ttt )
+{
+    mIsTopToBottom = ttt;
+}
+
+
 
 #include "imagewidget.moc"

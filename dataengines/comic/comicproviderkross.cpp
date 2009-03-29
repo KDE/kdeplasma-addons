@@ -32,6 +32,16 @@ ComicProviderKross::~ComicProviderKross()
 {
 }
 
+bool ComicProviderKross::isLeftToRight() const
+{
+    return m_wrapper.isLeftToRight();
+}
+
+bool ComicProviderKross::isTopToBottom() const
+{
+    return m_wrapper.isTopToBottom();
+}
+
 ComicProvider::IdentifierType ComicProviderKross::identifierType() const
 {
     return m_wrapper.identifierType();

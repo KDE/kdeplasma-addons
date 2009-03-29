@@ -167,4 +167,16 @@ KUrl CachedProvider::shopUrl() const
     return KUrl( settings.value( "shopUrl", QString() ).toString() );
 }
 
+bool CachedProvider::isLeftToRight() const
+{
+    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "isLeftToRight", true ).toBool();
+}
+
+bool CachedProvider::isTopToBottom() const
+{
+    QSettings settings( identifierToPath( requestedComicName() ) + ".conf", QSettings::IniFormat );
+    return settings.value( "isTopToBottom", true ).toBool();
+}
+
 #include "cachedprovider.moc"

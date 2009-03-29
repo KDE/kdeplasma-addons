@@ -42,6 +42,8 @@ class ImageWidget : public QGraphicsWidget
         void setScaled( bool isScaled );
         void setImage( const QImage &image );
         void setAvailableSize( const QSizeF &size );
+        void setIsLeftToRight( bool ltr );
+        void setIsTopToBottom( bool ttt );
 
     public Q_SLOTS:
         void updateScrollBars();
@@ -57,6 +59,8 @@ class ImageWidget : public QGraphicsWidget
 
         bool mIsScaled;
         bool mDifferentImage;
+        bool mIsLeftToRight;
+        bool mIsTopToBottom;
         Plasma::ScrollBar *mScrollBarVert;
         Plasma::ScrollBar *mScrollBarHoriz;
         QImage mImage;

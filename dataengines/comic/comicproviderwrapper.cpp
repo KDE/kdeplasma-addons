@@ -246,7 +246,9 @@ ComicProviderWrapper::ComicProviderWrapper( ComicProviderKross *parent )
       mKrossImage( 0 ),
       mPackage( 0 ),
       mRequests( 0 ),
-      mIdentifierSpecified( false )
+      mIdentifierSpecified( false ),
+      mIsLeftToRight( true ),
+      mIsTopToBottom( true )
 {
     QTimer::singleShot( 0, this, SLOT( init() ) );
 }
@@ -412,6 +414,26 @@ void ComicProviderWrapper::setIdentifierToDefault()
 bool ComicProviderWrapper::identifierSpecified() const
 {
     return mIdentifierSpecified;
+}
+
+bool ComicProviderWrapper::isLeftToRight() const
+{
+    return mIsLeftToRight;
+}
+
+void ComicProviderWrapper::setLeftToRight( bool ltr )
+{
+    mIsLeftToRight = ltr;
+}
+
+bool ComicProviderWrapper::isTopToBottom() const
+{
+    return mIsTopToBottom;
+}
+
+void ComicProviderWrapper::setTopToBottom( bool ttt )
+{
+    mIsTopToBottom = ttt;
 }
 
 QString ComicProviderWrapper::textCodec() const

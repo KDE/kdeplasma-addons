@@ -49,6 +49,8 @@ class ComicProvider::Private
         QString mRequestedComicName;
         QString mComicAuthor;
         bool mIsCurrent;
+        bool mIsLeftToRight;
+        bool mIsTopToBottom;
         QDate mRequestedDate;
         QDate mFirstStripDate;
         int mRequestedNumber;
@@ -234,6 +236,16 @@ KPluginInfo ComicProvider::description() const
 KUrl ComicProvider::shopUrl() const
 {
     return KUrl();
+}
+
+bool ComicProvider::isLeftToRight() const
+{
+    return true;
+}
+
+bool ComicProvider::isTopToBottom() const
+{
+    return true;
 }
 
 #include "comicprovider.moc"

@@ -368,6 +368,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     mLabelTop->setText( tempTop );
     mImageWidget->setImage( mImage );
+    mImageWidget->setIsLeftToRight( data[ "isLeftToRight" ].toBool() );
+    mImageWidget->setIsTopToBottom( data[ "isTopToBottom" ].toBool() );
     mLabelId->setText( mShownIdentifierSuffix );
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );

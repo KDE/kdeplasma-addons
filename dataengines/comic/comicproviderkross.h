@@ -37,6 +37,8 @@ class ComicProviderKross : public ComicProvider
 
         static Plasma::PackageStructure::Ptr packageStructure();
 
+        virtual bool isLeftToRight() const;
+        virtual bool isTopToBottom() const;
         virtual IdentifierType identifierType() const;
         virtual KUrl websiteUrl() const;
         virtual KUrl shopUrl() const;

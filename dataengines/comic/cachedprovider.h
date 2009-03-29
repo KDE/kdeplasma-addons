@@ -111,6 +111,16 @@ class CachedProvider : public ComicProvider
         virtual QString name() const;
 
         /**
+        * Returns wether the comic is leftToRight or not
+        */
+        virtual bool isLeftToRight() const;
+
+        /**
+        * Returns wether the comic is topToBottom or not
+        */
+        virtual bool isTopToBottom() const;
+
+        /**
          * Returns whether a comic with the given @p identifier is cached.
          */
         static bool isCached( const QString &identifier );

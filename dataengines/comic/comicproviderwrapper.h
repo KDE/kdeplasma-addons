@@ -131,6 +131,8 @@ class ComicProviderWrapper : public QObject
         Q_PROPERTY( QVariant previousIdentifier READ previousIdentifier WRITE setPreviousIdentifier )
         Q_PROPERTY( QVariant firstIdentifier READ firstIdentifier WRITE setFirstIdentifier )
         Q_PROPERTY( QVariant lastIdentifier READ lastIdentifier WRITE setLastIdentifier )
+        Q_PROPERTY( bool isLeftToRight READ isLeftToRight WRITE setLeftToRight )
+        Q_PROPERTY( bool isTopToBottom READ isTopToBottom WRITE setTopToBottom )
     public:
         enum PositionType {
             Left = 0,
@@ -180,6 +182,10 @@ class ComicProviderWrapper : public QObject
         void setFirstIdentifier( const QVariant &firstIdentifier );
         QVariant lastIdentifier();
         void setLastIdentifier( const QVariant &lastIdentifier );
+        bool isLeftToRight() const;
+        void setLeftToRight( bool ltr );
+        bool isTopToBottom() const;
+        void setTopToBottom( bool ttt );
 
         QVariant identifierVariant() const;
         QVariant firstIdentifierVariant() const;
@@ -227,6 +233,8 @@ class ComicProviderWrapper : public QObject
         QVariant mLastIdentifier;
         int mRequests;
         bool mIdentifierSpecified;
+        bool mIsLeftToRight;
+        bool mIsTopToBottom;
 };
 
 #endif
