@@ -182,7 +182,7 @@ void Pastebin::setActionState(ActionState state)
     switch (state ) {
         case Unset:
             kDebug() << "Unset";
-            toolTipData.setSubText(i18n("Unset"));
+            toolTipData.setSubText(i18nc("The status of the applet has not been set - i.e. it is unset.", "Unset"));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case Idle:
