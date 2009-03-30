@@ -51,7 +51,6 @@ class WeatherApplet : public Plasma::PopupApplet
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
-    void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect);
     void validate(const QString& source, const QVariant& data);
     void weatherContent(const Plasma::DataEngine::Data &data);
     QGraphicsWidget *graphicsWidget();

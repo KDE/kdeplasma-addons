@@ -246,13 +246,6 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
-{
-    Q_UNUSED(p)
-    Q_UNUSED(option)
-    Q_UNUSED(contentsRect)
-}
-
 void WeatherApplet::getValidation()
 {
     if (ui.locationEdit->text().size() >= 3) {
