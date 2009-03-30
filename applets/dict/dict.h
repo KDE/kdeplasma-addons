@@ -27,8 +27,6 @@
 class QTimer;
 class CheckableStringListModel;
 
-class QTextBrowser;
-class KTextBrowser;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
