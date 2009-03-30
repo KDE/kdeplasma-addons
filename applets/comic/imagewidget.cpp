@@ -231,9 +231,9 @@ void ImageWidget::setIsLeftToRight( bool ltr )
     mIsLeftToRight = ltr;
 }
 
-void ImageWidget::setIsTopToBottom( bool ttt )
+void ImageWidget::setIsTopToBottom( bool ttb )
 {
-    mIsTopToBottom = ttt;
+    mIsTopToBottom = ttb;
 }
 
 

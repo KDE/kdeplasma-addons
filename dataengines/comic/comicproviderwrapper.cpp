@@ -431,9 +431,9 @@ bool ComicProviderWrapper::isTopToBottom() const
     return mIsTopToBottom;
 }
 
-void ComicProviderWrapper::setTopToBottom( bool ttt )
+void ComicProviderWrapper::setTopToBottom( bool ttb )
 {
-    mIsTopToBottom = ttt;
+    mIsTopToBottom = ttb;
 }
 
 QString ComicProviderWrapper::textCodec() const

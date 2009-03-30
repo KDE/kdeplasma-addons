@@ -43,7 +43,7 @@ class ImageWidget : public QGraphicsWidget
         void setImage( const QImage &image );
         void setAvailableSize( const QSizeF &size );
         void setIsLeftToRight( bool ltr );
-        void setIsTopToBottom( bool ttt );
+        void setIsTopToBottom( bool ttb );
 
     public Q_SLOTS:
         void updateScrollBars();

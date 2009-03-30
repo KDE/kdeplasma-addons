@@ -185,7 +185,7 @@ class ComicProviderWrapper : public QObject
         bool isLeftToRight() const;
         void setLeftToRight( bool ltr );
         bool isTopToBottom() const;
-        void setTopToBottom( bool ttt );
+        void setTopToBottom( bool ttb );
 
         QVariant identifierVariant() const;
         QVariant firstIdentifierVariant() const;
