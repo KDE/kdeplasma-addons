@@ -655,8 +655,11 @@ void WeatherApplet::getWeather()
 
 QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = true, bool degreesOnly = false)
 {
+    double val = value.toDouble();
+    double temp = WeatherUtils::convertTemperature(val, type, format);
+
     if (rounded) {
-        long tempNumber = qRound(WeatherUtils::convertTemperature(value.toDouble(), type, format));
+        long tempNumber = qRound(temp);
         QString unitType = WeatherUtils::getUnitString(format, false);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
@@ -665,10 +668,11 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
         }
     }
     else {
+        QString formattedTemp = (val - (int) val) ? QString::number(temp, 'f', 1) : QString::number((int) temp);
         if (degreesOnly) {
-            return i18nc("temperature, unit", "%1%2", QString::number(WeatherUtils::convertTemperature(value.toDouble(), type, format), 'f', 1), WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
+            return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
         } else {
-            return i18nc("temperature, unit", "%1%2", QString::number(WeatherUtils::convertTemperature(value.toDouble(), type, format), 'f', 1), WeatherUtils::getUnitString(format, false));
+            return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(format, false));
         }
     }
 
@@ -699,7 +703,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     m_conditionsLabel->setText(data["Current Conditions"].toString());
 
     if (data["Temperature"] != "N/A" && data["Temperature"].toString().isEmpty() == false) {
-        m_tempLabel->setText(i18nc("temperature, unit","%1%2", QString::number(WeatherUtils::convertTemperature(data["Temperature"].toDouble(), data["Temperature Unit"].toInt(), m_weatherTempFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherTempFormat, false)));
+        m_tempLabel->setText(convertTemperature(m_weatherTempFormat, data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
 
     } else {
         m_tempLabel->setText(NULL);
