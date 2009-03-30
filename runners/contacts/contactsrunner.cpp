@@ -44,7 +44,7 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     m_icon = KIcon("internet-mail");
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
-    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your addressbook matching :q:.")));
+    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
 }
 
 ContactsRunner::~ContactsRunner()
