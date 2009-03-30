@@ -111,7 +111,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
 
 //  Icon in upper-left corner
     m_icon = new Plasma::IconWidget(this);
-    m_icon->setSvg(KStandardDirs::locate("icon", "oxygen/scalable/apps/accessories-dictionary.svgz"));
+    m_icon->setIcon("accessories-dictionary");
 
 //  Position lineedits
     //const int wordEditOffset = 40;
