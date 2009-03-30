@@ -970,7 +970,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (data["Wind Gust"] != "N/A" && data["Wind Gust"].toString().isEmpty() == false) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
-        dataGust->setText(i18n("Wind Gust: %1% 2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
+        dataGust->setText(i18n("Wind Gust: %1 %2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
         m_detailsModel->appendRow(dataGust);
     }
 
