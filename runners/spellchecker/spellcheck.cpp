@@ -46,6 +46,18 @@ void SpellCheckRunner::reloadConfiguration()
     m_triggerWord += ':';
 
     m_requireTriggerWord = config().readEntry("requireTriggerWord", true);
+
+    Plasma::RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".",
+                                 "%1 :q:", m_triggerWord),
+                           i18n("Checks the spelling of :q:."));
+
+    if (!m_requireTriggerWord) {
+        s.addExampleQuery(":q");
+    }
+
+    QList<Plasma::RunnerSyntax> syns;
+    syns << s;
+    setSyntaxes(syns);
 }
 
 void SpellCheckRunner::match(Plasma::RunnerContext &context)

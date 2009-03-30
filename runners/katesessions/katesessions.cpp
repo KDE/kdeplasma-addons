@@ -54,6 +54,11 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
 
+    Plasma::RunnerSyntax s(":q:", i18n("Finds Kate sessions matching :q:."));
+    s.addExampleQuery("kate :q:");
+    addSyntax(s);
+
+    addSyntax(Plasma::RunnerSyntax("kate", i18n("Lists all the Kate editor sessions in your account.")));
 }
 
 KateSessions::~KateSessions()

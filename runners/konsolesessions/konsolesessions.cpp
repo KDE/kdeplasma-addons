@@ -44,9 +44,16 @@ KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
-    connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
-    connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
+
+    connect(historyWatch, SIGNAL(dirty(QString)), this,SLOT(loadSessions()));
+    connect(historyWatch, SIGNAL(created(QString)), this,SLOT(loadSessions()));
+    connect(historyWatch, SIGNAL(deleted(QString)), this,SLOT(loadSessions()));
+
+    Plasma::RunnerSyntax s(":q:", i18n("Finds Konsole sessions matching :q:."));
+    s.addExampleQuery("konsole :q:");
+    addSyntax(s);
+
+    addSyntax(Plasma::RunnerSyntax("konsole", i18n("Lists all the Konsole sessions in your account.")));
 }
 
 KonsoleSessions::~KonsoleSessions()
@@ -113,10 +120,16 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
             if (i.value().contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setRelevance(1.0);
                 match.setIcon(m_icon);
                 match.setData(i.key());
                 match.setText("Konsole: " + i.value());
+
+                if (i.value().toLower() == term) {
+                    match.setRelevance(1.0);
+                } else {
+                    match.setRelevance(0.6);
+                }
+
                 context.addMatch(term, match);
             }
         }

@@ -46,10 +46,16 @@ KonquerorSessions::KonquerorSessions(QObject *parent, const QVariantList& args)
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
+
     connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadSessions()));
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadSessions()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadSessions()));
 
+    Plasma::RunnerSyntax s(":q:", i18n("Finds Konqueror profiles matching :q:."));
+    s.addExampleQuery("konqueror :q:");
+    addSyntax(s);
+
+    addSyntax(Plasma::RunnerSyntax("konqueror", i18n("Lists all the Konqueror profiles in your account.")));
 }
 
 KonquerorSessions::~KonquerorSessions()
@@ -110,10 +116,16 @@ void KonquerorSessions::match(Plasma::RunnerContext &context)
             if (i.value().contains(term, Qt::CaseInsensitive)) {
                 Plasma::QueryMatch match(this);
                 match.setType(Plasma::QueryMatch::PossibleMatch);
-                match.setRelevance(1.0);
                 match.setIcon(m_icon);
                 match.setData(i.key());
                 match.setText("Konqueror: " + i.value());
+
+                if (i.value().toLower() == term) {
+                    match.setRelevance(1.0);
+                } else {
+                    match.setRelevance(0.6);
+                }
+
                 context.addMatch(term, match);
             }
         }

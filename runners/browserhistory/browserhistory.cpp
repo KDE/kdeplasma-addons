@@ -44,6 +44,8 @@ BrowserHistoryRunner::BrowserHistoryRunner(QObject *parent, const QVariantList& 
     connect(historyWatch,SIGNAL(dirty(QString)),this,SLOT(loadHistory()));
     connect(historyWatch,SIGNAL(created(QString)),this,SLOT(loadHistory()));
     connect(historyWatch,SIGNAL(deleted(QString)),this,SLOT(loadHistory()));
+
+    addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds web sites you have visited matching :q:.")));
 }
 
 BrowserHistoryRunner::~BrowserHistoryRunner()
