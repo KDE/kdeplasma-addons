@@ -697,7 +697,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         }
     }
     else {
-        m_forecastTemps->setText(NULL);
+        m_forecastTemps->setText(QString());
     }
 
     m_conditionsLabel->setText(data["Current Conditions"].toString());
@@ -706,7 +706,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_tempLabel->setText(convertTemperature(m_weatherTempFormat, data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
 
     } else {
-        m_tempLabel->setText(NULL);
+        m_tempLabel->setText(QString());
     }
 
     //m_windDirLabel->setText(i18n("Wind Direction: %1", data["Wind Direction"].toString()));
