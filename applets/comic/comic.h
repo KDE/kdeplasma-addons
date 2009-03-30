@@ -153,8 +153,8 @@ class ComicApplet : public Plasma::Applet
         ArrowWidget *mRightArrow;
 
         //Tabs
+        bool mUseTabs;
         bool mShowTabBar;
-        int mNumTabs;
         int mSwitchTabTime;
         Plasma::TabBar *mTabBar;
         QStringList mTabIdentifier;

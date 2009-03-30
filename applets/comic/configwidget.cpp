@@ -94,7 +94,10 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
     mProxyModel->sort( 0, Qt::AscendingOrder );
+
     comicUi.comboBox_comic->setModel( mProxyModel );
+    comicUi.listView_comic->setModel( mProxyModel );
+
     if ( mModel->rowCount() < 1 ) {
         QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
     }
@@ -110,38 +113,108 @@ void ConfigWidget::getNewStuff()
     if ( engine.init( "comic.knsrc" ) ) {
         KNS::Entry::List entries = engine.downloadDialogModal( this );
         if ( entries.size() > 0 ) {
-            QString tmp = comicIdentifier();
+            QStringList tmp = comicIdentifier();
             mModel->setComics( mEngine->query( "providers" ) );
             setComicIdentifier( tmp );
         }
     }
 }
 
-void ConfigWidget::setComicIdentifier( const QString &comic )
+void ConfigWidget::setComicIdentifier( const QStringList &comics )
 {
-    if ( comic.isEmpty() && comicUi.comboBox_comic->count() > 0 ) {
+    if ( comics.isEmpty() && comicUi.comboBox_comic->count() > 0 ) {
         comicUi.comboBox_comic->setCurrentIndex( 0 );
+        QModelIndex index( mProxyModel->index( 0, 0 ) );
+        comicUi.listView_comic->selectionModel()->setCurrentIndex( index, QItemSelectionModel::Select );
     } else {
+        QModelIndex index;
+
+        //select an item of comboBox_comic
         for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            const QModelIndex index = mProxyModel->index( i, 0 );
-            if ( index.data( Qt::UserRole ).toString() == comic ) {
+            index = mProxyModel->index( i, 0 );
+            if ( index.data( Qt::UserRole ).toString() == comics.at( 0 ) ) {
                 comicUi.comboBox_comic->setCurrentIndex( i );
                 break;
+            }
+        }
+
+        //select the items of listView_comic
+        for ( int k = 0; k < comics.count(); ++k ) {
+            for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+                index = mProxyModel->index( i, 0 );
+                if ( index.data( Qt::UserRole ).toString() == comics.at( k ) ) {
+                    comicUi.listView_comic->selectionModel()->select( index, QItemSelectionModel::Select );
+                    break;
+                }
             }
         }
     }
 }
 
-QString ConfigWidget::comicIdentifier() const
+QStringList ConfigWidget::comicIdentifier() const
 {
-    const QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
-    return index.data( Qt::UserRole ).toString();
+    QStringList identifiers;
+
+    if ( mProxyModel->rowCount() ) {
+        QModelIndexList selected = comicUi.listView_comic->selectionModel()->selectedIndexes();
+        for ( int i = 0; i < selected.size(); i++ ) {
+            identifiers << selected.at( i ).data( Qt::UserRole ).toString();
+        }
+
+        //if no tabs are used or if nothing has been selected on listView_comic use the comboBox_comic
+        if ( !comicUi.checkBox_useTabs->isChecked() || identifiers.isEmpty() ) {
+            int indexNum = comicUi.comboBox_comic->currentIndex();
+            QModelIndex index;
+
+            //use the currentIndex or if none has been set then the first
+            if ( indexNum > -1 ) {
+                index  = mProxyModel->index( indexNum, 0 );
+            } else {
+                index  = mProxyModel->index( 0, 0 );
+            }
+            identifiers = QStringList( index.data( Qt::UserRole ).toString() );
+        }
+    }
+
+    //if identifiers is still empty add an empty string
+    if ( identifiers.isEmpty() ) {
+        identifiers << QString();
+    }
+
+    return identifiers;
 }
 
-QString ConfigWidget::comicName() const
+QStringList ConfigWidget::comicName() const
 {
-    const QModelIndex index = mProxyModel->index( comicUi.comboBox_comic->currentIndex(), 0 );
-    return index.data( Qt::DisplayRole ).toString();
+    QStringList names;
+
+    if ( mProxyModel->rowCount() ) {
+        QModelIndexList selected = comicUi.listView_comic->selectionModel()->selectedIndexes();
+        for ( int i = 0; i < selected.size(); i++ ) {
+            names << selected.at( i ).data( Qt::DisplayRole ).toString();
+        }
+
+        //if no tabs are used or if nothing has been selected on listView_comic use the comboBox_comic
+        if ( !comicUi.checkBox_useTabs->isChecked() || names.isEmpty() ) {
+            int indexNum = comicUi.comboBox_comic->currentIndex();
+            QModelIndex index;
+
+            //use the currentIndex or if none has been set then the first
+            if ( indexNum > -1 ) {
+                index  = mProxyModel->index( indexNum, 0 );
+            } else {
+                index  = mProxyModel->index( 0, 0 );
+            }
+            names = QStringList( index.data( Qt::DisplayRole ).toString() );
+        }
+    }
+
+    //if names is still empty add an empty string
+    if ( names.isEmpty() ) {
+        names << QString();
+    }
+
+    return names;
 }
 
 void ConfigWidget::setShowComicUrl( bool show )
@@ -197,6 +270,7 @@ bool ConfigWidget::arrowsOnHover() const
 void ConfigWidget::setMiddleClick( bool checked )
 {
     comicUi.checkBox_middle->setChecked( checked );
+    comicUi.checkBox_middle_2->setChecked( checked );
 }
 
 bool ConfigWidget::middleClick() const
@@ -214,24 +288,26 @@ QTime ConfigWidget::tabSwitchTime() const
     return comicUi.timeEdit_tabs->time();
 }
 
-void ConfigWidget::setShowTabBar( bool show )
+void ConfigWidget::setHideTabBar( bool hide )
 {
-    comicUi.checkBox_tabBar->setChecked( show );
+   comicUi.checkBox_hideTabBar->setChecked( hide );
 }
 
-bool ConfigWidget::showTabBar() const
+bool ConfigWidget::hideTabBar() const
 {
-    return comicUi.checkBox_tabBar->isChecked();
+    return comicUi.checkBox_hideTabBar->isChecked();
 }
 
-void ConfigWidget::setNumTabs( int num )
+void ConfigWidget::setUseTabs( bool use )
 {
-    comicUi.spinBox_numTabs->setValue( num );
+    comicUi.checkBox_useTabs->setChecked( use );
+    comicUi.checkBox_useTabs_2->setChecked( use );
 }
 
-int ConfigWidget::numTabs() const
+bool ConfigWidget::useTabs() const
 {
-    return comicUi.spinBox_numTabs->value();
+    return comicUi.checkBox_useTabs->isChecked();
 }
+
 
 #include "configwidget.moc"

@@ -42,8 +42,8 @@ class ConfigWidget : public QWidget
         ConfigWidget( Plasma::DataEngine *engine, QWidget *parent );
         ~ConfigWidget();
 
-        void setComicIdentifier( const QString &comic );
-        QString comicIdentifier() const;
+        void setComicIdentifier( const QStringList &comics );
+        QStringList comicIdentifier() const;
 
         void setShowComicUrl( bool show );
         bool showComicUrl() const;
@@ -59,11 +59,11 @@ class ConfigWidget : public QWidget
         bool middleClick() const;
         void setTabSwitchTime( const QTime &time );
         QTime tabSwitchTime() const;
-        void setShowTabBar( bool show );
-        bool showTabBar() const;
-        void setNumTabs( int num );
-        int numTabs() const;
-        QString comicName() const;
+        void setHideTabBar( bool hide );
+        bool hideTabBar() const;
+        void setUseTabs( bool use );
+        bool useTabs() const;
+        QStringList comicName() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;

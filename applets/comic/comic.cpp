@@ -106,6 +106,8 @@ class ChooseStripNumDialog : public KDialog
 };
 //END choose a strip dialog
 
+static const int s_tabHeight = 24;//used because there is no initial preferredHeight set
+
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::Applet( parent, args ),
       mShowPreviousButton( false ),
@@ -130,6 +132,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
     mTabBar = new Plasma::TabBar( this );
+    mTabBar->hide();
     connect( mTabBar, SIGNAL( currentChanged( int ) ), this, SLOT( slotTabChanged( int ) ) );
 
     mLabelTop = new Plasma::Label( this );
@@ -201,7 +204,7 @@ void ComicApplet::createLayout()
         newLayout->addItem( mLeftArrow );
     }
 
-    mTabBar->setVisible( mShowTabBar );
+    mTabBar->setVisible( mShowTabBar && mUseTabs );
     if ( mTabBar->isVisible() ) {
         centralLayout->addItem( mTabBar );
         centralLayout->setItemSpacing( centralLayout->count() - 1, 5 );
@@ -396,7 +399,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mReloadTimer->stop();
 
     mConfigWidget = new ConfigWidget( dataEngine( "comic" ), parent );
-    mConfigWidget->setComicIdentifier( mComicIdentifier );
+    mConfigWidget->setComicIdentifier( mTabIdentifier );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
     mConfigWidget->setShowComicTitle( mShowComicTitle );
@@ -405,8 +408,8 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setMiddleClick( mMiddleClick );
     QTime time = QTime( mSwitchTabTime / 3600, ( mSwitchTabTime / 60 ) % 60, mSwitchTabTime % 60 );
     mConfigWidget->setTabSwitchTime( time );
-    mConfigWidget->setShowTabBar( mShowTabBar );
-    mConfigWidget->setNumTabs( mNumTabs );
+    mConfigWidget->setHideTabBar( !mShowTabBar );
+    mConfigWidget->setUseTabs( mUseTabs );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon() );
@@ -421,8 +424,12 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 void ComicApplet::applyConfig()
 {
     bool checkButtonBar = ( mArrowsOnHover != mConfigWidget->arrowsOnHover() );
-    bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier() );
-    mComicIdentifier = mConfigWidget->comicIdentifier();
+    bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier().at( 0 ) );
+
+    mTabIdentifier = mConfigWidget->comicIdentifier();
+    mComicIdentifier = mTabIdentifier.at( 0 );
+    mTabText = mConfigWidget->comicName();
+    mComicTitle = mTabText.at( 0 );
     mShowComicUrl = mConfigWidget->showComicUrl();
     mShowComicAuthor = mConfigWidget->showComicAuthor();
     mShowComicTitle = mConfigWidget->showComicTitle();
@@ -431,9 +438,8 @@ void ComicApplet::applyConfig()
     mMiddleClick = mConfigWidget->middleClick();
     QTime time = mConfigWidget->tabSwitchTime();
     mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
-    mShowTabBar = mConfigWidget->showTabBar();
-    mNumTabs = mConfigWidget->numTabs();
-    mComicTitle = mConfigWidget->comicName();
+    mShowTabBar = !mConfigWidget->hideTabBar();
+    mUseTabs = mConfigWidget->useTabs();
 
     slotStartTimer();
     updateTabBar();
@@ -467,34 +473,12 @@ void ComicApplet::changeComic( bool differentComic )
 
 void ComicApplet::updateTabBar()
 {
-    if ( mNumTabs > mTabBar->count() ) {
-        for ( int i = mTabBar->count(); i < mNumTabs; ++i ) {
-            //initially mTabBar->count() always is 0, so we have to check if
-            //text should be appended
-            if ( mTabIdentifier.count() < mNumTabs ) {
-                mTabIdentifier.append( mComicIdentifier );
-            }
-            if ( mTabText.count() < mNumTabs ) {
-                mTabText.append( mComicTitle );
-            }
-
-            mTabBar->addTab( mTabText.at( i ) );
-        }
-    } else if ( mNumTabs < mTabBar->count() ) {
-        mTabBar->setCurrentIndex( 0 );
-        for ( int i = mTabBar->count(); i > mNumTabs; --i ) {
-            mTabBar->removeTab( i - 1 );
-            mTabIdentifier.removeLast();
-            mTabText.removeLast();
-        }
+    for ( int i = mTabBar->count(); i > 0; --i ) {
+        mTabBar->removeTab( i - 1 );
     }
-
-    int index = mTabBar->currentIndex();
-    mTabText[ index ] = mComicTitle;
-    mTabBar->setTabText( index, mComicTitle );
-    mTabIdentifier[ index ] = mComicIdentifier;
-
-    mTabBar->setVisible( mShowTabBar );
+    for ( int i = 0; i < mTabIdentifier.count(); ++i ) {
+        mTabBar->addTab( mTabText.at( i ) );
+    }
 }
 
 void ComicApplet::slotTabChanged( int newIndex )
@@ -515,7 +499,7 @@ void ComicApplet::checkDayChanged()
 void ComicApplet::loadConfig()
 {
     KConfigGroup cg = config();
-    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList() );
+    mTabIdentifier = cg.readEntry( "tabIdentifier", QStringList( QString() ) );
     mComicIdentifier = mTabIdentifier.count() ? mTabIdentifier.at( 0 ) : QString();
     mShowComicUrl = cg.readEntry( "showComicUrl", false );
     mShowComicAuthor = cg.readEntry( "showComicAuthor", false );
@@ -529,10 +513,10 @@ void ComicApplet::loadConfig()
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
     mSwitchTabTime = cg.readEntry( "switchTabTime", 0 );
-    mShowTabBar = cg.readEntry( "showTabBar", false );
-    mNumTabs = cg.readEntry( "numTabs", 1 );
-    mTabText = cg.readEntry( "tabText", QStringList() );
+    mShowTabBar = cg.readEntry( "showTabBar", true );
+    mTabText = cg.readEntry( "tabText", QStringList( QString() ) );
     mComicTitle = mTabText.count() ? mTabText.at( 0 ) : QString();
+    mUseTabs = cg.readEntry( "useTabs", false );
 
     buttonBar();
 }
@@ -549,9 +533,9 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "middleClick", mMiddleClick );
     cg.writeEntry( "switchTabTime", mSwitchTabTime );
     cg.writeEntry( "showTabBar", mShowTabBar );
-    cg.writeEntry( "numTabs", mNumTabs );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "tabText", mTabText );
+    cg.writeEntry( "useTabs", mUseTabs );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -735,7 +719,8 @@ void ComicApplet::updateSize()
     //leftArea and rightArea are not completly correct when their size is smaller then the preferredSize
     int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? mLeftArrow->preferredSize().width() + 1 : 0;
     int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mRightArrow->preferredSize().width() + 1 : 0;
-    int topArea = mShowTabBar ? mTabBar->nativeWidget()->height() + 5 : 0;
+    int topArea = mTabBar->nativeWidget()->height() ? mTabBar->nativeWidget()->height() : s_tabHeight;
+    topArea = ( mShowTabBar && mUseTabs ) ? topArea + 5 : 0;
     topArea += ( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() ) ? mLabelTop->nativeWidget()->height() : 0;
     int bottomArea = ( mShowComicUrl && !mLabelUrl->text().isEmpty() ) ? mLabelUrl->nativeWidget()->height() : 0;
     bottomArea = ( mShowComicIdentifier && !mLabelId->text().isEmpty() ) ? mLabelId->nativeWidget()->height() : bottomArea;
