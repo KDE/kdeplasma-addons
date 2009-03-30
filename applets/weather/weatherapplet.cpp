@@ -922,7 +922,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (data["Pressure"] != "N/A" && data["Pressure"].toString().isEmpty() == false) {
         QStandardItem *dataPressure = new QStandardItem();
-        dataPressure->setText(i18nc("pressure, unit","Pressure: %1%2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), m_weatherPressureFormat), 'f', 2), WeatherUtils::getUnitString(m_weatherPressureFormat, false)));
+        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), m_weatherPressureFormat), 'f', 2), WeatherUtils::getUnitString(m_weatherPressureFormat, false)));
         m_detailsModel->appendRow(dataPressure);
     }
 
@@ -938,7 +938,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         double visibility = data["Visibility"].toDouble(&isNumeric);
         Q_UNUSED(visibility)
         if (isNumeric) {
-            dataVisibility->setText(i18nc("distance, unit","Visibility: %1%2", QString::number(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), m_weatherVisibilityFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherVisibilityFormat, false)));
+            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", QString::number(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), m_weatherVisibilityFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherVisibilityFormat, false)));
         } else {
             dataVisibility->setText(i18n("Visibility: %1", data["Visibility"].toString()));
         }
@@ -953,7 +953,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-        m_windIcon->setText(i18nc("wind direction, speed","%1 %2%3", data["Wind Direction"].toString(),
+        m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
                 QString::number(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
     } else {
         if (data["Wind Speed"] == "N/A") {
@@ -973,7 +973,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (data["Wind Gust"] != "N/A" && data["Wind Gust"].toString().isEmpty() == false) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
-        dataGust->setText(i18n("Wind Gust: %1%2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
+        dataGust->setText(i18n("Wind Gust: %1% 2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
         m_detailsModel->appendRow(dataGust);
     }
 
