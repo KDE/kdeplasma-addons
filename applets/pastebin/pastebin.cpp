@@ -188,7 +188,7 @@ void Pastebin::setActionState(ActionState state)
         case Idle:
             kDebug() << "Idle";
             setBusy(false);
-            toolTipData.setSubText(i18n("Drop a text or an image onto me to upload it to Pastebin."));
+            toolTipData.setSubText(i18n("Drop text or an image onto me to upload it to Pastebin."));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case IdleError:
