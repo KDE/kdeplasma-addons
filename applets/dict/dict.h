@@ -36,6 +36,7 @@ namespace Plasma
 {
     class IconWidget;
     class LineEdit;
+    class TextBrowser;
 }
 
 class DictApplet: public Plasma::PopupApplet
@@ -72,8 +73,7 @@ class DictApplet: public Plasma::PopupApplet
         Plasma::LineEdit *m_wordEdit;
         //Plasma::Flash *m_flash;
 //         QTextBrowser* m_defBrowser;
-        KTextBrowser* m_defBrowser;
-        QGraphicsProxyWidget *m_defBrowserProxy;
+        Plasma::TextBrowser* m_defBrowser;
         Plasma::IconWidget *m_icon;
 
 //         QList< QPair<QString, bool> > m_dicts;

@@ -20,11 +20,8 @@
 
 #include "dict.h"
 
-#include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QTimer>
-// #include <QWebView>
-// #include <QTextBrowser>
 
 #include <KTextBrowser>
 #include <KDebug>
@@ -42,6 +39,7 @@
 #include <Plasma/Animator>
 #include <Plasma/IconWidget>
 #include <Plasma/LineEdit>
+#include <Plasma/TextBrowser>
 
 #define AUTO_DEFINE_TIMEOUT 500
 
@@ -105,13 +103,12 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_wordEdit->show();
     Plasma::Animator::self()->animateItem(m_wordEdit, Plasma::Animator::AppearAnimation);
 
-    m_defBrowser = new KTextBrowser();
-    m_defBrowser->setNotifyClick(true);
-    connect(m_defBrowser,SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
-    m_defBrowser->document()->setDefaultStyleSheet(QLatin1String(translationCSS));
-    m_defBrowserProxy = new QGraphicsProxyWidget(this);
-    m_defBrowserProxy->setWidget(m_defBrowser);
-    m_defBrowserProxy->hide();
+    m_defBrowser = new Plasma::TextBrowser();
+    m_defBrowser->nativeWidget()->setNotifyClick(true);
+    connect(m_defBrowser->nativeWidget(),SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
+    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QLatin1String(translationCSS));
+    m_defBrowser->hide();
+
 //  Icon in upper-left corner
     m_icon = new Plasma::IconWidget(this);
     m_icon->setSvg(KStandardDirs::locate("icon", "oxygen/scalable/apps/accessories-dictionary.svgz"));
@@ -134,7 +131,7 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_horLayout->addItem(m_wordEdit);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
     m_layout->addItem(m_horLayout);
-    m_layout->addItem(m_defBrowserProxy);
+    m_layout->addItem(m_defBrowser);
 
     m_source.clear();
     dataEngine(m_dataEngine)->connectSource(m_source, this);
@@ -216,11 +213,11 @@ void DictApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         m_flash->kill();
     }*/
     if (!m_source.isEmpty()) {
-        m_defBrowserProxy->show();
+        m_defBrowser->show();
         // TODO Phase::self()->animateItem(m_defBrowserProxy, Phase::Appear);
     }
     if (data.contains("text"))
-        m_defBrowser->setHtml(data[QString("text")].toString());
+        m_defBrowser->nativeWidget()->setHtml(data[QString("text")].toString());
     updateGeometry();
 }
 
@@ -252,7 +249,7 @@ void DictApplet::define()
     else
     {    //make the definition box disappear
         // TODO Phase::self()->animateItem(m_defBrowserProxy, Phase::Disappear);
-        m_defBrowserProxy->hide();
+        m_defBrowser->hide();
     }
 
     updateConstraints();
