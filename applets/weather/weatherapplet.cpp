@@ -89,7 +89,6 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     }
 
     KConfigGroup generalConfig = config();
-    QStringList places;
     // Per applet automatically setup a KConfig
     if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
         m_weatherWindFormat = generalConfig.readEntry("windFormat", (int)WeatherUtils::KilometersPerHour);
