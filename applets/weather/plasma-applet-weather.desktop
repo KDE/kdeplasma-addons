@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast
+Name[de]=Wetterbericht
 Name[el]=Πρόγνωση καιρού
 Name[es]=Previsión metereológica
 Name[et]=Ilmateade
@@ -19,6 +20,7 @@ Name[x-test]=xxWeather Forecastxx
 Name[zh_CN]=天气预报
 Name[zh_TW]=氣象預報
 Comment=Displays Weather information
+Comment[de]=Zeigt Wetterinformationen an
 Comment[el]=Εμφάνιση πληροφοριών καιρού
 Comment[es]=Muestra información meteorológica
 Comment[et]=Ilmateade
