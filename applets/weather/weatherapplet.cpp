@@ -316,23 +316,15 @@ void WeatherApplet::cancelAddClicked()
 
 void WeatherApplet::pluginIndexChanged(int index)
 {
-   Q_UNUSED(index)
+    Q_UNUSED(index)
 
-   ui.validatedPlaceLabel->clear();
-   if (ui.locationEdit->text().size() < 3) {
-       ui.validateButton->setEnabled(false);
-   } else {
-       ui.validateButton->setEnabled(true);
-   }
+    ui.validatedPlaceLabel->clear();
+    placeEditChanged(ui.locationEdit->text());
 }
 
 void WeatherApplet::placeEditChanged(const QString& text)
 {
-    if (text.size() < 3) {
-        ui.validateButton->setEnabled(false);
-    } else {
-        ui.validateButton->setEnabled(true);
-    }
+    ui.validateButton->setEnabled(text.size() >= 3);
 }
 
 void WeatherApplet::validate(const QString& source, const QVariant& data)
@@ -565,6 +557,11 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
     }
 }
 
+bool WeatherApplet::isValidData(const QVariant &data)
+{
+    return ((data != "N/A") && (!data.toString().isEmpty()));
+}
+
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
     m_locationLabel->setText(data["Place"].toString());
@@ -588,7 +585,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     m_conditionsLabel->setText(data["Current Conditions"].toString());
 
-    if (data["Temperature"] != "N/A" && data["Temperature"].toString().isEmpty() == false) {
+    if (isValidData(data["Temperature"])) {
         m_tempLabel->setText(convertTemperature(m_weatherTempFormat, data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
 
     } else {
@@ -780,7 +777,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_detailsModel->clear();
     }
 
-    if (data["Windchill"] != "N/A" && data["Windchill"].toString().isEmpty() == false) {
+    if (isValidData(data["Windchill"])) {
        QStandardItem *dataWindchill = new QStandardItem();
        
        // Use temperature unit to convert windchill temperature we only show degrees symbol not actual temperature unit
@@ -788,7 +785,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
        m_detailsModel->appendRow(dataWindchill);
     }
 
-    if (data["Humidex"] != "N/A" && data["Humidex"].toString().isEmpty() == false) {
+    if (isValidData(data["Humidex"])) {
         QStandardItem *dataHumidex = new QStandardItem();
 
         // Use temperature unit to convert humidex temperature we only show degrees symbol not actual temperature unit
@@ -797,25 +794,25 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_detailsModel->appendRow(dataHumidex);
     }
 
-    if (data["Dewpoint"] != "N/A" && data["Dewpoint"].toString().isEmpty() == false) {
+    if (isValidData(data["Dewpoint"])) {
         QStandardItem *dataDewpoint = new QStandardItem();
         dataDewpoint->setText(i18n("Dewpoint: %1", convertTemperature(m_weatherTempFormat, data["Dewpoint"].toString(), data["Dewpoint Unit"].toInt(), false)));
         m_detailsModel->appendRow(dataDewpoint);
     }
 
-    if (data["Pressure"] != "N/A" && data["Pressure"].toString().isEmpty() == false) {
+    if (isValidData(data["Pressure"])) {
         QStandardItem *dataPressure = new QStandardItem();
         dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), m_weatherPressureFormat), 'f', 2), WeatherUtils::getUnitString(m_weatherPressureFormat, false)));
         m_detailsModel->appendRow(dataPressure);
     }
 
-    if (data["Pressure Tendency"] != "N/A" && data["Pressure Tendency"].toString().isEmpty() == false) {
+    if (isValidData(data["Pressure Tendency"])) {
         QStandardItem *dataPressureTend = new QStandardItem();
         dataPressureTend->setText(i18n("Pressure Tendency: %1", data["Pressure Tendency"].toString()));
         m_detailsModel->appendRow(dataPressureTend);
     }
 
-    if (data["Visibility"] != "N/A" && data["Visibility"].toString().isEmpty() == false) {
+    if (isValidData(data["Visibility"])) {
         QStandardItem *dataVisibility = new QStandardItem();
         bool isNumeric;
         double visibility = data["Visibility"].toDouble(&isNumeric);
@@ -829,7 +826,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_detailsModel->appendRow(dataVisibility);
     }
 
-    if (data["Humidity"] != "N/A" && data["Humidity"].toString().isEmpty() == false) {
+    if (isValidData(data["Humidity"])) {
         QStandardItem *dataHumidity = new QStandardItem();
         dataHumidity->setText(i18n("Humidity: %1", data["Humidity"].toString()));
         m_detailsModel->appendRow(dataHumidity);
@@ -853,7 +850,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     m_windIcon->setMaximumSize(m_windIcon->sizeFromIconSize(KIconLoader::SizeSmall));
     m_windIcon->update();
 
-    if (data["Wind Gust"] != "N/A" && data["Wind Gust"].toString().isEmpty() == false) {
+    if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
         dataGust->setText(i18n("Wind Gust: %1 %2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));

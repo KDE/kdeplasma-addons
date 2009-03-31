@@ -122,6 +122,7 @@ private:
 
     Plasma::Frame *m_titleFrame;
 
+    bool isValidData(const QVariant &data);
     void weatherContent(const Plasma::DataEngine::Data &data);
     void setVisible(bool visible, QGraphicsLayout *layout);
     void setVisibleLayout(bool val);
