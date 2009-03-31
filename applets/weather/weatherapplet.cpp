@@ -487,7 +487,6 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
 
     ui.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
     ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    ui.locationEdit->clear();
     ui.validatedPlaceLabel->setText(m_activePlace);
     uui.windOptionsComboList->setCurrentIndex(uui.windOptionsComboList->findData(m_weatherWindFormat));
     uui.tempOptionsComboList->setCurrentIndex(uui.tempOptionsComboList->findData(m_weatherTempFormat));
