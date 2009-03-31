@@ -50,23 +50,12 @@ class WeatherApplet : public Plasma::PopupApplet
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
-    void validate(const QString& source, const QVariant& data);
-    void weatherContent(const Plasma::DataEngine::Data &data);
+
     QGraphicsWidget *graphicsWidget();
 
 public slots:
     void createConfigurationInterface(KConfigDialog *parent);
-    void showAddPlaceDialog(const QStringList& tokens);
-    void getValidation(void);
-    void addPlace(void);
-    void cancelAddClicked(void);
-    void placeEditChanged(const QString& text);
-    void pluginIndexChanged(int index);
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void selectPlace();
-    void creditLink(const QString& url);
-    void weatherNoticeLink(const QString& url);
-    void getWeather(void);
 
 protected slots:
     void configAccepted();
@@ -74,6 +63,18 @@ protected slots:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
+
+private slots:
+    void addPlace();
+    void showAddPlaceDialog(const QStringList& tokens);
+    void getValidation();
+    void getWeather();
+    void creditLink(const QString& url);
+    void weatherNoticeLink(const QString& url);
+    void selectPlace();
+    void pluginIndexChanged(int index);
+    void placeEditChanged(const QString& text);
+    void cancelAddClicked();
 
 private:
     Plasma::DataEngine *weatherEngine;
@@ -84,7 +85,6 @@ private:
     QStandardItemModel *m_amodel;
     QList<QStandardItem *> m_items;
 
-    QString m_currentSource; // Current source
     QString m_activeValidation; // Current place to validate
     QString m_activeIon; // Current data source plugin
     QString m_activePlace; // Current place we get weather from
@@ -123,7 +123,9 @@ private:
 
     Plasma::Frame *m_titleFrame;
 
+    void weatherContent(const Plasma::DataEngine::Data &data);
     void setVisibleLayout(bool val);
+    void validate(const QString& source, const QVariant& data);
     QString convertTemperature(int format, QString value, int type, bool rounded, bool degreesOnly);
 };
 
