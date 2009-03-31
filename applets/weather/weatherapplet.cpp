@@ -200,22 +200,6 @@ WeatherApplet::~WeatherApplet()
     if (m_addDialog) {
         delete m_addDialog;
     }
-
-    if (m_bottomLayout) {
-         if (m_fiveDaysView) {
-             kDebug() << "Delete the Plasma::m_fiveDaysView";
-             delete m_fiveDaysView;
-             m_fiveDaysView = 0;
-             kDebug() << "Finished deleting Plasma::m_fiveDaysView";
-         }
-
-         if (m_detailsView) {
-             kDebug() << "Delete the Plasma::m_detailsView";
-             delete m_detailsView;
-             m_detailsView = 0;
-             kDebug() << "Finished deleting Plasma::m_detailsView";
-         }
-    }
 }
 
 void WeatherApplet::toolTipAboutToShow()
@@ -646,7 +630,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (data["Total Weather Days"].toInt() > 0) {
         if (!m_fiveDaysView) {
             kDebug() << "Create 5 Days Plasma::WeatherView";
-            m_fiveDaysView = new Plasma::WeatherView();
+            m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
             m_fiveDaysView->setHasHeader(true);
             m_fiveDaysView->setOrientation(Qt::Vertical);
         }
@@ -765,7 +749,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     // Details data
     if (!m_detailsView) {
         kDebug() << "Create Details Plasma::WeatherView";
-        m_detailsView = new Plasma::WeatherView();
+        m_detailsView = new Plasma::WeatherView(m_tabBar);
         m_detailsView->setHasHeader(false);
         m_detailsView->setOrientation(Qt::Horizontal);
     }
