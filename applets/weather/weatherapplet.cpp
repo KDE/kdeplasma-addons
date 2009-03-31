@@ -644,12 +644,11 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
     double temp = WeatherUtils::convertTemperature(val, type, format);
 
     if (rounded) {
-        long tempNumber = qRound(temp);
-        QString unitType = WeatherUtils::getUnitString(format, false);
+        int tempNumber = qRound(temp);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
         } else {
-            return i18nc("temperature, unit", "%1%2", tempNumber, unitType);
+            return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(format, false));
         }
     } else {
         QString formattedTemp = (val - (int) val) ? QString::number(temp, 'f', 1) : QString::number((int) temp);
