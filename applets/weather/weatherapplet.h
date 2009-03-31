@@ -63,7 +63,6 @@ public slots:
     void cancelAddClicked(void);
     void placeEditChanged(const QString& text);
     void pluginIndexChanged(int index);
-    void optionsIndexChanged(int index);
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
     void selectPlace();
     void creditLink(const QString& url);
@@ -101,8 +100,6 @@ private:
     int m_weatherPressureFormat;
     int m_weatherVisibilityFormat;
     int m_weatherUpdateTime;
-
-    bool m_optionChanged; // If we're just converting a metric we don't want to get new data from source
 
     Plasma::DataEngine::Data m_ionPlugins;
     

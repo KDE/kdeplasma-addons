@@ -67,7 +67,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
     m_currentIcon = 0;
     m_titleFrame = 0;
     m_setupLayout = 0;
-    m_optionChanged = false;
     setPopupIcon("weather-not-available");
 }
 
@@ -415,12 +414,6 @@ void WeatherApplet::pluginIndexChanged(int index)
    }
 }
 
-void WeatherApplet::optionsIndexChanged(int index)
-{
-    Q_UNUSED(index)
-    m_optionChanged = true;
-}
-
 void WeatherApplet::placeEditChanged(const QString& text)
 {
     if (text.size() < 3) {
@@ -546,11 +539,6 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.locationEdit, SIGNAL(textChanged(const QString &)), this, SLOT(placeEditChanged(const QString &)));
     connect(ui.pluginComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(pluginIndexChanged(int)));
     connect(ui.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
-
-    connect(uui.windOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
-    connect(uui.tempOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
-    connect(uui.pressureOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
-    connect(uui.visibilityOptionsComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(optionsIndexChanged(int)));
     connect(ui.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
     KConfigGroup generalConfig = config();
@@ -563,7 +551,6 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     uui.tempOptionsComboList->setCurrentIndex(uui.tempOptionsComboList->findData(m_weatherTempFormat));
     uui.pressureOptionsComboList->setCurrentIndex(uui.pressureOptionsComboList->findData(m_weatherPressureFormat));
     uui.visibilityOptionsComboList->setCurrentIndex(uui.visibilityOptionsComboList->findData(m_weatherVisibilityFormat));
-    m_optionChanged = false;
 }
 
 void WeatherApplet::updateSpinBoxSuffix(int interval)
@@ -1122,9 +1109,8 @@ void WeatherApplet::configAccepted()
     if (!m_activePlace.isEmpty()) {
         setVisibleLayout(false);
 
-        if (!m_optionChanged) {
-            weatherEngine->disconnectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this);
-        }
+        //TODO: Don't reload date if data source and location aren't changed
+        weatherEngine->disconnectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this);
 
         KConfigGroup placeConfig(&generalConfig, m_activePlace);
         placeConfig.writeEntry("ion", m_activeIon);
