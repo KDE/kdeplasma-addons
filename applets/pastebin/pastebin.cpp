@@ -32,6 +32,7 @@
 #include <QBuffer>
 #include <QPainter>
 #include <QPaintEngine>
+#include <QSignalMapper>
 
 #include <KAction>
 #include <KDebug>
@@ -51,7 +52,9 @@
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_graphicsWidget(0), m_textServer(0),
-    m_imageServer(0), m_textBackend(0), m_imageBackend(0)
+    m_imageServer(0), m_textBackend(0), m_imageBackend(0),
+    m_paste(0), m_topSeparator(0), m_bottomSeparator(0),
+    m_signalMapper(new QSignalMapper())
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -60,6 +63,9 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     resize(150, 150);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
+
+    connect(m_signalMapper, SIGNAL(mapped(const QString &)),
+             this, SLOT(copyToClipboard(const QString &)));
 }
 
 Pastebin::~Pastebin()
@@ -467,6 +473,8 @@ void Pastebin::showResults(const QString &url)
     m_url = url;
     setActionState(IdleSuccess);
     copyToClipboard(url);
+
+    addToHistory(url);
 }
 
 void Pastebin::copyToClipboard(const QString &url)
@@ -564,16 +572,44 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
     }
 }
 
+void Pastebin::addToHistory(const QString &url)
+{
+    if (m_actionHistory.size() >= MAX_HISTORY) {
+        delete m_actionHistory.takeFirst();
+    }
+
+    QAction *ac = new QAction(url, this);
+    m_actionHistory.append(ac);
+    m_signalMapper->setMapping(ac, url);
+    connect(ac, SIGNAL(triggered(bool)), m_signalMapper, SLOT(map()));
+}
+
 QList<QAction*> Pastebin::contextualActions()
 {
-    if (m_contextualActions.isEmpty()){
-        KAction *paste = KStandardAction::paste(this);
-        connect(paste, SIGNAL(triggered(bool)), this, SLOT(postClipboard()));
-        m_contextualActions.append(paste);
-    
-        QAction *separator = new QAction(this);
-        separator->setSeparator(true);
-        m_contextualActions.append(separator);
+    if (!m_paste) {
+        m_paste = KStandardAction::paste(this);
+        connect(m_paste, SIGNAL(triggered(bool)), this, SLOT(postClipboard()));
+    }
+    if (!m_topSeparator) {
+        m_topSeparator = new QAction(this);
+        m_topSeparator->setSeparator(true);
+    }
+    if (!m_bottomSeparator) {
+        m_bottomSeparator = new QAction(this);
+        m_bottomSeparator->setSeparator(true);
+    }
+
+    m_contextualActions.clear();
+
+    m_contextualActions.append(m_paste);
+    m_contextualActions.append(m_topSeparator);
+
+    foreach(QAction *ac, m_actionHistory) {
+        m_contextualActions.append(ac);
+    }
+
+    if (!m_actionHistory.isEmpty()) {
+        m_contextualActions.append(m_bottomSeparator);
     }
 
     return m_contextualActions;

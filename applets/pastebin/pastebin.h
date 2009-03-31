@@ -20,6 +20,9 @@
 #ifndef PASTEBIN_H
 #define PASTEBIN_H
 
+//XXX It would be better to replace this by a KConfig
+#define MAX_HISTORY 3
+
 #include "backends/backends.h"
 #include "ui_pastebinConfig.h"
 #include "ui_pastebinServersConfig.h"
@@ -34,6 +37,8 @@
 #include <QTimer>
 #include <QPen>
 
+class QSignalMapper;
+class KAction;
 
 class Pastebin : public Plasma::Applet
 {
@@ -105,6 +110,8 @@ private:
     void showOverlay(bool show);
     void postContent(QString text, QImage imageData);
 
+    void addToHistory(const QString &url);
+
     void setInteractionState(InteractionState state);
     void setActionState(ActionState state);
 
@@ -134,7 +141,12 @@ private:
 
     QTimer *timer;
 
+    QSignalMapper *m_signalMapper;
     QList<QAction *> m_contextualActions;
+    QList<QAction *> m_actionHistory;
+    KAction *m_paste;
+    QAction *m_topSeparator;
+    QAction *m_bottomSeparator;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;
