@@ -1058,6 +1058,7 @@ void WeatherApplet::configAccepted()
         generalConfig.writeEntry("visibilityFormat", m_weatherVisibilityFormat);
         setConfigurationRequired(false);
         getWeather();
+        emit configNeedsSaving();
     } else {
         setVisibleLayout(false);
         setConfigurationRequired(true);
