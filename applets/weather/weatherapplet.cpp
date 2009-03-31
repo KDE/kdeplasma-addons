@@ -226,11 +226,6 @@ WeatherApplet::~WeatherApplet()
              m_detailsView = 0;
              kDebug() << "Finished deleting Plasma::m_detailsView";
          }
-
-        kDebug() << "Deleting Plasma::Label";
-        m_layout->removeItem(m_courtesyLabel);
-
-        m_setupLayout = 0;
     }
 }
 
