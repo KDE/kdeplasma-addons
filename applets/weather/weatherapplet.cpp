@@ -212,7 +212,56 @@ WeatherApplet::~WeatherApplet()
         delete m_addDialog;
     }
 
-    destroyLayout();
+    if (m_bottomLayout) {
+        if (m_fiveDaysModel) {
+            kDebug() << "Flushing m_fiveDaysModel out";
+            m_fiveDaysModel->clear();
+            delete m_fiveDaysModel;
+            m_fiveDaysModel = 0;
+         }
+
+         if (m_detailsModel) {
+             kDebug() << "Flushing m_detailsModel out";
+             delete m_detailsModel;
+             m_detailsModel = 0;
+         }
+
+         if (m_fiveDaysView) {
+             kDebug() << "Delete the Plasma::m_fiveDaysView";
+             delete m_fiveDaysView;
+             m_fiveDaysView = 0;
+             kDebug() << "Finished deleting Plasma::m_fiveDaysView";
+         }
+
+         if (m_detailsView) {
+             kDebug() << "Delete the Plasma::m_detailsView";
+             delete m_detailsView;
+             m_detailsView = 0;
+             kDebug() << "Finished deleting Plasma::m_detailsView";
+         }
+
+        kDebug() << "Deleting Plasma::TabBar";
+        m_bottomLayout->removeItem(m_tabBar);
+
+        if (m_currentIcon) {
+            kDebug() << "Deleting Plasma::IconWidget";
+            m_bottomLayout->removeItem(m_currentIcon);
+            delete m_currentIcon;
+            m_currentIcon = 0;
+        }
+
+        if (m_tabBar) {
+            delete m_tabBar;
+            m_tabBar = 0;
+        }
+
+        m_layout->removeItem(m_bottomLayout);
+
+        kDebug() << "Deleting Plasma::Label";
+        m_layout->removeItem(m_courtesyLabel);
+
+        m_setupLayout = 0;
+    }
 }
 
 void WeatherApplet::toolTipAboutToShow()
@@ -293,60 +342,6 @@ QList<QAction*> WeatherApplet::contextualActions()
     return actions;
 }
 */
-
-void WeatherApplet::destroyLayout()
-{
-    if (m_bottomLayout) {
-        if (m_fiveDaysModel) {
-            kDebug() << "Flushing m_fiveDaysModel out";
-            m_fiveDaysModel->clear();
-            delete m_fiveDaysModel;
-            m_fiveDaysModel = 0;
-         }
-
-         if (m_detailsModel) {
-             kDebug() << "Flushing m_detailsModel out";
-             delete m_detailsModel;
-             m_detailsModel = 0;
-         }
-
-         if (m_fiveDaysView) {
-             kDebug() << "Delete the Plasma::m_fiveDaysView";
-             delete m_fiveDaysView;
-             m_fiveDaysView = 0;
-             kDebug() << "Finished deleting Plasma::m_fiveDaysView";
-         }
-
-         if (m_detailsView) {
-             kDebug() << "Delete the Plasma::m_detailsView";
-             delete m_detailsView;
-             m_detailsView = 0;
-             kDebug() << "Finished deleting Plasma::m_detailsView";
-         }
-
-        kDebug() << "Deleting Plasma::TabBar";
-        m_bottomLayout->removeItem(m_tabBar);
-
-        if (m_currentIcon) {
-            kDebug() << "Deleting Plasma::IconWidget";
-            m_bottomLayout->removeItem(m_currentIcon);
-            delete m_currentIcon;
-            m_currentIcon = 0;
-        }
-
-        if (m_tabBar) {
-            delete m_tabBar;
-            m_tabBar = 0;
-        }
-
-        m_layout->removeItem(m_bottomLayout);
-
-        kDebug() << "Deleting Plasma::Label";
-        m_layout->removeItem(m_courtesyLabel);
-
-        m_setupLayout = 0;
-    }
-}
 
 void WeatherApplet::setVisibleLayout(bool val)  
 {

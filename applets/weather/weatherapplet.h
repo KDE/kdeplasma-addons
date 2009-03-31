@@ -128,7 +128,6 @@ private:
     Plasma::Frame *m_titleFrame;
 
     void setVisibleLayout(bool val);
-    void destroyLayout(void);
     QString convertTemperature(int format, QString value, int type, bool rounded, bool degreesOnly);
 };
 
