@@ -240,19 +240,11 @@ WeatherApplet::~WeatherApplet()
              kDebug() << "Finished deleting Plasma::m_detailsView";
          }
 
-        kDebug() << "Deleting Plasma::TabBar";
-        m_bottomLayout->removeItem(m_tabBar);
-
         if (m_currentIcon) {
             kDebug() << "Deleting Plasma::IconWidget";
             m_bottomLayout->removeItem(m_currentIcon);
             delete m_currentIcon;
             m_currentIcon = 0;
-        }
-
-        if (m_tabBar) {
-            delete m_tabBar;
-            m_tabBar = 0;
         }
 
         m_layout->removeItem(m_bottomLayout);
