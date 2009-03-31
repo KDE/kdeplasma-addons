@@ -104,10 +104,6 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     // Default time to update weather - 30 minutes
     m_weatherUpdateTime = generalConfig.readEntry("updateWeather", 30);
 
-    // "Update Now" contextual action
-    //m_actionUpdateNow = new KAction(i18n("&Update Now"), this);
-    //connect(m_actionUpdateNow, SIGNAL(triggered()), this, SLOT(getWeather()));
-
     // Connect to weather engine.
     weatherEngine = dataEngine("weather");
 
