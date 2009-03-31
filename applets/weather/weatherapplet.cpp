@@ -19,26 +19,24 @@
  ***************************************************************************/
 
 #include "weatherapplet.h"
-#include <QCheckBox>
-#include <KMessageBox>
-#include <KRun>
-#include <KDialog>
-#include <KConfigDialog>
-#include <KLocale>
-//#include <KAction>
-#include <QStandardItemModel>
-#include <QPushButton>
-#include <QPainter>
-#include <plasma/svg.h>
-#include <plasma/theme.h>
-#include <plasma/tooltipmanager.h>
-#include <plasma/widgets/label.h>
-#include <plasma/widgets/frame.h>
-#include <plasma/widgets/tabbar.h>
-#include <plasma/widgets/iconwidget.h>
-#include <plasma/widgets/busywidget.h>
+
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
+#include <QStandardItemModel>
+
+#include <KConfigDialog>
+#include <KDialog>
+#include <KLocale>
+#include <KMessageBox>
+#include <KRun>
+
+#include <Plasma/Frame>
+#include <Plasma/IconWidget>
+#include <Plasma/Label>
+#include <Plasma/Svg>
+#include <Plasma/TabBar>
+#include <Plasma/Theme>
+#include <Plasma/ToolTipManager>
 
 #include <weatherview.h>
 

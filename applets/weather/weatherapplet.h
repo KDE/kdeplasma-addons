@@ -20,28 +20,28 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
-#include <plasma/popupapplet.h>
-#include <plasma/dataengine.h>
+#include <Plasma/PopupApplet>
+#include <Plasma/DataEngine>
 #include <plasma/weather/weatherutils.h>
 
 #include "ui_weatherLocations.h"
 #include "ui_weatherUnits.h"
 #include "ui_weatherAddPlace.h"
 
-class KDialog;
-class QStandardItemModel;
-class QStandardItem;
-class QGraphicsLinearLayout;
 class QGraphicsGridLayout;
+class QGraphicsLinearLayout;
+class QStandardItem;
 class QStandardItemModel;
+
+class KDialog;
 
 namespace Plasma
 {
-class Label;
-class TabBar;
-class IconWidget;
-class WeatherView;
-class Frame;
+    class Frame;
+    class IconWidget;
+    class Label;
+    class TabBar;
+    class WeatherView;
 }
 
 class WeatherApplet : public Plasma::PopupApplet
