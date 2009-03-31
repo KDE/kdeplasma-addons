@@ -184,13 +184,9 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(creditLink(QString)));
 
-    // If we have any weather observations set them up here.
-    foreach(const QString& place, generalConfig.groupList()) {
-        KConfigGroup placeConfig(&generalConfig, place);
-        m_activePlace = place;
-        m_activeIon = placeConfig.readEntry("ion");
-        m_extraData[m_activePlace] = placeConfig.readEntry("data");
-    }
+    m_activePlace = generalConfig.readEntry("place");
+    m_activeIon = generalConfig.readEntry("ion");
+    m_extraData[m_activePlace] = generalConfig.readEntry("data");
 
 
     if (m_activePlace.isEmpty()) {
@@ -1022,10 +1018,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 void WeatherApplet::configAccepted()
 {
     KConfigGroup generalConfig = config();
-    foreach(const QString& place, generalConfig.groupList()) {
-        KConfigGroup placeConfig(&generalConfig, place);
-        placeConfig.deleteGroup();
-    }
 
     m_weatherWindFormat = uui.windOptionsComboList->itemData(uui.windOptionsComboList->currentIndex()).toInt();
     m_weatherTempFormat = uui.tempOptionsComboList->itemData(uui.tempOptionsComboList->currentIndex()).toInt();
@@ -1043,10 +1035,10 @@ void WeatherApplet::configAccepted()
         //TODO: Don't reload date if data source and location aren't changed
         weatherEngine->disconnectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this);
 
-        KConfigGroup placeConfig(&generalConfig, m_activePlace);
-        placeConfig.writeEntry("ion", m_activeIon);
+        generalConfig.writeEntry("place", m_activePlace);
+        generalConfig.writeEntry("ion", m_activeIon);
         if (!m_extraData[m_activePlace].isEmpty()) {
-            placeConfig.writeEntry("data", m_extraData[m_activePlace]);
+            generalConfig.writeEntry("data", m_extraData[m_activePlace]);
         }
 
         // Write out config options
