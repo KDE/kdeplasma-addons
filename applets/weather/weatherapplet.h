@@ -123,6 +123,7 @@ private:
     Plasma::Frame *m_titleFrame;
 
     void weatherContent(const Plasma::DataEngine::Data &data);
+    void setVisible(bool visible, QGraphicsLayout *layout);
     void setVisibleLayout(bool val);
     void validate(const QString& source, const QVariant& data);
     QString convertTemperature(int format, QString value, int type, bool rounded, bool degreesOnly);

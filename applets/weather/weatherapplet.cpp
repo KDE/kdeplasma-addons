@@ -277,43 +277,26 @@ void WeatherApplet::runLinkUrl(const QString& url)
     KRun::runUrl(KUrl(url), "text/html", 0);
 }
 
+void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
+{
+    for (int i = 0; i < layout->count(); i++) {
+        QGraphicsWidget *item = dynamic_cast<QGraphicsWidget *>(layout->itemAt(i));
+        if (item){
+            item->setVisible(visible);
+        }
+    }
+}
+
 void WeatherApplet::setVisibleLayout(bool val)  
 {
     if (m_titleFrame) {
-        if (val) {
-            m_titleFrame->show();
-        } else {
-            m_titleFrame->hide();
-        }
+        m_titleFrame->setVisible(val);
     }
 
-    if (m_titlePanel->count() > 0) {
-        for (int j = 0; j < m_titlePanel->count(); j++) {
-             QGraphicsWidget *titleItem = dynamic_cast<QGraphicsWidget *>(m_titlePanel->itemAt(j));
-             if (val) {
-                 titleItem->show();
-             } else {
-                 titleItem->hide();
-             }
-        }
-    }
+    setVisible(val, m_titlePanel);
+    setVisible(val, m_bottomLayout);
 
-    if (m_bottomLayout->count() > 0) {
-        for (int i = 0; i < m_bottomLayout->count(); i++) {
-             QGraphicsWidget *item = dynamic_cast<QGraphicsWidget *>(m_bottomLayout->itemAt(i));
-             if (val) {
-                 item->show();
-             } else {
-                 item->hide();
-             }
-        }
-    }
-
-    if (val) {
-        m_courtesyLabel->show();
-    } else {
-        m_courtesyLabel->hide();
-    }
+    m_courtesyLabel->setVisible(val);
 }
 
 void WeatherApplet::addPlace()
