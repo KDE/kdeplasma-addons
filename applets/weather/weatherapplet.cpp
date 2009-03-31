@@ -293,21 +293,6 @@ void WeatherApplet::weatherNoticeLink(const QString& url)
     KRun::runUrl(KUrl(url), "text/html", 0);
 }
 
-/*
-QList<QAction*> WeatherApplet::contextualActions()
-{
-    QList<QAction*> actions;
-
-    actions.append(m_actionUpdateNow);
-
-    QAction *separator = new QAction(this);
-    separator->setSeparator(true);
-    actions.append(separator);
-
-    return actions;
-}
-*/
-
 void WeatherApplet::setVisibleLayout(bool val)  
 {
     if (m_titleFrame) {
