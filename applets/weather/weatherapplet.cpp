@@ -28,7 +28,7 @@
 #include <KDialog>
 #include <KLocale>
 #include <KMessageBox>
-#include <KRun>
+#include <KToolInvocation>
 
 #include <Plasma/Frame>
 #include <Plasma/IconWidget>
@@ -176,7 +176,7 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 
     m_courtesyLabel->nativeWidget()->setWordWrap(false);
     m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
-    connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
+    connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
 
     m_activePlace = generalConfig.readEntry("place");
     m_activeIon = generalConfig.readEntry("ion");
@@ -272,9 +272,9 @@ void WeatherApplet::selectPlace()
     m_addDialog->close();
 }
 
-void WeatherApplet::runLinkUrl(const QString& url)
+void WeatherApplet::invokeBrowser(const QString& url)
 {
-    KRun::runUrl(KUrl(url), "text/html", 0);
+    KToolInvocation::invokeBrowser(url);
 }
 
 void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
@@ -884,7 +884,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(warningTitle);
             for (int k = 0; k < data["Total Warnings Issued"].toInt(); k++) {
                 Plasma::Label *warnNotice = new Plasma::Label();
-                connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
+                connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
                 pal = warnNotice->nativeWidget()->palette();
                 pal.setColor(warnNotice->nativeWidget()->foregroundRole(), Qt::red);
                 // If there is a Url to go along with the watch/warning turn label into clickable link
@@ -921,7 +921,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(watchTitle);
             for (int j = 0; j < data["Total Watches Issued"].toInt(); j++) {
                 Plasma::Label *watchNotice = new Plasma::Label();
-                connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
+                connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
                 pal = watchNotice->nativeWidget()->palette();
                 pal.setColor(watchNotice->nativeWidget()->foregroundRole(), Qt::yellow);
                 if (!data[QString("Watch Info %1").arg(j)].toString().isEmpty()) {

@@ -69,7 +69,7 @@ private slots:
     void showAddPlaceDialog(const QStringList& tokens);
     void getValidation();
     void getWeather();
-    void runLinkUrl(const QString& url);
+    void invokeBrowser(const QString& url);
     void selectPlace();
     void pluginIndexChanged(int index);
     void placeEditChanged(const QString& text);
