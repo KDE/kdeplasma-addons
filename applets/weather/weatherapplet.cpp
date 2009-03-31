@@ -348,7 +348,7 @@ void WeatherApplet::destroyLayout()
     }
 }
 
-void WeatherApplet::setVisibleLayout(bool val)
+void WeatherApplet::setVisibleLayout(bool val)  
 {
     if (m_titleFrame) {
         if (val) {
@@ -539,21 +539,15 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.locationEdit, SIGNAL(textChanged(const QString &)), this, SLOT(placeEditChanged(const QString &)));
     connect(ui.pluginComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(pluginIndexChanged(int)));
     connect(ui.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
-    connect(ui.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
+    ui.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
     ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    updateSpinBoxSuffix(m_weatherUpdateTime);
     ui.locationEdit->clear();
     ui.validatedPlaceLabel->setText(m_activePlace);
     uui.windOptionsComboList->setCurrentIndex(uui.windOptionsComboList->findData(m_weatherWindFormat));
     uui.tempOptionsComboList->setCurrentIndex(uui.tempOptionsComboList->findData(m_weatherTempFormat));
     uui.pressureOptionsComboList->setCurrentIndex(uui.pressureOptionsComboList->findData(m_weatherPressureFormat));
     uui.visibilityOptionsComboList->setCurrentIndex(uui.visibilityOptionsComboList->findData(m_weatherVisibilityFormat));
-}
-
-void WeatherApplet::updateSpinBoxSuffix(int interval)
-{
-    ui.weatherUpdateSpin->setSuffix(QString(" ") + i18np("minute", "minutes", interval));
 }
 
 void WeatherApplet::showAddPlaceDialog(const QStringList& tokens)

@@ -72,7 +72,6 @@ public slots:
 protected slots:
     void configAccepted();
     void toolTipAboutToShow();
-    void updateSpinBoxSuffix(int interval);
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
