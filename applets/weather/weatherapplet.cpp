@@ -176,7 +176,7 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 
     m_courtesyLabel->nativeWidget()->setWordWrap(false);
     m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
-    connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(creditLink(QString)));
+    connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
 
     m_activePlace = generalConfig.readEntry("place");
     m_activeIon = generalConfig.readEntry("ion");
@@ -272,12 +272,7 @@ void WeatherApplet::selectPlace()
     m_addDialog->close();
 }
 
-void WeatherApplet::creditLink(const QString& url)
-{
-    KRun::runUrl(KUrl(url), "text/html", 0);
-}
-
-void WeatherApplet::weatherNoticeLink(const QString& url)
+void WeatherApplet::runLinkUrl(const QString& url)
 {
     KRun::runUrl(KUrl(url), "text/html", 0);
 }
@@ -906,7 +901,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(warningTitle);
             for (int k = 0; k < data["Total Warnings Issued"].toInt(); k++) {
                 Plasma::Label *warnNotice = new Plasma::Label();
-                connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(weatherNoticeLink(QString)));
+                connect(warnNotice, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
                 pal = warnNotice->nativeWidget()->palette();
                 pal.setColor(warnNotice->nativeWidget()->foregroundRole(), Qt::red);
                 // If there is a Url to go along with the watch/warning turn label into clickable link
@@ -943,7 +938,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(watchTitle);
             for (int j = 0; j < data["Total Watches Issued"].toInt(); j++) {
                 Plasma::Label *watchNotice = new Plasma::Label();
-                connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(weatherNoticeLink(QString)));
+                connect(watchNotice, SIGNAL(linkActivated(QString)), this, SLOT(runLinkUrl(QString)));
                 pal = watchNotice->nativeWidget()->palette();
                 pal.setColor(watchNotice->nativeWidget()->foregroundRole(), Qt::yellow);
                 if (!data[QString("Watch Info %1").arg(j)].toString().isEmpty()) {
