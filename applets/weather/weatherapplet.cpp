@@ -541,8 +541,6 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     connect(ui.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
     connect(ui.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
-    KConfigGroup generalConfig = config();
-
     ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
     updateSpinBoxSuffix(m_weatherUpdateTime);
     ui.locationEdit->clear();
