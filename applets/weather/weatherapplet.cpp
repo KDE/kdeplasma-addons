@@ -651,8 +651,7 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
         } else {
             return i18nc("temperature, unit", "%1%2", tempNumber, unitType);
         }
-    }
-    else {
+    } else {
         QString formattedTemp = (val - (int) val) ? QString::number(temp, 'f', 1) : QString::number((int) temp);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
@@ -660,8 +659,6 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
             return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(format, false));
         }
     }
-
-    return QString();
 }
 
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
