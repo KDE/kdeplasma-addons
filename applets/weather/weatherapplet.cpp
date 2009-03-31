@@ -213,19 +213,6 @@ WeatherApplet::~WeatherApplet()
     }
 
     if (m_bottomLayout) {
-        if (m_fiveDaysModel) {
-            kDebug() << "Flushing m_fiveDaysModel out";
-            m_fiveDaysModel->clear();
-            delete m_fiveDaysModel;
-            m_fiveDaysModel = 0;
-         }
-
-         if (m_detailsModel) {
-             kDebug() << "Flushing m_detailsModel out";
-             delete m_detailsModel;
-             m_detailsModel = 0;
-         }
-
          if (m_fiveDaysView) {
              kDebug() << "Delete the Plasma::m_fiveDaysView";
              delete m_fiveDaysView;
@@ -239,15 +226,6 @@ WeatherApplet::~WeatherApplet()
              m_detailsView = 0;
              kDebug() << "Finished deleting Plasma::m_detailsView";
          }
-
-        if (m_currentIcon) {
-            kDebug() << "Deleting Plasma::IconWidget";
-            m_bottomLayout->removeItem(m_currentIcon);
-            delete m_currentIcon;
-            m_currentIcon = 0;
-        }
-
-        m_layout->removeItem(m_bottomLayout);
 
         kDebug() << "Deleting Plasma::Label";
         m_layout->removeItem(m_courtesyLabel);
