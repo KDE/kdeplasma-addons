@@ -47,9 +47,24 @@
      </item>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="historySizeLabel">
+     <property name="text">
+      <string>History size:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KIntSpinBox" name="historySize"/>
+   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

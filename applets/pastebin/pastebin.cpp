@@ -53,8 +53,8 @@
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_graphicsWidget(0), m_textServer(0),
     m_imageServer(0), m_textBackend(0), m_imageBackend(0),
-    m_paste(0), m_topSeparator(0), m_bottomSeparator(0),
-    m_signalMapper(new QSignalMapper())
+    m_historySize(0), m_signalMapper(new QSignalMapper()), m_paste(0),
+    m_topSeparator(0), m_bottomSeparator(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -118,13 +118,29 @@ void Pastebin::setTextServer(int backend)
             this, SLOT(showErrors()));
 }
 
+void Pastebin::setHistorySize(int max)
+{
+    if (max <= 0)
+        max = 0;
+
+    while (max < m_actionHistory.count()) {
+        delete m_actionHistory.takeFirst();
+    }
+
+    m_historySize = max;
+}
+
 void Pastebin::init()
 {
     KConfigGroup cg = config();
     int textBackend = cg.readEntry("TextBackend", "0").toInt();
     int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
+    int historySize = cg.readEntry("HistorySize", "0").toInt();
+
     setTextServer(textBackend);
     setImageServer(imageBackend);
+    setHistorySize(historySize);
+
     setActionState(Idle);
     setInteractionState(Waiting);
     m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
@@ -425,6 +441,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
     uiConfig.imageServer->setCurrentIndex(m_imageBackend);
+    uiConfig.historySize->setValue(m_historySize);
 
     QWidget *servers = new QWidget();
     uiServers.setupUi(servers);
@@ -448,6 +465,7 @@ void Pastebin::configAccepted()
     KConfigGroup cg = config();
     int textBackend = uiConfig.textServer->currentIndex();
     int imageBackend = uiConfig.imageServer->currentIndex();
+    int historySize = uiConfig.historySize->value();
 
     QString pastebincaURL = uiServers.pastebinca->text();
     QString pastebincomURL = uiServers.pastebincom->text();
@@ -456,6 +474,7 @@ void Pastebin::configAccepted()
 
     cg.writeEntry("TextBackend", textBackend);
     cg.writeEntry("ImageBackend", imageBackend);
+    cg.writeEntry("HistorySize", historySize);
 
     cg.writeEntry("pastebinca", pastebincaURL);
     cg.writeEntry("pastebincom", pastebincomURL);
@@ -464,6 +483,7 @@ void Pastebin::configAccepted()
 
     setTextServer(textBackend);
     setImageServer(imageBackend);
+    setHistorySize(historySize);
     emit configNeedsSaving();
 }
 
@@ -574,7 +594,7 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::addToHistory(const QString &url)
 {
-    if (m_actionHistory.size() >= MAX_HISTORY) {
+    if (m_actionHistory.size() >= m_historySize) {
         delete m_actionHistory.takeFirst();
     }
 

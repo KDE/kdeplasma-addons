@@ -20,9 +20,6 @@
 #ifndef PASTEBIN_H
 #define PASTEBIN_H
 
-//XXX It would be better to replace this by a KConfig
-#define MAX_HISTORY 3
-
 #include "backends/backends.h"
 #include "ui_pastebinConfig.h"
 #include "ui_pastebinServersConfig.h"
@@ -51,6 +48,7 @@ public:
     QList<QAction*> contextualActions();
     void setTextServer(int backend);
     void setImageServer(int backend);
+    void setHistorySize(int max);
 
     void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                         const QRect &contents);
@@ -140,6 +138,8 @@ private:
     int m_imageBackend;
 
     QTimer *timer;
+
+    int m_historySize;
 
     QSignalMapper *m_signalMapper;
     QList<QAction *> m_contextualActions;
