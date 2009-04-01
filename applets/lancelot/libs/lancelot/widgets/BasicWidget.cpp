@@ -19,6 +19,8 @@
 
 #include "BasicWidget.h"
 #include <KDebug>
+#include <KGlobalSettings>
+
 #include <cmath>
 #include "Global.h"
 #include <lancelot/lancelot.h>
@@ -181,8 +183,9 @@ void BasicWidget::paintForeground(QPainter * painter)
     painter->setPen(QPen(fgColor));
 
     QFont titleFont = painter->font();
-    QFont descriptionFont = painter->font();
-    descriptionFont.setPointSize(descriptionFont.pointSize() - 2);
+    // QFont descriptionFont = painter->font();
+    // descriptionFont.setPointSize(descriptionFont.pointSize() - 2);
+    QFont descriptionFont = KGlobalSettings::smallestReadableFont();
 
     QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect;
