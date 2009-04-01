@@ -3,20 +3,26 @@ Name=Lancelot
 IconName=lancelot
 Comment=Lancelot Menu
 Comment[ga]=Roghchlár Lancelot
+Comment[nds]=Lancelot-Menü
 Comment[pt]=Menu do Lancelot
 Comment[pt_BR]=Menu do Lancelot
+Comment[sv]=Lancelot-meny
 Comment[uk]=Меню Lancelot
 Version=1
 
 [Event/UsageLoggingOn]
 Name=Usage logging is activated
 Name[ga]=Logáil úsáide faoi shiúl
+Name[nds]=Bruuk-Logbook is anmaakt
 Name[pt]=O registo de utilizações está activo
 Name[pt_BR]=O registo de utilizações está activo
+Name[sv]=Användingsloggning är aktiverad
 Name[uk]=Задіяно використання журналу
 Comment=Shown only on first launch. Notifies that the usage logging is turned 'on'.
 Comment[ga]=Taispeántar é seo ag an chéad tosú amháin. Cuireann sé in iúl go bhfuil logáil úsáide faoi shiúl.
+Comment[nds]=Bloots bi den eersten Oproop wiest. Bescheed dor över, dat Bruuk-Logbook is nu anmaakt.
 Comment[pt]=Mostrar apenas no primeiro lançamento. Notifica que o registo de utilizações está activo.
 Comment[pt_BR]=Mostrar apenas no primeiro lançamento. Notifica que o registo de utilizações está activo.
+Comment[sv]=Visas bara vid första start. Underrättar om att användningsloggning är aktiverad.
 Comment[uk]=Буде показано лише під час першого запуску. Сповіщає про те, що увімкнено запис до журналу.
 Action=Popup
