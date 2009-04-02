@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=Pattern
+Name[de]=Muster
+Name[el]=Μοτίβο
+Name[et]=Muster
+Name[fr]=Modèle
+Name[ga]=Patrún
+Name[gl]=Padrón
+Name[km]=លំនាំ
+Name[nds]=Muster
+Name[nl]=Patroon
+Name[nn]=Mønster
+Name[pa]=ਪੈਟਰਨ
+Name[pt]=Padrão
+Name[pt_BR]=Padrão
+Name[ro]=Model
+Name[sv]=Mönster
+Name[tr]=Model
+Name[uk]=Візерунок
+Name[x-test]=xxPatternxx
+Type=Service
+Icon=preferences-desktop-pattern
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_pattern
+X-KDE-PluginInfo-Author=Will Stephenson
+X-KDE-PluginInfo-Email=wstephenson@kde.org
+X-KDE-PluginInfo-Name=pattern
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
