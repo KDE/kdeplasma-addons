@@ -598,7 +598,7 @@ void Pastebin::addToHistory(const QString &url)
         return;
     }
 
-    if (m_actionHistory.size() > m_historySize) {
+    if (m_actionHistory.size() >= m_historySize) {
         delete m_actionHistory.takeLast();
     }
 
