@@ -594,7 +594,11 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::addToHistory(const QString &url)
 {
-    if (m_actionHistory.size() >= m_historySize) {
+    if (m_historySize <= 0) {
+        return;
+    }
+
+    if (m_actionHistory.size() > m_historySize) {
         delete m_actionHistory.takeFirst();
     }
 
