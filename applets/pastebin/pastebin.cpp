@@ -599,11 +599,11 @@ void Pastebin::addToHistory(const QString &url)
     }
 
     if (m_actionHistory.size() > m_historySize) {
-        delete m_actionHistory.takeFirst();
+        delete m_actionHistory.takeLast();
     }
 
     QAction *ac = new QAction(url, this);
-    m_actionHistory.append(ac);
+    m_actionHistory.insert(0, ac);
     m_signalMapper->setMapping(ac, url);
     connect(ac, SIGNAL(triggered(bool)), m_signalMapper, SLOT(map()));
 }
@@ -628,9 +628,7 @@ QList<QAction*> Pastebin::contextualActions()
     m_contextualActions.append(m_paste);
     m_contextualActions.append(m_topSeparator);
 
-    foreach(QAction *ac, m_actionHistory) {
-        m_contextualActions.append(ac);
-    }
+    m_contextualActions.append(m_actionHistory);
 
     if (!m_actionHistory.isEmpty()) {
         m_contextualActions.append(m_bottomSeparator);
