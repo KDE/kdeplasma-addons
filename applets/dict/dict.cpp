@@ -33,6 +33,7 @@
 #include <QTreeView>
 #include <QStringListModel>
 
+#include <KColorScheme>
 #include <KConfigDialog>
 #include <KConfigGroup>
 
@@ -40,6 +41,7 @@
 #include <Plasma/IconWidget>
 #include <Plasma/LineEdit>
 #include <Plasma/TextBrowser>
+#include <Plasma/Theme>
 
 #define AUTO_DEFINE_TIMEOUT 500
 
@@ -47,25 +49,11 @@ using namespace Plasma;
 
 
 
+// Style sheet format
 const char* translationCSS =
-    "body {\n"
-        "font-size: 10pt; }\n"
-    "font.dict_name {\n"
-        "color: blue;\n"
-        "font-style: italic; }\n"
-    "font.title {\n"
-        "font-size: 16pt;\n"
-        "font-weight: bold; }\n"
-    "font.explanation {\n"
-        "color: #7f7f7f;\n"
-        "font-style: italic; }\n"
-    "font.abbreviature {\n"
-        "font-style: italic; }\n"
-    "font.example {\n"
-        "font-style: italic; }\n"
-    "font.transcription {\n"
-        "font-weight: bold; }\n";
-
+    "dl {color: %1;}\n"
+    "a{color: %2}\n"
+    "a:visited{color: %3}\n";
 
 DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args)
@@ -103,10 +91,16 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_wordEdit->show();
     Plasma::Animator::self()->animateItem(m_wordEdit, Plasma::Animator::AppearAnimation);
 
+    // Gets the color scheme from default theme
+    KColorScheme *colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+
     m_defBrowser = new Plasma::TextBrowser();
     m_defBrowser->nativeWidget()->setNotifyClick(true);
     connect(m_defBrowser->nativeWidget(),SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
-    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QLatin1String(translationCSS));
+    m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(translationCSS)
+                                                .arg(colorScheme->foreground().color().name())
+                                                .arg(colorScheme->foreground(KColorScheme::LinkText).color().name())
+                                                .arg(colorScheme->foreground(KColorScheme::VisitedText).color().name()));
     m_defBrowser->hide();
 
 //  Icon in upper-left corner
