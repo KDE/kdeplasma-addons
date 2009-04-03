@@ -257,15 +257,15 @@ void MarbleWallpaper::changeTheme(int index)
 void MarbleWallpaper::updateRenderPlugins()
 {
     // disable plugins except the stars
-    foreach (MarbleRenderPlugin *item, m_map->renderPlugins()) {
+    /*foreach (RenderPlugin * const item, m_map->renderPlugins()) {
         if (item->nameId() == "stars") {
-            item->setVisible(true); 
+            item->setVisible(true);
             item->setEnabled(true);
         } else {
             item->setVisible(false);
             item->setEnabled(false);
         }
-    }
+    }*/
 }
 
 void MarbleWallpaper::updateMovement(int index)
