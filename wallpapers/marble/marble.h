@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Marble {
 
-class MarbleAbstractFloatItem;
 class MarbleMap;
 
 class MarbleWallpaper : public Plasma::Wallpaper
@@ -37,7 +36,7 @@ class MarbleWallpaper : public Plasma::Wallpaper
 Q_OBJECT
 public:
     enum Movement {
-        FreeMovement = 0,       //< Allow user navigation
+        Interactive = 0,        //< Allow user interactive navigation
         FollowSun,              //< Rotate by following the sun
         ContinuousRotation      //< Rotate by configured values
     };
@@ -49,17 +48,16 @@ public:
     QWidget * createConfigurationInterface(QWidget *parent);
     /// Save config
     void save(KConfigGroup &config);
-
     /// Paint the wallpaper
     void paint(QPainter *painter, const QRectF &exposedRect);
 
-    virtual void wheelEvent (QGraphicsSceneWheelEvent *event);
-    virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
-    virtual void mousePressEvent (QGraphicsSceneMouseEvent *event);
-    virtual void mouseReleaseEvent (QGraphicsSceneMouseEvent *event);
-
 protected:
     void init(const KConfigGroup &config);
+
+    virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private slots:
     /// Redraw
@@ -70,18 +68,14 @@ private slots:
     void updateSettings();
     /// Change the map theme
     void changeTheme(int index);
-    /// Updates marble render plugins
-    void updateRenderPlugins();
     /// Updates configuration screen based on current 'movement'
-    void updateMovement(int);
+    void updateConfigScreen(int);
 
 private:
-    void renderPixmap();
-
     Ui_MarbleSettingsWidget m_ui;
 
     MarbleMap *m_map;                   // Marble parameters for GeoPainter
-    MarbleAbstractFloatItem *m_navItem; // Floating navigation widget
+    QString m_mapTheme;                 // Theme of the map
 
     Projection m_projection;            // Type of projection
     MapQuality m_quality;               // Painting quality
@@ -108,8 +102,6 @@ private:
     qreal m_leftPressedTranslationY;
 
     QPixmap m_pixmap;                   // Cached wallpaper
-    QString m_mapTheme;                 // Theme of the map
-    bool m_dirty;                       // Dirty state flag to update m_pixmap
 };
 
 K_EXPORT_PLASMA_WALLPAPER(marble, MarbleWallpaper)
