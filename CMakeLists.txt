@@ -17,6 +17,9 @@ macro_optional_find_package(Nepomuk)
 macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
+macro_optional_find_package(Marble)
+macro_log_feature(MARBLE_FOUND "Marble" "Desktop Globe" "http://marble.kde.org" FALSE "" "RECOMMENDED: Marble is used to provide a desktop globe wallpaper for Plasma.")
+
 if (NEPOMUK_FOUND)
   include_directories( ${SOPRANO_INCLUDE_DIR} ${NEPOMUK_INCLUDE_DIR} )
 endif (NEPOMUK_FOUND)

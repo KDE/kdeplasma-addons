@@ -1,0 +1,28 @@
+[Desktop Entry]
+Name=Globe
+Name[de]=Globus
+Name[el]=Υδρόγειος
+Name[et]=Gloobus
+Name[gl]=Globo
+Name[km]=សាកល
+Name[nds]=Eer
+Name[pa]=ਗਲੋਬ
+Name[pt]=Globo
+Name[pt_BR]=Globo
+Name[ro]=Glob
+Name[sv]=Glob
+Name[uk]=Глобус
+Name[x-test]=xxGlobexx
+Type=Service
+Icon=marble
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_marble
+X-KDE-PluginInfo-Author=Frederik Gladhorn
+X-KDE-PluginInfo-Email=gladhorn@kde.org
+X-KDE-PluginInfo-Name=marble
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
