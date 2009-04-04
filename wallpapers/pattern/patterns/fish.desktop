@@ -1,3 +1,8 @@
 [KDE Desktop Pattern]
 Comment=Fish Net
+Comment[pt]=Rede de Pesca
+Comment[pt_BR]=Rede de Pesca
+Comment[sv]=Fisknät
+Comment[uk]=Риб’яча сітка
+Comment[x-test]=xxFish Netxx
 File=fish.png

@@ -1,3 +1,8 @@
 [KDE Desktop Pattern]
 Comment=Flowers
+Comment[pt]=Flores
+Comment[pt_BR]=Flores
+Comment[sv]=Blommor
+Comment[uk]=Квіти
+Comment[x-test]=xxFlowersxx
 File=flowers.png

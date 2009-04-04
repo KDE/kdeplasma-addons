@@ -1,3 +1,8 @@
 [KDE Desktop Pattern]
 Comment=Triangles
+Comment[pt]=Triângulos
+Comment[pt_BR]=Triângulos
+Comment[sv]=Trianglar
+Comment[uk]=Трикутники
+Comment[x-test]=xxTrianglesxx
 File=triangles.png

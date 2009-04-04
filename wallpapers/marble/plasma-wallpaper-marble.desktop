@@ -1,18 +1,5 @@
 [Desktop Entry]
 Name=Globe
-Name[de]=Globus
-Name[el]=Υδρόγειος
-Name[et]=Gloobus
-Name[gl]=Globo
-Name[km]=សាកល
-Name[nds]=Eer
-Name[pa]=ਗਲੋਬ
-Name[pt]=Globo
-Name[pt_BR]=Globo
-Name[ro]=Glob
-Name[sv]=Glob
-Name[uk]=Глобус
-Name[x-test]=xxGlobexx
 Type=Service
 Icon=marble
 ServiceTypes=Plasma/Wallpaper

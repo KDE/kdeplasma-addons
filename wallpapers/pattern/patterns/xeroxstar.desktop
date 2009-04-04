@@ -1,4 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Xerox Star
+Comment[sv]=Xerox star
+Comment[uk]=Зірка Xerox
+Comment[x-test]=xxXerox Starxx
 File=xeroxstar.png
 

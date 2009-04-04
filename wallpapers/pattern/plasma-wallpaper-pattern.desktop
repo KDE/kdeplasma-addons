@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Pattern
+Name[pt]=Padrão
+Name[pt_BR]=Padrão
+Name[sv]=Mönster
+Name[uk]=Візерунок
+Name[x-test]=xxPatternxx
 Type=Service
 Icon=preferences-desktop-pattern
 ServiceTypes=Plasma/Wallpaper
