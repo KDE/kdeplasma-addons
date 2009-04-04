@@ -58,7 +58,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Marble {
 
 MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args )
-    : Plasma::Wallpaper(parent, args), m_map(0), m_rotationTimer(0), m_leftPressed(false)
+    : Plasma::Wallpaper(parent, args), m_map(0), m_rotationTimer(0)
 {
     KGlobal::locale()->insertCatalog("marble");
 }
@@ -79,7 +79,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_map->home(lon, lat, zoom);
 
     // Read settings
-    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(Interactive)));
+    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(DontMove)));
     m_mapTheme = config.readEntry(MAP_THEME_CONFIG_KEY, QString::fromLatin1("earth/bluemarble/bluemarble.dgml"));
     m_positionDist = config.readEntry(POSITION_DISTANCE_CONFIG_KEY, 4500);
     m_positionLon = config.readEntry(POSITION_LON_CONFIG_KEY, lon);
@@ -199,7 +199,6 @@ void MarbleWallpaper::paint(QPainter *painter, const QRectF &exposedRect)
 void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
-        // Dispatch the event
         event->accept();
         m_map->zoomViewBy((int)(event->delta() / 3));
         m_positionDist = m_map->distance();
@@ -209,7 +208,7 @@ void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 
 void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (m_leftPressed == true) {
+    if (m_movement == Interactive && event->buttons() == Qt::LeftButton) {
         event->accept();
         int polarity = m_map->viewParams()->viewport()->polarity();
 
@@ -247,7 +246,7 @@ void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void MarbleWallpaper::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (m_movement == Interactive && event->buttons() == Qt::LeftButton) {
-        m_leftPressed = true;
+        event->accept();
 
         // On the single event of a mouse button press these
         // values get stored, to enable us to e.g. calculate the
@@ -259,16 +258,6 @@ void MarbleWallpaper::mousePressEvent(QGraphicsSceneMouseEvent *event)
         // Calculate translation of center point
         m_leftPressedTranslationX =  m_map->centerLongitude() * DEG2RAD;
         m_leftPressedTranslationY =  m_map->centerLatitude() * DEG2RAD;
-
-        event->accept();
-    }
-}
-
-void MarbleWallpaper::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (m_leftPressed) {
-        m_leftPressed = false;
-        event->accept();
     }
 }
 
@@ -305,7 +294,7 @@ void MarbleWallpaper::rotate()
         m_positionLat = m_map->sunLocator()->getLat();
         m_map->centerOn(m_positionLon, m_positionLat);
         m_map->setDistance(m_positionDist);
-    } else if (m_movement == ContinuousRotation) {
+    } else if (m_movement == Rotate) {
         m_map->rotateBy(m_rotationLon * m_rotationTimeout / 1000,
                         m_rotationLat * m_rotationTimeout / 1000);
     } else {
@@ -337,34 +326,25 @@ void MarbleWallpaper::changeTheme(int index)
 void MarbleWallpaper::updateConfigScreen(int index)
 {
     m_movement = static_cast<Movement>(index);
-    switch (m_movement) {
-        case FollowSun:
-            m_ui.rotationLat->setVisible(false);
-            m_ui.labelRotationLat->setVisible(false);
-            m_ui.rotationLon->setVisible(false);
-            m_ui.labelRotationLon->setVisible(false);
-            m_ui.timeout->setVisible(true);
-            m_ui.labelTimeout->setVisible(true);
-            m_ui.mouseInstructions->setVisible(false);
-            break;
-        case ContinuousRotation:
-            m_ui.rotationLat->setVisible(true);
-            m_ui.labelRotationLat->setVisible(true);
-            m_ui.rotationLon->setVisible(true);
-            m_ui.labelRotationLon->setVisible(true);
-            m_ui.timeout->setVisible(true);
-            m_ui.labelTimeout->setVisible(true);
-            m_ui.mouseInstructions->setVisible(false);
-            break;
-        case Interactive:
-            m_ui.rotationLat->setVisible(false);
-            m_ui.labelRotationLat->setVisible(false);
-            m_ui.rotationLon->setVisible(false);
-            m_ui.labelRotationLon->setVisible(false);
-            m_ui.timeout->setVisible(false);
-            m_ui.labelTimeout->setVisible(false);
-            m_ui.mouseInstructions->setVisible(true);
-            break;
+
+    m_ui.mouseInstructions->setVisible(m_movement == Interactive);
+    if (m_movement == Rotate) {
+        m_ui.rotationLat->setVisible(true);
+        m_ui.rotationLon->setVisible(true);
+        m_ui.labelRotationLat->setVisible(true);
+        m_ui.labelRotationLon->setVisible(true);
+    } else {
+        m_ui.rotationLat->setVisible(false);
+        m_ui.rotationLon->setVisible(false);
+        m_ui.labelRotationLat->setVisible(false);
+        m_ui.labelRotationLon->setVisible(false);
+    }
+    if (m_movement == FollowSun || m_movement == Rotate) {
+        m_ui.timeout->setVisible(true);
+        m_ui.labelTimeout->setVisible(true);
+    } else {
+        m_ui.timeout->setVisible(false);
+        m_ui.labelTimeout->setVisible(false);
     }
 }
 

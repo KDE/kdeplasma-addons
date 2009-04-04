@@ -139,7 +139,12 @@
      </item>
      <item>
       <property name="text" >
-       <string>Fixed rotation</string>
+       <string>Rotate</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Don't move</string>
       </property>
      </item>
     </widget>

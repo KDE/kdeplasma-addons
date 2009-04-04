@@ -38,7 +38,8 @@ public:
     enum Movement {
         Interactive = 0,        //< Allow user interactive navigation
         FollowSun,              //< Rotate by following the sun
-        ContinuousRotation      //< Rotate by configured values
+        Rotate,                 //< Rotate by configured values
+        DontMove
     };
 
     MarbleWallpaper(QObject *parent, const QVariantList &args);
@@ -57,7 +58,6 @@ protected:
     virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private slots:
     /// Redraw
@@ -92,9 +92,6 @@ private:
 
     bool m_navigationEnabled;           // Visibility flag for navig. widget
     bool m_showPlacemarks;              // Visibility flag for all placemarks
-
-    // mouse interaction (drag)
-    bool m_leftPressed;                  // left mouse button is pressed
 
     int m_dragStartPositionX;            // position of last button press X
     int m_dragStartPositionY;            // position of last button press Y
