@@ -89,7 +89,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_rotationLat = config.readEntry(ROTATION_LAT_CONFIG_KEY, 0.0);
     m_rotationLon = config.readEntry(ROTATION_LON_CONFIG_KEY, 0.025);
     m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_CONFIG_KEY, 10000);
-    m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_CONFIG_KEY, true);
+    m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_CONFIG_KEY, false);
 
     // Set up the map
     m_map->setMapThemeId(m_mapTheme);
