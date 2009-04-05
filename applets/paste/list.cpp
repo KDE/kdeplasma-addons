@@ -36,6 +36,7 @@ ListForm::ListForm(QWidget *parent)
     : QWidget(parent), m_hide(false), cfg(0)
 {
     setupUi(this);
+    setAttribute(Qt::WA_NoSystemBackground);
     icon->setPixmap(KIcon("edit-paste").pixmap(KIconLoader::SizeSmall,
                                                KIconLoader::SizeSmall));
 
