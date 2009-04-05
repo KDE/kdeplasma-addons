@@ -144,7 +144,7 @@
      </item>
      <item>
       <property name="text" >
-       <string>Don't move</string>
+       <string>Do not move</string>
       </property>
      </item>
     </widget>
