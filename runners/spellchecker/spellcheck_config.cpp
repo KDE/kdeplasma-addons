@@ -28,6 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //For the macro
 #include <plasma/abstractrunner.h>
 
+#define K_EXPORT_RUNNER_CONFIG( name, classname )     \
+K_PLUGIN_FACTORY(ConfigFactory, registerPlugin<classname>();) \
+K_EXPORT_PLUGIN(ConfigFactory("kcm_krunner_" #name)) \
+K_EXPORT_PLUGIN_VERSION(PLASMA_VERSION)
+
 K_EXPORT_RUNNER_CONFIG(spellcheck, SpellCheckConfig)
 
 SpellCheckConfigForm::SpellCheckConfigForm(QWidget* parent) : QWidget(parent)
