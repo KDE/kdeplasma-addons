@@ -184,15 +184,13 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
 
     if (!hasHorizontal) {
         d->horizontal->setValue(0);
-        d->horizontal->setMinimum(0);
-        d->horizontal->setMaximum(0);
+        d->horizontal->setRange(0, 0);
         d->layout->setSize(0, FullBorderLayout::BottomBorder);
     }
 
     if (!hasVertical) {
         d->vertical->setValue(0);
-        d->vertical->setMinimum(0);
-        d->vertical->setMaximum(0);
+        d->horizontal->setRange(0, 0);
         d->layout->setSize(0, FullBorderLayout::RightBorder);
     }
 
@@ -201,11 +199,9 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
     if (hasHorizontal) {
         kDebug() << "Showing horizontal scrollbar";
         viewportSize = currentViewportSize().width();
-        d->horizontal->setMinimum(0);
-        d->horizontal->setMaximum(d->widget->sizeFor(currentViewportSize()).width() - viewportSize);
-        d->horizontal->setViewSize(viewportSize);
-        d->horizontal->setPageSize(viewportSize);
-        d->horizontal->setStepSize(d->widget->scrollUnit(Qt::Horizontal));
+        d->horizontal->setRange(0, d->widget->sizeFor(currentViewportSize()).width() - viewportSize);
+        d->horizontal->setPageStep(viewportSize);
+        d->horizontal->setSingleStep(d->widget->scrollUnit(Qt::Horizontal));
         if ((d->flags & HoverShowScrollbars) && !isHovered()) {
             d->horizontal->hide();
         }
@@ -214,11 +210,9 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
     if (hasVertical) {
         kDebug() << "Showing vertical scrollbar";
         viewportSize = currentViewportSize().height();
-        d->vertical->setMinimum(0);
-        d->vertical->setMaximum(d->widget->sizeFor(currentViewportSize()).height() - viewportSize);
-        d->vertical->setViewSize(viewportSize);
-        d->vertical->setPageSize(viewportSize);
-        d->vertical->setStepSize(d->widget->scrollUnit(Qt::Vertical));
+        d->vertical->setRange(0, d->widget->sizeFor(currentViewportSize()).height() - viewportSize);
+        d->vertical->setPageStep(viewportSize);
+        d->vertical->setSingleStep(d->widget->scrollUnit(Qt::Vertical));
         if ((d->flags & HoverShowScrollbars) && !isHovered()) {
             d->vertical->hide();
         }

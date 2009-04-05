@@ -47,18 +47,12 @@ public:
      */
     ScrollBar(QGraphicsWidget * parent = 0);
 
-    void setMinimum(int min);
-    void setMaximum(int max);
-    void setViewSize(int size);
-    void setPageSize(int size);
-    void setStepSize(int size);
-
-    void wheelEvent(QGraphicsSceneWheelEvent * event);
-
     /**
      * Destroys this Lancelot::ScrollBar
      */
     ~ScrollBar();
+
+    void wheelEvent(QGraphicsSceneWheelEvent * event);
 
 private:
     class Private;

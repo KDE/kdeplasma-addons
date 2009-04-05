@@ -43,31 +43,6 @@ ScrollBar::~ScrollBar()
     delete d;
 }
 
-void ScrollBar::setMinimum(int min)
-{
-    setRange(min, maximum());
-}
-
-void ScrollBar::setMaximum(int max)
-{
-    setRange(minimum(), max);
-}
-
-void ScrollBar::setViewSize(int size)
-{
-    setPageStep(size);
-}
-
-void ScrollBar::setPageSize(int size)
-{
-    setPageStep(size);
-}
-
-void ScrollBar::setStepSize(int size)
-{
-    setPageStep(size);
-}
-
 void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
 {
     Plasma::ScrollBar::wheelEvent(event);
