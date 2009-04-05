@@ -59,6 +59,7 @@ QWidget *KonsoleProfilesApplet::widget()
     if ( !m_listView )
     {
         m_listView = new QTreeView();
+        m_listView->setAttribute(Qt::WA_NoSystemBackground);
         m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
         m_listView->setRootIsDecorated(false);
         m_listView->setHeaderHidden(true);
