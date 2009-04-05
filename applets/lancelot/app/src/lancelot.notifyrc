@@ -10,6 +10,7 @@ Comment[pt_BR]=Menu do Lancelot
 Comment[sv]=Lancelot-meny
 Comment[uk]=Меню Lancelot
 Comment[x-test]=xxLancelot Menuxx
+Comment[zh_CN]=Lancelot 菜单
 Version=1
 
 [Event/UsageLoggingOn]

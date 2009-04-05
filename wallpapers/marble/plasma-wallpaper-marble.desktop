@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=Globe
+Name[pt]=Globo
+Name[pt_BR]=Globo
+Name[sv]=Glob
+Name[uk]=Глобус
 Type=Service
 Icon=marble
 ServiceTypes=Plasma/Wallpaper
