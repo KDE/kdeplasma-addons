@@ -1,315 +1,321 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MarbleSettingsWidget</class>
- <widget class="QWidget" name="MarbleSettingsWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MarbleSettingsWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
+    <width>354</width>
     <height>308</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2" >
-   <item row="0" column="0" >
-    <widget class="QLabel" name="label_2" >
-     <property name="minimumSize" >
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="minimumSize">
       <size>
        <width>125</width>
        <height>0</height>
       </size>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>&amp;Theme</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy" >
+     <property name="buddy">
       <cstring>themeList</cstring>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" >
-    <widget class="KComboBox" name="themeList" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="0" column="1">
+    <widget class="KComboBox" name="themeList">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="label" >
-     <property name="minimumSize" >
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
       <size>
        <width>125</width>
        <height>0</height>
       </size>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>&amp;Projection:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy" >
+     <property name="buddy">
       <cstring>projection</cstring>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="KComboBox" name="projection" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="1" column="1">
+    <widget class="KComboBox" name="projection">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Globe</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Flat Map</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Mercator</string>
       </property>
      </item>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="QLabel" name="label_5" >
-     <property name="text" >
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
       <string>&amp;Quality:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy" >
+     <property name="buddy">
       <cstring>quality</cstring>
      </property>
     </widget>
    </item>
-   <item row="2" column="1" >
-    <widget class="KComboBox" name="quality" >
+   <item row="2" column="1">
+    <widget class="KComboBox" name="quality">
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Low</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Normal</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>High</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Print</string>
       </property>
      </item>
     </widget>
    </item>
-   <item row="5" column="0" >
-    <widget class="QLabel" name="label_7" >
-     <property name="text" >
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
       <string>Rotation:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" >
-    <widget class="KComboBox" name="movement" >
+   <item row="5" column="1">
+    <widget class="KComboBox" name="movement">
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Interactive</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Follow the sun</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Rotate</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Do not move</string>
       </property>
      </item>
     </widget>
    </item>
-   <item row="8" column="1" >
-    <layout class="QGridLayout" name="gridLayout" >
-     <item row="0" column="0" >
-      <widget class="QLabel" name="labelRotationLon" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
+   <item row="8" column="1">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelRotationLon">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Longitude rotation:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>rotationLon</cstring>
        </property>
       </widget>
      </item>
-     <item row="0" column="1" >
-      <widget class="QDoubleSpinBox" name="rotationLon" >
-       <property name="wrapping" >
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="rotationLon">
+       <property name="wrapping">
         <bool>true</bool>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <property name="suffix" >
-        <string comment="how fast the view of the earth is rotated - degrees per second, Longitude" >°/s</string>
+       <property name="suffix">
+        <string comment="how fast the view of the earth is rotated - degrees per second, Longitude">°/s</string>
        </property>
-       <property name="decimals" >
+       <property name="decimals">
         <number>3</number>
        </property>
-       <property name="minimum" >
+       <property name="minimum">
         <double>-359.999000000000024</double>
        </property>
-       <property name="maximum" >
+       <property name="maximum">
         <double>359.999000000000024</double>
        </property>
-       <property name="singleStep" >
+       <property name="singleStep">
         <double>0.001000000000000</double>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" >
-      <widget class="QLabel" name="labelRotationLat" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelRotationLat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Latitude rotation:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>rotationLat</cstring>
        </property>
       </widget>
      </item>
-     <item row="1" column="1" >
-      <widget class="QDoubleSpinBox" name="rotationLat" >
-       <property name="wrapping" >
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="rotationLat">
+       <property name="wrapping">
         <bool>true</bool>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <property name="suffix" >
-        <string comment="how fast the view of the earth is rotated - degrees per second, Latitude" >°/s</string>
+       <property name="suffix">
+        <string comment="how fast the view of the earth is rotated - degrees per second, Latitude">°/s</string>
        </property>
-       <property name="decimals" >
+       <property name="decimals">
         <number>3</number>
        </property>
-       <property name="minimum" >
+       <property name="minimum">
         <double>-359.999000000000024</double>
        </property>
-       <property name="maximum" >
+       <property name="maximum">
         <double>359.999000000000024</double>
        </property>
-       <property name="singleStep" >
+       <property name="singleStep">
         <double>0.001000000000000</double>
        </property>
       </widget>
      </item>
-     <item row="2" column="0" >
-      <widget class="QLabel" name="labelTimeout" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelTimeout">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Update every:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>timeout</cstring>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" >
-      <widget class="KIntNumInput" name="timeout" >
-       <property name="value" >
+     <item row="2" column="1">
+      <widget class="KIntNumInput" name="timeout">
+       <property name="value">
         <number>10</number>
        </property>
-       <property name="minimum" >
+       <property name="minimum">
         <number>1</number>
        </property>
-       <property name="maximum" >
+       <property name="maximum">
         <number>3600</number>
        </property>
-       <property name="suffix" >
+       <property name="suffix">
         <string> seconds</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="13" column="1" >
-    <widget class="QCheckBox" name="showPlacemarks" >
-     <property name="toolTip" >
+   <item row="13" column="1">
+    <widget class="QCheckBox" name="showPlacemarks">
+     <property name="toolTip">
       <string>Determines whether all kind of placemarks are shown or not.</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Show &amp;placemarks</string>
      </property>
     </widget>
    </item>
-   <item row="14" column="1" >
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+   <item row="14" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>10</width>
        <height>0</height>
@@ -317,19 +323,19 @@
      </property>
     </spacer>
    </item>
-   <item row="10" column="1" >
-    <widget class="QLabel" name="mouseInstructions" >
-     <property name="text" >
+   <item row="10" column="1">
+    <widget class="QLabel" name="mouseInstructions">
+     <property name="text">
       <string>Drag (move the mouse while pressing the left mouse button) to rotate. Use the mouse wheel to zoom in and out.</string>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="11" column="1" >
-    <widget class="Line" name="line" >
-     <property name="orientation" >
+   <item row="11" column="1">
+    <widget class="Line" name="line">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>

@@ -93,8 +93,8 @@ private:
     bool m_navigationEnabled;           // Visibility flag for navig. widget
     bool m_showPlacemarks;              // Visibility flag for all placemarks
 
-    int m_dragStartPositionX;            // position of last button press X
-    int m_dragStartPositionY;            // position of last button press Y
+    int m_dragStartPositionX;           // position of last button press X
+    int m_dragStartPositionY;           // position of last button press Y
     qreal m_leftPressedTranslationX;
     qreal m_leftPressedTranslationY;
 
