@@ -35,7 +35,7 @@ AboutData::AboutData()
 
     addAuthor(
             ki18n("Ivan Čukić"),
-            ki18n("Maintainer and main developer"),
+            ki18n("Maintainer and lead developer"),
             "ivan(at)fomentgroup.org",
             "http://ivan.fomentgroup.org"
             );
