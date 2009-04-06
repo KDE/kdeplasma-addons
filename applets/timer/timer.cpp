@@ -53,6 +53,7 @@ Timer::Timer(QObject *parent, const QVariantList &args)
 
 Timer::~Timer()
 {
+    saveTimer();
 }
 
 void Timer::init()
@@ -104,6 +105,15 @@ void Timer::init()
     m_resetAction->setEnabled(false);
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
     createMenuAction();
+
+    m_running = cg.readEntry("running", false);
+    QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
+    int tmpSeconds = cg.readEntry("seconds", 0) - startedAt.secsTo(QDateTime::currentDateTime());
+    if (tmpSeconds > 0){
+        m_seconds = tmpSeconds;
+        m_running = true;
+        startTimer();
+    }
 }
 
 void Timer::createMenuAction()
@@ -241,9 +251,21 @@ void Timer::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *)
     }
 }
 
+void Timer::saveTimer()
+{
+    KConfigGroup cg = config();
+    cg.writeEntry("running", m_running);
+    cg.writeEntry("startedAt", QDateTime::currentDateTime());
+    cg.writeEntry("seconds", m_seconds);
+
+    emit configNeedsSaving();
+}
+
 void Timer::startTimer()
 {
     m_running = true;
+
+    saveTimer();
 
     timer.start(1000);
 
@@ -256,6 +278,8 @@ void Timer::stopTimer()
 {
     m_running = false;
 
+    saveTimer();
+
     timer.stop();
 
     m_startAction->setEnabled(true);
@@ -265,6 +289,8 @@ void Timer::stopTimer()
 void Timer::resetTimer()
 {
     stopTimer();
+
+    saveTimer();
 
     m_seconds = 0;
     m_resetAction->setEnabled(false);

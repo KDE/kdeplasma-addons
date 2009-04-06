@@ -61,6 +61,8 @@ class Timer : public Plasma::Applet
         void startTimerFromAction();
 
     private:
+        void saveTimer();
+
         int m_seconds;
         bool m_running;
 
