@@ -53,14 +53,16 @@ class WeatherStation : public Plasma::PopupApplet
 
         void setWind(const Conversion::Value& speed, const QString& direction);
         void setPressure(const QString& condition, const Conversion::Value& pressure,
-                         const QString& tendency, const Conversion::Value& temperature);
+                         const QString& tendency, const Conversion::Value& temperature,
+                         double latitude, double longitude);
         void setTemperature(const Conversion::Value& temperature);
         void setHumidity(QString humidity);
 
         QString fitValue(const Conversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
         QStringList fromPressure(const Conversion::Value& pressure, qreal tendency,
-                                 const Conversion::Value& temperature);
+                                 const Conversion::Value& temperature,
+                                 double latitude, double longitude);
         qreal tendency(const Conversion::Value& pressure, const QString& tendency);
 
     private:
@@ -69,6 +71,7 @@ class WeatherStation : public Plasma::PopupApplet
         WeatherConfig *m_weatherConfig;
         Plasma::DataEngine *m_weatherEngine;
         Plasma::DataEngine *m_locationEngine;
+        Plasma::DataEngine *m_solarpositionEngine;
         QString m_temperatureUnit;
         QString m_speedUnit;
         QString m_pressureUnit;
