@@ -45,7 +45,9 @@ ScrollBar::~ScrollBar()
 
 void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
 {
-    Plasma::ScrollBar::wheelEvent(event);
+    if (isVisible()) {
+        Plasma::ScrollBar::wheelEvent(event);
+    }
 }
 
 } // namespace Lancelot
