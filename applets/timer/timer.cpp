@@ -107,12 +107,15 @@ void Timer::init()
     createMenuAction();
 
     m_running = cg.readEntry("running", false);
-    QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
-    int tmpSeconds = cg.readEntry("seconds", 0) - startedAt.secsTo(QDateTime::currentDateTime());
-    if (tmpSeconds > 0){
-        m_seconds = tmpSeconds;
-        m_running = true;
-        startTimer();
+    if (m_running){
+        QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
+        int tmpSeconds = cg.readEntry("seconds", 0) - startedAt.secsTo(QDateTime::currentDateTime());
+        if (tmpSeconds > 0){
+            m_seconds = tmpSeconds;
+            startTimer();
+        }
+    }else{
+        m_seconds = cg.readEntry("seconds", 0);
     }
 }
 
