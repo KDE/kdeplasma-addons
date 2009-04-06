@@ -11,6 +11,7 @@ Comment[sv]=Lancelot-meny
 Comment[uk]=Меню Lancelot
 Comment[x-test]=xxLancelot Menuxx
 Comment[zh_CN]=Lancelot 菜单
+Comment[zh_TW]=Lancelot 選單
 Version=1
 
 [Event/UsageLoggingOn]
@@ -22,6 +23,7 @@ Name[pt_BR]=O registo de utilizações está activo
 Name[sv]=Användingsloggning är aktiverad
 Name[uk]=Задіяно використання журналу
 Name[x-test]=xxUsage logging is activatedxx
+Name[zh_TW]=使用紀錄已啟動
 Comment=Shown only on first launch. Notifies that the usage logging is turned 'on'.
 Comment[ga]=Taispeántar é seo ag an chéad tosú amháin. Cuireann sé in iúl go bhfuil logáil úsáide faoi shiúl.
 Comment[nds]=Bloots bi den eersten Oproop wiest. Bescheed dor över, dat Bruuk-Logbook is nu anmaakt.
@@ -30,4 +32,5 @@ Comment[pt_BR]=Mostrar apenas no primeiro lançamento. Notifica que o registo de
 Comment[sv]=Visas bara vid första start. Underrättar om att användningsloggning är aktiverad.
 Comment[uk]=Буде показано лише під час першого запуску. Сповіщає про те, що увімкнено запис до журналу.
 Comment[x-test]=xxShown only on first launch. Notifies that the usage logging is turned 'on'.xx
+Comment[zh_TW]=只在第一次啟動時顯示。通知使用紀錄已開啟。
 Action=Popup

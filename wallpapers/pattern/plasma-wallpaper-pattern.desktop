@@ -5,6 +5,7 @@ Name[pt_BR]=Padrão
 Name[sv]=Mönster
 Name[uk]=Візерунок
 Name[x-test]=xxPatternxx
+Name[zh_TW]=樣式
 Type=Service
 Icon=preferences-desktop-pattern
 ServiceTypes=Plasma/Wallpaper
