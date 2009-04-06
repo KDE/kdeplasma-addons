@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>predefinedTimersConfig</class>
- <widget class="QWidget" name="predefinedTimersConfig" >
-  <property name="geometry" >
+ <widget class="QWidget" name="predefinedTimersConfig">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,12 +10,16 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Timer Configuration</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="KEditListBox" name="defaulttimers" />
+    <widget class="KEditListBox" name="defaulttimers">
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
