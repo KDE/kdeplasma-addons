@@ -89,15 +89,14 @@ void WeatherWallpaper::save(KConfigGroup & config)
         config.writeEntry("ion", m_activeIon);
         if (!m_extraData[m_activePlace].isEmpty()) {
             config.writeEntry("data", m_extraData[m_activePlace]);
-            kDebug() << "Saved active place:" << m_extraData[m_activePlace];
         }
 
-        // Write out config options
-        config.writeEntry("updateWeather", m_weatherUpdateTime);
         getWeather();
     } else {
           kDebug() << "Nothing got saved apparently";
     }
+
+    config.writeEntry("updateWeather", m_weatherUpdateTime);
 }
 
 void WeatherWallpaper::configWidgetDestroyed()
@@ -127,14 +126,15 @@ QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
         locationsUi.pluginComboList->setCurrentIndex(locationsUi.pluginComboList->findData(m_activeIon));
     }
 
+    locationsUi.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
+    locationsUi.weatherUpdateSpin->setValue(m_weatherUpdateTime);
+    locationsUi.validatedPlaceLabel->setText(m_activePlace);
+
     connect(locationsUi.validateButton, SIGNAL(clicked()), this, SLOT(getValidation()));
     connect(locationsUi.locationEdit, SIGNAL(textChanged(const QString &)), this, SLOT(placeEditChanged(const QString &)));
     connect(locationsUi.pluginComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(pluginIndexChanged(int)));
     connect(locationsUi.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
-
-    locationsUi.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
-    locationsUi.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    locationsUi.validatedPlaceLabel->setText(m_activePlace);
+    connect(locationsUi.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(spinValueChanged(int)));
 
     return m_configWidget;
 }
@@ -420,6 +420,11 @@ void WeatherWallpaper::getValidation()
         m_activeValidation = QString("%1|validate|%2").arg(ion).arg(checkPlace);
         weatherEngine->connectSource(m_activeValidation, this);
     }
+}
+
+void WeatherWallpaper::spinValueChanged(int interval)
+{
+    m_weatherUpdateTime = interval;
 }
 
 void WeatherWallpaper::addPlace()

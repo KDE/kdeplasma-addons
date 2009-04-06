@@ -59,6 +59,7 @@ public slots:
     void save(KConfigGroup & config);
 
 protected slots:
+    void spinValueChanged(int interval);
     void updateBackground(const QImage &img);
     void updateFadedImage(qreal frame);
     void configWidgetDestroyed();
