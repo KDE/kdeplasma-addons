@@ -84,7 +84,6 @@ class ChooseStripNumDialog : public KDialog
             numInput->setRange( min, max );
             numInput->setEditFocus( true );
             numInput->setSliderEnabled( true );
-            numInput->setValue( current );
 
             QLabel *label = new QLabel( i18n( "&Strip Number:" ), widget );
             label->setBuddy( numInput );

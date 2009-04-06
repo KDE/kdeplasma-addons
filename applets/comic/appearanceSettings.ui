@@ -234,6 +234,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_arrows</tabstop>
+  <tabstop>pushButton_Size</tabstop>
+  <tabstop>checkBox_title</tabstop>
+  <tabstop>checkBox_identifier</tabstop>
+  <tabstop>checkBox_author</tabstop>
+  <tabstop>checkBox_url</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

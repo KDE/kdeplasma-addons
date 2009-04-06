@@ -486,6 +486,18 @@
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>comboBox_comic</tabstop>
+  <tabstop>pushButton_GHNS</tabstop>
+  <tabstop>checkBox_middle</tabstop>
+  <tabstop>checkBox_useTabs</tabstop>
+  <tabstop>listView_comic</tabstop>
+  <tabstop>pushButton_GHNS_2</tabstop>
+  <tabstop>checkBox_middle_2</tabstop>
+  <tabstop>checkBox_useTabs_2</tabstop>
+  <tabstop>checkBox_hideTabBar</tabstop>
+  <tabstop>timeEdit_tabs</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
