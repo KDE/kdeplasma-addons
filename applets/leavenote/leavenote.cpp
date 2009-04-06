@@ -90,7 +90,7 @@ void LeaveNote::init()
     connect(mTextEdit, SIGNAL(textChanged()), SLOT(slotLimitMessageLength()));
 
     mSendButton = new Plasma::PushButton(this);
-    mSendButton->setText(i18n("Send"));
+    mSendButton->setText(i18nc("leave a note to the user that is using the computer", "Leave Note"));
     mSendButton->setStyleSheet("background: rgba( 220, 220, 220, 30% )");
     mSendButton->nativeWidget()->setAutoFillBackground(false);
     connect(mSendButton, SIGNAL(clicked()), SLOT(slotSend()));
