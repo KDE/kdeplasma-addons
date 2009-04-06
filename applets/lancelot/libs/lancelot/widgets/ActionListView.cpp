@@ -147,6 +147,9 @@ void ActionListViewItemFactory::reload() //>
     while (m_items.size() > m_model->size()) {
         kDebug() << "deleting one";
         ActionListViewItem * item = m_items.takeLast();
+        if (m_selectedItem == item) {
+            m_selectedItem = NULL;
+        }
         item->hide();
         item->deleteLater();
     }
@@ -413,7 +416,11 @@ void ActionListViewItemFactory::modelItemDeleted(int index) //>
         // a full reload
         reload();
     } else {
-        delete m_items.takeAt(index);
+        ActionListViewItem * item = m_items.takeAt(index);
+        if (m_selectedItem == item) {
+            m_selectedItem = NULL;
+        }
+        delete item;
         emit itemDeleted(index);
     }
 } //<
