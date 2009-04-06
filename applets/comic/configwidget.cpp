@@ -93,14 +93,11 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     mModel = new ComicModel( mEngine->query( "providers" ), this );
     mProxyModel = new QSortFilterProxyModel( this );
     mProxyModel->setSourceModel( mModel );
+    mProxyModel->setFilterCaseSensitivity( Qt::CaseInsensitive );
     mProxyModel->sort( 0, Qt::AscendingOrder );
 
     comicUi.comboBox_comic->setModel( mProxyModel );
     comicUi.listView_comic->setModel( mProxyModel );
-
-    if ( mModel->rowCount() < 1 ) {
-        QTimer::singleShot( 0, this, SLOT( getNewStuff() ) );
-    }
 }
 
 ConfigWidget::~ConfigWidget()
