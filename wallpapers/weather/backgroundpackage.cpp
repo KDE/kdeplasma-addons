@@ -257,7 +257,7 @@ QString BackgroundPackage::title() const
     QString title = md.name();
     if (title.isEmpty()) {
         title = md.pluginName();
-        title.replace("_", " ");
+        title.replace('_', ' ');
     }
     return title;
 }
