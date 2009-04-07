@@ -68,7 +68,7 @@ class NotesTextEdit : public KTextEdit {
         void scrolledDown();
 
     public slots:
-	virtual void saveToFile();
+        virtual void saveToFile();
 };
 
 /**

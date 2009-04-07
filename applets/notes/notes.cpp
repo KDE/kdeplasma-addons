@@ -58,6 +58,7 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
     popup->exec(event->globalPos());
     delete popup;
 }
+
 /**
  * Add to mousePressEvent a signal to change the edited line's background color
  */
@@ -67,6 +68,7 @@ void NotesTextEdit::mousePressEvent ( QMouseEvent * event )
     if(event->button()== Qt::LeftButton)
       emit cursorMoved();
 }
+
 /**
  * Same as mousePressEvent
  */
@@ -84,8 +86,8 @@ void NotesTextEdit::keyPressEvent ( QKeyEvent * event )
 }
 
 /**
- * Scale text on wheel scrolling with control pressed
- */
+* Scale text on wheel scrolling with control pressed
+*/
 void NotesTextEdit::wheelEvent ( QWheelEvent * event )
 {
     if (event->modifiers() & Qt::ControlModifier ) {
@@ -111,6 +113,7 @@ void NotesTextEdit::leaveEvent ( QEvent * event )
   KTextEdit::leaveEvent(event);
   emit mouseUnhovered();
 }
+
 /**
  * Use notesTextEdit as native widget instead of KTextEdit
  */
@@ -162,6 +165,7 @@ void NotesTextEdit::saveToFile()
     out << toPlainText();
     file.close();
 }
+
 /**
 * remove the background color of the last line edited when leaving
 */
@@ -238,6 +242,7 @@ void Notes::init()
     addColor("green", i18n("Green"));
     addColor("blue", i18n("Blue"));
     addColor("pink", i18n("Pink"));
+    addColor("translucent", i18n("Translucent"));
     QAction *separator = new QAction(this);
     separator->setSeparator(true);
     m_colorActions.append(separator);
@@ -248,8 +253,11 @@ void Notes::init()
     m_color = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
     m_textColor = cg.readEntry("textColor", QColor(Qt::black));
-    m_textBackgroundColor = cg.readEntry("textbBackgroundColor", QColor(Qt::yellow));
+    m_textBackgroundColor = cg.readEntry("textBackgroundColor", QColor(Qt::transparent));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
+    QPalette palette = m_textEdit->nativeWidget()->palette();
+    palette.setColor(QPalette::Text, m_textColor);
+    m_textEdit->nativeWidget()->setPalette(palette);
 
     QString text = cg.readEntry("autoSave", QString());
     if (!text.isEmpty()) {
@@ -272,6 +280,7 @@ void Notes::init()
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
+
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
     connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
@@ -506,6 +515,9 @@ void Notes::configAccepted()
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
         m_textEdit->nativeWidget()->setTextCursor(textCursor);
+        QPalette palette = m_textEdit->nativeWidget()->palette();
+        palette.setColor(QPalette::Text, m_textColor);
+        m_textEdit->nativeWidget()->setPalette(palette);
     }
 
     if (m_useNoColor != ui.useNoColor->isChecked()) {
@@ -522,8 +534,6 @@ void Notes::configAccepted()
         QList<QTextEdit::ExtraSelection> extras;
         extras << textxtra;
         m_textEdit->nativeWidget()->setExtraSelections( extras );
-
-        update();
     }
 
     QColor newBackgroundColor = ui.textBackgroundColorButton->color();
