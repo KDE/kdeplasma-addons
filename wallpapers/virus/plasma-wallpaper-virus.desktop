@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Service
+Name=Virus
+Name[et]=Viirus
+Name[pt]=Vírus
+Name[pt_BR]=Vírus
+Name[uk]=Вірус
+Name[x-test]=xxVirusxx
+Icon=image-jpeg
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_virus
+X-KDE-PluginInfo-Author=Beat Wolf
+X-KDE-PluginInfo-Email=asraniel@fryx.ch
+X-KDE-PluginInfo-Name=virus
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
