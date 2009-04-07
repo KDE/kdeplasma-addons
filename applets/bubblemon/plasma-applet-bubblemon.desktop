@@ -1,0 +1,32 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Bubblemon
+Name[et]=Mullimonitor
+Name[x-test]=xxBubblemonxx
+Name[zh_TW]=泡泡監視器
+Comment=A pretty bubble that monitors your system
+Comment[es]=Una bonita burbuja que supervisa su sistema
+Comment[et]=Kena mull, mis jälgib süsteemi
+Comment[fr]=Une jolie bulle pour la surveillance de votre système
+Comment[nds]=En smuck Blaas, de Dien Systeem bekieken deit
+Comment[pt]=Uma bonita bolha que monitoriza o seu sistema
+Comment[pt_BR]=Uma bonita bolha que monitoriza o seu sistema
+Comment[sv]=En snygg bubbla som övervakar systemet
+Comment[tr]=Sisteminizi izleyen güzel bir balon
+Comment[uk]=Гарненька бульбашка, яка спостерігає за вашою системою
+Comment[x-test]=xxA pretty bubble that monitors your systemxx
+Comment[zh_TW]=漂亮的泡泡，監視您的系統
+ServiceTypes=Plasma/Applet
+Type=Service
+Icon=utilities-system-monitor
+
+X-KDE-Library=plasma_applet_bubblemon
+X-KDE-PluginInfo-Author=Trever Fischer
+X-KDE-PluginInfo-Email=wm161@wm161.net
+X-KDE-PluginInfo-Name=bubblemon
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=System Information
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
