@@ -113,9 +113,16 @@ void Timer::init()
         if (tmpSeconds > 0){
             m_seconds = tmpSeconds;
             startTimer();
+        }else{
+            //TODO: We should notify user about expired timer
+            m_running = false;
         }
     }else{
         m_seconds = cg.readEntry("seconds", 0);
+        if (m_seconds){
+            m_startAction->setEnabled(true);
+            m_resetAction->setEnabled(true);
+        }
     }
 }
 

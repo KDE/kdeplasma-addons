@@ -6,22 +6,58 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>398</width>
-    <height>156</height>
+    <width>497</width>
+    <height>246</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Appearance</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" rowspan="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>10</width>
+       <height>50</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
     <widget class="QCheckBox" name="showTitleCheckBox">
      <property name="text">
       <string>Show Title</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="3">
     <widget class="KLineEdit" name="titleLineEdit"/>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="checkBox">
+     <property name="text">
+      <string>Hide seconds</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
@@ -34,27 +70,13 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QCheckBox" name="showMessageCheckBox">
-     <property name="text">
-      <string>Show a message</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
+   <item row="5" column="3">
     <widget class="KLineEdit" name="messageLineEdit"/>
    </item>
-   <item row="3" column="0">
-    <widget class="QCheckBox" name="runCommandCheckBox">
-     <property name="text">
-      <string>Run a command</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
+   <item row="6" column="3">
     <widget class="KLineEdit" name="commandLineEdit"/>
    </item>
-   <item row="4" column="1">
+   <item row="7" column="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -66,6 +88,20 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="showMessageCheckBox">
+     <property name="text">
+      <string>Show a message</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QCheckBox" name="runCommandCheckBox">
+     <property name="text">
+      <string>Run a command</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
