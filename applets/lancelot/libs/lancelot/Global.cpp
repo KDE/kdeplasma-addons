@@ -18,6 +18,7 @@
  */
 
 #include "Global.h"
+#include "Global_p.h"
 #include "widgets/Widget.h"
 #include "widgets/BasicWidget.h"
 #include <KGlobal>
@@ -29,63 +30,40 @@ namespace Lancelot
 {
 
 // Group
-class WidgetGroup::Private {
-public:
-    Private()
-      : confGroupTheme(NULL), instance(NULL), name(QString()), backgroundSvg(NULL),
-        ownsBackgroundSvg(false), loaded(false)
+WidgetGroup::Private::Private()
+    : confGroupTheme(NULL), instance(NULL), name(QString()), backgroundSvg(NULL),
+      ownsBackgroundSvg(false), loaded(false)
        // TODO : Add caching?
        //cachedBackgroundNormal(NULL), cachedBackgroundActive(NULL), cachedBackgroundDisabled(NULL)
-    {}
+{}
 
-    ~Private()
-    {
-        delete confGroupTheme;
-        if (ownsBackgroundSvg) {
-            delete backgroundSvg;
-        }
-        //delete d->cachedBackgroundNormal;
-        //delete d->cachedBackgroundActive;
-        //delete d->cachedBackgroundDisabled;
+WidgetGroup::Private::~Private()
+{
+    delete confGroupTheme;
+    if (ownsBackgroundSvg) {
+        delete backgroundSvg;
     }
+    //delete d->cachedBackgroundNormal;
+    //delete d->cachedBackgroundActive;
+    //delete d->cachedBackgroundDisabled;
+}
 
-    KConfigGroup * confGroupTheme;
+void WidgetGroup::Private::copyFrom(WidgetGroup::Private * d)
+{
+    if (this == d) return;
 
-    Instance * instance;
+    properties = d->properties;
+    int_properties = d->int_properties;
 
-    QString name;
-    QMap < QString, QVariant > properties;
+    foregroundColor = d->foregroundColor;
+    backgroundColor = d->backgroundColor;
 
-    // TODO: rename when finished removing
-    // QString properties
-    QMap < int, QVariant > int_properties;
-
-    QList < Widget * > widgets;
-
-    ColorScheme foregroundColor;
-    ColorScheme backgroundColor;
-    Plasma::FrameSvg * backgroundSvg;
-
-    bool ownsBackgroundSvg : 1;
-    bool loaded : 1;
-
-    void copyFrom(WidgetGroup::Private * d)
-    {
-        if (this == d) return;
-
-        properties = d->properties;
-        int_properties = d->int_properties;
-
-        foregroundColor = d->foregroundColor;
-        backgroundColor = d->backgroundColor;
-
-        if (ownsBackgroundSvg) {
-            delete backgroundSvg;
-        }
-        backgroundSvg = d->backgroundSvg;
-        ownsBackgroundSvg = false;
+    if (ownsBackgroundSvg) {
+        delete backgroundSvg;
     }
-};
+    backgroundSvg = d->backgroundSvg;
+    ownsBackgroundSvg = false;
+}
 
 WidgetGroup::WidgetGroup(Instance * instance, QString name)
     : d(new Private())
@@ -272,46 +250,66 @@ void WidgetGroup::notifyUpdated()
 
 // Instance
 
-class Instance::Private {
-public:
-    Private()
-      : processGroupChanges(false),
-        confMain(NULL),
-        confTheme(NULL)
-    {}
-
-    ~Private()
-    {
-    }
-
-    static bool hasApplication;
-
-    // TODO: Warning! When threading comes around this approach will break...
-    // it'll need mutexes, or something else...
-    static Instance * activeInstance;
-    static QList < Instance * > activeInstanceStack;
-    static QMutex activeInstanceLock;
-
-    QList< Widget * > widgets;
-    QMap < QString, WidgetGroup * > groups;
-
-    bool processGroupChanges : 1;
-    KConfig * confMain;
-    KConfig * confTheme;
-
-    void loadAllGroups()
-    {
-        qDebug() << "Instance::Private::loadAllGroups()";
-        foreach(WidgetGroup * group, groups) {
-            group->load(true);
-        }
-    }
-};
-
 Instance * Instance::Private::activeInstance = NULL;
 QList < Instance * > Instance::Private::activeInstanceStack;
 QMutex Instance::Private::activeInstanceLock(QMutex::Recursive);
 bool Instance::Private::hasApplication = false;
+
+Instance::Private::Private()
+      : processGroupChanges(false),
+        confMain(NULL),
+        confTheme(NULL)
+{
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
+            this, SLOT(themeChanged()));
+}
+
+Instance::Private::~Private()
+{
+}
+
+void Instance::Private::createConfTheme()
+{
+    QString app = KGlobal::mainComponent().componentName();
+    if (app == "lancelot") {
+        app = "";
+    } else {
+        app += '-';
+    }
+
+    delete confTheme;
+    qDebug() << "What is the plasma theme: " << Plasma::Theme::defaultTheme()->themeName();
+    QString search = "desktoptheme/" +
+            Plasma::Theme::defaultTheme()->themeName()
+            + "/lancelot/" + app + "theme.config";
+    qDebug() << "Trying:" << search;
+
+    QString path =  KStandardDirs::locate( "data", search );
+    if (path.isEmpty()) {
+        search = "desktoptheme/default/lancelot/theme.config";
+        path =  KStandardDirs::locate( "data", search );
+    }
+    if (path.isEmpty()) {
+        path = "lancelotrc";
+    }
+
+    qDebug() << "Using theme:" << path;
+    confTheme = new KConfig(path);
+}
+
+void Instance::Private::themeChanged()
+{
+    createConfTheme();
+    loadAllGroups();
+}
+
+void Instance::Private::loadAllGroups()
+{
+    qDebug() << "Instance::Private::loadAllGroups()";
+    foreach(WidgetGroup * group, groups) {
+        group->load(true);
+    }
+}
 
 Instance * Instance::activeInstance()
 {
@@ -351,38 +349,18 @@ bool Instance::isActivated()
 }
 
 Instance::Instance()
-  : d(new Private)
+  : d(new Private())
 {
-    QString app = KGlobal::mainComponent().componentName();
-    if (app == "lancelot") {
-        app = "";
-    } else {
-        app += '-';
-    }
 
-    d->confMain = new KConfig("lancelot" + app + "rc");
+    d->confMain = new KConfig("lancelotrc");
 
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(true);
-    qDebug() << "What is the plasma theme: " << Plasma::Theme::defaultTheme()->themeName();
-    QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() + "/lancelot/" + app + "theme.config";
-    qDebug() << "Trying:" << search;
-
-    QString path =  KStandardDirs::locate( "data", search );
-    if (path.isEmpty()) {
-        search = "desktoptheme/default/lancelot/theme.config";
-        path =  KStandardDirs::locate( "data", search );
-    }
-    if (path.isEmpty()) {
-        path = "lancelotrc";
-    }
-
-    qDebug() << "Using theme:" << path;
-    d->confTheme = new KConfig(path);
+    d->createConfTheme();
 
     Instance::Private::activeInstance = this;
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
-            this, SLOT(activateAll()));
+            this, SLOT(themeChanged()));
 }
 
 Instance::~Instance()
