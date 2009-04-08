@@ -71,7 +71,7 @@ class WeatherStation : public Plasma::PopupApplet
         WeatherConfig *m_weatherConfig;
         Plasma::DataEngine *m_weatherEngine;
         Plasma::DataEngine *m_locationEngine;
-        Plasma::DataEngine *m_solarpositionEngine;
+        Plasma::DataEngine *m_timeEngine;
         QString m_temperatureUnit;
         QString m_speedUnit;
         QString m_pressureUnit;

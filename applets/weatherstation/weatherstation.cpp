@@ -73,7 +73,7 @@ void WeatherStation::init()
     setBackground();
 
     m_weatherEngine = dataEngine("weather");
-    m_solarpositionEngine = dataEngine("solarposition");
+    m_timeEngine = dataEngine("time");
     m_validator.setDataEngine(m_weatherEngine);
     setLCDIcon();
     connectToEngine();
@@ -295,16 +295,9 @@ QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, qrea
 
     p += tendency * 10; // This is completely unscientific so if anyone have a better formula for this :-)
 
-    bool moon;
-    if (m_solarpositionEngine->isValid()) {
-        Plasma::DataEngine::Data data = m_solarpositionEngine->query(
-                QString("%1|%2").arg(latitude).arg(longitude));
-        moon = data["Corrected Elevation"].toDouble() < 0.0;
-    } else {
-        // Moon 22:00 -> 6:00
-        moon = (((QDateTime::currentDateTime().time().hour() + 2) % 24) <= 8);
-    }
-    QString sunOrMoon = (moon) ? "moon" : "sun";
+    Plasma::DataEngine::Data data = m_timeEngine->query(
+            QString("Local|Solar|Latitude=%1|Longitude=%2").arg(latitude).arg(longitude));
+    QString sunOrMoon = (data["Corrected Elevation"].toDouble() < 0.0) ? "moon" : "sun";
     
     if (p > 103.0) {
         result << sunOrMoon;
