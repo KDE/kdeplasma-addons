@@ -1,11 +1,6 @@
 [Desktop Entry]
 Type=Service
 Name=Virus
-Name[et]=Viirus
-Name[pt]=Vírus
-Name[pt_BR]=Vírus
-Name[uk]=Вірус
-Name[x-test]=xxVirusxx
 Icon=image-jpeg
 ServiceTypes=Plasma/Wallpaper
 
