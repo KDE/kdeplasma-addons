@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Bubblemon
+Name[zh_TW]=泡泡監視器
 Comment=A pretty bubble that monitors your system
+Comment[sv]=En snygg bubbla som övervakar systemet
+Comment[uk]=Гарненька бульбашка, яка спостерігає за вашою системою
+Comment[zh_TW]=漂亮的泡泡，監視您的系統
 ServiceTypes=Plasma/Applet
 Type=Service
 Icon=utilities-system-monitor

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Service
 Name=Virus
+Name[uk]=Вірус
+Name[zh_TW]=病毒
 Icon=image-jpeg
 ServiceTypes=Plasma/Wallpaper
 
