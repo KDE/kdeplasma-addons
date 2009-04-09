@@ -76,8 +76,10 @@ class Alife : public QObject {
 
     void setImage(QImage image){
       m_image = image;
+      m_image_original = image;
       m_height = m_image.height();
       m_width = m_image.width();
+      m_max_attended = false;
     }
 
     void createViruses(int amount);
@@ -94,7 +96,10 @@ class Alife : public QObject {
     int m_height;
     int m_width;
 
+    bool m_max_attended;
+
     QImage m_image;
+    QImage m_image_original;
 };
 
 #endif

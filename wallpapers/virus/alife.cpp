@@ -18,6 +18,7 @@ Alife::Alife(){
     m_cells = 0;
     m_height = 0;
     m_width = 0;
+    m_max_attended = false;
 }
 
 Alife::~Alife(){
@@ -395,8 +396,18 @@ QPoint Alife::getNeighbour(int x, int y, int direction)
 //performance critical
 QImage Alife::virusMove()
 {
+    kDebug() << m_max_attended << m_livingCells.size() << m_maxViruses;
     if(m_livingCells.size() < m_startViruses / 3) {
 	createViruses(m_startViruses);
+    }
+
+    if(!m_max_attended && m_livingCells.size() > m_maxViruses / 2) {
+	m_max_attended = true;
+    }
+
+    if(m_max_attended && m_livingCells.size() < m_startViruses) {
+	m_image = m_image_original;
+	m_max_attended = false;
     }
 
     /*struct cell* myCell = m_livingCells.at(0);
