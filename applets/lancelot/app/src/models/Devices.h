@@ -61,8 +61,6 @@ private:
     void addDevice(const Solid::Device & device);
 
     Type m_filter;
-    //QMap < const Solid::StorageAccess *, QString> m_udis;
-    //QStringList m_devicesMounting;
 };
 
 } // namespace Models

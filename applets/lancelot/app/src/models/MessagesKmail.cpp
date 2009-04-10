@@ -23,6 +23,8 @@
 #include <KStandardDirs>
 #include <KDebug>
 
+#include "logger/Logger.h"
+
 #define CHECK_RUNNING_INTERVAL 5000
 
 namespace Models {
@@ -68,7 +70,9 @@ MessagesKmail::~MessagesKmail()
 void MessagesKmail::activate(int index)
 {
     if (m_dataValid) {
-        m_interface->selectFolder(itemAt(index).data.toString());
+        QString data = itemAt(index).data.toString();
+        Logger::instance()->log("kmail-model", data);
+        m_interface->selectFolder(data);
     }
 
     if (m_interface->isValid()) {

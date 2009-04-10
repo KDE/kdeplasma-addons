@@ -58,6 +58,7 @@
 #include "models/MessagesKmail.h"
 
 #include "models/BaseMergedModel.h"
+#include "logger/Logger.h"
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
 #include <lancelot/widgets/PopupMenu.h>
@@ -66,7 +67,6 @@
 #include <Plasma/LineEdit>
 #include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
-#include <KNotification>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500
@@ -173,25 +173,7 @@ LancelotWindow::LancelotWindow()
 
     connect(QApplication::instance(), SIGNAL(focusChanged(QWidget *, QWidget *)),
             this, SLOT(focusChanged(QWidget *, QWidget *)));
-
-    qDebug() << "creating the notification";
-    KNotification * notify = new KNotification("UsageLoggingOn", this);
-    notify->setText(i18n("Usage logging is activated."));
-    notify->setPixmap(KIcon("view-history").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
-    notify->setActions(QStringList(i18n("Configure")));
-    connect(notify, SIGNAL(activated(unsigned int)), this, SLOT(configureMenu()));
-    notify->sendEvent();
 }
-
-// void LancelotWindow::paintEvent(QPaintEvent * event)
-// {
-//     if (m_resizeDirection == None) {
-//         QGraphicsView::paintEvent(event);
-//     } else {
-//         QPainter p(this);
-//         p.fillRect(geometry(), Qt::black);
-//     }
-// }
 
 void LancelotWindow::drawBackground(QPainter * painter, const QRectF & rect)
 {
@@ -817,7 +799,6 @@ void LancelotWindow::loadConfig()
     }
 
     // Loading system buttons actions
-
     systemButtonActions[buttonSystem1] = m_configUi.systemButtonActions[m_configUi.buttonSystem1];
     systemButtonActions[buttonSystem2] = m_configUi.systemButtonActions[m_configUi.buttonSystem2];
     systemButtonActions[buttonSystem3] = m_configUi.systemButtonActions[m_configUi.buttonSystem3];
@@ -831,6 +812,11 @@ void LancelotWindow::loadConfig()
         i.key()->setIcon(Models::SystemActions::instance()->actionIcon(
                     i.value()));
     }
+
+    // Logging
+    qDebug() << "Trying to enable logging" <<
+        m_configUi.enableUsageStatistics();
+    Logger::instance()->setEnabled(m_configUi.enableUsageStatistics());
 }
 
 void LancelotWindow::lancelotContext()

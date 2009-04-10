@@ -29,6 +29,8 @@
 #include <KDebug>
 #include <KIcon>
 #include <KSycoca>
+
+#include "logger/Logger.h"
 // Applications
 
 namespace Models {
@@ -161,7 +163,9 @@ void Applications::activate(int index)
     if (index >= size()) return;
     if (index < m_submodels.size()) return;
 
-    new KRun(KUrl(m_items.at(index - m_submodels.size()).desktopFile), 0);
+    QString data = m_items.at(index - m_submodels.size()).desktopFile;
+    Logger::instance()->log("applications-model", data);
+    new KRun(KUrl(data), 0);
     ApplicationConnector::instance()->hide(true);
 }
 

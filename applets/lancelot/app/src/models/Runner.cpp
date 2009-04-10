@@ -24,6 +24,7 @@
 #include <KLocalizedString>
 #include <KStandardDirs>
 #include "FavoriteApplications.h"
+#include "logger/Logger.h"
 
 #include <plasma/abstractrunner.h>
 
@@ -140,7 +141,9 @@ void Runner::load()
 void Runner::activate(int index)
 {
     if (!valid) return;
-    m_runnerManager->run(itemAt(index).data.value< QStringList >().at(0));
+    QString data = itemAt(index).data.value< QStringList >().at(0);
+    Logger::instance()->log("run-model", data);
+    m_runnerManager->run(data);
     m_runnerManager->reset();
     changeLancelotSearchString(QString());
     hideLancelotWindow();

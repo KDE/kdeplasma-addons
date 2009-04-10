@@ -57,6 +57,8 @@ set(plasma_lancelot_models_SRCS
 
   models/Runner.cpp
   models/SystemActions.cpp
+
+  logger/Logger.cpp
 )
 
 # Lancelot application files

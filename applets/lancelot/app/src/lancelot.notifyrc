@@ -37,3 +37,8 @@ Comment[uk]=Буде показано лише під час першого за
 Comment[x-test]=xxShown only on first launch. Notifies that the usage logging is turned 'on'.xx
 Comment[zh_TW]=只在第一次啟動時顯示。通知使用紀錄已開啟。
 Action=Popup
+
+[Event/ErrorOpeningLog]
+Name=Error opening the log
+Comment=Failed to open the log file.
+Action=Popup

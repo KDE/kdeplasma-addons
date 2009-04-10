@@ -99,6 +99,8 @@ void LancelotConfig::loadConfig()
     setButtonData(buttonSystem1);
     setButtonData(buttonSystem2);
     setButtonData(buttonSystem3);
+
+    setEnableUsageStatistics(m_mainConfig.readEntry("enableUsageStatistics", true));
 }
 
 void LancelotConfig::saveConfig()
@@ -111,10 +113,12 @@ void LancelotConfig::saveConfig()
     m_mainConfig.writeEntry("systemButton2Action", systemButtonActions[buttonSystem2]);
     m_mainConfig.writeEntry("systemButton3Action", systemButtonActions[buttonSystem3]);
 
+    m_mainConfig.writeEntry("enableUsageStatistics", enableUsageStatistics());
+
     m_mainConfig.sync();
 }
 
-LancelotConfig::ActivationMethod LancelotConfig::activationMethod()
+LancelotConfig::ActivationMethod LancelotConfig::activationMethod() const
 {
     if (radioActivationClick->isChecked()) {
         return LancelotConfig::Click;
@@ -140,7 +144,7 @@ void LancelotConfig::setActivationMethod(LancelotConfig::ActivationMethod method
     }
 }
 
-bool LancelotConfig::appbrowserReset()
+bool LancelotConfig::appbrowserReset() const
 {
     return (checkAppBrowserReset->isChecked());
 }
@@ -150,7 +154,7 @@ void LancelotConfig::setAppbrowserReset(bool value)
     checkAppBrowserReset->setChecked(value);
 }
 
-bool LancelotConfig::appbrowserColumnLimitted()
+bool LancelotConfig::appbrowserColumnLimitted() const
 {
     return (radioAppBrowserTwoColumnLimit->isChecked());
 }
@@ -162,5 +166,15 @@ void LancelotConfig::setAppbrowserColumnLimitted(bool value)
     } else {
         radioAppBrowserNoColumnLimit->click();
     }
+}
+
+bool LancelotConfig::enableUsageStatistics() const
+{
+    return checkUsageStatisticsEnable->isChecked();
+}
+
+void LancelotConfig::setEnableUsageStatistics(bool value)
+{
+    checkUsageStatisticsEnable->setChecked(value);
 }
 

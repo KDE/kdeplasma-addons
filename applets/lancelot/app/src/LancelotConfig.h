@@ -44,14 +44,17 @@ public:
         NoClick = 2
     };
 
-    ActivationMethod activationMethod();
+    ActivationMethod activationMethod() const;
     void setActivationMethod(ActivationMethod method);
 
-    bool appbrowserColumnLimitted();
+    bool appbrowserColumnLimitted() const;
     void setAppbrowserColumnLimitted(bool value);
 
-    bool appbrowserReset();
+    bool appbrowserReset() const;
     void setAppbrowserReset(bool value);
+
+    bool enableUsageStatistics() const;
+    void setEnableUsageStatistics(bool value);
 
     QButtonGroup * qbgActivationMethod;
     QButtonGroup * qbgAppbrowserColumnLimit;

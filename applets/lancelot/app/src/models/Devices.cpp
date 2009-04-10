@@ -29,6 +29,8 @@
 #include <KDebug>
 #include <KIcon>
 
+#include "logger/Logger.h"
+
 #include <solid/device.h>
 #include <solid/deviceinterface.h>
 #include <solid/devicenotifier.h>
@@ -149,6 +151,8 @@ void Devices::activate(int index)
     if (index > size() - 1) return;
 
     QString udi = itemAt(index).data.toString();
+    Logger::instance()->log("devices-model", udi);
+
     setupDevice(udi, true);
 }
 

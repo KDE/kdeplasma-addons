@@ -30,6 +30,8 @@
 #include <KUrl>
 #include <KDebug>
 
+#include "logger/Logger.h"
+
 namespace Models {
 
 ApplicationConnector * ApplicationConnector::m_instance = NULL;
@@ -74,7 +76,10 @@ BaseModel::~BaseModel()
 
 void BaseModel::activate(int index)
 {
-    new KRun(KUrl(itemAt(index).data.toString()), 0);
+    QString data = itemAt(index).data.toString();
+
+    Logger::instance()->log("base-model", data);
+    new KRun(KUrl(data), 0);
     hideLancelotWindow();
 }
 

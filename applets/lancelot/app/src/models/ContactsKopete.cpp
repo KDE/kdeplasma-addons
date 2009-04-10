@@ -22,6 +22,8 @@
 #include <KStandardDirs>
 #include <KDebug>
 
+#include "logger/Logger.h"
+
 #define UPDATE_INTERVAL 15000
 #define CHECK_RUNNING_INTERVAL 5000
 
@@ -56,8 +58,9 @@ ContactsKopete::~ContactsKopete()
 void ContactsKopete::activate(int index)
 {
     if (m_kopeteRunning) {
-        // m_interface->sendMessage(title(index), "");
-        m_interface->openChat(title(index));
+        QString data = title(index);
+        Logger::instance()->log("kopete-model", data);
+        m_interface->openChat(data);
     } else {
         BaseModel::activate(index);
     }
