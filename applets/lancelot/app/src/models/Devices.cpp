@@ -62,27 +62,9 @@ void Devices::deviceRemoved(const QString & udi)
         const Item * item = & itemAt(i);
         if (item->data.toString() == udi) {
             removeAt(i);
-            // TODO: m_udis.removeAll(udi);
-            emit itemDeleted(i);
             return;
         }
     }
-
-    /*
-    QMutableListIterator<Item> i(m_items);
-    int index = 0;
-
-    while (i.hasNext()) {
-        Item & item = i.next();
-        if (item.data.toString() == udi) {
-            i.remove();
-            // TODO: m_udis.removeAll(udi);
-            emit itemDeleted(index);
-            return;
-        }
-        ++index;
-    }
-    */
 }
 
 void Devices::deviceAdded(const QString & udi)
@@ -92,7 +74,7 @@ void Devices::deviceAdded(const QString & udi)
 
 void Devices::addDevice(const Solid::Device & device)
 {
-    const Solid::StorageAccess * access = device.as<Solid::StorageAccess>();
+    const Solid::StorageAccess * access = device.as < Solid::StorageAccess > ();
 
     if (!access) return;
 
@@ -116,7 +98,6 @@ void Devices::addDevice(const Solid::Device & device)
         access, SIGNAL(accessibilityChanged(bool, const QString &)),
         this, SLOT(udiAccessibilityChanged(bool, const QString &))
     );
-    //m_udis[access] = device.udi();
 
     add(
         device.product(),
@@ -131,36 +112,16 @@ void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
     Q_UNUSED(accessible);
 
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
-    //if (!m_udis.contains(access)) {
-    //    return;
-    //}
 
     for (int i = size() - 1; i >= 0; i--) {
         Item * item = const_cast < Item * > (& itemAt(i));
         if (item->data.toString() == udi) {
             item->description = StringCoalesce(access->filePath(), i18n("Unmounted"));
-            emit itemDeleted(i);
+            emit itemAltered(i);
             return;
         }
     }
-
-    /*
-    QMutableListIterator<Item> i(m_items);
-    int index = 0;
-
-    while (i.hasNext()) {
-        Item & item = i.next();
-        if (item.data.toString() == udi) {
-            break;
-        }
-        ++index;
-    }
-
-    m_items[index].description = StringCoalesce(access->filePath(), i18n("Unmounted"));
-    emit itemAltered(index);
-    */
 }
-
 
 void Devices::load()
 {
@@ -188,22 +149,7 @@ void Devices::activate(int index)
     if (index > size() - 1) return;
 
     QString udi = itemAt(index).data.toString();
-    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
-
-    if (!access) return;
-
-    if (!access->isAccessible()) {
-        //m_devicesMounting << udi;
-        connect(access, SIGNAL(setupDone(Solid::ErrorType, QVariant, const QString &)),
-            this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
-        access->setup();
-        return;
-    }
-
-    //new KRun(KUrl(access->filePath()), 0);
-    KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
-
-    hideLancelotWindow();
+    setupDevice(udi, true);
 }
 
 bool Devices::hasContextActions(int index) const
@@ -218,8 +164,12 @@ void Devices::setContextActions(int index, Lancelot::PopupMenu * menu)
 
     QString udi = itemAt(index).data.toString();
     Solid::Device device(udi);
+    const Solid::StorageAccess * access = device.as < Solid::StorageAccess > ();
 
-    if (device.is<Solid::OpticalDisc>()) {
+    if (access->filePath().isEmpty()) {
+        menu->addAction(KIcon(device.icon()), i18n("Mount"))
+            ->setData(QVariant(1));
+    } else if (device.is < Solid::OpticalDisc > ()) {
         menu->addAction(KIcon("media-eject"), i18n("Eject"))
             ->setData(QVariant(0));
     } else {
@@ -235,8 +185,36 @@ void Devices::contextActivate(int index, QAction * context)
     }
 
     QString udi = itemAt(index).data.toString();
-    Solid::Device device(udi);
+    int data = context->data().toInt();
 
+    if (data == 0) {
+        tearDevice(udi);
+    } else if (data == 1) {
+        setupDevice(udi, false);
+    }
+}
+
+void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
+{
+    Q_UNUSED(error);
+    Q_UNUSED(errorData);
+
+    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
+    access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+
+    if (!access || !access->isAccessible()) {
+        KMessageBox::error(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
+        return;
+    }
+
+    qDebug() << "Device::setupDone()";
+    KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
+    hideLancelotWindow();
+}
+
+void Devices::tearDevice(const QString & udi)
+{
+    Solid::Device device(udi);
     if (device.is<Solid::OpticalDisc>()) {
         Solid::OpticalDrive *drive = device.parent().as<Solid::OpticalDrive>();
         drive->eject();
@@ -249,23 +227,23 @@ void Devices::contextActivate(int index, QAction * context)
     }
 }
 
-void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
+void Devices::setupDevice(const QString & udi, bool openAfterSetup)
 {
-    Q_UNUSED(error);
-    Q_UNUSED(errorData);
-    //m_devicesMounting.removeAll(udi);
+    Solid::StorageAccess * access = Solid::Device(udi).as < Solid::StorageAccess > ();
 
-    Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
-    access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+    if (!access) return;
 
-    if (!access || !access->isAccessible()) {
-        KMessageBox::error(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
+    if (!access->isAccessible()) {
+        if (openAfterSetup) {
+            connect(access, SIGNAL(setupDone(Solid::ErrorType, QVariant, const QString &)),
+                this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
+        }
+        access->setup();
         return;
+    } else if (openAfterSetup) {
+        KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
+        hideLancelotWindow();
     }
-
-    KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
-    hideLancelotWindow();
 }
-
 
 } // namespace Models

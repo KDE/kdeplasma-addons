@@ -50,6 +50,9 @@ private slots:
 
     void deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi);
 
+    void tearDevice(const QString & udi);
+    void setupDevice(const QString & udi, bool openAfterSetup);
+
 protected:
     void activate(int index);
     void load();
