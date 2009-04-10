@@ -70,7 +70,7 @@ void RecentDocuments::contextActivate(int index, QAction * context)
             // clearing the list
             foreach (QString file, QDir(m_dirPath).entryList(QDir::Files)) {
                 qDebug() << "deleting" << file <<
-                QFile::remove(m_dirPath + "/" + file);
+                QFile::remove(m_dirPath + '/' + file);
             }
             break;
     }

@@ -390,7 +390,7 @@ void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
     ui.validateButton->setEnabled(false);
 
     foreach(const QVariant& item, m_ionPlugins) {
-        QStringList pluginInfo = item.toString().split("|");
+        QStringList pluginInfo = item.toString().split('|');
         ui.pluginComboList->addItem(pluginInfo[0], pluginInfo[1]);
     }
     ui.pluginComboList->model()->sort(0, Qt::AscendingOrder);
@@ -549,7 +549,7 @@ bool WeatherApplet::isValidData(const QVariant &data)
 void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 {
     m_locationLabel->setText(data["Place"].toString());
-    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split("|"); // Get current time period of day
+    QStringList fiveDayTokens = data["Short Forecast Day 0"].toString().split('|'); // Get current time period of day
 
     if (fiveDayTokens.count() > 1) {
         // fiveDayTokens[3] = High Temperature
@@ -654,7 +654,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         darkColor.setAlphaF(0.5);
 
         for (int i = 0; i < data["Total Weather Days"].toInt(); i++) {
-            QStringList fiveDayTokens = data[QString("Short Forecast Day %1").arg(i)].toString().split("|");
+            QStringList fiveDayTokens = data[QString("Short Forecast Day %1").arg(i)].toString().split('|');
 
             if (fiveDayTokens.count() != 6) {
                 // We don't have the right number of tokens, abort trying
