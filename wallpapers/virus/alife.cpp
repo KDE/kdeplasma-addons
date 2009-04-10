@@ -396,7 +396,7 @@ QPoint Alife::getNeighbour(int x, int y, int direction)
 //performance critical
 QImage Alife::virusMove()
 {
-    kDebug() << m_max_attended << m_livingCells.size() << m_maxViruses;
+    //kDebug() << m_max_attended << m_livingCells.size() << m_maxViruses;
     if(m_livingCells.size() < m_startViruses / 3) {
 	createViruses(m_startViruses);
     }
@@ -405,19 +405,19 @@ QImage Alife::virusMove()
 	m_max_attended = true;
     }
 
-    if(m_max_attended && m_livingCells.size() < m_startViruses) {
+    if(m_max_attended && m_livingCells.size() < 4 * m_startViruses) {
 	m_image = m_image_original;
 	m_max_attended = false;
     }
-
-    /*struct cell* myCell = m_livingCells.at(0);
+/*
+    struct cell* myCell = m_livingCells.at(0);
     int pointer = 0;
     kDebug() << "start code";
     while(myCell->code[pointer] != 0 && pointer < VIRUS_GENOME_SIZE) {
         kDebug() << myCell->code[pointer++];
     }
-    kDebug() << "end code";*/
-
+    kDebug() << "end code";
+*/
     int cells = m_livingCells.size();
     for(int i = 0; i < cells; i++) {
         executeCell(i);
