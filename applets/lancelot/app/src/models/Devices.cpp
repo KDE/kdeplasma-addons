@@ -207,7 +207,6 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
         return;
     }
 
-    qDebug() << "Device::setupDone()";
     KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
     hideLancelotWindow();
 }
