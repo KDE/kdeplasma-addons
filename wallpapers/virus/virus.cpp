@@ -169,6 +169,9 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.m_maxCells->setValue(alife.getMaxViruses());
     connect(m_uiVirus.m_maxCells, SIGNAL(valueChanged(int)), this, SLOT(maxCellsChanged(int)));
 
+    m_uiVirus.m_updateInterval->setValue(alife.getUpdateInterval());
+    connect(m_uiVirus.m_updateInterval, SIGNAL(valueChanged(int)), this, SLOT(intervalChanged(int)));
+
     m_uiVirus.m_showCells->setChecked(alife.showCells());
     connect(m_uiVirus.m_showCells, SIGNAL(stateChanged(int)), this, SLOT(showCellsChanged(int)));
 
