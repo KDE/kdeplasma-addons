@@ -70,20 +70,9 @@ MarbleWallpaper::~MarbleWallpaper()
 
 void MarbleWallpaper::init(const KConfigGroup &config)
 {
-    m_map = new MarbleMap();
-
-    // Get default position from marble to initialize on first startup (empty config)
-    qreal lon;
-    qreal lat;
-    int zoom;
-    m_map->home(lon, lat, zoom);
-
     // Read settings
-    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(DontMove)));
+    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(Interactive)));
     m_mapTheme = config.readEntry(MAP_THEME_CONFIG_KEY, QString::fromLatin1("earth/bluemarble/bluemarble.dgml"));
-    m_positionDist = config.readEntry(POSITION_DISTANCE_CONFIG_KEY, 4500);
-    m_positionLon = config.readEntry(POSITION_LON_CONFIG_KEY, lon);
-    m_positionLat = config.readEntry(POSITION_LAT_CONFIG_KEY, lat);
     m_projection = static_cast<Projection>(config.readEntry(PROJECTION_CONFIG_KEY, static_cast<int>(Spherical)));
     m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_CONFIG_KEY, static_cast<int>(Normal)));
     m_rotationLat = config.readEntry(ROTATION_LAT_CONFIG_KEY, 0.0);
@@ -91,28 +80,44 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_CONFIG_KEY, 10000);
     m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_CONFIG_KEY, false);
 
-    // Set up the map
-    m_map->setMapThemeId(m_mapTheme);
-    m_map->setShowCompass(false);
-    m_map->setShowGrid(false);
-    m_map->setShowScaleBar(false);
-    m_map->sunLocator()->setCitylights(true);
-    m_map->sunLocator()->setShow(true);
-    m_map->centerOn(m_positionLon, m_positionLat);
-    m_map->setDistance(m_positionDist);
+    // Only on first start, otherwise opening the config dialog lets us lose the current position
+    if(!isInitialized()) {
+        m_map = new MarbleMap();
 
-    // Disable all render plugins except the "stars" plugin
-    foreach (RenderPlugin *item, m_map->renderPlugins()) {
-        if (item->nameId() == "stars") {
-            item->setVisible(true);
-            item->setEnabled(true);
-        } else {
-            item->setVisible(false);
-            item->setEnabled(false);
+        // Get default position from marble to initialize on first startup (empty config)
+        qreal lon;
+        qreal lat;
+        int zoom;
+        m_map->home(lon, lat, zoom);
+        m_positionDist = config.readEntry(POSITION_DISTANCE_CONFIG_KEY, 4500);
+        m_positionLon = config.readEntry(POSITION_LON_CONFIG_KEY, lon);
+        m_positionLat = config.readEntry(POSITION_LAT_CONFIG_KEY, lat);
+
+        // Disable all render plugins except the "stars" plugin
+        foreach (RenderPlugin *item, m_map->renderPlugins()) {
+            if (item->nameId() == "stars") {
+                item->setVisible(true);
+                item->setEnabled(true);
+            } else {
+                item->setVisible(false);
+                item->setEnabled(false);
+            }
         }
+
+        // Set up the map
+        m_map->setShowCompass(false);
+        m_map->setShowGrid(false);
+        m_map->setShowScaleBar(false);
+        m_map->sunLocator()->setCitylights(true);
+        m_map->sunLocator()->setShow(true);
+        m_map->centerOn(m_positionLon, m_positionLat);
+        m_map->setDistance(m_positionDist);
     }
 
+    m_map->setMapThemeId(m_mapTheme);
+    
     widgetChanged();
+    rotate();
 }
 
 QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
