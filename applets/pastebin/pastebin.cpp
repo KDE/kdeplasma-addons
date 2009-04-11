@@ -561,7 +561,7 @@ void Pastebin::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
     if (event->mimeData()->hasFormat("text/plain")) {
         event->acceptProposedAction();
     }
-    foreach (const QString f, event->mimeData()->formats()) {
+    foreach (const QString &f, event->mimeData()->formats()) {
         if (f.indexOf("image/") != -1) {
             istate = DraggedOver;
         }
