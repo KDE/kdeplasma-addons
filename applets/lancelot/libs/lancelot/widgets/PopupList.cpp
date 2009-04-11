@@ -204,8 +204,7 @@ void PopupList::timerEvent(QTimerEvent * event)
 void PopupList::updateSize()
 {
     d->list->resize(MENU_WIDTH, (d->list->list()->
-            itemFactory()->itemCount()) * ITEM_HEIGHT + 20);
-    // ^^^ 20 because Plasma::Dialog stopped working correctly
+            itemFactory()->itemCount()) * ITEM_HEIGHT);
 }
 
 void PopupList::exec(const QPoint & p)
