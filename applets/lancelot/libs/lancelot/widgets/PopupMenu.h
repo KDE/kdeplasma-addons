@@ -53,6 +53,7 @@ public:
     virtual ~PopupMenu();
 
     QAction * addAction(const QIcon & icon, const QString & title);
+    void addAction(QAction * action);
 
     QAction * exec(const QPoint & p, QAction * action = 0);
 

@@ -82,10 +82,12 @@ public:
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
 
-    void itemContext(ActionListViewItem * sender);
+    void itemContext(ActionListViewItem * sender,
+            bool mouseCoordinate = true);
     void itemDrag(ActionListViewItem * sender, QWidget * widget);
 
     void activateSelectedItem();
+    void contextForSelectedItem();
     void selectRelItem(int rel);
     void setSelectedItem(ActionListViewItem * item, bool selected = true);
     void activate(int index);

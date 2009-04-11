@@ -35,6 +35,7 @@ public:
     ~ActionsModel();
 
     QAction * addAction(const QIcon & icon, const QString & title);
+    void addAction(QAction * action);
 
     L_Override void activate(int index);
 
@@ -58,6 +59,11 @@ QAction * ActionsModel::addAction(const QIcon & icon, const QString & title)
             title, QString(), icon, QString()
        );
     return action;
+}
+
+void ActionsModel::addAction(QAction * action)
+{
+    m_actions << action;
 }
 
 void ActionsModel::activate(int index)
@@ -100,6 +106,11 @@ PopupMenu::PopupMenu(QWidget * parent, Qt::WindowFlags f)
 PopupMenu::~PopupMenu()
 {
     delete d;
+}
+
+void PopupMenu::addAction(QAction * action)
+{
+    d->model->addAction(action);
 }
 
 QAction * PopupMenu::addAction(const QIcon & icon, const QString & title)

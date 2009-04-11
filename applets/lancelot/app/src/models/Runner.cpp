@@ -153,7 +153,22 @@ bool Runner::hasContextActions(int index) const
 {
     if (!valid) return false;
     //kDebug() << m_items[index].data.value< QString >();
-    return (itemAt(index).data.value< QStringList >().at(1) == "Application");
+    if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
+        return true;
+    }
+
+    QString id = itemAt(index).data.value< QStringList >().at(0);
+    foreach (Plasma::QueryMatch match, m_runnerManager->matches()) {
+        if (match.id() == id) {
+            qDebug() << "Runner::hasContextActions() match.size" <<
+                m_runnerManager->actionsForMatch(match).size();
+            if (m_runnerManager->actionsForMatch(match).size() > 0) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void Runner::setContextActions(int index, Lancelot::PopupMenu * menu)
@@ -163,6 +178,15 @@ void Runner::setContextActions(int index, Lancelot::PopupMenu * menu)
     if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
         menu->addAction(KIcon("list-add"), i18n("Add to Favorites"))
             ->setData(QVariant(0));
+    }
+
+    QString id = itemAt(index).data.value< QStringList >().at(0);
+    foreach (Plasma::QueryMatch match, m_runnerManager->matches()) {
+        if (match.id() == id) {
+            foreach (QAction * action, m_runnerManager->actionsForMatch(match)) {
+                menu->addAction(action->icon(), action->text());
+            }
+        }
     }
 }
 

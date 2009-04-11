@@ -475,7 +475,8 @@ ExtenderPosition ActionListViewItemFactory::extenderPosition() const //>
     return m_extenderPosition;
 } //<
 
-void ActionListViewItemFactory::itemContext(ActionListViewItem * sender) //>
+void ActionListViewItemFactory::itemContext(
+        ActionListViewItem * sender, bool mouseCoordinate) //>
 {
     int index = m_items.indexOf(sender);
     if (index < 0 || index >= m_model->size() ||
@@ -484,9 +485,27 @@ void ActionListViewItemFactory::itemContext(ActionListViewItem * sender) //>
     }
 
     Lancelot::PopupMenu menu;
+    QPoint popupPoint;
     m_model->setContextActions(index, &menu);
-    m_model->contextActivate(index, menu.exec(QCursor::pos()));
+    if (!mouseCoordinate) {
+        QGraphicsScene * scene = sender->scene();
+        if (scene->views().size()) {
+            QGraphicsView * view = scene->views().at(0);
+            QPointF pos = sender->mapToScene(
+                    QPointF(sender->geometry().width() * 0.7, 0));
+            popupPoint = view->mapToGlobal(
+                view->mapFromScene(pos)
+            );
+        } else {
+            mouseCoordinate = true;
+        }
+    }
 
+    if (mouseCoordinate) {
+        popupPoint = QCursor::pos();
+    }
+
+    m_model->contextActivate(index, menu.exec(popupPoint));
 } //<
 
 void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * widget) //>
@@ -522,6 +541,17 @@ void ActionListViewItemFactory::activateSelectedItem() //>
 
     kDebug() << m_items.indexOf(m_selectedItem);
     activate(m_items.indexOf(m_selectedItem));
+} //<
+
+void ActionListViewItemFactory::contextForSelectedItem() //>
+{
+    kDebug() << (void *) m_selectedItem;
+    if (!m_selectedItem) {
+        return;
+    }
+
+    kDebug() << m_items.indexOf(m_selectedItem);
+    itemContext(m_selectedItem, false);
 } //<
 
 void ActionListViewItemFactory::clearSelection() //>
@@ -802,7 +832,11 @@ void ActionListView::keyPressEvent(QKeyEvent * event) //>
     kDebug() << event->key() << Qt::Key_Enter;
     if (event->key() == Qt::Key_Return ||
         event->key() == Qt::Key_Enter) {
-        d->itemFactory->activateSelectedItem();
+        if (event->modifiers() & Qt::AltModifier) {
+            d->itemFactory->contextForSelectedItem();
+        } else {
+            d->itemFactory->activateSelectedItem();
+        }
     } else if (event->key() == Qt::Key_Down) {
         d->itemFactory->selectRelItem(+1);
     } else if (event->key() == Qt::Key_Up) {
