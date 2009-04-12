@@ -110,6 +110,8 @@ protected:
     L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
 
+    void setPaintBackwardsWhenRTL(bool value);
+
 Q_SIGNALS:
     /**
      * This signal is emitted when the mouse cursor enters the widget

@@ -23,6 +23,7 @@
 #include "Global.h"
 #include <lancelot/lancelot.h>
 #include <KDebug>
+#include <QApplication>
 
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
@@ -34,13 +35,15 @@ public:
     Private()
       : group(NULL),
         hover(false),
-        down(false)
+        down(false),
+        paintBackwards(false)
     {
     };
 
     WidgetGroup * group;
     bool hover : 1;
     bool down : 1;
+    bool paintBackwards : 1;
 };
 
 Widget::Widget(QGraphicsItem * parent)
@@ -210,6 +213,7 @@ void Widget::paintBackground(QPainter * painter)
 void Widget::paintBackground(QPainter * painter, const QString & element)
 {
     if (!d->group) return;
+    bool rtl = QApplication::isRightToLeft();
 
     // Svg Background Painting
     if (Plasma::FrameSvg * svg = d->group->backgroundSvg()) {
@@ -218,7 +222,16 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
             svg->resizeFrame(size().toSize());
         }
         svg->clearCache();
+
+        if (rtl && d->paintBackwards) {
+            painter->translate(size().width(), 0);
+            painter->scale(-1, 1);
+        }
         svg->paintFrame(painter);
+        if (rtl && d->paintBackwards) {
+            painter->translate(size().width(), 0);
+            painter->scale(-1, 1);
+        }
 
         return;
     }
@@ -296,6 +309,11 @@ void Widget::hideEvent(QHideEvent * event)
     d->down = false;
     d->hover = false;
     QGraphicsWidget::hideEvent(event);
+}
+
+void Widget::setPaintBackwardsWhenRTL(bool value)
+{
+    d->paintBackwards = value;
 }
 
 

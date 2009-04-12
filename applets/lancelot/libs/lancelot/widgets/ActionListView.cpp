@@ -29,12 +29,9 @@ namespace Lancelot {
 ActionListViewItem::ActionListViewItem(ActionListViewItemFactory * factory)
     : ExtenderButton(), m_inSetSelected(false), m_factory(factory)
 {
-    //connect(this, SIGNAL(mouseHoverEnter()),
-    //        this, SLOT(select()));
-    //connect(this, SIGNAL(mouseHoverLeave()),
-    //        this, SLOT(deselect()));
     connect(this, SIGNAL(activated()),
             this, SLOT(select()));
+    // setPaintBackwardsWhenRTL(true);
     L_WIDGET_SET_INITIALIZED;
 }
 
