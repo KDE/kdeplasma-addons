@@ -20,6 +20,7 @@
 #include "BasicWidget.h"
 #include <KDebug>
 #include <KGlobalSettings>
+#include <QApplication>
 
 #include <cmath>
 #include "Global.h"
@@ -30,20 +31,6 @@
 #define WIDGET_PADDING 8
 
 #define max(A, B) ((A) >= (B)) ? (A) : (B)
-
-// macro for setting the left coordinate of items
-// relative to the parent and with alignment
-// taken into consideration
-#define setLeft(itemRect, parentRect, alignment) \
-    if ((parentRect).width() > (itemRect).width()) { \
-        if ((alignment) & Qt::AlignHCenter) \
-        (itemRect).moveLeft(WIDGET_PADDING + ((parentRect).width() - (itemRect).width()) / 2); \
-        else if ((alignment) & Qt::AlignRight) \
-        (itemRect).moveLeft(WIDGET_PADDING + (parentRect).width() - (itemRect).width()); \
-    } else { \
-        (itemRect).setWidth((parentRect).width()); \
-        (itemRect).moveLeft(WIDGET_PADDING); \
-    };
 
 namespace Lancelot
 {
@@ -159,9 +146,24 @@ void BasicWidget::paint(QPainter * painter,
     paintForeground(painter);
 }
 
+// macro for setting the left coordinate of items
+// relative to the parent and with alignment
+// taken into consideration
+#define setLeft(itemRect, parentRect, alignment) \
+    if ((parentRect).width() > (itemRect).width()) { \
+        if ((alignment) & Qt::AlignHCenter) \
+        (itemRect).moveLeft(WIDGET_PADDING + ((parentRect).width() - (itemRect).width()) / 2); \
+        else if ((alignment) & Qt::AlignRight) \
+        (itemRect).moveLeft(WIDGET_PADDING + (parentRect).width() - (itemRect).width()); \
+    } else { \
+        (itemRect).setWidth((parentRect).width()); \
+        (itemRect).moveLeft(WIDGET_PADDING); \
+    };
+
 void BasicWidget::paintForeground(QPainter * painter)
 {
     if (!L_WIDGET_IS_INITIALIZED) return;
+    bool rtl = QApplication::isRightToLeft();
 
     QPainter * _painter = painter;
 
@@ -183,11 +185,9 @@ void BasicWidget::paintForeground(QPainter * painter)
     painter->setPen(QPen(fgColor));
 
     QFont titleFont = painter->font();
-    // QFont descriptionFont = painter->font();
-    // descriptionFont.setPointSize(descriptionFont.pointSize() - 2);
     QFont descriptionFont = KGlobalSettings::smallestReadableFont();
 
-    QRectF widgetRect       = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
+    QRectF widgetRect     = QRectF(0, 0, size().width() - 2 * WIDGET_PADDING, size().height() - 2 * WIDGET_PADDING);
     QRectF iconRect;
 
     if (!d->icon.isNull() || d->iconInSvg.isValid()) {
@@ -212,6 +212,7 @@ void BasicWidget::paintForeground(QPainter * painter)
 
         // Modified setLeft macro for icon since we can not cut it if it's larger than needed
         // setLeft(iconRect, widgetRect, d->alignment);
+
         if (d->alignment & Qt::AlignHCenter) {
             iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - iconRect.width()) / 2);
         } else if (d->alignment & Qt::AlignRight) {
@@ -264,6 +265,7 @@ void BasicWidget::paintForeground(QPainter * painter)
                     Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine | Qt::ElideRight, d->description, false);
         }
     } else {
+        // Horizontal layout
         float /*left = WIDGET_PADDING,*/ width =
             iconRect.width() + fmaxf(titleRect.width(), descriptionRect.width()) +
             WIDGET_PADDING;
@@ -282,16 +284,36 @@ void BasicWidget::paintForeground(QPainter * painter)
         }
 
         if ((widgetRect.width() < width) || (d->alignment & Qt::AlignLeft)) {
-            iconRect.moveLeft(WIDGET_PADDING);
-            titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg.isValid()) ? iconRect.width() + WIDGET_PADDING : 0));
-            descriptionRect.setWidth(titleRect.width());
+            if (rtl) {
+                iconRect.moveRight(widgetRect.right() + WIDGET_PADDING);
+                titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg.isValid()) ? iconRect.width() + WIDGET_PADDING : 0));
+                descriptionRect.setWidth(titleRect.width());
+            } else {
+                iconRect.moveLeft(WIDGET_PADDING);
+                titleRect.setWidth(widgetRect.width() - ((!d->icon.isNull() || d->iconInSvg.isValid()) ? iconRect.width() + WIDGET_PADDING : 0));
+                descriptionRect.setWidth(titleRect.width());
+            }
         } else if (d->alignment & Qt::AlignHCenter) {
-            iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width) / 2);
-        } else
-            iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width));
+            if (rtl) {
+                iconRect.moveRight(WIDGET_PADDING + (widgetRect.width() + width) / 2);
+            } else {
+                iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width) / 2);
+            }
+        } else {
+            if (rtl) {
+                iconRect.moveRight(widgetRect.width() - WIDGET_PADDING - (widgetRect.width() - width));
+            } else {
+                iconRect.moveLeft(WIDGET_PADDING + (widgetRect.width() - width));
+            }
+        }
 
-        titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
-        descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
+        if (rtl) {
+            titleRect.moveRight(- WIDGET_PADDING + iconRect.left());
+            descriptionRect.moveRight(- WIDGET_PADDING + iconRect.left());
+        } else {
+            titleRect.moveLeft(WIDGET_PADDING + iconRect.right());
+            descriptionRect.moveLeft(WIDGET_PADDING + iconRect.right());
+        }
 
         if (!d->icon.isNull() || d->iconInSvg.isValid()) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
@@ -335,12 +357,22 @@ void BasicWidget::paintForeground(QPainter * painter)
         }
     }
 
-    QLinearGradient gradient = QLinearGradient(
-            QPointF(size().width() - WIDGET_PADDING - 20, 0),
-            QPointF(size().width() - WIDGET_PADDING, 0)
-            );
-    gradient.setColorAt(1, Qt::transparent);
-    gradient.setColorAt(0, Qt::black);
+    QLinearGradient gradient;
+    if (QApplication::isRightToLeft()) {
+        gradient = QLinearGradient(
+                QPointF(WIDGET_PADDING, 0),
+                QPointF(WIDGET_PADDING + 20, 0)
+                );
+        gradient.setColorAt(0, Qt::transparent);
+        gradient.setColorAt(1, Qt::black);
+    } else {
+        gradient = QLinearGradient(
+                QPointF(size().width() - WIDGET_PADDING - 20, 0),
+                QPointF(size().width() - WIDGET_PADDING, 0)
+                );
+        gradient.setColorAt(1, Qt::transparent);
+        gradient.setColorAt(0, Qt::black);
+    }
     painter->setCompositionMode(QPainter::CompositionMode_DestinationIn);
     painter->fillRect(
             0, 0, (int)size().width(), (int)size().height(),
