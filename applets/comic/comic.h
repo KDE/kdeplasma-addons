@@ -155,6 +155,7 @@ class ComicApplet : public Plasma::Applet
         //Tabs
         bool mUseTabs;
         bool mShowTabBar;
+        bool mSwitchTabs;
         int mSwitchTabTime;
         Plasma::TabBar *mTabBar;
         QStringList mTabIdentifier;

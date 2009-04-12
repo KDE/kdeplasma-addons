@@ -409,6 +409,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setTabSwitchTime( time );
     mConfigWidget->setHideTabBar( !mShowTabBar );
     mConfigWidget->setUseTabs( mUseTabs );
+    mConfigWidget->setSwitchTabs( mSwitchTabs );
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon(), i18n( "Press the \"Get New Comics ...\" button to install comics." ) );
@@ -439,6 +440,7 @@ void ComicApplet::applyConfig()
     mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
     mShowTabBar = !mConfigWidget->hideTabBar();
     mUseTabs = mConfigWidget->useTabs();
+    mSwitchTabs = mConfigWidget->switchTabs();
 
     slotStartTimer();
     updateTabBar();
@@ -511,11 +513,12 @@ void ComicApplet::loadConfig()
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
     mMaxSize = cg.readEntry( "maxSize", geometry().size() );
     mLastSize = mMaxSize;
-    mSwitchTabTime = cg.readEntry( "switchTabTime", 0 );
+    mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
     mShowTabBar = cg.readEntry( "showTabBar", true );
     mTabText = cg.readEntry( "tabText", QStringList( QString() ) );
     mComicTitle = mTabText.count() ? mTabText.at( 0 ) : QString();
     mUseTabs = cg.readEntry( "useTabs", false );
+    mSwitchTabs = cg.readEntry( "switchTabs", false );
 
     buttonBar();
 }
@@ -535,6 +538,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
     cg.writeEntry( "tabText", mTabText );
     cg.writeEntry( "useTabs", mUseTabs );
+    cg.writeEntry( "switchTabs", mSwitchTabs );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -586,7 +590,7 @@ void ComicApplet::slotReload()
 
 void ComicApplet::slotStartTimer()
 {
-    if ( mSwitchTabTime ) {
+    if ( mSwitchTabTime && mSwitchTabs ) {
         mReloadTimer->start( mSwitchTabTime * 1000 );
     } else {
         mReloadTimer->stop();

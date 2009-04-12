@@ -63,6 +63,8 @@ class ConfigWidget : public QWidget
         bool hideTabBar() const;
         void setUseTabs( bool use );
         bool useTabs() const;
+        void setSwitchTabs( bool switchTabs );
+        bool switchTabs() const;
         QStringList comicName() const;
 
         QWidget *comicSettings;
