@@ -66,6 +66,7 @@ MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args )
 MarbleWallpaper::~MarbleWallpaper()
 {
     delete m_map;
+    delete m_rotationTimer;
 }
 
 void MarbleWallpaper::init(const KConfigGroup &config)
