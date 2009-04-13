@@ -97,7 +97,7 @@ void Alife::resetCell(struct cell *temp)
 
 uchar Alife::randomCode()
 {
-    return qrand() % 19;
+    return qrand() % 20;
 }
 
 void Alife::executeCell(int id)
@@ -113,6 +113,8 @@ void Alife::executeCell(int id)
     int facing = 0; //looking in direction
     int reg = 0;
     int codePointer = 0;
+
+    bool better_eat = false; //eat more the next time a color is eaten
 
     bool stop = false;
     int max = 300;
@@ -148,27 +150,30 @@ void Alife::executeCell(int id)
             case 4:{ //eat red
                 int color = qRed(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = color / 10;
+                    int temp = qMin(color / (better_eat ? 5 : 10), color);
                     color -= temp;
                     cell->energy += temp;
+		    better_eat = false;
                 }
                 pixel = qRgb(color, qGreen(pixel), qBlue(pixel));
             }break;
             case 5:{ //eat green
                 int color = qGreen(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = color / 10;
+                    int temp = qMin(color / (better_eat ? 5 : 10), color);
                     color -= temp;
                     cell->energy += temp;
+		    better_eat = false;
                 }
                 pixel = qRgb(qRed(pixel), color, qBlue(pixel));
             }break;
             case 6:{ //eat blue
                 int color = qBlue(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = color / 10;
+                    int temp = qMin(color / (better_eat ? 5 : 10), color);
                     color -= temp;
                     cell->energy += temp;
+		    better_eat = false;
                 }
                 pixel = qRgb(qRed(pixel), qGreen(pixel), color);
             }break;
@@ -276,6 +281,9 @@ void Alife::executeCell(int id)
                 temp->energy += cell->energy / 2;
                 cell->energy /= 2;
             }break;
+	    case 19:{ //better eat
+		better_eat = true;
+	    }break;
             default:
               kDebug() << "wah" << cell->code[codePointer] << codePointer;
             break;
@@ -401,7 +409,7 @@ QImage Alife::virusMove()
 	createViruses(m_startViruses);
     }
 
-    if(!m_max_attended && m_livingCells.size() > m_maxViruses / 2) {
+    if(!m_max_attended && m_livingCells.size() > m_maxViruses / 5) {
 	m_max_attended = true;
     }
 
