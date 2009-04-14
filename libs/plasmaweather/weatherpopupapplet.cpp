@@ -19,7 +19,7 @@
 
 #include "weatherpopupapplet.h"
 #include "weatherconfig.h"
-#include "weathervalidator.h"
+#include "weatherlocation.h"
 #include <KConfigGroup>
 #include <KConfigDialog>
 #include <plasma/weather/weatherutils.h>
@@ -34,12 +34,11 @@ public:
         : q(weatherapplet)
         , weatherConfig(0)
         , weatherEngine(0)
-        , locationEngine(0)
         , timeEngine(0)
         , updateInterval(0)
     {
-        QObject::connect(&validator, SIGNAL(finished(const QString&)),
-                         q, SLOT(validationFinished(const QString&)));
+        QObject::connect(&location, SIGNAL(finished(const QString&)),
+                         q, SLOT(locationReady(const QString&)));
         unitMap["C"] = WeatherUtils::Celsius;
         unitMap["F"] = WeatherUtils::Fahrenheit;
         unitMap["K"] = WeatherUtils::Kelvin;
@@ -59,7 +58,6 @@ public:
     WeatherPopupApplet *q;
     WeatherConfig *weatherConfig;
     Plasma::DataEngine *weatherEngine;
-    Plasma::DataEngine *locationEngine;
     Plasma::DataEngine *timeEngine;
     QString temperatureUnit;
     QString speedUnit;
@@ -67,7 +65,7 @@ public:
     QString visibilityUnit;
     int updateInterval;
     QString source;
-    WeatherValidator validator;
+    WeatherLocation location;
 
     QString conditionIcon;
     QString tend;
@@ -77,20 +75,8 @@ public:
     double longitude;
     QHash<QString, int> unitMap;
     
-    void tryCity(const QString& city)
+    void locationReady(const QString &src)
     {
-        QString tmp = city.left(city.indexOf(','));
-        if (!tmp.isEmpty()) {
-            validator.validate("bbcukmet", tmp, true);
-            return;
-        }
-        q->setBusy(false);
-        q->setConfigurationRequired(true);
-    }
-    
-    void validationFinished(const QString &src)
-    {
-        q->setBusy(false);
         if (!src.isEmpty()) {
             source = src;
             KConfigGroup cfg = q->config();
@@ -98,6 +84,7 @@ public:
             emit q->configNeedsSaving();
             q->connectToEngine();
         } else {
+            q->setBusy(false);
             q->setConfigurationRequired(true);
         }
     }
@@ -207,22 +194,16 @@ void WeatherPopupApplet::init()
 
     d->weatherEngine = dataEngine("weather");
     d->timeEngine = dataEngine("time");
-    d->validator.setDataEngine(d->weatherEngine);
     connectToEngine();
 }
 
 void WeatherPopupApplet::connectToEngine()
 {
+    setBusy(true);
     if (d->source.isEmpty()) {
-        d->locationEngine = dataEngine("geolocation");
-        if (d->locationEngine->isValid()) {
-            d->locationEngine->connectSource("location", this);
-            setBusy(true);
-        } else {
-            setConfigurationRequired(true);
-        }
+        d->location.setDataEngines(dataEngine("geolocation"), d->weatherEngine);
+        d->location.getDefault();
     } else {
-        setBusy(true);
         d->weatherEngine->connectSource(d->source, this, d->updateInterval * 60 * 1000);
     }
 }
@@ -271,12 +252,7 @@ void WeatherPopupApplet::configAccepted()
 void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
-    if (source == "location") {
-        d->tryCity(data["city"].toString());
-        d->locationEngine->disconnectSource(source, this);
-        return;
-    }
-
+    Q_UNUSED(source)
     setBusy(false);
 
     if (data.isEmpty()) {

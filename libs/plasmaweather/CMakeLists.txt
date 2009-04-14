@@ -1,6 +1,7 @@
 set(plasmaweather_LIB_SRCS
     weatherpopupapplet.cpp
     weathervalidator.cpp
+    weatherlocation.cpp
     weatherconfig.cpp
     weatherconfigsearch.cpp
 )
@@ -9,6 +10,7 @@ set(plasmaweather_HEADERS
     weatherpopupapplet.h
     weathervalidator.h
     weatherconfig.h
+    weatherlocation.h
     plasmaweather_export.h
 )
 

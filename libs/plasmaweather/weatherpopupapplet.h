@@ -121,7 +121,7 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
         class Private;
         Private * const d;
         
-        Q_PRIVATE_SLOT(d, void validationFinished(const QString &source))
+        Q_PRIVATE_SLOT(d, void locationReady(const QString &source))
 };
 
 #endif
