@@ -165,4 +165,10 @@ void WeatherConfig::setConfigurableUnits(const ConfigurableUnits units)
     d->ui.visibilityComboBox->setVisible(units & Visibility);
 }
 
+void WeatherConfig::setHeadersVisible(bool visible)
+{
+    d->ui.locationLabel->setVisible(visible);
+    d->ui.unitsLabel->setVisible(visible);
+}
+
 #include "weatherconfig.moc"

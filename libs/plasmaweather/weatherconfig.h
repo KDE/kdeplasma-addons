@@ -112,6 +112,11 @@ public:
      **/
     QString visibilityUnit();
 
+    /**
+     * Sets header labels visible/hidden
+     **/
+    void setHeadersVisible(bool visible);
+
 public Q_SLOTS:
     /**
      * Sets update interval
