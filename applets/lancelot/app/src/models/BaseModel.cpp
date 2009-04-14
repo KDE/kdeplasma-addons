@@ -29,6 +29,7 @@
 #include <KMimeType>
 #include <KUrl>
 #include <KDebug>
+#include <lancelot/models/PlasmaServiceListModel.h>
 
 #include "logger/Logger.h"
 

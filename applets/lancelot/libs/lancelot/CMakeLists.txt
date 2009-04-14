@@ -72,6 +72,8 @@ set(lancelot_LIB_SRCS
         models/StandardActionTreeModel.cpp
         models/ActionTreeModelProxy.cpp
 
+        models/PlasmaServiceListModel.cpp
+
         # models/ActionListViewModels.cpp
         # models/PassagewayViewModels.cpp
 )
@@ -126,9 +128,11 @@ install(FILES
    models/StandardActionListModel.h
    models/MergedActionListModel.h
 
-   models/ActionTreeModel.cpp
-   models/StandardActionTreeModel.cpp
-   models/ActionTreeModelProxy.cpp
+   models/ActionTreeModel.h
+   models/StandardActionTreeModel.h
+   models/ActionTreeModelProxy.h
+
+   models/PlasmaServiceListModel.h
 
    # models/ActionListViewModels.h
    # models/PassagewayViewModels.h

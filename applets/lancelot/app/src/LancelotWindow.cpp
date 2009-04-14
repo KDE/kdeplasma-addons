@@ -62,6 +62,7 @@
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
 #include <lancelot/widgets/PopupMenu.h>
+#include <lancelot/models/PlasmaServiceListModel.h>
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
@@ -492,6 +493,10 @@ void LancelotWindow::setupModels()
      Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
 
      Merged(m_modelGroups["ContactsLeft"])->addModel("Messages", QIcon(), i18n("Unread messages"), m_models["Messages"]);
+     // Merged(m_modelGroups["ContactsLeft"])->addModel("Test", QIcon(), i18n("Test"),
+     //     new Lancelot::PlasmaServiceListModel("lancelotexamplemodel")
+     // );
+
      Merged(m_modelGroups["ContactsRight"])->addModel("Contacts", QIcon(), i18n("Contacts"), m_models["Contacts"]);
 
      m_modelGroups["SearchLeft"] = m_models["Runner"];
