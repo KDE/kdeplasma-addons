@@ -116,7 +116,8 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     }
 
     m_map->setMapThemeId(m_mapTheme);
-    
+    m_map->setShowGrid(false);
+
     widgetChanged();
     rotate();
 }
