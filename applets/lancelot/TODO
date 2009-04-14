@@ -47,6 +47,7 @@ Feature requests:
  - clear documents history - FINISHED
  - places to load from dolphin - FINISHED
  - choose which categories to show in the applet - FINISHED
+ - menu sorting - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
@@ -54,7 +55,6 @@ Feature requests:
      the PassagewayView - probably
  - hover-activation feedback animation - yes
  - tooltips for items that are too long to display - yes
- - menu sorting - yes
  - rearanging favorites by DnD - most probably
  - mail message titles/senders - probably
  - status of mails in the contacts icon - possibly
