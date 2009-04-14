@@ -253,7 +253,6 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
                                      const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source)
-    setBusy(false);
 
     if (data.isEmpty()) {
         return;
