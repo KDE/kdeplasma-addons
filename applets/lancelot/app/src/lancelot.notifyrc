@@ -43,10 +43,12 @@ Action=Popup
 
 [Event/ErrorOpeningLog]
 Name=Error opening the log
+Name[et]=Viga logi avamisel
 Name[sv]=Fel när loggen skulle öppnas
 Name[uk]=Помилка під час відкриття журналу
 Name[zh_TW]=開啟紀錄時發生錯誤
 Comment=Failed to open the log file.
+Comment[et]=Logifaili avamine nurjus.
 Comment[sv]=Misslyckades öppna loggfilen.
 Comment[uk]=Не вдалося відкрити файл журналу.
 Comment[zh_TW]=開啟紀錄檔時失敗。
