@@ -27,6 +27,11 @@
 
 class WeatherConfig;
 
+/**
+ * @class WeatherPopupApplet <plasmaweather/weatherpopupapplet.h>
+ *
+ * @short Base class for Weather Applets
+ */
 class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
@@ -34,29 +39,82 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
         WeatherPopupApplet(QObject *parent, const QVariantList &args);
         ~WeatherPopupApplet();
 
+        /**
+         * Reimplemented from Plasma::Applet
+         */
         virtual void init();
+        
+        /**
+         * Reimplemented from Plasma::Applet
+         */
         virtual void createConfigurationInterface(KConfigDialog *parent);
 
+        /**
+         * @return pressure unit
+         **/
         QString pressureUnit();
+
+        /**
+         * @return temperature unit
+         **/
         QString temperatureUnit();
+
+        /**
+         * @return speed unit
+         **/
         QString speedUnit();
+
+        /**
+         * @return visibility unit
+         **/
         QString visibilityUnit();
 
+        /**
+         * @return pressure unit
+         **/
         int pressureUnitInt();
+        
+        /**
+         * @return temperature unit
+         **/
         int temperatureUnitInt();
+        
+        /**
+         * @return speed unit
+         **/
         int speedUnitInt();
+        
+        /**
+         * @return visibility unit
+         **/
         int visibilityUnitInt();
 
+        /**
+         * @return condition icon with guessed value if it was empty
+         **/
         QString conditionIcon();
 
+        /**
+         * @return weather config dialog widget
+         **/
         WeatherConfig* weatherConfig();
 
     public Q_SLOTS:
+        /**
+         * Called when config is accepted
+         */
         virtual void configAccepted();
+        
+        /**
+         * Called when data is updated
+         */
         virtual void dataUpdated(const QString &name,
                                  const Plasma::DataEngine::Data &data);
     
     protected:
+        /**
+         * Connects applet to dataengine
+         */
         virtual void connectToEngine();
 
     private:

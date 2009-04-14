@@ -26,6 +26,11 @@
 
 namespace Plasma { class DataEngine; }
 
+/**
+ * @class WeatherConfig <plasmaweather/weatherconfig.h>
+ *
+ * @short Weather config widget class
+ */
 class PLASMAWEATHER_EXPORT WeatherConfig : public QWidget
 {
     Q_OBJECT
@@ -42,23 +47,75 @@ public:
     WeatherConfig(QWidget *parent = 0);
     virtual ~WeatherConfig();
 
+    /**
+     * Set units that are configurable. Default to all.
+     **/
     void setConfigurableUnits(const ConfigurableUnits units);
     
+    /**
+     * Sets dataengine to use
+     **/
     void setDataEngine(Plasma::DataEngine* dataengine);
+    
+    /**
+     * Sets ion source
+     **/
     void setSource(const QString& source);
+
+    /**
+     * Sets temperature unit
+     **/
     void setTemperatureUnit(const QString& unit);
+
+    /**
+     * Sets pressure unit
+     **/
     void setPressureUnit(const QString& unit);
+
+    /**
+     * Sets speed unit
+     **/
     void setSpeedUnit(const QString& unit);
+
+    /**
+     * Sets visibility unit
+     **/
     void setVisibilityUnit(const QString& unit);
 
+    /**
+     * @return ion source to use
+     **/
     QString source();
+    
+    /**
+     * @return update interval
+     **/
     int updateInterval();
+    
+    /**
+     * @return temperature unit
+     **/
     QString temperatureUnit();
+
+    /**
+     * @return pressure unit
+     **/
     QString pressureUnit();
+
+    /**
+     * @return speed unit
+     **/
     QString speedUnit();
+
+    /**
+     * @return visibility unit
+     **/
     QString visibilityUnit();
 
 public Q_SLOTS:
+    /**
+     * Sets update interval
+     **/
     void setUpdateInterval(int interval);
 
 private:

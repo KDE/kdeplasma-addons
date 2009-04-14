@@ -22,6 +22,11 @@
 
 #include <Plasma/DataEngine>
 
+/**
+ * @class WeatherValidator <plasmaweather/weathervalidator.h>
+ *
+ * @short Weather validator class
+ */
 class WeatherValidator : public QObject
 {
     Q_OBJECT
@@ -29,13 +34,29 @@ public:
     WeatherValidator(QWidget *parent = 0);
     virtual ~WeatherValidator();
 
-    void validate(const QString& plugin, const QString& citybool, bool silent = false);
+    /**
+     * Validate city
+     *
+     * @param plugin the name of the ion
+     * @param city the name of the city to find
+     * @param silent if true don't show any dialogs
+     **/
+    void validate(const QString& plugin, const QString& city, bool silent = false);
+    
+    /**
+     * Sets dataengine to use
+     *
+     * @param dataengine use this dataengine
+     **/
     void setDataEngine(Plasma::DataEngine* dataengine);
     
-signals:
+Q_SIGNALS:
+    /**
+     * Emitted when validation is done
+     **/
     void finished(const QString& source);
     
-public slots:
+public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
 private:
