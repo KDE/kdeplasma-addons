@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Service
+Name=Weather
+Name[de]=Wetter
+Name[et]=Ilm
+Name[pt]=Meteorologia
+Name[pt_BR]=Meteorologia
+Name[sv]=Väder
+Name[uk]=Погода
+Name[zh_CN]=天气
+Name[zh_TW]=天氣
+Icon=weather-clear
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_weather
+X-KDE-PluginInfo-Author=Jonathan Thomas
+X-KDE-PluginInfo-Email=echidnaman@kubuntu.org
+X-KDE-PluginInfo-Name=weather
+X-KDE-PluginInfo-Version=0.3
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
