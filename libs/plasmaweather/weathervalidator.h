@@ -22,12 +22,14 @@
 
 #include <Plasma/DataEngine>
 
+#include "plasmaweather_export.h"
+
 /**
  * @class WeatherValidator <plasmaweather/weathervalidator.h>
  *
  * @short Weather validator class
  */
-class WeatherValidator : public QObject
+class PLASMAWEATHER_EXPORT WeatherValidator : public QObject
 {
     Q_OBJECT
 public:

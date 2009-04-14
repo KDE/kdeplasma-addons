@@ -22,12 +22,14 @@
 
 #include <Plasma/DataEngine>
 
+#include "plasmaweather_export.h"
+
 /**
  * @class WeatherLocation <plasmaweather/weatherlocation.h>
  *
  * @short Class to get default source for weather
  */
-class WeatherLocation : public QObject
+class PLASMAWEATHER_EXPORT WeatherLocation : public QObject
 {
     Q_OBJECT
 public:
