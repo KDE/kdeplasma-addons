@@ -62,6 +62,7 @@ class WeatherStation : public WeatherPopupApplet
         LCD *m_lcdPanel;
         Ui::AppearanceConfig m_appearanceConfig;
         bool m_useBackground;
+        bool m_showToolTip;
         QString m_url;
 };
 

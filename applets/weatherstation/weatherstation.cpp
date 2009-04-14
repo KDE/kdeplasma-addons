@@ -24,6 +24,7 @@
 #include <KToolInvocation>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
+#include <Plasma/ToolTipManager>
 #include <plasma/weather/weatherutils.h>
 #include <conversion/converter.h>
 #include <plasmaweather/weatherconfig.h>
@@ -57,6 +58,7 @@ void WeatherStation::init()
     KConfigGroup cfg = config();
 
     m_useBackground = cfg.readEntry("background", true);
+    m_showToolTip = cfg.readEntry("tooltip", false);
     setBackground();
 
     setLCDIcon();
@@ -93,6 +95,7 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
     QWidget *w = new QWidget();
     m_appearanceConfig.setupUi(w);
     m_appearanceConfig.backgroundCheckBox->setChecked(m_useBackground);
+    m_appearanceConfig.tooltipCheckBox->setChecked(m_showToolTip);
     parent->addPage(w, i18n("Appearance"), icon());
 }
 
@@ -101,6 +104,8 @@ void WeatherStation::configAccepted()
     KConfigGroup cfg = config();
     cfg.writeEntry("background", m_useBackground =
             m_appearanceConfig.backgroundCheckBox->isChecked());
+    cfg.writeEntry("tooltip", m_showToolTip =
+            m_appearanceConfig.tooltipCheckBox->isChecked());
     setBackground();
 
     WeatherPopupApplet::configAccepted();
@@ -116,6 +121,7 @@ void WeatherStation::setLCDIcon()
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
+    kDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (data.contains("Credit Url")) {
@@ -133,6 +139,12 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
         m_lcd->setLabel("label0", data["Credit"].toString());
         m_url = data["Credit Url"].toString();
         m_lcd->setItemClickable("label0", !m_url.isEmpty());
+
+        if (m_showToolTip) {
+            Plasma::ToolTipContent ttc(data["Place"].toString(),
+                    i18n("Last updated: ") + QDateTime::currentDateTime().toString());
+            Plasma::ToolTipManager::self()->setContent(this, ttc);
+        }
     }
 }
 
