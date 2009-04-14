@@ -20,12 +20,13 @@
 
 #include "weatherapplet.h"
 
+#include <QLabel>
+#include <QApplication>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
 #include <QStandardItemModel>
 
-#include <KConfigDialog>
-#include <KDialog>
+#include <KGlobalSettings>
 #include <KLocale>
 #include <KMessageBox>
 #include <KToolInvocation>
@@ -41,11 +42,7 @@
 #include <weatherview.h>
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
-        : Plasma::PopupApplet(parent, args),
-        m_addDialog(0),
-        m_amodel(0),
-        m_activeValidation(0),
-        m_weatherWindFormat(0),
+        : WeatherPopupApplet(parent, args),
         m_locationLabel(new Plasma::Label),
         m_forecastTemps(new Plasma::Label),
         m_conditionsLabel(new Plasma::Label),
@@ -57,7 +54,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_detailsModel(0),
         m_graphicsWidget(0)
 {
-    setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     m_fiveDaysView = 0;
     m_detailsView = 0;
@@ -70,10 +66,11 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
 
 QGraphicsWidget *WeatherApplet::graphicsWidget()
 {
-    if (m_graphicsWidget) {
-        return m_graphicsWidget;
-    }
+    return m_graphicsWidget;
+}
 
+void WeatherApplet::init()
+{
     m_graphicsWidget = new QGraphicsWidget(this);
 
     switch (formFactor()) {
@@ -85,28 +82,6 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
         Plasma::ToolTipManager::self()->unregisterWidget(this);
         break;
     }
-
-    KConfigGroup generalConfig = config();
-    // Per applet automatically setup a KConfig
-    if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
-        m_weatherWindFormat = generalConfig.readEntry("windFormat", (int)WeatherUtils::KilometersPerHour);
-        m_weatherTempFormat = generalConfig.readEntry("tempFormat", (int)WeatherUtils::Celsius);
-        m_weatherPressureFormat = generalConfig.readEntry("pressureFormat", (int)WeatherUtils::Kilopascals);
-        m_weatherVisibilityFormat = generalConfig.readEntry("visibilityFormat", (int)WeatherUtils::Kilometers);
-    } else {
-        m_weatherWindFormat = generalConfig.readEntry("windFormat", (int)WeatherUtils::MilesPerHour);
-        m_weatherTempFormat = generalConfig.readEntry("tempFormat", (int)WeatherUtils::Fahrenheit);
-        m_weatherPressureFormat = generalConfig.readEntry("pressureFormat", (int)WeatherUtils::InchesHG);
-        m_weatherVisibilityFormat = generalConfig.readEntry("visibilityFormat", (int)WeatherUtils::Miles);
-    }
-    // Default time to update weather - 30 minutes
-    m_weatherUpdateTime = generalConfig.readEntry("updateWeather", 30);
-
-    // Connect to weather engine.
-    weatherEngine = dataEngine("weather");
-
-    // Set custom options
-    m_ionPlugins = weatherEngine->query("ions");
 
     m_titleFrame = new Plasma::Frame(this);
 
@@ -178,28 +153,13 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
     m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
 
-    m_activePlace = generalConfig.readEntry("place");
-    m_activeIon = generalConfig.readEntry("ion");
-    m_extraData[m_activePlace] = generalConfig.readEntry("data");
-
-
-    if (m_activePlace.isEmpty()) {
-        setConfigurationRequired(true);
-    } else {
-        getWeather();
-        setConfigurationRequired(false);
-    }
-
     m_graphicsWidget->setLayout(m_layout);
 
-    return m_graphicsWidget;
+    WeatherPopupApplet::init();
 }
 
 WeatherApplet::~WeatherApplet()
 {
-    if (m_addDialog) {
-        delete m_addDialog;
-    }
 }
 
 void WeatherApplet::toolTipAboutToShow()
@@ -232,30 +192,6 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::getValidation()
-{
-    if (ui.locationEdit->text().size() >= 3) {
-        // Destroy all other datasources
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source != "ions") {
-                weatherEngine->disconnectSource(source, this);
-            }
-        }
-
-        QString ion = ui.pluginComboList->itemData(ui.pluginComboList->currentIndex()).toString();
-        QString checkPlace = ui.locationEdit->text();
-        checkPlace[0] = checkPlace[0].toUpper();
-        m_activeValidation = QString("%1|validate|%2").arg(ion).arg(checkPlace);
-        weatherEngine->connectSource(m_activeValidation, this);
-    }
-}
-
-void WeatherApplet::selectPlace()
-{
-    addPlace();
-    m_addDialog->close();
-}
-
 void WeatherApplet::invokeBrowser(const QString& url)
 {
     KToolInvocation::invokeBrowser(url);
@@ -281,242 +217,6 @@ void WeatherApplet::setVisibleLayout(bool val)
     setVisible(val, m_bottomLayout);
 
     m_courtesyLabel->setVisible(val);
-}
-
-void WeatherApplet::addPlace()
-{
-    QModelIndex item = aui.foundPlacesListView->currentIndex();
-
-    m_activePlace = item.data().toString();
-    m_activeIon = ui.pluginComboList->itemData(ui.pluginComboList->currentIndex()).toString();
-    ui.validatedPlaceLabel->setText(m_activePlace);
-    ui.validateButton->setEnabled(false);
-}
-
-void WeatherApplet::cancelAddClicked()
-{
-    weatherEngine->disconnectSource(m_activeValidation, this);
-}
-
-void WeatherApplet::pluginIndexChanged(int index)
-{
-    Q_UNUSED(index)
-
-    ui.validatedPlaceLabel->clear();
-    placeEditChanged(ui.locationEdit->text());
-}
-
-void WeatherApplet::placeEditChanged(const QString& text)
-{
-    ui.validateButton->setEnabled(text.size() >= 3);
-}
-
-void WeatherApplet::validate(const QString& source, const QVariant& data)
-{
-    const QStringList tokens = data.toString().split('|');
-    bool extraflag = false;
-    bool placeflag = false;
-    QString place;
-
-    // If the place is valid, check if there is one place or multiple places returned. The user will have
-    // to select the place that best matches what they are looking for.
-    if (tokens[1] == QString("valid")) {
-        // Plugin returns only one matching place
-        if (tokens[2] == QString("single") || tokens[2] == QString("multiple")) {
-            m_activeValidation = source;
-            m_items.clear();
-            m_extraData.clear();
-
-            foreach(const QString& val, tokens) {
-                if (val.contains("place")) {
-                    placeflag = true;
-                    continue;
-                }
-
-                if (placeflag) {
-                    place = val;
-                    placeflag = false;
-                }
-
-                if (val.contains("extra")) {
-                    extraflag = true;
-                    continue;
-                }
-
-                if (extraflag) {
-                    extraflag = false;
-                    m_extraData[place] = val;
-                    continue;
-                }
-            }
-
-        }
-
-       // Pop up dialog and allow user to choose places
-       if (tokens[2] == "multiple") {
-           showAddPlaceDialog(tokens);
-       } else {
-           ui.validatedPlaceLabel->setText(tokens[4]);
-           ui.validateButton->setEnabled(false);
-       }
-
-       return;
-
-    } else if (tokens[1] == "timeout") {
-        KMessageBox::error(0, i18n("The applet was not able to contact the server, please try again later"));
-        return;
-    } else if (tokens[1] == "malformed") {
-        KMessageBox::error(0 ,i18n("The data source received a malformed string and was not able to process your request"));
-        return;
-    } else {
-        KMessageBox::error(0, i18n("The place '%1' is not valid. The data source is not able to find this place.", tokens[3]), i18n("Invalid Place"));
-        return;
-    }
-
-}
-
-void WeatherApplet::createConfigurationInterface(KConfigDialog *parent)
-{
-    QWidget *widget = new QWidget();
-    QWidget *unitWidget = new QWidget();
-    ui.setupUi(widget);
-    uui.setupUi(unitWidget);
-    parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    parent->addPage(widget, i18n("Location"), icon());
-    parent->addPage(unitWidget, i18n("Units"), icon());
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-
-    ui.validateButton->setEnabled(false);
-
-    foreach(const QVariant& item, m_ionPlugins) {
-        QStringList pluginInfo = item.toString().split('|');
-        ui.pluginComboList->addItem(pluginInfo[0], pluginInfo[1]);
-    }
-    ui.pluginComboList->model()->sort(0, Qt::AscendingOrder);
-
-    uui.windOptionsComboList->addItem(i18n("Kilometers Per Hour (km/h)"), WeatherUtils::KilometersPerHour);
-    uui.windOptionsComboList->addItem(i18n("Metres Per Second (m/s)"), WeatherUtils::MetersPerSecond);
-    uui.windOptionsComboList->addItem(i18n("Miles Per Hour (mph)"), WeatherUtils::MilesPerHour);
-    uui.windOptionsComboList->addItem(i18n("Knots (kt)"), WeatherUtils::Knots);
-    uui.windOptionsComboList->addItem(i18n("Beaufort Scale"), WeatherUtils::Beaufort);
-
-    uui.tempOptionsComboList->addItem(i18n("Celsius"), WeatherUtils::Celsius);
-    uui.tempOptionsComboList->addItem(i18n("Fahrenheit"), WeatherUtils::Fahrenheit);
-    uui.tempOptionsComboList->addItem(i18n("Kelvin"), WeatherUtils::Kelvin);
-
-    uui.pressureOptionsComboList->addItem(i18n("Kilopascals (kPa)"), WeatherUtils::Kilopascals);
-    uui.pressureOptionsComboList->addItem(i18n("Inches of Mercury (inHg)"), WeatherUtils::InchesHG);
-    uui.pressureOptionsComboList->addItem(i18n("Millibars (mb)"), WeatherUtils::Millibars);
-    uui.pressureOptionsComboList->addItem(i18n("Hectopascals (hPa)"), WeatherUtils::Hectopascals);
-
-    //uui.visibilityOptionsComboList->addItem(i18n("Meters"), WeatherUtils::Meters);
-    uui.visibilityOptionsComboList->addItem(i18n("Kilometers"), WeatherUtils::Kilometers);
-    uui.visibilityOptionsComboList->addItem(i18n("Miles"), WeatherUtils::Miles);
-    //uui.windOptionsComboList->model()->sort(0, Qt::AscendingOrder);
-
-    ui.locationEdit->setTrapReturnKey(true);
-
-    if (m_activeIon.isEmpty()) {
-        ui.pluginComboList->setCurrentIndex(0);
-    } else {
-        ui.pluginComboList->setCurrentIndex(ui.pluginComboList->findData(m_activeIon));
-    }
-
-    connect(ui.validateButton, SIGNAL(clicked()), this, SLOT(getValidation()));
-    connect(ui.locationEdit, SIGNAL(textChanged(const QString &)), this, SLOT(placeEditChanged(const QString &)));
-    connect(ui.pluginComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(pluginIndexChanged(int)));
-    connect(ui.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
-
-    ui.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
-    ui.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    ui.validatedPlaceLabel->setText(m_activePlace);
-    uui.windOptionsComboList->setCurrentIndex(uui.windOptionsComboList->findData(m_weatherWindFormat));
-    uui.tempOptionsComboList->setCurrentIndex(uui.tempOptionsComboList->findData(m_weatherTempFormat));
-    uui.pressureOptionsComboList->setCurrentIndex(uui.pressureOptionsComboList->findData(m_weatherPressureFormat));
-    uui.visibilityOptionsComboList->setCurrentIndex(uui.visibilityOptionsComboList->findData(m_weatherVisibilityFormat));
-}
-
-void WeatherApplet::showAddPlaceDialog(const QStringList& tokens)
-{
-    if (m_addDialog == 0) {
-        m_addDialog = new KDialog;
-        aui.setupUi(m_addDialog->mainWidget());
-        m_addDialog->mainWidget()->layout()->setMargin(0);
-
-        // Set up QListView with model/view
-        m_amodel = new QStandardItemModel();
-        aui.foundPlacesListView->setModel(m_amodel);
-        aui.foundPlacesListView->setSelectionMode(QAbstractItemView::SingleSelection);
-
-        aui.foundPlacesListView->show();
-
-        m_addDialog->setCaption(i18n("Found Places"));
-        m_addDialog->setButtons(KDialog::Ok | KDialog::Cancel);
-        m_addDialog->setButtonText(KDialog::Ok, i18n("&Add"));
-        m_addDialog->setDefaultButton(KDialog::NoDefault);
-
-
-        connect(m_addDialog, SIGNAL(okClicked()), this, SLOT(addPlace()));
-        connect(m_addDialog, SIGNAL(cancelClicked()), this, SLOT(cancelAddClicked()));
-        connect(aui.foundPlacesListView, SIGNAL(doubleClicked(const QModelIndex &)), this , SLOT(selectPlace()));
-    }
-    bool placeflag = false;
-    QStringList headers;
-    m_amodel->clear();
-    headers << i18n("Found Places");
-    m_amodel->setHorizontalHeaderLabels(headers);
-    m_amodel->setColumnCount(1);
-    aui.foundPlacesListView->setResizeMode(QListView::Adjust);
-
-    foreach(const QString& item, tokens) {
-        if (item.contains("place")) {
-            placeflag = true;
-            continue;
-        }
-        if (placeflag) {
-            m_items.clear();
-            m_items.append(new QStandardItem(item));
-            m_amodel->appendRow(m_items);
-            placeflag = false;
-        }
-    }
-    KDialog::centerOnScreen(m_addDialog);
-    m_addDialog->show();
-}
-
-void WeatherApplet::getWeather()
-{
-
-    setVisibleLayout(false);
-    setBusy(true);
-
-    if (m_extraData[m_activePlace].isEmpty()) {
-        QString str = QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace);
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source == str) {
-                if (!m_currentData.isEmpty()) {
-                    weatherContent(m_currentData);
-                    return;
-                }
-            }
-        }
-        weatherEngine->connectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this, m_weatherUpdateTime * 60 * 1000);
-
-    } else {
-        QString str = QString("%1|weather|%2|%3").arg(m_activeIon).arg(m_activePlace).arg(m_extraData[m_activePlace]);
-
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source == str) {
-                if (!m_currentData.isEmpty()) {
-                    weatherContent(m_currentData);
-                    return;
-                }
-            }
-        }
-
-        weatherEngine->connectSource(QString("%1|weather|%2|%3").arg(m_activeIon).arg(m_activePlace).arg(m_extraData[m_activePlace]), this, m_weatherUpdateTime * 60 * 1000);
-    }
 }
 
 QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = true, bool degreesOnly = false)
@@ -555,12 +255,12 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         // fiveDayTokens[3] = High Temperature
         // fiveDayTokens[4] = Low Temperature
         if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
-            m_tempLabel->setText(convertTemperature(m_weatherTempFormat, data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-            m_forecastTemps->setText(i18n("Low: %1", convertTemperature(m_weatherTempFormat, fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+            m_forecastTemps->setText(i18n("Low: %1", convertTemperature(temperatureUnitInt(), fiveDayTokens[4], data["Temperature Unit"].toInt())));
         } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
-            m_forecastTemps->setText(i18n("High: %1", convertTemperature(m_weatherTempFormat, fiveDayTokens[3], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18n("High: %1", convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt())));
         } else { // Both high and low
-            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(m_weatherTempFormat, fiveDayTokens[3], data["Temperature Unit"].toInt()), convertTemperature(m_weatherTempFormat,  fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt()), convertTemperature(temperatureUnitInt(),  fiveDayTokens[4], data["Temperature Unit"].toInt())));
         }
     }
     else {
@@ -570,7 +270,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     m_conditionsLabel->setText(data["Current Conditions"].toString());
 
     if (isValidData(data["Temperature"])) {
-        m_tempLabel->setText(convertTemperature(m_weatherTempFormat, data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+        m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
 
     } else {
         m_tempLabel->setText(QString());
@@ -704,7 +404,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     highItem->setText(i18nc("Short for no data available","-"));
                     hiItems.append(highItem);
                 } else {
-                    highItem->setText(convertTemperature(m_weatherTempFormat, fiveDayTokens[3], data["Temperature Unit"].toInt()));
+                    highItem->setText(convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt()));
                     hiItems.append(highItem);
                 }
             }
@@ -716,7 +416,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     lowItem->setText(i18nc("Short for no data available","-"));
                     lowItems.append(lowItem);
                 } else {
-                    lowItem->setText(convertTemperature(m_weatherTempFormat, fiveDayTokens[4], data["Temperature Unit"].toInt()));
+                    lowItem->setText(convertTemperature(temperatureUnitInt(), fiveDayTokens[4], data["Temperature Unit"].toInt()));
                     lowItems.append(lowItem);
                 }
             }
@@ -765,7 +465,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
        QStandardItem *dataWindchill = new QStandardItem();
        
        // Use temperature unit to convert windchill temperature we only show degrees symbol not actual temperature unit
-       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(m_weatherTempFormat, data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
+       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(temperatureUnitInt(), data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
        m_detailsModel->appendRow(dataWindchill);
     }
 
@@ -773,20 +473,20 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         QStandardItem *dataHumidex = new QStandardItem();
 
         // Use temperature unit to convert humidex temperature we only show degrees symbol not actual temperature unit
-        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(m_weatherTempFormat, data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
+        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(temperatureUnitInt(), data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
 
         m_detailsModel->appendRow(dataHumidex);
     }
 
     if (isValidData(data["Dewpoint"])) {
         QStandardItem *dataDewpoint = new QStandardItem();
-        dataDewpoint->setText(i18n("Dewpoint: %1", convertTemperature(m_weatherTempFormat, data["Dewpoint"].toString(), data["Dewpoint Unit"].toInt(), false)));
+        dataDewpoint->setText(i18n("Dewpoint: %1", convertTemperature(temperatureUnitInt(), data["Dewpoint"].toString(), data["Dewpoint Unit"].toInt(), false)));
         m_detailsModel->appendRow(dataDewpoint);
     }
 
     if (isValidData(data["Pressure"])) {
         QStandardItem *dataPressure = new QStandardItem();
-        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), m_weatherPressureFormat), 'f', 2), WeatherUtils::getUnitString(m_weatherPressureFormat, false)));
+        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), pressureUnitInt()), 'f', 2), pressureUnit()));
         m_detailsModel->appendRow(dataPressure);
     }
 
@@ -802,7 +502,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         double visibility = data["Visibility"].toDouble(&isNumeric);
         Q_UNUSED(visibility)
         if (isNumeric) {
-            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", QString::number(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), m_weatherVisibilityFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherVisibilityFormat, false)));
+            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", QString::number(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), visibilityUnitInt()), 'f', 1), visibilityUnit()));
         } else {
             dataVisibility->setText(i18n("Visibility: %1", data["Visibility"].toString()));
         }
@@ -818,7 +518,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
         m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                QString::number(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
+                QString::number(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 'f', 1), speedUnit()));
     } else {
         if (data["Wind Speed"] == "N/A") {
             m_windIcon->setText(i18nc("Not available","N/A"));
@@ -837,7 +537,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
-        dataGust->setText(i18n("Wind Gust: %1 %2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), m_weatherWindFormat), 'f', 1), WeatherUtils::getUnitString(m_weatherWindFormat)));
+        dataGust->setText(i18n("Wind Gust: %1 %2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), speedUnitInt()), 'f', 1), speedUnit()));
         m_detailsModel->appendRow(dataGust);
     }
 
@@ -942,71 +642,23 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
+    WeatherPopupApplet::dataUpdated(source, data);
+    
     if (data.isEmpty()) {
         return;
     }
 
-    QStringList tokens = data["validate"].toString().split('|');
-
-    if (tokens.size() > 0 && data.contains("validate")) {
-        weatherEngine->disconnectSource(source, this);
-        if (tokens[1] == "valid" || tokens[1] == "invalid") {
-            validate(source, data["validate"]);
-            if (isBusy()) {
-                setVisibleLayout(false);
-                setBusy(false);
-                setConfigurationRequired(true);
-            }
-       }
-    } else {
-        m_currentData = data;
-        //setVisibleLayout(true);
-        //setBusy(true);
-        weatherContent(data);
-    }
-
+    m_currentData = data;
+    //setVisibleLayout(true);
+    //setBusy(true);
+    weatherContent(data);
     update();
 }
 
 void WeatherApplet::configAccepted()
 {
-    KConfigGroup generalConfig = config();
-
-    m_weatherWindFormat = uui.windOptionsComboList->itemData(uui.windOptionsComboList->currentIndex()).toInt();
-    m_weatherTempFormat = uui.tempOptionsComboList->itemData(uui.tempOptionsComboList->currentIndex()).toInt();
-    m_weatherPressureFormat = uui.pressureOptionsComboList->itemData(uui.pressureOptionsComboList->currentIndex()).toInt();
-    m_weatherVisibilityFormat = uui.visibilityOptionsComboList->itemData(uui.visibilityOptionsComboList->currentIndex()).toInt();
-
-    m_weatherUpdateTime = ui.weatherUpdateSpin->value();
-    m_activePlace = ui.validatedPlaceLabel->text();
-
-    m_activeIon = ui.pluginComboList->itemData(ui.pluginComboList->currentIndex()).toString();
-
-    if (!m_activePlace.isEmpty()) {
-        setVisibleLayout(false);
-
-        //TODO: Don't reload date if data source and location aren't changed
-        weatherEngine->disconnectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this);
-
-        generalConfig.writeEntry("place", m_activePlace);
-        generalConfig.writeEntry("ion", m_activeIon);
-        if (!m_extraData[m_activePlace].isEmpty()) {
-            generalConfig.writeEntry("data", m_extraData[m_activePlace]);
-        }
-
-        // Write out config options
-        generalConfig.writeEntry("updateWeather", m_weatherUpdateTime);
-        generalConfig.writeEntry("windFormat", m_weatherWindFormat);
-        generalConfig.writeEntry("tempFormat", m_weatherTempFormat);
-        generalConfig.writeEntry("pressureFormat", m_weatherPressureFormat);
-        generalConfig.writeEntry("visibilityFormat", m_weatherVisibilityFormat);
-        setConfigurationRequired(false);
-        getWeather();
-        emit configNeedsSaving();
-    } else {
-        setVisibleLayout(false);
-        setConfigurationRequired(true);
-    }
+    WeatherPopupApplet::configAccepted();
+    setVisibleLayout(false);
 }
 
 #include "weatherapplet.moc"

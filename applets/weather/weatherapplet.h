@@ -23,10 +23,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 #include <plasma/weather/weatherutils.h>
-
-#include "ui_weatherLocations.h"
-#include "ui_weatherUnits.h"
-#include "ui_weatherAddPlace.h"
+#include <plasmaweather/weatherpopupapplet.h>
 
 class QGraphicsGridLayout;
 class QGraphicsLinearLayout;
@@ -44,17 +41,17 @@ namespace Plasma
     class WeatherView;
 }
 
-class WeatherApplet : public Plasma::PopupApplet
+class WeatherApplet : public WeatherPopupApplet
 {
     Q_OBJECT
 public:
     WeatherApplet(QObject *parent, const QVariantList &args);
     ~WeatherApplet();
 
+    void init();
     QGraphicsWidget *graphicsWidget();
 
 public slots:
-    void createConfigurationInterface(KConfigDialog *parent);
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
 protected slots:
@@ -65,40 +62,11 @@ protected:
     void constraintsEvent(Plasma::Constraints constraints);
 
 private slots:
-    void addPlace();
-    void showAddPlaceDialog(const QStringList& tokens);
-    void getValidation();
-    void getWeather();
     void invokeBrowser(const QString& url);
-    void selectPlace();
-    void pluginIndexChanged(int index);
-    void placeEditChanged(const QString& text);
-    void cancelAddClicked();
 
 private:
-    Plasma::DataEngine *weatherEngine;
-    KDialog *m_addDialog;
-    Ui::weatherLocations ui;
-    Ui::weatherUnits uui;
-    Ui::weatherAddPlace aui;
-    QStandardItemModel *m_amodel;
-    QList<QStandardItem *> m_items;
-
-    QString m_activeValidation; // Current place to validate
-    QString m_activeIon; // Current data source plugin
-    QString m_activePlace; // Current place we get weather from
     Plasma::DataEngine::Data m_currentData; // Current data returned from ion
-    QMap<QString, QString> m_extraData; // Some ions pass back extra info to applet
 
-    // Data stored by config
-    int m_weatherWindFormat;
-    int m_weatherTempFormat;
-    int m_weatherPressureFormat;
-    int m_weatherVisibilityFormat;
-    int m_weatherUpdateTime;
-
-    Plasma::DataEngine::Data m_ionPlugins;
-    
     Plasma::Label *m_locationLabel;
     Plasma::Label *m_forecastTemps;
     Plasma::Label *m_conditionsLabel;
@@ -126,7 +94,6 @@ private:
     void weatherContent(const Plasma::DataEngine::Data &data);
     void setVisible(bool visible, QGraphicsLayout *layout);
     void setVisibleLayout(bool val);
-    void validate(const QString& source, const QVariant& data);
     QString convertTemperature(int format, QString value, int type, bool rounded, bool degreesOnly);
 };
 
