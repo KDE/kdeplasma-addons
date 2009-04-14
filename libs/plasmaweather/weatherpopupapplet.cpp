@@ -249,13 +249,20 @@ void WeatherPopupApplet::configAccepted()
         d->weatherEngine->disconnectSource(d->source, this);
     }
 
+    d->temperatureUnit = d->weatherConfig->temperatureUnit();
+    d->speedUnit = d->weatherConfig->speedUnit();
+    d->pressureUnit = d->weatherConfig->pressureUnit();
+    d->visibilityUnit = d->weatherConfig->visibilityUnit();
+    d->updateInterval = d->weatherConfig->updateInterval();
+    d->source = d->weatherConfig->source();
+
     KConfigGroup cfg = config();
-    cfg.writeEntry("temperatureUnit", d->temperatureUnit = d->weatherConfig->temperatureUnit());
-    cfg.writeEntry("speedUnit", d->speedUnit = d->weatherConfig->speedUnit());
-    cfg.writeEntry("pressureUnit", d->pressureUnit = d->weatherConfig->pressureUnit());
-    cfg.writeEntry("visibilityUnit", d->visibilityUnit = d->weatherConfig->visibilityUnit());
-    cfg.writeEntry("updateInterval", d->updateInterval = d->weatherConfig->updateInterval());
-    cfg.writeEntry("source", d->source = d->weatherConfig->source());
+    cfg.writeEntry("temperatureUnit", d->temperatureUnit);
+    cfg.writeEntry("speedUnit", d->speedUnit);
+    cfg.writeEntry("pressureUnit", d->pressureUnit);
+    cfg.writeEntry("visibilityUnit", d->visibilityUnit);
+    cfg.writeEntry("updateInterval", d->updateInterval);
+    cfg.writeEntry("source", d->source);
 
     emit configNeedsSaving();
     connectToEngine();
@@ -269,9 +276,9 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
         d->locationEngine->disconnectSource(source, this);
         return;
     }
-    
+
     setBusy(false);
-    
+
     if (data.isEmpty()) {
         return;
     }
