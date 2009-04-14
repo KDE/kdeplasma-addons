@@ -13,7 +13,7 @@
 
 #include <KDebug>
 
-#define VIRUS_GENOME_SIZE 30
+#define VIRUS_GENOME_SIZE 38
 #define MAX_AGE 30
 
 #define MAX_EAT 10
@@ -84,7 +84,29 @@ void Alife::createViruses(int amount){
             for(int i = 0; i < 7; i++) {
                 temp->code[i] = randomCode();
             }
+	    /*temp->code[0] = 4;
+	    temp->code[1] = 12;
+	    temp->code[2] = 2;
+	    temp->code[3] = 7;*/
 
+	    /*temp->code[0] = 1;
+	    temp->code[1] = 10;
+	    temp->code[2] = 19;
+	    temp->code[3] = 4;
+	    temp->code[4] = 19;
+	    temp->code[5] = 6;
+	    temp->code[6] = 19;
+	    temp->code[7] = 6;
+	    temp->code[8] = 12;
+	    temp->code[9] = 2;
+	    temp->code[10] = 7;
+	    temp->code[11] = 13;
+
+	    temp->code[12] = 2;
+	    temp->code[13] = 3;
+	    temp->code[14] = 9;
+	    temp->code[15] = 11;
+	    temp->code[16] = 7;*/
             m_livingCells.append(temp);
         }
     }
@@ -209,7 +231,7 @@ void Alife::executeCell(int id)
             break;
             case 10: //while(register){
                 if(!reg){
-                    while(codePointer < VIRUS_GENOME_SIZE && cell->code[codePointer] != 11 && cell->energy){
+                    while(codePointer < VIRUS_GENOME_SIZE-1 && cell->code[codePointer] != 11 && cell->energy){
                           codePointer++;
                           cell->energy--;
                     }
@@ -323,8 +345,9 @@ bool Alife::reproduce(struct cell* cell, int direction)
     
     struct cell* newCell = &m_cells[neighbour.x()][neighbour.y()];
 
-    if(!newCell->alive && m_livingCells.size() < m_maxViruses) {
-        resetCell(newCell);
+    if(!newCell->alive&& m_livingCells.size() < m_maxViruses) {
+
+	resetCell(newCell);
         newCell->alive = true;
         newCell->code = new uchar[VIRUS_GENOME_SIZE];
         memset(newCell->code, 0, VIRUS_GENOME_SIZE);
@@ -334,23 +357,23 @@ bool Alife::reproduce(struct cell* cell, int direction)
 
         memcpy(newCell->code,cell->code,VIRUS_GENOME_SIZE);
 
-        int mutate = qrand() % 2;
+        int mutate = qrand() % 3;
         if(mutate) {
             //normal mutation
-            int mutations = qrand() % 6;
+            int mutations = qrand() % 5;
             for(int i = 0; i < mutations; i++) {
                 int index = qrand() % VIRUS_GENOME_SIZE;
                 newCell->code[index] = randomCode();
             }
 
-            int duplication = qrand() % 4;
+            int duplication = qrand() % 3;
             for(int i = 0; i < duplication; i++) {
                 int start = qrand() % VIRUS_GENOME_SIZE;
                 int end = start + qrand() % ( VIRUS_GENOME_SIZE - start);
                 memcpy(&newCell->code[end],&cell->code[start],VIRUS_GENOME_SIZE - end);
             }
 
-            int deletion = qrand() % 4;
+            int deletion = qrand() % 3;
             for(int i = 0; i < deletion; i++) {
                 int start = qrand() % VIRUS_GENOME_SIZE;
                 int end = start + qrand() % ( VIRUS_GENOME_SIZE - start);
@@ -454,16 +477,14 @@ void Alife::virusMove()
 	m_max_attended = false;
     }
 
-    struct cell* myCell = m_livingCells.at(0);
-    if(myCell->r == 0 && myCell->g == 0 && myCell->b == 0 && myCell->age > 10){
+/*    struct cell* myCell = m_livingCells.at(0);
     int pointer = 0;
     kDebug() << "start code";
     while(myCell->code[pointer] != 0 && pointer < VIRUS_GENOME_SIZE) {
         kDebug() << myCell->code[pointer++];
     }
     kDebug() << "end code";
-    }
-
+*/
     int cells = m_livingCells.size();
     for(int i = 0; i < cells; i++) {
         executeCell(i);
