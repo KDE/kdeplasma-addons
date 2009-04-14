@@ -16,7 +16,6 @@ Menu:
 TODO: M01 l (m) Themes and configuration for resize borders
 TODO: M02 l (m) Resize to work ... better
 TODO: M06 m (m) Search history
-IN PROGRESS: M07 m (m) Switch menu instead of searching for SESSIONS (depends on L07)
 TODO: M09   (a) Speed up
 TODO: M12 m (a) switch list models to DataEngines and Services (depends on L08)
 TODO: M13 h (m) plug-ins for contacts (maybe more?) (depends on M12)
@@ -47,13 +46,13 @@ Feature requests:
  - higlight the path in passageway view (not only the breadcrumb) - FINISHED
  - clear documents history - FINISHED
  - places to load from dolphin - FINISHED
+ - choose which categories to show in the applet - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
  - hover activation for categories that are not in the last list of
      the PassagewayView - probably
  - hover-activation feedback animation - yes
- - choose which categories to show in the applet - yes
  - tooltips for items that are too long to display - yes
  - menu sorting - yes
  - rearanging favorites by DnD - most probably
@@ -66,7 +65,4 @@ Feature requests:
  - align lists that don't have enough items bottom when the mouse comes from bottom - maybe
  - DnD searched applications - yes
  - Disk free space info - maybe
-
- - remove timeout for hover-activation of categories - not likely
- - more descriptive descriptions (KDE3 vs KDE4) - not likely
 
