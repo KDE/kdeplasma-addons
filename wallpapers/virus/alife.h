@@ -24,6 +24,9 @@ struct cell {
     uchar *code;
     int age;
     bool killMe;
+    uchar r;
+    uchar g;
+    uchar b;
 };
 
 class Alife : public QThread {

@@ -16,6 +16,9 @@
 #define VIRUS_GENOME_SIZE 30
 #define MAX_AGE 30
 
+#define MAX_EAT 10
+#define MIN_EAT 2
+
 Alife::Alife(){
     m_cells = 0;
     m_height = 0;
@@ -95,6 +98,9 @@ void Alife::resetCell(struct cell *temp)
     temp->code = 0;
     temp->age = 0;
     temp->killMe = false;
+    temp->r = 0;
+    temp->g = 0;
+    temp->b = 0;
 }
 
 //returns a random operation for the genome. 
@@ -119,7 +125,7 @@ void Alife::executeCell(int id)
     int reg = 0;
     int codePointer = 0;
 
-    bool better_eat = false; //eat more the next time a color is eaten
+    int better_eat = MAX_EAT; //what inverse percentage is eaten next time
 
     bool stop = false;
     int max = 300;
@@ -155,30 +161,30 @@ void Alife::executeCell(int id)
             case 4:{ //eat red
                 int color = qRed(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = qMin(color / (better_eat ? 5 : 10), color);
+                    int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = false;
+		    better_eat = MAX_EAT;
                 }
                 pixel = qRgb(color, qGreen(pixel), qBlue(pixel));
             }break;
             case 5:{ //eat green
                 int color = qGreen(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = qMin(color / (better_eat ? 5 : 10), color);
+                    int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = false;
+		    better_eat = MAX_EAT;
                 }
                 pixel = qRgb(qRed(pixel), color, qBlue(pixel));
             }break;
             case 6:{ //eat blue
                 int color = qBlue(pixel);
                 if(color && cell->energy + color < 255) {
-                    int temp = qMin(color / (better_eat ? 5 : 10), color);
+                    int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = false;
+		    better_eat = MAX_EAT;
                 }
                 pixel = qRgb(qRed(pixel), qGreen(pixel), color);
             }break;
@@ -287,7 +293,7 @@ void Alife::executeCell(int id)
                 cell->energy /= 2;
             }break;
 	    case 19:{ //better eat
-		better_eat = true;
+		better_eat = MIN_EAT;
 	    }break;
             default:
               kDebug() << "wah" << cell->code[codePointer] << codePointer;
@@ -297,6 +303,7 @@ void Alife::executeCell(int id)
         if(codePointer >= VIRUS_GENOME_SIZE) {
             stop = true;
         }
+	better_eat = qMin(better_eat + 1, 10);
         max--;
     }
 
@@ -322,8 +329,8 @@ bool Alife::reproduce(struct cell* cell, int direction)
         newCell->code = new uchar[VIRUS_GENOME_SIZE];
         memset(newCell->code, 0, VIRUS_GENOME_SIZE);
 
-        newCell->energy = cell->energy / 2;
-        cell->energy = cell->energy / 2;
+        newCell->energy = cell->energy / 3;
+        cell->energy = (2*cell->energy) / 3;
 
         memcpy(newCell->code,cell->code,VIRUS_GENOME_SIZE);
 
@@ -351,6 +358,18 @@ bool Alife::reproduce(struct cell* cell, int direction)
                 memset(&newCell->code[end], 0, VIRUS_GENOME_SIZE - end);
             }
         }
+  
+	for(int i = 0; i < VIRUS_GENOME_SIZE; i++) {
+	    if(newCell->code[i] == 4) {
+		newCell->r = qMax(newCell->r+50, 255);
+	    }
+	    if(newCell->code[i] == 5) {
+		newCell->g = qMax(newCell->g+50, 255);
+	    }
+	    if(newCell->code[i] == 6) {
+		newCell->b = qMax(newCell->b+50, 255);
+	    }
+	}
 
         m_livingCells.append(newCell);
         return true;
@@ -369,6 +388,9 @@ bool Alife::moveCell(int i, int direction)
         newCell->alive = true;
         newCell->energy += cell->energy;
         newCell->age = cell->age;
+	newCell->r = cell->r;
+	newCell->g = cell->g;
+	newCell->b = cell->b;
 
         resetCell(cell);
         cell->energy = 0;
@@ -431,15 +453,17 @@ void Alife::virusMove()
 	m_image = m_image_original;
 	m_max_attended = false;
     }
-/*
+
     struct cell* myCell = m_livingCells.at(0);
+    if(myCell->r == 0 && myCell->g == 0 && myCell->b == 0 && myCell->age > 10){
     int pointer = 0;
     kDebug() << "start code";
     while(myCell->code[pointer] != 0 && pointer < VIRUS_GENOME_SIZE) {
         kDebug() << myCell->code[pointer++];
     }
     kDebug() << "end code";
-*/
+    }
+
     int cells = m_livingCells.size();
     for(int i = 0; i < cells; i++) {
         executeCell(i);
@@ -474,7 +498,7 @@ void Alife::virusMove()
         int size =  m_livingCells.size();
         for(int i = 0; i < size; i++) {
             struct cell* cell = m_livingCells.at(i);
-            newImage.setPixel(cell->x,cell->y,qRgb(255,255,255));
+            newImage.setPixel(cell->x,cell->y,qRgb(cell->r,cell->g,cell->b));
         }
 
         m_current = newImage;
