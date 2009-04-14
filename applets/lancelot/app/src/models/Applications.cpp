@@ -61,7 +61,12 @@ void Applications::load()
     if (!root || !root->isValid())
         return;
 
-    KServiceGroup::List list = root->entries();
+    // KServiceGroup::List list = root->entries();
+    const KServiceGroup::List list =
+            root->entries(true /* sorted */,
+                          true /* exclude no display entries */,
+                          false /* allow separators */,
+                          false /* sort by generic name */);
     m_items.clear();
     QList < Applications * > submodelsOld = m_submodels;
     m_submodels.clear();
