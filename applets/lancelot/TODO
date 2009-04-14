@@ -48,6 +48,7 @@ Feature requests:
  - places to load from dolphin - FINISHED
  - choose which categories to show in the applet - FINISHED
  - menu sorting - FINISHED
+ - DnD searched applications - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
@@ -63,6 +64,5 @@ Feature requests:
  - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
  - advanced parts widget: list mode, icons mode, ..., search bar... - yes
  - align lists that don't have enough items bottom when the mouse comes from bottom - maybe
- - DnD searched applications - yes
  - Disk free space info - maybe
 

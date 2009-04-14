@@ -198,10 +198,31 @@ void Runner::contextActivate(int index, QAction * context)
         KService::Ptr service = KService::serviceByStorageId(
                 itemAt(index).data.value< QStringList >().at(2));
         if (service) {
-;           FavoriteApplications::instance()
+            FavoriteApplications::instance()
                 ->addFavorite(service->entryPath());
         }
     }
+}
+
+QMimeData * Runner::mimeData(int index) const
+{
+    if (!valid) return NULL;
+
+    if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
+        KService::Ptr service = KService::serviceByStorageId(
+                itemAt(index).data.value< QStringList >().at(2));
+        return BaseModel::mimeForService(service);
+    }
+
+    return NULL;
+}
+
+void Runner::setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction)
+{
+    Q_UNUSED(index);
+    actions = Qt::CopyAction;
+    defaultAction = Qt::CopyAction;
 }
 
 } // namespace Models

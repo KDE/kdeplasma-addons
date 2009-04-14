@@ -42,6 +42,10 @@ public:
     L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override void contextActivate(int index, QAction * context);
 
+    L_Override QMimeData * mimeData(int index) const;
+    L_Override void setDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+
 public Q_SLOTS:
     void setSearchString(const QString & search);
     void setQueryMatches(const QList<Plasma::QueryMatch> &matches);
