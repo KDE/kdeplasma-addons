@@ -18,17 +18,17 @@
 #ifndef WEATHERSTATION_HEADER
 #define WEATHERSTATION_HEADER
 
-#include "weatherconfig.h"
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 #include <conversion/value.h>
+#include <plasmaweather/weatherpopupapplet.h>
+#include "ui_appearanceconfig.h"
 
 class LCD;
 class QGraphicsLinearLayout;
-class WeatherConfig;
 namespace Conversion { class Value; }
 
-class WeatherStation : public Plasma::PopupApplet
+class WeatherStation : public WeatherPopupApplet
 {
     Q_OBJECT
     public:
@@ -40,46 +40,29 @@ class WeatherStation : public Plasma::PopupApplet
         virtual QGraphicsWidget *graphicsWidget();
 
     public slots:
-        void configAccepted();
-        void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+        virtual void configAccepted();
+        virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void clicked(const QString &name);
-        void finished(const QString &source);
     
     protected:
-        void connectToEngine();
         void setLCDIcon();
         void setBackground();
-        void tryCity(const QString& city);
 
         void setWind(const Conversion::Value& speed, const QString& direction);
         void setPressure(const QString& condition, const Conversion::Value& pressure,
-                         const QString& tendency, const Conversion::Value& temperature,
-                         double latitude, double longitude);
+                         const QString& tendency);
         void setTemperature(const Conversion::Value& temperature);
         void setHumidity(QString humidity);
 
         QString fitValue(const Conversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
-        QStringList fromPressure(const Conversion::Value& pressure, qreal tendency,
-                                 const Conversion::Value& temperature,
-                                 double latitude, double longitude);
-        qreal tendency(const Conversion::Value& pressure, const QString& tendency);
 
     private:
         LCD *m_lcd;
         LCD *m_lcdPanel;
-        WeatherConfig *m_weatherConfig;
-        Plasma::DataEngine *m_weatherEngine;
-        Plasma::DataEngine *m_locationEngine;
-        Plasma::DataEngine *m_timeEngine;
-        QString m_temperatureUnit;
-        QString m_speedUnit;
-        QString m_pressureUnit;
-        int m_updateInterval;
-        QString m_source;
+        Ui::AppearanceConfig m_appearanceConfig;
         bool m_useBackground;
         QString m_url;
-        WeatherValidator m_validator;
 };
 
 K_EXPORT_PLASMA_APPLET(weatherstation, WeatherStation)

@@ -3,16 +3,14 @@ project(plasma-weatherstation)
 set(weatherstation_SRCS
     weatherstation.cpp
     lcd.cpp
-    weatherconfig.cpp
 )
 
 kde4_add_ui_files(weatherstation_SRCS
-    weatherconfig.ui
-    weatherconfigsearch.ui
+    appearanceconfig.ui
 )
 
 kde4_add_plugin(plasma_applet_weatherstation ${weatherstation_SRCS})
-target_link_libraries(plasma_applet_weatherstation conversion
+target_link_libraries(plasma_applet_weatherstation conversion plasmaweather
     ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_PLASMA_LIBS} ${KDE4WORKSPACE_WEATHERION_LIBRARY} )
 
 install(TARGETS plasma_applet_weatherstation DESTINATION ${PLUGIN_INSTALL_DIR})

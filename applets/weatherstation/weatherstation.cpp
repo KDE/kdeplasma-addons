@@ -21,21 +21,19 @@
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KRun>
+#include <KToolInvocation>
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <plasma/weather/weatherutils.h>
 #include <conversion/converter.h>
+#include <plasmaweather/weatherconfig.h>
 #include <math.h>
 #include "lcd.h"
-#include "weatherconfig.h"
 
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
-    : Plasma::PopupApplet(parent, args), m_lcd(0), m_lcdPanel(0), m_locationEngine(0)
+    : WeatherPopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
 {
-    setHasConfigurationInterface(true);
     resize(250, 350);
-    connect(&m_validator, SIGNAL(finished(const QString&)),
-            this, SLOT(finished(const QString&)));
 }
 
 WeatherStation::~WeatherStation()
@@ -58,68 +56,12 @@ void WeatherStation::init()
 
     KConfigGroup cfg = config();
 
-    if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
-        m_temperatureUnit = cfg.readEntry("temperatureUnit", "C");
-        m_speedUnit = cfg.readEntry("speedUnit", "ms");
-        m_pressureUnit = cfg.readEntry("pressureUnit", "hPa");
-    } else {
-        m_temperatureUnit = cfg.readEntry("temperatureUnit", "F");
-        m_speedUnit = cfg.readEntry("speedUnit", "mph");
-        m_pressureUnit = cfg.readEntry("pressureUnit", "mb");
-    }
-    m_updateInterval = cfg.readEntry("updateWeather", 30);
-    m_source = cfg.readEntry("source", "");
     m_useBackground = cfg.readEntry("background", true);
     setBackground();
 
-    m_weatherEngine = dataEngine("weather");
-    m_timeEngine = dataEngine("time");
-    m_validator.setDataEngine(m_weatherEngine);
     setLCDIcon();
-    connectToEngine();
-}
-
-void WeatherStation::connectToEngine()
-{
-    if (m_source.isEmpty()) {
-        m_locationEngine = dataEngine("geolocation");
-        if (m_locationEngine->isValid()) {
-            m_locationEngine->connectSource("location", this);
-            setBusy(true);
-        } else {
-            setConfigurationRequired(true);
-        }
-    } else {
-        m_lcd->setNumber("temperature", "Load");
-        m_lcd->setNumber("humidity", "ing");
-        //kDebug() << m_source;
-        m_weatherEngine->connectSource(m_source, this, m_updateInterval * 60 * 1000);
-    }
-}
-
-void WeatherStation::tryCity(const QString& city)
-{
-    QString tmp = city.left(city.indexOf(','));
-    //kDebug() << city << tmp;
-    if (!tmp.isEmpty()) {
-        m_validator.validate("bbcukmet", tmp, true);
-        return;
-    }
-    setConfigurationRequired(true);
-}
-
-void WeatherStation::finished(const QString &source)
-{
-    setBusy(false);
-    if (!source.isEmpty()) {
-        m_source = source;
-        KConfigGroup cfg = config();
-        cfg.writeEntry("source", m_source);
-        emit configNeedsSaving();
-        connectToEngine();
-    } else {
-        setConfigurationRequired(true);
-    }
+    
+    WeatherPopupApplet::init();
 }
 
 QGraphicsWidget* WeatherStation::graphicsWidget()
@@ -143,37 +85,25 @@ void WeatherStation::setBackground()
 
 void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
 {
-    m_weatherConfig = new WeatherConfig(parent);
-    m_weatherConfig->setDataEngine(m_weatherEngine);
-    m_weatherConfig->setSource(m_source);
-    m_weatherConfig->setUpdateInterval(m_updateInterval);
-    m_weatherConfig->setTemperatureUnit(m_temperatureUnit);
-    m_weatherConfig->setSpeedUnit(m_speedUnit);
-    m_weatherConfig->setPressureUnit(m_pressureUnit);
-    m_weatherConfig->setBackground(m_useBackground);
-    parent->addPage(m_weatherConfig, i18n("Weather"), icon());
-    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    WeatherPopupApplet::createConfigurationInterface(parent);
+    WeatherConfig* wc = weatherConfig();
+    wc->setConfigurableUnits(WeatherConfig::Temperature | WeatherConfig::Speed |
+                             WeatherConfig::Pressure);
+    
+    QWidget *w = new QWidget();
+    m_appearanceConfig.setupUi(w);
+    m_appearanceConfig.backgroundCheckBox->setChecked(m_useBackground);
+    parent->addPage(w, i18n("Appearance"), icon());
 }
 
 void WeatherStation::configAccepted()
 {
-    setConfigurationRequired(false);
-    if (!m_source.isEmpty()) {
-        m_weatherEngine->disconnectSource(m_source, this);
-    }
-
     KConfigGroup cfg = config();
-    cfg.writeEntry("temperatureUnit", m_temperatureUnit = m_weatherConfig->temperatureUnit());
-    cfg.writeEntry("speedUnit", m_speedUnit = m_weatherConfig->speedUnit());
-    cfg.writeEntry("pressureUnit", m_pressureUnit = m_weatherConfig->pressureUnit());
-    cfg.writeEntry("updateInterval", m_updateInterval = m_weatherConfig->updateInterval());
-    cfg.writeEntry("source", m_source = m_weatherConfig->source());
-    cfg.writeEntry("background", m_useBackground = m_weatherConfig->background());
+    cfg.writeEntry("background", m_useBackground =
+            m_appearanceConfig.backgroundCheckBox->isChecked());
     setBackground();
 
-    emit configNeedsSaving();
-    connectToEngine();
+    WeatherPopupApplet::configAccepted();
 }
 
 void WeatherStation::setLCDIcon()
@@ -186,30 +116,24 @@ void WeatherStation::setLCDIcon()
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << source << data;
-    if (source == "location") {
-        tryCity(data["city"].toString());
-        m_locationEngine->disconnectSource(source, this);
-        return;
+    WeatherPopupApplet::dataUpdated(source, data);
+
+    if (data.contains("Credit Url")) {
+        Conversion::Value temp = Conversion::Value(data["Temperature"],
+                WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
+        setTemperature(temp);
+        setPressure(conditionIcon(),
+                    Conversion::Value(data["Pressure"],
+                        WeatherUtils::getUnitString(data["Pressure Unit"].toInt())),
+                    data["Pressure Tendency"].toString());
+        setHumidity(data["Humidity"].toString());
+        setWind(Conversion::Value(data["Wind Speed"],
+                WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
+                data["Wind Direction"].toString());
+        m_lcd->setLabel("label0", data["Credit"].toString());
+        m_url = data["Credit Url"].toString();
+        m_lcd->setItemClickable("label0", !m_url.isEmpty());
     }
-    if (data.isEmpty()) {
-        return;
-    }
-    Conversion::Value temp = Conversion::Value(data["Temperature"],
-                             WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
-    setTemperature(temp);
-    setPressure(data["Condition Icon"].toString(),
-                Conversion::Value(data["Pressure"],
-                    WeatherUtils::getUnitString(data["Pressure Unit"].toInt())),
-                data["Pressure Tendency"].toString(), temp,
-                data["Latitude"].toDouble(), data["Longitude"].toDouble());
-    setHumidity(data["Humidity"].toString());
-    setWind(Conversion::Value(data["Wind Speed"],
-            WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
-            data["Wind Direction"].toString());
-    m_lcd->setLabel("label0", data["Credit"].toString());
-    m_url = data["Credit Url"].toString();
-    m_lcd->setItemClickable("label0", !m_url.isEmpty());
 }
 
 QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
@@ -270,79 +194,25 @@ QStringList WeatherStation::fromCondition(const QString& condition)
     return result;
 }
 
-qreal WeatherStation::tendency(const Conversion::Value& pressure, const QString& tendency)
-{
-    qreal t;
-    
-    if (tendency.toLower() == "rising") {
-        t = 0.75;
-    } else if (tendency.toLower() == "falling") {
-        t = -0.75;
-    } else {
-        t = Conversion::Converter::self()->convert(
-                Conversion::Value(tendency.toDouble(), pressure.unit()), "kPa").number();
-    }
-    return t;
-}
-
-QStringList WeatherStation::fromPressure(const Conversion::Value& pressure, qreal tendency,
-                                         const Conversion::Value& temperature,
-                                         double latitude, double longitude)
-{
-    QStringList result;
-    qreal temp = Conversion::Converter::self()->convert(temperature, "C").number();
-    qreal p = Conversion::Converter::self()->convert(pressure, "kPa").number();
-
-    p += tendency * 10; // This is completely unscientific so if anyone have a better formula for this :-)
-
-    Plasma::DataEngine::Data data = m_timeEngine->query(
-            QString("Local|Solar|Latitude=%1|Longitude=%2").arg(latitude).arg(longitude));
-    QString sunOrMoon = (data["Corrected Elevation"].toDouble() < 0.0) ? "moon" : "sun";
-    
-    if (p > 103.0) {
-        result << sunOrMoon;
-    } else if (p > 100.0) {
-        result << "half_" + sunOrMoon << "lower_cloud";
-    } else if (p > 99.0) {
-        result << "cloud" << "cloud_flash_hole";
-        if (temp > 1.0) {
-            result << "water_drop";
-        } else if (temp < -1.0)  {
-            result << "snow_flake";
-        } else {
-            result << "water_drop" << "snow_flakes";
-        }
-    } else {
-        result << "cloud" << "cloud_flash_hole";
-        if (temp > 1.0) {
-            result << "water_drop" << "water_drops";
-        } else if (temp < -1.0)  {
-            result<< "snow_flake" << "snow_flakes";
-        } else {
-            result<< "water_drop" << "snow_flakes";
-        }
-    }
-    //kDebug() << result;
-    return result;
-}
-
 void WeatherStation::setPressure(const QString& condition, const Conversion::Value& pressure,
-                                 const QString& tendencyString, const Conversion::Value& temperature,
-                                 double latitude, double longitude)
+                                 const QString& tendencyString)
 {
     QStringList current;
-    qreal t = tendency(pressure, tendencyString);
-    if (!condition.isEmpty() && condition != "weather-none-available") {
-        current = fromCondition(condition);
-    }
-    if (current.size() == 0) {
-        current = fromPressure(pressure, t, temperature, latitude, longitude);
-    }
+    current = fromCondition(condition);
     m_lcd->setGroup("weather", current);
 
-    QString s = fitValue(Conversion::Converter::self()->convert(pressure, m_pressureUnit), 5);
+    QString s = fitValue(Conversion::Converter::self()->convert(pressure, pressureUnit()), 5);
     m_lcd->setNumber("pressure", s);
-    m_lcd->setGroup("pressure_unit", QStringList() << m_pressureUnit);
+    m_lcd->setGroup("pressure_unit", QStringList() << pressureUnit());
+
+    qreal t;
+    if (tendencyString.toLower() == "rising") {
+        t = 1.0;
+    } else if (tendencyString.toLower() == "falling") {
+        t = -1.0;
+    } else {
+        t = tendencyString.toDouble();
+    }
 
     if (t > 0.0) {
         m_lcd->setGroup("pressure_direction", QStringList() << "up");
@@ -355,9 +225,9 @@ void WeatherStation::setPressure(const QString& condition, const Conversion::Val
 
 void WeatherStation::setTemperature(const Conversion::Value& temperature)
 {
-    Conversion::Value v = Conversion::Converter::self()->convert(temperature, m_temperatureUnit);
-    m_lcd->setGroup("temp_unit", QStringList() << m_temperatureUnit);
-    m_lcdPanel->setGroup("temp_unit", QStringList() << m_temperatureUnit);
+    Conversion::Value v = Conversion::Converter::self()->convert(temperature, temperatureUnit());
+    m_lcd->setGroup("temp_unit", QStringList() << temperatureUnit());
+    m_lcdPanel->setGroup("temp_unit", QStringList() << temperatureUnit());
     m_lcd->setNumber("temperature", fitValue(v , 4));
     m_lcdPanel->setNumber("temperature", fitValue(v , 3));
     setLCDIcon();
@@ -376,7 +246,7 @@ void WeatherStation::setHumidity(QString humidity)
 void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
 {
     //kDebug() << speed.number() << speed.unit()->symbol() << dir;
-    QString s = fitValue(Conversion::Converter::self()->convert(speed, m_speedUnit), 3);
+    QString s = fitValue(Conversion::Converter::self()->convert(speed, speedUnit()), 3);
 
     if (dir == "N/A") {
         m_lcd->setGroup("wind", m_lcd->groupItems("wind"));
@@ -385,13 +255,13 @@ void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
     }
 
     m_lcd->setNumber("wind_speed", s);
-    m_lcd->setGroup("wind_unit", QStringList() << m_speedUnit);
+    m_lcd->setGroup("wind_unit", QStringList() << speedUnit());
 }
 
 void WeatherStation::clicked(const QString &name)
 {
     Q_UNUSED(name)
-    KRun::runUrl(KUrl(m_url), "text/html", 0);
+    KToolInvocation::invokeBrowser(m_url);
 }
 
 #include "weatherstation.moc"
