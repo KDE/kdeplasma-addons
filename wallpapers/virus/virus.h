@@ -53,6 +53,7 @@ class Virus : public Plasma::Wallpaper
         void intervalChanged(int interval);
         void maxCellsChanged(int interval);
         void showCellsChanged(int state);
+	void virusUpdated();
 
     protected:
         void init(const KConfigGroup &config);
@@ -74,7 +75,6 @@ class Virus : public Plasma::Wallpaper
         QWidget* m_configWidget;
         Ui::ImageConfig m_uiVirus;
         QString m_mode;
-        QList<Plasma::Package *> m_slideshowBackgrounds;
         QTimer m_timer;
         QPixmap m_pixmap;
         QPixmap m_oldPixmap;

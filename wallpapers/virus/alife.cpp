@@ -7,12 +7,14 @@
   (at your option) any later version.
 */
 
+//TODO: make this multithread
+
 #include "alife.h" 
 
 #include <KDebug>
 
 #define VIRUS_GENOME_SIZE 30
-#define MAX_AGE 10
+#define MAX_AGE 30
 
 Alife::Alife(){
     m_cells = 0;
@@ -58,6 +60,7 @@ void Alife::initVirus()
     createViruses(m_startViruses);
 }
 
+//create the needed viruses so that we have in total "amount" viruses
 void Alife::createViruses(int amount){
 
     for(int i = m_livingCells.size(); i < amount; i++) {
@@ -84,6 +87,7 @@ void Alife::createViruses(int amount){
     }
 }
 
+//resets the values of a cell
 void Alife::resetCell(struct cell *temp)
 {
     temp->alive = false;
@@ -93,13 +97,14 @@ void Alife::resetCell(struct cell *temp)
     temp->killMe = false;
 }
 
-
-
+//returns a random operation for the genome. 
+//REMINDER: Update if a new op is added
 uchar Alife::randomCode()
 {
     return qrand() % 20;
 }
 
+//Executes the code of a certain living cell
 void Alife::executeCell(int id)
 {
     struct cell* cell = m_livingCells.at(id);
@@ -401,8 +406,17 @@ QPoint Alife::getNeighbour(int x, int y, int direction)
     return QPoint(x,y);
 }
 
+void Alife::run(){
+    qsrand(QTime::currentTime().msec());
+    QTime a = QTime::currentTime();
+    virusMove();
+    QTime b = QTime::currentTime();
+
+    kDebug() << "needed" << a.msecsTo(b);
+}
+
 //performance critical
-QImage Alife::virusMove()
+void Alife::virusMove()
 {
     //kDebug() << m_max_attended << m_livingCells.size() << m_maxViruses;
     if(m_livingCells.size() < m_startViruses / 3) {
@@ -463,8 +477,8 @@ QImage Alife::virusMove()
             newImage.setPixel(cell->x,cell->y,qRgb(255,255,255));
         }
 
-        return newImage;
+        m_current = newImage;
     } else {
-        return m_image;
+        m_current = m_image;
     }
 }

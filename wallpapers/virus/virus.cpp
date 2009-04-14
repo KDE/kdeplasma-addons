@@ -45,11 +45,12 @@ Virus::Virus(QObject *parent, const QVariantList &args)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
+    connect(&alife, SIGNAL(finished()), this, SLOT(virusUpdated()));
 }
 
 Virus::~Virus()
 {
-    qDeleteAll(m_slideshowBackgrounds);
+    alife.exit(0);
 }
 
 void Virus::init(const KConfigGroup &config)
@@ -90,11 +91,12 @@ void Virus::init(const KConfigGroup &config)
 
 void Virus::requestUpdate()
 {
-    QTime a = QTime::currentTime();
-    m_pixmap = QPixmap::fromImage(alife.virusMove()); //virus attack
-    QTime b = QTime::currentTime();
+    alife.start();
+}
 
-    kDebug() << "needed" << a.msecsTo(b);
+void Virus::virusUpdated(){
+    m_pixmap = QPixmap::fromImage(alife.currentImage());
+    
     emit update(boundingRect());
     
     QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));

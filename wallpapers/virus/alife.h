@@ -13,6 +13,8 @@
 #include <QObject>
 #include <QImage>
 #include <QPoint>
+#include <QThread>
+#include <QTime>
 
 struct cell {
     bool alive;
@@ -24,13 +26,15 @@ struct cell {
     bool killMe;
 };
 
-class Alife : public QObject {
+class Alife : public QThread {
   Q_OBJECT
   public:
     Alife();
     virtual ~Alife();
 
-    QImage virusMove();
+    QImage currentImage(){return m_current;};
+    void run();
+    void virusMove();
     void initVirus();
     int normalXY(int coord, int max);
     void executeCell(int i);
@@ -100,6 +104,7 @@ class Alife : public QObject {
 
     QImage m_image;
     QImage m_image_original;
+    QImage m_current;
 };
 
 #endif
