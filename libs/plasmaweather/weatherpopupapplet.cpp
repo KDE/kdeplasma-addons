@@ -84,6 +84,7 @@ public:
             validator.validate("bbcukmet", tmp, true);
             return;
         }
+        q->setBusy(false);
         q->setConfigurationRequired(true);
     }
     
