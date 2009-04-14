@@ -361,13 +361,13 @@ bool Alife::reproduce(struct cell* cell, int direction)
   
 	for(int i = 0; i < VIRUS_GENOME_SIZE; i++) {
 	    if(newCell->code[i] == 4) {
-		newCell->r = qMax(newCell->r+50, 255);
+		newCell->r = qMin(newCell->r+50, 255);
 	    }
 	    if(newCell->code[i] == 5) {
-		newCell->g = qMax(newCell->g+50, 255);
+		newCell->g = qMin(newCell->g+50, 255);
 	    }
 	    if(newCell->code[i] == 6) {
-		newCell->b = qMax(newCell->b+50, 255);
+		newCell->b = qMin(newCell->b+50, 255);
 	    }
 	}
 
