@@ -37,9 +37,9 @@ class QStyleOptionGraphicsItem;
 
 struct cpuInfo
 {
-    double user, sys, nice, idle, disk;
-    int clock;
-    cpuInfo(): user(0), sys(0), nice(0), idle(0), disk(0), clock(0) {}
+    double user, sys, nice, idle, disk, clock;
+    bool clockValid;
+    cpuInfo(): user(0), sys(0), nice(0), idle(0), disk(0), clock(0), clockValid(false) {}
 };
 
 class SystemLoadViewer : public Plasma::Applet

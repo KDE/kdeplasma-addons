@@ -66,7 +66,6 @@ void SystemLoadViewer::init()
 
     sys_mon = dataEngine("systemmonitor");
     connect(sys_mon, SIGNAL(sourceAdded(const QString &)), this, SLOT(sourcesAdded(const QString &)));
-    reconnectSources();
 
     Plasma::ToolTipManager::self()->registerWidget(this);
 }
@@ -87,6 +86,8 @@ void SystemLoadViewer::reconnectSources()
 
 void SystemLoadViewer::reconnectCPUSources()
 {
+    m_numCPUs = sys_mon->query("system/cores")["value"].toUInt();
+    
     if (!m_showMultiCPU) {
 
         sys_mon->connectSource("cpu/system/user", this, m_updateInterval);
@@ -94,13 +95,10 @@ void SystemLoadViewer::reconnectCPUSources()
         sys_mon->connectSource("cpu/system/nice", this, m_updateInterval);
         sys_mon->connectSource("cpu/system/wait", this, m_updateInterval);
         sys_mon->connectSource("cpu/system/idle", this, m_updateInterval);
-        sys_mon->connectSource("cpu/system/clock", this, m_updateInterval);
-
+        sys_mon->connectSource("cpu/system/AverageClock", this, m_updateInterval);
+        
     } else {
 
-        sys_mon->connectSource("system/cores", this, m_updateInterval);
-
-        m_numCPUs = sys_mon->query("system/cores")["value"].toUInt();
         if (m_numCPUs == 0) {
             //If we have zero, either the sources doesn't exist or theres a problem.
             return ;
@@ -116,6 +114,7 @@ void SystemLoadViewer::reconnectCPUSources()
             sys_mon->connectSource(QString("cpu/cpu%1/wait").arg(i), this, m_updateInterval);
             sys_mon->connectSource(QString("cpu/cpu%1/idle").arg(i), this, m_updateInterval);
             sys_mon->connectSource(QString("cpu/cpu%1/clock").arg(i), this, m_updateInterval);
+            m_cpuInfo[i].clockValid = false;
 
         }
     }
@@ -144,7 +143,8 @@ void SystemLoadViewer::disconnectCPUSources()
         sys_mon->disconnectSource("cpu/system/nice", this);
         sys_mon->disconnectSource("cpu/system/wait", this);
         sys_mon->disconnectSource("cpu/system/idle", this);
-        sys_mon->disconnectSource("cpu/system/clock", this);
+        sys_mon->disconnectSource("cpu/system/AverageClock", this);
+        m_cpuInfo[0].clockValid = false;
 
     } else {
 
@@ -156,21 +156,24 @@ void SystemLoadViewer::disconnectCPUSources()
             sys_mon->disconnectSource(QString("cpu/cpu%1/wait").arg(i), this);
             sys_mon->disconnectSource(QString("cpu/cpu%1/idle").arg(i), this);
             sys_mon->disconnectSource(QString("cpu/cpu%1/clock").arg(i), this);
+            m_cpuInfo[i].clockValid = false;
+
         }
     }
 }
 
 void SystemLoadViewer::sourcesAdded(const QString &source)
 {
+    //kDebug() <<  source;
     if (source == "system/cores") {
 
-        reconnectCPUSources();
+        sys_mon->connectSource(source, this, m_updateInterval);
 
     } else if (source.startsWith(QLatin1String("cpu/system/")) && !m_showMultiCPU) {
 
         if (source.endsWith(QLatin1String("/user")) || source.endsWith(QLatin1String("/sys")) ||
             source.endsWith(QLatin1String("/nice")) || source.endsWith(QLatin1String("/wait")) ||
-            source.endsWith(QLatin1String("/idle")) || source.endsWith(QLatin1String("/clock")))
+            source.endsWith(QLatin1String("/idle")) || source.endsWith(QLatin1String("/AverageClock")))
         {
             sys_mon->connectSource(source, this, m_updateInterval);
         }
@@ -374,8 +377,10 @@ void SystemLoadViewer::configUpdated()
 
 void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    if (m_showMultiCPU && source == "system/cores") {
+    //kDebug() << source << "=" << data["value"].toString();
+    if (source == "system/cores") {
         if (data["value"].toUInt() != m_numCPUs) {
+            disconnectCPUSources();
             reconnectCPUSources();
             updateConstraints(Plasma::SizeConstraint);
         }
@@ -390,10 +395,11 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_cpuInfo[0].disk = (data["value"].toString().toDouble()) / 100;
         } else if (source.endsWith(QLatin1String("/idle"))) {
             m_cpuInfo[0].idle = (data["value"].toString().toDouble()) / 100;
-        } else if (source.endsWith(QLatin1String("/clock"))) {
+        } else if (source.endsWith(QLatin1String("/AverageClock"))) {
+            m_cpuInfo[0].clockValid = true;
             m_cpuInfo[0].clock = (data["value"].toString().toDouble());
         }
-    } else if (m_showMultiCPU && source.startsWith(QLatin1String("cpu/"))) {
+    } else if (m_showMultiCPU && source.startsWith(QLatin1String("cpu/")) && (m_numCPUs != 0)) {
         int cpu = source.split('/')[1].mid(3).toInt();
 
         if (cpu >= m_cpuInfo.size()) {
@@ -413,6 +419,7 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
         } else if (source.endsWith(QLatin1String("/idle"))) {
             m_cpuInfo[cpu].idle = (data["value"].toString().toDouble()) / 100;
         } else if (source.endsWith(QLatin1String("/clock"))) {
+            m_cpuInfo[cpu].clockValid = true;
             m_cpuInfo[cpu].clock = (data["value"].toString().toDouble());
         }
     } else if (source.startsWith(QLatin1String("mem/swap/"))) {
@@ -597,11 +604,26 @@ void SystemLoadViewer::toolTipAboutToShow()
     if (m_showMultiCPU) {
         for (uint i = 0; i < m_numCPUs; ++i) {
             cpuUsage = qRound((1 - m_cpuInfo[i].idle) * 100);
-            content += i18n("CPU %1 Usage: %2% at %3 MHz<br />", i+1, cpuUsage, m_cpuInfo[i].clock);
+            if (m_cpuInfo[i].clockValid) {
+                content += i18n("CPU %1 Usage: %2% at %3 MHz<br />", i+1, cpuUsage, m_cpuInfo[i].clock);
+            }
+            else {
+                content += i18n("CPU %1 Usage: %2%<br />", i+1, cpuUsage);
+            }
         }
     } else {
         cpuUsage = qRound((1 - m_cpuInfo[0].idle) * 100);
-        content += i18n("CPU Usage: %1% at %2 MHz<br />", cpuUsage, m_cpuInfo[0].clock);
+        if (m_cpuInfo[0].clockValid) {
+            if (m_numCPUs >1) {
+                content += i18n("CPU Usage: %1% at %2 MHz/CPU<br />", cpuUsage, m_cpuInfo[0].clock);
+            }
+            else {
+                content += i18n("CPU Usage: %1% at %2 MHz<br />", cpuUsage, m_cpuInfo[0].clock);
+            }
+        }
+        else {
+            content += i18n("CPU Usage: %1%<br />", cpuUsage);
+        }
     }
 
     // Memory Usage
