@@ -63,8 +63,8 @@ void Applications::load()
 
     // KServiceGroup::List list = root->entries();
     const KServiceGroup::List list =
-            root->entries(true /* sorted */,
-                          true /* exclude no display entries */,
+            root->entries(true  /* sorted */,
+                          true  /* exclude no display entries */,
                           false /* allow separators */,
                           false /* sort by generic name */);
     m_items.clear();
