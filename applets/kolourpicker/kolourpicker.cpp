@@ -288,7 +288,7 @@ void Kolourpicker::colorActionTriggered(QAction *act)
 
     QMimeData *mime = new QMimeData();
     mime->setColorData(color);
-    mime->setText(act->text());
+    mime->setText(act->text().remove(QChar('&')));
     QApplication::clipboard()->setMimeData(mime, QClipboard::Clipboard);
 }
 
