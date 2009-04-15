@@ -41,6 +41,13 @@ public:
         }
     }
 
+    void enableOK()
+    {
+        KDialog *dlg = qobject_cast<KDialog*>(q->parent());
+        if (dlg) {
+            dlg->enableButton(KDialog::Ok, !source.isEmpty());
+        }
+    }
 
     WeatherConfig *q;
     WeatherConfigSearch searchDlg;
@@ -93,6 +100,7 @@ void WeatherConfig::setSource(const QString& source)
     if (list.count() > 2) {
         d->ui.cityTextLabel->setText(list[2]);
     }
+    d->enableOK();
 }
 
 void WeatherConfig::setUpdateInterval(int interval)
