@@ -67,9 +67,9 @@ protected slots:
     void browse();
     void updateBackground(const QImage &img);
     void showFileDialog();
-    void removeBackground(const QString &path);
     void updateFadedImage(qreal frame);
     void configWidgetDestroyed();
+    void advancedDialogDestroyed();
     void locationReady(const QString &source);
 
 protected:

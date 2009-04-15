@@ -78,6 +78,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
         // TODO - Find a better way to retrieve weather than by looking at the icon name...
         // Map each wallpaper to a weather condition
         m_weatherMap["N/A"] = Plasma::Theme::defaultTheme()->wallpaperPath();
+        m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
         m_weatherMap["weather-clear"] = m_dir + "Fields_of_Peace";
         m_weatherMap["weather-few-clouds"] = m_dir + "Colorado_Farm";
         m_weatherMap["weather-clouds"] = m_dir + "Colorado_Farm";
@@ -128,6 +129,12 @@ void WeatherWallpaper::save(KConfigGroup & config)
 void WeatherWallpaper::configWidgetDestroyed()
 {
     m_configWidget = 0;
+}
+
+void WeatherWallpaper::advancedDialogDestroyed()
+{
+    m_advancedDialog = 0;
+    m_model = 0;
 }
 
 QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
@@ -214,13 +221,13 @@ void WeatherWallpaper::showAdvancedDialog()
         m_advancedDialog->setButtons(KDialog::Ok | KDialog::Cancel);
 
         qreal ratio = m_size.isEmpty() ? 1.0 : m_size.width() / qreal(m_size.height());
-        m_model = new BackgroundListModel(ratio, this);
+        m_model = new BackgroundListModel(ratio, this, m_advancedDialog);
         m_model->setResizeMethod(m_resizeMethod);
         m_model->setWallpaperSize(m_size);
         m_model->reload(m_usersWallpapers);
         m_advancedUi.m_wallpaperView->setModel(m_model);
         m_advancedUi.m_wallpaperView->setItemDelegate(new BackgroundDelegate(m_advancedUi.m_wallpaperView->view(),
-                                                                             ratio, this));
+                                                                             ratio, m_advancedDialog));
         m_advancedUi.m_wallpaperView->view()->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         connect(m_advancedUi.m_conditionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionChanged(int)));
@@ -269,6 +276,7 @@ void WeatherWallpaper::showAdvancedDialog()
         connect(m_advancedUi.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
     }
     KDialog::centerOnScreen(m_advancedDialog);
+    connect(m_advancedDialog, SIGNAL(destroyed(QObject*)), this, SLOT(advancedDialogDestroyed()));
     m_advancedDialog->show();
 }
 
@@ -505,13 +513,6 @@ void WeatherWallpaper::updateBackground(const QImage &img)
 void WeatherWallpaper::updateScreenshot(QPersistentModelIndex index)
 {
     m_advancedUi.m_wallpaperView->view()->update(index);
-}
-
-void WeatherWallpaper::removeBackground(const QString &path)
-{
-    if (m_model) {
-        m_model->removeBackground(path);
-    }
 }
 
 void WeatherWallpaper::updateFadedImage(qreal frame)

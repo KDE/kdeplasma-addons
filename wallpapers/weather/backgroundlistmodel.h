@@ -30,7 +30,7 @@ class BackgroundListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    BackgroundListModel(float ratio, Plasma::Wallpaper *listener);
+    BackgroundListModel(float ratio, Plasma::Wallpaper *listener, QObject *parent);
     virtual ~BackgroundListModel();
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;

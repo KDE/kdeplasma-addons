@@ -14,6 +14,7 @@
 #include <QDir>
 #include <QProgressBar>
 
+#include <KDebug>
 #include <KFileMetaInfo>
 #include <KGlobal>
 #include <KIO/PreviewJob>
@@ -26,14 +27,20 @@
 #include "backgrounddelegate.h"
 #include "weatherwallpaper.h"
 
-BackgroundListModel::BackgroundListModel(float ratio, Plasma::Wallpaper *listener)
-    : m_listener(listener),
+BackgroundListModel::BackgroundListModel(float ratio, Plasma::Wallpaper *listener, QObject *parent)
+    : QAbstractListModel(parent),
+      m_listener(listener),
       m_structureParent(listener),
       m_ratio(ratio),
       m_size(0,0),
       m_resizeMethod(Plasma::Wallpaper::ScaledResize)
 {
-    connect(&m_dirwatch, SIGNAL(deleted(QString)), listener, SLOT(removeBackground(QString)));
+    connect(&m_dirwatch, SIGNAL(deleted(QString)), this, SLOT(removeBackground(QString)));
+}
+
+BackgroundListModel::~BackgroundListModel()
+{
+    qDeleteAll(m_packages);
 }
 
 void BackgroundListModel::removeBackground(const QString &path)
@@ -41,7 +48,9 @@ void BackgroundListModel::removeBackground(const QString &path)
     int index;
     while ((index = indexOf(path)) != -1) {
         beginRemoveRows(QModelIndex(), index, index);
+        Plasma::Package *package = m_packages.at(index);
         m_packages.removeAt(index);
+        delete package;
         endRemoveRows();
     }
 }
@@ -51,10 +60,17 @@ void BackgroundListModel::reload()
     reload(QStringList());
 }
 
-void BackgroundListModel::reload(const QStringList& selected)
+void BackgroundListModel::reload(const QStringList &selected)
 {
     QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", "");
     QList<Plasma::Package *> tmp;
+
+    if (!m_packages.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_packages.count() - 1);
+        qDeleteAll(m_packages);
+        m_packages.clear();
+        endRemoveRows();
+    }
 
     foreach (const QString &file, selected) {
         if (!contains(file) && QFile::exists(file)) {
@@ -81,7 +97,7 @@ void BackgroundListModel::reload(const QStringList& selected)
 
     if (!tmp.isEmpty()) {
         beginInsertRows(QModelIndex(), 0, tmp.size() - 1);
-        m_packages = tmp + m_packages;
+        m_packages = tmp;
         endInsertRows();
     }
 }
@@ -113,13 +129,6 @@ int BackgroundListModel::indexOf(const QString &path) const
 bool BackgroundListModel::contains(const QString &path) const
 {
     return indexOf(path) != -1;
-}
-
-BackgroundListModel::~BackgroundListModel()
-{
-    foreach (Plasma::Package *pkg, m_packages) {
-        delete pkg;
-    }
 }
 
 int BackgroundListModel::rowCount(const QModelIndex &) const
