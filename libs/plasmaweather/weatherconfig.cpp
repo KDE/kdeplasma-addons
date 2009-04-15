@@ -43,7 +43,6 @@ public:
 
     void enableOK()
     {
-        KDialog *dlg = qobject_cast<KDialog*>(q->parent());
         if (dlg) {
             dlg->enableButton(KDialog::Ok, !source.isEmpty());
         }
@@ -53,12 +52,14 @@ public:
     WeatherConfigSearch searchDlg;
     QString source;
     Ui::WeatherConfig ui;
+    KDialog *dlg;
 };
 
 WeatherConfig::WeatherConfig(QWidget *parent)
     : QWidget(parent)
     , d(new Private(this))
 {
+    d->dlg = qobject_cast<KDialog*>(parent);
     d->ui.setupUi(this);
     d->ui.temperatureComboBox->addItem(i18n("Celsius \302\260C"), "C");
     d->ui.temperatureComboBox->addItem(i18n("Fahrenheit \302\260F"), "F");
