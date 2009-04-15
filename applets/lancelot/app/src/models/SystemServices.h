@@ -20,18 +20,17 @@
 #ifndef LANCELOTAPP_MODELS_SYSTEMSERVICES_H
 #define LANCELOTAPP_MODELS_SYSTEMSERVICES_H
 
-#include "BaseModel.h"
+#include "FolderModel.h"
 
 namespace Models {
 
-class SystemServices : public BaseModel {
+class SystemServices : public FolderModel {
     Q_OBJECT
 public:
     SystemServices();
     virtual ~SystemServices();
 
-protected:
-    void load();
+    static QString path();
 
 };
 

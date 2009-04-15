@@ -18,25 +18,58 @@
  */
 
 #include "SystemServices.h"
+#include <KStandardDirs>
 
 namespace Models {
 
 SystemServices::SystemServices()
-    : BaseModel(true)
+    : FolderModel(SystemServices::path(), QDir::Name)
 {
-    load();
+    QDir dir(path());
+    if (dir.entryList(QDir::Files | QDir::NoDotAndDotDot).size() == 0) {
+
+        QStringList applications;
+        applications
+            << "systemsettings"
+            << "ksysguard"
+            << "kinfocenter";
+
+        int index = 0;
+
+        foreach (const QString & serviceAlternatives, applications) {
+            foreach (const QString & serviceName, serviceAlternatives.split('|')) {
+                const KService::Ptr service = KService::serviceByStorageId(serviceName);
+                if (service) {
+                    QFileInfo file(service->entryPath());
+                    QFile::copy(
+                        service->entryPath(),
+                        dir.absolutePath() + "/" +
+                        QString::number(index++) + "_" + file.fileName());
+                    break;
+                }
+            }
+        }
+
+
+    }
 }
 
 SystemServices::~SystemServices()
 {
 }
 
-void SystemServices::load()
+QString SystemServices::path()
 {
-    addService("systemsettings");
-    addService("ksysguard");
-    addService("kinfocenter");
-    addService("adept");
+    QString path = KStandardDirs::locateLocal("data", "lancelot", true);
+    if (!path.endsWith("/")) {
+        path += "/";
+    }
+    path += "/systemservices/";
+
+    QDir dir;
+    dir.mkpath(path);
+
+    return path;
 }
 
 } // namespace Models

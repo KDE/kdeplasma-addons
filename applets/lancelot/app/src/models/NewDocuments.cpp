@@ -18,29 +18,60 @@
  */
 
 #include "NewDocuments.h"
+#include <KStandardDirs>
 
 namespace Models {
 
 NewDocuments::NewDocuments()
-    : BaseModel(true)
+    : FolderModel(NewDocuments::path(), QDir::Name)
 {
-    load();
+    QDir dir(path());
+    if (dir.entryList(QDir::Files | QDir::NoDotAndDotDot).size() == 0) {
+
+        QStringList applications;
+        applications
+            << "ooo-writer|writer|kword"
+            << "ooo-impress|impress|kpresenter"
+            << "ooo-calc|calc|kspread"
+            << "inkscape|karbon"
+            << "gimp|krita";
+
+        int index = 0;
+
+        foreach (const QString & serviceAlternatives, applications) {
+            foreach (const QString & serviceName, serviceAlternatives.split('|')) {
+                const KService::Ptr service = KService::serviceByStorageId(serviceName);
+                if (service) {
+                    QFileInfo file(service->entryPath());
+                    QFile::copy(
+                        service->entryPath(),
+                        dir.absolutePath() + "/" +
+                        QString::number(index++) + "_" + file.fileName());
+                    break;
+                }
+            }
+        }
+
+
+    }
 }
 
 NewDocuments::~NewDocuments()
 {
 }
 
-void NewDocuments::load()
+QString NewDocuments::path()
 {
-    QStringList applications;
-    applications
-        << "ooo-writer|writer|kword"
-        << "ooo-impress|impress|kpresenter"
-        << "ooo-calc|calc|kspread"
-        << "inkscape|karbon"
-        << "gimp|krita";
-    addServices(applications);
+    QString path = KStandardDirs::locateLocal("data", "lancelot", true);
+    if (!path.endsWith("/")) {
+        path += "/";
+    }
+    path += "/newdocuments/";
+
+    QDir dir;
+    dir.mkpath(path);
+
+    return path;
 }
 
 } // namespace Models

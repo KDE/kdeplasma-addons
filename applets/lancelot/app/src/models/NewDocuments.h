@@ -20,18 +20,17 @@
 #ifndef LANCELOTAPP_MODELS_NEWDOCUMENTS_H
 #define LANCELOTAPP_MODELS_NEWDOCUMENTS_H
 
-#include "BaseModel.h"
+#include "FolderModel.h"
 
 namespace Models {
 
-class NewDocuments : public BaseModel {
+class NewDocuments : public FolderModel {
     Q_OBJECT
 public:
     NewDocuments();
     virtual ~NewDocuments();
 
-protected:
-    void load();
+    static QString path();
 
 };
 
