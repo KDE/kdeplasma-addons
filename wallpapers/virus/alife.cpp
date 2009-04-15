@@ -7,14 +7,12 @@
   (at your option) any later version.
 */
 
-//TODO: make this multithread
-
 #include "alife.h" 
 
 #include <KDebug>
 
 #define VIRUS_GENOME_SIZE 38
-#define MAX_AGE 30
+#define MAX_AGE 20
 
 #define MAX_EAT 10
 #define MIN_EAT 2
@@ -84,6 +82,9 @@ void Alife::createViruses(int amount){
             for(int i = 0; i < 7; i++) {
                 temp->code[i] = randomCode();
             }
+
+	    temp->code[qrand()%7] = 7; //cheating, jumpstart evolution
+
 	    /*temp->code[0] = 4;
 	    temp->code[1] = 12;
 	    temp->code[2] = 2;
