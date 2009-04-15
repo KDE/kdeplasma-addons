@@ -266,6 +266,8 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
                            WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
     d->latitude = data["Latitude"].toDouble();
     d->longitude = data["Longitude"].toDouble();
+
+    setBusy(false);
 }
 
 QString WeatherPopupApplet::pressureUnit()

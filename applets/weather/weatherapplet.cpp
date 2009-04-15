@@ -636,25 +636,20 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     update();
 
     setVisibleLayout(true);
-    setBusy(false);
     //updateGeometry();
 }
 
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
-    WeatherPopupApplet::dataUpdated(source, data);
-    
     if (data.isEmpty()) {
         return;
     }
 
     m_currentData = data;
     setVisibleLayout(false);
-    if (!isBusy()) {
-        setBusy(true);
-    }
     weatherContent(data);
     update();
+    WeatherPopupApplet::dataUpdated(source, data);
 }
 
 void WeatherApplet::configAccepted()
