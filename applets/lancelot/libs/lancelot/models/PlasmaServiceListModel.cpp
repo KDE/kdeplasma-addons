@@ -30,6 +30,9 @@ public:
     Plasma::Service * service;
     Plasma::DataEngine * engine;
     Plasma::DataEngine::Data data;
+
+    QString title;
+    QIcon icon;
 };
 
 PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
@@ -37,13 +40,29 @@ PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
 {
     d->engine = Plasma::DataEngineManager::self()->loadEngine(dataEngine);
 
-    if (!d->engine->sources().contains("lancelotModel")) {
-        qDebug() << "PlasmaServiceListModel:"
-                 << dataEngine
-                 << "is not a lancelot model";
+    if (!d->engine->sources().contains(".metadata")) {
+        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model";
         d->engine = NULL;
         return;
     }
+
+    Plasma::DataEngine::Data data =
+        d->engine->query(".metadata");
+    if (!data.contains("lancelot") ||
+        data["lancelot"].toMap()["version"] != "1.0"
+    ) {
+        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model";
+        d->engine = NULL;
+        return;
+    }
+    qDebug() << "PlasmaServiceListModel:" << data
+             << data["lancelot"].toMap()["modelTitle"].toString()
+             << data["lancelot"].toMap()["modelIcon"].toString();
+
+    d->icon = KIcon(data["lancelot"].toMap()["modelIcon"].toString());
+
+    d->title = data["lancelot"].toMap()["modelTitle"].toString();
+    d->icon = KIcon(data["lancelot"].toMap()["modelIcon"].toString());
 
     d->engine->connectSource("data", this);
 }
@@ -102,6 +121,15 @@ void PlasmaServiceListModel::dataUpdated(const QString & name,
     }
 }
 
+QString PlasmaServiceListModel::modelTitle() const
+{
+    return d->title;
+}
+
+QIcon PlasmaServiceListModel::modelIcon() const
+{
+    return d->icon;
+}
 
 } // namespace Lancelot
 

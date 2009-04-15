@@ -58,11 +58,6 @@ ActionListModel * ActionTreeModelProxy::model() const
     return d->model;
 }
 
-QMimeData * ActionTreeModel::modelMimeData()
-{
-    return NULL;
-}
-
 // ActionTreeModel
 ActionTreeModel * ActionTreeModelProxy::child(int index)
 {

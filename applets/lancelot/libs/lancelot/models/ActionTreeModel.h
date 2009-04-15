@@ -32,10 +32,6 @@ public:
     ActionTreeModel();
     virtual ~ActionTreeModel();
     virtual ActionTreeModel * child(int index) = 0;
-    virtual QString modelTitle() const = 0;
-    virtual QIcon modelIcon() const = 0;
-
-    virtual QMimeData * modelMimeData();
 };
 
 } // namespace Lancelot

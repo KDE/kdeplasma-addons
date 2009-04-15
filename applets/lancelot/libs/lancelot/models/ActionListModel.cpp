@@ -98,6 +98,21 @@ void ActionListModel::activate(int index)
     Q_UNUSED(index);
 }
 
+QString ActionListModel::modelTitle() const
+{
+    return QString();
+}
+
+QIcon ActionListModel::modelIcon() const
+{
+    return QIcon();
+}
+
+QMimeData * ActionListModel::modelMimeData()
+{
+    return NULL;
+}
+
 } // namespace Lancelot
 
 #include "ActionListModel.moc"

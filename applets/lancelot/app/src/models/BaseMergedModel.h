@@ -31,6 +31,7 @@ public:
 
     void addModel(const QString & id, QIcon icon,
             const QString & title, ActionListModel * model);
+    void addModel(const QString & id, ActionListModel * model);
     L_Override QMimeData * modelMimeData(int index) const;
     L_Override void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);

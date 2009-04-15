@@ -453,71 +453,92 @@ void LancelotWindow::systemButtonClicked()
 
 void LancelotWindow::setupModels()
 {
-     // Models:
-     m_models["Places"]            = new Models::Places();
-     m_models["SystemServices"]    = new Models::SystemServices();
-     m_models["Devices/Removable"] = new Models::Devices(Models::Devices::Removable);
-     m_models["Devices/Fixed"]     = new Models::Devices(Models::Devices::Fixed);
+    // Models:
+    m_models["Places"]            = new Models::Places();
+    m_models["SystemServices"]    = new Models::SystemServices();
+    m_models["Devices/Removable"] = new Models::Devices(Models::Devices::Removable);
+    m_models["Devices/Fixed"]     = new Models::Devices(Models::Devices::Fixed);
 
-     m_models["NewDocuments"]      = new Models::NewDocuments();
-     m_models["RecentDocuments"]   = new Models::RecentDocuments();
-     m_models["OpenDocuments"]     = new Models::OpenDocuments();
+    m_models["NewDocuments"]      = new Models::NewDocuments();
+    m_models["RecentDocuments"]   = new Models::RecentDocuments();
+    m_models["OpenDocuments"]     = new Models::OpenDocuments();
 
-     m_models["Contacts"]          = new Models::ContactsKopete();
-     m_models["Messages"]          = new Models::MessagesKmail();
+    m_models["Contacts"]          = new Models::ContactsKopete();
+    m_models["Messages"]          = new Models::MessagesKmail();
 
-     m_models["Runner"]            = new Models::Runner();
+    m_models["Runner"]            = new Models::Runner();
 
-     // Groups:
+    // Groups:
 
-     m_modelGroups["ComputerLeft"]   = new Models::BaseMergedModel();
-     m_modelGroups["DocumentsLeft"]  = new Models::BaseMergedModel();
-     m_modelGroups["ContactsLeft"]   = new Models::BaseMergedModel();
+    m_modelGroups["ComputerLeft"]   = new Models::BaseMergedModel();
+    m_modelGroups["DocumentsLeft"]  = new Models::BaseMergedModel();
+    m_modelGroups["ContactsLeft"]   = new Models::BaseMergedModel();
 
-     m_modelGroups["ComputerRight"]  = new Models::BaseMergedModel();
-     m_modelGroups["DocumentsRight"] = new Models::BaseMergedModel();
-     m_modelGroups["ContactsRight"]  = new Models::BaseMergedModel();
+    m_modelGroups["ComputerRight"]  = new Models::BaseMergedModel();
+    m_modelGroups["DocumentsRight"] = new Models::BaseMergedModel();
+    m_modelGroups["ContactsRight"]  = new Models::BaseMergedModel();
 
-     // Assignments: Model - Group:
-     // defined Merged(A) ((Lancelot::MergedActionListModel *)(A))
+    // Assignments: Model - Group:
+    // defined Merged(A) ((Lancelot::MergedActionListModel *)(A))
 
-     Merged(m_modelGroups["ComputerLeft"])->addModel ("Places", QIcon(), i18n("Places"), m_models["Places"]);
-     Merged(m_modelGroups["ComputerLeft"])->addModel ("System", QIcon(), i18n("System"), m_models["SystemServices"]);
+    Merged(m_modelGroups["ComputerLeft"])->addModel ("Places", QIcon(), i18n("Places"), m_models["Places"]);
+    Merged(m_modelGroups["ComputerLeft"])->addModel ("System", QIcon(), i18n("System"), m_models["SystemServices"]);
 
-     Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Removable", QIcon(), i18n("Removable"), m_models["Devices/Removable"]);
-     Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Fixed", QIcon(), i18n("Fixed"), m_models["Devices/Fixed"]);
+    Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Removable", QIcon(), i18n("Removable"), m_models["Devices/Removable"]);
+    Merged(m_modelGroups["ComputerRight"])->addModel ("Devices/Fixed", QIcon(), i18n("Fixed"), m_models["Devices/Fixed"]);
 
-     Merged(m_modelGroups["DocumentsLeft"])->addModel ("NewDocuments", QIcon(), i18n("New:"), m_models["NewDocuments"]);
+    Merged(m_modelGroups["DocumentsLeft"])->addModel ("NewDocuments", QIcon(), i18n("New:"), m_models["NewDocuments"]);
 
-     Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18nc("@title Title of a list of documents that are open", "Open documents"), m_models["OpenDocuments"]);
-     Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
+    Merged(m_modelGroups["DocumentsRight"])->addModel("OpenDocuments", QIcon(), i18nc("@title Title of a list of documents that are open", "Open documents"), m_models["OpenDocuments"]);
+    Merged(m_modelGroups["DocumentsRight"])->addModel("RecentDocuments", QIcon(), i18n("Recent documents"), m_models["RecentDocuments"]);
 
-     Merged(m_modelGroups["ContactsLeft"])->addModel("Messages", QIcon(), i18n("Unread messages"), m_models["Messages"]);
-     // Merged(m_modelGroups["ContactsLeft"])->addModel("Test", QIcon(), i18n("Test"),
-     //     new Lancelot::PlasmaServiceListModel("lancelotexamplemodel")
-     // );
+    QString plugins;
 
-     Merged(m_modelGroups["ContactsRight"])->addModel("Contacts", QIcon(), i18n("Contacts"), m_models["Contacts"]);
+    // Contacts Mail
+    plugins = m_mainConfig.readEntry("mailPlugins", QString());
+    if (plugins.isEmpty()) {
+        Merged(m_modelGroups["ContactsLeft"])->addModel("Messages", QIcon(), i18n("Unread messages"), m_models["Messages"]);
+    } else {
+        Lancelot::ActionListModel * model;
+        foreach (QString plugin, plugins.split(",")) {
+            model = new Lancelot::PlasmaServiceListModel(plugin);
+            Merged(m_modelGroups["ContactsLeft"])
+                ->addModel(model->modelTitle(), model);
+        }
+    }
 
-     m_modelGroups["SearchLeft"] = m_models["Runner"];
+    // Contacts IM
+    plugins = m_mainConfig.readEntry("imPlugins", QString());
+    if (plugins.isEmpty()) {
+        Merged(m_modelGroups["ContactsRight"])->addModel("Contacts", QIcon(), i18n("Contacts"), m_models["Contacts"]);
+    } else {
+        Lancelot::ActionListModel * model;
+        foreach (QString plugin, plugins.split(",")) {
+            model = new Lancelot::PlasmaServiceListModel(plugin);
+            Merged(m_modelGroups["ContactsRight"])
+                ->addModel(model->modelTitle(), model);
+        }
+    }
 
-     // Assignments: ListView - Group
+    m_modelGroups["SearchLeft"] = m_models["Runner"];
 
-     listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
-     listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
-     listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
-     listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
+    // Assignments: ListView - Group
 
-     listComputerRight->setModel(m_modelGroups["ComputerRight"]);
-     listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
-     listContactsRight->setModel(m_modelGroups["ContactsRight"]);
-     //listSearchRight->setModel(m_modelGroups["SearchRight"]);
+    listComputerLeft->setModel(m_modelGroups["ComputerLeft"]);
+    listDocumentsLeft->setModel(m_modelGroups["DocumentsLeft"]);
+    listContactsLeft->setModel(m_modelGroups["ContactsLeft"]);
+    listSearchLeft->setModel(m_modelGroups["SearchLeft"]);
 
-     // Applications passageview
-     passagewayApplications->setEntranceModel(
-         new Models::FavoriteApplications::PassagewayViewProxy()
-     );
-     passagewayApplications->setAtlasModel(new Models::Applications());
+    listComputerRight->setModel(m_modelGroups["ComputerRight"]);
+    listDocumentsRight->setModel(m_modelGroups["DocumentsRight"]);
+    listContactsRight->setModel(m_modelGroups["ContactsRight"]);
+    //listSearchRight->setModel(m_modelGroups["SearchRight"]);
+
+    // Applications passageview
+    passagewayApplications->setEntranceModel(
+        new Models::FavoriteApplications::PassagewayViewProxy()
+    );
+    passagewayApplications->setAtlasModel(new Models::Applications());
 }
 
 // Resizing:

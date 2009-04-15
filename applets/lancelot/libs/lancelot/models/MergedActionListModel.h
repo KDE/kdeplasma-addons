@@ -55,6 +55,13 @@ public:
     void addModel(QIcon icon, const QString & title, ActionListModel * model);
 
     /**
+     * Adds a model to the list. Title and icon is
+     * loaded from model
+     * @param model model to add
+     */
+    void addModel(ActionListModel * model);
+
+    /**
      * @returns model with the specified index
      * @param index index of the model to return
      */

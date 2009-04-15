@@ -36,6 +36,11 @@ BaseMergedModel::~BaseMergedModel()
 {
 }
 
+void BaseMergedModel::addModel(const QString & id, ActionListModel * model)
+{
+    addModel(id, model->modelIcon(), model->modelTitle(), model);
+}
+
 void BaseMergedModel::addModel(const QString & id, QIcon icon,
         const QString & title, ActionListModel * model)
 {

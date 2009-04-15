@@ -50,6 +50,9 @@ public:
 
     L_Override int size() const;
 
+    L_Override QString modelTitle() const;
+    L_Override QIcon modelIcon() const;
+
 public Q_SLOTS:
     void dataUpdated(const QString & name,
             const Plasma::DataEngine::Data & data);

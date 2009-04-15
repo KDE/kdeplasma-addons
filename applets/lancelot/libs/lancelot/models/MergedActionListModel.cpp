@@ -287,6 +287,11 @@ void MergedActionListModel::Private::fromChildCoordinates(int & index, int model
     index = -1;
 }
 
+void MergedActionListModel::addModel(ActionListModel * model)
+{
+    addModel(model->modelIcon(), model->modelTitle(), model);
+}
+
 void MergedActionListModel::addModel(QIcon icon, const QString & title, ActionListModel * model)
 {
     if (!model) return;
