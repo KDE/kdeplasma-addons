@@ -1,14 +1,8 @@
 [Desktop Entry]
 Type=Service
 Name=Weather
-Name[de]=Wetter
 Name[et]=Ilm
-Name[pt]=Meteorologia
-Name[pt_BR]=Meteorologia
-Name[sv]=Väder
-Name[uk]=Погода
-Name[zh_CN]=天气
-Name[zh_TW]=天氣
+Name[ga]=Aimsir
 Icon=weather-clear
 ServiceTypes=Plasma/Wallpaper
 
