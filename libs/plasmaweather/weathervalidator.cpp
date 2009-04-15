@@ -90,7 +90,7 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
             weatherSource += QString("|%1").arg(places[place]);
         }
     } else if (result[1] == "timeout" && !d->silent) {
-        KMessageBox::error(0, i18n("Timeout happened when trying to connect weather server."));
+        KMessageBox::error(0, i18n("Timeout happened when trying to connect to weather server."));
     } else if (!d->silent) {
         KMessageBox::error(0, i18n("Cannot find '%1'.", result[3]));
     }
