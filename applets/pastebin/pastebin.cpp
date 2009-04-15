@@ -197,7 +197,7 @@ void Pastebin::setActionState(ActionState state)
     toolTipData = Plasma::ToolTipContent();
     toolTipData.setAutohide(true);
 
-    toolTipData.setMainText("Status of the applet");
+    toolTipData.setMainText("Pastebin");
 
     //TODO: choose icons for each state
 
@@ -550,7 +550,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void Pastebin::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
-    if (!m_url.isEmpty() && event->button() == Qt::MidButton) {
+    if (!m_url.isEmpty() && event->button() == Qt::MidButton && m_actionState == IdleSuccess) {
         copyToClipboard(m_url);
     }
 }
@@ -594,12 +594,17 @@ void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Pastebin::addToHistory(const QString &url)
 {
+<<<<<<< HEAD:applets/pastebin/pastebin.cpp
     if (m_historySize <= 0) {
         return;
     }
 
     if (m_actionHistory.size() >= m_historySize) {
         delete m_actionHistory.takeLast();
+=======
+    if (m_actionHistory.size() && m_actionHistory.size() >= m_historySize) {
+        delete m_actionHistory.takeFirst();
+>>>>>>> Some "smallish" improvements:applets/pastebin/pastebin.cpp
     }
 
     QAction *ac = new QAction(url, this);
