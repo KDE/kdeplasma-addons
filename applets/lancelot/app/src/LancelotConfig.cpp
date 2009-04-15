@@ -19,7 +19,11 @@
 
 #include "LancelotConfig.h"
 #include <KConfigGroup>
+#include <KRun>
+#include <KUrl>
 #include "models/SystemActions.h"
+#include "models/NewDocuments.h"
+#include "models/SystemServices.h"
 
 LancelotConfig::LancelotConfig()
     : systemButtonActionsMenu(NULL), clickedSystemButton(NULL),
@@ -43,6 +47,11 @@ void LancelotConfig::setupUi(QWidget * widget)
     connect(buttonSystem1, SIGNAL(clicked()), this, SLOT(systemButtonClicked()));
     connect(buttonSystem2, SIGNAL(clicked()), this, SLOT(systemButtonClicked()));
     connect(buttonSystem3, SIGNAL(clicked()), this, SLOT(systemButtonClicked()));
+
+    connect(buttonNewDocumentsEdit, SIGNAL(clicked()),
+            this, SLOT(buttonNewDocumentsEditClicked()));
+    connect(buttonSystemApplicationsEdit, SIGNAL(clicked()),
+            this, SLOT(buttonSystemApplicationsEditClicked()));
 
     loadConfig();
 }
@@ -176,5 +185,19 @@ bool LancelotConfig::enableUsageStatistics() const
 void LancelotConfig::setEnableUsageStatistics(bool value)
 {
     checkUsageStatisticsEnable->setChecked(value);
+}
+
+void LancelotConfig::buttonNewDocumentsEditClicked()
+{
+    new KRun(KUrl(
+        Models::NewDocuments::path()
+    ), 0);
+}
+
+void LancelotConfig::buttonSystemApplicationsEditClicked()
+{
+    new KRun(KUrl(
+        Models::SystemServices::path()
+    ), 0);
 }
 

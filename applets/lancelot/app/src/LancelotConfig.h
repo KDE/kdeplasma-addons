@@ -70,6 +70,9 @@ private Q_SLOTS:
     void systemButtonClicked();
     void systemButtonActionsMenuClicked();
 
+    void buttonSystemApplicationsEditClicked();
+    void buttonNewDocumentsEditClicked();
+
     void setButtonData(QPushButton * button);
 };
 

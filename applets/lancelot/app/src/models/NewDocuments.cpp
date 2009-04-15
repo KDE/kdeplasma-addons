@@ -51,8 +51,6 @@ NewDocuments::NewDocuments()
                 }
             }
         }
-
-
     }
 }
 
