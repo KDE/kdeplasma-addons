@@ -52,6 +52,9 @@ public:
     /// Paint the wallpaper
     void paint(QPainter *painter, const QRectF &exposedRect);
 
+signals:
+    void settingsChanged(bool);
+
 protected:
     void init(const KConfigGroup &config);
 

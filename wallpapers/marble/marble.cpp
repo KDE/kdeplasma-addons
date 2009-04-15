@@ -162,6 +162,9 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
     connect(m_ui.themeList, SIGNAL(currentIndexChanged(int)), SLOT(changeTheme(int)));
     connect(m_ui.timeout, SIGNAL(valueChanged(int)), SLOT(updateSettings()));
 
+    // notify the plasma background dialog of changes
+    connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
+
     return configWidget;
 }
 
@@ -321,6 +324,7 @@ void MarbleWallpaper::updateSettings()
     m_rotationTimeout = m_ui.timeout->value() * 1000;
 
     widgetChanged();
+    emit settingsChanged(true);
 }
 
 void MarbleWallpaper::changeTheme(int index)
@@ -328,6 +332,8 @@ void MarbleWallpaper::changeTheme(int index)
     m_mapTheme = m_ui.themeList->itemData(index).toString();
     m_map->setMapThemeId(m_mapTheme);
     emit update(boundingRect());
+
+    emit settingsChanged(true);
 }
 
 void MarbleWallpaper::updateConfigScreen(int index)
@@ -353,6 +359,8 @@ void MarbleWallpaper::updateConfigScreen(int index)
         m_ui.timeout->setVisible(false);
         m_ui.labelTimeout->setVisible(false);
     }
+
+    emit settingsChanged(true);
 }
 
 } // Marble namespace
