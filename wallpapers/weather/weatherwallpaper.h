@@ -27,9 +27,7 @@
 #include <Plasma/Wallpaper>
 #include <plasma/weather/weatherutils.h>
 
-#include "ui_weatherAddPlace.h"
 #include "ui_weatherAdvanced.h"
-#include "ui_weatherLocations.h"
 
 class QStandardItemModel;
 class QStandardItem;
@@ -38,6 +36,8 @@ class KDialog;
 class KFileDialog;
 
 class BackgroundListModel;
+class WeatherConfig;
+class WeatherLocation;
 
 class WeatherWallpaper : public Plasma::Wallpaper
 {
@@ -53,20 +53,12 @@ public:
     void weatherContent(const Plasma::DataEngine::Data &data);
 
 public slots:
-    void showAddPlaceDialog(const QStringList& tokens);
     void showAdvancedDialog();
-    void getValidation(void);
-    void addPlace(void);
-    void placeEditChanged(const QString& text);
-    void pluginIndexChanged(int index);
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void selectPlace();
-    void cancelAddClicked(void);
     void getWeather(void);
     void save(KConfigGroup & config);
 
 protected slots:
-    void spinValueChanged(int interval);
     void getNewWallpaper();
     void colorChanged(const QColor& color);
     void pictureChanged(int index);
@@ -78,6 +70,7 @@ protected slots:
     void removeBackground(const QString &path);
     void updateFadedImage(qreal frame);
     void configWidgetDestroyed();
+    void locationReady(const QString &source);
 
 protected:
     void init(const KConfigGroup & config);
@@ -90,23 +83,15 @@ private slots:
     void loadImage();
 
 private:
-    QWidget* m_configWidget;
-    KDialog *m_addDialog;
+    WeatherConfig* m_configWidget;
+    WeatherLocation* m_weatherLocation;
     KDialog *m_advancedDialog;
-    Ui::weatherLocations locationsUi;
-    Ui::weatherAddPlace addUi;
     Ui::weatherAdvanced m_advancedUi;
-    QStandardItemModel *m_amodel;
-    QList<QStandardItem *> m_items;
     QString m_dir;
     QStringList m_usersWallpapers;
 
-    QString m_currentSource; // Current source
-    QString m_activeValidation; // Current place to validate
-    QString m_activeIon; // Current data source plugin
-    QString m_activePlace; // Current place we get weather from
+    QString m_source; // Current source
     Plasma::DataEngine::Data m_currentData; // Current data returned from ion
-    QMap<QString, QString> m_extraData; // Some ions pass back extra info to applet
 
     int m_weatherUpdateTime;
 

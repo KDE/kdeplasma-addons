@@ -41,15 +41,16 @@
 #include "backgroundlistmodel.h"
 #include "backgrounddelegate.h"
 
+#include "plasmaweather/weatherconfig.h"
+#include "plasmaweather/weatherlocation.h"
+
 K_EXPORT_PLASMA_WALLPAPER(weather, WeatherWallpaper)
 
 WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
-        : Plasma::Wallpaper(parent, args),
-        m_addDialog(0),
-        m_advancedDialog(0),
-        m_amodel(0),
-        m_model(0),
-        m_fileDialog(0)
+    : Plasma::Wallpaper(parent, args)
+    , m_configWidget(0)
+    , m_weatherLocation(0)
+    , m_advancedDialog(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
@@ -65,10 +66,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     weatherEngine = dataEngine("weather");
 
     // Set custom weather options
-    m_ionPlugins = weatherEngine->query("ions");
-    m_activePlace = config.readEntry("place");
-    m_activeIon = config.readEntry("ion");
-    m_extraData[m_activePlace] = config.readEntry("data");
+    m_source = config.readEntry("source");
     m_weatherUpdateTime = config.readEntry("updateWeather", 30);
 
     m_color = config.readEntry("wallpapercolor", QColor(56, 111, 150));
@@ -105,20 +103,24 @@ void WeatherWallpaper::init(const KConfigGroup & config)
 
 void WeatherWallpaper::save(KConfigGroup & config)
 {
-    if (!m_activePlace.isEmpty()) {
-        //TODO: Don't reload date if data source and location aren't changed
-        weatherEngine->disconnectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this);
-
-        config.writeEntry("place", m_activePlace);
-        config.writeEntry("ion", m_activeIon);
-        if (!m_extraData[m_activePlace].isEmpty()) {
-            config.writeEntry("data", m_extraData[m_activePlace]);
-        }
-
-        getWeather();
+    QString oldSource(m_source);
+    int oldInterval = m_weatherUpdateTime;
+    
+    if (m_configWidget) {
+        m_source = m_configWidget->source();
+        m_weatherUpdateTime = m_configWidget->updateInterval();
     }
-    config.writeEntry("wallpaperposition", (int)m_resizeMethod);
+    if (m_source != oldSource || m_weatherUpdateTime != oldInterval) {
+        if (!oldSource.isEmpty()) {
+            weatherEngine->disconnectSource(oldSource, this);
+        }
+        if (!m_source.isEmpty()) {
+            getWeather();
+        }
+    }
+    config.writeEntry("source", m_source);
     config.writeEntry("updateWeather", m_weatherUpdateTime);
+    config.writeEntry("wallpaperposition", (int)m_resizeMethod);
     config.writeEntry("wallpapercolor", m_color);
     config.writeEntry("userswallpapers", m_usersWallpapers);
 }
@@ -130,40 +132,15 @@ void WeatherWallpaper::configWidgetDestroyed()
 
 QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
 {
-    m_configWidget = new QWidget(parent);
+    m_configWidget = new WeatherConfig(parent);
     connect(m_configWidget, SIGNAL(destroyed(QObject*)), this, SLOT(configWidgetDestroyed()));
-    locationsUi.setupUi(m_configWidget);
-
-    locationsUi.validateButton->setEnabled(false);
-
-    foreach(const QVariant& item, m_ionPlugins) {
-        QStringList pluginInfo = item.toString().split('|');
-        locationsUi.pluginComboList->addItem(pluginInfo[0], pluginInfo[1]);
-    }
-    locationsUi.pluginComboList->model()->sort(0, Qt::AscendingOrder);
-
-    locationsUi.locationEdit->setTrapReturnKey(true);
-
-    if (m_activeIon.isEmpty()) {
-        locationsUi.pluginComboList->setCurrentIndex(0);
-    } else {
-        locationsUi.pluginComboList->setCurrentIndex(locationsUi.pluginComboList->findData(m_activeIon));
-    }
-
-    locationsUi.weatherUpdateSpin->setSuffix(ki18np(" minute", " minutes"));
-    locationsUi.weatherUpdateSpin->setValue(m_weatherUpdateTime);
-    locationsUi.validatedPlaceLabel->setText(m_activePlace);
-
-    connect(locationsUi.validateButton, SIGNAL(clicked()), this, SLOT(getValidation()));
-    connect(locationsUi.advancedButton, SIGNAL(clicked()), this, SLOT(showAdvancedDialog()));
-    connect(locationsUi.locationEdit, SIGNAL(textChanged(const QString &)), this, SLOT(placeEditChanged(const QString &)));
-    connect(locationsUi.pluginComboList, SIGNAL(currentIndexChanged(int)), this, SLOT(pluginIndexChanged(int)));
-    connect(locationsUi.locationEdit, SIGNAL(returnPressed()), this, SLOT(getValidation()));
-    connect(locationsUi.weatherUpdateSpin, SIGNAL(valueChanged(int)), this, SLOT(spinValueChanged(int)));
-
+    m_configWidget->setDataEngine(weatherEngine);
+    m_configWidget->setSource(m_source);
+    m_configWidget->setUpdateInterval(m_weatherUpdateTime);
+    m_configWidget->setConfigurableUnits(WeatherConfig::None);
+    m_configWidget->setHeadersVisible(false);
     return m_configWidget;
 }
-
 
 void WeatherWallpaper::calculateGeometry()
 {
@@ -224,54 +201,6 @@ void WeatherWallpaper::loadImage()
     if (!m_size.isEmpty()) {
         renderWallpaper(img);
     }
-}
-
-void WeatherWallpaper::showAddPlaceDialog(const QStringList& tokens)
-{
-    if (m_addDialog == 0) {
-        m_addDialog = new KDialog;
-        addUi.setupUi(m_addDialog->mainWidget());
-        m_addDialog->mainWidget()->layout()->setMargin(0);
-
-        // Set up QListView with model/view
-        m_amodel = new QStandardItemModel();
-        addUi.foundPlacesListView->setModel(m_amodel);
-        addUi.foundPlacesListView->setSelectionMode(QAbstractItemView::SingleSelection);
-
-        addUi.foundPlacesListView->show();
-
-        m_addDialog->setCaption(i18n("Found Places"));
-        m_addDialog->setButtons(KDialog::Ok | KDialog::Cancel);
-        m_addDialog->setButtonText(KDialog::Ok, i18n("&Add"));
-        m_addDialog->setDefaultButton(KDialog::NoDefault);
-
-
-        connect(m_addDialog, SIGNAL(okClicked()), this, SLOT(addPlace()));
-        connect(m_addDialog, SIGNAL(cancelClicked()), this, SLOT(cancelAddClicked()));
-        connect(addUi.foundPlacesListView, SIGNAL(doubleClicked(const QModelIndex &)), this , SLOT(selectPlace()));
-    }
-    bool placeflag = false;
-    QStringList headers;
-    m_amodel->clear();
-    headers << i18n("Found Places");
-    m_amodel->setHorizontalHeaderLabels(headers);
-    m_amodel->setColumnCount(1);
-    addUi.foundPlacesListView->setResizeMode(QListView::Adjust);
-
-    foreach(const QString& item, tokens) {
-        if (item.contains("place")) {
-            placeflag = true;
-            continue;
-        }
-        if (placeflag) {
-            m_items.clear();
-            m_items.append(new QStandardItem(item));
-            m_amodel->appendRow(m_items);
-            placeflag = false;
-        }
-    }
-    KDialog::centerOnScreen(m_addDialog);
-    m_addDialog->show();
 }
 
 void WeatherWallpaper::showAdvancedDialog()
@@ -522,34 +451,40 @@ void WeatherWallpaper::renderWallpaper(const QString& image)
 
 void WeatherWallpaper::getWeather()
 {
-    if (m_extraData[m_activePlace].isEmpty()) {
-        QString str = QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace);
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source == str) {
-                if (!m_currentData.isEmpty()) {
-                    weatherContent(m_currentData);
-                    return;
-                }
-            } else {
-                // A location probably hasn't been configured, so call loadImage 
-                // since weatherContent() won't be called
-                loadImage();
-            }
-
+    if (m_source.isEmpty()) {
+        if (m_weatherLocation) {
+            // already tried to get default location
+            // A location probably hasn't been configured, so call loadImage
+            // since weatherContent() won't be called
+            loadImage();
+        } else {
+            m_weatherLocation = new WeatherLocation(this);
+            connect(m_weatherLocation, SIGNAL(finished(const QString&)),
+                    this, SLOT(locationReady(const QString&)));
+            m_weatherLocation->setDataEngines(dataEngine("geolocation"), weatherEngine);
+            m_weatherLocation->getDefault();
         }
-        weatherEngine->connectSource(QString("%1|weather|%2").arg(m_activeIon).arg(m_activePlace), this, m_weatherUpdateTime * 60 * 1000);
     } else {
-        QString str = QString("%1|weather|%2|%3").arg(m_activeIon).arg(m_activePlace).arg(m_extraData[m_activePlace]);
-
         foreach (const QString& source, weatherEngine->sources()) {
-            if (source == str) {
+            if (source == m_source) {
                 if (!m_currentData.isEmpty()) {
                     weatherContent(m_currentData);
                     return;
                 }
             }
         }
-        weatherEngine->connectSource(QString("%1|weather|%2|%3").arg(m_activeIon).arg(m_activePlace).arg(m_extraData[m_activePlace]), this, m_weatherUpdateTime * 60 * 1000);
+        weatherEngine->connectSource(m_source, this, m_weatherUpdateTime * 60 * 1000);
+    }
+}
+
+void WeatherWallpaper::locationReady(const QString &source)
+{
+    m_source = source;
+    if (!m_source.isEmpty()) {
+        if (m_configWidget) {
+            m_configWidget->setSource(m_source);
+        }
+        getWeather();
     }
 }
 
@@ -603,138 +538,6 @@ void WeatherWallpaper::updateFadedImage(qreal frame)
     emit update(boundingRect());
 }
 
-void WeatherWallpaper::validate(const QString& source, const QVariant& data)
-{
-    const QStringList tokens = data.toString().split('|');
-    bool extraflag = false;
-    bool placeflag = false;
-    QString place;
-
-    // If the place is valid, check if there is one place or multiple places returned. The user will have
-    // to select the place that best matches what they are looking for.
-    if (tokens[1] == QString("valid")) {
-        // Plugin returns only one matching place
-        if (tokens[2] == QString("single") || tokens[2] == QString("multiple")) {
-            m_activeValidation = source;
-            m_items.clear();
-            m_extraData.clear();
-
-            foreach(const QString& val, tokens) {
-                if (val.contains("place")) {
-                    placeflag = true;
-                    continue;
-                }
-
-                if (placeflag) {
-                    place = val;
-                    placeflag = false;
-                }
-
-                if (val.contains("extra")) {
-                    extraflag = true;
-                    continue;
-                }
-
-                if (extraflag) {
-                    extraflag = false;
-                    m_extraData[place] = val;
-                    continue;
-                }
-            }
-
-        }
-
-       // Pop up dialog and allow user to choose places
-       if (tokens[2] == "multiple") {
-           showAddPlaceDialog(tokens);
-       } else {
-           locationsUi.validatedPlaceLabel->setText(tokens[4]);
-           locationsUi.validateButton->setEnabled(false);
-           m_activePlace = locationsUi.validatedPlaceLabel->text();
-       }
-
-       return;
-
-    } else if (tokens[1] == "timeout") {
-        KMessageBox::error(0, i18n("The applet was not able to contact the server, please try again later."));
-        return;
-    } else if (tokens[1] == "malformed") {
-        KMessageBox::error(0 ,i18n("The data source received a malformed string and was not able to process your request."));
-        return;
-    } else {
-        KMessageBox::error(0, i18n("The place '%1' is not valid. The data source is not able to find this place.", tokens[3]), i18n("Invalid Place"));
-        return;
-    }
-
-}
-
-void WeatherWallpaper::selectPlace()
-{
-    addPlace();
-    m_addDialog->close();
-}
-
-void WeatherWallpaper::getValidation()
-{
-    if (locationsUi.locationEdit->text().size() >= 3) {
-        // Destroy all other datasources
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source != "ions") {
-                weatherEngine->disconnectSource(source, this);
-            }
-        }
-
-        QString ion = locationsUi.pluginComboList->itemData(locationsUi.pluginComboList->currentIndex()).toString();
-        QString checkPlace = locationsUi.locationEdit->text();
-        checkPlace[0] = checkPlace[0].toUpper();
-        m_activeValidation = QString("%1|validate|%2").arg(ion).arg(checkPlace);
-        weatherEngine->connectSource(m_activeValidation, this);
-    }
-}
-
-void WeatherWallpaper::spinValueChanged(int interval)
-{
-    m_weatherUpdateTime = interval;
-}
-
-void WeatherWallpaper::addPlace()
-{
-    QModelIndex item = addUi.foundPlacesListView->currentIndex();
-
-    m_activePlace = item.data().toString();
-    m_activeIon = locationsUi.pluginComboList->itemData(locationsUi.pluginComboList->currentIndex()).toString();
-    locationsUi.validatedPlaceLabel->setText(m_activePlace);
-    locationsUi.validateButton->setEnabled(false);
-}
-
-void WeatherWallpaper::cancelAddClicked()
-{
-    weatherEngine->disconnectSource(m_activeValidation, this);
-}
-
-void WeatherWallpaper::pluginIndexChanged(int index)
-{
-   Q_UNUSED(index)
-
-   locationsUi.validatedPlaceLabel->clear();
-   m_activePlace.clear();
-   if (locationsUi.locationEdit->text().size() < 3) {
-       locationsUi.validateButton->setEnabled(false);
-   } else {
-       locationsUi.validateButton->setEnabled(true);
-   }
-   m_activeIon = locationsUi.pluginComboList->itemData(locationsUi.pluginComboList->currentIndex()).toString();
-}
-
-void WeatherWallpaper::placeEditChanged(const QString& text)
-{
-    if (text.size() < 3) {
-        locationsUi.validateButton->setEnabled(false);
-    } else {
-        locationsUi.validateButton->setEnabled(true);
-    }
-}
-
 void WeatherWallpaper::weatherContent(const Plasma::DataEngine::Data &data)
 {
     kDebug() << "Current weather is:" << data["Condition Icon"].toString();
@@ -748,21 +551,11 @@ void WeatherWallpaper::weatherContent(const Plasma::DataEngine::Data &data)
 
 void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
+    Q_UNUSED(source)
     if (data.isEmpty()) {
         return;
     }
-
-    QStringList tokens = data["validate"].toString().split('|');
-
-    if (tokens.size() > 0 && data.contains("validate")) {
-        weatherEngine->disconnectSource(source, this);
-        if (tokens[1] == "valid" || tokens[1] == "invalid") {
-            validate(source, data["validate"]);
-        }
-    } else {
-        m_currentData = data;
-        weatherContent(data);
-    }
+    weatherContent(data);
 }
 
 #include "weatherwallpaper.moc"
