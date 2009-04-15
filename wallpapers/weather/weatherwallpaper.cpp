@@ -77,7 +77,6 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     if (!isInitialized()) {
         // TODO - Find a better way to retrieve weather than by looking at the icon name...
         // Map each wallpaper to a weather condition
-        m_weatherMap["N/A"] = Plasma::Theme::defaultTheme()->wallpaperPath();
         m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
         m_weatherMap["weather-clear"] = m_dir + "Fields_of_Peace";
         m_weatherMap["weather-few-clouds"] = m_dir + "Colorado_Farm";
