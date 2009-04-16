@@ -1,22 +1,5 @@
 project(weatherapplet)
 
-# ----------------- Needed for Extragear ------------------------
-
-# search packages used by KDE
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include (MacroLibrary)
-include(MacroOptionalAddSubdirectory)
-include(MacroOptionalDependPackage)
-
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -DQT_STRICT_ITERATORS)
-include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
-
-# local cmake modules
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
-
-# --------------- End ---------------------
-
 set(weatherapplet_SRCS
     weatherapplet.cpp
     weatherview.cpp
