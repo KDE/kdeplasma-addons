@@ -25,16 +25,16 @@ namespace Lancelot
 class ActionTreeModelProxy::Private {
 public:
     ActionListModel * model;
-    QString modelTitle;
-    QIcon modelIcon;
+    QString selfTitle;
+    QIcon selfIcon;
 };
 
 ActionTreeModelProxy::ActionTreeModelProxy(ActionListModel * model, QString title, QIcon icon)
     : d(new Private())
 {
     d->model = model;
-    d->modelTitle = title;
-    d->modelIcon = icon;
+    d->selfTitle = title;
+    d->selfIcon = icon;
 
     connect(model, SIGNAL( itemActivated(int) ),
             this,  SIGNAL( itemActivated(int) ));
@@ -65,14 +65,14 @@ ActionTreeModel * ActionTreeModelProxy::child(int index)
     return NULL;
 }
 
-QString ActionTreeModelProxy::modelTitle() const
+QString ActionTreeModelProxy::selfTitle() const
 {
-    return d->modelTitle;
+    return d->selfTitle;
 }
 
-QIcon ActionTreeModelProxy::modelIcon()  const
+QIcon ActionTreeModelProxy::selfIcon()  const
 {
-    return d->modelIcon;
+    return d->selfIcon;
 }
 
 // ActionListModel

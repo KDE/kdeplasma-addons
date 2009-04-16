@@ -39,8 +39,8 @@ public:
     L_Override int size() const;
 
     L_Override ActionTreeModel * child(int index);
-    L_Override QString modelTitle() const;
-    L_Override QIcon modelIcon()  const;
+    L_Override QString selfTitle() const;
+    L_Override QIcon selfIcon()  const;
 
     L_Override bool hasContextActions(int index) const;
     L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
@@ -49,7 +49,7 @@ public:
     L_Override QMimeData * mimeData(int index) const;
     L_Override void setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
-    L_Override QMimeData * modelMimeData();
+    L_Override QMimeData * selfMimeData() const;
 
 public Q_SLOTS:
     virtual void activate(int index);

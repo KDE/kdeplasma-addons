@@ -22,12 +22,16 @@
 #include <Plasma/DataEngineManager>
 #include <KIcon>
 #include <QDebug>
+#include <KConfigGroup>
 
 namespace Lancelot {
 
 class PlasmaServiceListModel::Private {
 public:
-    Plasma::Service * service;
+    Private()
+        : engine(NULL)
+    {}
+
     Plasma::DataEngine * engine;
     Plasma::DataEngine::Data data;
 
@@ -104,6 +108,7 @@ QIcon PlasmaServiceListModel::icon(int index) const
 
 bool PlasmaServiceListModel::isCategory(int index) const
 {
+    Q_UNUSED(index);
     return false;
 }
 
@@ -121,14 +126,23 @@ void PlasmaServiceListModel::dataUpdated(const QString & name,
     }
 }
 
-QString PlasmaServiceListModel::modelTitle() const
+QString PlasmaServiceListModel::selfTitle() const
 {
     return d->title;
 }
 
-QIcon PlasmaServiceListModel::modelIcon() const
+QIcon PlasmaServiceListModel::selfIcon() const
 {
     return d->icon;
+}
+
+void PlasmaServiceListModel::activate(int index)
+{
+    // Plasma::Service * service =
+    //     d->engine->serviceForSource("data");
+    // KConfigGroup cg = service->operationDescription("activate");
+    // cg.writeEntry("data", index);
+    // service->startOperationCall(cg);
 }
 
 } // namespace Lancelot

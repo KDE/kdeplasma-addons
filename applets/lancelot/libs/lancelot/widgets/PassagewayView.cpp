@@ -266,7 +266,7 @@ public:
             return;
         }
 
-        QMimeData * data = path.at(index)->model->modelMimeData();
+        QMimeData * data = path.at(index)->model->selfMimeData();
         if (!data) {
             return;
         }
@@ -345,7 +345,7 @@ void PassagewayView::listItemActivated(int index, int listIndex)
     if (model) {
         model = model->child(index);
         if (model) {
-            d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
+            d->next(Private::Step(model->selfTitle(), model->selfIcon(), model));
         } else {
             d->lists.at(listIndex)->clearSelection();
         }
@@ -494,7 +494,6 @@ void PassagewayView::keyPressEvent(QKeyEvent * event)
         ActionTreeModel * model = d->path.at(d->focusIndex)->model;
         int index = d->lists.at(d->focusIndex)->selectedIndex();
         if (index >= 0 && model && (model = model->child(index))) {
-            // d->next(Private::Step(model->modelTitle(), model->modelIcon(), model));
             listItemActivated(index, d->focusIndex);
             return;
         }

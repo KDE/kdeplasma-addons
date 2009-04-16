@@ -50,8 +50,9 @@ public:
 
     L_Override int size() const;
 
-    L_Override QString modelTitle() const;
-    L_Override QIcon modelIcon() const;
+    L_Override QString selfTitle() const;
+    L_Override QIcon selfIcon() const;
+    L_Override void activate(int index);
 
 public Q_SLOTS:
     void dataUpdated(const QString & name,

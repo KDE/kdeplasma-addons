@@ -111,12 +111,12 @@ bool StandardActionTreeModel::isCategory(int index) const
     return d->root->children.at(index)->children.size() != 0;
 }
 
-QString StandardActionTreeModel::modelTitle() const
+QString StandardActionTreeModel::selfTitle() const
 {
     return d->root->title;
 }
 
-QIcon StandardActionTreeModel::modelIcon() const
+QIcon StandardActionTreeModel::selfIcon() const
 {
     return d->root->icon;
 }

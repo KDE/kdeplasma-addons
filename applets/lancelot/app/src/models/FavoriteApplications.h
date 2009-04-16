@@ -41,7 +41,7 @@ public:
         PassagewayViewProxy();
         virtual ~PassagewayViewProxy();
 
-        L_Override QMimeData * modelMimeData();
+        L_Override QMimeData * selfMimeData() const;
     };
 
 protected:

@@ -98,17 +98,17 @@ void ActionListModel::activate(int index)
     Q_UNUSED(index);
 }
 
-QString ActionListModel::modelTitle() const
+QString ActionListModel::selfTitle() const
 {
     return QString();
 }
 
-QIcon ActionListModel::modelIcon() const
+QIcon ActionListModel::selfIcon() const
 {
     return QIcon();
 }
 
-QMimeData * ActionListModel::modelMimeData()
+QMimeData * ActionListModel::selfMimeData() const
 {
     return NULL;
 }

@@ -116,9 +116,9 @@ public:
      */
     virtual void contextActivate(int index, QAction * context);
 
-    virtual QString modelTitle() const;
-    virtual QIcon modelIcon() const;
-    virtual QMimeData * modelMimeData();
+    virtual QString selfTitle() const;
+    virtual QIcon selfIcon() const;
+    virtual QMimeData * selfMimeData() const;
 
 public Q_SLOTS:
     /**

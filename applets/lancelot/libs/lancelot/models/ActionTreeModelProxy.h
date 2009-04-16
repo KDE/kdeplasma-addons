@@ -38,8 +38,8 @@ public:
 
     // ActionTreeModel
     L_Override ActionTreeModel * child(int index);
-    L_Override QString modelTitle() const;
-    L_Override QIcon modelIcon()  const;
+    L_Override QString selfTitle() const;
+    L_Override QIcon selfIcon()  const;
 
     // ActionListModel
     L_Override QString title(int index) const;

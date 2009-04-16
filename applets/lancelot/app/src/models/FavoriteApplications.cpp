@@ -146,7 +146,7 @@ FavoriteApplications::PassagewayViewProxy::~PassagewayViewProxy()
 {
 }
 
-QMimeData * FavoriteApplications::PassagewayViewProxy::modelMimeData()
+QMimeData * FavoriteApplications::PassagewayViewProxy::selfMimeData() const
 {
     QMap < QString , QString > map;
     map["version"] = "1.0";

@@ -131,7 +131,7 @@ QString Applications::title(int index) const
     if (index >= size()) return "";
     return
         (index < m_submodels.size()) ?
-            m_submodels.at(index)->modelTitle() :
+            m_submodels.at(index)->selfTitle() :
             m_items.at(index - m_submodels.size()).name;
 }
 
@@ -147,7 +147,7 @@ QIcon Applications::icon(int index) const
     if (index >= size()) return QIcon();
     return
         (index < m_submodels.size()) ?
-            m_submodels.at(index)->modelIcon() :
+            m_submodels.at(index)->selfIcon() :
             m_items.at(index - m_submodels.size()).icon;
 }
 
@@ -201,12 +201,12 @@ Lancelot::ActionTreeModel * Applications::child(int index)
     return m_submodels.at(index);
 }
 
-QString Applications::modelTitle() const
+QString Applications::selfTitle() const
 {
     return m_title;
 }
 
-QIcon Applications::modelIcon() const
+QIcon Applications::selfIcon() const
 {
     return m_icon;
 }
@@ -246,7 +246,7 @@ void Applications::sycocaUpdated(const QStringList & resources)
     }
 }
 
-QMimeData * Applications::modelMimeData()
+QMimeData * Applications::selfMimeData() const
 {
     return BaseModel::mimeForUrl("applications:/" + m_root);
 }
