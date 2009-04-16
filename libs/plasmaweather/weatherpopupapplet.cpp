@@ -47,7 +47,7 @@ public:
         unitMap["mbar"] = WeatherUtils::Millibars;
         unitMap["inHg"] = WeatherUtils::InchesHG;
         unitMap["ms"] = WeatherUtils::MetersPerSecond;
-        unitMap["kmh"] = WeatherUtils::KilometersPerHour;
+        unitMap["km/h"] = WeatherUtils::KilometersPerHour;
         unitMap["mph"] = WeatherUtils::MilesPerHour;
         unitMap["kt"] = WeatherUtils::Knots;
         unitMap["bft"] = WeatherUtils::Beaufort;
