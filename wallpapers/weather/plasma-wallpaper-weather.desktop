@@ -3,6 +3,11 @@ Type=Service
 Name=Weather
 Name[et]=Ilm
 Name[ga]=Aimsir
+Name[pt]=Meteorologia
+Name[pt_BR]=Meteorologia
+Name[uk]=Погода
+Name[x-test]=xxWeatherxx
+Name[zh_TW]=天氣
 Icon=weather-clear
 ServiceTypes=Plasma/Wallpaper
 

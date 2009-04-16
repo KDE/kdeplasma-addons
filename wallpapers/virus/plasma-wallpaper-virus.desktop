@@ -5,6 +5,7 @@ Name[et]=Viirus
 Name[pt]=Vírus
 Name[pt_BR]=Vírus
 Name[uk]=Вірус
+Name[x-test]=xxVirusxx
 Name[zh_TW]=病毒
 Icon=image-jpeg
 ServiceTypes=Plasma/Wallpaper

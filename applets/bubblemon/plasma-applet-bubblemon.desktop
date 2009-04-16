@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Bubblemon
+Name[x-test]=xxBubblemonxx
 Name[zh_TW]=泡泡監視器
 Comment=A pretty bubble that monitors your system.
 Comment[de]=Eine schicke Blase, die Ihr System überwacht.
@@ -9,6 +10,7 @@ Comment[pt]=Uma bolha bonita que vigia o seu sistema.
 Comment[pt_BR]=Uma bolha bonita que vigia o seu sistema.
 Comment[sv]=En snygg bubbla som övervakar systemet.
 Comment[uk]=Гарненька бульбашка, яка спостерігає за вашою системою.
+Comment[x-test]=xxA pretty bubble that monitors your system.xx
 Comment[zh_CN]=监视您系统的可爱泡泡。
 Comment[zh_TW]=漂亮的泡泡，監視您的系統。
 ServiceTypes=Plasma/Applet
