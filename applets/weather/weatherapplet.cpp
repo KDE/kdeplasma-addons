@@ -655,9 +655,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 void WeatherApplet::configAccepted()
 {
     WeatherPopupApplet::configAccepted();
-    if (!isBusy()) {
-        setBusy(true);
-    }
     setVisibleLayout(false);
 }
 
