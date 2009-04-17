@@ -84,6 +84,7 @@ Unit::Unit(QObject* parent, const QString& singular, const QString& plural, cons
 
 Unit::~Unit()
 {
+    delete d;
 }
 
 UnitCategory* Unit::category() const

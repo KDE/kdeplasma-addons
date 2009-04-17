@@ -49,6 +49,7 @@ UnitCategory::UnitCategory(QObject* parent)
 
 UnitCategory::~UnitCategory()
 {
+    delete d;
 }
 
 QList<Unit*> UnitCategory::units() const
