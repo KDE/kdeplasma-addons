@@ -298,7 +298,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_courtesyLabel->setText(creditUrl);
     }
 
-
     if (data["Condition Icon"].toString() == "N/A") {
         m_currentIcon->setIcon(KIcon("weather-not-available"));
         setPopupIcon("weather-not-available");
@@ -320,7 +319,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         }
     }
 
-    // Do some cleanup on WeatherView
+    // FIXME: Destroy the treeview because if we don't Plasma crashes?:w
     if (m_fiveDaysView) {
         delete m_fiveDaysView;
         m_fiveDaysView = 0;
@@ -654,8 +653,8 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
 
 void WeatherApplet::configAccepted()
 {
-    WeatherPopupApplet::configAccepted();
     setVisibleLayout(false);
-}
+    WeatherPopupApplet::configAccepted();
+}   
 
 #include "weatherapplet.moc"
