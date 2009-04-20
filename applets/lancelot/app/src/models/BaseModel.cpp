@@ -29,11 +29,21 @@
 #include <KMimeType>
 #include <KUrl>
 #include <KDebug>
+#include <QApplication>
 #include <lancelot/models/PlasmaServiceListModel.h>
 
 #include "logger/Logger.h"
 
 namespace Models {
+
+class ApplicationConnector::Private {
+public:
+    Private()
+        : autohideEnabled(true)
+    {}
+
+    bool autohideEnabled;
+};
 
 ApplicationConnector * ApplicationConnector::m_instance = NULL;
 
@@ -45,24 +55,37 @@ ApplicationConnector * ApplicationConnector::instance()
     return m_instance;
 }
 
+void ApplicationConnector::setAutohideEnabled(bool value)
+{
+    d->autohideEnabled = value;
+}
+
+bool ApplicationConnector::autohideEnabled() const
+{
+    return d->autohideEnabled;
+}
+
 void ApplicationConnector::search(const QString & search)
 {
     emit doSearch(search);
 }
 
-bool ApplicationConnector::hide(bool immediate)
+void ApplicationConnector::hide(bool immediate)
 {
-    return emit doHide(immediate);
+    if (d->autohideEnabled && !(QApplication::keyboardModifiers() & Qt::ControlModifier)) {
+        emit doHide(immediate);
+    }
 }
 
 ApplicationConnector::ApplicationConnector()
+    : d(new Private())
 {
 
 }
 
 ApplicationConnector::~ApplicationConnector()
 {
-
+    delete d;
 }
 
 

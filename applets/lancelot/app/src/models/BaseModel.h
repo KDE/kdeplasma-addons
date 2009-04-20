@@ -30,18 +30,25 @@ class ApplicationConnector: public QObject {
     Q_OBJECT
 public:
     static ApplicationConnector * instance();
+
     void search(const QString & search);
-    bool hide(bool immediate = false);
+    void hide(bool immediate = false);
+
+    void setAutohideEnabled(bool value);
+    bool autohideEnabled() const;
 
 Q_SIGNALS:
     void doSearch(const QString & search);
-    bool doHide(bool immediate);
+    void doHide(bool immediate);
 
 private:
     ApplicationConnector();
     ~ApplicationConnector();
 
     static ApplicationConnector * m_instance;
+
+    class Private;
+    Private * const d;
 };
 
 class BaseModel : public Lancelot::StandardActionListModel {
@@ -68,8 +75,8 @@ protected:
 
     int addUrls(const QStringList & urls);
 
-    void hideLancelotWindow();
-    void changeLancelotSearchString(const QString & string);
+    static void hideLancelotWindow();
+    static void changeLancelotSearchString(const QString & string);
 
 public:
     static QMimeData * mimeForUrl(const KUrl & url);

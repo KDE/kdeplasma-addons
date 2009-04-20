@@ -45,7 +45,7 @@ PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
     d->engine = Plasma::DataEngineManager::self()->loadEngine(dataEngine);
 
     if (!d->engine->sources().contains(".metadata")) {
-        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model";
+        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model - it doesn't have the .metadata structure";
         d->engine = NULL;
         return;
     }
@@ -55,7 +55,7 @@ PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
     if (!data.contains("lancelot") ||
         data["lancelot"].toMap()["version"] != "1.0"
     ) {
-        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model";
+        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model - the version is not valid";
         d->engine = NULL;
         return;
     }
@@ -138,13 +138,14 @@ QIcon PlasmaServiceListModel::selfIcon() const
 
 void PlasmaServiceListModel::activate(int index)
 {
-    Q_UNUSED(index)
+    Plasma::Service * service =
+        d->engine->serviceForSource("data");
+    KConfigGroup cg = service->operationDescription("activate");
 
-    // Plasma::Service * service =
-    //     d->engine->serviceForSource("data");
-    // KConfigGroup cg = service->operationDescription("activate");
-    // cg.writeEntry("data", index);
-    // service->startOperationCall(cg);
+    QStringList list = d->data["data"].toStringList();
+    cg.writeEntry("data", list.at(index));
+
+    service->startOperationCall(cg);
 }
 
 } // namespace Lancelot
