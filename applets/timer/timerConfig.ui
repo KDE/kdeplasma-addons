@@ -51,7 +51,7 @@
     <widget class="KLineEdit" name="titleLineEdit"/>
    </item>
    <item row="2" column="1">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="hideSecondsCheckBox">
      <property name="text">
       <string>Hide seconds</string>
      </property>

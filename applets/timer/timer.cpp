@@ -91,6 +91,12 @@ void Timer::init()
                                                        << "01:00:00");
     m_title->setVisible(cg.readEntry("showTitle", false));
     m_title->setText(cg.readEntry("title", i18n("Timer")));
+
+    bool hideSeconds = cg.readEntry("hideSeconds", false);
+    m_secondsDigit[0]->setVisible(!hideSeconds);
+    m_secondsDigit[1]->setVisible(!hideSeconds);
+    m_separator[1]->setVisible(!hideSeconds);
+
     m_showMessage = cg.readEntry("showMessage", true);
     m_message = cg.readEntry("message", i18n("Timer Timeout"));
     m_runCommand = cg.readEntry("runCommand", false);
@@ -144,11 +150,12 @@ void Timer::constraintsEvent(Plasma::Constraints constraints)
 
     int appletHeight = (int) contentsRect().height();
     int appletWidth = (int) contentsRect().width();
+    float digits = m_secondsDigit[0]->isVisible() ? 7 : 4.5;
 
-    int h = (appletHeight / 2) * 7 < appletWidth ? appletHeight : ((appletWidth - 6) / 7) * 2;
+    int h = (int) ((appletHeight / 2) * digits < appletWidth ? appletHeight : ((appletWidth - (digits - 1)) / digits) * 2);
     int w = h / 2;
     int y = (int) (contentsRect().y() + (appletHeight - h) / 2);
-    int x = (int) (contentsRect().x() + (appletWidth - w * 7) / 2);
+    int x = (int) (contentsRect().x() + (appletWidth - w * digits) / 2);
 
     m_hoursDigit[0]->setGeometry(x, y, w, h);
     m_hoursDigit[1]->setGeometry(x + w, y, w, h);  
@@ -214,6 +221,7 @@ void Timer::createConfigurationInterface(KConfigDialog *parent)
     ui.showTitleCheckBox->setChecked(m_title->isVisible());
     ui.titleLineEdit->setEnabled(m_title->isVisible());
     ui.titleLineEdit->setText(m_title->text());
+    ui.hideSecondsCheckBox->setChecked(!m_secondsDigit[0]->isVisible());
     ui.showMessageCheckBox->setChecked(m_showMessage);
     ui.messageLineEdit->setEnabled(m_showMessage);
     ui.messageLineEdit->setText(m_message);
@@ -240,6 +248,12 @@ void Timer::configAccepted()
     m_title->setVisible(ui.showTitleCheckBox->isChecked());
     cg.writeEntry("showTitle", m_title->isVisible());
 
+    bool hideSeconds = ui.hideSecondsCheckBox->isChecked();
+    m_secondsDigit[0]->setVisible(!hideSeconds);
+    m_secondsDigit[1]->setVisible(!hideSeconds);
+    m_separator[1]->setVisible(!hideSeconds);
+    cg.writeEntry("hideSeconds", hideSeconds);
+
     m_title->setText(ui.titleLineEdit->text());
     cg.writeEntry("title", m_title->text());
 
@@ -256,6 +270,7 @@ void Timer::configAccepted()
     cg.writeEntry("command", m_command);
 
     createMenuAction();
+    updateConstraints(Plasma::SizeConstraint);
     emit configNeedsSaving();
 }
 
