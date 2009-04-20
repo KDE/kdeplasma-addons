@@ -20,6 +20,7 @@
 #include "CardLayout.h"
 #include <KDebug>
 #include <plasma/plasma.h>
+#include <QGraphicsScene>
 
 namespace Lancelot
 {
@@ -36,28 +37,23 @@ public:
         // just doesn't behave as it should,
         // this is a temporary solution
         // so instead of hiding the item,
-        // we are moving it somewhere
-        // out of bounds
-        // this is a very dirty hack!
+        // we are removing it from scene
 
-        QRectF g = widget->geometry();
-        if (g.left() < 0) {
-            return;
+        if (widget->parentItem()) {
+            parentItem = widget->parentItem();
+            widget->setParentItem(NULL);
+            if (widget->scene()) {
+                widget->scene()->removeItem(widget);
+            }
         }
-        g.moveRight(- g.left());
-        widget->setGeometry(g);
     }
 
     void _show(QGraphicsWidget * widget) {
         // see the comment in _hide
 
-        QRectF g = widget->geometry();
-        if (g.left() >= 0) {
-            return;
+        if (!widget->parentItem()) {
+            widget->setParentItem(parentItem);
         }
-
-        g.moveLeft(- g.right());
-        widget->setGeometry(g);
     }
 
     void relayout()
@@ -97,6 +93,7 @@ public:
     QList < QGraphicsLayoutItem * > items;
     QMap < QString, QGraphicsWidget * > widgets;
     QGraphicsWidget * shown;
+    QGraphicsItem * parentItem;
     CardLayout * q;
 };
 

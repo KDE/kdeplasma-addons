@@ -138,6 +138,8 @@ QIcon PlasmaServiceListModel::selfIcon() const
 
 void PlasmaServiceListModel::activate(int index)
 {
+    Q_UNUSED(index)
+
     // Plasma::Service * service =
     //     d->engine->serviceForSource("data");
     // KConfigGroup cg = service->operationDescription("activate");

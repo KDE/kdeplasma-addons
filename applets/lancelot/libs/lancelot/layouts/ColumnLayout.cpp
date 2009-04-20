@@ -20,6 +20,7 @@
 #include "ColumnLayout.h"
 #include <QList>
 #include <QGraphicsWidget>
+#include <QGraphicsScene>
 #include <KDebug>
 
 #define GOLDEN_SIZE  0.381966011250105  // 1 / (1 + phi); phi = (sqrt(5) + 1) / 2
@@ -88,13 +89,39 @@ class ColumnLayout::Private {
 public:
     ColumnLayout * q;
     QList < QGraphicsWidget * > items;
+    QGraphicsItem * parentItem;
     ColumnLayout::ColumnSizer * sizer;
     int count;
 
     enum RelayoutType { Clean, Push, Pop, Resize };
 
     Private(ColumnLayout * parent)
-        : q(parent), sizer(new GoldenColumnSizer()), count(2) {}
+        : q(parent), parentItem(NULL),
+          sizer(new GoldenColumnSizer()), count(2) {}
+
+    void _hide(QGraphicsWidget * widget) {
+        // since Qt has some strange bug (or it
+        // just doesn't behave as it should,
+        // this is a temporary solution
+        // so instead of hiding the item,
+        // we are removing it from scene
+
+        if (widget->parentItem()) {
+            parentItem = widget->parentItem();
+            widget->setParentItem(NULL);
+            if (widget->scene()) {
+                widget->scene()->removeItem(widget);
+            }
+        }
+    }
+
+    void _show(QGraphicsWidget * widget) {
+        // see the comment in _hide
+
+        if (!widget->parentItem()) {
+            widget->setParentItem(parentItem);
+        }
+    }
 
     void relayout(RelayoutType type = Clean)
     {
@@ -111,19 +138,22 @@ public:
 
         foreach (QGraphicsWidget * item, items) {
             if (items.size() - showItems > i++) {
-                item->setVisible(false);
+                // item->setVisible(false);
+                _hide(item);
             } else {
                 qreal itemWidth = sizer->size() * width;
                 if (itemWidth != 0) {
                     newGeometry.setWidth(itemWidth);
                     item->setGeometry(newGeometry);
                     kDebug() << newGeometry;
-                    if (!item->isVisible()) {
-                        item->setVisible(true);
-                    }
+                    // if (!item->isVisible()) {
+                    //     item->setVisible(true);
+                    // }
+                    _show(item);
                     newGeometry.moveLeft(newGeometry.left() + itemWidth);
                 } else {
-                    item->setVisible(false);
+                    // item->setVisible(false);
+                    _hide(item);
                 }
             }
         }
