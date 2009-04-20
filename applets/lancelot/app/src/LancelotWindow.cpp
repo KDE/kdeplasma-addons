@@ -843,6 +843,9 @@ void LancelotWindow::loadConfig()
     qDebug() << "Trying to enable logging" <<
         m_configUi.enableUsageStatistics();
     Logger::instance()->setEnabled(m_configUi.enableUsageStatistics());
+
+    // Keep open
+    Models::ApplicationConnector::instance()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
 }
 
 void LancelotWindow::lancelotContext()

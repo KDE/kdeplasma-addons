@@ -109,6 +109,7 @@ void LancelotConfig::loadConfig()
     setButtonData(buttonSystem2);
     setButtonData(buttonSystem3);
 
+    checkKeepOpen->setChecked(m_mainConfig.readEntry("enableKeepOpen", false));
     setEnableUsageStatistics(m_mainConfig.readEntry("enableUsageStatistics", true));
 }
 
@@ -123,6 +124,7 @@ void LancelotConfig::saveConfig()
     m_mainConfig.writeEntry("systemButton3Action", systemButtonActions[buttonSystem3]);
 
     m_mainConfig.writeEntry("enableUsageStatistics", enableUsageStatistics());
+    m_mainConfig.writeEntry("enableKeepOpen", checkKeepOpen->isChecked());
 
     m_mainConfig.sync();
 }
