@@ -15,7 +15,7 @@ include_directories(
    )
 
 # We add our source code here
-set(timer_SRCS timer.cpp customtimeeditor.cpp)
+set(timer_SRCS timer.cpp timerdigit.cpp customtimeeditor.cpp)
 kde4_add_ui_files(timer_SRCS timerConfig.ui predefinedTimersConfig.ui)
 
 # Now make sure all files get to the right place

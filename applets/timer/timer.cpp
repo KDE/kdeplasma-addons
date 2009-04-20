@@ -65,16 +65,23 @@ void Timer::init()
         m_separatorBasename += 'C';
     }
 
-    m_hoursDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
-    m_hoursDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
-    m_minutesDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
-    m_minutesDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
-    m_secondsDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
-    m_secondsDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_hoursDigit[0] = new TimerDigit(m_svg, 36000, this);
+    m_hoursDigit[1] = new TimerDigit(m_svg, 3600, this);
+    m_minutesDigit[0] = new TimerDigit(m_svg, 600, this);
+    m_minutesDigit[1] = new TimerDigit(m_svg, 60, this);
+    m_secondsDigit[0] = new TimerDigit(m_svg, 10, this);
+    m_secondsDigit[1] = new TimerDigit(m_svg, 1, this);
     m_separator[0] = new Plasma::SvgWidget(m_svg, m_separatorBasename, this);
     m_separator[1] = new Plasma::SvgWidget(m_svg, m_separatorBasename, this);
     m_title = new Plasma::Label(this);
     m_title->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
+    connect(m_hoursDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
+    connect(m_hoursDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
+    connect(m_minutesDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
+    connect(m_minutesDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
+    connect(m_secondsDigit[0], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
+    connect(m_secondsDigit[1], SIGNAL(changed(int)), this, SLOT(digitChanged(int)));
 
     KConfigGroup cg = config();
     m_predefinedTimers = cg.readEntry("predefinedTimers", QStringList() << "00:00:30" << "00:01:00"
@@ -387,49 +394,16 @@ void Timer::startTimerFromAction()
     startTimer();
 }
 
-void Timer::wheelEvent(QGraphicsSceneWheelEvent * event)
+void Timer::digitChanged(int value)
 {
-    Q_UNUSED(event);
-
     if (m_running) return;
 
-    int delta = 0;
-
-    int appletHeight = (int) contentsRect().height();
-    int appletWidth = (int) contentsRect().width();
-
-    int h = (appletHeight / 2) * 7 < appletWidth ? appletHeight : ((appletWidth - 6) / 7) * 2;
-    int w = h / 2;
-    int y = ((int) contentsRect().y()) + (appletHeight - h) / 2;
-    int x = ((int) contentsRect().x()) + (appletWidth - w * 7) / 2;
-
-    if (!(event->pos().y() > y && event->pos().y() < y + h)) return;
-
-    if ((event->pos().x() > x) && (event->pos().x() < x + w)){
-        delta = 36000;
-
-    }else if ((event->pos().x() > x + w) && (event->pos().x() < x + (w * 2))){
-        delta = 3600;
-
-    }else if ((event->pos().x() > x + (w * 2) + (w / 2)) && (event->pos().x() < x + (w * 3) + (w / 2))){
-        delta = 600;
-
-    }else if ((event->pos().x() > x + (w * 3) + (w / 2)) && (event->pos().x() < x + (w * 4) + (w / 2))){
-        delta = 60;
-
-    }else if ((event->pos().x() > x + (w * 5)) && (event->pos().x() < x + (w * 6))){
-        delta = 10;
-
-    }else if ((event->pos().x() > x + (w * 6)) && (event->pos().x() < x + (w * 7))){
-        delta = 1;
-    }
-
-    if (event->delta() < 0){
-        if (m_seconds >= delta){
-            setSeconds((m_seconds - delta) % 86400);
+    if (value < 0){
+        if (m_seconds >= abs(value)){
+            setSeconds((m_seconds - abs(value)) % 86400);
         }
     }else{
-        setSeconds((m_seconds + delta) % 86400);
+        setSeconds((m_seconds + abs(value)) % 86400);
     }
 
     if (m_seconds != 0){

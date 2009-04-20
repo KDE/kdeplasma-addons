@@ -26,6 +26,7 @@
 
 #include "ui_predefinedTimersConfig.h"
 #include "ui_timerConfig.h"
+#include "timerdigit.h"
 
 class QGraphicsSceneMouseEvent;
 class QGraphicsTextItem;
@@ -50,7 +51,6 @@ class Timer : public Plasma::Applet
         void init();
         void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
         void mousePressEvent(QGraphicsSceneMouseEvent * event);
-        void wheelEvent(QGraphicsSceneWheelEvent * event);
         QList<QAction*> contextualActions();
 
     protected:
@@ -64,6 +64,7 @@ class Timer : public Plasma::Applet
         void stopTimer();
         void resetTimer();
         void startTimerFromAction();
+        void digitChanged(int value);
 
     private:
         void saveTimer();
@@ -74,9 +75,9 @@ class Timer : public Plasma::Applet
 
         QTimer timer;
         Plasma::Svg *m_svg;
-        Plasma::SvgWidget *m_hoursDigit[2];
-        Plasma::SvgWidget *m_minutesDigit[2];
-        Plasma::SvgWidget *m_secondsDigit[2];
+        TimerDigit *m_hoursDigit[2];
+        TimerDigit *m_minutesDigit[2];
+        TimerDigit *m_secondsDigit[2];
         Plasma::SvgWidget *m_separator[2];
         Plasma::Label *m_title;
 
