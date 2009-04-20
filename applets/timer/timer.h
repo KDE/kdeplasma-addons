@@ -23,15 +23,22 @@
 #include <QTimer>
 
 #include <Plasma/Applet>
-#include <Plasma/Svg>
 
 #include "ui_predefinedTimersConfig.h"
 #include "ui_timerConfig.h"
 
 class QGraphicsSceneMouseEvent;
+class QGraphicsTextItem;
 class QMenu;
 class CustomTimeEditor;
 class QActionGroup;
+
+namespace Plasma
+{
+    class Label;
+    class Svg;
+    class SvgWidget;
+}
 
 class Timer : public Plasma::Applet
 {
@@ -40,9 +47,6 @@ class Timer : public Plasma::Applet
         Timer(QObject *parent, const QVariantList &args);
         ~Timer();
 
-        void paintInterface(QPainter *painter,
-                const QStyleOptionGraphicsItem *option,
-                const QRect& contentsRect);
         void init();
         void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
         void mousePressEvent(QGraphicsSceneMouseEvent * event);
@@ -52,6 +56,7 @@ class Timer : public Plasma::Applet
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
         void createMenuAction();
+        void constraintsEvent(Plasma::Constraints constraints);
     private slots:
         void updateTimer();
         void slotCountDone();
@@ -62,21 +67,26 @@ class Timer : public Plasma::Applet
 
     private:
         void saveTimer();
+        void setSeconds(int seconds);
 
         int m_seconds;
         bool m_running;
 
         QTimer timer;
         Plasma::Svg *m_svg;
+        Plasma::SvgWidget *m_hoursDigit[2];
+        Plasma::SvgWidget *m_minutesDigit[2];
+        Plasma::SvgWidget *m_secondsDigit[2];
+        Plasma::SvgWidget *m_separator[2];
+        Plasma::Label *m_title;
+
         QAction *m_startAction;
         QAction *m_stopAction;
         QAction *m_resetAction;
         Ui::predefinedTimersConfig predefinedTimersUi;
         Ui::timerConfig ui;
 
-        QStringList m_predefinedTimers;
-        bool m_showTitle;
-        QString m_title;        
+        QStringList m_predefinedTimers;    
         bool m_showMessage;
         QString m_message;
         bool m_runCommand;

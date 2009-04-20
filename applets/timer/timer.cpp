@@ -19,32 +19,26 @@
 
 #include "timer.h"
 
-#include <QDBusMessage>
-#include <QDBusConnection>
-#include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
-#include <QPainter>
 #include <QTimer>
-#include <KDebug>
-#include <QMenu>
 
-#include <KApplication>
 #include <KConfigDialog>
+#include <KDebug>
 #include <KNotification>
 #include <KShell>
 #include <KToolInvocation>
 
+#include <Plasma/Label>
 #include <Plasma/Svg>
-#include <Plasma/Theme>
-#include "customtimeeditor.h"
+#include <Plasma/SvgWidget>
 
+#include "customtimeeditor.h"
 
 
 Timer::Timer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_seconds(),
-      m_running(false),
-      m_title("Timer")
+      m_running(false)
 {
     resize(315, 125);
     setHasConfigurationInterface(true);
@@ -62,14 +56,34 @@ void Timer::init()
     m_svg->setImagePath("widgets/timer");
     m_svg->setContainsMultipleImages(true);
 
+    // Choose graphical separator based on the text one.
+    m_separatorBasename = QString("separator");
+    QString textSeparator = CustomTimeEditor::timerSeparator().remove(' ');
+    if (textSeparator == QString('.')) {
+        m_separatorBasename += 'B';
+    } else if (textSeparator == QString(' ')) {
+        m_separatorBasename += 'C';
+    }
+
+    m_hoursDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_hoursDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_minutesDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_minutesDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_secondsDigit[0] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_secondsDigit[1] = new Plasma::SvgWidget(m_svg, "0", this);
+    m_separator[0] = new Plasma::SvgWidget(m_svg, m_separatorBasename, this);
+    m_separator[1] = new Plasma::SvgWidget(m_svg, m_separatorBasename, this);
+    m_title = new Plasma::Label(this);
+    m_title->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
     KConfigGroup cg = config();
     m_predefinedTimers = cg.readEntry("predefinedTimers", QStringList() << "00:00:30" << "00:01:00"
                                                        << "00:02:00" << "00:05:00" << "00:07:30"
                                                        << "00:10:00" << "00:15:00" << "00:20:00"
                                                        << "00:25:00" << "00:30:00" << "00:45:00"
                                                        << "01:00:00");
-    m_showTitle = cg.readEntry("showTitle", false);
-    m_title = cg.readEntry("title", i18n("Timer"));
+    m_title->setVisible(cg.readEntry("showTitle", false));
+    m_title->setText(cg.readEntry("title", i18n("Timer")));
     m_showMessage = cg.readEntry("showMessage", true);
     m_message = cg.readEntry("message", i18n("Timer Timeout"));
     m_runCommand = cg.readEntry("runCommand", false);
@@ -81,15 +95,6 @@ void Timer::init()
         localizedTimers.append(CustomTimeEditor::toLocalizedTimer(timer));
     }
     m_predefinedTimers = localizedTimers;
-
-    // Choose graphical separator based on the text one.
-    m_separatorBasename = QString("separator");
-    QString textSeparator = CustomTimeEditor::timerSeparator().remove(' ');
-    if (textSeparator == QString('.')) {
-        m_separatorBasename += 'B';
-    } else if (textSeparator == QString(' ')) {
-        m_separatorBasename += 'C';
-    }
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
 
@@ -111,19 +116,50 @@ void Timer::init()
         QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
         int tmpSeconds = cg.readEntry("seconds", 0) - startedAt.secsTo(QDateTime::currentDateTime());
         if (tmpSeconds > 0){
-            m_seconds = tmpSeconds;
+            setSeconds(tmpSeconds);
             startTimer();
         }else{
             //TODO: We should notify user about expired timer
             m_running = false;
         }
     }else{
-        m_seconds = cg.readEntry("seconds", 0);
+        setSeconds(cg.readEntry("seconds", 0));
         if (m_seconds){
             m_startAction->setEnabled(true);
             m_resetAction->setEnabled(true);
         }
     }
+}
+
+void Timer::constraintsEvent(Plasma::Constraints constraints)
+{
+    Q_UNUSED(constraints)
+
+    int appletHeight = (int) contentsRect().height();
+    int appletWidth = (int) contentsRect().width();
+
+    int h = (appletHeight / 2) * 7 < appletWidth ? appletHeight : ((appletWidth - 6) / 7) * 2;
+    int w = h / 2;
+    int y = (int) (contentsRect().y() + (appletHeight - h) / 2);
+    int x = (int) (contentsRect().x() + (appletWidth - w * 7) / 2);
+
+    m_hoursDigit[0]->setGeometry(x, y, w, h);
+    m_hoursDigit[1]->setGeometry(x + w, y, w, h);  
+
+    m_separator[0]->setGeometry(x + (w * 2), y, w/2, h);
+
+    m_minutesDigit[0]->setGeometry(x + (w * 2) + (w/2), y, w, h);
+    m_minutesDigit[1]->setGeometry(x + (w * 3) + (w/2), y, w, h);
+
+    m_separator[1]->setGeometry(x + (w * 4) + (w/2), y, w/2, h);
+
+    m_secondsDigit[0]->setGeometry(x + (w * 5), y, w, h);
+    m_secondsDigit[1]->setGeometry(x + (w * 6), y, w, h);
+
+    QFont font = this->font();
+    font.setPixelSize( y - 6 );
+    m_title->nativeWidget()->setFont( font );
+    m_title->setGeometry(QRectF(0, 4, appletWidth, y - 2));
 }
 
 void Timer::createMenuAction()
@@ -168,9 +204,9 @@ void Timer::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    ui.showTitleCheckBox->setChecked(m_showTitle);
-    ui.titleLineEdit->setEnabled(m_showTitle);
-    ui.titleLineEdit->setText(m_title);
+    ui.showTitleCheckBox->setChecked(m_title->isVisible());
+    ui.titleLineEdit->setEnabled(m_title->isVisible());
+    ui.titleLineEdit->setText(m_title->text());
     ui.showMessageCheckBox->setChecked(m_showMessage);
     ui.messageLineEdit->setEnabled(m_showMessage);
     ui.messageLineEdit->setText(m_message);
@@ -194,11 +230,11 @@ void Timer::configAccepted()
     }
     cg.writePathEntry("predefinedTimers", unlocalizedTimers);
 
-    m_showTitle = ui.showTitleCheckBox->isChecked();
-    cg.writeEntry("showTitle", m_showTitle);
+    m_title->setVisible(ui.showTitleCheckBox->isChecked());
+    cg.writeEntry("showTitle", m_title->isVisible());
 
-    m_title = ui.titleLineEdit->text();
-    cg.writeEntry("title", m_title);
+    m_title->setText(ui.titleLineEdit->text());
+    cg.writeEntry("title", m_title->text());
 
     m_showMessage = ui.showMessageCheckBox->isChecked();
     cg.writeEntry("showMessage", m_showMessage);
@@ -229,17 +265,41 @@ void Timer::updateTimer()
         slotCountDone();
     }
 
-    if (m_seconds != 0) m_seconds--;
+    if (m_seconds != 0){
+        setSeconds(--m_seconds);
+    }
+}
 
-    update();
+void Timer::setSeconds(int secs)
+{
+    m_seconds = secs;
+
+    int hours =  m_seconds / (60 * 60);
+    int mins = (m_seconds % (60 * 60)) / 60;
+    int seconds =  m_seconds % 60;
+
+    QString suffix = (m_seconds < 60 && m_running) ? "_1" : "";
+
+    m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
+    m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
+
+    m_separator[0]->setElementID(m_separatorBasename + suffix);
+
+    m_minutesDigit[0]->setElementID(QString::number(mins / 10) + suffix);
+    m_minutesDigit[1]->setElementID(QString::number(mins % 10) + suffix);
+
+    m_separator[1]->setElementID(m_separatorBasename + suffix);
+
+    m_secondsDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
+    m_secondsDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
 }
 
 void Timer::slotCountDone()
 {
     if (m_showMessage){
         //TODO: probably something with an OK button is better.
-        if (m_showTitle)
-          KNotification::event(KNotification::Notification, m_title + " - " + m_message);
+        if (m_title->isVisible())
+          KNotification::event(KNotification::Notification, m_title->text() + " - " + m_message);
         else
           KNotification::event(KNotification::Notification, m_message);
     }
@@ -302,11 +362,9 @@ void Timer::resetTimer()
 
     saveTimer();
 
-    m_seconds = 0;
+    setSeconds(0);
     m_resetAction->setEnabled(false);
     m_startAction->setEnabled(false);
-
-    update();
 }
 
 void Timer::mousePressEvent(QGraphicsSceneMouseEvent *)
@@ -324,7 +382,7 @@ void Timer::startTimerFromAction()
 {
     QAction *action = dynamic_cast<QAction*> (sender());
     if (!action || action->property("seconds").type() != QVariant::Int ) return;
-    m_seconds=action->property("seconds").toInt();
+    setSeconds(action->property("seconds").toInt());
 
     startTimer();
 }
@@ -368,13 +426,11 @@ void Timer::wheelEvent(QGraphicsSceneWheelEvent * event)
 
     if (event->delta() < 0){
         if (m_seconds >= delta){
-            m_seconds = (m_seconds - delta) % 86400;
+            setSeconds((m_seconds - delta) % 86400);
         }
     }else{
-        m_seconds = (m_seconds + delta) % 86400;
+        setSeconds((m_seconds + delta) % 86400);
     }
-
-    update();
 
     if (m_seconds != 0){
         m_startAction->setEnabled(true);
@@ -382,54 +438,6 @@ void Timer::wheelEvent(QGraphicsSceneWheelEvent * event)
     }else{
         m_startAction->setEnabled(false);
         m_resetAction->setEnabled(false);
-    }
-}
-
-
-void Timer::paintInterface(QPainter *p,
-        const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
-{
-    Q_UNUSED(option);
-
-    int appletHeight = (int) contentsRect.height();
-    int appletWidth = (int) contentsRect.width();
-
-    int h = (appletHeight / 2) * 7 < appletWidth ? appletHeight : ((appletWidth - 6) / 7) * 2;
-    int w = h / 2;
-    int y = contentsRect.y() + (appletHeight - h) / 2;
-    int x = contentsRect.x() + (appletWidth - w * 7) / 2;
-
-    int hours =  m_seconds / (60*60);
-    int mins = (m_seconds % (60*60)) / 60;
-    int seconds =  m_seconds % 60;
-
-    QString suffix = (m_seconds < 60 && m_running) ? "_1" : "";
-
-    m_svg->paint(p, QRectF(x, y, w, h), QString::number(hours / 10) + suffix);
-    m_svg->paint(p, QRectF(x + w, y, w, h), QString::number(hours % 10) + suffix);
-
-    m_svg->paint(p, QRectF(x + (w * 2), y, w/2, h), m_separatorBasename + suffix);
-
-    m_svg->paint(p, QRectF(x + (w * 2) + (w/2), y, w, h), QString::number(mins / 10) + suffix);
-    m_svg->paint(p, QRectF(x + (w * 3) + (w/2), y, w, h), QString::number(mins % 10) + suffix);
-
-    m_svg->paint(p, QRectF(x + (w * 4) + (w/2), y, w/2, h), m_separatorBasename + suffix);
-
-    m_svg->paint(p, QRectF(x + (w * 5), y, w, h), QString::number(seconds / 10) + suffix);
-    m_svg->paint(p, QRectF(x + (w * 6), y, w, h), QString::number(seconds % 10) + suffix);
-
-    //Draw the title
-    if (m_showTitle) {
-        QFont font = this->font();
-        font.setPixelSize( y - 6 );                                //        Minor
-        QRect rectText( 0, 4, appletWidth, y - 2 );                //        adjustments
-        p->save();
-        p->setFont( font );
-        p->setPen( Plasma::Theme::defaultTheme()->color( Plasma::Theme::TextColor ));
-        p->drawText(rectText,
-                    Qt::AlignTop | Qt::AlignHCenter,
-                    m_title);
-        p->restore();
     }
 }
 
