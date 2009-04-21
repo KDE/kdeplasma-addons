@@ -302,18 +302,28 @@ void Timer::setSeconds(int secs)
 
     QString suffix = (m_seconds < 60 && m_running) ? "_1" : "";
 
-    m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
-    m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
+    if ((m_seconds >= 60) || m_secondsDigit[0]->isVisible()){
+        m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
+        m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
 
-    m_separator[0]->setElementID(m_separatorBasename + suffix);
+        m_separator[0]->setElementID(m_separatorBasename + suffix);
 
-    m_minutesDigit[0]->setElementID(QString::number(mins / 10) + suffix);
-    m_minutesDigit[1]->setElementID(QString::number(mins % 10) + suffix);
+        m_minutesDigit[0]->setElementID(QString::number(mins / 10) + suffix);
+        m_minutesDigit[1]->setElementID(QString::number(mins % 10) + suffix);
 
-    m_separator[1]->setElementID(m_separatorBasename + suffix);
+        m_separator[1]->setElementID(m_separatorBasename + suffix);
 
-    m_secondsDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
-    m_secondsDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
+        m_secondsDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
+        m_secondsDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
+    }else{
+        m_hoursDigit[0]->setElementID(QString::number(hours / 10) + suffix);
+        m_hoursDigit[1]->setElementID(QString::number(hours % 10) + suffix);
+
+        m_separator[0]->setElementID(m_separatorBasename + suffix);
+
+        m_minutesDigit[0]->setElementID(QString::number(seconds / 10) + suffix);
+        m_minutesDigit[1]->setElementID(QString::number(seconds % 10) + suffix);
+    }
 }
 
 void Timer::slotCountDone()
