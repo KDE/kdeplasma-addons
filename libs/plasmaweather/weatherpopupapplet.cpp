@@ -18,12 +18,17 @@
  */
 
 #include "weatherpopupapplet.h"
-#include "weatherconfig.h"
-#include "weatherlocation.h"
+
+#include <QTimer>
+
 #include <KConfigGroup>
 #include <KConfigDialog>
+
 #include <plasma/weather/weatherutils.h>
 #include <conversion/converter.h>
+
+#include "weatherconfig.h"
+#include "weatherlocation.h"
 
 using namespace Conversion;
 
@@ -53,8 +58,13 @@ public:
         unitMap["bft"] = WeatherUtils::Beaufort;
         unitMap["km"] = WeatherUtils::Kilometers;
         unitMap["ml"] = WeatherUtils::Miles;
+
+        busyTimer = new QTimer(q);
+        busyTimer->setSingleShot(true);
+        busyTimer->setInterval(2*60*1000);
+        QObject::connect(busyTimer, SIGNAL(timeout()), q, SLOT(giveUpBeingBusy()));
     }
-    
+
     WeatherPopupApplet *q;
     WeatherConfig *weatherConfig;
     Plasma::DataEngine *weatherEngine;
@@ -74,7 +84,8 @@ public:
     double latitude;
     double longitude;
     QHash<QString, int> unitMap;
-    
+    QTimer *busyTimer;
+
     void locationReady(const QString &src)
     {
         if (!src.isEmpty()) {
@@ -84,11 +95,27 @@ public:
             emit q->configNeedsSaving();
             q->connectToEngine();
         } else {
+            busyTimer->stop();
+            q->showMessage(QIcon(), QString(), Plasma::ButtonNone);
             q->setBusy(false);
             q->setConfigurationRequired(true);
         }
     }
-    
+
+    void giveUpBeingBusy()
+    {
+        q->setBusy(false);
+
+        QStringList list = source.split('|', QString::SkipEmptyParts);
+        if (list.count() < 3) {
+            q->setConfigurationRequired(true);
+        } else {
+            q->showMessage(KIcon("dialog-error"),
+                           i18n("Weather information retrieval for %1 timed out.", list.value(2)),
+                           Plasma::ButtonNone);
+        }
+    }
+
     qreal tendency(const Conversion::Value& pressure, const QString& tendency)
     {
         qreal t;
@@ -200,6 +227,7 @@ void WeatherPopupApplet::init()
 void WeatherPopupApplet::connectToEngine()
 {
     setBusy(true);
+    d->busyTimer->start();
     if (d->source.isEmpty()) {
         d->location.setDataEngines(dataEngine("geolocation"), d->weatherEngine);
         d->location.getDefault();
@@ -267,6 +295,8 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     d->latitude = data["Latitude"].toDouble();
     d->longitude = data["Longitude"].toDouble();
 
+    d->busyTimer->stop();
+    showMessage(QIcon(), QString(), Plasma::ButtonNone);
     setBusy(false);
 }
 

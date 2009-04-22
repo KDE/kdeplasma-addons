@@ -73,17 +73,17 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
          * @return pressure unit
          **/
         int pressureUnitInt();
-        
+
         /**
          * @return temperature unit
          **/
         int temperatureUnitInt();
-        
+
         /**
          * @return speed unit
          **/
         int speedUnitInt();
-        
+
         /**
          * @return visibility unit
          **/
@@ -104,13 +104,13 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
          * Called when config is accepted
          */
         virtual void configAccepted();
-        
+
         /**
          * Called when data is updated
          */
         virtual void dataUpdated(const QString &name,
                                  const Plasma::DataEngine::Data &data);
-    
+
     protected:
         /**
          * Connects applet to dataengine
@@ -120,8 +120,9 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
     private:
         class Private;
         Private * const d;
-        
+
         Q_PRIVATE_SLOT(d, void locationReady(const QString &source))
+        Q_PRIVATE_SLOT(d, void giveUpBeingBusy())
 };
 
 #endif
