@@ -108,6 +108,9 @@ class Alife : public QThread {
     QImage m_image;
     QImage m_image_original;
     QImage m_current;
+    
+    int m_current_eat;
+    int m_current_eat_best;
 };
 
 #endif

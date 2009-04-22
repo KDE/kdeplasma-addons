@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 2.6)
 project(plasma-wallpaper-virus)
 
 set(virus_SRCS
