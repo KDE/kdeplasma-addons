@@ -82,7 +82,7 @@ void Alife::createViruses(int amount){
 
             //initial code
             for(int i = 0; i < 7; i++) {
-                temp->code[i] = randomCode();
+                temp->code[i] = qrand()%12;
             }
 
 	    temp->code[qrand()%7] = 7; //cheating, jumpstart evolution
@@ -214,7 +214,7 @@ void Alife::executeCell(int id)
                 pixel = qRgb(qRed(pixel), qGreen(pixel), color);
             }break;
             case 7: //reproduce
-                reproduce(cell, facing);
+                reproduce(cell, facing, pixel);
                 special-= 2;
 		if(special <= 0) {
 		    stop = true;
@@ -344,13 +344,20 @@ void Alife::executeCell(int id)
     }
 }
 
-bool Alife::reproduce(struct cell* cell, int direction)
+bool Alife::reproduce(struct cell* cell, int direction, QRgb color)
 {
     QPoint neighbour = getNeighbour(cell->x, cell->y, direction);
     
     struct cell* newCell = &m_cells[neighbour.x()][neighbour.y()];
 
     if(!newCell->alive&& m_livingCells.size() < m_maxViruses) {
+
+	//give a unfair advantage to darker places
+	int prob = (((qRed(color) + qGreen(color) + qBlue(color))/ 255.)+1);// 0 - 765
+
+	if(qrand() % prob  != 0){
+	    return false;
+	}
 
 	resetCell(newCell);
         newCell->alive = true;
@@ -500,7 +507,7 @@ void Alife::virusMove()
 	createViruses(m_startViruses);
     }
 
-    if(!m_max_attended && m_livingCells.size() > m_maxViruses / 5) {
+    if(!m_max_attended && m_livingCells.size() > m_maxViruses / 10) {
 	m_max_attended = true;
     }
 

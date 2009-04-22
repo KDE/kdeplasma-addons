@@ -42,7 +42,7 @@ class Alife : public QThread {
     int normalXY(int coord, int max);
     void executeCell(int i);
     bool moveCell(int i, int direction);
-    bool reproduce(struct cell *temp, int direction);
+    bool reproduce(struct cell *temp, int direction, QRgb prob);
     QPoint getNeighbour(int x, int y, int direction);
     uchar randomCode();
     void resetCell(struct cell *temp);
