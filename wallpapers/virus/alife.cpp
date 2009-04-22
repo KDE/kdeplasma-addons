@@ -509,13 +509,13 @@ void Alife::virusMove()
 	m_max_attended = false;
     }
 
-    struct cell* myCell = m_livingCells.at(0);
+    /*struct cell* myCell = m_livingCells.at(0);
     int pointer = 0;
     kDebug() << "start code";
     while(myCell->code[pointer] != 0 && pointer < VIRUS_GENOME_SIZE) {
         kDebug() << myCell->code[pointer++];
     }
-    kDebug() << "end code";
+    kDebug() << "end code";*/
 
     int cells = m_livingCells.size();
     for(int i = 0; i < cells; i++) {
