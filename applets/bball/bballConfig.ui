@@ -36,7 +36,7 @@
       </sizepolicy>
      </property>
      <property name="filter">
-      <string>*.png *.gif *.svg *.jpeg *.jpg</string>
+      <string>*.png *.gif *.svg *.svgz *.jpeg *.jpg</string>
      </property>
     </widget>
    </item>

@@ -229,7 +229,7 @@ void bballApplet::configAccepted ()
   //mouse - undo the mouse clicked
   m_mouse_pressed = false;
 
-  update ();
+  update();
 }
 
 QSizeF bballApplet::contentSizeHint() const
@@ -257,9 +257,10 @@ void bballApplet::updateScaledBallImage()
   kDebug() << m_overlay_opacity;
 
   m_ball_img.resize( m_radius * 2, m_radius * 2 );
+  m_pixmap = m_ball_img.pixmap();
   if (m_overlay_enabled)
   {
-    QPainter p(&m_ball_img.pixmap());
+    QPainter p(&m_pixmap);
     p.setPen (QColor (0, 0, 0, 0));
     p.setBrush (m_overlay_colour);
     p.drawPie (m_pie_size, 0, 5760);
@@ -415,7 +416,7 @@ void bballApplet::paintInterface (QPainter * p, const QStyleOptionGraphicsItem *
   p->translate(m_radius, m_radius);
   p->rotate(m_angle);
   p->translate(-m_radius, -m_radius);
-  p->drawPixmap(QPoint (0, 0), m_ball_img.pixmap());
+  p->drawPixmap(QPoint(0, 0), m_pixmap);
 }
 
 void bballApplet::mousePressEvent (QGraphicsSceneMouseEvent * event)
