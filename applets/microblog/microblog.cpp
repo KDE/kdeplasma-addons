@@ -571,8 +571,8 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 
 void MicroBlog::updateSpinBoxSuffix()
 {
-    configUi.historySizeSpinBox->setSuffix(QString(" ") + i18np("message", "messages", configUi.historySizeSpinBox->value()));
-    configUi.historyRefreshSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", configUi.historyRefreshSpinBox->value()));
+    configUi.historySizeSpinBox->setSuffix(i18np(" message", " messages", configUi.historySizeSpinBox->value()));
+    configUi.historyRefreshSpinBox->setSuffix(i18np(" minute", " minutes", configUi.historyRefreshSpinBox->value()));
 }
 
 void MicroBlog::configAccepted()

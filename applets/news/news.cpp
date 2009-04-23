@@ -251,7 +251,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
 
 void News::updateSpinBoxSuffix(int interval)
 {
-    ui.intervalSpinBox->setSuffix(QString(" ") + i18np("minute", "minutes", interval));
+    ui.intervalSpinBox->setSuffix(i18np(" minute", " minutes", interval));
 }
 
 void News::feedTextChanged(const QString& text)
