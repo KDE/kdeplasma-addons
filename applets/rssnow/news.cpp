@@ -74,11 +74,9 @@ void News::init()
     m_layout->setSpacing(2);
 
     m_header = new Header(this);
-
     m_timer = new QTimer(this);
 
     updateScrollers();
-
     connect(m_timer, SIGNAL(timeout()), this, SLOT(switchItems()));
 }
 
@@ -258,11 +256,7 @@ void News::updateScrollers()
     m_timer->stop();
     m_timer->setInterval(m_switchInterval * 1000);
 
-    m_layout->removeItem(m_header);
-    m_header->hide(); //else a weird bug shows up when removing the logo
-    while (m_layout->count() > 0) {
-        QGraphicsLayoutItem * scroller = m_layout->itemAt(0);
-        delete scroller; // TODO right order to delete first?
+    while (m_layout->count()) {
         m_layout->removeAt(0);
     }
 
@@ -271,8 +265,9 @@ void News::updateScrollers()
         m_header->show();
     }
 
+    qDeleteAll(m_scrollerList);
     m_scrollerList.clear();
-    for (int i = 0; i < (m_feedlist.size()); i++ ) {
+    for (int i = 0; i < m_feedlist.size(); i++ ) {
         Scroller * scroller = new Scroller(this);
         m_layout->addItem(scroller);
         m_scrollerList.append(scroller);
@@ -291,13 +286,7 @@ void News::updateScrollers()
         scroller->listUpdated();
     }
 
-    m_layout->setGeometry(geometry());
-
-    QRectF layoutRectF = m_layout->geometry();
-    QRectF appletRectF = geometry();
-    appletRectF.setHeight(layoutRectF.height()+20);
-    setGeometry( appletRectF );
-
+    adjustSize();
     m_timer->start();
     connectToEngine();
 }
