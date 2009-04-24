@@ -82,7 +82,7 @@ void MicroBlog::init()
 {
     m_flash = new Plasma::FlashingLabel(this);
     m_theme = new Plasma::Svg(this);
-    m_theme->setImagePath("widgets/twitter");
+    m_theme->setImagePath("widgets/microblog");
     m_theme->setContainsMultipleImages(true);
 }
 
