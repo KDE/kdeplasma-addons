@@ -13,12 +13,10 @@ Format:
 TODO: <id> <priority> (<difficulty>)
 
 Menu:
-TODO: M01 l (m) Themes and configuration for resize borders
 TODO: M02 l (m) Resize to work ... better
 TODO: M06 m (m) Search history
 TODO: M09   (a) Speed up
-TODO: M12 m (a) switch list models to DataEngines and Services (depends on L08)
-TODO: M13 h (m) plug-ins for contacts (maybe more?) (depends on M12)
+TODO: M13 h (m) make configuration for plug-ins for contacts (maybe more?)
 TODO: M15 m (m) Reorder the favourites
 TODO: M16 m (e) Run as administrator context menu
 
@@ -31,7 +29,6 @@ TODO: L04 l (m) add proper size hints to layouts and widgets
 TODO: L05 l (m) move the groups mechanism away from Widget
              so that ordinary plasma widgets could be extended
              when needed. Add groups support to HoverIcon
-TODO: L08 m (a) switch list models to DataEngines and Services
 
 Launcher Applet:
 None
@@ -49,6 +46,7 @@ Feature requests:
  - choose which categories to show in the applet - FINISHED
  - menu sorting - FINISHED
  - DnD searched applications - FINISHED
+ - choosing the applications in documents and computer section - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
@@ -60,9 +58,8 @@ Feature requests:
  - mail message titles/senders - probably
  - status of mails in the contacts icon - possibly
  - add to panel/desktop action - probably
- - choosing the applications in documents and computer section - yes
  - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
  - advanced parts widget: list mode, icons mode, ..., search bar... - yes
- - align lists that don't have enough items bottom when the mouse comes from bottom - maybe
+ - align lists that don't have enough items bottom when the mouse comes from bottom - not likely
  - Disk free space info - maybe
 
