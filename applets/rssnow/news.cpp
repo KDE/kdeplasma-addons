@@ -68,7 +68,7 @@ void News::init()
     m_maxAge         = cg.readEntry("maxAge", 0);
     m_animations     = cg.readEntry("animations", true);
     m_showdroptarget = cg.readEntry("droptarget", true);
-    m_feedlist       = cg.readEntry("feeds", QStringList("http://www.kde.org/dotkdeorg.rdf"));
+    m_feedlist       = cg.readEntry("feeds", QStringList("http://dot.kde.org/rss.xml"));
 
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     m_layout->setSpacing(2);
