@@ -28,7 +28,7 @@
 #include <QMenu>
 #include <QScrollBar>
 #include <QTextStream>
-#include <Qt/QtGui>
+#include <QtGui/QtGui>
 #include <Plasma/PushButton>
 #include <KAction>
 #include <KConfigDialog>
