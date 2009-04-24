@@ -250,6 +250,7 @@ void News::configAccepted()
     cg.writeEntry("maxAge", m_maxAge);
 
     updateScrollers();
+    emit configNeedsSaving();
 }
 
 void News::updateScrollers()
