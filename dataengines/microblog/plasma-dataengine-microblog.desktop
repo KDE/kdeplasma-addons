@@ -15,6 +15,7 @@ Name[tr]=Mikro günlük
 Name[uk]=Міні-журнал
 Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
+Comment=identi.ca and twitter micro-blogging services
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
