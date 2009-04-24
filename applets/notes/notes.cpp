@@ -22,29 +22,44 @@
 #include "notes.h"
 
 #include <QFile>
+#include <QGraphicsGridLayout>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
 #include <QMenu>
 #include <QScrollBar>
 #include <QTextStream>
-
+#include <Qt/QtGui>
+#include <Plasma/PushButton>
 #include <KAction>
-#include <KFileDialog>
-#include <KMessageBox>
-#include <KGlobalSettings>
 #include <KConfigDialog>
 #include <KConfigGroup>
+#include <KFileDialog>
+#include <KGlobalSettings>
+#include <KMessageBox>
+#include <kicon.h>
+#include <kpushbutton.h>
+#include <KRichTextEdit>
 #include <KStandardAction>
 #include <KTextEdit>
-
 #include <Plasma/TextEdit>
 
-NotesTextEdit::NotesTextEdit( QWidget *parent ): KTextEdit( parent )
+
+
+
+
+NotesTextEdit::NotesTextEdit(QWidget *parent)
+    : KRichTextEdit(parent),
+      m_formatMenu(0)
 {
 }
 
 NotesTextEdit::~NotesTextEdit()
 {
+}
+
+void NotesTextEdit::setFormatMenu(QMenu *menu)
+{
+    m_formatMenu = menu;
 }
 
 /**
@@ -55,8 +70,68 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
     QMenu *popup = mousePopupMenu();
     popup->addSeparator();
     popup->addAction(KStandardAction::saveAs(this, SLOT(saveToFile()), this));
+
+    if (m_formatMenu) {
+        popup->addMenu(m_formatMenu);
+    }
+
     popup->exec(event->globalPos());
     delete popup;
+}
+
+void NotesTextEdit::italic()
+{
+    if (fontItalic() == true) {
+        setTextItalic(false);
+    } else {
+        setTextItalic(true);
+    }
+}
+
+void NotesTextEdit::bold()
+{ 
+    if (fontWeight() == 75) {
+        setTextBold(false);
+    } else {
+        setTextBold(true);
+    }
+}
+
+void NotesTextEdit::underline()
+{
+    if (fontUnderline() == true) {
+        setTextUnderline(false);
+    } else {
+        setTextUnderline(true);
+    }
+}
+
+void NotesTextEdit::strikeOut()
+{
+    QFont a = font();
+    if (a.strikeOut() == true) {
+        setTextStrikeOut(false);
+    } else {
+        setTextStrikeOut(true);
+    }
+}
+
+void NotesTextEdit::justifyCenter()
+{
+    if (alignment() == Qt::AlignHCenter) {
+        setAlignment(Qt::AlignLeft);
+    } else {
+        alignCenter ();
+    }
+}
+
+void NotesTextEdit::justifyFill()
+{
+    if (alignment() == Qt::AlignJustify) {
+        setAlignment(Qt::AlignLeft);
+    } else {
+        alignJustify();
+    }
 }
 
 /**
@@ -121,7 +196,7 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
     : Plasma::TextEdit(parent)
 {
     KTextEdit *w = nativeWidget();
-    NotesTextEdit* native = new NotesTextEdit;
+    native = new NotesTextEdit;
     //FIXME: we need a way to just add actions without changing the native widget under its feet
     if (native->verticalScrollBar() && w->verticalScrollBar()) {
         native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
@@ -188,7 +263,6 @@ void Notes::mouseUnhovered()
 Notes::Notes(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_wheelFontAdjustment(0),
-      m_notes_theme(this),
       m_layout(0),
       m_textEdit(0)
 {
@@ -203,7 +277,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
     m_textEdit = new PlasmaTextEdit(this);
     m_textEdit->setMinimumSize(QSize(0, 0));
-    m_layout = new QGraphicsLinearLayout(this);
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical);
+    m_layout->setSpacing(0);
     m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
     m_layout->addItem(m_textEdit);
@@ -213,20 +288,25 @@ Notes::Notes(QObject *parent, const QVariantList &args)
 
         if (f.open(QIODevice::ReadOnly)) {
             QTextStream t(&f);
-            m_textEdit->nativeWidget()->setPlainText(t.readAll());
+            m_textEdit->nativeWidget()->setHtml(t.readAll());
             f.close();
         }
     } else {
 #ifdef KTEXTEDIT_CLICKMSG_SUPPORT
-        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid. Type your notes here...."));
+        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
 #endif
     }
+
+    createTextFormatingWidgets();
+    setLayout(m_layout);
 }
 
 Notes::~Notes()
 {
     saveNote();
     delete m_textEdit;
+    delete m_colorMenu;
+    delete m_formatMenu;
 }
 
 void Notes::init()
@@ -234,6 +314,8 @@ void Notes::init()
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
 
+    m_colorMenu = new QMenu(i18n("Text Color"));
+    connect(m_colorMenu, SIGNAL(triggered(QAction*)), this, SLOT(changeColor(QAction*)));
     addColor("white", i18n("White"));
     addColor("black", i18n("Black"));
     addColor("red", i18n("Red"));
@@ -243,9 +325,6 @@ void Notes::init()
     addColor("blue", i18n("Blue"));
     addColor("pink", i18n("Pink"));
     addColor("translucent", i18n("Translucent"));
-    QAction *separator = new QAction(this);
-    separator->setSeparator(true);
-    m_colorActions.append(separator);
 
     m_autoFont = false;
 
@@ -261,7 +340,7 @@ void Notes::init()
 
     QString text = cg.readEntry("autoSave", QString());
     if (!text.isEmpty()) {
-        m_textEdit->nativeWidget()->setPlainText(text);
+        m_textEdit->nativeWidget()->setHtml(text);
     }
 
     int scrollValue = cg.readEntry("scrollValue").toInt();
@@ -281,7 +360,7 @@ void Notes::init()
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
 
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote())); 
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
     connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
 }
@@ -292,21 +371,22 @@ void Notes::init()
 */
 void Notes::lineChanged()
 {
-    if(!m_useNoColor)
-    {
-      QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-      QTextEdit::ExtraSelection textxtra;
-      textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
-      textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-      textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-      textxtra.format.setBackground( m_textBackgroundColor );
-
-      QList<QTextEdit::ExtraSelection> extras;
-      extras << textxtra;
-      m_textEdit->nativeWidget()->setExtraSelections( extras );
-
-      update();
+    if (m_useNoColor) {
+        return;
     }
+
+    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+    QTextEdit::ExtraSelection textxtra;
+    textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+    textxtra.format.setBackground( m_textBackgroundColor );
+
+    QList<QTextEdit::ExtraSelection> extras;
+    extras << textxtra;
+    m_textEdit->nativeWidget()->setExtraSelections( extras );
+
+    update();
 }
 
 void Notes::constraintsEvent(Plasma::Constraints constraints)
@@ -329,9 +409,9 @@ void Notes::constraintsEvent(Plasma::Constraints constraints)
 void Notes::updateTextGeometry()
 {
     if (m_layout) {
+        //FIXME: this needs to come from the svg
         const qreal xpad = geometry().width() / 15;
         const qreal ypad = geometry().height() / 15;
-        m_layout->setSpacing(xpad);
         m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
         m_font.setPointSize(fontSize());
         m_textEdit->nativeWidget()->setFont(m_font);
@@ -341,7 +421,7 @@ void Notes::updateTextGeometry()
 int Notes::fontSize()
 {
     if (m_autoFont) {
-        int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100) + m_wheelFontAdjustment;
+        int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100)  + m_wheelFontAdjustment;
         return qMax(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
     } else {
         return m_customFontSize + m_wheelFontAdjustment;
@@ -371,7 +451,7 @@ void Notes::delayedSaveNote()
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toPlainText());
+    cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toHtml());
     cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
     //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
@@ -379,16 +459,16 @@ void Notes::saveNote()
 
 void Notes::addColor(const QString &id, const QString &colorName)
 {
-    QAction *tmpAction = new QAction(colorName, this);
-    m_colorActions.append(tmpAction);
+    QAction *tmpAction = m_colorMenu->addAction(colorName);
     tmpAction->setProperty("color", id);
-    connect(tmpAction, SIGNAL(triggered(bool)), this, SLOT(changeColor()));
 }
 
-void Notes::changeColor()
+void Notes::changeColor(QAction *action)
 {
-    QAction *action = dynamic_cast<QAction*> (sender());
-    if (!action || action->property("color").type() != QVariant::String) return;
+    if (!action || action->property("color").type() != QVariant::String) {
+        return;
+    }
+
     m_color = action->property("color").toString();
     KConfigGroup cg = config();
     cg.writeEntry("color", m_color);
@@ -396,9 +476,12 @@ void Notes::changeColor()
     update();
 }
 
-QList<QAction*> Notes::contextualActions()
+QList<QAction *> Notes::contextualActions()
 {
-    return m_colorActions;
+    QList<QAction *> actions;
+    actions.append(m_colorMenu->menuAction());
+    actions.append(m_formatMenu->menuAction());
+    return actions;
 }
 
 void Notes::paintInterface(QPainter *p,
@@ -441,7 +524,6 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
     ui.useThemeColor->setChecked(m_useThemeColor);
     ui.useCustomColor->setChecked(!m_useThemeColor);
 
-
     QButtonGroup *BackgroundColorGroup = new QButtonGroup(widget);
     BackgroundColorGroup->addButton(ui.useNoColor);
     BackgroundColorGroup->addButton(ui.useCustomBackgroundColor);
@@ -450,12 +532,14 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 
     ui.checkSpelling->setChecked(m_checkSpelling);
 
-    for (int i = 0; i < m_colorActions.size(); i++){
-        QString text = m_colorActions[i]->text();
+    QList<QAction *> colorActions = m_colorMenu->actions();
+    for (int i = 0; i < colorActions.size(); i++){
+        QString text = colorActions.at(i)->text();
         if (!text.isEmpty()){
             ui.notesColorComboBox->insertItem(i, text);
-            if (m_colorActions[i]->property("color").toString() == m_color)
+            if (colorActions.at(i)->property("color").toString() == m_color) {
                 ui.notesColorComboBox->setCurrentIndex(i);
+            }
         }
     }
 }
@@ -511,9 +595,9 @@ void Notes::configAccepted()
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textColor", m_textColor);
-        QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-        m_textEdit->nativeWidget()->selectAll();
-        m_textEdit->nativeWidget()->setTextColor(m_textColor);
+    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+    m_textEdit->nativeWidget()->selectAll();
+    m_textEdit->nativeWidget()->setTextColor(m_textColor);
         m_textEdit->nativeWidget()->setTextCursor(textCursor);
         QPalette palette = m_textEdit->nativeWidget()->palette();
         palette.setColor(QPalette::Text, m_textColor);
@@ -545,13 +629,14 @@ void Notes::configAccepted()
 
     bool spellCheck = ui.checkSpelling->isChecked();
     if (spellCheck != m_checkSpelling) {
-        changed = true;
+      changed = true;
         m_checkSpelling = spellCheck;
         cg.writeEntry("checkSpelling", m_checkSpelling);
         m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     }
 
-    QString tmpColor = m_colorActions[ui.notesColorComboBox->currentIndex()]->property("color").toString();
+    QList<QAction *> colorActions = m_colorMenu->actions();
+    QString tmpColor = colorActions[ui.notesColorComboBox->currentIndex()]->property("color").toString();
     if (tmpColor != m_color){
         m_color = tmpColor;
         cg.writeEntry("color", m_color);
@@ -563,6 +648,80 @@ void Notes::configAccepted()
         update();
         emit configNeedsSaving();
     }
+}
+
+void Notes::createTextFormatingWidgets()
+{
+    m_formatMenu = new QMenu(i18n("Formatting"));
+    m_textEdit->native->setFormatMenu(m_formatMenu);
+    QAction *actionBold = m_formatMenu->addAction(KIcon("format-text-bold"), i18n("Bold")); 
+    QAction *actionItalic = m_formatMenu->addAction(KIcon("format-text-italic"),i18n("Italic"));
+    QAction *actionUnderline = m_formatMenu->addAction(KIcon("format-text-underline"), i18n("Underline"));
+    QAction *actionStrikeThrough = m_formatMenu->addAction(KIcon("format-text-strikethrough"), i18n("StrikeOut"));
+    QAction *actionCenter = m_formatMenu->addAction(KIcon("format-justify-center"), i18n("Justify center"));
+    QAction *actionFill = m_formatMenu->addAction(KIcon("format-justify-fill"), i18n("Justify"));
+    connect(actionItalic, SIGNAL(triggered()), m_textEdit->native, SLOT(italic()));
+    connect(actionBold, SIGNAL(triggered()), m_textEdit->native, SLOT(bold()));
+    connect(actionUnderline, SIGNAL(triggered()), m_textEdit->native, SLOT(underline()));
+    connect(actionStrikeThrough, SIGNAL(triggered()), m_textEdit->native, SLOT(strikeOut()));
+    connect(actionCenter, SIGNAL(triggered()), m_textEdit->native, SLOT(justifyCenter()));
+    connect(actionFill, SIGNAL(triggered()), m_textEdit->native, SLOT(justifyFill()));
+
+    QGraphicsWidget *widget = new QGraphicsWidget(this);
+    widget->setMaximumHeight(25);
+
+    QGraphicsLinearLayout *buttonLayout = new QGraphicsLinearLayout(Qt::Horizontal, widget);
+    buttonLayout->setSpacing(0);
+    buttonLayout->setContentsMargins(0, 0, 0, 0);
+    widget->setLayout(buttonLayout);
+
+    m_buttonOption = new Plasma::ToolButton(widget);
+    m_buttonOption->nativeWidget()->setIcon(KIcon("draw-text"));
+    m_buttonOption->nativeWidget()->setCheckable(true);
+
+    m_buttonBold = new Plasma::ToolButton(widget);
+    m_buttonBold->setAction(actionBold);
+
+    m_buttonItalic = new Plasma::ToolButton(widget);
+    m_buttonItalic->setAction(actionItalic);
+
+    m_buttonUnderline = new Plasma::ToolButton(widget);
+    m_buttonUnderline->setAction(actionUnderline);
+
+    m_buttonStrikeThrough = new Plasma::ToolButton(widget);
+    m_buttonStrikeThrough->setAction(actionStrikeThrough);
+
+    m_buttonCenter = new Plasma::ToolButton(widget);
+    m_buttonCenter->setAction(actionCenter);
+
+    m_buttonFill = new Plasma::ToolButton(widget);
+    m_buttonFill->setAction(actionFill);
+
+    buttonLayout->addItem(m_buttonOption);
+    buttonLayout->addStretch();
+    buttonLayout->addItem(m_buttonBold);
+    buttonLayout->addItem(m_buttonItalic);
+    buttonLayout->addItem(m_buttonUnderline);
+    buttonLayout->addItem(m_buttonStrikeThrough);
+    buttonLayout->addItem(m_buttonCenter);
+    buttonLayout->addItem(m_buttonFill);
+    buttonLayout->addStretch();
+
+    m_layout->addItem(widget);
+
+    showOptions(false);
+    connect(m_buttonOption->nativeWidget(), SIGNAL(toggled(bool)), this, SLOT(showOptions(bool)));
+}
+
+void Notes::showOptions(bool show)
+{
+    m_buttonOption->nativeWidget()->setDown(show);
+    m_buttonBold->setVisible(show);
+    m_buttonItalic->setVisible(show);
+    m_buttonUnderline->setVisible(show);
+    m_buttonStrikeThrough->setVisible(show); 
+    m_buttonCenter->setVisible(show);
+    m_buttonFill->setVisible(show);
 }
 
 #include "notes.moc"

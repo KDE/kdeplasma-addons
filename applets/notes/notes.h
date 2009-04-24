@@ -22,12 +22,17 @@
 #ifndef NOTES_HEADER
 #define NOTES_HEADER
 
+#include <QGraphicsLinearLayout>
 #include <QTimer>
+
+#include <QToolButton>
 #include <KTextEdit>
+#include <KRichTextEdit>
 
 #include <Plasma/Applet>
 #include <Plasma/Svg>
 #include <Plasma/TextEdit>
+#include <Plasma/ToolButton>
 
 #include "ui_config.h"
 
@@ -49,17 +54,23 @@ namespace Plasma
  * @see QTextEdit
  * @author Björn Ruberg <bjoern@ruberg-wegener.de>
  */
-class NotesTextEdit : public KTextEdit {
+class NotesTextEdit : public KRichTextEdit {
     Q_OBJECT
 
     public:
         NotesTextEdit(QWidget *parent = 0);
         ~NotesTextEdit();
-        virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
-        void mousePressEvent ( QMouseEvent * event );
-        void keyPressEvent ( QKeyEvent * event );
-        void leaveEvent ( QEvent * event );
-        void wheelEvent ( QWheelEvent * event );
+
+        void setFormatMenu(QMenu *menu);
+
+    public slots:
+        virtual void saveToFile();
+        void italic();
+        void bold();
+        void underline();
+        void strikeOut();
+        void justifyCenter();
+        void justifyFill();
 
     Q_SIGNALS:
         void cursorMoved();
@@ -67,8 +78,15 @@ class NotesTextEdit : public KTextEdit {
         void scrolledUp();
         void scrolledDown();
 
-    public slots:
-        virtual void saveToFile();
+    protected:
+        virtual void contextMenuEvent ( QContextMenuEvent *e )  ;
+        void mousePressEvent ( QMouseEvent * event );
+        void keyPressEvent ( QKeyEvent * event );
+        void leaveEvent ( QEvent * event );
+        void wheelEvent ( QWheelEvent * event );
+
+    private:
+        QMenu *m_formatMenu;
 };
 
 /**
@@ -88,6 +106,7 @@ class PlasmaTextEdit : public Plasma::TextEdit {
     public:
       PlasmaTextEdit(QGraphicsWidget *parent = 0);
       ~PlasmaTextEdit();
+      NotesTextEdit* native;
 };
 
 class Notes : public Plasma::Applet
@@ -105,6 +124,7 @@ class Notes : public Plasma::Applet
 
     public Q_SLOTS:
         void configAccepted();
+        void showOptions(bool show);
 
     protected:
         void constraintsEvent(Plasma::Constraints constraints);
@@ -113,19 +133,21 @@ class Notes : public Plasma::Applet
     private Q_SLOTS:
         void saveNote();
         void delayedSaveNote();
-        void changeColor();
+        void changeColor(QAction*);
         void lineChanged();
         void mouseUnhovered();
         void increaseFontSize();
         void decreaseFontSize();
 
     private:
+        void createTextFormatingWidgets();
         int fontSize();
+        void updateTextGeometry();
+        void addColor(const QString &id, const QString &colorName);
+
         int m_autoFontPercent;
         bool m_autoFont;
         bool m_checkSpelling;
-        void updateTextGeometry();
-        void addColor(const QString &id, const QString &colorName);
 
         QTimer m_saveTimer;
         QFont m_font;
@@ -137,7 +159,8 @@ class Notes : public Plasma::Applet
         QColor m_textBackgroundColor;
         QString m_color;
 
-        QList<QAction*> m_colorActions;
+        QMenu *m_colorMenu;
+        QMenu *m_formatMenu;
 
         Plasma::Svg m_notes_theme;
         QGraphicsLinearLayout *m_layout;
@@ -145,6 +168,14 @@ class Notes : public Plasma::Applet
         Ui::config ui;
 
         QSizeF m_size;
+
+        Plasma::ToolButton *m_buttonOption;
+        Plasma::ToolButton *m_buttonBold;
+        Plasma::ToolButton *m_buttonItalic;
+        Plasma::ToolButton *m_buttonUnderline;
+        Plasma::ToolButton *m_buttonStrikeThrough;
+        Plasma::ToolButton *m_buttonCenter;
+        Plasma::ToolButton *m_buttonFill;
 };
 
 K_EXPORT_PLASMA_APPLET(notes, Notes)
