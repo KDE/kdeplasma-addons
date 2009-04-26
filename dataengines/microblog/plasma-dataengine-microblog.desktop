@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Microblogging
 Name[cs]=Mikroblogování
+Name[el]=Μικροϊστολόγιο
 Name[es]=Microblogs
 Name[et]=Mikroblogimine
 Name[eu]=Mikrobloggintza
@@ -16,6 +17,8 @@ Name[uk]=Міні-журнал
 Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Comment=identi.ca and twitter micro-blogging services
+Comment[el]=Υπηρεσίες identi.ca και twitter μικροϊστολογίου
+Comment[uk]=Служби мікроблогів identi.ca і twitter
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im
