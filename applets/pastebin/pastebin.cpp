@@ -220,6 +220,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setImage(KIcon("dialog-cancel"));
             // Notification ...
             QTimer::singleShot(15000, this, SLOT(resetActionState()));
+            timer->stop();
             break;
         case IdleSuccess:
             kDebug() << "IdleSuccess";
@@ -228,6 +229,7 @@ void Pastebin::setActionState(ActionState state)
             toolTipData.setImage(KIcon("dialog-ok"));
             // Notification ...
             QTimer::singleShot(15000, this, SLOT(resetActionState()));
+            timer->stop();
             break;
         case Sending:
             kDebug() << "Sending";
