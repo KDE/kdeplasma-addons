@@ -37,7 +37,7 @@
         <item>
          <widget class="QRadioButton" name="rb_split" >
           <property name="text" >
-           <string>Use custom image</string>
+           <string>Use custom image:</string>
           </property>
          </widget>
         </item>

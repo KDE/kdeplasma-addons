@@ -145,7 +145,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Use &amp;Tabs:</string>
+            <string>Use &amp;tabs:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -371,7 +371,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Use &amp;Tabs:</string>
+            <string>Use &amp;tabs:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -464,7 +464,7 @@
          <item row="3" column="0">
           <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>Automatically &amp;switch Tabs:</string>
+            <string>Automatically &amp;switch tabs:</string>
            </property>
            <property name="buddy">
             <cstring>checkBox_switchTabs</cstring>

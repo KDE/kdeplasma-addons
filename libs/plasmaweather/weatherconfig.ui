@@ -125,7 +125,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Update &amp;Interval:</string>
+      <string>Update &amp;interval:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -234,7 +234,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Wind &amp;Speed:</string>
+      <string>Wind &amp;speed:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

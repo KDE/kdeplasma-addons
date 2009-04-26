@@ -54,7 +54,7 @@
      <item row="2" column="0">
       <widget class="QPushButton" name="pushButton_Size">
        <property name="text">
-        <string>Maximum &amp;size of the widget</string>
+        <string>Maximum &amp;Size of Widget</string>
        </property>
       </widget>
      </item>

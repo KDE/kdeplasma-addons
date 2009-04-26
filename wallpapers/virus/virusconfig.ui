@@ -377,7 +377,7 @@
         <locale language="English" country="UnitedStates"/>
        </property>
        <property name="text">
-        <string>Update interval</string>
+        <string>Update interval:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -390,7 +390,7 @@
         <locale language="English" country="UnitedStates"/>
        </property>
        <property name="text">
-        <string>Maximum viruses</string>
+        <string>Maximum viruses:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -403,7 +403,7 @@
         <locale language="English" country="UnitedStates"/>
        </property>
        <property name="text">
-        <string>Show viruses</string>
+        <string>Show viruses:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

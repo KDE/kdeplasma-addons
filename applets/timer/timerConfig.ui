@@ -43,7 +43,7 @@
    <item row="1" column="1">
     <widget class="QCheckBox" name="showTitleCheckBox">
      <property name="text">
-      <string>Show Title</string>
+      <string>Show title:</string>
      </property>
     </widget>
    </item>
@@ -92,14 +92,14 @@
    <item row="6" column="1">
     <widget class="QCheckBox" name="showMessageCheckBox">
      <property name="text">
-      <string>Show a message</string>
+      <string>Show a message:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="1">
     <widget class="QCheckBox" name="runCommandCheckBox">
      <property name="text">
-      <string>Run a command</string>
+      <string>Run a command:</string>
      </property>
     </widget>
    </item>

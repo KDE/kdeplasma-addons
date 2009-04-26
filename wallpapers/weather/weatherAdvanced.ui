@@ -16,7 +16,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>&amp;Weather Condition:</string>
+        <string>&amp;Weather condition:</string>
        </property>
        <property name="buddy">
         <cstring>m_conditionCombo</cstring>
