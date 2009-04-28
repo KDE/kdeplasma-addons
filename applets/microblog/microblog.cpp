@@ -187,23 +187,23 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
     m_flash->setColor( Plasma::Theme::TextColor );
-    QFont fnt = qApp->font();
+    QFont fnt = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
     fnt.setBold( true );
     QFontMetrics fm( fnt );
     m_flash->setFont( fnt );
     m_flash->flash( "", 20000 );
     m_flash->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    QGraphicsLinearLayout *titleLayout = new QGraphicsLinearLayout( Qt::Vertical );
+    QGraphicsLinearLayout *titleLayout = new QGraphicsLinearLayout(Qt::Vertical);
     Plasma::SvgWidget *svgTitle = new Plasma::SvgWidget(m_theme, "microblog", this);
     svgTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     svgTitle->setPreferredSize(75, 14);
     titleLayout->addItem(svgTitle);
 
     flashLayout->addItem(m_flash);
-    flashLayout->setStretchFactor(m_flash, 2);
-    flashLayout->addItem( titleLayout );
-    m_layout->addItem( flashLayout );
+    flashLayout->addItem(titleLayout);
+
+    m_layout->addItem(flashLayout);
 
     Plasma::Frame *headerFrame = new Plasma::Frame(this);
     m_headerLayout = new QGraphicsLinearLayout( Qt::Horizontal, headerFrame );
@@ -221,6 +221,8 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_headerLayout->addItem( m_icon );
 
     Plasma::Frame *statusEditFrame = new Plasma::Frame(this);
+
+    statusEditFrame->setMaximumHeight(fm.height() * 4);
     statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit(this);
@@ -242,6 +244,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
 
     m_layout->addItem(m_scrollWidget);
+    m_layout->setStretchFactor(m_scrollWidget, 10);
 
     //hook up some sources
     m_imageQuery = "UserImages:"+m_serviceUrl;
@@ -436,7 +439,7 @@ void MicroBlog::showTweets()
     // Add more tweetWidgets if there are not enough
     while (m_tweetWidgets.size() < m_historySize) {
         Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
-        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
