@@ -183,6 +183,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_layout->setSpacing( 3 );
 
     QGraphicsLinearLayout *flashLayout = new QGraphicsLinearLayout( Qt::Horizontal );
+    flashLayout->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
@@ -244,7 +245,6 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
 
     m_layout->addItem(m_scrollWidget);
-    m_layout->setStretchFactor(m_scrollWidget, 10);
 
     //hook up some sources
     m_imageQuery = "UserImages:"+m_serviceUrl;
@@ -439,7 +439,7 @@ void MicroBlog::showTweets()
     // Add more tweetWidgets if there are not enough
     while (m_tweetWidgets.size() < m_historySize) {
         Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
-        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
 
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
