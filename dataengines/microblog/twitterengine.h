@@ -27,7 +27,6 @@
 
 class QDomDocument;
 class QDomNodeList;
-class QHttp;
 class ImageSource;
 
 /**
