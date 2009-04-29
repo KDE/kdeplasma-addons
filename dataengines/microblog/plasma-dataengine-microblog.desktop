@@ -24,6 +24,7 @@ Comment[pt]=serviços de micro-blogs identi.ca e twitter
 Comment[pt_BR]=serviços de micro-blogs identi.ca e twitter
 Comment[sv]=Mikrowebbjournaltjänsterna identi.ca och twitter
 Comment[uk]=Служби мікроблогів identi.ca і twitter
+Comment[zh_TW]=identi.ca 與 twitter 微部落格服務
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=im

@@ -47,6 +47,7 @@ Comment[pt_BR]=Bandas desenhadas 'online'
 Comment[sv]=Tecknade serier på nätet
 Comment[tr]=Çevrimiçi çizgi romanlar
 Comment[uk]=Мережеві стрічки коміксів
+Comment[zh_TW]=線上漫畫
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=face-smile-big
