@@ -6,19 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>354</width>
+    <width>350</width>
     <height>308</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <property name="margin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="text">
       <string>&amp;Theme</string>
      </property>
