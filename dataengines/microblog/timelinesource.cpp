@@ -80,7 +80,7 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
     if (account.count() == 2){
         m_serviceBaseUrl = KUrl(account.at(1));
     }else{
-        m_serviceBaseUrl = KUrl("http://twitter.com/");
+        m_serviceBaseUrl = KUrl("https://twitter.com/");
     }
 
     // set up the url

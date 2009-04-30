@@ -165,7 +165,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     //config stuff
     KConfigGroup cg = config();
-    m_serviceUrl = cg.readEntry("serviceUrl", "http://identi.ca/api/");
+    m_serviceUrl = cg.readEntry("serviceUrl", "https://identi.ca/api/");
     m_username = cg.readEntry("username");
     m_password = KStringHandler::obscure(cg.readEntry("password"));
     m_historySize = cg.readEntry("historySize", 2);
@@ -559,8 +559,8 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
     connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
     connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
 
-    configUi.serviceUrlCombo->addItem("http://identi.ca/api/");
-    configUi.serviceUrlCombo->addItem("http://twitter.com/");
+    configUi.serviceUrlCombo->addItem("https://identi.ca/api/");
+    configUi.serviceUrlCombo->addItem("https://twitter.com/");
     configUi.serviceUrlCombo->setEditText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
