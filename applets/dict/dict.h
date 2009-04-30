@@ -59,6 +59,7 @@ class DictApplet: public Plasma::PopupApplet
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
+        void popupEvent(bool shown);
 
     private:
         QString m_source;

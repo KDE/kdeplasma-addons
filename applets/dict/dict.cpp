@@ -70,8 +70,6 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(engineChoice);
     setPopupIcon("accessories-dictionary");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-
-    connect(this, SIGNAL(activate()), this, SLOT(focusEditor()));
 }
 
 DictApplet::~DictApplet()
@@ -324,6 +322,14 @@ void DictApplet::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(widget, parent->windowTitle(), Applet::icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+}
+
+void DictApplet::popupEvent(bool shown)
+{
+    kDebug() << shown;
+    if (shown && m_wordEdit) {
+        m_wordEdit->setFocus(Qt::ShortcutFocusReason);
+    }
 }
 
 void DictApplet::configAccepted()
