@@ -91,7 +91,7 @@ private:
     int m_animid;
     int m_current;
     int m_animdirection;
-    int m_animations;
+    bool m_animations;
 
     //how many times has the user clicked / scrolled next or previous
     //while the current animation is being displayed.

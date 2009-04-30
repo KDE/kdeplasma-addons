@@ -194,7 +194,7 @@ void Scroller::moveNext()
 void Scroller::doAnimation()
 {
     if (m_list->size() > 1) {
-        if (m_animations) {
+        if (m_animations && m_animid == 0) {
             SingleFeedItem * item = new SingleFeedItem(this);
             item->setFeedData(m_list->at(m_current));
             item->setDisplayExtra(m_hovered);
@@ -294,11 +294,10 @@ void Scroller::updateSize()
     QRect rect;
     rect.setWidth(width);
     rect.setHeight(height);
-    if (m_itemlist != 0) {
+    if (m_itemlist != 0 && !m_animid) {
         for (int i = 0; i < m_itemlist->size(); i++) {
             item = m_itemlist->at(i);
             item->setRect(rect);
-            item->setPos( 0, 0);
         }
     }
     if (m_left != 0) {
