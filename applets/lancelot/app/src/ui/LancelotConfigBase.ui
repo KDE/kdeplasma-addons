@@ -73,7 +73,7 @@
           <item>
            <widget class="QCheckBox" name="checkKeepOpen">
             <property name="toolTip">
-             <string>Don't close the menu until it loses the focus</string>
+             <string>Do not close the menu until it loses focus.</string>
             </property>
             <property name="text">
              <string>&amp;Keep menu open</string>
