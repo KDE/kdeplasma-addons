@@ -1,3 +1,4 @@
+add_subdirectory(mandelbrot)
 add_subdirectory(pattern)
 add_subdirectory(weather)
 add_subdirectory(virus)
