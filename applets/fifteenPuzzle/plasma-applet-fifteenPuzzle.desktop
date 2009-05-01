@@ -93,6 +93,7 @@ X-KDE-PluginInfo-Name=fifteenPuzzle
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Fun and Games
+Keywords=Fun and Games
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
