@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_apodprovider
+X-KDE-PlasmaPoTDProvider-SuffixType=Date
+X-KDE-PlasmaPoTDProvider-Identifier=apod
+Icon=
+
+Name=Apod Provider
+Name[es]=Proveedor Apod
+Name[et]=Apodi pakkuja
+Name[fr]=Fournisseur Apod
+Name[pt]=Fornecedor do Apod
+Name[pt_BR]=Fornecedor do Apod
+Name[sv]=APOD-leverantör
+Name[tr]=Apod Sağlayıcı
+Name[uk]=Постачальник Apod
+Name[x-test]=xxApod Providerxx
+Name[zh_TW]=Apod 提供者
+Comment=Apod Provider
+Comment[es]=Proveedor Apod
+Comment[et]=Apodi pakkuja
+Comment[fr]=Fournisseur Apod
+Comment[pt]=Fornecedor do Apod
+Comment[pt_BR]=Fornecedor do Apod
+Comment[sv]=APOD-leverantör
+Comment[tr]=Apod Sağlayıcı
+Comment[uk]=Постачальник даних Apod
+Comment[x-test]=xxApod Providerxx
+Comment[zh_TW]=Apod 提供者

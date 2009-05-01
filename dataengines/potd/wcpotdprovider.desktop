@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_wcpotdprovider
+X-KDE-PlasmaPoTDProvider-SuffixType=Date
+X-KDE-PlasmaPoTDProvider-Identifier=wcpotd
+Icon=
+
+Name=Wcpotd Provider
+Name[es]=Proveedor Wcpotd
+Name[et]=Wcpotdi pakkuja
+Name[fr]=Fournisseur Wcpotd
+Name[pt]=Fornecedor Wcpotd
+Name[pt_BR]=Fornecedor Wcpotd
+Name[sv]=Wcpotd-leverantör
+Name[tr]=Wcpotd Sağlayıcı
+Name[uk]=Постачальник Wcpotd
+Name[x-test]=xxWcpotd Providerxx
+Name[zh_TW]=Wcpotd 提供者
+Comment=Wcpotd Provider
+Comment[es]=Proveedor Wcpotd
+Comment[et]=Wcpotdi pakkuja
+Comment[fr]=Fournisseur Wcpotd
+Comment[pt]=Fornecedor Wcpotd
+Comment[pt_BR]=Fornecedor Wcpotd
+Comment[sv]=Wcpotd-leverantör
+Comment[tr]=Wcpotd Sağlayıcı
+Comment[uk]=Постачальник даних Wcpotd
+Comment[x-test]=xxWcpotd Providerxx
+Comment[zh_TW]=Wcpotd 提供者

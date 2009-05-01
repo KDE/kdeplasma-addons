@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_flickrprovider
+X-KDE-PlasmaPoTDProvider-SuffixType=Date
+X-KDE-PlasmaPoTDProvider-Identifier=flickr
+Icon=
+
+Name=Flickr Provider
+Name[es]=Proveedor Flickr
+Name[et]=Flickri pakkuja
+Name[fr]=Fournisseur Flickr
+Name[pt]=Fornecedor do Flickr
+Name[pt_BR]=Fornecedor do Flickr
+Name[sv]=Flickr-leverantör
+Name[tr]=Flickr Sağlayıcı
+Name[uk]=Постачальник Flickr
+Name[x-test]=xxFlickr Providerxx
+Name[zh_TW]=Flickr 提供者
+Comment=Flickr Provider
+Comment[es]=Proveedor Flickr
+Comment[et]=Flickri pakkuja
+Comment[fr]=Fournisseur Flickr
+Comment[pt]=Fornecedor do Flickr
+Comment[pt_BR]=Fornecedor do Flickr
+Comment[sv]=Flickr-leverantör
+Comment[tr]=Flickr Sağlayıcı
+Comment[uk]=Постачальник даних Flickr
+Comment[x-test]=xxFlickr Providerxx
+Comment[zh_TW]=Flickr 提供者

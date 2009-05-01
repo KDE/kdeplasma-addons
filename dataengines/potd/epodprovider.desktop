@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=PlasmaPoTD/Plugin
+X-KDE-Library=plasma_potd_epodprovider
+X-KDE-PlasmaPoTDProvider-SuffixType=Date
+X-KDE-PlasmaPoTDProvider-Identifier=epod
+Icon=
+
+Name=Epod Provider
+Name[es]=Proveedor Epod
+Name[et]=Epodi pakkuja
+Name[fr]=Fournisseur Epod
+Name[pt]=Fornecedor do Epod
+Name[pt_BR]=Fornecedor do Epod
+Name[sv]=EPOD-leverantör
+Name[tr]=Epod Sağlayıcı
+Name[uk]=Постачальник Epod
+Name[x-test]=xxEpod Providerxx
+Name[zh_TW]=Epod 提供者
+Comment=Epod Provider
+Comment[es]=Proveedor Epod
+Comment[et]=Epodi pakkuja
+Comment[fr]=Fournisseur Epod
+Comment[pt]=Fornecedor do Epod
+Comment[pt_BR]=Fornecedor do Epod
+Comment[sv]=EPOD-leverantör
+Comment[tr]=Epod Sağlayıcı
+Comment[uk]=Постачальник даних Epod
+Comment[x-test]=xxEpod Providerxx
+Comment[zh_TW]=Epod 提供者
