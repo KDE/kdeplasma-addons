@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Mandelbrot
+Name[uk]=Мандельброт
+Name[x-test]=xxMandelbrotxx
+Type=Service
+Icon=preferences-desktop-mandelbrot
+ServiceTypes=Plasma/Wallpaper
+
+X-KDE-Library=plasma_wallpaper_mandelbrot
+X-KDE-PluginInfo-Author=Benoît Jacob
+X-KDE-PluginInfo-Email=jacob.benoit.1@gmail.com
+X-KDE-PluginInfo-Name=mandelbrot
+X-KDE-PluginInfo-Version=pre0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
