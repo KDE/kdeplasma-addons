@@ -58,7 +58,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
-    setAspectRatioMode(Plasma::KeepAspectRatio);
+    setAspectRatioMode(Plasma::ConstrainedSquare);
     setMinimumSize(16, 16);
     resize(150, 150);
     timer = new QTimer(this);
