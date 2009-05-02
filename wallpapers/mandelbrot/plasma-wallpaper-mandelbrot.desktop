@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Mandelbrot
 Name[uk]=Мандельброт
-Name[x-test]=xxMandelbrotxx
 Type=Service
 Icon=preferences-desktop-mandelbrot
 ServiceTypes=Plasma/Wallpaper

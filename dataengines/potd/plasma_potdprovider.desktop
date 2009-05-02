@@ -2,16 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=PlasmaPoTD/Plugin
 Comment=Plugin for Plasma PoTD Engine
-Comment[es]=Complemento para el motor PoTD de Plasma
-Comment[et]=Plasma päevapildi mootori plugin
-Comment[fr]=Module pour l'obtention de diverses photos du jour en ligne
-Comment[pt]='Plugin' do Motor de Imagem do Dia do Plasma
-Comment[pt_BR]='Plugin' do Motor de Imagem do Dia do Plasma
-Comment[sv]=Insticksprogram för Plasma PoTD-gränssnitt
-Comment[tr]=Plasma PoTD Motoru için eklenti
 Comment[uk]=Додаток для рушія Плазми PoTD
-Comment[x-test]=xxPlugin for Plasma PoTD Enginexx
-Comment[zh_TW]=Plasma PoTD 引擎的外掛程式
 
 [PropertyDef::X-KDE-PlasmaPoTDProvider-SuffixType]
 Type=QString
