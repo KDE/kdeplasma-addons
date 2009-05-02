@@ -295,6 +295,7 @@ void LancelotPart::init()
 
     resize(size());
     m_layout->activate();
+    KGlobal::locale()->insertCatalog("lancelot");
 }
 
 bool LancelotPart::load(const QString & input)
