@@ -61,5 +61,6 @@ Feature requests:
  - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
  - advanced parts widget: list mode, icons mode, ..., search bar... - yes
  - align lists that don't have enough items bottom when the mouse comes from bottom - not likely
+ - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350)
  - Disk free space info - maybe
 
