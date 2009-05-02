@@ -101,7 +101,7 @@ void bballApplet::readConfiguration()
 
   //Appearance
   m_image_url = cg.readEntry ("ImgURL", KStandardDirs::locate ("data", "bball/bball.svg"));
-  m_ball_img = QImage (m_image_url);
+  m_ball_img.setImagePath(m_image_url);
   m_overlay_enabled = cg.readEntry ("OverlayEnabled", false);
   m_overlay_colour = cg.readEntry ("OverlayColour", QColor ());
   m_overlay_opacity = cg.readEntry ("OverlayOpactiy", 0);
@@ -171,7 +171,7 @@ void bballApplet::configAccepted ()
   if(KIO::NetAccess::exists(ui.imageUrl->url (), KIO::NetAccess::SourceSide, NULL))
   {
     m_image_url = ui.imageUrl->url ().path ();
-    m_ball_img = QImage (m_image_url);
+    m_ball_img.setImagePath(m_image_url);
     cg.writeEntry ("ImgURL", m_image_url);
   }
   else
@@ -229,7 +229,7 @@ void bballApplet::configAccepted ()
   //mouse - undo the mouse clicked
   m_mouse_pressed = false;
 
-  update ();
+  update();
 }
 
 QSizeF bballApplet::contentSizeHint() const
@@ -256,10 +256,11 @@ void bballApplet::updateScaledBallImage()
   kDebug() << m_overlay_colour;
   kDebug() << m_overlay_opacity;
 
-  m_ball_scaled_img = m_ball_img.scaled( m_radius * 2, m_radius * 2 );
+  m_ball_img.resize( m_radius * 2, m_radius * 2 );
+  m_pixmap = m_ball_img.pixmap();
   if (m_overlay_enabled)
   {
-    QPainter p(&m_ball_scaled_img);
+    QPainter p(&m_pixmap);
     p.setPen (QColor (0, 0, 0, 0));
     p.setBrush (m_overlay_colour);
     p.drawPie (m_pie_size, 0, 5760);
@@ -415,8 +416,7 @@ void bballApplet::paintInterface (QPainter * p, const QStyleOptionGraphicsItem *
   p->translate(m_radius, m_radius);
   p->rotate(m_angle);
   p->translate(-m_radius, -m_radius);
-  p->drawImage(QPoint (0, 0), m_ball_scaled_img);
-
+  p->drawPixmap(QPoint (0, 0), m_pixmap);
 }
 
 void bballApplet::mousePressEvent (QGraphicsSceneMouseEvent * event)

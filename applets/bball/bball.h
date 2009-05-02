@@ -79,7 +79,8 @@ private:
   QRectF m_position, m_screen, m_pie_size;
   QPointF m_old_mouse, m_mouse;
   qreal m_angle;
-  QImage m_ball_img, m_ball_scaled_img;
+  Plasma::Svg m_ball_img;
+  QPixmap m_pixmap;
   double m_x_vel, m_y_vel, m_gravity, m_resitution, m_friction, m_circum_vel, m_auto_bounce_strength;
   bool m_mouse_pressed, m_sound_enabled, m_auto_bounce_enabled, m_overlay_enabled;
   QTimer *m_timer;
