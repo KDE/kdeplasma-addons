@@ -101,6 +101,7 @@ void LancelotPart::init()
 
     m_list->setMinimumSize(150, 200);
     m_list->setPreferredSize(250, 300);
+    KGlobal::locale()->insertCatalog("lancelot");
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
