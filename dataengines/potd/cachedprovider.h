@@ -23,7 +23,7 @@
 #include "potdprovider.h"
 
 /**
- * This class provides comics from the local cache.
+ * This class provides pictures from the local cache.
  */
 class CachedProvider : public PotdProvider
 {
@@ -33,7 +33,7 @@ class CachedProvider : public PotdProvider
         /**
          * Creates a new cached provider.
          *
-         * @param identifier The identifier of the cached comic.
+         * @param identifier The identifier of the cached picture.
          * @param parent The parent object.
          */
         CachedProvider( const QString &identifier, QObject *parent, const QVariantList &args );
@@ -52,17 +52,17 @@ class CachedProvider : public PotdProvider
         virtual QImage image() const;
 
         /**
-         * Returns the identifier of the comic request (name + date).
+         * Returns the identifier of the picture request (name + date).
          */
         virtual QString identifier() const;
 
         /**
-         * Returns whether a comic with the given @p identifier is cached.
+         * Returns whether a picture with the given @p identifier is cached.
          */
         static bool isCached( const QString &identifier );
 
         /**
-         * Stores the given @p comic with the given @p identifier in the cache.
+         * Stores the given @p potd with the given @p identifier in the cache.
          */
         static bool storeInCache( const QString &identifier, const QImage &potd );
 

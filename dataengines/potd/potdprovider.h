@@ -33,7 +33,7 @@ class QImage;
     K_EXPORT_PLUGIN( classname ## Factory( componentName, catalogName ) )
 
 /**
- * This class is an interface for PotD providers.
+ * This class is an interface for PoTD providers.
  */
 class PLASMA_POTD_EXPORT PotdProvider : public QObject
 {
@@ -41,14 +41,14 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
 
     public:
         /**
-         * Creates a new comic provider.
+         * Creates a new PoTD provider.
          *
          * @param parent The parent object.
          */
         PotdProvider( QObject *parent, const QVariantList &args );
 
         /**
-         * Destroys the comic provider.
+         * Destroys the PoTD provider.
          */
         virtual ~PotdProvider();
 
@@ -61,7 +61,7 @@ class PLASMA_POTD_EXPORT PotdProvider : public QObject
         virtual QImage image() const = 0;
 
         /**
-         * Returns the identifier of the comic request (name + date).
+         * Returns the identifier of the PoTD request (name + date).
          */
         virtual QString identifier() const = 0;
 
