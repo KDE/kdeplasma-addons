@@ -19,6 +19,7 @@
 
 #include "weatherlocation.h"
 #include "weathervalidator.h"
+#include "weatheri18ncatalog.h"
 
 class WeatherLocation::Private
 {
@@ -33,6 +34,7 @@ WeatherLocation::WeatherLocation(QObject *parent)
     : QObject(parent)
     , d(new Private())
 {
+    Weatheri18nCatalog::loadCatalog();
     QObject::connect(&d->validator, SIGNAL(finished(const QString&)),
                      this, SIGNAL(finished(const QString&)));
 }

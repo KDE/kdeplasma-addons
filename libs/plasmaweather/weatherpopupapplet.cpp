@@ -18,6 +18,7 @@
  */
 
 #include "weatherpopupapplet.h"
+#include "weatheri18ncatalog.h"
 
 #include <QTimer>
 
@@ -193,6 +194,7 @@ WeatherPopupApplet::WeatherPopupApplet(QObject *parent, const QVariantList &args
     : Plasma::PopupApplet(parent, args)
     , d(new Private(this))
 {
+    Weatheri18nCatalog::loadCatalog();
     setHasConfigurationInterface(true);
 }
 

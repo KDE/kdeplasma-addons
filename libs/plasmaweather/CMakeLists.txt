@@ -4,6 +4,7 @@ set(plasmaweather_LIB_SRCS
     weatherlocation.cpp
     weatherconfig.cpp
     weatherconfigsearch.cpp
+    weatheri18ncatalog.cpp
 )
 
 set(plasmaweather_HEADERS

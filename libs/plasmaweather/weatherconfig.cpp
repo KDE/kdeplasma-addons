@@ -20,6 +20,7 @@
 #include "weatherconfig.h"
 #include "weatherconfigsearch.h"
 #include "weathervalidator.h"
+#include "weatheri18ncatalog.h"
 #include "ui_weatherconfig.h"
 #include <KMessageBox>
 #include <KInputDialog>
@@ -59,6 +60,8 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     : QWidget(parent)
     , d(new Private(this))
 {
+    Weatheri18nCatalog::loadCatalog();
+
     d->dlg = qobject_cast<KDialog*>(parent);
     d->ui.setupUi(this);
     d->ui.temperatureComboBox->addItem(i18n("Celsius \302\260C"), "C");
