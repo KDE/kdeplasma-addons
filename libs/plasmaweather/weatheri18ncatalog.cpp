@@ -33,4 +33,4 @@ void Weatheri18nCatalog::loadCatalog() {
 		catalogLoaded = true;
 	}
 	loadingMutex.unlock();
-};
+}
