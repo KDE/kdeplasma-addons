@@ -7,6 +7,12 @@ X-KDE-PlasmaPoTDProvider-Identifier=epod
 Icon=
 
 Name=Epod Provider
+Name[pt]=Fornecedor do Epod
+Name[pt_BR]=Fornecedor do Epod
+Name[sv]=Tillhandahåll från Epod
 Name[uk]=Постачальник Epod
 Comment=Epod Provider
+Comment[pt]=Fornecedor do Epod
+Comment[pt_BR]=Fornecedor do Epod
+Comment[sv]=Tillhandahåll från Epod
 Comment[uk]=Постачальник даних Epod
