@@ -18,7 +18,11 @@ kde4_add_ui_files(rememberthemilk-plasmoid_SRCS authenticate.ui general.ui)
 
 kde4_add_plugin(plasma_applet_rtm ${rememberthemilk-plasmoid_SRCS})
 target_link_libraries(plasma_applet_rtm 
-                      ${KDE4_PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${QT_QTWEBKIT_LIBRARY}  ${KDE4_KDEUI_LIBS})
+                      ${KDE4_PLASMA_LIBS}
+                      ${KDE4_SOLID_LIBS}
+                      ${KDE4_KDEUI_LIBS}
+                      ${KDE4_KIO_LIBS}
+                     )
  
 install(TARGETS plasma_applet_rtm
         DESTINATION ${PLUGIN_INSTALL_DIR})

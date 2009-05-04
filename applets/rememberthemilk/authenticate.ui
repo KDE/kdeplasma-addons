@@ -104,7 +104,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="KUrlLabel" name="kurllabel">
+      <widget class="KUrlLabel" name="signupLabel">
        <property name="text">
         <string>Register for one here.</string>
        </property>
