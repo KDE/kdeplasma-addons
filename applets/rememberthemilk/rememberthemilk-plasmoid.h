@@ -64,8 +64,7 @@ class RememberTheMilkPlasmoid : public Plasma::PopupApplet
 
   public slots:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
-
-    void signupUrlClicked(const QString &url);
+    
     void showTaskEditor(QModelIndex index);
     void onTaskEditorHide();
     

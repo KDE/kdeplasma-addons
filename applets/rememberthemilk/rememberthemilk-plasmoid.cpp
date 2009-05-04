@@ -38,7 +38,7 @@
 #include <KConfigDialog>
 #include <KLineEdit>
 #include <KDebug> 
-#include <KRun>
+#include <KToolInvocation>
 
 // Plasma Includes
 #include <Plasma/Theme>
@@ -73,7 +73,7 @@ RememberTheMilkPlasmoid::RememberTheMilkPlasmoid(QObject* parent, const QVariant
     m_authWidget = new QWidget();
     m_authWidgetUi->setupUi(m_authWidget);
     m_generalOptions = new QWidget();
-    connect(m_authWidgetUi->signupLabel, SIGNAL(leftClickedUrl(const QString&)), SLOT(signupUrlClicked(const QString&)));
+    connect(m_authWidgetUi->signupLabel, SIGNAL(leftClickedUrl(const QString&)), KToolInvocation::self(), SLOT(invokeBrowser(const QString&)));
     m_generalOptionsUi->setupUi(m_generalOptions);
     m_generalOptionsUi->sortType->addItem(i18n("Due Date"));
     m_generalOptionsUi->sortType->addItem(i18n("Priority"));
@@ -124,12 +124,6 @@ void RememberTheMilkPlasmoid::init() {
   
   Plasma::Applet::init();
 }
-
-void RememberTheMilkPlasmoid::signupUrlClicked(const QString &url)
-{
-  KRun::runUrl(KUrl(url), "text/html", m_authWidget);
-}
-
 
 void RememberTheMilkPlasmoid::configAccepted() {
   if (!m_authWidgetUi->username->text().isEmpty()) {
