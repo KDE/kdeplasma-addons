@@ -48,6 +48,8 @@ void ShowDashboard::init()
 
     Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("dashboard-show"), QString(), this);
     registerAsDragHandle(icon);
+    icon->setMinimumSize(16, 16);
+    setMinimumSize(16, 16);
     layout->addItem(icon);
 
     Plasma::ToolTipManager::self()->registerWidget(this);
