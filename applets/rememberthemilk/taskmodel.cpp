@@ -127,7 +127,7 @@ QMimeData* TaskModel::mimeData(const QList< QModelIndex >& indexes) const {
 }
 
 bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) {
-  kDebug() << " TaskModel::dropMimeData";
+  Q_UNUSED(row);
   if (action == Qt::IgnoreAction)
       return true;
 
@@ -137,16 +137,21 @@ bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int r
   if (column > 0)
       return false;
 
+  RTMItemType dropHeaderType;
+  
   if (dropType == SortDue)
-    return false; // We don't support it yet //TODO
-    
-    
-  QModelIndex priorityParent = parent;
+    dropHeaderType = RTMDateHeader;
+  else if (dropType == SortPriority)
+    dropHeaderType = RTMPriorityHeader;
+  else
+    dropHeaderType = RTMDateHeader; // default it
 
-  while (priorityParent.data(Qt::RTMItemType).toInt() != RTMPriorityHeader && row >= 0)
-    priorityParent = index(priorityParent.row()-1, 0, rootitem->index());
+  QModelIndex parentItem = parent;
 
-  kDebug() << priorityParent.data(Qt::RTMItemType).toInt();
+  while (parentItem.data(Qt::RTMItemType).toInt() != dropHeaderType && parentItem.row() >= 0)
+    parentItem = index(parentItem.row()-1, 0, rootitem->index());
+  
+  kDebug() << parentItem.data(Qt::RTMItemType).toInt();
   
   QByteArray encodedData = data->data("application/vnd.text.list");
   QDataStream stream(&encodedData, QIODevice::ReadOnly);
@@ -165,13 +170,26 @@ bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int r
     if (m_taskItems.contains(id.toULongLong())) {
       TaskItem *item = taskFromId(id.toULongLong());
       if (item) {
-        kDebug() << "Setting Item to priority: " << priorityParent.data(Qt::RTMPriorityRole).toInt();
         Plasma::Service *service = engine->serviceForSource("Task:" + id);
         connect(service, SIGNAL(finished(Plasma::ServiceJob*)), SIGNAL(jobFinished(Plasma::ServiceJob*)));
         if (service) {
-          KConfigGroup cg = service->operationDescription("setPriority");
-          cg.writeEntry("priority", priorityParent.data(Qt::RTMPriorityRole).toInt());
-          emit jobStarted(service->startOperationCall(cg));
+          if (dropType == SortDue) {
+            QDate headerDate = QDateTime::fromTime_t(parentItem.data(Qt::RTMTimeTRole).toUInt()).date();
+            if (headerDate < QDate::currentDate())
+              headerDate = QDate::currentDate().addDays(-1); // set to due yesterday
+            else if (headerDate == QDate::currentDate().addDays(2)) // set to due never
+              headerDate = QDate();
+            kDebug() << "Setting Item to be due: " << headerDate.toString(Qt::SystemLocaleShortDate);
+            KConfigGroup cg = service->operationDescription("setDueTime");
+            cg.writeEntry("dueTime", headerDate.toString(Qt::SystemLocaleShortDate));
+            emit jobStarted(service->startOperationCall(cg));
+          }
+          else if (dropType == SortPriority) {
+            kDebug() << "Setting Item to priority: " << parentItem.data(Qt::RTMPriorityRole).toInt();
+            KConfigGroup cg = service->operationDescription("setPriority");
+            cg.writeEntry("priority", parentItem.data(Qt::RTMPriorityRole).toInt());
+            emit jobStarted(service->startOperationCall(cg));
+          }
         }
       }
     }

@@ -157,7 +157,7 @@ void TaskEditor::saveChanges() {
   if (!dateEdit->text().isEmpty()) {
     kDebug() << "Date Change: " << dateEdit->text();
     KConfigGroup cg = m_service->operationDescription("setDueText");
-    cg.writeEntry("due", dateEdit->text());
+    cg.writeEntry("dueText", dateEdit->text());
     emit jobStarted(m_service->startOperationCall(cg));
   }
 

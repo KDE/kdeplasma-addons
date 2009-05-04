@@ -65,7 +65,7 @@ void ModifyTaskJob::start() {
     m_task->setDue(parameters().value("due").toDateTime());
   }
   else if (operationName() == "setDueText") {
-    m_task->setDue(parameters().value("due").toString());
+    m_task->setDue(parameters().value("dueText").toString());
   }
   else if (operationName() == "setName") {
     m_task->setName(parameters().value("name").toString());
@@ -90,7 +90,7 @@ void ModifyTaskJob::start() {
 }
 
 void ModifyTaskJob::result(RTM::Task* task) {
-  kDebug() << task->id() << m_task->id();
+  //kDebug() << task->id() << m_task->id();
   if (task->id() != m_task->id())
     return;
 

@@ -18,7 +18,7 @@
       <entry name="due" type="DateTime"><label>The new due date of the task. (QDateTime() for no due date)</label></entry>
     </group>
     <group name="setDueText">
-      <entry name="due" type="String"><label>The new due date of the task. Parsed as the online duedate is</label></entry>
+      <entry name="dueText" type="String"><label>The new due date of the task. Parsed as the online duedate is</label></entry>
     </group>
     <group name="setName">
       <entry name="name" type="String"><label>The new name for the task</label></entry>
