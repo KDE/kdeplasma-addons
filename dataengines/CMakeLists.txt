@@ -1,3 +1,4 @@
 add_subdirectory(comic)
 add_subdirectory(microblog)
 add_subdirectory(potd)
+add_subdirectory(rememberthemilk)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="create">
+        <entry name="task" type="String">
+          <label>The name (and possible due date) of the task to create</label>
+        </entry>
+        <entry name="listid" type="ULongLong">
+          <label>The listid of the list to add this new task to</label>
+        </entry>
+    </group>
+</kcfg>
