@@ -238,6 +238,8 @@ void LancelotWindow::lancelotHide(bool immediate)
 
 void LancelotWindow::showWindow(int x, int y, bool centered)
 {
+    qDebug() << "LancelotWindow::showWindow:" << x << y << centered;
+
     panelSections->setVisible(m_showingFull);
 
     layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
@@ -254,6 +256,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     }
 
     QRect screenRect = QApplication::desktop()->screenGeometry(QPoint(x, y));
+    resizeWindow();
 
     Plasma::Flip flip;
 
@@ -269,12 +272,12 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
         }
 
         if (x + width() > screenRect.right()) {
-            x = screenRect.right() - width();
+            x = x - width();
             flip |= Plasma::HorizontalFlip;
         }
 
         if (y + height() > screenRect.bottom()) {
-            y = screenRect.bottom() - height();
+            y = y - height();
             flip &= ~Plasma::VerticalFlip;
         }
     } else {
@@ -288,7 +291,6 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
 
     layoutMain->setFlip(flip);
     layoutSections->setFlip(flip);
-    resizeWindow();
 
     if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
         instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
@@ -313,6 +315,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
         sectionActivated("applications");
     }
 
+    qDebug() << "LancelotWindow::showWindow: move" << x << y;
     move(x, y);
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
