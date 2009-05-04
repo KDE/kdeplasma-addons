@@ -1,8 +1,6 @@
 project(plasma-engine-rtm) 
 
 #find_package(RTM REQUIRED) # Will be needed again later
-add_subdirectory(librtm)
-set(RTM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/librtm/)
 set(RTM_LIBRARY rtm)
  
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
@@ -11,7 +9,7 @@ include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
    ${CMAKE_CURRENT_BINARY_DIR}
    ${KDE4_INCLUDES}
-   ${RTM_INCLUDE_DIR}
+   #${RTM_INCLUDE_DIR}
    )
  
 set(rtm_engine_SRCS 

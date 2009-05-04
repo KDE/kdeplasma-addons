@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
   KCmdLineArgs::init(argc, argv, &about);
   KApplication app;
                     
-  RTM::Session *session = new RTM::Session("54c4c997b087ba69b5700efd49f774d4", "85dc83023257714a", RTM::Delete, QString(), &app);
+  RTM::Session *session = new RTM::Session("myapikey", "mysharedsecret", RTM::Delete, QString(), &app);
   
   session->login("myuser", "mypass");
   

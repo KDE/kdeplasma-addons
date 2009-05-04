@@ -1,7 +1,5 @@
 project(librtm)
 
-include_directories(${KDE4_INCLUDES} ${QT4_INCLUDES} ${QT_INCLUDES} ${QT_INCLUDE_DIR} ${QT_QTNETWORK_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR})
-
 set( rtm_LIB_HEADERS
         rtm_export.h
         rtm.h
@@ -14,7 +12,7 @@ set( rtm_LIB_HEADERS
         xmlreaders.h
         )
 
-set( rtm_SRCS 
+set( rtm_LIB_SRCS 
         session.cpp
         task.cpp
         list.cpp
@@ -23,9 +21,9 @@ set( rtm_SRCS
         xmlreaders.cpp
     )
 
-kde4_add_library(rtm SHARED ${rtm_SRCS})
-
-target_link_libraries(rtm ${QT_QTNETWORK_LIBRARY} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KHTML_LIBS})
+kde4_add_library(rtm SHARED ${rtm_LIB_SRCS})
+set_target_properties(rtm PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+target_link_libraries(rtm ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KHTML_LIBS})
 
 
 #### FOR 4.3 we are not including the library as a stable platform, hence no exporting of headers

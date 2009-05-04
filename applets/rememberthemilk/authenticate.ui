@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>517</width>
+    <height>477</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -47,7 +47,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Re-Authenticate as:</string>
+      <string>Authenticate as:</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -92,6 +92,33 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Don't Have a Remember The Milk Account? </string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KUrlLabel" name="kurllabel">
+       <property name="text">
+        <string>Register for one here.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="url">
+        <string>http://www.rememberthemilk.com/signup/</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -109,13 +136,18 @@ p, li { white-space: pre-wrap; }
  <customwidgets>
   <customwidget>
    <class>KLed</class>
-   <extends>QWidget</extends>
+   <extends></extends>
    <header>kled.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
+   <extends></extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlLabel</class>
+   <extends></extends>
+   <header>kurllabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
