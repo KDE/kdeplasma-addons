@@ -253,13 +253,13 @@ void CustomList::viewportChanged(QRectF viewport) //>
 {
     kDebug();
     if (d->sizeUpdate || d->viewport.size() != viewport.size()) {
-        if (d->sizes[Qt::MinimumSize] > d->viewport.height()) {
+        if (d->sizes[Qt::MinimumSize] > viewport.height()) {
             d->scale = -1;
         } else {
-            if (d->sizes[Qt::MaximumSize] < d->viewport.height()) {
+            if (d->sizes[Qt::MaximumSize] < viewport.height()) {
                 d->scale = 1;
             } else {
-                d->scale = d->viewport.height() /
+                d->scale = viewport.height() /
                     (qreal) d->sizes[Qt::MaximumSize];
             }
         }

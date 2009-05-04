@@ -221,12 +221,8 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
     d->updateViewport();
 } //<
 
-void ScrollPane::setGeometry(const QRectF & rect) //>
+void ScrollPane::resizeEvent(QGraphicsSceneResizeEvent * event) //>
 {
-    QRectF old_geometry = geometry();
-    Widget::setGeometry(rect);
-
-    if (rect == old_geometry) return ;
     scrollableWidgetSizeUpdateNeeded();
 } //<
 
