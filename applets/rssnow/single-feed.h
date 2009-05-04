@@ -29,7 +29,7 @@ namespace Plasma {
     class Svg;
 }
 
-class SingleFeedItem : public QGraphicsItem
+class SingleFeedItem : public QGraphicsWidget
 {
     public:
         SingleFeedItem(QGraphicsItem * parent = 0);

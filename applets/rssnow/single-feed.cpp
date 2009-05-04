@@ -44,10 +44,10 @@ QRectF SingleFeedItem::boundingRect() const
     return m_rect;
 }
 
-SingleFeedItem::SingleFeedItem(QGraphicsItem * parent) : QGraphicsItem(parent),
+SingleFeedItem::SingleFeedItem(QGraphicsItem * parent) : QGraphicsWidget(parent),
                                                          m_displayExtra(true)
 {
-    m_background = new Plasma::Svg();
+    m_background = new Plasma::Svg(this);
     m_background->setImagePath("rssnow/background");
 
     QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
@@ -63,7 +63,6 @@ SingleFeedItem::SingleFeedItem(QGraphicsItem * parent) : QGraphicsItem(parent),
 
 SingleFeedItem::~SingleFeedItem()
 {
-    delete m_background;
 }
 
 void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
