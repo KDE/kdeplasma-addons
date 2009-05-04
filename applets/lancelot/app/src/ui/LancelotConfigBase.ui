@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
@@ -319,7 +319,7 @@ p, li { white-space: pre-wrap; }
        <item row="1" column="1">
         <widget class="QPushButton" name="buttonUsageStatisticsClear">
          <property name="text">
-          <string>Clear</string>
+          <string>Clear gathered data</string>
          </property>
         </widget>
        </item>
