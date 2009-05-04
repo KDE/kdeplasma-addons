@@ -22,6 +22,7 @@
 
 #include "feeddata.h"
 #include <QGraphicsItem>
+#include <QGraphicsWidget>
 
 class QRect;
 
