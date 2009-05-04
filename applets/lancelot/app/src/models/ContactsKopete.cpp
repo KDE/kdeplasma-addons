@@ -109,13 +109,16 @@ void ContactsKopete::load()
             }
 
             QString avatarPath = contactProperties.value().value("picture").toString();
-            qDebug() << "ContactsKopete::load() avatarPath:" << avatarPath;
-            qDebug() << "ContactsKopete::load() avatarUrl:" << QUrl(avatarPath).toLocalFile();
             avatarPath = QUrl(avatarPath).toLocalFile();
+
+            QString status = contactProperties.value().value("status_message").toString();
+            if (status.isEmpty()) {
+                status = contactProperties.value().value("status").toString();
+            }
 
             add(
                 contactProperties.value().value("display_name").toString(),
-                contactProperties.value().value("status").toString(),
+                status,
                 KIcon(avatarPath),
                 contact);
         }
