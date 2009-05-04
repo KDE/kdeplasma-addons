@@ -154,8 +154,8 @@ void SlideShow::setUpdateInterval(int msec)
 {
     m_timer->stop();
     if (msec > 1) {
-        if (m_currentUrl.isEmpty()) {
-            m_currentUrl = url();
+	if (m_currentUrl.isEmpty()) {
+	    m_currentUrl = url();
         }
         m_timer->start(msec);
     }
@@ -175,7 +175,7 @@ void SlideShow::clearPicture()
 
 void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
-    Q_UNUSED(name);
+    Q_UNUSED(name)
     if (data.isEmpty()) {
         m_picture = QImage();
         return;

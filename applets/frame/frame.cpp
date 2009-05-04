@@ -443,7 +443,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
 {
-    Q_UNUSED(option);
+    Q_UNUSED(option)
     if (m_slideShow) {
         // temporarily suspend the slideshow to allow time for loading the image
         m_mySlideShow->setUpdateInterval(0);
