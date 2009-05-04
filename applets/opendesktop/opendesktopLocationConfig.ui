@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Sebastian Kügler &lt;sebas@kde.org&gt;</author>
+ <class>opendesktopLocationConfig</class>
+ <widget class="QWidget" name="opendesktopLocationConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>233</width>
+    <height>185</height>
+   </rect>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::ExpandingFieldsGrow</enum>
+   </property>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_1">
+     <property name="text">
+      <string>City:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KLineEdit" name="city">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Country:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Latitude:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="KLineEdit" name="latitude">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Longitude:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="KLineEdit" name="longitude">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Distance</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="KIntSpinBox" name="distance"/>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="publishLocation">
+     <property name="text">
+      <string>Publish my Location</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="KComboBox" name="countryCombo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
