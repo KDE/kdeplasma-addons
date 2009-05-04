@@ -95,27 +95,29 @@ void ContactsKopete::load()
         }
 
         foreach (const QString& contact, contacts.value()) {
-            QStringList contactParts = contact.split(':');
-            if (contactParts.size() != 3) {
-                continue;
-            }
-
-            QString account   = contactParts.at(1);
-            QString contactID = contactParts.at(2);
+            qDebug() << "ContactsKopete::load()" << contact;
 
             // Retrieving contact name
-            QDBusReply < QString > contactName = m_interface->getDisplayName(contactID);
+            QDBusReply < QString > contactName = m_interface->getDisplayName(contact);
             if (!contactName.isValid()) {
                 continue;
             }
 
-            QString avatarPath = m_kopeteAvatarsDir + '/' + account + '/' + contactID + ".png";
-            add(contactName.value(), contactID,
-                    KIcon(
-                        (QFile::exists(avatarPath))?avatarPath:"user-online"
-                    ),
-                    QVariant(contactName));
+            QDBusReply < QVariantMap > contactProperties = m_interface->contactProperties(contact);
+            if (!contactProperties.isValid() || contactProperties.value().size() == 0) {
+                continue;
+            }
 
+            QString avatarPath = contactProperties.value().value("picture").toString();
+            qDebug() << "ContactsKopete::load() avatarPath:" << avatarPath;
+            qDebug() << "ContactsKopete::load() avatarUrl:" << QUrl(avatarPath).toLocalFile();
+            avatarPath = QUrl(avatarPath).toLocalFile();
+
+            add(
+                contactProperties.value().value("display_name").toString(),
+                contactProperties.value().value("status").toString(),
+                KIcon(avatarPath),
+                contact);
         }
 
         if (size() == 0) {

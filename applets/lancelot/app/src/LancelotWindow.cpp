@@ -347,7 +347,7 @@ QStringList LancelotWindow::sectionIDs()
 QStringList LancelotWindow::sectionNames()
 {
     QStringList res;
-    res << "Applications" << "Computer" << "Contacts" << "Documents";
+    res << i18n("Applications") << i18n("Computer") << i18n("Contacts") << i18n("Documents");
     return res;
 }
 
