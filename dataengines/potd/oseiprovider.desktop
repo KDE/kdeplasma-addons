@@ -7,12 +7,14 @@ X-KDE-PlasmaPoTDProvider-Identifier=osei
 Icon=
 
 Name=Osei Provider
+Name[et]=Osei pakkuja
 Name[pt]=Fornecedor do Osei
 Name[pt_BR]=Fornecedor do Osei
 Name[sv]=Tillhandahåll från Osei
 Name[tr]=Osei Sağlayıcı
 Name[uk]=Постачальник Osei
 Comment=Osei Provider
+Comment[et]=Osei pakkuja
 Comment[pt]=Fornecedor do Osei
 Comment[pt_BR]=Fornecedor do Osei
 Comment[sv]=Tillhandahåll från Osei

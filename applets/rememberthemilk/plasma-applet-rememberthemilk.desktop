@@ -1,15 +1,6 @@
 [Desktop Entry]
 Name=Remember The Milk
-Name[pt]=Recordar as Tarefas
-Name[pt_BR]=Recordar as Tarefas
 Comment=Remember The Milk Todo list applet
-Comment[et]=Remember The Milk ülesannete nimekirja aplett
-Comment[fr]=Applet de liste de choses à faire de « Remember The Milk »
-Comment[pt]='Applet' da lista de tarefas do 'Recordar The Milk'
-Comment[pt_BR]='Applet' da lista de tarefas do 'Recordar The Milk'
-Comment[sv]=Miniprogram med lista över Remember The Milk-aktiviteter
-Comment[uk]=Аплет списку завдань Remember The Milk
-Comment[zh_TW]=Remember The Milk 待辦清單小程式
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 Icon=basket

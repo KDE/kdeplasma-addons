@@ -1,14 +1,16 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Picture of the Day
+Name[et]=Päevapilt
 Name[pt]=Imagem do Dia
-Name[pt_BR]=Imagem do Dia
+Name[pt_BR]=Imagem do dia
 Name[sv]=Dagens bild
 Name[tr]=Günün Resmi
 Name[uk]=Картинка дня
 Comment=Data Engine for getting various online Pictures of The Day.
+Comment[et]=Andmete mootor internetis leiduvate päevapiltide hankimiseks.
 Comment[pt]=Motor de dados para obter diversas Imagens do Dia a nível 'online'.
-Comment[pt_BR]=Motor de dados para obter diversas Imagens do Dia a nível 'online'.
+Comment[pt_BR]=Mecanismo de dados para obter várias imagens do dia online.
 Comment[sv]=Datagränssnitt för att hämta diverse dagens bilder från nätet.
 Comment[tr]=Çeşitli çevirmiçi Günün Resimleri için veri motoru.
 Comment[uk]=Рушій даних для отримання різноманітних мережевих «Зображень дня»

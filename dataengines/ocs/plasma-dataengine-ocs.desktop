@@ -1,14 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Open Collaboration Services
-Name[et]=Avatud koostööteenused
-Name[fr]=Ouvre les services de collaboration
-Name[pt]=Abrir os Serviços de Colaboração
-Name[pt_BR]=Abrir os Serviços de Colaboração
-Name[sv]=Öppna sammarbetstjänster
-Name[tr]=Açık İşbirliği Servisleri
-Name[uk]=Служби Open Collaboration
-Name[zh_TW]=開放協同服務
 
 ServiceTypes=Plasma/DataEngine
 Type=Service

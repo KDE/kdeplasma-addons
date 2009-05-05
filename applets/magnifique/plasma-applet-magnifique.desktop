@@ -1,7 +1,5 @@
 [Desktop Entry]
 Name=Magnifique
-Name[sv]=Magnifik
-Name[x-test]=xxMagnifiquexx
 Comment = a magnification glass for Plasma canvas
 Type=Service
 Icon=zoom-in

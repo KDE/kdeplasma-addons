@@ -7,12 +7,14 @@ X-KDE-PlasmaPoTDProvider-Identifier=wcpotd
 Icon=
 
 Name=Wcpotd Provider
+Name[et]=Wcpotdi pakkuja
 Name[pt]=Fornecedor do Wcpotd
 Name[pt_BR]=Fornecedor do Wcpotd
 Name[sv]=Tillhandahåll från Wcpotd
 Name[tr]=Wcpotd Sağlayıcı
 Name[uk]=Постачальник Wcpotd
 Comment=Wcpotd Provider
+Comment[et]=Wcpotdi pakkuja
 Comment[pt]=Fornecedor do Wcpotd
 Comment[pt_BR]=Fornecedor do Wcpotd
 Comment[sv]=Tillhandahåll från Wcpotd
