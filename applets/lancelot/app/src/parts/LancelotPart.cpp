@@ -89,10 +89,15 @@ void LancelotPart::init()
 
     // Loading data
     bool loaded = loadConfig();
-    kDebug() << "loaded from config " << loaded;
+    KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_cmdarg));
+    qDebug() << "LancelotPart::init:"
+             << "loaded from config " << loaded
+             << "m_cmdarg" << m_cmdarg
+             << fileItem.mimetype()
+             << fileItem.isDir();
 
     if (!loaded && !m_cmdarg.isEmpty()) {
-        if (QFileInfo(QUrl(m_cmdarg).toLocalFile()).isDir()) {
+        if (fileItem.mimetype() == "inode/directory") {
             loadDirectory(m_cmdarg);
         } else {
             loadFromFile(m_cmdarg);
@@ -179,7 +184,7 @@ bool LancelotPart::loadDirectory(const QString & url)
     data["version"]     = "1.0";
     data["type"]        = "list";
     data["model"]       = "Folder " + url;
-    kDebug() << data;
+    qDebug() << "LancelotPart::loadDirectory:" << data;
     return load(Serializator::serialize(data));
 }
 
