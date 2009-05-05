@@ -41,8 +41,6 @@
 
 namespace Models {
 
-#define StringCoalesce(A, B) (A.isEmpty())?(B):(A)
-
 Devices::Devices(Type filter)
     : m_filter(filter)
 {
@@ -114,9 +112,14 @@ void Devices::addDevice(const Solid::Device & device)
         this, SLOT(udiAccessibilityChanged(bool, const QString &))
     );
 
+    QString description = access->filePath();
+    if (!access->isAccessible() || description.isEmpty()) {
+        description = i18n("Unmounted");
+    }
+
     add(
         device.product(),
-        StringCoalesce(access->filePath(), i18n("Unmounted")),
+        description,
         KIcon(device.icon()),
         device.udi()
     );
@@ -131,7 +134,11 @@ void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
     for (int i = size() - 1; i >= 0; i--) {
         Item * item = const_cast < Item * > (& itemAt(i));
         if (item->data.toString() == udi) {
-            item->description = StringCoalesce(access->filePath(), i18n("Unmounted"));
+            item->description = access->filePath();
+            if (!access->isAccessible() || item->description.isEmpty()) {
+                item->description = i18n("Unmounted");
+            }
+
             emit itemAltered(i);
             return;
         }
@@ -183,7 +190,7 @@ void Devices::setContextActions(int index, Lancelot::PopupMenu * menu)
     Solid::Device device(udi);
     const Solid::StorageAccess * access = device.as < Solid::StorageAccess > ();
 
-    if (access->filePath().isEmpty()) {
+    if (access->filePath().isEmpty() || !access->isAccessible()) {
         menu->addAction(KIcon(device.icon()), i18n("Mount"))
             ->setData(QVariant(1));
     } else if (device.is < Solid::OpticalDisc > ()) {
@@ -219,8 +226,9 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
     access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
 
-    if (!access || !access->isAccessible()) {
-        KMessageBox::error(NULL, i18n("Failed to open"), i18n("The requested device can not be accessed."));
+    if (error || !access || !access->isAccessible()) {
+        m_error = errorData.toString();
+        QTimer::singleShot(0, this, SLOT(showError()));
         return;
     }
 
@@ -249,7 +257,7 @@ void Devices::setupDevice(const QString & udi, bool openAfterSetup)
 
     if (!access) return;
 
-    if (!access->isAccessible()) {
+    if (access->filePath().isEmpty() || !access->isAccessible()) {
         if (openAfterSetup) {
             connect(access, SIGNAL(setupDone(Solid::ErrorType, QVariant, const QString &)),
                 this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
@@ -260,6 +268,11 @@ void Devices::setupDevice(const QString & udi, bool openAfterSetup)
         KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
         hideLancelotWindow();
     }
+}
+
+void Devices::showError()
+{
+    KMessageBox::detailedError(NULL, i18n("The requested device can not be accessed."), m_error, i18n("Failed to open"));
 }
 
 } // namespace Models

@@ -52,6 +52,7 @@ private slots:
 
     void tearDevice(const QString & udi);
     void setupDevice(const QString & udi, bool openAfterSetup);
+    void showError();
 
 protected:
     void activate(int index);
@@ -60,6 +61,7 @@ protected:
 private:
     void addDevice(const Solid::Device & device);
 
+    QString m_error;
     Type m_filter;
 };
 
