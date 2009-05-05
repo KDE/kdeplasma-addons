@@ -209,7 +209,7 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
       m_engine->connectSource("Tasks", this);
     }
     else if (m_categoriesBar->count() == 1 && m_lists.isEmpty())
-      m_categoriesBar->nativeWidget()->setTabText(0, i18n("Login Failed. Please try again"));
+      m_categoriesBar->nativeWidget()->setTabText(0, i18n("Login Failed. Please try again."));
   }
   else if (name == "Lists") {
     if (m_categoriesBar->count() == 1 && m_lists.isEmpty())
