@@ -1,0 +1,29 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.PlasmaMediaPlayer">
+
+    <method name="ToggleControlsVisibility">
+    </method>
+
+    <property name="ControlsVisible" access="readwrite" type="b"/>
+
+
+    <method name="RaiseLower">
+    </method>
+
+    <method name="Raise">
+    </method>
+
+    <method name="Lower">
+    </method>
+
+
+    <method name="ShowOpenFileDialog">
+    </method>
+
+    <method name="OpenUrl">
+      <arg name="path" type="s" direction="in"/>
+    </method>
+
+  </interface>
+</node>

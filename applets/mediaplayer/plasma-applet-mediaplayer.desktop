@@ -1,0 +1,43 @@
+[Desktop Entry]
+Name=Media Player
+Name[de]=Medienwiedergabe
+Name[es]=Reproductor multimedia
+Name[et]=Meediamängija
+Name[fr]=Lecteur multimédia
+Name[ga]=Seinnteoir Meán
+Name[pt]=Reprodutor Multimédia
+Name[pt_BR]=Reprodutor de mídia
+Name[sv]=Mediaspelare
+Name[tr]=Çokluortam Oynatıcı
+Name[uk]=Медіапрогравач
+Name[x-test]=xxMedia Playerxx
+Name[zh_TW]=媒體播放器
+Comment=Widget that can play video and sound
+Comment[es]=Elemento gráfico que reproduce video y sonido
+Comment[et]=Pilti ja heli esitav vidin
+Comment[fr]=Plasmoïde qui peut lire des vidéos et du son
+Comment[pt]=Um item que pode reproduzir vídeo e áudio
+Comment[pt_BR]=Um item que pode reproduzir vídeo e áudio
+Comment[sv]=Grafisk komponent som kan spela upp video och ljud
+Comment[tr]=Video oynatan ve ses çalan bir gereç
+Comment[uk]=Віджет, призначений для відтворення відео і звуку
+Comment[x-test]=xxWidget that can play video and soundxx
+Comment[zh_TW]=可播放影像與音效的元件
+
+
+Type=Service
+Icon=applications-multimedia
+X-Plasma-DropMimeTypes=video/mpeg,video/quicktime,video/ogg,video/x-msvideo, audio/mpeg, audio/x-vorbis+ogg, audio/x-flac
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_mediaplayer
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-Name=mediaplayer
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Multimedia
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+

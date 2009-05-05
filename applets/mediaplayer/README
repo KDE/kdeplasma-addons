@@ -1,0 +1,29 @@
+Plasma Applet Template
+----------------------
+
+You need KDE 4.1
+
+-- Build instructions --
+
+cd /where/your/applet/is/installed
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=$KDEDIRS .. 
+make 
+make install
+
+(your $KDEDIRS is where you install your KDE 4)
+
+Restart plasma to load the applet 
+kquitapp plasma
+plasma
+
+or view it with 
+plasmoidviewer YourAppletName
+
+-- Tutorials and resources --
+The explanation of the template
+http://techbase.kde.org/index.php?title=Development/Tutorials/Plasma/GettingStarted
+
+Plasma techbase pages
+http://techbase.kde.org/Projects/Plasma
