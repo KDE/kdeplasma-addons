@@ -53,7 +53,7 @@ void FileWatcher::init()
 {
   file = new QFile(this);
   textStream = 0;
-  watcher = new KDirWatch(this); //QFileSystemWatcher(this);
+  watcher = new KDirWatch(this);
   textItem = new FileWatcherTextItem(this);
   textItem->moveBy(contentsRect().x(), contentsRect().y());
   textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());

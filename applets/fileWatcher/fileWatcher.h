@@ -58,7 +58,6 @@ class FileWatcher : public Plasma::Applet
     void updateRows();
 
     QFile *file;
-    //QFileSystemWatcher *watcher;
     KDirWatch *watcher;
     FileWatcherTextItem *textItem;
     QTextStream *textStream;
