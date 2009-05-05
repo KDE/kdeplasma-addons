@@ -35,6 +35,7 @@ public:
 
     void setIconClickActivation(bool value);
     void setIcon(const QString & icon);
+    void setIcon(const QIcon & icon);
 
     void setContentsClickActivation(bool value);
     void setContentsExtenderPosition(Lancelot::ExtenderPosition position);

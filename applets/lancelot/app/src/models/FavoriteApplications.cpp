@@ -34,13 +34,13 @@ FavoriteApplications * FavoriteApplications::m_instance = NULL;
 FavoriteApplications::FavoriteApplications()
     : BaseModel(true)
 {
+    setSelfTitle(i18n("Favorites"));
+    setSelfIcon(KIcon("favorites"));
     load();
 }
 
 FavoriteApplications::~FavoriteApplications()
 {
-    setSelfTitle(i18n("Favorites"));
-    setSelfIcon(KIcon("favorites"));
 }
 
 bool FavoriteApplications::addFavorite(QString url)

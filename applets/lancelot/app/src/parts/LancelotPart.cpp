@@ -276,6 +276,7 @@ bool LancelotPart::load(const QString & input)
 
 LancelotPart::~LancelotPart()
 {
+    qDeleteAll(m_models);
     delete m_model;
     delete m_instance;
 }
@@ -344,8 +345,13 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
     m_config.panelIcon->setVisible(m_list->parentItem() == NULL);
 
     KConfigGroup kcg = config();
-    m_config.setIcon(
-            kcg.readEntry("iconLocation", "lancelot-part"));
+
+    QString iconPath = kcg.readEntry("iconLocation", "lancelot-part");
+    m_config.setIcon(iconPath);
+    if (iconPath == "lancelot-part") {
+        m_config.setIcon(popupIcon());
+    }
+
     m_config.setIconClickActivation(
             kcg.readEntry("iconClickActivation", true));
     m_config.setContentsClickActivation(
@@ -371,10 +377,12 @@ void LancelotPart::applyConfig()
     qDebug() << "LancelotPart::applyConfig()" << icon;
 
     if (icon == "lancelot-part") {
-        if (m_models.size() > 0) {
-            Lancelot::ActionListModel * model = m_models.first();
+        qDebug() << m_models.size();
+        if (m_model->modelCount() > 0) {
+            Lancelot::ActionListModel * model = m_model->modelAt(0);
             if (!model->selfIcon().isNull()) {
                 setPopupIcon(model->selfIcon());
+                qDebug() << "LancelotPart::applyConfig() << set the icon";
             }
         }
     }

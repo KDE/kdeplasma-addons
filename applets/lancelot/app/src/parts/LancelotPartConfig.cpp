@@ -88,3 +88,8 @@ void LancelotPartConfig::setIcon(const QString & icon)
 {
     iconChooser->setIcon(icon);
 }
+
+void LancelotPartConfig::setIcon(const QIcon & icon)
+{
+    iconChooser->setIcon(icon);
+}
