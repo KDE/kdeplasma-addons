@@ -198,7 +198,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     QGraphicsLinearLayout *titleLayout = new QGraphicsLinearLayout(Qt::Vertical);
     Plasma::SvgWidget *svgTitle = new Plasma::SvgWidget(m_theme, "microblog", this);
     svgTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    svgTitle->setPreferredSize(75, 14);
+    svgTitle->setPreferredSize(m_theme->elementSize("microblog"));
     titleLayout->addItem(svgTitle);
 
     flashLayout->addItem(m_flash);
@@ -263,6 +263,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
         downloadHistory();
     }
 
+    m_graphicsWidget->setPreferredSize(300, 400);
     return m_graphicsWidget;
 }
 
