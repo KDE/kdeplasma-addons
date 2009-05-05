@@ -39,6 +39,7 @@ Applications::Applications(QString root, QString title, QIcon icon, bool flat):
     m_root(root), m_title(title), m_icon(icon), m_flat(flat)
 {
     qDebug() << "Applications::Applications: root" << root;
+
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaUpdated(const QStringList &)));
     load();
@@ -61,6 +62,11 @@ void Applications::load()
     KServiceGroup::Ptr root = KServiceGroup::group(m_root);
     if (!root || !root->isValid())
         return;
+
+    if (m_title == QString() || m_icon.isNull()) {
+        m_title = root->caption();
+        m_icon = KIcon(root->icon());
+    }
 
     // KServiceGroup::List list = root->entries();
     const KServiceGroup::List list =

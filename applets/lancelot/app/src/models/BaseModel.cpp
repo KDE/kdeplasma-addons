@@ -89,14 +89,29 @@ ApplicationConnector::~ApplicationConnector()
     delete d;
 }
 
+class BaseModel::Private {
+public:
+    Private()
+        : enableDefaultDnD(false),
+          mimeData(NULL)
+    {
+    }
+
+    bool enableDefaultDnD;
+    QString title;
+    QIcon icon;
+    QMimeData * mimeData;
+};
 
 BaseModel::BaseModel(bool enableDefaultDnD)
-    : m_enableDefaultDnD(enableDefaultDnD)
+    : d(new Private())
 {
+    d->enableDefaultDnD = enableDefaultDnD;
 }
 
 BaseModel::~BaseModel()
 {
+    delete d;
 }
 
 void BaseModel::activate(int index)
@@ -227,7 +242,7 @@ QMimeData * BaseModel::mimeForUrl(const KUrl & url)
 
 QMimeData * BaseModel::mimeData(int index) const
 {
-    if (!m_enableDefaultDnD) {
+    if (!d->enableDefaultDnD) {
         kDebug() << "Requested mime for index" << index
             << "but we don't support DnD";
         return NULL;
@@ -262,6 +277,37 @@ QMimeData * BaseModel::mimeForService(const QString & serviceName)
 {
     const KService::Ptr service = KService::serviceByStorageId(serviceName);
     return mimeForService(service);
+}
+
+
+QString BaseModel::selfTitle() const
+{
+    return d->title;
+}
+
+QIcon BaseModel::selfIcon() const
+{
+    return d->icon;
+}
+
+QMimeData * BaseModel::selfMimeData() const
+{
+    return d->mimeData;
+}
+
+void BaseModel::setSelfTitle(const QString & title)
+{
+    d->title = title;
+}
+
+void BaseModel::setSelfIcon(const QIcon & icon)
+{
+    d->icon = icon;
+}
+
+void BaseModel::setSelfMimeData(QMimeData * data)
+{
+    d->mimeData = data;
 }
 
 } // namespace Models

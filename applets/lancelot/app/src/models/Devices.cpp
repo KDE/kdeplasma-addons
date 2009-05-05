@@ -46,6 +46,19 @@ namespace Models {
 Devices::Devices(Type filter)
     : m_filter(filter)
 {
+    switch (filter) {
+        case Models::Devices::Removable:
+            setSelfTitle(i18n("Removable"));
+            setSelfIcon(KIcon("media-optical"));
+            break;
+        case Models::Devices::Fixed:
+            setSelfTitle(i18n("Fixed"));
+            setSelfIcon(KIcon("drive-harddisk"));
+            break;
+        default:
+            setSelfIcon(KIcon("drive-harddisk"));
+    }
+
     load();
 
     connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),

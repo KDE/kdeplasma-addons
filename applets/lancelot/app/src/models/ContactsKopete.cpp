@@ -32,9 +32,11 @@ namespace Models {
 ContactsKopete::ContactsKopete()
     : m_interface(NULL), m_kopeteRunning(true)
 {
+    setSelfTitle(i18n("Contacts"));
+    setSelfIcon(KIcon("kopete"));
+
     m_interface = new org::kde::Kopete(
             "org.kde.kopete", "/Kopete", QDBusConnection::sessionBus());
-
 
     m_kopeteAvatarsDir = KStandardDirs::locate(
             "data", "kopete/avatars/Contacts/");

@@ -73,7 +73,6 @@ private:
     Models::PartsMergedModel * m_model;
     QList < Lancelot::ActionListModel * > m_models;
 
-    QGraphicsLayout * m_layout;
     QString m_cmdarg;
     QString m_data;
     Plasma::IconWidget * m_icon;

@@ -27,7 +27,10 @@ namespace Models {
 
 RecentDocuments::RecentDocuments()
     : FolderModel(KStandardDirs::locateLocal("data", QLatin1String("RecentDocuments/")), QDir::Time)
-{}
+{
+    setSelfTitle(i18n("Recent Documents"));
+    setSelfIcon(KIcon("document-open-recent"));
+}
 
 RecentDocuments::~RecentDocuments()
 {

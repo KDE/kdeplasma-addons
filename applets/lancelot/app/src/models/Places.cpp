@@ -31,6 +31,8 @@ Places::Places()
             KStandardDirs::locateLocal("data", "kfileplaces/bookmarks.xml")
             )
 {
+    setSelfTitle(i18n("Places"));
+    setSelfIcon(KIcon("folder"));
 }
 
 Places::~Places()

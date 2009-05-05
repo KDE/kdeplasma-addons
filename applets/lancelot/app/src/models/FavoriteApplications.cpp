@@ -39,6 +39,8 @@ FavoriteApplications::FavoriteApplications()
 
 FavoriteApplications::~FavoriteApplications()
 {
+    setSelfTitle(i18n("Favorites"));
+    setSelfIcon(KIcon("favorites"));
 }
 
 bool FavoriteApplications::addFavorite(QString url)

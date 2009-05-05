@@ -89,14 +89,9 @@ void LancelotPart::init()
 
     // Loading data
     bool loaded = loadConfig();
-    KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_cmdarg));
-    qDebug() << "LancelotPart::init:"
-             << "loaded from config " << loaded
-             << "m_cmdarg" << m_cmdarg
-             << fileItem.mimetype()
-             << fileItem.isDir();
 
     if (!loaded && !m_cmdarg.isEmpty()) {
+        KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_cmdarg));
         if (fileItem.mimetype() == "inode/directory") {
             loadDirectory(m_cmdarg);
         } else {
@@ -107,6 +102,7 @@ void LancelotPart::init()
     m_list->setMinimumSize(150, 200);
     m_list->setPreferredSize(250, 300);
     KGlobal::locale()->insertCatalog("lancelot");
+    applyConfig();
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -369,7 +365,19 @@ void LancelotPart::applyConfig()
 {
     KConfigGroup kcg = config();
 
-    setPopupIcon(kcg.readEntry("iconLocation", "lancelot-part"));
+    QString icon = kcg.readEntry("iconLocation", "lancelot-part");
+    setPopupIcon(icon);
+
+    qDebug() << "LancelotPart::applyConfig()" << icon;
+
+    if (icon == "lancelot-part") {
+        if (m_models.size() > 0) {
+            Lancelot::ActionListModel * model = m_models.first();
+            if (!model->selfIcon().isNull()) {
+                setPopupIcon(model->selfIcon());
+            }
+        }
+    }
     m_iconClickActivation = kcg.readEntry("iconClickActivation", true);
 
     if (!kcg.readEntry("contentsClickActivation", m_list->parentItem() == NULL)) {

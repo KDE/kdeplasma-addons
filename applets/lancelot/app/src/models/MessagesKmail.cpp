@@ -32,6 +32,9 @@ namespace Models {
 MessagesKmail::MessagesKmail()
     : m_interface(NULL), m_kmailRunning(false), m_dataValid(false)
 {
+    setSelfTitle(i18n("Unread messages"));
+    setSelfIcon(KIcon("kmail"));
+
     m_interface = new org::kde::kmail::kmail(
             "org.kde.kmail", "/KMail", QDBusConnection::sessionBus());
     m_folderinterface = new org::kde::kmail::folder(

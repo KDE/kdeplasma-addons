@@ -19,12 +19,16 @@
 
 #include "NewDocuments.h"
 #include <KStandardDirs>
+#include <KIcon>
 
 namespace Models {
 
 NewDocuments::NewDocuments()
     : FolderModel(NewDocuments::path(), QDir::Name)
 {
+    setSelfTitle(i18n("New:"));
+    setSelfIcon(KIcon("document-new"));
+
     QDir dir(path());
     if (dir.entryList(QDir::Files | QDir::NoDotAndDotDot).size() == 0) {
 

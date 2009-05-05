@@ -19,12 +19,16 @@
 
 #include "SystemServices.h"
 #include <KStandardDirs>
+#include <KIcon>
 
 namespace Models {
 
 SystemServices::SystemServices()
     : FolderModel(SystemServices::path(), QDir::Name)
 {
+    setSelfTitle(i18n("System"));
+    setSelfIcon(KIcon("computer"));
+
     QDir dir(path());
     if (dir.entryList(QDir::Files | QDir::NoDotAndDotDot).size() == 0) {
 

@@ -61,6 +61,10 @@ public:
     L_Override void setDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
+    L_Override QString selfTitle() const;
+    L_Override QIcon selfIcon() const;
+    L_Override QMimeData * selfMimeData() const;
+
 protected:
     virtual void activate(int index);
     virtual void load() = 0;
@@ -78,6 +82,10 @@ protected:
     static void hideLancelotWindow();
     static void changeLancelotSearchString(const QString & string);
 
+    void setSelfTitle(const QString & title);
+    void setSelfIcon(const QIcon & icon);
+    void setSelfMimeData(QMimeData * data);
+
 public:
     static QMimeData * mimeForUrl(const KUrl & url);
     static QMimeData * mimeForUrl(const QString & url);
@@ -86,7 +94,8 @@ public:
     static QMimeData * mimeForService(const QString & service);
 
 private:
-    bool m_enableDefaultDnD;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models

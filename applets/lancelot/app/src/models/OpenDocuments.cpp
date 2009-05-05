@@ -20,6 +20,7 @@
 
 #include "OpenDocuments.h"
 #include <KDebug>
+#include <KIcon>
 
 namespace Models {
 
@@ -31,6 +32,10 @@ OpenDocuments::SupportedTask::SupportedTask(const QString & classPattern,
 
 OpenDocuments::OpenDocuments()
 {
+    setSelfTitle(i18nc("@title Title of a list of documents that are open",
+            "Open documents"));
+    setSelfIcon(KIcon("document-edit"));
+
     m_supportedTasks
         // KDE applications
         << SupportedTask("kate", "([^-]+) - ([^-]*)")
