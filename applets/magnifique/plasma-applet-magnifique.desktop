@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Magnifique
+Name[sv]=Magnifik
+Name[x-test]=xxMagnifiquexx
+Comment = a magnification glass for Plasma canvas
+Type=Service
+Icon=zoom-in
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_magnifique
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-Name=magnifique
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
