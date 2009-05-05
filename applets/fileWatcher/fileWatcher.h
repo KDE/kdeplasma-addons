@@ -26,8 +26,8 @@
 #include "ui_filtersConfig.h"
 
 class QFile;
-class QFileSystemWatcher;
 class QTextDocument;
+class KDirWatch;
 class FileWatcherTextItem;
 
 
@@ -50,6 +50,7 @@ class FileWatcher : public Plasma::Applet
   private slots:
     void newData();
     void loadFile(const QString& path);
+    void fileDeleted(const QString& path);
 
     void createConfigurationInterface(KConfigDialog *parent);
 
@@ -57,12 +58,13 @@ class FileWatcher : public Plasma::Applet
     void updateRows();
 
     QFile *file;
-    QFileSystemWatcher *watcher;
+    //QFileSystemWatcher *watcher;
+    KDirWatch *watcher;
     FileWatcherTextItem *textItem;
     QTextStream *textStream;
     QTextDocument *textDocument;
 
-    QString m_tmpPath;
+    QString m_currentPath;
 
     QStringList m_filters;
     bool m_showOnlyMatches;

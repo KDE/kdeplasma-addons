@@ -22,7 +22,7 @@
 #include "fileWatcher.h"
 
 #include <QGraphicsTextItem>
-#include <QFileSystemWatcher>
+#include <KDirWatch>
 #include <QFile>
 #include <QStringList>
 #include <QTextDocument>
@@ -53,13 +53,15 @@ void FileWatcher::init()
 {
   file = new QFile(this);
   textStream = 0;
-  watcher = new QFileSystemWatcher(this);
+  watcher = new KDirWatch(this); //QFileSystemWatcher(this);
   textItem = new FileWatcherTextItem(this);
   textItem->moveBy(contentsRect().x(), contentsRect().y());
   textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());
   textDocument = textItem->document();
 
-  QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(loadFile(QString)));
+  QObject::connect(watcher, SIGNAL(dirty(QString)), this, SLOT(loadFile(QString)));
+  QObject::connect(watcher, SIGNAL(created(QString)), this, SLOT(loadFile(QString)));
+  QObject::connect(watcher, SIGNAL(deleted(QString)), this, SLOT(fileDeleted(QString)));
 
   KConfigGroup cg = config();
 
@@ -103,36 +105,49 @@ void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
+void FileWatcher::fileDeleted(const QString &path)
+{
+  delete textStream;
+  textStream = 0;
+  file->close();
+  setConfigurationRequired(true, i18n("Could not open file: %1", path));
+  textDocument->clear();
+}
+
 void FileWatcher::loadFile(const QString& path)
 {
   if (path.isEmpty()) return;
 
-  delete textStream;
-  textStream = 0;
-  textDocument->clear();
-  watcher->removePaths(watcher->files());
-  file->close();
+  bool newFile = !textStream || m_currentPath != path;
 
-  KMimeType::Ptr mimeType = KMimeType::findByFileContent(path);
-  if (!(mimeType->is("text/plain") || mimeType->name() == QLatin1String("application/x-zerosize"))) {
-    setConfigurationRequired(true, i18n("Cannot watch non-text file: %1", path));
-    return;
+  if (newFile) {
+    delete textStream;
+    textStream = 0;
+    watcher->removeFile(m_currentPath);
+    watcher->addFile(path);
+    file->close();
+
+    KMimeType::Ptr mimeType = KMimeType::findByFileContent(path);
+    if (!(mimeType->is("text/plain") || mimeType->name() == QLatin1String("application/x-zerosize"))) {
+        setConfigurationRequired(true, i18n("Cannot watch non-text file: %1", path));
+        return;
+    }
+
+    file->setFileName(path);
+    if (!file->open(QIODevice::ReadOnly | QIODevice::Text)){
+        setConfigurationRequired(true, i18n("Could not open file: %1", path));
+        return;
+    }
+
+    textStream = new QTextStream(file);
+
+    setConfigurationRequired(false);
+    QGraphicsItem::setToolTip(path);
+    m_currentPath = path;
+    textDocument->clear();
   }
-
-  file->setFileName(path);
-  if (!file->open(QIODevice::ReadOnly | QIODevice::Text)){
-    setConfigurationRequired(true, i18n("Could not open file: %1", path));
-    return;
-  }
-
-  setConfigurationRequired(false);
-  QGraphicsItem::setToolTip(path);
-
-  textStream = new QTextStream(file);
 
   newData();
-
-  watcher->addPath(path);
 }
 
 void FileWatcher::newData()
@@ -205,8 +220,10 @@ void FileWatcher::configAccepted()
     KConfigGroup cg = config();
 
     QFileInfo file(ui.pathUrlRequester->url().toLocalFile());
+    QString tmpPath;
+
     if (file.isFile()){
-        m_tmpPath = file.absoluteFilePath();
+        tmpPath = file.absoluteFilePath();
         cg.writePathEntry("path", file.absoluteFilePath());
     }
 
@@ -226,7 +243,7 @@ void FileWatcher::configAccepted()
     cg.writeEntry("useRegularExpressions", m_useRegularExpressions);
 
     textItem->update();
-    loadFile(m_tmpPath);
+    loadFile(tmpPath);
 
     emit configNeedsSaving();
 }
