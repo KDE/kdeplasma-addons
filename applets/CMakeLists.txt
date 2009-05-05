@@ -48,6 +48,10 @@ if(QT_QTWEBKIT_FOUND)
   add_subdirectory(news)
 endif(QT_QTWEBKIT_FOUND)
 
+if(PHONON_FOUND)
+  add_subdirectory(mediaplayer)
+endif(PHONON_FOUND)
+
 if(NOT WIN32)
   add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)
