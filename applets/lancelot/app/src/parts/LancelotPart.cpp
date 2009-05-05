@@ -248,10 +248,19 @@ bool LancelotPart::load(const QString & input)
                 m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::instance());
             } else if (modelID.startsWith("Folder ")) {
                 modelID.remove(0, 7);
-                m_model->addModel(modelID,
+                if (modelID.startsWith("applications:/")) {
+                    modelID.remove(0, 14);
+                    qDebug() << "LancelotPart::load: Folder: Apps:" << modelID;
+                    m_model->addModel(modelID,
+                        QIcon(),
+                        modelID,
+                        model = new Models::Applications(modelID, QString(), QIcon(), true));
+                } else {
+                    m_model->addModel(modelID,
                         QIcon(),
                         modelID,
                         model = new Models::FolderModel(modelID));
+                }
                 m_models.append(model);
             }
             loaded = (model != NULL);

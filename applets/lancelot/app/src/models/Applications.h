@@ -28,7 +28,7 @@ namespace Models {
 class Applications : public Lancelot::ActionTreeModel {
     Q_OBJECT
 public:
-    explicit Applications(QString root = "", QString title = "", QIcon icon = QIcon());
+    explicit Applications(QString root = "", QString title = "", QIcon icon = QIcon(), bool flat = false);
     virtual ~Applications();
 
     L_Override QString title(int index) const;
@@ -74,6 +74,7 @@ private:
     QString m_root;
     QString m_title;
     QIcon m_icon;
+    bool m_flat;
 };
 
 } // namespace Models

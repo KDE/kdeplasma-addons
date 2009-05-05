@@ -24,6 +24,7 @@
 #include <KRun>
 #include <KLocalizedString>
 #include <KDesktopFile>
+#include <KFileItem>
 #include <KIcon>
 #include <KGlobal>
 #include <KMimeType>
@@ -174,6 +175,10 @@ bool BaseModel::addUrl(const QString & url)
 
 bool BaseModel::addUrl(const KUrl & url)
 {
+    KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url);
+    qDebug() << "BaseModel::addUrl: mime for " << url <<
+        " is " << fileItem.mimetype();
+
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
         // .desktop files may be services (type field == 'Application' or 'Service')
         // or they may be other types such as links.
@@ -185,11 +190,13 @@ bool BaseModel::addUrl(const KUrl & url)
 
         if ((desktopFile.readType() == "Service" || desktopFile.readType() == "Application")
                 && addService(url.path())) {
+            qDebug() << "BaseModel::addUrl: this was a service/application: " << url;
             return true;
         }
 
         KUrl desktopUrl(desktopFile.readUrl());
 
+        qDebug() << "BaseModel::addUrl: this was a desktop file: " << url;
         add(
             QFileInfo(url.path()).baseName(),
             desktopUrl.isLocalFile() ? desktopUrl.path() : desktopUrl.prettyUrl(),
@@ -199,9 +206,9 @@ bool BaseModel::addUrl(const KUrl & url)
         );
     } else {
         add(
-            QFileInfo(url.path()).baseName(),
+            fileItem.text(),
             url.isLocalFile() ? url.path() : url.prettyUrl(),
-            KIcon(KMimeType::iconNameForUrl(url)),
+            KIcon(fileItem.iconName()),
             url.url()
         );
     }

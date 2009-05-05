@@ -35,9 +35,10 @@
 
 namespace Models {
 
-Applications::Applications(QString root, QString title, QIcon icon):
-    m_root(root), m_title(title), m_icon(icon)
+Applications::Applications(QString root, QString title, QIcon icon, bool flat):
+    m_root(root), m_title(title), m_icon(icon), m_flat(flat)
 {
+    qDebug() << "Applications::Applications: root" << root;
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaUpdated(const QStringList &)));
     load();
@@ -155,6 +156,9 @@ bool Applications::isCategory(int index) const
 {
     //Q_UNUSED(index);
     //return false;
+    if (m_flat) {
+        return false;
+    }
     return (index < m_submodels.size());
 }
 
@@ -165,8 +169,15 @@ int Applications::size() const
 
 void Applications::activate(int index)
 {
-    if (index >= size()) return;
-    if (index < m_submodels.size()) return;
+    if (index >= size() || index < 0) return;
+
+    if (index < m_submodels.size()) {
+        if (m_flat) {
+            // opening the dir in external viewer
+            new KRun(KUrl("applications:/" + m_submodels[index]->m_root), 0);
+        }
+        return;
+    }
 
     QString data = m_items.at(index - m_submodels.size()).desktopFile;
     Logger::instance()->log("applications-model", data);
