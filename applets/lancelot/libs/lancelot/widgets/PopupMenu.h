@@ -20,8 +20,6 @@
 #ifndef LANCELOT_POPUPMENU_H
 #define LANCELOT_POPUPMENU_H
 
-#include <KDE/KDebug>
-
 #include <plasma/dialog.h>
 
 #include <lancelot/lancelot_export.h>

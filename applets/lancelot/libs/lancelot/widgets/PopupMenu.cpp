@@ -131,7 +131,6 @@ QAction * PopupMenu::exec(const QPoint & p, QAction * action)
     while (isVisible()) {
         QApplication::processEvents();
     }
-    kDebug() << "is show stopping me?";
     return d->chosenAction;
 }
 

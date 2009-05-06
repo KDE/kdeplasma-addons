@@ -22,7 +22,6 @@
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <KLocale>
-#include <KDebug>
 #include <QIcon>
 #include <QtDBus>
 

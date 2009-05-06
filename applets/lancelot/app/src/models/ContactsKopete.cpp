@@ -20,7 +20,6 @@
 #include "ContactsKopete.h"
 #include <KIcon>
 #include <KStandardDirs>
-#include <KDebug>
 
 #include "logger/Logger.h"
 
@@ -97,8 +96,6 @@ void ContactsKopete::load()
         }
 
         foreach (const QString& contact, contacts.value()) {
-            qDebug() << "ContactsKopete::load()" << contact;
-
             // Retrieving contact name
             QDBusReply < QString > contactName = m_interface->getDisplayName(contact);
             if (!contactName.isValid()) {

@@ -76,7 +76,6 @@ SystemActions * SystemActions::instance()
 
 Lancelot::ActionTreeModel * SystemActions::action(const QString & id)
 {
-    qDebug() << "SystemActions::action" << id;
     QList < Lancelot::ActionTreeModel * > subs;
     subs << this;
 

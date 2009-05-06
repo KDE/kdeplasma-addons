@@ -21,7 +21,6 @@
 #include <KIcon>
 #include <KRun>
 #include <KStandardDirs>
-#include <KDebug>
 
 #include "logger/Logger.h"
 

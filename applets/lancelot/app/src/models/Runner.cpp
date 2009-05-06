@@ -19,7 +19,6 @@
 
 #include "Runner.h"
 #include <KRun>
-#include <KDebug>
 #include <KIcon>
 #include <KLocalizedString>
 #include <KStandardDirs>
@@ -114,12 +113,10 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 
         while (newMatchIt.hasNext()) {
             Plasma::QueryMatch match = newMatchIt.next();
-            kDebug() << match.id() << match.runner()->id() << match.runner()->objectName();
             QStringList data;
             data << match.id();
             data << match.runner()->id();
             data << match.data().toString();
-            kDebug() << data;
 
             add(
                 match.text(),
@@ -152,7 +149,6 @@ void Runner::activate(int index)
 bool Runner::hasContextActions(int index) const
 {
     if (!valid) return false;
-    //kDebug() << m_items[index].data.value< QString >();
     if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
         return true;
     }
@@ -160,8 +156,6 @@ bool Runner::hasContextActions(int index) const
     QString id = itemAt(index).data.value< QStringList >().at(0);
     foreach (Plasma::QueryMatch match, m_runnerManager->matches()) {
         if (match.id() == id) {
-            qDebug() << "Runner::hasContextActions() match.size" <<
-                m_runnerManager->actionsForMatch(match).size();
             if (m_runnerManager->actionsForMatch(match).size() > 0) {
                 return true;
             }

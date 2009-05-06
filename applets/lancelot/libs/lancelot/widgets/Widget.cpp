@@ -22,7 +22,6 @@
 #include <QVariant>
 #include "Global.h"
 #include <lancelot/lancelot.h>
-#include <KDebug>
 #include <QApplication>
 
 #include <QtGui/QGraphicsSceneMouseEvent>
@@ -59,7 +58,6 @@ Widget::Widget(QGraphicsItem * parent)
 
 Widget::~Widget()
 {
-    kDebug() << (void *)this << " is being deleted!";
     L_WIDGET_UNSET_INITIALIZED;
     if (d->group != NULL) {
         d->group->instance()->removeWidget(this);
@@ -98,7 +96,6 @@ void Widget::setHovered(bool value)
         return ;
     }
     d->hover = value;
-    kDebug() << (void *)this << " is being hovered!";
     update();
 }
 

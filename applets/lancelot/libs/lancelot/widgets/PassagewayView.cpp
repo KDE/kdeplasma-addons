@@ -160,7 +160,6 @@ public:
 
     void back(int steps, bool deselectLast = true)
     {
-        qDebug() << "PassagewayView::Private::back:" << steps;
         if (steps == 0) {
             return;
         }
@@ -204,7 +203,6 @@ public:
 
     void next(Step newStep)
     {
-        qDebug() << "PassagewayView::Private::next";
         Step * step = new Step(newStep);
         Instance::setActiveInstanceAndLock(parent->group()->instance());
         ExtenderButton * button =

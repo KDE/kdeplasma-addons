@@ -21,7 +21,6 @@
 
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
-#include <KDebug>
 #include <QIcon>
 
 #include <KAction>

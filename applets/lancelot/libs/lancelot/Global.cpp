@@ -71,8 +71,6 @@ WidgetGroup::WidgetGroup(Instance * instance, QString name)
     d->instance = instance;
     d->name = name;
     d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
-    qDebug() << "Creating group: " << name <<
-        d->confGroupTheme->isValid();
 }
 
 WidgetGroup::~WidgetGroup()
@@ -278,11 +276,9 @@ void Instance::Private::createConfTheme()
     }
 
     delete confTheme;
-    qDebug() << "What is the plasma theme: " << Plasma::Theme::defaultTheme()->themeName();
     QString search = "desktoptheme/" +
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/" + app + "theme.config";
-    qDebug() << "Trying:" << search;
 
     QString path =  KStandardDirs::locate( "data", search );
     if (path.isEmpty()) {
@@ -293,7 +289,6 @@ void Instance::Private::createConfTheme()
         path = "lancelotrc";
     }
 
-    qDebug() << "Using theme:" << path;
     confTheme = new KConfig(path);
 }
 
@@ -305,7 +300,6 @@ void Instance::Private::themeChanged()
 
 void Instance::Private::loadAllGroups()
 {
-    qDebug() << "Instance::Private::loadAllGroups()";
     foreach(WidgetGroup * group, groups) {
         group->load(true);
     }

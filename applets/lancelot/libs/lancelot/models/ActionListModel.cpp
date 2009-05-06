@@ -18,7 +18,6 @@
  */
 
 #include "ActionListModel.h"
-#include <KDebug>
 
 namespace Lancelot {
 

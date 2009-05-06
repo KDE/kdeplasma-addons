@@ -24,7 +24,6 @@
 #include <QString>
 #include <QStringList>
 #include <QUrl>
-#include <KDebug>
 
 QString Serializator::serialize(const QMap < QString , QString > data)
 {

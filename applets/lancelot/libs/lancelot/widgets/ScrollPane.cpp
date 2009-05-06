@@ -18,8 +18,6 @@
  */
 
 #include "ScrollPane.h"
-
-#include <KDebug>
 #include <QGraphicsSceneWheelEvent>
 
 #include "ScrollBar.h"
@@ -74,8 +72,6 @@ public:
 
     void updateViewport()
     {
-        kDebug() << QPointF(horizontal->value(), vertical->value())
-                 << q->currentViewportSize() << q->maximumViewportSize();
         widget->viewportChanged(QRectF(QPointF(horizontal->value(), vertical->value()),
                 q->currentViewportSize()));
     }
@@ -197,7 +193,6 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
     int viewportSize;
 
     if (hasHorizontal) {
-        kDebug() << "Showing horizontal scrollbar";
         viewportSize = currentViewportSize().width();
         d->horizontal->setRange(0, d->widget->sizeFor(currentViewportSize()).width() - viewportSize);
         d->horizontal->setPageStep(viewportSize);
@@ -208,7 +203,6 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
     }
 
     if (hasVertical) {
-        kDebug() << "Showing vertical scrollbar";
         viewportSize = currentViewportSize().height();
         d->vertical->setRange(0, d->widget->sizeFor(currentViewportSize()).height() - viewportSize);
         d->vertical->setPageStep(viewportSize);
@@ -223,19 +217,18 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
 
 void ScrollPane::resizeEvent(QGraphicsSceneResizeEvent * event) //>
 {
+    Lancelot::Widget::resizeEvent(event);
     scrollableWidgetSizeUpdateNeeded();
 } //<
 
 void ScrollPane::scrollHorizontal(int value) //>
 {
-    kDebug() << value;
     d->horizontal->setValue(value);
     d->updateViewport();
 } //<
 
 void ScrollPane::scrollVertical(int value) //>
 {
-    kDebug() << value;
     d->vertical->setValue(value);
     d->updateViewport();
 } //<
@@ -275,7 +268,6 @@ void ScrollPane::setFlags(Flags flags) //>
 
 void ScrollPane::hoverEnterEvent(QGraphicsSceneHoverEvent * event) //>
 {
-    kDebug();
     Widget::hoverEnterEvent(event);
 
     if (!(d->flags & HoverShowScrollbars)) {
@@ -291,7 +283,6 @@ void ScrollPane::hoverEnterEvent(QGraphicsSceneHoverEvent * event) //>
 
 void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
 {
-    kDebug();
     Widget::hoverLeaveEvent(event);
 
     if (!(d->flags & HoverShowScrollbars)) {

@@ -26,7 +26,6 @@
 
 #include <KRun>
 #include <KUrl>
-#include <KDebug>
 #include <KIcon>
 #include <KSycoca>
 
@@ -38,8 +37,6 @@ namespace Models {
 Applications::Applications(QString root, QString title, QIcon icon, bool flat):
     m_root(root), m_title(title), m_icon(icon), m_flat(flat)
 {
-    qDebug() << "Applications::Applications: root" << root;
-
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaUpdated(const QStringList &)));
     load();
@@ -195,7 +192,6 @@ QMimeData * Applications::mimeData(int index) const
 {
     if (index >= size()) return NULL;
     if (index < m_submodels.size()) {
-        kDebug() << m_submodels.at(index)->m_root;
         return BaseModel::mimeForUrl("applications:/" +
             m_submodels.at(index)->m_root);
     }

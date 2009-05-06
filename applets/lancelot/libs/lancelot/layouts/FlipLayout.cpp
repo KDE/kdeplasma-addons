@@ -20,7 +20,6 @@
 #include "FlipLayout.h"
 #include <QSet>
 #include <QMap>
-#include <KDebug>
 #include <QGraphicsWidget>
 
 namespace Lancelot

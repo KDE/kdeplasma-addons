@@ -23,7 +23,6 @@
 #include <KIcon>
 #include <KConfigGroup>
 #include <KStandardDirs>
-#include <KDebug>
 #include <KTemporaryFile>
 #include "../Serializator.h"
 

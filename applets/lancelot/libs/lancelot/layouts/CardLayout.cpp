@@ -18,7 +18,6 @@
  */
 
 #include "CardLayout.h"
-#include <KDebug>
 #include <plasma/plasma.h>
 #include <QGraphicsScene>
 

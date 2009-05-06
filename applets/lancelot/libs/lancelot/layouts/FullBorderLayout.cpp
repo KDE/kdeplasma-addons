@@ -19,7 +19,6 @@
 
 #include "FullBorderLayout.h"
 #include <lancelot/lancelot.h>
-#include <KDebug>
 #include <QGraphicsWidget>
 
 namespace Lancelot {

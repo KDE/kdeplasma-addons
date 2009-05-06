@@ -18,7 +18,6 @@
  */
 
 #include "StandardActionTreeModel.h"
-#include <KDebug>
 #include <iostream>
 
 namespace Lancelot
@@ -159,7 +158,6 @@ QVariant StandardActionTreeModel::data(int index) const
 
 int StandardActionTreeModel::size() const
 {
-    kDebug() << (void *) this;
     return d->root->children.size();
 }
 

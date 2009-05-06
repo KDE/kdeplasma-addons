@@ -24,7 +24,6 @@
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
-#include <KDE/KDebug>
 #include <QtGui/QIcon>
 
 #include <lancelot/widgets/CustomListView.h>

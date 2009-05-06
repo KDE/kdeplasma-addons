@@ -18,7 +18,6 @@
  */
 
 #include "Panel.h"
-#include <KDebug>
 #include "BasicWidget.h"
 #include <plasma/framesvg.h>
 

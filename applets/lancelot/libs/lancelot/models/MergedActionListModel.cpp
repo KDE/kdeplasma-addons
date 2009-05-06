@@ -18,7 +18,6 @@
  */
 
 #include "MergedActionListModel.h"
-#include <KDebug>
 
 namespace Lancelot {
 

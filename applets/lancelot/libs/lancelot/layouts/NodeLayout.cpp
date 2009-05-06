@@ -21,7 +21,6 @@
 
 #include <QPair>
 #include <QMap>
-#include <KDebug>
 #include "Global.h"
 #include <lancelot/lancelot.h>
 

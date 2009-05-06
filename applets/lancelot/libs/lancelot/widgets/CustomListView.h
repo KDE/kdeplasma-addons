@@ -22,7 +22,6 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include <KDebug>
 #include <KIcon>
 
 #include <lancelot/widgets/Widget.h>

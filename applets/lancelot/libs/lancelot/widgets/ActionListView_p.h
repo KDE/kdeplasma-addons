@@ -23,7 +23,6 @@
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 
-#include <KDebug>
 #include <QIcon>
 
 #include <lancelot/widgets/CustomListView.h>

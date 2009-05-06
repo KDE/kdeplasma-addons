@@ -142,7 +142,6 @@ ActionListViewItemFactory::~ActionListViewItemFactory() //>
 void ActionListViewItemFactory::reload() //>
 {
     while (m_items.size() > m_model->size()) {
-        kDebug() << "deleting one";
         ActionListViewItem * item = m_items.takeLast();
         if (m_selectedItem == item) {
             m_selectedItem = NULL;
@@ -151,7 +150,6 @@ void ActionListViewItemFactory::reload() //>
         item->deleteLater();
     }
 
-    kDebug() << "reloading the items";
     for (int i = 0; i < m_model->size(); i++) {
         itemForIndex(i, true);
     }
@@ -168,20 +166,15 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
         bool reload) //>
 {
     ActionListViewItem * item;
-    kDebug() << "req index:" << index
-             << "items size:" << m_items.size()
-             << "model size:" << m_model->size();
     if (index < m_items.size() && m_items[index]) {
         item = m_items[index];
     } else {
-        kDebug() << "Creating new one";
         item = new ActionListViewItem(this);
         item->setGroup((m_model->isCategory(index))
                 ? m_categoriesGroup : m_itemsGroup);
         reload = true;
         while (index >= m_items.size()) {
             m_items.append(NULL);
-            kDebug() << "Extending items list to fit item";
         }
         m_items[index] = item;
         setItemExtender(index);
@@ -201,11 +194,9 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
         if (m_model->isCategory(index)) {
             item->setGroup(m_categoriesGroup);
             item->setIconSize(m_categoryIconSize);
-            kDebug() << "Icon size is" << m_categoryIconSize << "for" << item->title();
         } else {
             item->setGroup(m_itemsGroup);
             item->setIconSize(m_itemIconSize);
-            kDebug() << "Icon size is" << m_itemIconSize << "for" << item->title();
         }
     }
 
@@ -320,7 +311,6 @@ void ActionListViewItemFactory::setItemIconSize(QSize size)
     int i = 0;
     foreach (ActionListViewItem * item, m_items) {
         if (!m_model->isCategory(i)) {
-            kDebug() << "Icon size is" << m_itemIconSize << "for" << item->title();
             item->setIconSize(size);
         }
         i++;
@@ -386,7 +376,6 @@ ActionListModel * ActionListViewItemFactory::model() const //>
 
 void ActionListViewItemFactory::modelUpdated() //>
 {
-    kDebug();
     reload();
 } //<
 
@@ -395,19 +384,16 @@ void ActionListViewItemFactory::modelItemInserted(int index) //>
     if (index < 0 || index > m_items.size()) {
         // If we get an illegal notification, do
         // a full reload
-        kDebug() << "illegal -> reloading: " << index;
         reload();
     } else {
         m_items.insert(index, NULL);
         itemForIndex(index, true);
-        kDebug() << "emit itemInserted" << index;
         emit itemInserted(index);
     }
 } //<
 
 void ActionListViewItemFactory::modelItemDeleted(int index) //>
 {
-    kDebug();
     if (index < 0 || index >= m_items.size()) {
         // If we get an illegal notification, do
         // a full reload
@@ -424,8 +410,6 @@ void ActionListViewItemFactory::modelItemDeleted(int index) //>
 
 void ActionListViewItemFactory::modelItemAltered(int index) //>
 {
-    kDebug();
-    kDebug();
     if (index < 0 || index >= m_items.size()) {
         // If we get an illegal notification, do
         // a full reload
@@ -531,23 +515,19 @@ void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * 
 
 void ActionListViewItemFactory::activateSelectedItem() //>
 {
-    kDebug() << (void *) m_selectedItem;
     if (!m_selectedItem) {
         return;
     }
 
-    kDebug() << m_items.indexOf(m_selectedItem);
     activate(m_items.indexOf(m_selectedItem));
 } //<
 
 void ActionListViewItemFactory::contextForSelectedItem() //>
 {
-    kDebug() << (void *) m_selectedItem;
     if (!m_selectedItem) {
         return;
     }
 
-    kDebug() << m_items.indexOf(m_selectedItem);
     itemContext(m_selectedItem, false);
 } //<
 
@@ -826,7 +806,6 @@ void ActionListView::keyPressEvent(QKeyEvent * event) //>
         return;
     }
 
-    kDebug() << event->key() << Qt::Key_Enter;
     if (event->key() == Qt::Key_Return ||
         event->key() == Qt::Key_Enter) {
         if (event->modifiers() & Qt::AltModifier) {

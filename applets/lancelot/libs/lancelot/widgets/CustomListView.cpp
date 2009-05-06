@@ -18,7 +18,6 @@
  */
 
 #include "CustomListView.h"
-#include <KDebug>
 #include <KIcon>
 
 namespace Lancelot {
@@ -123,7 +122,6 @@ public:
 
         returnIfFactoryNotSet;
 
-        kDebug() << factory->itemCount();
         for (int i = 0; i < factory->itemCount(); i++) {
             sizes[Qt::MinimumSize] +=
                 factory->itemHeight(i, Qt::MinimumSize);
@@ -133,13 +131,8 @@ public:
                 factory->itemHeight(i, Qt::MaximumSize);
         }
 
-        kDebug()
-            << (void *)q
-            << (void *)q->scrollPane()
-            << sizes << osizes;
         if (q && q->scrollPane() && osizes != sizes) {
             sizeUpdate = true;
-            kDebug() << "calling scrollableWidgetSizeUpdateNeeded";
             q->scrollPane()->scrollableWidgetSizeUpdateNeeded();
             sizeUpdate = false;
         }
@@ -155,8 +148,6 @@ public:
         // if (!q->isVisible()) {
         //    return;
         // }
-
-        kDebug() << viewport;
 
         QTransform transform;
         for (int i = 0; i < factory->itemCount(); i++) {
@@ -251,7 +242,6 @@ QSizeF CustomList::sizeFor(QSizeF viewportSize) const //>
 
 void CustomList::viewportChanged(QRectF viewport) //>
 {
-    kDebug();
     if (d->sizeUpdate || d->viewport.size() != viewport.size()) {
         if (d->sizes[Qt::MinimumSize] > viewport.height()) {
             d->scale = -1;
@@ -286,27 +276,23 @@ qreal CustomList::scrollUnit(Qt::Orientation direction) const //>
 void CustomList::factoryItemInserted(int position) //>
 {
     Q_UNUSED(position);
-    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemDeleted(int position) //>
 {
     Q_UNUSED(position);
-    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryItemAltered(int position) //>
 {
     Q_UNUSED(position);
-    kDebug();
     d->updateSizeInfo();
 } //<
 
 void CustomList::factoryUpdated() //>
 {
-    kDebug();
     d->updateSizeInfo();
 } //<
 

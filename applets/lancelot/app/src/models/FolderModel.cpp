@@ -18,7 +18,6 @@
  */
 
 #include "FolderModel.h"
-#include <KDebug>
 #include <KIcon>
 
 namespace Models {

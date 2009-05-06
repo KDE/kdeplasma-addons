@@ -18,9 +18,6 @@
  */
 
 #include "ResizeBordersPanel.h"
-
-#include <KDebug>
-
 #include "Widget.h"
 
 #define COLOR 255,0,0

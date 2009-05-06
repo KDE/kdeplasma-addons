@@ -18,7 +18,6 @@
  */
 
 #include "LancelotApplet.h"
-#include <KDebug>
 #include <KIcon>
 #include <climits>
 

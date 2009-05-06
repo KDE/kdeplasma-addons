@@ -20,7 +20,6 @@
 #include "BaseMergedModel.h"
 #include "Serializator.h"
 
-#include <KDebug>
 #include <KUrl>
 #include <KTemporaryFile>
 

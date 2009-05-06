@@ -20,7 +20,6 @@
 #include "Places.h"
 #include <KRun>
 #include <KLocalizedString>
-#include <KDebug>
 #include <KIcon>
 #include <KStandardDirs>
 

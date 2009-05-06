@@ -29,7 +29,6 @@
 #include <KGlobal>
 #include <KMimeType>
 #include <KUrl>
-#include <KDebug>
 #include <QApplication>
 #include <lancelot/models/PlasmaServiceListModel.h>
 
@@ -191,8 +190,6 @@ bool BaseModel::addUrl(const QString & url)
 bool BaseModel::addUrl(const KUrl & url)
 {
     KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url);
-    qDebug() << "BaseModel::addUrl: mime for " << url <<
-        " is " << fileItem.mimetype();
 
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
         // .desktop files may be services (type field == 'Application' or 'Service')
@@ -205,13 +202,11 @@ bool BaseModel::addUrl(const KUrl & url)
 
         if ((desktopFile.readType() == "Service" || desktopFile.readType() == "Application")
                 && addService(url.path())) {
-            qDebug() << "BaseModel::addUrl: this was a service/application: " << url;
             return true;
         }
 
         KUrl desktopUrl(desktopFile.readUrl());
 
-        qDebug() << "BaseModel::addUrl: this was a desktop file: " << url;
         add(
             QFileInfo(url.path()).baseName(),
             desktopUrl.isLocalFile() ? desktopUrl.path() : desktopUrl.prettyUrl(),
@@ -234,7 +229,6 @@ bool BaseModel::addUrl(const KUrl & url)
 QMimeData * BaseModel::mimeForUrl(const KUrl & url)
 {
     QMimeData * data = new QMimeData();
-    kDebug() << url.url();
     data->setData("text/uri-list", url.url().toAscii());
     data->setData("text/plain", url.url().toAscii());
     return data;
@@ -243,12 +237,9 @@ QMimeData * BaseModel::mimeForUrl(const KUrl & url)
 QMimeData * BaseModel::mimeData(int index) const
 {
     if (!d->enableDefaultDnD) {
-        kDebug() << "Requested mime for index" << index
-            << "but we don't support DnD";
         return NULL;
     }
 
-    kDebug() << "Requested mime for index" << index;
     return BaseModel::mimeForUrl(itemAt(index).data.toString());
 }
 

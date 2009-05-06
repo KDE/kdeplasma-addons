@@ -20,8 +20,6 @@
 #ifndef LANCELOT_WIDGET_H
 #define LANCELOT_WIDGET_H
 
-#include <KDE/KDebug>
-
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>
 

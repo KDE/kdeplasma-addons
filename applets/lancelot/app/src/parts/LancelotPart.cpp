@@ -18,7 +18,6 @@
  */
 
 #include "LancelotPart.h"
-#include <KDebug>
 #include <KIcon>
 #include <KMimeType>
 #include <KUrl>
@@ -73,8 +72,6 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 
 void LancelotPart::init()
 {
-    qDebug() << "init";
-
     // Setting up UI
     m_instance = new Lancelot::Instance();
     m_list = new Lancelot::ActionListView(this);
@@ -180,7 +177,6 @@ bool LancelotPart::loadDirectory(const QString & url)
     data["version"]     = "1.0";
     data["type"]        = "list";
     data["model"]       = "Folder " + url;
-    qDebug() << "LancelotPart::loadDirectory:" << data;
     return load(Serializator::serialize(data));
 }
 
@@ -246,7 +242,6 @@ bool LancelotPart::load(const QString & input)
                 modelID.remove(0, 7);
                 if (modelID.startsWith("applications:/")) {
                     modelID.remove(0, 14);
-                    qDebug() << "LancelotPart::load: Folder: Apps:" << modelID;
                     m_model->addModel(modelID,
                         QIcon(),
                         modelID,
@@ -374,15 +369,11 @@ void LancelotPart::applyConfig()
     QString icon = kcg.readEntry("iconLocation", "lancelot-part");
     setPopupIcon(icon);
 
-    qDebug() << "LancelotPart::applyConfig()" << icon;
-
     if (icon == "lancelot-part") {
-        qDebug() << m_models.size();
         if (m_model->modelCount() > 0) {
             Lancelot::ActionListModel * model = m_model->modelAt(0);
             if (!model->selfIcon().isNull()) {
                 setPopupIcon(model->selfIcon());
-                qDebug() << "LancelotPart::applyConfig() << set the icon";
             }
         }
     }
@@ -422,7 +413,6 @@ void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
 
 QGraphicsWidget * LancelotPart::graphicsWidget()
 {
-    qDebug() << "graphicsWidget" << (void *) m_list;
     return m_list;
 }
 

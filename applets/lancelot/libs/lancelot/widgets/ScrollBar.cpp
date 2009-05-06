@@ -18,8 +18,6 @@
  */
 
 #include "ScrollBar.h"
-#include <KDebug>
-
 #include "ExtenderButton.h"
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
@@ -108,7 +106,10 @@ void ScrollBar::hoverMoveEvent(QGraphicsSceneHoverEvent * event)
 
 void ScrollBar::timerEvent(QTimerEvent * event)
 {
-    setValue(value() + d->direction * SINGLE_SHOT_MOVE);
+    if (event->timerId() == d->timer.timerId()) {
+        setValue(value() + d->direction * SINGLE_SHOT_MOVE);
+    }
+    Plasma::ScrollBar::timerEvent(event);
 }
 
 void ScrollBar::setActivationMethod(Lancelot::ActivationMethod method)

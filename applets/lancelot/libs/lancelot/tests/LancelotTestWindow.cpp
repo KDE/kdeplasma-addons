@@ -23,7 +23,6 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <QStyleOptionGraphicsItem>
-#include <KDebug>
 #include <KLineEdit>
 #include <Plasma/LineEdit>
 

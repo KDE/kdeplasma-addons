@@ -26,7 +26,6 @@
 
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <KDebug>
 #include <KIcon>
 
 #include "logger/Logger.h"

@@ -18,7 +18,6 @@
  */
 
 #include "BasicWidget.h"
-#include <KDebug>
 #include <KGlobalSettings>
 #include <QApplication>
 

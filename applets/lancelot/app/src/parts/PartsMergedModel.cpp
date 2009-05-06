@@ -19,7 +19,6 @@
 
 #include "PartsMergedModel.h"
 #include <KIcon>
-#include <KDebug>
 #include <KLocalizedString>
 
 namespace Models {
@@ -72,7 +71,6 @@ void PartsMergedModel::setModelDropActions(int index, Qt::DropActions & actions,
 
 void PartsMergedModel::modelDataDropped(int index, Qt::DropAction action)
 {
-    kDebug() << "PartsDrop" << index << action << Qt::CopyAction << Qt::MoveAction;
     if (action == Qt::MoveAction) {
         emit removeModelRequested(index);
     }

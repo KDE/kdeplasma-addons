@@ -19,7 +19,6 @@
  */
 
 #include "OpenDocuments.h"
-#include <KDebug>
 #include <KIcon>
 
 namespace Models {
@@ -114,7 +113,6 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 {
     Q_ASSERT(task);
 
-    // kDebug() << task->className() << task->classClass();
     QRegExp extractor;
     QString className = task->className();
 

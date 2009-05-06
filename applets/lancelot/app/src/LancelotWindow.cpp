@@ -236,8 +236,6 @@ void LancelotWindow::lancelotHide(bool immediate)
 
 void LancelotWindow::showWindow(int x, int y, bool centered)
 {
-    qDebug() << "LancelotWindow::showWindow:" << x << y << centered;
-
     panelSections->setVisible(m_showingFull);
 
     layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
@@ -313,7 +311,6 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
         sectionActivated("applications");
     }
 
-    qDebug() << "LancelotWindow::showWindow: move" << x << y;
     move(x, y);
     show();
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
@@ -382,7 +379,7 @@ void LancelotWindow::sectionActivated(const QString & item)
 
     m_focusList.clear();
     m_focusIndex = 0;
-    kDebug() << item;
+
     if (item == "search") {
         m_focusList << listSearchLeft;
     } else if (item == "applications") {
@@ -633,7 +630,6 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         bool pass = false;
         int oindex = m_focusIndex;
         QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
-        qDebug() << "Pressed" << keyEvent;
         switch (keyEvent->key()) {
             case Qt::Key_Escape:
                 lancelotHide(true);
@@ -843,8 +839,6 @@ void LancelotWindow::loadConfig()
     }
 
     // Logging
-    qDebug() << "Trying to enable logging" <<
-        m_configUi.enableUsageStatistics();
     Logger::instance()->setEnabled(m_configUi.enableUsageStatistics());
 
     // Keep open
@@ -883,8 +877,6 @@ void LancelotWindow::lancelotContext()
 
 void LancelotWindow::configureMenu()
 {
-    qDebug() << "LancelotWindow::configureMenu()";
-
     lancelotHide(true);
     const QString dialogID = "LancelotMenuConfigurationDialog";
     KConfigDialog * dialog;

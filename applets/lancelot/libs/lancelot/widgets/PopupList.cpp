@@ -69,9 +69,6 @@ PopupList::Private::~Private()
 
 void PopupList::Private::listItemActivated(int index)
 {
-    qDebug() << "listItemActivated"
-        << "tree" << (void *) treeModel
-        << "list" << (void *) listModel;
     if (treeModel && treeModel->isCategory(index)) {
         switch (openAction) {
             case OpenInside:

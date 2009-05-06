@@ -19,7 +19,6 @@
 
 #include "RecentDocuments.h"
 #include <KStandardDirs>
-#include <KDebug>
 #include <KIcon>
 #include <QVariant>
 
@@ -58,10 +57,7 @@ void RecentDocuments::contextActivate(int index, QAction * context)
         return;
     }
 
-    qDebug() << itemAt(index).data.toString();
     KUrl url = KUrl(itemAt(index).data.toString());
-    qDebug() << url.fileName();
-    qDebug() << url.path();
 
     int action = context->data().toInt();
     switch (action) {
@@ -72,7 +68,6 @@ void RecentDocuments::contextActivate(int index, QAction * context)
         case 1:
             // clearing the list
             foreach (QString file, QDir(m_dirPath).entryList(QDir::Files)) {
-                qDebug() << "deleting" << file <<
                 QFile::remove(m_dirPath + '/' + file);
             }
             break;

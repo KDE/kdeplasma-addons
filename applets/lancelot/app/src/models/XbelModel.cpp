@@ -18,7 +18,6 @@
  */
 
 #include "XbelModel.h"
-#include <KDebug>
 #include <KIcon>
 #include <QFile>
 
@@ -43,7 +42,6 @@ void XbelModel::reload()
 void XbelModel::load()
 {
     QFile file(m_filePath);
-    qDebug() << "XbelModel::load(" << m_filePath << ")";
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;

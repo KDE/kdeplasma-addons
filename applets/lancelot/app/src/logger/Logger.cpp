@@ -19,7 +19,6 @@
 
 #include "Logger.h"
 #include <QIODevice>
-#include <QDebug>
 #include <QFile>
 #include <KNotification>
 #include <KStandardDirs>
@@ -53,7 +52,6 @@ void Logger::close()
     m_instance->setEnabled(false);
     delete m_instance;
     m_instance = NULL;
-    qDebug() << "Logger::close()";
 }
 
 void Logger::log(
@@ -65,10 +63,6 @@ void Logger::log(
     }
 
     QDateTime timestamp = QDateTime::currentDateTime();
-    qDebug() << "Logger::log:"
-             << source
-             << message
-             << timestamp;
 
     (*m_stream) << source
              << message
@@ -100,7 +94,6 @@ QString Logger::path() const
     QDate date = QDate::currentDate();
     path += "log-" + QString::number(date.year())
              + "-" + QString::number(date.month());
-    qDebug() << "Logger::path()" << path;
 
     return path;
 }
@@ -140,8 +133,6 @@ void Logger::openFile()
         m_stream = new QDataStream(m_file);
         m_stream->setVersion(QDataStream::Qt_4_0);
     } else {
-        qDebug() << "Logger::Logger: Failed to open log";
-
         KNotification * notify = new KNotification("ErrorOpeningLog");
         notify->setText(i18n("Failed to open the log file. Logging is disabled."));
         notify->setPixmap(KIcon("view-history").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium));

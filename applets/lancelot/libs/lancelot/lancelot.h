@@ -58,14 +58,14 @@ enum ActivationMethod {
         virtual const QMetaObject * L_metaObject() const { \
             return L_INITD_META_OBJECT;                    \
         }                                                  \
-    public:                                                \
-        virtual void L_debug() const {                     \
-            kDebug() << " 0 "                              \
-               << "This" << (void *)this                   \
-               << "Stati" << (void *)L_INITD_META_OBJECT   \
-               << "QMeta" << (void *)metaObject()          \
-               << "LMeta" << (void *)L_metaObject();       \
-        }
+//    public:
+//        virtual void L_debug() const {
+//            kDebug() << " 0 "
+//               << "This" << (void *)this
+//               << "Stati" << (void *)L_INITD_META_OBJECT
+//               << "QMeta" << (void *)metaObject()
+//               << "LMeta" << (void *)L_metaObject();
+//        }
 //        virtual void L_debugFull() const {
 //            kDebug() << " 1 " << L_metaObject()->className();
 //            kDebug() << " 2 " << metaObject()->className();
@@ -74,8 +74,8 @@ enum ActivationMethod {
 //        }
 
 #define L_WIDGET_IS_INITIALIZED  L_isInitialized()
-#define L_WIDGET_SET_INITIALIZED L_setInitialized(); groupUpdated(); updateGeometry(); \
-    kDebug() << "initialized" << (void*)this << "of class" << metaObject()->className();
+#define L_WIDGET_SET_INITIALIZED L_setInitialized(); groupUpdated(); updateGeometry();
+//    kDebug() << "initialized" << (void*)this << "of class" << metaObject()->className();
 #define L_WIDGET_UNSET_INITIALIZED  L_isInitialized()
 
 } // namespace Lancelot

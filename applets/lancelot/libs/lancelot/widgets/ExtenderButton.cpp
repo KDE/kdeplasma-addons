@@ -20,7 +20,6 @@
 #include "ExtenderButton.h"
 
 #include <QRectF>
-#include <KDebug>
 #include <QIcon>
 #include <QTimer>
 #include <QAction>
@@ -374,7 +373,6 @@ bool ExtenderButton::isCheckable() const
 
 void ExtenderButton::setShortcutKey(const QString & key)
 {
-    qDebug() << "Setting the key Alt +" << key << "for" << title();
     if (key.isEmpty()) {
         delete d->shortcut;
         d->shortcut = NULL;
@@ -385,8 +383,6 @@ void ExtenderButton::setShortcutKey(const QString & key)
         }
 
         d->shortcut->setShortcut("Alt+" + key);
-        // d->shortcut->setShortcutContext(Qt::ApplicationShortcut);
-        qDebug() << "set" << d->shortcut->shortcut();
         connect(d->shortcut, SIGNAL(triggered()),
                 this, SIGNAL(activated()));
     }
