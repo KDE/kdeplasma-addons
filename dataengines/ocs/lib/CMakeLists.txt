@@ -28,12 +28,10 @@ set(ocsclient_SRCS
  )
 
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
 
 kde4_add_library(ocsclient SHARED ${ocsclient_SRCS})
 set_target_properties(ocsclient PROPERTIES VERSION ${KDE_GENERIC_LIB_VERSION} SOVERSION ${KDE_GENERIC_LIB_SOVERSION})
 
 target_link_libraries(ocsclient ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KABC_LIBS})
 
-install(TARGETS ocsclient DESTINATION ${LIB_INSTALL_DIR})
+install(TARGETS ocsclient ${INSTALL_TARGETS_DEFAULT_ARGS})
