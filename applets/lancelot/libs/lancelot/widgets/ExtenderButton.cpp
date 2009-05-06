@@ -276,7 +276,7 @@ void ExtenderButton::setExtenderPosition(ExtenderPosition position)
     d->relayoutExtender();
 }
 
-ExtenderPosition ExtenderButton::extenderPosition()
+ExtenderPosition ExtenderButton::extenderPosition() const
 {
     return d->extenderPosition;
 }
@@ -290,7 +290,7 @@ void ExtenderButton::setActivationMethod(ActivationMethod method)
         setExtenderPosition(NoExtender);
 }
 
-ActivationMethod ExtenderButton::activationMethod()
+ActivationMethod ExtenderButton::activationMethod() const
 {
     return d->activationMethod;
 }
@@ -344,7 +344,7 @@ void ExtenderButton::setChecked(bool checked)
     emit toggled(d->checked);
 }
 
-bool ExtenderButton::isChecked()
+bool ExtenderButton::isChecked() const
 {
     return d->checked;
 }
@@ -367,7 +367,7 @@ void ExtenderButton::setCheckable(bool checkable)
     update();
 }
 
-bool ExtenderButton::isCheckable()
+bool ExtenderButton::isCheckable() const
 {
     return d->checkable;
 }

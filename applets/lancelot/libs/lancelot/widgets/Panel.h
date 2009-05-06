@@ -117,13 +117,13 @@ public:
     /**
      * @returns the layout item
      */
-    QGraphicsLayoutItem * layoutItem();
+    QGraphicsLayoutItem * layoutItem() const;
 
     /**
      * @param edge edge
      * @returns size of the specified edge
      */
-    qreal borderSize(Plasma::MarginEdge edge);
+    qreal borderSize(Plasma::MarginEdge edge) const;
 
     L_Override void setGeometry(const QRectF & geometry);
     L_Override void setGroup(WidgetGroup * group = NULL);

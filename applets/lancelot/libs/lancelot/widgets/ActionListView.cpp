@@ -379,7 +379,7 @@ void ActionListViewItemFactory::setModel(ActionListModel * model) //>
     }
 } //<
 
-ActionListModel * ActionListViewItemFactory::model() //>
+ActionListModel * ActionListViewItemFactory::model() const //>
 {
     return m_model;
 } //<

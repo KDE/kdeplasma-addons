@@ -274,7 +274,7 @@ void FullBorderLayout::setAutoSize(Border border)
     updateGeometry();
 }
 
-qreal FullBorderLayout::size(Border border)
+qreal FullBorderLayout::size(Border border) const
 {
     return d->sizes[border];
 }

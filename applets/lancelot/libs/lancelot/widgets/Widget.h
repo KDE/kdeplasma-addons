@@ -102,7 +102,7 @@ public:
     /**
      * @returns whether the button is down
      */
-    bool isDown();
+    bool isDown() const;
 
     L_Override void setGeometry(const QRectF & rect);
 

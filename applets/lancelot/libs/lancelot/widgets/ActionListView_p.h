@@ -77,7 +77,7 @@ public:
     L_Override int itemHeight(int index, Qt::SizeHint which) const;
 
     void setModel(ActionListModel * model);
-    ActionListModel * model();
+    ActionListModel * model() const;
 
     void setExtenderPosition(ExtenderPosition position);
     ExtenderPosition extenderPosition() const;
@@ -96,8 +96,10 @@ public:
 
     void setItemsGroup(WidgetGroup * group = NULL);
     WidgetGroup * itemsGroup() const;
+
     void setCategoriesGroup(WidgetGroup * group = NULL);
     WidgetGroup * categoriesGroup() const;
+
     void clearSelection();
     void updateExtenderPosition();
 

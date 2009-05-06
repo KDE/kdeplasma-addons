@@ -299,7 +299,7 @@ QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     return result;
 }
 
-bool Widget::isDown()
+bool Widget::isDown() const
 {
     return d->down;
 }

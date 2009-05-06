@@ -82,7 +82,7 @@ public:
     /**
      * @returns activation method
      */
-    Lancelot::ActivationMethod activationMethod();
+    Lancelot::ActivationMethod activationMethod() const;
 
     // L_Override void groupUpdated();
 

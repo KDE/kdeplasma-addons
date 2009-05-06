@@ -68,7 +68,7 @@ public:
      *                  size is needed
      * @returns scroll unit size
      */
-    virtual qreal scrollUnit(Qt::Orientation direction) = 0;
+    virtual qreal scrollUnit(Qt::Orientation direction) const = 0;
 
     /**
      * Sets the scroll pane that contains this Scrollable

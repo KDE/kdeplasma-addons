@@ -114,7 +114,7 @@ public:
      *
      * @param border border for which the size is requested
      */
-    qreal size(Border border);
+    qreal size(Border border) const;
 
     L_Override void setGeometry(const QRectF & rect);
     L_Override int count() const;

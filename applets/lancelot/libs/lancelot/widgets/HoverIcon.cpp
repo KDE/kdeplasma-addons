@@ -121,7 +121,7 @@ void HoverIcon::setActivationMethod(ActivationMethod method)
     d->activationMethod = method;
 }
 
-ActivationMethod HoverIcon::activationMethod()
+ActivationMethod HoverIcon::activationMethod() const
 {
     return d->activationMethod;
 }

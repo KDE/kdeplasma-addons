@@ -99,7 +99,7 @@ public:
     /**
      * @returns the extender position
      */
-    Lancelot::ExtenderPosition extenderPosition();
+    Lancelot::ExtenderPosition extenderPosition() const;
 
     /**
      * Sets the activation method of the ExtenderButton
@@ -110,7 +110,7 @@ public:
     /**
      * @returns activation method
      */
-    Lancelot::ActivationMethod activationMethod();
+    Lancelot::ActivationMethod activationMethod() const;
 
     /**
      * Makes the button checkable when set to true
@@ -121,12 +121,12 @@ public:
     /**
      * @returns whether the button is checkable
      */
-    bool isCheckable();
+    bool isCheckable() const;
 
     /**
      * @returns whether the button is checked
      */
-    bool isChecked();
+    bool isChecked() const;
 
     L_Override void geometryUpdated();
 

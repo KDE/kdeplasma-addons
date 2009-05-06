@@ -58,8 +58,8 @@ public:
     void setCategoriesGroupByName(const QString & group);
     WidgetGroup * categoriesGroup() const;
 
-    bool areCategoriesActivable() const;
     void setCategoriesActivable(bool value);
+    bool areCategoriesActivable() const;
 
     int selectedIndex() const;
 

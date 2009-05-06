@@ -130,7 +130,7 @@ Panel::~Panel()
     delete d;
 }
 
-qreal Panel::borderSize(Plasma::MarginEdge edge)
+qreal Panel::borderSize(Plasma::MarginEdge edge) const
 {
     if (!(group()) || !(group()->backgroundSvg())) {
         return 0;
@@ -187,7 +187,7 @@ void Panel::setLayoutItem(QGraphicsLayoutItem * layoutItem)
     d->invalidate();
 }
 
-QGraphicsLayoutItem * Panel::layoutItem()
+QGraphicsLayoutItem * Panel::layoutItem() const
 {
     return d->layoutItem;
 }

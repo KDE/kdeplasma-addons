@@ -277,7 +277,7 @@ void CustomList::viewportChanged(QRectF viewport) //>
     d->viewport = viewport;
 } //<
 
-qreal CustomList::scrollUnit(Qt::Orientation direction) //>
+qreal CustomList::scrollUnit(Qt::Orientation direction) const //>
 {
     Q_UNUSED(direction);
     return 20;
