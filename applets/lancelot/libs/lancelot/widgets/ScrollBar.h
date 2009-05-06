@@ -37,6 +37,8 @@ namespace Lancelot
 class LANCELOT_EXPORT ScrollBar: public Plasma::ScrollBar {
     Q_OBJECT
 
+    Q_PROPERTY ( ActivationMethod activationMethod READ activationMethod WRITE setActivationMethod )
+
     // L_WIDGET
     // L_INCLUDE(lancelot/widgets/ScrollBar.h lancelot/lancelot.h)
 
@@ -52,11 +54,30 @@ public:
      */
     ~ScrollBar();
 
-    void wheelEvent(QGraphicsSceneWheelEvent * event);
+    /**
+     * Sets the activation method of the ExtenderButton.
+     * If the activation method is ExtenderActivate, it will
+     * be treated as HoverActivate
+     * @param method new activation method
+     */
+    void setActivationMethod(Lancelot::ActivationMethod method);
+
+    /**
+     * @returns activation method
+     */
+    Lancelot::ActivationMethod activationMethod() const;
+
+protected:
+    L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
+    L_Override void wheelEvent(QGraphicsSceneWheelEvent * event);
+    L_Override void timerEvent(QTimerEvent * event);
 
 private:
     class Private;
     Private * const d;
+
+    friend class ScrollPane;
 };
 
 } // namespace Lancelot

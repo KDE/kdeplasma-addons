@@ -23,12 +23,23 @@
 #include "ExtenderButton.h"
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
+#include <QBasicTimer>
+
+#define SINGLE_SHOT_INTERVAL 50
+#define SINGLE_SHOT_MOVE 10
 
 namespace Lancelot
 {
 
 class ScrollBar::Private {
 public:
+    Private()
+        : direction(0), hoverScroll(true)
+    {}
+
+    QBasicTimer timer;
+    int direction;
+    bool hoverScroll: 1;
 };
 
 ScrollBar::ScrollBar(QGraphicsWidget * parent)
@@ -49,6 +60,71 @@ void ScrollBar::wheelEvent(QGraphicsSceneWheelEvent * event)
         Plasma::ScrollBar::wheelEvent(event);
     }
 }
+
+void ScrollBar::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+{
+    d->timer.stop();
+    Plasma::ScrollBar::hoverLeaveEvent(event);
+}
+
+void ScrollBar::hoverMoveEvent(QGraphicsSceneHoverEvent * event)
+{
+    Plasma::ScrollBar::hoverMoveEvent(event);
+    if (!d->hoverScroll) {
+        return;
+    }
+
+    QPointF pos = event->pos();
+
+    QScrollBar * sbar = qobject_cast
+        < QScrollBar * > (widget());
+
+    if (!sbar) {
+        return;
+    }
+
+    if (sbar->orientation() == Qt::Vertical) {
+        if (pos.y() < size().width()) {
+            d->direction = -1;
+        } else if (pos.y() > size().height() - size().width()) {
+            d->direction = +1;
+        } else {
+            d->direction = 0;
+        }
+    } else {
+        if (pos.x() < size().height()) {
+            d->direction = -1;
+        } else if (pos.x() > size().width() - size().height()) {
+            d->direction = +1;
+        } else {
+            d->direction = 0;
+        }
+    }
+
+    if ((!d->timer.isActive()) && (d->direction != 0)) {
+        d->timer.start(SINGLE_SHOT_INTERVAL, this);
+    }
+}
+
+void ScrollBar::timerEvent(QTimerEvent * event)
+{
+    setValue(value() + d->direction * SINGLE_SHOT_MOVE);
+}
+
+void ScrollBar::setActivationMethod(Lancelot::ActivationMethod method)
+{
+    d->hoverScroll = (method != Lancelot::ClickActivate);
+}
+
+Lancelot::ActivationMethod ScrollBar::activationMethod() const
+{
+    if (d->hoverScroll) {
+        return Lancelot::HoverActivate;
+    } else {
+        return Lancelot::ClickActivate;
+    }
+}
+
 
 } // namespace Lancelot
 
