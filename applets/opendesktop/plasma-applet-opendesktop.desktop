@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=openDesktop
+Name[sv]=Öppet skrivbord
 Comment=Communicate using the Social Desktop
+Comment[sv]=Kommunicera med användning av det sociala skrivbordet
+Comment[uk]=Спілкування за допомогою соціальної стільниці
+Comment[zh_TW]=使用 Social Desktop 聯繫
 
 Icon=system-users
 Type=Service
@@ -13,7 +17,9 @@ X-KDE-PluginInfo-Name=opendesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
+Keywords[sv]=Verktyg
 Keywords[uk]=Інструменти
+Keywords[zh_TW]=實用工具
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true

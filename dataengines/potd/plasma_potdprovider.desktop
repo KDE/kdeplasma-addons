@@ -8,6 +8,7 @@ Comment[pt_BR]='Plugin' do Motor da Imagem do Dia do Plasma
 Comment[sv]=Insticksprogram för Plasma gränssnitt till dagens bild
 Comment[tr]=Plasma PoTD Motoru için Eklenti
 Comment[uk]=Додаток для рушія Плазми PoTD
+Comment[zh_TW]=Plasma PoTD 引擎的外掛程式
 
 [PropertyDef::X-KDE-PlasmaPoTDProvider-SuffixType]
 Type=QString

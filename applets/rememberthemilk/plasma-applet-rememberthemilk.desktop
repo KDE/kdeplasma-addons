@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Remember The Milk
 Comment=Remember The Milk Todo list applet
+Comment[sv]=Miniprogram med lista över Remember The Milk-aktiviteter
+Comment[uk]=Аплет списку завдань Remember The Milk
+Comment[zh_TW]=Remember The Milk 待辦清單小程式
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 Icon=basket

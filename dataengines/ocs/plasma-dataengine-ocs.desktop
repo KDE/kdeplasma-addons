@@ -1,6 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Open Collaboration Services
+Name[sv]=Öppna sammarbetstjänster
+Name[uk]=Служби Open Collaboration
+Name[zh_TW]=開放協同服務
 
 ServiceTypes=Plasma/DataEngine
 Type=Service
