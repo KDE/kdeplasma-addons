@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Media Player
+Name[sv]=Mediaspelare
+Name[uk]=Медіапрогравач
+Name[zh_TW]=媒體播放器
 Comment=Widget that can play video and sound
+Comment[sv]=Grafisk komponent som kan spela video och ljud
+Comment[uk]=Віджет, призначений для відтворення відео і звуку
+Comment[zh_TW]=可播放影像與音效的元件
 
 
 Type=Service

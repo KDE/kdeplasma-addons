@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Remember The Milk
+Name[pt]=Recordar as Tarefas
 Comment=Remember The Milk Todo list applet
+Comment[pt]='Applet' de lista de tarefas e itens por-fazer
+Comment[pt_BR]=Miniaplicativo de lista de tarefas do Remember The Milk
 Comment[sv]=Miniprogram med lista över Remember The Milk-aktiviteter
 Comment[uk]=Аплет списку завдань Remember The Milk
 Comment[zh_TW]=Remember The Milk 待辦清單小程式
