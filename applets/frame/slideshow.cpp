@@ -53,9 +53,9 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
     m_picturePaths.clear();
     foreach(const QString &path, slideShowPath) {
         if (recursive) {
-            addRecursiveDir(path);
+            addRecursiveDir(KUrl(path).path());
         } else {
-            addDir(path);
+            addDir(KUrl(path).path());
         }
     }
 }
