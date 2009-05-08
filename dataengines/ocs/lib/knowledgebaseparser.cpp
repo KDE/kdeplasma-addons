@@ -92,6 +92,10 @@ KnowledgeBase KnowledgeBaseParser::parseKnowledgeBase( QXmlStreamReader &xml )
         knowledgeBase.setComments( xml.readElementText().toInt() );
       } else if ( xml.name() == "detailpage" ) {
         knowledgeBase.setDetailPage( KUrl(xml.readElementText()) );
+      } else if ( xml.name() == "contentid" ) {
+        knowledgeBase.setContentId( xml.readElementText().toInt() );
+      } else if ( xml.name() == "name" ) {
+        knowledgeBase.setName( xml.readElementText() );
       } else {
         knowledgeBase.addExtendedAttribute( xml.name().toString(),
           xml.readElementText() );
