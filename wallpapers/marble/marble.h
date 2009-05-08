@@ -63,16 +63,12 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private slots:
-    /// Redraw
-    void widgetChanged();
-    /// Called by the timer for rotation
-    void rotate();
-    /// Changes from the settings dialog
-    void updateSettings();
-    /// Change the map theme
-    void changeTheme(int index);
-    /// Updates configuration screen based on current 'movement'
-    void updateConfigScreen(int);
+    void widgetChanged();               //< Redraw
+    void rotate();                      //< Called by the timer for rotation
+    void updateSettings();              //< Changes from the settings dialog
+    void changeTheme(int index);        //< Change the map theme
+    void updateConfigScreen(int);       //< Updates configuration screen based on
+                                        //< current 'movement'
 
 private:
     Ui_MarbleSettingsWidget m_ui;
@@ -84,16 +80,14 @@ private:
     MapQuality m_quality;               // Painting quality
     Movement m_movement;                // Current movement/rotation scheme
 
-    qreal m_positionDist;               // Last saved distance
+    qreal m_zoom;                       // Last saved zoom / distance
     qreal m_positionLon;                // Last saved position lon
     qreal m_positionLat;                // Last saved position lat
-
     qreal m_rotationLon;                // Used for follow sun and custom rotate
     qreal m_rotationLat;                // Used for follow sun and custom rotate
     int m_rotationTimeout;              // Timer timeout interval for rot
     QTimer *m_rotationTimer;            // Rotation timer
 
-    bool m_navigationEnabled;           // Visibility flag for navig. widget
     bool m_showPlacemarks;              // Visibility flag for all placemarks
 
     int m_dragStartPositionX;           // position of last button press X

@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTimer>
 
 // Distance (pixel) before starting drag updates
-#define DRAGTHRESHOLD 3
+#define DRAG_THRESHOLD 3
 
 // Type of movement (follow sun, auto rotate, user)
 #define MOVEMENT_CONFIG_KEY "movement"
@@ -57,7 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Marble {
 
-MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args )
+MarbleWallpaper::MarbleWallpaper(QObject * parent, const QVariantList & args)
     : Plasma::Wallpaper(parent, args), m_map(0), m_rotationTimer(0)
 {
     KGlobal::locale()->insertCatalog("marble");
@@ -71,30 +71,15 @@ MarbleWallpaper::~MarbleWallpaper()
 
 void MarbleWallpaper::init(const KConfigGroup &config)
 {
-    // Read settings
-    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(Interactive)));
-    m_mapTheme = config.readEntry(MAP_THEME_CONFIG_KEY, QString::fromLatin1("earth/bluemarble/bluemarble.dgml"));
-    m_projection = static_cast<Projection>(config.readEntry(PROJECTION_CONFIG_KEY, static_cast<int>(Spherical)));
-    m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_CONFIG_KEY, static_cast<int>(Normal)));
-    m_rotationLat = config.readEntry(ROTATION_LAT_CONFIG_KEY, 0.0);
-    m_rotationLon = config.readEntry(ROTATION_LON_CONFIG_KEY, 0.025);
-    m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_CONFIG_KEY, 10000);
-    m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_CONFIG_KEY, false);
-
     // Only on first start, otherwise opening the config dialog lets us lose the current position
-    if(!isInitialized()) {
+    if (!isInitialized()) {
         m_map = new MarbleMap();
+        // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
+        m_map->setShowClouds(true);
+        m_map->sunLocator()->setCitylights(true);
+        m_map->sunLocator()->setShow(true);
 
-        // Get default position from marble to initialize on first startup (empty config)
-        qreal lon;
-        qreal lat;
-        int zoom;
-        m_map->home(lon, lat, zoom);
-        m_positionDist = config.readEntry(POSITION_DISTANCE_CONFIG_KEY, 4500);
-        m_positionLon = config.readEntry(POSITION_LON_CONFIG_KEY, lon);
-        m_positionLat = config.readEntry(POSITION_LAT_CONFIG_KEY, lat);
-
-        // Disable all render plugins except the "stars" plugin
+        // Disable all render plugins (scale bar, compass, etc.) except the "stars" plugin
         foreach (RenderPlugin *item, m_map->renderPlugins()) {
             if (item->nameId() == "stars") {
                 item->setVisible(true);
@@ -104,20 +89,25 @@ void MarbleWallpaper::init(const KConfigGroup &config)
                 item->setEnabled(false);
             }
         }
-
-        // Set up the map
-        m_map->setShowCompass(false);
-        m_map->setShowGrid(false);
-        m_map->setShowScaleBar(false);
-        m_map->setShowClouds(true);
-        m_map->sunLocator()->setCitylights(true);
-        m_map->sunLocator()->setShow(true);
-        m_map->centerOn(m_positionLon, m_positionLat);
-        m_map->setDistance(m_positionDist);
     }
 
-    m_map->setMapThemeId(m_mapTheme);
-    m_map->setShowGrid(false);
+    // Get default position from marble to initialize on first startup (empty config)
+    qreal lon, lat;
+    int zoom;
+    m_map->home(lon, lat, zoom);
+
+    // Read setting values or use defaults
+    m_mapTheme = config.readEntry(MAP_THEME_CONFIG_KEY, QString::fromLatin1("earth/bluemarble/bluemarble.dgml"));
+    m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(Interactive)));
+    m_zoom = config.readEntry(POSITION_DISTANCE_CONFIG_KEY, 4500);
+    m_positionLon = config.readEntry(POSITION_LON_CONFIG_KEY, lon);
+    m_positionLat = config.readEntry(POSITION_LAT_CONFIG_KEY, lat);
+    m_projection = static_cast<Projection>(config.readEntry(PROJECTION_CONFIG_KEY, static_cast<int>(Spherical)));
+    m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_CONFIG_KEY, static_cast<int>(Normal)));
+    m_rotationLat = config.readEntry(ROTATION_LAT_CONFIG_KEY, 0.0);
+    m_rotationLon = config.readEntry(ROTATION_LON_CONFIG_KEY, 0.025);
+    m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_CONFIG_KEY, 10000);
+    m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_CONFIG_KEY, false);
 
     widgetChanged();
     rotate();
@@ -138,7 +128,8 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
 
     MapThemeManager themeManager;
     themeManager.updateMapThemeModel();
-    // FIXME: Going manually through the model is ugly as hell, but plugging the model into the view didn't work for me
+    // FIXME: Going manually through the model is ugly as hell, but plugging the
+    //        model into the view didn't work for me
     for (int i = 0; i < themeManager.mapThemeModel()->rowCount(); i++) {
         QModelIndex index = themeManager.mapThemeModel()->index(i, 0, QModelIndex());
         QString theme = themeManager.mapThemeModel()->data(index, Qt::DisplayRole).toString();
@@ -163,7 +154,7 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
     connect(m_ui.themeList, SIGNAL(currentIndexChanged(int)), SLOT(changeTheme(int)));
     connect(m_ui.timeout, SIGNAL(valueChanged(int)), SLOT(updateSettings()));
 
-    // notify the plasma background dialog of changes
+    // Notify the plasma background dialog of changes
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
 
     return configWidget;
@@ -171,14 +162,9 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
 
 void MarbleWallpaper::save(KConfigGroup &config)
 {
-    if (!m_map) {
-        // When switching the background containment, this is called with m_map==0 for some reason
-        return;
-    }
-
     config.writeEntry(MAP_THEME_CONFIG_KEY, m_map->mapThemeId());
     config.writeEntry(MOVEMENT_CONFIG_KEY, static_cast<int>(m_movement));
-    config.writeEntry(POSITION_DISTANCE_CONFIG_KEY, m_positionDist);
+    config.writeEntry(POSITION_DISTANCE_CONFIG_KEY, m_zoom);
     config.writeEntry(POSITION_LAT_CONFIG_KEY, m_map->centerLatitude());
     config.writeEntry(POSITION_LON_CONFIG_KEY, m_map->centerLongitude());
     config.writeEntry(PROJECTION_CONFIG_KEY, static_cast<int>(m_projection));
@@ -203,16 +189,20 @@ void MarbleWallpaper::paint(QPainter *painter, const QRectF &exposedRect)
     GeoPainter gp(&m_pixmap, m_map->viewParams()->viewport(), m_quality, true);
     QRect mapRect(0, 0, m_map->width(), m_map->height());
     m_map->paint(gp, mapRect);
+
     // Draw the requested part of the pixmap
-    painter->drawPixmap(exposedRect, m_pixmap, exposedRect);
+    painter->drawPixmap(exposedRect, m_pixmap, exposedRect.translated(-boundingRect().topLeft()));
 }
 
 void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
         event->accept();
-        m_map->zoomViewBy((int)(event->delta() / 3));
-        m_positionDist = m_map->distance();
+        if (event->delta() > 0)
+            m_map->zoomIn();
+        else
+            m_map->zoomOut();
+        m_zoom = m_map->zoom();
         emit update(boundingRect());
     }
 }
@@ -228,7 +218,7 @@ void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         int deltaY = event->screenPos().y() - m_dragStartPositionY;
 
         // Only start dragging after a certain distance
-        if (abs(deltaX) <= DRAGTHRESHOLD && abs(deltaY) <= DRAGTHRESHOLD) {
+        if (abs(deltaX) <= DRAG_THRESHOLD && abs(deltaY) <= DRAG_THRESHOLD) {
             return;
         }
 
@@ -274,6 +264,9 @@ void MarbleWallpaper::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void MarbleWallpaper::widgetChanged()
 {
+    m_map->centerOn(m_positionLon, m_positionLat);
+    m_map->zoomView(m_zoom);
+    m_map->setMapThemeId(m_mapTheme);
     m_map->setProjection(m_projection);
     m_map->setShowCities(m_showPlacemarks);
     m_map->setShowOtherPlaces(m_showPlacemarks);
@@ -304,7 +297,7 @@ void MarbleWallpaper::rotate()
         m_positionLon = m_map->sunLocator()->getLon();
         m_positionLat = m_map->sunLocator()->getLat();
         m_map->centerOn(m_positionLon, m_positionLat);
-        m_map->setDistance(m_positionDist);
+        m_map->zoomView(m_zoom);
     } else if (m_movement == Rotate) {
         m_map->rotateBy(m_rotationLon * m_rotationTimeout / 1000,
                         m_rotationLat * m_rotationTimeout / 1000);
