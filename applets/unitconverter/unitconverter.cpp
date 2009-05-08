@@ -39,6 +39,7 @@ UnitConverter::UnitConverter(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args)
 , m_widget(0)
 {
+    KGlobal::locale()->insertCatalog("libconversion");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("accessories-calculator");
     resize(400, 300);
