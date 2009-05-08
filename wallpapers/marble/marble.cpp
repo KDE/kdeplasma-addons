@@ -109,6 +109,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
         m_map->setShowCompass(false);
         m_map->setShowGrid(false);
         m_map->setShowScaleBar(false);
+        m_map->setShowClouds(true);
         m_map->sunLocator()->setCitylights(true);
         m_map->sunLocator()->setShow(true);
         m_map->centerOn(m_positionLon, m_positionLat);
