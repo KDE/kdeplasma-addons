@@ -59,6 +59,7 @@ public:
 
     void init()
     {
+        showingTitle = hasTitle;
         titleWidget.setIconSize(QSize(16, 16));
         titleWidget.setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         titleWidget.setEnabled(false);
@@ -75,7 +76,7 @@ public:
             rect.setHeight(rect.height() - q->group()->backgroundSvg()->marginSize(Plasma::BottomMargin));
         }
 
-        if (!hasTitle) {
+        if (!showingTitle || !hasTitle) {
             titleWidget.hide();
             if (layoutItem) {
                 layoutItem->setGeometry(rect);
@@ -98,6 +99,7 @@ public:
 
     QGraphicsLayoutItem * layoutItem;
     bool hasTitle;
+    bool showingTitle;
 
     BasicWidget titleWidget;
     Panel * q;
@@ -166,6 +168,17 @@ void Panel::setIconSize(QSize size)
 QSize Panel::iconSize() const
 {
     return d->titleWidget.iconSize();
+}
+
+void Panel::setShowingTitle(bool value)
+{
+    d->showingTitle = value;
+    d->titleWidget.setVisible(value);
+}
+
+bool Panel::isShowingTitle() const
+{
+    return d->showingTitle;
 }
 
 void Panel::setGeometry(const QRectF & geometry)

@@ -35,6 +35,9 @@ class Lancelot__PanelHandler(Lancelot__Widget.Lancelot__WidgetHandler):
             setup += self.attribute('name') \
                   + '->setTitle(i18n("' + self.attribute('title') + '"));'
 
+        if self.hasAttribute('showingTitle'):
+            setup += self.attribute('name') \
+                  + '->setShowingTitle(' + self.attribute('showingTitle') + ');'
         ## Changed area begin: ##
         for child in self.node().childNodes:
             if not child.nodeType == xml.dom.Node.ELEMENT_NODE or not child.prefix == "item":

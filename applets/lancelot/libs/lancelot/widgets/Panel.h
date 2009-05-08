@@ -42,6 +42,7 @@ class LANCELOT_EXPORT Panel: public Lancelot::Widget
     Q_PROPERTY ( QIcon icon READ icon WRITE setIcon )
     Q_PROPERTY ( QSize iconSize READ iconSize WRITE setIconSize )
     Q_PROPERTY ( QString title READ title WRITE setTitle ) L_EXTRA ( i18n )
+    Q_PROPERTY ( bool showingTitle READ isShowingTitle WRITE setShowingTitle )
 
     L_WIDGET
     L_INCLUDE(lancelot/widgets/Panel.h QIcon QSize QString)
@@ -106,6 +107,16 @@ public:
      * @returns icon size of this Lancelot::Panel
      */
     QSize iconSize() const;
+
+    /**
+     * Sets whether the title is shown
+     */
+    void setShowingTitle(bool value);
+
+    /**
+     * @returns whether the title is shown
+     */
+    bool isShowingTitle() const;
 
     /**
      * Sets the layout item for the components in case the panel

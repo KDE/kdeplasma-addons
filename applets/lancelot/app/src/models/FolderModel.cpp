@@ -51,7 +51,7 @@ void FolderModel::load()
 
 void FolderModel::clear()
 {
-    clear();
+    BaseModel::clear();
 }
 
 void FolderModel::deleteItem(const KFileItem & fileItem)

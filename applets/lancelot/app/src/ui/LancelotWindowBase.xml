@@ -153,6 +153,7 @@
                     icon="computer-laptop"
                     iconSize="22, 22"
                     group="InnerPanel"
+                    showingTitle="false"
 
                     Lancelot__CardLayout:cardName="computer"
                 >
@@ -184,6 +185,7 @@
                     icon="kontact"
                     iconSize="22, 22"
                     group="InnerPanel"
+                    showingTitle="false"
 
                     Lancelot__CardLayout:cardName="contacts"
                 >
@@ -215,6 +217,7 @@
                     icon="applications-office"
                     iconSize="22, 22"
                     group="InnerPanel"
+                    showingTitle="false"
 
                     Lancelot__CardLayout:cardName="documents"
                 >
@@ -246,6 +249,7 @@
                     icon="edit-find"
                     iconSize="22, 22"
                     group="InnerPanel"
+                    showingTitle="false"
 
                     Lancelot__CardLayout:cardName="search"
                 >
