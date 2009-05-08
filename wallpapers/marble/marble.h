@@ -63,32 +63,27 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private slots:
-    void widgetChanged();               //< Redraw
-    void rotate();                      //< Called by the timer for rotation
+    void updateGlobe();                 //< Called by the timer
     void updateSettings();              //< Changes from the settings dialog
     void changeTheme(int index);        //< Change the map theme
-    void updateConfigScreen(int);       //< Updates configuration screen based on
-                                        //< current 'movement'
+    void updateConfigScreen(int);       //< Updates config screen
 
 private:
     Ui_MarbleSettingsWidget m_ui;
 
+    QTimer *m_timer;                    // Update timer
     MarbleMap *m_map;                   // Marble parameters for GeoPainter
-    QString m_mapTheme;                 // Theme of the map
-
     Projection m_projection;            // Type of projection
     MapQuality m_quality;               // Painting quality
     Movement m_movement;                // Current movement/rotation scheme
+    QString m_mapTheme;                 // Theme of the map
+    bool m_showPlacemarks;              // Visibility flag for all placemarks
 
     qreal m_zoom;                       // Last saved zoom / distance
     qreal m_positionLon;                // Last saved position lon
     qreal m_positionLat;                // Last saved position lat
-    qreal m_rotationLon;                // Used for follow sun and custom rotate
-    qreal m_rotationLat;                // Used for follow sun and custom rotate
-    int m_rotationTimeout;              // Timer timeout interval for rot
-    QTimer *m_rotationTimer;            // Rotation timer
-
-    bool m_showPlacemarks;              // Visibility flag for all placemarks
+    qreal m_rotationLon;                // Used for 'follow sun'
+    qreal m_rotationLat;                // Used for 'follow sun'
 
     int m_dragStartPositionX;           // position of last button press X
     int m_dragStartPositionY;           // position of last button press Y
