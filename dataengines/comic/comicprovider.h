@@ -71,7 +71,7 @@ class PLASMA_COMIC_EXPORT ComicProvider : public QObject
         virtual IdentifierType identifierType() const = 0;
 
         /**
-         * Returns the type of identifier that is used by this
+         * Returns the type of suffix that is used by this
          * comic provider.
          */
         virtual QString suffixType() const;
