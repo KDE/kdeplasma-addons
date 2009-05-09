@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTimer>
 
 #define DRAG_THRESHOLD 3                        // Distance (pixel) before starting drag updates
-#define DEFAULT_UPDATE_INTERVAL 600000          // Wait time between redraws in msecs (10 min)
+#define DEFAULT_UPDATE_INTERVAL 300000          // Wait time between redraws in msecs (5 min)
 
 #define MOVEMENT_KEY "movement"                 // Type of movement
 #define ROTATION_LON_KEY "rotateLongitude"      // Amount of rotation (degrees/second)
