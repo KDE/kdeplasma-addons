@@ -96,7 +96,6 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_mapTheme = config.readEntry(MAP_THEME_KEY, QString::fromLatin1("earth/bluemarble/bluemarble.dgml"));
     m_movement = static_cast<Movement>(config.readEntry(MOVEMENT_KEY, static_cast<int>(Interactive)));
     m_positionLon = config.readEntry(POSITION_LON_KEY, home_lon);
-    m_zoom = config.readEntry(ZOOM_KEY, home_zoom);
     m_positionLat = config.readEntry(POSITION_LAT_KEY, home_lat);
     m_projection = static_cast<Projection>(config.readEntry(PROJECTION_KEY, static_cast<int>(Spherical)));
     m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_KEY, static_cast<int>(Normal)));
@@ -104,6 +103,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_rotationLon = config.readEntry(ROTATION_LON_KEY, 0.025);
     m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_KEY, 10000);
     m_showPlacemarks = config.readEntry(SHOW_PLACEMARKS_KEY, false);
+    m_zoom = config.readEntry(ZOOM_KEY, home_zoom);
 
     m_map->setMapThemeId(m_mapTheme);
     m_map->setProjection(m_projection);
@@ -204,11 +204,9 @@ void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
         event->accept();
-        if (event->delta() > 0)
-            m_map->zoomIn();
-        else
-            m_map->zoomOut();
+        m_map->zoomViewBy(event->delta() > 0 ? 10 : -10);
         m_zoom = m_map->zoom();
+
         emit update(boundingRect());
     }
 }
@@ -246,6 +244,7 @@ void MarbleWallpaper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         m_positionLat = RAD2DEG * (qreal)(m_leftPressedTranslationY)
                         + 90.0 * deltaY / radius;
         m_map->centerOn(m_positionLon, m_positionLat);
+
         emit update(boundingRect());
     }
 }
@@ -318,8 +317,8 @@ void MarbleWallpaper::changeTheme(int index)
 {
     m_mapTheme = m_ui.themeList->itemData(index).toString();
     m_map->setMapThemeId(m_mapTheme);
-    emit update(boundingRect());
 
+    emit update(boundingRect());
     emit settingsChanged(true);
 }
 
