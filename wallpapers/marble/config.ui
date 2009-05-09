@@ -254,6 +254,47 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelTimeout">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Update every:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>timeout</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KIntNumInput" name="timeout">
+       <property name="value">
+        <number>10</number>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>3600</number>
+       </property>
+       <property name="suffix">
+        <string> seconds</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="13" column="1">
@@ -304,6 +345,11 @@
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>themeList</tabstop>
@@ -311,6 +357,7 @@
   <tabstop>quality</tabstop>
   <tabstop>rotationLon</tabstop>
   <tabstop>rotationLat</tabstop>
+  <tabstop>timeout</tabstop>
  </tabstops>
  <resources/>
  <connections/>

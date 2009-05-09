@@ -84,6 +84,7 @@ private:
     qreal m_positionLat;                // Last saved position lat
     qreal m_rotationLon;                // Used for 'follow sun'
     qreal m_rotationLat;                // Used for 'follow sun'
+    int m_rotationTimeout;              // Used for 'follow sun' and 'rotate'
 
     int m_dragStartPositionX;           // position of last button press X
     int m_dragStartPositionY;           // position of last button press Y
