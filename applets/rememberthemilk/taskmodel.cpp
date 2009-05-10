@@ -149,7 +149,7 @@ bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int r
   QModelIndex parentItem = parent;
 
   while (parentItem.data(Qt::RTMItemType).toInt() != dropHeaderType && parentItem.row() >= 0)
-    parentItem = index(parentItem.row()-1, 0, rootitem->index());
+    parentItem = index(parentItem.row()-1, 0, rootitem->index()); // This is buggy. going up rows doesn't always give the right headers...
   
   kDebug() << parentItem.data(Qt::RTMItemType).toInt();
   
@@ -175,13 +175,14 @@ bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int r
         if (service) {
           if (dropType == SortDue) {
             QDate headerDate = QDateTime::fromTime_t(parentItem.data(Qt::RTMTimeTRole).toUInt()).date();
+            kDebug() << headerDate;
             if (headerDate < QDate::currentDate())
               headerDate = QDate::currentDate().addDays(-1); // set to due yesterday
             else if (headerDate == QDate::currentDate().addDays(2)) // set to due never
               headerDate = QDate();
             kDebug() << "Setting Item to be due: " << headerDate.toString(Qt::SystemLocaleShortDate);
-            KConfigGroup cg = service->operationDescription("setDueTime");
-            cg.writeEntry("dueTime", headerDate.toString(Qt::SystemLocaleShortDate));
+            KConfigGroup cg = service->operationDescription("setDueText");
+            cg.writeEntry("dueText", headerDate.toString(Qt::SystemLocaleShortDate));
             emit jobStarted(service->startOperationCall(cg));
           }
           else if (dropType == SortPriority) {
