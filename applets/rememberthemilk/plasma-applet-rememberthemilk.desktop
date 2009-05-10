@@ -6,6 +6,7 @@ Comment[pt]='Applet' de lista de tarefas e itens por-fazer
 Comment[pt_BR]=Miniaplicativo de lista de tarefas do Remember The Milk
 Comment[sv]=Miniprogram med lista över Remember The Milk-aktiviteter
 Comment[uk]=Аплет списку завдань Remember The Milk
+Comment[zh_CN]=Remember The Milk 待办清单小程序
 Comment[zh_TW]=Remember The Milk 待辦清單小程式
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet

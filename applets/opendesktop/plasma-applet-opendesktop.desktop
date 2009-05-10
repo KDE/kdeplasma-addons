@@ -6,6 +6,7 @@ Comment[pt]=Comunicar com o Ambiente de Trabalho Social
 Comment[pt_BR]=Comunicar com o Ambiente de Trabalho Social
 Comment[sv]=Kommunicera med användning av det sociala skrivbordet
 Comment[uk]=Спілкування за допомогою соціальної стільниці
+Comment[zh_CN]=使用社会桌面沟通
 Comment[zh_TW]=使用 Social Desktop 聯繫
 
 Icon=system-users
@@ -24,6 +25,7 @@ Keywords[pt]=Utilitários
 Keywords[pt_BR]=Utilitários
 Keywords[sv]=Verktyg
 Keywords[uk]=Інструменти
+Keywords[zh_CN]=工具
 Keywords[zh_TW]=實用工具
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Magnifique
 Name[sv]=Magnifik
+Name[zh_CN]=魅影
 Comment = a magnification glass for Plasma canvas
 Type=Service
 Icon=zoom-in

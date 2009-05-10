@@ -12,6 +12,7 @@ Name[sv]=Väder
 Name[tr]=Hava Durumu
 Name[uk]=Погода
 Name[x-test]=xxWeatherxx
+Name[zh_CN]=天气
 Name[zh_TW]=天氣
 Icon=weather-clear
 ServiceTypes=Plasma/Wallpaper

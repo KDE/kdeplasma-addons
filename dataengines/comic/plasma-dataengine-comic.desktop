@@ -48,6 +48,7 @@ Comment[pt_BR]=Tirinhas online
 Comment[sv]=Tecknade serier på nätet
 Comment[tr]=Çevrimiçi çizgi romanlar
 Comment[uk]=Мережеві стрічки коміксів
+Comment[zh_CN]=在线连环画
 Comment[zh_TW]=線上漫畫
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
