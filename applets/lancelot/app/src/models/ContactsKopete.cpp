@@ -23,7 +23,7 @@
 
 #include "logger/Logger.h"
 
-#define UPDATE_INTERVAL 15000
+// #define UPDATE_INTERVAL 15000
 #define CHECK_RUNNING_INTERVAL 5000
 
 namespace Models {
@@ -74,20 +74,23 @@ void ContactsKopete::load()
     clear();
 
     if (!m_interface->isValid()) {
-            m_kopeteRunning = false;
-            m_timer.start(CHECK_RUNNING_INTERVAL, this);
+        m_kopeteRunning = false;
+        m_timer.start(CHECK_RUNNING_INTERVAL, this);
 
-            if (addService("kopete")) {
-                Item * item = const_cast < Item * > (& itemAt(0));
-                item->title = i18n("Messaging client");
-                item->description = i18n("Messaging client is not running");
-            } else {
-                add(i18n("Unable to find Kopete"), "",
-                        KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
-            }
+        if (addService("kopete")) {
+            Item * item = const_cast < Item * > (& itemAt(0));
+            item->title = i18n("Messaging client");
+            item->description = i18n("Messaging client is not running");
+        } else {
+            add(i18n("Unable to find Kopete"), "",
+                    KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
+        }
     } else {
+        connect(m_interface, SIGNAL(contactChanged(const QString &)),
+                this, SLOT(contactChanged(const QString &)));
+
         m_kopeteRunning = true;
-        m_timer.start(UPDATE_INTERVAL, this);
+        // m_timer.start(UPDATE_INTERVAL, this);
 
         QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
         if (!contacts.isValid()) {
@@ -96,38 +99,79 @@ void ContactsKopete::load()
         }
 
         foreach (const QString& contact, contacts.value()) {
-            // Retrieving contact name
-            QDBusReply < QString > contactName = m_interface->getDisplayName(contact);
-            if (!contactName.isValid()) {
-                continue;
-            }
+             updateContactData(contact);
+        }
 
-            QDBusReply < QVariantMap > contactProperties = m_interface->contactProperties(contact);
-            if (!contactProperties.isValid() || contactProperties.value().size() == 0) {
-                continue;
-            }
+        if (0) { //size() == 0) {
+            add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
+        }
+    }
+    setEmitInhibited(false);
+    emit updated();
+}
 
-            QString avatarPath = contactProperties.value().value("picture").toString();
-            avatarPath = QUrl(avatarPath).toLocalFile();
+void ContactsKopete::updateContactData(const QString & contact)
+{
+    // Retrieving contact name
+    QDBusReply < QString > contactName = m_interface->getDisplayName(contact);
+    if (!contactName.isValid()) {
+        return;
+    }
 
-            QString status = contactProperties.value().value("status_message").toString();
-            if (status.isEmpty()) {
-                status = contactProperties.value().value("status").toString();
-            }
+    QDBusReply < QVariantMap > contactProperties = m_interface->contactProperties(contact);
+    if (!contactProperties.isValid() || contactProperties.value().size() == 0) {
+        return;
+    }
 
+    QDBusReply < bool > contactOnline = m_interface->isContactOnline(contact);
+    if (!contactOnline.isValid()) {
+        return;
+    }
+
+    QString avatarPath = contactProperties.value().value("picture").toString();
+    avatarPath = QUrl(avatarPath).toLocalFile();
+
+    QString status = contactProperties.value().value("status_message").toString();
+    if (status.isEmpty()) {
+        status = contactProperties.value().value("status").toString();
+    }
+
+    int index;
+    for (index = 0; index < size(); index++) {
+        if (itemAt(index).data == contact) {
+            break;
+        }
+    }
+
+    if (index >= size()) {
+        // we don't have this contact in the list
+        if (contactOnline.value()) {
             add(
                 contactProperties.value().value("display_name").toString(),
                 status,
                 KIcon(avatarPath),
                 contact);
         }
-
-        if (size() == 0) {
-            add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
+    } else {
+        // we already have this contact
+        if (contactOnline.value()) {
+            // we are updating the contact
+            set(index,
+                contactProperties.value().value("display_name").toString(),
+                status,
+                KIcon(avatarPath),
+                contact);
+        } else {
+            // we are removing the contact from the list
+            removeAt(index);
         }
     }
-    setEmitInhibited(false);
-    emit updated();
+}
+
+void ContactsKopete::contactChanged(const QString & contactId)
+{
+    qDebug() << "ContactsKopete::contactChanged:" << contactId;
+    updateContactData(contactId);
 }
 
 } // namespace Models

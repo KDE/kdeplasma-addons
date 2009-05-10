@@ -36,6 +36,10 @@ public:
 protected:
     void activate(int index);
     void load();
+    void updateContactData(const QString & contactId);
+
+protected Q_SLOTS:
+    void contactChanged(const QString & contactId);
 
 private:
     org::kde::Kopete * m_interface;
