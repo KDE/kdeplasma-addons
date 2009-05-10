@@ -45,7 +45,8 @@ private:
     org::kde::Kopete * m_interface;
     QBasicTimer m_timer;
     QString m_kopeteAvatarsDir;
-    bool m_kopeteRunning;
+    bool m_kopeteRunning : 1;
+    bool m_noOnlineContacts : 1;
 };
 
 } // namespace Models

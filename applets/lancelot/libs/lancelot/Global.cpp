@@ -354,7 +354,7 @@ Instance::Instance()
     Instance::Private::activeInstance = this;
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
-            this, SLOT(themeChanged()));
+            d, SLOT(themeChanged()));
 }
 
 Instance::~Instance()

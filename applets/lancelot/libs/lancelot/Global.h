@@ -204,6 +204,7 @@ private:
  * unnecessary setGeometry calls.
  */
 class LANCELOT_EXPORT Instance : public QObject {
+    Q_OBJECT
 public:
     /**
      * Creates a new Lancelot::Instance

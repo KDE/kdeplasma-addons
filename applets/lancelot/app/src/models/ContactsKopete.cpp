@@ -58,7 +58,7 @@ ContactsKopete::~ContactsKopete()
 
 void ContactsKopete::activate(int index)
 {
-    if (m_kopeteRunning) {
+    if (m_kopeteRunning && !m_noOnlineContacts) {
         QString data = title(index);
         Logger::instance()->log("kopete-model", data);
         m_interface->openChat(data);
@@ -90,6 +90,7 @@ void ContactsKopete::load()
                 this, SLOT(contactChanged(const QString &)));
 
         m_kopeteRunning = true;
+        m_noOnlineContacts = false;
         // m_timer.start(UPDATE_INTERVAL, this);
 
         QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
@@ -102,8 +103,9 @@ void ContactsKopete::load()
              updateContactData(contact);
         }
 
-        if (0) { //size() == 0) {
+        if (size() == 0) {
             add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
+            m_noOnlineContacts = true;
         }
     }
     setEmitInhibited(false);
@@ -164,6 +166,11 @@ void ContactsKopete::updateContactData(const QString & contact)
         } else {
             // we are removing the contact from the list
             removeAt(index);
+
+            if (size() == 0) {
+                add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
+                m_noOnlineContacts = true;
+            }
         }
     }
 }

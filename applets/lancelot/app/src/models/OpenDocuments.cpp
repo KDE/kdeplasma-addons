@@ -20,6 +20,7 @@
 
 #include "OpenDocuments.h"
 #include <KIcon>
+#include <QDebug>
 
 namespace Models {
 
@@ -37,15 +38,13 @@ OpenDocuments::OpenDocuments()
 
     m_supportedTasks
         // KDE applications
-        << SupportedTask("kate", "([^-]+) - ([^-]*)")
-        << SupportedTask("kwrite", "([^-]+) - ([^-]*)")
-        << SupportedTask("krita.*", "([^-]+) - ([^-]*)")
+        << SupportedTask("(kate|kwrite|kword|krita|karbon|kchart|kexi|kformula|kpresenter|kspread).*", ".*([^/]+) . ([^ ]*)")
 
         // OpenOffice.org
         << SupportedTask("VCLSalFrame.*", "([^-]+) - ([^-]*)")
 
         // Other
-        << SupportedTask("gimp.*", "([^-]+) - ([^-]*)")
+        << SupportedTask("gimp.*", "([^-]+) . ([^-]*)")
         << SupportedTask("inkscape.*", "([^-]+) - ([^-]*)")
         << SupportedTask("gvim.*", "([^-]+) [(][^)]*[)] - ([^-]*)")
         ;
@@ -61,7 +60,7 @@ void OpenDocuments::connectTask(TaskPtr task)
 {
     Q_ASSERT(task);
     connect(
-        task.constData(), SIGNAL(changed(TaskChanges)),
+        task.constData(), SIGNAL(changed(::TaskManager::TaskChanges)),
         this, SLOT(taskChanged())
     );
 }
@@ -117,6 +116,7 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
     QString className = task->className();
 
     foreach (const SupportedTask &st, m_supportedTasks) {
+        // qDebug() << "OpenDocuments::setDataForTask" << task->className() << task->visibleName();
         if (st.m_classPattern.exactMatch(task->className())) {
             extractor = st.m_documentNameExtractor;
             break;
