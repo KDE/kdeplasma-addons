@@ -21,7 +21,7 @@
 #include <cmath>
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
-#include <KDebug>
+//#include <KDebug>
 
 #define MOUSE_MMB_SPEED ((qreal)10.)
 #define MOUSE_WHEEL_SPEED ((qreal)0.002)
@@ -60,7 +60,7 @@ void Mandelbrot::updateCache()
     if(k != m_cacheKey)
     {
         // remove old image from cache
-        kDebug() << "remove " << m_cacheKey;
+        //kDebug() << "remove " << m_cacheKey;
         insertIntoCache(m_cacheKey, QImage());
 
         // if the image is ready to be cached, cache it
@@ -69,14 +69,14 @@ void Mandelbrot::updateCache()
             // (if we say, as we currently do, that the image size isn't written in the key) or from leaving stale cached images
             // (if we made the image size part of the key).
             if(width()*height()>100000) {
-                kDebug() << "caching " << k << " replacing " << m_cacheKey;
+                //kDebug() << "caching " << k << " replacing " << m_cacheKey;
                 insertIntoCache(k, *m_image);
                 m_cacheKey = k;
             }
-            else kDebug() << "small image, don't cache";
+            //else kDebug() << "small image, don't cache";
         }
     }
-    else kDebug() << k << " is already cached";
+    //else kDebug() << k << " is already cached";
 }
 
 void Mandelbrot::paint(QPainter *painter, const QRectF& exposedRect)
@@ -235,20 +235,20 @@ void Mandelbrot::loadFromCacheOrStartRendering()
     if(findInCache(k, *m_image))
     {
         if(m_image->size() == boundingRect().size()) {
-            kDebug() << "image " << k << " found in cache and has the wanted size";
+            //kDebug() << "image " << k << " found in cache and has the wanted size";
             m_image->convertToFormat(MANDELBROT_QIMAGE_FORMAT);
             m_cacheKey = k;
             m_imageIsReady = true;
             update(m_image->rect());
         }
         else {
-            kDebug() << "image " << k << " found in cache but hasn't the wanted size. Removing it.";
+            //kDebug() << "image " << k << " found in cache but hasn't the wanted size. Removing it.";
             insertIntoCache(k, QImage());
         }
     }
     else
     {
-        kDebug() << "image " << k << " not found in cache";
+        //kDebug() << "image " << k << " not found in cache";
         startRendering();
     }
 }
