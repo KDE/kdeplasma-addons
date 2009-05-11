@@ -62,7 +62,7 @@ void WeatherStation::init()
     setBackground();
 
     setLCDIcon();
-    
+
     WeatherPopupApplet::init();
 }
 
@@ -91,7 +91,7 @@ void WeatherStation::createConfigurationInterface(KConfigDialog *parent)
     WeatherConfig* wc = weatherConfig();
     wc->setConfigurableUnits(WeatherConfig::Temperature | WeatherConfig::Speed |
                              WeatherConfig::Pressure);
-    
+
     QWidget *w = new QWidget();
     m_appearanceConfig.setupUi(w);
     m_appearanceConfig.backgroundCheckBox->setChecked(m_useBackground);
@@ -119,21 +119,29 @@ void WeatherStation::setLCDIcon()
     setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
+Conversion::Value WeatherStation::value(const QString& value, const QString& unit)
+{
+    if (value.isEmpty() || value == "N/A") {
+        return Conversion::Value();
+    }
+    return Conversion::Value(value, unit);
+}
+
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    kDebug() << data;
+    //kDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (data.contains("Credit Url")) {
-        Conversion::Value temp = Conversion::Value(data["Temperature"],
+        Conversion::Value temp = value(data["Temperature"].toString(),
                 WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
         setTemperature(temp);
         setPressure(conditionIcon(),
-                    Conversion::Value(data["Pressure"],
+                    value(data["Pressure"].toString(),
                         WeatherUtils::getUnitString(data["Pressure Unit"].toInt())),
                     data["Pressure Tendency"].toString());
         setHumidity(data["Humidity"].toString());
-        setWind(Conversion::Value(data["Wind Speed"],
+        setWind(value(data["Wind Speed"].toString(),
                 WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
                 data["Wind Direction"].toString());
         m_lcd->setLabel("label0", data["Credit"].toString());
@@ -150,6 +158,9 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
 
 QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
 {
+    if (!value.isValid()) {
+        return "-";
+    }
     double v = value.number();
     int mainDigits = (int)floor(log(fabs(v))) + 1;
     int precision = 0;
@@ -261,11 +272,10 @@ void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
     QString s = fitValue(Conversion::Converter::self()->convert(speed, speedUnit()), 3);
 
     if (dir == "N/A") {
-        m_lcd->setGroup("wind", m_lcd->groupItems("wind"));
+        m_lcd->setGroup("wind", QStringList());
     } else {
         m_lcd->setGroup("wind", QStringList() << dir);
     }
-
     m_lcd->setNumber("wind_speed", s);
     m_lcd->setGroup("wind_unit", QStringList() << speedUnit());
 }

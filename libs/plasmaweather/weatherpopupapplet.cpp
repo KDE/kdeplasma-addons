@@ -135,12 +135,15 @@ public:
     QString conditionFromPressure()
     {
         QString result;
+        if (!pressure.isValid()) {
+            return "weather-none-available";
+        }
         qreal temp = Converter::self()->convert(temperature, "C").number();
         qreal p = Converter::self()->convert(pressure, "kPa").number();
         qreal t = tendency(pressure, tend);
 
         // This is completely unscientific so if anyone have a better formula for this :-)
-        p += t * 10; 
+        p += t * 10;
 
         Plasma::DataEngine::Data data = timeEngine->query(
                 QString("Local|Solar|Latitude=%1|Longitude=%2").arg(latitude).arg(longitude));
@@ -289,8 +292,12 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     }
 
     d->conditionIcon = data["Condition Icon"].toString();
-    d->pressure = Value(data["Pressure"],
-                        WeatherUtils::getUnitString(data["Pressure Unit"].toInt()));
+    if (data["Pressure"].toString() != "N/A") {
+        d->pressure = Value(data["Pressure"],
+                            WeatherUtils::getUnitString(data["Pressure Unit"].toInt()));
+    } else {
+        d->pressure = Value();
+    }
     d->tend = data["Pressure Tendency"].toString();
     d->temperature = Value(data["Temperature"],
                            WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));

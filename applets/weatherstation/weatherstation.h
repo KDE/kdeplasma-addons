@@ -43,7 +43,7 @@ class WeatherStation : public WeatherPopupApplet
         virtual void configAccepted();
         virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void clicked(const QString &name);
-    
+
     protected:
         void setLCDIcon();
         void setBackground();
@@ -56,6 +56,7 @@ class WeatherStation : public WeatherPopupApplet
 
         QString fitValue(const Conversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
+        Conversion::Value value(const QString& value, const QString& unit);
 
     private:
         LCD *m_lcd;
