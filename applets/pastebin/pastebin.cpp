@@ -27,7 +27,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneDragDropEvent>
 #include <QMimeData>
-#include <QUrl>
 #include <QFile>
 #include <QBuffer>
 #include <QPainter>
@@ -541,9 +540,23 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::MidButton) {
         if (m_actionState == Idle) {
             // paste clipboard content
+#ifdef Q_WS_WIN
+            // Same as for D'n'D, Windows doesn't pass any actual image data when pasting
+            // image files. Though, it does provide us with those files' Urls. Since posting
+            // multiple images isn't yet implemented - we'll use first Url from list
+            QImage image;
+            QString imageFileName;
+            if (QApplication::clipboard()->mimeData()->hasUrls()) {
+                imageFileName = QApplication::clipboard()->mimeData()->urls().at(0).toLocalFile();
+                image.load(imageFileName);
+                postContent(imageFileName, image);
+            } else {
+                postContent(QApplication::clipboard()->mimeData()->text(), image);
+            };
+#else
             postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
-        }
-        else {
+#endif //Q_WS_WIN
+        } else {
             // Now releasing the middlebutton click copies to clipboard
             event->accept();
         }
@@ -588,8 +601,23 @@ void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     if (event->mimeData()->objectName() != QString("Pastebin-applet")) {
+#ifdef Q_WS_WIN
+        // Apparently, Windows doesn't pass any actual image data when drag'n'dropping
+        // image files. Though, it does provide us with those files' Urls. Since posting
+        // multiple images isn't yet implemented - we'll use first Url from list
+        QImage image;
+        QString imageFileName;
+        if (event->mimeData()->hasUrls()) {
+            imageFileName = event->mimeData()->urls().at(0).toLocalFile();
+            image.load(imageFileName);
+            postContent(imageFileName, image);
+        } else {
+            postContent(event->mimeData()->text(), image);
+        };
+#else
         QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
         postContent(event->mimeData()->text(), image);
+#endif //Q_WS_WIN
         event->acceptProposedAction();
     }
 }
@@ -641,7 +669,22 @@ QList<QAction*> Pastebin::contextualActions()
 
 void Pastebin::postClipboard()
 {
+#ifdef Q_WS_WIN
+// Same as for D'n'D, Windows doesn't pass any actual image data when pasting
+// image files. Though, it does provide us with those files' Urls. Since posting
+// multiple images isn't yet implemented - we'll use first Url from list
+    QImage image;
+    QString imageFileName;
+    if (QApplication::clipboard()->mimeData()->hasUrls()) {
+        imageFileName = QApplication::clipboard()->mimeData()->urls().at(0).toLocalFile();
+        image.load(imageFileName);
+        postContent(imageFileName, image);
+    } else {
+        postContent(QApplication::clipboard()->mimeData()->text(), image);
+    };
+#else
     postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
+#endif //Q_WS_WIN
 }
 
 void Pastebin::postContent(QString text, QImage imageData)
@@ -652,8 +695,8 @@ void Pastebin::postContent(QString text, QImage imageData)
     setActionState(Sending);
     timer->start(20000);
 
-    QUrl testPath(text);
-    validPath = QFile::exists(testPath.path());
+    KUrl testPath(text);
+    validPath = QFile::exists(testPath.toLocalFile());
 
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
@@ -669,7 +712,7 @@ void Pastebin::postContent(QString text, QImage imageData)
 
     if (!image) {
         if (validPath) {
-            QFile file(testPath.path());
+            QFile file(testPath.toLocalFile());
             file.open(QIODevice::ReadOnly);
             QTextStream in(&file);
             text = in.readAll();
@@ -680,8 +723,10 @@ void Pastebin::postContent(QString text, QImage imageData)
     } else {
         //upload image
         if (validPath) {
-            m_imageServer->post(testPath.path());
+            qDebug() << "+++++++++++++++it's a valid image file path!++++++++++++++++";
+            m_imageServer->post(testPath.toLocalFile());
         } else {
+            qDebug() << "---------------No valid image file path given! Attempting through tmp file------------";
             KTemporaryFile tempFile;
             if (tempFile.open()) {
                 tempFile.setAutoRemove(false);
@@ -696,11 +741,9 @@ void Pastebin::postContent(QString text, QImage imageData)
                 image.save(&buffer, "JPEG");
                 stream.writeRawData(data, data.size());
 
-                QUrl t(tempFile.fileName());
+                m_imageServer->post(tempFile.fileName());
+
                 tempFile.close();
-
-                m_imageServer->post(t.path());
-
             } else {
                 setActionState(IdleError);
                 timer->stop();
