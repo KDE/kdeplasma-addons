@@ -32,7 +32,7 @@
 #include <Phonon/MediaObject>
 #include <Phonon/Path>
 #include <Phonon/AudioOutput>
-#include <phononnamespace.h>
+#include <Phonon/Global>
 
 #include "ui_bballConfig.h"
 
