@@ -363,7 +363,7 @@ void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
 
 void LancelotApplet::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
-    Q_UNUSED(event);
+    Plasma::Applet::hoverLeaveEvent(event);
     d->offline = false;
 }
 
