@@ -8,7 +8,6 @@ __all__ = [
     "Lancelot__ScrollBar",
     "Lancelot__ScrollButton",
     "Lancelot__ScrollPane",
-    "Lancelot__WidgetPositioner",
     "Lancelot__Widget",
     "QGraphicsLayoutItem",
     "QGraphicsLayout",

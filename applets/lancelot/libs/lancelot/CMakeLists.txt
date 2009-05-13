@@ -112,7 +112,6 @@ install(FILES
    widgets/PassagewayView.h
    widgets/ResizeBordersPanel.h
    widgets/Widget.h
-   widgets/WidgetPositioner.h
    widgets/HoverIcon.h
    widgets/PopupList.h
    widgets/PopupMenu.h
