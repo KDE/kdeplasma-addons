@@ -81,7 +81,7 @@ void Virus::init(const KConfigGroup &config)
         m_dirs << KStandardDirs::installPath("wallpaper");
     }
 
-    setUsingDiskCache(false);
+    setUsingRenderingCache(false);
 
     //if (m_mode == "SingleImage") {
     setSingleImage();
@@ -95,11 +95,10 @@ void Virus::requestUpdate()
     alife.start();
 }
 
-void Virus::virusUpdated(){
+void Virus::virusUpdated()
+{
     m_pixmap = QPixmap::fromImage(alife.currentImage());
-    
     emit update(boundingRect());
-    
     QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));
 }
 

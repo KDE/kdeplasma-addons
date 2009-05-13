@@ -38,7 +38,7 @@ Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
     m_renderThreadCount = QThread::idealThreadCount();
     m_renderThreads = new MandelbrotRenderThread*[m_renderThreadCount];
     for(int th = 0; th < m_renderThreadCount; th++) m_renderThreads[th] = new MandelbrotRenderThread(this, th);
-    setUsingDiskCache(true);
+    setUsingRenderingCache(true);
 
     connect(this, SIGNAL(renderHintsChanged()), this, SLOT(checkRenderHints()));
 }
