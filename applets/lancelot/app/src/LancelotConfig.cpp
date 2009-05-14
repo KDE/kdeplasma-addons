@@ -34,6 +34,7 @@ LancelotConfig::LancelotConfig()
 void LancelotConfig::setupUi(QWidget * widget)
 {
     Ui::LancelotConfigBase::setupUi(widget);
+    tabWidget->setCurrentIndex(0);
 
     qbgActivationMethod = new QButtonGroup(widget);
     qbgActivationMethod->addButton(radioActivationClick);
