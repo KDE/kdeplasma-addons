@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>391</width>
-    <height>253</height>
+    <height>255</height>
    </rect>
   </property>
   <property name="styleSheet" >
@@ -135,6 +135,9 @@
      </property>
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy" >
+      <cstring>intervalSpinBox</cstring>
      </property>
     </widget>
    </item>
