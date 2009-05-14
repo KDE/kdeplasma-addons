@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Picture of the Day
+Name[es]=Imagen del día
 Name[et]=Päevapilt
 Name[pt]=Imagem do Dia
 Name[pt_BR]=Imagem do dia
@@ -10,6 +11,7 @@ Name[uk]=Картинка дня
 Name[zh_CN]=每日一图
 Name[zh_TW]=本日圖片
 Comment=Data Engine for getting various online Pictures of The Day.
+Comment[es]=Motor de datos para obtener diversas imágenes del día de la red.
 Comment[et]=Andmete mootor internetis leiduvate päevapiltide hankimiseks.
 Comment[pt]=Motor de dados para obter diversas Imagens do Dia a nível 'online'.
 Comment[pt_BR]=Mecanismo de dados para obter várias imagens do dia online.
