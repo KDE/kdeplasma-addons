@@ -31,7 +31,7 @@ TaskModel::TaskModel(Plasma::DataEngine* e, QObject* parent)
   : QStandardItemModel(parent),
   engine(e),
   dropType(SortPriority)
-{
+{ 
   currentListIndex = 0;
 
   rootitem = invisibleRootItem();
@@ -46,6 +46,28 @@ TaskModel::~TaskModel() {
 void TaskModel::setDropType(SortBy dropType)
 {
   this->dropType = dropType;
+}
+
+void TaskModel::dayChanged()
+{ 
+  QDateTime nextMidnight = QDateTime(QDate::currentDate().addDays(1));
+  int secsUntilMidnight = QDateTime::currentDateTime().secsTo(nextMidnight);
+  midnightAlarm.setInterval(1000*secsUntilMidnight+5000); // 5 secs over to ensure we're not under
+  midnightAlarm.start();
+  
+  m_dateItems.at(0)->setData(0, Qt::RTMTimeTRole); // Overdue
+  m_dateItems.at(0)->setData(0, Qt::RTMSortRole);
+  
+  m_dateItems.at(1)->setData(QDateTime(QDate::currentDate()).toTime_t(), Qt::RTMTimeTRole); // Today
+  m_dateItems.at(1)->setData(QDateTime(QDate::currentDate()).toTime_t(), Qt::RTMSortRole);
+  
+  m_dateItems.at(2)->setData(QDateTime(QDate::currentDate()).addDays(1).toTime_t(), Qt::RTMTimeTRole); // Tomorrow
+  m_dateItems.at(2)->setData(QDateTime(QDate::currentDate()).addDays(1).toTime_t(), Qt::RTMSortRole);
+  
+  m_dateItems.at(3)->setData(QDateTime(QDate::currentDate()).addDays(2).toTime_t(), Qt::RTMTimeTRole); // Past Tomorrow/Never
+  m_dateItems.at(3)->setData(QDateTime(QDate::currentDate()).addDays(2).toTime_t(), Qt::RTMSortRole);
+  
+  emit modelUpdated();
 }
 
 void TaskModel::refreshToplevel()
@@ -66,12 +88,6 @@ void TaskModel::refreshToplevel()
   dateStrings.append(i18n("Tomorrow"));
   dateStrings.append(i18n("Anytime"));
   
-  int dates[4];
-  dates[0] = 0;
-  dates[1] = QDateTime(QDate::currentDate()).toTime_t();
-  dates[2] = QDateTime(QDate::currentDate()).addDays(1).toTime_t();
-  dates[3] = QDateTime(QDate::currentDate()).addDays(2).toTime_t();
-
   for(int i=0;i<4;i++) {
     HeaderItem *priority = new HeaderItem(RTMPriorityHeader);
     priority->setData(i+1, Qt::RTMPriorityRole);
@@ -82,13 +98,13 @@ void TaskModel::refreshToplevel()
     rootitem->insertRow(rootitem->rowCount(), priority);
     
     HeaderItem *date = new HeaderItem(RTMDateHeader);
-    date->setData(dates[i], Qt::RTMTimeTRole);
-    date->setData(dates[i], Qt::RTMSortRole);
     date->setData(dateStrings.at(i), Qt::DisplayRole);
     date->setEditable(false);
     m_dateItems.append(date);
     rootitem->insertRow(rootitem->rowCount(), date);
   }
+  dayChanged();
+  connect(&midnightAlarm, SIGNAL(timeout()), SLOT(dayChanged()));
 }
 QFlags< Qt::DropAction > TaskModel::supportedDropActions() const {
   //kDebug() << "TaskModel::supportedDropActions()";

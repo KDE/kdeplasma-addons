@@ -1,3 +1,4 @@
+class HeaderItem;
 /*
  *   Copyright 2009 Andrew Stromme <astromme@chatonka.com>
  *
@@ -20,6 +21,7 @@
 #ifndef RTM_TASKMODEL_H
 #define RTM_TASKMODEL_H
 
+#include <QTimer>
 #include <QStandardItemModel>
 #include <Plasma/DataEngine>
 
@@ -60,6 +62,7 @@ public:
   
 public slots:
   void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+  void dayChanged();
   
 signals:
   void listSwitched(qulonglong listId);
@@ -81,6 +84,7 @@ protected:
   SortBy dropType;
 
 private:
+  QTimer midnightAlarm;
   TaskItem* taskFromId(qulonglong id);
   ListItem* listFromId(qulonglong id);
 };

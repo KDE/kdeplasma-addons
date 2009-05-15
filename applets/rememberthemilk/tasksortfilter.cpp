@@ -36,7 +36,7 @@ TaskSortFilter::TaskSortFilter(TaskModel *model, QObject* parent)
 
 void TaskSortFilter::listChanged()
 {
-  invalidateFilter();
+  invalidate();
 }
 
 void TaskSortFilter::setSortBy(SortBy sortBy)
@@ -59,7 +59,7 @@ bool TaskSortFilter::lessThan(const QModelIndex& left, const QModelIndex& right)
   int rightPriority = sourceModel()->data(right, Qt::RTMPriorityRole).toInt();
   
   if (sortBy == SortDue) {
-    if (sourceModel()->data(left, Qt::RTMItemType).toInt() != RTMTaskItem)
+    if (sourceModel()->data(left, Qt::RTMItemType).toInt() == RTMPriorityHeader)
       return  leftTime <= rightTime;
     else if (leftTime == rightTime)
       return leftPriority < rightPriority; // Subsort by priority
