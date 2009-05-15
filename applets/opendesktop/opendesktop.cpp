@@ -116,8 +116,8 @@ void OpenDesktop::init()
     } else {
         connectPerson(m_username);
         connectFriends(m_username);
-        connectGeolocation();
     }
+    connectGeolocation();
 }
 
 void OpenDesktop::connectGeolocation()
