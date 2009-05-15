@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>Settings</class>
- <widget class="QWidget" name="Settings" >
-  <property name="geometry" >
+ <widget class="QWidget" name="Settings">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,19 +10,19 @@
     <height>272</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
       <string>Sensor</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" >
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="KFilterProxySearchLine" name="searchBox" />
+       <widget class="KFilterProxySearchLine" name="searchBox"/>
       </item>
       <item>
-       <widget class="QListView" name="sensorView" >
-        <property name="showDropIndicator" stdset="0" >
+       <widget class="QListView" name="sensorView">
+        <property name="showDropIndicator" stdset="0">
          <bool>false</bool>
         </property>
        </widget>
@@ -30,60 +31,47 @@
     </widget>
    </item>
    <item>
-    <widget class="KIntNumInput" name="updateSpeed" >
-     <property name="label" >
+    <widget class="KIntNumInput" name="updateSpeed">
+     <property name="label">
       <string/>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <number>1</number>
      </property>
-     <property name="suffix" >
+     <property name="suffix">
       <string>ms</string>
      </property>
-     <property name="prefix" >
+     <property name="prefix">
       <string>Update every </string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="animateBubbles" >
-     <property name="text" >
-      <string comment="@option:check Whether the plasmoid is animated or not" >Animated</string>
+    <widget class="QCheckBox" name="animateBubbles">
+     <property name="text">
+      <string comment="@option:check Whether the plasmoid is animated or not">Animated</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="showText" >
-     <property name="text" >
+    <widget class="QCheckBox" name="showText">
+     <property name="text">
       <string>Show Text</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>20</width>
-       <height>53</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
    <class>KFilterProxySearchLine</class>
    <extends>QWidget</extends>
    <header>kfilterproxysearchline.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
