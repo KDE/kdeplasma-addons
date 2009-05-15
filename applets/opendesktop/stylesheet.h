@@ -44,9 +44,9 @@ class StyleSheet : public QObject
 
     public Q_SLOTS:
         void load(const QString &cssFile);
+        void update();
 
     private:
-        void update();
         QString m_cssFile;
         QString m_styleSheet;
         QString m_rawStyleSheet;
