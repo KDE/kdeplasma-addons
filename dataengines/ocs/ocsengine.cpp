@@ -37,6 +37,9 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
     m_maximumItems = 99;
     Q_UNUSED(args);
     setMinimumPollingInterval(500);
+
+    connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
+            this, SLOT(networkStatusChanged(Solid::Networking::Status)));
 }
 
 OcsEngine::~OcsEngine()
@@ -85,9 +88,9 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
         return _job != 0;
-        
+
     } else if (name.startsWith("PostLocation-")) {
-        
+
         QStringList args = QString(name).replace(QString("PostLocation-"), QString()).split(":");
         if (args.size() != 4) {
             kDebug() << "Invalid location string:" << name;
@@ -98,7 +101,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         qreal lon = args[1].toFloat();
         QString country = args[2];
         QString city = args[3];
-        
+
         kDebug() << "Posting location:" << lat << lon << country << city;
         PostJob* _job = Attica::OcsApi::postLocation(lat, lon, city, country);
         connect(_job, SIGNAL( result( KJob* ) ), SLOT( locationPosted( KJob* ) ));
@@ -154,6 +157,8 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
 bool OcsEngine::updateSourceEvent(const QString &name)
 {
+    sourceRequestEvent(name);
+    return true;
     kDebug() << "for name" << name;
     if (name == I18N_NOOP("activity")) {
         foreach(const Attica::Activity &activity, m_activities ) {
@@ -223,8 +228,8 @@ void OcsEngine::slotNearResult( KJob *j )
         kDebug() << "Fetching person failed:" << j->errorString();
     }
 }
-        
-        
+
+
 void OcsEngine::setPersonData(const QString &source, Attica::Person &person)
 {
     kDebug() << "Setting person data"<< source;
@@ -323,6 +328,19 @@ void OcsEngine::slotFriendsResult( KJob *j )
         kDebug() << "Error:" << j->errorString();
     }
 }
+
+
+void OcsEngine::networkStatusChanged(Solid::Networking::Status status)
+{
+    if (status == Solid::Networking::Connected || status == Solid::Networking::Unknown) {
+        kDebug() << "network status changed" << Solid::Networking::Connected << status;
+        kDebug() << "All sources:" << sources();
+        updateAllSources();
+    } else {
+        kDebug() << "Disconnected" << status;
+    }
+}
+
 
 #include "ocsengine.moc"
 

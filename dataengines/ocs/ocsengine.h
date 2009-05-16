@@ -26,6 +26,8 @@
 
 #include <QStringList>
 
+#include <Solid/Networking>
+
 class QTimer;
 class KJob;
 
@@ -50,7 +52,7 @@ protected:
     virtual bool sourceRequestEvent(const QString& name);
     virtual bool updateSourceEvent(const QString& source);
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotActivityResult( KJob* j);
     virtual void slotFriendsResult( KJob* j);
     virtual void slotNearPersonsResult( KJob* j);
@@ -59,6 +61,7 @@ protected slots:
     virtual void slotKnowledgeBaseResult( KJob *j );
     virtual void slotKnowledgeBaseListResult( KJob *j );
     virtual void locationPosted( KJob *j );
+    void networkStatusChanged(Solid::Networking::Status);
 
 private:
     void setPersonData(const QString &source, Attica::Person &person);
