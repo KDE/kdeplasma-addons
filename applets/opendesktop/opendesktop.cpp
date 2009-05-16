@@ -215,7 +215,7 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
     }
     if (m_friends.keys().contains(_id)) {
         kDebug() << "Updated existing widget" << m_near.keys();
-        m_near[_id]->setAtticaData(data);
+        m_friends[_id]->setAtticaData(data);
         return;
     }
     if (name.isEmpty()) {
