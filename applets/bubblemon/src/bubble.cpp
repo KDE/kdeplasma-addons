@@ -90,7 +90,6 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
     } else {
         connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
     }
-    
 }
 
 Bubble::~Bubble()
@@ -273,7 +272,7 @@ Bubble::drawLabel(QPainter *painter, const QStyleOptionGraphicsItem *option, con
 void
 Bubble::moveBubbles()
 {
-    if (m_bubbles.size() > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
+    if (!boundingRect().isEmpty() && m_bubbleHeight > 0 && m_bubbles.size() > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
         QRectF rect = boundingRect();
         QList<QPoint>::iterator i;
         bool needsUpdate = false;
