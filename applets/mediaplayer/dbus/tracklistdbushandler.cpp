@@ -20,6 +20,7 @@
 
 #include <QList>
 
+#include <kdebug.h>
 
 #include <Phonon/MediaObject>
 #include <Phonon/MediaSource>
@@ -122,11 +123,16 @@ void TrackListDBusHandler::SetRandom( bool enable )
 
 Phonon::MediaSource TrackListDBusHandler::nextTrack()
 {
+    if (m_tracks.size() < 2) {
+        return Phonon::MediaSource();
+    }
+
     if (m_random) {
-        m_currentTrack = qrand() % m_tracks.size();
+        m_currentTrack = qrand() % (m_tracks.size() - 1);
     } else {
         m_currentTrack = (m_currentTrack + 1) % (m_tracks.size() - 1);
     }
+
     Phonon::MediaSource source = m_tracks[m_currentTrack];
 
     if (!m_loop) {
