@@ -14,6 +14,7 @@ Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
 IconName=edit-paste
 Comment=Pastebin Widget
+Comment[ca]=Estri Pastebin
 Comment[de]=Pastebin-Widget
 Comment[el]=Συστατικό κάδου επικόλλησης
 Comment[es]=Miniaplicación de Pastebin
@@ -33,6 +34,7 @@ Version=1
 
 [Event/urlcopied]
 Name=Copied pastebin link
+Name[ca]=Enllaç pastebin copiat
 Name[de]=Kopierte Pastebin-Verknüpfung
 Name[el]=Αντιγραφή δεσμού κάδου επικόλλησης
 Name[es]=Enlace de pastebin copiado
@@ -49,6 +51,7 @@ Name[x-test]=xxCopied pastebin linkxx
 Name[zh_CN]=已复制 pastebin 链接
 Name[zh_TW]=已複製 pastebin 連結
 Comment=The pastebin URL has been copied to the clipboard
+Comment[ca]=S'ha copiat l'URL de pastebin al porta-retalls
 Comment[de]=Die Pastebin-Adresse wurde in die Zwischenablage kopiert
 Comment[el]=Το URL του κάδου επικόλλησης αντιγράφηκε στο πρόχειρο
 Comment[es]=Se ha copiado el URL de pastebin al portapapeles

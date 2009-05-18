@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=apod
 Icon=
 
 Name=Apod Provider
+Name[ca]=Proveïdor Apod
 Name[es]=Proveedor de Apod
 Name[et]=Apodi pakkuja
 Name[pt]=Fornecedor do Apod
@@ -17,6 +18,7 @@ Name[uk]=Постачальник Apod
 Name[zh_CN]=Apod 提供方
 Name[zh_TW]=Apod 提供者
 Comment=Apod Provider
+Comment[ca]=Proveïdor Apod
 Comment[es]=Proveedor de Apod
 Comment[et]=Apodi pakkuja
 Comment[pt]=Fornecedor do Apod

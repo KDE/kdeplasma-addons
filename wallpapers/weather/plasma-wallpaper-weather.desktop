@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Weather
+Name[ca]=Meteorologia
 Name[de]=Wetter
 Name[el]=Καιρός
 Name[es]=Meteorología

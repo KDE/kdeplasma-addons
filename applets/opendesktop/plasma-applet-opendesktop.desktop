@@ -2,6 +2,7 @@
 Name=openDesktop
 Name[sv]=Öppet skrivbord
 Comment=Communicate using the Social Desktop
+Comment[ca]=Comuniqueu-vos usant l'escriptori social
 Comment[es]=Comuníquese usando el escritorio social
 Comment[et]=Suhtlemine sotsiaalse töölaua vahendusel
 Comment[pt]=Comunicar com o Ambiente de Trabalho Social
@@ -22,6 +23,7 @@ X-KDE-PluginInfo-Name=opendesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
+Keywords[ca]=Utilitats
 Keywords[de]=Dienstprogramme
 Keywords[es]=Utilidades
 Keywords[et]=Abivahendid

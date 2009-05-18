@@ -2,6 +2,8 @@
 Type=ServiceType
 X-KDE-ServiceType=PlasmaPoTD/Plugin
 Comment=Plugin for Plasma PoTD Engine
+Comment[ca]=Connector per al motor PoTD del plasma
+Comment[de]=Plasma-Modul für Bilder des Tages
 Comment[es]=Complemento para el motor de imagen del día de Plasma
 Comment[et]=Plasma päevapildi mootori plugin
 Comment[pt]='Plugin' do Motor da Imagem do Dia do Plasma

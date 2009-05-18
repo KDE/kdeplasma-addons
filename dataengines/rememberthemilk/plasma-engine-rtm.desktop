@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Remember The Milk Engine
+Name[ca]=Motor per «Remember The Milk»
 Name[es]=Motor de Remember The Milk
 Name[et]=Remember The Milk mootor
 Name[pt]=Motor para Recordar as Tarefas
@@ -9,6 +10,7 @@ Name[uk]=Рушій Remember The Milk
 Name[zh_CN]=Remember The Milk 引擎
 Name[zh_TW]=Remember The Milk 引擎
 Comment=An engine to work with Remember the Milk.
+Comment[ca]=Un motor per treballar amb «Remember The Milk».
 Comment[es]=Un montor para trabajar con Remember The Milk.
 Comment[et]=Remember The Milk mootor.
 Comment[pt]=Um motor para funcionar com a 'applet' de recordação de tarefas.

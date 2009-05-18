@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=flickr
 Icon=
 
 Name=Flickr Provider
+Name[ca]=Proveïdor Flickr
 Name[es]=Proveedor de Flickr
 Name[et]=Flickri pakkuja
 Name[pt]=Fornecedor do Flickr
@@ -17,6 +18,7 @@ Name[uk]=Постачальник Flickr
 Name[zh_CN]=Flickr 提供方
 Name[zh_TW]=Flickr 提供者
 Comment=Flickr Provider
+Comment[ca]=Proveïdor Flickr
 Comment[es]=Proveedor de Flickr
 Comment[et]=Flickri pakkuja
 Comment[pt]=Fornecedor do Flickr
