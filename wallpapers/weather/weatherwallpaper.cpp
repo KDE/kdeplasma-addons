@@ -472,14 +472,6 @@ void WeatherWallpaper::getWeather()
             m_weatherLocation->getDefault();
         }
     } else {
-        foreach (const QString& source, weatherEngine->sources()) {
-            if (source == m_source) {
-                if (!m_currentData.isEmpty()) {
-                    weatherContent(m_currentData);
-                    return;
-                }
-            }
-        }
         weatherEngine->connectSource(m_source, this, m_weatherUpdateTime * 60 * 1000);
     }
 }
@@ -555,7 +547,7 @@ void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngi
     if (data.isEmpty()) {
         return;
     }
-    m_currentData = data;
+
     weatherContent(data);
 }
 
