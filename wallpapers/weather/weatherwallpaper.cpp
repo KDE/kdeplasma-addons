@@ -555,6 +555,7 @@ void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngi
     if (data.isEmpty()) {
         return;
     }
+    m_currentData = data;
     weatherContent(data);
 }
 
