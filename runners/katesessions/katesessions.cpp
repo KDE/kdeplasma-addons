@@ -104,7 +104,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
         if (term.toLower().trimmed() == "kate") {
             list_all = true;
         }
-        term.replace("kate", "", Qt::CaseInsensitive);
+        term.remove("kate", Qt::CaseInsensitive);
         term = term.trimmed();
     }
 
