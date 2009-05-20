@@ -43,6 +43,7 @@ class DictApplet: public Plasma::PopupApplet
     public:
         DictApplet(QObject *parent, const QVariantList &args);
         ~DictApplet();
+        void init();
 
         QGraphicsWidget *graphicsWidget();
         void setPath(const QString&);

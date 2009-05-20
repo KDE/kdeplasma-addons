@@ -42,6 +42,9 @@
 #include <Plasma/LineEdit>
 #include <Plasma/TextBrowser>
 #include <Plasma/Theme>
+#include <Plasma/ToolTipContent>
+#include <Plasma/ToolTipManager>
+
 
 #define AUTO_DEFINE_TIMEOUT 500
 
@@ -62,14 +65,26 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     , m_dictsModel(0)
       //m_flash(0)
 {
-    const char* dataEngines[]={"dict","qstardict"};
-    bool engineChoice=dataEngine(dataEngines[1])->isValid();
-//     bool engineChoice=false; //for testing
-    m_dataEngine=dataEngines[int(engineChoice)];
-
-    setHasConfigurationInterface(engineChoice);
     setPopupIcon("accessories-dictionary");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
+}
+
+void DictApplet::init()
+{
+    const char* dataEngines[]={"dict","qstardict"};
+    bool engineChoice = dataEngine(dataEngines[1])->isValid();
+//     bool engineChoice = false; //for testing
+    m_dataEngine = dataEngines[int(engineChoice)];
+    setHasConfigurationInterface(engineChoice);
+
+    // tooltip stuff
+    Plasma::ToolTipContent toolTipData = Plasma::ToolTipContent();
+    toolTipData.setAutohide(true);
+    toolTipData.setMainText(name());
+    toolTipData.setImage(KIcon("accessories-dictionary"));
+
+    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 }
 
 DictApplet::~DictApplet()
