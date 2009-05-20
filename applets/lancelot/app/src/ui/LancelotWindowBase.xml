@@ -309,7 +309,7 @@
                     iconSize="24, 24"
 
                     Lancelot__NodeLayout:topLeft     = "2.0 / 3.0, 0, - SYSTEM_HEIGHT * (2.0 / 3.0), SYSTEM_PADDING / 2"
-                    Lancelot__NodeLayout:bottomRight = "1, 0, - SYSTEM_HEIGHT, SYSTEM_PADDING"
+                    Lancelot__NodeLayout:bottomRight = "1, 1, - SYSTEM_HEIGHT, - SYSTEM_PADDING"
                 />
                 <item:widget
                     name="buttonLancelotContext" type="Lancelot::ExtenderButton"
