@@ -29,7 +29,8 @@
 
 #include <Plasma/Applet>
 #include <Plasma/Label>
-#include <plasma/tooltipmanager.h>
+#include <Plasma/ToolTipContent>
+#include <Plasma/ToolTipManager>
 
 #include <QTimer>
 #include <QPen>
