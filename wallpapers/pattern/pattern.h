@@ -40,6 +40,10 @@ public:
     QWidget * createConfigurationInterface(QWidget * parent);
     void save(KConfigGroup & config);
     void paint(QPainter * painter, const QRectF & exposedRect);
+
+    signals:
+        void settingsChanged(bool);
+
 protected:
     void init(const KConfigGroup & config);
 private slots:

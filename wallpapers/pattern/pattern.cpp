@@ -126,6 +126,7 @@ QWidget * PatternWallpaper::createConfigurationInterface(QWidget * parent)
     connect(m_ui.m_bgColor, SIGNAL(changed(const QColor&)), SLOT(widgetChanged()));
     connect(m_ui.m_pattern, SIGNAL(currentIndexChanged(int)), SLOT(widgetChanged()));
 
+    connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     return configWidget;
 }
 
@@ -151,6 +152,7 @@ void PatternWallpaper::widgetChanged()
         m_patternName = m_ui.m_pattern->itemData(m_ui.m_pattern->currentIndex()).toString();
     }
     loadPattern();
+    emit settingsChanged(true);
     emit update(boundingRect());
 }
 
