@@ -295,11 +295,8 @@ void RTM::TasksReader::readTask(TempProps *props) {
     task->d->priority = attributes().value("priority").toString().toInt();
 
   // Grab Due Date/Time
-  if (attributes().value("has_due_time") == "0") {
-    task->d->due = QDateTime(QDate::fromString(attributes().value("due").toString(), Qt::ISODate));
-  } else {
-    task->d->due = QDateTime::fromString(attributes().value("due").toString(), Qt::ISODate);
-  }
+  //if (attributes().value("has_due_time") == "0") // I seem to be able to ignore this.
+  task->d->due = QDateTime::fromString(attributes().value("due").toString(), Qt::ISODate);
 
   // Grab Estimate
   task->d->estimate = attributes().value("estimate").toString();
