@@ -32,7 +32,6 @@
 #include <KMessageBox>
 #include <KNS/Engine>
 #include <KStandardDirs>
-#include <kdeversion.h>
 
 #include <Plasma/Animator>
 #include <Plasma/DataEngineManager>

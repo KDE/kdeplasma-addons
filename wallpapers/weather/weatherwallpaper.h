@@ -91,7 +91,6 @@ private:
     QStringList m_usersWallpapers;
 
     QString m_source; // Current source
-    Plasma::DataEngine::Data m_currentData; // Current data returned from ion
 
     int m_weatherUpdateTime;
 
