@@ -124,7 +124,7 @@ bool RTM::TasksReader::readResponse() {
 
 void RTM::TasksReader::readTransaction() {
   // If we're not using a getList method we need to jump to the correct spot
-  QStringList splitMethod = request->method().split(".");
+  QStringList splitMethod = request->method().split('.');
 
   readNext();
     

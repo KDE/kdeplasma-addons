@@ -17,6 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#ifndef RTM_TASK_P_H
+#define RTM_TASK_P_H
+
 #include "task.h"
 
 #include "request.h"
@@ -63,3 +66,5 @@ class RTM::TaskPrivate {
     QMap<RTM::NoteId, RTM::Note> notes;
 
 };
+
+#endif // RTM_TASK_P_H

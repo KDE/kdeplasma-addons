@@ -40,7 +40,7 @@ class TaskEditor : public QGraphicsWidget
 {
 Q_OBJECT
 public:
-  TaskEditor(Plasma::DataEngine *engine, QGraphicsWidget *parent = 0);
+  explicit TaskEditor(Plasma::DataEngine *engine, QGraphicsWidget *parent = 0);
   ~TaskEditor();
 
   void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);

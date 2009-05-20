@@ -217,7 +217,7 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
     //while (m_categoriesBar->count())
     //  m_categoriesBar->removeTab(0);
     //m_lists.clear(); //FIXME: What happens when a list is deleted?
-    foreach(QString key, data.keys()) {
+    foreach(const QString &key, data.keys()) {
       if (!m_lists.contains(key.toULongLong())) {
         m_categoriesBar->addTab(data.value(key).toString());
         m_lists.append(key.toULongLong());

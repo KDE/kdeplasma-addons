@@ -36,7 +36,6 @@
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDomDocument>
-#include <QString>
 #include <QDomNode>
 #include <QDomElement>
 #include <QDomNodeList>

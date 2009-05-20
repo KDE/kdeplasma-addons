@@ -27,7 +27,6 @@
 
 #include <QUrl>
 #include <QStringList>
-#include <QString>
 #include <QByteArray>
 #include <QCryptographicHash>
 #include <QHttp>
@@ -35,7 +34,6 @@
 #include <QCoreApplication>
 
 #include <QDomDocument>
-#include <QString>
 #include <QDomNode>
 #include <QDomElement>
 #include <QDomNodeList>

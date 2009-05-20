@@ -169,7 +169,7 @@ QString RTM::Auth::requestUrl() {
       break;
    }
     QString url = RTM::baseAuthUrl;
-    foreach(QString key, arguments.keys()) 
+    foreach(const QString &key, arguments.keys()) 
       url.append('&' + key + '=' + arguments.value(key));
     return url;
 }

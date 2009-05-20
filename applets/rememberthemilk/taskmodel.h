@@ -45,7 +45,7 @@ class TaskModel : public QStandardItemModel
 {
 Q_OBJECT
 public:
-  TaskModel(Plasma::DataEngine *engine, QObject *parent=0);
+  explicit TaskModel(Plasma::DataEngine *engine, QObject *parent=0);
   QFlags< Qt::DropAction > supportedDropActions() const;
   QFlags< Qt::ItemFlag > flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;

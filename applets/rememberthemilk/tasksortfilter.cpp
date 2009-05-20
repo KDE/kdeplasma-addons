@@ -109,7 +109,7 @@ bool TaskSortFilter::filterAcceptsRow(int source_row, const QModelIndex& source_
   if (item.isValid()) {
     switch (filterOn) {
       case Tags:
-        foreach(QString tag, item.data(Qt::RTMTagsRole).toStringList()) {
+        foreach(const QString &tag, item.data(Qt::RTMTagsRole).toStringList()) {
           if (tag.contains(filterRegExp()))
             return true;
         }
@@ -130,7 +130,7 @@ bool TaskSortFilter::filterAcceptsRow(int source_row, const QModelIndex& source_
             (item.data(Qt::RTMDueRole).toDateTime().toString(Qt::LocalDate).contains(filterRegExp()))
             )
           return true;
-        foreach(QString tag, item.data(Qt::RTMTagsRole).toStringList()) {
+        foreach(const QString &tag, item.data(Qt::RTMTagsRole).toStringList()) {
           if (tag.contains(filterRegExp()))
             return true;
         }

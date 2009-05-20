@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef DEFINES_H
-#define DEFINES_H
+#ifndef RTM_H
+#define RTM_H
 
 #include "rtm_export.h"
 

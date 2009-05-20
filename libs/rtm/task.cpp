@@ -204,7 +204,7 @@ bool RTM::Task::editNote(RTM::NoteId noteid, const QString& newTitle, const QStr
   return true;
 }
 void RTM::Task::removeAllNotes() {
-  foreach(RTM::NoteId id, d->notes.keys())
+  foreach(const RTM::NoteId &id, d->notes.keys())
     removeNote(id);
 }
 bool RTM::Task::removeNote(RTM::NoteId noteid) {

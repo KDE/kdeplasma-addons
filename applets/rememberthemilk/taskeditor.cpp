@@ -162,7 +162,7 @@ void TaskEditor::saveChanges() {
   }
 
   if (!tagsEdit->text().isEmpty()) {
-    QStringList tags = tagsEdit->text().split(",");
+    QStringList tags = tagsEdit->text().split(',');
     KConfigGroup cg = m_service->operationDescription("setTags");
     cg.writeEntry("tags", tags);
     emit jobStarted(m_service->startOperationCall(cg));

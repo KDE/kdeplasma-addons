@@ -31,7 +31,7 @@ class TaskSortFilter : public QSortFilterProxyModel
 {
 Q_OBJECT
 public:
-  TaskSortFilter(TaskModel* model, QObject* parent = 0);
+  explicit TaskSortFilter(TaskModel* model, QObject* parent = 0);
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
   bool filterAcceptsColumn(int source_column, const QModelIndex& source_parent) const;
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;

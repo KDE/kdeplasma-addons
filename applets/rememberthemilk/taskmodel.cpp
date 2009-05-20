@@ -134,7 +134,7 @@ QMimeData* TaskModel::mimeData(const QList< QModelIndex >& indexes) const {
 
   QDataStream stream(&encodedData, QIODevice::WriteOnly);
 
-  foreach (QModelIndex index, indexes)
+  foreach(const QModelIndex &index, indexes)
     if (index.isValid())
       stream << index.data(Qt::RTMTaskIdRole).toString();
 
@@ -182,7 +182,7 @@ bool TaskModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int r
   }
 
   //int beginRow = rowCount(priorityParent);
-  foreach(QString id, newItems) {
+  foreach(const QString &id, newItems) {
     if (m_taskItems.contains(id.toULongLong())) {
       TaskItem *item = taskFromId(id.toULongLong());
       if (item) {
@@ -236,7 +236,7 @@ ListItem* TaskModel::listFromId(qulonglong id) {
 void TaskModel::listUpdate(qulonglong listId)
 {
   if (m_listItems.contains(listId)) {
-    foreach(qulonglong taskid, m_listItems.value(listId)->tasks) {
+    foreach(const qulonglong &taskid, m_listItems.value(listId)->tasks) {
         engine->connectSource("Task:" + QString::number(taskid), this);
     }
   }
@@ -269,7 +269,7 @@ void TaskModel::dataUpdated(const QString& name, const Plasma::DataEngine::Data&
 
     item->tasks.clear();
 
-    foreach(QString key, data.keys()) {
+    foreach(const QString &key, data.keys()) {
       if (key != "id" && key != "name" && key != "smart")
         item->tasks.append(key.toULongLong());
     }
