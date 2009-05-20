@@ -205,6 +205,7 @@ void TaskItemDelegate::paintTask(QPainter* painter, const QStyleOptionViewItem &
     // Elide (text with dots like th...) if wider than view and draw
     font.setBold(true);
     task = largerFM.elidedText(task, Qt::ElideRight, option.rect.width()-COLORTAB-3*MARGIN - QFontMetrics(font).width(due));
+    due = due.append(" "); // So that we have a space after the date before the task name
     painter->setFont(font);
     painter->drawText(option.rect.topLeft()+QPoint(COLORTAB+MARGIN,largerFM.height()),due);
     
