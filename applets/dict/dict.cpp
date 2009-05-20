@@ -343,7 +343,7 @@ void DictApplet::popupEvent(bool shown)
 {
     kDebug() << shown;
     if (shown && m_wordEdit) {
-        m_wordEdit->setFocus(Qt::ShortcutFocusReason);
+        focusEditor();
     }
 }
 
@@ -370,9 +370,10 @@ void DictApplet::configAccepted()
 
 void DictApplet::focusEditor()
 {
-    if (m_wordEdit) {
-        m_wordEdit->setFocus(Qt::ShortcutFocusReason);
-    }
+    m_wordEdit->clearFocus();
+    m_wordEdit->setFocus();
+    m_wordEdit->nativeWidget()->clearFocus();
+    m_wordEdit->nativeWidget()->setFocus();
 }
 
 #include "dict.moc"
