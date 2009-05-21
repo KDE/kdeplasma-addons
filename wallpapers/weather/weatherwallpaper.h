@@ -49,8 +49,6 @@ public:
     QWidget * createConfigurationInterface(QWidget * parent);
     void paint(QPainter * painter, const QRectF & exposedRect);
     void updateScreenshot(QPersistentModelIndex index);
-    void validate(const QString& source, const QVariant& data);
-    void weatherContent(const Plasma::DataEngine::Data &data);
 
 public slots:
     void showAdvancedDialog();

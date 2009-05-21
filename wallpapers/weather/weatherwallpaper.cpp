@@ -461,7 +461,6 @@ void WeatherWallpaper::getWeather()
         if (m_weatherLocation) {
             // already tried to get default location
             // A location probably hasn't been configured, so call loadImage
-            // since weatherContent() won't be called
             loadImage();
         } else {
             m_weatherLocation = new WeatherLocation(this);
@@ -529,17 +528,6 @@ void WeatherWallpaper::updateFadedImage(qreal frame)
     emit update(boundingRect());
 }
 
-void WeatherWallpaper::weatherContent(const Plasma::DataEngine::Data &data)
-{
-    kDebug() << "Current weather is:" << data["Condition Icon"].toString();
-    QString paper = m_weatherMap.value(data["Condition Icon"].toString());
-    kDebug() << "Paper is:" << paper;
-    if (!paper.isEmpty()) {
-        m_wallpaper = paper;
-        loadImage();
-    }
-}
-
 void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source)
@@ -547,7 +535,13 @@ void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngi
         return;
     }
 
-    weatherContent(data);
+    kDebug() << "Current weather is:" << data["Condition Icon"].toString();
+    QString paper = m_weatherMap.value(data["Condition Icon"].toString());
+    kDebug() << "Paper is:" << paper;
+    if (!paper.isEmpty()) {
+        m_wallpaper = paper;
+        loadImage();
+    }
 }
 
 #include "weatherwallpaper.moc"
