@@ -123,12 +123,19 @@ void TaskEditor::keyPressEvent(QKeyEvent* event) {
 
 void TaskEditor::setModelIndex(QModelIndex index) {
   m_index = index.data(Qt::RTMTaskIdRole).toULongLong();
+  
+  m_name = index.data(Qt::RTMNameRole).toString();
   nameEdit->nativeWidget()->clear();
-  nameEdit->nativeWidget()->setClickMessage(index.data(Qt::RTMNameRole).toString());
+  nameEdit->nativeWidget()->setText(m_name);
+  
+  m_date = index.data(Qt::RTMDueRole).toDate().toString(Qt::DefaultLocaleShortDate); //FIXME: Allow times within a date
   dateEdit->nativeWidget()->clear();
-  dateEdit->nativeWidget()->setClickMessage(index.data(Qt::RTMDueRole).toDate().toString(Qt::DefaultLocaleShortDate)); //FIXME: Allow times within a date
+  dateEdit->nativeWidget()->setText(m_date); 
+  
+  m_tags = index.data(Qt::RTMTagsRole).toStringList().join(", ");
   tagsEdit->nativeWidget()->clear();
-  tagsEdit->nativeWidget()->setClickMessage(index.data(Qt::RTMTagsRole).toStringList().join(", "));
+  tagsEdit->nativeWidget()->setText(m_tags);
+
   priorityEdit->nativeWidget()->setCurrentIndex((index.data(Qt::RTMPriorityRole).toInt()-1) % 4);
   m_priority = priorityEdit->nativeWidget()->currentIndex();
   completeBox->setChecked(index.data(Qt::RTMCompletedRole).toBool());
@@ -147,21 +154,21 @@ void TaskEditor::saveChanges() {
   if (!m_service)
     return; // No index (and hence no task) has been set, or something is really wrong.
   
-  if (!nameEdit->text().isEmpty()) {
+  if (m_name != nameEdit->text()) {
     kDebug() << "Name Change: " << nameEdit->text();
     KConfigGroup cg = m_service->operationDescription("setName");
     cg.writeEntry("name", nameEdit->text());
     emit jobStarted(m_service->startOperationCall(cg));
   }
 
-  if (!dateEdit->text().isEmpty()) {
+  if (m_date != dateEdit->text()) {
     kDebug() << "Date Change: " << dateEdit->text();
     KConfigGroup cg = m_service->operationDescription("setDueText");
     cg.writeEntry("dueText", dateEdit->text());
     emit jobStarted(m_service->startOperationCall(cg));
   }
 
-  if (!tagsEdit->text().isEmpty()) {
+  if (m_tags != tagsEdit->text()) {
     QStringList tags = tagsEdit->text().split(',');
     KConfigGroup cg = m_service->operationDescription("setTags");
     cg.writeEntry("tags", tags);

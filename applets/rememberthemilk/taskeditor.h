@@ -91,6 +91,9 @@ private:
   bool appearing; // used to know which direction to go in for the animation
   QSizeF fullSize;
   qreal opacity;
+  QString m_name;
+  QString m_date;
+  QString m_tags;
   int m_priority;
   Plasma::Service* m_service;
 };
