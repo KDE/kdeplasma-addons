@@ -1,12 +1,9 @@
 Todo:
 
 * Limitations:
-  - Add a "configure" button to the screensaver if the location isn't set 
-    (maybe not feasible at the moment?)
-  - The dataengine for the first location doesn't seem to go away after
-    setting a new location, so changing the location won't work unless you
-    change to another plugin and change back or restart plasma-desktop
-    (This works in plasmawallpaperviewer though...)
+  - Doesn't notify the user that the wallpaper needs to be configured before
+    working, maybe not that big of a problem, though
+  - Changing to a new location and then back to an old one doesn't work
 
 
 * Features:
