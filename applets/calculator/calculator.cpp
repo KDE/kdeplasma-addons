@@ -372,7 +372,12 @@ void CalculatorApplet::slotAddClicked()
 
     //kDebug() << "'+' was clixed, parsed to: " << currentValue << endl;
 
-    if (previousAddSubOperation!=calcNone) {
+    if (previousMulDivOperation != calcNone) {
+        calculate(currentValue, previousMulDivOperation);
+        previousMulDivOperation = calcNone;
+        calculate(factor, previousAddSubOperation);
+        factor = 0;
+    } else if (previousAddSubOperation != calcNone) {
         calculate(currentValue, previousAddSubOperation);
     } else {
         sum = currentValue;
@@ -387,7 +392,12 @@ void CalculatorApplet::slotSubtractClicked()
 {
     double currentValue = KGlobal::locale()->readNumber(inputText);
 
-    if (previousAddSubOperation!=calcNone) {
+    if (previousMulDivOperation != calcNone) {
+        calculate(currentValue, previousMulDivOperation);
+        previousMulDivOperation = calcNone;
+        calculate(factor, previousAddSubOperation);
+        factor = 0;
+    } else if (previousAddSubOperation != calcNone) {
         calculate(currentValue, previousAddSubOperation);
     } else {
         sum = currentValue;
