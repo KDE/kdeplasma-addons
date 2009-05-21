@@ -34,6 +34,9 @@
 #include <Plasma/Theme>
 #include <Plasma/Dialog>
 #include <Plasma/ToolTipManager>
+#include <Plasma/Containment>
+#include <Plasma/Corona>
+#include <Plasma/View>
 
 Magnifique::Magnifique(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -175,42 +178,29 @@ void Magnifique::wheelEvent(QGraphicsSceneWheelEvent *event)
     syncViewToScene();
 }
 
-//FIXME: shamelessy ripped off extenderitem, as stated there this function would be really good in corona
 QPointF Magnifique::scenePosFromScreenPos(const QPoint &pos) const
 {
+    Plasma::Corona *corona = containment()->corona();
+    Plasma::Containment *cont = 0;
+    if (corona) {
+        cont = corona->containmentForScreen(containment()->screen(), KWindowSystem::currentDesktop()-1);   
+    }
+    if (!corona || !cont) {
+        return QPoint();
+    }
+
     //get the stacking order of the toplevel windows and remove the toplevel view that's
     //only here while dragging, since we're not interested in finding that.
     QList<WId> order = KWindowSystem::stackingOrder();
-    /*if (toplevel) {
-        order.removeOne(toplevel->winId());
-    }*/
 
-    QGraphicsView *found = 0;
+    Plasma::View *found = 0;
     foreach (QWidget *w, QApplication::topLevelWidgets()) {
-        QGraphicsView *v = 0;
+        Plasma::View *v = qobject_cast<Plasma::View *>(w);
 
-        //first check if we're over a Dialog.
-        Plasma::Dialog *dialog = qobject_cast<Plasma::Dialog*>(w);
-        if (dialog) {
-            if (dialog->isVisible() && dialog->geometry().contains(pos)) {
-                v = qobject_cast<QGraphicsView*>(dialog->layout()->itemAt(0)->widget());
-                if (v) {
-                    return v->mapToScene(v->mapFromGlobal(pos));
-                }
-            }
-        } else {
-            v = qobject_cast<QGraphicsView *>(w);
-        }
-
-        //else check if it is a QGV:
-        if (v && w->isVisible() && w->geometry().contains(pos)) {
-            if (found && order.contains(found->winId())) {
-                if (order.indexOf(found->winId()) < order.indexOf(v->winId())) {
-                    found = v;
-                }
-            } else {
-                found = v;
-            }
+        Plasma::Containment *cont = corona->containmentForScreen(containment()->screen(), KWindowSystem::currentDesktop()-1);
+        if (v && v->containment() == cont) {
+            found = v;
+            break;
         }
     }
 
