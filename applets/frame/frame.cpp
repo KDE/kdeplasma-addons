@@ -114,7 +114,7 @@ void Frame::init()
 
 void Frame::updateMenu()
 {
-    if (!m_menuPresent && !m_potd && m_currentUrl.path() != "Default") {
+    if (isAllowed("LaunchApp") && ! (m_menuPresent || m_potd || m_currentUrl.path() == "Default")) {
         kDebug() << "Current url: " << m_currentUrl.url();
         m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
         m_actions.append(m_openPicture);
@@ -137,6 +137,9 @@ QList<QAction*> Frame::contextualActions()
 
 void Frame::slotOpenPicture()
 {
+    if (!isAllowed("LaunchApp")) {
+        return;
+    }
     KUrl url;
 
     if (m_slideShow) {
