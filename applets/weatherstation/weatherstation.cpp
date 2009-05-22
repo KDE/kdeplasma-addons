@@ -259,7 +259,7 @@ void WeatherStation::setTemperature(const Conversion::Value& temperature)
 void WeatherStation::setHumidity(QString humidity)
 {
     if (humidity == "N/A") {
-        humidity = "-";
+        humidity = '-';
     } else {
         humidity.remove('%');
     }

@@ -49,8 +49,8 @@ NewDocuments::NewDocuments()
                     QFileInfo file(service->entryPath());
                     QFile::copy(
                         service->entryPath(),
-                        dir.absolutePath() + "/" +
-                        QString::number(index++) + "_" + file.fileName());
+                        dir.absolutePath() + '/' +
+                        QString::number(index++) + '_' + file.fileName());
                     break;
                 }
             }
@@ -65,8 +65,8 @@ NewDocuments::~NewDocuments()
 QString NewDocuments::path()
 {
     QString path = KStandardDirs::locateLocal("data", "lancelot", true);
-    if (!path.endsWith("/")) {
-        path += "/";
+    if (!path.endsWith('/')) {
+        path += '/';
     }
     path += "/newdocuments/";
 

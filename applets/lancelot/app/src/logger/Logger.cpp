@@ -73,8 +73,8 @@ QString Logger::path() const
 {
     QDir dir;
     QString path = KStandardDirs::locateLocal("data", "lancelot", true);
-    if (!path.endsWith("/")) {
-        path += "/";
+    if (!path.endsWith('/')) {
+        path += '/';
     }
     path += "log/";
 
@@ -93,7 +93,7 @@ QString Logger::path() const
 
     QDate date = QDate::currentDate();
     path += "log-" + QString::number(date.year())
-             + "-" + QString::number(date.month());
+             + '-' + QString::number(date.month());
 
     return path;
 }

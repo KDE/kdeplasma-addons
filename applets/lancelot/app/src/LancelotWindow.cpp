@@ -500,7 +500,7 @@ void LancelotWindow::setupModels()
         MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
     } else {
         Lancelot::ActionListModel * model;
-        foreach (QString plugin, plugins.split(",")) {
+        foreach (QString plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
             MergedAddModel(m_modelGroups["ContactsLeft"], model->selfTitle(), model);
         }
@@ -512,7 +512,7 @@ void LancelotWindow::setupModels()
         MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
     } else {
         Lancelot::ActionListModel * model;
-        foreach (QString plugin, plugins.split(",")) {
+        foreach (QString plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
             MergedAddModel(m_modelGroups["ContactsRight"], model->selfTitle(), model);
         }
