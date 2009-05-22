@@ -34,9 +34,9 @@
 
 #include <KDebug>
 
-const qreal TaskItemDelegate::MARGIN = 2.0;
+const qreal TaskItemDelegate::MARGIN = 1.0;
 const qreal TaskItemDelegate::MARGINH = 6.0;
-const qreal TaskItemDelegate::COLORTAB = MARGIN*3;
+const qreal TaskItemDelegate::COLORTAB = MARGIN*6;
 
 // These colors are hardcoded because they represent priorities and need to be the same for visual recognition purposes.
 const QColor TaskItemDelegate::priority1 = QColor(255, 123, 0); // reddish-orange
@@ -96,10 +96,10 @@ void TaskItemDelegate::paintDueHeader(QPainter* painter, const QRectF& rect, con
   gradient.setColorAt((qreal)(1.3*fm.width(dueString)+2*MARGIN)/rect.width(), Qt::transparent);
   painter->setBrush(Qt::NoBrush);
   painter->setPen(QPen(QBrush(gradient), 1));
-  painter->drawLine(rect.bottomLeft(), rect.bottomRight());
+  painter->drawLine(rect.bottomLeft()+QPoint(0, -MARGIN), rect.bottomRight()+QPoint(0, -MARGIN));
   
   painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-  painter->drawText(rect.bottomLeft()+QPoint(MARGIN, -MARGIN) ,dueString);
+  painter->drawText(rect.bottomLeft()+QPoint(MARGIN, -2*MARGIN) ,dueString);
   
   painter->restore();
 }
@@ -120,7 +120,7 @@ void TaskItemDelegate::paintPriorityHeader(QPainter* painter, const QRectF& rect
   QString priority = index.data(Qt::DisplayRole).toString();
   painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
   painter->setBrush(Qt::NoBrush);
-  painter->drawText(rect.bottomLeft()+QPoint(MARGIN, -MARGIN) ,priority);
+  painter->drawText(rect.bottomLeft()+QPoint(MARGIN, -2*MARGIN) ,priority);
  
   painter->restore();
 }
