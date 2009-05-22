@@ -116,8 +116,10 @@ void RTM::Session::setToken(const QString& token)
     connect(d->auth, SIGNAL(tokenReceived(QString)), this, SLOT(setToken(QString)));
     connect(d->auth, SIGNAL(tokenReceived(QString)), this, SIGNAL(tokenReceived(QString)));
   }
-  else
+  else {
+    d->refreshSettings();
     createTimeline();
+  }
 }
 
 void RTM::Session::setTimeline(const RTM::Timeline& timeline) {

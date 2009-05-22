@@ -40,6 +40,8 @@
 #include <QDomElement>
 #include <QDomNodeList>
 
+#include <KSystemTimeZones>
+#include <KTimeZone>
 #include <KDebug>
 
 class RTM::SessionPrivate {
@@ -101,6 +103,26 @@ class RTM::SessionPrivate {
     
     reply->deleteLater();
   }
+  void refreshSettings() {
+    RTM::Request settingsRequest("rtm.settings.getList", q->apiKey(), q->sharedSecret());
+    settingsRequest.addArgument("auth_token", q->token());
+    
+    QString reply = settingsRequest.sendSynchronousRequest();
+    
+    // We're basically assuming no error here.... FIXME
+    QString timezone = reply.remove(0, reply.indexOf("<timezone>")+10);
+    timezone.truncate(timezone.indexOf("</timezone>"));
+    QString dateformat = reply.remove(0, reply.indexOf("<dateformat>"+12));
+    dateformat.truncate(dateformat.indexOf("</dateformat>"));
+    QString timeformat = reply.remove(0, reply.indexOf("<timeformat>"+12));
+    timeformat.truncate(timeformat.indexOf("</timeformat>"));
+    QString defaultlist = reply.remove(0, reply.indexOf("<defaultlist>"+13));
+    defaultlist.truncate(defaultlist.indexOf("</defaultlist>"));
+    
+    this->timezone = KSystemTimeZones::zone(timezone);
+    kDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+  }
+  
 
   friend class TasksReader;
   friend class Session;
@@ -113,6 +135,7 @@ class RTM::SessionPrivate {
   QString token;
   QDateTime lastRefresh;
   RTM::Permissions permissions;
+  KTimeZone timezone;
 
   RTM::Timeline timeline;
 

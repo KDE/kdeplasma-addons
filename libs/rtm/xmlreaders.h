@@ -49,6 +49,9 @@ public:
 private:
   Session * const session;
   Request * const request;
+  
+  QDateTime parseDateTime(const QString &datetime);
+  QDateTime localizedTime(const QDateTime &datetime);
 
   void readUnknownElement();
   bool readResponse();

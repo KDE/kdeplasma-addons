@@ -63,6 +63,21 @@ QList< RTM::Task* > RTM::TasksReader::readTasks() const {
 }
 
 
+QDateTime RTM::TasksReader::parseDateTime(const QString& datetime)
+{
+  QDateTime offsetTime =  QDateTime::fromString(datetime, Qt::ISODate);
+  return localizedTime(offsetTime);
+}
+
+QDateTime RTM::TasksReader::localizedTime(const QDateTime& datetime)
+{
+  QDateTime dt = QDateTime(datetime.date(), datetime.time(), Qt::LocalTime);
+  KTimeZone utc = KSystemTimeZones::zone("UTC");
+  KTimeZone rtm = session->d->timezone;
+  //kDebug() << datetime << dt << utc.convert(rtm, dt);
+  return utc.convert(rtm, dt);
+}
+
 bool RTM::TasksReader::read() {
   while (!atEnd()) {
     readNext();
@@ -295,15 +310,15 @@ void RTM::TasksReader::readTask(TempProps *props) {
     task->d->priority = attributes().value("priority").toString().toInt();
 
   // Grab Due Date/Time
-  //if (attributes().value("has_due_time") == "0") // I seem to be able to ignore this.
-  task->d->due = QDateTime::fromString(attributes().value("due").toString(), Qt::ISODate);
+  task->d->due = parseDateTime(attributes().value("due").toString());
+  // if (attributes().value("has_due_time") == "0") BUG: FIXME: Re-Implement time support
 
   // Grab Estimate
   task->d->estimate = attributes().value("estimate").toString();
 
   // Grab Completed/Deleted
-  task->d->completed = QDateTime::fromString(attributes().value("completed").toString(), Qt::ISODate);
-  task->d->deleted = QDateTime::fromString(attributes().value("deleted").toString(), Qt::ISODate);
+  task->d->completed = parseDateTime(attributes().value("completed").toString());
+  task->d->deleted = parseDateTime(attributes().value("deleted").toString());
 
   // TODO:: Grab Postponed
   // TODO: Parse rest of fields

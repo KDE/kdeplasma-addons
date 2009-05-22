@@ -285,7 +285,7 @@ QSize TaskItemDelegate::sizeHint(const QStyleOptionViewItem &option,
   }
   else {
     QString task = index.data(Qt::RTMNameRole).toString();
-    QString due = index.data(Qt::RTMDueRole).toDate().toString(Qt::DefaultLocaleShortDate);
+    QString due = index.data(Qt::RTMDueRole).toDate().toString("MMM d");
     QString tags = index.data(Qt::RTMTagsRole).toStringList().join(", ");
     if (!tags.isEmpty())
       tags.prepend(tagsPrefix);
