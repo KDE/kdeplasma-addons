@@ -80,8 +80,8 @@ Q_OBJECT
 
     void refreshTasksFromServer();
     void refreshListsFromServer();
-    QMap<RTM::TaskId,RTM::Task*> cachedTasks() const;
-    QMap<RTM::ListId,RTM::List*> cachedLists() const;
+    QHash<RTM::TaskId,RTM::Task*> cachedTasks() const;
+    QHash<RTM::ListId,RTM::List*> cachedLists() const;
 
     RTM::Task* taskFromId(RTM::TaskId id) const;
     RTM::Task* newBlankTask(RTM::TaskId id) const;

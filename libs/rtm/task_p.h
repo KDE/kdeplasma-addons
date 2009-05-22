@@ -63,7 +63,7 @@ class RTM::TaskPrivate {
     QString repeatString;
     QString url;
 
-    QMap<RTM::NoteId, RTM::Note> notes;
+    QHash<RTM::NoteId, RTM::Note> notes;
 
 };
 

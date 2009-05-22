@@ -37,7 +37,7 @@ struct TempProps {
   QString name;
   RTM::TaskSeriesId seriesId;
   RTM::ListId listId;
-  QMap<RTM::NoteId, RTM::Note> notes;
+  QHash<RTM::NoteId, RTM::Note> notes;
   QList<RTM::Tag> tags;
 };
 

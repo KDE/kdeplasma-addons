@@ -22,7 +22,7 @@
 
 #include "rtm_export.h"
 
-#include <QMap>
+#include <QHash>
 #include <QString>
 
 class QStringList;

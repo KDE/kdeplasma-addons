@@ -75,11 +75,11 @@ QString RTM::Session::apiKey() const {
   return d->apiKey;
 }
 
-QMap< RTM::ListId, RTM::List* > RTM::Session::cachedLists() const {
+QHash< RTM::ListId, RTM::List* > RTM::Session::cachedLists() const {
   return d->lists;
 }
 
-QMap< RTM::TaskId, RTM::Task* > RTM::Session::cachedTasks() const {
+QHash< RTM::TaskId, RTM::Task* > RTM::Session::cachedTasks() const {
   return d->tasks;
 }
 

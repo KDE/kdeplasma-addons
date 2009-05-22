@@ -139,8 +139,8 @@ class RTM::SessionPrivate {
 
   RTM::Timeline timeline;
 
-  QMap<RTM::TaskId,RTM::Task*> tasks;
-  QMap<RTM::ListId,RTM::List*> lists;
+  QHash<RTM::TaskId,RTM::Task*> tasks;
+  QHash<RTM::ListId,RTM::List*> lists;
 };
 
 #endif

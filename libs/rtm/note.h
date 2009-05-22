@@ -26,7 +26,7 @@
 // Local Includes
 #include "rtm.h"
 
-typedef QMap<RTM::NoteId, RTM::Note> Notes;
+typedef QHash<RTM::NoteId, RTM::Note> Notes;
 
 namespace RTM {
 

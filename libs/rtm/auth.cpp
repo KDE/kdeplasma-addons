@@ -19,7 +19,7 @@
 
 #include "auth.h"
 
-#include <QMapIterator>
+#include <QHashIterator>
 #include <QCryptographicHash>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>

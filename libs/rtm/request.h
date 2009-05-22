@@ -62,7 +62,7 @@ Q_OBJECT
     Request() {}
     void sign();
 
-    QMap<QString,QString> arguments;    
+    QMap<QString,QString> arguments;
     QString m_response;
     int retries;
     static const int MAX_RETRIES;

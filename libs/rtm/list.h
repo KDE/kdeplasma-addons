@@ -53,7 +53,7 @@ public:
   void setSmart(bool smart);
   void setFilter(const QString &filter);
 
-  QMap<RTM::TaskId, RTM::Task*> tasks;
+  QHash<RTM::TaskId, RTM::Task*> tasks;
 
 protected:
   List(RTM::Session* session);

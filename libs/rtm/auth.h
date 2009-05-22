@@ -22,7 +22,7 @@
 
 #include <QString>
 #include <QObject>
-#include <QMap>
+#include <QHash>
 #include <QBuffer>
 #include <QNetworkReply>
 
