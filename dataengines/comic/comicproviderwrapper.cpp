@@ -302,7 +302,7 @@ const QStringList& ComicProviderWrapper::extensions() const
         foreach( const QString &interpretername, Kross::Manager::self().interpreters() ) {
             info = Kross::Manager::self().interpreterInfo( interpretername );
             wildcards = info->wildcard();
-            wildcards.replace( '*', "" );
+            wildcards.remove( '*' );
             mExtensions << wildcards.split( ' ' );
         }
     }
