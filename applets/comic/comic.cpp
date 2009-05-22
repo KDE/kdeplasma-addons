@@ -157,7 +157,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl = new Plasma::Label( this );
     mLabelUrl->setMinimumWidth( 0 );
     mLabelUrl->nativeWidget()->setWordWrap( false );
-    if ( isAllowed( "KRun" ) ) {
+    if ( isAllowed( "LaunchApp" ) ) {
         mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
         mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
     }
@@ -272,7 +272,7 @@ void ComicApplet::init()
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
-    if ( isAllowed( "KRun" ) ) {
+    if ( isAllowed( "LaunchApp" ) ) {
         mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
         mActionShop->setEnabled( false );
         mActions.append( mActionShop );
@@ -652,7 +652,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     slotStartTimer();
     if ( event->button() == Qt::LeftButton ) {
         if ( mLabelUrl->isUnderMouse() ) {
-            if ( isAllowed( "KRun" ) ) {
+            if ( isAllowed( "LaunchApp" ) ) {
                 // link clicked
                 KRun::runUrl( mWebsiteUrl, "text/html", 0 );
             }
