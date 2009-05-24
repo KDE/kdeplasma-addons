@@ -183,7 +183,10 @@ QPointF Magnifique::scenePosFromScreenPos(const QPoint &pos) const
     Plasma::Corona *corona = containment()->corona();
     Plasma::Containment *cont = 0;
     if (corona) {
-        cont = corona->containmentForScreen(containment()->screen(), KWindowSystem::currentDesktop()-1);   
+        cont = corona->containmentForScreen(containment()->screen(), KWindowSystem::currentDesktop()-1);
+        if (!cont) {
+            cont = corona->containmentForScreen(containment()->screen(), -1);
+        }
     }
     if (!corona || !cont) {
         return QPoint();
@@ -197,7 +200,6 @@ QPointF Magnifique::scenePosFromScreenPos(const QPoint &pos) const
     foreach (QWidget *w, QApplication::topLevelWidgets()) {
         Plasma::View *v = qobject_cast<Plasma::View *>(w);
 
-        Plasma::Containment *cont = corona->containmentForScreen(containment()->screen(), KWindowSystem::currentDesktop()-1);
         if (v && v->containment() == cont) {
             found = v;
             break;
