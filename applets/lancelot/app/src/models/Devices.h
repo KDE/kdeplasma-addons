@@ -23,6 +23,7 @@
 #include "BaseModel.h"
 #include <solid/device.h>
 #include <solid/storageaccess.h>
+#include <QXmlStreamReader>
 
 namespace Models {
 
@@ -58,11 +59,16 @@ protected:
     void activate(int index);
     void load();
 
+    void readXbel();
+    void readItem();
+
 private:
     void addDevice(const Solid::Device & device);
 
     QString m_error;
+    QStringList m_udis;
     Type m_filter;
+    QXmlStreamReader m_xmlReader;
 };
 
 } // namespace Models

@@ -23,9 +23,12 @@
 #include <KMessageBox>
 #include <KRun>
 #include <KLocalizedString>
+#include <KStandardDirs>
 
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QFile>
+#include <QDebug>
 #include <KIcon>
 
 #include "logger/Logger.h"
@@ -149,12 +152,76 @@ void Devices::load()
     QList<Solid::Device> deviceList =
         Solid::Device::listFromType(Solid::DeviceInterface::StorageAccess, QString());
 
+    // Loading hidden UDIs list
+    QFile file(
+        KStandardDirs::locateLocal("data",
+        "kfileplaces/bookmarks.xml"));
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+    m_xmlReader.setDevice(& file);
+
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
+
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name() == "xbel") {
+                readXbel();
+            }
+        }
+    }
+
+    // Loading items
     setEmitInhibited(true);
     foreach(const Solid::Device & device, deviceList) {
-        addDevice(device);
+        if (!m_udis.contains(device.udi())) {
+            addDevice(device);
+        }
     }
     setEmitInhibited(false);
     emit updated();
+}
+
+void Devices::readXbel()
+{
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
+
+        if (m_xmlReader.isEndElement() &&
+                m_xmlReader.name() == "xbel")
+            break;
+
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name() == "separator")
+                readItem();
+        }
+    }
+}
+
+void Devices::readItem()
+{
+    QString udi;
+    bool showItem = true;
+
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
+
+        if (m_xmlReader.isEndElement() && m_xmlReader.name() == "separator") {
+            break;
+        }
+
+        if (m_xmlReader.name() == "UDI") {
+            udi = m_xmlReader.readElementText();
+        } else if (m_xmlReader.name() == "IsHidden") {
+            if (m_xmlReader.readElementText() == "true") {
+                showItem = false;
+            }
+        }
+    }
+
+    if (!showItem) {
+        m_udis << udi;
+    }
 }
 
 void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
