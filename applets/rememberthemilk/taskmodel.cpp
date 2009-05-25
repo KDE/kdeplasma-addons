@@ -86,7 +86,7 @@ void TaskModel::refreshToplevel()
   dateStrings.append(i18n("Overdue"));
   dateStrings.append(i18n("Today"));
   dateStrings.append(i18n("Tomorrow"));
-  dateStrings.append(i18n("Anytime"));
+  dateStrings.append(i18n("Anytime")); //FIXME: STRINGFREEZE: Consider a change to 'Later'
   
   for(int i=0;i<4;i++) {
     HeaderItem *priority = new HeaderItem(RTMPriorityHeader);
