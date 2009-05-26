@@ -62,10 +62,14 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     QStringList result = data["validate"].toString().split('|');
     QString weatherSource;
 
-    if (result[1] == "valid") {
+    if (result.count() < 2) {
+        if (!d->silent) {
+            KMessageBox::error(0, i18n("Cannot find '%1'.", source));
+        }
+    } else if (result[1] == "valid" && result.count() > 2) {
         QMap<QString, QString> places;
         int i = 3;
-        while (i < result.count()) {
+        while (i < result.count() - 1) {
             if (result[i] == "place") {
                 if (i + 2 < result.count() && result[i + 2] == "extra") {
                     places[result[i + 1]] = result[i + 3];
@@ -94,7 +98,7 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     } else if (result[1] == "timeout" && !d->silent) {
         KMessageBox::error(0, i18n("Timeout happened when trying to connect to weather server."));
     } else if (!d->silent) {
-        KMessageBox::error(0, i18n("Cannot find '%1'.", result[3]));
+        KMessageBox::error(0, i18n("Cannot find '%1'.", result.count() > 3 ? result[3] : source));
     }
     emit finished(weatherSource);
 }
