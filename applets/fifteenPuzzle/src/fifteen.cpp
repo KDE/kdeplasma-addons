@@ -40,6 +40,7 @@ Fifteen::Fifteen(QGraphicsItem *parent)
 
   m_svg = new Plasma::Svg();
   shuffle();
+  setCacheMode(DeviceCoordinateCache);
 }
 
 Fifteen::~Fifteen()
@@ -205,8 +206,6 @@ void Fifteen::updatePieces()
     m_pieces[i]->setPos(m_pieces[i]->getGameX() * width, m_pieces[i]->getGameY() * height);
     m_pieces[i]->setFont(m_font);
   }
-
-  update();
 }
 
 void Fifteen::piecePressed(Piece *item)

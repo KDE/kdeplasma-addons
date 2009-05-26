@@ -29,7 +29,7 @@
 //Plasma
 #include <Plasma/Theme>
 
-static const char defaultImage[] = ":/images/greensquare.svgz";
+static const char defaultImage[] = "fifteenPuzzle/greensquare";
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_configDialog(0)

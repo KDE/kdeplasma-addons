@@ -36,6 +36,7 @@ Piece::Piece(int id, QGraphicsItem *parent, Plasma::Svg *svg, int gamePos)
   m_numeral = true;
   m_gamePos = gamePos;
   m_svg = svg;
+  setCacheMode(DeviceCoordinateCache);
 }
 
 int Piece::getId()
