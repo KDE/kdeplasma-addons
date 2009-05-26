@@ -50,9 +50,9 @@
 #include <Plasma/Theme>
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_graphicsWidget(0), m_textServer(0),
+    : Plasma::Applet(parent, args), m_textServer(0),
     m_imageServer(0), m_textBackend(0), m_imageBackend(0),
-    m_historySize(0), m_signalMapper(new QSignalMapper()), m_paste(0),
+    m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
     m_topSeparator(0), m_bottomSeparator(0)
 {
     setAcceptDrops(true);
@@ -69,7 +69,18 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 
 Pastebin::~Pastebin()
 {
+    delete m_topSeparator;
+    delete m_bottomSeparator;
 
+    QString history;
+    for (int i = 0; i < m_actionHistory.size(); ++i) {
+        history.prepend(m_actionHistory.at(i)->text());
+        history.prepend("|");
+        delete m_actionHistory.at(i);
+    }
+
+    KConfigGroup cg = config();
+    cg.writeEntry("History", history);
 }
 
 void Pastebin::setImageServer(int backend)
@@ -134,7 +145,12 @@ void Pastebin::init()
     KConfigGroup cg = config();
     int textBackend = cg.readEntry("TextBackend", "0").toInt();
     int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
-    int historySize = cg.readEntry("HistorySize", "0").toInt();
+    int historySize = cg.readEntry("HistorySize", "3").toInt();
+    QStringList history = cg.readEntry("History", "").split("|", QString::SkipEmptyParts);
+
+    for (int i = 0; i < history.size(); ++i) {
+        addToHistory(history.at(i));
+    }
 
     setTextServer(textBackend);
     setImageServer(imageBackend);
@@ -167,23 +183,19 @@ void Pastebin::setInteractionState(InteractionState state)
 {
     switch (state ) {
         case Hovered:
-            kDebug() << "Hovered";
             m_linePen.setStyle(Qt::DotLine);
             m_linePen.setWidth(2);
             showOverlay(true);
             break;
         case Waiting:
-            kDebug() << "Waiting";
             showOverlay(false);
             break;
         case DraggedOver:
-            kDebug() << "DraggedOver";
             m_linePen.setStyle(Qt::DashLine);
             m_linePen.setWidth(2);
             showOverlay(true);
             break;
         case Rejected:
-            kDebug() << "Rejected";
             break;
         default:
             break;
@@ -202,18 +214,15 @@ void Pastebin::setActionState(ActionState state)
 
     switch (state ) {
         case Unset:
-            kDebug() << "Unset";
             toolTipData.setSubText(i18nc("The status of the applet has not been set - i.e. it is unset.", "Unset"));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case Idle:
-            kDebug() << "Idle";
             setBusy(false);
             toolTipData.setSubText(i18n("Drop text or an image onto me to upload it to Pastebin."));
             toolTipData.setImage(KIcon("edit-paste"));
             break;
         case IdleError:
-            kDebug() << "IdleError";
             setBusy(false);
             toolTipData.setSubText(i18n("Error during upload. Try again."));
             toolTipData.setImage(KIcon("dialog-cancel"));
@@ -222,7 +231,6 @@ void Pastebin::setActionState(ActionState state)
             timer->stop();
             break;
         case IdleSuccess:
-            kDebug() << "IdleSuccess";
             setBusy(false);
             toolTipData.setSubText(i18n("Successfully uploaded to %1.", m_url));
             toolTipData.setImage(KIcon("dialog-ok"));
@@ -231,7 +239,6 @@ void Pastebin::setActionState(ActionState state)
             timer->stop();
             break;
         case Sending:
-            kDebug() << "Sending";
             setBusy(true);
             toolTipData.setSubText(i18n("Sending...."));
             toolTipData.setImage(KIcon("view-history"));

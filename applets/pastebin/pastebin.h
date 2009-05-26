@@ -127,10 +127,8 @@ private:
     QColor m_fgColor;
     QColor m_bgColor;
     KIcon* m_icon;
-    QGraphicsWidget *m_graphicsWidget;
 
     Plasma::ToolTipContent toolTipData;
-    Plasma::Label *m_displayEdit;
     PastebinServer *m_textServer;
     PastebinServer *m_imageServer;
     QString m_url;
@@ -141,10 +139,9 @@ private:
     QTimer *timer;
 
     int m_historySize;
-
     QSignalMapper *m_signalMapper;
-    QList<QAction *> m_contextualActions;
-    QList<QAction *> m_actionHistory;
+    QList<QAction*> m_contextualActions;
+    QList<QAction*> m_actionHistory;
     KAction *m_paste;
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
