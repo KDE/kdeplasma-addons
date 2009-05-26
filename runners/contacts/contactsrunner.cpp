@@ -33,6 +33,8 @@
 #include <kabc/addressee.h>
 #include <kabc/picture.h>
 
+#include "imageiconengine.h"
+
 ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
@@ -88,7 +90,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
                         icon = QIcon(url);
                     }
                   }*/
-                QIcon icon(QPixmap::fromImage(a.photo().data()));
+                QIcon icon(new ImageIconEngine(a.photo().data()));
                 match.setIcon(icon);
             } else {
                 match.setIcon(m_icon);

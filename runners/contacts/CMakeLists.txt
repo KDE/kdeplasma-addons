@@ -1,5 +1,6 @@
 set(krunner_contacts_SRCS
     contactsrunner.cpp
+    imageiconengine.cpp
 )
 
 kde4_add_plugin(krunner_contacts ${krunner_contacts_SRCS})
