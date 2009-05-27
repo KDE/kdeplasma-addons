@@ -33,18 +33,19 @@
 #include <QAction>
 #include <QLabel>
 
+#include <KColorScheme>
+#include <KConfigDialog>
+#include <KDateTime>
 #include <KDebug>
 #include <KIcon>
-#include <KSharedConfig>
-#include <KConfigDialog>
 #include <KLineEdit>
+#include <KMessageBox>
+#include <KRun>
+#include <KSharedConfig>
+#include <KStringHandler>
 #include <KTextEdit>
 #include <KTextBrowser>
-#include <KStringHandler>
 #include <KWallet/Wallet>
-#include <KMessageBox>
-#include <KColorScheme>
-#include <KRun>
 
 #include <Plasma/Svg>
 #include <Plasma/Theme>
@@ -71,7 +72,8 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_lastTweet(0),
       m_wallet(0),
       m_walletWait(None),
-      m_colorScheme(0)
+      m_colorScheme(0),
+      m_tz(KTimeZone::utc())
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
@@ -517,7 +519,7 @@ void MicroBlog::showTweets()
             sourceString = i18n(" from %1", tweetData.value( "Source" ).toString());
         }
 
-	QLocale english(QLocale::English, QLocale::UnitedStates);
+        QLocale english(QLocale::English, QLocale::UnitedStates);
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
         html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
                 .arg(timeDescription( english.toDateTime(tweetData.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy") )).arg( sourceString);
@@ -784,21 +786,19 @@ void MicroBlog::openProfile()
 
 QString MicroBlog::timeDescription( const QDateTime &dt )
 {
-    int diff = dt.secsTo( QDateTime::currentDateTime() );
-    QString desc;
+    int diff = dt.secsTo(KDateTime::currentDateTime(m_tz).dateTime());
 
-    if( diff < 60 ) {
-        desc = i18n( "Less than a minute ago" );
-    }else if( diff < 60*60 ) {
-        desc = i18np( "1 minute ago", "%1 minutes ago", diff/60 );
-    } else if( diff < 2*60*60 ) {
-        desc = i18n( "Over an hour ago");
-    } else if( diff < 24*60*60 ) {
-        desc = i18np( "1 hour ago", "%1 hours ago", diff/3600 );
-    } else {
-        desc = dt.toString( Qt::LocaleDate );
+    if (diff < 60) {
+        return i18n("Less than a minute ago");
+    } else if (diff < 60*60) {
+        return i18np("1 minute ago", "%1 minutes ago", diff/60);
+    } else if (diff < 2*60*60) {
+        return i18n("Over an hour ago");
+    } else if (diff < 24*60*60) {
+        return i18np("1 hour ago", "%1 hours ago", diff/3600);
     }
-    return desc;
+
+    return dt.toString(Qt::LocaleDate);
 }
 
 #include "microblog.moc"

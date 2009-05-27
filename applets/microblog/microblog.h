@@ -23,6 +23,8 @@
 
 #include <QMap>
 
+#include <KTimeZone>
+
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
 
@@ -166,6 +168,8 @@ class MicroBlog : public Plasma::PopupApplet
 
         KColorScheme *m_colorScheme;
         Ui::TwitterConfig configUi;
+
+        KTimeZone m_tz;
 };
 
 K_EXPORT_PLASMA_APPLET(microblog, MicroBlog)
