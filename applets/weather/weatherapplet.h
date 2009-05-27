@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007-2008 by Shawn Starr <shawn.starr@rogers.com>       *
+ *   Copyright (C) 2007-2009 by Shawn Starr <shawn.starr@rogers.com>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -53,6 +53,7 @@ public:
 
 public slots:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void reloadTheme(void);
 
 protected slots:
     void configAccepted();
@@ -89,6 +90,7 @@ private:
     QGraphicsWidget *m_graphicsWidget;
 
     Plasma::Frame *m_titleFrame;
+    QFont m_titleFont;
 
     bool isValidData(const QVariant &data);
     void weatherContent(const Plasma::DataEngine::Data &data);

@@ -71,6 +71,8 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 
 void WeatherApplet::init()
 {
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
+
     m_graphicsWidget = new QGraphicsWidget(this);
 
     switch (formFactor()) {
@@ -100,10 +102,10 @@ void WeatherApplet::init()
     m_bottomLayout = new QGraphicsLinearLayout(Qt::Horizontal);
 
     m_locationLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
-    QFont titleFont = QApplication::font();
-    titleFont.setPointSize(titleFont.pointSize() * 1.6);
-    titleFont.setBold(true);
-    m_locationLabel->nativeWidget()->setFont(titleFont);
+    m_titleFont = QApplication::font();
+    m_titleFont.setPointSize(m_titleFont.pointSize() * 1.6);
+    m_titleFont.setBold(true);
+    m_locationLabel->nativeWidget()->setFont(m_titleFont);
     m_locationLabel->nativeWidget()->setWordWrap(false);
 
     m_locationLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -115,7 +117,7 @@ void WeatherApplet::init()
     m_windIcon->setOrientation(Qt::Horizontal);
 
     m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
-    m_tempLabel->nativeWidget()->setFont(titleFont);
+    m_tempLabel->nativeWidget()->setFont(m_titleFont);
     m_tempLabel->nativeWidget()->setWordWrap(false);
     // This one if a bit crude, ideally we set the horizontal SizePolicy to Preferred, but that doesn't seem
     // to actually respect the minimum size needed to display the temperature. (Bug in Label or QGL?)
@@ -656,5 +658,10 @@ void WeatherApplet::configAccepted()
     setVisibleLayout(false);
     WeatherPopupApplet::configAccepted();
 }   
+
+void WeatherApplet::reloadTheme()
+{
+    m_locationLabel->nativeWidget()->setFont(m_titleFont);
+}
 
 #include "weatherapplet.moc"
