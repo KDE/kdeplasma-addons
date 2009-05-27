@@ -314,7 +314,7 @@ void Notes::init()
     m_notes_theme.setImagePath("widgets/notes");
     m_notes_theme.setContainsMultipleImages(false);
 
-    m_colorMenu = new QMenu(i18n("Text Color"));
+    m_colorMenu = new QMenu(i18n("Notes Color"));
     connect(m_colorMenu, SIGNAL(triggered(QAction*)), this, SLOT(changeColor(QAction*)));
     addColor("white", i18n("White"));
     addColor("black", i18n("Black"));
@@ -595,9 +595,9 @@ void Notes::configAccepted()
         changed = true;
         m_textColor = newColor;
         cg.writeEntry("textColor", m_textColor);
-    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-    m_textEdit->nativeWidget()->selectAll();
-    m_textEdit->nativeWidget()->setTextColor(m_textColor);
+        QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+        m_textEdit->nativeWidget()->selectAll();
+        m_textEdit->nativeWidget()->setTextColor(m_textColor);
         m_textEdit->nativeWidget()->setTextCursor(textCursor);
         QPalette palette = m_textEdit->nativeWidget()->palette();
         palette.setColor(QPalette::Text, m_textColor);
