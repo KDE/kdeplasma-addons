@@ -1,10 +1,13 @@
 [Desktop Entry]
 Name=openDesktop
+Name[km]=បើក​​ផ្ទៃតុ
 Name[sv]=Öppet skrivbord
 Comment=Communicate using the Social Desktop
 Comment[ca]=Comuniqueu-vos usant l'escriptori social
 Comment[es]=Comuníquese usando el escritorio social
 Comment[et]=Suhtlemine sotsiaalse töölaua vahendusel
+Comment[km]=ទាក់ទង​ដោយ​ប្រើ​ផ្ទៃតុ​សង្គម
+Comment[nb]=Kommunikasjon ved bruk av det sosiale skrivebordet
 Comment[nds]=Klönen över den Meenschap-Schriefdisch
 Comment[pt]=Comunicar com o Ambiente de Trabalho Social
 Comment[pt_BR]=Comunicar com o Ambiente de Trabalho Social
@@ -28,6 +31,8 @@ Keywords[ca]=Utilitats
 Keywords[de]=Dienstprogramme
 Keywords[es]=Utilidades
 Keywords[et]=Abivahendid
+Keywords[km]=ឧបករណ៍​ប្រើប្រាស់
+Keywords[nb]=Verktøy
 Keywords[nds]=Warktüüch
 Keywords[pt]=Utilitários
 Keywords[pt_BR]=Utilitários
