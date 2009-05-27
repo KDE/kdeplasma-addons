@@ -45,6 +45,25 @@ PopupList::Private::Private(PopupList * parent)
     scene->addItem(list);
     parent->setGraphicsWidget(list);
     parent->resize(MENU_WIDTH, 384);
+
+    list->setShowsExtendersOutside(false);
+    list->setGroupByName("PopupList");
+    list->setItemsGroup(Instance::activeInstance()
+         ->group("PopupList-Items"));
+    list->setCategoriesGroup(Instance::activeInstance()
+         ->group("PopupList-Categories"));
+
+    list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
+    list->setItemHeight(ITEM_HEIGHT, Qt::PreferredSize);
+    list->setItemHeight(ITEM_HEIGHT, Qt::MaximumSize);
+
+    list->setCategoryHeight(ITEM_HEIGHT, Qt::MinimumSize);
+    list->setCategoryHeight(ITEM_HEIGHT, Qt::PreferredSize);
+    list->setCategoryHeight(ITEM_HEIGHT, Qt::MaximumSize);
+
+    list->setItemIconSize(ICON_SIZE);
+    list->setCategoryIconSize(ICON_SIZE);
+
 }
 
 void PopupList::Private::connectSignals()
@@ -130,24 +149,6 @@ void PopupList::setModel(ActionListModel * model)
 
 void PopupList::showEvent(QShowEvent * event)
 {
-    d->list->setShowsExtendersOutside(false);
-    d->list->setGroupByName("PopupList");
-    d->list->setItemsGroup(Instance::activeInstance()
-            ->group("PopupList-Items"));
-    d->list->setCategoriesGroup(Instance::activeInstance()
-            ->group("PopupList-Categories"));
-
-    d->list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
-    d->list->setItemHeight(ITEM_HEIGHT, Qt::PreferredSize);
-    d->list->setItemHeight(ITEM_HEIGHT, Qt::MaximumSize);
-
-    d->list->setCategoryHeight(ITEM_HEIGHT, Qt::MinimumSize);
-    d->list->setCategoryHeight(ITEM_HEIGHT, Qt::PreferredSize);
-    d->list->setCategoryHeight(ITEM_HEIGHT, Qt::MaximumSize);
-
-    d->list->setItemIconSize(ICON_SIZE);
-    d->list->setCategoryIconSize(ICON_SIZE);
-
     Plasma::Dialog::showEvent(event);
     d->list->setFocus();
     d->timer.stop();
