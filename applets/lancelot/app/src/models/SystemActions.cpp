@@ -153,7 +153,7 @@ QIcon SystemActions::actionIcon(const QString & id) const
     } else if (id == ID_LOGOUT) {
         return KIcon("system-log-out");
     } else if (id == ID_REBOOT) {
-        return KIcon("system-restart");
+        return KIcon("system-reboot");
     } else if (id == ID_POWEROFF) {
         return KIcon("system-shutdown");
     } else if (id == ID_SUSPEND_DISK) {
