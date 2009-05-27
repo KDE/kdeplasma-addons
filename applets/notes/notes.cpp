@@ -498,7 +498,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
-    parent->addPage(widget, i18n("General"), "notes");
+    parent->addPage(widget, i18n("General"), "knotes");
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
