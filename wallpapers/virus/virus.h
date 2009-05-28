@@ -9,8 +9,8 @@
   (at your option) any later version.
 */
 
-#ifndef IMAGE_HEADER
-#define IMAGE_HEADER
+#ifndef VIRUS_HEADER
+#define VIRUS_HEADER
 
 #include <QTimer>
 #include <QPixmap>

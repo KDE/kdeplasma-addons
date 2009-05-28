@@ -34,7 +34,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QComboBox" name="m_view">
+    <widget class="KComboBox" name="m_view">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>1</horstretch>
@@ -141,7 +141,7 @@
    <item row="2" column="1" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QComboBox" name="m_resizeMethod">
+      <widget class="KComboBox" name="m_resizeMethod">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
