@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Web Browser History
 Name[ca]=Historial del navegador web
+Name[da]=Webbrowser-historik
 Name[de]=Webbrowser-Verlauf
 Name[el]=Ιστορικό περιηγητή ιστού
 Name[es]=Historial del navegador web
@@ -22,7 +23,7 @@ Comment=Searches in Konqueror's history
 Comment[ar]=تبحث في تاريخ الكونيكور
 Comment[ca]=Cerques a l'historial del Konqueror
 Comment[cs]=Vyhledávání v historii prohlížeče Konqueror
-Comment[da]=Søger i Konqueror's historik
+Comment[da]=Søger i Konquerors historik.
 Comment[de]=Suche im Verlauf von Konqueror
 Comment[el]=Αναζήτηση στο ιστορικό του Konqueror
 Comment[es]=Búsquedas en el historial de Konqueror

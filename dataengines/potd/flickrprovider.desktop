@@ -8,6 +8,7 @@ Icon=
 
 Name=Flickr Provider
 Name[ca]=Proveïdor Flickr
+Name[da]=Flickr-udbyder
 Name[es]=Proveedor de Flickr
 Name[et]=Flickri pakkuja
 Name[km]=ក្រុមហ៊ុន​ផ្ដល់ Flickr
@@ -22,6 +23,7 @@ Name[zh_CN]=Flickr 提供方
 Name[zh_TW]=Flickr 提供者
 Comment=Flickr Provider
 Comment[ca]=Proveïdor Flickr
+Comment[da]=Flickr-udbyder.
 Comment[es]=Proveedor de Flickr
 Comment[et]=Flickri pakkuja
 Comment[km]=ក្រុមហ៊ុន​ផ្ដល់ Flickr

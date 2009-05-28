@@ -2,6 +2,7 @@
 Type=Service
 Name=Weather
 Name[ca]=Meteorologia
+Name[da]=Vejr
 Name[de]=Wetter
 Name[el]=Καιρός
 Name[es]=Meteorología

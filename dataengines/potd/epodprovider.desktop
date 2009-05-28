@@ -8,6 +8,7 @@ Icon=
 
 Name=Epod Provider
 Name[ca]=Proveïdor Epod
+Name[da]=Epod-udbyder
 Name[es]=Proveedor de Epod
 Name[et]=Epodi pakkuja
 Name[km]=ក្រុមហ៊ុន​ផ្ដល់ Epod
@@ -22,6 +23,7 @@ Name[zh_CN]=Epod 提供方
 Name[zh_TW]=Epod 提供者
 Comment=Epod Provider
 Comment[ca]=Proveïdor Epod
+Comment[da]=Epod-udbyder.
 Comment[es]=Proveedor de Epod
 Comment[et]=Epodi pakkuja
 Comment[km]=ក្រុមហ៊ុន​ផ្ដល់ Epod
