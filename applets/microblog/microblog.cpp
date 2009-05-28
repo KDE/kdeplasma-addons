@@ -521,15 +521,15 @@ void MicroBlog::showTweets()
 
         QLocale english(QLocale::English, QLocale::UnitedStates);
         QString html = "<table cellspacing='0' spacing='5' width='100%'>";
-        html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
+        html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr></table>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
                 .arg(timeDescription( english.toDateTime(tweetData.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy") )).arg( sourceString);
         QString status = tweetData.value( "Status" ).toString();
 
         status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
 
-        html += QString( "<tr><td colspan='2'><font color='%1'>%2</font></td></tr>" )
+        html += QString( "<p><font color='%1'>%2</font></p>" )
                 .arg( m_colorScheme->foreground().color().name()).arg( status );
-        html += "</table>";
+
         t.content->setText( html );
         t.content->nativeWidget()->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
                                             .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
