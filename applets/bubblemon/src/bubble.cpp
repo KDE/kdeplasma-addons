@@ -50,46 +50,10 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_animID(-1),
        m_labelTransparency(0)
 {
-    m_sensorModel = new QStandardItemModel(this);
-    
-    m_svg = new Plasma::Svg(this);
-    m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
-    m_svg->setContainsMultipleImages(true);
-    connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-    
-    m_animator = new QTimer(this);
-    m_animator->setInterval(75);
-    connect(m_animator, SIGNAL(timeout()), this, SLOT(moveBubbles()));
     setAcceptsHoverEvents(true);
     resize(200, 200);
     setAspectRatioMode(Plasma::Square);
     
-    KConfigGroup cg = config();
-    m_animated = cg.readEntry("animated", true);
-    m_showText = cg.readEntry("showText", false);
-    showLabel(m_showText);
-    m_speed = cg.readEntry("speed", 500);
-    m_sensor = cg.readEntry("sensor", QString());
-    if (m_sensor.isEmpty())
-        setConfigurationRequired(true);
-    
-    if (m_animated)
-        m_animator->start();
-    else
-        m_animator->stop();
-    
-    m_interpolator = new QTimeLine(m_speed*1.5, this);
-    connect(m_interpolator, SIGNAL(frameChanged(int)), this, SLOT(interpolateValue()));
-    
-    m_engine = dataEngine("systemmonitor");
-    if (!m_engine->isValid()) {
-        setFailedToLaunch(true,
-                           i18nc("@info:status The system monitor data engine could not be found or loaded",
-                                  "Could not load the System Monitor data engine."));
-    } else {
-        connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
-    }
 }
 
 Bubble::~Bubble()
@@ -117,6 +81,43 @@ Bubble::interpolateValue()
 void
 Bubble::init()
 {
+    m_sensorModel = new QStandardItemModel(this);
+    
+    m_svg = new Plasma::Svg(this);
+    m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
+    m_svg->setContainsMultipleImages(true);
+    connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
+    
+    m_animator = new QTimer(this);
+    m_animator->setInterval(75);
+    connect(m_animator, SIGNAL(timeout()), this, SLOT(moveBubbles()));
+    
+    KConfigGroup cg = config();
+    m_animated = cg.readEntry("animated", true);
+    m_showText = cg.readEntry("showText", false);
+    showLabel(m_showText);
+    m_speed = cg.readEntry("speed", 500);
+    m_sensor = cg.readEntry("sensor", QString());
+    if (m_sensor.isEmpty())
+        setConfigurationRequired(true);
+    
+    if (m_animated)
+        m_animator->start();
+    else
+        m_animator->stop();
+    
+    m_interpolator = new QTimeLine(m_speed*1.5, this);
+    connect(m_interpolator, SIGNAL(frameChanged(int)), this, SLOT(interpolateValue()));
+    
+    m_engine = dataEngine("systemmonitor");
+    if (!m_engine->isValid()) {
+        setFailedToLaunch(true,
+                           i18nc("@info:status The system monitor data engine could not be found or loaded",
+                                  "Could not load the System Monitor data engine."));
+    } else {
+        connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
+    }
     m_engine->connectSource(m_sensor, this, m_speed);
 }
 
