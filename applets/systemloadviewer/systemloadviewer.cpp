@@ -65,6 +65,7 @@ void SystemLoadViewer::init()
     readConfig();
 
     sys_mon = dataEngine("systemmonitor");
+    reconnectSources();
     connect(sys_mon, SIGNAL(sourceAdded(const QString &)), this, SLOT(sourcesAdded(const QString &)));
 
     Plasma::ToolTipManager::self()->registerWidget(this);
