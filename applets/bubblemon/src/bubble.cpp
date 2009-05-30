@@ -50,10 +50,15 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_animID(-1),
        m_labelTransparency(0)
 {
+    m_svg = new Plasma::Svg(this);
+    m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
+    m_svg->setContainsMultipleImages(true);
+
+    connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
+
     setAcceptsHoverEvents(true);
     resize(200, 200);
     setAspectRatioMode(Plasma::Square);
-    
 }
 
 Bubble::~Bubble()
@@ -82,11 +87,7 @@ void
 Bubble::init()
 {
     m_sensorModel = new QStandardItemModel(this);
-    
-    m_svg = new Plasma::Svg(this);
-    m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
-    m_svg->setContainsMultipleImages(true);
-    connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
+
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
     
     m_animator = new QTimer(this);
