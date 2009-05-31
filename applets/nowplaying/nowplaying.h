@@ -92,7 +92,6 @@ private:
     void findPlayer();
     void layoutPlanar();
     void layoutHorizontal();
-    void updatePositionSlider(int position);
 
     QString m_watchingPlayer;
     Plasma::Service* m_controller;

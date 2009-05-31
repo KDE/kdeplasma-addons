@@ -73,8 +73,6 @@ NowPlaying::NowPlaying(QObject *parent, const QVariantList &args)
     m_positionSlider->setMinimum(0);
     m_positionSlider->setMaximum(0);
     m_positionSlider->setValue(0);
-    connect(this, SIGNAL(lengthChanged(int)),
-            m_positionSlider, SLOT(setMaximum(int)));
     connect(m_positionSlider, SIGNAL(valueChanged(int)),
             this, SLOT(setPosition(int)));
     m_positionSlider->setEnabled(false);
@@ -205,13 +203,6 @@ void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void NowPlaying::updatePositionSlider(int position)
-{
-    m_positionSlider->blockSignals(true);
-    m_positionSlider->setValue(position);
-    m_positionSlider->blockSignals(false);
-}
-
 void NowPlaying::dataUpdated(const QString &name,
                              const Plasma::DataEngine::Data &data)
 {
@@ -244,10 +235,13 @@ void NowPlaying::dataUpdated(const QString &name,
     int length = data["Length"].toInt();
     if (length != m_length) {
         m_length = length;
+
+        m_positionSlider->blockSignals(true);
         if (length == 0) {
-            updatePositionSlider(0);
+            m_positionSlider->setValue(0);
         }
-        emit lengthChanged(m_length);
+        m_positionSlider->setMaximum(length);
+        m_positionSlider->blockSignals(false);
     }
     if (length != 0) {
         int pos = data["Position"].toInt();
@@ -256,7 +250,9 @@ void NowPlaying::dataUpdated(const QString &name,
                    QString::number(length / 60) + ':' +
                    QString::number(length % 60).rightJustified(2, '0');
         // we assume it's changed
-        updatePositionSlider(pos);
+        m_positionSlider->blockSignals(true);
+        m_positionSlider->setValue(pos);
+        m_positionSlider->blockSignals(false);
     }
 
     QMap<QString,QString> metadata;
