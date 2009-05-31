@@ -265,19 +265,19 @@ void SystemActions::delayedActivate()
     }
 
     KWorkSpace::ShutdownConfirm confirm = KWorkSpace::ShutdownConfirmDefault;
-    KWorkSpace::ShutdownType type = KWorkSpace::ShutdownTypeNone;
+    KWorkSpace::ShutdownType type = KWorkSpace::ShutdownTypeDefault; // abuse as "nothing"
 
     // KWorkSpace related
 
     if (cmd == ID_LOGOUT) {
-        type = KWorkSpace::ShutdownTypeLogout;
+        type = KWorkSpace::ShutdownTypeNone;
     } else if (cmd == ID_REBOOT) {
         type = KWorkSpace::ShutdownTypeReboot;
     } else if (cmd == ID_POWEROFF) {
         type = KWorkSpace::ShutdownTypeHalt;
     }
 
-    if (type != KWorkSpace::ShutdownTypeNone) {
+    if (type != KWorkSpace::ShutdownTypeDefault) {
         ApplicationConnector::instance()->hide(true);
         KWorkSpace::requestShutDown(confirm, type);
         return;
