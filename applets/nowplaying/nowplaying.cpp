@@ -205,13 +205,6 @@ void NowPlaying::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void NowPlaying::updatePositionSlider(int position)
-{
-    m_positionSlider->blockSignals(true);
-    m_positionSlider->setValue(position);
-    m_positionSlider->blockSignals(false);
-}
-
 void NowPlaying::dataUpdated(const QString &name,
                              const Plasma::DataEngine::Data &data)
 {
@@ -247,7 +240,7 @@ void NowPlaying::dataUpdated(const QString &name,
 
         m_positionSlider->blockSignals(true);
         if (length == 0) {
-            updatePositionSlider(0);
+            m_positionSlider->setValue(0);
         }
         m_positionSlider->setMaximum(length);
         m_positionSlider->blockSignals(false);
@@ -259,7 +252,9 @@ void NowPlaying::dataUpdated(const QString &name,
                    QString::number(length / 60) + ':' +
                    QString::number(length % 60).rightJustified(2, '0');
         // we assume it's changed
-        updatePositionSlider(pos);
+        m_positionSlider->blockSignals(true);
+        m_positionSlider->setValue(pos);
+        m_positionSlider->blockSignals(false);
     }
 
     QMap<QString,QString> metadata;
