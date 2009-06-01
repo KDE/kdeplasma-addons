@@ -115,6 +115,7 @@ void WeatherApplet::init()
 
     m_windIcon->setMaximumSize(0,0);
     m_windIcon->setOrientation(Qt::Horizontal);
+    m_windIcon->setTextBackgroundColor(QColor());
 
     m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_tempLabel->nativeWidget()->setFont(m_titleFont);

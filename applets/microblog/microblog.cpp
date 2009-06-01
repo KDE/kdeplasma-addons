@@ -218,6 +218,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_icon = new Plasma::IconWidget(this);
     m_icon->setIcon(KIcon("user-identity"));
     m_icon->setText(m_username);
+    m_icon->setTextBackgroundColor(QColor());
     QSizeF iconSize = m_icon->sizeFromIconSize(48);
     m_icon->setMinimumSize( iconSize );
     m_icon->setMaximumSize( iconSize );
