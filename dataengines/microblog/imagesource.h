@@ -53,6 +53,8 @@ private slots:
 private:
     QHash<KJob *, QString> m_jobs;
     QHash<KJob *, QByteArray> m_jobData;
+    int m_runningJobs;
+    QList<QPair<QString, KUrl> > m_queuedJobs;
 };
 
 #endif

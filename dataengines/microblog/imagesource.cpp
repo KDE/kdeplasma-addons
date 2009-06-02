@@ -24,7 +24,8 @@
 #include <KIO/Job>
 
 ImageSource::ImageSource(QObject* parent)
-    : Plasma::DataContainer(parent)
+    : Plasma::DataContainer(parent),
+      m_runningJobs(0)
 {
     setObjectName("UserImages");
 }
@@ -35,11 +36,19 @@ ImageSource::~ImageSource()
 
 void ImageSource::loadImage(const QString &who, const KUrl &url)
 {
-    KIO::Job *job = KIO::get(url, KIO::Reload, KIO::HideProgressInfo);
-    m_jobs[job] = who;
-    connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-            this, SLOT(recv(KIO::Job*, const QByteArray&)));
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    //FIXME: since kio_http bombs the system with too many request put a temporary arbitrary limit here
+    // revert as soon as BUG 192625 is fixed
+    if (m_runningJobs < 5) {
+        m_runningJobs++;
+        KIO::Job *job = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+        job->setAutoDelete(true);
+        m_jobs[job] = who;
+        connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
+                this, SLOT(recv(KIO::Job*, const QByteArray&)));
+        connect(job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+    } else {
+        m_queuedJobs.append(QPair<QString, KUrl>(who, url));
+    }
 }
 
 void ImageSource::recv(KIO::Job* job, const QByteArray& data)
@@ -52,6 +61,13 @@ void ImageSource::result(KJob *job)
 {
     if (!m_jobs.contains(job)) {
         return;
+    }
+
+    m_runningJobs--;
+
+    if (m_queuedJobs.count() > 0) {
+        QPair<QString, KUrl> jobDesc = m_queuedJobs.takeLast();
+        loadImage(jobDesc.first, jobDesc.second);
     }
 
     if (job->error()) {
