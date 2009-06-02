@@ -157,7 +157,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     mLabelUrl = new Plasma::Label( this );
     mLabelUrl->setMinimumWidth( 0 );
     mLabelUrl->nativeWidget()->setWordWrap( false );
-    if ( isAllowed( "LaunchApp" ) ) {
+    if ( hasAuthorization( "LaunchApp" ) ) {
         mLabelUrl->nativeWidget()->setCursor( Qt::PointingHandCursor );
         mLabelUrl->nativeWidget()->setToolTip( i18n( "Visit the comic website" ) );
     }
@@ -272,14 +272,14 @@ void ComicApplet::init()
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), mReloadTimer, SLOT( stop() ) );
     connect( mActionGoJump, SIGNAL( triggered( bool ) ), this, SLOT( slotGoJump() ) );
 
-    if ( isAllowed( "LaunchApp" ) ) {
+    if ( hasAuthorization( "LaunchApp" ) ) {
         mActionShop = new QAction( i18n( "Visit the shop &website" ), this );
         mActionShop->setEnabled( false );
         mActions.append( mActionShop );
         connect( mActionShop, SIGNAL( triggered( bool ) ), this, SLOT( slotShop() ) );
     }
 
-    if ( isAllowed( "FileDialog" ) ) {
+    if ( hasAuthorization( "FileDialog" ) ) {
         QAction *action = new QAction( KIcon( "document-save-as" ), i18n( "&Save Comic As..." ), this );
         mActions.append( action );
         //stop the timer to avoid tab switching while interacting with the applet
@@ -652,7 +652,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
     slotStartTimer();
     if ( event->button() == Qt::LeftButton ) {
         if ( mLabelUrl->isUnderMouse() ) {
-            if ( isAllowed( "LaunchApp" ) ) {
+            if ( hasAuthorization( "LaunchApp" ) ) {
                 // link clicked
                 KRun::runUrl( mWebsiteUrl, "text/html", 0 );
             }
