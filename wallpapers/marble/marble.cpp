@@ -168,11 +168,14 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
 
 void MarbleWallpaper::save(KConfigGroup &config)
 {
-    config.writeEntry(MAP_THEME_KEY, m_map->mapThemeId());
+    if (m_map) {
+        config.writeEntry(MAP_THEME_KEY, m_map->mapThemeId());
+        config.writeEntry(POSITION_LAT_KEY, m_map->centerLatitude());
+        config.writeEntry(POSITION_LON_KEY, m_map->centerLongitude());
+    }
+
     config.writeEntry(MOVEMENT_KEY, static_cast<int>(m_movement));
     config.writeEntry(ZOOM_KEY, m_zoom);
-    config.writeEntry(POSITION_LAT_KEY, m_map->centerLatitude());
-    config.writeEntry(POSITION_LON_KEY, m_map->centerLongitude());
     config.writeEntry(PROJECTION_KEY, static_cast<int>(m_projection));
     config.writeEntry(QUALITY_KEY, static_cast<int>(m_quality));
     config.writeEntry(ROTATION_LAT_KEY, m_rotationLat);
