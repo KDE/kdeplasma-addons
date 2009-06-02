@@ -350,7 +350,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         QList<QStandardItem *>lowItems;
 
         QFont titleFont = QApplication::font();
-        titleFont.setBold(true);
 
         QColor darkColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
         darkColor.setAlphaF(0.5);
@@ -374,6 +373,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                 dayName->setForeground(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
             }
 
+            titleFont.setBold(true);
             dayName->setFont(titleFont);
             dayName->setText(fiveDayTokens[0]);
             dayItems.append(dayName);
@@ -401,6 +401,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
             if (fiveDayTokens[3] != "N/U") {
                 QStandardItem *highItem = new QStandardItem();
+                titleFont.setBold(false);
                 highItem->setFont(titleFont);
                 if (fiveDayTokens[3] == "N/A") {
                     highItem->setText(i18nc("Short for no data available","-"));
@@ -413,6 +414,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
             if (fiveDayTokens[4] != "N/U") {
                 QStandardItem *lowItem = new QStandardItem();
+                titleFont.setBold(false);
                 lowItem->setFont(titleFont);
                 if (fiveDayTokens[4] == "N/A") {
                     lowItem->setText(i18nc("Short for no data available","-"));
