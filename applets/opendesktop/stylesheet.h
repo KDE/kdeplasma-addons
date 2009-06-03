@@ -36,7 +36,7 @@ class StyleSheet : public QObject
 
         void setFileName(const QString &cssFile);
 
-        QString styleSheet();
+        QString styleSheet() const;
         void setStyleSheet(const QString &css);
 
     Q_SIGNALS:

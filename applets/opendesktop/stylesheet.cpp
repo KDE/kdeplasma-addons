@@ -54,7 +54,7 @@ StyleSheet::~StyleSheet()
 {
 }
 
-QString StyleSheet::styleSheet()
+QString StyleSheet::styleSheet() const
 {
     return m_styleSheet;
 }

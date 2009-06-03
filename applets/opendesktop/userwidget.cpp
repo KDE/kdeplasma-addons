@@ -178,7 +178,7 @@ void UserWidget::setAtticaData(Plasma::DataEngine::Data data)
 
 }
 
-QString UserWidget::addRow(const QString title, const QString text)
+QString UserWidget::addRow(const QString& title, const QString& text)
 {
     if (!text.isEmpty()) {
         return QString("<tr><td class=\"rowheader\">%1</td><td>%2</td></tr>\n").arg(title, text);
@@ -268,16 +268,14 @@ void UserWidget::setInfo(const QString &text)
         m_info = text;
     }
     //kDebug();
-
-    QString html;
-    if (m_css) {
-        html = (QString("<style>%1</style>%2").arg(m_css->styleSheet(), m_info));
-    } else {
-        html = m_info;
-    }
-
     if (m_infoView) {
-        m_infoView->setHtml(html);
+      QString html;
+      if (m_css) {
+          html = (QString("<style>%1</style>%2").arg(m_css->styleSheet(), m_info));
+      } else {
+          html = m_info;
+      }
+      m_infoView->setHtml(html);
     }
 }
 

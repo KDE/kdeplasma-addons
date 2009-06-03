@@ -57,7 +57,7 @@ class UserWidget : public Plasma::Frame
     private :
         void buildDialog();
 
-        QString addRow(const QString title, const QString text);
+        QString addRow(const QString& title, const QString& text);
 
         Plasma::DataEngine::Data m_atticaData;
 
