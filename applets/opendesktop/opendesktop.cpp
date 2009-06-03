@@ -77,15 +77,8 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
         kDebug() << "Arguments:" << args << "id:" << args.at(0).toString().toInt();
     }
 
-    KConfigGroup cg = config();
-
     m_geolocation = new GeoLocation;
-    m_geolocation->city = cg.readEntry("geoCity", QString());
-    m_geolocation->country = cg.readEntry("geoCountry", QString());
-    m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
-    m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
-    m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
-    m_geolocation->distance = cg.readEntry("geoLongitude", 5);
+
 
     (void)graphicsWidget();
 }
@@ -99,6 +92,12 @@ void OpenDesktop::init()
 {
     kDebug() << "init: opendesktop";
     KConfigGroup cg = config();
+    m_geolocation->city = cg.readEntry("geoCity", QString());
+    m_geolocation->country = cg.readEntry("geoCountry", QString());
+    m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
+    m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
+    m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
+    m_geolocation->distance = cg.readEntry("geoLongitude", 5);
     m_maximumItems = cg.readEntry("maximumItems", 64);
     dataEngine("ocs")->connectSource("MaximumItems-" + QString::number(m_maximumItems), this);
     if (!id) {
