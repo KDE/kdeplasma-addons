@@ -39,7 +39,7 @@ class RTM_EXPORT Auth : public Request
 {
 Q_OBJECT
   public:
-    Auth(RTM::Permissions permissions, QString apiKey, QString sharedSecret);
+    Auth(RTM::Permissions permissions, const QString &apiKey, const QString &sharedSecret);
     void login(const QString &authUrl, const QString &username, const QString &password);
     QString getAuthUrl();
     void continueAuthForToken();

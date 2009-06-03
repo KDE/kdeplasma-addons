@@ -32,7 +32,7 @@
 
 const int RTM::Request::MAX_RETRIES = 10;
 
-RTM::Request::Request(QString method, QString apiKey, QString sharedSecret)
+RTM::Request::Request(const QString &method, const QString &apiKey, const QString &sharedSecret)
   : currentJob(0)
 {
   arguments.insert("method", method);
@@ -42,7 +42,7 @@ RTM::Request::Request(QString method, QString apiKey, QString sharedSecret)
   retries = 0;
 }
 
-void RTM::Request::addArgument(QString name, QString value) {
+void RTM::Request::addArgument(const QString &name, const QString &value) {
   arguments.insert(name, value);
 }
 

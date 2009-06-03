@@ -36,13 +36,13 @@ class RTM_EXPORT Request : public QBuffer
 {
 Q_OBJECT
   public:
-    Request(QString method, QString apiKey, QString sharedSecret);
+    Request(const QString &method, const QString &apiKey, const QString &sharedSecret);
     ~Request();
     
-    void addArgument(QString name, QString value);
+    void addArgument(const QString &name, const QString &value);
 
-    QString response() { return m_response; }
-    RTM::State state() { return m_state; }
+    QString response() const { return m_response; }
+    RTM::State state() const { return m_state; }
 
     virtual QString requestUrl(); // Conveniance
     QString method() const;

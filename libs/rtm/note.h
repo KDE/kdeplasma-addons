@@ -32,7 +32,7 @@ namespace RTM {
 
 class RTM_EXPORT Note {
 public:
-  Note(RTM::NoteId id, QString title, QString text)
+  Note(RTM::NoteId id, const QString& title, const QString& text)
   {
     noteId = id;
     m_title = title;

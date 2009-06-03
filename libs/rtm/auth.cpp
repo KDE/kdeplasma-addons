@@ -32,7 +32,7 @@
 #include <DOM/HTMLInputElement>
 #include <DOM/HTMLDocument>
 
-RTM::Auth::Auth(RTM::Permissions permissions, QString apiKey, QString sharedSecret)
+RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
   : authPage(0)
 {
   frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
