@@ -94,7 +94,7 @@ void Life::createConfigurationInterface(KConfigDialog *parent)
     ui.maxGensNumber->setValue(maxGensNumber);
 
     QRectF cSize = geometry();
-    int maxCells = (cSize.height() < cSize.width()) ? cSize.height() : cSize.width();
+    const int maxCells = (cSize.height() < cSize.width()) ? cSize.height() : cSize.width();
 
     ui.verticalCells->setMaximum(maxCells);
     ui.horizontalCells->setMaximum(maxCells);
