@@ -34,7 +34,7 @@ public:
 
     void setDataEngine(Plasma::DataEngine* dataengine);
     void setSource(const QString& source);
-    QString source();
+    QString source() const;
     QString nameForPlugin(const QString& plugin);
 
 public slots:

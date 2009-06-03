@@ -74,9 +74,9 @@ void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
 
     providerComboBox->clear();
     if (m_dataengine) {
-        QVariantList plugins = m_dataengine->query("ions").values();
+        const QVariantList plugins = m_dataengine->query("ions").values();
         foreach (const QVariant& plugin, plugins) {
-            QStringList pluginInfo = plugin.toString().split('|');
+            const QStringList pluginInfo = plugin.toString().split('|');
             providerComboBox->addItem(pluginInfo[0], pluginInfo[1]);
         }
         providerComboBox->setCurrentIndex(providerComboBox->findData("bbcukmet"));
@@ -86,18 +86,19 @@ void WeatherConfigSearch::setDataEngine(Plasma::DataEngine* dataengine)
 void WeatherConfigSearch::setSource(const QString& source)
 {
     m_source = source;
-    QStringList list = source.split('|', QString::SkipEmptyParts);
-    if (list.count() > 0) {
+    const QStringList list = source.split('|', QString::SkipEmptyParts);
+    int listCount = list.count();
+    if (listCount > 0) {
         providerComboBox->setCurrentIndex(providerComboBox->findData(list[0]));
     }
-    if (list.count() > 2) {
+    if (listCount > 2) {
         cityLineEdit->setText(list[2]);
     }
     cityLineEdit->selectAll();
     cityLineEdit->setFocus(Qt::OtherFocusReason);
 }
 
-QString WeatherConfigSearch::source()
+QString WeatherConfigSearch::source() const
 {
     return m_source;
 }
