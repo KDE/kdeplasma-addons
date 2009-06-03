@@ -78,7 +78,7 @@ QWidget *CharSelectApplet::widget()
 
 void CharSelectApplet::slotAddToClipboard()
 {
-    QString textLine = m_lineEdit->text();
+    const QString textLine = m_lineEdit->text();
     QClipboard *cb = QApplication::clipboard();
     cb->setText( textLine,QClipboard::Clipboard );
     cb->setText( textLine,QClipboard::Selection );
