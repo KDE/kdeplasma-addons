@@ -145,7 +145,7 @@ KUrl SlideShow::url()
     }
 }
 
-KUrl SlideShow::currentUrl()
+KUrl SlideShow::currentUrl() const
 {
     return m_currentUrl;
 }

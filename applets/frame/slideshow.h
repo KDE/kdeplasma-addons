@@ -43,7 +43,7 @@ public:
     void setImage(const QString &imagePath);
     void setRandom(bool);
     QImage image();
-    KUrl currentUrl();
+    KUrl currentUrl() const;
 
     void setUpdateInterval(int msec);
 
