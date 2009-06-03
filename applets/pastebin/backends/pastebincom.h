@@ -32,10 +32,10 @@ class PastebinCOMServer : public PastebinServer
     Q_OBJECT
 
 public:
-    PastebinCOMServer(KConfigGroup config);
+    PastebinCOMServer(const KConfigGroup& config);
     virtual ~PastebinCOMServer();
 
-    virtual void post(QString content);
+    virtual void post(const QString& content);
 
 public slots:
     void result(KIO::Job *job, const KUrl &url);

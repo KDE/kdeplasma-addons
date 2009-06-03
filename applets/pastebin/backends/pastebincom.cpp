@@ -22,7 +22,7 @@
 #include <KDebug>
 #include <QUrl>
 
-PastebinCOMServer::PastebinCOMServer(KConfigGroup config)
+PastebinCOMServer::PastebinCOMServer(const KConfigGroup& config)
     : PastebinServer()
 {
     m_server = config.readEntry("pastebincom", "http://pastebin.com");
@@ -45,7 +45,7 @@ void PastebinCOMServer::result(KIO::Job *job, const KUrl &url)
     emit postFinished(url.url());
 }
 
-void PastebinCOMServer::post(QString content)
+void PastebinCOMServer::post(const QString& content)
 {
     QByteArray bytearray = "code2=";
     bytearray.append(QUrl::toPercentEncoding(content,"/"));

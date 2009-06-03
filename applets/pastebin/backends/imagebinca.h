@@ -34,10 +34,10 @@ class ImagebinCAServer : public PastebinServer
     Q_OBJECT
 
 public:
-    ImagebinCAServer(KConfigGroup config);
+    ImagebinCAServer(const KConfigGroup& config);
     virtual ~ImagebinCAServer();
 
-    virtual void post(QString content);
+    virtual void post(const QString& content);
 
     void finish();
     bool addPair(const QString& name, const QString& value);

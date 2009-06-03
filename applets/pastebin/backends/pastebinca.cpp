@@ -23,7 +23,7 @@
 #include <KDebug>
 #include <QUrl>
 
-PastebinCAServer::PastebinCAServer(KConfigGroup config)
+PastebinCAServer::PastebinCAServer(const KConfigGroup& config)
     : PastebinServer(),
       m_apikey("AnGWmLlrReJCCJOUMOMpHViBTFkFZxre")
 {
@@ -60,7 +60,7 @@ void PastebinCAServer::readKIOData(KIO::Job *job, const QByteArray &data)
     _data.append(data);
 }
 
-void PastebinCAServer::post(QString content)
+void PastebinCAServer::post(const QString& content)
 {
     QByteArray bytearray = "content=";
     bytearray.append(QUrl::toPercentEncoding(content,"/"));

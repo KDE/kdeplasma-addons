@@ -34,10 +34,10 @@ class PastebinCAServer : public PastebinServer
     Q_OBJECT
 
 public:
-    PastebinCAServer(KConfigGroup config);
+    PastebinCAServer(const KConfigGroup& config);
     virtual ~PastebinCAServer();
 
-    virtual void post(QString content);
+    virtual void post(const QString& content);
 
 protected:
     const QByteArray m_apikey;

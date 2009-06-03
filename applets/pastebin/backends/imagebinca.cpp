@@ -32,7 +32,7 @@
 #include <kapplication.h>
 #include <KDebug>
 
-ImagebinCAServer::ImagebinCAServer(KConfigGroup config)
+ImagebinCAServer::ImagebinCAServer(const KConfigGroup& config)
     : PastebinServer()
 {
     m_server = config.readEntry("imagebinca", "http://imagebin.ca");
@@ -155,7 +155,7 @@ bool ImagebinCAServer::addFile(const QString& name,const QString& path)
 }
 
 
-void ImagebinCAServer::post(QString content)
+void ImagebinCAServer::post(const QString& content)
 {
     KUrl url(QString("%1/upload.php").arg(m_server));
 

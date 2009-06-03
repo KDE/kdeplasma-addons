@@ -34,10 +34,10 @@ class ImageshackServer : public PastebinServer
     Q_OBJECT
 
 public:
-    ImageshackServer(KConfigGroup config);
+    ImageshackServer(const KConfigGroup& config);
     virtual ~ImageshackServer();
 
-    virtual void post(QString content);
+    virtual void post(const QString& content);
 
     void finish();
     bool addPair(const QString& name, const QString& value);

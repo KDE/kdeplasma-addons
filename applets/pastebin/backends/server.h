@@ -29,7 +29,7 @@ class PastebinServer : public QObject
 
 public:
     virtual ~PastebinServer();
-    virtual void post(QString content) = 0;
+    virtual void post(const QString& content) = 0;
 
 signals:
     void postFinished(const QString &data);

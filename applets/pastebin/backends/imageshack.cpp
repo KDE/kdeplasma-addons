@@ -33,7 +33,7 @@
 #include <kapplication.h>
 #include <KDebug>
 
-ImageshackServer::ImageshackServer(KConfigGroup config)
+ImageshackServer::ImageshackServer(const KConfigGroup& config)
     : PastebinServer()
 {
     m_server = config.readEntry("imageshack", "http://imageshack.us");
@@ -151,7 +151,7 @@ bool ImageshackServer::addFile(const QString& name,const QString& path)
 }
 
 
-void ImageshackServer::post(QString content)
+void ImageshackServer::post(const QString& content)
 {
     KUrl url(QString("%1").arg(m_server));
 

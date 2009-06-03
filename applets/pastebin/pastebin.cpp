@@ -85,8 +85,7 @@ Pastebin::~Pastebin()
 
 void Pastebin::setImageServer(int backend)
 {
-    if (m_imageServer)
-        delete m_imageServer;
+    delete m_imageServer;
 
     switch(backend) {
 
