@@ -155,9 +155,9 @@ void News::connectToEngine()
 
 void News::makeStylesheet()
 {
-    QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() +
+    const QString search = "desktoptheme/" + Plasma::Theme::defaultTheme()->themeName() +
                      "/stylesheets/news.css";
-    QString path =  KStandardDirs::locate("data", search);
+    const QString path =  KStandardDirs::locate("data", search);
     if (path.isEmpty()) {
         KColorScheme plasmaColorTheme = KColorScheme(QPalette::Active, KColorScheme::View,
                 Plasma::Theme::defaultTheme()->colorScheme());
@@ -194,7 +194,7 @@ void News::makeStylesheet()
 QMap<QString, QString> News::akregatorFeeds()
 {
     QMap<QString, QString> result;
-    QString file = KStandardDirs::locate("data", "akregator/data/feeds.opml");
+    const QString file = KStandardDirs::locate("data", "akregator/data/feeds.opml");
     if (!file.isEmpty()) {
         QFile f(file);
         if (f.open(QIODevice::ReadOnly)) {
@@ -324,7 +324,7 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (KUrl::List::canDecode(event->mimeData())) {
         KUrl::List urls = KUrl::List::fromMimeData(event->mimeData());
 
-        if (urls.count() > 0) {
+        if (!urls.isEmpty()) {
             event->accept();
             m_feeds.clear();
             foreach (const KUrl &feed, urls) {
