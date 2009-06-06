@@ -44,7 +44,6 @@ Virus::Virus(QObject *parent, const QVariantList &args)
       m_startupResumed(false)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
     connect(&alife, SIGNAL(finished()), this, SLOT(virusUpdated()));
 }
 
@@ -424,21 +423,10 @@ QString Virus::cacheId() const
 
 void Virus::updateBackground(const QImage &img)
 {
-    /*m_oldPixmap = m_pixmap;
-    m_oldFadedPixmap = m_oldPixmap;*/
     m_pixmap = QPixmap::fromImage(img);
-
-    /*if (!m_oldPixmap.isNull()) {
-        Plasma::Animator::self()->customAnimation(254, 1000, Plasma::Animator::EaseInCurve, this, "updateFadedImage");
-        suspendStartup(false);
-    } else {*/
-        alife.setImage(m_pixmap.toImage());
-        if(!alife.inited()){
-            alife.initVirus();
-            QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));
-        }
-        emit update(boundingRect());
-    //}
+    alife.setImage(m_pixmap.toImage());
+    QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));
+    emit update(boundingRect());
 }
 
 void Virus::suspendStartup(bool suspend)

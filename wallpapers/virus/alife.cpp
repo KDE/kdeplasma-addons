@@ -27,13 +27,33 @@ Alife::Alife(){
 }
 
 Alife::~Alife(){
-    for(int i = 0; i < m_livingCells.size(); i++) {
-        struct cell* cell = m_livingCells.at(i);
-        delete [] cell->code;
-    }
+    resetLife();
+}
 
-    delete []m_cells[0];
-    delete []m_cells;
+void Alife::resetLife(){
+    mutex.lock();
+    if(inited()){
+        while( !m_livingCells.isEmpty() ){
+            struct cell* cell = m_livingCells.takeFirst();
+            delete [] cell->code;
+        }
+
+        delete []m_cells[0];
+        delete []m_cells;
+        m_cells = 0;
+    }
+    mutex.unlock();
+    //qDebug() << "life reseted";
+}
+
+void Alife::setImage(QImage image){
+    m_image = image;
+    m_image_original = image;
+    m_height = m_image.height();
+    m_width = m_image.width();
+    m_max_attended = false;
+    resetLife();
+    initVirus();
 }
 
 void Alife::initVirus()
@@ -61,6 +81,7 @@ void Alife::initVirus()
     }
 
     createViruses(m_startViruses);
+    //qDebug() << "life created";
 }
 
 //create the needed viruses so that we have in total "amount" viruses
@@ -489,12 +510,16 @@ QPoint Alife::getNeighbour(int x, int y, int direction)
 }
 
 void Alife::run(){
-    qsrand(QTime::currentTime().msec());
-    //QTime a = QTime::currentTime();
+    mutex.lock();
+    QTime a = QTime::currentTime();
+    qsrand(a.msec());
+    
     virusMove();
-    //QTime b = QTime::currentTime();
+    
+    QTime b = QTime::currentTime();
+    //qDebug() << "needed" << a.msecsTo(b);
 
-    //kDebug() << "needed" << a.msecsTo(b);
+    mutex.unlock();
 }
 
 //performance critical

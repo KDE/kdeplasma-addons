@@ -15,6 +15,7 @@
 #include <QPoint>
 #include <QThread>
 #include <QTime>
+#include <QMutex>
 
 struct cell {
     bool alive;
@@ -46,7 +47,8 @@ class Alife : public QThread {
     QPoint getNeighbour(int x, int y, int direction);
     uchar randomCode();
     void resetCell(struct cell *temp);
-
+    void resetLife();
+    
     bool inited(){ return m_cells != 0;};
 
     void setUpdateInterval(int interval){
@@ -81,13 +83,8 @@ class Alife : public QThread {
 	return m_showCells;
     }
 
-    void setImage(QImage image){
-      m_image = image;
-      m_image_original = image;
-      m_height = m_image.height();
-      m_width = m_image.width();
-      m_max_attended = false;
-    }
+    
+    void setImage(QImage image);
 
     void createViruses(int amount);
 
@@ -111,6 +108,7 @@ class Alife : public QThread {
     
     int m_current_eat;
     int m_current_eat_best;
+    QMutex mutex;
 };
 
 #endif
