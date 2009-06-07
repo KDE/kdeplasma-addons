@@ -47,13 +47,17 @@ void Alife::resetLife(){
 }
 
 void Alife::setImage(QImage image){
+    bool keepViruses = false;
     m_image = image;
     m_image_original = image;
+    keepViruses = m_height == m_image.height() && m_width == m_image.width();
     m_height = m_image.height();
     m_width = m_image.width();
     m_max_attended = false;
-    resetLife();
-    initVirus();
+    if(!keepViruses || !inited()){
+        resetLife();
+        initVirus();
+    }
 }
 
 void Alife::initVirus()
