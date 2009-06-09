@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Magnifique
+Name[it]=Lente d'ingrandimento
 Name[sv]=Magnifik
+Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=魅影
 Comment = a magnification glass for Plasma canvas
 Type=Service
