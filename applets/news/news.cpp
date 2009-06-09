@@ -28,6 +28,7 @@
 
 #include <KConfigDialog>
 #include <KColorScheme>
+#include <KColorUtils>
 #include <KStandardDirs>
 #include <KRun>
 
@@ -72,7 +73,7 @@ static const char *CSS =
             "a { text-decoration:none; color:%1 }\n"
             "table { width:100%; border-spacing:0px; }\n"
             "td { vertical-align: top; }\n"
-            "body { margin:0px; background-color:%3 }\n";
+            "body { margin:0px; background:none }\n";
 
 News::News(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
@@ -161,19 +162,18 @@ void News::makeStylesheet()
     if (path.isEmpty()) {
         KColorScheme plasmaColorTheme = KColorScheme(QPalette::Active, KColorScheme::View,
                 Plasma::Theme::defaultTheme()->colorScheme());
-        QColor headerColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::HighlightColor);
-        QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
         QColor backgroundColor =
                 Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+        QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
         QColor altBackgroundColor = backgroundColor;
         altBackgroundColor.setHsv(altBackgroundColor.hue(), altBackgroundColor.saturation(),
                 (altBackgroundColor.value() < 128)
                 ? backgroundColor.value() + 40 : backgroundColor.value() - 40,
                 altBackgroundColor.alpha());
         QString css = QString(CSS).arg(textColor.name())
-                                .arg(headerColor.name())
-                                .arg(backgroundColor.name())
-                                .arg(altBackgroundColor.name());
+                                .arg(QString("rgba(%1, %2, %3, 0.45)").arg(backgroundColor.red()).arg( backgroundColor.green()).arg( backgroundColor.blue()))
+                                .arg(QString("rgba(%1, %2, %3, 0.25)").arg(backgroundColor.red()).arg( backgroundColor.green()).arg( backgroundColor.blue()))
+                                .arg(QString("rgba(%1, %2, %3, 0.25)").arg(altBackgroundColor.red()).arg( altBackgroundColor.green()).arg( altBackgroundColor.blue()));
         KStandardDirs dirs;
         m_cssDir = dirs.saveLocation("data", "plasma_applet_news");
 
