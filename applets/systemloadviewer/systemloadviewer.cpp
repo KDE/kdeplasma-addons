@@ -593,7 +593,7 @@ void SystemLoadViewer::readConfig()
     m_ramUserColour = QColor(cg.readEntry("colour_ram_used", QString("#0000FF")));
     m_swapUsedColour = QColor(cg.readEntry("colour_swap_used", QString("#00CDCD")));
     m_freeResourceColor = cg.readEntry("colour_free_resource", QString("#808080"));
-    m_freeResourceColor.setAlpha(cg.readEntry("transparency_free_resource", 128));
+    m_freeResourceColor.setAlpha(cg.readEntry("transparency_free_resource", 0));
 }
 
 void SystemLoadViewer::toolTipAboutToShow()
