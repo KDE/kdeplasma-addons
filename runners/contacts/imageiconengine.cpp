@@ -48,9 +48,13 @@ void ImageIconEngine::paint(QPainter *painter, const QRect &rect, QIcon::Mode mo
 QPixmap ImageIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state)
 {
     Q_UNUSED(state);
-    Q_UNUSED(size);
+
+    QImage image = m_image;
+    if (size.isValid() && size != image.size()) {
+        image = image.scaled(size);
+    }
 
     QStyleOption opt;
-    return QApplication::style()->generatedIconPixmap(mode, QPixmap::fromImage(m_image), &opt);
+    return QApplication::style()->generatedIconPixmap(mode, QPixmap::fromImage(image), &opt);
 }
 
