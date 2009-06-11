@@ -49,6 +49,7 @@ Magnifique::Magnifique(QObject *parent, const QVariantList &args)
 
 Magnifique::~Magnifique()
 {
+    delete m_mainWindow;
 }
 
 void Magnifique::init()
