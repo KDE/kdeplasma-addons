@@ -29,6 +29,12 @@
 bool system_has_SSE2()
 {
   QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
+
+  if (list.isEmpty()) {
+      // because in the magical world of Solid, we can have no CPUs in our computer
+      return false;
+  }
+
   Solid::Processor::InstructionSets extensions = list[0].as<Solid::Processor>()->instructionSets();
   return (bool)(extensions & Solid::Processor::IntelSse2);
 }
