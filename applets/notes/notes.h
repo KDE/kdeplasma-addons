@@ -162,7 +162,7 @@ class Notes : public Plasma::Applet
         QMenu *m_colorMenu;
         QMenu *m_formatMenu;
 
-        Plasma::Svg m_notes_theme;
+        Plasma::Svg m_notesTheme;
         QGraphicsLinearLayout *m_layout;
         PlasmaTextEdit *m_textEdit;
         Ui::config ui;

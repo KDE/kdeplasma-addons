@@ -313,8 +313,8 @@ Notes::~Notes()
 
 void Notes::init()
 {
-    m_notes_theme.setImagePath("widgets/notes");
-    m_notes_theme.setContainsMultipleImages(false);
+    m_notesTheme.setImagePath("widgets/notes");
+    m_notesTheme.setContainsMultipleImages(false);
 
     m_colorMenu = new QMenu(i18n("Notes Color"));
     connect(m_colorMenu, SIGNAL(triggered(QAction*)), this, SLOT(changeColor(QAction*)));
@@ -461,7 +461,7 @@ void Notes::saveNote()
 
 void Notes::addColor(const QString &id, const QString &colorName)
 {
-    if (m_notes_theme.hasElement(id + "-notes")) {
+    if (m_notesTheme.hasElement(id + "-notes")) {
         QAction *tmpAction = m_colorMenu->addAction(colorName);
         tmpAction->setProperty("color", id);
     }
@@ -494,11 +494,11 @@ void Notes::paintInterface(QPainter *p,
 {
     Q_UNUSED(option);
 
-    m_notes_theme.resize(geometry().size());
-    if (m_notes_theme.hasElement(m_color + "-notes")) {
-        m_notes_theme.paint(p, contentsRect, m_color + "-notes");
+    m_notesTheme.resize(geometry().size());
+    if (m_notesTheme.hasElement(m_color + "-notes")) {
+        m_notesTheme.paint(p, contentsRect, m_color + "-notes");
     } else {
-        m_notes_theme.paint(p, contentsRect, "yellow-notes");
+        m_notesTheme.paint(p, contentsRect, "yellow-notes");
     }
 }
 
