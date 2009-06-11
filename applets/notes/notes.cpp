@@ -68,6 +68,9 @@ void NotesTextEdit::setFormatMenu(QMenu *menu)
 void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
 {
     QMenu *popup = mousePopupMenu();
+    popup->setWindowFlags(popup->windowFlags() | Qt::BypassGraphicsProxyWidget);
+    popup->setParent(0);
+    //popup->setParent(this);
     popup->addSeparator();
     popup->addAction(KStandardAction::saveAs(this, SLOT(saveToFile()), this));
 
@@ -75,7 +78,7 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
         popup->addMenu(m_formatMenu);
     }
 
-    popup->exec(event->globalPos());
+    popup->exec(event->pos());
     delete popup;
 }
 
@@ -211,7 +214,6 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
     setWidget(native);
     delete w;
     native->setAttribute(Qt::WA_NoSystemBackground);
-
 }
 
 PlasmaTextEdit::~PlasmaTextEdit()
@@ -246,18 +248,18 @@ void NotesTextEdit::saveToFile()
 */
 void Notes::mouseUnhovered()
 {
-      QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
-      QTextEdit::ExtraSelection textxtra;
-      textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
-      textxtra.cursor.movePosition( QTextCursor::StartOfLine );
-      textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
-      textxtra.format.setBackground( Qt::transparent );
+    QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
+    QTextEdit::ExtraSelection textxtra;
+    textxtra.cursor = m_textEdit->nativeWidget()->textCursor();
+    textxtra.cursor.movePosition( QTextCursor::StartOfLine );
+    textxtra.cursor.movePosition( QTextCursor::EndOfLine, QTextCursor::KeepAnchor );
+    textxtra.format.setBackground( Qt::transparent );
 
-      QList<QTextEdit::ExtraSelection> extras;
-      extras << textxtra;
-      m_textEdit->nativeWidget()->setExtraSelections( extras );
+    QList<QTextEdit::ExtraSelection> extras;
+    extras << textxtra;
+    m_textEdit->nativeWidget()->setExtraSelections( extras );
 
-      update();
+    update();
 }
 
 Notes::Notes(QObject *parent, const QVariantList &args)
@@ -459,8 +461,10 @@ void Notes::saveNote()
 
 void Notes::addColor(const QString &id, const QString &colorName)
 {
-    QAction *tmpAction = m_colorMenu->addAction(colorName);
-    tmpAction->setProperty("color", id);
+    if (m_notes_theme.hasElement(id + "-notes")) {
+        QAction *tmpAction = m_colorMenu->addAction(colorName);
+        tmpAction->setProperty("color", id);
+    }
 }
 
 void Notes::changeColor(QAction *action)
@@ -491,7 +495,11 @@ void Notes::paintInterface(QPainter *p,
     Q_UNUSED(option);
 
     m_notes_theme.resize(geometry().size());
-    m_notes_theme.paint(p, contentsRect, m_color + "-notes");
+    if (m_notes_theme.hasElement(m_color + "-notes")) {
+        m_notes_theme.paint(p, contentsRect, m_color + "-notes");
+    } else {
+        m_notes_theme.paint(p, contentsRect, "yellow-notes");
+    }
 }
 
 void Notes::createConfigurationInterface(KConfigDialog *parent)
