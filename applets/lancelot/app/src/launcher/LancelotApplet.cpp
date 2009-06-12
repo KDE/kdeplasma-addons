@@ -126,31 +126,32 @@ public:
 
     void resize()
     {
-         QSizeF size = q->size();
-         int buttonCount = buttons.size();  //(showCategories ? 4 : 1);
-         int sumSpacing = (buttonCount - 1) * SPACING;
+        QSizeF size = q->size();
+        int buttonCount = buttons.size();  //(showCategories ? 4 : 1);
+        int sumSpacing = (buttonCount - 1) * SPACING;
 
-         if (q->formFactor() == Plasma::Vertical) {
-             layout->setMinimumSize(
-                     SIZE_CMIN,  SIZE_CMIN  * buttonCount + sumSpacing);
-             layout->setPreferredSize(
-                     SIZE_CPREF, SIZE_CPREF * buttonCount + sumSpacing);
-             layout->setMaximumSize(
-                     INT_MAX,    SIZE_CMAX  * buttonCount + sumSpacing);
-         } else if (q->formFactor() == Plasma::Horizontal) {
-             layout->setMinimumSize(
-                     SIZE_CMIN  * buttonCount + sumSpacing, SIZE_CMIN);
-             layout->setPreferredSize(
-                     SIZE_CPREF * buttonCount + sumSpacing, SIZE_CPREF);
-             layout->setMaximumSize(
-                     SIZE_CMAX  * buttonCount + sumSpacing, INT_MAX);
-         } else {
-             size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
-             size = QSizeF(size.height() * buttons.count(), size.height());
-             layout->setPreferredSize(size);
-             q->resize(size);
-         }
-         layout->updateGeometry();
+        if (q->formFactor() == Plasma::Vertical) {
+            q->setMinimumSize(
+                    SIZE_CMIN,  SIZE_CMIN  * buttonCount + sumSpacing);
+            q->setPreferredSize(
+                    SIZE_CPREF, SIZE_CPREF * buttonCount + sumSpacing);
+            q->setMaximumSize(
+                    INT_MAX,    SIZE_CMAX  * buttonCount + sumSpacing);
+        } else if (q->formFactor() == Plasma::Horizontal) {
+            q->setMinimumSize(
+                    SIZE_CMIN  * buttonCount + sumSpacing, SIZE_CMIN);
+            q->setPreferredSize(
+                    SIZE_CPREF * buttonCount + sumSpacing, SIZE_CPREF);
+            q->setMaximumSize(
+                    SIZE_CMAX  * buttonCount + sumSpacing, INT_MAX);
+        } else {
+            size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
+            size = QSizeF(size.height() * buttons.count(), size.height());
+            q->setPreferredSize(size);
+            q->resize(size);
+        }
+
+        q->updateGeometry();
     }
 
     void toggleHide()
@@ -202,7 +203,7 @@ LancelotApplet::LancelotApplet(QObject * parent,
             parent));
     connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
 
-    d->waitClick.setInterval(1000); // 1 sec
+    d->waitClick.setInterval(500); // 1/2 sec
     d->waitClick.setSingleShot(true);
 }
 
@@ -274,7 +275,9 @@ void LancelotApplet::showLancelot()
 {
     if (d->offline) return;
 
-    d->waitClick.start();
+    if (!d->lancelot->isShowing()) {
+        d->waitClick.start();
+    }
     QPoint position = popupPosition(QSize());
     d->lancelot->show(position.x(), position.y());
 }
@@ -300,7 +303,9 @@ void LancelotApplet::showLancelotSection(const QString & section)
 {
     if (d->offline) return;
 
-    d->waitClick.start();
+    if (!d->lancelot->isShowing()) {
+        d->waitClick.start();
+    }
     QPoint position = popupPosition(QSize());
     d->lancelot->showItem(position.x(), position.y(), section);
 }
