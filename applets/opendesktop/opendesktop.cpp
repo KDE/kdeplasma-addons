@@ -212,11 +212,13 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
         m_userWidget->setAtticaData(data);
         return;
     }
-    if (m_friends.keys().contains(_id)) {
-        kDebug() << "Updated existing widget" << m_near.keys();
+
+    if (m_friends.value(_id)) {
+        kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
         m_friends[_id]->setAtticaData(data);
         return;
     }
+
     if (name.isEmpty()) {
         kDebug() << "Name empty, using id" << name << _id;
         name = _id;
@@ -247,17 +249,19 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
         m_userWidget->setAtticaData(data);
         return;
     }
-    if (m_near.keys().contains(_id)) {
-        kDebug() << "Updated existing widget" << m_near.keys();
+
+    if (m_near.value(_id)) {
+        kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
         m_near[_id]->setAtticaData(data);
         return;
     }
+
     if (name.isEmpty()) {
         name = _id;
     }
 
     // just show the first couple of widgets
-    if ( m_near.count() > m_maximumItems ) {
+    if (m_near.count() > m_maximumItems) {
         return;
     }
 
@@ -285,7 +289,7 @@ void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
     n = m_nearLayout->count();
     for (int i = 0; i < n; i++) {
         ContactWidget *cw = dynamic_cast<ContactWidget*>(m_nearLayout->itemAt(i));
-        m_friends.remove(cw->user());
+        m_near.remove(cw->user());
         cw->deleteLater();
     }
 
@@ -419,9 +423,10 @@ void OpenDesktop::configAccepted()
     // General tab
     QString cuser = ui.username->text();
     if (m_username != cuser) {
-        if (m_friends.keys().contains(cuser)) {
+        if (m_friends.value(cuser)) {
             m_userWidget->setAtticaData(m_friends[cuser]->data());
         }
+
         disconnectFriends(m_username);
         int n = m_friendsLayout->count();
         // Empty the friendslayout
@@ -430,6 +435,7 @@ void OpenDesktop::configAccepted()
             m_friends.remove(cw->user());
             cw->deleteLater();
         }
+
         disconnectPerson(m_username);
         m_username = cuser;
         m_displayedUser = m_username;
