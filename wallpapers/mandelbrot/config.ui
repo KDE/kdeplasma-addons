@@ -14,14 +14,11 @@
    <string>Color</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label_5">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="text">
       <string>&amp;Inside color:</string>
      </property>
@@ -72,12 +69,6 @@
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_6">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="text">
       <string>&amp;Frontier color:</string>
      </property>
@@ -115,12 +106,6 @@
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_7">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="text">
       <string>&amp;Outside color:</string>
      </property>
@@ -158,12 +143,6 @@
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_8">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="text">
       <string>&amp;Quality:</string>
      </property>
