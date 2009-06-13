@@ -151,12 +151,12 @@ QWidget *MarbleWallpaper::createConfigurationInterface(QWidget *parent)
     updateConfigScreen(static_cast<int>(m_movement));
 
     connect(m_ui.movement, SIGNAL(currentIndexChanged(int)), SLOT(updateConfigScreen(int)));
-    connect(m_ui.movement, SIGNAL(currentIndexChanged(int)), SLOT(updateSettings));
+    connect(m_ui.movement, SIGNAL(currentIndexChanged(int)), SLOT(updateSettings()));
     connect(m_ui.projection, SIGNAL(currentIndexChanged(int)), SLOT(updateSettings()));
     connect(m_ui.quality, SIGNAL(currentIndexChanged(int)), SLOT(updateSettings()));
     connect(m_ui.rotationLon, SIGNAL(valueChanged(double)), SLOT(updateSettings()));
     connect(m_ui.rotationLat, SIGNAL(valueChanged(double)), SLOT(updateSettings()));
-    connect(m_ui.timeout, SIGNAL(valueChanged(int)), SLOT(updateSettings()));
+    connect(m_ui.timeout, SIGNAL(valueChanged(double)), SLOT(updateSettings()));
     connect(m_ui.showPlacemarks, SIGNAL(stateChanged(int)), SLOT(updateSettings()));
     connect(m_ui.themeList, SIGNAL(currentIndexChanged(int)), SLOT(changeTheme(int)));
 
