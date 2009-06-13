@@ -88,7 +88,7 @@ public:
     void pass(const QStringList &strings)
     {
         passWhiteSpace();
-        QString temp = m_s.mid(m_index);
+        const QString temp = m_s.mid(m_index);
 
         foreach (const QString& s, strings) {
             if (temp.startsWith(s)) {
@@ -161,7 +161,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     QStringList separators;
     separators << QString(CONVERSION_CHAR) << i18nc("amount of 'unit1' in 'unit2'", "in")
                << i18nc("amount of 'unit1' as 'unit2'", "as");
-    QString s = cmd.get(StringParser::GetString);
+    const QString s = cmd.get(StringParser::GetString);
 
     if (!s.isEmpty() && !separators.contains(s)) {
         unit1 += ' ' + s;
@@ -183,7 +183,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         match.setData(v.number());
         context.addMatch(term, match);
     } else if (!unit2.isEmpty()) {
-        QStringList units = category->allUnits();
+        const QStringList units = category->allUnits();
         QSet<Conversion::Unit*> matchingUnits;
         foreach (const QString& s, units) {
             if (s.startsWith(unit2)) {
@@ -213,7 +213,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 void ConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QString data = match.data().toString();
+    const QString data = match.data().toString();
     if (data.startsWith(QLatin1String("http://"))) {
         KToolInvocation::invokeBrowser(data);
     } else {

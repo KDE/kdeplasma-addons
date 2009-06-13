@@ -40,7 +40,7 @@ KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
     loadSessions();
 
     KDirWatch *historyWatch = new KDirWatch(this);
-    QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "konsole/");
+    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "konsole/");
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
@@ -62,11 +62,11 @@ KonsoleSessions::~KonsoleSessions()
 
 void KonsoleSessions::loadSessions()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.profile", KStandardDirs::NoDuplicates);
+    const QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.profile", KStandardDirs::NoDuplicates);
     QStringList::ConstIterator end = list.constEnd();
     for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it) {
         QFileInfo info(*it);
-        QString profileName = KIO::decodeFileName(info.baseName());
+        const QString profileName = KIO::decodeFileName(info.baseName());
 
         QString niceName=profileName;
         //kDebug()<<" loadSessions :";
@@ -139,7 +139,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
 void KonsoleSessions::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QString session = match.data().toString();
+    const QString session = match.data().toString();
     kDebug() << "Open Konsole Session " << session;
 
     if (!session.isEmpty()) {

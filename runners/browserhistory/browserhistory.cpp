@@ -98,7 +98,7 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
 void BrowserHistoryRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QString location = match.data().toString();
+    const QString location = match.data().toString();
     kDebug() << "Browse to " << location;
     if (!location.isEmpty()) {
         KToolInvocation::invokeBrowser(location);

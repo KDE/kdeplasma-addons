@@ -73,8 +73,8 @@ void SpellCheckConfig::load()
     KConfigGroup conf = cfg->group( "Runners" );
     KConfigGroup grp = KConfigGroup( &conf, "Spell Checker");
 
-    bool requireTrigger = grp.readEntry("requireTriggerWord", true);
-    QString trigger = grp.readEntry("trigger", i18n("spell"));
+    const bool requireTrigger = grp.readEntry("requireTriggerWord", true);
+    const QString trigger = grp.readEntry("trigger", i18n("spell"));
 
     if (!requireTrigger) {
         m_ui->m_triggerWord->setEnabled(false);

@@ -46,7 +46,7 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
 
     // listen for changes to the list of kate sessions
     KDirWatch *historyWatch = new KDirWatch(this);
-    QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "kate/sessions/");
+    const QStringList sessiondirs = KGlobal::dirs()->findDirs("data", "kate/sessions/");
     foreach (const QString &dir, sessiondirs) {
         historyWatch->addDir(dir);
     }
@@ -150,7 +150,7 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 
     if (!session.isEmpty()) {
         QStringList args;
-        args << "--start" << session;
+       	args << "--start" << session;
         KToolInvocation::kdeinitExec("kate", args);
     }
 }

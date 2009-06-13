@@ -68,12 +68,12 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             return;
         }
 
-        bool matchedName = a.realName().contains(term, Qt::CaseInsensitive);
+        const bool matchedName = a.realName().contains(term, Qt::CaseInsensitive);
         bool matchedMail = false;
 
         if (!matchedName) {
             // Name didn't match, so lets try the name portion of the email address
-            int indexOf = a.preferredEmail().indexOf(term, Qt::CaseInsensitive);
+            const int indexOf = a.preferredEmail().indexOf(term, Qt::CaseInsensitive);
             matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf('@');
         }
 
@@ -118,8 +118,8 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
 void ContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context);
-    QString address = match.data().toString();
-    QString name = match.text();
+    const QString address = match.data().toString();
+    const QString name = match.text();
 
     kDebug() << "run name '" << name << "' with address '" << address << "'";
 

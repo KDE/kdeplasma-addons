@@ -62,6 +62,11 @@ void SpellCheckRunner::reloadConfiguration()
 
 void SpellCheckRunner::match(Plasma::RunnerContext &context)
 {
+    if (!context.isValid()) {
+        return;
+    }
+
+
     const QString term = context.query();
     QString query = term;
 
@@ -79,11 +84,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     }
 
     QStringList suggestions;
-    bool correct = m_speller.checkAndSuggest(query,suggestions);
-
-    if (!context.isValid()) {
-        return;
-    }
+    const bool correct = m_speller.checkAndSuggest(query,suggestions);
 
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);
@@ -93,7 +94,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
         match.setText(i18n("Correct"));
     } else {
         match.setIcon(KIcon("no"));
-        QString recommended = i18n("Suggested words: %1", suggestions.join (", "));
+        const QString recommended = i18n("Suggested words: %1", suggestions.join (", "));
         match.setText(recommended);
         match.setData(suggestions);
     }
