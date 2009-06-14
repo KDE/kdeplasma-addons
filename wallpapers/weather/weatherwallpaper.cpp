@@ -144,6 +144,10 @@ QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
     m_configWidget->setUpdateInterval(m_weatherUpdateTime);
     m_configWidget->setConfigurableUnits(WeatherConfig::None);
     m_configWidget->setHeadersVisible(false);
+    
+    connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
+    connect(m_configWidget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
+        
     return m_configWidget;
 }
 

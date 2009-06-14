@@ -49,7 +49,10 @@ public:
     QWidget * createConfigurationInterface(QWidget * parent);
     void paint(QPainter * painter, const QRectF & exposedRect);
     void updateScreenshot(QPersistentModelIndex index);
-
+    
+signals:
+    void settingsChanged(bool changed = true);
+    
 public slots:
     void showAdvancedDialog();
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -79,7 +82,7 @@ protected:
 
 private slots:
     void loadImage();
-
+    
 private:
     WeatherConfig* m_configWidget;
     WeatherLocation* m_weatherLocation;
