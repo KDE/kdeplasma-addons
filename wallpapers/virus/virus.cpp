@@ -45,6 +45,10 @@ Virus::Virus(QObject *parent, const QVariantList &args)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
     connect(&alife, SIGNAL(finished()), this, SLOT(virusUpdated()));
+    
+    //m_timer = QTimer(this);
+    m_timer.setSingleShot(true);
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(requestUpdate()));
 }
 
 Virus::~Virus()
@@ -82,11 +86,7 @@ void Virus::init(const KConfigGroup &config)
 
     setUsingRenderingCache(false);
 
-    //if (m_mode == "SingleImage") {
     setSingleImage();
-    /*} else {
-        QTimer::singleShot(0, this, SLOT(startSlideshow()));
-    }*/
 }
 
 void Virus::requestUpdate()
@@ -98,7 +98,7 @@ void Virus::virusUpdated()
 {
     m_pixmap = QPixmap::fromImage(alife.currentImage());
     emit update(boundingRect());
-    QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));
+    m_timer.start(alife.getUpdateInterval());
 }
 
 
@@ -430,7 +430,7 @@ void Virus::updateBackground(const QImage &img)
 {
     m_pixmap = QPixmap::fromImage(img);
     alife.setImage(m_pixmap.toImage());
-    QTimer::singleShot(alife.getUpdateInterval(), this, SLOT(requestUpdate()));
+    m_timer.start(alife.getUpdateInterval());
     emit update(boundingRect());
 }
 

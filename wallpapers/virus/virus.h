@@ -76,7 +76,6 @@ class Virus : public Plasma::Wallpaper
         QWidget* m_configWidget;
         Ui::ImageConfig m_uiVirus;
         QString m_mode;
-        QTimer m_timer;
         QPixmap m_pixmap;
         QPixmap m_oldPixmap;
         QPixmap m_oldFadedPixmap;
@@ -89,6 +88,8 @@ class Virus : public Plasma::Wallpaper
         bool m_randomize;
         bool m_startupResumed;
 
+        QTimer m_timer;
+        
         Alife alife;
 };
 

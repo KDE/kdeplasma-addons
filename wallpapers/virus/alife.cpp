@@ -60,8 +60,7 @@ void Alife::setImage(QImage image){
     }
 }
 
-void Alife::initVirus()
-{
+void Alife::initVirus(){
     //magic 2d array code
     if(!m_cells) {
         m_cells = new struct cell*[m_width];
@@ -90,7 +89,6 @@ void Alife::initVirus()
 
 //create the needed viruses so that we have in total "amount" viruses
 void Alife::createViruses(int amount){
-
     for(int i = m_livingCells.size(); i < amount; i++) {
         int x = qrand() % m_width;
         int y = qrand() % m_height;
