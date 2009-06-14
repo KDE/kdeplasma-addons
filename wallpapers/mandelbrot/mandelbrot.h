@@ -108,6 +108,10 @@ class Mandelbrot : public Plasma::Wallpaper
         /** sets the value of  m_imageIsReady. \see m_imageIsReady */
         void setImageIsReady(bool b) { m_imageIsReady = b; }
 
+    signals:
+        /** Signals that the configuration has changed */
+        void settingsChanged(bool);
+
     public slots:
         /** To be called whenever the given tile is done rendering */
         void tileDone(const MandelbrotTile& t);

@@ -142,6 +142,8 @@ QWidget* Mandelbrot::createConfigurationInterface(QWidget* parent)
     connect(m_ui.m_quality, SIGNAL(activated(int)), this, SLOT(setQuality(int)));
     connect(m_ui.m_lock, SIGNAL(stateChanged(int)), this, SLOT(setLock(int)));
     
+    connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
+    
     return widget;
 }
 
@@ -150,6 +152,7 @@ void Mandelbrot::setColor1(const QColor& color1)
     abortRendering();
     m_color1 = color1;
     startRendering();
+    emit settingsChanged(true);
 }
 
 void Mandelbrot::setColor2(const QColor& color2)
@@ -157,6 +160,7 @@ void Mandelbrot::setColor2(const QColor& color2)
     abortRendering();
     m_color2 = color2;
     startRendering();
+    emit settingsChanged(true);
 }
 
 void Mandelbrot::setColor3(const QColor& color3)
@@ -164,6 +168,7 @@ void Mandelbrot::setColor3(const QColor& color3)
     abortRendering();
     m_color3 = color3;
     startRendering();
+    emit settingsChanged(true);
 }
 
 void Mandelbrot::setQuality(int quality)
@@ -171,11 +176,13 @@ void Mandelbrot::setQuality(int quality)
     abortRendering();
     m_quality = quality;
     startRendering();
+    emit settingsChanged(true);
 }
 
 void Mandelbrot::setLock(int lock)
 {
     m_lock = Qt::CheckState(lock);
+    emit settingsChanged(true);
 }
 
 void Mandelbrot::checkRenderHints()
