@@ -48,6 +48,7 @@ Feature requests:
  - DnD searched applications - FINISHED
  - choosing the applications in documents and computer section - FINISHED
 
+ - DnD fixed devices
  - width of categories section changeable - maybe
  - web history - page titles - interesting
  - hover activation for categories that are not in the last list of
@@ -63,4 +64,5 @@ Feature requests:
  - align lists that don't have enough items bottom when the mouse comes from bottom - not likely
  - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350)
  - Disk free space info - maybe
+ - return the old logout dim-screen (https://bugs.kde.org/show_bug.cgi?id=196219)
 
