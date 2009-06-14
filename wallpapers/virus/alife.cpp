@@ -200,6 +200,7 @@ void Alife::executeCell(int id)
 		    }
                     cell = m_livingCells.at(id);
                     pixel = m_image.pixel(cell->x, cell->y);
+                    pixelBackup = pixel;
                     special--;
 		    if(special <= 0) {
 			stop = true;
