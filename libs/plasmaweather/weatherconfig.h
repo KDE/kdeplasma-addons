@@ -117,6 +117,9 @@ public:
      **/
     void setHeadersVisible(bool visible);
 
+  signals:
+    void settingsChanged();
+    
 public Q_SLOTS:
     /**
      * Sets update interval

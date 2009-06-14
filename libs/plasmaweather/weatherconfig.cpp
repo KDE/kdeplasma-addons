@@ -82,6 +82,18 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setUpdateInterval(int)));
+            
+    connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)), 
+            this, SIGNAL(settingsChanged()));
+    connect(d->ui.temperatureComboBox, SIGNAL(currentIndexChanged(int)), 
+            this, SIGNAL(settingsChanged()));
+    connect(d->ui.pressureComboBox, SIGNAL(currentIndexChanged(int)), 
+            this, SIGNAL(settingsChanged()));
+    connect(d->ui.speedComboBox, SIGNAL(currentIndexChanged(int)), 
+            this, SIGNAL(settingsChanged()));
+    connect(d->ui.visibilityComboBox, SIGNAL(currentIndexChanged(int)), 
+            this, SIGNAL(settingsChanged()));
+            
 }
 
 WeatherConfig::~WeatherConfig()
@@ -105,6 +117,7 @@ void WeatherConfig::setSource(const QString& source)
         d->ui.cityTextLabel->setText(list[2]);
     }
     d->enableOK();
+    emit settingsChanged();
 }
 
 void WeatherConfig::setUpdateInterval(int interval)
