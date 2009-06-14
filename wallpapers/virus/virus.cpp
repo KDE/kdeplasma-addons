@@ -72,7 +72,7 @@ void Virus::init(const KConfigGroup &config)
     m_color = config.readEntry("wallpapercolor", QColor(56, 111, 150));
     m_usersWallpapers = config.readEntry("userswallpapers", QStringList());
 
-    alife.setUpdateInterval(config.readEntry("updateinterval", 100));
+    alife.setUpdateInterval(config.readEntry("updateinterval", 200));
     alife.setMaxViruses(config.readEntry("maxcells", 2000));
     alife.setShowCells(config.readEntry("showcells", true));
 
