@@ -176,9 +176,9 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.m_showCells->setChecked(alife.showCells());
     connect(m_uiVirus.m_showCells, SIGNAL(stateChanged(int)), this, SLOT(showCellsChanged(int)));
 
-
-
     connect(m_uiVirus.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
+    
+    connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     
     return m_configWidget;
 }
@@ -260,6 +260,7 @@ void Virus::colorChanged(const QColor& color)
 {
     m_color = color;
     setSingleImage();
+    emit settingsChanged(true);
 }
 
 void Virus::pictureChanged(int index)
@@ -288,16 +289,19 @@ void Virus::pictureChanged(int index)
 void Virus::maxCellsChanged(int maxCells)
 {
     alife.setMaxViruses(maxCells);
+    emit settingsChanged(true);
 }
 
 void Virus::intervalChanged(int interval)
 {
     alife.setUpdateInterval(interval);
+    emit settingsChanged(true);
 }
 
 void Virus::showCellsChanged(int state)
 {
     alife.setShowCells(state == Qt::Checked);
+    emit settingsChanged(true);
 }
 
 void Virus::positioningChanged(int index)
@@ -310,6 +314,7 @@ void Virus::positioningChanged(int index)
     if (m_model) {
         m_model->setResizeMethod(m_resizeMethod);
     }
+    emit settingsChanged(true);
 }
 
 void Virus::fillMetaInfo(Plasma::Package *b)

@@ -37,7 +37,8 @@ class Virus : public Plasma::Wallpaper
         virtual void paint(QPainter* painter, const QRectF& exposedRect);
         virtual QWidget* createConfigurationInterface(QWidget* parent);
         void updateScreenshot(QPersistentModelIndex index);
-
+    signals:
+        void settingsChanged(bool);
     protected slots:
         void positioningChanged(int index);
         void getNewWallpaper();
