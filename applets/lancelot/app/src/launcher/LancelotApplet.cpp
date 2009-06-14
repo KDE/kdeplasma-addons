@@ -124,36 +124,6 @@ public:
         }
     }
 
-    void resize()
-    {
-        QSizeF size = q->size();
-        int buttonCount = buttons.size();  //(showCategories ? 4 : 1);
-        int sumSpacing = (buttonCount - 1) * SPACING;
-
-        if (q->formFactor() == Plasma::Vertical) {
-            q->setMinimumSize(
-                    SIZE_CMIN,  SIZE_CMIN  * buttonCount + sumSpacing);
-            q->setPreferredSize(
-                    SIZE_CPREF, SIZE_CPREF * buttonCount + sumSpacing);
-            q->setMaximumSize(
-                    INT_MAX,    SIZE_CMAX  * buttonCount + sumSpacing);
-        } else if (q->formFactor() == Plasma::Horizontal) {
-            q->setMinimumSize(
-                    SIZE_CMIN  * buttonCount + sumSpacing, SIZE_CMIN);
-            q->setPreferredSize(
-                    SIZE_CPREF * buttonCount + sumSpacing, SIZE_CPREF);
-            q->setMaximumSize(
-                    SIZE_CMAX  * buttonCount + sumSpacing, INT_MAX);
-        } else {
-            size = size.expandedTo(QSizeF(IconSize(KIconLoader::Desktop), IconSize(KIconLoader::Desktop)));
-            size = QSizeF(size.height() * buttons.count(), size.height());
-            q->setPreferredSize(size);
-            q->resize(size);
-        }
-
-        q->updateGeometry();
-    }
-
     void toggleHide()
     {
         if (waitClick.isActive()) {
@@ -249,7 +219,6 @@ void LancelotApplet::applyConfig()
         d->createMainButton();
     }
     emit configNeedsSaving();
-    d->resize();
     update();
     setAspectRatioMode(Plasma::KeepAspectRatio);
 }
@@ -363,7 +332,12 @@ void LancelotApplet::constraintsEvent(Plasma::Constraints constraints)
             d->layout->setOrientation(Qt::Horizontal);
         }
     }
-    d->resize();
+
+    if (formFactor() == Plasma::Horizontal) {
+        setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding));
+    } else if (formFactor() == Plasma::Vertical) {
+        setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
+    }
 }
 
 void LancelotApplet::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
@@ -379,6 +353,20 @@ QList< QAction * > LancelotApplet::contextualActions()
     QList < QAction * > result = Plasma::Applet::contextualActions();
     result << d->actions;
     return result;
+}
+
+QSizeF LancelotApplet::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
+{
+    QSizeF hint = Plasma::Applet::sizeHint(which, constraint);
+    if (formFactor() == Plasma::Horizontal &&
+            (which == Qt::MaximumSize || size().height() <= KIconLoader::SizeLarge)) {
+        hint.setWidth(size().height() * d->buttons.size());
+    } else if (formFactor() == Plasma::Vertical &&
+            (which == Qt::MaximumSize || size().width() <= KIconLoader::SizeLarge)) {
+        hint.setHeight(size().width() * d->buttons.size());
+    }
+
+    return hint;
 }
 
 #include "LancelotApplet.moc"

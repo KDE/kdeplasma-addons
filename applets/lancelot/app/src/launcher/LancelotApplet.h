@@ -48,6 +48,7 @@ protected Q_SLOTS:
     void configAccepted();
 
 protected:
+    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF & constraint = QSizeF()) const;
     virtual void createConfigurationInterface(KConfigDialog *parent);
     virtual void constraintsEvent(Plasma::Constraints
             constraints);
