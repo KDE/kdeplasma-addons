@@ -90,8 +90,8 @@ void Alife::initVirus(){
 //create the needed viruses so that we have in total "amount" viruses
 void Alife::createViruses(int amount){
     for(int i = m_livingCells.size(); i < amount; i++) {
-        int x = qrand() % m_width;
-        int y = qrand() % m_height;
+        int x = rand() % m_width;
+        int y = rand() % m_height;
         
         struct cell *temp = &m_cells[x][y];
         //cell already alive
@@ -105,10 +105,10 @@ void Alife::createViruses(int amount){
 
             //initial code
             for(int i = 0; i < 7; i++) {
-                temp->code[i] = qrand()%12;
+                temp->code[i] = rand()%12;
             }
 
-	    temp->code[qrand()%7] = 7; //cheating, jumpstart evolution
+	    temp->code[rand()%7] = 7; //cheating, jumpstart evolution
 
 	    /*temp->code[0] = 4;
 	    temp->code[1] = 12;
@@ -155,7 +155,7 @@ void Alife::resetCell(struct cell *temp)
 //REMINDER: Update if a new op is added
 uchar Alife::randomCode()
 {
-    return qrand() % 20;
+    return rand() % 20;
 }
 
 //Executes the code of a certain living cell
@@ -188,7 +188,7 @@ void Alife::executeCell(int id)
                 stop = true;
             break;
             case 1://random value
-                reg = qrand() % 4;
+                reg = rand() % 4;
             break;
             case 2: //change direction
                 facing = reg & 3;
@@ -379,7 +379,7 @@ bool Alife::reproduce(struct cell* cell, int direction, QRgb color)
 	//give a unfair advantage to darker places
 	int prob = (((qRed(color) + qGreen(color) + qBlue(color))/ 255.)+1);// 0 - 765
 
-	if(qrand() % prob  != 0){
+	if(rand() % prob  != 0){
 	    return false;
 	}
 
@@ -393,26 +393,26 @@ bool Alife::reproduce(struct cell* cell, int direction, QRgb color)
 
         memcpy(newCell->code,cell->code,VIRUS_GENOME_SIZE);
 
-        int mutate = qrand() % 3;
+        int mutate = rand() % 3;
         if(mutate) {
             //normal mutation
-            int mutations = qrand() % 5;
+            int mutations = rand() % 5;
             for(int i = 0; i < mutations; i++) {
-                int index = qrand() % VIRUS_GENOME_SIZE;
+                int index = rand() % VIRUS_GENOME_SIZE;
                 newCell->code[index] = randomCode();
             }
 
-            int duplication = qrand() % 3;
+            int duplication = rand() % 3;
             for(int i = 0; i < duplication; i++) {
-                int start = qrand() % VIRUS_GENOME_SIZE;
-                int end = start + qrand() % ( VIRUS_GENOME_SIZE - start);
+                int start = rand() % VIRUS_GENOME_SIZE;
+                int end = start + rand() % ( VIRUS_GENOME_SIZE - start);
                 memcpy(&newCell->code[end],&cell->code[start],VIRUS_GENOME_SIZE - end);
             }
 
-            int deletion = qrand() % 3;
+            int deletion = rand() % 3;
             for(int i = 0; i < deletion; i++) {
-                int start = qrand() % VIRUS_GENOME_SIZE;
-                int end = start + qrand() % ( VIRUS_GENOME_SIZE - start);
+                int start = rand() % VIRUS_GENOME_SIZE;
+                int end = start + rand() % ( VIRUS_GENOME_SIZE - start);
                 memcpy(&newCell->code[start],&cell->code[end],VIRUS_GENOME_SIZE - end);
                 memset(&newCell->code[end], 0, VIRUS_GENOME_SIZE - end);
             }
