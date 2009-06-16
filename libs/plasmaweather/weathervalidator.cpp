@@ -62,7 +62,6 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     QStringList result = data["validate"].toString().split('|');
     QString weatherSource;
 
-    kDebug() << source << data;
     if (result.count() < 2) {
         if (!d->silent) {
             KMessageBox::error(0, i18n("Cannot find '%1'.", source));
