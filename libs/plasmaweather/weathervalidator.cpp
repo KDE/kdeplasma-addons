@@ -62,6 +62,7 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
     QStringList result = data["validate"].toString().split('|');
     QString weatherSource;
 
+    kDebug() << source << data;
     if (result.count() < 2) {
         if (!d->silent) {
             KMessageBox::error(0, i18n("Cannot find '%1'.", source));
@@ -78,8 +79,11 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngi
                     places[result[i + 1]].clear();
                     i += 2;
                 }
+            } else {
+                ++i;
             }
         }
+
         QString place;
         if (result[2] == "multiple" && !d->silent) {
             QStringList selected = KInputDialog::getItemList(i18n("Weather station:"),
