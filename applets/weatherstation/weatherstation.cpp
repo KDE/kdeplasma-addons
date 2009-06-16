@@ -132,7 +132,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     //kDebug() << data;
     WeatherPopupApplet::dataUpdated(source, data);
 
-    if (data.contains("Credit Url")) {
+    if (data.contains("Place")) {
         Conversion::Value temp = value(data["Temperature"].toString(),
                 WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
         setTemperature(temp);
