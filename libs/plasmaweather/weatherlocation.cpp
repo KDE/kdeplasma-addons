@@ -64,11 +64,12 @@ void WeatherLocation::dataUpdated(const QString &source, const Plasma::DataEngin
     d->locationEngine->disconnectSource(source, this);
 
     QString city = data["city"].toString();
-    QString tmp = city.left(city.indexOf(','));
-    if (!tmp.isEmpty()) {
-        d->validator.validate("bbcukmet", tmp, true);
+    city.truncate(city.indexOf(',') - 1);
+    if (!city.isEmpty()) {
+        d->validator.validate("bbcukmet", city, true);
         return;
     }
+
     emit finished(QString());
 }
 
