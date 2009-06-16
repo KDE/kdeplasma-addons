@@ -35,9 +35,14 @@ class KnowledgeBaseParser
 
     KnowledgeBase parse( const QString &xml );
     KnowledgeBase::List parseList( const QString &xml );
+    KnowledgeBase::Metadata lastMetadata();
 
   protected:
     KnowledgeBase parseKnowledgeBase( QXmlStreamReader &xml );
+    KnowledgeBase::Metadata parseMetadata( QXmlStreamReader &xml );
+
+  private:
+    KnowledgeBase::Metadata m_lastMetadata;
 };
 
 }

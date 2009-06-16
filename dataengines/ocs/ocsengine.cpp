@@ -146,6 +146,12 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         KnowledgeBaseListJob* _job = Attica::OcsApi::requestKnowledgeBase(content, query, sortMode, page, pageSize);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseListResult( KJob * ) ) );
+
+        //putting the job/query pair into an hash to remember the association later
+        if (_job) {
+            m_knowledgeBaseListJobs[_job] = name;
+        }
+
         return _job != 0;
 
     } else if (name.startsWith("MaximumItems-")) {
@@ -276,6 +282,16 @@ void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
     m_job = 0;
     if (!j->error()) {
         Attica::KnowledgeBaseListJob *job = static_cast<Attica::KnowledgeBaseListJob *>( j );
+
+        QString source = m_knowledgeBaseListJobs[job];
+        if (!source.isEmpty()) {
+            KnowledgeBase::Metadata meta = job->metadata();
+            setData(source, "Status", meta.status);
+            setData(source, "Message", meta.message);
+            setData(source, "TotalItems", meta.totalItems);
+            setData(source, "ItemsPerPage", meta.itemsPerPage);
+            m_knowledgeBaseListJobs.remove(job);
+        }
 
         foreach (KnowledgeBase k, job->knowledgeBaseList()) {
             const QString source = QString("KnowledgeBase-%1").arg(k.id());

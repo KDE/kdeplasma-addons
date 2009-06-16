@@ -33,6 +33,13 @@ class ATTICA_EXPORT KnowledgeBase
 {
   public:
     typedef QList<KnowledgeBase> List;
+    struct Metadata
+    {
+        QString status;
+        QString message;
+        int totalItems;
+        int itemsPerPage;
+    };
 
     KnowledgeBase();
 
@@ -85,6 +92,7 @@ class ATTICA_EXPORT KnowledgeBase
 
     QMap<QString,QString> m_extendedAttributes;
 };
+
 }
 
 #endif

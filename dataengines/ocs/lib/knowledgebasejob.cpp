@@ -51,6 +51,11 @@ KnowledgeBase KnowledgeBaseJob::knowledgeBase() const
   return m_knowledgeBase;
 }
 
+KnowledgeBase::Metadata KnowledgeBaseJob::metadata() const
+{
+  return m_metadata;
+}
+
 void KnowledgeBaseJob::doWork()
 {
   qDebug() << m_url;
@@ -71,7 +76,9 @@ void KnowledgeBaseJob::slotJobResult( KJob *job )
     setErrorText( job->errorText() );
   } else {
     qDebug() << m_data;
-    m_knowledgeBase = KnowledgeBaseParser().parse( QString::fromUtf8( m_data.data() ) );
+    KnowledgeBaseParser parser;
+    m_knowledgeBase = parser.parse( QString::fromUtf8( m_data.data() ) );
+    m_metadata = parser.lastMetadata();
   }
 
   emitResult();

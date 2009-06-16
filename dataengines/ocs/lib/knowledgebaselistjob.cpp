@@ -51,6 +51,11 @@ KnowledgeBase::List KnowledgeBaseListJob::knowledgeBaseList() const
   return m_knowledgeBaseList;
 }
 
+KnowledgeBase::Metadata KnowledgeBaseListJob::metadata() const
+{
+  return m_metadata;
+}
+
 void KnowledgeBaseListJob::doWork()
 {
   qDebug() << m_url;
@@ -73,8 +78,10 @@ void KnowledgeBaseListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    m_knowledgeBaseList = KnowledgeBaseParser().parseList(
+    KnowledgeBaseParser parser;
+    m_knowledgeBaseList = parser.parseList(
       QString::fromUtf8( m_data.data() ) );
+    m_metadata = parser.lastMetadata();
 
     emitResult();
   }

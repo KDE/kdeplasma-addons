@@ -25,6 +25,7 @@
 #include "knowledgebaselistjob.h"
 
 #include <QStringList>
+#include <QHash>
 
 #include <Solid/Networking>
 
@@ -67,6 +68,7 @@ private:
     void setPersonData(const QString &source, Attica::Person &person);
     void setKnowledgeBaseData(const QString &source, Attica::KnowledgeBase &knowledgeBase);
 
+    QHash<KJob*, QString> m_knowledgeBaseListJobs;
     Attica::Activity::List m_activities;
     KJob* m_job;
     int m_maximumItems;
