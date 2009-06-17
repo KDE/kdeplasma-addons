@@ -128,10 +128,6 @@ void OpenDesktop::connectFriends(const QString &name)
 {
     QString src = QString("Friends-%1").arg(name);
     dataEngine("ocs")->connectSource(src, this);
-    connect(dataEngine("ocs"), SIGNAL(sourceAdded(QString)),
-            this,                          SLOT(sourceAdded(QString)));
-    connect(dataEngine("ocs"), SIGNAL(sourceRemoved(QString)),
-            this,                          SLOT(sourceRemoved(QString)));
     //kDebug() << "connected friends";
 }
 
@@ -139,8 +135,6 @@ void OpenDesktop::connectPerson(const QString &name)
 {
     QString src = QString("Person-%1").arg(name);
     dataEngine("ocs")->connectSource(src, this);
-    connect(dataEngine("ocs"), SIGNAL(sourceAdded(QString)),
-            this,                          SLOT(sourceAdded(QString)));
     //kDebug() << "connected user person" << src;
 }
 
@@ -149,8 +143,7 @@ void OpenDesktop::disconnectPerson(const QString &name)
     Q_UNUSED( name )
     QString src = QString("Person-%1").arg(m_username);
     dataEngine("ocs")->disconnectSource(src, this);
-    connect(dataEngine("ocs"), SIGNAL(sourceAdded(QString)),
-            this,                          SLOT(sourceAdded(QString)));
+
     //kDebug() << "disconnected user person" << name;
 }
 
@@ -158,10 +151,6 @@ void OpenDesktop::disconnectFriends(const QString &name)
 {
     QString src = QString("Friends-%1").arg(name);
     dataEngine("ocs")->disconnectSource(src, this);
-    disconnect(dataEngine("ocs"), SIGNAL(sourceAdded(QString)),
-            this,                          SLOT(sourceAdded(QString)));
-    disconnect(dataEngine("ocs"), SIGNAL(sourceRemoved(QString)),
-            this,                          SLOT(sourceRemoved(QString)));
     //kDebug() << "disconnected friends" << src;
 }
 
@@ -316,10 +305,6 @@ void OpenDesktop::connectNearby(int latitude, int longitude)
                         QString::number(m_geolocation->distance));
     kDebug() << "geolocation src" << src;
 
-    connect(dataEngine("ocs"), SIGNAL(sourceAdded(QString)),
-            this,                          SLOT(sourceAdded(QString)));
-    connect(dataEngine("ocs"), SIGNAL(sourceRemoved(QString)),
-            this,                          SLOT(sourceRemoved(QString)));
     dataEngine("ocs")->connectSource(src, this);
     kDebug() << "connected near";
 }
@@ -342,42 +327,38 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
         return;
 
     } else if (source.startsWith("Person-")) {
-        // A new friend is found
-        if (!data["Id"].toString().isEmpty()) {
+        // ourselves?
+        Plasma::DataEngine::Data personData = data[source].value<Plasma::DataEngine::Data>();
+        if (!personData["Id"].toString().isEmpty()) {
             QString self = QString("Person-%1").arg(m_username);
             if (data["Id"].toString() == m_username) {
                 // Our own data has updated ...
                 m_userWidget->setAtticaData(data);
-                m_ownData = data;
+                m_ownData = personData;
             }
-            addFriend(data);
+            addFriend(personData);
         }
         return;
 
     } else if (source.startsWith("Near-")) {
-        if (!data["Id"].toString().isEmpty()) {
-            addNearbyPerson(data);
+        foreach (const QString &person, data.keys()) {
+            if (person.startsWith("Person-")) {
+                Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
+                addNearbyPerson(personData);
+            }
         }
         return;
+    } else if (source.startsWith("Friends-")) {
+        foreach (const QString &person, data.keys()) {
+            if (person.startsWith("Person-")) {
+                Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
+                addFriend(personData);
+            }
+        }
     }
     kDebug() << "Don't know what to do with" << source;
 }
 
-void OpenDesktop::sourceAdded(const QString& source)
-{
-    //kDebug() << source;
-    if (source.startsWith("Person-") || source.startsWith("Near-")) {
-        dataEngine("ocs")->connectSource(source, this);
-    }
-}
-
-void OpenDesktop::sourceRemoved(const QString& source)
-{
-    if (source.startsWith("Person-")) {
-        dataEngine("ocs")->disconnectSource(source, this);
-        // TODO: remove the corresponding contactWidget
-    }
-}
 
 void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
 {

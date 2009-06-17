@@ -57,7 +57,6 @@ protected Q_SLOTS:
     virtual void slotActivityResult( KJob* j);
     virtual void slotFriendsResult( KJob* j);
     virtual void slotNearPersonsResult( KJob* j);
-    virtual void slotNearResult( KJob* j);
     virtual void slotPersonResult( KJob* j);
     virtual void slotKnowledgeBaseResult( KJob *j );
     virtual void slotKnowledgeBaseListResult( KJob *j );
@@ -65,10 +64,14 @@ protected Q_SLOTS:
     void networkStatusChanged(Solid::Networking::Status);
 
 private:
-    void setPersonData(const QString &source, Attica::Person &person);
-    void setKnowledgeBaseData(const QString &source, Attica::KnowledgeBase &knowledgeBase);
+    void setPersonData(const QString &source, const Attica::Person &person);
+    void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
 
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
+    QHash<KJob*, QString> m_personListJobs;
+    QHash<KJob*, KJob*> m_personJobs;
+    QHash<KJob*, int> m_personListJobsRefs;
+
     Attica::Activity::List m_activities;
     KJob* m_job;
     int m_maximumItems;

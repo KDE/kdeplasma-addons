@@ -60,8 +60,6 @@ class OpenDesktop : public Plasma::PopupApplet
         void createConfigurationInterface(KConfigDialog *parent);
 
     private Q_SLOTS:
-        void sourceAdded(const QString &source);
-        void sourceRemoved(const QString &source);
         void publishGeoLocation();
         void registerAccount();
         void showDetails(const Plasma::DataEngine::Data &data);

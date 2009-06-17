@@ -65,6 +65,11 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         PersonListJob* _job = Attica::OcsApi::requestFriend(_id, 0, m_maximumItems);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
+
+        if (_job) {
+            m_personListJobs[_job] = name;
+        }
+
         return _job != 0;
     } else if (name.startsWith("Person-")) {
         QString _id = QString(name).remove(QString("Person-"));
@@ -87,6 +92,11 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         PersonListJob* _job = Attica::OcsApi::requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
+
+        if (_job) {
+            m_personListJobs[_job] = name;
+        }
+
         return _job != 0;
 
     } else if (name.startsWith("PostLocation-")) {
@@ -205,7 +215,27 @@ void OcsEngine::slotPersonResult( KJob *j )
     if (!j->error()) {
         Attica::PersonJob *job = static_cast<Attica::PersonJob *>( j );
         Attica::Person p = job->person();
-        setPersonData(QString("Person-%1").arg(p.id()), p);
+
+        QString source;
+
+        KJob *personListJob = m_personJobs[job];
+        if (personListJob) {
+            if (!m_personListJobs[personListJob].isEmpty()) {
+                source = m_personListJobs[personListJob];
+                --m_personListJobsRefs[personListJob];
+            }
+            m_personJobs.remove(job);
+
+            if (m_personListJobsRefs[personListJob] <= 0) {
+                m_personListJobsRefs.remove(personListJob);
+                m_personListJobs.remove(personListJob);
+            }
+        } else {
+            source = QString("Person-%1").arg(p.id());
+        }
+
+        setPersonData(source, p);
+        scheduleSourcesUpdated();
     } else {
         kDebug() << "Fetching person failed:" << j->errorString();
     }
@@ -218,63 +248,58 @@ void OcsEngine::slotKnowledgeBaseResult( KJob *j )
         Attica::KnowledgeBaseJob *job = static_cast<Attica::KnowledgeBaseJob *>( j );
         Attica::KnowledgeBase k = job->knowledgeBase();
         setKnowledgeBaseData(QString("KnowledgeBase-%1").arg(k.id()), k);
+        scheduleSourcesUpdated();
     } else {
         kDebug() << "Fetching Knowledgebase failed:" << j->errorString();
     }
 }
 
-void OcsEngine::slotNearResult( KJob *j )
-{
-    if (!j->error()) {
-        kDebug() << "============================= Near Person Full Data is in";
-        Attica::PersonJob *job = static_cast<Attica::PersonJob *>( j );
-        Attica::Person p = job->person();
-        setPersonData(QString("Near-%1").arg(p.id()), p);
-    } else {
-        kDebug() << "Fetching person failed:" << j->errorString();
-    }
-}
-
-
-void OcsEngine::setPersonData(const QString &source, Attica::Person &person)
+void OcsEngine::setPersonData(const QString &source, const Attica::Person &person)
 {
     kDebug() << "Setting person data"<< source;
-    setData(source, "Id", person.id());
-    setData(source, "FirstName", person.firstName());
-    setData(source, "LastName", person.lastName());
+    Plasma::DataEngine::Data personData;
+
+    personData["Id"] = person.id();
+    personData["FirstName"] = person.firstName();
+    personData["LastName"] = person.lastName();
     QString n = QString("%1 %2").arg(person.firstName(), person.lastName());
-    setData(source, "Name", n.trimmed());
-    setData(source, "Birthday", person.birthday());
-    setData(source, "City", person.city());
-    setData(source, "Country", person.country());
-    setData(source, "Latitude", person.latitude());
-    setData(source, "Longitude", person.longitude());
-    setData(source, "Avatar", person.avatar());
-    setData(source, "AvatarUrl", person.avatarUrl());
+    personData["Name"] = n.trimmed();
+    personData["Birthday"] = person.birthday();
+    personData["City"] = person.city();
+    personData["Country"] = person.country();
+    personData["Latitude"] = person.latitude();
+    personData["Longitude"] = person.longitude();
+    personData["Avatar"] = person.avatar();
+    personData["AvatarUrl"] = person.avatarUrl();
+
     foreach(const QString &key, person.extendedAttributes().keys()) {
-        setData(source, key, person.extendedAttributes()[key]);
+        personData[key] = person.extendedAttributes()[key];
     }
-    scheduleSourcesUpdated();
+    setData(source, "Person-"+person.id(), personData);
 }
 
-void OcsEngine::setKnowledgeBaseData(const QString &source, Attica::KnowledgeBase &knowledgeBase)
+void OcsEngine::setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase)
 {
     kDebug() << "Setting KnowledgeBase data"<< source;
-    setData(source, "Id", knowledgeBase.id());
-    setData(source, "ContentId", knowledgeBase.contentId());
-    setData(source, "User", knowledgeBase.user());
-    setData(source, "Status", knowledgeBase.status());
-    setData(source, "Changed", knowledgeBase.changed());
-    setData(source, "Name", knowledgeBase.name());
-    setData(source, "Description", knowledgeBase.description());
-    setData(source, "Answer", knowledgeBase.answer());
-    setData(source, "Comments", knowledgeBase.comments());
-    setData(source, "DetailPage", knowledgeBase.detailPage());
+
+    Plasma::DataEngine::Data knowledgeBaseData;
+
+    knowledgeBaseData["Id"] = knowledgeBase.id();
+    knowledgeBaseData["ContentId"] = knowledgeBase.contentId();
+    knowledgeBaseData["User"] = knowledgeBase.user();
+    knowledgeBaseData["Status"] = knowledgeBase.status();
+    knowledgeBaseData["Changed"] = knowledgeBase.changed();
+    knowledgeBaseData["Name"] = knowledgeBase.name();
+    knowledgeBaseData["Description"] = knowledgeBase.description();
+    knowledgeBaseData["Answer"] = knowledgeBase.answer();
+    knowledgeBaseData["Comments"] = knowledgeBase.comments();
+    knowledgeBaseData["DetailPage"] = knowledgeBase.detailPage();
 
     foreach(const QString &key, knowledgeBase.extendedAttributes().keys()) {
-        setData(source, key, knowledgeBase.extendedAttributes()[key]);
+        knowledgeBaseData[key] = knowledgeBase.extendedAttributes()[key];
     }
-    scheduleSourcesUpdated();
+
+    setData(source, "KnowledgeBase-"+knowledgeBase.id(), knowledgeBaseData);
 }
 
 void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
@@ -294,8 +319,6 @@ void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
         }
 
         foreach (KnowledgeBase k, job->knowledgeBaseList()) {
-            const QString source = QString("KnowledgeBase-%1").arg(k.id());
-
             setKnowledgeBaseData(source, k);
         }
         scheduleSourcesUpdated();
@@ -308,15 +331,19 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
 {
     m_job = 0;
     if (!j->error()) {
-        Attica::PersonListJob *job = static_cast<Attica::PersonListJob *>( j );
+        Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
 
-        foreach (const Person &p, job->personList()) {
+        m_personListJobsRefs[listJob] = 0;
+
+        foreach (const Person &p, listJob->personList()) {
             const QString personId = QString("%1").arg(p.id());
             Attica::PersonJob* job = Attica::OcsApi::requestPerson(personId);
-            connect(job, SIGNAL(result(KJob*)), this, SLOT(slotNearResult(KJob*)));
+            connect(job, SIGNAL(result(KJob*)), this, SLOT(slotPersonResult(KJob*)));
             QString _id = QString("Near-%1").arg(p.id());
-            setData(_id, Plasma::DataEngine::Data());
             kDebug() << "New Near:" << _id << personId;
+
+            m_personJobs[job] = listJob;
+            ++m_personListJobsRefs[listJob];
         }
         scheduleSourcesUpdated();
     } else {
@@ -329,15 +356,19 @@ void OcsEngine::slotFriendsResult( KJob *j )
 {
     m_job = 0;
     if (!j->error()) {
-        Attica::PersonListJob *job = static_cast<Attica::PersonListJob *>( j );
+        Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
 
-        foreach (const Person &p, job->personList()) {
+        m_personListJobsRefs[listJob] = 0;
+
+        foreach (const Person &p, listJob->personList()) {
             const QString personId = QString("%1").arg(p.id());
             Attica::PersonJob* job = Attica::OcsApi::requestPerson(personId);
             connect(job, SIGNAL(result(KJob*)), this, SLOT(slotPersonResult(KJob*)));
             QString _id = QString("Person-%1").arg(p.id());
-            setData(_id, Plasma::DataEngine::Data());
             kDebug() << "New Friend:" << _id << personId;
+
+            m_personJobs[job] = listJob;
+            ++m_personListJobsRefs[listJob];
         }
         scheduleSourcesUpdated();
     } else {
