@@ -78,7 +78,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
         // Map each wallpaper to a weather condition
         m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
         m_weatherMap["weather-clear"] = m_dir + "Fields_of_Peace";
-        m_weatherMap["weather-few-clouds"] = m_dir + "Colorado_Farm";
+        m_weatherMap["weather-few-clouds"] = m_dir + "Evening";
         m_weatherMap["weather-clouds"] = m_dir + "Colorado_Farm";
         m_weatherMap["weather-many-clouds"] = m_dir + "Blue_Sun";
         m_weatherMap["weather-showers"] = m_dir + "There_is_Rain_on_the_Table";
