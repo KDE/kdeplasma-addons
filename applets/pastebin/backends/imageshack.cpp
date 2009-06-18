@@ -66,7 +66,8 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
         emit postError();
         return;
     }
-    QString pasteUrl = re.cap(1);
+
+    QString pasteUrl = re.cap(1).replace("&amp;", "&");
 
     // little dirty hack to avoid emiting the
     // second redirection of imageshack.us
