@@ -729,10 +729,8 @@ void Pastebin::postContent(QString text, QImage imageData)
     } else {
         //upload image
         if (validPath) {
-            qDebug() << "+++++++++++++++it's a valid image file path!++++++++++++++++";
             m_imageServer->post(testPath.toLocalFile());
         } else {
-            qDebug() << "---------------No valid image file path given! Attempting through tmp file------------";
             KTemporaryFile tempFile;
             if (tempFile.open()) {
                 tempFile.setAutoRemove(false);
@@ -747,9 +745,11 @@ void Pastebin::postContent(QString text, QImage imageData)
                 image.save(&buffer, "JPEG");
                 stream.writeRawData(data, data.size());
 
-                m_imageServer->post(tempFile.fileName());
-
+                KUrl t(tempFile.fileName());
                 tempFile.close();
+
+                m_imageServer->post(t.path());
+
             } else {
                 setActionState(IdleError);
                 timer->stop();
