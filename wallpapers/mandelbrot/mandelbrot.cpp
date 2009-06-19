@@ -249,8 +249,9 @@ void Mandelbrot::loadFromCacheOrStartRendering()
             update(m_image->rect());
         }
         else {
-            //kDebug() << "image " << k << " found in cache but hasn't the wanted size. Removing it.";
+            //kDebug() << "image " << k << " found in cache but hasn't the wanted size. Removing it, and re-rendering.";
             insertIntoCache(k, QImage());
+            startRendering();
         }
     }
     else
@@ -262,6 +263,10 @@ void Mandelbrot::loadFromCacheOrStartRendering()
 
 void Mandelbrot::startRendering(const QPointF& renderFirst)
 {
+    if(m_image->size() != boundingRect().size()) {
+        delete m_image;
+        m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
+    }
     m_imageIsReady = false;
     m_tile.start(renderFirst);
     m_renderThreads[0]->start(QThread::LowPriority);
