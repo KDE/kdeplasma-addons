@@ -80,7 +80,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
         m_weatherMap["weather-clear"] = m_dir + "Fields_of_Peace";
         m_weatherMap["weather-few-clouds"] = m_dir + "Evening";
         m_weatherMap["weather-clouds"] = m_dir + "Colorado_Farm";
-        m_weatherMap["weather-many-clouds"] = m_dir + "Blue_Sun";
+        m_weatherMap["weather-many-clouds"] = m_dir + "Beach_Reflecting_Clouds";
         m_weatherMap["weather-showers"] = m_dir + "There_is_Rain_on_the_Table";
         m_weatherMap["weather-showers-scattered"] = m_dir + "There_is_Rain_on_the_Table";
         m_weatherMap["weather-rain"] = m_dir + "There_is_Rain_on_the_Table";
