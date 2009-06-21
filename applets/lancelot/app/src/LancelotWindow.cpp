@@ -498,7 +498,7 @@ void LancelotWindow::setupModels()
     plugins = m_mainConfig.readEntry("mailPlugins", QString());
     if (plugins.isEmpty()) {
         MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
-    } else {
+    } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
         foreach (QString plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
@@ -510,7 +510,7 @@ void LancelotWindow::setupModels()
     plugins = m_mainConfig.readEntry("imPlugins", QString());
     if (plugins.isEmpty()) {
         MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
-    } else {
+    } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
         foreach (QString plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
