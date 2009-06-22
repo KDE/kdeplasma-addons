@@ -665,6 +665,7 @@ void WeatherApplet::configAccepted()
 void WeatherApplet::reloadTheme()
 {
     m_locationLabel->nativeWidget()->setFont(m_titleFont);
+    m_tempLabel->nativeWidget()->setFont(m_titleFont);
 }
 
 #include "weatherapplet.moc"
