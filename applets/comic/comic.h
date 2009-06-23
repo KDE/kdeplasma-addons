@@ -87,6 +87,7 @@ class ComicApplet : public Plasma::Applet
         void hoverEnterEvent( QGraphicsSceneHoverEvent* );
         void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
         void constraintsEvent( Plasma::Constraints constraints );
+        QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
 
     private:
         void changeComic( bool differentComic );

@@ -740,7 +740,17 @@ void ComicApplet::updateSize()
 
     createLayout();
     resize( mLastSize );
+    emit sizeHintChanged(Qt::PreferredSize);
     emit appletTransformedItself();
+}
+
+QSizeF ComicApplet::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    if (which != Qt::PreferredSize) {
+        return Applet::sizeHint(which, constraint);
+    } else {
+        return mLastSize;
+    }
 }
 
 QList<QAction*> ComicApplet::contextualActions()
