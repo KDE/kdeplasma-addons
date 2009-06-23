@@ -1,5 +1,5 @@
-find_package(Eigen2)
-macro_log_feature(EIGEN2_FOUND "Eigen2" "Eigen2 enables the Mandelbrot wallpaper plugin." "Module in kdesupport" FALSE "2.0")
+find_package(Eigen2 2.0.3)
+macro_log_feature(EIGEN2_FOUND "Eigen2" "Eigen2 enables the Mandelbrot wallpaper plugin." "http://eigen.tuxfamily.org" FALSE "2.0.3")
 
 if(EIGEN2_FOUND)
 
