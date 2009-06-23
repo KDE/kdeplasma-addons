@@ -179,6 +179,8 @@ void NotesTextEdit::wheelEvent ( QWheelEvent * event )
             }
         }
         event->accept();
+    } else {
+        KTextEdit::wheelEvent(event);
     }
 }
 
