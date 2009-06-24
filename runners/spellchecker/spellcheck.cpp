@@ -42,17 +42,17 @@ SpellCheckRunner::~SpellCheckRunner()
 void SpellCheckRunner::reloadConfiguration()
 {
     m_triggerWord = config().readEntry("trigger", i18n("spell"));
-    //Processing will be triggered by "keyword:"
-    m_triggerWord += ':';
+    //Processing will be triggered by "keyword "
+    m_triggerWord += ' ';
 
     m_requireTriggerWord = config().readEntry("requireTriggerWord", true);
 
     Plasma::RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".",
-                                 "%1 :q:", m_triggerWord),
+                                 "%1:q:", m_triggerWord),
                            i18n("Checks the spelling of :q:."));
 
     if (!m_requireTriggerWord) {
-        s.addExampleQuery(":q");
+        s.addExampleQuery(":q:");
     }
 
     QList<Plasma::RunnerSyntax> syns;
@@ -95,6 +95,7 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     } else {
         match.setIcon(KIcon("no"));
         const QString recommended = i18n("Suggested words: %1", suggestions.join (", "));
+        //TODO: try setting a text and a subtext, with the subtext being the suggestions
         match.setText(recommended);
         match.setData(suggestions);
     }
