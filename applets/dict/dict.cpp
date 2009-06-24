@@ -221,41 +221,47 @@ void DictApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
     }*/
     if (!m_source.isEmpty()) {
         m_defBrowser->show();
-        // TODO Phase::self()->animateItem(m_defBrowserProxy, Phase::Appear);
     }
-    if (data.contains("text"))
+
+    if (data.contains("text")) {
         m_defBrowser->nativeWidget()->setHtml(data[QString("text")].toString());
+    }
+
     updateGeometry();
 }
 
 void DictApplet::define()
 {
-
-    if (m_timer->isActive())
+    if (m_timer->isActive()) {
         m_timer->stop();
+    }
 
-    QString newSource=m_wordEdit->text();
+    QString newSource = m_wordEdit->text();
     QStringList dictsList;
-    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i)
-        if (m_activeDicts.contains(*i) && m_activeDicts.value(*i))
-            dictsList<<*i;
-    if (!newSource.isEmpty() && !dictsList.isEmpty())
-        newSource.prepend(dictsList.join(",")+':');
 
-    if (newSource == m_source)
+    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i) {
+        if (m_activeDicts.contains(*i) && m_activeDicts.value(*i)) {
+            dictsList << *i;
+        }
+    }
+
+    if (!newSource.isEmpty() && !dictsList.isEmpty()) {
+        newSource.prepend(dictsList.join(",")+':');
+    }
+
+    if (newSource == m_source) {
         return;
+    }
 
     dataEngine(m_dataEngine)->disconnectSource(m_source, this);
 
-    if (!newSource.isEmpty())
-    {   //get new definition
+    if (!newSource.isEmpty()) {
+        //get new definition
         //m_flash->flash(i18n("Looking up ") + m_word);
         m_source = newSource;
         dataEngine(m_dataEngine)->connectSource(m_source, this);
-    }
-    else
-    {    //make the definition box disappear
-        // TODO Phase::self()->animateItem(m_defBrowserProxy, Phase::Disappear);
+    } else {
+        //make the definition box disappear
         m_defBrowser->hide();
     }
 
