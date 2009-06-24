@@ -61,7 +61,7 @@ KnowledgeBase KnowledgeBaseParser::parse( const QString &xmlString )
   while ( !xml.atEnd() ) {
     xml.readNext();
 
-    if ( xml.isStartElement() && xml.name() == "content" ) {
+    if ( xml.isStartElement() && xml.name() == "knowledgebase" ) {
       knowledgeBase = parseKnowledgeBase( xml );
     }
   }
