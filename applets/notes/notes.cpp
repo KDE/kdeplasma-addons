@@ -84,39 +84,23 @@ void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
 
 void NotesTextEdit::italic()
 {
-    if (fontItalic() == true) {
-        setTextItalic(false);
-    } else {
-        setTextItalic(true);
-    }
+    setTextItalic(!fontItalic());
 }
 
 void NotesTextEdit::bold()
-{ 
-    if (fontWeight() == 75) {
-        setTextBold(false);
-    } else {
-        setTextBold(true);
-    }
+{
+    setTextBold(fontWeight() != 75);
 }
 
 void NotesTextEdit::underline()
 {
-    if (fontUnderline() == true) {
-        setTextUnderline(false);
-    } else {
-        setTextUnderline(true);
-    }
+    setTextUnderline(!fontUnderline());
 }
 
 void NotesTextEdit::strikeOut()
 {
-    QFont a = font();
-    if (a.strikeOut() == true) {
-        setTextStrikeOut(false);
-    } else {
-        setTextStrikeOut(true);
-    }
+    QFont a = currentFont();
+    setTextStrikeOut(!a.strikeOut());
 }
 
 void NotesTextEdit::justifyCenter()
@@ -124,7 +108,7 @@ void NotesTextEdit::justifyCenter()
     if (alignment() == Qt::AlignHCenter) {
         setAlignment(Qt::AlignLeft);
     } else {
-        alignCenter ();
+        alignCenter();
     }
 }
 
