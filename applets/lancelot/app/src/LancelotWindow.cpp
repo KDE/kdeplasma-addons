@@ -461,8 +461,8 @@ void LancelotWindow::setupModels()
     m_models["RecentDocuments"]   = new Models::RecentDocuments();
     m_models["OpenDocuments"]     = new Models::OpenDocuments();
 
-    m_models["Contacts"]          = new Models::ContactsKopete();
-    m_models["Messages"]          = new Models::MessagesKmail();
+    // m_models["Contacts"]          = new Models::ContactsKopete();
+    // m_models["Messages"]          = new Models::MessagesKmail();
 
     m_models["Runner"]            = new Models::Runner();
 
@@ -497,6 +497,7 @@ void LancelotWindow::setupModels()
     // Contacts Mail
     plugins = m_mainConfig.readEntry("mailPlugins", QString());
     if (plugins.isEmpty()) {
+        m_models["Messages"]          = new Models::MessagesKmail();
         MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
@@ -509,6 +510,7 @@ void LancelotWindow::setupModels()
     // Contacts IM
     plugins = m_mainConfig.readEntry("imPlugins", QString());
     if (plugins.isEmpty()) {
+        m_models["Contacts"]          = new Models::ContactsKopete();
         MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
