@@ -46,7 +46,7 @@ KonsoleProfilesApplet::~KonsoleProfilesApplet()
 void KonsoleProfilesApplet::init()
 {
     KDirWatch *dirwatch = new KDirWatch( this );
-    QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
+    const QStringList lst = KGlobal::dirs()->findDirs( "data", "konsole/" );
     for ( int i = 0; i < lst.count(); i++ )
     {
         dirwatch->addDir( lst[i] );
@@ -92,10 +92,11 @@ void KonsoleProfilesApplet::slotUpdateSessionMenu()
 void KonsoleProfilesApplet::initSessionFiles()
 {
     const QStringList list = KGlobal::dirs()->findAllResources( "data", "konsole/*.profile", KStandardDirs::NoDuplicates );
-    for (QStringList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it)
+    const QStringList::ConstIterator end = list.constEnd();
+    for (QStringList::ConstIterator it = list.constBegin(); it != end; ++it)
     {
         QFileInfo info( *it );
-        QString profileName = KIO::decodeFileName( info.baseName() );
+        const QString profileName = KIO::decodeFileName( info.baseName() );
         QString niceName=profileName;
         KConfig cfg( *it, KConfig::SimpleConfig );
         if ( cfg.hasGroup( "General" ) )
