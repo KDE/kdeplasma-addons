@@ -41,7 +41,6 @@ public:
     void reload(const QStringList &selected);
     void addBackground(const QString &path);
     int indexOf(const QString &path) const;
-    void removeBackground(const QString &path);
     virtual bool contains(const QString &bg) const;
 
     static QList<Plasma::Package *> findAllBackgrounds(Plasma::Wallpaper *structureParent,
@@ -54,6 +53,7 @@ public:
     void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
 
 protected Q_SLOTS:
+    void removeBackground(const QString &path);
     void showPreview(const KFileItem &item, const QPixmap &preview);
     void previewFailed(const KFileItem &item);
 

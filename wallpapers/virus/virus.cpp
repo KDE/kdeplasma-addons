@@ -456,11 +456,4 @@ void Virus::updateScreenshot(QPersistentModelIndex index)
     m_uiVirus.m_view->view()->update(index);
 }
 
-void Virus::removeBackground(const QString &path)
-{
-    if (m_model) {
-        m_model->removeBackground(path);
-    }
-}
-
 #include "virus.moc"
