@@ -47,7 +47,6 @@ class Virus : public Plasma::Wallpaper
         void browse();
         void updateBackground(const QImage &img);
         void showFileDialog();
-        void removeBackground(const QString &path);
         void configWidgetDestroyed();
 
         void requestUpdate();
