@@ -255,7 +255,7 @@ KnowledgeBaseListJob *OcsApi::requestKnowledgeBase( const int content, const QSt
 
 KUrl OcsApi::createUrl( const QString &path )
 {
-  KUrl url( "http://api.opendesktop.org/v1/" );
+  KUrl url( "https://api.opendesktop.org/v1/" );
   url.addPath( path );
   return url;
 }
