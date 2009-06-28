@@ -50,7 +50,7 @@ if(PHONON_FOUND)
 endif(PHONON_FOUND)
 
 if(NOT WIN32)
-  # add_subdirectory(lancelot)
+  add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)
   add_subdirectory(leavenote)
   add_subdirectory(showdesktop)

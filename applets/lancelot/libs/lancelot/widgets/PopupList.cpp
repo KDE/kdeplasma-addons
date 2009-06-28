@@ -48,9 +48,9 @@ PopupList::Private::Private(PopupList * parent)
 
     list->setShowsExtendersOutside(false);
     list->setGroupByName("PopupList");
-    list->setItemsGroup(Instance::activeInstance()
+    list->setItemsGroup(Global::instance()
          ->group("PopupList-Items"));
-    list->setCategoriesGroup(Instance::activeInstance()
+    list->setCategoriesGroup(Global::instance()
          ->group("PopupList-Categories"));
 
     list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
