@@ -278,6 +278,14 @@ public:
 
         QDrag * drag = new QDrag(widget);
         drag->setMimeData(data);
+
+        // Pixmap for dragger
+        QPixmap pixmap(item->size().toSize());
+        QPainter painter(&pixmap);
+        painter.fillRect(QRect(QPoint(), pixmap.size()), QColor(100, 100, 100));
+        item->paint(&painter, 0, 0);
+        drag->setPixmap(pixmap);
+
         drag->exec();
     }
 

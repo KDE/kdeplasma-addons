@@ -502,6 +502,13 @@ void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * 
     QDrag * drag = new QDrag(widget);
     drag->setMimeData(data);
 
+    // Pixmap for dragger
+    QPixmap pixmap(sender->size().toSize());
+    QPainter painter(&pixmap);
+    painter.fillRect(QRect(QPoint(), pixmap.size()), QColor(100, 100, 100));
+    sender->paint(&painter, 0, 0);
+    drag->setPixmap(pixmap);
+
     Qt::DropActions actions;
     Qt::DropAction defaultAction;
     m_model->setDropActions(index, actions, defaultAction);
