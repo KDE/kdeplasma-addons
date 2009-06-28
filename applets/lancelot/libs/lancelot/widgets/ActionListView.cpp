@@ -103,7 +103,7 @@ void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
     ExtenderButton::mouseMoveEvent(event);
     if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
         setDown(false);
-        m_factory->itemDrag(this, event->widget());
+        m_factory->itemDrag(this, event);
     }
 }
 
@@ -487,7 +487,7 @@ void ActionListViewItemFactory::itemContext(
     m_model->contextActivate(index, menu.exec(popupPoint));
 } //<
 
-void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * widget) //>
+void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QGraphicsSceneMouseEvent * event) //>
 {
     int index = m_items.indexOf(sender);
     if (index < 0 || index >= m_model->size()) {
@@ -499,7 +499,7 @@ void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * 
         return;
     }
 
-    QDrag * drag = new QDrag(widget);
+    QDrag * drag = new QDrag(event->widget());
     drag->setMimeData(data);
 
     // Pixmap for dragger
@@ -508,6 +508,7 @@ void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QWidget * 
     painter.fillRect(QRect(QPoint(), pixmap.size()), QColor(100, 100, 100));
     sender->paint(&painter, 0, 0);
     drag->setPixmap(pixmap);
+    drag->setHotSpot(event->pos().toPoint());
 
     Qt::DropActions actions;
     Qt::DropAction defaultAction;

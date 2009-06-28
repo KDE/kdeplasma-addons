@@ -149,7 +149,7 @@ public:
                 ExtenderButton::mouseMoveEvent(event);
                 if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
                     setDown(false);
-                    d->startDrag(this);
+                    d->startDrag(this, event);
                 }
             }
 
@@ -255,7 +255,7 @@ public:
         );
     }
 
-    void startDrag(BreadcrumbItem * item)
+    void startDrag(BreadcrumbItem * item, QGraphicsSceneMouseEvent * event)
     {
         int index = buttons.indexOf(item, 0);
         if (index == -1) {
@@ -285,6 +285,7 @@ public:
         painter.fillRect(QRect(QPoint(), pixmap.size()), QColor(100, 100, 100));
         item->paint(&painter, 0, 0);
         drag->setPixmap(pixmap);
+        drag->setHotSpot(event->pos().toPoint());
 
         drag->exec();
     }

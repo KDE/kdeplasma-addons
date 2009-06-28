@@ -83,7 +83,7 @@ public:
 
     void itemContext(ActionListViewItem * sender,
             bool mouseCoordinate = true);
-    void itemDrag(ActionListViewItem * sender, QWidget * widget);
+    void itemDrag(ActionListViewItem * sender, QGraphicsSceneMouseEvent * event);
 
     void activateSelectedItem();
     void contextForSelectedItem();
