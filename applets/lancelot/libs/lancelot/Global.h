@@ -83,9 +83,11 @@ public:
 
     /**
      * Sets the value of the specified property
-     * @param the name of the property
+     * @param property the name of the property
+     * @param value value
+     * @param persistent whether the property should be preserved on group reload
      */
-    void setProperty(const QString & property, const QVariant & value);
+    void setProperty(const QString & property, const QVariant & value, bool persistent = true);
 
     /**
      * Clears the value of the specified property

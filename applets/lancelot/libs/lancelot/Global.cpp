@@ -109,43 +109,44 @@ void Group::remove(QObject * object, bool setDefaultGroup)
     }
 }
 
-bool Group::hasProperty(const QString & prop) const
+bool Group::hasProperty(const QString & property) const
 {
     // TODO: remove this after 4.3
-    QString property = prop;
-    property[0] = property[0].toLower();
+    // QString property = prop;
+    // property[0] = property[0].toLower();
 
     return d->properties.contains(property);
 }
 
-QVariant Group::property(const QString & prop) const
+QVariant Group::property(const QString & property) const
 {
     // TODO: remove this after 4.3
-    QString property = prop;
-    property[0] = property[0].toLower();
+    // QString property = prop;
+    // property[0] = property[0].toLower();
 
     return d->properties.value(property);
 }
 
-void Group::setProperty(const QString & prop, const QVariant & value)
+void Group::setProperty(const QString & property, const QVariant & value, bool persistent)
 {
     // TODO: remove this after 4.3
-    QString property = prop;
-    property[0] = property[0].toLower();
+    // QString property = prop;
+    // property[0] = property[0].toLower();
 
     qDebug() << "Group::setProperty:" << property << value;
 
     d->properties[property] = value;
+    d->persistentProperties << property;
     foreach (QObject * child, d->objects) {
         d->setObjectProperty(child, property, value);
     }
 }
 
-void Group::clearProperty(const QString & prop)
+void Group::clearProperty(const QString & property)
 {
     // TODO: remove this after 4.3
-    QString property = prop;
-    property[0] = property[0].toLower();
+    // QString property = prop;
+    // property[0] = property[0].toLower();
 
     d->properties.remove(property);
 }
@@ -179,7 +180,14 @@ void Group::load(bool full)
     if (d->loaded && !full) return;
     d->loaded = true;
 
-    d->properties.clear();
+    // d->properties.clear();
+    QMutableMapIterator < QString, QVariant > i(d->properties);
+    while (i.hasNext()) {
+        i.next();
+        if (!d->persistentProperties.contains(i.key())) {
+            i.remove();
+        }
+    }
 
     if (d->ownsBackgroundSvg) {
         delete d->backgroundSvg;
@@ -188,6 +196,7 @@ void Group::load(bool full)
 
     Group * group;
 
+    qDebug() << "Loading group " << d->name;
     if (!d->confGroupTheme->exists()) {
         group = Global::instance()->defaultGroup();
         if (group == this) return;
@@ -213,9 +222,9 @@ void Group::load(bool full)
     QString type = d->confGroupTheme->readEntry("background.type", "none");
     if (type == "color" || type == "color-compact") {
         if (type == "color") {
-            setProperty("WholeColorBackground", 1);
+            setProperty("WholeColorBackground", 1, false);
         } else {
-            setProperty("TextColorBackground", 1);
+            setProperty("TextColorBackground", 1, false);
         }
         d->backgroundColor.normal   = d->confGroupTheme->readEntry("background.color.normal",   d->backgroundColor.normal);
         d->backgroundColor.active   = d->confGroupTheme->readEntry("background.color.active",   d->backgroundColor.active);
@@ -225,7 +234,7 @@ void Group::load(bool full)
             delete d->backgroundSvg;
         }
 
-        setProperty("SvgBackground", 1);
+        setProperty("SvgBackground", 1, false);
         d->backgroundSvg = new Plasma::FrameSvg(NULL);
         d->backgroundSvg->setImagePath(
             Plasma::Theme::defaultTheme()->imagePath(
@@ -236,7 +245,7 @@ void Group::load(bool full)
 
     if (!d->confGroupTheme->readEntry(
                 "foreground.blurtextshadow", QString()).isEmpty()) {
-        setProperty("BlurTextShadow", 1);
+        setProperty("BlurTextShadow", 1, false);
     }
 }
 

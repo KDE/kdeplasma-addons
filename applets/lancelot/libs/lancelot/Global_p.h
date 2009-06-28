@@ -39,6 +39,7 @@ public:
 
     QString name;
     QMap < QString, QVariant > properties;
+    QSet < QString > persistentProperties;
 
     QSet < QObject * > objects;
 

@@ -423,22 +423,22 @@ void PassagewayView::setActivationMethod(int value)
 {
     if (value == Lancelot::ClickActivate) {
         Global::instance()->group(group()->name() + "-Entrance")
-            ->setProperty("ExtenderPosition", NoExtender);
+            ->setProperty("extenderPosition", NoExtender);
         Global::instance()->group(group()->name() + "-Atlas")
-            ->setProperty("ExtenderPosition", NoExtender);
+            ->setProperty("extenderPosition", NoExtender);
         Global::instance()->group(group()->name() + "-Button")
-            ->setProperty("ExtenderPosition", NoExtender);
+            ->setProperty("extenderPosition", NoExtender);
         Global::instance()->group(group()->name() + "-Button")
-            ->setProperty("ActivationMethod", ClickActivate);
+            ->setProperty("activationMethod", ClickActivate);
     } else {
         Global::instance()->group(group()->name() + "-Entrance")
-            ->setProperty("ExtenderPosition", LeftExtender);
+            ->setProperty("extenderPosition", LeftExtender);
         Global::instance()->group(group()->name() + "-Atlas")
-            ->setProperty("ExtenderPosition", RightExtender);
+            ->setProperty("extenderPosition", RightExtender);
         Global::instance()->group(group()->name() + "-Button")
-            ->setProperty("ExtenderPosition", LeftExtender);
+            ->setProperty("extenderPosition", LeftExtender);
         Global::instance()->group(group()->name() + "-Button")
-            ->setProperty("ActivationMethod", ExtenderActivate);
+            ->setProperty("activationMethod", ExtenderActivate);
     }
     // Global::instance()->group(group()->name() + "-Entrance")
     //     ->notifyUpdated();

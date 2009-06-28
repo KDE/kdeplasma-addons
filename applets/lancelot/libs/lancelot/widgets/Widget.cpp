@@ -23,6 +23,7 @@
 #include "Global.h"
 #include <lancelot/lancelot.h>
 #include <QApplication>
+#include <QDebug>
 
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>

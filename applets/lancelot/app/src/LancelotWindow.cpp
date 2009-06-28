@@ -289,21 +289,21 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     layoutSections->setFlip(flip);
 
     if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
-        instance->group("SystemButtons")->setProperty("ExtenderPosition", QVariant(
+        instance->group("SystemButtons")->setProperty("extenderPosition", QVariant(
                 (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
         ));
         instance->group("SystemButtons")
-            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+            ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
         instance->group("SystemButtons")
-            ->setProperty("ExtenderPosition", QVariant(Lancelot::NoExtender));
+            ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
         instance->group("SystemButtons")
-            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+            ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
-    instance->group("LancelotContext")->setProperty("ExtenderPosition",
-            instance->group("SystemButtons")->property("ExtenderPosition"));
-    instance->group("LancelotContext")->setProperty("ActivationMethod",
-            instance->group("SystemButtons")->property("ActivationMethod"));
+    instance->group("LancelotContext")->setProperty("extenderPosition",
+            instance->group("SystemButtons")->property("extenderPosition"));
+    instance->group("LancelotContext")->setProperty("activationMethod",
+            instance->group("SystemButtons")->property("activationMethod"));
     instance->group("SystemButtons")->notifyUpdated();
     instance->group("LancelotContext")->notifyUpdated();
 
@@ -766,53 +766,53 @@ void LancelotWindow::loadConfig()
     }
 
     if (systemNoClick) {
-        instance->group("SystemButtons")->setProperty("ExtenderPosition",
+        instance->group("SystemButtons")->setProperty("extenderPosition",
                 (layoutMain->flip() & Plasma::VerticalFlip)
                     ? (Lancelot::TopExtender) : (Lancelot::BottomExtender)
         );
         instance->group("SystemButtons")
-            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+            ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
         instance->group("SystemButtons")
-            ->setProperty("ExtenderPosition", QVariant(Lancelot::NoExtender));
+            ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
         instance->group("SystemButtons")
-            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+            ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
 
-    instance->group("LancelotContext")->setProperty("ExtenderPosition",
-            instance->group("SystemButtons")->property("ExtenderPosition"));
-    instance->group("LancelotContext")->setProperty("ActivationMethod",
-            instance->group("SystemButtons")->property("ActivationMethod"));
+    instance->group("LancelotContext")->setProperty("extenderPosition",
+            instance->group("SystemButtons")->property("extenderPosition"));
+    instance->group("LancelotContext")->setProperty("activationMethod",
+            instance->group("SystemButtons")->property("activationMethod"));
     instance->group("SystemButtons")->notifyUpdated();
     instance->group("LancelotContext")->notifyUpdated();
 
     if (sectionNoClick) {
         instance->group("SectionButtons")
-            ->setProperty("ActivationMethod", Lancelot::HoverActivate);
+            ->setProperty("activationMethod", Lancelot::HoverActivate);
     } else {
         instance->group("SectionButtons")
-            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+            ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
     instance->group("SectionButtons")->notifyUpdated();
 
     if (listsNoClick) {
         instance->group("ActionListView-Left")
-            ->setProperty("ExtenderPosition", Lancelot::LeftExtender);
+            ->setProperty("extenderPosition", Lancelot::LeftExtender);
         instance->group("ActionListView-Right")
-            ->setProperty("ExtenderPosition", Lancelot::RightExtender);
+            ->setProperty("extenderPosition", Lancelot::RightExtender);
         instance->group("PassagewayView")
-            ->setProperty("ActivationMethod", Lancelot::ExtenderActivate);
+            ->setProperty("activationMethod", Lancelot::ExtenderActivate);
         instance->group("PopupList")
-            ->setProperty("ExtenderPosition", Lancelot::RightExtender);
+            ->setProperty("extenderPosition", Lancelot::RightExtender);
     } else {
         instance->group("ActionListView-Left")
-            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
+            ->setProperty("extenderPosition", Lancelot::NoExtender);
         instance->group("ActionListView-Right")
-            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
+            ->setProperty("extenderPosition", Lancelot::NoExtender);
         instance->group("PassagewayView")
-            ->setProperty("ActivationMethod", Lancelot::ClickActivate);
+            ->setProperty("activationMethod", Lancelot::ClickActivate);
         instance->group("PopupList")
-            ->setProperty("ExtenderPosition", Lancelot::NoExtender);
+            ->setProperty("extenderPosition", Lancelot::NoExtender);
     }
     instance->group("ActionListView-Left")->notifyUpdated();
     instance->group("ActionListView-Right")->notifyUpdated();
