@@ -224,6 +224,16 @@ public:
      */
     Group * defaultGroup();
 
+    /**
+     * Sets immutability
+     * @param immutability new immutability
+     */
+    void setImmutability(const Plasma::ImmutabilityType immutable);
+
+    /**
+     * @returns current immutability
+     */
+    Plasma::ImmutabilityType immutability() const;
 
 
 private:

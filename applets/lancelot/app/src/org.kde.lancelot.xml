@@ -6,6 +6,9 @@
       <arg name="x" type="i" direction="in"/>
       <arg name="y" type="i" direction="in"/>
     </method>
+    <method name="showCentered">
+      <arg type="b" direction="out"/>
+    </method>
     <method name="showItem">
       <arg type="b" direction="out"/>
       <arg name="x" type="i" direction="in"/>
@@ -47,6 +50,12 @@
     </method>
     <method name="sectionIcons">
       <arg type="as" direction="out"/>
+    </method>
+    <method name="setImmutability">
+      <arg name="immutable" type="i" direction="in"/>
+    </method>
+    <method name="immutability">
+      <arg type="i" direction="out"/>
     </method>
   </interface>
 </node>

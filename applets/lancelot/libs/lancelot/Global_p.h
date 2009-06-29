@@ -65,6 +65,8 @@ public:
     KConfig * confMain;
     KConfig * confTheme;
 
+    Plasma::ImmutabilityType immutability;
+
     void createConfTheme();
 
 public Q_SLOTS:

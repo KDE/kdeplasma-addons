@@ -136,7 +136,11 @@ void Group::setProperty(const QString & property, const QVariant & value, bool p
     qDebug() << "Group::setProperty:" << property << value;
 
     d->properties[property] = value;
-    d->persistentProperties << property;
+
+    if (persistent) {
+        d->persistentProperties << property;
+    }
+
     foreach (QObject * child, d->objects) {
         d->setObjectProperty(child, property, value);
     }
@@ -253,6 +257,7 @@ bool Group::contains(QObject * object)
 {
     return d->objects.contains(object);
 }
+
 
 // Global
 
@@ -415,6 +420,18 @@ void Global::setGroupForObject(QObject * object, Group * group) {
                 d, SLOT(objectDeleted(QObject *)));
     }
 }
+
+void Global::setImmutability(const Plasma::ImmutabilityType immutable)
+{
+    d->immutability = immutable;
+    qDebug() << "Global::setImmutability " << immutable;
+}
+
+Plasma::ImmutabilityType Global::immutability() const
+{
+    return d->immutability;
+}
+
 
 } // namespace Lancelot
 

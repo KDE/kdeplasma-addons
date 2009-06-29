@@ -60,7 +60,8 @@ public Q_SLOTS:
     QStringList sectionNames();
     QStringList sectionIcons();
 
-    void setImmutability(const Plasma::ImmutabilityType immutable);
+    void setImmutability(int immutable);
+    int immutability() const;
 
 protected:
     LancelotWindow * window;

@@ -38,13 +38,13 @@ public:
     void init();
     virtual QList< QAction * > contextualActions();
 
-    // void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
 protected Q_SLOTS:
     void showLancelot();
     void toggleLancelot();
     void showLancelotSection(const QString & section);
     void toggleLancelotSection(const QString & section);
+    void updateImmutability(const Plasma::ImmutabilityType immutable);
     void configAccepted();
 
 protected:

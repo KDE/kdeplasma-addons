@@ -25,9 +25,11 @@
 #include <QDBusReply>
 #include <QGraphicsLinearLayout>
 
-#include <lancelot/widgets/HoverIcon.h>
+#include <plasma/corona.h>
 
+#include <lancelot/widgets/HoverIcon.h>
 #include <lancelot/lancelot.h>
+
 #include "lancelot_interface.h"
 #include "../LancelotConfig.h"
 
@@ -240,6 +242,11 @@ void LancelotApplet::init()
         this, SLOT(toggleLancelotSection(const QString &))
     );
     KGlobal::locale()->insertCatalog("lancelot");
+
+    qDebug() << "LancelotApplet::init()";
+    connect(
+        (Plasma::Corona *)scene(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+        this, SLOT(updateImmutability(Plasma::ImmutabilityType)));
 }
 
 void LancelotApplet::showLancelot()
@@ -369,6 +376,13 @@ QSizeF LancelotApplet::sizeHint(Qt::SizeHint which, const QSizeF & constraint) c
     }
 
     return hint;
+}
+
+void LancelotApplet::updateImmutability(const Plasma::ImmutabilityType immutable)
+{
+    qDebug() << "LancelotApplet::setImmutability " << immutable;
+    d->lancelot->setImmutability(immutable);
+    Plasma::Applet::setImmutability(immutable);
 }
 
 #include "LancelotApplet.moc"
