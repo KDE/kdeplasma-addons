@@ -68,7 +68,6 @@ private:
     bool loadConfig();
     void applyConfig();
 
-    Lancelot::Instance * m_instance;
     Lancelot::ActionListView * m_list;
     Models::PartsMergedModel * m_model;
     QList < Lancelot::ActionListModel * > m_models;

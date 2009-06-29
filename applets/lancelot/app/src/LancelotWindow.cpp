@@ -80,7 +80,6 @@ LancelotWindow::LancelotWindow()
     : m_root(NULL), m_corona(NULL),
     m_hovered(false), m_showingFull(true), m_sectionsSignalMapper(NULL),
     m_config("lancelotrc"), m_mainConfig(&m_config, "Main"),
-    instance(NULL),
     m_configWidget(NULL),
     m_resizeDirection(None),
     m_mainSize(mainWidthDefault, windowHeightDefault),
@@ -104,9 +103,6 @@ LancelotWindow::LancelotWindow()
 
     setMinimumSize(400, 300);
     setScene(m_corona);
-
-    instance = new Lancelot::Instance();
-    instance->setHasApplication(true);
 
     m_root = new Lancelot::ResizeBordersPanel();
     installEventFilter(this);
@@ -139,8 +135,6 @@ LancelotWindow::LancelotWindow()
     passagewayApplications->setAtlasIcon(KIcon("applications-other"));
     /* End TODO */
 
-    // instance->activateAll();
-
     m_sectionsSignalMapper = new QSignalMapper(this);
     connect (m_sectionsSignalMapper,
         SIGNAL(mapped(const QString &)),
@@ -166,7 +160,6 @@ LancelotWindow::LancelotWindow()
         this, SLOT(search(const QString &))
     );
 
-    instance->activateAll();
     loadConfig();
     setupActions();
 
@@ -197,7 +190,6 @@ void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
 LancelotWindow::~LancelotWindow()
 {
     delete m_configWidget;
-    delete instance;
 }
 
 void LancelotWindow::lancelotShow(int x, int y)
@@ -289,23 +281,23 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     layoutSections->setFlip(flip);
 
     if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
-        instance->group("SystemButtons")->setProperty("extenderPosition", QVariant(
+        Lancelot::Global::instance()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
                 (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
         ));
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
-    instance->group("LancelotContext")->setProperty("extenderPosition",
-            instance->group("SystemButtons")->property("extenderPosition"));
-    instance->group("LancelotContext")->setProperty("activationMethod",
-            instance->group("SystemButtons")->property("activationMethod"));
-    instance->group("SystemButtons")->notifyUpdated();
-    instance->group("LancelotContext")->notifyUpdated();
+    Lancelot::Global::instance()->group("LancelotContext")->setProperty("extenderPosition",
+            Lancelot::Global::instance()->group("SystemButtons")->property("extenderPosition"));
+    Lancelot::Global::instance()->group("LancelotContext")->setProperty("activationMethod",
+            Lancelot::Global::instance()->group("SystemButtons")->property("activationMethod"));
+    Lancelot::Global::instance()->group("SystemButtons")->notifyUpdated();
+    Lancelot::Global::instance()->group("LancelotContext")->notifyUpdated();
 
     if (m_showingFull) {
         sectionActivated("applications");
@@ -766,57 +758,57 @@ void LancelotWindow::loadConfig()
     }
 
     if (systemNoClick) {
-        instance->group("SystemButtons")->setProperty("extenderPosition",
+        Lancelot::Global::instance()->group("SystemButtons")->setProperty("extenderPosition",
                 (layoutMain->flip() & Plasma::VerticalFlip)
                     ? (Lancelot::TopExtender) : (Lancelot::BottomExtender)
         );
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
-        instance->group("SystemButtons")
+        Lancelot::Global::instance()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
 
-    instance->group("LancelotContext")->setProperty("extenderPosition",
-            instance->group("SystemButtons")->property("extenderPosition"));
-    instance->group("LancelotContext")->setProperty("activationMethod",
-            instance->group("SystemButtons")->property("activationMethod"));
-    instance->group("SystemButtons")->notifyUpdated();
-    instance->group("LancelotContext")->notifyUpdated();
+    Lancelot::Global::instance()->group("LancelotContext")->setProperty("extenderPosition",
+            Lancelot::Global::instance()->group("SystemButtons")->property("extenderPosition"));
+    Lancelot::Global::instance()->group("LancelotContext")->setProperty("activationMethod",
+            Lancelot::Global::instance()->group("SystemButtons")->property("activationMethod"));
+    Lancelot::Global::instance()->group("SystemButtons")->notifyUpdated();
+    Lancelot::Global::instance()->group("LancelotContext")->notifyUpdated();
 
     if (sectionNoClick) {
-        instance->group("SectionButtons")
+        Lancelot::Global::instance()->group("SectionButtons")
             ->setProperty("activationMethod", Lancelot::HoverActivate);
     } else {
-        instance->group("SectionButtons")
+        Lancelot::Global::instance()->group("SectionButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
-    instance->group("SectionButtons")->notifyUpdated();
+    Lancelot::Global::instance()->group("SectionButtons")->notifyUpdated();
 
     if (listsNoClick) {
-        instance->group("ActionListView-Left")
+        Lancelot::Global::instance()->group("ActionListView-Left")
             ->setProperty("extenderPosition", Lancelot::LeftExtender);
-        instance->group("ActionListView-Right")
+        Lancelot::Global::instance()->group("ActionListView-Right")
             ->setProperty("extenderPosition", Lancelot::RightExtender);
-        instance->group("PassagewayView")
+        Lancelot::Global::instance()->group("PassagewayView")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
-        instance->group("PopupList")
+        Lancelot::Global::instance()->group("PopupList")
             ->setProperty("extenderPosition", Lancelot::RightExtender);
     } else {
-        instance->group("ActionListView-Left")
+        Lancelot::Global::instance()->group("ActionListView-Left")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
-        instance->group("ActionListView-Right")
+        Lancelot::Global::instance()->group("ActionListView-Right")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
-        instance->group("PassagewayView")
+        Lancelot::Global::instance()->group("PassagewayView")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
-        instance->group("PopupList")
+        Lancelot::Global::instance()->group("PopupList")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
     }
-    instance->group("ActionListView-Left")->notifyUpdated();
-    instance->group("ActionListView-Right")->notifyUpdated();
-    instance->group("PassagewayView")->notifyUpdated();
+    Lancelot::Global::instance()->group("ActionListView-Left")->notifyUpdated();
+    Lancelot::Global::instance()->group("ActionListView-Right")->notifyUpdated();
+    Lancelot::Global::instance()->group("PassagewayView")->notifyUpdated();
 
     // PassagewayView settings
     if (m_configUi.appbrowserColumnLimitted()) {

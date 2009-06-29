@@ -28,6 +28,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <plasma/framesvg.h>
+#include <plasma/plasma.h>
 
 #include <lancelot/lancelot_export.h>
 
@@ -223,6 +224,8 @@ public:
      */
     Group * defaultGroup();
 
+
+
 private:
     /**
      * Creates a new Lancelot::Global
@@ -231,24 +234,6 @@ private:
 
     class Private;
     Private * const d;
-};
-
-// TODO: delete this class after KDE 4.3
-class Instance {
-public:
-    Instance() {
-        Global::instance();
-    }
-
-    void setHasApplication(bool value) {
-        Q_UNUSED(value);
-    }
-    void activateAll() {};
-
-    Group * group(const QString name) {
-        return Global::instance()->group(name);
-    }
-
 };
 
 } // namespace Lancelot

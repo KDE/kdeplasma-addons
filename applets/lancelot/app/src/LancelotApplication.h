@@ -21,6 +21,7 @@
 #define LANCELOTAPPLICATION_H
 
 #include <kuniqueapplication.h>
+#include <plasma/plasma.h>
 #include <QTimer>
 #include <QSet>
 #include <QStringList>
@@ -43,7 +44,6 @@ public Q_SLOTS:
     static bool showCentered();
     static bool showItem(int x, int y, const QString & name);
 
-
     static bool hide(bool immediate = false);
     static bool search(const QString & string);
 
@@ -59,6 +59,8 @@ public Q_SLOTS:
     QStringList sectionIDs();
     QStringList sectionNames();
     QStringList sectionIcons();
+
+    void setImmutability(const Plasma::ImmutabilityType immutable);
 
 protected:
     LancelotWindow * window;

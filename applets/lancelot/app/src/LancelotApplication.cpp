@@ -203,3 +203,7 @@ void LancelotApplication::showMenuEditor()
     window->showMenuEditor();
 }
 
+void LancelotApplication::setImmutability(const Plasma::ImmutabilityType immutable)
+{
+
+}

@@ -202,8 +202,6 @@ private:
     KConfigGroup          m_mainConfig;
     QString               m_activeSection;
 
-    Lancelot::Instance  * instance;
-
     LancelotConfig m_configUi;
     QWidget * m_configWidget;
 

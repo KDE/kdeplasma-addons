@@ -46,7 +46,7 @@
 
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
-    m_instance(NULL), m_list(NULL), m_model(NULL),
+    m_list(NULL), m_model(NULL),
     m_icon(NULL)
 {
     if (args.size() > 0) {
@@ -73,11 +73,9 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 void LancelotPart::init()
 {
     // Setting up UI
-    m_instance = new Lancelot::Instance();
     m_list = new Lancelot::ActionListView(this);
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
-    m_instance->activateAll();
 
     connect(
             m_model, SIGNAL(removeModelRequested(int)),
@@ -273,7 +271,6 @@ LancelotPart::~LancelotPart()
 {
     qDeleteAll(m_models);
     delete m_model;
-    delete m_instance;
 }
 
 void LancelotPart::saveConfig()
