@@ -37,7 +37,8 @@
 
 Timer::Timer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-      m_seconds(),
+      m_seconds(0),
+      m_startingSeconds(0),
       m_running(false)
 {
     resize(315, 125);
@@ -124,10 +125,12 @@ void Timer::init()
     connect(m_resetAction, SIGNAL(triggered(bool)), this, SLOT(resetTimer()));
     createMenuAction();
 
-    m_running = cg.readEntry("running", false);
-    if (m_running){
+    int running = cg.readEntry("running", 0);
+    m_running = running > 0;
+    m_startingSeconds = cg.readEntry("seconds", 0);
+    if (m_running) {
         QDateTime startedAt = cg.readEntry("startedAt", QDateTime::currentDateTime());
-        int tmpSeconds = cg.readEntry("seconds", 0) - startedAt.secsTo(QDateTime::currentDateTime());
+        int tmpSeconds = running - startedAt.secsTo(QDateTime::currentDateTime());
         if (tmpSeconds > 0){
             setSeconds(tmpSeconds);
             startTimer();
@@ -135,8 +138,8 @@ void Timer::init()
             //TODO: We should notify user about expired timer
             m_running = false;
         }
-    }else{
-        setSeconds(cg.readEntry("seconds", 0));
+    } else {
+        setSeconds(m_startingSeconds);
         if (m_seconds){
             m_startAction->setEnabled(true);
             m_resetAction->setEnabled(true);
@@ -356,9 +359,9 @@ void Timer::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *)
 void Timer::saveTimer()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("running", m_running);
+    cg.writeEntry("running", m_running ? m_seconds : 0);
     cg.writeEntry("startedAt", QDateTime::currentDateTime());
-    cg.writeEntry("seconds", m_seconds);
+    cg.writeEntry("seconds", m_startingSeconds);
 
     emit configNeedsSaving();
 }
@@ -372,6 +375,7 @@ void Timer::startTimer()
     timer.start(1000);
 
     m_startAction->setEnabled(false);
+    m_resetAction->setEnabled(true);
     m_stopAction->setEnabled(true);
 }
 
@@ -385,18 +389,18 @@ void Timer::stopTimer()
     timer.stop();
 
     m_startAction->setEnabled(true);
+    m_resetAction->setEnabled(true);
     m_stopAction->setEnabled(false);
 }
 
 void Timer::resetTimer()
 {
     stopTimer();
-
     saveTimer();
 
-    setSeconds(0);
+    setSeconds(m_startingSeconds);
     m_resetAction->setEnabled(false);
-    m_startAction->setEnabled(false);
+    m_startAction->setEnabled(true);
 }
 
 void Timer::mousePressEvent(QGraphicsSceneMouseEvent *)
@@ -413,9 +417,12 @@ QList<QAction*> Timer::contextualActions()
 void Timer::startTimerFromAction()
 {
     QAction *action = dynamic_cast<QAction*> (sender());
-    if (!action || action->property("seconds").type() != QVariant::Int ) return;
-    setSeconds(action->property("seconds").toInt());
+    if (!action || action->property("seconds").type() != QVariant::Int) {
+        return;
+    }
 
+    m_startingSeconds = action->property("seconds").toInt();
+    setSeconds(m_startingSeconds);
     startTimer();
 }
 

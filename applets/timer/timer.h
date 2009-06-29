@@ -71,6 +71,7 @@ class Timer : public Plasma::Applet
         void setSeconds(int seconds);
 
         int m_seconds;
+        int m_startingSeconds;
         bool m_running;
 
         QTimer timer;
