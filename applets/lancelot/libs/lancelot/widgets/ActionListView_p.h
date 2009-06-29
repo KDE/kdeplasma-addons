@@ -29,6 +29,8 @@
 #include <lancelot/widgets/ActionListView.h>
 #include <lancelot/models/ActionListModel.h>
 
+#include <plasma/widgets/svgwidget.h>
+
 namespace Lancelot
 {
 
@@ -145,10 +147,11 @@ private:
 //> ActionListView
 class ActionListView::Private {
 public:
-    Private();
+    Private(ActionListView * listView);
     ~Private();
 
     ActionListViewItemFactory * itemFactory;
+    Plasma::SvgWidget * dropIndicator;
     bool showsExtendersOutside : 1;
 };
 //<

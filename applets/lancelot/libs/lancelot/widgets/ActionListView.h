@@ -1,5 +1,4 @@
 /*
-    QAction * chosenAction;
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -86,6 +85,11 @@ public:
 public Q_SLOTS:
     void clearSelection();
     void initialSelection();
+
+protected:
+    L_Override bool sceneEventFilter(QGraphicsItem * watched,
+            QEvent * event);
+    L_Override bool sceneEvent(QEvent * event);
 
 Q_SIGNALS:
     void activated(int index);

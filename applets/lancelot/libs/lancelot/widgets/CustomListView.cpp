@@ -224,6 +224,19 @@ void CustomList::setItemFactory(CustomListItemFactory * f) //>
     d->updateSizeInfo();
 } //<
 
+int CustomList::itemAtPosition(int y) const
+{
+    QGraphicsWidget * item;
+    for (int i = 0; i < d->factory->itemCount(); i++) {
+        item = d->itemForIndex(i);
+        if (item->geometry().bottom() > y) {
+            return i;
+        }
+    }
+
+    return NULL;
+}
+
 CustomListItemFactory * CustomList::itemFactory() const //>
 {
     return d->factory;

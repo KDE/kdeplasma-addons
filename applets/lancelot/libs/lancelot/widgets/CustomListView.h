@@ -123,6 +123,8 @@ public:
     void setItemFactory(CustomListItemFactory * factory);
     CustomListItemFactory * itemFactory() const;
 
+    int itemAtPosition(int y) const;
+
     L_Override QSizeF sizeFor(QSizeF viewportSize) const;
     L_Override void viewportChanged(QRectF viewport);
     L_Override qreal scrollUnit(Qt::Orientation direction) const;

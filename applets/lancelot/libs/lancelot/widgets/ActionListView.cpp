@@ -22,6 +22,7 @@
 
 #include <QGraphicsSceneMouseEvent>
 #include <QApplication>
+#include <QDebug>
 
 namespace Lancelot {
 
@@ -609,9 +610,22 @@ void ActionListViewItemFactory::selectRelItem(int rel) //>
 //<
 
 //> ActionListView
-ActionListView::Private::Private() //>
+ActionListView::Private::Private(ActionListView * listView) //>
     : itemFactory(NULL)
 {
+    listView->setFlag(ScrollPane::HoverShowScrollbars);
+    listView->clearFlag(ScrollPane::ClipScrollable);
+    listView->setFocusPolicy(Qt::WheelFocus);
+    listView->setAcceptDrops(true);
+
+    Plasma::Svg * svg = new Plasma::Svg();
+    svg->setImagePath("lancelot/action-list-view-drop-indicator");
+    svg->setContainsMultipleImages(true);
+    dropIndicator = new Plasma::SvgWidget(listView->list());
+    dropIndicator->setSvg(svg);
+    dropIndicator->setElementID("drop-indicator");
+    dropIndicator->hide();
+    qDebug() << "ActionListView dropIndicator SVG valid? " << svg->isValid();
 } //<
 
 ActionListView::Private::~Private() //>
@@ -620,28 +634,72 @@ ActionListView::Private::~Private() //>
 } //<
 
 ActionListView::ActionListView(QGraphicsItem * parent) //>
-    : CustomListView(parent), d(new Private())
+    : CustomListView(parent), d(new Private(this))
 {
     setModel(NULL);
-    setFlag(ScrollPane::HoverShowScrollbars);
-    clearFlag(ScrollPane::ClipScrollable);
-    setFocusPolicy(Qt::WheelFocus);
 } //<
 
 ActionListView::ActionListView(ActionListModel * model, QGraphicsItem * parent) //>
     : CustomListView(parent),
-      d(new Private())
+      d(new Private(this))
 {
     setModel(model);
     // d->itemFactory = (ActionListViewItemFactory *) list()->itemFactory();
     connect(
             d->itemFactory, SIGNAL(activated(int)),
             this, SIGNAL(activated(int)));
-
-    setFlag(ScrollPane::HoverShowScrollbars);
-    clearFlag(ScrollPane::ClipScrollable);
-    setFocusPolicy(Qt::WheelFocus);
 } //<
+
+bool ActionListView::sceneEventFilter(QGraphicsItem * object,
+        QEvent * event)
+{
+    return CustomListView::sceneEventFilter(object, event);
+}
+
+bool ActionListView::sceneEvent(QEvent * event)
+{
+
+    QGraphicsSceneDragDropEvent * dndEvent
+            = dynamic_cast < QGraphicsSceneDragDropEvent * > (event);
+    QRectF g;
+    switch (event->type()) {
+        case QEvent::GraphicsSceneDragEnter:
+            dndEvent->acceptProposedAction();
+            d->dropIndicator->show();
+            qDebug() << "ActionListView::sceneEvent : GraphicsSceneDragEnter";
+            break;
+        case QEvent::GraphicsSceneDragLeave:
+            qDebug() << "ActionListView::sceneEvent : GraphicsSceneDragLeave";
+            d->dropIndicator->hide();
+            break;
+        case QEvent::GraphicsSceneDragMove:
+        {
+            int top = dndEvent->pos().y() - list()->geometry().top();
+            QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
+                    (list()->itemFactory()->itemForIndex(
+                         list()->itemAtPosition(top)));
+            if (item) {
+                g = item->geometry();
+                if (top - g.top() < g.bottom() - top) {
+                    g.setTop(item->geometry().top() - 2);
+                } else {
+                    g.setTop(item->geometry().bottom() - 2);
+                }
+                g.setHeight(4);
+                d->dropIndicator->setGeometry(g);
+            }
+            break;
+        }
+        case QEvent::GraphicsSceneDrop:
+            d->dropIndicator->hide();
+            break;
+        default:
+            // nothing
+            break;
+    }
+
+    return CustomListView::sceneEvent(event);
+}
 
 ActionListView::~ActionListView() //>
 {
@@ -654,6 +712,7 @@ void ActionListView::setModel(ActionListModel * model) //>
         d->itemFactory = new ActionListViewItemFactory(
                 model, this);
         list()->setItemFactory(d->itemFactory);
+        setAcceptDrops(true);
     } else {
         d->itemFactory->setModel(model);
     }
