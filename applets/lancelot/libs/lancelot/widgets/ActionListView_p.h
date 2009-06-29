@@ -145,7 +145,8 @@ private:
 //<
 
 //> ActionListView
-class ActionListView::Private {
+class ActionListView::Private: public QObject {
+    Q_OBJECT
 public:
     Private(ActionListView * listView);
     ~Private();
@@ -153,6 +154,11 @@ public:
     ActionListViewItemFactory * itemFactory;
     Plasma::SvgWidget * dropIndicator;
     bool showsExtendersOutside : 1;
+    ActionListView * const q;
+
+public Q_SLOTS:
+    void immutabilityChanged(const Plasma::ImmutabilityType immutable);
+
 };
 //<
 

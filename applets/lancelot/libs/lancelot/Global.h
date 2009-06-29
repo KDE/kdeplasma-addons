@@ -235,6 +235,8 @@ public:
      */
     Plasma::ImmutabilityType immutability() const;
 
+Q_SIGNALS:
+    void immutabilityChanged(const Plasma::ImmutabilityType immutable);
 
 private:
     /**

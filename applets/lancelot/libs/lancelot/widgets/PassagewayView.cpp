@@ -257,6 +257,10 @@ public:
 
     void startDrag(BreadcrumbItem * item, QGraphicsSceneMouseEvent * event)
     {
+        if (Global::instance()->immutability() != Plasma::Mutable) {
+            return;
+        }
+
         int index = buttons.indexOf(item, 0);
         if (index == -1) {
             return;

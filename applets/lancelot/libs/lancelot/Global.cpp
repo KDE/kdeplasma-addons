@@ -423,8 +423,13 @@ void Global::setGroupForObject(QObject * object, Group * group) {
 
 void Global::setImmutability(const Plasma::ImmutabilityType immutable)
 {
+    if (d->immutability == immutable) {
+        return;
+    }
+
     d->immutability = immutable;
     qDebug() << "Global::setImmutability " << immutable;
+    emit immutabilityChanged(immutable);
 }
 
 Plasma::ImmutabilityType Global::immutability() const

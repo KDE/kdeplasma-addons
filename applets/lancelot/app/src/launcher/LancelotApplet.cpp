@@ -244,9 +244,10 @@ void LancelotApplet::init()
     KGlobal::locale()->insertCatalog("lancelot");
 
     qDebug() << "LancelotApplet::init()";
-    connect(
-        (Plasma::Corona *)scene(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+    Plasma::Corona * corona = (Plasma::Corona *) scene();
+    connect(corona, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
         this, SLOT(updateImmutability(Plasma::ImmutabilityType)));
+    d->lancelot->setImmutability(corona->immutability());
 }
 
 void LancelotApplet::showLancelot()

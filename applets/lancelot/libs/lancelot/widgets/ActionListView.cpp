@@ -102,7 +102,8 @@ void ActionListViewItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     ExtenderButton::mouseMoveEvent(event);
-    if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+    if (Global::instance()->immutability() == Plasma::Mutable &&
+            isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
         setDown(false);
         m_factory->itemDrag(this, event);
     }
@@ -611,12 +612,11 @@ void ActionListViewItemFactory::selectRelItem(int rel) //>
 
 //> ActionListView
 ActionListView::Private::Private(ActionListView * listView) //>
-    : itemFactory(NULL)
+    : itemFactory(NULL), q(listView)
 {
     listView->setFlag(ScrollPane::HoverShowScrollbars);
     listView->clearFlag(ScrollPane::ClipScrollable);
     listView->setFocusPolicy(Qt::WheelFocus);
-    listView->setAcceptDrops(true);
 
     Plasma::Svg * svg = new Plasma::Svg();
     svg->setImagePath("lancelot/action-list-view-drop-indicator");
@@ -625,12 +625,20 @@ ActionListView::Private::Private(ActionListView * listView) //>
     dropIndicator->setSvg(svg);
     dropIndicator->setElementID("drop-indicator");
     dropIndicator->hide();
-    qDebug() << "ActionListView dropIndicator SVG valid? " << svg->isValid();
+
+    connect(
+        Global::instance(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+        this, SLOT(immutabilityChanged(Plasma::ImmutabilityType)));
 } //<
 
 ActionListView::Private::~Private() //>
 {
     delete itemFactory;
+} //<
+
+void ActionListView::Private::immutabilityChanged(const Plasma::ImmutabilityType immutable) //>
+{
+    q->setAcceptDrops(Plasma::Mutable == immutable);
 } //<
 
 ActionListView::ActionListView(QGraphicsItem * parent) //>
@@ -666,10 +674,8 @@ bool ActionListView::sceneEvent(QEvent * event)
         case QEvent::GraphicsSceneDragEnter:
             dndEvent->acceptProposedAction();
             d->dropIndicator->show();
-            qDebug() << "ActionListView::sceneEvent : GraphicsSceneDragEnter";
             break;
         case QEvent::GraphicsSceneDragLeave:
-            qDebug() << "ActionListView::sceneEvent : GraphicsSceneDragLeave";
             d->dropIndicator->hide();
             break;
         case QEvent::GraphicsSceneDragMove:
@@ -712,7 +718,8 @@ void ActionListView::setModel(ActionListModel * model) //>
         d->itemFactory = new ActionListViewItemFactory(
                 model, this);
         list()->setItemFactory(d->itemFactory);
-        setAcceptDrops(true);
+        setAcceptDrops(Plasma::Mutable ==
+                Global::instance()->immutability());
     } else {
         d->itemFactory->setModel(model);
     }
