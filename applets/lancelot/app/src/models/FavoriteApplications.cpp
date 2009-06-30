@@ -19,6 +19,7 @@
 
 #include "FavoriteApplications.h"
 
+#include <QDebug>
 #include <KConfig>
 #include <KIcon>
 #include <KConfigGroup>
@@ -157,28 +158,41 @@ QMimeData * FavoriteApplications::PassagewayViewProxy::selfMimeData() const
     QMimeData * data = new QMimeData();
     data->setData("text/x-lancelotpart", Serializator::serialize(map).toAscii());
     return data;
-
-    /* We don't need this hack anymore in 4.2
-     * (the code is now a part of plasma shell)
-    KTemporaryFile file;
-    file.setAutoRemove(false);
-    file.setSuffix(".lancelotpart");
-
-    if (!file.open()) {
-        return NULL;
-    }
-
-    QTextStream out(&file);
-    out << Serializator::serialize(map).toAscii();
-    out.flush();
-
-    QMimeData * data = new QMimeData();
-    QByteArray urlData = KUrl(file.fileName()).url().toAscii();
-    data->setData("text/uri-list", urlData);
-    data->setData("text/plain", urlData);
-    file.close();
-
-    return data;*/
 }
+
+bool FavoriteApplications::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    Q_UNUSED(where);
+    return (mimeData->formats().contains("text/uri-list"));
+}
+
+void FavoriteApplications::dataDropped(int where, const QMimeData * mimeData)
+{
+    qDebug() << "FavoriteApplications::dataDropped: " << where;
+    if (mimeData->formats().contains("text/uri-list")) {
+        int from = 0;
+
+        KUrl url = KUrl(QString(mimeData->data("text/uri-list")));
+
+        for (int i = 0; i < size(); i++) {
+            qDebug() << "Drop " << url.path() << " " << itemAt(i).data;
+            if (url.path() == itemAt(i).data) {
+                from = i;
+                break;
+            }
+        }
+
+        removeAt(from);
+        insertUrl(where, url);
+
+        save();
+    }
+}
+
+// void FavoriteApplications::dataDragFinished(int index, Qt::DropAction action)
+// {
+//     qDebug() << "FavoriteApplications::dataDragFinished: " << index;
+//     removeAt(index);
+// }
 
 } // namespace Models

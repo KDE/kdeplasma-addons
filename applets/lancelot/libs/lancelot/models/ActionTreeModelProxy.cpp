@@ -132,5 +132,20 @@ void ActionTreeModelProxy::setDropActions(int index,
     d->model->setDropActions(index, actions, defaultAction);
 }
 
+bool ActionTreeModelProxy::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    return d->model->dataDropAvailable(where, mimeData);
+}
+
+void ActionTreeModelProxy::dataDropped(int where, const QMimeData * mimeData)
+{
+    d->model->dataDropped(where, mimeData);
+}
+
+void ActionTreeModelProxy::dataDragFinished(int index, Qt::DropAction action)
+{
+    d->model->dataDragFinished(index, action);
+}
+
 } // namespace Lancelot
 

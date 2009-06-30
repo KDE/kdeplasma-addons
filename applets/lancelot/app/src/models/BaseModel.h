@@ -69,6 +69,7 @@ protected:
     virtual void activate(int index);
     virtual void load() = 0;
 
+    // add functions
     bool addService(const QString & service);
     bool addService(const KService::Ptr & service);
 
@@ -79,6 +80,18 @@ protected:
 
     int addUrls(const QStringList & urls);
 
+    // insert functions
+    bool insertService(int where, const QString & service);
+    bool insertService(int where, const KService::Ptr & service);
+
+    int insertServices(int where, const QStringList & services);
+
+    bool insertUrl(int where, const QString & url);
+    bool insertUrl(int where, const KUrl & url);
+
+    int insertUrls(int where, const QStringList & urls);
+
+    // other
     static void hideLancelotWindow();
     static void changeLancelotSearchString(const QString & string);
 

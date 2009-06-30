@@ -226,6 +226,104 @@ bool BaseModel::addUrl(const KUrl & url)
     return true;
 }
 
+// inserts
+int BaseModel::insertServices(int where, const QStringList & serviceNames)
+{
+    int result = 0;
+    foreach (const QString & serviceAlternatives, serviceNames) {
+        foreach (const QString & serviceName, serviceAlternatives.split('|')) {
+            if (insertService(where + result, serviceName)) {
+                ++result;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+bool BaseModel::insertService(int where, const QString & serviceName)
+{
+    const KService::Ptr service = KService::serviceByStorageId(serviceName);
+    return insertService(where, service);
+}
+
+bool BaseModel::insertService(int where, const KService::Ptr & service)
+{
+    if (!service) {
+        return false;
+    }
+
+    QString genericName = service->genericName();
+    QString appName = service->name();
+
+    insert(
+        where,
+        genericName.isEmpty() ? appName : genericName,
+        genericName.isEmpty() ? "" : appName,
+        KIcon(service->icon()),
+        service->entryPath()
+    );
+    return true;
+}
+
+int BaseModel::insertUrls(int where, const QStringList & urls)
+{
+    int result = 0;
+    foreach (const QString & url, urls) {
+        if (insertUrl(where + result, url)) {
+            ++result;
+        }
+    }
+    return result;
+}
+
+bool BaseModel::insertUrl(int where, const QString & url)
+{
+    const KUrl kurl(url);
+    return insertUrl(where, kurl);
+}
+
+bool BaseModel::insertUrl(int where, const KUrl & url)
+{
+    KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url);
+
+    if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {
+        // .desktop files may be services (type field == 'Application' or 'Service')
+        // or they may be other types such as links.
+        //
+        // first look in the KDE service database to see if this file is a service,
+        // otherwise represent it as a generic .desktop file
+
+        KDesktopFile desktopFile(url.path());
+
+        if ((desktopFile.readType() == "Service" || desktopFile.readType() == "Application")
+                && insertService(where, url.path())) {
+            return true;
+        }
+
+        KUrl desktopUrl(desktopFile.readUrl());
+
+        insert(
+            where,
+            QFileInfo(url.path()).baseName(),
+            desktopUrl.isLocalFile() ? desktopUrl.path() : desktopUrl.prettyUrl(),
+            KIcon(desktopFile.readIcon()),
+            // url.path() //desktopFile.readUrl()
+            url.url()
+        );
+    } else {
+        insert(
+            where,
+            fileItem.text(),
+            url.isLocalFile() ? url.path() : url.prettyUrl(),
+            KIcon(fileItem.iconName()),
+            url.url()
+        );
+    }
+
+    return true;
+}
+
 QMimeData * BaseModel::mimeForUrl(const KUrl & url)
 {
     QMimeData * data = new QMimeData();

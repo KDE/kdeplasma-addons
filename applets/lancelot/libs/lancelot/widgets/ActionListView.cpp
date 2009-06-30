@@ -681,9 +681,9 @@ bool ActionListView::sceneEvent(QEvent * event)
         case QEvent::GraphicsSceneDragMove:
         {
             int top = dndEvent->pos().y() - list()->geometry().top();
+            int index = list()->itemAtPosition(top);
             QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
-                    (list()->itemFactory()->itemForIndex(
-                         list()->itemAtPosition(top)));
+                    (list()->itemFactory()->itemForIndex(index));
             if (item) {
                 g = item->geometry();
                 if (top - g.top() < g.bottom() - top) {
@@ -693,12 +693,19 @@ bool ActionListView::sceneEvent(QEvent * event)
                 }
                 g.setHeight(4);
                 d->dropIndicator->setGeometry(g);
+
+                d->itemFactory->model()->dataDropAvailable(index, dndEvent->mimeData());
             }
             break;
         }
         case QEvent::GraphicsSceneDrop:
+        {
+            int top = dndEvent->pos().y() - list()->geometry().top();
+            int index = list()->itemAtPosition(top);
+            d->itemFactory->model()->dataDropped(index, dndEvent->mimeData());
             d->dropIndicator->hide();
             break;
+        }
         default:
             // nothing
             break;
@@ -718,8 +725,7 @@ void ActionListView::setModel(ActionListModel * model) //>
         d->itemFactory = new ActionListViewItemFactory(
                 model, this);
         list()->setItemFactory(d->itemFactory);
-        setAcceptDrops(Plasma::Mutable ==
-                Global::instance()->immutability());
+        setAcceptDrops(Plasma::Mutable == Global::instance()->immutability());
     } else {
         d->itemFactory->setModel(model);
     }

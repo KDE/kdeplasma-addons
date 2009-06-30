@@ -90,6 +90,19 @@ void StandardActionListModel::add(const QString & title, const QString & descrip
     add(Item(title, description, icon, data));
 }
 
+void StandardActionListModel::insert(int where, const Item & item)
+{
+    d->items.insert(where, item);
+    if (d->sendEmits) {
+        emit itemInserted(where);
+    }
+}
+
+void StandardActionListModel::insert(int where, const QString & title, const QString & description, QIcon icon, const QVariant & data)
+{
+    insert(where, Item(title, description, icon, data));
+}
+
 void StandardActionListModel::set(int index, const Item & item)
 {
     if (index < 0 || index >= d->items.size()) return;

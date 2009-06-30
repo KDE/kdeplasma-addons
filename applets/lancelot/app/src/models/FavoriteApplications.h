@@ -34,6 +34,10 @@ public:
     L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override void contextActivate(int index, QAction * context);
 
+    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
+    L_Override void dataDropped(int where, const QMimeData * mimeData);
+    // L_Override void dataDragFinished(int index, Qt::DropAction action);
+
     bool addFavorite(QString url);
 
     class PassagewayViewProxy: public Lancelot::ActionTreeModelProxy {

@@ -86,12 +86,29 @@ public:
     void add(const QString & title, const QString & description, QIcon icon, const QVariant & data);
 
     /**
+     * Adds a new item into the model
+     * @param where where to insert
+     * @param item new item
+     */
+    void insert(int where, const Item & item);
+
+    /**
+     * Adds a new item into the model
+     * @param where where to insert
+     * @param title the title for the new item
+     * @param description the description of the new item
+     * @param icon the icon for the new item
+     * @param data data for the new item. Not shown to user
+     */
+    void insert(int where, const QString & title, const QString & description, QIcon icon, const QVariant & data);
+
+    /**
      * Replaces existing item at specified index with a new one
      * @param index index of the item to be replaced
      * @param item new item
      */
-
     void set(int index, const Item & item);
+
     /**
      * Replaces existing item at specified index with a new one
      * @param index index of the item to be replaced
