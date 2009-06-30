@@ -53,7 +53,6 @@ class News : public Plasma::PopupApplet
         void removeFeed();
         void feedTextChanged(const QString& text);
         void makeStylesheet();
-	void updateSpinBoxSuffix(int interval);
 
     private:
         QStringList m_feeds;

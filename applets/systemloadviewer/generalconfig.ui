@@ -58,7 +58,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <widget class="QSpinBox" name="spbxUpdateInterval" >
+        <widget class="KIntSpinBox" name="spbxUpdateInterval" >
          <property name="suffix" >
           <string> ms</string>
          </property>
@@ -95,6 +95,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

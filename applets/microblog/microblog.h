@@ -33,7 +33,6 @@
 class KLineEdit;
 class KTextEdit;
 class KTextBrowser;
-class QSpinBox;
 class QCheckBox;
 class QGraphicsLinearLayout;
 class QGraphicsProxyWidget;
@@ -96,7 +95,6 @@ class MicroBlog : public Plasma::PopupApplet
         void openProfile();
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
-        void updateSpinBoxSuffix();
 
         void themeChanged();
         void showTweets();

@@ -23,7 +23,6 @@
 #include <QApplication>
 #include <QGridLayout>
 #include <QPushButton>
-#include <QSpinBox>
 #include <QCheckBox>
 #include <QFontMetrics>
 #include <QGraphicsView>
@@ -559,27 +558,19 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
-
-    connect(configUi.historySizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
-    connect(configUi.historyRefreshSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix()));
-
+    
     configUi.serviceUrlCombo->addItem("https://identi.ca/api/");
     configUi.serviceUrlCombo->addItem("https://twitter.com/");
     configUi.serviceUrlCombo->setEditText(m_serviceUrl);
     configUi.usernameEdit->setText(m_username);
     configUi.passwordEdit->setText(m_password);
     configUi.historySizeSpinBox->setValue(m_historySize);
+    configUi.historySizeSpinBox->setSuffix(ki18np(" message", " messages"));
     configUi.historyRefreshSpinBox->setValue(m_historyRefresh);
+    configUi.historyRefreshSpinBox->setSuffix(ki18np(" minute", " minutes"));
     configUi.checkIncludeFriends->setChecked(m_includeFriends);
-    updateSpinBoxSuffix();
 
     parent->addPage(configWidget, i18n("General"), icon());
-}
-
-void MicroBlog::updateSpinBoxSuffix()
-{
-    configUi.historySizeSpinBox->setSuffix(i18np(" message", " messages", configUi.historySizeSpinBox->value()));
-    configUi.historyRefreshSpinBox->setSuffix(i18np(" minute", " minutes", configUi.historyRefreshSpinBox->value()));
 }
 
 void MicroBlog::configAccepted()

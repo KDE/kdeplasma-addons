@@ -123,7 +123,7 @@ void WeatherConfig::setSource(const QString& source)
 void WeatherConfig::setUpdateInterval(int interval)
 {
     d->ui.updateIntervalSpinBox->setValue(interval);
-    d->ui.updateIntervalSpinBox->setSuffix(i18np(" minute", " minutes", interval));
+    d->ui.updateIntervalSpinBox->setSuffix(ki18np(" minute", " minutes"));
 }
 
 void WeatherConfig::setTemperatureUnit(const QString& unit)

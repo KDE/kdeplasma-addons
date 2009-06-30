@@ -64,7 +64,6 @@ class News : public Plasma::Applet
         void removeFeed();
         void slotItemChanged();
         void slotChangeText( const QString& text );
-        void updateSpinBoxSuffix();
 
     private:
         QStringList         m_feedlist;

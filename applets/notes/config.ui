@@ -109,7 +109,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="autoFontPercent" >
+      <widget class="KIntSpinBox" name="autoFontPercent" >
        <property name="suffix" >
         <string>%</string>
        </property>

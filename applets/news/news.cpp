@@ -229,7 +229,6 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
     connect(feedsUi.addFeed, SIGNAL(clicked()), this, SLOT(addFeed()));
     connect(feedsUi.removeFeed, SIGNAL(clicked()), this, SLOT(removeFeed()));
-    connect(ui.intervalSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSpinBoxSuffix(int)));
 
     m_defaultFeeds = akregatorFeeds();
     feedsUi.feedComboBox->clear();
@@ -240,18 +239,13 @@ void News::createConfigurationInterface(KConfigDialog *parent)
     }
 
     ui.intervalSpinBox->setValue(m_interval);
-    updateSpinBoxSuffix(m_interval);
+    ui.intervalSpinBox->setSuffix(ki18np(" minute", " minutes"));
 
     ui.timestampCheckBox->setChecked(m_showTimestamps);
     ui.titlesCheckBox->setChecked(m_showTitles);
     ui.descriptionsCheckBox->setChecked(m_showDescriptions);
 
     feedsUi.feedList->addItems(m_feeds);
-}
-
-void News::updateSpinBoxSuffix(int interval)
-{
-    ui.intervalSpinBox->setSuffix(i18np(" minute", " minutes", interval));
 }
 
 void News::feedTextChanged(const QString& text)
