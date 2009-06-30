@@ -134,7 +134,7 @@ public:
     L_Override QString description(int index) const;
     L_Override QIcon icon(int index) const;
     L_Override QMimeData * mimeData(int index) const;
-    L_Override void dataDropped(int index, Qt::DropAction action);
+    L_Override void dataDragFinished(int index, Qt::DropAction action);
     L_Override void setDropActions(int index, Qt::DropActions & actions, Qt::DropAction & defaultAction);
     L_Override bool isCategory(int index) const;
     L_Override int size() const;

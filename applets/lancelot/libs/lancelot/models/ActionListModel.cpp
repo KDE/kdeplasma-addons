@@ -49,7 +49,20 @@ QMimeData * ActionListModel::mimeData(int index) const
     return NULL;
 }
 
-void ActionListModel::dataDropped(int index, Qt::DropAction action)
+bool ActionListModel::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    Q_UNUSED(where);
+    Q_UNUSED(mimeData);
+    return false;
+}
+
+void ActionListModel::dataDropped(int where, const QMimeData * mimeData)
+{
+    Q_UNUSED(where);
+    Q_UNUSED(mimeData);
+}
+
+void ActionListModel::dataDragFinished(int index, Qt::DropAction action)
 {
     Q_UNUSED(index);
     Q_UNUSED(action);

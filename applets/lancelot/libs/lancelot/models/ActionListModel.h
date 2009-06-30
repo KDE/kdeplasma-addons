@@ -76,7 +76,22 @@ public:
      * @param index index of the dragged item
      * @param action invoked drop action
      */
-    virtual void dataDropped(int index, Qt::DropAction action);
+    virtual void dataDragFinished(int index, Qt::DropAction action);
+
+    /**
+     * @returns whether the data can be dropped at the
+     * specified position
+     * @param where position
+     * @param mimeData dragged data
+     */
+    virtual bool dataDropAvailable(int where, const QMimeData * mimeData);
+
+    /**
+     * Invoked when the data is dropped into the model
+     * @param where position
+     * @param mimeData dropped data
+     */
+    virtual void dataDropped(int where, const QMimeData * mimeData);
 
     /**
      * @param index index of the item to be dragged

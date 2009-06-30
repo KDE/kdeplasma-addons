@@ -517,7 +517,7 @@ void ActionListViewItemFactory::itemDrag(ActionListViewItem * sender, QGraphicsS
     m_model->setDropActions(index, actions, defaultAction);
 
     Qt::DropAction dropAction = drag->exec(actions, defaultAction);
-    m_model->dataDropped(index, dropAction);
+    m_model->dataDragFinished(index, dropAction);
 
 } //<
 

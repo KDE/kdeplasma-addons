@@ -125,14 +125,14 @@ QMimeData * MergedActionListModel::mimeData(int index) const
     return d->models.at(model)->mimeData(modelIndex);
 }
 
-void MergedActionListModel::dataDropped(int index, Qt::DropAction action)
+void MergedActionListModel::dataDragFinished(int index, Qt::DropAction action)
 {
     int model, modelIndex;
     d->toChildCoordinates(index, model, modelIndex);
 
     if (model == -1) return;
     if (modelIndex == -1) return modelDataDropped(model, action);
-    return d->models.at(model)->dataDropped(modelIndex, action);
+    return d->models.at(model)->dataDragFinished(modelIndex, action);
 }
 
 void MergedActionListModel::modelDataDropped(int index, Qt::DropAction action)
