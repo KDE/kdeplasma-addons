@@ -35,6 +35,7 @@ BinaryClock::BinaryClock(QObject *parent, const QVariantList &args)
       m_time(0, 0)
 {
     KGlobal::locale()->insertCatalog("libplasmaclock");
+    KGlobal::locale()->insertCatalog("timezones4");
 
     setHasConfigurationInterface(true);
     resize(getWidthFromHeight(128), 128);
