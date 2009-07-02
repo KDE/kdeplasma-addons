@@ -139,7 +139,7 @@ void BinaryClock::createClockConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    parent->addPage(widget, i18n("General"), icon());
+    parent->addPage(widget, i18n("Appearance"), "view-media-visualization");
 
     ui.showSecondHandCheckBox->setChecked(m_showSeconds);
     ui.showGridCheckBox->setChecked(m_showGrid);
