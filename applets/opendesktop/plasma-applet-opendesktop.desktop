@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=openDesktop
 Name[km]=បើក​​ផ្ទៃតុ
+Name[sr]=Отворена површ
+Name[sr@latin]=Otvorena površ
 Name[sv]=Öppet skrivbord
 Name[x-test]=xxopenDesktopxx
 Comment=Communicate using the Social Desktop
@@ -22,6 +24,8 @@ Comment[nn]=Kommuniser via openDesktop
 Comment[pt]=Comunicar com o Ambiente de Trabalho Social
 Comment[pt_BR]=Comunique-se usando o Ambiente de Trabalho Social
 Comment[ro]=Comunicați utilizînd Biroul Social
+Comment[sr]=Комуницирање путем Друштвене површи
+Comment[sr@latin]=Komuniciranje putem Društvene površi
 Comment[sv]=Kommunicera med användning av det sociala skrivbordet
 Comment[uk]=Спілкування за допомогою соціальної стільниці
 Comment[x-test]=xxCommunicate using the Social Desktopxx
@@ -58,6 +62,8 @@ Keywords[nn]=Verktøy
 Keywords[pt]=Utilitários
 Keywords[pt_BR]=Utilitários
 Keywords[ro]=Utilitare
+Keywords[sr]=Алатке
+Keywords[sr@latin]=Alatke
 Keywords[sv]=Verktyg
 Keywords[uk]=Інструменти
 Keywords[x-test]=xxUtilitiesxx
