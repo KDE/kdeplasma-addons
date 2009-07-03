@@ -30,6 +30,7 @@
 #include <KLocale>
 #include <KDebug>
 #include <KMessageBox>
+#include <KPushButton>
 #include <KNS/Engine>
 #include <KStandardDirs>
 
@@ -144,7 +145,12 @@ QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
     m_configWidget->setUpdateInterval(m_weatherUpdateTime);
     m_configWidget->setConfigurableUnits(WeatherConfig::None);
     m_configWidget->setHeadersVisible(false);
-    
+
+    KPushButton *m_buttonAdvanced = new KPushButton(m_configWidget);
+    m_buttonAdvanced->setText( i18n( "&Advanced..." ) );
+    m_configWidget->layout()->addWidget(m_buttonAdvanced);
+
+    connect(m_buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedDialog()));
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     connect(m_configWidget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
         
