@@ -160,6 +160,7 @@ void bballApplet::createConfigurationInterface(KConfigDialog *parent)
     ui.autoBounceEnabled->setChecked (m_auto_bounce_enabled);
     ui.autoBounceStrengthLabel->setEnabled (m_auto_bounce_enabled);
     ui.autoBounceStrength->setValue (static_cast < int >(m_auto_bounce_strength));
+    ui.autoBounceStrength->setEnabled (m_auto_bounce_enabled);
     parent->addPage(widget, i18n("General"), icon());
 }
 
