@@ -36,7 +36,6 @@ public:
 
     L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
     L_Override void dataDropped(int where, const QMimeData * mimeData);
-    // L_Override void dataDragFinished(int index, Qt::DropAction action);
 
     bool addFavorite(QString url);
 

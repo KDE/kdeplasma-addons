@@ -168,14 +168,12 @@ bool FavoriteApplications::dataDropAvailable(int where, const QMimeData * mimeDa
 
 void FavoriteApplications::dataDropped(int where, const QMimeData * mimeData)
 {
-    qDebug() << "FavoriteApplications::dataDropped: " << where;
     if (mimeData->formats().contains("text/uri-list")) {
         int from = 0;
 
         KUrl url = KUrl(QString(mimeData->data("text/uri-list")));
 
         for (int i = 0; i < size(); i++) {
-            qDebug() << "Drop " << url.path() << " " << itemAt(i).data;
             if (url.path() == itemAt(i).data) {
                 from = i;
                 break;
@@ -188,11 +186,5 @@ void FavoriteApplications::dataDropped(int where, const QMimeData * mimeData)
         save();
     }
 }
-
-// void FavoriteApplications::dataDragFinished(int index, Qt::DropAction action)
-// {
-//     qDebug() << "FavoriteApplications::dataDragFinished: " << index;
-//     removeAt(index);
-// }
 
 } // namespace Models

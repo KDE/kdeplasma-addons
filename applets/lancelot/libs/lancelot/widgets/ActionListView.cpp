@@ -702,6 +702,14 @@ bool ActionListView::sceneEvent(QEvent * event)
         {
             int top = dndEvent->pos().y() - list()->geometry().top();
             int index = list()->itemAtPosition(top);
+            // QGraphicsWidget * item = dynamic_cast < QGraphicsWidget * >
+            //         (list()->itemFactory()->itemForIndex(index));
+            // if (item) {
+            //     g = item->geometry();
+            //     if (top - g.top() >= g.bottom() - top) {
+            //         index++;
+            //     }
+            // }
             d->itemFactory->model()->dataDropped(index, dndEvent->mimeData());
             d->dropIndicator->hide();
             break;
