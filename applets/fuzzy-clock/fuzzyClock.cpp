@@ -314,7 +314,9 @@ void Clock::calculateDateString()
 //     }
 
     if( m_showTimezone == true ) {
-        m_timezoneString = '(' + currentTimezone() + ')';
+        QString timezonetranslated = i18n( currentTimezone().toUtf8().data());
+        timezonetranslated = timezonetranslated.replace('_', ' ');
+        m_timezoneString = '(' + timezonetranslated  + ')';
     }
 }
 
