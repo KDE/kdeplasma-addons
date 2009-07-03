@@ -109,7 +109,6 @@ void Frame::init()
     }
 
     m_menuPresent = false;
-    updateMenu();
 }
 
 void Frame::updateMenu()
