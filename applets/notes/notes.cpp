@@ -327,9 +327,17 @@ void Notes::init()
     palette.setColor(QPalette::Text, m_textColor);
     m_textEdit->nativeWidget()->setPalette(palette);
 
-    QString text = cg.readEntry("autoSave", QString());
-    if (!text.isEmpty()) {
-        m_textEdit->nativeWidget()->setHtml(text);
+    QString text = cg.readEntry("autoSaveHtml", QString());
+    if (text.isEmpty()) {
+        // see if the old, plain text version is still there?
+        text = cg.readEntry("autoSave", QString());
+        if (!text.isEmpty()) {
+            m_textEdit->nativeWidget()->setText(text);
+            cg.deleteEntry("autoSave");
+            saveNote();
+        }
+    } else {
+        m_textEdit->setText(text);
     }
 
     int scrollValue = cg.readEntry("scrollValue").toInt();
@@ -440,7 +448,7 @@ void Notes::delayedSaveNote()
 void Notes::saveNote()
 {
     KConfigGroup cg = config();
-    cg.writeEntry("autoSave", m_textEdit->nativeWidget()->toHtml());
+    cg.writeEntry("autoSaveHtml", m_textEdit->text());
     cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
     //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
