@@ -484,6 +484,10 @@ void ComicApplet::updateTabBar()
 
 void ComicApplet::slotTabChanged( int newIndex )
 {
+    if (newIndex >= mTabIdentifier.count()) {
+        return;
+    }
+
     bool differentComic = ( mComicIdentifier != mTabIdentifier.at( newIndex ) );
     mComicIdentifier = mTabIdentifier.at( newIndex );
     changeComic( differentComic );
