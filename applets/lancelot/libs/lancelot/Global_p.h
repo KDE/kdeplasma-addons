@@ -35,8 +35,6 @@ public:
 
     ~Private();
 
-    KConfigGroup * confGroupTheme;
-
     Instance * instance;
 
     QString name;
@@ -56,6 +54,7 @@ public:
     bool loaded : 1;
 
     void copyFrom(WidgetGroup::Private * d);
+    KConfigGroup confGroupTheme();
 };
 
 class Instance::Private: public QObject {

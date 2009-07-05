@@ -31,7 +31,7 @@ namespace Lancelot
 
 // Group
 WidgetGroup::Private::Private()
-    : confGroupTheme(NULL), instance(NULL), name(QString()), backgroundSvg(NULL),
+    : instance(NULL), name(QString()), backgroundSvg(NULL),
       ownsBackgroundSvg(false), loaded(false)
        // TODO : Add caching?
        //cachedBackgroundNormal(NULL), cachedBackgroundActive(NULL), cachedBackgroundDisabled(NULL)
@@ -39,7 +39,6 @@ WidgetGroup::Private::Private()
 
 WidgetGroup::Private::~Private()
 {
-    delete confGroupTheme;
     if (ownsBackgroundSvg) {
         delete backgroundSvg;
     }
@@ -65,12 +64,16 @@ void WidgetGroup::Private::copyFrom(WidgetGroup::Private * d)
     ownsBackgroundSvg = false;
 }
 
+KConfigGroup WidgetGroup::Private::confGroupTheme()
+{
+    return KConfigGroup(instance->theme(), "Group-" + name);
+}
+
 WidgetGroup::WidgetGroup(Instance * instance, QString name)
     : d(new Private())
 {
     d->instance = instance;
     d->name = name;
-    d->confGroupTheme = new KConfigGroup(d->instance->theme(), "Group-" + name);
 }
 
 WidgetGroup::~WidgetGroup()
@@ -183,7 +186,8 @@ void WidgetGroup::load(bool full)
 
     WidgetGroup * group;
 
-    if (!d->confGroupTheme->exists()) {
+    KConfigGroup confGroupTheme = d->confGroupTheme();
+    if (!confGroupTheme.exists()) {
         group = d->instance->defaultGroup();
         if (group == this) return;
 
@@ -191,27 +195,27 @@ void WidgetGroup::load(bool full)
         return;
     }
 
-    group = d->instance->group(d->confGroupTheme->readEntry("parent", "Default"));
+    group = d->instance->group(confGroupTheme.readEntry("parent", "Default"));
     if (group != this) {
         group->load(false);
         d->copyFrom(group->d);
     }
 
     // Load properties from theme configuration file
-    d->foregroundColor.normal   = d->confGroupTheme->readEntry("foreground.color.normal",   d->foregroundColor.normal);
-    d->foregroundColor.active   = d->confGroupTheme->readEntry("foreground.color.active",   d->foregroundColor.active);
-    d->foregroundColor.disabled = d->confGroupTheme->readEntry("foreground.color.disabled", d->foregroundColor.disabled);
+    d->foregroundColor.normal   = confGroupTheme.readEntry("foreground.color.normal",   d->foregroundColor.normal);
+    d->foregroundColor.active   = confGroupTheme.readEntry("foreground.color.active",   d->foregroundColor.active);
+    d->foregroundColor.disabled = confGroupTheme.readEntry("foreground.color.disabled", d->foregroundColor.disabled);
 
-    QString type = d->confGroupTheme->readEntry("background.type", "none");
+    QString type = confGroupTheme.readEntry("background.type", "none");
     if (type == "color" || type == "color-compact") {
         if (type == "color") {
             setProperty(Widget::WholeColorBackground, 1);
         } else {
             setProperty(BasicWidget::TextColorBackground, 1);
         }
-        d->backgroundColor.normal   = d->confGroupTheme->readEntry("background.color.normal",   d->backgroundColor.normal);
-        d->backgroundColor.active   = d->confGroupTheme->readEntry("background.color.active",   d->backgroundColor.active);
-        d->backgroundColor.disabled = d->confGroupTheme->readEntry("background.color.disabled", d->backgroundColor.disabled);
+        d->backgroundColor.normal   = confGroupTheme.readEntry("background.color.normal",   d->backgroundColor.normal);
+        d->backgroundColor.active   = confGroupTheme.readEntry("background.color.active",   d->backgroundColor.active);
+        d->backgroundColor.disabled = confGroupTheme.readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
         if (d->ownsBackgroundSvg) {
             delete d->backgroundSvg;
@@ -221,12 +225,12 @@ void WidgetGroup::load(bool full)
         d->backgroundSvg = new Plasma::FrameSvg(NULL);
         d->backgroundSvg->setImagePath(
             Plasma::Theme::defaultTheme()->imagePath(
-                d->confGroupTheme->readEntry("background.svg")));
+                confGroupTheme.readEntry("background.svg")));
         d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
     }
 
-    if (!d->confGroupTheme->readEntry(
+    if (!confGroupTheme.readEntry(
                 "foreground.blurtextshadow", QString()).isEmpty()) {
         setProperty(BasicWidget::BlurTextShadow, 1);
     }
