@@ -113,6 +113,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         if ( status != Solid::Networking::Connected && status != Solid::Networking::Unknown ) {
             mIdentifierError = identifier;
             setData( identifier, "Error", true );
+            setData( identifier, "Identifier", identifier );
             setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
             return true;
         }
@@ -227,6 +228,7 @@ void ComicEngine::error( ComicProvider *provider )
     if ( provider->isCurrent() )
         identifier = identifier.left( identifier.indexOf( ':' ) + 1 );
 
+    setData( identifier, "Identifier", identifier );
     setData( identifier, "Error", true );
 
     // if there was an error loading the last cached comic strip, do not return its id anymore
