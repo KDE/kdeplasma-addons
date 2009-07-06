@@ -316,6 +316,9 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     slotStartTimer();
     if ( data[ "Error" ].toBool() ) {
         if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+            if ( !data[ "Identifier" ].toString().isEmpty() ) {
+                mIdentifierError = data[ "Identifier" ].toString();
+            }
             updateComic( data[ "Previous identifier suffix" ].toString() );
         } else {
             setConfigurationRequired( true );
@@ -776,7 +779,12 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         static QString oldSource = identifier;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
-        if ( oldSource != identifier ) {
+        //if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can come in
+        if ( !mIdentifierError.isEmpty() && !mIdentifierError.contains(mComicIdentifier) ) {
+            mEngine->disconnectSource( mIdentifierError, this );
+            mIdentifierError.clear();
+        }
+        if ( ( mIdentifierError != oldSource ) && ( oldSource != identifier ) ) {
             mEngine->disconnectSource( oldSource, this );
         }
         oldSource = identifier;
