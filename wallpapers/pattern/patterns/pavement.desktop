@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Pavement
 Comment[ca]=Paviment
+Comment[cs]=Dlažba
 Comment[da]=Brosten
 Comment[de]=Pflaster
 Comment[el]=Πεζοδρόμιο
@@ -25,6 +26,7 @@ Comment[sr@latin]=pločnik
 Comment[sv]=Trottoar
 Comment[tr]=Döşeme
 Comment[uk]=Бруківка
+Comment[wa]=Trotwer
 Comment[x-test]=xxPavementxx
 Comment[zh_TW]=人行道
 File=pavement.png

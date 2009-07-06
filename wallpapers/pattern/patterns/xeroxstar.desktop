@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Xerox Star
 Comment[ca]=Estrella Xerox
+Comment[cs]=Xerox hvězda
 Comment[es]=Estrella de Xerox
 Comment[et]=Xeroxi täht
 Comment[ga]=Réalta Xéireacs
@@ -15,6 +16,7 @@ Comment[sr]=зирокс стар
 Comment[sv]=Xerox star
 Comment[tr]=Xerox Yıldızı
 Comment[uk]=Зірка Xerox
+Comment[wa]=Sitoele Xerox
 Comment[x-test]=xxXerox Starxx
 Comment[zh_TW]=全錄星
 File=xeroxstar.png

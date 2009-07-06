@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Flowers
 Comment[ca]=Flors
+Comment[cs]=Květiny
 Comment[da]=Blomster
 Comment[de]=Blumen
 Comment[el]=Λουλούδια
@@ -25,6 +26,7 @@ Comment[sr@latin]=cveće
 Comment[sv]=Blommor
 Comment[tr]=Çiçekler
 Comment[uk]=Квіти
+Comment[wa]=Fleurs
 Comment[x-test]=xxFlowersxx
 Comment[zh_TW]=花兒
 File=flowers.png

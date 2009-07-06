@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Fish Net
 Comment[ca]=Xarxa de peix
+Comment[cs]=Rybářská síť
 Comment[da]=Fiskenet
 Comment[de]=Fishernetz
 Comment[el]=Δίχτυα ψαρέματος
@@ -25,6 +26,7 @@ Comment[sr@latin]=ribarska mreža
 Comment[sv]=Fisknät
 Comment[tr]=Sahte Ağ
 Comment[uk]=Риб’яча сітка
+Comment[wa]=Filet d' pexhe
 Comment[x-test]=xxFish Netxx
 Comment[zh_TW]=魚網
 File=fish.png

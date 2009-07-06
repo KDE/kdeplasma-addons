@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Microblogging
 Name[ca]=Microblocs
+Name[cs]=Mikroblogování
 Name[da]=Mikroblogning
 Name[el]=Μικροϊστολόγιο
 Name[es]=Microblogs
@@ -25,6 +26,7 @@ Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Comment=Update and view your microblog status.
 Comment[ca]=Actualitza i mostra l'estat del vostre microbloc.
+Comment[cs]=Aktualizujte a prohlížejte stav svého mikroblogování.
 Comment[da]=Opdater og se status for din mikroblog.
 Comment[de]=Status Ihres Microblogs aktualisieren und anzeigen.
 Comment[el]=Ενημέρωση και προβολή της κατάστασης του μικροϊστολογίου.
@@ -51,6 +53,7 @@ Comment[sr@latin]=Ažurirajte i prikažite stanje svog mikrobloga.
 Comment[sv]=Uppdatera och visa status för mikrowebbjournal
 Comment[tr]=Mikrogünlük durumunuzu güncelleyin ve görüntüleyin
 Comment[uk]=Оновіть і перегляньте ваш стан у міні-журналі.
+Comment[wa]=Metoz a djoû eyet voeyoz vosse sitatut microblog.
 Comment[x-test]=xxUpdate and view your microblog status.xx
 Comment[zh_CN]=更新并浏览您的微博客状态
 Comment[zh_TW]=更新並檢視您的 microblog 狀態。

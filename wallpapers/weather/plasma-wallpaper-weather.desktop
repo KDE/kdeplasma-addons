@@ -2,6 +2,7 @@
 Type=Service
 Name=Weather
 Name[ca]=Meteorologia
+Name[cs]=Počasí
 Name[da]=Vejr
 Name[de]=Wetter
 Name[el]=Καιρός
@@ -27,6 +28,7 @@ Name[sr@latin]=Vreme
 Name[sv]=Väder
 Name[tr]=Hava Durumu
 Name[uk]=Погода
+Name[wa]=Meteyo
 Name[x-test]=xxWeatherxx
 Name[zh_CN]=天气
 Name[zh_TW]=天氣

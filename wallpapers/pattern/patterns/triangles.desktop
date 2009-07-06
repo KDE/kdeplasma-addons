@@ -1,5 +1,6 @@
 [KDE Desktop Pattern]
 Comment=Triangles
+Comment[cs]=Trojúhelníky
 Comment[da]=Trekanter
 Comment[de]=Dreiecke
 Comment[el]=Τρίγωνα
@@ -23,6 +24,7 @@ Comment[sr@latin]=trouglovi
 Comment[sv]=Trianglar
 Comment[tr]=Üçgenler
 Comment[uk]=Трикутники
+Comment[wa]=Triyangues
 Comment[x-test]=xxTrianglesxx
 Comment[zh_CN]=三角形
 Comment[zh_TW]=三角形

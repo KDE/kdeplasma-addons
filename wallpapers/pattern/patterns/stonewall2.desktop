@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Stonewall 2 by Tigert
 Comment[ca]=Mur 2 per Tigert
+Comment[cs]=Kamenná stěna (od Tigerta)
 Comment[da]=Stonewall 2 af Tigert
 Comment[de]=Steinwand 2 von Tigert
 Comment[el]=Πέτρινος τοίχος 2 από Tigert
@@ -23,6 +24,7 @@ Comment[sr@latin]=kameni zid 2 od Tigerta
 Comment[sv]=Stenmur 2 av Tigert
 Comment[tr]=Tigert tarafından oluşturulan Stonewall 2
 Comment[uk]=Кам’яна стіна 2 від Тайгерта
+Comment[wa]=Meur di pîre 2 pal Tigert
 Comment[x-test]=xxStonewall 2 by Tigertxx
 Comment[zh_TW]=石牆 II（by Tigert）
 File=stonewall2.png
