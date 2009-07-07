@@ -72,7 +72,8 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_wallet(0),
       m_walletWait(None),
       m_colorScheme(0),
-      m_tz(KTimeZone::utc())
+      m_tz(KTimeZone::utc()),
+      m_showTweetsTimer(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setHasConfigurationInterface(true);
@@ -363,7 +364,7 @@ void MicroBlog::writeConfigPassword()
 
 void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << source;
+    //kDebug() << source << data.count();
     if (data.isEmpty()) {
         if (source.startsWith("Error")) {
             m_flash->kill(); //FIXME only clear it if it was showing an error msg
@@ -381,6 +382,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
         uint maxId = m_lastTweet;
         foreach (const QString &id, data.keys()) {
             uint i = id.toUInt();
+            //kDebug() << i << m_lastTweet;
             if (i > m_lastTweet) {
                 newCount++;
                 QVariant v = data.value(id);
@@ -392,16 +394,17 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                 }
             }
         }
+        //kDebug() << m_lastTweet << maxId << "<-- updated";
         m_lastTweet = maxId;
         m_newTweets = qMin(newCount, m_historySize);
         m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
-        showTweets();
+        scheduleShowTweets();
     } else if (source == m_imageQuery) {
         foreach (const QString &user, data.keys()) {
             QPixmap pm = data[user].value<QPixmap>();
 
-            if( !pm.isNull() ) {
-                if( user == m_username ) {
+            if (!pm.isNull()) {
+                if (user == m_username) {
                     QAction *profile = new QAction(QIcon(pm), m_username, this);
                     profile->setData(m_username);
 
@@ -413,7 +416,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                 }
                 m_pictureMap[user] = pm;
                 //TODO it would be nice to check whether the updated image is actually in use
-                showTweets();
+                scheduleShowTweets();
             }
         }
     } else if (source.startsWith("Error")) {
@@ -435,12 +438,34 @@ void MicroBlog::themeChanged()
     showTweets();
 }
 
+void MicroBlog::scheduleShowTweets()
+{
+    if (!m_showTweetsTimer) {
+        m_showTweetsTimer = new QTimer(this);
+        m_showTweetsTimer->setInterval(100);
+        m_showTweetsTimer->setSingleShot(true);
+        connect(m_showTweetsTimer, SIGNAL(timeout()), this, SLOT(showTweets()));
+    }
+
+    m_showTweetsTimer->stop();
+    m_showTweetsTimer->start();
+}
+
 void MicroBlog::showTweets()
 {
     prepareGeometryChange();
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
-    while (m_tweetWidgets.size() < m_historySize) {
+
+    //kDebug() << m_tweetMap.count() << m_historySize;
+    if (m_tweetMap.count() > m_historySize) {
+        QMap<uint, Plasma::DataEngine::Data>::iterator it = m_tweetMap.begin();
+        while (it != m_tweetMap.end() && m_tweetMap.count() > m_historySize) {
+            it = m_tweetMap.erase(it);
+        }
+    }
+
+    while (m_tweetWidgets.count() < m_tweetMap.count()) {
         Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
         tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -480,7 +505,7 @@ void MicroBlog::showTweets()
     }
 
     //clear out tweet widgets if there are too many
-    while (m_tweetWidgets.size() > m_historySize) {
+    while (m_tweetWidgets.count() > m_tweetMap.count()) {
         Tweet t = m_tweetWidgets[m_tweetWidgets.size() - 1];
         m_layout->removeItem(t.frame);
         QAction *iconAction = t.icon->action();
@@ -493,14 +518,8 @@ void MicroBlog::showTweets()
     int i = 0;
     QMap<uint, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
     while (it != m_tweetMap.begin()) {
-        if (i >= m_historySize) {
-            it = m_tweetMap.erase(it);
-            --it;
-            continue;
-        }
-
-        Plasma::DataEngine::Data tweetData = *(--it);
-        QString user = tweetData.value( "User" ).toString();
+        Plasma::DataEngine::Data &tweetData = *(--it);
+        QString user = tweetData.value("User").toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
         if (i == 0) {
@@ -513,8 +532,8 @@ void MicroBlog::showTweets()
         Tweet t = m_tweetWidgets[i];
         t.icon->setAction(profile);
         QSizeF iconSize = t.icon->sizeFromIconSize(30);
-        t.icon->setMinimumSize( iconSize );
-        t.icon->setMaximumSize( iconSize );
+        t.icon->setMinimumSize(iconSize);
+        t.icon->setMaximumSize(iconSize);
         connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
 
         QString sourceString;
@@ -562,7 +581,7 @@ void MicroBlog::createConfigurationInterface(KConfigDialog *parent)
 
     QWidget *configWidget = new QWidget();
     configUi.setupUi(configWidget);
-    
+
     configUi.serviceUrlCombo->addItem("https://identi.ca/api/");
     configUi.serviceUrlCombo->addItem("https://twitter.com/");
     configUi.serviceUrlCombo->setEditText(m_serviceUrl);
@@ -586,6 +605,7 @@ void MicroBlog::configAccepted()
     int historySize = configUi.historySizeSpinBox->value();
     bool includeFriends = configUi.checkIncludeFriends->isChecked();
     bool changed = false;
+    bool reloadRequired = false;
 
     KConfigGroup cg = config();
 
@@ -593,6 +613,7 @@ void MicroBlog::configAccepted()
 
     if (m_serviceUrl != serviceUrl) {
         changed = true;
+        reloadRequired = true;
         m_serviceUrl = serviceUrl;
         cg.writeEntry( "serviceUrl", m_serviceUrl );
     }
@@ -600,20 +621,23 @@ void MicroBlog::configAccepted()
 
     if (m_username != username) {
         changed = true;
+        reloadRequired = true;
         m_username = username;
         m_icon->setIcon( QIcon() );
         m_icon->setText( m_username );
         cg.writeEntry( "username", m_username );
+        m_tweetMap.clear();
+        m_lastTweet = 0;
     }
 
     m_imageQuery = "UserImages:"+m_serviceUrl;
     m_engine->connectSource(m_imageQuery, this);
 
-
     if (m_password != password) {
         changed = true;
         m_password = password;
     }
+
     //if (m_walletWait == Read)
     //then the user is a dumbass.
     //we're going to ignore that, which drops the read attempt
@@ -633,22 +657,31 @@ void MicroBlog::configAccepted()
 
     if (m_includeFriends != includeFriends) {
         changed = true;
+        reloadRequired = true;
         m_includeFriends = includeFriends;
+        m_tweetMap.clear();
+        m_lastTweet = 0;
     }
 
     if (m_historySize != historySize) {
-        m_historySize = historySize;
-        cg.writeEntry("historySize", m_historySize);
-        if (! changed) {
+        //kDebug() << m_historySize << historySize;
+        if (m_historySize < historySize) {
+            reloadRequired = true;
+        } else if (!reloadRequired) {
             showTweets();
         }
+
+        changed = true;
+        m_historySize = historySize;
+        cg.writeEntry("historySize", m_historySize);
     }
 
+    //kDebug() << changed << reloadRequired;
     if (changed) {
-        //TODO we only *need* to wipe the map if name or includeFriends changed
-        m_tweetMap.clear();
-        m_lastTweet=0;
-        downloadHistory();
+        if (reloadRequired) {
+            m_lastTweet = 0;
+            downloadHistory();
+        }
 
         emit configNeedsSaving();
     }
@@ -660,6 +693,7 @@ MicroBlog::~MicroBlog()
 {
     delete m_colorScheme;
     delete m_service;
+    delete m_profileService;
 }
 
 void MicroBlog::editTextChanged()
@@ -720,14 +754,16 @@ void MicroBlog::downloadHistory()
     m_flash->flash( i18n("Refreshing timeline..."), -1 );
 
     QString query;
-    if( m_includeFriends) {
+    if (m_includeFriends) {
         query = QString("TimelineWithFriends:%1@%2");
     } else {
         query = QString("Timeline:%1@%2");
     }
 
     query = query.arg(m_username, m_serviceUrl);
-    if (m_curTimeline != query) {
+    //kDebug() << m_curTimeline << query;
+    bool newQuery = m_curTimeline != query;
+    if (newQuery) {
         //ditch the old one, if needed
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
@@ -741,11 +777,11 @@ void MicroBlog::downloadHistory()
     m_engine->connectSource("Error:" + query, this);
 
     delete m_service;
-    m_service = m_engine->serviceForSource(query);
+    m_service = m_engine->serviceForSource(m_curTimeline);
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
     KConfigGroup cg = m_service->operationDescription("auth");
     cg.writeEntry("password", m_password);
     m_service->startOperationCall(cg);
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 
     //get the profile to retrieve the user icon
     QString profileQuery(QString("Profile:%1@%2").arg(m_username, m_serviceUrl));
@@ -754,11 +790,11 @@ void MicroBlog::downloadHistory()
     m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
 
     delete m_profileService;
-    Plasma::Service *m_profileService = m_engine->serviceForSource(profileQuery);
+    m_profileService = m_engine->serviceForSource(profileQuery);
+    connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
     KConfigGroup profileConf = m_profileService->operationDescription("auth");
     profileConf.writeEntry("password", m_password);
     m_profileService->startOperationCall(profileConf);
-    connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 }
 
 void MicroBlog::serviceFinished(Plasma::ServiceJob *job)

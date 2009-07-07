@@ -97,6 +97,7 @@ class MicroBlog : public Plasma::PopupApplet
         void serviceFinished(Plasma::ServiceJob *job);
 
         void themeChanged();
+        void scheduleShowTweets();
         void showTweets();
 
     protected:
@@ -168,6 +169,7 @@ class MicroBlog : public Plasma::PopupApplet
         Ui::TwitterConfig configUi;
 
         KTimeZone m_tz;
+        QTimer *m_showTweetsTimer;
 };
 
 K_EXPORT_PLASMA_APPLET(microblog, MicroBlog)
