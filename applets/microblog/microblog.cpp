@@ -69,6 +69,7 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_newTweets(0),
       m_service(0),
       m_profileService(0),
+      m_statusService(0),
       m_lastTweet(0),
       m_wallet(0),
       m_walletWait(None),
@@ -365,7 +366,7 @@ void MicroBlog::writeConfigPassword()
 
 void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << source << data.count();
+    //kDebug() << source << data.count() << m_curTimeline;
     if (data.isEmpty()) {
         if (source.startsWith("Error")) {
             m_flash->kill(); //FIXME only clear it if it was showing an error msg
@@ -398,7 +399,11 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
         //kDebug() << m_lastTweet << maxId << "<-- updated";
         m_lastTweet = maxId;
         m_newTweets = qMin(newCount, m_historySize);
-        m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
+
+        if (m_newTweets > 0) {
+            m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );
+        }
+
         scheduleShowTweets();
     } else if (source == m_imageQuery) {
         foreach (const QString &user, data.keys()) {
@@ -458,7 +463,6 @@ void MicroBlog::showTweets()
     // Adjust the number of the TweetWidgets if the configuration has changed
     // Add more tweetWidgets if there are not enough
 
-    //kDebug() << m_tweetMap.count() << m_historySize;
     if (m_tweetMap.count() > m_historySize) {
         QMap<uint, Plasma::DataEngine::Data>::iterator it = m_tweetMap.begin();
         while (it != m_tweetMap.end() && m_tweetMap.count() > m_historySize) {
@@ -670,6 +674,7 @@ void MicroBlog::configAccepted()
         m_includeFriends = includeFriends;
         m_tweetMap.clear();
         m_lastTweet = 0;
+        cg.writeEntry("includeFriends", m_includeFriends);
     }
 
     if (m_historySize != historySize) {
@@ -703,6 +708,7 @@ MicroBlog::~MicroBlog()
     delete m_colorScheme;
     delete m_service;
     delete m_profileService;
+    delete m_statusService;
 }
 
 void MicroBlog::editTextChanged()
@@ -738,14 +744,28 @@ void MicroBlog::updateStatus()
 {
     QString status = m_statusEdit->nativeWidget()->toPlainText();
 
-    delete m_service;
-    m_service = m_engine->serviceForSource(m_curTimeline);
+    if (!m_statusService) {
+        m_statusService = m_engine->serviceForSource(m_curTimeline);
+    }
+
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
-    m_service->startOperationCall(cg);
+    //m_statusUpdates.insert(m_service->startOperationCall(cg), status);
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
+    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 
     m_statusEdit->nativeWidget()->setPlainText("");
+}
+
+void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
+{
+    if (!job->error()) {
+        //m_statusUpdates.value(job);
+        downloadHistory();
+    }
+
+    //m_statusUpdates.remove(job);
 }
 
 //what this really means now is 'reconnect to the timeline source'
@@ -760,7 +780,7 @@ void MicroBlog::downloadHistory()
         return;
     }
 
-    m_flash->flash( i18n("Refreshing timeline..."), -1 );
+    m_flash->flash(i18n("Refreshing timeline..."), -1);
 
     QString query;
     if (m_includeFriends) {
@@ -778,6 +798,10 @@ void MicroBlog::downloadHistory()
             m_engine->disconnectSource(m_curTimeline, this);
             m_engine->disconnectSource("Error:" + m_curTimeline, this);
         }
+
+        delete m_statusService;
+        m_statusService = 0;
+
         m_curTimeline = query;
     }
 

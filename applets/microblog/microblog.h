@@ -92,6 +92,7 @@ class MicroBlog : public Plasma::PopupApplet
     protected slots:
         void configAccepted();
         void updateStatus();
+        void updateCompleted(Plasma::ServiceJob *job);
         void downloadHistory();
         void openProfile();
         void editTextChanged();
@@ -148,6 +149,7 @@ class MicroBlog : public Plasma::PopupApplet
         QString m_password;
         QString m_serviceUrl;
         QString m_imageQuery;
+        //QHash<Plasma::ServiceJob *, QString> m_statusUpdates;
         int m_historySize;
         int m_historyRefresh;
         int m_newTweets;
@@ -156,6 +158,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::DataEngine *m_engine;
         Plasma::Service *m_service;
         Plasma::Service *m_profileService;
+        Plasma::Service *m_statusService;
         QString m_curTimeline;
 
         QMap<QString, QPixmap> m_pictureMap;
