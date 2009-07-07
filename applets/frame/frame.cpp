@@ -113,7 +113,8 @@ void Frame::init()
 
 void Frame::updateMenu()
 {
-    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || (m_currentUrl.path() == "Default" && m_mySlideShow->currentUrl() == "Default"))) {
+    bool invalidPicture = (m_currentUrl.url() == "Default") && (m_mySlideShow->currentUrl() == "Default");
+    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || invalidPicture)) {
         kDebug() << "Current url: " << m_currentUrl.url();
         m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);       
         m_actions.append(m_openPicture);
