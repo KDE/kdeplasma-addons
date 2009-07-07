@@ -67,7 +67,6 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
         m_source->setPassword(parameters.value("password").toString());
     }
 
-    // fail!
     return new Plasma::ServiceJob(m_source->account(), operation, parameters, this);
 }
 
@@ -77,9 +76,9 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
 {
     //who should be something like user@http://twitter.com, if there isn't any @, http://twitter.com will be the default
     QStringList account = who.split('@');
-    if (account.count() == 2){
+    if (account.count() == 2) {
         m_serviceBaseUrl = KUrl(account.at(1));
-    }else{
+    } else {
         m_serviceBaseUrl = KUrl("https://twitter.com/");
     }
 
@@ -113,8 +112,9 @@ Plasma::Service* TimelineSource::createService()
 
 void TimelineSource::setPassword(const QString &password)
 {
+    bool force = m_url.passWord().isEmpty();
     m_url.setPass(password);
-    update();
+    update(force);
 }
 
 QString TimelineSource::password() const
@@ -132,11 +132,11 @@ KUrl TimelineSource::serviceBaseUrl() const
     return m_serviceBaseUrl;
 }
 
-void TimelineSource::update()
+void TimelineSource::update(bool forcedUpdate)
 {
     if (m_job || (!account().isEmpty() && password().isEmpty())) {
         // We are already performing a fetch, let's not bother starting over
-        //kDebug() << "already updating....." << account() << password();
+        //kDebug() << "already updating....." << m_job << account().isEmpty() << password().isEmpty();
         return;
     }
 
@@ -146,6 +146,11 @@ void TimelineSource::update()
     connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
             this, SLOT(recv(KIO::Job*, const QByteArray&)));
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+
+    if (forcedUpdate) {
+        //kDebug() << "forcing update";
+        connect(m_job, SIGNAL(result(KJob*)), this, SLOT(forceImmediateUpdate()));
+    }
 }
 
 void TimelineSource::recv(KIO::Job*, const QByteArray& data)

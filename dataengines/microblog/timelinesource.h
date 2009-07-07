@@ -84,7 +84,7 @@ public:
     TimelineSource(const QString &who, RequestType requestType, QObject* parent);
     ~TimelineSource();
 
-    void update();
+    void update(bool forcedUpdate = false);
     void setPassword(const QString &password);
     QString account() const;
     QString password() const;
