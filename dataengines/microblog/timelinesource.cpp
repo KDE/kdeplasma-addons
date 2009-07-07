@@ -112,7 +112,7 @@ Plasma::Service* TimelineSource::createService()
 
 void TimelineSource::setPassword(const QString &password)
 {
-    bool force = m_url.passWord().isEmpty();
+    bool force = m_url.password().isEmpty();
     m_url.setPass(password);
     update(force);
 }
