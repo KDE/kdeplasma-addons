@@ -445,7 +445,6 @@ void MicroBlog::showTweets()
         Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
         tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-
         QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
         tweetLayout->setContentsMargins( 0, 5, 0, 5 );
         tweetLayout->setSpacing( 5 );
@@ -472,7 +471,6 @@ void MicroBlog::showTweets()
         tweetLayout->addItem(tweetText);
         tweetLayout->addItem(favIcon);
 
-
         Tweet t;
         t.frame = tweetFrame;
         t.icon = icon;
@@ -494,8 +492,14 @@ void MicroBlog::showTweets()
     }
 
     int i = 0;
-    QMap<uint, Plasma::DataEngine::Data>::const_iterator it = m_tweetMap.constEnd();
-    while (i < m_historySize && it != m_tweetMap.constBegin()) {
+    QMap<uint, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
+    while (it != m_tweetMap.begin()) {
+        if (i >= m_historySize) {
+            it = m_tweetMap.erase(it);
+            --it;
+            continue;
+        }
+
         Plasma::DataEngine::Data tweetData = *(--it);
         QString user = tweetData.value( "User" ).toString();
         QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();

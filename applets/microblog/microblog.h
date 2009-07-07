@@ -157,9 +157,9 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Service *m_profileService;
         QString m_curTimeline;
 
-        QMap< QString, QPixmap > m_pictureMap;
-        QMap< uint, Plasma::DataEngine::Data > m_tweetMap;
-        QList< Tweet > m_tweetWidgets;
+        QMap<QString, QPixmap> m_pictureMap;
+        QMap<uint, Plasma::DataEngine::Data> m_tweetMap;
+        QList<Tweet> m_tweetWidgets;
 
         uint m_lastTweet;
         KWallet::Wallet *m_wallet;
