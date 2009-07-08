@@ -105,15 +105,15 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     Plasma::Animator::self()->animateItem(m_wordEdit, Plasma::Animator::AppearAnimation);
 
     // Gets the color scheme from default theme
-    KColorScheme *colorScheme = new KColorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
+    KColorScheme colorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
 
     m_defBrowser = new Plasma::TextBrowser();
     m_defBrowser->nativeWidget()->setNotifyClick(true);
     connect(m_defBrowser->nativeWidget(),SIGNAL(urlClick(QString)),this,SLOT(linkDefine(QString)));
     m_defBrowser->nativeWidget()->document()->setDefaultStyleSheet(QString(translationCSS)
-                                                .arg(colorScheme->foreground().color().name())
-                                                .arg(colorScheme->foreground(KColorScheme::LinkText).color().name())
-                                                .arg(colorScheme->foreground(KColorScheme::VisitedText).color().name()));
+                                                .arg(colorScheme.foreground().color().name())
+                                                .arg(colorScheme.foreground(KColorScheme::LinkText).color().name())
+                                                .arg(colorScheme.foreground(KColorScheme::VisitedText).color().name()));
     m_defBrowser->hide();
 
 //  Icon in upper-left corner
