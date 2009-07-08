@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/plasma_applet_charselect.pot
+$XGETTEXT *.cpp -o $podir/plasma_applet_CharSelectApplet.pot
