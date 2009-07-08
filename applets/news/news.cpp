@@ -160,8 +160,6 @@ void News::makeStylesheet()
                      "/stylesheets/news.css";
     const QString path =  KStandardDirs::locate("data", search);
     if (path.isEmpty()) {
-        KColorScheme plasmaColorTheme = KColorScheme(QPalette::Active, KColorScheme::View,
-                Plasma::Theme::defaultTheme()->colorScheme());
         QColor backgroundColor =
                 Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
         QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
