@@ -47,6 +47,9 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
     addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
+    addSyntax(Plasma::RunnerSyntax(i18nc("list of all people in address book", "contacts"),
+                                   i18n("List all people in your address book.")));
+
 }
 
 ContactsRunner::~ContactsRunner()
@@ -68,10 +71,18 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             return;
         }
 
-        const bool matchedName = a.realName().contains(term, Qt::CaseInsensitive);
-        bool matchedMail = false;
+        bool matchedName;
+        bool matchedMail;
 
-        if (!matchedName) {
+        if (term.compare(i18nc("list of all people in address book", "contacts"), Qt::CaseInsensitive) == 0) {
+            matchedName = true;
+            matchedMail = true;
+        } else {
+            matchedName = a.realName().contains(term, Qt::CaseInsensitive);
+            matchedMail = false;
+        }
+
+        if (!matchedName && !matchedMail) {
             // Name didn't match, so lets try the name portion of the email address
             const int indexOf = a.preferredEmail().indexOf(term, Qt::CaseInsensitive);
             matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf('@');
