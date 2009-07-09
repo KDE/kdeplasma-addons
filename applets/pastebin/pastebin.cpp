@@ -693,6 +693,23 @@ void Pastebin::postClipboard()
 #endif //Q_WS_WIN
 }
 
+void Pastebin::processTinyUrl(QNetworkReply *reply)
+{
+    QByteArray dataRaw(reply->readAll());
+    QString data(dataRaw);
+
+    QRegExp re(".*<blockquote><b>([^<]+)</b><br>.*");
+
+    if (!re.exactMatch(data)) {
+        // couldn't find url
+        showErrors();
+        return;
+    }
+
+    QString tinyUrl = re.cap(1);
+    showResults(tinyUrl);
+}
+
 void Pastebin::postContent(QString text, QImage imageData)
 {
     bool image = false;
@@ -722,6 +739,14 @@ void Pastebin::postContent(QString text, QImage imageData)
             file.open(QIODevice::ReadOnly);
             QTextStream in(&file);
             text = in.readAll();
+        } else if (testPath.scheme().toLower() == QString("http")) {
+            // lets make use of tiny url ;)
+            QString tinyUrl = QString("http://tinyurl.com/create.php?url=%1").arg(testPath.prettyUrl());
+            manager = new QNetworkAccessManager(this);
+            connect(manager, SIGNAL(finished(QNetworkReply*)),
+                    this, SLOT(processTinyUrl(QNetworkReply*)));
+            manager->get(QNetworkRequest(tinyUrl));
+            return;
         }
 
         // upload text

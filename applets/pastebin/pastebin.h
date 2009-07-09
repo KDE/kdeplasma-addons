@@ -34,6 +34,7 @@
 
 #include <QTimer>
 #include <QPen>
+#include <QtNetwork>
 
 class QSignalMapper;
 class KAction;
@@ -86,6 +87,7 @@ protected slots:
     void showErrors();
     void openLink();
     void postClipboard();
+    void processTinyUrl(QNetworkReply *reply);
 
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -145,6 +147,9 @@ private:
     KAction *m_paste;
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
+
+    // to handle request to tinyUrl
+    QNetworkAccessManager *manager;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;
