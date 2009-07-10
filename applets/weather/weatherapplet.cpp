@@ -40,6 +40,12 @@
 #include <Plasma/ToolTipManager>
 
 #include <weatherview.h>
+#include <cmath>
+
+template <typename T> T clampValue(T value, int decimals) 
+{ 
+        const T mul = std::pow(10, decimals); return int(value * mul) / mul; 
+}
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         : WeatherPopupApplet(parent, args),
@@ -234,7 +240,7 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
             return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(format, false));
         }
     } else {
-        QString formattedTemp = QString::number(temp, 'f', 1);
+        float formattedTemp = clampValue(temp, 1);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
         } else {
@@ -489,7 +495,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Pressure"])) {
         QStandardItem *dataPressure = new QStandardItem();
-        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", QString::number(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), pressureUnitInt()), 'f', 2), pressureUnit()));
+        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", clampValue(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), pressureUnitInt()), 2), pressureUnit()));
         m_detailsModel->appendRow(dataPressure);
     }
 
@@ -505,7 +511,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         double visibility = data["Visibility"].toDouble(&isNumeric);
         Q_UNUSED(visibility)
         if (isNumeric) {
-            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", QString::number(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), visibilityUnitInt()), 'f', 1), visibilityUnit()));
+            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", clampValue(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), visibilityUnitInt()), 1), visibilityUnit()));
         } else {
             dataVisibility->setText(i18n("Visibility: %1", data["Visibility"].toString()));
         }
@@ -521,7 +527,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
         m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                QString::number(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 'f', 1), speedUnit()));
+                clampValue(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
     } else {
         if (data["Wind Speed"] == "N/A") {
             m_windIcon->setText(i18nc("Not available","N/A"));
@@ -540,7 +546,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
-        dataGust->setText(i18n("Wind Gust: %1 %2", QString::number(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), speedUnitInt()), 'f', 1), speedUnit()));
+        dataGust->setText(i18n("Wind Gust: %1 %2", clampValue(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
         m_detailsModel->appendRow(dataGust);
     }
 
