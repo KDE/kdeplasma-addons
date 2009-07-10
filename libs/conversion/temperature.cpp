@@ -21,37 +21,37 @@
 #include <KDebug>
 #include <KLocale>
 
-class Celsius : public Conversion::Complex
+class CelsiusConv : public Conversion::Complex
 {
     double toDefault(double value) const { return value + 273.15; };
     double fromDefault(double value) const { return value - 273.15; };
 };
 
-class Fahrenheit : public Conversion::Complex
+class FahrenheitConv : public Conversion::Complex
 {
     double toDefault(double value) const { return (value + 459.67) * 5.0 / 9.0; };
     double fromDefault(double value) const { return (value * 9.0 / 5.0) - 459.67; };
 };
 
-class Delisle : public Conversion::Complex
+class DelisleConv : public Conversion::Complex
 {
     double toDefault(double value) const { return 373.15 - (value * 2.0 / 3.0); };
     double fromDefault(double value) const { return (373.15 - value) * 3.0 / 2.0; };
 };
 
-class Newton : public Conversion::Complex
+class NewtonConv : public Conversion::Complex
 {
     double toDefault(double value) const { return (value * 100.0 / 33.0) + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 33.0 / 100.0; };
 };
 
-class Reaumur : public Conversion::Complex
+class ReaumurConv : public Conversion::Complex
 {
     double toDefault(double value) const { return (value * 5.0 / 4.0) + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 4.0 / 5.0; };
 };
 
-class Romer : public Conversion::Complex
+class RomerConv : public Conversion::Complex
 {
     double toDefault(double value) const { return (value - 7.5) * 40.0 / 21.0 + 273.15; };
     double fromDefault(double value) const { return (value - 273.15) * 21.0 / 40.0 + 7.5; };
@@ -64,14 +64,60 @@ Temperature::Temperature(QObject* parent)
     setObjectName("temperature");
     setName(i18n("Temperature"));
 
-    setDefaultUnit(U(i18n("kelvin"), i18n("kelvins"), "K", 1.0, ));
-    U(i18n("celsius"), i18n("celsiuses"), "\xb0""C", new Celsius(), << "C");
-    U(i18n("fahrenheit"), i18n("fahrenheits"), "\xb0""F", new Fahrenheit(), << "F");
-    U(i18n("rankine"), i18n("rankines"), "\xb0""R", 5.0 / 9.0, << "R");
-    U(i18n("delisle"), i18n("delisles"), "\xb0""De", new Delisle(), << "De");
-    U(i18n("newton"), i18n("newtons"), "\xb0""N", new Newton(), << "N");
-    U(i18n("réaumur"), i18n("réaumurs"), "\xb0""R\xe9", new Reaumur(),
-        << i18n("reaumur") << i18n("reaumurs") << "Re" << "R\xe9");
-    U(i18n("rømer"), i18n("rømer"), "\xb0""R\xf8", new Romer(),
-        << i18n("romer") << i18n("romers") << "Ro" << "R\xf8");
+    setDefaultUnit(U(Temperature::Kelvin, 1,
+      i18nc("temperature unit symbol", "K"),
+      i18nc("unit description in lists", "kelvins"),
+      i18nc("unit synonyms for matching user input", "kelvin;kelvins;K"),
+      ki18nc("amount in units (real)", "%1 kelvins"),
+      ki18ncp("amount in units (integer)", "%1 kelvin", "%1 kelvins")
+    ));
+    U(Temperature::Celsius, new CelsiusConv(),
+      i18nc("temperature unit symbol", "°C"),
+      i18nc("unit description in lists", "celsiuses"),
+      i18nc("unit synonyms for matching user input", "celsius;celsiuses;°C;C"),
+      ki18nc("amount in units (real)", "%1 celsiuses"),
+      ki18ncp("amount in units (integer)", "%1 celsius", "%1 celsiuses")
+    );
+    U(Temperature::Fahrenheit, new FahrenheitConv(),
+      i18nc("temperature unit symbol", "°F"),
+      i18nc("unit description in lists", "fahrenheits"),
+      i18nc("unit synonyms for matching user input", "fahrenheit;fahrenheits;°F;F"),
+      ki18nc("amount in units (real)", "%1 fahrenheits"),
+      ki18ncp("amount in units (integer)", "%1 fahrenheit", "%1 fahrenheits")
+    );
+    U(Temperature::Rankine, 0.555556,
+      i18nc("temperature unit symbol", "°R"),
+      i18nc("unit description in lists", "rankines"),
+      i18nc("unit synonyms for matching user input", "rankine;rankines;°R;R"),
+      ki18nc("amount in units (real)", "%1 rankines"),
+      ki18ncp("amount in units (integer)", "%1 rankine", "%1 rankines")
+    );
+    U(Temperature::Delisle, new DelisleConv(),
+      i18nc("temperature unit symbol", "°De"),
+      i18nc("unit description in lists", "delisles"),
+      i18nc("unit synonyms for matching user input", "delisle;delisles;°De;De"),
+      ki18nc("amount in units (real)", "%1 delisles"),
+      ki18ncp("amount in units (integer)", "%1 delisle", "%1 delisles")
+    );
+    U(Temperature::Newton, new NewtonConv(),
+      i18nc("temperature unit symbol", "°N"),
+      i18nc("unit description in lists", "newtons"),
+      i18nc("unit synonyms for matching user input", "newton;newtons;°N;N"),
+      ki18nc("amount in units (real)", "%1 newtons"),
+      ki18ncp("amount in units (integer)", "%1 newton", "%1 newtons")
+    );
+    U(Temperature::Reaumur, new ReaumurConv(),
+      i18nc("temperature unit symbol", "°Ré"),
+      i18nc("unit description in lists", "réaumurs"),
+      i18nc("unit synonyms for matching user input", "réaumur;réaumurs;°Ré;reaumur;reaumurs;Re;Ré"),
+      ki18nc("amount in units (real)", "%1 réaumurs"),
+      ki18ncp("amount in units (integer)", "%1 réaumur", "%1 réaumurs")
+    );
+    U(Temperature::Romer, new RomerConv(),
+      i18nc("temperature unit symbol", "°Rø"),
+      i18nc("unit description in lists", "rømer"),
+      i18nc("unit synonyms for matching user input", "rømer;rømer;°Rø;romer;romers;Ro;Rø"),
+      ki18nc("amount in units (real)", "%1 rømer"),
+      ki18ncp("amount in units (integer)", "%1 rømer", "%1 rømer")
+    );
 }

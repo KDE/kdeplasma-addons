@@ -25,6 +25,14 @@
 class Pressure : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        Yottapascal = 5000, Zettapascal, Exapascal, Petapascal, Terapascal, Gigapascal, Megapascal,
+        Kilopascal, Hectopascal, Decapascal, Pascal, Decipascal, Centipascal, Millipascal,
+        Micropascal, Nanopascal, Picopascal, Femtopascal, Attopascal, Zeptopascal, Yoctopascal,
+        Bar, Millibar, Decibar, Torr, TechnicalAtmosphere, Atmosphere, PoundForcePerSquareInch,
+        InchesOfMercury
+    };
+
     Pressure(QObject* parent = 0);
 };
 

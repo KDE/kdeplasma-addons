@@ -38,60 +38,368 @@ Currency::Currency(QObject* parent)
     setDescription("From ECB");
     setUrl(KUrl("http://www.ecb.int/stats/exchange/eurofxref/html/index.en.html"));
 
-    setDefaultUnit(U(i18n("euro"), i18n("euros"), "EUR", 1.0, << QString::fromUtf8("€")));
-
     // Static rates
-    U(i18n("schilling"), i18n("schillings"), "ATS", 1.0 / 13.7603, << i18n("austria"));
-    U(i18n("franc"), i18n("francs"), "BEF", 1.0 / 40.3399, << i18n("belgium"));
-    U(i18n("guilder"), i18n("guilders"), "NLG", 1.0 / 2.20371, << i18n("netherlands"));
-    U(i18n("markka"), i18n("markkas"), "FIM", 1.0 / 5.94573, << i18n("finland") << "mk");
-    U(i18n("franc"), i18n("francs"), "FRF", 1.0 / 6.55957, << i18n("france"));
-    U(i18n("mark"), i18n("marks"), "DEM", 1.0 / 1.95583, << i18n("germany"));
-    U(i18n("irish pound"), i18n("irish pounds"), "IEP", 1.0 / 0.787564, << i18n("ireland"));
-    U(i18n("lira"), i18n("liras"), "ITL", 1.0 / 1936.27, << i18n("italy"));
-    U(i18n("franc"), i18n("francs"), "LUF", 1.0 / 40.3399, << i18n("luxembourg"));
-    U(i18n("escudo"), i18n("escudos"), "PTE", 1.0 / 200.482, << i18n("portugal"));
-    U(i18n("peseta"), i18n("pesetas"), "ESP", 1.0 / 166.386, << i18n("spain"));
-    U(i18n("drachma"), i18n("drachmas"), "GRD", 1.0 / 340.750, << i18n("greece"));
-    U(i18n("tolar"), i18n("tolars"), "SIT", 1.0 / 239.640, << i18n("slovenia"));
-    U(i18n("cypriot pound"), i18n("cypriot pounds"), "CYP", 1.0 / 0.585274, << i18n("cyprus"));
-    U(i18n("maltese lira"), i18n("maltese liras"), "MTL", 1.0 / 0.429300, << i18n("malta"));
-    U(i18n("koruna"), i18n("korunas"), "SKK", 1.0 / 30.1260, << i18n("slovakia"));
+    setDefaultUnit(U(Currency::Eur, 1,
+      i18nc("currency unit symbol", "EUR"),
+      i18nc("unit description in lists", "euros"),
+      i18nc("unit synonyms for matching user input", "euro;euros;EUR;eur;€"),
+      ki18nc("amount in units (real)", "%1 euros"),
+      ki18ncp("amount in units (integer)", "%1 euro", "%1 euros")
+    ));
+    U(Currency::Ats, 0.0726728,
+      i18nc("currency unit symbol", "ATS"),
+      i18nc("unit description in lists", "schillings"),
+      i18nc("unit synonyms for matching user input", "schilling;schillings;ATS;ats;austria"),
+      ki18nc("amount in units (real)", "%1 schillings"),
+      ki18ncp("amount in units (integer)", "%1 schilling", "%1 schillings")
+    );
+    U(Currency::Bef, 0.0247894,
+      i18nc("currency unit symbol", "BEF"),
+      i18nc("unit description in lists", "francs"),
+      i18nc("unit synonyms for matching user input", "franc;francs;BEF;bef;belgium"),
+      ki18nc("amount in units (real)", "%1 francs"),
+      ki18ncp("amount in units (integer)", "%1 franc", "%1 francs")
+    );
+    U(Currency::Nlg, 0.45378,
+      i18nc("currency unit symbol", "NLG"),
+      i18nc("unit description in lists", "guilders"),
+      i18nc("unit synonyms for matching user input", "guilder;guilders;NLG;nlg;netherlands"),
+      ki18nc("amount in units (real)", "%1 guilders"),
+      ki18ncp("amount in units (integer)", "%1 guilder", "%1 guilders")
+    );
+    U(Currency::Fim, 0.168188,
+      i18nc("currency unit symbol", "FIM"),
+      i18nc("unit description in lists", "markkas"),
+      i18nc("unit synonyms for matching user input", "markka;markkas;FIM;fim;finland;mk"),
+      ki18nc("amount in units (real)", "%1 markkas"),
+      ki18ncp("amount in units (integer)", "%1 markka", "%1 markkas")
+    );
+    U(Currency::Frf, 0.152449,
+      i18nc("currency unit symbol", "FRF"),
+      i18nc("unit description in lists", "francs"),
+      i18nc("unit synonyms for matching user input", "franc;francs;FRF;frf;france"),
+      ki18nc("amount in units (real)", "%1 francs"),
+      ki18ncp("amount in units (integer)", "%1 franc", "%1 francs")
+    );
+    U(Currency::Dem, 0.511292,
+      i18nc("currency unit symbol", "DEM"),
+      i18nc("unit description in lists", "marks"),
+      i18nc("unit synonyms for matching user input", "mark;marks;DEM;dem;germany"),
+      ki18nc("amount in units (real)", "%1 marks"),
+      ki18ncp("amount in units (integer)", "%1 mark", "%1 marks")
+    );
+    U(Currency::Iep, 1.26974,
+      i18nc("currency unit symbol", "IEP"),
+      i18nc("unit description in lists", "irish pounds"),
+      i18nc("unit synonyms for matching user input", "irish pound;irish pounds;IEP;iep;ireland"),
+      ki18nc("amount in units (real)", "%1 irish pounds"),
+      ki18ncp("amount in units (integer)", "%1 irish pound", "%1 irish pounds")
+    );
+    U(Currency::Itl, 0.000516457,
+      i18nc("currency unit symbol", "ITL"),
+      i18nc("unit description in lists", "liras"),
+      i18nc("unit synonyms for matching user input", "lira;liras;ITL;itl;italy"),
+      ki18nc("amount in units (real)", "%1 liras"),
+      ki18ncp("amount in units (integer)", "%1 lira", "%1 liras")
+    );
+    U(Currency::Luf, 0.0247894,
+      i18nc("currency unit symbol", "LUF"),
+      i18nc("unit description in lists", "francs"),
+      i18nc("unit synonyms for matching user input", "franc;francs;LUF;luf;luxembourg"),
+      ki18nc("amount in units (real)", "%1 francs"),
+      ki18ncp("amount in units (integer)", "%1 franc", "%1 francs")
+    );
+    U(Currency::Pte, 0.00498798,
+      i18nc("currency unit symbol", "PTE"),
+      i18nc("unit description in lists", "escudos"),
+      i18nc("unit synonyms for matching user input", "escudo;escudos;PTE;pte;portugal"),
+      ki18nc("amount in units (real)", "%1 escudos"),
+      ki18ncp("amount in units (integer)", "%1 escudo", "%1 escudos")
+    );
+    U(Currency::Esp, 0.00601012,
+      i18nc("currency unit symbol", "ESP"),
+      i18nc("unit description in lists", "pesetas"),
+      i18nc("unit synonyms for matching user input", "peseta;pesetas;ESP;esp;spain"),
+      ki18nc("amount in units (real)", "%1 pesetas"),
+      ki18ncp("amount in units (integer)", "%1 peseta", "%1 pesetas")
+    );
+    U(Currency::Grd, 0.0029347,
+      i18nc("currency unit symbol", "GRD"),
+      i18nc("unit description in lists", "drachmas"),
+      i18nc("unit synonyms for matching user input", "drachma;drachmas;GRD;grd;greece"),
+      ki18nc("amount in units (real)", "%1 drachmas"),
+      ki18ncp("amount in units (integer)", "%1 drachma", "%1 drachmas")
+    );
+    U(Currency::Sit, 0.00417293,
+      i18nc("currency unit symbol", "SIT"),
+      i18nc("unit description in lists", "tolars"),
+      i18nc("unit synonyms for matching user input", "tolar;tolars;SIT;sit;slovenia"),
+      ki18nc("amount in units (real)", "%1 tolars"),
+      ki18ncp("amount in units (integer)", "%1 tolar", "%1 tolars")
+    );
+    U(Currency::Cyp, 1.7086,
+      i18nc("currency unit symbol", "CYP"),
+      i18nc("unit description in lists", "cypriot pounds"),
+      i18nc("unit synonyms for matching user input", "cypriot pound;cypriot pounds;CYP;cyp;cyprus"),
+      ki18nc("amount in units (real)", "%1 cypriot pounds"),
+      ki18ncp("amount in units (integer)", "%1 cypriot pound", "%1 cypriot pounds")
+    );
+    U(Currency::Mtl, 2.32937,
+      i18nc("currency unit symbol", "MTL"),
+      i18nc("unit description in lists", "maltese liras"),
+      i18nc("unit synonyms for matching user input", "maltese lira;maltese liras;MTL;mtl;malta"),
+      ki18nc("amount in units (real)", "%1 maltese liras"),
+      ki18ncp("amount in units (integer)", "%1 maltese lira", "%1 maltese liras")
+    );
+    U(Currency::Skk, 0.0331939,
+      i18nc("currency unit symbol", "SKK"),
+      i18nc("unit description in lists", "korunas"),
+      i18nc("unit synonyms for matching user input", "koruna;korunas;SKK;skk;slovakia"),
+      ki18nc("amount in units (real)", "%1 korunas"),
+      ki18ncp("amount in units (integer)", "%1 koruna", "%1 korunas")
+    );
 
     // From ECB
-    U(i18n("dollar"), i18n("dollars"), "USD", 1E99, << i18n("usa") << "$");
-    U(i18n("yen"), i18n("yens"), "JPY", 1E99, << i18n("japan") << "\xa5");
-    U(i18n("lev"), i18n("levs"), "BGN", 1E99, << i18n("bulgaria"));
-    U(i18n("koruna"), i18n("korunas"), "CZK", 1E99, << i18n("czech"));
-    U(i18n("danish krone"), i18n("danish krones"), "DKK", 1E99, << i18n("denmark"));
-    U(i18n("kroon"), i18n("kroons"), "EEK", 1E99, << i18n("estonia"));
-    U(i18n("pound"), i18n("pounds"), "GBP", 1E99, << "\xa3" << i18n("UK") << i18n("sterling") << i18n("sterlings"));
-    U(i18n("forint"), i18n("forints"), "HUF", 1E99, << i18n("hungary"));
-    U(i18n("litas"), i18n("litass"), "LTL", 1E99, << i18n("lithuania"));
-    U(i18n("lats"), i18n("latss"), "LVL", 1E99, << i18n("latvia"));
-    U(i18n("zloty"), i18n("zlotys"), "PLN", 1E99, << i18n("poland"));
-    U(i18n("leu"), i18n("leus"), "RON", 1E99, << i18n("romania"));
-    U(i18n("krona"), i18n("kronas"), "SEK", 1E99, << i18n("sweden"));
-    U(i18n("franc"), i18n("francs"), "CHF", 1E99, << i18n("switzerland"));
-    U(i18n("norwegian krone"), i18n("norwegian krones"), "NOK", 1E99, << i18n("norway"));
-    U(i18n("kuna"), i18n("kunas"), "HRK", 1E99, << i18n("croatia"));
-    U(i18n("rouble"), i18n("roubles"), "RUB", 1E99, << i18n("russia"));
-    U(i18n("lira"), i18n("liras"), "TRY", 1E99, << i18n("turkey"));
-    U(i18n("australian dollar"), i18n("australian dollars"), "AUD", 1E99, << i18n("australia"));
-    U(i18n("real"), i18n("reals"), "BRL", 1E99, << i18n("brasilia"));
-    U(i18n("canadian dollar"), i18n("canadian dollars"), "CAD", 1E99, << i18n("canada"));
-    U(i18n("yuan"), i18n("yuans"), "CNY", 1E99, << i18n("china"));
-    U(i18n("hong kong dollar"), i18n("hong kong dollars"), "HKD", 1E99, << i18n("hong kong"));
-    U(i18n("rupiah"), i18n("rupiahs"), "IDR", 1E99, << i18n("indonesia"));
-    U(i18n("rupee"), i18n("rupees"), "INR", 1E99, << i18n("india"));
-    U(i18n("won"), i18n("wons"), "KRW", 1E99, << i18n("south korea"));
-    U(i18n("mexican peso"), i18n("mexican pesos"), "MXN", 1E99, << i18n("mexico"));
-    U(i18n("ringgit"), i18n("ringgits"), "MYR", 1E99, << i18n("malaysia"));
-    U(i18n("new zealand dollar"), i18n("new zealand dollars"), "NZD", 1E99, << i18n("new zealand"));
-    U(i18n("philippine peso"), i18n("philippine pesos"), "PHP", 1E99, << i18n("philippines"));
-    U(i18n("singapore dollar"), i18n("singapore dollars"), "SGD", 1E99, << i18n("singapore"));
-    U(i18n("baht"), i18n("bahts"), "THB", 1E99, << i18n("thailand"));
-    U(i18n("rand"), i18n("rands"), "ZAR", 1E99, << i18n("south africa"));
+    U(Currency::Usd, 1e+99,
+      i18nc("currency unit symbol", "USD"),
+      i18nc("unit description in lists", "dollars"),
+      i18nc("unit synonyms for matching user input", "dollar;dollars;USD;usd;usa;$"),
+      ki18nc("amount in units (real)", "%1 dollars"),
+      ki18ncp("amount in units (integer)", "%1 dollar", "%1 dollars")
+    );
+    U(Currency::Jpy, 1e+99,
+      i18nc("currency unit symbol", "JPY"),
+      i18nc("unit description in lists", "yens"),
+      i18nc("unit synonyms for matching user input", "yen;yens;JPY;jpy;japan;¥"),
+      ki18nc("amount in units (real)", "%1 yens"),
+      ki18ncp("amount in units (integer)", "%1 yen", "%1 yens")
+    );
+    U(Currency::Bgn, 1e+99,
+      i18nc("currency unit symbol", "BGN"),
+      i18nc("unit description in lists", "levs"),
+      i18nc("unit synonyms for matching user input", "lev;levs;BGN;bgn;bulgaria"),
+      ki18nc("amount in units (real)", "%1 levs"),
+      ki18ncp("amount in units (integer)", "%1 lev", "%1 levs")
+    );
+    U(Currency::Czk, 1e+99,
+      i18nc("currency unit symbol", "CZK"),
+      i18nc("unit description in lists", "korunas"),
+      i18nc("unit synonyms for matching user input", "koruna;korunas;CZK;czk;czech"),
+      ki18nc("amount in units (real)", "%1 korunas"),
+      ki18ncp("amount in units (integer)", "%1 koruna", "%1 korunas")
+    );
+    U(Currency::Dkk, 1e+99,
+      i18nc("currency unit symbol", "DKK"),
+      i18nc("unit description in lists", "danish krones"),
+      i18nc("unit synonyms for matching user input", "danish krone;danish krones;DKK;dkk;denmark"),
+      ki18nc("amount in units (real)", "%1 danish krones"),
+      ki18ncp("amount in units (integer)", "%1 danish krone", "%1 danish krones")
+    );
+    U(Currency::Eek, 1e+99,
+      i18nc("currency unit symbol", "EEK"),
+      i18nc("unit description in lists", "kroons"),
+      i18nc("unit synonyms for matching user input", "kroon;kroons;EEK;eek;estonia"),
+      ki18nc("amount in units (real)", "%1 kroons"),
+      ki18ncp("amount in units (integer)", "%1 kroon", "%1 kroons")
+    );
+    U(Currency::Gbp, 1e+99,
+      i18nc("currency unit symbol", "GBP"),
+      i18nc("unit description in lists", "pounds"),
+      i18nc("unit synonyms for matching user input",
+            "pound;pounds;GBP;gbp;£;UK;sterling;sterlings"),
+      ki18nc("amount in units (real)", "%1 pounds"),
+      ki18ncp("amount in units (integer)", "%1 pound", "%1 pounds")
+    );
+    U(Currency::Huf, 1e+99,
+      i18nc("currency unit symbol", "HUF"),
+      i18nc("unit description in lists", "forints"),
+      i18nc("unit synonyms for matching user input", "forint;forints;HUF;huf;hungary"),
+      ki18nc("amount in units (real)", "%1 forints"),
+      ki18ncp("amount in units (integer)", "%1 forint", "%1 forints")
+    );
+    U(Currency::Ltl, 1e+99,
+      i18nc("currency unit symbol", "LTL"),
+      i18nc("unit description in lists", "litass"),
+      i18nc("unit synonyms for matching user input", "litas;litass;LTL;ltl;lithuania"),
+      ki18nc("amount in units (real)", "%1 litass"),
+      ki18ncp("amount in units (integer)", "%1 litas", "%1 litass")
+    );
+    U(Currency::Lvl, 1e+99,
+      i18nc("currency unit symbol", "LVL"),
+      i18nc("unit description in lists", "latss"),
+      i18nc("unit synonyms for matching user input", "lats;latss;LVL;lvl;latvia"),
+      ki18nc("amount in units (real)", "%1 latss"),
+      ki18ncp("amount in units (integer)", "%1 lats", "%1 latss")
+    );
+    U(Currency::Pln, 1e+99,
+      i18nc("currency unit symbol", "PLN"),
+      i18nc("unit description in lists", "zlotys"),
+      i18nc("unit synonyms for matching user input", "zloty;zlotys;PLN;pln;poland"),
+      ki18nc("amount in units (real)", "%1 zlotys"),
+      ki18ncp("amount in units (integer)", "%1 zloty", "%1 zlotys")
+    );
+    U(Currency::Ron, 1e+99,
+      i18nc("currency unit symbol", "RON"),
+      i18nc("unit description in lists", "leus"),
+      i18nc("unit synonyms for matching user input", "leu;leus;RON;ron;romania"),
+      ki18nc("amount in units (real)", "%1 leus"),
+      ki18ncp("amount in units (integer)", "%1 leu", "%1 leus")
+    );
+    U(Currency::Sek, 1e+99,
+      i18nc("currency unit symbol", "SEK"),
+      i18nc("unit description in lists", "kronas"),
+      i18nc("unit synonyms for matching user input", "krona;kronas;SEK;sek;sweden"),
+      ki18nc("amount in units (real)", "%1 kronas"),
+      ki18ncp("amount in units (integer)", "%1 krona", "%1 kronas")
+    );
+    U(Currency::Chf, 1e+99,
+      i18nc("currency unit symbol", "CHF"),
+      i18nc("unit description in lists", "francs"),
+      i18nc("unit synonyms for matching user input", "franc;francs;CHF;chf;switzerland"),
+      ki18nc("amount in units (real)", "%1 francs"),
+      ki18ncp("amount in units (integer)", "%1 franc", "%1 francs")
+    );
+    U(Currency::Nok, 1e+99,
+      i18nc("currency unit symbol", "NOK"),
+      i18nc("unit description in lists", "norwegian krones"),
+      i18nc("unit synonyms for matching user input",
+            "norwegian krone;norwegian krones;NOK;nok;norway"),
+      ki18nc("amount in units (real)", "%1 norwegian krones"),
+      ki18ncp("amount in units (integer)", "%1 norwegian krone", "%1 norwegian krones")
+    );
+    U(Currency::Hrk, 1e+99,
+      i18nc("currency unit symbol", "HRK"),
+      i18nc("unit description in lists", "kunas"),
+      i18nc("unit synonyms for matching user input", "kuna;kunas;HRK;hrk;croatia"),
+      ki18nc("amount in units (real)", "%1 kunas"),
+      ki18ncp("amount in units (integer)", "%1 kuna", "%1 kunas")
+    );
+    U(Currency::Rub, 1e+99,
+      i18nc("currency unit symbol", "RUB"),
+      i18nc("unit description in lists", "roubles"),
+      i18nc("unit synonyms for matching user input", "rouble;roubles;RUB;rub;russia"),
+      ki18nc("amount in units (real)", "%1 roubles"),
+      ki18ncp("amount in units (integer)", "%1 rouble", "%1 roubles")
+    );
+    U(Currency::Try, 1e+99,
+      i18nc("currency unit symbol", "TRY"),
+      i18nc("unit description in lists", "liras"),
+      i18nc("unit synonyms for matching user input", "lira;liras;TRY;try;turkey"),
+      ki18nc("amount in units (real)", "%1 liras"),
+      ki18ncp("amount in units (integer)", "%1 lira", "%1 liras")
+    );
+    U(Currency::Aud, 1e+99,
+      i18nc("currency unit symbol", "AUD"),
+      i18nc("unit description in lists", "australian dollars"),
+      i18nc("unit synonyms for matching user input",
+            "australian dollar;australian dollars;AUD;aud;australia"),
+      ki18nc("amount in units (real)", "%1 australian dollars"),
+      ki18ncp("amount in units (integer)", "%1 australian dollar", "%1 australian dollars")
+    );
+    U(Currency::Brl, 1e+99,
+      i18nc("currency unit symbol", "BRL"),
+      i18nc("unit description in lists", "reals"),
+      i18nc("unit synonyms for matching user input", "real;reals;BRL;brasilia"),
+      ki18nc("amount in units (real)", "%1 reals"),
+      ki18ncp("amount in units (integer)", "%1 real", "%1 reals")
+    );
+    U(Currency::Cad, 1e+99,
+      i18nc("currency unit symbol", "CAD"),
+      i18nc("unit description in lists", "canadian dollars"),
+      i18nc("unit synonyms for matching user input",
+            "canadian dollar;canadian dollars;CAD;cad;canada"),
+      ki18nc("amount in units (real)", "%1 canadian dollars"),
+      ki18ncp("amount in units (integer)", "%1 canadian dollar", "%1 canadian dollars")
+    );
+    U(Currency::Cny, 1e+99,
+      i18nc("currency unit symbol", "CNY"),
+      i18nc("unit description in lists", "yuans"),
+      i18nc("unit synonyms for matching user input", "yuan;yuans;CNY;china"),
+      ki18nc("amount in units (real)", "%1 yuans"),
+      ki18ncp("amount in units (integer)", "%1 yuan", "%1 yuans")
+    );
+    U(Currency::Hkd, 1e+99,
+      i18nc("currency unit symbol", "HKD"),
+      i18nc("unit description in lists", "hong kong dollars"),
+      i18nc("unit synonyms for matching user input",
+            "hong kong dollar;hong kong dollars;HKD;hkd;hong kong"),
+      ki18nc("amount in units (real)", "%1 hong kong dollars"),
+      ki18ncp("amount in units (integer)", "%1 hong kong dollar", "%1 hong kong dollars")
+    );
+    U(Currency::Idr, 1e+99,
+      i18nc("currency unit symbol", "IDR"),
+      i18nc("unit description in lists", "rupiahs"),
+      i18nc("unit synonyms for matching user input",
+            "rupiah;rupiahs;IDR;idr;indonesia"),
+      ki18nc("amount in units (real)", "%1 rupiahs"),
+      ki18ncp("amount in units (integer)", "%1 rupiah", "%1 rupiahs")
+    );
+    U(Currency::Inr, 1e+99,
+      i18nc("currency unit symbol", "INR"),
+      i18nc("unit description in lists", "rupees"),
+      i18nc("unit synonyms for matching user input", "rupee;rupees;INR;inr;india"),
+      ki18nc("amount in units (real)", "%1 rupees"),
+      ki18ncp("amount in units (integer)", "%1 rupee", "%1 rupees")
+    );
+    U(Currency::Krw, 1e+99,
+      i18nc("currency unit symbol", "KRW"),
+      i18nc("unit description in lists", "wons"),
+      i18nc("unit synonyms for matching user input", "won;wons;KRW;krw;south korea"),
+      ki18nc("amount in units (real)", "%1 wons"),
+      ki18ncp("amount in units (integer)", "%1 won", "%1 wons")
+    );
+    U(Currency::Mxn, 1e+99,
+      i18nc("currency unit symbol", "MXN"),
+      i18nc("unit description in lists", "mexican pesos"),
+      i18nc("unit synonyms for matching user input", "mexican peso;mexican pesos;MXN;mxn;mexico"),
+      ki18nc("amount in units (real)", "%1 mexican pesos"),
+      ki18ncp("amount in units (integer)", "%1 mexican peso", "%1 mexican pesos")
+    );
+    U(Currency::Myr, 1e+99,
+      i18nc("currency unit symbol", "MYR"),
+      i18nc("unit description in lists", "ringgits"),
+      i18nc("unit synonyms for matching user input", "ringgit;ringgits;MYR;myr;malaysia"),
+      ki18nc("amount in units (real)", "%1 ringgits"),
+      ki18ncp("amount in units (integer)", "%1 ringgit", "%1 ringgits")
+    );
+    U(Currency::Nzd, 1e+99,
+      i18nc("currency unit symbol", "NZD"),
+      i18nc("unit description in lists", "new zealand dollars"),
+      i18nc("unit synonyms for matching user input",
+            "new zealand dollar;new zealand dollars;NZD;nzd;new zealand"),
+      ki18nc("amount in units (real)", "%1 new zealand dollars"),
+      ki18ncp("amount in units (integer)", "%1 new zealand dollar", "%1 new zealand dollars")
+    );
+    U(Currency::Php, 1e+99,
+      i18nc("currency unit symbol", "PHP"),
+      i18nc("unit description in lists", "philippine pesos"),
+      i18nc("unit synonyms for matching user input",
+            "philippine peso;philippine pesos;PHP;php;philippines"),
+      ki18nc("amount in units (real)", "%1 philippine pesos"),
+      ki18ncp("amount in units (integer)", "%1 philippine peso", "%1 philippine pesos")
+    );
+    U(Currency::Sgd, 1e+99,
+      i18nc("currency unit symbol", "SGD"),
+      i18nc("unit description in lists", "singapore dollars"),
+      i18nc("unit synonyms for matching user input",
+            "singapore dollar;singapore dollars;SGD;sgd;singapore"),
+      ki18nc("amount in units (real)", "%1 singapore dollars"),
+      ki18ncp("amount in units (integer)", "%1 singapore dollar", "%1 singapore dollars")
+    );
+    U(Currency::Thb, 1e+99,
+      i18nc("currency unit symbol", "THB"),
+      i18nc("unit description in lists", "bahts"),
+      i18nc("unit synonyms for matching user input", "baht;bahts;THB;thb;thailand"),
+      ki18nc("amount in units (real)", "%1 bahts"),
+      ki18ncp("amount in units (integer)", "%1 baht", "%1 bahts")
+    );
+    U(Currency::Zar, 1e+99,
+      i18nc("currency unit symbol", "ZAR"),
+      i18nc("unit description in lists", "rands"),
+      i18nc("unit synonyms for matching user input", "rand;rands;ZAR;zar;south africa"),
+      ki18nc("amount in units (real)", "%1 rands"),
+      ki18ncp("amount in units (integer)", "%1 rand", "%1 rands")
+    );
 
     m_cache = KStandardDirs::locateLocal("data", "libconversion/currency.xml");
     m_update = true;

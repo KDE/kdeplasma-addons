@@ -25,6 +25,11 @@
 class Velocity : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        MeterPerSecond = 9000, KilometerPerHour, MilePerHour, FootPerSecond, InchPerSecond, Knot,
+        Mach, SpeedOfLight, Beaufort
+    };
+
     Velocity(QObject* parent = 0);
 };
 

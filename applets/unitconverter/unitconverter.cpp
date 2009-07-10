@@ -69,8 +69,8 @@ void UnitConverter::sltCategoryChanged(int index)
     m_pCmbUnit2->clear();
     int i = 0;
     foreach (const Conversion::Unit* unit, units) {
-        m_pCmbUnit1->nativeWidget()->addItem(unit->singular(), QVariant::fromValue(unit));
-        m_pCmbUnit2->nativeWidget()->addItem(unit->singular(), QVariant::fromValue(unit));
+        m_pCmbUnit1->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
+        m_pCmbUnit2->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
         if (unit == defaultUnit) {
             m_pCmbUnit1->nativeWidget()->setCurrentIndex(i);
             m_pCmbUnit2->nativeWidget()->setCurrentIndex(i);

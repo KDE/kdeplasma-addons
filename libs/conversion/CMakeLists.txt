@@ -17,6 +17,7 @@ set(conversion_LIB_SRCS
     power.cpp
     timeunit.cpp
     fuel_efficiency.cpp
+    density.cpp
 )
 
 set(conversion_HEADERS
@@ -31,5 +32,5 @@ kde4_add_library(conversion SHARED ${conversion_LIB_SRCS})
 target_link_libraries(conversion ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS})
 set_target_properties(conversion PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS conversion ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES ${conversion_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/conversion COMPONENT Devel)
-install(FILES FindConversion.cmake DESTINATION ${DATA_INSTALL_DIR}/cmake/modules)
+#install(FILES ${conversion_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/conversion COMPONENT Devel)
+#install(FILES FindConversion.cmake DESTINATION ${DATA_INSTALL_DIR}/cmake/modules)

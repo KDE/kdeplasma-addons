@@ -102,15 +102,15 @@ public:
      * @return converted value
      **/
     Value convert(const Value& value, const QString& toUnit = QString());
+    Value convert(const Value& value, int toUnit);
     virtual Value convert(const Value& value, const Unit* toUnit);
 
 protected:
-    void addSIUnit(const QString& symbol, const QString& single, const QString& plural,
-                   uint multiplier = 1, double shift = 1.0);
     void setName(const QString& name);
     void setDefaultUnit(Unit* defaultUnit);
     void addUnitName(const QString& name);
-    void addUnitMapValues(Unit* unit, const QStringList& names);
+    void addUnitMapValues(Unit* unit, const QString& names);
+    void addIdMapValue(Unit* unit, int id);
     void setDescription(const QString& desc);
     void setUrl(const KUrl& url);
 

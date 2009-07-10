@@ -74,7 +74,7 @@ bool Value::isValid() const
 QString Value::toString() const
 {
     if (isValid()) {
-        return QString("%1 %2").arg(d->number).arg(d->unit->toString(d->number));
+        return d->unit->toString(d->number);
     }
     return QString();
 }

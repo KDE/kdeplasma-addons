@@ -25,6 +25,12 @@
 class Currency : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        Eur = 8000, Ats, Bef, Nlg, Fim, Frf, Dem, Iep, Itl, Luf, Pte, Esp, Grd, Sit, Cyp, Mtl, Skk,
+        Usd, Jpy, Bgn, Czk, Dkk, Eek, Gbp, Huf, Ltl, Lvl, Pln, Ron, Sek, Chf, Nok, Hrk, Rub, Try,
+        Aud, Brl, Cad, Cny, Hkd, Idr, Inr, Krw, Mxn, Myr, Nzd, Php, Sgd, Thb, Zar
+    };
+
     Currency(QObject* parent = 0);
     virtual Conversion::Value convert(const Conversion::Value& value,
                                       const Conversion::Unit* to);

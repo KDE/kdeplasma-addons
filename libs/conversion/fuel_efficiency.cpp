@@ -44,11 +44,32 @@ FuelEfficiency::FuelEfficiency(QObject* parent)
     setObjectName("fuelefficiency");
     setName(i18n("Fuel Efficiency"));
 
-    setDefaultUnit(U(i18n("liters per 100 kilometers"), i18n("liters per 100 kilometers"),
-            "l/100 km", 1.0, << "L/100 km"));
-    U(i18n("mile per US gallon"), i18n("miles per US gallon"),
-            "mpg", new mpg(), );
-    U(i18n("mile per imperial gallon"), i18n("miles per imperial gallon"),
-            i18n("mpg (imperial)"), new mpgi(), );
-    U(i18n("kilometre per litre"), i18n("kilometres per litre"), "kmpl", new kmpl(), << "km/l");
+    setDefaultUnit(U(FuelEfficiency::LitersPer100Kilometers, 1,
+      i18nc("fuelefficiency unit symbol", "l/100 km"),
+      i18nc("unit description in lists", "liters per 100 kilometers"),
+      i18nc("unit synonyms for matching user input", "liters per 100 kilometers;liters per 100 kilometers;l/100 km;L/100 km"),
+      ki18nc("amount in units (real)", "%1 liters per 100 kilometers"),
+      ki18ncp("amount in units (integer)", "%1 liters per 100 kilometers", "%1 liters per 100 kilometers")
+    ));
+    U(FuelEfficiency::MilePerUsGallon, new mpg(),
+      i18nc("fuelefficiency unit symbol", "mpg"),
+      i18nc("unit description in lists", "miles per US gallon"),
+      i18nc("unit synonyms for matching user input", "mile per US gallon;miles per US gallon;mpg"),
+      ki18nc("amount in units (real)", "%1 miles per US gallon"),
+      ki18ncp("amount in units (integer)", "%1 mile per US gallon", "%1 miles per US gallon")
+    );
+    U(FuelEfficiency::MilePerImperialGallon, new mpgi(),
+      i18nc("fuelefficiency unit symbol", "mpg (imperial)"),
+      i18nc("unit description in lists", "miles per imperial gallon"),
+      i18nc("unit synonyms for matching user input", "mile per imperial gallon;miles per imperial gallon;mpg (imperial)"),
+      ki18nc("amount in units (real)", "%1 miles per imperial gallon"),
+      ki18ncp("amount in units (integer)", "%1 mile per imperial gallon", "%1 miles per imperial gallon")
+    );
+    U(FuelEfficiency::KilometrePerLitre, new kmpl(),
+      i18nc("fuelefficiency unit symbol", "kmpl"),
+      i18nc("unit description in lists", "kilometres per litre"),
+      i18nc("unit synonyms for matching user input", "kilometre per litre;kilometres per litre;kmpl;km/l"),
+      ki18nc("amount in units (real)", "%1 kilometres per litre"),
+      ki18ncp("amount in units (integer)", "%1 kilometre per litre", "%1 kilometres per litre")
+    );
 }

@@ -25,6 +25,13 @@
 class Length : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        Yottameter = 2000, Zettameter, Exameter, Petameter, Terameter, Gigameter, Megameter,
+        Kilometer, Hectometer, Decameter, Meter, Decimeter, Centimeter, Millimeter, Micrometer,
+        Nanometer, Picometer, Femtometer, Attometer, Zeptometer, Yoctometer, Inch, Foot, Yard,
+        Mile, NauticalMile, LightYear, Parsec, AstronomicalUnit
+    };
+
     Length(QObject* parent = 0);
 };
 

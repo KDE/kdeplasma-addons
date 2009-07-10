@@ -25,6 +25,10 @@
 class Temperature : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        Kelvin = 6000, Celsius, Fahrenheit, Rankine, Delisle, Newton, Reaumur, Romer
+    };
+
     Temperature(QObject* parent = 0);
 };
 

@@ -25,6 +25,13 @@
 class Energy : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        Yottajoule = 7000, Zettajoule, Exajoule, Petajoule, Terajoule, Gigajoule, Megajoule,
+        Kilojoule, Hectojoule, Decajoule, Joule, Decijoule, Centijoule, Millijoule, Microjoule,
+        Nanojoule, Picojoule, Femtojoule, Attojoule, Zeptojoule, Yoctojoule, GuidelineDailyAmount,
+        Electronvolt, Rydberg, Kilocalorie
+    };
+
     Energy(QObject* parent = 0);
 };
 

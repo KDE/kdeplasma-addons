@@ -25,6 +25,17 @@
 class Volume : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        CubicYottameter = 3000, CubicZettameter, CubicExameter, CubicPetameter, CubicTerameter,
+        CubicGigameter, CubicMegameter, CubicKilometer, CubicHectometer, CubicDecameter, CubicMeter,
+        CubicDecimeter, CubicCentimeter, CubicMillimeter, CubicMicrometer, CubicNanometer,
+        CubicPicometer, CubicFemtometer, CubicAttometer, CubicZeptometer, CubicYoctometer,
+        Yottaliter, Zettaliter, Exaliter, Petaliter, Teraliter, Gigaliter, Megaliter, Kiloliter,
+        Hectoliter, Decaliter, Liter, Deciliter, Centiliter, Milliliter, Microliter, Nanoliter,
+        Picoliter, Femtoliter, Attoliter, Zeptoliter, Yoctoliter, CubicFoot, CubicInch, CubicMile,
+        FluidOunce, Cup, GallonUS, PintImperial
+    };
+
     Volume(QObject* parent = 0);
 };
 

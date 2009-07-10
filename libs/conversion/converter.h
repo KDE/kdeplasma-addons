@@ -21,6 +21,20 @@
 #define CONVERSION_CONVERTER_H
 
 #include "value.h"
+#include "length.h"
+#include "area.h"
+#include "volume.h"
+#include "temperature.h"
+#include "velocity.h"
+#include "mass.h"
+#include "pressure.h"
+#include "energy.h"
+#include "currency.h"
+#include "power.h"
+#include "timeunit.h"
+#include "fuel_efficiency.h"
+#include "density.h"
+
 #include "plasmaconversion_export.h"
 #include <QtCore/QVariant>
 
@@ -46,6 +60,7 @@ public:
      * @return converted value
      **/
     Value convert(const Value& value, const QString& toUnit = QString()) const;
+    Value convert(const Value& value, int toUnit) const;
 
     /**
      * Find unit category for unit.

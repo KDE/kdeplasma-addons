@@ -21,7 +21,7 @@
 #define CONVERSION_UNIT_H
 
 #include <QString>
-#include <QStringList>
+#include <KLocalizedString>
 #include "plasmaconversion_export.h"
 
 namespace Conversion
@@ -40,24 +40,20 @@ public:
 
 class PLASMACONVERSION_EXPORT Unit : public QObject
 {
+    Q_OBJECT
 public:
     Unit(QObject* parent = 0);
-    explicit Unit(QObject* parent, const QString& singular, const QString& plural,
-                  const QString& symbol, double multiplier,
-                  const QStringList& synonyms = QStringList());
-    explicit Unit(QObject* parent, const QString& singular, const QString& plural,
-                  const QString& symbol, const Complex* multiplier,
-                  const QStringList& synonyms = QStringList());
+    explicit Unit(QObject* parent, int id, double multiplier, const QString& symbol,
+                  const QString& description, const QString& match,
+                  const KLocalizedString& real, const KLocalizedString& integer);
+    explicit Unit(QObject* parent, int id, const Complex* complex, const QString& symbol,
+                  const QString& description, const QString& match,
+                  const KLocalizedString& real, const KLocalizedString& integer);
     virtual ~Unit();
     /**
      * @return translated name for unit.
      **/
-    QString singular() const;
-
-    /**
-     * @return translated name for unit (plural).
-     **/
-    QString plural() const;
+    QString description() const;
 
     /**
      * @return symbol for the unit.
@@ -99,7 +95,7 @@ private:
     Private* const d;
 };
 
-#define U(n, p, s, m, sy) (new Conversion::Unit(this, n, p, s, m, QStringList() sy))
+#define U(id, m, s, d, sy, r, i) (new Conversion::Unit(this, id, m, s, d, sy, r, i))
 
 } // Conversion namespace
 

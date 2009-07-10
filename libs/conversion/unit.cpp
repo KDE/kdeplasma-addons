@@ -19,6 +19,7 @@
 
 #include "unit.h"
 #include "unitcategory.h"
+#include <QTimer>
 #include <KLocale>
 #include <KDebug>
 
@@ -39,10 +40,11 @@ public:
         delete complex;
     };
 
-    QString singular;
-    QString plural;
     QString symbol;
+    QString description;
     double multiplier;
+    KLocalizedString real;
+    KLocalizedString integer;
     const Complex* complex;
 };
 
@@ -52,34 +54,40 @@ Unit::Unit(QObject* parent)
 {
 }
 
-Unit::Unit(QObject* parent, const QString& singular, const QString& plural, const QString& symbol,
-           double multiplier, const QStringList& synonyms)
+Unit::Unit(QObject* parent, int id, double multiplier, const QString& symbol,
+           const QString& description, const QString& match,
+           const KLocalizedString& real, const KLocalizedString& integer)
 : QObject(parent)
 , d(new Unit::Private)
 {
     UnitCategory* uc = category();
     if (uc) {
-        uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
+        uc->addUnitMapValues(this, match);
+        uc->addIdMapValue(this, id);
     }
     d->multiplier = multiplier;
-    d->singular = singular;
-    d->plural = plural;
+    d->real = real;
+    d->integer = integer;
     d->symbol = symbol;
+    d->description = description;
 }
 
-Unit::Unit(QObject* parent, const QString& singular, const QString& plural, const QString& symbol,
-           const Complex* complex, const QStringList& synonyms)
+Unit::Unit(QObject* parent, int id, const Complex* complex, const QString& symbol,
+           const QString& description, const QString& match,
+           const KLocalizedString& real, const KLocalizedString& integer)
 : QObject(parent)
 , d(new Unit::Private)
 {
     UnitCategory* uc = category();
     if (uc) {
-        uc->addUnitMapValues(this, QStringList() << singular << plural << symbol << synonyms);
+        uc->addUnitMapValues(this, match);
+        uc->addIdMapValue(this, id);
     }
     d->complex = complex;
-    d->singular = singular;
-    d->plural = plural;
+    d->real = real;
+    d->integer = integer;
     d->symbol = symbol;
+    d->description = description;
 }
 
 Unit::~Unit()
@@ -92,14 +100,9 @@ UnitCategory* Unit::category() const
     return dynamic_cast<UnitCategory*>(parent());
 }
 
-QString Unit::singular() const
+QString Unit::description() const
 {
-    return d->singular;
-}
-
-QString Unit::plural() const
-{
-    return d->plural;
+    return d->description;
 }
 
 QString Unit::symbol() const
@@ -137,16 +140,17 @@ double Unit::fromDefault(double value) const
 
 QString Unit::toString(double value) const
 {
-    if (value == 1.0) {
-        return singular();
+    if ((int)value == value) {
+        return d->integer.subs((int)value).toString();
     }
-    return plural();
+    return d->real.subs(value).toString();
 }
 
 bool Unit::isValid() const
 {
-    return !d->singular.isEmpty();
+    return !d->symbol.isEmpty();
 }
 
 }
 
+#include "unit.moc"

@@ -27,7 +27,8 @@ namespace Conversion
 class UnitCategory::Private
 {
 public:
-    Private()
+    Private() :
+        defaultUnit(0)
     {
     };
 
@@ -37,6 +38,7 @@ public:
     QString name;
     Unit* defaultUnit;
     QMap<QString, Unit*> unitMap;
+    QMap<int, Unit*> idMap;
     QString description;
     KUrl url;
 };
@@ -76,6 +78,14 @@ Conversion::Value UnitCategory::convert(const Conversion::Value& value, const QS
     return Value();
 }
 
+Conversion::Value UnitCategory::convert(const Conversion::Value& value, int toUnit)
+{
+    if (d->idMap.keys().contains(toUnit) && value.unit()->isValid()) {
+        return convert(value, d->idMap[toUnit]);
+    }
+    return Value();
+}
+
 Conversion::Value UnitCategory::convert(const Conversion::Value& value, const Unit* toUnit)
 {
     if (toUnit) {
@@ -85,60 +95,17 @@ Conversion::Value UnitCategory::convert(const Conversion::Value& value, const Un
     return Value();
 }
 
-void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const QString& plural,
-                             uint multiplier, double shift)
+void UnitCategory::addUnitMapValues(Unit* unit, const QString& names)
 {
-    static const QStringList prefixes = QStringList() <<
-            i18n("yotta") << i18n("zetta") << i18n("exa") << i18n("peta") << i18n("tera") <<
-            i18n("giga") << i18n("mega") << i18n("kilo") << i18n("hecto") << i18n("deca") <<
-            "" << i18n("deci") << i18n("centi") << i18n("milli") << i18n("micro") <<
-            i18n("nano") << i18n("pico") << i18n("femto") << i18n("atto") << i18n("zepto") <<
-            i18n("yocto");
-    static const QStringList symbols = QStringList() <<
-            "Y" << "Z" << "E" << "P" << "T" << "G" << "M" << "k" << "h" << "da" << "" << "d" <<
-            "c" << "m" << "\xb5" << "n" << "p" << "f" << "a" << "z" << "y";
-    static const QList<double> decimals = QList<double>() <<
-            1.0E+24 << 1.0E+21 << 1.0E+18 << 1.0E+15 << 1.0E+12 << 1.0E+9 << 1.0E+6 << 1.0E+3 <<
-            1.0E+2 << 1.0E+1 << 1.0 << 1.0E-1 << 1.0E-2 << 1.0E-3 << 1.0E-6 << 1.0E-9 <<
-            1.0E-12 << 1.0E-15 << 1.0E-18 << 1.0E-21 << 1.0E-24;
-
-    QString prefix;
-    QStringList suffixes;
-    switch (multiplier) {
-        case 2:
-            prefix = i18n("square ");
-            suffixes << "/-2" << "^2" << "2";
-            break;
-        case 3:
-            prefix = i18n("cubic ");
-            suffixes << "/-3" << "^3" << "3";
-            break;
-    }
-    for (int i = 0; i < prefixes.count(); ++i) {
-        QStringList list;
-        if (symbols[i] == "\xb5") {
-            list << 'u' + symbol;
-        }
-        foreach (const QString& suffix, suffixes) {
-            list << symbols[i] + symbol.left(symbol.length() - 1) + suffix;
-        }
-        double d = decimals[i] / shift;
-        for (uint j = 1; j < multiplier; ++j) {
-            d *= decimals[i];
-        }
-        Unit* u = new Unit(this, prefix + prefixes[i] + single, prefix + prefixes[i] + plural,
-                           symbols[i] + symbol, d, list);
-        if (prefixes[i].isEmpty()) {
-            setDefaultUnit(u);
-        }
+    QStringList list = names.split(';');
+    foreach (const QString& name, list) {
+        d->unitMap[name] = unit;
     }
 }
 
-void UnitCategory::addUnitMapValues(Unit* unit, const QStringList& names)
+void UnitCategory::addIdMapValue(Unit* unit, int id)
 {
-    foreach (const QString& name, names) {
-        d->unitMap[name] = unit;
-    }
+    d->idMap[id] = unit;
 }
 
 Unit* UnitCategory::unit(const QString& s) const

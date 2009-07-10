@@ -25,6 +25,14 @@
 class Area : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        SquareYottameter = 1000, SquareZettameter, SquareExameter, SquarePetameter, SquareTerameter,
+        SquareGigameter, SquareMegameter, SquareKilometer, SquareHectometer, SquareDecameter,
+        SquareMeter, SquareDecimeter, SquareCentimeter, SquareMillimeter, SquareMicrometer,
+        SquareNanometer, SquarePicometer, SquareFemtometer, SquareAttometer, SquareZeptometer,
+        SquareYoctometer, Acre, SquareFoot, SquareInch, SquareMile
+    };
+
     Area(QObject* parent = 0);
 };
 

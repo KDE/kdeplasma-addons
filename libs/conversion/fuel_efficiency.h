@@ -25,6 +25,10 @@
 class FuelEfficiency : public Conversion::UnitCategory
 {
 public:
+    enum Id {
+        LitersPer100Kilometers = 12000, MilePerUsGallon, MilePerImperialGallon, KilometrePerLitre
+    };
+
     FuelEfficiency(QObject* parent = 0);
 };
 

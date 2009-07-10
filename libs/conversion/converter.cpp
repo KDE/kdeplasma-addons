@@ -20,18 +20,6 @@
 #include "converter.h"
 #include "unit.h"
 
-#include "length.h"
-#include "area.h"
-#include "volume.h"
-#include "temperature.h"
-#include "velocity.h"
-#include "mass.h"
-#include "pressure.h"
-#include "energy.h"
-#include "currency.h"
-#include "power.h"
-#include "timeunit.h"
-#include "fuel_efficiency.h"
 #include <KGlobal>
 #include <KDebug>
 
@@ -74,6 +62,7 @@ Converter::Converter(QObject* parent)
     new Power(this);
     new Time(this);
     new FuelEfficiency(this);
+    new Density(this);
 }
 
 Converter::~Converter()
@@ -87,6 +76,15 @@ Converter* Converter::self()
 }
 
 Value Converter::convert(const Value& value, const QString& toUnit) const
+{
+    UnitCategory* category = value.unit()->category();
+    if (!category) {
+        return Value();
+    }
+    return category->convert(value, toUnit);
+}
+
+Value Converter::convert(const Value& value, int toUnit) const
 {
     UnitCategory* category = value.unit()->category();
     if (!category) {
