@@ -222,10 +222,9 @@ void WeatherApplet::setVisibleLayout(bool val)
     m_courtesyLabel->setVisible(val);
 }
 
-QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = true, bool degreesOnly = false)
+QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = false, bool degreesOnly = false)
 {
-    double val = value.toDouble();
-    double temp = WeatherUtils::convertTemperature(val, type, format);
+    double temp = WeatherUtils::convertTemperature(value.toDouble(), type, format);
 
     if (rounded) {
         int tempNumber = qRound(temp);
@@ -235,7 +234,7 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
             return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(format, false));
         }
     } else {
-        QString formattedTemp = (val - (int) val) ? QString::number(temp, 'f', 1) : QString::number((int) temp);
+        QString formattedTemp = QString::number(temp, 'f', 1);
         if (degreesOnly) {
             return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
         } else {
