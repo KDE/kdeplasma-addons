@@ -446,7 +446,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                 m_fiveDaysView->setModel(m_fiveDaysModel);
             }
             // If we have any items, display 5 Day tab, otherwise only details
-            m_tabBar->addTab(i18n("5 Days"), m_fiveDaysView);
+            int total = data["Total Weather Days"].toInt();
+            QString totalDays = QString("%1 %2").arg(total).arg(i18n("Days"));
+            m_tabBar->addTab(totalDays, m_fiveDaysView);
         }
     }
 
