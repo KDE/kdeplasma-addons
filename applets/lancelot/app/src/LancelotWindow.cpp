@@ -268,6 +268,14 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
             y = y - height();
             flip &= ~Plasma::VerticalFlip;
         }
+
+        if (m_showingFull) {
+            if (flip & Plasma::HorizontalFlip) {
+                x += sectionsWidth / 2;
+            } else {
+                x -= sectionsWidth / 2;
+            }
+        }
     } else {
         flip = Plasma::NoFlip;
 
