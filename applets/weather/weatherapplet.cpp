@@ -44,7 +44,7 @@
 
 template <typename T> T clampValue(T value, int decimals) 
 { 
-        const T mul = std::pow(10, decimals); return int(value * mul) / mul; 
+        const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul; 
 }
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
