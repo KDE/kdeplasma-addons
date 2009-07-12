@@ -152,7 +152,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
                 data["Wind Direction"].toString());
         m_lcd->setLabel("provider-label", data["Credit"].toString());
         m_url = data["Credit Url"].toString();
-        m_lcd->setItemClickable("label0", !m_url.isEmpty());
+        m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
 
         if (m_showToolTip) {
             Plasma::ToolTipContent ttc(data["Place"].toString(),
