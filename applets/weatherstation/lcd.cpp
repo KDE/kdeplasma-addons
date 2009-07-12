@@ -39,12 +39,13 @@ class LCD::Private
         // lcd numbers did not look good with that.
         KSvgRenderer svg;
         bool dirty;
+        bool xmlDirty;
         QPixmap img;
         QStringList items;
         QMap<QString, QStringList> groups;
-        QHash<QString, QColor> colors;
-        QHash<QString, QString> labels;
+        QHash<QString, QDomText> texts;
         QStringList clickable;
+        QDomDocument doc;
 
         static const QString A;
         static const QString B;
@@ -172,16 +173,12 @@ class LCD::Private
                 paint(&p, item);
             }
             p.restore();
-            foreach (const QString& label, labels.keys()) {
-                text(&p, label);
-            }
             dirty = false;
         }
 
         void parseXml()
         {
             QIODevice *device = KFilterDev::deviceForFile(content, "application/x-gzip");
-            QDomDocument doc;
 
             doc.setContent(device);
             QList<QDomNodeList> lists;
@@ -196,13 +193,22 @@ class LCD::Private
                     QString id = element.attribute("id");
                     if ((pos = id.lastIndexOf(':')) > -1) {
                         groups[id.left(pos)] << id.mid(pos + 1);
-                    } else if (element.tagName() == "rect") {
-                        if (rx.indexIn(element.attribute("style")) > -1) {
-                            colors[id] = QColor(rx.cap(1));
-                        }
                     }
                 }
             }
+            QDomNodeList list = doc.elementsByTagName("text");
+            for (int i = 0; i < list.count(); ++i) {
+                QDomElement element = list.item(i).toElement();
+                QDomNodeList l = element.elementsByTagName("tspan");
+                QDomElement e = l.item(0).toElement();
+                for (QDomNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                    QDomText t = n.toText();
+                    if (!t.isNull()) {
+                        texts[element.attribute("id")] = t;
+                    }
+                }
+            }
+
             //kDebug() << groups;
             delete device;
         }
@@ -221,35 +227,6 @@ class LCD::Private
                 result.setPointSizeF(result.pointSizeF() - 0.5);
             }
             return result;
-        }
-
-        void text(QPainter *p, const QString elementID)
-        {
-            QString text = labels[elementID];
-
-            if (svg.elementExists(elementID)) {
-                QRectF elementRect = scaledRect(elementID);
-                Qt::Alignment align = Qt::AlignCenter;
-
-                p->setPen(QPen(colors[elementID]));
-                p->setFont(fitText(p, text, elementRect));
-                if (elementRect.width() > elementRect.height()) {
-                    p->drawText(elementRect, align, text);
-                } else {
-                    p->save();
-                    QPointF rotateCenter(
-                            elementRect.left() + elementRect.width() / 2,
-                            elementRect.top() + elementRect.height() / 2);
-                    p->translate(rotateCenter);
-                    p->rotate(-90);
-                    p->translate(elementRect.height() / -2,
-                                elementRect.width() / -2);
-                    QRectF r(0, 0, elementRect.height(), elementRect.width());
-                    p->drawText(r, align, text);
-                    p->restore();
-                }
-                //p->drawRect(elementRect);
-            }
         }
 };
 
@@ -287,10 +264,9 @@ void LCD::setSvg(const QString &svg)
     } else {
         d->content = Plasma::Theme::defaultTheme()->imagePath(svg);
     }
-    d->svg.load(d->content);
     d->parseXml();
-    setPreferredSize(d->svg.defaultSize());
     d->dirty = true;
+    d->xmlDirty = true;
     update();
 }
 
@@ -304,6 +280,12 @@ void LCD::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *wi
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
+    if (d->xmlDirty) {
+        kDebug() << "XML dirty";
+        d->xmlDirty = false;
+        d->svg.load(d->doc.toByteArray(0));
+        setPreferredSize(d->svg.defaultSize());
+    }
     if (d->dirty || size().toSize() != d->img.size()) {
         d->updateImage();
     }
@@ -386,12 +368,15 @@ void LCD::setItemOff(const QString &name)
 
 void LCD::setLabel(const QString &name, const QString &text)
 {
-    d->labels[name] = text;
+    if (d->texts[name].data() != text) {
+        d->texts[name].setData(text);
+        d->xmlDirty = true;
+    }
 }
 
 QString LCD::label(const QString &name) const
 {
-    return d->labels[name];
+    return d->texts[name].data();
 }
 
 QPixmap LCD::toPixmap()
