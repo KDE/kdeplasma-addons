@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Weather
+Name[ar]=الطقس
 Name[ca]=Meteorologia
 Name[cs]=Počasí
 Name[da]=Vejr

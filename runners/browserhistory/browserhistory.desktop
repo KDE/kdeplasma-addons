@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Web Browser History
+Name[ar]=تاريخ متصفح الويب
 Name[ca]=Historial del navegador web
 Name[cs]=Historie prohlížeče
 Name[da]=Webbrowser-historik
@@ -32,7 +33,7 @@ Name[x-test]=xxWeb Browser Historyxx
 Name[zh_CN]=网页浏览器历史
 Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
-Comment[ar]=تبحث في تاريخ الكونيكور
+Comment[ar]=تبحث في تاريخ كنيكر
 Comment[ca]=Cerques a l'historial del Konqueror
 Comment[cs]=Vyhledávání v historii prohlížeče Konqueror
 Comment[da]=Søger i Konquerors historik.

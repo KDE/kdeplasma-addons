@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=System Load Viewer
+Name[ar]=عارض حمل النظام
 Name[ca]=Visor de la càrrega del sistema
 Name[cs]=Prohlížeč zátěže systému
 Name[da]=Systembelastningsviser
@@ -33,6 +34,7 @@ Name[x-test]=xxSystem Load Viewerxx
 Name[zh_CN]=系统负荷查看器
 Name[zh_TW]=系統負載檢視器
 Comment=Tiny CPU/RAM/Swap monitor
+Comment[ar]=مراقب المعالج/الذاكرة/التبديل
 Comment[ca]=Monitor petit de CPU/RAM/Memòria d'intercanvi
 Comment[cs]=Malý monitor CPU/RAM/Swap
 Comment[da]=Lillebitte CPU/RAM/swap-overvåger.

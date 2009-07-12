@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=wcpotd
 Icon=
 
 Name=Wcpotd Provider
+Name[ar]=المزود Wcpotd
 Name[ca]=Proveïdor Wcpotd
 Name[da]=Wcpotd-udbyder
 Name[de]=Wcpotd-Anbieter
@@ -35,6 +36,7 @@ Name[x-test]=xxWcpotd Providerxx
 Name[zh_CN]=Wcpotd 提供方
 Name[zh_TW]=Wcpotd 提供者
 Comment=Wcpotd Provider
+Comment[ar]=المزود Wcpotd
 Comment[ca]=Proveïdor Wcpotd
 Comment[da]=Wcpotd-udbyder.
 Comment[de]=Wcpotd-Anbieter

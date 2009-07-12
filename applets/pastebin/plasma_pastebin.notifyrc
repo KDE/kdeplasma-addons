@@ -15,6 +15,7 @@ Name[uk]=Вставлячка
 Name[x-test]=xxPastebinxx
 IconName=edit-paste
 Comment=Pastebin Widget
+Comment[ar]=ودجة سلة اللصق
 Comment[ca]=Estri Pastebin
 Comment[cs]=Pastebin applet
 Comment[da]=Pastebin-widget
@@ -50,6 +51,7 @@ Version=1
 
 [Event/urlcopied]
 Name=Copied pastebin link
+Name[ar]=وصلة سلطة اللصق منسوخة
 Name[ca]=Enllaç pastebin copiat
 Name[cs]=Pastebin odkaz zkopírován
 Name[da]=Kopieret pastebin-link
@@ -82,6 +84,7 @@ Name[x-test]=xxCopied pastebin linkxx
 Name[zh_CN]=已复制 pastebin 链接
 Name[zh_TW]=已複製 pastebin 連結
 Comment=The pastebin URL has been copied to the clipboard
+Comment[ar]=نسخت وصلة سلة اللصق إلى الحافظة.
 Comment[ca]=S'ha copiat l'URL de pastebin al porta-retalls
 Comment[cs]=Pastebin URL bylo zkopírováno do schránky
 Comment[da]=Pastebin-URL'en er blevet kopieret til udklipsholderen.

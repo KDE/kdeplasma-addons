@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Konqueror Sessions
-Name[ar]=جلسات الكونكيور
+Name[ar]=جلسات كنكير
 Name[ca]=Sessions del Konqueror
 Name[cs]=Relace Konqueroru
 Name[da]=Konqueror-sessioner
@@ -45,7 +45,7 @@ Name[x-test]=xxKonqueror Sessionsxx
 Name[zh_CN]=Konqueror 会话
 Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
-Comment[ar]=تطابق جلسات الكونكيور
+Comment[ar]=تطابق جلسات كنكير
 Comment[ca]=Coincideix amb les sessions del Konqueror
 Comment[cs]=Vyhledávání v relacích Konqueroru
 Comment[da]=Matcher Konqueror-sessioner.

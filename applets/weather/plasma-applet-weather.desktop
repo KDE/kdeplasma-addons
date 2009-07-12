@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Weather Forecast
+Name[ar]=تنبؤات الطقس
 Name[ca]=Previsió meteorològica
 Name[cs]=Předpověď počasí
 Name[da]=Vejrudsigt
@@ -35,6 +36,7 @@ Name[x-test]=xxWeather Forecastxx
 Name[zh_CN]=天气预报
 Name[zh_TW]=氣象預報
 Comment=Displays Weather information
+Comment[ar]=تعرض معلومات الطقس
 Comment[ca]=Mostra informació meteorològica
 Comment[cs]=Zobrazuje informace o počasí
 Comment[da]=Viser vejrinformation.

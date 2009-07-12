@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Media Player
+Name[ar]=مشغل وسائط
 Name[ca]=Reproductor Multimèdia
 Name[cs]=Přehrávač médií
 Name[da]=Medieafspiller
@@ -29,6 +30,7 @@ Name[x-test]=xxMedia Playerxx
 Name[zh_CN]=媒体播放器
 Name[zh_TW]=媒體播放器
 Comment=Widget that can play video and sound
+Comment[ar]=ودجة تستطيع أن تشغل الصوت و الفيديو
 Comment[ca]=Estri que permet reproduir vídeos i so.
 Comment[cs]=Applet přehrávající video a zvuk
 Comment[da]=Widget der kan afspille video og lyd.
