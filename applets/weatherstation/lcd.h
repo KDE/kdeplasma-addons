@@ -139,14 +139,15 @@ public:
      * Reimplemented from QGraphicsWidget
      */
     void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    
+
 signals:
     void clicked(const QString &name);
 
 protected:
     virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-    
+    virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+
 private:
     class Private;
     Private * const d;

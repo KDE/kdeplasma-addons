@@ -45,13 +45,17 @@ void WeatherStation::init()
 {
     m_lcd = new LCD(this);
     m_lcd->setSvg("weatherstation/lcd");
+    // i18n: This and other all-caps messages are pieces of text shown on
+    // an LCD-like image mimicking a electronic weather station display.
+    // If weather station displays in your country are always in English,
+    // you may want to consider leaving these strings in English too,
+    // to achieve a more realistic feeling.
     m_lcd->setLabel("pressure-label", i18n("PRESSURE"));
     m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
     m_lcd->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
     m_lcd->setLabel("humidity-label", i18n("HUMIDITY"));
     m_lcd->setLabel("wind-label", i18n("WIND"));
-    // So we don't show in panel
-    m_lcd->setMinimumSize(m_lcd->preferredSize() / 2);
+    m_lcd->setLabel("provider-label", QString());
     connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
 
     m_lcdPanel = new LCD(this);

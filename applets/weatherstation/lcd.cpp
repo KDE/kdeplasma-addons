@@ -150,30 +150,38 @@ class LCD::Private
             return r;
         }
 
-        void updateImage()
+        void checkIfDirty()
         {
-            if (l->size().toSize() != img.size()) {
-                img = QPixmap(l->size().toSize());
+            if (xmlDirty) {
+                //kDebug() << "xml dirty";
+                svg.load(doc.toByteArray(0));
+                xmlDirty = false;
             }
-            img.fill(Qt::transparent);
+            if (dirty || (l->size().toSize() != img.size() && l->size().toSize() != QSize(0, 0))) {
+                //kDebug() << "Making bitmap" << l->size();
+                if (l->size().toSize() != img.size()) {
+                    img = QPixmap(l->size().toSize());
+                }
+                img.fill(Qt::transparent);
 
-            QPainter p(&img);
+                QPainter p(&img);
 
-            xScale = l->size().width() / svg.defaultSize().width();
-            yScale = l->size().height() / svg.defaultSize().height();
-            p.setRenderHint(QPainter::TextAntialiasing, true);
-            p.setRenderHint(QPainter::Antialiasing, true);
-            p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+                xScale = l->size().width() / svg.defaultSize().width();
+                yScale = l->size().height() / svg.defaultSize().height();
+                p.setRenderHint(QPainter::TextAntialiasing, true);
+                p.setRenderHint(QPainter::Antialiasing, true);
+                p.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
-            p.save();
-            p.scale(l->size().width() / svg.defaultSize().width(),
-                    l->size().height() / svg.defaultSize().height());
+                p.save();
+                p.scale(l->size().width() / svg.defaultSize().width(),
+                        l->size().height() / svg.defaultSize().height());
 
-            foreach (const QString& item, items) {
-                paint(&p, item);
+                foreach (const QString& item, items) {
+                    paint(&p, item);
+                }
+                p.restore();
+                dirty = false;
             }
-            p.restore();
-            dirty = false;
         }
 
         void parseXml()
@@ -280,15 +288,7 @@ void LCD::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *wi
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
-    if (d->xmlDirty) {
-        kDebug() << "XML dirty";
-        d->xmlDirty = false;
-        d->svg.load(d->doc.toByteArray(0));
-        setPreferredSize(d->svg.defaultSize());
-    }
-    if (d->dirty || size().toSize() != d->img.size()) {
-        d->updateImage();
-    }
+    d->checkIfDirty();
     p->drawPixmap(0, 0, d->img);
 }
 
@@ -381,9 +381,7 @@ QString LCD::label(const QString &name) const
 
 QPixmap LCD::toPixmap()
 {
-    if (d->dirty || size().toSize() != d->img.size()) {
-        d->updateImage();
-    }
+    d->checkIfDirty();
     return d->img;
 }
 
@@ -414,6 +412,20 @@ void LCD::mousePressEvent(QGraphicsSceneMouseEvent* event)
             emit clicked(name);
         }
     }
+}
+
+QSizeF LCD::sizeHint(Qt::SizeHint which, const QSizeF& constraint) const
+{
+    QSizeF s = QGraphicsWidget::sizeHint(which, constraint);
+    d->checkIfDirty();
+    if (which == Qt::PreferredSize) {
+        s = d->svg.defaultSize();
+    } else if (which == Qt::MinimumSize) {
+        s = d->svg.defaultSize() / 2;
+    } else {
+        s = QGraphicsWidget::sizeHint(which, constraint);
+    }
+    return s;
 }
 
 #include "lcd.moc"
