@@ -308,12 +308,29 @@ void Global::Private::createConfTheme()
     QString search = "desktoptheme/" +
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/" + app + "theme.config";
-
     QString path =  KStandardDirs::locate( "data", search );
+    qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
+
+    // if we didn't find the theme specific for this application
+    // we'll use the main theme file
+    if (path.isEmpty()) {
+        search = "desktoptheme/" +
+            Plasma::Theme::defaultTheme()->themeName()
+            + "/lancelot/theme.config";
+        path =  KStandardDirs::locate( "data", search );
+        qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
+    }
+
+    // if the above fails, we are loading the default theme's
+    // file
     if (path.isEmpty()) {
         search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
+        qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
     }
+
+    // this doesn't really do anything useful
+    // TODO: remove later
     if (path.isEmpty()) {
         path = "lancelotrc";
     }
