@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Aaron Seigo <aseigo@kde.org>
+ *   Copyright 2009 Ryan P. Bitanga <ryan.bitanga@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,7 +20,7 @@
 
 #include "timelinesource.h"
 
-#include <QBuffer>
+#include <QXmlStreamReader>
 
 #include <KIO/Job>
 
@@ -86,6 +87,12 @@ TimelineSource::TimelineSource(const QString &who, RequestType requestType, QObj
     switch (requestType) {
     case Profile:
         m_url = KUrl(m_serviceBaseUrl, QString("users/show/%1.xml").arg(account.at(0)));
+        break;
+    case DirectMessages:
+        m_url = KUrl(m_serviceBaseUrl, "direct_messages.xml");
+        break;
+    case Replies:
+        m_url = KUrl(m_serviceBaseUrl, "statuses/replies.xml");
         break;
     case TimelineWithFriends:
         m_url = KUrl(m_serviceBaseUrl, "statuses/friends_timeline.xml");
@@ -172,12 +179,8 @@ void TimelineSource::result(KJob *job)
         // TODO: error handling
     } else {
         //kDebug() << "done!" << data().count() << m_xml;
-        QXmlSimpleReader reader;
-        reader.setContentHandler(this);
-        reader.setErrorHandler(this);
-        QBuffer input(&m_xml);
-        QXmlInputSource source(&input);
-        reader.parse(&source, false);
+        QXmlStreamReader reader(m_xml);
+        parse(reader);
         //kDebug() << "parsing through .." << data().count();
     }
 
@@ -186,84 +189,185 @@ void TimelineSource::result(KJob *job)
     m_job = 0;
 }
 
-bool TimelineSource::startElement(const QString &namespaceURI, const QString &localName,
-                                  const QString &qName, const QXmlAttributes &atts)
+void TimelineSource::parse(QXmlStreamReader &xml)
 {
-    Q_UNUSED(namespaceURI)
-    Q_UNUSED(qName)
-    Q_UNUSED(atts)
+    while (!xml.atEnd()) {
+        xml.readNext();
 
-    QString tag = localName.toLower();
-    if (tag == "status") {
+        if (xml.isStartElement()) {
+            QString tag = xml.name().toString().toLower();
+
+            if (tag == "status") {
+                readStatus(xml);
+            } else if (tag == "user") {
+                readUser(xml);
+            } else if (tag == "direct_message") {
+                readDirectMessage(xml);
+            }
+        }
+    }
+
+    if (xml.hasError()) {
+        kWarning() << "Fatal error on line" << xml.lineNumber()
+                   << ", column" << xml.columnNumber() << ":"
+                   << xml.errorString();
         m_tempData.clear();
         m_id.clear();
     }
-
-    return true;
 }
 
-bool TimelineSource::endElement(const QString &namespaceURI, const QString &localName, const QString &qName)
+void TimelineSource::readStatus(QXmlStreamReader &xml)
 {
-    Q_UNUSED(namespaceURI)
-    Q_UNUSED(qName)
-
-    QString tag = localName.toLower();
-
-    m_cdata = m_cdata.trimmed();
-
-    if (tag == "status") {
-        if (!m_id.isEmpty()) {
-            QVariant v;
-            v.setValue(m_tempData);
-            //kDebug() << "setting data" << m_id << v;
-            setData(m_id, v);
-            m_id.clear();
-        }
-
-        m_tempData.clear();
-    //if id is not empty we are in the id of the user, ignoring it
-    } else if (tag == "id" && m_id.isEmpty()) {
-        m_id = m_cdata;
-    } else if (tag == "text") {
-        m_tempData["Status"] = m_cdata;
-    } else if (tag == "profile_image_url") {
-        m_tempData["ImageUrl"] = m_cdata;
-        if (m_tempData.contains("User")) {
-
-            KUrl url(m_cdata);
-            m_imageSource->loadImage(m_tempData["User"].toString(), url);
-        }
-    } else if (tag == "screen_name") {
-        m_tempData["User"] = m_cdata;
-        if (m_tempData.contains("ImageUrl")) {
-            KUrl url(m_tempData["ImageUrl"].toString());
-            m_imageSource->loadImage(m_cdata, url);
-        }
-    } else if (tag == "source") {
-        m_tempData["Source"] = m_cdata;
-    } else if (tag == "url") {
-        m_tempData["Url"] = m_cdata;
-    } else if (tag == "created_at" && m_id.isEmpty()) {
-        m_tempData["Date"] = m_cdata;
-    }
-    m_cdata.clear();
-    return true;
-}
-
-bool TimelineSource::characters(const QString &ch)
-{
-    m_cdata.append(ch);
-    return true;
-}
-
-bool TimelineSource::fatalError(const QXmlParseException &exception)
-{
-    kWarning() << "Fatal error on line" << exception.lineNumber()
-               << ", column" << exception.columnNumber() << ":"
-               << exception.message();
     m_tempData.clear();
-    m_id.clear();
-    return false;
+
+    //kDebug() << "- BEGIN STATUS -" << endl;
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        QString tag = xml.name().toString().toLower();
+
+        if (xml.isEndElement() && tag == "status") {
+            break;
+        }
+
+        if (xml.isStartElement()) {
+            QString cdata;
+
+            if (tag == "user") {
+                readUser(xml);
+            } else {
+                cdata = xml.readElementText().trimmed();
+            }
+
+            if (tag == "created_at") {
+                m_tempData["Date"] = cdata;
+            } else if (tag == "id") {
+                m_id = cdata;
+            } else if (tag == "text") {
+                m_tempData["Status"] = cdata;
+            } else if (tag == "source") {
+                m_tempData["Source"] = cdata;
+            } else if (tag == "favorited") {
+                m_tempData["IsFavorite"] = cdata;
+            }
+        }
+    }
+
+    //kDebug() << "- END STATUS -" << endl;
+
+    if (!m_id.isEmpty()) {
+        QVariant v;
+        v.setValue(m_tempData);
+        //kDebug() << "setting data" << m_id << v;
+        setData(m_id, v);
+        m_id.clear();
+    }
+
+    m_tempData.clear();
+}
+
+void TimelineSource::readUser(QXmlStreamReader &xml, const QString &tagName)
+{
+    //kDebug() << "- BEGIN USER -" << endl;
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        QString tag = xml.name().toString().toLower();
+
+        if (xml.isEndElement() && tag == tagName) {
+            break;
+        }
+
+        if (xml.isStartElement()) {
+            QString cdata;
+
+            if (tag == "status") {
+                readStatus(xml);
+            } else {
+                cdata = xml.readElementText().trimmed();
+            }
+
+            if (tag == "screen_name") {
+                m_tempData["User"] = cdata;
+                if (m_tempData.contains("ImageUrl")) {
+                    KUrl url(m_tempData["ImageUrl"].toString());
+                    m_imageSource->loadImage(cdata, url);
+                }
+            } else if (tag == "profile_image_url") {
+                m_tempData["ImageUrl"] = cdata;
+                if (m_tempData.contains("User")) {
+                    KUrl url(cdata);
+                    m_imageSource->loadImage(m_tempData["User"].toString(), url);
+                }
+            } else if (tag ==  "url") {
+                m_tempData["Url"] = cdata;
+            }
+        }
+    }
+
+    //kDebug() << "- END USER -" << endl;
+}
+
+void TimelineSource::readDirectMessage(QXmlStreamReader &xml)
+{
+    m_tempData.clear();
+
+    //kDebug() << "- BEGIN DIRECT MESSAGE -" << endl;
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        QString tag = xml.name().toString().toLower();
+
+        if (xml.isEndElement() && tag == "direct_message") {
+            break;
+        }
+
+        if (xml.isStartElement()) {
+            QString cdata;
+
+            // Use nested sender user data for avatar and ignore recipient
+            if (tag == "sender") {
+                readUser(xml, "sender");
+            } else if (tag == "recipient") {
+                skipTag(xml, "recipient");
+            } else {
+                cdata = xml.readElementText().trimmed();
+            }
+
+            if (tag == "created_at") {
+                m_tempData["Date"] = cdata;
+            } else if (tag == "id") {
+                m_id = cdata;
+            } else if (tag == "text") {
+                m_tempData["Status"] = cdata;
+            }
+        }
+    }
+
+    //kDebug() << "- END DIRECT MESSAGE -" << endl;
+
+    if (!m_id.isEmpty()) {
+        QVariant v;
+        v.setValue(m_tempData);
+        //kDebug() << "setting data" << m_id << v;
+        setData(m_id, v);
+        m_id.clear();
+    }
+
+    m_tempData.clear();
+}
+
+void TimelineSource::skipTag(QXmlStreamReader &xml, const QString &tagName)
+{
+    while (!xml.atEnd()) {
+        xml.readNext();
+        if (xml.isEndElement() && xml.name() == tagName) {
+            return;
+        }
+    }
 }
 
 void TimelineSource::setImageSource(ImageSource *source)

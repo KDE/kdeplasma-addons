@@ -1,5 +1,6 @@
 /*
  *   Copyright 2008 Aaron Seigo <aseigo@kde.org>
+ *   Copyright (C) 2009 Ryan P. Bitanga <ryan.bitanga@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -22,7 +23,6 @@
 
 #include <QList>
 #include <QPair>
-#include <QXmlDefaultHandler>
 
 #include <KUrl>
 
@@ -31,6 +31,8 @@
 #include <Plasma/ServiceJob>
 
 // forward declarations
+class QXmlStreamReader;
+
 class KJob;
 
 namespace KIO
@@ -70,7 +72,7 @@ private:
     TimelineSource *m_source;
 };
 
-class TimelineSource : public Plasma::DataContainer, QXmlDefaultHandler
+class TimelineSource : public Plasma::DataContainer
 {
     Q_OBJECT
 
@@ -78,6 +80,8 @@ public:
     enum RequestType {
         Timeline = 0,
         TimelineWithFriends,
+        Replies,
+        DirectMessages,
         Profile
     };
 
@@ -92,11 +96,6 @@ public:
 
     Plasma::Service *createService();
 
-    bool startElement(const QString &namespaceURI, const QString & localName,
-                      const QString &qName, const QXmlAttributes &atts);
-    bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
-    bool characters(const QString &ch);
-    bool fatalError(const QXmlParseException & exception);
     ImageSource *imageSource() const;
     void setImageSource(ImageSource *);
 
@@ -105,15 +104,19 @@ private slots:
     void result(KJob*);
 
 private:
+    void parse(QXmlStreamReader &xml);
+    void readStatus(QXmlStreamReader &xml);
+    void readUser(QXmlStreamReader &xml, const QString &tagName = "user");
+    void readDirectMessage(QXmlStreamReader &xml);
+    void skipTag(QXmlStreamReader &xml, const QString &tagName);
+
     KUrl m_url;
     KUrl m_serviceBaseUrl;
     ImageSource *m_imageSource;
     QByteArray m_xml;
-    QString m_cdata;
     Plasma::DataEngine::Data m_tempData;
     KIO::Job * m_job;
     QString m_id;
 };
 
 #endif
-

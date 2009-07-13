@@ -67,9 +67,11 @@ class TwitterEngine : public Plasma::DataEngine
         bool updateSourceEvent(const QString &name);
 
     private:
-	static const QString timelinePrefix;
-	static const QString timelineWithFriendsPrefix;
-	static const QString profilePrefix;
+        static const QString timelinePrefix;
+        static const QString timelineWithFriendsPrefix;
+        static const QString profilePrefix;
+        static const QString repliesPrefix;
+        static const QString messagesPrefix;
         ImageSource *m_imageSource;
 
 };

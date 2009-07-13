@@ -21,9 +21,6 @@
 #include "twitterengine.h"
 
 #include <QDateTime>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
 #include <QImage>
 #include <QPixmap>
 
@@ -37,6 +34,8 @@
 const QString TwitterEngine::timelinePrefix("Timeline:");
 const QString TwitterEngine::timelineWithFriendsPrefix("TimelineWithFriends:");
 const QString TwitterEngine::profilePrefix("Profile:");
+const QString TwitterEngine::repliesPrefix("Replies:");
+const QString TwitterEngine::messagesPrefix("Messages:");
 
 TwitterEngine::TwitterEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
@@ -56,7 +55,9 @@ bool TwitterEngine::sourceRequestEvent(const QString &name)
         return true;
     }
 
-    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)  && !name.startsWith(profilePrefix)) {
+    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
+        && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
+        && !name.startsWith(messagesPrefix)) {
         return false;
     }
 
@@ -81,12 +82,14 @@ Plasma::Service* TwitterEngine::serviceForSource(const QString &name)
 //called when it's time to update a source
 //also called by twitter from sourceRequested
 //and when it thinks an update would be useful
-//always returns false becaues everything is async
+//always returns false because everything is async
 bool TwitterEngine::updateSourceEvent(const QString &name)
 {
     //kDebug() << name;
     //right now it only makes sense to do an update on timelines
-    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix) && !name.startsWith(profilePrefix)) {
+    if (!name.startsWith(timelinePrefix) && !name.startsWith(timelineWithFriendsPrefix)
+        && !name.startsWith(profilePrefix) && !name.startsWith(repliesPrefix)
+        && !name.startsWith(messagesPrefix)) {
         return false;
     }
 
@@ -99,7 +102,13 @@ bool TwitterEngine::updateSourceEvent(const QString &name)
     } else if (name.startsWith(profilePrefix)) {
         requestType = TimelineSource::Profile;
         who.remove(profilePrefix);
-    }else{
+    } else if (name.startsWith(repliesPrefix)) {
+        requestType = TimelineSource::Replies;
+        who.remove(repliesPrefix);
+    } else if (name.startsWith(messagesPrefix)) {
+        requestType = TimelineSource::DirectMessages;
+        who.remove(messagesPrefix);
+    } else {
         requestType = TimelineSource::Timeline;
         who.remove(timelinePrefix);
     }
