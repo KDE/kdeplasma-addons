@@ -27,11 +27,25 @@ Area::Area(QObject* parent)
     setName(i18n("Area"));
 
     U(Area::SquareYottameter, 1e+48,
+      // i18n: Used when unit symbol is needed.
       i18nc("area unit symbol", "Ym²"),
+      // i18n: unit as it will be shown to user wherever units are to
+      // be explicitly selected (listbox, radio buttons, checkboxes...).
+      // E.g. an application may give option "Unit of wind speed: [unit-list-box]"
       i18nc("unit description in lists", "square yottameters"),
+      // i18n: Messages such as this one provide synonyms for each unit,
+      // in order to guess the unit from the text that the user inputs.
+      // Synonyms are semicolon-separated, and you can add as many as
+      // you need (either equal to, more, or less than in the original).
+      // Note that any gramatical inflections of unit names
+      // (such as plural and cases) should also be listed.
       i18nc("unit synonyms for matching user input",
             "square yottameter;square yottameters;Ym²;Ym/-2;Ym^2;Ym2"),
+      // i18n: This is used when a real-valued amount in units is given,
+      // such as "0.37 miles".
       ki18nc("amount in units (real)", "%1 square yottameters"),
+      // i18n: This is used when a integer-valued amount in units is given,
+      // such as "1 mile" or "21 miles".
       ki18ncp("amount in units (integer)", "%1 square yottameter", "%1 square yottameters")
     );
     U(Area::SquareZettameter, 1e+42,
