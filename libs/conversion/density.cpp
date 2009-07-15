@@ -248,7 +248,7 @@ Density::Density(QObject* parent)
       ki18nc("amount in units (real)", "%1 ounces per cubic inch"),
       ki18ncp("amount in units (integer)", "%1 ounce per cubic inch", "%1 ounces per cubic inch")
     );
-    U(Density::OuncePerCubicFoot, 1.00115,
+    U(Density::OuncePerCubicYard, 1.00115,
       i18nc("density unit symbol", "lb/yd³"),
       i18nc("unit description in lists", "ounces per cubic yard"),
       i18nc("unit synonyms for matching user input",
