@@ -117,6 +117,8 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
 {
     comicSettings = new QWidget();
     comicUi.setupUi( comicSettings );
+    comicUi.pushButton_GHNS->setIcon( KIcon( "get-hot-new-stuff" ) );
+    comicUi.pushButton_GHNS_2->setIcon( KIcon( "get-hot-new-stuff" ) );
 
     appearanceSettings = new QWidget();
     appearanceUi.setupUi( appearanceSettings );
