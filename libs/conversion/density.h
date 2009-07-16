@@ -34,8 +34,9 @@ public:
         CentikilogramsPerCubicMeter, MillikilogramsPerCubicMeter, MicrokilogramsPerCubicMeter,
         NanokilogramsPerCubicMeter, PicokilogramsPerCubicMeter, FemtokilogramsPerCubicMeter,
         AttokilogramsPerCubicMeter, ZeptokilogramsPerCubicMeter, YoctokilogramsPerCubicMeter,
-        KilogramPerLiter, GramPerLiter, GramPerMilliliter, OuncePerCubicYard,
-        OuncePerCubicInch, OuncePerCubicFoot, PoundPerCubicInch, PoundPerCubicFoot, PoundPerCubicYard
+        KilogramPerLiter, GramPerLiter, GramPerMilliliter,
+		OuncePerCubicInch, OuncePerCubicFoot, OuncePerCubicYard,
+        PoundPerCubicInch, PoundPerCubicFoot, PoundPerCubicYard
     };
 
     Density(QObject* parent = 0);
