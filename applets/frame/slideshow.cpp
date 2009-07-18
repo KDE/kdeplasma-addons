@@ -34,6 +34,10 @@ SlideShow::SlideShow(QObject *parent)
     m_slideNumber = 0;
     m_useRandom = false;
     m_randomInt = 0;
+
+    m_picture = new Picture(this);
+    connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
+
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(updatePicture()));
 }
@@ -49,7 +53,7 @@ void SlideShow::setRandom(bool useRandom)
 
 void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 {
-    m_picture = QImage();
+    m_image = QPixmap();
     m_picturePaths.clear();
     foreach(const QString &path, slideShowPath) {
         if (recursive) {
@@ -62,7 +66,7 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 
 void SlideShow::setImage(const QString &imagePath)
 {
-    m_picture = QImage();
+    m_image = QPixmap();
     m_picturePaths.clear();
     addImage(imagePath);
     m_currentUrl = url();
@@ -110,21 +114,15 @@ void SlideShow::addRecursiveDir(const QString &path)
     }
 }
 
-QImage SlideShow::image()
+QPixmap SlideShow::image()
 {
-    if (m_picture.isNull()) {
-        //kDebug() << m_currentUrl;
-        Picture myPicture;
-        m_picture = myPicture.setPicture(m_currentUrl);
-        // we'll clear the image after a few seconds, but this allows
-        // the applet to do it's business without reloading the picture
-        // over and over in the meantime
-        if (!m_timer->isActive() || m_timer->interval() > 5000) {
-            QTimer::singleShot(5000, this, SLOT(clearPicture()));
-        }
+    if (m_image.isNull() || m_currentUrl != m_picture->url()) {
+        kDebug() << "reloading from Picture" << m_currentUrl;
+        //m_currentUrl = m_picture->url();
+        m_picture->setPicture(m_currentUrl);
     }
-
-    return m_picture;
+    kDebug();
+    return m_image;
 }
 
 KUrl SlideShow::url()
@@ -141,7 +139,7 @@ KUrl SlideShow::url()
 
         return KUrl(m_picturePaths.at(index));
     } else {
-        return KUrl("Default");
+        return KUrl();
     }
 }
 
@@ -154,8 +152,8 @@ void SlideShow::setUpdateInterval(int msec)
 {
     m_timer->stop();
     if (msec > 1) {
-	if (m_currentUrl.isEmpty()) {
-	    m_currentUrl = url();
+        if (m_currentUrl.isEmpty()) {
+            m_currentUrl = url();
         }
         m_timer->start(msec);
     }
@@ -164,24 +162,35 @@ void SlideShow::setUpdateInterval(int msec)
 void SlideShow::updatePicture()
 {
     m_currentUrl = url();
-    m_picture = QImage();
+    m_image = image();
+    emit pictureUpdated();
+}
+
+QString SlideShow::message()
+{
+    return m_picture->message();
+}
+
+void SlideShow::pictureLoaded(QPixmap image)
+{
+    m_image = image;
     emit pictureUpdated();
 }
 
 void SlideShow::clearPicture()
 {
-    m_picture = QImage();
+    m_image = QPixmap();
 }
 
 void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(name)
     if (data.isEmpty()) {
-        m_picture = QImage();
+        m_image = QPixmap();
         return;
     }
 
-    m_picture = data[0].value<QImage>();
+    m_image = data[0].value<QPixmap>();
     emit pictureUpdated();
 }
 

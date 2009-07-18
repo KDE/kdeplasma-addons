@@ -24,6 +24,8 @@
 #include <QImage>
 
 #include <KUrl>
+#include <KIO/StoredTransferJob>
+#include <KDirWatch>
 
 /**
  * @brief Picture choice
@@ -33,27 +35,41 @@
  * makes it ready for the Frame class to paint this picture.
  */
 
-class Picture
+class Picture : public QObject
 {
+    Q_OBJECT
+
 public:
-    Picture();
+    explicit Picture(QObject *parent);
     ~Picture();
     /**
     * Set Default picture with written message @p message if no picture or folder was chosen
     * by the user
     **/
-    QImage defaultPicture(const QString &message);
+    QPixmap defaultPicture(const QString &message);
     /**
     * Set picture from location @p currentUrl
     **/
-    QImage setPicture(const KUrl &currentUrl);
+    void setPicture(const KUrl &currentUrl);
+    QPixmap correctRotation(QPixmap tempImage, const QString &path);
+    KIO::StoredTransferJob * m_job;
+    KUrl url();
+    QString message();
+
+Q_SIGNALS:
+    void pictureLoaded(QPixmap image);
+
+private Q_SLOTS:
+    void slotFinished(KJob *job);
+    void reload();
 
 private:
-    QImage getPicture() const {
-        return m_picture;
-    };
-    QImage m_picture;
-
+    void setPath(const QString &path);
+    KUrl m_currentUrl;
+    QString m_path; // The local path of the image on disk
+    KDirWatch *m_fileWatch;
+    QString m_message;
+    QString m_defaultImage;
 };
 
 

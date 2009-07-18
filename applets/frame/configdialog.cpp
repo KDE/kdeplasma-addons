@@ -28,6 +28,9 @@
 ConfigDialog::ConfigDialog(QWidget *parent)
         : QObject(parent)
 {
+    m_picture = new Picture(this);
+    connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
+
     appearanceSettings = new QWidget();
     appearanceUi.setupUi(appearanceSettings);
 
@@ -118,22 +121,25 @@ KUrl ConfigDialog::currentUrl() const
     return imageUi.picRequester->url();
 }
 
-void ConfigDialog::previewPicture(const QImage &image)
+void ConfigDialog::previewPicture(const QPixmap &image)
 {
-    QImage scaledImage = image.scaled(QRect(23, 14, 151, 115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
-    m_preview->setPixmap(QPixmap::fromImage(scaledImage));
+    QPixmap scaledImage = image.scaled(QRect(23, 14, 151, 115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    m_preview->setPixmap(scaledImage);
 }
 
 void ConfigDialog::changePreview(const KUrl &path)
 {
-    Picture myPicture;
-    previewPicture(myPicture.setPicture(path));
+    m_picture->setPicture(path);
+}
+
+void ConfigDialog::pictureLoaded(QPixmap image)
+{
+    previewPicture(image);
 }
 
 void ConfigDialog::changePreview(const QString &path)
 {
-    Picture myPicture;
-    previewPicture(myPicture.setPicture(KUrl(path)));
+    m_picture->setPicture(KUrl(path));
 }
 
 void ConfigDialog::setSmoothScaling(bool smooth)

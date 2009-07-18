@@ -23,6 +23,8 @@
 #include "ui_imageSettings.h"
 #include "ui_appearanceSettings.h"
 
+#include "picture.h"
+
 class ConfigDialog : public QObject
 {
     Q_OBJECT
@@ -58,15 +60,18 @@ public:
     QWidget *appearanceSettings;
     /// Image Preview
     /// Allow to preview each new chosen picture
-    void previewPicture(const QImage &pix);
+    void previewPicture(const QPixmap &pix);
 
 private slots:
     /// Update preview when URL changes via the file dialog
     void changePreview(const KUrl &);
     /// Update preview when URL changes via the combobox
     void changePreview(const QString &);
+    /// The image is loaded, update the preview
+    void pictureLoaded(QPixmap image);
 
 private:
+    Picture *m_picture;
     QLabel *m_preview;
 };
 

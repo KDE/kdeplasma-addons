@@ -63,7 +63,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     if (args.count()) {
         m_currentUrl = args.value(0).toString();
     } else {
-        m_currentUrl = KUrl("Default");
+        m_currentUrl = KUrl();
     }
 }
 
@@ -109,12 +109,12 @@ void Frame::init()
     }
 
     m_menuPresent = false;
-    updateMenu();
 }
 
 void Frame::updateMenu()
 {
-    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || m_currentUrl.path() == "Default")) {
+    bool invalidPicture = (m_currentUrl.url() == "Default") && (m_mySlideShow->currentUrl() == "Default");
+    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || invalidPicture)) {
         kDebug() << "Current url: " << m_currentUrl.url();
         m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
         m_actions.append(m_openPicture);
@@ -170,47 +170,193 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             resize(contentSizeHint());
             emit appletTransformedItself();
         }
-
-        updatePicture();
+        m_dirty = true;
     }
 
     if (constraints & Plasma::SizeConstraint) {
         //If on panel, keep geometry to 4:3 ratio
         if(formFactor() == Plasma::Vertical) {
-            setMinimumSize(QSizeF(0, boundingRect().width()/1.33));
-            setMaximumSize(QSizeF(-1, boundingRect().width()/1.33));
+            setMinimumSize(QSizeF(0, contentsRect().width()/1.33));
+            setMaximumSize(QSizeF(-1, contentsRect().width()/1.33));
         } else if(formFactor() == Plasma::Horizontal) {
-            setMinimumSize(QSizeF(boundingRect().height()*1.33,0));
-            setMaximumSize(QSizeF(boundingRect().height()*1.33,-1));
+            setMinimumSize(QSizeF(contentsRect().height()*1.33,0));
+            setMaximumSize(QSizeF(contentsRect().height()*1.33,-1));
         } else {
-            setMinimumSize(QSizeF());
+            int min = 22;
+            if (m_shadow) {
+                min += m_swOutline;
+            }
+            if (m_frame) {
+                min += m_frameOutline;
+            }
+            setMinimumSize(QSizeF(min, min));
             setMaximumSize(QSizeF());
         }
+        m_dirty = true;
     }
 }
 
 QSizeF Frame::contentSizeHint() const
 {
     if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
-        const qreal maxSize = geometry().width() > geometry().height() ? geometry().width() : geometry().height();
+        const qreal maxSize = contentsRect().width() > contentsRect().height() ? contentsRect().width() : contentsRect().height();
         QSize size = m_pictureSize;
         size.scale(maxSize, maxSize, Qt::KeepAspectRatio);
         return size;
     } else {
-        return geometry().size();
+        return contentsRect().size();
     }
 }
 
 void Frame::updatePicture()
 {
-    QImage picture = m_mySlideShow->image();
-    m_pictureSize = picture.size();
+    m_pictureSize = m_mySlideShow->image().size();
     QSizeF sizeHint = contentSizeHint();
-    if (geometry().size() != sizeHint) {
+    int frameLines = qMin(m_frameOutline, (int)(sizeHint.height()/10));
+    const QSize contentsSize = sizeHint.toSize();
+
+    if (contentsRect().size() != sizeHint) {
         resize(sizeHint);
         emit appletTransformedItself();
     }
+    updateMenu();
 
+    kDebug() << "Rendering picture";
+
+    // create a QPixmap which can be drawn in paintInterface()
+    QPixmap picture = m_mySlideShow->image();
+
+    if (picture.isNull()) {
+        return;
+    }
+
+    m_pixmap = QPixmap(contentsSize);
+    m_pixmap.fill(Qt::transparent);
+    QPainter *p = new QPainter();
+    p->begin(&m_pixmap);
+
+    int roundingFactor = qMin(sizeHint.height() / 10, 12.0) * m_roundCorners;
+    int swRoundness = roundingFactor + frameLines / 2 * m_frame * m_roundCorners;
+
+    QRectF frameRect(QPoint(0, 0), contentsSize);
+    frameRect.adjust(m_swOutline, m_swOutline, -m_swOutline, -m_swOutline); //Pretty useless.
+
+    QSizeF scaledSize = frameRect.size();
+    scaledSize.scale(frameRect.size(), Qt::KeepAspectRatio);
+    frameRect = QRectF(QPoint(frameRect.x() + (frameRect.width() - scaledSize.width()) / 2,
+                      frameRect.y() + (frameRect.height() - scaledSize.height()) / 2), scaledSize);
+
+    QRectF shadowRect;
+    if (m_frame) {
+        shadowRect = frameRect.adjusted(-frameLines, -frameLines,
+                                        frameLines, frameLines);
+    } else {
+        shadowRect = frameRect;
+    }
+
+    // The frame path. It will be used to draw the frame and clip the image.
+    QPainterPath framePath = Plasma::PaintUtils::roundedRectangle(frameRect, roundingFactor);
+
+    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
+    p->setRenderHint(QPainter::Antialiasing, true);
+
+    // Shadow
+    if (m_shadow) {
+        // The shadow is a couple of lines with decreasing opacity painted around the path
+        p->setBrush(Qt::NoBrush);
+        QPen pen = QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap, Qt::RoundJoin);
+        int shadowLines = qMin((int)(sizeHint.height() / 6), m_swOutline);
+
+        // The shadow is drawn from inside to the outside
+        shadowRect.adjust(+shadowLines, +shadowLines, -shadowLines, -shadowLines);
+
+        // Make the path ot paint the frame in a bit smaller so it's inside the shadow
+        frameRect.adjust(+shadowLines, +shadowLines, -shadowLines, -shadowLines);
+        framePath = Plasma::PaintUtils::roundedRectangle(frameRect, roundingFactor);
+
+        // Paint the shadow's lines around the picture
+        for (int i = m_swOutline - shadowLines; i <= m_swOutline; i += 1) {
+            // It's important to change the opacity using the QColor, as
+            // QPainter->setOpacity() kills performance
+            qreal opacity = 0.7 * exp(-(i / (double)(m_swOutline / 3)));
+            pen.setColor(QColor(0, 0, 0, opacity * 254));
+            p->setPen(pen);
+            QPainterPath tr = Plasma::PaintUtils::roundedRectangle(shadowRect, swRoundness + i);
+            p->drawPath(tr);
+            shadowRect.adjust(-1, -1, + 1, + 1);
+        }
+    }
+
+    p->setBrush(Qt::NoBrush);
+
+    // Frame
+    if (m_frame) {
+        m_frameColor.setAlphaF(0.5);
+        // The frame is painted twice as thick, the inner half lies behind the picture
+        // This is important to not make the corners look "cut out" when rounded
+        p->setPen(QPen(m_frameColor, frameLines * 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+        p->drawPath(framePath);
+    }
+
+    // Picture
+
+    // We save the painter here so the clipping only happens on the pixmap,
+    // not on pixmap, frame, shadow, etc
+    p->save();
+    if (m_roundCorners) {
+        p->setClipPath(framePath);
+    }
+
+    // Respect the smoothScaling setting
+    p->setRenderHint(QPainter::SmoothPixmapTransform, m_smoothScaling);
+    // draw our pixmap into the computed rectangle
+    p->drawPixmap(frameRect.toRect(), m_mySlideShow->image());
+    p->restore();
+
+    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
+    // black frame
+    if (m_frame) {
+        p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p->drawPath(framePath);
+    } else if (m_roundCorners) {
+        p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p->drawPath(framePath);
+    }
+
+    // Paint status text on top of it all
+    if (!m_mySlideShow->message().isEmpty()) {
+        int dist = frameRect.width() / 10;
+        QRect bgRect = frameRect.adjusted(dist-1, dist-1, -dist, -dist).toRect();
+
+        // The text's background rounded rectangle
+        QPainterPath bgPath = Plasma::PaintUtils::roundedRectangle(bgRect, bgRect.height()/15);
+
+        QColor c = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+        c.setAlphaF(.3);
+        QColor outline = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        outline.setAlphaF(.5);
+        p->setBrush(c);
+        p->setPen(outline);
+        p->setPen(QPen(outline, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p->drawPath(bgPath);
+        QString message = m_mySlideShow->message();
+
+        // Set the font and draw text
+        p->setRenderHint(QPainter::Antialiasing);
+        QFont textFont = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
+        textFont.setPixelSize(qMax(KGlobalSettings::smallestReadableFont().pixelSize(), bgRect.height() / 6));
+        p->setFont(textFont);
+
+        QTextOption option;
+        option.setAlignment(Qt::AlignCenter);
+        option.setWrapMode(QTextOption::WordWrap);
+        p->setPen(QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        p->drawText(bgRect, message, option);
+    }
+
+    p->end();
+    delete p;
+    m_dirty = false;
     update();
 }
 
@@ -358,10 +504,10 @@ void Frame::configAccepted()
     cg.writeEntry("potdProvider", m_potdProvider);
     cg.writeEntry("potd", m_potd);
 
+    initSlideShow();
+
     // Creates the menu if the settings have changed from "Default" to sth. else
     updateMenu();
-
-    initSlideShow();
 
     emit configNeedsSaving();
 }
@@ -423,15 +569,11 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (droppedUrl.isLocalFile() && QFileInfo(droppedUrl.path()).isDir()) {
         m_slideShowPaths.clear();
         m_slideShowPaths.append(droppedUrl.path());
-        if (!m_slideShow) {
-            m_slideShow = true;
-        }
+        m_slideShow = true;
     } else {
         kDebug() << "Remote URL" << droppedUrl.url();
         m_currentUrl = droppedUrl;
-        if (m_slideShow) {
-            m_slideShow = false;
-        }
+        m_slideShow = false;
     }
 
     stopPotd();
@@ -446,93 +588,22 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
 {
+
+    if (contentsRect().size() != contentSizeHint()) {
+        resize(contentSizeHint());
+        emit appletTransformedItself();
+    }
+
+    //kDebug() << "Paint!";
     Q_UNUSED(option)
     if (m_slideShow) {
         // temporarily suspend the slideshow to allow time for loading the image
         m_mySlideShow->setUpdateInterval(0);
     }
-
-    QImage picture = m_mySlideShow->image();
-    const QSize contentsSize = rect.size();
-
-    if (picture.isNull()) {
-        if (m_slideShow) {
-            // unsuspend the slideshow to allow time for loading the image
-            m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
-        }
-        return;
+    if (m_dirty) {
+        updatePicture();
     }
-
-    int roundingFactor = 12 * m_roundCorners;
-    int swRoundness = roundingFactor + m_frameOutline / 2 * m_frame * m_roundCorners;
-
-    QRect frameRect(QPoint(0, 0), contentsSize);
-    frameRect.adjust(m_swOutline, m_swOutline, -m_swOutline, -m_swOutline); //Pretty useless.
-
-    Qt::TransformationMode transformationMode = m_smoothScaling ? Qt::SmoothTransformation : Qt::FastTransformation;
-    //TODO check if correct
-    QImage scaledImage = picture.scaled(frameRect.size(), Qt::KeepAspectRatio, transformationMode);
-    frameRect = QRect(QPoint(frameRect.x() + (frameRect.width() - scaledImage.width()) / 2,
-                             frameRect.y() + (frameRect.height() - scaledImage.height()) / 2), scaledImage.size());
-
-    QRect shadowRect;
-    if (m_frame) {
-        shadowRect = frameRect.adjusted(-m_frameOutline + 1, -m_frameOutline + 1,
-                                        m_frameOutline - 1, m_frameOutline - 1);
-    } else {
-        shadowRect = frameRect;
-    }
-
-    // choose where to draw.
-
-    // The frame path. It will be used to draw the frame and clip the image.
-    QPainterPath framePath = Plasma::PaintUtils::roundedRectangle(frameRect, roundingFactor);
-
-    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
-    p->setRenderHint(QPainter::Antialiasing, true);
-
-    // Shadow
-    // TODO faster. I'd like to use it on liveTransform.
-    if (m_shadow) {
-        p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap, Qt::RoundJoin));
-        p->setBrush(Qt::NoBrush);
-        for (int i = 0; i <= m_swOutline; i += 1) {
-            p->setOpacity(0.7 * exp(-(i / (double)(m_swOutline / 3))));
-            QPainterPath tr = Plasma::PaintUtils::roundedRectangle(shadowRect, swRoundness + i);
-            p->drawPath(tr);
-            shadowRect.adjust(-1, -1, + 1, + 1);
-        }
-    }
-
-    p->setBrush(Qt::NoBrush);
-
-    // Frame
-    if (m_frame) {
-        p->setOpacity(0.5);
-        p->setPen(QPen(m_frameColor, m_frameOutline * 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-        p->drawPath(framePath);
-    }
-
-    p->setOpacity(1);
-
-    // Picture
-    p->save();
-    if (m_roundCorners) {
-        p->setClipPath(framePath);
-    }
-
-    // scale and center
-    p->drawImage(frameRect, scaledImage);
-    p->restore();
-
-    // black frame
-    if (m_frame) {
-        p->setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p->drawPath(framePath);
-    } else if (m_roundCorners) {
-        p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p->drawPath(framePath);
-    }
+    p->drawPixmap(rect, m_pixmap, rect);
 
     if (m_slideShow) {
         // unsuspend the slideshow to allow time for loading the image

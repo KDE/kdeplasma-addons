@@ -107,6 +107,8 @@ private:
     bool m_random;
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
+    QPixmap m_pixmap;
+    bool m_dirty;
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)

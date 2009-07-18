@@ -29,6 +29,8 @@
 
 #include <Plasma/DataEngine>
 
+#include "picture.h"
+
 class QTimer;
 
 class SlideShow : public QObject
@@ -42,8 +44,9 @@ public:
     void setDirs(const QStringList &slideShowPaths, bool recursive = false);
     void setImage(const QString &imagePath);
     void setRandom(bool);
-    QImage image();
+    QPixmap image();
     KUrl currentUrl() const;
+    QString message();
 
     void setUpdateInterval(int msec);
 
@@ -53,17 +56,17 @@ public Q_SLOTS:
 Q_SIGNALS:
     void pictureUpdated();
 
+private Q_SLOTS:
+    void updatePicture();
+    void clearPicture();
+    void pictureLoaded(QPixmap image);
+
 private:
     void addImage(const QString &imagePath);
     void addDir(const QString &path);
     void addRecursiveDir(const QString &path);
     KUrl url();
 
-private Q_SLOTS:
-    void updatePicture();
-    void clearPicture();
-
-private:
     QStringList m_picturePaths;
     QStringList m_filters;
     int m_slideNumber;
@@ -73,7 +76,8 @@ private:
     int m_randomInt;
     KUrl m_currentUrl;
     QTimer *m_timer;
-    QImage m_picture;
+    QPixmap m_image;
+    Picture *m_picture;
 };
 
 #endif /*SLIDESHOW_H*/
