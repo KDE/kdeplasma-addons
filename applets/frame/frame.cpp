@@ -109,14 +109,14 @@ void Frame::init()
     }
 
     m_menuPresent = false;
+    updateMenu();
 }
 
 void Frame::updateMenu()
 {
-    bool invalidPicture = (m_currentUrl.url() == "Default") && (m_mySlideShow->currentUrl() == "Default");
-    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || invalidPicture)) {
+    if (hasAuthorization("LaunchApp") && ! (m_menuPresent || m_potd || m_currentUrl.path() == "Default")) {
         kDebug() << "Current url: " << m_currentUrl.url();
-        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);       
+        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
         m_actions.append(m_openPicture);
         connect(m_openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
         m_menuPresent = true;
@@ -210,7 +210,7 @@ void Frame::updatePicture()
         resize(sizeHint);
         emit appletTransformedItself();
     }
-    updateMenu();
+
     update();
 }
 
@@ -358,10 +358,10 @@ void Frame::configAccepted()
     cg.writeEntry("potdProvider", m_potdProvider);
     cg.writeEntry("potd", m_potd);
 
-    initSlideShow();
-    
     // Creates the menu if the settings have changed from "Default" to sth. else
     updateMenu();
+
+    initSlideShow();
 
     emit configNeedsSaving();
 }
