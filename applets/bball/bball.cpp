@@ -55,7 +55,10 @@ bballApplet::bballApplet (QObject * parent, const QVariantList & args):
   m_x_vel(0.0),
   m_y_vel(0.0),
   m_circum_vel(0.0),
-  m_mouse_pressed(false)
+  m_mouse_pressed(false),
+  m_bottom_left(0),
+  m_bottom_right(0),
+  m_bottom(0)
 {
   setHasConfigurationInterface (true);
   //TODO figure out why it is not good enough to set it here
@@ -284,6 +287,7 @@ inline void bballApplet::bottomCollision()
   m_y_vel *= -m_resitution;
   adjustAngularVelocity( &m_x_vel, m_circum_vel );
   m_circum_vel = m_x_vel;
+  m_bottom=1;
 }
 
 inline void bballApplet::topCollision()
@@ -296,18 +300,31 @@ inline void bballApplet::topCollision()
 
 inline void bballApplet::rightCollision()
 {
-  m_position.moveRight (m_screen.right ());
+  m_position.moveRight (m_screen.right () - 0.1);
   m_x_vel *= -m_resitution;
   adjustAngularVelocity( &m_y_vel, -m_circum_vel );
   m_circum_vel = -m_y_vel;
+  if (m_bottom == 1) 
+  {
+    //kDebug() << "HIT Bottom AND RIGHT";
+    m_x_vel = 0.0;
+    m_bottom=0;
+    m_bottom_right=1;
+  }
 }
 
 inline void bballApplet::leftCollision()
 {
-  m_position.moveLeft (m_screen.left ());
+  m_position.moveLeft (m_screen.left () + 0.1);
   m_x_vel *= -m_resitution;
   adjustAngularVelocity( &m_y_vel, m_circum_vel );
   m_circum_vel = m_y_vel;
+  if (m_bottom == 1) 
+  {
+    //kDebug() << "HIT Bottom AND LEFT";
+    m_bottom=0;
+    m_bottom_left=1;
+  }
 }
 
 inline void bballApplet::checkCollisions()
@@ -319,6 +336,7 @@ inline void bballApplet::checkCollisions()
   {
     bottomCollision();
     collision = true;
+    kDebug() << "Bottom collision";
   }
 
   //ceiling
@@ -353,6 +371,9 @@ inline void bballApplet::applyPhysics()
   m_y_vel += m_gravity;
   m_y_vel *= m_friction;
   m_x_vel *= m_friction;
+  if (m_bottom_right == 1 || m_bottom_left == 1) {
+    m_x_vel=0.0;
+  }
 }
 
 inline void bballApplet::moveAndRotateBall()
@@ -364,7 +385,6 @@ inline void bballApplet::moveAndRotateBall()
 
 void bballApplet::goPhysics ()
 {
-//  kDebug() << "called";
   if ( m_mouse_pressed ) {
     return;
   }
