@@ -75,7 +75,7 @@ private:
   inline void applyPhysics();
   inline void moveAndRotateBall();
 
-  int m_radius, m_old_radius, m_sound_volume, m_overlay_opacity;
+  int m_radius, m_old_radius, m_sound_volume, m_overlay_opacity, m_bottom_left, m_bottom_right, m_bottom;
   QRectF m_position, m_screen, m_pie_size;
   QPointF m_old_mouse, m_mouse;
   qreal m_angle;
