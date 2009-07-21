@@ -1,4 +1,10 @@
 [KDE Desktop Pattern]
 Comment=Lineage
+Comment[nds]=Afkomst
+Comment[pt]=Linhagem
+Comment[pt_BR]=Linhagem
+Comment[sv]=Anor
+Comment[uk]=Родовід
+Comment[x-test]=xxLineagexx
 File=lineage.png
 

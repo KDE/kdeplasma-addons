@@ -1,4 +1,10 @@
 [KDE Desktop Pattern]
 Comment=Starry Sky
+Comment[nds]=Steernheven
+Comment[pt]=Céu Estrelado
+Comment[pt_BR]=Céu Estrelado
+Comment[sv]=Stjärnbeströdd himmel
+Comment[uk]=Зоряне небо
+Comment[x-test]=xxStarry Skyxx
 File=stars.png
 
