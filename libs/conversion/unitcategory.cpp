@@ -104,6 +104,11 @@ void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const
 
     QString prefix;
     QStringList suffixes;
+    // i18n: Fix for 4.3.0 Translate this to "yes" if you want square and cubic
+    // as prefix e.g. "square meter". "no" if you want suffix e.g. "mètre au carré"
+    bool useprefix = (i18n("yes") == "yes");
+    QString sin;
+    QString plu;
     switch (multiplier) {
         case 2:
             prefix = i18n("square ");
@@ -126,8 +131,14 @@ void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const
         for (uint j = 1; j < multiplier; ++j) {
             d *= decimals[i];
         }
-        Unit* u = new Unit(this, prefix + prefixes[i] + single, prefix + prefixes[i] + plural,
-                           symbols[i] + symbol, d, list);
+        if (useprefix) {
+            sin = prefix + prefixes[i] + single;
+            plu = prefix + prefixes[i] + plural;
+        } else {
+            sin = prefixes[i] + single + prefix;
+            plu = prefixes[i] + plural + prefix;
+        }
+        Unit* u = new Unit(this, sin, plu, symbols[i] + symbol, d, list);
         if (prefixes[i].isEmpty()) {
             setDefaultUnit(u);
         }
