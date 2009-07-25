@@ -35,10 +35,14 @@ add_subdirectory(rssnow)
 add_subdirectory(showdashboard)
 add_subdirectory(systemloadviewer)
 add_subdirectory(timer)
-add_subdirectory(weatherstation)
-add_subdirectory(weather)
+
 add_subdirectory(eyes)
-add_subdirectory(unitconverter)
+
+if(CONVERSION_FOUND)
+  add_subdirectory(unitconverter)
+  add_subdirectory(weatherstation)
+  add_subdirectory(weather)
+endif(CONVERSION_FOUND)
 
 if(QT_QTWEBKIT_FOUND)
   add_subdirectory(dict)
