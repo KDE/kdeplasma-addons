@@ -116,25 +116,21 @@ void WeatherApplet::init()
 
     m_locationLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
-    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
-    m_conditionsLabel->nativeWidget()->setWordWrap(false);
-
     m_windIcon->setMaximumSize(0,0);
     m_windIcon->setOrientation(Qt::Horizontal);
     m_windIcon->setTextBackgroundColor(QColor());
 
-    m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
-    m_tempLabel->nativeWidget()->setFont(m_titleFont);
-    m_tempLabel->nativeWidget()->setWordWrap(false);
+    //m_tempLabel->nativeWidget()->setFont(m_titleFont);
+    //m_tempLabel->nativeWidget()->setWordWrap(false);
     // This one if a bit crude, ideally we set the horizontal SizePolicy to Preferred, but that doesn't seem
     // to actually respect the minimum size needed to display the temperature. (Bug in Label or QGL?)
-    m_tempLabel->setMinimumWidth(85);
-    m_tempLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    //m_tempLabel->setMinimumWidth(85);
+    //m_tempLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
+    //m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_forecastTemps->nativeWidget()->setWordWrap(false);
-    m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
-    m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    //m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
+    //m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /*QGraphicsWidget *titleSpacer = new QGraphicsWidget(this);
     //FIXME: will be a width somewhat related to the weather icon size
@@ -143,10 +139,8 @@ void WeatherApplet::init()
     m_titlePanel->addItem(titleSpacer, 0, 0, 2, 1);*/
 
     m_titlePanel->addItem(m_locationLabel, 0, 0, 1, 3);
-    m_titlePanel->addItem(m_tempLabel, 0, 3);
-    m_titlePanel->addItem(m_conditionsLabel, 1, 0);
-    m_titlePanel->addItem(m_windIcon, 1, 2);
-    m_titlePanel->addItem(m_forecastTemps, 1, 3);
+    //m_titlePanel->addItem(m_tempLabel, 0, 3);
+    //m_titlePanel->addItem(m_forecastTemps, 1, 3);
 
     m_titlePanel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -160,6 +154,7 @@ void WeatherApplet::init()
 
     m_courtesyLabel->nativeWidget()->setWordWrap(false);
     m_courtesyLabel->nativeWidget()->setAlignment(Qt::AlignRight);
+    m_courtesyLabel->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
     connect(m_courtesyLabel, SIGNAL(linkActivated(QString)), this, SLOT(invokeBrowser(QString)));
 
     m_graphicsWidget->setLayout(m_layout);
@@ -284,11 +279,12 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_tempLabel->setText(QString());
     }
 
+
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget";
-        m_currentIcon = new Plasma::IconWidget(this);
-        m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
-        m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_currentIcon = new Plasma::IconWidget(); 
+        //m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
+        //m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
@@ -298,9 +294,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (!data["Credit Url"].toString().isEmpty()) {
         QString creditUrl = QString("<A HREF=\"%1\" ><FONT size=\"-0.5\" color=\"%2\">%3</FONT></A>").arg(data["Credit Url"].toString()).arg(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).rgb()).arg(data["Credit"].toString());
         m_courtesyLabel->nativeWidget()->setTextInteractionFlags(Qt::TextBrowserInteraction);
-        //m_courtesyLabel->setAcceptHoverEvents(true);
-        //m_courtesyLabel->nativeWidget()->setMouseTracking(true);
-
         m_courtesyLabel->setText(creditUrl);
     }
 
@@ -325,11 +318,31 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         }
     }
 
-    // FIXME: Destroy the treeview because if we don't Plasma crashes?:w
+    // FIXME: Destroy the treeview because if we don't Plasma crashes?
     if (m_fiveDaysView) {
         delete m_fiveDaysView;
         m_fiveDaysView = 0;
     }
+
+    // Display condition in tab
+    QGraphicsLinearLayout *conditionMainLayout = new QGraphicsLinearLayout(Qt::Vertical);
+    QGraphicsGridLayout *conditionLayout = new QGraphicsGridLayout();
+    m_tempLabel->nativeWidget()->setAlignment(Qt::AlignHCenter);
+    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignHCenter);
+    m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignHCenter);
+
+    conditionLayout->setRowMaximumHeight(0, KIconLoader::SizeEnormous);
+    conditionLayout->setRowMaximumHeight(2, KIconLoader::SizeEnormous);
+
+    conditionLayout->addItem(m_tempLabel, 0, 0, Qt::AlignHCenter);
+    conditionLayout->addItem(m_currentIcon, 1, 0, Qt::AlignHCenter);
+    conditionLayout->addItem(m_conditionsLabel, 2, 0, Qt::AlignHCenter);
+    conditionLayout->addItem(m_windIcon, 3, 0, Qt::AlignHCenter);
+    conditionLayout->addItem(m_forecastTemps, 4, 0, Qt::AlignHCenter);
+    conditionMainLayout->addItem(conditionLayout);
+    conditionLayout->setRowSpacing(3, 20);
+   
+    m_tabBar->addTab(i18nc("Observed weather", "Currently"), conditionMainLayout);
 
     // If we have a 5 day forecast, display it
     if (data["Total Weather Days"].toInt() > 0) {
@@ -634,7 +647,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        m_bottomLayout->addItem(m_currentIcon);
+       //m_bottomLayout->addItem(m_currentIcon);
         m_bottomLayout->addItem(m_tabBar);
         m_layout->addItem(m_bottomLayout);
         m_layout->addItem(m_courtesyLabel);
