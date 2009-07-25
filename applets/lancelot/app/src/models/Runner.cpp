@@ -203,7 +203,7 @@ QMimeData * Runner::mimeData(int index) const
 {
     if (!valid) return NULL;
 
-    if (itemAt(index).data.value< QStringList >().at(1) == "Application") {
+    if (itemAt(index).data.value< QStringList >().at(1) == "services") {
         KService::Ptr service = KService::serviceByStorageId(
                 itemAt(index).data.value< QStringList >().at(2));
         return BaseModel::mimeForService(service);
