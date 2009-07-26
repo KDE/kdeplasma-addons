@@ -26,7 +26,7 @@
 #include <QDebug>
 
 #include <plasma/abstractrunner.h>
-
+#include "FavoriteApplications.h"
 #define SLEEP 600
 
 namespace Models {
