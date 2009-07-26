@@ -32,8 +32,10 @@
 #include "conversion/converter.h"
 #include "conversion/unitcategory.h"
 
-Q_DECLARE_METATYPE(const Conversion::Unit*)
-Q_DECLARE_METATYPE(Conversion::UnitCategory*)
+using namespace KUnitConversion;
+
+Q_DECLARE_METATYPE(const Unit*)
+Q_DECLARE_METATYPE(UnitCategory*)
 
 UnitConverter::UnitConverter(QObject *parent, const QVariantList &args)
 : Plasma::PopupApplet(parent, args)
@@ -61,14 +63,14 @@ void UnitConverter::init()
 void UnitConverter::sltCategoryChanged(int index)
 {
     Q_UNUSED(index);
-    Conversion::UnitCategory* category =
-            m_pCmbCategory->nativeWidget()->itemData(index).value<Conversion::UnitCategory*>();
-    QList<Conversion::Unit*> units = category->units();
-    Conversion::Unit* defaultUnit = category->defaultUnit();
+    UnitCategory* category =
+            m_pCmbCategory->nativeWidget()->itemData(index).value<UnitCategory*>();
+    QList<Unit*> units = category->units();
+    Unit* defaultUnit = category->defaultUnit();
     m_pCmbUnit1->clear();
     m_pCmbUnit2->clear();
     int i = 0;
-    foreach (const Conversion::Unit* unit, units) {
+    foreach (const Unit* unit, units) {
         m_pCmbUnit1->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
         m_pCmbUnit2->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
         if (unit == defaultUnit) {
@@ -100,13 +102,13 @@ void UnitConverter::sltValueChanged(const QString &sNewValue)
 
 void UnitConverter::calculate()
 {
-    const Conversion::Unit* in = m_pCmbUnit1->nativeWidget()->itemData(
-            m_pCmbUnit1->nativeWidget()->currentIndex()).value<const Conversion::Unit*>();
-    const Conversion::Unit* out = m_pCmbUnit2->nativeWidget()->itemData(
-            m_pCmbUnit2->nativeWidget()->currentIndex()).value<const Conversion::Unit*>();
+    const Unit* in = m_pCmbUnit1->nativeWidget()->itemData(
+            m_pCmbUnit1->nativeWidget()->currentIndex()).value<const Unit*>();
+    const Unit* out = m_pCmbUnit2->nativeWidget()->itemData(
+            m_pCmbUnit2->nativeWidget()->currentIndex()).value<const Unit*>();
     if (in && out) {
-        Conversion::Value dblValueIn(m_pTxtValue1->text().toDouble(), in);
-        Conversion::Value dblValueOut = in->category()->convert(dblValueIn, out->symbol());
+        Value dblValueIn(m_pTxtValue1->text().toDouble(), in);
+        Value dblValueOut = in->category()->convert(dblValueIn, out->symbol());
 
         m_pTxtValue2->setText(QString::number(dblValueOut.number()));
     }
@@ -147,8 +149,8 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         pGridLayout->addItem(m_pInfo, 4, 0, 1, 2);
         pGridLayout->setRowStretchFactor(5, 1);
 
-        QList<Conversion::UnitCategory*> categories = Conversion::Converter::self()->categories();
-        foreach (Conversion::UnitCategory* category, categories) {
+        QList<UnitCategory*> categories = Converter::self()->categories();
+        foreach (UnitCategory* category, categories) {
             m_pCmbCategory->nativeWidget()->addItem(category->name(), QVariant::fromValue(category));
         }
         // Load previous values

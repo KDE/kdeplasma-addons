@@ -27,6 +27,8 @@
 
 #define CONVERSION_CHAR '>'
 
+using namespace KUnitConversion;
+
 class StringParser
 {
 public:
@@ -171,10 +173,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
     unit2 = cmd.rest();
 
-    Conversion::UnitCategory* category = Conversion::Converter::self()->categoryForUnit(unit1);
+    UnitCategory* category = Converter::self()->categoryForUnit(unit1);
     if (!category)
         return;
-    Conversion::Value v = category->convert(Conversion::Value(value, unit1), unit2);
+    Value v = category->convert(Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
@@ -184,14 +186,14 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         context.addMatch(term, match);
     } else if (!unit2.isEmpty()) {
         const QStringList units = category->allUnits();
-        QSet<Conversion::Unit*> matchingUnits;
+        QSet<Unit*> matchingUnits;
         foreach (const QString& s, units) {
             if (s.startsWith(unit2)) {
                 matchingUnits << category->unit(s);
             }
         }
-        foreach (const Conversion::Unit* u, matchingUnits) {
-            v = category->convert(Conversion::Value(value, unit1), u->symbol());
+        foreach (const Unit* u, matchingUnits) {
+            v = category->convert(Value(value, unit1), u->symbol());
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::InformationalMatch);
             match.setIcon(KIcon("edit-copy"));

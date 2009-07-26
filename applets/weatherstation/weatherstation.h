@@ -48,15 +48,15 @@ class WeatherStation : public WeatherPopupApplet
         void setLCDIcon();
         void setBackground();
 
-        void setWind(const Conversion::Value& speed, const QString& direction);
-        void setPressure(const QString& condition, const Conversion::Value& pressure,
+        void setWind(const KUnitConversion::Value& speed, const QString& direction);
+        void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
                          const QString& tendency);
-        void setTemperature(const Conversion::Value& temperature);
+        void setTemperature(const KUnitConversion::Value& temperature);
         void setHumidity(QString humidity);
 
-        QString fitValue(const Conversion::Value& value, int digits);
+        QString fitValue(const KUnitConversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
-        Conversion::Value value(const QString& value, const QString& unit);
+        KUnitConversion::Value value(const QString& value, const QString& unit);
 
     private:
         LCD *m_lcd;

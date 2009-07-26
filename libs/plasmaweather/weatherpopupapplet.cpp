@@ -31,7 +31,7 @@
 #include "weatherconfig.h"
 #include "weatherlocation.h"
 
-using namespace Conversion;
+using namespace KUnitConversion;
 
 class WeatherPopupApplet::Private
 {
@@ -117,7 +117,7 @@ public:
         }
     }
 
-    qreal tendency(const Conversion::Value& pressure, const QString& tendency)
+    qreal tendency(const Value& pressure, const QString& tendency)
     {
         qreal t;
 
@@ -126,8 +126,8 @@ public:
         } else if (tendency.toLower() == "falling") {
             t = -0.75;
         } else {
-            t = Conversion::Converter::self()->convert(
-                    Conversion::Value(tendency.toDouble(), pressure.unit()), "kPa").number();
+            t = Converter::self()->convert(
+                    Value(tendency.toDouble(), pressure.unit()), "kPa").number();
         }
         return t;
     }

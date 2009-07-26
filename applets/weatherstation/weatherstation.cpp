@@ -31,6 +31,8 @@
 #include <math.h>
 #include "lcd.h"
 
+using namespace KUnitConversion;
+
 WeatherStation::WeatherStation(QObject *parent, const QVariantList &args)
     : WeatherPopupApplet(parent, args), m_lcd(0), m_lcdPanel(0)
 {
@@ -129,12 +131,12 @@ void WeatherStation::setLCDIcon()
     setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
-Conversion::Value WeatherStation::value(const QString& value, const QString& unit)
+Value WeatherStation::value(const QString& value, const QString& unit)
 {
     if (value.isEmpty() || value == "N/A") {
-        return Conversion::Value();
+        return Value();
     }
-    return Conversion::Value(value, unit);
+    return Value(value, unit);
 }
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
@@ -143,7 +145,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (data.contains("Place")) {
-        Conversion::Value temp = value(data["Temperature"].toString(),
+        Value temp = value(data["Temperature"].toString(),
                 WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
         setTemperature(temp);
         setPressure(conditionIcon(),
@@ -166,7 +168,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     }
 }
 
-QString WeatherStation::fitValue(const Conversion::Value& value, int digits)
+QString WeatherStation::fitValue(const Value& value, int digits)
 {
     if (!value.isValid()) {
         return "-";
@@ -227,14 +229,14 @@ QStringList WeatherStation::fromCondition(const QString& condition)
     return result;
 }
 
-void WeatherStation::setPressure(const QString& condition, const Conversion::Value& pressure,
+void WeatherStation::setPressure(const QString& condition, const Value& pressure,
                                  const QString& tendencyString)
 {
     QStringList current;
     current = fromCondition(condition);
     m_lcd->setGroup("weather", current);
 
-    Conversion::Value value = Conversion::Converter::self()->convert(pressure, pressureUnit());
+    Value value = Converter::self()->convert(pressure, pressureUnit());
     QString s = fitValue(value, 5);
     m_lcd->setNumber("pressure", s);
     m_lcd->setLabel("pressure-unit-label", value.unit()->symbol());
@@ -257,9 +259,9 @@ void WeatherStation::setPressure(const QString& condition, const Conversion::Val
     }
 }
 
-void WeatherStation::setTemperature(const Conversion::Value& temperature)
+void WeatherStation::setTemperature(const Value& temperature)
 {
-    Conversion::Value v = Conversion::Converter::self()->convert(temperature, temperatureUnit());
+    Value v = Converter::self()->convert(temperature, temperatureUnit());
     m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
     m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
     m_lcd->setNumber("temperature", fitValue(v , 4));
@@ -277,10 +279,10 @@ void WeatherStation::setHumidity(QString humidity)
     m_lcd->setNumber("humidity", humidity);
 }
 
-void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
+void WeatherStation::setWind(const Value& speed, const QString& dir)
 {
     //kDebug() << speed.number() << speed.unit()->symbol() << dir;
-    Conversion::Value value = Conversion::Converter::self()->convert(speed, speedUnit());
+    Value value = Converter::self()->convert(speed, speedUnit());
     QString s = fitValue(value, 3);
 
     if (dir == "N/A") {
