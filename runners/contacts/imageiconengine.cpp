@@ -42,7 +42,11 @@ QSize ImageIconEngine::actualSize(const QSize &size, QIcon::Mode mode, QIcon::St
 
 void ImageIconEngine::paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state)
 {
-    painter->drawPixmap(rect, pixmap(rect.size(), mode, state));
+    painter->fillRect(rect, Qt::transparent);
+    QPixmap p = pixmap(rect.size(), mode, state);
+    QRect r = p.rect();
+    r.moveCenter(rect.center());
+    painter->drawPixmap(r, p);
 }
 
 QPixmap ImageIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state)
@@ -51,7 +55,7 @@ QPixmap ImageIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
 
     QImage image = m_image;
     if (size.isValid() && size != image.size()) {
-        image = image.scaled(size);
+        image = image.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
 
     QStyleOption opt;
