@@ -163,8 +163,6 @@ void Pastebin::init()
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
     Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);
-    setBackgroundHints(NoBackground);
-
 }
 
 void Pastebin::updateTheme()
