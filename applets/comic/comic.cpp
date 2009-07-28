@@ -393,6 +393,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
         updateSize();
         update();
     }
+    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
@@ -756,7 +757,7 @@ QSizeF ComicApplet::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     if (which != Qt::PreferredSize) {
         return Applet::sizeHint(which, constraint);
     } else {
-        return mLastSize;
+        return mImage.size();
     }
 }
 
