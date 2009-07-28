@@ -126,8 +126,7 @@ public:
         } else if (tendency.toLower() == "falling") {
             t = -0.75;
         } else {
-            t = Converter::self()->convert(
-                    Value(tendency.toDouble(), pressure.unit()), "kPa").number();
+            t = Value(tendency.toDouble(), pressure.unit()).convertTo(Kilopascal).number();
         }
         return t;
     }
@@ -138,8 +137,8 @@ public:
         if (!pressure.isValid()) {
             return "weather-none-available";
         }
-        qreal temp = Converter::self()->convert(temperature, "C").number();
-        qreal p = Converter::self()->convert(pressure, "kPa").number();
+        qreal temp = temperature.convertTo(Celsius).number();
+        qreal p = pressure.convertTo(Kilopascal).number();
         qreal t = tendency(pressure, tend);
 
         // This is completely unscientific so if anyone have a better formula for this :-)

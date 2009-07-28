@@ -22,6 +22,7 @@
 #define UNITCONVERTER_H
 
 #include <Plasma/PopupApplet>
+#include "conversion/converter.h"
 
 namespace Plasma {
     class ComboBox;
@@ -58,6 +59,7 @@ class UnitConverter : public Plasma::PopupApplet
         Plasma::LineEdit *m_pTxtValue2;
         Plasma::Label    *m_pInfo;
         int               m_iCategory;
+        KUnitConversion::Converter m_converter;
 };
 
 // This is the command that links your applet to the .desktop file

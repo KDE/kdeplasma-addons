@@ -173,9 +173,11 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
     unit2 = cmd.rest();
 
-    UnitCategory* category = Converter::self()->categoryForUnit(unit1);
-    if (!category)
+    Converter converter;
+    UnitCategory* category = converter.categoryForUnit(unit1);
+    if (!category) {
         return;
+    }
     Value v = category->convert(Value(value, unit1), unit2);
     if (v.isValid()) {
         Plasma::QueryMatch match(this);
@@ -186,13 +188,13 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         context.addMatch(term, match);
     } else if (!unit2.isEmpty()) {
         const QStringList units = category->allUnits();
-        QSet<Unit*> matchingUnits;
+        QSet<UnitPtr> matchingUnits;
         foreach (const QString& s, units) {
             if (s.startsWith(unit2)) {
                 matchingUnits << category->unit(s);
             }
         }
-        foreach (const Unit* u, matchingUnits) {
+        foreach (const UnitPtr& u, matchingUnits) {
             v = category->convert(Value(value, unit1), u->symbol());
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::InformationalMatch);
