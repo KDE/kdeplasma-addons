@@ -751,6 +751,7 @@ void MicroBlog::updateStatus()
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
+    m_service->startOperationCall(cg);
     //m_statusUpdates.insert(m_service->startOperationCall(cg), status);
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
