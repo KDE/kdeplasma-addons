@@ -39,7 +39,7 @@ SlideShow::SlideShow(QObject *parent)
     connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
 
     m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(updatePicture()));
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(nextPicture()));
 }
 
 SlideShow::~SlideShow()
@@ -125,22 +125,49 @@ QPixmap SlideShow::image()
     return m_image;
 }
 
-KUrl SlideShow::url()
+KUrl SlideShow::url(int offset)
 {
     if (!m_picturePaths.isEmpty()) {
-        int index = -1;
         if (m_useRandom) {
-            m_randomInt++;
-            index = m_indexList[m_randomInt % m_picturePaths.count()];
-            //kDebug() << "Random was selected and the index was: " << index << " out of " << m_picturePaths.count() << " images" << endl;
-        } else {
-            index = m_slideNumber++ % m_picturePaths.count();
+            m_randomInt += offset;
+
+            if (m_randomInt <= -1) {
+                m_randomInt = m_picturePaths.count() - 1;
+
+            } else if (m_randomInt >= m_picturePaths.count()) {
+                m_randomInt = 0;
+            }
+
+            return KUrl(m_picturePaths.at(m_indexList.at(m_randomInt)));
         }
 
-        return KUrl(m_picturePaths.at(index));
-    } else {
-        return KUrl();
+        m_slideNumber += offset;
+
+        if (m_slideNumber <= -1) {
+            m_slideNumber = m_picturePaths.count() - 1;
+
+        } else if (m_slideNumber >= m_picturePaths.count()) {
+            m_slideNumber = 0;
+        }
+
+        return KUrl(m_picturePaths.at(m_slideNumber));
     }
+
+    return KUrl();
+}
+
+void SlideShow::nextPicture()
+{
+    m_currentUrl = url(1);
+    m_image = image();
+    emit pictureUpdated();
+}
+
+void SlideShow::previousPicture()
+{
+    m_currentUrl = url(-1);
+    m_image = image();
+    emit pictureUpdated();
 }
 
 KUrl SlideShow::currentUrl() const
@@ -157,13 +184,6 @@ void SlideShow::setUpdateInterval(int msec)
         }
         m_timer->start(msec);
     }
-}
-
-void SlideShow::updatePicture()
-{
-    m_currentUrl = url();
-    m_image = image();
-    emit pictureUpdated();
 }
 
 QString SlideShow::message()

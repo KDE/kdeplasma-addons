@@ -35,6 +35,11 @@ class ConfigDialog;
 class QGraphicsSceneDragDropEvent;
 class SlideShow;
 
+namespace Plasma
+{
+    class ToolButton;
+    class Frame;
+}
 
 class Frame : public Plasma::Applet
 {
@@ -57,6 +62,8 @@ protected Q_SLOTS:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void configAccepted();
     void updatePicture();
+    void nextPicture();
+    void previousPicture();
     void slotOpenPicture();
 
 private Q_SLOTS:
@@ -67,10 +74,13 @@ private Q_SLOTS:
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
     void updateMenu();
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
 private:
     void stopPotd();
     void initSlideShow();
+    void checkSlideFrame();
 
     /// The current color of the frame
     QColor m_frameColor;
@@ -109,6 +119,9 @@ private:
     SlideShow* m_mySlideShow;
     QPixmap m_pixmap;
     bool m_dirty;
+    Plasma::ToolButton* m_backButton;
+    Plasma::ToolButton* m_nextButton;
+    Plasma::Frame* m_slideFrame;
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)

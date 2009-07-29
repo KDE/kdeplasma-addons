@@ -52,12 +52,13 @@ public:
 
 public Q_SLOTS:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void nextPicture();
+    void previousPicture();
 
 Q_SIGNALS:
     void pictureUpdated();
 
 private Q_SLOTS:
-    void updatePicture();
     void clearPicture();
     void pictureLoaded(QPixmap image);
 
@@ -65,7 +66,7 @@ private:
     void addImage(const QString &imagePath);
     void addDir(const QString &path);
     void addRecursiveDir(const QString &path);
-    KUrl url();
+    KUrl url(int offset = 1);
 
     QStringList m_picturePaths;
     QStringList m_filters;

@@ -25,11 +25,13 @@
 #include <QPixmap>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneDragDropEvent>
+#include <QGraphicsLinearLayout>
 #include <QPen>
 #include <QCheckBox>
 #include <QTimer>
 #include <QFileInfo>
 #include <QStandardItemModel>
+#include <QToolButton>
 
 #include <KDebug>
 #include <KConfigDialog>
@@ -42,6 +44,8 @@
 
 #include <Plasma/PaintUtils>
 #include <Plasma/DataEngine>
+#include <Plasma/ToolButton>
+#include <Plasma/Frame>
 
 #include <math.h>
 
@@ -52,7 +56,8 @@
 Frame::Frame(QObject *parent, const QVariantList &args)
         : Plasma::Applet(parent, args),
         m_configDialog(0),
-        m_openPicture(0)
+        m_openPicture(0),
+        m_slideFrame(0)
 {
     setHasConfigurationInterface(true);
     setAcceptDrops(true);
@@ -192,6 +197,15 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             setMinimumSize(QSizeF(min, min));
             setMaximumSize(QSizeF());
         }
+
+        if (m_slideShow) {
+            checkSlideFrame();
+
+            int x = contentsRect().center().x() - (m_slideFrame->size().width() / 2);
+            int y = contentsRect().bottom() - m_slideFrame->size().height() - 5;
+            m_slideFrame->setPos(x, y);
+        }
+
         m_dirty = true;
     }
 }
@@ -358,6 +372,20 @@ void Frame::updatePicture()
     delete p;
     m_dirty = false;
     update();
+}
+
+void Frame::nextPicture()
+{
+    m_mySlideShow->setUpdateInterval(0);
+    m_mySlideShow->nextPicture();
+    m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
+}
+
+void Frame::previousPicture()
+{
+    m_mySlideShow->setUpdateInterval(0);
+    m_mySlideShow->previousPicture();
+    m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
 }
 
 void Frame::addDir()
@@ -584,6 +612,58 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     cg.writeEntry("slideshow", m_slideShow);
     cg.writeEntry("slideshow paths", m_slideShowPaths);
     emit configNeedsSaving();
+}
+
+void Frame::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (m_slideShow) {
+        checkSlideFrame();
+        m_slideFrame->show();
+    }
+
+    Applet::hoverEnterEvent(event);
+}
+
+void Frame::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (m_slideShow) {
+        checkSlideFrame();
+        m_slideFrame->hide();
+    }
+
+    Applet::hoverLeaveEvent( event );
+}
+
+void Frame::checkSlideFrame()
+{
+    if (m_slideFrame)
+        return;
+
+    m_slideFrame = new Plasma::Frame( this );
+    m_slideFrame->setZValue( 10 );
+
+    m_backButton = new Plasma::ToolButton(m_slideFrame);
+    m_backButton->setImage("widgets/arrows", "left-arrow");
+    m_backButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    m_backButton->setMaximumSize(IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar));
+    connect(m_backButton, SIGNAL(clicked()), this , SLOT(previousPicture()));
+
+    m_nextButton = new Plasma::ToolButton(m_slideFrame);
+    m_nextButton->setImage("widgets/arrows", "right-arrow");
+    m_nextButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    m_nextButton->setMaximumSize(IconSize(KIconLoader::MainToolbar), IconSize(KIconLoader::MainToolbar));
+    connect(m_nextButton, SIGNAL(clicked()), this , SLOT(nextPicture()));
+
+    QGraphicsLinearLayout *buttonsLayout = new QGraphicsLinearLayout();
+    buttonsLayout->addItem(m_backButton);
+    buttonsLayout->addItem(m_nextButton);
+    m_slideFrame->setLayout(buttonsLayout);
+    buttonsLayout->activate();
+
+    m_slideFrame->setFrameShadow( Plasma::Frame::Raised );
+    m_slideFrame->hide();
+
+    constraintsEvent(Plasma::SizeConstraint);
 }
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
