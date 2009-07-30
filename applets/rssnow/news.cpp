@@ -255,6 +255,8 @@ void News::updateScrollers()
     if (m_logo) {
         m_layout->addItem(m_header);
         m_header->show();
+    } else {
+        m_header->hide();
     }
 
     qDeleteAll(m_scrollerList);
@@ -328,6 +330,7 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
 
             KConfigGroup cg = config();
             cg.writeEntry("feeds", m_feedlist);
+            emit configNeedsSaving();
 
             updateScrollers();
             connectToEngine();
@@ -337,12 +340,12 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void News::constraintsEvent(Plasma::Constraints constraints)
 {
-    kDebug() << "constrainsUpdated : " << constraints;
+    //kDebug() << "constrainsUpdated : " << constraints;
     if (constraints & Plasma::FormFactorConstraint || constraints & Plasma::SizeConstraint ) {
         if (formFactor() == Plasma::Horizontal) {
             int minSize = (m_feedlist.size() * m_scrollerList.first()->minimumSize().height()) + m_header->size().height();
-            kDebug() << "minimum size to contain all scrollers: " << minSize;
-            if (geometry().height() < minSize && !m_collapsed) {
+            //kDebug() << "minimum size to contain all scrollers: " << minSize << m_feedlist;
+            if (contentsRect().height() < minSize) {
                 //group all feeds together so it can fit (only a single time):
                 QString allfeeds;
                 foreach (const QString &feed, m_feedlist) {
@@ -359,7 +362,10 @@ void News::constraintsEvent(Plasma::Constraints constraints)
                 m_collapsed = true;
                 updateScrollers();
             } else {
-                //TODO: restore default settings.
+                m_collapsed = false;
+                m_logo = config().readEntry("logo", true);
+                m_feedlist = config().readEntry("feeds", QStringList("http://dot.kde.org/rss.xml"));
+                updateScrollers();
             }
         }
     }
