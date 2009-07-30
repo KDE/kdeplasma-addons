@@ -210,6 +210,17 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
                                           option.rect.size(),
                                           option.rect);
 
+    if (!decorationIcon.isNull() && !titleText.isNull()) {
+        QFontMetrics fm(option.font);
+        QRect textRect = fm.boundingRect(titleText);
+        textRect.moveCenter(titleRect.center());
+        if (option.direction == Qt::LeftToRight) {
+            decorationRect.moveRight(textRect.left());
+        } else {
+            decorationRect.moveLeft(textRect.right());
+        }
+    }
+
     decorationIcon.paint(painter, decorationRect, option.decorationAlignment);
 
     if (titleColor.isValid()) {
