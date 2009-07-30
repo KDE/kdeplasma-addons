@@ -23,7 +23,6 @@
 
 #include "category.h"
 
-class QXmlStreamReader;
 
 namespace Attica {
 

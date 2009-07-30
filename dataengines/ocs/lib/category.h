@@ -27,7 +27,6 @@
 
 namespace Attica {
 
-class CategoryListJob;
 
 class ATTICA_EXPORT Category
 {

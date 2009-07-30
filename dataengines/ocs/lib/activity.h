@@ -30,7 +30,6 @@
 
 namespace Attica {
 
-class ActivityListJob;
 
 class ATTICA_EXPORT Activity
 {
