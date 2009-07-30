@@ -32,7 +32,6 @@ namespace RTM {
   class TasksReader;
 }
 
-class QNetworkReply;
 
 /** @file
  * This file is part of librtm. It defines

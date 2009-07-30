@@ -35,6 +35,7 @@
 namespace RTM {
 
 class TaskPrivate;
+class Session;
 
 class RTM_EXPORT Task : public QObject
 {

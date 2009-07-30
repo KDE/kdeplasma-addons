@@ -25,9 +25,7 @@
 #include <QHash>
 #include <QString>
 
-class QStringList;
 class QString;
-class QByteArray;
 
 namespace RTM {
   enum State { Mutable, Hashed, RequestSent, RequestReceived };
@@ -48,15 +46,11 @@ namespace RTM {
   typedef QString Tag;
 
   class List;
-  class Session;
   class Request;
   class Auth;
   class Task;
-  class StaticTask;
   class Note;
-  class Object;
 
-  class TasksReader;
 
   class Location
   {
