@@ -34,7 +34,6 @@
 
 // forward declarations
 class TaskSource;
-class QNetworkReply;
 class TasksSource;
 class RtmEngine;
 

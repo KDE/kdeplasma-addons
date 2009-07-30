@@ -24,8 +24,6 @@
 
 #include <rtm/rtm.h>
 
-class TasksSource;
-class ListsSource;
 class TaskSource;
 
 class RtmEngine : public Plasma::DataEngine
