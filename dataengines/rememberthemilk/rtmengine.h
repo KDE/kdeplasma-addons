@@ -25,6 +25,10 @@
 #include <rtm/rtm.h>
 
 class TaskSource;
+namespace RTM
+{
+  class Session;
+}
 
 class RtmEngine : public Plasma::DataEngine
 {
