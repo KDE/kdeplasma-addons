@@ -25,8 +25,6 @@
 
 #include <QMap>
 
-class QDomDocument;
-class QDomNodeList;
 class ImageSource;
 
 /**
