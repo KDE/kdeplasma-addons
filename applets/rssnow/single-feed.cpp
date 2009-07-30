@@ -26,6 +26,7 @@
 #include <kdebug.h>
 #include <kicon.h>
 #include <kcursor.h>
+#include <kglobalsettings.h>
 
 //Plasma
 #include <plasma/svg.h>
@@ -50,9 +51,6 @@ SingleFeedItem::SingleFeedItem(QGraphicsItem * parent) : QGraphicsWidget(parent)
     m_background = new Plasma::Svg(this);
     m_background->setImagePath("rssnow/background");
 
-    QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-    font.setPointSize(font.pointSize() - 2); //because it looks prettier, but
-
     //ok, so why use a QGraphicsTextItem and not display it? It causes a lot of
     //clipping issues, so it's easier to only use the convert to plain text
     //functionality of QGraphicsTextItem. TODO: find a more direct and elegant
@@ -75,10 +73,7 @@ void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
     qreal width = m_rect.width();
 
     p->setRenderHint(QPainter::Antialiasing);
-    QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-    // FIXME: currently there is nothing else than DefaultFont for Theme
-    // so we calculate the size
-    font.setPixelSize(height/5); 
+    QFont font = KGlobalSettings::smallestReadableFont();
 
     //paint background
     m_background->paint(p, 0, 0);
