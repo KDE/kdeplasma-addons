@@ -32,7 +32,6 @@
 #include <QString>
 #include <QByteArray>
 #include <QCryptographicHash>
-#include <QHttp>
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDomDocument>

@@ -29,7 +29,6 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QCryptographicHash>
-#include <QHttp>
 #include <QBuffer>
 #include <QCoreApplication>
 
