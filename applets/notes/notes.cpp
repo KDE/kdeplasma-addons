@@ -411,7 +411,13 @@ void Notes::updateTextGeometry()
         const qreal ypad = geometry().height() / 15;
         m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
         m_font.setPointSize(fontSize());
-        m_textEdit->nativeWidget()->setFont(m_font);
+
+        QString cssWeight = m_font.bold() ? "bold" : "normal";
+        QString cssStyle = m_font.italic() ? "italic" : "normal";
+        QString cssSize = QString::number(m_font.pointSize()) + QString("pt");
+        QString css = QString("QTextEdit { font-family:%1; font-size:%2; font-weight:%3;"
+        "font-style:%4; }").arg(m_font.family(), cssSize, cssWeight, cssStyle);
+        m_textEdit->nativeWidget()->setStyleSheet(css);
     }
 }
 
@@ -560,7 +566,6 @@ void Notes::configAccepted()
         cg.writeEntry("font", newFont);
         m_font = newFont;
         m_font.setPointSize(fontSize());
-        m_textEdit->nativeWidget()->setFont(newFont);
     }
 
     if (m_customFontSize != ui.customFontSizeSpinBox->value()) {
