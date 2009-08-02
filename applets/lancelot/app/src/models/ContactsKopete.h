@@ -34,6 +34,7 @@ public:
 protected:
     void activate(int index);
     void load();
+    void load(bool forceReload);
     void updateContactData(const QString & contactId);
     void timerEvent(QTimerEvent * event);
 

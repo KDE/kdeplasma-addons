@@ -55,7 +55,7 @@ void ContactsKopete::timerEvent(QTimerEvent * event)
         m_delayTimer.stop();
         // checking whether we have a large update
         if (m_contactsToUpdate.size() > 5) {
-            load();
+            load(true);
         } else {
             foreach(QString contact, m_contactsToUpdate) {
                 updateContactData(contact);
@@ -84,44 +84,65 @@ void ContactsKopete::activate(int index)
 
 void ContactsKopete::load()
 {
+    load(false);
+}
+
+void ContactsKopete::load(bool forceReload)
+{
     setEmitInhibited(true);
-    clear();
+    bool statusChanged = false;
+    // clear();
 
     if (!m_interface->isValid()) {
-        m_kopeteRunning = false;
-        m_checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
+        if (m_kopeteRunning) {
+            qDebug() << "ContactsKopete::disconnecting D-Bus";
+            disconnect(m_interface, SIGNAL(contactChanged(const QString &)),
+                    this, SLOT(contactChanged(const QString &)));
+            statusChanged = true;
+        }
 
-        if (addService("kopete")) {
-            Item * item = const_cast < Item * > (& itemAt(0));
-            item->title = i18n("Messaging client");
-            item->description = i18n("Messaging client is not running");
-        } else {
-            add(i18n("Unable to find Kopete"), "",
-                    KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
+        if (forceReload || statusChanged) {
+            clear();
+            m_kopeteRunning = false;
+            m_checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
+
+            if (addService("kopete")) {
+                Item * item = const_cast < Item * > (& itemAt(0));
+                item->title = i18n("Messaging client");
+                item->description = i18n("Messaging client is not running");
+            } else {
+                add(i18n("Unable to find Kopete"), "",
+                        KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
+            }
         }
     } else {
         if (!m_kopeteRunning) {
             qDebug() << "ContactsKopete::connecting D-Bus";
             connect(m_interface, SIGNAL(contactChanged(const QString &)),
                     this, SLOT(contactChanged(const QString &)));
+            statusChanged = true;
         }
 
-        m_kopeteRunning = true;
-        m_noOnlineContacts = false;
+        if (forceReload || statusChanged) {
+            qDebug() << "ContactsKopete::load: full";
+            clear();
+            m_kopeteRunning = true;
+            m_noOnlineContacts = false;
 
-        QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
-        if (!contacts.isValid()) {
-            m_kopeteRunning = false;
-            return;
-        }
+            QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
+            if (!contacts.isValid()) {
+                m_kopeteRunning = false;
+                return;
+            }
 
-        foreach (const QString& contact, contacts.value()) {
-             updateContactData(contact);
-        }
+            foreach (const QString& contact, contacts.value()) {
+                 updateContactData(contact);
+            }
 
-        if (size() == 0) {
-            add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
-            m_noOnlineContacts = true;
+            if (size() == 0) {
+                add(i18n("No online contacts"), "", KIcon("user-offline"), QVariant());
+                m_noOnlineContacts = true;
+            }
         }
     }
     setEmitInhibited(false);
