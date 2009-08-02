@@ -139,7 +139,7 @@ void News::createConfigurationInterface(KConfigDialog *parent)
         feedsUi.feedComboBox->addItem(name);
     }
 
-    foreach (const QString& name, akregatorFeeds().values()) {
+    foreach (const QString& name, akregatorFeeds()) {
         feedsUi.feedComboBox->addItem(name);
     }
 

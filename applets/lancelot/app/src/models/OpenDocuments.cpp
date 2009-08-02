@@ -67,7 +67,7 @@ void OpenDocuments::connectTask(TaskPtr task)
 
 void OpenDocuments::load()
 {
-    foreach (TaskPtr task, TaskManager::TaskManager::self()->tasks().values()) {
+    foreach (TaskPtr task, TaskManager::TaskManager::self()->tasks()) {
         if (setDataForTask(task)) {
             connectTask(task);
         }
