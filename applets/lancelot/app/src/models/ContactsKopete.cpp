@@ -25,6 +25,7 @@
 
 // #define UPDATE_INTERVAL 15000
 #define CHECK_RUNNING_INTERVAL 5000
+#define DELAY_INTERVAL 500
 
 namespace Models {
 
@@ -40,14 +41,27 @@ ContactsKopete::ContactsKopete()
     m_kopeteAvatarsDir = KStandardDirs::locate(
             "data", "kopete/avatars/Contacts/");
 
-    m_timer.start(CHECK_RUNNING_INTERVAL, this);
+    m_checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
     load();
 }
 
 void ContactsKopete::timerEvent(QTimerEvent * event)
 {
-    if (event->timerId() == m_timer.timerId()) {
+    if (event->timerId() == m_checkRunningTimer.timerId()) {
         load();
+    } else if (event->timerId() == m_delayTimer.timerId()) {
+        qDebug() << "ContactsKopete::contactChanged [delayed]:"
+            << m_contactsToUpdate.size();
+        m_delayTimer.stop();
+        // checking whether we have a large update
+        if (m_contactsToUpdate.size() > 5) {
+            load();
+        } else {
+            foreach(QString contact, m_contactsToUpdate) {
+                updateContactData(contact);
+            }
+        }
+        m_contactsToUpdate.clear();
     }
 }
 
@@ -75,7 +89,7 @@ void ContactsKopete::load()
 
     if (!m_interface->isValid()) {
         m_kopeteRunning = false;
-        m_timer.start(CHECK_RUNNING_INTERVAL, this);
+        m_checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
 
         if (addService("kopete")) {
             Item * item = const_cast < Item * > (& itemAt(0));
@@ -86,12 +100,14 @@ void ContactsKopete::load()
                     KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
         }
     } else {
-        connect(m_interface, SIGNAL(contactChanged(const QString &)),
-                this, SLOT(contactChanged(const QString &)));
+        if (!m_kopeteRunning) {
+            qDebug() << "ContactsKopete::connecting D-Bus";
+            connect(m_interface, SIGNAL(contactChanged(const QString &)),
+                    this, SLOT(contactChanged(const QString &)));
+        }
 
         m_kopeteRunning = true;
         m_noOnlineContacts = false;
-        // m_timer.start(UPDATE_INTERVAL, this);
 
         QDBusReply < QStringList > contacts = m_interface->contactsByFilter("online");
         if (!contacts.isValid()) {
@@ -178,7 +194,12 @@ void ContactsKopete::updateContactData(const QString & contact)
 void ContactsKopete::contactChanged(const QString & contactId)
 {
     qDebug() << "ContactsKopete::contactChanged:" << contactId;
-    updateContactData(contactId);
+    // updateContactData(contactId);
+    // delaying the update
+    if (!m_contactsToUpdate.contains(contactId)) {
+        m_contactsToUpdate << contactId;
+    }
+    m_delayTimer.start(DELAY_INTERVAL, this);
 }
 
 } // namespace Models

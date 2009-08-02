@@ -31,19 +31,20 @@ public:
     ContactsKopete();
     ~ContactsKopete();
 
-    void timerEvent(QTimerEvent * event);
-
 protected:
     void activate(int index);
     void load();
     void updateContactData(const QString & contactId);
+    void timerEvent(QTimerEvent * event);
 
 protected Q_SLOTS:
     void contactChanged(const QString & contactId);
 
 private:
     org::kde::Kopete * m_interface;
-    QBasicTimer m_timer;
+    QBasicTimer m_delayTimer;
+    QBasicTimer m_checkRunningTimer;
+    QStringList m_contactsToUpdate;
     QString m_kopeteAvatarsDir;
     bool m_kopeteRunning : 1;
     bool m_noOnlineContacts : 1;
