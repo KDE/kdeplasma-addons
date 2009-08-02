@@ -160,7 +160,7 @@ ContentListJob *OcsApi::requestContent( const Category::List &categories,
   KUrl url = createUrl( "content/data" );
 
   QStringList categoryIds;
-  foreach( Category category, categories ) {
+  foreach( const Category &category, categories ) {
     categoryIds.append( category.id() );
   }
   url.addQueryItem( "categories", categoryIds.join( "x" ) );

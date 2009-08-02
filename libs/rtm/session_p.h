@@ -85,7 +85,7 @@ class RTM::SessionPrivate {
   void smartListReply(RTM::Request* reply) {
     QStringList parts = reply->requestUrl().split("&");
     RTM::ListId id = 0;
-    foreach(QString part, parts)
+    foreach(const QString &part, parts)
       if (part.contains("rtm_internal_list_id"))
         id = part.split("=").last().toLongLong();
       

@@ -318,7 +318,7 @@ void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
             m_knowledgeBaseListJobs.remove(job);
         }
 
-        foreach (KnowledgeBase k, job->knowledgeBaseList()) {
+        foreach (const KnowledgeBase &k, job->knowledgeBaseList()) {
             setKnowledgeBaseData(source, k);
         }
         scheduleSourcesUpdated();
