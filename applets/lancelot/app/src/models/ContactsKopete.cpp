@@ -30,7 +30,7 @@
 namespace Models {
 
 ContactsKopete::ContactsKopete()
-    : m_interface(NULL), m_kopeteRunning(true)
+    : m_interface(NULL), m_kopeteRunning(false)
 {
     setSelfTitle(i18n("Contacts"));
     setSelfIcon(KIcon("kopete"));
@@ -193,7 +193,7 @@ void ContactsKopete::updateContactData(const QString & contact)
 
 void ContactsKopete::contactChanged(const QString & contactId)
 {
-    qDebug() << "ContactsKopete::contactChanged:" << contactId;
+    // qDebug() << "ContactsKopete::contactChanged:" << contactId;
     // updateContactData(contactId);
     // delaying the update
     if (!m_contactsToUpdate.contains(contactId)) {
