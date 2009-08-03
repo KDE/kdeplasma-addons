@@ -68,7 +68,6 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_newTweets(0),
       m_service(0),
       m_profileService(0),
-      m_statusService(0),
       m_lastTweet(0),
       m_wallet(0),
       m_walletWait(None),
@@ -683,6 +682,16 @@ void MicroBlog::configAccepted()
 
     //kDebug() << changed << reloadRequired;
     if (changed) {
+        if (m_service) {
+            m_service->deleteLater();
+            m_service = 0;
+        }
+
+        if (m_profileService) {
+            m_profileService->deleteLater();
+            m_profileService = 0;
+        }
+
         if (reloadRequired) {
             m_lastTweet = 0;
             downloadHistory();
@@ -699,7 +708,6 @@ MicroBlog::~MicroBlog()
     delete m_colorScheme;
     delete m_service;
     delete m_profileService;
-    delete m_statusService;
 }
 
 void MicroBlog::editTextChanged()
@@ -733,25 +741,32 @@ bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
 
 void MicroBlog::updateStatus()
 {
+    createTimelineService();
     QString status = m_statusEdit->nativeWidget()->toPlainText();
-
-    if (!m_statusService) {
-        m_statusService = m_engine->serviceForSource(m_curTimeline);
-    }
 
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
-    m_service->startOperationCall(cg);
-    //m_statusUpdates.insert(m_service->startOperationCall(cg), status);
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
-    connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
 
+    if (m_updateJobs.isEmpty()) {
+        connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
+    }
+
+    m_updateJobs.insert(m_service->startOperationCall(cg));
     m_statusEdit->nativeWidget()->setPlainText("");
 }
 
 void MicroBlog::updateCompleted(Plasma::ServiceJob *job)
 {
+    if (!m_updateJobs.contains(job)) {
+        return;
+    }
+
+    m_updateJobs.remove(job);
+    if (m_updateJobs.isEmpty()) {
+        disconnect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
+    }
+
     if (!job->error()) {
         //m_statusUpdates.value(job);
         downloadHistory();
@@ -774,6 +789,39 @@ void MicroBlog::downloadHistory()
 
     m_flash->flash(i18n("Refreshing timeline..."), -1);
 
+    if (m_service) {
+        KConfigGroup cg = m_service->operationDescription("refresh");
+        m_service->startOperationCall(cg);
+    } else {
+        createTimelineService();
+        KConfigGroup cg = m_service->operationDescription("auth");
+        cg.writeEntry("password", m_password);
+        m_service->startOperationCall(cg);
+    }
+
+    //get the profile to retrieve the user icon
+
+    if (m_profileService) {
+        KConfigGroup cg = m_profileService->operationDescription("refresh");
+        m_profileService->startOperationCall(cg);
+    } else {
+        QString profileQuery(QString("Profile:%1@%2").arg(m_username, m_serviceUrl));
+        m_engine->connectSource(m_imageQuery, this);
+        m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
+        m_profileService = m_engine->serviceForSource(profileQuery);
+        connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
+        KConfigGroup profileConf = m_profileService->operationDescription("auth");
+        profileConf.writeEntry("password", m_password);
+        m_profileService->startOperationCall(profileConf);
+    }
+}
+
+void MicroBlog::createTimelineService()
+{
+    if (m_service) {
+        return;
+    }
+
     QString query;
     if (m_includeFriends) {
         query = QString("TimelineWithFriends:%1@%2");
@@ -783,16 +831,12 @@ void MicroBlog::downloadHistory()
 
     query = query.arg(m_username, m_serviceUrl);
     //kDebug() << m_curTimeline << query;
-    bool newQuery = m_curTimeline != query;
-    if (newQuery) {
+    if (m_curTimeline != query) {
         //ditch the old one, if needed
         if (!m_curTimeline.isEmpty()) {
             m_engine->disconnectSource(m_curTimeline, this);
             m_engine->disconnectSource("Error:" + m_curTimeline, this);
         }
-
-        delete m_statusService;
-        m_statusService = 0;
 
         m_curTimeline = query;
     }
@@ -800,36 +844,26 @@ void MicroBlog::downloadHistory()
     //kDebug() << "Connecting to source " << query << "with refresh rate" << m_historyRefresh * 60 * 1000;
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
-
-    if (m_service) {
-        m_service->deleteLater();
-    }
     m_service = m_engine->serviceForSource(m_curTimeline);
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
-    KConfigGroup cg = m_service->operationDescription("auth");
-    cg.writeEntry("password", m_password);
-    m_service->startOperationCall(cg);
-
-    //get the profile to retrieve the user icon
-    QString profileQuery(QString("Profile:%1@%2").arg(m_username, m_serviceUrl));
-
-    m_engine->connectSource(m_imageQuery, this);
-    m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
-
-    if (m_profileService) {
-        m_profileService->deleteLater();
-    }
-    m_profileService = m_engine->serviceForSource(profileQuery);
-    connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
-    KConfigGroup profileConf = m_profileService->operationDescription("auth");
-    profileConf.writeEntry("password", m_password);
-    m_profileService->startOperationCall(profileConf);
 }
 
 void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
 {
     if (job->error()) {
         m_flash->flash(job->errorString(), 2000);
+
+        // reset the service objects to give it a chance
+        // to re-authenticate
+        if (m_service) {
+            m_service->deleteLater();
+            m_service = 0;
+        }
+
+        if (m_profileService) {
+            m_profileService->deleteLater();
+            m_profileService = 0;
+        }
     }
 }
 

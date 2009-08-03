@@ -130,6 +130,11 @@ class MicroBlog : public Plasma::PopupApplet
          */
         void paintIcon();
 
+        /**
+         * Sets up the timeline service object (m_service)
+         */
+        void createTimelineService();
+
         Plasma::Svg *m_theme;
         Plasma::TextEdit *m_statusEdit;
         Plasma::WebContent *m_historyEdit;
@@ -156,7 +161,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::DataEngine *m_engine;
         Plasma::Service *m_service;
         Plasma::Service *m_profileService;
-        Plasma::Service *m_statusService;
+        QSet<Plasma::ServiceJob *> m_updateJobs;
         QString m_curTimeline;
 
         QMap<QString, QPixmap> m_pictureMap;
