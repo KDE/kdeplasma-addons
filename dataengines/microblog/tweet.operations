@@ -2,6 +2,9 @@
 <!DOCTYPE kcfg SYSTEM
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
+    <group name="refresh">
+    </group>
+
     <group name="auth">
         <entry name="password" type="String">
             <label>The log in password for the account.</label>

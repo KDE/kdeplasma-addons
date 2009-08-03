@@ -62,9 +62,9 @@ Plasma::ServiceJob* TimelineService::createJob(const QString &operation, QMap<QS
 {
     if (operation == "update") {
         return new TweetJob(m_source, parameters);
-    }
-
-    if (operation == "auth") {
+    } else if (operation == "refresh") {
+        m_source->update(true);
+    } else if (operation == "auth") {
         m_source->setPassword(parameters.value("password").toString());
     }
 
