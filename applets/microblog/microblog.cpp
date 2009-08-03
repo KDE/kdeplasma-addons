@@ -751,6 +751,7 @@ void MicroBlog::updateStatus()
     KConfigGroup cg = m_service->operationDescription("update");
     cg.writeEntry("password", m_password);
     cg.writeEntry("status", status);
+    m_service->startOperationCall(cg);
     //m_statusUpdates.insert(m_service->startOperationCall(cg), status);
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(updateCompleted(Plasma::ServiceJob*)));
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
@@ -809,7 +810,9 @@ void MicroBlog::downloadHistory()
     m_engine->connectSource(query, this, m_historyRefresh * 60 * 1000);
     m_engine->connectSource("Error:" + query, this);
 
-    delete m_service;
+    if (m_service) {
+        m_service->deleteLater();
+    }
     m_service = m_engine->serviceForSource(m_curTimeline);
     connect(m_service, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
     KConfigGroup cg = m_service->operationDescription("auth");
@@ -822,7 +825,9 @@ void MicroBlog::downloadHistory()
     m_engine->connectSource(m_imageQuery, this);
     m_engine->connectSource(profileQuery, this, m_historyRefresh * 60 * 1000);
 
-    delete m_profileService;
+    if (m_profileService) {
+        m_profileService->deleteLater();
+    }
     m_profileService = m_engine->serviceForSource(profileQuery);
     connect(m_profileService, SIGNAL(finished(Plasma::ServiceJob*)), this, SLOT(serviceFinished(Plasma::ServiceJob*)));
     KConfigGroup profileConf = m_profileService->operationDescription("auth");
