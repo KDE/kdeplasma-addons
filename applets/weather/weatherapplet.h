@@ -63,7 +63,7 @@ protected:
     void constraintsEvent(Plasma::Constraints constraints);
 
 private slots:
-    void invokeBrowser(const QString& url);
+    void invokeBrowser(const QString& url) const;
 
 private:
     Plasma::DataEngine::Data m_currentData; // Current data returned from ion
@@ -95,7 +95,7 @@ private:
     Plasma::Frame *m_titleFrame;
     QFont m_titleFont;
 
-    bool isValidData(const QVariant &data);
+    bool isValidData(const QVariant &data) const;
     void weatherContent(const Plasma::DataEngine::Data &data);
     void setVisible(bool visible, QGraphicsLayout *layout);
     void setVisibleLayout(bool val);

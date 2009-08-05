@@ -195,7 +195,7 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WeatherApplet::invokeBrowser(const QString& url)
+void WeatherApplet::invokeBrowser(const QString& url) const
 {
     KToolInvocation::invokeBrowser(url);
 }
@@ -243,7 +243,7 @@ QString WeatherApplet::convertTemperature(int format, QString value, int type, b
     }
 }
 
-bool WeatherApplet::isValidData(const QVariant &data)
+bool WeatherApplet::isValidData(const QVariant &data) const
 {
     return ((data != "N/A") && (!data.toString().isEmpty()));
 }
