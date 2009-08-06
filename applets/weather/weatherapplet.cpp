@@ -590,7 +590,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Humidity"])) {
         QStandardItem *dataHumidity = new QStandardItem();
-        dataHumidity->setText(i18nc("content of water in air", "Humidity: %1", data["Humidity"].toString()));
+        dataHumidity->setText(i18nc("content of water in air", "Humidity: %1%2", data["Humidity"].toString(), WeatherUtils::getUnitString(WeatherUtils::Percent, false)));
         m_detailsModel->appendRow(dataHumidity);
     }
 
