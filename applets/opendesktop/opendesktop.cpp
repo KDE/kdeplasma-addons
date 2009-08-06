@@ -440,7 +440,7 @@ void OpenDesktop::configAccepted()
 void OpenDesktop::registerAccount()
 {
     kDebug() << "register new account";
-    KToolInvocation::invokeBrowser("http://www.opendesktop.org/usermanager/new.php");
+    KToolInvocation::invokeBrowser("https://www.opendesktop.org/usermanager/new.php");
 }
 
 void OpenDesktop::syncGeoLocation()

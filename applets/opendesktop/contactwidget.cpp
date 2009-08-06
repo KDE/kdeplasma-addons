@@ -195,12 +195,12 @@ void ContactWidget::setImage(const QImage &image)
 
 void ContactWidget::sendMessage()
 {
-    KToolInvocation::invokeBrowser(QString("http://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user()));
+    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user()));
 }
 
 void ContactWidget::addFriend()
 {
-    KToolInvocation::invokeBrowser(QString("http://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user()));
+    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user()));
 }
 
 void ContactWidget::userProperties()
