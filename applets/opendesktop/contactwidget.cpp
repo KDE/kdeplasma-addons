@@ -28,7 +28,7 @@
 #include <KIcon>
 #include <KIconLoader>
 #include <KGlobalSettings>
-#include <KRun>
+#include <KToolInvocation>
 
 // Plasma
 #include <Plasma/Theme>
@@ -195,15 +195,12 @@ void ContactWidget::setImage(const QImage &image)
 
 void ContactWidget::sendMessage()
 {
-    QUrl url = QString("http://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user());
-    new KRun(url, m_nameLabel->nativeWidget());
+    KToolInvocation::invokeBrowser(QString("http://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user()));
 }
 
 void ContactWidget::addFriend()
 {
-    KUrl url = QString("http://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user());
-    kDebug() << "add friend" << user() << url.url();
-    new KRun(url, m_nameLabel->nativeWidget());
+    KToolInvocation::invokeBrowser(QString("http://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user()));
 }
 
 void ContactWidget::userProperties()

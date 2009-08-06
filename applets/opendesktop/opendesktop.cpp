@@ -26,7 +26,7 @@
 //KDE
 #include <KConfigDialog>
 #include <KLocale>
-#include <KRun>
+#include <KToolInvocation>
 
 //plasma
 #include <Plasma/Label>
@@ -439,9 +439,8 @@ void OpenDesktop::configAccepted()
 
 void OpenDesktop::registerAccount()
 {
-    KUrl url("http://www.opendesktop.org/usermanager/new.php");
-    kDebug() << "register new account" << url.url();
-    new KRun(url, ui.registerButton);
+    kDebug() << "register new account";
+    KToolInvocation::invokeBrowser("http://www.opendesktop.org/usermanager/new.php");
 }
 
 void OpenDesktop::syncGeoLocation()
