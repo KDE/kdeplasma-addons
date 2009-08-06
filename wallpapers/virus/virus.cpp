@@ -54,7 +54,7 @@ Virus::Virus(QObject *parent, const QVariantList &args)
 Virus::~Virus()
 {
     alife.exit(0);
-    while(!alife.isFinished()) ;
+    alife.wait();
 }
 
 void Virus::init(const KConfigGroup &config)
