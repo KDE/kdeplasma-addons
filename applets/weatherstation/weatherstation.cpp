@@ -45,12 +45,22 @@ void WeatherStation::init()
 {
     m_lcd = new LCD(this);
     m_lcd->setSvg("weatherstation/lcd");
-    // So we don't show in panel
-    m_lcd->setMinimumSize(m_lcd->preferredSize() / 2);
+    // i18n: This and other all-caps messages are pieces of text shown on
+    // an LCD-like image mimicking a electronic weather station display.
+    // If weather station displays in your country are always in English,
+    // you may want to consider leaving these strings in English too,
+    // to achieve a more realistic feeling.
+    m_lcd->setLabel("pressure-label", i18n("PRESSURE"));
+    m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
+    m_lcd->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
+    m_lcd->setLabel("humidity-label", i18n("HUMIDITY"));
+    m_lcd->setLabel("wind-label", i18n("WIND"));
+    m_lcd->setLabel("provider-label", QString());
     connect(m_lcd, SIGNAL(clicked(const QString&)), this, SLOT(clicked(const QString&)));
 
     m_lcdPanel = new LCD(this);
     m_lcdPanel->setSvg("weatherstation/lcd_panel");
+    m_lcdPanel->setLabel("temperature-label", i18n("OUTDOOR TEMP"));
     m_lcdPanel->hide();
 
     //m_lcd->setItemOn("under_construction");
@@ -144,9 +154,9 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
         setWind(value(data["Wind Speed"].toString(),
                 WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
                 data["Wind Direction"].toString());
-        m_lcd->setLabel("label0", data["Credit"].toString());
+        m_lcd->setLabel("provider-label", data["Credit"].toString());
         m_url = data["Credit Url"].toString();
-        m_lcd->setItemClickable("label0", !m_url.isEmpty());
+        m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
 
         if (m_showToolTip) {
             Plasma::ToolTipContent ttc(data["Place"].toString(),
@@ -224,9 +234,10 @@ void WeatherStation::setPressure(const QString& condition, const Conversion::Val
     current = fromCondition(condition);
     m_lcd->setGroup("weather", current);
 
-    QString s = fitValue(Conversion::Converter::self()->convert(pressure, pressureUnit()), 5);
+    Conversion::Value value = Conversion::Converter::self()->convert(pressure, pressureUnit());
+    QString s = fitValue(value, 5);
     m_lcd->setNumber("pressure", s);
-    m_lcd->setGroup("pressure_unit", QStringList() << pressureUnit());
+    m_lcd->setLabel("pressure-unit-label", value.unit()->symbol());
 
     qreal t;
     if (tendencyString.toLower() == "rising") {
@@ -249,8 +260,8 @@ void WeatherStation::setPressure(const QString& condition, const Conversion::Val
 void WeatherStation::setTemperature(const Conversion::Value& temperature)
 {
     Conversion::Value v = Conversion::Converter::self()->convert(temperature, temperatureUnit());
-    m_lcd->setGroup("temp_unit", QStringList() << temperatureUnit());
-    m_lcdPanel->setGroup("temp_unit", QStringList() << temperatureUnit());
+    m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
+    m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
     m_lcd->setNumber("temperature", fitValue(v , 4));
     m_lcdPanel->setNumber("temperature", fitValue(v , 3));
     setLCDIcon();
@@ -269,7 +280,8 @@ void WeatherStation::setHumidity(QString humidity)
 void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
 {
     //kDebug() << speed.number() << speed.unit()->symbol() << dir;
-    QString s = fitValue(Conversion::Converter::self()->convert(speed, speedUnit()), 3);
+    Conversion::Value value = Conversion::Converter::self()->convert(speed, speedUnit());
+    QString s = fitValue(value, 3);
 
     if (dir == "N/A") {
         m_lcd->setGroup("wind", QStringList());
@@ -277,7 +289,7 @@ void WeatherStation::setWind(const Conversion::Value& speed, const QString& dir)
         m_lcd->setGroup("wind", QStringList() << dir);
     }
     m_lcd->setNumber("wind_speed", s);
-    m_lcd->setGroup("wind_unit", QStringList() << speedUnit());
+    m_lcd->setLabel("wind-unit-label", value.unit()->symbol());
 }
 
 void WeatherStation::clicked(const QString &name)
