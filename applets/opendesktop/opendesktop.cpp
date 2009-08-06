@@ -439,7 +439,7 @@ void OpenDesktop::configAccepted()
 
 void OpenDesktop::registerAccount()
 {
-    KUrl url("http://www.opendesktop.org/usermanager/new.php");
+    KUrl url("https://www.opendesktop.org/usermanager/new.php");
     kDebug() << "register new account" << url.url();
     new KRun(url, ui.registerButton);
 }

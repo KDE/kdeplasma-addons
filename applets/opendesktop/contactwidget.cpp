@@ -195,13 +195,13 @@ void ContactWidget::setImage(const QImage &image)
 
 void ContactWidget::sendMessage()
 {
-    QUrl url = QString("http://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user());
+    QUrl url = QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user());
     new KRun(url, m_nameLabel->nativeWidget());
 }
 
 void ContactWidget::addFriend()
 {
-    KUrl url = QString("http://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user());
+    KUrl url = QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user());
     kDebug() << "add friend" << user() << url.url();
     new KRun(url, m_nameLabel->nativeWidget());
 }
