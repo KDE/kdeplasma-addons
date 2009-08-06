@@ -27,6 +27,7 @@ Alife::Alife(){
 }
 
 Alife::~Alife(){
+    mutex.unlock();
     resetLife();
 }
 
@@ -519,7 +520,7 @@ void Alife::run(){
     
     virusMove();
     
-    QTime b = QTime::currentTime();
+    //QTime b = QTime::currentTime();
     //qDebug() << "needed" << a.msecsTo(b);
 
     mutex.unlock();
@@ -549,7 +550,7 @@ void Alife::virusMove()
     kDebug() << "start code";
     while(myCell->code[pointer] != 0 && pointer < VIRUS_GENOME_SIZE) {
         kDebug() << myCell->code[pointer++];
-    }
+    }file:///home/kde-devel/kde/src/kdeplasma-addons/wallpapers/virus/alife.h
     kDebug() << "end code";*/
 
     int cells = m_livingCells.size();
@@ -573,9 +574,9 @@ void Alife::virusMove()
     for(int x = 0; x < m_width; x++) {
         for(int y = 0; y < m_height; y++) {
             struct cell *cell = &m_cells[x][y];
-            newImage.setPixel(cell->x,cell->y,qRgb(cell->energy,cell->energy,cell->energy));
+            newImage.setPixel(cell->x,cell->y,qRgb(cell->energy,cell->energy,cell->energy));file:///home/kde-devel/kde/src/kdeplasma-addons/wallpapers/virus/virus.cpp
         }
-    }
+    }file:///home/kde-devel/kde/src/kdeplasma-addons/wallpapers/virus/virus.h
     m_pixmap = QPixmap::fromImage(newImage);*/
         
        
