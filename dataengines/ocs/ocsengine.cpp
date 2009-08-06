@@ -177,12 +177,7 @@ bool OcsEngine::updateSourceEvent(const QString &name)
     return true;
     kDebug() << "for name" << name;
     if (name == I18N_NOOP("activity")) {
-        foreach(const Attica::Activity &activity, m_activities ) {
-            setData(name, I18N_NOOP("user"), activity.user());
-            setData(name, I18N_NOOP("timestamp"), activity.timestamp());
-            setData(name, I18N_NOOP("message"), activity.message());
-        }
-        return true;
+
     } else if (name.startsWith("Friends-")) {
 
     }
@@ -196,7 +191,22 @@ void OcsEngine::slotActivityResult( KJob *j )
     if (!j->error()) {
         Attica::ActivityListJob *job = static_cast<Attica::ActivityListJob *>( j );
         m_activities = job->ActivityList();
-        updateSourceEvent(I18N_NOOP("activity"));
+
+        QHash<uint, Plasma::DataEngine::Data> orderedActivities;
+        foreach(const Attica::Activity &activity, m_activities ) {
+            Plasma::DataEngine::Data activityData;
+            activityData["user"] = activity.user();
+            activityData["timestamp"] = activity.timestamp();
+            activityData["message"] = activity.message();
+
+            orderedActivities[activity.timestamp().toTime_t()] = activityData;
+        }
+
+        int i = 0;
+        foreach (Plasma::DataEngine::Data activityData, orderedActivities) {
+            setData("activity", QString::number(i), activityData);
+            ++i;
+        }
     }
 }
 
