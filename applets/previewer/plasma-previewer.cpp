@@ -55,6 +55,7 @@ Previewer::Previewer(QObject *parent, const QVariantList &args)
       m_base(0),
       m_dialog(0),
       m_part(0),
+      m_currentFile(QString()),
       m_previewWidget(0)
 {
     new PreviewerAdaptor(this);
@@ -68,6 +69,10 @@ Previewer::Previewer(QObject *parent, const QVariantList &args)
     setAcceptDrops(true);
 
     resize(PreviewWidget::suggestedWidth(), 150);
+    if (args.count()) {
+        kDebug() << "Opening file from arg passed into applet ..." << args.value(0).toString();
+        m_currentFile = args.value(0).toString();
+    }
 }
 
 Previewer::~Previewer()
@@ -99,6 +104,9 @@ void Previewer::init()
 {
     setPopupIcon("previewer");
     setupActions();
+    if (!m_currentFile.isEmpty()) {
+        openFile(m_currentFile);
+    }
 }
 
 void Previewer::constraintsEvent(Plasma::Constraints constraints)
@@ -257,7 +265,7 @@ void Previewer::removeCurrentFromHistory()
     m_dialog->setWindowFlags(Qt::FramelessWindowHint);
     m_dialog->show();
 
-    int buttonCode = KMessageBox::questionYesNo(m_dialog, i18n("Are you sure you want to remove:\n%1", cur.pathOrUrl()), 
+    int buttonCode = KMessageBox::questionYesNo(m_dialog, i18n("Are you sure you want to remove:\n%1", cur.pathOrUrl()),
                                                   i18n("Deleting File"));
 
     m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
