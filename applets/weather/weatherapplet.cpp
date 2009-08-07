@@ -273,11 +273,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Temperature"])) {
         m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-
     } else {
-        m_tempLabel->setText(QString());
+        m_tempLabel->setText(i18nc("Not available","N/A"));
     }
-
 
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
@@ -558,7 +556,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Dewpoint"])) {
         QStandardItem *dataDewpoint = new QStandardItem();
-        dataDewpoint->setText(i18nc("ground temperature, unit", "Dewpoint: %1", convertTemperature(temperatureUnitInt(), data["Dewpoint"].toString(), data["Dewpoint Unit"].toInt(), false)));
+        dataDewpoint->setText(i18nc("ground temperature, unit", "Dewpoint: %1", convertTemperature(temperatureUnitInt(), data["Dewpoint"].toString(), data["Temperature Unit"].toInt(), false)));
         m_detailsModel->appendRow(dataDewpoint);
     }
 
