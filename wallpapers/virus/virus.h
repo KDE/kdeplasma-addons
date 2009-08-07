@@ -53,7 +53,7 @@ class Virus : public Plasma::Wallpaper
         void intervalChanged(int interval);
         void maxCellsChanged(int interval);
         void showCellsChanged(int state);
-	void virusUpdated();
+        void virusUpdated();
 
     protected:
         void init(const KConfigGroup &config);

@@ -68,19 +68,19 @@ class Alife : public QThread {
     };
 
     void setMaxViruses(int max){
-	m_maxViruses = max;
+        m_maxViruses = max;
     };
 
     int getMaxViruses(){
-	return m_maxViruses;
+        return m_maxViruses;
     };
 
     void setShowCells(bool show){
-	m_showCells = show;
+        m_showCells = show;
     };
 
     bool showCells(){
-	return m_showCells;
+        return m_showCells;
     }
 
     

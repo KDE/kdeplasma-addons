@@ -132,15 +132,15 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_model->reload(m_usersWallpapers);
     m_uiVirus.m_view->setModel(m_model);
     m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view->view(),
-							      ratio, this));
+                                                              ratio, this));
     m_uiVirus.m_view->view()->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     int index = m_model->indexOf(m_wallpaper);
     if (index != -1) {
-	m_uiVirus.m_view->setCurrentIndex(index);
-	Plasma::Package *b = m_model->package(index);
-	if (b) {
-	    fillMetaInfo(b);
-	}
+        m_uiVirus.m_view->setCurrentIndex(index);
+        Plasma::Package *b = m_model->package(index);
+        if (b) {
+            fillMetaInfo(b);
+        }
     }
     connect(m_uiVirus.m_view, SIGNAL(currentIndexChanged(int)), this, SLOT(pictureChanged(int)));
 
@@ -156,13 +156,13 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.m_resizeMethod->addItem(i18n("Tiled"), TiledResize);
     m_uiVirus.m_resizeMethod->addItem(i18n("Center Tiled"), CenterTiledResize);
     for (int i = 0; i < m_uiVirus.m_resizeMethod->count(); ++i) {
-	if (m_resizeMethod == m_uiVirus.m_resizeMethod->itemData(i).value<int>()) {
-	    m_uiVirus.m_resizeMethod->setCurrentIndex(i);
-	    break;
-	}
+        if (m_resizeMethod == m_uiVirus.m_resizeMethod->itemData(i).value<int>()) {
+            m_uiVirus.m_resizeMethod->setCurrentIndex(i);
+            break;
+        }
     }
     connect(m_uiVirus.m_resizeMethod, SIGNAL(currentIndexChanged(int)),
-	    this, SLOT(positioningChanged(int)));
+            this, SLOT(positioningChanged(int)));
 
     m_uiVirus.m_color->setColor(m_color);
     connect(m_uiVirus.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));

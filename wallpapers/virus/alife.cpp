@@ -109,31 +109,31 @@ void Alife::createViruses(int amount){
                 temp->code[i] = rand()%12;
             }
 
-	    temp->code[rand()%7] = 7; //cheating, jumpstart evolution
+            temp->code[rand()%7] = 7; //cheating, jumpstart evolution
 
-	    /*temp->code[0] = 4;
-	    temp->code[1] = 12;
-	    temp->code[2] = 2;
-	    temp->code[3] = 7;*/
+            /*temp->code[0] = 4;
+            temp->code[1] = 12;
+            temp->code[2] = 2;
+            temp->code[3] = 7;*/
 
-	    /*temp->code[0] = 1;
-	    temp->code[1] = 10;
-	    temp->code[2] = 19;
-	    temp->code[3] = 4;
-	    temp->code[4] = 19;
-	    temp->code[5] = 6;
-	    temp->code[6] = 19;
-	    temp->code[7] = 6;
-	    temp->code[8] = 12;
-	    temp->code[9] = 2;
-	    temp->code[10] = 7;
-	    temp->code[11] = 13;
+            /*temp->code[0] = 1;
+            temp->code[1] = 10;
+            temp->code[2] = 19;
+            temp->code[3] = 4;
+            temp->code[4] = 19;
+            temp->code[5] = 6;
+            temp->code[6] = 19;
+            temp->code[7] = 6;
+            temp->code[8] = 12;
+            temp->code[9] = 2;
+            temp->code[10] = 7;
+            temp->code[11] = 13;
 
-	    temp->code[12] = 2;
-	    temp->code[13] = 3;
-	    temp->code[14] = 9;
-	    temp->code[15] = 11;
-	    temp->code[16] = 7;*/
+            temp->code[12] = 2;
+            temp->code[13] = 3;
+            temp->code[14] = 9;
+            temp->code[15] = 11;
+            temp->code[16] = 7;*/
             m_livingCells.append(temp);
         }
     }
@@ -196,16 +196,16 @@ void Alife::executeCell(int id)
             break;
             case 3: //move
                 if(moveCell(id, facing)){
-		    if(pixelBackup != pixel) {
-			m_image.setPixel(cell->x, cell->y, pixel );
-		    }
+                    if(pixelBackup != pixel) {
+                        m_image.setPixel(cell->x, cell->y, pixel );
+                    }
                     cell = m_livingCells.at(id);
                     pixel = m_image.pixel(cell->x, cell->y);
                     pixelBackup = pixel;
                     special--;
-		    if(special <= 0) {
-			stop = true;
-		    }
+                    if(special <= 0) {
+                        stop = true;
+                    }
                 }
             break;
             case 4:{ //eat red
@@ -214,7 +214,7 @@ void Alife::executeCell(int id)
                     int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = m_current_eat;
+                    better_eat = m_current_eat;
                 }
                 pixel = qRgb(color, qGreen(pixel), qBlue(pixel));
             }break;
@@ -224,7 +224,7 @@ void Alife::executeCell(int id)
                     int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = m_current_eat;
+                    better_eat = m_current_eat;
                 }
                 pixel = qRgb(qRed(pixel), color, qBlue(pixel));
             }break;
@@ -234,16 +234,16 @@ void Alife::executeCell(int id)
                     int temp = qMin(color / better_eat, color);
                     color -= temp;
                     cell->energy += temp;
-		    better_eat = m_current_eat;
+                    better_eat = m_current_eat;
                 }
                 pixel = qRgb(qRed(pixel), qGreen(pixel), color);
             }break;
             case 7: //reproduce
                 reproduce(cell, facing, pixel);
                 special-= 2;
-		if(special <= 0) {
-		    stop = true;
-		}
+                if(special <= 0) {
+                    stop = true;
+                }
             break;
             case 8: //increment register
                 reg++;
@@ -333,20 +333,20 @@ void Alife::executeCell(int id)
                 struct cell *temp = &m_cells[neighbour.x()][neighbour.y()];
                 if(temp->alive && temp->code[0] == reg) {
                     temp->killMe = true;
-		    int enTemp = cell->energy + temp->energy / 2;
+                    int enTemp = cell->energy + temp->energy / 2;
                     cell->energy = qMin(255, enTemp);
                 }
             }break;
             case 18:{ //give
                 QPoint neighbour = getNeighbour(cell->x, cell->y, facing);
                 struct cell *temp = &m_cells[neighbour.x()][neighbour.y()];
-		int enTemp = temp->energy + cell->energy / 2;
+                int enTemp = temp->energy + cell->energy / 2;
                 temp->energy = qMin(255, enTemp);
                 cell->energy /= 2;
             }break;
-	    case 19:{ //better eat
-		better_eat = m_current_eat_best;
-	    }break;
+            case 19:{ //better eat
+                better_eat = m_current_eat_best;
+            }break;
             default:
               kDebug() << "wah" << cell->code[codePointer] << codePointer;
             break;
@@ -355,12 +355,12 @@ void Alife::executeCell(int id)
         if(codePointer >= VIRUS_GENOME_SIZE) {
             stop = true;
         }
-	better_eat = qMin(better_eat + 1, m_current_eat);
+        better_eat = qMin(better_eat + 1, m_current_eat);
         max--;
     }
 
     if(pixelBackup != pixel) {
-	m_image.setPixel(cell->x, cell->y, pixel );
+        m_image.setPixel(cell->x, cell->y, pixel );
     }
 
     if(cell->energy <= 0) {
@@ -377,14 +377,14 @@ bool Alife::reproduce(struct cell* cell, int direction, QRgb color)
 
     if(!newCell->alive&& m_livingCells.size() < m_maxViruses) {
 
-	//give a unfair advantage to darker places
-	int prob = (((qRed(color) + qGreen(color) + qBlue(color))/ 255.)+1);// 0 - 765
+        //give a unfair advantage to darker places
+        int prob = (((qRed(color) + qGreen(color) + qBlue(color))/ 255.)+1);// 0 - 765
 
-	if(rand() % prob  != 0){
-	    return false;
-	}
+        if(rand() % prob  != 0){
+            return false;
+        }
 
-	resetCell(newCell);
+        resetCell(newCell);
         newCell->alive = true;
         newCell->code = new uchar[VIRUS_GENOME_SIZE];
         memset(newCell->code, 0, VIRUS_GENOME_SIZE);
@@ -419,42 +419,42 @@ bool Alife::reproduce(struct cell* cell, int direction, QRgb color)
             }
         }
   
-	int r = 0;
-	int g = 0;
-	int b = 0;
-	int mod = 1;
-	for(int i = 0; i < VIRUS_GENOME_SIZE; i++) {
-	    switch(newCell->code[i]) {
-		case 4:
-		  r += 40 * mod;
-		break;
-		case 5:
-		  g += 40 * mod;
-		break;
-		case 6:
-		  b += 40 * mod;
-		break;
-		case 10:
-		  mod = 2;
-		break;
-		case 11:
-		  mod = 1;
-		break;
-		case 12:
-		  r += 20 * mod;
-		break;
-		case 13:
-		  g += 20 * mod;
-		break;
-		case 14:
-		  b += 20 * mod;
-		break;
-	    }
-	}
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        int mod = 1;
+        for(int i = 0; i < VIRUS_GENOME_SIZE; i++) {
+            switch(newCell->code[i]) {
+                case 4:
+                  r += 40 * mod;
+                break;
+                case 5:
+                  g += 40 * mod;
+                break;
+                case 6:
+                  b += 40 * mod;
+                break;
+                case 10:
+                  mod = 2;
+                break;
+                case 11:
+                  mod = 1;
+                break;
+                case 12:
+                  r += 20 * mod;
+                break;
+                case 13:
+                  g += 20 * mod;
+                break;
+                case 14:
+                  b += 20 * mod;
+                break;
+            }
+        }
 
-	newCell->r = qMin(r, 255);
-	newCell->g = qMin(g, 255);
-	newCell->b = qMin(b, 255);
+        newCell->r = qMin(r, 255);
+        newCell->g = qMin(g, 255);
+        newCell->b = qMin(b, 255);
 
         m_livingCells.append(newCell);
         return true;
@@ -473,9 +473,9 @@ bool Alife::moveCell(int i, int direction)
         newCell->alive = true;
         newCell->energy += cell->energy / 2;
         newCell->age = cell->age;
-	newCell->r = cell->r;
-	newCell->g = cell->g;
-	newCell->b = cell->b;
+        newCell->r = cell->r;
+        newCell->g = cell->g;
+        newCell->b = cell->b;
 
         resetCell(cell);
         cell->energy = 0;
@@ -503,7 +503,7 @@ int Alife::normalXY(int coord, int max)
 QPoint Alife::getNeighbour(int x, int y, int direction) 
 {
     if(direction == 0 || direction == 2) {
-	y--;
+        y--;
         y = normalXY(y + direction, m_height - 1);
         return QPoint(x,y);
     }
@@ -533,16 +533,16 @@ void Alife::virusMove()
     m_current_eat_best = qMax(MIN_EAT, (int)(((double)m_livingCells.size()/ (double) (m_maxViruses / 4.0)) * (MIN_EAT * 2)));
     //kDebug() << m_current_eat_best << m_current_eat << m_livingCells.size() << m_maxViruses;
     if(m_livingCells.size() < m_startViruses / 3) {
-	createViruses(m_startViruses);
+        createViruses(m_startViruses);
     }
 
     if(!m_max_attended && m_livingCells.size() > m_maxViruses / 10) {
-	m_max_attended = true;
+        m_max_attended = true;
     }
 
     if(m_max_attended && m_livingCells.size() < 4 * m_startViruses) {
-	m_image = m_image_original;
-	m_max_attended = false;
+        m_image = m_image_original;
+        m_max_attended = false;
     }
 
     /*struct cell* myCell = m_livingCells.at(0);
