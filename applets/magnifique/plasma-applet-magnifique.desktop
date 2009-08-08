@@ -11,7 +11,7 @@ Name[sv]=Magnifik
 Name[wa]=Magnifike
 Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=魅影
-Comment = a magnification glass for Plasma canvas
+Comment=A magnification glass for Plasma canvas
 Type=Service
 Icon=zoom-in
 
