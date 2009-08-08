@@ -50,15 +50,15 @@ using namespace Plasma;
 bballApplet::bballApplet (QObject * parent, const QVariantList & args):
   Plasma::Applet(parent, args),
   m_radius(50),
+  m_bottom_left(0),
+  m_bottom_right(0),
+  m_bottom(0),
   m_angle(0.0),
   m_ball_img(),
   m_x_vel(0.0),
   m_y_vel(0.0),
   m_circum_vel(0.0),
-  m_mouse_pressed(false),
-  m_bottom_left(0),
-  m_bottom_right(0),
-  m_bottom(0)
+  m_mouse_pressed(false)
 {
   setHasConfigurationInterface (true);
   //TODO figure out why it is not good enough to set it here
