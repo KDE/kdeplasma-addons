@@ -8,7 +8,7 @@ Name[sr@latin]=magnifik
 Name[sv]=Magnifik
 Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=魅影
-Comment = a magnification glass for Plasma canvas
+Comment=A magnification glass for the Plasma desktop
 Type=Service
 Icon=zoom-in
 
