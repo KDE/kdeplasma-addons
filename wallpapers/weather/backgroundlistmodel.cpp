@@ -12,7 +12,6 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QDir>
-#include <QProgressBar>
 
 #include <KDebug>
 #include <KFileMetaInfo>

@@ -23,16 +23,14 @@
 
 #include <QImage>
 #include <QPainter>
-#include <QStandardItemModel>
 
 #include <KDialog>
 #include <KFileDialog>
 #include <KLocale>
 #include <KDebug>
-#include <KMessageBox>
 #include <KPushButton>
-#include <KNS/Engine>
 #include <KStandardDirs>
+#include <KNS/Engine>
 
 #include <Plasma/Animator>
 #include <Plasma/DataEngineManager>
