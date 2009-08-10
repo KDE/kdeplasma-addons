@@ -18,14 +18,12 @@
 
 #include "contactsrunner.h"
 
-#include <QPixmap>
 
 #include <KDebug>
 #include <KLocale>
 #include <KIcon>
 #include <KToolInvocation>
 /*#include <KMimeType>
-#include <KUrl>
 
 */
 

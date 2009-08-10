@@ -19,7 +19,6 @@
 #ifndef SPELLCHECK_H
 #define SPELLCHECK_H
 
-#include <KGenericFactory>
 #include <sonnet/speller.h>
 
 #include <plasma/abstractrunner.h>
