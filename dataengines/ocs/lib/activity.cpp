@@ -29,6 +29,16 @@ Activity::Activity()
 {
 }
 
+void Activity::setId( const QString &id )
+{
+    m_id = id;
+}
+
+QString Activity::id() const
+{
+    return m_id;
+}
+
 void Activity::setUser( const QString &u )
 {
   m_user = u;

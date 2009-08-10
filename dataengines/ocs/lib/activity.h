@@ -34,8 +34,11 @@ class ATTICA_EXPORT Activity
 {
   public:
     typedef QList<Activity> List;
-  
+
     Activity();
+
+    void setId( const QString & );
+    QString id() const;
 
     void setUser( const QString & );
     QString user() const;
@@ -50,7 +53,8 @@ class ATTICA_EXPORT Activity
     QString link() const;
 
   private:
-    QString m_user;  
+    QString m_id;
+    QString m_user;
     QDateTime m_timestamp;
     QString m_message;
     QString m_link;

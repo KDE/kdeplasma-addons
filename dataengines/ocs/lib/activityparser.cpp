@@ -45,7 +45,9 @@ Activity::List ActivityParser::parseList( const QString &xmlString )
         xml.readNext();
 
         if ( xml.isStartElement() ) {
-          if ( xml.name() == "personid" ) {
+          if ( xml.name() == "id" ) {
+            activity.setId( xml.readElementText() );
+          } else if ( xml.name() == "personid" ) {
             activity.setUser( xml.readElementText() );
           } else if ( xml.name() == "timestamp" ) {
             QString timestampString = xml.readElementText();

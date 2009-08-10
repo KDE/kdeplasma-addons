@@ -189,20 +189,14 @@ void OcsEngine::slotActivityResult( KJob *j )
         Attica::ActivityListJob *job = static_cast<Attica::ActivityListJob *>( j );
         m_activities = job->ActivityList();
 
-        QHash<uint, Plasma::DataEngine::Data> orderedActivities;
         foreach(const Attica::Activity &activity, m_activities ) {
             Plasma::DataEngine::Data activityData;
+            activityData["id"] = activity.id();
             activityData["user"] = activity.user();
             activityData["timestamp"] = activity.timestamp();
             activityData["message"] = activity.message();
 
-            orderedActivities[activity.timestamp().toTime_t()] = activityData;
-        }
-
-        int i = 0;
-        foreach (Plasma::DataEngine::Data activityData, orderedActivities) {
-            setData("activity", QString::number(i), activityData);
-            ++i;
+            setData("activity", activity.id(), activityData);
         }
     }
 }
