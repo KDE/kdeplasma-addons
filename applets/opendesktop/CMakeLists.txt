@@ -7,6 +7,7 @@ set(opendesktop_SRCS
     userwidget.cpp
     contactimage.cpp
     stylesheet.cpp
+    activitywidget.cpp
     )
 
 kde4_add_ui_files(opendesktop_SRCS opendesktopConfig.ui opendesktopLocationConfig.ui )

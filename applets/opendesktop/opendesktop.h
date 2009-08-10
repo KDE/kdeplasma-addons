@@ -22,6 +22,7 @@
 
 // Qt
 #include <QGraphicsLinearLayout>
+#include <QList>
 
 //Plasma
 
@@ -40,6 +41,7 @@ namespace Plasma
     class ScrollWidget;
 }
 class KConfigDialog;
+class ActivityWidget;
 
 class OpenDesktop : public Plasma::PopupApplet
 {
@@ -74,6 +76,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void disconnectFriends(const QString &name);
         void addFriend(const Plasma::DataEngine::Data &data);
         void addNearbyPerson(const Plasma::DataEngine::Data &data);
+        void addActivityItem(const Plasma::DataEngine::Data &data);
 
         // Configuration dialog
         Ui::opendesktopConfig ui;
@@ -93,6 +96,12 @@ class OpenDesktop : public Plasma::PopupApplet
         QGraphicsWidget* m_friendsWidget;
         QHash<QString, ContactWidget*> m_friends;
         QGraphicsLinearLayout* m_friendsLayout;
+
+        //Friends activity tab
+        Plasma::ScrollWidget* m_activityScroll;
+        QGraphicsWidget* m_activityWidget;
+        QList<ActivityWidget *> m_activities;
+        QGraphicsLinearLayout* m_activityLayout;
 
         // Nearby people tab
         Plasma::ScrollWidget* m_nearScroll;
