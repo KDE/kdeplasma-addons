@@ -48,7 +48,7 @@ ActivityWidget::~ActivityWidget()
 void ActivityWidget::setAtticaData(Plasma::DataEngine::Data data)
 {
     m_atticaData = data;
-    m_messageLabel->setText(data["message"].toString());
+    m_messageLabel->setText(data.value("message").toString());
 }
 
 
