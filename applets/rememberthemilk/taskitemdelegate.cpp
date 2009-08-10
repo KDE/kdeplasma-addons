@@ -29,8 +29,6 @@
 #include <QColor>
 #include <QLinearGradient>
 #include <QCheckBox>
-#include <QAbstractItemView>
-#include <QDateTime>
 
 #include <KDebug>
 

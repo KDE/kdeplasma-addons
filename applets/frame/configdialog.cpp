@@ -19,7 +19,6 @@
 
 #include "configdialog.h"
 
-#include <KComboBox>
 #include <KLocale>
 #include <KStandardDirs>
 

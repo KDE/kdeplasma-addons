@@ -20,7 +20,6 @@
 #include "tasksortfilter.h"
 #include "taskitem.h"
 #include "taskmodel.h"
-#include <QDateTime>
 
 
 TaskSortFilter::TaskSortFilter(TaskModel *model, QObject* parent)

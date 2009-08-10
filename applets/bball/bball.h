@@ -22,8 +22,6 @@
 
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
-#include <QImage>
-#include <KIcon>
 #include <KConfigDialog>
 
 #include <Plasma/Applet>

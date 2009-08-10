@@ -22,24 +22,22 @@
 
 #include <QApplication>
 #include <QClipboard>
-#include <QDrag>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsScene>
 #include <QGraphicsSceneDragDropEvent>
-#include <QMimeData>
 #include <QFile>
 #include <QBuffer>
 #include <QPainter>
 #include <QPaintEngine>
 #include <QSignalMapper>
 
-#include <KAction>
 #include <KDebug>
 #include <KLocale>
 #include <KConfigDialog>
 #include <KStandardAction>
 #include <KToolInvocation>
 #include <KNotification>
+#include <KAction>
 
 #include <kmimetype.h>
 #include <ktemporaryfile.h>

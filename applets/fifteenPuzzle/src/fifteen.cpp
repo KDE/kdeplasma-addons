@@ -22,9 +22,8 @@
 
 #include <ctime>
 #include <QGraphicsScene>
-#include <QDebug>
 #include <QGraphicsSceneMouseEvent>
-#include <QPainter>
+#include <QFontMetrics>
 
 #include <KDebug>
 #include <KGlobalSettings>

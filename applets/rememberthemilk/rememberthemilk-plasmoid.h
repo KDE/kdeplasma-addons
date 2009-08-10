@@ -23,9 +23,6 @@
 #include <Plasma/PopupApplet>
 
 #include <QGraphicsLinearLayout>
-#include <QStringListModel>
-#include <QStandardItemModel>
-#include <QListView>
 #include <QList>
 
 #include "taskitem.h"

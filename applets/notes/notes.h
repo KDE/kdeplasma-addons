@@ -25,7 +25,6 @@
 #include <QGraphicsLinearLayout>
 #include <QTimer>
 
-#include <QToolButton>
 #include <KTextEdit>
 #include <KRichTextEdit>
 

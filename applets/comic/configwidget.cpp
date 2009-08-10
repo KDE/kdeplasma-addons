@@ -30,7 +30,6 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSortFilterProxyModel>
 
-#include <KLocale>
 #include <KIcon>
 #include <KNS/Engine>
 

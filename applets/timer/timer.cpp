@@ -20,7 +20,6 @@
 #include "timer.h"
 
 #include <QGraphicsSceneMouseEvent>
-#include <QTimer>
 
 #include <KConfigDialog>
 #include <KDebug>

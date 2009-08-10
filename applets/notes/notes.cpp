@@ -26,11 +26,9 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsTextItem>
 #include <QMenu>
-#include <QScrollBar>
 #include <QTextStream>
 #include <QtGui/QtGui>
 #include <Plasma/PushButton>
-#include <KAction>
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KFileDialog>
@@ -42,7 +40,7 @@
 #include <KStandardAction>
 #include <KTextEdit>
 #include <Plasma/TextEdit>
-
+#include <KAction>
 
 
 

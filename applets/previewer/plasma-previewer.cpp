@@ -22,12 +22,10 @@
 #include "previewwidget.h"
 
 // Qt
-#include <QPainter>
 #include <QGraphicsSceneDragDropEvent>
-#include <QLabel>
-#include <QPalette>
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QLabel>
 
 // KDE
 #include <KIcon>
@@ -39,8 +37,6 @@
 #include <KAction>
 #include <KUrl>
 #include <KService>
-#include <KGlobalSettings>
-#include <KFileItem>
 #include <KIO/DeleteJob>
 #include <KRun>
 #include <KMessageBox>

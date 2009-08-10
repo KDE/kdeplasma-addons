@@ -27,11 +27,9 @@
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsLinearLayout>
 #include <QTimer>
-#include <QPainter>
-#include <QDateTime>
-#include <QLineEdit>
 #include <QDomDocument>
 #include <QFile>
+#include <QLineEdit>
 
 //KDE
 #include <kglobal.h>

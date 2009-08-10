@@ -23,7 +23,6 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneWheelEvent>
 #include <QApplication>
-#include <QLayout>
 #include <QSlider>
 #include <QVBoxLayout>
 

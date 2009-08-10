@@ -20,11 +20,9 @@
 #include "eyes.h"
 
 #include <QPainter>
-#include <QPixmap>
 #include <QGraphicsView>
 
 #include <Plasma/Theme>
-#include <KDialog>
 #include <KDebug>
 
 #include <math.h>

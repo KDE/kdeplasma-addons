@@ -19,17 +19,13 @@
 
 #include "bball.h"
 #include <QPainter>
-#include <QFontMetrics>
 #include <QSizeF>
-#include <QMessageBox>
 #include <qdesktopwidget.h>
 #include <KSharedConfig>
-#include <KGlobalSettings>
 #include <KLocale>
 #include <KStandardDirs>
 #include <KIO/NetAccess>
 #include <KMessageBox>
-#include <QDebug>
 
 #include <plasma/svg.h>
 #include <plasma/theme.h>

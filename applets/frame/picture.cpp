@@ -21,15 +21,12 @@
 #include "picture.h"
 
 #include <QFile>
-#include <QPainter>
-#include <KSvgRenderer>
-#include <QTextOption>
 
 #include <KGlobalSettings>
-#include <KStandardDirs>
 #include <KUrl>
 #include <KIO/NetAccess>
 #include <KIO/Job>
+#include <KStandardDirs>
 
 #include <klocalizedstring.h>
 #include <Plasma/Theme>

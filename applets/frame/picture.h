@@ -21,7 +21,6 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
-#include <QImage>
 
 #include <KUrl>
 #include <KIO/StoredTransferJob>

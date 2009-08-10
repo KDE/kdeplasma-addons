@@ -17,13 +17,11 @@
 
 #include "previewitemmodel.h"
 #include <KUrl>
-#include <KIconLoader>
 #include <KMimeType>
 #include <KDebug>
 #include <KIcon>
 #include <KFileItem>
 
-#include <QPixmap>
 
 int PreviewItemModel::rowCount( const QModelIndex &parent) const
 {

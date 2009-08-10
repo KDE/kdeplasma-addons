@@ -24,7 +24,6 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsGridLayout>
 #include <QStandardItemModel>
-#include <KIcon>
 #include <KToolInvocation>
 #include <KDirWatch>
 #include <QFileInfo>

@@ -18,7 +18,6 @@
 #include "tracklistdbushandler.h"
 #include "tracklistadaptor.h"
 
-#include <QList>
 
 #include <kdebug.h>
 

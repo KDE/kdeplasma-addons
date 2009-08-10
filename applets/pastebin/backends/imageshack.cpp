@@ -23,8 +23,6 @@
 #include "imageshack.h"
 
 #include <QFile>
-#include <QFileInfo>
-#include <QTextStream>
 #include <QString>
 
 #include <kmimetype.h>

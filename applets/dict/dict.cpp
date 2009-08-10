@@ -23,19 +23,16 @@
 #include <QGraphicsLinearLayout>
 #include <QTimer>
 
-#include <KTextBrowser>
 #include <KDebug>
 #include <KIcon>
-#include <KStandardDirs>
-#include <KLineEdit>
-#include <KEditListBox>
-#include <QListView>
 #include <QTreeView>
 #include <QStringListModel>
 
 #include <KColorScheme>
 #include <KConfigDialog>
 #include <KConfigGroup>
+#include <KLineEdit>
+#include <KTextBrowser>
 
 #include <Plasma/Animator>
 #include <Plasma/IconWidget>

@@ -22,7 +22,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QImage>
 #include <QObject>
 
 #include <KUrl>

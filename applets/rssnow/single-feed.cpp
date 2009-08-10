@@ -36,7 +36,6 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QFont>
-#include <QTimer>
 
 //This implementation is based on a great mockup from pinheiro.
 

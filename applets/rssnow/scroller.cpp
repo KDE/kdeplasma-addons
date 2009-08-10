@@ -28,8 +28,6 @@
 #include <krun.h>
 #include <QGraphicsItem>
 #include <QDateTime>
-#include <QPainter>
-#include <QFont>
 #include <QTimer>
 #include <QList>
 #include <QStyleOptionGraphicsItem>

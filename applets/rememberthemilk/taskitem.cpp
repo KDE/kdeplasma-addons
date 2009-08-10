@@ -19,8 +19,6 @@
 
 #include "taskitem.h"
 
-#include <QPainter>
-#include <QStyleOption>
 
 #include <KDebug>
 

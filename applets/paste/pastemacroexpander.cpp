@@ -22,7 +22,6 @@
 #include <QProcess>
 #include <QDate>
 #include <QTime>
-#include <QPair>
 
 #include <KIO/NetAccess>
 #include <KDebug>

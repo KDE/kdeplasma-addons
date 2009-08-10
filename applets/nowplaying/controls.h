@@ -20,7 +20,6 @@
 #define CONTROLS_H
 
 #include <QGraphicsWidget>
-#include <QFlags>
 
 #include "nowplaying.h"
 

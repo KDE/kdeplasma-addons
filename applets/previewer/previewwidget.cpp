@@ -23,13 +23,10 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
-#include <QTimeLine>
 
 // KDE
 #include <KDebug>
-#include <KConfigGroup>
 #include <KGlobalSettings>
-#include <KService>
 #include <KIconLoader>
 #include <KIO/PreviewJob>
 #include <KUrl>

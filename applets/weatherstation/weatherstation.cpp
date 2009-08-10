@@ -17,10 +17,8 @@
 
 #include "weatherstation.h"
 #include <QGraphicsLinearLayout>
-#include <QPainter>
 #include <KConfigDialog>
 #include <KConfigGroup>
-#include <KRun>
 #include <KToolInvocation>
 #include <Plasma/Containment>
 #include <Plasma/Theme>

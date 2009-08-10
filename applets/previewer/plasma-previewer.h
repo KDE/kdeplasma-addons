@@ -22,7 +22,6 @@
 #include <QWidget>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
-#include <QStyleOptionViewItem>
 
 #include <KMimeType>
 

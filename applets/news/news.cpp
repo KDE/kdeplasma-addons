@@ -28,7 +28,6 @@
 
 #include <KConfigDialog>
 #include <KColorScheme>
-#include <KColorUtils>
 #include <KStandardDirs>
 #include <KRun>
 

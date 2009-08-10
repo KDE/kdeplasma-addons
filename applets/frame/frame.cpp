@@ -28,10 +28,8 @@
 #include <QGraphicsLinearLayout>
 #include <QPen>
 #include <QCheckBox>
-#include <QTimer>
 #include <QFileInfo>
 #include <QStandardItemModel>
-#include <QToolButton>
 
 #include <KDebug>
 #include <KConfigDialog>

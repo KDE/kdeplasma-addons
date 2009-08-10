@@ -20,23 +20,12 @@
 #include "rememberthemilk-plasmoid.h"
 
 // Qt Includes
-#include <QApplication>
-#include <QPainter>
-#include <QFontMetrics>
-#include <QSizeF>
-#include <QStringListModel>
-#include <QTreeView>
-#include <QHeaderView>
-#include <QTimer>
-#include <QVBoxLayout>
-#include <QWebView>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QTreeView>
 
 // KDE Includes
-#include <KTitleWidget>
 #include <KConfigDialog>
-#include <KLineEdit>
 #include <KDebug> 
 #include <KToolInvocation>
 
