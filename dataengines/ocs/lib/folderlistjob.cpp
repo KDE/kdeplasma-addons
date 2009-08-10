@@ -25,8 +25,8 @@
 
 #include <kio/job.h>
 #include <klocale.h>
-
-#include <QtCore>
+#include <QTimer>
+#include <QDebug>
 
 using namespace Attica;
 

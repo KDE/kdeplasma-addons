@@ -20,12 +20,8 @@
 
 #include "twitterengine.h"
 
-#include <QDateTime>
-#include <QImage>
-#include <QPixmap>
 
 #include <KDebug>
-#include <KUrl>
 #include <ksocketfactory.h>
 
 #include "timelinesource.h"

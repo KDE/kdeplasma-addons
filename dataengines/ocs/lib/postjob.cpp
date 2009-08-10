@@ -24,9 +24,9 @@
 #include <kio/job.h>
 #include <klocale.h>
 
-#include <QtCore>
 #include <QXmlStreamReader>
-
+#include <QDebug>
+#include <QTimer>
 using namespace Attica;
 
 PostJob::PostJob()

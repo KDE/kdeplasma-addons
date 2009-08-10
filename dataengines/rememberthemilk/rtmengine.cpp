@@ -26,11 +26,7 @@
 #include "authservice.h"
 #include "tasksservice.h"
 
-#include <QDate>
-#include <QTime>
  
-#include <KSystemTimeZones>
-#include <KDateTime>
 
 #include <Plasma/DataContainer>
 

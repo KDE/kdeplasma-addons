@@ -21,8 +21,6 @@
 #ifndef TIMELINESOURCE_H
 #define TIMELINESOURCE_H
 
-#include <QList>
-#include <QPair>
 
 #include <KUrl>
 

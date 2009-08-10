@@ -17,10 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <QTimer>
-#include <QProcess>
 
-#include <KLocale>
 
 #include "ocsengine.h"
 #include "activitylistjob.h"

@@ -26,7 +26,6 @@
 #include <kurl.h>
 
 #include <QtCore>
-#include <QPixmap>
 
 namespace Attica {
 

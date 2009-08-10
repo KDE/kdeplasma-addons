@@ -26,7 +26,6 @@
 #include <kio/job.h>
 #include <klocale.h>
 
-#include <QtCore>
 
 using namespace Attica;
 

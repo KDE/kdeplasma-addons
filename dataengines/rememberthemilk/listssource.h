@@ -22,8 +22,6 @@
 
 #include <rtm/rtm.h>
 
-#include <QList>
-#include <QPair>
 #include <QTimer>
 
 #include <Plasma/DataContainer>

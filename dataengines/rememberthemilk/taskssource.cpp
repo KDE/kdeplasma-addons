@@ -23,10 +23,7 @@
 #include <rtm/task.h>
 #include <rtm/session.h>
 #include <rtm/request.h>
-#include <QNetworkReply>
 
-#include <QTimer>
-#include <QBuffer>
 
 #include <KIO/Job>
 #include "rtmengine.h"

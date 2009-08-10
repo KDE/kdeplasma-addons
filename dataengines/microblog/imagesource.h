@@ -22,7 +22,6 @@
 
 #include <QList>
 #include <QPair>
-#include <QXmlDefaultHandler>
 
 #include <KUrl>
 

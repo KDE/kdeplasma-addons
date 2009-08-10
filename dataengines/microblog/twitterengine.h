@@ -23,7 +23,6 @@
 
 #include <plasma/dataengine.h>
 
-#include <QMap>
 
 class ImageSource;
 

@@ -19,7 +19,6 @@
 
 #include "imagesource.h"
 
-#include <QBuffer>
 
 #include <KIO/Job>
 

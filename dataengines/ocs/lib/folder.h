@@ -22,9 +22,8 @@
 #define ATTICA_FOLDER_H
 
 #include "atticaclient_export.h"
-
-#include <QtCore>
-
+#include <QList>
+#include <QString>
 namespace Attica {
 
 class ATTICA_EXPORT Folder
