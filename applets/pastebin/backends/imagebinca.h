@@ -42,6 +42,7 @@ public:
     void finish();
     bool addPair(const QString& name, const QString& value);
     bool addFile(const QString& name,const QString& path);
+    int m_privacy;
 
 protected:
     QByteArray m_buffer;

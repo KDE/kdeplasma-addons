@@ -70,6 +70,27 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="imagebinPrivacyLabel">
+     <property name="text">
+      <string>Make Imagebin images:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="KComboBox" name="imagebinPrivacy">
+     <item>
+      <property name="text">
+       <string>Public</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Private</string>
+      </property>
+     </item>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>

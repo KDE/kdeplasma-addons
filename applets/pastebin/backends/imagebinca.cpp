@@ -35,8 +35,8 @@
 ImagebinCAServer::ImagebinCAServer(const KConfigGroup& config)
     : PastebinServer()
 {
+    m_privacy = config.readEntry("imagebinPrivacy", 0);
     m_server = config.readEntry("imagebinca", "http://imagebin.ca");
-
     m_boundary  = "----------";
     m_boundary += KRandom::randomString(42 + 13).toAscii();
 }
@@ -168,10 +168,18 @@ void ImagebinCAServer::post(const QString& content)
     addPair("tags", "plasma");
     url.addQueryItem("tags", "plasma");
 
-    addPair("adult", "f");
-    url.addQueryItem("adult", "f");
+    QString adult;
+    if(m_privacy == 0){
+      adult = "f";
+    } else {
+      adult = "t";
+    }
+
+    addPair("adult", adult);
+    url.addQueryItem("adult", adult);
 
     addFile("f", content);
+
     finish();
 
     _data.clear();

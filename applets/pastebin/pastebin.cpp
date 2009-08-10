@@ -463,6 +463,12 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 
     QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
     uiServers.imageshack->setText(imageshackURL);
+
+    uiConfig.textServer->setCurrentIndex(m_textBackend);
+
+    int imagebinPrivacy = cg.readEntry("imagebinPrivacy", 0);
+    uiConfig.imagebinPrivacy->setCurrentIndex(imagebinPrivacy);
+
 }
 
 void Pastebin::configAccepted()
@@ -477,6 +483,8 @@ void Pastebin::configAccepted()
     QString imagebincaURL = uiServers.imagebinca->text();
     QString imageshackURL = uiServers.imageshack->text();
 
+    int imagebinPrivacy = uiConfig.imagebinPrivacy->currentIndex();
+
     cg.writeEntry("TextBackend", textBackend);
     cg.writeEntry("ImageBackend", imageBackend);
     cg.writeEntry("HistorySize", historySize);
@@ -485,6 +493,8 @@ void Pastebin::configAccepted()
     cg.writeEntry("pastebincom", pastebincomURL);
     cg.writeEntry("imagebinca", imagebincaURL);
     cg.writeEntry("imageshack", imageshackURL);
+
+    cg.writeEntry("imagebinPrivacy", imagebinPrivacy);
 
     setTextServer(textBackend);
     setImageServer(imageBackend);
