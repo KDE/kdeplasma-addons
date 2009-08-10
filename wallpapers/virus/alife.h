@@ -10,11 +10,9 @@
 #ifndef ALIFE_HEADER
 #define ALIFE_HEADER
 
-#include <QObject>
 #include <QImage>
 #include <QPoint>
 #include <QThread>
-#include <QTime>
 #include <QMutex>
 
 struct cell {

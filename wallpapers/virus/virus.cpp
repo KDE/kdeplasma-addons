@@ -14,16 +14,10 @@
 #include "virus.h"
 
 #include <QPainter>
-#include <QFile>
 
-#include <KDirSelectDialog>
 #include <KDirWatch>
 #include <KFileDialog>
-#include <KGlobalSettings>
-#include <KImageFilePreview>
 #include <KNS/Engine>
-#include <KProgressDialog>
-#include <KRandom>
 #include <KStandardDirs>
 
 #include <Plasma/Theme>

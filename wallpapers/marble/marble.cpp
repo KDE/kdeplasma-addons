@@ -30,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <marble/ViewportParams.h>
 
 #include <QGraphicsSceneMouseEvent>
-#include <QStandardItemModel>
 #include <QTimer>
 
 #define DRAG_THRESHOLD 3                        // Distance (pixel) before starting drag updates

@@ -22,7 +22,6 @@
 
 #include <QColor>
 #include <QRect>
-#include <QTimer>
 #include <plasma/wallpaper.h>
 
 #include "ui_config.h"

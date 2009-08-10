@@ -8,7 +8,7 @@
 */
 
 #include "alife.h" 
-
+#include <QTime>
 #include <KDebug>
 
 #define VIRUS_GENOME_SIZE 38
