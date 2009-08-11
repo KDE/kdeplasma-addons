@@ -12,8 +12,10 @@ Name[wa]=Magnifike
 Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=魅影
 Comment=A magnification glass for the Plasma desktop
+Comment[nds]=En Kiekglas för den Plasma-Schriefdisch
 Comment[sv]=Ett förstoringsglas för Plasmaskrivbordet
 Comment[uk]=Збільшувальне скло для стільниці Плазми
+Comment[zh_TW]=Plasma 桌面上的放大鏡
 Type=Service
 Icon=zoom-in
 
