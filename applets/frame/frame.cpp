@@ -77,7 +77,7 @@ Frame::~Frame()
 void Frame::init()
 {
     bool frameReceivedUrlArgs = false;
-    if (m_currentUrl != KUrl("Default")) {
+    if (!m_currentUrl.isEmpty()) {
         frameReceivedUrlArgs = true;
     }
 
@@ -116,7 +116,7 @@ void Frame::init()
 
 void Frame::updateMenu()
 {
-    bool invalidPicture = (m_currentUrl.url() == "Default") && (m_mySlideShow->currentUrl() == "Default");
+    bool invalidPicture = m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty();
  
     if (m_potd || invalidPicture ) {
       delete m_openPicture;
@@ -148,7 +148,7 @@ void Frame::slotOpenPicture()
         url = m_currentUrl;
     }
 
-    if (url.path() != "Default") {
+    if (!url.path().isEmpty()) {
         new KRun(url, 0);
     }
 }

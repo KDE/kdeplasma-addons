@@ -81,7 +81,7 @@ void Picture::setPicture(const KUrl &currentUrl)
         image = QPixmap(m_defaultImage);
         m_message = i18n("Loading image ...");
     } else {
-        if (currentUrl.isEmpty() || currentUrl.path() == "Default") {
+        if (currentUrl.isEmpty()) {
             image = QPixmap(m_defaultImage);
             m_message = i18nc("Info", "Put your photo here or drop a folder to start a slideshow");
             kDebug() << "default image ...";
