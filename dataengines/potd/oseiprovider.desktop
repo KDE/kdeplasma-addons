@@ -7,6 +7,10 @@ X-KDE-PlasmaPoTDProvider-Identifier=osei
 Icon=
 
 Name=Operational Significant Event Imagery Picture of the Day
+Name[pt]=Imagem do Dia para Eventos Operacionais Significativos
+Name[pt_BR]=Imagem do Dia para Eventos Operacionais Significativos
+Name[sv]=Dagens bild av operationellt signifikant händelse
+Name[uk]=Зображення дня Operational Significant Event Imagery
 Comment=Osei Provider
 Comment[ca]=Proveïdor Osei
 Comment[da]=Osei-udbyder.
