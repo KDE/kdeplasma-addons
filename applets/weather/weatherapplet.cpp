@@ -56,20 +56,18 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_tempLabel(new Plasma::Label),
         m_windIcon(new Plasma::IconWidget),
         m_courtesyLabel(new Plasma::Label),
+        m_tabBar(0),
         m_fiveDaysModel(0),
         m_detailsModel(0),
         m_conditionsModel(0),
-        m_graphicsWidget(0)
+        m_fiveDaysView(0),
+        m_detailsView(0),
+        m_conditionsView(0),
+        m_setupLayout(0),
+        m_graphicsWidget(0),
+        m_titleFrame(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    m_conditionsView = 0;
-    m_fiveDaysView = 0;
-    m_detailsView = 0;
-    m_tabBar = 0;
-    m_currentIcon = 0;
-    m_windIcon = 0;
-    m_titleFrame = 0;
-    m_setupLayout = 0;
     setPopupIcon("weather-not-available");
 }
 
