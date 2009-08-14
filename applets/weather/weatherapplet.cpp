@@ -59,10 +59,8 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_tabBar(0),
         m_fiveDaysModel(0),
         m_detailsModel(0),
-        m_conditionsModel(0),
         m_fiveDaysView(0),
         m_detailsView(0),
-        m_conditionsView(0),
         m_setupLayout(0),
         m_graphicsWidget(0),
         m_titleFrame(0)
@@ -116,18 +114,26 @@ void WeatherApplet::init()
     m_locationLabel->nativeWidget()->setWordWrap(false);
 
     m_locationLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute); 	 
+    m_conditionsLabel->nativeWidget()->setWordWrap(false);
 
-    //m_tempLabel->nativeWidget()->setFont(m_titleFont);
-    //m_tempLabel->nativeWidget()->setWordWrap(false);
+    m_windIcon->setMaximumSize(0,0); 	 
+    m_windIcon->setOrientation(Qt::Horizontal); 	 
+    m_windIcon->setTextBackgroundColor(QColor());
+
+    m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
+    m_tempLabel->nativeWidget()->setFont(m_titleFont);
+    m_tempLabel->nativeWidget()->setWordWrap(false);
+
     // This one if a bit crude, ideally we set the horizontal SizePolicy to Preferred, but that doesn't seem
     // to actually respect the minimum size needed to display the temperature. (Bug in Label or QGL?)
-    //m_tempLabel->setMinimumWidth(85);
-    //m_tempLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    m_tempLabel->setMinimumWidth(85);
+    m_tempLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    //m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
+    m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_forecastTemps->nativeWidget()->setWordWrap(false);
-    //m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
-    //m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
+    m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     /*QGraphicsWidget *titleSpacer = new QGraphicsWidget(this);
     //FIXME: will be a width somewhat related to the weather icon size
@@ -136,8 +142,9 @@ void WeatherApplet::init()
     m_titlePanel->addItem(titleSpacer, 0, 0, 2, 1);*/
 
     m_titlePanel->addItem(m_locationLabel, 0, 0, 1, 3);
-    //m_titlePanel->addItem(m_tempLabel, 0, 3);
-    //m_titlePanel->addItem(m_forecastTemps, 1, 3);
+    m_titlePanel->addItem(m_tempLabel, 0, 3);
+    m_titlePanel->addItem(m_conditionsLabel, 1, 0);
+    m_titlePanel->addItem(m_forecastTemps, 1, 3);
 
     m_titlePanel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -278,8 +285,8 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
         m_currentIcon = new Plasma::IconWidget(); 
-        //m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
-        //m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
+        m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
@@ -290,6 +297,19 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_windIcon = new Plasma::IconWidget();
         m_windIcon->setOrientation(Qt::Horizontal);
         m_windIcon->setDrawBackground(false);
+    }
+
+    if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
+        m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
+                clampValue(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
+    } else {
+        if (data["Wind Speed"] == "N/A") {
+            m_windIcon->setText(i18nc("Not available","N/A"));
+        } else {
+            if (data["Wind Speed"].toInt() == 0 || data["Wind Speed"] == "Calm") {
+                m_windIcon->setText(i18nc("Wind condition","Calm"));
+            }
+        }
     }
 
     m_courtesyLabel->setText(data["Credit"].toString());
@@ -322,80 +342,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
              m_tabBar->removeTab(0);
         }
     }
-
-/*
-    // FIXME: Destroy the treeview because if we don't Plasma crashes?
-    if (m_fiveDaysView) {
-        delete m_fiveDaysView;
-        m_fiveDaysView = 0;
-    }
-*/
-
-    // Conditions data
-    if (!m_conditionsView) {
-        kDebug() << "Create Details Plasma::WeatherView";
-        m_conditionsView = new Plasma::WeatherView(m_tabBar);
-        m_conditionsView->setHasHeader(false);
-        m_conditionsView->setOrientation(Qt::Horizontal);
-    }
-
-    if (!m_conditionsModel) {
-        kDebug() << "Create Details QStandardItemModel";
-        m_conditionsModel = new QStandardItemModel(this);
-    } else {
-        m_conditionsModel->clear();
-    }
-
-    QStandardItem *temperature = new QStandardItem();
-    temperature->setText(m_tempLabel->nativeWidget()->text());
-    m_conditionsModel->appendRow(temperature);
-
-    QStandardItem *icon = new QStandardItem(m_currentIcon->icon(), NULL);
-    m_conditionsModel->appendRow(icon);
-
-    QStandardItem *conditionText = new QStandardItem();
-    conditionText->setText(m_conditionsLabel->nativeWidget()->text());
-    m_conditionsModel->appendRow(conditionText);
-
-    kDebug() << "WIND DIRECTION: " << data["Wind Direction"].toString();
-    Plasma::Svg mySvgIcon;
-    mySvgIcon.setImagePath("weather/wind-arrows");
-    QIcon windIcon = mySvgIcon.pixmap(data["Wind Direction"].toString());
-
-    m_windIcon->setIcon(windIcon); 
-    m_windIcon->setMaximumSize(m_windIcon->sizeFromIconSize(KIconLoader::SizeSmall));
-    m_windIcon->update();
-
-    if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
-        m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                clampValue(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
-    } else {
-        if (data["Wind Speed"] == "N/A") {
-            m_windIcon->setText(i18nc("Not available","N/A"));
-        } else {
-            if (data["Wind Speed"].toInt() == 0 || data["Wind Speed"] == "Calm") {
-                m_windIcon->setText(i18nc("Wind condition","Calm"));
-            }
-        }
-    }
-
-    QStandardItem *windInfo = new QStandardItem(m_windIcon->icon(), NULL);
-    windInfo->setTextAlignment(Qt::AlignRight);
-    windInfo->setText(m_windIcon->text());
-    m_conditionsModel->appendRow(windInfo);
-
-    if (!m_forecastTemps->text().isEmpty()) {
-        QStandardItem *tempForecast = new QStandardItem();
-        tempForecast->setText(m_forecastTemps->text());
-        m_conditionsModel->appendRow(tempForecast);
-    }
-  
-    if (m_conditionsModel->rowCount() > 0) {
-       if (!m_conditionsView->model()) {
-           m_conditionsView->setModel(m_conditionsModel);
-       }
-       m_tabBar->addTab(i18nc("Observed weather", "Currently"), m_conditionsView);
-   }
 
     // If we have a 5 day forecast, display it
     if (data["Total Weather Days"].toInt() > 0) {
@@ -590,6 +536,20 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_detailsModel->appendRow(dataHumidity);
     }
 
+    if (isValidData(data["Wind Speed"])) {
+        Plasma::Svg svgWindIcon;
+        svgWindIcon.setImagePath("weather/wind-arrows");
+        QIcon windIcon = svgWindIcon.pixmap(data["Wind Direction"].toString());
+        m_windIcon->setIcon(windIcon);
+        m_windIcon->setMaximumSize(m_windIcon->sizeFromIconSize(KIconLoader::SizeSmall));
+        m_windIcon->update();
+   
+        QStandardItem *windInfo = new QStandardItem(m_windIcon->icon(), NULL);
+        windInfo->setTextAlignment(Qt::AlignRight);
+        windInfo->setText(m_windIcon->text());
+        m_detailsModel->appendRow(windInfo);
+    }
+        
     if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
@@ -683,7 +643,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-       //m_bottomLayout->addItem(m_currentIcon);
+        //m_bottomLayout->addItem(m_currentIcon);
         m_bottomLayout->addItem(m_tabBar);
         m_layout->addItem(m_bottomLayout);
         m_layout->addItem(m_courtesyLabel);

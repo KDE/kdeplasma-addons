@@ -79,11 +79,9 @@ private:
 
     QStandardItemModel *m_fiveDaysModel;
     QStandardItemModel *m_detailsModel;
-    QStandardItemModel *m_conditionsModel;
 
     Plasma::WeatherView *m_fiveDaysView;
     Plasma::WeatherView *m_detailsView;
-    Plasma::WeatherView *m_conditionsView;
 
     // Layout
     int m_setupLayout;
