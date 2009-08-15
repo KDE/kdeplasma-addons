@@ -160,7 +160,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
 
         if (m_showToolTip) {
             Plasma::ToolTipContent ttc(data["Place"].toString(),
-                    i18n("Last updated: ") + KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), KLocale::FancyLongDate));
+                    i18n("Last updated: %1", KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), KLocale::FancyLongDate)));
             Plasma::ToolTipManager::self()->setContent(this, ttc);
         }
     }
