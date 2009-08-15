@@ -8,9 +8,10 @@ Icon=
 
 Name=Operational Significant Event Imagery Picture of the Day
 Name[pt]=Imagem do Dia para Eventos Operacionais Significativos
-Name[pt_BR]=Imagem do Dia para Eventos Operacionais Significativos
+Name[pt_BR]=Imagem do dia para eventos operacionais significativos
 Name[sv]=Dagens bild av operationellt signifikant händelse
 Name[uk]=Зображення дня Operational Significant Event Imagery
+Name[x-test]=xxOperational Significant Event Imagery Picture of the Dayxx
 Comment=Osei Provider
 Comment[ca]=Proveïdor Osei
 Comment[da]=Osei-udbyder.
