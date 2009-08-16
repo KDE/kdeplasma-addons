@@ -9,17 +9,17 @@ find_package(SharedMimeInfo REQUIRED)
 # Checking for Composite Begin                          #
 #########################################################
 
-if(X11_Xcomposite_FOUND AND X11_Xdamage_FOUND )
+if(X11_Xrender_FOUND )
     set( LANCELOT_HAVE_COMPOSITING 1 )
-endif( X11_Xcomposite_FOUND AND X11_Xdamage_FOUND )
+endif( X11_Xrender_FOUND )
 
 macro_log_feature(LANCELOT_HAVE_COMPOSITING
-   "Compositing support"
-   "X11 Compositing support"
+   "XRender"
+   "Lancelot compositing support"
    "http://www.x.org/"
    FALSE
    ""
-   "STRONGLY_RECOMMENDED: XComposite and XDamage extensions are required for Lancelot compositing support")
+   "STRONGLY_RECOMMENDED: XRender extension is required for Lancelot compositing support")
 
 
 configure_file(config-lancelot.h.cmake
