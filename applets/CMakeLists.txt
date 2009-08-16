@@ -59,5 +59,6 @@ if(NOT WIN32)
   add_subdirectory(leavenote)
   add_subdirectory(showdesktop)
   add_subdirectory(paste)
+  add_subdirectory(plasmaboard)
 endif(NOT WIN32)
 

@@ -1,0 +1,34 @@
+[Desktop Entry]
+Name=Keyboard
+Name[nb]=Tastatur
+Name[nds]=Tastatuur
+Name[pt]=Teclado
+Name[pt_BR]=Teclado
+Name[sv]=Tangentbord
+Name[tr]=Klavye
+Name[uk]=Клавіатура
+Name[x-test]=xxKeyboardxx
+Name[zh_TW]=鍵盤
+Comment=A virtual, on-screen keyboard
+Comment[nb]=Et virtuelt tastatur på skjermen
+Comment[nds]=En virtuell Tastatuur op den Schirm
+Comment[pt]=Um teclado virtual no ecrã
+Comment[pt_BR]=Um teclado virtual na tela
+Comment[sv]=Ett virtuellt tangentbord på skärmen
+Comment[tr]=Sanal bir masaüstü klavyesi
+Comment[uk]=Віртуальна екранна клавіатура
+Comment[x-test]=xxA virtual, on-screen keyboardxx
+Comment[zh_TW]=虛擬鍵盤
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=keyboard
+
+X-KDE-Library=plasma_applet_plasmaboard
+X-KDE-PluginInfo-Author=Björn Ruberg
+X-KDE-PluginInfo-Email=bjoern@ruberg-wegener.de
+X-KDE-PluginInfo-Name=plasmaboard
+X-KDE-PluginInfo-Version=0.7
+X-KDE-PluginInfo-Category=Accessibility
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
