@@ -29,6 +29,8 @@ TODO: L04 l (m) add proper size hints to layouts and widgets
 TODO: L05 l (m) move the groups mechanism away from Widget
              so that ordinary plasma widgets could be extended
              when needed. Add groups support to HoverIcon
+TODO: L06 m (e) The menu key should show the context menu just
+             like alt+enter
 
 Launcher Applet:
 None
