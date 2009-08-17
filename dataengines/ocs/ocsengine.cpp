@@ -57,7 +57,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
         return m_job != 0;
     } else if (name.startsWith("Friends-")) {
-        QString _id = QString(name).remove(QString("Friends-"));
+        QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
         kDebug() << "Searching friends for id" << _id;
         PersonListJob* _job = Attica::OcsApi::requestFriend(_id, 0, m_maximumItems);
         setData(name, DataEngine::Data());
@@ -69,21 +69,22 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
         return _job != 0;
     } else if (name.startsWith("Person-")) {
-        QString _id = QString(name).remove(QString("Person-"));
+        QString _id = QString(name).remove(0, 7); // Removes prefix Person-
         kDebug() << "Searching for Person id" << _id;
         PersonJob* _job = Attica::OcsApi::requestPerson(_id);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
         return _job != 0;
     } else if (name.startsWith("Near-")) {
-        if (name.split(':').count() != 3) {
+        QStringList args = QString(name).remove(0, 5).split(':'); // Removes prefix Near-
+        if (args.size() != 3) {
             kDebug() << "Don't understand your request." << name;
             kDebug() << "it should go in the format: lat:long:distance (all in degrees)";
             return false;
         }
-        qreal lat = QString(name).remove(QString("Near-")).split(":")[0].toFloat();
-        qreal lon = QString(name).remove(QString("Near-")).split(":")[1].toFloat();
-        qreal dist = QString(name).remove(QString("Near-")).split(":")[2].toFloat();
+        qreal lat = args[0].toFloat();
+        qreal lon = args[1].toFloat();
+        qreal dist = args[2].toFloat();
 
         kDebug() << "Searching for people near" << lat << lon << "distance:" << dist << m_maximumItems;
         PersonListJob* _job = Attica::OcsApi::requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
@@ -97,8 +98,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
 
     } else if (name.startsWith("PostLocation-")) {
-
-        QStringList args = QString(name).remove(QString("PostLocation-")).split(":");
+        QStringList args = QString(name).remove(0, 13).split(':'); // Removes prefix PostLocation-
         if (args.size() != 4) {
             kDebug() << "Invalid location string:" << name;
             kDebug() << "it should go in the format: lat:long:country:city";
@@ -115,7 +115,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
 
     } else if (name.startsWith("KnowledgeBase-")) {
-        QString _id = QString(name).remove(QString("KnowledgeBase-"));
+        QString _id = QString(name).remove(0, 14); // Removes prefix KnowledgeBase-
         kDebug() << "Searching for KnowledgeBase id" << _id;
         KnowledgeBaseJob* _job = Attica::OcsApi::requestKnowledgeBase(_id);
         setData(name, DataEngine::Data());
@@ -123,18 +123,19 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
 
     } else if (name.startsWith("KnowledgeBaseList-")) {
-        const int numTokens = name.split(':').count();
+        QStringList args = QString(name).remove(0, 18).split(':');
+        const int numTokens = args.size();
         if (numTokens != 4 && numTokens != 5) {
             kDebug() << "Don't understand your request." << name;
             return false;
         }
-        QString query = QString(name).remove(QString("KnowledgeBaseList-")).split(":")[0];
-        QString sortModeString = QString(name).remove(QString("KnowledgeBaseList-")).split(":")[1];
-        int page = QString(name).remove(QString("KnowledgeBaseList-")).split(":")[2].toInt();
-        int pageSize = QString(name).remove(QString("KnowledgeBaseList-")).split(":")[3].toInt();
+        QString query = args[0];
+        QString sortModeString = args[1];
+        int page = args[2].toInt();
+        int pageSize = args[3].toInt();
         int content = 0;
         if (numTokens == 5) {
-            content = QString(name).remove(QString("KnowledgeBaseList-")).split(":")[4].toInt();
+            content = args[4].toInt();
         }
 
         Attica::OcsApi::SortMode sortMode;
@@ -337,11 +338,10 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
         m_personListJobsRefs[listJob] = 0;
 
         foreach (const Person &p, listJob->personList()) {
-            const QString personId = QString("%1").arg(p.id());
-            Attica::PersonJob* job = Attica::OcsApi::requestPerson(personId);
+            Attica::PersonJob* job = Attica::OcsApi::requestPerson(p.id());
             connect(job, SIGNAL(result(KJob*)), this, SLOT(slotPersonResult(KJob*)));
             QString _id = QString("Near-%1").arg(p.id());
-            kDebug() << "New Near:" << _id << personId;
+            kDebug() << "New Near:" << _id << p.id();
 
             m_personJobs[job] = listJob;
             ++m_personListJobsRefs[listJob];
