@@ -284,9 +284,9 @@ void OpenDesktop::addActivityItem(const Plasma::DataEngine::Data &data)
     }
 
     activityWidget->setActivityData(data);
-    
+
     if (m_friends.contains(data["user"].toString())) {
-        Plasma::DataEngine::Data data = m_friends.value(data["User"].toString())->atticaData();
+        Plasma::DataEngine::Data data = m_friends.value(data["user"].toString())->atticaData();
         activityWidget->setPixmap(data["Avatar"].value<QPixmap>());
     }
     m_activityLayout->insertItem(0, activityWidget);
