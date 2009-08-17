@@ -98,7 +98,7 @@ void MarbleWallpaper::init(const KConfigGroup &config)
     m_positionLon = config.readEntry(POSITION_LON_KEY, home_lon);
     m_positionLat = config.readEntry(POSITION_LAT_KEY, home_lat);
     m_projection = static_cast<Projection>(config.readEntry(PROJECTION_KEY, static_cast<int>(Spherical)));
-    m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_KEY, static_cast<int>(Normal)));
+    m_quality = static_cast<MapQuality>(config.readEntry(QUALITY_KEY, static_cast<int>(NormalQuality)));
     m_rotationLat = config.readEntry(ROTATION_LAT_KEY, 0.0);
     m_rotationLon = config.readEntry(ROTATION_LON_KEY, 0.025);
     m_rotationTimeout = config.readEntry(ROTATION_TIMEOUT_KEY, 10000);
