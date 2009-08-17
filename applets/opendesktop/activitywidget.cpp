@@ -18,12 +18,14 @@
 */
 
 #include "activitywidget.h"
+#include "contactimage.h"
 
 //Qt
 #include <QGraphicsLinearLayout>
 
 //KDE
 #include <KDebug>
+#include <KIconLoader>
 
 // Plasma
 #include <Plasma/Label>
@@ -35,6 +37,13 @@ ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
     : Frame(parent)
 {
     m_layout = new QGraphicsLinearLayout(this);
+
+    m_image = new ContactImage(this);
+    m_image->setMinimumSize(KIconLoader::SizeSmallMedium, KIconLoader::SizeSmallMedium);
+    m_image->setMaximumSize(m_image->minimumSize());
+
+    m_layout->addItem(m_image);
+
     m_messageLabel = new Plasma::Label(this);
     m_layout->addItem(m_messageLabel);
 }
@@ -43,13 +52,21 @@ ActivityWidget::~ActivityWidget()
 {
 }
 
+void ActivityWidget::setPixmap(const QPixmap &pixmap)
+{
+    m_image->setPixmap(pixmap);
+}
 
-
-void ActivityWidget::setAtticaData(Plasma::DataEngine::Data data)
+void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
 {
     m_atticaData = data;
     m_messageLabel->setText(data.value("message").toString());
 }
 
+
+Plasma::DataEngine::Data ActivityWidget::activityData() const
+{
+    return m_atticaData;
+}
 
 #include "activitywidget.moc"

@@ -102,6 +102,11 @@ void ContactWidget::setAtticaData(const Plasma::DataEngine::Data &data)
     }
 }
 
+Plasma::DataEngine::Data ContactWidget::atticaData() const
+{
+    return m_ocsData;
+}
+
 void ContactWidget::buildDialog()
 {
     updateColors();

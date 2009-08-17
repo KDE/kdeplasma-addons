@@ -25,6 +25,8 @@
 
 class QGraphicsLinearLayout;
 
+class ContactImage;
+
 namespace Plasma
 {
     class Label;
@@ -39,13 +41,17 @@ public:
     ActivityWidget(QGraphicsWidget *parent = 0);
     virtual ~ActivityWidget();
 
+    void setPixmap(const QPixmap &pixmap);
+
 public Q_SLOTS:
-    void setAtticaData(Plasma::DataEngine::Data data);
+    void setActivityData(Plasma::DataEngine::Data data);
+    Plasma::DataEngine::Data activityData() const;
 
 private:
     Plasma::DataEngine::Data m_atticaData;
     QGraphicsLinearLayout *m_layout;
     Plasma::Label *m_messageLabel;
+    ContactImage* m_image;
 };
 
 #endif

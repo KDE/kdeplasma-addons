@@ -283,7 +283,12 @@ void OpenDesktop::addActivityItem(const Plasma::DataEngine::Data &data)
         activityWidget = new ActivityWidget(this);
     }
 
-    activityWidget->setAtticaData(data);
+    activityWidget->setActivityData(data);
+    
+    if (m_friends.contains(data["user"].toString())) {
+        Plasma::DataEngine::Data data = m_friends.value(data["User"].toString())->atticaData();
+        activityWidget->setPixmap(data["Avatar"].value<QPixmap>());
+    }
     m_activityLayout->insertItem(0, activityWidget);
     m_activities.append(activityWidget);
 }
@@ -358,7 +363,7 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
         Plasma::DataEngine::Data personData = data[source].value<Plasma::DataEngine::Data>();
         if (!personData["Id"].toString().isEmpty()) {
             QString self = QString("Person-%1").arg(m_username);
-            if (data["Id"].toString() == m_username) {
+            if ( personData["Id"].toString() == m_username) {
                 // Our own data has updated ...
                 m_userWidget->setAtticaData(data);
                 m_ownData = personData;
@@ -380,6 +385,13 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
             if (person.startsWith("Person-")) {
                 Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
                 addFriend(personData);
+
+                //FIXME: make it more efficient
+                foreach (ActivityWidget * activity, m_activities) {
+                    if (personData["Id"].toString() == activity->activityData()["user"].toString()) {
+                        activity->setPixmap(personData["Avatar"].value<QPixmap>());
+                    }
+                }
             }
         }
         return;

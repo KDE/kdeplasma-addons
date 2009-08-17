@@ -47,6 +47,7 @@ class ContactWidget : public Plasma::Frame
         virtual ~ContactWidget();
 
         void setAtticaData(const Plasma::DataEngine::Data &data);
+        Plasma::DataEngine::Data atticaData() const;
 
         QString name();
         QString user();
