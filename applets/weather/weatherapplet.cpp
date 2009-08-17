@@ -94,21 +94,21 @@ void WeatherApplet::init()
 
     //FIXME: hardcoded quantities, could be better?
     m_titlePanel = new QGraphicsGridLayout;
-    m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
-    m_titlePanel->setColumnMaximumWidth(0, KIconLoader::SizeHuge * 1.5);
+    //m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
+    //m_titlePanel->setColumnMaximumWidth(0, KIconLoader::SizeHuge * 1.5);
 
     //these minimum widths seems to give different "weights" when resizing the applet
-    m_titlePanel->setColumnMinimumWidth(1, 10);
-    m_titlePanel->setColumnMinimumWidth(2, 12);
-    m_titlePanel->setColumnMinimumWidth(3, 5);
+    //m_titlePanel->setColumnMinimumWidth(1, 10);
+    //m_titlePanel->setColumnMinimumWidth(2, 12);
+    //m_titlePanel->setColumnMinimumWidth(3, 5);
 
-    m_titlePanel->setHorizontalSpacing(0);
-    m_titlePanel->setVerticalSpacing(0);
+    //m_titlePanel->setHorizontalSpacing(0);
+    //m_titlePanel->setVerticalSpacing(0);
     m_bottomLayout = new QGraphicsLinearLayout(Qt::Horizontal);
 
     m_locationLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     m_titleFont = QApplication::font();
-    m_titleFont.setPointSize(m_titleFont.pointSize() * 1.6);
+    m_titleFont.setPointSize(m_titleFont.pointSize() * 1.4);
     m_titleFont.setBold(true);
     m_locationLabel->nativeWidget()->setFont(m_titleFont);
     m_locationLabel->nativeWidget()->setWordWrap(false);
@@ -137,7 +137,7 @@ void WeatherApplet::init()
 
     /*QGraphicsWidget *titleSpacer = new QGraphicsWidget(this);
     //FIXME: will be a width somewhat related to the weather icon size
-    titleSpacer->setPreferredWidth(60);
+    //titleSpacer->setPreferredWidth(60);
     titleSpacer->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
     m_titlePanel->addItem(titleSpacer, 0, 0, 2, 1);*/
 
@@ -274,7 +274,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_forecastTemps->setText(QString());
     }
 
-    m_conditionsLabel->setText(data["Current Conditions"].toString());
+    m_conditionsLabel->setText(data["Current Conditions"].toString().trimmed());
 
     if (isValidData(data["Temperature"])) {
         m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
