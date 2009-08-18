@@ -202,15 +202,14 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
             int difference = 0;
             kDebug() << "Maximum Column Width: " << maxColumns;
             kDebug() << "shown Columns: " << shownColumns;
-            if (maxColumns <= shownColumns) {
+            if (maxColumns < shownColumns) {
                 difference = (maxColumns-shownColumns);
                 kDebug() << "A: Difference is:" << difference;
                 for (int i = maxColumns-1; i < shownColumns; ++i) {
                      kDebug() << "HIDE: i = " << i;
                      m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
                 }
-            }
-            if (maxColumns > shownColumns) {
+            } else {
                 difference = (shownColumns-maxColumns);
                 kDebug() << "B: Difference is: " << difference;
                 for (int i = difference; i < maxColumns; ++i) {
