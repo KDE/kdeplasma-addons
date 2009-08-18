@@ -133,7 +133,7 @@ void WeatherApplet::init()
     m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
     m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
-    m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeEnormous);
+    m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
     m_titlePanel->addItem(m_locationLabel, 0, 1);
     m_titlePanel->addItem(m_tempLabel, 0, 4);
     m_titlePanel->addItem(m_conditionsLabel, 1, 1);
@@ -309,6 +309,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_currentIcon = new Plasma::IconWidget(this); 
         m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         m_currentIcon->show();
+        m_currentIcon->setZValue(900);
         m_currentIcon->setPos(contentsRect().topLeft());
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
