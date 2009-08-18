@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Keyboard
+Name[pt]=Teclado
+Name[pt_BR]=Teclado
+Name[sv]=Tangentbord
+Name[uk]=Клавіатура
+Name[x-test]=xxKeyboardxx
 Comment=A virtual, on-screen keyboard
+Comment[pt]=Um teclado virtual no ecrã
+Comment[pt_BR]=Um teclado virtual na tela
+Comment[sv]=Ett virtuellt tangentbord på skärmen
+Comment[uk]=Віртуальна екранна клавіатура
+Comment[x-test]=xxA virtual, on-screen keyboardxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=keyboard
