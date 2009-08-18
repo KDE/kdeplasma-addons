@@ -21,6 +21,8 @@
 #include "weatherapplet.h"
 
 #include <QLabel>
+#include <QTreeView>
+#include <QHeaderView>
 #include <QApplication>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
@@ -56,14 +58,14 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_tempLabel(new Plasma::Label),
         m_windIcon(new Plasma::IconWidget),
         m_courtesyLabel(new Plasma::Label),
-        m_tabBar(0),
+        m_tabBar(new Plasma::TabBar),
         m_fiveDaysModel(0),
         m_detailsModel(0),
         m_fiveDaysView(0),
         m_detailsView(0),
         m_setupLayout(0),
         m_graphicsWidget(0),
-        m_titleFrame(0)
+        m_titleFrame(new Plasma::Frame)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     setPopupIcon("weather-not-available");
@@ -77,7 +79,7 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 void WeatherApplet::init()
 {
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-
+    connect(this, SIGNAL(geometryChanged()), this, SLOT(appletGeometryChanged()));
     m_graphicsWidget = new QGraphicsWidget(this);
 
     switch (formFactor()) {
@@ -90,20 +92,18 @@ void WeatherApplet::init()
         break;
     }
 
-    m_titleFrame = new Plasma::Frame(this);
-
     //FIXME: hardcoded quantities, could be better?
     m_titlePanel = new QGraphicsGridLayout;
     //m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeHuge);
-    //m_titlePanel->setColumnMaximumWidth(0, KIconLoader::SizeHuge * 1.5);
+    //m_titlePanel->setColumnMaximumWidth(0, KIconLoader::SizeHuge * 1.4);
 
     //these minimum widths seems to give different "weights" when resizing the applet
     //m_titlePanel->setColumnMinimumWidth(1, 10);
     //m_titlePanel->setColumnMinimumWidth(2, 12);
     //m_titlePanel->setColumnMinimumWidth(3, 5);
 
-    //m_titlePanel->setHorizontalSpacing(0);
-    //m_titlePanel->setVerticalSpacing(0);
+    m_titlePanel->setHorizontalSpacing(0);
+    m_titlePanel->setVerticalSpacing(0);
     m_bottomLayout = new QGraphicsLinearLayout(Qt::Horizontal);
 
     m_locationLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
@@ -112,10 +112,11 @@ void WeatherApplet::init()
     m_titleFont.setBold(true);
     m_locationLabel->nativeWidget()->setFont(m_titleFont);
     m_locationLabel->nativeWidget()->setWordWrap(false);
+    m_locationLabel->setMinimumWidth(85);
 
-    m_locationLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute); 	 
     m_conditionsLabel->nativeWidget()->setWordWrap(false);
+    m_conditionsLabel->setMinimumWidth(55);
 
     m_windIcon->setMaximumSize(0,0); 	 
     m_windIcon->setOrientation(Qt::Horizontal); 	 
@@ -123,25 +124,17 @@ void WeatherApplet::init()
 
     m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_tempLabel->nativeWidget()->setFont(m_titleFont);
-    m_tempLabel->nativeWidget()->setWordWrap(false);
 
     // This one if a bit crude, ideally we set the horizontal SizePolicy to Preferred, but that doesn't seem
     // to actually respect the minimum size needed to display the temperature. (Bug in Label or QGL?)
-    m_tempLabel->setMinimumWidth(85);
-    m_tempLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    m_tempLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     m_forecastTemps->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     m_forecastTemps->nativeWidget()->setWordWrap(false);
     m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
     m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
-    /*QGraphicsWidget *titleSpacer = new QGraphicsWidget(this);
-    //FIXME: will be a width somewhat related to the weather icon size
-    //titleSpacer->setPreferredWidth(60);
-    titleSpacer->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-    m_titlePanel->addItem(titleSpacer, 0, 0, 2, 1);*/
-
-    m_titlePanel->addItem(m_locationLabel, 0, 0, 1, 3);
+    m_titlePanel->addItem(m_locationLabel, 0, 0);
     m_titlePanel->addItem(m_tempLabel, 0, 3);
     m_titlePanel->addItem(m_conditionsLabel, 1, 0);
     m_titlePanel->addItem(m_forecastTemps, 1, 3);
@@ -152,7 +145,6 @@ void WeatherApplet::init()
     m_layout->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
     m_layout->setPreferredSize(400,300);
 
-    // This seems broken with layouts :(
     m_titleFrame->setLayout(m_titlePanel);
     m_layout->addItem(m_titleFrame);
 
@@ -205,6 +197,10 @@ void WeatherApplet::invokeBrowser(const QString& url) const
     KToolInvocation::invokeBrowser(url);
 }
 
+void WeatherApplet::appletGeometryChanged() const
+{
+    return;
+}
 void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
 {
     for (int i = 0; i < layout->count(); i++) {
@@ -223,7 +219,7 @@ void WeatherApplet::setVisibleLayout(bool val)
 
     setVisible(val, m_titlePanel);
     setVisible(val, m_bottomLayout);
-
+    
     m_courtesyLabel->setVisible(val);
 }
 
@@ -284,7 +280,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
-        m_currentIcon = new Plasma::IconWidget(); 
+        m_currentIcon = new Plasma::IconWidget(this); 
         m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
         m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
@@ -328,13 +324,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         setPopupIcon(data["Condition Icon"].toString());
     }
 
-    if (!m_tabBar) {
-        m_tabBar = new Plasma::TabBar(this);
-        m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        kDebug() << "Create new Plasma::TabBar";
-    }
-
-    //m_tabBar->clear(); - NOT in API yet
+    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     if (m_tabBar->count() > 0) {
         // If we have items in tab clean it up first
@@ -348,6 +338,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         if (!m_fiveDaysView) {
             kDebug() << "Create 5 Days Plasma::WeatherView";
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
+            connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
             m_fiveDaysView->setHasHeader(true);
             m_fiveDaysView->setOrientation(Qt::Vertical);
         }
@@ -465,6 +456,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             m_tabBar->addTab(totalDays, m_fiveDaysView);
         }
     }
+
 
     // Details data
     if (!m_detailsView) {
@@ -643,7 +635,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        //m_bottomLayout->addItem(m_currentIcon);
+        m_bottomLayout->addItem(m_currentIcon);
         m_bottomLayout->addItem(m_tabBar);
         m_layout->addItem(m_bottomLayout);
         m_layout->addItem(m_courtesyLabel);
@@ -652,7 +644,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     update();
 
     setVisibleLayout(true);
-    //updateGeometry();
+    updateGeometry();
 }
 
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
@@ -680,4 +672,15 @@ void WeatherApplet::reloadTheme()
     m_tempLabel->nativeWidget()->setFont(m_titleFont);
 }
 
+void WeatherApplet::fiveDaysColumnResized(int column, int oldSize, int newSize)
+{
+    if (m_fiveDaysView) {
+        kDebug() << "COLUMN WAS RESIZED: " << column;
+        kDebug() << "COLUMN IS VISIBLE: " << m_fiveDaysView->nativeWidget()->isColumnHidden(column);
+        kDebug() << "COLUMN OLD WIDTH SIZE: " << oldSize;
+        kDebug() << "COLUMN NEW WIDTH SIZE: " << newSize;
+        kDebug() << "COLUMN HEIGHT SIZE: " << m_fiveDaysView->sizeHintForColumn(column);
+    }
+}
+ 
 #include "weatherapplet.moc"

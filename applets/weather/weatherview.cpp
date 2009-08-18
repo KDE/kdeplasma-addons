@@ -48,6 +48,16 @@ WeatherView::~WeatherView()
 {
 }
 
+int WeatherView::columnWidth(int column) const
+{
+   return nativeWidget()->columnWidth(column);
+}
+
+int WeatherView::sizeHintForColumn(int column) 
+{
+   return qobject_cast<QAbstractItemView*>(nativeWidget())->sizeHintForColumn(column);
+}
+
 void WeatherView::setHasHeader(bool hasHeader)
 {
     m_delegate->setHasHeader(hasHeader);

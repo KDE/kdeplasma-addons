@@ -24,6 +24,7 @@
 #include <plasma/widgets/treeview.h>
 
 class WeatherDelegate;
+class QTreeView;
 
 namespace Plasma
 {
@@ -41,6 +42,8 @@ public:
 
     void setOrientation(Qt::Orientation orientation);
     Qt::Orientation orientation() const;
+    int columnWidth(int column) const;
+    int sizeHintForColumn(int column);
 
 protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);

@@ -49,7 +49,6 @@ private slots:
 protected:
 
     virtual QSize sizeHint(const QStyleOptionViewItem& option , const QModelIndex& index) const;
-
 private:
     WeatherDelegatePrivate * const d;
 };

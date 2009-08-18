@@ -51,19 +51,21 @@ public:
     void init();
     QGraphicsWidget *graphicsWidget();
 
-public slots:
+public Q_SLOTS:
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
     void reloadTheme(void);
 
-protected slots:
+protected Q_SLOTS:
     void configAccepted();
     void toolTipAboutToShow();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
 
-private slots:
+private Q_SLOTS:
     void invokeBrowser(const QString& url) const;
+    void appletGeometryChanged(void) const;
+    void fiveDaysColumnResized(int column, int oldSize, int newSize);
 
 private:
     Plasma::DataEngine::Data m_currentData; // Current data returned from ion
