@@ -64,8 +64,6 @@ protected:
 
 private Q_SLOTS:
     void invokeBrowser(const QString& url) const;
-    void appletGeometryChanged(void) const;
-    void fiveDaysColumnResized(int column, int oldSize, int newSize);
 
 private:
     Plasma::DataEngine::Data m_currentData; // Current data returned from ion

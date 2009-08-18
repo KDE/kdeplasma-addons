@@ -79,7 +79,6 @@ QGraphicsWidget *WeatherApplet::graphicsWidget()
 void WeatherApplet::init()
 {
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
-    connect(this, SIGNAL(geometryChanged()), this, SLOT(appletGeometryChanged()));
     m_graphicsWidget = new QGraphicsWidget(this);
 
     switch (formFactor()) {
@@ -189,6 +188,37 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
             Plasma::ToolTipManager::self()->unregisterWidget(this);
             break;
         }
+    } else if (constraints & Plasma::SizeConstraint) {
+        if (m_fiveDaysView) {
+            int maxColumns = m_fiveDaysView->size().width() / 66; //m_fiveDaysView->nativeWidget()->fontMetrics().maxWidth();
+            int totalColumns = m_fiveDaysView->model()->columnCount();
+            int shownColumns = 0;
+            for (int i = 0; i < totalColumns; i++) {
+                 if (!m_fiveDaysView->nativeWidget()->isColumnHidden(i)) {
+                     shownColumns++;
+                     kDebug() << "Column " << i << " is NOT hidden";
+                 }
+            }
+            int difference = 0;
+            kDebug() << "Maximum Column Width: " << maxColumns;
+            kDebug() << "shown Columns: " << shownColumns;
+            if (maxColumns <= shownColumns) {
+                difference = (maxColumns-shownColumns);
+                kDebug() << "A: Difference is:" << difference;
+                for (int i = maxColumns-1; i < shownColumns; ++i) {
+                     kDebug() << "HIDE: i = " << i;
+                     m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
+                }
+            }
+            if (maxColumns > shownColumns) {
+                difference = (shownColumns-maxColumns);
+                kDebug() << "B: Difference is: " << difference;
+                for (int i = difference; i < maxColumns; ++i) {
+                    kDebug() << "UNHIDE: i = " << i;
+                    m_fiveDaysView->nativeWidget()->setColumnHidden(i, false);
+                }
+            }    
+        }
     }
 }
 
@@ -197,10 +227,6 @@ void WeatherApplet::invokeBrowser(const QString& url) const
     KToolInvocation::invokeBrowser(url);
 }
 
-void WeatherApplet::appletGeometryChanged() const
-{
-    return;
-}
 void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
 {
     for (int i = 0; i < layout->count(); i++) {
@@ -672,24 +698,4 @@ void WeatherApplet::reloadTheme()
     m_tempLabel->nativeWidget()->setFont(m_titleFont);
 }
 
-void WeatherApplet::fiveDaysColumnResized(int column, int oldSize, int newSize)
-{
-    if (m_fiveDaysView) {
-        kDebug() << "COLUMN WAS RESIZED: " << column;
-        kDebug() << "COLUMN IS VISIBLE: " << m_fiveDaysView->nativeWidget()->isColumnHidden(column);
-        kDebug() << "COLUMN OLD WIDTH SIZE: " << oldSize;
-        kDebug() << "COLUMN NEW WIDTH SIZE: " << newSize;
-        kDebug() << "COLUMN HEIGHT SIZE: " << m_fiveDaysView->sizeHintForColumn(column);
-
-        if (m_fiveDaysView->sizeHintForColumn(column) <= 62) { // FIXME: Isn't there a better way to do this?
-            setVisible(false, m_bottomLayout);
-            m_courtesyLabel->setVisible(false);
-        } else {
-            setVisible(true, m_bottomLayout);
-            m_courtesyLabel->setVisible(true);
-        }
-
-    }
-}
- 
 #include "weatherapplet.moc"
