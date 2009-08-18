@@ -177,6 +177,54 @@ void WeatherApplet::toolTipAboutToShow()
     Plasma::ToolTipManager::self()->setContent(this, data);
 }
 
+void WeatherApplet::resizeView()
+{
+    if (m_fiveDaysView) {
+        int totalColumns = m_fiveDaysView->nativeWidget()->header()->count();
+        QString maxString, curString;
+
+        kDebug() << "Total Columns: " << totalColumns;
+        // Figure out maximum text length in model this will give us width sizing we want with setWidthSize
+        for (int i = 0; i < totalColumns; i++) {
+             curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString();
+             if (curString.length() > maxString.length()) {
+                 maxString = curString;
+             }
+        }
+        kDebug() << "Maximum string is: " << maxString;
+
+        int maxColumns = m_fiveDaysView->size().width() / m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString);
+        int shownColumns = 0;
+        for (int i = 0; i < totalColumns; i++) {
+             if (!m_fiveDaysView->nativeWidget()->isColumnHidden(i)) {
+                 shownColumns++;
+                 kDebug() << "Column " << i << " is NOT hidden";
+             }
+        }
+        int difference = 0;
+        kDebug() << "Maximum Column Width: " << maxColumns;
+        kDebug() << "shown Columns: " << shownColumns;
+        if (maxColumns < shownColumns) {
+            difference = qAbs(maxColumns-shownColumns);
+            kDebug() << "A: Difference is:" << difference;
+            for (int i = maxColumns-1; i < shownColumns; ++i) {
+                 kDebug() << "HIDE: i = " << i;
+                 m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
+            }
+        } else {
+            difference = qAbs(shownColumns-maxColumns);
+            if (difference > totalColumns) {
+                return;
+            }
+            kDebug() << "B: Difference is: " << difference;
+            for (int i = difference; i < maxColumns; ++i) {
+                 kDebug() << "UNHIDE: i = " << i;
+                 m_fiveDaysView->nativeWidget()->setColumnHidden(i, false);
+            }
+        }
+    }
+}
+ 
 void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
@@ -190,35 +238,8 @@ void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
             break;
         }
     } else if (constraints & Plasma::SizeConstraint) {
-        if (m_fiveDaysView) {
-            int maxColumns = m_fiveDaysView->size().width() / 66; //m_fiveDaysView->nativeWidget()->fontMetrics().maxWidth();
-            int totalColumns = m_fiveDaysView->model()->columnCount();
-            int shownColumns = 0;
-            for (int i = 0; i < totalColumns; i++) {
-                 if (!m_fiveDaysView->nativeWidget()->isColumnHidden(i)) {
-                     shownColumns++;
-                     kDebug() << "Column " << i << " is NOT hidden";
-                 }
-            }
-            int difference = 0;
-            kDebug() << "Maximum Column Width: " << maxColumns;
-            kDebug() << "shown Columns: " << shownColumns;
-            if (maxColumns < shownColumns) {
-                difference = (maxColumns-shownColumns);
-                kDebug() << "A: Difference is:" << difference;
-                for (int i = maxColumns-1; i < shownColumns; ++i) {
-                     kDebug() << "HIDE: i = " << i;
-                     m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
-                }
-            } else {
-                difference = (shownColumns-maxColumns);
-                kDebug() << "B: Difference is: " << difference;
-                for (int i = difference; i < maxColumns; ++i) {
-                    kDebug() << "UNHIDE: i = " << i;
-                    m_fiveDaysView->nativeWidget()->setColumnHidden(i, false);
-                }
-            }    
-        }
+        resizeView();
+        update();
     }
 }
 
@@ -308,12 +329,13 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         kDebug() << "Create new Plasma::IconWidget (condition)";
         m_currentIcon = new Plasma::IconWidget(this); 
         m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
-        m_currentIcon->show();
+        m_currentIcon->setMinimumWidth(KIconLoader::SizeSmall);
         m_currentIcon->setZValue(900);
         m_currentIcon->setPos(contentsRect().topLeft());
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
+        m_currentIcon->show();
     }
 
     if (!m_windIcon) {
@@ -669,10 +691,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_layout->addItem(m_courtesyLabel);
         m_setupLayout = 1;
     }
-    update();
 
     setVisibleLayout(true);
-    updateGeometry();
+    update();
 }
 
 void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
@@ -684,8 +705,9 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     m_currentData = data;
     setVisibleLayout(false);
     weatherContent(data);
-    update();
     WeatherPopupApplet::dataUpdated(source, data);
+    resizeView();
+    update();
 }
 
 void WeatherApplet::configAccepted()

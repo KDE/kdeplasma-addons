@@ -61,6 +61,7 @@ protected Q_SLOTS:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
+    void resizeView(void);
 
 private Q_SLOTS:
     void invokeBrowser(const QString& url) const;
