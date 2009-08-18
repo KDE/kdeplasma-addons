@@ -182,8 +182,10 @@ void ContactWidget::buildDialog()
 
 void ContactWidget::setIsFriend(bool isFriend)
 {
-    m_isFriend = isFriend;
-    updateActions();
+    if (m_isFriend != isFriend) {
+        m_isFriend = isFriend;
+        updateActions();
+    }
 }
 
 void ContactWidget::updateActions()
