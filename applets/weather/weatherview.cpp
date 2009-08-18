@@ -82,7 +82,14 @@ void WeatherView::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     QGraphicsProxyWidget::resizeEvent(event);
 
-    const int newWidth = size().width() / nativeWidget()->header()->count();
+    int shownColumns = 0;
+    for (int i = 0; i < nativeWidget()->header()->count(); i++) {
+            if (!nativeWidget()->isColumnHidden(i)) {
+                shownColumns++;
+                kDebug() << "Column " << i << " is NOT hidden";
+            }
+    }
+    const int newWidth = size().width() / shownColumns;
 
     for (int i = 0; i < nativeWidget()->header()->count(); ++i) {
         nativeWidget()->header()->resizeSection(i, newWidth);
