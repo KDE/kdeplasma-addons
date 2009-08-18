@@ -54,7 +54,7 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_locationLabel(new Plasma::Label),
         m_forecastTemps(new Plasma::Label),
         m_conditionsLabel(new Plasma::Label),
-        m_currentIcon(new Plasma::IconWidget),
+        m_currentIcon(0),
         m_tempLabel(new Plasma::Label),
         m_windIcon(new Plasma::IconWidget),
         m_courtesyLabel(new Plasma::Label),
@@ -133,10 +133,11 @@ void WeatherApplet::init()
     m_forecastTemps->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
     m_forecastTemps->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
-    m_titlePanel->addItem(m_locationLabel, 0, 0);
-    m_titlePanel->addItem(m_tempLabel, 0, 3);
-    m_titlePanel->addItem(m_conditionsLabel, 1, 0);
-    m_titlePanel->addItem(m_forecastTemps, 1, 3);
+    m_titlePanel->setColumnMinimumWidth(0, KIconLoader::SizeEnormous);
+    m_titlePanel->addItem(m_locationLabel, 0, 1);
+    m_titlePanel->addItem(m_tempLabel, 0, 4);
+    m_titlePanel->addItem(m_conditionsLabel, 1, 1);
+    m_titlePanel->addItem(m_forecastTemps, 1, 4);
 
     m_titlePanel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -306,8 +307,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
         m_currentIcon = new Plasma::IconWidget(this); 
-        m_currentIcon->setMaximumWidth(KIconLoader::SizeEnormous);
-        m_currentIcon->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
+        m_currentIcon->show();
+        m_currentIcon->setPos(contentsRect().topLeft());
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
@@ -660,7 +662,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (!m_setupLayout) {
-        m_bottomLayout->addItem(m_currentIcon);
+        //m_bottomLayout->addItem(m_currentIcon);
         m_bottomLayout->addItem(m_tabBar);
         m_layout->addItem(m_bottomLayout);
         m_layout->addItem(m_courtesyLabel);
