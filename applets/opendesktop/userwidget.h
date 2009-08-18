@@ -27,6 +27,7 @@
 
 // Plasma
 #include <Plasma/Frame>
+#include <Plasma/DataEngine>
 
 namespace Plasma
 {
@@ -43,34 +44,45 @@ class UserWidget : public Plasma::Frame
     Q_OBJECT
 
     public:
-        UserWidget(QGraphicsWidget *parent = 0);
+        UserWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~UserWidget();
-        void setName(const QString &name = "");
-        void setInfo(const QString &name = "");
+        void setId(const QString& id);
 
     public Q_SLOTS:
-        void setAtticaData(Plasma::DataEngine::Data data);
         void updateColors();
         //void loadStyleSheet(const QString &cssFile = "");
         void setStyleSheet(const QString &stylesheet);
 
+    private Q_SLOTS:
+        void dataUpdated(const QString &source, const Plasma::DataEngine::Data& data);
+
     private :
         void buildDialog();
+        void setName();
+        void setInfo();
 
         QString addRow(const QString& title, const QString& text);
 
-        Plasma::DataEngine::Data m_atticaData;
+        // Caches the data
+        Plasma::DataEngine::Data m_data;
 
         StyleSheet* m_css;
 
         QString m_cssFile;
         QString m_email;
+        // Caches the content part of the widget
         QString m_info;
+        // Caches the title part of the widget
+        QString m_name;
         // The applet attached to this item
         QGraphicsGridLayout* m_layout;
         ContactImage* m_image;
         Plasma::Label* m_nameLabel;
         Plasma::WebView* m_infoView;
+        // The user id to display
+        QString m_id;
+        // The data engine used
+        Plasma::DataEngine* m_engine;
 };
 
 #endif

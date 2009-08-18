@@ -43,12 +43,13 @@
 
 using namespace Plasma;
 
-UserWidget::UserWidget(QGraphicsWidget *parent)
+UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
     : Frame(parent),
       m_css(0),
       m_image(0),
       m_nameLabel(0),
-      m_infoView(0)
+      m_infoView(0),
+      m_engine(engine)
 {
     m_info = i18n("No information available.");
 
@@ -121,60 +122,36 @@ void UserWidget::buildDialog()
     updateColors();
 }
 
-void UserWidget::setAtticaData(Plasma::DataEngine::Data data)
+void UserWidget::setId(const QString& id) {
+    // Disconnect from the last person displayed
+    if (!m_id.isEmpty())
+        m_engine->disconnectSource(QString("Person-%1").arg(m_id), this);
+    
+    m_id = id;
+    
+    if (!m_id.isEmpty())
+        m_engine->connectSource(QString("Person-%1").arg(m_id), this);
+
+    m_data = m_engine->query(QString("Person-%1").arg(m_id));
+    setName();
+    setInfo();
+}
+
+void UserWidget::dataUpdated(const QString& source, const Plasma::DataEngine::Data& atticaData)
 {
     //kDebug() << data;
     kDebug() << "Updating user widget";
-    m_atticaData = data;
-    setName();
+    m_data = atticaData[source].value<Plasma::DataEngine::Data>();
 
-    QString city = data["City"].toString();
-    QString country = data["Country"].toString();
-    qreal lat = (qreal)(data["Latitude"].toDouble());
-    qreal lon = (qreal)(data["Longitude"].toDouble());
-    QString location;
-    if (!city.isEmpty() && !country.isEmpty()) {
-        location = QString("%1, %2").arg(city, country);
-    } else if (country.isEmpty() && !city.isEmpty()) {
-        location = city;
-    } else if (city.isEmpty() && !country.isEmpty()) {
-        location = country;
-    }
-
-    if (lat > 0 && lon) {
-        location = i18nc("city, country, latitude and longitude", "%1 (Lat: %2, Long: %3)", location, KGlobal::locale()->formatNumber(lat, 2), KGlobal::locale()->formatNumber(lon, 2));
-    }
-    QPixmap pm = data["Avatar"].value<QPixmap>();
-    QString pmUrl = data["AvatarUrl"].toUrl().toString();
+    QPixmap pm = m_data["Avatar"].value<QPixmap>();
+    QString pmUrl = m_data["AvatarUrl"].toUrl().toString();
     if (!pm.isNull()) {
         m_image->setPixmap(pm);
     } else {
         kDebug() << "avatarUrl" << pmUrl;
     }
-    QStringList userInfo;
-
-    userInfo << "<table>";
-    QString d = KGlobal::locale()->formatDate(data["Birthday"].toDate(), KLocale::FancyLongDate);
-    userInfo << addRow(i18n("Birthday:"), d);
-    if (!location.isEmpty()) {
-        userInfo << addRow(i18n("Location:"), location);
-    }
-    userInfo << addRow(i18n("IRC Nickname:"), data["ircnick"].toString());
-    userInfo << addRow(i18n("Company:"), data["company"].toString());
-    userInfo << addRow(i18n("Languages:"), data["languages"].toString());
-    userInfo << addRow(i18n("Interests:"), data["interests"].toString());
-    userInfo << addRow(i18n("Music:"), data["favouritemusic"].toString());
-    userInfo << addRow(i18n("TV Shows:"), data["favouritetvshows"].toString());
-    userInfo << addRow(i18n("Games:"), data["favouritegames"].toString());
-    userInfo << addRow(i18n("Programming:"), data["programminglanguages"].toString());
-    userInfo << addRow(i18n("%1 likes:", data["Id"].toString()), data["likes"].toString());
-    userInfo << addRow(i18n("%1 does not like:", data["Id"].toString()), data["dontlikes"].toString());
-
-
-    userInfo << "</table>";
-    QString html = userInfo.join("");
-    kDebug() << html;
-    setInfo(html);
+    setName();
+    setInfo();
 
 }
 
@@ -231,51 +208,75 @@ void UserWidget::updateColors()
     kDebug() << "CSS:" << m_css->styleSheet();
 }
 
-void UserWidget::setName(const QString &name)
+void UserWidget::setName()
 {
     QString html;
-    if (name.isEmpty()) {
-        QString _id = m_atticaData["Id"].toString();
 
-        QString _name = m_atticaData["Name"].toString();
+    QString _name = m_data["Name"].toString();
 
-        if (_name.isEmpty()) {
-            html.append(QString("<font size=\"+2\"><b>%1</b></font>").arg(_id));
-        } else {
-            html.append(QString("<font size=\"+2\"><b>%1 (%2)</b></font>").arg(_name, _id));
-        }
-
-        QString crole = m_atticaData["description"].toString();
-        kDebug() << "=========== DESC" << m_atticaData["description"].toString() << m_atticaData["description"].toString();
-        if (!crole.isEmpty()) {
-            html.append(QString("\n<br />%1").arg(crole));
-            kDebug() << "CROLE" << crole;
-        }
+    if (_name.isEmpty()) {
+        html = QString("<font size=\"+2\"><b>%1</b></font>").arg(m_id);
     } else {
-        html = QString("<h2>%1</h2>").arg(name);
+        html = QString("<font size=\"+2\"><b>%1 (%2)</b></font>").arg(_name, m_id);
+    }
+
+    QString crole = m_data["description"].toString();
+    
+    if (!crole.isEmpty()) {
+        html.append(QString("\n<br />%1").arg(crole));
     }
 
     if (m_nameLabel) {
         m_nameLabel->setText(QString("<style>%1</style>%2").arg(m_css->styleSheet(), html));
-        //kDebug() << "NAME TEXT" << m_nameLabel->text();
     }
 }
 
-void UserWidget::setInfo(const QString &text)
+void UserWidget::setInfo()
 {
-    QString t = text;
-    if (!text.isEmpty()) {
-        m_info = text;
+    QString city = m_data["City"].toString();
+    QString country = m_data["Country"].toString();
+    qreal lat = (qreal)(m_data["Latitude"].toDouble());
+    qreal lon = (qreal)(m_data["Longitude"].toDouble());
+
+    QString location;
+    if (!city.isEmpty() && !country.isEmpty()) {
+        location = QString("%1, %2").arg(city, country);
+    } else if (country.isEmpty() && !city.isEmpty()) {
+        location = city;
+    } else if (city.isEmpty() && !country.isEmpty()) {
+        location = country;
     }
-    //kDebug();
+
+    if (lat > 0 && lon) {
+        location = i18nc("city, country, latitude and longitude", "%1 (Lat: %2, Long: %3)", location, KGlobal::locale()->formatNumber(lat, 2), KGlobal::locale()->formatNumber(lon, 2));
+    }
+
+    QString birthday = KGlobal::locale()->formatDate(m_data["Birthday"].toDate(), KLocale::FancyLongDate);
+
+    QStringList userInfo;
+
+    userInfo << "<table>";
+    userInfo << addRow(i18n("Birthday:"), birthday);
+    userInfo << addRow(i18n("Location:"), location);
+    userInfo << addRow(i18n("IRC Nickname:"), m_data["ircnick"].toString());
+    userInfo << addRow(i18n("Company:"), m_data["company"].toString());
+    userInfo << addRow(i18n("Languages:"), m_data["languages"].toString());
+    userInfo << addRow(i18n("Interests:"), m_data["interests"].toString());
+    userInfo << addRow(i18n("Music:"), m_data["favouritemusic"].toString());
+    userInfo << addRow(i18n("TV Shows:"), m_data["favouritetvshows"].toString());
+    userInfo << addRow(i18n("Games:"), m_data["favouritegames"].toString());
+    userInfo << addRow(i18n("Programming:"), m_data["programminglanguages"].toString());
+    userInfo << addRow(i18n("%1 likes:", m_id), m_data["likes"].toString());
+    userInfo << addRow(i18n("%1 does not like:", m_id), m_data["dontlikes"].toString());
+    userInfo << "</table>";
+
+    QString html = userInfo.join("");
+
     if (m_infoView) {
-      QString html;
-      if (m_css) {
-          html = (QString("<style>%1</style>%2").arg(m_css->styleSheet(), m_info));
-      } else {
-          html = m_info;
-      }
-      m_infoView->setHtml(html);
+        if (m_css) {
+            html = (QString("<style>%1</style>%2").arg(m_css->styleSheet(), html));
+        }
+        m_infoView->setHtml(html);
     }
 }
 

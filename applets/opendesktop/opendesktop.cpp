@@ -114,7 +114,6 @@ void OpenDesktop::init()
     if (m_username.isEmpty()) {
         setConfigurationRequired(true);
     } else {
-        connectPerson(m_username);
         connectFriends(m_username);
     }
     connectGeolocation();
@@ -173,7 +172,7 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_activityScroll->setWidget(m_activityWidget);
         m_tabs->addTab(i18n("News feed"), m_activityScroll);
 
-        m_userWidget = new UserWidget(m_tabs);
+        m_userWidget = new UserWidget(dataEngine("ocs"), m_tabs);
         m_tabs->addTab(i18n("Personal"), m_userWidget);
 
         // Friends
@@ -208,7 +207,7 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
     kDebug() << "name, id" << name << _id;
     if (_id == m_username) {
         kDebug() << "Updating myself" << m_username;
-        m_userWidget->setAtticaData(data);
+        m_userWidget->setId(_id);
         return;
     }
 
@@ -245,7 +244,7 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
 
     if (_id == m_username) {
         kDebug() << "Updating myself" << m_username;
-        m_userWidget->setAtticaData(data);
+        m_userWidget->setId(_id);
         return;
     }
 
@@ -299,7 +298,11 @@ void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
 {
     //kDebug() << "showing details. ... switching to user info tab";
     m_tabs->setCurrentIndex(1);
-    m_userWidget->setAtticaData(data);
+    // FIXME: The following 3 (!) lines are a temporary hack
+    if (!data.contains("Id"))
+        m_userWidget->setId(m_username);
+    else
+    m_userWidget->setId(data["Id"].toString());
 
     int n = m_friendsLayout->count();
     for (int i = 0; i < n; i++) {
@@ -366,13 +369,11 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
             QString self = QString("Person-%1").arg(m_username);
             if ( personData["Id"].toString() == m_username) {
                 // Our own data has updated ...
-                m_userWidget->setAtticaData(data);
                 m_ownData = personData;
             }
             addFriend(personData);
         }
         return;
-
     } else if (source.startsWith("Near-")) {
         foreach (const QString &person, data.keys()) {
             if (person.startsWith("Person-")) {
@@ -455,7 +456,7 @@ void OpenDesktop::configAccepted()
     QString cuser = ui.username->text();
     if (m_username != cuser) {
         if (m_friends.value(cuser)) {
-            m_userWidget->setAtticaData(m_friends[cuser]->data());
+            m_userWidget->setId(m_username);
         }
 
         disconnectFriends(m_username);
