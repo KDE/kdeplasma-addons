@@ -298,7 +298,7 @@ void OpenDesktop::addActivityItem(const Plasma::DataEngine::Data &data)
 void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
 {
     //kDebug() << "showing details. ... switching to user info tab";
-    m_tabs->setCurrentIndex(0);
+    m_tabs->setCurrentIndex(1);
     m_userWidget->setAtticaData(data);
 
     int n = m_friendsLayout->count();
