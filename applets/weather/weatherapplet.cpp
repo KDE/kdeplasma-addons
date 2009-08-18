@@ -680,6 +680,15 @@ void WeatherApplet::fiveDaysColumnResized(int column, int oldSize, int newSize)
         kDebug() << "COLUMN OLD WIDTH SIZE: " << oldSize;
         kDebug() << "COLUMN NEW WIDTH SIZE: " << newSize;
         kDebug() << "COLUMN HEIGHT SIZE: " << m_fiveDaysView->sizeHintForColumn(column);
+
+        if (m_fiveDaysView->sizeHintForColumn(column) <= 62) { // FIXME: Isn't there a better way to do this?
+            setVisible(false, m_bottomLayout);
+            m_courtesyLabel->setVisible(false);
+        } else {
+            setVisible(true, m_bottomLayout);
+            m_courtesyLabel->setVisible(true);
+        }
+
     }
 }
  
