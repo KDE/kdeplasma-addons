@@ -367,7 +367,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
             connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
             m_fiveDaysView->setHasHeader(true);
-            m_fiveDaysView->setOrientation(Qt::Vertical);
+            m_fiveDaysView->setOrientation(Qt::Horizontal);
         }
 
         if (!m_fiveDaysModel) {
