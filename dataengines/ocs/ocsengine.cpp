@@ -335,16 +335,11 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
     if (!j->error()) {
         Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
 
-        m_personListJobsRefs[listJob] = 0;
+        QString _id = m_personListJobs[j];
+        m_personListJobs.remove(j);
 
         foreach (const Person &p, listJob->personList()) {
-            Attica::PersonJob* job = Attica::OcsApi::requestPerson(p.id());
-            connect(job, SIGNAL(result(KJob*)), this, SLOT(slotPersonResult(KJob*)));
-            QString _id = QString("Near-%1").arg(p.id());
-            kDebug() << "New Near:" << _id << p.id();
-
-            m_personJobs[job] = listJob;
-            ++m_personListJobsRefs[listJob];
+            setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
     } else {
