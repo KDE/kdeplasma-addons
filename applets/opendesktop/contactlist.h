@@ -9,19 +9,50 @@
 
 #include "contactwidget.h"
 
-
+/**
+ * The ContactList class provides a Plasma widget for displaying lists of contactwidget
+ */
 class ContactList : public Plasma::ScrollWidget
 {
     Q_OBJECT
     
     public:
+        /**
+         * Creates a new ContactList widget without entries
+         * @param engine the Plasma data engine to use
+         * @param parent the parent of this widget
+         */
         ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
+
+        /**
+         * Returns the maximum number of items shown
+         * @return the current limit
+         */
         int limit() const;
+
+        /**
+         * Returns the query whose results should be displayed
+         * @return the current query
+         */
         QString query() const;
+
+        /**
+         * Adjusts the maximum number of items shown
+         * @param limit the new limit
+         */
         void setLimit(int limit);
+
+        /**
+         * Sets the query whose results should be displayed
+         * @param query a source of the data engine that can be interpreted as a list of contacts (where each person is identified by a Person-[id] key)
+         */
         void setQuery(const QString& query);
 
     Q_SIGNALS:
+        /**
+         * This signal is emitted when the user requests the details of a contact
+         * @param id the identification of the requested contact details
+         */
         void showDetails(const QString& id);
         
     private Q_SLOTS:
