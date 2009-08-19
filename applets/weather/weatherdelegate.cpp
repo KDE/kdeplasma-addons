@@ -135,7 +135,7 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
     }
 
     QSize decorationSize(option.decorationSize);
-    decorationSize = decorationSize.boundedTo(option.rect.size());
+    decorationSize = decorationSize.boundedTo(QSize(option.rect.size().width(), option.rect.size().width()));
 
     if (decorationSize.width() > KIconLoader::SizeSmall && decorationSize.width() < KIconLoader::SizeSmallMedium) {
         decorationSize = QSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);

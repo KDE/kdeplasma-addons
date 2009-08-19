@@ -334,7 +334,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         m_currentIcon->setMinimumWidth(KIconLoader::SizeSmall);
         m_currentIcon->setZValue(900);
-        m_currentIcon->setPos(contentsRect().topLeft());
+        m_currentIcon->setPos(0,0);
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
@@ -685,6 +685,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (!m_setupLayout) {
         //m_bottomLayout->addItem(m_currentIcon);
+        m_bottomLayout->addStretch();
         m_bottomLayout->addItem(m_tabBar);
         m_layout->addItem(m_bottomLayout);
         m_layout->addItem(m_courtesyLabel);
