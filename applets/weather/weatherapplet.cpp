@@ -182,18 +182,20 @@ void WeatherApplet::resizeView()
     if (m_fiveDaysView) {
         int totalColumns = m_fiveDaysView->nativeWidget()->header()->count();
         QString maxString, curString;
+        int longestString = 0;
 
         kDebug() << "Total Columns: " << totalColumns;
         // Figure out maximum text length in model this will give us width sizing we want with setWidthSize
         for (int i = 0; i < totalColumns; i++) {
              curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString();
-             if (curString.length() > maxString.length()) {
+             if (m_fiveDaysView->nativeWidget()->fontMetrics().width(curString) > m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString)) {
                  maxString = curString;
+                 longestString = m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString);
              }
         }
         kDebug() << "Maximum string is: " << maxString;
-
-        int maxColumns = m_fiveDaysView->size().width() / m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString);
+        kDebug() << "Longest Size: " << longestString;
+        int maxColumns = m_fiveDaysView->size().width() / longestString;
         int shownColumns = 0;
         for (int i = 0; i < totalColumns; i++) {
              if (!m_fiveDaysView->nativeWidget()->isColumnHidden(i)) {
@@ -327,7 +329,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
-        m_currentIcon = new Plasma::IconWidget(this); 
+        m_currentIcon = new Plasma::IconWidget(m_graphicsWidget); 
         m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         m_currentIcon->setMinimumWidth(KIconLoader::SizeSmall);
         m_currentIcon->setZValue(900);
