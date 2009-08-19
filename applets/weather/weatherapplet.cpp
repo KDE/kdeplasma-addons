@@ -195,6 +195,7 @@ void WeatherApplet::resizeView()
         }
         kDebug() << "Maximum string is: " << maxString;
         kDebug() << "Longest Size: " << longestString;
+        kDebug() << "m_fiveDaysView width is: " << m_fiveDaysView->size().width();
 
         int maxColumns = m_fiveDaysView->size().width() / longestString;
         int shownColumns = 0;
@@ -217,7 +218,7 @@ void WeatherApplet::resizeView()
         } else {
             difference = qAbs(shownColumns-maxColumns);
             if (difference > totalColumns) {
-                return;
+                kDebug() << "Difference is bigger than totalColumns!";
             }
             kDebug() << "B: Difference is: " << difference;
             for (int i = difference; i < maxColumns; ++i) {
@@ -432,7 +433,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
             titleFont.setBold(true);
             dayName->setFont(titleFont);
-            dayName->setText(fiveDayTokens[0]);
+            dayName->setText(fiveDayTokens[0].trimmed());
             dayItems.append(dayName);
 
             // If we see N/U (Not Used) we skip the item
