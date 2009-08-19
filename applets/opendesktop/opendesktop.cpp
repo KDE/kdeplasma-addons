@@ -115,8 +115,8 @@ void OpenDesktop::init()
     } else {
         connectPerson(m_username);
         connectFriends(m_username);
+        connectGeolocation();
     }
-    connectGeolocation();
 }
 
 void OpenDesktop::connectGeolocation()
@@ -422,6 +422,9 @@ void OpenDesktop::configAccepted()
         m_displayedUser = m_username;
         connectPerson(m_username);
         connectFriends(m_username);
+        if (!m_username.isEmpty()) {
+            connectGeolocation();
+        }
         cg.writeEntry("username", m_username);
         emit configNeedsSaving();
         setConfigurationRequired(false);
