@@ -85,6 +85,7 @@ bool WeatherDelegate::helpEvent(QHelpEvent *event, QAbstractItemView* view, cons
 void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     QFontMetrics fm(option.font);
+    const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(&option);
     const int rows = index.model()->rowCount();
     const int columns = index.model()->columnCount();
     const int radius = 5;
@@ -107,6 +108,9 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
     if (index.column() == columns - 1) {
         drawRight = true;
     }
+
+    drawLeft  = (opt->viewItemPosition == QStyleOptionViewItemV4::Beginning);
+    drawRight = (opt->viewItemPosition == QStyleOptionViewItemV4::End);
 
     if (!drawLeft && !drawRight) {
         painter->fillRect(backgroundRect, backgroundColor);
