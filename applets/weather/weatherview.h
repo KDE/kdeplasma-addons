@@ -37,11 +37,6 @@ public:
     explicit WeatherView(QGraphicsWidget *parent = 0);
     ~WeatherView();
 
-    void setHasHeader(bool hasHeader);
-    bool hasHeader() const;
-
-    void setOrientation(Qt::Orientation orientation);
-    Qt::Orientation orientation() const;
     int columnWidth(int column) const;
     int sizeHintForColumn(int column);
 

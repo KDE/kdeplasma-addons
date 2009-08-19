@@ -58,25 +58,6 @@ int WeatherView::sizeHintForColumn(int column)
    return qobject_cast<QAbstractItemView*>(nativeWidget())->sizeHintForColumn(column);
 }
 
-void WeatherView::setHasHeader(bool hasHeader)
-{
-    m_delegate->setHasHeader(hasHeader);
-}
-
-bool WeatherView::hasHeader() const
-{
-    return m_delegate->hasHeader();
-}
-
-void WeatherView::setOrientation(Qt::Orientation orientation)
-{
-    m_delegate->setOrientation(orientation);
-}
-
-Qt::Orientation WeatherView::orientation() const
-{
-    return m_delegate->orientation();
-}
 
 void WeatherView::resizeEvent(QGraphicsSceneResizeEvent *event)
 {

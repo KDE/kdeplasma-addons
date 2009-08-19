@@ -44,16 +44,12 @@ class WeatherDelegatePrivate
 {
 public:
     WeatherDelegatePrivate()
-        : hasHeader(false),
-          orientation(Qt::Horizontal)
     {
     }
 
     ~WeatherDelegatePrivate() {
     }
 
-    bool hasHeader;
-    Qt::Orientation orientation;
 };
 
 
@@ -88,26 +84,22 @@ bool WeatherDelegate::helpEvent(QHelpEvent *event, QAbstractItemView* view, cons
 
 void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+    QFontMetrics fm(option.font);
     const int rows = index.model()->rowCount();
     const int columns = index.model()->columnCount();
     const int radius = 5;
     bool drawLeft = false;
     bool drawRight = false;
-    bool drawTop = false;
-    bool drawBottom = false;
+
 
     QColor backgroundColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    backgroundColor.setAlphaF((((qreal)index.row() + 1) / (qreal)rows)*0.3);
 
-    if ((d->orientation == Qt::Vertical && index.column() % 2 == 0) ||
-        (d->orientation == Qt::Horizontal && index.row() % 2 == 0) ||
-        (d->hasHeader && index.row() == 0)) {
-        backgroundColor.setAlphaF(0.1);
-    } else {
-        backgroundColor.setAlphaF(0.2);
-    }
 
     QRect backgroundRect(option.rect);
-    //backgroundRect.adjust(0, backgroundRect.height() / 4.2, 0, -backgroundRect.height() / 4.2);
+
+    backgroundRect.setHeight(qMin(int(fm.height() * 1.2), option.rect.height()-4));
+    backgroundRect.moveCenter(option.rect.center());
 
     if (index.column() == 0) {
         drawLeft = true;
@@ -115,14 +107,8 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
     if (index.column() == columns - 1) {
         drawRight = true;
     }
-    if (index.row() == 0) {
-        drawTop = true;
-    }
-    if (index.row() == rows - 1) {
-        drawBottom = true;
-    }
 
-    if (!drawLeft && !drawRight && !drawTop && !drawBottom) {
+    if (!drawLeft && !drawRight) {
         painter->fillRect(backgroundRect, backgroundColor);
     } else {
         QPainterPath path;
@@ -133,12 +119,6 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
         }
         if (!drawRight) {
             backgroundRectToClip.setRight(backgroundRectToClip.right()+radius);
-        }
-        if (!drawTop) {
-            backgroundRectToClip.setTop(backgroundRectToClip.top()-radius);
-        }
-        if (!drawBottom) {
-            backgroundRectToClip.setBottom(backgroundRectToClip.bottom()+radius);
         }
 
         path = Plasma::PaintUtils::roundedRectangle(backgroundRectToClip, radius);
@@ -152,31 +132,6 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
         painter->setPen(Qt::NoPen);
         painter->setBrush(backgroundColor);
         painter->drawPath(path);
-    }
-
-    if (index.row() == 0 && d->hasHeader) {
-        QRect lineRect(backgroundRect);
-        lineRect.setTop(lineRect.bottom());
-        painter->setPen(Qt::NoPen);
-
-        QColor color1 = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-        QColor color2 = color1;
-        color1.setAlphaF(0);
-        color2.setAlphaF(0.6);
-        QLinearGradient gradient(lineRect.topLeft(), lineRect.topRight());
-
-        if (index.column() == 0) {
-            gradient.setColorAt(0, color1);
-            gradient.setColorAt(1, color2);
-            painter->setBrush(gradient);
-        } else if (index.column() == columns - 1) {
-            gradient.setColorAt(0, color2);
-            gradient.setColorAt(1, color1);
-            painter->setBrush(gradient);
-        } else {
-            painter->setBrush(color2);
-        }
-        painter->drawRect(lineRect);
     }
 
     QSize decorationSize(option.decorationSize);
@@ -212,7 +167,6 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
                                           option.rect);
 
     if (!decorationIcon.isNull() && !titleText.isNull()) {
-        QFontMetrics fm(option.font);
         QRect textRect = fm.boundingRect(titleText);
         textRect.moveCenter(titleRect.center());
         if (option.direction == Qt::LeftToRight) {
@@ -231,26 +185,6 @@ void WeatherDelegate::paint(QPainter *painter, const QStyleOptionViewItem& optio
     }
     painter->setFont(titleFont);
     painter->drawText(titleRect, Qt::AlignCenter, titleText);
-}
-
-void WeatherDelegate::setHasHeader(bool hasHeader)
-{
-    d->hasHeader = hasHeader;
-}
-
-bool WeatherDelegate::hasHeader() const
-{
-    return d->hasHeader;
-}
-
-void WeatherDelegate::setOrientation(Qt::Orientation orientation)
-{
-    d->orientation = orientation;
-}
-
-Qt::Orientation WeatherDelegate::orientation() const
-{
-    return d->orientation;
 }
 
 QSize WeatherDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const

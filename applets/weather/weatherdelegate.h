@@ -38,12 +38,6 @@ public:
     //Reimplemented
     virtual void paint(QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
-    void setHasHeader(bool hasHeader);
-    bool hasHeader() const;
-
-    void setOrientation(Qt::Orientation orientation);
-    Qt::Orientation orientation() const;
-
 private slots:
     bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index);
 protected:

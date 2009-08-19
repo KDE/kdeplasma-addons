@@ -190,11 +190,12 @@ void WeatherApplet::resizeView()
              curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString().append("XX");
              if (m_fiveDaysView->nativeWidget()->fontMetrics().width(curString) > m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString)) {
                  maxString = curString;
-                 longestString = m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString);
+                 longestString = m_fiveDaysView->nativeWidget()->fontMetrics().width("XX"+maxString);
              }
         }
         kDebug() << "Maximum string is: " << maxString;
         kDebug() << "Longest Size: " << longestString;
+
         int maxColumns = m_fiveDaysView->size().width() / longestString;
         int shownColumns = 0;
         for (int i = 0; i < totalColumns; i++) {
@@ -391,8 +392,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             kDebug() << "Create 5 Days Plasma::WeatherView";
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
             connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
-            m_fiveDaysView->setHasHeader(true);
-            m_fiveDaysView->setOrientation(Qt::Horizontal);
         }
 
         if (!m_fiveDaysModel) {
@@ -514,8 +513,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (!m_detailsView) {
         kDebug() << "Create Details Plasma::WeatherView";
         m_detailsView = new Plasma::WeatherView(m_tabBar);
-        m_detailsView->setHasHeader(false);
-        m_detailsView->setOrientation(Qt::Horizontal);
     }
 
     if (!m_detailsModel) {
