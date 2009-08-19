@@ -187,7 +187,7 @@ void WeatherApplet::resizeView()
         kDebug() << "Total Columns: " << totalColumns;
         // Figure out maximum text length in model this will give us width sizing we want with setWidthSize
         for (int i = 0; i < totalColumns; i++) {
-             curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString().append("XX");
+             curString  = m_fiveDaysView->model()->index(0, i).data(Qt::DisplayRole).toString();
              if (m_fiveDaysView->nativeWidget()->fontMetrics().width(curString) > m_fiveDaysView->nativeWidget()->fontMetrics().width(maxString)) {
                  maxString = curString;
                  longestString = m_fiveDaysView->nativeWidget()->fontMetrics().width("XX"+maxString);
