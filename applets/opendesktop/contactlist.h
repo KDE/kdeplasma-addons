@@ -50,13 +50,27 @@ class ContactList : public Plasma::ScrollWidget
 
     Q_SIGNALS:
         /**
+         * This signal is emitted when the user requests to add a friend
+         * @param id the identification of the new friend
+         */
+        void addFriend(const QString& id);
+
+        /**
          * This signal is emitted when the user requests the details of a contact
          * @param id the identification of the requested contact details
          */
         void showDetails(const QString& id);
+
+        /**
+         * This signal is emitted when the user requests to write a message to a contact
+         * @param id the identification of the recipient
+         */
+        void sendMessage(const QString& id);
         
     private Q_SLOTS:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
+        void addFriend();
+        void sendMessage();
         void showDetails();
 
     private:

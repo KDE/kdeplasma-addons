@@ -69,6 +69,8 @@ void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::D
         widget->setAtticaData(data[QString("Person-%1").arg(*j)].value<Plasma::DataEngine::Data>());
         m_layout->addItem(widget);
         m_mapping.insert(widget, *j);
+        connect(widget, SIGNAL(addFriend(Plasma::DataEngine::Data)), SLOT(addFriend()));
+        connect(widget, SIGNAL(sendMessage(Plasma::DataEngine::Data)), SLOT(sendMessage()));
         connect(widget, SIGNAL(showDetails(Plasma::DataEngine::Data)), SLOT(showDetails()));
     }
     this->setPos(0, 0);
@@ -87,6 +89,20 @@ void ContactList::setLimit(int limit)
         m_limit = limit;
         dataUpdated(m_query, m_engine->query(m_query));
     }
+}
+
+
+void ContactList::addFriend()
+{
+    ContactWidget* widget = static_cast<ContactWidget*>(sender());
+    emit addFriend(m_mapping[widget]);
+}
+
+
+void ContactList::sendMessage()
+{
+    ContactWidget* widget = static_cast<ContactWidget*>(sender());
+    emit sendMessage(m_mapping[widget]);
 }
 
 

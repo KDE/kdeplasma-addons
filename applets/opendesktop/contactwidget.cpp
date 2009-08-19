@@ -203,11 +203,13 @@ void ContactWidget::setImage(const QImage &image)
 void ContactWidget::sendMessage()
 {
     KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user()));
+    emit sendMessage(m_ocsData);
 }
 
 void ContactWidget::addFriend()
 {
     KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user()));
+    emit addFriend(m_ocsData);
 }
 
 void ContactWidget::userProperties()

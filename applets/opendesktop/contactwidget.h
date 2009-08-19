@@ -63,6 +63,8 @@ class ContactWidget : public Plasma::Frame
         Plasma::PopupApplet* m_applet;
 
     Q_SIGNALS:
+        void addFriend(Plasma::DataEngine::Data data);
+        void sendMessage(Plasma::DataEngine::Data data);
         void showDetails(Plasma::DataEngine::Data data);
 
     public Q_SLOTS:
