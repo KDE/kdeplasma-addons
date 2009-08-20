@@ -43,6 +43,9 @@ public:
 protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);
 
+Q_SIGNALS:
+    void geometryChanged(void);
+
 private:
     WeatherDelegate *m_delegate;
 

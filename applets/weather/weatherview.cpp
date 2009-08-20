@@ -81,6 +81,7 @@ void WeatherView::resizeEvent(QGraphicsSceneResizeEvent *event)
         iconSize = qMax(iconSize, int(size().height()/model()->rowCount()));
     }
     nativeWidget()->setIconSize(QSize(iconSize, iconSize));
+    emit geometryChanged();
 }
 
 }
