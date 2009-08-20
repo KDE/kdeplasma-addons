@@ -37,9 +37,17 @@ SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& 
 {
     m_label = new Plasma::Label(this);
 
-    m_subject = new Plasma::TextEdit(this);
+    Frame* subjectFrame = new Frame(this);
+    subjectFrame->setFrameShadow(Sunken);
+    m_subject = new Plasma::TextEdit(subjectFrame);
+    m_subject->setText("Subject");
+    (new QGraphicsLinearLayout(subjectFrame))->addItem(m_subject);
     
-    m_body = new Plasma::TextEdit(this);
+    Frame* bodyFrame = new Frame(this);
+    bodyFrame->setFrameShadow(Sunken);
+    m_body = new Plasma::TextEdit(bodyFrame);
+    m_body->setText("Body");
+    (new QGraphicsLinearLayout(bodyFrame))->addItem(m_body);
 
     m_submit = new Plasma::PushButton(this);
     m_submit->setText(i18n("Send"));
@@ -51,9 +59,8 @@ SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& 
     
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     layout->addItem(m_label);
-    layout->addItem(m_subject);
-    layout->addItem(m_body);
-    layout->addItem(m_subject);
+    layout->addItem(subjectFrame);
+    layout->addItem(bodyFrame);
     layout->addItem(m_submit);
     layout->addItem(cancel);
 
