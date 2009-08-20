@@ -269,7 +269,7 @@ void BinaryClock::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *op
     int yPos = ((appletHeight - 4 * rectSize) / 2) + contentsRect.topLeft().y();
     int xPos = ((appletWidth - (rectSize * dots) - 5) / 2) + contentsRect.topLeft().x();
 
-    char timeDigits[6] = {m_time.hour() / 10, m_time.hour() % 10,
+    int timeDigits[6] = {m_time.hour() / 10, m_time.hour() % 10,
                           m_time.minute() / 10, m_time.minute() % 10,
                           m_time.second() / 10, m_time.second() % 10};
 
