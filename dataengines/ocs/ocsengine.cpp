@@ -368,17 +368,10 @@ void OcsEngine::slotFriendsResult( KJob *j )
     if (!j->error()) {
         Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
 
-        m_personListJobsRefs[listJob] = 0;
+        QString _id = m_personListJobs[j];
 
         foreach (const Person &p, listJob->personList()) {
-            const QString personId = QString("%1").arg(p.id());
-            Attica::PersonJob* job = Attica::OcsApi::requestPerson(personId);
-            connect(job, SIGNAL(result(KJob*)), this, SLOT(slotPersonResult(KJob*)));
-            QString _id = QString("Person-%1").arg(p.id());
-            kDebug() << "New Friend:" << _id << personId;
-
-            m_personJobs[job] = listJob;
-            ++m_personListJobsRefs[listJob];
+            setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
     } else {
