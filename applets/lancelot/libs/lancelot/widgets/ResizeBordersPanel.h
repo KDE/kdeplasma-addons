@@ -21,7 +21,6 @@
 #define LANCELOT_RESIZE_BORDERS_PANEL_H
 
 #include <lancelot/lancelot_export.h>
-
 #include <lancelot/widgets/Panel.h>
 
 namespace Lancelot

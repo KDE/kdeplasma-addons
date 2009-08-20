@@ -21,11 +21,11 @@
 #define LANCELOT_NODE_LAYOUT_H
 
 #include <QtCore/QMap>
+#include <QGraphicsLayout>
+
 #include <cmath>
 
 #include <lancelot/lancelot_export.h>
-
-#include <QGraphicsLayout>
 
 namespace Lancelot {
 
@@ -66,8 +66,8 @@ public:
 
         static NodeCoordinate simple(qreal x, qreal y, CoordinateType xType = Relative, CoordinateType yType = Relative);
 
-        float xr, xa;
-        float yr, ya;
+        qreal xr, xa;
+        qreal yr, ya;
     };
 
     /**

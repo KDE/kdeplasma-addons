@@ -20,13 +20,12 @@
 #ifndef LANCELOT_ACTION_LIST_VIEW_H
 #define LANCELOT_ACTION_LIST_VIEW_H
 
-#include <lancelot/lancelot.h>
-#include <lancelot/lancelot_export.h>
-
 #include <QtGui/QIcon>
 
-#include <lancelot/widgets/CustomListView.h>
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
 #include <lancelot/models/ActionListModel.h>
+#include <lancelot/widgets/CustomListView.h>
 
 namespace Lancelot
 {

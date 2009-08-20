@@ -20,16 +20,15 @@
 #ifndef LANCELOT_ACTION_LIST_VIEW_PH
 #define LANCELOT_ACTION_LIST_VIEW_PH
 
-#include <lancelot/lancelot.h>
-#include <lancelot/lancelot_export.h>
-
 #include <QIcon>
 
-#include <lancelot/widgets/CustomListView.h>
-#include <lancelot/widgets/ActionListView.h>
-#include <lancelot/models/ActionListModel.h>
-
 #include <plasma/widgets/svgwidget.h>
+
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
+#include <lancelot/models/ActionListModel.h>
+#include <lancelot/widgets/ActionListView.h>
+#include <lancelot/widgets/CustomListView.h>
 
 namespace Lancelot
 {

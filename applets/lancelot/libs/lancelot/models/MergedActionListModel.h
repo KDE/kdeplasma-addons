@@ -20,10 +20,10 @@
 #ifndef LANCELOT_MERGED_ACTION_LIST_MODEL_H
 #define LANCELOT_MERGED_ACTION_LIST_MODEL_H
 
+#include <QtCore/QPair>
+
 #include <lancelot/lancelot_export.h>
 #include <lancelot/models/ActionListModel.h>
-
-#include <QtCore/QPair>
 
 namespace Lancelot
 {

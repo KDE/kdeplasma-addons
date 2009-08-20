@@ -20,12 +20,14 @@
 #ifndef LANCELOTAPPLICATION_H
 #define LANCELOTAPPLICATION_H
 
-#include <kuniqueapplication.h>
-#include <plasma/plasma.h>
 #include <QTimer>
 #include <QSet>
 #include <QStringList>
 #include <QSignalMapper>
+
+#include <KUniqueApplication>
+
+#include <plasma/plasma.h>
 
 class LancelotWindow;
 class KActionCollection;

@@ -20,11 +20,12 @@
 #ifndef LANCELOT_PLASMA_SERVICE_LIST_MODEL_H
 #define LANCELOT_PLASMA_SERVICE_LIST_MODEL_H
 
+#include <QtCore/QVariant>
+
+#include <Plasma/DataEngine>
+
 #include <lancelot/lancelot_export.h>
 #include <lancelot/models/ActionListModel.h>
-
-#include <QtCore/QVariant>
-#include <Plasma/DataEngine>
 
 namespace Lancelot
 {

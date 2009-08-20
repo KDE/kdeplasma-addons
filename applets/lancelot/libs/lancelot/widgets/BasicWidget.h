@@ -20,13 +20,13 @@
 #ifndef LANCELOT_BASIC_WIDGET_H
 #define LANCELOT_BASIC_WIDGET_H
 
-#include <lancelot/lancelot_export.h>
-#include <lancelot/lancelot.h>
+#include <QtGui/QGraphicsScene>
+#include <QtGui/QIcon>
 
 #include <plasma/svg.h>
 
-#include <QtGui/QGraphicsScene>
-#include <QtGui/QIcon>
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/Widget.h>
 
 namespace Lancelot

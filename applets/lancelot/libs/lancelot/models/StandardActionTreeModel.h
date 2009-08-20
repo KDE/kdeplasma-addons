@@ -20,9 +20,9 @@
 #ifndef LANCELOT_STANDARD_ACTION_TREE_MODEL_H
 #define LANCELOT_STANDARD_ACTION_TREE_MODEL_H
 
-#include <lancelot/lancelot_export.h>
-
 #include "ActionTreeModel.h"
+
+#include <lancelot/lancelot_export.h>
 
 namespace Lancelot
 {

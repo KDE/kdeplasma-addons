@@ -17,8 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "Panel.h"
 #include "BasicWidget.h"
+#include "Panel.h"
+
 #include <plasma/framesvg.h>
 
 namespace Lancelot

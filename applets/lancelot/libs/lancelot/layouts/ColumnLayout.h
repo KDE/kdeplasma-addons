@@ -21,8 +21,9 @@
 #define LANCELOT_COLUMN_LAYOUT_H
 
 #include <lancelot/lancelot_export.h>
-#include <QtGui/QGraphicsLayoutItem>
+
 #include <QtGui/QGraphicsLayout>
+#include <QtGui/QGraphicsLayoutItem>
 
 namespace Lancelot
 {

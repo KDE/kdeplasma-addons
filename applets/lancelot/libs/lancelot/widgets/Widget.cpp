@@ -18,15 +18,15 @@
  */
 
 #include "Widget.h"
-
-#include <QVariant>
 #include "Global.h"
-#include <lancelot/lancelot.h>
+
 #include <QApplication>
 #include <QDebug>
-
+#include <QVariant>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
+
+#include <lancelot/lancelot.h>
 
 namespace Lancelot {
 

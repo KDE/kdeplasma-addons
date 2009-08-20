@@ -20,12 +20,11 @@
 #ifndef LANCELOT_WIDGET_H
 #define LANCELOT_WIDGET_H
 
+#include <QtGui/QGraphicsWidget>
+
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>
-
 #include <lancelot/Global.h>
-
-#include <QtGui/QGraphicsWidget>
 
 namespace Lancelot
 {

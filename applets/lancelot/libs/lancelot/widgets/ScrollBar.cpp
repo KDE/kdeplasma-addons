@@ -19,6 +19,7 @@
 
 #include "ScrollBar.h"
 #include "ExtenderButton.h"
+
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
 #include <QBasicTimer>

@@ -20,9 +20,9 @@
 #include "ActionListView.h"
 #include "ActionListView_p.h"
 
-#include <QGraphicsSceneMouseEvent>
 #include <QApplication>
 #include <QDebug>
+#include <QGraphicsSceneMouseEvent>
 
 namespace Lancelot {
 

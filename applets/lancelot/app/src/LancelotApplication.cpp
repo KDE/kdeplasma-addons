@@ -19,21 +19,21 @@
 
 #include "LancelotApplication.h"
 
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <KLocale>
 #include <QIcon>
 #include <QtDBus>
 
 #include <KAction>
 #include <KCrash>
+#include <KCmdLineArgs>
+#include <KAboutData>
+#include <KLocale>
 
 #include <lancelot/Global.h>
-#include "LancelotWindow.h"
-#include "models/BaseModel.h"
 
-#include "lancelotadaptor.h"
 #include "AboutData.h"
+#include "LancelotWindow.h"
+#include "lancelotadaptor.h"
+#include "models/BaseModel.h"
 
 #include "QtDisplay.h"
 

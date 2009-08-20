@@ -21,7 +21,6 @@
 #define LANCELOT_SCROLL_PANE_H
 
 #include <lancelot/lancelot_export.h>
-
 #include <lancelot/widgets/Panel.h>
 
 namespace Lancelot

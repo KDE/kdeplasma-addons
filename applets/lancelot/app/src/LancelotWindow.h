@@ -20,21 +20,23 @@
 #ifndef LANCELOTWINDOW_H
 #define LANCELOTWINDOW_H
 
+#include <QEvent>
+#include <QSignalMapper>
+#include <QTimer>
+
+#include <KConfig>
+#include <KConfigGroup>
+#include <KIcon>
+
 #include <plasma/svg.h>
 #include <plasma/plasma.h>
 #include <plasma/corona.h>
-#include <KConfig>
-#include <KConfigGroup>
-#include <QEvent>
-#include <QTimer>
-#include <QSignalMapper>
-
-#include <KIcon>
-#include "LancelotConfig.h"
-#include "ui_LancelotWindowBase.h"
 
 #include <lancelot/widgets/PopupList.h>
 #include <lancelot/widgets/PopupMenu.h>
+
+#include "LancelotConfig.h"
+#include "ui_LancelotWindowBase.h"
 
 namespace Lancelot {
     class ActionListModel;

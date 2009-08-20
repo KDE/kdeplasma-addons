@@ -18,6 +18,7 @@
  */
 
 #include "StandardActionTreeModel.h"
+
 #include <iostream>
 
 namespace Lancelot

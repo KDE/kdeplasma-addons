@@ -18,9 +18,10 @@
  */
 
 #include "FlipLayout.h"
-#include <QSet>
-#include <QMap>
+
 #include <QGraphicsWidget>
+#include <QMap>
+#include <QSet>
 
 namespace Lancelot
 {

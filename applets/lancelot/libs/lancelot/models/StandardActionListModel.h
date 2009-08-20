@@ -20,10 +20,10 @@
 #ifndef LANCELOT_STANDARD_ACTION_LIST_MODEL_H
 #define LANCELOT_STANDARD_ACTION_LIST_MODEL_H
 
+#include <QtCore/QVariant>
+
 #include <lancelot/lancelot_export.h>
 #include <lancelot/models/ActionListModel.h>
-
-#include <QtCore/QVariant>
 
 namespace Lancelot
 {

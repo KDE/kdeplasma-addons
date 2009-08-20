@@ -21,12 +21,14 @@
 #define LANCELOTCONFIG_H
 
 #include "ui_LancelotConfigBase.h"
-#include <KConfig>
-#include <KConfigGroup>
+
 #include <QButtonGroup>
-#include <QPushButton>
 #include <QHash>
 #include <QMenu>
+#include <QPushButton>
+
+#include <KConfig>
+#include <KConfigGroup>
 
 class LancelotConfig: public QObject, public Ui::LancelotConfigBase {
     Q_OBJECT

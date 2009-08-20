@@ -20,12 +20,12 @@
 #ifndef LANCELOT_PANEL_H
 #define LANCELOT_PANEL_H
 
-#include <lancelot/lancelot_export.h>
+#include <QtGui/QIcon>
+
 #include <plasma/plasma.h>
 
+#include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/Widget.h>
-
-#include <QtGui/QIcon>
 
 namespace Lancelot
 {

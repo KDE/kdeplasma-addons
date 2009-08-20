@@ -20,22 +20,19 @@
 #ifndef LANCELOT_PASSAGEWAY_VIEW_H
 #define LANCELOT_PASSAGEWAY_VIEW_H
 
-#include <lancelot/lancelot.h>
-#include <lancelot/lancelot_export.h>
-
-#include <lancelot/widgets/Widget.h>
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QIcon>
 
-#include <lancelot/widgets/Panel.h>
-#include <lancelot/widgets/ActionListView.h>
-#include <lancelot/widgets/PassagewayView.h>
+#include <lancelot/lancelot.h>
+#include <lancelot/lancelot_export.h>
 #include <lancelot/layouts/ColumnLayout.h>
-
-#include <lancelot/models/ActionTreeModel.h>
-#include <lancelot/models/ActionListModel.h>
-
 #include <lancelot/layouts/NodeLayout.h>
-#include <QtGui/QGraphicsLinearLayout>
+#include <lancelot/models/ActionListModel.h>
+#include <lancelot/models/ActionTreeModel.h>
+#include <lancelot/widgets/ActionListView.h>
+#include <lancelot/widgets/Panel.h>
+#include <lancelot/widgets/PassagewayView.h>
+#include <lancelot/widgets/Widget.h>
 
 namespace Lancelot
 {

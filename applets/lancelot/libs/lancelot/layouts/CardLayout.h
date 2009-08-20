@@ -20,14 +20,14 @@
 #ifndef LANCELOT_CARD_LAYOUT_H
 #define LANCELOT_CARD_LAYOUT_H
 
-#include <lancelot/lancelot_export.h>
-
-#include <cmath>
 #include <QtCore/QMap>
-
 #include <QtGui/QGraphicsLayout>
 #include <QtGui/QGraphicsLayoutItem>
 #include <QtGui/QGraphicsWidget>
+
+#include <cmath>
+
+#include <lancelot/lancelot_export.h>
 
 namespace Lancelot
 {

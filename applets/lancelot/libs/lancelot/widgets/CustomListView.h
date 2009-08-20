@@ -20,13 +20,12 @@
 #ifndef LANCELOT_CUSTOM_LIST_VIEW_H
 #define LANCELOT_CUSTOM_LIST_VIEW_H
 
-#include <lancelot/lancelot_export.h>
-
 #include <KIcon>
 
-#include <lancelot/widgets/Widget.h>
+#include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/ExtenderButton.h>
 #include <lancelot/widgets/ScrollPane.h>
+#include <lancelot/widgets/Widget.h>
 
 namespace Lancelot
 {

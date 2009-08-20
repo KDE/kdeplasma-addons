@@ -20,9 +20,9 @@
 #ifndef LANCELOT_FULL_BORDER_LAYOUT_H
 #define LANCELOT_FULL_BORDER_LAYOUT_H
 
-#include <lancelot/lancelot_export.h>
-
 #include <QGraphicsLayout>
+
+#include <lancelot/lancelot_export.h>
 
 namespace Lancelot {
 

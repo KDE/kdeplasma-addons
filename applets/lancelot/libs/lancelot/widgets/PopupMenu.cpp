@@ -18,10 +18,12 @@
  */
 
 #include "PopupMenu.h"
-#include <lancelot/widgets/ActionListView.h>
-#include <lancelot/models/StandardActionListModel.h>
+
 #include <QApplication>
 #include <QSignalMapper>
+
+#include <lancelot/models/StandardActionListModel.h>
+#include <lancelot/widgets/ActionListView.h>
 
 #define ITEM_HEIGHT 32
 

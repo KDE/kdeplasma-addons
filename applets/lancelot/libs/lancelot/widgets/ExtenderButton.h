@@ -22,9 +22,8 @@
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
-
-#include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/BasicWidget.h>
+#include <lancelot/widgets/Widget.h>
 
 #define EXTENDER_SIZE 20
 

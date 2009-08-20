@@ -18,6 +18,7 @@
  */
 
 #include "CustomListView.h"
+
 #include <KIcon>
 
 namespace Lancelot {

@@ -21,8 +21,10 @@
 #define LANCELOT_POPUPLIST_PH
 
 #include "PopupList.h"
-#include <lancelot/widgets/ActionListView.h>
+
 #include <QBasicTimer>
+
+#include <lancelot/widgets/ActionListView.h>
 #include <lancelot/models/ActionTreeModel.h>
 #include <lancelot/models/ActionListModel.h>
 

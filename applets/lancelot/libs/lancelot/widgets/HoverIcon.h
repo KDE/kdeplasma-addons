@@ -21,6 +21,7 @@
 #define LANCELOT_HOVER_ICON_H
 
 #include <plasma/widgets/iconwidget.h>
+
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/Widget.h>

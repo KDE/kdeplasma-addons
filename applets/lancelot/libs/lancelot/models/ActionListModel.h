@@ -20,13 +20,13 @@
 #ifndef LANCELOT_ACTION_LIST_MODEL_H
 #define LANCELOT_ACTION_LIST_MODEL_H
 
-#include <lancelot/lancelot_export.h>
-#include <lancelot/widgets/PopupMenu.h>
-
 #include <QtCore/QMimeData>
 #include <QtCore/QString>
 #include <QtGui/QIcon>
 #include <QtGui/QAction>
+
+#include <lancelot/lancelot_export.h>
+#include <lancelot/widgets/PopupMenu.h>
 
 namespace Lancelot
 {

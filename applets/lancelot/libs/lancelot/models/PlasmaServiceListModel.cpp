@@ -18,11 +18,14 @@
  */
 
 #include "PlasmaServiceListModel.h"
+
+#include <QDebug>
+
+#include <KIcon>
+#include <KConfigGroup>
+
 #include <Plasma/Service>
 #include <Plasma/DataEngineManager>
-#include <KIcon>
-#include <QDebug>
-#include <KConfigGroup>
 
 namespace Lancelot {
 

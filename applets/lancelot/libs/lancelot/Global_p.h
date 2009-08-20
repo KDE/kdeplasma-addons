@@ -18,10 +18,13 @@
  */
 
 #include "Global.h"
-#include <KGlobal>
-#include <plasma/theme.h>
-#include <KStandardDirs>
+
 #include <QSet>
+
+#include <KGlobal>
+#include <KStandardDirs>
+
+#include <plasma/theme.h>
 
 namespace Lancelot
 {

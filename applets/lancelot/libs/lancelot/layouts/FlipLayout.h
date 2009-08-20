@@ -20,10 +20,12 @@
 #ifndef LANCELOT_FLIP_LAYOUT_H
 #define LANCELOT_FLIP_LAYOUT_H
 
-#include <QGraphicsLayoutItem>
 #include <QGraphicsLayout>
-#include <lancelot/lancelot_export.h>
+#include <QGraphicsLayoutItem>
+
 #include <plasma/plasma.h>
+
+#include <lancelot/lancelot_export.h>
 
 namespace Lancelot
 {

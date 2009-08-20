@@ -18,14 +18,18 @@
  */
 
 #include "BasicWidget.h"
-#include <KGlobalSettings>
+#include "Global.h"
+
 #include <QApplication>
+#include <QtGui/QPainter>
+
+#include <KGlobalSettings>
+
+#include <plasma/paintutils.h>
 
 #include <cmath>
-#include "Global.h"
+
 #include <lancelot/lancelot.h>
-#include <QtGui/QPainter>
-#include <plasma/paintutils.h>
 
 #define WIDGET_PADDING 8
 
@@ -219,7 +223,7 @@ void BasicWidget::paintForeground(QPainter * painter)
         setLeft(titleRect, widgetRect, d->alignment);
         setLeft(descriptionRect, widgetRect, d->alignment);
 
-        float top = WIDGET_PADDING, height =
+        qreal top = WIDGET_PADDING, height =
             iconRect.height() + titleRect.height() + descriptionRect.height();
 
         if ((!d->icon.isNull() || d->iconInSvg.isValid()) && !(d->title.isEmpty() && d->description.isEmpty()))
@@ -263,7 +267,7 @@ void BasicWidget::paintForeground(QPainter * painter)
         }
     } else {
         // Horizontal layout
-        float /*left = WIDGET_PADDING,*/ width =
+        qreal /*left = WIDGET_PADDING,*/ width =
             iconRect.width() + fmaxf(titleRect.width(), descriptionRect.width()) +
             WIDGET_PADDING;
 

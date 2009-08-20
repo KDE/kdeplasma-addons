@@ -21,12 +21,14 @@
 #define LANCELOT_GLOBAL_H
 
 #include <QColor>
-#include <QString>
-#include <QMap>
 #include <QList>
+#include <QMap>
+#include <QString>
 #include <QVariant>
+
 #include <KConfig>
 #include <KConfigGroup>
+
 #include <plasma/framesvg.h>
 #include <plasma/plasma.h>
 

@@ -18,8 +18,10 @@
  */
 
 #include "FullBorderLayout.h"
-#include <lancelot/lancelot.h>
+
 #include <QGraphicsWidget>
+
+#include <lancelot/lancelot.h>
 
 namespace Lancelot {
 

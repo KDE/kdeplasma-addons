@@ -19,12 +19,15 @@
 
 #include "Global.h"
 #include "Global_p.h"
-#include <KGlobal>
-#include <plasma/theme.h>
-#include <KStandardDirs>
-#include <QMutex>
-#include <QMetaProperty>
+
 #include <QMetaObject>
+#include <QMetaProperty>
+#include <QMutex>
+
+#include <KGlobal>
+#include <KStandardDirs>
+
+#include <plasma/theme.h>
 
 namespace Lancelot
 {

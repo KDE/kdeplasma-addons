@@ -18,12 +18,12 @@
  */
 
 #include "ScrollPane.h"
-#include <QGraphicsSceneWheelEvent>
-
 #include "ScrollBar.h"
 #include "Widget.h"
+
+#include <QGraphicsSceneWheelEvent>
+
 #include <lancelot/layouts/FullBorderLayout.h>
-// #include <lancelot/layouts/FlipLayout.h>
 
 namespace Lancelot
 {

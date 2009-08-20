@@ -18,11 +18,13 @@
  */
 
 #include "LancelotConfig.h"
+
 #include <KConfigGroup>
 #include <KRun>
 #include <KUrl>
-#include "models/SystemActions.h"
+
 #include "models/NewDocuments.h"
+#include "models/SystemActions.h"
 #include "models/SystemServices.h"
 
 LancelotConfig::LancelotConfig()

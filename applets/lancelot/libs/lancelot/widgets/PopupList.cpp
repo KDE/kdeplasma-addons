@@ -19,9 +19,11 @@
 
 #include "PopupList.h"
 #include "PopupList_p.h"
-#include <KMessageBox>
+
 #include <QApplication>
 #include <QDesktopWidget>
+
+#include <KMessageBox>
 
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)

@@ -19,12 +19,12 @@
 
 #include "ExtenderButton.h"
 
-#include <QRectF>
-#include <QIcon>
-#include <QTimer>
 #include <QAction>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QIcon>
+#include <QRectF>
+#include <QTimer>
 
 #define ACTIVATION_TIME 300
 #define EXTENDER_Z_VALUE 100000.0

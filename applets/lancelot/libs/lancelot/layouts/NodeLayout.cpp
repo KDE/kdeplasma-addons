@@ -17,11 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "Global.h"
 #include "NodeLayout.h"
 
-#include <QPair>
 #include <QMap>
-#include "Global.h"
+#include <QPair>
+
 #include <lancelot/lancelot.h>
 
 #include <limits>
@@ -47,7 +48,7 @@ NodeLayout::NodeCoordinate NodeLayout::NodeCoordinate::simple(qreal x, qreal y,
         break;
     case InnerRelative:
         coo.xr = x;
-        coo.xa = std::numeric_limits<float>::infinity();
+        coo.xa = QREAL_INFINITY;
         break;
     }
 
@@ -62,7 +63,7 @@ NodeLayout::NodeCoordinate NodeLayout::NodeCoordinate::simple(qreal x, qreal y,
         break;
     case InnerRelative:
         coo.yr = y;
-        coo.ya = std::numeric_limits<float>::infinity();
+        coo.ya = QREAL_INFINITY;
         break;
     }
     return coo;
@@ -120,14 +121,14 @@ public:
 
         result.setTopLeft(calculatePosition(items[item].first, geometry));
 
-        if (items[item].second.xa != std::numeric_limits<float>::infinity()) {
+        if (items[item].second.xa != QREAL_INFINITY) {
             result.setRight(calculateXPosition(items[item].second, geometry));
         } else {
             result.setWidth(item->preferredSize().width());
             result.moveLeft(result.left() - items[item].second.xr * result.width());
         }
 
-        if (items[item].second.ya != std::numeric_limits<float>::infinity()) {
+        if (items[item].second.ya != QREAL_INFINITY) {
             result.setBottom(calculateYPosition(items[item].second, geometry));
         } else {
             result.setHeight(item->preferredSize().height());

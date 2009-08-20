@@ -24,7 +24,6 @@
 
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>
-
 #include <lancelot/Global.h>
 
 namespace Lancelot {

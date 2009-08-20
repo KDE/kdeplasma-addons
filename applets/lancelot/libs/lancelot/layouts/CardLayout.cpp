@@ -18,8 +18,10 @@
  */
 
 #include "CardLayout.h"
-#include <plasma/plasma.h>
+
 #include <QGraphicsScene>
+
+#include <plasma/plasma.h>
 
 namespace Lancelot
 {

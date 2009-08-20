@@ -25,13 +25,13 @@
 
 #ifdef LANCELOT_HAVE_COMPOSITING
 
-#include <QTextStream>
 #include <QImage>
-#include <QPaintDevice>
 #include <QLabel>
-#include <QPixmap>
-#include <QTimer>
 #include <QMainWindow>
+#include <QPaintDevice>
+#include <QPixmap>
+#include <QTextStream>
+#include <QTimer>
 
 #include <X11/extensions/Xrender.h>
 
