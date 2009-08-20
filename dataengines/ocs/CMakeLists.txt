@@ -3,6 +3,8 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}
 add_subdirectory( lib )
 
 set(ocs_engine_SRCS
+   messagesendservicejob.cpp
+   messageservice.cpp
    ocsengine.cpp
 )
 
@@ -13,3 +15,4 @@ target_link_libraries(plasma_engine_ocs ocsclient ${KDE4_KDECORE_LIBS}
 
 install(TARGETS plasma_engine_ocs DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-ocs.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install(FILES ocsMessage.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)

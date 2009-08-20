@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="sendMessage">
+        <entry name="To" type="String">
+            <label>The recipient of the message.</label>
+        </entry>
+        <entry name="Subject" type="String">
+            <label>The subject of the message.</label>
+        </entry>
+        <entry name="Body" type="String">
+            <label>The body of the message.</label>
+        </entry>
+    </group>
+</kcfg>

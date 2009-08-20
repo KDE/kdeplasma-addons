@@ -28,7 +28,8 @@
 using namespace Attica;
 
 OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent)
+    : Plasma::DataEngine(parent),
+      m_messageService(0)
 {
     // fairy random, should be set from the applet by calling
     m_maximumItems = 99;
@@ -47,6 +48,19 @@ QStringList OcsEngine::sources() const
 {
     return (QStringList() << "activity");
 }
+
+
+Plasma::Service* OcsEngine::serviceForSource(const QString& source)
+{
+    if (source == "Message") {
+        if (!m_messageService) {
+            m_messageService = new MessageService(this);
+        }
+        return m_messageService;
+    }
+    return Plasma::DataEngine::serviceForSource(source);
+}
+
 
 bool OcsEngine::sourceRequestEvent(const QString &name)
 {

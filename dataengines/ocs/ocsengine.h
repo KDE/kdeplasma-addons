@@ -29,6 +29,8 @@
 
 #include <Solid/Networking>
 
+#include "messageservice.h"
+
 class QTimer;
 class KJob;
 
@@ -48,6 +50,7 @@ public:
     OcsEngine ( QObject* parent, const QVariantList& args );
     ~OcsEngine ();
     virtual QStringList sources() const;
+    virtual Plasma::Service* serviceForSource(const QString& source);
 
 protected:
     virtual bool sourceRequestEvent(const QString& name);
@@ -75,6 +78,7 @@ private:
     Attica::Activity::List m_activities;
     KJob* m_job;
     int m_maximumItems;
+    MessageService* m_messageService;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )
