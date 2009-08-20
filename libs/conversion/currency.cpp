@@ -18,6 +18,7 @@
  */
 
 #include "currency.h"
+#include "conversioni18ncatalog.h"
 #include <QFileInfo>
 #include <QDateTime>
 #include <QDomDocument>
@@ -33,6 +34,8 @@ static const char* URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-dai
 Currency::Currency(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("currency");
     setName(i18n("Currency"));
     setDescription("From ECB");

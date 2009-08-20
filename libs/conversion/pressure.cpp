@@ -18,11 +18,14 @@
  */
 
 #include "pressure.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Pressure::Pressure(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("pressure");
     setName(i18n("Pressure"));
 

@@ -18,6 +18,7 @@
  */
 
 #include "velocity.h"
+#include "conversioni18ncatalog.h"
 #include <math.h>
 #include <KLocale>
 
@@ -30,6 +31,8 @@ class Beaufort : public Conversion::Complex
 Velocity::Velocity(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("velocity");
     setName(i18n("Velocity"));
 

@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2009 Petri Damstén <damu@iki.fi>
+ *   Copyright (C) 2009 Andrew Coles <andrew_coles@yahoo.co.uk>
+ *   Copyright (C) 2009 Kristof Bal <kristof.bal@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,18 +18,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "power.h"
-#include "conversioni18ncatalog.h"
-#include <KLocale>
+#ifndef WEATHERI18NCATALOG_H
+#define WEATHERI18NCATALOG_H
 
-Power::Power(QObject* parent)
-: Conversion::UnitCategory(parent)
-{
-    Conversioni18nCatalog::loadCatalog();
-    
-    setObjectName("power");
-    setName(i18n("Power"));
-    addSIUnit("W", i18n("watt"), i18n("watts"));
 
-    U(i18n("horsepower"), i18n("horsepowers"), i18nc("horsepower", "hp"), 735.49875, );
-}
+class Conversioni18nCatalog {
+
+public:
+	static void loadCatalog();
+};
+
+#endif

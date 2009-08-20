@@ -18,11 +18,14 @@
  */
 
 #include "timeunit.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Time::Time(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("time");
     setName(i18n("Time"));
     addSIUnit("s", i18n("second"), i18n("seconds"));

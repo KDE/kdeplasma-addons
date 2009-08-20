@@ -18,6 +18,7 @@
  */
 
 #include "temperature.h"
+#include "conversioni18ncatalog.h"
 #include <KDebug>
 #include <KLocale>
 
@@ -61,6 +62,8 @@ class Romer : public Conversion::Complex
 Temperature::Temperature(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("temperature");
     setName(i18n("Temperature"));
 

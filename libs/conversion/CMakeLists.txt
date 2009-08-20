@@ -17,6 +17,7 @@ set(conversion_LIB_SRCS
     power.cpp
     timeunit.cpp
     fuel_efficiency.cpp
+    conversioni18ncatalog.cpp
 )
 
 set(conversion_HEADERS

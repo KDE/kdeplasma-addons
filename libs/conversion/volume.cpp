@@ -18,11 +18,14 @@
  */
 
 #include "volume.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Volume::Volume(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("volume");
     setName(i18n("Volume"));
 

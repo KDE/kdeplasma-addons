@@ -18,6 +18,7 @@
  */
 
 #include "unitcategory.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 #include <KDebug>
 
@@ -88,6 +89,8 @@ Conversion::Value UnitCategory::convert(const Conversion::Value& value, const Un
 void UnitCategory::addSIUnit(const QString& symbol, const QString& single, const QString& plural,
                              uint multiplier, double shift)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     static const QStringList prefixes = QStringList() <<
             i18n("yotta") << i18n("zetta") << i18n("exa") << i18n("peta") << i18n("tera") <<
             i18n("giga") << i18n("mega") << i18n("kilo") << i18n("hecto") << i18n("deca") <<

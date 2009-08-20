@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2009 Petri Damstén <damu@iki.fi>
+ *   Copyright (C) 2009 Andrew Coles <andrew_coles@yahoo.co.uk>
+ *   Copyright (C) 2009 Kristof Bal <kristof.bal@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,18 +18,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "power.h"
 #include "conversioni18ncatalog.h"
-#include <KLocale>
+#include <QMutex>
+#include <kglobal.h>
+#include <klocale.h>
 
-Power::Power(QObject* parent)
-: Conversion::UnitCategory(parent)
-{
-    Conversioni18nCatalog::loadCatalog();
-    
-    setObjectName("power");
-    setName(i18n("Power"));
-    addSIUnit("W", i18n("watt"), i18n("watts"));
+static bool catalogLoaded = false;
+static QMutex loadingMutex;
 
-    U(i18n("horsepower"), i18n("horsepowers"), i18nc("horsepower", "hp"), 735.49875, );
+void Conversioni18nCatalog::loadCatalog() {
+
+	loadingMutex.lock();
+	if (!catalogLoaded) {
+		KGlobal::locale()->insertCatalog("libconversion");
+		catalogLoaded = true;
+	}
+	loadingMutex.unlock();
 }

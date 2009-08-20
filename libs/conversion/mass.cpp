@@ -19,11 +19,14 @@
  */
 
 #include "mass.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Mass::Mass(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("mass");
     setName(i18n("Mass"));
     addSIUnit("g", i18nc("mass unit", "gram"), i18n("grams"));

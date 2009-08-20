@@ -18,11 +18,14 @@
  */
 
 #include "area.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Area::Area(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("area");
     setName(i18n("Area"));
     addSIUnit("m\xb2", i18nc("area unit","meter"), i18nc("area unit","meters"), 2);

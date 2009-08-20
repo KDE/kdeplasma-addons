@@ -18,12 +18,15 @@
  */
 
 #include "length.h"
+#include "conversioni18ncatalog.h"
 #include <KDebug>
 #include <KLocale>
 
 Length::Length(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
+    Conversioni18nCatalog::loadCatalog();
+    
     setObjectName("length");
     setName(i18n("Length"));
 
