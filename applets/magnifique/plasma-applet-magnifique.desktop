@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Magnifique
 Name[ar]=المكبر
+Name[el]=Μεγεθυντής
 Name[it]=Lente d'ingrandimento
 Name[nn]=Forstørring
 Name[pa]=ਵੱਡਦਰਸ਼ੀ
@@ -12,6 +13,8 @@ Name[wa]=Magnifike
 Name[x-test]=xxMagnifiquexx
 Name[zh_CN]=魅影
 Comment=A magnification glass for the Plasma desktop
+Comment[da]=Et forstørrelsesglas til Plasma-skrivebordet
+Comment[el]=Ένας μεγεθυντικός φακός για την επιφάνεια εργασίας plasma
 Comment[es]=Una lente de aumento para el escritorio Plasma
 Comment[et]=Plasma töölaua suurendusklaas
 Comment[is]=Stækkunargler fyrir Plasma skjáborðið
