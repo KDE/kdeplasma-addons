@@ -343,6 +343,12 @@ void Notes::init()
     }
 
     m_font = cg.readEntry("font", KGlobalSettings::generalFont());
+    //Set the font family on init, it may have changed from the outside
+    QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
+    m_textEdit->nativeWidget()->selectAll();
+    m_textEdit->nativeWidget()->setFontFamily(m_font.family());
+    m_textEdit->nativeWidget()->setTextCursor(oldCursor);
+    
     m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
@@ -422,7 +428,9 @@ void Notes::updateTextGeometry()
         m_textEdit->nativeWidget()->setFontPointSize(m_font.pointSize());
         m_textEdit->nativeWidget()->setTextCursor(oldTextCursor);
         
-        lineChanged();
+        if (m_autoFont) {
+            lineChanged();
+        }
     }
 }
 
@@ -589,7 +597,6 @@ void Notes::configAccepted()
         changed = true;
         cg.writeEntry("font", newFont);
         m_font = newFont;
-        m_font.setPointSize(fontSize());
         
         //Apply font size
         QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
@@ -602,23 +609,18 @@ void Notes::configAccepted()
         changed = true;
         m_customFontSize = ui.customFontSizeSpinBox->value();
         cg.writeEntry("customFontSize", m_customFontSize);
-        m_font.setPointSize(fontSize());
     }
 
     if (m_autoFont != ui.autoFont->isChecked()) {
         changed = true;
         m_autoFont = ui.autoFont->isChecked();
         cg.writeEntry("autoFont", m_autoFont);
-        m_font.setPointSize(fontSize());
     }
 
     if (m_autoFontPercent != ui.autoFontPercent->value()) {
         changed = true;
         m_autoFontPercent = (ui.autoFontPercent->value());
         cg.writeEntry("autoFontPercent", m_autoFontPercent);
-        if (m_autoFont) {
-            m_font.setPointSize(fontSize());
-        }
     }
 
     //TODO
