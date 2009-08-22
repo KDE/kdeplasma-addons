@@ -410,12 +410,20 @@ void Notes::updateTextGeometry()
         m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
         m_font.setPointSize(fontSize());
 
-        QString cssWeight = m_font.bold() ? "bold" : "normal";
-        QString cssStyle = m_font.italic() ? "italic" : "normal";
-        QString cssSize = QString::number(m_font.pointSize()) + QString("pt");
-        QString css = QString("QTextEdit { font-family:%1; font-size:%2; font-weight:%3;"
-        "font-style:%4; }").arg(m_font.family(), cssSize, cssWeight, cssStyle);
-        m_textEdit->nativeWidget()->setStyleSheet(css);
+        //Save the current text selection
+        QTextCursor oldTextCursor = m_textEdit->nativeWidget()->textCursor();
+        
+        //Select all the text to set the new style
+        QTextCursor allSelection = oldTextCursor;
+        allSelection.select(QTextCursor::Document);
+        m_textEdit->nativeWidget()->setTextCursor(allSelection);
+        
+        //Apply the new font family and size
+        m_textEdit->nativeWidget()->setFontFamily(m_font.family());
+        m_textEdit->nativeWidget()->setFontPointSize(m_font.pointSize());
+        
+        //Restore the text selection
+        m_textEdit->nativeWidget()->setTextCursor(oldTextCursor);
     }
 }
 
@@ -515,9 +523,9 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 
     ui.textColorButton->setColor(m_textColor);
     ui.textBackgroundColorButton->setColor(m_textBackgroundColor);
-    ui.fontStyleComboBox->setCurrentFont(m_textEdit->nativeWidget()->font());
-    ui.fontBoldCheckBox->setChecked(m_textEdit->nativeWidget()->font().bold());
-    ui.fontItalicCheckBox->setChecked(m_textEdit->nativeWidget()->font().italic());
+    ui.fontStyleComboBox->setCurrentFont(m_font);
+    ui.fontBoldCheckBox->setChecked(m_font.bold());
+    ui.fontItalicCheckBox->setChecked(m_font.italic());
     ui.autoFont->setChecked(m_autoFont);
     ui.autoFontPercent->setEnabled(m_autoFont);
     ui.customFont->setChecked(!m_autoFont);
@@ -559,6 +567,28 @@ void Notes::configAccepted()
     QFont newFont = ui.fontStyleComboBox->currentFont();
     newFont.setBold(ui.fontBoldCheckBox->isChecked());
     newFont.setItalic(ui.fontItalicCheckBox->isChecked());
+    
+    //Apply bold and italic changes (if any) here (this is destructive formatting)
+    bool boldChanged = (m_font.bold() != newFont.bold());
+    bool italicChanged = (m_font.italic() != newFont.italic());
+    if (boldChanged || italicChanged) {
+        //Save previous selection
+        QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
+        //Apply new global formatting
+        QTextCursor allSelection = oldCursor;
+        allSelection.select(QTextCursor::Document);
+        m_textEdit->nativeWidget()->setTextCursor(allSelection);
+        if (boldChanged) {
+            m_textEdit->nativeWidget()->setFontWeight(newFont.weight());
+        }
+        if (italicChanged) {
+            m_textEdit->nativeWidget()->setFontItalic(newFont.italic());
+        }
+        //Restore previous selection
+        m_textEdit->nativeWidget()->setTextCursor(oldCursor);
+    }
+    
+    //Save font settings to config
     if (m_font != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
