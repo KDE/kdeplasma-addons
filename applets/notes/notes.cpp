@@ -21,29 +21,26 @@
 
 #include "notes.h"
 
-#include <QFile>
-#include <QGraphicsGridLayout>
-#include <QGraphicsLinearLayout>
-#include <QGraphicsTextItem>
-#include <QMenu>
-#include <QTextStream>
-#include <QtGui/QtGui>
-#include <Plasma/PushButton>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+
+#include <QtGui/QGraphicsGridLayout>
+#include <QtGui/QGraphicsTextItem>
+#include <QtGui/QScrollBar>
+#include <QtGui/QToolButton>
+#include <QtGui/QMenu>
+
 #include <KConfigDialog>
 #include <KConfigGroup>
-#include <KFileDialog>
 #include <KGlobalSettings>
+#include <KFileDialog>
 #include <KMessageBox>
-#include <kicon.h>
-#include <kpushbutton.h>
-#include <KRichTextEdit>
+#include <KIcon>
+#include <KPushButton>
 #include <KStandardAction>
-#include <KTextEdit>
-#include <Plasma/TextEdit>
 #include <KAction>
 
-
-
+#include <Plasma/PushButton>
 
 NotesTextEdit::NotesTextEdit(QWidget *parent)
     : KRichTextEdit(parent),
