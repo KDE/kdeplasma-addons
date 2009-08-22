@@ -23,6 +23,8 @@
 #include <QMetaObject>
 #include <QWidget>
 
+#include <limits>
+
 namespace Lancelot
 {
 
