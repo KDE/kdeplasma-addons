@@ -323,9 +323,6 @@ void Notes::init()
     m_textColor = cg.readEntry("textColor", QColor(Qt::black));
     m_textBackgroundColor = cg.readEntry("textBackgroundColor", QColor(Qt::transparent));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
-    QPalette palette = m_textEdit->nativeWidget()->palette();
-    palette.setColor(QPalette::Text, m_textColor);
-    m_textEdit->nativeWidget()->setPalette(palette);
 
     QString text = cg.readEntry("autoSaveHtml", QString());
     if (text.isEmpty()) {
@@ -368,6 +365,14 @@ void Notes::init()
 */
 void Notes::lineChanged()
 {
+    //Re-set the formatting if previous text was deleted
+    if (m_textEdit->nativeWidget()->document()->characterCount() == 1) {
+        QTextCharFormat fmt;
+        fmt.setForeground(QBrush(m_textColor));
+        fmt.setFont(m_font);
+        m_textEdit->nativeWidget()->setCurrentCharFormat(fmt);   
+    }
+    
     if (m_useNoColor) {
         return;
     }
@@ -412,20 +417,12 @@ void Notes::updateTextGeometry()
         m_layout->setContentsMargins(xpad, ypad, xpad, ypad);
         m_font.setPointSize(fontSize());
 
-        //Save the current text selection
         QTextCursor oldTextCursor = m_textEdit->nativeWidget()->textCursor();
-        
-        //Select all the text to set the new style
-        QTextCursor allSelection = oldTextCursor;
-        allSelection.select(QTextCursor::Document);
-        m_textEdit->nativeWidget()->setTextCursor(allSelection);
-        
-        //Apply the new font family and size
-        m_textEdit->nativeWidget()->setFontFamily(m_font.family());
+        m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setFontPointSize(m_font.pointSize());
-        
-        //Restore the text selection
         m_textEdit->nativeWidget()->setTextCursor(oldTextCursor);
+        
+        lineChanged();
     }
 }
 
@@ -576,10 +573,7 @@ void Notes::configAccepted()
     if (boldChanged || italicChanged) {
         //Save previous selection
         QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
-        //Apply new global formatting
-        QTextCursor allSelection = oldCursor;
-        allSelection.select(QTextCursor::Document);
-        m_textEdit->nativeWidget()->setTextCursor(allSelection);
+        m_textEdit->nativeWidget()->selectAll();
         if (boldChanged) {
             m_textEdit->nativeWidget()->setFontWeight(newFont.weight());
         }
@@ -596,6 +590,12 @@ void Notes::configAccepted()
         cg.writeEntry("font", newFont);
         m_font = newFont;
         m_font.setPointSize(fontSize());
+        
+        //Apply font size
+        QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
+        m_textEdit->nativeWidget()->selectAll();
+        m_textEdit->nativeWidget()->setFontFamily(m_font.family());
+        m_textEdit->nativeWidget()->setTextCursor(oldCursor);
     }
 
     if (m_customFontSize != ui.customFontSizeSpinBox->value()) {
@@ -637,9 +637,6 @@ void Notes::configAccepted()
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
         m_textEdit->nativeWidget()->setTextCursor(textCursor);
-        QPalette palette = m_textEdit->nativeWidget()->palette();
-        palette.setColor(QPalette::Text, m_textColor);
-        m_textEdit->nativeWidget()->setPalette(palette);
     }
 
     if (m_useNoColor != ui.useNoColor->isChecked()) {
