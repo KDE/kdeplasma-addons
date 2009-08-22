@@ -321,9 +321,6 @@ void Notes::init()
     m_textColor = cg.readEntry("textColor", QColor(Qt::black));
     m_textBackgroundColor = cg.readEntry("textBackgroundColor", QColor(Qt::transparent));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
-    QPalette palette = m_textEdit->nativeWidget()->palette();
-    palette.setColor(QPalette::Text, m_textColor);
-    m_textEdit->nativeWidget()->setPalette(palette);
 
     QString text = cg.readEntry("autoSaveHtml", QString());
     if (text.isEmpty()) {
@@ -366,6 +363,14 @@ void Notes::init()
 */
 void Notes::lineChanged()
 {
+    //Re-set the formatting if previous text was deleted
+    if (m_textEdit->nativeWidget()->document()->characterCount() == 1) {
+        QTextCharFormat fmt;
+        fmt.setForeground(QBrush(m_textColor));
+        fmt.setFont(m_font);
+        m_textEdit->nativeWidget()->setCurrentCharFormat(fmt);   
+    }
+    
     if (m_useNoColor) {
         return;
     }
@@ -635,9 +640,6 @@ void Notes::configAccepted()
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);
         m_textEdit->nativeWidget()->setTextCursor(textCursor);
-        QPalette palette = m_textEdit->nativeWidget()->palette();
-        palette.setColor(QPalette::Text, m_textColor);
-        m_textEdit->nativeWidget()->setPalette(palette);
     }
 
     if (m_useNoColor != ui.useNoColor->isChecked()) {
