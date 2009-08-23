@@ -272,7 +272,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     m_layout->addItem(m_textEdit);
 
     if (args.count() > 0) {
-        KUrl url = KUrl::fromPathOrUrl(args.at(0).toString());
+        KUrl url = KUrl(args.at(0).toString());
         QFile f(url.path());
 
         if (f.open(QIODevice::ReadOnly)) {
