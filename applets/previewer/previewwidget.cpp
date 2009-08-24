@@ -44,6 +44,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
     : QGraphicsWidget(parent),
       m_selectedIndex(-1),
       m_hoveredIndex(-1),
+      m_hoverSvg(new Plasma::FrameSvg(this)),
       m_closeStatus(true),
       m_animId(-1)
 {
@@ -64,6 +65,10 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
 
     m_logo = new Plasma::Svg(this);
     m_logo->setImagePath("widgets/previewer-16");
+    
+    m_hoverSvg->setImagePath("widgets/viewitem");
+    m_hoverSvg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    m_hoverSvg->setCacheAllRenderedFrames(true);
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
             this, SLOT(setupOptionViewItem()));
@@ -522,13 +527,19 @@ void PreviewWidget::paint(QPainter *painter,
             }
 
             m_option.state &= ~(QStyle::State_Selected | QStyle::State_MouseOver) ;
+	    m_hoverSvg->setElementPrefix("");
             if (m_selectedIndex == i) {
-                m_option.state |= QStyle::State_Selected;
+                m_hoverSvg->prefix().isEmpty() ? m_hoverSvg->setElementPrefix("selected") : m_hoverSvg->setElementPrefix(m_hoverSvg->prefix() + "+selected");
             }
 
             if (m_hoveredIndex == i) {
-                m_option.state |= QStyle::State_MouseOver;
+                m_hoverSvg->prefix().isEmpty() ? m_hoverSvg->setElementPrefix("hover") : m_hoverSvg->setElementPrefix(m_hoverSvg->prefix() + "+hover");
             }
+	    
+	    if (!m_hoverSvg->prefix().isEmpty()) {
+	        m_hoverSvg->resizeFrame(r.size());
+	        m_hoverSvg->paintFrame(painter, r.topLeft());
+	    }
 
             m_option.rect = r;
             m_delegate.setShadowColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor));

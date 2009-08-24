@@ -40,6 +40,7 @@
 #include <KIO/DeleteJob>
 #include <KRun>
 #include <KMessageBox>
+#include <KDebug>
 
 // Plasma
 #include <plasma/theme.h>
@@ -165,7 +166,7 @@ void Previewer::stayOnTop(bool top)
 
 void Previewer::openFile(KUrl u)
 {
-    kDebug()<<"opening file";
+    kDebug() << "opening file";
     if (!u.isValid()) {
         u = KFileDialog::getOpenUrl();
 
@@ -292,7 +293,7 @@ void Previewer::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
 {
-    kDebug()<<"addPreview() reached";
+    kDebug() << "addPreview() reached";
     if (m_previewHistory.contains(url)) {
         return;
     }
@@ -386,7 +387,7 @@ void Previewer::slotRunClicked()
     KMimeType::Ptr mimeType = KMimeType::findByUrl(url, 0, true);
     KService::Ptr service = KMimeTypeTrader::self()->preferredService(mimeType->name());
     if (service) {
-        kDebug()<<service->exec();
+        //kDebug()<<service->exec();
         KRun::run(service->exec(), url, m_dialog);
     }
 

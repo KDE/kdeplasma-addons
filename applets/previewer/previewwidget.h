@@ -109,6 +109,7 @@ class PreviewWidget : public QGraphicsWidget
        QRect m_previewRect;
        bool m_layoutIsValid;
        Plasma::FrameSvg *m_panel;
+       Plasma::FrameSvg *m_hoverSvg;
        Plasma::Svg *m_logo;
        KUrl m_hoveredUrl;
        QList<QUrl> m_previewHistory;
