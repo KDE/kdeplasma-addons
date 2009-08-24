@@ -29,7 +29,6 @@ BoardKey::BoardKey(PlasmaboardWidget *parent):
 	//this->setDrawBackground(true);
 	setMinimumSize(10,10);
 	setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored, QSizePolicy::DefaultType);
-	pen = QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 }
 
 BoardKey::~BoardKey() {
@@ -57,7 +56,7 @@ void BoardKey::sendKeycodeToggled() {}
 
 void BoardKey::setUpPainter(QPainter *painter){
 	painter->setRenderHints(QPainter::Antialiasing);
-        painter->setPen(pen);
+	painter->setPen(QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor)));
 	//painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 }
 

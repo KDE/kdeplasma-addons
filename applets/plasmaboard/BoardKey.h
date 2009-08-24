@@ -39,7 +39,6 @@ public:
 private:
 	QString labelText;
 	int fontDivider;
-	QPen pen;
 
 public Q_SLOTS:
 	virtual void sendKeycodePress();

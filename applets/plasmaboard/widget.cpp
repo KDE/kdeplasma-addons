@@ -163,7 +163,7 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+4, 1, 2, Qt::AlignLeft);
 	}
 
-        extKeys[0]->setKey(XK_Escape, true, i18n("Esc"));
+	extKeys[0]->setKey(XK_Escape, true, i18nc("The escape key on a keyboard", "Esc"));
         extKeys[1]->setKey(XK_F1, true, i18n("F1"));
         extKeys[2]->setKey(XK_F2, true, i18n("F2"));
         extKeys[3]->setKey(XK_F3, true, i18n("F3"));
@@ -176,9 +176,9 @@ void PlasmaboardWidget::initExtendedKeyboard(){
         extKeys[10]->setKey(XK_F10, true, i18n("F10"));
         extKeys[11]->setKey(XK_F11, true, i18n("F11"));
         extKeys[12]->setKey(XK_F12, true, i18n("F12"));
-        extKeys[13]->setKey(XK_Print, true, i18n("Print"));
-        extKeys[14]->setKey(XK_Num_Lock, true, i18n("Num"));
-        extKeys[15]->setKey(XK_Pause, true, i18n("Pause"));
+	extKeys[13]->setKey(XK_Print, true, i18nc("The print key on a keyboard", "Print"));
+	extKeys[14]->setKey(XK_Num_Lock, true, i18nc("The num key on a keyboard", "Num"));
+	extKeys[15]->setKey(XK_Pause, true, i18nc("The pause key on a keyboard", "Pause"));
 
 	initBasicKeyboard(1);
 
@@ -187,13 +187,13 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	int col = 31;
 
 	m_layout->addItem(extKeys[HOMEKEY], FIRST_ROW + 1, col, 1, 2, Qt::AlignLeft);
-        extKeys[HOMEKEY]->setKey(XK_Home, true, i18n("Home"));
+	extKeys[HOMEKEY]->setKey(XK_Home, true, i18nc("The home key on a keyboard", "Home"));
 
 	m_layout->addItem(extKeys[ENDKEY], FIRST_ROW + 2, col, 1, 2, Qt::AlignLeft);
-        extKeys[ENDKEY]->setKey(XK_End, true, i18n("End"));
+	extKeys[ENDKEY]->setKey(XK_End, true, i18nc("The end key on a keyboard", "End"));
 
 	m_layout->addItem(extKeys[INSKEY], FIRST_ROW + 3, col, 1, 2, Qt::AlignLeft);
-        extKeys[INSKEY]->setKey(XK_Insert, true, i18n("Ins"));
+	extKeys[INSKEY]->setKey(XK_Insert, true, i18nc("The insert key on a keyboard", "Ins"));
 
 	m_layout->addItem(extKeys[ARROWTOPKEY], FIRST_ROW + 4, col, 1, 2, Qt::AlignLeft);
 	m_layout->addItem(extKeys[ARROWBOTTOMKEY], FIRST_ROW + 5, col, 1, 2, Qt::AlignLeft);
@@ -202,11 +202,11 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 
 	m_layout->addItem(extKeys[ARROWRIGHTKEY], FIRST_ROW + 5, col, 1, 2, Qt::AlignLeft);
 	m_layout->addItem(extKeys[DELKEY], FIRST_ROW + 1, col, 1, 2, Qt::AlignLeft);
-        extKeys[DELKEY]->setKey(XK_Delete, true, i18n("Del"));
+	extKeys[DELKEY]->setKey(XK_Delete, true, i18nc("The delete key on a keyboard", "Del"));
 	m_layout->addItem(extKeys[PGUPKEY], FIRST_ROW + 2, col, 1, 2, Qt::AlignLeft);
-        extKeys[PGUPKEY]->setKey(XK_Page_Up, true, i18n("PgUp"));
+	extKeys[PGUPKEY]->setKey(XK_Page_Up, true, i18nc("The page up key on a keyboard", "PgUp"));
 	m_layout->addItem(extKeys[PGDOWNKEY], FIRST_ROW + 3, col, 1, 2, Qt::AlignLeft);
-        extKeys[PGDOWNKEY]->setKey(XK_Page_Down, true, i18n("PgDn"));
+	extKeys[PGDOWNKEY]->setKey(XK_Page_Down, true, i18nc("The page down key on a keyboard", "PgDn"));
 
 	col+=3;
 
@@ -250,7 +250,7 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	m_layout->addItem(extKeys[40], FIRST_ROW + 2, col, 2, 2);
         extKeys[40]->setKey(XK_KP_Add, true, i18n("+"));
 	m_layout->addItem(extKeys[41], FIRST_ROW + 4, col, 2, 2);
-        extKeys[41]->setKey(XK_KP_Enter, true, i18n("Enter"));
+	extKeys[41]->setKey(XK_KP_Enter, true, i18nc("The enter key on a keyboard", "Enter"));
 
 	for(int i = 30; i < 44; i++){
                 m_layout->setColumnPreferredWidth(i,size().width()/30);
@@ -277,13 +277,13 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
                 i++;
         }
 
-        funcKeys[CTLKEY]->setKey(XK_Control_L, false, i18n("Ctrl"));
-        funcKeys[META_L_KEY]->setKey(XK_Meta_L, false, i18n("Meta"));
-        funcKeys[ALT_L_KEY]->setKey(XK_Alt_L, false, i18n("Alt"));
+	funcKeys[CTLKEY]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
+	funcKeys[META_L_KEY]->setKey(XK_Meta_L, false, i18nc("The meta (windows) key on a keyboard", "Meta"));
+	funcKeys[ALT_L_KEY]->setKey(XK_Alt_L, false, i18nc("The alt key on a keyboard", "Alt"));
         funcKeys[SPACE]->setKeycode(XK_space, true);
-        funcKeys[ALTGRKEY]->setKey(XK_ISO_Level3_Shift, false, i18n("Alt Gr"));
+	funcKeys[ALTGRKEY]->setKey(XK_ISO_Level3_Shift, false, i18nc("The Alt Gr key on a keyboard", "Alt Gr"));
         funcKeys[META_R_KEY]->setKey(XK_Meta_L, false, i18n("Meta"));
-        funcKeys[MENU]->setKey(XK_Menu, true, i18n("Menu"));
+	funcKeys[MENU]->setKey(XK_Menu, true, i18nc("The menu key on a keyboard", "Menu"));
         funcKeys[CONTROL_LEFT]->setKey(XK_Control_L, false, i18n("Ctrl"));
 
         // set Keymap
