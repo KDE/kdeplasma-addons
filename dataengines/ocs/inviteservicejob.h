@@ -19,24 +19,28 @@
     USA.
 */
 
-#include "personservice.h"
+#ifndef INVITESERVICEJOB_H
+#define INVITESERVICEJOB_H
 
-#include "inviteservicejob.h"
-#include "messagesendservicejob.h"
+#include <Plasma/ServiceJob>
 
 
-PersonService::PersonService(const QString& id, QObject* parent) : Service(parent), m_id(id)
+class InviteServiceJob : public Plasma::ServiceJob
 {
-    setName("ocsPerson");
-}
+    Q_OBJECT
+
+    public:
+        InviteServiceJob(const QString& destination, const QString& operation,
+            const QMap<QString, QVariant>& parameters, QObject* parent = 0);
+        ~InviteServiceJob();
+        void start();
+
+    private slots:
+        void result(KJob* job);
+
+    private:
+        KJob* m_job;
+};
 
 
-Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
-{
-    if (operation == "sendMessage") {
-        return new MessageSendServiceJob(m_id, operation, parameters);
-    } else if (operation == "invite") {
-        return new InviteServiceJob(m_id, operation, parameters);
-    } else
-        return new Plasma::ServiceJob("", operation, parameters);
-}
+#endif

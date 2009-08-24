@@ -19,24 +19,40 @@
     USA.
 */
 
-#include "personservice.h"
-
 #include "inviteservicejob.h"
-#include "messagesendservicejob.h"
+
+#include "ocsapi.h"
 
 
-PersonService::PersonService(const QString& id, QObject* parent) : Service(parent), m_id(id)
+using namespace Attica;
+
+
+InviteServiceJob::InviteServiceJob(const QString& destination, const QString& operation,
+    const QMap< QString, QVariant>& parameters, QObject* parent)
+    : ServiceJob(destination, operation, parameters, parent) 
 {
-    setName("ocsPerson");
 }
 
 
-Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
+InviteServiceJob::~InviteServiceJob()
 {
-    if (operation == "sendMessage") {
-        return new MessageSendServiceJob(m_id, operation, parameters);
-    } else if (operation == "invite") {
-        return new InviteServiceJob(m_id, operation, parameters);
-    } else
-        return new Plasma::ServiceJob("", operation, parameters);
+    delete m_job;
 }
+
+
+void InviteServiceJob::start()
+{
+    m_job = OcsApi::postInvitation(destination(), parameters()["Message"].toString());
+    connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
+}
+
+
+void InviteServiceJob::result(KJob* job)
+{
+    setError(job->error());
+    setErrorText(job->errorText());
+    setResult(!job->error());
+}
+
+
+#include "inviteservicejob.moc"

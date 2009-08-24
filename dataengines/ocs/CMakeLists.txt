@@ -3,6 +3,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}
 add_subdirectory( lib )
 
 set(ocs_engine_SRCS
+   inviteservicejob.cpp
    messagesendservicejob.cpp
    personservice.cpp
    ocsengine.cpp

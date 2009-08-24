@@ -10,4 +10,9 @@
             <label>The body of the message.</label>
         </entry>
     </group>
+    <group name="invite">
+        <entry name="Message" type="String">
+            <label>The message accompagnying the invitation.</label>
+        </entry>
+    </group>
 </kcfg>
