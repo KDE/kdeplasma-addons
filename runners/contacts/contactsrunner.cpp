@@ -42,8 +42,7 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     m_book = KABC::StdAddressBook::self(true /*asynchronous*/);
 
     m_icon = KIcon("internet-mail");
-    setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
-                    Plasma::RunnerContext::NetworkLocation);
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
     addSyntax(Plasma::RunnerSyntax(i18nc("list of all people in address book", "contacts"),
                                    i18n("List all people in your address book.")));

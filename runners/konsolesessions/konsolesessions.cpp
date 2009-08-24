@@ -37,6 +37,7 @@ KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
     Q_UNUSED(args);
     setObjectName("Konsole Sessions");
     m_icon = KIcon("utilities-terminal");
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     loadSessions();
 
     KDirWatch *historyWatch = new KDirWatch(this);

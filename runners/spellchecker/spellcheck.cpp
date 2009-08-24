@@ -30,6 +30,7 @@ SpellCheckRunner::SpellCheckRunner(QObject* parent, const QVariantList &args)
     Q_UNUSED(args)
     KGlobal::locale()->insertCatalog("krunner_spellcheckrunner");
     setObjectName("Spell Checker");
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     setSpeed(AbstractRunner::SlowSpeed);
 
     reloadConfiguration();

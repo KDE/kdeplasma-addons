@@ -38,6 +38,7 @@ KonquerorSessions::KonquerorSessions(QObject *parent, const QVariantList& args)
 {
     Q_UNUSED(args);
     setObjectName("Konqueror Sessions");
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     m_icon = KIcon("konqueror");
     loadSessions();
 

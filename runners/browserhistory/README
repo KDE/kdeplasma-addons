@@ -6,7 +6,6 @@ these items.
 
 Open
 =====
-- What is the setIgnoredTypes() call about?
 - Is there a way to get notified on updates to
   the browser's history, rather than reloading
   the config file?

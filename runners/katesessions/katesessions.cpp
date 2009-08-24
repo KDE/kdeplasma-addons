@@ -40,6 +40,7 @@ KateSessions::KateSessions(QObject *parent, const QVariantList& args)
 {
     Q_UNUSED(args);
     setObjectName("Kate Sessions");
+    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
     m_icon = KIcon("kate");
 
     loadSessions();
