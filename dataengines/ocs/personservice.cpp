@@ -33,7 +33,7 @@ PersonService::PersonService(const QString& id, QObject* parent) : Service(paren
 Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
 {
     if (operation == "sendMessage") {
-        return new MessageSendServiceJob("", operation, parameters);
+        return new MessageSendServiceJob(m_id, operation, parameters);
     } else
         return new Plasma::ServiceJob("", operation, parameters);
 }
