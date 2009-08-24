@@ -179,10 +179,9 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	extKeys[13]->setKey(XK_Print, true, i18nc("The print key on a keyboard", "Print"));
 	extKeys[14]->setKey(XK_Num_Lock, true, i18nc("The num key on a keyboard", "Num"));
 	extKeys[15]->setKey(XK_Pause, true, i18nc("The pause key on a keyboard", "Pause"));
-
-	initBasicKeyboard(1);
-
-	m_layout->addItem(extKeys[ARROWLEFTKEY], FIRST_ROW + 5, 29, 1, 2, Qt::AlignLeft);
+	
+	
+		m_layout->addItem(extKeys[ARROWLEFTKEY], FIRST_ROW + 5, 29, 1, 2, Qt::AlignLeft);
 
 	int col = 31;
 
@@ -252,8 +251,13 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	m_layout->addItem(extKeys[41], FIRST_ROW + 4, col, 2, 2);
 	extKeys[41]->setKey(XK_KP_Enter, true, i18nc("The enter key on a keyboard", "Enter"));
 
+	initBasicKeyboard(1);
+
+
+
+	int t_width = size().width() / 30;
 	for(int i = 30; i < 44; i++){
-                m_layout->setColumnPreferredWidth(i,size().width()/30);
+		m_layout->setColumnPreferredWidth(i,t_width);
 	}
 }
 

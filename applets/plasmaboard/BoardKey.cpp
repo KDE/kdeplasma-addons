@@ -37,8 +37,7 @@ BoardKey::~BoardKey() {
 
 void BoardKey::setText(QString text) {
         labelText = text;
-	fontDivider = (text.size() > 1) ? ((text.size() > 3) ? 4 : 3) : 2;
-        update();
+	fontDivider = (text.size() > 1) ? ((text.size() > 3) ? 6 : 3) : 2;
         //Plasma::PushButton::setText(text);
 }
 

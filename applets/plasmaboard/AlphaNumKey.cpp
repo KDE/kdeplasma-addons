@@ -44,7 +44,7 @@ void AlphaNumKey::setKeycode(unsigned int keycodeP) {
 }
 
 void AlphaNumKey::setLabel(int level){
-	setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level))));
+	setText( Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level)) );
 }
 
 void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
@@ -60,6 +60,7 @@ void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
 		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0)))) :
 		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0))));*/
         }
+	update();
 }
 
 void AlphaNumKey::sendKeycodePress() {
