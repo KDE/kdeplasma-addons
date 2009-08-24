@@ -57,6 +57,8 @@ class PreviewWidget : public QGraphicsWidget
         int bottomBorderHeight() const;
         static int suggestedWidth();
 
+        QList<QUrl> previews();
+
         static const int s_spacing = 2;
         static const int s_logoSize = 27;
         static const int s_topBorder = s_logoSize + 8;
@@ -66,6 +68,7 @@ class PreviewWidget : public QGraphicsWidget
         void contract();
         void expandingSlot(qreal progress);
         void addItem(const QUrl &);
+        void removeItem(int index);
 
     protected:
         void layoutItems();

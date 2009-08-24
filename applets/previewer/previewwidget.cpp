@@ -228,15 +228,7 @@ void PreviewWidget::updateSelectedItems(const QPoint &point)
     r.setX(r.right() - REMOVE_EMBLEM_SIZE);
     r.setSize(QSize(REMOVE_EMBLEM_SIZE, REMOVE_EMBLEM_SIZE));
     if (r.contains(point)) {
-        m_previewHistory.removeAt(m_selectedIndex);
-        m_selectedIndex = -1;
-        m_hoveredIndex = -1;
-        m_layoutIsValid = false;
-        if (m_previewHistory.isEmpty()) {
-            contract();
-        }
-        lookForPreview();
-        update();
+        removeItem(m_selectedIndex);
         return;
     }
 
@@ -670,4 +662,22 @@ int PreviewWidget::suggestedWidth()
     fm = QFontMetrics(font);
 
     return (39 + length + fm.width(i18n("Drop files on me to preview them.")) + 70);
+}
+
+QList<QUrl> PreviewWidget::previews()
+{
+    return m_previewHistory;
+}
+
+void PreviewWidget::removeItem(int index)
+{
+    m_previewHistory.removeAt(index);
+    m_selectedIndex = -1;
+    m_hoveredIndex = -1;
+    m_layoutIsValid = false;
+    if (m_previewHistory.isEmpty()) {
+        contract();
+    }
+    lookForPreview();
+    update();
 }

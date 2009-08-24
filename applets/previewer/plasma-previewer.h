@@ -77,7 +77,6 @@ class Previewer : public Plasma::PopupApplet
 
     private:
         void addRecent(QAction *action, const QUrl &url);
-        void removeRecent(int index);
 
     private slots:
         virtual void closeFile(bool hide = true);
@@ -98,7 +97,6 @@ class Previewer : public Plasma::PopupApplet
        QString m_currentFile;
        QPoint m_clicked;
        KMenu *m_recents;
-       QList<QUrl> m_previewHistory;
        PreviewWidget *m_previewWidget;
 };
 

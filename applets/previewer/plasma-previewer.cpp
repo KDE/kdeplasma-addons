@@ -186,7 +186,7 @@ void Previewer::openFile(KUrl u)
         m_dialog->show();
         m_base->setFocus(Qt::TabFocusReason);
 
-        if (!m_previewHistory.contains(u)) {
+        if (!m_previewWidget->previews().contains(u)) {
             addPreview(u);
         }
         //   browser->setCurrentUrl(u);
@@ -236,8 +236,7 @@ void Previewer::closeFile(bool hide)
 void Previewer::removeCurrentFromHistory()
 {
     KUrl cur(currentFile());
-    int index = m_previewHistory.indexOf(cur);
-    kDebug() << index;
+    int index = m_previewWidget->previews().indexOf(cur);
 
     m_dialog->setWindowFlags(Qt::FramelessWindowHint);
     m_dialog->show();
@@ -252,9 +251,8 @@ void Previewer::removeCurrentFromHistory()
         delete m_part;
         m_part = 0;
         m_dialog->hide();
-        removeRecent(index);
         KIO::del(cur);
-        m_previewWidget->setItemsList(m_previewHistory);
+        m_previewWidget->removeItem(index);
         return;
     }
 
@@ -274,7 +272,7 @@ void Previewer::dropEvent(QGraphicsSceneDragDropEvent *event)
 void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
 {
     kDebug() << "addPreview() reached";
-    if (m_previewHistory.contains(url)) {
+    if (m_previewWidget->previews().contains(url)) {
         return;
     }
 
@@ -297,18 +295,12 @@ void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
         graphicsWidget();
     }
 
-    if (m_previewHistory.isEmpty()) {
+    if (m_previewWidget->previews().isEmpty()) {
         // animating this is WICKED smooth =)
         m_previewWidget->expand();
     }
 
     m_previewWidget->addItem(url);
-}
-
-void Previewer::removeRecent(int index)
-{
-    m_previewHistory.takeAt(index);
-    delete m_recents->actions().takeAt(index);
 }
 
 QString Previewer::currentFile()
