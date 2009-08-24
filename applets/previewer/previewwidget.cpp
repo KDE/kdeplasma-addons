@@ -63,7 +63,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
 
     // let's draw the top border of the applet
     m_panel = new Plasma::FrameSvg(this);
-    m_panel->setImagePath("dialogs/background");
+    m_panel->setImagePath("widgets/background");
 
     m_logo = new Plasma::Svg(this);
     m_logo->setImagePath("widgets/previewer-16");
@@ -72,8 +72,12 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
     m_hoverSvg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
     m_hoverSvg->setCacheAllRenderedFrames(true);
 
+    updateMargins();
+
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
             this, SLOT(setupOptionViewItem()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
+            this, SLOT(updateMargins()));
 }
 
 PreviewWidget::~PreviewWidget()
@@ -353,7 +357,7 @@ void PreviewWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 
 void PreviewWidget::calculateRects()
 {
-    QRect rect = contentsRect().toRect();
+    QRect rect = this->rect().toRect();
     const int scrollBarWidth = m_scrollBar->isVisible() ? int(m_scrollBar->preferredSize().width()) : 0;
     const int itemWidth = iconSize().width() * 2;
     const int itemRectWidth = itemWidth + scrollBarWidth + (s_spacing * 2) +
@@ -370,7 +374,7 @@ void PreviewWidget::calculateRects()
     }
 
     const int itemRectHeight = m_animationHeight - s_topBorder - bottomBorder;
-    m_itemsRect = QRect(5, s_topBorder, itemRectWidth, itemRectHeight);
+    m_itemsRect = QRect(contentsRect().x(), s_topBorder, itemRectWidth, itemRectHeight);
 
     if (itemRectHeight) {
         QRect r = QRect(m_itemsRect.right() - scrollBarWidth + 2, s_topBorder + 1, scrollBarWidth,
@@ -381,8 +385,7 @@ void PreviewWidget::calculateRects()
     }
 
     //kDebug() << m_animationHeight;
-
-    m_arrowRect = QRect(rect.width() - 30 - 5, (s_topBorder / 2), 10,10);
+    m_arrowRect = QRect(contentsRect().right() - 10, (s_topBorder / 2), 10,10);
 
     m_previewRect = QRect(m_itemsRect.right(), m_itemsRect.y(),
                          rect.width() - m_itemsRect.right() - rect.x(),
@@ -501,7 +504,7 @@ void PreviewWidget::paint(QPainter *painter,
     }
 
     const int bottomBorder = bottomBorderHeight();
-    QRect contentsRect = this->contentsRect().toRect();
+    QRect contentsRect = opt->rect;
     painter->translate(contentsRect.topLeft());
     painter->setRenderHint(QPainter::Antialiasing);
 
@@ -681,4 +684,19 @@ void PreviewWidget::removeItem(int index)
     }
     lookForPreview();
     update();
+}
+
+void PreviewWidget::updateMargins()
+{
+    if (!m_panel) {
+        return;
+    }
+
+    qreal left;
+    qreal top;
+    qreal right;
+    qreal bottom;
+
+    m_panel->getMargins(left, top, right, bottom);
+    setContentsMargins(left, top, right, bottom);
 }

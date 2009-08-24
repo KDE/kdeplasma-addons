@@ -95,6 +95,7 @@ class PreviewWidget : public QGraphicsWidget
         virtual void scrolled(int);
         void setupOptionViewItem();
         void calculateRects();
+        void updateMargins();
 
     signals:
         void fileOpenRequested(const KUrl &);
