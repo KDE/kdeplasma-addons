@@ -2,6 +2,7 @@ project(plasma-opendesktop)
 
 
 set(opendesktop_SRCS
+    utils.cpp
     sendmessagewidget.cpp
     opendesktop.cpp
     contactwidget.cpp
