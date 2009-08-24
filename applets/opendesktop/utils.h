@@ -23,3 +23,10 @@
 
 
 QString personQuery(const QString& id);
+
+/**
+ * Return the user id that belongs to a person query
+ * @param query The query to read from
+ * @return the user id if query is of correct format, otherwise an empty string
+ */
+QString personFromQuery(const QString& query);

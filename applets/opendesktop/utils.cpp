@@ -24,5 +24,14 @@
 
 QString personQuery(const QString& id)
 {
-    return QString("Person-%i").arg(id);
+    return QString("Person-%1").arg(id);
+}
+
+
+QString personFromQuery(const QString& query)
+{
+    if (query.startsWith("Person-")) {
+        return QString(query).remove(0, 7);
+    }
+    return QString();
 }
