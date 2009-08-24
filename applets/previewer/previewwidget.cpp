@@ -30,6 +30,7 @@
 #include <KIconLoader>
 #include <KIO/PreviewJob>
 #include <KUrl>
+#include <KIcon>
 
 // Plasma
 #include <Plasma/Animator>
@@ -38,7 +39,8 @@
 #include <Plasma/Svg>
 #include <Plasma/Theme>
 
-const int EXPANDING_DURATION = 200;
+static const int EXPANDING_DURATION = 200;
+static const int REMOVE_EMBLEM_SIZE = 22;
 
 PreviewWidget::PreviewWidget(QGraphicsItem *parent)
     : QGraphicsWidget(parent),
@@ -213,10 +215,32 @@ void PreviewWidget::updateSelectedItems(const QPoint &point)
     for (int i = 0; i < m_items.count(); i++) {
         if (m_items[i].contains(point)) {
             m_selectedIndex = i;
-            emit fileOpenRequested(KUrl(m_previewHistory[i]));
             break;
         }
     }
+    
+    if (m_selectedIndex == -1) {
+        return;
+    }
+
+    // here we check if the remove emblem was clicked
+    QRect r = m_items[m_selectedIndex];
+    r.setX(r.right() - REMOVE_EMBLEM_SIZE);
+    r.setSize(QSize(REMOVE_EMBLEM_SIZE, REMOVE_EMBLEM_SIZE));
+    if (r.contains(point)) {
+        m_previewHistory.removeAt(m_selectedIndex);
+        m_selectedIndex = -1;
+        m_hoveredIndex = -1;
+        m_layoutIsValid = false;
+        if (m_previewHistory.isEmpty()) {
+            contract();
+        }
+        lookForPreview();
+        update();
+        return;
+    }
+
+    emit fileOpenRequested(KUrl(m_previewHistory[m_selectedIndex]));
 
     if (m_selectedIndex != previous) {
         if (m_selectedIndex != -1) {
@@ -231,6 +255,12 @@ void PreviewWidget::updateSelectedItems(const QPoint &point)
 
 void PreviewWidget::updateHoveredItems(const QPoint &point)
 {
+
+    // updating is unsafe when layout is broken
+    if (!m_layoutIsValid) {
+        return;
+    }
+
     m_hoveredUrl = KUrl();
     const int previous = m_hoveredIndex;
     m_hoveredIndex = -1;
@@ -281,9 +311,7 @@ void PreviewWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         if (m_itemsRect.contains(event->pos().toPoint())) {
             updateSelectedItems(event->pos().toPoint());
-        }
-
-        if (m_arrowRect.contains(event->pos().toPoint())) {
+        } else if (m_arrowRect.contains(event->pos().toPoint())) {
             if (m_closeStatus) {
                 expand();
             } else {
@@ -310,7 +338,16 @@ void PreviewWidget::setItemsList(const QList<QUrl> &list)
     m_previewHistory.clear();
     m_previewHistory = list;
 
-    calculateRects();
+    m_layoutIsValid = false;
+    update();
+
+    lookForPreview();
+}
+
+void PreviewWidget::addItem(const QUrl &url)
+{
+    m_previewHistory << url;
+    m_layoutIsValid = false;
     update();
 
     lookForPreview();
@@ -334,17 +371,21 @@ void PreviewWidget::calculateRects()
     // items rect shouldn't be visible even if the status is close
     if (m_previewHistory.isEmpty() || (m_closeStatus && m_animId < 1)) {
         m_animationHeight = s_topBorder + bottomBorder;
-        m_scrollBar->setGeometry(QRect());
     } else {
         if (m_animId < 1) {
             m_animationHeight = rect.height();
         }
-        const int itemRectHeight = m_animationHeight - s_topBorder - bottomBorder;
-        m_itemsRect = QRect(5, s_topBorder, itemRectWidth, itemRectHeight);
+    }
 
+    const int itemRectHeight = m_animationHeight - s_topBorder - bottomBorder;
+    m_itemsRect = QRect(5, s_topBorder, itemRectWidth, itemRectHeight);
+
+    if (itemRectHeight) {
         QRect r = QRect(m_itemsRect.right() - scrollBarWidth + 2, s_topBorder + 1, scrollBarWidth,
                         m_animationHeight - s_topBorder - bottomBorder - 2);
         m_scrollBar->setGeometry(r);
+    } else {
+        m_scrollBar->setGeometry(QRect());
     }
 
     //kDebug() << m_animationHeight;
@@ -539,6 +580,7 @@ void PreviewWidget::paint(QPainter *painter,
 	    if (!m_hoverSvg->prefix().isEmpty()) {
 	        m_hoverSvg->resizeFrame(r.size());
 	        m_hoverSvg->paintFrame(painter, r.topLeft());
+                KIcon("list-remove").paint(painter, r.right() - REMOVE_EMBLEM_SIZE, r.y(), REMOVE_EMBLEM_SIZE, REMOVE_EMBLEM_SIZE);
 	    }
 
             m_option.rect = r;

@@ -65,6 +65,7 @@ class PreviewWidget : public QGraphicsWidget
         void expand();
         void contract();
         void expandingSlot(qreal progress);
+        void addItem(const QUrl &);
 
     protected:
         void layoutItems();

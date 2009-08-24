@@ -60,7 +60,6 @@ class Previewer : public Plasma::PopupApplet
         Previewer(QObject* parent, const QVariantList &args);
        ~Previewer();
 
-        QList<QAction*> contextualActions();
         void init();
 
         QGraphicsWidget *graphicsWidget();
@@ -73,7 +72,6 @@ class Previewer : public Plasma::PopupApplet
 
     protected:
         void dropEvent(QGraphicsSceneDragDropEvent *);
-        void setupActions();
         void setupPreviewDialog();
         void constraintsEvent(Plasma::Constraints);
 
@@ -84,19 +82,18 @@ class Previewer : public Plasma::PopupApplet
     private slots:
         virtual void closeFile(bool hide = true);
         virtual void addPreview(const QUrl&, KMimeType::Ptr mimeType = KMimeType::Ptr());
-        virtual void reopenPreview();
         virtual void stayOnTop(bool);
         virtual void openFile(KUrl u = KUrl());
         virtual void removeCurrentFromHistory();
         virtual void openUrls(KUrl::List);
         virtual void slotRunClicked();
+        void setStartSize();
 
     private:
        QWidget *m_base;
        Plasma::ScrollBar *m_scrollBar;
        PreviewDialog *m_dialog;
        KParts::ReadOnlyPart *m_part;
-       QList<QAction*> m_actions;
        QString m_currentService;
        QString m_currentFile;
        QPoint m_clicked;

@@ -83,6 +83,11 @@ Previewer::~Previewer()
     }
 }
 
+void Previewer::setStartSize()
+{
+    resize(PreviewWidget::suggestedWidth(), 150);
+}
+
 QGraphicsWidget* Previewer::graphicsWidget()
 {
     if (!m_previewWidget) {
@@ -100,7 +105,6 @@ QGraphicsWidget* Previewer::graphicsWidget()
 void Previewer::init()
 {
     setPopupIcon("previewer");
-    setupActions();
     if (!m_currentFile.isEmpty()) {
         openFile(m_currentFile);
     }
@@ -110,30 +114,6 @@ void Previewer::constraintsEvent(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints)
     setBackgroundHints(NoBackground);
-}
-
-void Previewer::setupActions()
-{
-    KAction *open = new KAction(KIcon("document-preview"), i18n("&Open"), this);
-    connect(open, SIGNAL(triggered()), this, SLOT(openFile()));
-
-    m_actions << open;
-
-    KAction *onTop = new KAction(i18n("Preview Dialog Always on Top"), this);
-    onTop->setCheckable(true);
-    onTop->setChecked(true);
-    connect(onTop, SIGNAL(toggled(bool)), this, SLOT(stayOnTop(bool)));
-    m_actions << onTop;
-
-    QAction *sep = new QAction(this);
-    sep->setSeparator(true);
-    m_actions << sep;
-
-    m_recents = new KMenu();
-    m_recents->setIcon(KIcon("document-open-recent"));
-    QAction *r_action = m_recents->menuAction();
-    r_action->setText(i18n("Recently Opened"));
-    m_actions<<r_action;
 }
 
 void Previewer::setupPreviewDialog()
@@ -322,37 +302,13 @@ void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
         m_previewWidget->expand();
     }
 
-    KAction *a = new KAction(KIcon(mimeType->iconName()), KUrl(url).fileName(), this);
-    a->setData(url);
-    connect(a, SIGNAL(triggered()), this, SLOT(reopenPreview()));
-
-    addRecent(a, url);
-    m_previewWidget->setItemsList(m_previewHistory);
-}
-
-void Previewer::reopenPreview()
-{
-    KAction *s = qobject_cast<KAction*>(sender());
-    if (s) {
-        openFile(s->data().toUrl());
-    }
-}
-
-QList<QAction*> Previewer::contextualActions()
-{
-    return m_actions;
+    m_previewWidget->addItem(url);
 }
 
 void Previewer::removeRecent(int index)
 {
     m_previewHistory.takeAt(index);
     delete m_recents->actions().takeAt(index);
-}
-
-void Previewer::addRecent(QAction *action, const QUrl &url)
-{
-    m_previewHistory.append(url);
-    m_recents->addAction(action);
 }
 
 QString Previewer::currentFile()
