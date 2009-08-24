@@ -523,6 +523,7 @@ void PreviewWidget::paint(QPainter *painter,
 
     m_logo->paint(painter, QRect(10, 5, s_logoSize, s_logoSize));
 
+    // FIXME: probably too much magic numbers
     painter->save();
     QFont font = KGlobalSettings::smallestReadableFont();
     font.setBold(true);
@@ -530,13 +531,13 @@ void PreviewWidget::paint(QPainter *painter,
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     painter->drawText(QRect(39, 3, contentsRect.width() - 39, 30), Qt::AlignBottom | Qt::AlignLeft,
                       ' ' + i18n("Previewer"));
-    QFontMetrics fm(font);
-    int length = fm.width(i18n("Previewer") + "  ");
+    int length = opt->fontMetrics.width(i18n("Previewer") + "  ");
     font.setBold(false);
     painter->setFont(KGlobalSettings::smallestReadableFont());
-    painter->drawText(QRect(39 + length, 3, contentsRect.width() - 39, 30),
+    QString elidedHint = opt->fontMetrics.elidedText(i18n("Drop files on me to preview them."), Qt::ElideRight, contentsRect.width() - 39 - length - 3);
+    painter->drawText(QRect(39 + length + 3, 3, contentsRect.width() - 39 - length - 3, 30),
                       Qt::AlignBottom | Qt::AlignLeft,
-                      i18n("Drop files on me to preview them."));
+                      elidedHint);
     painter->restore();
 
     drawOpenCloseArrow(painter);
