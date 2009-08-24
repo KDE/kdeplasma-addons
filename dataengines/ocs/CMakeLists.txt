@@ -4,7 +4,7 @@ add_subdirectory( lib )
 
 set(ocs_engine_SRCS
    messagesendservicejob.cpp
-   messageservice.cpp
+   personservice.cpp
    ocsengine.cpp
 )
 
@@ -15,4 +15,4 @@ target_link_libraries(plasma_engine_ocs ocsclient ${KDE4_KDECORE_LIBS}
 
 install(TARGETS plasma_engine_ocs DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-ocs.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install(FILES ocsMessage.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+install(FILES ocsPerson.operations DESTINATION ${DATA_INSTALL_DIR}/plasma/services)

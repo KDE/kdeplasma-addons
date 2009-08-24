@@ -29,7 +29,7 @@
 
 #include <Solid/Networking>
 
-#include "messageservice.h"
+#include "personservice.h"
 
 class QTimer;
 class KJob;
@@ -78,7 +78,7 @@ private:
     Attica::Activity::List m_activities;
     KJob* m_job;
     int m_maximumItems;
-    MessageService* m_messageService;
+    QHash<QString,PersonService*> m_personServices;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )

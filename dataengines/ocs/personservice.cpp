@@ -19,20 +19,21 @@
     USA.
 */
 
-#ifndef MESSAGESERVICE_H
-#define MESSAGESERVICE_H
+#include "personservice.h"
 
-#include <plasma/service.h>
+#include "messagesendservicejob.h"
 
 
-class MessageService : public Plasma::Service
+PersonService::PersonService(const QString& id, QObject* parent) : Service(parent), m_id(id)
 {
-    public:
-        MessageService(QObject* parent = 0);
-
-    protected:
-        virtual Plasma::ServiceJob* createJob(const QString& operation, QMap<QString, QVariant>& parameters);
-};
+    setName("ocsPerson");
+}
 
 
-#endif
+Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
+{
+    if (operation == "sendMessage") {
+        return new MessageSendServiceJob("", operation, parameters);
+    } else
+        return new Plasma::ServiceJob("", operation, parameters);
+}

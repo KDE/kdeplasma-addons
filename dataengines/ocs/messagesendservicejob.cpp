@@ -45,7 +45,7 @@ void MessageSendServiceJob::start()
 {
     QMap<QString, QVariant> params = parameters();
     Message message;
-    message.setTo(params["To"].toString());
+    message.setTo(destination());
     message.setSubject(params["Subject"].toString());
     message.setBody(params["Body"].toString());
     
