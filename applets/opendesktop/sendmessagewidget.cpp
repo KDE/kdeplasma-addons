@@ -28,12 +28,14 @@
 
 #include <Plasma/Service>
 
+#include "utils.h"
+
 
 SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& id, QGraphicsWidget* parent)
     : Frame(parent),
       m_engine(engine),
       m_id(id),
-      m_query(QString("Person-%1").arg(id))
+      m_query(personQuery(id))
 {
     m_label = new Plasma::Label(this);
 
@@ -75,7 +77,7 @@ void SendMessageWidget::dataUpdated(const QString& source, const Plasma::DataEng
 {
     Q_UNUSED(source);
     
-    Plasma::DataEngine::Data personData = data[QString("Person-%1").arg(m_id)].value<Plasma::DataEngine::Data>();
+    Plasma::DataEngine::Data personData = data[personQuery(m_id)].value<Plasma::DataEngine::Data>();
     m_label->setText(i18n("To: %1 (%2)").arg(personData["Name"].toString()).arg(personData["Id"].toString()));
 }
 
