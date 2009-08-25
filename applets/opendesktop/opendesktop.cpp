@@ -114,6 +114,7 @@ void OpenDesktop::init()
     if (m_username.isEmpty()) {
         setConfigurationRequired(true);
     } else {
+        m_userWidget->setId(m_username);
         connectFriends(m_username);
         connectGeolocation();
     }
@@ -202,7 +203,6 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
     kDebug() << "name, id" << name << _id;
     if (_id == m_username) {
         kDebug() << "Updating myself" << m_username;
-        m_userWidget->setId(_id);
         return;
     }
 
