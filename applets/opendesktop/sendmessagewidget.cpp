@@ -84,9 +84,8 @@ void SendMessageWidget::dataUpdated(const QString& source, const Plasma::DataEng
 
 void SendMessageWidget::send()
 {
-    Plasma::Service* service = m_engine->serviceForSource("Message");
+    Plasma::Service* service = m_engine->serviceForSource(m_query);
     KConfigGroup cg = service->operationDescription("sendMessage");
-    cg.writeEntry("To", m_id);
     cg.writeEntry("Subject", m_subject->nativeWidget()->toPlainText());
     cg.writeEntry("Body", m_body->nativeWidget()->toPlainText());
     service->startOperationCall(cg);
