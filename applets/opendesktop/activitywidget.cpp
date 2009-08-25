@@ -26,8 +26,10 @@
 //KDE
 #include <KDebug>
 #include <KIconLoader>
+#include <KToolInvocation>
 
 // Plasma
+#include <Plasma/IconWidget>
 #include <Plasma/Label>
 
 
@@ -46,6 +48,19 @@ ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
 
     m_messageLabel = new Plasma::Label(this);
     m_layout->addItem(m_messageLabel);
+
+    int s = KIconLoader::SizeSmallMedium; // The size for the action icons
+
+    m_link = new Plasma::IconWidget(this);
+    m_link->setIcon("go-jump");
+    m_link->setToolTip(i18n("More information"));
+    m_link->setMinimumHeight(s);
+    m_link->setMaximumHeight(s);
+    m_link->setMinimumWidth(s);
+    m_link->setMaximumWidth(s);
+    m_layout->addItem(m_link);
+    m_link->setVisible(false);
+    connect(m_link, SIGNAL(clicked()), this, SLOT(followLink()));
 }
 
 ActivityWidget::~ActivityWidget()
@@ -63,6 +78,7 @@ void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
     m_messageLabel->setText(i18n("<b>%1:</b><br />%2")
         .arg(data.value("user").toString())
         .arg(data.value("message").toString()));
+    m_link->setVisible(!data.value("link").toString().isEmpty());
 }
 
 
@@ -70,5 +86,12 @@ Plasma::DataEngine::Data ActivityWidget::activityData() const
 {
     return m_atticaData;
 }
+
+
+void ActivityWidget::followLink()
+{
+    KToolInvocation::invokeBrowser(m_atticaData["link"].toString());
+}
+
 
 #include "activitywidget.moc"

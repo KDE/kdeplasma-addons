@@ -29,6 +29,7 @@ class ContactImage;
 
 namespace Plasma
 {
+    class IconWidget;
     class Label;
 }
 
@@ -47,11 +48,15 @@ public Q_SLOTS:
     void setActivityData(Plasma::DataEngine::Data data);
     Plasma::DataEngine::Data activityData() const;
 
+private Q_SLOTS:
+    void followLink();
+
 private:
     Plasma::DataEngine::Data m_atticaData;
     QGraphicsLinearLayout *m_layout;
     Plasma::Label *m_messageLabel;
     ContactImage* m_image;
+    Plasma::IconWidget* m_link;
 };
 
 #endif
