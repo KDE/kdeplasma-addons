@@ -21,6 +21,8 @@
 
 #include "activitylist.h"
 
+#include <QtCore/QtAlgorithms>
+
 #include "activitywidget.h"
 
 
@@ -68,13 +70,10 @@ void ActivityList::setUpdateInterval(int interval)
 
 
 QStringList ActivityList::getDisplayedActivities(const Plasma::DataEngine::Data& data) {
-    // FIXME: This should take into order filtering, sorting etc.
-    QStringList result;
-    foreach (const QString& key, data.keys()) {
-        if (result.size() >= m_limit) {
-            break;
-        }
-        result.append(key);
+    QStringList result = data.keys();
+    qSort(result.begin(), result.end(), qGreater<QString>());
+    while (result.size() > m_limit) {
+        result.pop_back();
     }
     return result;
 }
