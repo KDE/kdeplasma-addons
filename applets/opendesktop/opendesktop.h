@@ -41,7 +41,7 @@ namespace Plasma
     class ScrollWidget;
 }
 class KConfigDialog;
-class ActivityWidget;
+class ActivityList;
 
 class OpenDesktop : public Plasma::PopupApplet
 {
@@ -98,10 +98,7 @@ class OpenDesktop : public Plasma::PopupApplet
         QGraphicsLinearLayout* m_friendsLayout;
 
         //Friends activity tab
-        Plasma::ScrollWidget* m_activityScroll;
-        QGraphicsWidget* m_activityWidget;
-        QList<ActivityWidget *> m_activities;
-        QGraphicsLinearLayout* m_activityLayout;
+        ActivityList* m_activityList;
 
         // Nearby people tab
         Plasma::ScrollWidget* m_nearScroll;

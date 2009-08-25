@@ -20,7 +20,7 @@
 //own
 #include "opendesktop.h"
 #include "contactwidget.h"
-#include "activitywidget.h"
+#include "activitylist.h"
 
 //Qt
 
@@ -117,8 +117,6 @@ void OpenDesktop::init()
         connectFriends(m_username);
         connectGeolocation();
     }
-    //TODO: configurable refresh
-    dataEngine("ocs")->connectSource("activity", this, 5 * 60 * 1000);
 }
 
 void OpenDesktop::connectGeolocation()
@@ -166,11 +164,8 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         // Friends activity
-        m_activityScroll = new Plasma::ScrollWidget(m_tabs);
-        m_activityWidget = new QGraphicsWidget(m_activityScroll);
-        m_activityLayout = new QGraphicsLinearLayout(Qt::Vertical, m_activityWidget);
-        m_activityScroll->setWidget(m_activityWidget);
-        m_tabs->addTab(i18n("News feed"), m_activityScroll);
+        m_activityList = new ActivityList(dataEngine("ocs"), m_tabs);
+        m_tabs->addTab(i18n("News feed"), m_activityList);
 
         m_userWidget = new UserWidget(dataEngine("ocs"), m_tabs);
         m_tabs->addTab(i18n("Personal"), m_userWidget);
@@ -271,28 +266,6 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
     m_near[_id] = contactWidget;
 }
 
-void OpenDesktop::addActivityItem(const Plasma::DataEngine::Data &data)
-{
-    ActivityWidget* activityWidget = 0;
-    // if there are too many recycle the oldest widget
-    if (m_activities.count() > m_maximumItems) {
-        activityWidget = m_activities.takeAt(0);
-        m_activityLayout->removeAt(m_activityLayout->count()-1);
-    } else {
-        activityWidget = new ActivityWidget(this);
-    }
-
-    activityWidget->setActivityData(data);
-
-    QString user = data["user"].toString();
-    if (!user.isNull() && m_friends.contains(user)) {
-        Plasma::DataEngine::Data data = m_friends.value(user)->atticaData();
-        activityWidget->setPixmap(data["Avatar"].value<QPixmap>());
-    }
-    m_activityLayout->insertItem(0, activityWidget);
-    m_activities.append(activityWidget);
-}
-
 
 void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
 {
@@ -387,22 +360,7 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
             if (person.startsWith("Person-")) {
                 Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
                 addFriend(personData);
-
-                //FIXME: make it more efficient
-                foreach (ActivityWidget * activity, m_activities) {
-                    if (personData["Id"].toString() == activity->activityData()["user"].toString()) {
-                        activity->setPixmap(personData["Avatar"].value<QPixmap>());
-                    }
-                }
             }
-        }
-        return;
-    } else if (source == "activity") {
-        QStringList keys = data.keys();
-        keys.sort();
-        foreach (const QString activityId, keys) {
-            Plasma::DataEngine::Data activityData = data[activityId].value<Plasma::DataEngine::Data>();
-            addActivityItem(activityData);
         }
         return;
     }
