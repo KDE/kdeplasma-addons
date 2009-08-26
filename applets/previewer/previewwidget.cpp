@@ -157,7 +157,6 @@ void PreviewWidget::wheelEvent(QGraphicsSceneWheelEvent *event)
 
 void PreviewWidget::lookForPreview()
 {
-    m_previewReady = false;
     if (m_previewHistory.isEmpty()) {
         return;
     }
@@ -176,18 +175,7 @@ void PreviewWidget::lookForPreview()
 void PreviewWidget::setPreview(const KFileItem &item, const QPixmap &pixmap)
 {
     m_previews.insert(item.url(), pixmap);
-    m_previewReady = true;
-    updatePreview();
-}
-
-void PreviewWidget::updatePreview()
-{
-    //NOTE: use this to update the exact rect in order to repaint
-    //      correctly the preview
-
-    QRect rect = m_previewRect;
-    rect.setHeight(rect.height() + bottomBorderHeight());
-    update(rect);
+    update();
 }
 
 void PreviewWidget::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -271,7 +259,7 @@ void PreviewWidget::updateHoveredItems(const QPoint &point)
                 KUrl item = KUrl(m_previewHistory[i]);
                 if (m_previews.contains(item)) {
                     m_hoveredUrl = item;
-                    updatePreview();
+                    update();
                 }
 
                 break;
@@ -505,7 +493,7 @@ void PreviewWidget::paint(QPainter *painter,
 
     const int bottomBorder = bottomBorderHeight();
     QRect contentsRect = opt->rect;
-    painter->translate(contentsRect.topLeft());
+//    painter->translate(contentsRect.topLeft());
     painter->setRenderHint(QPainter::Antialiasing);
 
     painter->save();
@@ -547,7 +535,6 @@ void PreviewWidget::paint(QPainter *painter,
 
     if (!m_items.isEmpty() && m_itemsRect.isValid()) {
         painter->save();
-        painter->setClipping(true);
         painter->setClipRect(m_itemsRect);
 
         PreviewItemModel model(m_previewHistory);
@@ -575,7 +562,7 @@ void PreviewWidget::paint(QPainter *painter,
 	    
 	    if (!m_hoverSvg->prefix().isEmpty()) {
 	        m_hoverSvg->resizeFrame(r.size());
-	        m_hoverSvg->paintFrame(painter, r.topLeft());
+                m_hoverSvg->paintFrame(painter, r.topLeft());
                 KIcon("list-remove").paint(painter, r.right() - REMOVE_EMBLEM_SIZE, r.y(), REMOVE_EMBLEM_SIZE, REMOVE_EMBLEM_SIZE);
 	    }
 
@@ -589,16 +576,9 @@ void PreviewWidget::paint(QPainter *painter,
     }
 
     // hovering rect
-    if (m_previewReady && !m_hoveredUrl.isEmpty()) {
+    if (!m_hoveredUrl.isEmpty() && m_previews.contains(m_hoveredUrl)) {
         QPixmap pmap;
-        if (m_previews.contains(m_hoveredUrl)) {
-            pmap = m_previews[m_hoveredUrl];
-            QRect itemNameRect = QRect(m_itemsRect.right(), m_itemsRect.bottom(),
-                                       contentsRect.width() - m_itemsRect.right(), bottomBorder);
-            // here we paint the file name
-            painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-            painter->drawText(itemNameRect, Qt::AlignVCenter | Qt::AlignLeft, m_hoveredUrl.fileName());
-        }
+        pmap = m_previews[m_hoveredUrl];
 
         if (m_previewRect.width() >= pmap.width() && m_previewRect.height() >= pmap.height()) {
             QRect p_rect = QRect(m_previewRect.x() + abs(m_previewRect.width() - pmap.width())/2,
@@ -614,6 +594,17 @@ void PreviewWidget::paint(QPainter *painter,
             painter->drawPixmap(p_rect, scaled);
         }
     }
+
+
+    if (!m_hoveredUrl.isValid()) {
+        return;
+    }
+    QRect itemNameRect = QRect(m_itemsRect.x(), m_itemsRect.bottom(),
+                               m_itemsRect.width(), bottomBorder);
+    // here we paint the file name
+    painter->setFont(KGlobalSettings::smallestReadableFont());
+    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    painter->drawText(itemNameRect, Qt::AlignVCenter | Qt::AlignLeft, m_hoveredUrl.fileName());
 }
 
 void PreviewWidget::drawOpenCloseArrow(QPainter *painter)

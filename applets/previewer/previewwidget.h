@@ -76,7 +76,6 @@ class PreviewWidget : public QGraphicsWidget
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-        void updatePreview();
         void wheelEvent(QGraphicsSceneWheelEvent *event);
         void updateSelectedItems(const QPoint &);
         void updateHoveredItems(const QPoint &);
@@ -109,7 +108,6 @@ class PreviewWidget : public QGraphicsWidget
        QMap<KUrl, QPixmap> m_previews;
        int m_selectedIndex;
        int m_hoveredIndex;
-       bool m_previewReady;
        QStyleOptionViewItemV4 m_option;
        QRect m_previewRect;
        bool m_layoutIsValid;

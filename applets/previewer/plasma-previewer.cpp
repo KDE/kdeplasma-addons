@@ -60,8 +60,6 @@ Previewer::Previewer(QObject *parent, const QVariantList &args)
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Previewer", this);
 
-    setAspectRatioMode(Plasma::IgnoreAspectRatio);
-
     setAcceptHoverEvents(true);
     setAcceptDrops(true);
 
@@ -114,6 +112,7 @@ void Previewer::constraintsEvent(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints)
     setBackgroundHints(NoBackground);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
 void Previewer::setupPreviewDialog()
