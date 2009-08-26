@@ -594,17 +594,6 @@ void PreviewWidget::paint(QPainter *painter,
             painter->drawPixmap(p_rect, scaled);
         }
     }
-
-
-    if (!m_hoveredUrl.isValid()) {
-        return;
-    }
-    QRect itemNameRect = QRect(m_itemsRect.x(), m_itemsRect.bottom(),
-                               m_itemsRect.width(), bottomBorder);
-    // here we paint the file name
-    painter->setFont(KGlobalSettings::smallestReadableFont());
-    painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    painter->drawText(itemNameRect, Qt::AlignVCenter | Qt::AlignLeft, m_hoveredUrl.fileName());
 }
 
 void PreviewWidget::drawOpenCloseArrow(QPainter *painter)
