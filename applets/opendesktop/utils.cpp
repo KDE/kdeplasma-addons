@@ -28,6 +28,12 @@ QString personQuery(const QString& id)
 }
 
 
+QString personSummaryQuery(const QString& id)
+{
+    return QString("PersonSummary-%1").arg(id);
+}
+
+
 QString personFromQuery(const QString& query)
 {
     if (query.startsWith("Person-")) {

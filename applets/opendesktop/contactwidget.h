@@ -43,11 +43,11 @@ class ContactWidget : public Plasma::Frame
     Q_OBJECT
 
     public:
-        ContactWidget(QGraphicsWidget *parent = 0);
+        ContactWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~ContactWidget();
 
-        void setAtticaData(const Plasma::DataEngine::Data &data);
         Plasma::DataEngine::Data atticaData() const;
+        QString id() const;
 
         QString name();
         QString user();
@@ -56,9 +56,8 @@ class ContactWidget : public Plasma::Frame
         void setInfo(const QString &name);
         void setIsFriend(bool isFriend);
         void setImage(const QImage &image);
+        void setId(const QString& id);
         Plasma::DataEngine::Data data();
-
-        qlonglong id;
 
         Plasma::PopupApplet* m_applet;
 
@@ -76,6 +75,7 @@ class ContactWidget : public Plasma::Frame
         void sendMessage();
         void addFriend();
         void userProperties();
+        void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
     private :
         void buildDialog();
@@ -94,6 +94,8 @@ class ContactWidget : public Plasma::Frame
         Plasma::IconWidget* m_sendMessage;
         Plasma::IconWidget* m_addFriend;
         Plasma::IconWidget* m_showDetails;
+        Plasma::DataEngine* m_engine;
+        QString m_id;
 };
 
 #endif

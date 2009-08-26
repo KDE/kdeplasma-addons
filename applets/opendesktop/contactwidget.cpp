@@ -39,19 +39,20 @@
 // own
 #include "contactwidget.h"
 #include "contactimage.h"
+#include "utils.h"
 
 using namespace Plasma;
 
-ContactWidget::ContactWidget(QGraphicsWidget *parent)
+ContactWidget::ContactWidget(DataEngine* engine, QGraphicsWidget* parent)
     : Frame(parent),
-      id(0),
       m_isHovered(false),
       m_isFriend(false),
       m_image(0),
       m_nameLabel(0),
       m_sendMessage(0),
       m_addFriend(0),
-      m_showDetails(0)
+      m_showDetails(0),
+      m_engine(engine)
 {
     setAcceptHoverEvents(true);
     buildDialog();
@@ -66,21 +67,37 @@ ContactWidget::~ContactWidget()
 {
 }
 
-void ContactWidget::setAtticaData(const Plasma::DataEngine::Data &data)
-{
-    //kDebug() << data;
-    m_ocsData = data;
-    QString _id = data["Id"].toString();
 
-    QString name = data["Name"].toString();
+void ContactWidget::setId(const QString& id)
+{
+    m_engine->disconnectSource(personSummaryQuery(m_id), this);
+    m_id = id;
+    m_engine->connectSource(personSummaryQuery(m_id), this);
+}
+
+
+QString ContactWidget::id() const
+{
+    return m_id;
+}
+
+
+void ContactWidget::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
+{
+    Q_UNUSED(source);
+    
+    m_ocsData = data.value(personQuery(m_id)).value<DataEngine::Data>();
+    QString _id = m_ocsData["Id"].toString();
+
+    QString name = m_ocsData["Name"].toString();
     if (name.isEmpty()) {
         setName(_id);
     } else {
         setName(QString("%1 (%2)").arg(name, _id));
     }
 
-    QString city = data["City"].toString();
-    QString country = data["Country"].toString();
+    QString city = m_ocsData["City"].toString();
+    QString country = m_ocsData["Country"].toString();
     QString location;
     if (!city.isEmpty() && !country.isEmpty()) {
         location = QString("%1, %2").arg(city, country);
@@ -93,14 +110,15 @@ void ContactWidget::setAtticaData(const Plasma::DataEngine::Data &data)
     if (!location.isEmpty()) {
         setInfo(location);
     }
-    QPixmap pm = data["Avatar"].value<QPixmap>();
-    QString pmUrl = data["AvatarUrl"].toUrl().toString();
+    QPixmap pm = m_ocsData["Avatar"].value<QPixmap>();
+    QString pmUrl = m_ocsData["AvatarUrl"].toUrl().toString();
     if (!pm.isNull()) {
         m_image->setPixmap(pm);
     } else {
         kDebug() << "avatarUrl" << pmUrl;
     }
 }
+
 
 Plasma::DataEngine::Data ContactWidget::atticaData() const
 {

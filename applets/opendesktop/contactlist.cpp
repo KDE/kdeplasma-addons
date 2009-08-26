@@ -86,8 +86,8 @@ void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::D
     QStringList::iterator j = displayedContacts.begin();
     for (int i = 0; i < displayedContacts.size(); ++i, ++j) {
         ContactWidget* widget;
-        widget = new ContactWidget(m_container);
-        widget->setAtticaData(data[QString("Person-%1").arg(*j)].value<Plasma::DataEngine::Data>());
+        widget = new ContactWidget(m_engine, m_container);
+        widget->setId(*j);
         m_layout->addItem(widget);
         m_mapping.insert(widget, *j);
         connect(widget, SIGNAL(addFriend(Plasma::DataEngine::Data)), SLOT(addFriend()));

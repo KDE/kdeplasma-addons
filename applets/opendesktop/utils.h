@@ -24,6 +24,8 @@
 
 QString personQuery(const QString& id);
 
+QString personSummaryQuery(const QString& id);
+
 /**
  * Return the user id that belongs to a person query
  * @param query The query to read from

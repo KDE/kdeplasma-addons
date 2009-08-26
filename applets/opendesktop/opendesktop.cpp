@@ -208,7 +208,7 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
 
     if (m_friends.value(_id)) {
         kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
-        m_friends[_id]->setAtticaData(data);
+        m_friends[_id]->setId(_id);
         return;
     }
 
@@ -222,8 +222,8 @@ void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
         return;
     }
 
-    ContactWidget* contactWidget = new ContactWidget(m_friendsWidget);
-    contactWidget->setAtticaData(data);
+    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_friendsWidget);
+    contactWidget->setId(_id);
     contactWidget->setIsFriend(true);
     connect(contactWidget, SIGNAL(showDetails(Plasma::DataEngine::Data)),
             this, SLOT(showDetails(Plasma::DataEngine::Data)));
@@ -245,7 +245,7 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
 
     if (m_near.value(_id)) {
         kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
-        m_near[_id]->setAtticaData(data);
+        m_near[_id]->setId(_id);
         return;
     }
 
@@ -258,8 +258,8 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
         return;
     }
 
-    ContactWidget* contactWidget = new ContactWidget(m_friendsWidget);
-    contactWidget->setAtticaData(data);
+    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_friendsWidget);
+    contactWidget->setId(_id);
     connect(contactWidget, SIGNAL(showDetails(Plasma::DataEngine::Data)),
             this, SLOT(showDetails(Plasma::DataEngine::Data)));
     m_nearLayout->addItem(contactWidget);
