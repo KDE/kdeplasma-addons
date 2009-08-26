@@ -18,12 +18,15 @@
  */
 
 #include "energy.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 Energy::Energy(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
-    setObjectName("energy");
+    Conversioni18nCatalog::loadCatalog();
+	
+	setObjectName("energy");
     setName(i18n("Energy"));
     addSIUnit("J", i18n("joule"), i18n("joules"));
 

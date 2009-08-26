@@ -18,6 +18,7 @@
  */
 
 #include "fuel_efficiency.h"
+#include "conversioni18ncatalog.h"
 #include <KLocale>
 
 class kmpl : public Conversion::Complex
@@ -41,7 +42,9 @@ class mpgi : public Conversion::Complex
 FuelEfficiency::FuelEfficiency(QObject* parent)
 : Conversion::UnitCategory(parent)
 {
-    setObjectName("fuelefficiency");
+    Conversioni18nCatalog::loadCatalog();
+	
+	setObjectName("fuelefficiency");
     setName(i18n("Fuel Efficiency"));
 
     setDefaultUnit(U(i18n("liters per 100 kilometers"), i18n("liters per 100 kilometers"),
