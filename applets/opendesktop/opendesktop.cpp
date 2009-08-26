@@ -113,6 +113,7 @@ void OpenDesktop::init()
     } else {
         connectGeolocation();
     }
+    switchDisplayedUser(m_username);
 }
 
 void OpenDesktop::connectGeolocation()
@@ -157,8 +158,6 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
                                   QSizeF(KIconLoader::SizeSmallMedium, KIconLoader::SizeSmallMedium)));
         connect(m_homeButton, SIGNAL(clicked()), this, SLOT(goHome()));
         m_homeButton->setVisible(false);
-
-        switchDisplayedUser(m_username);
     }
     return m_tabs;
 }
