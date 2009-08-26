@@ -21,6 +21,8 @@
 #include "opendesktop.h"
 #include "contactwidget.h"
 #include "activitylist.h"
+#include "contactlist.h"
+#include "utils.h"
 
 //Qt
 
@@ -57,9 +59,7 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
         id(0),
         m_tabs(0),
-        m_friendsScroll(0),
-        m_friendsWidget(0),
-        m_friendsLayout(0),
+        m_friendList(0),
         m_nearScroll(0),
         m_nearWidget(0),
         m_nearLayout(0),
@@ -172,11 +172,9 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_tabs->addTab(i18n("Personal"), m_userWidget);
 
         // Friends
-        m_friendsScroll = new Plasma::ScrollWidget(m_tabs);
-        m_friendsWidget = new QGraphicsWidget(m_friendsScroll);
-        m_friendsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_friendsWidget);
-        m_friendsScroll->setWidget(m_friendsWidget);
-        m_tabs->addTab(i18n("Friends"), m_friendsScroll);
+        m_friendList = new ContactList(dataEngine("ocs"), m_tabs);
+        m_tabs->addTab(i18n("Friends"), m_friendList);
+        connect(m_friendList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
 
         // People near me
         m_nearScroll = new Plasma::ScrollWidget(m_tabs);
@@ -194,41 +192,6 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_homeButton->setVisible(false);
     }
     return m_tabs;
-}
-
-void OpenDesktop::addFriend(const Plasma::DataEngine::Data &data)
-{
-    QString name = data["Name"].toString();
-    QString _id = data["Id"].toString();
-    kDebug() << "name, id" << name << _id;
-    if (_id == m_username) {
-        kDebug() << "Updating myself" << m_username;
-        return;
-    }
-
-    if (m_friends.value(_id)) {
-        kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
-        m_friends[_id]->setId(_id);
-        return;
-    }
-
-    if (name.isEmpty()) {
-        kDebug() << "Name empty, using id" << name << _id;
-        name = _id;
-    }
-
-    // just show the first couple of widgets
-    if ( m_friends.count() > m_maximumItems ) {
-        return;
-    }
-
-    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_friendsWidget);
-    contactWidget->setId(_id);
-    contactWidget->setIsFriend(true);
-    connect(contactWidget, SIGNAL(showDetails(Plasma::DataEngine::Data)),
-            this, SLOT(showDetails(Plasma::DataEngine::Data)));
-    m_friendsLayout->addItem(contactWidget);
-    m_friends[_id] = contactWidget;
 }
 
 void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
@@ -258,12 +221,20 @@ void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
         return;
     }
 
-    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_friendsWidget);
+    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_nearWidget);
     contactWidget->setId(_id);
     connect(contactWidget, SIGNAL(showDetails(Plasma::DataEngine::Data)),
             this, SLOT(showDetails(Plasma::DataEngine::Data)));
     m_nearLayout->addItem(contactWidget);
     m_near[_id] = contactWidget;
+}
+
+
+void OpenDesktop::switchDisplayedUser(const QString& id)
+{
+    DataEngine::Data data;
+    data.insert("Id", id);
+    showDetails(data);
 }
 
 
@@ -276,15 +247,9 @@ void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
         m_userWidget->setId(m_username);
     else
     m_userWidget->setId(data["Id"].toString());
+    m_friendList->setQuery(friendsQuery(data["Id"].toString()));
 
-    int n = m_friendsLayout->count();
-    for (int i = 0; i < n; i++) {
-        ContactWidget *cw = dynamic_cast<ContactWidget*>(m_friendsLayout->itemAt(i));
-        m_friends.remove(cw->user());
-        cw->deleteLater();
-    }
-
-    n = m_nearLayout->count();
+    int n = m_nearLayout->count();
     for (int i = 0; i < n; i++) {
         ContactWidget *cw = dynamic_cast<ContactWidget*>(m_nearLayout->itemAt(i));
         m_near.remove(cw->user());
@@ -344,7 +309,6 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
                 // Our own data has updated ...
                 m_ownData = personData;
             }
-            addFriend(personData);
         }
         return;
     } else if (source.startsWith("Near-")) {
@@ -352,14 +316,6 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
             if (person.startsWith("Person-")) {
                 Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
                 addNearbyPerson(personData);
-            }
-        }
-        return;
-    } else if (source.startsWith("Friends-")) {
-        foreach (const QString &person, data.keys()) {
-            if (person.startsWith("Person-")) {
-                Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
-                addFriend(personData);
             }
         }
         return;
@@ -413,24 +369,12 @@ void OpenDesktop::configAccepted()
     // General tab
     QString cuser = ui.username->text();
     if (m_username != cuser) {
-        if (m_friends.value(cuser)) {
-            m_userWidget->setId(m_username);
-        }
-
-        disconnectFriends(m_username);
-        int n = m_friendsLayout->count();
-        // Empty the friendslayout
-        for (int i = 0; i < n; i++) {
-            ContactWidget *cw = dynamic_cast<ContactWidget*>(m_friendsLayout->itemAt(i));
-            m_friends.remove(cw->user());
-            cw->deleteLater();
-        }
-
         disconnectPerson(m_username);
         m_username = cuser;
         m_displayedUser = m_username;
         connectPerson(m_username);
-        connectFriends(m_username);
+        m_userWidget->setId(m_username);
+        m_friendList->setQuery(friendsQuery(m_username));
         if (!m_username.isEmpty()) {
             connectGeolocation();
         }

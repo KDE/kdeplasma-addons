@@ -22,6 +22,8 @@
 #include <QtCore/QString>
 
 
+QString friendsQuery(const QString& id);
+
 QString personQuery(const QString& id);
 
 QString personSummaryQuery(const QString& id);

@@ -22,6 +22,12 @@
 #include "utils.h"
 
 
+QString friendsQuery(const QString& id)
+{
+    return QString("Friends-%1").arg(id);
+}
+
+
 QString personQuery(const QString& id)
 {
     return QString("Person-%1").arg(id);

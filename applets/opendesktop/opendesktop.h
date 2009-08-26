@@ -42,6 +42,7 @@ namespace Plasma
 }
 class KConfigDialog;
 class ActivityList;
+class ContactList;
 
 class OpenDesktop : public Plasma::PopupApplet
 {
@@ -66,6 +67,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void registerAccount();
         void showDetails(const Plasma::DataEngine::Data &data);
         void goHome();
+        void switchDisplayedUser(const QString& id);
 
     private:
         void connectGeolocation();
@@ -74,9 +76,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void connectNearby(const int latitude, const int longitude);
         void disconnectPerson(const QString &name);
         void disconnectFriends(const QString &name);
-        void addFriend(const Plasma::DataEngine::Data &data);
         void addNearbyPerson(const Plasma::DataEngine::Data &data);
-        void addActivityItem(const Plasma::DataEngine::Data &data);
 
         // Configuration dialog
         Ui::opendesktopConfig ui;
@@ -92,10 +92,7 @@ class OpenDesktop : public Plasma::PopupApplet
         Plasma::DataEngine::Data m_ownData;
 
         // Friends tab
-        Plasma::ScrollWidget* m_friendsScroll;
-        QGraphicsWidget* m_friendsWidget;
-        QHash<QString, ContactWidget*> m_friends;
-        QGraphicsLinearLayout* m_friendsLayout;
+        ContactList* m_friendList;
 
         //Friends activity tab
         ActivityList* m_activityList;
