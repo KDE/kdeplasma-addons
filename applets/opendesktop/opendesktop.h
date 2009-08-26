@@ -65,18 +65,12 @@ class OpenDesktop : public Plasma::PopupApplet
     private Q_SLOTS:
         void publishGeoLocation();
         void registerAccount();
-        void showDetails(const Plasma::DataEngine::Data &data);
         void goHome();
         void switchDisplayedUser(const QString& id);
 
     private:
         void connectGeolocation();
-        void connectFriends(const QString &name);
-        void connectPerson(const QString &name);
         void connectNearby(const int latitude, const int longitude);
-        void disconnectPerson(const QString &name);
-        void disconnectFriends(const QString &name);
-        void addNearbyPerson(const Plasma::DataEngine::Data &data);
 
         // Configuration dialog
         Ui::opendesktopConfig ui;
@@ -98,11 +92,9 @@ class OpenDesktop : public Plasma::PopupApplet
         ActivityList* m_activityList;
 
         // Nearby people tab
-        Plasma::ScrollWidget* m_nearScroll;
+        ContactList* m_nearList;
+
         Plasma::IconWidget* m_homeButton;
-        QGraphicsWidget* m_nearWidget;
-        QHash<QString, ContactWidget*> m_near;
-        QGraphicsLinearLayout* m_nearLayout;
 
         // Config values
         int m_maximumItems;

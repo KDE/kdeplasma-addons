@@ -19,7 +19,6 @@
 
 //own
 #include "opendesktop.h"
-#include "contactwidget.h"
 #include "activitylist.h"
 #include "contactlist.h"
 #include "utils.h"
@@ -60,9 +59,7 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
         id(0),
         m_tabs(0),
         m_friendList(0),
-        m_nearScroll(0),
-        m_nearWidget(0),
-        m_nearLayout(0),
+        m_nearList(0),
         m_maximumItems(0)
 {
     KGlobal::locale()->insertCatalog("plasma_applet_opendesktop");
@@ -114,8 +111,6 @@ void OpenDesktop::init()
     if (m_username.isEmpty()) {
         setConfigurationRequired(true);
     } else {
-        m_userWidget->setId(m_username);
-        connectFriends(m_username);
         connectGeolocation();
     }
 }
@@ -123,36 +118,6 @@ void OpenDesktop::init()
 void OpenDesktop::connectGeolocation()
 {
     dataEngine("geolocation")->connectSource("location", this);
-}
-
-void OpenDesktop::connectFriends(const QString &name)
-{
-    QString src = QString("Friends-%1").arg(name);
-    dataEngine("ocs")->connectSource(src, this);
-    //kDebug() << "connected friends";
-}
-
-void OpenDesktop::connectPerson(const QString &name)
-{
-    QString src = QString("Person-%1").arg(name);
-    dataEngine("ocs")->connectSource(src, this);
-    //kDebug() << "connected user person" << src;
-}
-
-void OpenDesktop::disconnectPerson(const QString &name)
-{
-    Q_UNUSED( name )
-    QString src = QString("Person-%1").arg(m_username);
-    dataEngine("ocs")->disconnectSource(src, this);
-
-    //kDebug() << "disconnected user person" << name;
-}
-
-void OpenDesktop::disconnectFriends(const QString &name)
-{
-    QString src = QString("Friends-%1").arg(name);
-    dataEngine("ocs")->disconnectSource(src, this);
-    //kDebug() << "disconnected friends" << src;
 }
 
 
@@ -177,11 +142,9 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         connect(m_friendList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
 
         // People near me
-        m_nearScroll = new Plasma::ScrollWidget(m_tabs);
-        m_nearWidget = new QGraphicsWidget(m_nearScroll);
-        m_nearLayout = new QGraphicsLinearLayout(Qt::Vertical, m_nearWidget);
-        m_nearScroll->setWidget(m_nearWidget);
-        m_tabs->addTab(i18n("Nearby"), m_nearScroll);
+        m_nearList = new ContactList(dataEngine("ocs"), m_tabs);
+        m_tabs->addTab(i18n("Nearby"), m_nearList);
+        connect(m_nearList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
 
         // "Home" button, outside of the layout
         m_homeButton = new Plasma::IconWidget(this);
@@ -190,85 +153,33 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
                                   QSizeF(KIconLoader::SizeSmallMedium, KIconLoader::SizeSmallMedium)));
         connect(m_homeButton, SIGNAL(clicked()), this, SLOT(goHome()));
         m_homeButton->setVisible(false);
+
+        switchDisplayedUser(m_username);
     }
     return m_tabs;
-}
-
-void OpenDesktop::addNearbyPerson(const Plasma::DataEngine::Data &data)
-{
-    QString name = data["Name"].toString();
-    QString _id = data["Id"].toString();
-    kDebug() << "nearby name, id" << name << _id;
-
-    if (_id == m_username) {
-        kDebug() << "Updating myself" << m_username;
-        m_userWidget->setId(_id);
-        return;
-    }
-
-    if (m_near.value(_id)) {
-        kDebug() << "Updated existing widget" << (QObject*)m_near[_id];
-        m_near[_id]->setId(_id);
-        return;
-    }
-
-    if (name.isEmpty()) {
-        name = _id;
-    }
-
-    // just show the first couple of widgets
-    if (m_near.count() > m_maximumItems) {
-        return;
-    }
-
-    ContactWidget* contactWidget = new ContactWidget(dataEngine("ocs"), m_nearWidget);
-    contactWidget->setId(_id);
-    connect(contactWidget, SIGNAL(showDetails(Plasma::DataEngine::Data)),
-            this, SLOT(showDetails(Plasma::DataEngine::Data)));
-    m_nearLayout->addItem(contactWidget);
-    m_near[_id] = contactWidget;
 }
 
 
 void OpenDesktop::switchDisplayedUser(const QString& id)
 {
-    DataEngine::Data data;
-    data.insert("Id", id);
-    showDetails(data);
-}
+    m_displayedUser = id;
 
-
-void OpenDesktop::showDetails(const Plasma::DataEngine::Data &data)
-{
-    //kDebug() << "showing details. ... switching to user info tab";
     m_tabs->setCurrentIndex(1);
-    // FIXME: The following 3 (!) lines are a temporary hack
-    if (!data.contains("Id"))
-        m_userWidget->setId(m_username);
-    else
-    m_userWidget->setId(data["Id"].toString());
-    m_friendList->setQuery(friendsQuery(data["Id"].toString()));
-
-    int n = m_nearLayout->count();
-    for (int i = 0; i < n; i++) {
-        ContactWidget *cw = dynamic_cast<ContactWidget*>(m_nearLayout->itemAt(i));
-        m_near.remove(cw->user());
-        cw->deleteLater();
+    m_userWidget->setId(id);
+    if (!m_displayedUser.isEmpty()) {
+        m_friendList->setQuery(friendsQuery(id));
+    } else {
+        m_friendList->setQuery(QString());
     }
-
-    disconnectPerson(m_displayedUser);
-    disconnectFriends(m_displayedUser);
-    m_displayedUser = data["Id"].toString();
-    connectPerson(m_displayedUser);
-    connectFriends(m_displayedUser);
-    connectNearby(data["Latitude"].toDouble(), data["Longitude"].toDouble());
+    m_nearList->setQuery(QString());
 
     m_homeButton->setVisible(m_username != m_displayedUser);
 }
 
+
 void OpenDesktop::goHome()
 {
-    showDetails(m_ownData);
+    switchDisplayedUser(m_username);
 }
 
 void OpenDesktop::connectNearby(int latitude, int longitude)
@@ -279,7 +190,7 @@ void OpenDesktop::connectNearby(int latitude, int longitude)
                         QString::number(m_geolocation->distance));
     kDebug() << "geolocation src" << src;
 
-    dataEngine("ocs")->connectSource(src, this);
+    m_nearList->setQuery(src);
     kDebug() << "connected near";
 }
 
@@ -298,26 +209,6 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
                 m_geolocation->countryCode << m_geolocation->latitude << m_geolocation->longitude;
         connectNearby(m_geolocation->latitude, m_geolocation->longitude);
         saveGeoLocation();
-        return;
-
-    } else if (source.startsWith("Person-")) {
-        // ourselves?
-        Plasma::DataEngine::Data personData = data[source].value<Plasma::DataEngine::Data>();
-        if (!personData["Id"].toString().isEmpty()) {
-            QString self = QString("Person-%1").arg(m_username);
-            if ( personData["Id"].toString() == m_username) {
-                // Our own data has updated ...
-                m_ownData = personData;
-            }
-        }
-        return;
-    } else if (source.startsWith("Near-")) {
-        foreach (const QString &person, data.keys()) {
-            if (person.startsWith("Person-")) {
-                Plasma::DataEngine::Data personData = data[person].value<Plasma::DataEngine::Data>();
-                addNearbyPerson(personData);
-            }
-        }
         return;
     }
 
@@ -369,12 +260,8 @@ void OpenDesktop::configAccepted()
     // General tab
     QString cuser = ui.username->text();
     if (m_username != cuser) {
-        disconnectPerson(m_username);
         m_username = cuser;
-        m_displayedUser = m_username;
-        connectPerson(m_username);
-        m_userWidget->setId(m_username);
-        m_friendList->setQuery(friendsQuery(m_username));
+        switchDisplayedUser(m_username);
         if (!m_username.isEmpty()) {
             connectGeolocation();
         }
