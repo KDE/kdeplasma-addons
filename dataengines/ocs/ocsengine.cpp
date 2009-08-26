@@ -86,9 +86,25 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         QString _id = QString(name).remove(0, 7); // Removes prefix Person-
         kDebug() << "Searching for Person id" << _id;
         PersonJob* _job = Attica::OcsApi::requestPerson(_id);
-        setData(name, DataEngine::Data());
+        if (m_personCache.contains(_id)) {
+            // Set data already in the cache, it will hopefully get replaced by more complete data soon
+            setPersonData(QString("Person-%1").arg(_id), m_personCache[_id]);
+        } else {
+            setData(name, DataEngine::Data());
+        }
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
         return _job != 0;
+    } else if (name.startsWith("PersonSummary-")) {
+        QString _id = QString(name).remove(0, 14); // Removes prefix PersonSummary-
+        kDebug() << "Searching for Person Summary id" << _id;
+        if (m_personCache.contains(_id)) {
+            return true;
+        } else {
+            PersonJob* _job = Attica::OcsApi::requestPerson(_id);
+            setData(name, DataEngine::Data());
+            connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
+            return _job != 0;
+        }
     } else if (name.startsWith("Near-")) {
         QStringList args = QString(name).remove(0, 5).split(':'); // Removes prefix Near-
         if (args.size() != 3) {
@@ -250,6 +266,7 @@ void OcsEngine::slotPersonResult( KJob *j )
             source = QString("Person-%1").arg(p.id());
         }
 
+        addToCache(p.id(), p, true);
         setPersonData(source, p);
         scheduleSourcesUpdated();
     } else {
@@ -353,6 +370,7 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
         m_personListJobs.remove(j);
 
         foreach (const Person &p, listJob->personList()) {
+            addToCache(p.id(), p);
             setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
@@ -371,6 +389,7 @@ void OcsEngine::slotFriendsResult( KJob *j )
         QString _id = m_personListJobs[j];
 
         foreach (const Person &p, listJob->personList()) {
+            addToCache(p.id(), p);
             setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
@@ -389,6 +408,53 @@ void OcsEngine::networkStatusChanged(Solid::Networking::Status status)
     } else {
         kDebug() << "Disconnected" << status;
     }
+}
+
+
+void OcsEngine::addToCache(const QString& id, const Attica::Person& person, bool replaceCache)
+{
+    if (replaceCache || !m_personCache.contains(id)) {
+        // Add the person to the cache
+        m_personCache[id] = person;
+    } else {
+        // Update and enhance the cache
+        Attica::Person& cachePerson = m_personCache[id];
+        if (!person.avatar().isNull()) {
+            cachePerson.setAvatar(person.avatar());
+        }
+        if (!person.avatarUrl().isEmpty()) {
+            cachePerson.setAvatarUrl(person.avatarUrl());
+        }
+        if (person.birthday().isValid()) {
+            cachePerson.setBirthday(person.birthday());
+        }
+        if (!person.city().isEmpty()) {
+            cachePerson.setCity(person.city());
+        }
+        if (!person.country().isEmpty()) {
+            cachePerson.setCountry(person.country());
+        }
+        if (!person.firstName().isEmpty()) {
+            cachePerson.setFirstName(person.firstName());
+        }
+        if (!person.homepage().isEmpty()) {
+            cachePerson.setHomepage(person.homepage());
+        }
+        if (!person.id().isEmpty()) {
+            cachePerson.setId(person.id());
+        }
+        if (!person.lastName().isEmpty()) {
+            cachePerson.setLastName(person.lastName());
+        }
+        if (person.latitude() && person.longitude()) {
+            cachePerson.setLatitude(person.latitude());
+            cachePerson.setLongitude(person.longitude());
+        }
+        foreach(const QString& key, person.extendedAttributes()) {
+            cachePerson.addExtendedAttribute(key, person.extendedAttribute(key));
+        }
+    }
+    setPersonData(QString("PersonSummary-%1").arg(id), m_personCache[id]);
 }
 
 

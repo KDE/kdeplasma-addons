@@ -69,6 +69,7 @@ protected Q_SLOTS:
 private:
     void setPersonData(const QString &source, const Attica::Person &person);
     void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
+    void addToCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
 
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
     QHash<KJob*, QString> m_personListJobs;
@@ -79,6 +80,7 @@ private:
     KJob* m_job;
     int m_maximumItems;
     QHash<QString,PersonService*> m_personServices;
+    QHash<QString, Attica::Person> m_personCache;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )
