@@ -69,13 +69,13 @@ class ContactWidget : public Plasma::Frame
 
     public Q_SLOTS:
         void updateColors();
-        void sendMessage();
-        void addFriend();
-        void userProperties();
 
     protected Q_SLOTS:
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        void sendMessage();
+        void addFriend();
+        void userProperties();
 
     private :
         void buildDialog();
