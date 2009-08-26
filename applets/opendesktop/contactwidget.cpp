@@ -111,19 +111,9 @@ void ContactWidget::dataUpdated(const QString& source, const Plasma::DataEngine:
         setInfo(location);
     }
     QPixmap pm = m_ocsData["Avatar"].value<QPixmap>();
-    QString pmUrl = m_ocsData["AvatarUrl"].toUrl().toString();
-    if (!pm.isNull()) {
-        m_image->setPixmap(pm);
-    } else {
-        kDebug() << "avatarUrl" << pmUrl;
-    }
+    m_image->setPixmap(pm);
 }
 
-
-Plasma::DataEngine::Data ContactWidget::atticaData() const
-{
-    return m_ocsData;
-}
 
 void ContactWidget::buildDialog()
 {
@@ -182,9 +172,9 @@ void ContactWidget::buildDialog()
     m_showDetails->setMinimumWidth(s);
     m_showDetails->setMaximumWidth(s);
 
-    connect(m_sendMessage, SIGNAL(clicked()), this, SLOT(sendMessage()));
-    connect(m_addFriend, SIGNAL(clicked()), this, SLOT(addFriend()));
-    connect(m_showDetails, SIGNAL(clicked()), this, SLOT(userProperties()));
+    connect(m_sendMessage, SIGNAL(clicked()), SIGNAL(sendMessage()));
+    connect(m_addFriend, SIGNAL(clicked()), SIGNAL(addFriend()));
+    connect(m_showDetails, SIGNAL(clicked()), SLOT(slotShowDetails()));
 
     m_actions->addItem(m_addFriend);
     m_actions->addItem(m_sendMessage);
@@ -213,31 +203,15 @@ void ContactWidget::updateActions()
     m_showDetails->setVisible(m_isHovered);
 }
 
-void ContactWidget::setImage(const QImage &image)
-{
-    m_image->setImage(image);
-}
 
-void ContactWidget::sendMessage()
-{
-    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(user()));
-    emit sendMessage(m_ocsData);
-}
-
-void ContactWidget::addFriend()
-{
-    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(user()));
-    emit addFriend(m_ocsData);
-}
-
-void ContactWidget::userProperties()
+void ContactWidget::slotShowDetails()
 {
     kDebug() << "user details" << user();
     // When sliding out, we'll usually miss the hoverLeaveEvent,
     // so do it manually
     m_isHovered = false;
     updateActions();
-    emit showDetails(m_ocsData);
+    emit showDetails();
 }
 
 void ContactWidget::updateColors()
@@ -291,10 +265,6 @@ void ContactWidget::updateColors()
     }
 }
 
-Plasma::DataEngine::Data ContactWidget::data()
-{
-    return m_ocsData;
-}
 
 void ContactWidget::setName(const QString &name)
 {

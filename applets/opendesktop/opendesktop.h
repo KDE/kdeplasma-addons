@@ -67,6 +67,8 @@ class OpenDesktop : public Plasma::PopupApplet
         void registerAccount();
         void goHome();
         void switchDisplayedUser(const QString& id);
+        void addFriend(const QString& id);
+        void sendMessage(const QString& id);
 
     private:
         void connectGeolocation();

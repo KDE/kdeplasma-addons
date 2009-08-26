@@ -49,19 +49,18 @@ ContactImage::~ContactImage()
 
 void ContactImage::setImage(const QImage &image)
 {
-    if (!image.size().isEmpty()) {
-        m_pixmap = QPixmap::fromImage(image);
-        pixmapUpdated();
-        kDebug() << "----" << m_pixmap.size() << m_scaledPixmap.size();
-    }
+    setPixmap(QPixmap::fromImage(image));
 }
 
 void ContactImage::setPixmap(const QPixmap &pixmap)
 {
-    if (!pixmap.size().isEmpty()) {
+    if (!pixmap.isNull()) {
         m_pixmap = pixmap;
         pixmapUpdated();
         kDebug() << "----" << m_pixmap.size() << m_scaledPixmap.size();
+    } else {
+        m_pixmap = KIcon("system-users").pixmap(64, 64);
+        pixmapUpdated();
     }
 }
 

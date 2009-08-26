@@ -90,9 +90,9 @@ void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::D
         widget->setId(*j);
         m_layout->addItem(widget);
         m_mapping.insert(widget, *j);
-        connect(widget, SIGNAL(addFriend(Plasma::DataEngine::Data)), SLOT(addFriend()));
-        connect(widget, SIGNAL(sendMessage(Plasma::DataEngine::Data)), SLOT(sendMessage()));
-        connect(widget, SIGNAL(showDetails(Plasma::DataEngine::Data)), SLOT(showDetails()));
+        connect(widget, SIGNAL(addFriend()), SLOT(addFriend()));
+        connect(widget, SIGNAL(sendMessage()), SLOT(sendMessage()));
+        connect(widget, SIGNAL(showDetails()), SLOT(showDetails()));
     }
     this->setPos(0, 0);
 }

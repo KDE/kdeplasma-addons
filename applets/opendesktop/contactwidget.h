@@ -46,7 +46,6 @@ class ContactWidget : public Plasma::Frame
         ContactWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~ContactWidget();
 
-        Plasma::DataEngine::Data atticaData() const;
         QString id() const;
 
         QString name();
@@ -55,16 +54,14 @@ class ContactWidget : public Plasma::Frame
         void setName(const QString &name);
         void setInfo(const QString &name);
         void setIsFriend(bool isFriend);
-        void setImage(const QImage &image);
         void setId(const QString& id);
-        Plasma::DataEngine::Data data();
 
         Plasma::PopupApplet* m_applet;
 
     Q_SIGNALS:
-        void addFriend(Plasma::DataEngine::Data data);
-        void sendMessage(Plasma::DataEngine::Data data);
-        void showDetails(Plasma::DataEngine::Data data);
+        void addFriend();
+        void sendMessage();
+        void showDetails();
 
     public Q_SLOTS:
         void updateColors();
@@ -72,9 +69,7 @@ class ContactWidget : public Plasma::Frame
     protected Q_SLOTS:
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        void sendMessage();
-        void addFriend();
-        void userProperties();
+        void slotShowDetails();
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
     private :

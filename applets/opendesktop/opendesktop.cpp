@@ -139,11 +139,15 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         // Friends
         m_friendList = new ContactList(dataEngine("ocs"), m_tabs);
         m_tabs->addTab(i18n("Friends"), m_friendList);
+        connect(m_friendList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
+        connect(m_friendList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
         connect(m_friendList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
 
         // People near me
         m_nearList = new ContactList(dataEngine("ocs"), m_tabs);
         m_tabs->addTab(i18n("Nearby"), m_nearList);
+        connect(m_nearList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
+        connect(m_nearList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
         connect(m_nearList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
 
         // "Home" button, outside of the layout
@@ -174,6 +178,18 @@ void OpenDesktop::switchDisplayedUser(const QString& id)
     m_nearList->setQuery(QString());
 
     m_homeButton->setVisible(m_username != m_displayedUser);
+}
+
+
+void OpenDesktop::addFriend(const QString& id)
+{
+    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(id));
+}
+
+
+void OpenDesktop::sendMessage(const QString& id)
+{
+     KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(id));
 }
 
 
