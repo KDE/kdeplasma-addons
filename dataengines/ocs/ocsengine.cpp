@@ -226,6 +226,7 @@ void OcsEngine::slotActivityResult( KJob *j )
             activityData["user"] = activity.user();
             activityData["timestamp"] = activity.timestamp();
             activityData["message"] = activity.message();
+            activityData["link"] = activity.link();
 
             setData("activity", activity.id(), activityData);
         }
