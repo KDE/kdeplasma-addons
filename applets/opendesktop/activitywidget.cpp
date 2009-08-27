@@ -36,8 +36,11 @@
 using namespace Plasma;
 
 ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
-    : Frame(parent)
+    : Frame(parent),
+      m_isHovered(false)
 {
+    setAcceptHoverEvents(true);
+
     m_layout = new QGraphicsLinearLayout(this);
 
     m_image = new ContactImage(this);
@@ -59,7 +62,7 @@ ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
     m_link->setMinimumWidth(s);
     m_link->setMaximumWidth(s);
     m_layout->addItem(m_link);
-    m_link->setVisible(false);
+    m_link->setVisible(true);
     connect(m_link, SIGNAL(clicked()), this, SLOT(followLink()));
 }
 
@@ -78,7 +81,7 @@ void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
     m_messageLabel->setText(i18n("<b>%1:</b><br />%2")
         .arg(data.value("user").toString())
         .arg(data.value("message").toString()));
-    m_link->setVisible(!data.value("link").toString().isEmpty());
+    updateActions();
 }
 
 
@@ -91,6 +94,28 @@ Plasma::DataEngine::Data ActivityWidget::activityData() const
 void ActivityWidget::followLink()
 {
     KToolInvocation::invokeBrowser(m_atticaData["link"].toString());
+}
+
+
+void ActivityWidget::updateActions()
+{
+    m_link->setVisible(m_isHovered && !m_atticaData.value("link").toString().isEmpty());
+}
+
+
+void ActivityWidget::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED( event );
+    m_isHovered = true;
+    updateActions();
+}
+
+
+void ActivityWidget::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED( event );
+    m_isHovered = false;
+    updateActions();
 }
 
 

@@ -48,15 +48,21 @@ public Q_SLOTS:
     void setActivityData(Plasma::DataEngine::Data data);
     Plasma::DataEngine::Data activityData() const;
 
+protected Q_SLOTS:
+    void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+
 private Q_SLOTS:
     void followLink();
 
 private:
+    void updateActions();
     Plasma::DataEngine::Data m_atticaData;
     QGraphicsLinearLayout *m_layout;
     Plasma::Label *m_messageLabel;
     ContactImage* m_image;
     Plasma::IconWidget* m_link;
+    bool m_isHovered;
 };
 
 #endif
