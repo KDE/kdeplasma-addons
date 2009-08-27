@@ -113,7 +113,7 @@ void OpenDesktop::init()
     } else {
         connectGeolocation();
     }
-    switchDisplayedUser(m_username);
+    switchDisplayedUser(m_username, false);
 }
 
 void OpenDesktop::connectGeolocation()
@@ -163,11 +163,13 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
 }
 
 
-void OpenDesktop::switchDisplayedUser(const QString& id)
+void OpenDesktop::switchDisplayedUser(const QString& id, bool switchToPersonal)
 {
     m_displayedUser = id;
 
-    m_tabs->setCurrentIndex(1);
+    if (switchToPersonal) {
+        m_tabs->setCurrentIndex(1);
+    }
     m_userWidget->setId(id);
     if (!m_displayedUser.isEmpty()) {
         m_friendList->setQuery(friendsQuery(id));
