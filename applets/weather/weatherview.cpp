@@ -67,13 +67,14 @@ void WeatherView::resizeEvent(QGraphicsSceneResizeEvent *event)
     for (int i = 0; i < nativeWidget()->header()->count(); i++) {
             if (!nativeWidget()->isColumnHidden(i)) {
                 shownColumns++;
-                kDebug() << "Column " << i << " is NOT hidden";
             }
     }
+
     const int newWidth = size().width() / shownColumns;
 
-    for (int i = 0; i < nativeWidget()->header()->count(); ++i) {
+    for (int i = 0; i < shownColumns; ++i) {
         nativeWidget()->header()->resizeSection(i, newWidth);
+        //kDebug() << "Column resized: " << model()->index(0, i).data(Qt::DisplayRole).toString();
     }
 
     int iconSize = int(KIconLoader::SizeSmall);

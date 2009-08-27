@@ -211,7 +211,7 @@ void WeatherApplet::resizeView()
         if (maxColumns < shownColumns) {
             difference = qAbs(maxColumns-shownColumns);
             kDebug() << "A: Difference is:" << difference;
-            for (int i = maxColumns-1; i < shownColumns; ++i) {
+            for (int i = maxColumns; i < shownColumns; ++i) {
                  kDebug() << "HIDE: i = " << i;
                  m_fiveDaysView->nativeWidget()->setColumnHidden(i, true);
             }
@@ -393,6 +393,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             kDebug() << "Create 5 Days Plasma::WeatherView";
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
             connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
+
+
+
         }
 
         if (!m_fiveDaysModel) {
@@ -712,7 +715,6 @@ void WeatherApplet::dataUpdated(const QString &source, const Plasma::DataEngine:
     setVisibleLayout(false);
     weatherContent(data);
     WeatherPopupApplet::dataUpdated(source, data);
-    resizeView();
     update();
 }
 
