@@ -41,6 +41,7 @@
 #include <KAction>
 
 #include <Plasma/PushButton>
+#include <Plasma/Theme>
 
 NotesTextEdit::NotesTextEdit(QWidget *parent)
     : KRichTextEdit(parent),
@@ -315,7 +316,14 @@ void Notes::init()
     KConfigGroup cg = config();
     m_color = cg.readEntry("color", "yellow");
     // color must be before setPlainText("foo")
-    m_textColor = cg.readEntry("textColor", QColor(Qt::black));
+    m_useThemeColor = cg.readEntry("useThemeColor", true);
+    m_useNoColor = cg.readEntry("useNoColor", true);
+    if (m_useThemeColor) {
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+    } else {
+        m_textColor = cg.readEntry("textColor", m_textColor);
+    }
     m_textBackgroundColor = cg.readEntry("textBackgroundColor", QColor(Qt::transparent));
     m_textEdit->nativeWidget()->setTextColor(m_textColor);
 
@@ -343,13 +351,10 @@ void Notes::init()
     m_textEdit->nativeWidget()->selectAll();
     m_textEdit->nativeWidget()->setFontFamily(m_font.family());
     m_textEdit->nativeWidget()->setTextCursor(oldCursor);
-    
+
     m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
     m_autoFont = cg.readEntry("autoFont", true);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
-
-    m_useThemeColor = cg.readEntry("useThemeColor", true);
-    m_useNoColor = cg.readEntry("useNoColor", true);
 
     m_checkSpelling = cg.readEntry("checkSpelling", false);
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
@@ -373,7 +378,7 @@ void Notes::lineChanged()
         fmt.setFont(m_font);
         m_textEdit->nativeWidget()->setCurrentCharFormat(fmt);   
     }
-    
+
     if (m_useNoColor) {
         return;
     }
@@ -466,6 +471,12 @@ void Notes::saveNote()
     cg.writeEntry("scrollValue", QVariant(m_textEdit->nativeWidget()->verticalScrollBar()->value()));
     //kDebug() << m_textEdit->nativeWidget()->toPlainText();
     emit configNeedsSaving();
+}
+
+void Notes::themeChanged()
+{
+    m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+    update();
 }
 
 void Notes::addColor(const QString &id, const QString &colorName)
@@ -618,18 +629,28 @@ void Notes::configAccepted()
         cg.writeEntry("autoFontPercent", m_autoFontPercent);
     }
 
-    //TODO
+    disconnect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+    bool textColorChanged = false;
     if (m_useThemeColor != ui.useThemeColor->isChecked()) {
         changed = true;
+        textColorChanged = true;
         m_useThemeColor = ui.useThemeColor->isChecked();
         cg.writeEntry("useThemeColor", m_useThemeColor);
+        m_textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
     }
 
-    QColor newColor = ui.textColorButton->color();
-    if (m_textColor != newColor) {
-        changed = true;
-        m_textColor = newColor;
-        cg.writeEntry("textColor", m_textColor);
+    if (!m_useThemeColor) {
+        QColor newColor = ui.textColorButton->color();
+        if (m_textColor != newColor) {
+            changed = true;
+            textColorChanged = true;
+            m_textColor = newColor;
+            cg.writeEntry("textColor", m_textColor);
+        }
+    }
+
+    if (textColorChanged) {
         QTextCursor textCursor = m_textEdit->nativeWidget()->textCursor();
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setTextColor(m_textColor);

@@ -137,6 +137,7 @@ class Notes : public Plasma::Applet
         void mouseUnhovered();
         void increaseFontSize();
         void decreaseFontSize();
+        void themeChanged();
 
     private:
         void createTextFormatingWidgets();
