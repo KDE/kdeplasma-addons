@@ -26,6 +26,7 @@
 #include "tooltip.h"
 #include <plasma/applet.h>
 #include <plasma/containment.h>
+#include <plasma/dataengine.h>
 #include <plasma/widgets/label.h>
 #include <QTimer>
 #include <QList>
@@ -78,22 +79,16 @@ class PlasmaboardWidget : public Plasma::Containment
 	Plasma::Label* switcher;
 
     public Q_SLOTS:
-        /*
-          * Switch key level between lower and upper
-          */
-        void switchLevel();
-        /*
-          * Switch between the alternative lvel
-          */
-        void switchAlternative();
-        /*
-          * Switch caps key on and off
-          */
-        void switchCaps();
+
         /*
           Unsets all pressed keys despite of caps
           */
-        void clear();
+	void clear();
+
+	/*
+	  Triggers a relabeling of alphanumeric keys on the keyboard
+	  */
+	void relabelKeys();
 
         /*
           Sets tooltip to a new text
@@ -102,9 +97,13 @@ class PlasmaboardWidget : public Plasma::Containment
         /*
           * Removes tooltip
           */
-        void clearTooltip();
+	void clearTooltip();
+
+	void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
 	private:
+		Plasma::DataEngine* engine;
+
                 QList<AlphaNumKey*> alphaKeys; // normal keys labeled with symbols like a, b, c
                 QList<FuncKey*> funcKeys; // functional keys like shift, backspace, enter
                 QList<FuncKey*> extKeys; // keys only shown in the extended layout as F1, F2,..

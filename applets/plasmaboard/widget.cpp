@@ -95,6 +95,10 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_layout->setRowMaximumHeight ( 0, 15 );
     QObject::connect(switcher, SIGNAL( linkActivated(QString) ), parent, SLOT( toggleMode() ) );
 
+    engine = dataEngine("keystate");
+    if(engine){
+	engine -> connectAllSources(this);
+    }
 }
 
 
@@ -102,6 +106,32 @@ PlasmaboardWidget::~PlasmaboardWidget(){
     delete tooltipTimer;
     delete switcher;
     delete tooltip;
+}
+
+void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data){
+
+    if ( sourceName == "Shift" ){
+	if ( data["Pressed"].toBool() )
+	    isLevel2 = true;
+	else
+	    isLevel2 = false;
+    }
+    
+    else if ( sourceName == "Caps Lock" ) {
+	if ( data["Pressed"].toBool() )
+	    isLocked = true;
+	else
+	    isLocked = false;
+    }
+
+    else if ( sourceName == "AltGr" ) {
+	if ( data["Pressed"].toBool() )
+	    isAlternative = true;
+	else
+	    isAlternative = false;
+    }
+
+    relabelKeys();
 }
 
 void PlasmaboardWidget::resetKeyboard(){
@@ -377,11 +407,6 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
 	m_layout->setContentsMargins(0,0,0,0);
 
 
-	QObject::connect(funcKeys[SHIFT_L_KEY], SIGNAL( clicked() ), this, SLOT( switchLevel() ) );
-	QObject::connect(funcKeys[SHIFT_R_KEY], SIGNAL( clicked() ), this, SLOT( switchLevel() ) );
-	QObject::connect(funcKeys[CAPSKEY], SIGNAL( clicked() ), this, SLOT( switchCaps() ) );
-	QObject::connect(funcKeys[ALTGRKEY], SIGNAL( clicked() ), this, SLOT( switchAlternative() ) );
-
 }
 
 void PlasmaboardWidget::paint(QPainter *p,
@@ -392,50 +417,14 @@ void PlasmaboardWidget::paint(QPainter *p,
     p->setRenderHint(QPainter::Antialiasing);
 }
 
-void PlasmaboardWidget::switchLevel(){
-	if(!isLevel2){
-		isLevel2 = true;
-	}
-	else {
-		isLevel2 = false;
-		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
-		funcKeys[SHIFT_L_KEY]->toggleOff();
-		funcKeys[SHIFT_R_KEY]->toggleOff();
-	}
+void PlasmaboardWidget::relabelKeys() {
 	foreach (AlphaNumKey* key, alphaKeys){
 	    key->switchKey(isLevel2, isAlternative, isLocked);
 	}
 }
 
-void PlasmaboardWidget::switchAlternative(){
-	if(!isAlternative){
-		isAlternative = true;
-	}
-	else {
-		isAlternative = false;
-		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_ISO_Level3_Shift));
-		funcKeys[ALTGRKEY]->toggleOff();
-	}
-        foreach (AlphaNumKey* key, alphaKeys){
-	    key->switchKey(isLevel2, isAlternative, isLocked);
-	}
-}
-
-void PlasmaboardWidget::switchCaps(){
-	if(isLocked){
-		isLocked = false;
-	}
-	else {
-		isLocked = true;
-	}
-        foreach (AlphaNumKey* key, alphaKeys){
-            key->switchKey(isLevel2, isAlternative, isLocked);
-	}
-}
-
 void PlasmaboardWidget::clearAnything(){
 	if ( isLocked ) {
-		switchCaps();
 		funcKeys[CAPSKEY]->sendKeycodePress();
 		funcKeys[CAPSKEY]->sendKeycodeRelease();
 	}
@@ -445,14 +434,14 @@ void PlasmaboardWidget::clearAnything(){
 void PlasmaboardWidget::clear(){
 
 	bool change = false;
-	if(isLevel2){
+	if( funcKeys[SHIFT_L_KEY]->toggled() || funcKeys[SHIFT_R_KEY]->toggled() ){
 		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
 		funcKeys[SHIFT_L_KEY]->toggleOff();
 		funcKeys[SHIFT_R_KEY]->toggleOff();
 		isLevel2 = false;
 		change = true;
 	}
-	if(isAlternative){
+	if( funcKeys[ALTGRKEY]->toggled() ){
 		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_ISO_Level3_Shift));
 		funcKeys[ALTGRKEY]->toggleOff();
 		isAlternative = false;
@@ -460,10 +449,7 @@ void PlasmaboardWidget::clear(){
 	}
 
 	if(change){
-
-                foreach (AlphaNumKey* key, alphaKeys){
-                    key->switchKey(isLevel2, isAlternative, isLocked);
-                }
+		relabelKeys();
 	}
 
 	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Control_L));
@@ -472,7 +458,7 @@ void PlasmaboardWidget::clear(){
 	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
 	funcKeys[META_L_KEY]->toggleOff();
 	funcKeys[META_R_KEY]->toggleOff();
-	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
+	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
 	funcKeys[ALT_L_KEY]->toggleOff();
 }
 

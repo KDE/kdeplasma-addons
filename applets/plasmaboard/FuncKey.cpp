@@ -36,6 +36,10 @@ void FuncKey::toggleOff(){
 	pressed = false;
 }
 
+bool FuncKey::toggled(){
+	return pressed;
+}
+
 void FuncKey::setKeycode(unsigned int code, bool sendUp){
 	keycode = Helpers::keysymToKeycode(code);
 	if(sendUp){

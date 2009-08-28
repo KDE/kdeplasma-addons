@@ -30,6 +30,7 @@ public:
 	FuncKey(PlasmaboardWidget *parent);
 	void toggleOn();
 	void toggleOff();
+	bool toggled();
 	void setKeycode(unsigned int code, bool sendUp);
         void setKey(unsigned int code, bool sendUp, const QString &text);
 
