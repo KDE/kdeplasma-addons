@@ -170,7 +170,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_serviceUrl = cg.readEntry("serviceUrl", "https://identi.ca/api/");
     m_username = cg.readEntry("username");
     m_password = KStringHandler::obscure(cg.readEntry("password"));
-    m_historySize = cg.readEntry("historySize", 2);
+    m_historySize = cg.readEntry("historySize", 6);
     m_historyRefresh = cg.readEntry("historyRefresh", 5);
     m_includeFriends = cg.readEntry("includeFriends", true);
 
