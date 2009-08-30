@@ -88,15 +88,15 @@ void Pastebin::setImageServer(int backend)
     switch(backend) {
 
     case Pastebin::IMAGEBINCA:
-        m_imageServer = static_cast<ImagebinCAServer*>(new ImagebinCAServer(config()));
+        m_imageServer = new ImagebinCAServer(config());
         break;
 
     case Pastebin::IMAGESHACK:
-        m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer(config()));
+        m_imageServer = new ImageshackServer(config());
         break;
 
     case Pastebin::SIMPLESTIMAGEHOSTING:
-        m_imageServer = static_cast<SimplestImageHostingServer*>(new SimplestImageHostingServer(config()));
+        m_imageServer = new SimplestImageHostingServer(config());
         break;
     }
 
@@ -114,11 +114,11 @@ void Pastebin::setTextServer(int backend)
     switch(backend) {
 
     case Pastebin::PASTEBINCA:
-        m_textServer = static_cast<PastebinCAServer*>(new PastebinCAServer(config()));
+        m_textServer = new PastebinCAServer(config());
         break;
 
     case Pastebin::PASTEBINCOM:
-        m_textServer = static_cast<PastebinCOMServer*>(new PastebinCOMServer(config()));
+        m_textServer = new PastebinCOMServer(config());
         break;
     }
 
