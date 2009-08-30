@@ -6,6 +6,7 @@ set(pastebin_SRCS
   backends/pastebincom.cpp
   backends/imagebinca.cpp
   backends/imageshack.cpp
+  backends/simplestimagehosting.cpp
   pastebin.cpp)
 
 kde4_add_ui_files(pastebin_SRCS pastebinConfig.ui)

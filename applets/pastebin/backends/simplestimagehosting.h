@@ -1,5 +1,8 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Artur Duque de Souza <morpheuz@gmail.com>       *
+ *   Copyright (C) 2009 by Thomas Georgiou <TAGeorgiou@gmail.com>          *
+ *                         Artur Duque de Souza <morpheuz@gmail.com>       *
+ *                         Michał Ziąbkowski <mziab@o2.pl>                 *
+ *                         Michał Dutkiewicz <emdeck@gmail.com>            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,13 +20,38 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BACKENDS_H
-#define BACKENDS_H
+#ifndef SIMPLESTIMAGEHOSTING_H
+#define SIMPLESTIMAGEHOSTING_H
 
-#include "pastebinca.h"
-#include "pastebincom.h"
-#include "imagebinca.h"
-#include "imageshack.h"
-#include "simplestimagehosting.h"
+#include "server.h"
+
+#include <KConfigDialog>
+
+#include <kio/global.h>
+#include <kio/job.h>
+
+class SimplestImageHostingServer : public PastebinServer
+{
+    Q_OBJECT
+
+public:
+    SimplestImageHostingServer(const KConfigGroup& config);
+    virtual ~SimplestImageHostingServer();
+
+    virtual void post(const QString& content);
+
+    void finish();
+    bool addFile(const QString& name,const QString& path);
+
+protected:
+    QByteArray m_buffer;
+    QByteArray m_boundary;
+
+public slots:
+    void readKIOData(KIO::Job *job, const QByteArray &data);
+
+private:
+    bool m_finished;
+};
 
 #endif

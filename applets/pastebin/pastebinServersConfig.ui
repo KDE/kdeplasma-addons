@@ -2,14 +2,25 @@
 <ui version="4.0">
  <class>pastebinServersConfig</class>
  <widget class="QWidget" name="pastebinServersConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>338</width>
+    <height>164</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Pastebin Server Config Dialog</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="pastebincaLabel">
      <property name="text">
       <string>Pastebin.ca:</string>
+     </property>
+     <property name="buddy">
+      <cstring>pastebinca</cstring>
      </property>
     </widget>
    </item>
@@ -17,9 +28,12 @@
     <widget class="KLineEdit" name="pastebinca"/>
    </item>
    <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="pastebincomLabel">
      <property name="text">
       <string>Pastebin.com:</string>
+     </property>
+     <property name="buddy">
+      <cstring>pastebincom</cstring>
      </property>
     </widget>
    </item>
@@ -27,9 +41,12 @@
     <widget class="KLineEdit" name="pastebincom"/>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="imagebincaLabel">
      <property name="text">
       <string>Imagebin.ca:</string>
+     </property>
+     <property name="buddy">
+      <cstring>imagebinca</cstring>
      </property>
     </widget>
    </item>
@@ -37,14 +54,30 @@
     <widget class="KLineEdit" name="imagebinca"/>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="imageshackLabel">
      <property name="text">
       <string>ImageShack.us:</string>
+     </property>
+     <property name="buddy">
+      <cstring>imageshack</cstring>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
     <widget class="KLineEdit" name="imageshack"/>
+   </item>
+   <item row="4" column="1">
+    <widget class="KLineEdit" name="simplestimagehosting"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="simplestimagehostingLbel">
+     <property name="text">
+      <string>Simplest-Image-Hosting.net</string>
+     </property>
+     <property name="buddy">
+      <cstring>simplestimagehosting</cstring>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

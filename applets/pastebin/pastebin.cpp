@@ -94,6 +94,10 @@ void Pastebin::setImageServer(int backend)
     case Pastebin::IMAGESHACK:
         m_imageServer = static_cast<ImageshackServer*>(new ImageshackServer(config()));
         break;
+
+    case Pastebin::SIMPLESTIMAGEHOSTING:
+        m_imageServer = static_cast<SimplestImageHostingServer*>(new SimplestImageHostingServer(config()));
+        break;
     }
 
     m_imageBackend = backend;
@@ -461,6 +465,9 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 
     QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
     uiServers.imageshack->setText(imageshackURL);
+
+    QString simplestimagehostingURL = cg.readEntry("simplestimagehosting", "http://api.simplest-image-hosting.net");
+    uiServers.simplestimagehosting->setText(simplestimagehostingURL);
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
 

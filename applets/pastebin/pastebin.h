@@ -57,7 +57,7 @@ public:
     void constraintsEvent(Plasma::Constraints constraints);
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
-    enum imageServers { IMAGEBINCA, IMAGESHACK };
+    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING };
 
     enum InteractionState { /* What is the user doing, used for visual feedback on user actions */
         Off = 0,            /* Not set */
