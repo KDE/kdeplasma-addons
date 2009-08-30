@@ -253,7 +253,7 @@ void Pastebin::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & (Plasma::FormFactorConstraint | Plasma::SizeConstraint)) {
         int minSize = KGlobalSettings::smallestReadableFont().pointSize();
-        int dynSize = qMax(1.0, qMin(contentsRect().width(), contentsRect().height()) / 4);
+        int dynSize = qMax((qreal)1.0, (qreal)(qMin(contentsRect().width(), contentsRect().height()) / 4));
         //kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
         m_font.setPointSize(qMax(minSize, dynSize));
     }
