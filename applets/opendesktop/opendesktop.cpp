@@ -95,7 +95,7 @@ void OpenDesktop::init()
     m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
     m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
-    m_geolocation->distance = cg.readEntry("geoDistance", 5);
+    m_geolocation->distance = cg.readEntry("geoDistance", 1);
     m_maximumItems = cg.readEntry("maximumItems", 64);
     dataEngine("ocs")->connectSource("MaximumItems-" + QString::number(m_maximumItems), this);
     if (!id) {
