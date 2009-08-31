@@ -108,7 +108,6 @@ void OpenDesktop::init()
     }
     m_username = cg.readEntry("username", QString());
     m_displayedUser = m_username;
-    resize(420, 420);
 
     if (m_username.isEmpty()) {
         setConfigurationRequired(true);
