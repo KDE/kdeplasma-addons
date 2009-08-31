@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Pastebin engine
+Comment=Engine to paste text and images to servers
+Type=Service
+ 
+X-KDE-ServiceTypes=Plasma/DataEngine
+X-KDE-Library=plasma_engine_pastebin
+X-Plasma-EngineName=pastebin
+X-KDE-PluginInfo-Author=Artur de Souza
+X-KDE-PluginInfo-Email=asouza@kde.org
+X-KDE-PluginInfo-Name=pastebin
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true

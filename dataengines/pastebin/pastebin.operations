@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="text">
+        <entry name="server" type="String">
+            <label>The server address</label>
+        </entry>
+        <entry name="fileName" type="String">
+            <label>The file to send to server</label>
+        </entry>
+        <entry name="backend" type="int">
+            <label>The backend to be used</label>
+        </entry>
+    </group>
+    <group name="image">
+        <entry name="server" type="String">
+            <label>The server address</label>
+        </entry>
+        <entry name="fileName" type="String">
+            <label>The file to send to server</label>
+        </entry>
+        <entry name="privacy" type="bool">
+            <label>If the file should be private or not</label>
+        </entry>
+    </group>
+</kcfg>
