@@ -52,7 +52,7 @@ public:
         unitMap["kPa"] = WeatherUtils::Kilopascals;
         unitMap["mbar"] = WeatherUtils::Millibars;
         unitMap["inHg"] = WeatherUtils::InchesHG;
-        unitMap["ms"] = WeatherUtils::MetersPerSecond;
+        unitMap["m/s"] = WeatherUtils::MetersPerSecond;
         unitMap["km/h"] = WeatherUtils::KilometersPerHour;
         unitMap["mph"] = WeatherUtils::MilesPerHour;
         unitMap["kt"] = WeatherUtils::Knots;
@@ -211,7 +211,7 @@ void WeatherPopupApplet::init()
 
     if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
         d->temperatureUnit = cfg.readEntry("temperatureUnit", "C");
-        d->speedUnit = cfg.readEntry("speedUnit", "ms");
+        d->speedUnit = cfg.readEntry("speedUnit", "m/s");
         d->pressureUnit = cfg.readEntry("pressureUnit", "hPa");
         d->visibilityUnit = cfg.readEntry("visibilityUnit", "km");
     } else {
