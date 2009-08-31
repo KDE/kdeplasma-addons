@@ -48,16 +48,11 @@ public:
 
     void init();
     QList<QAction*> contextualActions();
-    void setTextServer(int backend);
-    void setImageServer(int backend);
     void setHistorySize(int max);
 
     void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                         const QRect &contents);
     void constraintsEvent(Plasma::Constraints constraints);
-
-    enum textServers { PASTEBINCA, PASTEBINCOM };
-    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING };
 
     enum InteractionState { /* What is the user doing, used for visual feedback on user actions */
         Off = 0,            /* Not set */
@@ -79,6 +74,7 @@ public:
 
 public slots:
     void configAccepted();
+    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
 protected slots:
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
@@ -131,12 +127,12 @@ private:
     KIcon* m_icon;
 
     Plasma::ToolTipContent toolTipData;
-    PastebinServer *m_textServer;
-    PastebinServer *m_imageServer;
     QString m_url;
 
     int m_textBackend;
     int m_imageBackend;
+    int m_imagePrivacy;
+    QString m_server;
 
     QTimer *timer;
 
@@ -147,9 +143,6 @@ private:
     KAction *m_paste;
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
-
-    // to handle request to tinyUrl
-    QNetworkAccessManager *manager;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;

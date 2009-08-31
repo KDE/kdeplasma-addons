@@ -20,6 +20,22 @@
 
 #include "pastebin.h"
 
+#include <KConfigDialog>
+#include <KStandardAction>
+#include <KToolInvocation>
+#include <KNotification>
+#include <KAction>
+
+#include <kmimetype.h>
+#include <KTemporaryFile>
+
+
+#include <kio/global.h>
+#include <kio/job.h>
+
+#include <Plasma/Theme>
+#include <Plasma/Service>
+
 #include <QApplication>
 #include <QClipboard>
 #include <QGraphicsLinearLayout>
@@ -31,27 +47,12 @@
 #include <QPaintEngine>
 #include <QSignalMapper>
 
-#include <KDebug>
-#include <KLocale>
-#include <KConfigDialog>
-#include <KStandardAction>
-#include <KToolInvocation>
-#include <KNotification>
-#include <KAction>
-
-#include <kmimetype.h>
-#include <ktemporaryfile.h>
-
-#include <kio/global.h>
-#include <kio/job.h>
-
-#include <Plasma/Theme>
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_textServer(0),
-    m_imageServer(0), m_textBackend(0), m_imageBackend(0),
-    m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-    m_topSeparator(0), m_bottomSeparator(0)
+    : Plasma::Applet(parent, args),
+      m_textBackend(0), m_imageBackend(0), m_imagePrivacy(0),
+      m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
+      m_topSeparator(0), m_bottomSeparator(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -63,6 +64,10 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 
     connect(m_signalMapper, SIGNAL(mapped(const QString &)),
              this, SLOT(copyToClipboard(const QString &)));
+
+    Plasma::DataEngine *engine = dataEngine("pastebin");
+    engine->connectSource("result", this);
+    engine->connectSource("error", this);
 }
 
 Pastebin::~Pastebin()
@@ -81,52 +86,21 @@ Pastebin::~Pastebin()
     cg.writeEntry("History", history);
 }
 
-void Pastebin::setImageServer(int backend)
+void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    delete m_imageServer;
-
-    switch(backend) {
-
-    case Pastebin::IMAGEBINCA:
-        m_imageServer = new ImagebinCAServer(config());
-        break;
-
-    case Pastebin::IMAGESHACK:
-        m_imageServer = new ImageshackServer(config());
-        break;
-
-    case Pastebin::SIMPLESTIMAGEHOSTING:
-        m_imageServer = new SimplestImageHostingServer(config());
-        break;
+    // initialization of data
+    if (data["result"].toString().isEmpty() && data["error"].toString().isEmpty()) {
+        return;
     }
 
-    m_imageBackend = backend;
-    connect(m_imageServer, SIGNAL(postFinished(QString)),
-            this, SLOT(showResults(QString)));
-    connect(m_imageServer, SIGNAL(postError()),
-            this, SLOT(showErrors()));
-}
+    const QString msg(data[sourceName].toString());
 
-void Pastebin::setTextServer(int backend)
-{
-    delete m_textServer;
-
-    switch(backend) {
-
-    case Pastebin::PASTEBINCA:
-        m_textServer = new PastebinCAServer(config());
-        break;
-
-    case Pastebin::PASTEBINCOM:
-        m_textServer = new PastebinCOMServer(config());
-        break;
+    if (sourceName == "result") {
+        const QString result(data["result"].toString());
+        showResults(msg);
+    } else {
+        showErrors();
     }
-
-    m_textBackend = backend;
-    connect(m_textServer, SIGNAL(postFinished(QString)),
-            this, SLOT(showResults(QString)));
-    connect(m_textServer, SIGNAL(postError()),
-            this, SLOT(showErrors()));
 }
 
 void Pastebin::setHistorySize(int max)
@@ -144,17 +118,18 @@ void Pastebin::setHistorySize(int max)
 void Pastebin::init()
 {
     KConfigGroup cg = config();
-    int textBackend = cg.readEntry("TextBackend", "0").toInt();
-    int imageBackend = cg.readEntry("ImageBackend", "0").toInt();
+
+    m_textBackend = cg.readEntry("TextBackend", "0").toInt();
+    m_imageBackend = cg.readEntry("ImageBackend", "0").toInt();
+    m_imagePrivacy = cg.readEntry("imagePrivacy", "0").toInt();
     int historySize = cg.readEntry("HistorySize", "3").toInt();
+
     QStringList history = cg.readEntry("History", "").split("|", QString::SkipEmptyParts);
 
     for (int i = 0; i < history.size(); ++i) {
         addToHistory(history.at(i));
     }
 
-    setTextServer(textBackend);
-    setImageServer(imageBackend);
     setHistorySize(historySize);
 
     setActionState(Idle);
@@ -471,38 +446,41 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
 
-    int imagebinPrivacy = cg.readEntry("imagebinPrivacy", 0);
-    uiConfig.imagebinPrivacy->setCurrentIndex(imagebinPrivacy);
+    int imagePrivacy = cg.readEntry("imagePrivacy", 0);
+    uiConfig.imagePrivacy->setCurrentIndex(imagePrivacy);
 
 }
 
 void Pastebin::configAccepted()
 {
     KConfigGroup cg = config();
-    int textBackend = uiConfig.textServer->currentIndex();
-    int imageBackend = uiConfig.imageServer->currentIndex();
+    m_textBackend = uiConfig.textServer->currentIndex();
+    m_imageBackend = uiConfig.imageServer->currentIndex();
+    m_imagePrivacy = uiConfig.imagePrivacy->currentIndex();
+
     int historySize = uiConfig.historySize->value();
 
     QString pastebincaURL = uiServers.pastebinca->text();
     QString pastebincomURL = uiServers.pastebincom->text();
     QString imagebincaURL = uiServers.imagebinca->text();
     QString imageshackURL = uiServers.imageshack->text();
+    QString simplestimagehostingURL = uiServers.simplestimagehosting->text();
 
-    int imagebinPrivacy = uiConfig.imagebinPrivacy->currentIndex();
-
-    cg.writeEntry("TextBackend", textBackend);
-    cg.writeEntry("ImageBackend", imageBackend);
+    cg.writeEntry("TextBackend", m_textBackend);
+    cg.writeEntry("ImageBackend", m_imageBackend);
+    cg.writeEntry("imagePrivacy", m_imagePrivacy);
     cg.writeEntry("HistorySize", historySize);
 
+    // write text and image servers based on backend
+
+    // save all address
     cg.writeEntry("pastebinca", pastebincaURL);
     cg.writeEntry("pastebincom", pastebincomURL);
     cg.writeEntry("imagebinca", imagebincaURL);
     cg.writeEntry("imageshack", imageshackURL);
+    cg.writeEntry("simplestimagehosting", simplestimagehostingURL);
 
-    cg.writeEntry("imagebinPrivacy", imagebinPrivacy);
 
-    setTextServer(textBackend);
-    setImageServer(imageBackend);
     setHistorySize(historySize);
     emit configNeedsSaving();
 }
@@ -676,7 +654,6 @@ QList<QAction*> Pastebin::contextualActions()
 
     m_contextualActions.append(m_paste);
     m_contextualActions.append(m_topSeparator);
-
     m_contextualActions.append(m_actionHistory);
 
     if (!m_actionHistory.isEmpty()) {
@@ -722,14 +699,10 @@ void Pastebin::processTinyUrl(QNetworkReply *reply)
 
 void Pastebin::postContent(QString text, QImage imageData)
 {
-    bool image = false;
-    bool validPath = false;
-
-    setActionState(Sending);
-    timer->start(20000);
-
     KUrl testPath(text);
-    validPath = QFile::exists(testPath.toLocalFile());
+    bool validPath = QFile::exists(testPath.toLocalFile());
+    bool image = false;
+
 
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
@@ -740,57 +713,48 @@ void Pastebin::postContent(QString text, QImage imageData)
     } else {
         if (!imageData.isNull()) {
             image = true;
-        }
-    }
 
-    if (!image) {
-        if (validPath) {
-            QFile file(testPath.toLocalFile());
-            file.open(QIODevice::ReadOnly);
-            QTextStream in(&file);
-            text = in.readAll();
-        } else if (testPath.scheme().toLower() == QString("http")) {
-            // lets make use of tiny url ;)
-            QString tinyUrl = QString("http://tinyurl.com/api-create.php?url=%1").arg(testPath.prettyUrl());
-            manager = new QNetworkAccessManager(this);
-            connect(manager, SIGNAL(finished(QNetworkReply*)),
-                    this, SLOT(processTinyUrl(QNetworkReply*)));
-            manager->get(QNetworkRequest(tinyUrl));
-            return;
-        }
-
-        // upload text
-        m_textServer->post(text);
-    } else {
-        //upload image
-        if (validPath) {
-            m_imageServer->post(testPath.toLocalFile());
-        } else {
             KTemporaryFile tempFile;
             if (tempFile.open()) {
                 tempFile.setAutoRemove(false);
 
                 QDataStream stream(&tempFile);
-
                 QByteArray data;
                 QBuffer buffer(&data);
+
                 buffer.open(QIODevice::ReadWrite);
-
-                QImage image = imageData;
-                image.save(&buffer, "JPEG");
+                imageData.save(&buffer, "JPEG");
                 stream.writeRawData(data, data.size());
-
-                KUrl t(tempFile.fileName());
                 tempFile.close();
 
-                m_imageServer->post(t.path());
-
+                text = tempFile.fileName();
             } else {
                 setActionState(IdleError);
-                timer->stop();
+                return;
             }
         }
     }
+
+    if (!image) {
+        Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
+        KConfigGroup ops = service->operationDescription("text");
+        ops.writeEntry("server", "");
+        ops.writeEntry("fileName", text);
+        ops.writeEntry("backend", m_textBackend);
+        service->startOperationCall(ops);
+    } else {
+        Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
+        KConfigGroup ops = service->operationDescription("image");
+        ops.writeEntry("server", "");
+        ops.writeEntry("fileName", text);
+        ops.writeEntry("privacy", m_imagePrivacy);
+        ops.writeEntry("backend", m_imageBackend);
+
+        service->startOperationCall(ops);
+    }
+
+    setActionState(Sending);
+    timer->start(20000);
 }
 
 
