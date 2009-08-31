@@ -25,11 +25,14 @@
 ContactList::ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     : ScrollWidget(parent),
       m_engine(engine),
-      m_limit(20)
+      m_limit(20),
+      m_friends(engine)
 {
     m_container = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
     setWidget(m_container);
+    connect(&m_friends, SIGNAL(friendAdded(QString)), SLOT(friendAdded(QString)));
+    connect(&m_friends, SIGNAL(friendRemoved(QString)), SLOT(friendRemoved(QString)));
 }
 
 
@@ -51,6 +54,12 @@ void ContactList::setQuery(const QString& query)
             dataUpdated(m_query, m_engine->query(m_query));
         }
     }
+}
+
+
+void ContactList::setOwnId(const QString& id)
+{
+    m_friends.setRelativeTo(id);
 }
 
 
@@ -82,14 +91,17 @@ void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::D
         widget->deleteLater();
     }
     m_mapping.clear();
+    m_idToWidget.clear();
 
     QStringList::iterator j = displayedContacts.begin();
     for (int i = 0; i < displayedContacts.size(); ++i, ++j) {
         ContactWidget* widget;
         widget = new ContactWidget(m_engine, m_container);
         widget->setId(*j);
+        widget->setIsFriend(m_friends.contains(*j));
         m_layout->addItem(widget);
         m_mapping.insert(widget, *j);
+        m_idToWidget.insert(*j, widget);
         connect(widget, SIGNAL(addFriend()), SLOT(addFriend()));
         connect(widget, SIGNAL(sendMessage()), SLOT(sendMessage()));
         connect(widget, SIGNAL(showDetails()), SLOT(showDetails()));
@@ -131,6 +143,22 @@ void ContactList::showDetails()
 {
     ContactWidget* widget = static_cast<ContactWidget*>(sender());
     emit showDetails(m_mapping[widget]);
+}
+
+
+void ContactList::friendAdded(const QString& id)
+{
+    if (m_idToWidget.contains(id)) {
+        m_idToWidget[id]->setIsFriend(true);
+    }
+}
+
+
+void ContactList::friendRemoved(const QString& id)
+{
+    if (m_idToWidget.contains(id)) {
+        m_idToWidget[id]->setIsFriend(false);
+    }
 }
 
 

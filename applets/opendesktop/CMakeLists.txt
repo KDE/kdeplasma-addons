@@ -2,6 +2,8 @@ project(plasma-opendesktop)
 
 
 set(opendesktop_SRCS
+    friendwatchlist.cpp
+    sourcewatchlist.cpp
     activitylist.cpp
     utils.cpp
     sendmessagewidget.cpp

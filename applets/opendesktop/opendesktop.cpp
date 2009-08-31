@@ -114,6 +114,8 @@ void OpenDesktop::init()
         connectGeolocation();
     }
     switchDisplayedUser(m_username, false);
+    m_friendList->setOwnId(m_username);
+    m_nearList->setOwnId(m_username);
 }
 
 void OpenDesktop::connectGeolocation()
@@ -279,6 +281,8 @@ void OpenDesktop::configAccepted()
     if (m_username != cuser) {
         m_username = cuser;
         switchDisplayedUser(m_username);
+        m_friendList->setOwnId(m_username);
+        m_nearList->setOwnId(m_username);
         if (!m_username.isEmpty()) {
             connectGeolocation();
         }

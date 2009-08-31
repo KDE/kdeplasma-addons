@@ -29,6 +29,8 @@
 #include <Plasma/ScrollWidget>
 
 #include "contactwidget.h"
+#include "friendwatchlist.h"
+
 
 /**
  * The ContactList class provides a Plasma widget for displaying lists of contactwidget
@@ -64,6 +66,12 @@ class ContactList : public Plasma::ScrollWidget
         void setLimit(int limit);
 
         /**
+         * Sets the id of the user (i.e. the id that is taken into account when computing friendships)
+         * @param id the new id
+         */
+        void setOwnId(const QString& id);
+
+        /**
          * Sets the query whose results should be displayed
          * @param query a source of the data engine that can be interpreted as a list of contacts (where each person is identified by a Person-[id] key)
          */
@@ -93,6 +101,8 @@ class ContactList : public Plasma::ScrollWidget
         void addFriend();
         void sendMessage();
         void showDetails();
+        void friendAdded( const QString& id);
+        void friendRemoved(const QString& id);
 
     private:
         QStringList getDisplayedContacts(const Plasma::DataEngine::Data& data);
@@ -101,8 +111,10 @@ class ContactList : public Plasma::ScrollWidget
         Plasma::DataEngine* m_engine;
         QGraphicsLinearLayout* m_layout;
         int m_limit;
+        QHash<QString, ContactWidget*> m_idToWidget;
         QHash<ContactWidget*, QString> m_mapping;
         QString m_query;
+        FriendWatchList m_friends;
 };
 
 
