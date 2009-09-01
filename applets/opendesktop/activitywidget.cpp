@@ -78,7 +78,14 @@ void ActivityWidget::setPixmap(const QPixmap &pixmap)
 void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
 {
     m_atticaData = data;
-    m_messageLabel->setText(i18n("<b>%1:</b><br />%2", data.value("user").toString(), data.value("message").toString()));
+    const QString user = data.value("user").toString();
+    const QString message = data.value("message").toString();
+    if (!message.startsWith(user)) {
+        m_messageLabel->setText(i18n("%1: <i>%2</i>", user, message));
+    } else {
+        m_messageLabel->setText(message);
+    }
+
     updateActions();
 }
 
