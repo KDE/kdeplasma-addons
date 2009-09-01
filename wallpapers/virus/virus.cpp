@@ -156,7 +156,8 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     }
     connect(m_uiVirus.m_resizeMethod, SIGNAL(currentIndexChanged(int)),
             this, SLOT(positioningChanged(int)));
-
+    m_uiVirus.m_newStuff->setIcon(KIcon("get-hot-new-stuff"));
+   
     m_uiVirus.m_color->setColor(m_color);
     connect(m_uiVirus.m_color, SIGNAL(changed(const QColor&)), this, SLOT(colorChanged(const QColor&)));
 

@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>592</width>
-    <height>282</height>
+    <height>400</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="margin">
     <number>0</number>
    </property>
-   <item row="8" column="1" colspan="2">
+   <item row="8" column="2" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <spacer name="horizontalSpacer">
@@ -51,7 +51,7 @@
      </item>
     </layout>
    </item>
-   <item row="13" column="1">
+   <item row="13" column="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -64,7 +64,7 @@
      </property>
     </spacer>
    </item>
-   <item row="9" column="1">
+   <item row="9" column="2">
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="1" column="2">
       <spacer name="horizontalSpacer_3">
@@ -229,7 +229,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1" colspan="2">
+   <item row="6" column="2" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="KColorButton" name="m_color">
@@ -239,14 +239,14 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="color" stdset="0">
+       <property name="color">
         <color>
          <red>70</red>
          <green>90</green>
          <blue>130</blue>
         </color>
        </property>
-       <property name="defaultColor" stdset="0">
+       <property name="defaultColor">
         <color>
          <red>70</red>
          <green>90</green>
@@ -270,9 +270,6 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="1">
-    <widget class="QListView" name="m_view"/>
-   </item>
    <item row="6" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
@@ -286,10 +283,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="KComboBox" name="m_resizeMethod" native="true">
+      <widget class="KComboBox" name="m_resizeMethod">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -319,14 +316,12 @@
      </item>
     </layout>
    </item>
+   <item row="7" column="0" colspan="3">
+    <widget class="QListView" name="m_view"/>
+   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
@@ -334,8 +329,13 @@
   </customwidget>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QWidget</extends>
+   <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
