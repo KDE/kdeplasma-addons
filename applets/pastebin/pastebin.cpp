@@ -498,6 +498,7 @@ void Pastebin::showResults(const QString &url)
 void Pastebin::copyToClipboard(const QString &url)
 {
     QApplication::clipboard()->setText(url);
+    QApplication::clipboard()->setText(url, QClipboard::Selection);
     kDebug() << "Copying:" << url;
     QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
 
