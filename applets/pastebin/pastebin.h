@@ -20,7 +20,6 @@
 #ifndef PASTEBIN_H
 #define PASTEBIN_H
 
-#include "backends/backends.h"
 #include "ui_pastebinConfig.h"
 #include "ui_pastebinServersConfig.h"
 
@@ -29,6 +28,7 @@
 
 #include <Plasma/Applet>
 #include <Plasma/Label>
+
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
 
@@ -83,7 +83,6 @@ protected slots:
     void showErrors();
     void openLink();
     void postClipboard();
-    void processTinyUrl(QNetworkReply *reply);
 
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);

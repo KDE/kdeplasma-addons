@@ -6,111 +6,257 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>126</height>
+    <width>332</width>
+    <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Pastebin Config Dialog</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <widget class="QLabel" name="textServerLabel">
-     <property name="text">
-      <string>Pastebin server:</string>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
      </property>
-     <property name="buddy">
-      <cstring>textServer</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="KComboBox" name="textServer">
-     <item>
-      <property name="text">
-       <string>Pastebin.ca</string>
-      </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="textServerLabel">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Pastebin server:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>textServer</cstring>
+       </property>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>Pastebin.com</string>
-      </property>
+     <item row="0" column="1">
+      <widget class="KComboBox" name="textServer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>130</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>Pastebin.ca</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Pastebin.com</string>
+        </property>
+       </item>
+      </widget>
      </item>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="imageServerLabel">
-     <property name="text">
-      <string>Imagebin server:</string>
-     </property>
-     <property name="buddy">
-      <cstring>imageServer</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="KComboBox" name="imageServer">
-     <item>
-      <property name="text">
-       <string>Imagebin.ca</string>
-      </property>
+     <item row="1" column="0">
+      <widget class="QLabel" name="imageServerLabel">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Imagebin server:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>imageServer</cstring>
+       </property>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>Imageshack.us</string>
-      </property>
+     <item row="1" column="1">
+      <widget class="KComboBox" name="imageServer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>130</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>Imagebin.ca</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Imageshack.us</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Simplest-Image-Hosting.net</string>
+        </property>
+       </item>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>Simplest-Image-Hosting.net</string>
-      </property>
+     <item row="2" column="0">
+      <widget class="QLabel" name="historySizeLabel">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>History size:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>historySize</cstring>
+       </property>
+      </widget>
      </item>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="historySizeLabel">
-     <property name="text">
-      <string>History size:</string>
-     </property>
-     <property name="buddy">
-      <cstring>historySize</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="KIntSpinBox" name="historySize">
-     <property name="value">
-      <number>3</number>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="imagePrivacyLabel">
-     <property name="text">
-      <string>Make Imagebin images:</string>
-     </property>
-     <property name="buddy">
-      <cstring>imagePrivacy</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="KComboBox" name="imagePrivacy">
-     <item>
-      <property name="text">
-       <string>Public</string>
-      </property>
+     <item row="2" column="1">
+      <widget class="KIntSpinBox" name="historySize">
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="value">
+        <number>3</number>
+       </property>
+      </widget>
      </item>
-     <item>
-      <property name="text">
-       <string>Private</string>
-      </property>
+     <item row="3" column="0">
+      <widget class="QLabel" name="imagePrivacyLabel">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Make Imagebin images:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>imagePrivacy</cstring>
+       </property>
+      </widget>
      </item>
-    </widget>
+     <item row="3" column="1">
+      <widget class="KComboBox" name="imagePrivacy">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>Public</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Private</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="KIconButton" name="editTextServer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>32</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="icon">
+        <string>document-edit</string>
+       </property>
+       <property name="iconSize">
+        <number>16</number>
+       </property>
+       <property name="strictIconSize">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="KIconButton" name="editImageServer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>32</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="icon">
+        <string>document-edit</string>
+       </property>
+       <property name="iconSize">
+        <number>16</number>
+       </property>
+       <property name="strictIconSize">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>

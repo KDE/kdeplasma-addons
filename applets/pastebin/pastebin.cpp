@@ -425,24 +425,24 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.imageServer->setCurrentIndex(m_imageBackend);
     uiConfig.historySize->setValue(m_historySize);
 
-    QWidget *servers = new QWidget();
-    uiServers.setupUi(servers);
-    parent->addPage(servers, i18n("Servers"), Applet::icon());
+//     QWidget *servers = new QWidget();
+//     uiServers.setupUi(servers);
+//     parent->addPage(servers, i18n("Servers"), Applet::icon());
 
-    QString pastebincaURL = cg.readEntry("pastebinca", "http://pastebin.ca");
-    uiServers.pastebinca->setText(pastebincaURL);
+//     QString pastebincaURL = cg.readEntry("pastebinca", "http://pastebin.ca");
+//     uiServers.pastebinca->setText(pastebincaURL);
 
-    QString pastebincomURL = cg.readEntry("pastebincom", "http://pastebin.com");
-    uiServers.pastebincom->setText(pastebincomURL);
+//     QString pastebincomURL = cg.readEntry("pastebincom", "http://pastebin.com");
+//     uiServers.pastebincom->setText(pastebincomURL);
 
-    QString imagebincaURL = cg.readEntry("imagebinca", "http://imagebin.ca");
-    uiServers.imagebinca->setText(imagebincaURL);
+//     QString imagebincaURL = cg.readEntry("imagebinca", "http://imagebin.ca");
+//     uiServers.imagebinca->setText(imagebincaURL);
 
-    QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
-    uiServers.imageshack->setText(imageshackURL);
+//     QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
+//     uiServers.imageshack->setText(imageshackURL);
 
-    QString simplestimagehostingURL = cg.readEntry("simplestimagehosting", "http://api.simplest-image-hosting.net");
-    uiServers.simplestimagehosting->setText(simplestimagehostingURL);
+//     QString simplestimagehostingURL = cg.readEntry("simplestimagehosting", "http://api.simplest-image-hosting.net");
+//     uiServers.simplestimagehosting->setText(simplestimagehostingURL);
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
 
@@ -460,25 +460,25 @@ void Pastebin::configAccepted()
 
     int historySize = uiConfig.historySize->value();
 
-    QString pastebincaURL = uiServers.pastebinca->text();
-    QString pastebincomURL = uiServers.pastebincom->text();
-    QString imagebincaURL = uiServers.imagebinca->text();
-    QString imageshackURL = uiServers.imageshack->text();
-    QString simplestimagehostingURL = uiServers.simplestimagehosting->text();
+//     QString pastebincaURL = uiServers.pastebinca->text();
+//     QString pastebincomURL = uiServers.pastebincom->text();
+//     QString imagebincaURL = uiServers.imagebinca->text();
+//     QString imageshackURL = uiServers.imageshack->text();
+//     QString simplestimagehostingURL = uiServers.simplestimagehosting->text();
 
     cg.writeEntry("TextBackend", m_textBackend);
     cg.writeEntry("ImageBackend", m_imageBackend);
     cg.writeEntry("imagePrivacy", m_imagePrivacy);
     cg.writeEntry("HistorySize", historySize);
 
-    // write text and image servers based on backend
+//     // write text and image servers based on backend
 
-    // save all address
-    cg.writeEntry("pastebinca", pastebincaURL);
-    cg.writeEntry("pastebincom", pastebincomURL);
-    cg.writeEntry("imagebinca", imagebincaURL);
-    cg.writeEntry("imageshack", imageshackURL);
-    cg.writeEntry("simplestimagehosting", simplestimagehostingURL);
+//     // save all address
+//     cg.writeEntry("pastebinca", pastebincaURL);
+//     cg.writeEntry("pastebincom", pastebincomURL);
+//     cg.writeEntry("imagebinca", imagebincaURL);
+//     cg.writeEntry("imageshack", imageshackURL);
+//     cg.writeEntry("simplestimagehosting", simplestimagehostingURL);
 
 
     setHistorySize(historySize);
@@ -681,20 +681,6 @@ void Pastebin::postClipboard()
 #else
     postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
 #endif //Q_WS_WIN
-}
-
-void Pastebin::processTinyUrl(QNetworkReply *reply)
-{
-    QByteArray dataRaw(reply->readAll());
-    QString data(dataRaw);
-
-    if (data.isEmpty() || !data.contains("tinyurl.com")) {
-        // couldn't find url
-        showErrors();
-        return;
-    }
-
-    showResults(data);
 }
 
 void Pastebin::postContent(QString text, QImage imageData)
