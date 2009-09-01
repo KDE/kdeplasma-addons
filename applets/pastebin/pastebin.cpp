@@ -551,7 +551,8 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
                 postContent(QApplication::clipboard()->mimeData()->text(), image);
             };
 #else
-            postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
+            QClipboard::Mode mode = QApplication::clipboard()->supportsSelection() ? QClipboard::Selection : QClipboard::Clipboard;
+            postContent(QApplication::clipboard()->text(mode), QApplication::clipboard()->image(mode));
 #endif //Q_WS_WIN
         } else {
             // Now releasing the middlebutton click copies to clipboard
