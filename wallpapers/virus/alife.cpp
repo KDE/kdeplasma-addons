@@ -27,7 +27,6 @@ Alife::Alife(){
 }
 
 Alife::~Alife(){
-    mutex.unlock();
     resetLife();
 }
 
