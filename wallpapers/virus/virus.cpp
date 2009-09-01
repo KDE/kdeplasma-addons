@@ -137,7 +137,7 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
             fillMetaInfo(b);
         }
     }
-    connect(m_uiVirus.m_view, SIGNAL(currentIndexChanged(int)), this, SLOT(pictureChanged(int)));
+    connect(m_uiVirus.m_view, SIGNAL(activated(const QModelIndex &)), this, SLOT(pictureChanged(const QModelIndex &)));
 
     m_uiVirus.m_pictureUrlButton->setIcon(KIcon("document-open"));
     connect(m_uiVirus.m_pictureUrlButton, SIGNAL(clicked()), this, SLOT(showFileDialog()));
