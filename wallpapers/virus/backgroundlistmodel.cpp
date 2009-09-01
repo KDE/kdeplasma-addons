@@ -9,10 +9,10 @@
 
 #include "backgroundlistmodel.h"
 
-#include <QCoreApplication>
 #include <QFile>
 #include <QDir>
 
+#include <KDebug>
 #include <KFileMetaInfo>
 #include <KGlobal>
 #include <KIO/PreviewJob>
@@ -25,22 +25,30 @@
 #include "backgrounddelegate.h"
 #include "virus.h"
 
-BackgroundListModel::BackgroundListModel(float ratio, Plasma::Wallpaper *listener)
-    : m_listener(listener),
+BackgroundListModel::BackgroundListModel(float ratio, Plasma::Wallpaper *listener, QObject *parent)
+    : QAbstractListModel(parent),
+      m_listener(listener),
       m_structureParent(listener),
       m_ratio(ratio),
       m_size(0,0),
       m_resizeMethod(Plasma::Wallpaper::ScaledResize)
 {
-    connect(&m_dirwatch, SIGNAL(deleted(QString)), listener, SLOT(removeBackground(QString)));
+    connect(&m_dirwatch, SIGNAL(deleted(QString)), this, SLOT(removeBackground(QString)));
+}
+
+BackgroundListModel::~BackgroundListModel()
+{
+    qDeleteAll(m_packages);
 }
 
 void BackgroundListModel::removeBackground(const QString &path)
 {
-    int index;
-    while ((index = indexOf(path)) != -1) {
-        beginRemoveRows(QModelIndex(), index, index);
-        m_packages.removeAt(index);
+    QModelIndex index;
+    while ((index = indexOf(path)).isValid()) {
+        beginRemoveRows(QModelIndex(), index.row(), index.row());
+        Plasma::Package *package = m_packages.at(index.row());
+        m_packages.removeAt(index.row());
+        delete package;
         endRemoveRows();
     }
 }
@@ -50,10 +58,17 @@ void BackgroundListModel::reload()
     reload(QStringList());
 }
 
-void BackgroundListModel::reload(const QStringList& selected)
+void BackgroundListModel::reload(const QStringList &selected)
 {
-    QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", "");
+    const QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", "");
     QList<Plasma::Package *> tmp;
+
+    if (!m_packages.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_packages.count() - 1);
+        qDeleteAll(m_packages);
+        m_packages.clear();
+        endRemoveRows();
+    }
 
     foreach (const QString &file, selected) {
         if (!contains(file) && QFile::exists(file)) {
@@ -62,17 +77,14 @@ void BackgroundListModel::reload(const QStringList& selected)
     }
 
     {
-        KProgressDialog progressDialog;
-        initProgressDialog(&progressDialog);
-
-        foreach (const QString &dir, dirs) {
-            tmp += findAllBackgrounds(m_structureParent, this, dir, m_ratio, &progressDialog);
+        const QStringList backgrounds = findAllBackgrounds(m_structureParent, this, dirs);
+        foreach (const QString &background, backgrounds) {
+            tmp << new Plasma::Package(background, Plasma::Wallpaper::packageStructure(m_structureParent));
         }
     }
 
     // add new files to dirwatch
     foreach (Plasma::Package *b, tmp) {
-        //TODO: packages need to be added to the dir watch as well
         if (!m_dirwatch.contains(b->path())) {
             m_dirwatch.addFile(b->path());
         }
@@ -80,9 +92,14 @@ void BackgroundListModel::reload(const QStringList& selected)
 
     if (!tmp.isEmpty()) {
         beginInsertRows(QModelIndex(), 0, tmp.size() - 1);
-        m_packages = tmp + m_packages;
+        m_packages = tmp;
         endInsertRows();
     }
+}
+
+QStringList BackgroundFinder::papersFound() const
+{
+    return m_papersFound;
 }
 
 void BackgroundListModel::addBackground(const QString& path)
@@ -99,26 +116,30 @@ void BackgroundListModel::addBackground(const QString& path)
     }
 }
 
-int BackgroundListModel::indexOf(const QString &path) const
+QModelIndex BackgroundListModel::indexOf(const QString &path) const
 {
     for (int i = 0; i < m_packages.size(); i++) {
-        if (path.startsWith(m_packages[i]->path())) {
-            return i;
+        // packages will end with a '/', but the path passed in may not
+        QString package = m_packages[i]->path();
+        if (package.at(package.length() - 1) == '/') {
+            package.truncate(package.length() - 1);
+        }
+
+        if (path.startsWith(package)) {
+            // FIXME: ugly hack to make a difference between local files in the same dir
+            // package->path does not contain the actual file name
+            if ((!m_packages[i]->structure()->contentsPrefix().isEmpty()) ||
+                (path == m_packages[i]->filePath("preferred"))) {
+                return index(i, 0);
+            }
         }
     }
-    return -1;
+    return QModelIndex();
 }
 
 bool BackgroundListModel::contains(const QString &path) const
 {
-    return indexOf(path) != -1;
-}
-
-BackgroundListModel::~BackgroundListModel()
-{
-    foreach (Plasma::Package *pkg, m_packages) {
-        delete pkg;
-    }
+    return indexOf(path).isValid();
 }
 
 int BackgroundListModel::rowCount(const QModelIndex &) const
@@ -132,7 +153,7 @@ QSize BackgroundListModel::bestSize(Plasma::Package *package) const
         return m_sizeCache.value(package);
     }
 
-    QString image = package->filePath("preferred");
+    const QString image = package->filePath("preferred");
     if (image.isEmpty()) {
         return QSize();
     }
@@ -253,85 +274,102 @@ Plasma::Package* BackgroundListModel::package(int index) const
     return m_packages.at(index);
 }
 
-void BackgroundListModel::initProgressDialog(KProgressDialog *progress)
+QStringList BackgroundListModel::findAllBackgrounds(Plasma::Wallpaper *structureParent,
+                                                    const BackgroundListModel *container,
+                                                    const QStringList &p)
 {
+    //TODO: put this in a thread so that it can run in the background without blocking
+    QEventLoop localEventLoop;
+    BackgroundFinder finder(structureParent, container, p, &localEventLoop);
+    connect(&finder, SIGNAL(finished()), &localEventLoop, SLOT(quit()));
+    QTimer::singleShot(0, &finder, SLOT(start()));
+    localEventLoop.exec();
+    return finder.papersFound();
+}
+
+BackgroundFinder::BackgroundFinder(Plasma::Wallpaper *structureParent,
+                                   const BackgroundListModel *container,
+                                   const QStringList &paths,
+                                   QEventLoop *eventLoop)
+    : QObject(0),
+      m_structureParent(structureParent),
+      m_container(container),
+      m_paths(paths),
+      m_eventLoop(eventLoop)
+{
+}
+
+void BackgroundFinder::start()
+{
+    KProgressDialog *progress = new KProgressDialog;
     progress->setAllowCancel(false);
     progress->setModal(true);
     progress->setLabelText(i18n("Finding images for the wallpaper slideshow."));
     progress->progressBar()->setRange(0, 0);
-}
 
-QList<Plasma::Package *> BackgroundListModel::findAllBackgrounds(Plasma::Wallpaper *structureParent,
-                                                                 const BackgroundListModel *container,
-                                                                 const QString &path, float ratio,
-                                                                 KProgressDialog *progress)
-{
-    KProgressDialog *myProgress = 0;
-    if (!progress) {
-        myProgress = progress = new KProgressDialog;
-        initProgressDialog(myProgress);
-    }
+    QSet<QString> suffixes;
+    suffixes << "png" << "jpeg" << "jpg" << "svg" << "svgz";
 
-    //kDebug() << "looking for" << path;
-    QList<Plasma::Package *> res;
+    QDir dir;
+    dir.setFilter(QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::Readable);
 
-    // get all packages in this directory
-    //kDebug() << "getting packages";
-    QStringList packages = Plasma::Package::listInstalledPaths(path);
-    QSet<QString> validPackages;
-    foreach (const QString &packagePath, packages) {
-        QCoreApplication::processEvents();
-        progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
-                               i18n("Testing %1 for a Wallpaper package", packagePath));
-        Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(structureParent);
-        Plasma::Package *pkg = new Plasma::Package(path + packagePath, structure);
-        if (pkg->isValid() && (!container || !container->contains(pkg->path()))) {
-            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
-                                   i18n("Adding wallpaper package in %1", packagePath));
-            res.append(pkg);
-            //kDebug() << "    adding valid package:" << packagePath;
-            validPackages << packagePath;
-        } else {
-            delete pkg;
+    int count = 0;
+    int allCount = 0;
+    bool setLabel = true;
+    while (!m_paths.isEmpty()) {
+        QString path = m_paths.takeLast();
+        //kDebug() << "doing" << path;
+        dir.setPath(path);
+        const QFileInfoList files = dir.entryInfoList();
+        foreach (const QFileInfo &wp, files) {
+            if (wp.isDir()) {
+                //kDebug() << "directory" << wp.fileName() << validPackages.contains(wp.fileName());
+                QString name = wp.fileName();
+                if (name == "." || name == "..") {
+                    // do nothing
+                } else if(QFile::exists(wp.filePath() + "/metadata.desktop")) {
+                    Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(m_structureParent);
+                    Plasma::Package pkg(wp.filePath(), structure);
+
+                    if (pkg.isValid() && (!m_container || !m_container->contains(pkg.path()))) {
+                        if (setLabel) {
+                            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
+                                                   i18n("Adding wallpaper package in %1", name));
+                        }
+
+                        ++count;
+                        m_papersFound << pkg.path();
+                        //kDebug() << "gots a" << wp.filePath();
+                    } else {
+                        m_paths.append(wp.filePath());
+                    }
+                } else {
+                    m_paths.append(wp.filePath());
+                }
+            } else if (suffixes.contains(wp.suffix().toLower()) && (!m_container || !m_container->contains(wp.filePath()))) {
+                //kDebug() << "adding" << wp.filePath() << setLabel;
+                if (setLabel) {
+                    progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
+                                           i18n("Adding image %1", wp.filePath()));
+                    setLabel = false;
+                }
+                //kDebug() << "     adding image file" << wp.filePath();
+                ++count;
+                m_papersFound << wp.filePath();
+            }
+
+            ++allCount;
+            if (allCount % 10 == 0) {
+                m_eventLoop->processEvents(QEventLoop::ExcludeUserInputEvents);
+                if (progress->isVisible() && count % 10) {
+                    setLabel = true;
+                }
+            }
         }
     }
 
-    // search normal wallpapers
-    //kDebug() << "listing normal files";
-    QDir dir(path);
-    QStringList filters;
-    filters << "*.png" << "*.jpeg" << "*.jpg" << "*.svg" << "*.svgz";
-    dir.setNameFilters(filters);
-    dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
-    QFileInfoList files = dir.entryInfoList();
-    foreach (const QFileInfo &wp, files) {
-        QCoreApplication::processEvents();
-        if (!container || !container->contains(wp.filePath())) {
-            //kDebug() << "     adding image file" << wp.filePath();
-            progress->setLabelText(i18n("Finding images for the wallpaper slideshow.") + "\n\n" +
-                                   i18n("Adding image %1", wp.filePath()));
-            Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(structureParent);
-            res.append(new Plasma::Package(wp.filePath(), structure));
-        }
-    }
-
-    // now recurse the dirs, skipping ones we found packages in
-    //kDebug() << "recursing dirs";
-    dir.setFilter(QDir::AllDirs | QDir::Readable);
-    files = dir.entryInfoList();
-
-    foreach (const QFileInfo &wp, files) {
-        QCoreApplication::processEvents();
-        QString name = wp.fileName();
-        if (name != "." && name != ".." && !validPackages.contains(wp.fileName())) {
-            //kDebug() << "    " << name << wp.filePath();
-            res += findAllBackgrounds(structureParent, container, wp.filePath(), ratio, progress);
-        }
-    }
-
-    //kDebug() << "completed.";
-    delete myProgress;
-    return res;
+    delete progress;
+    emit finished();
 }
 
 void BackgroundListModel::setWallpaperSize(QSize size)

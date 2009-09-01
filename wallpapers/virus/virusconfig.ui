@@ -14,212 +14,7 @@
    <property name="margin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="minimumSize">
-      <size>
-       <width>75</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>&amp;Picture:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>m_view</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="KComboBox" name="m_view">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>1</horstretch>
-       <verstretch>1</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="3">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="m_authorLabel">
-       <property name="text">
-        <string>Author:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="m_authorLine">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="m_emailLabel">
-       <property name="text">
-        <string>Email:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="m_emailLine">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="m_licenseLabel">
-       <property name="text">
-        <string>License:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="m_licenseLine">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="minimumSize">
-      <size>
-       <width>125</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>P&amp;ositioning:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>m_resizeMethod</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="KComboBox" name="m_resizeMethod">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>187</width>
-         <height>17</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>&amp;Color:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>m_color</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="3">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="KColorButton" name="m_color">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="color">
-        <color>
-         <red>70</red>
-         <green>90</green>
-         <blue>130</blue>
-        </color>
-       </property>
-       <property name="defaultColor">
-        <color>
-         <red>70</red>
-         <green>90</green>
-         <blue>130</blue>
-        </color>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item row="4" column="1" colspan="3">
+   <item row="8" column="1" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <spacer name="horizontalSpacer">
@@ -235,6 +30,16 @@
       </spacer>
      </item>
      <item>
+      <widget class="QToolButton" name="m_pictureUrlButton">
+       <property name="toolTip">
+        <string>Browse</string>
+       </property>
+       <property name="text">
+        <string>Open</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="m_newStuff">
        <property name="toolTip">
         <string>Download new wallpapers</string>
@@ -246,7 +51,7 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="1">
+   <item row="13" column="1">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -259,17 +64,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="2">
-    <widget class="QToolButton" name="m_pictureUrlButton">
-     <property name="toolTip">
-      <string>Browse</string>
-     </property>
-     <property name="text">
-      <string>...</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
+   <item row="9" column="1">
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="1" column="2">
       <spacer name="horizontalSpacer_3">
@@ -372,7 +167,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0">
+   <item row="9" column="0">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
@@ -415,6 +210,115 @@
      </item>
     </layout>
    </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="minimumSize">
+      <size>
+       <width>125</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>P&amp;ositioning:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>m_resizeMethod</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="KColorButton" name="m_color">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="color" stdset="0">
+        <color>
+         <red>70</red>
+         <green>90</green>
+         <blue>130</blue>
+        </color>
+       </property>
+       <property name="defaultColor" stdset="0">
+        <color>
+         <red>70</red>
+         <green>90</green>
+         <blue>130</blue>
+        </color>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>187</width>
+         <height>17</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="1">
+    <widget class="QListView" name="m_view"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>&amp;Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>m_color</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="KComboBox" name="m_resizeMethod" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>10</width>
+         <height>10</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -427,6 +331,11 @@
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QWidget</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -43,7 +43,7 @@ class Virus : public Plasma::Wallpaper
         void positioningChanged(int index);
         void getNewWallpaper();
         void colorChanged(const QColor& color);
-        void pictureChanged(int index);
+        void pictureChanged(QModelIndex index);
         void browse();
         void updateBackground(const QImage &img);
         void showFileDialog();
@@ -56,6 +56,7 @@ class Virus : public Plasma::Wallpaper
         void virusUpdated();
 
     protected:
+        void modified();
         void init(const KConfigGroup &config);
         void fillMetaInfo(Plasma::Package *b);
         bool setMetadata(QLabel *label, const QString &text);

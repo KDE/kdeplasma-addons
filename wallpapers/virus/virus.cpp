@@ -110,6 +110,7 @@ void Virus::save(KConfigGroup &config)
 void Virus::configWidgetDestroyed()
 {
     m_configWidget = 0;
+    m_model = 0;
 }
 
 QWidget* Virus::createConfigurationInterface(QWidget* parent)
@@ -120,18 +121,18 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     m_uiVirus.setupUi(m_configWidget);
 
     qreal ratio = m_size.isEmpty() ? 1.0 : m_size.width() / qreal(m_size.height());
-    m_model = new BackgroundListModel(ratio, this);
+    m_model = new BackgroundListModel(ratio, this, m_configWidget);
     m_model->setResizeMethod(m_resizeMethod);
     m_model->setWallpaperSize(m_size);
     m_model->reload(m_usersWallpapers);
     m_uiVirus.m_view->setModel(m_model);
-    m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view->view(),
-                                                              ratio, this));
-    m_uiVirus.m_view->view()->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-    int index = m_model->indexOf(m_wallpaper);
-    if (index != -1) {
+    m_uiVirus.m_view->setItemDelegate(new BackgroundDelegate(m_uiVirus.m_view,
+                                                                 ratio, m_configWidget));
+    m_uiVirus.m_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    QModelIndex index = m_model->indexOf(m_wallpaper);
+    if (index.isValid()) {
         m_uiVirus.m_view->setCurrentIndex(index);
-        Plasma::Package *b = m_model->package(index);
+        Plasma::Package *b = m_model->package(index.row());
         if (b) {
             fillMetaInfo(b);
         }
@@ -140,8 +141,6 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
 
     m_uiVirus.m_pictureUrlButton->setIcon(KIcon("document-open"));
     connect(m_uiVirus.m_pictureUrlButton, SIGNAL(clicked()), this, SLOT(showFileDialog()));
-
-    m_uiVirus.m_emailLine->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
     m_uiVirus.m_resizeMethod->addItem(i18n("Scaled & Cropped"), ScaledAndCroppedResize);
     m_uiVirus.m_resizeMethod->addItem(i18n("Scaled"), ScaledResize);
@@ -175,6 +174,11 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     
     return m_configWidget;
+}
+
+void Virus::modified()
+{
+    emit settingsChanged(true);
 }
 
 void Virus::calculateGeometry()
@@ -257,13 +261,13 @@ void Virus::colorChanged(const QColor& color)
     emit settingsChanged(true);
 }
 
-void Virus::pictureChanged(int index)
+void Virus::pictureChanged(QModelIndex index)
 {
-    if (index == -1 || !m_model) {
+    if (index.row() == -1 || !m_model) {
         return;
     }
 
-    Plasma::Package *b = m_model->package(index);
+    Plasma::Package *b = m_model->package(index.row());
     if (!b) {
         return;
     }
@@ -313,33 +317,11 @@ void Virus::positioningChanged(int index)
 
 void Virus::fillMetaInfo(Plasma::Package *b)
 {
-    // Prepare more user-friendly forms of some pieces of data.
-    // - license by config is more a of a key value,
-    //   try to get the proper name if one of known licenses.
-
-    // not needed for now...
-    //QString license = b->license();
-    /*
-    KAboutLicense knownLicense = KAboutLicense::byKeyword(license);
-    if (knownLicense.key() != KAboutData::License_Custom) {
-        license = knownLicense.name(KAboutData::ShortName);
-    }
-    */
-    // - last ditch attempt to localize author's name, if not such by config
-    //   (translators can "hook" names from outside if resolute enough).
-    QString author = b->metadata().author();
-    if (author.isEmpty()) {
-        setMetadata(m_uiVirus.m_authorLine, QString());
-        m_uiVirus.m_authorLabel->setAlignment(Qt::AlignLeft);
-    } else {
-        QString authorIntl = i18nc("Wallpaper info, author name", "%1", author);
-        m_uiVirus.m_authorLabel->setAlignment(Qt::AlignRight);
-        setMetadata(m_uiVirus.m_authorLine, authorIntl);
-    }
-    setMetadata(m_uiVirus.m_licenseLine, QString());
+  QString author = b->metadata().author();
+    /*setMetadata(m_uiVirus.m_licenseLine, QString());
     setMetadata(m_uiVirus.m_emailLine, QString());
     m_uiVirus.m_emailLabel->hide();
-    m_uiVirus.m_licenseLabel->hide();
+    m_uiVirus.m_licenseLabel->hide();  */
 }
 
 bool Virus::setMetadata(QLabel *label, const QString &text)
@@ -363,6 +345,9 @@ void Virus::showFileDialog()
         m_dialog->setInlinePreviewShown(true);
         m_dialog->setCaption(i18n("Select Wallpaper Image File"));
         m_dialog->setModal(false);
+
+        connect(m_dialog, SIGNAL(okClicked()), this, SLOT(wallpaperBrowseCompleted()));
+        connect(m_dialog, SIGNAL(destroyed(QObject*)), this, SLOT(fileDialogFinished()));
     }
 
     m_dialog->show();
@@ -376,8 +361,7 @@ void Virus::browse()
 {
     Q_ASSERT(m_model);
 
-    QString wallpaper = m_dialog->selectedFile();
-    disconnect(m_dialog, SIGNAL(okClicked()), this, SLOT(browse()));
+    const QString wallpaper = m_dialog->selectedFile();
 
     if (wallpaper.isEmpty()) {
         return;
@@ -392,8 +376,8 @@ void Virus::browse()
     m_model->addBackground(wallpaper);
 
     // select it
-    int index = m_model->indexOf(wallpaper);
-    if (index != -1) {
+    QModelIndex index = m_model->indexOf(wallpaper);
+    if (index.isValid()) {
         m_uiVirus.m_view->setCurrentIndex(index);
     }
     // save it
@@ -447,7 +431,7 @@ void Virus::suspendStartup(bool suspend)
 
 void Virus::updateScreenshot(QPersistentModelIndex index)
 {
-    m_uiVirus.m_view->view()->update(index);
+    m_uiVirus.m_view->update(index);
 }
 
 #include "virus.moc"
