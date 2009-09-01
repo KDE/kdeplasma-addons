@@ -71,7 +71,7 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     d->ui.pressureComboBox->addItem(i18n("Kilopascals kPa"), "kPa");
     d->ui.pressureComboBox->addItem(i18n("Millibars mbar"), "mbar");
     d->ui.pressureComboBox->addItem(i18n("Inches of Mercury inHg"), "inHg");
-    d->ui.speedComboBox->addItem(i18n("Meters per Second m/s"), "ms");
+    d->ui.speedComboBox->addItem(i18n("Meters per Second m/s"), "m/s");
     d->ui.speedComboBox->addItem(i18n("Kilometers per Hour km/h"), "km/h");
     d->ui.speedComboBox->addItem(i18n("Miles per Hour mph"), "mph");
     d->ui.speedComboBox->addItem(i18n("Knots kt"), "kt");
