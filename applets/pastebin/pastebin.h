@@ -32,6 +32,7 @@
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
 
+#include <QClipboard>
 #include <QTimer>
 #include <QPen>
 #include <QtNetwork>
@@ -142,6 +143,8 @@ private:
     KAction *m_paste;
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
+
+    QClipboard::Mode lastMode;
 
     Ui::pastebinConfig uiConfig;
     Ui::pastebinServersConfig uiServers;

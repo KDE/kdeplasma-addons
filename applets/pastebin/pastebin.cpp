@@ -497,8 +497,7 @@ void Pastebin::showResults(const QString &url)
 
 void Pastebin::copyToClipboard(const QString &url)
 {
-    QApplication::clipboard()->setText(url);
-    QApplication::clipboard()->setText(url, QClipboard::Selection);
+    QApplication::clipboard()->setText(url, lastMode);
     kDebug() << "Copying:" << url;
     QPixmap pix = KIcon("edit-paste").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
 
@@ -542,6 +541,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
             // Same as for D'n'D, Windows doesn't pass any actual image data when pasting
             // image files. Though, it does provide us with those files' Urls. Since posting
             // multiple images isn't yet implemented - we'll use first Url from list
+            lastMode = QClipboard::Clipboard;
             QImage image;
             QString imageFileName;
             if (QApplication::clipboard()->mimeData()->hasUrls()) {
@@ -552,8 +552,8 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
                 postContent(QApplication::clipboard()->mimeData()->text(), image);
             };
 #else
-            QClipboard::Mode mode = QApplication::clipboard()->supportsSelection() ? QClipboard::Selection : QClipboard::Clipboard;
-            postContent(QApplication::clipboard()->text(mode), QApplication::clipboard()->image(mode));
+            lastMode = QApplication::clipboard()->supportsSelection() ? QClipboard::Selection : QClipboard::Clipboard;
+            postContent(QApplication::clipboard()->text(lastMode), QApplication::clipboard()->image(lastMode));
 #endif //Q_WS_WIN
         } else {
             // Now releasing the middlebutton click copies to clipboard
@@ -600,6 +600,7 @@ void Pastebin::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 void Pastebin::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     if (event->mimeData()->objectName() != QString("Pastebin-applet")) {
+        lastMode = QClipboard::Clipboard;
 #ifdef Q_WS_WIN
         // Apparently, Windows doesn't pass any actual image data when drag'n'dropping
         // image files. Though, it does provide us with those files' Urls. Since posting
@@ -667,6 +668,7 @@ QList<QAction*> Pastebin::contextualActions()
 
 void Pastebin::postClipboard()
 {
+    lastMode = QClipboard::Clipboard;
 #ifdef Q_WS_WIN
 // Same as for D'n'D, Windows doesn't pass any actual image data when pasting
 // image files. Though, it does provide us with those files' Urls. Since posting
