@@ -109,10 +109,10 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
         valid = false;
     } else {
         QList < Plasma::QueryMatch > matches = m;
-        QMutableListIterator < Plasma::QueryMatch > newMatchIt(matches);
+        qSort(matches.begin(), matches.end());
 
-        while (newMatchIt.hasNext()) {
-            Plasma::QueryMatch match = newMatchIt.next();
+        while (matches.size()) {
+            Plasma::QueryMatch match = matches.takeLast();
             QStringList data;
             data << match.id();
             data << match.runner()->id();
