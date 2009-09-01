@@ -62,7 +62,6 @@ public:
         Rejected = 3,       /* unsuitable content is dragged over us */
         DraggedOver = 5     /* suitable content is dragged over us */
     };
-    //Q_DECLARE_FLAGS(InteractionStates, InteractionState)
 
     enum ActionState {   /* What is the applet doing */
         Unset = 0,       /* Not set */
@@ -71,7 +70,9 @@ public:
         IdleSuccess = 4, /* Last action succeeded */
         Sending = 8      /* Sending data to the server, waiting for reply */
     };
-    //Q_DECLARE_FLAGS(ActionStates, ActionState)
+
+    enum textServers { PASTEBINCA, PASTEBINCOM };
+    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING };
 
 public slots:
     void configAccepted();
@@ -101,6 +102,11 @@ private slots:
     void updateTheme();
     void resetActionState();
     void copyToClipboard(const QString &url);
+
+    void editTextServer();
+    void saveTextServer();
+    void editImageServer();
+    void saveImageServer();
 
 private:
     int iconSize();
@@ -143,6 +149,9 @@ private:
     KAction *m_paste;
     QAction *m_topSeparator;
     QAction *m_bottomSeparator;
+
+    // custom server dialog
+    QWidget *m_servers;
 
     QClipboard::Mode lastMode;
 

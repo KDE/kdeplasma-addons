@@ -52,7 +52,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_textBackend(0), m_imageBackend(0), m_imagePrivacy(0),
       m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-      m_topSeparator(0), m_bottomSeparator(0)
+      m_topSeparator(0), m_bottomSeparator(0), m_servers(0)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -86,6 +86,32 @@ Pastebin::~Pastebin()
     cg.writeEntry("History", history);
 }
 
+void Pastebin::init()
+{
+    KConfigGroup cg = config();
+
+    m_textBackend = cg.readEntry("TextBackend", "0").toInt();
+    m_imageBackend = cg.readEntry("ImageBackend", "0").toInt();
+    m_imagePrivacy = cg.readEntry("imagePrivacy", "0").toInt();
+    int historySize = cg.readEntry("HistorySize", "3").toInt();
+
+    QStringList history = cg.readEntry("History", "").split("|", QString::SkipEmptyParts);
+
+    for (int i = 0; i < history.size(); ++i) {
+        addToHistory(history.at(i));
+    }
+
+    setHistorySize(historySize);
+    setActionState(Idle);
+    setInteractionState(Waiting);
+    m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
+
+    updateTheme();
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
+    Plasma::ToolTipManager::self()->registerWidget(this);
+    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
+}
+
 void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
     // initialization of data
@@ -113,33 +139,6 @@ void Pastebin::setHistorySize(int max)
     }
 
     m_historySize = max;
-}
-
-void Pastebin::init()
-{
-    KConfigGroup cg = config();
-
-    m_textBackend = cg.readEntry("TextBackend", "0").toInt();
-    m_imageBackend = cg.readEntry("ImageBackend", "0").toInt();
-    m_imagePrivacy = cg.readEntry("imagePrivacy", "0").toInt();
-    int historySize = cg.readEntry("HistorySize", "3").toInt();
-
-    QStringList history = cg.readEntry("History", "").split("|", QString::SkipEmptyParts);
-
-    for (int i = 0; i < history.size(); ++i) {
-        addToHistory(history.at(i));
-    }
-
-    setHistorySize(historySize);
-
-    setActionState(Idle);
-    setInteractionState(Waiting);
-    m_icon = new KIcon("edit-paste"); // TODO: make member (for caching)
-
-    updateTheme();
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateTheme()));
-    Plasma::ToolTipManager::self()->registerWidget(this);
-    Plasma::ToolTipManager::self()->setContent(this, toolTipData);
 }
 
 void Pastebin::updateTheme()
@@ -418,37 +417,123 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
 
     QWidget *general = new QWidget();
     uiConfig.setupUi(general);
+
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     parent->addPage(general, i18n("General"), Applet::icon());
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
     uiConfig.imageServer->setCurrentIndex(m_imageBackend);
     uiConfig.historySize->setValue(m_historySize);
+    uiConfig.imagePrivacy->setCurrentIndex(m_imagePrivacy);
 
-//     QWidget *servers = new QWidget();
-//     uiServers.setupUi(servers);
-//     parent->addPage(servers, i18n("Servers"), Applet::icon());
+    uiConfig.editTextServer->setIcon(KIcon("document-edit"));
+    uiConfig.editImageServer->setIcon(KIcon("document-edit"));
 
-//     QString pastebincaURL = cg.readEntry("pastebinca", "http://pastebin.ca");
-//     uiServers.pastebinca->setText(pastebincaURL);
+    connect(uiConfig.editTextServer, SIGNAL(clicked()), this, SLOT(editTextServer()));
+    connect(uiConfig.editImageServer, SIGNAL(clicked()), this, SLOT(editImageServer()));
+}
 
-//     QString pastebincomURL = cg.readEntry("pastebincom", "http://pastebin.com");
-//     uiServers.pastebincom->setText(pastebincomURL);
+void Pastebin::editTextServer()
+{
+    KConfigGroup cg = config();
 
-//     QString imagebincaURL = cg.readEntry("imagebinca", "http://imagebin.ca");
-//     uiServers.imagebinca->setText(imagebincaURL);
+    // avoid memory leaks as its not modal and the user can click again
+    // on the edit button
+    if (m_servers) {
+        delete m_servers;
+    }
 
-//     QString imageshackURL = cg.readEntry("imageshack", "http://imageshack.us");
-//     uiServers.imageshack->setText(imageshackURL);
+    m_servers = new QWidget();
+    uiServers.setupUi(m_servers);
+    m_servers->show();
+    connect(uiServers.saveButton, SIGNAL(clicked()), this, SLOT(saveTextServer()));
 
-//     QString simplestimagehostingURL = cg.readEntry("simplestimagehosting", "http://api.simplest-image-hosting.net");
-//     uiServers.simplestimagehosting->setText(simplestimagehostingURL);
+    QString serverAddress;
+    switch(uiConfig.textServer->currentIndex()) {
+        case Pastebin::PASTEBINCA:
+            serverAddress = cg.readEntry("pastebinca", "http://pastebin.ca");
+            break;
 
-    uiConfig.textServer->setCurrentIndex(m_textBackend);
+        case Pastebin::PASTEBINCOM:
+           serverAddress = cg.readEntry("pastebincom", "http://pastebin.com");
+           break;
+    }
 
-    int imagePrivacy = cg.readEntry("imagePrivacy", 0);
-    uiConfig.imagePrivacy->setCurrentIndex(imagePrivacy);
+    uiServers.server->setText(serverAddress);
+}
 
+void Pastebin::saveTextServer()
+{
+    KConfigGroup cg = config();
+
+    switch(uiConfig.textServer->currentIndex()) {
+        case Pastebin::PASTEBINCA:
+            cg.writeEntry("pastebinca", uiServers.server->text());
+            break;
+
+        case Pastebin::PASTEBINCOM:
+            cg.writeEntry("pastebincom", uiServers.server->text());
+            break;
+    }
+
+    delete m_servers;
+    m_servers = 0;
+}
+
+void Pastebin::editImageServer()
+{
+    KConfigGroup cg = config();
+
+    // avoid memory leaks as its not modal and the user can click again
+    // on the edit button
+    if (m_servers) {
+        delete m_servers;
+    }
+
+    m_servers = new QWidget();
+    uiServers.setupUi(m_servers);
+    m_servers->show();
+    connect(uiServers.saveButton, SIGNAL(clicked()), this, SLOT(saveImageServer()));
+
+    QString serverAddress;
+    switch(uiConfig.imageServer->currentIndex()) {
+        case Pastebin::IMAGEBINCA:
+            serverAddress = cg.readEntry("imagebinca", "http://imagebin.ca");
+            break;
+
+        case Pastebin::IMAGESHACK:
+            serverAddress = cg.readEntry("imageshack", "http://imageshack.us");
+            break;
+
+        case Pastebin::SIMPLESTIMAGEHOSTING:
+            serverAddress = cg.readEntry("simplestimagehosting",
+                                         "http://api.simplest-image-hosting.net");
+            break;
+    }
+
+    uiServers.server->setText(serverAddress);
+}
+
+void Pastebin::saveImageServer()
+{
+    KConfigGroup cg = config();
+
+    switch(uiConfig.imageServer->currentIndex()) {
+        case Pastebin::IMAGEBINCA:
+            cg.writeEntry("imagebinca", uiServers.server->text());
+            break;
+
+        case Pastebin::IMAGESHACK:
+            cg.writeEntry("imageshack", uiServers.server->text());
+            break;
+
+        case Pastebin::SIMPLESTIMAGEHOSTING:
+            cg.writeEntry("simplestimagehosting", uiServers.server->text());
+            break;
+    }
+
+    delete m_servers;
+    m_servers = 0;
 }
 
 void Pastebin::configAccepted()
@@ -459,29 +544,13 @@ void Pastebin::configAccepted()
     m_imagePrivacy = uiConfig.imagePrivacy->currentIndex();
 
     int historySize = uiConfig.historySize->value();
-
-//     QString pastebincaURL = uiServers.pastebinca->text();
-//     QString pastebincomURL = uiServers.pastebincom->text();
-//     QString imagebincaURL = uiServers.imagebinca->text();
-//     QString imageshackURL = uiServers.imageshack->text();
-//     QString simplestimagehostingURL = uiServers.simplestimagehosting->text();
+    setHistorySize(historySize);
 
     cg.writeEntry("TextBackend", m_textBackend);
     cg.writeEntry("ImageBackend", m_imageBackend);
     cg.writeEntry("imagePrivacy", m_imagePrivacy);
     cg.writeEntry("HistorySize", historySize);
 
-//     // write text and image servers based on backend
-
-//     // save all address
-//     cg.writeEntry("pastebinca", pastebincaURL);
-//     cg.writeEntry("pastebincom", pastebincomURL);
-//     cg.writeEntry("imagebinca", imagebincaURL);
-//     cg.writeEntry("imageshack", imageshackURL);
-//     cg.writeEntry("simplestimagehosting", simplestimagehostingURL);
-
-
-    setHistorySize(historySize);
     emit configNeedsSaving();
 }
 
@@ -693,7 +762,6 @@ void Pastebin::postContent(QString text, QImage imageData)
     bool validPath = QFile::exists(testPath.toLocalFile());
     bool image = false;
 
-
     if (validPath) {
         KMimeType::Ptr type = KMimeType::findByPath(testPath.path());
 
@@ -725,17 +793,44 @@ void Pastebin::postContent(QString text, QImage imageData)
         }
     }
 
+    KConfigGroup cg = config();
+
     if (!image) {
         Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
         KConfigGroup ops = service->operationDescription("text");
-        ops.writeEntry("server", "");
+
+        switch(m_textBackend) {
+            case Pastebin::PASTEBINCA:
+                ops.writeEntry("server", cg.readEntry("pastebinca", "http://pastebin.ca"));
+                break;
+
+            case Pastebin::PASTEBINCOM:
+                ops.writeEntry("server", cg.readEntry("pastebincom", "http://pastebin.com"));
+                break;
+        }
+
         ops.writeEntry("fileName", text);
         ops.writeEntry("backend", m_textBackend);
         service->startOperationCall(ops);
     } else {
         Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
         KConfigGroup ops = service->operationDescription("image");
-        ops.writeEntry("server", "");
+
+        switch(uiConfig.imageServer->currentIndex()) {
+            case Pastebin::IMAGEBINCA:
+                ops.writeEntry("server", cg.readEntry("imagebinca", "http://imagebin.ca"));
+                break;
+
+            case Pastebin::IMAGESHACK:
+                ops.writeEntry("server", cg.readEntry("imageshack", "http://imageshack.us"));
+                break;
+
+            case Pastebin::SIMPLESTIMAGEHOSTING:
+                ops.writeEntry("server", cg.readEntry("simplestimagehosting",
+                                                      "http://api.simplest-image-hosting.net"));
+                break;
+        }
+
         ops.writeEntry("fileName", text);
         ops.writeEntry("privacy", m_imagePrivacy);
         ops.writeEntry("backend", m_imageBackend);

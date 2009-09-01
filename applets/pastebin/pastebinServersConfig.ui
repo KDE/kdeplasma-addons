@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Pastebin Server Config Dialog</string>
   </property>
-  <widget class="KLineEdit" name="klineedit">
+  <widget class="KLineEdit" name="server">
    <property name="geometry">
     <rect>
      <x>115</x>
@@ -36,23 +36,25 @@
     <string>Server address:</string>
    </property>
   </widget>
-  <widget class="KDialog" name="kdialog">
+  <widget class="KPushButton" name="saveButton">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>100</x>
      <y>40</y>
-     <width>180</width>
-     <height>34</height>
+     <width>81</width>
+     <height>27</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>&amp;OK</string>
    </property>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KDialog</class>
-   <extends>QDialog</extends>
-   <header>kdialog.h</header>
-   <container>1</container>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
