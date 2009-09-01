@@ -212,6 +212,10 @@ void WeatherPopupApplet::init()
     if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
         d->temperatureUnit = cfg.readEntry("temperatureUnit", "C");
         d->speedUnit = cfg.readEntry("speedUnit", "m/s");
+        if (d->speedUnit == "ms") {
+            // compat for KDE < 4.3 where 'm/s' is incorrectly coded as 'ms'
+            d->speedUnit == "m/s";
+        }
         d->pressureUnit = cfg.readEntry("pressureUnit", "hPa");
         d->visibilityUnit = cfg.readEntry("visibilityUnit", "km");
     } else {
