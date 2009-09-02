@@ -1,4 +1,8 @@
 set(ocsclient_SRCS
+   eventjob.cpp
+   eventlistjob.cpp
+   eventparser.cpp
+   event.cpp
    activity.cpp
    activityparser.cpp
    activitylistjob.cpp

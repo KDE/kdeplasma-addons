@@ -32,6 +32,8 @@
 #include "contentlistjob.h"
 #include "knowledgebasejob.h"
 #include "knowledgebaselistjob.h"
+#include "eventjob.h"
+#include "eventlistjob.h"
 
 namespace Attica {
 
@@ -67,6 +69,9 @@ class ATTICA_EXPORT OcsApi
     static ContentJob *requestContent( const QString &id );
     static KnowledgeBaseJob *requestKnowledgeBase(const QString &id);
     static KnowledgeBaseListJob *requestKnowledgeBase(const int content, const QString &search, SortMode, const int page, const int pageSize);
+
+    static EventJob* requestEvent(const QString& id);
+    static EventListJob* requestEvent(const QString& country, const QString& search, const QDate& startAt, SortMode mode, int page, int pageSize);
 
   protected:
     static KUrl createUrl( const QString &path );

@@ -253,6 +253,57 @@ KnowledgeBaseListJob *OcsApi::requestKnowledgeBase( const int content, const QSt
   return job;
 }
 
+EventJob* OcsApi::requestEvent(const QString& id)
+{
+  EventJob* job = new EventJob();
+
+  job->setUrl(createUrl("event/data/" + id));
+
+  job->start();
+  return job;
+}
+
+EventListJob* OcsApi::requestEvent(const QString& country, const QString& search, const QDate& startAt, OcsApi::SortMode mode, int page, int pageSize)
+{
+  EventListJob* job = new EventListJob();
+
+  KUrl url = createUrl("event/data");
+
+  if (!search.isEmpty()) {
+      url.addQueryItem("search", search);
+  }
+
+  QString sortModeString;
+  switch (mode) {
+    case Newest:
+      sortModeString = "new";
+      break;
+    case Alphabetical:
+      sortModeString = "alpha";
+      break;
+    default:
+        break;
+  }
+  if (!sortModeString.isEmpty()) {
+    url.addQueryItem("sortmode", sortModeString);
+  }
+  
+  if (!country.isEmpty()) {
+    url.addQueryItem("country", country);
+  }
+  
+  url.addQueryItem("startat", startAt.toString(Qt::ISODate));
+
+  url.addQueryItem("page", QString::number(page));
+  url.addQueryItem("pagesize", QString::number(pageSize));
+
+  job->setUrl(url);
+
+  job->start();
+  return job;
+
+}
+
 KUrl OcsApi::createUrl( const QString &path )
 {
   KUrl url( "https://api.opendesktop.org/v1/" );
