@@ -192,6 +192,39 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
         return _job != 0;
 
+    } else if (name.startsWith("Event-")) {
+        QString _id = QString(name).remove(0, 6); // Removes prefix Event-
+        EventJob* _job = Attica::OcsApi::requestEvent(_id);
+        setData(name, DataEngine::Data());
+        connect( _job, SIGNAL(result(KJob*)), SLOT(slotEventResult(KJob*)));
+        return _job != 0;
+
+    } else if (name.startsWith("FutureEvents-")) {
+        QStringList args = QString(name).remove(0, 13).split(':');
+        const int numTokens = args.size();
+        if (numTokens != 1 && numTokens != 2) {
+            kDebug() << "Don't understand your request." << name;
+            return false;
+        }
+        QString country = args[0];
+        QString search;
+        if (numTokens == 2) {
+            search = args[1];
+        }
+
+        // FIXME: The size of the request is currently hardcoded
+        EventListJob* _job = OcsApi::requestEvent(country, search, QDate::currentDate(),
+            OcsApi::Alphabetical, 0, 100);
+        setData(name, DataEngine::Data());
+        connect(_job, SIGNAL(result(KJob*)), SLOT(slotEventListResult(KJob*)));
+
+        //putting the job/query pair into an hash to remember the association later
+        if (_job) {
+            m_eventListJobs.insert(_job, name);
+        }
+
+        return _job != 0;
+
     } else if (name.startsWith("MaximumItems-")) {
         m_maximumItems = name.split('-')[1].toInt();
         kDebug() << "Changed maximum number of hits to" << m_maximumItems;
@@ -457,6 +490,61 @@ void OcsEngine::addToCache(const QString& id, const Attica::Person& person, bool
     }
     setPersonData(QString("PersonSummary-%1").arg(id), m_personCache[id]);
 }
+
+
+void OcsEngine::slotEventResult(KJob* j)
+{
+    if (!j->error()) {
+        Attica::EventJob* job = static_cast<Attica::EventJob*>(j);
+        Attica::Event k = job->event();
+        setEventData(QString("Event-%1").arg(k.id()), k);
+        scheduleSourcesUpdated();
+    } else {
+        kDebug() << "Fetching Event failed:" << j->errorString();
+    }
+}
+
+void OcsEngine::setEventData(const QString& source, const Event& event)
+{
+    Plasma::DataEngine::Data eventData;
+
+    eventData["Id"] = event.id();
+    eventData["Name"] = event.name();
+    eventData["Description"] = event.description();
+    eventData["User"] = event.user();
+    eventData["StartDate"] = event.startDate();
+    eventData["EndDate"] = event.endDate();
+    eventData["Latitude"] = event.latitude();
+    eventData["Longitude"] = event.longitude();
+    eventData["Homepage"] = event.homepage();
+    eventData["Country"] = event.country();
+    eventData["City"] = event.city();
+
+    foreach(const QString& key, event.extendedAttributes().keys()) {
+        eventData[key] = event.extendedAttributes()[key];
+    }
+
+    setData(source, "Event-" + event.id(), eventData);
+}
+
+void OcsEngine::slotEventListResult(KJob* j)
+{
+    if (!j->error()) {
+        EventListJob* job = static_cast<EventListJob*>(j);
+
+        QString source = m_eventListJobs[job];
+
+        m_eventListJobs.remove(job);
+
+        foreach (const Event& event, job->eventList()) {
+            setEventData(source, event);
+        }
+        scheduleSourcesUpdated();
+    } else {
+        kDebug() << "Error:" << j->errorString();
+    }
+}
+
 
 
 #include "ocsengine.moc"

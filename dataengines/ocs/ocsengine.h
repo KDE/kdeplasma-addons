@@ -37,6 +37,7 @@ class KJob;
 namespace Attica {
     class PersonJob;
     class KnowledgeBaseJob;
+    class Event;
 }
 
 /**
@@ -63,14 +64,18 @@ protected Q_SLOTS:
     virtual void slotPersonResult( KJob* j);
     virtual void slotKnowledgeBaseResult( KJob *j );
     virtual void slotKnowledgeBaseListResult( KJob *j );
+    virtual void slotEventResult(KJob* j);
+    virtual void slotEventListResult(KJob* j);
     virtual void locationPosted( KJob *j );
     void networkStatusChanged(Solid::Networking::Status);
 
 private:
     void setPersonData(const QString &source, const Attica::Person &person);
     void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
+    void setEventData(const QString& source, const Attica::Event& event);
     void addToCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
 
+    QHash<KJob*, QString> m_eventListJobs;
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
     QHash<KJob*, QString> m_personListJobs;
     QHash<KJob*, KJob*> m_personJobs;
