@@ -211,7 +211,7 @@ void NowPlaying::dataUpdated(const QString &name,
                     //i18n("No media player found")
                     //i18nc("The state of a music player", "Stopped")
     if (name != m_watchingPlayer) {
-        kDebug() << "Wasn't expecting an update from" << name;
+        kDebug() << "Wasn't expecting an update from" << name << " but watching " << m_watchingPlayer;
         return;
     }
     if (data.isEmpty()) {
@@ -312,8 +312,15 @@ void NowPlaying::playerAdded(const QString &name)
 {
     kDebug() << "Player" << name << "added";
     if (m_watchingPlayer.isEmpty()) {
+        //findPlayer();
         kDebug() << "Installing" << name << "as watched player";
         m_watchingPlayer = name;
+
+        m_controller = dataEngine("nowplaying")->serviceForSource(m_watchingPlayer);
+        m_controller->associateWidget(m_positionSlider, "seek");
+        m_controller->associateWidget(m_volumeSlider, "volume");
+        emit controllerChanged(m_controller);
+
         dataEngine("nowplaying")->connectSource(m_watchingPlayer, this, 500);
     }
 }

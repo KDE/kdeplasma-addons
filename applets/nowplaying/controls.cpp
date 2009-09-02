@@ -52,7 +52,7 @@ Controls::~Controls()
 
 void Controls::playPauseClicked()
 {
-    if (m_state == Playing) {
+    if (m_state == Playing && m_controller) {
         m_state = Paused;
         m_playpause->setIcon("media-playback-start");
         m_controller->associateWidget(m_playpause, "play");
@@ -67,7 +67,7 @@ void Controls::playPauseClicked()
 
 void Controls::stateChanged(State state)
 {
-    if (m_state != state) {
+    if (m_state != state && m_controller) {
         if (state == Playing) {
             m_playpause->setIcon("media-playback-pause");
             m_controller->associateWidget(m_playpause, "pause");
