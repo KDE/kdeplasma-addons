@@ -22,7 +22,7 @@
 #define UNITCONVERTER_H
 
 #include <Plasma/PopupApplet>
-#include "conversion/converter.h"
+#include <KUnitConversion/Converter>
 
 namespace Plasma {
     class ComboBox;

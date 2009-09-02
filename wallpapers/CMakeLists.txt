@@ -6,6 +6,6 @@ if(MARBLE_FOUND)
     add_subdirectory(marble)
 endif(MARBLE_FOUND)
 
-if(CONVERSION_FOUND)
+if(KUNITCONVERSION_FOUND)
   add_subdirectory(weather)
-endif(CONVERSION_FOUND)
+endif(KUNITCONVERSION_FOUND)

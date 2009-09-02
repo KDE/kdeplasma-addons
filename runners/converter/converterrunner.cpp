@@ -22,8 +22,8 @@
 #include <KIcon>
 #include <KDebug>
 #include <KToolInvocation>
-#include <conversion/converter.h>
-#include <conversion/unitcategory.h>
+#include <KUnitConversion/Converter>
+#include <KUnitConversion/UnitCategory>
 
 #define CONVERSION_CHAR '>'
 

@@ -1,4 +1,4 @@
-if(CONVERSION_FOUND)
+if(KUNITCONVERSION_FOUND)
   add_subdirectory(plasmaweather)
-endif(CONVERSION_FOUND)
+endif(KUNITCONVERSION_FOUND)
 add_subdirectory(rtm)

@@ -38,11 +38,11 @@ add_subdirectory(timer)
 
 add_subdirectory(eyes)
 
-if(CONVERSION_FOUND)
+if(KUNITCONVERSION_FOUND)
   add_subdirectory(unitconverter)
   add_subdirectory(weatherstation)
   add_subdirectory(weather)
-endif(CONVERSION_FOUND)
+endif(KUNITCONVERSION_FOUND)
 
 if(QT_QTWEBKIT_FOUND)
   add_subdirectory(dict)

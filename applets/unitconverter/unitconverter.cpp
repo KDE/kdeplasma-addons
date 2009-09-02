@@ -29,7 +29,7 @@
 #include <Plasma/LineEdit>
 #include <Plasma/Label>
 #include <Plasma/Frame>
-#include "conversion/unitcategory.h"
+#include <KUnitConversion/UnitCategory>
 
 using namespace KUnitConversion;
 

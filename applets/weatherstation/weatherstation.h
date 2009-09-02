@@ -20,7 +20,7 @@
 
 #include <Plasma/PopupApplet>
 #include <Plasma/DataEngine>
-#include <conversion/value.h>
+#include <KUnitConversion/Value>
 #include <plasmaweather/weatherpopupapplet.h>
 #include "ui_appearanceconfig.h"
 
