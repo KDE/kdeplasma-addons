@@ -63,6 +63,10 @@ MediaPlayer::MediaPlayer(QObject *parent, const QVariantList &args)
 
 MediaPlayer::~MediaPlayer()
 {
+    delete m_hideTimer;
+
+    // tries to solve problems with videos keeping being played
+    m_video->stop();
     delete m_video;
 }
 
