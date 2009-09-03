@@ -282,26 +282,8 @@ void OcsEngine::slotPersonResult( KJob *j )
         Attica::PersonJob *job = static_cast<Attica::PersonJob *>( j );
         Attica::Person p = job->person();
 
-        QString source;
-
-        KJob *personListJob = m_personJobs[job];
-        if (personListJob) {
-            if (!m_personListJobs[personListJob].isEmpty()) {
-                source = m_personListJobs[personListJob];
-                --m_personListJobsRefs[personListJob];
-            }
-            m_personJobs.remove(job);
-
-            if (m_personListJobsRefs[personListJob] <= 0) {
-                m_personListJobsRefs.remove(personListJob);
-                m_personListJobs.remove(personListJob);
-            }
-        } else {
-            source = QString("Person-%1").arg(p.id());
-        }
-
         addToPersonCache(p.id(), p, true);
-        setPersonData(source, p);
+        setPersonData(QString("Person-%1").arg(p.id()), p);
         scheduleSourcesUpdated();
     } else {
         kDebug() << "Fetching person failed:" << j->errorString();

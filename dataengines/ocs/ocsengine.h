@@ -78,8 +78,6 @@ private:
     QHash<KJob*, QString> m_eventListJobs;
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
     QHash<KJob*, QString> m_personListJobs;
-    QHash<KJob*, KJob*> m_personJobs;
-    QHash<KJob*, int> m_personListJobsRefs;
 
     Attica::Activity::List m_activities;
     KJob* m_job;
