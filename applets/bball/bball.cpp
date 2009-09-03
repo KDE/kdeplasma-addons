@@ -83,14 +83,14 @@ void bballApplet::init ()
   }
   createPath (m_sound, audioOutput);
 
-  m_position = QRectF (geometry ().x (), geometry ().y (), 100, 100);
-  QDesktopWidget *desktop = new QDesktopWidget ();
-  m_screen = desktop->availableGeometry ();
+  m_position = QRectF(geometry().x(), geometry().y(), 100, 100);
+  QDesktopWidget *desktop = new QDesktopWidget();
+  m_screen = desktop->availableGeometry();
 
   //timer
   m_timer = new QTimer (this);
-  connect (m_timer, SIGNAL (timeout ()), this, SLOT (goPhysics ()));
-  m_timer->start (25);
+  connect(m_timer, SIGNAL(timeout()), this, SLOT(goPhysics()));
+  m_timer->start(25);
   delete desktop;
 }
 
@@ -239,13 +239,15 @@ QSizeF bballApplet::contentSizeHint() const
 
 void bballApplet::constraintsEvent (Plasma::Constraints constraints)
 {
-  setBackgroundHints(NoBackground);
-  if ( constraints & Plasma::SizeConstraint )
-  {
-    m_position =  QRectF (geometry ().x (), geometry ().y (), geometry ().width (), geometry ().height ());
-    m_radius = static_cast<int>(geometry().width()) / 2;
-    updateScaledBallImage();
-  }
+    if (constraints & Plasma::FormFactorConstraint) {
+        setBackgroundHints(NoBackground);
+    }
+
+    if (constraints & Plasma::SizeConstraint) {
+        m_position = QRectF(geometry().x(), geometry().y(), geometry().width(), geometry().height());
+        m_radius = static_cast<int>(geometry().width()) / 2;
+        updateScaledBallImage();
+    }
 }
 
 void bballApplet::updateScaledBallImage()
@@ -265,7 +267,8 @@ void bballApplet::updateScaledBallImage()
     p.setBrush (m_overlay_colour);
     p.drawPie (m_pie_size, 0, 5760);
   }
-  m_pie_size = QRectF( 0, 0, m_radius * 2, m_radius * 2 );
+
+  m_pie_size = QRectF(0, 0, m_radius * 2, m_radius * 2);
 }
 
 inline void bballApplet::adjustAngularVelocity( double * velocity, double circ_velocity )
@@ -315,7 +318,7 @@ inline void bballApplet::leftCollision()
   m_x_vel *= -m_resitution;
   adjustAngularVelocity( &m_y_vel, m_circum_vel );
   m_circum_vel = m_y_vel;
-  if (m_bottom == 1) 
+  if (m_bottom == 1)
   {
     //kDebug() << "HIT Bottom AND LEFT";
     m_bottom=0;
@@ -326,12 +329,17 @@ inline void bballApplet::leftCollision()
 inline void bballApplet::checkCollisions()
 {
   bool collision = false;
+  kDebug() << "my geometry: " << geometry();
 
   //floor
-  if (m_position.bottom () >= m_screen.bottom ())
+  if (m_position.bottom() >= m_screen.bottom())
   {
     bottomCollision();
     collision = true;
+    kDebug() << "m_position.bottom: " << m_position.bottom();
+    kDebug() << "m_screen.bottom: " << m_screen.bottom();
+    kDebug() << "geometry: " << geometry();
+    kDebug() << "pixmap geometry: " << m_pixmap.size();
     kDebug() << "Bottom collision";
   }
 
@@ -438,30 +446,42 @@ void bballApplet::paintInterface (QPainter * p, const QStyleOptionGraphicsItem *
 
 void bballApplet::mousePressEvent (QGraphicsSceneMouseEvent * event)
 {
-  m_x_vel = 0;
-  m_y_vel = 0;
-  m_circum_vel = 0;
-  m_mouse = event->scenePos();
-  m_mouse_pressed = true;
-  event->accept();
+    if (immutability() != Plasma::Mutable) {
+        return;
+    }
+
+    m_x_vel = 0;
+    m_y_vel = 0;
+    m_circum_vel = 0;
+    m_mouse = event->scenePos();
+    m_mouse_pressed = true;
+    event->accept();
 }
 
 void bballApplet::mouseReleaseEvent (QGraphicsSceneMouseEvent * event)
 {
-  m_x_vel = (m_mouse - m_old_mouse).x();
-  m_y_vel = (m_mouse - m_old_mouse).y();
-  m_mouse_pressed = false;
-  m_timer->start();
-  event->accept();
+    if (immutability() != Plasma::Mutable) {
+        return;
+    }
+
+    m_x_vel = (m_mouse - m_old_mouse).x();
+    m_y_vel = (m_mouse - m_old_mouse).y();
+    m_mouse_pressed = false;
+    m_timer->start();
+    event->accept();
 }
 
 void bballApplet::mouseMoveEvent (QGraphicsSceneMouseEvent * event)
 {
-  m_old_mouse = m_mouse;
-  m_mouse = event->scenePos();
-  m_position.translate(m_mouse - m_old_mouse);
-  setGeometry(m_position);
-  event->accept();
+    if (immutability() != Plasma::Mutable) {
+        return;
+    }
+
+    m_old_mouse = m_mouse;
+    m_mouse = event->scenePos();
+    m_position.translate(m_mouse - m_old_mouse);
+    setGeometry(m_position);
+    event->accept();
 }
 
 #include "bball.moc"
