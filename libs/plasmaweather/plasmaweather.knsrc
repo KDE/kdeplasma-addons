@@ -1,0 +1,8 @@
+[KNewStuff2]
+ProvidersUrl=http://download.kde.org/khotnewstuff/plasmaweather-providers.xml
+ChecksumPolicy=ifpossible
+SignaturePolicy=ifpossible
+TargetDir=plasma/ions
+Uncompress=never
+InstallationCommand=plasmapkg -t ion -u %f
+UninstallCommand=plasmapkg -t ion -r %f

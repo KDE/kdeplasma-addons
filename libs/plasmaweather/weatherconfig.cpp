@@ -25,6 +25,8 @@
 #include <KMessageBox>
 #include <KInputDialog>
 
+#include <KNS/Engine>
+
 class WeatherConfig::Private
 {
 public:
@@ -79,6 +81,10 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     d->ui.visibilityComboBox->addItem(i18n("Kilometers"), "km");
     d->ui.visibilityComboBox->addItem(i18n("Miles"), "ml");
 
+    // Setup GHNS button icon
+    d->ui.ghnsProviderButton->setIcon(KIcon("get-hot-new-stuff"));
+    connect(d->ui.ghnsProviderButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
+
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setUpdateInterval(int)));
@@ -99,6 +105,17 @@ WeatherConfig::WeatherConfig(QWidget *parent)
 WeatherConfig::~WeatherConfig()
 {
     delete d;
+}
+
+void WeatherConfig::getNewStuff()
+{
+    KNS::Engine engine(this);
+    if (engine.init("plasmaweather.knsrc")) {
+        KNS::Entry::List entries = engine.downloadDialogModal(this);
+        if (entries.size() > 0) {
+           kDebug() << "We have ions to download!!!!!!!!!!!!";
+        }
+    }
 }
 
 void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
