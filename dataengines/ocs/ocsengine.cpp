@@ -300,7 +300,7 @@ void OcsEngine::slotPersonResult( KJob *j )
             source = QString("Person-%1").arg(p.id());
         }
 
-        addToCache(p.id(), p, true);
+        addToPersonCache(p.id(), p, true);
         setPersonData(source, p);
         scheduleSourcesUpdated();
     } else {
@@ -404,7 +404,7 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
         m_personListJobs.remove(j);
 
         foreach (const Person &p, listJob->personList()) {
-            addToCache(p.id(), p);
+            addToPersonCache(p.id(), p);
             setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
@@ -423,7 +423,7 @@ void OcsEngine::slotFriendsResult( KJob *j )
         QString _id = m_personListJobs[j];
 
         foreach (const Person &p, listJob->personList()) {
-            addToCache(p.id(), p);
+            addToPersonCache(p.id(), p);
             setPersonData(_id, p);
         }
         scheduleSourcesUpdated();
@@ -445,7 +445,7 @@ void OcsEngine::networkStatusChanged(Solid::Networking::Status status)
 }
 
 
-void OcsEngine::addToCache(const QString& id, const Attica::Person& person, bool replaceCache)
+void OcsEngine::addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache)
 {
     if (replaceCache || !m_personCache.contains(id)) {
         // Add the person to the cache

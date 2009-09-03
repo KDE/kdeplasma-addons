@@ -73,7 +73,7 @@ private:
     void setPersonData(const QString &source, const Attica::Person &person);
     void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
     void setEventData(const QString& source, const Attica::Event& event);
-    void addToCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
+    void addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
 
     QHash<KJob*, QString> m_eventListJobs;
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
