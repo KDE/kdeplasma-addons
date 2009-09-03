@@ -54,7 +54,8 @@ bballApplet::bballApplet (QObject * parent, const QVariantList & args):
   m_x_vel(0.0),
   m_y_vel(0.0),
   m_circum_vel(0.0),
-  m_mouse_pressed(false)
+  m_mouse_pressed(false),
+  m_refresh_pos(false)
 {
   setHasConfigurationInterface (true);
   //TODO figure out why it is not good enough to set it here
@@ -243,8 +244,13 @@ void bballApplet::constraintsEvent (Plasma::Constraints constraints)
         setBackgroundHints(NoBackground);
     }
 
+    if (constraints & Plasma::LocationConstraint) {
+        // m_position needs to be updated
+        m_refresh_pos = true;
+    }
+
     if (constraints & Plasma::SizeConstraint) {
-        m_position = QRectF(geometry().x(), geometry().y(), geometry().width(), geometry().height());
+        m_position = geometry();
         m_radius = static_cast<int>(geometry().width()) / 2;
         updateScaledBallImage();
     }
@@ -303,7 +309,7 @@ inline void bballApplet::rightCollision()
   m_x_vel *= -m_resitution;
   adjustAngularVelocity( &m_y_vel, -m_circum_vel );
   m_circum_vel = -m_y_vel;
-  if (m_bottom == 1) 
+  if (m_bottom == 1)
   {
     //kDebug() << "HIT Bottom AND RIGHT";
     m_x_vel = 0.0;
@@ -448,6 +454,11 @@ void bballApplet::mousePressEvent (QGraphicsSceneMouseEvent * event)
 {
     if (immutability() != Plasma::Mutable) {
         return;
+    }
+
+    if (m_refresh_pos) {
+        m_refresh_pos = false;
+        m_position = geometry();
     }
 
     m_x_vel = 0;
