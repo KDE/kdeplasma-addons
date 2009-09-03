@@ -49,9 +49,9 @@ void ContactList::setQuery(const QString& query)
             m_engine->disconnectSource(m_query, this);
         }
         m_query = query;
+        dataUpdated(m_query, Plasma::DataEngine::Data());
         if (!m_query.isEmpty()) {
             m_engine->connectSource(m_query, this);
-            dataUpdated(m_query, m_engine->query(m_query));
         }
     }
 }
