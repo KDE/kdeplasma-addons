@@ -1,14 +1,20 @@
 [Desktop Entry]
 Name=Pastebin engine
+Name[es]=Motor de Pastebin
 Name[nds]=Pastebin-Karn
+Name[pt]=Motor do Pastebin
 Name[pt_BR]=Mecanismo do Pastebin
 Name[sv]=Pastebin-gränssnitt
+Name[tr]=Pastebin motoru
 Name[uk]=Рушій Pastebin
 Name[x-test]=xxPastebin enginexx
 Comment=Engine to paste text and images to servers
+Comment[es]=Motor para pegar texto e imágenes en servidores
 Comment[nds]=En Karn för't infögen vun Text oder Biller op feern Servers
+Comment[pt]=Um motor para colar o texto e imagens para servidores remotos
 Comment[pt_BR]=Mecanismo para colar texto e imagens para servidores
 Comment[sv]=Gränssnitt för att ḱlistra in text och bilder på en server
+Comment[tr]=Uzak sunuculara metin/resim yapıştırma motoru
 Comment[uk]=Рушій для надсилання тексту і зображень на сервери
 Comment[x-test]=xxEngine to paste text and images to serversxx
 Type=Service
