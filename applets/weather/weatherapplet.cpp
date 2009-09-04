@@ -339,6 +339,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         //m_currentIcon = new Plasma::IconWidget(KIcon(data["Condition Icon"].toString()), QString(), this);
         //m_currentIcon->icon().pixmap(QSize(KIconLoader::SizeEnormous,KIconLoader::SizeEnormous));
         m_currentIcon->setDrawBackground(false);
+        m_currentIcon->setAcceptHoverEvents(false);
         m_currentIcon->show();
     }
 
