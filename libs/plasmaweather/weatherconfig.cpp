@@ -53,6 +53,7 @@ public:
 
     WeatherConfig *q;
     WeatherConfigSearch searchDlg;
+    Plasma::DataEngine *m_engine;
     QString source;
     Ui::WeatherConfig ui;
     KDialog *dlg;
@@ -113,15 +114,18 @@ void WeatherConfig::getNewStuff()
     if (engine.init("plasmaweather.knsrc")) {
         KNS::Entry::List entries = engine.downloadDialogModal(this);
         if (entries.size() > 0) {
-           kDebug() << "We have ions to download!!!!!!!!!!!!";
+            kDebug() << "About to ask WeatherEngine for plugin update!";
+            d->m_engine->setProperty("update", true);
         }
     }
 }
 
 void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
 {
+    d->m_engine = dataengine;
     d->searchDlg.setDataEngine(dataengine);
 }
+
 
 void WeatherConfig::setSource(const QString& source)
 {

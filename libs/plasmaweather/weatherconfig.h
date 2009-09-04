@@ -56,7 +56,9 @@ public:
      * Sets dataengine to use
      **/
     void setDataEngine(Plasma::DataEngine* dataengine);
-    
+   
+    Plasma::DataEngine *engine();
+ 
     /**
      * Sets ion source
      **/
