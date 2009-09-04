@@ -98,10 +98,7 @@ void PersonJob::slotAvatarJobResult( KJob *job )
     qWarning() << "Error retrieving Avatar:" << job->errorText();
   } else {
     QPixmap pic;
-    if ( !pic.loadFromData( m_avatarData ) ) {
-      setError( UserDefinedError );
-      setErrorText( i18n("Unable to parse avatar image data.") );
-    } else {
+    if ( pic.loadFromData( m_avatarData ) ) {
       m_person.setAvatar( pic );
     }
   }
