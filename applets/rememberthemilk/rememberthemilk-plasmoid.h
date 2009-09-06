@@ -71,6 +71,7 @@ class RememberTheMilkPlasmoid : public Plasma::PopupApplet
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void configFinished();
+    void startAuth();
     
     void setSortBy(SortBy sortBy);
     

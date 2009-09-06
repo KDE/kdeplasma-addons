@@ -54,12 +54,13 @@ RTM::Session::~Session()
   delete d;
 }
 
-void RTM::Session::login(const QString& username, const QString& password) {
+void RTM::Session::showLoginWindow() {
   //FIXME: What happens when auth wasn't created?
   if (!d->auth)
     d->auth = new RTM::Auth(d->permissions, d->apiKey, d->sharedSecret);
-  d->auth->login(d->authUrl, username, password);
+  d->auth->showLoginWebpage();
 }
+
 
 
 QString RTM::Session::getAuthUrl() const {

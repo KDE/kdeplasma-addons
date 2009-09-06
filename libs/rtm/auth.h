@@ -40,7 +40,7 @@ class RTM_EXPORT Auth : public Request
 Q_OBJECT
   public:
     Auth(RTM::Permissions permissions, const QString &apiKey, const QString &sharedSecret);
-    void login(const QString &authUrl, const QString &username, const QString &password);
+    void showLoginWebpage();
     QString getAuthUrl();
     void continueAuthForToken();
 
@@ -52,17 +52,14 @@ Q_OBJECT
     Request *frobRequest;
     Request *tokenRequest;
     KHTMLPart* authPage;
-    QString m_username;
-    QString m_password;
-    int authCount;
 
   signals:
     void authUrlReady(QString authUrl);
     void tokenReceived(QString token);
 
   protected slots:
-    void pageLoaded();
-    void pageLoadingReq(const KUrl& url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browserArgs);
+    void pageClosed();
+    void showLoginWindowInternal();
 };
 
 } // Namespace RTM

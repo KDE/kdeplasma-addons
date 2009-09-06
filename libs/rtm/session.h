@@ -59,7 +59,7 @@ Q_OBJECT
     virtual ~Session();
 
     QString getAuthUrl() const;
-    void login(const QString &username, const QString &password);
+    void showLoginWindow();
     bool authenticated() const;
 
     RTM::Request* request(const QString& method);

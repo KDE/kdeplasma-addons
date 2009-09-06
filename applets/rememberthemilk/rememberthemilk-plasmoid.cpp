@@ -44,6 +44,7 @@
 #include "ui_general.h"
 #include "taskmodel.h"
 #include "tasksortfilter.h"
+#include <KLineEdit>
 
 RememberTheMilkPlasmoid::RememberTheMilkPlasmoid(QObject* parent, const QVariantList& args)
     : Plasma::PopupApplet(parent, args),
@@ -114,16 +115,16 @@ void RememberTheMilkPlasmoid::init() {
   Plasma::Applet::init();
 }
 
+
+void RememberTheMilkPlasmoid::startAuth()
+{
+  KConfigGroup cg = m_authService->operationDescription("Login");
+  busyUntil(m_authService->startOperationCall(cg));
+  busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
+  m_authenticated = false;  
+}
+
 void RememberTheMilkPlasmoid::configAccepted() {
-  if (!m_authWidgetUi->username->text().isEmpty()) {
-      // Remove/replace tabs?
-      KConfigGroup cg = m_authService->operationDescription("Login");
-      cg.writeEntry("username", m_authWidgetUi->username->text());
-      cg.writeEntry("password", m_authWidgetUi->password->text());
-      busyUntil(m_authService->startOperationCall(cg));
-      busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
-      m_authenticated = false;
-  }
   switch(m_generalOptionsUi->sortType->currentIndex()) {
     case 0:
       setSortBy(SortDue);
@@ -144,6 +145,7 @@ void RememberTheMilkPlasmoid::createConfigurationInterface(KConfigDialog* parent
   connect(parent, SIGNAL(finished()), this, SLOT(configFinished()));
   connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+  connect(m_authWidgetUi->authenticate, SIGNAL(clicked(bool)), this, SLOT(startAuth()));
   
   if (m_authenticated) {
     m_authWidgetUi->authStatus->setText(i18n("Authenticated"));
@@ -154,8 +156,6 @@ void RememberTheMilkPlasmoid::createConfigurationInterface(KConfigDialog* parent
     m_authWidgetUi->kled->setState(KLed::Off); 
     m_authWidgetUi->kled->setColor(Qt::red);
   }
-  m_authWidgetUi->username->clear();
-  m_authWidgetUi->password->clear();
   
   m_generalOptionsUi->sortType->setCurrentIndex(m_sortBy);
   

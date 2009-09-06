@@ -48,88 +48,46 @@ RTM::Auth::~Auth() {
   tokenRequest->deleteLater();
 }
 
-void RTM::Auth::login(const QString& authUrl, const QString& username, const QString& password) {
-  kDebug() << "Starting Login for user: " << username;
-  KIO::Job *job = KIO::get(KUrl(authUrl), KIO::NoReload, KIO::HideProgressInfo);
-  QByteArray data;
-  KIO::NetAccess::synchronousRun(job, 0, &data);
-  job->deleteLater();
-  
-  authPage = new KHTMLPart();
-  authPage->setJScriptEnabled(false);
-  authPage->begin(KUrl(authUrl));
-  authPage->write(data.constData());
-  authPage->end();
-  
-  //authPage->view()->resize(500, 400);
-  //authPage->widget()->show();
-  
-  m_username = username;
-  m_password = password;
-  
-  connect(authPage, SIGNAL(completed()), SLOT(pageLoaded()));
-  connect(authPage->browserExtension(), SIGNAL(openUrlRequestDelayed(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
-          SLOT(pageLoadingReq(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&))); 
-          
-  authCount = 0;
-}
 
-void RTM::Auth::pageLoaded() {
-  kDebug() << "Stage " << authCount;
-  
-  if (authCount >= 2) {
-    disconnect(authPage);
-    continueAuthForToken();
-    return;
-  }
-    
-  DOM::HTMLInputElement auth = authPage->htmlDocument().getElementById("authorize_yes");
-  if (!auth.isNull()) {
-    kDebug() << "Entering Stage 2";
-    authCount = 2;
-    auth.click();
-    return;
-  }
-  
-  DOM::HTMLInputElement uname = authPage->htmlDocument().getElementById("username");
-  DOM::HTMLInputElement pword = authPage->htmlDocument().getElementById("password");
-  DOM::HTMLFormElement form = authPage->htmlDocument().getElementById("loginform");
-  
-  if (uname.isNull()) {
-    authCount = 2;
-    disconnect(authPage);
-    authPage->deleteLater();
-    continueAuthForToken();
-    return;
-  }
-  
-  uname.setValue(m_username);
-  pword.setValue(m_password);
-  
-  kDebug() << "Entering Stage 1";
-    
-  form.submit();
-  
-  authCount = 1;
-}
-
-void RTM::Auth::pageLoadingReq(const KUrl& url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browserArgs)
+void RTM::Auth::showLoginWebpage()
 {
-  kDebug() << url;
-  authPage->setArguments(args);
-  authPage->browserExtension()->setBrowserArguments(browserArgs);
-  authPage->openUrl(url);
+  connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal()));
+  frobRequest->sendRequest();
 }
 
-QString RTM::Auth::getAuthUrl() {
-  QString reply = frobRequest->sendSynchronousRequest();
+
+void RTM::Auth::showLoginWindowInternal()
+{
+  QString reply = frobRequest->readAll();
   frob = reply.remove(0, reply.indexOf("<frob>")+6);
   frob.truncate(frob.indexOf("</frob>"));
   kDebug() << "Frob: " << frob;
   arguments.insert("frob", frob);
-  return requestUrl();
+  
+  
+  authPage = new KHTMLPart();
+
+  authPage->openUrl(getAuthUrl());
+  
+  authPage->widget()->resize(800, 600);
+  authPage->widget()->scroll(0, 200);
+  authPage->widget()->show();
+  
+  
+  connect(authPage->widget(), SIGNAL(destroyed(QObject*)), SLOT(pageClosed()));
 }
 
+
+void RTM::Auth::pageClosed() {
+  disconnect(authPage);
+  continueAuthForToken();
+}
+
+QString RTM::Auth::getAuthUrl() {
+  if (frob.isEmpty())
+    kWarning() << "Warning, Frob is EMPTY";
+  return requestUrl();
+}
 
 QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
 {
@@ -176,6 +134,7 @@ QString RTM::Auth::requestUrl() {
 
 void RTM::Auth::continueAuthForToken()
 {
+  kDebug() << "Token Time";
   tokenRequest->addArgument("frob", arguments.value("frob"));
   QString reply = tokenRequest->sendSynchronousRequest();
 
