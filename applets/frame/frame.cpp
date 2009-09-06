@@ -432,7 +432,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     }
 
     parent->addPage(m_configDialog->imageSettings, i18n("Image"), icon());
-    parent->addPage(m_configDialog->appearanceSettings, i18n("Appearance"), icon());
+    parent->addPage(m_configDialog->appearanceSettings, i18n("Appearance"), "preferences-desktop-theme");
     parent->setDefaultButton(KDialog::Ok);
     parent->showButtonSeparator(true);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
