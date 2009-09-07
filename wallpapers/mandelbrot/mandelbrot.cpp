@@ -340,16 +340,16 @@ void Mandelbrot::zoomView(const QPointF& at, qreal zoomFactor)
     m_center += (oldResolution - newResolution) * (at - QPointF(width()/2, height()/2));
 
     // now scale part the old image and merge it immediately into m_image to give the user a sense of speed
-    qreal srcwidth = width() * qMin(zoomFactor,1.);
-    qreal srcheight = height() * qMin(zoomFactor,1.);
+    qreal srcwidth = width() * qMin(zoomFactor,(qreal)(1.0));
+    qreal srcheight = height() * qMin(zoomFactor,(qreal)(1.0));
     qreal srcleft = at.x() - srcwidth/2.;
     qreal srcright = at.x() + srcwidth/2.;
     qreal srctop = at.y() - srcheight/2.;
     qreal srcbottom = at.y() + srcheight/2.;
-    qreal srcleft_c = CLAMP(srcleft, 0., (qreal)width());
-    qreal srcright_c = CLAMP(srcright, 0., (qreal)width());
-    qreal srctop_c = CLAMP(srctop, 0., (qreal)height());
-    qreal srcbottom_c = CLAMP(srcbottom, 0., (qreal)height());
+    qreal srcleft_c = CLAMP(srcleft, (qreal)(0.0), (qreal)width());
+    qreal srcright_c = CLAMP(srcright, (qreal)(0.0), (qreal)width());
+    qreal srctop_c = CLAMP(srctop, (qreal)(0.0), (qreal)height());
+    qreal srcbottom_c = CLAMP(srcbottom, (qreal)(0.0), (qreal)height());
     qreal srcwidth_c = srcright_c - srcleft_c;
     qreal srcheight_c = srcbottom_c - srctop_c;
     qreal dstwidth = width() * qMin(1./zoomFactor,1.);
