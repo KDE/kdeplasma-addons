@@ -70,7 +70,7 @@ void PersonJob::slotUserJobResult( KJob *job )
   
     emitResult();
   } else {
-    qDebug() << m_userData;
+    // qDebug() << m_userData;
     m_person = PersonParser().parse( m_userData );
   
     if (!m_person.avatarUrl().isEmpty()) {
