@@ -145,11 +145,9 @@ void UserWidget::dataUpdated(const QString& source, const Plasma::DataEngine::Da
 
     QPixmap pm = m_data["Avatar"].value<QPixmap>();
     QString pmUrl = m_data["AvatarUrl"].toUrl().toString();
-    if (!pm.isNull()) {
-        m_image->setPixmap(pm);
-    } else {
-        kDebug() << "avatarUrl" << pmUrl;
-    }
+
+    m_image->setPixmap(pm);
+
     setName();
     setInfo();
 
