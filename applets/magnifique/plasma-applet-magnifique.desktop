@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Magnifique
+Name[fr]=Loupe
 Name[it]=Lente d'ingrandimento
 Name[nn]=Forstørring
 Name[sk]=Lupa
@@ -13,6 +14,7 @@ Comment[ca]=Una lent d'augment per l'escriptori Plasma
 Comment[da]=Et forstørrelsesglas til Plasma-skrivebordet
 Comment[es]=Una lente de ampliación para el escritorio Plasma
 Comment[et]=Plasma töölaua suurendusklaas
+Comment[fr]=Une loupe pour le bureau Plasma
 Comment[nds]=En Kiekglas för den Plasma-Schriefdisch
 Comment[nn]=Eit forstørringsglas til Plasma-skrivebordet
 Comment[pt]=Uma lupa de ampliação para o ambiente de trabalho Plasma

@@ -8,6 +8,7 @@ Name[sv]=Pastebin-gränssnitt
 Name[tr]=Pastebin motoru
 Name[uk]=Рушій Pastebin
 Name[x-test]=xxPastebin enginexx
+Name[zh_TW]=Pastebin 引擎
 Comment=Engine to paste text and images to servers
 Comment[es]=Motor para pegar texto e imágenes en servidores
 Comment[nds]=En Karn för't infögen vun Text oder Biller op feern Servers
@@ -17,6 +18,7 @@ Comment[sv]=Gränssnitt för att ḱlistra in text och bilder på en server
 Comment[tr]=Uzak sunuculara metin/resim yapıştırma motoru
 Comment[uk]=Рушій для надсилання тексту і зображень на сервери
 Comment[x-test]=xxEngine to paste text and images to serversxx
+Comment[zh_TW]=將文字與影像貼到遠端伺服器的引擎
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
