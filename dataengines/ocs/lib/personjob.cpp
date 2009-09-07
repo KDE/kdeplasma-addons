@@ -73,14 +73,18 @@ void PersonJob::slotUserJobResult( KJob *job )
     qDebug() << m_userData;
     m_person = PersonParser().parse( m_userData );
   
-    qDebug() << "Getting avatar from" << m_person.avatarUrl();
-  
-    m_job = KIO::get( m_person.avatarUrl(), KIO::NoReload,
-      KIO::HideProgressInfo );
-    connect( m_job, SIGNAL( result( KJob * ) ),
-      SLOT( slotAvatarJobResult( KJob * ) ) );
-    connect( m_job, SIGNAL( data( KIO::Job *, const QByteArray & ) ),
-      SLOT( slotAvatarJobData( KIO::Job *, const QByteArray & ) ) );    
+    if (!m_person.avatarUrl().isEmpty()) {
+      qDebug() << "Getting avatar from" << m_person.avatarUrl();
+
+      m_job = KIO::get( m_person.avatarUrl(), KIO::NoReload,
+        KIO::HideProgressInfo );
+      connect( m_job, SIGNAL( result( KJob * ) ),
+        SLOT( slotAvatarJobResult( KJob * ) ) );
+      connect( m_job, SIGNAL( data( KIO::Job *, const QByteArray & ) ),
+        SLOT( slotAvatarJobData( KIO::Job *, const QByteArray & ) ) );
+    } else {
+      emitResult();
+    }
   }
 }
 
