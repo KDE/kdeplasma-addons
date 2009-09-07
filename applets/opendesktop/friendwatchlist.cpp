@@ -28,8 +28,8 @@ FriendWatchList::FriendWatchList(Plasma::DataEngine* engine, QObject* parent)
     : QObject(parent),
       m_list(engine)
 {
-    connect(&m_list, SIGNAL(keyAdded(QString)), SLOT(slotKeyAdded(QString)));
-    connect(&m_list, SIGNAL(keyRemoved(QString)), SLOT(slotKeyRemoved(QString)));
+    connect(&m_list, SIGNAL(keysAdded(QSet<QString>)), SLOT(slotKeysAdded(QSet<QString>)));
+    connect(&m_list, SIGNAL(keysRemoved(QSet<QString>)), SLOT(slotKeysRemoved(QSet<QString>)));
 }
 
 
@@ -55,15 +55,19 @@ void FriendWatchList::setRelativeTo(const QString& id)
 }
 
 
-void FriendWatchList::slotKeyAdded(const QString& key)
+void FriendWatchList::slotKeysAdded(const QSet<QString>& keys)
 {
-    emit friendAdded(QString(key).remove(0, 7)); // Remove the Person- prefix
+    foreach (const QString& key, keys) {
+        emit friendAdded(QString(key).remove(0, 7)); // Remove the Person- prefix
+    }
 }
 
 
-void FriendWatchList::slotKeyRemoved(const QString& key)
+void FriendWatchList::slotKeysRemoved(const QSet<QString>& keys)
 {
-    emit friendRemoved(QString(key).remove(0, 7)); // Remove the Person- prefix
+    foreach (const QString& key, keys) {
+        emit friendRemoved(QString(key).remove(0, 7)); // Remove the Person- prefix
+    }
 }
 
 

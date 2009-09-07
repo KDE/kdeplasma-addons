@@ -34,17 +34,18 @@ class SourceWatchList : public QObject
         bool contains(const QString& key) const;
         QString query() const;
         void setQuery(const QString& query);
+        QVariant value(const QString& id) const;
 
     Q_SIGNALS:
-        void keyAdded(const QString& key);
-        void keyRemoved(const QString& key);
+        void keysAdded(const QSet<QString>& keys);
+        void keysRemoved(const QSet<QString>& keys);
 
     private Q_SLOTS:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
     private:
+        Plasma::DataEngine::Data m_data;
         Plasma::DataEngine* m_engine;
-        QSet<QString> m_keys;
         QString m_query;
 };
 

@@ -40,8 +40,8 @@ class FriendWatchList : public QObject
         void friendRemoved(const QString& id);
 
     private Q_SLOTS:
-        void slotKeyAdded(const QString& key);
-        void slotKeyRemoved(const QString& key);
+        void slotKeysAdded(const QSet<QString>& keys);
+        void slotKeysRemoved(const QSet<QString>& keys);
 
     private:
         SourceWatchList m_list;

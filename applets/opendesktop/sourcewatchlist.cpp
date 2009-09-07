@@ -33,7 +33,7 @@ SourceWatchList::SourceWatchList(DataEngine* engine, QObject* parent)
 
 bool SourceWatchList::contains(const QString& key) const
 {
-    return m_keys.contains(key);
+    return m_data.contains(key);
 }
 
 
@@ -53,18 +53,21 @@ void SourceWatchList::setQuery(const QString& query)
 }
 
 
+QVariant SourceWatchList::value(const QString& id) const
+{
+    return m_data.value(id);
+}
+
+
 void SourceWatchList::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
     Q_UNUSED(source)
 
-    QSet<QString> keys = QSet<QString>::fromList(data.keys());
-    foreach(const QString& key, QSet<QString>(m_keys).subtract(keys)) {
-        emit keyRemoved(key);
-    }
-    foreach(const QString& key, QSet<QString>(keys).subtract(m_keys)) {
-        emit keyAdded(key);
-    }
-    m_keys = keys;
+    const QSet<QString> oldKeys = QSet<QString>::fromList(m_data.keys());
+    const QSet<QString> newKeys = QSet<QString>::fromList(data.keys());
+    m_data = data;
+    emit keysRemoved(QSet<QString>(oldKeys).subtract(newKeys));
+    emit keysAdded(QSet<QString>(newKeys).subtract(oldKeys));
 }
 
 
