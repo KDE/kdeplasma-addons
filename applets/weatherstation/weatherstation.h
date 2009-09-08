@@ -56,7 +56,7 @@ class WeatherStation : public WeatherPopupApplet
 
         QString fitValue(const KUnitConversion::Value& value, int digits);
         QStringList fromCondition(const QString& condition);
-        KUnitConversion::Value value(const QString& value, const QString& unit);
+        KUnitConversion::Value value(const QString& value, int unit);
 
     private:
         LCD *m_lcd;

@@ -32,6 +32,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KToolInvocation>
+#include <KUnitConversion/Value>
 
 #include <Plasma/Frame>
 #include <Plasma/IconWidget>
@@ -44,9 +45,9 @@
 #include <weatherview.h>
 #include <cmath>
 
-template <typename T> T clampValue(T value, int decimals) 
-{ 
-        const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul; 
+template <typename T> T clampValue(T value, int decimals)
+{
+        const T mul = std::pow(static_cast<T>(10), decimals); return int(value * mul) / mul;
 }
 
 WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
@@ -113,12 +114,12 @@ void WeatherApplet::init()
     m_locationLabel->nativeWidget()->setWordWrap(false);
     m_locationLabel->setMinimumWidth(85);
 
-    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute); 	 
+    m_conditionsLabel->nativeWidget()->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     m_conditionsLabel->nativeWidget()->setWordWrap(false);
     m_conditionsLabel->setMinimumWidth(55);
 
-    m_windIcon->setMaximumSize(0,0); 	 
-    m_windIcon->setOrientation(Qt::Horizontal); 	 
+    m_windIcon->setMaximumSize(0,0);
+    m_windIcon->setOrientation(Qt::Horizontal);
     m_windIcon->setTextBackgroundColor(QColor());
 
     m_tempLabel->nativeWidget()->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
@@ -228,7 +229,7 @@ void WeatherApplet::resizeView()
         }
     }
 }
- 
+
 void WeatherApplet::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
@@ -262,7 +263,7 @@ void WeatherApplet::setVisible(bool visible, QGraphicsLayout *layout)
     }
 }
 
-void WeatherApplet::setVisibleLayout(bool val)  
+void WeatherApplet::setVisibleLayout(bool val)
 {
     if (m_titleFrame) {
         m_titleFrame->setVisible(val);
@@ -270,27 +271,29 @@ void WeatherApplet::setVisibleLayout(bool val)
 
     setVisible(val, m_titlePanel);
     setVisible(val, m_bottomLayout);
-    
+
     m_courtesyLabel->setVisible(val);
 }
 
-QString WeatherApplet::convertTemperature(int format, QString value, int type, bool rounded = false, bool degreesOnly = false)
+QString WeatherApplet::convertTemperature(KUnitConversion::UnitPtr format, QString value,
+                                          int type, bool rounded = false, bool degreesOnly = false)
 {
-    double temp = WeatherUtils::convertTemperature(value.toDouble(), type, format);
+    KUnitConversion::Value v(value.toDouble(), type);
+    v = v.convertTo(format);
 
     if (rounded) {
-        int tempNumber = qRound(temp);
+        int tempNumber = qRound(v.number());
         if (degreesOnly) {
-            return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
+            return i18nc("temperature, unit", "%1%2", tempNumber, i18nc("Degree, unit symbol", "°"));
         } else {
-            return i18nc("temperature, unit", "%1%2", tempNumber, WeatherUtils::getUnitString(format, false));
+            return i18nc("temperature, unit", "%1%2", tempNumber, v.unit()->symbol());
         }
     } else {
-        float formattedTemp = clampValue(temp, 1);
+        float formattedTemp = clampValue(v.number(), 1);
         if (degreesOnly) {
-            return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(WeatherUtils::DegreeUnit, false));
+            return i18nc("temperature, unit", "%1%2", formattedTemp, i18nc("Degree, unit symbol", "°"));
         } else {
-            return i18nc("temperature, unit", "%1%2", formattedTemp, WeatherUtils::getUnitString(format, false));
+            return i18nc("temperature, unit", "%1%2", formattedTemp, v.unit()->symbol());
         }
     }
 }
@@ -309,12 +312,12 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         // fiveDayTokens[3] = High Temperature
         // fiveDayTokens[4] = Low Temperature
         if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
-            m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-            m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnitInt(), fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+            m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt())));
         } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
-            m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt())));
         } else { // Both high and low
-            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt()), convertTemperature(temperatureUnitInt(),  fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt()), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt())));
         }
     }
     else {
@@ -324,14 +327,14 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     m_conditionsLabel->setText(data["Current Conditions"].toString().trimmed());
 
     if (isValidData(data["Temperature"])) {
-        m_tempLabel->setText(convertTemperature(temperatureUnitInt(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
+        m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
     } else {
         m_tempLabel->setText(i18nc("Not available","N/A"));
     }
 
     if (!m_currentIcon) {
         kDebug() << "Create new Plasma::IconWidget (condition)";
-        m_currentIcon = new Plasma::IconWidget(m_graphicsWidget); 
+        m_currentIcon = new Plasma::IconWidget(m_graphicsWidget);
         m_currentIcon->resize(KIconLoader::SizeEnormous, KIconLoader::SizeEnormous);
         m_currentIcon->setMinimumWidth(KIconLoader::SizeSmall);
         m_currentIcon->setZValue(900);
@@ -351,8 +354,10 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     }
 
     if (data["Wind Speed"] != "N/A" && data["Wind Speed"].toDouble() != 0 && data["Wind Speed"] != "Calm") {
+        KUnitConversion::Value v(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt());
+        v = v.convertTo(speedUnit());
         m_windIcon->setText(i18nc("wind direction, speed","%1 %2 %3", data["Wind Direction"].toString(),
-                clampValue(WeatherUtils::convertSpeed(data["Wind Speed"].toDouble(), data["Wind Speed Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
+                clampValue(v.number(), 1), v.unit()->symbol()));
     } else {
         if (data["Wind Speed"] == "N/A") {
             m_windIcon->setText(i18nc("Not available","N/A"));
@@ -469,7 +474,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     highItem->setText(i18nc("Short for no data available","-"));
                     hiItems.append(highItem);
                 } else {
-                    highItem->setText(convertTemperature(temperatureUnitInt(), fiveDayTokens[3], data["Temperature Unit"].toInt()));
+                    highItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt()));
                     hiItems.append(highItem);
                 }
             }
@@ -482,7 +487,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     lowItem->setText(i18nc("Short for no data available","-"));
                     lowItems.append(lowItem);
                 } else {
-                    lowItem->setText(convertTemperature(temperatureUnitInt(), fiveDayTokens[4], data["Temperature Unit"].toInt()));
+                    lowItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt()));
                     lowItems.append(lowItem);
                 }
             }
@@ -529,9 +534,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Windchill"])) {
        QStandardItem *dataWindchill = new QStandardItem();
-       
+
        // Use temperature unit to convert windchill temperature we only show degrees symbol not actual temperature unit
-       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(temperatureUnitInt(), data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
+       dataWindchill->setText(i18nc("windchill, unit", "Windchill: %1", convertTemperature(temperatureUnit(), data["Windchill"].toString(), data["Temperature Unit"].toInt(), false, true)));
        m_detailsModel->appendRow(dataWindchill);
     }
 
@@ -539,20 +544,22 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         QStandardItem *dataHumidex = new QStandardItem();
 
         // Use temperature unit to convert humidex temperature we only show degrees symbol not actual temperature unit
-        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(temperatureUnitInt(), data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
+        dataHumidex->setText(i18nc("humidex, unit","Humidex: %1", convertTemperature(temperatureUnit(), data["Humidex"].toString(), data["Temperature Unit"].toInt(), false, true)));
 
         m_detailsModel->appendRow(dataHumidex);
     }
 
     if (isValidData(data["Dewpoint"])) {
         QStandardItem *dataDewpoint = new QStandardItem();
-        dataDewpoint->setText(i18nc("ground temperature, unit", "Dewpoint: %1", convertTemperature(temperatureUnitInt(), data["Dewpoint"].toString(), data["Temperature Unit"].toInt(), false)));
+        dataDewpoint->setText(i18nc("ground temperature, unit", "Dewpoint: %1", convertTemperature(temperatureUnit(), data["Dewpoint"].toString(), data["Temperature Unit"].toInt(), false)));
         m_detailsModel->appendRow(dataDewpoint);
     }
 
     if (isValidData(data["Pressure"])) {
         QStandardItem *dataPressure = new QStandardItem();
-        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", clampValue(WeatherUtils::convertPressure(data["Pressure"].toDouble(), data["Pressure Unit"].toInt(), pressureUnitInt()), 2), pressureUnit()));
+        KUnitConversion::Value v(data["Pressure"].toDouble(), data["Pressure Unit"].toInt());
+        v = v.convertTo(pressureUnit());
+        dataPressure->setText(i18nc("pressure, unit","Pressure: %1 %2", clampValue(v.number(), 2), v.unit()->symbol()));
         m_detailsModel->appendRow(dataPressure);
     }
 
@@ -565,10 +572,11 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (isValidData(data["Visibility"])) {
         QStandardItem *dataVisibility = new QStandardItem();
         bool isNumeric;
-        double visibility = data["Visibility"].toDouble(&isNumeric);
-        Q_UNUSED(visibility)
+        data["Visibility"].toDouble(&isNumeric);
         if (isNumeric) {
-            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", clampValue(WeatherUtils::convertDistance(data["Visibility"].toDouble(), data["Visibility Unit"].toInt(), visibilityUnitInt()), 1), visibilityUnit()));
+            KUnitConversion::Value v(data["Visibility"].toDouble(), data["Visibility Unit"].toInt());
+            v = v.convertTo(visibilityUnit());
+            dataVisibility->setText(i18nc("distance, unit","Visibility: %1 %2", clampValue(v.number(), 1), v.unit()->symbol()));
         } else {
             dataVisibility->setText(i18nc("visibility from distance", "Visibility: %1", data["Visibility"].toString()));
         }
@@ -578,7 +586,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     if (isValidData(data["Humidity"])) {
         QStandardItem *dataHumidity = new QStandardItem();
-        dataHumidity->setText(i18nc("content of water in air", "Humidity: %1%2", data["Humidity"].toString(), WeatherUtils::getUnitString(WeatherUtils::Percent, false)));
+        dataHumidity->setText(i18nc("content of water in air", "Humidity: %1%2", data["Humidity"].toString(), i18nc("Precent, measure unit", "%")));
         m_detailsModel->appendRow(dataHumidity);
     }
 
@@ -589,17 +597,19 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_windIcon->setIcon(windIcon);
         m_windIcon->setMaximumSize(m_windIcon->sizeFromIconSize(KIconLoader::SizeSmall));
         m_windIcon->update();
-   
+
         QStandardItem *windInfo = new QStandardItem(m_windIcon->icon(), NULL);
         windInfo->setTextAlignment(Qt::AlignRight);
         windInfo->setText(m_windIcon->text());
         m_detailsModel->appendRow(windInfo);
     }
-        
+
     if (isValidData(data["Wind Gust"])) {
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
-        dataGust->setText(i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2", clampValue(WeatherUtils::convertSpeed(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt(), speedUnitInt()), 1), speedUnit()));
+        KUnitConversion::Value v(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt());
+        v = v.convertTo(visibilityUnit());
+        dataGust->setText(i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2", clampValue(v.number(), 1), v.unit()->symbol()));
         m_detailsModel->appendRow(dataGust);
     }
 
@@ -723,7 +733,7 @@ void WeatherApplet::configAccepted()
 {
     setVisibleLayout(false);
     WeatherPopupApplet::configAccepted();
-}   
+}
 
 void WeatherApplet::reloadTheme()
 {

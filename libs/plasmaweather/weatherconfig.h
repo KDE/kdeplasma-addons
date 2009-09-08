@@ -43,7 +43,7 @@ public:
         Visibility = 8
     };
     Q_DECLARE_FLAGS(ConfigurableUnits, ConfigurableUnit)
-    
+
     WeatherConfig(QWidget *parent = 0);
     virtual ~WeatherConfig();
 
@@ -51,14 +51,14 @@ public:
      * Set units that are configurable. Default to all.
      **/
     void setConfigurableUnits(const ConfigurableUnits units);
-    
+
     /**
      * Sets dataengine to use
      **/
     void setDataEngine(Plasma::DataEngine* dataengine);
-   
+
     Plasma::DataEngine *engine();
- 
+
     /**
      * Sets ion source
      **/
@@ -67,52 +67,52 @@ public:
     /**
      * Sets temperature unit
      **/
-    void setTemperatureUnit(const QString& unit);
+    void setTemperatureUnit(int unit);
 
     /**
      * Sets pressure unit
      **/
-    void setPressureUnit(const QString& unit);
+    void setPressureUnit(int unit);
 
     /**
      * Sets speed unit
      **/
-    void setSpeedUnit(const QString& unit);
+    void setSpeedUnit(int unit);
 
     /**
      * Sets visibility unit
      **/
-    void setVisibilityUnit(const QString& unit);
+    void setVisibilityUnit(int unit);
 
     /**
      * @return ion source to use
      **/
     QString source();
-    
+
     /**
      * @return update interval
      **/
     int updateInterval();
-    
+
     /**
      * @return temperature unit
      **/
-    QString temperatureUnit();
+    int temperatureUnit();
 
     /**
      * @return pressure unit
      **/
-    QString pressureUnit();
+    int pressureUnit();
 
     /**
      * @return speed unit
      **/
-    QString speedUnit();
+    int speedUnit();
 
     /**
      * @return visibility unit
      **/
-    QString visibilityUnit();
+    int visibilityUnit();
 
     /**
      * Sets header labels visible/hidden
@@ -121,7 +121,7 @@ public:
 
   signals:
     void settingsChanged();
-    
+
 public Q_SLOTS:
     /**
      * Sets update interval
@@ -134,7 +134,7 @@ protected Q_SLOTS:
 private:
     class Private;
     Private * const d;
-    
+
     Q_PRIVATE_SLOT(d, void changePressed())
 };
 

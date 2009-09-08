@@ -26,6 +26,9 @@
 #include <KInputDialog>
 
 #include <KNS/Engine>
+#include <KUnitConversion/Converter>
+
+using namespace KUnitConversion;
 
 class WeatherConfig::Private
 {
@@ -35,7 +38,7 @@ public:
         , searchDlg(weatherconfig)
     {
     }
-    
+
     void changePressed()
     {
         searchDlg.setSource(source);
@@ -67,20 +70,20 @@ WeatherConfig::WeatherConfig(QWidget *parent)
 
     d->dlg = qobject_cast<KDialog*>(parent);
     d->ui.setupUi(this);
-    d->ui.temperatureComboBox->addItem(i18n("Celsius \302\260C"), "C");
-    d->ui.temperatureComboBox->addItem(i18n("Fahrenheit \302\260F"), "F");
-    d->ui.temperatureComboBox->addItem(i18n("Kelvin K"), "K");
-    d->ui.pressureComboBox->addItem(i18n("Hectopascals hPa"), "hPa");
-    d->ui.pressureComboBox->addItem(i18n("Kilopascals kPa"), "kPa");
-    d->ui.pressureComboBox->addItem(i18n("Millibars mbar"), "mbar");
-    d->ui.pressureComboBox->addItem(i18n("Inches of Mercury inHg"), "inHg");
-    d->ui.speedComboBox->addItem(i18n("Meters per Second m/s"), "m/s");
-    d->ui.speedComboBox->addItem(i18n("Kilometers per Hour km/h"), "km/h");
-    d->ui.speedComboBox->addItem(i18n("Miles per Hour mph"), "mph");
-    d->ui.speedComboBox->addItem(i18n("Knots kt"), "kt");
-    d->ui.speedComboBox->addItem(i18n("Beaufort scale bft"), "bft");
-    d->ui.visibilityComboBox->addItem(i18n("Kilometers"), "km");
-    d->ui.visibilityComboBox->addItem(i18n("Miles"), "ml");
+    d->ui.temperatureComboBox->addItem(i18n("Celsius \302\260C"), Celsius);
+    d->ui.temperatureComboBox->addItem(i18n("Fahrenheit \302\260F"), Fahrenheit);
+    d->ui.temperatureComboBox->addItem(i18n("Kelvin K"), Kelvin);
+    d->ui.pressureComboBox->addItem(i18n("Hectopascals hPa"), Hectopascal);
+    d->ui.pressureComboBox->addItem(i18n("Kilopascals kPa"), Kilopascal);
+    d->ui.pressureComboBox->addItem(i18n("Millibars mbar"), Millibar);
+    d->ui.pressureComboBox->addItem(i18n("Inches of Mercury inHg"), InchesOfMercury);
+    d->ui.speedComboBox->addItem(i18n("Meters per Second m/s"), MeterPerSecond);
+    d->ui.speedComboBox->addItem(i18n("Kilometers per Hour km/h"), KilometerPerHour);
+    d->ui.speedComboBox->addItem(i18n("Miles per Hour mph"), MilePerHour);
+    d->ui.speedComboBox->addItem(i18n("Knots kt"), Knot);
+    d->ui.speedComboBox->addItem(i18n("Beaufort scale bft"), Beaufort);
+    d->ui.visibilityComboBox->addItem(i18n("Kilometers"), Kilometer);
+    d->ui.visibilityComboBox->addItem(i18n("Miles"), Mile);
 
     // Setup GHNS button icon
     d->ui.ghnsProviderButton->setIcon(KIcon("get-hot-new-stuff"));
@@ -89,18 +92,18 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setUpdateInterval(int)));
-            
-    connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)), 
+
+    connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SIGNAL(settingsChanged()));
-    connect(d->ui.temperatureComboBox, SIGNAL(currentIndexChanged(int)), 
+    connect(d->ui.temperatureComboBox, SIGNAL(currentIndexChanged(int)),
             this, SIGNAL(settingsChanged()));
-    connect(d->ui.pressureComboBox, SIGNAL(currentIndexChanged(int)), 
+    connect(d->ui.pressureComboBox, SIGNAL(currentIndexChanged(int)),
             this, SIGNAL(settingsChanged()));
-    connect(d->ui.speedComboBox, SIGNAL(currentIndexChanged(int)), 
+    connect(d->ui.speedComboBox, SIGNAL(currentIndexChanged(int)),
             this, SIGNAL(settingsChanged()));
-    connect(d->ui.visibilityComboBox, SIGNAL(currentIndexChanged(int)), 
+    connect(d->ui.visibilityComboBox, SIGNAL(currentIndexChanged(int)),
             this, SIGNAL(settingsChanged()));
-            
+
 }
 
 WeatherConfig::~WeatherConfig()
@@ -147,22 +150,22 @@ void WeatherConfig::setUpdateInterval(int interval)
     d->ui.updateIntervalSpinBox->setSuffix(ki18np(" minute", " minutes"));
 }
 
-void WeatherConfig::setTemperatureUnit(const QString& unit)
+void WeatherConfig::setTemperatureUnit(int unit)
 {
     d->ui.temperatureComboBox->setCurrentIndex(d->ui.temperatureComboBox->findData(unit));
 }
 
-void WeatherConfig::setPressureUnit(const QString& unit)
+void WeatherConfig::setPressureUnit(int unit)
 {
     d->ui.pressureComboBox->setCurrentIndex(d->ui.pressureComboBox->findData(unit));
 }
 
-void WeatherConfig::setSpeedUnit(const QString& unit)
+void WeatherConfig::setSpeedUnit(int unit)
 {
     d->ui.speedComboBox->setCurrentIndex(d->ui.speedComboBox->findData(unit));
 }
 
-void WeatherConfig::setVisibilityUnit(const QString& unit)
+void WeatherConfig::setVisibilityUnit(int unit)
 {
     d->ui.visibilityComboBox->setCurrentIndex(d->ui.visibilityComboBox->findData(unit));
 }
@@ -177,25 +180,24 @@ int WeatherConfig::updateInterval()
     return d->ui.updateIntervalSpinBox->value();
 }
 
-QString WeatherConfig::temperatureUnit()
+int WeatherConfig::temperatureUnit()
 {
-    return d->ui.temperatureComboBox->itemData(
-            d->ui.temperatureComboBox->currentIndex()).toString();
+    return d->ui.temperatureComboBox->itemData(d->ui.temperatureComboBox->currentIndex()).toInt();
 }
 
-QString WeatherConfig::pressureUnit()
+int WeatherConfig::pressureUnit()
 {
-    return d->ui.pressureComboBox->itemData(d->ui.pressureComboBox->currentIndex()).toString();
+    return d->ui.pressureComboBox->itemData(d->ui.pressureComboBox->currentIndex()).toInt();
 }
 
-QString WeatherConfig::speedUnit()
+int WeatherConfig::speedUnit()
 {
-    return d->ui.speedComboBox->itemData(d->ui.speedComboBox->currentIndex()).toString();
+    return d->ui.speedComboBox->itemData(d->ui.speedComboBox->currentIndex()).toInt();
 }
 
-QString WeatherConfig::visibilityUnit()
+int WeatherConfig::visibilityUnit()
 {
-    return d->ui.visibilityComboBox->itemData(d->ui.visibilityComboBox->currentIndex()).toString();
+    return d->ui.visibilityComboBox->itemData(d->ui.visibilityComboBox->currentIndex()).toInt();
 }
 
 void WeatherConfig::setConfigurableUnits(const ConfigurableUnits units)

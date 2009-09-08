@@ -129,12 +129,12 @@ void WeatherStation::setLCDIcon()
     setPopupIcon(QIcon(m_lcdPanel->toPixmap()));
 }
 
-Value WeatherStation::value(const QString& value, const QString& unit)
+Value WeatherStation::value(const QString& value, int unit)
 {
     if (value.isEmpty() || value == "N/A") {
         return Value();
     }
-    return Value(value, unit);
+    return Value(value.toDouble(), unit);
 }
 
 void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
@@ -143,16 +143,13 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (data.contains("Place")) {
-        Value temp = value(data["Temperature"].toString(),
-                WeatherUtils::getUnitString(data["Temperature Unit"].toInt(), true));
+        Value temp = value(data["Temperature"].toString(), data["Temperature Unit"].toInt());
         setTemperature(temp);
         setPressure(conditionIcon(),
-                    value(data["Pressure"].toString(),
-                        WeatherUtils::getUnitString(data["Pressure Unit"].toInt())),
+                    value(data["Pressure"].toString(), data["Pressure Unit"].toInt()),
                     data["Pressure Tendency"].toString());
         setHumidity(data["Humidity"].toString());
-        setWind(value(data["Wind Speed"].toString(),
-                WeatherUtils::getUnitString(data["Wind Speed Unit"].toInt(), true)),
+        setWind(value(data["Wind Speed"].toString(), data["Wind Speed Unit"].toInt()),
                 data["Wind Direction"].toString());
         m_lcd->setLabel("provider-label", data["Credit"].toString());
         m_url = data["Credit Url"].toString();
