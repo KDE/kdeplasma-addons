@@ -30,6 +30,7 @@
 #include "userwidget.h"
 #include "ui_opendesktopConfig.h"
 #include "ui_opendesktopLocationConfig.h"
+#include "sourcewatchlist.h"
 
 //desktop view
 namespace Plasma
@@ -69,6 +70,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void switchDisplayedUser(const QString& id, bool switchToPersonal = true);
         void addFriend(const QString& id);
         void sendMessage(const QString& id);
+        void newActivities(const QSet<QString>& keys);
 
     private:
         void connectGeolocation();
@@ -92,6 +94,7 @@ class OpenDesktop : public Plasma::PopupApplet
 
         //Friends activity tab
         ActivityList* m_activityList;
+        SourceWatchList* m_activityWatcher;
 
         // Nearby people tab
         ContactList* m_nearList;

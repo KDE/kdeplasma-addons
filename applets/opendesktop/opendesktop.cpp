@@ -29,6 +29,7 @@
 #include <KConfigDialog>
 #include <KLocale>
 #include <KToolInvocation>
+#include <KNotification>
 
 //plasma
 #include <Plasma/Label>
@@ -115,6 +116,9 @@ void OpenDesktop::init()
     switchDisplayedUser(m_username, false);
     m_friendList->setOwnId(m_username);
     m_nearList->setOwnId(m_username);
+    m_activityWatcher = new SourceWatchList(dataEngine("ocs"), this);
+    m_activityWatcher->setQuery("activity");
+    connect(m_activityWatcher, SIGNAL(keysAdded(QSet<QString>)), SLOT(newActivities(QSet<QString>)));
 }
 
 void OpenDesktop::connectGeolocation()
@@ -345,5 +349,24 @@ void OpenDesktop::saveGeoLocation()
 
     emit configNeedsSaving();
 }
+
+
+void OpenDesktop::newActivities(const QSet<QString>& keys)
+{
+    // FIXME: This still needs to take into account which activities have already been displayed
+
+    // Don't mass-spam the user with activities
+    if (keys.size() <= 2) {
+        foreach (const QString& key, keys) {
+            Plasma::DataEngine::Data activity = m_activityWatcher->value(key).value<Plasma::DataEngine::Data>();
+            KNotification* notification = new KNotification("activity");
+            notification->setTitle("OpenDesktop activities");
+            notification->setText(activity.value("message").toString());
+            notification->setComponentData(KComponentData("plasma-applet-opendesktop", "plasma-applet-opendesktop", KComponentData::SkipMainComponentRegistration));
+            notification->sendEvent();
+        }
+    }
+}
+
 
 #include "opendesktop.moc"

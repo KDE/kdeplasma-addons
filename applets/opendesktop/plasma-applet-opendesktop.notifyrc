@@ -1,0 +1,7 @@
+[Global]
+Comment=OpenDesktop Activities Plasmoid
+
+[Event/activity]
+Name=New Activity
+Comment=Something interesting has happened in your friends network
+Action=Popup

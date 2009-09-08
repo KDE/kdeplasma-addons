@@ -30,3 +30,4 @@ install(TARGETS plasma_applet_opendesktop DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-applet-opendesktop.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES user.css DESTINATION ${DATA_INSTALL_DIR}/plasma-applet-opendesktop/)
+install(FILES plasma-applet-opendesktop.notifyrc DESTINATION ${DATA_INSTALL_DIR}/plasma-applet-opendesktop/)
