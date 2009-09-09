@@ -21,9 +21,12 @@
 #ifndef ATTICA_CONTENT_H
 #define ATTICA_CONTENT_H
 
+#include <QtCore/QDateTime>
+#include <QtCore/QList>
+#include <QtCore/QMap>
+
 #include "atticaclient_export.h"
 
-#include <QtCore>
 
 namespace Attica {
 

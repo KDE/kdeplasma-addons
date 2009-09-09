@@ -21,7 +21,9 @@
 
 #include "activityparser.h"
 
+#include <QRegExp>
 #include <QXmlStreamReader>
+
 
 using namespace Attica;
 

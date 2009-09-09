@@ -21,9 +21,11 @@
 #ifndef ATTICA_CATEGORY_H
 #define ATTICA_CATEGORY_H
 
+#include <QtCore/QList>
+#include <QtCore/QString>
+
 #include "atticaclient_export.h"
 
-#include <QtCore>
 
 namespace Attica {
 

@@ -21,11 +21,11 @@
 #ifndef ATTICA_ACTIVITY_H
 #define ATTICA_ACTIVITY_H
 
+#include <QtCore/QDateTime>
+#include <QtCore/QList>
+
 #include "atticaclient_export.h"
 
-#include <kurl.h>
-
-#include <QtCore>
 
 namespace Attica {
 
