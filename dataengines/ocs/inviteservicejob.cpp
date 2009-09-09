@@ -21,7 +21,7 @@
 
 #include "inviteservicejob.h"
 
-#include "ocsapi.h"
+#include "provider.h"
 
 
 using namespace Attica;
@@ -42,7 +42,7 @@ InviteServiceJob::~InviteServiceJob()
 
 void InviteServiceJob::start()
 {
-    m_job = OcsApi::postInvitation(destination(), parameters()["Message"].toString());
+    m_job = Provider::byId("opendesktop").postInvitation(destination(), parameters()["Message"].toString());
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 

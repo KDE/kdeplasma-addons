@@ -17,36 +17,92 @@
     USA.
 */
 
-#include "ocsapi.h"
+#include "provider.h"
 
 #include <KDebug>
 
 using namespace Attica;
 
-OcsApi::OcsApi()
+
+class Provider::Private {
+  public:
+    KUrl m_baseUrl;
+    QString m_id;
+    QString m_name;
+    Private(const Private& other)
+      : m_baseUrl(other.m_baseUrl), m_id(other.m_id), m_name(other.m_name)
+    {
+    }
+    Private(const QString& id, const KUrl& baseUrl, const QString name)
+      : m_baseUrl(baseUrl), m_id(id), m_name(name)
+    {
+    }
+};
+
+
+Provider Provider::byId(const QString& id)
+{
+  if (id == "opendesktop") {
+    return Provider(id, KUrl("https://api.opendesktop.org/v1/"), "OpenDesktop.org");
+  } else {
+    return Provider();
+  }
+}
+
+
+Provider::Provider()
+  : d(new Private(QString(), KUrl(), QString()))
 {
 }
 
-PersonJob *OcsApi::requestPerson( const QString &id )
+Provider::Provider(const Provider& other)
+  : d(new Private(*other.d))
+{
+}
+
+Provider::Provider(const QString& id, const KUrl& baseUrl, const QString& name)
+  : d(new Private(id, baseUrl, name))
+{
+}
+
+Provider::~Provider()
+{
+    delete d;
+}
+
+
+QString Provider::id() const
+{
+    return d->m_id;
+}
+
+
+QString Provider::name() const
+{
+    return d->m_name;
+}
+
+
+PersonJob* Provider::requestPerson(const QString& id)
 {
   KUrl url = createUrl( "person/data/" + id );
   return doRequestPerson( url );
 }
 
-PersonJob *OcsApi::requestPersonSelf()
+PersonJob* Provider::requestPersonSelf()
 {
   KUrl url = createUrl( "person/self" );
   return doRequestPerson( url );
 }
 
-PersonListJob *OcsApi::requestPersonSearchByName( const QString &name )
+PersonListJob* Provider::requestPersonSearchByName(const QString& name)
 {
   KUrl url = createUrl( "person/data");
   url.addQueryItem("name", name);
   return doRequestPersonList( url );
 }
 
-PersonListJob *OcsApi::requestPersonSearchByLocation( qreal latitude, qreal longitude, qreal distance, const int page, const int pageSize)
+PersonListJob* Provider::requestPersonSearchByLocation(qreal latitude, qreal longitude, qreal distance, int page, int pageSize)
 {
   KUrl url = createUrl( "person/data" );
   url.addQueryItem("latitude", QString::number(latitude));
@@ -60,7 +116,7 @@ PersonListJob *OcsApi::requestPersonSearchByLocation( qreal latitude, qreal long
   return doRequestPersonList( url );
 }
 
-PersonListJob *OcsApi::requestFriend( const QString &id, const int page, const int pageSize )
+PersonListJob* Provider::requestFriend(const QString& id, int page, int pageSize)
 {
   KUrl url = createUrl( "friend/data/" + id );
   url.addQueryItem("page", QString::number(page));
@@ -69,13 +125,13 @@ PersonListJob *OcsApi::requestFriend( const QString &id, const int page, const i
   return doRequestPersonList( url );
 }
 
-ActivityListJob *OcsApi::requestActivity()
+ActivityListJob* Provider::requestActivity()
 {
   KUrl url = createUrl( "activity" );
   return doRequestActivityList( url );
 }
 
-PostJob *OcsApi::postActivity( const QString &message )
+PostJob* Provider::postActivity(const QString& message)
 {
   PostJob *job = new PostJob();
 
@@ -87,7 +143,7 @@ PostJob *OcsApi::postActivity( const QString &message )
   return job;
 }
 
-PostJob *OcsApi::postInvitation( const QString &to, const QString &message )
+PostJob* Provider::postInvitation(const QString& to, const QString& message)
 {
   PostJob *job = new PostJob();
 
@@ -99,7 +155,7 @@ PostJob *OcsApi::postInvitation( const QString &to, const QString &message )
   return job;  
 }
 
-PostJob *OcsApi::postLocation( qreal latitude, qreal longitude, const QString &city, const QString &country )
+PostJob* Provider::postLocation(qreal latitude, qreal longitude, const QString& city, const QString& country)
 {
   PostJob *job = new PostJob();
   
@@ -117,17 +173,17 @@ PostJob *OcsApi::postLocation( qreal latitude, qreal longitude, const QString &c
 }
 
 
-FolderListJob *OcsApi::requestFolders()
+FolderListJob* Provider::requestFolders()
 {
   return doRequestFolderList( createUrl( "message" ) );
 }
 
-MessageListJob *OcsApi::requestMessages( const QString &folderId )
+MessageListJob* Provider::requestMessages(const QString& folderId)
 {
   return doRequestMessageList( createUrl( "message/" + folderId ) );
 }
 
-PostJob *OcsApi::postMessage( const Message &message )
+PostJob* Provider::postMessage( const Message &message )
 {
   PostJob *job = new PostJob();
   
@@ -141,7 +197,7 @@ PostJob *OcsApi::postMessage( const Message &message )
   return job;
 }
 
-CategoryListJob *OcsApi::requestCategories()
+CategoryListJob* Provider::requestCategories()
 {
   CategoryListJob *job = new CategoryListJob();
   
@@ -152,8 +208,7 @@ CategoryListJob *OcsApi::requestCategories()
   return job;
 }
 
-ContentListJob *OcsApi::requestContent( const Category::List &categories,
-  const QString &search, SortMode sortMode )
+ContentListJob* Provider::requestContent(const Category::List& categories, const QString& search, SortMode sortMode)
 {
   ContentListJob *job = new ContentListJob();
   
@@ -191,7 +246,7 @@ ContentListJob *OcsApi::requestContent( const Category::List &categories,
   return job;
 }
 
-ContentJob *OcsApi::requestContent( const QString &id )
+ContentJob* Provider::requestContent(const QString& id)
 {
   ContentJob *job = new ContentJob();
   
@@ -202,7 +257,7 @@ ContentJob *OcsApi::requestContent( const QString &id )
   return job;
 }
 
-KnowledgeBaseJob *OcsApi::requestKnowledgeBase( const QString &id )
+KnowledgeBaseJob* Provider::requestKnowledgeBase(const QString& id)
 {
   KnowledgeBaseJob *job = new KnowledgeBaseJob();
 
@@ -213,7 +268,7 @@ KnowledgeBaseJob *OcsApi::requestKnowledgeBase( const QString &id )
   return job;
 }
 
-KnowledgeBaseListJob *OcsApi::requestKnowledgeBase( const int content, const QString &search, SortMode sortMode, const int page, const int pageSize )
+KnowledgeBaseListJob* Provider::requestKnowledgeBase(int content, const QString& search, Provider::SortMode sortMode, int page, int pageSize)
 {
   KnowledgeBaseListJob *job = new KnowledgeBaseListJob();
 
@@ -253,7 +308,7 @@ KnowledgeBaseListJob *OcsApi::requestKnowledgeBase( const int content, const QSt
   return job;
 }
 
-EventJob* OcsApi::requestEvent(const QString& id)
+EventJob* Provider::requestEvent(const QString& id)
 {
   EventJob* job = new EventJob();
 
@@ -263,7 +318,7 @@ EventJob* OcsApi::requestEvent(const QString& id)
   return job;
 }
 
-EventListJob* OcsApi::requestEvent(const QString& country, const QString& search, const QDate& startAt, OcsApi::SortMode mode, int page, int pageSize)
+EventListJob* Provider::requestEvent(const QString& country, const QString& search, const QDate& startAt, Provider::SortMode mode, int page, int pageSize)
 {
   EventListJob* job = new EventListJob();
 
@@ -304,14 +359,14 @@ EventListJob* OcsApi::requestEvent(const QString& country, const QString& search
 
 }
 
-KUrl OcsApi::createUrl( const QString &path )
+KUrl Provider::createUrl(const QString& path)
 {
-  KUrl url( "https://api.opendesktop.org/v1/" );
+  KUrl url(d->m_baseUrl);
   url.addPath( path );
   return url;
 }
 
-PersonJob *OcsApi::doRequestPerson( const KUrl &url )
+PersonJob* Provider::doRequestPerson(const KUrl& url)
 {
   PersonJob *job = new PersonJob();
 
@@ -321,7 +376,7 @@ PersonJob *OcsApi::doRequestPerson( const KUrl &url )
   return job;
 }
 
-PersonListJob *OcsApi::doRequestPersonList( const KUrl &url )
+PersonListJob* Provider::doRequestPersonList(const KUrl& url)
 {
   PersonListJob *job = new PersonListJob();
 
@@ -331,7 +386,7 @@ PersonListJob *OcsApi::doRequestPersonList( const KUrl &url )
   return job;
 }
 
-ActivityListJob *OcsApi::doRequestActivityList( const KUrl &url )
+ActivityListJob* Provider::doRequestActivityList(const KUrl& url)
 {
   ActivityListJob *job = new ActivityListJob();
 
@@ -341,7 +396,7 @@ ActivityListJob *OcsApi::doRequestActivityList( const KUrl &url )
   return job;
 }
 
-FolderListJob *OcsApi::doRequestFolderList( const KUrl &url )
+FolderListJob* Provider::doRequestFolderList(const KUrl& url)
 {
   FolderListJob *job = new FolderListJob();
   
@@ -350,7 +405,7 @@ FolderListJob *OcsApi::doRequestFolderList( const KUrl &url )
   return job;
 }
 
-MessageListJob *OcsApi::doRequestMessageList( const KUrl &url )
+MessageListJob* Provider::doRequestMessageList(const KUrl& url)
 {
   MessageListJob *job = new MessageListJob();
   

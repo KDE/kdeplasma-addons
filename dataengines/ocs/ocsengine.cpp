@@ -21,7 +21,7 @@
 
 #include "ocsengine.h"
 #include "activitylistjob.h"
-#include "ocsapi.h"
+#include "provider.h"
 
 #include <plasma/datacontainer.h>
 
@@ -66,14 +66,14 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 {
     kDebug() << "for name" << name;
     if (name == I18N_NOOP("activity")) {
-        m_job = Attica::OcsApi::requestActivity();
+        m_job = Provider::byId("opendesktop").requestActivity();
         setData(name, DataEngine::Data());
         connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
         return m_job != 0;
     } else if (name.startsWith("Friends-")) {
         QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
         kDebug() << "Searching friends for id" << _id;
-        PersonListJob* _job = Attica::OcsApi::requestFriend(_id, 0, m_maximumItems);
+        PersonListJob* _job = Provider::byId("opendesktop").requestFriend(_id, 0, m_maximumItems);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
 
@@ -85,7 +85,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
     } else if (name.startsWith("Person-")) {
         QString _id = QString(name).remove(0, 7); // Removes prefix Person-
         kDebug() << "Searching for Person id" << _id;
-        PersonJob* _job = Attica::OcsApi::requestPerson(_id);
+        PersonJob* _job = Provider::byId("opendesktop").requestPerson(_id);
         if (m_personCache.contains(_id)) {
             // Set data already in the cache, it will hopefully get replaced by more complete data soon
             setPersonData(QString("Person-%1").arg(_id), m_personCache[_id]);
@@ -100,7 +100,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         if (m_personCache.contains(_id)) {
             return true;
         } else {
-            PersonJob* _job = Attica::OcsApi::requestPerson(_id);
+            PersonJob* _job = Provider::byId("opendesktop").requestPerson(_id);
             setData(name, DataEngine::Data());
             connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
             return _job != 0;
@@ -117,7 +117,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         qreal dist = args[2].toFloat();
 
         kDebug() << "Searching for people near" << lat << lon << "distance:" << dist << m_maximumItems;
-        PersonListJob* _job = Attica::OcsApi::requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
+        PersonListJob* _job =Provider::byId("opendesktop").requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
 
@@ -140,14 +140,14 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         QString city = args[3];
 
         kDebug() << "Posting location:" << lat << lon << country << city;
-        PostJob* _job = Attica::OcsApi::postLocation(lat, lon, city, country);
+        PostJob* _job = Provider::byId("opendesktop").postLocation(lat, lon, city, country);
         connect(_job, SIGNAL( result( KJob* ) ), SLOT( locationPosted( KJob* ) ));
         return _job != 0;
 
     } else if (name.startsWith("KnowledgeBase-")) {
         QString _id = QString(name).remove(0, 14); // Removes prefix KnowledgeBase-
         kDebug() << "Searching for KnowledgeBase id" << _id;
-        KnowledgeBaseJob* _job = Attica::OcsApi::requestKnowledgeBase(_id);
+        KnowledgeBaseJob* _job = Provider::byId("opendesktop").requestKnowledgeBase(_id);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseResult( KJob * ) ) );
         return _job != 0;
@@ -168,20 +168,20 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
             content = args[4].toInt();
         }
 
-        Attica::OcsApi::SortMode sortMode;
+        Provider::SortMode sortMode;
 
         if (sortModeString == "new") {
-            sortMode = Attica::OcsApi::Newest;
+            sortMode = Provider::Newest;
         } else if (sortModeString == "alpha") {
-            sortMode = Attica::OcsApi::Alphabetical;
+            sortMode = Provider::Alphabetical;
         } else if (sortModeString == "high") {
-            sortMode = Attica::OcsApi::Rating;
+            sortMode = Provider::Rating;
         } else {
-            sortMode = Attica::OcsApi::Newest;
+            sortMode = Provider::Newest;
         }
 
         kDebug() << "Searching for" << query << "into knowledge base";
-        KnowledgeBaseListJob* _job = Attica::OcsApi::requestKnowledgeBase(content, query, sortMode, page, pageSize);
+        KnowledgeBaseListJob* _job = Provider::byId("opendesktop").requestKnowledgeBase(content, query, sortMode, page, pageSize);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseListResult( KJob * ) ) );
 
@@ -194,7 +194,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
     } else if (name.startsWith("Event-")) {
         QString _id = QString(name).remove(0, 6); // Removes prefix Event-
-        EventJob* _job = Attica::OcsApi::requestEvent(_id);
+        EventJob* _job = Provider::byId("opendesktop").requestEvent(_id);
         setData(name, DataEngine::Data());
         connect( _job, SIGNAL(result(KJob*)), SLOT(slotEventResult(KJob*)));
         return _job != 0;
@@ -213,8 +213,8 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         // FIXME: The size of the request is currently hardcoded
-        EventListJob* _job = OcsApi::requestEvent(country, search, QDate::currentDate(),
-            OcsApi::Alphabetical, 0, 100);
+        EventListJob* _job = Provider::byId("opendesktop").requestEvent(country, search, QDate::currentDate(),
+            Provider::Alphabetical, 0, 100);
         setData(name, DataEngine::Data());
         connect(_job, SIGNAL(result(KJob*)), SLOT(slotEventListResult(KJob*)));
 

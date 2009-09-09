@@ -10,7 +10,7 @@ set(ocsclient_SRCS
    personparser.cpp
    personjob.cpp
    personlistjob.cpp
-   ocsapi.cpp
+   provider.cpp
    postjob.cpp
    folder.cpp
    folderlistjob.cpp

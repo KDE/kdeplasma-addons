@@ -22,7 +22,7 @@
 #include "messagesendservicejob.h"
 
 #include "message.h"
-#include "ocsapi.h"
+#include "provider.h"
 
 
 using namespace Attica;
@@ -49,7 +49,7 @@ void MessageSendServiceJob::start()
     message.setSubject(params["Subject"].toString());
     message.setBody(params["Body"].toString());
     
-    m_job = OcsApi::postMessage(message);
+    m_job = Provider::byId("opendesktop").postMessage(message);
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 
