@@ -21,6 +21,7 @@
 
 #include "inviteservicejob.h"
 
+#include "postjob.h"
 #include "provider.h"
 
 

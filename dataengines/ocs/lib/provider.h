@@ -20,24 +20,30 @@
 #ifndef ATTICA_PROVIDER_H
 #define ATTICA_PROVIDER_H
 
-#include "atticaclient_export.h"
+#include <QtCore/QExplicitlySharedDataPointer>
 
-#include "personjob.h"
-#include "personlistjob.h"
-#include "activitylistjob.h"
-#include "postjob.h"
-#include "folderlistjob.h"
-#include "messagelistjob.h"
-#include "categorylistjob.h"
-#include "contentjob.h"
-#include "contentlistjob.h"
-#include "knowledgebasejob.h"
-#include "knowledgebaselistjob.h"
-#include "eventjob.h"
-#include "eventlistjob.h"
+#include "atticaclient_export.h"
+#include "category.h"
+
+class KUrl;
+class QDate;
 
 namespace Attica {
 
+class ActivityListJob;
+class CategoryListJob;
+class ContentJob;
+class ContentListJob;
+class EventJob;
+class EventListJob;
+class FolderListJob;
+class KnowledgeBaseJob;
+class KnowledgeBaseListJob;
+class Message;
+class MessageListJob;
+class PersonJob;
+class PersonListJob;
+class PostJob;
 class ProviderInitJob;
 
 /**

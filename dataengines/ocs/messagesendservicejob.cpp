@@ -22,6 +22,7 @@
 #include "messagesendservicejob.h"
 
 #include "message.h"
+#include "postjob.h"
 #include "provider.h"
 
 

@@ -20,7 +20,13 @@
 
 
 #include "ocsengine.h"
+
 #include "activitylistjob.h"
+#include "eventjob.h"
+#include "eventlistjob.h"
+#include "knowledgebasejob.h"
+#include "personjob.h"
+#include "postjob.h"
 #include "provider.h"
 #include "providerinitjob.h"
 

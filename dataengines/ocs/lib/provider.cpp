@@ -20,8 +20,23 @@
 #include "provider.h"
 
 #include <KDebug>
+#include <KUrl>
 
+#include "activitylistjob.h"
+#include "categorylistjob.h"
+#include "contentjob.h"
+#include "contentlistjob.h"
+#include "eventjob.h"
+#include "eventlistjob.h"
+#include "folderlistjob.h"
+#include "knowledgebasejob.h"
+#include "knowledgebaselistjob.h"
+#include "messagelistjob.h"
+#include "personjob.h"
+#include "personlistjob.h"
+#include "postjob.h"
 #include "providerinitjob.h"
+
 
 using namespace Attica;
 

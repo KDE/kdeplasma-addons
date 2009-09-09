@@ -1,5 +1,7 @@
 #include "providerinitjob.h"
 
+#include <KUrl>
+
 
 using namespace Attica;
 
