@@ -24,17 +24,20 @@
 
 #include <Plasma/Service>
 
+#include "provider.h"
+
 
 class PersonService : public Plasma::Service
 {
     public:
-        PersonService(const QString& id, QObject* parent = 0);
+        PersonService(const Attica::Provider& provider, const QString& id, QObject* parent = 0);
 
     protected:
         virtual Plasma::ServiceJob* createJob(const QString& operation, QMap<QString, QVariant>& parameters);
 
     private:
         QString m_id;
+        Attica::Provider m_provider;
 };
 
 

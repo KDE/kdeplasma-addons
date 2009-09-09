@@ -1,4 +1,5 @@
 set(ocsclient_SRCS
+   providerinitjob.cpp
    eventjob.cpp
    eventlistjob.cpp
    eventparser.cpp

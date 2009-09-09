@@ -1,7 +1,7 @@
 /*
     This file is part of KDE.
 
-    Copyright (c) 2009 Eckhart Wörner <ewoerner@kde.org>
+    Copyright (c) 2009 Eckhart Wörner <ewoerner@kde.org
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,31 +19,36 @@
     USA.
 */
 
-#ifndef INVITESERVICEJOB_H
-#define INVITESERVICEJOB_H
+#ifndef PROVIDERINITJOB_H
+#define PROVIDERINITJOB_H
 
-#include <Plasma/ServiceJob>
+#include <KJob>
 
+#include "atticaclient_export.h"
 #include "provider.h"
 
+namespace Attica {
 
-class InviteServiceJob : public Plasma::ServiceJob
+class ATTICA_EXPORT ProviderInitJob : public KJob
 {
     Q_OBJECT
 
     public:
-        InviteServiceJob(const Attica::Provider& provider, const QString& destination, const QString& operation,
-            const QMap<QString, QVariant>& parameters, QObject* parent = 0);
-        ~InviteServiceJob();
+        ProviderInitJob(const QString& id, QObject* parent = 0);
+
         void start();
 
+        Provider provider() const;
+
     private slots:
-        void result(KJob* job);
+        void doWork();
 
     private:
-        KJob* m_job;
-        Attica::Provider m_provider;
+        const QString m_id;
+        Provider m_provider;
 };
+
+}
 
 
 #endif

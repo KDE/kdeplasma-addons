@@ -21,16 +21,18 @@
 
 #include <KDebug>
 
+#include "providerinitjob.h"
+
 using namespace Attica;
 
 
-class Provider::Private {
+class Provider::Private : public QSharedData {
   public:
     KUrl m_baseUrl;
     QString m_id;
     QString m_name;
     Private(const Private& other)
-      : m_baseUrl(other.m_baseUrl), m_id(other.m_id), m_name(other.m_name)
+      : QSharedData(other), m_baseUrl(other.m_baseUrl), m_id(other.m_id), m_name(other.m_name)
     {
     }
     Private(const QString& id, const KUrl& baseUrl, const QString name)
@@ -40,13 +42,9 @@ class Provider::Private {
 };
 
 
-Provider Provider::byId(const QString& id)
+ProviderInitJob* Provider::byId(const QString& id)
 {
-  if (id == "opendesktop") {
-    return Provider(id, KUrl("https://api.opendesktop.org/v1/"), "OpenDesktop.org");
-  } else {
-    return Provider();
-  }
+  return new ProviderInitJob(id);
 }
 
 
@@ -56,7 +54,7 @@ Provider::Provider()
 }
 
 Provider::Provider(const Provider& other)
-  : d(new Private(*other.d))
+  : d(other.d)
 {
 }
 
@@ -65,9 +63,14 @@ Provider::Provider(const QString& id, const KUrl& baseUrl, const QString& name)
 {
 }
 
+Provider& Provider::operator=(const Attica::Provider & other)
+{
+    d = other.d;
+    return *this;
+}
+
 Provider::~Provider()
 {
-    delete d;
 }
 
 

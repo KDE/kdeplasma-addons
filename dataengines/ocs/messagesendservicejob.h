@@ -24,13 +24,15 @@
 
 #include <Plasma/ServiceJob>
 
+#include "provider.h"
+
 
 class MessageSendServiceJob : public Plasma::ServiceJob
 {
     Q_OBJECT
 
     public:
-        MessageSendServiceJob(const QString& destination, const QString& operation,
+        MessageSendServiceJob(const Attica::Provider& provider, const QString& destination, const QString& operation,
             const QMap<QString, QVariant>& parameters, QObject* parent = 0);
         ~MessageSendServiceJob();
         void start();
@@ -40,6 +42,7 @@ class MessageSendServiceJob : public Plasma::ServiceJob
 
     private:
         KJob* m_job;
+        Attica::Provider m_provider;
 };
 
 #endif

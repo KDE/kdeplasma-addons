@@ -38,6 +38,8 @@
 
 namespace Attica {
 
+class ProviderInitJob;
+
 /**
   Open Collaboration Services API.
 */
@@ -46,6 +48,8 @@ class ATTICA_EXPORT Provider
   public:
     Provider();
     Provider(const Provider& other);
+    Provider(const QString& id, const KUrl& baseUrl, const QString& name);
+    Provider& operator=(const Provider& other);
     ~Provider();
     
     QString name() const;
@@ -58,7 +62,7 @@ class ATTICA_EXPORT Provider
         Downloads
     };
 
-    static Provider byId(const QString& id);
+    static ProviderInitJob* byId(const QString& id);
 
     // Person part of OCS
 
@@ -110,9 +114,8 @@ class ATTICA_EXPORT Provider
     MessageListJob* doRequestMessageList(const KUrl& url);
 
   private:
-    Provider(const QString& id, const KUrl& baseUrl, const QString& name);
     class Private;
-    Private* const d;
+    QExplicitlySharedDataPointer<Private> d;
 };
 
 }

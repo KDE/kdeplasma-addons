@@ -22,13 +22,15 @@
 #include "ocsengine.h"
 #include "activitylistjob.h"
 #include "provider.h"
+#include "providerinitjob.h"
 
 #include <plasma/datacontainer.h>
 
 using namespace Attica;
 
 OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent)
+    : Plasma::DataEngine(parent),
+      m_providerInitialized(false)
 {
     // fairy random, should be set from the applet by calling
     m_maximumItems = 99;
@@ -37,6 +39,10 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
 
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
+
+    ProviderInitJob* job = new ProviderInitJob("opendesktop");
+    connect(job, SIGNAL(result(KJob*)), SLOT(initializeProvider(KJob*)));
+    job->start();
 }
 
 OcsEngine::~OcsEngine()
@@ -54,7 +60,7 @@ Plasma::Service* OcsEngine::serviceForSource(const QString& source)
     if (source.startsWith("Person-")) {
         QString id = QString(source).remove(0, 7);
         if (!m_personServices.contains(id)) {
-            m_personServices[id] = new PersonService(id, this);
+            m_personServices[id] = new PersonService(m_provider, id, this);
         }
         return m_personServices[id];
     }
@@ -66,15 +72,21 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 {
     kDebug() << "for name" << name;
     if (name == I18N_NOOP("activity")) {
-        m_job = Provider::byId("opendesktop").requestActivity();
         setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
+        m_job = m_provider.requestActivity();
         connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
         return m_job != 0;
     } else if (name.startsWith("Friends-")) {
+        setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
         QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
         kDebug() << "Searching friends for id" << _id;
-        PersonListJob* _job = Provider::byId("opendesktop").requestFriend(_id, 0, m_maximumItems);
-        setData(name, DataEngine::Data());
+        PersonListJob* _job = m_provider.requestFriend(_id, 0, m_maximumItems);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
 
         if (_job) {
@@ -84,14 +96,17 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
     } else if (name.startsWith("Person-")) {
         QString _id = QString(name).remove(0, 7); // Removes prefix Person-
-        kDebug() << "Searching for Person id" << _id;
-        PersonJob* _job = Provider::byId("opendesktop").requestPerson(_id);
         if (m_personCache.contains(_id)) {
             // Set data already in the cache, it will hopefully get replaced by more complete data soon
             setPersonData(QString("Person-%1").arg(_id), m_personCache[_id]);
         } else {
             setData(name, DataEngine::Data());
         }
+        if (cacheRequest(name)) {
+            return true;
+        }
+        kDebug() << "Searching for Person id" << _id;
+        PersonJob* _job = m_provider.requestPerson(_id);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
         return _job != 0;
     } else if (name.startsWith("PersonSummary-")) {
@@ -100,8 +115,11 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         if (m_personCache.contains(_id)) {
             return true;
         } else {
-            PersonJob* _job = Provider::byId("opendesktop").requestPerson(_id);
             setData(name, DataEngine::Data());
+            if (cacheRequest(name)) {
+                return true;
+            }
+            PersonJob* _job = m_provider.requestPerson(_id);
             connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
             return _job != 0;
         }
@@ -112,13 +130,17 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
             kDebug() << "it should go in the format: lat:long:distance (all in degrees)";
             return false;
         }
+        setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
+
         qreal lat = args[0].toFloat();
         qreal lon = args[1].toFloat();
         qreal dist = args[2].toFloat();
 
         kDebug() << "Searching for people near" << lat << lon << "distance:" << dist << m_maximumItems;
-        PersonListJob* _job =Provider::byId("opendesktop").requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
-        setData(name, DataEngine::Data());
+        PersonListJob* _job = m_provider.requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
 
         if (_job) {
@@ -140,15 +162,18 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         QString city = args[3];
 
         kDebug() << "Posting location:" << lat << lon << country << city;
-        PostJob* _job = Provider::byId("opendesktop").postLocation(lat, lon, city, country);
+        PostJob* _job = m_provider.postLocation(lat, lon, city, country);
         connect(_job, SIGNAL( result( KJob* ) ), SLOT( locationPosted( KJob* ) ));
         return _job != 0;
 
     } else if (name.startsWith("KnowledgeBase-")) {
+        setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
         QString _id = QString(name).remove(0, 14); // Removes prefix KnowledgeBase-
         kDebug() << "Searching for KnowledgeBase id" << _id;
-        KnowledgeBaseJob* _job = Provider::byId("opendesktop").requestKnowledgeBase(_id);
-        setData(name, DataEngine::Data());
+        KnowledgeBaseJob* _job = m_provider.requestKnowledgeBase(_id);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseResult( KJob * ) ) );
         return _job != 0;
 
@@ -158,6 +183,10 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         if (numTokens != 4 && numTokens != 5) {
             kDebug() << "Don't understand your request." << name;
             return false;
+        }
+        setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
         }
         QString query = args[0];
         QString sortModeString = args[1];
@@ -181,8 +210,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         kDebug() << "Searching for" << query << "into knowledge base";
-        KnowledgeBaseListJob* _job = Provider::byId("opendesktop").requestKnowledgeBase(content, query, sortMode, page, pageSize);
-        setData(name, DataEngine::Data());
+        KnowledgeBaseListJob* _job = m_provider.requestKnowledgeBase(content, query, sortMode, page, pageSize);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseListResult( KJob * ) ) );
 
         //putting the job/query pair into an hash to remember the association later
@@ -193,9 +221,12 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
 
     } else if (name.startsWith("Event-")) {
-        QString _id = QString(name).remove(0, 6); // Removes prefix Event-
-        EventJob* _job = Provider::byId("opendesktop").requestEvent(_id);
         setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
+        QString _id = QString(name).remove(0, 6); // Removes prefix Event-
+        EventJob* _job = m_provider.requestEvent(_id);
         connect( _job, SIGNAL(result(KJob*)), SLOT(slotEventResult(KJob*)));
         return _job != 0;
 
@@ -206,6 +237,10 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
             kDebug() << "Don't understand your request." << name;
             return false;
         }
+        setData(name, DataEngine::Data());
+        if (cacheRequest(name)) {
+            return true;
+        }
         QString country = args[0];
         QString search;
         if (numTokens == 2) {
@@ -213,9 +248,8 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         // FIXME: The size of the request is currently hardcoded
-        EventListJob* _job = Provider::byId("opendesktop").requestEvent(country, search, QDate::currentDate(),
+        EventListJob* _job = m_provider.requestEvent(country, search, QDate::currentDate(),
             Provider::Alphabetical, 0, 100);
-        setData(name, DataEngine::Data());
         connect(_job, SIGNAL(result(KJob*)), SLOT(slotEventListResult(KJob*)));
 
         //putting the job/query pair into an hash to remember the association later
@@ -226,6 +260,9 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         return _job != 0;
 
     } else if (name.startsWith("MaximumItems-")) {
+        if (cacheRequest(name)) {
+            return true;
+        }
         m_maximumItems = name.split('-')[1].toInt();
         kDebug() << "Changed maximum number of hits to" << m_maximumItems;
     }
@@ -527,6 +564,27 @@ void OcsEngine::slotEventListResult(KJob* j)
     }
 }
 
+
+void OcsEngine::initializeProvider(KJob* j)
+{
+    ProviderInitJob* job = static_cast<ProviderInitJob*>(j);
+    m_provider = job->provider();
+    m_providerInitialized = true;
+
+    foreach(const QString& query, m_requestCache) {
+        updateSourceEvent(query);
+    }
+    m_requestCache.clear();
+}
+
+
+bool OcsEngine::cacheRequest(const QString& query)
+{
+    if (!m_providerInitialized) {
+        m_requestCache.insert(query);
+    }
+    return !m_providerInitialized;
+}
 
 
 #include "ocsengine.moc"

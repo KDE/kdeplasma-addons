@@ -27,9 +27,9 @@
 using namespace Attica;
 
 
-InviteServiceJob::InviteServiceJob(const QString& destination, const QString& operation,
+InviteServiceJob::InviteServiceJob(const Provider& provider, const QString& destination, const QString& operation,
     const QMap< QString, QVariant>& parameters, QObject* parent)
-    : ServiceJob(destination, operation, parameters, parent) 
+    : ServiceJob(destination, operation, parameters, parent), m_provider(provider)
 {
 }
 
@@ -42,7 +42,7 @@ InviteServiceJob::~InviteServiceJob()
 
 void InviteServiceJob::start()
 {
-    m_job = Provider::byId("opendesktop").postInvitation(destination(), parameters()["Message"].toString());
+    m_job = m_provider.postInvitation(destination(), parameters()["Message"].toString());
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 

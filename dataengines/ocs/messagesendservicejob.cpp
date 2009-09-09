@@ -28,9 +28,8 @@
 using namespace Attica;
 
 
-MessageSendServiceJob::MessageSendServiceJob(const QString& destination, const QString& operation,
-    const QMap< QString, QVariant>& parameters, QObject* parent)
-    : ServiceJob(destination, operation, parameters, parent) 
+MessageSendServiceJob::MessageSendServiceJob(const Provider& provider, const QString& destination, const QString& operation, const QMap<QString, QVariant>& parameters, QObject* parent)
+    : ServiceJob(destination, operation, parameters, parent), m_provider(provider)
 {
 }
 
@@ -49,7 +48,7 @@ void MessageSendServiceJob::start()
     message.setSubject(params["Subject"].toString());
     message.setBody(params["Body"].toString());
     
-    m_job = Provider::byId("opendesktop").postMessage(message);
+    m_job = m_provider.postMessage(message);
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 

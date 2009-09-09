@@ -30,6 +30,7 @@
 #include <Solid/Networking>
 
 #include "personservice.h"
+#include "provider.h"
 
 class QTimer;
 class KJob;
@@ -68,12 +69,14 @@ protected Q_SLOTS:
     virtual void slotEventListResult(KJob* j);
     virtual void locationPosted( KJob *j );
     void networkStatusChanged(Solid::Networking::Status);
+    void initializeProvider(KJob* j);
 
 private:
     void setPersonData(const QString &source, const Attica::Person &person);
     void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
     void setEventData(const QString& source, const Attica::Event& event);
     void addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
+    bool cacheRequest(const QString& query);
 
     QHash<KJob*, QString> m_eventListJobs;
     QHash<KJob*, QString> m_knowledgeBaseListJobs;
@@ -84,6 +87,9 @@ private:
     int m_maximumItems;
     QHash<QString,PersonService*> m_personServices;
     QHash<QString, Attica::Person> m_personCache;
+    Attica::Provider m_provider;
+    bool m_providerInitialized;
+    QSet<QString> m_requestCache;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )

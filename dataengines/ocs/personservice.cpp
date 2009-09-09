@@ -25,7 +25,10 @@
 #include "messagesendservicejob.h"
 
 
-PersonService::PersonService(const QString& id, QObject* parent) : Service(parent), m_id(id)
+using namespace Attica;
+
+PersonService::PersonService(const Provider& provider, const QString& id, QObject* parent)
+    : Service(parent), m_id(id), m_provider(provider)
 {
     setName("ocsPerson");
 }
@@ -34,9 +37,9 @@ PersonService::PersonService(const QString& id, QObject* parent) : Service(paren
 Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
 {
     if (operation == "sendMessage") {
-        return new MessageSendServiceJob(m_id, operation, parameters);
+        return new MessageSendServiceJob(m_provider, m_id, operation, parameters);
     } else if (operation == "invite") {
-        return new InviteServiceJob(m_id, operation, parameters);
+        return new InviteServiceJob(m_provider, m_id, operation, parameters);
     } else
         return new Plasma::ServiceJob("", operation, parameters);
 }
