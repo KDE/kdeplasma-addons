@@ -24,145 +24,182 @@
 
 using namespace Attica;
 
+class Event::Private : public QSharedData {
+    public:
+        QString m_id;
+        QString m_name;
+        QString m_description;
+        QString m_user;
+        QDate m_startDate;
+        QDate m_endDate;
+        qreal m_latitude;
+        qreal m_longitude;
+        QString m_homepage;
+        QString m_country;
+        QString m_city;
+        QMap<QString, QString> m_extendedAttributes;
+
+        Private()
+            : m_latitude(0),
+              m_longitude(0)
+        {
+        }
+};
+
 
 Event::Event()
-    : m_latitude(0), m_longitude(0)
+    : d(new Private)
+{
+}
+
+Event::Event(const Event& other)
+    : d(other.d)
+{
+}
+
+Event& Event::operator=(const Event& other)
+{
+    d = other.d;
+    return *this;
+}
+
+Event::~Event()
 {
 }
 
 
 void Event::setId(const QString& id)
 {
-    m_id = id;
+    d->m_id = id;
 }
 
 QString Event::id() const
 {
-    return m_id;
+    return d->m_id;
 }
 
 
 void Event::setName(const QString& name)
 {
-    m_name = name;
+    d->m_name = name;
 }
 
 QString Event::name() const
 {
-    return m_name;
+    return d->m_name;
 }
 
 
 void Event::setDescription(const QString& text)
 {
-    m_description = text;
+    d->m_description = text;
 }
 
 QString Event::description() const
 {
-    return m_description;
+    return d->m_description;
 }
 
 
 void Event::setUser(const QString& id)
 {
-    m_user = id;
+    d->m_user = id;
 }
 
 QString Event::user() const
 {
-    return m_user;
+    return d->m_user;
 }
 
 
 void Event::setStartDate(const QDate& date)
 {
-    m_startDate = date;
+    d->m_startDate = date;
 }
 
 QDate Event::startDate() const
 {
-    return m_startDate;
+    return d->m_startDate;
 }
 
 
 void Event::setEndDate(const QDate& date)
 {
-    m_endDate = date;
+    d->m_endDate = date;
 }
 
 QDate Event::endDate() const
 {
-    return m_endDate;
+    return d->m_endDate;
 }
 
 
 void Event::setLatitude(qreal lat)
 {
-    m_latitude = lat;
+    d->m_latitude = lat;
 }
 
 qreal Event::latitude() const
 {
-    return m_latitude;
+    return d->m_latitude;
 }
 
 
 void Event::setLongitude(qreal lon)
 {
-    m_longitude = lon;
+    d->m_longitude = lon;
 }
 
 qreal Event::longitude() const
 {
-    return m_longitude;
+    return d->m_longitude;
 }
 
 
 void Event::setHomepage(const QString& url)
 {
-    m_homepage = url;
+    d->m_homepage = url;
 }
 
 QString Event::homepage() const
 {
-    return m_homepage;
+    return d->m_homepage;
 }
 
 
 void Event::setCountry(const QString& country)
 {
-    m_country = country;
+    d->m_country = country;
 }
 
 QString Event::country() const
 {
-    return m_country;
+    return d->m_country;
 }
 
 
 void Event::setCity(const QString& city)
 {
-    m_city = city;
+    d->m_city = city;
 }
 
 QString Event::city() const
 {
-    return m_city;
+    return d->m_city;
 }
 
 
 void Event::addExtendedAttribute(const QString& key, const QString& value)
 {
-    m_extendedAttributes.insert(key, value);
+    d->m_extendedAttributes.insert(key, value);
 }
 
 QString Event::extendedAttribute(const QString& key) const
 {
-    return m_extendedAttributes.value(key);
+    return d->m_extendedAttributes.value(key);
 }
 
 QMap<QString, QString> Event::extendedAttributes() const
 {
-    return m_extendedAttributes;
+    return d->m_extendedAttributes;
 }

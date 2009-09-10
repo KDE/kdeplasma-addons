@@ -23,6 +23,7 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QList>
+#include <QtCore/QSharedDataPointer>
 #include <QtGui/QPixmap>
 
 #include <KUrl>
@@ -38,6 +39,9 @@ class ATTICA_EXPORT Person
     typedef QList<Person> List;
   
     Person();
+    Person(const Person& other);
+    Person& operator=(const Person& other);
+    ~Person();
 
     void setId( const QString & );
     QString id() const;
@@ -78,19 +82,8 @@ class ATTICA_EXPORT Person
     QMap<QString,QString> extendedAttributes() const;
 
   private:
-    QString m_id;  
-    QString m_firstName;
-    QString m_lastName;
-    QDate m_birthday;
-    QString m_country;
-    qreal m_latitude;
-    qreal m_longitude;
-    KUrl m_avatarUrl;
-    QPixmap m_avatar;
-    QString m_homepage;
-    QString m_city;
-
-    QMap<QString,QString> m_extendedAttributes;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }

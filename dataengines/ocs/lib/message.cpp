@@ -23,87 +23,121 @@
 
 using namespace Attica;
 
+class Message::Private : public QSharedData {
+    public:
+        QString m_id;
+        QString m_from;
+        QString m_to;
+        QDateTime m_sent;
+        Status m_status;
+        QString m_statusText;
+        QString m_subject;
+        QString m_body;
+
+        Private()
+            : m_status(Unread)
+        {
+        }
+};
+
+
 Message::Message()
-  : m_status( Unread )
+  : d(new Private)
 {
 }
 
+Message::Message(const Message& other)
+    : d(other.d)
+{
+}
+
+Message& Message::operator=(const Attica::Message & other)
+{
+    d = other.d;
+    return *this;
+}
+
+Message::~Message()
+{
+}
+
+
 void Message::setId( const QString &u )
 {
-  m_id = u;
+  d->m_id = u;
 }
 
 QString Message::id() const
 {
-  return m_id;
+  return d->m_id;
 }
 
 void Message::setFrom( const QString &n )
 {
-  m_from = n;
+  d->m_from = n;
 }
 
 QString Message::from() const
 {
-  return m_from;
+  return d->m_from;
 }
   
 void Message::setTo( const QString &n )
 {
-  m_to = n;
+  d->m_to = n;
 }
 
 QString Message::to() const
 {
-  return m_to;
+  return d->m_to;
 }
     
-void Message::setSent( const QDateTime &d )
+void Message::setSent( const QDateTime &date )
 {
-  m_sent = d;
+  d->m_sent = date;
 }
 
 QDateTime Message::sent() const
 {
-  return m_sent;
+  return d->m_sent;
 }
 
 void Message::setStatus( Message::Status s )
 {
-  m_status = s;
+  d->m_status = s;
 }
 
 Message::Status Message::status() const
 {
-  return m_status;
+  return d->m_status;
 }
 
 void Message::setStatusText( const QString &c )
 {
-  m_statusText = c;
+  d->m_statusText = c;
 }
 
 QString Message::statusText() const
 {
-  return m_statusText;
+  return d->m_statusText;
 }
 
 void Message::setSubject( const QString &subject )
 {
-  m_subject = subject;
+  d->m_subject = subject;
 }
 
 QString Message::subject() const
 {
-  return m_subject;
+  return d->m_subject;
 }
 
 void Message::setBody( const QString &body )
 {
-  m_body = body;
+  d->m_body = body;
 }
 
 QString Message::body() const
 {
-  return m_body;
+  return d->m_body;
 }

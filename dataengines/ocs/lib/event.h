@@ -27,6 +27,7 @@
 #include <QtCore/QDate>
 #include <QtCore/QList>
 #include <QtCore/QMap>
+#include <QtCore/QSharedDataPointer>
 
 
 namespace Attica {
@@ -37,6 +38,9 @@ class ATTICA_EXPORT Event
         typedef QList<Event> List;
 
         Event();
+        Event(const Event& other);
+        Event& operator=(const Event& other);
+        ~Event();
 
         void setId(const QString& id);
         QString id() const;
@@ -76,18 +80,8 @@ class ATTICA_EXPORT Event
         QMap<QString,QString> extendedAttributes() const;
 
     private:
-        QString m_id;
-        QString m_name;
-        QString m_description;
-        QString m_user;
-        QDate m_startDate;
-        QDate m_endDate;
-        qreal m_latitude;
-        qreal m_longitude;
-        QString m_homepage;
-        QString m_country;
-        QString m_city;
-        QMap<QString, QString> m_extendedAttributes;
+        class Private;
+        QSharedDataPointer<Private> d;
 };
 
 }

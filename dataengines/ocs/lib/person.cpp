@@ -23,132 +23,171 @@
 
 using namespace Attica;
 
+class Person::Private : public QSharedData {
+    public:
+        QString m_id;  
+        QString m_firstName;
+        QString m_lastName;
+        QDate m_birthday;
+        QString m_country;
+        qreal m_latitude;
+        qreal m_longitude;
+        KUrl m_avatarUrl;
+        QPixmap m_avatar;
+        QString m_homepage;
+        QString m_city;
+
+        QMap<QString,QString> m_extendedAttributes;
+
+        Private()
+            : m_latitude(0), m_longitude(0)
+        {
+        }
+};
+
+
 Person::Person()
-  : m_latitude( 0 ), m_longitude( 0 )
+  : d(new Private)
 {
 }
 
+Person::Person(const Person& other)
+    : d(other.d)
+{
+}
+
+Person& Person::operator=(const Attica::Person & other)
+{
+    d = other.d;
+    return *this;
+}
+
+Person::~Person()
+{
+}
+
+
 void Person::setId( const QString &u )
 {
-  m_id = u;
+  d->m_id = u;
 }
 
 QString Person::id() const
 {
-  return m_id;
+  return d->m_id;
 }
 
 void Person::setFirstName( const QString &name )
 {
-  m_firstName = name;
+  d->m_firstName = name;
 }
 
 QString Person::firstName() const
 {
-  return m_firstName;
+  return d->m_firstName;
 }
   
 void Person::setLastName( const QString &name )
 {
-  m_lastName = name;
+  d->m_lastName = name;
 }
 
 QString Person::lastName() const
 {
-  return m_lastName;
+  return d->m_lastName;
 }
     
-void Person::setBirthday( const QDate &d )
+void Person::setBirthday( const QDate &date )
 {
-  m_birthday = d;
+  d->m_birthday = date;
 }
 
 QDate Person::birthday() const
 {
-  return m_birthday;
+  return d->m_birthday;
 }
 
 void Person::setCountry( const QString &c )
 {
-  m_country = c;
+  d->m_country = c;
 }
 
 QString Person::country() const
 {
-  return m_country;
+  return d->m_country;
 }
 
 void Person::setLatitude( qreal l )
 {
-  m_latitude = l;
+  d->m_latitude = l;
 }
 
 qreal Person::latitude() const
 {
-  return m_latitude;
+  return d->m_latitude;
 }
 
 void Person::setLongitude( qreal l )
 {
-  m_longitude = l;
+  d->m_longitude = l;
 }
 
 qreal Person::longitude() const
 {
-  return m_longitude;
+  return d->m_longitude;
 }
 
 void Person::setAvatarUrl( const KUrl &url )
 {
-  m_avatarUrl = url;
+  d->m_avatarUrl = url;
 }
 
 KUrl Person::avatarUrl() const
 {
-  return m_avatarUrl;
+  return d->m_avatarUrl;
 }
 
 void Person::setAvatar( const QPixmap &p )
 {
-  m_avatar = p;
+  d->m_avatar = p;
 }
 
 QPixmap Person::avatar() const
 {
-  return m_avatar;
+  return d->m_avatar;
 }
 
 void Person::setHomepage( const QString &h )
 {
-  m_homepage = h;
+  d->m_homepage = h;
 }
 
 QString Person::homepage() const
 {
-  return m_homepage;
+  return d->m_homepage;
 }
 
 void Person::setCity( const QString &h )
 {
-  m_city = h;
+  d->m_city = h;
 }
 
 QString Person::city() const
 {
-  return m_city;
+  return d->m_city;
 }
 
 void Person::addExtendedAttribute( const QString &key, const QString &value )
 {
-  m_extendedAttributes.insert( key, value );
+  d->m_extendedAttributes.insert( key, value );
 }
 
 QString Person::extendedAttribute( const QString &key ) const
 {
-  return m_extendedAttributes.value( key );
+  return d->m_extendedAttributes.value( key );
 }
 
 QMap<QString,QString> Person::extendedAttributes() const
 {
-  return m_extendedAttributes;
+  return d->m_extendedAttributes;
 }

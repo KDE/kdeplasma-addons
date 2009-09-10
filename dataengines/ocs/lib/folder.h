@@ -23,7 +23,10 @@
 
 #include "atticaclient_export.h"
 #include <QList>
+#include <QtCore/QSharedDataPointer>
 #include <QString>
+
+
 namespace Attica {
 
 class ATTICA_EXPORT Folder
@@ -32,6 +35,9 @@ class ATTICA_EXPORT Folder
     typedef QList<Folder> List;
   
     Folder();
+    Folder(const Folder& other);
+    Folder& operator=(const Folder& other);
+    ~Folder();
 
     void setId( const QString & );
     QString id() const;
@@ -46,10 +52,8 @@ class ATTICA_EXPORT Folder
     QString type() const;
 
   private:
-    QString m_id;  
-    QString m_name;
-    int m_messageCount;
-    QString m_type;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }

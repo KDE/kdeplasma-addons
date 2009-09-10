@@ -23,6 +23,7 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
+#include <QtCore/QSharedDataPointer>
 
 #include "atticaclient_export.h"
 
@@ -37,6 +38,9 @@ class ATTICA_EXPORT Message
     enum Status { Unread = 0, Read = 1 };
   
     Message();
+    Message(const Message& other);
+    Message& operator=(const Message& other);
+    ~Message();
 
     void setId( const QString & );
     QString id() const;
@@ -63,14 +67,8 @@ class ATTICA_EXPORT Message
     QString body() const;
 
   private:
-    QString m_id;
-    QString m_from;
-    QString m_to;
-    QDateTime m_sent;
-    Status m_status;
-    QString m_statusText;
-    QString m_subject;
-    QString m_body;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }
