@@ -61,7 +61,9 @@ class Provider::Private : public QSharedData {
 
 ProviderInitJob* Provider::byId(const QString& id)
 {
-  return new ProviderInitJob(id);
+  ProviderInitJob* job = new ProviderInitJob(id);
+  job->start();
+  return job;
 }
 
 
