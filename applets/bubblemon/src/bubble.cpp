@@ -352,7 +352,15 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
         m_interpolator->setFrameRange(prev, m_val);
         m_interpolator->start();
     }
-    update();
+    
+    int lower = qMin(m_val, prev);
+    int upper = qMax(m_val, prev);
+    
+    //formula taken fron Bubble::paintInterface
+    QRect toUpdate(0, geometry().height()-(geometry().height()*((float)upper/m_max)),
+                   geometry().width(), geometry().height()-(geometry().height()*((float)lower/m_max)) );
+                   
+    update(toUpdate);
 }
 
 QString
