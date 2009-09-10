@@ -308,6 +308,10 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
     Q_UNUSED(name);
     int prev = m_val;
     m_val = data["value"].toDouble();
+    
+    if(prev == m_val)
+        return;
+    
     if (data["max"].toDouble()>0)
         m_max = data["max"].toDouble();
     else
