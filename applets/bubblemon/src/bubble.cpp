@@ -50,14 +50,15 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_animID(-1),
        m_labelTransparency(0)
 {
+    resize(200, 200);
     m_svg = new Plasma::Svg(this);
+    m_svg->resize(geometry().width(), geometry().height());
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
     m_svg->setContainsMultipleImages(true);
 
     connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(repaintNeeded()));
 
     setAcceptsHoverEvents(true);
-    resize(200, 200);
     setAspectRatioMode(Plasma::Square);
 }
 
