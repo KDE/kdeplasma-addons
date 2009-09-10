@@ -48,7 +48,6 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
 
     ProviderInitJob* job = new ProviderInitJob("opendesktop");
     connect(job, SIGNAL(result(KJob*)), SLOT(initializeProvider(KJob*)));
-    job->start();
 }
 
 OcsEngine::~OcsEngine()
