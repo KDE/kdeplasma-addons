@@ -1,7 +1,22 @@
 [Global]
 Comment=OpenDesktop Activities Plasmoid
+Comment[nds]=Plasma-Lüttprogramm för OpenDesktop-Aktiviteten
+Comment[pt]=Plasmóide de Actividades do OpenDesktop
+Comment[pt_BR]=Plasmóide de Actividades do OpenDesktop
+Comment[sv]=OpenDesktop aktivitetsplasmoid
+Comment[uk]=Плазмоїд просторів дій OpenDesktop
 
 [Event/activity]
 Name=New Activity
+Name[nds]=Nieg Aktiviteet
+Name[pt]=Nova Actividade
+Name[pt_BR]=Nova Actividade
+Name[sv]=Ny aktivitet
+Name[uk]=Новий простір дій
 Comment=Something interesting has happened in your friends network
+Comment[nds]=Dor hett sik sünnerlich wat daan in Dien Mackers-Nettwark
+Comment[pt]=Algo de interessante se passou na rede dos seus amigos
+Comment[pt_BR]=Algo de interessante se passou na rede dos seus amigos
+Comment[sv]=Någonting intressant har hänt i dina vänners nätverk
+Comment[uk]=У мережі ваших друзів трапилося щось цікаве
 Action=Popup
