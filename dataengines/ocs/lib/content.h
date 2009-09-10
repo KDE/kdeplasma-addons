@@ -21,12 +21,14 @@
 #ifndef ATTICA_CONTENT_H
 #define ATTICA_CONTENT_H
 
-#include <QtCore/QDateTime>
 #include <QtCore/QList>
 #include <QtCore/QMap>
+#include <QtCore/QSharedDataPointer>
 
 #include "atticaclient_export.h"
 
+
+class QDateTime;
 
 namespace Attica {
 
@@ -36,6 +38,9 @@ class ATTICA_EXPORT Content
     typedef QList<Content> List;
   
     Content();
+    Content(const Content& other);
+    Content& operator=(const Content& other);
+    ~Content();
 
     void setId( const QString & );
     QString id() const;
@@ -61,14 +66,8 @@ class ATTICA_EXPORT Content
     QMap<QString,QString> extendedAttributes() const;
 
   private:
-    QString m_id;  
-    QString m_name;
-    int m_rating;
-    int m_downloads;
-    QDateTime m_created;
-    QDateTime m_updated;
-
-    QMap<QString,QString> m_extendedAttributes;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }

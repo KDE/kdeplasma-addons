@@ -21,8 +21,8 @@
 #ifndef ATTICA_CATEGORY_H
 #define ATTICA_CATEGORY_H
 
+#include <QtCore/QSharedDataPointer>
 #include <QtCore/QList>
-#include <QtCore/QString>
 
 #include "atticaclient_export.h"
 
@@ -36,6 +36,9 @@ class ATTICA_EXPORT Category
     typedef QList<Category> List;
   
     Category();
+    Category(const Category& other);
+    Category& operator=(const Category& other);
+    ~Category();
 
     void setId( const QString & );
     QString id() const;
@@ -44,8 +47,8 @@ class ATTICA_EXPORT Category
     QString name() const;
 
   private:
-    QString m_id;  
-    QString m_name;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }
