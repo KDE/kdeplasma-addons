@@ -48,6 +48,7 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
 
     ProviderInitJob* job = new ProviderInitJob("opendesktop");
     connect(job, SIGNAL(result(KJob*)), SLOT(initializeProvider(KJob*)));
+    job->start();
 }
 
 OcsEngine::~OcsEngine()
@@ -560,7 +561,7 @@ void OcsEngine::slotEventListResult(KJob* j)
 
         m_eventListJobs.remove(job);
 
-        foreach (const Event& event, job->eventList()) {
+        foreach (const Event& event, job->itemList()) {
             setEventData(source, event);
         }
         scheduleSourcesUpdated();
