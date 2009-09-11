@@ -24,21 +24,18 @@
 #include <KDebug>
 #include <KUrl>
 
-#include "activitylistjob.h"
-#include "categorylistjob.h"
+#include "activity.h"
+#include "content.h"
 #include "contentjob.h"
-#include "contentlistjob.h"
 #include "eventjob.h"
-#include "eventlistjob.h"
-#include "folderlistjob.h"
+#include "folder.h"
 #include "knowledgebasejob.h"
 #include "knowledgebaselistjob.h"
-#include "messagelistjob.h"
+#include "message.h"
 #include "personjob.h"
-#include "personlistjob.h"
 #include "postjob.h"
 #include "providerinitjob.h"
-
+#include "listjob.h"
 
 using namespace Attica;
 
@@ -117,14 +114,14 @@ PersonJob* Provider::requestPersonSelf()
   return doRequestPerson( url );
 }
 
-PersonListJob* Provider::requestPersonSearchByName(const QString& name)
+ListJob<Person>* Provider::requestPersonSearchByName(const QString& name)
 {
   KUrl url = createUrl( "person/data");
   url.addQueryItem("name", name);
   return doRequestPersonList( url );
 }
 
-PersonListJob* Provider::requestPersonSearchByLocation(qreal latitude, qreal longitude, qreal distance, int page, int pageSize)
+ListJob<Person>* Provider::requestPersonSearchByLocation(qreal latitude, qreal longitude, qreal distance, int page, int pageSize)
 {
   KUrl url = createUrl( "person/data" );
   url.addQueryItem("latitude", QString::number(latitude));
@@ -138,7 +135,7 @@ PersonListJob* Provider::requestPersonSearchByLocation(qreal latitude, qreal lon
   return doRequestPersonList( url );
 }
 
-PersonListJob* Provider::requestFriend(const QString& id, int page, int pageSize)
+ListJob<Person>* Provider::requestFriend(const QString& id, int page, int pageSize)
 {
   KUrl url = createUrl( "friend/data/" + id );
   url.addQueryItem("page", QString::number(page));
@@ -147,7 +144,7 @@ PersonListJob* Provider::requestFriend(const QString& id, int page, int pageSize
   return doRequestPersonList( url );
 }
 
-ActivityListJob* Provider::requestActivity()
+ListJob<Activity>* Provider::requestActivity()
 {
   KUrl url = createUrl( "activity" );
   return doRequestActivityList( url );
@@ -195,12 +192,12 @@ PostJob* Provider::postLocation(qreal latitude, qreal longitude, const QString& 
 }
 
 
-FolderListJob* Provider::requestFolders()
+ListJob<Folder>* Provider::requestFolders()
 {
   return doRequestFolderList( createUrl( "message" ) );
 }
 
-MessageListJob* Provider::requestMessages(const QString& folderId)
+ListJob<Message>* Provider::requestMessages(const QString& folderId)
 {
   return doRequestMessageList( createUrl( "message/" + folderId ) );
 }
@@ -219,9 +216,9 @@ PostJob* Provider::postMessage( const Message &message )
   return job;
 }
 
-CategoryListJob* Provider::requestCategories()
+ListJob<Category>* Provider::requestCategories()
 {
-  CategoryListJob *job = new CategoryListJob();
+  ListJob<Category> *job = new ListJob<Category>();
   
   KUrl url = createUrl( "content/categories" );
   job->setUrl( url );
@@ -230,9 +227,9 @@ CategoryListJob* Provider::requestCategories()
   return job;
 }
 
-ContentListJob* Provider::requestContent(const Category::List& categories, const QString& search, SortMode sortMode)
+ListJob<Content>* Provider::requestContent(const Category::List& categories, const QString& search, SortMode sortMode)
 {
-  ContentListJob *job = new ContentListJob();
+  ListJob<Content> *job = new ListJob<Content>();
   
   KUrl url = createUrl( "content/data" );
 
@@ -340,9 +337,9 @@ EventJob* Provider::requestEvent(const QString& id)
   return job;
 }
 
-EventListJob* Provider::requestEvent(const QString& country, const QString& search, const QDate& startAt, Provider::SortMode mode, int page, int pageSize)
+ListJob<Event>* Provider::requestEvent(const QString& country, const QString& search, const QDate& startAt, Provider::SortMode mode, int page, int pageSize)
 {
-  EventListJob* job = new EventListJob();
+  ListJob<Event>* job = new ListJob<Event>();
 
   KUrl url = createUrl("event/data");
 
@@ -398,9 +395,9 @@ PersonJob* Provider::doRequestPerson(const KUrl& url)
   return job;
 }
 
-PersonListJob* Provider::doRequestPersonList(const KUrl& url)
+ListJob<Person>* Provider::doRequestPersonList(const KUrl& url)
 {
-  PersonListJob *job = new PersonListJob();
+  ListJob<Person> *job = new ListJob<Person>();
 
   job->setUrl( url );
 
@@ -408,9 +405,9 @@ PersonListJob* Provider::doRequestPersonList(const KUrl& url)
   return job;
 }
 
-ActivityListJob* Provider::doRequestActivityList(const KUrl& url)
+ListJob<Activity>* Provider::doRequestActivityList(const KUrl& url)
 {
-  ActivityListJob *job = new ActivityListJob();
+  ListJob<Activity> *job = new ListJob<Activity>();
 
   job->setUrl( url );
 
@@ -418,18 +415,18 @@ ActivityListJob* Provider::doRequestActivityList(const KUrl& url)
   return job;
 }
 
-FolderListJob* Provider::doRequestFolderList(const KUrl& url)
+ListJob<Folder>* Provider::doRequestFolderList(const KUrl& url)
 {
-  FolderListJob *job = new FolderListJob();
+  ListJob<Folder> *job = new ListJob<Folder>();
   
   job->setUrl( url );
   job->start();
   return job;
 }
 
-MessageListJob* Provider::doRequestMessageList(const KUrl& url)
+ListJob<Message>* Provider::doRequestMessageList(const KUrl& url)
 {
-  MessageListJob *job = new MessageListJob();
+  ListJob<Message> *job = new ListJob<Message>();
   
   job->setUrl( url );
   job->start();

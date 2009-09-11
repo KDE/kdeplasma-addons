@@ -20,15 +20,13 @@
 #define OCSENGINE_H
 
 #include "plasma/dataengine.h"
-#include "activitylistjob.h"
-#include "personlistjob.h"
-#include "knowledgebaselistjob.h"
 
 #include <QStringList>
 #include <QHash>
 
 #include <Solid/Networking>
 
+#include "activity.h"
 #include "personservice.h"
 #include "provider.h"
 

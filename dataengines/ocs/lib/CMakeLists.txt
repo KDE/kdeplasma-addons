@@ -1,31 +1,25 @@
 set(ocsclient_SRCS
+   listjob_inst.cpp
    listjobbase.cpp
    providerinitjob.cpp
    eventjob.cpp
-   eventlistjob.cpp
    eventparser.cpp
    event.cpp
    activity.cpp
    activityparser.cpp
-   activitylistjob.cpp
    person.cpp
    personparser.cpp
    personjob.cpp
-   personlistjob.cpp
    provider.cpp
    postjob.cpp
    folder.cpp
-   folderlistjob.cpp
    folderparser.cpp
    message.cpp
-   messagelistjob.cpp
    messageparser.cpp
    category.cpp
-   categorylistjob.cpp
    categoryparser.cpp
    content.cpp
    contentjob.cpp
-   contentlistjob.cpp
    contentparser.cpp
    knowledgebase.cpp
    knowledgebasejob.cpp

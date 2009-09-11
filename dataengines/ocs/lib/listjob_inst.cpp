@@ -1,7 +1,7 @@
 /*
     This file is part of KDE.
 
-    Copyright (c) 2008 Cornelius Schumacher <schumacher@kde.org>
+    Copyright (c) 2009 Eckhart Wörner <ewoerner@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,46 +18,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
 */
-#ifndef ATTICA_MESSAGELISTJOB_H
-#define ATTICA_MESSAGELISTJOB_H
 
+#include "listjob.cpp"
+
+#include "activity.h"
+#include "activityparser.h"
+#include "category.h"
+#include "categoryparser.h"
+#include "content.h"
+#include "contentparser.h"
+#include "event.h"
+#include "eventparser.h"
+#include "folder.h"
+#include "folderparser.h"
 #include "message.h"
+#include "messageparser.h"
+#include "person.h"
+#include "personparser.h"
 
-#include <kjob.h>
-#include <kurl.h>
 
-namespace KIO {
-class Job;
-}
+using namespace Attica;
 
-namespace Attica {
-
-class ATTICA_EXPORT MessageListJob : public KJob
-{
-    Q_OBJECT
-  public:
-    MessageListJob();
-
-    void setUrl( const KUrl & );
-
-    void start();
-
-    Message::List messageList() const;
-    
-  protected slots:
-    void doWork();
-
-    void slotJobResult( KJob *job );
-    void slotJobData( KIO::Job *job, const QByteArray &data );
-    
-  private:
-    KUrl m_url;
-    KIO::Job *m_job;
-    QByteArray m_data;
-  
-    Message::List m_messageList;
-};
-
-}
-
-#endif
+template class ListJob<Activity>;
+template class ListJob<Category>;
+template class ListJob<Content>;
+template class ListJob<Event>;
+template class ListJob<Folder>;
+template class ListJob<Message>;
+template class ListJob<Person>;

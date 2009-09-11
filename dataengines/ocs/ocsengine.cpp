@@ -21,10 +21,9 @@
 
 #include "ocsengine.h"
 
-#include "activitylistjob.h"
 #include "eventjob.h"
-#include "eventlistjob.h"
 #include "knowledgebasejob.h"
+#include "knowledgebaselistjob.h"
 #include "personjob.h"
 #include "postjob.h"
 #include "provider.h"
@@ -92,7 +91,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
         QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
         kDebug() << "Searching friends for id" << _id;
-        PersonListJob* _job = m_provider.requestFriend(_id, 0, m_maximumItems);
+        ListJob<Person>* _job = m_provider.requestFriend(_id, 0, m_maximumItems);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
 
         if (_job) {
@@ -146,7 +145,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         qreal dist = args[2].toFloat();
 
         kDebug() << "Searching for people near" << lat << lon << "distance:" << dist << m_maximumItems;
-        PersonListJob* _job = m_provider.requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
+        ListJob<Person>* _job = m_provider.requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
 
         if (_job) {
@@ -254,7 +253,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         // FIXME: The size of the request is currently hardcoded
-        EventListJob* _job = m_provider.requestEvent(country, search, QDate::currentDate(),
+        ListJob<Event>* _job = m_provider.requestEvent(country, search, QDate::currentDate(),
             Provider::Alphabetical, 0, 100);
         connect(_job, SIGNAL(result(KJob*)), SLOT(slotEventListResult(KJob*)));
 
@@ -293,8 +292,8 @@ void OcsEngine::slotActivityResult( KJob *j )
 {
     m_job = 0;
     if (!j->error()) {
-        Attica::ActivityListJob *job = static_cast<Attica::ActivityListJob *>( j );
-        m_activities = job->ActivityList();
+        Attica::ListJob<Activity> *job = static_cast<Attica::ListJob<Activity> *>( j );
+        m_activities = job->itemList();
 
         foreach(const Attica::Activity &activity, m_activities ) {
             Plasma::DataEngine::Data activityData;
@@ -423,12 +422,12 @@ void OcsEngine::slotNearPersonsResult( KJob *j )
 {
     m_job = 0;
     if (!j->error()) {
-        Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
+        Attica::ListJob<Person> *listJob = static_cast<Attica::ListJob<Person> *>( j );
 
         QString _id = m_personListJobs[j];
         m_personListJobs.remove(j);
 
-        foreach (const Person &p, listJob->personList()) {
+        foreach (const Person &p, listJob->itemList()) {
             addToPersonCache(p.id(), p);
             setPersonData(_id, p);
         }
@@ -443,11 +442,11 @@ void OcsEngine::slotFriendsResult( KJob *j )
 {
     m_job = 0;
     if (!j->error()) {
-        Attica::PersonListJob *listJob = static_cast<Attica::PersonListJob *>( j );
+        Attica::ListJob<Person> *listJob = static_cast<Attica::ListJob<Person> *>( j );
 
         QString _id = m_personListJobs[j];
 
-        foreach (const Person &p, listJob->personList()) {
+        foreach (const Person &p, listJob->itemList()) {
             addToPersonCache(p.id(), p);
             setPersonData(_id, p);
         }
@@ -555,7 +554,7 @@ void OcsEngine::setEventData(const QString& source, const Event& event)
 void OcsEngine::slotEventListResult(KJob* j)
 {
     if (!j->error()) {
-        EventListJob* job = static_cast<EventListJob*>(j);
+        ListJob<Event>* job = static_cast<ListJob<Event>*>(j);
 
         QString source = m_eventListJobs[job];
 

@@ -27,25 +27,26 @@
 
 #include "atticaclient_export.h"
 #include "category.h"
+#include "listjob.h"
+
 
 class KUrl;
 class QDate;
 
 namespace Attica {
 
-class ActivityListJob;
-class CategoryListJob;
+class Activity;
+class Content;
 class ContentJob;
-class ContentListJob;
+class Event;
 class EventJob;
-class EventListJob;
-class FolderListJob;
+class Folder;
+class KnowledgeBase;
 class KnowledgeBaseJob;
 class KnowledgeBaseListJob;
 class Message;
-class MessageListJob;
+class Person;
 class PersonJob;
-class PersonListJob;
 class PostJob;
 class ProviderInitJob;
 
@@ -77,30 +78,30 @@ class ATTICA_EXPORT Provider
 
     PersonJob* requestPerson(const QString& id);
     PersonJob* requestPersonSelf();
-    PersonListJob* requestPersonSearchByName(const QString& name);
-    PersonListJob* requestPersonSearchByLocation(qreal latitude, qreal longitude, qreal distance, int page = 0, int pageSize = 100);
+    ListJob<Person>* requestPersonSearchByName(const QString& name);
+    ListJob<Person>* requestPersonSearchByLocation(qreal latitude, qreal longitude, qreal distance, int page = 0, int pageSize = 100);
     PostJob* postLocation(qreal latitude, qreal longitude, const QString& city = QString(), const QString& country = QString());
 
     // Friend part of OCS
 
-    PersonListJob* requestFriend(const QString& id, int page = 0, int pageSize = 100);
+    ListJob<Person>* requestFriend(const QString& id, int page = 0, int pageSize = 100);
     PostJob* postInvitation(const QString& to, const QString& message);
 
     // Message part of OCS
 
-    FolderListJob* requestFolders();
-    MessageListJob* requestMessages(const QString& folderId);
+    ListJob<Folder>* requestFolders();
+    ListJob<Message>* requestMessages(const QString& folderId);
     PostJob* postMessage(const Message& message);
 
     // Activity part of OCS
 
-    ActivityListJob* requestActivity();
+    ListJob<Activity>* requestActivity();
     PostJob* postActivity(const QString& message);
 
     // Content part of OCS
 
-    CategoryListJob* requestCategories();
-    ContentListJob* requestContent(const Category::List& categories, const QString& search, SortMode mode);
+    ListJob<Category>* requestCategories();
+    ListJob<Content>* requestContent(const Category::List& categories, const QString& search, SortMode mode);
     ContentJob* requestContent(const QString& id);
 
     // KnowledgeBase part of OCS
@@ -111,16 +112,16 @@ class ATTICA_EXPORT Provider
     // Event part of OCS
 
     EventJob* requestEvent(const QString& id);
-    EventListJob* requestEvent(const QString& country, const QString& search, const QDate& startAt, SortMode mode, int page, int pageSize);
+    ListJob<Event>* requestEvent(const QString& country, const QString& search, const QDate& startAt, SortMode mode, int page, int pageSize);
 
   protected:
     KUrl createUrl(const QString& path);
   
     PersonJob* doRequestPerson(const KUrl& url);
-    PersonListJob* doRequestPersonList(const KUrl& url);
-    ActivityListJob* doRequestActivityList(const KUrl& url);
-    FolderListJob* doRequestFolderList(const KUrl& url);
-    MessageListJob* doRequestMessageList(const KUrl& url);
+    ListJob<Person>* doRequestPersonList(const KUrl& url);
+    ListJob<Activity>* doRequestActivityList(const KUrl& url);
+    ListJob<Folder>* doRequestFolderList(const KUrl& url);
+    ListJob<Message>* doRequestMessageList(const KUrl& url);
 
   private:
     class Private;
