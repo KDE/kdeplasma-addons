@@ -5,6 +5,7 @@ Comment[pt]=Plasmóide de Actividades do OpenDesktop
 Comment[pt_BR]=Plasmóide de Actividades do OpenDesktop
 Comment[sv]=OpenDesktop aktivitetsplasmoid
 Comment[uk]=Плазмоїд просторів дій OpenDesktop
+Comment[x-test]=xxOpenDesktop Activities Plasmoidxx
 
 [Event/activity]
 Name=New Activity
@@ -12,11 +13,14 @@ Name[nds]=Nieg Aktiviteet
 Name[pt]=Nova Actividade
 Name[pt_BR]=Nova Actividade
 Name[sv]=Ny aktivitet
+Name[tr]=Yeni Etkinlik
 Name[uk]=Новий простір дій
+Name[x-test]=xxNew Activityxx
 Comment=Something interesting has happened in your friends network
 Comment[nds]=Dor hett sik sünnerlich wat daan in Dien Mackers-Nettwark
 Comment[pt]=Algo de interessante se passou na rede dos seus amigos
 Comment[pt_BR]=Algo de interessante se passou na rede dos seus amigos
 Comment[sv]=Någonting intressant har hänt i dina vänners nätverk
 Comment[uk]=У мережі ваших друзів трапилося щось цікаве
+Comment[x-test]=xxSomething interesting has happened in your friends networkxx
 Action=Popup
