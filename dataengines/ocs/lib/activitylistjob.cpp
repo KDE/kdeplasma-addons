@@ -74,7 +74,7 @@ void ActivityListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     // qDebug() << m_data;
-    m_activityList = ActivityParser().parseList(
+    m_activityList = Activity::Parser().parseList(
       QString::fromUtf8( m_data.data() ) );
 
     emitResult();

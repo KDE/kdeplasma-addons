@@ -74,7 +74,7 @@ void MessageListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    m_messageList = MessageParser().parseList(
+    m_messageList = Message::Parser().parseList(
       QString::fromUtf8( m_data.data() ) );
 
     emitResult();

@@ -25,11 +25,11 @@
 
 using namespace Attica;
 
-MessageParser::MessageParser()
+Message::Parser::Parser()
 {
 }
 
-Message::List MessageParser::parseList( const QString &xmlString )
+Message::List Message::Parser::parseList( const QString &xmlString )
 {
   Message::List messageList;
   

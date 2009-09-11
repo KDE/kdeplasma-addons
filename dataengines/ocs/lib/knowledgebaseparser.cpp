@@ -26,11 +26,11 @@
 
 using namespace Attica;
 
-KnowledgeBaseParser::KnowledgeBaseParser()
+KnowledgeBase::Parser::Parser()
 {
 }
 
-KnowledgeBase::List KnowledgeBaseParser::parseList( const QString &xmlString )
+KnowledgeBase::List KnowledgeBase::Parser::parseList( const QString &xmlString )
 {
   KnowledgeBase::List KnowledgeBaseList;
 
@@ -50,7 +50,7 @@ KnowledgeBase::List KnowledgeBaseParser::parseList( const QString &xmlString )
   return KnowledgeBaseList;
 }
 
-KnowledgeBase KnowledgeBaseParser::parse( const QString &xmlString )
+KnowledgeBase KnowledgeBase::Parser::parse( const QString &xmlString )
 {
   KnowledgeBase knowledgeBase;
 
@@ -69,12 +69,12 @@ KnowledgeBase KnowledgeBaseParser::parse( const QString &xmlString )
   return knowledgeBase;
 }
 
-KnowledgeBase::Metadata KnowledgeBaseParser::lastMetadata()
+KnowledgeBase::Metadata KnowledgeBase::Parser::lastMetadata()
 {
     return m_lastMetadata;
 }
 
-KnowledgeBase::Metadata KnowledgeBaseParser::parseMetadata( QXmlStreamReader &xml )
+KnowledgeBase::Metadata KnowledgeBase::Parser::parseMetadata( QXmlStreamReader &xml )
 {
     KnowledgeBase::Metadata meta;
     meta.status = QString();
@@ -108,7 +108,7 @@ KnowledgeBase::Metadata KnowledgeBaseParser::parseMetadata( QXmlStreamReader &xm
     return meta;
 }
 
-KnowledgeBase KnowledgeBaseParser::parseKnowledgeBase( QXmlStreamReader &xml )
+KnowledgeBase KnowledgeBase::Parser::parseKnowledgeBase( QXmlStreamReader &xml )
 {
   KnowledgeBase knowledgeBase;
 

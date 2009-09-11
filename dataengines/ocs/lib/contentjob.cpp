@@ -72,7 +72,7 @@ void ContentJob::slotJobResult( KJob *job )
     setErrorText( job->errorText() );
   } else {
     qDebug() << m_data;
-    m_content = ContentParser().parse( QString::fromUtf8( m_data.data() ) );
+    m_content = Content::Parser().parse( QString::fromUtf8( m_data.data() ) );
   }
 
   emitResult();

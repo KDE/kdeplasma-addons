@@ -25,11 +25,11 @@
 
 using namespace Attica;
 
-CategoryParser::CategoryParser()
+Category::Parser::Parser()
 {
 }
 
-Category::List CategoryParser::parseList( const QString &xmlString )
+Category::List Category::Parser::parseList( const QString &xmlString )
 {
   Category::List categoryList;
   

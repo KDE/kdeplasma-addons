@@ -33,6 +33,7 @@ class ATTICA_EXPORT Folder
 {
   public:
     typedef QList<Folder> List;
+    class Parser;
   
     Folder();
     Folder(const Folder& other);

@@ -74,7 +74,7 @@ void PersonJob::slotUserJobResult( KJob *job )
     emitResult();
   } else {
     // qDebug() << m_userData;
-    m_person = PersonParser().parse( m_userData );
+    m_person = Person::Parser().parse( m_userData );
   
     if (!m_person.avatarUrl().isEmpty()) {
       qDebug() << "Getting avatar from" << m_person.avatarUrl();

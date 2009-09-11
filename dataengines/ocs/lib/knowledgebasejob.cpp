@@ -76,7 +76,7 @@ void KnowledgeBaseJob::slotJobResult( KJob *job )
     setErrorText( job->errorText() );
   } else {
     qDebug() << m_data;
-    KnowledgeBaseParser parser;
+    KnowledgeBase::Parser parser;
     m_knowledgeBase = parser.parse( QString::fromUtf8( m_data.data() ) );
     m_metadata = parser.lastMetadata();
   }

@@ -34,6 +34,7 @@ class ATTICA_EXPORT Message
 {
   public:
     typedef QList<Message> List;
+    class Parser;
 
     enum Status { Unread = 0, Read = 1 };
   

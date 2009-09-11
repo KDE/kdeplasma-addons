@@ -74,7 +74,7 @@ void CategoryListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    m_categoryList = CategoryParser().parseList(
+    m_categoryList = Category::Parser().parseList(
       QString::fromUtf8( m_data.data() ) );
 
     emitResult();

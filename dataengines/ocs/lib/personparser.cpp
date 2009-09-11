@@ -25,11 +25,11 @@
 
 using namespace Attica;
 
-PersonParser::PersonParser()
+Person::Parser::Parser()
 {
 }
 
-Person::List PersonParser::parseList( const QString &xmlString )
+Person::List Person::Parser::parseList( const QString &xmlString )
 {
   Person::List personList;
   
@@ -48,7 +48,7 @@ Person::List PersonParser::parseList( const QString &xmlString )
   return personList;
 }
 
-Person PersonParser::parse( const QString &xmlString )
+Person Person::Parser::parse( const QString &xmlString )
 {
   Person person;
 
@@ -65,7 +65,7 @@ Person PersonParser::parse( const QString &xmlString )
   return person;
 }
 
-Person PersonParser::parsePerson( QXmlStreamReader &xml )
+Person Person::Parser::parsePerson( QXmlStreamReader &xml )
 {
   Person person;
   bool hasAvatarPic = false;

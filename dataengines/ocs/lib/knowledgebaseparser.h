@@ -28,10 +28,10 @@ class QXmlStreamReader;
 
 namespace Attica {
 
-class KnowledgeBaseParser
+class KnowledgeBase::Parser
 {
   public:
-    KnowledgeBaseParser();
+    Parser();
 
     KnowledgeBase parse( const QString &xml );
     KnowledgeBase::List parseList( const QString &xml );

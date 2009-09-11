@@ -26,10 +26,10 @@
 
 namespace Attica {
 
-class CategoryParser
+class Category::Parser
 {
   public:
-    CategoryParser();
+    Parser();
 
     Category::List parseList( const QString &xml );
 };

@@ -28,11 +28,11 @@
 
 using namespace Attica;
 
-ActivityParser::ActivityParser()
+Activity::Parser::Parser()
 {
 }
 
-Activity::List ActivityParser::parseList( const QString &xmlString )
+Activity::List Activity::Parser::parseList( const QString &xmlString )
 {
   Activity::List activityList;
   

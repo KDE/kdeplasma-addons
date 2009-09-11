@@ -37,6 +37,7 @@ class ATTICA_EXPORT Person
 {
   public:
     typedef QList<Person> List;
+    class Parser;
   
     Person();
     Person(const Person& other);

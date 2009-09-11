@@ -78,7 +78,7 @@ void KnowledgeBaseListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    KnowledgeBaseParser parser;
+    KnowledgeBase::Parser parser;
     m_knowledgeBaseList = parser.parseList(
       QString::fromUtf8( m_data.data() ) );
     m_metadata = parser.lastMetadata();

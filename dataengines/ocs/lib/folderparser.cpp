@@ -25,11 +25,11 @@
 
 using namespace Attica;
 
-FolderParser::FolderParser()
+Folder::Parser::Parser()
 {
 }
 
-Folder::List FolderParser::parseList( const QString &xmlString )
+Folder::List Folder::Parser::parseList( const QString &xmlString )
 {
   Folder::List folderList;
   

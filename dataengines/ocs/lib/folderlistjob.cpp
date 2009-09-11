@@ -72,7 +72,7 @@ void FolderListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    m_folderList = FolderParser().parseList(
+    m_folderList = Folder::Parser().parseList(
       QString::fromUtf8( m_data.data() ) );
 
     emitResult();

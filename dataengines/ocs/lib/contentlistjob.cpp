@@ -74,7 +74,7 @@ void ContentListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    m_contentList = ContentParser().parseList(
+    m_contentList = Content::Parser().parseList(
       QString::fromUtf8( m_data.data() ) );
 
     emitResult();

@@ -33,6 +33,7 @@ class ATTICA_EXPORT KnowledgeBase
 {
   public:
     typedef QList<KnowledgeBase> List;
+    class Parser;
     struct Metadata
     {
         QString status;

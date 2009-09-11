@@ -26,10 +26,10 @@
 
 namespace Attica {
 
-class FolderParser
+class Folder::Parser
 {
   public:
-    FolderParser();
+    Parser();
 
     Folder::List parseList( const QString &xml );
 };

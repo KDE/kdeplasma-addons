@@ -27,10 +27,10 @@ class QXmlStreamReader;
 
 namespace Attica {
 
-class ContentParser
+class Content::Parser
 {
   public:
-    ContentParser();
+    Parser();
 
     Content parse( const QString &xml );
     Content::List parseList( const QString &xml );

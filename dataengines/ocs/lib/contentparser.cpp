@@ -26,11 +26,11 @@
 
 using namespace Attica;
 
-ContentParser::ContentParser()
+Content::Parser::Parser()
 {
 }
 
-Content::List ContentParser::parseList( const QString &xmlString )
+Content::List Content::Parser::parseList( const QString &xmlString )
 {
   Content::List contentList;
   
@@ -48,7 +48,7 @@ Content::List ContentParser::parseList( const QString &xmlString )
   return contentList;
 }
 
-Content ContentParser::parse( const QString &xmlString )
+Content Content::Parser::parse( const QString &xmlString )
 {
   Content content;
 
@@ -65,7 +65,7 @@ Content ContentParser::parse( const QString &xmlString )
   return content;
 }
 
-Content ContentParser::parseContent( QXmlStreamReader &xml )
+Content Content::Parser::parseContent( QXmlStreamReader &xml )
 {
   Content content;
   

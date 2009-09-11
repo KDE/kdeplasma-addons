@@ -26,10 +26,10 @@
 
 namespace Attica {
 
-class MessageParser
+class Message::Parser
 {
   public:
-    MessageParser();
+    Parser();
 
     Message::List parseList( const QString &xml );
 };

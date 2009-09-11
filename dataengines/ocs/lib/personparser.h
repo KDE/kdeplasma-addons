@@ -27,10 +27,10 @@ class QXmlStreamReader;
 
 namespace Attica {
 
-class PersonParser
+class Person::Parser
 {
   public:
-    PersonParser();
+    Parser();
 
     Person parse( const QString &xml );
     Person::List parseList( const QString &xml );
