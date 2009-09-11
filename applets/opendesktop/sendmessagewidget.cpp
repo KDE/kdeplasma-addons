@@ -42,13 +42,13 @@ SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& 
     Frame* subjectFrame = new Frame(this);
     subjectFrame->setFrameShadow(Sunken);
     m_subject = new Plasma::TextEdit(subjectFrame);
-    m_subject->setText("Subject");
+    m_subject->setText(i18n("Subject"));
     (new QGraphicsLinearLayout(subjectFrame))->addItem(m_subject);
     
     Frame* bodyFrame = new Frame(this);
     bodyFrame->setFrameShadow(Sunken);
     m_body = new Plasma::TextEdit(bodyFrame);
-    m_body->setText("Body");
+    m_body->setText(i18n("Body"));
     (new QGraphicsLinearLayout(bodyFrame))->addItem(m_body);
 
     m_submit = new Plasma::PushButton(this);
