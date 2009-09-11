@@ -28,7 +28,7 @@
 
 
 namespace Attica {
-
+    
 class ATTICA_EXPORT EventListJob : public ListJob<Event>
 {
     Q_OBJECT

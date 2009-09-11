@@ -74,7 +74,7 @@ void EventJob::slotJobResult(KJob* job)
     
         emitResult();
     } else {
-        m_event = EventParser().parse(QString::fromUtf8(m_data.data()));
+        m_event = Event::Parser().parse(QString::fromUtf8(m_data.data()));
 
         emitResult();
     }

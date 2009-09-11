@@ -32,13 +32,11 @@
 
 namespace Attica {
     
-class EventParser;
-
 class ATTICA_EXPORT Event
 {
     public:
         typedef QList<Event> List;
-        typedef EventParser Parser;
+        class Parser;
 
         Event();
         Event(const Event& other);

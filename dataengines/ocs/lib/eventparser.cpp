@@ -27,12 +27,12 @@
 
 using namespace Attica;
 
-EventParser::EventParser()
+Event::Parser::Parser()
 {
 }
 
 
-Event EventParser::parse(const QString& xmlString)
+Event Event::Parser::parse(const QString& xmlString)
 {
     Event event;
 
@@ -50,7 +50,7 @@ Event EventParser::parse(const QString& xmlString)
 }
 
 
-Event::List Attica::EventParser::parseList(const QString& xmlString)
+Event::List Event::Parser::parseList(const QString& xmlString)
 {
     Event::List eventList;
     
@@ -68,7 +68,7 @@ Event::List Attica::EventParser::parseList(const QString& xmlString)
 }
 
 
-Event EventParser::parseEvent(QXmlStreamReader& xml)
+Event Event::Parser::parseEvent(QXmlStreamReader& xml)
 {
     Event event;
 

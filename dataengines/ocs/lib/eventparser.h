@@ -29,10 +29,10 @@ class QXmlStreamReader;
 
 namespace Attica {
 
-class EventParser
+class Event::Parser
 {
     public:
-        EventParser();
+        Parser();
 
         Event parse(const QString& xml);
         Event::List parseList(const QString& xml);
