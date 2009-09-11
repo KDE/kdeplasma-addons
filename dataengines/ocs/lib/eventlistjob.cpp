@@ -21,72 +21,14 @@
 
 #include "eventlistjob.h"
 
-#include <QtCore/QTimer>
-
-#include <KIO/Job>
-
 #include "eventparser.h"
+
+#include "listjob.cpp"
 
 
 using namespace Attica;
 
-
-EventListJob::EventListJob()
-    : m_job(0)
-{
-}
-
-
-void EventListJob::setUrl(const KUrl& url)
-{
-    m_url = url;
-}
-
-
-void EventListJob::start()
-{
-    QTimer::singleShot(0, this, SLOT(doWork()));
-}
-
-
-Event::List EventListJob::eventList() const
-{
-    return m_eventList;
-}
-
-
-void EventListJob::doWork()
-{
-    m_job = KIO::get(m_url, KIO::NoReload, KIO::HideProgressInfo);
-    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotJobResult(KJob*)));
-    connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-        SLOT(slotJobData(KIO::Job*, const QByteArray&)));
-}
-
-
-void EventListJob::slotJobResult(KJob* job)
-{
-    m_job = 0;
-
-    if (job->error()) {
-        setError(job->error());
-        setErrorText(job->errorText());
-    
-        emitResult();
-    } else {
-        m_eventList = EventParser().parseList(QString::fromUtf8(m_data.data()));
-
-        emitResult();
-    }
-}
-
-
-void EventListJob::slotJobData(KIO::Job* job, const QByteArray& data)
-{
-    Q_UNUSED(job);
-
-    m_data.append(data);
-}
+template class ListJob<Event>;
 
 
 #include "eventlistjob.moc"

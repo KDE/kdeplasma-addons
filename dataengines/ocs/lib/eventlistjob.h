@@ -22,44 +22,16 @@
 #ifndef ATTICA_EVENTLISTJOB_H
 #define ATTICA_EVENTLISTJOB_H
 
-#include <KJob>
-#include <KUrl>
-
 #include "atticaclient_export.h"
 #include "event.h"
+#include "listjob.h"
 
-
-namespace KIO {
-    class Job;
-}
 
 namespace Attica {
 
-class ATTICA_EXPORT EventListJob : public KJob
+class ATTICA_EXPORT EventListJob : public ListJob<Event>
 {
     Q_OBJECT
-
-    public:
-        EventListJob();
-
-        void setUrl(const KUrl& url);
-
-        void start();
-
-        Event::List eventList() const;
-        
-    protected slots:
-        void doWork();
-
-        void slotJobResult(KJob* job);
-        void slotJobData(KIO::Job* job, const QByteArray& data);
-        
-    private:
-        KUrl m_url;
-        KIO::Job* m_job;
-        QByteArray m_data;
-    
-        Event::List m_eventList;
 };
 
 }
