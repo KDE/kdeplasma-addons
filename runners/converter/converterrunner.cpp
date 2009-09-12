@@ -130,6 +130,10 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
 
+    QString description = i18n("Converts the value of :q: when :q: is made up of "
+                               "\"value unit [>, to, as, in] value\". You can use "
+                               "Unit converter applet to find all available units.");
+    addSyntax(Plasma::RunnerSyntax("=:q:", description));
 }
 
 ConverterRunner::~ConverterRunner()
