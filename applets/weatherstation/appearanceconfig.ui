@@ -35,14 +35,14 @@
    <item>
     <widget class="QCheckBox" name="backgroundCheckBox">
      <property name="text">
-      <string>Show LCD &amp;background</string>
+      <string>Show LCD background</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="tooltipCheckBox">
      <property name="text">
-      <string>Show &amp;tool tip</string>
+      <string>Show location</string>
      </property>
     </widget>
    </item>

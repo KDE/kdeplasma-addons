@@ -68,7 +68,7 @@ void WeatherStation::init()
     KConfigGroup cfg = config();
 
     m_useBackground = cfg.readEntry("background", true);
-    m_showToolTip = cfg.readEntry("tooltip", false);
+    m_showToolTip = cfg.readEntry("tooltip", true);
     setBackground();
 
     setLCDIcon();
@@ -156,6 +156,7 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
         m_lcd->setItemClickable("provider-click", !m_url.isEmpty());
 
         if (m_showToolTip) {
+            m_lcd->setLabel("weather-label", data["Place"].toString().toUpper());
             Plasma::ToolTipContent ttc(data["Place"].toString(),
                     i18n("Last updated: %1", KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), KLocale::FancyLongDate)));
             Plasma::ToolTipManager::self()->setContent(this, ttc);
