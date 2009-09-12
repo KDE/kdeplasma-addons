@@ -38,7 +38,9 @@ Group::Private::Private()
       ownsBackgroundSvg(false), loaded(false)
        // TODO : Add caching?
        //cachedBackgroundNormal(NULL), cachedBackgroundActive(NULL), cachedBackgroundDisabled(NULL)
-{}
+{
+}
+
 
 Group::Private::~Private()
 {
@@ -241,17 +243,30 @@ void Group::load(bool full)
         d->backgroundColor.active   = confGroupTheme.readEntry("background.color.active",   d->backgroundColor.active);
         d->backgroundColor.disabled = confGroupTheme.readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
-        if (d->ownsBackgroundSvg) {
-            delete d->backgroundSvg;
-        }
+        // we have already deleted the backgroundSvg
+        // if (d->ownsBackgroundSvg) {
+        //     delete d->backgroundSvg;
+        // }
 
-        setProperty("SvgBackground", 1, false);
         d->backgroundSvg = new Plasma::FrameSvg(NULL);
-        d->backgroundSvg->setImagePath(
-            Plasma::Theme::defaultTheme()->imagePath(
-                confGroupTheme.readEntry("background.svg")));
+        QString imagePath = Plasma::Theme::defaultTheme()->imagePath(
+                confGroupTheme.readEntry("background.svg"));
+
+        d->backgroundSvg->setImagePath(imagePath);
+        qDebug() << "Background is: " <<
+            d->backgroundSvg->imagePath();
         d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
+
+        if (!d->backgroundSvg->isValid()) {
+            qDebug() << "Background is not valid: " <<
+                d->backgroundSvg->imagePath();
+            delete d->backgroundSvg;
+            d->backgroundSvg = NULL;
+            d->ownsBackgroundSvg = false;
+        } else {
+            setProperty("SvgBackground", 1, false);
+        }
     }
 
     if (!confGroupTheme.readEntry(
