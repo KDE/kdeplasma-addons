@@ -116,6 +116,11 @@ void WeatherStation::configAccepted()
             m_appearanceConfig.backgroundCheckBox->isChecked());
     cfg.writeEntry("tooltip", m_showToolTip =
             m_appearanceConfig.tooltipCheckBox->isChecked());
+
+    if (!m_showToolTip) {
+        m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
+        Plasma::ToolTipManager::self()->clearContent(this);
+    }
     setBackground();
 
     WeatherPopupApplet::configAccepted();
