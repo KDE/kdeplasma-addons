@@ -161,7 +161,9 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     }
 
     QStringList separators;
-    separators << QString(CONVERSION_CHAR) << i18nc("amount of 'unit1' in 'unit2'", "in")
+    separators << QString(CONVERSION_CHAR)
+               << i18nc("amount of 'unit1' in 'unit2'", "in")
+               << i18nc("amount of 'unit1' to 'unit2'", "to")
                << i18nc("amount of 'unit1' as 'unit2'", "as");
     const QString s = cmd.get(StringParser::GetString);
 
