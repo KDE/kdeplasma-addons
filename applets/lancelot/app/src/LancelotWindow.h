@@ -99,6 +99,9 @@ protected Q_SLOTS:
      */
     void sectionActivated(const QString & item);
 
+private:
+    void nextSection(int increment);
+
 private Q_SLOTS:
     void systemButtonClicked();
 

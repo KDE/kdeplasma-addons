@@ -64,6 +64,26 @@ void Runner::setRunnerName(const QString & name)
 void Runner::setSearchString(const QString & search)
 {
     m_searchString = search.trimmed();
+    clear();
+
+    if (m_searchString.isEmpty()) {
+        add(
+            i18n("Search string is empty"),
+            i18n("Enter something to search for"),
+            KIcon("help-hint"),
+            QVariant()
+        );
+        valid = false;
+    } else {
+        add(
+            i18n("Searching..."),
+            i18n("Some searches can take longer to complete"),
+            KIcon("help-hint"),
+            QVariant()
+        );
+        valid = false;
+    }
+
     m_timer.start(SLEEP, this);
 }
 
@@ -75,16 +95,10 @@ void Runner::timerEvent(QTimerEvent * event)
     }
 
     m_timer.stop();
-    if (m_searchString.isEmpty()) {
-        clear();
-        add(
-            i18n("Search string is empty"),
-            i18n("Enter something to search for"),
-            KIcon("help-hint"),
-            QVariant()
-        );
-        valid = false;
-    } else {
+
+    if (!m_searchString.isEmpty()) {
+        m_runnerManager->reset();
+
         if (m_runnerName.isEmpty()) {
             m_runnerManager->launchQuery(m_searchString);
         } else {
@@ -96,6 +110,7 @@ void Runner::timerEvent(QTimerEvent * event)
 // Code taken from KRunner Runner::setQueryMatches
 void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 {
+    qDebug() << "Runner::setQueryMatches" << m.size();
     setEmitInhibited(true);
     clear();
 

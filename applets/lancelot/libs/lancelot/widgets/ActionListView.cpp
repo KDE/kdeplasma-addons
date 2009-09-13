@@ -694,7 +694,9 @@ bool ActionListView::sceneEvent(QEvent * event)
                 g.setHeight(4);
                 d->dropIndicator->setGeometry(g);
 
-                d->itemFactory->model()->dataDropAvailable(index, dndEvent->mimeData());
+                bool allow = d->itemFactory->model()->dataDropAvailable(index, dndEvent->mimeData());
+                d->dropIndicator->setVisible(allow);
+                dndEvent->setAccepted(allow);
             }
             break;
         }

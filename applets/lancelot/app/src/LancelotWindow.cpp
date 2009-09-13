@@ -34,6 +34,7 @@
 #include <KConfigDialog>
 #include <KProcess>
 #include <plasma/animator.h>
+#include <plasma/windoweffects.h>
 
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
@@ -170,7 +171,10 @@ LancelotWindow::LancelotWindow()
 void LancelotWindow::drawBackground(QPainter * painter, const QRectF & rect)
 {
     painter->setCompositionMode(QPainter::CompositionMode_Clear);
-    painter->fillRect(QRectF(rect.x()-2,rect.y()-2,rect.width()+2,rect.height()+2).toRect(), Qt::transparent);
+    painter->fillRect(
+        QRectF(rect.x() - 2, rect.y() - 2,
+               rect.width() + 2, rect.height() + 2).toRect(),
+               Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_Source);
 }
 
@@ -312,7 +316,16 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     }
 
     move(x, y);
+    if (KWindowSystem::compositingActive()) {
+        if (flip & Plasma::VerticalFlip) {
+            Plasma::WindowEffects::slideWindow(this, Plasma::TopEdge);
+
+        } else {
+            Plasma::WindowEffects::slideWindow(this, Plasma::BottomEdge);
+        }
+    }
     show();
+
     KWindowSystem::setState( winId(), NET::SkipTaskbar | NET::SkipPager | NET::KeepAbove );
     KWindowSystem::forceActiveWindow(winId());
 
@@ -654,6 +667,12 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
             case Qt::Key_Right:
                 m_focusIndex++;
                 break;
+            case Qt::Key_PageUp:
+                nextSection(-1);
+                return true;
+            case Qt::Key_PageDown:
+                nextSection(1);
+                return true;
             default:
                 pass = true;
         }
@@ -678,7 +697,6 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         if (pass) {
             sendKeyEvent(keyEvent);
         }
-
 
         editSearch->nativeWidget()->setFocus();
         editSearch->setFocus();
@@ -729,6 +747,25 @@ void LancelotWindow::configureShortcuts()
 void LancelotWindow::configurationChanged()
 {
     loadConfig();
+}
+
+void LancelotWindow::nextSection(int increment)
+{
+    qDebug() << "LancelotWindow::nextSection " << increment;
+    if (! (layoutMain->flip() & Plasma::VerticalFlip)) {
+        increment = - increment;
+    }
+
+    int currentIndex = sectionIDs().indexOf(m_activeSection);
+    currentIndex += increment;
+
+    if (currentIndex >= sectionIDs().size()) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = sectionIDs().size() - 1;
+    }
+
+    sectionActivated(sectionIDs()[currentIndex]);
 }
 
 void LancelotWindow::loadConfig()
