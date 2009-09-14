@@ -114,7 +114,7 @@ void SlideShow::addRecursiveDir(const QString &path)
     }
 }
 
-QPixmap SlideShow::image()
+QPixmap SlideShow::image() const 
 {
     if (m_image.isNull() || m_currentUrl != m_picture->url()) {
         kDebug() << "reloading from Picture" << m_currentUrl;
@@ -186,7 +186,7 @@ void SlideShow::setUpdateInterval(int msec)
     }
 }
 
-QString SlideShow::message()
+QString SlideShow::message() const 
 {
     return m_picture->message();
 }

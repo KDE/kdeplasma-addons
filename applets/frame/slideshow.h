@@ -43,9 +43,9 @@ public:
     void setDirs(const QStringList &slideShowPaths, bool recursive = false);
     void setImage(const QString &imagePath);
     void setRandom(bool);
-    QPixmap image();
+    QPixmap image() const;
     KUrl currentUrl() const;
-    QString message();
+    QString message() const;
 
     void setUpdateInterval(int msec);
 
