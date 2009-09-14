@@ -139,6 +139,15 @@ ActionListViewItemFactory::~ActionListViewItemFactory() //>
     m_items.clear();
 } //<
 
+qreal ActionListViewItemFactory::preferredWidth() const //>
+{
+    qreal result = 0;
+    foreach (ActionListViewItem * item, m_items) {
+        result = qMax(result, item->preferredWidth());
+    }
+    return result;
+}
+
 void ActionListViewItemFactory::reload() //>
 {
     while (m_items.size() > m_model->size()) {
@@ -641,6 +650,11 @@ void ActionListView::Private::immutabilityChanged(const Plasma::ImmutabilityType
     q->setAcceptDrops(Plasma::Mutable == immutable);
 } //<
 
+void ActionListView::Private::sizeHintUpdateNeeded() //>
+{
+    q->updateGeometry();
+} //<
+
 ActionListView::ActionListView(QGraphicsItem * parent) //>
     : CustomListView(parent), d(new Private(this))
 {
@@ -736,6 +750,14 @@ void ActionListView::setModel(ActionListModel * model) //>
                 model, this);
         list()->setItemFactory(d->itemFactory);
         setAcceptDrops(Plasma::Mutable == Global::instance()->immutability());
+        connect(d->itemFactory, SIGNAL(updated()),
+             d, SLOT(sizeHintUpdateNeeded()));
+        connect(d->itemFactory, SIGNAL(itemInserted(int)),
+             d, SLOT(sizeHintUpdateNeeded()));
+        connect(d->itemFactory, SIGNAL(itemDeleted(int)),
+             d, SLOT(sizeHintUpdateNeeded()));
+        connect(d->itemFactory, SIGNAL(itemAltered(int)),
+             d, SLOT(sizeHintUpdateNeeded()));
     } else {
         d->itemFactory->setModel(model);
     }
@@ -934,6 +956,34 @@ void ActionListView::setCategoriesActivable(bool value) //>
 {
     d->itemFactory->m_categoriesActivable = value;
     d->itemFactory->updateExtenderPosition();
+} //<
+
+QSizeF ActionListView::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const //>
+{
+    QSizeF result;
+    if (!group()) return result;
+
+    switch (which) {
+        case Qt::MinimumSize:
+            result = QSizeF();
+            break;
+        case Qt::MaximumSize:
+            result = MAX_WIDGET_SIZE;
+            break;
+        case Qt::PreferredSize:
+            result = QSizeF(d->itemFactory->preferredWidth(), 400);
+            result += CustomListView::sizeHint(which, constraint);
+            // scrollbars...
+            result.rwidth() += 50;
+            break;
+        default:
+            result = QSizeF();
+            break;
+    }
+    if (constraint.isValid()) {
+        result = result.boundedTo(constraint);
+    }
+    return result;
 } //<
 
 //<

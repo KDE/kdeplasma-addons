@@ -118,6 +118,8 @@ private Q_SLOTS:
     void modelItemAltered(int index);
     void itemActivated();
 
+    qreal preferredWidth() const;
+
 Q_SIGNALS:
     void activated(int index);
 
@@ -157,6 +159,7 @@ public:
 
 public Q_SLOTS:
     void immutabilityChanged(const Plasma::ImmutabilityType immutable);
+    void sizeHintUpdateNeeded();
 
 };
 //<

@@ -203,8 +203,12 @@ void PopupList::timerEvent(QTimerEvent * event)
 
 void PopupList::updateSize()
 {
-    d->list->resize(MENU_WIDTH, (d->list->list()->
-            itemFactory()->itemCount()) * ITEM_HEIGHT);
+    qreal width = d->list->preferredWidth();
+    if (width < MENU_WIDTH) {
+        width = MENU_WIDTH;
+    }
+    d->list->resize(width,
+            (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT);
 }
 
 void PopupList::exec(const QPoint & p)

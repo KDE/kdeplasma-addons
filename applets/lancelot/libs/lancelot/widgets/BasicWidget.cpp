@@ -388,7 +388,9 @@ void BasicWidget::paintForeground(QPainter * painter)
 
 void BasicWidget::setIconSize(QSize size)
 {
-    d->iconSize = size; update();
+    d->iconSize = size;
+    update();
+    updateGeometry();
 }
 
 QSize BasicWidget::iconSize() const
@@ -398,7 +400,9 @@ QSize BasicWidget::iconSize() const
 
 void BasicWidget::setIcon(QIcon icon)
 {
-    d->icon = icon; update();
+    d->icon = icon;
+    update();
+    updateGeometry();
 }
 
 QIcon BasicWidget::icon() const
@@ -410,6 +414,7 @@ void BasicWidget::setIconInSvg(const Plasma::Svg & icon)
 {
     d->iconInSvg.setImagePath(icon.imagePath());
     update();
+    updateGeometry();
 }
 
 Plasma::Svg & BasicWidget::iconInSvg() const
@@ -427,6 +432,7 @@ void BasicWidget::setTitle(const QString & title)
     }
 
     update();
+    updateGeometry();
 }
 
 void BasicWidget::setShortcutKey(const QString & key)
@@ -443,6 +449,7 @@ void BasicWidget::setDescription(const QString & description)
 {
     d->description = description;
     update();
+    updateGeometry();
 }
 
 QString BasicWidget::description() const
@@ -453,6 +460,7 @@ QString BasicWidget::description() const
 void BasicWidget::setInnerOrientation(Qt::Orientation position) {
     d->innerOrientation = position;
     update();
+    updateGeometry();
 }
 
 Qt::Orientation BasicWidget::innerOrientation() const
@@ -462,7 +470,8 @@ Qt::Orientation BasicWidget::innerOrientation() const
 
 void BasicWidget::setAlignment(Qt::Alignment alignment)
 {
-    d->alignment = alignment; update();
+    d->alignment = alignment;
+    update();
 }
 
 Qt::Alignment BasicWidget::alignment() const
@@ -483,16 +492,41 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
             break;
         default:
             // Do we need a more precise sizeHint?
-            result = d->iconSize + QSizeF(2 * WIDGET_PADDING, 2 * WIDGET_PADDING);
+            // result = d->iconSize + QSizeF(2 * WIDGET_PADDING, 2 * WIDGET_PADDING);
+            result = d->iconSize;
+            QFontMetrics titleMetrics = QFontMetrics(font());
+            QFontMetrics desctiprionMetrics =
+                    QFontMetrics(KGlobalSettings::smallestReadableFont());
+            QSizeF textSize = QSizeF(
+                    qMax(
+                        titleMetrics.width(d->title),
+                        desctiprionMetrics.width(d->description)
+                    ),
+                    (titleMetrics.height()) +
+                    (d->description.isEmpty()?0:desctiprionMetrics.height())
+                );
+
             if (d->innerOrientation == Qt::Horizontal) {
-                result.scale(5.0, 1.0, Qt::IgnoreAspectRatio);
+                result.rwidth() += textSize.width();
+
+                if (result.height() < textSize.height()) {
+                    result.setHeight(textSize.height());
+                }
             } else {
-                result.scale(2.0, 2.0, Qt::IgnoreAspectRatio);
+                result.rheight() += textSize.height();
+
+                if (result.width() < textSize.width()) {
+                    result.setWidth(textSize.width());
+                }
             }
+            result += Widget::sizeHint(which, constraint) +
+                QSizeF(3 * WIDGET_PADDING, 2 * WIDGET_PADDING);
     }
-    if (constraint != QSizeF(-1, -1)) {
+
+    if (constraint.isValid()) {
         result = result.boundedTo(constraint);
     }
+
     return result;
 }
 

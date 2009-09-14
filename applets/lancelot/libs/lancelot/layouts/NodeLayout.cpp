@@ -197,7 +197,7 @@ QSizeF NodeLayout::sizeHint(Qt::SizeHint which,
         default:
             result = d->sizeHintCache[which];
     }
-    if (constraint != QSizeF(-1, -1)) {
+    if (constraint.isValid()) {
         result = result.boundedTo(constraint);
     }
     return result;

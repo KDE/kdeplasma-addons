@@ -177,7 +177,6 @@ public:
     virtual void setShortcutKey(const QString & key);
 
 protected:
-
     /**
      * Common implementation of icon/text/description
      * rendering

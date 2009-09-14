@@ -222,7 +222,7 @@ QSizeF Panel::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
     } else {
         result = d->layoutItem->effectiveSizeHint(which, constraint);
     }
-    if (constraint != QSizeF(-1, -1)) {
+    if (constraint.isValid()) {
         result = result.boundedTo(constraint);
     }
     return result;

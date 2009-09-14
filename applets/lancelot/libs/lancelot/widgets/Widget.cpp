@@ -244,7 +244,7 @@ QSizeF Widget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) const
             result = QSizeF();
             break;
     }
-    if (constraint != QSizeF(-1, -1)) {
+    if (constraint.isValid()) {
         result = result.boundedTo(constraint);
     }
     return result;

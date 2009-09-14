@@ -39,7 +39,6 @@ public:
 
 private:
     Plasma::Corona      * m_corona;
-    Lancelot::Instance  * instance;
 
     friend class CustomGraphicsView;
 };

@@ -89,6 +89,8 @@ protected:
     L_Override bool sceneEventFilter(QGraphicsItem * watched,
             QEvent * event);
     L_Override bool sceneEvent(QEvent * event);
+    L_Override QSizeF sizeHint(Qt::SizeHint which,
+            const QSizeF & constraint = QSizeF()) const;
 
 Q_SIGNALS:
     void activated(int index);

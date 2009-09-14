@@ -113,28 +113,62 @@ LancelotTestWindow::LancelotTestWindow()
     setFocusPolicy(Qt::WheelFocus);
     m_corona = new Plasma::Corona(this);
     setScene(m_corona);
-    instance = new Instance();
 
     // Test area - begin ####################################
     QGraphicsWidget * m_root = new QGraphicsWidget();
-    Lancelot::FullBorderLayout * m_layout = new Lancelot::FullBorderLayout();
-    m_root->setLayout(m_layout);
+
     m_root->setGeometry(QRectF(0, 0, 400, 400));
     m_corona->addItem(m_root);
 
-    Lancelot::ScrollPane * sp = new Lancelot::ScrollPane(m_root);
-    sp->clearFlag(ScrollPane::ClipScrollable);
-    sp->setFlag(ScrollPane::HoverShowScrollbars);
-    m_layout->addItem(sp);
-    sp->setScrollableWidget(new ScrollableWidget(sp));
+    BasicWidget * wgt;
 
-    Plasma::LineEdit * le = new Plasma::LineEdit(m_root);
-    m_layout->addItem(le, Lancelot::FullBorderLayout::Bottom);
+    wgt = new BasicWidget(m_root);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Cukic je genije");
+    wgt->setGeometry(QRectF(QPointF(0, 0), wgt->preferredSize()));
 
+    wgt = new BasicWidget(m_root);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Pie iesu domine, dona e ist requiem");
+    wgt->setGeometry(QRectF(QPointF(0, 100), wgt->preferredSize()));
+
+    wgt = new BasicWidget(m_root);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan Restrer oret");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Cukic je genije");
+    wgt->setGeometry(QRectF(QPointF(0, 200), wgt->preferredSize()));
+
+    wgt = new BasicWidget(m_root);
+    wgt->setInnerOrientation(Qt::Vertical);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Cukic je genije");
+    wgt->setGeometry(QRectF(QPointF(200, 0), wgt->preferredSize()));
+
+    wgt = new BasicWidget(m_root);
+    wgt->setInnerOrientation(Qt::Vertical);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Pie iesu domine, dona e ist requiem");
+    wgt->setGeometry(QRectF(QPointF(200, 100), wgt->preferredSize()));
+
+    wgt = new BasicWidget(m_root);
+    wgt->setInnerOrientation(Qt::Vertical);
+    wgt->setGroupByName("RootPanel");
+    wgt->setTitle("Ivan Restrer oret");
+    wgt->setIcon(KIcon("lancelot"));
+    wgt->setDescription("Cukic je genije");
+    wgt->setGeometry(QRectF(QPointF(200, 200), wgt->preferredSize()));
     // Test area - end   ####################################
 
     // Starting...
-    instance->activateAll();
 }
 
 LancelotTestWindow::~LancelotTestWindow()

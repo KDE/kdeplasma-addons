@@ -221,7 +221,7 @@ QSizeF FullBorderLayout::sizeHint(Qt::SizeHint which,
     }
 
     QSizeF result = QSizeF(hintWidth, hintHeight);
-    if (constraint != QSizeF(-1, -1)) {
+    if (constraint.isValid()) {
         result = result.boundedTo(constraint);
     }
     return result;
