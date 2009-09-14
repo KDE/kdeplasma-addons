@@ -22,7 +22,6 @@
 
 #include "knowledgebaseparser.h"
 
-#include <QXmlStreamReader>
 
 using namespace Attica;
 

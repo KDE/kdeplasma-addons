@@ -21,9 +21,11 @@
 #ifndef ATTICA_CONTENTPARSER_H
 #define ATTICA_CONTENTPARSER_H
 
+// WARNING: QXmlStreamReader cannot be forward declared (Qt 4.5)
+#include <QtXml/QXmlStreamReader>
+
 #include "content.h"
 
-class QXmlStreamReader;
 
 namespace Attica {
 
