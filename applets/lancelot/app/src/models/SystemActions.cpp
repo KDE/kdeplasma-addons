@@ -134,7 +134,7 @@ QString SystemActions::actionTitle(const QString & id) const
     } else if (id == ID_POWEROFF) {
         return i18n("&Shut Down");
     } else if (id == ID_SUSPEND_DISK) {
-        return i18n("Suspend to &Disk");
+        return i18n("Suspend to D&isk");
     } else if (id == ID_SUSPEND_RAM) {
         return i18n("Suspend to &RAM");
     }
