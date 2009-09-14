@@ -23,6 +23,15 @@
 
 namespace Models {
 
+#define LinkOrCopy(source, destination)           \
+    qDebug() << "Models::LinkOrCopy:"             \
+                 << source << destination;        \
+    if (!QFile::link((source), (destination))) {  \
+        qDebug() << "Models::LinkOrCopy:"         \
+                 << "Linking failed ... copying"; \
+        QFile::copy((source), (destination));     \
+    }
+
 NewDocuments::NewDocuments()
     : FolderModel(NewDocuments::path(), QDir::Name)
 {
@@ -47,7 +56,7 @@ NewDocuments::NewDocuments()
                 const KService::Ptr service = KService::serviceByStorageId(serviceName);
                 if (service) {
                     QFileInfo file(service->entryPath());
-                    QFile::copy(
+                    LinkOrCopy(
                         service->entryPath(),
                         dir.absolutePath() + '/' +
                         QString::number(index++) + '_' + file.fileName());

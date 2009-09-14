@@ -71,12 +71,15 @@ void FolderModel::newItems(const KFileItemList &items)
         if (item.isDesktopFile()) {
             addUrl(item.url());
         } else {
-            add(
-                item.name(),
-                item.mimeComment(),
-                KIcon(item.iconName()),
-                item.url().url()
-            );
+            QFileInfo info(item.localPath());
+            if (info.isFile() || info.isDir()) {
+                add(
+                    item.name(),
+                    item.mimeComment(),
+                    KIcon(item.iconName()),
+                    item.url().url()
+                );
+            }
         }
     }
 }
