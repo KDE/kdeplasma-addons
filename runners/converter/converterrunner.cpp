@@ -126,6 +126,10 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
     Q_UNUSED(args)
     setObjectName("Converter");
 
+    m_separators << QString(CONVERSION_CHAR);
+    m_separators << i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
+                          "in;to;as").split(";");
+
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
                     Plasma::RunnerContext::NetworkLocation);
@@ -164,18 +168,13 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     }
 
-    QStringList separators;
-    separators << QString(CONVERSION_CHAR)
-               << i18nc("amount of 'unit1' in 'unit2'", "in")
-               << i18nc("amount of 'unit1' to 'unit2'", "to")
-               << i18nc("amount of 'unit1' as 'unit2'", "as");
     const QString s = cmd.get(StringParser::GetString);
 
-    if (!s.isEmpty() && !separators.contains(s)) {
+    if (!s.isEmpty() && !m_separators.contains(s)) {
         unit1 += ' ' + s;
     }
-    if (s.isEmpty() || !separators.contains(s)) {
-        cmd.pass(separators);
+    if (s.isEmpty() || !m_separators.contains(s)) {
+        cmd.pass(m_separators);
     }
     unit2 = cmd.rest();
 

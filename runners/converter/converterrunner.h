@@ -33,6 +33,9 @@ public:
 
     void match(Plasma::RunnerContext &context);
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+
+private:
+    QStringList m_separators;
 };
 
 K_EXPORT_PLASMA_RUNNER(converterrunner, ConverterRunner)
