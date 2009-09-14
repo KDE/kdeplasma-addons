@@ -21,11 +21,10 @@
 #include "picture.h"
 
 #include <QPainter>
-#include <KSvgRenderer>
 #include <QTextOption>
 
 #include <KUrl>
-
+#include <KStandardDirs>
 #include <klocalizedstring.h>
 #include <plasma/theme.h>
 
@@ -43,14 +42,10 @@ Picture::~Picture()
 
 QImage Picture::defaultPicture(const QString &message)
 {
-    // Create a QImage with same axpect ratio of default svg and current pixelSize
-    QString svgFile = Plasma::Theme::defaultTheme()->imagePath("widgets/picture-frame-default");
-    KSvgRenderer sr(svgFile);
-    QImage imload(sr.defaultSize(), QImage::Format_RGB32);//TODO optimize, too slow
+    QString defaultPic = KGlobal::dirs()->findResource("data", "plasma-applet-frame/picture-frame-default.jpg");
 
+    QImage imload(defaultPic);
     QPainter p(&imload);
-    sr.render(&p, QRect(QPoint(0, 0), imload.size()));
-
     // Set the font and draw text
     p.setRenderHint(QPainter::Antialiasing);
     QFont textFont;
