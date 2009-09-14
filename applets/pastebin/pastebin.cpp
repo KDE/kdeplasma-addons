@@ -816,7 +816,7 @@ void Pastebin::postContent(QString text, QImage imageData)
         Plasma::Service *service = dataEngine("pastebin")->serviceForSource("");
         KConfigGroup ops = service->operationDescription("image");
 
-        switch(uiConfig.imageServer->currentIndex()) {
+        switch(m_imageBackend) {
             case Pastebin::IMAGEBINCA:
                 ops.writeEntry("server", cg.readEntry("imagebinca", "http://imagebin.ca"));
                 break;
