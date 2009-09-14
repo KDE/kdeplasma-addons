@@ -247,7 +247,10 @@ void SystemActions::delayedActivate()
 
     QString cmd = root()->children.at(delayedActivateItemIndex)->data.toString();
 
-    if (cmd == ID_LOCK_SCREEN) {
+    if (cmd == ID_LOCK_SCREEN ||
+            cmd == ID_SUSPEND_DISK ||
+            cmd == ID_SUSPEND_RAM
+        ) {
         org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());
 
         if (screensaver.isValid()) {
@@ -261,7 +264,9 @@ void SystemActions::delayedActivate()
                     i18n("Session locking error"));
         }
 
-        return;
+        if (cmd == ID_LOCK_SCREEN) {
+            return;
+        }
     }
 
     KWorkSpace::ShutdownConfirm confirm = KWorkSpace::ShutdownConfirmDefault;
