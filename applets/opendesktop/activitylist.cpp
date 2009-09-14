@@ -30,7 +30,7 @@ ActivityList::ActivityList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     : ScrollWidget(parent),
       m_engine(engine),
       m_limit(20),
-      m_updateInterval(5 * 60)
+      m_updateInterval(10 * 60)
 {
     m_container = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
