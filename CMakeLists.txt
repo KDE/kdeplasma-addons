@@ -8,7 +8,8 @@ include(MacroLibrary)
 include(MacroOptionalDependPackage)
 
 find_package(KDE4Workspace REQUIRED)
-find_package(KdepimLibs REQUIRED)
+#macro_optional_find_package(KdepimLibs)
+#macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "KDE PIM libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 find_package(Boost)
 
 macro_optional_find_package(OpenGL)
