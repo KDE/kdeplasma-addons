@@ -152,22 +152,38 @@ void WeatherConfig::setUpdateInterval(int interval)
 
 void WeatherConfig::setTemperatureUnit(int unit)
 {
-    d->ui.temperatureComboBox->setCurrentIndex(d->ui.temperatureComboBox->findData(unit));
+    int index = d->ui.temperatureComboBox->findData(unit);
+
+    if (index != -1) {
+        d->ui.temperatureComboBox->setCurrentIndex(index);
+    }
 }
 
 void WeatherConfig::setPressureUnit(int unit)
 {
-    d->ui.pressureComboBox->setCurrentIndex(d->ui.pressureComboBox->findData(unit));
+    int index = d->ui.pressureComboBox->findData(unit);
+
+    if (index != -1) {
+        d->ui.pressureComboBox->setCurrentIndex(index);
+    }
 }
 
 void WeatherConfig::setSpeedUnit(int unit)
 {
-    d->ui.speedComboBox->setCurrentIndex(d->ui.speedComboBox->findData(unit));
+    int index = d->ui.speedComboBox->findData(unit);
+
+    if (index != -1) {
+        d->ui.speedComboBox->setCurrentIndex(index);
+    }
 }
 
 void WeatherConfig::setVisibilityUnit(int unit)
 {
-    d->ui.visibilityComboBox->setCurrentIndex(d->ui.visibilityComboBox->findData(unit));
+    int index = d->ui.visibilityComboBox->findData(unit);
+
+    if (index != -1) {
+        d->ui.visibilityComboBox->setCurrentIndex(index);
+    }
 }
 
 QString WeatherConfig::source()
