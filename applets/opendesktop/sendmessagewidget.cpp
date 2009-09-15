@@ -31,6 +31,8 @@
 #include "utils.h"
 
 
+using namespace Plasma;
+
 SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& id, QGraphicsWidget* parent)
     : Frame(parent),
       m_engine(engine),
@@ -39,32 +41,39 @@ SendMessageWidget::SendMessageWidget(Plasma::DataEngine* engine, const QString& 
 {
     m_label = new Plasma::Label(this);
 
-    Frame* subjectFrame = new Frame(this);
-    subjectFrame->setFrameShadow(Sunken);
-    m_subject = new Plasma::TextEdit(subjectFrame);
-    m_subject->setText(i18n("Subject"));
-    (new QGraphicsLinearLayout(subjectFrame))->addItem(m_subject);
+    Label* subjectLabel = new Label;
+    subjectLabel->setText(i18n("Subject:"));
+    
+    m_subject = new Plasma::LineEdit;
+
+    Label* bodyLabel = new Label;
+    bodyLabel->setText(i18n("Body:"));
     
     Frame* bodyFrame = new Frame(this);
     bodyFrame->setFrameShadow(Sunken);
     m_body = new Plasma::TextEdit(bodyFrame);
-    m_body->setText(i18n("Body"));
     (new QGraphicsLinearLayout(bodyFrame))->addItem(m_body);
 
-    m_submit = new Plasma::PushButton(this);
+    m_submit = new Plasma::PushButton;
     m_submit->setText(i18n("Send"));
     connect(m_submit, SIGNAL(clicked()), SIGNAL(send()));
     
-    Plasma::PushButton* cancel = new Plasma::PushButton(this);
+    Plasma::PushButton* cancel = new Plasma::PushButton;
     cancel->setText(i18n("Cancel"));
     connect(cancel, SIGNAL(clicked()), SIGNAL(done()));
+
+    
+    QGraphicsLinearLayout* buttonLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    buttonLayout->addItem(m_submit);
+    buttonLayout->addItem(cancel);
     
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical, this);
     layout->addItem(m_label);
-    layout->addItem(subjectFrame);
+    layout->addItem(subjectLabel);
+    layout->addItem(m_subject);
+    layout->addItem(bodyLabel);
     layout->addItem(bodyFrame);
-    layout->addItem(m_submit);
-    layout->addItem(cancel);
+    layout->addItem(buttonLayout);
 
     m_engine->connectSource(m_query, this);
     dataUpdated(m_query, m_engine->query(m_query));
@@ -86,7 +95,7 @@ void SendMessageWidget::send()
 {
     Plasma::Service* service = m_engine->serviceForSource(m_query);
     KConfigGroup cg = service->operationDescription("sendMessage");
-    cg.writeEntry("Subject", m_subject->nativeWidget()->toPlainText());
+    cg.writeEntry("Subject", m_subject->text());
     cg.writeEntry("Body", m_body->nativeWidget()->toPlainText());
     service->startOperationCall(cg);
     

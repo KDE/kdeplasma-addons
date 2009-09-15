@@ -25,6 +25,7 @@
 #include <Plasma/DataEngine>
 #include <Plasma/Frame>
 #include <Plasma/Label>
+#include <Plasma/LineEdit>
 #include <Plasma/PushButton>
 #include <Plasma/TextEdit>
 
@@ -49,7 +50,7 @@ class SendMessageWidget : public Plasma::Frame
         const QString m_id;
         const QString m_query;
         Plasma::Label* m_label;
-        Plasma::TextEdit* m_subject;
+        Plasma::LineEdit* m_subject;
         Plasma::PushButton* m_submit;
 };
 
