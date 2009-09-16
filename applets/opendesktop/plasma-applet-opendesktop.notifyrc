@@ -4,6 +4,7 @@ Comment[nds]=Plasma-Lüttprogramm för OpenDesktop-Aktiviteten
 Comment[pt]=Plasmóide de Actividades do OpenDesktop
 Comment[pt_BR]=Plasmóide de atividades do OpenDesktop
 Comment[sv]=OpenDesktop aktivitetsplasmoid
+Comment[tr]=OpenDesktop Eylemleri Plasma Programcığı
 Comment[uk]=Плазмоїд просторів дій OpenDesktop
 Comment[x-test]=xxOpenDesktop Activities Plasmoidxx
 
@@ -21,6 +22,7 @@ Comment[nds]=Dor hett sik sünnerlich wat daan in Dien Mackers-Nettwark
 Comment[pt]=Algo de interessante se passou na rede dos seus amigos
 Comment[pt_BR]=Algo de interessante aconteceu na rede dos seus amigos
 Comment[sv]=Någonting intressant har hänt i dina vänners nätverk
+Comment[tr]=Arkadaşlarınızın ağında ilginç birşeyler oldu
 Comment[uk]=У мережі ваших друзів трапилося щось цікаве
 Comment[x-test]=xxSomething interesting has happened in your friends networkxx
 Action=Popup
