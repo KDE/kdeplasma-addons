@@ -85,6 +85,7 @@ void LancelotPart::init()
 
     // Listening to immutability
     Plasma::Corona * corona = (Plasma::Corona *) scene();
+    immutabilityChanged(corona->immutability());
     connect(corona, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(immutabilityChanged(Plasma::ImmutabilityType)));
 

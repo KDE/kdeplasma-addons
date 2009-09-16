@@ -33,6 +33,11 @@ namespace Lancelot
 {
 
 // Group
+Group::ColorScheme::ColorScheme()
+    : normal(QColor()), disabled(QColor()), active(QColor())
+{
+}
+
 Group::Private::Private()
     : name(QString()), backgroundSvg(NULL),
       ownsBackgroundSvg(false), loaded(false)
@@ -58,11 +63,34 @@ void Group::Private::setObjectProperty(QObject * object,
     object->setProperty(property.toAscii(), value);
 }
 
+// clearing all info
+void Group::Private::reset()
+{
+    QMutableMapIterator < QString, QVariant > i(properties);
+    while (i.hasNext()) {
+        i.next();
+        if (!persistentProperties.contains(i.key())) {
+            qDebug() << "Group::load: reloading property:" << i.key();
+            i.remove();
+        }
+    }
+
+    if (ownsBackgroundSvg) {
+        delete backgroundSvg;
+    }
+    backgroundSvg = NULL;
+
+    foregroundColor = Group::ColorScheme();
+    backgroundColor = Group::ColorScheme();
+
+}
+
 void Group::Private::copyFrom(Group::Private * d)
 {
     if (this == d) return;
 
     properties = d->properties;
+    persistentProperties = d->persistentProperties;
 
     foregroundColor = d->foregroundColor;
     backgroundColor = d->backgroundColor;
@@ -192,19 +220,10 @@ void Group::load(bool full)
     if (d->loaded && !full) return;
     d->loaded = true;
 
-    // d->properties.clear();
-    QMutableMapIterator < QString, QVariant > i(d->properties);
-    while (i.hasNext()) {
-        i.next();
-        if (!d->persistentProperties.contains(i.key())) {
-            i.remove();
-        }
-    }
+    qDebug() << "Group::load: loading group:" << name();
 
-    if (d->ownsBackgroundSvg) {
-        delete d->backgroundSvg;
-    }
-    d->backgroundSvg = NULL;
+    // d->properties.clear();
+    d->reset();
 
     Group * group;
 
@@ -234,6 +253,7 @@ void Group::load(bool full)
 
     QString type = confGroupTheme.readEntry("background.type", "none");
     if (type == "color" || type == "color-compact") {
+        qDebug() << "Group::load: loading color background";
         if (type == "color") {
             setProperty("WholeColorBackground", 1, false);
         } else {
@@ -243,6 +263,7 @@ void Group::load(bool full)
         d->backgroundColor.active   = confGroupTheme.readEntry("background.color.active",   d->backgroundColor.active);
         d->backgroundColor.disabled = confGroupTheme.readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
+        qDebug() << "Group::load: loading svg background";
         // we have already deleted the backgroundSvg
         // if (d->ownsBackgroundSvg) {
         //     delete d->backgroundSvg;
@@ -358,12 +379,17 @@ void Global::Private::createConfTheme()
 
 void Global::Private::themeChanged()
 {
+    qDebug() << "Global::Private::themeChanged";
     createConfTheme();
-    loadAllGroups();
+    loadAllGroups(true);
 }
 
-void Global::Private::loadAllGroups()
+void Global::Private::loadAllGroups(bool clearFirst)
 {
+    foreach(Group * group, groups) {
+        group->d->reset();
+    }
+
     foreach(Group * group, groups) {
         group->load(true);
     }

@@ -69,6 +69,8 @@ public:
      */
     class ColorScheme {
     public:
+        ColorScheme();
+
         QColor normal, disabled, active;
     };
 

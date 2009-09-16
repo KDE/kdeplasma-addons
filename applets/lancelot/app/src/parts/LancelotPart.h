@@ -70,6 +70,8 @@ private:
     void applyConfig();
 
     Lancelot::ActionListView * m_list;
+    // Plasma::LineEdit * m_searchText;
+
     Models::PartsMergedModel * m_model;
     QList < Lancelot::ActionListModel * > m_models;
 

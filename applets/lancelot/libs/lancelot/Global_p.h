@@ -37,6 +37,7 @@ public:
     void setObjectProperty(QObject * object,
             const QString & property, const QVariant & value);
     void copyFrom(Group::Private * d);
+    void reset();
 
     QString name;
     QMap < QString, QVariant > properties;
@@ -72,7 +73,7 @@ public:
     void createConfTheme();
 
 public Q_SLOTS:
-    void loadAllGroups();
+    void loadAllGroups(bool clearFirst = true);
     void themeChanged();
     void objectDeleted(QObject * object);
 };
