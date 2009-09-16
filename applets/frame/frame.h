@@ -52,7 +52,6 @@ public:
                         const QRect &contentsRect);
     void init();
     QSizeF contentSizeHint() const;
-    virtual QList<QAction*> contextualActions();
 
 public slots:
     void createConfigurationInterface(KConfigDialog *parent);
@@ -73,7 +72,6 @@ private Q_SLOTS:
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
-    void updateMenu();
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
@@ -105,9 +103,6 @@ private:
     int m_slideshowTime;
     /// The size of the current picture
     QSize m_pictureSize;
-    /// The action list for the context menu
-    QList<QAction*> m_actions;
-    QAction* m_openPicture;
     /// Frame & shadow outline thickness
     int m_frameOutline;
     int m_swOutline;

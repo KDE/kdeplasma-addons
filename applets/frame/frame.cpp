@@ -54,7 +54,6 @@
 Frame::Frame(QObject *parent, const QVariantList &args)
         : Plasma::Applet(parent, args),
         m_configDialog(0),
-        m_openPicture(0),
         m_slideFrame(0)
 {
     setHasConfigurationInterface(true);
@@ -114,27 +113,10 @@ void Frame::init()
     }
 
     m_menuPresent = false;
-}
 
-void Frame::updateMenu()
-{
-    bool invalidPicture = m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty();
- 
-    if (m_potd || invalidPicture ) {
-      delete m_openPicture;
-      m_openPicture = 0;
-    }
-    else if (!m_openPicture && hasAuthorization("LaunchApp")) {
-        kDebug() << "Current url: " << m_currentUrl.url();
-        m_openPicture = new QAction(SmallIcon("image-x-generic"), i18n("&Open Picture..."), this);
-        m_actions.append(m_openPicture);
-        connect(m_openPicture, SIGNAL(triggered(bool)), this , SLOT(slotOpenPicture()));
-    }
-}
-
-QList<QAction*> Frame::contextualActions()
-{
-    return m_actions;
+    QAction *openAction = action("run associated application");
+    openAction->setIcon(SmallIcon("image-x-generic"));
+    openAction->setText(i18n("&Open Picture..."));
 }
 
 void Frame::slotOpenPicture()
@@ -230,7 +212,11 @@ void Frame::updatePicture()
         resize(sizeHint);
         emit appletTransformedItself();
     }
-    updateMenu();
+    if (m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty()) {
+        setAssociatedApplicationUrls(KUrl::List());
+    } else {
+        setAssociatedApplicationUrls(m_mySlideShow->currentUrl());
+    }
 
     kDebug() << "Rendering picture";
 
@@ -246,7 +232,7 @@ void Frame::updatePicture()
     QPainter *p = new QPainter();
     p->begin(&m_pixmap);
 
-    int roundingFactor = qMin(sizeHint.height() / 10, qreal(12.0)) * m_roundCorners;
+    int roundingFactor = qMin(sizeHint.height() / 10, 12.0) * m_roundCorners;
     int swRoundness = roundingFactor + frameLines / 2 * m_frame * m_roundCorners;
 
     QRectF frameRect(QPoint(0, 0), contentsSize);
@@ -531,9 +517,6 @@ void Frame::configAccepted()
     cg.writeEntry("potd", m_potd);
 
     initSlideShow();
-
-    // Creates the menu if the settings have changed from "Default" to sth. else
-    updateMenu();
 
     emit configNeedsSaving();
 }
