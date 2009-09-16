@@ -68,6 +68,7 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     } else {
         m_currentUrl = KUrl();
     }
+    setAssociatedApplicationUrls(m_currentUrl);
 }
 
 Frame::~Frame()
@@ -95,6 +96,7 @@ void Frame::init()
     m_slideShowPaths = cg.readEntry("slideshow paths", QStringList());
     m_slideshowTime = cg.readEntry("slideshow time", 60); // default to 1 minute
     m_currentUrl = cg.readEntry("url", m_currentUrl);
+    setAssociatedApplicationUrls(m_currentUrl);
     m_potdProvider = cg.readEntry("potdProvider", "");
     m_potd = cg.readEntry("potd", false);
 
@@ -500,6 +502,7 @@ void Frame::configAccepted()
     m_random = m_configDialog->random();
     cg.writeEntry("random", m_random);
     m_currentUrl = m_configDialog->currentUrl();
+    setAssociatedApplicationUrls(m_currentUrl);
     cg.writeEntry("url", m_currentUrl);
     cg.writeEntry("slideshow", m_slideShow);
     m_recursiveSlideShow = m_configDialog->imageUi.recursiveCheckBox->checkState() == Qt::Checked ? true : false;
@@ -596,6 +599,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     } else {
         kDebug() << "Remote URL" << droppedUrl.url();
         m_currentUrl = droppedUrl;
+        setAssociatedApplicationUrls(m_currentUrl);
         m_slideShow = false;
     }
 

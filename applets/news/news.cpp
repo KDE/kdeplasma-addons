@@ -30,6 +30,7 @@
 #include <KColorScheme>
 #include <KStandardDirs>
 #include <KRun>
+#include <KDesktopFile>
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
@@ -82,6 +83,8 @@ News::News(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 
     setPopupIcon("application-rss+xml");
+
+    setAssociatedApplication("akregator");
 }
 
 News::~News()
