@@ -65,7 +65,7 @@ Life::~Life()
 void Life::startUpdateTimer()
 {
     connect(&timer, SIGNAL(timeout()), this, SLOT(updateGame()));
-    timer.start(1000);
+    timer.start( stepInterval * 1000 );
 }
 
 void Life::updateGame()
