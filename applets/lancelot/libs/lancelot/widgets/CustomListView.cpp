@@ -165,6 +165,10 @@ public:
                             itemGeometry.top());
                     transform.scale(1, clip.height() /
                             itemGeometry.height());
+                    item->setOpacity(clip.height() /
+                            itemGeometry.height());
+                } else {
+                    item->setOpacity(1);
                 }
                 item->setTransform(transform);
             } else {
