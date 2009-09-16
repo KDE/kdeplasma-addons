@@ -29,7 +29,6 @@
 class Piece : public QObject, public QGraphicsItem
 {
   Q_OBJECT
-  Q_INTERFACES(QGraphicsItem)
   public:
     Piece(int id, QGraphicsItem * parent, Plasma::Svg *svg, int gamePos);
     int getId();
