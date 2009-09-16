@@ -258,6 +258,11 @@ void LancelotApplet::showLancelot()
         d->waitClick.start();
     }
     QPoint position = popupPosition(QSize());
+
+    // untill we get this in plasma d-bus
+    Plasma::Corona * corona = (Plasma::Corona *) scene();
+    d->lancelot->setImmutability(corona->immutability());
+
     d->lancelot->show(position.x(), position.y());
 }
 
