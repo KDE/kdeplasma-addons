@@ -76,6 +76,12 @@ void RecentDocuments::contextActivate(int index, QAction * context)
     m_dirLister->updateDirectory(KUrl(m_dirPath));
 }
 
+bool RecentDocuments::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    Q_UNUSED(where);
+    return false;
+}
+
 } // namespace Models
 
 #include "RecentDocuments.moc"

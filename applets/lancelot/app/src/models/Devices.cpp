@@ -341,4 +341,19 @@ void Devices::showError()
     KMessageBox::detailedError(NULL, i18n("The requested device can not be accessed."), m_error, i18n("Failed to open"));
 }
 
+QMimeData * Devices::mimeData(int index) const
+{
+    QString udi = itemAt(index).data.toString();
+
+    Solid::StorageAccess * access = Solid::Device(udi).as < Solid::StorageAccess > ();
+
+    if (!access) return NULL;
+
+    if (access->filePath().isEmpty() || !access->isAccessible()) {
+        return NULL;
+    } else {
+        return BaseModel::mimeForUrl(access->filePath());
+    }
+}
+
 } // namespace Models
