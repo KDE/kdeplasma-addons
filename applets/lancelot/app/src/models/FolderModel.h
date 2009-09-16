@@ -38,11 +38,15 @@ public:
 
 protected:
     void load();
+    void save();
 
 protected:
+    void addItem(const QString & url);
+
     KDirLister * m_dirLister;
     QString m_dirPath;
     QDir::SortFlags m_sort;
+    QStringList m_items;
 
 protected Q_SLOTS:
     void clear();

@@ -18,6 +18,7 @@
  */
 
 #include "FolderModel.h"
+#include <KStandardDirs>
 #include <KIcon>
 
 namespace Models {
@@ -28,6 +29,9 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
     if (!m_dirPath.endsWith(QDir::separator())) {
         m_dirPath += QDir::separator();
     }
+    m_dirPath = m_dirPath.replace("//", "/");
+
+    load();
 
     m_dirLister = new KDirLister();
     connect(m_dirLister, SIGNAL(clear()),
@@ -47,6 +51,15 @@ FolderModel::~FolderModel()
 
 void FolderModel::load()
 {
+    KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
+    KConfigGroup config = cfg.group("FolderModel");
+
+    QStringList items = config.readEntry(m_dirPath, QStringList());
+    foreach (QString item, items) {
+        if (QFile::exists(item)) {
+            addItem(QUrl(item).toString());
+        }
+    }
 }
 
 void FolderModel::clear()
@@ -59,7 +72,8 @@ void FolderModel::deleteItem(const KFileItem & fileItem)
     for (int i = 0; i < size(); i++) {
         Item item = itemAt(i);
 
-        if (fileItem.url().url() == item.data.toString()) {
+        if (fileItem.localPath() == item.data.toString()) {
+            m_items.removeAll(item.data.toString());
             removeAt(i);
         }
     }
@@ -68,20 +82,22 @@ void FolderModel::deleteItem(const KFileItem & fileItem)
 void FolderModel::newItems(const KFileItemList &items)
 {
     foreach (const KFileItem &item, items) {
-        if (item.isDesktopFile()) {
-            addUrl(item.url());
-        } else {
-            QFileInfo info(item.localPath());
-            if (info.isFile() || info.isDir()) {
-                add(
-                    item.name(),
-                    item.mimeComment(),
-                    KIcon(item.iconName()),
-                    item.url().url()
-                );
-            }
+        QFileInfo info(item.localPath());
+        if (info.isFile() || info.isDir()) {
+            addItem(item.localPath());
         }
     }
+}
+
+void FolderModel::addItem(const QString & url)
+{
+    if (m_items.contains(url)) {
+        return;
+    }
+
+    qDebug() << "FolderModel::addItem:" << url;
+    m_items << url;
+    addUrl(url);
 }
 
 bool FolderModel::dataDropAvailable(int where, const QMimeData * mimeData)
@@ -93,7 +109,7 @@ bool FolderModel::dataDropAvailable(int where, const QMimeData * mimeData)
 void FolderModel::dataDropped(int where, const QMimeData * mimeData)
 {
     if (mimeData->formats().contains("text/uri-list")) {
-        int from = 0;
+        int from = -1;
 
         KUrl url = KUrl(QString(mimeData->data("text/uri-list")));
 
@@ -104,11 +120,30 @@ void FolderModel::dataDropped(int where, const QMimeData * mimeData)
             }
         }
 
-        removeAt(from);
-        insertUrl(where, url);
-
-        // save();
+        if (from != -1) {
+            removeAt(from);
+            insertUrl(where, url);
+            save();
+        }
     }
+}
+
+void FolderModel::save()
+{
+    QStringList items;
+    for (int i = 0; i < size(); i++) {
+        items << itemAt(i).data.toString();
+    }
+
+    qDebug() << "FolderModel::save:"
+        << m_dirPath
+        << items;
+
+    KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
+    KConfigGroup config = cfg.group("FolderModel");
+
+    config.writeEntry(m_dirPath, items);
+    config.sync();
 }
 
 } // namespace Models

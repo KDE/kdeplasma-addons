@@ -169,7 +169,7 @@ bool FavoriteApplications::dataDropAvailable(int where, const QMimeData * mimeDa
 void FavoriteApplications::dataDropped(int where, const QMimeData * mimeData)
 {
     if (mimeData->formats().contains("text/uri-list")) {
-        int from = 0;
+        int from = -1;
 
         KUrl url = KUrl(QString(mimeData->data("text/uri-list")));
 
@@ -180,7 +180,9 @@ void FavoriteApplications::dataDropped(int where, const QMimeData * mimeData)
             }
         }
 
-        removeAt(from);
+        if (from != -1) {
+            removeAt(from);
+        }
         insertUrl(where, url);
 
         save();
