@@ -25,6 +25,7 @@
 #include <QGraphicsLayout>
 #include <QDataStream>
 #include <plasma/framesvg.h>
+#include <plasma/corona.h>
 #include <plasma/widgets/iconwidget.h>
 
 #include "../models/BaseModel.h"
@@ -81,6 +82,11 @@ void LancelotPart::init()
             m_model, SIGNAL(removeModelRequested(int)),
             this, SLOT(removeModel(int))
     );
+
+    // Listening to immutability
+    Plasma::Corona * corona = (Plasma::Corona *) scene();
+    connect(corona, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            this, SLOT(immutabilityChanged(Plasma::ImmutabilityType)));
 
     // Loading data
     bool loaded = loadConfig();
@@ -411,6 +417,12 @@ void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
 QGraphicsWidget * LancelotPart::graphicsWidget()
 {
     return m_list;
+}
+
+void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
+{
+    qDebug() << "LancelotPart::immutabilityChanged:" << value;
+    Lancelot::Global::instance()->setImmutability(value);
 }
 
 #include "LancelotPart.moc"

@@ -57,6 +57,7 @@ protected:
 
 private Q_SLOTS:
     void removeModel(int index);
+    void immutabilityChanged(Plasma::ImmutabilityType value);
 
 private:
     bool load(const QString & data);
