@@ -33,6 +33,9 @@ public:
     explicit FolderModel(QString dirPath, QDir::SortFlags sort = QDir::NoSort);
     virtual ~FolderModel();
 
+    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
+    L_Override void dataDropped(int where, const QMimeData * mimeData);
+
 protected:
     void load();
 

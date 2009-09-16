@@ -142,6 +142,9 @@ public:
     L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
     L_Override void contextActivate(int index, QAction * context);
 
+    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
+    L_Override void dataDropped(int where, const QMimeData * mimeData);
+
     /**
      * @returns whether the empty models are hidden
      */

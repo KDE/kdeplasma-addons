@@ -84,6 +84,33 @@ void FolderModel::newItems(const KFileItemList &items)
     }
 }
 
+bool FolderModel::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    Q_UNUSED(where);
+    return (mimeData->formats().contains("text/uri-list"));
+}
+
+void FolderModel::dataDropped(int where, const QMimeData * mimeData)
+{
+    if (mimeData->formats().contains("text/uri-list")) {
+        int from = 0;
+
+        KUrl url = KUrl(QString(mimeData->data("text/uri-list")));
+
+        for (int i = 0; i < size(); i++) {
+            if (url.path() == itemAt(i).data) {
+                from = i;
+                break;
+            }
+        }
+
+        removeAt(from);
+        insertUrl(where, url);
+
+        // save();
+    }
+}
+
 } // namespace Models
 
 #include "FolderModel.moc"

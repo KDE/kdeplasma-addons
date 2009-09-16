@@ -165,6 +165,26 @@ QMimeData * MergedActionListModel::modelMimeData(int index) const
     return NULL;
 }
 
+bool MergedActionListModel::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    int model, modelIndex;
+    d->toChildCoordinates(where, model, modelIndex);
+
+    if (model == -1) return false;
+    if (modelIndex == -1) return false; // setModelDropActions(model, actions, defaultAction);
+    return d->models.at(model)->dataDropAvailable(modelIndex, mimeData);
+}
+
+void MergedActionListModel::dataDropped(int where, const QMimeData * mimeData)
+{
+    int model, modelIndex;
+    d->toChildCoordinates(where, model, modelIndex);
+
+    if (model == -1) return;
+    if (modelIndex == -1) return; // setModelDropActions(model, actions, defaultAction);
+    return d->models.at(model)->dataDropped(modelIndex, mimeData);
+}
+
 bool MergedActionListModel::hasModelContextActions(int index) const
 {
     Q_UNUSED(index);
