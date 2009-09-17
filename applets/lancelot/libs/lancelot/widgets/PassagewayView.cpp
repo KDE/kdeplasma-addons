@@ -258,7 +258,7 @@ public:
 
     void startDrag(BreadcrumbItem * item, QGraphicsSceneMouseEvent * event)
     {
-        if (Global::instance()->immutability() != Plasma::Mutable) {
+        if (Global::self()->immutability() != Plasma::Mutable) {
             return;
         }
 
@@ -439,29 +439,29 @@ void PassagewayView::setGroup(Group * g)
 void PassagewayView::setActivationMethod(int value)
 {
     if (value == Lancelot::ClickActivate) {
-        Global::instance()->group(group()->name() + "-Entrance")
+        Global::self()->group(group()->name() + "-Entrance")
             ->setProperty("extenderPosition", NoExtender);
-        Global::instance()->group(group()->name() + "-Atlas")
+        Global::self()->group(group()->name() + "-Atlas")
             ->setProperty("extenderPosition", NoExtender);
-        Global::instance()->group(group()->name() + "-Button")
+        Global::self()->group(group()->name() + "-Button")
             ->setProperty("extenderPosition", NoExtender);
-        Global::instance()->group(group()->name() + "-Button")
+        Global::self()->group(group()->name() + "-Button")
             ->setProperty("activationMethod", ClickActivate);
     } else {
-        Global::instance()->group(group()->name() + "-Entrance")
+        Global::self()->group(group()->name() + "-Entrance")
             ->setProperty("extenderPosition", LeftExtender);
-        Global::instance()->group(group()->name() + "-Atlas")
+        Global::self()->group(group()->name() + "-Atlas")
             ->setProperty("extenderPosition", RightExtender);
-        Global::instance()->group(group()->name() + "-Button")
+        Global::self()->group(group()->name() + "-Button")
             ->setProperty("extenderPosition", LeftExtender);
-        Global::instance()->group(group()->name() + "-Button")
+        Global::self()->group(group()->name() + "-Button")
             ->setProperty("activationMethod", ExtenderActivate);
     }
-    // Global::instance()->group(group()->name() + "-Entrance")
+    // Global::self()->group(group()->name() + "-Entrance")
     //     ->notifyUpdated();
-    // Global::instance()->group(group()->name() + "-Atlas")
+    // Global::self()->group(group()->name() + "-Atlas")
     //     ->notifyUpdated();
-    // Global::instance()->group(group()->name() + "-Button")
+    // Global::self()->group(group()->name() + "-Button")
     //     ->notifyUpdated();
 }
 

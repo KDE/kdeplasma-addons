@@ -39,7 +39,7 @@ Logger::~Logger()
 {
 }
 
-Logger * Logger::instance(bool enabled)
+Logger * Logger::self(bool enabled)
 {
     if (!m_instance) {
         m_instance = new Logger(enabled);

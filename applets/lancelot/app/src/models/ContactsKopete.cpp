@@ -74,7 +74,7 @@ void ContactsKopete::activate(int index)
 {
     if (m_kopeteRunning && !m_noOnlineContacts) {
         QString data = title(index);
-        Logger::instance()->log("kopete-model", data);
+        Logger::self()->log("kopete-model", data);
         m_interface->openChat(data);
     } else {
         BaseModel::activate(index);

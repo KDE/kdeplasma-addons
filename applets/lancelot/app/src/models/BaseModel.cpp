@@ -47,7 +47,7 @@ public:
 
 ApplicationConnector * ApplicationConnector::m_instance = NULL;
 
-ApplicationConnector * ApplicationConnector::instance()
+ApplicationConnector * ApplicationConnector::self()
 {
     if (m_instance == NULL) {
         m_instance = new ApplicationConnector();
@@ -117,19 +117,19 @@ void BaseModel::activate(int index)
 {
     QString data = itemAt(index).data.toString();
 
-    Logger::instance()->log("base-model", data);
+    Logger::self()->log("base-model", data);
     new KRun(KUrl(data), 0);
     hideLancelotWindow();
 }
 
 void BaseModel::hideLancelotWindow()
 {
-    ApplicationConnector::instance()->hide(true);
+    ApplicationConnector::self()->hide(true);
 }
 
 void BaseModel::changeLancelotSearchString(const QString & string)
 {
-    ApplicationConnector::instance()->search(string);
+    ApplicationConnector::self()->search(string);
 }
 
 int BaseModel::addServices(const QStringList & serviceNames)

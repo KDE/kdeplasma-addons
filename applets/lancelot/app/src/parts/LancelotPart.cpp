@@ -265,7 +265,7 @@ bool LancelotPart::load(const QString & input)
                 m_models.append(model);
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
-                m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::instance());
+                m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::self());
             } else if (modelID.startsWith("Folder ")) {
                 modelID.remove(0, 7);
                 if (modelID.startsWith("applications:/")) {
@@ -474,7 +474,7 @@ QGraphicsWidget * LancelotPart::graphicsWidget()
 void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
 {
     qDebug() << "LancelotPart::immutabilityChanged:" << value;
-    Lancelot::Global::instance()->setImmutability(value);
+    Lancelot::Global::self()->setImmutability(value);
 }
 
 void LancelotPart::search(const QString & query)

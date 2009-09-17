@@ -183,9 +183,9 @@ void Applications::activate(int index)
     }
 
     QString data = m_items.at(index - m_submodels.size()).desktopFile;
-    Logger::instance()->log("applications-model", data);
+    Logger::self()->log("applications-model", data);
     new KRun(KUrl(data), 0);
-    ApplicationConnector::instance()->hide(true);
+    ApplicationConnector::self()->hide(true);
 }
 
 QMimeData * Applications::mimeData(int index) const
@@ -247,7 +247,7 @@ void Applications::contextActivate(int index, QAction * context)
 
     int appIndex = index - m_submodels.size();
     if (context->data().toInt() == 0) {
-        FavoriteApplications::instance()
+        FavoriteApplications::self()
             ->addFavorite(m_items.at(appIndex).desktopFile);
     }
 }

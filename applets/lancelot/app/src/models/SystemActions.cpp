@@ -65,7 +65,7 @@ SystemActions::~SystemActions()
 {
 }
 
-SystemActions * SystemActions::instance()
+SystemActions * SystemActions::self()
 {
     if (!m_instance) {
         m_instance = new SystemActions();
@@ -254,7 +254,7 @@ void SystemActions::delayedActivate()
         org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());
 
         if (screensaver.isValid()) {
-            ApplicationConnector::instance()->hide(true);
+            ApplicationConnector::self()->hide(true);
             screensaver.Lock();
         } else {
             KMessageBox::error(
@@ -283,7 +283,7 @@ void SystemActions::delayedActivate()
     }
 
     if (type != KWorkSpace::ShutdownTypeDefault) {
-        ApplicationConnector::instance()->hide(true);
+        ApplicationConnector::self()->hide(true);
         KWorkSpace::requestShutDown(confirm, type);
         return;
     }
@@ -301,7 +301,7 @@ void SystemActions::delayedActivate()
     }
 
     if (method) {
-        ApplicationConnector::instance()->hide(true);
+        ApplicationConnector::self()->hide(true);
         job = Solid::Control::PowerManager::suspend(method);
         if (job) {
             job->start();

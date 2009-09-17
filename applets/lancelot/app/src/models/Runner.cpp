@@ -154,7 +154,7 @@ void Runner::activate(int index)
 {
     if (!valid) return;
     QString data = itemAt(index).data.value< QStringList >().at(0);
-    Logger::instance()->log("run-model", data);
+    Logger::self()->log("run-model", data);
     m_runnerManager->run(data);
     m_runnerManager->reset();
     changeLancelotSearchString(QString());
@@ -208,7 +208,7 @@ void Runner::contextActivate(int index, QAction * context)
         KService::Ptr service = KService::serviceByStorageId(
                 itemAt(index).data.value< QStringList >().at(2));
         if (service) {
-            FavoriteApplications::instance()
+            FavoriteApplications::self()
                 ->addFavorite(service->entryPath());
         }
     }

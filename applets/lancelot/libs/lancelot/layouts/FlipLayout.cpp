@@ -46,7 +46,7 @@ FlipLayoutManager::~FlipLayoutManager()
     delete d;
 }
 
-FlipLayoutManager * FlipLayoutManager::instance()
+FlipLayoutManager * FlipLayoutManager::self()
 {
     if (m_instance == NULL) {
         m_instance = new FlipLayoutManager();

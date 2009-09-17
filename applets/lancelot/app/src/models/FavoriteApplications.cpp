@@ -52,7 +52,7 @@ bool FavoriteApplications::addFavorite(QString url)
     return false;
 }
 
-FavoriteApplications * FavoriteApplications::instance()
+FavoriteApplications * FavoriteApplications::self()
 {
     if (!m_instance) {
         m_instance = new FavoriteApplications();
@@ -139,7 +139,7 @@ void FavoriteApplications::contextActivate(int index, QAction * context)
 }
 
 FavoriteApplications::PassagewayViewProxy::PassagewayViewProxy()
-    : ActionTreeModelProxy(Models::FavoriteApplications::instance(),
+    : ActionTreeModelProxy(Models::FavoriteApplications::self(),
             i18n("Favorites"), KIcon("favorites"))
 {
 }

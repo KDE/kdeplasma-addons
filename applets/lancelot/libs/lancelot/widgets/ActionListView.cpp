@@ -103,7 +103,7 @@ void ActionListViewItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     ExtenderButton::mouseMoveEvent(event);
-    if (Global::instance()->immutability() == Plasma::Mutable &&
+    if (Global::self()->immutability() == Plasma::Mutable &&
             isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
         setDown(false);
         m_factory->itemDrag(this, event);
@@ -216,7 +216,7 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
 void ActionListViewItemFactory::setItemsGroup(Group * group) //>
 {
     if (group == NULL) {
-        group = Global::instance()->group("ActionListView-Items");
+        group = Global::self()->group("ActionListView-Items");
     }
 
     if (group == m_itemsGroup) return;
@@ -240,7 +240,7 @@ Group * ActionListViewItemFactory::itemsGroup() const //>
 void ActionListViewItemFactory::setCategoriesGroup(Group * group) //>
 {
     if (group == NULL) {
-        group = Global::instance()->group("ActionListView-Categories");
+        group = Global::self()->group("ActionListView-Categories");
     }
 
     if (group == m_itemsGroup) return;
@@ -637,7 +637,7 @@ ActionListView::Private::Private(ActionListView * listView) //>
     dropIndicator->hide();
 
     connect(
-        Global::instance(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+        Global::self(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
         this, SLOT(immutabilityChanged(Plasma::ImmutabilityType)));
 } //<
 
@@ -750,7 +750,7 @@ void ActionListView::setModel(ActionListModel * model) //>
         d->itemFactory = new ActionListViewItemFactory(
                 model, this);
         list()->setItemFactory(d->itemFactory);
-        setAcceptDrops(Plasma::Mutable == Global::instance()->immutability());
+        setAcceptDrops(Plasma::Mutable == Global::self()->immutability());
         connect(d->itemFactory, SIGNAL(updated()),
              d, SLOT(sizeHintUpdateNeeded()));
         connect(d->itemFactory, SIGNAL(itemInserted(int)),
@@ -864,7 +864,7 @@ void ActionListView::setItemsGroup(Group * group) //>
 
 void ActionListView::setItemsGroupByName(const QString & group) //>
 {
-    setItemsGroup(Global::instance()->group(group));
+    setItemsGroup(Global::self()->group(group));
 } //<
 
 Group * ActionListView::itemsGroup() const //>
@@ -887,7 +887,7 @@ void ActionListView::setCategoriesGroup(Group * group) //>
 
 void ActionListView::setCategoriesGroupByName(const QString & group) //>
 {
-    setCategoriesGroup(Global::instance()->group(group));
+    setCategoriesGroup(Global::self()->group(group));
 } //<
 
 Group * ActionListView::categoriesGroup() const //>

@@ -37,7 +37,7 @@ public:
      * @param enabled sets whether the logger should be
      *     enabled. Useful for first invocation
      */
-    static Logger * instance(bool enabled = false);
+    static Logger * self(bool enabled = false);
 
     static void close();
 

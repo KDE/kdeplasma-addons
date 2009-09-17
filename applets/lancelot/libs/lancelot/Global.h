@@ -184,7 +184,7 @@ private:
 class LANCELOT_EXPORT Global : public QObject {
     Q_OBJECT
 public:
-    static Global * instance();
+    static Global * self();
 
     /**
      * Destroys this Lancelot::Global

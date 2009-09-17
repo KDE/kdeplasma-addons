@@ -237,7 +237,7 @@ void Devices::activate(int index)
     if (index > size() - 1) return;
 
     QString udi = itemAt(index).data.toString();
-    Logger::instance()->log("devices-model", udi);
+    Logger::self()->log("devices-model", udi);
 
     setupDevice(udi, true);
 }

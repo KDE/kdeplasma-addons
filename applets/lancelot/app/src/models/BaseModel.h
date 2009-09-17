@@ -29,7 +29,7 @@ namespace Models {
 class ApplicationConnector: public QObject {
     Q_OBJECT
 public:
-    static ApplicationConnector * instance();
+    static ApplicationConnector * self();
 
     void search(const QString & search);
     void hide(bool immediate = false);

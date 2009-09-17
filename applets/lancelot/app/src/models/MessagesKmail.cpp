@@ -73,7 +73,7 @@ void MessagesKmail::activate(int index)
 {
     if (m_dataValid) {
         QString data = itemAt(index).data.toString();
-        Logger::instance()->log("kmail-model", data);
+        Logger::self()->log("kmail-model", data);
         m_interface->selectFolder(data);
     }
 

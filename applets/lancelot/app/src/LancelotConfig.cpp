@@ -64,7 +64,7 @@ void LancelotConfig::systemButtonClicked()
     clickedSystemButton = static_cast < QPushButton * > (sender());
     if (!systemButtonActionsMenu) {
         systemButtonActionsMenu = new QMenu();
-        Models::SystemActions * model = Models::SystemActions::instance();
+        Models::SystemActions * model = Models::SystemActions::self();
         foreach (QString id, model->actions()) {
             systemButtonActionsMenu->addAction(
                     model->actionIcon(id),
@@ -88,9 +88,9 @@ void LancelotConfig::systemButtonActionsMenuClicked()
 
 void LancelotConfig::setButtonData(QPushButton * button)
 {
-    button->setText(Models::SystemActions::instance()->actionTitle(
+    button->setText(Models::SystemActions::self()->actionTitle(
                 systemButtonActions[button]));
-    button->setIcon(Models::SystemActions::instance()->actionIcon(
+    button->setIcon(Models::SystemActions::self()->actionIcon(
                 systemButtonActions[button]));
 }
 

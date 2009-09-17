@@ -50,9 +50,9 @@ PopupList::Private::Private(PopupList * parent)
 
     list->setShowsExtendersOutside(false);
     list->setGroupByName("PopupList");
-    list->setItemsGroup(Global::instance()
+    list->setItemsGroup(Global::self()
          ->group("PopupList-Items"));
-    list->setCategoriesGroup(Global::instance()
+    list->setCategoriesGroup(Global::self()
          ->group("PopupList-Categories"));
 
     list->setItemHeight(ITEM_HEIGHT, Qt::MinimumSize);
@@ -131,12 +131,12 @@ void PopupList::setModel(ActionListModel * model)
 
     if (!d->treeModel) {
         d->listModel = model;
-        d->list->setCategoriesGroup(Global::instance()
+        d->list->setCategoriesGroup(Global::self()
                 ->group("PopupList-CategoriesPass"));
     } else {
         d->listModel = NULL;
         d->list->setCategoriesActivable(true);
-        d->list->setCategoriesGroup(Global::instance()
+        d->list->setCategoriesGroup(Global::self()
                 ->group("PopupList-CategoriesPass"));
     }
 

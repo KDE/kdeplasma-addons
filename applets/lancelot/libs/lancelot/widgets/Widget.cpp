@@ -134,17 +134,17 @@ QString Widget::groupName() const
 
 void Widget::setGroupByName(const QString & groupName)
 {
-    setGroup(Global::instance()->group(groupName));
+    setGroup(Global::self()->group(groupName));
 }
 
 void Widget::setGroup(Group * group)
 {
-    Global::instance()->setGroupForObject(this, group);
+    Global::self()->setGroupForObject(this, group);
 }
 
 Group * Widget::group() const
 {
-    return Global::instance()->groupForObject(
+    return Global::self()->groupForObject(
         const_cast < Widget * > (this));
 }
 

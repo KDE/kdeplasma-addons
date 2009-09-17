@@ -66,7 +66,7 @@ public:
     /**
      * @returns the singleton instance of the FlipLayoutManager
      */
-    static FlipLayoutManager * instance();
+    static FlipLayoutManager * self();
 
     /**
      * Implementation of the actual flipping
@@ -93,23 +93,23 @@ public:
 
     void setFlip(Plasma::Flip flip)
     {
-        FlipLayoutManager::instance()->setFlip(this, flip);
+        FlipLayoutManager::self()->setFlip(this, flip);
     }
 
     void setUseGlobalFlip()
     {
-        FlipLayoutManager::instance()->setUseGlobalFlip(this);
+        FlipLayoutManager::self()->setUseGlobalFlip(this);
     }
 
     Plasma::Flip flip() const
     {
-        return FlipLayoutManager::instance()->flip(this);
+        return FlipLayoutManager::self()->flip(this);
     }
 
     L_Override void setGeometry(const QRectF & rect)
     {
         SuperLayout::setGeometry(rect);
-        FlipLayoutManager::instance()->setGeometry(this);
+        FlipLayoutManager::self()->setGeometry(this);
     }
 
 };

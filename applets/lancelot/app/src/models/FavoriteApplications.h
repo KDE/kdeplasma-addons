@@ -28,7 +28,7 @@ namespace Models {
 class FavoriteApplications : public BaseModel {
     Q_OBJECT
 public:
-    static FavoriteApplications * instance();
+    static FavoriteApplications * self();
 
     L_Override bool hasContextActions(int index) const;
     L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);

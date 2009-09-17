@@ -104,7 +104,7 @@ void Group::Private::copyFrom(Group::Private * d)
 
 KConfigGroup Group::Private::confGroupTheme()
 {
-    return KConfigGroup(Global::instance()->theme(), "Group-" + name);
+    return KConfigGroup(Global::self()->theme(), "Group-" + name);
 }
 
 Group::Group(QString name)
@@ -135,7 +135,7 @@ void Group::add(QObject * object)
 
 void Group::remove(QObject * object, bool setDefaultGroup)
 {
-    if (Global::instance()->defaultGroup() == this && setDefaultGroup) return;
+    if (Global::self()->defaultGroup() == this && setDefaultGroup) return;
 
     if (!d->objects.contains(object)) return;
     d->objects.remove(object);
@@ -230,7 +230,7 @@ void Group::load(bool full)
     qDebug() << "Loading group " << d->name;
     KConfigGroup confGroupTheme = d->confGroupTheme();
     if (!confGroupTheme.exists()) {
-        group = Global::instance()->defaultGroup();
+        group = Global::self()->defaultGroup();
         if (group == this) return;
 
         d->copyFrom(group->d);
@@ -238,8 +238,8 @@ void Group::load(bool full)
     }
 
     QString parentName = confGroupTheme.readEntry("parent", "Default");
-    if (Global::instance()->groupExists(parentName)) {
-        group = Global::instance()->group(confGroupTheme.readEntry("parent", "Default"));
+    if (Global::self()->groupExists(parentName)) {
+        group = Global::self()->group(confGroupTheme.readEntry("parent", "Default"));
         if (group != this) {
             group->load(false);
             d->copyFrom(group->d);
@@ -306,7 +306,7 @@ bool Group::contains(QObject * object)
 
 Global * Global::Private::instance = NULL;
 
-Global * Global::instance()
+Global * Global::self()
 {
     if (!Global::Private::instance) {
         Global::Private::instance = new Global();
@@ -328,7 +328,7 @@ Global::Private::~Private()
 
 void Global::Private::objectDeleted(QObject * object)
 {
-    Group * group = Global::instance()->groupForObject(object);
+    Group * group = Global::self()->groupForObject(object);
     if (group) {
         group->remove(object);
     }

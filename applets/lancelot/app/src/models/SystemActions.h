@@ -34,7 +34,7 @@ namespace Models {
 class SystemActions: public Lancelot::StandardActionTreeModel {
     Q_OBJECT
 public:
-    static SystemActions * instance();
+    static SystemActions * self();
 
     ~SystemActions();
 

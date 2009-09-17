@@ -72,7 +72,7 @@ void LancelotApplication::init()
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
 
-    Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
+    Models::ApplicationConnector * ac = Models::ApplicationConnector::self();
     connect(
             ac, SIGNAL(doSearch(QString)),
             this, SLOT(search(QString))
@@ -205,11 +205,11 @@ void LancelotApplication::showMenuEditor()
 
 void LancelotApplication::setImmutability(int immutable)
 {
-    Lancelot::Global::instance()->setImmutability(
+    Lancelot::Global::self()->setImmutability(
             (Plasma::ImmutabilityType) immutable);
 }
 
 int LancelotApplication::immutability() const
 {
-    return Lancelot::Global::instance()->immutability();
+    return Lancelot::Global::self()->immutability();
 }

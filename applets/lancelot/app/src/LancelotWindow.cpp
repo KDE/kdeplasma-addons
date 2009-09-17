@@ -293,23 +293,23 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     layoutSections->setFlip(flip);
 
     if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
-        Lancelot::Global::instance()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
+        Lancelot::Global::self()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
                 (flip & Plasma::VerticalFlip)?(Lancelot::TopExtender):(Lancelot::BottomExtender)
         ));
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
-    Lancelot::Global::instance()->group("LancelotContext")->setProperty("extenderPosition",
-            Lancelot::Global::instance()->group("SystemButtons")->property("extenderPosition"));
-    Lancelot::Global::instance()->group("LancelotContext")->setProperty("activationMethod",
-            Lancelot::Global::instance()->group("SystemButtons")->property("activationMethod"));
-    Lancelot::Global::instance()->group("SystemButtons")->notifyUpdated();
-    Lancelot::Global::instance()->group("LancelotContext")->notifyUpdated();
+    Lancelot::Global::self()->group("LancelotContext")->setProperty("extenderPosition",
+            Lancelot::Global::self()->group("SystemButtons")->property("extenderPosition"));
+    Lancelot::Global::self()->group("LancelotContext")->setProperty("activationMethod",
+            Lancelot::Global::self()->group("SystemButtons")->property("activationMethod"));
+    Lancelot::Global::self()->group("SystemButtons")->notifyUpdated();
+    Lancelot::Global::self()->group("LancelotContext")->notifyUpdated();
 
     if (m_showingFull) {
         sectionActivated("applications");
@@ -433,14 +433,14 @@ void LancelotWindow::systemButtonClicked()
         static_cast < Lancelot::ExtenderButton * > (sender());
 
     Lancelot::ActionTreeModel * model =
-        Models::SystemActions::instance()->action(systemButtonActions[button]);
+        Models::SystemActions::self()->action(systemButtonActions[button]);
 
     if (!model) return;
 
     if (!menuSystemButton) {
         menuSystemButton = new Lancelot::PopupList();
         menuSystemButton->resize(200, 200);
-        Models::ApplicationConnector * ac = Models::ApplicationConnector::instance();
+        Models::ApplicationConnector * ac = Models::ApplicationConnector::self();
         connect(
                 ac, SIGNAL(doHide(bool)),
                 menuSystemButton, SLOT(close())
@@ -803,57 +803,57 @@ void LancelotWindow::loadConfig()
     }
 
     if (systemNoClick) {
-        Lancelot::Global::instance()->group("SystemButtons")->setProperty("extenderPosition",
+        Lancelot::Global::self()->group("SystemButtons")->setProperty("extenderPosition",
                 (layoutMain->flip() & Plasma::VerticalFlip)
                     ? (Lancelot::TopExtender) : (Lancelot::BottomExtender)
         );
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
     } else {
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("extenderPosition", QVariant(Lancelot::NoExtender));
-        Lancelot::Global::instance()->group("SystemButtons")
+        Lancelot::Global::self()->group("SystemButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
 
-    Lancelot::Global::instance()->group("LancelotContext")->setProperty("extenderPosition",
-            Lancelot::Global::instance()->group("SystemButtons")->property("extenderPosition"));
-    Lancelot::Global::instance()->group("LancelotContext")->setProperty("activationMethod",
-            Lancelot::Global::instance()->group("SystemButtons")->property("activationMethod"));
-    Lancelot::Global::instance()->group("SystemButtons")->notifyUpdated();
-    Lancelot::Global::instance()->group("LancelotContext")->notifyUpdated();
+    Lancelot::Global::self()->group("LancelotContext")->setProperty("extenderPosition",
+            Lancelot::Global::self()->group("SystemButtons")->property("extenderPosition"));
+    Lancelot::Global::self()->group("LancelotContext")->setProperty("activationMethod",
+            Lancelot::Global::self()->group("SystemButtons")->property("activationMethod"));
+    Lancelot::Global::self()->group("SystemButtons")->notifyUpdated();
+    Lancelot::Global::self()->group("LancelotContext")->notifyUpdated();
 
     if (sectionNoClick) {
-        Lancelot::Global::instance()->group("SectionButtons")
+        Lancelot::Global::self()->group("SectionButtons")
             ->setProperty("activationMethod", Lancelot::HoverActivate);
     } else {
-        Lancelot::Global::instance()->group("SectionButtons")
+        Lancelot::Global::self()->group("SectionButtons")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
     }
-    Lancelot::Global::instance()->group("SectionButtons")->notifyUpdated();
+    Lancelot::Global::self()->group("SectionButtons")->notifyUpdated();
 
     if (listsNoClick) {
-        Lancelot::Global::instance()->group("ActionListView-Left")
+        Lancelot::Global::self()->group("ActionListView-Left")
             ->setProperty("extenderPosition", Lancelot::LeftExtender);
-        Lancelot::Global::instance()->group("ActionListView-Right")
+        Lancelot::Global::self()->group("ActionListView-Right")
             ->setProperty("extenderPosition", Lancelot::RightExtender);
-        Lancelot::Global::instance()->group("PassagewayView")
+        Lancelot::Global::self()->group("PassagewayView")
             ->setProperty("activationMethod", Lancelot::ExtenderActivate);
-        Lancelot::Global::instance()->group("PopupList")
+        Lancelot::Global::self()->group("PopupList")
             ->setProperty("extenderPosition", Lancelot::RightExtender);
     } else {
-        Lancelot::Global::instance()->group("ActionListView-Left")
+        Lancelot::Global::self()->group("ActionListView-Left")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
-        Lancelot::Global::instance()->group("ActionListView-Right")
+        Lancelot::Global::self()->group("ActionListView-Right")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
-        Lancelot::Global::instance()->group("PassagewayView")
+        Lancelot::Global::self()->group("PassagewayView")
             ->setProperty("activationMethod", Lancelot::ClickActivate);
-        Lancelot::Global::instance()->group("PopupList")
+        Lancelot::Global::self()->group("PopupList")
             ->setProperty("extenderPosition", Lancelot::NoExtender);
     }
-    Lancelot::Global::instance()->group("ActionListView-Left")->notifyUpdated();
-    Lancelot::Global::instance()->group("ActionListView-Right")->notifyUpdated();
-    Lancelot::Global::instance()->group("PassagewayView")->notifyUpdated();
+    Lancelot::Global::self()->group("ActionListView-Left")->notifyUpdated();
+    Lancelot::Global::self()->group("ActionListView-Right")->notifyUpdated();
+    Lancelot::Global::self()->group("PassagewayView")->notifyUpdated();
 
     // PassagewayView settings
     if (m_configUi.appbrowserColumnLimitted()) {
@@ -871,17 +871,17 @@ void LancelotWindow::loadConfig()
     while (i.hasNext()) {
         i.next();
 
-        i.key()->setTitle(Models::SystemActions::instance()->actionTitle(
+        i.key()->setTitle(Models::SystemActions::self()->actionTitle(
                     i.value()));
-        i.key()->setIcon(Models::SystemActions::instance()->actionIcon(
+        i.key()->setIcon(Models::SystemActions::self()->actionIcon(
                     i.value()));
     }
 
     // Logging
-    Logger::instance()->setEnabled(m_configUi.enableUsageStatistics());
+    Logger::self()->setEnabled(m_configUi.enableUsageStatistics());
 
     // Keep open
-    Models::ApplicationConnector::instance()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
+    Models::ApplicationConnector::self()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
 }
 
 void LancelotWindow::lancelotContext()
