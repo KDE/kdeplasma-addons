@@ -1,0 +1,42 @@
+[Desktop Entry]
+Name=KnowledgeBase
+Name[es]=Base de conocimientos
+Name[fr]=KnowledgeBase
+Name[gl]=KnowledgeBase
+Name[nds]=KnowledgeBase
+Name[pt]=Base de Conhecimento
+Name[pt_BR]=Base de conhecimento
+Name[ro]=Baza de cunoștințe
+Name[sv]=Kunskapsbas
+Name[tr]=KnowledgeBase
+Name[uk]=База знань
+Name[x-test]=xxKnowledgeBasexx
+Name[zh_TW]=知識庫
+Comment=Opendesktop Knowledgebase
+Comment[es]=Base de conocimientos Opendesktop
+Comment[fr]=Base de connaissance Opendesktop
+Comment[gl]=Knowledgebase de Opendesktop
+Comment[nds]=Opendesktop-Wetendatenbank
+Comment[pt]=Base de Conhecimento do OpenDesktop
+Comment[pt_BR]=Base de conhecimento do Opendesktop
+Comment[ro]=Baza de cunoștințe Opendesktop
+Comment[sv]=Opendesktop kunskapsbas
+Comment[tr]=Açık Masaüstü Bilgi Tabanı
+Comment[uk]=База знань Opendesktop
+Comment[x-test]=xxOpendesktop Knowledgebasexx
+Comment[zh_TW]=Opendesktop 知識庫
+Type=Service
+Icon=help-contents
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_knowledgebase
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-Name=knowledgebase
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
