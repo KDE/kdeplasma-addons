@@ -1,6 +1,7 @@
 [KDE Desktop Pattern]
 Comment=Eastern Blues
 Comment[es]=Blues oriental
+Comment[nb]=Eastern Blues
 Comment[nds]=Oosten Sachtmood
 Comment[pt]=Blues de Leste
 Comment[pt_BR]=Blues do Leste
@@ -9,5 +10,6 @@ Comment[sv]=Östlig blues
 Comment[tr]=Doğu Hüznü
 Comment[uk]=Східний блюз
 Comment[x-test]=xxEastern Bluesxx
+Comment[zh_TW]=Eastern Blues
 File=eastern_blues.png
 
