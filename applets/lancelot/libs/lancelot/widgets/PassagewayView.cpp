@@ -354,6 +354,9 @@ void PassagewayView::listItemActivated(int index, int listIndex)
         model = model->child(index);
         if (model) {
             d->next(Private::Step(model->selfTitle(), model->selfIcon(), model));
+            // PopupMenu * popup = new PopupMenu();
+            // popup->setModel(model);
+            // popup->exec(QCursor::pos());
         } else {
             d->lists.at(listIndex)->clearSelection();
         }
@@ -411,7 +414,7 @@ void PassagewayView::setAtlasIcon(QIcon icon)
 
 void PassagewayView::setGroup(Group * g)
 {
-    Widget::setGroup(g);
+    Panel::setGroup(g);
 
     int i = d->buttons.size();
     foreach (ExtenderButton * button, d->buttons) {

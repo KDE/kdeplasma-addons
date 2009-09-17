@@ -21,6 +21,7 @@
 #include <KIcon>
 #include <KMimeType>
 #include <KUrl>
+#include <KLineEdit>
 #include <QGraphicsLayoutItem>
 #include <QGraphicsLayout>
 #include <QDataStream>
@@ -47,7 +48,7 @@
 
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
-    m_list(NULL), m_model(NULL),
+    m_list(NULL), m_model(NULL), m_runnnerModel(NULL),
     m_icon(NULL)
 {
     if (args.size() > 0) {
@@ -74,9 +75,32 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 void LancelotPart::init()
 {
     // Setting up UI
-    m_list = new Lancelot::ActionListView(this);
+    m_root = new QGraphicsWidget(this);
+
+    // m_layout = new Lancelot::FullBorderLayout();
+    m_layout = new QGraphicsLinearLayout();
+    m_layout->setOrientation(Qt::Vertical);
+
+    m_root->setLayout(m_layout);
+
+    m_searchText = new Plasma::LineEdit(m_root);
+    m_searchText->nativeWidget()->setClearButtonShown(true);
+    m_searchText->nativeWidget()->setClickMessage(i18n("Search"));
+    connect(m_searchText->widget(),
+        SIGNAL(textChanged(const QString &)),
+        this, SLOT(search(const QString &))
+    );
+
+    m_list = new Lancelot::ActionListView(m_root);
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
+
+    m_root->setMinimumSize(150, 200);
+    m_list->setPreferredSize(300, 400);
+
+    m_layout->addItem(m_searchText);
+    m_layout->addItem(m_list);
+    m_layout->setStretchFactor(m_list, 2);
 
     connect(
             m_model, SIGNAL(removeModelRequested(int)),
@@ -88,6 +112,7 @@ void LancelotPart::init()
     immutabilityChanged(corona->immutability());
     connect(corona, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             this, SLOT(immutabilityChanged(Plasma::ImmutabilityType)));
+    immutabilityChanged(Plasma::Mutable);
 
     // Loading data
     bool loaded = loadConfig();
@@ -101,8 +126,6 @@ void LancelotPart::init()
         }
     }
 
-    m_list->setMinimumSize(150, 200);
-    m_list->setPreferredSize(250, 300);
     KGlobal::locale()->insertCatalog("lancelot");
     applyConfig();
 }
@@ -334,6 +357,29 @@ bool LancelotPart::eventFilter(QObject * object, QEvent * event)
         }
     }
 
+    if (event->type() == QEvent::KeyPress) {
+        bool pass = false;
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        switch (keyEvent->key()) {
+            case Qt::Key_Tab:
+                return true;
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+                if (m_list->selectedIndex() == -1) {
+                    m_list->initialSelection();
+                }
+            default:
+                pass = true;
+        }
+
+        if (pass) {
+            m_list->keyPressEvent(keyEvent);
+        }
+
+        m_searchText->nativeWidget()->setFocus();
+        m_searchText->setFocus();
+    }
+
     return Plasma::PopupApplet::eventFilter(object, event);
 }
 
@@ -359,6 +405,8 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
             (Lancelot::ExtenderPosition)
             kcg.readEntry("contentsExtenderPosition",
             (int)Lancelot::RightExtender));
+    m_config.setShowSearchBox(
+            kcg.readEntry("showSearchBox", false));
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
@@ -391,6 +439,8 @@ void LancelotPart::applyConfig()
     } else {
         m_list->setExtenderPosition(Lancelot::NoExtender);
     }
+
+    showSearchBox(kcg.readEntry("showSearchBox", false));
 }
 
 void LancelotPart::configAccepted()
@@ -405,6 +455,7 @@ void LancelotPart::configAccepted()
             m_config.contentsClickActivation());
     kcg.writeEntry("contentsExtenderPosition",
             (int)m_config.contentsExtenderPosition());
+    kcg.writeEntry("showSearchBox", m_config.showSearchBox());
 
     kcg.sync();
     applyConfig();
@@ -417,13 +468,42 @@ void LancelotPart::resizeEvent(QGraphicsSceneResizeEvent * event)
 
 QGraphicsWidget * LancelotPart::graphicsWidget()
 {
-    return m_list;
+    return m_root;
 }
 
 void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
 {
     qDebug() << "LancelotPart::immutabilityChanged:" << value;
     Lancelot::Global::instance()->setImmutability(value);
+}
+
+void LancelotPart::search(const QString & query)
+{
+    if (!m_runnnerModel) {
+        m_runnnerModel = new Models::Runner();
+    }
+
+    if (query.isEmpty()) {
+        m_list->setModel(m_model);
+    } else {
+        m_runnnerModel->setSearchString(query);
+        m_list->setModel(m_runnnerModel);
+    }
+}
+
+void LancelotPart::showSearchBox(bool value)
+{
+    if (m_searchText->isVisible() == value) {
+        return;
+    }
+
+    m_searchText->setVisible(value);
+
+    if (value) {
+        m_layout->insertItem(0, m_searchText);
+    } else {
+        m_layout->removeItem(m_searchText);
+    }
 }
 
 #include "LancelotPart.moc"

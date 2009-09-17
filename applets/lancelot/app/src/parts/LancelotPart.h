@@ -22,15 +22,19 @@
 
 #include <KConfigDialog>
 #include <QBasicTimer>
+#include <QGraphicsLinearLayout>
 
 #include <plasma/applet.h>
 #include <plasma/popupapplet.h>
+#include <plasma/widgets/lineedit.h>
 
 #include <lancelot/Global.h>
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ActionListView.h>
+#include <lancelot/layouts/FullBorderLayout.h>
 
 #include "PartsMergedModel.h"
+#include "models/Runner.h"
 #include "LancelotPartConfig.h"
 
 class LancelotPart : public Plasma::PopupApplet
@@ -44,16 +48,16 @@ public:
     L_Override void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
     L_Override void dropEvent(QGraphicsSceneDragDropEvent * event);
 
-    L_Override bool eventFilter(QObject * object, QEvent * event);
-
 private Q_SLOTS:
     void configAccepted();
+    void search(const QString & query);
 
 protected:
     L_Override void createConfigurationInterface(KConfigDialog *parent);
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
     L_Override QGraphicsWidget * graphicsWidget();
     L_Override void timerEvent(QTimerEvent * event);
+    L_Override bool eventFilter(QObject * object, QEvent * event);
 
 private Q_SLOTS:
     void removeModel(int index);
@@ -64,15 +68,20 @@ private:
     bool loadFromFile(const QString & url);
     bool loadFromList(const QStringList & list);
     bool loadDirectory(const QString & url);
+    void showSearchBox(bool value);
 
     void saveConfig();
     bool loadConfig();
     void applyConfig();
 
+    QGraphicsWidget * m_root;
+    // Lancelot::FullBorderLayout * m_layout;
+    QGraphicsLinearLayout * m_layout;
     Lancelot::ActionListView * m_list;
-    // Plasma::LineEdit * m_searchText;
+    Plasma::LineEdit * m_searchText;
 
     Models::PartsMergedModel * m_model;
+    Models::Runner * m_runnnerModel;
     QList < Lancelot::ActionListModel * > m_models;
 
     QString m_cmdarg;

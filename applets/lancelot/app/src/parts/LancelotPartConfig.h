@@ -28,6 +28,7 @@ public:
     void setupUi(QWidget * widget);
 
     bool iconClickActivation() const;
+    bool showSearchBox() const;
     QString icon() const;
 
     bool contentsClickActivation() const;
@@ -39,6 +40,7 @@ public:
 
     void setContentsClickActivation(bool value);
     void setContentsExtenderPosition(Lancelot::ExtenderPosition position);
+    void setShowSearchBox(bool value);
 
     QButtonGroup * qbgIcon;
     QButtonGroup * qbgContents;

@@ -97,7 +97,7 @@ void PopupList::Private::listItemActivated(int index)
                 break;
             case PopupNew:
                 if (!child) {
-                    child = new PopupList();
+                    child = new PopupList(q);
                 }
                 child->setModel(treeModel->child(index));
                 child->exec(QCursor::pos(), q);

@@ -91,6 +91,7 @@ void ActionListViewItem::contextMenuEvent(QGraphicsSceneContextMenuEvent * event
 {
     ExtenderButton::contextMenuEvent(event);
     m_factory->itemContext(this);
+    event->accept();
 }
 
 void ActionListViewItem::mousePressEvent(QGraphicsSceneMouseEvent * event)

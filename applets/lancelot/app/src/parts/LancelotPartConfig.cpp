@@ -84,6 +84,16 @@ void LancelotPartConfig::setContentsExtenderPosition(Lancelot::ExtenderPosition 
     }
 }
 
+void LancelotPartConfig::setShowSearchBox(bool value)
+{
+    checkShowSearchBox->setChecked(value);
+}
+
+bool LancelotPartConfig::showSearchBox() const
+{
+    return checkShowSearchBox->isChecked();
+}
+
 void LancelotPartConfig::setIcon(const QString & icon)
 {
     iconChooser->setIcon(icon);
