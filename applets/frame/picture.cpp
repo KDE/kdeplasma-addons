@@ -117,7 +117,7 @@ void Picture::reload()
     emit pictureLoaded(correctRotation(QPixmap(m_path), m_path));
 }
 
-QPixmap Picture::correctRotation(QPixmap tempImage, const QString &path)
+QPixmap Picture::correctRotation(const QPixmap& tempImage, const QString &path)
 {
     kDebug() << path;
     QPixmap image = QPixmap();

@@ -50,7 +50,7 @@ public:
     * Set picture from location @p currentUrl
     **/
     void setPicture(const KUrl &currentUrl);
-    QPixmap correctRotation(QPixmap tempImage, const QString &path);
+    QPixmap correctRotation(const QPixmap& tempImage, const QString &path);
     KIO::StoredTransferJob * m_job;
     KUrl url();
     QString message();
