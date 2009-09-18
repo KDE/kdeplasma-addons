@@ -1,16 +1,5 @@
 project(life)
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
-
- 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-   ${CMAKE_SOURCE_DIR}
-   ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
-   )
-
 set(life_SRCS life.cpp)
 
 kde4_add_ui_files(life_SRCS lifeConfig.ui)

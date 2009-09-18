@@ -2,18 +2,6 @@
 # Project needs a name of course
 project(timer)
 
-# Find the required Libaries
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
-
-
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-   ${CMAKE_SOURCE_DIR}
-   ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
-   )
-
 # We add our source code here
 set(timer_SRCS timer.cpp timerdigit.cpp customtimeeditor.cpp)
 kde4_add_ui_files(timer_SRCS timerConfig.ui predefinedTimersConfig.ui)
