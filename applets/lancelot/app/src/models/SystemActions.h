@@ -44,7 +44,7 @@ public:
      * If it is a set of actions, pointer to the model
      * will be returned.
      */
-    Lancelot::ActionTreeModel * action(const QString & id);
+    Lancelot::ActionTreeModel * action(const QString & id, bool execute = true);
 
     /**
      * @returns a list of action IDs

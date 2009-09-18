@@ -42,6 +42,7 @@
 #include "../models/Runner.h"
 #include "../models/ContactsKopete.h"
 #include "../models/MessagesKmail.h"
+#include "../models/SystemActions.h"
 #include "../Serializator.h"
 
 #define ACTIVATION_TIME 300
@@ -233,7 +234,13 @@ bool LancelotPart::load(const QString & input)
 
     if (data["version"] <= "1.0") {
         if (data["type"] == "list") {
-            QString modelID = data["model"];
+            QStringList modelDef = data["model"].split(" ");
+            qDebug() << "LancelotPart::load" << input << modelDef;
+            QString modelID = modelDef[0];
+            QString modelExtraData = QString();
+            if (modelDef.size() != 1) {
+                modelExtraData = modelDef[1];
+            }
             Lancelot::ActionListModel * model = NULL;
 
             if (modelID == "Places") {
@@ -266,19 +273,28 @@ bool LancelotPart::load(const QString & input)
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
                 m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::self());
-            } else if (modelID.startsWith("Folder ")) {
-                modelID.remove(0, 7);
-                if (modelID.startsWith("applications:/")) {
-                    modelID.remove(0, 14);
-                    m_model->addModel(modelID,
-                        QIcon(),
-                        modelID,
-                        model = new Models::Applications(modelID, QString(), QIcon(), true));
+            } else if (modelID == "SystemActions") {
+                // We don't want to delete this one (singleton)
+                if (modelExtraData == QString()) {
+                    m_model->addModel(modelID, QIcon(), i18n("System"), model = Models::SystemActions::self());
                 } else {
-                    m_model->addModel(modelID,
+                    model = Models::SystemActions::self()->action(modelExtraData, false);
+                    if (!model) return false;
+                    m_model->addModel(modelID, QIcon(), i18n("System"), model);
+                }
+            } else if (modelID == "Folder") {
+                qDebug() << "LancelotPart::" << modelExtraData;
+                if (modelExtraData.startsWith("applications:/")) {
+                    modelExtraData.remove(0, 14);
+                    m_model->addModel(modelExtraData,
                         QIcon(),
-                        modelID,
-                        model = new Models::FolderModel(modelID));
+                        modelExtraData,
+                        model = new Models::Applications(modelExtraData, QString(), QIcon(), true));
+                } else {
+                    m_model->addModel(modelExtraData,
+                        QIcon(),
+                        modelExtraData,
+                        model = new Models::FolderModel(modelExtraData));
                 }
                 m_models.append(model);
             }

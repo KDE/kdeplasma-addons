@@ -61,27 +61,6 @@ QMimeData * BaseMergedModel::modelMimeData(int index) const
     QMimeData * data = new QMimeData();
     data->setData("text/x-lancelotpart", Serializator::serialize(map).toAscii());
     return data;
-
-    /* We don't need this hack anymore in 4.2
-     * (the code is now a part of plasma shell)
-    KTemporaryFile file;
-    file.setAutoRemove(false);
-    file.setSuffix(".lancelotpart");
-    if (!file.open()) {
-        return NULL;
-    }
-
-    QTextStream out(&file);
-    out << Serializator::serialize(map).toAscii();
-    out.flush();
-
-    QMimeData * data = new QMimeData();
-    QByteArray urlData = KUrl(file.fileName()).url().toAscii();
-    data->setData("text/uri-list", urlData);
-    data->setData("text/plain", urlData);
-    file.close();
-
-    return data;*/
 }
 
 void BaseMergedModel::setModelDropActions(int index, Qt::DropActions & actions,

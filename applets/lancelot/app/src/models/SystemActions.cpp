@@ -74,7 +74,7 @@ SystemActions * SystemActions::self()
     return m_instance;
 }
 
-Lancelot::ActionTreeModel * SystemActions::action(const QString & id)
+Lancelot::ActionTreeModel * SystemActions::action(const QString & id, bool execute)
 {
     QList < Lancelot::ActionTreeModel * > subs;
     subs << this;
@@ -93,7 +93,10 @@ Lancelot::ActionTreeModel * SystemActions::action(const QString & id)
                     return model->child(i);
                 }
 
-                model->activated(i);
+                if (execute) {
+                    model->activated(i);
+                }
+
                 return NULL;
             } else {
                 if (model->isCategory(i)) {
