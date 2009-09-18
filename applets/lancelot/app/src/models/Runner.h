@@ -30,7 +30,7 @@ namespace Models {
 class Runner : public BaseModel {
     Q_OBJECT
 public:
-    Runner(QString search = QString());
+    Runner(bool limitRunners = false, QString search = QString());
     virtual ~Runner();
 
     QString searchString() const;

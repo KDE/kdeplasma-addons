@@ -21,6 +21,7 @@
 #include <KRun>
 #include <KIcon>
 #include <KLocalizedString>
+#include <KApplication>
 #include <KStandardDirs>
 #include "logger/Logger.h"
 #include <QDebug>
@@ -31,21 +32,22 @@
 
 namespace Models {
 
-Runner::Runner(QString search)
+Runner::Runner(bool limitRunners, QString search)
     : m_searchString(search), valid(false)
 {
     m_runnerManager = new Plasma::RunnerManager(this);
 
-    // initializing allowed runners
-    QStringList allowed;
-    allowed
-        << "places"
-        << "shell"
-        << "services"
-        << "bookmarks"
-        << "recentdocuments"
-        << "locations";
-    m_runnerManager->setAllowedRunners(allowed);
+    if (limitRunners) {
+        QStringList allowed;
+        allowed
+            << "places"
+            << "shell"
+            << "services"
+            << "bookmarks"
+            << "recentdocuments"
+            << "locations";
+        m_runnerManager->setAllowedRunners(allowed);
+    }
 
     connect(
         m_runnerManager, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
