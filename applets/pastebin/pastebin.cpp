@@ -52,7 +52,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_textBackend(0), m_imageBackend(0), m_imagePrivacy(0),
       m_historySize(3), m_signalMapper(new QSignalMapper()), m_paste(0),
-      m_topSeparator(0), m_bottomSeparator(0), m_servers(0)
+      m_topSeparator(0), m_bottomSeparator(0), m_servers(0), m_waiting(false)
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -114,13 +114,18 @@ void Pastebin::init()
 
 void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
+    // if it's something not generated from this applet, ignore it
+    if (!m_waiting) {
+        return;
+    }
+
     // initialization of data
     if (data["result"].toString().isEmpty() && data["error"].toString().isEmpty()) {
         return;
     }
 
+    m_waiting = false;
     const QString msg(data[sourceName].toString());
-
     if (sourceName == "result") {
         const QString result(data["result"].toString());
         showResults(msg);
@@ -840,6 +845,7 @@ void Pastebin::postContent(QString text, QImage imageData)
 
     setActionState(Sending);
     timer->start(20000);
+    m_waiting = true;
 }
 
 

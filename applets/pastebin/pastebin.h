@@ -152,6 +152,7 @@ private:
 
     // custom server dialog
     QWidget *m_servers;
+    bool m_waiting;
 
     QClipboard::Mode lastMode;
 
