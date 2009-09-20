@@ -1,0 +1,27 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Black Board
+Name[gl]=Encerado
+Name[nds]=Swatt Brett
+Name[pt]=Quadro Preto
+Name[pt_BR]=Quadro negro
+Name[sv]=Svarta tavlan
+Name[tr]=Kara Tahta
+Name[uk]=Дошка
+Name[x-test]=xxBlack Boardxx
+Name[zh_TW]=黑板
+Type=Service
+Icon=chronometer
+ServiceTypes=Plasma/Applet,Plasma/Containment
+X-Plasma-ContainmentCategories=desktop
+X-KDE-Library=plasma_applet_blackboard
+X-KDE-PluginInfo-Author=Davide Bettio
+X-KDE-PluginInfo-Email=davide.bettio@kdemail.net
+X-KDE-PluginInfo-Name=blackboard
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Date and Time
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
