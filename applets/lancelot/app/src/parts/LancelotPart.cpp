@@ -29,22 +29,6 @@
 #include <plasma/corona.h>
 #include <plasma/widgets/iconwidget.h>
 
-#include "../models/BaseModel.h"
-#include "../models/Devices.h"
-#include "../models/Places.h"
-#include "../models/SystemServices.h"
-#include "../models/RecentDocuments.h"
-#include "../models/OpenDocuments.h"
-#include "../models/NewDocuments.h"
-#include "../models/FolderModel.h"
-#include "../models/FavoriteApplications.h"
-#include "../models/Applications.h"
-#include "../models/Runner.h"
-#include "../models/ContactsKopete.h"
-#include "../models/MessagesKmail.h"
-#include "../models/SystemActions.h"
-#include "../Serializator.h"
-
 #define ACTIVATION_TIME 300
 
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
@@ -120,11 +104,8 @@ void LancelotPart::init()
 
     if (!loaded && !m_cmdarg.isEmpty()) {
         KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_cmdarg));
-        if (fileItem.mimetype() == "inode/directory") {
-            loadDirectory(m_cmdarg);
-        } else {
-            loadFromFile(m_cmdarg);
-        }
+        m_model->append(m_cmdarg, fileItem);
+        saveConfig();
     }
 
     KGlobal::locale()->insertCatalog("lancelot");
@@ -155,58 +136,9 @@ void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
 
 void LancelotPart::dropEvent(QGraphicsSceneDragDropEvent * event)
 {
-    if (event->mimeData()->hasFormat("text/x-lancelotpart")) {
-        event->setAccepted(true);
-        QString data = event->mimeData()->data("text/x-lancelotpart");
-        load(data);
-        return;
-    }
-
-    if (!event->mimeData()->hasFormat("text/uri-list")) {
-        event->setAccepted(false);
-        return;
-    }
-
-    QString file = event->mimeData()->data("text/uri-list");
-    KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
-    if (!mimeptr) {
-        event->setAccepted(false);
-        return;
-    }
-    QString mime = mimeptr->name();
-    event->setAccepted(mime == "text/x-lancelotpart" || mime == "inode/directory");
-
-    if (mime == "inode/directory") {
-        loadDirectory(file);
-    } else {
-        loadFromFile(file);
-    }
-}
-
-bool LancelotPart::loadFromFile(const QString & url)
-{
-    bool loaded = false;
-    QFile file(QUrl(url).toLocalFile());
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString line = in.readLine().trimmed();
-            if (load(line)) {
-                loaded = true;
-            }
-        }
-    }
-
-    return loaded;
-}
-
-bool LancelotPart::loadDirectory(const QString & url)
-{
-    QMap < QString, QString > data;
-    data["version"]     = "1.0";
-    data["type"]        = "list";
-    data["model"]       = "Folder " + url;
-    return load(Serializator::serialize(data));
+    event->setAccepted(
+        m_model->append(event->mimeData()));
+    saveConfig();
 }
 
 bool LancelotPart::loadFromList(const QStringList & list)
@@ -222,118 +154,15 @@ bool LancelotPart::loadFromList(const QStringList & list)
     return loaded;
 }
 
-bool LancelotPart::load(const QString & input)
-{
-    QMap < QString, QString > data = Serializator::deserialize(input);
-
-    if (!data.contains("version")) {
-        return false;
-    }
-
-    bool loaded = false;
-
-    if (data["version"] <= "1.0") {
-        if (data["type"] == "list") {
-            QStringList modelDef = data["model"].split(" ");
-            qDebug() << "LancelotPart::load" << input << modelDef;
-            QString modelID = modelDef[0];
-            QString modelExtraData = QString();
-            if (modelDef.size() != 1) {
-                modelExtraData = modelDef[1];
-            }
-            Lancelot::ActionListModel * model = NULL;
-
-            if (modelID == "Places") {
-                m_model->addModel(modelID, QIcon(), i18n("Places"),
-                        model = new Models::Places());
-                m_models.append(model);
-            } else if (modelID == "System") {
-                m_model->addModel(modelID, QIcon(), i18n("System"),
-                        model = new Models::SystemServices());
-                m_models.append(model);
-            } else if (modelID == "Devices/Removable") {
-                m_model->addModel(modelID, QIcon(), i18n("Removable devices"),
-                        model = new Models::Devices(Models::Devices::Removable));
-                m_models.append(model);
-            } else if (modelID == "Devices/Fixed") {
-                m_model->addModel(modelID, QIcon(), i18n("Fixed devices"),
-                        model = new Models::Devices(Models::Devices::Fixed));
-                m_models.append(model);
-            } else if (modelID == "NewDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("New Documents"),
-                        model = new Models::NewDocuments());
-                m_models.append(model);
-            } else if (modelID == "OpenDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("Open Documents"),
-                        model = new Models::OpenDocuments());
-                m_models.append(model);
-            } else if (modelID =="RecentDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("Recent Documents"),
-                        model = new Models::RecentDocuments());
-                m_models.append(model);
-            } else if (modelID =="Messages") {
-                m_model->addModel(modelID, QIcon(), i18n("Unread messages"),
-                        model = new Models::MessagesKmail());
-                m_models.append(model);
-            } else if (modelID =="Contacts") {
-                m_model->addModel(modelID, QIcon(), i18n("Online contacts"),
-                        model = new Models::ContactsKopete());
-                m_models.append(model);
-            } else if (modelID == "FavoriteApplications") {
-                // We don't want to delete this one (singleton)
-                m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"),
-                        model = Models::FavoriteApplications::self());
-            } else if (modelID == "SystemActions") {
-                // We don't want to delete this one (singleton)
-                if (modelExtraData == QString()) {
-                    m_model->addModel(modelID, QIcon(), i18n("System"),
-                            model = Models::SystemActions::self());
-                } else {
-                    model = Models::SystemActions::self()->action(modelExtraData, false);
-                    if (!model) return false;
-                    m_model->addModel(modelID, QIcon(), i18n("System"), model);
-                }
-            } else if (modelID == "Folder") {
-                qDebug() << "LancelotPart::" << modelExtraData;
-                if (modelExtraData.startsWith("applications:/")) {
-                    modelExtraData.remove(0, 14);
-                    m_model->addModel(modelExtraData,
-                        QIcon(),
-                        modelExtraData,
-                        model = new Models::Applications(modelExtraData, QString(), QIcon(), true));
-                } else {
-                    m_model->addModel(modelExtraData,
-                        QIcon(),
-                        modelExtraData,
-                        model = new Models::FolderModel(modelExtraData));
-                }
-                m_models.append(model);
-            }
-            loaded = (model != NULL);
-        }
-    }
-
-    if (loaded) {
-        if (!m_data.isEmpty()) {
-            m_data += '\n';
-        }
-        m_data += input;
-        saveConfig();
-    }
-
-    return loaded;
-}
-
 LancelotPart::~LancelotPart()
 {
-    qDeleteAll(m_models);
     delete m_model;
 }
 
 void LancelotPart::saveConfig()
 {
     KConfigGroup kcg = config();
-    kcg.writeEntry("partData", m_data);
+    kcg.writeEntry("partData", m_model->serializedData());
     kcg.sync();
 }
 
@@ -352,16 +181,7 @@ bool LancelotPart::loadConfig()
 
 void LancelotPart::removeModel(int index)
 {
-    Lancelot::ActionListModel * model = m_model->modelAt(index);
-    m_model->removeModel(index);
-    if (m_models.contains(model)) {
-        delete model;
-    }
-
-    QStringList configs = m_data.split('\n');
-    configs.removeAt(index);
-    m_data = configs.join("\n");
-
+    m_model->remove(index);
     saveConfig();
 }
 

@@ -64,10 +64,7 @@ private Q_SLOTS:
     void immutabilityChanged(Plasma::ImmutabilityType value);
 
 private:
-    bool load(const QString & data);
-    bool loadFromFile(const QString & url);
     bool loadFromList(const QStringList & list);
-    bool loadDirectory(const QString & url);
     void showSearchBox(bool value);
 
     void saveConfig();
@@ -82,10 +79,8 @@ private:
 
     Models::PartsMergedModel * m_model;
     Models::Runner * m_runnnerModel;
-    QList < Lancelot::ActionListModel * > m_models;
 
     QString m_cmdarg;
-    QString m_data;
     Plasma::IconWidget * m_icon;
     bool m_iconClickActivation;
     QBasicTimer m_timer;

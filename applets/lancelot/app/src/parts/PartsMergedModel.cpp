@@ -18,8 +18,27 @@
  */
 
 #include "PartsMergedModel.h"
+#include "../Serializator.h"
+#include <QFile>
+#include <QTextStream>
 #include <KIcon>
 #include <KLocalizedString>
+
+#include "../models/BaseModel.h"
+#include "../models/Devices.h"
+#include "../models/Places.h"
+#include "../models/SystemServices.h"
+#include "../models/RecentDocuments.h"
+#include "../models/OpenDocuments.h"
+#include "../models/NewDocuments.h"
+#include "../models/FolderModel.h"
+#include "../models/FavoriteApplications.h"
+#include "../models/Applications.h"
+#include "../models/Runner.h"
+#include "../models/ContactsKopete.h"
+#include "../models/MessagesKmail.h"
+#include "../models/SystemActions.h"
+#include "../Serializator.h"
 
 namespace Models {
 
@@ -30,6 +49,7 @@ PartsMergedModel::PartsMergedModel()
 
 PartsMergedModel::~PartsMergedModel()
 {
+    qDeleteAll(m_models);
 }
 
 bool PartsMergedModel::hasModelContextActions(int index) const
@@ -74,6 +94,217 @@ void PartsMergedModel::modelDataDropped(int index, Qt::DropAction action)
     if (action == Qt::MoveAction) {
         emit removeModelRequested(index);
     }
+}
+
+bool PartsMergedModel::dataDropAvailable(int where, const QMimeData * mimeData)
+{
+    if (mimeData->formats().contains("text/x-lancelotpart") ||
+        mimeData->formats().contains("inode/directory")) {
+        return true;
+    }
+
+    return BaseMergedModel::dataDropAvailable(where, mimeData);
+}
+
+void PartsMergedModel::dataDropped(int where, const QMimeData * mimeData)
+{
+    if (mimeData->formats().contains("text/x-lancelotpart") ||
+            mimeData->formats().contains("inode/directory")) {
+        append(mimeData);
+    }
+
+    BaseMergedModel::dataDropped(where, mimeData);
+}
+
+bool PartsMergedModel::append(const QString & data)
+{
+    load(data);
+}
+
+bool PartsMergedModel::append(const QMimeData * mimeData)
+{
+    if (mimeData->hasFormat("text/x-lancelotpart")) {
+        QString data = mimeData->data("text/x-lancelotpart");
+        load(data);
+        return true;
+    }
+
+    if (!mimeData->hasFormat("text/uri-list")) {
+        return false;
+    }
+
+    QString file = mimeData->data("text/uri-list");
+    KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
+    if (!mimeptr) {
+        return false;
+    }
+    QString mime = mimeptr->name();
+
+    if (mime != "text/x-lancelotpart" && mime != "inode/directory") {
+        return false;
+    }
+
+    if (mime == "inode/directory") {
+        return loadDirectory(file);
+    } else {
+        return loadFromFile(file);
+    }
+}
+
+bool PartsMergedModel::append(const QString & path, const KFileItem & fileItem)
+{
+    if (fileItem.mimetype() == "inode/directory") {
+        return loadDirectory(path);
+    } else {
+        return loadFromFile(path);
+    }
+}
+
+void PartsMergedModel::remove(int index)
+{
+    Lancelot::ActionListModel * model = modelAt(index);
+    removeModel(index);
+    if (m_models.contains(model)) {
+        delete model;
+        m_models.removeAll(model);
+    }
+
+    QStringList configs = m_data.split('\n');
+    configs.removeAt(index);
+    m_data = configs.join("\n");
+}
+
+bool PartsMergedModel::loadFromFile(const QString & url)
+{
+    bool loaded = false;
+
+    QFile file(QUrl(url).toLocalFile());
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine().trimmed();
+            if (load(line)) {
+                loaded = true;
+            }
+        }
+    }
+
+    return loaded;
+}
+
+bool PartsMergedModel::loadDirectory(const QString & url)
+{
+    QMap < QString, QString > data;
+    data["version"]     = "1.0";
+    data["type"]        = "list";
+    data["model"]       = "Folder " + url;
+    return load(Serializator::serialize(data));
+}
+
+bool PartsMergedModel::load(const QString & input)
+{
+    QMap < QString, QString > data = Serializator::deserialize(input);
+
+    if (!data.contains("version")) {
+        return false;
+    }
+
+    bool loaded = false;
+
+    if (data["version"] <= "1.0") {
+        if (data["type"] == "list") {
+            QStringList modelDef = data["model"].split(" ");
+            // qDebug() << "LancelotPart::load" << input << modelDef;
+            QString modelID = modelDef[0];
+            QString modelExtraData = QString();
+            if (modelDef.size() != 1) {
+                modelExtraData = modelDef[1];
+            }
+            Lancelot::ActionListModel * model = NULL;
+
+            if (modelID == "Places") {
+                addModel(modelID, QIcon(), i18n("Places"),
+                        model = new Models::Places());
+                m_models.append(model);
+            } else if (modelID == "System") {
+                addModel(modelID, QIcon(), i18n("System"),
+                        model = new Models::SystemServices());
+                m_models.append(model);
+            } else if (modelID == "Devices/Removable") {
+                addModel(modelID, QIcon(), i18n("Removable devices"),
+                        model = new Models::Devices(Models::Devices::Removable));
+                m_models.append(model);
+            } else if (modelID == "Devices/Fixed") {
+                addModel(modelID, QIcon(), i18n("Fixed devices"),
+                        model = new Models::Devices(Models::Devices::Fixed));
+                m_models.append(model);
+            } else if (modelID == "NewDocuments") {
+                addModel(modelID, QIcon(), i18n("New Documents"),
+                        model = new Models::NewDocuments());
+                m_models.append(model);
+            } else if (modelID == "OpenDocuments") {
+                addModel(modelID, QIcon(), i18n("Open Documents"),
+                        model = new Models::OpenDocuments());
+                m_models.append(model);
+            } else if (modelID =="RecentDocuments") {
+                addModel(modelID, QIcon(), i18n("Recent Documents"),
+                        model = new Models::RecentDocuments());
+                m_models.append(model);
+            } else if (modelID =="Messages") {
+                addModel(modelID, QIcon(), i18n("Unread messages"),
+                        model = new Models::MessagesKmail());
+                m_models.append(model);
+            } else if (modelID =="Contacts") {
+                addModel(modelID, QIcon(), i18n("Online contacts"),
+                        model = new Models::ContactsKopete());
+                m_models.append(model);
+            } else if (modelID == "FavoriteApplications") {
+                // We don't want to delete this one (singleton)
+                addModel(modelID, QIcon(), i18n("Favorite Applications"),
+                        model = Models::FavoriteApplications::self());
+            } else if (modelID == "SystemActions") {
+                // We don't want to delete this one (singleton)
+                if (modelExtraData == QString()) {
+                    addModel(modelID, QIcon(), i18n("System"),
+                            model = Models::SystemActions::self());
+                } else {
+                    model = Models::SystemActions::self()->action(modelExtraData, false);
+                    if (!model) return false;
+                    addModel(modelID, QIcon(), i18n("System"), model);
+                }
+            } else if (modelID == "Folder") {
+                qDebug() << "LancelotPart::" << modelExtraData;
+                if (modelExtraData.startsWith("applications:/")) {
+                    modelExtraData.remove(0, 14);
+                    addModel(modelExtraData,
+                        QIcon(),
+                        modelExtraData,
+                        model = new Models::Applications(modelExtraData, QString(), QIcon(), true));
+                } else {
+                    addModel(modelExtraData,
+                        QIcon(),
+                        modelExtraData,
+                        model = new Models::FolderModel(modelExtraData));
+                }
+                m_models.append(model);
+            }
+            loaded = (model != NULL);
+        }
+    }
+
+    if (loaded) {
+        if (!m_data.isEmpty()) {
+            m_data += '\n';
+        }
+        m_data += input;
+    }
+
+    return loaded;
+}
+
+QString PartsMergedModel::serializedData() const
+{
+    return m_data;
 }
 
 } // namespace Models

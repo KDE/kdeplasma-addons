@@ -21,6 +21,7 @@
 #define LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 
 #include "../models/BaseMergedModel.h"
+#include <kfileitem.h>
 
 namespace Models {
 
@@ -36,6 +37,26 @@ public:
     L_Override void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
     L_Override void modelDataDropped(int index, Qt::DropAction action);
+
+    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
+    L_Override void dataDropped(int where, const QMimeData * mimeData);
+
+    bool append(const QMimeData * mimeData);
+    bool append(const QString & mimeData);
+    bool append(const QString & path, const KFileItem & fileItem);
+
+    void remove(int index);
+
+    QString serializedData() const;
+
+protected:
+    bool load(const QString & data);
+    bool loadFromFile(const QString & url);
+    bool loadFromList(const QStringList & list);
+    bool loadDirectory(const QString & url);
+
+    QList < Lancelot::ActionListModel * > m_models;
+    QString m_data;
 
 Q_SIGNALS:
     void removeModelRequested(int index);
