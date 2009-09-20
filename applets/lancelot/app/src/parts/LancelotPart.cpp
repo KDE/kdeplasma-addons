@@ -302,6 +302,7 @@ void LancelotPart::removeModel(int index)
     m_model->removeModel(index);
     if (m_models.contains(model)) {
         delete model;
+        m_models.removeAll(model);
     }
 
     QStringList configs = m_data.split('\n');
