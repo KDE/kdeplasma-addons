@@ -244,39 +244,50 @@ bool LancelotPart::load(const QString & input)
             Lancelot::ActionListModel * model = NULL;
 
             if (modelID == "Places") {
-                m_model->addModel(modelID, QIcon(), i18n("Places"), model = new Models::Places());
+                m_model->addModel(modelID, QIcon(), i18n("Places"),
+                        model = new Models::Places());
                 m_models.append(model);
             } else if (modelID == "System") {
-                m_model->addModel(modelID, QIcon(), i18n("System"), model = new Models::SystemServices());
+                m_model->addModel(modelID, QIcon(), i18n("System"),
+                        model = new Models::SystemServices());
                 m_models.append(model);
             } else if (modelID == "Devices/Removable") {
-                m_model->addModel(modelID, QIcon(), i18n("Removable devices"), model = new Models::Devices(Models::Devices::Removable));
+                m_model->addModel(modelID, QIcon(), i18n("Removable devices"),
+                        model = new Models::Devices(Models::Devices::Removable));
                 m_models.append(model);
             } else if (modelID == "Devices/Fixed") {
-                m_model->addModel(modelID, QIcon(), i18n("Fixed devices"), model = new Models::Devices(Models::Devices::Fixed));
+                m_model->addModel(modelID, QIcon(), i18n("Fixed devices"),
+                        model = new Models::Devices(Models::Devices::Fixed));
                 m_models.append(model);
             } else if (modelID == "NewDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("New Documents"), model = new Models::NewDocuments());
+                m_model->addModel(modelID, QIcon(), i18n("New Documents"),
+                        model = new Models::NewDocuments());
                 m_models.append(model);
             } else if (modelID == "OpenDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("Open Documents"), model = new Models::OpenDocuments());
+                m_model->addModel(modelID, QIcon(), i18n("Open Documents"),
+                        model = new Models::OpenDocuments());
                 m_models.append(model);
             } else if (modelID =="RecentDocuments") {
-                m_model->addModel(modelID, QIcon(), i18n("Recent Documents"), model = new Models::RecentDocuments());
+                m_model->addModel(modelID, QIcon(), i18n("Recent Documents"),
+                        model = new Models::RecentDocuments());
                 m_models.append(model);
             } else if (modelID =="Messages") {
-                m_model->addModel(modelID, QIcon(), i18n("Unread messages"), model = new Models::MessagesKmail());
+                m_model->addModel(modelID, QIcon(), i18n("Unread messages"),
+                        model = new Models::MessagesKmail());
                 m_models.append(model);
             } else if (modelID =="Contacts") {
-                m_model->addModel(modelID, QIcon(), i18n("Online contacts"), model = new Models::ContactsKopete());
+                m_model->addModel(modelID, QIcon(), i18n("Online contacts"),
+                        model = new Models::ContactsKopete());
                 m_models.append(model);
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
-                m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"), model = Models::FavoriteApplications::self());
+                m_model->addModel(modelID, QIcon(), i18n("Favorite Applications"),
+                        model = Models::FavoriteApplications::self());
             } else if (modelID == "SystemActions") {
                 // We don't want to delete this one (singleton)
                 if (modelExtraData == QString()) {
-                    m_model->addModel(modelID, QIcon(), i18n("System"), model = Models::SystemActions::self());
+                    m_model->addModel(modelID, QIcon(), i18n("System"),
+                            model = Models::SystemActions::self());
                 } else {
                     model = Models::SystemActions::self()->action(modelExtraData, false);
                     if (!model) return false;

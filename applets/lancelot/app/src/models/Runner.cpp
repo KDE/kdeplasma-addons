@@ -28,7 +28,7 @@
 
 #include <plasma/abstractrunner.h>
 #include "FavoriteApplications.h"
-#define SLEEP 600
+#define SLEEP 200
 
 namespace Models {
 
