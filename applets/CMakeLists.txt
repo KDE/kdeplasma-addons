@@ -10,6 +10,7 @@ endif(KDE4_PLASMA_OPENGL_FOUND)
 
 add_subdirectory(bball)
 add_subdirectory(binary-clock)
+add_subdirectory(blackboard)
 add_subdirectory(bubblemon)
 add_subdirectory(calculator)
 add_subdirectory(charselect)
