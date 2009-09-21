@@ -63,6 +63,7 @@ void KnowledgeBase::init()
     delayedQuery();
 
     m_refreshTime = config().readEntry("refreshTime", 5);
+    setAssociatedApplicationUrls(KUrl("http://opendesktop.org/knowledgebase"));
 }
 
 QGraphicsWidget *KnowledgeBase::graphicsWidget()
