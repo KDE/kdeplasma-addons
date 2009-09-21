@@ -209,7 +209,7 @@ void Frame::updatePicture()
     const QSize contentsSize = sizeHint.toSize();
 
     if (contentsRect().size() != sizeHint) {
-        resize(sizeHint);
+        resize(sizeHint + QSizeF(boundingRect().size() - contentsRect().size()));
         emit appletTransformedItself();
     }
     if (m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty()) {
