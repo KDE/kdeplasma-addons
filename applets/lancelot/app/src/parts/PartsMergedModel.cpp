@@ -118,7 +118,7 @@ void PartsMergedModel::dataDropped(int where, const QMimeData * mimeData)
 
 bool PartsMergedModel::append(const QString & data)
 {
-    load(data);
+    return load(data);
 }
 
 bool PartsMergedModel::append(const QMimeData * mimeData)
