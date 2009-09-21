@@ -201,6 +201,15 @@ QSizeF Frame::contentSizeHint() const
     }
 }
 
+QSizeF Frame::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    if (which != Qt::PreferredSize) {
+        return Applet::sizeHint(which, constraint);
+    } else {
+        return m_pictureSize;
+    }
+}
+
 void Frame::updatePicture()
 {
     m_pictureSize = m_mySlideShow->image().size();
@@ -217,6 +226,8 @@ void Frame::updatePicture()
     } else {
         setAssociatedApplicationUrls(m_mySlideShow->currentUrl());
     }
+
+    emit sizeHintChanged(Qt::PreferredSize);
 
     kDebug() << "Rendering picture";
 

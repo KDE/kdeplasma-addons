@@ -74,6 +74,7 @@ protected:
     void constraintsEvent(Plasma::Constraints constraints);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
 
 private:
     void stopPotd();
