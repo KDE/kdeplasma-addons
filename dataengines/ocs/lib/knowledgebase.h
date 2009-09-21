@@ -23,7 +23,7 @@
 
 #include "atticaclient_export.h"
 
-#include <QDateTime>
+#include <QtCore/QDateTime>
 #include <KUrl>
 
 namespace Attica

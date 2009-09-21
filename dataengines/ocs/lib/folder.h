@@ -22,9 +22,9 @@
 #define ATTICA_FOLDER_H
 
 #include "atticaclient_export.h"
-#include <QList>
+#include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
-#include <QString>
+#include <QtCore/QString>
 
 
 namespace Attica {
