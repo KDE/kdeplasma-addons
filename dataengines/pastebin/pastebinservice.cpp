@@ -33,7 +33,7 @@ Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
 {
     QString server = parameters["server"].toString();
 
-   // it's a text
+    // it's a text
     if (operation == "text") {
         if (m_textServer) {
             delete m_textServer;
@@ -101,15 +101,11 @@ void PastebinService::postText(QMap<QString, QVariant> &parameters)
     // if it's a valid path, then take the file's content
     // otherwise just post the content's of fileName
     if (validPath) {
-        qDebug() << "Its a FILE!";
-
         QFile file(testPath.toLocalFile());
         file.open(QIODevice::ReadOnly);
         QTextStream in(&file);
         text = in.readAll();
     } else if (testPath.scheme().toLower() == QString("http")) {
-        qDebug() << "Its tiny url!";
-
         // lets use tiny url ;)
         QString tinyUrl = QString("http://tinyurl.com/api-create.php?url=%1").arg(testPath.prettyUrl());
         manager = new QNetworkAccessManager(this);
