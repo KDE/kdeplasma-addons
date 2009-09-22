@@ -90,7 +90,7 @@ class ATTICA_EXPORT Provider
     // Message part of OCS
 
     ListJob<Folder>* requestFolders();
-    ListJob<Message>* requestMessages(const QString& folderId);
+    ListJob<Message>* requestMessages(const Folder& folder);
     PostJob* postMessage(const Message& message);
 
     // Activity part of OCS
@@ -107,7 +107,7 @@ class ATTICA_EXPORT Provider
     // KnowledgeBase part of OCS
 
     KnowledgeBaseJob* requestKnowledgeBase(const QString& id);
-    KnowledgeBaseListJob* requestKnowledgeBase(int content, const QString& search, SortMode, int page, int pageSize);
+    KnowledgeBaseListJob* requestKnowledgeBase(const Content& content, const QString& search, SortMode, int page, int pageSize);
 
     // Event part of OCS
 

@@ -21,6 +21,7 @@
 
 #include "ocsengine.h"
 
+#include "content.h"
 #include "eventjob.h"
 #include "knowledgebasejob.h"
 #include "knowledgebaselistjob.h"
@@ -197,9 +198,9 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         QString sortModeString = args[1];
         int page = args[2].toInt();
         int pageSize = args[3].toInt();
-        int content = 0;
+        Content content;
         if (numTokens == 5) {
-            content = args[4].toInt();
+            content.setId(args[4]);
         }
 
         Provider::SortMode sortMode;

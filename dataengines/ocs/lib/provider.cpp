@@ -197,9 +197,9 @@ ListJob<Folder>* Provider::requestFolders()
   return doRequestFolderList( createUrl( "message" ) );
 }
 
-ListJob<Message>* Provider::requestMessages(const QString& folderId)
+ListJob<Message>* Provider::requestMessages(const Folder& folder)
 {
-  return doRequestMessageList( createUrl( "message/" + folderId ) );
+  return doRequestMessageList( createUrl( "message/" + folder.id() ) );
 }
 
 PostJob* Provider::postMessage( const Message &message )
@@ -287,14 +287,14 @@ KnowledgeBaseJob* Provider::requestKnowledgeBase(const QString& id)
   return job;
 }
 
-KnowledgeBaseListJob* Provider::requestKnowledgeBase(int content, const QString& search, Provider::SortMode sortMode, int page, int pageSize)
+KnowledgeBaseListJob* Provider::requestKnowledgeBase(const Content& content, const QString& search, Provider::SortMode sortMode, int page, int pageSize)
 {
   KnowledgeBaseListJob *job = new KnowledgeBaseListJob();
 
   KUrl url = createUrl( "knowledgebase/data" );
 
-  if (content) {
-      url.addQueryItem("content", QString::number(content));
+  if (content.isValid()) {
+      url.addQueryItem("content", content.id());
   }
 
   url.addQueryItem( "search", search );
