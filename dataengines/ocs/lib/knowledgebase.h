@@ -24,7 +24,10 @@
 #include "atticaclient_export.h"
 
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedDataPointer>
+
 #include <KUrl>
+
 
 namespace Attica
 {
@@ -43,6 +46,9 @@ class ATTICA_EXPORT KnowledgeBase
     };
 
     KnowledgeBase();
+    KnowledgeBase(const KnowledgeBase& other);
+    KnowledgeBase& operator=(const KnowledgeBase& other);
+    ~KnowledgeBase();
 
     void setId(QString id);
     QString id() const;
@@ -79,19 +85,11 @@ class ATTICA_EXPORT KnowledgeBase
 
     QMap<QString,QString> extendedAttributes() const;
 
-  private:
-    QString m_id;
-    int m_contentId;
-    QString m_user;
-    QString m_status;
-    QDateTime m_changed;
-    QString m_name;
-    QString m_description;
-    QString m_answer;
-    int m_comments;
-    KUrl m_detailPage;
+    bool isValid() const;
 
-    QMap<QString,QString> m_extendedAttributes;
+  private:
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 }

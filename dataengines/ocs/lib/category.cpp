@@ -72,3 +72,8 @@ QString Category::name() const
 {
   return d->m_name;
 }
+
+
+bool Category::isValid() const {
+  return !(d->m_id.isEmpty());
+}

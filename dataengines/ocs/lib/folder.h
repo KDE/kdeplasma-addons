@@ -52,6 +52,8 @@ class ATTICA_EXPORT Folder
     void setType( const QString & );
     QString type() const;
 
+    bool isValid() const;
+
   private:
     class Private;
     QSharedDataPointer<Private> d;

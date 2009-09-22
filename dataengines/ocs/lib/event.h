@@ -80,6 +80,8 @@ class ATTICA_EXPORT Event
         QString extendedAttribute(const QString& key) const;
         QMap<QString,QString> extendedAttributes() const;
 
+        bool isValid() const;
+
     private:
         class Private;
         QSharedDataPointer<Private> d;

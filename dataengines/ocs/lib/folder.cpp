@@ -96,3 +96,8 @@ QString Folder::type() const
 {
   return d->m_type;
 }
+
+
+bool Folder::isValid() const {
+  return !(d->m_id.isEmpty());
+}

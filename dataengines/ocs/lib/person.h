@@ -82,6 +82,8 @@ class ATTICA_EXPORT Person
 
     QMap<QString,QString> extendedAttributes() const;
 
+    bool isValid() const;
+
   private:
     class Private;
     QSharedDataPointer<Private> d;

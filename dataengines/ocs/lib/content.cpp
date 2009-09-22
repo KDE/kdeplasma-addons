@@ -140,3 +140,8 @@ QMap<QString,QString> Content::extendedAttributes() const
 {
   return d->m_extendedAttributes;
 }
+
+
+bool Content::isValid() const {
+  return !(d->m_id.isEmpty());
+}

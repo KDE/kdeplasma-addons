@@ -58,6 +58,8 @@ class ATTICA_EXPORT Activity
     void setLink( const QString & );
     QString link() const;
 
+    bool isValid() const;
+
   private:
     class Private;
     QSharedDataPointer<Private> d;

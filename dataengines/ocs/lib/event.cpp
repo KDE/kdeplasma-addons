@@ -203,3 +203,8 @@ QMap<QString, QString> Event::extendedAttributes() const
 {
     return d->m_extendedAttributes;
 }
+
+
+bool Event::isValid() const {
+    return !(d->m_id.isEmpty());
+}

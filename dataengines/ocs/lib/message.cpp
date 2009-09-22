@@ -141,3 +141,8 @@ QString Message::body() const
 {
   return d->m_body;
 }
+
+
+bool Message::isValid() const {
+  return !(d->m_id.isEmpty());
+}

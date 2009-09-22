@@ -104,3 +104,8 @@ QString Activity::link() const
 {
   return d->m_link;
 }
+
+
+bool Activity::isValid() const {
+  return !(d->m_id.isEmpty());
+}

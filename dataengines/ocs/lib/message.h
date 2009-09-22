@@ -67,6 +67,8 @@ class ATTICA_EXPORT Message
     void setBody( const QString & );
     QString body() const;
 
+    bool isValid() const;
+
   private:
     class Private;
     QSharedDataPointer<Private> d;

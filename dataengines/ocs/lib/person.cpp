@@ -191,3 +191,8 @@ QMap<QString,QString> Person::extendedAttributes() const
 {
   return d->m_extendedAttributes;
 }
+
+
+bool Person::isValid() const {
+  return !(d->m_id.isEmpty());
+}

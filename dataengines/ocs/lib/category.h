@@ -47,6 +47,8 @@ class ATTICA_EXPORT Category
     void setName( const QString & );
     QString name() const;
 
+    bool isValid() const;
+
   private:
     class Private;
     QSharedDataPointer<Private> d;

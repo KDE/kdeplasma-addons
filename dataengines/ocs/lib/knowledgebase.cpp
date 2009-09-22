@@ -24,134 +24,177 @@
 
 using namespace Attica;
 
+class KnowledgeBase::Private : public QSharedData {
+    public:
+        QString m_id;
+        int m_contentId;
+        QString m_user;
+        QString m_status;
+        QDateTime m_changed;
+        QString m_name;
+        QString m_description;
+        QString m_answer;
+        int m_comments;
+        KUrl m_detailPage;
+
+        QMap<QString,QString> m_extendedAttributes;
+
+        Private()
+            : m_contentId(0),
+              m_comments(0)
+        {
+        }
+};
+
 KnowledgeBase::KnowledgeBase()
-    : m_id(0),
-      m_contentId(0),
-      m_comments(0)
+    : d(new Private)
+{
+}
+
+
+KnowledgeBase::KnowledgeBase(const KnowledgeBase& other)
+    : d(other.d)
+{
+}
+
+
+KnowledgeBase& KnowledgeBase::operator=(const Attica::KnowledgeBase & other)
+{
+    d = other.d;
+    return *this;
+}
+
+
+KnowledgeBase::~KnowledgeBase()
 {
 }
 
 
 void KnowledgeBase::setId(QString id)
 {
-    m_id = id;
+    d->m_id = id;
 }
 
 QString KnowledgeBase::id() const
 {
-    return m_id;
+    return d->m_id;
 }
 
 
 void KnowledgeBase::setContentId(int id)
 {
-    m_contentId = id;
+    d->m_contentId = id;
 }
 
 int KnowledgeBase::contentId() const
 {
-    return m_contentId;
+    return d->m_contentId;
 }
 
 
 void KnowledgeBase::setUser(const QString &user)
 {
-    m_user = user;
+    d->m_user = user;
 }
 
 QString KnowledgeBase::user() const
 {
-    return m_user;
+    return d->m_user;
 }
 
 
 void KnowledgeBase::setStatus(const QString status)
 {
-    m_status = status;
+    d->m_status = status;
 }
 
 QString KnowledgeBase::status() const
 {
-    return m_status;
+    return d->m_status;
 }
 
 
 void KnowledgeBase::setChanged(const QDateTime &changed)
 {
-    m_changed = changed;
+    d->m_changed = changed;
 }
 
 QDateTime KnowledgeBase::changed() const
 {
-    return m_changed;
+    return d->m_changed;
 }
 
 
 void KnowledgeBase::setName(const QString &name)
 {
-    m_name = name;
+    d->m_name = name;
 }
 
 QString KnowledgeBase::name() const
 {
-    return m_name;
+    return d->m_name;
 }
 
 
 void KnowledgeBase::setDescription(const QString &description)
 {
-    m_description = description;
+    d->m_description = description;
 }
 
 QString KnowledgeBase::description() const
 {
-    return m_description;
+    return d->m_description;
 }
 
 
 void KnowledgeBase::setAnswer(const QString &answer)
 {
-    m_answer = answer;
+    d->m_answer = answer;
 }
 
 QString KnowledgeBase::answer() const
 {
-    return m_answer;
+    return d->m_answer;
 }
 
 
 void KnowledgeBase::setComments(int comments)
 {
-    m_comments = comments;
+    d->m_comments = comments;
 }
 
 int KnowledgeBase::comments() const
 {
-    return m_comments;
+    return d->m_comments;
 }
 
 
 void KnowledgeBase::setDetailPage(const KUrl &detailPage)
 {
-    m_detailPage = detailPage;
+    d->m_detailPage = detailPage;
 }
 
 KUrl KnowledgeBase::detailPage() const
 {
-    return m_detailPage;
+    return d->m_detailPage;
 }
 
 void KnowledgeBase::addExtendedAttribute( const QString &key, const QString &value )
 {
-  m_extendedAttributes.insert( key, value );
+  d->m_extendedAttributes.insert( key, value );
 }
 
 QString KnowledgeBase::extendedAttribute( const QString &key ) const
 {
-  return m_extendedAttributes.value( key );
+  return d->m_extendedAttributes.value( key );
 }
 
 QMap<QString,QString> KnowledgeBase::extendedAttributes() const
 {
-  return m_extendedAttributes;
+  return d->m_extendedAttributes;
+}
+
+
+bool KnowledgeBase::isValid() const {
+  return !(d->m_id.isEmpty());
 }
