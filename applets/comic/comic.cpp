@@ -123,7 +123,8 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mFrame( 0 ),
       mFadingItem( 0 ),
       mPrevButton( 0 ),
-      mNextButton( 0 )
+      mNextButton( 0 ),
+      mZoomButton( 0 )
 {
     setHasConfigurationInterface( true );
     setMinimumSize( QSizeF( 80, 40 ) );
@@ -672,15 +673,7 @@ void ComicApplet::mousePressEvent( QGraphicsSceneMouseEvent *event )
             updateSize();
         }
     } else if ( ( event->button() == Qt::MidButton ) && mMiddleClick ) { // handle full view
-        if ( !mFullViewWidget ) {
-            mFullViewWidget = new FullViewWidget();
-        }
-
-        if ( !mFullViewWidget->isVisible() ) {
-            mFullViewWidget->setImage( mImage );
-            mFullViewWidget->adaptPosition( mapToScene( 0, 0 ).toPoint() );
-            mFullViewWidget->show();
-        }
+        fullView();
     }
 
     event->ignore();
@@ -930,6 +923,15 @@ void ComicApplet::buttonBar()
             mPrevButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
             connect( mPrevButton, SIGNAL( clicked() ), this , SLOT( slotPreviousDay() ) );
             l->addItem( mPrevButton );
+
+            mZoomButton = new Plasma::PushButton( mFrame );
+            mZoomButton->nativeWidget()->setIcon( KIcon( "zoom-original" ) );
+            mZoomButton->nativeWidget()->setToolTip( i18n( "Actual size in a different view. Press Middle-Mouse-Button on the comic alternatively." ) );
+            mZoomButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
+            mZoomButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
+            connect( mZoomButton, SIGNAL( clicked() ), this, SLOT( fullView() ) );
+            l->addItem( mZoomButton );
+
             mNextButton = new Plasma::PushButton( mFrame );
             mNextButton->nativeWidget()->setIcon( KIcon( "arrow-right" ) );
             mNextButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
@@ -952,6 +954,19 @@ void ComicApplet::buttonBar()
         mPrevButton = 0;
         mNextButton = 0;
         mFadingItem = 0;
+    }
+}
+
+void ComicApplet::fullView()
+{
+    if ( !mFullViewWidget ) {
+        mFullViewWidget = new FullViewWidget();
+    }
+
+    if ( !mFullViewWidget->isVisible() ) {
+        mFullViewWidget->setImage( mImage );
+        mFullViewWidget->adaptPosition( mapToScene( 0, 0 ).toPoint() );
+        mFullViewWidget->show();
     }
 }
 

@@ -79,6 +79,7 @@ class ComicApplet : public Plasma::Applet
         void checkDayChanged();
         void buttonBar();
         void createLayout();
+        void fullView();
 
     protected:
         void mousePressEvent( QGraphicsSceneMouseEvent* );
@@ -149,6 +150,7 @@ class ComicApplet : public Plasma::Applet
         Plasma::Label *mLabelUrl;
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
+        Plasma::PushButton *mZoomButton;
 
         ImageWidget *mImageWidget;
         ArrowWidget *mLeftArrow;
