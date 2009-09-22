@@ -48,7 +48,7 @@ protected:
 protected slots:
     void processTinyUrl(QNetworkReply *reply);
     void showResults(const QString &url);
-    void showErrors();
+    void showErrors(const QString &url = "");
 
 private:
     PastebinEngine *m_engine;

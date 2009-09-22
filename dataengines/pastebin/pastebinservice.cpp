@@ -22,7 +22,7 @@
 
 
 PastebinService::PastebinService(PastebinEngine *engine)
-    : Plasma::Service(), m_imageServer(0), m_textServer(0)
+    : Plasma::Service(), m_textServer(0), m_imageServer(0)
 {
     m_engine = engine;
     setName("pastebin");
@@ -49,8 +49,6 @@ Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
                 m_textServer = new PastebinCOMServer(server);
                 break;
         }
-
-        qDebug() << "Using backend: " << backend;
 
         connect(m_textServer, SIGNAL(postFinished(QString)),
                 this, SLOT(showResults(QString)));
@@ -93,8 +91,6 @@ void PastebinService::postText(QMap<QString, QVariant> &parameters)
 {
     QString text = parameters["fileName"].toString();
 
-    qDebug() << "Posting text: " << text;
-
     KUrl testPath(text);
     bool validPath = QFile::exists(testPath.toLocalFile());
 
@@ -112,10 +108,9 @@ void PastebinService::postText(QMap<QString, QVariant> &parameters)
         connect(manager, SIGNAL(finished(QNetworkReply*)),
                 this, SLOT(processTinyUrl(QNetworkReply*)));
         manager->get(QNetworkRequest(tinyUrl));
-        return; // XXX
+        return;
     }
 
-    qDebug() << "POSTING!";
     // the post
     m_textServer->post(text);
 }
@@ -125,17 +120,15 @@ void PastebinService::postImage(QMap<QString, QVariant> &parameters)
     // it's an image
     QString url = parameters["server"].toString();
     QString fileName = parameters["fileName"].toString();
-    bool privacy = parameters["privacy"].toBool();
+    //    bool privacy = parameters["privacy"].toBool();
 
     KUrl testPath(fileName);
     bool validPath = QFile::exists(testPath.toLocalFile());
 
     if (validPath) {
-        qDebug() << "--> Sending as a FILE";
         m_imageServer->post(testPath.toLocalFile());
     } else {
-        qDebug() << "PROBLEM!";
-        // XXX: problem!
+        showErrors(i18n("Could not post image."));
     }
 }
 
@@ -145,8 +138,7 @@ void PastebinService::processTinyUrl(QNetworkReply *reply)
     QString data(dataRaw);
 
     if (data.isEmpty() || !data.contains("tinyurl.com")) {
-        // couldn't find url
-        // XXX: problem!
+        showErrors(i18n("Problems while posting URL."));
         return;
     }
 
@@ -157,11 +149,15 @@ void PastebinService::processTinyUrl(QNetworkReply *reply)
 void PastebinService::showResults(const QString &url)
 {
     m_engine->setData("result", url);
-    qDebug() << "---> RESULT: " << url;
 }
 
-void PastebinService::showErrors()
+void PastebinService::showErrors(const QString &message)
 {
-    m_engine->setData("error", "ErrorMsg");
-    qDebug() << "---> ERROR!";
+    QString errorMsg = message;
+
+    if (errorMsg.isEmpty()) {
+        errorMsg = i18n("Unknown Error");
+    }
+
+    m_engine->setData("error", errorMsg);
 }
