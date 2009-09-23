@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
+    <width>450</width>
     <height>308</height>
    </rect>
   </property>
@@ -282,10 +282,10 @@
         <string> seconds</string>
        </property>
        <property name="decimals">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="minimum">
-        <double>0.100000000000000</double>
+        <double>1.000000000000000</double>
        </property>
        <property name="maximum">
         <double>3600.000000000000000</double>
