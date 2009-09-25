@@ -68,21 +68,22 @@ class BasicWidget::Private {
         parent->setGroupByName("BasicWidget");
     }
 
-    int shortcutPosition(const QString & text)
+    int shortcutPosition(QString & text)
     {
         Q_UNUSED(text);
 
         int index = 0;
-        while ((index = title.indexOf('&', index)) != -1) {
-            if (index == title.size() - 1) {
+        while ((index = text.indexOf('&', index)) != -1) {
+            if (index == text.size() - 1) {
                 return -1;
             }
 
-            if (title.at(index + 1) != '&') {
+            if (text.at(index + 1) != '&') {
                 return index + 1;
             }
 
-            index += 2;
+            index++;
+            text.remove(index, 1);
         }
         return -1;
     }
@@ -415,10 +416,11 @@ Plasma::Svg & BasicWidget::iconInSvg() const
     return d->iconInSvg;
 }
 
-void BasicWidget::setTitle(const QString & title)
+void BasicWidget::setTitle(const QString & value)
 {
-    d->title = title;
+    d->title = value;
 
+    QString title(value);
     int pos = d->shortcutPosition(title);
     if (pos > -1) {
         setShortcutKey(title.at(pos));
