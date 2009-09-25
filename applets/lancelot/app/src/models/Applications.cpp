@@ -89,7 +89,7 @@ void Applications::load()
                 continue;
 
             data.icon = KIcon(service->icon());
-            data.name = service->name();
+            data.name = service->name().replace("&", "&&");
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
 
@@ -112,7 +112,7 @@ void Applications::load()
             if (!found) {
                 m_submodels.append(new Applications(
                     serviceGroup->relPath(),
-                    serviceGroup->caption(),
+                    serviceGroup->caption().replace("&", "&&"),
                     KIcon(serviceGroup->icon())
                 ));
             } else {
