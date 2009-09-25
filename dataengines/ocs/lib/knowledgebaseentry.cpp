@@ -20,11 +20,11 @@
 
 
 
-#include "knowledgebase.h"
+#include "knowledgebaseentry.h"
 
 using namespace Attica;
 
-class KnowledgeBase::Private : public QSharedData {
+class KnowledgeBaseEntry::Private : public QSharedData {
     public:
         QString m_id;
         int m_contentId;
@@ -46,155 +46,155 @@ class KnowledgeBase::Private : public QSharedData {
         }
 };
 
-KnowledgeBase::KnowledgeBase()
+KnowledgeBaseEntry::KnowledgeBaseEntry()
     : d(new Private)
 {
 }
 
 
-KnowledgeBase::KnowledgeBase(const KnowledgeBase& other)
+KnowledgeBaseEntry::KnowledgeBaseEntry(const KnowledgeBaseEntry& other)
     : d(other.d)
 {
 }
 
 
-KnowledgeBase& KnowledgeBase::operator=(const Attica::KnowledgeBase & other)
+KnowledgeBaseEntry& KnowledgeBaseEntry::operator=(const Attica::KnowledgeBaseEntry & other)
 {
     d = other.d;
     return *this;
 }
 
 
-KnowledgeBase::~KnowledgeBase()
+KnowledgeBaseEntry::~KnowledgeBaseEntry()
 {
 }
 
 
-void KnowledgeBase::setId(QString id)
+void KnowledgeBaseEntry::setId(QString id)
 {
     d->m_id = id;
 }
 
-QString KnowledgeBase::id() const
+QString KnowledgeBaseEntry::id() const
 {
     return d->m_id;
 }
 
 
-void KnowledgeBase::setContentId(int id)
+void KnowledgeBaseEntry::setContentId(int id)
 {
     d->m_contentId = id;
 }
 
-int KnowledgeBase::contentId() const
+int KnowledgeBaseEntry::contentId() const
 {
     return d->m_contentId;
 }
 
 
-void KnowledgeBase::setUser(const QString &user)
+void KnowledgeBaseEntry::setUser(const QString &user)
 {
     d->m_user = user;
 }
 
-QString KnowledgeBase::user() const
+QString KnowledgeBaseEntry::user() const
 {
     return d->m_user;
 }
 
 
-void KnowledgeBase::setStatus(const QString status)
+void KnowledgeBaseEntry::setStatus(const QString status)
 {
     d->m_status = status;
 }
 
-QString KnowledgeBase::status() const
+QString KnowledgeBaseEntry::status() const
 {
     return d->m_status;
 }
 
 
-void KnowledgeBase::setChanged(const QDateTime &changed)
+void KnowledgeBaseEntry::setChanged(const QDateTime &changed)
 {
     d->m_changed = changed;
 }
 
-QDateTime KnowledgeBase::changed() const
+QDateTime KnowledgeBaseEntry::changed() const
 {
     return d->m_changed;
 }
 
 
-void KnowledgeBase::setName(const QString &name)
+void KnowledgeBaseEntry::setName(const QString &name)
 {
     d->m_name = name;
 }
 
-QString KnowledgeBase::name() const
+QString KnowledgeBaseEntry::name() const
 {
     return d->m_name;
 }
 
 
-void KnowledgeBase::setDescription(const QString &description)
+void KnowledgeBaseEntry::setDescription(const QString &description)
 {
     d->m_description = description;
 }
 
-QString KnowledgeBase::description() const
+QString KnowledgeBaseEntry::description() const
 {
     return d->m_description;
 }
 
 
-void KnowledgeBase::setAnswer(const QString &answer)
+void KnowledgeBaseEntry::setAnswer(const QString &answer)
 {
     d->m_answer = answer;
 }
 
-QString KnowledgeBase::answer() const
+QString KnowledgeBaseEntry::answer() const
 {
     return d->m_answer;
 }
 
 
-void KnowledgeBase::setComments(int comments)
+void KnowledgeBaseEntry::setComments(int comments)
 {
     d->m_comments = comments;
 }
 
-int KnowledgeBase::comments() const
+int KnowledgeBaseEntry::comments() const
 {
     return d->m_comments;
 }
 
 
-void KnowledgeBase::setDetailPage(const KUrl &detailPage)
+void KnowledgeBaseEntry::setDetailPage(const KUrl &detailPage)
 {
     d->m_detailPage = detailPage;
 }
 
-KUrl KnowledgeBase::detailPage() const
+KUrl KnowledgeBaseEntry::detailPage() const
 {
     return d->m_detailPage;
 }
 
-void KnowledgeBase::addExtendedAttribute( const QString &key, const QString &value )
+void KnowledgeBaseEntry::addExtendedAttribute( const QString &key, const QString &value )
 {
   d->m_extendedAttributes.insert( key, value );
 }
 
-QString KnowledgeBase::extendedAttribute( const QString &key ) const
+QString KnowledgeBaseEntry::extendedAttribute( const QString &key ) const
 {
   return d->m_extendedAttributes.value( key );
 }
 
-QMap<QString,QString> KnowledgeBase::extendedAttributes() const
+QMap<QString,QString> KnowledgeBaseEntry::extendedAttributes() const
 {
   return d->m_extendedAttributes;
 }
 
 
-bool KnowledgeBase::isValid() const {
+bool KnowledgeBaseEntry::isValid() const {
   return !(d->m_id.isEmpty());
 }

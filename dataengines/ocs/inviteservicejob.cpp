@@ -43,7 +43,7 @@ InviteServiceJob::~InviteServiceJob()
 
 void InviteServiceJob::start()
 {
-    m_job = m_provider.postInvitation(destination(), parameters()["Message"].toString());
+    m_job = m_provider.postFriendInvitation(destination(), parameters()["Message"].toString());
     connect(m_job, SIGNAL(result(KJob*)), this, SLOT(result(KJob*)));
 }
 

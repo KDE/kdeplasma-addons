@@ -20,9 +20,9 @@
     USA.
 */
 
-#include "knowledgebasejob.h"
+#include "knowledgebaseentryjob.h"
 
-#include "knowledgebaseparser.h"
+#include "knowledgebaseentryparser.h"
 
 #include <kio/job.h>
 #include <klocale.h>
@@ -31,32 +31,32 @@
 
 using namespace Attica;
 
-KnowledgeBaseJob::KnowledgeBaseJob()
+KnowledgeBaseEntryJob::KnowledgeBaseEntryJob()
   : m_job( 0 )
 {
 }
 
-void KnowledgeBaseJob::setUrl( const KUrl &url )
+void KnowledgeBaseEntryJob::setUrl( const KUrl &url )
 {
   m_url = url;
 }
 
-void KnowledgeBaseJob::start()
+void KnowledgeBaseEntryJob::start()
 {
   QTimer::singleShot( 0, this, SLOT( doWork() ) );
 }
 
-KnowledgeBase KnowledgeBaseJob::knowledgeBase() const
+KnowledgeBaseEntry KnowledgeBaseEntryJob::knowledgeBase() const
 {
   return m_knowledgeBase;
 }
 
-KnowledgeBase::Metadata KnowledgeBaseJob::metadata() const
+KnowledgeBaseEntry::Metadata KnowledgeBaseEntryJob::metadata() const
 {
   return m_metadata;
 }
 
-void KnowledgeBaseJob::doWork()
+void KnowledgeBaseEntryJob::doWork()
 {
   qDebug() << m_url;
 
@@ -67,7 +67,7 @@ void KnowledgeBaseJob::doWork()
     SLOT( slotJobData( KIO::Job *, const QByteArray & ) ) );
 }
 
-void KnowledgeBaseJob::slotJobResult( KJob *job )
+void KnowledgeBaseEntryJob::slotJobResult( KJob *job )
 {
   m_job = 0;
 
@@ -76,7 +76,7 @@ void KnowledgeBaseJob::slotJobResult( KJob *job )
     setErrorText( job->errorText() );
   } else {
     qDebug() << m_data;
-    KnowledgeBase::Parser parser;
+    KnowledgeBaseEntry::Parser parser;
     m_knowledgeBase = parser.parse( QString::fromUtf8( m_data.data() ) );
     m_metadata = parser.lastMetadata();
   }
@@ -84,7 +84,7 @@ void KnowledgeBaseJob::slotJobResult( KJob *job )
   emitResult();
 }
 
-void KnowledgeBaseJob::slotJobData( KIO::Job *, const QByteArray &data )
+void KnowledgeBaseEntryJob::slotJobData( KIO::Job *, const QByteArray &data )
 {
   m_data.append( data );
 }

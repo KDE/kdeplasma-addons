@@ -25,6 +25,8 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 
+#include <KUrl>
+
 #include "atticaclient_export.h"
 #include "category.h"
 #include "listjob.h"
@@ -41,8 +43,8 @@ class ContentJob;
 class Event;
 class EventJob;
 class Folder;
-class KnowledgeBase;
-class KnowledgeBaseJob;
+class KnowledgeBaseEntry;
+class KnowledgeBaseEntryJob;
 class KnowledgeBaseListJob;
 class Message;
 class Person;
@@ -58,10 +60,11 @@ class ATTICA_EXPORT Provider
   public:
     Provider();
     Provider(const Provider& other);
-    Provider(const QString& id, const KUrl& baseUrl, const QString& name);
     Provider& operator=(const Provider& other);
     ~Provider();
     
+    bool isValid() const;
+    KUrl baseUrl() const;
     QString name() const;
     QString id() const;
 
@@ -84,8 +87,8 @@ class ATTICA_EXPORT Provider
 
     // Friend part of OCS
 
-    ListJob<Person>* requestFriend(const QString& id, int page = 0, int pageSize = 100);
-    PostJob* postInvitation(const QString& to, const QString& message);
+    ListJob<Person>* requestFriends(const QString& id, int page = 0, int pageSize = 100);
+    PostJob* postFriendInvitation(const QString& to, const QString& message);
 
     // Message part of OCS
 
@@ -95,19 +98,19 @@ class ATTICA_EXPORT Provider
 
     // Activity part of OCS
 
-    ListJob<Activity>* requestActivity();
+    ListJob<Activity>* requestActivities();
     PostJob* postActivity(const QString& message);
 
     // Content part of OCS
 
     ListJob<Category>* requestCategories();
-    ListJob<Content>* requestContent(const Category::List& categories, const QString& search, SortMode mode);
+    ListJob<Content>* searchContents(const Category::List& categories, const QString& search, SortMode mode);
     ContentJob* requestContent(const QString& id);
 
     // KnowledgeBase part of OCS
 
-    KnowledgeBaseJob* requestKnowledgeBase(const QString& id);
-    KnowledgeBaseListJob* requestKnowledgeBase(const Content& content, const QString& search, SortMode, int page, int pageSize);
+    KnowledgeBaseEntryJob* requestKnowledgeBaseEntry(const QString& id);
+    KnowledgeBaseListJob* searchKnowledgeBase(const Content& content, const QString& search, SortMode, int page, int pageSize);
 
     // Event part of OCS
 
@@ -126,6 +129,8 @@ class ATTICA_EXPORT Provider
   private:
     class Private;
     QExplicitlySharedDataPointer<Private> d;
+    Provider(const QString& id, const KUrl& baseUrl, const QString& name);
+    friend class ProviderInitJob;
 };
 
 }

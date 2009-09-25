@@ -21,10 +21,10 @@ set(ocsclient_SRCS
    content.cpp
    contentjob.cpp
    contentparser.cpp
-   knowledgebase.cpp
-   knowledgebasejob.cpp
-   knowledgebaselistjob.cpp
-   knowledgebaseparser.cpp
+   knowledgebaseentry.cpp
+   knowledgebaseentryjob.cpp
+   knowledgebaseentrylistjob.cpp
+   knowledgebaseentryparser.cpp
  )
 
 

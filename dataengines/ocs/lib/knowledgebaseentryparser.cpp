@@ -20,18 +20,18 @@
     USA.
 */
 
-#include "knowledgebaseparser.h"
+#include "knowledgebaseentryparser.h"
 
 
 using namespace Attica;
 
-KnowledgeBase::Parser::Parser()
+KnowledgeBaseEntry::Parser::Parser()
 {
 }
 
-KnowledgeBase::List KnowledgeBase::Parser::parseList( const QString &xmlString )
+KnowledgeBaseEntry::List KnowledgeBaseEntry::Parser::parseList( const QString &xmlString )
 {
-  KnowledgeBase::List KnowledgeBaseList;
+  KnowledgeBaseEntry::List KnowledgeBaseList;
 
   QXmlStreamReader xml( xmlString );
 
@@ -41,7 +41,7 @@ KnowledgeBase::List KnowledgeBase::Parser::parseList( const QString &xmlString )
     xml.readNext();
 
     if ( xml.isStartElement() && xml.name() == "content" ) {
-      KnowledgeBase KnowledgeBase = parseKnowledgeBase( xml );
+      KnowledgeBaseEntry KnowledgeBase = parseKnowledgeBase( xml );
       KnowledgeBaseList.append( KnowledgeBase );
     }
   }
@@ -49,9 +49,9 @@ KnowledgeBase::List KnowledgeBase::Parser::parseList( const QString &xmlString )
   return KnowledgeBaseList;
 }
 
-KnowledgeBase KnowledgeBase::Parser::parse( const QString &xmlString )
+KnowledgeBaseEntry KnowledgeBaseEntry::Parser::parse( const QString &xmlString )
 {
-  KnowledgeBase knowledgeBase;
+  KnowledgeBaseEntry knowledgeBase;
 
   QXmlStreamReader xml( xmlString );
 
@@ -68,14 +68,14 @@ KnowledgeBase KnowledgeBase::Parser::parse( const QString &xmlString )
   return knowledgeBase;
 }
 
-KnowledgeBase::Metadata KnowledgeBase::Parser::lastMetadata()
+KnowledgeBaseEntry::Metadata KnowledgeBaseEntry::Parser::lastMetadata()
 {
     return m_lastMetadata;
 }
 
-KnowledgeBase::Metadata KnowledgeBase::Parser::parseMetadata( QXmlStreamReader &xml )
+KnowledgeBaseEntry::Metadata KnowledgeBaseEntry::Parser::parseMetadata( QXmlStreamReader &xml )
 {
-    KnowledgeBase::Metadata meta;
+    KnowledgeBaseEntry::Metadata meta;
     meta.status = QString();
     meta.message = QString();
     meta.totalItems = 0;
@@ -107,9 +107,9 @@ KnowledgeBase::Metadata KnowledgeBase::Parser::parseMetadata( QXmlStreamReader &
     return meta;
 }
 
-KnowledgeBase KnowledgeBase::Parser::parseKnowledgeBase( QXmlStreamReader &xml )
+KnowledgeBaseEntry KnowledgeBaseEntry::Parser::parseKnowledgeBase( QXmlStreamReader &xml )
 {
-  KnowledgeBase knowledgeBase;
+  KnowledgeBaseEntry knowledgeBase;
 
   while ( !xml.atEnd() ) {
     xml.readNext();

@@ -23,8 +23,8 @@
 
 #include "content.h"
 #include "eventjob.h"
-#include "knowledgebasejob.h"
-#include "knowledgebaselistjob.h"
+#include "knowledgebaseentryjob.h"
+#include "knowledgebaseentrylistjob.h"
 #include "personjob.h"
 #include "postjob.h"
 #include "provider.h"
@@ -82,7 +82,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         if (cacheRequest(name)) {
             return true;
         }
-        m_job = m_provider.requestActivity();
+        m_job = m_provider.requestActivities();
         connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
         return m_job != 0;
     } else if (name.startsWith("Friends-")) {
@@ -92,7 +92,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
         QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
         kDebug() << "Searching friends for id" << _id;
-        ListJob<Person>* _job = m_provider.requestFriend(_id, 0, m_maximumItems);
+        ListJob<Person>* _job = m_provider.requestFriends(_id, 0, m_maximumItems);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
 
         if (_job) {
@@ -179,7 +179,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
         QString _id = QString(name).remove(0, 14); // Removes prefix KnowledgeBase-
         kDebug() << "Searching for KnowledgeBase id" << _id;
-        KnowledgeBaseJob* _job = m_provider.requestKnowledgeBase(_id);
+        KnowledgeBaseEntryJob* _job = m_provider.requestKnowledgeBaseEntry(_id);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseResult( KJob * ) ) );
         return _job != 0;
 
@@ -216,7 +216,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         kDebug() << "Searching for" << query << "into knowledge base";
-        KnowledgeBaseListJob* _job = m_provider.requestKnowledgeBase(content, query, sortMode, page, pageSize);
+        KnowledgeBaseListJob* _job = m_provider.searchKnowledgeBase(content, query, sortMode, page, pageSize);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseListResult( KJob * ) ) );
 
         //putting the job/query pair into an hash to remember the association later
@@ -337,8 +337,8 @@ void OcsEngine::slotKnowledgeBaseResult( KJob *j )
 {
     kDebug() << "============================= KnowledgeBase Full Data is in";
     if (!j->error()) {
-        Attica::KnowledgeBaseJob *job = static_cast<Attica::KnowledgeBaseJob *>( j );
-        Attica::KnowledgeBase k = job->knowledgeBase();
+        Attica::KnowledgeBaseEntryJob *job = static_cast<Attica::KnowledgeBaseEntryJob *>( j );
+        Attica::KnowledgeBaseEntry k = job->knowledgeBase();
         setKnowledgeBaseData(QString("KnowledgeBase-%1").arg(k.id()), k);
         scheduleSourcesUpdated();
     } else {
@@ -370,7 +370,7 @@ void OcsEngine::setPersonData(const QString &source, const Attica::Person &perso
     setData(source, "Person-"+person.id(), personData);
 }
 
-void OcsEngine::setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase)
+void OcsEngine::setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBaseEntry &knowledgeBase)
 {
     kDebug() << "Setting KnowledgeBase data"<< source;
 
@@ -402,7 +402,7 @@ void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
 
         QString source = m_knowledgeBaseListJobs[job];
         if (!source.isEmpty()) {
-            KnowledgeBase::Metadata meta = job->metadata();
+            KnowledgeBaseEntry::Metadata meta = job->metadata();
             setData(source, "Status", meta.status);
             setData(source, "Message", meta.message);
             setData(source, "TotalItems", meta.totalItems);
@@ -410,7 +410,7 @@ void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
             m_knowledgeBaseListJobs.remove(job);
         }
 
-        foreach (const KnowledgeBase &k, job->knowledgeBaseList()) {
+        foreach (const KnowledgeBaseEntry &k, job->knowledgeBaseList()) {
             setKnowledgeBaseData(source, k);
         }
         scheduleSourcesUpdated();

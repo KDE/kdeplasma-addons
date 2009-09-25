@@ -18,33 +18,46 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
-*/
-#ifndef ATTICA_KNOWLEDGEBASEPARSER_H
-#define ATTICA_KNOWLEDGEBASEPARSER_H
+ */
+#ifndef ATTICA_KNOWLEDGEBASEJOB_H
+#define ATTICA_KNOWLEDGEBASEJOB_H
 
-// WARNING: QXmlStreamReader cannot be forward declared (Qt 4.5)
-#include <QtXml/QXmlStreamReader>
+#include "knowledgebaseentry.h"
 
-#include "knowledgebase.h"
+#include <kjob.h>
 
+namespace KIO {
+class Job;
+}
 
 namespace Attica {
 
-class KnowledgeBase::Parser
+class ATTICA_EXPORT KnowledgeBaseEntryJob : public KJob
 {
+    Q_OBJECT
   public:
-    Parser();
+    KnowledgeBaseEntryJob();
 
-    KnowledgeBase parse( const QString &xml );
-    KnowledgeBase::List parseList( const QString &xml );
-    KnowledgeBase::Metadata lastMetadata();
+    void setUrl( const KUrl & );
 
-  protected:
-    KnowledgeBase parseKnowledgeBase( QXmlStreamReader &xml );
-    KnowledgeBase::Metadata parseMetadata( QXmlStreamReader &xml );
+    void start();
+
+    KnowledgeBaseEntry knowledgeBase() const;
+    KnowledgeBaseEntry::Metadata metadata() const;
+
+  protected slots:
+    void doWork();
+
+    void slotJobResult( KJob *job );
+    void slotJobData( KIO::Job *job, const QByteArray &data );
 
   private:
-    KnowledgeBase::Metadata m_lastMetadata;
+    KUrl m_url;
+    KIO::Job *m_job;
+    QByteArray m_data;
+
+    KnowledgeBaseEntry m_knowledgeBase;
+    KnowledgeBaseEntry::Metadata m_metadata;
 };
 
 }

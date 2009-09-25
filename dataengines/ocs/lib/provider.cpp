@@ -135,7 +135,7 @@ ListJob<Person>* Provider::requestPersonSearchByLocation(qreal latitude, qreal l
   return doRequestPersonList( url );
 }
 
-ListJob<Person>* Provider::requestFriend(const QString& id, int page, int pageSize)
+ListJob<Person>* Provider::requestFriends(const QString& id, int page, int pageSize)
 {
   KUrl url = createUrl( "friend/data/" + id );
   url.addQueryItem("page", QString::number(page));
@@ -144,7 +144,7 @@ ListJob<Person>* Provider::requestFriend(const QString& id, int page, int pageSi
   return doRequestPersonList( url );
 }
 
-ListJob<Activity>* Provider::requestActivity()
+ListJob<Activity>* Provider::requestActivities()
 {
   KUrl url = createUrl( "activity" );
   return doRequestActivityList( url );
@@ -162,7 +162,7 @@ PostJob* Provider::postActivity(const QString& message)
   return job;
 }
 
-PostJob* Provider::postInvitation(const QString& to, const QString& message)
+PostJob* Provider::postFriendInvitation(const QString& to, const QString& message)
 {
   PostJob *job = new PostJob();
 
@@ -227,7 +227,7 @@ ListJob<Category>* Provider::requestCategories()
   return job;
 }
 
-ListJob<Content>* Provider::requestContent(const Category::List& categories, const QString& search, SortMode sortMode)
+ListJob<Content>* Provider::searchContents(const Category::List& categories, const QString& search, SortMode sortMode)
 {
   ListJob<Content> *job = new ListJob<Content>();
   
@@ -276,9 +276,9 @@ ContentJob* Provider::requestContent(const QString& id)
   return job;
 }
 
-KnowledgeBaseJob* Provider::requestKnowledgeBase(const QString& id)
+KnowledgeBaseEntryJob* Provider::requestKnowledgeBaseEntry(const QString& id)
 {
-  KnowledgeBaseJob *job = new KnowledgeBaseJob();
+  KnowledgeBaseEntryJob *job = new KnowledgeBaseEntryJob();
 
   KUrl url = createUrl( "knowledgebase/data/" + id );
   job->setUrl( url );
@@ -287,7 +287,7 @@ KnowledgeBaseJob* Provider::requestKnowledgeBase(const QString& id)
   return job;
 }
 
-KnowledgeBaseListJob* Provider::requestKnowledgeBase(const Content& content, const QString& search, Provider::SortMode sortMode, int page, int pageSize)
+KnowledgeBaseListJob* Provider::searchKnowledgeBase(const Content& content, const QString& search, Provider::SortMode sortMode, int page, int pageSize)
 {
   KnowledgeBaseListJob *job = new KnowledgeBaseListJob();
 

@@ -35,7 +35,7 @@ class KJob;
 
 namespace Attica {
     class PersonJob;
-    class KnowledgeBaseJob;
+    class KnowledgeBaseEntryJob;
     class Event;
 }
 
@@ -71,7 +71,7 @@ protected Q_SLOTS:
 
 private:
     void setPersonData(const QString &source, const Attica::Person &person);
-    void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBase &knowledgeBase);
+    void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBaseEntry &knowledgeBase);
     void setEventData(const QString& source, const Attica::Event& event);
     void addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
     bool cacheRequest(const QString& query);

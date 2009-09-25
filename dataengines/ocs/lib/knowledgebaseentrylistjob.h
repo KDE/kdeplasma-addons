@@ -19,11 +19,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
  */
-#ifndef ATTICA_KNOWLEDGEBASEJOB_H
-#define ATTICA_KNOWLEDGEBASEJOB_H
+#ifndef ATTICA_KNOWLEDGEBASELISTJOB_H
+#define ATTICA_KNOWLEDGEBASELISTJOB_H
 
-#include "knowledgebase.h"
+#include "knowledgebaseentry.h"
 
+#include <kurl.h>
 #include <kjob.h>
 
 namespace KIO {
@@ -32,18 +33,18 @@ class Job;
 
 namespace Attica {
 
-class ATTICA_EXPORT KnowledgeBaseJob : public KJob
+class ATTICA_EXPORT KnowledgeBaseListJob : public KJob
 {
     Q_OBJECT
   public:
-    KnowledgeBaseJob();
+    KnowledgeBaseListJob();
 
     void setUrl( const KUrl & );
 
     void start();
 
-    KnowledgeBase knowledgeBase() const;
-    KnowledgeBase::Metadata metadata() const;
+    KnowledgeBaseEntry::List knowledgeBaseList() const;
+    KnowledgeBaseEntry::Metadata metadata() const;
 
   protected slots:
     void doWork();
@@ -56,8 +57,8 @@ class ATTICA_EXPORT KnowledgeBaseJob : public KJob
     KIO::Job *m_job;
     QByteArray m_data;
 
-    KnowledgeBase m_knowledgeBase;
-    KnowledgeBase::Metadata m_metadata;
+    KnowledgeBaseEntry::List m_knowledgeBaseList;
+    KnowledgeBaseEntry::Metadata m_metadata;
 };
 
 }

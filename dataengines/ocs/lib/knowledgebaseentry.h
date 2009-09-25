@@ -32,10 +32,10 @@
 namespace Attica
 {
 
-class ATTICA_EXPORT KnowledgeBase
+class ATTICA_EXPORT KnowledgeBaseEntry
 {
   public:
-    typedef QList<KnowledgeBase> List;
+    typedef QList<KnowledgeBaseEntry> List;
     class Parser;
     struct Metadata
     {
@@ -45,10 +45,10 @@ class ATTICA_EXPORT KnowledgeBase
         int itemsPerPage;
     };
 
-    KnowledgeBase();
-    KnowledgeBase(const KnowledgeBase& other);
-    KnowledgeBase& operator=(const KnowledgeBase& other);
-    ~KnowledgeBase();
+    KnowledgeBaseEntry();
+    KnowledgeBaseEntry(const KnowledgeBaseEntry& other);
+    KnowledgeBaseEntry& operator=(const KnowledgeBaseEntry& other);
+    ~KnowledgeBaseEntry();
 
     void setId(QString id);
     QString id() const;

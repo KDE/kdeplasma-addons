@@ -20,9 +20,9 @@
     USA.
 */
 
-#include "knowledgebaselistjob.h"
+#include "knowledgebaseentrylistjob.h"
 
-#include "knowledgebaseparser.h"
+#include "knowledgebaseentryparser.h"
 
 #include <kio/job.h>
 #include <klocale.h>
@@ -46,12 +46,12 @@ void KnowledgeBaseListJob::start()
   QTimer::singleShot( 0, this, SLOT( doWork() ) );
 }
 
-KnowledgeBase::List KnowledgeBaseListJob::knowledgeBaseList() const
+KnowledgeBaseEntry::List KnowledgeBaseListJob::knowledgeBaseList() const
 {
   return m_knowledgeBaseList;
 }
 
-KnowledgeBase::Metadata KnowledgeBaseListJob::metadata() const
+KnowledgeBaseEntry::Metadata KnowledgeBaseListJob::metadata() const
 {
   return m_metadata;
 }
@@ -78,7 +78,7 @@ void KnowledgeBaseListJob::slotJobResult( KJob *job )
     emitResult();
   } else {
     qDebug() << m_data;
-    KnowledgeBase::Parser parser;
+    KnowledgeBaseEntry::Parser parser;
     m_knowledgeBaseList = parser.parseList(
       QString::fromUtf8( m_data.data() ) );
     m_metadata = parser.lastMetadata();
