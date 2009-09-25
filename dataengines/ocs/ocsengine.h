@@ -90,7 +90,7 @@ private:
     QSet<QString> m_requestCache;
 };
 
-K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )
+K_EXPORT_PLASMA_DATAENGINE(ocs, OcsEngine )
 
 #endif
 
