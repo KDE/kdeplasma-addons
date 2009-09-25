@@ -77,7 +77,7 @@ private:
     int m_maximumItems;
 };
 
-K_EXPORT_PLASMA_DATAENGINE(attica, OcsEngine )
+K_EXPORT_PLASMA_DATAENGINE(ocs, OcsEngine )
 
 #endif
 
