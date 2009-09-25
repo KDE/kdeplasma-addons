@@ -295,6 +295,7 @@ void WeatherPopupApplet::dataUpdated(const QString& source,
     d->temperature = Value(data["Temperature"].toDouble(), data["Temperature Unit"].toInt());
     d->latitude = data["Latitude"].toDouble();
     d->longitude = data["Longitude"].toDouble();
+    setAssociatedApplicationUrls(KUrl(data.value("Credit Url").toString()));
 
     d->busyTimer->stop();
     showMessage(QIcon(), QString(), Plasma::ButtonNone);
