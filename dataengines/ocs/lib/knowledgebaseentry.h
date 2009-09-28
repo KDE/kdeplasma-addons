@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef ATTICA_KNOWLEDGEBASE_H
-#define ATTICA_KNOWLEDGEBASE_H
+#ifndef ATTICA_KNOWLEDGEBASEENTRY_H
+#define ATTICA_KNOWLEDGEBASEENTRY_H
 
 #include "atticaclient_export.h"
 

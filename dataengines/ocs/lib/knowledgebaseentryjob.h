@@ -19,8 +19,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
  */
-#ifndef ATTICA_KNOWLEDGEBASEJOB_H
-#define ATTICA_KNOWLEDGEBASEJOB_H
+#ifndef ATTICA_KNOWLEDGEBASEENTRYJOB_H
+#define ATTICA_KNOWLEDGEBASEENTRYJOB_H
 
 #include "knowledgebaseentry.h"
 

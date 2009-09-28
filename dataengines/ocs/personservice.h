@@ -19,8 +19,8 @@
     USA.
 */
 
-#ifndef MESSAGESERVICE_H
-#define MESSAGESERVICE_H
+#ifndef PERSONSERVICE_H
+#define PERSONSERVICE_H
 
 #include <Plasma/Service>
 

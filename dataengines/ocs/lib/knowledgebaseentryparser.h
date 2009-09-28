@@ -19,8 +19,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
 */
-#ifndef ATTICA_KNOWLEDGEBASEPARSER_H
-#define ATTICA_KNOWLEDGEBASEPARSER_H
+#ifndef ATTICA_KNOWLEDGEBASEENTRYPARSER_H
+#define ATTICA_KNOWLEDGEBASEENTRYPARSER_H
 
 // WARNING: QXmlStreamReader cannot be forward declared (Qt 4.5)
 #include <QtXml/QXmlStreamReader>

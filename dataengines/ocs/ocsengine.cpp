@@ -63,7 +63,7 @@ QStringList OcsEngine::sources() const
 
 Plasma::Service* OcsEngine::serviceForSource(const QString& source)
 {
-    if (source.startsWith("Person-")) {
+    if (source.startsWith(QLatin1String("Person-"))) {
         QString id = QString(source).remove(0, 7);
         if (!m_personServices.contains(id)) {
             m_personServices[id] = new PersonService(m_provider, id, this);
@@ -85,7 +85,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         m_job = m_provider.requestActivities();
         connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
         return m_job != 0;
-    } else if (name.startsWith("Friends-")) {
+    } else if (name.startsWith(QLatin1String("Friends-"))) {
         setData(name, DataEngine::Data());
         if (cacheRequest(name)) {
             return true;
@@ -100,7 +100,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         }
 
         return _job != 0;
-    } else if (name.startsWith("Person-")) {
+    } else if (name.startsWith(QLatin1String("Person-"))) {
         QString _id = QString(name).remove(0, 7); // Removes prefix Person-
         if (m_personCache.contains(_id)) {
             // Set data already in the cache, it will hopefully get replaced by more complete data soon
@@ -115,7 +115,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         PersonJob* _job = m_provider.requestPerson(_id);
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
         return _job != 0;
-    } else if (name.startsWith("PersonSummary-")) {
+    } else if (name.startsWith(QLatin1String("PersonSummary-"))) {
         QString _id = QString(name).remove(0, 14); // Removes prefix PersonSummary-
         kDebug() << "Searching for Person Summary id" << _id;
         if (m_personCache.contains(_id)) {
@@ -129,7 +129,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
             connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
             return _job != 0;
         }
-    } else if (name.startsWith("Near-")) {
+    } else if (name.startsWith(QLatin1String("Near-"))) {
         QStringList args = QString(name).remove(0, 5).split(':'); // Removes prefix Near-
         if (args.size() != 3) {
             kDebug() << "Don't understand your request." << name;
@@ -155,7 +155,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
         return _job != 0;
 
-    } else if (name.startsWith("PostLocation-")) {
+    } else if (name.startsWith(QLatin1String("PostLocation-"))) {
         QStringList args = QString(name).remove(0, 13).split(':'); // Removes prefix PostLocation-
         if (args.size() != 4) {
             kDebug() << "Invalid location string:" << name;
@@ -172,7 +172,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         connect(_job, SIGNAL( result( KJob* ) ), SLOT( locationPosted( KJob* ) ));
         return _job != 0;
 
-    } else if (name.startsWith("KnowledgeBase-")) {
+    } else if (name.startsWith(QLatin1String("KnowledgeBase-"))) {
         setData(name, DataEngine::Data());
         if (cacheRequest(name)) {
             return true;
@@ -183,7 +183,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseResult( KJob * ) ) );
         return _job != 0;
 
-    } else if (name.startsWith("KnowledgeBaseList-")) {
+    } else if (name.startsWith(QLatin1String("KnowledgeBaseList-"))) {
         QStringList args = QString(name).remove(0, 18).split(':');
         const int numTokens = args.size();
         if (numTokens != 4 && numTokens != 5) {
@@ -226,7 +226,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
         return _job != 0;
 
-    } else if (name.startsWith("Event-")) {
+    } else if (name.startsWith(QLatin1String("Event-"))) {
         setData(name, DataEngine::Data());
         if (cacheRequest(name)) {
             return true;
@@ -236,7 +236,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
         connect( _job, SIGNAL(result(KJob*)), SLOT(slotEventResult(KJob*)));
         return _job != 0;
 
-    } else if (name.startsWith("FutureEvents-")) {
+    } else if (name.startsWith(QLatin1String("FutureEvents-"))) {
         QStringList args = QString(name).remove(0, 13).split(':');
         const int numTokens = args.size();
         if (numTokens != 1 && numTokens != 2) {
@@ -265,7 +265,7 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
 
         return _job != 0;
 
-    } else if (name.startsWith("MaximumItems-")) {
+    } else if (name.startsWith(QLatin1String("MaximumItems-"))) {
         if (cacheRequest(name)) {
             return true;
         }
@@ -282,7 +282,7 @@ bool OcsEngine::updateSourceEvent(const QString &name)
     kDebug() << "for name" << name;
     if (name == I18N_NOOP("activity")) {
 
-    } else if (name.startsWith("Friends-")) {
+    } else if (name.startsWith(QLatin1String("Friends-"))) {
 
     }
 

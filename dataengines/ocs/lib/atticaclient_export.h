@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
     USA.
 */
-#ifndef ATTICA_EXPORT_H
-#define ATTICA_EXPORT_H
+#ifndef ATTICACLIENT_EXPORT_H
+#define ATTICACLIENT_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
