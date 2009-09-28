@@ -45,6 +45,8 @@ class ATTICA_EXPORT ProviderInitJob : public KJob
         void doWork();
 
     private:
+        ProviderInitJob(const ProviderInitJob& other);
+        ProviderInitJob& operator=(const ProviderInitJob& other);
         class Private;
         Private* const d;
 };
