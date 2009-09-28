@@ -31,33 +31,104 @@ class QDateTime;
 
 namespace Attica {
 
-
+/**
+ * Represents a single news item (also known as activity)
+ */
 class ATTICA_EXPORT Activity
 {
   public:
     typedef QList<Activity> List;
     class Parser;
 
+    /**
+     * Creates an empty activity
+     */
     Activity();
+
+    /**
+     * Copy constructor.
+     * @param other the Activity to copy from
+     */
     Activity(const Activity& other);
+
+    /**
+     * Assignment operator.
+     * @param other the Activity to assign from
+     * @return pointer to this Activity
+     */
     Activity& operator=(const Activity& other);
+
+    /**
+     * Destructor.
+     */
     ~Activity();
 
-    void setId( const QString & );
+    /**
+     * Sets the id of the Activity.
+     * The id uniquely identifies an Activity with the OCS API.
+     * @param id the new id
+     */
+    void setId(const QString& id);
+
+    /**
+     * Gets the id of the Activity.
+     * The id uniquely identifies an Activity with the OCS API.
+     * @return the id
+     */
     QString id() const;
 
-    void setUser( const QString & );
+    /**
+     * Sets the id of the user bound to the Activity.
+     * @param id the new user id
+     */
+    void setUser(const QString& id);
+
+    /**
+     * Gets the id of the user bound to the Activity.
+     * @return the user id
+     */
     QString user() const;
 
-    void setTimestamp( const QDateTime & );
+    /**
+     * Sets the timestamp the Activity has been published.
+     * @param timestamp the new timestamp
+     */
+    void setTimestamp(const QDateTime& timestamp);
+
+    /**
+     * Gets the timestamp the Activity has been published.
+     * @return the timestamp
+     */
     QDateTime timestamp() const;
 
-    void setMessage( const QString & );
+    /**
+     * Sets the message of the Activity.
+     * @param message the new message
+     */
+    void setMessage(const QString& message);
+
+    /**
+     * Gets the message of the Activity.
+     * @return the message
+     */
     QString message() const;
 
-    void setLink( const QString & );
+    /**
+     * Sets the link to further informations about this Activity.
+     * @param link the new link
+     */
+    void setLink(const QString& link);
+
+    /**
+     * Gets the link to further informations about this Activity.
+     * @return the link
+     */
     QString link() const;
 
+    /**
+     * Checks whether this Activity has an id
+     * @return @c true if an id has been set, @c false otherwise
+     */
     bool isValid() const;
 
   private:
