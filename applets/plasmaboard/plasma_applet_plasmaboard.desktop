@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Keyboard
 Name[es]=Teclado
+Name[nb]=Tastatur
 Name[nds]=Tastatuur
 Name[pt]=Teclado
 Name[pt_BR]=Teclado
@@ -11,6 +12,7 @@ Name[x-test]=xxKeyboardxx
 Name[zh_TW]=鍵盤
 Comment=A virtual, on-screen keyboard
 Comment[es]=Un teclado virtual en pantalla
+Comment[nb]=Et virtuelt tastatur på skjermen
 Comment[nds]=En virtuell Tastatuur op den Schirm
 Comment[pt]=Um teclado virtual no ecrã
 Comment[pt_BR]=Um teclado virtual na tela

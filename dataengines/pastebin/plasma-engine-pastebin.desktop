@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Pastebin engine
 Name[es]=Motor de Pastebin
+Name[nb]=Pastebin-motor
 Name[nds]=Pastebin-Karn
 Name[pt]=Motor do Pastebin
 Name[pt_BR]=Mecanismo do Pastebin
@@ -11,6 +12,7 @@ Name[x-test]=xxPastebin enginexx
 Name[zh_TW]=Pastebin 引擎
 Comment=Engine to paste text and images to servers
 Comment[es]=Motor para pegar texto e imágenes en servidores
+Comment[nb]=Motor som limer inn tekst/bilder til en nettverkstjener
 Comment[nds]=En Karn för't infögen vun Text oder Biller op feern Servers
 Comment[pt]=Um motor para colar o texto e imagens para servidores remotos
 Comment[pt_BR]=Mecanismo para colar texto e imagens para servidores
