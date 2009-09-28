@@ -35,6 +35,7 @@ class ATTICA_EXPORT ProviderInitJob : public KJob
 
     public:
         ProviderInitJob(const QString& id, QObject* parent = 0);
+        ~ProviderInitJob();
 
         void start();
 
@@ -44,8 +45,8 @@ class ATTICA_EXPORT ProviderInitJob : public KJob
         void doWork();
 
     private:
-        const QString m_id;
-        Provider m_provider;
+        class Private;
+        Private* const d;
 };
 
 }

@@ -8,9 +8,25 @@
 using namespace Attica;
 
 
+class ProviderInitJob::Private {
+    public:
+        QString m_id;
+        Provider m_provider;
+        Private(const QString& id) : m_id(id)
+        {
+        }
+};
+
+
 ProviderInitJob::ProviderInitJob(const QString& id, QObject* parent)
-    : KJob(parent), m_id(id)
+    : KJob(parent), d(new Private(id))
 {
+}
+
+
+ProviderInitJob::~ProviderInitJob()
+{
+    delete d;
 }
 
 
@@ -22,8 +38,8 @@ void ProviderInitJob::start()
 
 void ProviderInitJob::doWork()
 {
-    if (m_id == "opendesktop") {
-        m_provider = Provider(m_id, KUrl("https://api.opendesktop.org/v1/"), "OpenDesktop.org");
+    if (d->m_id == "opendesktop") {
+        d->m_provider = Provider(d->m_id, KUrl("https://api.opendesktop.org/v1/"), "OpenDesktop.org");
     }
     emitResult();
 }
@@ -31,7 +47,7 @@ void ProviderInitJob::doWork()
 
 Provider ProviderInitJob::provider() const
 {
-    return m_provider;
+    return d->m_provider;
 }
 
 
