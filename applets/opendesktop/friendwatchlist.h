@@ -30,7 +30,7 @@ class FriendWatchList : public QObject
     Q_OBJECT
 
     public:
-        FriendWatchList(Plasma::DataEngine* engine, QObject* parent = 0);
+        explicit FriendWatchList(Plasma::DataEngine* engine, QObject* parent = 0);
         bool contains(const QString& id) const;
         QString relativeTo() const;
         void setRelativeTo(const QString& id);

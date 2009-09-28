@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "stylesheet.h"
+
 //Qt
 #include <QFile>
 #include <QPalette>
@@ -29,8 +31,6 @@
 // Plasma
 #include <Plasma/Theme>
 
-// own
-#include "stylesheet.h"
 
 using namespace Plasma;
 

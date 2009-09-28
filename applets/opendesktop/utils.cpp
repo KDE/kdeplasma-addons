@@ -19,6 +19,9 @@
     USA.
 */
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #include "utils.h"
 
 
@@ -47,3 +50,6 @@ QString personFromQuery(const QString& query)
     }
     return QString();
 }
+
+
+#endif

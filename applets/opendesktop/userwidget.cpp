@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "userwidget.h"
+
 //Qt
 #include <QGraphicsGridLayout>
 #include <QWebPage>
@@ -37,7 +39,6 @@
 #include <Plasma/WebView>
 
 // own
-#include "userwidget.h"
 #include "contactimage.h"
 #include "stylesheet.h"
 

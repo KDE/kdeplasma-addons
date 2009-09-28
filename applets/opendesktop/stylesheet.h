@@ -21,7 +21,7 @@
 #define STYLESHEET_H
 
 //Qt
-#include <QString>
+#include <QtCore/QHash>
 
 // KDE
 #include <KDirWatch>

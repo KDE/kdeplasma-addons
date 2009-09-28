@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "contactimage.h"
+
 //Qt
 #include <QGraphicsWidget>
 #include <QPainter>
@@ -28,8 +30,6 @@
 // Plasma
 #include <Plasma/Theme>
 
-// own
-#include "contactimage.h"
 
 using namespace Plasma;
 

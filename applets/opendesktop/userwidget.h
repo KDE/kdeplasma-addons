@@ -44,7 +44,7 @@ class UserWidget : public Plasma::Frame
     Q_OBJECT
 
     public:
-        UserWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
+        explicit UserWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~UserWidget();
         void setId(const QString& id);
 

@@ -30,7 +30,7 @@ class SourceWatchList : public QObject
     Q_OBJECT
 
     public:
-        SourceWatchList(Plasma::DataEngine* engine, QObject* parent = 0);
+        explicit SourceWatchList(Plasma::DataEngine* engine, QObject* parent = 0);
         bool contains(const QString& key) const;
         QString query() const;
         void setQuery(const QString& query);

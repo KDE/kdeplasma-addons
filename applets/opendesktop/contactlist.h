@@ -45,7 +45,7 @@ class ContactList : public Plasma::ScrollWidget
          * @param engine the Plasma data engine to use
          * @param parent the parent of this widget
          */
-        ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
+        explicit ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
 
         /**
          * Returns the maximum number of items shown

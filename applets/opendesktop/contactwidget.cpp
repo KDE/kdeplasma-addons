@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "contactwidget.h"
+
 //Qt
 #include <QGraphicsGridLayout>
 #include <QGraphicsSceneMouseEvent>
@@ -37,7 +39,6 @@
 #include <Plasma/Frame>
 
 // own
-#include "contactwidget.h"
 #include "contactimage.h"
 #include "utils.h"
 
