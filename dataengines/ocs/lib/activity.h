@@ -41,7 +41,7 @@ class ATTICA_EXPORT Activity
     class Parser;
 
     /**
-     * Creates an empty activity
+     * Creates an empty Activity
      */
     Activity();
 
