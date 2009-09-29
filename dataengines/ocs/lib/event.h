@@ -29,6 +29,8 @@
 #include <QtCore/QMap>
 #include <QtCore/QSharedDataPointer>
 
+#include <KUrl>
+
 
 namespace Attica {
     
@@ -166,13 +168,13 @@ class ATTICA_EXPORT Event
          * Sets the homepage of the Event.
          * @param homepage the new homepage
          */
-        void setHomepage(const QString& homepage);
+        void setHomepage(const KUrl& homepage);
     
         /**
          * Gets the homepage of the Event.
          * @return the homepage
          */
-        QString homepage() const;
+        KUrl homepage() const;
 
         /**
          * Sets the country where the Event takes place.
