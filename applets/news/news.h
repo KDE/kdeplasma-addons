@@ -37,7 +37,7 @@ class News : public Plasma::PopupApplet
 
         QGraphicsWidget *graphicsWidget();
 
-    public slots:
+    public Q_SLOTS:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
     protected:
@@ -45,7 +45,7 @@ class News : public Plasma::PopupApplet
         void connectToEngine();
         QMap<QString, QString> akregatorFeeds();
 
-    protected slots:
+    protected Q_SLOTS:
         void dropEvent(QGraphicsSceneDragDropEvent *event);
         void configAccepted();
         void linkActivated(const QUrl& link);
