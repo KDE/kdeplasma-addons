@@ -29,13 +29,14 @@
 //Plasma
 #include <Plasma/Theme>
 
-static const char defaultImage[] = "fifteenPuzzle/greensquare";
+static const char defaultImage[] = "fifteenPuzzle/blanksquare";
 
 FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args), m_configDialog(0)
 {
   setHasConfigurationInterface(true);
   m_board = new Fifteen(this);
+  m_board->setSize(4);
   QGraphicsLinearLayout * lay = new QGraphicsLinearLayout(this);
   lay->addItem(m_board);
   lay->setContentsMargins(0,0,0,0);
@@ -53,6 +54,10 @@ void FifteenPuzzle::init()
   m_imagePath = cg.readEntry("ImagePath", QString());
   m_usePlainPieces = m_imagePath.isEmpty() || cg.readEntry("UsePlainPieces", true);
   m_showNumerals = cg.readEntry("ShowNumerals", true);
+
+  m_board->setColor(cg.readEntry("boardColor", QColor()));
+  kDebug() << "SIZE IS: " << cg.readEntry("boardSize",4);
+  m_board->setSize(qMax(4, cg.readEntry("boardSize",4)));
 
   // make sure nobody messed up with the config file
   if (!m_usePlainPieces) {
@@ -79,6 +84,8 @@ void FifteenPuzzle::constraintsEvent(Plasma::Constraints constraints)
 void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
 {
   m_configDialog = new FifteenPuzzleConfig();
+  connect(m_configDialog, SIGNAL(valueChanged(int)), m_board, SLOT(setSize(int)));
+  connect(m_configDialog, SIGNAL(colorChanged(QColor)), m_board, SLOT(setColor(QColor)));
   connect(m_configDialog, SIGNAL(shuffle()), m_board, SLOT(shuffle()));
   connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -91,6 +98,8 @@ void FifteenPuzzle::createConfigurationInterface(KConfigDialog *parent)
   }
   m_configDialog->ui.urlRequester->setUrl(m_imagePath);
   m_configDialog->ui.cb_showNumerals->setChecked(m_showNumerals);
+  m_configDialog->ui.color->setColor(m_board->color());
+  m_configDialog->ui.size->setValue(m_board->size());
   m_configDialog->show();
 }
 
@@ -105,6 +114,8 @@ void FifteenPuzzle::configAccepted()
   cg.writeEntry("ShowNumerals", m_showNumerals);
   cg.writeEntry("UsePlainPieces", m_usePlainPieces);
   cg.writeEntry("ImagePath", m_imagePath);
+  cg.writeEntry("boardSize",  m_configDialog->ui.size->value());
+  cg.writeEntry("boardColor", m_configDialog->ui.color->color());
 
   updateBoard();
 

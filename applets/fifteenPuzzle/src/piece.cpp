@@ -28,33 +28,36 @@
 #include <QFontMetrics>
 
 #include <KDebug>
+#include "fifteen.h"
 
-Piece::Piece(int id, QGraphicsItem *parent, Plasma::Svg *svg, int gamePos)
+Piece::Piece(int id, Fifteen* parent, Plasma::Svg* svg)
     : QGraphicsItem(parent)
 {
   m_id = id;
   m_numeral = true;
-  m_gamePos = gamePos;
+  m_gamePos = id;
   m_svg = svg;
+  m_fifteen = parent;
+  m_bg = new QGraphicsRectItem(this);
   setCacheMode(DeviceCoordinateCache);
 }
 
-int Piece::getId()
+int Piece::id() const
 {
   return m_id;
 }
 
-int Piece::getGameX()
+int Piece::boardX() const
 {
-  return m_gamePos % 4;
+ return m_gamePos % m_fifteen->size();
 }
 
-int Piece::getGameY()
+int Piece::boardY() const
 {
-  return m_gamePos / 4;
+  return m_gamePos / m_fifteen->size();
 }
 
-int Piece::getGamePos()
+int Piece::boardPos() const
 {
   return m_gamePos;
 }
@@ -99,6 +102,10 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     m_svg->paint(painter, QPointF(0, 0), "piece_" + QString::number(m_id));
   } else {
     // here we assume that the svg has already been resized correctly by Fifteen::updatePixmaps()
+     QColor c(m_fifteen->color());
+    c.setAlphaF(0.5);
+    painter->setBrush(c);
+    painter->drawRect(boundingRect());
     m_svg->paint(painter, QPointF(0, 0));
   }
 
@@ -127,6 +134,11 @@ void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
   painter->drawText((width / 2) - m.width(text) / 2,
                     (height / 2) + m.ascent() / 2,
                     text);
+}
+
+void Piece::shuffling()
+{
+  emit pressed(this);
 }
 
 QRectF Piece::boundingRect() const

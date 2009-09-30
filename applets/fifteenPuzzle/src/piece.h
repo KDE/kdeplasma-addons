@@ -25,23 +25,25 @@
 #include <QObject>
 
 #include <Plasma/Svg>
+class Fifteen;
 
 class Piece : public QObject, public QGraphicsItem
 {
   Q_OBJECT
   public:
-    Piece(int id, QGraphicsItem * parent, Plasma::Svg *svg, int gamePos);
-    int getId();
+    Piece(int id, Fifteen * parent, Plasma::Svg *svg);
+    int id() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     void showNumeral(bool show);
-    int getGameX();
-    int getGameY();
-    int getGamePos();
+    int boardX() const;
+    int boardY() const;
+    int boardPos() const;
     void setGamePos(int gamePos);
     void setSize(QSizeF size);
     void setSplitImage(bool splitPixmap);
     void setFont(const QFont &font);
+    void shuffling();
 
   private:
     int m_id;
@@ -51,6 +53,9 @@ class Piece : public QObject, public QGraphicsItem
     QSizeF m_size;
     QFont m_font;
     Plasma::Svg *m_svg;
+    QGraphicsRectItem *m_bg;
+    Fifteen *m_fifteen;
+
 
   protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

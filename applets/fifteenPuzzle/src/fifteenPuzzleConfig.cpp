@@ -34,6 +34,8 @@ FifteenPuzzleConfig::FifteenPuzzleConfig(QWidget *parent)
   ui.setupUi(mainWidget());
 
   connect(ui.pb_shuffle, SIGNAL(clicked()), this, SIGNAL(shuffle()));
+  connect(ui.size, SIGNAL(valueChanged(int)), this, SIGNAL(valueChanged(int)));
+  connect(ui.color, SIGNAL(activated(QColor)), this, SIGNAL(colorChanged(QColor)));
 }
 
 void FifteenPuzzleConfig::slotButtonClicked(int button)

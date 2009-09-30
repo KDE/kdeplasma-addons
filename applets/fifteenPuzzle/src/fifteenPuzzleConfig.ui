@@ -1,101 +1,76 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>fifteenPuzzleConfig</class>
- <widget class="QWidget" name="fifteenPuzzleConfig" >
-  <property name="geometry" >
+ <widget class="QWidget" name="fifteenPuzzleConfig">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>363</width>
-    <height>255</height>
+    <width>291</width>
+    <height>226</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Configure Fifteen Puzzle</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="gb_appearance" >
-     <property name="title" >
+    <widget class="QGroupBox" name="gb_appearance">
+     <property name="title">
       <string>Appearance</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <item>
-       <widget class="QRadioButton" name="rb_identical" >
-        <property name="text" >
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QRadioButton" name="rb_identical">
+        <property name="text">
          <string>Use plain pieces</string>
         </property>
-        <property name="checked" >
+        <property name="checked">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" >
-        <item>
-         <widget class="QRadioButton" name="rb_split" >
-          <property name="text" >
-           <string>Use custom image:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="KUrlRequester" name="urlRequester" >
-          <property name="enabled" >
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="4" column="0" colspan="2">
+       <widget class="QRadioButton" name="rb_split">
+        <property name="text">
+         <string>Use custom image:</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" >
-        <item>
-         <spacer name="horizontalSpacer" >
-          <property name="orientation" >
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType" >
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="cb_showNumerals" >
-          <property name="enabled" >
-           <bool>false</bool>
-          </property>
-          <property name="text" >
-           <string>Show numerals</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="4" column="2" colspan="2">
+       <widget class="KUrlRequester" name="urlRequester">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gb_actions" >
-     <property name="title" >
-      <string>Actions</string>
-     </property>
-     <property name="flat" >
-      <bool>true</bool>
-     </property>
-     <layout class="QVBoxLayout" >
-      <item>
-       <widget class="QPushButton" name="pb_shuffle" >
-        <property name="text" >
-         <string>Shuffle Pieces</string>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Size</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2">
+       <widget class="KColorCombo" name="color"/>
+      </item>
+      <item row="6" column="2" colspan="2">
+       <widget class="QSpinBox" name="size">
+        <property name="minimum">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="cb_showNumerals">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Show numerals</string>
         </property>
        </widget>
       </item>
@@ -103,17 +78,22 @@
     </widget>
    </item>
    <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="gb_actions">
+     <property name="title">
+      <string>Actions</string>
      </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>20</width>
-       <height>0</height>
-      </size>
+     <property name="flat">
+      <bool>true</bool>
      </property>
-    </spacer>
+     <layout class="QVBoxLayout"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pb_shuffle">
+     <property name="text">
+      <string>Shuffle Pieces</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -122,6 +102,11 @@
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorCombo</class>
+   <extends>QComboBox</extends>
+   <header>kcolorcombo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -132,13 +117,13 @@
    <receiver>cb_showNumerals</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
-     <x>146</x>
-     <y>81</y>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>127</y>
     </hint>
-    <hint type="destinationlabel" >
-     <x>146</x>
-     <y>146</y>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>156</y>
     </hint>
    </hints>
   </connection>
@@ -148,13 +133,29 @@
    <receiver>urlRequester</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
-     <x>146</x>
-     <y>81</y>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>127</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>171</x>
      <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rb_split</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>color</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>52</y>
     </hint>
    </hints>
   </connection>

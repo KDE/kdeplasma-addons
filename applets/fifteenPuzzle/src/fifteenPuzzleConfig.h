@@ -21,8 +21,9 @@
 #define FIFTEENPUZZLECONFIG_H
 
 #include <KDialog>
-
+#include <KColorCombo>
 #include "ui_fifteenPuzzleConfig.h"
+class Fifteen;
 
 class FifteenPuzzleConfig : public KDialog
 {
@@ -37,6 +38,8 @@ class FifteenPuzzleConfig : public KDialog
 
   signals:
     void shuffle();
+    void colorChanged(QColor c);
+    void valueChanged(int i);
 };
 
 #endif

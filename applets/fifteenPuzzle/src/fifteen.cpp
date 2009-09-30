@@ -20,7 +20,6 @@
 #include "fifteen.h"
 #include "piece.h"
 
-#include <ctime>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QFontMetrics>
@@ -30,15 +29,16 @@
 
 #include "plasma/animator.h"
 
-Fifteen::Fifteen(QGraphicsItem *parent)
+Fifteen::Fifteen(QGraphicsItem* parent, int size)
     : QGraphicsWidget(parent)
 {
-  m_pieces.resize(16);
+  m_size = size;
+  m_pieces.resize(size*size);
   m_splitPixmap = false;
   m_numerals = true;
 
   m_svg = new Plasma::Svg();
-  shuffle();
+  startBoard();
   setCacheMode(DeviceCoordinateCache);
 }
 
@@ -48,62 +48,68 @@ Fifteen::~Fifteen()
   delete m_svg;
 }
 
+
+void Fifteen::setSize(int size)
+{
+  m_size = size;
+  startBoard();
+  updatePieces();
+}
+
+void Fifteen::setColor(const QColor& c)
+{
+  m_color = c;
+  updatePieces();
+  kDebug() << "Should have updated pieces.";
+}
+
+int Fifteen::size() const
+{
+  return m_size;
+}
+
+const QColor& Fifteen:: color() const
+{
+  return m_color;
+}
+
+
 void Fifteen::clearPieces()
 {
-  for (int i = 0; i < 16; ++i)
+  for (int i = 0; i < (m_size * m_size); ++i){
     delete m_pieces[i];
+  }
+}
+
+void Fifteen::startBoard(){
+  qDeleteAll(m_pieces);
+  m_pieces.fill(NULL);
+  qreal d = m_size * m_size;
+  m_pieces.resize(d);
+  for (int i = 0; i < d; ++i) {
+    m_pieces[i] = new Piece(i, this, m_svg);
+    connect(m_pieces[i], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
+  }
+  m_blank = m_pieces[0];
+ updatePieces();
 }
 
 void Fifteen::shuffle()
 {
-  qsrand(time(0));
-  qDeleteAll(m_pieces);
-  m_pieces.fill(NULL);
-  int numPiecesLeft = 16;
-  for (int i = 0; i < 16; ++i) {
-    int randIndex = qrand() % numPiecesLeft;
-    int rand = 0;
-    --numPiecesLeft;
-
-    // make sure we have an empty piece
-    if (randIndex == 0 && m_pieces.at(0)) {
-        ++randIndex;
+  int numSteps = m_size * m_size;
+  while(--numSteps){
+    bool orientation = (rand()%2 == 0); // true rols, false column
+    int posClicked = rand()%m_size;
+    while(posClicked == (orientation?m_blank->boardX():m_blank->boardY())){
+      posClicked = rand()%m_size;
     }
-
-    for (int j = 0; j < randIndex; ++j) {
-        ++rand;
-        while (m_pieces.at(rand)) {
-            ++rand;
-        }
+    if(orientation){
+      itemAt( posClicked, m_blank->boardY())->shuffling();
     }
-    //kDebug() << "rand" << randIndex << rand;
-
-    m_pieces[rand] = new Piece(i, this, m_svg, rand);
-    QObject::connect(m_pieces[rand], SIGNAL(pressed(Piece*)), this, SLOT(piecePressed(Piece*)));
-
-    if (i == 0) {
-      m_blank = m_pieces[rand];
+    else{
+      itemAt(m_blank->boardX(), posClicked)->shuffling();
     }
   }
-
-  if (!isSolvable()) {
-    // this is where I would rip out two pieces and swap them around, if it were a plastic puzzle
-    int a = 1;
-    int b = 2;
-    if (m_pieces[a] == m_blank) { // you can't pull out a hole!
-      a = 3;
-    } else if (m_pieces[b] == m_blank) {
-      b = 0;
-    }
-    qSwap(m_pieces[a], m_pieces[b]);
-
-    // also swap the gamePos of the pieces
-    int aPos = m_pieces[a]->getGamePos();
-    m_pieces[a]->setGamePos(m_pieces[b]->getGamePos());
-    m_pieces[b]->setGamePos(aPos);
-  }
-
-  updatePieces();
 }
 
 void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
@@ -111,13 +117,14 @@ void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
   Q_UNUSED(event);
 
   QSizeF size = contentsRect().size();
-  int width = size.width() / 4;
-  int height = size.height() / 4;
+  int width = size.width() / m_size;
+  int height = size.height() / m_size;
 
   QString test = "99";
   QFont f = font();
   int smallest = KGlobalSettings::smallestReadableFont().pixelSize();
-  int fontSize = 14;
+  Piece *x = m_pieces[0];
+  int fontSize = x?x->boundingRect().height()/3:14;
   f.setBold(true);
   f.setPixelSize(fontSize);
   
@@ -141,37 +148,6 @@ void Fifteen::resizeEvent(QGraphicsSceneResizeEvent *event)
   updatePieces();
 }
 
-bool Fifteen::isSolvable()
-{
-  int fields[16];
-  bool odd_even_solvable=0;
-  for (int i = 0;  i < 16; ++i) {
-    fields[i] = m_pieces[i]->getId();
-    if (fields[i] == 0) {
-      fields[i] = 16;
-      switch (i) {
-        case 0: case  2: case  5: case  7:
-        case 8: case 10: case 13: case 15: odd_even_solvable = 1; break;
-        case 1: case  3: case  4: case  6:
-        case 9: case 11: case 12: case 14: odd_even_solvable = 0; break;
-      }
-    }
-  }
-
-  bool odd_even_permutations = 1;
-  for (int i = 0; i < 16; ++i) {
-    int field = fields[i];
-    while (field != i + 1) {
-      int temp_field = fields[field - 1];
-      fields[field - 1] = field;
-      field = temp_field;
-      odd_even_permutations = !odd_even_permutations;
-    }
-  }
-
-  return odd_even_solvable == odd_even_permutations;
-}
-
 void Fifteen::setShowNumerals(bool show)
 {
   m_numerals = show;
@@ -189,8 +165,8 @@ void Fifteen::setImage(const QString &path, bool identicalPieces)
 void Fifteen::updatePieces()
 {
   QSizeF size = contentsRect().size();
-  int width = size.width() / 4;
-  int height = size.height() / 4;
+  int width = size.width() / m_size;
+  int height = size.height() / m_size;
 
   if (m_splitPixmap) {
     m_svg->resize(size);
@@ -198,21 +174,23 @@ void Fifteen::updatePieces()
     m_svg->resize(width, height);
   }
 
-  for (int i = 0; i < 16; ++i) {
+  for (int i = 0; i < (m_size * m_size); ++i) {
+    if (!m_pieces[i]) continue;
     m_pieces[i]->showNumeral(m_numerals);
     m_pieces[i]->setSplitImage(m_splitPixmap);
     m_pieces[i]->setSize(QSizeF(width, height));
-    m_pieces[i]->setPos(m_pieces[i]->getGameX() * width, m_pieces[i]->getGameY() * height);
+    m_pieces[i]->setPos(m_pieces[i]->boardX() * width, m_pieces[i]->boardY() * height);
     m_pieces[i]->setFont(m_font);
+    m_pieces[i]->update();
   }
 }
 
 void Fifteen::piecePressed(Piece *item)
 {
-  int ix = item->getGameX();
-  int iy = item->getGameY();
-  int bx = m_blank->getGameX();
-  int by = m_blank->getGameY();
+  int ix = item->boardX();
+  int iy = item->boardY();
+  int bx = m_blank->boardX();
+  int by = m_blank->boardY();
 
   if (ix == bx && iy != by) {
     if (iy > by) {
@@ -246,9 +224,9 @@ void Fifteen::piecePressed(Piece *item)
 
 Piece* Fifteen::itemAt(int gameX, int gameY)
 {
-  int gamePos = (gameY * 4) + gameX;
-  for (int i = 0; i < 16; i++) {
-    if (m_pieces[i]->getGamePos() == gamePos) {
+  int gamePos = (gameY * m_size) + gameX;
+  for (int i = 0; i < (m_size * m_size); i++) {
+    if (m_pieces[i]->boardPos() == gamePos) {
       return m_pieces[i];
     }
   }
@@ -257,17 +235,17 @@ Piece* Fifteen::itemAt(int gameX, int gameY)
 
 void Fifteen::swapPieceWithBlank(Piece *item)
 {
-  int width = contentsRect().size().width() / 4;
-  int height = contentsRect().size().height() / 4;
+  int width = contentsRect().size().width() / m_size;
+  int height = contentsRect().size().height() / m_size;
 
   // swap widget positions
-  QPointF pos = QPointF(item->getGameX() * width, item->getGameY() * height);
+  QPointF pos = QPointF(item->boardX() * width, item->boardY() * height);
   Plasma::Animator::self()->moveItem(item, Plasma::Animator::FastSlideInMovement, m_blank->pos().toPoint());
   m_blank->setPos(pos);
 
   // swap game positions
-  int blankPos = m_blank->getGamePos();
-  m_blank->setGamePos(item->getGamePos());
+  int blankPos = m_blank->boardPos();
+  m_blank->setGamePos(item->boardPos());
   item->setGamePos(blankPos);
 }
 
