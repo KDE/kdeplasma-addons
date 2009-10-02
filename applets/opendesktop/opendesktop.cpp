@@ -19,7 +19,6 @@
 
 //own
 #include "opendesktop.h"
-#include "activitylist.h"
 #include "contactlist.h"
 #include "utils.h"
 
@@ -117,9 +116,6 @@ void OpenDesktop::init()
     switchDisplayedUser(m_username, false);
     m_friendList->setOwnId(m_username);
     m_nearList->setOwnId(m_username);
-    m_activityWatcher = new SourceWatchList(dataEngine("ocs"), this);
-    m_activityWatcher->setQuery("activity");
-    connect(m_activityWatcher, SIGNAL(keysAdded(QSet<QString>)), SLOT(newActivities(QSet<QString>)));
 }
 
 void OpenDesktop::connectGeolocation()
@@ -137,9 +133,6 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         // Friends activity
-        m_activityList = new ActivityList(dataEngine("ocs"), m_tabs);
-        m_tabs->addTab(i18n("News feed"), m_activityList);
-
         m_userWidget = new UserWidget(dataEngine("ocs"), m_tabs);
         m_tabs->addTab(i18n("Personal"), m_userWidget);
 
@@ -350,24 +343,6 @@ void OpenDesktop::saveGeoLocation()
     cg.writeEntry("geoDistance", m_geolocation->distance);
 
     emit configNeedsSaving();
-}
-
-
-void OpenDesktop::newActivities(const QSet<QString>& keys)
-{
-    // FIXME: This still needs to take into account which activities have already been displayed
-
-    // Don't mass-spam the user with activities
-    if (keys.size() <= 2) {
-        foreach (const QString& key, keys) {
-            Plasma::DataEngine::Data activity = m_activityWatcher->value(key).value<Plasma::DataEngine::Data>();
-            KNotification* notification = new KNotification("activity");
-            notification->setTitle("OpenDesktop activities");
-            notification->setText(activity.value("message").toString());
-            notification->setComponentData(KComponentData("plasma-applet-opendesktop", "plasma-applet-opendesktop", KComponentData::SkipMainComponentRegistration));
-            notification->sendEvent();
-        }
-    }
 }
 
 

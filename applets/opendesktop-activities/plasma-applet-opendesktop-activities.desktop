@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=openDesktop Activities
+Comment=Stay informed with the Social Desktop
+
+Icon=system-users
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_opendesktop_activities
+X-KDE-PluginInfo-Author=Eckhart Wörner
+X-KDE-PluginInfo-Email=ewoerner@kde.org
+X-KDE-PluginInfo-Name=opendesktop_activities
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+Keywords=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

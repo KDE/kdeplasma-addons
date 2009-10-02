@@ -70,7 +70,6 @@ class OpenDesktop : public Plasma::PopupApplet
         void switchDisplayedUser(const QString& id, bool switchToPersonal = true);
         void addFriend(const QString& id);
         void sendMessage(const QString& id);
-        void newActivities(const QSet<QString>& keys);
 
     private:
         void connectGeolocation();
@@ -91,10 +90,6 @@ class OpenDesktop : public Plasma::PopupApplet
 
         // Friends tab
         ContactList* m_friendList;
-
-        //Friends activity tab
-        ActivityList* m_activityList;
-        SourceWatchList* m_activityWatcher;
 
         // Nearby people tab
         ContactList* m_nearList;
