@@ -31,7 +31,7 @@ namespace RTM {
   enum State { Mutable, Hashed, RequestSent, RequestReceived };
   enum Permissions { None , Read, Write, Delete };
   const QString baseAuthUrl = "https://www.rememberthemilk.com/services/auth/?";
-  const QString baseMethodUrl = "https://api.rememberthemilk.com/services/rest/?";
+  const QString baseMethodUrl = "http://api.rememberthemilk.com/services/rest/?";
 
   /** Timlines are unsigned longs that map to a "session" in which
     actions are undoable */
