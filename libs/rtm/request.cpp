@@ -125,7 +125,6 @@ void RTM::Request::unsign() {
 
 QString RTM::Request::requestUrl()
 {
-  kDebug() << m_state << RTM::Mutable;
   switch(m_state) {
     case RTM::Mutable:
       sign();

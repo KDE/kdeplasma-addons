@@ -49,9 +49,9 @@ Q_OBJECT
     QString getTextPermissions(RTM::Permissions permissions);
     QString requestUrl();
     QString frob;
+    QString apiKey;
     Request *frobRequest;
     Request *tokenRequest;
-    QWebView* authPage;
 
   signals:
     void authUrlReady(QString authUrl);

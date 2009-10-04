@@ -32,11 +32,11 @@
 #include <QVBoxLayout>
 
 RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
-  : authPage(0)
+  : frobRequest(0),
+  tokenRequest(0)
 {
-  frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
-  tokenRequest = new RTM::Request("rtm.auth.getToken", apiKey, sharedSecret);
   arguments.insert("perms", getTextPermissions(permissions));
+  this->apiKey = apiKey;
   this->sharedSecret = sharedSecret;
   arguments.insert("api_key", apiKey);
   m_state = RTM::Mutable;
@@ -50,6 +50,10 @@ RTM::Auth::~Auth() {
 
 void RTM::Auth::showLoginWebpage()
 {
+  if (frobRequest)
+    frobRequest->deleteLater();
+  
+  frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
   connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal(RTM::Request*)));
   frobRequest->sendRequest();
 }
@@ -68,9 +72,9 @@ void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
   QWidget *authWidget = new QWidget();
   QVBoxLayout *layout = new QVBoxLayout(authWidget);
   QPushButton *button = new QPushButton(authWidget);
-  button->setText("Click Here After Authentication");
+  QWebView *authPage  = new QWebView(authWidget);
   
-  authPage = new QWebView(authWidget);
+  button->setText("Click Here After Authentication");
 
   authPage->setUrl(getAuthUrl());
   
@@ -90,7 +94,6 @@ void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
 
 
 void RTM::Auth::pageClosed() {
-  disconnect(authPage);
   continueAuthForToken();
 }
 
@@ -148,8 +151,12 @@ QString RTM::Auth::requestUrl() {
 void RTM::Auth::continueAuthForToken()
 {
   kDebug() << "Token Time";
-  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
+  if (tokenRequest)
+    tokenRequest->deleteLater();
+  
+  tokenRequest = new RTM::Request("rtm.auth.getToken", apiKey, sharedSecret);
   tokenRequest->addArgument("frob", arguments.value("frob"));
+  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
   tokenRequest->sendRequest();
 }
 

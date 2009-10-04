@@ -46,6 +46,9 @@ RTM::Session::Session(QString apiKey, QString sharedSecret, RTM::Permissions per
   d->apiKey = apiKey;
   d->sharedSecret = sharedSecret;
   d->permissions = permissions;
+  
+  connect(this, SIGNAL(tokenCheck(bool)), SLOT(handleValidToken(bool)));
+  
   setToken(token);
 }
 
@@ -101,15 +104,20 @@ QString RTM::Session::token() const {
 
 void RTM::Session::setToken(const QString& token)
 {
+  d->token = token;
+  d->tasks.clear(); //FIXME: Leak? Tasks/Lists are pointers.
+  d->lists.clear();
+  
+  checkToken();
+}
+
+void RTM::Session::handleValidToken(bool valid)
+{
   if (d->auth) {
     d->auth->deleteLater();
     d->auth = 0;
   }
-    
-  d->token = token;
-  d->tasks.clear(); //FIXME: Leak? Tasks/Lists are pointers.
-  d->lists.clear();
-  if (!checkToken()) {
+  if (!valid) {
     d->token.clear();
     d->auth = new RTM::Auth(d->permissions, d->apiKey, d->sharedSecret);
     d->authUrl = d->auth->getAuthUrl();
@@ -122,6 +130,7 @@ void RTM::Session::setToken(const QString& token)
   }
 }
 
+
 void RTM::Session::setTimeline(const RTM::Timeline& timeline) {
   d->timeline = timeline;
 }
@@ -131,35 +140,51 @@ void RTM::Session::continueAuthForToken()
   d->auth->continueAuthForToken();
 }
 
-bool RTM::Session::checkToken() {
-  if (d->token.isEmpty())
-    return false;
-  RTM::Request tokenRequest("rtm.auth.checkToken", d->apiKey, d->sharedSecret);
-  tokenRequest.addArgument("auth_token", d->token);
-  QString reply = tokenRequest.sendSynchronousRequest();
+void RTM::Session::checkToken() {
+  if (d->token.isEmpty()) {
+    emit tokenCheck(false);
+    return;
+  }
+  RTM::Request *tokenRequest = new RTM::Request("rtm.auth.checkToken", d->apiKey, d->sharedSecret);
+  tokenRequest->addArgument("auth_token", d->token);
+  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenCheckReply(RTM::Request*)));
+  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), tokenRequest, SLOT(deleteLater()));
+  tokenRequest->sendRequest();
+}
 
+
+void RTM::Session::tokenCheckReply(RTM::Request* response)
+{
+  QString reply = response->data();
+  
   if (!reply.contains(d->token)) {
     kDebug() << "Failed Token Check: " << reply;
     emit tokenCheck(false);
-    return false;
   }
   kDebug() << "Successful Token Check: " << reply;
   emit tokenCheck(true);
-  return true;
 }
 
-RTM::Timeline RTM::Session::createTimeline() {
+
+void RTM::Session::createTimeline() {
   RTM::Request *request = new RTM::Request("rtm.timelines.create", d->apiKey, d->sharedSecret);
   request->addArgument("auth_token", d->token);
-  QString reply = request->sendSynchronousRequest();
+  connect(request, SIGNAL(replyReceived(RTM::Request*)), SLOT(timelineReply(RTM::Request*)));
+  connect(request, SIGNAL(replyReceived(RTM::Request*)), request, SLOT(deleteLater()));
+  request->sendRequest();
+}
+
+void RTM::Session::timelineReply(RTM::Request* response)
+{
+  QString reply = response->data();
   QString timeline = reply.remove(0, reply.indexOf("<timeline>")+10);
   timeline.truncate(timeline.indexOf("</timeline>"));
   kDebug() << "Timeline: " << timeline;
-  request->deleteLater();
   d->timeline = timeline.toLong();
   d->lastRefresh = QDateTime();
-  return getTimeline();
+  emit timelineCreated(getTimeline());
 }
+
 
 
 void RTM::Session::handleResponse()

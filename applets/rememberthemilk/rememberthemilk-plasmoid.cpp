@@ -147,16 +147,6 @@ void RememberTheMilkPlasmoid::createConfigurationInterface(KConfigDialog* parent
   connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
   connect(m_authWidgetUi->authenticate, SIGNAL(clicked(bool)), this, SLOT(startAuth()));
   
-  if (m_authenticated) {
-    m_authWidgetUi->authStatus->setText(i18n("Authenticated"));
-    m_authWidgetUi->kled->setState(KLed::On);
-    m_authWidgetUi->kled->setColor(Qt::green);
-  } else {
-    m_authWidgetUi->authStatus->setText(i18n("Not Authenticated"));
-    m_authWidgetUi->kled->setState(KLed::Off); 
-    m_authWidgetUi->kled->setColor(Qt::red);
-  }
-  
   m_generalOptionsUi->sortType->setCurrentIndex(m_sortBy);
   
   KPageWidgetItem* general = parent->addPage(m_generalOptions, i18n("General"), "configure", i18n("General Configuration Options"));
@@ -190,6 +180,17 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
   if (name == "Auth") {
     m_authenticated = data.value("ValidToken").toBool();
     kDebug() << "Auth: " << m_authenticated;
+    
+    if (m_authenticated) {
+      m_authWidgetUi->authStatus->setText(i18n("Authenticated"));
+      m_authWidgetUi->kled->setState(KLed::On);
+      m_authWidgetUi->kled->setColor(Qt::green);
+    } else {
+      m_authWidgetUi->authStatus->setText(i18n("Not Authenticated"));
+      m_authWidgetUi->kled->setState(KLed::Off); 
+      m_authWidgetUi->kled->setColor(Qt::red);
+    }
+    
     if (m_authenticated) {
       setConfigurationRequired(false);
       m_token = data.value("Token").toString();
