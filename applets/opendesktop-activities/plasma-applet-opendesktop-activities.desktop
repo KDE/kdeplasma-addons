@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=openDesktop Activities
+Name[uk]=Простори дій OpenDesktop
+Name[x-test]=xxopenDesktop Activitiesxx
 Comment=Stay informed with the Social Desktop
+Comment[uk]=Отримуйте інформацію за допомогою соціальної стільниці
+Comment[x-test]=xxStay informed with the Social Desktopxx
 
 Icon=system-users
 Type=Service
