@@ -24,13 +24,12 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QCoreApplication>
+#include <QWebView>
+#include <QPushButton>
 
 #include <KDebug>
 #include <KIO/NetAccess>
-#include <KHTMLPart>
-#include <KHTMLView>
-#include <DOM/HTMLInputElement>
-#include <DOM/HTMLDocument>
+#include <QVBoxLayout>
 
 RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
   : authPage(0)
@@ -51,30 +50,42 @@ RTM::Auth::~Auth() {
 
 void RTM::Auth::showLoginWebpage()
 {
-  connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal()));
+  connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal(RTM::Request*)));
   frobRequest->sendRequest();
 }
 
 
-void RTM::Auth::showLoginWindowInternal()
+void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
 {
-  QString reply = frobRequest->readAll();
+  QString reply = rawReply->data();
+  //QString reply = rawReply->readAll(); //FIXME: I have no idea why this line isn't working?
   frob = reply.remove(0, reply.indexOf("<frob>")+6);
   frob.truncate(frob.indexOf("</frob>"));
   kDebug() << "Frob: " << frob;
   arguments.insert("frob", frob);
   
   
-  authPage = new KHTMLPart();
+  QWidget *authWidget = new QWidget();
+  QVBoxLayout *layout = new QVBoxLayout(authWidget);
+  QPushButton *button = new QPushButton(authWidget);
+  button->setText("Click Here After Authentication");
+  
+  authPage = new QWebView(authWidget);
 
-  authPage->openUrl(getAuthUrl());
+  authPage->setUrl(getAuthUrl());
   
-  authPage->widget()->resize(800, 600);
-  authPage->widget()->scroll(0, 200);
-  authPage->widget()->show();
+  authPage->resize(800, 600);
+  authPage->scroll(0, 200);
   
+  layout->addWidget(authPage);
+  layout->addWidget(button);
   
-  connect(authPage->widget(), SIGNAL(destroyed(QObject*)), SLOT(pageClosed()));
+ 
+  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(hide()));
+  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(deleteLater()));
+  connect(button, SIGNAL(clicked(bool)), SLOT(pageClosed())); // Last because it takes more time.
+  
+  authWidget->show();
 }
 
 
@@ -114,12 +125,14 @@ QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
 }
 
 QString RTM::Auth::requestUrl() {
-  kDebug() << "RTM::Auth::getRequestUrl()";
+  kDebug() << "RTM::Auth::getRequestUrl()" << m_state << RTM::Mutable;
   switch(m_state) {
     case RTM::Mutable:
       sign();
       break;
     case RTM::Hashed:
+      unsign();
+      sign();
       break;
     case RTM::RequestSent:
       break;
@@ -135,11 +148,19 @@ QString RTM::Auth::requestUrl() {
 void RTM::Auth::continueAuthForToken()
 {
   kDebug() << "Token Time";
+  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
   tokenRequest->addArgument("frob", arguments.value("frob"));
-  QString reply = tokenRequest->sendSynchronousRequest();
+  tokenRequest->sendRequest();
+}
 
+
+void RTM::Auth::tokenResponse(RTM::Request* response)
+{
+  QString reply = response->data();
+  kDebug() << "Reply: " << reply;
   QString token = reply.remove(0, reply.indexOf("<token>")+7);
   token.truncate(token.indexOf("</token>"));
   kDebug() << "Token: " << token;
   emit tokenReceived(token);
 }
+

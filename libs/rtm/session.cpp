@@ -94,7 +94,7 @@ QString RTM::Session::sharedSecret() const {
 RTM::Timeline RTM::Session::getTimeline() const {
   return d->timeline;
 }
-
+  
 QString RTM::Session::token() const {
   return d->token;
 }

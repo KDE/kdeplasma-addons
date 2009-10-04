@@ -119,12 +119,19 @@ void RTM::Request::sign() {
   m_state = RTM::Hashed;
 }
 
+void RTM::Request::unsign() {
+  arguments.remove("api_sig");
+}
+
 QString RTM::Request::requestUrl()
 {
+  kDebug() << m_state << RTM::Mutable;
   switch(m_state) {
     case RTM::Mutable:
       sign();
     case RTM::Hashed:
+      unsign();
+      sign();
       break;
     case RTM::RequestSent:
       break;

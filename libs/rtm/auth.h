@@ -30,8 +30,8 @@
 
 #include "request.h"
 
+class QWebView;
 
-class KHTMLPart;
 
 namespace RTM {
 
@@ -51,7 +51,7 @@ Q_OBJECT
     QString frob;
     Request *frobRequest;
     Request *tokenRequest;
-    KHTMLPart* authPage;
+    QWebView* authPage;
 
   signals:
     void authUrlReady(QString authUrl);
@@ -59,7 +59,9 @@ Q_OBJECT
 
   protected slots:
     void pageClosed();
-    void showLoginWindowInternal();
+    void showLoginWindowInternal(RTM::Request* rawReply);
+public slots:
+    void tokenResponse(RTM::Request*);
 };
 
 } // Namespace RTM

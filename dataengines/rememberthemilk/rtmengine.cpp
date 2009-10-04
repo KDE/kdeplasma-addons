@@ -33,8 +33,9 @@
 #include <rtm/rtm.h> 
 #include <rtm/session.h>
 
-const QString RtmEngine::apiKey = "54c4c997b087ba69b5700efd49f774d4";
-const QString RtmEngine::sharedSecret = "85dc83023257714a";
+const QString RtmEngine::apiKey = "631e881f0e5671d237c1a2a0a64d5b98";
+const QString RtmEngine::sharedSecret = "a1c48d8944bce414";
+
 
 RtmEngine::RtmEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args),
