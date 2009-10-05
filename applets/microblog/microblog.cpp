@@ -53,6 +53,7 @@
 #include <Plasma/FlashingLabel>
 #include <Plasma/IconWidget>
 #include <Plasma/SvgWidget>
+#include <Plasma/TabBar>
 #include <Plasma/TextBrowser>
 #include <Plasma/ScrollWidget>
 #include <Plasma/TextEdit>
@@ -242,6 +243,13 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_statusEdit->nativeWidget()->installEventFilter(this);
     m_headerLayout->addItem( statusEditFrame );
 
+    m_tabBar = new Plasma::TabBar(this);
+    m_tabBar->addTab("Timeline");
+    m_tabBar->addTab("Replies");
+    m_tabBar->addTab("Messages");
+    m_layout->addItem(m_tabBar);
+    connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged()));
+
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_tweetsWidget = new QGraphicsWidget;
     m_scrollWidget->setWidget(m_tweetsWidget);
@@ -268,6 +276,13 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_graphicsWidget->setPreferredSize(300, 400);
     return m_graphicsWidget;
+}
+
+void MicroBlog::modeChanged()
+{
+    m_tweetMap.clear();
+    m_lastTweet=0;
+    downloadHistory();
 }
 
 void MicroBlog::getWallet()
@@ -825,10 +840,20 @@ void MicroBlog::createTimelineService()
     }
 
     QString query;
-    if (m_includeFriends) {
-        query = QString("TimelineWithFriends:%1@%2");
-    } else {
-        query = QString("Timeline:%1@%2");
+    switch(m_tabBar->currentIndex()) {
+    case 2:
+        query = "Messages:%1@%2";
+        break;
+    case 1:
+        query = "Replies:%1@%2";
+        break;
+    default:
+        if(m_includeFriends) {
+            query = QString("TimelineWithFriends:%1@%2");
+        } else {
+            query = QString("Timeline:%1@%2");
+        }
+        break;
     }
 
     query = query.arg(m_username, m_serviceUrl);

@@ -52,6 +52,7 @@ namespace Plasma
     class WebContent;
     class Frame;
     class ServiceJob;
+    class TabBar;
     class TextBrowser;
     class ScrollWidget;
 }
@@ -100,6 +101,7 @@ class MicroBlog : public Plasma::PopupApplet
         void themeChanged();
         void scheduleShowTweets();
         void showTweets();
+        void modeChanged();
 
     protected:
         QString timeDescription( const QDateTime &dt );
@@ -141,6 +143,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::FlashingLabel *m_flash;
         Plasma::IconWidget *m_icon;
         Plasma::ScrollWidget *m_scrollWidget;
+        Plasma::TabBar *m_tabBar;
         QGraphicsWidget *m_tweetsWidget;
         QGraphicsLinearLayout *m_tweetsLayout;
         QGraphicsLinearLayout *m_layout;
