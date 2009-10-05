@@ -74,7 +74,7 @@ Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
-
+    delete m_icon;
     QString history;
     for (int i = 0; i < m_actionHistory.size(); ++i) {
         history.prepend(m_actionHistory.at(i)->text());
