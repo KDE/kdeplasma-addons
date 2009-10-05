@@ -444,9 +444,7 @@ void Pastebin::editTextServer()
 
     // avoid memory leaks as its not modal and the user can click again
     // on the edit button
-    if (m_servers) {
-        delete m_servers;
-    }
+    delete m_servers;
 
     m_servers = new QWidget();
     uiServers.setupUi(m_servers);
@@ -491,9 +489,7 @@ void Pastebin::editImageServer()
 
     // avoid memory leaks as its not modal and the user can click again
     // on the edit button
-    if (m_servers) {
-        delete m_servers;
-    }
+    delete m_servers;
 
     m_servers = new QWidget();
     uiServers.setupUi(m_servers);
