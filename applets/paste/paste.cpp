@@ -45,14 +45,15 @@ Paste::Paste(QObject *parent, const QVariantList &args)
 
 Paste::~Paste()
 {
-    delete m_list;
+    m_list->deleteLater();
+    m_list = 0;
 }
 
 void Paste::init()
 {
     cfg = globalConfig();
 
-    m_list = new ListForm();
+    m_list = new ListForm;
     connect(&cfg, SIGNAL(changed(const ConfigData&)), m_list, SLOT(setData(const ConfigData&)));
     connect(m_list, SIGNAL(textCopied()), this, SLOT(showOk()));
     m_list->setData(cfg);
