@@ -1,8 +1,14 @@
 [Desktop Entry]
 Name=openDesktop Activities
+Name[pt_BR]=Atividades do OpenDesktop
+Name[sv]=OpenDesktop aktiviteter
+Name[tr]=OpenDesktop Eylemleri
 Name[uk]=Простори дій OpenDesktop
 Name[x-test]=xxopenDesktop Activitiesxx
 Comment=Stay informed with the Social Desktop
+Comment[pt_BR]=Esteja informado com Ambiente de Trabalho Social
+Comment[sv]=Håll dig informerad med det sociala skrivbordet
+Comment[tr]=Sosyal Masaüstünü kullan, haberin olsun
 Comment[uk]=Отримуйте інформацію за допомогою соціальної стільниці
 Comment[x-test]=xxStay informed with the Social Desktopxx
 
