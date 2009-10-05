@@ -429,7 +429,8 @@ void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data
 
         //TODO: separate this and use a timer to update fuzzyDate
         //every minute.
-        for (int i = 0; i < m_list->size(); i++) {
+        const int listSize = m_list->size();
+        for (int i = 0; i < listSize; ++i) {
             uint timestamp = m_list->at(i).time;
             if (timestamp != 0) {
                 QDateTime datetime;
