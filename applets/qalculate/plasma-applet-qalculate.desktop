@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=Qalculate!
+Name[es]=¡Qalcular!
+Name[fr]=Qalculate!
+Name[gl]=Qalculate!
+Name[nds]=Qalculate!
+Name[pt]=Qalculate!
+Name[pt_BR]=Qalculate!
+Name[sv]=Beräkna!
+Name[tr]=Qalculate!
+Name[uk]=Qalculate!
+Name[x-test]=xxQalculate!xx
+Name[zh_TW]=Qalculate!
+Comment=A powerful mathematical equation solver
+Comment[pt]=Um sistema poderoso de resolução de equações matemáticas
+Comment[pt_BR]=Um sistema poderoso de resolução de equações matemáticas
+Comment[sv]=Ett kraftfullt verktyg för lösning av matematiska ekvationer
+Comment[tr]=Gelişmiş bir matematiksel eşitlik çözücü
+Comment[uk]=Потужний інструмент розв’язання рівнянь
+Comment[x-test]=xxA powerful mathematical equation solverxx
+Icon=qalculate-applet
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_qalculate
+X-KDE-PluginInfo-Author=Matteo Agostinelli
+X-KDE-PluginInfo-Email=agostinelli@gmail.com
+X-KDE-PluginInfo-Name=qalculate
+X-KDE-PluginInfo-Version=0.6
+X-KDE-PluginInfo-Website=http://wwwu.uni-klu.ac.at/magostin
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+

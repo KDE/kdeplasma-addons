@@ -1,0 +1,25 @@
+Qalculate! Applet
+-----------------
+
+You need KDE, version >= 4.2
+
+-- Build instructions --
+
+cd /where/your/applet/is/installed
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
+make
+sudo make install
+
+Restart plasma to load the applet 
+kquitapp plasma
+plasma
+
+or view it with 
+plasmoidviewer YourAppletName
+
+You might need to run kbuildsycoca4
+in order to get the .desktop file recognized.
+
+APPLET WEBPAGE: http://wwwu.uni-klu.ac.at/magostin/qalculate.html

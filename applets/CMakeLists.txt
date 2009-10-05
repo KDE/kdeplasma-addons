@@ -53,6 +53,12 @@ if(PHONON_FOUND)
   add_subdirectory(mediaplayer)
 endif(PHONON_FOUND)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/qalculate/cmake_modules)
+find_package(Qalculate)
+if ( QALCULATE_FOUND )
+    add_subdirectory(qalculate)
+endif( QALCULATE_FOUND )
+
 if(NOT WIN32)
   add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)

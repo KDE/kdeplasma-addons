@@ -1,0 +1,45 @@
+project(plasma-qalculate)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
+ 
+# Find the required Libaries
+find_package(KDE4 REQUIRED)
+include(KDE4Defaults)
+find_package(Qalculate REQUIRED)
+ 
+add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+include_directories(
+   ${CMAKE_SOURCE_DIR}
+   ${CMAKE_BINARY_DIR}
+   ${KDE4_INCLUDES}
+)
+		
+set(CMAKE_CXX_FLAGS "-fexceptions -Wno-deprecated")	
+ 
+# We add our source code here
+set(qalculate_SRCS     
+	qalculate_applet.cpp
+	qalculate_labels.cpp
+	qalculate_settings.cpp
+	qalculate_engine.cpp
+	qalculate_history.cpp
+)
+ 
+# Now make sure all files get to the right place
+kde4_add_plugin(plasma_applet_qalculate ${qalculate_SRCS})
+target_link_libraries(plasma_applet_qalculate 
+${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS} ${QALCULATE_LIBRARIES} ${CLN_LIBRARIES})
+ 
+install(TARGETS plasma_applet_qalculate
+        DESTINATION ${PLUGIN_INSTALL_DIR})
+ 
+install(FILES plasma-applet-qalculate.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})
+
+install(FILES
+icons/128x128/qalculate-applet.png
+DESTINATION ${SHARE_INSTALL_PREFIX}/icons/oxygen/128x128/apps/)
+
+install(FILES
+icons/48x48/qalculate-applet.png
+DESTINATION ${SHARE_INSTALL_PREFIX}/icons/oxygen/48x48/apps/)

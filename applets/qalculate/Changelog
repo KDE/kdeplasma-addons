@@ -1,0 +1,41 @@
+- 0.6
+Applet rewrite. Now using Plasma::PopupApplet
+Improved panel support
+Improved interface
+Added support for Reverse Polish Notation
+Added base conversion
+Added various options
+
+- 0.5.2
+KDE Proxy settings applied when downloading exchange rates
+
+- 0.5.1
+Fixed update of exchange rates
+Fixed input string conversion
+
+- 0.5
+Added button to copy results
+Added option to write results in input line edit
+Added notifications when applet is in panel
+Better integration in panel
+Various improvements
+
+- 0.4
+Plasmoid can be moved to panel
+Added possibility to copy results to clipboard
+
+- 0.3.1
+Compatibility with KDE 4.2
+Added icon
+
+- 0.3
+Added currency conversion
+Changed aspect ratio
+Minor changes
+
+- 0.2
+Improved formatting of the result
+Added more options
+
+- 0.1
+Initial version
