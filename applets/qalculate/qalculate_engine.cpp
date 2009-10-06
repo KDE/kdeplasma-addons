@@ -61,7 +61,7 @@ void QalculateEngine::updateExchangeRates()
 void QalculateEngine::updateResult(KJob* job)
 {
     if (job->error()) {
-        qDebug() << i18n("The exchange rates could not be updated. The following error has been reported: %1").arg(job->errorString());
+        kDebug() << i18n("The exchange rates could not be updated. The following error has been reported: %1",job->errorString());
     } else {
         // the exchange rates have been successfully updated, now load them
         m_currenciesLoaded = CALCULATOR->loadExchangeRates();
