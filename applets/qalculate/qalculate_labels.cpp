@@ -63,12 +63,12 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
         mstr += m.number().print(po, ips_n).c_str();
         if (!exp.empty()) {
             if (po.lower_case_e) {
-                mstr += "e";
+                mstr += 'e';
             } else {
                 STR_MARKUP_ADD_SMALL(mstr, "E");
             }
             if (exp_minus) {
-                mstr += "-";
+                mstr += '-';
             }
             mstr += exp.c_str();
         }
@@ -316,7 +316,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
         str.replace("_", " ");
         mstr += str;
 
-        mstr += "(";
+        mstr += '(';
         STR_MARKUP_END(mstr);
         mstr += "</a>";
 
@@ -564,7 +564,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             if (index > 0) {
                 STR_MARKUP_BEGIN(mstr);
                 mstr += CALCULATOR->getComma().c_str();
-                mstr += " ";
+                mstr += ' ';
                 STR_MARKUP_END(mstr);
             }
             ips_n.wrap = m[index].needsParenthesis(po, ips_n, m, index + 1, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
@@ -656,7 +656,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             ips_n.wrap = m[1][1].needsParenthesis(po, ips_n, m[1], 2, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[1][1], po, ips_n);
             do_space = !tstr.endsWith("valign=\"middle\">");
-            if (do_space) mstr += " ";
+            if (do_space) mstr += ' ';
             STR_MARKUP_END(mstr);
             mstr += tstr;
 
@@ -745,12 +745,12 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
                     if (ips.depth == 0 && po.use_unicode_signs && (*po.is_approximate || m.isApproximate()) && (!po.can_display_unicode_string_function || (*po.can_display_unicode_string_function)(SIGN_ALMOST_EQUAL, po.can_display_unicode_string_arg))) {
                         mstr += SIGN_ALMOST_EQUAL;
                     } else {
-                        mstr += "=";
+                        mstr += '=';
                     }
                 } else {
                     mstr += str;
                 }
-                if (do_space) mstr += " ";
+                if (do_space) mstr += ' ';
                 STR_MARKUP_END(mstr);
             }
             mstr += tstr;
