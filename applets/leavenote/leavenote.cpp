@@ -238,8 +238,8 @@ void LeaveNote::slotWaitForKNotes()
     }
 
     /* now we can empty the message cache */
-    QList<QHash<QString, QVariant> >::iterator i;
-    for (i = mMsgCache.begin(); i != mMsgCache.end(); ++i) {
+    QList<QHash<QString, QVariant> >::const_iterator i;
+    for (i = mMsgCache.constBegin(); i != mMsgCache.constEnd(); ++i) {
         createNote((*i)["title"].toString(),
                    (*i)["msg"].toString());
     }
