@@ -1,20 +1,6 @@
 project(plasma-qalculate)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
- 
-# Find the required Libaries
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
-find_package(Qalculate REQUIRED)
- 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-   ${CMAKE_SOURCE_DIR}
-   ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
-)
-		
-set(CMAKE_CXX_FLAGS "-fexceptions -Wno-deprecated")	
+set(CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS} -Wno-deprecated")	
  
 # We add our source code here
 set(qalculate_SRCS     
