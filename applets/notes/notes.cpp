@@ -277,7 +277,7 @@ Notes::Notes(QObject *parent, const QVariantList &args)
             f.close();
         }
     } else {
-#ifdef KTEXTEDIT_CLICKMSG_SUPPORT
+#if KDE_IS_VERSION(4,3,60)
         m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
 #endif
     }
