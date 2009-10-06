@@ -74,7 +74,7 @@ void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
   QPushButton *button = new QPushButton(authWidget);
   QWebView *authPage  = new QWebView(authWidget);
   
-  button->setText("Click Here After Authentication");
+  button->setText("Click here after you've logged in and authorized the applet");
 
   authPage->setUrl(getAuthUrl());
   
