@@ -52,7 +52,6 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
 {
     resize(200, 200);
     m_svg = new Plasma::Svg(this);
-    m_svg->resize(geometry().width(), geometry().height());
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
     m_svg->setContainsMultipleImages(true);
 
@@ -87,6 +86,8 @@ Bubble::interpolateValue()
 void
 Bubble::init()
 {
+    m_svg->resize(geometry().width(), geometry().height());
+  
     m_sensorModel = new QStandardItemModel(this);
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
