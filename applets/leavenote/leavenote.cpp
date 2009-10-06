@@ -22,6 +22,8 @@
  */
 
 #include "leavenote.h"
+#include <kstandarddirs.h>
+#include <kmessagebox.h>
 
 #include <QtCore/QProcess>
 #include <QtCore/QHash>
@@ -199,14 +201,20 @@ void LeaveNote::slotSend()
         if (mTimer && mTimer->isActive()) {
             return;
         }
+        if (KStandardDirs::findExe("knotes").isEmpty())
+        {
+            KMessageBox::error( 0, i18n( "knotes can not find. Please install it to be able to send it" ) );
+        }
+        else
+        {
+            // TODO fine grain for errors after start of KNotes
+            QProcess knotes(this);
+            knotes.startDetached("knotes", QStringList() << "--skip-note");
+            knotes.waitForStarted();
 
-        // TODO fine grain for errors after start of KNotes
-        QProcess knotes(this);
-        knotes.startDetached("knotes", QStringList() << "--skip-note");
-        knotes.waitForStarted();
-
-        /* wait for the dbus interface to settle */
-        mTimer->singleShot(10000, this, SLOT(slotWaitForKNotes()));
+            /* wait for the dbus interface to settle */
+            mTimer->singleShot(10000, this, SLOT(slotWaitForKNotes()));
+        }
 
     } else {
         createNote(title, msg);
