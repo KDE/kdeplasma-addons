@@ -28,13 +28,10 @@
 #include <libqalculate/Variable.h>
 #include <libqalculate/Function.h>
 
-#include <QFile>
-#include <QHttp>
 #include <QApplication>
 #include <QClipboard>
 #include <QString>
 
-#include <KProtocolManager>
 #include <KLocale>
 #include <KIO/Job>
 #include <KIO/NetAccess>
