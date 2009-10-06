@@ -150,6 +150,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     layout->addWidget(m_baseSpin, 7, 1);
     layout->addWidget(baseDisplayLabel, 8, 0);
     layout->addWidget(m_baseDisplaySpin, 8, 1);
+    layout->setRowStretch(9, 10);
 
     m_configDialog->addPage(page, i18nc("Evaluation", "Evaluation Settings"), m_applet->icon());
     
@@ -195,7 +196,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     printLayout->addWidget(m_allPrefixesCheck, 3, 0);
     printLayout->addWidget(m_denominatorPrefixCheck, 4, 0);
     printLayout->addWidget(m_negativeExponentsCheck, 5, 0);
-    printLayout->setRowStretch(5, 1);
+    printLayout->setRowStretch(6, 10);
 
     m_configDialog->addPage(printPage, i18nc("Print", "Print Settings"), m_applet->icon());
 
@@ -205,6 +206,7 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_exchangeRatesCheck = new QCheckBox(i18n("Update exchange rates at startup"), currencyPage);
     m_exchangeRatesCheck->setCheckState(m_updateExchangeRatesAtStartup ? Qt::Checked : Qt::Unchecked);
     currencyLayout->addWidget(m_exchangeRatesCheck, 0, 0);
+    currencyLayout->setRowStretch(1, 10);
 
     m_configDialog->addPage(currencyPage, i18nc("Currency", "Currency Settings"), m_applet->icon());
 }
