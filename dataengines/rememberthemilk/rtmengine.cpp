@@ -117,23 +117,23 @@ bool RtmEngine::updateSourceEvent(const QString& source) {
     return true;
   }
   else if (source.startsWith("Lists")) {
-    ListsSource *listssoruce = dynamic_cast<ListsSource*>(containerForSource(source)); 
+    ListsSource *listssoruce = static_cast<ListsSource*>(containerForSource(source)); 
     listssoruce->refresh();
     return true;
   }
   else if (source.startsWith("Tasks")) {
-    TasksSource *taskssource = dynamic_cast<TasksSource*>(containerForSource(source)); 
+    TasksSource *taskssource = static_cast<TasksSource*>(containerForSource(source)); 
     taskssource->refresh();
     return true;
   }
   else if (source.startsWith("List:")) {
-    ListSource *listsource = dynamic_cast<ListSource*>(containerForSource(source)); 
+    ListSource *listsource = static_cast<ListSource*>(containerForSource(source)); 
     if (listsource)
       listsource->update();
     return true;
   }
   else if (source.startsWith("Task:")) {
-    TaskSource *tasksource = dynamic_cast<TaskSource*>(containerForSource(source)); 
+    TaskSource *tasksource = static_cast<TaskSource*>(containerForSource(source)); 
     if (tasksource)
       tasksource->update();
     return true;
