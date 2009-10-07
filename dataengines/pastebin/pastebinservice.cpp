@@ -35,9 +35,7 @@ Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
 
     // it's a text
     if (operation == "text") {
-        if (m_textServer) {
-            delete m_textServer;
-        }
+        delete m_textServer;
 
         int backend = parameters["backend"].toInt();
         switch(backend) {
@@ -57,9 +55,7 @@ Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
 
         postText(parameters);
     } else {
-        if (m_imageServer) {
-            delete m_imageServer;
-        }
+        delete m_imageServer;
 
         int backend = parameters["backend"].toInt();
         switch(backend) {
