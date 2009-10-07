@@ -424,7 +424,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.setupUi(general);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    connect( parent, SIGNAL( cancelClicked() ), this, SLOT( closeServerDialog() ) );
+    connect(parent, SIGNAL(cancelClicked()), this, SLOT(closeServerDialog()));
     parent->addPage(general, i18n("General"), Applet::icon());
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
@@ -451,7 +451,7 @@ void Pastebin::editTextServer()
     uiServers.setupUi(m_servers);
     m_servers->show();
     connect(uiServers.buttonBox, SIGNAL(accepted()), this, SLOT(saveTextServer()));
-    connect( uiServers.buttonBox, SIGNAL( rejected() ), this, SLOT( closeServerDialog() ) );
+    connect(uiServers.buttonBox, SIGNAL(rejected()), this, SLOT(closeServerDialog()));
     QString serverAddress;
     switch(uiConfig.textServer->currentIndex()) {
         case Pastebin::PASTEBINCA:
