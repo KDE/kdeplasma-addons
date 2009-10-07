@@ -244,9 +244,9 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_headerLayout->addItem( statusEditFrame );
 
     m_tabBar = new Plasma::TabBar(this);
-    m_tabBar->addTab("Timeline");
-    m_tabBar->addTab("Replies");
-    m_tabBar->addTab("Messages");
+    m_tabBar->addTab(i18n("Timeline"));
+    m_tabBar->addTab(i18n("Replies"));
+    m_tabBar->addTab(i18n("Messages"));
     m_layout->addItem(m_tabBar);
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged()));
 
