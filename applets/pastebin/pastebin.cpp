@@ -424,6 +424,7 @@ void Pastebin::createConfigurationInterface(KConfigDialog *parent)
     uiConfig.setupUi(general);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect( parent, SIGNAL( cancelClicked() ), this, SLOT( closeServerDialog() ) );
     parent->addPage(general, i18n("General"), Applet::icon());
 
     uiConfig.textServer->setCurrentIndex(m_textBackend);
@@ -555,6 +556,7 @@ void Pastebin::configAccepted()
     cg.writeEntry("imagePrivacy", m_imagePrivacy);
     cg.writeEntry("HistorySize", historySize);
 
+    closeServerDialog();
     emit configNeedsSaving();
 }
 
