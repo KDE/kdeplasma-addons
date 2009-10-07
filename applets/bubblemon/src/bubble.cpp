@@ -207,6 +207,9 @@ Bubble::showLabel(bool show)
 void
 Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 {
+    if(configurationRequired()){
+        return;
+    }
     m_svg->paint(painter, m_svg->elementRect("background"), "background");
     if (m_max>0 && m_val>0) {
         QRect clipRect(contentsRect);
