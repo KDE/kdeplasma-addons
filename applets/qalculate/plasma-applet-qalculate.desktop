@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Qalculate!
+Name[pt]=Qalculate!
+Name[pt_BR]=Qalculate!
+Name[uk]=Qalculate!
+Name[x-test]=xxQalculate!xx
 Comment=A powerful mathematical equation solver
+Comment[pt]=Um sistema de resolução de equações matemáticas poderoso
+Comment[pt_BR]=Um sistema poderoso de resolução de equações matemáticas
+Comment[uk]=Потужний інструмент розв’язання рівнянь
+Comment[x-test]=xxA powerful mathematical equation solverxx
 Icon=qalculate-applet
 Type=Service
 
