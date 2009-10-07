@@ -107,7 +107,7 @@ private slots:
     void saveTextServer();
     void editImageServer();
     void saveImageServer();
-
+    void closeServerDialog();
 private:
     int iconSize();
     void showOverlay(bool show);

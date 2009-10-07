@@ -13,49 +13,31 @@
   <property name="windowTitle">
    <string>Pastebin Server Config Dialog</string>
   </property>
-  <widget class="KLineEdit" name="server">
-   <property name="geometry">
-    <rect>
-     <x>115</x>
-     <y>5</y>
-     <width>148</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>111</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Server address:</string>
-   </property>
-  </widget>
-  <widget class="KPushButton" name="saveButton">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>40</y>
-     <width>81</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&amp;OK</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Server address:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="server"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>

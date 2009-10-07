@@ -449,8 +449,8 @@ void Pastebin::editTextServer()
     m_servers = new QWidget();
     uiServers.setupUi(m_servers);
     m_servers->show();
-    connect(uiServers.saveButton, SIGNAL(clicked()), this, SLOT(saveTextServer()));
-
+    connect(uiServers.buttonBox, SIGNAL(accepted()), this, SLOT(saveTextServer()));
+    connect( uiServers.buttonBox, SIGNAL( rejected() ), this, SLOT( closeServerDialog() ) );
     QString serverAddress;
     switch(uiConfig.textServer->currentIndex()) {
         case Pastebin::PASTEBINCA:
@@ -479,6 +479,11 @@ void Pastebin::saveTextServer()
             break;
     }
 
+    closeServerDialog();
+}
+
+void Pastebin::closeServerDialog()
+{
     delete m_servers;
     m_servers = 0;
 }
@@ -494,8 +499,8 @@ void Pastebin::editImageServer()
     m_servers = new QWidget();
     uiServers.setupUi(m_servers);
     m_servers->show();
-    connect(uiServers.saveButton, SIGNAL(clicked()), this, SLOT(saveImageServer()));
-
+    connect(uiServers.buttonBox, SIGNAL(accepted()), this, SLOT(saveImageServer()));
+    connect( uiServers.buttonBox, SIGNAL( rejected() ), this, SLOT( closeServerDialog() ) );
     QString serverAddress;
     switch(uiConfig.imageServer->currentIndex()) {
         case Pastebin::IMAGEBINCA:
@@ -532,9 +537,7 @@ void Pastebin::saveImageServer()
             cg.writeEntry("simplestimagehosting", uiServers.server->text());
             break;
     }
-
-    delete m_servers;
-    m_servers = 0;
+    closeServerDialog();
 }
 
 void Pastebin::configAccepted()
