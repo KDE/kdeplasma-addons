@@ -159,6 +159,12 @@ Bubble::constraintsEvent(Plasma::Constraints constraints)
     if (constraints & Plasma::FormFactorConstraint) {
         setBackgroundHints(NoBackground);
     }
+    
+    if (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter) {
+        setMinimumSize(30,30);
+    } else {
+        setMinimumSize(0,0);
+    }
 }
 
 void
