@@ -174,6 +174,8 @@ QWidget* Virus::createConfigurationInterface(QWidget* parent)
     
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     
+    connect(m_uiVirus.m_view, SIGNAL(clicked(const QModelIndex &)), this, SLOT(modified()));
+    
     return m_configWidget;
 }
 

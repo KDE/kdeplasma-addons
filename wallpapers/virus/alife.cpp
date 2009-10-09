@@ -603,23 +603,19 @@ void Alife::virusMove()
 
 void Alife::updateAffectedArea(int x, int y)
 {
-    if(m_tl.x() > x){
+    if (m_tl.x() > x) {
         m_tl.setX(x);
-    }
-    
-    if(m_tl.y() > y){
-        m_tl.setY(y);
-    }
-    
-    if(m_br.x() < x){
+    }else if (m_br.x() < x) {
         m_br.setX(x);
     }
     
-    if(m_br.y() < y){
+    if (m_tl.y() > y) {
+        m_tl.setY(y);
+    } else if(m_br.y() < y) {
         m_br.setY(y);
     }
 }
 
-QRect Alife::updatedArea(){
+QRect Alife::updatedArea(){  
     return QRect(m_tl, m_br);
 }
