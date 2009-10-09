@@ -203,7 +203,7 @@ void LeaveNote::slotSend()
         }
         if (KStandardDirs::findExe("knotes").isEmpty())
         {
-            KMessageBox::error( 0, i18n( "knotes can not find. Please install it to be able to send it" ) );
+            KMessageBox::error( 0, i18n( "knotes cannot be found. Please install it to be able to send a note." ) );
         }
         else
         {

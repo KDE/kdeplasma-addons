@@ -79,7 +79,7 @@ void Picture::setPicture(const KUrl &currentUrl)
         m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
         image = QPixmap(m_defaultImage);
-        m_message = i18n("Loading image ...");
+        m_message = i18n("Loading image...");
     } else {
         if (currentUrl.isEmpty()) {
             image = QPixmap(m_defaultImage);

@@ -69,7 +69,7 @@ void PanelIcon::initKeyboard() {
 	m_plasmaboard->resetKeyboard();
 	if (extendedMode) {
 	    m_plasmaboard->initExtendedKeyboard();
-	    m_plasmaboard->switcher->setText("<a href=\"#test\" style=\"color:"+Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).name()+";\">"+i18n("Less Keys")+"</a>");
+	    m_plasmaboard->switcher->setText("<a href=\"#test\" style=\"color:"+Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).name()+";\">"+i18n("Fewer Keys")+"</a>");
 	}
 	else{
 	    m_plasmaboard->switcher->setText("<a href=\"#test\" style=\"color:"+Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).name()+";\">"+i18n("More Keys")+"</a>");

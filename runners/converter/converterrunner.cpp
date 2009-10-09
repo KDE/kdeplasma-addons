@@ -135,7 +135,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
                     Plasma::RunnerContext::NetworkLocation);
 
     QString description = i18n("Converts the value of :q: when :q: is made up of "
-                               "\"value unit [>, to, as, in] value\". You can use "
+                               "\"value unit [>, to, as, in] value\". You can use the "
                                "Unit converter applet to find all available units.");
     addSyntax(Plasma::RunnerSyntax("=:q:", description));
 }

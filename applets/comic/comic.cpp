@@ -926,7 +926,7 @@ void ComicApplet::buttonBar()
 
             mZoomButton = new Plasma::PushButton( mFrame );
             mZoomButton->nativeWidget()->setIcon( KIcon( "zoom-original" ) );
-            mZoomButton->nativeWidget()->setToolTip( i18n( "Actual size in a different view. Press Middle-Mouse-Button on the comic alternatively." ) );
+            mZoomButton->nativeWidget()->setToolTip( i18n( "Show at actual size in a different view.  Alternatively, click with the middle mouse button on the comic." ) );
             mZoomButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
             mZoomButton->setMaximumSize( IconSize( KIconLoader::MainToolbar ), IconSize( KIconLoader::MainToolbar ) );
             connect( mZoomButton, SIGNAL( clicked() ), this, SLOT( fullView() ) );
