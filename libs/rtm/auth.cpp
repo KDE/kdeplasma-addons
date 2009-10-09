@@ -30,6 +30,7 @@
 #include <KDebug>
 #include <KIO/NetAccess>
 #include <QVBoxLayout>
+#include <KLocale>
 
 RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
   : frobRequest(0),
@@ -74,7 +75,7 @@ void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
   QPushButton *button = new QPushButton(authWidget);
   QWebView *authPage  = new QWebView(authWidget);
   
-  button->setText("Click here after you've logged in and authorized the applet");
+  button->setText(i18n("Click here after you've logged in and authorized the applet"));
 
   authPage->setUrl(getAuthUrl());
   
