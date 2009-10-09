@@ -85,8 +85,13 @@ class Alife : public QThread {
     void setImage(QImage image);
 
     void createViruses(int amount);
+    
+    QRect updatedArea();
 
   protected:
+    
+    void updateAffectedArea(int x, int y);
+    
     struct cell ** m_cells;
     QList<struct cell*>m_livingCells;
 
@@ -107,6 +112,8 @@ class Alife : public QThread {
     int m_current_eat;
     int m_current_eat_best;
     QMutex mutex;
+    
+    QPoint m_tl, m_br;
 };
 
 #endif

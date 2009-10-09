@@ -197,6 +197,7 @@ void Alife::executeCell(int id)
                 if(moveCell(id, facing)){
                     if(pixelBackup != pixel) {
                         m_image.setPixel(cell->x, cell->y, pixel );
+                        updateAffectedArea(cell->x, cell->y);
                     }
                     cell = m_livingCells.at(id);
                     pixel = m_image.pixel(cell->x, cell->y);
@@ -360,6 +361,7 @@ void Alife::executeCell(int id)
 
     if(pixelBackup != pixel) {
         m_image.setPixel(cell->x, cell->y, pixel );
+        updateAffectedArea(cell->x, cell->y);
     }
 
     if(cell->energy <= 0) {
@@ -528,6 +530,9 @@ void Alife::run(){
 //performance critical
 void Alife::virusMove()
 {
+    m_tl = QPoint(m_width, m_height);
+    m_br = QPoint(0,0);
+  
     m_current_eat = qMax(MAX_EAT, (int)(((double)m_livingCells.size()/ (double) (m_maxViruses / 4.0)) * MAX_EAT));
     m_current_eat_best = qMax(MIN_EAT, (int)(((double)m_livingCells.size()/ (double) (m_maxViruses / 4.0)) * (MIN_EAT * 2)));
     //kDebug() << m_current_eat_best << m_current_eat << m_livingCells.size() << m_maxViruses;
@@ -587,10 +592,34 @@ void Alife::virusMove()
         for(int i = 0; i < size; i++) {
             struct cell* cell = m_livingCells.at(i);
             newImage.setPixel(cell->x,cell->y,qRgb(cell->r,cell->g,cell->b));
+            updateAffectedArea(cell->x,cell->y);
         }
 
         m_current = newImage;
     } else {
         m_current = m_image;
     }
+}
+
+void Alife::updateAffectedArea(int x, int y)
+{
+    if(m_tl.x() > x){
+        m_tl.setX(x);
+    }
+    
+    if(m_tl.y() > y){
+        m_tl.setY(y);
+    }
+    
+    if(m_br.x() < x){
+        m_br.setX(x);
+    }
+    
+    if(m_br.y() < y){
+        m_br.setY(y);
+    }
+}
+
+QRect Alife::updatedArea(){
+    return QRect(m_tl, m_br);
 }

@@ -91,7 +91,7 @@ void Virus::requestUpdate()
 void Virus::virusUpdated()
 {
     m_pixmap = QPixmap::fromImage(alife.currentImage());
-    emit update(boundingRect());
+    emit update(alife.updatedArea());
     m_timer.start(alife.getUpdateInterval());
 }
 
