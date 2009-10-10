@@ -31,11 +31,12 @@
 
 class ArrowWidget;
 class ConfigWidget;
-class FadingItem;
 class FullViewWidget;
 class ImageWidget;
-class QTimer;
 class QAction;
+class QGraphicsLayout;
+class QPropertyAnimation;
+class QTimer;
 
 namespace Plasma {
 class Frame;
@@ -144,7 +145,7 @@ class ComicApplet : public Plasma::Applet
         QSizeF mIdealSize;
         Plasma::DataEngine *mEngine;
         Plasma::Frame *mFrame;
-        FadingItem *mFadingItem;
+        QPropertyAnimation *mFrameAnim;
         Plasma::Label *mLabelId;
         Plasma::Label *mLabelTop;
         Plasma::Label *mLabelUrl;

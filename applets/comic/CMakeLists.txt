@@ -4,7 +4,6 @@ set(comic_SRCS
     comic.cpp
     configwidget.cpp
     fullviewwidget.cpp
-    fadingitem.cpp
     imagewidget.cpp
     arrowwidget.cpp)
 

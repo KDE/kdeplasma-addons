@@ -21,6 +21,7 @@
 
 #include "comic.h"
 
+#include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
 #include <QtGui/QAction>
 #include <QtGui/QGraphicsLinearLayout>
@@ -59,7 +60,6 @@
 #include "arrowwidget.h"
 #include "configwidget.h"
 #include "fullviewwidget.h"
-#include "fadingitem.h"
 #include "imagewidget.h"
 
 //NOTE based on GotoPageDialog KDE/kdegraphics/okular/part.cpp
@@ -121,7 +121,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
       mActionShop( 0 ),
       mEngine( 0 ),
       mFrame( 0 ),
-      mFadingItem( 0 ),
+      mFrameAnim( 0 ),
       mPrevButton( 0 ),
       mNextButton( 0 ),
       mZoomButton( 0 )
@@ -883,8 +883,9 @@ void ComicApplet::constraintsEvent( Plasma::Constraints constraints )
 
 void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 {
-    if ( !configurationRequired() && mFadingItem && !mFadingItem->isVisible() ) {
-        mFadingItem->showItem();
+    if ( !configurationRequired() && mArrowsOnHover && mFrameAnim ) {
+        mFrameAnim->setDirection( QAbstractAnimation::Forward );
+        mFrameAnim->start();
     }
 
     Applet::hoverEnterEvent( event );
@@ -892,8 +893,9 @@ void ComicApplet::hoverEnterEvent( QGraphicsSceneHoverEvent *event )
 
 void ComicApplet::hoverLeaveEvent( QGraphicsSceneHoverEvent *event )
 {
-    if ( mFadingItem && mFadingItem->isVisible() ) {
-        mFadingItem->hideItem();
+    if ( mArrowsOnHover && mFrameAnim ) {
+        mFrameAnim->setDirection( QAbstractAnimation::Backward );
+        mFrameAnim->start();
     }
 
     Applet::hoverLeaveEvent( event );
@@ -942,18 +944,22 @@ void ComicApplet::buttonBar()
             mFrame->setFrameShadow( Plasma::Frame::Raised );
             // To get correct frame size in constraintsEvent
             l->activate();
-            mFrame->hide();
-            mFadingItem = new FadingItem( mFrame );
-            mFadingItem->hide();
+            mFrame->setOpacity( 0.0 );
+
+            mFrameAnim = new QPropertyAnimation( mFrame, "opacity", mFrame );
+            mFrameAnim->setDuration( 100 );
+            mFrameAnim->setStartValue( 0.0 );
+            mFrameAnim->setEndValue( 1.0 );
+
             // Set frame position
             constraintsEvent( Plasma::SizeConstraint );
         }
     } else {
         delete mFrame;
         mFrame = 0;
+        mFrameAnim = 0;
         mPrevButton = 0;
         mNextButton = 0;
-        mFadingItem = 0;
     }
 }
 
