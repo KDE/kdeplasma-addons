@@ -399,7 +399,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
 
             qulonglong i = id.toULongLong();
             //kDebug() << i << m_lastTweet;
-            if (1||i > m_lastTweet) {
+            if (i > m_lastTweet) {
                 newCount++;
                 QVariant v = data.value(id);
                 //Warning: This function is not available with MSVC 6
