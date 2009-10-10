@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KnowledgeBase
+Name[en_GB]=KnowledgeBase
 Name[nb]=Kunnskapsbase
 Name[nds]=KnowledgeBase
 Name[pt]=Base de Conhecimento
@@ -9,6 +10,7 @@ Name[tr]=Bilgi Tabanı
 Name[uk]=База знань
 Name[x-test]=xxKnowledgeBasexx
 Comment=Opendesktop Knowledgebase
+Comment[en_GB]=Opendesktop Knowledgebase
 Comment[nb]=Opendesktop kunnskapsbase
 Comment[nds]=Opendesktop-Wetendatenbank
 Comment[pt]=Base de Conhecimento do OpenDesktop
