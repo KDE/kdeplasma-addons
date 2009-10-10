@@ -394,7 +394,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
 
         //add the newbies
         int newCount = 0;
-        ulong maxId = m_lastTweet;
+        qulonglong maxId = m_lastTweet;
         foreach (const QString &id, data.keys()) {
 
             qulonglong i = id.toULongLong();
@@ -479,7 +479,7 @@ void MicroBlog::showTweets()
     // Add more tweetWidgets if there are not enough
 
     if (m_tweetMap.count() > m_historySize) {
-        QMap<ulong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.begin();
+        QMap<qulonglong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.begin();
         while (it != m_tweetMap.end() && m_tweetMap.count() > m_historySize) {
             it = m_tweetMap.erase(it);
         }
@@ -536,7 +536,7 @@ void MicroBlog::showTweets()
     }
 
     int i = 0;
-    QMap<ulong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
+    QMap<qulonglong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
     while (it != m_tweetMap.begin()) {
         Plasma::DataEngine::Data &tweetData = *(--it);
         QString user = tweetData.value("User").toString();

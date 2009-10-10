@@ -168,10 +168,10 @@ class MicroBlog : public Plasma::PopupApplet
         QString m_curTimeline;
 
         QMap<QString, QPixmap> m_pictureMap;
-        QMap<ulong, Plasma::DataEngine::Data> m_tweetMap;
+        QMap<qulonglong, Plasma::DataEngine::Data> m_tweetMap;
         QList<Tweet> m_tweetWidgets;
 
-        ulong m_lastTweet;
+        qulonglong m_lastTweet;
         KWallet::Wallet *m_wallet;
         enum WalletWait { None=0, Read, Write };
         WalletWait m_walletWait;
