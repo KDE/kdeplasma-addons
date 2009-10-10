@@ -396,14 +396,16 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
         int newCount = 0;
         ulong maxId = m_lastTweet;
         foreach (const QString &id, data.keys()) {
-            ulong i = id.toULong();
+
+            qulonglong i = id.toULongLong();
             //kDebug() << i << m_lastTweet;
-            if (i > m_lastTweet) {
+            if (1||i > m_lastTweet) {
                 newCount++;
                 QVariant v = data.value(id);
                 //Warning: This function is not available with MSVC 6
                 Plasma::DataEngine::Data t = v.value<Plasma::DataEngine::Data>();
                 m_tweetMap[i] = t;
+
                 if (i > maxId) {
                     maxId = i;
                 }
