@@ -35,6 +35,7 @@ class KTextEdit;
 class KTextBrowser;
 class QCheckBox;
 class QGraphicsLinearLayout;
+class QGraphicsAnchorLayout;
 class QGraphicsProxyWidget;
 class KColorScheme;
 
@@ -147,7 +148,7 @@ class MicroBlog : public Plasma::PopupApplet
         QGraphicsWidget *m_tweetsWidget;
         QGraphicsLinearLayout *m_tweetsLayout;
         QGraphicsLinearLayout *m_layout;
-        QGraphicsLinearLayout *m_headerLayout;
+        QGraphicsAnchorLayout *m_headerLayout;
         QGraphicsWidget *m_graphicsWidget;
         QPixmap m_popupIcon;
 

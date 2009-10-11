@@ -27,6 +27,7 @@
 #include <QFontMetrics>
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsAnchorLayout>
 #include <QGraphicsGridLayout>
 #include <QGraphicsProxyWidget>
 #include <QAction>
@@ -210,27 +211,27 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_layout->addItem(flashLayout);
 
     Plasma::Frame *headerFrame = new Plasma::Frame(this);
-    m_headerLayout = new QGraphicsLinearLayout( Qt::Horizontal, headerFrame );
-    m_headerLayout->setContentsMargins( 5, 5, 5, 10 );
+    m_headerLayout = new QGraphicsAnchorLayout(headerFrame);
     m_headerLayout->setSpacing( 5 );
-    m_layout->addItem( headerFrame );
+    m_layout->addItem(headerFrame);
 
 
-    m_icon = new Plasma::IconWidget(this);
+    m_icon = new Plasma::IconWidget(headerFrame);
     m_icon->setIcon(KIcon("user-identity"));
     m_icon->setText(m_username);
     m_icon->setTextBackgroundColor(QColor());
     QSizeF iconSize = m_icon->sizeFromIconSize(48);
     m_icon->setMinimumSize( iconSize );
     m_icon->setMaximumSize( iconSize );
-    m_headerLayout->addItem( m_icon );
+    m_headerLayout->addAnchor(m_icon, Qt::AnchorVerticalCenter, m_headerLayout, Qt::AnchorVerticalCenter);
+    m_headerLayout->addAnchor(m_icon, Qt::AnchorLeft, m_headerLayout, Qt::AnchorLeft);
 
-    Plasma::Frame *statusEditFrame = new Plasma::Frame(this);
+    Plasma::Frame *statusEditFrame = new Plasma::Frame(headerFrame);
 
-    statusEditFrame->setMaximumHeight(fm.height() * 4);
     statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
     m_statusEdit = new Plasma::TextEdit(this);
+    m_statusEdit->setPreferredHeight(fm.height() * 4);
 
     connect(m_statusEdit, SIGNAL(textChanged()), this, SLOT(editTextChanged()));
     statusEditLayout->addItem(m_statusEdit);
@@ -241,7 +242,9 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     editPal.setColor(QPalette::Text, m_colorScheme->foreground().color());
     m_statusEdit->nativeWidget()->setPalette(editPal);
     m_statusEdit->nativeWidget()->installEventFilter(this);
-    m_headerLayout->addItem( statusEditFrame );
+    m_headerLayout->addAnchor(m_icon, Qt::AnchorRight, statusEditFrame, Qt::AnchorLeft);
+    m_headerLayout->addAnchors(statusEditFrame, m_headerLayout, Qt::Vertical);
+    m_headerLayout->addAnchor(statusEditFrame, Qt::AnchorRight, m_headerLayout, Qt::AnchorRight);
 
     m_tabBar = new Plasma::TabBar(this);
     m_tabBar->addTab(i18n("Timeline"));
