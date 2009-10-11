@@ -181,10 +181,10 @@ bool LeaveNote::checkKNotesDBusInterface()
 
 void LeaveNote::slotSend()
 {
-    incrementMessageCount();
-
     if (mTextEdit->nativeWidget()->toPlainText().isEmpty())
         return;
+
+    incrementMessageCount();
 
     QString time = KGlobal::locale()->formatTime(KDateTime::currentLocalDateTime().time());
     QString title = i18nc("String + time", "Somebody has left a note at %1", time);
