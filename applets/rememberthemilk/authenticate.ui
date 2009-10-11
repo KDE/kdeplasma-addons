@@ -112,7 +112,7 @@ p, li { white-space: pre-wrap; }
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
        <property name="url">
-        <string>http://www.rememberthemilk.com/signup/</string>
+        <string>https://www.rememberthemilk.com/signup/</string>
        </property>
       </widget>
      </item>
