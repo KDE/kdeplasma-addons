@@ -39,7 +39,6 @@
 Picture::Picture(QObject *parent)
 : QObject(parent)
 {
-    m_message = QString();
     m_defaultImage = KGlobal::dirs()->findResource("data", "plasma-applet-frame/picture-frame-default.jpg");
 
     // listen for changes to the file we're displaying
@@ -88,7 +87,7 @@ void Picture::setPicture(const KUrl &currentUrl)
         } else {
             image = correctRotation(QPixmap(m_currentUrl.path()), m_currentUrl.path());
             setPath(m_currentUrl.path());
-            m_message = QString();
+            m_message.clear();
         }
     }
     emit pictureLoaded(image);
@@ -157,7 +156,7 @@ void Picture::slotFinished( KJob *job )
     } else {
         image.loadFromData(m_job->data());
         kDebug() << "Successfully downloaded, saving image to" << path;
-        m_message = QString();
+        m_message.clear();
         int i = 1;
         while (QFile(path).exists()) {
             // the file exists, prepend $number- to the filename and count up
