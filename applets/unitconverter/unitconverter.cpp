@@ -70,8 +70,10 @@ void UnitConverter::sltCategoryChanged(int index)
     m_pCmbUnit2->clear();
     int i = 0;
     foreach (const UnitPtr& unit, units) {
-        m_pCmbUnit1->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
-        m_pCmbUnit2->nativeWidget()->addItem(unit->description(), QVariant::fromValue(unit));
+        m_pCmbUnit1->nativeWidget()->addItem(QString("%1 (%2)")
+                .arg(unit->description()).arg(unit->symbol()), QVariant::fromValue(unit));
+        m_pCmbUnit2->nativeWidget()->addItem(QString("%1 (%2)")
+                .arg(unit->description()).arg(unit->symbol()), QVariant::fromValue(unit));
         if (unit == defaultUnit) {
             m_pCmbUnit1->nativeWidget()->setCurrentIndex(i);
             m_pCmbUnit2->nativeWidget()->setCurrentIndex(i);
