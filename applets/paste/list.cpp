@@ -111,9 +111,9 @@ void ListForm::clicked(const QModelIndex &index)
     if (m_hide) {
         hide();
     }
-    // Macro expander might change windows focus so activate windows after that
-    KWindowSystem::activateWindow(info.win());
     if (cfg->autoPaste) {
+        // Macro expander might change windows focus so activate windows after that
+        KWindowSystem::activateWindow(info.win());
         if (cfg->specialApps.contains(info.windowClassClass())) {
             m_pasteKey = cfg->specialApps[info.windowClassClass()];
         } else {
