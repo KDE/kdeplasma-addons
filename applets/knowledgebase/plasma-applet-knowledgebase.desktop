@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KnowledgeBase
 Name[en_GB]=KnowledgeBase
+Name[et]=Teadmusbaas
 Name[nb]=Kunnskapsbase
 Name[nds]=KnowledgeBase
 Name[pt]=Base de Conhecimento
@@ -11,6 +12,7 @@ Name[uk]=База знань
 Name[x-test]=xxKnowledgeBasexx
 Comment=Opendesktop Knowledgebase
 Comment[en_GB]=Opendesktop Knowledgebase
+Comment[et]=Opendesktopi teadmusbaas
 Comment[nb]=Opendesktop kunnskapsbase
 Comment[nds]=Opendesktop-Wetendatenbank
 Comment[pt]=Base de Conhecimento do OpenDesktop
