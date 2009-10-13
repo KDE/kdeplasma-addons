@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>454</width>
+    <width>462</width>
     <height>265</height>
    </rect>
   </property>
@@ -68,6 +68,9 @@
            </property>
            <property name="filter">
             <string>*.png *.jpeg *.jpg *.svg *.svgz</string>
+           </property>
+           <property name="fileDialogModality">
+            <enum>Qt::NonModal</enum>
            </property>
           </widget>
          </item>
@@ -327,9 +330,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
   </customwidget>
   <customwidget>
    <class>KListWidget</class>
@@ -346,6 +349,11 @@
    <extends>KUrlRequester</extends>
    <header>kurlrequester.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
