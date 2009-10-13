@@ -38,6 +38,9 @@
      <property name="filter">
       <string>*.png *.gif *.svg *.svgz *.jpeg *.jpg</string>
      </property>
+     <property name="fileDialogModality">
+      <enum>Qt::NonModal</enum>
+     </property>
     </widget>
    </item>
    <item row="2" column="2" colspan="2">

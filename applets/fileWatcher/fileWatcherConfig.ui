@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>fileWatcherConfig</class>
- <widget class="QWidget" name="fileWatcherConfig" >
-  <property name="geometry" >
+ <widget class="QWidget" name="fileWatcherConfig">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,32 +10,32 @@
     <height>321</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Configure File Watcher</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QLabel" name="label_4" >
-     <property name="font" >
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_4">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>File</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <spacer name="horizontalSpacer" >
-     <property name="orientation" >
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>13</width>
        <height>20</height>
@@ -42,35 +43,35 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="2" >
-    <widget class="QLabel" name="label_2" >
-     <property name="text" >
+   <item row="1" column="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
       <string>File:</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="3" >
-    <widget class="QLabel" name="label_5" >
-     <property name="font" >
+   <item row="3" column="0" colspan="3">
+    <widget class="QLabel" name="label_5">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Font</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0" >
-    <spacer name="horizontalSpacer_2" >
-     <property name="orientation" >
+   <item row="4" column="0">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>13</width>
        <height>22</height>
@@ -78,40 +79,40 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1" colspan="2" >
-    <widget class="QLabel" name="label_6" >
-     <property name="text" >
+   <item row="4" column="1" colspan="2">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
       <string>Font:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="4" column="3" >
-    <widget class="KFontRequester" name="fontRequester" />
+   <item row="4" column="3">
+    <widget class="KFontRequester" name="fontRequester"/>
    </item>
-   <item row="6" column="1" colspan="2" >
-    <widget class="QLabel" name="label_7" >
-     <property name="text" >
+   <item row="6" column="1" colspan="2">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
       <string>Color:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="6" column="3" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item row="6" column="3">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="KColorButton" name="fontColorButton" />
+      <widget class="KColorButton" name="fontColorButton"/>
      </item>
      <item>
-      <spacer name="horizontalSpacer_3" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -121,12 +122,12 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="3" >
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+   <item row="9" column="3">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>389</width>
        <height>71</height>
@@ -134,15 +135,15 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="2" >
-    <spacer name="verticalSpacer_2" >
-     <property name="orientation" >
+   <item row="2" column="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>13</height>
@@ -150,15 +151,15 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="2" >
-    <spacer name="verticalSpacer_3" >
-     <property name="orientation" >
+   <item row="7" column="2">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>13</height>
@@ -166,18 +167,22 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="3" >
-    <widget class="KUrlRequester" name="pathUrlRequester" />
+   <item row="1" column="3">
+    <widget class="KUrlRequester" name="pathUrlRequester">
+     <property name="fileDialogModality">
+      <enum>Qt::NonModal</enum>
+     </property>
+    </widget>
    </item>
-   <item row="5" column="2" >
-    <spacer name="verticalSpacer_4" >
-     <property name="orientation" >
+   <item row="5" column="2">
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>4</height>
@@ -189,9 +194,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
   </customwidget>
   <customwidget>
    <class>KFontRequester</class>
@@ -199,9 +204,9 @@
    <header>kfontrequester.h</header>
   </customwidget>
   <customwidget>
-   <class>KUrlRequester</class>
-   <extends>QFrame</extends>
-   <header>kurlrequester.h</header>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

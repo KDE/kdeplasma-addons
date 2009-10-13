@@ -45,6 +45,9 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="fileDialogModality">
+         <enum>Qt::NonModal</enum>
+        </property>
        </widget>
       </item>
       <item row="6" column="0">
