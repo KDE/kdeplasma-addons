@@ -24,10 +24,14 @@
 #include "backends/backends.h"
 
 #include <Plasma/Service>
-#include <Plasma/ServiceJob>
 
-#include <QtNetwork>
 
+class QNetworkAccessManager;
+class QNetworkReply;
+
+namespace Plasma {
+    class ServiceJob;
+}
 
 class PastebinService : public Plasma::Service
 {

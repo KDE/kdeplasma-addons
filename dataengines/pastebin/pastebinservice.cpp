@@ -19,6 +19,10 @@
 
 #include "pastebinservice.h"
 
+#include <QtCore/QFile>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 
 
 PastebinService::PastebinService(PastebinEngine *engine)
