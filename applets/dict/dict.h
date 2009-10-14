@@ -77,7 +77,7 @@ class DictApplet: public Plasma::PopupApplet
         Plasma::IconWidget *m_icon;
 
 //         QList< QPair<QString, bool> > m_dicts;
-        QPointer<CheckableStringListModel> m_dictsModel;
+        QWeakPointer<CheckableStringListModel> m_dictsModel;
         QStringList m_dicts;
         QHash<QString,bool> m_activeDicts;
 };

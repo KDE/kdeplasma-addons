@@ -59,8 +59,6 @@ DictApplet::DictApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args)
     , m_graphicsWidget(0)
     , m_wordEdit(0)
-    , m_dictsModel(0)
-      //m_flash(0)
 {
     setPopupIcon("accessories-dictionary");
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -159,13 +157,12 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_flash->setPos(25,-10);
     m_flash->resize(QSize(200,20));*/
 
-
-
     KConfigGroup cg = config();
     m_dicts = cg.readEntry("KnownDictionaries", QStringList());
     QStringList activeDictNames = cg.readEntry("ActiveDictionaries", QStringList());
-    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i)
+    for (QStringList::const_iterator i = m_dicts.constBegin(); i != m_dicts.constEnd(); ++i) {
         m_activeDicts[*i]=activeDictNames.contains(*i);
+    }
 
     m_graphicsWidget = new QGraphicsWidget(this);
     m_graphicsWidget->setLayout(m_layout);
@@ -177,45 +174,39 @@ QGraphicsWidget *DictApplet::graphicsWidget()
 
 void DictApplet::linkDefine(const QString &text)
 {
-    kDebug() <<"ACTIVATED";
+    //kDebug() <<"ACTIVATED";
     m_wordEdit->setText(text);
     define();
 }
 
 void DictApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    if (source=="list-dictionaries")
-    {
-        QStringList newDicts=data["dictionaries"].toStringList();
-        bool changed=false;
-        for (QStringList::const_iterator i = newDicts.constBegin(); i != newDicts.constEnd(); ++i)
-        {
-            if (!m_dicts.contains(*i))
-            {
-                m_dicts<<*i;
-                m_activeDicts[*i]=true;
-                changed=true;
+    if (source=="list-dictionaries") {
+        QStringList newDicts = data["dictionaries"].toStringList();
+        bool changed = false;
+        for (QStringList::const_iterator i = newDicts.constBegin(); i != newDicts.constEnd(); ++i) {
+            if (!m_dicts.contains(*i)) {
+                m_dicts << *i;
+                m_activeDicts[*i] = true;
+                changed = true;
             }
         }
-        QStringList::iterator it = m_dicts.begin();
-        while (it != m_dicts.end())
-        {
-            if (!newDicts.contains(*it))
-            {
-                it=m_dicts.erase(it);
-                changed=true;
-            }
-            else
-                ++it;
-        }
-        if (changed)
-            configAccepted();
 
+        QStringList::iterator it = m_dicts.begin();
+        while (it != m_dicts.end()) {
+            if (!newDicts.contains(*it)) {
+                it = m_dicts.erase(it);
+                changed = true;
+            } else {
+                ++it;
+            }
+        }
+
+        if (changed) {
+            configAccepted();
+        }
     }
-//     Q_UNUSED(source);
-    /*if (m_flash) {
-        m_flash->kill();
-    }*/
+
     if (!m_source.isEmpty()) {
         m_defBrowser->show();
     }
@@ -333,9 +324,10 @@ void DictApplet::createConfigurationInterface(KConfigDialog *parent)
     widget->setAllColumnsShowFocus(true);
     widget->setRootIsDecorated(false);
 
-    delete m_dictsModel;
-    m_dictsModel=new CheckableStringListModel(parent,m_dicts,m_activeDicts);
-    widget->setModel(m_dictsModel);
+    delete m_dictsModel.data();
+    CheckableStringListModel *model = new CheckableStringListModel(parent,m_dicts,m_activeDicts);
+    m_dictsModel = model;
+    widget->setModel(model);
 
     parent->addPage(widget, parent->windowTitle(), Applet::icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
@@ -344,7 +336,7 @@ void DictApplet::createConfigurationInterface(KConfigDialog *parent)
 
 void DictApplet::popupEvent(bool shown)
 {
-    kDebug() << shown;
+    //kDebug() << shown;
     if (shown && m_wordEdit) {
         focusEditor();
     }
@@ -352,10 +344,10 @@ void DictApplet::popupEvent(bool shown)
 
 void DictApplet::configAccepted()
 {
-    if (m_dictsModel)
-    {
-        m_dicts=m_dictsModel->stringList();
-        m_activeDicts=m_dictsModel->activeDicts;
+    if (m_dictsModel) {
+        CheckableStringListModel *model = m_dictsModel.data();
+        m_dicts = model->stringList();
+        m_activeDicts = model->activeDicts;
     }
     KConfigGroup cg = config();
     cg.writeEntry("KnownDictionaries", m_dicts);
