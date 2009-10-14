@@ -26,19 +26,16 @@
 #include "authservice.h"
 #include "tasksservice.h"
 
-#include <QDate>
-#include <QTime>
  
-#include <KSystemTimeZones>
-#include <KDateTime>
 
 #include <Plasma/DataContainer>
 
 #include <rtm/rtm.h> 
 #include <rtm/session.h>
 
-const QString RtmEngine::apiKey = "54c4c997b087ba69b5700efd49f774d4";
-const QString RtmEngine::sharedSecret = "85dc83023257714a";
+const QString RtmEngine::apiKey = "631e881f0e5671d237c1a2a0a64d5b98";
+const QString RtmEngine::sharedSecret = "a1c48d8944bce414";
+
 
 RtmEngine::RtmEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args),
@@ -120,23 +117,23 @@ bool RtmEngine::updateSourceEvent(const QString& source) {
     return true;
   }
   else if (source.startsWith("Lists")) {
-    ListsSource *listssoruce = dynamic_cast<ListsSource*>(containerForSource(source)); 
+    ListsSource *listssoruce = static_cast<ListsSource*>(containerForSource(source)); 
     listssoruce->refresh();
     return true;
   }
   else if (source.startsWith("Tasks")) {
-    TasksSource *taskssource = dynamic_cast<TasksSource*>(containerForSource(source)); 
+    TasksSource *taskssource = static_cast<TasksSource*>(containerForSource(source)); 
     taskssource->refresh();
     return true;
   }
   else if (source.startsWith("List:")) {
-    ListSource *listsource = dynamic_cast<ListSource*>(containerForSource(source)); 
+    ListSource *listsource = static_cast<ListSource*>(containerForSource(source)); 
     if (listsource)
       listsource->update();
     return true;
   }
   else if (source.startsWith("Task:")) {
-    TaskSource *tasksource = dynamic_cast<TaskSource*>(containerForSource(source)); 
+    TaskSource *tasksource = static_cast<TaskSource*>(containerForSource(source)); 
     if (tasksource)
       tasksource->update();
     return true;

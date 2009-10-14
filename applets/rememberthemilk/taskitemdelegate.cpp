@@ -29,8 +29,6 @@
 #include <QColor>
 #include <QLinearGradient>
 #include <QCheckBox>
-#include <QAbstractItemView>
-#include <QDateTime>
 
 #include <KDebug>
 
@@ -112,9 +110,18 @@ void TaskItemDelegate::paintPriorityHeader(QPainter* painter, const QRectF& rect
   QLinearGradient gradient(rect.topLeft(), rect.bottomRight());
   gradient.setColorAt(0, itemPriorityColor(index));
   gradient.setColorAt(1, Qt::transparent);
-  painter->setBrush(gradient);
-  painter->setPen(Qt::NoPen);
-  painter->drawRect(rect);
+  
+  int h = QApplication::fontMetrics().height();
+  QPainterPath path;
+  path.moveTo(rect.bottomLeft());
+  path.quadTo(rect.bottomLeft()+QPointF(0, -h), rect.bottomLeft()+QPointF(2, -h));
+  path.lineTo(rect.bottomRight()-QPointF(2, h));
+  path.quadTo(rect.bottomRight()+QPointF(0, -h), rect.bottomRight());
+  painter->setBrush(Qt::NoBrush);
+  QPen thickPen(itemPriorityColor(index));
+  thickPen.setWidth(2);
+  painter->setPen(thickPen);
+  painter->drawPath(path);
   
   // Draw priority text
   QString priority = index.data(Qt::DisplayRole).toString();

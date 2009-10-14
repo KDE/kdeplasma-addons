@@ -24,20 +24,20 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QCoreApplication>
+#include <QWebView>
+#include <QPushButton>
 
 #include <KDebug>
 #include <KIO/NetAccess>
-#include <KHTMLPart>
-#include <KHTMLView>
-#include <DOM/HTMLInputElement>
-#include <DOM/HTMLDocument>
+#include <QVBoxLayout>
+#include <KLocale>
 
 RTM::Auth::Auth(RTM::Permissions permissions, const QString& apiKey, const QString& sharedSecret)
-  : authPage(0)
+  : frobRequest(0),
+  tokenRequest(0)
 {
-  frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
-  tokenRequest = new RTM::Request("rtm.auth.getToken", apiKey, sharedSecret);
   arguments.insert("perms", getTextPermissions(permissions));
+  this->apiKey = apiKey;
   this->sharedSecret = sharedSecret;
   arguments.insert("api_key", apiKey);
   m_state = RTM::Mutable;
@@ -48,88 +48,62 @@ RTM::Auth::~Auth() {
   tokenRequest->deleteLater();
 }
 
-void RTM::Auth::login(const QString& authUrl, const QString& username, const QString& password) {
-  kDebug() << "Starting Login for user: " << username;
-  KIO::Job *job = KIO::get(KUrl(authUrl), KIO::NoReload, KIO::HideProgressInfo);
-  QByteArray data;
-  KIO::NetAccess::synchronousRun(job, 0, &data);
-  job->deleteLater();
-  
-  authPage = new KHTMLPart();
-  authPage->setJScriptEnabled(false);
-  authPage->begin(KUrl(authUrl));
-  authPage->write(data.constData());
-  authPage->end();
-  
-  //authPage->view()->resize(500, 400);
-  //authPage->widget()->show();
-  
-  m_username = username;
-  m_password = password;
-  
-  connect(authPage, SIGNAL(completed()), SLOT(pageLoaded()));
-  connect(authPage->browserExtension(), SIGNAL(openUrlRequestDelayed(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
-          SLOT(pageLoadingReq(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&))); 
-          
-  authCount = 0;
-}
 
-void RTM::Auth::pageLoaded() {
-  kDebug() << "Stage " << authCount;
-  
-  if (authCount >= 2) {
-    disconnect(authPage);
-    continueAuthForToken();
-    return;
-  }
-    
-  DOM::HTMLInputElement auth = authPage->htmlDocument().getElementById("authorize_yes");
-  if (!auth.isNull()) {
-    kDebug() << "Entering Stage 2";
-    authCount = 2;
-    auth.click();
-    return;
-  }
-  
-  DOM::HTMLInputElement uname = authPage->htmlDocument().getElementById("username");
-  DOM::HTMLInputElement pword = authPage->htmlDocument().getElementById("password");
-  DOM::HTMLFormElement form = authPage->htmlDocument().getElementById("loginform");
-  
-  if (uname.isNull()) {
-    authCount = 2;
-    disconnect(authPage);
-    authPage->deleteLater();
-    continueAuthForToken();
-    return;
-  }
-  
-  uname.setValue(m_username);
-  pword.setValue(m_password);
-  
-  kDebug() << "Entering Stage 1";
-    
-  form.submit();
-  
-  authCount = 1;
-}
-
-void RTM::Auth::pageLoadingReq(const KUrl& url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browserArgs)
+void RTM::Auth::showLoginWebpage()
 {
-  kDebug() << url;
-  authPage->setArguments(args);
-  authPage->browserExtension()->setBrowserArguments(browserArgs);
-  authPage->openUrl(url);
+  if (frobRequest)
+    frobRequest->deleteLater();
+  
+  frobRequest = new RTM::Request("rtm.auth.getFrob", apiKey, sharedSecret);
+  connect(frobRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(showLoginWindowInternal(RTM::Request*)));
+  frobRequest->sendRequest();
 }
 
-QString RTM::Auth::getAuthUrl() {
-  QString reply = frobRequest->sendSynchronousRequest();
+
+void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
+{
+  QString reply = rawReply->data();
+  //QString reply = rawReply->readAll(); //FIXME: I have no idea why this line isn't working?
   frob = reply.remove(0, reply.indexOf("<frob>")+6);
   frob.truncate(frob.indexOf("</frob>"));
   kDebug() << "Frob: " << frob;
   arguments.insert("frob", frob);
-  return requestUrl();
+  
+  
+  QWidget *authWidget = new QWidget();
+  QVBoxLayout *layout = new QVBoxLayout(authWidget);
+  QPushButton *button = new QPushButton(authWidget);
+  QWebView *authPage  = new QWebView(authWidget);
+  
+  button->setText(i18n("Click here after you've logged in and authorized the applet"));
+
+  authPage->setUrl(getAuthUrl());
+  
+  authPage->resize(800, 600);
+  authPage->scroll(0, 200);
+  
+  layout->addWidget(authPage);
+  layout->addWidget(button);
+  
+ 
+  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(hide()));
+  connect(button, SIGNAL(clicked(bool)), authWidget, SLOT(deleteLater()));
+  connect(button, SIGNAL(clicked(bool)), SLOT(pageClosed())); // Last because it takes more time.
+  
+  authWidget->show();
 }
 
+
+void RTM::Auth::pageClosed() {
+  continueAuthForToken();
+}
+
+QString RTM::Auth::getAuthUrl() {
+  if (frob.isEmpty()) {
+    kWarning() << "Warning, Frob is EMPTY";
+  }
+  return requestUrl();
+}
 
 QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
 {
@@ -156,12 +130,14 @@ QString RTM::Auth::getTextPermissions(RTM::Permissions permissions)
 }
 
 QString RTM::Auth::requestUrl() {
-  kDebug() << "RTM::Auth::getRequestUrl()";
+  kDebug() << "RTM::Auth::getRequestUrl()" << m_state << RTM::Mutable;
   switch(m_state) {
     case RTM::Mutable:
       sign();
       break;
     case RTM::Hashed:
+      unsign();
+      sign();
       break;
     case RTM::RequestSent:
       break;
@@ -176,11 +152,24 @@ QString RTM::Auth::requestUrl() {
 
 void RTM::Auth::continueAuthForToken()
 {
+  kDebug() << "Token Time";
+  if (tokenRequest)
+    tokenRequest->deleteLater();
+  
+  tokenRequest = new RTM::Request("rtm.auth.getToken", apiKey, sharedSecret);
   tokenRequest->addArgument("frob", arguments.value("frob"));
-  QString reply = tokenRequest->sendSynchronousRequest();
+  connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenResponse(RTM::Request*)));
+  tokenRequest->sendRequest();
+}
 
+
+void RTM::Auth::tokenResponse(RTM::Request* response)
+{
+  QString reply = response->data();
+  kDebug() << "Reply: " << reply;
   QString token = reply.remove(0, reply.indexOf("<token>")+7);
   token.truncate(token.indexOf("</token>"));
   kDebug() << "Token: " << token;
   emit tokenReceived(token);
 }
+

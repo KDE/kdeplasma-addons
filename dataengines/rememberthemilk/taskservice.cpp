@@ -21,7 +21,6 @@
 #include "tasksource.h"
 
 #include <rtm/session.h>
-#include <QMetaClassInfo>
 
 TaskService::TaskService(RTM::Session* session, RTM::Task* task, TaskSource* parent)
   : Plasma::Service(parent)

@@ -25,14 +25,12 @@
 #include <QHash>
 #include <QString>
 
-class QStringList;
 class QString;
-class QByteArray;
 
 namespace RTM {
   enum State { Mutable, Hashed, RequestSent, RequestReceived };
   enum Permissions { None , Read, Write, Delete };
-  const QString baseAuthUrl = "http://www.rememberthemilk.com/services/auth/?";
+  const QString baseAuthUrl = "https://www.rememberthemilk.com/services/auth/?";
   const QString baseMethodUrl = "http://api.rememberthemilk.com/services/rest/?";
 
   /** Timlines are unsigned longs that map to a "session" in which
@@ -48,15 +46,11 @@ namespace RTM {
   typedef QString Tag;
 
   class List;
-  class Session;
   class Request;
   class Auth;
   class Task;
-  class StaticTask;
   class Note;
-  class Object;
 
-  class TasksReader;
 
   class Location
   {

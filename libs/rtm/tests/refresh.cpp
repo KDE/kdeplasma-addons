@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
                     
   RTM::Session *session = new RTM::Session("myapikey", "mysharedsecret", RTM::Delete, QString(), &app);
   
-  session->login("myuser", "mypass");
+  session->showLoginWindow();
   
   Refresher refresher;
   refresher.session = session;

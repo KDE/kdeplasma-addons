@@ -48,7 +48,7 @@ void AuthJob::start() {
   connect(m_session, SIGNAL(tokenCheck(bool)), SLOT(result(bool)));
   //FIXME: error handling?
   if (operationName() == "Login") {
-    m_session->login(parameters().value("username").toString(), parameters().value("password").toString());
+    m_session->showLoginWindow();
   } 
   else if (operationName() == "AuthWithToken") {
     m_session->setToken(parameters().value("token").toString());

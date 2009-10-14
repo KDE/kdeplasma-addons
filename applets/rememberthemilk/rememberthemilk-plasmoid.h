@@ -23,9 +23,6 @@
 #include <Plasma/PopupApplet>
 
 #include <QGraphicsLinearLayout>
-#include <QStringListModel>
-#include <QStandardItemModel>
-#include <QListView>
 #include <QList>
 
 #include "taskitem.h"
@@ -74,6 +71,7 @@ class RememberTheMilkPlasmoid : public Plasma::PopupApplet
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void configFinished();
+    void startAuth();
     
     void setSortBy(SortBy sortBy);
     

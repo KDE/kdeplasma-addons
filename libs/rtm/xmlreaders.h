@@ -23,9 +23,7 @@
 namespace RTM {
   class Request;
   class Session;
-  class SessionPrivate;
   class Task;
-  class TaskPrivate;
 }
 
 #include <QXmlStreamReader>

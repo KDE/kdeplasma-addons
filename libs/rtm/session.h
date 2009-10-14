@@ -32,7 +32,6 @@ namespace RTM {
   class TasksReader;
 }
 
-class QNetworkReply;
 
 /** @file
  * This file is part of librtm. It defines
@@ -60,7 +59,7 @@ Q_OBJECT
     virtual ~Session();
 
     QString getAuthUrl() const;
-    void login(const QString &username, const QString &password);
+    void showLoginWindow();
     bool authenticated() const;
 
     RTM::Request* request(const QString& method);
@@ -69,9 +68,9 @@ Q_OBJECT
 
     void setTimeline(const RTM::Timeline& timeline);
     RTM::Timeline getTimeline() const;
-    RTM::Timeline createTimeline();
+    void createTimeline();
 
-    bool checkToken();
+    void checkToken();
 
     QString apiKey() const;
     QString sharedSecret() const;
@@ -95,10 +94,15 @@ Q_OBJECT
     void continueAuthForToken();
     void addTask(const QString &task, RTM::ListId listId);
     RTM::Task* createTaskFromString(const QString& task);
+    void tokenCheckReply(RTM::Request*);
+    void handleValidToken(bool);
+    void timelineReply(RTM::Request*);
 
   Q_SIGNALS:
     void tokenReceived(const QString& token);
     void tokenCheck(bool success);
+    
+    void timelineCreated(RTM::Timeline timeline);
 
     void taskChanged(RTM::Task* task);
     void listChanged(RTM::List* list);

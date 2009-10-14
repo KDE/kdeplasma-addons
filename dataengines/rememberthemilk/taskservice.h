@@ -26,7 +26,6 @@
 class TaskSource;
 
 namespace RTM {
-  class Request;
   class Session;
   class Task;
 }

@@ -24,7 +24,6 @@
 #include <Plasma/ServiceJob>
 
 namespace RTM {
-  class Request;
   class Session;
 }
 

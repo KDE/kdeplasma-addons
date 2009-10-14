@@ -61,6 +61,7 @@ Q_OBJECT
   protected:
     Request() {}
     void sign();
+    void unsign();
 
     QMap<QString,QString> arguments;
     QString m_response;
