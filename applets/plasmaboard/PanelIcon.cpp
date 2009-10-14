@@ -20,12 +20,16 @@
 #include <QAction>
 #include "PanelIcon.h"
 #include <plasma/theme.h>
+#include <KIcon>
+#include <Plasma/ToolTipManager>
+#include <Plasma/ToolTipContent>
 
 
 PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
 	Plasma::PopupApplet(parent, args), m_plasmaboard(0){
         setAspectRatioMode(Plasma::IgnoreAspectRatio);
         setPopupIcon("preferences-desktop-keyboard");
+	setFocusPolicy(Qt::NoFocus);
         KConfigGroup cg = config();
         extendedMode = cg.readEntry("extendedMode", false);
         setPassivePopup(true);
@@ -34,10 +38,19 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
         connect(contextExtended, SIGNAL(triggered(bool)), this, SLOT(toggleMode()));
         contextBasic = new QAction(i18n("Switch to extended mode"), this);
         connect(contextBasic, SIGNAL(triggered(bool)), this, SLOT(toggleMode()));
+
+
+	Plasma::ToolTipManager::self()->registerWidget(this);
+	Plasma::ToolTipContent toolTip;
+	toolTip.setImage(KIcon("preferences-desktop-keyboard"));
+	toolTip.setMainText(i18n("Virtual Keyboard"));
+	Plasma::ToolTipManager::self()->setContent(this, toolTip);
 }
 
 
 PanelIcon::~PanelIcon() {
+	Plasma::ToolTipManager::self()->unregisterWidget(this);
+
         delete contextExtended;
         delete contextBasic;
 }

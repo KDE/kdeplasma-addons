@@ -75,6 +75,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     setPreferredSize(500, 200);
     setMinimumSize(300,150);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    setFocusPolicy(Qt::NoFocus);
 
     isLevel2 = false;
     isAlternative = false;

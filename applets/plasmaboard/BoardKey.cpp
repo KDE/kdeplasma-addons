@@ -29,6 +29,7 @@ BoardKey::BoardKey(PlasmaboardWidget *parent):
 	//this->setDrawBackground(true);
 	setMinimumSize(10,10);
 	setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored, QSizePolicy::DefaultType);
+	setFocusPolicy(Qt::NoFocus);
 }
 
 BoardKey::~BoardKey() {
