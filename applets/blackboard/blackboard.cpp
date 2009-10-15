@@ -28,7 +28,8 @@
 #include <Plasma/ToolButton>
 
 BlackBoard::BlackBoard(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args)
+    : Plasma::Applet(parent, args),
+      blackBoard(0)
 {
     resize(200, 200);
     setHasConfigurationInterface(false);
@@ -37,7 +38,9 @@ BlackBoard::BlackBoard(QObject *parent, const QVariantList &args)
 
 BlackBoard::~BlackBoard()
 {
-    blackBoard->saveImage();
+    if (blackBoard) {
+        blackBoard->saveImage();
+    }
 }
 
 void BlackBoard::init()
