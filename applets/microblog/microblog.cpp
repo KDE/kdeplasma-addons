@@ -452,7 +452,8 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
 
         m_flash->flash(desc, 60 * 1000); //I'd really prefer it to stay there. and be red.
     }
-    //updateGeometry();
+    m_graphicsWidget->setPreferredSize(-1, -1);
+    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 void MicroBlog::themeChanged()
