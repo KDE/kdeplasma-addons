@@ -94,38 +94,38 @@ void GridLayout::layoutApplet(Plasma::Applet* applet)
     //     QPointF pos = mapToItem(this, applet->pos());.
     QPointF pos = mapFromItem(parentItem(), applet->pos());
     kDebug()<<pos;
-    //     if (m_spacer->geometry().contains(mapToItem(this, pos))) {
-   //         applet->setParentItem(this);
-   //         Position spacerPos = itemPosition(m_spacer);
-   //         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
-   //             insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
-   //         }
-   //     } else {
+    if (m_spacer->geometry().contains(mapToItem(this, pos))) {
+        applet->setParentItem(this);
+        Position spacerPos = itemPosition(m_spacer);
+        if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
+            m_spacer->hide();
+            removeItemAt(spacerPos);
+            insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
+        }
+    } else {
         if (m_spacer->isVisible()) {
             m_spacer->hide();
             removeItemAt(itemPosition(m_spacer));
         }
         showItemDropZone(applet, pos);
-       //     }
+    }
 }
 
-Position GridLayout::itemPosition(QGraphicsWidget* widget)
+Position GridLayout::itemPosition(QGraphicsWidget *widget)
 {
+    if (!widget) {
+        return Position();
+    }
+
     for (int i = 0; i < m_layout->rowCount(); ++i) {
-        for (int j = 0; i < m_layout->columnCount(); ++j) {
+        for (int j = 0; j < m_layout->columnCount(); ++j) {
             if (widget == m_layout->itemAt(i, j)) {
-                Position pos;
-                pos.row = i;
-                pos.column = j;
-                return pos;
+                return Position(i, j);
             }
         }
     }
 
-    Position pos;
-    pos.row = -1;
-    pos.column = -1;
-    return pos;
+    return Position();
 }
 
 void GridLayout::insertItemAt(QGraphicsWidget* item, int row, int column, Orientation orientation)
@@ -199,13 +199,13 @@ void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
     if (widget->geometry().contains(pos)) {
         return;
     }
-/*
+
     Position itemPos = itemPosition(widget);
 
     if ((itemPos.row != -1) && (itemPos.column != -1)) {
         removeItemAt(itemPos.row, itemPos.column);
         widget->hide();
-    }*/
+    }
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
@@ -215,21 +215,21 @@ void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
         return;
     }
 
-//     const qreal rowHeight = boundingRect().height() / rows;
-//     const qreal columnWidth = boundingRect().width() / columns;
-// 
-//     const int i = x / columnWidth;
-//     const int j = y / rowHeight;
-// 
-//     int n;
-//     if ((n = nearestBoundair(x, columnWidth)) != -1) {
-//         insertItemAt(widget, j, n, Horizontal);
-//         return;
-//     }
-//     if ((n = nearestBoundair(y, rowHeight)) != -1) {
-//         insertItemAt(widget, n, i, Vertical);
-//         return;
-//     }
+    const qreal rowHeight = boundingRect().height() / rows;
+    const qreal columnWidth = boundingRect().width() / columns;
+
+    const int i = x / columnWidth;
+    const int j = y / rowHeight;
+
+    int n;
+    if ((n = nearestBoundair(x, columnWidth)) != -1) {
+        insertItemAt(widget, j, n, Horizontal);
+        return;
+    }
+    if ((n = nearestBoundair(y, rowHeight)) != -1) {
+        insertItemAt(widget, n, i, Vertical);
+        return;
+    }
 }
 
 int GridLayout::nearestBoundair(qreal pos, qreal size)
@@ -256,8 +256,8 @@ int GridLayout::nearestBoundair(qreal pos, qreal size)
 void GridLayout::saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group)
 {
     Position pos = itemPosition(applet);
-    group.writeEntry("row", pos.row);
-    group.writeEntry("Columns", pos.column);
+    group.writeEntry("Row", pos.row);
+    group.writeEntry("Column", pos.column);
 }
 
 void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
@@ -271,8 +271,8 @@ void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGr
     }
 
     if (isOwnApplet) {
-        int row = group.readEntry("Row", 0);
-        int column = group.readEntry("Column", 0);
+        int row = group.readEntry("Row", -1);
+        int column = group.readEntry("Column", -1);
 
         m_layout->addItem(applet, row, column);
     }

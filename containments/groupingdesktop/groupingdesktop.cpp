@@ -22,6 +22,7 @@
 
 #include "groupingdesktop.h"
 
+#include <QtGui/QGraphicsSceneContextMenuEvent>
 #include <QAction>
 
 #include <KDebug>
@@ -51,13 +52,17 @@ void GroupingDesktop::init()
 
     m_newGridLayout = new QAction(this);
     m_newGridLayout->setText(i18n("Add a new grid layout"));
+    m_removeGroup = new QAction(this);
+    m_removeGroup->setText(i18n("Remove this group"));
     connect (m_newGridLayout, SIGNAL(triggered()),
              this, SLOT(newGridLayoutClicked()));
+    connect (m_removeGroup, SIGNAL(rtiggered()),
+             this, SLOT(removeGroup()));
     connect (this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
              this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 
     addToolBoxAction(m_newGridLayout);
-//     newGridLayoutClicked();
+    newGridLayoutClicked();
 }
 
 void GroupingDesktop::newGridLayoutClicked()
@@ -72,11 +77,11 @@ void GroupingDesktop::newGridLayoutClicked()
 QList<QAction *> GroupingDesktop::contextualActions()
 {
     QList<QAction *> list;
-    list << m_newGridLayout;
+    list << m_newGridLayout << m_removeGroup;
     return list;
 }
 
-void GroupingDesktop::layoutApplet(Plasma::Applet* applet, const QPointF& pos)
+void GroupingDesktop::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
     foreach (AbstractGroup *group, m_groups) {
         if (group->geometry().contains(pos)) {
@@ -100,6 +105,13 @@ AbstractGroup* GroupingDesktop::createGroup(const QString& plugin, int id)
     m_groups.insert(id, group);
 
     return group;
+}
+
+void GroupingDesktop::removeGroup()
+{
+    int id = m_removeGroup->data().toInt();
+
+    m_groups.value(id)->destroy();
 }
 
 void GroupingDesktop::save(KConfigGroup &group) const
@@ -154,17 +166,35 @@ void GroupingDesktop::restore(KConfigGroup& group)
         KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
         KConfigGroup groupConfig(&appletConfig, "GroupInformation");
 
-        int groupId = groupConfig.readEntry("Group", -1);
+        if (groupConfig.isValid()) {
+            int groupId = groupConfig.readEntry("Group", -1);
 
-        if (groupId != -1) {
-            AbstractGroup *group = m_groups.value(groupId);
-            if (group) {
-                kDebug()<<group->id();
-                group->assignApplet(applet, false);
-                group->restoreAppletLayoutInfo(applet, groupConfig);
+            if (groupId != -1) {
+                AbstractGroup *group = m_groups.value(groupId);
+                if (group) {
+                    kDebug()<<group->id();
+                    group->assignApplet(applet, false);
+                    group->restoreAppletLayoutInfo(applet, groupConfig);
+                }
             }
         }
     }
+}
+
+void GroupingDesktop::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+
+    m_removeGroup->setVisible(false);
+
+    foreach (AbstractGroup *group, m_groups) {
+        kDebug()<<group->geometry()<<event->pos();
+        if (group->geometry().contains(event->pos())) {
+            m_removeGroup->setVisible(true);
+            m_removeGroup->setData(group->id());
+        }
+    }
+
+    Plasma::Containment::contextMenuEvent(event);
 }
 
 void GroupingDesktop::onImmutabilityChanged(Plasma::ImmutabilityType immutability)

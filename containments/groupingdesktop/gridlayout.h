@@ -28,9 +28,16 @@ namespace Plasma {
     class Applet;
 };
 
-struct Position {
-    int row;
-    int column;
+class Position {
+    public:
+        Position(int r = -1, int c = -1)
+                : row(r),
+                  column(c)
+        {
+        }
+
+        int row;
+        int column;
 };
 
 class Spacer;

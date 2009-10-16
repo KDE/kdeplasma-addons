@@ -61,7 +61,6 @@ AbstractGroup::AbstractGroup(int id, Plasma::Containment *parent, Qt::WindowFlag
 
 AbstractGroup::~AbstractGroup()
 {
-
 }
 
 int AbstractGroup::id() const
@@ -98,6 +97,26 @@ void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
             d->applets.removeAll(applet);
         }
     }
+}
+
+void AbstractGroup::destroy()
+{
+    foreach (Plasma::Applet *applet, d->applets) {
+        applet->destroy();
+    }
+
+    KConfigGroup cg = config();
+    cg.deleteGroup();
+
+    deleteLater();
+}
+
+KConfigGroup AbstractGroup::config()
+{
+    KConfigGroup containmentGroup = containment()->config();
+    KConfigGroup config = KConfigGroup(&containmentGroup, QString::number(id()));
+
+    return config;
 }
 
 void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)

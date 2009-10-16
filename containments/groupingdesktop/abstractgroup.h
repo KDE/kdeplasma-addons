@@ -45,6 +45,8 @@ class AbstractGroup : public QGraphicsWidget
         virtual QString plugin() = 0;
         virtual void layoutApplet(Plasma::Applet *applet) = 0;
         int id() const;
+        void destroy();
+        KConfigGroup config();
         Plasma::Applet::List assignedApplets();
         Plasma::Containment *containment();
 
