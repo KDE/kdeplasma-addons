@@ -383,7 +383,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
         int newCount = 0;
         qulonglong maxId = m_lastTweet;
         foreach (const QString &id, data.keys()) {
-            qulonglong i = id.toULong();
+            qulonglong i = id.toULongLong();
             //kDebug() << i << m_lastTweet;
             if (i > m_lastTweet) {
                 newCount++;
