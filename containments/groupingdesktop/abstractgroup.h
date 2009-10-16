@@ -30,19 +30,23 @@ namespace Plasma {
     class FrameSvg;
 };
 
+class AbstractGroupPrivate;
+
 class AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     public:
-        AbstractGroup(int id, QGraphicsItem* parent = 0, Qt::WindowFlags wFlags = 0);
+        AbstractGroup(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags = 0);
         ~AbstractGroup();
 
-        virtual void assignApplet(Plasma::Applet *applet);
+        void assignApplet(Plasma::Applet *applet, bool layoutApplets = true);
         virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) = 0;
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
         virtual QString plugin() = 0;
+        virtual void layoutApplet(Plasma::Applet *applet) = 0;
         int id() const;
         Plasma::Applet::List assignedApplets();
+        Plasma::Containment *containment();
 
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
@@ -50,9 +54,11 @@ class AbstractGroup : public QGraphicsWidget
         void resizeEvent(QGraphicsSceneResizeEvent *event);
         void dropEvent(QGraphicsSceneDragDropEvent *event);
 
-        Plasma::FrameSvg *m_background;
-        int m_id;
-        Plasma::Applet::List m_applets;
+    private slots:
+        void onAppletRemoved(Plasma::Applet *applet);
+
+    private:
+        AbstractGroupPrivate *const d;
 };
 
 #endif // ABSTRACTGROUP_H

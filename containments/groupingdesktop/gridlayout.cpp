@@ -68,7 +68,7 @@ class Spacer : public QGraphicsWidget
         }
 };
 
-GridLayout::GridLayout(int id, QGraphicsItem* parent, Qt::WindowFlags wFlags)
+GridLayout::GridLayout(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(id, parent, wFlags)
 {
     m_layout = new QGraphicsGridLayout(this);
@@ -89,10 +89,8 @@ QString GridLayout::plugin()
     return "grid";
 }
 
-void GridLayout::assignApplet(Plasma::Applet *applet)
+void GridLayout::layoutApplet(Plasma::Applet* applet)
 {
-    AbstractGroup::assignApplet(applet);
-
     //     QPointF pos = mapToItem(this, applet->pos());.
     QPointF pos = mapFromItem(parentItem(), applet->pos());
     kDebug()<<pos;
@@ -103,11 +101,12 @@ void GridLayout::assignApplet(Plasma::Applet *applet)
    //             insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
    //         }
    //     } else {
-//        showItemDropZone(applet, pos);
+        if (m_spacer->isVisible()) {
+            m_spacer->hide();
+            removeItemAt(itemPosition(m_spacer));
+        }
+        showItemDropZone(applet, pos);
        //     }
-
-       m_spacer->hide();
-       m_applets << applet;
 }
 
 Position GridLayout::itemPosition(QGraphicsWidget* widget)
@@ -129,13 +128,9 @@ Position GridLayout::itemPosition(QGraphicsWidget* widget)
     return pos;
 }
 
-QList< Plasma::Applet* > GridLayout::assignedApplets()
-{
-    return m_applets;
-}
-
 void GridLayout::insertItemAt(QGraphicsWidget* item, int row, int column, Orientation orientation)
 {
+    kDebug()<<row<< column;
     if (!item) {
         return;
     }
@@ -186,6 +181,11 @@ void GridLayout::removeItemAt(int row, int column)
     takeItemAt(row, column);
 }
 
+void GridLayout::removeItemAt(Position pos)
+{
+    removeItemAt(pos.row, pos.column);
+}
+
 void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent* event)
 {
     showItemDropZone(m_spacer, event->pos());
@@ -199,13 +199,13 @@ void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
     if (widget->geometry().contains(pos)) {
         return;
     }
-
+/*
     Position itemPos = itemPosition(widget);
 
     if ((itemPos.row != -1) && (itemPos.column != -1)) {
         removeItemAt(itemPos.row, itemPos.column);
         widget->hide();
-    }
+    }*/
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
@@ -215,21 +215,21 @@ void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
         return;
     }
 
-    const qreal rowHeight = boundingRect().height() / rows;
-    const qreal columnWidth = boundingRect().width() / columns;
-
-    const int i = x / columnWidth;
-    const int j = y / rowHeight;
-
-    int n;
-    if ((n = nearestBoundair(x, columnWidth)) != -1) {
-        insertItemAt(widget, j, n, Horizontal);
-        return;
-    }
-    if ((n = nearestBoundair(y, rowHeight)) != -1) {
-        insertItemAt(widget, n, i, Vertical);
-        return;
-    }
+//     const qreal rowHeight = boundingRect().height() / rows;
+//     const qreal columnWidth = boundingRect().width() / columns;
+// 
+//     const int i = x / columnWidth;
+//     const int j = y / rowHeight;
+// 
+//     int n;
+//     if ((n = nearestBoundair(x, columnWidth)) != -1) {
+//         insertItemAt(widget, j, n, Horizontal);
+//         return;
+//     }
+//     if ((n = nearestBoundair(y, rowHeight)) != -1) {
+//         insertItemAt(widget, n, i, Vertical);
+//         return;
+//     }
 }
 
 int GridLayout::nearestBoundair(qreal pos, qreal size)
@@ -260,7 +260,7 @@ void GridLayout::saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group
     group.writeEntry("Columns", pos.column);
 }
 
-void GridLayout::restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup &group)
+void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
 {
     bool isOwnApplet = false;
     foreach (Plasma::Applet *ownApplet, assignedApplets()) {

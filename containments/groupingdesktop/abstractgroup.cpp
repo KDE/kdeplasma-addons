@@ -23,17 +23,40 @@
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QPainter>
 
+#include <Plasma/Containment>
 #include <Plasma/FrameSvg>
 
-AbstractGroup::AbstractGroup(int id, QGraphicsItem* parent, Qt::WindowFlags wFlags)
+class AbstractGroupPrivate
+{
+    public:
+        AbstractGroupPrivate()
+        {
+        }
+
+        ~AbstractGroupPrivate()
+        {
+        }
+
+        Plasma::Containment *containment;
+        int id;
+        Plasma::Applet::List applets;
+        Plasma::FrameSvg *background;
+};
+
+AbstractGroup::AbstractGroup(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
-               m_id(id)
+               d(new AbstractGroupPrivate())
 {
     setAcceptDrops(true);
 
-    m_background = new Plasma::FrameSvg(this);
-    m_background->setImagePath("widgets/translucentbackground");
-    m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    d->containment = parent;
+    d->id = id;
+    d->background = new Plasma::FrameSvg(this);
+    d->background->setImagePath("widgets/translucentbackground");
+    d->background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
+
+    connect(d->containment, SIGNAL(appletRemoved(Plasma::Applet *)),
+            this, SLOT(onAppletRemoved(Plasma::Applet *)));
 }
 
 AbstractGroup::~AbstractGroup()
@@ -43,25 +66,43 @@ AbstractGroup::~AbstractGroup()
 
 int AbstractGroup::id() const
 {
-    return m_id;
+    return d->id;
 }
 
-void AbstractGroup::assignApplet(Plasma::Applet *applet)
+void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
 {
     kDebug()<<"adding applet in group"<<id();
 
     applet->setParentItem(this);
-    m_applets << applet;
+    d->applets << applet;
+
+    if (layoutApplets) {
+        layoutApplet(applet);
+    }
 }
 
 Plasma::Applet::List AbstractGroup::assignedApplets()
 {
-    return m_applets;
+    return d->applets;
+}
+
+Plasma::Containment *AbstractGroup::containment()
+{
+    return d->containment;
+}
+
+void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
+{
+    foreach (Plasma::Applet *ownApplet, d->applets) {
+        if (applet = ownApplet) {
+            d->applets.removeAll(applet);
+        }
+    }
 }
 
 void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
-    m_background->resizeFrame(event->newSize());
+    d->background->resizeFrame(event->newSize());
 }
 
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
@@ -74,7 +115,7 @@ void AbstractGroup::paint(QPainter* painter, const QStyleOptionGraphicsItem* opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    m_background->paintFrame(painter);
+    d->background->paintFrame(painter);
 }
 
 #include "abstractgroup.moc"

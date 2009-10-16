@@ -52,12 +52,12 @@ void GroupingDesktop::init()
     m_newGridLayout = new QAction(this);
     m_newGridLayout->setText(i18n("Add a new grid layout"));
     connect (m_newGridLayout, SIGNAL(triggered()),
-            this, SLOT(newGridLayoutClicked()));
+             this, SLOT(newGridLayoutClicked()));
     connect (this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
              this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 
     addToolBoxAction(m_newGridLayout);
-    newGridLayoutClicked();
+//     newGridLayoutClicked();
 }
 
 void GroupingDesktop::newGridLayoutClicked()
@@ -159,7 +159,8 @@ void GroupingDesktop::restore(KConfigGroup& group)
         if (groupId != -1) {
             AbstractGroup *group = m_groups.value(groupId);
             if (group) {
-                group->assignApplet(applet);
+                kDebug()<<group->id();
+                group->assignApplet(applet, false);
                 group->restoreAppletLayoutInfo(applet, groupConfig);
             }
         }

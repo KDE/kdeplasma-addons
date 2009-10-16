@@ -39,14 +39,13 @@ class GridLayout : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridLayout(int id, QGraphicsItem* parent = 0, Qt::WindowFlags wFlags = 0);
+        GridLayout(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags = 0);
         ~GridLayout();
 
-        void assignApplet(Plasma::Applet *applet);
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group);
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
+        void layoutApplet(Plasma::Applet* applet);
         Position itemPosition(QGraphicsWidget *item);
-        QList<Plasma::Applet *> assignedApplets();
         QString plugin();
 
     protected:
@@ -60,12 +59,12 @@ class GridLayout : public AbstractGroup
 
         void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
         void removeItemAt(int row, int column);
+        void removeItemAt(Position pos);
         QGraphicsLayoutItem *takeItemAt(int row, int column);
         int nearestBoundair(qreal pos, qreal size);
         void showItemDropZone(QGraphicsWidget *widget, const QPointF &pos);
 
         QGraphicsGridLayout *m_layout;
-        QList<Plasma::Applet *> m_applets;
         Spacer *m_spacer;
 
         friend class Spacer;
