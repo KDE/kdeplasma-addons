@@ -10,6 +10,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 		    ${NEPOMUK_INCLUDES})
 
 set(groupingdesktop_SRCS
+          abstractgroup.cpp
           gridlayout.cpp
           groupingdesktop.cpp
             )

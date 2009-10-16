@@ -20,13 +20,12 @@
 #ifndef GRIDLAYOUT_H
 #define GRIDLAYOUT_H
 
-#include <QtGui/QGraphicsWidget>
+#include "abstractgroup.h"
 
 class QGraphicsGridLayout;
 
 namespace Plasma {
     class Applet;
-    class FrameSvg;
 };
 
 struct Position {
@@ -36,24 +35,22 @@ struct Position {
 
 class Spacer;
 
-class GridLayout : public QGraphicsWidget
+class GridLayout : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridLayout(QGraphicsItem* parent = 0, Qt::WindowFlags wFlags = 0);
+        GridLayout(int id, QGraphicsItem* parent = 0, Qt::WindowFlags wFlags = 0);
         ~GridLayout();
 
-        void assignApplet(Plasma::Applet *applet, int row, int column);
-        void assignApplet(Plasma::Applet *applet, const QPointF &pos);
+        void assignApplet(Plasma::Applet *applet);
+        void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group);
+        void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
         Position itemPosition(QGraphicsWidget *item);
         QList<Plasma::Applet *> assignedApplets();
-
-        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+        QString plugin();
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-        void dropEvent(QGraphicsSceneDragDropEvent *event);
-        void resizeEvent(QGraphicsSceneResizeEvent *event);
 
     private:
         enum Orientation {
@@ -69,7 +66,6 @@ class GridLayout : public QGraphicsWidget
 
         QGraphicsGridLayout *m_layout;
         QList<Plasma::Applet *> m_applets;
-        Plasma::FrameSvg *m_background;
         Spacer *m_spacer;
 
         friend class Spacer;

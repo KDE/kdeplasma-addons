@@ -25,7 +25,7 @@
 
 #include <Plasma/Containment>
 
-class GridLayout;
+class AbstractGroup;
 
 class GroupingDesktop: public Plasma::Containment
 {
@@ -47,8 +47,10 @@ class GroupingDesktop: public Plasma::Containment
         void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
 
     private:
+        AbstractGroup *createGroup(const QString &plugin, int id = 0);
+
         QAction *m_newGridLayout;
-        QMap<int, GridLayout *> m_gridLayouts;
+        QMap<int, AbstractGroup *> m_groups;
 };
 
 #endif

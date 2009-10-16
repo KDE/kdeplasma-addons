@@ -19,9 +19,8 @@
 
 #include "gridlayout.h"
 
-#include <QGraphicsScene>
 #include <QtGui/QGraphicsGridLayout>
-#include <QtGui/QGraphicsSceneResizeEvent>
+#include <QtGui/QGraphicsSceneDragDropEvent>
 #include <QPainter>
 
 #include <Plasma/Applet>
@@ -69,17 +68,11 @@ class Spacer : public QGraphicsWidget
         }
 };
 
-GridLayout::GridLayout(QGraphicsItem* parent, Qt::WindowFlags wFlags)
-          : QGraphicsWidget(parent, wFlags)
+GridLayout::GridLayout(int id, QGraphicsItem* parent, Qt::WindowFlags wFlags)
+          : AbstractGroup(id, parent, wFlags)
 {
-    setAcceptDrops(true);
-
     m_layout = new QGraphicsGridLayout(this);
     setLayout(m_layout);
-
-    m_background = new Plasma::FrameSvg(this);
-    m_background->setImagePath("widgets/translucentbackground");
-    m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
 
     m_spacer = new Spacer(this);
     m_spacer->parent = this;
@@ -91,22 +84,30 @@ GridLayout::~GridLayout()
 
 }
 
-void GridLayout::assignApplet(Plasma::Applet *applet, int row, int column)
+QString GridLayout::plugin()
 {
-//     m_layout->addItem(applet, row, column);
+    return "grid";
 }
 
-
-void GridLayout::assignApplet(Plasma::Applet* applet, const QPointF &pos)
+void GridLayout::assignApplet(Plasma::Applet *applet)
 {
-    applet->setParentItem(this);
-    Position spacerPos = itemPosition(m_spacer);
-    if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
-        insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
-    }
-    m_spacer->hide();
+    AbstractGroup::assignApplet(applet);
 
-    m_applets << applet;
+    //     QPointF pos = mapToItem(this, applet->pos());.
+    QPointF pos = mapFromItem(parentItem(), applet->pos());
+    kDebug()<<pos;
+    //     if (m_spacer->geometry().contains(mapToItem(this, pos))) {
+   //         applet->setParentItem(this);
+   //         Position spacerPos = itemPosition(m_spacer);
+   //         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
+   //             insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
+   //         }
+   //     } else {
+//        showItemDropZone(applet, pos);
+       //     }
+
+       m_spacer->hide();
+       m_applets << applet;
 }
 
 Position GridLayout::itemPosition(QGraphicsWidget* widget)
@@ -131,11 +132,6 @@ Position GridLayout::itemPosition(QGraphicsWidget* widget)
 QList< Plasma::Applet* > GridLayout::assignedApplets()
 {
     return m_applets;
-}
-
-void GridLayout::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
-{
-    m_background->paintFrame(painter);
 }
 
 void GridLayout::insertItemAt(QGraphicsWidget* item, int row, int column, Orientation orientation)
@@ -181,16 +177,13 @@ QGraphicsLayoutItem* GridLayout::takeItemAt(int row, int column)
             }
         }
     }
+
+    return 0;
 }
 
 void GridLayout::removeItemAt(int row, int column)
 {
     takeItemAt(row, column);
-}
-
-void GridLayout::resizeEvent(QGraphicsSceneResizeEvent *event)
-{
-    m_background->resizeFrame(event->newSize());
 }
 
 void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent* event)
@@ -260,9 +253,29 @@ int GridLayout::nearestBoundair(qreal pos, qreal size)
     return -1;
 }
 
-void GridLayout::dropEvent(QGraphicsSceneDragDropEvent *event)
+void GridLayout::saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group)
 {
-    scene()->sendEvent(parentItem(), event);
+    Position pos = itemPosition(applet);
+    group.writeEntry("row", pos.row);
+    group.writeEntry("Columns", pos.column);
+}
+
+void GridLayout::restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup &group)
+{
+    bool isOwnApplet = false;
+    foreach (Plasma::Applet *ownApplet, assignedApplets()) {
+        if (applet == ownApplet) {
+            isOwnApplet = true;
+            break;
+        }
+    }
+
+    if (isOwnApplet) {
+        int row = group.readEntry("Row", 0);
+        int column = group.readEntry("Column", 0);
+
+        m_layout->addItem(applet, row, column);
+    }
 }
 
 #include "gridlayout.moc"
