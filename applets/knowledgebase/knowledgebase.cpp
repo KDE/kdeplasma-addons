@@ -81,6 +81,7 @@ QGraphicsWidget *KnowledgeBase::graphicsWidget()
         connect(m_questionInput, SIGNAL(textEdited(const QString&)), this, SLOT(delayedQuery()));
 
         m_KBItemsScroll= new Plasma::ScrollWidget(this);
+        m_KBItemsScroll->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         m_KBItemsPage = new QGraphicsWidget(this);
         m_KBItemsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_KBItemsPage);
         m_KBItemsScroll->setWidget(m_KBItemsPage);
@@ -248,6 +249,11 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
             kbItem->setPixmap(personData["Avatar"].value<QPixmap>());
         }
     }
+
+    m_graphicsWidget->setPreferredSize(-1,-1);
+    m_KBItemsLayout->invalidate();
+
+    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 void KnowledgeBase::detailsClicked(KBItemWidget *item, bool shown)
@@ -257,6 +263,8 @@ void KnowledgeBase::detailsClicked(KBItemWidget *item, bool shown)
     m_KBItemsLayout->invalidate();
     m_KBItemsPage->resize(QSizeF(m_KBItemsPage->size().width(), m_KBItemsPage->effectiveSizeHint(Qt::PreferredSize).height()));
     m_KBItemsPage->setPos(0, -item->pos().y());
+
+    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 
