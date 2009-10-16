@@ -83,6 +83,7 @@ private:
 
     Plasma::WeatherView *m_fiveDaysView;
     Plasma::WeatherView *m_detailsView;
+    QGraphicsWidget *m_noticesView;
 
     // Layout
     int m_setupLayout;

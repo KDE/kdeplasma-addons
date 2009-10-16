@@ -64,6 +64,7 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_detailsModel(0),
         m_fiveDaysView(0),
         m_detailsView(0),
+        m_noticesView(0),
         m_setupLayout(0),
         m_graphicsWidget(0),
         m_titleFrame(new Plasma::Frame)
@@ -386,11 +387,9 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    if (m_tabBar->count() > 0) {
-        // If we have items in tab clean it up first
-        while (m_tabBar->count()) {
-             m_tabBar->removeTab(0);
-        }
+    // If we have items in tab clean it up first
+    while (m_tabBar->count()) {
+        m_tabBar->takeTab(0);
     }
 
     // If we have a 5 day forecast, display it
@@ -399,9 +398,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             kDebug() << "Create 5 Days Plasma::WeatherView";
             m_fiveDaysView = new Plasma::WeatherView(m_tabBar);
             connect(m_fiveDaysView->nativeWidget()->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(fiveDaysColumnResized(int, int, int)));
-
-
-
         }
 
         if (!m_fiveDaysModel) {
@@ -491,9 +487,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     lowItems.append(lowItem);
                 }
             }
-
         }
-
 
         if (dayItems.count() > 0) {
             m_fiveDaysModel->appendRow(dayItems);
@@ -515,9 +509,14 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             // If we have any items, display 5 Day tab, otherwise only details
             QString totalDays = i18ncp("Forecast period timeframe", "1 Day", "%1 Days", data["Total Weather Days"].toInt());
             m_tabBar->addTab(totalDays, m_fiveDaysView);
+        } else {
+            delete m_fiveDaysView;
+            m_fiveDaysView = 0;
         }
+    } else {
+        delete m_fiveDaysView;
+        m_fiveDaysView = 0;
     }
-
 
     // Details data
     if (!m_detailsView) {
@@ -622,6 +621,10 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     int rowCount = 0;
     if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
+        if (!m_noticesView) {
+            m_noticesView = new QGraphicsWidget;
+        }
+
         QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
         QPalette pal;
 
@@ -656,6 +659,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                 warningLayout->addItem(warnNotice, rowCount, 0);
                 rowCount++;
             }
+
             noticeLayout->addItem(warningLayout);
         }
 
@@ -695,7 +699,10 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(watchLayout);
         }
 
-        m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
+        m_tabBar->addTab(i18nc("weather notices", "Notices"), m_noticesView);
+    } else {
+        delete m_noticesView;
+        m_noticesView = 0;
     }
 
     if (!m_setupLayout) {
