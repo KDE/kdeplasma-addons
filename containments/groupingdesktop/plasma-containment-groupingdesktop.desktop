@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=GroupingDesktop
+Name[sv]=Gruppera skrivbord
+Name[uk]=GroupingDesktop
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
