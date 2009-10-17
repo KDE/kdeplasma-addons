@@ -243,7 +243,7 @@ void Frame::updatePicture()
     QPainter *p = new QPainter();
     p->begin(&m_pixmap);
 
-    int roundingFactor = qMin(sizeHint.height() / 10, 12.0) * m_roundCorners;
+    int roundingFactor = qMin(qreal(sizeHint.height() / 10), qreal(12.0)) * m_roundCorners;
     int swRoundness = roundingFactor + frameLines / 2 * m_frame * m_roundCorners;
 
     QRectF frameRect(QPoint(0, 0), contentsSize);
