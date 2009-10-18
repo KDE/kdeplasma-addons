@@ -65,7 +65,6 @@ Previewer::Previewer(QObject *parent, const QVariantList &args)
     setBackgroundHints(NoBackground);
 
     resize(PreviewWidget::suggestedWidth(), 150);
-    setPreferredSize(PreviewWidget::suggestedWidth(), 150);
     if (args.count()) {
         kDebug() << "Opening file from arg passed into applet ..." << args.value(0).toString();
         m_currentFile = args.value(0).toString();
@@ -96,6 +95,7 @@ QGraphicsWidget* Previewer::graphicsWidget()
         m_previewWidget->setMinimumSize(200, m_previewWidget->iconSize().height() + m_previewWidget->s_topBorder +
                                         m_previewWidget->bottomBorderHeight());
         m_previewWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_previewWidget->setPreferredSize(m_previewWidget->minimumSize());
         connect(m_previewWidget, SIGNAL(urlsDropped(KUrl::List)), this, SLOT(openUrls(KUrl::List)));
         connect(m_previewWidget, SIGNAL(fileOpenRequested(KUrl)), this, SLOT(openFile(KUrl)));
     }
