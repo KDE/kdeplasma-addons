@@ -64,6 +64,7 @@ QGraphicsWidget* OpenDesktopActivities::graphicsWidget()
 void OpenDesktopActivities::init()
 {
     QTimer::singleShot(0, this, SLOT(initWatcher()));
+    setAssociatedApplicationUrls(KUrl("http://opendesktop.org"));
 }
 
 
