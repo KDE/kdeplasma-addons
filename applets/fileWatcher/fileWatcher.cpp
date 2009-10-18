@@ -40,7 +40,6 @@ FileWatcher::FileWatcher(QObject *parent, const QVariantList &args)
 {
   setAspectRatioMode(Plasma::IgnoreAspectRatio);
   setHasConfigurationInterface(true);
-  setBackgroundHints(TranslucentBackground);
   resize(400, 200);
 }
 
@@ -101,6 +100,7 @@ void FileWatcher::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::SizeConstraint){
         textItem->setSize((int) contentsRect().width(), (int) contentsRect().height());
+        textItem->setPos(contentsRect().topLeft());
         updateRows();
     }
 }
@@ -191,6 +191,7 @@ void FileWatcher::newData()
   }
 
   cursor.endEditBlock();
+  emit sizeHintChanged(Qt::PreferredSize);
 }
 
 void FileWatcher::createConfigurationInterface(KConfigDialog *parent)
@@ -246,6 +247,16 @@ void FileWatcher::configAccepted()
     loadFile(tmpPath);
 
     emit configNeedsSaving();
+}
+
+QSizeF FileWatcher::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    QSizeF hint = QGraphicsWidget::sizeHint(which, constraint);
+    if (which == Qt::PreferredSize) {
+        hint.setHeight(qMax((qreal)200.0, textItem->document()->size().height()));
+    }
+
+    return hint;
 }
 
 #include "fileWatcher.moc"

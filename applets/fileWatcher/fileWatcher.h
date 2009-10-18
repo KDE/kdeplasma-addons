@@ -43,6 +43,7 @@ class FileWatcher : public Plasma::Applet
 
   protected:
     void constraintsEvent(Plasma::Constraints constraints);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
 
   protected slots:
     void configAccepted();
