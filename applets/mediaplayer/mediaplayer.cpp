@@ -48,6 +48,7 @@ MediaPlayer::MediaPlayer(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(200, 200);
+    setPreferredSize(200,200);
 
     if (args.count()) {
         m_currentUrl = args.value(0).toString();
@@ -200,6 +201,7 @@ void MediaPlayer::ShowOpenFileDialog()
 void MediaPlayer::OpenUrl(const QString &url)
 {
     m_currentUrl = url;
+    setAssociatedApplicationUrls(KUrl(m_currentUrl));
     m_video->setUrl(m_currentUrl);
     m_video->mediaObject()->play();
 }
