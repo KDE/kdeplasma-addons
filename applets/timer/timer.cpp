@@ -41,6 +41,7 @@ Timer::Timer(QObject *parent, const QVariantList &args)
       m_running(false)
 {
     resize(315, 125);
+    setPreferredSize(315, 125);
     setHasConfigurationInterface(true);
     setAspectRatioMode(Plasma::KeepAspectRatio);
 }
