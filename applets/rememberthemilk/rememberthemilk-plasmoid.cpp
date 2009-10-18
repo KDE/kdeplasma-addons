@@ -113,6 +113,7 @@ void RememberTheMilkPlasmoid::init() {
     setSortBy(SortDue); // Default
   
   Plasma::Applet::init();
+  setAssociatedApplicationUrls(KUrl("http://remeberthemilk.com"));
 }
 
 
