@@ -43,6 +43,7 @@ FifteenPuzzle::FifteenPuzzle(QObject *parent, const QVariantList &args)
   setLayout(lay);
   m_board->resize(192, 192); // 48 * 4 = 192
   resize(m_board->geometry().size());
+  setPreferredSize(192, 192);
 }
 
 void FifteenPuzzle::init()
