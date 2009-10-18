@@ -51,7 +51,6 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_labelTransparency(0)
 {
     resize(200, 200);
-    setPreferredSize(200,200);
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
     m_svg->setContainsMultipleImages(true);
@@ -60,6 +59,7 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
 
     setAcceptsHoverEvents(true);
     setAspectRatioMode(Plasma::Square);
+    setBackgroundHints(NoBackground);
 }
 
 Bubble::~Bubble()
@@ -159,7 +159,11 @@ Bubble::constraintsEvent(Plasma::Constraints constraints)
     Plasma::Applet::constraintsEvent(constraints);
     
     if (constraints & Plasma::FormFactorConstraint) {
-        setBackgroundHints(NoBackground);
+        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical) {
+            setPreferredSize(-1,-1);
+        } else {
+            setPreferredSize(150, 150);
+        }
     }
     
     if (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter) {
