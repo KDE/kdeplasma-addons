@@ -62,11 +62,14 @@ Previewer::Previewer(QObject *parent, const QVariantList &args)
 
     setAcceptHoverEvents(true);
     setAcceptDrops(true);
+    setBackgroundHints(NoBackground);
 
     resize(PreviewWidget::suggestedWidth(), 150);
+    setPreferredSize(PreviewWidget::suggestedWidth(), 150);
     if (args.count()) {
         kDebug() << "Opening file from arg passed into applet ..." << args.value(0).toString();
         m_currentFile = args.value(0).toString();
+        setAssociatedApplicationUrls(KUrl(m_currentFile));
     }
 }
 
@@ -111,7 +114,6 @@ void Previewer::init()
 void Previewer::constraintsEvent(Plasma::Constraints constraints)
 {
     Q_UNUSED(constraints)
-    setBackgroundHints(NoBackground);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
 }
 
@@ -178,6 +180,7 @@ void Previewer::openFile(KUrl u)
     if (m_part->openUrl(u)) {
         kDebug() << "part successfully created";
         m_currentFile = u.pathOrUrl();
+        setAssociatedApplicationUrls(KUrl(m_currentFile));
         m_dialog->setTitle(u.fileName());
         m_dialog->resize(600,500);
         QDesktopWidget *dw = QApplication::desktop();
