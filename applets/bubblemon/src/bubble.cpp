@@ -51,6 +51,7 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_labelTransparency(0)
 {
     resize(200, 200);
+    setPreferredSize(200,200);
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
     m_svg->setContainsMultipleImages(true);
@@ -128,7 +129,8 @@ void
 Bubble::resizeEvent(QGraphicsSceneResizeEvent *evt)
 {
     Plasma::Applet::resizeEvent(evt);
-    m_svg->resize(evt->newSize());
+    qreal size = qMin(contentsRect().size().width(), contentsRect().size().height());
+    m_svg->resize(size, size);
     m_bubbleHeight = m_svg->elementSize("bubble").height();
 }
 
@@ -216,7 +218,9 @@ Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option
     if (configurationRequired()) {
         return;
     }
-    
+
+    painter->save();
+    painter->translate(contentsRect.topLeft());
     m_svg->paint(painter, m_svg->elementRect("background"), "background");
     
     if (m_max>0 && m_val>0) {
@@ -247,6 +251,7 @@ Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option
     m_svg->paint(painter, m_svg->elementRect("glass"), "glass");
     if (m_labelTransparency > 0)
         drawLabel(painter, option, contentsRect);
+    painter->restore();
 }
 
 void
