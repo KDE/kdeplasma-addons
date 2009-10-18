@@ -20,8 +20,7 @@
 #ifndef ABSTRACTGROUP_H
 #define ABSTRACTGROUP_H
 
-#include <QtGui/QGraphicsWidget>
-#include <KDE/Plasma/Applet>
+#include <Plasma/Applet>
 
 class KConfigGroup;
 
@@ -32,28 +31,24 @@ namespace Plasma {
 
 class AbstractGroupPrivate;
 
-class AbstractGroup : public QGraphicsWidget
+class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
 {
     Q_OBJECT
     public:
-        AbstractGroup(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags = 0);
+        AbstractGroup(QObject *parent = 0, const QVariantList &args = QVariantList());
         ~AbstractGroup();
 
+        void init();
         void assignApplet(Plasma::Applet *applet, bool layoutApplets = true);
         virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) = 0;
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
-        virtual QString plugin() = 0;
         virtual void layoutApplet(Plasma::Applet *applet) = 0;
-        int id() const;
         void destroy();
         KConfigGroup config();
+        void save(KConfigGroup &group) const;
         Plasma::Applet::List assignedApplets();
-        Plasma::Containment *containment();
-
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     protected:
-        void resizeEvent(QGraphicsSceneResizeEvent *event);
         void dropEvent(QGraphicsSceneDragDropEvent *event);
 
     private slots:

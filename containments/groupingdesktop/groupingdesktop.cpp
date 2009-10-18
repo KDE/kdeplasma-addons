@@ -28,7 +28,6 @@
 #include <KDebug>
 
 #include "abstractgroup.h"
-#include "gridlayout.h"
 
 K_EXPORT_PLASMA_APPLET(groupingdesktop, GroupingDesktop)
 
@@ -56,10 +55,8 @@ void GroupingDesktop::init()
     m_removeGroup->setText(i18n("Remove this group"));
     connect (m_newGridLayout, SIGNAL(triggered()),
              this, SLOT(newGridLayoutClicked()));
-    connect (m_removeGroup, SIGNAL(rtiggered()),
+    connect (m_removeGroup, SIGNAL(triggered()),
              this, SLOT(removeGroup()));
-    connect (this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
-             this, SLOT(onImmutabilityChanged(Plasma::ImmutabilityType)));
 
     addToolBoxAction(m_newGridLayout);
     newGridLayoutClicked();
@@ -67,11 +64,12 @@ void GroupingDesktop::init()
 
 void GroupingDesktop::newGridLayoutClicked()
 {
-    int id = m_groups.count(); //FIXME
-    AbstractGroup *group = createGroup("grid", id);
-    group->setGeometry(20,20,400,400);
+    AbstractGroup *group = createGroup("gridlayout", 0);
+    if (group) {
+        group->setGeometry(20,20,400,400);
 
-    emit configNeedsSaving();
+        emit configNeedsSaving();
+    }
 }
 
 QList<QAction *> GroupingDesktop::contextualActions()
@@ -90,17 +88,24 @@ void GroupingDesktop::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
     }
 }
 
-AbstractGroup* GroupingDesktop::createGroup(const QString& plugin, int id)
+AbstractGroup *GroupingDesktop::createGroup(const QString &plugin, int id)
 {
-    AbstractGroup *group;
+    Plasma::Applet *applet = Plasma::Applet::load(plugin, id);
+    AbstractGroup *group = dynamic_cast<AbstractGroup *>(applet);
 
-    if (plugin == "grid") {
-        group = new GridLayout(id, this);
-    } else {
+    if (!group) {
+        delete applet;
         return 0;
     }
 
-    group->setFlag(QGraphicsItem::ItemIsMovable, immutability() == Plasma::Mutable);
+    group->setParent(this);
+    group->setParentItem(this);
+    group->init();
+    group->updateConstraints(Plasma::StartupCompletedConstraint);
+    group->flushPendingConstraintsEvents();
+    group->updateConstraints(Plasma::AllConstraints);
+    group->flushPendingConstraintsEvents();
+    group->setZValue(-100000000); //maybe FIXME ?
 
     m_groups.insert(id, group);
 
@@ -125,7 +130,7 @@ void GroupingDesktop::save(KConfigGroup &group) const
     KConfigGroup groupsConfig(&group, "Groups");
     foreach (AbstractGroup *group, m_groups) {
         KConfigGroup groupConfig(&groupsConfig, QString::number(m_groups.key(group)));
-        groupConfig.writeEntry("Plugin", group->plugin());
+        groupConfig.writeEntry("Plugin", group->pluginName());
         groupConfig.writeEntry("Geometry", group->geometry());
     }
 }
@@ -191,6 +196,7 @@ void GroupingDesktop::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         if (group->geometry().contains(event->pos())) {
             m_removeGroup->setVisible(true);
             m_removeGroup->setData(group->id());
+            kDebug()<<"Group clicked";
         }
     }
 

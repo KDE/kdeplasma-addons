@@ -26,6 +26,20 @@
 #include <Plasma/Applet>
 #include <Plasma/PaintUtils>
 
+K_EXPORT_PLASMA_APPLET(gridlayout, GridLayout)
+
+class Position {
+    public:
+        Position(int r = -1, int c = -1)
+        : row(r),
+        column(c)
+        {
+        }
+
+        int row;
+        int column;
+};
+
 class Spacer : public QGraphicsWidget
 {
     public:
@@ -68,8 +82,8 @@ class Spacer : public QGraphicsWidget
         }
 };
 
-GridLayout::GridLayout(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags)
-          : AbstractGroup(id, parent, wFlags)
+GridLayout::GridLayout(QObject *parent, const QVariantList &args)
+          : AbstractGroup(parent, args)
 {
     m_layout = new QGraphicsGridLayout(this);
     setLayout(m_layout);
@@ -77,16 +91,13 @@ GridLayout::GridLayout(int id, Plasma::Containment *parent, Qt::WindowFlags wFla
     m_spacer = new Spacer(this);
     m_spacer->parent = this;
     m_spacer->hide();
+
+    assignApplet(0, false);
 }
 
 GridLayout::~GridLayout()
 {
 
-}
-
-QString GridLayout::plugin()
-{
-    return "grid";
 }
 
 void GridLayout::layoutApplet(Plasma::Applet* applet)

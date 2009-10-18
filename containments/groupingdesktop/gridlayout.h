@@ -28,32 +28,19 @@ namespace Plasma {
     class Applet;
 };
 
-class Position {
-    public:
-        Position(int r = -1, int c = -1)
-                : row(r),
-                  column(c)
-        {
-        }
-
-        int row;
-        int column;
-};
-
+class Position;
 class Spacer;
 
 class GridLayout : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridLayout(int id, Plasma::Containment *parent, Qt::WindowFlags wFlags = 0);
+        GridLayout(QObject *parent, const QVariantList &args);
         ~GridLayout();
 
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group);
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
         void layoutApplet(Plasma::Applet* applet);
-        Position itemPosition(QGraphicsWidget *item);
-        QString plugin();
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
@@ -64,6 +51,7 @@ class GridLayout : public AbstractGroup
             Vertical = 1
         };
 
+        Position itemPosition(QGraphicsWidget *item);
         void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
         void removeItemAt(int row, int column);
         void removeItemAt(Position pos);
