@@ -44,6 +44,7 @@ class GridLayout : public AbstractGroup
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+        void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
 
     private:
         enum Orientation {

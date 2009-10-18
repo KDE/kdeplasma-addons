@@ -47,7 +47,8 @@ class AbstractGroupPrivate
             }
 
             KConfigGroup containmentGroup = q->containment()->config();
-            KConfigGroup *mainConfig = new KConfigGroup(&containmentGroup, QString::number(q->id()));
+            KConfigGroup groupsConfig = KConfigGroup(&containmentGroup, "Groups");
+            KConfigGroup *mainConfig = new KConfigGroup(&groupsConfig, QString::number(q->id()));
 
             return mainConfig;
         }
@@ -109,9 +110,9 @@ void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
 
 void AbstractGroup::destroy()
 {
-    foreach (Plasma::Applet *applet, d->applets) {
-        applet->destroy();
-    }
+//     foreach (Plasma::Applet *applet, d->applets) {
+//         applet->destroy();
+//     }
 
     Plasma::Applet::destroy();
 }

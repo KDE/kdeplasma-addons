@@ -37,24 +37,18 @@ class GroupingDesktop: public Plasma::Containment
         void init();
 
         QList<QAction *>  contextualActions();
-        void save(KConfigGroup& group) const;
         void saveContents(KConfigGroup &group) const;
         void restore(KConfigGroup& group);
 
-    protected:
-        void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-
     private slots:
         void newGridLayoutClicked();
-        void removeGroup();
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
-        void onImmutabilityChanged(Plasma::ImmutabilityType immutability);
+        void groupDestroyed(Plasma::Applet *group);
 
     private:
         AbstractGroup *createGroup(const QString &plugin, int id = 0);
 
         QAction *m_newGridLayout;
-        QAction *m_removeGroup;
         QMap<int, AbstractGroup *> m_groups;
 };
 

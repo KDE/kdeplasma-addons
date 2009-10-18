@@ -197,9 +197,22 @@ void GridLayout::removeItemAt(Position pos)
     removeItemAt(pos.row, pos.column);
 }
 
-void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent* event)
+void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
     showItemDropZone(m_spacer, event->pos());
+
+    if (!geometry().contains(event->pos())) {
+        m_spacer->hide();
+        removeItemAt(itemPosition(m_spacer));
+    }
+}
+
+void GridLayout::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+//     if (m_spacer->isVisible()) {
+//         m_spacer->hide();
+//         removeItemAt(itemPosition(m_spacer));
+//     }
 }
 
 void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
@@ -264,8 +277,9 @@ int GridLayout::nearestBoundair(qreal pos, qreal size)
     return -1;
 }
 
-void GridLayout::saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group)
+void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group)
 {
+    kDebug()<<"save";
     Position pos = itemPosition(applet);
     group.writeEntry("Row", pos.row);
     group.writeEntry("Column", pos.column);
