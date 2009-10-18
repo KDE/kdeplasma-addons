@@ -65,6 +65,7 @@ void FileWatcher::init()
   KConfigGroup cg = config();
 
   QString path = cg.readEntry("path", QString());
+  setAssociatedApplicationUrls(KUrl(path));
   textItem->setDefaultTextColor(cg.readEntry("textColor", Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor)));
   textItem->setFont(cg.readEntry("font", Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont)));
 
@@ -245,6 +246,7 @@ void FileWatcher::configAccepted()
 
     textItem->update();
     loadFile(tmpPath);
+    setAssociatedApplicationUrls(KUrl(tmpPath));
 
     emit configNeedsSaving();
 }
