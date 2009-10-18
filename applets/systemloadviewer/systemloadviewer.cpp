@@ -52,7 +52,6 @@ SystemLoadViewer::SystemLoadViewer(QObject *parent, const QVariantList &args)
 
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(100, 100); // sane size for Planar and MediaCenter
-    setPreferredSize(150, 150);
 
     m_freeResourceColor = QColor(128, 128, 128, 128);
 }
@@ -211,6 +210,7 @@ void SystemLoadViewer::constraintsEvent(Plasma::Constraints constraints)
         } else if (backgroundHints() != NoBackground) { // else: Horizontal/Vertical
             setBackgroundHints(NoBackground);
         }
+
     } else if (constraints.testFlag(Plasma::SizeConstraint)) {
         updateSize();
     }
@@ -223,10 +223,12 @@ void SystemLoadViewer::updateSize()
 
     if (formFactor() == Plasma::Horizontal) {
         setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        setMinimumWidth(widthForHeight(contentsRect().height()));
+        setMinimumWidth(widthForHeight(size().height()));
     } else if (formFactor() == Plasma::Vertical) {
         setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        setMinimumHeight(heightForWidth(contentsRect().width()));
+        setMinimumHeight(heightForWidth(size().width()));
+    } else {
+        setPreferredHeight(heightForWidth(size().width()));
     }
 }
 
