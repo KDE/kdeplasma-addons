@@ -536,7 +536,10 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
         //resize ( QSizeF ( m_contentSize.width(),geometry().size().height() ) );
     } else {
         //add margins
-        resize ( m_contentSize + QSizeF(size()-contentsRect().size()) );
+        resize(m_contentSize + QSizeF(size()-contentsRect().size()));
+        setPreferredSize(m_contentSize + QSizeF(size()-contentsRect().size()));
+        resize(preferredSize());
+        emit sizeHintChanged(Qt::PreferredSize);
         emit appletTransformedItself();
     }
 
@@ -670,7 +673,9 @@ if ( contentsRect().size().width() > m_timeStringSize.width() && (formFactor() =
 
         //we use the minimal height here, since the user has given us too much height we cannot use for anything useful. minimal width because we are in a panel.
         kDebug() << "we set the minimum size needed as the size we want";
-        resize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
+        setPreferredSize ( QSizeF ( m_minimumContentSize.width() + m_margin*2,m_minimumContentSize.height() ) + (size() - contentsRect().size()) );
+        resize(preferredSize());
+        emit sizeHintChanged(Qt::PreferredSize);
         emit appletTransformedItself();
     }
 }
