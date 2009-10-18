@@ -262,7 +262,7 @@ void KnowledgeBase::detailsClicked(KBItemWidget *item, bool shown)
 
     m_KBItemsLayout->invalidate();
     m_KBItemsPage->resize(QSizeF(m_KBItemsPage->size().width(), m_KBItemsPage->effectiveSizeHint(Qt::PreferredSize).height()));
-    m_KBItemsPage->setPos(0, -item->pos().y());
+    m_KBItemsScroll->ensureItemVisible(item);
 
     emit sizeHintChanged(Qt::PreferredSize);
 }
