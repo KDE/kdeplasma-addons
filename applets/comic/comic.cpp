@@ -329,6 +329,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 
     mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
+    setAssociatedApplicationUrls(mWebsiteUrl);
     mShopUrl = data[ "Shop Url" ].value<KUrl>();
     mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
     mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
