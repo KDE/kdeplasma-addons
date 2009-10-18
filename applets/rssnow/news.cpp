@@ -74,6 +74,8 @@ void News::init()
     m_header = new Header(this);
     m_timer = new QTimer(this);
 
+    setAssociatedApplication("akregator");
+
     updateScrollers();
     connect(m_timer, SIGNAL(timeout()), this, SLOT(switchItems()));
 }
