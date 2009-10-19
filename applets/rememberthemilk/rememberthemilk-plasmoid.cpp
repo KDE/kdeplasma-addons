@@ -111,9 +111,9 @@ void RememberTheMilkPlasmoid::init() {
     setSortBy(SortPriority);
   else
     setSortBy(SortDue); // Default
-  
+
   Plasma::Applet::init();
-  setAssociatedApplicationUrls(KUrl("http://remeberthemilk.com"));
+  setAssociatedApplicationUrls(KUrl("http://rememberthemilk.com"));
 }
 
 
