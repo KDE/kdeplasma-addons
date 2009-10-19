@@ -84,21 +84,21 @@ int BinaryClock::getWidthFromHeight(int h) const
 
 void BinaryClock::constraintsEvent(Plasma::Constraints constraints)
 {
-    if (constraints & Plasma::FormFactorConstraint) {
+    if (constraints & Plasma::SizeConstraint) {
         qreal top, bottom, left, right;
         getContentsMargins(&left, &top, &right, &bottom);
         qreal borderHeight = top + bottom;
         qreal borderWidth = left + right;
 
         if (formFactor() == Plasma::Vertical) {
-            setMaximumHeight(getHeightFromWidth((int) contentsRect().width()) + borderHeight);
-
+            setMinimumHeight(getHeightFromWidth((int) contentsRect().width()) + borderHeight);
+            setMinimumWidth(0);
         } else if (formFactor() == Plasma::Horizontal) {
-            setMaximumWidth(getWidthFromHeight((int) contentsRect().height()) + borderWidth);
-
+            setMinimumWidth(getWidthFromHeight((int) contentsRect().height()) + borderWidth);
+            setMinimumHeight(0);
         } else {
-            resize(getWidthFromHeight((int) contentsRect().height()) + borderWidth, contentsRect().height() + borderHeight);
-            emit appletTransformedItself();
+            setMinimumWidth(getWidthFromHeight(30));
+            setMinimumHeight(30);
         }
     }
 }
