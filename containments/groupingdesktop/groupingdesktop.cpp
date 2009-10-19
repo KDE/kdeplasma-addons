@@ -46,8 +46,8 @@ void GroupingDesktop::init()
 {
     Plasma::Containment::init();
 
-    connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
-            this, SLOT(layoutApplet(Plasma::Applet*, QPointF)));
+    connect(this, SIGNAL(appletAdded(Plasma::Applet *, QPointF)),
+            this, SLOT(layoutApplet(Plasma::Applet *, QPointF)));
 
     m_newGridLayout = new QAction(this);
     m_newGridLayout->setText(i18n("Add a new grid layout"));
@@ -60,9 +60,9 @@ void GroupingDesktop::init()
 
 void GroupingDesktop::newGridLayoutClicked()
 {
-    AbstractGroup *group = createGroup("gridlayout", 0);
+    AbstractGroup *group = createGroup("gridlayout", QPointF(20,20), 0);
     if (group) {
-        group->setGeometry(20,20,400,400);
+        group->resize(400,400);
 
         emit configNeedsSaving();
     }
@@ -86,7 +86,7 @@ void GroupingDesktop::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
     }
 }
 
-AbstractGroup *GroupingDesktop::createGroup(const QString &plugin, int id)
+AbstractGroup *GroupingDesktop::createGroup(const QString &plugin, const QPointF &pos, int id)
 {
 
     Plasma::Applet *applet = Plasma::Applet::load(plugin, id);
@@ -97,48 +97,42 @@ AbstractGroup *GroupingDesktop::createGroup(const QString &plugin, int id)
         return 0;
     }
 
-    group->setParent(this);
-    group->setParentItem(this);
-    group->init();
-    group->updateConstraints(Plasma::StartupCompletedConstraint);
-    group->flushPendingConstraintsEvents();
-    group->updateConstraints(Plasma::AllConstraints);
-    group->flushPendingConstraintsEvents();
-    group->setZValue(-100000000); //maybe FIXME ?
-    group->setImmutability(Plasma::Mutable);
+    group->setPos(pos);
 
-    connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
-    connect(group, SIGNAL(appletDestroyed(Plasma::Applet*)), this, SLOT(groupDestroyed(Plasma::Applet*)));
+    Plasma::Containment::addApplet(group, pos, false);
 
     m_groups.insert(id, group);
+    connect(group, SIGNAL(appletDestroyed(Plasma::Applet*)), this, SLOT(groupDestroyed(Plasma::Applet*)));
 
     return group;
 }
 
 void GroupingDesktop::saveContents(KConfigGroup &group) const
 {
-    Containment::saveContents(group);
-
-    kDebug()<<group.accessMode();
-kDebug()<<"jklN===============================================================";
     KConfigGroup appletsConfig(&group, "Applets");
+    KConfigGroup groupsConfig(&group, "Groups");
+    foreach (const Applet *applet, applets()) {
+        if (!m_groups.contains(applet->id())){
+            KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
+            applet->save(appletConfig);
+        } else {
+            KConfigGroup groupConfig(&groupsConfig, QString::number(applet->id()));
+            applet->save(groupConfig);
+        }
+    }
+
     foreach (AbstractGroup *group, m_groups) {
         foreach (Plasma::Applet *applet, group->assignedApplets()) {
-            kDebug()<<QString::number(applet->id());
             KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
-            appletConfig.writeEntry("aa", "dd");
             KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
-            kDebug()<<appletConfig.isImmutable()<<group->id();
             groupConfig.writeEntry("Group", group->id());
             group->saveAppletLayoutInfo(applet, groupConfig);
         }
     }
 }
 
-void GroupingDesktop::restore(KConfigGroup& group)
+void GroupingDesktop::restoreContents(KConfigGroup& group)
 {
-    Containment::restore(group);
-
     KConfigGroup groupsConfig(&group, "Groups");
     foreach (QString groupId, groupsConfig.groupList()) {
         int id = groupId.toInt();
@@ -146,9 +140,9 @@ void GroupingDesktop::restore(KConfigGroup& group)
         QRectF geometry = groupConfig.readEntry("geometry", QRectF());
         QString plugin = groupConfig.readEntry("plugin", QString());
 
-        AbstractGroup *group = createGroup(plugin, id);
+        AbstractGroup *group = createGroup(plugin, geometry.topLeft(), id);
         if (group) {
-            group->setGeometry(geometry);
+            group->resize(geometry.size());
         }
     }
 
@@ -164,7 +158,6 @@ void GroupingDesktop::restore(KConfigGroup& group)
             if (groupId != -1) {
                 AbstractGroup *group = m_groups.value(groupId);
                 if (group) {
-                    kDebug()<<group->id();
                     group->assignApplet(applet, false);
                     group->restoreAppletLayoutInfo(applet, groupConfig);
                 }
@@ -175,9 +168,9 @@ void GroupingDesktop::restore(KConfigGroup& group)
 
 void GroupingDesktop::groupDestroyed(Plasma::Applet *group)
 {
-    int id = group->id();
+    kDebug()<<"Group"<<group->id()<<"destroyed !";
 
-//     m_groups.remove(id);
+    m_groups.remove(group->id());
 }
 
 #include "groupingdesktop.moc"

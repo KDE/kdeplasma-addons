@@ -91,8 +91,6 @@ GridLayout::GridLayout(QObject *parent, const QVariantList &args)
     m_spacer = new Spacer(this);
     m_spacer->parent = this;
     m_spacer->hide();
-
-    assignApplet(0, false);
 }
 
 GridLayout::~GridLayout()
@@ -100,13 +98,11 @@ GridLayout::~GridLayout()
 
 }
 
-void GridLayout::layoutApplet(Plasma::Applet* applet)
+void GridLayout::layoutApplet(Plasma::Applet *applet)
 {
-    //     QPointF pos = mapToItem(this, applet->pos());.
     QPointF pos = mapFromItem(parentItem(), applet->pos());
     kDebug()<<pos;
     if (m_spacer->geometry().contains(mapToItem(this, pos))) {
-        applet->setParentItem(this);
         Position spacerPos = itemPosition(m_spacer);
         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
             m_spacer->hide();

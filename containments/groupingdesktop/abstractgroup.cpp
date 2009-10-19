@@ -70,6 +70,7 @@ AbstractGroup::AbstractGroup(QObject *parent, const QVariantList &args)
 
 AbstractGroup::~AbstractGroup()
 {
+    delete d;
 }
 
 void AbstractGroup::init()
@@ -110,16 +111,15 @@ void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
 
 void AbstractGroup::destroy()
 {
-//     foreach (Plasma::Applet *applet, d->applets) {
-//         applet->destroy();
-//     }
+    foreach (Plasma::Applet *applet, d->applets) {
+        applet->destroy();
+    }
 
     Plasma::Applet::destroy();
 }
 
 KConfigGroup AbstractGroup::config()
 {
-
     KConfigGroup config = KConfigGroup(d->mainConfigGroup(), "Configuration");
 
     return config;
@@ -127,9 +127,9 @@ KConfigGroup AbstractGroup::config()
 
 void AbstractGroup::save(KConfigGroup &group) const
 {
-    if (!group.isValid()) {
+//     if (!group.isValid()) {
         group = *d->mainConfigGroup();
-    }
+//     }
 
     Plasma::Applet::save(group);
 }

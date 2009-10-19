@@ -38,7 +38,7 @@ class GroupingDesktop: public Plasma::Containment
 
         QList<QAction *>  contextualActions();
         void saveContents(KConfigGroup &group) const;
-        void restore(KConfigGroup& group);
+        void restoreContents(KConfigGroup& group);
 
     private slots:
         void newGridLayoutClicked();
@@ -46,7 +46,7 @@ class GroupingDesktop: public Plasma::Containment
         void groupDestroyed(Plasma::Applet *group);
 
     private:
-        AbstractGroup *createGroup(const QString &plugin, int id = 0);
+        AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, int id = 0);
 
         QAction *m_newGridLayout;
         QMap<int, AbstractGroup *> m_groups;
