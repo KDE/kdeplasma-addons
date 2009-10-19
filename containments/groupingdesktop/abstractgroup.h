@@ -24,34 +24,87 @@
 
 class KConfigGroup;
 
-namespace Plasma {
-    class Applet;
-    class FrameSvg;
-};
-
 class AbstractGroupPrivate;
 
 class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
 {
     Q_OBJECT
     public:
+        /**
+        * Constructor of the abstract class.
+        **/
         AbstractGroup(QObject *parent = 0, const QVariantList &args = QVariantList());
+        /**
+        * Default destructor
+        **/
         ~AbstractGroup();
 
+        /**
+        * Reimplemented from Plasma::Applet
+        **/
         void init();
+
+        /**
+        * Assignes an Applet to this Group
+        * @param applet the applet to be managed by this
+        * @param layoutApplets if true calls layoutApplet(applet)
+        **/
         void assignApplet(Plasma::Applet *applet, bool layoutApplets = true);
+
+        /**
+        * Saves the group's specific configurations for an applet.
+        * This function must be reimplemented by a child class.
+        * @param applet the applet which will be saved
+        * @param group the config group for the configuration
+        **/
         virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) = 0;
+
+        /**
+        * Restores the group's specific configurations for an applet.
+        * This function must be reimplemented by a child class.
+        * @param applet the applet which will be restored
+        * @param group the config group for the configuration
+        **/
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
+
+        /**
+        * Lay outs an applet inside the group
+        * This function must be reimplemented by a child class.
+        * @param applet the applet to be layed out
+        **/
         virtual void layoutApplet(Plasma::Applet *applet) = 0;
+
+        /**
+        * Destroyed this groups and its applet, deleting the configurations too
+        **/
         void destroy();
+
+        /**
+        * Reimplemented from Plasma::Applet
+        **/
         KConfigGroup config();
+
+        /**
+        * Reimplemented from Plasma::Applet
+        **/
         void save(KConfigGroup &group) const;
+
+        /**
+        * Used to have a list of the applets managed by this group
+        * @return the list of the applets
+        **/
         Plasma::Applet::List assignedApplets();
 
     protected:
+        /**
+        * Reimplemented from QGraphicsItem
+        **/
         void dropEvent(QGraphicsSceneDragDropEvent *event);
 
     private slots:
+        /**
+        * @internal slot called when an applet is removed
+        **/
         void onAppletRemoved(Plasma::Applet *applet);
 
     private:
