@@ -1,3 +1,26 @@
+- 0.7
+Various bugfixes
+Proper stretch factor of the settings dialog
+
+- 0.6.4
+Async. and non-blocking download of exchange rates at startup
+Hide tooltips when applet is placed on desktop
+Display icon when no input is given
+
+- 0.6.3
+Fixed bug when both live evaluation and write results in input line are enabled
+
+- 0.6.2
+Fixed vertical panel issue
+Added option to evaluate expression as you type
+
+- 0.6.1
+Clear button added
+Applet is scaled down to a one-line calculator when the option "Write results in input line" is enabled
+Applet is now respecting locale settings
+Fixed a couple of memory leaks
+Fixed some translations
+
 - 0.6
 Applet rewrite. Now using Plasma::PopupApplet
 Improved panel support
