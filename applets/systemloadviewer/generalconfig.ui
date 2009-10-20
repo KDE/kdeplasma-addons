@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>314</height>
+    <width>275</width>
+    <height>92</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,27 +59,22 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <widget class="KIntSpinBox" name="spbxUpdateInterval">
+     <property name="suffix">
+      <string> ms</string>
      </property>
-     <widget class="KIntSpinBox" name="spbxUpdateInterval">
-      <property name="suffix">
-       <string> ms</string>
-      </property>
-      <property name="minimum">
-       <number>500</number>
-      </property>
-      <property name="maximum">
-       <number>3000</number>
-      </property>
-      <property name="singleStep">
-       <number>250</number>
-      </property>
-      <property name="value">
-       <number>2000</number>
-      </property>
-     </widget>
+     <property name="minimum">
+      <number>500</number>
+     </property>
+     <property name="maximum">
+      <number>3000</number>
+     </property>
+     <property name="singleStep">
+      <number>250</number>
+     </property>
+     <property name="value">
+      <number>2000</number>
+     </property>
     </widget>
    </item>
    <item row="2" column="2">
@@ -89,13 +84,13 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>97</width>
+       <width>2</width>
        <height>17</height>
       </size>
      </property>
     </spacer>
    </item>
-   <item row="3" column="0">
+   <item row="3" column="0" colspan="3">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
