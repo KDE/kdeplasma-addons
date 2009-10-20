@@ -6,97 +6,194 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>291</width>
-    <height>226</height>
+    <width>527</width>
+    <height>468</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Configure Fifteen Puzzle</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QGroupBox" name="gb_appearance">
-     <property name="title">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
       <string>Appearance</string>
      </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0" colspan="2">
-       <widget class="QRadioButton" name="rb_identical">
-        <property name="text">
-         <string>Use plain pieces</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QRadioButton" name="rb_split">
-        <property name="text">
-         <string>Use custom image:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2" colspan="2">
-       <widget class="KUrlRequester" name="urlRequester">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="fileDialogModality">
-         <enum>Qt::NonModal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Size</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2">
-       <widget class="KColorCombo" name="color"/>
-      </item>
-      <item row="6" column="2" colspan="2">
-       <widget class="QSpinBox" name="size">
-        <property name="minimum">
-         <number>4</number>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QCheckBox" name="cb_showNumerals">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Show numerals</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
-   <item>
-    <widget class="QGroupBox" name="gb_actions">
-     <property name="title">
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>23</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Size:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QSpinBox" name="size">
+     <property name="minimum">
+      <number>4</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QRadioButton" name="rb_identical">
+     <property name="text">
+      <string>Use plain pieces:</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="KColorCombo" name="color"/>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QRadioButton" name="rb_split">
+     <property name="text">
+      <string>Use custom image:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="KUrlRequester" name="urlRequester">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="fileDialogModality">
+      <enum>Qt::NonModal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>13</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cb_showNumerals">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Show numerals</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>87</width>
+       <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
       <string>Actions</string>
      </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-     <layout class="QVBoxLayout"/>
     </widget>
    </item>
-   <item>
+   <item row="7" column="1" colspan="2">
     <widget class="QPushButton" name="pb_shuffle">
      <property name="text">
       <string>Shuffle Pieces</string>
      </property>
     </widget>
+   </item>
+   <item row="7" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>169</width>
+       <height>24</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>70</width>
+       <height>239</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="4">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>169</width>
+       <height>22</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
@@ -114,22 +211,6 @@
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>rb_split</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>cb_showNumerals</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>131</x>
-     <y>127</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>277</x>
-     <y>156</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>rb_split</sender>
    <signal>toggled(bool)</signal>
@@ -159,6 +240,22 @@
     <hint type="destinationlabel">
      <x>147</x>
      <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rb_split</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cb_showNumerals</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>156</y>
     </hint>
    </hints>
   </connection>
