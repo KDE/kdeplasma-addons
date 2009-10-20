@@ -13,8 +13,8 @@ make
 sudo make install
 
 Restart plasma to load the applet 
-kquitapp plasma
-plasma
+kquitapp plasma-desktop
+plasma-desktop
 
 or view it with 
 plasmoidviewer YourAppletName
