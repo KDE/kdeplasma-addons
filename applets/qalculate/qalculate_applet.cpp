@@ -37,6 +37,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsLinearLayout>
 #include <QLabel>
+#include <QGraphicsSceneMouseEvent>
 
 K_EXPORT_PLASMA_APPLET(qalculate, QalculateApplet)
 
@@ -57,7 +58,7 @@ QalculateApplet::QalculateApplet(QObject *parent, const QVariantList &args)
     connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(createTooltip()));
     connect(m_engine, SIGNAL(resultReady(const QString&)), this, SLOT(receivedResult(const QString&)));
     connect(m_settings, SIGNAL(configChanged()), this, SLOT(evalNoHist()));
-
+  
     setHasConfigurationInterface(true);
 }
 
@@ -116,13 +117,16 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         connect(m_input, SIGNAL(returnPressed()), this, SLOT(evaluate()));
         connect(m_input->nativeWidget(), SIGNAL(clearButtonClicked()), this, SLOT(clearOutputLabel()));
         connect(m_input->nativeWidget(), SIGNAL(editingFinished()), this, SLOT(evalNoHist()));
-
+        m_input->setAcceptedMouseButtons(Qt::LeftButton);
+        m_input->setFocusPolicy(Qt::StrongFocus);
+           
         m_output = new Plasma::Label;
         m_output->nativeWidget()->setAlignment(Qt::AlignCenter);
         QFont f = m_output->nativeWidget()->font();
         f.setBold(true);
         f.setPointSize(resultSize() / 2);
         m_output->nativeWidget()->setFont(f);
+        m_output->setFocusPolicy(Qt::NoFocus);
 
         QPalette palette = m_output->palette();
         palette.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
@@ -133,9 +137,12 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         m_layout->addItem(m_output);
 
         m_graphicsWidget->setLayout(m_layout);
+        m_graphicsWidget->setFocusPolicy(Qt::StrongFocus);
 
         configChanged();
         clearOutputLabel();
+        
+        connect(this, SIGNAL(activate()), this, SLOT(giveFocus()));
     }
 
     return m_graphicsWidget;
@@ -209,7 +216,7 @@ void QalculateApplet::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Down) {
         m_input->setText(m_history->nextItem());
     }
-
+    
     Plasma::PopupApplet::keyPressEvent(event);
 }
 
@@ -242,5 +249,28 @@ void QalculateApplet::clearOutputLabel()
     }
 }
 
+void QalculateApplet::focusInEvent(QFocusEvent* event)
+{
+    if (event->gotFocus()) {
+        giveFocus();
+    }   
+    
+    Plasma::PopupApplet::focusInEvent(event);
+}
+
+void QalculateApplet::giveFocus()
+{
+    this->setFocus();
+    m_input->setFocus();
+    m_input->nativeWidget()->setFocus();
+}
+
+void QalculateApplet::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        giveFocus();
+    }
+    Plasma::PopupApplet::mousePressEvent(event);
+}
 
 #include "qalculate_applet.moc"

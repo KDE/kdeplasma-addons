@@ -39,7 +39,6 @@
 
 #include <Plasma/PopupApplet>
 
-
 namespace Plasma
 {
 class LineEdit;
@@ -80,6 +79,8 @@ public slots:
 protected:
     void createConfigurationInterface(KConfigDialog *p_parent);
     void keyPressEvent(QKeyEvent * event);
+    void focusInEvent(QFocusEvent* event);
+    void mousePressEvent(QGraphicsSceneMouseEvent* event);
 
 protected slots:
     //! Evaluate the expression entered by the user
@@ -90,6 +91,8 @@ protected slots:
     void displayResult(const QString&);
     //! A slot to process the received result from the engine
     void receivedResult(const QString&);
+    //! Give focus to the input line
+    void giveFocus();
 
 private:
     //! The graphics widget
