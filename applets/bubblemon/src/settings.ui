@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
-    <height>437</height>
+    <width>391</width>
+    <height>294</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -107,6 +107,12 @@
    </item>
    <item row="3" column="3" rowspan="2">
     <widget class="QListView" name="sensorView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>10</verstretch>
+      </sizepolicy>
+     </property>
      <property name="showDropIndicator" stdset="0">
       <bool>false</bool>
      </property>
