@@ -309,8 +309,6 @@ void SystemLoadViewer::createConfigurationInterface(KConfigDialog *parent)
 
     parent->addPage(widGeneral, "General", icon(), QString(), false);
     parent->addPage(widColours, "Colours", icon(), QString(), false);
-
-    parent->setFaceType(KConfigDialog::Tabbed);
 }
 
 void SystemLoadViewer::configUpdated()
