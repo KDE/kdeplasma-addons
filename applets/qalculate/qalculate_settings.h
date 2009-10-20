@@ -70,6 +70,11 @@ public:
     bool liveEvaluation() const {
         return m_liveEvaluation;
     }    
+    //! Automatically gives focus to the input line when the plasmoid is clicked
+    bool autoFocus() const {
+        return m_autoFocus;
+    }
+    
     //! Structuring of the resultsInline
     //! @return 0, None
     //! @return 1, Simplify
@@ -149,7 +154,7 @@ private:
     bool m_copyToClipboard, m_resultsInline;
     bool m_rpn;
     bool m_preserveFormat;
-    bool m_liveEvaluation;
+    bool m_liveEvaluation, m_autoFocus;
     int m_structuring;
     int m_fractionDisplay;
     int m_angleUnit;
@@ -159,7 +164,7 @@ private:
 
     QCheckBox *m_unitsCheck, *m_infiniteSeriesCheck, *m_allPrefixesCheck, *m_denominatorPrefixCheck, *m_negativeExponentsCheck, *m_rpnCheck;
     QCheckBox *m_exchangeRatesCheck;
-    QCheckBox *m_copyToClipboardCheck, *m_resultsInlineCheck, *m_liveEvaluationCheck;
+    QCheckBox *m_copyToClipboardCheck, *m_resultsInlineCheck, *m_liveEvaluationCheck, *m_autoFocusCheck;
     KComboBox *m_structuringCombo, *m_fractionCombo, *m_angleUnitCombo, *m_minExpCombo;
     QSpinBox *m_baseSpin, *m_baseDisplaySpin;
 };

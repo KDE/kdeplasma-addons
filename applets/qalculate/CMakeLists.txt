@@ -3,12 +3,13 @@ project(plasma-qalculate)
 set(CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS} -Wno-deprecated")	
  
 # We add our source code here
-set(qalculate_SRCS     
+set(qalculate_SRCS    
 	qalculate_applet.cpp
 	qalculate_labels.cpp
 	qalculate_settings.cpp
 	qalculate_engine.cpp
 	qalculate_history.cpp
+    outputlabel.cpp
 )
  
 # Now make sure all files get to the right place

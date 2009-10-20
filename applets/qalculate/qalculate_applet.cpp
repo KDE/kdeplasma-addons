@@ -22,6 +22,8 @@
 #include "qalculate_engine.h"
 #include "qalculate_history.h"
 
+#include "outputlabel.h"
+
 #include <KLocale>
 #include <KLineEdit>
 #include <KIcon>
@@ -120,13 +122,14 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         m_input->setAcceptedMouseButtons(Qt::LeftButton);
         m_input->setFocusPolicy(Qt::StrongFocus);
            
-        m_output = new Plasma::Label;
+        m_output = new OutputLabel;
         m_output->nativeWidget()->setAlignment(Qt::AlignCenter);
         QFont f = m_output->nativeWidget()->font();
         f.setBold(true);
         f.setPointSize(resultSize() / 2);
         m_output->nativeWidget()->setFont(f);
         m_output->setFocusPolicy(Qt::NoFocus);
+        connect(m_output, SIGNAL(clicked()), this, SLOT(giveFocus()));
 
         QPalette palette = m_output->palette();
         palette.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
@@ -260,6 +263,10 @@ void QalculateApplet::focusInEvent(QFocusEvent* event)
 
 void QalculateApplet::giveFocus()
 {
+    if (!m_settings->autoFocus()) {
+        return;
+    }
+    
     this->setFocus();
     m_input->setFocus();
     m_input->nativeWidget()->setFocus();

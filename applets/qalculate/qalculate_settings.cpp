@@ -54,6 +54,7 @@ void QalculateSettings::readSettings()
     m_rpn = cfg.readEntry("rpn", false);
     m_preserveFormat = cfg.readEntry("preserveFormat", false);
     m_liveEvaluation = cfg.readEntry("liveEvaluation", false);
+    m_autoFocus = cfg.readEntry("autoFocus", true);
     m_base = cfg.readEntry("base", 10);
     m_baseDisplay = cfg.readEntry("baseDisplay", 10);
     m_minExp = cfg.readEntry("minExp", 0);
@@ -76,6 +77,7 @@ void QalculateSettings::writeSettings()
     cfg.writeEntry("copyToClipboard", m_copyToClipboardCheck->checkState() == Qt::Checked);
     cfg.writeEntry("resultsInline", m_resultsInlineCheck->checkState() == Qt::Checked);
     cfg.writeEntry("liveEvaluation", m_liveEvaluationCheck->checkState() == Qt::Checked);
+    cfg.writeEntry("autoFocus", m_autoFocusCheck->checkState() == Qt::Checked);
     cfg.writeEntry("rpn", m_rpnCheck->checkState() == Qt::Checked);
     cfg.writeEntry("base", m_baseSpin->value());
     cfg.writeEntry("baseDisplay", m_baseDisplaySpin->value());
@@ -104,6 +106,8 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     m_resultsInlineCheck->setCheckState(m_resultsInline ? Qt::Checked : Qt::Unchecked);
     m_liveEvaluationCheck = new QCheckBox(i18n("Live evaluation"), page);
     m_liveEvaluationCheck->setCheckState(m_liveEvaluation ? Qt::Checked : Qt::Unchecked);
+    m_autoFocusCheck = new QCheckBox(i18n("Automatically assign focus to input line on activation"), page);
+    m_autoFocusCheck->setCheckState(m_autoFocus ? Qt::Checked : Qt::Unchecked);
     connect(m_liveEvaluationCheck, SIGNAL(stateChanged(int)), this, SLOT(checkValidity()));
     m_rpnCheck = new QCheckBox(i18n("Enable reverse Polish notation"), page);
     m_rpnCheck->setCheckState(m_rpn ? Qt::Checked : Qt::Unchecked);
@@ -141,16 +145,17 @@ void QalculateSettings::createConfigurationInterface(KConfigDialog* parent)
     layout->addWidget(m_copyToClipboardCheck, 1, 0);
     layout->addWidget(m_resultsInlineCheck, 2, 0);
     layout->addWidget(m_liveEvaluationCheck, 3, 0);
-    layout->addWidget(m_rpnCheck, 4, 0);
-    layout->addWidget(structuringLabel, 5, 0);
-    layout->addWidget(m_structuringCombo, 5, 1);
-    layout->addWidget(angleUnitLabel, 6, 0);
-    layout->addWidget(m_angleUnitCombo, 6, 1);
-    layout->addWidget(baseLabel, 7, 0);
-    layout->addWidget(m_baseSpin, 7, 1);
-    layout->addWidget(baseDisplayLabel, 8, 0);
-    layout->addWidget(m_baseDisplaySpin, 8, 1);
-    layout->setRowStretch(9, 10);
+    layout->addWidget(m_autoFocusCheck, 4, 0);
+    layout->addWidget(m_rpnCheck, 5, 0);
+    layout->addWidget(structuringLabel, 6, 0);
+    layout->addWidget(m_structuringCombo, 6, 1);
+    layout->addWidget(angleUnitLabel, 7, 0);
+    layout->addWidget(m_angleUnitCombo, 7, 1);
+    layout->addWidget(baseLabel, 8, 0);
+    layout->addWidget(m_baseSpin, 8, 1);
+    layout->addWidget(baseDisplayLabel, 9, 0);
+    layout->addWidget(m_baseDisplaySpin, 9, 1);
+    layout->setRowStretch(10, 10);
 
     m_configDialog->addPage(page, i18nc("Evaluation", "Evaluation Settings"), m_applet->icon());
     

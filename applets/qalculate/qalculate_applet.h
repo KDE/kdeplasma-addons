@@ -42,8 +42,8 @@
 namespace Plasma
 {
 class LineEdit;
-class Label;
 }
+class OutputLabel;
 
 class QGraphicsWidget;
 class QGraphicsLinearLayout;
@@ -109,7 +109,7 @@ private:
     //! The input line where the user types the expression
     Plasma::LineEdit *m_input;
     //! The output label where the result is shown
-    Plasma::Label *m_output;
+    OutputLabel *m_output;
 
     //! The size of the result
     static int resultSize();
