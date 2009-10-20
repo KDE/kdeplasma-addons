@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>468</height>
+    <width>293</width>
+    <height>211</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,6 +55,9 @@
    </item>
    <item row="1" column="3">
     <widget class="QSpinBox" name="size">
+     <property name="suffix">
+      <string> pieces wide</string>
+     </property>
      <property name="minimum">
       <number>4</number>
      </property>
@@ -109,12 +112,15 @@
       </spacer>
      </item>
      <item>
-      <widget class="QCheckBox" name="cb_showNumerals">
+      <widget class="QLabel" name="lb_showNumbers">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Show numerals</string>
+        <string>Show numerals:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -195,6 +201,16 @@
      </property>
     </spacer>
    </item>
+   <item row="4" column="3">
+    <widget class="QCheckBox" name="cb_showNumerals">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -218,12 +234,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>131</x>
-     <y>127</y>
+     <x>152</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
-     <x>171</x>
-     <y>114</y>
+     <x>284</x>
+     <y>109</y>
     </hint>
    </hints>
   </connection>
@@ -234,12 +250,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>45</x>
-     <y>114</y>
+     <x>66</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
-     <x>147</x>
-     <y>52</y>
+     <x>284</x>
+     <y>79</y>
     </hint>
    </hints>
   </connection>
@@ -250,12 +266,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>131</x>
-     <y>127</y>
+     <x>152</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
-     <x>277</x>
-     <y>156</y>
+     <x>284</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rb_split</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lb_showNumbers</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>85</x>
+     <y>124</y>
     </hint>
    </hints>
   </connection>
