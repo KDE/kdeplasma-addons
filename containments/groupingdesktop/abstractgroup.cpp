@@ -135,7 +135,7 @@ void AbstractGroup::destroy()
     }
 }
 
-KConfigGroup AbstractGroup::config()
+KConfigGroup AbstractGroup::config() const
 {
     KConfigGroup config = KConfigGroup(d->mainConfigGroup(), "Configuration");
 

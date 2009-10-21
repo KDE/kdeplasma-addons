@@ -36,20 +36,14 @@ class GroupingDesktop: public Plasma::Containment
 
         void init();
 
-        QList<QAction *>  contextualActions();
         void saveContents(KConfigGroup &group) const;
         void restoreContents(KConfigGroup& group);
 
     private slots:
-        void newGridLayoutClicked();
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
-        void groupDestroyed(Plasma::Applet *group);
 
     private:
         AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, int id = 0);
-
-        QAction *m_newGridLayout;
-        QMap<int, AbstractGroup *> m_groups;
 };
 
 #endif
