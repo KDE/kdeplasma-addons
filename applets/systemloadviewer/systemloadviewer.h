@@ -34,6 +34,7 @@ class QString;
 class QSizeF;
 class QPainter;
 class QStyleOptionGraphicsItem;
+class QPoint;
 
 struct cpuInfo
 {
@@ -56,6 +57,10 @@ public:
 
     virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
 
+protected:
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    
 protected slots:
     void dataUpdated(const QString& source, const Plasma::DataEngine::Data &data);
     void configUpdated();
@@ -114,6 +119,8 @@ private:
 
     QColor m_swapUsedColour;
     QColor m_freeResourceColor;
+    
+    QPoint m_mousePressLoc;
 
     Plasma::DataEngine *sys_mon;
 };

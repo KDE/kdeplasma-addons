@@ -28,6 +28,8 @@
 #include <KConfigDialog>
 
 #include <QtGui/QPainter>
+#include <QtGui/QGraphicsSceneMouseEvent>
+#include <QtDBus/QDBusInterface>
 
 SystemLoadViewer::SystemLoadViewer(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
@@ -274,6 +276,22 @@ QSizeF SystemLoadViewer::sizeHint(Qt::SizeHint which, const QSizeF &constraint) 
 
 //     kDebug() << "sizeHint:" << hint << " -- which:" << which;
     return hint;
+}
+
+void SystemLoadViewer::mousePressEvent(QGraphicsSceneMouseEvent *event){
+ 
+    if(event->button() == Qt::LeftButton){
+        m_mousePressLoc = event->screenPos();
+    }
+  
+}
+
+void SystemLoadViewer::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
+ 
+  if(event->button() == Qt::LeftButton && ((event->screenPos() - m_mousePressLoc).manhattanLength()) < QApplication::startDragDistance()){
+      QDBusInterface("org.kde.krunner", "/App", "org.kde.krunner.App").call(QDBus::NoBlock, "showTaskManager");
+  }
+  
 }
 
 void SystemLoadViewer::createConfigurationInterface(KConfigDialog *parent)
