@@ -288,10 +288,10 @@
         <string> seconds</string>
        </property>
        <property name="decimals">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="minimum">
-        <double>1.000000000000000</double>
+        <double>0.100000000000000</double>
        </property>
        <property name="maximum">
         <double>3600.000000000000000</double>
