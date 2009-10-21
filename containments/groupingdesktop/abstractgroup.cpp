@@ -73,6 +73,10 @@ AbstractGroup::AbstractGroup(QObject *parent, const QVariantList &args)
 
 AbstractGroup::~AbstractGroup()
 {
+    foreach (Plasma::Applet *applet, assignedApplets()) {
+        applet->setParentItem(containment());
+    }
+
     delete d;
 }
 
@@ -103,7 +107,7 @@ Plasma::Applet::List AbstractGroup::assignedApplets()
     return d->applets;
 }
 
-void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
+void AbstractGroup::onAppletRemoved(Plasma::Applet *applet)
 {
     foreach (Plasma::Applet *ownApplet, d->applets) {
         if (applet == ownApplet) {
