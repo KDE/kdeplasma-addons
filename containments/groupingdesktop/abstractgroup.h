@@ -57,7 +57,7 @@ class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
         * @param applet the applet which will be saved
         * @param group the config group for the configuration
         **/
-        virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) = 0;
+        virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const = 0;
 
         /**
         * Restores the group's specific configurations for an applet.
@@ -65,7 +65,7 @@ class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
         * @param applet the applet which will be restored
         * @param group the config group for the configuration
         **/
-        virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
+        virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) const = 0;
 
         /**
         * Lay outs an applet inside the group
@@ -93,7 +93,7 @@ class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
         * Used to have a list of the applets managed by this group
         * @return the list of the applets
         **/
-        Plasma::Applet::List assignedApplets();
+        Plasma::Applet::List assignedApplets() const;
 
     protected:
         /**

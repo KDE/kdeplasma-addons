@@ -55,14 +55,13 @@ void GroupingDesktop::init()
              this, SLOT(newGridLayoutClicked()));
 
     addToolBoxAction(m_newGridLayout);
-    newGridLayoutClicked();
+//     newGridLayoutClicked();
 }
 
 void GroupingDesktop::newGridLayoutClicked()
 {
     AbstractGroup *group = createGroup("gridlayout", QPointF(20,20), 0);
     if (group) {
-        group->resize(400,400);
 
         emit configNeedsSaving();
     }
@@ -78,7 +77,7 @@ QList<QAction *> GroupingDesktop::contextualActions()
 void GroupingDesktop::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
     foreach (AbstractGroup *group, m_groups) {
-        if (group->geometry().contains(pos)) {
+        if (group && group->geometry().contains(pos)) {
             group->assignApplet(applet);
 
             emit configNeedsSaving();
@@ -120,19 +119,12 @@ void GroupingDesktop::saveContents(KConfigGroup &group) const
             applet->save(groupConfig);
         }
     }
-
-    foreach (AbstractGroup *group, m_groups) {
-        foreach (Plasma::Applet *applet, group->assignedApplets()) {
-            KConfigGroup appletConfig(&appletsConfig, QString::number(applet->id()));
-            KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
-            groupConfig.writeEntry("Group", group->id());
-            group->saveAppletLayoutInfo(applet, groupConfig);
-        }
-    }
 }
 
 void GroupingDesktop::restoreContents(KConfigGroup& group)
 {
+    Plasma::Containment::restoreContents(group);
+
     KConfigGroup groupsConfig(&group, "Groups");
     foreach (QString groupId, groupsConfig.groupList()) {
         int id = groupId.toInt();

@@ -32,9 +32,9 @@ class AbstractGroupPrivate
     public:
         AbstractGroupPrivate(AbstractGroup *group)
             : q(group),
-              m_mainConfig(0),
-              destroying(false)
-        {
+              destroying(false),
+              m_mainConfig(0)
+{
         }
 
         ~AbstractGroupPrivate()
@@ -102,7 +102,7 @@ void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
     }
 }
 
-Plasma::Applet::List AbstractGroup::assignedApplets()
+Plasma::Applet::List AbstractGroup::assignedApplets() const
 {
     return d->applets;
 }
@@ -149,6 +149,13 @@ void AbstractGroup::save(KConfigGroup &group) const
 //     }
 
     Plasma::Applet::save(group);
+
+    foreach (Plasma::Applet *applet, assignedApplets()) {
+        KConfigGroup appletConfig = applet->config().parent();
+        KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
+        groupConfig.writeEntry("Group", id());
+        saveAppletLayoutInfo(applet, groupConfig);
+    }
 }
 
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
