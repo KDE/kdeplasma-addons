@@ -38,13 +38,12 @@ class GridLayout : public AbstractGroup
         GridLayout(QObject *parent, const QVariantList &args);
         ~GridLayout();
 
-        void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group);
+        void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
         void layoutApplet(Plasma::Applet* applet);
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-        void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
 
     private:
         enum Orientation {
@@ -52,13 +51,13 @@ class GridLayout : public AbstractGroup
             Vertical = 1
         };
 
-        Position itemPosition(QGraphicsWidget *item);
+        QGraphicsLayoutItem *removeItemAt(int row, int column, bool fillLayout = true);
+        QGraphicsLayoutItem *removeItemAt(Position position, bool fillLayout = true);
+        void removeItem(QGraphicsWidget *item, bool fillLayout = true);
+        void showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos);
         void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
-        void removeItemAt(int row, int column);
-        void removeItemAt(Position pos);
-        QGraphicsLayoutItem *takeItemAt(int row, int column);
-        int nearestBoundair(qreal pos, qreal size);
-        void showItemDropZone(QGraphicsWidget *widget, const QPointF &pos);
+        Position itemPosition(QGraphicsItem *item) const;
+        int nearestBoundair(qreal pos, qreal size) const;
 
         QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;

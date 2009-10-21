@@ -98,140 +98,40 @@ GridLayout::~GridLayout()
 
 }
 
-void GridLayout::layoutApplet(Plasma::Applet *applet)
+void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    QPointF pos = mapFromItem(parentItem(), applet->pos());
-    kDebug()<<pos;
-    if (m_spacer->geometry().contains(mapToItem(this, pos))) {
-        Position spacerPos = itemPosition(m_spacer);
-        if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
-            m_spacer->hide();
-            removeItemAt(spacerPos);
-            insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
-        }
-    } else {
-        if (m_spacer->isVisible()) {
-            m_spacer->hide();
-            removeItemAt(itemPosition(m_spacer));
-        }
-        showItemDropZone(applet, pos);
-    }
-}
-
-Position GridLayout::itemPosition(QGraphicsWidget *widget)
-{
-    if (!widget) {
-        return Position();
-    }
-
-    for (int i = 0; i < m_layout->rowCount(); ++i) {
-        for (int j = 0; j < m_layout->columnCount(); ++j) {
-            if (widget == m_layout->itemAt(i, j)) {
-                return Position(i, j);
-            }
-        }
-    }
-
-    return Position();
-}
-
-void GridLayout::insertItemAt(QGraphicsWidget* item, int row, int column, Orientation orientation)
-{
-    kDebug()<<row<< column;
-    if (!item) {
+    if (!m_layout->geometry().contains(event->pos())) {
+        m_spacer->hide();
+        removeItem(m_spacer);
         return;
     }
 
-    const int rows = m_layout->rowCount();
-    const int columns = m_layout->columnCount();
-
-    item->show();
-    if ((rows > row) && (columns > column) && m_layout->itemAt(row, column)) {
-        if (orientation == Horizontal) {
-            for (int i = columns - 1; i >= column; --i) {
-                QGraphicsLayoutItem *nextItem = takeItemAt(row, i);
-                if (nextItem) {
-                    m_layout->addItem(nextItem, row, i + 1);
-                }
-            }
-        } else {
-            for (int i = rows - 1; i >= row; --i) {
-                QGraphicsLayoutItem *nextItem = takeItemAt(i, column);
-                if (nextItem) {
-                    m_layout->addItem(nextItem, i + 1, column);
-                }
-            }
-        }
-    }
-
-    m_layout->addItem(item, row, column);
-}
-
-QGraphicsLayoutItem* GridLayout::takeItemAt(int row, int column)
-{
-    QGraphicsLayoutItem *item = m_layout->itemAt(row, column);
-    if (item) {
-        for (int i = 0; i < m_layout->count(); ++i) {
-            QGraphicsLayoutItem *it = m_layout->itemAt(i);
-            if (it && it == item) {
-                m_layout->removeAt(i);
-                return it;
-            }
-        }
-    }
-
-    return 0;
-}
-
-void GridLayout::removeItemAt(int row, int column)
-{
-    takeItemAt(row, column);
-}
-
-void GridLayout::removeItemAt(Position pos)
-{
-    removeItemAt(pos.row, pos.column);
-}
-
-void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
-{
-    showItemDropZone(m_spacer, event->pos());
-
-    if (!geometry().contains(event->pos())) {
-        m_spacer->hide();
-        removeItemAt(itemPosition(m_spacer));
+    if (immutability() == Plasma::Mutable) {
+        showItemTo(m_spacer, event->pos());
     }
 }
 
-void GridLayout::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
-{
-//     if (m_spacer->isVisible()) {
-//         m_spacer->hide();
-//         removeItemAt(itemPosition(m_spacer));
-//     }
-}
-
-void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
+void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
 {
     const qreal x = pos.x();
     const qreal y = pos.y();
 
-    if (widget->geometry().contains(pos)) {
+    if (movingWidget->geometry().contains(pos)) {
         return;
     }
 
-    Position itemPos = itemPosition(widget);
+    Position itemPos = itemPosition(movingWidget);
 
     if ((itemPos.row != -1) && (itemPos.column != -1)) {
-        removeItemAt(itemPos.row, itemPos.column);
-        widget->hide();
+        removeItemAt(itemPos, true);
+        movingWidget->hide();
     }
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
 
     if (columns == 0) {
-        insertItemAt(widget, 0, 0, Horizontal);
+        insertItemAt(movingWidget, 0, 0, Horizontal);
         return;
     }
 
@@ -243,16 +143,125 @@ void GridLayout::showItemDropZone(QGraphicsWidget* widget, const QPointF& pos)
 
     int n;
     if ((n = nearestBoundair(x, columnWidth)) != -1) {
-        insertItemAt(widget, j, n, Horizontal);
+        insertItemAt(movingWidget, j, n, Horizontal);
         return;
     }
     if ((n = nearestBoundair(y, rowHeight)) != -1) {
-        insertItemAt(widget, n, i, Vertical);
+        insertItemAt(movingWidget, n, i, Vertical);
         return;
     }
 }
 
-int GridLayout::nearestBoundair(qreal pos, qreal size)
+QGraphicsLayoutItem* GridLayout::removeItemAt(Position position, bool fillLayout)
+{
+    return removeItemAt(position.row, position.column, fillLayout);
+}
+
+void GridLayout::removeItem(QGraphicsWidget* item, bool fillLayout)
+{
+    Position pos = itemPosition(item);
+    if ((pos.row != -1) && (pos.column != -1)) {
+        kDebug()<<"The item is not in the layout";
+        return;
+    }
+
+    removeItemAt(pos, fillLayout);
+}
+
+QGraphicsLayoutItem *GridLayout::removeItemAt(int row, int column, bool fillLayout)
+{
+    QGraphicsLayoutItem *item = m_layout->itemAt(row, column);
+    for (int i = 0; i < m_layout->count(); ++i) {
+        if (item == m_layout->itemAt(i)) {
+            m_layout->removeAt(i);
+            if (fillLayout) {
+                if (m_layout->columnCount() > column) {
+                    QGraphicsLayoutItem *movingWidget = removeItemAt(row, column + 1);
+                    if (movingWidget) {
+                        m_layout->addItem(movingWidget, row, column);
+                    }
+                }
+                if (m_layout->columnCount() > row) {
+                    QGraphicsLayoutItem *movingWidget = removeItemAt(row + 1, column);
+                    if (movingWidget) {
+                        m_layout->addItem(movingWidget, row, column);
+                    }
+                }
+            }
+
+            return item;
+        }
+    }
+
+    return 0;
+}
+
+void GridLayout::insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation)
+{
+    if (!item) {
+        return;
+    }
+
+    const int rows = m_layout->rowCount();
+    const int columns = m_layout->columnCount();
+
+    item->show();
+    if ((rows > row) && (columns > column) && m_layout->itemAt(row, column)) {
+        if (orientation == Horizontal) {
+            for (int i = columns - 1; i >= column; --i) {
+                QGraphicsLayoutItem *nextItem = removeItemAt(row, i, false);
+                if (nextItem) {
+                    m_layout->addItem(nextItem, row, i + 1);
+                }
+            }
+        } else {
+            for (int i = rows - 1; i >= row; --i) {
+                QGraphicsLayoutItem *nextItem = removeItemAt(i, column, false);
+                if (nextItem) {
+                    m_layout->addItem(nextItem, i + 1, column);
+                }
+            }
+        }
+    }
+
+    m_layout->addItem(item, row, column);
+}
+
+Position GridLayout::itemPosition(QGraphicsItem *item) const
+{
+    for (int i = 0; i < m_layout->rowCount(); ++i) {
+        for (int j = 0; j < m_layout->columnCount(); ++j) {
+            QGraphicsLayoutItem *layoutItem = m_layout->itemAt(i, j);
+            if (layoutItem && layoutItem->graphicsItem() == item) {
+                return Position(i, j);
+            }
+        }
+    }
+
+    return Position(-1, -1);
+}
+
+void GridLayout::layoutApplet(Plasma::Applet *applet)
+{
+    QPointF pos = mapFromItem(parentItem(), applet->pos());
+    kDebug()<<pos;
+    if (m_spacer->geometry().contains(mapToItem(this, pos))) {
+        Position spacerPos = itemPosition(m_spacer);
+        if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
+            m_spacer->hide();
+            removeItemAt(spacerPos, false);
+            insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
+        }
+    } else {
+        if (m_spacer->isVisible()) {
+            m_spacer->hide();
+            removeItemAt(itemPosition(m_spacer), true);
+        }
+        showItemTo(applet, pos);
+    }
+}
+
+int GridLayout::nearestBoundair(qreal pos, qreal size) const
 {
     const int gap = size / 3;
 
@@ -273,9 +282,8 @@ int GridLayout::nearestBoundair(qreal pos, qreal size)
     return -1;
 }
 
-void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group)
+void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
 {
-    kDebug()<<"save";
     Position pos = itemPosition(applet);
     group.writeEntry("Row", pos.row);
     group.writeEntry("Column", pos.column);

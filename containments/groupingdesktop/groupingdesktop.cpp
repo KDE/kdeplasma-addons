@@ -48,15 +48,13 @@ void GroupingDesktop::init()
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, QPointF)),
             this, SLOT(layoutApplet(Plasma::Applet *, QPointF)));
-
-//     createGroup("gridlayout", QPointF(20,20), 0);
 }
 
 void GroupingDesktop::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
     foreach (Plasma::Applet *a, applets()) {
         AbstractGroup *group = dynamic_cast<AbstractGroup *>(a);
-        if (group && group->geometry().contains(pos) && (a != applet)) {
+        if (group && (a != applet) && group->geometry().contains(pos)) {
             group->assignApplet(applet);
 
             emit configNeedsSaving();
