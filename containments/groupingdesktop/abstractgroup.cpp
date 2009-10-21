@@ -32,12 +32,14 @@ class AbstractGroupPrivate
     public:
         AbstractGroupPrivate(AbstractGroup *group)
             : q(group),
-              m_mainConfig(0)
+              m_mainConfig(0),
+              destroying(false)
         {
         }
 
         ~AbstractGroupPrivate()
         {
+            delete m_mainConfig;
         }
 
         KConfigGroup *mainConfigGroup()
@@ -55,6 +57,7 @@ class AbstractGroupPrivate
 
         Plasma::Applet::List applets;
         AbstractGroup *q;
+        bool destroying;
 
     private:
         KConfigGroup *m_mainConfig;
@@ -105,17 +108,27 @@ void AbstractGroup::onAppletRemoved(Plasma::Applet* applet)
     foreach (Plasma::Applet *ownApplet, d->applets) {
         if (applet == ownApplet) {
             d->applets.removeAll(applet);
+
+            if (d->destroying && (d->applets.count() == 0)) {
+                Plasma::Applet::destroy();
+                d->destroying = false;
+            }
         }
     }
 }
 
 void AbstractGroup::destroy()
 {
-    foreach (Plasma::Applet *applet, d->applets) {
-        applet->destroy();
+    if (assignedApplets().count() == 0) {
+        Plasma::Applet::destroy();
+        return;
     }
 
-    Plasma::Applet::destroy();
+    d->destroying = true;
+
+    foreach (Plasma::Applet *applet, assignedApplets()) {
+        applet->destroy();
+    }
 }
 
 KConfigGroup AbstractGroup::config()
