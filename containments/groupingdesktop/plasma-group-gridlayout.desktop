@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=GridLayout
+Name[pt]=Grelha
+Name[sv]=Rutnätsutläggning
+Name[uk]=Компонування ґраткою
+Name[x-test]=xxGridLayoutxx
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Group,Plasma/Applet
