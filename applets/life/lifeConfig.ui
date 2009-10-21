@@ -48,6 +48,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>horizontalCells</cstring>
+     </property>
     </widget>
    </item>
    <item row="1" column="3">
@@ -96,6 +99,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>maxGensNumber</cstring>
      </property>
     </widget>
    </item>
@@ -149,6 +155,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>verticalCells</cstring>
+     </property>
     </widget>
    </item>
    <item row="4" column="2">
@@ -158,6 +167,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>stepInterval</cstring>
      </property>
     </widget>
    </item>

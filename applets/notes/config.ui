@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>config</class>
- <widget class="QWidget" name="config" >
-  <property name="geometry" >
+ <widget class="QWidget" name="config">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,41 +10,44 @@
     <height>512</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QLabel" name="fontGroupLabel" >
-     <property name="font" >
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="fontGroupLabel">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Font</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QLabel" name="fontStyleLabel" >
-     <property name="text" >
+   <item row="1" column="1">
+    <widget class="QLabel" name="fontStyleLabel">
+     <property name="text">
       <string>Style:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>fontStyleComboBox</cstring>
      </property>
     </widget>
    </item>
-   <item row="1" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_4" >
+   <item row="1" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="KFontComboBox" name="fontStyleComboBox" />
+      <widget class="KFontComboBox" name="fontStyleComboBox"/>
      </item>
      <item>
-      <spacer name="horizontalSpacer_4" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -53,29 +57,29 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="2" >
-    <widget class="QCheckBox" name="fontBoldCheckBox" >
-     <property name="text" >
+   <item row="2" column="2">
+    <widget class="QCheckBox" name="fontBoldCheckBox">
+     <property name="text">
       <string>&amp;Bold</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="2" >
-    <widget class="QCheckBox" name="fontItalicCheckBox" >
-     <property name="text" >
+   <item row="3" column="2">
+    <widget class="QCheckBox" name="fontItalicCheckBox">
+     <property name="text">
       <string>&amp;Italic</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="2" >
-    <spacer name="verticalSpacer_5" >
-     <property name="orientation" >
+   <item row="4" column="2">
+    <spacer name="verticalSpacer_5">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>383</width>
        <height>13</height>
@@ -83,44 +87,44 @@
      </property>
     </spacer>
    </item>
-   <item row="5" column="1" >
-    <widget class="QLabel" name="fontSizeLabel" >
-     <property name="text" >
+   <item row="5" column="1">
+    <widget class="QLabel" name="fontSizeLabel">
+     <property name="text">
       <string>Size:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="5" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_3" >
+   <item row="5" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QRadioButton" name="autoFont" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+      <widget class="QRadioButton" name="autoFont">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Scale font size by:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KIntSpinBox" name="autoFontPercent" >
-       <property name="suffix" >
+      <widget class="KIntSpinBox" name="autoFontPercent">
+       <property name="suffix">
         <string>%</string>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_2" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -130,30 +134,30 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item row="6" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QRadioButton" name="customFont" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+      <widget class="QRadioButton" name="customFont">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Use custom font size:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KIntSpinBox" name="customFontSizeSpinBox" />
+      <widget class="KIntSpinBox" name="customFontSizeSpinBox"/>
      </item>
      <item>
-      <spacer name="horizontalSpacer" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -163,15 +167,15 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="2" >
-    <spacer name="verticalSpacer_4" >
-     <property name="orientation" >
+   <item row="7" column="2">
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>383</width>
        <height>13</height>
@@ -179,60 +183,60 @@
      </property>
     </spacer>
    </item>
-   <item row="8" column="1" >
-    <widget class="QLabel" name="fontColorLabel" >
-     <property name="text" >
+   <item row="8" column="1">
+    <widget class="QLabel" name="fontColorLabel">
+     <property name="text">
       <string>Color:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="8" column="2" >
-    <widget class="QRadioButton" name="useThemeColor" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="8" column="2">
+    <widget class="QRadioButton" name="useThemeColor">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Use theme color</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="9" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+   <item row="9" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QRadioButton" name="useCustomColor" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+      <widget class="QRadioButton" name="useCustomColor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Use custom color:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KColorButton" name="textColorButton" >
-       <property name="enabled" >
+      <widget class="KColorButton" name="textColorButton">
+       <property name="enabled">
         <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_6" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -242,15 +246,15 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="2" >
-    <spacer name="verticalSpacer_7" >
-     <property name="orientation" >
+   <item row="10" column="2">
+    <spacer name="verticalSpacer_7">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>383</width>
        <height>13</height>
@@ -258,60 +262,60 @@
      </property>
     </spacer>
    </item>
-   <item row="11" column="1" >
-    <widget class="QLabel" name="fontBackgroundColorLabel" >
-     <property name="text" >
+   <item row="11" column="1">
+    <widget class="QLabel" name="fontBackgroundColorLabel">
+     <property name="text">
       <string>Active line highlight color:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="11" column="2" >
-    <widget class="QRadioButton" name="useNoColor" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+   <item row="11" column="2">
+    <widget class="QRadioButton" name="useNoColor">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Use no color</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="12" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_8" >
+   <item row="12" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
-      <widget class="QRadioButton" name="useCustomBackgroundColor" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+      <widget class="QRadioButton" name="useCustomBackgroundColor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>Use custom color:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KColorButton" name="textBackgroundColorButton" >
-       <property name="enabled" >
+      <widget class="KColorButton" name="textBackgroundColorButton">
+       <property name="enabled">
         <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_6" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -321,15 +325,15 @@
      </item>
     </layout>
    </item>
-   <item row="13" column="0" >
-    <spacer name="verticalSpacer_3" >
-     <property name="orientation" >
+   <item row="13" column="0">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>13</height>
@@ -337,40 +341,43 @@
      </property>
     </spacer>
    </item>
-   <item row="14" column="0" >
-    <widget class="QLabel" name="themeGroupLabel" >
-     <property name="font" >
+   <item row="14" column="0">
+    <widget class="QLabel" name="themeGroupLabel">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Theme</string>
      </property>
     </widget>
    </item>
-   <item row="15" column="1" >
-    <widget class="QLabel" name="notesColorLabel" >
-     <property name="text" >
+   <item row="15" column="1">
+    <widget class="QLabel" name="notesColorLabel">
+     <property name="text">
       <string>Notes color:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>notesColorComboBox</cstring>
      </property>
     </widget>
    </item>
-   <item row="15" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_6" >
+   <item row="15" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <widget class="KComboBox" name="notesColorComboBox" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+      <widget class="KComboBox" name="notesColorComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>200</width>
          <height>0</height>
@@ -379,11 +386,11 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_5" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -393,15 +400,15 @@
      </item>
     </layout>
    </item>
-   <item row="16" column="0" >
-    <spacer name="verticalSpacer_2" >
-     <property name="orientation" >
+   <item row="16" column="0">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>13</height>
@@ -409,44 +416,50 @@
      </property>
     </spacer>
    </item>
-   <item row="17" column="0" colspan="2" >
-    <widget class="QLabel" name="spellCheckLabel" >
-     <property name="font" >
+   <item row="17" column="0" colspan="2">
+    <widget class="QLabel" name="spellCheckLabel">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Spell Check</string>
      </property>
     </widget>
    </item>
-   <item row="18" column="1" >
-    <widget class="QLabel" name="checkSpellingLabel" >
-     <property name="text" >
+   <item row="18" column="1">
+    <widget class="QLabel" name="checkSpellingLabel">
+     <property name="text">
       <string>Enable spell check:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>checkSpelling</cstring>
      </property>
     </widget>
    </item>
-   <item row="18" column="2" >
-    <layout class="QHBoxLayout" name="horizontalLayout_5" >
+   <item row="18" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QCheckBox" name="checkSpelling" >
-       <property name="text" >
+      <widget class="QCheckBox" name="checkSpelling">
+       <property name="text">
         <string/>
        </property>
-       <property name="checked" >
+       <property name="checked">
         <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_3" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -456,12 +469,12 @@
      </item>
     </layout>
    </item>
-   <item row="19" column="1" colspan="2" >
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+   <item row="19" column="1" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>9</height>
@@ -473,14 +486,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
   </customwidget>
   <customwidget>
    <class>KFontComboBox</class>
@@ -488,9 +496,14 @@
    <header>kfontcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -501,11 +514,11 @@
    <receiver>customFontSizeSpinBox</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>407</x>
      <y>195</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>494</x>
      <y>200</y>
     </hint>
@@ -517,11 +530,11 @@
    <receiver>autoFontPercent</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>381</x>
      <y>159</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>468</x>
      <y>164</y>
     </hint>
@@ -533,11 +546,11 @@
    <receiver>textColorButton</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>367</x>
      <y>270</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>472</x>
      <y>272</y>
     </hint>
@@ -549,11 +562,11 @@
    <receiver>textBackgroundColorButton</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>348</x>
      <y>337</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>437</x>
      <y>343</y>
     </hint>

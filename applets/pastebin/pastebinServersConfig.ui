@@ -21,6 +21,9 @@
        <property name="text">
         <string>Server address:</string>
        </property>
+       <property name="buddy">
+        <cstring>server</cstring>
+       </property>
       </widget>
      </item>
      <item>

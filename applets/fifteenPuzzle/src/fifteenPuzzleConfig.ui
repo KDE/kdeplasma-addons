@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>293</width>
-    <height>211</height>
+    <width>306</width>
+    <height>221</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,6 +50,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>size</cstring>
      </property>
     </widget>
    </item>
@@ -121,6 +124,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>cb_showNumerals</cstring>
        </property>
       </widget>
      </item>

@@ -85,6 +85,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>colourizeOpacitySlider</cstring>
+     </property>
     </widget>
    </item>
    <item row="3" column="2" colspan="2">
@@ -145,6 +148,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>soundEnabled</cstring>
+     </property>
     </widget>
    </item>
    <item row="10" column="2">
@@ -174,6 +180,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>soundFile</cstring>
      </property>
     </widget>
    </item>
@@ -224,6 +233,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>imageUrl</cstring>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
@@ -237,6 +249,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>colourize</cstring>
+     </property>
     </widget>
    </item>
    <item row="5" column="1">
@@ -246,6 +261,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>gravity</cstring>
      </property>
     </widget>
    </item>
@@ -257,6 +275,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>friction</cstring>
+     </property>
     </widget>
    </item>
    <item row="7" column="1">
@@ -266,6 +287,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>resitution</cstring>
      </property>
     </widget>
    </item>
@@ -293,6 +317,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>soundVolume</cstring>
+     </property>
     </widget>
    </item>
    <item row="15" column="2">
@@ -310,6 +337,9 @@
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
+     <property name="buddy">
+      <cstring>autoBounceEnabled</cstring>
+     </property>
     </widget>
    </item>
    <item row="17" column="1">
@@ -322,6 +352,9 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>autoBounceStrength</cstring>
      </property>
     </widget>
    </item>
@@ -361,6 +394,7 @@
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KColorButton</class>

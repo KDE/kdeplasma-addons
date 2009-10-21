@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>233</width>
-    <height>185</height>
+    <width>238</width>
+    <height>201</height>
    </rect>
   </property>
   <layout class="QFormLayout" name="formLayout">
@@ -19,6 +19,9 @@
     <widget class="QLabel" name="label_1">
      <property name="text">
       <string>City:</string>
+     </property>
+     <property name="buddy">
+      <cstring>city</cstring>
      </property>
     </widget>
    </item>
@@ -37,12 +40,18 @@
      <property name="text">
       <string>Country:</string>
      </property>
+     <property name="buddy">
+      <cstring>countryCombo</cstring>
+     </property>
     </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Latitude:</string>
+     </property>
+     <property name="buddy">
+      <cstring>latitude</cstring>
      </property>
     </widget>
    </item>
@@ -61,6 +70,9 @@
      <property name="text">
       <string>Longitude:</string>
      </property>
+     <property name="buddy">
+      <cstring>longitude</cstring>
+     </property>
     </widget>
    </item>
    <item row="5" column="1">
@@ -78,17 +90,13 @@
      <property name="text">
       <string>Distance</string>
      </property>
+     <property name="buddy">
+      <cstring>distance</cstring>
+     </property>
     </widget>
    </item>
    <item row="6" column="1">
     <widget class="KIntSpinBox" name="distance"/>
-   </item>
-   <item row="7" column="1">
-    <widget class="QPushButton" name="publishLocation">
-     <property name="text">
-      <string>Publish my Location</string>
-     </property>
-    </widget>
    </item>
    <item row="3" column="1">
     <widget class="KComboBox" name="countryCombo">
@@ -97,6 +105,13 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="publishLocation">
+     <property name="text">
+      <string>Publish my Location</string>
      </property>
     </widget>
    </item>

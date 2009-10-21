@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>config</class>
- <widget class="QWidget" name="config" >
-  <property name="geometry" >
+ <widget class="QWidget" name="config">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,35 +10,35 @@
     <height>318</height>
    </rect>
   </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QLabel" name="label_4" >
-     <property name="font" >
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_4">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>News</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <spacer name="horizontalSpacer_2" >
-     <property name="orientation" >
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>25</height>
@@ -45,49 +46,52 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item row="1" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_2" >
-       <property name="text" >
+      <widget class="QLabel" name="label_2">
+       <property name="text">
         <string>Update interval:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>intervalSpinBox</cstring>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KIntSpinBox" name="intervalSpinBox" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <widget class="KIntSpinBox" name="intervalSpinBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>130</width>
          <height>0</height>
         </size>
        </property>
-       <property name="minimum" >
+       <property name="minimum">
         <number>1</number>
        </property>
-       <property name="maximum" >
+       <property name="maximum">
         <number>525600</number>
        </property>
-       <property name="value" >
+       <property name="value">
         <number>30</number>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer" >
-       <property name="orientation" >
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -97,15 +101,15 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="1" >
-    <spacer name="verticalSpacer_2" >
-     <property name="orientation" >
+   <item row="2" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>10</height>
@@ -113,67 +117,67 @@
      </property>
     </spacer>
    </item>
-   <item row="3" column="0" colspan="2" >
-    <widget class="QLabel" name="label_3" >
-     <property name="font" >
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_3">
+     <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Information</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1" >
-    <widget class="QCheckBox" name="timestampCheckBox" >
-     <property name="text" >
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="timestampCheckBox">
+     <property name="text">
       <string>Show timestamps</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" >
-    <widget class="QCheckBox" name="titlesCheckBox" >
-     <property name="text" >
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="titlesCheckBox">
+     <property name="text">
       <string>Show titles</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1" >
-    <widget class="QCheckBox" name="descriptionsCheckBox" >
-     <property name="text" >
+   <item row="6" column="1">
+    <widget class="QCheckBox" name="descriptionsCheckBox">
+     <property name="text">
       <string>Show descriptions</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1" >
-    <widget class="QLabel" name="label" >
-     <property name="font" >
+   <item row="8" column="1">
+    <widget class="QLabel" name="label">
+     <property name="font">
       <font>
        <italic>true</italic>
       </font>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Note that timestamps, titles and descriptions are available only if they are provided by feed.</string>
      </property>
-     <property name="textFormat" >
+     <property name="textFormat">
       <enum>Qt::PlainText</enum>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="9" column="1" >
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+   <item row="9" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>60</height>
@@ -181,15 +185,15 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="1" >
-    <spacer name="verticalSpacer_3" >
-     <property name="orientation" >
+   <item row="7" column="1">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>5</height>
