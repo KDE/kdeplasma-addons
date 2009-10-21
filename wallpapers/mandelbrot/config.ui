@@ -6,17 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>309</width>
-    <height>165</height>
+    <width>326</width>
+    <height>193</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Color</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
-    <number>0</number>
-   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
@@ -32,12 +29,6 @@
    </item>
    <item row="0" column="1">
     <widget class="KColorButton" name="m_color1">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="color">
       <color>
        <red>70</red>
@@ -54,7 +45,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="2" rowspan="3">
+   <item row="0" column="3" rowspan="3">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -82,12 +73,6 @@
    </item>
    <item row="1" column="1">
     <widget class="KColorButton" name="m_color2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="color">
       <color>
        <red>70</red>
@@ -119,12 +104,6 @@
    </item>
    <item row="2" column="1">
     <widget class="KColorButton" name="m_color3">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="color">
       <color>
        <red>70</red>
@@ -154,7 +133,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1" colspan="2">
+   <item row="3" column="1" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="KComboBox" name="m_quality">
@@ -225,6 +204,19 @@
       <string/>
      </property>
     </widget>
+   </item>
+   <item row="5" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>24</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
