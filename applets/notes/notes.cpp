@@ -276,10 +276,6 @@ Notes::Notes(QObject *parent, const QVariantList &args)
             m_textEdit->nativeWidget()->setHtml(t.readAll());
             f.close();
         }
-    } else {
-#if KDE_IS_VERSION(4,3,60)
-        m_textEdit->nativeWidget()->setClickMessage(i18n("Welcome to the Notes Plasmoid! Type your notes here..."));
-#endif
     }
 
     createTextFormatingWidgets();
