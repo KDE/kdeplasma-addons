@@ -36,6 +36,8 @@ public:
 
     void setBackup(const QString&);
     QString backup() const;
+    
+    bool isAtEnd() const;
 
 private:
     QStringList m_history;

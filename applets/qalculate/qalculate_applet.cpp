@@ -21,6 +21,7 @@
 #include "qalculate_settings.h"
 #include "qalculate_engine.h"
 #include "qalculate_history.h"
+#include "qalculate_graphicswidget.h"
 
 #include "outputlabel.h"
 
@@ -108,7 +109,7 @@ int QalculateApplet::resultSize()
 QGraphicsWidget* QalculateApplet::graphicsWidget()
 {
     if (!m_graphicsWidget) {
-        m_graphicsWidget = new QGraphicsWidget(this);
+        m_graphicsWidget = new QalculateGraphicsWidget(this);
         m_graphicsWidget->setMinimumSize(200, 150);
         m_graphicsWidget->setPreferredSize(300, 200);
 
@@ -145,7 +146,9 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         configChanged();
         clearOutputLabel();
         
-        connect(this, SIGNAL(activate()), this, SLOT(giveFocus()));
+        connect(m_graphicsWidget, SIGNAL(giveFocus()), this, SLOT(giveFocus()));
+        connect(m_graphicsWidget, SIGNAL(nextHistory()), this, SLOT(nextHistory()));
+        connect(m_graphicsWidget, SIGNAL(previousHistory()), this, SLOT(previousHistory()));
     }
 
     return m_graphicsWidget;
@@ -191,7 +194,6 @@ void QalculateApplet::evalNoHist()
     m_engine->evaluate(m_input->text().replace(KGlobal::locale()->decimalSymbol(), "."));
 }
 
-
 void QalculateApplet::displayResult(const QString& result)
 {
     m_output->setText(result);
@@ -206,21 +208,6 @@ void QalculateApplet::receivedResult(const QString& result)
     if (m_settings->copyToClipboard()) {
         m_engine->copyToClipboard();
     }
-}
-
-void QalculateApplet::keyPressEvent(QKeyEvent* event)
-{
-    if (m_history->backup().isEmpty() && ((event->key() == Qt::Key_Up) || event->key() == Qt::Key_Down))
-        m_history->setBackup(m_input->text());
-
-    if (event->key() == Qt::Key_Up) {
-        m_input->setText(m_history->previousItem());
-    }
-    if (event->key() == Qt::Key_Down) {
-        m_input->setText(m_history->nextItem());
-    }
-    
-    Plasma::PopupApplet::keyPressEvent(event);
 }
 
 void QalculateApplet::configChanged()
@@ -252,32 +239,29 @@ void QalculateApplet::clearOutputLabel()
     }
 }
 
-void QalculateApplet::focusInEvent(QFocusEvent* event)
-{
-    if (event->gotFocus()) {
-        giveFocus();
-    }   
-    
-    Plasma::PopupApplet::focusInEvent(event);
-}
-
 void QalculateApplet::giveFocus()
 {
-    if (!m_settings->autoFocus()) {
-        return;
-    }
-    
     this->setFocus();
     m_input->setFocus();
     m_input->nativeWidget()->setFocus();
 }
 
-void QalculateApplet::mousePressEvent(QGraphicsSceneMouseEvent* event)
+void QalculateApplet::nextHistory()
 {
-    if (event->button() == Qt::LeftButton) {
-        giveFocus();
+    if (m_history->backup().isEmpty() && m_history->isAtEnd()) {
+        m_history->setBackup(m_input->text());
     }
-    Plasma::PopupApplet::mousePressEvent(event);
+    
+    m_input->setText(m_history->nextItem());
+}
+
+void QalculateApplet::previousHistory()
+{
+    if (m_history->backup().isEmpty() && m_history->isAtEnd()) {
+        m_history->setBackup(m_input->text());
+    }
+    
+    m_input->setText(m_history->previousItem());
 }
 
 #include "qalculate_applet.moc"

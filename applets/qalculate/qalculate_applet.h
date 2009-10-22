@@ -45,7 +45,7 @@ class LineEdit;
 }
 class OutputLabel;
 
-class QGraphicsWidget;
+class QalculateGraphicsWidget;
 class QGraphicsLinearLayout;
 class QalculateSettings;
 class QalculateEngine;
@@ -75,12 +75,14 @@ public:
 public slots:
     //! The configuration has changed -> the plasmoid must react accordingly
     void configChanged();
-
+   
+    //! Navigate to the next history item
+    void nextHistory();
+    //! Navigate to the previous history item
+    void previousHistory();
+   
 protected:
     void createConfigurationInterface(KConfigDialog *p_parent);
-    void keyPressEvent(QKeyEvent * event);
-    void focusInEvent(QFocusEvent* event);
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
 
 protected slots:
     //! Evaluate the expression entered by the user
@@ -96,7 +98,7 @@ protected slots:
 
 private:
     //! The graphics widget
-    QGraphicsWidget* m_graphicsWidget;
+    QalculateGraphicsWidget* m_graphicsWidget;
     //! The main layout of the widget
     QGraphicsLinearLayout *m_layout;
     //! The applet's settings

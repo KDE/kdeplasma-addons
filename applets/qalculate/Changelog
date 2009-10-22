@@ -1,3 +1,11 @@
+- 0.7.2
+Fixed a bug in focus handling
+Fixed history navigation, now it should be working also when plasmoid is in panel
+
+- 0.7.1
+Improved focus handling
+Added option to automatically give focus to the input line edit on plasmod activation
+
 - 0.7
 Various bugfixes
 Proper stretch factor of the settings dialog

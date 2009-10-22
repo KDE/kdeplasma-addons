@@ -19,6 +19,7 @@
 
 #include "qalculate_history.h"
 
+#include <QDebug>
 
 QalculateHistory::QalculateHistory(QObject* parent): QObject(parent)
 {
@@ -27,13 +28,16 @@ QalculateHistory::QalculateHistory(QObject* parent): QObject(parent)
 
 void QalculateHistory::addItem(const QString& expression)
 {
-    m_history << expression;
+    m_history.push_back(expression);
     m_backup = "";
     m_currentItem = m_history.size() - 1;
 }
 
 QString QalculateHistory::currentItem()
 {
+    qDebug() << "Current item: " << m_currentItem;
+    qDebug() << "History size: " << m_history.size();
+    
     if (m_history.isEmpty())
         return QString();
 
@@ -42,10 +46,17 @@ QString QalculateHistory::currentItem()
     }
 
     if (m_currentItem >= m_history.size()) {
-        m_currentItem = m_history.size();
-        return m_backup;
+        if (!backup().isEmpty()) {
+            m_currentItem = m_history.size();
+            return m_backup;
+        } else {
+            m_currentItem = m_history.size() - 1;
+        }
     }
 
+    qDebug() << "Final current item: " << m_currentItem;
+    qDebug() << "---";
+    
     return m_history.at(m_currentItem);
 }
 
@@ -63,11 +74,20 @@ QString QalculateHistory::previousItem()
 
 void QalculateHistory::setBackup(const QString& backup)
 {
-    m_backup = backup;
-    m_currentItem++;
+    if (backup != m_history.last()) {
+        m_backup = backup;
+        m_currentItem++;
+    } else {
+        m_backup = "";
+    }
 }
 
 QString QalculateHistory::backup() const
 {
     return m_backup;
+}
+
+bool QalculateHistory::isAtEnd() const
+{
+    return m_currentItem == m_history.size() - 1;
 }
