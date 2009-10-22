@@ -20,29 +20,26 @@
 #ifndef ABSTRACTGROUP_H
 #define ABSTRACTGROUP_H
 
+#include <QtGui/QGraphicsWidget>
 #include <Plasma/Applet>
 
 class KConfigGroup;
 
+class Containment;
 class AbstractGroupPrivate;
 
-class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
+class AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     public:
         /**
         * Constructor of the abstract class.
         **/
-        AbstractGroup(QObject *parent = 0, const QVariantList &args = QVariantList());
+        AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         /**
         * Default destructor
         **/
         ~AbstractGroup();
-
-        /**
-        * Reimplemented from Plasma::Applet
-        **/
-        void init();
 
         /**
         * Assignes an Applet to this Group
@@ -95,11 +92,28 @@ class PLASMA_EXPORT AbstractGroup : public Plasma::Applet
         **/
         Plasma::Applet::List assignedApplets() const;
 
+        void setContainment(Plasma::Containment *containment);
+        Plasma::Containment *containment() const;
+        void setId(unsigned int id);
+        unsigned int id() const;
+        virtual QString pluginName() const = 0;
+
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+
+    public slots:
+        void setImmutability(Plasma::ImmutabilityType immutability);
+
     protected:
         /**
         * Reimplemented from QGraphicsItem
         **/
         void dropEvent(QGraphicsSceneDragDropEvent *event);
+
+        void resizeEvent(QGraphicsSceneResizeEvent *event);
+
+    signals:
+        void groupRemoved(AbstractGroup *);
+        void appletRemoved(Plasma::Applet *);
 
     private slots:
         /**

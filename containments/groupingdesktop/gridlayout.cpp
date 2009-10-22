@@ -26,8 +26,6 @@
 #include <Plasma/Applet>
 #include <Plasma/PaintUtils>
 
-K_EXPORT_PLASMA_APPLET(gridlayout, GridLayout)
-
 class Position {
     public:
         Position(int r = -1, int c = -1)
@@ -82,20 +80,34 @@ class Spacer : public QGraphicsWidget
         }
 };
 
-GridLayout::GridLayout(QObject *parent, const QVariantList &args)
-          : AbstractGroup(parent, args)
+GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
+          : AbstractGroup(parent, wFlags)
 {
+    resize(200,200);
     m_layout = new QGraphicsGridLayout(this);
     setLayout(m_layout);
 
     m_spacer = new Spacer(this);
     m_spacer->parent = this;
     m_spacer->hide();
+
+    connect(this, SIGNAL(appletRemoved(Plasma::Applet*)),
+            this, SLOT(onAppletRemoved(Plasma::Applet *)));
 }
 
 GridLayout::~GridLayout()
 {
 
+}
+
+void GridLayout::onAppletRemoved(Plasma::Applet *applet)
+{
+//     removeItem(applet);
+}
+
+QString GridLayout::pluginName() const
+{
+    return QString("gridlayout");
 }
 
 void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
@@ -106,9 +118,9 @@ void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
         return;
     }
 
-    if (immutability() == Plasma::Mutable) {
+//     if (immutability() == Plasma::Mutable) {
         showItemTo(m_spacer, event->pos());
-    }
+//     }
 }
 
 void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
@@ -259,6 +271,8 @@ void GridLayout::layoutApplet(Plasma::Applet *applet)
         }
         showItemTo(applet, pos);
     }
+
+    kDebug()<<m_layout->columnCount();
 }
 
 int GridLayout::nearestBoundair(qreal pos, qreal size) const

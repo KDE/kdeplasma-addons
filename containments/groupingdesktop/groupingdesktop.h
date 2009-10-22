@@ -26,6 +26,7 @@
 #include <Plasma/Containment>
 
 class AbstractGroup;
+class GroupingDesktopPrivate;
 
 class GroupingDesktop: public Plasma::Containment
 {
@@ -38,12 +39,24 @@ class GroupingDesktop: public Plasma::Containment
 
         void saveContents(KConfigGroup &group) const;
         void restoreContents(KConfigGroup& group);
+        QList<QAction *> contextualActions();
+        void addGroup(const QString &plugin, const QPointF &pos, int id = 0);
+
+    protected:
+//         void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
     private slots:
+        void onGroupAdded(AbstractGroup *group, const QPointF &pos);
+        void onGroupRemoved(AbstractGroup *group);
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
+        void newGridLayoutClicked();
+        void removeGroupClicked();
+
 
     private:
-        AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, int id = 0);
+        GroupingDesktopPrivate *const d;
+
+        friend class GroupingDesktopPrivate;
 };
 
 #endif

@@ -24,26 +24,31 @@
 
 class QGraphicsGridLayout;
 
-namespace Plasma {
-    class Applet;
-};
-
 class Position;
 class Spacer;
+
+namespace Plasma
+{
+    class Applet;
+};
 
 class GridLayout : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridLayout(QObject *parent, const QVariantList &args);
+        GridLayout(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~GridLayout();
 
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
         void layoutApplet(Plasma::Applet* applet);
+        QString pluginName() const;
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+
+    private slots:
+        void onAppletRemoved(Plasma::Applet *applet);
 
     private:
         enum Orientation {
