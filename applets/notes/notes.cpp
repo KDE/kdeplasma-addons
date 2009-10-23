@@ -40,6 +40,9 @@
 #include <KStandardAction>
 #include <KAction>
 
+#include <Plasma/Animator>
+#include <plasma/abstractanimation.h>
+#include <plasma/animationgroup.h>
 #include <Plasma/PushButton>
 #include <Plasma/Theme>
 
@@ -758,19 +761,38 @@ void Notes::createTextFormatingWidgets()
 
     m_layout->addItem(widget);
 
+    m_buttonAnimGroup = new Plasma::AnimationGroup(this);
+    m_buttonAnimGroup->setParallel(true);  
+
+    for (int i = 0; i < 6; i++){
+        m_buttonAnim[i] = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
+        m_buttonAnimGroup->add(m_buttonAnim[i]);
+    }
+
+    m_buttonAnim[0]->setWidgetToAnimate(m_buttonBold);
+    m_buttonAnim[1]->setWidgetToAnimate(m_buttonItalic);
+    m_buttonAnim[2]->setWidgetToAnimate(m_buttonUnderline);
+    m_buttonAnim[3]->setWidgetToAnimate(m_buttonStrikeThrough);
+    m_buttonAnim[4]->setWidgetToAnimate(m_buttonCenter);
+    m_buttonAnim[5]->setWidgetToAnimate(m_buttonFill);
+
     showOptions(false);
     connect(m_buttonOption->nativeWidget(), SIGNAL(toggled(bool)), this, SLOT(showOptions(bool)));
 }
 
 void Notes::showOptions(bool show)
-{
+{   
     m_buttonOption->nativeWidget()->setDown(show);
-    m_buttonBold->setVisible(show);
-    m_buttonItalic->setVisible(show);
-    m_buttonUnderline->setVisible(show);
-    m_buttonStrikeThrough->setVisible(show); 
-    m_buttonCenter->setVisible(show);
-    m_buttonFill->setVisible(show);
+
+    qreal targetOpacity = show ? 1 : 0;
+    qreal startOpacity = 1 - targetOpacity;
+
+    for (int i = 0; i < 6; i++){
+        m_buttonAnim[i]->setProperty("startOpacity", startOpacity);
+        m_buttonAnim[i]->setProperty("targetOpacity", targetOpacity);
+    }
+
+    m_buttonAnimGroup->start();
 }
 
 #include "notes.moc"
