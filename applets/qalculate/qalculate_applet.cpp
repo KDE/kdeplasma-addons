@@ -149,6 +149,7 @@ QGraphicsWidget* QalculateApplet::graphicsWidget()
         connect(m_graphicsWidget, SIGNAL(giveFocus()), this, SLOT(giveFocus()));
         connect(m_graphicsWidget, SIGNAL(nextHistory()), this, SLOT(nextHistory()));
         connect(m_graphicsWidget, SIGNAL(previousHistory()), this, SLOT(previousHistory()));
+	//connect(this, SIGNAL(activated()), this, SLOT(giveFocus()));
     }
 
     return m_graphicsWidget;
@@ -241,7 +242,7 @@ void QalculateApplet::clearOutputLabel()
 
 void QalculateApplet::giveFocus()
 {
-    this->setFocus();
+    m_graphicsWidget->setFocus();
     m_input->setFocus();
     m_input->nativeWidget()->setFocus();
 }
