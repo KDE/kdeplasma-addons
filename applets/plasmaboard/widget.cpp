@@ -319,7 +319,7 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
 	funcKeys[ALTGRKEY]->setKey(XK_ISO_Level3_Shift, false, i18nc("The Alt Gr key on a keyboard", "Alt Gr"));
         funcKeys[META_R_KEY]->setKey(XK_Meta_L, false, i18n("Meta"));
 	funcKeys[MENU]->setKey(XK_Menu, true, i18nc("The menu key on a keyboard", "Menu"));
-        funcKeys[CONTROL_LEFT]->setKey(XK_Control_L, false, i18n("Ctrl"));
+	funcKeys[CONTROL_LEFT]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
 
         // set Keymap
 
