@@ -78,6 +78,7 @@ class PlasmaboardWidget : public Plasma::Containment
 
 	Plasma::Label* switcher;
 
+
     public Q_SLOTS:
 
         /*

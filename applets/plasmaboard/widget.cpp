@@ -73,9 +73,11 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     : Plasma::Containment(parent)
 {
     setPreferredSize(500, 200);
-    setMinimumSize(300,150);
+    setMinimumSize(200,100);
+    setMaximumSize(20000,10000);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     setFocusPolicy(Qt::NoFocus);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     isLevel2 = false;
     isAlternative = false;
@@ -477,3 +479,4 @@ void PlasmaboardWidget::clearTooltip(){
 
     tooltip->hide();
 }
+

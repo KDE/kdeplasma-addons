@@ -30,6 +30,7 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
         setAspectRatioMode(Plasma::IgnoreAspectRatio);
         setPopupIcon("preferences-desktop-keyboard");
 	setFocusPolicy(Qt::NoFocus);
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         KConfigGroup cg = config();
         extendedMode = cg.readEntry("extendedMode", false);
         setPassivePopup(true);
