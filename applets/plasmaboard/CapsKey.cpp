@@ -31,21 +31,14 @@ void CapsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 
 	setUpPainter(painter);
 
-	QRectF rect = contentsRect();
-	int height = rect.height();
-	QPointF center = rect.center();
-
-	double unitHeight = height / 4;
-	double unitWidth = unitHeight / 2;
-
 	const QPointF points[7] = {
-		     QPointF(center.x(), center.y() + unitHeight),
-		     QPointF(center.x() + 2 * unitWidth, center.y()),
-		     QPointF(center.x() + unitWidth, center.y()),
-		     QPointF(center.x() + unitWidth, center.y() - unitHeight),
-		     QPointF(center.x() - unitWidth, center.y() - unitHeight),
-		     QPointF(center.x() - unitWidth, center.y()),
-		     QPointF(center.x() - 2 * unitWidth, center.y())
+		     QPointF(0, 3),
+		     QPointF(-2, 0),
+		     QPointF(-1, 0),
+		     QPointF(-1, -2),
+		     QPointF( 1, -2),
+		     QPointF( 1, 0),
+		     QPointF( 2, 0)
 	};
 
 	painter->drawConvexPolygon(points, 7);

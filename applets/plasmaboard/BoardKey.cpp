@@ -24,7 +24,7 @@
 #include "widget.h"
 
 BoardKey::BoardKey(PlasmaboardWidget *parent):
-	Plasma::PushButton(parent){
+	Plasma::PushButton(parent),fontSize(6) {
 	//this->setOrientation(Qt::Horizontal);
 	//this->setDrawBackground(true);
 	setMinimumSize(10,10);
@@ -38,7 +38,7 @@ BoardKey::~BoardKey() {
 
 void BoardKey::setText(QString text) {
         labelText = text;
-	fontDivider = (text.size() > 1) ? ((text.size() > 3) ? 6 : 3) : 2;
+	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 2 : 4) : 6;
         //Plasma::PushButton::setText(text);
 }
 
@@ -57,13 +57,20 @@ void BoardKey::sendKeycodeToggled() {}
 void BoardKey::setUpPainter(QPainter *painter){
 	painter->setRenderHints(QPainter::Antialiasing);
 	painter->setPen(QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor)));
-	//painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+
+	painter->translate(contentsRect().center());
+	double mul = qMin(contentsRect().width(), contentsRect().height()) / 10;
+	painter->scale(mul, mul);
+
 }
 
 void BoardKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
         Plasma::PushButton::paint(painter, option, widget);
 
-        setUpPainter(painter);
-	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), (qMin(size().height(), size().width()) - 5) / fontDivider ));
-        painter->drawText(rect(), Qt::AlignCenter , labelText);
+	setUpPainter(painter); // scales the matrix
+	painter->scale(0.1, 0.1);
+
+
+	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize*10));
+	painter->drawText(QRect(-50,-50,100,100), Qt::AlignCenter , labelText); // don't know why rect must be like that
 }

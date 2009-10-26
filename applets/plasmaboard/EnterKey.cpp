@@ -31,20 +31,17 @@ void EnterKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	Plasma::PushButton::paint(painter, option, widget);
 
 	setUpPainter(painter);
+	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
-	QRectF rect = contentsRect();
-	int width = rect.width();
-	int height = rect.height();
-	QPointF center = rect.center();
-
-	painter->drawLine(rect.left() + width / 3, center.y(), rect.right(), center.y());
-	painter->drawLine(rect.right(), center.y(), rect.right(), center.y() - height / 15);
+	painter->drawLine(-1, 0, 3, 0);
+	painter->drawLine(3, 0, 3, -1);
 
 	const QPointF points[3] = {
-	     QPointF(rect.left(), center.y()),
-	     QPointF(rect.left() + width / 3, center.y() - height / 20),
-	     QPointF(rect.left() + width / 3, center.y() + height / 20),
+	     QPointF(-3, 0),
+	     QPointF(-1, 1),
+	     QPointF(-1, -1),
 	 };
 
 	painter->drawConvexPolygon(points, 3);
+
 }

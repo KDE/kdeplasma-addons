@@ -22,6 +22,8 @@
 
 #include <kpushbutton.h>
 #include "FuncKey.h"
+#include <QPainter>
+#include <plasma/theme.h>
 
 FuncKey::FuncKey(PlasmaboardWidget *parent):
 	BoardKey::BoardKey(parent) {
@@ -76,4 +78,18 @@ void FuncKey::sendKeycodeToggled() {
 void FuncKey::sendKeycodeRelease() {
 	Helpers::fakeKeyRelease(getKeycode());
 	toggleOff();
+}
+
+void FuncKey::paintArrow(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+
+    	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+	painter->drawLine(-1, 0 , 3, 0);
+
+	const QPointF points[3] = {
+	     QPointF(-3, 0),
+	     QPointF(-1, 1),
+	     QPointF(-1, -1),
+	 };
+
+	painter->drawConvexPolygon(points, 3);
 }

@@ -34,6 +34,7 @@ public:
 	void setKeycode(unsigned int code, bool sendUp);
         void setKey(unsigned int code, bool sendUp, const QString &text);
 
+
 public Q_SLOTS:
 	virtual void sendKeycodePress();
 	virtual void sendKeycodeRelease();
@@ -43,6 +44,9 @@ public Q_SLOTS:
 private:
 	QString oldStyle;
 	bool pressed;
+
+protected:
+	void paintArrow(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
 #endif /* FUNCKEY_H_ */

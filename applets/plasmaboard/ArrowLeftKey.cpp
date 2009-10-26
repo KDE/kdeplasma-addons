@@ -31,21 +31,5 @@ void ArrowLeftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	Plasma::PushButton::paint(painter, option, widget);
 	setUpPainter(painter);
 
-	QRectF rect = contentsRect();
-	int height = rect.height();
-	QPointF center = rect.center();
-
-	double unitHeight = height / 4;
-
-	painter->drawLine(center.x(),
-			center.y(),
-			center.x() + unitHeight,
-			center.y());
-
-	const QPointF points[3] = {
-	     QPointF(center.x() - unitHeight, center.y()),
-	     QPointF(center.x(), center.y() + unitHeight / 2),
-	     QPointF(center.x(), center.y() - unitHeight / 2)
-	 };
-	painter->drawConvexPolygon(points, 3);
+	paintArrow(painter, option, widget);
 }

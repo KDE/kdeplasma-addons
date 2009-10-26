@@ -30,20 +30,7 @@ void BackspaceKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 	Plasma::PushButton::paint(painter, option, widget);
 	setUpPainter(painter);
+	painter->translate(-2, 0);
 
-	QRectF rect = contentsRect();
-	int width = rect.width();
-	int height = rect.height();
-	QPointF center = rect.center();
-
-	painter->drawLine(rect.left() + width / 6 + width / 4, center.y(), rect.right() - width / 4, center.y());
-
-	const QPointF points[3] = {
-	     QPointF(rect.left() + width / 4, center.y()),
-	     QPointF(rect.left() + width / 6 + width / 4, center.y() - height / 10),
-	     QPointF(rect.left() + width / 6 + width / 4, center.y() + height / 10),
-	 };
-
-	painter->drawConvexPolygon(points, 3);
-
+	paintArrow(painter, option, widget);
 }

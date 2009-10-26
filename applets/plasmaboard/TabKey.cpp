@@ -30,43 +30,24 @@ void TabKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 	Plasma::PushButton::paint(painter, option, widget);
 
 	setUpPainter(painter);
+	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
-	QRectF rect = contentsRect();
-	int width = rect.width();
-	int height = rect.height();
-
-	double unitWidth = width / 4;
-	double unitHeight = height / 4;
-
-
-	painter->drawLine(rect.left() + 1.5 * unitWidth,
-			rect.top() + unitHeight,
-			rect.right() - unitWidth,
-			rect.top() + unitHeight);
-	const QPointF points[3] = {
-	     QPointF(rect.left() + unitWidth, rect.top() + unitHeight),
-	     QPointF(rect.left() + 1.5 * unitWidth, rect.top() + unitHeight/2),
-	     QPointF(rect.left() + 1.5 * unitWidth, rect.top() + 1.5*unitHeight)
+	painter->drawLine(-1, -2 , 3, -2);
+	QPointF points[3] = {
+	     QPointF(-3, -2),
+	     QPointF(-1, -1),
+	     QPointF(-1, -3),
 	 };
 	painter->drawConvexPolygon(points, 3);
-	painter->drawLine(rect.left() + unitWidth - 1,
-				rect.top() + unitHeight / 2,
-				rect.left() + unitWidth - 1,
-				rect.top() + 1.5*unitHeight);
+	painter->drawLine(-3, -1 , -3, -3);
 
-	painter->drawLine(rect.right() - 1.5 * unitWidth,
-			rect.bottom() - 2 * unitHeight,
-			rect.left() + unitWidth,
-			rect.bottom() - 2 * unitHeight);
-	const QPointF pointsTwo[3] = {
-	     QPointF(rect.right() - unitWidth, rect.bottom() - 2 * unitHeight),
-	     QPointF(rect.right() - 1.5 * unitWidth, rect.bottom() - 1.5 * unitHeight),
-	     QPointF(rect.right() - 1.5 * unitWidth, rect.bottom() - 2.5 * unitHeight)
+	painter->drawLine(-3, 0 , 1, 0);
+	points = {
+	     QPointF(1, -1),
+	     QPointF(3, 0),
+	     QPointF(1, 1),
 	 };
-	painter->drawLine(rect.right() - unitWidth + 1,
-				rect.bottom() - 1.5 * unitHeight,
-				rect.right() - unitWidth + 1,
-				rect.bottom() - 2.5 * unitHeight);
+	painter->drawConvexPolygon(points, 3);
+	painter->drawLine(3, 1 , 3, -1);
 
-	painter->drawConvexPolygon(pointsTwo, 3);
 }

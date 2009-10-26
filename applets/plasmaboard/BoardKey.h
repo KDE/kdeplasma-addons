@@ -43,7 +43,7 @@ public:
         QString text();
 private:
 	QString labelText;
-	int fontDivider;
+	int fontSize;
 
 public Q_SLOTS:
 	virtual void sendKeycodePress();
