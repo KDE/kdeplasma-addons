@@ -167,6 +167,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Service *m_profileService;
         QSet<Plasma::ServiceJob *> m_updateJobs;
         QString m_curTimeline;
+        Plasma::Frame *m_headerFrame;
 
         QMap<QString, QPixmap> m_pictureMap;
         QMap<qulonglong, Plasma::DataEngine::Data> m_tweetMap;

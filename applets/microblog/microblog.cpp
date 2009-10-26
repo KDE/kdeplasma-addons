@@ -153,6 +153,7 @@ void MicroBlog::focusInEvent(QFocusEvent *event)
 {
     Q_UNUSED(event);
 
+    m_scrollWidget->ensureItemVisible(m_headerFrame);
     m_statusEdit->setFocus();
 }
 
@@ -210,13 +211,11 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_layout->addItem(flashLayout);
 
-    Plasma::Frame *headerFrame = new Plasma::Frame(this);
-    m_headerLayout = new QGraphicsAnchorLayout(headerFrame);
+    m_headerFrame = new Plasma::Frame(this);
+    m_headerLayout = new QGraphicsAnchorLayout(m_headerFrame);
     m_headerLayout->setSpacing( 5 );
-    m_layout->addItem(headerFrame);
 
-
-    m_icon = new Plasma::IconWidget(headerFrame);
+    m_icon = new Plasma::IconWidget(m_headerFrame);
     m_icon->setIcon(KIcon("user-identity"));
     m_icon->setText(m_username);
     m_icon->setTextBackgroundColor(QColor());
@@ -226,7 +225,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_headerLayout->addAnchor(m_icon, Qt::AnchorVerticalCenter, m_headerLayout, Qt::AnchorVerticalCenter);
     m_headerLayout->addAnchor(m_icon, Qt::AnchorLeft, m_headerLayout, Qt::AnchorLeft);
 
-    Plasma::Frame *statusEditFrame = new Plasma::Frame(headerFrame);
+    Plasma::Frame *statusEditFrame = new Plasma::Frame(m_headerFrame);
 
     statusEditFrame->setFrameShadow(Plasma::Frame::Sunken);
     QGraphicsLinearLayout *statusEditLayout = new QGraphicsLinearLayout(statusEditFrame);
@@ -252,11 +251,13 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tabBar->addTab(i18n("Messages"));
     m_layout->addItem(m_tabBar);
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged()));
+    m_tabBar->nativeWidget()->installEventFilter(this);
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_tweetsWidget = new QGraphicsWidget;
     m_scrollWidget->setWidget(m_tweetsWidget);
     m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
+    m_tweetsLayout->addItem(m_headerFrame);
 
     m_layout->addItem(m_scrollWidget);
 
@@ -537,6 +538,7 @@ void MicroBlog::showTweets()
         delete iconAction;
         delete t.frame;
         m_tweetWidgets.removeAt(m_tweetWidgets.size() - 1);
+        m_tweetsWidget->resize(m_tweetsWidget->effectiveSizeHint(Qt::PreferredSize));
     }
 
     int i = 0;
@@ -757,6 +759,10 @@ bool MicroBlog::eventFilter(QObject *obj, QEvent *event)
         } else {
             return false;
         }
+    } else if (obj == m_tabBar->nativeWidget() && event->type() == QEvent::MouseButtonPress) {
+        m_scrollWidget->ensureItemVisible(m_headerFrame);
+        m_statusEdit->setFocus();
+        return false;
     } else {
         return Plasma::Applet::eventFilter(obj, event);
     }
