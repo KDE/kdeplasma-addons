@@ -102,7 +102,7 @@ class MicroBlog : public Plasma::PopupApplet
         void themeChanged();
         void scheduleShowTweets();
         void showTweets();
-        void modeChanged();
+        void modeChanged(int index);
 
     protected:
         QString timeDescription( const QDateTime &dt );
@@ -161,6 +161,7 @@ class MicroBlog : public Plasma::PopupApplet
         int m_historyRefresh;
         int m_newTweets;
         bool m_includeFriends;
+        int m_lastMode;
 
         Plasma::DataEngine *m_engine;
         Plasma::Service *m_service;

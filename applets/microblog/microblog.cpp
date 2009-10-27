@@ -68,6 +68,7 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_graphicsWidget(0),
       m_newTweets(0),
+      m_lastMode(0),
       m_service(0),
       m_profileService(0),
       m_lastTweet(0),
@@ -251,7 +252,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tabBar->addTab(i18n("Replies"));
     m_tabBar->addTab(i18n("Messages"));
     m_layout->addItem(m_tabBar);
-    connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged()));
+    connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(modeChanged(int)));
     m_tabBar->nativeWidget()->installEventFilter(this);
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
@@ -283,7 +284,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     return m_graphicsWidget;
 }
 
-void MicroBlog::modeChanged()
+void MicroBlog::modeChanged(int index)
 {
     m_tweetMap.clear();
     m_lastTweet=0;
@@ -819,7 +820,7 @@ void MicroBlog::downloadHistory()
 
     m_flash->flash(i18n("Refreshing timeline..."), -1);
 
-    if (m_service) {
+    if (m_service && m_tabBar->currentIndex() == m_lastMode) {
         KConfigGroup cg = m_service->operationDescription("refresh");
         m_service->startOperationCall(cg);
     } else {
@@ -848,8 +849,11 @@ void MicroBlog::downloadHistory()
 
 void MicroBlog::createTimelineService()
 {
-    if (m_service) {
+    if (m_service && m_lastMode == m_tabBar->currentIndex()) {
         return;
+    } else if (m_service) {
+        delete m_service;
+        m_lastMode = m_tabBar->currentIndex();
     }
 
     QString query;
