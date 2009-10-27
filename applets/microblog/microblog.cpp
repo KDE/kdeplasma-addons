@@ -153,7 +153,6 @@ void MicroBlog::focusInEvent(QFocusEvent *event)
 {
     Q_UNUSED(event);
 
-    m_scrollWidget->ensureItemVisible(m_headerFrame);
     m_statusEdit->setFocus();
 }
 
