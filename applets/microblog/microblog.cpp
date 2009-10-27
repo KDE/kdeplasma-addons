@@ -244,6 +244,8 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_headerLayout->addAnchor(m_icon, Qt::AnchorRight, statusEditFrame, Qt::AnchorLeft);
     m_headerLayout->addAnchors(statusEditFrame, m_headerLayout, Qt::Vertical);
     m_headerLayout->addAnchor(statusEditFrame, Qt::AnchorRight, m_headerLayout, Qt::AnchorRight);
+    m_headerLayout->activate();
+    m_headerLayout->setMaximumHeight(m_headerLayout->effectiveSizeHint(Qt::PreferredSize).height());
 
     m_tabBar = new Plasma::TabBar(this);
     m_tabBar->addTab(i18n("Timeline"));
