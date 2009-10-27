@@ -1,5 +1,5 @@
-/*/***************************************************************************
- *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>    *
+/*/*************************************************************************
+ *   Copyright (C) 2009 by Björn Ruberg <bjoern@ruberg-wegener.de>         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -42,12 +42,12 @@ void TabKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 	painter->drawLine(-3, -1 , -3, -3);
 
 	painter->drawLine(-3, 0 , 1, 0);
-	points = {
+	QPointF points2[3] = {
 	     QPointF(1, -1),
 	     QPointF(3, 0),
 	     QPointF(1, 1),
 	 };
-	painter->drawConvexPolygon(points, 3);
+	painter->drawConvexPolygon(points2, 3);
 	painter->drawLine(3, 1 , 3, -1);
 
 }
