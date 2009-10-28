@@ -30,7 +30,7 @@ class Spacer;
 namespace Plasma
 {
     class Applet;
-};
+}
 
 class GridLayout : public AbstractGroup
 {
