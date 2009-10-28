@@ -24,7 +24,7 @@
 #include "widget.h"
 
 BoardKey::BoardKey(PlasmaboardWidget *parent):
-	Plasma::PushButton(parent),fontSize(6) {
+	Plasma::PushButton(parent),fontSize(60) {
 	//this->setOrientation(Qt::Horizontal);
 	//this->setDrawBackground(true);
 	setMinimumSize(10,10);
@@ -38,7 +38,7 @@ BoardKey::~BoardKey() {
 
 void BoardKey::setText(QString text) {
         labelText = text;
-	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 2 : 4) : 6;
+	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 20 : 40) : 60;
         //Plasma::PushButton::setText(text);
 }
 
@@ -70,7 +70,6 @@ void BoardKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 	setUpPainter(painter); // scales the matrix
 	painter->scale(0.1, 0.1);
 
-
-	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize*10));
+	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
 	painter->drawText(QRect(-50,-50,100,100), Qt::AlignCenter , labelText); // don't know why rect must be like that
 }

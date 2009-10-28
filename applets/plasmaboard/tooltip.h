@@ -28,6 +28,7 @@ class QHBoxLayout;
 
 class Tooltip : public QWidget
 {
+    Q_OBJECT
 public:
     Tooltip(QString text);
     ~Tooltip();
@@ -40,6 +41,9 @@ private:
     Plasma::FrameSvg* frame;
     QLabel* label;
     QHBoxLayout* m_layout;
+
+  public Q_SLOTS:
+    void setColors();
 };
 
 #endif // TOOLTIP_H

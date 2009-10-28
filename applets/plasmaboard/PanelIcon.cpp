@@ -40,6 +40,8 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
         contextBasic = new QAction(i18n("Switch to extended mode"), this);
         connect(contextBasic, SIGNAL(triggered(bool)), this, SLOT(toggleMode()));
 
+	connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(initKeyboard()));
+
 
 	Plasma::ToolTipManager::self()->registerWidget(this);
 	Plasma::ToolTipContent toolTip;

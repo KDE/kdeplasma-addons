@@ -30,13 +30,12 @@
 
 Tooltip::Tooltip(QString text) : QWidget()
 {
-    setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_TransparentForMouseEvents);
     setWindowFlags( Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
 
-    QPalette pal = palette();
-    pal.setColor(backgroundRole(), Qt::transparent);
-    pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    setPalette(pal);
+    setColors();
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(setColorsu()));
 
     frame = new Plasma::FrameSvg(this);
     frame->setEnabledBorders(Plasma::FrameSvg::AllBorders);
@@ -54,6 +53,13 @@ Tooltip::Tooltip(QString text) : QWidget()
 
 Tooltip::~Tooltip() {
 
+}
+
+void Tooltip::setColors(){
+    QPalette pal = palette();
+    pal.setColor(backgroundRole(), Qt::transparent);
+    pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    setPalette(pal);
 }
 
 void Tooltip::setText(QString text) {
