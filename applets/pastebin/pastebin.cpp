@@ -59,7 +59,6 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::ConstrainedSquare);
     setMinimumSize(16, 16);
     resize(150, 150);
-    setPreferredSize(150, 150);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showErrors()));
 
@@ -238,6 +237,13 @@ void Pastebin::constraintsEvent(Plasma::Constraints constraints)
         int dynSize = qMax((qreal)1.0, (qreal)(qMin(contentsRect().width(), contentsRect().height()) / 4));
         //kDebug() << "Min : Dyn" << minSize << dynSize << qMax(minSize, dynSize);
         m_font.setPointSize(qMax(minSize, dynSize));
+    }
+    if (constraints & Plasma::FormFactorConstraint) {
+        if (formFactor() == Plasma::Horizontal || formFactor() == Plasma::Vertical ) {
+            setPreferredSize(-1, -1);
+        } else {
+            setPreferredSize(150, 150);
+        }
     }
 }
 
