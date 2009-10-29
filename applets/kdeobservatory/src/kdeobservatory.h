@@ -23,6 +23,6 @@ private:
     QGraphicsView  *m_view;
 };
 
-K_EXPORT_PLASMA_APPLET(KDEObservatory, KDEObservatory)
+K_EXPORT_PLASMA_APPLET(kdeobservatory, KDEObservatory)
 
 #endif
