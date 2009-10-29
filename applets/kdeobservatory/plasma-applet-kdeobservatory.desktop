@@ -1,9 +1,6 @@
 [Desktop Entry]
 Name=KDE Observatory
-Name[pt_BR]=Observatório KDE
-Name[x-test]=xxKDE Observatoryxx
 Comment=Visualize the KDE ecosystem
-Comment[pt_BR]=Visualize o ecossistema KDE
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet
