@@ -30,6 +30,7 @@ ContactList::ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
 {
     m_container = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     setWidget(m_container);
     connect(&m_friends, SIGNAL(friendAdded(QString)), SLOT(friendAdded(QString)));
     connect(&m_friends, SIGNAL(friendRemoved(QString)), SLOT(friendRemoved(QString)));
@@ -106,7 +107,7 @@ void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::D
         connect(widget, SIGNAL(sendMessage()), SLOT(sendMessage()));
         connect(widget, SIGNAL(showDetails()), SLOT(showDetails()));
     }
-    this->setPos(0, 0);
+    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 

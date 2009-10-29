@@ -131,6 +131,7 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_tabs->setPreferredSize(300, 400);
         m_tabs->setMinimumSize(150, 200);
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        connect(m_tabs, SIGNAL(currentChanged(int)), this, SLOT(updateSizeHint()));
 
         // Friends activity
         m_userWidget = new UserWidget(dataEngine("ocs"), m_tabs);
@@ -142,6 +143,7 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         connect(m_friendList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
         connect(m_friendList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
         connect(m_friendList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
+        connect(m_friendList, SIGNAL(sizeHintChanged(Qt::SizeHint)), this, SIGNAL(sizeHintChanged(Qt::SizeHint)));
 
         // People near me
         m_nearList = new ContactList(dataEngine("ocs"), m_tabs);
@@ -149,6 +151,7 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         connect(m_nearList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
         connect(m_nearList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
         connect(m_nearList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
+        connect(m_nearList, SIGNAL(sizeHintChanged(Qt::SizeHint)), this, SIGNAL(sizeHintChanged(Qt::SizeHint)));
 
         // "Home" button, outside of the layout
         m_homeButton = new Plasma::IconWidget(this);
@@ -161,6 +164,12 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
     return m_tabs;
 }
 
+void OpenDesktop::updateSizeHint()
+{
+    m_tabs->setPreferredSize(-1, -1);
+
+    emit sizeHintChanged(Qt::PreferredSize);
+}
 
 void OpenDesktop::switchDisplayedUser(const QString& id, bool switchToPersonal)
 {

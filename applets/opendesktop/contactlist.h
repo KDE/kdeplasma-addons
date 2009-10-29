@@ -95,7 +95,12 @@ class ContactList : public Plasma::ScrollWidget
          * @param id the identification of the recipient
          */
         void sendMessage(const QString& id);
-        
+
+        /**
+         * Size hint has changed, probably because the number of items changed
+         */
+        void sizeHintChanged(Qt::SizeHint);
+
     private Q_SLOTS:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
         void addFriend();
