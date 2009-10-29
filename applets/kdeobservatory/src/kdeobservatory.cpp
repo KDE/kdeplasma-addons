@@ -8,6 +8,7 @@
 #include <KConfigDialog>
 
 #include "ui_kdeobservatoryconfiggeneral.h"
+#include "ui_kdeobservatoryconfigcommits.h"
 #include "commitcollector.h"
 
 KDEObservatory::KDEObservatory(QObject *parent, const QVariantList &args)
@@ -46,6 +47,11 @@ void KDEObservatory::createConfigurationInterface(KConfigDialog *parent)
     Ui::KDEObservatoryConfigGeneral *ui_configGeneral = new Ui::KDEObservatoryConfigGeneral;
     ui_configGeneral->setupUi(configGeneral); 
     parent->addPage(configGeneral, i18n("General"), icon());
+
+    QWidget *configCommits = new QWidget;
+    Ui::KDEObservatoryConfigCommits *ui_configCommits = new Ui::KDEObservatoryConfigCommits;
+    ui_configCommits->setupUi(configCommits); 
+    parent->addPage(configCommits, i18n("Commits"), icon());
 }
 
 #include "kdeobservatory.moc"

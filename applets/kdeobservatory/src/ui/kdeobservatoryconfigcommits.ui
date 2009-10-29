@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KDEObservatoryConfigGeneral</class>
- <widget class="QWidget" name="KDEObservatoryConfigGeneral">
+ <class>KDEObservatoryConfigCommits</class>
+ <widget class="QWidget" name="KDEObservatoryConfigCommits">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>206</height>
+    <width>393</width>
+    <height>174</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Configure KDE Observatory</string>
+   <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="lblAppearance">
+   <item row="0" column="1">
+    <widget class="QLabel" name="lblCommits">
      <property name="font">
       <font>
        <weight>75</weight>
@@ -23,12 +23,12 @@
       </font>
      </property>
      <property name="text">
-      <string>Appearance</string>
+      <string>Commits</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <spacer name="spacer1">
+    <spacer name="spacer5">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -43,46 +43,10 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="enableAnimations">
-     <property name="text">
-      <string>Enable animations</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="enableAutoViewChange">
-     <property name="text">
-      <string>Enable automatic view change</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
+   <item row="1" column="1" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <spacer name="spacer3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>27</width>
-         <height>23</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblViewsDelay">
+      <widget class="QLabel" name="lblDays1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -90,7 +54,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Change view every:</string>
+        <string>Show activities for the past </string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -101,26 +65,63 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="viewsDelay">
+      <widget class="QSpinBox" name="commitExtent">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="displayFormat">
-        <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
+       <property name="minimumSize">
+        <size>
+         <width>46</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>46</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>30</number>
+       </property>
+       <property name="value">
+        <number>7</number>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="spacer4">
+      <widget class="QLabel" name="lblDays2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>days</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>size</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>37</width>
+         <width>111</width>
          <height>20</height>
         </size>
        </property>
@@ -128,28 +129,38 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="3">
-    <spacer name="spacer2">
+   <item row="1" column="3">
+    <spacer name="spacer7">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>40</width>
+       <width>14</width>
        <height>20</height>
       </size>
      </property>
     </spacer>
    </item>
-   <item row="4" column="2">
-    <spacer name="spacer5">
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="cacheContents">
+     <property name="text">
+      <string>Cache contents</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <spacer name="spacer3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>67</height>
+       <height>86</height>
       </size>
      </property>
     </spacer>
