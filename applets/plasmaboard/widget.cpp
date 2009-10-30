@@ -180,20 +180,20 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	extKeys[ARROWBOTTOMKEY] = new ArrowBottomKey(this);
 	extKeys[ARROWRIGHTKEY] = new ArrowRightKey(this);
 
-	m_layout->addItem(extKeys[0], FIRST_ROW, 0, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[0], FIRST_ROW, 0, 1, 2);
 	i = 1;
 	for(i = 1; i < 5; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+1, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+1, 1, 2);
 	}
 	for(i = 5; i < 9; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+2, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+2, 1, 2);
 	}
 	for(i = 9; i < 13; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+3, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+3, 1, 2);
 	}
 
 	for(i = 13; i < 16; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+4, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+4, 1, 2);
 	}
 
 	extKeys[0]->setKey(XK_Escape, true, i18nc("The escape key on a keyboard", "Esc"));
@@ -213,31 +213,30 @@ void PlasmaboardWidget::initExtendedKeyboard(){
 	extKeys[14]->setKey(XK_Num_Lock, true, i18nc("The num key on a keyboard", "Num"));
 	extKeys[15]->setKey(XK_Pause, true, i18nc("The pause key on a keyboard", "Pause"));
 	
-	
-		m_layout->addItem(extKeys[ARROWLEFTKEY], FIRST_ROW + 5, 29, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[ARROWLEFTKEY], FIRST_ROW + 5, 29, 1, 2);
 
 	int col = 31;
 
-	m_layout->addItem(extKeys[HOMEKEY], FIRST_ROW + 1, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[HOMEKEY], FIRST_ROW + 1, col, 1, 2);
 	extKeys[HOMEKEY]->setKey(XK_Home, true, i18nc("The home key on a keyboard", "Home"));
 
-	m_layout->addItem(extKeys[ENDKEY], FIRST_ROW + 2, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[ENDKEY], FIRST_ROW + 2, col, 1, 2);
 	extKeys[ENDKEY]->setKey(XK_End, true, i18nc("The end key on a keyboard", "End"));
 
-	m_layout->addItem(extKeys[INSKEY], FIRST_ROW + 3, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[INSKEY], FIRST_ROW + 3, col, 1, 2);
 	extKeys[INSKEY]->setKey(XK_Insert, true, i18nc("The insert key on a keyboard", "Ins"));
 
-	m_layout->addItem(extKeys[ARROWTOPKEY], FIRST_ROW + 4, col, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(extKeys[ARROWBOTTOMKEY], FIRST_ROW + 5, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[ARROWTOPKEY], FIRST_ROW + 4, col, 1, 2);
+	m_layout->addItem(extKeys[ARROWBOTTOMKEY], FIRST_ROW + 5, col, 1, 2);
 
 	col+=2;
 
-	m_layout->addItem(extKeys[ARROWRIGHTKEY], FIRST_ROW + 5, col, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(extKeys[DELKEY], FIRST_ROW + 1, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[ARROWRIGHTKEY], FIRST_ROW + 5, col, 1, 2);
+	m_layout->addItem(extKeys[DELKEY], FIRST_ROW + 1, col, 1, 2);
 	extKeys[DELKEY]->setKey(XK_Delete, true, i18nc("The delete key on a keyboard", "Del"));
-	m_layout->addItem(extKeys[PGUPKEY], FIRST_ROW + 2, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[PGUPKEY], FIRST_ROW + 2, col, 1, 2);
 	extKeys[PGUPKEY]->setKey(XK_Page_Up, true, i18nc("The page up key on a keyboard", "PgUp"));
-	m_layout->addItem(extKeys[PGDOWNKEY], FIRST_ROW + 3, col, 1, 2, Qt::AlignLeft);
+	m_layout->addItem(extKeys[PGDOWNKEY], FIRST_ROW + 3, col, 1, 2);
 	extKeys[PGDOWNKEY]->setKey(XK_Page_Down, true, i18nc("The page down key on a keyboard", "PgDn"));
 
 	col+=3;
@@ -354,49 +353,49 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
 	int x;
 	int row = offset;
 	for(x = 0; x<=12; x++){
-		m_layout->addItem(alphaKeys[x], row, x*2, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(alphaKeys[x], row, x*2, 1, 2);
 	}
-	m_layout->addItem(funcKeys[BACKSPACEKEY], row, x*2, 1, 4, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[BACKSPACEKEY], row, x*2, 1, 4);
 
 	row++;
 
-	m_layout->addItem(funcKeys[TABKEY], row, 0, 1, 3, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[TABKEY], row, 0, 1, 3);
 	int t = 3;
 	for(x = 13; x<=24; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
 		t+=2;
 	}
-	m_layout->addItem(funcKeys[ENTERKEY], row, t+1, 2, 2, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[ENTERKEY], row, t+1, 2, 2);
 
 	row++;
 
-	m_layout->addItem(funcKeys[CAPSKEY], row, 0, 1, 4, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[CAPSKEY], row, 0, 1, 4);
 	t = 4;
 	for(x = 25; x<=36; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
 		t+=2;
 	}
 
 	row++;
 
-	m_layout->addItem(funcKeys[SHIFT_L_KEY], row, 0, 1, 3, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[SHIFT_L_KEY], row, 0, 1, 3);
 	t = 3;
 	for(x = 37; x<=47; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2, Qt::AlignLeft);
+		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
 		t+=2;
 	}
-	m_layout->addItem(funcKeys[SHIFT_R_KEY], row, t, 1, 5, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[SHIFT_R_KEY], row, t, 1, 5);
 
 	row++;
 
-	m_layout->addItem(funcKeys[CTLKEY], row, 0, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(funcKeys[META_L_KEY], row, 2, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(funcKeys[ALT_L_KEY], row, 4, 1, 2, Qt::AlignLeft);
-        m_layout->addItem(funcKeys[SPACE], row, 6, 1, 14, Qt::AlignLeft);
-	m_layout->addItem(funcKeys[ALTGRKEY], row, 20, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(funcKeys[META_R_KEY], row, 22, 1, 2, Qt::AlignLeft);
-        m_layout->addItem(funcKeys[MENU], row, 24, 1, 2, Qt::AlignLeft);
-	m_layout->addItem(funcKeys[CONTROL_LEFT], row, 26, 1, 3, Qt::AlignLeft);
+	m_layout->addItem(funcKeys[CTLKEY], row, 0, 1, 2);
+	m_layout->addItem(funcKeys[META_L_KEY], row, 2, 1, 2);
+	m_layout->addItem(funcKeys[ALT_L_KEY], row, 4, 1, 2);
+	m_layout->addItem(funcKeys[SPACE], row, 6, 1, 14);
+	m_layout->addItem(funcKeys[ALTGRKEY], row, 20, 1, 2);
+	m_layout->addItem(funcKeys[META_R_KEY], row, 22, 1, 2);
+	m_layout->addItem(funcKeys[MENU], row, 24, 1, 2);
+	m_layout->addItem(funcKeys[CONTROL_LEFT], row, 26, 1, 3);
 
 	for(int i = 0; i<numberOfCols; i++){
                 m_layout->setColumnPreferredWidth(i,size().width()/numberOfCols);

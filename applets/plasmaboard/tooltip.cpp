@@ -35,7 +35,7 @@ Tooltip::Tooltip(QString text) : QWidget()
     setWindowFlags( Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
 
     setColors();
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(setColorsu()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(setColors()));
 
     frame = new Plasma::FrameSvg(this);
     frame->setEnabledBorders(Plasma::FrameSvg::AllBorders);
