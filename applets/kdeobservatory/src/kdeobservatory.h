@@ -6,12 +6,12 @@
 class QGraphicsScene;
 class QGraphicsView;
 
-class KDEObservatory : public Plasma::Applet
+class KdeObservatory : public Plasma::Applet
 {
     Q_OBJECT
 public:
-    KDEObservatory(QObject *parent, const QVariantList &args);
-    ~KDEObservatory();
+    KdeObservatory(QObject *parent, const QVariantList &args);
+    ~KdeObservatory();
 
     void init();
 
@@ -23,6 +23,6 @@ private:
     QGraphicsView  *m_view;
 };
 
-K_EXPORT_PLASMA_APPLET(kdeobservatory, KDEObservatory)
+K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 #endif

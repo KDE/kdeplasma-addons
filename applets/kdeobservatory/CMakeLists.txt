@@ -14,11 +14,13 @@ set(kdeobservatory_SRCS
     src/kdeobservatory.cpp
     src/icollector.cpp
     src/commitcollector.cpp
+    src/kdeobservatoryconfiggeneral.cpp
 )
 
 kde4_add_ui_files(kdeobservatory_SRCS
 		  src/ui/kdeobservatoryconfiggeneral.ui
 		  src/ui/kdeobservatoryconfigcommits.ui
+		  src/ui/kdeobservatoryconfigproject.ui
 )
  
 kde4_add_plugin(plasma_applet_kdeobservatory ${kdeobservatory_SRCS})

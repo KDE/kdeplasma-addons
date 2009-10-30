@@ -7,11 +7,11 @@
 
 #include <KConfigDialog>
 
-#include "ui_kdeobservatoryconfiggeneral.h"
 #include "ui_kdeobservatoryconfigcommits.h"
+#include "kdeobservatoryconfiggeneral.h"
 #include "commitcollector.h"
 
-KDEObservatory::KDEObservatory(QObject *parent, const QVariantList &args)
+KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args)
 {
     setBackgroundHints(DefaultBackground);
@@ -33,23 +33,21 @@ KDEObservatory::KDEObservatory(QObject *parent, const QVariantList &args)
     c->run();
 }
 
-KDEObservatory::~KDEObservatory()
+KdeObservatory::~KdeObservatory()
 {
 }
 
-void KDEObservatory::init()
+void KdeObservatory::init()
 {
 }
 
-void KDEObservatory::createConfigurationInterface(KConfigDialog *parent)
+void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 {
-    QWidget *configGeneral = new QWidget;
-    Ui::KDEObservatoryConfigGeneral *ui_configGeneral = new Ui::KDEObservatoryConfigGeneral;
-    ui_configGeneral->setupUi(configGeneral); 
+    KdeObservatoryConfigGeneral *configGeneral = new KdeObservatoryConfigGeneral;
     parent->addPage(configGeneral, i18n("General"), icon());
 
     QWidget *configCommits = new QWidget;
-    Ui::KDEObservatoryConfigCommits *ui_configCommits = new Ui::KDEObservatoryConfigCommits;
+    Ui::KdeObservatoryConfigCommits *ui_configCommits = new Ui::KdeObservatoryConfigCommits;
     ui_configCommits->setupUi(configCommits); 
     parent->addPage(configCommits, i18n("Commits"), icon());
 }
