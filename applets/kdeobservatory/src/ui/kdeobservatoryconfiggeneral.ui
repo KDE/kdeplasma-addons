@@ -6,48 +6,127 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>481</width>
-    <height>396</height>
+    <width>372</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Configure KDE Observatory</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <widget class="QLabel" name="lblAppearance">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Appearance</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout2">
      <item>
-      <spacer name="spacer1">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>13</width>
-         <height>23</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="1" colspan="2">
+        <widget class="QLabel" name="lblDays1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Show activities for the past </string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>size</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QSpinBox" name="commitExtent">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>46</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>46</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>30</number>
+         </property>
+         <property name="value">
+          <number>7</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QLabel" name="lblSynchronize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Synchronize data every:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>size</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" colspan="3">
+        <widget class="QTimeEdit" name="SynchronizationDelay">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="displayFormat">
+          <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" rowspan="2">
+        <spacer name="spacer1">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>13</width>
+           <height>47</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QCheckBox" name="cacheContents">
+         <property name="text">
+          <string>Cache contents</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
         <widget class="QCheckBox" name="enableAnimations">
          <property name="text">
           <string>Enable animations</string>
@@ -57,7 +136,17 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="4" column="1" colspan="3">
+        <widget class="QCheckBox" name="enableTransitionEffects">
+         <property name="text">
+          <string>Enable transition effects</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="3">
         <widget class="QCheckBox" name="enableAutoViewChange">
          <property name="text">
           <string>Enable automatic view change</string>
@@ -67,122 +156,219 @@
          </property>
         </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <spacer name="spacer2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>27</width>
-             <height>23</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="lblViewsDelay">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Change view every:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-            <cstring>size</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTimeEdit" name="viewsDelay">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="displayFormat">
-            <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="6" column="1">
+        <spacer name="spacer3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>27</width>
+           <height>23</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLabel" name="lblViewsDelay">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Change view every:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>size</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3" colspan="3">
+        <widget class="QTimeEdit" name="viewsDelay">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="displayFormat">
+          <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="lblDays2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>days</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>size</cstring>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
      <item>
-      <spacer name="spacer3">
+      <spacer name="spacer2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>34</width>
-         <height>22</height>
+         <width>106</width>
+         <height>44</height>
         </size>
        </property>
       </spacer>
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="lblProjects">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+   <item row="1" column="1">
+    <widget class="QLabel" name="lblActiveViews">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="text">
-      <string>Projects</string>
+      <string>Active views:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>size</cstring>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item row="2" column="0">
+    <spacer name="spacer4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>47</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout1">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <widget class="QListWidget" name="activeViews">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>123</height>
+        </size>
+       </property>
        <item>
-        <widget class="QTableWidget" name="projects">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>85</height>
-          </size>
+        <property name="text">
+         <string>Commit summary</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Commit history</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Top Developers</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Krazy</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bugs</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/emotes/face-sad.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/emotes/face-sad.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QToolButton" name="tlbUp">
+         <property name="text">
+          <string>...</string>
          </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</iconset>
          </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::SingleSelection</enum>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tlbDown">
+         <property name="text">
+          <string>...</string>
          </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</iconset>
          </property>
-         <attribute name="verticalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <column>
-          <property name="text">
-           <string>Project</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Commit Subject</string>
-          </property>
-         </column>
         </widget>
        </item>
        <item>
@@ -193,87 +379,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="KPushButton" name="psbAddProject">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>102</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>&amp;Add</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="KPushButton" name="psbRemoveProject">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>&amp;Remove</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="KPushButton" name="psbEditProject">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>102</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>&amp;Edit</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/document-edit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/document-edit.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
+           <height>18</height>
           </size>
          </property>
         </spacer>
@@ -282,175 +388,21 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="lblActiveViews">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Active views</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" rowspan="3" colspan="2">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0" colspan="2">
-      <widget class="KComboBox" name="kcombobox"/>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QListWidget" name="activeViews">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>85</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer5_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="2">
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <widget class="KPushButton" name="psbAddView">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>102</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>&amp;Add</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="KPushButton" name="psbRemoveView">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>&amp;Remove</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer4_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="2">
-      <widget class="KComboBox" name="kcombobox_2">
-       <item>
-        <property name="text">
-         <string>Commits</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Developers</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Krazy</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Bugs</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="lblProject">
-       <property name="text">
-        <string>Project:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="labelViewType">
-       <property name="text">
-        <string>View type:</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="0">
-    <spacer name="spacer10">
+   <item row="3" column="1">
+    <spacer name="spacer6">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>67</height>
+       <height>112</height>
       </size>
      </property>
     </spacer>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

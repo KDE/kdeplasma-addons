@@ -7,8 +7,10 @@
 
 #include <KConfigDialog>
 
-#include "ui_kdeobservatoryconfigcommits.h"
 #include "kdeobservatoryconfiggeneral.h"
+#include "kdeobservatoryconfigprojects.h"
+#include "ui_kdeobservatoryconfigcommitsummary.h"
+
 #include "commitcollector.h"
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
@@ -30,7 +32,7 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     setLayout(layout);
 
     CommitCollector *c = new CommitCollector(this);
-    c->run();
+    //c->run();
 }
 
 KdeObservatory::~KdeObservatory()
@@ -44,12 +46,15 @@ void KdeObservatory::init()
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 {
     KdeObservatoryConfigGeneral *configGeneral = new KdeObservatoryConfigGeneral;
-    parent->addPage(configGeneral, i18n("General"), icon());
+    parent->addPage(configGeneral, i18n("General"), "applications-development");
 
-    QWidget *configCommits = new QWidget;
-    Ui::KdeObservatoryConfigCommits *ui_configCommits = new Ui::KdeObservatoryConfigCommits;
-    ui_configCommits->setupUi(configCommits); 
-    parent->addPage(configCommits, i18n("Commits"), icon());
+    KdeObservatoryConfigProjects *configProjects = new KdeObservatoryConfigProjects;
+    parent->addPage(configProjects, i18n("Projects"), "project-development");
+
+    QWidget *configCommitSummary = new QWidget;
+    Ui::KdeObservatoryConfigCommitSummary *ui_configCommitSummary = new Ui::KdeObservatoryConfigCommitSummary;
+    ui_configCommitSummary->setupUi(configCommitSummary);
+    parent->addPage(configCommitSummary, i18n("Commit Summary"), "svn-commit");
 }
 
 #include "kdeobservatory.moc"

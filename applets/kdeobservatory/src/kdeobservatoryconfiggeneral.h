@@ -15,10 +15,13 @@ public:
     KdeObservatoryConfigGeneral(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~KdeObservatoryConfigGeneral();
 
-private Q_SLOTS:
-    void on_psbAddProject_clicked();
+public Q_SLOTS:
+    void on_tlbUp_clicked();
+    void on_tlbDown_clicked();
 
 private:
+    void swapViewItems(int updown);
+
     Ui::KdeObservatoryConfigGeneral *m_configGeneral;
 };
 
