@@ -32,6 +32,6 @@ void ArrowTopKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	setUpPainter(painter);
 
 	painter->rotate(90);
-	paintArrow(painter, option, widget);
+	paintArrow(painter);
 
 }

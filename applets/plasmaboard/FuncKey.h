@@ -46,7 +46,7 @@ private:
 	bool pressed;
 
 protected:
-	void paintArrow(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	void paintArrow(QPainter *painter);
 };
 
 #endif /* FUNCKEY_H_ */

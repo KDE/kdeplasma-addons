@@ -32,5 +32,5 @@ void BackspaceKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	setUpPainter(painter);
 	painter->translate(-2, 0);
 
-	paintArrow(painter, option, widget);
+	paintArrow(painter);
 }

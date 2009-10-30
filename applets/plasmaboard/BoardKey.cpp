@@ -27,9 +27,9 @@ BoardKey::BoardKey(PlasmaboardWidget *parent):
 	Plasma::PushButton(parent),fontSize(60) {
 	//this->setOrientation(Qt::Horizontal);
 	//this->setDrawBackground(true);
-	setMinimumSize(10,10);
+	setMinimumSize(5,5);
 	setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored, QSizePolicy::DefaultType);
-	setFocusPolicy(Qt::NoFocus);
+	//setFocusPolicy(Qt::NoFocus);
 }
 
 BoardKey::~BoardKey() {

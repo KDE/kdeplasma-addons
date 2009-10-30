@@ -31,5 +31,5 @@ void ArrowLeftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	Plasma::PushButton::paint(painter, option, widget);
 	setUpPainter(painter);
 
-	paintArrow(painter, option, widget);
+	paintArrow(painter);
 }

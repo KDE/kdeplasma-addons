@@ -26,8 +26,7 @@
 #include <plasma/theme.h>
 
 FuncKey::FuncKey(PlasmaboardWidget *parent):
-	BoardKey::BoardKey(parent) {
-	pressed = false;
+	BoardKey::BoardKey(parent), pressed(false) {
 }
 
 void FuncKey::toggleOn(){
@@ -80,7 +79,7 @@ void FuncKey::sendKeycodeRelease() {
 	toggleOff();
 }
 
-void FuncKey::paintArrow(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void FuncKey::paintArrow(QPainter *painter){
 
     	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 	painter->drawLine(-1, 0 , 3, 0);
