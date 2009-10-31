@@ -2,13 +2,9 @@
 #define KDEOBSERVATORYCONFIGPROJECTS_HEADER
 
 #include <QWidget>
+#include "ui_kdeobservatoryconfigprojects.h"
 
-namespace Ui
-{
-    class KdeObservatoryConfigProjects;
-}
-
-class KdeObservatoryConfigProjects : public QWidget
+class KdeObservatoryConfigProjects : public QWidget, public Ui::KdeObservatoryConfigProjects
 {
     Q_OBJECT
 public:
@@ -19,9 +15,6 @@ public Q_SLOTS:
     void on_psbAddProject_clicked();
     void on_psbRemoveProject_clicked();
     void on_psbEditProject_clicked();
-
-private:
-    Ui::KdeObservatoryConfigProjects *m_configProjects;
 };
 
 #endif

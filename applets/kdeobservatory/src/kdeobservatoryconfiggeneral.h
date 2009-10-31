@@ -2,13 +2,9 @@
 #define KDEOBSERVATORYCONFIGGENERAL_HEADER
 
 #include <QWidget>
+#include "ui_kdeobservatoryconfiggeneral.h"
 
-namespace Ui
-{
-    class KdeObservatoryConfigGeneral;
-}
-
-class KdeObservatoryConfigGeneral : public QWidget
+class KdeObservatoryConfigGeneral : public QWidget, public Ui::KdeObservatoryConfigGeneral
 {
     Q_OBJECT
 public:
@@ -21,8 +17,6 @@ public Q_SLOTS:
 
 private:
     void swapViewItems(int updown);
-
-    Ui::KdeObservatoryConfigGeneral *m_configGeneral;
 };
 
 #endif

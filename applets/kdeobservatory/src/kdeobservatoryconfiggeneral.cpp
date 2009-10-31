@@ -1,16 +1,13 @@
 #include "kdeobservatoryconfiggeneral.h"
 
-#include "ui_kdeobservatoryconfiggeneral.h"
-
 KdeObservatoryConfigGeneral::KdeObservatoryConfigGeneral(QWidget *parent, Qt::WindowFlags f)
-: QWidget(parent, f), m_configGeneral(new Ui::KdeObservatoryConfigGeneral)
+: QWidget(parent, f)
 {
-    m_configGeneral->setupUi(this);
+    setupUi(this);
 }
 
 KdeObservatoryConfigGeneral::~KdeObservatoryConfigGeneral()
 {
-    delete m_configGeneral;
 }
 
 void KdeObservatoryConfigGeneral::on_tlbUp_clicked()
@@ -25,13 +22,13 @@ void KdeObservatoryConfigGeneral::on_tlbDown_clicked()
 
 void KdeObservatoryConfigGeneral::swapViewItems(int updown)
 {
-    int linenumber = m_configGeneral->activeViews->currentRow();
+    int linenumber = activeViews->currentRow();
 
-    if (linenumber + updown < m_configGeneral->activeViews->count())
+    if (linenumber + updown < activeViews->count())
     {
-        QListWidgetItem *item = m_configGeneral->activeViews->currentItem();
-        m_configGeneral->activeViews->takeItem(linenumber);
-        m_configGeneral->activeViews->insertItem(linenumber + updown, item);
-        m_configGeneral->activeViews->setCurrentItem(item);
+        QListWidgetItem *item = activeViews->currentItem();
+        activeViews->takeItem(linenumber);
+        activeViews->insertItem(linenumber + updown, item);
+        activeViews->setCurrentItem(item);
     }
 }
