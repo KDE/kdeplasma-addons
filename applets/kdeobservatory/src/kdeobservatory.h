@@ -21,6 +21,13 @@ public:
 
     void init();
 
+    struct Project
+    {
+        QString name;
+        QString commitSubject;
+        QString icon;
+    };
+
 protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
@@ -34,7 +41,7 @@ private:
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
 
-    QStandardItemModel *m_projects;
+    QList<Project> m_projects;
 };
 
 #endif

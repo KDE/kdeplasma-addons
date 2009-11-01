@@ -2,6 +2,7 @@
 #define COMMITCOLLECTOR_HEADER
 
 #include "icollector.h"
+#include "kdeobservatory.h"
 
 class QStandardItemModel;
 
@@ -9,7 +10,7 @@ class CommitCollector : public ICollector
 {
     Q_OBJECT
 public:
-    CommitCollector(QStandardItemModel *projects, QObject *parent = 0);
+    CommitCollector(const QList<KdeObservatory::Project> &projects, QObject *parent = 0);
     virtual ~CommitCollector();
 
     virtual void run();
@@ -28,7 +29,7 @@ private:
     QHttpRequestHeader m_header;
     QString m_archiveName;
     QString m_summary;
-    QStandardItemModel *m_projects;
+    QList<KdeObservatory::Project> m_projects;
 
     QMap<QString, int> m_resultMap;
 };

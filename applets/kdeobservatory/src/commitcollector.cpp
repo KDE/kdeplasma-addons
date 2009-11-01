@@ -6,7 +6,7 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 
-CommitCollector::CommitCollector(QStandardItemModel *projects, QObject *parent)
+CommitCollector::CommitCollector(const QList<KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent), m_extent(7), m_header("POST", "/"), m_projects(projects)
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
@@ -63,16 +63,15 @@ void CommitCollector::requestFinished (int id, bool error)
 
         qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
 
-        QList<QStandardItem*> items = m_projects->findItems("*", Qt::MatchWildcard | Qt::MatchRecursive, 1);
-        foreach (QStandardItem* item, items)
+        foreach (KdeObservatory::Project project, m_projects)
         {
-            QString itemText = item->text();
-            if (path.startsWith(itemText))
+            QString commitSubject = project.commitSubject;
+            if (path.startsWith(commitSubject))
             {
-                if (m_resultMap.contains(itemText))
-                    m_resultMap[itemText]++;
+                if (m_resultMap.contains(commitSubject))
+                    m_resultMap[commitSubject]++;
                 else
-                    m_resultMap[itemText] = 1;
+                    m_resultMap[commitSubject] = 1;
             }
         }
 

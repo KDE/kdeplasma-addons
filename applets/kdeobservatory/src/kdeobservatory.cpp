@@ -18,7 +18,7 @@
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
-: Plasma::Applet(parent, args), m_projects(new QStandardItemModel(this))
+: Plasma::Applet(parent, args)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
@@ -49,19 +49,18 @@ void KdeObservatory::init()
     QStringList projectIcons = m_configGroup.readEntry("projectIcons", QStringList());
 
     int projectsCount = projectNames.count();
-    m_projects->clear();
-    m_projects->setHorizontalHeaderLabels(QStringList() << "Project" << "Commit Subject");
-
+    m_projects.clear();
     for (int i = 0; i < projectsCount; ++i)
     {
-        QStandardItem *nameItem = new QStandardItem(KIcon(projectIcons.at(i)), projectNames.at(i));
-        nameItem->setData(projectIcons.at(i), Qt::UserRole);
-        QStandardItem *commitSubjectItem = new QStandardItem(projectCommitSubjects.at(i));
-        m_projects->appendRow(QList<QStandardItem *>() << nameItem << commitSubjectItem);
+        Project project;
+        project.name = projectNames.at(i);
+        project.commitSubject = projectCommitSubjects.at(i);
+        project.icon = projectIcons.at(i);
+        m_projects.append(project);
     }
 
     CommitCollector *c = new CommitCollector(m_projects, this);
-    c->run();
+//    c->run();
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -77,8 +76,21 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     ui_configCommitSummary->setupUi(configCommitSummary);
     parent->addPage(configCommitSummary, i18n("Commit Summary"), "svn-commit");
 
-    m_configProjects->projects->setModel(m_projects);
-    m_configProjects->projects->setCurrentIndex(m_projects->index(0, 0));
+    int projectCount = m_projects.count();
+    for (int i = 0; i < projectCount; ++i)
+    {
+        QTableWidgetItem *itemProject = new QTableWidgetItem(KIcon(m_projects.at(i).icon), m_projects.at(i).name);
+        itemProject->setData(Qt::UserRole, m_projects.at(i).icon);
+        QTableWidgetItem *itemCommitSubject = new QTableWidgetItem(m_projects.at(i).commitSubject);
+        int rowCount = m_configProjects->projects->rowCount();
+        m_configProjects->projects->setRowCount(rowCount+1);
+        m_configProjects->projects->setItem(rowCount, 0, itemProject);
+        m_configProjects->projects->setItem(rowCount, 1, itemCommitSubject);
+        m_configProjects->projects->setRowHeight(rowCount, m_configProjects->projects->rowHeight(rowCount)*0.75);
+        m_configProjects->projects->setCurrentItem(itemProject);
+    }
+    m_configProjects->projects->resizeColumnsToContents();
+    m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -90,12 +102,19 @@ void KdeObservatory::configAccepted()
     QStringList projectCommitSubjects;
     QStringList projectIcons;
 
-    int projectsCount = m_projects->rowCount(m_projects->invisibleRootItem()->index());
+    m_projects.clear();
+
+    int projectsCount = m_configProjects->projects->rowCount();
     for (int i = 0; i < projectsCount; ++i)
     {
-        projectNames << m_projects->item(i, 0)->text();
-        projectCommitSubjects << m_projects->item(i, 1)->text();
-        projectIcons << m_projects->item(i, 0)->data(Qt::UserRole).value<QString>();
+        Project project;
+        project.name = m_configProjects->projects->item(i, 0)->text();
+        project.commitSubject = m_configProjects->projects->item(i, 1)->text();
+        project.icon = m_configProjects->projects->item(i, 0)->data(Qt::UserRole).value<QString>();
+        m_projects.append(project);
+        projectNames << project.name;
+        projectCommitSubjects << project.commitSubject;
+        projectIcons << project.icon;
     }
 
     m_configGroup.writeEntry("projectNames", projectNames);

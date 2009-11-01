@@ -2,6 +2,7 @@
 #define KDEOBSERVATORYCONFIGPROJECTS_HEADER
 
 #include <QWidget>
+#include <QStandardItemModel>
 #include "ui_kdeobservatoryconfigprojects.h"
 
 class KdeObservatoryConfigProjects : public QWidget, public Ui::KdeObservatoryConfigProjects
