@@ -35,7 +35,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTableWidget" name="projects">
+        <widget class="QTableView" name="projects">
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
@@ -45,19 +45,6 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
-         <attribute name="verticalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <column>
-          <property name="text">
-           <string>Project</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Commit Subject</string>
-          </property>
-         </column>
         </widget>
        </item>
        <item>

@@ -1,7 +1,9 @@
 #ifndef KDEOBSERVATORY_HEADER
 #define KDEOBSERVATORY_HEADER
 
-#include <QDataStream>
+#include <QStandardItemModel>
+
+#include <KConfigGroup>
 
 #include <Plasma/Applet>
 
@@ -20,27 +22,20 @@ public:
 
     void init();
 
-    struct Project
-    {
-        QString name;
-        QString commitSubject;
-        QString icon;
-    };
-
 protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
 
 private:
+    KConfigGroup m_configGroup;
+
     QGraphicsScene *m_scene;
     QGraphicsView  *m_view;
 
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
 
-    QList<Project> m_projects;
+    QStandardItemModel *m_projects;
 };
-
-K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 #endif

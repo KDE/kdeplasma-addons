@@ -1,5 +1,7 @@
 #include "kdeobservatoryconfigprojects.h"
 
+#include <QStandardItem>
+
 #include <KDialog>
 #include <KMessageBox>
 
@@ -12,7 +14,8 @@ KdeObservatoryConfigProjects::KdeObservatoryConfigProjects(QWidget *parent, Qt::
 {
     setupUi(this);
     projects->horizontalHeader()->setStretchLastSection(true);
-    projects->setRowCount(0);
+    projects->verticalHeader()->hide();
+    projects->resizeColumnsToContents();
 }
 
 KdeObservatoryConfigProjects::~KdeObservatoryConfigProjects()
@@ -28,15 +31,11 @@ void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
 
     if (configProject->exec() == KDialog::Accepted)
     {
-        QTableWidgetItem *itemProject = new QTableWidgetItem(KIcon(ui_configProject->icon->icon()), ui_configProject->projectName->text());
-        itemProject->setData(Qt::UserRole, ui_configProject->icon->icon());
-        QTableWidgetItem *itemCommitSubject = new QTableWidgetItem(ui_configProject->commitSubject->text());
-        int rowCount = projects->rowCount();
-        projects->setRowCount(rowCount+1);
-        projects->setItem(rowCount, 0, itemProject);
-        projects->setItem(rowCount, 1, itemCommitSubject);
-        projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
-        projects->setCurrentItem(itemProject);
+        QStandardItem *nameItem = new QStandardItem(KIcon(ui_configProject->icon->icon()), ui_configProject->projectName->text());
+        nameItem->setData(ui_configProject->icon->icon(), Qt::UserRole);
+        QStandardItem *commitSubjectItem = new QStandardItem(ui_configProject->commitSubject->text());
+        (qobject_cast<QStandardItemModel *>(projects->model()))->appendRow(QList<QStandardItem *>() << nameItem << commitSubjectItem);
+        projects->setCurrentIndex(nameItem->index());
     }
 
     delete ui_configProject;
@@ -45,29 +44,37 @@ void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
 
 void KdeObservatoryConfigProjects::on_psbRemoveProject_clicked()
 {
-    QTableWidgetItem *currentItem;
-    if ((currentItem = projects->currentItem()))
-        if (KMessageBox::questionYesNo(this, "Are you sure you want to remove project '" + currentItem->text() + "' ?", "Remove projet") == KMessageBox::Yes)
-            projects->removeRow(currentItem->row());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(projects->model());
+    QModelIndex currentIndex;
+    if ((currentIndex = projects->currentIndex()).isValid())
+        if (KMessageBox::questionYesNo(this, "Are you sure you want to remove project '" + model->data(currentIndex, Qt::DisplayRole).toString() + "' ?", "Remove projet") == KMessageBox::Yes)
+            model->removeRow(currentIndex.row());
 }
 
 void KdeObservatoryConfigProjects::on_psbEditProject_clicked()
 {
-    QTableWidgetItem *currentItem;
-    if ((currentItem = projects->currentItem()))
+    QModelIndex currentIndex;
+    if ((currentIndex = projects->currentIndex()).isValid())
     {
         QPointer<KDialog> configProjects = new KDialog(this);
         configProjects->setButtons(KDialog::None);
         Ui::KdeObservatoryConfigProject *ui_configProjects = new Ui::KdeObservatoryConfigProject;
         ui_configProjects->setupUi(configProjects);
 
-        int currentRow = projects->currentRow();
-        ui_configProjects->projectName->setText(projects->itemAt(currentRow, 0)->text());
-        ui_configProjects->commitSubject->setText(projects->itemAt(currentRow, 1)->text());
-        ui_configProjects->icon->setIcon(projects->itemAt(currentRow, 0)->icon());
+        int currentRow = currentIndex.row();
+        QStandardItemModel *model = qobject_cast<QStandardItemModel *>(projects->model());
+        QModelIndex index0 = model->index(currentRow, 0, QModelIndex());
+        QModelIndex index1 = model->index(currentRow, 1, QModelIndex());
+        ui_configProjects->projectName->setText(model->data(index0, Qt::DisplayRole).toString());
+        ui_configProjects->commitSubject->setText(model->data(index1, Qt::DisplayRole).toString());
+        ui_configProjects->icon->setIcon(model->data(index0, Qt::UserRole).toString());
 
         if (configProjects->exec() == KDialog::Accepted)
         {
+            model->setData(index0, ui_configProjects->projectName->text(), Qt::DisplayRole);
+            model->setData(index1, ui_configProjects->commitSubject->text(), Qt::DisplayRole);
+            model->itemFromIndex(index0)->setIcon(KIcon(ui_configProjects->icon->icon()));
+            model->setData(index0, ui_configProjects->icon->icon(), Qt::UserRole);
         }
 
         delete ui_configProjects;
