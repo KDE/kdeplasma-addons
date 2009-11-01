@@ -10,13 +10,3 @@ ICollector::ICollector(QObject *parent)
 ICollector::~ICollector()
 {
 }
-
-const QString &ICollector::summary() const
-{
-    return m_summary;
-}
-
-const ICollector::ResultMap &ICollector::resultMap() const
-{
-    return m_resultMap;
-}

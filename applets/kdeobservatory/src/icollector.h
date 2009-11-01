@@ -10,11 +10,7 @@ public:
     ICollector(QObject *parent = 0);
     virtual ~ICollector();
 
-    typedef QMap<QString, QList< QPair<QString, int> > > ResultMap;
     virtual void run() = 0;
-
-    const QString &summary() const;
-    const ResultMap &resultMap() const;
 
 Q_SIGNALS:
     void collectFinished();
@@ -22,10 +18,6 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
     virtual void requestFinished (int id, bool error) = 0;
-
-protected:
-    QString m_summary;
-    ResultMap m_resultMap;
 };
 
 #endif

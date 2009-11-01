@@ -2,6 +2,7 @@
 
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
+#include <QStandardItemModel>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
@@ -33,9 +34,6 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
     layout->addItem(proxy);
     setLayout(layout);
-
-    CommitCollector *c = new CommitCollector(this);
-    //c->run();
 }
 
 KdeObservatory::~KdeObservatory()
@@ -61,6 +59,9 @@ void KdeObservatory::init()
         QStandardItem *commitSubjectItem = new QStandardItem(projectCommitSubjects.at(i));
         m_projects->appendRow(QList<QStandardItem *>() << nameItem << commitSubjectItem);
     }
+
+    CommitCollector *c = new CommitCollector(m_projects, this);
+    c->run();
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)

@@ -1,14 +1,13 @@
 #ifndef KDEOBSERVATORY_HEADER
 #define KDEOBSERVATORY_HEADER
 
-#include <QStandardItemModel>
-
 #include <KConfigGroup>
 
 #include <Plasma/Applet>
 
 class QGraphicsScene;
 class QGraphicsView;
+class QStandardItemModel;
 
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;

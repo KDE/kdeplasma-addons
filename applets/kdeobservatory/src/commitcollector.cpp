@@ -4,9 +4,10 @@
 #include <QDate>
 #include <QDebug>
 #include <QRegExp>
+#include <QStandardItemModel>
 
-CommitCollector::CommitCollector(QObject *parent)
-: ICollector(parent), m_extent(7), m_header("POST", "/")
+CommitCollector::CommitCollector(QStandardItemModel *projects, QObject *parent)
+: ICollector(parent), m_extent(7), m_header("POST", "/"), m_projects(projects)
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
     m_header.setValue("Host", "lists.kde.org");
@@ -53,15 +54,29 @@ void CommitCollector::requestFinished (int id, bool error)
     int pos = 0;
     while ((pos = regExp.indexIn(source, pos)) != -1)
     {
-         QString path = regExp.cap(3).trimmed();
-         QString commiter = regExp.cap(4).trimmed();
-         long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
+        QString path = regExp.cap(3).trimmed();
+        QString commiter = regExp.cap(4).trimmed();
+        long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
 
-         if (date <= m_stopCollectingDay)
-             return;
+        if (date <= m_stopCollectingDay)
+         return;
 
-         qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
-         pos += regExp.matchedLength();
+        qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
+
+        QList<QStandardItem*> items = m_projects->findItems("*", Qt::MatchWildcard | Qt::MatchRecursive, 1);
+        foreach (QStandardItem* item, items)
+        {
+            QString itemText = item->text();
+            if (path.startsWith(itemText))
+            {
+                if (m_resultMap.contains(itemText))
+                    m_resultMap[itemText]++;
+                else
+                    m_resultMap[itemText] = 1;
+            }
+        }
+
+        pos += regExp.matchedLength();
     }
     ++m_page;
     if (!source.contains(">Next<"))
@@ -70,6 +85,7 @@ void CommitCollector::requestFinished (int id, bool error)
         m_archiveName = QDate::fromString(m_archiveName + "01", "yyyyMMdd").addDays(-1).toString("yyyyMM");
     }
 
-    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
-    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
+    qDebug() << m_resultMap;
+//    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
+//    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }

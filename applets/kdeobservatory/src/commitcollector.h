@@ -3,11 +3,13 @@
 
 #include "icollector.h"
 
+class QStandardItemModel;
+
 class CommitCollector : public ICollector
 {
     Q_OBJECT
 public:
-    CommitCollector(QObject *parent = 0);
+    CommitCollector(QStandardItemModel *projects, QObject *parent = 0);
     virtual ~CommitCollector();
 
     virtual void run();
@@ -25,6 +27,10 @@ private:
     long long m_stopCollectingDay;
     QHttpRequestHeader m_header;
     QString m_archiveName;
+    QString m_summary;
+    QStandardItemModel *m_projects;
+
+    QMap<QString, int> m_resultMap;
 };
 
 #endif
