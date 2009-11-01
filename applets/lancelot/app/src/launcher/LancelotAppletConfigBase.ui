@@ -86,7 +86,7 @@
                 <bool>false</bool>
                </property>
                <property name="dragDropMode">
-                <enum>QAbstractItemView::NoDragDrop</enum>
+                <enum>QAbstractItemView::DragDrop</enum>
                </property>
                <property name="selectionMode">
                 <enum>QAbstractItemView::SingleSelection</enum>
@@ -96,6 +96,9 @@
                  <width>64</width>
                  <height>64</height>
                 </size>
+               </property>
+               <property name="movement">
+                <enum>QListView::Static</enum>
                </property>
                <property name="spacing">
                 <number>8</number>
@@ -142,7 +145,7 @@
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="dragDropMode">
-                <enum>QAbstractItemView::NoDragDrop</enum>
+                <enum>QAbstractItemView::DragDrop</enum>
                </property>
                <property name="selectionMode">
                 <enum>QAbstractItemView::MultiSelection</enum>
@@ -152,6 +155,9 @@
                  <width>64</width>
                  <height>64</height>
                 </size>
+               </property>
+               <property name="movement">
+                <enum>QListView::Static</enum>
                </property>
                <property name="spacing">
                 <number>8</number>
