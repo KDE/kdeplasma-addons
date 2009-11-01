@@ -648,18 +648,19 @@ void SystemLoadViewer::toolTipAboutToShow()
 
     // Memory Usage
     const int ramUsage = qRound((m_ramapps / m_ramtotal) * 100);
-    content += i18n("Ram Usage: %1%<br />", ramUsage);
+    int ramTotalMiB = qRound(m_ramtotal / 1024);
+    content += i18n("Ram Usage: %1% of %2 MiB<br />", ramUsage, ramTotalMiB);
 
     // Swap Usage
     if (m_swapAvailable) {
         const int swapUsage = qRound((m_swapused / m_swaptotal) * 100);
-        content += i18n("Swap Usage: %1%", swapUsage);
+        int swapTotalMiB = qRound(m_swaptotal / 10.24); //m_swaptotal is already divided by 100
+        content += i18n("Swap Usage: %1% of %2 MiB", swapUsage, swapTotalMiB);
     } else {
         content += i18nc("not available means the system does not have swap", "Swap: not available");
     }
         
-    Plasma::ToolTipManager::self()->setContent(this,
-        Plasma::ToolTipContent(i18n("System Load Viewer"), content));
+    Plasma::ToolTipManager::self()->setContent(this, Plasma::ToolTipContent(i18n("System Load Viewer"), content, KIcon("view-statistics")));
 }
 
 bool SystemLoadViewer::verticalBars() const
