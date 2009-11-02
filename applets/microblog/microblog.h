@@ -63,6 +63,8 @@ struct Tweet {
     Plasma::IconWidget *icon;
     Plasma::TextBrowser *content;
     Plasma::IconWidget *favIcon;
+    Plasma::IconWidget *replyIcon;
+    Plasma::IconWidget *forwardIcon;
 };
 
 class MicroBlog : public Plasma::PopupApplet
@@ -103,6 +105,8 @@ class MicroBlog : public Plasma::PopupApplet
         void scheduleShowTweets();
         void showTweets();
         void modeChanged(int index);
+        void reply(QString to);
+        void forward(QString rt);
 
     protected:
         QString timeDescription( const QDateTime &dt );

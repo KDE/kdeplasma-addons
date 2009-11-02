@@ -32,6 +32,7 @@
 #include <QGraphicsProxyWidget>
 #include <QAction>
 #include <QLabel>
+#include <QSignalMapper>
 
 #include <KColorScheme>
 #include <KConfigDialog>
@@ -291,6 +292,23 @@ void MicroBlog::modeChanged(int index)
     downloadHistory();
 }
 
+void MicroBlog::reply(QString to)
+{
+    m_scrollWidget->ensureItemVisible(m_headerFrame);
+    m_statusEdit->nativeWidget()->setPlainText("@" + to + " ");
+    QTextCursor cursor = m_statusEdit->nativeWidget()->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    m_statusEdit->nativeWidget()->setTextCursor(cursor);
+    m_statusEdit->nativeWidget()->setFocus();
+}
+
+void MicroBlog::forward(QString rt)
+{
+    m_scrollWidget->ensureItemVisible(m_headerFrame);
+    m_statusEdit->nativeWidget()->setPlainText("RT @" + rt);
+    m_statusEdit->nativeWidget()->setFocus();
+}
+
 void MicroBlog::getWallet()
 {
     //TODO: maybe Plasma in general should handle the wallet
@@ -518,15 +536,35 @@ void MicroBlog::showTweets()
         favIcon->setMinimumSize( favIconSize );
         favIcon->setMaximumSize( favIconSize );
 
+        Plasma::IconWidget *replyIcon = new Plasma::IconWidget("@",tweetFrame);
+        QSizeF replyIconSize = icon->sizeFromIconSize(24);
+        replyIcon->setMinimumSize( replyIconSize );
+        replyIcon->setMaximumSize( replyIconSize );
+
+        Plasma::IconWidget *forwardIcon = new Plasma::IconWidget("RT",tweetFrame);
+        QSizeF forwardIconSize = icon->sizeFromIconSize(24);
+        forwardIcon->setMinimumSize( forwardIconSize );
+        forwardIcon->setMaximumSize( forwardIconSize );
+
         tweetLayout->addItem(icon);
         tweetLayout->addItem(tweetText);
         tweetLayout->addItem(favIcon);
+
+        //building a vertical layout for toolbox
+        QGraphicsLinearLayout *toolsLayout = new QGraphicsLinearLayout( Qt::Vertical, tweetLayout );
+        toolsLayout->setContentsMargins( 0, 5, 0, 5 );
+        toolsLayout->setSpacing(2);
+        toolsLayout->addItem(replyIcon);
+        toolsLayout->addItem(forwardIcon);
+        tweetLayout->addItem(toolsLayout);
 
         Tweet t;
         t.frame = tweetFrame;
         t.icon = icon;
         t.content = tweetText;
         t.favIcon = favIcon;
+        t.replyIcon = replyIcon;
+        t.forwardIcon = forwardIcon;
 
         m_tweetWidgets.append( t );
     }
@@ -545,6 +583,9 @@ void MicroBlog::showTweets()
 
     int i = 0;
     QMap<qulonglong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
+    QSignalMapper *signalMapperReply = new QSignalMapper(this);
+    QSignalMapper *signalMapperForward = new QSignalMapper(this);
+
     while (it != m_tweetMap.begin()) {
         Plasma::DataEngine::Data &tweetData = *(--it);
         QString user = tweetData.value("User").toString();
@@ -558,6 +599,12 @@ void MicroBlog::showTweets()
         profile->setData(user);
 
         Tweet t = m_tweetWidgets[i];
+        //you don't want to reply or RT yourself
+        if (user == m_username) {
+            t.replyIcon->hide();
+            t.forwardIcon->hide();
+        }
+
         t.icon->setAction(profile);
         QSizeF iconSize = t.icon->sizeFromIconSize(30);
         t.icon->setMinimumSize(iconSize);
@@ -577,6 +624,9 @@ void MicroBlog::showTweets()
         html += QString("<tr height='1em'><td align='left' width='1%'><font color='%2'>%1</font></td><td align='right' width='auto'><p align='right'><font color='%2'>%3%4</font></p></td></tr></table>").arg( user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
                 .arg(timeDescription( dt )).arg( sourceString);
         QString status = tweetData.value( "Status" ).toString();
+        //getting the user name of the tweeterer for reply and his message for retweet
+        signalMapperReply->setMapping(t.replyIcon, QString(user));
+        signalMapperForward->setMapping(t.forwardIcon, QString(user+ ": "+ status));
 
         status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
 
@@ -590,6 +640,12 @@ void MicroBlog::showTweets()
 
 
         t.content->update();
+
+        //connecting the tool icons
+        connect(t.replyIcon, SIGNAL(clicked()),signalMapperReply, SLOT (map()));
+        connect(signalMapperReply, SIGNAL(mapped(const QString &)),this, SLOT(reply(const QString &)));
+        connect(t.forwardIcon, SIGNAL(clicked()),signalMapperForward, SLOT (map()));
+        connect(signalMapperForward, SIGNAL(mapped(const QString &)),this, SLOT(forward(const QString &)));
 
         if( !favIcon.isNull() ) {
             t.favIcon->setIcon( QIcon(favIcon) );
