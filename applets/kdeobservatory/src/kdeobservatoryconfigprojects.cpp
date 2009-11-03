@@ -13,11 +13,23 @@ KdeObservatoryConfigProjects::KdeObservatoryConfigProjects(QWidget *parent, Qt::
 : QWidget(parent, f)
 {
     setupUi(this);
-    projects->verticalHeader()->hide();
 }
 
 KdeObservatoryConfigProjects::~KdeObservatoryConfigProjects()
 {
+}
+
+void KdeObservatoryConfigProjects::createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &icon)
+{
+    QTableWidgetItem *itemProject = new QTableWidgetItem(KIcon(icon), projectName);
+    itemProject->setData(Qt::UserRole, icon);
+    QTableWidgetItem *itemCommitSubject = new QTableWidgetItem(commitSubject);
+    int rowCount = projects->rowCount();
+    projects->setRowCount(rowCount+1);
+    projects->setItem(rowCount, 0, itemProject);
+    projects->setItem(rowCount, 1, itemCommitSubject);
+    projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
+    projects->setCurrentItem(itemProject);
 }
 
 void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
@@ -29,15 +41,7 @@ void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
 
     if (configProject->exec() == KDialog::Accepted)
     {
-        QTableWidgetItem *itemProject = new QTableWidgetItem(KIcon(ui_configProject->icon->icon()), ui_configProject->projectName->text());
-        itemProject->setData(Qt::UserRole, ui_configProject->icon->icon());
-        QTableWidgetItem *itemCommitSubject = new QTableWidgetItem(ui_configProject->commitSubject->text());
-        int rowCount = projects->rowCount();
-        projects->setRowCount(rowCount+1);
-        projects->setItem(rowCount, 0, itemProject);
-        projects->setItem(rowCount, 1, itemCommitSubject);
-        projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
-        projects->setCurrentItem(itemProject);
+        createTableWidgetItem(ui_configProject->projectName->text(), ui_configProject->commitSubject->text(), ui_configProject->icon->icon());
         projects->resizeColumnsToContents();
         projects->horizontalHeader()->setStretchLastSection(true);
     }

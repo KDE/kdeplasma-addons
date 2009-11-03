@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>372</width>
-    <height>353</height>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,7 +88,7 @@
         </widget>
        </item>
        <item row="1" column="3" colspan="3">
-        <widget class="QTimeEdit" name="SynchronizationDelay">
+        <widget class="QTimeEdit" name="synchronizationDelay">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>

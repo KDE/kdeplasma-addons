@@ -12,6 +12,7 @@ public:
     KdeObservatoryConfigProjects(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~KdeObservatoryConfigProjects();
 
+    void createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &icon);
 public Q_SLOTS:
     void on_psbAddProject_clicked();
     void on_psbRemoveProject_clicked();

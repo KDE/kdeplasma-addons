@@ -25,7 +25,7 @@ void CommitCollector::run()
     m_stopCollectingDay = now.addDays(-(m_extent+1)).toString("yyyyMMdd").toLongLong();
 
     m_archiveName = now.toString("yyyyMM");
-    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
+    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4" << ". Stop: " << m_stopCollectingDay;
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }
 
@@ -85,6 +85,6 @@ void CommitCollector::requestFinished (int id, bool error)
     }
 
     qDebug() << m_resultMap;
-//    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
-//    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
+    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
+    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }

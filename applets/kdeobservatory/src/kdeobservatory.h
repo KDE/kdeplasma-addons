@@ -5,8 +5,8 @@
 
 #include <Plasma/Applet>
 
-class QGraphicsScene;
 class QGraphicsView;
+class QGraphicsScene;
 class QStandardItemModel;
 
 class KdeObservatoryConfigGeneral;
@@ -41,7 +41,16 @@ private:
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
 
+    int m_commitExtent;
+    int m_synchronizationDelay;
+    bool m_cacheContents;
+    bool m_enableAnimations;
+    bool m_enableTransitionEffects;
+    bool m_enableAutoViewChange;
+    int m_viewsDelay;
+
     QList<Project> m_projects;
+    QList< QPair<QString, bool> > m_views;
 };
 
 #endif
