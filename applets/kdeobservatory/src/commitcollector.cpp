@@ -73,13 +73,13 @@ void CommitCollector::requestFinished (int id, bool error)
 
         foreach (KdeObservatory::Project project, m_projects)
         {
-            QString commitSubject = project.commitSubject;
-            if (path.startsWith(commitSubject))
+            QRegExp commitSubject(project.commitSubject);
+            if (commitSubject.indexIn(path, 0) != -1)
             {
-                if (m_resultMap.contains(commitSubject))
-                    m_resultMap[commitSubject]++;
+                if (m_resultMap.contains(project.commitSubject))
+                    m_resultMap[project.commitSubject]++;
                 else
-                    m_resultMap[commitSubject] = 1;
+                    m_resultMap[project.commitSubject] = 1;
             }
         }
 

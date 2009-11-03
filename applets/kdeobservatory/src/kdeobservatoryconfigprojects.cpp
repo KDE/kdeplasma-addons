@@ -29,7 +29,6 @@ void KdeObservatoryConfigProjects::createTableWidgetItem(const QString &projectN
     projects->setItem(rowCount, 0, itemProject);
     projects->setItem(rowCount, 1, itemCommitSubject);
     projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
-    projects->setCurrentItem(itemProject);
 }
 
 void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
@@ -71,7 +70,7 @@ void KdeObservatoryConfigProjects::on_psbEditProject_clicked()
         int currentRow = projects->currentRow();
         ui_configProjects->projectName->setText(projects->item(currentRow, 0)->text());
         ui_configProjects->commitSubject->setText(projects->item(currentRow, 1)->text());
-        ui_configProjects->icon->setIcon(projects->item(currentRow, 0)->icon());
+        ui_configProjects->icon->setIcon(projects->item(currentRow, 0)->data(Qt::UserRole).toString());
 
         if (configProjects->exec() == KDialog::Accepted)
         {

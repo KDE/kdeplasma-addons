@@ -115,6 +115,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     int projectCount = m_projects.count();
     for (int i = 0; i < projectCount; ++i)
         m_configProjects->createTableWidgetItem(m_projects.at(i).name, m_projects.at(i).commitSubject, m_projects.at(i).icon);
+    m_configProjects->projects->setCurrentItem(m_configProjects->projects->item(0, 0));
     m_configProjects->projects->resizeColumnsToContents();
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
@@ -195,7 +196,11 @@ void KdeObservatory::collectFinished()
         QGraphicsRectItem *rect = m_scene->addRect((qreal) 15*j++, (qreal) 0, (qreal) 10, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
         rect->translate(0, -rank);
     }
-    m_view->update();
+    for (int i = 0; i < 200; ++i)
+    {
+        m_view->setSceneRect(-100-i, 0, 100, 100);
+        m_view->update();
+    }
 }
 
 #include "kdeobservatory.moc"
