@@ -1,10 +1,11 @@
 #include "kdeobservatory.h"
 
+#include <QResizeEvent>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QStandardItemModel>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
-#include <QStandardItemModel>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 
 #include <KConfig>
 #include <KConfigDialog>
@@ -17,19 +18,39 @@
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
+class MyView : public QGraphicsView
+{
+protected:
+    void resizeEvent(QResizeEvent *event)
+    {
+        if (scene())
+        {
+            QSize size = event->size();
+            qreal minSizeView = qMin(size.width(), size.height());
+            QRectF rect = scene()->sceneRect();
+            qreal minSizeScene = qMin(rect.width(), rect.height());
+            qreal factor = minSizeView/minSizeScene;
+            resetMatrix();
+            scale(factor, factor);
+        }
+    }
+};
+
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
-    resize(400, 400);
+    resize(200, 200);
 
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(this);
-    proxy->setWidget(m_view = new QGraphicsView);
-    m_view->setScene(m_scene = new QGraphicsScene);
+    proxy->setWidget(m_view = new MyView);
+    m_scene = new QGraphicsScene;
+    m_scene->addRect(-0, -100, 100, 100, QPen(QColor(255,0,0)));
+    m_scene->setSceneRect(0, -100, 100, 100);
+    m_view->setScene(m_scene);
     //m_view->setBackgroundBrush(QColor(0, 0, 0));
     //m_view->setAutoFillBackground(true);
-     m_scene->addEllipse(0, 0, 100, 100);
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
     layout->addItem(proxy);
@@ -194,11 +215,8 @@ void KdeObservatory::collectFinished()
     while (i.hasPrevious())
     {
         int rank = i.previous();
-        qDebug() << rank << ": " << resultMap.key(rank);
-        m_scene->addEllipse(0, 0, 100, 100);
-        QGraphicsRectItem *rect = m_scene->addRect((qreal) 25*j, (qreal) 0, (qreal) 20, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(16, 16))->setPos((qreal) 25*j++, (qreal) 0);
-        rect->translate(0, -rank);
+        QGraphicsRectItem *rect = m_scene->addRect((qreal) 25*j, (qreal) -rank, (qreal) 20, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(16, 16))->setPos((qreal) (25*j++)+2, (qreal) -rank-20);
     }
     m_view->update();
 }
