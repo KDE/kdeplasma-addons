@@ -15,39 +15,20 @@
 #include "ui_kdeobservatoryconfigcommitsummary.h"
 
 #include "commitcollector.h"
+#include "kdeobservatoryview.h"
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
-
-class MyView : public QGraphicsView
-{
-protected:
-    void resizeEvent(QResizeEvent *event)
-    {
-        if (scene())
-        {
-            QSize size = event->size();
-            qreal minSizeView = qMin(size.width(), size.height());
-            QRectF rect = scene()->sceneRect();
-            qreal minSizeScene = qMin(rect.width(), rect.height());
-            qreal factor = minSizeView/minSizeScene;
-            resetMatrix();
-            scale(factor, factor);
-        }
-    }
-};
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
-    resize(200, 200);
+    resize(300, 200);
 
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(this);
-    proxy->setWidget(m_view = new MyView);
+    proxy->setWidget(m_view = new KdeObservatoryView);
     m_scene = new QGraphicsScene;
-    m_scene->addRect(-0, -100, 100, 100, QPen(QColor(255,0,0)));
-    m_scene->setSceneRect(0, -100, 100, 100);
     m_view->setScene(m_scene);
     //m_view->setBackgroundBrush(QColor(0, 0, 0));
     //m_view->setAutoFillBackground(true);
@@ -65,7 +46,7 @@ void KdeObservatory::init()
 {
     m_configGroup = config();
 
-    m_commitExtent = m_configGroup.readEntry("commitExtent", 7);
+    m_commitExtent = m_configGroup.readEntry("commitExtent", 1);
     m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 60);
     m_cacheContents = m_configGroup.readEntry("cacheContents", true);
     m_enableAnimations = m_configGroup.readEntry("enableAnimations", true);
@@ -94,13 +75,6 @@ void KdeObservatory::init()
         project.icon = projectIcons.at(i);
         m_projects[projectNames.at(i)] = project;
     }
-
-    m_collector = new CommitCollector(m_projects, this);
-    m_collector->setExtent(m_commitExtent);
-
-    connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-    setBusy(true);
-    m_collector->run();
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -198,6 +172,12 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
+    m_collector = new CommitCollector(m_projects, this);
+    m_collector->setExtent(m_commitExtent);
+    connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
+    setBusy(true);
+
+    m_collector->run();
     emit configNeedsSaving();
 }
 
@@ -215,9 +195,25 @@ void KdeObservatory::collectFinished()
     while (i.hasPrevious())
     {
         int rank = i.previous();
-        QGraphicsRectItem *rect = m_scene->addRect((qreal) 25*j, (qreal) -rank, (qreal) 20, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(16, 16))->setPos((qreal) (25*j++)+2, (qreal) -rank-20);
+        QGraphicsRectItem *rect = m_scene->addRect((qreal) (68*j) + 2, (qreal) -(rank*2), (qreal) 64, (qreal) rank*2, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(64, 64))->setPos((qreal) (68*j)+2, (qreal) -(rank*2)-68);
+        QGraphicsTextItem *textNumber = m_scene->addText(QString::number(rank), QFont("Times", 12, QFont::Bold));
+        textNumber->setDefaultTextColor(QColor(255, 255, 255));
+        textNumber->setZValue(1);
+        QFontMetrics fontMetricsNumber(textNumber->font());
+        textNumber->setPos((qreal) (68*j)+30-(fontMetricsNumber.width(textNumber->toPlainText())/2), -fontMetricsNumber.height()-4);
+
+        QGraphicsTextItem *textItem = m_scene->addText(resultMap.key(rank));
+        QFontMetrics fontMetrics(textItem->font());
+        textItem->setPos((qreal) (68*j)+30-(fontMetrics.width(textItem->toPlainText())/2), (qreal) -(rank*2)-74-(fontMetrics.height()));
+        j++;
     }
+
+    QGraphicsSimpleTextItem *simpleTextItem = m_scene->addSimpleText("Top Active Projects", QFont("Times", 14, QFont::Bold));
+    QFontMetrics fontMetrics(simpleTextItem->font());
+    QRectF sceneRect = m_scene->itemsBoundingRect();
+    simpleTextItem->setPos(sceneRect.x()+(sceneRect.width()/2)-(fontMetrics.width("Top Active Projects")/2), sceneRect.y()-fontMetrics.height()-4);
+
     m_view->update();
 }
 

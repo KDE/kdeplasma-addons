@@ -7,7 +7,7 @@
 #include <QStandardItemModel>
 
 CommitCollector::CommitCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
-: ICollector(parent), m_extent(7), m_header("POST", "/"), m_projects(projects)
+: ICollector(parent), m_extent(1), m_header("POST", "/"), m_projects(projects)
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
     m_header.setValue("Host", "lists.kde.org");

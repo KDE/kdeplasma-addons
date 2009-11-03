@@ -11,17 +11,18 @@ include_directories(
 )
  
 set(kdeobservatory_SRCS
-    src/kdeobservatory.cpp
     src/icollector.cpp
+    src/kdeobservatory.cpp
     src/commitcollector.cpp
+    src/kdeobservatoryview.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
 )
 
 kde4_add_ui_files(kdeobservatory_SRCS
 		  src/ui/kdeobservatoryconfiggeneral.ui
-		  src/ui/kdeobservatoryconfigprojects.ui
 		  src/ui/kdeobservatoryconfigproject.ui
+		  src/ui/kdeobservatoryconfigprojects.ui
 		  src/ui/kdeobservatoryconfigcommitsummary.ui
 )
  
