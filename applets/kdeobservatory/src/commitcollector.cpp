@@ -39,6 +39,11 @@ int CommitCollector::extent() const
     return m_extent;
 }
 
+const QMap<QString, int> &CommitCollector::resultMap() const
+{
+    return m_resultMap;
+}
+
 void CommitCollector::requestFinished (int id, bool error)
 {
     if (error)
@@ -59,7 +64,10 @@ void CommitCollector::requestFinished (int id, bool error)
         long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
 
         if (date <= m_stopCollectingDay)
-         return;
+        {
+            emit collectFinished();
+            return;
+        }
 
         qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
 

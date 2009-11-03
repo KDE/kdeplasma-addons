@@ -18,6 +18,8 @@ public:
     void setExtent (int extent);
     int extent() const;
 
+    const QMap<QString, int> &resultMap() const;
+
 protected Q_SLOTS:
     virtual void requestFinished (int id, bool error);
 

@@ -11,6 +11,7 @@ class QStandardItemModel;
 
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
+class CommitCollector;
 
 class KdeObservatory : public Plasma::Applet
 {
@@ -31,6 +32,7 @@ public:
 protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
+    void collectFinished();
 
 private:
     KConfigGroup m_configGroup;
@@ -51,6 +53,8 @@ private:
 
     QList<Project> m_projects;
     QList< QPair<QString, bool> > m_views;
+
+    CommitCollector *m_collector;
 };
 
 #endif

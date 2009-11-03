@@ -22,14 +22,13 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
-    resize(200, 200);
+    resize(400, 400);
 
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(this);
     proxy->setWidget(m_view = new QGraphicsView);
     m_view->setScene(m_scene = new QGraphicsScene);
     //m_view->setBackgroundBrush(QColor(0, 0, 0));
     //m_view->setAutoFillBackground(true);
-    m_scene->addEllipse(0, 0, 50, 50);
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
     layout->addItem(proxy);
@@ -75,9 +74,12 @@ void KdeObservatory::init()
         m_projects.append(project);
     }
 
-    CommitCollector *c = new CommitCollector(m_projects, this);
-    c->setExtent(m_commitExtent);
-    c->run();
+    m_collector = new CommitCollector(m_projects, this);
+    m_collector->setExtent(m_commitExtent);
+
+    connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
+    setBusy(true);
+    m_collector->run();
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -173,6 +175,27 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
     emit configNeedsSaving();
+}
+
+void KdeObservatory::collectFinished()
+{
+    setBusy(false);
+    const QMap<QString, int> &resultMap = m_collector->resultMap();
+    QList<int> list = resultMap.values();
+    qSort(list);
+
+    QListIterator<int> i(list);
+    i.toBack();
+    int j = 0;
+
+    while (i.hasPrevious())
+    {
+        int rank = i.previous();
+        qDebug() << rank << ": " << resultMap.key(rank);
+        QGraphicsRectItem *rect = m_scene->addRect((qreal) 15*j++, (qreal) 0, (qreal) 10, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        rect->translate(0, -rank);
+    }
+    m_view->update();
 }
 
 #include "kdeobservatory.moc"
