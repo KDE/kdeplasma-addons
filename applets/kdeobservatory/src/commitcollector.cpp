@@ -6,7 +6,7 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 
-CommitCollector::CommitCollector(const QList<KdeObservatory::Project> &projects, QObject *parent)
+CommitCollector::CommitCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent), m_extent(7), m_header("POST", "/"), m_projects(projects)
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
@@ -71,15 +71,16 @@ void CommitCollector::requestFinished (int id, bool error)
 
         qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
 
-        foreach (KdeObservatory::Project project, m_projects)
+        foreach (QString projectName, m_projects.keys())
         {
+            KdeObservatory::Project project = m_projects.value(projectName);
             QRegExp commitSubject(project.commitSubject);
             if (commitSubject.indexIn(path, 0) != -1)
             {
-                if (m_resultMap.contains(project.commitSubject))
-                    m_resultMap[project.commitSubject]++;
+                if (m_resultMap.contains(projectName))
+                    m_resultMap[projectName]++;
                 else
-                    m_resultMap[project.commitSubject] = 1;
+                    m_resultMap[projectName] = 1;
             }
         }
 
@@ -92,7 +93,5 @@ void CommitCollector::requestFinished (int id, bool error)
         m_archiveName = QDate::fromString(m_archiveName + "01", "yyyyMMdd").addDays(-1).toString("yyyyMM");
     }
 
-    qDebug() << m_resultMap;
-    qDebug() << "Requesting: " << "l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4";
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }

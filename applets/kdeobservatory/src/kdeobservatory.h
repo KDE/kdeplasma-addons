@@ -24,7 +24,6 @@ public:
 
     struct Project
     {
-        QString name;
         QString commitSubject;
         QString icon;
     };
@@ -51,7 +50,7 @@ private:
     bool m_enableAutoViewChange;
     int m_viewsDelay;
 
-    QList<Project> m_projects;
+    QMap<QString, Project> m_projects;
     QList< QPair<QString, bool> > m_views;
 
     CommitCollector *m_collector;

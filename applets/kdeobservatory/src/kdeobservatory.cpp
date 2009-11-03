@@ -29,6 +29,7 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     m_view->setScene(m_scene = new QGraphicsScene);
     //m_view->setBackgroundBrush(QColor(0, 0, 0));
     //m_view->setAutoFillBackground(true);
+     m_scene->addEllipse(0, 0, 100, 100);
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
     layout->addItem(proxy);
@@ -68,10 +69,9 @@ void KdeObservatory::init()
     for (int i = 0; i < projectsCount; ++i)
     {
         Project project;
-        project.name = projectNames.at(i);
         project.commitSubject = projectCommitSubjects.at(i);
         project.icon = projectIcons.at(i);
-        m_projects.append(project);
+        m_projects[projectNames.at(i)] = project;
     }
 
     m_collector = new CommitCollector(m_projects, this);
@@ -112,9 +112,12 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
         m_configGeneral->activeViews->insertItem(i, item);
     }
 
-    int projectCount = m_projects.count();
-    for (int i = 0; i < projectCount; ++i)
-        m_configProjects->createTableWidgetItem(m_projects.at(i).name, m_projects.at(i).commitSubject, m_projects.at(i).icon);
+    foreach(QString projectName, m_projects.keys())
+    {
+        Project project = m_projects.value(projectName);
+        m_configProjects->createTableWidgetItem(projectName, project.commitSubject, project.icon);
+    }
+
     m_configProjects->projects->setCurrentItem(m_configProjects->projects->item(0, 0));
     m_configProjects->projects->resizeColumnsToContents();
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
@@ -134,11 +137,10 @@ void KdeObservatory::configAccepted()
     for (int i = 0; i < projectsCount; ++i)
     {
         Project project;
-        project.name = m_configProjects->projects->item(i, 0)->text();
         project.commitSubject = m_configProjects->projects->item(i, 1)->text();
         project.icon = m_configProjects->projects->item(i, 0)->data(Qt::UserRole).value<QString>();
-        m_projects.append(project);
-        projectNames << project.name;
+        m_projects[m_configProjects->projects->item(i, 0)->text()] = project;
+        projectNames << m_configProjects->projects->item(i, 0)->text();
         projectCommitSubjects << project.commitSubject;
         projectIcons << project.icon;
     }
@@ -193,14 +195,12 @@ void KdeObservatory::collectFinished()
     {
         int rank = i.previous();
         qDebug() << rank << ": " << resultMap.key(rank);
-        QGraphicsRectItem *rect = m_scene->addRect((qreal) 15*j++, (qreal) 0, (qreal) 10, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        m_scene->addEllipse(0, 0, 100, 100);
+        QGraphicsRectItem *rect = m_scene->addRect((qreal) 25*j, (qreal) 0, (qreal) 20, (qreal) rank, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(16, 16))->setPos((qreal) 25*j++, (qreal) 0);
         rect->translate(0, -rank);
     }
-    for (int i = 0; i < 200; ++i)
-    {
-        m_view->setSceneRect(-100-i, 0, 100, 100);
-        m_view->update();
-    }
+    m_view->update();
 }
 
 #include "kdeobservatory.moc"

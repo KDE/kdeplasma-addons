@@ -10,7 +10,7 @@ class CommitCollector : public ICollector
 {
     Q_OBJECT
 public:
-    CommitCollector(const QList<KdeObservatory::Project> &projects, QObject *parent = 0);
+    CommitCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent = 0);
     virtual ~CommitCollector();
 
     virtual void run();
@@ -31,7 +31,7 @@ private:
     QHttpRequestHeader m_header;
     QString m_archiveName;
     QString m_summary;
-    QList<KdeObservatory::Project> m_projects;
+    const QMap<QString, KdeObservatory::Project> &m_projects;
 
     QMap<QString, int> m_resultMap;
 };
