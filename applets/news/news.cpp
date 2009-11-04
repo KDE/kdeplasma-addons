@@ -389,7 +389,9 @@ void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         }
         html += END_TABLE;
         html += END;
+        m_graphicsWidget->setPreferredSize(-1, -1);
         m_news->setHtml(html, m_cssDir);
+        emit sizeHintChanged(Qt::PreferredSize);
     }
 }
 
