@@ -6,6 +6,8 @@
 #include <QStandardItemModel>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsItemAnimation>
+#include <QTimeLine>
 
 #include <KConfig>
 #include <KConfigDialog>
@@ -15,7 +17,6 @@
 #include "ui_kdeobservatoryconfigcommitsummary.h"
 
 #include "commitcollector.h"
-#include "kdeobservatoryview.h"
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
@@ -25,17 +26,6 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
     resize(300, 200);
-
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(this);
-    proxy->setWidget(m_view = new KdeObservatoryView);
-    m_scene = new QGraphicsScene;
-    m_view->setScene(m_scene);
-    //m_view->setBackgroundBrush(QColor(0, 0, 0));
-    //m_view->setAutoFillBackground(true);
-
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
-    layout->addItem(proxy);
-    setLayout(layout);
 }
 
 KdeObservatory::~KdeObservatory()
@@ -184,37 +174,74 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
+
+    QRectF appletRect = contentsRect();
+
+    QGraphicsSimpleTextItem *simpleTextItem = new QGraphicsSimpleTextItem("Top Active Projects", this);
+    simpleTextItem->setFont(QFont("Times", 12, QFont::Bold));
+    QFontMetrics fontMetrics(simpleTextItem->font());
+    simpleTextItem->setPos(appletRect.x()+(appletRect.width()/2)-(fontMetrics.width("Top Active Projects")/2), appletRect.y());
+
     const QMap<QString, int> &resultMap = m_collector->resultMap();
     QList<int> list = resultMap.values();
+
     qSort(list);
 
     QListIterator<int> i(list);
     i.toBack();
-    int j = 0;
 
+    int maxRank = list.last();
+    int x = appletRect.x();
+    int y = appletRect.y()+fontMetrics.height()+10;
+    qreal width = appletRect.width();
+    qreal step = (appletRect.height()-y) / list.count();
+
+    int j = 0;
+    QGraphicsRectItem *rect;
+    QGraphicsPixmapItem *icon;
     while (i.hasPrevious())
     {
         int rank = i.previous();
-        QGraphicsRectItem *rect = m_scene->addRect((qreal) (68*j) + 2, (qreal) -(rank*2), (qreal) 64, (qreal) rank*2, QPen(QColor(0, 0, 0)), QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-        m_scene->addPixmap(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(64, 64))->setPos((qreal) (68*j)+2, (qreal) -(rank*2)-68);
-        QGraphicsTextItem *textNumber = m_scene->addText(QString::number(rank), QFont("Times", 12, QFont::Bold));
+        qreal widthFactor = (width-34)/maxRank;
+        qreal yItem = y+(j*step)+2;
+
+        rect = new QGraphicsRectItem((qreal) x,
+                                     (qreal) yItem,
+                                     (qreal) widthFactor*rank,
+                                     (qreal) step-4, this);
+        rect->setPen(QPen(QColor(0, 0, 0)));
+        rect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+
+        icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), this);
+        icon->setPos((qreal) x+widthFactor*rank+2, (qreal) yItem+(((step-4)/2)-11));
+
+        QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), this);
+        textNumber->setFont(QFont("Times", 10, QFont::Bold));
         textNumber->setDefaultTextColor(QColor(255, 255, 255));
         textNumber->setZValue(1);
         QFontMetrics fontMetricsNumber(textNumber->font());
-        textNumber->setPos((qreal) (68*j)+30-(fontMetricsNumber.width(textNumber->toPlainText())/2), -fontMetricsNumber.height()-4);
+        textNumber->setPos((qreal) x+((widthFactor*rank)/2)-(fontMetricsNumber.width(textNumber->toPlainText())/2),
+                           (qreal) yItem+((step-4)/2)-(fontMetricsNumber.height()/2));
 
-        QGraphicsTextItem *textItem = m_scene->addText(resultMap.key(rank));
-        QFontMetrics fontMetrics(textItem->font());
-        textItem->setPos((qreal) (68*j)+30-(fontMetrics.width(textItem->toPlainText())/2), (qreal) -(rank*2)-74-(fontMetrics.height()));
+//        QGraphicsTextItem *textItem = m_scene->addText(resultMap.key(rank));
+//        QFontMetrics fontMetrics(textItem->font());
+//        textItem->setPos((qreal) (68*j)+30-(fontMetrics.width(textItem->toPlainText())/2), (qreal) -(rank*2)-74-(fontMetrics.height()));
         j++;
     }
 
-    QGraphicsSimpleTextItem *simpleTextItem = m_scene->addSimpleText("Top Active Projects", QFont("Times", 14, QFont::Bold));
-    QFontMetrics fontMetrics(simpleTextItem->font());
-    QRectF sceneRect = m_scene->itemsBoundingRect();
-    simpleTextItem->setPos(sceneRect.x()+(sceneRect.width()/2)-(fontMetrics.width("Top Active Projects")/2), sceneRect.y()-fontMetrics.height()-4);
+/*
+    QTimeLine *timer = new QTimeLine(5000);
+    timer->setFrameRange(0, 100);
 
-    m_view->update();
+    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
+    animation->setItem(rect);
+    animation->setTimeLine(timer);
+
+    for (int i = 0; i < 200; ++i)
+        animation->setRotationAt(i / 200.0, i*10);
+
+    timer->start();
+*/
 }
 
 #include "kdeobservatory.moc"
