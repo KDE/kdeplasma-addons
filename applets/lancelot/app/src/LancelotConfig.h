@@ -52,6 +52,9 @@ public:
     bool appbrowserColumnLimitted() const;
     void setAppbrowserColumnLimitted(bool value);
 
+    bool appbrowserPopupSubmenus() const;
+    void setAppbrowserPopupSubmenus(bool value);
+
     bool appbrowserReset() const;
     void setAppbrowserReset(bool value);
 
@@ -76,6 +79,9 @@ private Q_SLOTS:
     void buttonNewDocumentsEditClicked();
 
     void setButtonData(QPushButton * button);
+
+private:
+    bool m_appbrowserPopupSubmenus;
 };
 
 #endif // LANCELOTCONFIG_H

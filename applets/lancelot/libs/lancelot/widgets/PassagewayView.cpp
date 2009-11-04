@@ -67,7 +67,8 @@ public:
     Private(ActionTreeModel * entranceModel,
             ActionTreeModel * atlasModel,
             PassagewayView * p)
-      : focusIndex(0), layout(NULL), buttonsLayout(NULL), listsLayout(NULL), parent(p)
+      : focusIndex(0), layout(NULL), buttonsLayout(NULL), listsLayout(NULL),
+        parent(p), popupMenus(false)
     {
         parent->setLayout(layout = new NodeLayout());
         layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
@@ -301,11 +302,12 @@ public:
     QList < ActionListView * > lists;
     int focusIndex;
 
-    NodeLayout          * layout;
+    NodeLayout                  * layout;
     ColumnLayout::ColumnSizer   * sizer;
     QGraphicsLinearLayout       * buttonsLayout;
     ColumnLayout                * listsLayout;
     PassagewayView              * parent;
+    bool                          popupMenus;
 };
 
 PassagewayView::PassagewayView(QGraphicsItem * parent)
@@ -353,10 +355,13 @@ void PassagewayView::listItemActivated(int index, int listIndex)
     if (model) {
         model = model->child(index);
         if (model) {
-            d->next(Private::Step(model->selfTitle(), model->selfIcon(), model));
-            // PopupMenu * popup = new PopupMenu();
-            // popup->setModel(model);
-            // popup->exec(QCursor::pos());
+            if (d->popupMenus) {
+                PopupMenu * popup = new PopupMenu();
+                popup->setModel(model);
+                popup->exec(QCursor::pos());
+            } else {
+                d->next(Private::Step(model->selfTitle(), model->selfIcon(), model));
+            }
         } else {
             d->lists.at(listIndex)->clearSelection();
         }
@@ -472,7 +477,13 @@ int PassagewayView::activationMethod() const
 
 void PassagewayView::setColumnLimit(int limit)
 {
-    d->listsLayout->setColumnCount(limit);
+    if (limit > 0) {
+        d->listsLayout->setColumnCount(limit);
+        d->popupMenus = false;
+    } else {
+        d->listsLayout->setColumnCount(2);
+        d->popupMenus = true;
+    }
 }
 
 void PassagewayView::reset()

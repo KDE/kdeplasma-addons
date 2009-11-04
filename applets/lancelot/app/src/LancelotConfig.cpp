@@ -102,6 +102,7 @@ void LancelotConfig::loadConfig()
             m_mainConfig.readEntry("activationMethod", (int)NoClick));
     setAppbrowserColumnLimitted(m_mainConfig.readEntry("appbrowserColumnLimitted", false));
     setAppbrowserReset(m_mainConfig.readEntry("appbrowserReset", true));
+    setAppbrowserPopupSubmenus(m_mainConfig.readEntry("appbrowserPopupSubmenus", false));
 
     // SystemButtons loading
     systemButtonActions[buttonSystem1] = m_mainConfig.readEntry("systemButton1Action", "lock-screen");
@@ -120,6 +121,7 @@ void LancelotConfig::saveConfig()
 {
     m_mainConfig.writeEntry("activationMethod", (int)activationMethod());
     m_mainConfig.writeEntry("appbrowserColumnLimitted", appbrowserColumnLimitted());
+    m_mainConfig.writeEntry("appbrowserPopupSubmenus", appbrowserPopupSubmenus());
     m_mainConfig.writeEntry("appbrowserReset", appbrowserReset());
 
     m_mainConfig.writeEntry("systemButton1Action", systemButtonActions[buttonSystem1]);
@@ -180,6 +182,16 @@ void LancelotConfig::setAppbrowserColumnLimitted(bool value)
     } else {
         radioAppBrowserNoColumnLimit->click();
     }
+}
+
+bool LancelotConfig::appbrowserPopupSubmenus() const
+{
+    return m_appbrowserPopupSubmenus;
+}
+
+void LancelotConfig::setAppbrowserPopupSubmenus(bool value)
+{
+    m_appbrowserPopupSubmenus = value;
 }
 
 bool LancelotConfig::enableUsageStatistics() const

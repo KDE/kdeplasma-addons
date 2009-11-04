@@ -856,7 +856,9 @@ void LancelotWindow::loadConfig()
     Lancelot::Global::self()->group("PassagewayView")->notifyUpdated();
 
     // PassagewayView settings
-    if (m_configUi.appbrowserColumnLimitted()) {
+    if (m_configUi.appbrowserPopupSubmenus()) {
+        passagewayApplications->setColumnLimit(-1);
+    } else if (m_configUi.appbrowserColumnLimitted()) {
         passagewayApplications->setColumnLimit(2);
     } else {
         passagewayApplications->setColumnLimit(22); // TODO: Temp
