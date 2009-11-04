@@ -226,7 +226,7 @@ QStringList WeatherStation::fromCondition(const QString& condition)
     } else if (condition == "weather-storm") {
         result << "cloud" << "flash" << "water_drops";
     }
-    //kDebug() << result;
+    //kDebug() << condition << result;
     return result;
 }
 
