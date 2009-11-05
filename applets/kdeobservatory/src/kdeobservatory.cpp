@@ -1,14 +1,5 @@
 #include "kdeobservatory.h"
 
-#include <QResizeEvent>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QStandardItemModel>
-#include <QGraphicsProxyWidget>
-#include <QGraphicsLinearLayout>
-#include <QGraphicsItemAnimation>
-#include <QTimeLine>
-
 #include <KConfig>
 #include <KConfigDialog>
 
@@ -17,6 +8,7 @@
 #include "ui_kdeobservatoryconfigcommitsummary.h"
 
 #include "commitcollector.h"
+#include "topactiveprojectsview.h"
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
@@ -174,76 +166,7 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
-
-    QRectF appletRect = contentsRect();
-    QGraphicsRectItem *parent = new QGraphicsRectItem(appletRect, this);
-    parent->setPos(appletRect.width(), 0);
-    parent->setPen(QPen(Qt::NoPen));
-
-    QGraphicsSimpleTextItem *simpleTextItem = new QGraphicsSimpleTextItem("Top Active Projects", parent);
-    simpleTextItem->setFont(QFont("Times", 12, QFont::Bold));
-    QFontMetrics fontMetrics(simpleTextItem->font());
-    simpleTextItem->setPos(appletRect.x()+(appletRect.width()/2)-(fontMetrics.width("Top Active Projects")/2), appletRect.y());
-
-    const QMap<QString, int> &resultMap = m_collector->resultMap();
-    QList<int> list = resultMap.values();
-
-    qSort(list);
-
-    QListIterator<int> i(list);
-    i.toBack();
-
-    int maxRank = list.last();
-    int x = appletRect.x();
-    int y = appletRect.y()+fontMetrics.height()+10;
-    qreal width = appletRect.width();
-    qreal step = (appletRect.height()-y) / list.count();
-
-    int j = 0;
-    QGraphicsRectItem *rect;
-    QGraphicsPixmapItem *icon;
-    while (i.hasPrevious())
-    {
-        int rank = i.previous();
-        qreal widthFactor = (width-34)/maxRank;
-        qreal yItem = y+(j*step)+2;
-
-        rect = new QGraphicsRectItem((qreal) x,
-                                     (qreal) yItem,
-                                     (qreal) widthFactor*rank,
-                                     (qreal) step-4, parent);
-        rect->setPen(QPen(QColor(0, 0, 0)));
-        rect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-
-        icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), parent);
-        icon->setPos((qreal) x+widthFactor*rank+2, (qreal) yItem+(((step-4)/2)-11));
-
-        QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), parent);
-        textNumber->setFont(QFont("Times", 10, QFont::Bold));
-        textNumber->setDefaultTextColor(QColor(255, 255, 255));
-        textNumber->setZValue(1);
-        QFontMetrics fontMetricsNumber(textNumber->font());
-        textNumber->setPos((qreal) x+((widthFactor*rank)/2)-(fontMetricsNumber.width(textNumber->toPlainText())/2),
-                           (qreal) yItem+((step-4)/2)-(fontMetricsNumber.height()/2));
-
-//        QGraphicsTextItem *textItem = m_scene->addText(resultMap.key(rank));
-//        QFontMetrics fontMetrics(textItem->font());
-//        textItem->setPos((qreal) (68*j)+30-(fontMetrics.width(textItem->toPlainText())/2), (qreal) -(rank*2)-74-(fontMetrics.height()));
-        j++;
-    }
-
-    QTimeLine *timer = new QTimeLine(1000);
-    timer->setFrameRange(0, 1);
-    timer->setCurveShape(QTimeLine::EaseOutCurve);
-
-    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(parent);
-    animation->setTimeLine(timer);
-
-    animation->setPosAt(0, QPointF(appletRect.width(), 0));
-    animation->setPosAt(1, QPointF(0, 0));
-
-    timer->start();
+    new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
 }
 
 #include "kdeobservatory.moc"

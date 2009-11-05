@@ -4,8 +4,6 @@
 #include "icollector.h"
 #include "kdeobservatory.h"
 
-class QStandardItemModel;
-
 class CommitCollector : public ICollector
 {
     Q_OBJECT
@@ -30,7 +28,6 @@ private:
     long long m_stopCollectingDay;
     QHttpRequestHeader m_header;
     QString m_archiveName;
-    QString m_summary;
     const QMap<QString, KdeObservatory::Project> &m_projects;
 
     QMap<QString, int> m_resultMap;

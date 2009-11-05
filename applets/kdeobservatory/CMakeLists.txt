@@ -12,6 +12,7 @@ include_directories(
  
 set(kdeobservatory_SRCS
     src/icollector.cpp
+    src/topactiveprojectsview.cpp
     src/kdeobservatory.cpp
     src/commitcollector.cpp
     src/kdeobservatoryconfiggeneral.cpp
