@@ -106,6 +106,7 @@ QGraphicsWidget* Previewer::graphicsWidget()
 void Previewer::init()
 {
     setPopupIcon("previewer");
+    graphicsWidget();
     if (!m_currentFile.isEmpty()) {
         openFile(m_currentFile);
     }
@@ -290,11 +291,6 @@ void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
     if (lst.isEmpty()) {
         // no KPart? we can't do them.
         return;
-    }
-
-    if (!m_previewWidget) {
-        // make sure it's initialized!
-        graphicsWidget();
     }
 
     if (m_previewWidget->previews().isEmpty()) {
