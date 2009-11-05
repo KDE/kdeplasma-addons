@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Picture of the Day
 Name[ca]=Imatge del dia
+Name[cs]=Obrázek dne
 Name[da]=Dagens billede
 Name[de]=Bild des Tages
 Name[en_GB]=Picture of the Day
@@ -33,6 +34,7 @@ Name[zh_CN]=每日一图
 Name[zh_TW]=本日圖片
 Comment=Data Engine for getting various online Pictures of The Day.
 Comment[ca]=Motor de dades per accedir a varies "imagtes del dia" en línia.
+Comment[cs]=Mechanismus pro získávání různých obrázků dne ze sítě.
 Comment[da]=Datamotor der henter diverse online dagens billede.
 Comment[de]=Daten-Treiber zum Holen verschiedener Bilder des Tages.
 Comment[en_GB]=Data Engine for getting various online Pictures of The Day.

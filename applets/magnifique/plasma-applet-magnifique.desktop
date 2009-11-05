@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Magnifique
 Name[ca]=Magnifique
+Name[cs]=Magnifique
 Name[da]=Magnifique
 Name[de]=Vergrößerung
 Name[en_GB]=Magnifique
@@ -32,6 +33,7 @@ Name[zh_CN]=魅影
 Name[zh_TW]=Magnifique
 Comment=A magnification glass for the Plasma desktop
 Comment[ca]=Una lent d'augment per l'escriptori Plasma
+Comment[cs]=Zvětšovací sklo pro Plasma desktop
 Comment[da]=Et forstørrelsesglas til Plasma-skrivebordet
 Comment[de]=Ein Vergrößerungsglas für die Plasma-Arbeitsfläche
 Comment[en_GB]=A magnification glass for the Plasma desktop

@@ -1,6 +1,7 @@
 [Global]
 Name=Lancelot
 Name[ca]=Lancelot
+Name[cs]=Lancelot
 Name[da]=Lancelot
 Name[de]=Lancelot
 Name[el]=Lancelot
@@ -36,6 +37,7 @@ Name[zh_TW]=Lancelot
 IconName=lancelot
 Comment=Lancelot Menu
 Comment[ca]=Menú del Lancelot
+Comment[cs]=Nabídka Lancelotu
 Comment[da]=Lancelot-menu
 Comment[de]=Lancelot-Menü
 Comment[el]=Μενού Lancelot
@@ -73,6 +75,7 @@ Version=1
 [Event/UsageLoggingOn]
 Name=Usage logging is activated
 Name[ca]=L'ús del registre està activat
+Name[cs]=Je aktivován záznam použití
 Name[da]=Logning af anvendelse er aktiveret.
 Name[de]=Benutzungsprotokoll ist aktiviert
 Name[el]=Η καταγραφή χρήσης ενεργή
@@ -140,6 +143,7 @@ Action=Popup
 [Event/ErrorOpeningLog]
 Name=Error opening the log
 Name[ca]=Hi ha hagut un error en obrir el registre
+Name[cs]=Chyba při otevírání záznamu
 Name[da]=Fejl ved åbning af log
 Name[de]=Fehler beim Öffnen des Protokolls
 Name[el]=Σφάλμα ανοίγματος της καταγραφής
@@ -172,6 +176,7 @@ Name[zh_CN]=打开日志出错
 Name[zh_TW]=開啟紀錄時發生錯誤
 Comment=Failed to open the log file.
 Comment[ca]=No s'ha pogut obrir el fitxer de registre.
+Comment[cs]=Nepovedlo se otevřít soubor záznamu.
 Comment[da]=Åbning af logfilen mislykkedes.
 Comment[de]=Die Protokolldatei kann nicht geöffnet werden.
 Comment[el]=Αποτυχία ανοίγματος του αρχείου καταγραφής.

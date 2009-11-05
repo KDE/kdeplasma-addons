@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Bubblemon
 Name[ca]=Monitor bombolla
+Name[cs]=Bubblemon
 Name[da]=Bobbelmon
 Name[de]=Bubblemon
 Name[el]=Bubblemon
@@ -34,6 +35,7 @@ Name[zh_CN]=Bubblemon
 Name[zh_TW]=泡泡監視器
 Comment=A pretty bubble that monitors your system.
 Comment[ca]=Una bombolla bonica que monitoreja el vostre sistema.
+Comment[cs]=Pěkná bublina monitorující váš systém.
 Comment[da]=En pæn bobbel der overvåger dit system.
 Comment[de]=Eine schicke Blase, die Ihr System überwacht.
 Comment[el]=Μια όμορφη φούσκα που εποπτεύει το σύστημά σας.

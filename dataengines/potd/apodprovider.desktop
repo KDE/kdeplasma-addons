@@ -23,6 +23,7 @@ Name[x-test]=xxAstronomy Picture of the Dayxx
 Name[zh_TW]=本日天文圖片
 Comment=Apod Provider
 Comment[ca]=Proveïdor Apod
+Comment[cs]=Poskytovatel Apodu
 Comment[da]=Apod-udbyder.
 Comment[de]=Apod-Anbieter
 Comment[en_GB]=Apod Provider

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=System Load Viewer
 Name[ca]=Visor de la càrrega del sistema
+Name[cs]=Prohlížeč zátěže systému
 Name[da]=Systembelastningsviser
 Name[de]=Systemlast-Anzeige
 Name[el]=Προβολέας φορτίου συστήματος
@@ -35,6 +36,7 @@ Name[zh_CN]=系统负荷查看器
 Name[zh_TW]=系統負載檢視器
 Comment=Tiny CPU/RAM/Swap monitor
 Comment[ca]=Monitor petit de CPU/RAM/Memòria d'intercanvi
+Comment[cs]=Malý monitor CPU/RAM/Swap
 Comment[da]=Lillebitte CPU/RAM/swap-overvåger.
 Comment[de]=Kleine CPU/RAM/Swap-Anzeige
 Comment[el]=Μικροσκοπική εποπτεία ΚΜΕ/RAM/Swap
