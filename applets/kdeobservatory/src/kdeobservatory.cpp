@@ -165,8 +165,8 @@ void KdeObservatory::configAccepted()
     m_collector = new CommitCollector(m_projects, this);
     m_collector->setExtent(m_commitExtent);
     connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-    setBusy(true);
 
+    setBusy(true);
     m_collector->run();
     emit configNeedsSaving();
 }
@@ -176,8 +176,11 @@ void KdeObservatory::collectFinished()
     setBusy(false);
 
     QRectF appletRect = contentsRect();
+    QGraphicsRectItem *parent = new QGraphicsRectItem(appletRect, this);
+    parent->setPos(appletRect.width(), 0);
+    parent->setPen(QPen(Qt::NoPen));
 
-    QGraphicsSimpleTextItem *simpleTextItem = new QGraphicsSimpleTextItem("Top Active Projects", this);
+    QGraphicsSimpleTextItem *simpleTextItem = new QGraphicsSimpleTextItem("Top Active Projects", parent);
     simpleTextItem->setFont(QFont("Times", 12, QFont::Bold));
     QFontMetrics fontMetrics(simpleTextItem->font());
     simpleTextItem->setPos(appletRect.x()+(appletRect.width()/2)-(fontMetrics.width("Top Active Projects")/2), appletRect.y());
@@ -208,14 +211,14 @@ void KdeObservatory::collectFinished()
         rect = new QGraphicsRectItem((qreal) x,
                                      (qreal) yItem,
                                      (qreal) widthFactor*rank,
-                                     (qreal) step-4, this);
+                                     (qreal) step-4, parent);
         rect->setPen(QPen(QColor(0, 0, 0)));
         rect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
 
-        icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), this);
+        icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), parent);
         icon->setPos((qreal) x+widthFactor*rank+2, (qreal) yItem+(((step-4)/2)-11));
 
-        QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), this);
+        QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), parent);
         textNumber->setFont(QFont("Times", 10, QFont::Bold));
         textNumber->setDefaultTextColor(QColor(255, 255, 255));
         textNumber->setZValue(1);
@@ -229,19 +232,18 @@ void KdeObservatory::collectFinished()
         j++;
     }
 
-/*
-    QTimeLine *timer = new QTimeLine(5000);
-    timer->setFrameRange(0, 100);
+    QTimeLine *timer = new QTimeLine(1000);
+    timer->setFrameRange(0, 1);
+    timer->setCurveShape(QTimeLine::EaseOutCurve);
 
     QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(rect);
+    animation->setItem(parent);
     animation->setTimeLine(timer);
 
-    for (int i = 0; i < 200; ++i)
-        animation->setRotationAt(i / 200.0, i*10);
+    animation->setPosAt(0, QPointF(appletRect.width(), 0));
+    animation->setPosAt(1, QPointF(0, 0));
 
     timer->start();
-*/
 }
 
 #include "kdeobservatory.moc"
