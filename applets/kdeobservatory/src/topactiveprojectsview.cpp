@@ -13,7 +13,7 @@
 TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QRectF &rect, QGraphicsItem *parent)
 : QGraphicsRectItem(rect, parent), m_projects(projects), m_collector(collector)
 {
-    setPos(rect.width(), 0);
+    setPos(rect.x() + rect.width(), rect.y());
     setPen(QPen(Qt::NoPen));
 
     QGraphicsSimpleTextItem *simpleTextItem = new QGraphicsSimpleTextItem("Top Active Projects", this);
@@ -72,14 +72,13 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
     timer->setCurveShape(QTimeLine::EaseOutCurve);
 
     QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(parent);
+    animation->setItem(this);
     animation->setTimeLine(timer);
 
-    animation->setPosAt(0, QPointF(rect.width(), 0));
-    animation->setPosAt(1, QPointF(0, 0));
+    animation->setPosAt(0, QPointF(rect.x() + rect.width(), rect.y()));
+    animation->setPosAt(1, QPointF(rect.x(), rect.y()));
 
     timer->start();
-
 }
 
 TopActiveProjectsView::~TopActiveProjectsView()
