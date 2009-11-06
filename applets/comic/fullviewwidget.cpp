@@ -44,27 +44,10 @@ void FullViewWidget::adaptPosition( const QPoint &pos )
 {
     int x = pos.x();
     int y = pos.y();
-    int width = this->width();
-    int height = this->height();
-    if ( x + width > mDesktopSize.width() )
+    if ( x + width() > mDesktopSize.width() )
         x = mDesktopSize.left();
-    if ( y + height > mDesktopSize.height() )
+    if ( y + height() > mDesktopSize.height() )
         y = mDesktopSize.top();
-    if ( width > mDesktopSize.width() || height > mDesktopSize.height() )
-    {
-        if ( static_cast<float>( width ) / mDesktopSize.width() > static_cast<float>( height ) / mDesktopSize.height() )
-        {
-            width = mDesktopSize.width();
-            height = height * mDesktopSize.width() / width;
-        }
-        else
-        {
-            width = width * mDesktopSize.height() / height;
-            height = mDesktopSize.height();
-        }
-
-        resize( width, height );
-    }
 
     move( x, y );
 }
@@ -72,7 +55,7 @@ void FullViewWidget::adaptPosition( const QPoint &pos )
 void FullViewWidget::paintEvent( QPaintEvent* )
 {
     QPainter p( this );
-    p.drawImage( QRect( 0, 0, width(), height() ), mImage );
+    p.drawImage( 0, 0, mImage );
 }
 
 void FullViewWidget::mousePressEvent( QMouseEvent* )
