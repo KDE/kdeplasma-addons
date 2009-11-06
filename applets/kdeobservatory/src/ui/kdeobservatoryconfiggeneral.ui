@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>355</height>
+    <width>412</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -287,7 +287,7 @@
        </property>
        <item>
         <property name="text">
-         <string>Commit summary</string>
+         <string>Top Active Projects</string>
         </property>
         <property name="checkState">
          <enum>Checked</enum>

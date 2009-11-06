@@ -15,6 +15,7 @@ set(kdeobservatory_SRCS
     src/icollector.cpp
     src/kdeobservatory.cpp
     src/commitcollector.cpp
+    src/topcommitersview.cpp
     src/topactiveprojectsview.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp

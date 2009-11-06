@@ -1,4 +1,4 @@
-#include "topactiveprojectsview.h"
+#include "topcommitersview.h"
 
 #include <QPen>
 #include <QFontMetrics>
@@ -12,7 +12,7 @@
 #include "icollector.h"
 #include "commitcollector.h"
 
-TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QString &title, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopCommitersView::TopCommitersView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QString &title, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
 : IView(i18n("Top Active Projects"), rect, parent, wFlags), m_projects(projects), m_collector(collector)
 {
     const QMap<QString, int> &resultMap = (qobject_cast<CommitCollector *>(m_collector))->resultMapCommits();
@@ -64,6 +64,6 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
     timer->start();
 }
 
-TopActiveProjectsView::~TopActiveProjectsView()
+TopCommitersView::~TopCommitersView()
 {
 }

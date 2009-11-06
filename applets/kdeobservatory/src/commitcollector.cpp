@@ -2,7 +2,6 @@
 
 #include <QUrl>
 #include <QDate>
-#include <QDebug>
 #include <QRegExp>
 #include <QStandardItemModel>
 
@@ -38,9 +37,14 @@ int CommitCollector::extent() const
     return m_extent;
 }
 
-const QMap<QString, int> &CommitCollector::resultMap() const
+const QMap<QString, int> &CommitCollector::resultMapCommits() const
 {
-    return m_resultMap;
+    return m_resultMapCommits;
+}
+
+const QMap<QString, QMap<QString, int> > &CommitCollector::resultMapCommiters() const
+{
+    return m_resultMapCommiters;
 }
 
 void CommitCollector::requestFinished (int id, bool error)
@@ -68,21 +72,22 @@ void CommitCollector::requestFinished (int id, bool error)
             return;
         }
 
-        // qDebug() << regExp.cap(1).trimmed() << "-" << regExp.cap(2).trimmed() << "-" << regExp.cap(3).trimmed() << "-" << regExp.cap(4).trimmed();
-
         foreach (QString projectName, m_projects.keys())
         {
             KdeObservatory::Project project = m_projects.value(projectName);
             QRegExp commitSubject(project.commitSubject);
             if (commitSubject.indexIn(path, 0) != -1)
             {
-                if (m_resultMap.contains(projectName))
-                    m_resultMap[projectName]++;
+                if (m_resultMapCommits.contains(projectName))
+                    m_resultMapCommits[projectName]++;
                 else
-                    m_resultMap[projectName] = 1;
+                    m_resultMapCommits[projectName] = 1;
+                if (m_resultMapCommiters.contains(projectName) && m_resultMapCommiters[projectName].contains(commiter))
+                    m_resultMapCommiters[projectName][commiter]++;
+                else
+                    m_resultMapCommiters[projectName][commiter] = 1;
             }
         }
-
         pos += regExp.matchedLength();
     }
     ++m_page;

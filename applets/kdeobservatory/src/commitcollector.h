@@ -16,7 +16,8 @@ public:
     void setExtent (int extent);
     int extent() const;
 
-    const QMap<QString, int> &resultMap() const;
+    const QMap<QString, int> &resultMapCommits() const;
+    const QMap<QString, QMap<QString, int> > &resultMapCommiters() const;
 
 protected Q_SLOTS:
     virtual void requestFinished (int id, bool error);
@@ -30,7 +31,8 @@ private:
     QString m_archiveName;
     const QMap<QString, KdeObservatory::Project> &m_projects;
 
-    QMap<QString, int> m_resultMap;
+    QMap<QString, int> m_resultMapCommits;
+    QMap<QString, QMap<QString, int> > m_resultMapCommiters;
 };
 
 #endif
