@@ -10,6 +10,8 @@
 #include "commitcollector.h"
 #include "topactiveprojectsview.h"
 
+#include "iview.h"
+
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
@@ -166,7 +168,8 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
-    new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
+    new TopActiveProjectsView(m_projects, m_collector, i18n("Top Active Projects"), contentsRect(), this);
+//    new IView("Top Active Projects", contentsRect(), this);
 }
 
 #include "kdeobservatory.moc"
