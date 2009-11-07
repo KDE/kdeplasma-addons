@@ -84,3 +84,5 @@ X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-Requires-FileDialog=Unused
 X-Plasma-Requires-LaunchApp=Unused
 X-Plasma-NotificationArea=true
+
+X-Plasma-DefaultSize=200,200
