@@ -50,7 +50,6 @@ namespace Plasma
     class Frame;
     class ServiceJob;
     class TabBar;
-    class TextBrowser;
     class ScrollWidget;
 }
 

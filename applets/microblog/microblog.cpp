@@ -21,32 +21,21 @@
 #include "microblog.h"
 #include "postwidget.h"
 
-#include <QApplication>
-#include <QGridLayout>
-#include <QPushButton>
-#include <QCheckBox>
 #include <QFontMetrics>
 #include <QGraphicsView>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsAnchorLayout>
-#include <QGraphicsGridLayout>
-#include <QGraphicsProxyWidget>
 #include <QAction>
-#include <QLabel>
-#include <QSignalMapper>
+#include <QTimer>
 
 #include <KColorScheme>
 #include <KConfigDialog>
-#include <KDateTime>
 #include <KDebug>
 #include <KIcon>
-#include <KLineEdit>
 #include <KMessageBox>
-#include <KRun>
-#include <KSharedConfig>
 #include <KStringHandler>
-#include <KTextEdit>
 #include <KTextBrowser>
+#include <KTextEdit>
 #include <KWallet/Wallet>
 #include <KToolInvocation>
 
