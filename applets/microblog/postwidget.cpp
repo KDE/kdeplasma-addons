@@ -75,6 +75,18 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     //horizontal
     lay->addAnchor(m_picture, Qt::AnchorRight, m_text, Qt::AnchorLeft);
 
+    QGraphicsItem *pw = this;
+    while ((pw = pw->parentItem())) {
+        Plasma::ScrollWidget *view = dynamic_cast<Plasma::ScrollWidget *>(pw);
+        if (view) {
+            view->registerAsDragHandle(m_from);
+            view->registerAsDragHandle(m_picture);
+            view->registerAsDragHandle(m_text);
+            view->registerAsDragHandle(m_replyIcon);
+            view->registerAsDragHandle(m_forwardIcon);
+            break;
+        }
+    }
 }
 
 PostWidget::~PostWidget()

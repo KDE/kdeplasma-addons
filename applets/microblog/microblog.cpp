@@ -258,7 +258,7 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
     m_tabBar->nativeWidget()->installEventFilter(this);
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
-    m_tweetsWidget = new QGraphicsWidget;
+    m_tweetsWidget = new QGraphicsWidget(m_scrollWidget);
     m_scrollWidget->setWidget(m_tweetsWidget);
     m_tweetsLayout = new QGraphicsLinearLayout(Qt::Vertical, m_tweetsWidget);
     m_tweetsLayout->addItem(m_headerFrame);
@@ -512,7 +512,7 @@ void MicroBlog::showTweets()
     }
 
     while (m_tweetWidgets.count() < m_tweetMap.count()) {
-        PostWidget *postWidget = new PostWidget(this);
+        PostWidget *postWidget = new PostWidget(m_tweetsWidget);
         connect(postWidget, SIGNAL(reply(const QString &)), this, SLOT(reply(const QString &)));
         connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
         connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
