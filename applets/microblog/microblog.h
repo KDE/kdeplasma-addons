@@ -38,6 +38,7 @@ class QGraphicsLinearLayout;
 class QGraphicsAnchorLayout;
 class QGraphicsProxyWidget;
 class KColorScheme;
+class PostWidget;
 
 namespace KWallet
 {
@@ -57,15 +58,6 @@ namespace Plasma
     class TextBrowser;
     class ScrollWidget;
 }
-
-struct Tweet {
-    Plasma::Frame *frame;
-    Plasma::IconWidget *icon;
-    Plasma::TextBrowser *content;
-    Plasma::IconWidget *favIcon;
-    Plasma::IconWidget *replyIcon;
-    Plasma::IconWidget *forwardIcon;
-};
 
 class MicroBlog : public Plasma::PopupApplet
 {
@@ -92,12 +84,11 @@ class MicroBlog : public Plasma::PopupApplet
          */
         void writeWallet(bool success);
 
-    protected slots:
+    protected Q_SLOTS:
         void configAccepted();
         void updateStatus();
         void updateCompleted(Plasma::ServiceJob *job);
         void downloadHistory();
-        void openProfile();
         void editTextChanged();
         void serviceFinished(Plasma::ServiceJob *job);
 
@@ -105,11 +96,11 @@ class MicroBlog : public Plasma::PopupApplet
         void scheduleShowTweets();
         void showTweets();
         void modeChanged(int index);
-        void reply(QString to);
-        void forward(QString rt);
+        void openProfile(const QString &user = QString());
+        void reply(const QString &to);
+        void forward(const QString &rt);
 
     protected:
-        QString timeDescription( const QDateTime &dt );
         bool eventFilter(QObject *obj, QEvent *event);
         void popupEvent(bool show);
         void focusInEvent(QFocusEvent *event);
@@ -176,7 +167,7 @@ class MicroBlog : public Plasma::PopupApplet
 
         QMap<QString, QPixmap> m_pictureMap;
         QMap<qulonglong, Plasma::DataEngine::Data> m_tweetMap;
-        QList<Tweet> m_tweetWidgets;
+        QList<PostWidget *> m_tweetWidgets;
 
         qulonglong m_lastTweet;
         KWallet::Wallet *m_wallet;
@@ -186,7 +177,6 @@ class MicroBlog : public Plasma::PopupApplet
         KColorScheme *m_colorScheme;
         Ui::TwitterConfig configUi;
 
-        KTimeZone m_tz;
         QTimer *m_showTweetsTimer;
 };
 

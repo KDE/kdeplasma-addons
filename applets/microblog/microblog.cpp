@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "microblog.h"
+#include "postwidget.h"
 
 #include <QApplication>
 #include <QGridLayout>
@@ -47,6 +48,7 @@
 #include <KTextEdit>
 #include <KTextBrowser>
 #include <KWallet/Wallet>
+#include <KToolInvocation>
 
 #include <Plasma/Svg>
 #include <Plasma/Theme>
@@ -76,7 +78,6 @@ MicroBlog::MicroBlog(QObject *parent, const QVariantList &args)
       m_wallet(0),
       m_walletWait(None),
       m_colorScheme(0),
-      m_tz(KTimeZone::utc()),
       m_showTweetsTimer(0)
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
@@ -292,20 +293,20 @@ void MicroBlog::modeChanged(int index)
     downloadHistory();
 }
 
-void MicroBlog::reply(QString to)
+void MicroBlog::reply(const QString &to)
 {
     m_scrollWidget->ensureItemVisible(m_headerFrame);
-    m_statusEdit->nativeWidget()->setPlainText("@" + to + " ");
+    m_statusEdit->nativeWidget()->setPlainText(to);
     QTextCursor cursor = m_statusEdit->nativeWidget()->textCursor();
     cursor.movePosition(QTextCursor::End);
     m_statusEdit->nativeWidget()->setTextCursor(cursor);
     m_statusEdit->nativeWidget()->setFocus();
 }
 
-void MicroBlog::forward(QString rt)
+void MicroBlog::forward(const QString &rt)
 {
     m_scrollWidget->ensureItemVisible(m_headerFrame);
-    m_statusEdit->nativeWidget()->setPlainText("RT @" + rt);
+    m_statusEdit->nativeWidget()->setPlainText(rt);
     m_statusEdit->nativeWidget()->setFocus();
 }
 
@@ -457,7 +458,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                     m_icon->setAction(profile);
                     m_icon->setMinimumSize( iconSize );
                     m_icon->setMaximumSize( iconSize );
-                    connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
+                    connect(profile, SIGNAL(triggered()), this, SLOT(openProfile()));
                 }
                 m_pictureMap[user] = pm;
                 //TODO it would be nice to check whether the updated image is actually in use
@@ -511,144 +512,41 @@ void MicroBlog::showTweets()
     }
 
     while (m_tweetWidgets.count() < m_tweetMap.count()) {
-        Plasma::Frame *tweetFrame = new Plasma::Frame(m_tweetsWidget);
-        tweetFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
-        QGraphicsLinearLayout *tweetLayout = new QGraphicsLinearLayout( Qt::Horizontal, tweetFrame );
-        tweetLayout->setContentsMargins( 0, 5, 0, 5 );
-        tweetLayout->setSpacing( 5 );
-        //m_layout->insertItem( m_layout->count()-1, tweetFrame );
-        m_tweetsLayout->addItem(tweetFrame);
-
-        Plasma::TextBrowser *tweetText = new Plasma::TextBrowser(tweetFrame);
-        tweetText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        tweetText->nativeWidget()->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-        tweetText->nativeWidget()->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-        tweetText->nativeWidget()->setCursor( Qt::ArrowCursor );
-
-        Plasma::IconWidget *icon = new Plasma::IconWidget(tweetFrame);
-        QSizeF iconSize = icon->sizeFromIconSize(30);
-        icon->setMinimumSize( iconSize );
-        icon->setMaximumSize( iconSize );
-
-        Plasma::IconWidget *favIcon = new Plasma::IconWidget(tweetFrame);
-        QSizeF favIconSize = icon->sizeFromIconSize(16);
-        favIcon->setMinimumSize( favIconSize );
-        favIcon->setMaximumSize( favIconSize );
-
-        Plasma::IconWidget *replyIcon = new Plasma::IconWidget("@",tweetFrame);
-        QSizeF replyIconSize = icon->sizeFromIconSize(24);
-        replyIcon->setMinimumSize( replyIconSize );
-        replyIcon->setMaximumSize( replyIconSize );
-
-        Plasma::IconWidget *forwardIcon = new Plasma::IconWidget("RT",tweetFrame);
-        QSizeF forwardIconSize = icon->sizeFromIconSize(24);
-        forwardIcon->setMinimumSize( forwardIconSize );
-        forwardIcon->setMaximumSize( forwardIconSize );
-
-        tweetLayout->addItem(icon);
-        tweetLayout->addItem(tweetText);
-        tweetLayout->addItem(favIcon);
-
-        //building a vertical layout for toolbox
-        QGraphicsLinearLayout *toolsLayout = new QGraphicsLinearLayout( Qt::Vertical, tweetLayout );
-        toolsLayout->setContentsMargins( 0, 5, 0, 5 );
-        toolsLayout->setSpacing(2);
-        toolsLayout->addItem(replyIcon);
-        toolsLayout->addItem(forwardIcon);
-        tweetLayout->addItem(toolsLayout);
-
-        Tweet t;
-        t.frame = tweetFrame;
-        t.icon = icon;
-        t.content = tweetText;
-        t.favIcon = favIcon;
-        t.replyIcon = replyIcon;
-        t.forwardIcon = forwardIcon;
-
-        m_tweetWidgets.append( t );
+        PostWidget *postWidget = new PostWidget(this);
+        connect(postWidget, SIGNAL(reply(const QString &)), this, SLOT(reply(const QString &)));
+        connect(postWidget, SIGNAL(forward(const QString &)), this, SLOT(forward(const QString &)));
+        connect(postWidget, SIGNAL(openProfile(const QString &)), this, SLOT(openProfile(const QString &)));
+        m_tweetWidgets.append(postWidget);
     }
 
     //clear out tweet widgets if there are too many
     while (m_tweetWidgets.count() > m_tweetMap.count()) {
-        Tweet t = m_tweetWidgets[m_tweetWidgets.size() - 1];
-        m_layout->removeItem(t.frame);
-        QAction *iconAction = t.icon->action();
-        t.icon->setAction(0);
-        delete iconAction;
-        delete t.frame;
+        PostWidget *t = m_tweetWidgets[m_tweetWidgets.size() - 1];
+        m_layout->removeItem(t);
         m_tweetWidgets.removeAt(m_tweetWidgets.size() - 1);
+        t->deleteLater();
         m_tweetsWidget->resize(m_tweetsWidget->effectiveSizeHint(Qt::PreferredSize));
     }
 
     int i = 0;
     QMap<qulonglong, Plasma::DataEngine::Data>::iterator it = m_tweetMap.end();
-    QSignalMapper *signalMapperReply = new QSignalMapper(this);
-    QSignalMapper *signalMapperForward = new QSignalMapper(this);
 
     while (it != m_tweetMap.begin()) {
         Plasma::DataEngine::Data &tweetData = *(--it);
+
         QString user = tweetData.value("User").toString();
-        QPixmap favIcon = tweetData.value("SourceFavIcon").value<QPixmap>();
 
         if (i == 0) {
             m_popupIcon = m_pictureMap[user];
         }
 
-        QAction *profile = new QAction(QIcon(m_pictureMap[user]), QString(), this);
-        profile->setData(user);
-
-        Tweet t = m_tweetWidgets[i];
+        PostWidget *t = m_tweetWidgets[i];
+        t->setColorScheme(m_colorScheme);
+        t->setData(tweetData);
+        t->setPicture(m_pictureMap[user]);
         //you don't want to reply or RT yourself
-        if (user == m_username) {
-            t.replyIcon->hide();
-            t.forwardIcon->hide();
-        }
-
-        t.icon->setAction(profile);
-        QSizeF iconSize = t.icon->sizeFromIconSize(30);
-        t.icon->setMinimumSize(iconSize);
-        t.icon->setMaximumSize(iconSize);
-        connect(profile, SIGNAL(triggered(bool)), this, SLOT(openProfile()));
-
-        QString sourceString;
-
-        if (favIcon.isNull()) {
-            sourceString = i18n(" from %1", tweetData.value( "Source" ).toString());
-        }
-
-        QLocale english(QLocale::English, QLocale::UnitedStates);
-        QDateTime dt = english.toDateTime(tweetData.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy");
-        dt.setTimeSpec(Qt::UTC);
-        QString html = QString("<p><big><font color='%2'>%1</font></big><br/><font color='%2'><small>%3%4<small></font></p>").arg(user).arg(m_colorScheme->foreground(KColorScheme::InactiveText).color().name())
-                .arg(timeDescription( dt )).arg( sourceString);
-        QString status = tweetData.value( "Status" ).toString();
-        //getting the user name of the tweeterer for reply and his message for retweet
-        signalMapperReply->setMapping(t.replyIcon, QString(user));
-        signalMapperForward->setMapping(t.forwardIcon, QString(user+ ": "+ status));
-
-        status.replace(QRegExp("((http|https)://[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]])"), "<a href='\\1'>\\1</a>");
-
-        html += QString( "<p><font color='%1'>%2</font></p>" )
-                .arg( m_colorScheme->foreground().color().name()).arg( status );
-
-        t.content->setText( html );
-        t.content->nativeWidget()->document()->setDefaultStyleSheet(QString("a{color:%1} a:visited{color:%2}")
-                                            .arg( m_colorScheme->foreground(KColorScheme::LinkText).color().name())
-                                            .arg(m_colorScheme->foreground(KColorScheme::VisitedText).color().name()));
-
-
-        t.content->update();
-
-        //connecting the tool icons
-        connect(t.replyIcon, SIGNAL(clicked()),signalMapperReply, SLOT (map()));
-        connect(signalMapperReply, SIGNAL(mapped(const QString &)),this, SLOT(reply(const QString &)));
-        connect(t.forwardIcon, SIGNAL(clicked()),signalMapperForward, SLOT (map()));
-        connect(signalMapperForward, SIGNAL(mapped(const QString &)),this, SLOT(forward(const QString &)));
-
-        if( !favIcon.isNull() ) {
-            t.favIcon->setIcon( QIcon(favIcon) );
-        }
+        t->setActionsShown(user != m_username);
+        m_tweetsLayout->addItem(t);
 
         ++i;
     }
@@ -966,33 +864,17 @@ void MicroBlog::serviceFinished(Plasma::ServiceJob *job)
     }
 }
 
-void MicroBlog::openProfile()
+void MicroBlog::openProfile(const QString &profile)
 {
-    QAction *action = qobject_cast<QAction *>(sender());
-
-    if (action) {
-        QString url = m_serviceUrl;
-        url.remove("api/");
-
-        KRun::runUrl( KUrl(KUrl(url), action->data().toString()), "text/html", 0 );
+    QString url = m_serviceUrl;
+    url.remove("api/");
+    if (!profile.isEmpty()) {
+        KToolInvocation::invokeBrowser(KUrl(KUrl(url), profile).prettyUrl());
+    } else {
+        KToolInvocation::invokeBrowser(KUrl(KUrl(url), m_username).prettyUrl());
     }
 }
 
-QString MicroBlog::timeDescription( const QDateTime &dt )
-{
-    int diff = dt.secsTo(KDateTime::currentDateTime(m_tz).dateTime());
 
-    if (diff < 60) {
-        return i18n("Less than a minute ago");
-    } else if (diff < 60*60) {
-        return i18np("1 minute ago", "%1 minutes ago", diff/60);
-    } else if (diff < 2*60*60) {
-        return i18n("Over an hour ago");
-    } else if (diff < 24*60*60) {
-        return i18np("1 hour ago", "%1 hours ago", diff/3600);
-    }
-
-    return dt.toString(Qt::LocaleDate);
-}
 
 #include "microblog.moc"
