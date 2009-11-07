@@ -1,5 +1,5 @@
-#ifndef IVIEW_HEADER
-#define IVIEW_HEADER
+#ifndef IVIEWPROVIDER_HEADER
+#define IVIEWPROVIDER_HEADER
 
 #include <QGraphicsWidget>
 
@@ -10,11 +10,11 @@ namespace Plasma
     class Frame;
 }
 
-class IView : public QObject
+class IViewProvider : public QObject
 {
 public:
-    IView(const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
-    virtual ~IView();
+    IViewProvider(const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    virtual ~IViewProvider();
 
     QGraphicsWidget *createView(const QString &title);
     const QList<QGraphicsWidget *> views() const;

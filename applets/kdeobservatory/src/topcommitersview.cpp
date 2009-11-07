@@ -12,44 +12,50 @@
 #include "icollector.h"
 #include "commitcollector.h"
 
-TopCommitersView::TopCommitersView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
-: IView(rect, parent, wFlags), m_projects(projects), m_collector(collector)
+TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+: IViewProvider(rect, parent, wFlags),
+  m_collector(collector)
 {
-    const QMap<QString, int> &resultMap = (qobject_cast<CommitCollector *>(m_collector))->resultMapCommits();
-    QList<int> list = resultMap.values();
+    const QMap<QString, QMap<QString, int> > &resultMapCommiters = (qobject_cast<CommitCollector *>(m_collector))->resultMapCommiters();
+    const QList<QString> &projects = resultMapCommiters.keys();
 
-    qSort(list);
-
-    QListIterator<int> i(list);
-    i.toBack();
-
-    QGraphicsWidget *container = createView(i18n("Top Commiters"));
-
-    int maxRank = list.last();
-    qreal width = container->geometry().width();
-    qreal step = qMax(container->geometry().height() / list.count(), (qreal) 22);
-
-    int j = 0;
-    while (i.hasPrevious())
+    foreach (const QString &project, projects)
     {
-        int rank = i.previous();
-        qreal widthFactor = (width-24)/maxRank;
-        qreal yItem = (j*step)+2;
+        const QMap<QString, int> &projectCommiters = resultMapCommiters[project];
+        QList<int> commits = projectCommiters.values();
+        qSort(commits);
 
-        QGraphicsRectItem *commits = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
-        commits->setPos(0, yItem);
-        commits->setPen(QPen(QColor(0, 0, 0)));
-        commits->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+        QListIterator<int> i(commits);
+        i.toBack();
 
-        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
-        icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
+        QGraphicsWidget *container = createView(i18n("Top Commiters") + " - " + project);
 
-        QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), commits);
-        textNumber->setDefaultTextColor(QColor(255, 255, 255));
-        QFontMetrics fontMetricsNumber(textNumber->font());
-        textNumber->setPos((qreal) ((commits->rect().width())/2)-(fontMetricsNumber.width(textNumber->toPlainText())/2),
-                           (qreal) ((commits->rect().height())/2)-(fontMetricsNumber.height()/2));
-        j++;
+        int maxRank = commits.last();
+        qreal width = container->geometry().width();
+        qreal step = qMax(container->geometry().height() / commits.count(), (qreal) 22);
+
+        int j = 0;
+        while (i.hasPrevious())
+        {
+            int rank = i.previous();
+            qreal widthFactor = (width-24)/maxRank;
+            qreal yItem = (j*step)+2;
+
+            QGraphicsRectItem *commiterRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
+            commiterRect->setPos(0, yItem);
+            commiterRect->setPen(QPen(QColor(0, 0, 0)));
+            commiterRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+
+//            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
+//            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
+
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), commiterRect);
+            commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
+            QFontMetrics fontMetricsNumber(commitsNumber->font());
+            commitsNumber->setPos((qreal) ((commiterRect->rect().width())/2)-(fontMetricsNumber.width(commitsNumber->toPlainText())/2),
+                               (qreal) ((commiterRect->rect().height())/2)-(fontMetricsNumber.height()/2));
+            j++;
+        }
     }
 
     QTimeLine *timer = new QTimeLine(500);
