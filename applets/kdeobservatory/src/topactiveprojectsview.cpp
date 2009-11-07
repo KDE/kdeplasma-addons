@@ -12,8 +12,8 @@
 #include "icollector.h"
 #include "commitcollector.h"
 
-TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QString &title, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
-: IView(i18n("Top Active Projects"), rect, parent, wFlags), m_projects(projects), m_collector(collector)
+TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+: IView(rect, parent, wFlags), m_projects(projects), m_collector(collector)
 {
     const QMap<QString, int> &resultMap = (qobject_cast<CommitCollector *>(m_collector))->resultMapCommits();
     QList<int> list = resultMap.values();
@@ -23,9 +23,11 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
     QListIterator<int> i(list);
     i.toBack();
 
+    QGraphicsWidget *container = createView(i18n("Top Active Projects"));
+
     int maxRank = list.last();
-    qreal width = m_container->geometry().width();
-    qreal step = qMax(m_container->geometry().height() / list.count(), (qreal) 22);
+    qreal width = container->geometry().width();
+    qreal step = qMax(container->geometry().height() / list.count(), (qreal) 22);
 
     int j = 0;
     while (i.hasPrevious())
@@ -34,12 +36,12 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
         qreal widthFactor = (width-24)/maxRank;
         qreal yItem = (j*step)+2;
 
-        QGraphicsRectItem *commits = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, m_container);
+        QGraphicsRectItem *commits = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
         commits->setPos(0, yItem);
         commits->setPen(QPen(QColor(0, 0, 0)));
         commits->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
 
-        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), m_container);
+        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
         icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
         QGraphicsTextItem *textNumber = new QGraphicsTextItem(QString::number(rank), commits);
@@ -55,7 +57,7 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
     timer->setCurveShape(QTimeLine::EaseOutCurve);
 
     QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(this);
+    animation->setItem(m_views[0]);
     animation->setTimeLine(timer);
 
     animation->setPosAt(0, QPointF(rect.x() + rect.width(), rect.y()));

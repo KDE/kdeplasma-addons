@@ -10,15 +10,20 @@ namespace Plasma
     class Frame;
 }
 
-class IView : public QGraphicsWidget
+class IView : public QObject
 {
 public:
-    IView(const QString &title, const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    IView(const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IView();
 
+    QGraphicsWidget *createView(const QString &title);
+    const QList<QGraphicsWidget *> views() const;
+
 protected:
-    Plasma::Frame *m_header;
-    QGraphicsWidget *m_container;
+    const QRectF &m_rect;
+    QGraphicsItem *m_parent;
+    Qt::WindowFlags m_wFlags;
+    QList<QGraphicsWidget *> m_views;
 };
 
 #endif

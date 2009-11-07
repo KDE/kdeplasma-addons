@@ -10,7 +10,7 @@ class ICollector;
 class TopCommitersView : public IView
 {
 public:
-    TopCommitersView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QString &title, const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    TopCommitersView(const QMap<QString, KdeObservatory::Project> &projects, ICollector *collector, const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~TopCommitersView();
 
 private:

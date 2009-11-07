@@ -168,7 +168,7 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
-    new TopActiveProjectsView(m_projects, m_collector, i18n("Top Active Projects"), contentsRect(), this);
+    new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
 }
 
 #include "kdeobservatory.moc"
