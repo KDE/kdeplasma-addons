@@ -921,6 +921,8 @@ void ActionListView::keyPressEvent(QKeyEvent * event) //>
         } else {
             d->itemFactory->activateSelectedItem();
         }
+    } else if (event->key() == Qt::Key_Menu) {
+        d->itemFactory->contextForSelectedItem();
     } else if (event->key() == Qt::Key_Down) {
         d->itemFactory->selectRelItem(+1);
     } else if (event->key() == Qt::Key_Up) {

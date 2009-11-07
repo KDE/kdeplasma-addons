@@ -121,6 +121,7 @@ LancelotWindow::LancelotWindow()
     editSearch->setParentItem(m_root);
     editSearch->nativeWidget()->setClearButtonShown(true);
     editSearch->nativeWidget()->setClickMessage(i18n("Search"));
+    editSearch->nativeWidget()->setContextMenuPolicy(Qt::NoContextMenu);
     editSearch->show();
     layoutSearch->addItem(editSearch,
         Lancelot::NodeLayout::NodeCoordinate(0.0, 0.5, 0, 0),
@@ -659,6 +660,7 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
                 }
             case Qt::Key_Up:
             case Qt::Key_Down:
+            case Qt::Key_Menu:
                 sendKeyEvent(keyEvent);
                 break;
             case Qt::Key_Left:
