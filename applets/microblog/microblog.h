@@ -30,13 +30,8 @@
 
 #include "ui_configuration.h"
 
-class KLineEdit;
-class KTextEdit;
-class KTextBrowser;
-class QCheckBox;
 class QGraphicsLinearLayout;
 class QGraphicsAnchorLayout;
-class QGraphicsProxyWidget;
 class KColorScheme;
 class PostWidget;
 
