@@ -125,7 +125,7 @@ LancelotWindow::LancelotWindow()
     editSearch->show();
     layoutSearch->addItem(editSearch,
         Lancelot::NodeLayout::NodeCoordinate(0.0, 0.5, 0, 0),
-        Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, INFINITY)
+        Lancelot::NodeLayout::NodeCoordinate(1.0, 0.5, 0, QREAL_INFINITY)
     );
     editSearch->nativeWidget()->installEventFilter(this);
     editSearch->setFocusPolicy(Qt::WheelFocus);
