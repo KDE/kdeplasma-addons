@@ -2,7 +2,8 @@
 #define COMMITCOLLECTOR_HEADER
 
 #include "icollector.h"
-#include "kdeobservatory.h"
+
+#include <QStack>
 
 class CommitCollector : public ICollector
 {
@@ -16,20 +17,31 @@ public:
 
     virtual void run();
 
+    typedef struct
+    {
+        QString date;
+        QString subject;
+        QString developer;
+    } Commit;
+
 protected Q_SLOTS:
     virtual void requestFinished (int id, bool error);
 
 private:
     bool m_fullUpdate;
-    int m_commitsRead;
+    int  m_commitsRead;
+    QString m_lastArchiveRead;
+    int  m_commitsToBeRead;
 
     int m_extent;
     int m_page;
     int m_connectId;
     long long m_stopCollectingDay;
 
+    QStack<Commit> m_commits;
     QHttpRequestHeader m_header;
     QString m_archiveName;
+    QString m_initialArchiveName;
 };
 
 #endif

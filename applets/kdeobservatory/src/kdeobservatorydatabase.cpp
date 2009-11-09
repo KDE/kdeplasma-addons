@@ -3,6 +3,7 @@
 #include <QVariant>
 #include <QSqlError>
 
+#include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>
 
@@ -47,6 +48,34 @@ void KdeObservatoryDatabase::deleteOldCommits(const QString &date)
     m_query.bindValue(":commit_date", date);
     if (!m_query.exec())
         kDebug() << "Error when deleting old commits -" << m_db.lastError();
+}
+
+int KdeObservatoryDatabase::commitsByProject(const QString &prefix)
+{
+    m_query.clear();
+    m_query.prepare("select count(*) from commits where subject like '" + prefix + "%'");
+    if (!m_query.exec())
+    {
+        qDebug() << "Error when executing commits by project -" << m_db.lastError();
+        return 0;
+    }
+    m_query.next();
+    return m_query.value(0).toInt();
+}
+
+QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QString &prefix)
+{
+    m_query.clear();
+    m_query.prepare("select count(*), developer from commits where subject like '" + prefix + "%' group by developer order by count(*) desc;");
+    QMultiMap<int, QString> result;
+    if (!m_query.exec())
+    {
+        qDebug() << "Error when executing commits by project -" << m_db.lastError();
+        return result;
+    }
+    while(m_query.next())
+        result.insert(m_query.value(0).toInt(), m_query.value(1).toString());
+    return result;
 }
 
 KdeObservatoryDatabase::KdeObservatoryDatabase()

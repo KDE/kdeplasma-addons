@@ -41,6 +41,7 @@ private:
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
 
+    // Config - General
     int  m_commitExtent;
     int  m_synchronizationDelay;
     bool m_cacheContents;
@@ -48,13 +49,17 @@ private:
     bool m_enableTransitionEffects;
     bool m_enableAutoViewChange;
     int  m_viewsDelay;
-
-    QMap<QString, Project> m_projects;
     QList< QPair<QString, bool> > m_activeViews;
+
+    // Config - projects
+    QMap<QString, Project> m_projects;
+
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
 
-    QTimer *m_timer;
+    QTimer *m_viewTransitionTimer;
+    QTimer *m_synchronizeTimer;
+
     CommitCollector *m_collector;
 };
 

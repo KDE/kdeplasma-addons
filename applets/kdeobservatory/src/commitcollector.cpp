@@ -7,12 +7,15 @@
 
 #include "kdeobservatorydatabase.h"
 
+#include <QDebug>
+
 CommitCollector::CommitCollector(QObject *parent)
 : ICollector(parent),
   m_fullUpdate(true),
   m_commitsRead(0),
+  m_lastArchiveRead(""),
   m_extent(1),
-  m_header("POST", "/"),
+  m_header("POST", "/")
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
     m_header.setValue("Host", "lists.kde.org");
@@ -43,15 +46,16 @@ void CommitCollector::run()
     QString stopDate = now.addDays(-m_extent-1).toString("yyyyMMdd");
     m_stopCollectingDay = stopDate.toLongLong();
 
-    KdeObservatoryDatabase::deleteOldCommits(stopDate);
+    KdeObservatoryDatabase::self()->deleteOldCommits(stopDate);
     if (m_fullUpdate)
     {
-        KdeObservatoryDatabase::truncateCommits();
+        KdeObservatoryDatabase::self()->truncateCommits();
         m_fullUpdate = false;
         m_commitsRead = 0;
     }
 
-    m_archiveName = now.toString("yyyyMM");
+    m_commits.clear();
+    m_initialArchiveName = m_archiveName = now.toString("yyyyMM");
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }
 
@@ -63,9 +67,17 @@ void CommitCollector::requestFinished (int id, bool error)
     if (id == m_connectId)
         return;
 
+    QString source = readAll();
+
+    if (m_page == 1)
+    {
+        QRegExp regExpMsg("\\((\\d+) messages\\)");
+        regExpMsg.indexIn(source, 0);
+        m_commitsToBeRead = regExpMsg.cap(1).trimmed().toInt();
+    }
+
     QRegExp regExp("(\\d+)\\.\\s*(\\d{4}-\\d{2}-\\d{2})\\s*<a href=\".*\">(.*)</a>\\s*<a.*</a>(.*)(\n|\r|\f)");
     regExp.setMinimal(true);
-    QString source = readAll();
 
     int pos = 0;
     while ((pos = regExp.indexIn(source, pos)) != -1)
@@ -74,13 +86,30 @@ void CommitCollector::requestFinished (int id, bool error)
         QString developer = regExp.cap(4).trimmed();
         long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
 
-        if (date <= m_stopCollectingDay)
+        if (date <= m_stopCollectingDay || // It reaches the whole commit extent
+            (m_commitsRead == m_commitsToBeRead && // It read the delta commits ...
+                   (m_lastArchiveRead.isEmpty() || m_archiveName == m_lastArchiveRead))) // ... in last read archive
         {
+            m_lastArchiveRead = m_initialArchiveName;
+            m_commitsRead = m_commitsToBeRead;
+            while(!m_commits.isEmpty())
+            {
+                const Commit &commit = m_commits.pop();
+                KdeObservatoryDatabase::self()->addCommit(commit.date, commit.subject, commit.developer);
+            }
+
             emit collectFinished();
             return;
         }
 
-        KdeObservatoryDatabase::self()->addCommit(regExp.cap(2).trimmed(), path, developer);
+        Commit commit;
+        commit.date = regExp.cap(2).trimmed();
+        commit.subject = path;
+        commit.developer = developer;
+        m_commits.push(commit);
+
+        ++m_commitsRead;
+        qDebug() << "Commits read:" << m_commitsRead;
         pos += regExp.matchedLength();
     }
 

@@ -14,12 +14,12 @@
 
 #include "commitcollector.h"
 #include "topactiveprojectsview.h"
-#include "topcommitersview.h"
+#include "topdevelopersview.h"
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
-: Plasma::Applet(parent, args)
+: Plasma::Applet(parent, args), m_collector (new CommitCollector(this))
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
@@ -64,9 +64,9 @@ void KdeObservatory::init()
         m_projects[projectNames.at(i)] = project;
     }
 
-    m_timer = new QTimer(this);
-    m_timer->setInterval(m_viewsDelay * 1000);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(switchViews()));
+    m_viewTransitionTimer = new QTimer(this);
+    m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
+    connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(switchViews()));
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -119,7 +119,7 @@ void KdeObservatory::configAccepted()
     QStringList projectIcons;
 
     m_projects.clear();
-    m_timer->stop();
+    m_viewTransitionTimer->stop();
 
     int projectsCount = m_configProjects->projects->rowCount();
     for (int i = 0; i < projectsCount; ++i)
@@ -165,11 +165,10 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
-    m_collector = new CommitCollector(m_projects, this);
     m_collector->setExtent(m_commitExtent);
     connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
 
-    m_timer->setInterval(m_viewsDelay * 1000);
+    m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
 
     setBusy(true);
     m_collector->run();
@@ -180,14 +179,14 @@ void KdeObservatory::collectFinished()
 {
     setBusy(false);
 
-    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
-    TopCommitersView *topCommitersView = new TopCommitersView(m_collector, contentsRect(), this);
+    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, contentsRect(), this);
+    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, contentsRect(), this);
 
     m_views = topActiveProjectsView->views();
-    m_views.append(topCommitersView->views());
+    m_views.append(topDevelopersView->views());
 
     m_currentView = m_views.count()-1;
-    m_timer->start();
+    m_viewTransitionTimer->start();
 }
 
 void KdeObservatory::switchViews()

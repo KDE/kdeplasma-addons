@@ -2,36 +2,41 @@
 
 #include <QPen>
 #include <QFontMetrics>
-#include <QTimeLine>
-#include <QGraphicsItemAnimation>
 
 #include <KIcon>
 
-#include <Plasma/Frame>
+#include "kdeobservatorydatabase.h"
 
-#include "icollector.h"
-#include "commitcollector.h"
-
-TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projectsInView, ICollector *collector, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projectsInView, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
-  m_projectsInView(projectsInView),
-  m_collector(collector)
+  m_projectsInView(projectsInView)
 {
-    const QList< QPair<QString, int> > &resultingCommits = (qobject_cast<CommitCollector *>(m_collector))->resultingCommits();
+    QMultiMap<int, QString> topActiveProjects;
+    QMapIterator<QString, KdeObservatory::Project> i1(projectsInView);
+    while (i1.hasNext())
+    {
+        i1.next();
+        int rank = KdeObservatoryDatabase::self()->commitsByProject(i1.value().commitSubject);
+        topActiveProjects.insert(rank, i1.key());
+    }
+
     QGraphicsWidget *container = createView(i18n("Top Active Projects"));
 
-    int maxRank = resultingCommits.last().second;
+    qDebug() << topActiveProjects;
+    int maxRank;
     qreal width = container->geometry().width();
-    qreal step = qMax(container->geometry().height() / resultingCommits.count(), (qreal) 22);
+    qreal step = qMax(container->geometry().height() / topActiveProjects.size(), (qreal) 22);
 
-    QListIterator< QPair<QString, int> > i(resultingCommits);
-    i.toBack();
+    QMapIterator<int, QString> i2(topActiveProjects);
+    i2.toBack();
     int j = 0;
-    while (i.hasPrevious())
+    while (i2.hasPrevious())
     {
-        const QPair<QString, int> &pair = i.previous();
-        QString project = pair.first;
-        int rank = pair.second;
+        i2.previous();
+        QString project = i2.value();
+        int rank = i2.key();
+        if (j == 0)
+            maxRank = rank;
 
         qreal widthFactor = (width-24)/maxRank;
         qreal yItem = (j*step)+2;
