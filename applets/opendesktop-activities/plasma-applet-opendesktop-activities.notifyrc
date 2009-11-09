@@ -10,6 +10,7 @@ Comment[sv]=OpenDesktop aktivitetsplasmoid
 Comment[tr]=OpenDesktop Eylemleri Plasma Programcığı
 Comment[uk]=Плазмоїд просторів дій OpenDesktop
 Comment[x-test]=xxOpenDesktop Activities Plasmoidxx
+Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
 Name=New Activity
@@ -24,6 +25,7 @@ Name[sv]=Ny aktivitet
 Name[tr]=Yeni Etkinlik
 Name[uk]=Новий простір дій
 Name[x-test]=xxNew Activityxx
+Name[zh_TW]=新活動
 Comment=Something interesting has happened in your friends network
 Comment[de]=Etwas interessantes Neues ist im Freundeskreis passiert
 Comment[en_GB]=Something interesting has happened in your friends network
@@ -36,4 +38,5 @@ Comment[sv]=Någonting intressant har hänt i dina vänners nätverk
 Comment[tr]=Arkadaşlarınızın ağında ilginç birşeyler oldu
 Comment[uk]=У мережі ваших друзів трапилося щось цікаве
 Comment[x-test]=xxSomething interesting has happened in your friends networkxx
+Comment[zh_TW]=有些有趣的事在您的朋友網路中發生了
 Action=Popup

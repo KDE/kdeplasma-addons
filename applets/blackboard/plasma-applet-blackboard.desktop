@@ -12,6 +12,7 @@ Name[sv]=Svarta tavlan
 Name[tr]=Kara Tahta
 Name[uk]=Дошка
 Name[x-test]=xxBlack Boardxx
+Name[zh_TW]=黑板
 Type=Service
 Icon=chronometer
 ServiceTypes=Plasma/Applet

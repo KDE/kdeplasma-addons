@@ -10,6 +10,7 @@ Name[sv]=Beräkna!
 Name[tr]=Qalculate!
 Name[uk]=Qalculate!
 Name[x-test]=xxQalculate!xx
+Name[zh_TW]=Qalculate!
 Comment=A powerful mathematical equation solver
 Comment[en_GB]=A powerful mathematical equation solver
 Comment[et]=Võimas võrrandilahendaja
@@ -20,6 +21,7 @@ Comment[sv]=Ett kraftfullt verktyg för lösning av matematiska ekvationer
 Comment[tr]=Gelişmiş bir matematiksel eşitlik çözücü
 Comment[uk]=Потужний інструмент розв’язання рівнянь
 Comment[x-test]=xxA powerful mathematical equation solverxx
+Comment[zh_TW]=強大的數學方程式解題器
 Icon=qalculate-applet
 Type=Service
 

@@ -10,6 +10,7 @@ Name[sv]=Kunskapsbas
 Name[tr]=Bilgi Tabanı
 Name[uk]=База знань
 Name[x-test]=xxKnowledgeBasexx
+Name[zh_TW]=知識庫
 Comment=Opendesktop Knowledgebase
 Comment[en_GB]=Opendesktop Knowledgebase
 Comment[et]=Opendesktopi teadmusbaas
@@ -21,6 +22,7 @@ Comment[sv]=Opendesktop kunskapsbas
 Comment[tr]=Açık Masaüstü Bilgi Tabanı
 Comment[uk]=База знань Opendesktop
 Comment[x-test]=xxOpendesktop Knowledgebasexx
+Comment[zh_TW]=Opendesktop 知識庫
 Type=Service
 Icon=help-contents
 
