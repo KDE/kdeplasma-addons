@@ -5,6 +5,7 @@
 
 #include <Plasma/Applet>
 
+class QTimer;
 class QGraphicsView;
 class QGraphicsScene;
 class QStandardItemModel;
@@ -32,27 +33,28 @@ protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void collectFinished();
+    void switchViews();
 
 private:
     KConfigGroup m_configGroup;
 
-    QGraphicsScene *m_scene;
-    QGraphicsView  *m_view;
-
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
 
-    int m_commitExtent;
-    int m_synchronizationDelay;
+    int  m_commitExtent;
+    int  m_synchronizationDelay;
     bool m_cacheContents;
     bool m_enableAnimations;
     bool m_enableTransitionEffects;
     bool m_enableAutoViewChange;
-    int m_viewsDelay;
+    int  m_viewsDelay;
 
     QMap<QString, Project> m_projects;
-    QList< QPair<QString, bool> > m_views;
+    QList< QPair<QString, bool> > m_activeViews;
+    QList<QGraphicsWidget *> m_views;
+    int m_currentView;
 
+    QTimer *m_timer;
     CommitCollector *m_collector;
 };
 

@@ -20,6 +20,7 @@ IViewProvider::~IViewProvider()
 QGraphicsWidget *IViewProvider::createView(const QString &title)
 {
     QGraphicsWidget *view = new QGraphicsWidget(m_parent);
+    view->hide();
 
     Plasma::Frame *header = new Plasma::Frame(view);
     header->setText(title);

@@ -1,11 +1,16 @@
 #include "kdeobservatory.h"
 
+#include <QTimer>
+#include <QThread>
+#include <QTimeLine>
+#include <QGraphicsItemAnimation>
+
 #include <KConfig>
 #include <KConfigDialog>
 
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
-#include "ui_kdeobservatoryconfigcommitsummary.h"
+#include "ui_kdeobservatoryconfigtopactiveprojects.h"
 
 #include "commitcollector.h"
 #include "topactiveprojectsview.h"
@@ -40,10 +45,10 @@ void KdeObservatory::init()
     QStringList viewNames = m_configGroup.readEntry("viewNames", QStringList());
     QList<bool> viewActives = m_configGroup.readEntry("viewActives", QList<bool>());
 
-    m_views.clear();
+    m_activeViews.clear();
     int viewsCount = viewNames.count();
     for (int i = 0; i < viewsCount; ++i)
-        m_views.append(QPair<QString, bool>(viewNames.at(i), viewActives.at(i)));
+        m_activeViews.append(QPair<QString, bool>(viewNames.at(i), viewActives.at(i)));
 
     QStringList projectNames = m_configGroup.readEntry("projectNames", QStringList());
     QStringList projectCommitSubjects = m_configGroup.readEntry("projectCommitSubjects", QStringList());
@@ -58,6 +63,10 @@ void KdeObservatory::init()
         project.icon = projectIcons.at(i);
         m_projects[projectNames.at(i)] = project;
     }
+
+    m_timer = new QTimer(this);
+    m_timer->setInterval(3000);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(switchViews()));
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -68,10 +77,10 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects = new KdeObservatoryConfigProjects(parent);
     parent->addPage(m_configProjects, i18n("Projects"), "project-development");
 
-    QWidget *configCommitSummary = new QWidget(parent);
-    Ui::KdeObservatoryConfigCommitSummary *ui_configCommitSummary = new Ui::KdeObservatoryConfigCommitSummary;
-    ui_configCommitSummary->setupUi(configCommitSummary);
-    parent->addPage(configCommitSummary, i18n("Commit Summary"), "svn-commit");
+    QWidget *configTopActiveProjects = new QWidget(parent);
+    Ui::KdeObservatoryConfigTopActiveProjects *ui_configTopActiveProjects = new Ui::KdeObservatoryConfigTopActiveProjects;
+    ui_configTopActiveProjects->setupUi(configTopActiveProjects);
+    parent->addPage(configTopActiveProjects, i18n("Top Active Projects"), "svn-commit");
 
     m_configGeneral->commitExtent->setValue(m_commitExtent);
     m_configGeneral->synchronizationDelay->setTime(QTime(m_synchronizationDelay/3600, (m_synchronizationDelay/60)%60, m_synchronizationDelay%60));
@@ -81,11 +90,11 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configGeneral->enableAutoViewChange->setChecked(m_enableAutoViewChange);
     m_configGeneral->viewsDelay->setTime(QTime(m_viewsDelay/3600, (m_viewsDelay/60)%60, m_viewsDelay%60));
 
-    int viewsCount = m_views.count();
+    int viewsCount = m_activeViews.count();
     for (int i = 0; i < viewsCount; ++i)
     {
-        QListWidgetItem * item = m_configGeneral->activeViews->findItems(m_views.at(i).first, Qt::MatchFixedString).at(0);
-        item->setCheckState(m_views.at(i).second == true ? Qt::Checked:Qt::Unchecked);
+        QListWidgetItem * item = m_configGeneral->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString).at(0);
+        item->setCheckState(m_activeViews.at(i).second == true ? Qt::Checked:Qt::Unchecked);
         m_configGeneral->activeViews->takeItem(m_configGeneral->activeViews->row(item));
         m_configGeneral->activeViews->insertItem(i, item);
     }
@@ -110,6 +119,7 @@ void KdeObservatory::configAccepted()
     QStringList projectIcons;
 
     m_projects.clear();
+    m_timer->stop();
 
     int projectsCount = m_configProjects->projects->rowCount();
     for (int i = 0; i < projectsCount; ++i)
@@ -134,7 +144,7 @@ void KdeObservatory::configAccepted()
     QTime viewsDelay = m_configGeneral->viewsDelay->time();
     m_configGroup.writeEntry("viewsDelay", m_viewsDelay = viewsDelay.second() + viewsDelay.minute()*60 + viewsDelay.hour()*3600);
 
-    m_views.clear();
+    m_activeViews.clear();
     QStringList viewNames;
     QList<bool> viewActives;
 
@@ -143,7 +153,7 @@ void KdeObservatory::configAccepted()
         QListWidgetItem *item = m_configGeneral->activeViews->item(i);
         QString viewName = item->text();
         bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
-        m_views << QPair<QString, bool>(viewName, viewActive);
+        m_activeViews << QPair<QString, bool>(viewName, viewActive);
         viewNames << viewName;
         viewActives << viewActive;
     }
@@ -167,8 +177,47 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
-//    new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
-    new TopCommitersView(m_collector, contentsRect(), this);
+
+    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_collector, contentsRect(), this);
+    TopCommitersView *topCommitersView = new TopCommitersView(m_collector, contentsRect(), this);
+
+    m_views = topActiveProjectsView->views();
+    m_views.append(topCommitersView->views());
+
+    m_currentView = m_views.count()-1;
+    m_timer->start();
+}
+
+void KdeObservatory::switchViews()
+{
+    m_views.at(m_currentView)->hide();
+    m_currentView = (m_currentView + 1) % m_views.count();
+    m_views.at(m_currentView)->show();
+    /*
+    QRectF rect = contentsRect();
+    QGraphicsWidget *viewOld = 0;
+    foreach (QGraphicsWidget *view, views)
+    {
+        if (viewOld != 0)
+            viewOld->hide();
+        view->show();
+        viewOld = view;
+
+        QTimeLine *timer = new QTimeLine(500);
+        timer->setFrameRange(0, 1);
+        timer->setCurveShape(QTimeLine::EaseOutCurve);
+
+        QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
+        animation->setItem(view);
+        animation->setTimeLine(timer);
+
+        animation->setPosAt(0, QPointF(rect.x() + rect.width(), rect.y()));
+        animation->setPosAt(1, QPointF(rect.x(), rect.y()));
+
+        timer->start();
+        break;
+    }
+    */
 }
 
 #include "kdeobservatory.moc"

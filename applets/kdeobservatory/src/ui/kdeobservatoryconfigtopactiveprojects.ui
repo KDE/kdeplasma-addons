@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KdeObservatoryConfigCommitSummary</class>
- <widget class="QWidget" name="KdeObservatoryConfigCommitSummary">
+ <class>KdeObservatoryConfigTopActiveProjects</class>
+ <widget class="QWidget" name="KdeObservatoryConfigTopActiveProjects">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="1">
-    <widget class="QLabel" name="lblProjectsInCommitSummary">
+    <widget class="QLabel" name="lblProjectsInTopActiveProjectsView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -23,7 +23,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Projects in commit summary:</string>
+      <string>Projects in Top Active Projects view:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -50,7 +50,7 @@
     </spacer>
    </item>
    <item row="1" column="1">
-    <widget class="QListWidget" name="projectsInCommitSummary">
+    <widget class="QListWidget" name="projectsInTopActiveProjectsView">
      <property name="minimumSize">
       <size>
        <width>0</width>

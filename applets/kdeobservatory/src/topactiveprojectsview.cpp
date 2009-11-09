@@ -53,19 +53,6 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
                            (qreal) ((projectRect->rect().height())/2)-(fontMetricsNumber.height()/2));
         j++;
     }
-
-    QTimeLine *timer = new QTimeLine(500);
-    timer->setFrameRange(0, 1);
-    timer->setCurveShape(QTimeLine::EaseOutCurve);
-
-    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(m_views[0]);
-    animation->setTimeLine(timer);
-
-    animation->setPosAt(0, QPointF(rect.x() + rect.width(), rect.y()));
-    animation->setPosAt(1, QPointF(rect.x(), rect.y()));
-
-    timer->start();
 }
 
 TopActiveProjectsView::~TopActiveProjectsView()

@@ -2,8 +2,6 @@
 
 #include <QPen>
 #include <QFontMetrics>
-#include <QTimeLine>
-#include <QGraphicsItemAnimation>
 
 #include <KIcon>
 
@@ -32,10 +30,10 @@ TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QG
 
         int maxRank = commits.last();
         qreal width = container->geometry().width();
-        qreal step = qMax(container->geometry().height() / commits.count(), (qreal) 22);
+        qreal step = container->geometry().height() / qMax(commits.count(), 6);
 
         int j = 0;
-        while (i.hasPrevious())
+        while (i.hasPrevious() && j < 6)
         {
             int rank = i.previous();
             qreal widthFactor = (width-24)/maxRank;
@@ -49,7 +47,7 @@ TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QG
 //            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
 //            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
-            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), commiterRect);
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + projectCommiters.key(rank), commiterRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
             QFontMetrics fontMetricsNumber(commitsNumber->font());
             commitsNumber->setPos((qreal) ((commiterRect->rect().width())/2)-(fontMetricsNumber.width(commitsNumber->toPlainText())/2),
@@ -57,19 +55,6 @@ TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QG
             j++;
         }
     }
-
-    QTimeLine *timer = new QTimeLine(500);
-    timer->setFrameRange(0, 1);
-    timer->setCurveShape(QTimeLine::EaseOutCurve);
-
-    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
-    animation->setItem(m_views[0]);
-    animation->setTimeLine(timer);
-
-    animation->setPosAt(0, QPointF(rect.x() + rect.width(), rect.y()));
-    animation->setPosAt(1, QPointF(rect.x(), rect.y()));
-
-    timer->start();
 }
 
 TopCommitersView::~TopCommitersView()
