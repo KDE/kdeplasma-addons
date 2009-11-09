@@ -65,7 +65,7 @@ void KdeObservatory::init()
     }
 
     m_timer = new QTimer(this);
-    m_timer->setInterval(3000);
+    m_timer->setInterval(m_viewsDelay * 1000);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(switchViews()));
 }
 
@@ -168,6 +168,8 @@ void KdeObservatory::configAccepted()
     m_collector = new CommitCollector(m_projects, this);
     m_collector->setExtent(m_commitExtent);
     connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
+
+    m_timer->setInterval(m_viewsDelay * 1000);
 
     setBusy(true);
     m_collector->run();

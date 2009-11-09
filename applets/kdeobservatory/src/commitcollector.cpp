@@ -5,16 +5,14 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 
-bool pairLessThan(const QPair<QString, int> &p1, const QPair<QString, int> &p2)
-{
-     return p1.second < p2.second;
-}
+#include "kdeobservatorydatabase.h"
 
-CommitCollector::CommitCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
+CommitCollector::CommitCollector(QObject *parent)
 : ICollector(parent),
+  m_fullUpdate(true),
+  m_commitsRead(0),
   m_extent(1),
   m_header("POST", "/"),
-  m_projects(projects)
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
     m_header.setValue("Host", "lists.kde.org");
@@ -25,24 +23,10 @@ CommitCollector::~CommitCollector()
 {
 }
 
-void CommitCollector::run()
-{
-    m_page = 1;
-
-    m_tempCommits.clear();
-    m_resultingCommits.clear();
-    m_tempCommiters.clear();
-    m_resultingCommiters.clear();
-
-    QDate now = QDate::currentDate();
-    m_stopCollectingDay = now.addDays(-(m_extent+1)).toString("yyyyMMdd").toLongLong();
-
-    m_archiveName = now.toString("yyyyMM");
-    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
-}
-
 void CommitCollector::setExtent (int extent)
 {
+    if (extent > m_extent)
+        m_fullUpdate = true;
     m_extent = extent;
 }
 
@@ -51,14 +35,24 @@ int CommitCollector::extent() const
     return m_extent;
 }
 
-const QList< QPair <QString, int> > &CommitCollector::resultingCommits() const
+void CommitCollector::run()
 {
-    return m_resultingCommits;
-}
+    m_page = 1;
 
-const QHash<QString, QList< QPair<QString, int> > > &CommitCollector::resultingCommiters() const
-{
-    return m_resultingCommiters;
+    QDate now = QDate::currentDate();
+    QString stopDate = now.addDays(-m_extent-1).toString("yyyyMMdd");
+    m_stopCollectingDay = stopDate.toLongLong();
+
+    KdeObservatoryDatabase::deleteOldCommits(stopDate);
+    if (m_fullUpdate)
+    {
+        KdeObservatoryDatabase::truncateCommits();
+        m_fullUpdate = false;
+        m_commitsRead = 0;
+    }
+
+    m_archiveName = now.toString("yyyyMM");
+    request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }
 
 void CommitCollector::requestFinished (int id, bool error)
@@ -77,34 +71,19 @@ void CommitCollector::requestFinished (int id, bool error)
     while ((pos = regExp.indexIn(source, pos)) != -1)
     {
         QString path = regExp.cap(3).trimmed();
-        QString commiter = regExp.cap(4).trimmed();
+        QString developer = regExp.cap(4).trimmed();
         long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
 
         if (date <= m_stopCollectingDay)
         {
-            createSortedLists();
             emit collectFinished();
             return;
         }
 
-        foreach (QString projectName, m_projects.keys())
-        {
-            KdeObservatory::Project project = m_projects.value(projectName);
-            QRegExp commitSubject(project.commitSubject);
-            if (commitSubject.indexIn(path, 0) != -1)
-            {
-                if (m_tempCommits.contains(projectName))
-                    m_tempCommits[projectName]++;
-                else
-                    m_tempCommits[projectName] = 1;
-                if (m_tempCommiters.contains(projectName) && m_tempCommiters[projectName].contains(commiter))
-                    m_tempCommiters[projectName][commiter]++;
-                else
-                    m_tempCommiters[projectName][commiter] = 1;
-            }
-        }
+        KdeObservatoryDatabase::self()->addCommit(regExp.cap(2).trimmed(), path, developer);
         pos += regExp.matchedLength();
     }
+
     ++m_page;
     if (!source.contains(">Next<"))
     {
@@ -113,30 +92,4 @@ void CommitCollector::requestFinished (int id, bool error)
     }
 
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
-}
-
-void CommitCollector::createSortedLists()
-{
-    QHashIterator<QString, int> i1(m_tempCommits);
-    while (i1.hasNext())
-    {
-        i1.next();
-        m_resultingCommits.append(QPair<QString, int>(i1.key(), i1.value()));
-    }
-    qSort(m_resultingCommits.begin(), m_resultingCommits.end(), pairLessThan);
-
-    QHashIterator< QString, QHash<QString, int> > i2(m_tempCommiters);
-    while (i2.hasNext())
-    {
-        i2.next();
-        QList< QPair<QString, int> > list;
-        QHashIterator<QString, int> i3(i2.value());
-        while (i3.hasNext())
-        {
-            i3.next();
-            list.append(QPair<QString, int>(i3.key(), i3.value()));
-        }
-        qSort(list.begin(), list.end(), pairLessThan);
-        m_resultingCommiters[i2.key()] = list;
-    }
 }
