@@ -26,7 +26,7 @@
 #include <QtGui/QImage>
 
 #include <KUrl>
-#include <plasma/applet.h>
+#include <plasma/popupapplet.h>
 #include <plasma/dataengine.h>
 
 class ArrowWidget;
@@ -45,7 +45,7 @@ class PushButton;
 class TabBar;
 }
 
-class ComicApplet : public Plasma::Applet
+class ComicApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
 
@@ -55,6 +55,8 @@ class ComicApplet : public Plasma::Applet
 
         void init();
         virtual QList<QAction*> contextualActions();
+
+        QGraphicsWidget *graphicsWidget();
 
     public Q_SLOTS:
         void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
@@ -83,13 +85,8 @@ class ComicApplet : public Plasma::Applet
         void fullView();
 
     protected:
-        void mousePressEvent( QGraphicsSceneMouseEvent* );
-        void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
-        void wheelEvent( QGraphicsSceneWheelEvent* );
-        void hoverEnterEvent( QGraphicsSceneHoverEvent* );
-        void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
-        void constraintsEvent( Plasma::Constraints constraints );
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
+        bool eventFilter( QObject *receiver, QEvent *event );
 
     private:
         void changeComic( bool differentComic );
@@ -131,6 +128,7 @@ class ComicApplet : public Plasma::Applet
         QTimer *mDateChangedTimer;
         QTimer *mReloadTimer;
         QList<QAction*> mActions;
+        QGraphicsWidget *mMainWidget;
         FullViewWidget *mFullViewWidget;
         QAction *mActionGoFirst;
         QAction *mActionGoLast;
