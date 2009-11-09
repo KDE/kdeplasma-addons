@@ -14,28 +14,31 @@ TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QG
 : IViewProvider(rect, parent, wFlags),
   m_collector(collector)
 {
-    const QMap<QString, QMap<QString, int> > &resultMapCommiters = (qobject_cast<CommitCollector *>(m_collector))->resultMapCommiters();
-    const QList<QString> &projects = resultMapCommiters.keys();
+    const QHash<QString, QList< QPair<QString, int> > > &resultingCommiters = (qobject_cast<CommitCollector *>(m_collector))->resultingCommiters();
 
-    foreach (const QString &project, projects)
+    QHashIterator<QString, QList< QPair<QString, int> > > i1(resultingCommiters);
+    while (i1.hasNext())
     {
-        const QMap<QString, int> &projectCommiters = resultMapCommiters[project];
-        QList<int> commits = projectCommiters.values();
-        qSort(commits);
+        i1.next();
+        QString project = i1.key();
+        const QList< QPair<QString, int> > &projectCommiters = i1.value();
 
-        QListIterator<int> i(commits);
-        i.toBack();
+        QListIterator< QPair<QString, int> > i2(projectCommiters);
+        i2.toBack();
 
         QGraphicsWidget *container = createView(i18n("Top Commiters") + " - " + project);
 
-        int maxRank = commits.last();
+        int maxRank = projectCommiters.last().second;
         qreal width = container->geometry().width();
-        qreal step = container->geometry().height() / qMax(commits.count(), 6);
+        qreal step = qMax(container->geometry().height() / projectCommiters.count(), (qreal) 22);
 
         int j = 0;
-        while (i.hasPrevious() && j < 6)
+        while (i2.hasPrevious() && j < 6)
         {
-            int rank = i.previous();
+            const QPair<QString, int> &pair = i2.previous();
+            QString commiter = pair.first;
+            int rank = pair.second;
+
             qreal widthFactor = (width-24)/maxRank;
             qreal yItem = (j*step)+2;
 
@@ -47,11 +50,10 @@ TopCommitersView::TopCommitersView(ICollector *collector, const QRectF &rect, QG
 //            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
 //            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
-            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + projectCommiters.key(rank), commiterRect);
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + commiter, commiterRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
             QFontMetrics fontMetricsNumber(commitsNumber->font());
-            commitsNumber->setPos((qreal) ((commiterRect->rect().width())/2)-(fontMetricsNumber.width(commitsNumber->toPlainText())/2),
-                               (qreal) ((commiterRect->rect().height())/2)-(fontMetricsNumber.height()/2));
+            commitsNumber->setPos((qreal) 0, (qreal) ((commiterRect->rect().height())/2)-(fontMetricsNumber.height()/2));
             j++;
         }
     }

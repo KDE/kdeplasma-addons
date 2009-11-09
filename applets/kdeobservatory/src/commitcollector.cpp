@@ -5,6 +5,11 @@
 #include <QRegExp>
 #include <QStandardItemModel>
 
+bool pairLessThan(const QPair<QString, int> &p1, const QPair<QString, int> &p2)
+{
+     return p1.second < p2.second;
+}
+
 CommitCollector::CommitCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent),
   m_extent(1),
@@ -23,6 +28,12 @@ CommitCollector::~CommitCollector()
 void CommitCollector::run()
 {
     m_page = 1;
+
+    m_tempCommits.clear();
+    m_resultingCommits.clear();
+    m_tempCommiters.clear();
+    m_resultingCommiters.clear();
+
     QDate now = QDate::currentDate();
     m_stopCollectingDay = now.addDays(-(m_extent+1)).toString("yyyyMMdd").toLongLong();
 
@@ -40,14 +51,14 @@ int CommitCollector::extent() const
     return m_extent;
 }
 
-const QMap<QString, int> &CommitCollector::resultMapCommits() const
+const QList< QPair <QString, int> > &CommitCollector::resultingCommits() const
 {
-    return m_resultMapCommits;
+    return m_resultingCommits;
 }
 
-const QMap<QString, QMap<QString, int> > &CommitCollector::resultMapCommiters() const
+const QHash<QString, QList< QPair<QString, int> > > &CommitCollector::resultingCommiters() const
 {
-    return m_resultMapCommiters;
+    return m_resultingCommiters;
 }
 
 void CommitCollector::requestFinished (int id, bool error)
@@ -71,6 +82,7 @@ void CommitCollector::requestFinished (int id, bool error)
 
         if (date <= m_stopCollectingDay)
         {
+            createSortedLists();
             emit collectFinished();
             return;
         }
@@ -81,14 +93,14 @@ void CommitCollector::requestFinished (int id, bool error)
             QRegExp commitSubject(project.commitSubject);
             if (commitSubject.indexIn(path, 0) != -1)
             {
-                if (m_resultMapCommits.contains(projectName))
-                    m_resultMapCommits[projectName]++;
+                if (m_tempCommits.contains(projectName))
+                    m_tempCommits[projectName]++;
                 else
-                    m_resultMapCommits[projectName] = 1;
-                if (m_resultMapCommiters.contains(projectName) && m_resultMapCommiters[projectName].contains(commiter))
-                    m_resultMapCommiters[projectName][commiter]++;
+                    m_tempCommits[projectName] = 1;
+                if (m_tempCommiters.contains(projectName) && m_tempCommiters[projectName].contains(commiter))
+                    m_tempCommiters[projectName][commiter]++;
                 else
-                    m_resultMapCommiters[projectName][commiter] = 1;
+                    m_tempCommiters[projectName][commiter] = 1;
             }
         }
         pos += regExp.matchedLength();
@@ -101,4 +113,30 @@ void CommitCollector::requestFinished (int id, bool error)
     }
 
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
+}
+
+void CommitCollector::createSortedLists()
+{
+    QHashIterator<QString, int> i1(m_tempCommits);
+    while (i1.hasNext())
+    {
+        i1.next();
+        m_resultingCommits.append(QPair<QString, int>(i1.key(), i1.value()));
+    }
+    qSort(m_resultingCommits.begin(), m_resultingCommits.end(), pairLessThan);
+
+    QHashIterator< QString, QHash<QString, int> > i2(m_tempCommiters);
+    while (i2.hasNext())
+    {
+        i2.next();
+        QList< QPair<QString, int> > list;
+        QHashIterator<QString, int> i3(i2.value());
+        while (i3.hasNext())
+        {
+            i3.next();
+            list.append(QPair<QString, int>(i3.key(), i3.value()));
+        }
+        qSort(list.begin(), list.end(), pairLessThan);
+        m_resultingCommiters[i2.key()] = list;
+    }
 }

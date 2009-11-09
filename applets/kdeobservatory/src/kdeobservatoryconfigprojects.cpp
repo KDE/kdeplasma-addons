@@ -7,8 +7,6 @@
 
 #include "ui_kdeobservatoryconfigproject.h"
 
-#include <QDebug>
-
 KdeObservatoryConfigProjects::KdeObservatoryConfigProjects(QWidget *parent, Qt::WindowFlags f)
 : QWidget(parent, f)
 {

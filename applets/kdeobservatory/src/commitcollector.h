@@ -16,13 +16,15 @@ public:
     void setExtent (int extent);
     int extent() const;
 
-    const QMap<QString, int> &resultMapCommits() const;
-    const QMap<QString, QMap<QString, int> > &resultMapCommiters() const;
+    const QList< QPair <QString, int> > &resultingCommits() const;
+    const QHash<QString, QList< QPair<QString, int> > > &resultingCommiters() const;
 
 protected Q_SLOTS:
     virtual void requestFinished (int id, bool error);
 
 private:
+    void createSortedLists();
+
     int m_extent;
     int m_page;
     int m_connectId;
@@ -31,8 +33,11 @@ private:
     QString m_archiveName;
     const QMap<QString, KdeObservatory::Project> &m_projects;
 
-    QMap<QString, int> m_resultMapCommits;
-    QMap<QString, QMap<QString, int> > m_resultMapCommiters;
+    QHash<QString, int> m_tempCommits;
+    QList< QPair <QString, int> > m_resultingCommits;
+
+    QHash<QString, QHash<QString, int> > m_tempCommiters;
+    QHash<QString, QList< QPair<QString, int> > > m_resultingCommiters;
 };
 
 #endif
