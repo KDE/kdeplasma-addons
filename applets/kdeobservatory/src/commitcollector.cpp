@@ -52,7 +52,6 @@ void CommitCollector::run()
     if (m_fullUpdate)
     {
         KdeObservatoryDatabase::self()->truncateCommits();
-        m_fullUpdate = false;
         m_commitsRead = 0;
     }
 
@@ -108,6 +107,7 @@ void CommitCollector::requestFinished (int id, bool error)
                 KdeObservatoryDatabase::self()->addCommit(commit.date, commit.subject, commit.developer);
             }
 
+            m_fullUpdate = false;
             emit collectFinished();
             return;
         }
@@ -119,7 +119,6 @@ void CommitCollector::requestFinished (int id, bool error)
         m_commits.push(commit);
 
         ++m_commitsRead;
-        qDebug() << "Commits read:" << m_commitsRead;
         pos += regExp.matchedLength();
     }
 

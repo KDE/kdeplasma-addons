@@ -34,7 +34,10 @@ protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void collectFinished();
-    void switchViews();
+    void moveViewRight();
+    void moveViewLeft();
+    void switchViews(int delta);
+    void runCollectors();
 
 private:
     KConfigGroup m_configGroup;
@@ -52,17 +55,18 @@ private:
     int  m_viewsDelay;
     QList< QPair<QString, bool> > m_activeViews;
 
-    // Config - projects
+    // Config - Projects
     QMap<QString, Project> m_projects;
 
+    // Main Layout
     QGraphicsWidget *m_viewContainer;
+    QProgressBar *m_collectorProgress;
+
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
 
     QTimer *m_viewTransitionTimer;
-    QTimer *m_synchronizeTimer;
-
-    QProgressBar *m_collectorProgress;
+    QTimer *m_synchronizationTimer;
 
     CommitCollector *m_collector;
 };
