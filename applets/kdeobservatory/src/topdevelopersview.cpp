@@ -4,6 +4,7 @@
 #include <QFontMetrics>
 
 #include <KIcon>
+#include <KGlobalSettings>
 
 #include "kdeobservatorydatabase.h"
 
@@ -58,6 +59,7 @@ TopDevelopersView::TopDevelopersView(const QMap<QString, KdeObservatory::Project
 
             QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + developer, commiterRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
+            commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
             QFontMetrics fontMetricsNumber(commitsNumber->font());
             commitsNumber->setPos((qreal) 0, (qreal) ((commiterRect->rect().height())/2)-(fontMetricsNumber.height()/2));
             j++;

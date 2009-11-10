@@ -4,6 +4,7 @@
 #include <QFontMetrics>
 
 #include <KIcon>
+#include <KGlobalSettings>
 
 #include "kdeobservatorydatabase.h"
 
@@ -22,7 +23,6 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
 
     QGraphicsWidget *container = createView(i18n("Top Active Projects"));
 
-    qDebug() << topActiveProjects;
     int maxRank = 0;
     qreal width = container->geometry().width();
     qreal step = qMax(container->geometry().height() / topActiveProjects.size(), (qreal) 22);
@@ -51,6 +51,7 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
 
         QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), projectRect);
         commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
+        commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
         QFontMetrics fontMetricsNumber(commitsNumber->font());
         commitsNumber->setPos((qreal) ((projectRect->rect().width())/2)-(fontMetricsNumber.width(commitsNumber->toPlainText())/2),
                               (qreal) ((projectRect->rect().height())/2)-(fontMetricsNumber.height()/2));

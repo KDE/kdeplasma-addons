@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QTimeLine>
 #include <QProgressBar>
+#include <QListWidgetItem>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsItemAnimation>
@@ -24,8 +25,8 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args),
-  m_collector (new CommitCollector(this)),
-  m_currentView(0)
+  m_currentView(0),
+  m_collector (new CommitCollector(this))
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
@@ -41,6 +42,10 @@ KdeObservatory::~KdeObservatory()
 void KdeObservatory::init()
 {
     m_configGroup = config();
+
+    m_collector->setCommitsRead(m_configGroup.readEntry("commitsRead", 0));
+    if (m_collector->commitsRead() == 0)
+        m_collector->setFullUpdate(true);
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 1);
@@ -92,16 +97,16 @@ void KdeObservatory::init()
     connect(right->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewRight()));
     connect(left->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewLeft()));
 
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
-    m_collectorProgress = new QProgressBar;
-    connect(m_collector, SIGNAL(progressMaximum(int)), m_collectorProgress, SLOT(setMaximum(int)));
-    connect(m_collector, SIGNAL(progressValue(int)), m_collectorProgress, SLOT(setValue(int)));
-    proxy->setWidget(m_collectorProgress);
-    proxy->hide();
+    m_progressProxy = new QGraphicsProxyWidget(container);
+    QProgressBar *collectorProgress = new QProgressBar;
+    connect(m_collector, SIGNAL(progressMaximum(int)), collectorProgress, SLOT(setMaximum(int)));
+    connect(m_collector, SIGNAL(progressValue(int)), collectorProgress, SLOT(setValue(int)));
+    m_progressProxy->setWidget(collectorProgress);
+    m_progressProxy->hide();
 
     QGraphicsLinearLayout *horizontalLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     horizontalLayout->addItem(left);
-    horizontalLayout->addItem(proxy);
+    horizontalLayout->addItem(m_progressProxy);
     horizontalLayout->addItem(right);
     horizontalLayout->setMaximumHeight(22);
 
@@ -159,21 +164,33 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     {
         Project project = m_projects.value(projectName);
         m_configProjects->createTableWidgetItem(projectName, project.commitSubject, project.icon);
+        m_configProjects->projects->setCurrentCell(0, 0);
     }
 
     m_configProjects->projects->setCurrentItem(m_configProjects->projects->item(0, 0));
     m_configProjects->projects->resizeColumnsToContents();
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
-    m_viewTransitionTimer->stop();
-    m_synchronizationTimer->stop();
+    // Config - Top Active Projects
+    foreach(QString projectName, m_projects.keys())
+    {
+        Project project = m_projects.value(projectName);
+        QListWidgetItem *item = new QListWidgetItem(projectName, ui_configTopActiveProjects->projectsInTopActiveProjectsView);
+        item->setCheckState(Qt::Checked);
+        item->setIcon(KIcon(project.icon));
+    }
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 }
 
 void KdeObservatory::configAccepted()
 {
+    m_viewTransitionTimer->stop();
+    m_synchronizationTimer->stop();
+
     // General properties
+    if (m_configGeneral->commitExtent->value() > m_commitExtent)
+        m_collector->setFullUpdate(true);
     m_configGroup.writeEntry("commitExtent", m_commitExtent = m_configGeneral->commitExtent->value());
     QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
     m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay = synchronizationDelay.second() + synchronizationDelay.minute()*60 + synchronizationDelay.hour()*3600);
@@ -235,7 +252,7 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
-    m_collectorProgress->hide();
+    m_progressProxy->hide();
 
     TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_viewContainer->geometry(), m_viewContainer);
     TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, m_viewContainer->geometry(), m_viewContainer);
@@ -249,6 +266,7 @@ void KdeObservatory::collectFinished()
     if (m_enableAutoViewChange)
         m_viewTransitionTimer->start();
 
+    m_configGroup.writeEntry("commitsRead", m_collector->commitsRead());
     m_synchronizationTimer->start();
 }
 
@@ -303,11 +321,11 @@ void KdeObservatory::switchViews(int delta)
 
 void KdeObservatory::runCollectors()
 {
-    if (m_views.at(m_currentView))
-        m_views.at(m_currentView)->hide();
+    foreach(QGraphicsWidget *widget, m_views)
+        widget->hide();
 
     setBusy(true);
-    m_collectorProgress->show();
+    m_progressProxy->show();
     m_collector->run();
 }
 

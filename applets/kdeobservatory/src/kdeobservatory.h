@@ -6,10 +6,7 @@
 #include <Plasma/Applet>
 
 class QTimer;
-class QProgressBar;
-class QGraphicsView;
-class QGraphicsScene;
-class QStandardItemModel;
+class QGraphicsProxyWidget;
 
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
@@ -60,7 +57,7 @@ private:
 
     // Main Layout
     QGraphicsWidget *m_viewContainer;
-    QProgressBar *m_collectorProgress;
+    QGraphicsProxyWidget *m_progressProxy;
 
     QList<QGraphicsWidget *> m_views;
     int m_currentView;

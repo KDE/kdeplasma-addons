@@ -15,6 +15,11 @@ public:
     void setExtent (int extent);
     int extent() const;
 
+    void setCommitsRead(int commitsRead);
+    int commitsRead() const;
+
+    void setFullUpdate(bool fullUpdate);
+
     virtual void run();
 
     typedef struct

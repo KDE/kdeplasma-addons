@@ -11,7 +11,7 @@
 
 CommitCollector::CommitCollector(QObject *parent)
 : ICollector(parent),
-  m_fullUpdate(true),
+  m_fullUpdate(false),
   m_commitsRead(0),
   m_lastArchiveRead(""),
   m_extent(1),
@@ -28,14 +28,27 @@ CommitCollector::~CommitCollector()
 
 void CommitCollector::setExtent (int extent)
 {
-    if (extent > m_extent)
-        m_fullUpdate = true;
     m_extent = extent;
 }
 
 int CommitCollector::extent() const
 {
     return m_extent;
+}
+
+void CommitCollector::setCommitsRead(int commitsRead)
+{
+    m_commitsRead = commitsRead;
+}
+
+int CommitCollector::commitsRead() const
+{
+    return m_commitsRead;
+}
+
+void CommitCollector::setFullUpdate(bool fullUpdate)
+{
+    m_fullUpdate = fullUpdate;
 }
 
 void CommitCollector::run()

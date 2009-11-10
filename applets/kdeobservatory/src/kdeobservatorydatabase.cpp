@@ -56,7 +56,7 @@ int KdeObservatoryDatabase::commitsByProject(const QString &prefix)
     m_query.prepare("select count(*) from commits where subject like '" + prefix + "%'");
     if (!m_query.exec())
     {
-        qDebug() << "Error when executing commits by project -" << m_db.lastError();
+        kDebug() << "Error when executing commits by project -" << m_db.lastError();
         return 0;
     }
     m_query.next();
@@ -70,7 +70,7 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
     QMultiMap<int, QString> result;
     if (!m_query.exec())
     {
-        qDebug() << "Error when executing commits by project -" << m_db.lastError();
+        kDebug() << "Error when executing commits by project -" << m_db.lastError();
         return result;
     }
     while(m_query.next())
@@ -81,7 +81,6 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
 KdeObservatoryDatabase::KdeObservatoryDatabase()
 : m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    qDebug() << KStandardDirs::locate("data", "kdeobservatory/data/kdeobservatory.db");
     m_db.setDatabaseName(KStandardDirs::locate("data", "kdeobservatory/data/kdeobservatory.db"));
     if (!m_db.open())
     {

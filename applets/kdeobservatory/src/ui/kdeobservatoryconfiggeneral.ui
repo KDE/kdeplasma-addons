@@ -404,5 +404,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>enableAutoViewChange</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>viewsDelay</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

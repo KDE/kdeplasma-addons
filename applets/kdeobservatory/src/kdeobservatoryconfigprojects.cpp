@@ -27,6 +27,7 @@ void KdeObservatoryConfigProjects::createTableWidgetItem(const QString &projectN
     projects->setItem(rowCount, 0, itemProject);
     projects->setItem(rowCount, 1, itemCommitSubject);
     projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
+    projects->setCurrentItem(itemProject);
 }
 
 void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
