@@ -3,10 +3,15 @@
 #include <QTimer>
 #include <QThread>
 #include <QTimeLine>
+#include <QProgressBar>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsLinearLayout>
 #include <QGraphicsItemAnimation>
 
 #include <KConfig>
 #include <KConfigDialog>
+
+#include <Plasma/PushButton>
 
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
@@ -67,6 +72,39 @@ void KdeObservatory::init()
     m_viewTransitionTimer = new QTimer(this);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
     connect(m_viewTransitionTimer, SIGNAL(timeout()), this, SLOT(switchViews()));
+
+    QGraphicsWidget *container = new QGraphicsWidget(this);
+
+    m_viewContainer = new QGraphicsWidget(container);
+    m_viewContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    Plasma::PushButton *right = new Plasma::PushButton(container);
+    Plasma::PushButton *left = new Plasma::PushButton(container);
+    right->setIcon(KIcon("go-next-view"));
+    left->setIcon(KIcon("go-previous-view"));
+    right->nativeWidget()->setToolTip(i18n("Go to next view"));
+    left->nativeWidget()->setToolTip(i18n("Go to previous view"));
+    right->setMaximumSize(22, 22);
+    left->setMaximumSize(22, 22);
+
+    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget(container);
+    m_collectorProgress = new QProgressBar;
+    connect(m_collector, SIGNAL(progressMaximum(int)), m_collectorProgress, SLOT(setMaximum(int)));
+    connect(m_collector, SIGNAL(progressValue(int)), m_collectorProgress, SLOT(setValue(int)));
+    proxy->setWidget(m_collectorProgress);
+    proxy->hide();
+
+    QGraphicsLinearLayout *horizontalLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    horizontalLayout->addItem(left);
+    horizontalLayout->addItem(proxy);
+    horizontalLayout->addItem(right);
+    horizontalLayout->setMaximumHeight(22);
+
+    QGraphicsLinearLayout *verticalLayout = new QGraphicsLinearLayout(Qt::Vertical);
+    verticalLayout->addItem(m_viewContainer);
+    verticalLayout->addItem(horizontalLayout);
+    container->setLayout(verticalLayout);
+    container->setGeometry(contentsRect());
 }
 
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
@@ -171,6 +209,7 @@ void KdeObservatory::configAccepted()
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
 
     setBusy(true);
+    m_collectorProgress->show();
     m_collector->run();
     emit configNeedsSaving();
 }
@@ -178,9 +217,10 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
+    m_collectorProgress->hide();
 
-    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, contentsRect(), this);
-    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, contentsRect(), this);
+    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_viewContainer->geometry(), m_viewContainer);
+    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, m_viewContainer->geometry(), m_viewContainer);
 
     m_views = topActiveProjectsView->views();
     m_views.append(topDevelopersView->views());

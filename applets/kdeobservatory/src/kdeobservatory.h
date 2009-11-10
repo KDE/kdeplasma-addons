@@ -6,6 +6,7 @@
 #include <Plasma/Applet>
 
 class QTimer;
+class QProgressBar;
 class QGraphicsView;
 class QGraphicsScene;
 class QStandardItemModel;
@@ -54,11 +55,14 @@ private:
     // Config - projects
     QMap<QString, Project> m_projects;
 
+    QGraphicsWidget *m_viewContainer;
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
 
     QTimer *m_viewTransitionTimer;
     QTimer *m_synchronizeTimer;
+
+    QProgressBar *m_collectorProgress;
 
     CommitCollector *m_collector;
 };

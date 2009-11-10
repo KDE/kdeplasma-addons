@@ -45,6 +45,8 @@ void CommitCollector::run()
     QDate now = QDate::currentDate();
     QString stopDate = now.addDays(-m_extent-1).toString("yyyyMMdd");
     m_stopCollectingDay = stopDate.toLongLong();
+    m_lastDay = now.toString("yyyyMMdd").toLongLong();
+    m_dayCounter = 0;
 
     KdeObservatoryDatabase::self()->deleteOldCommits(stopDate);
     if (m_fullUpdate)
@@ -56,6 +58,7 @@ void CommitCollector::run()
 
     m_commits.clear();
     m_initialArchiveName = m_archiveName = now.toString("yyyyMM");
+    emit progressMaximum(m_extent);
     request(m_header, QString("l=kde-commits&r=" + QString::number(m_page) + "&b=" + m_archiveName + "&w=4").toUtf8());
 }
 
@@ -85,6 +88,13 @@ void CommitCollector::requestFinished (int id, bool error)
         QString path = regExp.cap(3).trimmed();
         QString developer = regExp.cap(4).trimmed();
         long long date = regExp.cap(2).trimmed().remove("-").toLongLong();
+
+        if (date != m_lastDay)
+        {
+            ++m_dayCounter;
+            m_lastDay = date;
+            emit progressValue(m_dayCounter);
+        }
 
         if (date <= m_stopCollectingDay || // It reaches the whole commit extent
             (m_commitsRead == m_commitsToBeRead && // It read the delta commits ...

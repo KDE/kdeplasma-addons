@@ -37,6 +37,8 @@ private:
     int m_page;
     int m_connectId;
     long long m_stopCollectingDay;
+    long long m_lastDay;
+    int m_dayCounter;
 
     QStack<Commit> m_commits;
     QHttpRequestHeader m_header;

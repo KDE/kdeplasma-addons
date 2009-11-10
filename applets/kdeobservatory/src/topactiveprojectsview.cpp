@@ -23,7 +23,7 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
     QGraphicsWidget *container = createView(i18n("Top Active Projects"));
 
     qDebug() << topActiveProjects;
-    int maxRank;
+    int maxRank = 0;
     qreal width = container->geometry().width();
     qreal step = qMax(container->geometry().height() / topActiveProjects.size(), (qreal) 22);
 

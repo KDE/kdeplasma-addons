@@ -13,6 +13,8 @@ public:
     virtual void run() = 0;
 
 Q_SIGNALS:
+    void progressMaximum(int value);
+    void progressValue(int value);
     void collectFinished();
     void collectError(QString error);
 

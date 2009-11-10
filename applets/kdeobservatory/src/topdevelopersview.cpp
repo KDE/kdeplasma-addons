@@ -32,7 +32,7 @@ TopDevelopersView::TopDevelopersView(const QMap<QString, KdeObservatory::Project
 
         QGraphicsWidget *container = createView(i18n("Top Commiters") + " - " + project);
 
-        int maxRank;
+        int maxRank = 0;
         qreal width = container->geometry().width();
         qreal step = qMax(container->geometry().height() / projectDevelopers.size(), (qreal) 22);
 
