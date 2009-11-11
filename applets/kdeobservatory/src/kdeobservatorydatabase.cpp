@@ -82,7 +82,7 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
 QList< QPair<QString, int> > KdeObservatoryDatabase::commitHistory(const QString &prefix)
 {
     m_query.clear();
-    m_query.prepare("select commit_date, count(*) from commits group by commit_date order by commit_date");
+    m_query.prepare("select commit_date, count(*) from commits where subject like '" + prefix + "%' group by commit_date order by commit_date");
     QList< QPair<QString, int> > result;
     if (!m_query.exec())
     {

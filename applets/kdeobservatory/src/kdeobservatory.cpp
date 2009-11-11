@@ -479,7 +479,6 @@ void KdeObservatory::updateViews()
     {
         const QPair<QString, bool> &pair = m_activeViews.at(i);
         const QString &view = pair.first;
-        qDebug() << pair.second << view << m_viewProviders[view];
         if (pair.second && m_viewProviders[view])
         {
             m_viewProviders[view]->updateViews();

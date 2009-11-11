@@ -6,6 +6,7 @@
 
 #include <qwt/qwt_plot.h>
 #include <qwt/qwt_plot_curve.h>
+#include <qwt/qwt_scale_widget.h>
 
 #include "kdeobservatorydatabase.h"
 
@@ -49,9 +50,11 @@ void CommitHistoryView::updateViews()
 
         int count = projectCommits.count();
         int j;
+        qDebug() << "Commits for" << project;
         for (j=0; j < count; ++j)
         {
             const QPair<QString, int> &pair = projectCommits.at(j);
+            qDebug() << pair.first << QDate::fromString(pair.first, "yyyy-MM-dd").toString("MMdd");
             x[j] = QDate::fromString(pair.first, "yyyy-MM-dd").toString("MMdd").toInt();
             y[j] = pair.second;
             if (x[j] > maxDate)
@@ -68,19 +71,27 @@ void CommitHistoryView::updateViews()
 
         QwtPlot *plot = new QwtPlot;
         plot->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//        plot->setAxisScale(0, 0, maxCommit);
-//        plot->setAxisScale(1, minDate, maxDate);
-        plot->setFont(KGlobalSettings::smallestReadableFont());
+        plot->setAxisScale(0, 0, maxCommit, maxCommit/5.);
+        plot->setAxisScale(2, minDate, maxDate, 1);
+        plot->setAxisFont(0, KGlobalSettings::smallestReadableFont());
+        plot->setAxisFont(2, KGlobalSettings::smallestReadableFont());
+        plot->setAxisLabelRotation(2, -15);
+        plot->axisWidget(0)->hide();
+        plot->axisWidget(2)->hide();
         plot->setCanvasBackground(QColor(0, 0, 140));
 
         QwtPlotCurve *curve = new QwtPlotCurve;
         curve->setData(x, y, j);
-//        curve->attach(plot);
+        curve->attach(plot);
         QPen pen = curve->pen();
         pen.setColor(QColor(255, 255, 0));
         curve->setPen(pen);
         plot->replot();
 
         proxy->setWidget(plot);
+//        proxy->setGeometry(container->geometry());
+        plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());
+//        proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
+//        container->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
     }
 }
