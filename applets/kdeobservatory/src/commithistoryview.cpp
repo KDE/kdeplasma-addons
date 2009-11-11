@@ -5,6 +5,7 @@
 #include <KGlobalSettings>
 
 #include <qwt/qwt_plot.h>
+#include <qwt/qwt_plot_grid.h>
 #include <qwt/qwt_plot_curve.h>
 #include <qwt/qwt_scale_widget.h>
 
@@ -95,6 +96,12 @@ void CommitHistoryView::updateViews()
         pen.setColor(QColor(255, 255, 0));
         curve->setPen(pen);
         plot->replot();
+
+        QwtPlotGrid *grid = new QwtPlotGrid;
+        grid->enableXMin(true);
+        grid->setMajPen(QPen(Qt::white, 0, Qt::DotLine));
+        grid->setMinPen(QPen(Qt::NoPen));
+        grid->attach(plot);
 
         proxy->setWidget(plot);
         plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());

@@ -59,12 +59,12 @@ void CommitCollector::run()
     m_page = 1;
 
     QDate now = QDate::currentDate();
-    QString stopDate = now.addDays(-m_extent-1).toString("yyyyMMdd");
-    m_stopCollectingDay = stopDate.toLongLong();
+    QDate stopDate = now.addDays(-m_extent-1);
+    m_stopCollectingDay = stopDate.toString("yyyyMMdd").toLongLong();
     m_lastDay = now.toString("yyyyMMdd").toLongLong();
     m_dayCounter = 0;
 
-    KdeObservatoryDatabase::self()->deleteOldCommits(stopDate);
+    KdeObservatoryDatabase::self()->deleteOldCommits(stopDate.toString("yyyy-MM-dd"));
     if (m_fullUpdate)
     {
         KdeObservatoryDatabase::self()->truncateCommits();

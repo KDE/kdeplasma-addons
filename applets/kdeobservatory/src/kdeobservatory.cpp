@@ -169,6 +169,7 @@ void KdeObservatory::init()
     m_viewProviders["Top Developers"] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
     m_viewProviders["Commit History"] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
 
+    m_collector->setExtent(m_commitExtent);
     runCollectors();
 }
 
@@ -266,9 +267,14 @@ void KdeObservatory::configAccepted()
 {
     prepareUpdateViews();
 
+    bool commitExtentChanged = false;
+    if (m_configGeneral->commitExtent->value() != m_commitExtent)
+        if (m_configGeneral->commitExtent->value() > m_commitExtent)
+            m_collector->setFullUpdate(true);
+        else
+            commitExtentChanged = true;
+
     // General properties
-    if (m_configGeneral->commitExtent->value() > m_commitExtent)
-        m_collector->setFullUpdate(true);
     m_configGroup.writeEntry("commitExtent", m_commitExtent = m_configGeneral->commitExtent->value());
     QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
     m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay = synchronizationDelay.second() + synchronizationDelay.minute()*60 + synchronizationDelay.hour()*3600);
@@ -372,7 +378,7 @@ void KdeObservatory::configAccepted()
 
     emit configNeedsSaving();
 
-    if (m_collector->fullUpdate())
+    if (m_collector->fullUpdate() || commitExtentChanged)
         runCollectors();
     else
         updateViews();

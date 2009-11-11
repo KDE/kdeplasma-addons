@@ -44,9 +44,9 @@ void KdeObservatoryDatabase::truncateCommits()
 
 void KdeObservatoryDatabase::deleteOldCommits(const QString &date)
 {
+    qDebug() << "Deleting commits <=" << date;
     m_query.clear();
-    m_query.prepare("delete from commits where commit_date <= :date");
-    m_query.bindValue(":commit_date", date);
+    m_query.prepare("delete from commits where commit_date <= '" + date + "'");
     if (!m_query.exec())
         kDebug() << "Error when deleting old commits -" << m_db.lastError();
 }
