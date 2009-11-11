@@ -6,10 +6,13 @@
 #include <Plasma/Applet>
 
 class QTimer;
+class QTimeLine;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
 class CommitCollector;
+class TopDevelopersView;
+class TopActiveProjectsView;
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
 class KdeObservatoryConfigTopDevelopers;
@@ -51,6 +54,9 @@ protected Q_SLOTS:
     void runCollectors();
 
 private:
+    void prepareUpdateViews();
+    void updateViews();
+
     KConfigGroup m_configGroup;
 
     KdeObservatoryConfigGeneral *m_configGeneral;
@@ -85,11 +91,16 @@ private:
     Plasma::PushButton *m_right;
     Plasma::PushButton *m_left;
 
+    // View providers
+    TopActiveProjectsView *m_topActiveProjectsView;
+    TopDevelopersView     *m_topDevelopersView;
+
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
 
     QTimer *m_viewTransitionTimer;
     QTimer *m_synchronizationTimer;
+    QTimeLine *m_transitionTimer;
 
     CommitCollector *m_collector;
 };

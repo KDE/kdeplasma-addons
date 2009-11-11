@@ -7,8 +7,6 @@
 
 #include "kdeobservatorydatabase.h"
 
-#include <QDebug>
-
 CommitCollector::CommitCollector(QObject *parent)
 : ICollector(parent),
   m_fullUpdate(false),
@@ -49,6 +47,11 @@ int CommitCollector::commitsRead() const
 void CommitCollector::setFullUpdate(bool fullUpdate)
 {
     m_fullUpdate = fullUpdate;
+}
+
+bool CommitCollector::fullUpdate() const
+{
+    return m_fullUpdate;
 }
 
 void CommitCollector::run()

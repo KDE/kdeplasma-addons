@@ -86,7 +86,7 @@ KdeObservatoryDatabase::KdeObservatoryDatabase()
     m_db.setDatabaseName(KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db"));
     if (!m_db.open())
     {
-        qDebug() << "Erro ao abrir o banco de dados";
+        kDebug() << "Erro ao abrir o banco de dados";
     }
     if (!databaseExists)
         init();

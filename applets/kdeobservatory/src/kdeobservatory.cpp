@@ -28,7 +28,7 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args),
-  m_currentView(0),
+  m_transitionTimer(0),
   m_collector (new CommitCollector(this))
 {
     setBackgroundHints(DefaultBackground);
@@ -153,6 +153,10 @@ void KdeObservatory::init()
     m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
     connect(m_synchronizationTimer, SIGNAL(timeout()), this, SLOT(runCollectors()));
 
+    // Creating view providers
+    m_topActiveProjectsView = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+    m_topDevelopersView = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+
     runCollectors();
 }
 
@@ -232,8 +236,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 
 void KdeObservatory::configAccepted()
 {
-    m_viewTransitionTimer->stop();
-    m_synchronizationTimer->stop();
+    prepareUpdateViews();
 
     // General properties
     if (m_configGeneral->commitExtent->value() > m_commitExtent)
@@ -325,11 +328,16 @@ void KdeObservatory::configAccepted()
 
     emit configNeedsSaving();
 
-    runCollectors();
+    if (m_collector->fullUpdate())
+        runCollectors();
+    else
+        updateViews();
 }
 
 void KdeObservatory::collectFinished()
 {
+    prepareUpdateViews();
+
     setBusy(false);
     m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
     m_progressProxy->hide();
@@ -339,17 +347,7 @@ void KdeObservatory::collectFinished()
     m_right->setEnabled(true);
     m_left->setEnabled(true);
 
-    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
-    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
-
-    m_views = topActiveProjectsView->views();
-    m_views.append(topDevelopersView->views());
-
-    m_currentView = m_views.count()-1;
-    moveViewLeft();
-
-    if (m_enableAutoViewChange)
-        m_viewTransitionTimer->start();
+    updateViews();
 
     m_configGroup.writeEntry("commitsRead", m_collector->commitsRead());
     m_synchronizationTimer->start();
@@ -378,23 +376,23 @@ void KdeObservatory::switchViews(int delta)
         currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
         currentViewWidget->show();
 
-        QTimeLine *timer = new QTimeLine(500);
-        timer->setFrameRange(0, 1);
-        timer->setCurveShape(QTimeLine::EaseOutCurve);
+        m_transitionTimer = new QTimeLine(500);
+        m_transitionTimer->setFrameRange(0, 1);
+        m_transitionTimer->setCurveShape(QTimeLine::EaseOutCurve);
 
         QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation;
         animationPrevious->setItem(previousViewWidget);
-        animationPrevious->setTimeLine(timer);
+        animationPrevious->setTimeLine(m_transitionTimer);
         animationPrevious->setPosAt(0, QPointF(0, 0));
         animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
 
         QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation;
         animationNew->setItem(currentViewWidget);
-        animationNew->setTimeLine(timer);
+        animationNew->setTimeLine(m_transitionTimer);
         animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));
         animationNew->setPosAt(1, QPointF(0, 0));
 
-        timer->start();
+        m_transitionTimer->start();
     }
     else
     {
@@ -406,8 +404,6 @@ void KdeObservatory::switchViews(int delta)
 
 void KdeObservatory::runCollectors()
 {
-    foreach(QGraphicsWidget *widget, m_views)
-        widget->hide();
     m_right->setEnabled(false);
     m_left->setEnabled(false);
 
@@ -416,7 +412,32 @@ void KdeObservatory::runCollectors()
     m_horizontalLayout->removeItem(m_updateLabel);
     m_horizontalLayout->insertItem(1, m_progressProxy);
     m_progressProxy->show();
+
     m_collector->run();
+}
+
+void KdeObservatory::prepareUpdateViews()
+{
+    m_viewTransitionTimer->stop();
+    m_synchronizationTimer->stop();
+    if (m_transitionTimer)
+        m_transitionTimer->stop();
+
+    foreach(QGraphicsWidget *widget, m_views)
+        widget->hide();
+}
+
+void KdeObservatory::updateViews()
+{
+    m_topActiveProjectsView->updateViews();
+    m_topDevelopersView->updateViews();
+    m_views = m_topActiveProjectsView->views();
+    m_views.append(m_topDevelopersView->views());
+    m_currentView = m_views.count()-1;
+    moveViewLeft();
+    if (m_enableAutoViewChange)
+        m_viewTransitionTimer->start();
+    m_synchronizationTimer->start();
 }
 
 #include "kdeobservatory.moc"

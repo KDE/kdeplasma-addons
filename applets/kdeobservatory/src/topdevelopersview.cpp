@@ -8,18 +8,28 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopDevelopersView::TopDevelopersView(QHash<QString, bool> topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
   m_topDevelopersViewProjects(topDevelopersViewProjects),
   m_projects(projects)
 {
+}
+
+TopDevelopersView::~TopDevelopersView()
+{
+}
+
+void TopDevelopersView::updateViews()
+{
+    deleteViews();
+
     QMap< QString, QMultiMap<int, QString> > topDevelopers;
     QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
     while (i1.hasNext())
     {
         i1.next();
         if (i1.value())
-            topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(projects[i1.key()].commitSubject));
+            topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(m_projects[i1.key()].commitSubject));
     }
 
     QMapIterator< QString, QMultiMap<int, QString> > i2(topDevelopers);
@@ -67,8 +77,4 @@ TopDevelopersView::TopDevelopersView(QHash<QString, bool> topDevelopersViewProje
             j++;
         }
     }
-}
-
-TopDevelopersView::~TopDevelopersView()
-{
 }

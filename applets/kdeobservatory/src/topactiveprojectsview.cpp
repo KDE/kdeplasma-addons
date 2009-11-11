@@ -8,11 +8,21 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopActiveProjectsView::TopActiveProjectsView(QHash<QString, bool> topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopActiveProjectsView::TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
   m_topActiveProjectsViewProjects(topActiveProjectsViewProjects),
   m_projects(projects)
 {
+}
+
+TopActiveProjectsView::~TopActiveProjectsView()
+{
+}
+
+void TopActiveProjectsView::updateViews()
+{
+    deleteViews();
+
     QMultiMap<int, QString> topActiveProjects;
     QHashIterator<QString, bool> i1(m_topActiveProjectsViewProjects);
     while (i1.hasNext())
@@ -61,8 +71,4 @@ TopActiveProjectsView::TopActiveProjectsView(QHash<QString, bool> topActiveProje
                               (qreal) ((projectRect->rect().height())/2)-(fontMetricsNumber.height()/2));
         j++;
     }
-}
-
-TopActiveProjectsView::~TopActiveProjectsView()
-{
 }

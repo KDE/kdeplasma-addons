@@ -19,6 +19,7 @@ public:
     int commitsRead() const;
 
     void setFullUpdate(bool fullUpdate);
+    bool fullUpdate() const;
 
     virtual void run();
 
