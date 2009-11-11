@@ -89,5 +89,5 @@ QString QalculateHistory::backup() const
 
 bool QalculateHistory::isAtEnd() const
 {
-    return m_currentItem == m_history.size() - 1;
+    return m_currentItem >= 0 && m_history.size() - 1;
 }
