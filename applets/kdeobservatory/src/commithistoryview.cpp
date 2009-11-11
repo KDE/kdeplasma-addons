@@ -10,6 +10,15 @@
 
 #include "kdeobservatorydatabase.h"
 
+class TimeScaleDraw : public QwtScaleDraw
+{
+public:
+    virtual QwtText label(double v) const
+    {
+        return QString::number(v).insert(2, "/");
+    }
+};
+
 CommitHistoryView::CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
   m_commitHistoryViewProjects(commitHistoryViewProjects),
@@ -43,24 +52,18 @@ void CommitHistoryView::updateViews()
         const QList< QPair<QString, int> > &projectCommits = i2.value();
 
         int maxCommit = 0;
-        long long maxDate = 0;
-        int minDate = INT_MAX;
+        long long maxDate = QDate::fromString(projectCommits.at(projectCommits.count()-1).first, "yyyy-MM-dd").toString("MMdd").toInt();
+        int minDate = QDate::fromString(projectCommits.at(0).first, "yyyy-MM-dd").toString("MMdd").toInt();
         double x[30];
         double y[30];
 
         int count = projectCommits.count();
         int j;
-        qDebug() << "Commits for" << project;
         for (j=0; j < count; ++j)
         {
             const QPair<QString, int> &pair = projectCommits.at(j);
-            qDebug() << pair.first << QDate::fromString(pair.first, "yyyy-MM-dd").toString("MMdd");
             x[j] = QDate::fromString(pair.first, "yyyy-MM-dd").toString("MMdd").toInt();
             y[j] = pair.second;
-            if (x[j] > maxDate)
-                maxDate = x[j];
-            if (x[j] < minDate)
-                minDate = x[j];
             if (y[j] > maxCommit)
                 maxCommit = y[j];
         }
@@ -71,17 +74,22 @@ void CommitHistoryView::updateViews()
 
         QwtPlot *plot = new QwtPlot;
         plot->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        plot->setAxisScale(0, 0, maxCommit, maxCommit/5.);
-        plot->setAxisScale(2, minDate, maxDate, 1);
-        plot->setAxisFont(0, KGlobalSettings::smallestReadableFont());
-        plot->setAxisFont(2, KGlobalSettings::smallestReadableFont());
-        plot->setAxisLabelRotation(2, -15);
-        plot->axisWidget(0)->hide();
-        plot->axisWidget(2)->hide();
+
+        plot->setAxisScale(QwtPlot::yLeft, 0, qRound((maxCommit/5.)+0.5)*5, qRound((maxCommit/5.)+0.5));
+        plot->setAxisScale(QwtPlot::xBottom, minDate, maxDate, 1);
+
+        plot->setAxisScaleDraw(QwtPlot::xBottom, new TimeScaleDraw);
+
+        plot->setAxisFont(QwtPlot::yLeft, KGlobalSettings::smallestReadableFont());
+        plot->setAxisFont(QwtPlot::xBottom, KGlobalSettings::smallestReadableFont());
+
+        plot->setAxisLabelRotation(QwtPlot::xBottom, -15);
+
         plot->setCanvasBackground(QColor(0, 0, 140));
 
         QwtPlotCurve *curve = new QwtPlotCurve;
         curve->setData(x, y, j);
+
         curve->attach(plot);
         QPen pen = curve->pen();
         pen.setColor(QColor(255, 255, 0));
@@ -89,9 +97,6 @@ void CommitHistoryView::updateViews()
         plot->replot();
 
         proxy->setWidget(plot);
-//        proxy->setGeometry(container->geometry());
         plot->setGeometry(0, 0, container->geometry().width(), container->geometry().height());
-//        proxy->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
-//        container->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
     }
 }
