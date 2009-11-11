@@ -183,7 +183,6 @@ QGraphicsWidget *CalculatorApplet::graphicsWidget()
         qreal left, top, right, bottom;
         getContentsMargins(&left, &top, &right, &bottom);
         m_widget->setMinimumSize(m_layout->sizeHint(Qt::MinimumSize) + QSizeF(left + right, top + bottom));
-        m_widget->resize(300,300);
 
         QAction *copy = new QAction(i18n( "Copy" ), this);
         actions.append(copy);
