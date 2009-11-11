@@ -15,6 +15,7 @@ class IViewProvider;
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
 class KdeObservatoryConfigTopDevelopers;
+class KdeObservatoryConfigCommitHistory;
 class KdeObservatoryConfigTopActiveProjects;
 
 namespace Plasma
@@ -62,6 +63,7 @@ private:
     KdeObservatoryConfigProjects *m_configProjects;
     KdeObservatoryConfigTopActiveProjects *m_configTopActiveProjects;
     KdeObservatoryConfigTopDevelopers *m_configTopDevelopers;
+    KdeObservatoryConfigCommitHistory *m_configCommitHistory;
 
     // Config - General
     int  m_commitExtent;
@@ -81,6 +83,9 @@ private:
 
     // Config - Top Developers
     QHash<QString, bool> m_topDevelopersViewProjects;
+
+    // Config - Commit History
+    QHash<QString, bool> m_commitHistoryViewProjects;
 
     // Main Layout
     QGraphicsLinearLayout *m_horizontalLayout;

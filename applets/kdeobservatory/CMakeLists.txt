@@ -16,11 +16,13 @@ set(kdeobservatory_SRCS
     src/kdeobservatory.cpp
     src/commitcollector.cpp
     src/topdevelopersview.cpp
+    src/commithistoryview.cpp
     src/topactiveprojectsview.cpp
     src/kdeobservatorydatabase.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
     src/kdeobservatoryconfigtopdevelopers.cpp
+    src/kdeobservatoryconfigcommithistory.cpp
     src/kdeobservatoryconfigtopactiveprojects.cpp
 )
 
@@ -29,12 +31,13 @@ kde4_add_ui_files(kdeobservatory_SRCS
 		  src/ui/kdeobservatoryconfigproject.ui
 		  src/ui/kdeobservatoryconfigprojects.ui
 		  src/ui/kdeobservatoryconfigtopdevelopers.ui
+		  src/ui/kdeobservatoryconfigcommithistory.ui
 		  src/ui/kdeobservatoryconfigtopactiveprojects.ui
 )
  
 kde4_add_plugin(plasma_applet_kdeobservatory ${kdeobservatory_SRCS})
 target_link_libraries(plasma_applet_kdeobservatory 
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTSQL_LIBRARY})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTSQL_LIBRARY} qwt)
  
 install(TARGETS plasma_applet_kdeobservatory
         DESTINATION ${PLUGIN_INSTALL_DIR})

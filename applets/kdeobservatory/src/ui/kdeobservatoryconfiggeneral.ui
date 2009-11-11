@@ -299,7 +299,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Commit history</string>
+         <string>Commit History</string>
         </property>
         <property name="checkState">
          <enum>Checked</enum>

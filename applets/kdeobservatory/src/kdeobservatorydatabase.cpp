@@ -67,7 +67,7 @@ int KdeObservatoryDatabase::commitsByProject(const QString &prefix)
 QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QString &prefix)
 {
     m_query.clear();
-    m_query.prepare("select count(*), developer from commits where subject like '" + prefix + "%' group by developer order by count(*) desc;");
+    m_query.prepare("select count(*), developer from commits where subject like '" + prefix + "%' group by developer order by count(*) desc");
     QMultiMap<int, QString> result;
     if (!m_query.exec())
     {
@@ -76,6 +76,21 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
     }
     while(m_query.next())
         result.insert(m_query.value(0).toInt(), m_query.value(1).toString());
+    return result;
+}
+
+QList< QPair<QString, int> > KdeObservatoryDatabase::commitHistory(const QString &prefix)
+{
+    m_query.clear();
+    m_query.prepare("select commit_date, count(*) from commits group by commit_date order by commit_date");
+    QList< QPair<QString, int> > result;
+    if (!m_query.exec())
+    {
+        kDebug() << "Error when executing commit history by project -" << m_db.lastError();
+        return result;
+    }
+    while(m_query.next())
+        result.append(QPair<QString, int>(m_query.value(0).toString(), m_query.value(1).toInt()));
     return result;
 }
 

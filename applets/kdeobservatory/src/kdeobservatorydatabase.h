@@ -1,6 +1,7 @@
 #ifndef KDEOBSERVATORYDATABASE_HEADER
 #define KDEOBSERVATORYDATABASE_HEADER
 
+#include <QPair>
 #include <QSqlQuery>
 #include <QMultiMap>
 #include <QSqlDatabase>
@@ -15,6 +16,7 @@ public:
     void deleteOldCommits(const QString &date);
     int commitsByProject(const QString &prefix);
     QMultiMap<int, QString> developersByProject(const QString &prefix);
+    QList< QPair<QString, int> > commitHistory(const QString &prefix);
 
 private:
     KdeObservatoryDatabase();
