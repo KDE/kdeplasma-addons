@@ -154,8 +154,8 @@ void KdeObservatory::init()
     connect(m_synchronizationTimer, SIGNAL(timeout()), this, SLOT(runCollectors()));
 
     // Creating view providers
-    m_topActiveProjectsView = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
-    m_topDevelopersView = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+    m_viewProviders["Top Active Projects"] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+    m_viewProviders["Top Developers"] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
 
     runCollectors();
 }
@@ -429,14 +429,26 @@ void KdeObservatory::prepareUpdateViews()
 
 void KdeObservatory::updateViews()
 {
-    m_topActiveProjectsView->updateViews();
-    m_topDevelopersView->updateViews();
-    m_views = m_topActiveProjectsView->views();
-    m_views.append(m_topDevelopersView->views());
-    m_currentView = m_views.count()-1;
-    moveViewLeft();
-    if (m_enableAutoViewChange)
-        m_viewTransitionTimer->start();
+    m_views.clear();
+    int count = m_activeViews.count();
+    for (int i = 0; i < count; ++i)
+    {
+        const QPair<QString, bool> &pair = m_activeViews.at(i);
+        const QString &view = pair.first;
+        if (pair.second && m_viewProviders[view])
+        {
+            m_viewProviders[view]->updateViews();
+            m_views.append(m_viewProviders[view]->views());
+        }
+    }
+
+    if (m_views.count() > 0)
+    {
+        m_currentView = m_views.count()-1;
+        moveViewLeft();
+        if (m_enableAutoViewChange)
+            m_viewTransitionTimer->start();
+    }
     m_synchronizationTimer->start();
 }
 

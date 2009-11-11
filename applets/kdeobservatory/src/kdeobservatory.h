@@ -11,8 +11,7 @@ class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
 class CommitCollector;
-class TopDevelopersView;
-class TopActiveProjectsView;
+class IViewProvider;
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
 class KdeObservatoryConfigTopDevelopers;
@@ -92,8 +91,7 @@ private:
     Plasma::PushButton *m_left;
 
     // View providers
-    TopActiveProjectsView *m_topActiveProjectsView;
-    TopDevelopersView     *m_topDevelopersView;
+    QMap<QString, IViewProvider *> m_viewProviders;
 
     QList<QGraphicsWidget *> m_views;
     int m_currentView;
