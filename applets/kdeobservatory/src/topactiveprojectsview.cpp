@@ -8,17 +8,21 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projectsInView, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopActiveProjectsView::TopActiveProjectsView(QHash<QString, bool> topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
-  m_projectsInView(projectsInView)
+  m_topActiveProjectsViewProjects(topActiveProjectsViewProjects),
+  m_projects(projects)
 {
     QMultiMap<int, QString> topActiveProjects;
-    QMapIterator<QString, KdeObservatory::Project> i1(projectsInView);
+    QHashIterator<QString, bool> i1(m_topActiveProjectsViewProjects);
     while (i1.hasNext())
     {
         i1.next();
-        int rank = KdeObservatoryDatabase::self()->commitsByProject(i1.value().commitSubject);
-        topActiveProjects.insert(rank, i1.key());
+        if (i1.value())
+        {
+            int rank = KdeObservatoryDatabase::self()->commitsByProject(m_projects[i1.key()].commitSubject);
+            topActiveProjects.insert(rank, i1.key());
+        }
     }
 
     QGraphicsWidget *container = createView(i18n("Top Active Projects"));
@@ -46,7 +50,7 @@ TopActiveProjectsView::TopActiveProjectsView(const QMap<QString, KdeObservatory:
         projectRect->setPen(QPen(QColor(0, 0, 0)));
         projectRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
 
-        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projectsInView[project].icon).pixmap(22, 22), container);
+        QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[project].icon).pixmap(22, 22), container);
         icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
         QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank), projectRect);

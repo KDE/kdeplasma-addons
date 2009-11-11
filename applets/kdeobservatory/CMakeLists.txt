@@ -20,6 +20,7 @@ set(kdeobservatory_SRCS
     src/kdeobservatorydatabase.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
+    src/kdeobservatoryconfigtopdevelopers.cpp
     src/kdeobservatoryconfigtopactiveprojects.cpp
 )
 
@@ -27,6 +28,7 @@ kde4_add_ui_files(kdeobservatory_SRCS
 		  src/ui/kdeobservatoryconfiggeneral.ui
 		  src/ui/kdeobservatoryconfigproject.ui
 		  src/ui/kdeobservatoryconfigprojects.ui
+		  src/ui/kdeobservatoryconfigtopdevelopers.ui
 		  src/ui/kdeobservatoryconfigtopactiveprojects.ui
 )
  

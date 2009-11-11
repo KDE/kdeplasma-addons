@@ -8,16 +8,18 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopDevelopersView::TopDevelopersView(const QMap<QString, KdeObservatory::Project> &projectsInView, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
+TopDevelopersView::TopDevelopersView(QHash<QString, bool> topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const QRectF &rect, QGraphicsItem *parent, Qt::WindowFlags wFlags)
 : IViewProvider(rect, parent, wFlags),
-  m_projectsInView(projectsInView)
+  m_topDevelopersViewProjects(topDevelopersViewProjects),
+  m_projects(projects)
 {
     QMap< QString, QMultiMap<int, QString> > topDevelopers;
-    QMapIterator<QString, KdeObservatory::Project> i1(projectsInView);
+    QHashIterator<QString, bool> i1(m_topDevelopersViewProjects);
     while (i1.hasNext())
     {
         i1.next();
-        topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(i1.value().commitSubject));
+        if (i1.value())
+            topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(projects[i1.key()].commitSubject));
     }
 
     QMapIterator< QString, QMultiMap<int, QString> > i2(topDevelopers);

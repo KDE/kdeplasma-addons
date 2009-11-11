@@ -9,10 +9,11 @@ class QTimer;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
+class CommitCollector;
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
+class KdeObservatoryConfigTopDevelopers;
 class KdeObservatoryConfigTopActiveProjects;
-class CommitCollector;
 
 namespace Plasma
 {
@@ -55,6 +56,7 @@ private:
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
     KdeObservatoryConfigTopActiveProjects *m_configTopActiveProjects;
+    KdeObservatoryConfigTopDevelopers *m_configTopDevelopers;
 
     // Config - General
     int  m_commitExtent;
@@ -70,7 +72,10 @@ private:
     QMap<QString, Project> m_projects;
 
     // Config - Top Active Projects
-    QHash<QString, bool> m_topActiveProjectsViews;
+    QHash<QString, bool> m_topActiveProjectsViewProjects;
+
+    // Config - Top Developers
+    QHash<QString, bool> m_topDevelopersViewProjects;
 
     // Main Layout
     QGraphicsLinearLayout *m_horizontalLayout;

@@ -12,16 +12,17 @@
 #include <KConfigDialog>
 #include <KGlobalSettings>
 
-#include <Plasma/PushButton>
 #include <Plasma/Label>
+#include <Plasma/PushButton>
 
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
+#include "kdeobservatoryconfigtopdevelopers.h"
 #include "kdeobservatoryconfigtopactiveprojects.h"
 
 #include "commitcollector.h"
-#include "topactiveprojectsview.h"
 #include "topdevelopersview.h"
+#include "topactiveprojectsview.h"
 
 K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
@@ -85,10 +86,19 @@ void KdeObservatory::init()
     QStringList topActiveProjectsViewNames = m_configGroup.readEntry("topActiveProjectsViewNames", QStringList());
     QList<bool> topActiveProjectsViewActives = m_configGroup.readEntry("topActiveProjectsViewActives", QList<bool>());
 
-    m_topActiveProjectsViews.clear();
+    m_topActiveProjectsViewProjects.clear();
     int topActiveProjectsViewsCount = topActiveProjectsViewNames.count();
     for (int i = 0; i < topActiveProjectsViewsCount; ++i)
-        m_topActiveProjectsViews[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i);
+        m_topActiveProjectsViewProjects[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i);
+
+    // Config - Top Developers
+    QStringList topDevelopersViewNames = m_configGroup.readEntry("topDevelopersViewNames", QStringList());
+    QList<bool> topDevelopersViewActives = m_configGroup.readEntry("topDevelopersViewActives", QList<bool>());
+
+    m_topDevelopersViewProjects.clear();
+    int topDevelopersViewsCount = topDevelopersViewNames.count();
+    for (int i = 0; i < topDevelopersViewsCount; ++i)
+        m_topDevelopersViewProjects[topDevelopersViewNames.at(i)] = topDevelopersViewActives.at(i);
 
     // Main Layout
     QGraphicsWidget *container = new QGraphicsWidget(this);
@@ -157,10 +167,17 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configTopActiveProjects = new KdeObservatoryConfigTopActiveProjects(parent);
     parent->addPage(m_configTopActiveProjects, i18n("Top Active Projects"), "svn-commit");
 
+    m_configTopDevelopers = new KdeObservatoryConfigTopDevelopers(parent);
+    parent->addPage(m_configTopDevelopers, i18n("Top Developers"), "user-properties");
+
     connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
             m_configTopActiveProjects, SLOT(projectAdded(const QString &, const QString &)));
     connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
             m_configTopActiveProjects, SLOT(projectRemoved(const QString &)));
+    connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
+            m_configTopDevelopers, SLOT(projectAdded(const QString &, const QString &)));
+    connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
+            m_configTopDevelopers, SLOT(projectRemoved(const QString &)));
 
     // Config - General
     m_configGeneral->commitExtent->setValue(m_commitExtent);
@@ -193,12 +210,21 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
     // Config - Top Active Projects
-    QHashIterator<QString, bool> i(m_topActiveProjectsViews);
-    while (i.hasNext())
+    QHashIterator<QString, bool> i1(m_topActiveProjectsViewProjects);
+    while (i1.hasNext())
     {
-        i.next();
-        Project project = m_projects[i.key()];
-        m_configTopActiveProjects->createListWidgetItem(i.key(), project.icon, i.value());
+        i1.next();
+        Project project = m_projects[i1.key()];
+        m_configTopActiveProjects->createListWidgetItem(i1.key(), project.icon, i1.value());
+    }
+
+    // Config - Top Developers
+    QHashIterator<QString, bool> i2(m_topDevelopersViewProjects);
+    while (i2.hasNext())
+    {
+        i2.next();
+        Project project = m_projects[i2.key()];
+        m_configTopDevelopers->createListWidgetItem(i2.key(), project.icon, i2.value());
     }
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -266,7 +292,7 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
     // Top active projects properties
-    m_topActiveProjectsViews.clear();
+    m_topActiveProjectsViewProjects.clear();
     QStringList topActiveProjectsViewNames;
     QList<bool> topActiveProjectsViewActives;
     for (int i = 0; i < m_configTopActiveProjects->projectsInTopActiveProjectsView->count(); ++i)
@@ -274,12 +300,28 @@ void KdeObservatory::configAccepted()
         QListWidgetItem *item = m_configTopActiveProjects->projectsInTopActiveProjectsView->item(i);
         QString viewName = item->text();
         bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
-        m_topActiveProjectsViews[viewName] = viewActive;
+        m_topActiveProjectsViewProjects[viewName] = viewActive;
         topActiveProjectsViewNames << viewName;
         topActiveProjectsViewActives << viewActive;
     }
     m_configGroup.writeEntry("topActiveProjectsViewNames", topActiveProjectsViewNames);
     m_configGroup.writeEntry("topActiveProjectsViewActives", topActiveProjectsViewActives);
+
+    // Top developers properties
+    m_topDevelopersViewProjects.clear();
+    QStringList topDevelopersViewNames;
+    QList<bool> topDevelopersViewActives;
+    for (int i = 0; i < m_configTopDevelopers->projectsInTopDevelopersView->count(); ++i)
+    {
+        QListWidgetItem *item = m_configTopDevelopers->projectsInTopDevelopersView->item(i);
+        QString viewName = item->text();
+        bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
+        m_topDevelopersViewProjects[viewName] = viewActive;
+        topDevelopersViewNames << viewName;
+        topDevelopersViewActives << viewActive;
+    }
+    m_configGroup.writeEntry("topDevelopersViewNames", topDevelopersViewNames);
+    m_configGroup.writeEntry("topDevelopersViewActives", topDevelopersViewActives);
 
     emit configNeedsSaving();
 
@@ -297,8 +339,8 @@ void KdeObservatory::collectFinished()
     m_right->setEnabled(true);
     m_left->setEnabled(true);
 
-    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_viewContainer->geometry(), m_viewContainer);
-    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, m_viewContainer->geometry(), m_viewContainer);
+    TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+    TopDevelopersView *topDevelopersView = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
 
     m_views = topActiveProjectsView->views();
     m_views.append(topDevelopersView->views());

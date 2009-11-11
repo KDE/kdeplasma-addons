@@ -8,11 +8,12 @@
 class TopActiveProjectsView : public IViewProvider
 {
 public:
-    TopActiveProjectsView(const QMap<QString, KdeObservatory::Project> &projectsInView, const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    TopActiveProjectsView(QHash<QString, bool> topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, const QRectF &rect, QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~TopActiveProjectsView();
 
 private:
-    const QMap<QString, KdeObservatory::Project> &m_projectsInView;
+    const QHash<QString, bool> &m_topActiveProjectsViewProjects;
+    const QMap<QString, KdeObservatory::Project> &m_projects;
 };
 
 #endif
