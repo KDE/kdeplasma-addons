@@ -7,10 +7,23 @@
 
 class QTimer;
 class QGraphicsProxyWidget;
+class QGraphicsLinearLayout;
 
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
+class KdeObservatoryConfigTopActiveProjects;
 class CommitCollector;
+
+namespace Plasma
+{
+    class Label;
+    class PushButton;
+}
+
+namespace Ui
+{
+    class KdeObservatoryConfigTopActiveProjects;
+}
 
 class KdeObservatory : public Plasma::Applet
 {
@@ -41,6 +54,7 @@ private:
 
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
+    KdeObservatoryConfigTopActiveProjects *m_configTopActiveProjects;
 
     // Config - General
     int  m_commitExtent;
@@ -55,9 +69,16 @@ private:
     // Config - Projects
     QMap<QString, Project> m_projects;
 
+    // Config - Top Active Projects
+    QHash<QString, bool> m_topActiveProjectsViews;
+
     // Main Layout
+    QGraphicsLinearLayout *m_horizontalLayout;
     QGraphicsWidget *m_viewContainer;
     QGraphicsProxyWidget *m_progressProxy;
+    Plasma::Label *m_updateLabel;
+    Plasma::PushButton *m_right;
+    Plasma::PushButton *m_left;
 
     QList<QGraphicsWidget *> m_views;
     int m_currentView;

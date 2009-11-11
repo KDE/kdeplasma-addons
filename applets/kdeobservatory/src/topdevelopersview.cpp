@@ -31,7 +31,7 @@ TopDevelopersView::TopDevelopersView(const QMap<QString, KdeObservatory::Project
         QMapIterator<int, QString> i3(projectDevelopers);
         i3.toBack();
 
-        QGraphicsWidget *container = createView(i18n("Top Commiters") + " - " + project);
+        QGraphicsWidget *container = createView(i18n("Top Developers") + " - " + project);
 
         int maxRank = 0;
         qreal width = container->geometry().width();

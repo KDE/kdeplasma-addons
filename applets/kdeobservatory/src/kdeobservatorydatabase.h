@@ -18,6 +18,7 @@ public:
 
 private:
     KdeObservatoryDatabase();
+    void init();
 
     static KdeObservatoryDatabase *m_kdeObservatoryDatabase;
     QSqlDatabase m_db;

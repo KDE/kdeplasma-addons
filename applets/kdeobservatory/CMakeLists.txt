@@ -20,6 +20,7 @@ set(kdeobservatory_SRCS
     src/kdeobservatorydatabase.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
+    src/kdeobservatoryconfigtopactiveprojects.cpp
 )
 
 kde4_add_ui_files(kdeobservatory_SRCS
@@ -38,5 +39,3 @@ install(TARGETS plasma_applet_kdeobservatory
  
 install(FILES plasma-applet-kdeobservatory.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-
-add_subdirectory(db)

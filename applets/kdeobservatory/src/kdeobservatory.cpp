@@ -10,12 +10,14 @@
 
 #include <KConfig>
 #include <KConfigDialog>
+#include <KGlobalSettings>
 
 #include <Plasma/PushButton>
+#include <Plasma/Label>
 
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
-#include "ui_kdeobservatoryconfigtopactiveprojects.h"
+#include "kdeobservatoryconfigtopactiveprojects.h"
 
 #include "commitcollector.h"
 #include "topactiveprojectsview.h"
@@ -79,6 +81,15 @@ void KdeObservatory::init()
         m_projects[projectNames.at(i)] = project;
     }
 
+    // Config - Top Active Projects
+    QStringList topActiveProjectsViewNames = m_configGroup.readEntry("topActiveProjectsViewNames", QStringList());
+    QList<bool> topActiveProjectsViewActives = m_configGroup.readEntry("topActiveProjectsViewActives", QList<bool>());
+
+    m_topActiveProjectsViews.clear();
+    int topActiveProjectsViewsCount = topActiveProjectsViewNames.count();
+    for (int i = 0; i < topActiveProjectsViewsCount; ++i)
+        m_topActiveProjectsViews[topActiveProjectsViewNames.at(i)] = topActiveProjectsViewActives.at(i);
+
     // Main Layout
     QGraphicsWidget *container = new QGraphicsWidget(this);
 
@@ -86,16 +97,17 @@ void KdeObservatory::init()
     m_viewContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_viewContainer->setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
 
-    Plasma::PushButton *right = new Plasma::PushButton(container);
-    Plasma::PushButton *left = new Plasma::PushButton(container);
-    right->setIcon(KIcon("go-next-view"));
-    left->setIcon(KIcon("go-previous-view"));
-    right->nativeWidget()->setToolTip(i18n("Go to next view"));
-    left->nativeWidget()->setToolTip(i18n("Go to previous view"));
-    right->setMaximumSize(22, 22);
-    left->setMaximumSize(22, 22);
-    connect(right->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewRight()));
-    connect(left->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewLeft()));
+    m_right = new Plasma::PushButton(container);
+    m_right->nativeWidget()->setIcon(KIcon("go-next-view"));
+    m_right->nativeWidget()->setToolTip(i18n("Go to previous view"));
+    m_right->setMaximumSize(22, 22);
+    connect(m_right->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewRight()));
+
+    m_left = new Plasma::PushButton(container);
+    m_left->nativeWidget()->setIcon(KIcon("go-previous-view"));
+    m_left->nativeWidget()->setToolTip(i18n("Go to next view"));
+    m_left->setMaximumSize(22, 22);
+    connect(m_left->nativeWidget(), SIGNAL(clicked()), this, SLOT(moveViewLeft()));
 
     m_progressProxy = new QGraphicsProxyWidget(container);
     QProgressBar *collectorProgress = new QProgressBar;
@@ -104,15 +116,21 @@ void KdeObservatory::init()
     m_progressProxy->setWidget(collectorProgress);
     m_progressProxy->hide();
 
-    QGraphicsLinearLayout *horizontalLayout = new QGraphicsLinearLayout(Qt::Horizontal);
-    horizontalLayout->addItem(left);
-    horizontalLayout->addItem(m_progressProxy);
-    horizontalLayout->addItem(right);
-    horizontalLayout->setMaximumHeight(22);
+    m_updateLabel = new Plasma::Label(container);
+    m_updateLabel->setText("");
+    m_updateLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_updateLabel->setFont(KGlobalSettings::smallestReadableFont());
+    m_updateLabel->setAlignment(Qt::AlignCenter);
+
+    m_horizontalLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    m_horizontalLayout->addItem(m_left);
+    m_horizontalLayout->addItem(m_updateLabel);
+    m_horizontalLayout->addItem(m_right);
+    m_horizontalLayout->setMaximumHeight(22);
 
     QGraphicsLinearLayout *verticalLayout = new QGraphicsLinearLayout(Qt::Vertical);
     verticalLayout->addItem(m_viewContainer);
-    verticalLayout->addItem(horizontalLayout);
+    verticalLayout->addItem(m_horizontalLayout);
     container->setLayout(verticalLayout);
     container->setGeometry(contentsRect());
 
@@ -136,10 +154,13 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects = new KdeObservatoryConfigProjects(parent);
     parent->addPage(m_configProjects, i18n("Projects"), "project-development");
 
-    QWidget *configTopActiveProjects = new QWidget(parent);
-    Ui::KdeObservatoryConfigTopActiveProjects *ui_configTopActiveProjects = new Ui::KdeObservatoryConfigTopActiveProjects;
-    ui_configTopActiveProjects->setupUi(configTopActiveProjects);
-    parent->addPage(configTopActiveProjects, i18n("Top Active Projects"), "svn-commit");
+    m_configTopActiveProjects = new KdeObservatoryConfigTopActiveProjects(parent);
+    parent->addPage(m_configTopActiveProjects, i18n("Top Active Projects"), "svn-commit");
+
+    connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
+            m_configTopActiveProjects, SLOT(projectAdded(const QString &, const QString &)));
+    connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
+            m_configTopActiveProjects, SLOT(projectRemoved(const QString &)));
 
     // Config - General
     m_configGeneral->commitExtent->setValue(m_commitExtent);
@@ -172,12 +193,12 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
     // Config - Top Active Projects
-    foreach(QString projectName, m_projects.keys())
+    QHashIterator<QString, bool> i(m_topActiveProjectsViews);
+    while (i.hasNext())
     {
-        Project project = m_projects.value(projectName);
-        QListWidgetItem *item = new QListWidgetItem(projectName, ui_configTopActiveProjects->projectsInTopActiveProjectsView);
-        item->setCheckState(Qt::Checked);
-        item->setIcon(KIcon(project.icon));
+        i.next();
+        Project project = m_projects[i.key()];
+        m_configTopActiveProjects->createListWidgetItem(i.key(), project.icon, i.value());
     }
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
@@ -244,6 +265,22 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
+    // Top active projects properties
+    m_topActiveProjectsViews.clear();
+    QStringList topActiveProjectsViewNames;
+    QList<bool> topActiveProjectsViewActives;
+    for (int i = 0; i < m_configTopActiveProjects->projectsInTopActiveProjectsView->count(); ++i)
+    {
+        QListWidgetItem *item = m_configTopActiveProjects->projectsInTopActiveProjectsView->item(i);
+        QString viewName = item->text();
+        bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
+        m_topActiveProjectsViews[viewName] = viewActive;
+        topActiveProjectsViewNames << viewName;
+        topActiveProjectsViewActives << viewActive;
+    }
+    m_configGroup.writeEntry("topActiveProjectsViewNames", topActiveProjectsViewNames);
+    m_configGroup.writeEntry("topActiveProjectsViewActives", topActiveProjectsViewActives);
+
     emit configNeedsSaving();
 
     runCollectors();
@@ -252,7 +289,13 @@ void KdeObservatory::configAccepted()
 void KdeObservatory::collectFinished()
 {
     setBusy(false);
+    m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
     m_progressProxy->hide();
+    m_horizontalLayout->removeItem(m_progressProxy);
+    m_horizontalLayout->insertItem(1, m_updateLabel);
+    m_updateLabel->show();
+    m_right->setEnabled(true);
+    m_left->setEnabled(true);
 
     TopActiveProjectsView *topActiveProjectsView = new TopActiveProjectsView(m_projects, m_viewContainer->geometry(), m_viewContainer);
     TopDevelopersView *topDevelopersView = new TopDevelopersView(m_projects, m_viewContainer->geometry(), m_viewContainer);
@@ -323,8 +366,13 @@ void KdeObservatory::runCollectors()
 {
     foreach(QGraphicsWidget *widget, m_views)
         widget->hide();
+    m_right->setEnabled(false);
+    m_left->setEnabled(false);
 
     setBusy(true);
+    m_updateLabel->hide();
+    m_horizontalLayout->removeItem(m_updateLabel);
+    m_horizontalLayout->insertItem(1, m_progressProxy);
     m_progressProxy->show();
     m_collector->run();
 }

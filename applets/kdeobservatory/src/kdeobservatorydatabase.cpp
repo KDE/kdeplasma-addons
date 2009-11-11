@@ -1,5 +1,6 @@
 #include "kdeobservatorydatabase.h"
 
+#include <QFile>
 #include <QVariant>
 #include <QSqlError>
 
@@ -81,9 +82,20 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
 KdeObservatoryDatabase::KdeObservatoryDatabase()
 : m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    m_db.setDatabaseName(KStandardDirs::locate("data", "kdeobservatory/data/kdeobservatory.db"));
+    bool databaseExists = QFile(KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db")).exists();
+    m_db.setDatabaseName(KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db"));
     if (!m_db.open())
     {
         qDebug() << "Erro ao abrir o banco de dados";
     }
+    if (!databaseExists)
+        init();
+}
+
+void KdeObservatoryDatabase::init()
+{
+    m_query.clear();
+    m_query.prepare("CREATE TABLE commits (insert_date datetime, commit_date date, subject text, developer text)");
+    if (!m_query.exec())
+        kDebug() << "Error when creating database -" << m_db.lastError();
 }

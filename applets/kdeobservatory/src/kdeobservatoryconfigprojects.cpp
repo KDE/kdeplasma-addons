@@ -42,6 +42,7 @@ void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
         createTableWidgetItem(ui_configProject->projectName->text(), ui_configProject->commitSubject->text(), ui_configProject->icon->icon());
         projects->resizeColumnsToContents();
         projects->horizontalHeader()->setStretchLastSection(true);
+        emit projectAdded(ui_configProject->projectName->text(), ui_configProject->icon->icon());
     }
 
     delete ui_configProject;
@@ -53,7 +54,11 @@ void KdeObservatoryConfigProjects::on_psbRemoveProject_clicked()
     QTableWidgetItem *currentItem;
     if ((currentItem = projects->currentItem()))
         if (KMessageBox::questionYesNo(this, "Are you sure you want to remove project '" + currentItem->text() + "' ?", "Remove projet") == KMessageBox::Yes)
+        {
+            QString projectName = currentItem->text();
             projects->removeRow(currentItem->row());
+            emit projectRemoved(projectName);
+        }
 }
 
 void KdeObservatoryConfigProjects::on_psbEditProject_clicked()

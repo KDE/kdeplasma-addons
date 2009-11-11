@@ -2,7 +2,6 @@
 #define KDEOBSERVATORYCONFIGPROJECTS_HEADER
 
 #include <QWidget>
-#include <QStandardItemModel>
 #include "ui_kdeobservatoryconfigprojects.h"
 
 class KdeObservatoryConfigProjects : public QWidget, public Ui::KdeObservatoryConfigProjects
@@ -13,6 +12,11 @@ public:
     virtual ~KdeObservatoryConfigProjects();
 
     void createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &icon);
+
+Q_SIGNALS:
+    void projectAdded(const QString &projectName, const QString &icon);
+    void projectRemoved(const QString &projectName);
+
 public Q_SLOTS:
     void on_psbAddProject_clicked();
     void on_psbRemoveProject_clicked();
