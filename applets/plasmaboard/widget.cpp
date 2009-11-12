@@ -145,17 +145,26 @@ void PlasmaboardWidget::resetKeyboard(){
 			m_layout->removeAt(i--);
 		}
 
-                qDeleteAll(funcKeys);
+		//qDeleteAll(funcKeys);
+		foreach(BoardKey* key, funcKeys){
+		    key->deleteLater();
+		}
                 funcKeys.clear();
 
-                qDeleteAll(alphaKeys);
+		//qDeleteAll(alphaKeys);
+		foreach(BoardKey* key, funcKeys){
+		    key->deleteLater();
+		}
                 alphaKeys.clear();
 
 		basicKeys = false;
 	}
 
 	if( extendedKeys ) {
-                qDeleteAll(extKeys);
+		//qDeleteAll(extKeys);
+		foreach(BoardKey* key, funcKeys){
+		    key->deleteLater();
+		}
                 extKeys.clear();
 		extendedKeys = false;
 	}
