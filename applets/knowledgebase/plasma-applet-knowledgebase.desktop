@@ -2,6 +2,7 @@
 Name=KnowledgeBase
 Name[en_GB]=KnowledgeBase
 Name[et]=Teadmusbaas
+Name[fr]=Base de connaissances
 Name[nb]=Kunnskapsbase
 Name[nds]=KnowledgeBase
 Name[pt]=Base de Conhecimento
@@ -14,6 +15,7 @@ Name[zh_TW]=知識庫
 Comment=Opendesktop Knowledgebase
 Comment[en_GB]=Opendesktop Knowledgebase
 Comment[et]=Opendesktopi teadmusbaas
+Comment[fr]=Base de connaissances du projet Opendesktop
 Comment[nb]=Opendesktop kunnskapsbase
 Comment[nds]=Opendesktop-Wetendatenbank
 Comment[pt]=Base de Conhecimento do OpenDesktop
