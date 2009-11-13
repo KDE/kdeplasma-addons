@@ -69,7 +69,7 @@ void TopDevelopersView::updateViews()
 //            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
 //            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
 
-            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + developer, commiterRect);
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + developer.split(" ")[0], commiterRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
             commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
             QFontMetrics fontMetricsNumber(commitsNumber->font());

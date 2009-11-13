@@ -388,6 +388,7 @@ void KdeObservatory::collectFinished()
 {
     prepareUpdateViews();
 
+    qDebug() << "Setting busy false";
     setBusy(false);
     m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
     m_progressProxy->hide();
@@ -457,6 +458,7 @@ void KdeObservatory::runCollectors()
     m_right->setEnabled(false);
     m_left->setEnabled(false);
 
+    qDebug() << "Setting busy true";
     setBusy(true);
     m_updateLabel->hide();
     m_horizontalLayout->removeItem(m_updateLabel);
