@@ -700,6 +700,7 @@ void ComicApplet::updateSize()
 
     createLayout();
     mMainWidget->resize( mLastSize );
+    mImageWidget->update();
     emit sizeHintChanged(Qt::PreferredSize);
     emit appletTransformedItself();
 }
