@@ -37,7 +37,7 @@
 #include <QLabel>
 #include <KConfigGroup>
 #include <Plasma/BusyWidget>
-
+#include "Helpers.h"
 
 #define BACKSPACEKEY 0
 #define TABKEY 1
@@ -69,6 +69,9 @@
 
 #define FIRST_ROW 1
 
+
+QChar Helpers::mapXtoUTF8[0xffff+1];
+
 PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     : Plasma::Containment(parent)
 {
@@ -79,6 +82,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    Helpers::buildUp();
     isLevel2 = false;
     isAlternative = false;
     isLocked = false;

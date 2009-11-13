@@ -22,15 +22,16 @@
 #ifndef WIDGET_H_
 #define WIDGET_H_
 
+
 #include "BoardKey.h"
 #include "tooltip.h"
+
 #include <plasma/applet.h>
 #include <plasma/containment.h>
 #include <plasma/dataengine.h>
 #include <plasma/widgets/label.h>
 #include <QTimer>
-#include <QList>
-#include "Helpers.h"
+
 
 #define XK_TECHNICAL
 #define XK_PUBLISHING
@@ -41,6 +42,7 @@
 class AlphaNumKey;
 class FuncKey;
 class QGraphicsGridLayout;
+
 
 
 class PlasmaboardWidget : public Plasma::Containment

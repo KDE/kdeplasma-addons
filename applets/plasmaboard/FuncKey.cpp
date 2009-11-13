@@ -24,6 +24,7 @@
 #include "FuncKey.h"
 #include <QPainter>
 #include <plasma/theme.h>
+#include "Helpers.h"
 
 FuncKey::FuncKey(PlasmaboardWidget *parent):
 	BoardKey::BoardKey(parent), pressed(false) {
