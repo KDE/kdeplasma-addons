@@ -35,6 +35,7 @@
 #include <Plasma/Label>
 #include <Plasma/Frame>
 #include <Plasma/TextBrowser>
+#include <Plasma/ScrollWidget>
 
 // own
 #include "kbitemwidget.h"
@@ -89,6 +90,11 @@ void KBItemWidget::openBrowser()
 void KBItemWidget::openProfile()
 {
     KToolInvocation::invokeBrowser("http://www.opendesktop.org/usermanager/search.php?username="+m_ocsData["User"].toString());
+}
+
+QGraphicsWidget *KBItemWidget::dragTitle() const
+{
+    return m_title;
 }
 
 void KBItemWidget::setDetailsShown(const bool show)

@@ -51,6 +51,8 @@ public:
 
     Plasma::PopupApplet* m_applet;
 
+    QGraphicsWidget *dragTitle() const;
+
 public Q_SLOTS:
     void openBrowser();
     void openProfile();

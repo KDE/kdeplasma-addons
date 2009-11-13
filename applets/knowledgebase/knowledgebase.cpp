@@ -223,12 +223,13 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
             if (kb.startsWith("KnowledgeBase-")) {
                 Plasma::DataEngine::Data kbData = data[kb].value<Plasma::DataEngine::Data>();
 
-                KBItemWidget *kbItem = new KBItemWidget(this);
+                KBItemWidget *kbItem = new KBItemWidget(m_KBItemsPage);
                 connect(kbItem, SIGNAL(detailsVisibilityChanged(KBItemWidget *, bool)), this, SLOT(detailsClicked(KBItemWidget *, bool)));
 
                 kbItem->setAtticaData(kbData);
                 //we want inverted order
                 m_KBItemsLayout->insertItem(0, kbItem);
+                m_KBItemsScroll->registerAsDragHandle(kbItem->dragTitle());
                 QString user = kbData["User"].toString();
 
                 if (!m_kbItemsByUser.contains(user)) {
