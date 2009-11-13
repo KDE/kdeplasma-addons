@@ -20,7 +20,7 @@
 
 #include "BackspaceKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
+
 
 BackspaceKey::BackspaceKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_BackSpace, true);

@@ -20,7 +20,6 @@
 
 #include "ShiftKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
 
 ShiftKey::ShiftKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_Shift_L, false);

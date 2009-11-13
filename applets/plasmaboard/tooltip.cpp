@@ -23,8 +23,6 @@
 #include <QPalette>
 #include <QLabel>
 #include <QHBoxLayout>
-/*#include <QImage>
-#include <QBitmap>*/
 #include <plasma/theme.h>
 
 

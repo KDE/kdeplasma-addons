@@ -18,10 +18,8 @@
  ***************************************************************************/
 
 #include <QPainter>
-#include <QString>
-#include <plasma/theme.h>
 #include "BoardKey.h"
-#include "widget.h"
+#include <plasma/theme.h>
 
 BoardKey::BoardKey(PlasmaboardWidget *parent):
 	Plasma::PushButton(parent),fontSize(60) {

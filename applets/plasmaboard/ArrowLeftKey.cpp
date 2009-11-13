@@ -20,7 +20,6 @@
 
 #include "ArrowLeftKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
 
 ArrowLeftKey::ArrowLeftKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_Left, true);

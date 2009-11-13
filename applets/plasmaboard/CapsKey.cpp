@@ -20,7 +20,6 @@
 
 #include "CapsKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
 
 CapsKey::CapsKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_Caps_Lock, true);

@@ -33,10 +33,8 @@
 #include "ArrowRightKey.h"
 #include <QPainter>
 #include <QGraphicsGridLayout>
-#include <QGraphicsScene>
-#include <QLabel>
-#include <KConfigGroup>
-#include <Plasma/BusyWidget>
+#include <QTimer>
+
 #include "Helpers.h"
 
 #define BACKSPACEKEY 0

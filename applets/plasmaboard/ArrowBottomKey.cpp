@@ -20,7 +20,6 @@
 
 #include "ArrowBottomKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
 
 ArrowBottomKey::ArrowBottomKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_Down, true);

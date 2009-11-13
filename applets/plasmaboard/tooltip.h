@@ -23,6 +23,7 @@
 #include <QWidget>
 #include <plasma/framesvg.h>
 
+class QWidget;
 class QLabel;
 class QHBoxLayout;
 

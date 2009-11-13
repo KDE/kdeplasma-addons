@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 
-#include <QPainter>
+
 #include <kpushbutton.h>
 #include "AlphaNumKey.h"
 #include "Helpers.h"

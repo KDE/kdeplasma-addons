@@ -22,27 +22,23 @@
 #ifndef WIDGET_H_
 #define WIDGET_H_
 
-
-#include "BoardKey.h"
 #include "tooltip.h"
 
-#include <plasma/applet.h>
 #include <plasma/containment.h>
 #include <plasma/dataengine.h>
 #include <plasma/widgets/label.h>
-#include <QTimer>
+
 
 
 #define XK_TECHNICAL
 #define XK_PUBLISHING
 #define XK_LATIN1
-
 #include <X11/keysym.h>
 
 class AlphaNumKey;
 class FuncKey;
 class QGraphicsGridLayout;
-
+class QTimer;
 
 
 class PlasmaboardWidget : public Plasma::Containment

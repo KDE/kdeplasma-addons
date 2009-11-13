@@ -21,8 +21,6 @@
 #define KEY_H_
 
 #include <widget.h>
-#include <QPen>
-#include <QString>
 #include <plasma/widgets/pushbutton.h>
 
 class PlasmaboardWidget;
