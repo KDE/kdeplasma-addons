@@ -36,12 +36,11 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);  
     resize(300, 200);
 
-    // Collector in key order
     m_collectors["Commit Collector"] = new CommitCollector(this);
-//    m_collectors["Krazy Collector"] = new KrazyCollector(this);
+    m_collectors["Krazy Collector"] = new KrazyCollector(this);
 
-    // When last connector finishes its execution invoke collectFinished
     connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
+    connect(m_collectors["Krazy Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
 }
 
 KdeObservatory::~KdeObservatory()
@@ -329,21 +328,25 @@ void KdeObservatory::configAccepted()
 
 void KdeObservatory::collectFinished()
 {
-    prepareUpdateViews();
+    ++m_collectorsFinished;
+    if (m_collectorsFinished == m_collectors.count())
+    {
+        prepareUpdateViews();
 
-    setBusy(false);
-    m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-    m_progressProxy->hide();
-    m_horizontalLayout->removeItem(m_progressProxy);
-    m_horizontalLayout->insertItem(1, m_updateLabel);
-    m_updateLabel->show();
-    m_right->setEnabled(true);
-    m_left->setEnabled(true);
+        setBusy(false);
+        m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+        m_progressProxy->hide();
+        m_horizontalLayout->removeItem(m_progressProxy);
+        m_horizontalLayout->insertItem(1, m_updateLabel);
+        m_updateLabel->show();
+        m_right->setEnabled(true);
+        m_left->setEnabled(true);
 
-    updateViews();
+        updateViews();
 
-    m_configGroup.writeEntry("commitsRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->commitsRead());
-    m_synchronizationTimer->start();
+        m_configGroup.writeEntry("commitsRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->commitsRead());
+        m_synchronizationTimer->start();
+    }
 }
 
 void KdeObservatory::moveViewRight()
@@ -406,6 +409,7 @@ void KdeObservatory::runCollectors()
     m_horizontalLayout->insertItem(1, m_progressProxy);
     m_progressProxy->show();
 
+    m_collectorsFinished = 0;
     foreach (ICollector *collector, m_collectors)
         collector->run();
 }

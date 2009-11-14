@@ -106,6 +106,7 @@ private:
 
     // Collectors
     QMap<QString, ICollector *> m_collectors;
+    int m_collectorsFinished;
 };
 
 #endif
