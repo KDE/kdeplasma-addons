@@ -37,7 +37,7 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
     resize(300, 200);
 
     m_collectors["Commit Collector"] = new CommitCollector(this);
-    m_collectors["Krazy Collector"] = new KrazyCollector(this);
+    m_collectors["Krazy Collector"] = new KrazyCollector(m_projects, this);
 
     connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
     connect(m_collectors["Krazy Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
