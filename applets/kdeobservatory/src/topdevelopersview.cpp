@@ -61,19 +61,16 @@ void TopDevelopersView::updateViews()
             qreal widthFactor = (width-24)/maxRank;
             qreal yItem = (j*step)+2;
 
-            QGraphicsRectItem *commiterRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
-            commiterRect->setPos(0, yItem);
-            commiterRect->setPen(QPen(QColor(0, 0, 0)));
-            commiterRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            QGraphicsRectItem *developerRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
+            developerRect->setPos(0, yItem);
+            developerRect->setPen(QPen(QColor(0, 0, 0)));
+            developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
+            developerRect->setToolTip(developer + " - " + QString::number(rank) + " " + i18n("commits"));
 
-//            QGraphicsPixmapItem *icon = new QGraphicsPixmapItem(KIcon(m_projects[resultMap.key(rank)].icon).pixmap(22, 22), container);
-//            icon->setPos((qreal) widthFactor*rank+2, (qreal) yItem+((step-4)/2)-11);
-
-            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(QString::number(rank) + " - " + developer.split(" ")[0], commiterRect);
+            QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(developer.split(" ")[0], developerRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));
             commitsNumber->setFont(KGlobalSettings::smallestReadableFont());
-            QFontMetrics fontMetricsNumber(commitsNumber->font());
-            commitsNumber->setPos((qreal) 0, (qreal) ((commiterRect->rect().height())/2)-(fontMetricsNumber.height()/2));
+            commitsNumber->setPos((qreal) 0, (qreal) ((developerRect->rect().height())/2)-(commitsNumber->boundingRect().height()/2));
             j++;
         }
     }
