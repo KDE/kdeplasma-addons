@@ -93,6 +93,27 @@ QList< QPair<QString, int> > KdeObservatoryDatabase::commitHistory(const QString
     return result;
 }
 
+void KdeObservatoryDatabase::addKrazyError(const QString &project, const QString &fileType, const QString &testName, const QString &fileName, const QString &error)
+{
+    m_query.clear();
+    m_query.prepare("INSERT INTO krazy_errors (project, file_type, test_name, file_name, error) VALUES (:project, :file_type, :test_name, :file_name, :error)");
+    m_query.bindValue(":project", project);
+    m_query.bindValue(":file_type", fileType);
+    m_query.bindValue(":test_name", testName);
+    m_query.bindValue(":file_name", fileName);
+    m_query.bindValue(":error", error);
+    if (!m_query.exec())
+        kDebug() << "Error when inserting into table commits -" << m_db.lastError();
+}
+
+void KdeObservatoryDatabase::truncateKrazyErrors()
+{
+    m_query.clear();
+    m_query.prepare("delete from krazy_errors");
+    if (!m_query.exec())
+        kDebug() << "Error when truncating table commits -" << m_db.lastError();
+}
+
 KdeObservatoryDatabase::KdeObservatoryDatabase()
 : m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
@@ -110,6 +131,10 @@ void KdeObservatoryDatabase::init()
 {
     m_query.clear();
     m_query.prepare("CREATE TABLE commits (insert_date datetime, commit_date date, subject text, developer text)");
+    if (!m_query.exec())
+        kDebug() << "Error when creating database -" << m_db.lastError();
+    m_query.clear();
+    m_query.prepare("CREATE TABLE krazy_errors (project text, file_type text, test_name text, file_name text, error text)");
     if (!m_query.exec())
         kDebug() << "Error when creating database -" << m_db.lastError();
 }

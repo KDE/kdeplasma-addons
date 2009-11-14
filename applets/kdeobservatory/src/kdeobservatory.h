@@ -39,6 +39,7 @@ public:
     struct Project
     {
         QString commitSubject;
+        QString krazyReport;
         QString icon;
     };
 

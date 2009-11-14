@@ -11,7 +11,7 @@ public:
     KdeObservatoryConfigProjects(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~KdeObservatoryConfigProjects();
 
-    void createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &icon);
+    void createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &krazyReport, const QString &icon);
 
 Q_SIGNALS:
     void projectAdded(const QString &projectName, const QString &icon);

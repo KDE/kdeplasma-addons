@@ -36,6 +36,7 @@ void KdeObservatoryConfigViews::projectRemoved(const QString &projectName)
         QString view = i.key();
         m_projectsInView[view].remove(projectName);
     }
+    updateView(m_lastView);
 }
 
 void KdeObservatoryConfigViews::on_views_currentIndexChanged(QString view)
@@ -46,6 +47,11 @@ void KdeObservatoryConfigViews::on_views_currentIndexChanged(QString view)
         QListWidgetItem *item = projectsInView->item(i);
         m_projectsInView[m_lastView][item->text()] = item->checkState() == Qt::Checked ? true:false;
     }
+    updateView(view);
+}
+
+void KdeObservatoryConfigViews::updateView(const QString &view)
+{
     projectsInView->clear();
     QHashIterator<QString, bool> i(m_projectsInView[view]);
     while (i.hasNext())
@@ -58,3 +64,4 @@ void KdeObservatoryConfigViews::on_views_currentIndexChanged(QString view)
     }
     m_lastView = view;
 }
+

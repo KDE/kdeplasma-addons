@@ -21,6 +21,7 @@ public Q_SLOTS:
     void projectAdded(const QString &projectName, const QString &icon);
     void projectRemoved(const QString &projectName);
     void on_views_currentIndexChanged(QString view);
+    void updateView(const QString &view);
 
 private:
     QString m_lastView;

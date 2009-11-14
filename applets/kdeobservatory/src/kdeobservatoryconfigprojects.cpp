@@ -17,15 +17,17 @@ KdeObservatoryConfigProjects::~KdeObservatoryConfigProjects()
 {
 }
 
-void KdeObservatoryConfigProjects::createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &icon)
+void KdeObservatoryConfigProjects::createTableWidgetItem(const QString &projectName, const QString &commitSubject, const QString &krazyReport, const QString &icon)
 {
     QTableWidgetItem *itemProject = new QTableWidgetItem(KIcon(icon), projectName);
     itemProject->setData(Qt::UserRole, icon);
     QTableWidgetItem *itemCommitSubject = new QTableWidgetItem(commitSubject);
+    QTableWidgetItem *itemKrazyReport = new QTableWidgetItem(krazyReport);
     int rowCount = projects->rowCount();
     projects->setRowCount(rowCount+1);
     projects->setItem(rowCount, 0, itemProject);
     projects->setItem(rowCount, 1, itemCommitSubject);
+    projects->setItem(rowCount, 2, itemKrazyReport);
     projects->setRowHeight(rowCount, projects->rowHeight(rowCount)*0.75);
     projects->setCurrentItem(itemProject);
 }
@@ -39,7 +41,7 @@ void KdeObservatoryConfigProjects::on_psbAddProject_clicked()
 
     if (configProject->exec() == KDialog::Accepted)
     {
-        createTableWidgetItem(ui_configProject->projectName->text(), ui_configProject->commitSubject->text(), ui_configProject->icon->icon());
+        createTableWidgetItem(ui_configProject->projectName->text(), ui_configProject->commitSubject->text(), ui_configProject->krazyReport->text(), ui_configProject->icon->icon());
         projects->resizeColumnsToContents();
         projects->horizontalHeader()->setStretchLastSection(true);
         emit projectAdded(ui_configProject->projectName->text(), ui_configProject->icon->icon());
@@ -74,6 +76,7 @@ void KdeObservatoryConfigProjects::on_psbEditProject_clicked()
         int currentRow = projects->currentRow();
         ui_configProjects->projectName->setText(projects->item(currentRow, 0)->text());
         ui_configProjects->commitSubject->setText(projects->item(currentRow, 1)->text());
+        ui_configProjects->krazyReport->setText(projects->item(currentRow, 2)->text());
         ui_configProjects->icon->setIcon(projects->item(currentRow, 0)->data(Qt::UserRole).toString());
 
         if (configProjects->exec() == KDialog::Accepted)
@@ -82,6 +85,7 @@ void KdeObservatoryConfigProjects::on_psbEditProject_clicked()
             projects->item(currentRow, 0)->setIcon(KIcon(ui_configProjects->icon->icon()));
             projects->item(currentRow, 0)->setData(Qt::UserRole, ui_configProjects->icon->icon());
             projects->item(currentRow, 1)->setText(ui_configProjects->commitSubject->text());
+            projects->item(currentRow, 2)->setText(ui_configProjects->krazyReport->text());
         }
 
         delete ui_configProjects;

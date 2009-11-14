@@ -18,6 +18,9 @@ public:
     QMultiMap<int, QString> developersByProject(const QString &prefix);
     QList< QPair<QString, int> > commitHistory(const QString &prefix);
 
+    void addKrazyError(const QString &project, const QString &fileType, const QString &testName, const QString &fileName, const QString &error);
+    void truncateKrazyErrors();
+
 private:
     KdeObservatoryDatabase();
     void init();

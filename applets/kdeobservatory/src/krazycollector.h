@@ -25,7 +25,7 @@ private:
     int m_connectId;
     int m_projectsCollected;
     const QMap<QString, KdeObservatory::Project> &m_projects;
-    QMap<int, QString> m_idCommitSubjectMap;
+    QMap<int, QString> m_idProjectMap;
 };
 
 #endif

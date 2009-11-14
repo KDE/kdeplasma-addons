@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>180</height>
+    <height>195</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>411</width>
-    <height>180</height>
+    <height>195</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -48,14 +48,14 @@
      <item row="1" column="1">
       <widget class="KLineEdit" name="commitSubject"/>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="lblIcon">
        <property name="text">
         <string>Icon:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="KIconButton" name="icon">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -77,7 +77,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <spacer name="spacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -89,6 +89,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblKrazyReport">
+       <property name="text">
+        <string>Krazy report:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KLineEdit" name="krazyReport"/>
      </item>
     </layout>
    </item>
@@ -123,6 +133,13 @@
    <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>projectName</tabstop>
+  <tabstop>commitSubject</tabstop>
+  <tabstop>krazyReport</tabstop>
+  <tabstop>icon</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
