@@ -10,13 +10,11 @@ class QTimeLine;
 class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
-class CommitCollector;
+class ICollector;
 class IViewProvider;
+class KdeObservatoryConfigViews;
 class KdeObservatoryConfigGeneral;
 class KdeObservatoryConfigProjects;
-class KdeObservatoryConfigTopDevelopers;
-class KdeObservatoryConfigCommitHistory;
-class KdeObservatoryConfigTopActiveProjects;
 
 namespace Plasma
 {
@@ -61,9 +59,7 @@ private:
 
     KdeObservatoryConfigGeneral *m_configGeneral;
     KdeObservatoryConfigProjects *m_configProjects;
-    KdeObservatoryConfigTopActiveProjects *m_configTopActiveProjects;
-    KdeObservatoryConfigTopDevelopers *m_configTopDevelopers;
-    KdeObservatoryConfigCommitHistory *m_configCommitHistory;
+    KdeObservatoryConfigViews *m_configViews;
 
     // Config - General
     int  m_commitExtent;
@@ -87,6 +83,9 @@ private:
     // Config - Commit History
     QHash<QString, bool> m_commitHistoryViewProjects;
 
+    // Config - Krazy
+    QHash<QString, bool> m_krazyViewProjects;
+
     // Main Layout
     QGraphicsLinearLayout *m_horizontalLayout;
     QGraphicsWidget *m_viewContainer;
@@ -105,7 +104,8 @@ private:
     QTimer *m_synchronizationTimer;
     QTimeLine *m_transitionTimer;
 
-    CommitCollector *m_collector;
+    // Collectors
+    QMap<QString, ICollector *> m_collectors;
 };
 
 #endif

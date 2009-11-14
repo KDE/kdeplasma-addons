@@ -3,7 +3,6 @@
 #include <QUrl>
 #include <QDate>
 #include <QRegExp>
-#include <QStandardItemModel>
 
 #include "kdeobservatorydatabase.h"
 

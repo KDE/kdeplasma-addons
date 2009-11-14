@@ -14,25 +14,22 @@ set(kdeobservatory_SRCS
     src/icollector.cpp
     src/iviewprovider.cpp
     src/kdeobservatory.cpp
+    src/krazycollector.cpp
     src/commitcollector.cpp
     src/topdevelopersview.cpp
     src/commithistoryview.cpp
     src/topactiveprojectsview.cpp
     src/kdeobservatorydatabase.cpp
+    src/kdeobservatoryconfigviews.cpp
     src/kdeobservatoryconfiggeneral.cpp
     src/kdeobservatoryconfigprojects.cpp
-    src/kdeobservatoryconfigtopdevelopers.cpp
-    src/kdeobservatoryconfigcommithistory.cpp
-    src/kdeobservatoryconfigtopactiveprojects.cpp
 )
 
 kde4_add_ui_files(kdeobservatory_SRCS
+		  src/ui/kdeobservatoryconfigviews.ui
 		  src/ui/kdeobservatoryconfiggeneral.ui
 		  src/ui/kdeobservatoryconfigproject.ui
 		  src/ui/kdeobservatoryconfigprojects.ui
-		  src/ui/kdeobservatoryconfigtopdevelopers.ui
-		  src/ui/kdeobservatoryconfigcommithistory.ui
-		  src/ui/kdeobservatoryconfigtopactiveprojects.ui
 )
  
 kde4_add_plugin(plasma_applet_kdeobservatory ${kdeobservatory_SRCS})

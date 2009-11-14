@@ -15,13 +15,13 @@
 #include <Plasma/Label>
 #include <Plasma/PushButton>
 
+#include "kdeobservatoryconfigviews.h"
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
-#include "kdeobservatoryconfigtopdevelopers.h"
-#include "kdeobservatoryconfigcommithistory.h"
-#include "kdeobservatoryconfigtopactiveprojects.h"
 
+#include "krazycollector.h"
 #include "commitcollector.h"
+
 #include "topdevelopersview.h"
 #include "commithistoryview.h"
 #include "topactiveprojectsview.h"
@@ -30,14 +30,18 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args),
-  m_transitionTimer(0),
-  m_collector (new CommitCollector(this))
+  m_transitionTimer(0)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);  
     resize(300, 200);
 
-    connect(m_collector, SIGNAL(collectFinished()), this, SLOT(collectFinished()));
+    // Collector in key order
+    m_collectors["Commit Collector"] = new CommitCollector(this);
+//    m_collectors["Krazy Collector"] = new KrazyCollector(this);
+
+    // When last connector finishes its execution invoke collectFinished
+    connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
 }
 
 KdeObservatory::~KdeObservatory()
@@ -48,9 +52,11 @@ void KdeObservatory::init()
 {
     m_configGroup = config();
 
-    m_collector->setCommitsRead(m_configGroup.readEntry("commitsRead", 0));
-    if (m_collector->commitsRead() == 0)
-        m_collector->setFullUpdate(true);
+    CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
+
+    commitCollector->setCommitsRead(m_configGroup.readEntry("commitsRead", 0));
+    if (commitCollector->commitsRead() == 0)
+        commitCollector->setFullUpdate(true);
 
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 1);
@@ -132,8 +138,8 @@ void KdeObservatory::init()
 
     m_progressProxy = new QGraphicsProxyWidget(container);
     QProgressBar *collectorProgress = new QProgressBar;
-    connect(m_collector, SIGNAL(progressMaximum(int)), collectorProgress, SLOT(setMaximum(int)));
-    connect(m_collector, SIGNAL(progressValue(int)), collectorProgress, SLOT(setValue(int)));
+    connect(commitCollector, SIGNAL(progressMaximum(int)), collectorProgress, SLOT(setMaximum(int)));
+    connect(commitCollector, SIGNAL(progressValue(int)), collectorProgress, SLOT(setValue(int)));
     m_progressProxy->setWidget(collectorProgress);
     m_progressProxy->hide();
 
@@ -169,7 +175,7 @@ void KdeObservatory::init()
     m_viewProviders["Top Developers"] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
     m_viewProviders["Commit History"] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
 
-    m_collector->setExtent(m_commitExtent);
+    commitCollector->setExtent(m_commitExtent);
     runCollectors();
 }
 
@@ -181,27 +187,19 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects = new KdeObservatoryConfigProjects(parent);
     parent->addPage(m_configProjects, i18n("Projects"), "project-development");
 
-    m_configTopActiveProjects = new KdeObservatoryConfigTopActiveProjects(parent);
-    parent->addPage(m_configTopActiveProjects, i18n("Top Active Projects"), "svn-commit");
-
-    m_configTopDevelopers = new KdeObservatoryConfigTopDevelopers(parent);
-    parent->addPage(m_configTopDevelopers, i18n("Top Developers"), "user-properties");
-
-    m_configCommitHistory = new KdeObservatoryConfigCommitHistory(parent);
-    parent->addPage(m_configCommitHistory, i18n("Commit History"), "view-history");
+    m_configViews = new KdeObservatoryConfigViews(parent);
+    m_configViews->m_projects = m_projects;
+    m_configViews->m_projectsInView["Top Active Projects"] = m_topActiveProjectsViewProjects;
+    m_configViews->m_projectsInView["Top Developers"] = m_topDevelopersViewProjects;
+    m_configViews->m_projectsInView["Commit History"] = m_commitHistoryViewProjects;
+    m_configViews->m_projectsInView["Krazy"] = m_krazyViewProjects;
+    m_configViews->on_views_currentIndexChanged("Top Active Projects");
+    parent->addPage(m_configViews, i18n("Views"), "view-presentation");
 
     connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
-            m_configTopActiveProjects, SLOT(projectAdded(const QString &, const QString &)));
+            m_configViews, SLOT(projectAdded(const QString &, const QString &)));
     connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
-            m_configTopActiveProjects, SLOT(projectRemoved(const QString &)));
-    connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
-            m_configTopDevelopers, SLOT(projectAdded(const QString &, const QString &)));
-    connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
-            m_configTopDevelopers, SLOT(projectRemoved(const QString &)));
-    connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
-            m_configCommitHistory, SLOT(projectAdded(const QString &, const QString &)));
-    connect(m_configProjects, SIGNAL(projectRemoved(const QString &)),
-            m_configCommitHistory, SLOT(projectRemoved(const QString &)));
+            m_configViews, SLOT(projectRemoved(const QString &)));
 
     // Config - General
     m_configGeneral->commitExtent->setValue(m_commitExtent);
@@ -233,33 +231,6 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configProjects->projects->resizeColumnsToContents();
     m_configProjects->projects->horizontalHeader()->setStretchLastSection(true);
 
-    // Config - Top Active Projects
-    QHashIterator<QString, bool> i1(m_topActiveProjectsViewProjects);
-    while (i1.hasNext())
-    {
-        i1.next();
-        Project project = m_projects[i1.key()];
-        m_configTopActiveProjects->createListWidgetItem(i1.key(), project.icon, i1.value());
-    }
-
-    // Config - Top Developers
-    QHashIterator<QString, bool> i2(m_topDevelopersViewProjects);
-    while (i2.hasNext())
-    {
-        i2.next();
-        Project project = m_projects[i2.key()];
-        m_configTopDevelopers->createListWidgetItem(i2.key(), project.icon, i2.value());
-    }
-
-    // Config - Commit History
-    QHashIterator<QString, bool> i3(m_commitHistoryViewProjects);
-    while (i3.hasNext())
-    {
-        i3.next();
-        Project project = m_projects[i3.key()];
-        m_configCommitHistory->createListWidgetItem(i3.key(), project.icon, i3.value());
-    }
-
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 }
 
@@ -267,10 +238,12 @@ void KdeObservatory::configAccepted()
 {
     prepareUpdateViews();
 
+    CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
+
     bool commitExtentChanged = false;
     if (m_configGeneral->commitExtent->value() != m_commitExtent)
         if (m_configGeneral->commitExtent->value() > m_commitExtent)
-            m_collector->setFullUpdate(true);
+            commitCollector->setFullUpdate(true);
         else
             commitExtentChanged = true;
 
@@ -301,7 +274,7 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("viewNames", viewNames);
     m_configGroup.writeEntry("viewActives", viewActives);
 
-    m_collector->setExtent(m_commitExtent);
+    commitCollector->setExtent(m_commitExtent);
     m_viewTransitionTimer->setInterval(m_viewsDelay * 1000);
     m_synchronizationTimer->setInterval(m_synchronizationDelay * 1000);
 
@@ -328,57 +301,27 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
-    // Top active projects properties
-    m_topActiveProjectsViewProjects.clear();
-    QStringList topActiveProjectsViewNames;
-    QList<bool> topActiveProjectsViewActives;
-    for (int i = 0; i < m_configTopActiveProjects->projectsInTopActiveProjectsView->count(); ++i)
-    {
-        QListWidgetItem *item = m_configTopActiveProjects->projectsInTopActiveProjectsView->item(i);
-        QString viewName = item->text();
-        bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
-        m_topActiveProjectsViewProjects[viewName] = viewActive;
-        topActiveProjectsViewNames << viewName;
-        topActiveProjectsViewActives << viewActive;
-    }
-    m_configGroup.writeEntry("topActiveProjectsViewNames", topActiveProjectsViewNames);
-    m_configGroup.writeEntry("topActiveProjectsViewActives", topActiveProjectsViewActives);
+    m_configViews->on_views_currentIndexChanged("Top Active Projects");
+    m_topActiveProjectsViewProjects = m_configViews->m_projectsInView["Top Active Projects"];
+    m_topDevelopersViewProjects = m_configViews->m_projectsInView["Top Developers"];
+    m_commitHistoryViewProjects = m_configViews->m_projectsInView["Commit History"];
+    m_krazyViewProjects = m_configViews->m_projectsInView["Krazy"];
 
-    // Top developers properties
-    m_topDevelopersViewProjects.clear();
-    QStringList topDevelopersViewNames;
-    QList<bool> topDevelopersViewActives;
-    for (int i = 0; i < m_configTopDevelopers->projectsInTopDevelopersView->count(); ++i)
-    {
-        QListWidgetItem *item = m_configTopDevelopers->projectsInTopDevelopersView->item(i);
-        QString viewName = item->text();
-        bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
-        m_topDevelopersViewProjects[viewName] = viewActive;
-        topDevelopersViewNames << viewName;
-        topDevelopersViewActives << viewActive;
-    }
-    m_configGroup.writeEntry("topDevelopersViewNames", topDevelopersViewNames);
-    m_configGroup.writeEntry("topDevelopersViewActives", topDevelopersViewActives);
+    m_configGroup.writeEntry("topActiveProjectsViewNames", m_topActiveProjectsViewProjects.keys());
+    m_configGroup.writeEntry("topActiveProjectsViewActives", m_topActiveProjectsViewProjects.values());
 
-    // Commit history properties
-    m_commitHistoryViewProjects.clear();
-    QStringList commitHistoryViewNames;
-    QList<bool> commitHistoryViewActives;
-    for (int i = 0; i < m_configCommitHistory->projectsInCommitHistoryView->count(); ++i)
-    {
-        QListWidgetItem *item = m_configCommitHistory->projectsInCommitHistoryView->item(i);
-        QString viewName = item->text();
-        bool viewActive = (item->checkState() == Qt::Checked) ? true:false;
-        m_commitHistoryViewProjects[viewName] = viewActive;
-        commitHistoryViewNames << viewName;
-        commitHistoryViewActives << viewActive;
-    }
-    m_configGroup.writeEntry("commitHistoryViewNames", commitHistoryViewNames);
-    m_configGroup.writeEntry("commitHistoryViewActives", commitHistoryViewActives);
+    m_configGroup.writeEntry("topDevelopersViewNames", m_topDevelopersViewProjects.keys());
+    m_configGroup.writeEntry("topDevelopersViewActives", m_topDevelopersViewProjects.values());
+
+    m_configGroup.writeEntry("commitHistoryViewNames", m_commitHistoryViewProjects.keys());
+    m_configGroup.writeEntry("commitHistoryViewActives", m_commitHistoryViewProjects.values());
+
+    m_configGroup.writeEntry("krazyViewNames", m_krazyViewProjects.keys());
+    m_configGroup.writeEntry("krazyViewActives", m_krazyViewProjects.values());
 
     emit configNeedsSaving();
 
-    if (m_collector->fullUpdate() || commitExtentChanged)
+    if (commitCollector->fullUpdate() || commitExtentChanged)
         runCollectors();
     else
         updateViews();
@@ -388,7 +331,6 @@ void KdeObservatory::collectFinished()
 {
     prepareUpdateViews();
 
-    qDebug() << "Setting busy false";
     setBusy(false);
     m_updateLabel->setText(i18n("Last update: ") + QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
     m_progressProxy->hide();
@@ -400,7 +342,7 @@ void KdeObservatory::collectFinished()
 
     updateViews();
 
-    m_configGroup.writeEntry("commitsRead", m_collector->commitsRead());
+    m_configGroup.writeEntry("commitsRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->commitsRead());
     m_synchronizationTimer->start();
 }
 
@@ -418,7 +360,7 @@ void KdeObservatory::switchViews(int delta)
 {
     int previousView = m_currentView;
     int newView = m_currentView + delta;
-    m_currentView = (newView >= 0) ? newView % m_views.count():m_views.count()+newView;
+    m_currentView = (newView >= 0) ? newView % m_views.count():m_views.count() + newView;
 
     if (m_enableTransitionEffects)
     {
@@ -458,14 +400,14 @@ void KdeObservatory::runCollectors()
     m_right->setEnabled(false);
     m_left->setEnabled(false);
 
-    qDebug() << "Setting busy true";
     setBusy(true);
     m_updateLabel->hide();
     m_horizontalLayout->removeItem(m_updateLabel);
     m_horizontalLayout->insertItem(1, m_progressProxy);
     m_progressProxy->show();
 
-    m_collector->run();
+    foreach (ICollector *collector, m_collectors)
+        collector->run();
 }
 
 void KdeObservatory::prepareUpdateViews()
