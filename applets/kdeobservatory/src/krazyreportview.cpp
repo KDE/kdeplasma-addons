@@ -1,3 +1,23 @@
+/*************************************************************************
+ * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ *                                                                       *
+ * This program is free software; you can redistribute it and/or         *
+ * modify it under the terms of the GNU General Public License as        *
+ * published by the Free Software Foundation; either version 2 of        *
+ * the License or (at your option) version 3 or any later version        *
+ * accepted by the membership of KDE e.V. (or its successor approved     *
+ * by the membership of KDE e.V.), which shall act as a proxy            *
+ * defined in Section 14 of version 3 of the license.                    *
+ *                                                                       *
+ * This program is distributed in the hope that it will be useful,       *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ * GNU General Public License for more details.                          *
+ *                                                                       *
+ * You should have received a copy of the GNU General Public License     *
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
+ * ***********************************************************************/
+
 #include "krazyreportview.h"
 
 #include <QPen>
@@ -28,7 +48,7 @@ void KrazyReportView::updateViews()
     {
         i1.next();
         if (i1.value())
-            krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(m_projects[i1.key()].commitSubject.split("/").last());
+            krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(m_projects[i1.key()].commitSubject.split('/').last());
     }
 
     QMapIterator< QString, QMap<QString, QMultiMap<int, QString> > > i2(krazyReports);
@@ -77,9 +97,9 @@ void KrazyReportView::updateViews()
                 testNameRect->setPos(xItem, container->geometry().height() - testNameRect->rect().height());
                 testNameRect->setPen(QPen(QColor(0, 0, 0)));
                 testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
-                QString toolTip = "<html><body><h5>" + testName + " " + QString::number(rank) + " " + i18np("error", "errors", rank) + "<ul>";
+                QString toolTip = "<html><body><h5>" + testName + ' ' + QString::number(rank) + ' ' + i18np("error", "errors", rank) + "<ul>";
 
-                QStringList files = KdeObservatoryDatabase::self()->krazyFilesByProjectTypeAndTest(m_projects[i1.key()].commitSubject.split("/").last(), fileType, testName);
+                QStringList files = KdeObservatoryDatabase::self()->krazyFilesByProjectTypeAndTest(m_projects[i1.key()].commitSubject.split('/').last(), fileType, testName);
                 foreach (const QString &fileName, files)
                     toolTip += "<li>" + fileName + "</li>";
                 toolTip += "</ul></h5></body></html>";

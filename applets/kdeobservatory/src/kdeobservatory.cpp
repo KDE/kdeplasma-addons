@@ -1,3 +1,23 @@
+/*************************************************************************
+ * Copyright 2009 Sandro Andrade sandroandrade@kde.org                   *
+ *                                                                       *
+ * This program is free software; you can redistribute it and/or         *
+ * modify it under the terms of the GNU General Public License as        *
+ * published by the Free Software Foundation; either version 2 of        *
+ * the License or (at your option) version 3 or any later version        *
+ * accepted by the membership of KDE e.V. (or its successor approved     *
+ * by the membership of KDE e.V.), which shall act as a proxy            *
+ * defined in Section 14 of version 3 of the license.                    *
+ *                                                                       *
+ * This program is distributed in the hope that it will be useful,       *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ * GNU General Public License for more details.                          *
+ *                                                                       *
+ * You should have received a copy of the GNU General Public License     *
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
+ * ***********************************************************************/
+
 #include "kdeobservatory.h"
 
 #include <QTimer>
@@ -61,8 +81,6 @@ void KdeObservatory::init()
     // Config - General
     m_commitExtent = m_configGroup.readEntry("commitExtent", 1);
     m_synchronizationDelay = m_configGroup.readEntry("synchronizationDelay", 60);
-    m_cacheContents = m_configGroup.readEntry("cacheContents", true);
-    m_enableAnimations = m_configGroup.readEntry("enableAnimations", true);
     m_enableTransitionEffects = m_configGroup.readEntry("enableTransitionEffects", true);
     m_enableAutoViewChange = m_configGroup.readEntry("enableAutoViewChange", true);
     m_viewsDelay = m_configGroup.readEntry("viewsDelay", 5);
@@ -194,7 +212,7 @@ void KdeObservatory::init()
 void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 {
     m_configGeneral = new KdeObservatoryConfigGeneral(parent);
-    parent->addPage(m_configGeneral, i18n("General"), "applications-development");
+    parent->addPage(m_configGeneral, i18nc("General", "Global configuration options"), "applications-development");
 
     m_configProjects = new KdeObservatoryConfigProjects(parent);
     parent->addPage(m_configProjects, i18n("Projects"), "project-development");
@@ -216,8 +234,6 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     // Config - General
     m_configGeneral->commitExtent->setValue(m_commitExtent);
     m_configGeneral->synchronizationDelay->setTime(QTime(m_synchronizationDelay/3600, (m_synchronizationDelay/60)%60, m_synchronizationDelay%60));
-    m_configGeneral->cacheContents->setChecked(m_cacheContents);
-    m_configGeneral->enableAnimations->setChecked(m_enableAnimations);
     m_configGeneral->enableTransitionEffects->setChecked(m_enableTransitionEffects);
     m_configGeneral->enableAutoViewChange->setChecked(m_enableAutoViewChange);
     m_configGeneral->viewsDelay->setTime(QTime(m_viewsDelay/3600, (m_viewsDelay/60)%60, m_viewsDelay%60));
@@ -232,10 +248,12 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     }
 
     // Config - Projects
-    foreach(QString projectName, m_projects.keys())
+    QMapIterator<QString, Project> i(m_projects);
+    while (i.hasNext())
     {
-        Project project = m_projects.value(projectName);
-        m_configProjects->createTableWidgetItem(projectName, project.commitSubject, project.krazyReport, project.icon);
+        i.next();
+        Project project = i.value();
+        m_configProjects->createTableWidgetItem(i.key(), project.commitSubject, project.krazyReport, project.icon);
         m_configProjects->projects->setCurrentCell(0, 0);
     }
 
@@ -263,8 +281,6 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("commitExtent", m_commitExtent = m_configGeneral->commitExtent->value());
     QTime synchronizationDelay = m_configGeneral->synchronizationDelay->time();
     m_configGroup.writeEntry("synchronizationDelay", m_synchronizationDelay = synchronizationDelay.second() + synchronizationDelay.minute()*60 + synchronizationDelay.hour()*3600);
-    m_configGroup.writeEntry("cacheContents", m_cacheContents = (m_configGeneral->cacheContents->checkState() == Qt::Checked) ? true:false);
-    m_configGroup.writeEntry("enableAnimations", m_enableAnimations = (m_configGeneral->enableAnimations->checkState() == Qt::Checked) ? true:false);
     m_configGroup.writeEntry("enableTransitionEffects", m_enableTransitionEffects = (m_configGeneral->enableTransitionEffects->checkState() == Qt::Checked) ? true:false);
     m_configGroup.writeEntry("enableAutoViewChange", m_enableAutoViewChange = (m_configGeneral->enableAutoViewChange->checkState() == Qt::Checked) ? true:false);
     QTime viewsDelay = m_configGeneral->viewsDelay->time();
