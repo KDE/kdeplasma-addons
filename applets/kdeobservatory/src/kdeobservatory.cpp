@@ -51,6 +51,7 @@ K_EXPORT_PLASMA_APPLET(kdeobservatory, KdeObservatory)
 
 KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 : Plasma::Applet(parent, args),
+  m_currentView(0),
   m_transitionTimer(0)
 {
     setBackgroundHints(DefaultBackground);
@@ -398,40 +399,46 @@ void KdeObservatory::moveViewLeft()
 
 void KdeObservatory::switchViews(int delta)
 {
-    int previousView = m_currentView;
-    int newView = m_currentView + delta;
-    m_currentView = (newView >= 0) ? newView % m_views.count():m_views.count() + newView;
-
-    if (m_enableTransitionEffects)
+    if (m_views.count() > 0)
     {
-        QGraphicsWidget *previousViewWidget = m_views.at(previousView);
-        QGraphicsWidget *currentViewWidget = m_views.at(m_currentView);
-        currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
-        currentViewWidget->show();
+        int previousView = m_currentView;
+        int newView = m_currentView + delta;
+        m_currentView = (newView >= 0) ? (newView % m_views.count()):(m_views.count() + newView);
 
-        m_transitionTimer = new QTimeLine(500, this);
-        m_transitionTimer->setFrameRange(0, 1);
-        m_transitionTimer->setCurveShape(QTimeLine::EaseOutCurve);
+        if (m_enableTransitionEffects)
+        {
+            qDebug() << "Entrou";
+            QGraphicsWidget *previousViewWidget = m_views.at(previousView);
+            qDebug() << "P1";
+            QGraphicsWidget *currentViewWidget = m_views.at(m_currentView);
+            qDebug() << "P2";
+            currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
+            currentViewWidget->show();
 
-        QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation(this);
-        animationPrevious->setItem(previousViewWidget);
-        animationPrevious->setTimeLine(m_transitionTimer);
-        animationPrevious->setPosAt(0, QPointF(0, 0));
-        animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
+            m_transitionTimer = new QTimeLine(500, this);
+            m_transitionTimer->setFrameRange(0, 1);
+            m_transitionTimer->setCurveShape(QTimeLine::EaseOutCurve);
 
-        QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation(this);
-        animationNew->setItem(currentViewWidget);
-        animationNew->setTimeLine(m_transitionTimer);
-        animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));
-        animationNew->setPosAt(1, QPointF(0, 0));
+            QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation(this);
+            animationPrevious->setItem(previousViewWidget);
+            animationPrevious->setTimeLine(m_transitionTimer);
+            animationPrevious->setPosAt(0, QPointF(0, 0));
+            animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
 
-        m_transitionTimer->start();
-    }
-    else
-    {
-        m_views.at(previousView)->hide();
-        m_views.at(m_currentView)->setPos(0, 0);
-        m_views.at(m_currentView)->show();
+            QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation(this);
+            animationNew->setItem(currentViewWidget);
+            animationNew->setTimeLine(m_transitionTimer);
+            animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));
+            animationNew->setPosAt(1, QPointF(0, 0));
+
+            m_transitionTimer->start();
+        }
+        else
+        {
+            m_views.at(previousView)->hide();
+            m_views.at(m_currentView)->setPos(0, 0);
+            m_views.at(m_currentView)->show();
+        }
     }
 }
 
