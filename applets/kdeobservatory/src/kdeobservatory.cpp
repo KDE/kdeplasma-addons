@@ -66,6 +66,10 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 
 KdeObservatory::~KdeObservatory()
 {
+    delete m_viewProviders["Top Active Projects"];
+    delete m_viewProviders["Top Developers"];
+    delete m_viewProviders["Commit History"];
+    delete m_viewProviders["Krazy Report"];
 }
 
 void KdeObservatory::init()
@@ -405,17 +409,17 @@ void KdeObservatory::switchViews(int delta)
         currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
         currentViewWidget->show();
 
-        m_transitionTimer = new QTimeLine(500);
+        m_transitionTimer = new QTimeLine(500, this);
         m_transitionTimer->setFrameRange(0, 1);
         m_transitionTimer->setCurveShape(QTimeLine::EaseOutCurve);
 
-        QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation;
+        QGraphicsItemAnimation *animationPrevious = new QGraphicsItemAnimation(this);
         animationPrevious->setItem(previousViewWidget);
         animationPrevious->setTimeLine(m_transitionTimer);
         animationPrevious->setPosAt(0, QPointF(0, 0));
         animationPrevious->setPosAt(1, -delta*QPointF(previousViewWidget->geometry().width(), 0));
 
-        QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation;
+        QGraphicsItemAnimation *animationNew = new QGraphicsItemAnimation(this);
         animationNew->setItem(currentViewWidget);
         animationNew->setTimeLine(m_transitionTimer);
         animationNew->setPosAt(0, delta*QPointF(currentViewWidget->geometry().width(), 0));

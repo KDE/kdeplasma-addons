@@ -95,6 +95,7 @@ void CommitHistoryView::updateViews()
 
         QwtPlot *plot = new QwtPlot;
         plot->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        plot->setAttribute(Qt::WA_TranslucentBackground, true);
 
         plot->setAxisScale(QwtPlot::yLeft, 0, qRound((maxCommit/5.)+0.5)*5, qRound((maxCommit/5.)+0.5));
         plot->setAxisScale(QwtPlot::xBottom, minDate, maxDate, 1);

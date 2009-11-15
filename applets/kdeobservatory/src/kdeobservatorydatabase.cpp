@@ -153,7 +153,6 @@ QStringList KdeObservatoryDatabase::krazyFilesByProjectTypeAndTest(const QString
 {
     m_query.clear();
     m_query.prepare("select file_name, error from krazy_errors where project = '" + project + "' and file_type = '" + fileType + "' and test_name = '" + testName + '\'');
-    qDebug() << "Executando" << "select file_name from krazy_errors where project = '" + project + "' and file_type = '" + fileType + "' and test_name = '" + testName + '\'';
     QStringList result;
     if (!m_query.exec())
     {

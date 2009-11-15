@@ -66,7 +66,8 @@ void TopDevelopersView::updateViews()
 
         int maxRank = 0;
         qreal width = container->geometry().width();
-        qreal step = qMax(container->geometry().height() / projectDevelopers.size(), (qreal) 22);
+        //qreal step = qMax(container->geometry().height() / projectDevelopers.size(), (qreal) 22);
+        qreal step = 22;
 
         int j = 0;
         while (i3.hasPrevious())

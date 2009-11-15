@@ -59,7 +59,8 @@ void TopActiveProjectsView::updateViews()
 
     int maxRank = 0;
     qreal width = container->geometry().width();
-    qreal step = qMax(container->geometry().height() / topActiveProjects.size(), (qreal) 22);
+    //qreal step = qMax(container->geometry().height() / topActiveProjects.size(), (qreal) 22);
+    qreal step = 22;
 
     QMapIterator<int, QString> i2(topActiveProjects);
     i2.toBack();
