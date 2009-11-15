@@ -1,7 +1,6 @@
 #include "topdevelopersview.h"
 
 #include <QPen>
-#include <QFontMetrics>
 
 #include <KIcon>
 #include <KGlobalSettings>

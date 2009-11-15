@@ -85,7 +85,7 @@ private:
     QHash<QString, bool> m_commitHistoryViewProjects;
 
     // Config - Krazy
-    QHash<QString, bool> m_krazyViewProjects;
+    QHash<QString, bool> m_krazyReportViewProjects;
 
     // Main Layout
     QGraphicsLinearLayout *m_horizontalLayout;

@@ -110,20 +110,11 @@
      </item>
      <item>
       <property name="text">
-       <string>Krazy</string>
+       <string>Krazy Report</string>
       </property>
       <property name="icon">
        <iconset>
         <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Bugs</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../../../../../usr/share/icons/oxygen/16x16/emotes/face-sad.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/emotes/face-sad.png</iconset>
       </property>
      </item>
     </widget>

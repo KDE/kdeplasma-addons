@@ -19,6 +19,8 @@ public:
     QList< QPair<QString, int> > commitHistory(const QString &prefix);
 
     void addKrazyError(const QString &project, const QString &fileType, const QString &testName, const QString &fileName, const QString &error);
+    QMap<QString, QMultiMap<int, QString> > krazyErrorsByProject(const QString &project);
+    QStringList krazyFilesByProjectTypeAndTest(const QString &project, const QString &fileType, const QString &testName);
     void truncateKrazyErrors();
 
 private:

@@ -114,6 +114,37 @@ void KdeObservatoryDatabase::truncateKrazyErrors()
         kDebug() << "Error when truncating table commits -" << m_db.lastError();
 }
 
+QMap<QString, QMultiMap<int, QString> > KdeObservatoryDatabase::krazyErrorsByProject(const QString &project)
+{
+    m_query.clear();
+    m_query.prepare("select file_type, test_name, count(*) from krazy_errors where project = '" + project + "' group by file_type, test_name");
+    QMap<QString, QMultiMap<int, QString> > result;
+    if (!m_query.exec())
+    {
+        kDebug() << "Error when executing krazy errors by project -" << m_db.lastError();
+        return result;
+    }
+    while(m_query.next())
+        result[m_query.value(0).toString()].insert(m_query.value(2).toInt(), m_query.value(1).toString());
+    return result;
+}
+
+QStringList KdeObservatoryDatabase::krazyFilesByProjectTypeAndTest(const QString &project, const QString &fileType, const QString &testName)
+{
+    m_query.clear();
+    m_query.prepare("select file_name, error from krazy_errors where project = '" + project + "' and file_type = '" + fileType + "' and test_name = '" + testName + "'");
+    qDebug() << "Executando" << "select file_name from krazy_errors where project = '" + project + "' and file_type = '" + fileType + "' and test_name = '" + testName + "'";
+    QStringList result;
+    if (!m_query.exec())
+    {
+        kDebug() << "Error when executing krazy files by project, type, and test -" << m_db.lastError();
+        return result;
+    }
+    while(m_query.next())
+        result.append(m_query.value(0).toString() + ": " + m_query.value(1).toString());
+    return result;
+}
+
 KdeObservatoryDatabase::KdeObservatoryDatabase()
 : m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {

@@ -5,8 +5,6 @@
 
 #include "kdeobservatorydatabase.h"
 
-#include <QDebug>
-
 KrazyCollector::KrazyCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent),
   m_projects(projects)
@@ -41,34 +39,42 @@ void KrazyCollector::requestFinished (int id, bool error)
 
     QRegExp regExp1("<li><b><u>(.*)</u></b><ol>");
     QRegExp regExp2("<li><span class=\"toolmsg\">(.*)<b>");
-    QRegExp regExp3("<li><a href=\".*" + m_idProjectMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
+    QRegExp regExp3("<li><a href=\"[^<>]*" + m_idProjectMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
     regExp1.setMinimal(true);
     regExp2.setMinimal(true);
     regExp3.setMinimal(true);
 
-    int pos = 0;
-    enum State {Initial, FoundFileType, FoundTool};
-    State state = Initial;
-    QRegExp regExp = regExp1;
+    int pos = 0, pos1, pos2, pos3;
     QString fileType;
     QString testName;
-    while ((pos = regExp.indexIn(source, pos)) != -1)
+    pos1 = regExp1.indexIn(source, pos);
+    pos2 = regExp2.indexIn(source, pos);
+    pos3 = regExp3.indexIn(source, pos);
+    while (pos1 != -1 || pos2 != -1 || pos3 != -1)
     {
-        pos += regExp.matchedLength();
-        if (state == Initial)
+        pos = pos1;
+        if (pos2 != -1 && pos2 < pos)
+            pos = pos2;
+        if (pos3 != -1 && pos3 < pos)
+            pos = pos3;
+        if (pos == pos1)
         {
-            fileType = regExp.cap(1);
-            state = FoundFileType;
-            regExp = regExp2;
+            fileType = regExp1.cap(1);
+            pos += regExp1.matchedLength();
         }
-        else if (state == FoundFileType)
+        else if (pos == pos2)
         {
-            testName = regExp.cap(1);
-            state = FoundTool;
-            regExp = regExp3;
+            testName = regExp2.cap(1);
+            pos += regExp2.matchedLength();
         }
-        else
-            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectMap[id], fileType, testName, regExp.cap(1), regExp.cap(2));
+        else if (pos == pos3)
+        {
+            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectMap[id], fileType, testName, regExp3.cap(1), regExp3.cap(2));
+            pos += regExp3.matchedLength();
+        }
+        pos1 = regExp1.indexIn(source, pos);
+        pos2 = regExp2.indexIn(source, pos);
+        pos3 = regExp3.indexIn(source, pos);
     }
 
     ++m_projectsCollected;

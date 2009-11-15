@@ -22,6 +22,7 @@
 #include "krazycollector.h"
 #include "commitcollector.h"
 
+#include "krazyreportview.h"
 #include "topdevelopersview.h"
 #include "commithistoryview.h"
 #include "topactiveprojectsview.h"
@@ -118,6 +119,15 @@ void KdeObservatory::init()
     for (int i = 0; i < commitHistoryViewsCount; ++i)
         m_commitHistoryViewProjects[commitHistoryViewNames.at(i)] = commitHistoryViewActives.at(i);
 
+    // Config - Krazy Report
+    QStringList krazyReportViewNames = m_configGroup.readEntry("krazyReportViewNames", QStringList());
+    QList<bool> krazyReportViewActives = m_configGroup.readEntry("krazyReportViewActives", QList<bool>());
+
+    m_krazyReportViewProjects.clear();
+    int krazyReportViewsCount = krazyReportViewNames.count();
+    for (int i = 0; i < krazyReportViewsCount; ++i)
+        m_krazyReportViewProjects[krazyReportViewNames.at(i)] = krazyReportViewActives.at(i);
+
     // Main Layout
     QGraphicsWidget *container = new QGraphicsWidget(this);
 
@@ -175,6 +185,7 @@ void KdeObservatory::init()
     m_viewProviders["Top Active Projects"] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
     m_viewProviders["Top Developers"] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
     m_viewProviders["Commit History"] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
+    m_viewProviders["Krazy Report"] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer->geometry(), m_viewContainer);
 
     commitCollector->setExtent(m_commitExtent);
     runCollectors();
@@ -193,7 +204,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     m_configViews->m_projectsInView["Top Active Projects"] = m_topActiveProjectsViewProjects;
     m_configViews->m_projectsInView["Top Developers"] = m_topDevelopersViewProjects;
     m_configViews->m_projectsInView["Commit History"] = m_commitHistoryViewProjects;
-    m_configViews->m_projectsInView["Krazy"] = m_krazyViewProjects;
+    m_configViews->m_projectsInView["Krazy Report"] = m_krazyReportViewProjects;
     m_configViews->updateView("Top Active Projects");
     parent->addPage(m_configViews, i18n("Views"), "view-presentation");
 
@@ -306,11 +317,11 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("projectKrazyReports", projectKrazyReports);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
-    m_configViews->updateView("Top Active Projects");
+    m_configViews->on_views_currentIndexChanged("Top Active Projects");
     m_topActiveProjectsViewProjects = m_configViews->m_projectsInView["Top Active Projects"];
     m_topDevelopersViewProjects = m_configViews->m_projectsInView["Top Developers"];
     m_commitHistoryViewProjects = m_configViews->m_projectsInView["Commit History"];
-    m_krazyViewProjects = m_configViews->m_projectsInView["Krazy"];
+    m_krazyReportViewProjects = m_configViews->m_projectsInView["Krazy Report"];
 
     m_configGroup.writeEntry("topActiveProjectsViewNames", m_topActiveProjectsViewProjects.keys());
     m_configGroup.writeEntry("topActiveProjectsViewActives", m_topActiveProjectsViewProjects.values());
@@ -321,8 +332,8 @@ void KdeObservatory::configAccepted()
     m_configGroup.writeEntry("commitHistoryViewNames", m_commitHistoryViewProjects.keys());
     m_configGroup.writeEntry("commitHistoryViewActives", m_commitHistoryViewProjects.values());
 
-    m_configGroup.writeEntry("krazyViewNames", m_krazyViewProjects.keys());
-    m_configGroup.writeEntry("krazyViewActives", m_krazyViewProjects.values());
+    m_configGroup.writeEntry("krazyReportViewNames", m_krazyReportViewProjects.keys());
+    m_configGroup.writeEntry("krazyReportViewActives", m_krazyReportViewProjects.values());
 
     emit configNeedsSaving();
 
