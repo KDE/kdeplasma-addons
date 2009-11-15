@@ -407,11 +407,8 @@ void KdeObservatory::switchViews(int delta)
 
         if (m_enableTransitionEffects)
         {
-            qDebug() << "Entrou";
             QGraphicsWidget *previousViewWidget = m_views.at(previousView);
-            qDebug() << "P1";
             QGraphicsWidget *currentViewWidget = m_views.at(m_currentView);
-            qDebug() << "P2";
             currentViewWidget->setPos(currentViewWidget->geometry().width(), 0);
             currentViewWidget->show();
 
