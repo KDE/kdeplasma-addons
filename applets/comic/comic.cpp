@@ -132,7 +132,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     setHasConfigurationInterface( true );
     resize( 600, 250 );
 
-    setAspectRatioMode( Plasma::IgnoreAspectRatio );
     setPopupIcon( "face-smile-big" );
 
     graphicsWidget();
@@ -198,6 +197,8 @@ void ComicApplet::createLayout()
 
 void ComicApplet::init()
 {
+    connect(this, SIGNAL(appletTransformedByUser()), this, SLOT(slotAppletTransformedByUser()));
+
     Plasma::ToolTipManager::self()->registerWidget( this );
 
     loadConfig();
@@ -356,6 +357,12 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mComicTitle = data[ "Title" ].toString();
     mSuffixType = data[ "SuffixType" ].toString();
     mScaleComic = mActionScaleContent->isChecked();
+
+    if ( mScaleComic ) {
+        setAspectRatioMode( Plasma::IgnoreAspectRatio );
+    } else {
+        setAspectRatioMode( Plasma::KeepAspectRatio );
+    }
 
     // get the text at top
     QString tempTop;
@@ -689,6 +696,7 @@ void ComicApplet::updateSize()
     bottomArea = ( mShowComicIdentifier && !mLabelId->text().isEmpty() ) ? mLabelId->nativeWidget()->height() : bottomArea;
 
     QSizeF margins = mMainWidget->geometry().size() - mMainWidget->contentsRect().size();
+
     QSizeF availableSize = mMaxSize - margins;
     availableSize.setHeight( availableSize.height() - topArea - bottomArea );
     availableSize.setWidth( availableSize.width() - leftArea - rightArea );
@@ -699,8 +707,9 @@ void ComicApplet::updateSize()
     mLastSize.setWidth( mLastSize.width() + leftArea + rightArea );
 
     createLayout();
+
     mMainWidget->resize( mLastSize );
-    mImageWidget->update();
+    resize( mLastSize );
     emit sizeHintChanged(Qt::PreferredSize);
     emit appletTransformedItself();
 }
@@ -716,7 +725,7 @@ QSizeF ComicApplet::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
         return Applet::sizeHint(which, constraint);
     } else {
         QSize imageSize = mImage.size();
-        if (imageSize.width() * imageSize.width() > 0) {
+        if (!imageSize.isEmpty()) {
             return imageSize;
         } else {
             return Applet::sizeHint(which, constraint);
@@ -914,7 +923,6 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
                                 mMainWidget->contentsRect().bottom() - mFrame->size().height() - 5 );
                 mFrame->setPos( buttons );
             }
-            slotSizeChanged();
 
             break;
         default:
@@ -927,6 +935,11 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
 void ComicApplet::slotScaleToContent()
 {
     mScaleComic = mActionScaleContent->isChecked();
+    if ( mScaleComic ) {
+        setAspectRatioMode( Plasma::IgnoreAspectRatio );
+    } else {
+        setAspectRatioMode( Plasma::KeepAspectRatio );
+    }
     mImageWidget->setScaled( !mScaleComic );
 
     KConfigGroup cg = config();

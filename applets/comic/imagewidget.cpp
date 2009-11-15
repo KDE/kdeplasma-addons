@@ -179,6 +179,7 @@ void ImageWidget::setScaled( bool isScaled )
     if ( !mIsScaled ) {
         mDifferentImage = true;
         updateScrollBars();
+        update();
     }
 }
 
@@ -235,7 +236,5 @@ void ImageWidget::setIsTopToBottom( bool ttb )
 {
     mIsTopToBottom = ttb;
 }
-
-
 
 #include "imagewidget.moc"
