@@ -69,6 +69,7 @@ private Q_SLOTS:
     void addDir();
     void removeDir();
     void updateButtons();
+    void delayedUpdateSize();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -114,7 +115,7 @@ private:
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
     QPixmap m_pixmap;
-    bool m_dirty;
+    QTimer* m_updateTimer;
     Plasma::ToolButton* m_backButton;
     Plasma::ToolButton* m_nextButton;
     Plasma::Frame* m_slideFrame;

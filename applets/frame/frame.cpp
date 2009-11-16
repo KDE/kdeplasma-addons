@@ -68,6 +68,10 @@ Frame::Frame(QObject *parent, const QVariantList &args)
         m_currentUrl = KUrl();
     }
     setAssociatedApplicationUrls(m_currentUrl);
+
+    m_updateTimer = new QTimer(this);
+    m_updateTimer->setSingleShot(true);
+    connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(delayedUpdateSize()));
 }
 
 Frame::~Frame()
@@ -154,7 +158,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             resize(contentSizeHint());
             emit appletTransformedItself();
         }
-        m_dirty = true;
+        m_updateTimer->start(400);
     }
 
     if (constraints & Plasma::SizeConstraint) {
@@ -185,7 +189,8 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             m_slideFrame->setPos(x, y);
         }
 
-        m_dirty = true;
+        updatePicture();
+        m_updateTimer->start(400);
     }
 }
 
@@ -217,10 +222,6 @@ void Frame::updatePicture()
     int frameLines = qMin(m_frameOutline, (int)(sizeHint.height()/10));
     const QSize contentsSize = sizeHint.toSize();
 
-    if (contentsRect().size() != sizeHint) {
-        resize(sizeHint + QSizeF(boundingRect().size() - contentsRect().size()));
-        emit appletTransformedItself();
-    }
     if (m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty()) {
         setAssociatedApplicationUrls(KUrl::List());
     } else {
@@ -364,7 +365,6 @@ void Frame::updatePicture()
 
     p->end();
     delete p;
-    m_dirty = false;
     update();
 }
 
@@ -661,27 +661,25 @@ void Frame::checkSlideFrame()
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
 {
-
-    if (contentsRect().size() != contentSizeHint()) {
-        resize(contentSizeHint());
-        emit appletTransformedItself();
-    }
-
     //kDebug() << "Paint!";
     Q_UNUSED(option)
     if (m_slideShow) {
         // temporarily suspend the slideshow to allow time for loading the image
         m_mySlideShow->setUpdateInterval(0);
     }
-    if (m_dirty) {
-        updatePicture();
-    }
+
     p->drawPixmap(rect, m_pixmap, rect);
 
     if (m_slideShow) {
         // unsuspend the slideshow to allow time for loading the image
         m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
     }
+}
+
+void Frame::delayedUpdateSize()
+{
+    resize(contentSizeHint());
+    emit appletTransformedItself();
 }
 
 #include "frame.moc"
