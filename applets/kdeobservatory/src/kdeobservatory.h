@@ -60,6 +60,7 @@ public:
     {
         QString commitSubject;
         QString krazyReport;
+        QString krazyFilePrefix;
         QString icon;
     };
 

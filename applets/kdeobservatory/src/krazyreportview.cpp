@@ -48,7 +48,7 @@ void KrazyReportView::updateViews()
     {
         i1.next();
         if (i1.value())
-            krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(m_projects[i1.key()].commitSubject.split('/').last());
+            krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(i1.key());
     }
 
     QMapIterator< QString, QMap<QString, QMultiMap<int, QString> > > i2(krazyReports);
@@ -99,7 +99,7 @@ void KrazyReportView::updateViews()
                 testNameRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
                 QString toolTip = "<html><body><h5>" + testName + ' ' + QString::number(rank) + ' ' + i18np("error", "errors", rank) + "<ul>";
 
-                QStringList files = KdeObservatoryDatabase::self()->krazyFilesByProjectTypeAndTest(m_projects[i1.key()].commitSubject.split('/').last(), fileType, testName);
+                QStringList files = KdeObservatoryDatabase::self()->krazyFilesByProjectTypeAndTest(project, fileType, testName);
                 foreach (const QString &fileName, files)
                     toolTip += "<li>" + fileName + "</li>";
                 toolTip += "</ul></h5></body></html>";

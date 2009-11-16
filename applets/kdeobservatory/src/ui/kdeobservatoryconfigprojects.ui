@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>346</width>
+    <width>543</width>
     <height>248</height>
    </rect>
   </property>
@@ -36,6 +36,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QTableWidget" name="projects">
+         <property name="minimumSize">
+          <size>
+           <width>406</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
@@ -61,6 +67,11 @@
          <column>
           <property name="text">
            <string>Krazy Report</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Krazy File Prefix</string>
           </property>
          </column>
         </widget>

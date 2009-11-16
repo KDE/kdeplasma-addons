@@ -45,7 +45,8 @@ private:
     int m_connectId;
     int m_projectsCollected;
     const QMap<QString, KdeObservatory::Project> &m_projects;
-    QMap<int, QString> m_idProjectMap;
+    QMap<int, QString> m_idFilePrefixMap;
+    QMap<int, QString> m_idProjectNameMap;
 };
 
 #endif

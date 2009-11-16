@@ -65,7 +65,7 @@ void KrazyCollector::requestFinished (int id, bool error)
 
     QRegExp regExp1("<li><b><u>(.*)</u></b><ol>");
     QRegExp regExp2("<li><span class=\"toolmsg\">(.*)<b>");
-    QRegExp regExp3("<li><a href=\"[^<>]*" + m_idProjectMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
+    QRegExp regExp3("<li><a href=\"http://lxr.kde.org/source/[^<>]*" + m_idFilePrefixMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
     regExp1.setMinimal(true);
     regExp2.setMinimal(true);
     regExp3.setMinimal(true);
@@ -95,7 +95,7 @@ void KrazyCollector::requestFinished (int id, bool error)
         }
         else if (pos == pos3)
         {
-            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectMap[id], fileType, testName, regExp3.cap(1), regExp3.cap(2));
+            KdeObservatoryDatabase::self()->addKrazyError(m_idProjectNameMap[id], fileType, testName, regExp3.cap(1), regExp3.cap(2));
             pos += regExp3.matchedLength();
         }
         pos1 = regExp1.indexIn(source, pos);
@@ -111,5 +111,6 @@ void KrazyCollector::requestFinished (int id, bool error)
 void KrazyCollector::collectProject(const QString &project)
 {
     int id = get(QUrl::toPercentEncoding("/krazy/reports/" + m_projects[project].krazyReport + "/index.html", "!$&'()*+,;=:@/"));
-    m_idProjectMap[id] = m_projects[project].commitSubject.split('/').last();
+    m_idFilePrefixMap[id] = m_projects[project].krazyFilePrefix;
+    m_idProjectNameMap[id] = project;
 }

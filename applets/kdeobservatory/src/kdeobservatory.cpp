@@ -102,6 +102,7 @@ void KdeObservatory::init()
     QStringList projectNames = m_configGroup.readEntry("projectNames", QStringList());
     QStringList projectCommitSubjects = m_configGroup.readEntry("projectCommitSubjects", QStringList());
     QStringList projectKrazyReports = m_configGroup.readEntry("projectKrazyReports", QStringList());
+    QStringList projectKrazyFilePrefix = m_configGroup.readEntry("projectKrazyFilePrefix", QStringList());
     QStringList projectIcons = m_configGroup.readEntry("projectIcons", QStringList());
 
     m_projects.clear();
@@ -111,6 +112,7 @@ void KdeObservatory::init()
         Project project;
         project.commitSubject = projectCommitSubjects.at(i);
         project.krazyReport = projectKrazyReports.at(i);
+        project.krazyFilePrefix = projectKrazyFilePrefix.at(i);
         project.icon = projectIcons.at(i);
         m_projects[projectNames.at(i)] = project;
     }
@@ -258,7 +260,7 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     {
         i.next();
         Project project = i.value();
-        m_configProjects->createTableWidgetItem(i.key(), project.commitSubject, project.krazyReport, project.icon);
+        m_configProjects->createTableWidgetItem(i.key(), project.commitSubject, project.krazyReport, project.krazyFilePrefix, project.icon);
         m_configProjects->projects->setCurrentCell(0, 0);
     }
 
@@ -315,6 +317,7 @@ void KdeObservatory::configAccepted()
     QStringList projectNames;
     QStringList projectCommitSubjects;
     QStringList projectKrazyReports;
+    QStringList projectKrazyFilePrefix;
     QStringList projectIcons;
 
     m_projects.clear();
@@ -325,17 +328,20 @@ void KdeObservatory::configAccepted()
         Project project;
         project.commitSubject = m_configProjects->projects->item(i, 1)->text();
         project.krazyReport = m_configProjects->projects->item(i, 2)->text();
+        project.krazyFilePrefix = m_configProjects->projects->item(i, 3)->text();
         project.icon = m_configProjects->projects->item(i, 0)->data(Qt::UserRole).value<QString>();
         m_projects[m_configProjects->projects->item(i, 0)->text()] = project;
         projectNames << m_configProjects->projects->item(i, 0)->text();
         projectCommitSubjects << project.commitSubject;
         projectKrazyReports << project.krazyReport;
+        projectKrazyFilePrefix << project.krazyFilePrefix;
         projectIcons << project.icon;
     }
 
     m_configGroup.writeEntry("projectNames", projectNames);
     m_configGroup.writeEntry("projectCommitSubjects", projectCommitSubjects);
     m_configGroup.writeEntry("projectKrazyReports", projectKrazyReports);
+    m_configGroup.writeEntry("projectKrazyFilePrefix", projectKrazyFilePrefix);
     m_configGroup.writeEntry("projectIcons", projectIcons);
 
     m_configViews->on_views_currentIndexChanged("Top Active Projects");
