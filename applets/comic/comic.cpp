@@ -623,7 +623,7 @@ void ComicApplet::slotReload()
 
 void ComicApplet::slotStartTimer()
 {
-    if ( mSwitchTabTime && mSwitchTabs ) {
+    if ( mUseTabs && mSwitchTabTime && mSwitchTabs && mTabIdentifier.count() > 1 ) {
         mReloadTimer->start( mSwitchTabTime * 1000 );
     } else {
         mReloadTimer->stop();
