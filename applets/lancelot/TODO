@@ -30,8 +30,6 @@ TODO: L04 l (m) add proper size hints to layouts and widgets
 TODO: L05 l (m) move the groups mechanism away from Widget
              so that ordinary plasma widgets could be extended
              when needed. Add groups support to HoverIcon
-TODO: L06 m (e) The menu key should show the context menu just
-             like alt+enter
 
 Launcher Applet:
 None
@@ -50,15 +48,16 @@ Feature requests:
  - menu sorting - FINISHED
  - DnD searched applications - FINISHED
  - choosing the applications in documents and computer section - FINISHED
+ - The menu key should show the context menu just like alt+enter - FINISHED
+ - DnD fixed devices - FINISHED
+ - rearanging favorites by DnD - FINISHED
 
- - DnD fixed devices
  - width of categories section changeable - maybe
  - web history - page titles - interesting
  - hover activation for categories that are not in the last list of
      the PassagewayView - probably
  - hover-activation feedback animation - yes
  - tooltips for items that are too long to display - yes
- - rearanging favorites by DnD - most probably
  - mail message titles/senders - probably
  - status of mails in the contacts icon - possibly
  - add to panel/desktop action - probably
@@ -68,4 +67,5 @@ Feature requests:
  - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350)
  - Disk free space info - maybe
  - return the old logout dim-screen (https://bugs.kde.org/show_bug.cgi?id=196219)
+ - configurable sizes for item heights - maybe
 

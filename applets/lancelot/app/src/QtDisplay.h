@@ -1,6 +1,6 @@
 /*
  *   Copyright (C) 2005,2006,2007 by Siraj Razick <siraj@kde.org>
- *   Copyright (C) 2007 by Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 by Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,

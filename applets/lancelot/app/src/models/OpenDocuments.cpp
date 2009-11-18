@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic(at)kde.org>
  *   Copyright (C) 2007 Robert Knight <robertknight@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify

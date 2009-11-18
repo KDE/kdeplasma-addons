@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2007 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -36,7 +36,7 @@ AboutData::AboutData()
     addAuthor(
             ki18n("Ivan Čukić"),
             ki18n("Maintainer and lead developer"),
-            "ivan(at)fomentgroup.org",
+            "ivan.cukic(at)kde.org",
             "http://ivan.fomentgroup.org"
             );
 
