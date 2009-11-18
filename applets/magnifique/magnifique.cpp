@@ -156,6 +156,10 @@ bool Magnifique::eventFilter(QObject *watched, QEvent *event)
 
 void Magnifique::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
+    if (!m_view) {
+        return;
+    }
+
     qreal delta = 1;
 
     //don't allow too big zooming, for speed reason :/
