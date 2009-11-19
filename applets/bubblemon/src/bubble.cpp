@@ -122,6 +122,7 @@ Bubble::init()
         connect(m_engine, SIGNAL(sourceAdded(const QString)), this, SLOT(connectSensor()));
     }
     m_engine->connectSource(m_sensor, this, m_speed);
+    m_bubbleHeight = m_svg->elementSize("bubble").height();
 }
 
 void
@@ -447,7 +448,7 @@ Bubble::configAccepted()
 {
     KConfigGroup cg = config();
     if (m_animated != ui.animateBubbles->isChecked()) {
-        m_animated = !m_animated;
+        m_animated = ui.animateBubbles->isChecked();
         cg.writeEntry("animated", m_animated);
         if (m_animated)
             m_animator->start();
