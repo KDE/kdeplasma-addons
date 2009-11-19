@@ -64,8 +64,8 @@ class BlackBoardWidget : public QGraphicsWidget
         QString m_id;
         QColor m_color;
         QPixmap m_pixmap;
-        QPointF oldPoint;
-        QPainter p;
+        QPointF m_oldPoint;
+        QPainter m_painter;
 };
 
 #endif

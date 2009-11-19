@@ -39,7 +39,7 @@ BlackBoardWidget::BlackBoardWidget(Plasma::Applet *parent)
     m_parentApplet = parent;
     
     m_color = QColor(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    oldPoint = QPointF(-1, 0);
+    m_oldPoint = QPointF(-1, 0);
     
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(saveImage()));
@@ -69,11 +69,11 @@ void BlackBoardWidget::saveImage()
 
 void BlackBoardWidget::loadImage()
 {
-    p.end();
+    m_painter.end();
     m_pixmap.load(imagePath(), "PNG");
     update(contentsRect());
-    p.begin(&m_pixmap);
-    p.setPen(QPen(m_color, 3));
+    m_painter.begin(&m_pixmap);
+    m_painter.setPen(QPen(m_color, 3));
 }
 
 void BlackBoardWidget::mousePressEvent(QGraphicsSceneMouseEvent *)
@@ -85,41 +85,41 @@ void BlackBoardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     QPointF lastPos = event->lastPos();
 
-    if (oldPoint.x() != -1){
-        p.drawLine(oldPoint, lastPos);
+    if (m_oldPoint.x() != -1){
+        m_painter.drawLine(m_oldPoint, lastPos);
 
-        qreal x = qMin(lastPos.x(), oldPoint.x()) - 1;
-        qreal y = qMin(lastPos.y(), oldPoint.y()) - 1;
-        qreal w = qMax(lastPos.x(), oldPoint.x()) + 1 - x;
-        qreal h = qMax(lastPos.y(), oldPoint.y()) + 1 - y;
+        qreal x = qMin(lastPos.x(), m_oldPoint.x()) - 1;
+        qreal y = qMin(lastPos.y(), m_oldPoint.y()) - 1;
+        qreal w = qMax(lastPos.x(), m_oldPoint.x()) + 1 - x;
+        qreal h = qMax(lastPos.y(), m_oldPoint.y()) + 1 - y;
 
         update(x, y, w, h);
 	m_changed = true;
     }
 
-    oldPoint = lastPos;
+    m_oldPoint = lastPos;
 }
 
 void BlackBoardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
 {
     mouseMoveEvent(event);
-    oldPoint.setX(-1);
+    m_oldPoint.setX(-1);
 }
 
 void BlackBoardWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     Q_UNUSED(event)
     
-    if (p.isActive())
-        p.end();
+    if (m_painter.isActive())
+        m_painter.end();
     
     QPixmap tmpPixmap = m_pixmap;
     m_pixmap = QPixmap(contentsRect().width(), contentsRect().height());
     m_pixmap.fill(Qt::transparent);
 
-    p.begin(&m_pixmap);
-    p.drawPixmap(0, 0, tmpPixmap);
-    p.setPen(QPen(m_color, 3));
+    m_painter.begin(&m_pixmap);
+    m_painter.drawPixmap(0, 0, tmpPixmap);
+    m_painter.setPen(QPen(m_color, 3));
 }
 
 void BlackBoardWidget::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -132,7 +132,7 @@ void BlackBoardWidget::paint(QPainter *p, const QStyleOptionGraphicsItem *option
 void BlackBoardWidget::setBrushColor(QColor color)
 {
     m_color = color;
-    p.setPen(QPen(m_color, 3));
+    m_painter.setPen(QPen(m_color, 3));
 }
 
 void BlackBoardWidget::erase()
