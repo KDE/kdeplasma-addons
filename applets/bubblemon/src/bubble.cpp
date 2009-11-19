@@ -301,7 +301,6 @@ Bubble::drawLabel(QPainter *painter, const QStyleOptionGraphicsItem *option, con
 void
 Bubble::moveBubbles()
 {
-    kDebug() << "Bubble count:" << m_bubbleCount;
     if (!boundingRect().isEmpty() && int(m_bubbleHeight * m_bubbleCount) > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
         QRectF rect = boundingRect();
         QVector<QPoint>::iterator i;
