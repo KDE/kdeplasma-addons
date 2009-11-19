@@ -21,7 +21,9 @@
 #include "ScrollBar.h"
 #include "Widget.h"
 
+#include <Plasma/Animator>
 #include <QGraphicsSceneWheelEvent>
+#include <QDebug>
 
 #include <lancelot/layouts/FullBorderLayout.h>
 
@@ -68,6 +70,9 @@ public:
           vertical(NULL), horizontal(NULL),
           flags(ScrollPane::ClipScrollable)
     {
+        qDebug() << "Plasma::Animator";
+        q->setAcceptTouchEvents(true);
+        Plasma::Animator::self()->registerScrollingManager(q);
     }
 
     void updateViewport()
@@ -298,11 +303,16 @@ void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
 
 void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event) //>
 {
-    if (event->modifiers() & Qt::ControlModifier) {
-        d->horizontal->wheelEvent(event);
-    } else {
-        d->vertical->wheelEvent(event);
-    }
+    // TODO: Remove this - we are using Plasma::Animator::registerScrollingManager
+    // for wheel scrolling
+    Widget::wheelEvent(event);
+    return;
+
+    // if (event->modifiers() & Qt::ControlModifier) {
+    //     d->horizontal->wheelEvent(event);
+    // } else {
+    //     d->vertical->wheelEvent(event);
+    // }
 } //<
 
 void ScrollPane::setFlip(Plasma::Flip flip) //>
@@ -338,6 +348,26 @@ void ScrollPane::scrollTo(QRectF rect) //>
     } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
         scrollVertical(rect.right() - viewportSize.width());
     }
+} //<
+
+QSizeF ScrollPane::contentsSize() const //>
+{
+    return d->widget->sizeFor(currentViewportSize());
+} //<
+
+void ScrollPane::setScrollPosition(const QPointF &position) //>
+{
+    scrollTo(QRectF(position, currentViewportSize()));
+} //<
+
+QPointF ScrollPane::scrollPosition() const //>
+{
+    return QPointF(d->horizontal->value(), d->vertical->value());
+} //<
+
+QRectF ScrollPane::viewportGeometry() const //>
+{
+    return QRectF(QPointF(), currentViewportSize());
 } //<
 
 } // namespace Lancelot

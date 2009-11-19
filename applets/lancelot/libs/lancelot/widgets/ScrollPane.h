@@ -94,6 +94,10 @@ private:
 class LANCELOT_EXPORT ScrollPane: public Lancelot::Widget {
     Q_OBJECT
 
+    Q_PROPERTY(QPointF scrollPosition READ scrollPosition WRITE setScrollPosition)
+    Q_PROPERTY(QSizeF contentsSize READ contentsSize)
+    Q_PROPERTY(QRectF viewportGeometry READ viewportGeometry)
+
     L_WIDGET
     L_INCLUDE(lancelot/widgets/ScrollPane.h)
 
@@ -165,6 +169,27 @@ public:
      * @param rect area
      */
     void scrollTo(QRectF rect);
+
+    /**
+     * @return the size of the internal widget
+     */
+    QSizeF contentsSize() const;
+
+    /**
+     * Sets the position of the webpage relative to this widget
+     */
+    void setScrollPosition(const QPointF &position);
+
+    /**
+     * @return the position of the webpage relative to this widget
+     */
+    QPointF scrollPosition() const;
+
+    /**
+     * The geometry of the area that actually displays the web page
+     */
+    QRectF viewportGeometry() const;
+
 
 protected:
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
