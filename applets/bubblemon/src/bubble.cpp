@@ -48,6 +48,7 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_max(0),
        m_speed(1000),
        m_animID(-1),
+       m_bubbles(20),
        m_labelTransparency(0)
 {
     m_svg = new Plasma::Svg(this);
@@ -243,12 +244,16 @@ Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option
         clipPath.addRect(clipRect);
         painter->setClipPath(clipPath.intersected(fillPath));
         m_svg->paint(painter, m_svg->elementRect("fill"), "fill");
-        if (m_bubbles.size()>0 && m_animated && !shouldConserveResources()) {
+        if (m_bubbleCount>0 && m_animated && !shouldConserveResources()) {
             painter->setClipPath(clipPath.intersected(bubblePath));
-            foreach(const QPoint& p, m_bubbles) {
+            for(int i = 0;i<m_bubbleCount;i++) {
+                if (m_bubbles.at(i).y()<contentsRect.bottom())
+                    m_svg->paint(painter, m_bubbles.at(i), "bubble");
+            }
+            /*foreach(const QPoint& p, m_bubbles) {
                 if (p.y()<contentsRect.bottom())
                     m_svg->paint(painter, p, "bubble");
-            }
+            }*/
         }
         painter->setClipping(false);
     }
@@ -296,15 +301,16 @@ Bubble::drawLabel(QPainter *painter, const QStyleOptionGraphicsItem *option, con
 void
 Bubble::moveBubbles()
 {
-    if (!boundingRect().isEmpty() && int(m_bubbleHeight * m_bubbles.size()) > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
+    kDebug() << "Bubble count:" << m_bubbleCount;
+    if (!boundingRect().isEmpty() && int(m_bubbleHeight * m_bubbleCount) > 0 && m_max > 0 && m_animated && !shouldConserveResources()) {
         QRectF rect = boundingRect();
-        QList<QPoint>::iterator i;
+        QVector<QPoint>::iterator i;
         bool needsUpdate = false;
         int maxHeight = rect.height()-(m_val/(float)m_max*rect.height()+m_bubbleHeight);
         for(i=m_bubbles.begin();i!=m_bubbles.end();++i) {
             (*i).setY((*i).y()-m_bubbleSpeed);
             if ((*i).y()<maxHeight-m_bubbleHeight) {
-                (*i).setY(rect.bottom()+(qrand() % (int)( m_bubbleHeight*m_bubbles.size() ) ) );
+                (*i).setY(rect.bottom()+(qrand() % (int)( m_bubbleHeight*m_bubbleCount ) ) );
                 (*i).setX(qrand() % (int)rect.width());
                 needsUpdate = true;
             }
@@ -359,15 +365,16 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
     Plasma::ToolTipManager::self()->setContent(this, tip);
     
     if (m_animated && !shouldConserveResources()) {
-        int bubbleCount;
+        m_bubbleCount = ((float)m_val/(float)m_max)*20;
+        /*int bubbleCount;
         if (m_max>0)
             bubbleCount = ((float)m_val/(float)m_max)*20;
         else
-            bubbleCount = 0;
-        while(m_bubbles.size()<bubbleCount)
+            bubbleCount = 0;*/
+        /*while(m_bubbles.size()<bubbleCount)
             m_bubbles.append(QPoint(0, 0));
         while(m_bubbles.size()>bubbleCount)
-            m_bubbles.removeLast();
+            m_bubbles.removeLast();*/
         m_bubbleSpeed = (boundingRect().height()/20)*((float)m_val/m_max)*3;
         
         m_interpolator->stop();

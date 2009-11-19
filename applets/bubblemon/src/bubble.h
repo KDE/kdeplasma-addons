@@ -80,12 +80,13 @@ class Bubble : public Plasma::Applet {
         int m_max;
         int m_speed;
         int m_animID;
+        QVector<QPoint> m_bubbles;
+        int m_bubbleCount;
         qreal m_labelTransparency;
         float m_bubbleSpeed;
         float m_bubbleHeight;
         QString m_sensor;
         Plasma::Svg *m_svg;
-        QList<QPoint> m_bubbles;
         QString m_label;
         QTimer *m_animator;
         QTimeLine *m_interpolator;
