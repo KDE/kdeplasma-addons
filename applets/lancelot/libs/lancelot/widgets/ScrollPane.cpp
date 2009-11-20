@@ -72,7 +72,6 @@ public:
     {
         qDebug() << "Plasma::Animator";
         q->setAcceptTouchEvents(true);
-        Plasma::Animator::self()->registerScrollingManager(q);
     }
 
     void updateViewport()
@@ -120,6 +119,8 @@ ScrollPane::ScrollPane(QGraphicsItem * parent) //>
     d->layout->setContentsMargins(0, 0, 0, 0);
 
     setLayout(d->layout);
+
+    Plasma::Animator::self()->registerScrollingManager(this);
 } //<
 
 ScrollPane::~ScrollPane() //>
@@ -362,6 +363,9 @@ void ScrollPane::setScrollPosition(const QPointF &position) //>
 
 QPointF ScrollPane::scrollPosition() const //>
 {
+    if (!d || !d->horizontal || !d->vertical) {
+        return QPointF();
+    }
     return QPointF(d->horizontal->value(), d->vertical->value());
 } //<
 
