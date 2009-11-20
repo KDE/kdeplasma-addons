@@ -46,9 +46,6 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
     addSyntax(Plasma::RunnerSyntax(i18nc("list of all people in address book", "contacts"),
                                    i18n("List all people in your address book.")));
-    addSyntax(Plasma::RunnerSyntax("contacts", i18n("List all people in your address book.")));
-
-
 }
 
 ContactsRunner::~ContactsRunner()
