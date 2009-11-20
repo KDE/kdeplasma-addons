@@ -46,6 +46,8 @@ ContactsRunner::ContactsRunner(QObject *parent, const QVariantList& args)
     addSyntax(Plasma::RunnerSyntax(":q:", i18n("Finds people in your address book matching :q:.")));
     addSyntax(Plasma::RunnerSyntax(i18nc("list of all people in address book", "contacts"),
                                    i18n("List all people in your address book.")));
+    addSyntax(Plasma::RunnerSyntax("contacts", i18n("List all people in your address book.")));
+
 
 }
 
@@ -71,7 +73,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
         bool matchedName;
         bool matchedMail;
 
-        if (term.compare(i18nc("list of all people in address book", "contacts"), Qt::CaseInsensitive) == 0) {
+        if (term.compare(i18nc("list of all people in address book", "contacts"), Qt::CaseInsensitive) == 0 || term.compare("contacts", Qt::CaseInsensitive) == 0) {
             matchedName = true;
             matchedMail = true;
         } else {
