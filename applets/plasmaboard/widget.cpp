@@ -44,11 +44,11 @@
 #define SHIFT_L_KEY 4
 #define SHIFT_R_KEY 5
 #define CTLKEY 6
-#define META_L_KEY 7
+#define SUPER_L_KEY 7
 #define ALT_L_KEY 8
 #define SPACE 9
 #define ALTGRKEY 10
-#define META_R_KEY 11
+#define SUPER_R_KEY 11
 
 #define MENU 12
 #define CONTROL_LEFT 13
@@ -136,14 +136,40 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
     else if ( sourceName == "AltGr" ) {
 	if ( data["Pressed"].toBool() ){
 	    isAlternative = true;
-	    emit altKey(true);
+	    emit altGrKey(true);
 	}
 	else{
 	    isAlternative = false;
-	    emit altKey(false);
+	    emit altGrKey(false);
 	}
     }
 
+    else if ( sourceName == "Alt" ) {
+	if ( data["Pressed"].toBool() )
+	    emit altKey(true);
+	else
+	    emit altKey(false);
+    }
+
+    else if ( sourceName == "Super" ) {
+	if ( data["Pressed"].toBool() )
+	    emit superKey(true);
+	else
+	    emit superKey(false);
+    }
+
+    else if ( sourceName == "Ctrl" ) {
+	if ( data["Pressed"].toBool() )
+	    emit controlKey(true);
+	else
+	    emit controlKey(false);
+    }
+    else if ( sourceName == "Menu" ) {
+	if ( data["Pressed"].toBool() )
+	    emit menuKey(true);
+	else
+	    emit menuKey(false);
+    }
     relabelKeys();
 }
 
@@ -324,14 +350,20 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
         }
 
 	funcKeys[CTLKEY]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
-	funcKeys[META_L_KEY]->setKey(XK_Meta_L, false, i18nc("The meta (windows) key on a keyboard", "Meta"));
+	QObject::connect(this, SIGNAL( controlKey(bool) ), funcKeys[CTLKEY], SLOT( toggle(bool) ) );
+	funcKeys[SUPER_L_KEY]->setKey(XK_Super_L, false, i18nc("The meta (windows) key on a keyboard", "Super"));
+	QObject::connect(this, SIGNAL( superKey(bool) ), funcKeys[SUPER_L_KEY], SLOT( toggle(bool) ) );
 	funcKeys[ALT_L_KEY]->setKey(XK_Alt_L, false, i18nc("The alt key on a keyboard", "Alt"));
+	QObject::connect(this, SIGNAL( altKey(bool) ), funcKeys[ALT_L_KEY], SLOT( toggle(bool) ) );
         funcKeys[SPACE]->setKeycode(XK_space, true);
 	funcKeys[ALTGRKEY]->setKey(XK_ISO_Level3_Shift, false, i18nc("The Alt Gr key on a keyboard", "Alt Gr"));
-	QObject::connect(this, SIGNAL( altKey(bool) ), funcKeys[ALTGRKEY], SLOT( toggle(bool) ) );
-        funcKeys[META_R_KEY]->setKey(XK_Meta_L, false, i18n("Meta"));
+	QObject::connect(this, SIGNAL( altGrKey(bool) ), funcKeys[ALTGRKEY], SLOT( toggle(bool) ) );
+	funcKeys[SUPER_R_KEY]->setKey(XK_Super_L, false, i18n("Super"));
+	QObject::connect(this, SIGNAL( superKey(bool) ), funcKeys[SUPER_R_KEY], SLOT( toggle(bool) ) );
 	funcKeys[MENU]->setKey(XK_Menu, true, i18nc("The menu key on a keyboard", "Menu"));
+	QObject::connect(this, SIGNAL( menuKey(bool) ), funcKeys[MENU], SLOT( toggle(bool) ) );
 	funcKeys[CONTROL_LEFT]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
+	QObject::connect(this, SIGNAL( controlKey(bool) ), funcKeys[CONTROL_LEFT], SLOT( toggle(bool) ) );
 
         // set Keymap
 
@@ -400,11 +432,11 @@ void PlasmaboardWidget::initBasicKeyboard(int offset){
 	row++;
 
 	m_layout->addItem(funcKeys[CTLKEY], row, 0, 1, 2);
-	m_layout->addItem(funcKeys[META_L_KEY], row, 2, 1, 2);
+	m_layout->addItem(funcKeys[SUPER_L_KEY], row, 2, 1, 2);
 	m_layout->addItem(funcKeys[ALT_L_KEY], row, 4, 1, 2);
 	m_layout->addItem(funcKeys[SPACE], row, 6, 1, 14);
 	m_layout->addItem(funcKeys[ALTGRKEY], row, 20, 1, 2);
-	m_layout->addItem(funcKeys[META_R_KEY], row, 22, 1, 2);
+	m_layout->addItem(funcKeys[SUPER_R_KEY], row, 22, 1, 2);
 	m_layout->addItem(funcKeys[MENU], row, 24, 1, 2);
 	m_layout->addItem(funcKeys[CONTROL_LEFT], row, 26, 1, 3);
 
@@ -469,8 +501,8 @@ void PlasmaboardWidget::clear(){
 	funcKeys[CTLKEY]->toggleOff();
         funcKeys[CONTROL_LEFT]->toggleOff();
 	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
-	funcKeys[META_L_KEY]->toggleOff();
-	funcKeys[META_R_KEY]->toggleOff();
+	funcKeys[SUPER_L_KEY]->toggleOff();
+	funcKeys[SUPER_R_KEY]->toggleOff();
 	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
 	funcKeys[ALT_L_KEY]->toggleOff();
 }

@@ -120,7 +120,10 @@ class PlasmaboardWidget : public Plasma::Containment
 	signals:
 		void shiftKey(bool value);
 		void altKey(bool value);
-		void metaKey(bool value);
+		void altGrKey(bool value);
+		void superKey(bool value);
+		void controlKey(bool value);
+		void menuKey(bool value);
 };
 
 
