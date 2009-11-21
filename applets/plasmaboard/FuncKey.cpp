@@ -31,11 +31,18 @@ FuncKey::FuncKey(PlasmaboardWidget *parent):
 }
 
 void FuncKey::toggleOn(){
+	nativeWidget()->setDown(true);
 	pressed = true;
 }
 
 void FuncKey::toggleOff(){
+	nativeWidget()->setDown(false);
 	pressed = false;
+}
+
+void FuncKey::toggle(bool toggle){
+	nativeWidget()->setDown(toggle);
+	pressed = toggle;
 }
 
 bool FuncKey::toggled(){
@@ -49,7 +56,7 @@ void FuncKey::setKeycode(unsigned int code, bool sendUp){
                 QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), this, SLOT( sendKeycodeRelease() ) );
 	}
 	else {
-		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodeToggled() ) );
+		QObject::connect(this, SIGNAL( clicked() ), this, SLOT( sendKeycodeToggled() ) );
 	}
 }
 

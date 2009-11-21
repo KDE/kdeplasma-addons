@@ -117,6 +117,10 @@ class PlasmaboardWidget : public Plasma::Containment
 
 		Tooltip* tooltip;
 
+	signals:
+		void shiftKey(bool value);
+		void altKey(bool value);
+		void metaKey(bool value);
 };
 
 

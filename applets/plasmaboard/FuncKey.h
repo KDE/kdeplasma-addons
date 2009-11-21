@@ -26,6 +26,9 @@
 class PlasmaboardWidget;
 
 class FuncKey: public BoardKey {
+
+    Q_OBJECT
+
 public:
 	FuncKey(PlasmaboardWidget *parent);
 	void toggleOn();
@@ -39,6 +42,7 @@ public Q_SLOTS:
 	virtual void sendKeycodePress();
 	virtual void sendKeycodeRelease();
 	virtual void sendKeycodeToggled();
+	void toggle(bool toggle);
 
 
 private:

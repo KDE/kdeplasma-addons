@@ -24,6 +24,7 @@
 #include "FuncKey.h"
 
 class ShiftKey: public FuncKey {
+    Q_OBJECT
 public:
 	ShiftKey(PlasmaboardWidget *parent);
 

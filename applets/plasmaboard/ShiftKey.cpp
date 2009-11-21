@@ -23,6 +23,7 @@
 
 ShiftKey::ShiftKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
 	setKeycode(XK_Shift_L, false);
+	QObject::connect(parent, SIGNAL( shiftKey(bool) ), this, SLOT( toggle(bool) ) );
 }
 
 void ShiftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
