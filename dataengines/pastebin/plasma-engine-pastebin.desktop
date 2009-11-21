@@ -14,6 +14,7 @@ Name[uk]=Рушій Pastebin
 Name[x-test]=xxPastebin enginexx
 Name[zh_TW]=Pastebin 引擎
 Comment=Engine to paste text and images to servers
+Comment[de]=Text und Bilder auf einen Server hochladen
 Comment[en_GB]=Engine to paste text and images to servers
 Comment[es]=Motor para pegar texto e imágenes en servidores
 Comment[et]=Teksti ja piltide serverisse asetamise mootor
