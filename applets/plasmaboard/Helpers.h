@@ -30,7 +30,7 @@ class Helpers {
 public:
 
 
-	static unsigned int keycodeToKeysym(unsigned int code, int level){
+	static unsigned int keycodeToKeysym(const unsigned int &code, int &level){
 		#ifdef Q_WS_X11
 			return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, level);
 		#else
@@ -38,7 +38,7 @@ public:
 		#endif
 	}
 
-	static unsigned int keysymToKeycode(unsigned int code){
+	static unsigned int keysymToKeycode(const unsigned int &code){
 		#ifdef Q_WS_X11
 			return ((unsigned int) XKeysymToKeycode(QX11Info::display(), code));
 		#else
@@ -46,12 +46,12 @@ public:
 		#endif
 	}
 
-	static void fakeKeyPress(unsigned int code){
+	static void fakeKeyPress(const unsigned int &code){
 		#ifdef Q_WS_X11
 		XTestFakeKeyEvent(QX11Info::display(), code, true, 0);
 		#endif
 	}
-	static void fakeKeyRelease(unsigned int code){
+	static void fakeKeyRelease(const unsigned int &code){
 		#ifdef Q_WS_X11
 		XTestFakeKeyEvent(QX11Info::display(), code, false, 0);
 		#endif
@@ -60,7 +60,7 @@ public:
 	static QChar mapXtoUTF8[0xffff+1];
 	// what follows is a long and ugly list of mappings
 
-	static QChar mapToUnicode(unsigned int keysym){
+	static QChar mapToUnicode(const unsigned int &keysym){
 
 		/*if(keysym >= 0xffff){
 			return 0;

@@ -31,7 +31,7 @@ class AlphaNumKey: public BoardKey {
     Q_OBJECT
 
 public:
-        AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym);
+	AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym);
 	virtual ~AlphaNumKey();
 
 	void switchKey(bool isLevel2, bool isAlternative, bool isLocked);

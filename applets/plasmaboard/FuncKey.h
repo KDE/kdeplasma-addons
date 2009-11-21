@@ -35,7 +35,7 @@ public:
 	void toggleOff();
 	bool toggled();
 	void setKeycode(unsigned int code, bool sendUp);
-        void setKey(unsigned int code, bool sendUp, const QString &text);
+	void setKey(unsigned int code, bool sendUp, const QString text);
 
 
 public Q_SLOTS:

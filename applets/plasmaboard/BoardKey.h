@@ -37,7 +37,7 @@ public:
 	  Replaces text on the button. Warning! This does not trigger a repaint for performance reasons.
 	  If you are updating an already painted button, call update() !
 	  */
-        void setText(QString text);
+	void setText(QString text);
         QString text();
 private:
 	QString labelText;

@@ -61,7 +61,7 @@ void FuncKey::setKeycode(unsigned int code, bool sendUp){
 }
 
 
-void FuncKey::setKey(unsigned int code, bool sendUp, const QString &text) {
+void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
         setKeycode(code, sendUp);
         setText(text);
 }
