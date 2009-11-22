@@ -1,24 +1,25 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 #include "abstractgroup.h"
 
+#include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneResizeEvent>
 
@@ -27,6 +28,8 @@
 
 #include <Plasma/Containment>
 #include <Plasma/FrameSvg>
+#include <Plasma/Animator>
+#include <Plasma/AbstractAnimation>
 
 class AbstractGroupPrivate
 {
@@ -35,6 +38,7 @@ class AbstractGroupPrivate
             : q(group),
               destroying(false),
               containment(0),
+              immutability(Plasma::Mutable),
               m_mainConfig(0)
         {
             background = new Plasma::FrameSvg(q);
@@ -63,10 +67,31 @@ class AbstractGroupPrivate
         void destroyGroup()
         {
             mainConfigGroup()->deleteGroup();
-            delete m_mainConfig;
+
+            Plasma::AbstractAnimation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
+            if (anim) {
+            anim->setWidgetToAnimate(q);
+            anim->start();
+            }
 
             q->scene()->removeItem(q);
             delete q;
+        }
+
+        void appletDestroyed(Plasma::Applet *applet)
+        {
+            if (applets.contains(applet)) {
+                kDebug()<<"removed applet"<<applet->id()<<"inside group"<<id;
+
+                applets.removeAll(applet);
+
+                if (destroying && (applets.count() == 0)) {
+                    destroyGroup();
+                    destroying = false;
+                }
+
+//                 emit q->appletRemovedFromGroup(applet); //FIXME crash! ???
+            }
         }
 
         Plasma::Applet::List applets;
@@ -75,6 +100,7 @@ class AbstractGroupPrivate
         Plasma::Containment *containment;
         unsigned int id;
         Plasma::FrameSvg *background;
+        Plasma::ImmutabilityType immutability;
 
     private:
         KConfigGroup *m_mainConfig;
@@ -84,12 +110,14 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
                d(new AbstractGroupPrivate(this))
 {
+    setAcceptHoverEvents(true);
     setAcceptDrops(true);
+    setContentsMargins(10, 10, 10, 10);
 }
 
 AbstractGroup::~AbstractGroup()
 {
-    emit groupRemoved(this);
+    emit groupDestroyed(this);
 
     delete d;
 }
@@ -98,24 +126,24 @@ void AbstractGroup::setContainment(Plasma::Containment *containment)
 {
     d->containment = containment;
 
-    connect(containment, SIGNAL(appletRemoved(Plasma::Applet *)),
-            this, SLOT(onAppletRemoved(Plasma::Applet *)));
     connect (containment, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
              this, SLOT(setImmutability(Plasma::ImmutabilityType)));
 }
 
-Plasma::Containment* AbstractGroup::containment() const
+Plasma::Containment *AbstractGroup::containment() const
 {
     return d->containment;
 }
 
 void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
 {
-    if (immutability == Plasma::Mutable) {
-        setFlag(QGraphicsItem::ItemIsMovable, true);
-    } else {
-        setFlag(QGraphicsItem::ItemIsMovable, false);
-    }
+    setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
+    d->immutability = immutability;
+}
+
+Plasma::ImmutabilityType AbstractGroup::immutability() const
+{
+    return d->immutability;
 }
 
 void AbstractGroup::setId(unsigned int id)
@@ -140,8 +168,8 @@ void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
 //     applet->setImmutability(Plasma::SystemImmutable);
     d->applets << applet;
 
-    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
-            this, SLOT(onAppletRemoved(Plasma::Applet*)));
+    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
+            this, SLOT(appletDestroyed(Plasma::Applet *)));
 
     if (layoutApplets) {
         layoutApplet(applet);
@@ -151,24 +179,6 @@ void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
 Plasma::Applet::List AbstractGroup::assignedApplets() const
 {
     return d->applets;
-}
-
-void AbstractGroup::onAppletRemoved(Plasma::Applet *applet)
-{
-    kDebug()<<"removed";
-    foreach (Plasma::Applet *ownApplet, d->applets) {
-        if (applet == ownApplet) {
-            kDebug()<<"removed";
-            emit appletRemoved(applet);
-
-            d->applets.removeAll(applet);
-
-            if (d->destroying && (d->applets.count() == 0)) {
-                d->destroyGroup();
-                d->destroying = false;
-            }
-        }
-    }
 }
 
 void AbstractGroup::destroy()
@@ -184,6 +194,35 @@ void AbstractGroup::destroy()
         kDebug()<<"deleting applet"<<applet->id()<<"in group"<<id();
         applet->destroy();
     }
+}
+
+QGraphicsView *AbstractGroup::view() const
+{
+    // It's assumed that we won't be visible on more than one view here.
+    // Anything that actually needs view() should only really care about
+    // one of them anyway though.
+    if (!scene()) {
+        return 0;
+    }
+
+    QGraphicsView *found = 0;
+    QGraphicsView *possibleFind = 0;
+    //kDebug() << "looking through" << scene()->views().count() << "views";
+    foreach (QGraphicsView *view, scene()->views()) {
+        //kDebug() << "     checking" << view << view->sceneRect()
+        //         << "against" << sceneBoundingRect() << scenePos();
+        if (view->sceneRect().intersects(sceneBoundingRect()) ||
+            view->sceneRect().contains(scenePos())) {
+            //kDebug() << "     found something!" << view->isActiveWindow();
+            if (view->isActiveWindow()) {
+                found = view;
+            } else {
+                possibleFind = view;
+            }
+        }
+    }
+
+    return found ? found : possibleFind;
 }
 
 KConfigGroup AbstractGroup::config() const
@@ -208,9 +247,11 @@ void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
     scene()->sendEvent(containment(), event);
 }
 
-void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent* event)
+void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     d->background->resizeFrame(event->newSize());
+
+    emit geometryChanged();
 }
 
 void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

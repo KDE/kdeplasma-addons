@@ -1,21 +1,21 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 #ifndef ABSTRACTGROUP_H
 #define ABSTRACTGROUP_H
@@ -36,10 +36,11 @@ class AbstractGroup : public QGraphicsWidget
         * Constructor of the abstract class.
         **/
         AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+
         /**
         * Default destructor
         **/
-        ~AbstractGroup();
+        virtual ~AbstractGroup();
 
         /**
         * Assignes an Applet to this Group
@@ -64,12 +65,7 @@ class AbstractGroup : public QGraphicsWidget
         **/
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
 
-        /**
-        * Lay outs an applet inside the group
-        * This function must be reimplemented by a child class.
-        * @param applet the applet to be layed out
-        **/
-        virtual void layoutApplet(Plasma::Applet *applet) = 0;
+        QGraphicsView *view() const;
 
         /**
         * Destroyed this groups and its applet, deleting the configurations too
@@ -96,9 +92,10 @@ class AbstractGroup : public QGraphicsWidget
         Plasma::Containment *containment() const;
         void setId(unsigned int id);
         unsigned int id() const;
+        Plasma::ImmutabilityType immutability() const;
         virtual QString pluginName() const = 0;
 
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     public slots:
         void setImmutability(Plasma::ImmutabilityType immutability);
@@ -107,22 +104,33 @@ class AbstractGroup : public QGraphicsWidget
         /**
         * Reimplemented from QGraphicsItem
         **/
-        void dropEvent(QGraphicsSceneDragDropEvent *event);
+        virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
-        void resizeEvent(QGraphicsSceneResizeEvent *event);
+        /**
+        * Reimplemented from QGraphicsItem
+        **/
+        virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
+
+        /**
+        * Lay outs an applet inside the group
+        * This function must be reimplemented by a child class.
+        * @param applet the applet to be layed out
+        **/
+        virtual void layoutApplet(Plasma::Applet *applet) = 0;
 
     signals:
-        void groupRemoved(AbstractGroup *);
-        void appletRemoved(Plasma::Applet *);
-
-    private slots:
-        /**
-        * @internal slot called when an applet is removed
-        **/
-        void onAppletRemoved(Plasma::Applet *applet);
+        void groupDestroyed(AbstractGroup *);
+        void appletRemovedFromGroup(Plasma::Applet *);
+        void geometryChanged();
+        void groupTransformedByUser();
 
     private:
+        Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
+
         AbstractGroupPrivate *const d;
+
+        friend class AbstractGroupPrivate;
+        friend class GroupHandle;
 };
 
 #endif // ABSTRACTGROUP_H

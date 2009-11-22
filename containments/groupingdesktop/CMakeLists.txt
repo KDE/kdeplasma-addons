@@ -12,7 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 # set(abstractgroup_SRCS
 #           abstractgroup.cpp)
 
-set(groupingdesktop_SRCS
+set(groupingdesktop_SRCS groupingcontainment.cpp grouphandle.cpp
           groupingdesktop.cpp
           abstractgroup.cpp
         gridlayout.cpp
