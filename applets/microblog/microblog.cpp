@@ -183,7 +183,6 @@ QGraphicsWidget *MicroBlog::graphicsWidget()
 
     m_flash->setAutohide( true );
     m_flash->setMinimumSize( 0, 20 );
-    m_flash->setColor( Plasma::Theme::TextColor );
     QFont fnt = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
     fnt.setBold( true );
     QFontMetrics fm( fnt );
