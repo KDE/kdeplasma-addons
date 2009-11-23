@@ -17,28 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef FLOATINGGROUP_H
-#define FLOATINGGROUP_H
+#ifndef ABSTRACTGROPUPRIVATE_H
+#define ABSTRACTGROUPPRIVATE_H
 
 #include "abstractgroup.h"
+#include "groupingcontainment.h"
 
-class FloatingGroup : public AbstractGroup
+class AbstractGroupPrivate
 {
-    Q_OBJECT
     public:
-        FloatingGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
-        virtual ~FloatingGroup();
+        AbstractGroupPrivate(AbstractGroup *group);
+        ~AbstractGroupPrivate();
+        KConfigGroup *mainConfigGroup();
+        void destroyGroup();
+        void appletDestroyed(Plasma::Applet *applet);
 
-        virtual QString pluginName() const;
-        virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group);
-        virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const;
+        Plasma::Applet::List applets;
+        AbstractGroup *q;
+        bool destroying;
+        GroupingContainment *containment;
+        unsigned int id;
+        Plasma::FrameSvg *background;
+        Plasma::ImmutabilityType immutability;
 
-    protected:
-        virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
-        virtual bool eventFilter(QObject *watched, QEvent *event);
-
-    private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
+    private:
+        KConfigGroup *m_mainConfig;
 };
 
-#endif // FLOATINGGROUP_H
+#endif

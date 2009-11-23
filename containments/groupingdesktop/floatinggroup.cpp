@@ -23,6 +23,9 @@ FloatingGroup::FloatingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags)
 {
     resize(200,200);
+
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet *, AbstractGroup *)),
+            this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
 FloatingGroup::~FloatingGroup()
@@ -47,9 +50,58 @@ void FloatingGroup::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup gr
     group.writeEntry("Position", applet->pos());
 }
 
-void FloatingGroup::layoutApplet(Plasma::Applet *applet)
+void FloatingGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    applet->setPos(mapFromItem(parentItem(), applet->pos()));
+    applet->setPos(pos);
+}
+
+void FloatingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
+{
+    Q_UNUSED(group)
+
+    applet->installEventFilter(this);
+}
+
+bool FloatingGroup::eventFilter(QObject *watched, QEvent *event)
+{
+//     Plasma::Applet *applet = dynamic_cast<Plasma::Applet *>(watched);
+//     if (assignedApplets().contains(applet)) {
+//         switch (event->type()) {
+// //             case QEvent::GraphicsSceneMove:
+// //                 if (!contentsRect().contains(applet->geometry())) {
+// //                     kDebug()<<"!LKNJ";
+// //                     QRectF appletRect = applet->geometry();
+// //                     if (appletRect.x() < 0) {
+// //                         applet->moveBy(-appletRect.x(), 0);
+// //                     }
+// //                     if (appletRect.y() < 0) {
+// //                         applet->moveBy(0, -appletRect.y());
+// //                     }
+// // 
+// //                 }
+// //                 break;
+//             case QEvent:GraphicsSceneMouseMove:
+//                 if (!contentsRect().contains(applet->geometry())) {
+//                     kDebug()<<"!LKNJ";
+//                     QRectF appletRect = applet->geometry();
+//                     if (appletRect.x() < 0) {
+//                         applet->moveBy(-appletRect.x(), 0);
+//                     }
+//                     if (appletRect.y() < 0) {
+//                         applet->moveBy(0, -appletRect.y());
+//                     }
+// 
+//                 }
+//                 break;
+//             default:
+//                 break;
+// // 
+//         }
+// // 
+// //         return false;
+//     }
+
+    return AbstractGroup::eventFilter(watched, event);
 }
 
 #include "floatinggroup.moc"

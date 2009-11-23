@@ -41,11 +41,11 @@ class GridLayout : public AbstractGroup
 
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
-        void layoutApplet(Plasma::Applet* applet);
         QString pluginName() const;
 
     protected:
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+        void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);

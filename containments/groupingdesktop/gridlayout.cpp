@@ -264,10 +264,8 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
     return Position(-1, -1);
 }
 
-void GridLayout::layoutApplet(Plasma::Applet *applet)
+void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    QPointF pos = mapFromItem(parentItem(), applet->pos());
-
     if (m_spacer->geometry().contains(mapToItem(this, pos))) {
         Position spacerPos = itemPosition(m_spacer);
         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {

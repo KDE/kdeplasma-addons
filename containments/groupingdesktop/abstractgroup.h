@@ -28,101 +28,161 @@ class KConfigGroup;
 class Containment;
 class AbstractGroupPrivate;
 
+/**
+ * @class AbstractGroup
+ *
+ * @short The base Group class
+ *
+ * AbstractGroup is a base class for special widgets thoughts to contain Plasma::Applet
+ */
 class AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     public:
         /**
-        * Constructor of the abstract class.
-        **/
+         * Constructor of the abstract class.
+         **/
         AbstractGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
 
         /**
-        * Default destructor
-        **/
+         * Default destructor
+         **/
         virtual ~AbstractGroup();
 
         /**
         * Assignes an Applet to this Group
-        * @param applet the applet to be managed by this
-        * @param layoutApplets if true calls layoutApplet(applet)
-        **/
+         * @param applet the applet to be managed by this
+         * @param layoutApplets if true calls layoutApplet(applet)
+         * @see assignedApplets
+         **/
         void assignApplet(Plasma::Applet *applet, bool layoutApplets = true);
 
         /**
-        * Saves the group's specific configurations for an applet.
-        * This function must be reimplemented by a child class.
-        * @param applet the applet which will be saved
-        * @param group the config group for the configuration
-        **/
+         * Saves the group's specific configurations for an applet.
+         * This function must be reimplemented by a child class.
+         * @param applet the applet which will be saved
+         * @param group the config group for the configuration
+         * @see restoreAppletLayoutInfo
+         **/
         virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const = 0;
 
         /**
-        * Restores the group's specific configurations for an applet.
-        * This function must be reimplemented by a child class.
-        * @param applet the applet which will be restored
-        * @param group the config group for the configuration
-        **/
+         * Restores the group's specific configurations for an applet.
+         * This function must be reimplemented by a child class.
+         * @param applet the applet which will be restored
+         * @param group the config group for the configuration
+         * @see saveAppletLayoutInfo
+         **/
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
 
+        /**
+         * Returns the view this widget is visible on, or 0 if none can be found.
+         * @warning do NOT assume this will always return a view!
+         * a null view probably means that either plasma isn't finished loading, or your group is
+         * on an activity that's not being shown anywhere.
+         */
         QGraphicsView *view() const;
 
         /**
-        * Destroyed this groups and its applet, deleting the configurations too
-        **/
+         * Destroyed this groups and its applet, deleting the configurations too
+         **/
         void destroy();
 
         /**
-        * Reimplemented from Plasma::Applet
-        **/
+         * Returns the KConfigGroup to access the group configuration.
+         **/
         KConfigGroup config() const;
 
         /**
-        * Reimplemented from Plasma::Applet
-        **/
+         * Saves state information about this group.
+         **/
         void save(KConfigGroup &group) const;
 
         /**
-        * Used to have a list of the applets managed by this group
-        * @return the list of the applets
-        **/
+         * Returns a list of the applets managed by this group
+         * @see assignApplet
+         **/
         Plasma::Applet::List assignedApplets() const;
 
-        void setContainment(Plasma::Containment *containment);
-        Plasma::Containment *containment() const;
-        void setId(unsigned int id);
-        unsigned int id() const;
+        /**
+         * Returns the id of this group
+         **/
+        uint id() const;
+
+        /**
+         * Returns the type of immutability of this group
+         * @see setImmutability
+         **/
         Plasma::ImmutabilityType immutability() const;
+
+        /**
+         * Returns the plugin name for the group
+         **/
         virtual QString pluginName() const = 0;
 
+        /**
+         * Reimplemented from QGraphicsWidget
+         **/
         virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
     public slots:
+        /**
+         * Sets the immutability type for this group (not immutable,
+         * user immutable or system immutable)
+         * @param immutable the new immutability type of this applet
+         * @see immutability
+         * @see Plasma::ImmutabilityType
+         */
         void setImmutability(Plasma::ImmutabilityType immutability);
 
     protected:
         /**
-        * Reimplemented from QGraphicsItem
-        **/
+         * Reimplemented from QGraphicsWidget
+         **/
         virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
         /**
-        * Reimplemented from QGraphicsItem
-        **/
+         * Reimplemented from QGraphicsWidget
+         **/
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
         /**
-        * Lay outs an applet inside the group
-        * This function must be reimplemented by a child class.
-        * @param applet the applet to be layed out
-        **/
-        virtual void layoutApplet(Plasma::Applet *applet) = 0;
+         * Lay outs an applet inside the group
+         * This function must be reimplemented by a child class.
+         * @param applet the applet to be layed out
+         * @param pos the position of the applet mapped to the group's coordinates
+         **/
+        virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos) = 0;
 
     signals:
+        /**
+         * This signal is emitted when the group's destructor is called.
+         * @param group a pointer to the group
+         **/
         void groupDestroyed(AbstractGroup *group);
+
+        /**
+         * Emitted when an applet is assigned to this group.
+         * @param applet a pointer to the applet added
+         * @param group a pointer to this group
+         **/
         void appletAddedInGroup(Plasma::Applet *applet, AbstractGroup *group);
+
+        /**
+         * Emitted when an applet is removed from this group.
+         * @param applet a pointer to the applet removed
+         * @param group a pointer to this group
+         **/
         void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
+
+        /**
+         * This signal is emitted when the group's geometry changes.
+         **/
         void geometryChanged();
+
+        /**
+         * This signal is emitted when the group is transformed by the user.
+         **/
         void groupTransformedByUser();
 
     private:
@@ -132,6 +192,8 @@ class AbstractGroup : public QGraphicsWidget
 
         friend class AbstractGroupPrivate;
         friend class GroupHandle;
+        friend class GroupingContainment;
+        friend class GroupingContainmentPrivate;
 };
 
 #endif // ABSTRACTGROUP_H
