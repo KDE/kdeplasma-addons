@@ -48,7 +48,10 @@ class BlackBoardWidget : public QGraphicsWidget
         void resizeEvent(QGraphicsSceneResizeEvent *event);
 
         void setBrushColor(QColor color);
-	
+
+    protected:
+        bool event(QEvent *event);
+
     public Q_SLOTS:
         void saveImage();
 	void erase();
