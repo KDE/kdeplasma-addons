@@ -91,8 +91,10 @@ GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     m_spacer->parent = this;
     m_spacer->hide();
 
-    connect(this, SIGNAL(appletRemoved(Plasma::Applet*)),
-            this, SLOT(onAppletRemoved(Plasma::Applet *)));
+    connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet *, AbstractGroup *)),
+            this, SLOT(onAppletRemoved(Plasma::Applet *, AbstractGroup *)));
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet *, AbstractGroup *)),
+            this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
 GridLayout::~GridLayout()
@@ -100,8 +102,17 @@ GridLayout::~GridLayout()
 
 }
 
-void GridLayout::onAppletRemoved(Plasma::Applet *applet)
+void GridLayout::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
 {
+    Q_UNUSED(group);
+
+    applet->setImmutability(Plasma::SystemImmutable);
+}
+
+void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
+{
+    Q_UNUSED(group)
+
     removeItem(applet);
 }
 
@@ -256,7 +267,7 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
 void GridLayout::layoutApplet(Plasma::Applet *applet)
 {
     QPointF pos = mapFromItem(parentItem(), applet->pos());
-    kDebug()<<pos;
+
     if (m_spacer->geometry().contains(mapToItem(this, pos))) {
         Position spacerPos = itemPosition(m_spacer);
         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
@@ -305,20 +316,10 @@ void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group
 
 void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
 {
-    bool isOwnApplet = false;
-    foreach (Plasma::Applet *ownApplet, assignedApplets()) {
-        if (applet == ownApplet) {
-            isOwnApplet = true;
-            break;
-        }
-    }
+    int row = group.readEntry("Row", -1);
+    int column = group.readEntry("Column", -1);
 
-    if (isOwnApplet) {
-        int row = group.readEntry("Row", -1);
-        int column = group.readEntry("Column", -1);
-
-        m_layout->addItem(applet, row, column);
-    }
+    m_layout->addItem(applet, row, column);
 }
 
 #include "gridlayout.moc"

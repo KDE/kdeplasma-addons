@@ -119,8 +119,9 @@ class AbstractGroup : public QGraphicsWidget
         virtual void layoutApplet(Plasma::Applet *applet) = 0;
 
     signals:
-        void groupDestroyed(AbstractGroup *);
-        void appletRemovedFromGroup(Plasma::Applet *);
+        void groupDestroyed(AbstractGroup *group);
+        void appletAddedInGroup(Plasma::Applet *applet, AbstractGroup *group);
+        void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
         void geometryChanged();
         void groupTransformedByUser();
 

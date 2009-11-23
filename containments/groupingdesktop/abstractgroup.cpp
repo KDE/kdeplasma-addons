@@ -90,7 +90,7 @@ class AbstractGroupPrivate
                     destroying = false;
                 }
 
-//                 emit q->appletRemovedFromGroup(applet); //FIXME crash! ???
+//                 emit q->appletRemovedFromGroup(applet, group); //FIXME crash! ???
             }
         }
 
@@ -165,7 +165,6 @@ void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id();
 
     applet->setParentItem(this);
-//     applet->setImmutability(Plasma::SystemImmutable);
     d->applets << applet;
 
     connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),

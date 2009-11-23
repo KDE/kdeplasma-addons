@@ -48,7 +48,8 @@ class GridLayout : public AbstractGroup
         void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
 
     private slots:
-        void onAppletRemoved(Plasma::Applet *applet);
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
+        void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
 
     private:
         enum Orientation {
