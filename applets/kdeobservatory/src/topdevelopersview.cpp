@@ -27,8 +27,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(rect, parent, wFlags),
+TopDevelopersView::TopDevelopersView(const QHash<QString, bool> &topDevelopersViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(parent, wFlags),
   m_topDevelopersViewProjects(topDevelopersViewProjects),
   m_projects(projects)
 {
@@ -51,6 +51,8 @@ void TopDevelopersView::updateViews()
             topDevelopers.insert(i1.key(), KdeObservatoryDatabase::self()->developersByProject(m_projects[i1.key()].commitSubject));
     }
 
+    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
+
     QMapIterator< QString, QMultiMap<int, QString> > i2(topDevelopers);
     while (i2.hasNext())
     {
@@ -66,7 +68,6 @@ void TopDevelopersView::updateViews()
 
         int maxRank = 0;
         qreal width = container->geometry().width();
-        //qreal step = qMax(container->geometry().height() / projectDevelopers.size(), (qreal) 22);
         qreal step = 22;
 
         int j = 0;
@@ -81,11 +82,16 @@ void TopDevelopersView::updateViews()
             qreal widthFactor = (width-24)/maxRank;
             qreal yItem = (j*step)+2;
 
+            if (yItem + step-4 > container->geometry().height())
+                break;
+
             QGraphicsRectItem *developerRect = new QGraphicsRectItem(0, 0, (qreal) widthFactor*rank, (qreal) step-4, container);
             developerRect->setPos(0, yItem);
             developerRect->setPen(QPen(QColor(0, 0, 0)));
             developerRect->setBrush(QBrush(QColor::fromHsv(qrand() % 256, 255, 190), Qt::SolidPattern));
             developerRect->setToolTip(developer + " - " + QString::number(rank) + ' ' + i18n("commits"));
+            developerRect->setAcceptHoverEvents(true);
+            developerRect->installSceneEventFilter(kdeObservatory);
 
             QGraphicsTextItem *commitsNumber = new QGraphicsTextItem(developer.split(' ')[0], developerRect);
             commitsNumber->setDefaultTextColor(QColor(255, 255, 255));

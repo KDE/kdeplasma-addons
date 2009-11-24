@@ -25,9 +25,8 @@
 
 #include <Plasma/Frame>
 
-IViewProvider::IViewProvider(QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+IViewProvider::IViewProvider(QGraphicsWidget *parent, Qt::WindowFlags wFlags)
 : QObject(),
-  m_rect(rect),
   m_parent(parent),
   m_wFlags(wFlags)
 {
@@ -40,6 +39,7 @@ IViewProvider::~IViewProvider()
 QGraphicsWidget *IViewProvider::createView(const QString &title)
 {
     QGraphicsWidget *view = new QGraphicsWidget(m_parent);
+    view->setHandlesChildEvents(true);
     view->hide();
 
     Plasma::Frame *header = new Plasma::Frame(view);
@@ -54,7 +54,7 @@ QGraphicsWidget *IViewProvider::createView(const QString &title)
     layout->addItem(container);
 
     view->setLayout(layout);
-    view->setGeometry(m_rect);
+    view->setGeometry(m_parent->geometry());
 
     m_views.append(view);
     return container;

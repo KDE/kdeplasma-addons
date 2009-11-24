@@ -42,8 +42,14 @@ public Q_SLOTS:
     void projectRemoved(const QString &projectName);
     void on_views_currentIndexChanged(QString view);
     void updateView(const QString &view);
+    void on_tlbUp_clicked();
+    void on_tlbDown_clicked();
+    void on_psbCheckAll_clicked();
+    void on_psbUncheckAll_clicked();
 
 private:
+    void swapViewItems(int updown);
+
     QString m_lastView;
 };
 

@@ -18,25 +18,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  * ***********************************************************************/
 
-#ifndef TOPACTIVEPROJECTSVIEW_HEADER
-#define TOPACTIVEPROJECTSVIEW_HEADER
+#ifndef KDEOBSERVATORYPRESETS_HEADER
+#define KDEOBSERVATORYPRESETS_HEADER
 
-#include "iviewprovider.h"
+#include <QStringList>
 
-#include "kdeobservatory.h"
-
-class TopActiveProjectsView : public IViewProvider
+class KdeObservatoryPresets
 {
 public:
-    TopActiveProjectsView(const QHash<QString, bool> &topActiveProjectsViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
-    virtual ~TopActiveProjectsView();
+    static void init();
 
-    virtual void updateViews();
+    enum PresetInfo
+    {
+        ProjectName = 0,
+        CommitSubject,
+        KrazyReport,
+        KrazyFilePrefix,
+        Icon
+    };
+
+    static QStringList preset(PresetInfo info);
+    static QList<bool> automaticallyInViews();
+    static QStringList viewsPreset();
+    static QList<bool> viewsActivePreset();
 
 private:
-    QGraphicsWidget *m_parent;
-    const QHash<QString, bool> &m_topActiveProjectsViewProjects;
-    const QMap<QString, KdeObservatory::Project> &m_projects;
+    static QList<QStringList> presets;
 };
 
 #endif

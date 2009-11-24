@@ -6,12 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>412</width>
-    <height>358</height>
+    <width>395</width>
+    <height>185</height>
    </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Configure KDE Observatory</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -46,9 +43,6 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
-       <property name="buddy">
-        <cstring>size</cstring>
-       </property>
       </widget>
      </item>
      <item row="0" column="1">
@@ -78,7 +72,7 @@
         <number>30</number>
        </property>
        <property name="value">
-        <number>1</number>
+        <number>7</number>
        </property>
       </widget>
      </item>
@@ -96,9 +90,6 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
-       <property name="buddy">
-        <cstring>size</cstring>
-       </property>
       </widget>
      </item>
      <item row="1" column="1" colspan="3">
@@ -112,19 +103,16 @@
        <property name="displayFormat">
         <string>hh 'Hours' mm 'Mins' ss 'Secs'</string>
        </property>
+       <property name="time">
+        <time>
+         <hour>0</hour>
+         <minute>5</minute>
+         <second>0</second>
+        </time>
+       </property>
       </widget>
      </item>
      <item row="2" column="0" colspan="2">
-      <widget class="QCheckBox" name="enableTransitionEffects">
-       <property name="text">
-        <string>Enable transition effects</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0" colspan="2">
       <widget class="QCheckBox" name="enableAutoViewChange">
        <property name="text">
         <string>Enable automatic view change</string>
@@ -147,9 +135,6 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="buddy">
-        <cstring>size</cstring>
        </property>
       </widget>
      </item>
@@ -198,9 +183,6 @@
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy">
-      <cstring>size</cstring>
-     </property>
     </widget>
    </item>
    <item row="1" column="3">
@@ -216,143 +198,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="QLabel" name="lblActiveViews">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Active views:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>size</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <spacer name="spacer4">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>13</width>
-       <height>47</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="1" colspan="4">
-    <layout class="QHBoxLayout" name="horizontalLayout1">
-     <item>
-      <widget class="QListWidget" name="activeViews">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>123</height>
-        </size>
-       </property>
-       <item>
-        <property name="text">
-         <string>Top Active Projects</string>
-        </property>
-        <property name="checkState">
-         <enum>Checked</enum>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Commit History</string>
-        </property>
-        <property name="checkState">
-         <enum>Checked</enum>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Top Developers</string>
-        </property>
-        <property name="checkState">
-         <enum>Checked</enum>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Krazy Report</string>
-        </property>
-        <property name="checkState">
-         <enum>Checked</enum>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QToolButton" name="tlbUp">
-         <property name="text">
-          <string>...</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="tlbDown">
-         <property name="text">
-          <string>...</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="spacer5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>18</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="4" column="1" colspan="4">
+   <item row="2" column="1" colspan="4">
     <spacer name="spacer6">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

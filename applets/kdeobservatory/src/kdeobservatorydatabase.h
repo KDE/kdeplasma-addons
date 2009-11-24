@@ -31,6 +31,9 @@ class KdeObservatoryDatabase
 public:
     virtual ~KdeObservatoryDatabase();
     static KdeObservatoryDatabase *self();
+
+    void beginTransaction();
+    void commitTransaction();
     void addCommit(const QString &date, const QString &subject, const QString &developer);
     void truncateCommits();
     void deleteOldCommits(const QString &date);

@@ -25,11 +25,16 @@
 
 #include "kdeobservatorydatabase.h"
 
-KrazyCollector::KrazyCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
+KrazyCollector::KrazyCollector(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QObject *parent)
 : ICollector(parent),
+  m_header("GET", "/krazy/index.php"),
+  m_krazyReportViewProjects(krazyReportViewProjects),
   m_projects(projects)
 {
     m_connectId = setHost("www.englishbreakfastnetwork.org", QHttp::ConnectionModeHttp, 0);
+    m_header.setValue("Host", "www.englishbreakfastnetwork.org");
+    m_header.setValue( "User-Agent", "User Agent");
+    m_header.setContentType("application/x-www-form-urlencoded");
 }
 
 KrazyCollector::~KrazyCollector()
@@ -39,18 +44,23 @@ KrazyCollector::~KrazyCollector()
 void KrazyCollector::run()
 {
     m_projectsCollected = 0;
+    m_projectsCountDelta = 0;
+    m_activeProjects = 0;
     KdeObservatoryDatabase::self()->truncateKrazyErrors();
-    if (m_projects.count() == 0)
-        emit collectFinished();
-    else
+    bool collected = false;
+    QHashIterator<QString, bool> i(m_krazyReportViewProjects);
+    while (i.hasNext())
     {
-        QMapIterator<QString, KdeObservatory::Project> i(m_projects);
-        while (i.hasNext())
+        i.next();
+        if (i.value())
         {
-            i.next();
+            collected = true;
+            ++m_activeProjects;
             collectProject(i.key());
         }
     }
+    if (!collected)
+        emit collectFinished();
 }
 
 void KrazyCollector::requestFinished (int id, bool error)
@@ -61,8 +71,31 @@ void KrazyCollector::requestFinished (int id, bool error)
     if (id == m_connectId)
         return;
 
-    QString source = readAll();
+    m_source = readAll();
 
+    if (m_source.contains("<h1>Not Found</h1>"))
+        kDebug() << "Krazy report not found for:" << m_idProjectNameMap[id] << ". Please, check configuration.";
+
+    if (m_source.contains("<table style=\"clear: right;\" class=\"sortable\" id=\"reportTable\" cellspacing=\"0\" border=\"0\" width=\"100%\">"))
+        processModule(id);
+    else
+        parseReport(id);
+}
+
+void KrazyCollector::collectProject(const QString &project)
+{
+    int id;
+    QString krazyReport = m_projects[project].krazyReport;
+    if (krazyReport.contains("reports"))
+        id = get(QUrl::toPercentEncoding("/krazy/" + krazyReport, "!$&'()*+,;=:@/"));
+    else if (krazyReport.contains("component="))
+        id = get(QString("/krazy/index.php?" + krazyReport).toUtf8());
+    m_idFilePrefixMap[id] = m_projects[project].krazyFilePrefix;
+    m_idProjectNameMap[id] = project;
+}
+
+void KrazyCollector::parseReport(int id)
+{
     QRegExp regExp1("<li><b><u>(.*)</u></b><ol>");
     QRegExp regExp2("<li><span class=\"toolmsg\">(.*)<b>");
     QRegExp regExp3("<li><a href=\"http://lxr.kde.org/source/[^<>]*" + m_idFilePrefixMap[id] + "(.*)\">.*</a>:\\s*(.*)\\s*</li>");
@@ -73,9 +106,9 @@ void KrazyCollector::requestFinished (int id, bool error)
     int pos = 0, pos1, pos2, pos3;
     QString fileType;
     QString testName;
-    pos1 = regExp1.indexIn(source, pos);
-    pos2 = regExp2.indexIn(source, pos);
-    pos3 = regExp3.indexIn(source, pos);
+    pos1 = regExp1.indexIn(m_source, pos);
+    pos2 = regExp2.indexIn(m_source, pos);
+    pos3 = regExp3.indexIn(m_source, pos);
     while (pos1 != -1 || pos2 != -1 || pos3 != -1)
     {
         pos = pos1;
@@ -98,19 +131,28 @@ void KrazyCollector::requestFinished (int id, bool error)
             KdeObservatoryDatabase::self()->addKrazyError(m_idProjectNameMap[id], fileType, testName, regExp3.cap(1), regExp3.cap(2));
             pos += regExp3.matchedLength();
         }
-        pos1 = regExp1.indexIn(source, pos);
-        pos2 = regExp2.indexIn(source, pos);
-        pos3 = regExp3.indexIn(source, pos);
+        pos1 = regExp1.indexIn(m_source, pos);
+        pos2 = regExp2.indexIn(m_source, pos);
+        pos3 = regExp3.indexIn(m_source, pos);
     }
 
     ++m_projectsCollected;
-    if (m_projectsCollected == m_projects.count())
+    if (m_projectsCollected == m_activeProjects + m_projectsCountDelta)
         emit collectFinished();
 }
 
-void KrazyCollector::collectProject(const QString &project)
+void KrazyCollector::processModule(int id)
 {
-    int id = get(QUrl::toPercentEncoding("/krazy/reports/" + m_projects[project].krazyReport + "/index.html", "!$&'()*+,;=:@/"));
-    m_idFilePrefixMap[id] = m_projects[project].krazyFilePrefix;
-    m_idProjectNameMap[id] = project;
+    QRegExp exp("<a href=\"(reports.*)\"");
+    exp.setMinimal(true);
+    --m_projectsCountDelta;
+    int pos = 0;
+    while ((pos = exp.indexIn(m_source, pos)) != -1)
+    {
+        ++m_projectsCountDelta;
+        int newId = get(QUrl::toPercentEncoding("/krazy/" + exp.cap(1), "!$&'()*+,;=:@/"));
+        m_idFilePrefixMap[newId] = m_idFilePrefixMap[id];
+        m_idProjectNameMap[newId] = m_idProjectNameMap[id];
+        pos += exp.matchedLength();
+    }
 }

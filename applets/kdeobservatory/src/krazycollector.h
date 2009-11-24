@@ -21,6 +21,8 @@
 #ifndef KRAZYCOLLECTOR_HEADER
 #define KRAZYCOLLECTOR_HEADER
 
+#include <QHttpRequestHeader>
+
 #include "icollector.h"
 #include "kdeobservatory.h"
 
@@ -28,7 +30,7 @@ class KrazyCollector : public ICollector
 {
     Q_OBJECT
 public:
-    KrazyCollector(const QMap<QString, KdeObservatory::Project> &projects, QObject *parent = 0);
+    KrazyCollector(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QObject *parent = 0);
     virtual ~KrazyCollector();
 
     void setExtent (int extent);
@@ -41,9 +43,16 @@ protected Q_SLOTS:
 
 private:
     void collectProject(const QString &project);
+    void parseReport(int id);
+    void processModule(int id);
 
+    QHttpRequestHeader m_header;
     int m_connectId;
     int m_projectsCollected;
+    int m_activeProjects;
+    int m_projectsCountDelta;
+    QString m_source;
+    const QHash<QString, bool> &m_krazyReportViewProjects;
     const QMap<QString, KdeObservatory::Project> &m_projects;
     QMap<int, QString> m_idFilePrefixMap;
     QMap<int, QString> m_idProjectNameMap;

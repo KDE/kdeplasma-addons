@@ -34,7 +34,7 @@ class IViewProvider : public QObject
 {
     Q_OBJECT
 public:
-    explicit IViewProvider(QRectF rect, QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
+    explicit IViewProvider(QGraphicsWidget *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~IViewProvider();
 
     QGraphicsWidget *createView(const QString &title);
@@ -44,7 +44,6 @@ public:
     virtual void updateViews() = 0;
 
 protected:
-    QRectF m_rect;
     QGraphicsWidget *m_parent;
     Qt::WindowFlags m_wFlags;
     QList<QGraphicsWidget *> m_views;

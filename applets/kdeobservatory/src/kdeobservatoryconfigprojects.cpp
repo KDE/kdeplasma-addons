@@ -31,6 +31,9 @@ KdeObservatoryConfigProjects::KdeObservatoryConfigProjects(QWidget *parent, Qt::
 : QWidget(parent, f)
 {
     setupUi(this);
+    psbAddProject->setIcon(KIcon("list-add"));
+    psbRemoveProject->setIcon(KIcon("list-remove"));
+    psbEditProject->setIcon(KIcon("document-edit"));
 }
 
 KdeObservatoryConfigProjects::~KdeObservatoryConfigProjects()

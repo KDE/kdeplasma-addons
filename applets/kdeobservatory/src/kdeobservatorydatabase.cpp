@@ -36,6 +36,16 @@ KdeObservatoryDatabase::~KdeObservatoryDatabase()
         m_db.close();
 }
 
+void KdeObservatoryDatabase::beginTransaction()
+{
+    m_db.transaction();
+}
+
+void KdeObservatoryDatabase::commitTransaction()
+{
+    m_db.commit();
+}
+
 KdeObservatoryDatabase *KdeObservatoryDatabase::self()
 {
     if (!m_kdeObservatoryDatabase)
@@ -73,7 +83,7 @@ void KdeObservatoryDatabase::deleteOldCommits(const QString &date)
 int KdeObservatoryDatabase::commitsByProject(const QString &prefix)
 {
     m_query.clear();
-    m_query.prepare("select count(*) from commits where subject like '" + prefix + "%'");
+    m_query.prepare("select count(*) from commits where subject like '%" + prefix + "%'");
     if (!m_query.exec())
     {
         kDebug() << "Error when executing commits by project -" << m_db.lastError();
@@ -86,7 +96,7 @@ int KdeObservatoryDatabase::commitsByProject(const QString &prefix)
 QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QString &prefix)
 {
     m_query.clear();
-    m_query.prepare("select count(*), developer from commits where subject like '" + prefix + "%' group by developer order by count(*) desc");
+    m_query.prepare("select count(*), developer from commits where subject like '%" + prefix + "%' group by developer order by count(*) desc");
     QMultiMap<int, QString> result;
     if (!m_query.exec())
     {
@@ -101,7 +111,7 @@ QMultiMap<int, QString> KdeObservatoryDatabase::developersByProject(const QStrin
 QList< QPair<QString, int> > KdeObservatoryDatabase::commitHistory(const QString &prefix)
 {
     m_query.clear();
-    m_query.prepare("select commit_date, count(*) from commits where subject like '" + prefix + "%' group by commit_date order by commit_date");
+    m_query.prepare("select commit_date, count(*) from commits where subject like '%" + prefix + "%' group by commit_date order by commit_date");
     QList< QPair<QString, int> > result;
     if (!m_query.exec())
     {
@@ -167,14 +177,19 @@ QStringList KdeObservatoryDatabase::krazyFilesByProjectTypeAndTest(const QString
 KdeObservatoryDatabase::KdeObservatoryDatabase()
 : m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    bool databaseExists = QFile(KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db")).exists();
-    m_db.setDatabaseName(KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db"));
+    const QString dbPath = KStandardDirs::locateLocal("data", "kdeobservatory/data/kdeobservatory.db");
+    bool databaseExists = QFile(dbPath).exists();
+    m_db.setDatabaseName(dbPath);
     if (!m_db.open())
     {
-        kDebug() << "Erro ao abrir o banco de dados";
+        kDebug() << "Error when opening database";
     }
-    if (!databaseExists)
-        init();
+    else
+    {
+        m_query.setForwardOnly(true);
+        if (!databaseExists)
+            init();
+    }
 }
 
 void KdeObservatoryDatabase::init()

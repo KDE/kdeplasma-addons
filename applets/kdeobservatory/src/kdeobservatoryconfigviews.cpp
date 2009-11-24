@@ -24,6 +24,8 @@ KdeObservatoryConfigViews::KdeObservatoryConfigViews(QWidget *parent, Qt::Window
 : QWidget(parent, f)
 {
     setupUi(this);
+    psbCheckAll->setIcon(KIcon("button_more"));
+    psbUncheckAll->setIcon(KIcon("button_fewer"));
     m_lastView = views->currentText();
 }
 
@@ -85,3 +87,39 @@ void KdeObservatoryConfigViews::updateView(const QString &view)
     m_lastView = view;
 }
 
+void KdeObservatoryConfigViews::on_tlbUp_clicked()
+{
+    swapViewItems(-1);
+}
+
+void KdeObservatoryConfigViews::on_tlbDown_clicked()
+{
+    swapViewItems(1);
+}
+
+void KdeObservatoryConfigViews::on_psbCheckAll_clicked()
+{
+    int counter = projectsInView->count();
+    for (int i = 0; i < counter; ++i)
+        projectsInView->item(i)->setCheckState(Qt::Checked);
+}
+
+void KdeObservatoryConfigViews::on_psbUncheckAll_clicked()
+{
+    int counter = projectsInView->count();
+    for (int i = 0; i < counter; ++i)
+        projectsInView->item(i)->setCheckState(Qt::Unchecked);
+}
+
+void KdeObservatoryConfigViews::swapViewItems(int updown)
+{
+    int linenumber = activeViews->currentRow();
+
+    if (linenumber + updown < activeViews->count())
+    {
+        QListWidgetItem *item = activeViews->currentItem();
+        activeViews->takeItem(linenumber);
+        activeViews->insertItem(linenumber + updown, item);
+        activeViews->setCurrentItem(item);
+    }
+}

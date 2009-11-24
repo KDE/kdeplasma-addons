@@ -31,7 +31,7 @@ CommitCollector::CommitCollector(QObject *parent)
   m_fullUpdate(false),
   m_commitsRead(0),
   m_lastArchiveRead(""),
-  m_extent(1),
+  m_extent(7),
   m_header("POST", "/")
 {
     m_connectId = setHost("lists.kde.org", QHttp::ConnectionModeHttp, 0);
@@ -136,11 +136,13 @@ void CommitCollector::requestFinished (int id, bool error)
         {
             m_lastArchiveRead = m_initialArchiveName;
             m_commitsRead = m_commitsToBeRead;
+            KdeObservatoryDatabase::self()->beginTransaction();
             while(!m_commits.isEmpty())
             {
                 const Commit &commit = m_commits.pop();
                 KdeObservatoryDatabase::self()->addCommit(commit.date, commit.subject, commit.developer);
             }
+            KdeObservatoryDatabase::self()->commitTransaction();
 
             m_fullUpdate = false;
             emit collectFinished();

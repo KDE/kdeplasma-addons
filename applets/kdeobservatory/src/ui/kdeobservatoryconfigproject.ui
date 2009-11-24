@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>221</height>
+    <height>235</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,11 +19,14 @@
   <property name="minimumSize">
    <size>
     <width>411</width>
-    <height>221</height>
+    <height>235</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Configure KDE Observatory - Project</string>
+  <property name="maximumSize">
+   <size>
+    <width>411</width>
+    <height>235</height>
+   </size>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -114,8 +117,10 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Bitstream Vera Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Krazy report web address for this project.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format:&lt;/span&gt; http://www.englishbreakfastnetwork.org/krazy/reports/&amp;lt;krazy-report&amp;gt;/index.html&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ex:&lt;/span&gt; http://www.englishbreakfastnetwork.org/krazy/reports/&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;kde-4.x/kdebase-runtime/plasma&lt;/span&gt;/index.html&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format:&lt;/span&gt; http://www.englishbreakfastnetwork.org/krazy/&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;lt;krazy-report&amp;gt;&lt;/span&gt; &lt;span style=&quot; font-weight:600;&quot;&gt;or &lt;/span&gt;http://www.englishbreakfastnetwork.org/krazy/index.php?&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;lt;krazy-component-module&amp;gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ex:&lt;/span&gt; http://www.englishbreakfastnetwork.org/krazy/&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;reports/kde-4.x/kdebase-runtime/plasma&lt;/span&gt;/&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;index.html&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;or&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;http://www.englishbreakfastnetwork.org/krazy/index.php?&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;component=kde-4.x&amp;amp;module=kdevelop&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
@@ -134,7 +139,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Bitstream Vera Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Sub-string that must appear in files belonging to this project. Leave it blank if all files in Krazy report belong to this project.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Sub-string that must appear in files belonging to this project. Leave it blank if all files in Krazy report belong to this project or a component-module address was given.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ex: for a plasmoid in playground, &lt;span style=&quot; text-decoration: underline;&quot;&gt;Krazy report&lt;/span&gt; would be &quot;playground/base/plasma&quot; and &lt;span style=&quot; text-decoration: underline;&quot;&gt;Krazy file identifier&lt;/span&gt; would be &quot;&amp;lt;plasmoid-directory&amp;gt;&quot;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>

@@ -23,11 +23,10 @@
 
 #include <KConfigGroup>
 
-#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 
 class QTimer;
 class QTimeLine;
-class QGraphicsProxyWidget;
 class QGraphicsLinearLayout;
 
 class ICollector;
@@ -39,15 +38,11 @@ class KdeObservatoryConfigProjects;
 namespace Plasma
 {
     class Label;
+    class Meter;
     class PushButton;
 }
 
-namespace Ui
-{
-    class KdeObservatoryConfigTopActiveProjects;
-}
-
-class KdeObservatory : public Plasma::Applet
+class KdeObservatory : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
@@ -55,6 +50,7 @@ public:
     ~KdeObservatory();
 
     void init();
+    virtual QGraphicsWidget* graphicsWidget();
 
     struct Project
     {
@@ -64,18 +60,28 @@ public:
         QString icon;
     };
 
+protected:
+    bool eventFilter(QObject *receiver, QEvent *event);
+    bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+
 protected Q_SLOTS:
     void createConfigurationInterface(KConfigDialog *parent);
     void configAccepted();
     void collectFinished();
     void moveViewRight();
     void moveViewLeft();
+    void moveViewRightClicked();
+    void moveViewLeftClicked();
     void switchViews(int delta);
     void runCollectors();
 
 private:
     void prepareUpdateViews();
     void updateViews();
+    void loadConfig();
+    void saveConfig();
+    void createTimers();
+    void createViewProviders();
 
     KConfigGroup m_configGroup;
 
@@ -87,9 +93,9 @@ private:
     int  m_commitExtent;
     int  m_synchronizationDelay;
     bool m_cacheContents;
-    bool m_enableTransitionEffects;
     bool m_enableAutoViewChange;
     int  m_viewsDelay;
+    int  m_lastViewCount;
     QList< QPair<QString, bool> > m_activeViews;
 
     // Config - Projects
@@ -108,9 +114,10 @@ private:
     QHash<QString, bool> m_krazyReportViewProjects;
 
     // Main Layout
+    QGraphicsWidget *m_mainContainer;
     QGraphicsLinearLayout *m_horizontalLayout;
     QGraphicsWidget *m_viewContainer;
-    QGraphicsProxyWidget *m_progressProxy;
+    Plasma::Meter *m_collectorProgress;
     Plasma::Label *m_updateLabel;
     Plasma::PushButton *m_right;
     Plasma::PushButton *m_left;

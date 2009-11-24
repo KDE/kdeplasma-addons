@@ -27,8 +27,8 @@
 
 #include "kdeobservatorydatabase.h"
 
-KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QRectF rect, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
-: IViewProvider(rect, parent, wFlags),
+KrazyReportView::KrazyReportView(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
+: IViewProvider(parent, wFlags),
   m_krazyReportViewProjects(krazyReportViewProjects),
   m_projects(projects)
 {
@@ -50,6 +50,8 @@ void KrazyReportView::updateViews()
         if (i1.value())
             krazyReports[i1.key()] = KdeObservatoryDatabase::self()->krazyErrorsByProject(i1.key());
     }
+
+    KdeObservatory *kdeObservatory = dynamic_cast<KdeObservatory *>(m_parent->parentItem()->parentItem());
 
     QMapIterator< QString, QMap<QString, QMultiMap<int, QString> > > i2(krazyReports);
     while (i2.hasNext())
@@ -104,6 +106,8 @@ void KrazyReportView::updateViews()
                     toolTip += "<li>" + fileName + "</li>";
                 toolTip += "</ul></h5></body></html>";
                 testNameRect->setToolTip(toolTip);
+                testNameRect->setAcceptHoverEvents(true);
+                testNameRect->installSceneEventFilter(kdeObservatory);
 
                 j++;
             }

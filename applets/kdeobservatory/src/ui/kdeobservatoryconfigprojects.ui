@@ -10,9 +10,6 @@
     <height>248</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Configure KDE Observatory - Projects</string>
-  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <spacer name="spacer1">
@@ -71,7 +68,7 @@
          </column>
          <column>
           <property name="text">
-           <string>Krazy File Prefix</string>
+           <string>Krazy File Identifier</string>
           </property>
          </column>
         </widget>
@@ -103,16 +100,18 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>102</width>
+           <width>85</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>85</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="text">
           <string>&amp;Add</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-add.png</iconset>
          </property>
         </widget>
        </item>
@@ -124,12 +123,20 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>85</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>85</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="text">
           <string>&amp;Remove</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/list-remove.png</iconset>
          </property>
         </widget>
        </item>
@@ -143,16 +150,18 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>102</width>
+           <width>85</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>85</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="text">
           <string>&amp;Edit</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/document-edit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/document-edit.png</iconset>
          </property>
         </widget>
        </item>

@@ -7,15 +7,12 @@
     <x>0</x>
     <y>0</y>
     <width>393</width>
-    <height>266</height>
+    <height>364</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Configure KDE Observatory - Commit Summary</string>
-  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="1">
-    <widget class="QLabel" name="lblProjectsInView">
+   <item row="0" column="1">
+    <widget class="QLabel" name="lblActiveViews">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -23,17 +20,309 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Projects in view:</string>
+      <string>Active views:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
-     <property name="buddy">
-      <cstring>size</cstring>
-     </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="1" column="0">
+    <spacer name="spacer4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>13</width>
+       <height>47</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout1">
+     <item>
+      <widget class="QListWidget" name="activeViews">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>123</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>Top Active Projects</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Commit History</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Top Developers</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Krazy Report</string>
+        </property>
+        <property name="checkState">
+         <enum>Checked</enum>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QToolButton" name="tlbUp">
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-up.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tlbDown">
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/go-down.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spacer5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>18</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="1">
+    <spacer name="spacer2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>86</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" rowspan="2">
+    <widget class="QGroupBox" name="gpbViewConfiguration">
+     <property name="title">
+      <string>View Configuration</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="lblView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>View:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KComboBox" name="views">
+          <item>
+           <property name="text">
+            <string>Top Active Projects</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Top Developers</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Commit History</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Krazy Report</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblProjectsInView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Projects in view:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QListWidget" name="projectsInView">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>85</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="KPushButton" name="psbCheckAll">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>105</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>105</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>&amp;Check All</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KPushButton" name="psbUncheckAll">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>105</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>105</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>&amp;Uncheck All</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <spacer name="spacer1">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -49,79 +338,14 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1">
-    <widget class="QListWidget" name="projectsInView">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>85</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <spacer name="spacer2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>86</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="lblView">
-     <property name="text">
-      <string>View:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="KComboBox" name="views">
-     <item>
-      <property name="text">
-       <string>Top Active Projects</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/svn-commit.png</iconset>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Top Developers</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/user-properties.png</iconset>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Commit History</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/view-history.png</iconset>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Krazy Report</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</normaloff>../../../../../usr/share/icons/oxygen/16x16/actions/checkbox.png</iconset>
-      </property>
-     </item>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

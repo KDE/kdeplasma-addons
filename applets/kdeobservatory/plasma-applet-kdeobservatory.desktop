@@ -1,16 +1,21 @@
 [Desktop Entry]
 Name=KDE Observatory
+Name[en_GB]=KDE Observatory
+Name[et]=KDE ülevaataja
 Name[pt]=Observatório do KDE
 Name[sv]=KDE-observatorium
 Name[tr]=KDE Gözlem Evi
 Name[uk]=Спостережний пункт KDE
 Name[x-test]=xxKDE Observatoryxx
 Comment=Visualize the KDE ecosystem
+Comment[en_GB]=Visualise the KDE ecosystem
+Comment[et]=KDE ökosüsteemi näitamine
 Comment[pt]=Visualizar o ecossistema do KDE
 Comment[sv]=Åskådliggör KDE:s ekosystem
 Comment[uk]=Візуалізація екосистеми KDE
 Comment[x-test]=xxVisualize the KDE ecosystemxx
 Type=Service
+Icon=kdeobservatory.png
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_kdeobservatory
