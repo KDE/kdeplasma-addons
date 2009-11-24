@@ -117,8 +117,8 @@ QPair<QString, QHash<QString, QString> > OcsEngine::parseSource(const QString& s
     QString request;
     QHash<QString, QString> arguments;
 
-    for (QStringList::const_iterator i = lines.begin(); i != lines.end(); ++i) {
-        if (i == lines.begin()) {
+    for (QStringList::const_iterator i = lines.constBegin(); i != lines.constEnd(); ++i) {
+        if (i == lines.constBegin()) {
             request = *i;
         } else {
             int splitPos = (*i).indexOf(':');
@@ -535,7 +535,7 @@ void OcsEngine::setPersonData(const QString& source, const Attica::Person& perso
         personData.insert("AvatarUrl", person.avatarUrl());
 
         QMap<QString, QString> attributes = person.extendedAttributes();
-        for(QMap<QString, QString>::const_iterator i = attributes.begin(); i != attributes.end(); ++i) {
+        for(QMap<QString, QString>::const_iterator i = attributes.constBegin(); i != attributes.constEnd(); ++i) {
             personData.insert(i.key(), i.value());
         }
         setData(source, "Person-" + person.id(), personData);
