@@ -58,7 +58,7 @@ void RTM::Request::sendRequest()
   }
   QString url = requestUrl();
   kDebug() << "Request ready. Url is: " << url;
-  currentJob = KIO::get(KUrl(url), KIO::NoReload, KIO::HideProgressInfo);
+  currentJob = KIO::get(KUrl(url.toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
   connect(currentJob, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(dataIncrement(KIO::Job*,QByteArray)));
   connect(currentJob, SIGNAL(result(KJob*)), this, SLOT(finished(KJob*)));
 
@@ -70,7 +70,7 @@ QString RTM::Request::method() const {
 }
 
 QByteArray RTM::Request::sendSynchronousRequest() {
-  KIO::Job *job = KIO::get(KUrl(requestUrl()), KIO::NoReload, KIO::HideProgressInfo);
+  KIO::Job *job = KIO::get(KUrl(requestUrl().toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
   job->setAutoDelete(true);
   QByteArray data = this->data();
   KIO::NetAccess::synchronousRun(job, 0, &data);
@@ -114,7 +114,8 @@ void RTM::Request::sign() {
       unistring.append(i.key());
       unistring.append(i.value());
  }
-  QString hash = QCryptographicHash::hash(unistring.toAscii(), QCryptographicHash::Md5).toHex();
+
+  QString hash = QCryptographicHash::hash(unistring.toUtf8(), QCryptographicHash::Md5).toHex();
   arguments.insert("api_sig", hash);
   m_state = RTM::Hashed;
 }
