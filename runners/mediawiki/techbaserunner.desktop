@@ -1,0 +1,30 @@
+[Desktop Entry]
+Name=TechBase
+Name[en_GB]=TechBase
+Name[et]=TechBase
+Name[pt]=TechBase
+Name[sv]=Techbase
+Name[tr]=TechBase
+Name[uk]=TechBase
+Name[x-test]=xxTechBasexx
+Comment=Search on KDE's TechBase
+Comment[en_GB]=Search on KDE's TechBase
+Comment[et]=Otsing KDE TechBase'is
+Comment[pt]=Procurar na TechBase do KDE
+Comment[sv]=Sök på KDE:s Techbase
+Comment[tr]=KDE'nin TechBase Sayfalarında Ara
+Comment[uk]=Пошук у TechBase KDE
+Comment[x-test]=xxSearch on KDE's TechBasexx
+Icon=kde
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_mediawiki
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=techbase
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false
+
+X-Plasma-Args=http://techbase.kde.org/api.php

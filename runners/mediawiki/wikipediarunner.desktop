@@ -1,0 +1,31 @@
+[Desktop Entry]
+Name=Wikipedia
+Name[cs]=Wikipedia
+Name[en_GB]=Wikipedia
+Name[et]=Wikipedia
+Name[pt]=Wikipédia
+Name[sv]=Wikipedia
+Name[tr]=Wikipedia
+Name[uk]=Вікіпедія
+Name[x-test]=xxWikipediaxx
+Comment=Search on Wikipedia
+Comment[en_GB]=Search on Wikipedia
+Comment[et]=Otsing Wikipedias
+Comment[pt]=Procurar na Wikipédia
+Comment[sv]=Sök på Wikipedia
+Comment[tr]=Wikipedia'da Ara
+Comment[uk]=Пошук у Вікіпедії
+Comment[x-test]=xxSearch on Wikipediaxx
+Icon=applications-internet
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+X-KDE-Library=krunner_mediawiki
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=wikipedia
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false
+
+X-Plasma-Args=http://wikipedia.org/w/api.php
