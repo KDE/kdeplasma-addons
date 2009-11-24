@@ -29,7 +29,7 @@
 
 namespace Plasma {
     class DataEngine;
-};
+}
 
 class MessageCounter : public QObject
 {
