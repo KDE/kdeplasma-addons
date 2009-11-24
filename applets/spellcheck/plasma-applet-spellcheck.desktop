@@ -1,0 +1,44 @@
+[Desktop Entry]
+Name=Spell Check
+Name[de]=Rechtschreibprüfung
+Name[en_GB]=Spell Check
+Name[es]=Comprobación de sintaxis
+Name[et]=Õigekirja kontroll
+Name[fr]=Spell Check
+Name[gl]=Corrección ortográfica
+Name[nl]=Spellingscontrole
+Name[pt]=Verificação Ortográfica
+Name[pt_BR]=Verificar ortografia
+Name[sv]=Stavningskontroll
+Name[tr]=Yazım Denetimi
+Name[uk]=Перевірка правопису
+Name[x-test]=xxSpell Checkxx
+
+Comment=Fast spell checking
+Comment[en_GB]=Fast spell checking
+Comment[es]=Comprobación rápida de sintaxis
+Comment[et]=Kiire õigekirja kontroll
+Comment[fr]=Vérification orthographique rapide
+Comment[gl]=Corrección ortográfica rápida
+Comment[nl]=Snelle spellingscontrole
+Comment[pt]=Verificação ortográfica rápida
+Comment[pt_BR]=Verificação rápida da ortográfica
+Comment[sv]=Snabb stavningskontroll
+Comment[tr]=Hızlı yazım denetimi
+Comment[uk]=Швидка перевірка правопису
+Comment[x-test]=xxFast spell checkingxx
+
+Icon=tools-check-spelling
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_spellcheck
+X-KDE-PluginInfo-Author=Michał Dutkiewicz aka Emdek
+X-KDE-PluginInfo-Email=emdeck@gmail.com
+X-KDE-PluginInfo-Name=spellcheck
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=http://emdek.cba.pl/
+X-KDE-PluginInfo-Category=Language
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
