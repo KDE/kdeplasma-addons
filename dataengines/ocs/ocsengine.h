@@ -76,7 +76,7 @@ protected Q_SLOTS:
     void slotPixmapData(KIO::Job* j, const QByteArray& data);
     void slotPixmapResult(KJob* j);
 
-    void providersChanged();
+    void providerAdded(const Attica::Provider& provider);
     void serviceUpdates(const QString& command);
 
 private:

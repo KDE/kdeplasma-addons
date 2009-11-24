@@ -50,7 +50,7 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
 
-    connect(&m_pm, SIGNAL(providersChanged()), SLOT(providersChanged()));
+    connect(&m_pm, SIGNAL(providerAdded(const Attica::Provider&)), SLOT(providerAdded(const Attica::Provider&)));
     m_pm.loadDefaultProviders();
     connect(m_serviceUpdates.data(), SIGNAL(mapped(QString)), SLOT(serviceUpdates(QString)));
 }
@@ -844,19 +844,19 @@ void OcsEngine::slotMessageListResult(BaseJob* j)
 }
 
 
-void OcsEngine::providersChanged() {
-    qDebug() << "providersChanged()";
-    foreach (Provider provider, m_pm.providers()) {
-        QString baseUrl = provider.baseUrl().toString();
-        if (!m_providers.contains(baseUrl)) {
-            m_providers.insert(baseUrl, QSharedPointer<Provider>(new Provider(provider)));
+void OcsEngine::providerAdded(const Attica::Provider& provider)
+{
+    qDebug() << "providerAdded" << provider.baseUrl();
 
-            setProviderData("Providers", provider);
+    QString baseUrl = provider.baseUrl().toString();
+    if (!m_providers.contains(baseUrl)) {
+        m_providers.insert(baseUrl, QSharedPointer<Provider>(new Provider(provider)));
 
-            // Work off all source requests for this provider
-            foreach(const QString& query, m_requestCache.value(baseUrl)) {
-                updateSourceEvent(query);
-            }
+        setProviderData("Providers", provider);
+
+        // Work off all source requests for this provider
+        foreach(const QString& query, m_requestCache.value(baseUrl)) {
+            updateSourceEvent(query);
         }
     }
 }
