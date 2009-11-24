@@ -59,7 +59,6 @@ Q_OBJECT
     virtual ~Session();
 
     QString getAuthUrl() const;
-    void showLoginWindow();
     bool authenticated() const;
 
     RTM::Request* request(const QString& method);
@@ -68,7 +67,6 @@ Q_OBJECT
 
     void setTimeline(const RTM::Timeline& timeline);
     RTM::Timeline getTimeline() const;
-    void createTimeline();
 
     void checkToken();
 
@@ -89,19 +87,21 @@ Q_OBJECT
     RTM::List* newBlankList(RTM::ListId id) const;
 
   public Q_SLOTS:
+    void showLoginWindow();
     void setToken(const QString &token);
     void handleResponse();
     void continueAuthForToken();
     void addTask(const QString &task, RTM::ListId listId);
-    RTM::Task* createTaskFromString(const QString& task);
     void tokenCheckReply(RTM::Request*);
     void handleValidToken(bool);
     void timelineReply(RTM::Request*);
+    void createTimeline();
 
   Q_SIGNALS:
     void tokenReceived(const QString& token);
     void tokenCheck(bool success);
     
+    void settingsUpdated();
     void timelineCreated(RTM::Timeline timeline);
 
     void taskChanged(RTM::Task* task);
@@ -118,6 +118,7 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void taskUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void listUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
+    Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
 };
 
 } // Namespace RTM

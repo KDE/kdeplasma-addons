@@ -69,14 +69,6 @@ QString RTM::Request::method() const {
   return arguments.value("method");
 }
 
-QByteArray RTM::Request::sendSynchronousRequest() {
-  KIO::Job *job = KIO::get(KUrl(requestUrl().toUtf8()), KIO::NoReload, KIO::HideProgressInfo);
-  job->setAutoDelete(true);
-  QByteArray data = this->data();
-  KIO::NetAccess::synchronousRun(job, 0, &data);
-  return data; // TODO ERROR HANDLING
-}
-
 void RTM::Request::dataIncrement(KIO::Job* job, QByteArray data) {
   Q_UNUSED(job)
   //kDebug() << data;

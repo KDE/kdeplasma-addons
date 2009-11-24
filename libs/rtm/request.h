@@ -52,7 +52,6 @@ Q_OBJECT
 
   public slots:
     void sendRequest();
-    QByteArray sendSynchronousRequest();
     
   private slots:
     void dataIncrement(KIO::Job* job, QByteArray data);

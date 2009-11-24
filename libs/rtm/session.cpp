@@ -48,6 +48,7 @@ RTM::Session::Session(QString apiKey, QString sharedSecret, RTM::Permissions per
   d->permissions = permissions;
   
   connect(this, SIGNAL(tokenCheck(bool)), SLOT(handleValidToken(bool)));
+  connect(this, SIGNAL(settingsUpdated()), SLOT(createTimeline()));
   
   setToken(token);
 }
@@ -57,7 +58,9 @@ RTM::Session::~Session()
   delete d;
 }
 
-void RTM::Session::showLoginWindow() {
+
+void RTM::Session::showLoginWindow()
+{
   //FIXME: What happens when auth wasn't created?
   if (!d->auth)
     d->auth = new RTM::Auth(d->permissions, d->apiKey, d->sharedSecret);
@@ -126,7 +129,6 @@ void RTM::Session::handleValidToken(bool valid)
   }
   else {
     d->refreshSettings();
-    createTimeline();
   }
 }
 
@@ -257,12 +259,6 @@ void RTM::Session::addTask(const QString& task, RTM::ListId listId)
   
   connectTaskRequest(newTask);
   newTask->sendRequest();
-}
-
-RTM::Task* RTM::Session::createTaskFromString(const QString& task) {
-  RTM::Task *newTask = RTM::Task::createSyncTaskFromString(this, task);
-  d->tasks.insert(newTask->id(), newTask);
-  return newTask;
 }
 
 #include "session.moc"

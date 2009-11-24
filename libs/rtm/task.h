@@ -61,8 +61,6 @@ class RTM_EXPORT Task : public QObject
   public:
     virtual ~Task();
 
-    /** Creates a new task from QString task. Also uploads to RTM::Session session */
-    static Task* createSyncTaskFromString(RTM::Session* session, const QString& task);
     static Task* uninitializedTask(RTM::Session* session);
 
     QStringList tags() const;

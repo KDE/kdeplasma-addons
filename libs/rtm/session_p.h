@@ -102,11 +102,9 @@ class RTM::SessionPrivate {
     
     reply->deleteLater();
   }
-  void refreshSettings() {
-    RTM::Request settingsRequest("rtm.settings.getList", q->apiKey(), q->sharedSecret());
-    settingsRequest.addArgument("auth_token", q->token());
-    
-    QString reply = settingsRequest.sendSynchronousRequest();
+  void settingsReply(RTM::Request* request) {
+    QString reply = request->readAll();
+        
     
     // We're basically assuming no error here.... FIXME
     QString timezone = reply.remove(0, reply.indexOf("<timezone>")+10);
@@ -120,6 +118,16 @@ class RTM::SessionPrivate {
     
     this->timezone = KSystemTimeZones::zone(timezone);
     kDebug() << "Timezone Set To: " << timezone << " i.e. " << this->timezone.name();
+    
+    request->deleteLater();
+    emit q->settingsUpdated();
+  }
+  void refreshSettings() {
+    RTM::Request *settingsRequest = new RTM::Request("rtm.settings.getList", q->apiKey(), q->sharedSecret());
+    settingsRequest->addArgument("auth_token", q->token());
+    
+    QObject::connect(settingsRequest, SIGNAL(replyReceived(RTM::Request*)), q, SLOT(settingsReply(RTM::Request*)));
+    settingsRequest->sendRequest();
   }
   
 

@@ -292,18 +292,6 @@ void RTM::Task::undoLastAction() {
   //TODO: Implement
 }
 
-RTM::Task* RTM::Task::createSyncTaskFromString(RTM::Session* session, const QString& task) {
-  RTM::Request *request = session->request("rtm.tasks.add"); // auth token is done for us
-  request->addArgument("name", task);
-  request->addArgument("parse", "1");
-  request->addArgument("timeline", QString::number(session->getTimeline()));
-  request->sendSynchronousRequest();
-  RTM::TasksReader reader(request, session);
-  reader.read();
-  //return reader.getReadTasks()->values().first();
-  return new Task(session); //TODO: rewrite async.
-}
-
 RTM::Task* RTM::Task::uninitializedTask(RTM::Session* session) {
   return new Task(session);
 }
