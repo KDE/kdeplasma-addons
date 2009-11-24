@@ -32,7 +32,7 @@ class UserWidget;
 namespace Plasma {
     class DataEngine;
     class TabBar;
-};
+}
 
 class ActionStack : public QGraphicsWidget
 {
