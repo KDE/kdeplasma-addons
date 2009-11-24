@@ -60,6 +60,7 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 {
     setBackgroundHints(DefaultBackground);
     setHasConfigurationInterface(true);
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
     resize(300, 200);
 
     m_collectors["Commit Collector"] = new CommitCollector(this);
