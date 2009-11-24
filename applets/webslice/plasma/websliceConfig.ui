@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>websliceConfig</class>
+ <widget class="QWidget" name="websliceConfig">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>513</width>
+    <height>418</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>200</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Configure the System Bar</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::ExpandingFieldsGrow</enum>
+   </property>
+   <item row="2" column="0">
+    <widget class="QLabel" name="urlLabel">
+     <property name="text">
+      <string>URL</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KLineEdit" name="urlEdit"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="elementLabel">
+     <property name="text">
+      <string>Element to Show</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="KLineEdit" name="elementEdit"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Geometry</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="KLineEdit" name="geometryEdit"/>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>&lt;p&gt;
+The Webslice Widget allows you to display a part of a webpage on your desktop or in a panel. The webslice is fully interactive.
+&lt;/p&gt;
+&lt;p&gt;
+Specify the URL of the webpage in the URL field.
+
+In the &lt;em&gt;Element to Show&lt;/em&gt; field, fill in a CSS identifier (for example #mybox for elements with the id &quot;mybox&quot;).  This is the preferred method as it works best with layout changes on the webpage.
+&lt;/p&gt;
+&lt;p&gt;
+Alternatively, you can specify a rectangle on the webpage to use as slice. Use &quot;x,y,width,height&quot; in pixels, for example &lt;em&gt;&quot;100,80,300,360&quot;&lt;/em&gt;. This method is a fallback for webpages that don't provide enough semantic markup for the above mechanism.
+&lt;/p&gt;
+If both methods (element and geometry) are used, the element will take precedence.
+</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>&lt;b&gt;Webslice&lt;/b&gt;
+</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>&lt;b&gt;Setup&lt;/b&gt;</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

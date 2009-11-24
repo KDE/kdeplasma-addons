@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=Web Slice
+Name[en_GB]=Web Slice
+Name[et]=Veebilõik
+Name[pt]=Fatia Web
+Name[sv]=Webbutdrag
+Name[tr]=Web Parçacığı
+Name[uk]=Веб-зріз
+Name[x-test]=xxWeb Slicexx
+Comment=Show a part of a webpage
+Comment[en_GB]=Show a part of a webpage
+Comment[et]=Veebilehe osa näitamine
+Comment[pt]=Mostrar uma parte de uma página Web
+Comment[sv]=Visa en del av en webbsida
+Comment[tr]=Bir web sayfasının bir bölümünü göster
+Comment[uk]=Показ частини веб-сторінки
+Comment[x-test]=xxShow a part of a webpagexx
+
+Type=Service
+Icon=internet-web-browser
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_webslice
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=webslice
+X-KDE-PluginInfo-Version=0.3
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
