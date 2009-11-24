@@ -84,7 +84,7 @@ void KrazyCollector::requestFinished (int id, bool error)
 
 void KrazyCollector::collectProject(const QString &project)
 {
-    int id;
+    int id = 0;
     QString krazyReport = m_projects[project].krazyReport;
     if (krazyReport.contains("reports"))
         id = get(QUrl::toPercentEncoding("/krazy/" + krazyReport, "!$&'()*+,;=:@/"));
