@@ -35,6 +35,7 @@ add_subdirectory(pastebin)
 add_subdirectory(previewer)
 add_subdirectory(rememberthemilk)
 add_subdirectory(rssnow)
+add_subdirectory(spellcheck)
 add_subdirectory(showdashboard)
 add_subdirectory(timer)
 
