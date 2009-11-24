@@ -75,6 +75,7 @@ private :
     int m_totalPages;
 
     Plasma::Label *m_title;
+    Plasma::Label* m_category;
     QGraphicsLinearLayout *m_layout;
     QPixmap m_pixmap;
     QGraphicsWidget *m_detailsWidget;

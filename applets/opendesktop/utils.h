@@ -19,18 +19,39 @@
     USA.
 */
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <QtCore/QString>
 
 
-QString friendsQuery(const QString& id);
+QString escape(const QString& value);
 
-QString personQuery(const QString& id);
+QString friendsQuery(const QString& provider, const QString& id);
 
-QString personSummaryQuery(const QString& id);
+QString messageAddPrefix(const QString& message);
 
-/**
- * Return the user id that belongs to a person query
- * @param query The query to read from
- * @return the user id if query is of correct format, otherwise an empty string
- */
-QString personFromQuery(const QString& query);
+QString messageListQuery(const QString& provider, const QString& folder);
+
+QString messageListUnreadQuery(const QString& provider, const QString& folder);
+
+QString messageRemovePrefix(const QString& message);
+
+QString messageQuery(const QString& provider, const QString& folder, const QString& message);
+
+QString messageSummaryQuery(const QString& provider, const QString& folder, const QString& message);
+
+QString personAddPrefix(const QString& id);
+
+QString personQuery(const QString& provider, const QString& id);
+
+QString personRemovePrefix(const QString& id);
+
+QString personSelfQuery(const QString& provider);
+
+QString personSummaryQuery(const QString& provider, const QString& id);
+
+QString receivedInvitationsQuery(const QString& provider);
+
+
+#endif

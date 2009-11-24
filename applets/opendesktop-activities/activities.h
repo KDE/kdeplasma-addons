@@ -40,12 +40,13 @@ class OpenDesktopActivities : public Plasma::PopupApplet
         QGraphicsWidget* graphicsWidget();
 
     private Q_SLOTS:
-        void initWatcher();
+        void initAsync();
         void newActivities(const QSet<QString>& keys);
 
     private:
         ActivityList* m_activityList;
         SourceWatchList* m_activityWatcher;
+        QString m_provider;
 };
 
 #endif

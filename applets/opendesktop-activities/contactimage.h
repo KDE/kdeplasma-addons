@@ -21,38 +21,39 @@
 #define CONTACTIMAGE_H
 
 //Qt
-#include <QGraphicsWidget>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
-#include <QWidget>
+#include <QtCore/QUrl>
+#include <QtGui/QGraphicsWidget>
+
+#include <Plasma/DataEngine>
+
 
 class ContactImage : public QGraphicsWidget
 {
     Q_OBJECT
 
-    public:
-        ContactImage(QGraphicsWidget *parent = 0);
-        virtual ~ContactImage();
-        void setImage(const QImage &image);
-        void setPixmap(const QPixmap &pixmap);
+public:
+    explicit ContactImage(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
+    void setUrl(const QUrl& url);
 
-        QColor fg;
-        QColor bg;
-        //QImage image;
-        int border;
+private Q_SLOTS:
+    void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
-    protected:
-        void paint(QPainter *painter,
-               const QStyleOptionGraphicsItem *option,
-               QWidget *widget = 0);
+private:
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+    void resizeEvent(QGraphicsSceneResizeEvent* event);
+    void pixmapUpdated();
 
-        void resizeEvent(QGraphicsSceneResizeEvent *event);
+    Plasma::DataEngine* m_engine;
 
-    private:
-        void pixmapUpdated();
-        QPixmap m_pixmap;
-        QPixmap m_scaledPixmap;
+    int border;
+    QColor fg;
+    QColor bg;
+
+    QPixmap m_pixmap;
+    QPixmap m_scaledPixmap;
+
+    QString m_source;
 };
 
-#endif
 
+#endif

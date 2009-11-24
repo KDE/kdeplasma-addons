@@ -21,6 +21,7 @@
 #include "contactimage.h"
 
 //Qt
+#include <QtCore/QUrl>
 #include <QGraphicsLinearLayout>
 
 //KDE
@@ -35,7 +36,7 @@
 
 using namespace Plasma;
 
-ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
+ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     : Frame(parent),
       m_isHovered(false)
 {
@@ -43,8 +44,8 @@ ActivityWidget::ActivityWidget(QGraphicsWidget *parent)
 
     m_layout = new QGraphicsLinearLayout(this);
 
-    m_image = new ContactImage(this);
-    m_image->setMinimumSize(KIconLoader::SizeSmallMedium, KIconLoader::SizeSmallMedium);
+    m_image = new ContactImage(engine, this);
+    m_image->setMinimumSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
     m_image->setMaximumSize(m_image->minimumSize());
 
     m_layout->addItem(m_image);
@@ -70,10 +71,6 @@ ActivityWidget::~ActivityWidget()
 {
 }
 
-void ActivityWidget::setPixmap(const QPixmap &pixmap)
-{
-    m_image->setPixmap(pixmap);
-}
 
 void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
 {
@@ -85,6 +82,7 @@ void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
     } else {
         m_messageLabel->setText(message);
     }
+    m_image->setUrl(data.value("user-AvatarUrl").toUrl());
 
     updateActions();
 }
@@ -98,13 +96,13 @@ Plasma::DataEngine::Data ActivityWidget::activityData() const
 
 void ActivityWidget::followLink()
 {
-    KToolInvocation::invokeBrowser(m_atticaData["link"].toString());
+    KToolInvocation::invokeBrowser(m_atticaData["link"].value<QUrl>().toString());
 }
 
 
 void ActivityWidget::updateActions()
 {
-    m_link->setVisible(m_isHovered && !m_atticaData.value("link").toString().isEmpty());
+    m_link->setVisible(m_isHovered && m_atticaData.value("link").value<QUrl>().isValid());
 }
 
 

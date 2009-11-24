@@ -21,14 +21,15 @@
 
 #include "personservice.h"
 
-#include "inviteservicejob.h"
-#include "messagesendservicejob.h"
+#include <attica/message.h>
+#include <attica/postjob.h>
+#include "servicejobwrapper.h"
 
 
 using namespace Attica;
 
-PersonService::PersonService(const Provider& provider, const QString& id, QObject* parent)
-    : Service(parent), m_id(id), m_provider(provider)
+PersonService::PersonService(QSharedPointer<Provider> provider, const QString& id, QSharedPointer<QSignalMapper> serviceUpdates, QObject* parent)
+    : Service(parent), m_id(id), m_provider(provider), m_serviceUpdates(serviceUpdates)
 {
     setName("ocsPerson");
 }
@@ -37,9 +38,34 @@ PersonService::PersonService(const Provider& provider, const QString& id, QObjec
 Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
 {
     if (operation == "sendMessage") {
-        return new MessageSendServiceJob(m_provider, m_id, operation, parameters);
+        Message message;
+        message.setTo(m_id);
+        message.setSubject(parameters.value("Subject").toString());
+        message.setBody(parameters.value("Body").toString());
+        
+        return new ServiceJobWrapper(m_provider->postMessage(message), m_id, operation, parameters);
     } else if (operation == "invite") {
-        return new InviteServiceJob(m_provider, m_id, operation, parameters);
-    } else
+        QString message = parameters.value("Message").toString();
+        ServiceJobWrapper* job = new ServiceJobWrapper(m_provider->inviteFriend(m_id, message), m_id, operation, parameters);
+        m_serviceUpdates.data()->setMapping(job, "SentInvitations");
+        connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
+        return job;
+    } else if (operation == "approveFriendship") {
+        ServiceJobWrapper* job = new ServiceJobWrapper(m_provider->approveFriendship(m_id), m_id, operation, parameters);
+        m_serviceUpdates.data()->setMapping(job, "ReceivedInvitations,Friends");
+        connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
+        return job;
+    } else if (operation == "declineFriendship") {
+        ServiceJobWrapper* job = new ServiceJobWrapper(m_provider->declineFriendship(m_id), m_id, operation, parameters);
+        m_serviceUpdates.data()->setMapping(job, "ReceivedInvitations");
+        connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
+        return job;
+    } else if (operation == "cancelFriendship") {
+        ServiceJobWrapper* job = new ServiceJobWrapper(m_provider->cancelFriendship(m_id), m_id, operation, parameters);
+        m_serviceUpdates.data()->setMapping(job, "Friends");
+        connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
+        return job;
+    } else {
         return new Plasma::ServiceJob("", operation, parameters);
+    }
 }

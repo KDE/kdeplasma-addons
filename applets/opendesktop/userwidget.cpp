@@ -29,6 +29,7 @@
 #include <KDirWatch>
 #include <KColorScheme>
 #include <KGlobalSettings>
+#include <KIconLoader>
 #include <KLocale>
 #include <KStandardDirs>
 
@@ -41,6 +42,7 @@
 // own
 #include "contactimage.h"
 #include "stylesheet.h"
+#include "utils.h"
 
 using namespace Plasma;
 
@@ -50,7 +52,8 @@ UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
       m_image(0),
       m_nameLabel(0),
       m_infoView(0),
-      m_engine(engine)
+      m_engine(engine),
+      m_personWatch(engine)
 {
     m_info = i18n("No information available.");
 
@@ -74,7 +77,7 @@ UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
     setMinimumWidth(200);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     buildDialog();
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
+    connect(Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
     connect(KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), SLOT(updateColors()));
 }
 
@@ -88,22 +91,23 @@ void UserWidget::buildDialog()
     updateColors();
 
     int m = 64; // size of the image
+    int actionSize = KIconLoader::SizeSmallMedium;
+
     m_layout = new QGraphicsGridLayout(this);
     m_layout->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_layout->setColumnFixedWidth(0, m); // This could probably be a bit more dynamic
     m_layout->setColumnMinimumWidth(1, 60);
     m_layout->setHorizontalSpacing(4);
 
-    m_image = new ContactImage(this);
+    m_image = new ContactImage(m_engine, this);
 
-    //m_image->setIcon("system-users");
-    //m_image->setPreferredWidth(64);
-    //m_image->setPreferredHeight(64);
+    m_image->setPreferredWidth(m);
+    m_image->setPreferredHeight(m);
     m_image->setMinimumHeight(m);
     m_image->setMinimumWidth(m);
     m_layout->addItem(m_image, 0, 0, 1, 1, Qt::AlignTop);
 
-    m_nameLabel = new Plasma::Label(this);
+    m_nameLabel = new Label(this);
     m_nameLabel->nativeWidget()->setWordWrap(true);
     m_nameLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_nameLabel->setMinimumWidth(60);
@@ -111,43 +115,51 @@ void UserWidget::buildDialog()
     m_layout->addItem(m_nameLabel, 0, 1, 1, 1, Qt::AlignTop);
 
 
-    m_infoView = new Plasma::WebView(this);
+    m_infoView = new WebView(this);
     m_infoView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     //m_infoView->nativeWidget()->setFont(KGlobalSettings::smallestReadableFont());
     //m_infoView->nativeWidget()->setWordWrap(true);
 
     m_layout->addItem(m_infoView, 1, 0, 1, 2, Qt::AlignTop);
 
+    Plasma::IconWidget* back = new Plasma::IconWidget;
+    back->setIcon("go-previous-view");
+    back->setToolTip(i18n("Back"));
+    back->setMinimumHeight(actionSize);
+    back->setMaximumHeight(actionSize);
+    back->setMinimumWidth(actionSize);
+    back->setMaximumWidth(actionSize);
+
+    QGraphicsLinearLayout* actionLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    actionLayout->addItem(back);
+    actionLayout->addStretch();
+
+    m_layout->addItem(actionLayout, 2, 0);
     setLayout(m_layout);
 
+    connect(back, SIGNAL(clicked()), SIGNAL(done()));
+
     updateColors();
+
+    connect(&m_personWatch, SIGNAL(updated()), SLOT(dataUpdated()));
 }
 
-void UserWidget::setId(const QString& id) {
-    // Disconnect from the last person displayed
-    if (!m_id.isEmpty())
-        m_engine->disconnectSource(QString("Person-%1").arg(m_id), this);
-    
-    m_id = id;
-    
-    if (!m_id.isEmpty())
-        m_engine->connectSource(QString("Person-%1").arg(m_id), this);
-
-    m_data = m_engine->query(QString("Person-%1").arg(m_id));
-    setName();
-    setInfo();
-}
-
-void UserWidget::dataUpdated(const QString& source, const Plasma::DataEngine::Data& atticaData)
+void UserWidget::setId(const QString& id)
 {
-    //kDebug() << data;
-    kDebug() << "Updating user widget";
-    m_data = atticaData[source].value<Plasma::DataEngine::Data>();
+    m_id = id;
+    m_personWatch.setId(id);
+}
 
-    QPixmap pm = m_data["Avatar"].value<QPixmap>();
-    QString pmUrl = m_data["AvatarUrl"].toUrl().toString();
 
-    m_image->setPixmap(pm);
+void UserWidget::setProvider(const QString& provider)
+{
+    m_personWatch.setProvider(provider);
+}
+
+
+void UserWidget::dataUpdated()
+{
+    m_image->setUrl(m_personWatch.data().value("AvatarUrl").toUrl());
 
     setName();
     setInfo();
@@ -180,10 +192,10 @@ void UserWidget::updateColors()
     p.setColor(QPalette::Window, Qt::transparent); // For Qt 4.4, remove when we depend on 4.5
 
 
-    QColor text = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-    QColor link = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+    QColor text = Theme::defaultTheme()->color(Theme::TextColor);
+    QColor link = Theme::defaultTheme()->color(Theme::TextColor);
     link.setAlphaF(qreal(.8));
-    QColor linkvisited = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
+    QColor linkvisited = Theme::defaultTheme()->color(Theme::TextColor);
     linkvisited.setAlphaF(qreal(.6));
 
     p.setColor(QPalette::Text, text);
@@ -192,10 +204,6 @@ void UserWidget::updateColors()
 
     setPalette(p);
 
-    if (m_image) {
-        m_image->fg = text;
-        m_image->bg = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
-    }
     if (m_nameLabel) {
         m_nameLabel->setPalette(p);
         if (m_css) {
@@ -209,9 +217,10 @@ void UserWidget::updateColors()
 
 void UserWidget::setName()
 {
+    DataEngine::Data data = m_personWatch.data();
     QString html;
 
-    QString _name = m_data["Name"].toString();
+    QString _name = data["Name"].toString();
 
     if (_name.isEmpty()) {
         html = QString("<font size=\"+2\"><b>%1</b></font>").arg(m_id);
@@ -219,7 +228,7 @@ void UserWidget::setName()
         html = QString("<font size=\"+2\"><b>%1 (%2)</b></font>").arg(_name, m_id);
     }
 
-    QString crole = m_data["description"].toString();
+    QString crole = data["description"].toString();
     
     if (!crole.isEmpty()) {
         html.append(QString("\n<br />%1").arg(crole));
@@ -232,10 +241,11 @@ void UserWidget::setName()
 
 void UserWidget::setInfo()
 {
-    QString city = m_data["City"].toString();
-    QString country = m_data["Country"].toString();
-    qreal lat = (qreal)(m_data["Latitude"].toDouble());
-    qreal lon = (qreal)(m_data["Longitude"].toDouble());
+    DataEngine::Data data = m_personWatch.data();
+    QString city = data["City"].toString();
+    QString country = data["Country"].toString();
+    qreal lat = (qreal)(data["Latitude"].toDouble());
+    qreal lon = (qreal)(data["Longitude"].toDouble());
 
     QString location;
     if (!city.isEmpty() && !country.isEmpty()) {
@@ -250,23 +260,23 @@ void UserWidget::setInfo()
         location = i18nc("city, country, latitude and longitude", "%1 (Lat: %2, Long: %3)", location, KGlobal::locale()->formatNumber(lat, 2), KGlobal::locale()->formatNumber(lon, 2));
     }
 
-    QString birthday = KGlobal::locale()->formatDate(m_data["Birthday"].toDate(), KLocale::FancyLongDate);
+    QString birthday = KGlobal::locale()->formatDate(data["Birthday"].toDate(), KLocale::FancyLongDate);
 
     QStringList userInfo;
 
     userInfo << "<table>";
     userInfo << addRow(i18n("Birthday:"), birthday);
     userInfo << addRow(i18n("Location:"), location);
-    userInfo << addRow(i18n("IRC Nickname:"), m_data["ircnick"].toString());
-    userInfo << addRow(i18n("Company:"), m_data["company"].toString());
-    userInfo << addRow(i18n("Languages:"), m_data["languages"].toString());
-    userInfo << addRow(i18n("Interests:"), m_data["interests"].toString());
-    userInfo << addRow(i18n("Music:"), m_data["favouritemusic"].toString());
-    userInfo << addRow(i18n("TV Shows:"), m_data["favouritetvshows"].toString());
-    userInfo << addRow(i18n("Games:"), m_data["favouritegames"].toString());
-    userInfo << addRow(i18n("Programming:"), m_data["programminglanguages"].toString());
-    userInfo << addRow(i18n("%1 likes:", m_id), m_data["likes"].toString());
-    userInfo << addRow(i18n("%1 does not like:", m_id), m_data["dontlikes"].toString());
+    userInfo << addRow(i18n("IRC Nickname:"), data["ircnick"].toString());
+    userInfo << addRow(i18n("Company:"), data["company"].toString());
+    userInfo << addRow(i18n("Languages:"), data["languages"].toString());
+    userInfo << addRow(i18n("Interests:"), data["interests"].toString());
+    userInfo << addRow(i18n("Music:"), data["favouritemusic"].toString());
+    userInfo << addRow(i18n("TV Shows:"), data["favouritetvshows"].toString());
+    userInfo << addRow(i18n("Games:"), data["favouritegames"].toString());
+    userInfo << addRow(i18n("Programming:"), data["programminglanguages"].toString());
+    userInfo << addRow(i18n("%1 likes:", m_id), data["likes"].toString());
+    userInfo << addRow(i18n("%1 does not like:", m_id), data["dontlikes"].toString());
     userInfo << "</table>";
 
     QString html = userInfo.join("");

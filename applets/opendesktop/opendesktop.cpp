@@ -39,6 +39,13 @@
 #include <Plasma/ScrollWidget>
 #include <Plasma/ToolTipManager>
 
+#include "actionstack.h"
+#include "messagecounter.h"
+#include "messagelist.h"
+#include "ownidwatcher.h"
+#include "friendlist.h"
+
+
 K_EXPORT_PLASMA_APPLET(opendesktop, OpenDesktop)
 
 using namespace Plasma;
@@ -50,17 +57,15 @@ struct GeoLocation {
     int accuracy;
     qreal latitude;
     qreal longitude;
-    qreal distance;
 };
 
 
 OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
-        id(0),
         m_tabs(0),
         m_friendList(0),
         m_nearList(0),
-        m_maximumItems(0)
+        m_provider("https://api.opendesktop.org/v1/")
 {
     KGlobal::locale()->insertCatalog("plasma_applet_opendesktop");
     setBackgroundHints(StandardBackground);
@@ -69,11 +74,6 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     setPassivePopup(true);
 
     setPopupIcon("system-users");
-
-    if (args.count() > 0) {
-        id = args.at(0).toString().toInt();
-        kDebug() << "Arguments:" << args << "id:" << args.at(0).toString().toInt();
-    }
 
     m_geolocation = new GeoLocation;
 
@@ -95,27 +95,11 @@ void OpenDesktop::init()
     m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
     m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
-    m_geolocation->distance = cg.readEntry("geoDistance", 1);
-    m_maximumItems = cg.readEntry("maximumItems", 64);
-    dataEngine("ocs")->connectSource("MaximumItems-" + QString::number(m_maximumItems), this);
-    if (!id) {
-        id = cg.readEntry("currentId", 0);
-    } else {
-        cg.writeEntry("currentId", id);
-        emit configNeedsSaving();
-    }
-    m_username = cg.readEntry("username", QString());
-    setAssociatedApplicationUrls(KUrl("http://opendesktop.org/usermanager/search.php?username="+m_username));
-    m_displayedUser = m_username;
 
-    if (m_username.isEmpty()) {
-        setConfigurationRequired(true);
-    } else {
-        connectGeolocation();
-    }
-    switchDisplayedUser(m_username, false);
-    m_friendList->setOwnId(m_username);
-    m_nearList->setOwnId(m_username);
+    // FIXME: Uncomment
+    //setAssociatedApplicationUrls(KUrl("http://opendesktop.org/usermanager/search.php?username="+m_username));
+
+    connectGeolocation();
 }
 
 void OpenDesktop::connectGeolocation()
@@ -127,97 +111,91 @@ void OpenDesktop::connectGeolocation()
 QGraphicsWidget* OpenDesktop::graphicsWidget()
 {
     if (!m_tabs) {
-        m_tabs = new Plasma::TabBar(this);
+        DataEngine* engine = dataEngine("ocs");
+
+        // Watch for our own id
+        m_ownIdWatcher = new OwnIdWatcher(engine, this);
+
+        // Watch for our own id
+        m_messageCounter = new MessageCounter(engine, this);
+
+        // Friends
+        m_friendList = new FriendList(engine);
+        m_friendStack = new ActionStack(engine, m_friendList);
+
+        // People near me
+        m_nearList = new ContactList(engine);
+        m_nearStack = new ActionStack(engine, m_nearList);
+
+        // Messages
+        m_messageList = new MessageList(engine);
+        m_messageList->setFolder("0");
+
+        m_tabs = new Plasma::TabBar;
         m_tabs->setPreferredSize(300, 400);
         m_tabs->setMinimumSize(150, 200);
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        connect(m_tabs, SIGNAL(currentChanged(int)), this, SLOT(updateSizeHint()));
+        m_tabs->addTab(i18n("Friends"), m_friendStack);
+        m_tabs->addTab(i18n("Nearby"), m_nearStack);
+        m_tabs->addTab(i18n("Messages"), m_messageList);
 
-        // Friends activity
-        m_userWidget = new UserWidget(dataEngine("ocs"), m_tabs);
-        m_tabs->addTab(i18n("Personal"), m_userWidget);
+        connect(this, SIGNAL(providerChanged(QString)), m_friendList, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_friendStack, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_messageCounter, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_messageList, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_ownIdWatcher, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_nearList, SLOT(setProvider(QString)));
+        connect(this, SIGNAL(providerChanged(QString)), m_nearStack, SLOT(setProvider(QString)));
 
-        // Friends
-        m_friendList = new ContactList(dataEngine("ocs"), m_tabs);
-        m_tabs->addTab(i18n("Friends"), m_friendList);
-        connect(m_friendList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
-        connect(m_friendList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
-        connect(m_friendList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
-        connect(m_friendList, SIGNAL(sizeHintChanged(Qt::SizeHint)), this, SIGNAL(sizeHintChanged(Qt::SizeHint)));
+        connect(m_friendList, SIGNAL(addFriend(QString)), m_friendStack, SLOT(addFriend(QString)));
+        connect(m_friendList, SIGNAL(sendMessage(QString)), m_friendStack, SLOT(sendMessage(QString)));
+        connect(m_friendList, SIGNAL(showDetails(QString)), m_friendStack, SLOT(showDetails(QString)));
 
-        // People near me
-        m_nearList = new ContactList(dataEngine("ocs"), m_tabs);
-        m_tabs->addTab(i18n("Nearby"), m_nearList);
-        connect(m_nearList, SIGNAL(addFriend(QString)), SLOT(addFriend(QString)));
-        connect(m_nearList, SIGNAL(sendMessage(QString)), SLOT(sendMessage(QString)));
-        connect(m_nearList, SIGNAL(showDetails(QString)), SLOT(switchDisplayedUser(QString)));
-        connect(m_nearList, SIGNAL(sizeHintChanged(Qt::SizeHint)), this, SIGNAL(sizeHintChanged(Qt::SizeHint)));
+        connect(m_friendStack, SIGNAL(endWork()), SLOT(endWork()));
+        connect(m_friendStack, SIGNAL(startWork()), SLOT(startWork()));
 
-        // "Home" button, outside of the layout
-        m_homeButton = new Plasma::IconWidget(this);
-        m_homeButton->setIcon("go-home");
-        m_homeButton->setGeometry(QRectF(contentsRect().topLeft(),
-                                  QSizeF(KIconLoader::SizeSmallMedium, KIconLoader::SizeSmallMedium)));
-        connect(m_homeButton, SIGNAL(clicked()), this, SLOT(goHome()));
-        m_homeButton->setVisible(false);
+        connect(m_nearList, SIGNAL(addFriend(QString)), m_nearStack, SLOT(addFriend(QString)));
+        connect(m_nearList, SIGNAL(sendMessage(QString)), m_nearStack, SLOT(sendMessage(QString)));
+        connect(m_nearList, SIGNAL(showDetails(QString)), m_nearStack, SLOT(showDetails(QString)));
+
+        connect(m_nearStack, SIGNAL(endWork()), SLOT(endWork()));
+        connect(m_nearStack, SIGNAL(startWork()), SLOT(startWork()));
+
+        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_friendList, SLOT(setOwnId(QString)));
+        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_friendStack, SLOT(setOwnId(QString)));
+        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_nearList, SLOT(setOwnId(QString)));
+        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_nearStack, SLOT(setOwnId(QString)));
+
+        emit providerChanged(m_provider);
     }
     return m_tabs;
 }
 
-void OpenDesktop::updateSizeHint()
-{
-    m_tabs->setPreferredSize(-1, -1);
-
-    emit sizeHintChanged(Qt::PreferredSize);
-}
-
-void OpenDesktop::switchDisplayedUser(const QString& id, bool switchToPersonal)
-{
-    m_displayedUser = id;
-
-    if (switchToPersonal) {
-        m_tabs->setCurrentIndex(1);
-    }
-    m_userWidget->setId(id);
-    if (!m_displayedUser.isEmpty()) {
-        m_friendList->setQuery(friendsQuery(id));
-    } else {
-        m_friendList->setQuery(QString());
-    }
-    m_nearList->setQuery(QString());
-
-    m_homeButton->setVisible(m_username != m_displayedUser);
-}
-
-
-void OpenDesktop::addFriend(const QString& id)
-{
-    KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/usermanager/relationadd.php?username=%1").arg(id));
-}
-
-
-void OpenDesktop::sendMessage(const QString& id)
-{
-     KToolInvocation::invokeBrowser(QString("https://www.opendesktop.org/messages/?action=newmessage&username=%1").arg(id));
-}
-
-
-void OpenDesktop::goHome()
-{
-    switchDisplayedUser(m_username);
-}
 
 void OpenDesktop::connectNearby(int latitude, int longitude)
 {
-    QString src = QString("Near-%1:%2:%3").arg(
-                        QString::number(latitude),
-                        QString::number(longitude),
-                        QString::number(m_geolocation->distance));
-    kDebug() << "geolocation src" << src;
+    QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3")
+        .arg(m_provider)
+        .arg(latitude)
+        .arg(longitude);
 
     m_nearList->setQuery(src);
-    kDebug() << "connected near";
 }
+
+
+void OpenDesktop::endWork()
+{
+    // FIXME: Count
+    setBusy(false);
+}
+
+
+void OpenDesktop::startWork()
+{
+    // FIXME: Count
+    setBusy(true);
+}
+
 
 void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
@@ -256,13 +234,10 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(ui.registerButton, SIGNAL(clicked()), this, SLOT(registerAccount()));
     connect(locationUi.publishLocation, SIGNAL(clicked()), this, SLOT(publishGeoLocation()));
-    ui.maxitems->setValue(m_maximumItems);
-    ui.username->setText(m_username);
 
     locationUi.city->setText(m_geolocation->city);
     locationUi.latitude->setText(QString::number(m_geolocation->latitude));
     locationUi.longitude->setText(QString::number(m_geolocation->longitude));
-    locationUi.distance->setValue(m_geolocation->distance);
 
     locationUi.countryCombo->setInsertPolicy(QComboBox::InsertAlphabetically);
     foreach ( const QString &cc, KGlobal::locale()->allCountriesList() ) {
@@ -280,31 +255,6 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
 
 void OpenDesktop::configAccepted()
 {
-    KConfigGroup cg = config();
-
-    // General tab
-    QString cuser = ui.username->text();
-    if (m_username != cuser) {
-        m_username = cuser;
-        setAssociatedApplicationUrls(KUrl("http://opendesktop.org/usermanager/search.php?username="+m_username));
-        switchDisplayedUser(m_username);
-        m_friendList->setOwnId(m_username);
-        m_nearList->setOwnId(m_username);
-        if (!m_username.isEmpty()) {
-            connectGeolocation();
-        }
-        cg.writeEntry("username", m_username);
-        emit configNeedsSaving();
-        setConfigurationRequired(false);
-    }
-    int cmax = ui.maxitems->value();
-    if (m_maximumItems != cmax) {
-        m_maximumItems = cmax;
-        cg.writeEntry("maximumItems", m_maximumItems);
-        emit configNeedsSaving();
-        dataEngine("ocs")->connectSource("MaximumItems-" + QString::number(m_maximumItems), this);
-    }
-
     syncGeoLocation();
 }
 
@@ -322,7 +272,6 @@ void OpenDesktop::syncGeoLocation()
     m_geolocation->country = locationUi.countryCombo->currentText();
     m_geolocation->latitude = locationUi.latitude->text().toDouble();
     m_geolocation->longitude = locationUi.longitude->text().toDouble();
-    m_geolocation->distance = locationUi.distance->text().toDouble();
 
     kDebug() << "New location:" << m_geolocation->city << m_geolocation->country << m_geolocation->countryCode << m_geolocation->latitude << m_geolocation->longitude;
 
@@ -332,6 +281,7 @@ void OpenDesktop::syncGeoLocation()
 void OpenDesktop::publishGeoLocation()
 {
     syncGeoLocation();
+    // FIXME: Use service
     QString source = QString("PostLocation-%1:%2:%3:%4").arg(
                                     QString("%1").arg(m_geolocation->latitude),
                                     QString("%1").arg(m_geolocation->longitude),
@@ -349,9 +299,18 @@ void OpenDesktop::saveGeoLocation()
     cg.writeEntry("geoCountryCode", m_geolocation->countryCode);
     cg.writeEntry("geoLatitude", m_geolocation->latitude);
     cg.writeEntry("geoLongitude", m_geolocation->longitude);
-    cg.writeEntry("geoDistance", m_geolocation->distance);
 
     emit configNeedsSaving();
+}
+
+
+void OpenDesktop::unreadMessageCountChanged(int count)
+{
+    if (count) {
+        m_tabs->setTabText(2, i18n("Messages (%1)", count));
+    } else {
+        m_tabs->setTabText(2, i18n("Messages"));
+    }
 }
 
 

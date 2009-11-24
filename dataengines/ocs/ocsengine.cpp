@@ -1,6 +1,6 @@
 /*
  *   Copyright (C) 2008 Dirk Mueller <mueller@kde.org>
- *   Copyright (C) 2009 Sebastian Kügler <sebas@kde.org>
+ *   Copyright (C) 2009 Sebastian K?gler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -21,190 +21,260 @@
 
 #include "ocsengine.h"
 
-#include "content.h"
-#include "eventjob.h"
-#include "knowledgebaseentryjob.h"
-#include "knowledgebaseentrylistjob.h"
-#include "personjob.h"
-#include "postjob.h"
-#include "provider.h"
-#include "providerinitjob.h"
+#include <attica/atticabasejob.h>
+#include <attica/content.h>
+#include <attica/event.h>
+#include <attica/folder.h>
+#include <attica/knowledgebaseentry.h>
+#include <attica/message.h>
+#include <attica/person.h>
+#include <attica/postjob.h>
+#include <attica/provider.h>
+#include <attica/providermanager.h>
+
+#include <KIO/Job>
 
 #include <plasma/datacontainer.h>
+#include <attica/metadata.h>
+
 
 using namespace Attica;
 
 OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent),
-      m_providerInitialized(false)
+      m_serviceUpdates(new QSignalMapper)
 {
-    // fairy random, should be set from the applet by calling
-    m_maximumItems = 99;
     Q_UNUSED(args);
-    setMinimumPollingInterval(500);
+    setMinimumPollingInterval(5000);
 
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
 
-    ProviderInitJob* job = new ProviderInitJob("opendesktop");
-    connect(job, SIGNAL(result(KJob*)), SLOT(initializeProvider(KJob*)));
-    job->start();
-}
-
-OcsEngine::~OcsEngine()
-{
-}
-
-QStringList OcsEngine::sources() const
-{
-    return (QStringList() << "activity");
+    connect(&m_pm, SIGNAL(providersChanged()), SLOT(providersChanged()));
+    m_pm.loadDefaultProviders();
+    connect(m_serviceUpdates.data(), SIGNAL(mapped(QString)), SLOT(serviceUpdates(QString)));
 }
 
 
 Plasma::Service* OcsEngine::serviceForSource(const QString& source)
 {
-    if (source.startsWith(QLatin1String("Person-"))) {
-        QString id = QString(source).remove(0, 7);
-        if (!m_personServices.contains(id)) {
-            m_personServices[id] = new PersonService(m_provider, id, this);
+    QPair<QString, QHash<QString, QString> > parsedSource = parseSource(source);
+    QString request = parsedSource.first;
+    QHash<QString, QString> arguments = parsedSource.second;
+
+    qDebug() << "Service request:" << request << "- arguments:" << arguments;
+
+    if (request == "Person") {
+        QString id = arguments.value("id");
+        QString providerString = arguments.value("provider");
+        if (!id.isEmpty() && !providerString.isEmpty()) {
+            QPair<QString, QString> key = qMakePair(providerString, id);
+            if (!m_personServices.contains(key)) {
+                m_personServices[key] = new PersonService(m_providers.value(providerString), id, m_serviceUpdates, this);
+            }
+            return m_personServices[key];
         }
-        return m_personServices[id];
     }
     return Plasma::DataEngine::serviceForSource(source);
 }
 
 
-bool OcsEngine::sourceRequestEvent(const QString &name)
+QStringList OcsEngine::split(const QString& encodedString)
 {
-    kDebug() << "for name" << name;
-    if (name == I18N_NOOP("activity")) {
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
-        }
-        m_job = m_provider.requestActivities();
-        connect( m_job, SIGNAL( result( KJob * ) ), SLOT( slotActivityResult( KJob * ) ) );
-        return m_job != 0;
-    } else if (name.startsWith(QLatin1String("Friends-"))) {
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
-        }
-        QString _id = QString(name).remove(0, 8); // Removes prefix Friends-
-        kDebug() << "Searching friends for id" << _id;
-        ListJob<Person>* _job = m_provider.requestFriends(_id, 0, m_maximumItems);
-        connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotFriendsResult( KJob * ) ) );
-
-        if (_job) {
-            m_personListJobs[_job] = name;
-        }
-
-        return _job != 0;
-    } else if (name.startsWith(QLatin1String("Person-"))) {
-        QString _id = QString(name).remove(0, 7); // Removes prefix Person-
-        if (m_personCache.contains(_id)) {
-            // Set data already in the cache, it will hopefully get replaced by more complete data soon
-            setPersonData(QString("Person-%1").arg(_id), m_personCache[_id]);
-        } else {
-            setData(name, DataEngine::Data());
-        }
-        if (cacheRequest(name)) {
-            return true;
-        }
-        kDebug() << "Searching for Person id" << _id;
-        PersonJob* _job = m_provider.requestPerson(_id);
-        connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
-        return _job != 0;
-    } else if (name.startsWith(QLatin1String("PersonSummary-"))) {
-        QString _id = QString(name).remove(0, 14); // Removes prefix PersonSummary-
-        kDebug() << "Searching for Person Summary id" << _id;
-        if (m_personCache.contains(_id)) {
-            return true;
-        } else {
-            setData(name, DataEngine::Data());
-            if (cacheRequest(name)) {
-                return true;
+    QStringList lines;
+    const char separator = '\\';
+    int startPos = 0;
+    int foundPos = -1;
+    while (true) {
+        foundPos = encodedString.indexOf(separator, foundPos + 1);
+        if (foundPos == -1) {
+            QString remaining = encodedString.mid(startPos);
+            if (!remaining.isEmpty()) {
+                lines << remaining;
             }
-            PersonJob* _job = m_provider.requestPerson(_id);
-            connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotPersonResult( KJob * ) ) );
-            return _job != 0;
+            return lines;
+        } else {
+            if (foundPos != encodedString.size() - 1 && encodedString.at(foundPos + 1) == separator) {
+                // We found an escaping, just skipping it for now
+                ++foundPos;
+            } else {
+                lines << encodedString.mid(startPos, foundPos - startPos).replace("\\\\", "\\");
+                startPos = foundPos + 1;
+            }
         }
-    } else if (name.startsWith(QLatin1String("Near-"))) {
-        QStringList args = QString(name).remove(0, 5).split(':'); // Removes prefix Near-
-        if (args.size() != 3) {
-            kDebug() << "Don't understand your request." << name;
-            kDebug() << "it should go in the format: lat:long:distance (all in degrees)";
+    }
+}
+
+
+QString OcsEngine::encode(const QString& s) {
+    return QString(s).replace('\\', "\\\\");
+}
+
+
+QPair<QString, QHash<QString, QString> > OcsEngine::parseSource(const QString& source) {
+    QStringList lines = split(source);
+
+    QString request;
+    QHash<QString, QString> arguments;
+
+    for (QStringList::const_iterator i = lines.begin(); i != lines.end(); ++i) {
+        if (i == lines.begin()) {
+            request = *i;
+        } else {
+            int splitPos = (*i).indexOf(':');
+            if (splitPos == -1) {
+                return qMakePair(QString(), QHash<QString, QString>());
+            }
+            QString key = (*i).left(splitPos);
+            QString value = (*i).mid(splitPos + 1);
+            arguments.insert(key, value);
+        }
+    }
+
+    return qMakePair(request, arguments);
+}
+
+
+bool OcsEngine::providerDependentRequest(const QString& request, const QHash<QString, QString>& arguments, const QString& source, const QString& baseUrl, Provider* provider)
+{
+    if (request == "Activities") {
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Activity>* job = provider->requestActivities();
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotActivityResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "Friends") {
+        if (!arguments.contains("id")) {
             return false;
         }
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Person>* job = provider->requestFriends(arguments.value("id"));
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-
-        qreal lat = args[0].toFloat();
-        qreal lon = args[1].toFloat();
-        qreal dist = args[2].toFloat();
-
-        kDebug() << "Searching for people near" << lat << lon << "distance:" << dist << m_maximumItems;
-        ListJob<Person>* _job = m_provider.requestPersonSearchByLocation(lat, lon, dist, 0, m_maximumItems);
-        connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotNearPersonsResult( KJob * ) ) );
-
-        if (_job) {
-            m_personListJobs[_job] = name;
+        return true;
+    } else if (request == "SentInvitations") {
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Person>* job = provider->requestSentInvitations();
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("PostLocation-"))) {
-        QStringList args = QString(name).remove(0, 13).split(':'); // Removes prefix PostLocation-
-        if (args.size() != 4) {
-            kDebug() << "Invalid location string:" << name;
-            kDebug() << "it should go in the format: lat:long:country:city";
+        return true;
+    } else if (request == "ReceivedInvitations") {
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Person>* job = provider->requestReceivedInvitations();
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "Person") {
+        if (!arguments.contains("id")) {
             return false;
         }
-        qreal lat = args[0].toFloat();
-        qreal lon = args[1].toFloat();
-        QString country = args[2];
-        QString city = args[3];
-
-        kDebug() << "Posting location:" << lat << lon << country << city;
-        PostJob* _job = m_provider.postLocation(lat, lon, city, country);
-        connect(_job, SIGNAL( result( KJob* ) ), SLOT( locationPosted( KJob* ) ));
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("KnowledgeBase-"))) {
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
+        // FIXME
+        QString id = arguments.value("id");
+        if (m_personCache.contains(qMakePair(baseUrl, id))) {
+            // Set data already in the cache, it will hopefully get replaced by more complete data soon
+            setPersonData(source, m_personCache.value(qMakePair(baseUrl, id)));
+        } else {
+            setData(source, DataEngine::Data());
         }
-        QString _id = QString(name).remove(0, 14); // Removes prefix KnowledgeBase-
-        kDebug() << "Searching for KnowledgeBase id" << _id;
-        KnowledgeBaseEntryJob* _job = m_provider.requestKnowledgeBaseEntry(_id);
-        connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseResult( KJob * ) ) );
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("KnowledgeBaseList-"))) {
-        QStringList args = QString(name).remove(0, 18).split(':');
-        const int numTokens = args.size();
-        if (numTokens != 4 && numTokens != 5) {
-            kDebug() << "Don't understand your request." << name;
+        if (provider) {
+            ItemJob<Person>* job = provider->requestPerson(id);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "PersonCheck") {
+        setData(source, DataEngine::Data());
+        if (provider) {
+            // FIXME: Implement using the self mechanism
+            ItemJob<Person>* job = provider->requestPersonSelf();
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "PersonSummary") {
+        if (!arguments.contains("id")) {
             return false;
         }
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
+        QString id = arguments.value("id");
+        if (!m_personCache.contains(qMakePair(baseUrl, id))) {
+            setData(source, DataEngine::Data());
+            if (provider) {
+                ItemJob<Person>* job = provider->requestPerson(id);
+                connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonResult(Attica::BaseJob*)));
+                m_jobs.insert(job, source);
+            job->start();
+            }
         }
-        QString query = args[0];
-        QString sortModeString = args[1];
-        int page = args[2].toInt();
-        int pageSize = args[3].toInt();
+        return true;
+    } else if (request == "Near") {
+        if (!arguments.contains("latitude") || !arguments.contains("longitude")) {
+            return false;
+        }
+        qreal dist = arguments.value("distance").toFloat();
+        qreal lat = arguments.value("latitude").toFloat();
+        qreal lon = arguments.value("longitude").toFloat();
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Person>* job = provider->requestPersonSearchByLocation(lat, lon, dist);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotPersonListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "PostLocation") {
+        // FIXME: This should be implemented as a service
+        if (!arguments.contains("city") || !arguments.contains("country") || !arguments.contains("latitude") || !arguments.contains("longitude")) {
+            return false;
+        }
+        QString city = arguments.value("city");
+        QString country = arguments.value("country");
+        qreal lat = arguments.value("latitude").toDouble();
+        qreal lon = arguments.value("longitude").toDouble();
+        if (provider) {
+            Attica::BaseJob* job = provider->postLocation(lat, lon, city, country);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(locationPosted(Attica::BaseJob*)));
+            job->start();
+        }
+        return true;
+    } else if (request == "KnowledgeBase") {
+        if (!arguments.contains("id")) {
+            return false;
+        }
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ItemJob<KnowledgeBaseEntry>* job = provider->requestKnowledgeBaseEntry(arguments.value("id"));
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotKnowledgeBaseResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "KnowledgeBaseList") {
+        if (!arguments.contains("page") || !arguments.contains("pageSize") || !arguments.contains("query") || !arguments.contains("sortMode")) {
+            return false;
+        }
+        setData(source, DataEngine::Data());
         Content content;
-        if (numTokens == 5) {
-            content.setId(args[4]);
-        }
+        content.setId(arguments.value("contentId"));
+        int page = arguments.value("page").toInt();
+        int pageSize = arguments.value("pageSize").toInt();
+        QString query = arguments.value("query");
+        QString sortModeString = arguments.value("sortMode");
 
         Provider::SortMode sortMode;
-
         if (sortModeString == "new") {
             sortMode = Provider::Newest;
         } else if (sortModeString == "alpha") {
@@ -215,159 +285,261 @@ bool OcsEngine::sourceRequestEvent(const QString &name)
             sortMode = Provider::Newest;
         }
 
-        kDebug() << "Searching for" << query << "into knowledge base";
-        KnowledgeBaseListJob* _job = m_provider.searchKnowledgeBase(content, query, sortMode, page, pageSize);
-        connect( _job, SIGNAL( result( KJob * ) ), SLOT( slotKnowledgeBaseListResult( KJob * ) ) );
-
-        //putting the job/query pair into an hash to remember the association later
-        if (_job) {
-            m_knowledgeBaseListJobs[_job] = name;
+        if (provider) {
+            ListJob<KnowledgeBaseEntry>* job = provider->searchKnowledgeBase(content, query, sortMode, page, pageSize);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotKnowledgeBaseListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("Event-"))) {
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
-        }
-        QString _id = QString(name).remove(0, 6); // Removes prefix Event-
-        EventJob* _job = m_provider.requestEvent(_id);
-        connect( _job, SIGNAL(result(KJob*)), SLOT(slotEventResult(KJob*)));
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("FutureEvents-"))) {
-        QStringList args = QString(name).remove(0, 13).split(':');
-        const int numTokens = args.size();
-        if (numTokens != 1 && numTokens != 2) {
-            kDebug() << "Don't understand your request." << name;
+        return true;
+    } else if (request == "Event") {
+        if (!arguments.contains("id")) {
             return false;
         }
-        setData(name, DataEngine::Data());
-        if (cacheRequest(name)) {
-            return true;
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ItemJob<Event>* job = provider->requestEvent(arguments.value("id"));
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotEventResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-        QString country = args[0];
-        QString search;
-        if (numTokens == 2) {
-            search = args[1];
+        return true;
+    } else if (request == "FutureEvents") {
+        if (!arguments.contains("country")) {
+            return false;
         }
-
-        // FIXME: The size of the request is currently hardcoded
-        ListJob<Event>* _job = m_provider.requestEvent(country, search, QDate::currentDate(),
-            Provider::Alphabetical, 0, 100);
-        connect(_job, SIGNAL(result(KJob*)), SLOT(slotEventListResult(KJob*)));
-
-        //putting the job/query pair into an hash to remember the association later
-        if (_job) {
-            m_eventListJobs.insert(_job, name);
+        QString country = arguments.value("country");
+        QString query = arguments.value("query");
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Event>* job = provider->requestEvent(country, query, QDate::currentDate(), Provider::Alphabetical, 0, 100);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotEventListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-
-        return _job != 0;
-
-    } else if (name.startsWith(QLatin1String("MaximumItems-"))) {
-        if (cacheRequest(name)) {
-            return true;
+        return true;
+    } else if (request == "Folders") {
+        setData(source, DataEngine::Data());
+        if (provider) {
+            ListJob<Folder>* job = provider->requestFolders();
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotFolderListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
         }
-        m_maximumItems = name.split('-')[1].toInt();
-        kDebug() << "Changed maximum number of hits to" << m_maximumItems;
+        return true;
+    } else if (request == "Messages") {
+        if (!arguments.contains("folder")) {
+            return false;
+        }
+        QString folderId = arguments.value("folder");
+        QString status = arguments.value("status");
+        setData(source, DataEngine::Data());
+        if (provider) {
+            Folder folder;
+            folder.setId(folderId);
+            ListJob<Message>* job;
+            if (status == "unread") {
+                job = provider->requestMessages(folder, Message::Unread);
+            } else if (status == "read") {
+                job = provider->requestMessages(folder, Message::Read);
+            } else if (status == "read") {
+                job = provider->requestMessages(folder, Message::Answered);
+            } else {
+                job = provider->requestMessages(folder);
+            }
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotMessageListResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "Message") {
+        if (!arguments.contains("folder") || !arguments.contains("id")) {
+            return false;
+        }
+        QString folderId = arguments.value("folder");
+        QString messageId = arguments.value("id");
+        setData(source, DataEngine::Data());
+        if (provider) {
+            Folder folder;
+            folder.setId(folderId);
+            ItemJob<Message>* job = provider->requestMessage(folder, messageId);
+            connect(job, SIGNAL(finished(Attica::BaseJob*)), SLOT(slotMessageResult(Attica::BaseJob*)));
+            m_jobs.insert(job, source);
+            job->start();
+        }
+        return true;
+    } else if (request == "MessageSummary") {
+        if (!arguments.contains("folder") || !arguments.contains("id")) {
+            return false;
+        }
+        // FIXME: We should not ignore the folder, but since message ids are unique across folders, it doesn't matter
+        QString id = arguments.value("id");
+        setMessageData(source, m_messageCache.value(qMakePair(baseUrl, id)));
+        return true;
     }
     return false;
 }
+
+bool OcsEngine::sourceRequestEvent(const QString& source)
+{
+    QPair<QString, QHash<QString, QString> > parsedSource = parseSource(source);
+    QString request = parsedSource.first;
+    QHash<QString, QString> arguments = parsedSource.second;
+
+    qDebug() << "Source request:" << request << "- arguments:" << arguments;
+
+    if (request.isEmpty()) {
+        return false;
+    }
+
+    if (!arguments.contains("provider")) {
+        if (request == "Providers") {
+            foreach (const QSharedPointer<Provider>& provider, m_providers) {
+                setProviderData("Providers", *provider.data());
+            }
+            return true;
+        } else if (request == "Pixmap") {
+            if (!arguments.contains("url")) {
+                return false;
+            }
+            setData(source, "Pixmap", QVariant(QPixmap()));
+            KIO::TransferJob* job = KIO::get(arguments.value("url"), KIO::NoReload, KIO::HideProgressInfo);
+            m_pixmapJobs.insert(job, source);
+            connect(job, SIGNAL(data(KIO::Job*,QByteArray)), SLOT(slotPixmapData(KIO::Job*,QByteArray)));
+            connect(job, SIGNAL(finished(KJob*)), SLOT(slotPixmapResult(KJob*)));
+            job->start();
+            return true;
+        }
+        return false;
+    } else {
+        // Provider dependent queries
+        QString baseUrl = arguments.value("provider");
+
+        Provider* provider = m_providers.value(baseUrl).data();
+        bool success = providerDependentRequest(request, arguments, source, baseUrl, provider);
+        if (!success) {
+            qDebug() << "Source failed:" << source;
+        } else if (!provider) {
+            // Cache the request till the provider becomes available
+            m_requestCache[baseUrl].insert(source);
+        } else {
+            setData(source, "SourceStatus", "retrieving");
+        }
+        return success;
+    }
+    return false;
+}
+
 
 bool OcsEngine::updateSourceEvent(const QString &name)
 {
     sourceRequestEvent(name);
     return true;
-    kDebug() << "for name" << name;
-    if (name == I18N_NOOP("activity")) {
-
-    } else if (name.startsWith(QLatin1String("Friends-"))) {
-
-    }
-
-    return false;
 }
 
-void OcsEngine::slotActivityResult( KJob *j )
+void OcsEngine::slotActivityResult(BaseJob* j)
 {
-    m_job = 0;
-    if (!j->error()) {
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
         Attica::ListJob<Activity> *job = static_cast<Attica::ListJob<Activity> *>( j );
-        m_activities = job->itemList();
 
-        foreach(const Attica::Activity &activity, m_activities ) {
+        foreach(const Attica::Activity &activity, job->itemList()) {
             Plasma::DataEngine::Data activityData;
             activityData["id"] = activity.id();
-            activityData["user"] = activity.user();
+            activityData["user-Id"] = activity.associatedPerson().id();
+            activityData["user-AvatarUrl"] = activity.associatedPerson().avatarUrl();
             activityData["timestamp"] = activity.timestamp();
             activityData["message"] = activity.message();
             activityData["link"] = activity.link();
 
-            setData("activity", activity.id(), activityData);
+            setData(source, activity.id(), activityData);
         }
     }
+    setStatusData(source, j);
 }
 
-void OcsEngine::locationPosted( KJob *j )
+void OcsEngine::locationPosted( BaseJob *j )
 {
-    if (!j->error()) {
-        updateSourceEvent(I18N_NOOP("activity"));
+    if (j->metadata().error() == Metadata::NoError) {
+        updateSourceEvent("activity");
     } else {
-        kDebug() << "location posted returned an error:" << j->errorString();
+        kDebug() << "location posted returned an error:" << j->metadata().statusString();
     }
 }
 
-void OcsEngine::slotPersonResult( KJob *j )
-{
-    kDebug() << "============================= Person Full Data is in";
-    if (!j->error()) {
-        Attica::PersonJob *job = static_cast<Attica::PersonJob *>( j );
-        Attica::Person p = job->person();
 
-        addToPersonCache(p.id(), p, true);
-        setPersonData(QString("Person-%1").arg(p.id()), p);
-        scheduleSourcesUpdated();
+void OcsEngine::slotPersonResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ItemJob<Person>* personJob = static_cast<ItemJob<Person>*>(j);
+        Attica::Person p = personJob->result();
+        kDebug() << p.firstName();
+
+        addToPersonCache(source, p, true);
+        setPersonData(source, p);
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::slotKnowledgeBaseResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ItemJob<KnowledgeBaseEntry>* job = static_cast<ItemJob<KnowledgeBaseEntry>*>( j );
+        KnowledgeBaseEntry k = job->result();
+        setKnowledgeBaseData(source, k);
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::setStatusData(const QString& source, BaseJob* job)
+{
+    Metadata meta = job->metadata();
+    if (meta.error() == Metadata::NoError) {
+        setData(source, "SourceStatus", "success");
+        setData(source, "Status", meta.statusString());
+        setData(source, "Message", meta.message());
+        setData(source, "TotalItems", meta.totalItems());
+        setData(source, "ItemsPerPage", meta.itemsPerPage());
     } else {
-        kDebug() << "Fetching person failed:" << j->errorString();
+        setData(source, "SourceStatus", "failure");
+        setData(source, "Status", QVariant());
+        setData(source, "Message", QVariant());
+        setData(source, "TotalItems", QVariant());
+        setData(source, "ItemsPerPage", QVariant());
     }
 }
 
-void OcsEngine::slotKnowledgeBaseResult( KJob *j )
+
+void OcsEngine::setPersonData(const QString& source, const Attica::Person& person, bool keyOnly)
 {
-    kDebug() << "============================= KnowledgeBase Full Data is in";
-    if (!j->error()) {
-        Attica::KnowledgeBaseEntryJob *job = static_cast<Attica::KnowledgeBaseEntryJob *>( j );
-        Attica::KnowledgeBaseEntry k = job->knowledgeBase();
-        setKnowledgeBaseData(QString("KnowledgeBase-%1").arg(k.id()), k);
-        scheduleSourcesUpdated();
+    if (keyOnly) {
+        setData(source, "Person-" + person.id(), person.id());
     } else {
-        kDebug() << "Fetching Knowledgebase failed:" << j->errorString();
+        kDebug() << "Setting person data" << source;
+        Plasma::DataEngine::Data personData;
+
+        personData.insert("Id", person.id());
+        personData.insert("FirstName", person.firstName());
+        personData.insert("LastName", person.lastName());
+        QString name = QString("%1 %2").arg(person.firstName(), person.lastName());
+        personData.insert("Name", name.trimmed());
+        personData.insert("Birthday", person.birthday());
+        personData.insert("City", person.city());
+        personData.insert("Country", person.country());
+        personData.insert("Latitude", person.latitude());
+        personData.insert("Longitude", person.longitude());
+        personData.insert("AvatarUrl", person.avatarUrl());
+
+        QMap<QString, QString> attributes = person.extendedAttributes();
+        for(QMap<QString, QString>::const_iterator i = attributes.begin(); i != attributes.end(); ++i) {
+            personData.insert(i.key(), i.value());
+        }
+        setData(source, "Person-" + person.id(), personData);
     }
-}
-
-void OcsEngine::setPersonData(const QString &source, const Attica::Person &person)
-{
-    kDebug() << "Setting person data"<< source;
-    Plasma::DataEngine::Data personData;
-
-    personData["Id"] = person.id();
-    personData["FirstName"] = person.firstName();
-    personData["LastName"] = person.lastName();
-    QString n = QString("%1 %2").arg(person.firstName(), person.lastName());
-    personData["Name"] = n.trimmed();
-    personData["Birthday"] = person.birthday();
-    personData["City"] = person.city();
-    personData["Country"] = person.country();
-    personData["Latitude"] = person.latitude();
-    personData["Longitude"] = person.longitude();
-    personData["Avatar"] = person.avatar();
-    personData["AvatarUrl"] = person.avatarUrl();
-
-    foreach(const QString &key, person.extendedAttributes().keys()) {
-        personData[key] = person.extendedAttributes()[key];
-    }
-    setData(source, "Person-"+person.id(), personData);
 }
 
 void OcsEngine::setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBaseEntry &knowledgeBase)
@@ -394,66 +566,64 @@ void OcsEngine::setKnowledgeBaseData(const QString &source, const Attica::Knowle
     setData(source, "KnowledgeBase-"+knowledgeBase.id(), knowledgeBaseData);
 }
 
-void OcsEngine::slotKnowledgeBaseListResult( KJob *j )
+void OcsEngine::slotKnowledgeBaseListResult(BaseJob* j)
 {
-    m_job = 0;
-    if (!j->error()) {
-        Attica::KnowledgeBaseListJob *job = static_cast<Attica::KnowledgeBaseListJob *>( j );
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ListJob<KnowledgeBaseEntry>* job = static_cast<ListJob<KnowledgeBaseEntry>*>(j);
 
-        QString source = m_knowledgeBaseListJobs[job];
         if (!source.isEmpty()) {
-            KnowledgeBaseEntry::Metadata meta = job->metadata();
-            setData(source, "Status", meta.status);
-            setData(source, "Message", meta.message);
-            setData(source, "TotalItems", meta.totalItems);
-            setData(source, "ItemsPerPage", meta.itemsPerPage);
-            m_knowledgeBaseListJobs.remove(job);
+            Metadata meta = job->metadata();
+            setData(source, "Status", meta.statusString());
+            setData(source, "Message", meta.message());
+            setData(source, "TotalItems", meta.totalItems());
+            setData(source, "ItemsPerPage", meta.itemsPerPage());
         }
 
-        foreach (const KnowledgeBaseEntry &k, job->knowledgeBaseList()) {
+        foreach (const KnowledgeBaseEntry &k, job->itemList()) {
             setKnowledgeBaseData(source, k);
         }
-        scheduleSourcesUpdated();
     } else {
-        kDebug() << "Error:" << j->errorString();
+        qDebug() << "Getting knowledgebase list" << source << "failed with code" << j->metadata().statusCode();
     }
+    setStatusData(source, j);
 }
 
-void OcsEngine::slotNearPersonsResult( KJob *j )
+void OcsEngine::slotPersonListResult(BaseJob* j)
 {
-    m_job = 0;
-    if (!j->error()) {
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
         Attica::ListJob<Person> *listJob = static_cast<Attica::ListJob<Person> *>( j );
 
-        QString _id = m_personListJobs[j];
-        m_personListJobs.remove(j);
-
-        foreach (const Person &p, listJob->itemList()) {
-            addToPersonCache(p.id(), p);
-            setPersonData(_id, p);
+        Data data;
+        foreach (const Person& p, listJob->itemList()) {
+            addToPersonCache(source, p);
+            data.insert("Person-" + p.id(), QVariant(p.id()));
         }
-        scheduleSourcesUpdated();
+        setData(source, data);
+        qDebug() << "Got a list of persons for" << source << ":" << data.keys();
     } else {
-        kDebug() << "Error:" << j->errorString();
+        qDebug() << "Getting person list" << source << "failed with code" << j->metadata().statusCode();
     }
+    setStatusData(source, j);
 }
 
 
-void OcsEngine::slotFriendsResult( KJob *j )
+void OcsEngine::slotPixmapData(KIO::Job* j, const QByteArray& data) {
+    m_pixmapData[j].append(data);
+}
+
+
+void OcsEngine::slotPixmapResult(KJob* j)
 {
-    m_job = 0;
+    QString source = m_pixmapJobs.take(j);
     if (!j->error()) {
-        Attica::ListJob<Person> *listJob = static_cast<Attica::ListJob<Person> *>( j );
-
-        QString _id = m_personListJobs[j];
-
-        foreach (const Person &p, listJob->itemList()) {
-            addToPersonCache(p.id(), p);
-            setPersonData(_id, p);
-        }
-        scheduleSourcesUpdated();
+        QPixmap pixmap;
+        pixmap.loadFromData(m_pixmapData.take(j));
+        setData(source, "Pixmap", QVariant(pixmap));
+        setData(source, "SourceStatus", "success");
     } else {
-        kDebug() << "Error:" << j->errorString();
+        setData(source, "SourceStatus", "failure");
     }
 }
 
@@ -470,17 +640,19 @@ void OcsEngine::networkStatusChanged(Solid::Networking::Status status)
 }
 
 
-void OcsEngine::addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache)
+void OcsEngine::addToPersonCache(const QString& source, const Attica::Person& person, bool replaceCache)
 {
-    if (replaceCache || !m_personCache.contains(id)) {
+    QPair<QString, QHash<QString, QString> > parsedSource = parseSource(source);
+    QString provider = parsedSource.second.value("provider");
+    QString id = person.id();
+    QPair<QString, QString> key = qMakePair(provider, id);
+
+    if (replaceCache || !m_personCache.contains(key)) {
         // Add the person to the cache
-        m_personCache[id] = person;
+        m_personCache[key] = person;
     } else {
         // Update and enhance the cache
-        Attica::Person& cachePerson = m_personCache[id];
-        if (!person.avatar().isNull()) {
-            cachePerson.setAvatar(person.avatar());
-        }
+        Attica::Person cachePerson = m_personCache.value(key);
         if (!person.avatarUrl().isEmpty()) {
             cachePerson.setAvatarUrl(person.avatarUrl());
         }
@@ -512,22 +684,59 @@ void OcsEngine::addToPersonCache(const QString& id, const Attica::Person& person
         foreach(const QString& key, person.extendedAttributes()) {
             cachePerson.addExtendedAttribute(key, person.extendedAttribute(key));
         }
+        m_personCache[key] = cachePerson;
     }
-    setPersonData(QString("PersonSummary-%1").arg(id), m_personCache[id]);
+    setPersonData(QString("PersonSummary\\provider:%1\\id:%2").arg(provider).arg(id), m_personCache.value(key));
 }
 
 
-void OcsEngine::slotEventResult(KJob* j)
+void OcsEngine::addToMessageCache(const QString& source, const Message& message, bool replaceCache)
 {
-    if (!j->error()) {
-        Attica::EventJob* job = static_cast<Attica::EventJob*>(j);
-        Attica::Event k = job->event();
-        setEventData(QString("Event-%1").arg(k.id()), k);
-        scheduleSourcesUpdated();
+    QPair<QString, QHash<QString, QString> > parsedSource = parseSource(source);
+    QString provider = parsedSource.second.value("provider");
+    QString folder = parsedSource.second.value("folder");
+    QString id = message.id();
+    QPair<QString, QString> key = qMakePair(provider, id);
+
+    if (replaceCache || !m_messageCache.contains(key)) {
+        // Add the person to the cache
+        m_messageCache[key] = message;
     } else {
-        kDebug() << "Fetching Event failed:" << j->errorString();
+        // Update and enhance the cache
+        Message cacheMessage = m_messageCache.value(key);
+        if (!message.body().isEmpty()) {
+            cacheMessage.setBody(message.body());
+        }
+        if (!message.from().isEmpty()) {
+            cacheMessage.setFrom(message.from());
+        }
+        if (!message.to().isEmpty()) {
+            cacheMessage.setTo(message.to());
+        }
+        cacheMessage.setStatus(message.status());
+        if (!message.subject().isEmpty()) {
+            cacheMessage.setSubject(message.subject());
+        }
+        if (message.sent().isValid()) {
+            cacheMessage.setSent(message.sent());
+        }
+        m_messageCache[key] = cacheMessage;
     }
+    setMessageData(QString("MessageSummary\\provider:%1\\folder:%2\\id:%3").arg(provider).arg(folder).arg(id), m_messageCache.value(key));
 }
+
+
+void OcsEngine::slotEventResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ItemJob<Event>* job = static_cast<ItemJob<Event>*>(j);
+        Event k = job->result();
+        setEventData(source, k);
+    }
+    setStatusData(source, j);
+}
+
 
 void OcsEngine::setEventData(const QString& source, const Event& event)
 {
@@ -552,44 +761,128 @@ void OcsEngine::setEventData(const QString& source, const Event& event)
     setData(source, "Event-" + event.id(), eventData);
 }
 
-void OcsEngine::slotEventListResult(KJob* j)
+void OcsEngine::setFolderData(const QString& source, const Folder& folder)
 {
-    if (!j->error()) {
+    Plasma::DataEngine::Data folderData;
+
+    folderData.insert("Id", folder.id());
+    folderData.insert("Name", folder.name());
+    folderData.insert("Type", folder.type());
+    folderData.insert("MessageCount", folder.messageCount());
+
+    setData(source, "Folder-" + folder.id(), folderData);
+}
+
+void OcsEngine::setMessageData(const QString& source, const Message& message)
+{
+    Plasma::DataEngine::Data messageData;
+
+    messageData.insert("Id", message.id());
+    messageData.insert("From-Id", message.from());
+    messageData.insert("To-Id", message.to());
+    messageData.insert("Subject", message.subject());
+    messageData.insert("Body", message.body());
+    messageData.insert("SendDate", message.sent());
+    messageData.insert("Status", message.status() == Message::Answered ? "answered" : message.status() == Message::Read ? "read" : "unread");
+
+    setData(source, "Message-" + message.id(), messageData);
+}
+
+void OcsEngine::slotEventListResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
         ListJob<Event>* job = static_cast<ListJob<Event>*>(j);
-
-        QString source = m_eventListJobs[job];
-
-        m_eventListJobs.remove(job);
 
         foreach (const Event& event, job->itemList()) {
             setEventData(source, event);
         }
-        scheduleSourcesUpdated();
-    } else {
-        kDebug() << "Error:" << j->errorString();
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::slotFolderListResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ListJob<Folder>* job = static_cast<ListJob<Folder>*>(j);
+
+        foreach (const Folder& folder, job->itemList()) {
+            setFolderData(source, folder);
+        }
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::slotMessageResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ItemJob<Message>* job = static_cast<ItemJob<Message>*>(j);
+        Message message = job->result();
+        addToMessageCache(source, message);
+        setMessageData(source, message);
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::slotMessageListResult(BaseJob* j)
+{
+    QString source = m_jobs.take(j);
+    if (j->metadata().error() == Metadata::NoError) {
+        ListJob<Message>* job = static_cast<ListJob<Message>*>(j);
+
+        foreach (const Message& message, job->itemList()) {
+            addToMessageCache(source, message);
+            setMessageData(source, message);
+        }
+    }
+    setStatusData(source, j);
+}
+
+
+void OcsEngine::providersChanged() {
+    qDebug() << "providersChanged()";
+    foreach (Provider provider, m_pm.providers()) {
+        QString baseUrl = provider.baseUrl().toString();
+        if (!m_providers.contains(baseUrl)) {
+            m_providers.insert(baseUrl, QSharedPointer<Provider>(new Provider(provider)));
+
+            setProviderData("Providers", provider);
+
+            // Work off all source requests for this provider
+            foreach(const QString& query, m_requestCache.value(baseUrl)) {
+                updateSourceEvent(query);
+            }
+        }
     }
 }
 
 
-void OcsEngine::initializeProvider(KJob* j)
-{
-    ProviderInitJob* job = static_cast<ProviderInitJob*>(j);
-    m_provider = job->provider();
-    m_providerInitialized = true;
+void OcsEngine::setProviderData(const QString& source, const Attica::Provider& provider) {
+    Plasma::DataEngine::Data providerData;
 
-    foreach(const QString& query, m_requestCache) {
-        updateSourceEvent(query);
-    }
-    m_requestCache.clear();
+    providerData.insert("BaseUrl", provider.baseUrl());
+    providerData.insert("Name", provider.name());
+
+    setData(source, "Provider-" + provider.baseUrl().toString(), providerData);
 }
 
 
-bool OcsEngine::cacheRequest(const QString& query)
+void OcsEngine::serviceUpdates(const QString& command)
 {
-    if (!m_providerInitialized) {
-        m_requestCache.insert(query);
+    QStringList commands = command.split(',');
+    foreach (const QString& command, commands) {
+        foreach (const QString& source, sources()) {
+            if (source.startsWith(command + '\\')) {
+                qDebug() << "Updating" << source << "- matches:" << command;
+                updateSourceEvent(source);
+            }
+        }
     }
-    return !m_providerInitialized;
 }
 
 

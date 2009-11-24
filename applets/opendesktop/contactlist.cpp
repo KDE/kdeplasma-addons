@@ -21,145 +21,36 @@
 
 #include "contactlist.h"
 
+#include "contactcontainer.h"
+
 
 ContactList::ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
-    : ScrollWidget(parent),
-      m_engine(engine),
-      m_limit(20),
-      m_friends(engine)
+    : ScrollWidget(parent)
 {
-    m_container = new QGraphicsWidget(this);
-    m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
-    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    setWidget(m_container);
-    connect(&m_friends, SIGNAL(friendAdded(QString)), SLOT(friendAdded(QString)));
-    connect(&m_friends, SIGNAL(friendRemoved(QString)), SLOT(friendRemoved(QString)));
+    m_widget = new ContactContainer(engine);
+    setWidget(m_widget);
+
+    connect(m_widget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));
+    connect(m_widget, SIGNAL(sendMessage(QString)), SIGNAL(sendMessage(QString)));
+    connect(m_widget, SIGNAL(showDetails(QString)), SIGNAL(showDetails(QString)));
 }
 
 
-QString ContactList::query() const
+void ContactList::setProvider(const QString& provider)
 {
-    return m_query;
+    m_widget->setProvider(provider);
 }
 
 
 void ContactList::setQuery(const QString& query)
 {
-    if (query != m_query) {
-        if (!m_query.isEmpty()) {
-            m_engine->disconnectSource(m_query, this);
-        }
-        m_query = query;
-        dataUpdated(m_query, Plasma::DataEngine::Data());
-        if (!m_query.isEmpty()) {
-            m_engine->connectSource(m_query, this);
-        }
-    }
+    m_widget->setSource(query);
 }
 
 
 void ContactList::setOwnId(const QString& id)
 {
-    m_friends.setRelativeTo(id);
-}
-
-
-QStringList ContactList::getDisplayedContacts(const Plasma::DataEngine::Data& data) {
-    // FIXME: This should take into order filtering, sorting etc.
-    QStringList result;
-    foreach (const QString& key, data.keys()) {
-        if (result.size() >= m_limit) {
-            break;
-        }
-        if (key.startsWith("Person-")) {
-            result.append(QString(key).remove(0, 7));
-        }
-    }
-    return result;
-}
-
-
-void ContactList::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
-{
-    Q_UNUSED(source)
-    
-    QStringList displayedContacts = getDisplayedContacts(data);
-    
-    // FIXME: This is still highly inefficient
-    while (m_layout->count()) {
-        ContactWidget* widget = static_cast<ContactWidget*>(m_layout->itemAt(0));
-        m_layout->removeAt(0);
-        widget->deleteLater();
-    }
-    m_mapping.clear();
-    m_idToWidget.clear();
-
-    QStringList::iterator j = displayedContacts.begin();
-    for (int i = 0; i < displayedContacts.size(); ++i, ++j) {
-        ContactWidget* widget;
-        widget = new ContactWidget(m_engine, m_container);
-        widget->setId(*j);
-        widget->setIsFriend(m_friends.contains(*j));
-        m_layout->addItem(widget);
-        m_mapping.insert(widget, *j);
-        m_idToWidget.insert(*j, widget);
-        connect(widget, SIGNAL(addFriend()), SLOT(addFriend()));
-        connect(widget, SIGNAL(sendMessage()), SLOT(sendMessage()));
-        connect(widget, SIGNAL(showDetails()), SLOT(showDetails()));
-    }
-    emit sizeHintChanged(Qt::PreferredSize);
-}
-
-
-int ContactList::limit() const
-{
-    return m_limit;
-}
-
-
-void ContactList::setLimit(int limit)
-{
-    if (limit != m_limit) {
-        m_limit = limit;
-        dataUpdated(m_query, m_engine->query(m_query));
-    }
-}
-
-
-void ContactList::addFriend()
-{
-    ContactWidget* widget = static_cast<ContactWidget*>(sender());
-    emit addFriend(m_mapping[widget]);
-}
-
-
-void ContactList::sendMessage()
-{
-    ContactWidget* widget = static_cast<ContactWidget*>(sender());
-    emit sendMessage(m_mapping[widget]);
-}
-
-
-void ContactList::showDetails()
-{
-    ContactWidget* widget = static_cast<ContactWidget*>(sender());
-    emit showDetails(m_mapping[widget]);
-}
-
-
-void ContactList::friendAdded(const QString& id)
-{
-    if (m_idToWidget.contains(id)) {
-        m_idToWidget[id]->setIsFriend(true);
-    }
-}
-
-
-void ContactList::friendRemoved(const QString& id)
-{
-    if (m_idToWidget.contains(id)) {
-        m_idToWidget[id]->setIsFriend(false);
-    }
+    m_widget->setOwnId(id);
 }
 
 

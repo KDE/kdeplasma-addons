@@ -47,6 +47,7 @@ void SourceWatchList::setQuery(const QString& query)
 {
     if (query != m_query) {
         m_engine->disconnectSource(m_query, this);
+        dataUpdated(m_query, DataEngine::Data());
         m_query = query;
         m_engine->connectSource(m_query, this);
     }
@@ -61,7 +62,9 @@ QVariant SourceWatchList::value(const QString& id) const
 
 void SourceWatchList::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
-    Q_UNUSED(source)
+    if (source != m_query) {
+        return;
+    }
 
     const QSet<QString> oldKeys = QSet<QString>::fromList(m_data.keys());
     const QSet<QString> newKeys = QSet<QString>::fromList(data.keys());

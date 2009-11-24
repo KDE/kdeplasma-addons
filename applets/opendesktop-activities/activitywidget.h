@@ -39,10 +39,8 @@ class ActivityWidget : public Plasma::Frame
     Q_OBJECT
 
 public:
-    ActivityWidget(QGraphicsWidget *parent = 0);
+    explicit ActivityWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
     virtual ~ActivityWidget();
-
-    void setPixmap(const QPixmap &pixmap);
 
 public Q_SLOTS:
     void setActivityData(Plasma::DataEngine::Data data);

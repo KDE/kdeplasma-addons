@@ -19,37 +19,126 @@
     USA.
 */
 
-#ifndef UTILS_H
-#define UTILS_H
-
 #include "utils.h"
 
 
-QString friendsQuery(const QString& id)
-{
-    return QString("Friends-%1").arg(id);
+QString escape(const QString& value) {
+    return QString(value).replace('\\', "\\\\");
 }
 
 
-QString personQuery(const QString& id)
+QString friendsQuery(const QString& provider, const QString& id) {
+    if (!provider.isEmpty() && ! id.isEmpty()) {
+        return QString("Friends\\provider:%1\\id:%2").arg(escape(provider)).arg(escape(id));
+    } else {
+        return QString();
+    }
+}
+
+
+QString messageAddPrefix(const QString& message)
 {
+    return QString("Message-%1").arg(message);
+}
+
+
+QString messageListQuery(const QString& provider, const QString& folder)
+{
+    if (!provider.isEmpty() && ! folder.isEmpty()) {
+        return QString("Messages\\provider:%1\\folder:%2").arg(escape(provider)).arg(escape(folder));
+    } else {
+        return QString();
+    }
+}
+
+
+QString messageListUnreadQuery(const QString& provider, const QString& folder)
+{
+    if (!provider.isEmpty() && ! folder.isEmpty()) {
+        return QString("Messages\\provider:%1\\folder:%2\\status:unread").arg(escape(provider)).arg(escape(folder));
+    } else {
+        return QString();
+    }
+}
+
+
+QString messageRemovePrefix(const QString& id) {
+    if (id.startsWith("Message-")) {
+        QString message = QString(id).remove(0, 8);
+        return message;
+    } else {
+        return QString();
+    }
+}
+
+
+QString messageQuery(const QString& provider, const QString& folder, const QString& message)
+{
+    if (!provider.isEmpty() && ! folder.isEmpty() && !message.isEmpty()) {
+        return QString("Message\\provider:%1\\folder:%2\\id:%3").arg(escape(provider)).arg(escape(folder)).arg(escape(message));
+    } else {
+        return QString();
+    }
+}
+
+
+QString messageSummaryQuery(const QString& provider, const QString& folder, const QString& message)
+{
+    if (!provider.isEmpty() && ! folder.isEmpty() && !message.isEmpty()) {
+        return QString("MessageSummary\\provider:%1\\folder:%2\\id:%3").arg(escape(provider)).arg(escape(folder)).arg(escape(message));
+    } else {
+        return QString();
+    }
+}
+
+
+QString personAddPrefix(const QString& id) {
     return QString("Person-%1").arg(id);
 }
 
 
-QString personSummaryQuery(const QString& id)
-{
-    return QString("PersonSummary-%1").arg(id);
-}
-
-
-QString personFromQuery(const QString& query)
-{
-    if (query.startsWith("Person-")) {
-        return QString(query).remove(0, 7);
+QString personQuery(const QString& provider, const QString& id) {
+    if (!provider.isEmpty() && ! id.isEmpty()) {
+        return QString("Person\\provider:%1\\id:%2").arg(escape(provider)).arg(escape(id));
+    } else {
+        return QString();
     }
-    return QString();
 }
 
 
-#endif
+QString personRemovePrefix(const QString& id) {
+    if (id.startsWith("Person-")) {
+        QString person = QString(id).remove(0, 7);
+        return person;
+    } else {
+        return QString();
+    }
+}
+
+
+QString personSelfQuery(const QString& provider)
+{
+    if (!provider.isEmpty()) {
+        return QString("PersonCheck\\provider:%1").arg(escape(provider));
+    } else {
+        return QString();
+    }
+}
+
+
+QString personSummaryQuery(const QString& provider, const QString& id) {
+    if (!provider.isEmpty() && ! id.isEmpty()) {
+        return QString("PersonSummary\\provider:%1\\id:%2").arg(escape(provider)).arg(escape(id));
+    } else {
+        return QString();
+    }
+}
+
+
+QString receivedInvitationsQuery(const QString& provider) {
+    if (!provider.isEmpty()) {
+        return QString("ReceivedInvitations\\provider:%1").arg(escape(provider));
+    } else {
+        return QString();
+    }
+}

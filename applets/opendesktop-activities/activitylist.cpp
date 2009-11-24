@@ -35,9 +35,6 @@ ActivityList::ActivityList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     m_container = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
     setWidget(m_container);
-
-    m_engine->connectSource("activity", this, m_updateInterval * 1000);
-    dataUpdated("activity", m_engine->query("activity"));
 }
 
 
@@ -62,10 +59,23 @@ void ActivityList::setLimit(int limit)
 }
 
 
+void ActivityList::setProvider(const QString& provider) {
+    if (provider != m_provider) {
+        if (!m_provider.isEmpty()) {
+            m_engine->disconnectSource("Activities\\provider:" + m_provider, this);
+        }
+        m_provider = provider;
+        if (!m_provider.isEmpty()) {
+            m_engine->connectSource("Activities\\provider:" + m_provider, this, m_updateInterval * 1000);
+        }
+    }
+}
+
+
 void ActivityList::setUpdateInterval(int interval)
 {
     m_updateInterval = interval;
-    m_engine->connectSource("activity", this, m_updateInterval * 1000);
+    m_engine->connectSource("Activities\\provider:" + m_provider, this, m_updateInterval * 1000);
 }
 
 
@@ -94,7 +104,7 @@ void ActivityList::dataUpdated(const QString& source, const Plasma::DataEngine::
 
     QStringList::iterator j = displayedActivities.begin();
     for (int i = 0; i < displayedActivities.size(); ++i, ++j) {
-        ActivityWidget* widget = new ActivityWidget(m_container);
+        ActivityWidget* widget = new ActivityWidget(m_engine, m_container);
         widget->setActivityData(data[*j].value<Plasma::DataEngine::Data>());
         m_layout->addItem(widget);
     }

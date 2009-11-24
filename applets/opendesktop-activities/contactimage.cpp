@@ -28,51 +28,61 @@
 #include <KIcon>
 
 // Plasma
+#include <Plasma/DataEngine>
 #include <Plasma/Theme>
 
 
 using namespace Plasma;
 
-ContactImage::ContactImage(QGraphicsWidget *parent)
-    : QGraphicsWidget(parent)
+ContactImage::ContactImage(DataEngine* engine, QGraphicsWidget* parent)
+    : QGraphicsWidget(parent), m_engine(engine)
 {
     border = 1; // should be a power of two, otherwise we get blurry lines
-    fg = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-    bg = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
-    m_pixmap = KIcon("system-users").pixmap(64, 64);
-
+    fg = Theme::defaultTheme()->color(Theme::TextColor);
+    bg = Theme::defaultTheme()->color(Theme::BackgroundColor);
+    pixmapUpdated();
 }
 
-ContactImage::~ContactImage()
-{
-}
 
-void ContactImage::setImage(const QImage &image)
+void ContactImage::setUrl(const QUrl& url)
 {
-    setPixmap(QPixmap::fromImage(image));
-}
-
-void ContactImage::setPixmap(const QPixmap &pixmap)
-{
-    if (!pixmap.isNull()) {
-        m_pixmap = pixmap;
-        pixmapUpdated();
-        kDebug() << "----" << m_pixmap.size() << m_scaledPixmap.size();
-    } else {
-        m_pixmap = KIcon("system-users").pixmap(64, 64);
-        pixmapUpdated();
+    if (!m_source.isEmpty()) {
+        m_engine->disconnectSource(m_source, this);
+    }
+    m_source = url.isValid() ? "Pixmap\\url:" + url.toString() : QString();
+    if (!m_source.isEmpty()) {
+        m_engine->connectSource(m_source, this);
     }
 }
 
-void ContactImage::pixmapUpdated()
+
+void ContactImage::dataUpdated(const QString& source, const DataEngine::Data& data)
 {
-    QSize newsize = QSize(contentsRect().width() - (border * 2), contentsRect().height() - (border * 2) +1);
-    m_scaledPixmap = m_pixmap.scaled(newsize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    Q_UNUSED(source)
+    m_pixmap = data.value("Pixmap").value<QPixmap>();
+    pixmapUpdated();
+    update();
 }
 
-void ContactImage::paint(QPainter *painter,
-                   const QStyleOptionGraphicsItem *option,
-                   QWidget *widget)
+
+void ContactImage::pixmapUpdated()
+{
+    QSize newSize = QSize(contentsRect().width() - (border * 2), contentsRect().height() - (border * 2));
+    if (!m_pixmap.isNull()) {
+        if (newSize.width() > m_pixmap.width()) {
+            newSize.setWidth(m_pixmap.width());
+        }
+        if (newSize.height() > m_pixmap.height()) {
+            newSize.setHeight(m_pixmap.height());
+        }
+        m_scaledPixmap = m_pixmap.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    } else {
+        m_scaledPixmap = KIcon("system-users").pixmap(newSize);
+    }
+}
+
+
+void ContactImage::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
@@ -95,10 +105,13 @@ void ContactImage::paint(QPainter *painter,
 
 }
 
-void ContactImage::resizeEvent(QGraphicsSceneResizeEvent *event)
+
+void ContactImage::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-    // resize m_image;
+    Q_UNUSED(event)
+
     pixmapUpdated();
 }
+
 
 #include "contactimage.moc"

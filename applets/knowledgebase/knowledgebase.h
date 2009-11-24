@@ -79,6 +79,7 @@ private:
     Plasma::ToolButton *m_prevButton;
     Plasma::ToolButton *m_nextButton;
     Plasma::Label *m_statusLabel;
+    QString m_provider;
 
     int m_currentPage;
     int m_totalPages;

@@ -25,12 +25,14 @@
 #include <QtCore/QString>
 #include <QtGui/QGraphicsLinearLayout>
 
-#include <Plasma/DataEngine>
 #include <Plasma/ScrollWidget>
 
-#include "contactwidget.h"
-#include "friendwatchlist.h"
 
+class ContactContainer;
+
+namespace Plasma {
+    class DataEngine;
+}
 
 /**
  * The ContactList class provides a Plasma widget for displaying lists of contactwidget
@@ -47,29 +49,14 @@ class ContactList : public Plasma::ScrollWidget
          */
         explicit ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
 
-        /**
-         * Returns the maximum number of items shown
-         * @return the current limit
-         */
-        int limit() const;
-
-        /**
-         * Returns the query whose results should be displayed
-         * @return the current query
-         */
-        QString query() const;
-
-        /**
-         * Adjusts the maximum number of items shown
-         * @param limit the new limit
-         */
-        void setLimit(int limit);
-
+    public Q_SLOTS:
         /**
          * Sets the id of the user (i.e. the id that is taken into account when computing friendships)
          * @param id the new id
          */
         void setOwnId(const QString& id);
+
+        void setProvider(const QString& provider);
 
         /**
          * Sets the query whose results should be displayed
@@ -96,30 +83,8 @@ class ContactList : public Plasma::ScrollWidget
          */
         void sendMessage(const QString& id);
 
-        /**
-         * Size hint has changed, probably because the number of items changed
-         */
-        void sizeHintChanged(Qt::SizeHint);
-
-    private Q_SLOTS:
-        void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
-        void addFriend();
-        void sendMessage();
-        void showDetails();
-        void friendAdded( const QString& id);
-        void friendRemoved(const QString& id);
-
     private:
-        QStringList getDisplayedContacts(const Plasma::DataEngine::Data& data);
-        
-        QGraphicsWidget* m_container;
-        Plasma::DataEngine* m_engine;
-        QGraphicsLinearLayout* m_layout;
-        int m_limit;
-        QHash<QString, ContactWidget*> m_idToWidget;
-        QHash<ContactWidget*, QString> m_mapping;
-        QString m_query;
-        FriendWatchList m_friends;
+        ContactContainer* m_widget;
 };
 
 

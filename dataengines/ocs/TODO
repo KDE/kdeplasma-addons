@@ -1,0 +1,13 @@
+Qt Only
+ * Get rid of remaining KIO
+
+General
+ * Create a class to create providers (ProviderFactory? OpenCollaborationServices?)
+ * Upload
+ * Use ItemJob instead of individual jobs
+
+KDE integration
+ * KDE Wallet
+ * Proxy
+
+

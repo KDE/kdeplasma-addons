@@ -29,6 +29,9 @@
 #include <Plasma/Frame>
 #include <Plasma/DataEngine>
 
+#include "personwatch.h"
+
+
 namespace Plasma
 {
     class Label;
@@ -46,30 +49,31 @@ class UserWidget : public Plasma::Frame
     public:
         explicit UserWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~UserWidget();
-        void setId(const QString& id);
+
+    Q_SIGNALS:
+        void done();
 
     public Q_SLOTS:
+        void setId(const QString& id);
+        void setProvider(const QString& provider);
+
         void updateColors();
         //void loadStyleSheet(const QString &cssFile = "");
         void setStyleSheet(const QString &stylesheet);
 
     private Q_SLOTS:
-        void dataUpdated(const QString &source, const Plasma::DataEngine::Data& data);
+        void dataUpdated();
 
-    private :
+    private:
         void buildDialog();
         void setName();
         void setInfo();
 
         QString addRow(const QString& title, const QString& text);
 
-        // Caches the data
-        Plasma::DataEngine::Data m_data;
-
         StyleSheet* m_css;
 
         QString m_cssFile;
-        QString m_email;
         // Caches the content part of the widget
         QString m_info;
         // Caches the title part of the widget
@@ -83,6 +87,7 @@ class UserWidget : public Plasma::Frame
         QString m_id;
         // The data engine used
         Plasma::DataEngine* m_engine;
+        PersonWatch m_personWatch;
 };
 
 #endif

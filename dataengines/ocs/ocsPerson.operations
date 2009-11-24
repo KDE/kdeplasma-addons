@@ -15,4 +15,7 @@
             <label>The message accompagnying the invitation.</label>
         </entry>
     </group>
+    <group name="approveFriendship" />
+    <group name="declineFriendship" />
+    <group name="cancelFriendship" />
 </kcfg>

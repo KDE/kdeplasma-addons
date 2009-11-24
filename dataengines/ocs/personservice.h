@@ -22,22 +22,26 @@
 #ifndef PERSONSERVICE_H
 #define PERSONSERVICE_H
 
+#include <QtCore/QSharedPointer>
+#include <QtCore/QSignalMapper>
+
 #include <Plasma/Service>
 
-#include "provider.h"
+#include <attica/provider.h>
 
 
 class PersonService : public Plasma::Service
 {
     public:
-        PersonService(const Attica::Provider& provider, const QString& id, QObject* parent = 0);
+        PersonService(QSharedPointer<Attica::Provider> provider, const QString& id, QSharedPointer<QSignalMapper> serviceUpdates, QObject* parent = 0);
 
     protected:
         virtual Plasma::ServiceJob* createJob(const QString& operation, QMap<QString, QVariant>& parameters);
 
     private:
         QString m_id;
-        Attica::Provider m_provider;
+        QSharedPointer<Attica::Provider> m_provider;
+        QSharedPointer<QSignalMapper> m_serviceUpdates;
 };
 
 

@@ -26,7 +26,8 @@ using namespace Plasma;
 
 SourceWatchList::SourceWatchList(DataEngine* engine, QObject* parent)
     : QObject(parent),
-      m_engine(engine)
+      m_engine(engine),
+      m_updateInterval(0)
 {
 }
 
@@ -46,9 +47,23 @@ QString SourceWatchList::query() const
 void SourceWatchList::setQuery(const QString& query)
 {
     if (query != m_query) {
-        m_engine->disconnectSource(m_query, this);
+        if (!m_query.isEmpty()) {
+            m_engine->disconnectSource(m_query, this);
+        }
+        dataUpdated(m_query, DataEngine::Data());
         m_query = query;
-        m_engine->connectSource(m_query, this);
+        if (!m_query.isEmpty()) {
+            m_engine->connectSource(m_query, this, m_updateInterval);
+        }
+    }
+}
+
+
+void SourceWatchList::setUpdateInterval(uint updateInterval)
+{
+    m_updateInterval = updateInterval;
+    if (!m_query.isEmpty()) {
+        m_engine->connectSource(m_query, this, m_updateInterval);
     }
 }
 
@@ -66,8 +81,14 @@ void SourceWatchList::dataUpdated(const QString& source, const Plasma::DataEngin
     const QSet<QString> oldKeys = QSet<QString>::fromList(m_data.keys());
     const QSet<QString> newKeys = QSet<QString>::fromList(data.keys());
     m_data = data;
-    emit keysRemoved(QSet<QString>(oldKeys).subtract(newKeys));
-    emit keysAdded(QSet<QString>(newKeys).subtract(oldKeys));
+    QSet<QString> addedKeys = QSet<QString>(newKeys).subtract(oldKeys);
+    QSet<QString> removedKeys = QSet<QString>(oldKeys).subtract(newKeys);
+    if (!removedKeys.isEmpty()) {
+        emit keysRemoved(removedKeys);
+    }
+    if (!addedKeys.isEmpty()) {
+        emit keysAdded(addedKeys);
+    }
 }
 
 

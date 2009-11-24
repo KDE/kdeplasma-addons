@@ -34,6 +34,7 @@ class SourceWatchList : public QObject
         bool contains(const QString& key) const;
         QString query() const;
         void setQuery(const QString& query);
+        void setUpdateInterval(uint updateInterval);
         QVariant value(const QString& id) const;
 
     Q_SIGNALS:
@@ -47,6 +48,7 @@ class SourceWatchList : public QObject
         Plasma::DataEngine::Data m_data;
         Plasma::DataEngine* m_engine;
         QString m_query;
+        uint m_updateInterval;
 };
 
 

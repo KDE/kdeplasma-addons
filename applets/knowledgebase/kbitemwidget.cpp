@@ -65,10 +65,13 @@ KBItemWidget::KBItemWidget(QGraphicsWidget *parent)
     m_openBrowser->setMaximumSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
     connect(m_openBrowser, SIGNAL(clicked()), this, SLOT(openBrowser()));
 
+    m_category = new Label;
+
     titleLayout->addItem(m_title);
     titleLayout->addItem(m_openBrowser);
 
     m_layout->addItem(titleLayout);
+    m_layout->addItem(m_category);
 
 }
 
@@ -80,11 +83,12 @@ void KBItemWidget::setAtticaData(const Plasma::DataEngine::Data &data)
 {
     m_ocsData = data;
     m_title->setText(data["Name"].toString());
+    m_category->setText(i18n("<i>Category: %1</i>", data.value("category").toString()));
 }
 
 void KBItemWidget::openBrowser()
 {
-    KToolInvocation::invokeBrowser(m_ocsData["DetailPage"].value<KUrl>().prettyUrl());
+    KToolInvocation::invokeBrowser(m_ocsData["DetailPage"].value<QUrl>().toString());
 }
 
 void KBItemWidget::openProfile()

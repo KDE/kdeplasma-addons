@@ -71,9 +71,13 @@ ContactWidget::~ContactWidget()
 
 void ContactWidget::setId(const QString& id)
 {
-    m_engine->disconnectSource(personSummaryQuery(m_id), this);
+    if (!m_provider.isEmpty() && !m_id.isEmpty()) {
+        m_engine->disconnectSource(personSummaryQuery(m_provider, m_id), this);
+    }
     m_id = id;
-    m_engine->connectSource(personSummaryQuery(m_id), this);
+    if (!m_provider.isEmpty() && !m_id.isEmpty()) {
+        m_engine->connectSource(personSummaryQuery(m_provider, m_id), this);
+    }
 }
 
 
@@ -83,11 +87,29 @@ QString ContactWidget::id() const
 }
 
 
+void ContactWidget::setProvider(const QString& provider)
+{
+    if (!m_provider.isEmpty() && !m_id.isEmpty()) {
+        m_engine->disconnectSource(personSummaryQuery(m_provider, m_id), this);
+    }
+    m_provider = provider;
+    if (!m_provider.isEmpty() && !m_id.isEmpty()) {
+        m_engine->connectSource(personSummaryQuery(m_provider, m_id), this);
+    }
+}
+
+
+QString ContactWidget::provider() const
+{
+    return m_provider;
+}
+
+
 void ContactWidget::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
     Q_UNUSED(source);
     
-    m_ocsData = data.value(personQuery(m_id)).value<DataEngine::Data>();
+    m_ocsData = data.value(personAddPrefix(m_id)).value<DataEngine::Data>();
     QString _id = m_ocsData["Id"].toString();
 
     QString name = m_ocsData["Name"].toString();
@@ -111,8 +133,7 @@ void ContactWidget::dataUpdated(const QString& source, const Plasma::DataEngine:
     if (!location.isEmpty()) {
         setInfo(location);
     }
-    QPixmap pm = m_ocsData["Avatar"].value<QPixmap>();
-    m_image->setPixmap(pm);
+    m_image->setUrl(m_ocsData.value("AvatarUrl").toUrl());
 }
 
 
@@ -127,7 +148,7 @@ void ContactWidget::buildDialog()
     m_layout->setColumnFixedWidth(0, int(m*1.2));
     m_layout->setHorizontalSpacing(4);
 
-    m_image = new ContactImage(this);
+    m_image = new ContactImage(m_engine, this);
     m_image->setMinimumHeight(m);
     m_image->setMinimumWidth(m);
     m_layout->addItem(m_image, 0, 0, 2, 1, Qt::AlignTop);
@@ -235,10 +256,11 @@ void ContactWidget::updateColors()
 
     setPalette(p);
 
-    if (m_image) {
+    // FIXME: Re-activate or delete
+    /*if (m_image) {
         m_image->fg = text;
         m_image->bg = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
-    }
+    }*/
 
     qreal fontsize = KGlobalSettings::smallestReadableFont().pointSize();
     m_stylesheet = QString("\
@@ -272,12 +294,12 @@ void ContactWidget::setName(const QString &name)
     m_nameLabel->setText(name);
 }
 
-QString ContactWidget::name()
+QString ContactWidget::name() const
 {
     return m_ocsData["Name"].toString();
 }
 
-QString ContactWidget::user()
+QString ContactWidget::user() const
 {
     return m_ocsData["Id"].toString();
 }
@@ -306,5 +328,12 @@ void ContactWidget::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     m_isHovered = false;
     updateActions();
 }
+
+
+void ContactWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+    emit showDetails();
+}
+
 
 #include "contactwidget.moc"

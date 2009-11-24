@@ -55,6 +55,7 @@ QGraphicsWidget* OpenDesktopActivities::graphicsWidget()
 {
     if (!m_activityList) {
         m_activityList = new ActivityList(dataEngine("ocs"), this);
+        m_activityList->setProvider(m_provider);
         m_activityList->setMinimumSize(300, 300);
     }
     return m_activityList;
@@ -63,15 +64,20 @@ QGraphicsWidget* OpenDesktopActivities::graphicsWidget()
 
 void OpenDesktopActivities::init()
 {
-    QTimer::singleShot(0, this, SLOT(initWatcher()));
+    QTimer::singleShot(0, this, SLOT(initAsync()));
     setAssociatedApplicationUrls(KUrl("http://opendesktop.org"));
 }
 
 
-void OpenDesktopActivities::initWatcher()
+void OpenDesktopActivities::initAsync()
 {
+    m_provider = config().readEntry("provider", "https://api.opendesktop.org/v1/");
+    if (m_activityList) {
+        m_activityList->setProvider(m_provider);
+    }
+
     m_activityWatcher = new SourceWatchList(dataEngine("ocs"), this);
-    m_activityWatcher->setQuery("activity");
+    m_activityWatcher->setQuery("Activities\\provider:" + m_provider);
     connect(m_activityWatcher, SIGNAL(keysAdded(QSet<QString>)), SLOT(newActivities(QSet<QString>)));
 }
 
@@ -84,7 +90,6 @@ void OpenDesktopActivities::newActivities(const QSet<QString>& keys)
     if (keys.size() <= 2) {
         foreach (const QString& key, keys) {
             Plasma::DataEngine::Data activity = m_activityWatcher->value(key).value<Plasma::DataEngine::Data>();
-            qDebug() << "New activity: " << activity.value("message").toString();
             KNotification* notification = new KNotification("activity");
             notification->setTitle("OpenDesktop Activities");
             notification->setText(activity.value("message").toString());

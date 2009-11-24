@@ -44,7 +44,8 @@ KnowledgeBase::KnowledgeBase(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_graphicsWidget(0),
       m_currentPage(1),
-      m_totalPages(1)
+      m_totalPages(1),
+      m_provider("https://api.opendesktop.org/v1/")
 {
     setHasConfigurationInterface(true);
     setPopupIcon("help-contents");
@@ -63,7 +64,7 @@ void KnowledgeBase::init()
     delayedQuery();
 
     m_refreshTime = config().readEntry("refreshTime", 5);
-    setAssociatedApplicationUrls(KUrl("http://opendesktop.org/knowledgebase"));
+    //setAssociatedApplicationUrls(KUrl("http://opendesktop.org/knowledgebase"));
 }
 
 QGraphicsWidget *KnowledgeBase::graphicsWidget()
@@ -141,7 +142,10 @@ void KnowledgeBase::doQuery()
 
     dataEngine("ocs")->disconnectSource( m_currentQuery, this );
 
-    m_currentQuery = QString("KnowledgeBaseList-%1:new:%2:10").arg(m_questionInput->text()).arg(m_currentPage-1);
+    m_currentQuery = QString("KnowledgeBaseList\\provider:%1\\query:%2\\sortMode:new\\page:%3\\pageSize:10")
+        .arg(m_provider)
+        .arg(m_questionInput->text())
+        .arg(m_currentPage-1);
 
     //if is null refresh periodically
     if (m_questionInput->text().isNull()) {
@@ -197,7 +201,7 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
 {
     setBusy(false);
 
-    if (source.startsWith("KnowledgeBaseList-")) {
+    if (source.startsWith("KnowledgeBaseList\\")) {
         m_totalItems = data["TotalItems"].toInt();
         m_totalPages = ceil((qreal)m_totalItems/m_itemsPerPage);
 
@@ -237,12 +241,12 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
                 }
 
                 m_kbItemsByUser[user].append(kbItem);
-                dataEngine("ocs")->connectSource("Person-"+user, this);
+                dataEngine("ocs")->connectSource("Person\\provider:" + m_provider + "\\id:" + user, this);
                 m_sources.append("Person-"+user);
             }
         }
 
-    } else if (source.startsWith("Person-")) {
+    } else if (source.startsWith("Person\\")) {
         Plasma::DataEngine::Data personData = data[source].value<Plasma::DataEngine::Data>();
         QList<KBItemWidget *> items = m_kbItemsByUser[personData["Id"].toString()];
 
@@ -263,7 +267,7 @@ void KnowledgeBase::detailsClicked(KBItemWidget *item, bool shown)
 
     m_KBItemsLayout->invalidate();
     m_KBItemsPage->resize(QSizeF(m_KBItemsPage->size().width(), m_KBItemsPage->effectiveSizeHint(Qt::PreferredSize).height()));
-    m_KBItemsScroll->ensureItemVisible(item);
+    //m_KBItemsScroll->ensureItemVisible(item);
 
     emit sizeHintChanged(Qt::PreferredSize);
 }

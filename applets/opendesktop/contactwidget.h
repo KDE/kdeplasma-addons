@@ -43,18 +43,19 @@ class ContactWidget : public Plasma::Frame
     Q_OBJECT
 
     public:
-        ContactWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
+        explicit ContactWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~ContactWidget();
 
         QString id() const;
-
-        QString name();
-        QString user();
+        QString name() const;
+        QString provider() const;
+        QString user() const;
 
         void setName(const QString &name);
         void setInfo(const QString &name);
         void setIsFriend(bool isFriend);
         void setId(const QString& id);
+        void setProvider(const QString& provider);
 
         Plasma::PopupApplet* m_applet;
 
@@ -69,6 +70,8 @@ class ContactWidget : public Plasma::Frame
     protected Q_SLOTS:
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent* event);
+
         void slotShowDetails();
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
@@ -91,6 +94,7 @@ class ContactWidget : public Plasma::Frame
         Plasma::IconWidget* m_showDetails;
         Plasma::DataEngine* m_engine;
         QString m_id;
+        QString m_provider;
 };
 
 #endif

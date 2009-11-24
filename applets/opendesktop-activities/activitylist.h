@@ -41,7 +41,7 @@ class ActivityList : public Plasma::ScrollWidget
          * @param engine the Plasma data engine to use
          * @param parent the parent of this widget
          */
-        ActivityList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
+        explicit ActivityList(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
 
         /**
          * Returns the maximum number of items shown
@@ -62,6 +62,12 @@ class ActivityList : public Plasma::ScrollWidget
         void setLimit(int limit);
 
         /**
+         * Sets the provider used to fetch the activities
+         * @param provider the new provider
+         */
+        void setProvider(const QString& provider);
+
+        /**
          * Adjusts the interval for refreshing the activities list
          * @param interval the new interval in seconds
          */
@@ -77,6 +83,7 @@ class ActivityList : public Plasma::ScrollWidget
         Plasma::DataEngine* m_engine;
         QGraphicsLinearLayout* m_layout;
         int m_limit;
+        QString m_provider;
         int m_updateInterval;
 };
 

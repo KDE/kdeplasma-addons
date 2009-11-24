@@ -20,30 +20,29 @@
 #ifndef OPENDESKTOP_H
 #define OPENDESKTOP_H
 
-// Qt
-#include <QGraphicsLinearLayout>
-#include <QList>
-
 //Plasma
+#include <Plasma/DataEngine>
+#include <Plasma/PopupApplet>
 
-#include "contactwidget.h"
-#include "userwidget.h"
 #include "ui_opendesktopConfig.h"
 #include "ui_opendesktopLocationConfig.h"
-#include "sourcewatchlist.h"
 
-//desktop view
+
 namespace Plasma
 {
     class DataEngine;
-    class IconWidget;
     class TabBar;
-    class PopupApplet;
-    class ScrollWidget;
 }
-class KConfigDialog;
-class ActivityList;
+
+class ActionStack;
 class ContactList;
+class FriendList;
+class KConfigDialog;
+class MessageCounter;
+class MessageList;
+class OwnIdWatcher;
+class QGraphicsLinearLayout;
+struct GeoLocation;
 
 class OpenDesktop : public Plasma::PopupApplet
 {
@@ -55,10 +54,14 @@ class OpenDesktop : public Plasma::PopupApplet
         void init();
         QGraphicsWidget* graphicsWidget();
 
+    Q_SIGNALS:
+        void providerChanged(const QString& provider);
 
     public Q_SLOTS:
         void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+        void endWork();
         void configAccepted();
+        void startWork();
 
     protected:
         void createConfigurationInterface(KConfigDialog *parent);
@@ -66,11 +69,7 @@ class OpenDesktop : public Plasma::PopupApplet
     private Q_SLOTS:
         void publishGeoLocation();
         void registerAccount();
-        void goHome();
-        void switchDisplayedUser(const QString& id, bool switchToPersonal = true);
-        void addFriend(const QString& id);
-        void sendMessage(const QString& id);
-        void updateSizeHint();
+        void unreadMessageCountChanged(int count);
 
     private:
         void connectGeolocation();
@@ -80,30 +79,28 @@ class OpenDesktop : public Plasma::PopupApplet
         Ui::opendesktopConfig ui;
         Ui::opendesktopLocationConfig locationUi;
 
-        qlonglong id;
         Plasma::TabBar* m_tabs;
 
         QGraphicsLinearLayout* m_layout;
 
-        // Personal tab
-        UserWidget* m_userWidget;
-        Plasma::DataEngine::Data m_ownData;
-
         // Friends tab
-        ContactList* m_friendList;
+        FriendList* m_friendList;
+        ActionStack* m_friendStack;
 
         // Nearby people tab
         ContactList* m_nearList;
+        ActionStack* m_nearStack;
 
-        Plasma::IconWidget* m_homeButton;
+        // Messages tab
+        MessageList* m_messageList;
 
         // Config values
-        int m_maximumItems;
-        QString m_username;
-        QString m_displayedUser;
-        struct GeoLocation *m_geolocation;
+        QString m_provider;
+        GeoLocation* m_geolocation;
         void saveGeoLocation();
         void syncGeoLocation();
+        OwnIdWatcher* m_ownIdWatcher;
+        MessageCounter* m_messageCounter;
 };
 
 #endif

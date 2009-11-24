@@ -2,7 +2,19 @@ project(plasma-opendesktop)
 
 
 set(opendesktop_SRCS
-    friendwatchlist.cpp
+    actionstack.cpp
+    friendlist.cpp
+    contactcontainer.cpp
+    friendmanagementcontainer.cpp
+    friendmanagementwidget.cpp
+    messagecounter.cpp
+    requestfriendshipwidget.cpp
+    ownidwatcher.cpp
+    messagelist.cpp
+    messagewatchlist.cpp
+    messagewidget.cpp
+    personwatch.cpp
+    personwatchlist.cpp
     sourcewatchlist.cpp
     utils.cpp
     sendmessagewidget.cpp

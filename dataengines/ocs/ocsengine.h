@@ -21,22 +21,28 @@
 
 #include "plasma/dataengine.h"
 
+#include <QtCore/QSignalMapper>
 #include <QStringList>
 #include <QHash>
+#include <QtCore/QSharedPointer>
 
 #include <Solid/Networking>
 
-#include "activity.h"
-#include "personservice.h"
-#include "provider.h"
+#include <attica/activity.h>
+#include <attica/message.h>
+#include <attica/provider.h>
+#include <attica/providermanager.h>
 
-class QTimer;
+#include "personservice.h"
+
 class KJob;
 
+namespace KIO {
+    class Job;
+}
+
 namespace Attica {
-    class PersonJob;
-    class KnowledgeBaseEntryJob;
-    class Event;
+    class BaseJob;
 }
 
 /**
@@ -48,46 +54,57 @@ class OcsEngine : public Plasma::DataEngine
 
 public:
     OcsEngine ( QObject* parent, const QVariantList& args );
-    ~OcsEngine ();
-    virtual QStringList sources() const;
-    virtual Plasma::Service* serviceForSource(const QString& source);
+    Plasma::Service* serviceForSource(const QString& source);
 
 protected:
-    virtual bool sourceRequestEvent(const QString& name);
-    virtual bool updateSourceEvent(const QString& source);
+    bool sourceRequestEvent(const QString& name);
+    bool updateSourceEvent(const QString& source);
 
 protected Q_SLOTS:
-    virtual void slotActivityResult( KJob* j);
-    virtual void slotFriendsResult( KJob* j);
-    virtual void slotNearPersonsResult( KJob* j);
-    virtual void slotPersonResult( KJob* j);
-    virtual void slotKnowledgeBaseResult( KJob *j );
-    virtual void slotKnowledgeBaseListResult( KJob *j );
-    virtual void slotEventResult(KJob* j);
-    virtual void slotEventListResult(KJob* j);
-    virtual void locationPosted( KJob *j );
+    void slotActivityResult( Attica::BaseJob* j);
+    void slotPersonListResult( Attica::BaseJob* j);
+    void slotPersonResult( Attica::BaseJob* j );
+    void slotKnowledgeBaseResult( Attica::BaseJob* j );
+    void slotKnowledgeBaseListResult( Attica::BaseJob* j );
+    void slotEventResult( Attica::BaseJob* j);
+    void slotEventListResult( Attica::BaseJob* j);
+    void slotFolderListResult(Attica::BaseJob* j);
+    void slotMessageResult(Attica::BaseJob* j);
+    void slotMessageListResult(Attica::BaseJob* j);
+    void locationPosted( Attica::BaseJob* j );
     void networkStatusChanged(Solid::Networking::Status);
-    void initializeProvider(KJob* j);
+    void slotPixmapData(KIO::Job* j, const QByteArray& data);
+    void slotPixmapResult(KJob* j);
+
+    void providersChanged();
+    void serviceUpdates(const QString& command);
 
 private:
-    void setPersonData(const QString &source, const Attica::Person &person);
+    void setPersonData(const QString& source, const Attica::Person& person, bool keyOnly = false);
     void setKnowledgeBaseData(const QString &source, const Attica::KnowledgeBaseEntry &knowledgeBase);
     void setEventData(const QString& source, const Attica::Event& event);
-    void addToPersonCache(const QString& id, const Attica::Person& person, bool replaceCache = false);
-    bool cacheRequest(const QString& query);
+    void setFolderData(const QString& source, const Attica::Folder& folder);
+    void setMessageData(const QString& source, const Attica::Message& message);
+    void setProviderData(const QString& source, const Attica::Provider& provider);
+    void setStatusData(const QString& source, Attica::BaseJob* job);
+    void addToPersonCache(const QString& source, const Attica::Person& person, bool replaceCache = false);
+    void addToMessageCache(const QString& source, const Attica::Message& message, bool replaceCache = false);
+    static QStringList split(const QString& encodedString);
+    static QString encode(const QString& s);
+    static QPair<QString, QHash<QString, QString> > parseSource(const QString& source);
+    bool providerDependentRequest(const QString& request, const QHash<QString, QString>& arguments, const QString& fullQuery, const QString& baseUrl, Attica::Provider* provider);
 
-    QHash<KJob*, QString> m_eventListJobs;
-    QHash<KJob*, QString> m_knowledgeBaseListJobs;
-    QHash<KJob*, QString> m_personListJobs;
+    QHash<Attica::BaseJob*, QString> m_jobs;
+    QHash<KJob*, QString> m_pixmapJobs;
+    QHash<KJob*, QByteArray> m_pixmapData;
 
-    Attica::Activity::List m_activities;
-    KJob* m_job;
-    int m_maximumItems;
-    QHash<QString,PersonService*> m_personServices;
-    QHash<QString, Attica::Person> m_personCache;
-    Attica::Provider m_provider;
-    bool m_providerInitialized;
-    QSet<QString> m_requestCache;
+    QHash<QPair<QString, QString>, PersonService*> m_personServices;
+    QHash<QPair<QString, QString>, Attica::Person> m_personCache;
+    QHash<QPair<QString, QString>, Attica::Message> m_messageCache;
+    QHash<QString, QSharedPointer<Attica::Provider> > m_providers;
+    QHash<QString, QSet<QString> > m_requestCache;
+    Attica::ProviderManager m_pm;
+    QSharedPointer<QSignalMapper> m_serviceUpdates;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(ocs, OcsEngine )
