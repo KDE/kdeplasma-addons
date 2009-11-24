@@ -45,6 +45,7 @@
 #include "topactiveprojectsview.h"
 
 #include "kdeobservatorypresets.h"
+#include "kdeobservatorydatabase.h"
 #include "kdeobservatoryconfigviews.h"
 #include "kdeobservatoryconfiggeneral.h"
 #include "kdeobservatoryconfigprojects.h"
@@ -78,6 +79,7 @@ KdeObservatory::~KdeObservatory()
         delete m_viewProviders["Top Developers"];
         delete m_viewProviders["Commit History"];
         delete m_viewProviders["Krazy Report"];
+        KdeObservatoryDatabase::self()->~KdeObservatoryDatabase();
     }
 }
 
@@ -163,6 +165,7 @@ bool KdeObservatory::eventFilter(QObject *receiver, QEvent *event)
 
 bool KdeObservatory::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
+    Q_UNUSED(watched);
     if (event->type() == QEvent::GraphicsSceneHoverEnter && m_enableAutoViewChange)
         m_viewTransitionTimer->stop();
     if (event->type() == QEvent::GraphicsSceneHoverLeave && m_enableAutoViewChange)

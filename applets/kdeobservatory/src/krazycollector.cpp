@@ -49,14 +49,16 @@ void KrazyCollector::run()
     KdeObservatoryDatabase::self()->truncateKrazyErrors();
     bool collected = false;
     QHashIterator<QString, bool> i(m_krazyReportViewProjects);
+    QString projectName;
     while (i.hasNext())
     {
         i.next();
-        if (i.value())
+        projectName = i.key();
+        if (i.value() && !m_projects[projectName].krazyReport.isEmpty())
         {
             collected = true;
             ++m_activeProjects;
-            collectProject(i.key());
+            collectProject(projectName);
         }
     }
     if (!collected)

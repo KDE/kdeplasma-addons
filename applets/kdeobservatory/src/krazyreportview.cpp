@@ -79,7 +79,7 @@ void KrazyReportView::updateViews()
 
             int maxRank = 0;
             qreal height = container->geometry().height() - fileTypeText->boundingRect().height();
-            qreal step = container->geometry().width() / projectFileTypeKrazyReport.size();
+            qreal step = qMin(container->geometry().width() / projectFileTypeKrazyReport.size(), (qreal) 22);
 
             int j = 0;
             QMapIterator<int, QString> i4(projectFileTypeKrazyReport);
