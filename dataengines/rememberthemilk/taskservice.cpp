@@ -84,8 +84,9 @@ void ModifyTaskJob::start() {
   else if (operationName() == "setTags") {
     m_task->setTags(parameters().value("tags").toStringList());
   }
-  else
+  else {
     kDebug() << "Operation not recognized";
+  }
 }
 
 void ModifyTaskJob::result(RTM::Task* task) {

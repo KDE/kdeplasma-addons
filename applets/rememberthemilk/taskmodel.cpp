@@ -273,8 +273,9 @@ void TaskModel::dataUpdated(const QString& name, const Plasma::DataEngine::Data&
       if (key != "id" && key != "name" && key != "smart")
         item->tasks.append(key.toULongLong());
     }
-    if (!item->tasks.count())
+    if (!item->tasks.count()) {
       kDebug() << "No tasks for: " << item->name << item->id << data.keys() << item->tasks;
+    }
     if (id == m_currentList)
       switchToList(m_currentList);
   }
@@ -304,8 +305,9 @@ void TaskModel::dataUpdated(const QString& name, const Plasma::DataEngine::Data&
     }
     insertTask(id);
   }
-  else
+  else {
     kDebug() << "Error, unknown source: " << name;
+  }
     
   emit modelUpdated();
 }
