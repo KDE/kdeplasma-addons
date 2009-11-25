@@ -50,6 +50,7 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
 
+    m_pm.setAuthenticationSuppressed(true);
     connect(&m_pm, SIGNAL(providerAdded(const Attica::Provider&)), SLOT(providerAdded(const Attica::Provider&)));
     m_pm.loadDefaultProviders();
     connect(m_serviceUpdates.data(), SIGNAL(mapped(QString)), SLOT(serviceUpdates(QString)));
