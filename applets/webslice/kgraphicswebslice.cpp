@@ -27,7 +27,6 @@
 #include <qwebframe.h>
 #include <qboxlayout.h>
 
-
 #include "kgraphicswebslice.h"
 
 struct KGraphicsWebSlicePrivate
@@ -47,7 +46,7 @@ KGraphicsWebSlice::KGraphicsWebSlice( QGraphicsWidget *parent )
     d->currentZoom = 1.0;
     d->originalGeometry = QRectF();
     d->view = new QGraphicsWebView( this );
-    connect( d->view, SIGNAL( loadFinished(bool) ), this, SLOT( createSlice() ) );
+    connect( d->view, SIGNAL( loadFinished(bool) ), this, SLOT( createSlice(bool) ) );
 
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
@@ -61,9 +60,9 @@ KGraphicsWebSlice::~KGraphicsWebSlice()
 
 void KGraphicsWebSlice::setUrl( const QUrl &url )
 {
-    d->view->load( url );
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setHtml(d->loadingText);
+    d->view->load( url );
 }
 
 void KGraphicsWebSlice::setLoadingText(const QString &html)
@@ -91,21 +90,26 @@ void KGraphicsWebSlice::setSliceGeometry( const QRectF geo )
     d->sliceGeometry = geo;
 }
 
+void KGraphicsWebSlice::createSlice(bool ok)
+{
+    if (ok) {
+        createSlice();
+    }
+}
+
 void KGraphicsWebSlice::createSlice()
 {
     //qDebug() << "KGraphicsWebSlice::createSlice()";
     QRectF geo = sliceGeometry();
-    if (!geo.isValid()) {
-        qDebug() << "Not creating slice, geo invalid" << geo;
-        return;
-    }
-    d->originalGeometry = geo;
-    d->view->resize( geo.size() );
     QWebFrame *frame = d->view->page()->mainFrame();
-    frame->setScrollPosition( geo.topLeft().toPoint() );
-    refresh();
-    emit sizeChanged(geo.size());
-    emit loadFinished();
+    if (geo.isValid()) {
+        d->originalGeometry = geo;
+        d->view->resize( geo.size() );
+        frame->setScrollPosition( geo.topLeft().toPoint() );
+        refresh();
+        emit sizeChanged(geo.size());
+        emit loadFinished();
+    }
 }
 
 QRectF KGraphicsWebSlice::sliceGeometry()
@@ -115,38 +119,29 @@ QRectF KGraphicsWebSlice::sliceGeometry()
     if (!d->selector.isEmpty()) {
        QWebElement element = frame->findFirstElement( d->selector );
         if ( element.isNull() ) {
-            qDebug() << "element is null..." << d->selector;
             return QRectF();
         }
         geo = element.geometry();
-        //qDebug() << "element geometry" << geo;
     } else if (d->sliceGeometry.isValid()) {
         geo = d->sliceGeometry;
-    } else {
-        qWarning() << "invalid element and size" << d->selector << d->sliceGeometry;
     }
     if (!geo.isValid()) {
-        qDebug() << "invalid geometry" << geo;
         return QRectF();
     }
     return geo;
-
 }
 
 void KGraphicsWebSlice::refresh()
 {
     QRectF geo = sliceGeometry();
     if (!geo.isValid()) {
-        qDebug() << "Not creating slice, geo invalid" << geo;
         return;
     }
     d->view->resize( geo.size() );
     QWebFrame *frame = d->view->page()->mainFrame();
     frame->setScrollPosition( geo.topLeft().toPoint() );
-    //qDebug() << "top point" << geo.topLeft().toPoint();
     setPreferredSize(geo.size());
     updateGeometry();
-    //qDebug() << "refreshed. ... " << geo;
 }
 
 void KGraphicsWebSlice::resizeEvent ( QGraphicsSceneResizeEvent * event )

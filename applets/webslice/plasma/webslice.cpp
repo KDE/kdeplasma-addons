@@ -53,8 +53,8 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
 void WebSlice::init()
 {
     KConfigGroup cg = config();
-    m_url = cg.readEntry("url", "http://dot.kde.org/");
-    m_element = cg.readEntry("element", "#block-user-0");
+    m_url = cg.readEntry("url", "http://www.kde.org/");
+    m_element = cg.readEntry("element", "#hotspot");
 
     // for testing geometry
     //m_url = cg.readEntry("url", "http://buienradar.nl/");

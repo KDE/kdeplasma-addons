@@ -137,17 +137,21 @@ signals:
      */
     void loadFinished();
 
-protected slots:
+protected Q_SLOTS:
     /**
-     * Initial creating of slice and setting of sizing information.
+     * Slot to catch errors, passes on to createSlice()
      */
-    void createSlice();
+    void createSlice(bool ok);
     /**
      * Reimplemented from QGraphicsWidget
      */
     void resizeEvent ( QGraphicsSceneResizeEvent * event );
 
 private:
+    /**
+     * Initial creating of slice and setting of sizing information.
+     */
+    void createSlice();
     struct KGraphicsWebSlicePrivate *d;
 };
 
