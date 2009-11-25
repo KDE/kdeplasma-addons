@@ -35,7 +35,6 @@ class FloatingGroup : public AbstractGroup
 
     protected:
         virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
-        virtual bool eventFilter(QObject *watched, QEvent *event);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);

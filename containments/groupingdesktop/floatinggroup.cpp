@@ -62,46 +62,4 @@ void FloatingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
     applet->installEventFilter(this);
 }
 
-bool FloatingGroup::eventFilter(QObject *watched, QEvent *event)
-{
-//     Plasma::Applet *applet = dynamic_cast<Plasma::Applet *>(watched);
-//     if (assignedApplets().contains(applet)) {
-//         switch (event->type()) {
-// //             case QEvent::GraphicsSceneMove:
-// //                 if (!contentsRect().contains(applet->geometry())) {
-// //                     kDebug()<<"!LKNJ";
-// //                     QRectF appletRect = applet->geometry();
-// //                     if (appletRect.x() < 0) {
-// //                         applet->moveBy(-appletRect.x(), 0);
-// //                     }
-// //                     if (appletRect.y() < 0) {
-// //                         applet->moveBy(0, -appletRect.y());
-// //                     }
-// // 
-// //                 }
-// //                 break;
-//             case QEvent:GraphicsSceneMouseMove:
-//                 if (!contentsRect().contains(applet->geometry())) {
-//                     kDebug()<<"!LKNJ";
-//                     QRectF appletRect = applet->geometry();
-//                     if (appletRect.x() < 0) {
-//                         applet->moveBy(-appletRect.x(), 0);
-//                     }
-//                     if (appletRect.y() < 0) {
-//                         applet->moveBy(0, -appletRect.y());
-//                     }
-// 
-//                 }
-//                 break;
-//             default:
-//                 break;
-// // 
-//         }
-// // 
-// //         return false;
-//     }
-
-    return AbstractGroup::eventFilter(watched, event);
-}
-
 #include "floatinggroup.moc"

@@ -25,7 +25,7 @@
 
 class KConfigGroup;
 
-class Containment;
+class GroupingContainment;
 class AbstractGroupPrivate;
 
 /**
@@ -50,12 +50,13 @@ class AbstractGroup : public QGraphicsWidget
         virtual ~AbstractGroup();
 
         /**
-        * Assignes an Applet to this Group
+         * Adds an Applet to this Group
          * @param applet the applet to be managed by this
          * @param layoutApplets if true calls layoutApplet(applet)
-         * @see assignedApplets
+         * @see applets
+         * @see removeApplet
          **/
-        void assignApplet(Plasma::Applet *applet, bool layoutApplets = true);
+        void addApplet(Plasma::Applet *applet, bool layoutApplets = true);
 
         /**
          * Saves the group's specific configurations for an applet.
@@ -74,6 +75,14 @@ class AbstractGroup : public QGraphicsWidget
          * @see saveAppletLayoutInfo
          **/
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
+
+        /**
+         * Removes an applet from this group.
+         * @param applet the applet to be removed
+         * @see addApplet
+         * @see applets
+         **/
+        void removeApplet(Plasma::Applet *applet);
 
         /**
          * Returns the view this widget is visible on, or 0 if none can be found.
@@ -98,11 +107,14 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void save(KConfigGroup &group) const;
 
+        virtual void showDropZone(const QPointF &pos);
+
         /**
          * Returns a list of the applets managed by this group
-         * @see assignApplet
+         * @see addApplet
+         * @see removeApplet
          **/
-        Plasma::Applet::List assignedApplets() const;
+        Plasma::Applet::List applets() const;
 
         /**
          * Returns the id of this group
@@ -114,6 +126,11 @@ class AbstractGroup : public QGraphicsWidget
          * @see setImmutability
          **/
         Plasma::ImmutabilityType immutability() const;
+
+        /**
+         * Returns a pointer to the containment this group is displayed in.
+         **/
+        GroupingContainment *containment() const;
 
         /**
          * Returns the plugin name for the group
@@ -136,6 +153,8 @@ class AbstractGroup : public QGraphicsWidget
         void setImmutability(Plasma::ImmutabilityType immutability);
 
     protected:
+        virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+
         /**
          * Reimplemented from QGraphicsWidget
          **/
@@ -145,6 +164,8 @@ class AbstractGroup : public QGraphicsWidget
          * Reimplemented from QGraphicsWidget
          **/
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
+
+        virtual bool eventFilter(QObject *obj, QEvent *event);
 
         /**
          * Lay outs an applet inside the group

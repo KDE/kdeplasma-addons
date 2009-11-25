@@ -81,7 +81,7 @@ void AbstractGroupPrivate::destroyGroup()
 void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
 {
     if (applets.contains(applet)) {
-        kDebug()<<"removed applet"<<applet->id()<<"inside group"<<id;
+        kDebug()<<"removed applet"<<applet->id()<<"inside group"<<id<<"of type"<<q->pluginName();
 
         applets.removeAll(applet);
 
@@ -90,7 +90,7 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
             destroying = false;
         }
 
-//                 emit q->appletRemovedFromGroup(applet, group); //FIXME crash! ???
+//                 emit q->appletRemovedFromGroup(applet, q); //FIXME crash! ???
     }
 }
 
@@ -126,16 +126,17 @@ uint AbstractGroup::id() const
     return d->id;
 }
 
-void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
+void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
 {
-    if (!applet) {
+    if (!applet || applets().contains(applet)) {
         return;
     }
 
-    kDebug()<<"adding applet"<<applet->id()<<"in group"<<id();
+    kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
-    applet->setParentItem(this);
     d->applets << applet;
+    applet->setParentItem(this);
+    applet->installEventFilter(this);
 
     connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
             this, SLOT(appletDestroyed(Plasma::Applet *)));
@@ -147,22 +148,32 @@ void AbstractGroup::assignApplet(Plasma::Applet *applet, bool layoutApplets)
     emit appletAddedInGroup(applet, this);
 }
 
-Plasma::Applet::List AbstractGroup::assignedApplets() const
+Plasma::Applet::List AbstractGroup::applets() const
 {
     return d->applets;
 }
 
+void AbstractGroup::removeApplet(Plasma::Applet *applet)
+{
+    kDebug()<<"removing applet"<<applet->id()<<"from group"<<id()<<"of type"<<pluginName();
+
+    d->applets.removeAll(applet);
+    applet->setParentItem(containment());
+    applet->setPos(mapToParent(applet->pos()));
+
+    emit appletRemovedFromGroup(applet, this);
+}
+
 void AbstractGroup::destroy()
 {
-    if (assignedApplets().count() == 0) {
+    if (applets().count() == 0) {
         d->destroyGroup();
         return;
     }
 
     d->destroying = true;
 
-    foreach (Plasma::Applet *applet, assignedApplets()) {
-        kDebug()<<"deleting applet"<<applet->id()<<"in group"<<id();
+    foreach (Plasma::Applet *applet, applets()) {
         applet->destroy();
     }
 }
@@ -196,6 +207,11 @@ QGraphicsView *AbstractGroup::view() const
     return found ? found : possibleFind;
 }
 
+GroupingContainment *AbstractGroup::containment() const
+{
+    return d->containment;
+}
+
 KConfigGroup AbstractGroup::config() const
 {
     KConfigGroup config = KConfigGroup(d->mainConfigGroup(), "Configuration");
@@ -211,6 +227,39 @@ void AbstractGroup::save(KConfigGroup &group) const
 
     group.writeEntry("plugin", pluginName());
     group.writeEntry("geometry", geometry());
+}
+
+void AbstractGroup::showDropZone(const QPointF& pos)
+{
+    Q_UNUSED(pos)
+
+    //base implementation does nothing
+}
+
+bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
+{
+//     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
+//     if (applet && applets().contains(applet)) {
+// //         kDebug()<<"KJN";
+//         switch (event->type()) {
+//             case QEvent::GraphicsSceneMove:
+// //                 removeApplet(applet);
+//                 break;
+// 
+//             default:
+//                 break;
+//         }
+// 
+//         return false;
+//     }
+
+
+    return QGraphicsWidget::eventFilter(obj, event);
+}
+
+void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    showDropZone(event->pos());
 }
 
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)

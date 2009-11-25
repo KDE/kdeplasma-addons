@@ -106,7 +106,7 @@ void GridLayout::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group);
 
-    applet->setImmutability(Plasma::SystemImmutable);
+//     applet->setImmutability(Plasma::SystemImmutable);
 }
 
 void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
@@ -121,17 +121,9 @@ QString GridLayout::pluginName() const
     return QString("gridlayout");
 }
 
-void GridLayout::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+void GridLayout::showDropZone(const QPointF &pos)
 {
-    if (!m_layout->geometry().contains(event->pos())) {
-        m_spacer->hide();
-        removeItem(m_spacer);
-        return;
-    }
-
-//     if (immutability() == Plasma::Mutable) {
-        showItemTo(m_spacer, event->pos());
-//     }
+    showItemTo(m_spacer, pos);
 }
 
 void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
@@ -266,7 +258,7 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
 
 void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    if (m_spacer->geometry().contains(mapToItem(this, pos))) {
+    if (m_spacer->geometry().contains(pos)) {
         Position spacerPos = itemPosition(m_spacer);
         if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
             m_spacer->hide();
@@ -280,8 +272,6 @@ void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
         }
         showItemTo(applet, pos);
     }
-
-    kDebug()<<m_layout->columnCount();
 }
 
 int GridLayout::nearestBoundair(qreal pos, qreal size) const

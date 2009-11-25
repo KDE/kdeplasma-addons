@@ -42,9 +42,9 @@ class GridLayout : public AbstractGroup
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
         QString pluginName() const;
+        virtual void showDropZone(const QPointF &pos);
 
     protected:
-        void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
 
     private slots:
