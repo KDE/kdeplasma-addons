@@ -68,7 +68,6 @@ KdeObservatory::KdeObservatory(QObject *parent, const QVariantList &args)
 
     connect(m_collectors["Commit Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
     connect(m_collectors["Krazy Collector"], SIGNAL(collectFinished()), this, SLOT(collectFinished()));
-
     KdeObservatoryPresets::init();
 }
 
@@ -86,8 +85,8 @@ KdeObservatory::~KdeObservatory()
 
 void KdeObservatory::init()
 {
-    graphicsWidget();
     loadConfig();
+    graphicsWidget();
     createTimers();
     createViewProviders();
     runCollectors();
@@ -205,16 +204,16 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     int viewsCount = m_activeViews.count();
     for (int i = 0; i < viewsCount; ++i)
     {
-		
-	QList<QListWidgetItem*> list = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString);
-	if (list.count() == 0) return;
-        QListWidgetItem * item = list.at(0);
+        QList<QListWidgetItem*> list = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString);
+        if (list.count() == 0){ kDebug() << "Failed to get in " << i <<"." << "String: " << m_activeViews.at(i).first; continue; }
+        QListWidgetItem * item = list.first();
         item->setCheckState(m_activeViews.at(i).second == true ? Qt::Checked:Qt::Unchecked);
         m_configViews->activeViews->takeItem(m_configViews->activeViews->row(item));
         m_configViews->activeViews->insertItem(i, item);
     }
 
     // Config - Projects
+    kDebug() << "Criando a parte de configuração de interface com " << m_projects.count() << "Projetos";
     QMapIterator<QString, Project> i(m_projects);
     while (i.hasNext())
     {
@@ -488,6 +487,7 @@ void KdeObservatory::loadConfig()
 
     m_projects.clear();
     int projectsCount = projectNames.count();
+    kDebug() << "Quantidade de projetos sendo adicionados em m_projects: " << projectNames.count();
     for (int i = 0; i < projectsCount; ++i)
     {
         Project project;
