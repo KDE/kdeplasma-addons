@@ -1,11 +1,6 @@
 project(plasma-webslice)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}/.. )
-
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 set(plasma-webslice_SRCS
     webslice.cpp
