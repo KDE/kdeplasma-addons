@@ -24,10 +24,10 @@
 
 #include <KGlobalSettings>
 
-#include <qwt/qwt_plot.h>
-#include <qwt/qwt_plot_grid.h>
-#include <qwt/qwt_plot_curve.h>
-#include <qwt/qwt_scale_widget.h>
+#include <qwt_plot.h>
+#include <qwt_plot_grid.h>
+#include <qwt_plot_curve.h>
+#include <qwt_scale_widget.h>
 
 #include "kdeobservatorydatabase.h"
 
@@ -36,7 +36,7 @@ class TimeScaleDraw : public QwtScaleDraw
 public:
     virtual QwtText label(double v) const
     {
-        return QString::number(v).insert(2, "/");
+        return QwtText(QString::number(v).insert(2, "/"));
     }
 };
 
