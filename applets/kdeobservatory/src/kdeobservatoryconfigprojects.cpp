@@ -80,7 +80,7 @@ void KdeObservatoryConfigProjects::on_psbRemoveProject_clicked()
 {
     QTableWidgetItem *currentItem;
     if ((currentItem = projects->currentItem()))
-        if (KMessageBox::questionYesNo(this, i18n("Are you sure you want to remove project '%1' ?", projects->item(currentItem->row(), 0)->text() ), i18n("Remove projet")) == KMessageBox::Yes)
+        if (KMessageBox::questionYesNo(this, i18n("Are you sure you want to remove project '%1'?", projects->item(currentItem->row(), 0)->text() ), i18n("Remove project")) == KMessageBox::Yes)
         {
             QString projectName = currentItem->text();
             projects->removeRow(currentItem->row());
