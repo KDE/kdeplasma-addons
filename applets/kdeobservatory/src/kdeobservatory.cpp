@@ -75,10 +75,10 @@ KdeObservatory::~KdeObservatory()
 {
     if (!hasFailedToLaunch())
     {
-        delete m_viewProviders["Top Active Projects"];
-        delete m_viewProviders["Top Developers"];
-        delete m_viewProviders["Commit History"];
-        delete m_viewProviders["Krazy Report"];
+        delete m_viewProviders[i18n("Top Active Projects")];
+        delete m_viewProviders[i18n("Top Developers")];
+        delete m_viewProviders[i18n("Commit History")];
+        delete m_viewProviders[i18n("Krazy Report")];
         KdeObservatoryDatabase::self()->~KdeObservatoryDatabase();
     }
 }
@@ -183,11 +183,11 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
 
     m_configViews = new KdeObservatoryConfigViews(parent);
     m_configViews->m_projects = m_projects;
-    m_configViews->m_projectsInView["Top Active Projects"] = m_topActiveProjectsViewProjects;
-    m_configViews->m_projectsInView["Top Developers"] = m_topDevelopersViewProjects;
-    m_configViews->m_projectsInView["Commit History"] = m_commitHistoryViewProjects;
-    m_configViews->m_projectsInView["Krazy Report"] = m_krazyReportViewProjects;
-    m_configViews->updateView("Top Active Projects");
+    m_configViews->m_projectsInView[i18n("Top Active Projects")] = m_topActiveProjectsViewProjects;
+    m_configViews->m_projectsInView[i18n("Top Developers")] = m_topDevelopersViewProjects;
+    m_configViews->m_projectsInView[i18n("Commit History")] = m_commitHistoryViewProjects;
+    m_configViews->m_projectsInView[i18n("Krazy Report")] = m_krazyReportViewProjects;
+    m_configViews->updateView(i18n("Top Active Projects"));
     parent->addPage(m_configViews, i18n("Views"), "view-presentation");
 
     connect(m_configProjects, SIGNAL(projectAdded(const QString &, const QString &)),
@@ -204,16 +204,13 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     int viewsCount = m_activeViews.count();
     for (int i = 0; i < viewsCount; ++i)
     {
-        QList<QListWidgetItem*> list = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString);
-        if (list.count() == 0){ kDebug() << "Failed to get in " << i <<"." << "String: " << m_activeViews.at(i).first; continue; }
-        QListWidgetItem * item = list.first();
+        QListWidgetItem * item = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString).first();
         item->setCheckState(m_activeViews.at(i).second == true ? Qt::Checked:Qt::Unchecked);
         m_configViews->activeViews->takeItem(m_configViews->activeViews->row(item));
         m_configViews->activeViews->insertItem(i, item);
     }
 
     // Config - Projects
-    kDebug() << "Criando a parte de configuração de interface com " << m_projects.count() << "Projetos";
     QMapIterator<QString, Project> i(m_projects);
     while (i.hasNext())
     {
@@ -300,11 +297,11 @@ void KdeObservatory::configAccepted()
         projectIcons << project.icon;
     }
 
-    m_configViews->on_views_currentIndexChanged("Top Active Projects");
-    m_topActiveProjectsViewProjects = m_configViews->m_projectsInView["Top Active Projects"];
-    m_topDevelopersViewProjects = m_configViews->m_projectsInView["Top Developers"];
-    m_commitHistoryViewProjects = m_configViews->m_projectsInView["Commit History"];
-    m_krazyReportViewProjects = m_configViews->m_projectsInView["Krazy Report"];
+    m_configViews->on_views_currentIndexChanged(i18n("Top Active Projects"));
+    m_topActiveProjectsViewProjects = m_configViews->m_projectsInView[i18n("Top Active Projects")];
+    m_topDevelopersViewProjects = m_configViews->m_projectsInView[i18n("Top Developers")];
+    m_commitHistoryViewProjects = m_configViews->m_projectsInView[i18n("Commit History")];
+    m_krazyReportViewProjects = m_configViews->m_projectsInView[i18n("Krazy Report")];
 
     saveConfig();
 
@@ -487,7 +484,6 @@ void KdeObservatory::loadConfig()
 
     m_projects.clear();
     int projectsCount = projectNames.count();
-    kDebug() << "Quantidade de projetos sendo adicionados em m_projects: " << projectNames.count();
     for (int i = 0; i < projectsCount; ++i)
     {
         Project project;
@@ -612,10 +608,10 @@ void KdeObservatory::createTimers()
 
 void KdeObservatory::createViewProviders()
 {
-    m_viewProviders["Top Active Projects"] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
-    m_viewProviders["Top Developers"] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer);
-    m_viewProviders["Commit History"] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer);
-    m_viewProviders["Krazy Report"] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Top Active Projects")] = new TopActiveProjectsView(m_topActiveProjectsViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Top Developers")] = new TopDevelopersView(m_topDevelopersViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Commit History")] = new CommitHistoryView(m_commitHistoryViewProjects, m_projects, m_viewContainer);
+    m_viewProviders[i18n("Krazy Report")] = new KrazyReportView(m_krazyReportViewProjects, m_projects, m_viewContainer);
 }
 
 #include "kdeobservatory.moc"

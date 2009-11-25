@@ -20,6 +20,8 @@
 
 #include "kdeobservatorypresets.h"
 
+#include <KLocale>
+
 QList<QStringList> KdeObservatoryPresets::presets;
 
 void KdeObservatoryPresets::init()
@@ -166,7 +168,7 @@ QList<bool> KdeObservatoryPresets::automaticallyInViews()
 
 QStringList KdeObservatoryPresets::viewsPreset()
 {
-    return QStringList() << "Top Active Projects" << "Commit History" << "Top Developers" << "Krazy Report";
+    return QStringList() << i18n("Top Active Projects") << i18n("Commit History") << i18n("Top Developers") << i18n("Krazy Report");
 }
 
 QList<bool> KdeObservatoryPresets::viewsActivePreset()
