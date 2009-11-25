@@ -83,7 +83,7 @@ Specify the URL of the webpage in the URL field.
 In the &lt;em&gt;Element to Show&lt;/em&gt; field, fill in a CSS identifier (for example #mybox for elements with the id &quot;mybox&quot;).  This is the preferred method as it works best with layout changes on the webpage.
 &lt;/p&gt;
 &lt;p&gt;
-Alternatively, you can specify a rectangle on the webpage to use as slice. Use &quot;x,y,width,height&quot; in pixels, for example &lt;em&gt;&quot;100,80,300,360&quot;&lt;/em&gt;. This method is a fallback for webpages that don't provide enough semantic markup for the above mechanism.
+Alternatively, you can specify a rectangle on the webpage to use as slice. Use &quot;x,y,width,height&quot; in pixels, for example &lt;em&gt;&quot;100,80,300,360&quot;&lt;/em&gt;. This method is a fallback for webpages that do not provide enough semantic markup for the above mechanism.
 &lt;/p&gt;
 If both methods (element and geometry) are used, the element will take precedence.
 </string>
