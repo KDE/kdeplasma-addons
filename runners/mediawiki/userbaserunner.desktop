@@ -1,20 +1,6 @@
 [Desktop Entry]
 Name=KDE Documentation
-Name[en_GB]=KDE Documentation
-Name[et]=KDE dokumentatsioon
-Name[pt]=Documentação do KDE
-Name[sv]=KDE-dokumentation
-Name[tr]=KDE Belgelendirmeleri
-Name[uk]=Документація KDE
-Name[x-test]=xxKDE Documentationxx
 Comment=Search on KDE's Userbase
-Comment[en_GB]=Search on KDE's Userbase
-Comment[et]=Otsing KDE Userbase'is
-Comment[pt]=Procurar na Base de Utilizadores do KDE
-Comment[sv]=Sök på KDE:s Userbase
-Comment[tr]=KDE'nin Userbase Sayfalarında Ara
-Comment[uk]=Пошук у Userbase KDE
-Comment[x-test]=xxSearch on KDE's Userbasexx
 Icon=kde
 
 X-KDE-ServiceTypes=Plasma/Runner
