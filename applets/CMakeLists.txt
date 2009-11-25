@@ -88,4 +88,4 @@ if (Q_WS_X11)
    endif (X11_Xrender_FOUND)
 endif (Q_WS_X11)
 
- add_subdirectory(webslice)
+add_subdirectory(webslice)
