@@ -205,7 +205,10 @@ void KdeObservatory::createConfigurationInterface(KConfigDialog *parent)
     int viewsCount = m_activeViews.count();
     for (int i = 0; i < viewsCount; ++i)
     {
-        QListWidgetItem * item = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString).at(0);
+		
+	QList<QListWidgetItem*> list = m_configViews->activeViews->findItems(m_activeViews.at(i).first, Qt::MatchFixedString);
+	if (list.count() == 0) return;
+        QListWidgetItem * item = list.at(0);
         item->setCheckState(m_activeViews.at(i).second == true ? Qt::Checked:Qt::Unchecked);
         m_configViews->activeViews->takeItem(m_configViews->activeViews->row(item));
         m_configViews->activeViews->insertItem(i, item);
