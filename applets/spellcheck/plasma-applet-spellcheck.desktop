@@ -1,7 +1,19 @@
 [Desktop Entry]
 Name=Spell Check
+Name[en_GB]=Spell Check
+Name[pt]=Verificação Ortográfica
+Name[sv]=Stavningskontroll
+Name[uk]=Перевірка правопису
+Name[x-test]=xxSpell Checkxx
+Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
+Comment[en_GB]=Fast spell checking
+Comment[pt]=Verificação ortográfica rápida
+Comment[sv]=Snabb stavningskontroll
+Comment[uk]=Швидка перевірка правопису
+Comment[x-test]=xxFast spell checkingxx
+Comment[zh_TW]=快速拼字檢查
 
 Icon=tools-check-spelling
 Type=Service

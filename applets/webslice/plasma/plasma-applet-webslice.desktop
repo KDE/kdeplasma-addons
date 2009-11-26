@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Web Slice
+Name[en_GB]=Web Slice
+Name[pt]=Fatia Web
+Name[sv]=Webbutdrag
+Name[uk]=Веб-зріз
+Name[x-test]=xxWeb Slicexx
+Name[zh_TW]=網頁切片
 Comment=Show a part of a webpage
+Comment[en_GB]=Show a part of a webpage
+Comment[pt]=Mostrar uma parte de uma página Web
+Comment[sv]=Visa en del av en webbsida
+Comment[uk]=Показ частини веб-сторінки
+Comment[x-test]=xxShow a part of a webpagexx
+Comment[zh_TW]=顯示一部份的網頁
 
 Type=Service
 Icon=internet-web-browser

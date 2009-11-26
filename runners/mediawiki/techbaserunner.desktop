@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=TechBase
+Name[en_GB]=TechBase
+Name[pt]=TechBase
+Name[sv]=Techbase
+Name[uk]=TechBase
+Name[x-test]=xxTechBasexx
+Name[zh_TW]=TechBase
 Comment=Search on KDE's TechBase
+Comment[en_GB]=Search on KDE's TechBase
+Comment[pt]=Procurar na TechBase do KDE
+Comment[sv]=Sök på KDE:s Techbase
+Comment[uk]=Пошук у TechBase KDE
+Comment[x-test]=xxSearch on KDE's TechBasexx
+Comment[zh_TW]=搜尋 KDE TechBase
 Icon=kde
 
 X-KDE-ServiceTypes=Plasma/Runner

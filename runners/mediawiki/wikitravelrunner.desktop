@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Wikitravel
+Name[en_GB]=Wikitravel
+Name[pt]=Wikitravel
+Name[sv]=Wikitravel
+Name[uk]=Wikitravel
+Name[x-test]=xxWikitravelxx
+Name[zh_TW]=Wikitravel
 Comment=Search on Wikitravel
+Comment[en_GB]=Search on Wikitravel
+Comment[pt]=Procurar no Wikitravel
+Comment[sv]=Sök på Wikitravel
+Comment[uk]=Пошук у Wikitravel
+Comment[x-test]=xxSearch on Wikitravelxx
+Comment[zh_TW]=搜尋 Wikitravel
 Icon=applications-internet
 
 X-KDE-ServiceTypes=Plasma/Runner
