@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>238</width>
-    <height>201</height>
+    <height>180</height>
    </rect>
   </property>
   <layout class="QFormLayout" name="formLayout">
@@ -95,20 +95,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Distance</string>
-     </property>
-     <property name="buddy">
-      <cstring>distance</cstring>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="1">
-    <widget class="KIntSpinBox" name="distance"/>
-   </item>
-   <item row="7" column="1">
     <widget class="QPushButton" name="publishLocation">
      <property name="text">
       <string>Publish my Location</string>
@@ -122,11 +109,6 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>

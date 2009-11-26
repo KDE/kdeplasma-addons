@@ -96,9 +96,6 @@ void OpenDesktop::init()
     m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
 
-    // FIXME: Uncomment
-    //setAssociatedApplicationUrls(KUrl("http://opendesktop.org/usermanager/search.php?username="+m_username));
-
     connectGeolocation();
 }
 

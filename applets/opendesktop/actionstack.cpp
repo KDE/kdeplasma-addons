@@ -40,12 +40,12 @@ ActionStack::ActionStack(DataEngine* engine, QGraphicsWidget* mainWidget, QGraph
     m_sendMessage = new SendMessageWidget(engine);
 
     m_tabs = new TabBar;
-    //m_tabs->setTabBarShown(false);
+    m_tabs->setTabBarShown(false);
     m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    m_tabs->addTab("1", mainWidget);
-    m_tabs->addTab("2", m_details);
-    m_tabs->addTab("3", m_sendMessage);
-    m_tabs->addTab("4", m_requestFriendship);
+    m_tabs->addTab(QString(), mainWidget);
+    m_tabs->addTab(QString(), m_details);
+    m_tabs->addTab(QString(), m_sendMessage);
+    m_tabs->addTab(QString(), m_requestFriendship);
 
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Horizontal);
     layout->addItem(m_tabs);
