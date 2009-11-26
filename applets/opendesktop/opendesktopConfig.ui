@@ -182,7 +182,7 @@ p, li { white-space: pre-wrap; }
    <item row="3" column="2">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>User name:</string>
+      <string>Username:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
