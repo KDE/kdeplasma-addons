@@ -77,7 +77,6 @@ if(NOT WIN32)
 endif(NOT WIN32)
 
 if (Q_WS_X11)
-   message("got x11")
    if (X11_Xrender_FOUND)
       set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/kimpanel/cmake)
       find_package(SCIM)
