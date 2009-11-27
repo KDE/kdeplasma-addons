@@ -64,17 +64,18 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     lay->addCornerAnchors(m_picture, Qt::TopRightCorner, m_author, Qt::TopLeftCorner);
     lay->addCornerAnchors(m_author, Qt::BottomLeftCorner, m_from, Qt::TopLeftCorner);
 
+    lay->addCornerAnchors(lay, Qt::TopRightCorner, m_forwardButton, Qt::TopRightCorner);
+    lay->addCornerAnchors(m_forwardButton, Qt::TopLeftCorner, m_replyButton, Qt::TopRightCorner);
+    lay->addCornerAnchors(m_replyButton, Qt::TopLeftCorner, m_author, Qt::TopRightCorner);
+
     //vertical
     lay->addAnchor(m_from, Qt::AnchorBottom, m_text, Qt::AnchorTop);
     lay->addAnchor(lay, Qt::AnchorBottom, m_text, Qt::AnchorBottom);
-    lay->addAnchor(lay, Qt::AnchorRight, m_text, Qt::AnchorRight);
-
-    lay->addAnchor(m_picture, Qt::AnchorBottom, m_replyButton, Qt::AnchorTop);
-    lay->addAnchor(m_replyButton, Qt::AnchorBottom, m_forwardButton, Qt::AnchorTop);
-    lay->addAnchor(lay, Qt::AnchorBottom, m_forwardButton, Qt::AnchorBottom);
 
     //horizontal
-    lay->addAnchor(m_picture, Qt::AnchorRight, m_text, Qt::AnchorLeft);
+    lay->addAnchor(lay, Qt::AnchorRight, m_from, Qt::AnchorRight);
+    lay->addAnchors(lay, m_text, Qt::Horizontal);
+
 
     QGraphicsItem *pw = this;
     while ((pw = pw->parentItem())) {
