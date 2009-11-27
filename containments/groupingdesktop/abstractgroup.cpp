@@ -135,15 +135,18 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
     d->applets << applet;
+    QPointF newPos = mapFromItem(containment(), applet->pos());
     applet->setParentItem(this);
-    applet->installEventFilter(this);
-
-    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
-            this, SLOT(appletDestroyed(Plasma::Applet *)));
+    //FIXME this simple line breaks everything when adding plasmoids from the containment!! Why???
+//     applet->setPos(newPos); 
 
     if (layoutApplets) {
-        layoutApplet(applet, mapFromParent(applet->pos()));
+        layoutApplet(applet, newPos);
     }
+
+    applet->installEventFilter(this);
+    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
+            this, SLOT(appletDestroyed(Plasma::Applet *)));
 
     emit appletAddedInGroup(applet, this);
 }
@@ -238,20 +241,20 @@ void AbstractGroup::showDropZone(const QPointF& pos)
 
 bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 {
-//     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
-//     if (applet && applets().contains(applet)) {
-// //         kDebug()<<"KJN";
-//         switch (event->type()) {
-//             case QEvent::GraphicsSceneMove:
-// //                 removeApplet(applet);
-//                 break;
-// 
-//             default:
-//                 break;
-//         }
-// 
-//         return false;
-//     }
+    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
+    if (applet && applets().contains(applet)) {
+        switch (event->type()) {
+            case QEvent::GraphicsSceneMove:
+                 kDebug()<<"KJN";
+//                 removeApplet(applet);
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 
 
     return QGraphicsWidget::eventFilter(obj, event);

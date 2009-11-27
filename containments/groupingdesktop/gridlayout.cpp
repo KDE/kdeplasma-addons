@@ -26,6 +26,8 @@
 #include <Plasma/Applet>
 #include <Plasma/PaintUtils>
 
+#include "groupingcontainment.h"
+
 class Position {
     public:
         Position(int r = -1, int c = -1)
@@ -106,7 +108,7 @@ void GridLayout::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group);
 
-//     applet->setImmutability(Plasma::SystemImmutable);
+    applet->setImmutability(Plasma::UserImmutable);
 }
 
 void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)

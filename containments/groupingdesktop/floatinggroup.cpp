@@ -23,9 +23,6 @@ FloatingGroup::FloatingGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : AbstractGroup(parent, wFlags)
 {
     resize(200,200);
-
-    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet *, AbstractGroup *)),
-            this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
 FloatingGroup::~FloatingGroup()
@@ -52,14 +49,8 @@ void FloatingGroup::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup gr
 
 void FloatingGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    applet->setPos(pos);
-}
-
-void FloatingGroup::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
-{
-    Q_UNUSED(group)
-
-    applet->installEventFilter(this);
+    Q_UNUSED(applet)
+    Q_UNUSED(pos)
 }
 
 #include "floatinggroup.moc"

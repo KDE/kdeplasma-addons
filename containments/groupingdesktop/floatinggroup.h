@@ -36,8 +36,6 @@ class FloatingGroup : public AbstractGroup
     protected:
         virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
 
-    private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
 };
 
 #endif // FLOATINGGROUP_H
