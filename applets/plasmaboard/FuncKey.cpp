@@ -27,7 +27,7 @@
 #include "Helpers.h"
 
 FuncKey::FuncKey(PlasmaboardWidget *parent):
-	BoardKey::BoardKey(parent), pressed(false) {
+	BoardKey(parent), pressed(false) {
 }
 
 void FuncKey::toggleOn(){

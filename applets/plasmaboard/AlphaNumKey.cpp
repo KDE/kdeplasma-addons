@@ -24,7 +24,7 @@
 #include "Helpers.h"
 
 AlphaNumKey::AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym):
-        BoardKey::BoardKey(parent){
+        BoardKey(parent){
 
 
         QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodePress() ) );
