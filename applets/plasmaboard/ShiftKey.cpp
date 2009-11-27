@@ -21,7 +21,7 @@
 #include "ShiftKey.h"
 #include <QPainter>
 
-ShiftKey::ShiftKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+ShiftKey::ShiftKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Shift_L, false);
 	QObject::connect(parent, SIGNAL( shiftKey(bool) ), this, SLOT( toggle(bool) ) );
 }

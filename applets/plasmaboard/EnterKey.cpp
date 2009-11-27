@@ -22,7 +22,7 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-EnterKey::EnterKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent) {
+EnterKey::EnterKey(PlasmaboardWidget *parent) : FuncKey(parent) {
 	// TODO Auto-generated constructor stub
 	setKeycode(XK_Return, true);
 }

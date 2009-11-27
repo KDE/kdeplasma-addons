@@ -22,7 +22,7 @@
 #include <QPainter>
 
 
-BackspaceKey::BackspaceKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+BackspaceKey::BackspaceKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_BackSpace, true);
 }
 

@@ -22,7 +22,7 @@
 #include <QPainter>
 
 
-ArrowTopKey::ArrowTopKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+ArrowTopKey::ArrowTopKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Up, true);
 }
 

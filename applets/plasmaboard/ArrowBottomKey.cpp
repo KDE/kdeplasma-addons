@@ -21,7 +21,7 @@
 #include "ArrowBottomKey.h"
 #include <QPainter>
 
-ArrowBottomKey::ArrowBottomKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+ArrowBottomKey::ArrowBottomKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Down, true);
 }
 

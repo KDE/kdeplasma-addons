@@ -21,7 +21,7 @@
 #include "ArrowRightKey.h"
 #include <QPainter>
 
-ArrowRightKey::ArrowRightKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+ArrowRightKey::ArrowRightKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Right, true);
 }
 

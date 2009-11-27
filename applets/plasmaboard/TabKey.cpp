@@ -22,7 +22,7 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-TabKey::TabKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+TabKey::TabKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Tab, true);
 }
 

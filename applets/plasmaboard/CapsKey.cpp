@@ -21,7 +21,7 @@
 #include "CapsKey.h"
 #include <QPainter>
 
-CapsKey::CapsKey(PlasmaboardWidget *parent) : FuncKey::FuncKey(parent){
+CapsKey::CapsKey(PlasmaboardWidget *parent) : FuncKey(parent){
 	setKeycode(XK_Caps_Lock, true);
 }
 
