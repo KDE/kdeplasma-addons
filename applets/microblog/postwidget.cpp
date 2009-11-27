@@ -54,7 +54,7 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     m_replyButton->setText("@");
     connect(m_replyButton, SIGNAL(clicked()), this, SLOT(askReply()));
     m_forwardButton = new Plasma::ToolButton(this);
-    m_forwardButton->setText("RT");
+    m_forwardButton->setText(QChar(0x267B));
     connect(m_forwardButton, SIGNAL(clicked()), this, SLOT(askForward()));
 
     //corners
@@ -125,7 +125,7 @@ void PostWidget::askReply()
 
 void PostWidget::askForward()
 {
-    emit forward("RT @" + m_author->text() + " " + m_text->nativeWidget()->toPlainText());
+    emit forward(QChar(0x267B) + QString(" @") + m_author->text() + " " + m_text->nativeWidget()->toPlainText());
 }
 
 void PostWidget::askProfile()
