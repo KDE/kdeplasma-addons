@@ -31,6 +31,7 @@ namespace Plasma
 class Label;
 class IconWidget;
 class TextBrowser;
+class ToolButton;
 }
 
 class PostWidget : public Plasma::Frame
@@ -63,8 +64,8 @@ private:
     Plasma::IconWidget *m_picture;
     Plasma::Label *m_from;
     Plasma::TextBrowser *m_text;
-    Plasma::IconWidget *m_replyIcon;
-    Plasma::IconWidget *m_forwardIcon;
+    Plasma::ToolButton *m_replyButton;
+    Plasma::ToolButton *m_forwardButton;
     KTimeZone m_tz;
     KColorScheme *m_colorScheme;
 };

@@ -29,6 +29,7 @@
 
 #include <Plasma/Label>
 #include <Plasma/IconWidget>
+#include <Plasma/ToolButton>
 #include <Plasma/TextBrowser>
 #include <Plasma/ScrollWidget>
 
@@ -49,12 +50,12 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     m_text->nativeWidget()->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     m_text->nativeWidget()->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     m_text->nativeWidget()->setCursor( Qt::ArrowCursor );
-    m_replyIcon = new Plasma::IconWidget(this);
-    m_replyIcon->setText("@");
-    connect(m_replyIcon, SIGNAL(clicked()), this, SLOT(askReply()));
-    m_forwardIcon = new Plasma::IconWidget(this);
-    m_forwardIcon->setText("RT");
-    connect(m_forwardIcon, SIGNAL(clicked()), this, SLOT(askForward()));
+    m_replyButton = new Plasma::ToolButton(this);
+    m_replyButton->setText("@");
+    connect(m_replyButton, SIGNAL(clicked()), this, SLOT(askReply()));
+    m_forwardButton = new Plasma::ToolButton(this);
+    m_forwardButton->setText("RT");
+    connect(m_forwardButton, SIGNAL(clicked()), this, SLOT(askForward()));
 
     //corners
     QGraphicsAnchorLayout *lay = new QGraphicsAnchorLayout(this);
@@ -68,9 +69,9 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     lay->addAnchor(lay, Qt::AnchorBottom, m_text, Qt::AnchorBottom);
     lay->addAnchor(lay, Qt::AnchorRight, m_text, Qt::AnchorRight);
 
-    lay->addAnchor(m_picture, Qt::AnchorBottom, m_replyIcon, Qt::AnchorTop);
-    lay->addAnchor(m_replyIcon, Qt::AnchorBottom, m_forwardIcon, Qt::AnchorTop);
-    lay->addAnchor(lay, Qt::AnchorBottom, m_forwardIcon, Qt::AnchorBottom);
+    lay->addAnchor(m_picture, Qt::AnchorBottom, m_replyButton, Qt::AnchorTop);
+    lay->addAnchor(m_replyButton, Qt::AnchorBottom, m_forwardButton, Qt::AnchorTop);
+    lay->addAnchor(lay, Qt::AnchorBottom, m_forwardButton, Qt::AnchorBottom);
 
     //horizontal
     lay->addAnchor(m_picture, Qt::AnchorRight, m_text, Qt::AnchorLeft);
@@ -82,8 +83,8 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
             view->registerAsDragHandle(m_from);
             view->registerAsDragHandle(m_picture);
             view->registerAsDragHandle(m_text);
-            view->registerAsDragHandle(m_replyIcon);
-            view->registerAsDragHandle(m_forwardIcon);
+            view->registerAsDragHandle(m_replyButton);
+            view->registerAsDragHandle(m_forwardButton);
             break;
         }
     }
@@ -133,8 +134,8 @@ void PostWidget::askProfile()
 
 void PostWidget::setActionsShown(bool show)
 {
-    m_replyIcon->setVisible(show);
-    m_forwardIcon->setVisible(show);
+    m_replyButton->setVisible(show);
+    m_forwardButton->setVisible(show);
 }
 
 QString PostWidget::timeDescription( const QDateTime &dt )
