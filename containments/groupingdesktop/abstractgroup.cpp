@@ -115,6 +115,21 @@ void AbstractGroupPrivate::callLayoutApplet()
     currAppletPos = QPointF();
 }
 
+void AbstractGroupPrivate::repositionRemovedApplet()
+{
+    if (!currApplet || currAppletPos.isNull()) {
+        return;
+    }
+
+    currApplet->setPos(currAppletPos);
+    emit q->appletRemovedFromGroup(currApplet, q);
+
+    currApplet = 0;
+    currAppletPos = QPointF();
+}
+
+//-----------------------------AbstractGroup------------------------------
+
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
                d(new AbstractGroupPrivate(this))
@@ -164,7 +179,7 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
     if (layoutApplets) {
         d->currApplet = applet;
         d->currAppletPos = newPos;
-        //so i workarounded the above-mentioned problem with this QTimer::singleShot
+        //HACK so i workarounded the above-mentioned problem with this QTimer::singleShot
         QTimer::singleShot(0, this, SLOT(callLayoutApplet()));
     } else {
         applet->installEventFilter(this);
@@ -185,10 +200,12 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
     kDebug()<<"removing applet"<<applet->id()<<"from group"<<id()<<"of type"<<pluginName();
 
     d->applets.removeAll(applet);
+    applet->removeEventFilter(this);
     applet->setParentItem(containment());
-    applet->setPos(mapToParent(applet->pos()));
-
-    emit appletRemovedFromGroup(applet, this);
+    d->currApplet = applet;
+    d->currAppletPos = mapToParent(applet->pos());
+    //HACK like the one in layoutApplet
+    QTimer::singleShot(0, this, SLOT(repositionRemovedApplet()));
 }
 
 void AbstractGroup::destroy()
@@ -269,8 +286,9 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     if (applet && applets().contains(applet)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
-//                  kDebug()<<"KJN";
-//                 removeApplet(applet);
+                if (!contentsRect().contains(applet->geometry())) {
+                    removeApplet(applet);
+                }
                 break;
 
             default:

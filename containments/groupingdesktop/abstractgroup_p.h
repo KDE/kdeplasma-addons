@@ -32,6 +32,7 @@ class AbstractGroupPrivate
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
         void callLayoutApplet();
+        void repositionRemovedApplet();
 
         Plasma::Applet::List applets;
         AbstractGroup *q;
