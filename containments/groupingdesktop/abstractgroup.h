@@ -169,7 +169,7 @@ class AbstractGroup : public QGraphicsWidget
 
         /**
          * Lay outs an applet inside the group
-         * This function must be reimplemented by a child class.
+         * A child group probably wants to reimplement this function
          * @param applet the applet to be layed out
          * @param pos the position of the applet mapped to the group's coordinates
          **/
@@ -208,6 +208,7 @@ class AbstractGroup : public QGraphicsWidget
 
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
+        Q_PRIVATE_SLOT(d, void callLayoutApplet())
 
         AbstractGroupPrivate *const d;
 

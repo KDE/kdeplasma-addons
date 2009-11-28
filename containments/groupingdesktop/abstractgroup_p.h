@@ -31,6 +31,7 @@ class AbstractGroupPrivate
         KConfigGroup *mainConfigGroup();
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
+        void callLayoutApplet();
 
         Plasma::Applet::List applets;
         AbstractGroup *q;
@@ -39,6 +40,8 @@ class AbstractGroupPrivate
         unsigned int id;
         Plasma::FrameSvg *background;
         Plasma::ImmutabilityType immutability;
+        Plasma::Applet *currApplet;
+        QPointF currAppletPos;
 
     private:
         KConfigGroup *m_mainConfig;

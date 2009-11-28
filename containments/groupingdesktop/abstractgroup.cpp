@@ -33,6 +33,7 @@
 #include <Plasma/AbstractAnimation>
 
 #include "groupingcontainment.h"
+#include <QTimer>
 
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
@@ -94,6 +95,26 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
     }
 }
 
+void AbstractGroupPrivate::callLayoutApplet()
+{
+    if (!currApplet || currAppletPos.isNull()) {
+        return;
+    }
+
+    currApplet->setFlag(QGraphicsItem::ItemIsMovable, false);
+    currApplet->setPos(currAppletPos);
+    q->layoutApplet(currApplet, currAppletPos);
+
+    currApplet->installEventFilter(q);
+    q->connect(currApplet, SIGNAL(appletDestroyed(Plasma::Applet *)),
+            q, SLOT(appletDestroyed(Plasma::Applet *)));
+
+    emit q->appletAddedInGroup(currApplet, q);
+
+    currApplet = 0;
+    currAppletPos = QPointF();
+}
+
 AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
              : QGraphicsWidget(parent, wFlags),
                d(new AbstractGroupPrivate(this))
@@ -141,14 +162,17 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
 //     applet->setPos(newPos); 
 
     if (layoutApplets) {
-        layoutApplet(applet, newPos);
+        d->currApplet = applet;
+        d->currAppletPos = newPos;
+        //so i workarounded the above-mentioned problem with this QTimer::singleShot
+        QTimer::singleShot(0, this, SLOT(callLayoutApplet()));
+    } else {
+        applet->installEventFilter(this);
+        connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
+                this, SLOT(appletDestroyed(Plasma::Applet *)));
+
+        emit appletAddedInGroup(applet, this);
     }
-
-    applet->installEventFilter(this);
-    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
-            this, SLOT(appletDestroyed(Plasma::Applet *)));
-
-    emit appletAddedInGroup(applet, this);
 }
 
 Plasma::Applet::List AbstractGroup::applets() const
@@ -245,7 +269,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     if (applet && applets().contains(applet)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
-                 kDebug()<<"KJN";
+//                  kDebug()<<"KJN";
 //                 removeApplet(applet);
                 break;
 

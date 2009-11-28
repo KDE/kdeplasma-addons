@@ -108,7 +108,7 @@ void GridLayout::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group);
 
-    applet->setImmutability(Plasma::UserImmutable);
+//     applet->setImmutability(Plasma::UserImmutable);
 }
 
 void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
