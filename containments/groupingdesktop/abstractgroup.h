@@ -116,6 +116,14 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void save(KConfigGroup &group) const;
 
+        /**
+         * Shows a visual clue for drag and drop
+         * The default implementation does nothing,
+         * reimplement in groups that need it
+         *
+         * @param pos point where to show the drop target; if an invalid point is passed in
+         *        the drop zone should not be shown
+         */
         virtual void showDropZone(const QPointF &pos);
 
         /**
@@ -162,6 +170,9 @@ class AbstractGroup : public QGraphicsWidget
         void setImmutability(Plasma::ImmutabilityType immutability);
 
     protected:
+        /**
+         * Reimplemented from QGraphicsWidget
+         **/
         virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
 
         /**
@@ -174,6 +185,9 @@ class AbstractGroup : public QGraphicsWidget
          **/
         virtual void resizeEvent(QGraphicsSceneResizeEvent *event);
 
+        /**
+         * Reimplemented from QGraphicsWidget
+         **/
         virtual bool eventFilter(QObject *obj, QEvent *event);
 
         /**
@@ -184,7 +198,18 @@ class AbstractGroup : public QGraphicsWidget
          **/
         virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos) = 0;
 
+        /**
+         * Sets the type of this group
+         * @see groupType
+         * @see GroupType
+         */
         void setGroupType(GroupType type);
+
+        /**
+         * @return the type of this group
+         * @see setGroupType
+         * @see GroupType
+         */
         GroupType groupType() const;
 
     signals:
