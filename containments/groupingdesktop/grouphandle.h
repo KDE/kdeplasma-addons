@@ -53,7 +53,7 @@ class GroupHandle : public QGraphicsObject
             RotateButton,
             ConfigureButton,
             RemoveButton,
-            ResizeButton,
+            ResizeButton
         };
 
         GroupHandle(GroupingContainment *parent, AbstractGroup *group, const QPointF &hoverPos);

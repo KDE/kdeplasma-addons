@@ -30,7 +30,6 @@
 
 #include <kcolorscheme.h>
 #include <kglobalsettings.h>
-#include <kicon.h>
 #include <kiconloader.h>
 #include <kwindowsystem.h>
 

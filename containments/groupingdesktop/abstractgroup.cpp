@@ -110,9 +110,6 @@ void AbstractGroupPrivate::callLayoutApplet()
     q->connect(currApplet, SIGNAL(appletDestroyed(Plasma::Applet *)),
             q, SLOT(appletDestroyed(Plasma::Applet *)));
 
-    if (groupType == AbstractGroup::ConstrainedGroup) {
-            currApplet->setImmutability(Plasma::UserImmutable);
-    }
     emit q->appletAddedInGroup(currApplet, q);
 
     currApplet = 0;
@@ -190,10 +187,6 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
         connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
                 this, SLOT(appletDestroyed(Plasma::Applet *)));
 
-        if (groupType() == ConstrainedGroup) {
-            applet->setImmutability(Plasma::UserImmutable);
-        }
-
         emit appletAddedInGroup(applet, this);
     }
 }
@@ -209,9 +202,6 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
 
     d->applets.removeAll(applet);
     applet->removeEventFilter(this);
-    if (groupType() == ConstrainedGroup) {
-        applet->setImmutability(Plasma::Mutable);
-    }
     applet->setParentItem(containment());
     d->currApplet = applet;
     d->currAppletPos = mapToParent(applet->pos());
@@ -231,9 +221,6 @@ void AbstractGroup::destroy()
     d->destroying = true;
 
     foreach (Plasma::Applet *applet, applets()) {
-        if (groupType() == ConstrainedGroup) {
-            applet->setImmutability(Plasma::Mutable);
-        }
         applet->destroy();
     }
 }
@@ -314,8 +301,6 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
             case QEvent::GraphicsSceneMove:
                 if (!contentsRect().contains(applet->geometry())) {
                     removeApplet(applet);
-                } else {
-                    emit appletMovedInGroup(applet);
                 }
                 break;
 

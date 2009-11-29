@@ -233,8 +233,6 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
 
-        void appletMovedInGroup(Plasma::Applet *applet);
-
         /**
          * This signal is emitted when the group's geometry changes.
          **/

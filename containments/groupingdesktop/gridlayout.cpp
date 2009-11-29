@@ -19,11 +19,13 @@
 
 #include "gridlayout.h"
 
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsGridLayout>
 #include <QtGui/QGraphicsSceneDragDropEvent>
 #include <QPainter>
 
 #include <Plasma/Applet>
+#include <Plasma/IconWidget>
 #include <Plasma/PaintUtils>
 
 #include "groupingcontainment.h"
@@ -83,25 +85,41 @@ class Spacer : public QGraphicsWidget
 };
 
 GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
-          : AbstractGroup(parent, wFlags)
+          : AbstractGroup(parent, wFlags),
+            m_layout(new QGraphicsGridLayout(this)),
+            m_spacer(new Spacer(this)),
+            m_overlayLayout(new QGraphicsLinearLayout()),
+            m_overlayIcon(new Plasma::IconWidget(this))
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
-    m_layout = new QGraphicsGridLayout(this);
     setLayout(m_layout);
 
-    m_spacer = new Spacer(this);
     m_spacer->parent = this;
     m_spacer->hide();
 
+    m_overlayIcon->setIcon("transform-move");
+    m_overlayIcon->hide();
+    m_overlayLayout->addItem(m_overlayIcon);
+    m_overlayLayout->setAlignment(m_overlayIcon, Qt::AlignCenter);
+
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet *, AbstractGroup *)),
             this, SLOT(onAppletRemoved(Plasma::Applet *, AbstractGroup *)));
+    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
 GridLayout::~GridLayout()
 {
 
+}
+
+void GridLayout::onAppletAdded(Plasma::Applet* applet, AbstractGroup* group)
+{
+    Q_UNUSED(group)
+
+    applet->installSceneEventFilter(this);
 }
 
 void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
@@ -310,6 +328,37 @@ void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGr
     int column = group.readEntry("Column", -1);
 
     m_layout->addItem(applet, row, column);
+}
+
+bool GridLayout::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
+{
+    if (immutability() != Plasma::Mutable) {
+        return AbstractGroup::sceneEventFilter(watched, event);
+    }
+
+    Plasma::Applet *applet = qgraphicsitem_cast<Plasma::Applet *>(watched);
+
+    if (applet && applets().contains(applet)) {
+        switch (event->type()) {
+        case QEvent::GraphicsSceneHoverMove:
+        case QEvent::GraphicsSceneHoverEnter:
+            if (m_overlayLayout->parentLayoutItem() != applet) {
+                m_overlayIcon->show();
+                applet->setLayout(m_overlayLayout);
+            }
+            break;
+
+        case QEvent::GraphicsSceneHoverLeave:
+            m_overlayIcon->hide();
+            m_overlayLayout->setParentLayoutItem(0);
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    return AbstractGroup::sceneEventFilter(watched, event);
 }
 
 #include "gridlayout.moc"

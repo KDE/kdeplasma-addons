@@ -23,14 +23,16 @@
 #include "abstractgroup.h"
 
 class QGraphicsGridLayout;
-
-class Position;
-class Spacer;
+class QGraphicsLinearLayout;
 
 namespace Plasma
 {
     class Applet;
+    class IconWidget;
 }
+
+class Position;
+class Spacer;
 
 class GridLayout : public AbstractGroup
 {
@@ -45,9 +47,11 @@ class GridLayout : public AbstractGroup
         virtual void showDropZone(const QPointF &pos);
 
     protected:
+        bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
 
     private slots:
+        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
 
     private:
@@ -66,6 +70,9 @@ class GridLayout : public AbstractGroup
 
         QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;
+
+        QGraphicsLinearLayout *m_overlayLayout;
+        Plasma::IconWidget *m_overlayIcon;
 
         friend class Spacer;
 };
