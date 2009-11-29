@@ -37,7 +37,7 @@ public:
     void resize(QSize size);
 protected:
     void paintEvent ( QPaintEvent * event );
-    bool event(QEvent *event);
+    //bool event(QEvent *event);
 private:
     Plasma::FrameSvg* frame;
     QLabel* label;

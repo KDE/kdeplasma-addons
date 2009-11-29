@@ -44,7 +44,6 @@ public:
           */
 	void setLabel(int level);
 
-
 public Q_SLOTS:
         /*
           * called when button is pressed
@@ -54,9 +53,17 @@ public Q_SLOTS:
           * called when button is released
           */
 	virtual void sendKeycodeRelease();
+	/*
+	  * called when button is pressed
+	  */
+	virtual void pressed();
+	/*
+	  * called when button is pressed
+	  */
+	virtual void released();
 
 signals:
-	void keySend ( QString text, QSizeF size, QPointF pos );
+	void keyPressed ( QString text, QSizeF size, QPointF pos );
 };
 
 #endif /* ALPHANUMKEY_H_ */

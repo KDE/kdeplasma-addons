@@ -33,7 +33,6 @@
 #include "ArrowRightKey.h"
 #include <QPainter>
 #include <QGraphicsGridLayout>
-#include <QTimer>
 
 #include "Helpers.h"
 
@@ -88,8 +87,6 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     extendedKeys = false;
     basicKeys = false;
 
-    tooltipTimer = new QTimer(this);
-    connect(tooltipTimer, SIGNAL(timeout()), this, SLOT(clearTooltip()));
     tooltip = new Tooltip("");
 
     switcher = new Plasma::Label(this);
@@ -108,7 +105,6 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
 
 
 PlasmaboardWidget::~PlasmaboardWidget(){
-    delete tooltipTimer;
     delete switcher;
     delete tooltip;
 }
@@ -505,6 +501,8 @@ void PlasmaboardWidget::clear(){
 	funcKeys[SUPER_R_KEY]->toggleOff();
 	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
 	funcKeys[ALT_L_KEY]->toggleOff();
+
+	clearTooltip();
 }
 
 
@@ -514,7 +512,7 @@ void PlasmaboardWidget::setTooltip(QString text, QSizeF buttonSize, QPointF posi
     tooltip -> resize( (buttonSize * 2).toSize() );
     tooltip -> show();
 
-    tooltipTimer->start(300);
+    //tooltipTimer->start(300);
 }
 
 void PlasmaboardWidget::clearTooltip(){

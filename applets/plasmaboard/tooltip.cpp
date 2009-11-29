@@ -78,17 +78,17 @@ void Tooltip::paintEvent ( QPaintEvent * event ){
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);
     painter.setRenderHint(QPainter::Antialiasing);
-
+    //painter.setCompositionMode(QPainter::CompositionMode_Source);
+    painter.fillRect(rect(), Qt::transparent);
     frame->paintFrame(&painter, event->rect());
 }
 
-bool Tooltip::event(QEvent *event)
+/*bool Tooltip::paintEvent(QPaintEvent *event)
 {
     if (event->type() == QEvent::Paint) {
 	QPainter painter(this);
-	painter.setCompositionMode(QPainter::CompositionMode_Source);
-	painter.fillRect(rect(), Qt::transparent);
+
     }
 
     return QWidget::event(event);
-}
+}*/

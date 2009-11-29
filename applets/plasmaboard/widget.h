@@ -38,7 +38,6 @@
 class AlphaNumKey;
 class FuncKey;
 class QGraphicsGridLayout;
-class QTimer;
 
 
 class PlasmaboardWidget : public Plasma::Containment
@@ -93,14 +92,18 @@ class PlasmaboardWidget : public Plasma::Containment
           Sets tooltip to a new text
           */
 	void setTooltip(QString text, QSizeF buttonSize, QPointF position);
-        /*
-          * Removes tooltip
-          */
-	void clearTooltip();
+
 
 	void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
 	private:
+
+	 /*
+	  * Removes tooltip
+	  */
+	void clearTooltip();
+
+
 		Plasma::DataEngine* engine;
 
                 QList<AlphaNumKey*> alphaKeys; // normal keys labeled with symbols like a, b, c
@@ -113,7 +116,6 @@ class PlasmaboardWidget : public Plasma::Containment
                 bool extendedKeys; // are extended keys displayed
                 QGraphicsGridLayout *m_layout; // layout the keys are positioned in
 		//Plasma::ToolTipContent tooltip;
-                QTimer *tooltipTimer;
 
 		Tooltip* tooltip;
 
