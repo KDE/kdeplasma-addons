@@ -40,7 +40,10 @@
    <item row="5" column="2">
     <widget class="KLineEdit" name="passwordEdit">
      <property name="echoMode">
-      <enum>QLineEdit::Normal</enum>
+      <enum>QLineEdit::Password</enum>
+     </property>
+     <property name="passwordMode">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
