@@ -380,8 +380,11 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
     if (data["Condition Icon"].toString() == "N/A") {
         m_currentIcon->setIcon(KIcon("weather-not-available"));
         setPopupIcon("weather-not-available");
+    } else if (!isValidData(data["Condition Icon"]) || data["Condition Icon"].toString() == "N/U") {
+        m_currentIcon->hide();
     } else {
         m_currentIcon->setIcon(KIcon(data["Condition Icon"].toString()));
+        m_currentIcon->show();
         setPopupIcon(data["Condition Icon"].toString());
     }
 
