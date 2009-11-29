@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -48,7 +48,6 @@ class GridLayout : public AbstractGroup
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
 
     private slots:
-        void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
 
     private:

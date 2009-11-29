@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -16,7 +16,6 @@
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
 #include "groupingdesktop.h"
 
 K_EXPORT_PLASMA_APPLET(groupingdesktop, GroupingDesktop)

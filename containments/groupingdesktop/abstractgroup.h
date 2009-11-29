@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -39,6 +39,15 @@ class AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     public:
+        /**
+         * Defines if the applets inside the group can be freely transformed or not by the user
+         */
+        enum GroupType {
+            ConstrainedGroup = 0,   /**< The transformations of the applet are constrained by,
+                                         e.g. a layout */
+            FreeGroup = 1           /**< The applets can be freely transformed */
+        };
+
         /**
          * Constructor of the abstract class.
          **/
@@ -175,6 +184,9 @@ class AbstractGroup : public QGraphicsWidget
          **/
         virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos) = 0;
 
+        void setGroupType(GroupType type);
+        GroupType groupType() const;
+
     signals:
         /**
          * This signal is emitted when the group's destructor is called.
@@ -195,6 +207,8 @@ class AbstractGroup : public QGraphicsWidget
          * @param group a pointer to this group
          **/
         void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
+
+        void appletMovedInGroup(Plasma::Applet *applet);
 
         /**
          * This signal is emitted when the group's geometry changes.

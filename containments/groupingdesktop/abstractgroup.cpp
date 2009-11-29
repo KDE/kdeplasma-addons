@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -40,6 +40,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
         destroying(false),
         containment(0),
         immutability(Plasma::Mutable),
+        groupType(AbstractGroup::FreeGroup),
         m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -91,7 +92,7 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
             destroying = false;
         }
 
-//                 emit q->appletRemovedFromGroup(applet, q); //FIXME crash! ???
+        emit q->appletRemovedFromGroup(applet, q);
     }
 }
 
@@ -109,6 +110,9 @@ void AbstractGroupPrivate::callLayoutApplet()
     q->connect(currApplet, SIGNAL(appletDestroyed(Plasma::Applet *)),
             q, SLOT(appletDestroyed(Plasma::Applet *)));
 
+    if (groupType == AbstractGroup::ConstrainedGroup) {
+            currApplet->setImmutability(Plasma::UserImmutable);
+    }
     emit q->appletAddedInGroup(currApplet, q);
 
     currApplet = 0;
@@ -186,6 +190,10 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
         connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
                 this, SLOT(appletDestroyed(Plasma::Applet *)));
 
+        if (groupType() == ConstrainedGroup) {
+            applet->setImmutability(Plasma::UserImmutable);
+        }
+
         emit appletAddedInGroup(applet, this);
     }
 }
@@ -201,6 +209,9 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
 
     d->applets.removeAll(applet);
     applet->removeEventFilter(this);
+    if (groupType() == ConstrainedGroup) {
+        applet->setImmutability(Plasma::Mutable);
+    }
     applet->setParentItem(containment());
     d->currApplet = applet;
     d->currAppletPos = mapToParent(applet->pos());
@@ -210,6 +221,8 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
 
 void AbstractGroup::destroy()
 {
+    kDebug()<<"destroying group"<<id()<<"of type"<<pluginName();
+
     if (applets().count() == 0) {
         d->destroyGroup();
         return;
@@ -218,6 +231,9 @@ void AbstractGroup::destroy()
     d->destroying = true;
 
     foreach (Plasma::Applet *applet, applets()) {
+        if (groupType() == ConstrainedGroup) {
+            applet->setImmutability(Plasma::Mutable);
+        }
         applet->destroy();
     }
 }
@@ -280,6 +296,16 @@ void AbstractGroup::showDropZone(const QPointF& pos)
     //base implementation does nothing
 }
 
+void AbstractGroup::setGroupType(AbstractGroup::GroupType type)
+{
+    d->groupType = type;
+}
+
+AbstractGroup::GroupType AbstractGroup::groupType() const
+{
+    return d->groupType;
+}
+
 bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 {
     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
@@ -288,6 +314,8 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
             case QEvent::GraphicsSceneMove:
                 if (!contentsRect().contains(applet->geometry())) {
                     removeApplet(applet);
+                } else {
+                    emit appletMovedInGroup(applet);
                 }
                 break;
 

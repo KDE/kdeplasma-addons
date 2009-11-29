@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -43,6 +43,7 @@ class AbstractGroupPrivate
         Plasma::ImmutabilityType immutability;
         Plasma::Applet *currApplet;
         QPointF currAppletPos;
+        AbstractGroup::GroupType groupType;
 
     private:
         KConfigGroup *m_mainConfig;

@@ -1,5 +1,5 @@
 /*
- *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@kde.org>
+ *   Copyright 2009 by Giulio Camuffo <giuliocamuffo@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -86,6 +86,8 @@ GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags)
 {
     resize(200,200);
+    setGroupType(AbstractGroup::ConstrainedGroup);
+
     m_layout = new QGraphicsGridLayout(this);
     setLayout(m_layout);
 
@@ -95,20 +97,11 @@ GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet *, AbstractGroup *)),
             this, SLOT(onAppletRemoved(Plasma::Applet *, AbstractGroup *)));
-    connect(this, SIGNAL(appletAddedInGroup(Plasma::Applet *, AbstractGroup *)),
-            this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
 GridLayout::~GridLayout()
 {
 
-}
-
-void GridLayout::onAppletAdded(Plasma::Applet *applet, AbstractGroup *group)
-{
-    Q_UNUSED(group);
-
-//     applet->setImmutability(Plasma::UserImmutable);
 }
 
 void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
@@ -132,6 +125,12 @@ void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
 {
     const qreal x = pos.x();
     const qreal y = pos.y();
+// kDebug()<<movingWidget->geometry()<<pos;
+
+    if (!contentsRect().contains(pos)) {
+        movingWidget->hide();
+        removeItem(movingWidget);
+    }
 
     if (movingWidget->geometry().contains(pos)) {
         return;
@@ -242,6 +241,7 @@ void GridLayout::insertItemAt(QGraphicsWidget *item, int row, int column, Orient
     }
 
     m_layout->addItem(item, row, column);
+    m_layout->activate();
 }
 
 Position GridLayout::itemPosition(QGraphicsItem *item) const
