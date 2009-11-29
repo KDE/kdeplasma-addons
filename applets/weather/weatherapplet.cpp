@@ -314,11 +314,11 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         // fiveDayTokens[4] = Low Temperature
         if (fiveDayTokens[4] != "N/A" && fiveDayTokens[3] == "N/A") {  // Low temperature
             m_tempLabel->setText(convertTemperature(temperatureUnit(), data["Temperature"].toString(), data["Temperature Unit"].toInt(), false));
-            m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("Low temperature", "Low: %1", convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
         } else if (fiveDayTokens[3] != "N/A" && fiveDayTokens[4] == "N/A") { // High temperature
-            m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("High temperature", "High: %1", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true)));
         } else { // Both high and low
-            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt()), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt())));
+            m_forecastTemps->setText(i18nc("High & Low temperature", "H: %1 L: %2", convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true), convertTemperature(temperatureUnit(),  fiveDayTokens[4], data["Temperature Unit"].toInt(), true)));
         }
     }
     else {
@@ -470,7 +470,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     highItem->setText(i18nc("Short for no data available","-"));
                     hiItems.append(highItem);
                 } else {
-                    highItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt()));
+                    highItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[3], data["Temperature Unit"].toInt(), true));
                     hiItems.append(highItem);
                 }
             }
@@ -483,7 +483,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
                     lowItem->setText(i18nc("Short for no data available","-"));
                     lowItems.append(lowItem);
                 } else {
-                    lowItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt()));
+                    lowItem->setText(convertTemperature(temperatureUnit(), fiveDayTokens[4], data["Temperature Unit"].toInt(), true));
                     lowItems.append(lowItem);
                 }
             }
