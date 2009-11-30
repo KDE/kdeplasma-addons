@@ -8,7 +8,7 @@ Icon=
 
 Name=Flickr Picture of the Day
 Name[cs]=Obrázek dne z Flickru
-Name[de]=Flickr Bild des Tages
+Name[de]=Bild des Tages von Flickr
 Name[en_GB]=Flickr Picture of the Day
 Name[es]=Imagen de Flickr del día
 Name[et]=Flickri päevapilt
@@ -32,7 +32,7 @@ Comment[de]=Flickr-Anbieter
 Comment[en_GB]=Flickr Provider
 Comment[es]=Proveedor de Flickr
 Comment[et]=Flickri pakkuja
-Comment[fr]=Fournisseur flickr
+Comment[fr]=Fournisseur Flickr
 Comment[gl]=Fornecedor de Flickr
 Comment[hu]=Flickr-csatoló
 Comment[is]=Flickr þjónusta

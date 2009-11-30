@@ -7,7 +7,9 @@ X-KDE-ParentComponents=audioplayercontrol
 X-KDE-PluginKeyword=kcm_krunner_audioplayercontrol
 
 Name=Control audio player
+Name[de]=Medienwiedergabe steuern
 Name[en_GB]=Control audio player
+Name[fr]=Contrôle du lecteur audio
 Name[pt]=Controlar o leitor de áudio
 Name[sv]=Styr ljudspelare
 Name[uk]=Керування аудіопрогравачем

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Control Audio Player
+Name[de]=Medienwiedergabe steuern
 Name[en_GB]=Control Audio Player
+Name[fr]=Contrôle du lecteur audio
 Name[nb]=Portabel mediaspiller
 Name[pt]=Controlar o Leitor de Áudio
 Name[sv]=Styr ljudspelare
@@ -8,7 +10,9 @@ Name[uk]=Керування аудіопрогравачем
 Name[x-test]=xxControl Audio Playerxx
 Name[zh_TW]=控制音效播放器
 Comment=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
+Comment[de]=Ermöglicht die Steuerung von MPRIS-Medienspielern (und kann zudem die Sammlung von Amarok durchsuchen)
 Comment[en_GB]=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
+Comment[fr]=Permet de contrôler les lecteurs audio MPRIS (également capable de chercher dans les collections d'AmaroK)
 Comment[pt]=Permite controlar os leitores de áudio MPRIS (também é capaz de percorrer a colecção do Amarok)
 Comment[sv]=Gör det möjligt att styra MPRIS-ljudspelare (kan också söka igenom Amaroks samling)
 Comment[uk]=Надає змогу керувати аудіопрогравачами стандарту MPRIS (крім того, може здійснювати пошук у збірці Amarok)
