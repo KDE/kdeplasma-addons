@@ -11,9 +11,9 @@ install(TARGETS krunner_mediawiki DESTINATION ${PLUGIN_INSTALL_DIR} )
 install(FILES
         plasma-runner-wikipedia.desktop
         plasma-runner-wikitravel.desktop
-        plasma-runner-userbase.desktop
+        plasma-runner-techbase.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 # doesn't seem to work, maybe XML API is disabled
-#install(FILES userbaserunner.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+#install(FILES plasma-runner-userbase.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
