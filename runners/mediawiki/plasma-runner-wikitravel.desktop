@@ -1,13 +1,21 @@
 [Desktop Entry]
 Name=Wikitravel
+Name[de]=Wikitravel
 Name[en_GB]=Wikitravel
+Name[et]=Wikitravel
+Name[fr]=Wikitravel
+Name[nb]=Wikitravel
 Name[pt]=Wikitravel
 Name[sv]=Wikitravel
 Name[uk]=Wikitravel
 Name[x-test]=xxWikitravelxx
 Name[zh_TW]=Wikitravel
 Comment=Search on Wikitravel
+Comment[de]=Auf Wikitravel suchen
 Comment[en_GB]=Search on Wikitravel
+Comment[et]=Otsing Wikitravelis
+Comment[fr]=Chercher dans Wikitravel
+Comment[nb]=Søk på Wikitravel
 Comment[pt]=Procurar no Wikitravel
 Comment[sv]=Sök på Wikitravel
 Comment[uk]=Пошук у Wikitravel

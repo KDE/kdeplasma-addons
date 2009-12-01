@@ -1,13 +1,21 @@
 [Desktop Entry]
 Name=KDE Documentation
+Name[de]=KDE-Dokumentation
 Name[en_GB]=KDE Documentation
+Name[et]=KDE dokumentatsioon
+Name[fr]=Documentation de KDE
+Name[nb]=KDE-dokumentasjon
 Name[pt]=Documentação do KDE
 Name[sv]=KDE-dokumentation
 Name[uk]=Документація KDE
 Name[x-test]=xxKDE Documentationxx
 Name[zh_TW]=KDE 文件
 Comment=Search on KDE's Userbase
+Comment[de]=Auf KDE-UserBase suchen
 Comment[en_GB]=Search on KDE's Userbase
+Comment[et]=Otsing KDE Userbase'is
+Comment[fr]=Chercher dans le site User-Base de KDE
+Comment[nb]=Søk på KDEs Userbase
 Comment[pt]=Procurar na Base de Utilizadores do KDE
 Comment[sv]=Sök på KDE:s Userbase
 Comment[uk]=Пошук у Userbase KDE

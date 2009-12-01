@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Wikipedia
+Name[de]=Wikipedia
 Name[en_GB]=Wikipedia
+Name[et]=Wikipedia
+Name[fr]=Wikipédia
 Name[nb]=Wikipedia
 Name[nn]=Wikipedia
 Name[pt]=Wikipédia
@@ -9,7 +12,11 @@ Name[uk]=Вікіпедія
 Name[x-test]=xxWikipediaxx
 Name[zh_TW]=維基百科
 Comment=Search on Wikipedia
+Comment[de]=Auf Wikipedia suchen
 Comment[en_GB]=Search on Wikipedia
+Comment[et]=Otsing Wikipedias
+Comment[fr]=Chercher dans Wikipédia
+Comment[nb]=Søk på Wikipedia
 Comment[pt]=Procurar na Wikipédia
 Comment[sv]=Sök på Wikipedia
 Comment[uk]=Пошук у Вікіпедії
