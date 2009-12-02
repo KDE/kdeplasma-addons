@@ -251,7 +251,7 @@ void LeaveNote::createNote(const QString& title, const QString& msg)
     kDebug();
     if (mUseKNotes) {
         QDBusInterface knotesDBus("org.kde.knotes", "/KNotes", "org.kde.KNotes");
-        knotesDBus.call("newNote", title, msg);
+        knotesDBus.asyncCall("newNote", title, msg);
     } else {
         QWidget* widget = new QWidget(0);
         widget->setWindowTitle(title);
