@@ -1,5 +1,5 @@
 /*
- *   Copyright 2008 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2008 Sebastian K?gler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -89,7 +89,10 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
             match.setIcon(m_icon);
             match.setData(historyitem);
             QString text = historyitem;
-            match.setText(text.replace("http://", ""));
+            text.replace("http://", "");
+            match.setSubtext(text);
+            text.replace(QRegExp("/.*"), "");
+            match.setText(text);
             context.addMatch(term, match);
         }
     }
