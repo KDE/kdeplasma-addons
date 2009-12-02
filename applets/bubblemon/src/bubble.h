@@ -29,6 +29,7 @@ class QTimeLine;
 class QGraphicsSceneResizeEvent;
 class QTimer;
 class QStandardItemModel;
+class QPropertyAnimation;
 
 namespace Plasma {
     class Svg;
@@ -36,6 +37,7 @@ namespace Plasma {
 
 class Bubble : public Plasma::Applet {
     Q_OBJECT
+    Q_PROPERTY(qreal labelTransparency READ labelTransparency WRITE setLabelTransparency);
     
     public:
         Bubble(QObject *parent, const QVariantList &args);
@@ -44,6 +46,8 @@ class Bubble : public Plasma::Applet {
         void init();
         void createConfigurationInterface(KConfigDialog *parent);
         QString icon() const;
+        void setLabelTransparency(qreal);
+        qreal labelTransparency() const;
 
     public slots:
         void dataUpdated(QString name, Plasma::DataEngine::Data data);
@@ -61,7 +65,6 @@ class Bubble : public Plasma::Applet {
         void configAccepted();
         void moveBubbles();
         void showLabel(bool);
-        void updateLabelAnimation(qreal trans);
         void interpolateValue();
         void connectSensor();
         void reconnectSensor();
@@ -74,12 +77,10 @@ class Bubble : public Plasma::Applet {
         
         Ui::Settings ui;
         bool m_showText;
-        bool m_showingText;
         bool m_animated;
         int m_val;
         int m_max;
         int m_speed;
-        int m_animID;
         QVector<QPoint> m_bubbles;
         int m_bubbleCount;
         qreal m_labelTransparency;
@@ -92,6 +93,7 @@ class Bubble : public Plasma::Applet {
         QTimeLine *m_interpolator;
         Plasma::DataEngine *m_engine;
         QStandardItemModel *m_sensorModel;
+        QPropertyAnimation *m_animation;
 };
 
 #endif

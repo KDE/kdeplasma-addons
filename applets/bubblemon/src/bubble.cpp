@@ -20,6 +20,7 @@
 
 #include <QtCore/QTimeLine>
 #include <QtCore/QTimer>
+#include <QtCore/QPropertyAnimation>
 #include <QtGui/QPainter>
 #include <QtGui/QStyleOptionGraphicsItem>
 #include <QtGui/QGraphicsSceneResizeEvent>
@@ -42,12 +43,10 @@ K_EXPORT_PLASMA_APPLET(bubblemon, Bubble)
 Bubble::Bubble(QObject *parent, const QVariantList &args)
     :  Plasma::Applet(parent, args),
        m_showText(false),
-       m_showingText(false),
        m_animated(true),
        m_val(0),
        m_max(0),
        m_speed(1000),
-       m_animID(-1),
        m_bubbles(20),
        m_labelTransparency(0)
 {
@@ -60,6 +59,11 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
     setAspectRatioMode(Plasma::Square);
     setBackgroundHints(NoBackground);
+    
+    m_animation = new QPropertyAnimation(this, "labelTransparency");
+    m_animation->setDuration(200);
+    m_animation->setStartValue(0.0);
+    m_animation->setEndValue(1.0);
 }
 
 Bubble::~Bubble()
@@ -178,43 +182,39 @@ void
 Bubble::hoverEnterEvent(QGraphicsSceneHoverEvent *evt)
 {
     Q_UNUSED(evt)
-    showLabel(true);
+    if (m_showText)
+        showLabel(true);
 }
 
 void
 Bubble::hoverLeaveEvent(QGraphicsSceneHoverEvent *evt)
 {
     Q_UNUSED(evt)
-    if (!m_showText)
+    if (m_showText)
         showLabel(false);
 }
 
-void
-Bubble::updateLabelAnimation(qreal trans)
+qreal
+Bubble::labelTransparency() const
 {
-    if (trans == 1)
-        m_animID = -1;
-    if (!m_showingText) {
-        m_labelTransparency = qMin(1 - trans, m_labelTransparency);
-    } else {
-        m_labelTransparency = trans;
-    }
-    m_labelTransparency = qMax(qreal(0.0), m_labelTransparency);
+    return m_labelTransparency;
+}
+
+void
+Bubble::setLabelTransparency(qreal trans)
+{
+    m_labelTransparency = trans;
     update();
 }
 
 void
 Bubble::showLabel(bool show)
 {
-    if (m_showingText == show)
-        return;
-    m_showingText = show;
-    const int FadeInDuration = 150;
-    if (m_animID != -1)
-        Plasma::Animator::self()->stopCustomAnimation(m_animID);
-    m_animID = Plasma::Animator::self()->customAnimation(40 / (1000 / FadeInDuration), FadeInDuration,
-                                                          Plasma::Animator::EaseOutCurve, this,
-                                                          "updateLabelAnimation");
+    if (!show)
+        m_animation->setDirection(QAbstractAnimation::Backward);
+    else
+        m_animation->setDirection(QAbstractAnimation::Forward);
+    m_animation->start();
 }
 
 void
@@ -464,7 +464,8 @@ Bubble::configAccepted()
 
     if (m_showText != ui.showText->isChecked()) {
         m_showText = ui.showText->isChecked();
-        showLabel(m_showText);
+        if (!m_showText)
+            showLabel(m_showText);
         cg.writeEntry("showText", m_showText);
     }
     
