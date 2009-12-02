@@ -543,7 +543,7 @@ void ComicApplet::loadConfig()
     mMiddleClick = cg.readEntry( "middleClick", true );
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
-    mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, "" );
+    mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, QString() );
     mMaxSize = cg.readEntry( "maxSize", mMainWidget->geometry().size() );
     mLastSize = mMaxSize;
     mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
@@ -552,6 +552,7 @@ void ComicApplet::loadConfig()
     mComicTitle = mTabText.count() ? mTabText.at( 0 ) : QString();
     mUseTabs = cg.readEntry( "useTabs", false );
     mSwitchTabs = cg.readEntry( "switchTabs", false );
+    mSavingDir = cg.readEntry( "savingDir", QString() );
 
     buttonBar();
 }
@@ -572,6 +573,7 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "tabText", mTabText );
     cg.writeEntry( "useTabs", mUseTabs );
     cg.writeEntry( "switchTabs", mSwitchTabs );
+    cg.writeEntry( "savingDir", mSavingDir );
 }
 
 void ComicApplet::slotChosenDay( const QDate &date )
@@ -808,11 +810,30 @@ void ComicApplet::slotSaveComicAs()
 
     KUrl srcUrl( tempFile.fileName() );
 
-    KUrl destUrl = KFileDialog::getSaveUrl( KUrl(), "*.png" );
+    QString dir = mSavingDir;
+    if ( dir.isEmpty() ) {
+        dir = KGlobalSettings::picturesPath();
+    }
+    if ( dir.isEmpty() ) {
+        dir = KGlobalSettings::downloadPath();
+    }
+    if ( dir.isEmpty() ) {
+        dir = QDir::homePath();
+    }
+
+    QString name = mComicTitle + " - " + mCurrentIdentifierSuffix + ".png";
+
+    KUrl destUrl = KUrl(dir);
+    destUrl.addPath( name );
+
+    destUrl = KFileDialog::getSaveUrl( destUrl, "*.png" );
     if ( !destUrl.isValid() ) {
         slotStartTimer();
         return;
     }
+
+    mSavingDir = destUrl.directory();
+    saveConfig();
 
 #ifdef HAVE_NEPOMUK
     bool worked = KIO::NetAccess::file_copy( srcUrl, destUrl );
