@@ -77,7 +77,7 @@ Icon=utilities-system-monitor
 
 X-KDE-Library=plasma_applet_bubblemon
 X-KDE-PluginInfo-Author=Trever Fischer
-X-KDE-PluginInfo-Email=wm161@wm161.net
+X-KDE-PluginInfo-Email=tdfischer@fedoraproject.org
 X-KDE-PluginInfo-Name=bubblemon
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
