@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef _BLACKBOARD_H_
-#define _BLACKBOARD_H_
+#ifndef BLACKBOARD_H
+#define BLACKBOARD_H
 
 #include <Plasma/Containment>
 

@@ -16,8 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#ifndef MIX_HEADER
+#define MIX_HEADER
+
 #include "mandelbrot.h"
 #include <Eigen/Core>
 
 typedef Eigen::Matrix<qreal,3,1> Color3;
 Color3 mix(const Color3& a_rgb, const Color3& a_hsv, const Color3& b_rgb, const Color3& b_hsv, qreal s);
+
+#endif // MIX_HEADER

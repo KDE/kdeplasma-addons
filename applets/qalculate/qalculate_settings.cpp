@@ -16,6 +16,10 @@
 *   Free Software Foundation, Inc.,
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
+#include "qalculate_settings.h"
+#include "qalculate_applet.h"
+
 #include <KConfigGroup>
 #include <KConfigDialog>
 
@@ -25,9 +29,6 @@
 
 #include <KComboBox>
 #include <QSpinBox>
-
-#include "qalculate_settings.h"
-#include "qalculate_applet.h"
 
 QalculateSettings::QalculateSettings(QalculateApplet* applet): QObject(0), m_applet(applet)
 {

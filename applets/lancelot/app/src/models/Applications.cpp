@@ -60,7 +60,7 @@ void Applications::load()
     if (!root || !root->isValid())
         return;
 
-    if (m_title == QString() || m_icon.isNull()) {
+    if (m_title.isEmpty() || m_icon.isNull()) {
         m_title = root->caption();
         m_icon = KIcon(root->icon());
     }

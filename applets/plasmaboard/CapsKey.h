@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef CAPSKEY_H_
-#define CAPSKEY_H_
+#ifndef CAPSKEY_H
+#define CAPSKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* CAPSKEY_H_ */
+#endif /* CAPSKEY_H */

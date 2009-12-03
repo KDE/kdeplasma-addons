@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef PANELICON_H_
-#define PANELICON_H_
+#ifndef PANELICON_H
+#define PANELICON_H
 
 #include "plasma/popupapplet.h"
 #include "widget.h"
@@ -68,6 +68,6 @@ private:
 
 };
 
-#endif /* PANELICON_H_ */
+#endif /* PANELICON_H */
 
 

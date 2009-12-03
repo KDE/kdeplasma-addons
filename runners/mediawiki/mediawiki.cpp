@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "mediawiki.h"
+
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
@@ -28,8 +30,6 @@
 #include <KIO/AccessManager>
 
 #include <Plasma/RunnerContext>
-
-#include "mediawiki.h"
 
 enum State {
     StateApiChanged,

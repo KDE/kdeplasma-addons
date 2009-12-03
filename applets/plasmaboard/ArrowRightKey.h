@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef ARROWRIGHTKEY_H_
-#define ARROWRIGHTKEY_H_
+#ifndef ARROWRIGHTKEY_H
+#define ARROWRIGHTKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* ARROWLEFTKEY_H_ */
+#endif /* ARROWRIGHTKEY_H */

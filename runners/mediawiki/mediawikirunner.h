@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WIKIPEDIARUNNER_H
-#define WIKIPEDIARUNNER_H
+#ifndef MEDIAWIKIRUNNER_H
+#define MEDIAWIKIRUNNER_H
 
 #include <plasma/abstractrunner.h>
 

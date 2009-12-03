@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef FUNCKEY_H_
-#define FUNCKEY_H_
+#ifndef FUNCKEY_H
+#define FUNCKEY_H
 
 #include "BoardKey.h"
 
@@ -53,4 +53,4 @@ protected:
 	void paintArrow(QPainter *painter);
 };
 
-#endif /* FUNCKEY_H_ */
+#endif /* FUNCKEY_H */

@@ -35,7 +35,6 @@
 #include <QClipboard>
 #include <QTimer>
 #include <QPen>
-#include <QtNetwork>
 
 class QSignalMapper;
 class KAction;

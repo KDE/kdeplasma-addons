@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <QAction>
 #include "PanelIcon.h"
-#include <plasma/theme.h>
+#include <QAction>
 #include <KIcon>
+#include <plasma/theme.h>
 #include <Plasma/ToolTipManager>
 #include <Plasma/ToolTipContent>
 

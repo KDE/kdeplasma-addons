@@ -17,11 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-//Qt
-#include <QGraphicsSceneMouseEvent>
-
 // own
 #include "kbitemtitle.h"
+
+//Qt
+#include <QGraphicsSceneMouseEvent>
 
 using namespace Plasma;
 

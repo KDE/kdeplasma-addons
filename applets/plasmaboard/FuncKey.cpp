@@ -18,10 +18,9 @@
  ***************************************************************************/
 
 
-//#include "FuncKey.h"
+#include "FuncKey.h"
 
 #include <kpushbutton.h>
-#include "FuncKey.h"
 #include <QPainter>
 #include <plasma/theme.h>
 #include "Helpers.h"

@@ -17,6 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+// own
+#include "kbitemwidget.h"
+#include "kbitemtitle.h"
+
 //Qt
 #include <QGraphicsLinearLayout>
 #include <QGraphicsGridLayout>
@@ -36,10 +40,6 @@
 #include <Plasma/Frame>
 #include <Plasma/TextBrowser>
 #include <Plasma/ScrollWidget>
-
-// own
-#include "kbitemwidget.h"
-#include "kbitemtitle.h"
 
 using namespace Plasma;
 

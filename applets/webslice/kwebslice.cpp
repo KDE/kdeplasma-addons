@@ -18,10 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qdebug.h>
-
 #include "kwebslice.h"
 #include "kgraphicswebslice.h"
+
+#include <qdebug.h>
 
 struct KWebSlicePrivate
 {

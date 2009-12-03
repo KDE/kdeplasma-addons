@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "Global.h"
 #include "NodeLayout.h"
+#include "Global.h"
 
 #include <QMap>
 #include <QPair>

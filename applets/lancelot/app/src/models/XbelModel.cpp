@@ -112,7 +112,7 @@ void XbelModel::readBookmark()
             bookmarkItem.title = m_xmlReader.readElementText();
         } else if (m_xmlReader.name() == "icon") {
             QString icon = m_xmlReader.attributes().value("name").toString();
-            if (icon != QString()) {
+            if (!icon.isEmpty()) {
                 bookmarkItem.icon = KIcon(icon);
             }
         } else if (m_xmlReader.name() == "IsHidden") {

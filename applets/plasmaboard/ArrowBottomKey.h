@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef ARROWBOTTOMKEY_H_
-#define ARROWBOTTOMKEY_H_
+#ifndef ARROWBOTTOMKEY_H
+#define ARROWBOTTOMKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* ARROWBOTTOMKEY_H_ */
+#endif /* ARROWBOTTOMKEY_H */

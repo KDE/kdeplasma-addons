@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef BACKSPACEKEY_H_
-#define BACKSPACEKEY_H_
+#ifndef BACKSPACEKEY_H
+#define BACKSPACEKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* BACKSPACEKEY_H_ */
+#endif /* BACKSPACEKEY_H */

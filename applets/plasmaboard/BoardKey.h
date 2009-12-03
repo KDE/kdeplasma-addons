@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef KEY_H_
-#define KEY_H_
+#ifndef BOARDKEY_H
+#define BOARDKEY_H
 
 #include <widget.h>
 #include <plasma/widgets/pushbutton.h>
@@ -55,4 +55,4 @@ protected:
 
 };
 
-#endif /* KEY_H_ */
+#endif /* BOARDKEY_H */

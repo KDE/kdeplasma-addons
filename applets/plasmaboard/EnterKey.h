@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef ENTERKEY_H_
-#define ENTERKEY_H_
+#ifndef ENTERKEY_H
+#define ENTERKEY_H
 
 #include "FuncKey.h"
 
@@ -30,4 +30,4 @@ public:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* ENTERKEY_H_ */
+#endif /* ENTERKEY_H */

@@ -44,7 +44,6 @@ enum ActivationMethod {
 
 #define MAX_WIDGET_SIZE QSizeF(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX)
 
-#include <limits>
 #define QREAL_INFINITY std::numeric_limits<qreal>::infinity()
 
 #define L_WIDGET

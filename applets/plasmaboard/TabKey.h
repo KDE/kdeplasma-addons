@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef TABKEY_H_
-#define TABKEY_H_
+#ifndef TABKEY_H
+#define TABKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* BACKSPACEKEY_H_ */
+#endif /* TABKEY_H */

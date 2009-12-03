@@ -18,9 +18,9 @@
  ***************************************************************************/
 
 
+#include "AlphaNumKey.h"
 
 #include <kpushbutton.h>
-#include "AlphaNumKey.h"
 #include "Helpers.h"
 
 AlphaNumKey::AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym):

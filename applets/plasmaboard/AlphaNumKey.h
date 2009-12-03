@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef ALPHANUMKEY_H_
-#define ALPHANUMKEY_H_
+#ifndef ALPHANUMKEY_H
+#define ALPHANUMKEY_H
 
 #include "BoardKey.h"
 
@@ -66,4 +66,4 @@ signals:
 	void keyPressed ( QString text, QSizeF size, QPointF pos );
 };
 
-#endif /* ALPHANUMKEY_H_ */
+#endif /* ALPHANUMKEY_H */

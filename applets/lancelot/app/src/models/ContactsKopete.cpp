@@ -168,7 +168,7 @@ void ContactsKopete::updateContactData(const QString & contact)
     }
 
     QString avatarPath = contactProperties.value().value("picture").toString();
-    avatarPath = QUrl(avatarPath).toLocalFile();
+    avatarPath = KUrl(avatarPath).toLocalFile();
 
     QString status = contactProperties.value().value("status_message").toString();
     if (status.isEmpty()) {

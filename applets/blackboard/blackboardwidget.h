@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef _BLACKBOARDWIDGET_H
-#define _BLACKBOARDWIDGET_H
+#ifndef BLACKBOARDWIDGET_H
+#define BLACKBOARDWIDGET_H
 
 #include <QGraphicsWidget>
 #include <QPainter>

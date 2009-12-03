@@ -17,6 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "mediawikirunner.h"
+#include "mediawiki.h"
 
 #include <QMutex>
 #include <QtCore/QEventLoop>
@@ -27,10 +29,6 @@
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
 #include <KToolInvocation>
-
-#include "mediawikirunner.h"
-#include "mediawiki.h"
-
 
 MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)

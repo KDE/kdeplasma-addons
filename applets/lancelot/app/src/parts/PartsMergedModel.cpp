@@ -18,7 +18,6 @@
  */
 
 #include "PartsMergedModel.h"
-#include "../Serializator.h"
 #include <QFile>
 #include <QTextStream>
 #include <KIcon>
@@ -264,7 +263,7 @@ bool PartsMergedModel::load(const QString & input)
                         model = Models::FavoriteApplications::self());
             } else if (modelID == "SystemActions") {
                 // We don't want to delete this one (singleton)
-                if (modelExtraData == QString()) {
+                if (modelExtraData.isEmpty()) {
                     addModel(modelID, QIcon(), i18n("System"),
                             model = Models::SystemActions::self());
                 } else {

@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <QPainter>
 #include "BoardKey.h"
+#include <QPainter>
 #include <plasma/theme.h>
 
 BoardKey::BoardKey(PlasmaboardWidget *parent):

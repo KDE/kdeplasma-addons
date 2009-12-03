@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "kgraphicswebslice.h"
+
 #include <qdebug.h>
 #include <QGraphicsSceneResizeEvent>
 #include <qlabel.h>
@@ -26,8 +28,6 @@
 #include <qwebpage.h>
 #include <qwebframe.h>
 #include <qboxlayout.h>
-
-#include "kgraphicswebslice.h"
 
 struct KGraphicsWebSlicePrivate
 {

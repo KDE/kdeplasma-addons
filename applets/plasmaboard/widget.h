@@ -19,8 +19,8 @@
 
 
 
-#ifndef WIDGET_H_
-#define WIDGET_H_
+#ifndef WIDGET_H
+#define WIDGET_H
 
 #include "tooltip.h"
 
@@ -129,4 +129,4 @@ class PlasmaboardWidget : public Plasma::Containment
 };
 
 
-#endif /* WIDGET_H_ */
+#endif /* WIDGET_H */

@@ -17,14 +17,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#ifndef HELPERS_H
+#define HELPERS_H
+
 #include <QChar>
 #include <qx11info_x11.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
-
-
-#ifndef KEYMAP_H_
-#define KEYMAP_H_
 
 class Helpers {
 public:
@@ -1704,4 +1703,4 @@ public:
 };
 
 
-#endif /* KEYMAP_H_ */
+#endif /* HELPERS_H */

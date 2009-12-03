@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef ARROWTOPKEY_H_
-#define ARROWTOPKEY_H_
+#ifndef ARROWTOPKEY_H
+#define ARROWTOPKEY_H
 
 #include "FuncKey.h"
 
@@ -31,4 +31,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* CAPSKEY_H_ */
+#endif /* ARROWTOPKEY_H */

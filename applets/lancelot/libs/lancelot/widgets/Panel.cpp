@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "BasicWidget.h"
 #include "Panel.h"
+#include "BasicWidget.h"
 
 #include <plasma/framesvg.h>
 

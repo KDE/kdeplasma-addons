@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef SHIFTKEY_H_
-#define SHIFTKEY_H_
+#ifndef SHIFTKEY_H
+#define SHIFTKEY_H
 
 #include "FuncKey.h"
 
@@ -32,4 +32,4 @@ protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
-#endif /* BACKSPACEKEY_H_ */
+#endif /* SHIFTKEY_H */

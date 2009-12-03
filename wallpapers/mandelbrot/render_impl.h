@@ -16,8 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#ifndef RENDER_IMPL
+#define RENDER_IMPL
+
 template<typename Real> void mandelbrot_render_tile(
   Mandelbrot *mandelbrot,
   int interleaving_number,
   QImage *image
 );
+
+#endif // RENDER_IMPL

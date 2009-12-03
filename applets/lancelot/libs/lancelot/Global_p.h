@@ -17,6 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#ifndef GLOBAL_P_H
+#define GLOBAL_P_H
+
 #include "Global.h"
 
 #include <QSet>
@@ -80,3 +83,4 @@ public Q_SLOTS:
 
 } // namespace Lancelot
 
+#endif /* GLOBAL_P_H */
