@@ -44,7 +44,7 @@ namespace Plasma
 {
     class TextEdit;
     class AnimationGroup;
-    class AbstractAnimation;
+    class Animation;
 }
 
 /**
@@ -178,9 +178,9 @@ class Notes : public Plasma::Applet
         Plasma::ToolButton *m_buttonStrikeThrough;
         Plasma::ToolButton *m_buttonCenter;
         Plasma::ToolButton *m_buttonFill;
-        
+
         Plasma::AnimationGroup *m_buttonAnimGroup;
-        Plasma::AbstractAnimation *m_buttonAnim[6];
+        Plasma::Animation *m_buttonAnim[6];
 };
 
 K_EXPORT_PLASMA_APPLET(notes, Notes)

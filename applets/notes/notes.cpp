@@ -41,7 +41,7 @@
 #include <KAction>
 
 #include <Plasma/Animator>
-#include <plasma/abstractanimation.h>
+#include <plasma/animation.h>
 #include <plasma/animationgroup.h>
 #include <Plasma/PushButton>
 #include <Plasma/Theme>
@@ -359,7 +359,7 @@ void Notes::init()
     m_textEdit->nativeWidget()->setCheckSpellingEnabled(m_checkSpelling);
     updateTextGeometry();
 
-    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote())); 
+    connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(delayedSaveNote()));
     connect(m_textEdit, SIGNAL(textChanged()), this, SLOT(lineChanged()));
     connect(m_textEdit, SIGNAL(mouseUnhovered()), this, SLOT(mouseUnhovered()));
 }
@@ -375,7 +375,7 @@ void Notes::lineChanged()
         QTextCharFormat fmt;
         fmt.setForeground(QBrush(m_textColor));
         fmt.setFont(m_font);
-        m_textEdit->nativeWidget()->setCurrentCharFormat(fmt);   
+        m_textEdit->nativeWidget()->setCurrentCharFormat(fmt);
     }
 
     if (m_useNoColor) {
@@ -426,7 +426,7 @@ void Notes::updateTextGeometry()
         m_textEdit->nativeWidget()->selectAll();
         m_textEdit->nativeWidget()->setFontPointSize(m_font.pointSize());
         m_textEdit->nativeWidget()->setTextCursor(oldTextCursor);
-        
+
         if (m_autoFont) {
             lineChanged();
         }
@@ -579,7 +579,7 @@ void Notes::configAccepted()
     QFont newFont = ui.fontStyleComboBox->currentFont();
     newFont.setBold(ui.fontBoldCheckBox->isChecked());
     newFont.setItalic(ui.fontItalicCheckBox->isChecked());
-    
+
     //Apply bold and italic changes (if any) here (this is destructive formatting)
     bool boldChanged = (m_font.bold() != newFont.bold());
     bool italicChanged = (m_font.italic() != newFont.italic());
@@ -596,13 +596,13 @@ void Notes::configAccepted()
         //Restore previous selection
         m_textEdit->nativeWidget()->setTextCursor(oldCursor);
     }
-    
+
     //Save font settings to config
     if (m_font != newFont) {
         changed = true;
         cg.writeEntry("font", newFont);
         m_font = newFont;
-        
+
         //Apply font family
         QTextCursor oldCursor = m_textEdit->nativeWidget()->textCursor();
         m_textEdit->nativeWidget()->selectAll();
@@ -706,7 +706,7 @@ void Notes::createTextFormatingWidgets()
 {
     m_formatMenu = new QMenu(i18n("Formatting"));
     m_textEdit->native->setFormatMenu(m_formatMenu);
-    QAction *actionBold = m_formatMenu->addAction(KIcon("format-text-bold"), i18n("Bold")); 
+    QAction *actionBold = m_formatMenu->addAction(KIcon("format-text-bold"), i18n("Bold"));
     QAction *actionItalic = m_formatMenu->addAction(KIcon("format-text-italic"),i18n("Italic"));
     QAction *actionUnderline = m_formatMenu->addAction(KIcon("format-text-underline"), i18n("Underline"));
     QAction *actionStrikeThrough = m_formatMenu->addAction(KIcon("format-text-strikethrough"), i18n("StrikeOut"));
@@ -762,7 +762,7 @@ void Notes::createTextFormatingWidgets()
     m_layout->addItem(widget);
 
     m_buttonAnimGroup = new Plasma::AnimationGroup(this);
-    m_buttonAnimGroup->setParallel(true);  
+    m_buttonAnimGroup->setParallel(true);
 
     for (int i = 0; i < 6; i++){
         m_buttonAnim[i] = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
@@ -781,7 +781,7 @@ void Notes::createTextFormatingWidgets()
 }
 
 void Notes::showOptions(bool show)
-{   
+{
     m_buttonOption->nativeWidget()->setDown(show);
 
     qreal targetOpacity = show ? 1 : 0;
