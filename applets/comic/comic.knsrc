@@ -1,8 +1,8 @@
-[KNewStuff2]
-ProvidersUrl=http://download.kde.org/khotnewstuff/plasmacomics-providers.xml
-ChecksumPolicy=ifpossible
-SignaturePolicy=ifpossible
+[KNewStuff3]
+ProvidersUrl=http://download.kde.org/ocs/providers.xml
+Categories=Plasma Comic
 TargetDir=plasma/comics
 Uncompress=never
 InstallationCommand=plasmapkg -t comic -u %f
 UninstallCommand=plasmapkg -t comic -r %f
+

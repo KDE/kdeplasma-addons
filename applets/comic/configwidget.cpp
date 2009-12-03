@@ -31,7 +31,7 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include <KIcon>
-#include <KNS/Engine>
+#include <KNS3/DownloadDialog>
 
 class ComicModel : public QAbstractTableModel
 {
@@ -145,14 +145,13 @@ ConfigWidget::~ConfigWidget()
 
 void ConfigWidget::getNewStuff()
 {
-    KNS::Engine engine( this );
-    if ( engine.init( "comic.knsrc" ) ) {
-        KNS::Entry::List entries = engine.downloadDialogModal( this );
-        if ( entries.size() > 0 ) {
-            QStringList tmp = comicIdentifier();
-            mModel->setComics( mEngine->query( "providers" ) );
-            setComicIdentifier( tmp );
-        }
+    KNS3::DownloadDialog dialog( "comic.knsrc", this );
+    dialog.exec();
+
+    if ( dialog.changedEntries().count() ) {
+        QStringList tmp = comicIdentifier();
+        mModel->setComics( mEngine->query( "providers" ) );
+        setComicIdentifier( tmp );
     }
 }
 
