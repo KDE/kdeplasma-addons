@@ -16,13 +16,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RENDER_IMPL
-#define RENDER_IMPL
+// No header guards should be used here as this file is expected to be
+// #includeable more than once
+//krazy:skip
 
 template<typename Real> void mandelbrot_render_tile(
   Mandelbrot *mandelbrot,
   int interleaving_number,
   QImage *image
 );
-
-#endif // RENDER_IMPL
