@@ -25,6 +25,7 @@
 
 class QalculateHistory : public QObject
 {
+    Q_OBJECT
 public:
     QalculateHistory(QObject* parent = 0);
 
