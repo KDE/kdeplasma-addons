@@ -487,4 +487,5 @@ Bubble::configAccepted()
     
 
     emit configNeedsSaving();
+    update();
 }
