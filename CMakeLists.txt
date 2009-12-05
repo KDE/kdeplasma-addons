@@ -12,6 +12,10 @@ macro_optional_find_package(KdepimLibs)
 macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "KDE PIM libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 find_package(Boost)
 
+
+macro_optional_find_package(LibAttica)
+macro_log_feature(LIBATTICA_FOUND "libattica" "Attica Library" "?" FALSE "" "Needed for building the Open Collaboration Services plasma plugins")
+
 macro_optional_find_package(OpenGL)
 macro_log_feature(OPENGL_FOUND "OpenGL" "API for developing portable, interactive 2D and 3D graphics applications" "http://mesa3d.sourceforge.net" FALSE "" "STRONGLY RECOMMENDED: The 3D hardware acceleration available through the OpenGL API is used in applications ranging from graphics and modellers to screensavers and video players.")
 
