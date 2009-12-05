@@ -58,13 +58,19 @@ PanelIcon::~PanelIcon() {
         delete contextBasic;
 }
 
-
 QGraphicsWidget *PanelIcon::graphicsWidget()
 {
     if (!m_plasmaboard) {
         m_plasmaboard = new PlasmaboardWidget(this);
         initKeyboard();
     }
+
+    bool restrictedH = formFactor() == Plasma::Horizontal;
+    bool restrictedV = formFactor() == Plasma::Vertical;
+    if(!restrictedH && !restrictedV){
+	m_plasmaboard->setEnabled(false);
+    }
+
     return m_plasmaboard;
 }
 
