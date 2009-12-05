@@ -167,6 +167,9 @@ p, li { white-space: pre-wrap; }
      <property name="text">
       <string>Password:</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
    </item>
    <item row="1" column="3">
@@ -176,6 +179,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Provider:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
