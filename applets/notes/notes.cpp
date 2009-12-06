@@ -29,6 +29,7 @@
 #include <QtGui/QScrollBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QMenu>
+#include <QParallelAnimationGroup>
 
 #include <KConfigDialog>
 #include <KConfigGroup>
@@ -42,7 +43,6 @@
 
 #include <Plasma/Animator>
 #include <plasma/animation.h>
-#include <plasma/animationgroup.h>
 #include <Plasma/PushButton>
 #include <Plasma/Theme>
 
@@ -761,12 +761,11 @@ void Notes::createTextFormatingWidgets()
 
     m_layout->addItem(widget);
 
-    m_buttonAnimGroup = new Plasma::AnimationGroup(this);
-    m_buttonAnimGroup->setParallel(true);
+    m_buttonAnimGroup = new QParallelAnimationGroup(this);
 
     for (int i = 0; i < 6; i++){
         m_buttonAnim[i] = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
-        m_buttonAnimGroup->add(m_buttonAnim[i]);
+        m_buttonAnimGroup->addAnimation(m_buttonAnim[i]);
     }
 
     m_buttonAnim[0]->setWidgetToAnimate(m_buttonBold);

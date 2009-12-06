@@ -39,11 +39,11 @@ class QGraphicsLinearLayout;
 class QSizeF;
 class QContextMenuEvent;
 class QGraphicsWidget;
+class QParallelAnimationGroup;
 
 namespace Plasma
 {
     class TextEdit;
-    class AnimationGroup;
     class Animation;
 }
 
@@ -179,7 +179,7 @@ class Notes : public Plasma::Applet
         Plasma::ToolButton *m_buttonCenter;
         Plasma::ToolButton *m_buttonFill;
 
-        Plasma::AnimationGroup *m_buttonAnimGroup;
+        QParallelAnimationGroup *m_buttonAnimGroup;
         Plasma::Animation *m_buttonAnim[6];
 };
 
