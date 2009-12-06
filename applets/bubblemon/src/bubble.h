@@ -37,7 +37,7 @@ namespace Plasma {
 
 class Bubble : public Plasma::Applet {
     Q_OBJECT
-    Q_PROPERTY(qreal labelTransparency READ labelTransparency WRITE setLabelTransparency);
+    Q_PROPERTY(qreal labelTransparency READ labelTransparency WRITE setLabelTransparency)
     
     public:
         Bubble(QObject *parent, const QVariantList &args);
