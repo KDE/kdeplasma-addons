@@ -1,10 +1,7 @@
 project(plasma-frame)
-include (MacroLogFeature)
 
 macro_optional_find_package(Kexiv2)
 macro_log_feature(KEXIV2_FOUND "libkexiv2" "Library to access EXIF information" "http://www.kde.org" FALSE "0.2.0" "RECOMENDED: Enables automatic rotation for frame applet" )
-
-macro_display_feature_log()
 
 set(frame_SRCS
     frame.cpp
@@ -21,7 +18,7 @@ kde4_add_plugin(plasma_applet_frame ${frame_SRCS})
 
 if(HAVE_KEXIV2)
     include_directories( ${KEXIV2_INCLUDES} )
-    set_source_files_properties(picture.cpp PROPERTIES 
+    set_source_files_properties(picture.cpp PROPERTIES
                                COMPILE_FLAGS -DHAVE_KEXIV2)
     target_link_libraries(plasma_applet_frame ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS} ${KEXIV2_LIBRARIES} )
 else (HAVE_KEXIV2)
