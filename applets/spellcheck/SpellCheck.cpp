@@ -50,8 +50,8 @@ SpellCheck::SpellCheck(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::ConstrainedSquare);
     setAcceptDrops(true);
 
-    const int iconSize = IconSize(KIconLoader::Desktop);
-    resize((iconSize * 2), (iconSize * 2));
+    const int iconSize = (IconSize(KIconLoader::Desktop) * 2);
+    resize(iconSize, iconSize);
 }
 
 SpellCheck::~SpellCheck()
@@ -173,7 +173,6 @@ void SpellCheck::timerEvent(QTimerEvent *event)
 void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
 {
     if (!m_spellingDialog) {
-        // m_spellingDialog has no parent, but gets connected to the destroyed signal of this class
         m_spellingDialog = new Plasma::Dialog(NULL, Qt::Tool);
         m_spellingDialog->setFocusPolicy(Qt::NoFocus);
         m_spellingDialog->setWindowTitle(i18n("Spell checking"));
@@ -216,22 +215,21 @@ void SpellCheck::toggleDialog(bool pasteText, bool preferSelection)
 
         setLanguage(config().readEntry("dictionary", m_textEdit->highlighter()->currentLanguage()));
 
-        connect(this, SIGNAL(destroyed()), m_spellingDialog, SLOT(deleteLater()));
         connect(m_spellingDialog, SIGNAL(dialogResized()), this, SLOT(dialogResized()));
         connect(spellingAction, SIGNAL(triggered()), m_textEdit, SLOT(checkSpelling()));
         connect(copyAction, SIGNAL(triggered()), this, SLOT(copyToClipboard()));
-        connect(closeAction, SIGNAL(triggered()), m_spellingDialog, SLOT(close()));
+        connect(closeAction, SIGNAL(triggered()), this, SLOT(toggleDialog()));
         connect(m_textEdit, SIGNAL(languageChanged(QString)), this, SLOT(setLanguage(QString)));
         connect(m_dictionaryComboBox, SIGNAL(dictionaryChanged(QString)), this, SLOT(setLanguage(QString)));
     }
 
     if (m_spellingDialog->isVisible()) {
-        m_spellingDialog->hide();
+        m_spellingDialog->animatedHide(Plasma::locationToInverseDirection(location()));
 
         m_textEdit->clear();
     } else {
         m_spellingDialog->move(popupPosition(m_spellingDialog->sizeHint()));
-        m_spellingDialog->show();
+        m_spellingDialog->animatedShow(Plasma::locationToDirection(location()));
 
         if (pasteText) {
             m_textEdit->setText((!preferSelection || QApplication::clipboard()->text(QClipboard::Selection).isEmpty()) ? QApplication::clipboard()->text(QClipboard::Clipboard) : QApplication::clipboard()->text(QClipboard::Selection));
