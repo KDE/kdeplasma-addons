@@ -304,6 +304,8 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                             if (intersected.isValid()) {
                                 group->showDropZone(mapToItem(group, intersected.center()));
                                 break;
+                            } else {
+                                group->showDropZone(QPointF());
                             }
                         }
 

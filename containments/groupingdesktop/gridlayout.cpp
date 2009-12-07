@@ -145,7 +145,12 @@ QString GridLayout::pluginName() const
 
 void GridLayout::showDropZone(const QPointF &pos)
 {
-    showItemTo(m_spacer, pos);
+    if (pos.isNull()) {
+        m_spacer->hide();
+        removeItem(m_spacer);
+    } else {
+        showItemTo(m_spacer, pos);
+    }
 }
 
 void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
