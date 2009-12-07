@@ -29,6 +29,7 @@
 #include <Plasma/PaintUtils>
 
 #include "groupingcontainment.h"
+#include "appletoverlay.h"
 
 class Position {
     public:
@@ -36,6 +37,11 @@ class Position {
         : row(r),
         column(c)
         {
+        }
+
+        bool isValid()
+        {
+            return (row >= 0 && column >= 0 ? true : false);
         }
 
         int row;
@@ -88,21 +94,17 @@ GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
             m_layout(new QGraphicsGridLayout(this)),
             m_spacer(new Spacer(this)),
-            m_overlayLayout(new QGraphicsLinearLayout()),
-            m_overlayIcon(new Plasma::IconWidget(this))
+            m_overlay(0)
 {
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
+    m_layout->setContentsMargins(10, 10, 10, 10);
     setLayout(m_layout);
 
     m_spacer->parent = this;
+    m_spacer->setZValue(1000);
     m_spacer->hide();
-
-    m_overlayIcon->setIcon("transform-move");
-    m_overlayIcon->hide();
-    m_overlayLayout->addItem(m_overlayIcon);
-    m_overlayLayout->setAlignment(m_overlayIcon, Qt::AlignCenter);
 
     connect(this, SIGNAL(appletRemovedFromGroup(Plasma::Applet *, AbstractGroup *)),
             this, SLOT(onAppletRemoved(Plasma::Applet *, AbstractGroup *)));
@@ -126,12 +128,19 @@ void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group)
 
-    removeItem(applet);
+    if (m_overlay && applet == m_overlay->applet()) {
+        m_spacer->hide();
+        removeItem(m_spacer);
+        delete m_overlay;
+        m_overlay = 0;
+    } else {
+        removeItem(applet);
+    }
 }
 
 QString GridLayout::pluginName() const
 {
-    return QString("gridlayout");
+    return QString("grid");
 }
 
 void GridLayout::showDropZone(const QPointF &pos)
@@ -278,19 +287,11 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
 
 void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
-    if (m_spacer->geometry().contains(pos)) {
-        Position spacerPos = itemPosition(m_spacer);
-        if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
-            m_spacer->hide();
-            removeItemAt(spacerPos, false);
-            insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
-        }
-    } else {
-        if (m_spacer->isVisible()) {
-            m_spacer->hide();
-            removeItemAt(itemPosition(m_spacer), true);
-        }
-        showItemTo(applet, pos);
+    Position spacerPos = itemPosition(m_spacer);
+    if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
+        m_spacer->hide();
+        removeItemAt(spacerPos, false);
+        insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
     }
 }
 
@@ -313,6 +314,46 @@ int GridLayout::nearestBoundair(qreal pos, qreal size) const
     }
 
     return -1;
+}
+
+void GridLayout::overlayStartsMoving()
+{
+    Position pos = itemPosition(m_overlay->applet());
+    kDebug()<<pos.row<< pos.column;
+    if (pos.isValid()) {
+        removeItemAt(pos);
+        insertItemAt(m_spacer, pos.row, pos.column);
+        m_spacer->show();
+    }
+}
+
+void GridLayout::overlayMoving(qreal x, qreal y)
+{
+    Plasma::Applet *applet = m_overlay->applet();
+    QPointF newPos(applet->pos() + QPointF(x, y));
+    QRectF newRect(applet->geometry().translated(newPos));
+    if (contentsRect().contains(newRect)) {
+        applet->moveBy(x, y);
+    }
+}
+
+void GridLayout::overlayEndsMoving()
+{
+    Position pos = itemPosition(m_spacer);
+    kDebug()<<pos.row<< pos.column;
+    if (pos.isValid()) {
+        removeItemAt(pos);
+        insertItemAt(m_overlay->applet(), pos.row, pos.column);
+    }
+
+    delete m_overlay;
+    m_overlay = 0;
+    m_spacer->hide();
+}
+
+void GridLayout::onAppletMovedOutside(qreal x, qreal y)
+{
+    m_overlay->applet()->moveBy(x, y);
 }
 
 void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
@@ -342,15 +383,25 @@ bool GridLayout::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
         switch (event->type()) {
         case QEvent::GraphicsSceneHoverMove:
         case QEvent::GraphicsSceneHoverEnter:
-            if (m_overlayLayout->parentLayoutItem() != applet) {
-                m_overlayIcon->show();
-                applet->setLayout(m_overlayLayout);
+            {
+                if (!m_overlay) {
+                    m_overlay = new AppletOverlay(applet);
+                    connect(m_overlay, SIGNAL(startMoving()), this, SLOT(overlayStartsMoving()));
+                    connect(m_overlay, SIGNAL(endMoving()), this, SLOT(overlayEndsMoving()));
+                    connect(m_overlay, SIGNAL(movedOf(qreal, qreal)),
+                            this, SLOT(overlayMoving(qreal, qreal)));
+                    connect(m_overlay, SIGNAL(appletMovedOutside(qreal, qreal)),
+                            this, SLOT(onAppletMovedOutside(qreal, qreal)));
+                }
             }
             break;
 
         case QEvent::GraphicsSceneHoverLeave:
-            m_overlayIcon->hide();
-            m_overlayLayout->setParentLayoutItem(0);
+            if (m_overlay) {
+                delete m_overlay;
+                m_overlay = 0;
+            }
+
             break;
 
         default:

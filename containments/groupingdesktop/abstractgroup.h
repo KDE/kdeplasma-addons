@@ -68,6 +68,14 @@ class AbstractGroup : public QGraphicsWidget
         void addApplet(Plasma::Applet *applet, bool layoutApplets = true);
 
         /**
+         * Removes an applet from this group.
+         * @param applet the applet to be removed
+         * @see addApplet
+         * @see applets
+         **/
+        void removeApplet(Plasma::Applet *applet);
+
+        /**
          * Saves the group's specific configurations for an applet.
          * This function must be reimplemented by a child class.
          * @param applet the applet which will be saved
@@ -84,14 +92,6 @@ class AbstractGroup : public QGraphicsWidget
          * @see saveAppletLayoutInfo
          **/
         virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
-
-        /**
-         * Removes an applet from this group.
-         * @param applet the applet to be removed
-         * @see addApplet
-         * @see applets
-         **/
-        void removeApplet(Plasma::Applet *applet);
 
         /**
          * Returns the view this widget is visible on, or 0 if none can be found.

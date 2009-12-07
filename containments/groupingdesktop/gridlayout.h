@@ -33,6 +33,7 @@ namespace Plasma
 
 class Position;
 class Spacer;
+class AppletOverlay;
 
 class GridLayout : public AbstractGroup
 {
@@ -53,6 +54,10 @@ class GridLayout : public AbstractGroup
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
+        void overlayStartsMoving();
+        void overlayEndsMoving();
+        void overlayMoving(qreal x, qreal y);
+        void onAppletMovedOutside(qreal x, qreal y);
 
     private:
         enum Orientation {
@@ -64,15 +69,15 @@ class GridLayout : public AbstractGroup
         QGraphicsLayoutItem *removeItemAt(Position position, bool fillLayout = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         void showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos);
-        void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation);
+        void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation = Horizontal);
         Position itemPosition(QGraphicsItem *item) const;
         int nearestBoundair(qreal pos, qreal size) const;
 
         QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;
 
-        QGraphicsLinearLayout *m_overlayLayout;
-        Plasma::IconWidget *m_overlayIcon;
+        QPointF posOfClick;
+        AppletOverlay *m_overlay;
 
         friend class Spacer;
 };

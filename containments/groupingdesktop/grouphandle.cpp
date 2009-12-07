@@ -20,8 +20,8 @@
 
 #include "grouphandle.h"
 
-#include <QApplication>
-#include <QBitmap>
+#include <QtGui/QApplication>
+#include <QtGui/QBitmap>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QPainter>

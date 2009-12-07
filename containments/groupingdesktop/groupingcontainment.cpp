@@ -109,9 +109,7 @@ class GroupingContainmentPrivate
             if (handles.contains(group)) {
                 GroupHandle *handle = handles.value(group);
                 handles.remove(group);
-                if (q->scene()) {
-                    q->scene()->removeItem(handle);
-                }
+                delete handle;
             }
 
             groups.removeAll(group);
@@ -120,10 +118,14 @@ class GroupingContainmentPrivate
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos)
         {
             foreach (AbstractGroup *group, groups) {
-                if (group && group->geometry().contains(pos)) {
-                    group->addApplet(applet);
+                if (group) {
+                    QRectF rect = group->contentsRect();
+                    rect.translate(group->pos());
+                    if (rect.contains(applet->geometry())) {
+                        group->addApplet(applet);
 
-                    applet->installSceneEventFilter(q);
+                        applet->installSceneEventFilter(q);
+                    }
 
                     break;
                 }
@@ -168,7 +170,7 @@ void GroupingContainment::init()
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, QPointF)),
             this, SLOT(layoutApplet(Plasma::Applet *, QPointF)));
 
-    addGroup("grid", QPointF(100,100), 0);
+//     addGroup("grid", QPointF(100,100), 0);
 }
 
 void GroupingContainment::addGroup(const QString &plugin, const QPointF &pos, int id)

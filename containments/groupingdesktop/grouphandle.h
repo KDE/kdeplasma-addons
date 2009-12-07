@@ -22,7 +22,7 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QGraphicsObject>
-#include <QTimer>
+#include <QtCore/QTimer>
 
 #include <Plasma/Svg>
 

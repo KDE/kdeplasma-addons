@@ -20,6 +20,7 @@
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 
+#include <QtCore/QTimer>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneResizeEvent>
@@ -30,10 +31,9 @@
 #include <Plasma/Containment>
 #include <Plasma/FrameSvg>
 #include <Plasma/Animator>
-#include <Plasma/AbstractAnimation>
+#include <Plasma/Animation>
 
 #include "groupingcontainment.h"
-#include <QTimer>
 
 AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
     : q(group),
@@ -70,7 +70,7 @@ void AbstractGroupPrivate::destroyGroup()
 {
     mainConfigGroup()->deleteGroup();
 
-    Plasma::AbstractAnimation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
+    Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
     if (anim) {
     anim->setWidgetToAnimate(q);
     anim->start();
@@ -92,7 +92,7 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
             destroying = false;
         }
 
-        emit q->appletRemovedFromGroup(applet, q);
+//         emit q->appletRemovedFromGroup(applet, q);
     }
 }
 
@@ -299,7 +299,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     if (applet && applets().contains(applet)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
-                if (!contentsRect().contains(applet->geometry())) {
+                if (!geometry().contains(applet->geometry())) {
                     removeApplet(applet);
                 }
                 break;
