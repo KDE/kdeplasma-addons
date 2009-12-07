@@ -21,7 +21,7 @@
 
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneContextMenuEvent>
-#include <QAction>
+#include <QtGui/QAction>
 
 #include <KDebug>
 #include <KMenu>
@@ -114,12 +114,7 @@ class GroupingContainmentPrivate
                 }
             }
 
-            foreach (AbstractGroup *g, groups) {
-                if (g == group) {
-                    groups.removeAll(group);
-                    break;
-                }
-            }
+            groups.removeAll(group);
         }
 
         void layoutApplet(Plasma::Applet *applet, const QPointF &pos)
@@ -192,6 +187,8 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     group->d->containment = this;
     connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
             group, SLOT(setImmutability(Plasma::ImmutabilityType)));
+    connect(group, SIGNAL(groupDestroyed(AbstractGroup *)),
+            this, SLOT(onGroupRemoved(AbstractGroup *)));
     group->setPos(pos);
 
     if (containmentType() == Plasma::Containment::DesktopContainment) {
