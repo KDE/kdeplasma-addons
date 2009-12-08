@@ -243,6 +243,8 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void groupTransformedByUser();
 
+        void configNeedsSaving();
+
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
         Q_PRIVATE_SLOT(d, void callLayoutApplet())

@@ -69,6 +69,7 @@ KConfigGroup *AbstractGroupPrivate::mainConfigGroup()
 void AbstractGroupPrivate::destroyGroup()
 {
     mainConfigGroup()->deleteGroup();
+    emit q->configNeedsSaving();
 
     Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
     if (anim) {
@@ -189,6 +190,8 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
 
         emit appletAddedInGroup(applet, this);
     }
+
+    emit configNeedsSaving();
 }
 
 Plasma::Applet::List AbstractGroup::applets() const
@@ -203,6 +206,12 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
     d->applets.removeAll(applet);
     applet->removeEventFilter(this);
     applet->setParentItem(containment());
+
+    KConfigGroup appletConfig = applet->config().parent();
+    KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
+    groupConfig.deleteGroup();
+    emit configNeedsSaving();
+
     d->currApplet = applet;
     d->currAppletPos = mapToParent(applet->pos());
     //HACK like the one in layoutApplet

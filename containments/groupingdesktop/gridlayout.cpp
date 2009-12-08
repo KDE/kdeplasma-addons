@@ -383,6 +383,8 @@ void GridLayout::overlayMoving(qreal x, qreal y)
 
                 m_layout->addItem(applet, spacerPos.row, spacerPos.column);
                 m_layout->addItem(m_spacer, appletPos.row, appletPos.column);
+
+                emit configNeedsSaving();
             }
         }
     }

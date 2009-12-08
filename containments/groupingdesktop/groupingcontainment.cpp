@@ -193,6 +193,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             group, SLOT(setImmutability(Plasma::ImmutabilityType)));
     connect(group, SIGNAL(groupDestroyed(AbstractGroup *)),
             this, SLOT(onGroupRemoved(AbstractGroup *)));
+    connect(group, SIGNAL(configNeedSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
 
     if (containmentType() == Plasma::Containment::DesktopContainment) {
