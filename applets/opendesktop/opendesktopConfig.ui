@@ -212,6 +212,13 @@ p, li { white-space: pre-wrap; }
    <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>provider</tabstop>
+  <tabstop>username</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>registerButton</tabstop>
+  <tabstop>maxitems</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
