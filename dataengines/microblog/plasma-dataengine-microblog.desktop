@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
+Name[ar]=التدوين المصغر
 Name[ca]=Microblocs
 Name[cs]=Mikroblogování
 Name[da]=Mikroblogning
@@ -37,6 +38,7 @@ Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Name[zh_TW]=Microblogging
 Comment=identi.ca and twitter micro-blogging services
+Comment[ar]=خدمات التدوين المصغر من تويتر و identi.ca
 Comment[ca]=Serveis de microblocs identi.ca i twitter
 Comment[da]=identi.ca og twitter mikroblogningstjenester
 Comment[de]=identi.ca und twitter Micro-Blogging-Services

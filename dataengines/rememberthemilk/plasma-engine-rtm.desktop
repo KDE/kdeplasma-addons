@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Remember The Milk Engine
+Name[ar]=محرك Remember The Milk
 Name[ca]=Motor per «Remember The Milk»
 Name[da]=Remember The Milk-motor
 Name[de]=Remember-the-Milk-Treiber
@@ -33,6 +34,7 @@ Name[x-test]=xxRemember The Milk Enginexx
 Name[zh_CN]=Remember The Milk 引擎
 Name[zh_TW]=Remember The Milk 引擎
 Comment=An engine to work with Remember the Milk.
+Comment[ar]=محرك يعمل مع  Remember the Milk .
 Comment[ca]=Un motor per treballar amb «Remember The Milk».
 Comment[da]=En motor der virker med Remember the Milk.
 Comment[de]=Ein Treiber, der mit Remember the Milk arbeitet.

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=openDesktop
+Name[ar]=openDesktop
 Name[ca]=openDesktop
 Name[cs]=openDesktop
 Name[da]=openDesktop
@@ -34,6 +35,7 @@ Name[x-test]=xxopenDesktopxx
 Name[zh_CN]=openDesktop
 Name[zh_TW]=openDesktop
 Comment=Communicate using the Social Desktop
+Comment[ar]=تواصبل باستخدام سطح المكتب الاجتماعي
 Comment[ca]=Comuniqueu-vos usant l'escriptori social
 Comment[cs]=Komunikujte pomocí Sociálního desktopu
 Comment[da]=Kommunikér ved hjælp det sociale skrivebord.
@@ -79,6 +81,7 @@ X-KDE-PluginInfo-Name=opendesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
+Keywords[ar]=أدوات
 Keywords[ca]=Utilitats
 Keywords[cs]=Nástroje
 Keywords[da]=Redskaber

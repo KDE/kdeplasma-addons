@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Microblogging
+Name[ar]=التدوين المصغر
 Name[ca]=Microblocs
 Name[cs]=Mikroblogování
 Name[da]=Mikroblogning
@@ -37,6 +38,7 @@ Name[x-test]=xxMicrobloggingxx
 Name[zh_CN]=微博客
 Name[zh_TW]=Microblogging
 Comment=Update and view your microblog status.
+Comment[ar]=حدث و شاهد حالة تدويناتك.
 Comment[ca]=Actualitza i mostra l'estat del vostre microbloc.
 Comment[cs]=Aktualizujte a prohlížejte stav svého mikroblogování.
 Comment[da]=Opdater og se status for din mikroblog.

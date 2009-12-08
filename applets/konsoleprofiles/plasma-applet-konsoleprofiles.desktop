@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Konsole Profiles
-Name[ar]=تشكيلات الكونسول
+Name[ar]=تشكيلات كونسول
 Name[ca]=Perfils del Konsole
 Name[cs]=Profily Konsole
 Name[da]=Konsole-profiler
@@ -47,7 +47,7 @@ Name[x-test]=xxKonsole Profilesxx
 Name[zh_CN]=Konsole 配置集
 Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
-Comment[ar]=تعرض و تطلق تشكيلات الكونسول
+Comment[ar]=تعرض و تطلق تشكيلات كونسول
 Comment[ca]=Llista i executa els perfils del Konsole
 Comment[cs]=Seznam a spouštění profilů Konsole
 Comment[da]=Vis og start Konsole-profiler.

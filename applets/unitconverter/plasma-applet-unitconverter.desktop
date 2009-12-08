@@ -47,6 +47,7 @@ Name[x-test]=xxUnit Converterxx
 Name[zh_CN]=单位转换器
 Name[zh_TW]=單位轉換器
 Comment=Plasmoid for converting units
+Comment[ar]=بلازمويد لتحويل الوحدات
 Comment[ca]=Plasmoide per convertir unitats
 Comment[cs]=Plasmoid pro převod jednotek
 Comment[da]=Plasmoid til at konvertere enheder.

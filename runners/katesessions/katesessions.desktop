@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Kate Sessions
-Name[ar]=جلسات كات
+Name[ar]=جلسات كيت
 Name[ca]=Sessions del Kate
 Name[cs]=Relace Kate
 Name[da]=Kate-sessioner
@@ -47,7 +47,7 @@ Name[x-test]=xxKate Sessionsxx
 Name[zh_CN]=Kate 会话
 Name[zh_TW]=Kate 工作階段
 Comment=Matches Kate Sessions
-Comment[ar]=تطابق جلسات كات
+Comment[ar]=تطابق جلسات كيت
 Comment[ca]=Coincideix amb les sessions del Kate
 Comment[cs]=Vyhledávání v relacích Kate
 Comment[da]=Matcher Kate-sessioner.

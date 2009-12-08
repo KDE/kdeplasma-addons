@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Remember The Milk
+Name[ar]=Remember The Milk
 Name[ca]=Remember The Milk
 Name[cs]=Remember The Milk
 Name[da]=Remember The Milk
@@ -34,6 +35,7 @@ Name[x-test]=xxRemember The Milkxx
 Name[zh_CN]=Remember The Milk
 Name[zh_TW]=Remember The Milk
 Comment=Remember The Milk Todo list applet
+Comment[ar]=بريمج قائمة المهام Remember The Milk 
 Comment[ca]=Miniaplicació per la llista de coses pendents de «Remember The Milk»
 Comment[cs]=Applet úkolů Remember The Milk
 Comment[da]=Remember The Milk er en opgaveliste-applet.
