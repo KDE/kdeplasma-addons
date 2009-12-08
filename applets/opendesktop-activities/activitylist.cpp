@@ -116,9 +116,11 @@ void ActivityList::dataUpdated(const QString& source, const Plasma::DataEngine::
 
     QStringList::iterator j = displayedActivities.begin();
     for (int i = 0; i < displayedActivities.size(); ++i, ++j) {
-        ActivityWidget* widget = new ActivityWidget(m_engine, m_container);
-        widget->setActivityData(data[*j].value<Plasma::DataEngine::Data>());
-        m_layout->addItem(widget);
+        if (!data[*j].value<Plasma::DataEngine::Data>().isEmpty()) {
+            ActivityWidget* widget = new ActivityWidget(m_engine, m_container);
+            widget->setActivityData(data[*j].value<Plasma::DataEngine::Data>());
+            m_layout->addItem(widget);
+        }
     }
     
     // Go to the top of the list
