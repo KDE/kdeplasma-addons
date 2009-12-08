@@ -85,6 +85,7 @@ class ActivityList : public Plasma::ScrollWidget
         int m_limit;
         QString m_provider;
         int m_updateInterval;
+        bool m_firstUpdateDone;
 };
 
 

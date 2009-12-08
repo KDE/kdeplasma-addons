@@ -30,7 +30,8 @@ ActivityList::ActivityList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     : ScrollWidget(parent),
       m_engine(engine),
       m_limit(20),
-      m_updateInterval(10 * 60)
+      m_updateInterval(10 * 60),
+      m_firstUpdateDone(false)
 {
     m_container = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, m_container);
@@ -66,7 +67,8 @@ void ActivityList::setProvider(const QString& provider) {
         }
         m_provider = provider;
         if (!m_provider.isEmpty()) {
-            m_engine->connectSource("Activities\\provider:" + m_provider, this, m_updateInterval * 1000);
+            // wait for the data to arrive the first time
+            m_engine->connectSource("Activities\\provider:" + m_provider, this, 1000);
         }
     }
 }
@@ -79,7 +81,8 @@ void ActivityList::setUpdateInterval(int interval)
 }
 
 
-QStringList ActivityList::getDisplayedActivities(const Plasma::DataEngine::Data& data) {
+QStringList ActivityList::getDisplayedActivities(const Plasma::DataEngine::Data& data)
+{
     QStringList result = data.keys();
     qSort(result.begin(), result.end(), qGreater<QString>());
     while (result.size() > m_limit) {
@@ -92,6 +95,15 @@ QStringList ActivityList::getDisplayedActivities(const Plasma::DataEngine::Data&
 void ActivityList::dataUpdated(const QString& source, const Plasma::DataEngine::Data& data)
 {
     Q_UNUSED(source)
+
+    if (!m_firstUpdateDone) {
+        if (data.contains("SourceStatus") && data.value("SourceStatus") == "retrieving") {
+            return;
+        }
+        m_engine->connectSource("Activities\\provider:" + m_provider, this, m_updateInterval * 1000);
+        m_firstUpdateDone = true;
+    }
+
     
     QStringList displayedActivities = getDisplayedActivities(data);
     
