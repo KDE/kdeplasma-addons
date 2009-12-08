@@ -36,6 +36,8 @@ class AppletOverlay : public QGraphicsWidget
 
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
         Plasma::Applet *applet() const;
+        bool isMoving() const;
+        void setZ(int value);
 
     protected:
         void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -57,6 +59,7 @@ class AppletOverlay : public QGraphicsWidget
         Plasma::Applet *m_applet;
         bool m_moving;
         QPointF m_startPos;
+        int m_savedZValue;
 };
 
 #endif // APPLETOVERLAY_H

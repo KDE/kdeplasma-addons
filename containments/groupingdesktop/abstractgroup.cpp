@@ -299,7 +299,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
     if (applet && applets().contains(applet)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
-                if (!geometry().contains(applet->geometry())) {
+                if (!contentsRect().contains(applet->geometry())) {
                     removeApplet(applet);
                 }
                 break;

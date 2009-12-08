@@ -42,10 +42,16 @@ AppletOverlay::AppletOverlay(Plasma::Applet *applet, Qt::WindowFlags wFlags)
 
 AppletOverlay::~AppletOverlay()
 {
-
+    m_applet->setZValue(m_savedZValue);
 }
 
-Plasma::Applet* AppletOverlay::applet() const
+void AppletOverlay::setZ(int value)
+{
+    m_savedZValue = m_applet->zValue();
+    m_applet->setZValue(value);
+}
+
+Plasma::Applet *AppletOverlay::applet() const
 {
     return m_applet;
 }
@@ -57,7 +63,12 @@ void AppletOverlay::delayedSyncGeometry()
 
 void AppletOverlay::syncGeometry()
 {
-    setGeometry(m_applet->geometry());
+    setGeometry(m_applet->contentsRect());
+}
+
+bool AppletOverlay::isMoving() const
+{
+    return m_moving;
 }
 
 void AppletOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -93,6 +104,7 @@ void AppletOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void AppletOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
+        kDebug()<<"jkbhj";
         QPointF p(event->pos() - m_startPos);
         emit appletMovedOutside(p.x(), p.y());
     }
