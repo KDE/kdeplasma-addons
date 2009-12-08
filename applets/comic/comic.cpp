@@ -197,7 +197,7 @@ void ComicApplet::createLayout()
 
 void ComicApplet::init()
 {
-    connect(this, SIGNAL(appletTransformedByUser()), this, SLOT(slotAppletTransformedByUser()));
+    connect(this, SIGNAL(appletTransformedByUser()), this, SLOT(slotSizeChanged()));
 
     Plasma::ToolTipManager::self()->registerWidget( this );
 
@@ -665,6 +665,7 @@ void ComicApplet::slotSizeChanged()
     // if the applet was resized manually by the user
     if ( mMainWidget->geometry().size() != mLastSize ) {
         mMaxSize = mMainWidget->geometry().size();
+        updateSize();
 
         KConfigGroup cg = config();
         cg.writeEntry( "maxSize", mMaxSize );
