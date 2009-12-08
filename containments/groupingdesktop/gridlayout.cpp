@@ -148,37 +148,34 @@ void GridLayout::showDropZone(const QPointF &pos)
     if (pos.isNull()) {
         m_spacer->hide();
         removeItem(m_spacer);
-    } else {
-        showItemTo(m_spacer, pos);
-    }
-}
 
-void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
-{
+        return;
+    }
+
     const qreal x = pos.x();
     const qreal y = pos.y();
 
     if (!contentsRect().contains(pos)) {
-        movingWidget->hide();
-        removeItem(movingWidget);
+        m_spacer->hide();
+        removeItem(m_spacer);
     }
 
-    if (movingWidget->geometry().contains(pos)) {
+    if ((m_spacer->isVisible()) && (m_spacer->geometry().contains(pos))) {
         return;
     }
 
-    Position itemPos = itemPosition(movingWidget);
+    Position itemPos = itemPosition(m_spacer);
 
     if ((itemPos.row != -1) && (itemPos.column != -1)) {
         removeItemAt(itemPos, true);
-        movingWidget->hide();
+        m_spacer->hide();
     }
 
     const int rows = m_layout->rowCount();
     const int columns = m_layout->columnCount();
 
     if (columns == 0) {
-        insertItemAt(movingWidget, 0, 0, Horizontal);
+        insertItemAt(m_spacer, 0, 0, Horizontal);
         return;
     }
 
@@ -190,11 +187,11 @@ void GridLayout::showItemTo(QGraphicsWidget *movingWidget, const QPointF &pos)
 
     int n;
     if ((n = nearestBoundair(x, columnWidth)) != -1) {
-        insertItemAt(movingWidget, j, n, Horizontal);
+        insertItemAt(m_spacer, j, n, Horizontal);
         return;
     }
     if ((n = nearestBoundair(y, rowHeight)) != -1) {
-        insertItemAt(movingWidget, n, i, Vertical);
+        insertItemAt(m_spacer, n, i, Vertical);
         return;
     }
 }
@@ -291,6 +288,8 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
 
 void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
+    Q_UNUSED(pos)
+
     Position spacerPos = itemPosition(m_spacer);
     if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
         m_spacer->hide();
@@ -405,7 +404,7 @@ void GridLayout::overlayEndsMoving()
 void GridLayout::onAppletMovedOutside(qreal x, qreal y)
 {
     m_overlay->applet()->moveBy(x, y);
-    removeItem(m_spacer);
+    removeApplet(m_overlay->applet());
 }
 
 void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const

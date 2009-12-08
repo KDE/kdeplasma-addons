@@ -36,7 +36,8 @@ class GroupingContainmentPrivate
 {
     public:
         GroupingContainmentPrivate(GroupingContainment *containment)
-            : q(containment)
+            : q(containment),
+              interestingGroup(0)
         {
             newGroupAction = new QAction(i18n("Add a new group"), q);
             newGroupMenu = new KMenu(i18n("Add a new group"), 0);
@@ -121,7 +122,7 @@ class GroupingContainmentPrivate
                 if (group) {
                     QRectF rect = group->contentsRect();
                     rect.translate(group->pos());
-                    if (rect.contains(applet->geometry())) {
+                    if (rect.contains(pos)) {
                         group->addApplet(applet);
 
                         applet->installSceneEventFilter(q);
@@ -142,6 +143,7 @@ class GroupingContainmentPrivate
 
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
+        AbstractGroup *interestingGroup;
         QMap<AbstractGroup *, GroupHandle *> handles;
         QAction *newGroupAction;
         KMenu *newGroupMenu;
@@ -298,14 +300,19 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         rect.translate(group->pos());
                         if (rect.contains(applet->geometry())) {
                             group->addApplet(applet);
+                            d->interestingGroup = 0;
                             break;
                         } else {
                             QRectF intersected(rect.intersected(applet->geometry()));
                             if (intersected.isValid()) {
                                 group->showDropZone(mapToItem(group, intersected.center()));
+                                d->interestingGroup = group;
                                 break;
                             } else {
-                                group->showDropZone(QPointF());
+                                if (group == d->interestingGroup) {
+                                    group->showDropZone(QPointF());
+                                    d->interestingGroup = 0;
+                                }
                             }
                         }
 

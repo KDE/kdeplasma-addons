@@ -104,7 +104,6 @@ void AppletOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void AppletOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
-        kDebug()<<"jkbhj";
         QPointF p(event->pos() - m_startPos);
         emit appletMovedOutside(p.x(), p.y());
     }
