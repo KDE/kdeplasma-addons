@@ -18,4 +18,12 @@
     <group name="approveFriendship" />
     <group name="declineFriendship" />
     <group name="cancelFriendship" />
+    <group name="setCredentials">
+        <entry name="username" type="String">
+            <label>Username</label>
+        </entry>
+        <entry name="password" type="String">
+            <label>Password</label>
+        </entry>
+    </group>
 </kcfg>

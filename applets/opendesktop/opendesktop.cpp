@@ -65,7 +65,8 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
         m_tabs(0),
         m_friendList(0),
         m_nearList(0),
-        m_provider("https://api.opendesktop.org/v1/")
+        m_provider("https://api.opendesktop.org/v1/"),
+        m_credentialsSource(QString("Credentials\\provider:%1").arg(m_provider))
 {
     KGlobal::locale()->insertCatalog("plasma_applet_opendesktop");
     setBackgroundHints(StandardBackground);
@@ -108,24 +109,24 @@ void OpenDesktop::connectGeolocation()
 QGraphicsWidget* OpenDesktop::graphicsWidget()
 {
     if (!m_tabs) {
-        DataEngine* engine = dataEngine("ocs");
+        m_engine = dataEngine("ocs");
 
         // Watch for our own id
-        m_ownIdWatcher = new OwnIdWatcher(engine, this);
+        m_ownIdWatcher = new OwnIdWatcher(m_engine, this);
 
         // Watch for our own id
-        m_messageCounter = new MessageCounter(engine, this);
+        m_messageCounter = new MessageCounter(m_engine, this);
 
         // Friends
-        m_friendList = new FriendList(engine);
-        m_friendStack = new ActionStack(engine, m_friendList);
+        m_friendList = new FriendList(m_engine);
+        m_friendStack = new ActionStack(m_engine, m_friendList);
 
         // People near me
-        m_nearList = new ContactList(engine);
-        m_nearStack = new ActionStack(engine, m_nearList);
+        m_nearList = new ContactList(m_engine);
+        m_nearStack = new ActionStack(m_engine, m_nearList);
 
         // Messages
-        m_messageList = new MessageList(engine);
+        m_messageList = new MessageList(m_engine);
         m_messageList->setFolder("0");
 
         m_tabs = new Plasma::TabBar;
@@ -196,7 +197,8 @@ void OpenDesktop::startWork()
 
 void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
-    //kDebug() << "source updated:" << source << data;
+    kDebug() << "source updated:" << source << data;
+
     if (source == "location") {
         // The location from the geolocation engine arrived!
         m_geolocation->city = data["city"].toString();
@@ -210,6 +212,11 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
         connectNearby(m_geolocation->latitude, m_geolocation->longitude);
         saveGeoLocation();
         return;
+    } else if (source == m_credentialsSource) {
+        m_user = data["UserName"].toString();
+        m_password = data["Password"].toString();
+        ui.username->setText(m_user);
+        ui.password->setText(m_password);
     }
 
     kDebug() << "Don't know what to do with" << source;
@@ -218,9 +225,12 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
 
 void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
 {
-    QWidget *widget = new QWidget(parent);
-    ui.setupUi(widget);
-    parent->addPage(widget, i18n("General"), Applet::icon());
+    QWidget *generalSettingswidget = new QWidget(parent);
+    ui.setupUi(generalSettingswidget);
+    parent->addPage(generalSettingswidget, i18n("General"), Applet::icon());
+
+    m_engine->connectSource(m_credentialsSource, this);
+    ui.provider->addItem(m_provider);
 
     QWidget *locationWidget = new QWidget(parent);
     locationUi.setupUi(locationWidget);
@@ -252,6 +262,14 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
 
 void OpenDesktop::configAccepted()
 {
+    if (!ui.username->text().isEmpty()) {
+        Service* service = m_engine->serviceForSource(settingsQuery(m_provider, "setCredentials"));
+        KConfigGroup cg = service->operationDescription("setCredentials");
+        kDebug() << ui.username->text() << "in config group...";
+        cg.writeEntry("username", ui.username->text());
+        cg.writeEntry("password", ui.password->text());
+        ServiceJob* job = service->startOperationCall(cg);
+    }
     syncGeoLocation();
 }
 
@@ -285,7 +303,7 @@ void OpenDesktop::publishGeoLocation()
                                     m_geolocation->countryCode,
                                     m_geolocation->city);
     kDebug() << "updating location:" << source;
-    dataEngine("ocs")->connectSource(source, this);
+    m_engine->connectSource(source, this);
 }
 
 void OpenDesktop::saveGeoLocation()

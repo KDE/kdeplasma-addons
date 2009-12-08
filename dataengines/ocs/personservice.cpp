@@ -21,6 +21,8 @@
 
 #include "personservice.h"
 
+#include <KDebug>
+
 #include <attica/message.h>
 #include <attica/postjob.h>
 #include "servicejobwrapper.h"
@@ -37,12 +39,12 @@ PersonService::PersonService(QSharedPointer<Provider> provider, const QString& i
 
 Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QString, QVariant>& parameters)
 {
+    kDebug() << "operation: " << operation << "params: " << parameters;
     if (operation == "sendMessage") {
         Message message;
         message.setTo(m_id);
         message.setSubject(parameters.value("Subject").toString());
         message.setBody(parameters.value("Body").toString());
-        
         return new ServiceJobWrapper(m_provider->postMessage(message), m_id, operation, parameters);
     } else if (operation == "invite") {
         QString message = parameters.value("Message").toString();
@@ -64,6 +66,11 @@ Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QStr
         ServiceJobWrapper* job = new ServiceJobWrapper(m_provider->cancelFriendship(m_id), m_id, operation, parameters);
         m_serviceUpdates.data()->setMapping(job, "Friends");
         connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
+        return job;
+    } else if (operation == "setCredentials") {
+        m_provider->saveCredentials(parameters.value("username").toString(), parameters.value("password").toString());
+        kDebug() << "Set credentials: " << parameters.value("username") << parameters.value("password");
+        CredentialsJob* job = new CredentialsJob(m_id, operation, parameters);
         return job;
     } else {
         return new Plasma::ServiceJob("", operation, parameters);

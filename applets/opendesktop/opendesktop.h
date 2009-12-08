@@ -101,6 +101,10 @@ class OpenDesktop : public Plasma::PopupApplet
         void syncGeoLocation();
         OwnIdWatcher* m_ownIdWatcher;
         MessageCounter* m_messageCounter;
+        Plasma::DataEngine* m_engine;
+        QString m_user;
+        QString m_password;
+        QString m_credentialsSource;
 };
 
 #endif

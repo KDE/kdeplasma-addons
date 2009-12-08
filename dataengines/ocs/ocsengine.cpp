@@ -65,7 +65,7 @@ Plasma::Service* OcsEngine::serviceForSource(const QString& source)
 
     qDebug() << "Service request:" << request << "- arguments:" << arguments;
 
-    if (request == "Person") {
+    if (request == "Person" || request == "Settings") {
         QString id = arguments.value("id");
         QString providerString = arguments.value("provider");
         if (!id.isEmpty() && !providerString.isEmpty()) {
@@ -376,6 +376,19 @@ bool OcsEngine::providerDependentRequest(const QString& request, const QHash<QSt
         // FIXME: We should not ignore the folder, but since message ids are unique across folders, it doesn't matter
         QString id = arguments.value("id");
         setMessageData(source, m_messageCache.value(qMakePair(baseUrl, id)));
+        return true;
+    } else if (request == "Credentials") {
+        kDebug() << "load credentials...";
+        if (provider) {
+            QString user;
+            QString password;
+            if (provider->hasCredentials() && provider->loadCredentials(user, password)) {
+                setData(source, "UserName", user);
+                setData(source, "Password", password);
+                setData(source, "SourceStatus", "success");
+                kDebug() << "user: " << user;
+            }
+        }
         return true;
     }
     return false;

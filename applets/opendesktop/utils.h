@@ -53,5 +53,6 @@ QString personSummaryQuery(const QString& provider, const QString& id);
 
 QString receivedInvitationsQuery(const QString& provider);
 
+QString settingsQuery(const QString& provider, const QString& id);
 
 #endif

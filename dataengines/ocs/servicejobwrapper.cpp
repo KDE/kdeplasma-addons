@@ -27,5 +27,14 @@ void ServiceJobWrapper::finished(BaseJob* job)
     setResult(QVariant());
 }
 
+CredentialsJob::CredentialsJob(const QString &destination, const QString &operation, const QMap< QString, QVariant > &parameters, QObject *parent)
+        : ServiceJob(destination, operation, parameters, parent)
+{
+}
+
+void CredentialsJob::start()
+{
+    emitResult();
+}
 
 #include "servicejobwrapper.moc"
