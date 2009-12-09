@@ -22,7 +22,8 @@
 #include "actionstack.h"
 
 #include <Plasma/TabBar>
-
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
 #include "contactlist.h"
 #include "requestfriendshipwidget.h"
 #include "sendmessagewidget.h"
@@ -48,6 +49,10 @@ ActionStack::ActionStack(DataEngine* engine, QGraphicsWidget* mainWidget, QGraph
     m_tabs->addTab(QString(), m_requestFriendship);
 
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Horizontal);
+    layout->setContentsMargins(0, 0, 0, 0);
+    setContentsMargins(0, 0, 0, 0);
+    mainWidget->setContentsMargins(0, 0, 0, 0);
+    m_tabs->setContentsMargins(0, 0, 0, 0);
     layout->addItem(m_tabs);
 
     setLayout(layout);
@@ -103,6 +108,5 @@ void ActionStack::showMainWidget()
 {
     m_tabs->setCurrentIndex(0);
 }
-
 
 #include "actionstack.moc"
