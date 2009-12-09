@@ -229,6 +229,7 @@ void Frame::updatePicture()
     }
 
     emit sizeHintChanged(Qt::PreferredSize);
+    resize(contentSizeHint());
 
     kDebug() << "Rendering picture";
 
