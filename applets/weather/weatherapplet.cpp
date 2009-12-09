@@ -64,7 +64,6 @@ WeatherApplet::WeatherApplet(QObject *parent, const QVariantList &args)
         m_detailsModel(0),
         m_fiveDaysView(0),
         m_detailsView(0),
-        m_noticesView(0),
         m_setupLayout(0),
         m_graphicsWidget(0),
         m_titleFrame(new Plasma::Frame)
@@ -624,10 +623,6 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
 
     int rowCount = 0;
     if (data["Total Watches Issued"].toInt() > 0 || data["Total Warnings Issued"].toInt() > 0) {
-        if (!m_noticesView) {
-            m_noticesView = new QGraphicsWidget;
-        }
-
         QGraphicsLinearLayout *noticeLayout = new QGraphicsLinearLayout(Qt::Vertical);
         QPalette pal;
 
@@ -702,10 +697,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
             noticeLayout->addItem(watchLayout);
         }
 
-        m_tabBar->addTab(i18nc("weather notices", "Notices"), m_noticesView);
-    } else {
-        delete m_noticesView;
-        m_noticesView = 0;
+        m_tabBar->addTab(i18nc("weather notices", "Notices"), noticeLayout);
     }
 
     if (!m_setupLayout) {
