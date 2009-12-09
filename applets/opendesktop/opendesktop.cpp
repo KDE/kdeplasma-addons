@@ -199,6 +199,9 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
 {
     kDebug() << "source updated:" << source << data;
 
+    m_tabs->setPreferredSize(-1, -1);
+    emit sizeHintChanged(Qt::PreferredSize);
+
     if (source == "location") {
         // The location from the geolocation engine arrived!
         m_geolocation->city = data["city"].toString();
