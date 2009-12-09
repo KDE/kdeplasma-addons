@@ -1,0 +1,55 @@
+Just a quick overview about the goals of this thing:
+
+This little project will provide the user the ability to layout his applets
+in a more advanced way. He will be able to group them inside special
+QGraphicsWidgets called Groups, in a way that depends on the specific group.
+So, e.g. there is a grid group that layouts the applets in a grid, a
+floating group that leaves them free to move inside the group and others to
+come. I want to develop a desktop containment and a panel one. The panel
+isn't yet started.
+The applets are added to a group dropping them from the "add applet" thing
+or moving them over the group. If it is necessary (like in the grid group) a
+drop zone will be shown (like in the panel).
+
+ =====================================================================
+
+More technical stuff:
+This is composed of a library and two containments.
+The library consists of a base class for the containments,
+GroupingContainment, and a base class for the groups, AbstractGroup plus
+internal class(es) like GroupHandle.
+This classes provide all the things needed to write a simple, basic group or
+a simple, basic containment with grouping support and they co-operate well
+together. So, e.g. the floating group has only few lines of code, most of
+which are the copyright header and constructor and destructor, as the
+desktop containment, while the grid group that is more specialised is more
+"fat".
+In order to be able to have many types of groups with their different needs
+when speaking of saving the configuration, i moved this from the containment
+to the groups: AbstractGroup has two pure virtual methods,
+saveAppletLayoutInfo(Plasma::Applet, KConfigGroup) and
+restoreAppletLayoutInfo(Plasma::Applet, KConfigGroup) which its subclasses
+must reimplement, which actually save and restore the configuration. This
+way it isn't the containment that saves, but it delegates this to the
+specific groups that know how the applets are arranged and so know the best
+way to save the configuration. The grid group saves "Row" and "Column", a
+tab group would save a "Index" and so on. That way in the config section of
+every applet inside a group there will be a [GroupInformation] group with some
+keys, one of which is mandatory (Group=id of the group), while others will
+depend on the type of the group.
+The configuration of the groups are instead saved in [Containments][Id][Groups][Id].
+
+There are two groups right now, a grid group and a floating group, and one
+desktop containment.
+Other groups will come, I think, like a tab group, a stack group,... like a
+panel containment.
+======================================================================
+
+TODO: (with more or less a decreasing priority)
+-finish the movings of the applets inside the grid group;
+-hard bug and crash hunting;
+-develop the panel containment;
+-create a nice interface to add groups;
+-decide if make the groups pluginnable;
+-add support for configurations of the groups;
+-group in group support;
