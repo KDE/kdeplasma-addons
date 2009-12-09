@@ -35,7 +35,7 @@ namespace Plasma {
     class DataEngine;
 }
 
-class FriendList : public Plasma::ScrollWidget
+class FriendList : public QGraphicsWidget
 {
     Q_OBJECT
     
@@ -55,7 +55,7 @@ class FriendList : public Plasma::ScrollWidget
         FriendManagementContainer* m_invitations;
         QString m_ownId;
         QString m_provider;
-        ContactContainer* m_widget;
+        ContactContainer* m_friendListWidget;
 };
 
 

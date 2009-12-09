@@ -27,25 +27,24 @@
 
 
 FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
-    : ScrollWidget(parent)
+: QGraphicsWidget(parent)
 {
     m_invitations = new FriendManagementContainer(engine);
-    m_widget = new ContactContainer(engine);
+    m_friendListWidget = new ContactContainer(engine);
 
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical);
     layout->addItem(m_invitations);
-    layout->addItem(m_widget);
+    
+    Plasma::ScrollWidget* friendScroll = new Plasma::ScrollWidget;
+    friendScroll->setWidget(m_friendListWidget);
+    
+    layout->addItem(friendScroll);
 
-    QGraphicsWidget* widget = new QGraphicsWidget;
-    // FIXME: The following line is a hack to prevent a segfault, report it!
-    widget->setMinimumSize(100, 100);
-    widget->setLayout(layout);
-
-    setWidget(widget);
-
-    connect(m_widget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));
-    connect(m_widget, SIGNAL(sendMessage(QString)), SIGNAL(sendMessage(QString)));
-    connect(m_widget, SIGNAL(showDetails(QString)), SIGNAL(showDetails(QString)));
+    setLayout(layout);
+  
+    connect(m_friendListWidget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));
+    connect(m_friendListWidget, SIGNAL(sendMessage(QString)), SIGNAL(sendMessage(QString)));
+    connect(m_friendListWidget, SIGNAL(showDetails(QString)), SIGNAL(showDetails(QString)));
 }
 
 
@@ -53,16 +52,16 @@ void FriendList::setProvider(const QString& provider)
 {
     m_provider = provider;
     m_invitations->setProvider(provider);
-    m_widget->setProvider(provider);
-    m_widget->setSource(friendsQuery(m_provider, m_ownId));
+    m_friendListWidget->setProvider(provider);
+    m_friendListWidget->setSource(friendsQuery(m_provider, m_ownId));
 }
 
 
 void FriendList::setOwnId(const QString& id)
 {
     m_ownId = id;
-    m_widget->setOwnId(id);
-    m_widget->setSource(friendsQuery(m_provider, m_ownId));
+    m_friendListWidget->setOwnId(id);
+    m_friendListWidget->setSource(friendsQuery(m_provider, m_ownId));
 }
 
 
