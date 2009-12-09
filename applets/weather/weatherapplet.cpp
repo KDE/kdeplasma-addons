@@ -609,7 +609,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         // Convert the wind format for nonstandard types
         QStandardItem *dataGust = new QStandardItem();
         KUnitConversion::Value v(data["Wind Gust"].toDouble(), data["Wind Gust Unit"].toInt());
-        v = v.convertTo(visibilityUnit());
+        v = v.convertTo(speedUnit());
         dataGust->setText(i18nc("winds exceeding wind speed briefly", "Wind Gust: %1 %2", clampValue(v.number(), 1), v.unit()->symbol()));
         m_detailsModel->appendRow(dataGust);
     }
