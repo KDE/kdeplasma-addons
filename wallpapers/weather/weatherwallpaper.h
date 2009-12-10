@@ -49,14 +49,14 @@ public:
     QWidget * createConfigurationInterface(QWidget * parent);
     void paint(QPainter * painter, const QRectF & exposedRect);
     void updateScreenshot(QPersistentModelIndex index);
-    
+
 signals:
     void settingsChanged(bool changed = true);
-    
+
 public slots:
     void showAdvancedDialog();
     void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
-    void getWeather(void);
+    void connectWeatherSource(void);
     void save(KConfigGroup & config);
 
 protected slots:
@@ -82,7 +82,7 @@ protected:
 
 private slots:
     void loadImage();
-    
+
 private:
     WeatherConfig* m_configWidget;
     WeatherLocation* m_weatherLocation;
@@ -92,6 +92,7 @@ private:
     QStringList m_usersWallpapers;
 
     QString m_source; // Current source
+    QString m_condition; // Current condition
 
     int m_weatherUpdateTime;
 

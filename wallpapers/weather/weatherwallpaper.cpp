@@ -72,38 +72,34 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_usersWallpapers = config.readEntry("userswallpapers", QStringList());
     m_resizeMethod = (ResizeMethod)config.readEntry("wallpaperposition", (int)ScaledResize);
 
-    if (!isInitialized()) {
-        // TODO - Find a better way to retrieve weather than by looking at the icon name...
-        // Map each wallpaper to a weather condition
-        m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
-        m_weatherMap["weather-clear"] = m_dir + "Fields_of_Peace";
-        m_weatherMap["weather-few-clouds"] = m_dir + "Evening";
-        m_weatherMap["weather-clouds"] = m_dir + "Colorado_Farm";
-        m_weatherMap["weather-many-clouds"] = m_dir + "Beach_Reflecting_Clouds";
-        m_weatherMap["weather-showers"] = m_dir + "There_is_Rain_on_the_Table";
-        m_weatherMap["weather-showers-scattered"] = m_dir + "There_is_Rain_on_the_Table";
-        m_weatherMap["weather-rain"] = m_dir + "There_is_Rain_on_the_Table";
-        m_weatherMap["weather-mist"] = m_dir + "Fresh_Morning";
-        m_weatherMap["weather-storm"] = m_dir + "Lightning";
-        m_weatherMap["weather-hail"] = m_dir + "Hail";
-        m_weatherMap["weather-snow"] = m_dir + "Winter_Track";
-        m_weatherMap["weather-snow-scattered"] = m_dir + "Winter_Track";
-        m_weatherMap["weather-few-clouds-night"] = m_dir + "JK_Bridge_at_Night";
-        m_weatherMap["weather-clouds-night"] = m_dir + "JK_Bridge_at_Night";
-        m_weatherMap["weather-clear-night"] = m_dir + "At_Night";
-        m_weatherMap["weather-freezing-rain"] = m_dir + "Icy_Tree";
-        m_weatherMap["weather-snow-rain"] = m_dir + "Icy_Tree";
-    }
+    m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
+    m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace");
+    m_weatherMap["weather-few-clouds"] = config.readEntry("partlyCloudyPaper", m_dir + "Evening");
+    m_weatherMap["weather-clouds"] = config.readEntry("cloudyPaper", m_dir + "Colorado_Farm");
+    m_weatherMap["weather-many-clouds"] = config.readEntry("manyCloudsPaper", m_dir + "Beach_Reflecting_Clouds");
+    m_weatherMap["weather-showers"] = config.readEntry("showersPaper", m_dir + "There_is_Rain_on_the_Table");
+    m_weatherMap["weather-showers-scattered"] = config.readEntry("showersScatteredPaper", m_dir + "There_is_Rain_on_the_Table");
+    m_weatherMap["weather-rain"] = config.readEntry("rainPaper", m_dir + "There_is_Rain_on_the_Table");
+    m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning");
+    m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning");
+    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Hail");
+    m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track");
+    m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track");
+    m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night");
+    m_weatherMap["weather-clouds-night"] = config.readEntry("cloudyNightPaper", m_dir + "JK_Bridge_at_Night");
+    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "At_Night");
+    m_weatherMap["weather-freezing-rain"] = config.readEntry("freezingRainPaper", m_dir + "Icy_Tree");
+    m_weatherMap["weather-snow-rain"] = config.readEntry("snowRainPaper", m_dir + "Icy_Tree");
 
     calculateGeometry();
-    getWeather();
+    connectWeatherSource();
 }
 
 void WeatherWallpaper::save(KConfigGroup & config)
 {
     QString oldSource(m_source);
     int oldInterval = m_weatherUpdateTime;
-    
+
     if (m_configWidget) {
         m_source = m_configWidget->source();
         m_weatherUpdateTime = m_configWidget->updateInterval();
@@ -113,7 +109,7 @@ void WeatherWallpaper::save(KConfigGroup & config)
             weatherEngine->disconnectSource(oldSource, this);
         }
         if (!m_source.isEmpty()) {
-            getWeather();
+            connectWeatherSource();
         }
     }
     config.writeEntry("source", m_source);
@@ -121,6 +117,24 @@ void WeatherWallpaper::save(KConfigGroup & config)
     config.writeEntry("wallpaperposition", (int)m_resizeMethod);
     config.writeEntry("wallpapercolor", m_color);
     config.writeEntry("userswallpapers", m_usersWallpapers);
+
+    config.writeEntry("clearPaper", m_weatherMap["weather-clear"]);
+    config.writeEntry("partlyCloudyPaper", m_weatherMap["weather-few-clouds"]);
+    config.writeEntry("cloudyPaper", m_weatherMap["weather-clouds"]);
+    config.writeEntry("manyCloudsPaper", m_weatherMap["weather-many-clouds"]);
+    config.writeEntry("showersPaper", m_weatherMap["weather-showers"]);
+    config.writeEntry("showersScatteredPaper", m_weatherMap["weather-showers-scattered"]);
+    config.writeEntry("rainPaper", m_weatherMap["weather-rain"]);
+    config.writeEntry("mistPaper", m_weatherMap["weather-mist"]);
+    config.writeEntry("stormPaper", m_weatherMap["weather-storm"]);
+    config.writeEntry("hailPaper", m_weatherMap["weather-hail"]);
+    config.writeEntry("snowPaper", m_weatherMap["weather-snow"]);
+    config.writeEntry("snowScatteredPaper", m_weatherMap["weather-snow-scattered"]);
+    config.writeEntry("partlyCloudyNightPaper", m_weatherMap["weather-few-clouds-night"]);
+    config.writeEntry("cloudyNightPaper", m_weatherMap["weather-clouds-night"]);
+    config.writeEntry("clearNightPaper", m_weatherMap["weather-clear-night"]);
+    config.writeEntry("freezingRainPaper", m_weatherMap["weather-freezing-rain"]);
+    config.writeEntry("snowRainPaper", m_weatherMap["weather-snow-rain"]);
 }
 
 void WeatherWallpaper::configWidgetDestroyed()
@@ -151,7 +165,7 @@ QWidget * WeatherWallpaper::createConfigurationInterface(QWidget * parent)
     connect(m_buttonAdvanced, SIGNAL(clicked()), this, SLOT(showAdvancedDialog()));
     connect(this, SIGNAL(settingsChanged(bool)), parent, SLOT(settingsChanged(bool)));
     connect(m_configWidget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
-        
+
     return m_configWidget;
 }
 
@@ -198,6 +212,9 @@ void WeatherWallpaper::paint(QPainter * painter, const QRectF & exposedRect)
 
 void WeatherWallpaper::loadImage()
 {
+    m_wallpaper = m_weatherMap[m_condition];
+    kDebug() << "Current wallpaper is: " << m_weatherMap[m_condition];
+
     if (m_wallpaper.isEmpty()) {
         m_wallpaper = Plasma::Theme::defaultTheme()->wallpaperPath();
     }
@@ -323,7 +340,7 @@ void WeatherWallpaper::pictureChanged(int index)
         m_weatherMap[conditionIndexValue] = b->path();
     }
 
-    getWeather();
+    loadImage();
 }
 
 void WeatherWallpaper::conditionChanged(int index)
@@ -332,8 +349,7 @@ void WeatherWallpaper::conditionChanged(int index)
         return;
     }
     QString conditionIndexValue = m_advancedUi.m_conditionCombo->itemData(index).toString();
-    QString paper = m_weatherMap.value(conditionIndexValue);
-    kDebug() << "paper currently is:" << paper;
+    QString paper = m_weatherMap[conditionIndexValue];
 
     // Set the wallpaper view to the current wallpaper for the condition we just changed to
     // FIXME In theory this is supposed to set the model index to that of the default wallpaper for the chosen
@@ -463,20 +479,18 @@ void WeatherWallpaper::renderWallpaper(const QString& image)
     render(m_img, m_size, m_resizeMethod, m_color);
 }
 
-void WeatherWallpaper::getWeather()
+void WeatherWallpaper::connectWeatherSource()
 {
     if (m_source.isEmpty()) {
-        if (m_weatherLocation) {
-            // already tried to get default location
-            // A location probably hasn't been configured, so call loadImage
-            loadImage();
-        } else {
-            m_weatherLocation = new WeatherLocation(this);
-            connect(m_weatherLocation, SIGNAL(finished(const QString&)),
-                    this, SLOT(locationReady(const QString&)));
-            m_weatherLocation->setDataEngines(dataEngine("geolocation"), weatherEngine);
-            m_weatherLocation->getDefault();
-        }
+        // A location probably hasn't been configured, so call loadImage to load
+        // the default wallpaper in case we can't guess later
+        loadImage();
+        // We can see if we can be nice and figure out where the user is
+        m_weatherLocation = new WeatherLocation(this);
+        connect(m_weatherLocation, SIGNAL(finished(const QString&)),
+                this, SLOT(locationReady(const QString&)));
+        m_weatherLocation->setDataEngines(dataEngine("geolocation"), weatherEngine);
+        m_weatherLocation->getDefault();
     } else {
         weatherEngine->connectSource(m_source, this, m_weatherUpdateTime * 60 * 1000);
     }
@@ -489,7 +503,7 @@ void WeatherWallpaper::locationReady(const QString &source)
         if (m_configWidget) {
             m_configWidget->setSource(m_source);
         }
-        getWeather();
+        connectWeatherSource();
     }
 }
 
@@ -538,18 +552,15 @@ void WeatherWallpaper::updateFadedImage(qreal frame)
 
 void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
-    Q_UNUSED(source)
+    Q_UNUSED(source);
     if (data.isEmpty()) {
         return;
     }
 
     kDebug() << "Current weather is:" << data["Condition Icon"].toString();
-    QString paper = m_weatherMap.value(data["Condition Icon"].toString());
-    kDebug() << "Paper is:" << paper;
-    if (!paper.isEmpty()) {
-        m_wallpaper = paper;
-        loadImage();
-    }
+    m_condition = data["Condition Icon"].toString();
+
+    loadImage();
 }
 
 #include "weatherwallpaper.moc"
