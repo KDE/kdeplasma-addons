@@ -166,7 +166,7 @@ void GridLayout::showDropZone(const QPointF &pos)
 
     Position itemPos = itemPosition(m_spacer);
 
-    if ((itemPos.row != -1) && (itemPos.column != -1)) {
+    if (itemPos.isValid()) {
         removeItemAt(itemPos, true);
         m_spacer->hide();
     }
@@ -219,13 +219,13 @@ QGraphicsLayoutItem *GridLayout::removeItemAt(int row, int column, bool fillLayo
         if (item == m_layout->itemAt(i)) {
             m_layout->removeAt(i);
             if (fillLayout) {
-                if (m_layout->columnCount() > column) {
+                if (m_layout->columnCount() > column + 1) {
                     QGraphicsLayoutItem *movingWidget = removeItemAt(row, column + 1);
                     if (movingWidget) {
                         m_layout->addItem(movingWidget, row, column);
                     }
                 }
-                if (m_layout->columnCount() > row) {
+                if (m_layout->columnCount() > row + 1) {
                     QGraphicsLayoutItem *movingWidget = removeItemAt(row + 1, column);
                     if (movingWidget) {
                         m_layout->addItem(movingWidget, row, column);
