@@ -56,7 +56,7 @@ class GridLayout : public AbstractGroup
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
         void overlayStartsMoving();
         void overlayEndsMoving();
-        void overlayMoving(qreal x, qreal y);
+        void overlayMoving(qreal x, qreal y, const QPointF &mousePos);
         void onAppletMovedOutside(qreal x, qreal y);
 
     private:

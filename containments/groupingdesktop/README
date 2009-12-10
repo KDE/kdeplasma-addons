@@ -46,7 +46,6 @@ panel containment.
 ======================================================================
 
 TODO: (with more or less a decreasing priority)
--finish the movings of the applets inside the grid group;
 -hard bug and crash hunting;
 -develop the panel containment;
 -create a nice interface to add groups;

@@ -109,7 +109,7 @@ void AbstractGroupPrivate::callLayoutApplet()
 
     currApplet->installEventFilter(q);
     q->connect(currApplet, SIGNAL(appletDestroyed(Plasma::Applet *)),
-            q, SLOT(appletDestroyed(Plasma::Applet *)));
+               q, SLOT(appletDestroyed(Plasma::Applet *)));
 
     emit q->appletAddedInGroup(currApplet, q);
 
@@ -148,13 +148,13 @@ AbstractGroup::~AbstractGroup()
     delete d;
 }
 
-void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
+void AbstractGroup::setImmutability(ImmutabilityType immutability)
 {
     setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
     d->immutability = immutability;
 }
 
-Plasma::ImmutabilityType AbstractGroup::immutability() const
+ImmutabilityType AbstractGroup::immutability() const
 {
     return d->immutability;
 }

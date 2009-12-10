@@ -47,7 +47,7 @@ class AppletOverlay : public QGraphicsWidget
 
     signals:
         void startMoving();
-        void movedOf(qreal x, qreal y);
+        void movedOf(qreal x, qreal y, const QPointF &pos);
         void endMoving();
         void appletMovedOutside(qreal x, qreal y);
 

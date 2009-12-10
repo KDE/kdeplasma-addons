@@ -339,7 +339,7 @@ void GridLayout::overlayStartsMoving()
     }
 }
 
-void GridLayout::overlayMoving(qreal x, qreal y)
+void GridLayout::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
 {
     Plasma::Applet *applet = m_overlay->applet();
     QPointF newPos(applet->pos() + QPointF(x, y));
@@ -372,22 +372,7 @@ void GridLayout::overlayMoving(qreal x, qreal y)
         }
     }
 
-    foreach (Plasma::Applet *applet, applets()) {
-        if (applet->geometry().contains(newRect.center())) {
-            Position appletPos = itemPosition(applet);
-            Position spacerPos = itemPosition(m_spacer);
-
-            if (appletPos.isValid() && spacerPos.isValid()) {
-                removeItemAt(appletPos, false);
-                removeItemAt(spacerPos, false);
-
-                m_layout->addItem(applet, spacerPos.row, spacerPos.column);
-                m_layout->addItem(m_spacer, appletPos.row, appletPos.column);
-
-                emit configNeedsSaving();
-            }
-        }
-    }
+    showDropZone(mapFromItem(m_overlay, mousePos));
 }
 
 void GridLayout::overlayEndsMoving()
@@ -441,8 +426,8 @@ bool GridLayout::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
                     m_overlay = new AppletOverlay(applet);
                     connect(m_overlay, SIGNAL(startMoving()), this, SLOT(overlayStartsMoving()));
                     connect(m_overlay, SIGNAL(endMoving()), this, SLOT(overlayEndsMoving()));
-                    connect(m_overlay, SIGNAL(movedOf(qreal, qreal)),
-                            this, SLOT(overlayMoving(qreal, qreal)));
+                    connect(m_overlay, SIGNAL(movedOf(qreal, qreal, const QPointF &)),
+                            this, SLOT(overlayMoving(qreal, qreal, const QPointF &)));
                     connect(m_overlay, SIGNAL(appletMovedOutside(qreal, qreal)),
                             this, SLOT(onAppletMovedOutside(qreal, qreal)));
                 }

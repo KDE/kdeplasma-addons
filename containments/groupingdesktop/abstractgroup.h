@@ -28,6 +28,8 @@ class KConfigGroup;
 class GroupingContainment;
 class AbstractGroupPrivate;
 
+typedef Plasma::ImmutabilityType ImmutabilityType;
+
 /**
  * @class AbstractGroup
  *
@@ -142,7 +144,7 @@ class AbstractGroup : public QGraphicsWidget
          * Returns the type of immutability of this group
          * @see setImmutability
          **/
-        Plasma::ImmutabilityType immutability() const;
+        ImmutabilityType immutability() const;
 
         /**
          * Returns a pointer to the containment this group is displayed in.
@@ -167,7 +169,7 @@ class AbstractGroup : public QGraphicsWidget
          * @see immutability
          * @see Plasma::ImmutabilityType
          */
-        void setImmutability(Plasma::ImmutabilityType immutability);
+        void setImmutability(ImmutabilityType immutability);
 
     protected:
         /**

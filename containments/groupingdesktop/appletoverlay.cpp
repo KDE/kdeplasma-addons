@@ -89,7 +89,7 @@ void AppletOverlay::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
-        emit movedOf(p.x(), p.y());
+        emit movedOf(p.x(), p.y(), event->pos());
     }
 }
 
@@ -97,7 +97,7 @@ void AppletOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
-        emit movedOf(p.x(), p.y());
+        emit movedOf(p.x(), p.y(), event->pos());
     }
 }
 
@@ -111,6 +111,9 @@ void AppletOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void AppletOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     KIcon icon("transform-move");
 
     int iconSize = qMin(qMin((int)geometry().height(), int(m_applet->size().width())), 64);
