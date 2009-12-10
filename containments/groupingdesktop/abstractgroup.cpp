@@ -148,13 +148,13 @@ AbstractGroup::~AbstractGroup()
     delete d;
 }
 
-void AbstractGroup::setImmutability(ImmutabilityType immutability)
+void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
 {
     setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
     d->immutability = immutability;
 }
 
-ImmutabilityType AbstractGroup::immutability() const
+Plasma::ImmutabilityType AbstractGroup::immutability() const
 {
     return d->immutability;
 }

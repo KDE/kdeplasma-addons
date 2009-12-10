@@ -32,8 +32,6 @@
 #include "gridlayout.h"
 #include "floatinggroup.h"
 
-typedef Plasma::ImmutabilityType ImmutabilityType;
-
 class GroupingContainmentPrivate
 {
     public:
@@ -191,8 +189,8 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     kDebug()<<"adding group"<<group->id();
     group->setImmutability(immutability());
     group->d->containment = this;
-    connect(this, SIGNAL(immutabilityChanged(ImmutabilityType)),
-            group, SLOT(setImmutability(ImmutabilityType)));
+    connect(this, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
+            group, SLOT(setImmutability(Plasma::ImmutabilityType)));
     connect(group, SIGNAL(groupDestroyed(AbstractGroup *)),
             this, SLOT(onGroupRemoved(AbstractGroup *)));
     connect(group, SIGNAL(configNeedSaving()), this, SIGNAL(configNeedsSaving()));
