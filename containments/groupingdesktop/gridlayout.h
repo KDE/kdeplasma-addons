@@ -65,6 +65,7 @@ class GridLayout : public AbstractGroup
             Vertical = 1
         };
 
+        void showDropZone(const QPointF &pos, bool showAlwaysSomething);
         QGraphicsLayoutItem *removeItemAt(int row, int column, bool fillLayout = true);
         QGraphicsLayoutItem *removeItemAt(const Position &position, bool fillLayout = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);

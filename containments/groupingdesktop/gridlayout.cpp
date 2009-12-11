@@ -63,6 +63,7 @@ class Spacer : public QGraphicsWidget
 
         GridLayout *parent;
         bool m_visible;
+        GridLayout::Orientation lastOrientation;
 
     protected:
         void dropEvent(QGraphicsSceneDragDropEvent *event)
@@ -145,6 +146,11 @@ QString GridLayout::pluginName() const
 
 void GridLayout::showDropZone(const QPointF &pos)
 {
+    showDropZone(pos, false);
+}
+
+void GridLayout::showDropZone(const QPointF &pos, bool showAlwaysSomething)
+{
     if (pos.isNull() && m_spacer->isVisible()) {
         m_spacer->hide();
         removeItem(m_spacer);
@@ -164,7 +170,6 @@ void GridLayout::showDropZone(const QPointF &pos)
     }
 
     Position itemPos = itemPosition(m_spacer);
-
     if (itemPos.isValid()) {
         removeItemAt(itemPos, true);
         m_spacer->hide();
@@ -189,12 +194,19 @@ void GridLayout::showDropZone(const QPointF &pos)
 
     int n;
     if ((n = nearestBoundair(x, columnWidth)) != -1) {
+        if (itemPosition(m_spacer).isValid()) {
+            removeItem(m_spacer);
+        }
+        m_spacer->lastOrientation = Horizontal;
         insertItemAt(m_spacer, j, n, Horizontal);
-        return;
-    }
-    if ((n = nearestBoundair(y, rowHeight)) != -1) {
+    } else if ((n = nearestBoundair(y, rowHeight)) != -1) {
+        if (itemPosition(m_spacer).isValid()) {
+            removeItem(m_spacer);
+        }
+        m_spacer->lastOrientation = Vertical;
         insertItemAt(m_spacer, n, i, Vertical);
-        return;
+    } else if (showAlwaysSomething) {
+        insertItemAt(m_spacer, itemPos.row, itemPos.column, m_spacer->lastOrientation);
     }
 }
 
@@ -307,18 +319,18 @@ void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 
 int GridLayout::nearestBoundair(qreal pos, qreal size) const
 {
-    const int gap = size / 3.0;
+    const qreal gap = size / 3.0;
 
     int x = pos / size;
     qreal n = pos / size;
     while (n > 1) { //equivalent of "pos % size" that won't work
         --n;        //because they are qreal
     }
-//     kDebug()<<pos<<size<<gap<<x<<n;
+
     if (n * size > size / 2.0) {
         ++x;
     }
-// kDebug()<<x;
+
     const qreal y = x * size;
     if (((pos < y) && (pos > y - gap)) || ((pos > y) && (pos < y + gap))) {
         return x;
@@ -380,7 +392,7 @@ void GridLayout::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
         }
     }
 
-    showDropZone(mapFromItem(m_overlay, mousePos));
+    showDropZone(mapFromItem(m_overlay, mousePos), true);
 }
 
 void GridLayout::overlayEndsMoving()
