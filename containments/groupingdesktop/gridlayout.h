@@ -66,7 +66,7 @@ class GridLayout : public AbstractGroup
         };
 
         QGraphicsLayoutItem *removeItemAt(int row, int column, bool fillLayout = true);
-        QGraphicsLayoutItem *removeItemAt(Position position, bool fillLayout = true);
+        QGraphicsLayoutItem *removeItemAt(const Position &position, bool fillLayout = true);
         void removeItem(QGraphicsWidget *item, bool fillLayout = true);
         void insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation = Horizontal);
         Position itemPosition(QGraphicsItem *item) const;

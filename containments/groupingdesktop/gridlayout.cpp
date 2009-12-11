@@ -145,19 +145,18 @@ QString GridLayout::pluginName() const
 
 void GridLayout::showDropZone(const QPointF &pos)
 {
-    if (pos.isNull()) {
+    if (pos.isNull() && m_spacer->isVisible()) {
         m_spacer->hide();
         removeItem(m_spacer);
 
         return;
     }
 
-    const qreal x = pos.x();
-    const qreal y = pos.y();
-
     if (!contentsRect().contains(pos)) {
         m_spacer->hide();
         removeItem(m_spacer);
+
+        return;
     }
 
     if ((m_spacer->isVisible()) && (m_spacer->geometry().contains(pos))) {
@@ -182,6 +181,9 @@ void GridLayout::showDropZone(const QPointF &pos)
     const qreal rowHeight = boundingRect().height() / rows;
     const qreal columnWidth = boundingRect().width() / columns;
 
+    const qreal x = pos.x();
+    const qreal y = pos.y();
+
     const int i = x / columnWidth;
     const int j = y / rowHeight;
 
@@ -196,7 +198,7 @@ void GridLayout::showDropZone(const QPointF &pos)
     }
 }
 
-QGraphicsLayoutItem* GridLayout::removeItemAt(Position position, bool fillLayout)
+QGraphicsLayoutItem *GridLayout::removeItemAt(const Position &position, bool fillLayout)
 {
     return removeItemAt(position.row, position.column, fillLayout);
 }
@@ -215,26 +217,31 @@ void GridLayout::removeItem(QGraphicsWidget *item, bool fillLayout)
 QGraphicsLayoutItem *GridLayout::removeItemAt(int row, int column, bool fillLayout)
 {
     QGraphicsLayoutItem *item = m_layout->itemAt(row, column);
+    int index = -1;
     for (int i = 0; i < m_layout->count(); ++i) {
         if (item == m_layout->itemAt(i)) {
-            m_layout->removeAt(i);
-            if (fillLayout) {
-                if (m_layout->columnCount() > column + 1) {
-                    QGraphicsLayoutItem *movingWidget = removeItemAt(row, column + 1);
-                    if (movingWidget) {
-                        m_layout->addItem(movingWidget, row, column);
-                    }
-                }
-                if (m_layout->columnCount() > row + 1) {
-                    QGraphicsLayoutItem *movingWidget = removeItemAt(row + 1, column);
-                    if (movingWidget) {
-                        m_layout->addItem(movingWidget, row, column);
-                    }
+            index = i;
+            break;
+        }
+    }
+
+    if (index > -1) {
+        m_layout->removeAt(index);
+        if (fillLayout) {
+            if (m_layout->columnCount() > column + 1) {
+                QGraphicsLayoutItem *movingWidget = removeItemAt(row, column + 1);
+                if (movingWidget) {
+                    m_layout->addItem(movingWidget, row, column);
                 }
             }
-
-            return item;
+            if (m_layout->rowCount() > row + 1) {
+                QGraphicsLayoutItem *movingWidget = removeItemAt(row + 1, column);
+                if (movingWidget) {
+                    m_layout->addItem(movingWidget, row, column);
+                }
+            }
         }
+        return item;
     }
 
     return 0;
@@ -300,17 +307,18 @@ void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 
 int GridLayout::nearestBoundair(qreal pos, qreal size) const
 {
-    const int gap = size / 3;
+    const int gap = size / 3.0;
 
     int x = pos / size;
     qreal n = pos / size;
-    while (n > 1) { //equivalent of "point % size" that won't work
-        --n;         //because they are qreal
+    while (n > 1) { //equivalent of "pos % size" that won't work
+        --n;        //because they are qreal
     }
-    if (n * size > size / 2) {
+//     kDebug()<<pos<<size<<gap<<x<<n;
+    if (n * size > size / 2.0) {
         ++x;
     }
-
+// kDebug()<<x;
     const qreal y = x * size;
     if (((pos < y) && (pos > y - gap)) || ((pos > y) && (pos < y + gap))) {
         return x;
