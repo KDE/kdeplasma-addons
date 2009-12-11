@@ -427,8 +427,9 @@ Bubble::createConfigurationInterface(KConfigDialog* dlg)
         sensorItem->setData(sensor);
         sensorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         m_sensorModel->appendRow(sensorItem);
-        if (sensor == m_sensor)
+        if (sensor == m_sensor) {
             currentSensor = m_sensorModel->indexFromItem(sensorItem);
+        }
     }
 
     QSortFilterProxyModel *proxy = new QSortFilterProxyModel(m_sensorModel);
@@ -436,7 +437,7 @@ Bubble::createConfigurationInterface(KConfigDialog* dlg)
     ui.sensorView->setModel(proxy);
 
     if (currentSensor.isValid()) {
-        ui.sensorView->selectionModel()->select(currentSensor, QItemSelectionModel::ClearAndSelect);
+        ui.sensorView->selectionModel()->setCurrentIndex(currentSensor, QItemSelectionModel::ClearAndSelect);
     }
 
     ui.searchBox->setProxy(proxy);
