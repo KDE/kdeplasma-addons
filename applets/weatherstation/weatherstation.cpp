@@ -148,8 +148,9 @@ void WeatherStation::dataUpdated(const QString& source, const Plasma::DataEngine
     WeatherPopupApplet::dataUpdated(source, data);
 
     if (data.contains("Place")) {
-        Value temp = value(data["Temperature"].toString(), data["Temperature Unit"].toInt());
-        setTemperature(temp);
+        QString v = data["Temperature"].toString();
+        Value temp = value(v, data["Temperature Unit"].toInt());
+        setTemperature(temp, (v.indexOf('.') > -1));
         setPressure(conditionIcon(),
                     value(data["Pressure"].toString(), data["Pressure Unit"].toInt()),
                     data["Pressure Tendency"].toString());
@@ -261,13 +262,16 @@ void WeatherStation::setPressure(const QString& condition, const Value& pressure
     }
 }
 
-void WeatherStation::setTemperature(const Value& temperature)
+void WeatherStation::setTemperature(const Value& temperature, bool hasDigit)
 {
+    hasDigit = hasDigit || (temperatureUnit() != temperature.unit());
     Value v = temperature.convertTo(temperatureUnit());
     m_lcd->setLabel("temperature-unit-label", v.unit()->symbol());
     m_lcdPanel->setLabel("temperature-unit-label", v.unit()->symbol());
-    m_lcd->setNumber("temperature", fitValue(v , 4));
-    m_lcdPanel->setNumber("temperature", fitValue(v , 3));
+    QString tmp = hasDigit ? fitValue(v , 4) : QString::number(v.number());
+    m_lcd->setNumber("temperature", tmp);
+    tmp = hasDigit ? fitValue(v , 3) : QString::number(v.number());
+    m_lcdPanel->setNumber("temperature", tmp);
     setLCDIcon();
 }
 

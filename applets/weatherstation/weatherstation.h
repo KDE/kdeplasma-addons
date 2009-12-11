@@ -51,7 +51,7 @@ class WeatherStation : public WeatherPopupApplet
         void setWind(const KUnitConversion::Value& speed, const QString& direction);
         void setPressure(const QString& condition, const KUnitConversion::Value& pressure,
                          const QString& tendency);
-        void setTemperature(const KUnitConversion::Value& temperature);
+        void setTemperature(const KUnitConversion::Value& temperature, bool hasDigit);
         void setHumidity(QString humidity);
 
         QString fitValue(const KUnitConversion::Value& value, int digits);
