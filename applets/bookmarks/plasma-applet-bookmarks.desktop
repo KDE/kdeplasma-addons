@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Bookmarks
+Comment=Quick Access to the Bookmarks
+Type=Service
+Icon=bookmarks
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_bookmarks
+X-KDE-PluginInfo-Author=Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Email=kossebau@kde.org
+X-KDE-PluginInfo-Name=bookmarks
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=File System
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
