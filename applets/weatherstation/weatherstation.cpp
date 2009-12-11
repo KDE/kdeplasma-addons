@@ -175,10 +175,11 @@ QString WeatherStation::fitValue(const Value& value, int digits)
         return "-";
     }
     double v = value.number();
-    int mainDigits = (int)floor(log(fabs(v))) + 1;
+    int mainDigits = (int)floor(log10(fabs(v))) + 1;
     int precision = 0;
 
-    if (mainDigits < 3 && mainDigits + (v < 0)?1:0 + 1 < digits) {
+    mainDigits += ((v < 0) ? 1 : 0); // minus sign
+    if (mainDigits < digits) {
         precision = 1;
     }
     return QString::number(v, 'f', precision);
