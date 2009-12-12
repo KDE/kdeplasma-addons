@@ -547,8 +547,8 @@ void Frame::initSlideShow()
     m_mySlideShow->setUpdateInterval(0);
 
     if (m_slideShow) {
-        m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
         m_mySlideShow->setRandom(m_random);
+        m_mySlideShow->setDirs(m_slideShowPaths, m_recursiveSlideShow);
         m_mySlideShow->setUpdateInterval(m_slideshowTime * 1000);
     } else if (m_potd) {
         Plasma::DataEngine *engine = dataEngine("potd");

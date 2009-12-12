@@ -51,6 +51,7 @@ public:
 
 public Q_SLOTS:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+    void firstPicture();
     void nextPicture();
     void previousPicture();
 
@@ -63,8 +64,7 @@ private Q_SLOTS:
 
 private:
     void addImage(const QString &imagePath);
-    void addDir(const QString &path);
-    void addRecursiveDir(const QString &path);
+    void addDir(const QString &path, bool recursive);
     KUrl url(int offset = 1);
 
     QStringList m_picturePaths;
@@ -73,7 +73,6 @@ private:
     bool m_useRandom;
 
     QList<int> m_indexList;
-    int m_randomInt;
     KUrl m_currentUrl;
     QTimer *m_timer;
     QPixmap m_image;

@@ -20,6 +20,7 @@
 #include "slideshow.h"
 
 #include <QDir>
+#include <QDirIterator>
 #include <QTimer>
 
 #include <KDebug>
@@ -33,7 +34,6 @@ SlideShow::SlideShow(QObject *parent)
     m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
     m_slideNumber = 0;
     m_useRandom = false;
-    m_randomInt = 0;
 
     m_picture = new Picture(this);
     connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
@@ -53,15 +53,28 @@ void SlideShow::setRandom(bool useRandom)
 
 void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 {
+    QDateTime setDirStart = QDateTime::currentDateTime();
+
     m_image = QPixmap();
     m_picturePaths.clear();
     foreach(const QString &path, slideShowPath) {
-        if (recursive) {
-            addRecursiveDir(KUrl(path).path());
-        } else {
-            addDir(KUrl(path).path());
-        }
+        addDir(KUrl(path).path(), recursive);
     }
+    
+    KRandomSequence randomSequence;
+    m_indexList.clear();
+
+    for (int j = 0; j < m_picturePaths.count(); j++) {
+        m_indexList.append(j);
+    }
+    randomSequence.randomize(m_indexList);
+
+    // select 1st picture
+    firstPicture();
+    
+    // TODO do something meaningful if m_picturePaths.empty()
+    
+    kDebug() << "Loaded " << m_picturePaths.size() << " pictures in " << setDirStart.secsTo(QDateTime::currentDateTime()) << " seconds";
 }
 
 void SlideShow::setImage(const QString &imagePath)
@@ -74,44 +87,23 @@ void SlideShow::setImage(const QString &imagePath)
 
 void SlideShow::addImage(const QString &imagePath)
 {
-    if (!m_picturePaths.contains(imagePath)) {
-        m_picturePaths.append(imagePath);
-    }
+    m_picturePaths.append(imagePath);
 }
 
-void SlideShow::addDir(const QString &path)
+void SlideShow::addDir(const QString &path, bool recursive)
 {
-    QDir dir(path);
-    dir.setNameFilters(m_filters);
+    QDirIterator dirIterator(path, m_filters, QDir::Files, (recursive ? QDirIterator::Subdirectories : QDirIterator::NoIteratorFlags));
+    QStringList dirPicturePaths;
 
-    if (dir.entryList().isEmpty())  {
-        //TODO remove the path from the list
-        return;
+    while (dirIterator.hasNext()) {
+        dirIterator.next();
+        dirPicturePaths.append(dirIterator.filePath());
     }
-
-    foreach(const QString &imageFile, dir.entryList(QDir::Files)) {
-        addImage(path + '/' + imageFile);
-    }
-
-    KRandomSequence randomSequence;
-    m_indexList.clear();
-
-    //get the number of sounds then shuffle it: each number will be taken once then the sequence will come back
-    for (int j = 0; j < m_picturePaths.count(); j++) {
-        m_indexList.append(j);
-    }
-
-    randomSequence.randomize(m_indexList);
-}
-
-void SlideShow::addRecursiveDir(const QString &path)
-{
-    addDir(path);
-    QDir dir(path);
-
-    foreach(const QString &subDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-        addRecursiveDir(path + '/' + subDir);
-    }
+    
+    // the pictures have to be sorted before adding them to the list,
+    // because the QDirIterator sorts them in a different way than QDir::entryList
+    dirPicturePaths.sort();
+    m_picturePaths.append(dirPicturePaths);
 }
 
 QPixmap SlideShow::image() const 
@@ -128,18 +120,6 @@ QPixmap SlideShow::image() const
 KUrl SlideShow::url(int offset)
 {
     if (!m_picturePaths.isEmpty()) {
-        if (m_useRandom) {
-            m_randomInt += offset;
-
-            if (m_randomInt <= -1) {
-                m_randomInt = m_picturePaths.count() - 1;
-
-            } else if (m_randomInt >= m_picturePaths.count()) {
-                m_randomInt = 0;
-            }
-
-            return KUrl(m_picturePaths.at(m_indexList.at(m_randomInt)));
-        }
 
         m_slideNumber += offset;
 
@@ -150,10 +130,22 @@ KUrl SlideShow::url(int offset)
             m_slideNumber = 0;
         }
 
-        return KUrl(m_picturePaths.at(m_slideNumber));
+        if (m_useRandom) {
+            return KUrl(m_picturePaths.at(m_indexList.at(m_slideNumber)));
+        } else {
+            return KUrl(m_picturePaths.at(m_slideNumber));
+        }
     }
 
     return KUrl();
+}
+
+void SlideShow::firstPicture()
+{
+    m_slideNumber = 0;
+    m_currentUrl = url(0);
+    m_image = image();
+    emit pictureUpdated();
 }
 
 void SlideShow::nextPicture()
