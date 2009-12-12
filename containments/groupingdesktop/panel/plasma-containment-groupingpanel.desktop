@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=GroupingPanel
+Icon=
+Type=Service
+X-KDE-ServiceTypes=Plasma/Containment
+X-Plasma-ContainmentCategories=panel
+
+X-KDE-Library=plasma_containment_groupingpanel
+X-KDE-PluginInfo-Author=
+X-KDE-PluginInfo-Email=giuliocamuffo@gmail.com
+X-KDE-PluginInfo-Name=groupingpanel
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Containments
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -20,7 +20,7 @@
 #ifndef GROUPINGDESKTOP_H
 #define GROUPINGDESKTOP_H
 
-#include "groupingcontainment.h"
+#include "../lib/groupingcontainment.h"
 
 class GroupingDesktop: public GroupingContainment
 {

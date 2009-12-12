@@ -8,12 +8,12 @@ Name[uk]=GroupingDesktop
 Name[x-test]=xxGroupingDesktopxx
 Icon=
 Type=Service
-X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
+X-KDE-ServiceTypes=Plasma/Containment
 X-Plasma-ContainmentCategories=desktop
 
 X-KDE-Library=plasma_containment_groupingdesktop
 X-KDE-PluginInfo-Author=
-X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-Email=giuliocamuffo@gmail.com
 X-KDE-PluginInfo-Name=groupingdesktop
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=

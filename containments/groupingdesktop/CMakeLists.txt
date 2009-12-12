@@ -5,34 +5,36 @@ include(KDE4Defaults)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(${CMAKE_SOURCE_DIR}
-		    ${CMAKE_BINARY_DIR}
-		    ${KDE4_INCLUDES}
-		    ${NEPOMUK_INCLUDES})
+                    ${CMAKE_BINARY_DIR}
+                    ${KDE4_INCLUDES}
+                    ${NEPOMUK_INCLUDES}
+                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal)
 
-# set(abstractgroup_SRCS
-#           abstractgroup.cpp)
+set(groupingcontainment_SRCS
+        lib/groupingcontainment.cpp
+        lib/grouphandle.cpp
+        lib/abstractgroup.cpp
+        lib/floatinggroup.cpp
+        lib/gridgroup.cpp
+        lib/appletoverlay.cpp)
 
-set(groupingdesktop_SRCS appletoverlay.cpp floatinggroup.cpp groupingcontainment.cpp grouphandle.cpp
-          groupingdesktop.cpp
-          abstractgroup.cpp
-        gridlayout.cpp
-            )
+set(groupingdesktop_SRCS desktop/groupingdesktop.cpp)
 
-# set(gridlayout_SRCS
-#         gridlayout.cpp)
+set(groupingpanel_SRCS panel/groupingpanel.cpp)
 
-# kde4_add_library(plasma_abstractgroup SHARED ${abstractgroup_SRCS})
+kde4_add_library(plasma_groupingcontainment SHARED ${groupingcontainment_SRCS})
 kde4_add_plugin(plasma_containment_groupingdesktop ${groupingdesktop_SRCS})
-# kde4_add_plugin(plasma_group_gridlayout ${gridlayout_SRCS})
-# target_link_libraries(plasma_abstractgroup ${KDE4_PLASMA_LIBS})
-target_link_libraries(plasma_containment_groupingdesktop ${KDE4_PLASMA_LIBS} )
-# target_link_libraries(plasma_group_gridlayout ${KDE4_PLASMA_LIBS} plasma_abstractgroup)
+kde4_add_plugin(plasma_containment_groupingpanel ${groupingpanel_SRCS})
 
-# set_target_properties(plasma_abstractgroup PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+target_link_libraries(plasma_groupingcontainment ${KDE4_PLASMA_LIBS})
+target_link_libraries(plasma_containment_groupingdesktop ${KDE4_PLASMA_LIBS} plasma_groupingcontainment)
+target_link_libraries(plasma_containment_groupingpanel ${KDE4_PLASMA_LIBS} plasma_groupingcontainment kephal)
 
-# install(TARGETS plasma_abstractgroup EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+set_target_properties(plasma_groupingcontainment PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+
+install(TARGETS plasma_groupingcontainment EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS plasma_containment_groupingdesktop DESTINATION ${PLUGIN_INSTALL_DIR})
-# install(TARGETS plasma_group_gridlayout DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-containment-groupingdesktop.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-# install(FILES plasma-group-gridlayout.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-# install(FILES plasma-group.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(TARGETS plasma_containment_groupingpanel DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install(FILES desktop/plasma-containment-groupingdesktop.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES panel/plasma-containment-groupingpanel.desktop DESTINATION ${SERVICES_INSTALL_DIR})

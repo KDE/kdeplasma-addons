@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GRIDLAYOUT_H
-#define GRIDLAYOUT_H
+#ifndef GRIDGROUP_H
+#define GRIDGROUP_H
 
 #include "abstractgroup.h"
 
@@ -35,12 +35,12 @@ class Position;
 class Spacer;
 class AppletOverlay;
 
-class GridLayout : public AbstractGroup
+class GridGroup : public AbstractGroup
 {
     Q_OBJECT
     public:
-        GridLayout(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
-        ~GridLayout();
+        GridGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+        ~GridGroup();
 
         void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
         void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
@@ -82,4 +82,4 @@ class GridLayout : public AbstractGroup
         friend class Spacer;
 };
 
-#endif // GRIDLAYOUT_H
+#endif // GRIDGROUP_H

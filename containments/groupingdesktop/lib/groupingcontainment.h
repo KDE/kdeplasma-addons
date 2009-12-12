@@ -25,9 +25,7 @@
 class AbstractGroup;
 class GroupingContainmentPrivate;
 
-#include <plasma/widgets/busywidget.h>
-
-class GroupingContainment: public Plasma::Containment
+class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
 {
     Q_OBJECT
     public:
@@ -43,9 +41,10 @@ class GroupingContainment: public Plasma::Containment
         void addGroup(AbstractGroup *group, const QPointF &pos);
 
     protected:
-        bool eventFilter(QObject *obj, QEvent *event);
-        bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
-//         void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+        virtual bool eventFilter(QObject *obj, QEvent *event);
+        virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+        virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     signals:
         void groupAdded(AbstractGroup *group, const QPointF &pos);
@@ -56,6 +55,7 @@ class GroupingContainment: public Plasma::Containment
         Q_PRIVATE_SLOT(d, void onGroupRemoved(AbstractGroup *group))
         Q_PRIVATE_SLOT(d, void layoutApplet(Plasma::Applet *applet, const QPointF &pos))
         Q_PRIVATE_SLOT(d, void newGroupClicked(QAction *action))
+        Q_PRIVATE_SLOT(d, void deleteGroup())
 
         GroupingContainmentPrivate *const d;
 

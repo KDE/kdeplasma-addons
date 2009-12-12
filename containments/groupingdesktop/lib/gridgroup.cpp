@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "gridlayout.h"
+#include "gridgroup.h"
 
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsGridLayout>
@@ -28,7 +28,7 @@
 #include <Plasma/IconWidget>
 #include <Plasma/PaintUtils>
 
-#include "groupingcontainment.h"
+#include "../lib/groupingcontainment.h"
 #include "appletoverlay.h"
 
 class Position {
@@ -61,9 +61,9 @@ class Spacer : public QGraphicsWidget
         ~Spacer()
         {}
 
-        GridLayout *parent;
+        GridGroup *parent;
         bool m_visible;
-        GridLayout::Orientation lastOrientation;
+        GridGroup::Orientation lastOrientation;
 
     protected:
         void dropEvent(QGraphicsSceneDragDropEvent *event)
@@ -91,7 +91,7 @@ class Spacer : public QGraphicsWidget
         }
 };
 
-GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
+GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
           : AbstractGroup(parent, wFlags),
             m_layout(new QGraphicsGridLayout(this)),
             m_spacer(new Spacer(this)),
@@ -113,19 +113,19 @@ GridLayout::GridLayout(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             this, SLOT(onAppletAdded(Plasma::Applet *, AbstractGroup *)));
 }
 
-GridLayout::~GridLayout()
+GridGroup::~GridGroup()
 {
 
 }
 
-void GridLayout::onAppletAdded(Plasma::Applet* applet, AbstractGroup* group)
+void GridGroup::onAppletAdded(Plasma::Applet* applet, AbstractGroup* group)
 {
     Q_UNUSED(group)
 
     applet->installSceneEventFilter(this);
 }
 
-void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
+void GridGroup::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
 {
     Q_UNUSED(group)
 
@@ -139,17 +139,17 @@ void GridLayout::onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group)
     }
 }
 
-QString GridLayout::pluginName() const
+QString GridGroup::pluginName() const
 {
     return QString("grid");
 }
 
-void GridLayout::showDropZone(const QPointF &pos)
+void GridGroup::showDropZone(const QPointF &pos)
 {
     showDropZone(pos, false);
 }
 
-void GridLayout::showDropZone(const QPointF &pos, bool showAlwaysSomething)
+void GridGroup::showDropZone(const QPointF &pos, bool showAlwaysSomething)
 {
     if (pos.isNull() && m_spacer->isVisible()) {
         m_spacer->hide();
@@ -210,12 +210,12 @@ void GridLayout::showDropZone(const QPointF &pos, bool showAlwaysSomething)
     }
 }
 
-QGraphicsLayoutItem *GridLayout::removeItemAt(const Position &position, bool fillLayout)
+QGraphicsLayoutItem *GridGroup::removeItemAt(const Position &position, bool fillLayout)
 {
     return removeItemAt(position.row, position.column, fillLayout);
 }
 
-void GridLayout::removeItem(QGraphicsWidget *item, bool fillLayout)
+void GridGroup::removeItem(QGraphicsWidget *item, bool fillLayout)
 {
     Position pos = itemPosition(item);
     if (!pos.isValid()) {
@@ -226,7 +226,7 @@ void GridLayout::removeItem(QGraphicsWidget *item, bool fillLayout)
     removeItemAt(pos, fillLayout);
 }
 
-QGraphicsLayoutItem *GridLayout::removeItemAt(int row, int column, bool fillLayout)
+QGraphicsLayoutItem *GridGroup::removeItemAt(int row, int column, bool fillLayout)
 {
     QGraphicsLayoutItem *item = m_layout->itemAt(row, column);
     int index = -1;
@@ -259,7 +259,7 @@ QGraphicsLayoutItem *GridLayout::removeItemAt(int row, int column, bool fillLayo
     return 0;
 }
 
-void GridLayout::insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation)
+void GridGroup::insertItemAt(QGraphicsWidget *item, int row, int column, Orientation orientation)
 {
     if (!item) {
         return;
@@ -291,7 +291,7 @@ void GridLayout::insertItemAt(QGraphicsWidget *item, int row, int column, Orient
     m_layout->activate();
 }
 
-Position GridLayout::itemPosition(QGraphicsItem *item) const
+Position GridGroup::itemPosition(QGraphicsItem *item) const
 {
     for (int i = 0; i < m_layout->rowCount(); ++i) {
         for (int j = 0; j < m_layout->columnCount(); ++j) {
@@ -305,7 +305,7 @@ Position GridLayout::itemPosition(QGraphicsItem *item) const
     return Position(-1, -1);
 }
 
-void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
+void GridGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
 {
     Q_UNUSED(pos)
 
@@ -317,7 +317,7 @@ void GridLayout::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
     }
 }
 
-int GridLayout::nearestBoundair(qreal pos, qreal size) const
+int GridGroup::nearestBoundair(qreal pos, qreal size) const
 {
     const qreal gap = size / 3.0;
 
@@ -339,7 +339,7 @@ int GridLayout::nearestBoundair(qreal pos, qreal size) const
     return -1;
 }
 
-void GridLayout::overlayStartsMoving()
+void GridGroup::overlayStartsMoving()
 {
     Position pos = itemPosition(m_overlay->applet());
 
@@ -359,7 +359,7 @@ void GridLayout::overlayStartsMoving()
     }
 }
 
-void GridLayout::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
+void GridGroup::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
 {
     Plasma::Applet *applet = m_overlay->applet();
     QPointF newPos(applet->pos() + QPointF(x, y));
@@ -395,7 +395,7 @@ void GridLayout::overlayMoving(qreal x, qreal y, const QPointF &mousePos)
     showDropZone(mapFromItem(m_overlay, mousePos), true);
 }
 
-void GridLayout::overlayEndsMoving()
+void GridGroup::overlayEndsMoving()
 {
     Position pos = itemPosition(m_spacer);
     if (pos.isValid()) {
@@ -408,20 +408,20 @@ void GridLayout::overlayEndsMoving()
     m_spacer->hide();
 }
 
-void GridLayout::onAppletMovedOutside(qreal x, qreal y)
+void GridGroup::onAppletMovedOutside(qreal x, qreal y)
 {
     m_overlay->applet()->moveBy(x, y);
     removeApplet(m_overlay->applet());
 }
 
-void GridLayout::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
+void GridGroup::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
 {
     Position pos = itemPosition(applet);
     group.writeEntry("Row", pos.row);
     group.writeEntry("Column", pos.column);
 }
 
-void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
+void GridGroup::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
 {
     int row = group.readEntry("Row", -1);
     int column = group.readEntry("Column", -1);
@@ -429,7 +429,7 @@ void GridLayout::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGr
     m_layout->addItem(applet, row, column);
 }
 
-bool GridLayout::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
+bool GridGroup::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
     if (immutability() != Plasma::Mutable) {
         return AbstractGroup::sceneEventFilter(watched, event);
@@ -470,4 +470,4 @@ bool GridLayout::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     return AbstractGroup::sceneEventFilter(watched, event);
 }
 
-#include "gridlayout.moc"
+#include "gridgroup.moc"

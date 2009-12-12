@@ -29,7 +29,7 @@
 #include "abstractgroup.h"
 #include "abstractgroup_p.h"
 #include "grouphandle.h"
-#include "gridlayout.h"
+#include "gridgroup.h"
 #include "floatinggroup.h"
 
 class GroupingContainmentPrivate
@@ -49,10 +49,13 @@ class GroupingContainmentPrivate
             newGroupMenu->addAction(newGridGroup);
             newGroupMenu->addAction(newFloatingGroup);
 
+            deleteGroupAction = new QAction(i18n("Remove this group"), q);
+
             separator = new QAction(q);
             separator->setSeparator(true);
 
             q->connect(newGroupMenu, SIGNAL(triggered(QAction *)), q, SLOT(newGroupClicked(QAction *)));
+            q->connect(deleteGroupAction, SIGNAL(triggered()), q, SLOT(deleteGroup()));
         }
 
         ~GroupingContainmentPrivate()
@@ -63,7 +66,7 @@ class GroupingContainmentPrivate
             kDebug()<<plugin;
             AbstractGroup *group = 0;
             if (plugin == "grid") {
-                group = new GridLayout(q);
+                group = new GridGroup(q);
             } else if (plugin == "floating") {
                 group = new FloatingGroup(q);
             }
@@ -141,6 +144,19 @@ class GroupingContainmentPrivate
             createGroup(action->data().toString(), lastClick, 0);
         }
 
+        void deleteGroup()
+        {
+            int id = deleteGroupAction->data().toInt();
+
+            foreach (AbstractGroup *group, groups) {
+                if (group->id() == id) {
+                    group->destroy();
+
+                    return;
+                }
+            }
+        }
+
         GroupingContainment *q;
         QList<AbstractGroup *> groups;
         AbstractGroup *interestingGroup;
@@ -150,6 +166,7 @@ class GroupingContainmentPrivate
         QAction *newGridGroup;
         QAction *newFloatingGroup;
         QAction *separator;
+        QAction *deleteGroupAction;
         QPointF lastClick;
 };
 
@@ -206,7 +223,7 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
 QList<QAction *> GroupingContainment::contextualActions()
 {
     QList<QAction *> list;
-    list << d->newGroupAction << d->separator;
+    list << d->newGroupAction << d->separator << d->deleteGroupAction;
     return list;
 }
 
@@ -276,6 +293,17 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
                 break;
 
+            case QEvent::GraphicsSceneContextMenu:
+                kDebug()<<"JKN";
+                d->deleteGroupAction->setVisible(true);
+                d->deleteGroupAction->setData(group->id());
+
+//                 contextMenuEvent(static_cast<QGraphicsSceneContextMenuEvent *>(event));
+                scene()->sendEvent(this, static_cast<QGraphicsSceneContextMenuEvent *>(event));
+
+//                 return false;
+                break;
+
             default:
                 break;
             }
@@ -286,7 +314,7 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
 //                 d->removeGroup->setVisible(true);
 //                 d->removeGroup->setData(group->id());
 //                 d->lastClick = static_cast<QGraphicsSceneContextMenuEvent *>(event)->pos();
-//
+// 
 //                 contextMenuEvent(static_cast<QGraphicsSceneContextMenuEvent *>(event));
 //             }
 //         }
@@ -394,12 +422,47 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
     }
 }
 
-// void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
-// {
-//     d->lastClick = event->pos();
-//     kDebug()<<d->lastClick;
+void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+        event->ignore();
+        
+    QGraphicsItem *item = scene()->itemAt(event->scenePos());
+    if (event->button() == Qt::RightButton && event->modifiers() == Qt::NoModifier && item != this) {
+        //fake a contextmenuevent in case something in the containment plugin is expecting it
+        //we do this because the click is sent around as a mousepress before a contextmenu event,
+        //folderview only handles it as a contextmenu event, but if folderview isn't handling it
+        //then we need to handle it as a mousepress *not* a contextmenuevent.
+        //unfortunately this makes is possible for badly-behaved containments to eat rightclicks
+        kDebug()<<"KJJK";
+        QGraphicsSceneContextMenuEvent contextEvent(QEvent::GraphicsSceneContextMenu);
+        contextEvent.setReason(QGraphicsSceneContextMenuEvent::Mouse);
+        contextEvent.setPos(event->pos());
+        contextEvent.setScenePos(event->scenePos());
+        contextEvent.setScreenPos(event->screenPos());
+        contextEvent.setModifiers(event->modifiers());
+        contextEvent.setWidget(event->widget());
 
-//     Plasma::Containment::contextMenuEvent(event);
-// }
+        scene()->sendEvent(item, &contextEvent);
+        if (contextEvent.isAccepted()) {
+            event->accept();
+            return;
+        }
+    }
+}
+
+void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(scene()->itemAt(event->scenePos()));
+
+    if (group) {
+        
+    kDebug()<<"OOO";        
+    }
+    
+    event->ignore();
+
+
+    Plasma::Containment::contextMenuEvent(event);
+}
 
 #include "groupingcontainment.moc"
