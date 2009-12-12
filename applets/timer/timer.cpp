@@ -361,7 +361,7 @@ void Timer::saveTimer()
     KConfigGroup cg = config();
     cg.writeEntry("running", m_running ? m_seconds : 0);
     cg.writeEntry("startedAt", QDateTime::currentDateTime());
-    cg.writeEntry("seconds", m_startingSeconds);
+    cg.writeEntry("seconds", 0);
 
     emit configNeedsSaving();
 }
