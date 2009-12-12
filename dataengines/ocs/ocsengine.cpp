@@ -45,7 +45,9 @@ OcsEngine::OcsEngine(QObject* parent, const QVariantList& args)
       m_serviceUpdates(new QSignalMapper)
 {
     Q_UNUSED(args);
-    setMinimumPollingInterval(5000);
+    setName("ocs");
+
+    setMinimumPollingInterval(1000);
 
     connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)),
             this, SLOT(networkStatusChanged(Solid::Networking::Status)));
@@ -400,7 +402,7 @@ bool OcsEngine::sourceRequestEvent(const QString& source)
     QString request = parsedSource.first;
     QHash<QString, QString> arguments = parsedSource.second;
 
-    qDebug() << "Source request:" << request << "- arguments:" << arguments;
+    kDebug() << "Source request:" << request << "- arguments:" << arguments;
 
     if (request.isEmpty()) {
         return false;
@@ -408,9 +410,8 @@ bool OcsEngine::sourceRequestEvent(const QString& source)
 
     if (!arguments.contains("provider")) {
         if (request == "Providers") {
-            foreach (const QSharedPointer<Provider>& provider, m_providers) {
-                setProviderData("Providers", *provider.data());
-            }
+            kDebug() << "Providers requested";
+            updateProviderData();
             return true;
         } else if (request == "Pixmap") {
             if (!arguments.contains("url")) {
@@ -860,29 +861,44 @@ void OcsEngine::slotMessageListResult(BaseJob* j)
 
 void OcsEngine::providerAdded(const Attica::Provider& provider)
 {
+    
     qDebug() << "providerAdded" << provider.baseUrl();
 
     QString baseUrl = provider.baseUrl().toString();
     if (!m_providers.contains(baseUrl)) {
         m_providers.insert(baseUrl, QSharedPointer<Provider>(new Provider(provider)));
 
-        setProviderData("Providers", provider);
-
-        // Work off all source requests for this provider
-        foreach(const QString& query, m_requestCache.value(baseUrl)) {
-            updateSourceEvent(query);
-        }
+        updateProviderData();
     }
 }
 
 
-void OcsEngine::setProviderData(const QString& source, const Attica::Provider& provider) {
-    Plasma::DataEngine::Data providerData;
-
-    providerData.insert("BaseUrl", provider.baseUrl());
-    providerData.insert("Name", provider.name());
-
-    setData(source, "Provider-" + provider.baseUrl().toString(), providerData);
+void OcsEngine::updateProviderData()
+{
+    if (m_providers.size() == 0) {
+        // even if no providers are there yet, in order to let the applet connect to us, set dummy data
+        setData("Providers", "loading", Plasma::DataEngine::Data());
+    } else {
+        removeData("Providers", "loading");
+    }
+    
+    foreach(QSharedPointer<Attica::Provider> provider, m_providers) {
+        Plasma::DataEngine::Data providerData;
+        
+        providerData.insert("BaseUrl", provider->baseUrl());
+        providerData.insert("Name", provider->name());
+        
+        if (provider->hasCredentials()) {
+            QString user;
+            QString pass;
+            
+            provider->loadCredentials(user, pass);
+            kDebug() << "credentials found" << user;
+            providerData.insert("UserName", user);
+        }
+        removeData("Providers", provider->baseUrl().toString());
+        setData("Providers", provider->baseUrl().toString(), providerData);
+    }    
 }
 
 

@@ -15,20 +15,13 @@ class ServiceJobWrapper : public Plasma::ServiceJob
     public:
         ServiceJobWrapper(Attica::BaseJob* job, const QString& destination, const QString& operation, const QMap<QString, QVariant>& parameters, QObject* parent = 0);
         void start();
-
+            
     private Q_SLOTS:
-        void finished(Attica::BaseJob* job);
+        void atticaJobFinished(Attica::BaseJob* job);
 
     private:
         Attica::BaseJob* m_job;
 };
 
-class CredentialsJob : public Plasma::ServiceJob
-{
-    Q_OBJECT
-public:
-    CredentialsJob(const QString &destination, const QString &operation, const QMap< QString, QVariant > &parameters, QObject *parent=0);
-    void start();
-};
 
 #endif

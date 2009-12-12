@@ -68,9 +68,12 @@ Plasma::ServiceJob* PersonService::createJob(const QString& operation, QMap<QStr
         connect(job, SIGNAL(finished(KJob*)), m_serviceUpdates.data(), SLOT(map()));
         return job;
     } else if (operation == "setCredentials") {
+        kDebug() << "save credentials! " << parameters.value("username").toString() << parameters.value("password").toString();
         m_provider->saveCredentials(parameters.value("username").toString(), parameters.value("password").toString());
+        ServiceJobWrapper* job = new ServiceJobWrapper(
+            m_provider->checkLogin(parameters.value("username").toString(), parameters.value("password").toString())
+            , m_id, operation, parameters);        
         kDebug() << "Set credentials: " << parameters.value("username") << parameters.value("password");
-        CredentialsJob* job = new CredentialsJob(m_id, operation, parameters);
         return job;
     } else {
         return new Plasma::ServiceJob("", operation, parameters);

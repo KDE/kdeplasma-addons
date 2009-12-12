@@ -85,7 +85,7 @@ private:
     void setEventData(const QString& source, const Attica::Event& event);
     void setFolderData(const QString& source, const Attica::Folder& folder);
     void setMessageData(const QString& source, const Attica::Message& message);
-    void setProviderData(const QString& source, const Attica::Provider& provider);
+    void updateProviderData();
     void setStatusData(const QString& source, Attica::BaseJob* job);
     void addToPersonCache(const QString& source, const Attica::Person& person, bool replaceCache = false);
     void addToMessageCache(const QString& source, const Attica::Message& message, bool replaceCache = false);
