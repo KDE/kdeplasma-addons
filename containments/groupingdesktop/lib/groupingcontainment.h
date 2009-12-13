@@ -52,7 +52,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
     private:
         Q_PRIVATE_SLOT(d, void handleDisappeared(GroupHandle *handle))
         Q_PRIVATE_SLOT(d, void onGroupRemoved(AbstractGroup *group))
-        Q_PRIVATE_SLOT(d, void layoutApplet(Plasma::Applet *applet, const QPointF &pos))
+        Q_PRIVATE_SLOT(d, void manageApplet(Plasma::Applet *applet, const QPointF &pos))
         Q_PRIVATE_SLOT(d, void newGroupClicked(QAction *action))
         Q_PRIVATE_SLOT(d, void deleteGroup())
 

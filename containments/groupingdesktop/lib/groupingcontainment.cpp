@@ -123,8 +123,9 @@ class GroupingContainmentPrivate
             emit q->groupRemoved(group);
         }
 
-        void layoutApplet(Plasma::Applet *applet, const QPointF &pos)
+        void manageApplet(Plasma::Applet *applet, const QPointF &pos)
         {
+            kDebug()<<"JNK";
             foreach (AbstractGroup *group, groups) {
                 if (group) {
                     QRectF rect = group->contentsRect();
@@ -191,7 +192,7 @@ void GroupingContainment::init()
     Plasma::Containment::init();
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet *, QPointF)),
-            this, SLOT(layoutApplet(Plasma::Applet *, QPointF)));
+            this, SLOT(manageApplet(Plasma::Applet *, QPointF)));
 
 //     addGroup("grid", QPointF(100,100), 0);
 }

@@ -100,7 +100,7 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
     resize(200,200);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
-    m_layout->setContentsMargins(10, 10, 10, 10);
+//     m_layout->setContentsMargins(10, 10, 10, 10);
     setLayout(m_layout);
 
     m_spacer->parent = this;

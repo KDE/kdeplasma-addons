@@ -138,7 +138,7 @@ AbstractGroup::AbstractGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
 {
     setAcceptHoverEvents(true);
     setAcceptDrops(true);
-    setContentsMargins(10, 10, 10, 10);
+//     setContentsMargins(0, 10, 10, 10);
 }
 
 AbstractGroup::~AbstractGroup()
@@ -346,7 +346,12 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    d->background->paintFrame(painter);
+    if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
+                         (d->containment->formFactor() != Plasma::Horizontal)) {
+        d->background->paintFrame(painter);
+    } else {
+        //TODO draw a halo, something
+    }
 }
 
 #include "abstractgroup.moc"
