@@ -111,6 +111,11 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
     menu->popup( popupPosition(menu->sizeHint()) );
 }
 
+void BookmarksPlasmoid::toggleMenu()
+{
+    toggleMenu( true );
+}
+
 BookmarksPlasmoid::~BookmarksPlasmoid()
 {
     delete mBookmarkMenu;

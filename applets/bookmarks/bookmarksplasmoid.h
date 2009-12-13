@@ -50,6 +50,7 @@ class BookmarksPlasmoid : public Applet
 
   protected Q_SLOTS:
     void toggleMenu( bool toggle );
+    void toggleMenu();
 
   private:
     IconWidget* mIcon;
