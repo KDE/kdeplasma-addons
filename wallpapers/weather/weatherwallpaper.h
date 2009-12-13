@@ -108,8 +108,8 @@ private:
     QPixmap m_pixmap;
     QPixmap m_oldPixmap;
     QPixmap m_oldFadedPixmap;
-    BackgroundListModel *m_model;
     KFileDialog *m_fileDialog;
+    BackgroundListModel *m_model;
     QSize m_size;
     QString m_img;
 };

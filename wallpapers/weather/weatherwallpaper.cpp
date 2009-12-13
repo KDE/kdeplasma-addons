@@ -28,7 +28,7 @@
 // KDE includes
 #include <KDialog>
 #include <KFileDialog>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KNS3/DownloadDialog>
 #include <KPushButton>
 #include <KStandardDirs>
@@ -50,9 +50,9 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     : Plasma::Wallpaper(parent, args)
     , m_configWidget(0)
     , m_weatherLocation(0)
-    , m_model(0)
     , m_advancedDialog(0)
     , m_fileDialog(0)
+    , m_model(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
