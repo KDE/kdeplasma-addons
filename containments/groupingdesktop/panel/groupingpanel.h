@@ -21,7 +21,7 @@
 #ifndef PLASMA_PANEL_H
 #define PLASMA_PANEL_H
 
-#include <../lib/groupingcontainment.h>
+#include "../lib/groupingcontainment.h"
 
 class QAction;
 class QTimer;
