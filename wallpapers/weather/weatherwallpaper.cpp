@@ -27,7 +27,6 @@
 #include <KDialog>
 #include <KFileDialog>
 #include <KLocale>
-// #include <KDebug>
 #include <KPushButton>
 #include <KStandardDirs>
 #include <knewstuff3/downloaddialog.h>
@@ -73,23 +72,23 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_resizeMethod = (ResizeMethod)config.readEntry("wallpaperposition", (int)ScaledResize);
 
     m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
-    m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace");
-    m_weatherMap["weather-few-clouds"] = config.readEntry("partlyCloudyPaper", m_dir + "Evening");
-    m_weatherMap["weather-clouds"] = config.readEntry("cloudyPaper", m_dir + "Colorado_Farm");
-    m_weatherMap["weather-many-clouds"] = config.readEntry("manyCloudsPaper", m_dir + "Beach_Reflecting_Clouds");
-    m_weatherMap["weather-showers"] = config.readEntry("showersPaper", m_dir + "There_is_Rain_on_the_Table");
-    m_weatherMap["weather-showers-scattered"] = config.readEntry("showersScatteredPaper", m_dir + "There_is_Rain_on_the_Table");
-    m_weatherMap["weather-rain"] = config.readEntry("rainPaper", m_dir + "There_is_Rain_on_the_Table");
-    m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning");
-    m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning");
-    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Hail");
-    m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track");
-    m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track");
-    m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night");
-    m_weatherMap["weather-clouds-night"] = config.readEntry("cloudyNightPaper", m_dir + "JK_Bridge_at_Night");
-    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "At_Night");
-    m_weatherMap["weather-freezing-rain"] = config.readEntry("freezingRainPaper", m_dir + "Icy_Tree");
-    m_weatherMap["weather-snow-rain"] = config.readEntry("snowRainPaper", m_dir + "Icy_Tree");
+    m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace/");
+    m_weatherMap["weather-few-clouds"] = config.readEntry("partlyCloudyPaper", m_dir + "Evening/");
+    m_weatherMap["weather-clouds"] = config.readEntry("cloudyPaper", m_dir + "Colorado_Farm/");
+    m_weatherMap["weather-many-clouds"] = config.readEntry("manyCloudsPaper", m_dir + "Beach_Reflecting_Clouds/");
+    m_weatherMap["weather-showers"] = config.readEntry("showersPaper", m_dir + "There_is_Rain_on_the_Table/");
+    m_weatherMap["weather-showers-scattered"] = config.readEntry("showersScatteredPaper", m_dir + "There_is_Rain_on_the_Table/");
+    m_weatherMap["weather-rain"] = config.readEntry("rainPaper", m_dir + "There_is_Rain_on_the_Table/");
+    m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning/");
+    m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning/");
+    m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Hail/");
+    m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track/");
+    m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track/");
+    m_weatherMap["weather-few-clouds-night"] = config.readEntry("partlyCloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
+    m_weatherMap["weather-clouds-night"] = config.readEntry("cloudyNightPaper", m_dir + "JK_Bridge_at_Night/");
+    m_weatherMap["weather-clear-night"] = config.readEntry("clearNightPaper", m_dir + "At_Night/");
+    m_weatherMap["weather-freezing-rain"] = config.readEntry("freezingRainPaper", m_dir + "Icy_Tree/");
+    m_weatherMap["weather-snow-rain"] = config.readEntry("snowRainPaper", m_dir + "Icy_Tree/");
 
     calculateGeometry();
     connectWeatherSource();
@@ -269,6 +268,8 @@ void WeatherWallpaper::showAdvancedDialog()
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clouds-night"), i18n("Cloudy Night"), "weather-clouds-night");
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clear-night"), i18n("Clear Night"), "weather-clear-night");
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-snow-rain"), i18n("Mixed Precipitation"), "weather-snow-rain");
+        // Set to the current weather condition
+        m_advancedUi.m_conditionCombo->setCurrentIndex(m_advancedUi.m_conditionCombo->findData(m_condition));
 
 
         connect(m_advancedUi.m_wallpaperView, SIGNAL(currentIndexChanged(int)), this, SLOT(pictureChanged(int)));
@@ -349,11 +350,7 @@ void WeatherWallpaper::conditionChanged(int index)
     QString conditionIndexValue = m_advancedUi.m_conditionCombo->itemData(index).toString();
     QString paper = m_weatherMap[conditionIndexValue];
 
-    // Set the wallpaper view to the current wallpaper for the condition we just changed to
-    // FIXME In theory this is supposed to set the model index to that of the default wallpaper for the chosen
-    // condition, but it isn't :/ (Quite possibly an obvious mistake on my part)
     int modelIndex = m_model->indexOf(paper);
-//     kDebug() << "modelIndex is equal to:" << modelIndex;
     if (modelIndex != -1) {
         m_advancedUi.m_wallpaperView->setCurrentIndex(modelIndex);
         Plasma::Package *b = m_model->package(modelIndex);
