@@ -79,7 +79,9 @@ BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args 
 
 void BookmarksPlasmoid::init()
 {
-//     Plasma::ToolTipManager::self()->registerWidget( this );
+    Plasma::ToolTipManager::self()->registerWidget( this );
+    Plasma::ToolTipContent toolTipContent( i18n("Bookmarks"), i18n("Quick Access to the Bookmarks"), mIcon->icon() );
+    Plasma::ToolTipManager::self()->setContent( this, toolTipContent );
 }
 
 void BookmarksPlasmoid::toggleMenu( bool toggle )
