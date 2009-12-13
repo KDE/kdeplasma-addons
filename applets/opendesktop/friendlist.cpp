@@ -41,7 +41,7 @@ FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     friendScroll->setWidget(m_friendListWidget);
     
     layout->addItem(friendScroll);
-
+    
     setLayout(layout);
   
     connect(m_friendListWidget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));
@@ -52,6 +52,7 @@ FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
 
 void FriendList::setProvider(const QString& provider)
 {
+    kDebug() << "provider" << provider;
     m_provider = provider;
     m_invitations->setProvider(provider);
     m_friendListWidget->setProvider(provider);
@@ -61,6 +62,7 @@ void FriendList::setProvider(const QString& provider)
 
 void FriendList::setOwnId(const QString& id)
 {
+    kDebug() << id;
     m_ownId = id;
     m_friendListWidget->setOwnId(id);
     m_friendListWidget->setSource(friendsQuery(m_provider, m_ownId));

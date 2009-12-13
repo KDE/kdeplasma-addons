@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2009 by Sebastian Kügler <sebas@kde.org>                    *
+ *   Copyright 2009 by Frederik Gladhorn <gladhorn@kde.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,10 +20,7 @@
 
 //own
 #include "opendesktop.h"
-#include "contactlist.h"
-#include "utils.h"
 
-//Qt
 
 //KDE
 #include <KConfigDialog>
@@ -40,10 +38,12 @@
 #include <Plasma/ToolTipManager>
 
 #include "actionstack.h"
+#include "contactlist.h"
+#include "friendlist.h"
+#include "loginwidget.h"
 #include "messagecounter.h"
 #include "messagelist.h"
-#include "ownidwatcher.h"
-#include "friendlist.h"
+#include "utils.h"
 
 
 K_EXPORT_PLASMA_APPLET(opendesktop, OpenDesktop)
@@ -63,6 +63,7 @@ struct GeoLocation {
 OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
         m_tabs(0),
+        m_loginWidget(0),
         m_friendList(0),
         m_nearList(0),
         m_provider("https://api.opendesktop.org/v1/"),
@@ -77,9 +78,6 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
     setPopupIcon("system-users");
 
     m_geolocation = new GeoLocation;
-
-
-    (void)graphicsWidget();
 }
 
 OpenDesktop::~OpenDesktop()
@@ -89,6 +87,8 @@ OpenDesktop::~OpenDesktop()
 
 void OpenDesktop::init()
 {
+    (void)graphicsWidget();
+    
     kDebug() << "init: opendesktop";
     KConfigGroup cg = config();
     m_geolocation->city = cg.readEntry("geoCity", QString());
@@ -98,6 +98,7 @@ void OpenDesktop::init()
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
 
     connectGeolocation();
+
 }
 
 void OpenDesktop::connectGeolocation()
@@ -105,52 +106,29 @@ void OpenDesktop::connectGeolocation()
     dataEngine("geolocation")->connectSource("location", this);
 }
 
-
 QGraphicsWidget* OpenDesktop::graphicsWidget()
 {
     if (!m_tabs) {
         m_engine = dataEngine("ocs");
-
-        // Watch for our own id
-        m_ownIdWatcher = new OwnIdWatcher(m_engine, this);
-
-        // Watch for our own id
-        m_messageCounter = new MessageCounter(m_engine, this);
-
-        // Friends
-        m_friendList = new FriendList(m_engine);
-        m_friendStack = new ActionStack(m_engine, m_friendList);
+        m_engine->connectSource("Providers", this);
 
         // People near me
         m_nearList = new ContactList(m_engine);
         m_nearStack = new ActionStack(m_engine, m_nearList);
-
-        // Messages
-        m_messageList = new MessageList(m_engine);
-        m_messageList->setFolder("0");
+        
+        m_nearStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_nearStack->setPreferredSize(300, 400);
+        m_nearStack->setMinimumSize(150, 200);
 
         m_tabs = new Plasma::TabBar;
         m_tabs->setPreferredSize(300, 400);
         m_tabs->setMinimumSize(150, 200);
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        m_tabs->addTab(i18n("Friends"), m_friendStack);
+        
         m_tabs->addTab(i18n("Nearby"), m_nearStack);
-        m_tabs->addTab(i18n("Messages"), m_messageList);
 
-        connect(this, SIGNAL(providerChanged(QString)), m_friendList, SLOT(setProvider(QString)));
-        connect(this, SIGNAL(providerChanged(QString)), m_friendStack, SLOT(setProvider(QString)));
-        connect(this, SIGNAL(providerChanged(QString)), m_messageCounter, SLOT(setProvider(QString)));
-        connect(this, SIGNAL(providerChanged(QString)), m_messageList, SLOT(setProvider(QString)));
-        connect(this, SIGNAL(providerChanged(QString)), m_ownIdWatcher, SLOT(setProvider(QString)));
         connect(this, SIGNAL(providerChanged(QString)), m_nearList, SLOT(setProvider(QString)));
         connect(this, SIGNAL(providerChanged(QString)), m_nearStack, SLOT(setProvider(QString)));
-
-        connect(m_friendList, SIGNAL(addFriend(QString)), m_friendStack, SLOT(addFriend(QString)));
-        connect(m_friendList, SIGNAL(sendMessage(QString)), m_friendStack, SLOT(sendMessage(QString)));
-        connect(m_friendList, SIGNAL(showDetails(QString)), m_friendStack, SLOT(showDetails(QString)));
-
-        connect(m_friendStack, SIGNAL(endWork()), SLOT(endWork()));
-        connect(m_friendStack, SIGNAL(startWork()), SLOT(startWork()));
 
         connect(m_nearList, SIGNAL(addFriend(QString)), m_nearStack, SLOT(addFriend(QString)));
         connect(m_nearList, SIGNAL(sendMessage(QString)), m_nearStack, SLOT(sendMessage(QString)));
@@ -159,20 +137,89 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         connect(m_nearStack, SIGNAL(endWork()), SLOT(endWork()));
         connect(m_nearStack, SIGNAL(startWork()), SLOT(startWork()));
 
-        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_friendList, SLOT(setOwnId(QString)));
-        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_friendStack, SLOT(setOwnId(QString)));
-        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_nearList, SLOT(setOwnId(QString)));
-        connect(m_ownIdWatcher, SIGNAL(changed(QString)), m_nearStack, SLOT(setOwnId(QString)));
-
+        connect(this, SIGNAL(usernameChanged(QString)), m_nearList, SLOT(setOwnId(QString)));
+        connect(this, SIGNAL(usernameChanged(QString)), m_nearStack, SLOT(setOwnId(QString)));
+        
         emit providerChanged(m_provider);
     }
     return m_tabs;
 }
 
 
+void OpenDesktop::showLoginWidget(bool show)
+{
+    if (!show) {
+        if (m_loginWidget) {
+            m_tabs->removeTab(1);
+            delete m_loginWidget;
+            m_loginWidget = 0;
+        }
+        return;
+    }
+    
+    if (!m_loginWidget) {
+        m_loginWidget = new LoginWidget(m_engine);
+        m_tabs->addTab(i18n("Login"), m_loginWidget);
+        connect(m_loginWidget, SIGNAL(loginFinished()), this, SLOT(loginFinished()));
+        connect(this, SIGNAL(providerChanged(QString)), m_loginWidget, SLOT(setProvider(QString)));
+
+        m_loginWidget->setProvider(m_provider);
+    }
+}
+
+
+void OpenDesktop::loginFinished()
+{
+    showLoginWidget(false);
+    showFriendsWidget();
+    emit providerChanged(m_provider);
+    emit usernameChanged(m_user);
+}
+
+
+void OpenDesktop::showFriendsWidget()
+{    
+    // Messages
+    m_messageCounter = new MessageCounter(m_engine, this);
+    
+    // Friends
+    m_friendList = new FriendList(m_engine);
+    m_friendStack = new ActionStack(m_engine, m_friendList);
+    
+    m_messageList = new MessageList(m_engine);
+    m_messageList->setFolder("0");
+    
+    m_tabs->addTab(i18n("Friends"), m_friendStack);
+    m_tabs->addTab(i18n("Messages"), m_messageList);
+
+    connect(m_friendList, SIGNAL(addFriend(QString)), m_friendStack, SLOT(addFriend(QString)));
+    connect(m_friendList, SIGNAL(sendMessage(QString)), m_friendStack, SLOT(sendMessage(QString)));
+    connect(m_friendList, SIGNAL(showDetails(QString)), m_friendStack, SLOT(showDetails(QString)));
+    
+    connect(m_friendStack, SIGNAL(endWork()), SLOT(endWork()));
+    connect(m_friendStack, SIGNAL(startWork()), SLOT(startWork()));
+    
+    connect(this, SIGNAL(usernameChanged(QString)), m_friendList, SLOT(setOwnId(QString)));
+    connect(this, SIGNAL(usernameChanged(QString)), m_friendStack, SLOT(setOwnId(QString)));
+    
+    connect(this, SIGNAL(providerChanged(QString)), m_friendList, SLOT(setProvider(QString)));
+    connect(this, SIGNAL(providerChanged(QString)), m_friendStack, SLOT(setProvider(QString)));
+    connect(this, SIGNAL(providerChanged(QString)), m_messageList, SLOT(setProvider(QString)));
+    connect(this, SIGNAL(providerChanged(QString)), m_messageCounter, SLOT(setProvider(QString)));
+    
+    m_friendList->setOwnId(m_user);
+    m_friendStack->setOwnId(m_user);
+    m_friendList->setProvider(m_provider);
+    m_friendStack->setProvider(m_provider);
+    
+    m_messageList->setProvider(m_provider);
+    m_messageCounter->setProvider(m_provider);
+}
+
+
 void OpenDesktop::connectNearby(int latitude, int longitude)
 {
-    QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3")
+    QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3\\distance:2")
         .arg(m_provider)
         .arg(latitude)
         .arg(longitude);
@@ -198,7 +245,7 @@ void OpenDesktop::startWork()
 void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << "source updated:" << source << data;
-
+    
     m_tabs->setPreferredSize(-1, -1);
     emit sizeHintChanged(Qt::PreferredSize);
 
@@ -214,15 +261,28 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
                 m_geolocation->countryCode << m_geolocation->latitude << m_geolocation->longitude;
         connectNearby(m_geolocation->latitude, m_geolocation->longitude);
         saveGeoLocation();
-        return;
     } else if (source == m_credentialsSource) {
         m_user = data["UserName"].toString();
         m_password = data["Password"].toString();
         ui.username->setText(m_user);
         ui.password->setText(m_password);
-    }
+    } else if (source == "Providers") {
+        // The provider to use has been loaded... and it tells about a user name to use
+        if (data.contains(m_provider)) {
+            QHash<QString, QVariant> hashData = data[m_provider].toHash();
+            QString user = hashData.value("UserName").toString();
+            kDebug() << "USER" << user;
 
-    kDebug() << "Don't know what to do with" << source;
+            m_user = user;
+            if (user.isEmpty()) {
+                showLoginWidget(true);
+            } else {
+                showFriendsWidget();
+                emit usernameChanged(user);
+            }
+
+        }
+    }
 }
 
 

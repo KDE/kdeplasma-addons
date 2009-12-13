@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2009 by Sebastian Kügler <sebas@kde.org>                    *
+ *   Copyright 2009 by Frederik Gladhorn <gladhorn@kde.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -37,10 +38,10 @@ namespace Plasma
 class ActionStack;
 class ContactList;
 class FriendList;
+class LoginWidget;
 class KConfigDialog;
 class MessageCounter;
 class MessageList;
-class OwnIdWatcher;
 class QGraphicsLinearLayout;
 struct GeoLocation;
 
@@ -56,6 +57,7 @@ class OpenDesktop : public Plasma::PopupApplet
 
     Q_SIGNALS:
         void providerChanged(const QString& provider);
+        void usernameChanged(const QString& user);
 
     public Q_SLOTS:
         void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
@@ -70,7 +72,12 @@ class OpenDesktop : public Plasma::PopupApplet
         void publishGeoLocation();
         void registerAccount();
         void unreadMessageCountChanged(int count);
-
+        
+        void showLoginWidget(bool show);
+        void showFriendsWidget();
+        
+        void loginFinished();
+        
     private:
         void connectGeolocation();
         void connectNearby(const int latitude, const int longitude);
@@ -83,6 +90,9 @@ class OpenDesktop : public Plasma::PopupApplet
 
         QGraphicsLinearLayout* m_layout;
 
+        // Login tab
+        LoginWidget* m_loginWidget;
+        
         // Friends tab
         FriendList* m_friendList;
         ActionStack* m_friendStack;
@@ -99,8 +109,8 @@ class OpenDesktop : public Plasma::PopupApplet
         GeoLocation* m_geolocation;
         void saveGeoLocation();
         void syncGeoLocation();
-        OwnIdWatcher* m_ownIdWatcher;
         MessageCounter* m_messageCounter;
+        
         Plasma::DataEngine* m_engine;
         QString m_user;
         QString m_password;
