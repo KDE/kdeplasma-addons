@@ -27,7 +27,7 @@
 #include <KDialog>
 #include <KFileDialog>
 #include <KLocale>
-#include <KDebug>
+// #include <KDebug>
 #include <KPushButton>
 #include <KStandardDirs>
 #include <knewstuff3/downloaddialog.h>
@@ -213,7 +213,6 @@ void WeatherWallpaper::paint(QPainter * painter, const QRectF & exposedRect)
 void WeatherWallpaper::loadImage()
 {
     m_wallpaper = m_weatherMap[m_condition];
-    kDebug() << "Current wallpaper is: " << m_weatherMap[m_condition];
 
     if (m_wallpaper.isEmpty()) {
         m_wallpaper = Plasma::Theme::defaultTheme()->wallpaperPath();
@@ -354,7 +353,7 @@ void WeatherWallpaper::conditionChanged(int index)
     // FIXME In theory this is supposed to set the model index to that of the default wallpaper for the chosen
     // condition, but it isn't :/ (Quite possibly an obvious mistake on my part)
     int modelIndex = m_model->indexOf(paper);
-    kDebug() << "modelIndex is equal to:" << modelIndex;
+//     kDebug() << "modelIndex is equal to:" << modelIndex;
     if (modelIndex != -1) {
         m_advancedUi.m_wallpaperView->setCurrentIndex(modelIndex);
         Plasma::Package *b = m_model->package(modelIndex);
@@ -512,7 +511,6 @@ void WeatherWallpaper::updateBackground(const QImage &img)
     m_oldFadedPixmap = m_oldPixmap;
     m_pixmap = QPixmap::fromImage(img);
 
-    kDebug() << "!m_oldPixmap.isNull() is:" << !m_oldPixmap.isNull();
     if (!m_oldPixmap.isNull()) {
         Plasma::Animator::self()->customAnimation(254, 1000, Plasma::Animator::EaseInCurve, this, "updateFadedImage");
     } else {
@@ -556,7 +554,6 @@ void WeatherWallpaper::dataUpdated(const QString &source, const Plasma::DataEngi
         return;
     }
 
-    kDebug() << "Current weather is:" << data["Condition Icon"].toString();
     m_condition = data["Condition Icon"].toString();
 
     loadImage();
