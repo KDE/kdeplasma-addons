@@ -44,7 +44,6 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     signals:
         void groupAdded(AbstractGroup *group, const QPointF &pos);
