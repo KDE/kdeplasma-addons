@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[en_GB]=Bookmarks
+Name[pt]=Favoritos
+Name[sv]=Bokmärken
+Name[uk]=Закладки
+Name[x-test]=xxBookmarksxx
 Comment=Quick Access to the Bookmarks
+Comment[en_GB]=Quick Access to the Bookmarks
+Comment[pt]=Acesso Rápido aos Favoritos
+Comment[sv]=Snabbåtkomst till bokmärken
+Comment[uk]=Швидкий доступ до закладок
+Comment[x-test]=xxQuick Access to the Bookmarksxx
 Type=Service
 Icon=bookmarks
 ServiceTypes=Plasma/Applet
