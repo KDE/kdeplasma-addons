@@ -36,22 +36,21 @@ QString FloatingGroup::pluginName() const
     return QString("floating");
 }
 
-void FloatingGroup::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
+void FloatingGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
     QPointF pos = group.readEntry("Position", QPointF());
 
-    applet->setPos(pos);
+    child->setPos(pos);
 }
 
-void FloatingGroup::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
+void FloatingGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
-    group.writeEntry("Position", applet->pos());
+    group.writeEntry("Position", child->pos());
 }
 
-void FloatingGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
+void FloatingGroup::layoutChild(QGraphicsWidget *, const QPointF &)
 {
-    Q_UNUSED(applet)
-    Q_UNUSED(pos)
+
 }
 
 #include "floatinggroup.moc"

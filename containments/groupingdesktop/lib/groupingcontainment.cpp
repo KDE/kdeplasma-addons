@@ -354,7 +354,7 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
                 KConfigGroup appletConfig = applet->config().parent();
                 KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
                 groupConfig.writeEntry("Group", group->id());
-                group->saveAppletLayoutInfo(applet, groupConfig);
+                group->saveChildGroupInfo(applet, groupConfig);
             }
         }
     }
@@ -396,7 +396,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
                 }
                 if (group) {
                     group->addApplet(applet, false);
-                    group->restoreAppletLayoutInfo(applet, groupConfig);
+                    group->restoreChildGroupInfo(applet, groupConfig);
                 }
             }
         }

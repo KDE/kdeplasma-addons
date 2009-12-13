@@ -29,20 +29,22 @@ class AbstractGroupPrivate
         AbstractGroupPrivate(AbstractGroup *group);
         ~AbstractGroupPrivate();
         KConfigGroup *mainConfigGroup();
+        void addChild(QGraphicsWidget *child, bool layoutChild);
         void destroyGroup();
         void appletDestroyed(Plasma::Applet *applet);
-        void callLayoutApplet();
-        void repositionRemovedApplet();
+        void callLayoutChild();
+        void repositionRemovedChild();
 
         Plasma::Applet::List applets;
+        QList<AbstractGroup *> subGroups;
         AbstractGroup *q;
         bool destroying;
         GroupingContainment *containment;
         unsigned int id;
         Plasma::FrameSvg *background;
         Plasma::ImmutabilityType immutability;
-        Plasma::Applet *currApplet;
-        QPointF currAppletPos;
+        QGraphicsWidget *currChild;
+        QPointF currChildPos;
         AbstractGroup::GroupType groupType;
 
     private:

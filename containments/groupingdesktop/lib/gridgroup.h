@@ -42,14 +42,14 @@ class GridGroup : public AbstractGroup
         GridGroup(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
         ~GridGroup();
 
-        void saveAppletLayoutInfo(Plasma::Applet* applet, KConfigGroup group) const;
-        void restoreAppletLayoutInfo(Plasma::Applet* applet, const KConfigGroup& group);
+        void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
+        void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup& group);
         QString pluginName() const;
         virtual void showDropZone(const QPointF &pos);
 
     protected:
         bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
-        void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
+        void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);

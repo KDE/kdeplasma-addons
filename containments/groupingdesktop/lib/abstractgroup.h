@@ -65,7 +65,9 @@ class AbstractGroup : public QGraphicsWidget
          * @see applets
          * @see removeApplet
          **/
-        void addApplet(Plasma::Applet *applet, bool layoutApplets = true);
+        void addApplet(Plasma::Applet *applet, bool layoutApplet = true);
+
+        void addSubGroup(AbstractGroup *group, bool layoutGroup = false);
 
         /**
          * Removes an applet from this group.
@@ -75,23 +77,25 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void removeApplet(Plasma::Applet *applet);
 
+        void removeSubGroup(AbstractGroup *group);
+
         /**
          * Saves the group's specific configurations for an applet.
          * This function must be reimplemented by a child class.
          * @param applet the applet which will be saved
          * @param group the config group for the configuration
-         * @see restoreAppletLayoutInfo
+         * @see restoreChildGroupInfo
          **/
-        virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const = 0;
+        virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup config) const = 0;
 
         /**
          * Restores the group's specific configurations for an applet.
          * This function must be reimplemented by a child class.
          * @param applet the applet which will be restored
          * @param group the config group for the configuration
-         * @see saveAppletLayoutInfo
+         * @see saveChildGroupInfo
          **/
-        virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group) = 0;
+        virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group) = 0;
 
         /**
          * Returns the view this widget is visible on, or 0 if none can be found.
@@ -132,6 +136,8 @@ class AbstractGroup : public QGraphicsWidget
          * @see removeApplet
          **/
         Plasma::Applet::List applets() const;
+
+        QList<AbstractGroup *> subGroups() const;
 
         /**
          * Returns the id of this group
@@ -191,12 +197,12 @@ class AbstractGroup : public QGraphicsWidget
         virtual bool eventFilter(QObject *obj, QEvent *event);
 
         /**
-         * Lay outs an applet inside the group
+         * Lay outs a child inside the group
          * A child group probably wants to reimplement this function
-         * @param applet the applet to be layed out
+         * @param child the child to be layed out
          * @param pos the position of the applet mapped to the group's coordinates
          **/
-        virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos) = 0;
+        virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos) = 0;
 
         /**
          * Sets the type of this group
@@ -226,6 +232,8 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void appletAddedInGroup(Plasma::Applet *applet, AbstractGroup *group);
 
+        void subGroupAddedInGroup(AbstractGroup *subGroup, AbstractGroup *group);
+
         /**
          * Emitted when an applet is removed from this group.
          * @param applet a pointer to the applet removed
@@ -247,8 +255,8 @@ class AbstractGroup : public QGraphicsWidget
 
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
-        Q_PRIVATE_SLOT(d, void callLayoutApplet())
-        Q_PRIVATE_SLOT(d, void repositionRemovedApplet())
+        Q_PRIVATE_SLOT(d, void callLayoutChild())
+        Q_PRIVATE_SLOT(d, void repositionRemovedChild())
 
         AbstractGroupPrivate *const d;
 

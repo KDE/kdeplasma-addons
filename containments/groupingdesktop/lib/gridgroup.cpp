@@ -305,7 +305,7 @@ Position GridGroup::itemPosition(QGraphicsItem *item) const
     return Position(-1, -1);
 }
 
-void GridGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
+void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
     Q_UNUSED(pos)
 
@@ -313,7 +313,7 @@ void GridGroup::layoutApplet(Plasma::Applet *applet, const QPointF &pos)
     if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
         m_spacer->hide();
         removeItemAt(spacerPos, false);
-        insertItemAt(applet, spacerPos.row, spacerPos.column, Horizontal);
+        insertItemAt(child, spacerPos.row, spacerPos.column, Horizontal);
     }
 }
 
@@ -414,19 +414,19 @@ void GridGroup::onAppletMovedOutside(qreal x, qreal y)
     removeApplet(m_overlay->applet());
 }
 
-void GridGroup::saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const
+void GridGroup::saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const
 {
-    Position pos = itemPosition(applet);
+    Position pos = itemPosition(child);
     group.writeEntry("Row", pos.row);
     group.writeEntry("Column", pos.column);
 }
 
-void GridGroup::restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group)
+void GridGroup::restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group)
 {
     int row = group.readEntry("Row", -1);
     int column = group.readEntry("Column", -1);
 
-    m_layout->addItem(applet, row, column);
+    m_layout->addItem(child, row, column);
 }
 
 bool GridGroup::sceneEventFilter(QGraphicsItem *watched, QEvent *event)

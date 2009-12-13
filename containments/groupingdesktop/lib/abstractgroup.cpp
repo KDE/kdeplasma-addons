@@ -97,37 +97,51 @@ void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
     }
 }
 
-void AbstractGroupPrivate::callLayoutApplet()
+void AbstractGroupPrivate::callLayoutChild()
 {
-    if (!currApplet || currAppletPos.isNull()) {
+    if (!currChild || currChildPos.isNull()) {
         return;
     }
 
-    currApplet->setFlag(QGraphicsItem::ItemIsMovable, false);
-    currApplet->setPos(currAppletPos);
-    q->layoutApplet(currApplet, currAppletPos);
+    currChild->setFlag(QGraphicsItem::ItemIsMovable, false);
+    currChild->setPos(currChildPos);
+    q->layoutChild(currChild, currChildPos);
 
-    currApplet->installEventFilter(q);
-    q->connect(currApplet, SIGNAL(appletDestroyed(Plasma::Applet *)),
-               q, SLOT(appletDestroyed(Plasma::Applet *)));
+    currChild->installEventFilter(q);
 
-    emit q->appletAddedInGroup(currApplet, q);
-
-    currApplet = 0;
-    currAppletPos = QPointF();
+    currChild = 0;
+    currChildPos = QPointF();
 }
 
-void AbstractGroupPrivate::repositionRemovedApplet()
+void AbstractGroupPrivate::repositionRemovedChild()
 {
-    if (!currApplet || currAppletPos.isNull()) {
+    if (!currChild || currChildPos.isNull()) {
         return;
     }
 
-    currApplet->setPos(currAppletPos);
-    emit q->appletRemovedFromGroup(currApplet, q);
+    currChild->setPos(currChildPos);
 
-    currApplet = 0;
-    currAppletPos = QPointF();
+    currChild = 0;
+    currChildPos = QPointF();
+}
+
+void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
+{
+    QPointF newPos = q->mapFromItem(containment, child->pos());
+    child->setParentItem(q);
+    //FIXME this simple line breaks everything when adding plasmoids from the containment!! Why???
+//     applet->setPos(newPos);
+
+    if (layoutChild) {
+        currChild = child;
+        currChildPos = newPos;
+        //HACK so i workarounded the above-mentioned problem with this QTimer::singleShot
+        QTimer::singleShot(0, q, SLOT(callLayoutChild()));
+    } else {
+        child->installEventFilter(q);
+    }
+
+    emit q->configNeedsSaving();
 }
 
 //-----------------------------AbstractGroup------------------------------
@@ -164,7 +178,7 @@ uint AbstractGroup::id() const
     return d->id;
 }
 
-void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
+void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplet)
 {
     if (!applet || applets().contains(applet)) {
         return;
@@ -173,30 +187,39 @@ void AbstractGroup::addApplet(Plasma::Applet *applet, bool layoutApplets)
     kDebug()<<"adding applet"<<applet->id()<<"in group"<<id()<<"of type"<<pluginName();
 
     d->applets << applet;
-    QPointF newPos = mapFromItem(containment(), applet->pos());
-    applet->setParentItem(this);
-    //FIXME this simple line breaks everything when adding plasmoids from the containment!! Why???
-//     applet->setPos(newPos); 
+    d->addChild(applet, layoutApplet);
 
-    if (layoutApplets) {
-        d->currApplet = applet;
-        d->currAppletPos = newPos;
-        //HACK so i workarounded the above-mentioned problem with this QTimer::singleShot
-        QTimer::singleShot(0, this, SLOT(callLayoutApplet()));
-    } else {
-        applet->installEventFilter(this);
-        connect(applet, SIGNAL(appletDestroyed(Plasma::Applet *)),
-                this, SLOT(appletDestroyed(Plasma::Applet *)));
+    connect(applet, SIGNAL(appletDestroyed(Plasma::Applet*)),
+            this, SLOT(appletDestroyed(Plasma::Applet*)));
 
-        emit appletAddedInGroup(applet, this);
+    emit appletAddedInGroup(applet, this);
+}
+
+void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
+{
+    if (!group || subGroups().contains(group)) {
+        return;
     }
 
-    emit configNeedsSaving();
+    kDebug()<<"adding sub group"<<group->id()<<"in group"<<id()<<"of type"<<pluginName();
+
+    d->subGroups << group;
+    d->addChild(group, layoutGroup);
+
+    connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
+            this, SLOT(groupDestroyed(AbstractGroup*)));
+
+    emit subGroupAddedInGroup(group, this);
 }
 
 Plasma::Applet::List AbstractGroup::applets() const
 {
     return d->applets;
+}
+
+QList<AbstractGroup *> AbstractGroup::subGroups() const
+{
+    return d->subGroups;
 }
 
 void AbstractGroup::removeApplet(Plasma::Applet *applet)
@@ -211,11 +234,12 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
     KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
     groupConfig.deleteGroup();
     emit configNeedsSaving();
+    emit appletRemovedFromGroup(applet, this);
 
-    d->currApplet = applet;
-    d->currAppletPos = mapToParent(applet->pos());
+    d->currChild = applet;
+    d->currChildPos = mapToParent(applet->pos());
     //HACK like the one in layoutApplet
-    QTimer::singleShot(0, this, SLOT(repositionRemovedApplet()));
+    QTimer::singleShot(0, this, SLOT(repositionRemovedChild()));
 }
 
 void AbstractGroup::destroy()

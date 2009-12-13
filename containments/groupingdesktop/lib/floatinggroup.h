@@ -30,11 +30,11 @@ class FloatingGroup : public AbstractGroup
         virtual ~FloatingGroup();
 
         virtual QString pluginName() const;
-        virtual void restoreAppletLayoutInfo(Plasma::Applet *applet, const KConfigGroup &group);
-        virtual void saveAppletLayoutInfo(Plasma::Applet *applet, KConfigGroup group) const;
+        virtual void restoreChildGroupInfo(QGraphicsWidget *child, const KConfigGroup &group);
+        virtual void saveChildGroupInfo(QGraphicsWidget *child, KConfigGroup group) const;
 
     protected:
-        virtual void layoutApplet(Plasma::Applet *applet, const QPointF &pos);
+        virtual void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
 };
 
