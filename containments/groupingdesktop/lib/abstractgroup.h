@@ -67,7 +67,7 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void addApplet(Plasma::Applet *applet, bool layoutApplet = true);
 
-        void addSubGroup(AbstractGroup *group, bool layoutGroup = false);
+        void addSubGroup(AbstractGroup *group, bool layoutGroup = true);
 
         /**
          * Removes an applet from this group.
@@ -138,6 +138,8 @@ class AbstractGroup : public QGraphicsWidget
         Plasma::Applet::List applets() const;
 
         QList<AbstractGroup *> subGroups() const;
+
+        QList<QGraphicsWidget *> children() const;
 
         /**
          * Returns the id of this group
@@ -241,6 +243,8 @@ class AbstractGroup : public QGraphicsWidget
          **/
         void appletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group);
 
+        void subGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group);
+
         /**
          * This signal is emitted when the group's geometry changes.
          **/
@@ -255,6 +259,7 @@ class AbstractGroup : public QGraphicsWidget
 
     private:
         Q_PRIVATE_SLOT(d, void appletDestroyed(Plasma::Applet *applet))
+        Q_PRIVATE_SLOT(d, void subGroupDestroyed(AbstractGroup *subGroup))
         Q_PRIVATE_SLOT(d, void callLayoutChild())
         Q_PRIVATE_SLOT(d, void repositionRemovedChild())
 

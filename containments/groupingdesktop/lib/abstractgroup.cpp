@@ -84,11 +84,27 @@ void AbstractGroupPrivate::destroyGroup()
 void AbstractGroupPrivate::appletDestroyed(Plasma::Applet *applet)
 {
     if (applets.contains(applet)) {
-        kDebug()<<"removed applet"<<applet->id()<<"inside group"<<id<<"of type"<<q->pluginName();
+        kDebug()<<"removed applet"<<applet->id()<<"from group"<<id<<"of type"<<q->pluginName();
 
         applets.removeAll(applet);
 
-        if (destroying && (applets.count() == 0)) {
+        if (destroying && (q->children().count() == 0)) {
+            destroyGroup();
+            destroying = false;
+        }
+
+//         emit q->appletRemovedFromGroup(applet, q);
+    }
+}
+
+void AbstractGroupPrivate::subGroupDestroyed(AbstractGroup *subGroup)
+{
+    if (subGroups.contains(subGroup)) {
+        kDebug()<<"removed sub group"<<subGroup->id()<<"from group"<<id<<"of type"<<q->pluginName();
+
+        subGroups.removeAll(subGroup);
+
+        if (destroying && (q->children().count() == 0)) {
             destroyGroup();
             destroying = false;
         }
@@ -127,7 +143,7 @@ void AbstractGroupPrivate::repositionRemovedChild()
 
 void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
 {
-    QPointF newPos = q->mapFromItem(containment, child->pos());
+    QPointF newPos = q->mapFromScene(child->scenePos());
     child->setParentItem(q);
     //FIXME this simple line breaks everything when adding plasmoids from the containment!! Why???
 //     applet->setPos(newPos);
@@ -142,6 +158,17 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
     }
 
     emit q->configNeedsSaving();
+}
+
+void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
+{
+    child->removeEventFilter(q);
+    child->setParentItem(q->parentItem());
+
+    currChild = child;
+    currChildPos = q->mapToParent(child->pos());
+    //HACK like the one in addChild
+    QTimer::singleShot(0, q, SLOT(repositionRemovedChild()));
 }
 
 //-----------------------------AbstractGroup------------------------------
@@ -207,7 +234,7 @@ void AbstractGroup::addSubGroup(AbstractGroup *group, bool layoutGroup)
     d->addChild(group, layoutGroup);
 
     connect(group, SIGNAL(groupDestroyed(AbstractGroup*)),
-            this, SLOT(groupDestroyed(AbstractGroup*)));
+            this, SLOT(subGroupDestroyed(AbstractGroup*)));
 
     emit subGroupAddedInGroup(group, this);
 }
@@ -222,24 +249,47 @@ QList<AbstractGroup *> AbstractGroup::subGroups() const
     return d->subGroups;
 }
 
+QList<QGraphicsWidget *> AbstractGroup::children() const
+{
+    QList<QGraphicsWidget *> list;
+    foreach (Plasma::Applet *applet, d->applets) {
+        list << applet;
+    }
+    foreach (AbstractGroup *group, d->subGroups) {
+        list << group;
+    }
+
+    return list;
+}
+
 void AbstractGroup::removeApplet(Plasma::Applet *applet)
 {
     kDebug()<<"removing applet"<<applet->id()<<"from group"<<id()<<"of type"<<pluginName();
 
     d->applets.removeAll(applet);
-    applet->removeEventFilter(this);
-    applet->setParentItem(containment());
-
     KConfigGroup appletConfig = applet->config().parent();
     KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
     groupConfig.deleteGroup();
     emit configNeedsSaving();
-    emit appletRemovedFromGroup(applet, this);
 
-    d->currChild = applet;
-    d->currChildPos = mapToParent(applet->pos());
-    //HACK like the one in layoutApplet
-    QTimer::singleShot(0, this, SLOT(repositionRemovedChild()));
+    d->removeChild(applet);
+
+    emit appletRemovedFromGroup(applet, this);
+}
+
+void AbstractGroup::removeSubGroup(AbstractGroup *subGroup)
+{
+    kDebug()<<"removing sub group"<<subGroup->id()<<"from group"<<id()<<"of type"<<pluginName();
+
+    d->subGroups.removeAll(subGroup);
+    KConfigGroup subGroupConfig = subGroup->config().parent();
+    KConfigGroup groupConfig(&subGroupConfig, QString("GroupInformation"));
+    groupConfig.deleteGroup();
+    emit configNeedsSaving();
+
+    d->removeChild(subGroup);
+
+    emit subGroupRemovedFromGroup(subGroup, this);
 }
 
 void AbstractGroup::destroy()
@@ -329,11 +379,26 @@ AbstractGroup::GroupType AbstractGroup::groupType() const
 bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 {
     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
+    AbstractGroup *subGroup = qobject_cast<AbstractGroup *>(obj);
+
     if (applet && applets().contains(applet)) {
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
                 if (!contentsRect().contains(applet->geometry())) {
                     removeApplet(applet);
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    } else if (subGroup && subGroups().contains(subGroup)) {
+        switch (event->type()) {
+            case QEvent::GraphicsSceneMove:
+                if (!contentsRect().contains(subGroup->geometry())) {
+                    removeSubGroup(subGroup);
                 }
                 break;
 
