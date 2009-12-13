@@ -65,7 +65,8 @@ protected slots:
     void pictureChanged(int index);
     void conditionChanged(int index);
     void positioningChanged(int index);
-    void browse();
+    void fileDialogFinished();
+    void wallpaperBrowseCompleted();
     void updateBackground(const QImage &img);
     void showFileDialog();
     void updateFadedImage(qreal frame);

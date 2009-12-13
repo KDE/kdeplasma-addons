@@ -21,25 +21,28 @@
 
 #include "weatherwallpaper.h"
 
+// Qt includes
 #include <QImage>
 #include <QPainter>
 
+// KDE includes
 #include <KDialog>
 #include <KFileDialog>
 #include <KLocale>
+#include <KNS3/DownloadDialog>
 #include <KPushButton>
 #include <KStandardDirs>
-#include <knewstuff3/downloaddialog.h>
-
 #include <Plasma/Animator>
 #include <Plasma/DataEngineManager>
 #include <Plasma/Theme>
 
-#include "backgroundlistmodel.h"
-#include "backgrounddelegate.h"
-
+// Libplasmaweather includes
 #include "plasmaweather/weatherconfig.h"
 #include "plasmaweather/weatherlocation.h"
+
+// Own includes
+#include "backgroundlistmodel.h"
+#include "backgrounddelegate.h"
 
 K_EXPORT_PLASMA_WALLPAPER(weather, WeatherWallpaper)
 
@@ -47,14 +50,15 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     : Plasma::Wallpaper(parent, args)
     , m_configWidget(0)
     , m_weatherLocation(0)
+    , m_model(0)
     , m_advancedDialog(0)
+    , m_fileDialog(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
 
 WeatherWallpaper::~WeatherWallpaper()
 {
-
 }
 
 void WeatherWallpaper::init(const KConfigGroup & config)
@@ -116,7 +120,7 @@ void WeatherWallpaper::save(KConfigGroup & config)
     config.writeEntry("wallpaperposition", (int)m_resizeMethod);
     config.writeEntry("wallpapercolor", m_color);
     config.writeEntry("userswallpapers", m_usersWallpapers);
-
+    // Save custom wallpaper/weather pairings
     config.writeEntry("clearPaper", m_weatherMap["weather-clear"]);
     config.writeEntry("partlyCloudyPaper", m_weatherMap["weather-few-clouds"]);
     config.writeEntry("cloudyPaper", m_weatherMap["weather-clouds"]);
@@ -430,15 +434,23 @@ void WeatherWallpaper::showFileDialog()
     m_fileDialog->raise();
     m_fileDialog->activateWindow();
 
-    connect(m_fileDialog, SIGNAL(okClicked()), this, SLOT(browse()));
+    connect(m_fileDialog, SIGNAL(okClicked()), this, SLOT(wallpaperBrowseCompleted()));
+    connect(m_fileDialog, SIGNAL(destroyed(QObject*)), this, SLOT(fileDialogFinished()));
 }
 
-void WeatherWallpaper::browse()
+void WeatherWallpaper::fileDialogFinished()
+{
+    m_fileDialog = 0;
+}
+
+void WeatherWallpaper::wallpaperBrowseCompleted()
 {
     Q_ASSERT(m_model);
 
-    QString wallpaper = m_fileDialog->selectedFile();
-    disconnect(m_fileDialog, SIGNAL(okClicked()), this, SLOT(browse()));
+    const QFileInfo info(m_fileDialog->selectedFile());
+
+    //the full file path, so it isn't broken when dealing with symlinks
+    const QString wallpaper = info.canonicalFilePath();
 
     if (wallpaper.isEmpty()) {
         return;
