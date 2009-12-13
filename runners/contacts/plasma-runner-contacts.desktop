@@ -103,4 +103,4 @@ X-KDE-PluginInfo-Name=kabccontacts
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-SingleRunnerQueryMode=true
+X-Plasma-AdvertiseSingleRunnerQueryMode=true
