@@ -42,6 +42,7 @@ PostWidget::PostWidget(QGraphicsWidget *parent)
     m_author->nativeWidget()->setWordWrap(false);
     m_picture = new Plasma::IconWidget(this);
     m_picture->setMinimumSize(m_picture->sizeFromIconSize(32));
+    m_picture->setMaximumSize(m_picture->sizeFromIconSize(32));
     connect(m_picture, SIGNAL(clicked()), this, SLOT(askProfile()));
     m_from = new Plasma::Label(this);
     m_from->nativeWidget()->setWordWrap(false);
