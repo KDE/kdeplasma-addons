@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=GroupingPanel
+Name[en_GB]=GroupingPanel
+Name[fr]=GroupingPanel
+Name[sv]=Grupperingspanel
+Name[uk]=Панель групування
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment

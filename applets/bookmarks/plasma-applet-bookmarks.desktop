@@ -1,12 +1,16 @@
 [Desktop Entry]
 Name=Bookmarks
 Name[en_GB]=Bookmarks
+Name[fr]=Marque-pages
+Name[nb]=Bokmerker
+Name[nn]=Bokmerke
 Name[pt]=Favoritos
 Name[sv]=Bokmärken
 Name[uk]=Закладки
 Name[x-test]=xxBookmarksxx
 Comment=Quick Access to the Bookmarks
 Comment[en_GB]=Quick Access to the Bookmarks
+Comment[fr]=Accès rapide aux marque-pages
 Comment[pt]=Acesso Rápido aos Favoritos
 Comment[sv]=Snabbåtkomst till bokmärken
 Comment[uk]=Швидкий доступ до закладок
