@@ -103,10 +103,13 @@ void ActionListViewItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 void ActionListViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     ExtenderButton::mouseMoveEvent(event);
-    if (Global::self()->immutability() == Plasma::Mutable &&
-            isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
-        setDown(false);
-        m_factory->itemDrag(this, event);
+    if (Global::self()->immutability() == Plasma::Mutable) {
+        if (isDown() && ((m_mousePos - event->pos()).toPoint().manhattanLength() > QApplication::startDragDistance())) {
+            setDown(false);
+            m_factory->itemDrag(this, event);
+        }
+    } else {
+        event->ignore();
     }
 }
 

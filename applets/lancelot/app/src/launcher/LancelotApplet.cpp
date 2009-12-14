@@ -241,6 +241,10 @@ void LancelotApplet::init()
         & d->signalMapperToggle, SIGNAL(mapped(const QString &)),
         this, SLOT(toggleLancelotSection(const QString &))
     );
+    connect(
+        this, SIGNAL(activate()),
+        this, SLOT(showLancelot())
+    );
     KGlobal::locale()->insertCatalog("lancelot");
 
     qDebug() << "LancelotApplet::init()";
