@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Control Audio Player
+Name[da]=Betjening af lydafspiller
 Name[de]=Medienwiedergabe steuern
 Name[en_GB]=Control Audio Player
 Name[et]=Helifailide mängija juhtimine
@@ -12,6 +13,7 @@ Name[uk]=Керування аудіопрогравачем
 Name[x-test]=xxControl Audio Playerxx
 Name[zh_TW]=控制音效播放器
 Comment=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
+Comment[da]=Lader dig betjene MPRIS-lydafspillere (den kan også søge i Amaroks samling)
 Comment[de]=Ermöglicht die Steuerung von MPRIS-Medienspielern (und kann zudem die Sammlung von Amarok durchsuchen)
 Comment[en_GB]=Allows to control MPRIS audio players (it is able to search through Amarok's collection, too)
 Comment[et]=Võimaldab juhtida MPRIS helifailide mängijaid (ning suudab ka otsida Amaroki kogudes)

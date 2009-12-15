@@ -1,5 +1,6 @@
 [Global]
 Comment=OpenDesktop Activities Plasmoid
+Comment[da]=Plasmoid til openDesktop-aktiviteter
 Comment[en_GB]=OpenDesktop Activities Plasmoid
 Comment[et]=OpenDesktopi tegevuste plasmoid
 Comment[fr]=Plasmoïde Activités Open-Desktop
@@ -17,6 +18,7 @@ Comment[zh_TW]=openDesktop 活動元件
 
 [Event/activity]
 Name=New Activity
+Name[da]=Ny aktivitet
 Name[de]=Neue Aktivität
 Name[en_GB]=New Activity
 Name[et]=Uus tegevus
@@ -34,6 +36,7 @@ Name[uk]=Новий простір дій
 Name[x-test]=xxNew Activityxx
 Name[zh_TW]=新活動
 Comment=Something interesting has happened in your friends network
+Comment[da]=Noget interessant er sket i din vens netværk
 Comment[de]=Etwas interessantes Neues ist im Freundeskreis passiert
 Comment[en_GB]=Something interesting has happened in your friends network
 Comment[et]=Sinu sõprade võrgus juhtus midagi huvitavat

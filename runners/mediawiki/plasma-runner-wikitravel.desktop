@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Wikitravel
 Name[cs]=Wikitravel
+Name[da]=Wikitravel
 Name[de]=Wikitravel
 Name[en_GB]=Wikitravel
 Name[et]=Wikitravel
@@ -14,6 +15,7 @@ Name[uk]=Wikitravel
 Name[x-test]=xxWikitravelxx
 Name[zh_TW]=Wikitravel
 Comment=Search on Wikitravel
+Comment[da]=Søg på Wikitravel
 Comment[de]=Auf Wikitravel suchen
 Comment[en_GB]=Search on Wikitravel
 Comment[et]=Otsing Wikitravelis

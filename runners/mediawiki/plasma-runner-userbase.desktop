@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KDE Documentation
 Name[cs]=Dokumentace KDE
+Name[da]=KDE-dokumentation
 Name[de]=KDE-Dokumentation
 Name[en_GB]=KDE Documentation
 Name[et]=KDE dokumentatsioon
@@ -14,6 +15,7 @@ Name[uk]=Документація KDE
 Name[x-test]=xxKDE Documentationxx
 Name[zh_TW]=KDE 文件
 Comment=Search on KDE's Userbase
+Comment[da]=Søg på KDE's Userbase
 Comment[de]=Auf KDE-UserBase suchen
 Comment[en_GB]=Search on KDE's Userbase
 Comment[et]=Otsing KDE Userbase'is

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spell Check
+Name[da]=Stavekontrol
 Name[de]=Rechtschreibprüfung
 Name[en_GB]=Spell Check
 Name[et]=Õigekirja kontroll
@@ -15,6 +16,7 @@ Name[x-test]=xxSpell Checkxx
 Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
+Comment[da]=Hurtig stavekontrol
 Comment[de]=Schnelle Rechtschreibprüfung
 Comment[en_GB]=Fast spell checking
 Comment[et]=Kiire õigekirja kontroll

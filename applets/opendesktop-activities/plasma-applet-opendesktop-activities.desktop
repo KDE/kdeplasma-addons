@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=openDesktop Activities
 Name[cs]=Aktivity openDesktop
+Name[da]=openDesktop-aktiviteter
 Name[en_GB]=openDesktop Activities
 Name[et]=openDesktopi tegevused
 Name[fr]=Activités open-Desktop
@@ -17,6 +18,7 @@ Name[uk]=Простори дій OpenDesktop
 Name[x-test]=xxopenDesktop Activitiesxx
 Name[zh_TW]=openDesktop 活動
 Comment=Stay informed with the Social Desktop
+Comment[da]=Hold dig opdateret med den sociale desktop
 Comment[de]=Bleiben Sie auf dem Laufenden mit dem Social Desktop
 Comment[en_GB]=Stay informed with the Social Desktop
 Comment[et]=Suhtlemine sotsiaalse töölaua vahendusel
