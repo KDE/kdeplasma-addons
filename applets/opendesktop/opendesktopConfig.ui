@@ -156,7 +156,7 @@ p, li { white-space: pre-wrap; }
     </spacer>
    </item>
    <item row="4" column="3">
-    <widget class="QLineEdit" name="password">
+    <widget class="KLineEdit" name="password">
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
      </property>
@@ -176,7 +176,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="QComboBox" name="provider"/>
+    <widget class="KComboBox" name="provider"/>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label_6">
