@@ -121,7 +121,6 @@ QGraphicsWidget *News::graphicsWidget()
 
     setAcceptDrops(true);
     makeStylesheet();
-    connectToEngine();
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(makeStylesheet()));
 
@@ -130,6 +129,8 @@ QGraphicsWidget *News::graphicsWidget()
     m_graphicsWidget->setPreferredSize(370,440);
     //a tiny minimum size, a panel 48px high is enough to display the whole applet
     m_graphicsWidget->setMinimumSize(150, 48);
+
+    connectToEngine();
 
     return m_graphicsWidget;
 }
@@ -390,6 +391,7 @@ void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &da
         html += END_TABLE;
         html += END;
         m_graphicsWidget->setPreferredSize(-1, -1);
+
         m_news->setHtml(html, m_cssDir);
         emit sizeHintChanged(Qt::PreferredSize);
     }
