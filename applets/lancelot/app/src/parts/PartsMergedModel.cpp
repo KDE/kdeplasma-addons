@@ -212,7 +212,7 @@ bool PartsMergedModel::load(const QString & input)
 
     if (data["version"] <= "1.0") {
         if (data["type"] == "list") {
-            QStringList modelDef = data["model"].split(" ");
+            QStringList modelDef = data["model"].split(' ');
             // qDebug() << "LancelotPart::load" << input << modelDef;
             QString modelID = modelDef[0];
             QString modelExtraData = QString();

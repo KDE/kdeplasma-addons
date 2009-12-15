@@ -95,7 +95,7 @@ void Pastebin::init()
     m_imagePrivacy = cg.readEntry("imagePrivacy", "0").toInt();
     int historySize = cg.readEntry("HistorySize", "3").toInt();
 
-    QStringList history = cg.readEntry("History", "").split("|", QString::SkipEmptyParts);
+    QStringList history = cg.readEntry("History", "").split('|', QString::SkipEmptyParts);
 
     for (int i = 0; i < history.size(); ++i) {
         addToHistory(history.at(i));

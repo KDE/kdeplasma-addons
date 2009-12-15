@@ -164,7 +164,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
         } else {
             str += ename->name.c_str();
         }
-        str.replace("_", " ");
+        str.replace('_', ' ');
         mstr += str;
 
         if (m.variable() == CALCULATOR->v_i) {
@@ -324,7 +324,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             if (index > 0) {
                 STR_MARKUP_BEGIN(mstr);
                 mstr += po.comma().c_str();
-                mstr += " ";
+                mstr += ' ';
                 STR_MARKUP_END(mstr);
             }
             mstr += drawStructure(m[index], po, ips_n);
@@ -587,7 +587,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             do_space = !tstr.endsWith("valign=\"middle\">");
             mstr += tstr;
             STR_MARKUP_BEGIN(mstr);
-            if (do_space) mstr += " ";
+            if (do_space) mstr += ' ';
             switch (m[0].comparisonType()) {
             case COMPARISON_LESS: {
                 mstr += "&gt;";
@@ -619,11 +619,11 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             ips_n.wrap = m[0][0].needsParenthesis(po, ips_n, m[0], 1, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[0][0], po, ips_n);
             do_space = !tstr.endsWith("valign=\"middle\">");
-            if (do_space) mstr += " ";
+            if (do_space) mstr += ' ';
             STR_MARKUP_END(mstr);
             mstr += tstr;
             STR_MARKUP_BEGIN(mstr);
-            if (do_space) mstr += " ";
+            if (do_space) mstr += ' ';
 
             switch (m[1].comparisonType()) {
             case COMPARISON_GREATER: {
@@ -740,7 +740,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             do_space = !tstr.endsWith("valign=\"middle\">");
             if (i > 0) {
                 STR_MARKUP_BEGIN(mstr);
-                if (do_space_prev) mstr += " ";
+                if (do_space_prev) mstr += ' ';
                 if (m.isComparison() && m.comparisonType() == COMPARISON_EQUALS) {
                     if (ips.depth == 0 && po.use_unicode_signs && (*po.is_approximate || m.isApproximate()) && (!po.can_display_unicode_string_function || (*po.can_display_unicode_string_function)(SIGN_ALMOST_EQUAL, po.can_display_unicode_string_arg))) {
                         mstr += SIGN_ALMOST_EQUAL;

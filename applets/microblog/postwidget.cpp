@@ -121,7 +121,7 @@ void PostWidget::setColorScheme(KColorScheme *scheme)
 
 void PostWidget::askReply()
 {
-    emit reply("@" + m_author->text() + " ");
+    emit reply('@' + m_author->text() + ' ');
 }
 
 void PostWidget::askForward()

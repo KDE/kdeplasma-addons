@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Sebastian Kügler <sebas@kde.org>                *
+ *   Copyright (C) 2009 by Sebastian K?gler <sebas@kde.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -113,7 +113,7 @@ void WebSlice::configAccepted()
         m_element = ui.elementEdit->text();
 
         QString geo = ui.geometryEdit->text();
-        QStringList gel = geo.split(",");
+        QStringList gel = geo.split(',');
         qreal x, y, w, h;
         bool ok = true;
         if (gel.length() == 4) {
