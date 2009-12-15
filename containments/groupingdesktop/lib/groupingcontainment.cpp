@@ -123,37 +123,47 @@ class GroupingContainmentPrivate
             emit q->groupRemoved(group);
         }
 
-        void manageApplet(Plasma::Applet *applet, const QPointF &pos)
+        AbstractGroup *groupAt(const QPointF &pos)
         {
-            foreach (AbstractGroup *group, groups) {
+            QGraphicsItem *item = q->scene()->itemAt(q->mapToScene(pos));
+
+            AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(item);
+
+            if (group) {
+                return group;
+            }
+
+            if (item) {
+                //FIXME i'm quite unsure about this: in a group there could be a grandchild
+                group = qgraphicsitem_cast<AbstractGroup *>(item->parentItem());
                 if (group) {
-                    QRectF rect = group->contentsRect();
-                    rect.translate(group->pos());
-                    if (rect.contains(pos)) {
-                        group->addApplet(applet);
-
-                        applet->installSceneEventFilter(q);
-                    }
-
-                    break;
+                    return group;
                 }
             }
 
-            applet->installEventFilter(q);
+            return 0;
+        }
+
+        void manageApplet(Plasma::Applet *applet, const QPointF &pos)
+        {
+            AbstractGroup *group = groupAt(pos);
+            kDebug()<<group;
+            if (group) {
+                group->addApplet(applet);
+
+                applet->installSceneEventFilter(q);
+            } else {
+                applet->installEventFilter(q);
+            }
         }
 
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos)
         {
-            foreach (AbstractGroup *group, groups) {
-                if (group && (group != subGroup)) {
-                    QRectF rect = group->contentsRect();
-                    rect.translate(group->pos());
-                    if (rect.contains(pos)) {
-                        group->addSubGroup(subGroup);
-                    }
-
-                    break;
-                }
+            AbstractGroup *group = groupAt(pos);
+            if (group && (group != subGroup)) {
+                group->addSubGroup(subGroup);
+            } else {
+                subGroup->installEventFilter(q);
             }
         }
 
@@ -173,6 +183,24 @@ class GroupingContainmentPrivate
 
                     return;
                 }
+            }
+        }
+
+        void onAppletRemovedFromGroup(Plasma::Applet *applet, AbstractGroup *group)
+        {
+            Q_UNUSED(group)
+
+            if (applet->parentItem() == q) {
+                applet->installEventFilter(q);
+            }
+        }
+
+        void onSubGroupRemovedFromGroup(AbstractGroup *subGroup, AbstractGroup *group)
+        {
+            Q_UNUSED(group)
+
+            if (subGroup->parentItem() == q) {
+                subGroup->installEventFilter(q);
             }
         }
 
@@ -231,12 +259,16 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
             group, SLOT(setImmutability(Plasma::ImmutabilityType)));
     connect(group, SIGNAL(groupDestroyed(AbstractGroup *)),
             this, SLOT(onGroupRemoved(AbstractGroup *)));
+    connect(group, SIGNAL(appletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)),
+            this, SLOT(onAppletRemovedFromGroup(Plasma::Applet*,AbstractGroup*)));
+    connect(group, SIGNAL(subGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)),
+            this, SLOT(onSubGroupRemovedFromGroup(AbstractGroup*,AbstractGroup*)));
     connect(group, SIGNAL(configNeedsSaving()), this, SIGNAL(configNeedsSaving()));
     group->setPos(pos);
     d->manageGroup(group, pos);
 
     if (containmentType() == Plasma::Containment::DesktopContainment) {
-        group->installEventFilter(this);
+        group->installSceneEventFilter(this);
     }
 
     emit groupAdded(group, pos);
@@ -252,37 +284,10 @@ QList<QAction *> GroupingContainment::contextualActions()
 bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event)
 {
     Plasma::Applet *applet = qgraphicsitem_cast<Plasma::Applet *>(watched);
-
-    if (applet) {
-        switch (event->type()) {
-        case QEvent::GraphicsSceneHoverMove:
-        case QEvent::GraphicsSceneHoverEnter:
-            foreach (AbstractGroup *group, d->groups) {
-                if (group->applets().contains(applet)) {
-                    if (group->groupType() == AbstractGroup::ConstrainedGroup) {
-                        return Plasma::Applet::sceneEventFilter(watched, event);
-                    } else {
-                        return Plasma::Containment::sceneEventFilter(watched, event);
-                    }
-                }
-            }
-            break;
-
-        default:
-            break;
-        }
-    }
-
-    return Plasma::Containment::sceneEventFilter(watched, event);
-}
-
-bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
-{
-    AbstractGroup *group = qobject_cast<AbstractGroup *>(obj);
-    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
+    AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(watched);
 
     if (group) {
-        if (immutability() == Plasma::Mutable && group->immutability() == Plasma::Mutable) {
+        if ((immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable)) {
             AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(group->parentItem());
 
             if (!parentGroup || (parentGroup && parentGroup->groupType() != AbstractGroup::ConstrainedGroup)) {
@@ -322,7 +327,37 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                 }
             }
         }
+
+        return false;
     }
+
+    if (applet) {
+        switch (event->type()) {
+        case QEvent::GraphicsSceneHoverMove:
+        case QEvent::GraphicsSceneHoverEnter:
+            foreach (AbstractGroup *group, d->groups) {
+                if (group->applets().contains(applet)) {
+                    if (group->groupType() == AbstractGroup::ConstrainedGroup) {
+                        return Plasma::Applet::sceneEventFilter(watched, event);
+                    } else {
+                        return Plasma::Containment::sceneEventFilter(watched, event);
+                    }
+                }
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    return Plasma::Containment::sceneEventFilter(watched, event);
+}
+
+bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
+{
+    AbstractGroup *group = qobject_cast<AbstractGroup *>(obj);
+    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
 
     QGraphicsWidget *widget = 0;
     if (applet) {
@@ -339,12 +374,14 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
                         QRectF rect = parentGroup->contentsRect();
                         rect.translate(parentGroup->pos());
                         if (rect.contains(widget->geometry())) {
+                            widget->removeEventFilter(this);
+                            d->interestingGroup = 0;
                             if (applet) {
+                                kDebug()<<parentGroup->id();
                                 parentGroup->addApplet(applet);
-                            } else {
+                            } else if (!group->isAncestorOf(parentGroup)) {
                                 parentGroup->addSubGroup(group);
                             }
-                            d->interestingGroup = 0;
                             break;
                         } else {
                             QRectF intersected(rect.intersected(widget->geometry()));

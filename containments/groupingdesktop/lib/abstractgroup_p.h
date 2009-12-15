@@ -48,6 +48,7 @@ class AbstractGroupPrivate
         QGraphicsWidget *currChild;
         QPointF currChildPos;
         AbstractGroup::GroupType groupType;
+        AbstractGroup *interestingGroup;
 
     private:
         KConfigGroup *m_mainConfig;

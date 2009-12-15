@@ -167,6 +167,11 @@ class AbstractGroup : public QGraphicsWidget
          **/
         virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 
+        enum {
+            Type = UserType + 2
+        };
+        virtual int type() const;
+
     public slots:
         /**
          * Sets the immutability type for this group (not immutable,

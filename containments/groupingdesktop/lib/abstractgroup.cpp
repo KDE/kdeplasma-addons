@@ -41,6 +41,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
         containment(0),
         immutability(Plasma::Mutable),
         groupType(AbstractGroup::FreeGroup),
+        interestingGroup(0),
         m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -135,7 +136,7 @@ void AbstractGroupPrivate::repositionRemovedChild()
         return;
     }
 
-    currChild->setPos(currChildPos);
+    currChild->setPos(containment->mapFromScene(currChildPos));
 
     currChild = 0;
     currChildPos = QPointF();
@@ -162,11 +163,12 @@ void AbstractGroupPrivate::addChild(QGraphicsWidget *child, bool layoutChild)
 
 void AbstractGroupPrivate::removeChild(QGraphicsWidget *child)
 {
-    child->removeEventFilter(q);
-    child->setParentItem(q->parentItem());
-
     currChild = child;
-    currChildPos = q->mapToParent(child->pos());
+    currChildPos = (child->scenePos());
+
+    child->removeEventFilter(q);
+    child->setParentItem(containment);
+
     //HACK like the one in addChild
     QTimer::singleShot(0, q, SLOT(repositionRemovedChild()));
 }
@@ -272,7 +274,12 @@ void AbstractGroup::removeApplet(Plasma::Applet *applet)
     groupConfig.deleteGroup();
     emit configNeedsSaving();
 
-    d->removeChild(applet);
+    AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
+    if (parentGroup) {
+        parentGroup->addApplet(applet);
+    } else {
+        d->removeChild(applet);
+    }
 
     emit appletRemovedFromGroup(applet, this);
 }
@@ -287,7 +294,12 @@ void AbstractGroup::removeSubGroup(AbstractGroup *subGroup)
     groupConfig.deleteGroup();
     emit configNeedsSaving();
 
-    d->removeChild(subGroup);
+    AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
+    if (parentGroup) {
+        parentGroup->addSubGroup(subGroup);
+    } else {
+        d->removeChild(subGroup);
+    }
 
     emit subGroupRemovedFromGroup(subGroup, this);
 }
@@ -303,6 +315,9 @@ void AbstractGroup::destroy()
 
     d->destroying = true;
 
+    foreach (AbstractGroup *group, subGroups()) {
+        group->destroy();
+    }
     foreach (Plasma::Applet *applet, applets()) {
         applet->destroy();
     }
@@ -378,37 +393,62 @@ AbstractGroup::GroupType AbstractGroup::groupType() const
 
 bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 {
+    AbstractGroup *group = qobject_cast<AbstractGroup *>(obj);
     Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(obj);
-    AbstractGroup *subGroup = qobject_cast<AbstractGroup *>(obj);
 
-    if (applet && applets().contains(applet)) {
-        switch (event->type()) {
-            case QEvent::GraphicsSceneMove:
-                if (!contentsRect().contains(applet->geometry())) {
-                    removeApplet(applet);
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        return false;
-    } else if (subGroup && subGroups().contains(subGroup)) {
-        switch (event->type()) {
-            case QEvent::GraphicsSceneMove:
-                if (!contentsRect().contains(subGroup->geometry())) {
-                    removeSubGroup(subGroup);
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        return false;
+    QGraphicsWidget *widget = 0;
+    if (applet) {
+        widget = applet;
+    } else if (group) {
+        widget = group;
     }
 
+    if (widget) {
+        switch (event->type()) {
+            case QEvent::GraphicsSceneMove:
+                foreach (AbstractGroup *parentGroup, d->subGroups) {
+                    if (!parentGroup->children().contains(widget) && (parentGroup != group)) {
+                        QRectF rect = parentGroup->contentsRect();
+                        rect.translate(parentGroup->pos());
+                        if (rect.contains(widget->geometry())) {
+                            if (applet) {
+                                d->applets.removeAll(applet);
+                                parentGroup->addApplet(applet);
+                            } else if (!group->isAncestorOf(parentGroup)) {
+                                d->subGroups.removeAll(group);
+                                parentGroup->addSubGroup(group);
+                            }
+                            widget->removeEventFilter(this);
+                            d->interestingGroup = 0;
+                            break;
+                        } else {
+                            QRectF intersected(rect.intersected(widget->geometry()));
+                            if (intersected.isValid()) {
+                                parentGroup->showDropZone(mapToItem(parentGroup, intersected.center()));
+                                d->interestingGroup = parentGroup;
+                                break;
+                            } else {
+                                if (parentGroup == d->interestingGroup) {
+                                    parentGroup->showDropZone(QPointF());
+                                    d->interestingGroup = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (children().contains(widget) && !contentsRect().contains(widget->geometry())) {
+                    if (applet) {
+                        removeApplet(applet);
+                    } else {
+                        removeSubGroup(group);
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
 
     return QGraphicsWidget::eventFilter(obj, event);
 }
@@ -428,6 +468,11 @@ void AbstractGroup::resizeEvent(QGraphicsSceneResizeEvent *event)
     d->background->resizeFrame(event->newSize());
 
     emit geometryChanged();
+}
+
+int AbstractGroup::type() const
+{
+    return Type;
 }
 
 void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
