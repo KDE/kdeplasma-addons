@@ -55,7 +55,7 @@ void FolderModel::load()
     KConfigGroup config = cfg.group("FolderModel");
 
     QStringList items = config.readEntry(m_dirPath, QStringList());
-    foreach (QString item, items) {
+    foreach (const QString item, items) {
         if (QFile::exists(item)) {
             addItem(QUrl(item).toString());
         }

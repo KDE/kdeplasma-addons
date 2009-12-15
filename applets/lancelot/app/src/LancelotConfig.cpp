@@ -65,7 +65,7 @@ void LancelotConfig::systemButtonClicked()
     if (!systemButtonActionsMenu) {
         systemButtonActionsMenu = new QMenu();
         Models::SystemActions * model = Models::SystemActions::self();
-        foreach (QString id, model->actions()) {
+        foreach (const QString id, model->actions()) {
             systemButtonActionsMenu->addAction(
                     model->actionIcon(id),
                     model->actionTitle(id),
