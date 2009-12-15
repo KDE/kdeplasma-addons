@@ -17,61 +17,60 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "appletoverlay.h"
+#include "itemoverlay.h"
 
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsSceneMouseEvent>
+#include <QtGui/QGraphicsLinearLayout>
 
 #include <KIcon>
 
-#include <Plasma/Applet>
 #include <QtCore/QTimer>
 
-AppletOverlay::AppletOverlay(Plasma::Applet *applet, Qt::WindowFlags wFlags)
-             : QGraphicsWidget(applet, wFlags),
-               m_applet(applet),
+ItemOverlay::ItemOverlay(QGraphicsWidget *item, Qt::WindowFlags wFlags)
+             : QGraphicsWidget(item, wFlags),
+               m_item(item),
+//                m_layout(new QGraphicsLinearLayout(m_item)),
                m_moving(false)
 {
     setAcceptHoverEvents(true);
 
-    setZValue(m_applet->zValue() + 1);
-    syncGeometry();
-
-    connect(applet, SIGNAL(geometryChanged()), this, SLOT(delayedSyncGeometry()));
+        setGeometry(m_item->contentsRect());
+//     m_layout->addItem(this);
 }
 
-AppletOverlay::~AppletOverlay()
+ItemOverlay::~ItemOverlay()
 {
-    m_applet->setZValue(m_savedZValue);
+    m_item->setZValue(m_savedZValue);
 }
 
-void AppletOverlay::setZ(int value)
+void ItemOverlay::setZ(int value)
 {
-    m_savedZValue = m_applet->zValue();
-    m_applet->setZValue(value);
+    m_savedZValue = m_item->zValue();
+    m_item->setZValue(value);
 }
 
-Plasma::Applet *AppletOverlay::applet() const
+QGraphicsWidget *ItemOverlay::item() const
 {
-    return m_applet;
+    return m_item;
 }
 
-void AppletOverlay::delayedSyncGeometry()
+void ItemOverlay::delayedSyncGeometry()
 {
     QTimer::singleShot(0, this, SLOT(syncGeometry()));
 }
 
-void AppletOverlay::syncGeometry()
+void ItemOverlay::syncGeometry()
 {
-    setGeometry(m_applet->contentsRect());
+    setGeometry(m_item->contentsRect());
 }
 
-bool AppletOverlay::isMoving() const
+bool ItemOverlay::isMoving() const
 {
     return m_moving;
 }
 
-void AppletOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void ItemOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         if (m_moving) {
@@ -85,7 +84,7 @@ void AppletOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void AppletOverlay::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+void ItemOverlay::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
@@ -93,7 +92,7 @@ void AppletOverlay::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     }
 }
 
-void AppletOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void ItemOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
@@ -101,25 +100,25 @@ void AppletOverlay::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
-void AppletOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void ItemOverlay::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_moving) {
         QPointF p(event->pos() - m_startPos);
-        emit appletMovedOutside(p.x(), p.y());
+        emit itemMovedOutside(p.x(), p.y());
     }
 }
 
-void AppletOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void ItemOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
     KIcon icon("transform-move");
 
-    int iconSize = qMin(qMin((int)geometry().height(), int(m_applet->size().width())), 64);
+    int iconSize = qMin(qMin((int)geometry().height(), int(m_item->size().width())), 64);
     QRect iconRect(rect().center().toPoint() - QPoint(iconSize / 2, iconSize / 2), QSize(iconSize, iconSize));
 
     painter->drawPixmap(iconRect, icon.pixmap(iconSize, iconSize));
 }
 
-#include "appletoverlay.moc"
+#include "itemoverlay.moc"

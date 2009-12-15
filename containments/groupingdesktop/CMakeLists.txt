@@ -16,7 +16,7 @@ set(groupingcontainment_SRCS
         lib/abstractgroup.cpp
         lib/floatinggroup.cpp
         lib/gridgroup.cpp
-        lib/appletoverlay.cpp)
+        lib/itemoverlay.cpp)
 
 set(groupingdesktop_SRCS desktop/groupingdesktop.cpp)
 

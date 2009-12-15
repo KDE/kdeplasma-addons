@@ -370,7 +370,8 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
         switch (event->type()) {
             case QEvent::GraphicsSceneMove:
                 foreach (AbstractGroup *parentGroup, d->groups) {
-                    if (!parentGroup->children().contains(widget) && (parentGroup != group)) {
+                    if (!parentGroup->children().contains(widget) && (parentGroup != group) &&
+                        (parentGroup->parentItem() == this)) {
                         QRectF rect = parentGroup->contentsRect();
                         rect.translate(parentGroup->pos());
                         if (rect.contains(widget->geometry())) {

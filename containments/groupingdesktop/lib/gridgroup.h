@@ -33,7 +33,7 @@ namespace Plasma
 
 class Position;
 class Spacer;
-class AppletOverlay;
+class ItemOverlay;
 
 class GridGroup : public AbstractGroup
 {
@@ -48,16 +48,18 @@ class GridGroup : public AbstractGroup
         virtual void showDropZone(const QPointF &pos);
 
     protected:
-        bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+        bool eventFilter(QObject *watched, QEvent *event);
         void layoutChild(QGraphicsWidget *child, const QPointF &pos);
 
     private slots:
         void onAppletAdded(Plasma::Applet *applet, AbstractGroup *group);
         void onAppletRemoved(Plasma::Applet *applet, AbstractGroup *group);
+        void onSubGroupAdded(AbstractGroup *subGroup, AbstractGroup *group);
+        void onSubGroupRemoved(AbstractGroup *subGroup, AbstractGroup *group);
         void overlayStartsMoving();
         void overlayEndsMoving();
         void overlayMoving(qreal x, qreal y, const QPointF &mousePos);
-        void onAppletMovedOutside(qreal x, qreal y);
+        void onItemMovedOutside(qreal x, qreal y);
 
     private:
         enum Orientation {
@@ -75,9 +77,10 @@ class GridGroup : public AbstractGroup
 
         QGraphicsGridLayout *m_layout;
         Spacer *m_spacer;
+        AbstractGroup *m_interestingGroup;
 
         QPointF posOfClick;
-        AppletOverlay *m_overlay;
+        ItemOverlay *m_overlay;
 
         friend class Spacer;
 };

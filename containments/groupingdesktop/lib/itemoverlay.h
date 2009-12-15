@@ -17,25 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef APPLETOVERLAY_H
-#define APPLETOVERLAY_H
+#ifndef ITEMOVERLAY_H
+#define ITEMOVERLAY_H
 
 #include <QtGui/QGraphicsWidget>
 
-namespace Plasma
-{
-    class Applet;
-}
+class QGraphicsLinearLayout;
 
-class AppletOverlay : public QGraphicsWidget
+class ItemOverlay : public QGraphicsWidget
 {
     Q_OBJECT
     public:
-        AppletOverlay(Plasma::Applet *applet, Qt::WindowFlags wFlags = 0);
-        ~AppletOverlay();
+        ItemOverlay(QGraphicsWidget *item, Qt::WindowFlags wFlags = 0);
+        ~ItemOverlay();
 
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
-        Plasma::Applet *applet() const;
+        QGraphicsWidget *item() const;
         bool isMoving() const;
         void setZ(int value);
 
@@ -49,14 +46,15 @@ class AppletOverlay : public QGraphicsWidget
         void startMoving();
         void movedOf(qreal x, qreal y, const QPointF &pos);
         void endMoving();
-        void appletMovedOutside(qreal x, qreal y);
+        void itemMovedOutside(qreal x, qreal y);
 
     private slots:
         void syncGeometry();
         void delayedSyncGeometry();
 
     private:
-        Plasma::Applet *m_applet;
+        QGraphicsWidget *m_item;
+        QGraphicsLinearLayout *m_layout;
         bool m_moving;
         QPointF m_startPos;
         int m_savedZValue;

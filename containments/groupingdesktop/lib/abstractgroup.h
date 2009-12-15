@@ -75,9 +75,9 @@ class AbstractGroup : public QGraphicsWidget
          * @see addApplet
          * @see applets
          **/
-        void removeApplet(Plasma::Applet *applet);
+        void removeApplet(Plasma::Applet *applet, AbstractGroup *newGroup = 0);
 
-        void removeSubGroup(AbstractGroup *group);
+        void removeSubGroup(AbstractGroup *group, AbstractGroup *newGroup = 0);
 
         /**
          * Saves the group's specific configurations for an applet.
