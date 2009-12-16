@@ -54,9 +54,7 @@
 
 #include <Plasma/Theme>
 #include <Plasma/Frame>
-#include <Plasma/Label>
 #include <Plasma/PushButton>
-#include <Plasma/TabBar>
 #include <plasma/tooltipmanager.h>
 
 #include "arrowwidget.h"
@@ -107,8 +105,6 @@ class ChooseStripNumDialog : public KDialog
 };
 //END choose a strip dialog
 
-static const int s_tabHeight = 24;//used because there is no initial preferredHeight set
-
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::PopupApplet( parent, args ),
       mShowPreviousButton( false ),
@@ -135,64 +131,6 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     setPopupIcon( "face-smile-big" );
 
     graphicsWidget();
-}
-
-void ComicApplet::createLayout()
-{
-    QGraphicsLinearLayout *newLayout = new QGraphicsLinearLayout;
-    newLayout->setContentsMargins( 0, 0, 0, 0 );
-    newLayout->setSpacing( 1 );
-
-    QGraphicsLinearLayout *centralLayout = new QGraphicsLinearLayout;
-    centralLayout->setOrientation( Qt::Vertical );
-    centralLayout->setContentsMargins( 0, 0, 0, 0 );
-    centralLayout->setSpacing( 0 );
-
-    QGraphicsLinearLayout *bottomLayout = 0;
-
-    mLeftArrow->setVisible( mShowPreviousButton && !mArrowsOnHover );
-    if ( mLeftArrow->isVisible() ) {
-        newLayout->addItem( mLeftArrow );
-    }
-
-    mTabBar->setVisible( mShowTabBar && mUseTabs );
-    if ( mTabBar->isVisible() ) {
-        centralLayout->addItem( mTabBar );
-        centralLayout->setItemSpacing( centralLayout->count() - 1, 5 );
-    }
-
-    mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
-    if ( mLabelTop->isVisible() ) {
-        centralLayout->addItem( mLabelTop);
-    }
-
-    mImageWidget->show();
-    centralLayout->addItem( mImageWidget );
-
-    mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
-    mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
-    if ( mLabelId->isVisible() || mLabelUrl->isVisible() ) {
-        bottomLayout = new QGraphicsLinearLayout;
-        bottomLayout->setContentsMargins( 0, 0, 0, 0 );
-        bottomLayout->setSpacing( 0 );
-
-        if ( mLabelId->isVisible() ) {
-            bottomLayout->addItem( mLabelId );
-        }
-        bottomLayout->addStretch( 1 );
-        if ( mLabelUrl->isVisible() ) {
-            bottomLayout->addItem( mLabelUrl );
-        }
-        centralLayout->addItem( bottomLayout );
-    }
-    newLayout->addItem( centralLayout );
-
-    mRightArrow->setVisible( mShowNextButton && !mArrowsOnHover );
-    if ( mRightArrow->isVisible() ) {
-        newLayout->addItem( mRightArrow );
-    }
-
-    mMainWidget->setLayout( newLayout );
 }
 
 void ComicApplet::init()
@@ -270,31 +208,50 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         mMainWidget->setAcceptHoverEvents( true );
         mMainWidget->installEventFilter( this );
 
-        mTabBar = new Plasma::TabBar( mMainWidget );
+        QGraphicsLinearLayout *layout = new QGraphicsLinearLayout;
+        layout->setContentsMargins( 0, 0, 0, 0 );
+        layout->setSpacing( 0 );
+
+        QGraphicsLinearLayout *centralLayout = new QGraphicsLinearLayout;
+        centralLayout->setOrientation( Qt::Vertical );
+        centralLayout->setContentsMargins( 0, 0, 0, 0 );
+        centralLayout->setSpacing( 0 );
+
+        QGraphicsLinearLayout *bottomLayout = new QGraphicsLinearLayout;
+        bottomLayout->setContentsMargins( 0, 2, 0, 0 );
+        bottomLayout->setSpacing( 0 );
+
+        mTabBar = new ComicTabBar( mMainWidget );
+        mTabBar->nativeWidget()->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
         mTabBar->hide();
         connect( mTabBar, SIGNAL( currentChanged( int ) ), this, SLOT( slotTabChanged( int ) ) );
+        centralLayout->addItem( mTabBar );
 
-        mLabelTop = new Plasma::Label( mMainWidget );
+        mLabelTop = new ComicLabel( mMainWidget );
         mLabelTop->setMinimumWidth( 0 );
         mLabelTop->nativeWidget()->setWordWrap( false );
         mLabelTop->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelTop->setAlignment( Qt::AlignCenter );
         mLabelTop->hide();
+        centralLayout->addItem( mLabelTop );
+        centralLayout->setItemSpacing( 1, 2 );
 
         mImageWidget = new ImageWidget( mMainWidget );
         mImageWidget->setZValue( 0 );
         mImageWidget->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
-        mImageWidget->hide();
+        centralLayout->addItem( mImageWidget );
 
-        mLabelId = new Plasma::Label( mMainWidget );
+        mLabelId = new ComicLabel( mMainWidget );
         mLabelId->setMinimumWidth( 0 );
         mLabelId->nativeWidget()->setWordWrap( false );
         mLabelId->nativeWidget()->setCursor( Qt::PointingHandCursor );
         mLabelId->nativeWidget()->setToolTip( i18n( "Jump to Strip ..." ) );
         mLabelId->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelId->hide();
+        bottomLayout->addItem( mLabelId );
+        bottomLayout->addStretch( 1 );
 
-        mLabelUrl = new Plasma::Label( mMainWidget );
+        mLabelUrl = new ComicLabel( mMainWidget );
         mLabelUrl->setMinimumWidth( 0 );
         mLabelUrl->nativeWidget()->setWordWrap( false );
         if ( hasAuthorization( "LaunchApp" ) ) {
@@ -303,21 +260,26 @@ QGraphicsWidget *ComicApplet::graphicsWidget()
         }
         mLabelUrl->nativeWidget()->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
         mLabelUrl->hide();
+        bottomLayout->addItem( mLabelUrl );
+        centralLayout->addItem( bottomLayout );
 
         mLeftArrow = new ArrowWidget( mMainWidget );
         mLeftArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
         mLeftArrow->setCursor( Qt::PointingHandCursor );
         mLeftArrow->hide();
-        mLeftArrow->setGeometry( QRectF( QPointF( 0, 0 ), mLeftArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
         connect( mLeftArrow, SIGNAL( clicked() ), this, SLOT( slotPreviousDay() ) );
+        layout->addItem( mLeftArrow );
+        layout->addItem( centralLayout );
 
         mRightArrow = new ArrowWidget( mMainWidget );
         mRightArrow->setDirection( Plasma::Right );
         mRightArrow->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding ) );
         mRightArrow->setCursor( Qt::PointingHandCursor );
         mRightArrow->hide();
-        mRightArrow->setGeometry( QRectF( QPointF( 0, 0 ), mRightArrow->preferredSize() ) );//to intially have a size -- needed in updateSize
         connect( mRightArrow, SIGNAL( clicked() ), this, SLOT( slotNextDay() ) );
+        layout->addItem( mRightArrow );
+
+        mMainWidget->setLayout( layout );
 
     #ifdef HAVE_NEPOMUK
 //         for manually saving the comics
@@ -404,6 +366,11 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mLabelUrl->setText( mWebsiteUrl.host() );
     mImageWidget->setScaled( !mScaleComic );
 
+    mTabBar->setVisible( mShowTabBar && mUseTabs );
+    mLabelTop->setVisible( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() );
+    mLabelId->setVisible( mShowComicIdentifier && !mLabelId->text().isEmpty() );
+    mLabelUrl->setVisible( mShowComicUrl && !mLabelUrl->text().isEmpty() );
+
     updateButtons();
     updateContextMenu();
 
@@ -415,10 +382,8 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     Plasma::ToolTipManager::self()->setContent( this, toolTipData );
 
     if ( !mImage.isNull() ) {
-        updateSize();
-        update();
+        QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
     }
-    emit sizeHintChanged(Qt::PreferredSize);
 }
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
@@ -452,8 +417,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
 void ComicApplet::applyConfig()
 {
-    bool checkButtonBar = ( mArrowsOnHover != mConfigWidget->arrowsOnHover() );
-    bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier().at( 0 ) );
+    const bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier().at( 0 ) );
 
     mTabIdentifier = mConfigWidget->comicIdentifier();
     mComicIdentifier = mTabIdentifier.at( 0 );
@@ -465,7 +429,7 @@ void ComicApplet::applyConfig()
     mShowComicIdentifier = mConfigWidget->showComicIdentifier();
     mArrowsOnHover = mConfigWidget->arrowsOnHover();
     mMiddleClick = mConfigWidget->middleClick();
-    QTime time = mConfigWidget->tabSwitchTime();
+    const QTime time = mConfigWidget->tabSwitchTime();
     mSwitchTabTime = time.second() + time.minute() * 60 + time.hour() * 3600;
     mShowTabBar = !mConfigWidget->hideTabBar();
     mUseTabs = mConfigWidget->useTabs();
@@ -474,13 +438,9 @@ void ComicApplet::applyConfig()
     slotStartTimer();
     updateTabBar();
     saveConfig();
+    buttonBar();
 
     changeComic( differentComic );
-
-    if ( checkButtonBar ) {
-        buttonBar();
-        update();
-    }
 }
 
 void ComicApplet::changeComic( bool differentComic )
@@ -553,6 +513,7 @@ void ComicApplet::loadConfig()
     mUseTabs = cg.readEntry( "useTabs", false );
     mSwitchTabs = cg.readEntry( "switchTabs", false );
     mSavingDir = cg.readEntry( "savingDir", QString() );
+    mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
 
     buttonBar();
 }
@@ -663,8 +624,16 @@ void ComicApplet::slotStorePosition()
 void ComicApplet::slotSizeChanged()
 {
     // if the applet was resized manually by the user
-    if ( mMainWidget->geometry().size() != mLastSize ) {
-        mMaxSize = mMainWidget->geometry().size();
+    if ( isInPanel() ) {
+        if ( mMainWidget->size() != mLastSize ) {
+            mMaxSize = mMainWidget->size();
+            updateSize();
+
+            KConfigGroup cg = config();
+            cg.writeEntry( "maxSize", mMaxSize );
+        }
+    } else if ( this->geometry().size() != mLastSize ) {
+        mMaxSize = this->geometry().size();
         updateSize();
 
         KConfigGroup cg = config();
@@ -683,38 +652,31 @@ void ComicApplet::slotShop()
     KRun::runUrl( mShopUrl, "text/html", 0 );
 }
 
+bool ComicApplet::isInPanel() const
+{
+    return ( this->geometry().width() < 70 ) || ( this->geometry().height() < 50 );
+}
+
 void ComicApplet::updateSize()
 {
-    //HACK to work around shortcomings in the layout code FIXME later
-    mLabelId->setPreferredWidth( mLabelId->nativeWidget()->sizeHint().width() );
-    mLabelUrl->setPreferredWidth( mLabelUrl->nativeWidget()->sizeHint().width() );
-
-    //leftArea and rightArea are not completly correct when their size is smaller then the preferredSize
-    int leftArea = ( mShowPreviousButton && !mArrowsOnHover ) ? mLeftArrow->preferredSize().width() + 1 : 0;
-    int rightArea = ( mShowNextButton && !mArrowsOnHover ) ? mRightArrow->preferredSize().width() + 1 : 0;
-    int topArea = mTabBar->nativeWidget()->height() ? mTabBar->nativeWidget()->height() : s_tabHeight;
-    topArea = ( mShowTabBar && mUseTabs ) ? topArea + 5 : 0;
-    topArea += ( ( mShowComicAuthor || mShowComicTitle ) && !mLabelTop->text().isEmpty() ) ? mLabelTop->nativeWidget()->height() : 0;
-    int bottomArea = ( mShowComicUrl && !mLabelUrl->text().isEmpty() ) ? mLabelUrl->nativeWidget()->height() : 0;
-    bottomArea = ( mShowComicIdentifier && !mLabelId->text().isEmpty() ) ? mLabelId->nativeWidget()->height() : bottomArea;
-
-    QSizeF margins = mMainWidget->geometry().size() - mMainWidget->contentsRect().size();
-
-    QSizeF availableSize = mMaxSize - margins;
-    availableSize.setHeight( availableSize.height() - topArea - bottomArea );
-    availableSize.setWidth( availableSize.width() - leftArea - rightArea );
+    QSizeF notAvailableSize;
+    if ( isInPanel() ) {
+        notAvailableSize =  mMainWidget->geometry().size() - mImageWidget->size();
+    } else {
+        notAvailableSize =  this->geometry().size() - mImageWidget->size();
+    }
+    QSizeF availableSize = mMaxSize - notAvailableSize;
     mImageWidget->setAvailableSize( availableSize );
+    mLastSize = mImageWidget->preferredSize() + notAvailableSize;
 
-    mLastSize = mImageWidget->preferredSize() + margins;
-    mLastSize.setHeight( mLastSize.height() + topArea + bottomArea );
-    mLastSize.setWidth( mLastSize.width() + leftArea + rightArea );
-
-    createLayout();
-
-    mMainWidget->resize( mLastSize );
-    resize( mLastSize );
-    emit sizeHintChanged(Qt::PreferredSize);
-    emit appletTransformedItself();
+    if ( isInPanel() ) {
+        mMainWidget->resize( mLastSize );
+    } else {
+        resize( mLastSize );
+        emit sizeHintChanged( Qt::PreferredSize );
+        emit appletTransformedItself();
+    }
+    mImageWidget->update();
 }
 
 QList<QAction*> ComicApplet::contextualActions()
@@ -747,18 +709,17 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
     if ( !mComicIdentifier.isEmpty() && mEngine && mEngine->isValid() ) {
         setBusy( true );
         const QString identifier = mComicIdentifier + ':' + identifierSuffix;
-        static QString oldSource = identifier;
 
         //disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
         //if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can come in
-        if ( !mIdentifierError.isEmpty() && !mIdentifierError.contains(mComicIdentifier) ) {
+        if ( !mIdentifierError.isEmpty() && !mIdentifierError.contains( mComicIdentifier ) ) {
             mEngine->disconnectSource( mIdentifierError, this );
             mIdentifierError.clear();
         }
-        if ( ( mIdentifierError != oldSource ) && ( oldSource != identifier ) ) {
-            mEngine->disconnectSource( oldSource, this );
+        if ( ( mIdentifierError != mOldSource ) && ( mOldSource != identifier ) ) {
+            mEngine->disconnectSource( mOldSource, this );
         }
-        oldSource = identifier;
+        mOldSource = identifier;
 
         mEngine->disconnectSource( identifier, this );
         mEngine->connectSource( identifier, this );
@@ -779,6 +740,9 @@ void ComicApplet::updateButtons()
 {
     mShowNextButton = !mNextIdentifierSuffix.isEmpty();
     mShowPreviousButton = !mPreviousIdentifierSuffix.isEmpty();
+
+    mLeftArrow->setVisible( !mArrowsOnHover && mShowPreviousButton );
+    mRightArrow->setVisible( !mArrowsOnHover && mShowNextButton );
 
     if ( mNextButton && mPrevButton ) {
         mNextButton->setEnabled( mShowNextButton );

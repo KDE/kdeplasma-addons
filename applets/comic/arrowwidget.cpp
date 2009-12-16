@@ -19,16 +19,20 @@
 
 #include "arrowwidget.h"
 
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>
 
 #include <Plasma/Svg>
 
-ArrowWidget::ArrowWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
-    : QGraphicsWidget( parent, wFlags ), mDirection( Plasma::Left )
+const int Arrow::HEIGHT = 28;
+const int Arrow::WIDTH = 28;
+
+Arrow::Arrow( QGraphicsItem *parent, Qt::WindowFlags wFlags )
+  : QGraphicsWidget( parent, wFlags ),
+    mDirection( Plasma::Left )
 {
     setCacheMode( DeviceCoordinateCache );
-    setPreferredSize( 30, 30 );
 
     mArrow = new Plasma::Svg( this );
     mArrow->setImagePath( "widgets/arrows" );
@@ -36,11 +40,24 @@ ArrowWidget::ArrowWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
     setDirection( mDirection );
 }
 
-ArrowWidget::~ArrowWidget()
+Arrow::~Arrow()
 {
 }
 
-void ArrowWidget::setDirection( Plasma::Direction direction )
+QSizeF Arrow::sizeHint( Qt::SizeHint which, const QSizeF &constraint ) const
+{
+    Q_UNUSED( which )
+    Q_UNUSED( constraint )
+
+    return QSizeF( WIDTH, HEIGHT );
+}
+
+Plasma::Direction Arrow::direction() const
+{
+    return mDirection;
+}
+
+void Arrow::setDirection(Plasma::Direction direction)
 {
     mDirection = direction;
     if ( mDirection == Plasma::Left ) {
@@ -54,29 +71,38 @@ void ArrowWidget::setDirection( Plasma::Direction direction )
     }
 }
 
-Plasma::Direction ArrowWidget::direction() const
-{
-    return mDirection;
-}
-
-void ArrowWidget::paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget* )
+void Arrow::paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget* )
 {
     p->setRenderHint( QPainter::Antialiasing );
 
-    QRectF contentRect = this->rect();
-    qreal arrowWidth = preferredWidth();
-    qreal arrowHeight = preferredHeight();
+    mArrow->paint( p, 0, 0, WIDTH, HEIGHT, mArrowName );
+}
 
-    //there is not enough space to paint the arrows at their preferred size, so scale them down and keep their aspect ratio
-    if ( ( arrowWidth > contentRect.width() ) || ( arrowHeight > contentRect.height() ) ) {
-        arrowWidth = ( contentRect.height() > contentRect.width() ) ? contentRect.width() : contentRect.height();
-        arrowHeight = arrowWidth;
-    }
+ArrowWidget::ArrowWidget( QGraphicsItem *parent, Qt::WindowFlags wFlags )
+    : QGraphicsWidget( parent, wFlags )
+{
+    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout( Qt::Vertical );
+    layout->setContentsMargins( 1, 1, 1, 1 );
+    layout->addStretch();
+    mArrow = new Arrow( this );
+    layout->addItem( mArrow );
+    layout->addStretch();
 
-    qreal buttonLeft = contentRect.left() + ( contentRect.width() - arrowWidth ) / 2;
-    qreal buttonTop = contentRect.top() + ( contentRect.height() - arrowHeight ) / 2;
+    setLayout( layout );
+}
 
-    mArrow->paint( p, buttonLeft, buttonTop, arrowWidth, arrowHeight, mArrowName );
+ArrowWidget::~ArrowWidget()
+{
+}
+
+void ArrowWidget::setDirection( Plasma::Direction direction )
+{
+    mArrow->setDirection( direction );
+}
+
+Plasma::Direction ArrowWidget::direction() const
+{
+    return mArrow->direction();
 }
 
 void ArrowWidget::mousePressEvent ( QGraphicsSceneMouseEvent *event )
@@ -84,6 +110,27 @@ void ArrowWidget::mousePressEvent ( QGraphicsSceneMouseEvent *event )
     if ( event->button() == Qt::LeftButton ) {
         emit clicked();
     }
+}
+
+QSizeF ArrowWidget::sizeHint( Qt::SizeHint which, const QSizeF &constraint ) const
+{
+    if ( !isVisible() ) {
+        return QSizeF( 0, 0 );
+    }
+
+    return QGraphicsWidget::sizeHint( which, constraint );
+}
+
+void ArrowWidget::hideEvent( QHideEvent *event )
+{
+    updateGeometry();
+    QGraphicsWidget::hideEvent( event );
+}
+
+void ArrowWidget::showEvent(QShowEvent* event)
+{
+    updateGeometry();
+    QGraphicsWidget::showEvent( event );
 }
 
 #include "arrowwidget.moc"

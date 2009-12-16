@@ -30,16 +30,38 @@ namespace Plasma {
 class Svg;
 }
 
+class Arrow : public QGraphicsWidget
+{
+    Q_OBJECT
+
+    public:
+        Arrow( QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0 );
+        ~Arrow();
+
+        void paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget* widget = 0 );
+        void setDirection( Plasma::Direction direction );
+        Plasma::Direction direction() const;
+
+    protected:
+        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const;
+
+    private:
+        Plasma::Svg *mArrow;
+        Plasma::Direction mDirection;
+        QString mArrowName;
+
+        static const int HEIGHT;
+        static const int WIDTH;
+};
 
 class ArrowWidget : public QGraphicsWidget
 {
     Q_OBJECT
 
     public:
-        ArrowWidget ( QGraphicsItem * parent = 0, Qt::WindowFlags wFlags = 0 );
+        ArrowWidget ( QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0 );
         ~ArrowWidget();
 
-        void paint( QPainter *p, const QStyleOptionGraphicsItem *, QWidget* widget = 0 );
         void setDirection( Plasma::Direction direction );
         Plasma::Direction direction() const;
 
@@ -47,12 +69,13 @@ class ArrowWidget : public QGraphicsWidget
         void clicked();
 
     protected:
-        void mousePressEvent( QGraphicsSceneMouseEvent * );
+        void mousePressEvent( QGraphicsSceneMouseEvent *event );
+        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const;
+        void hideEvent( QHideEvent *event );
+        void showEvent( QShowEvent *event );
 
     private:
-        QString mArrowName;
-        Plasma::Direction mDirection;
-        Plasma::Svg *mArrow;
+        Arrow *mArrow;
 };
 
 #endif

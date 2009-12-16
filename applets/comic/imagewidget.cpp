@@ -167,9 +167,6 @@ void ImageWidget::setImage( const QImage &image )
 {
     mImage = image;
     mDifferentImage = true;
-    resetScrollBars();
-    updateScrollBars();
-    update( this->rect() );
 }
 
 void ImageWidget::setScaled( bool isScaled )
@@ -223,7 +220,7 @@ void ImageWidget::setAvailableSize( const QSizeF &available )
             mLastSize = QSizeF( finalWidth, finalHeight );
         }
 
-        setPreferredSize( mLastSize );
+        setPreferredSize( mLastSize.toSize() );//works better with values in integer
     }
 }
 

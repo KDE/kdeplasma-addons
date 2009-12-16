@@ -26,8 +26,10 @@
 #include <QtGui/QImage>
 
 #include <KUrl>
-#include <plasma/popupapplet.h>
-#include <plasma/dataengine.h>
+#include <Plasma/DataEngine>
+#include <Plasma/Label>
+#include <Plasma/PopupApplet>
+#include <Plasma/TabBar>
 
 class ArrowWidget;
 class ConfigWidget;
@@ -40,10 +42,66 @@ class QTimer;
 
 namespace Plasma {
 class Frame;
-class Label;
 class PushButton;
-class TabBar;
 }
+
+//Helper class, sets the sizeHint to 0 if the TabBar is hidden
+class ComicTabBar : public Plasma::TabBar
+{
+    public:
+        ComicTabBar( QGraphicsWidget *parent = 0 ) : TabBar( parent ) {}
+        ~ComicTabBar() {}
+
+    protected:
+        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
+        {
+            if ( !isVisible() ) {
+                return QSizeF( 0, 0 );
+            }
+            return QGraphicsWidget::sizeHint( which, constraint );
+        }
+
+        void hideEvent( QHideEvent *event )
+        {
+            updateGeometry();
+            QGraphicsWidget::hideEvent( event );
+        }
+
+        void showEvent( QShowEvent *event )
+        {
+            updateGeometry();
+            QGraphicsWidget::showEvent( event );
+        }
+};
+
+//Helper class, sets the sizeHint to 0 if the Label is hidden
+class ComicLabel : public Plasma::Label
+{
+    public:
+        ComicLabel( QGraphicsWidget *parent = 0 ) : Plasma::Label( parent ) {}
+        ~ComicLabel() {}
+
+    protected:
+        QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
+        {
+            if ( !isVisible() ) {
+                return QSizeF( 0, 0 );
+            }
+            return QGraphicsProxyWidget::sizeHint( which, constraint );
+        }
+
+        void hideEvent( QHideEvent *event )
+        {
+            updateGeometry();
+            QGraphicsProxyWidget::hideEvent( event );
+        }
+
+        void showEvent( QShowEvent *event )
+        {
+            updateGeometry();
+            QGraphicsProxyWidget::showEvent( event );
+        }
+};
 
 class ComicApplet : public Plasma::PopupApplet
 {
@@ -81,8 +139,8 @@ class ComicApplet : public Plasma::PopupApplet
         void applyConfig();
         void checkDayChanged();
         void buttonBar();
-        void createLayout();
         void fullView();
+        void updateSize();
 
     protected:
         QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint = QSizeF()) const;
@@ -96,8 +154,9 @@ class ComicApplet : public Plasma::PopupApplet
         void updateContextMenu();
         void loadConfig();
         void saveConfig();
-        void updateSize();
+        bool isInPanel() const;
 
+    private:
         QImage mImage;
         QDate mCurrentDay;
         KUrl mWebsiteUrl;
@@ -116,6 +175,7 @@ class ComicApplet : public Plasma::PopupApplet
         QString mStoredIdentifierSuffix;
         QString mIdentifierError;
         QString mSavingDir;
+        QString mOldSource;
         ConfigWidget *mConfigWidget;
         bool mScaleComic;
         bool mShowPreviousButton;
@@ -145,9 +205,9 @@ class ComicApplet : public Plasma::PopupApplet
         Plasma::DataEngine *mEngine;
         Plasma::Frame *mFrame;
         QPropertyAnimation *mFrameAnim;
-        Plasma::Label *mLabelId;
-        Plasma::Label *mLabelTop;
-        Plasma::Label *mLabelUrl;
+        ComicLabel *mLabelId;
+        ComicLabel *mLabelTop;
+        ComicLabel *mLabelUrl;
         Plasma::PushButton *mPrevButton;
         Plasma::PushButton *mNextButton;
         Plasma::PushButton *mZoomButton;
@@ -161,7 +221,7 @@ class ComicApplet : public Plasma::PopupApplet
         bool mShowTabBar;
         bool mSwitchTabs;
         int mSwitchTabTime;
-        Plasma::TabBar *mTabBar;
+        ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
         QStringList mTabText;
 };
