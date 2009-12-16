@@ -36,8 +36,8 @@ MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
     Q_UNUSED(args);
     setObjectName("MediaWikiRunner");
 
-    QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(id());
-    KService::List offers = KServiceTypeTrader::self()->query("Plasma/Runner", constraint);
+    const QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(id());
+    const KService::List offers = KServiceTypeTrader::self()->query("Plasma/Runner", constraint);
 
     foreach (const KPluginInfo &info, KPluginInfo::fromServices(offers)) {
 
@@ -113,7 +113,7 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
 void MediaWikiRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
-    QString wikiurl = match.data().toUrl().toString();
+    const QString wikiurl = match.data().toUrl().toString();
     kDebug() << "Open MediaWiki page " << wikiurl;
 
     if (!wikiurl.isEmpty()) {
