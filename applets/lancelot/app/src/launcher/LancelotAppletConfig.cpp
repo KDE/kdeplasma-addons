@@ -125,7 +125,7 @@ QStringList LancelotAppletConfig::showingCategories(bool value) const
 
 QString LancelotAppletConfig::icon() const
 {
-    foreach (const QString id, icons.keys()) {
+    foreach (const QString &id, icons.keys()) {
         QListWidgetItem * item = icons[id];
         if (item->isSelected()) {
             if (id == "custom") {
@@ -146,7 +146,7 @@ void LancelotAppletConfig::setShowAllCategories(bool value)
 
 void LancelotAppletConfig::setShowingCategories(QStringList ids, bool value)
 {
-    foreach (const QString id, categories.keys()) {
+    foreach (const QString &id, categories.keys()) {
         QListWidgetItem * item = categories[id];
         item->setSelected((ids.contains(id)) ? value : (!value));
     }
@@ -178,7 +178,7 @@ void LancelotAppletConfig::setClickActivation(bool value)
 void LancelotAppletConfig::setIcon(const QString & icon)
 {
     bool found = false;
-    foreach (const QString id, icons.keys()) {
+    foreach (const QString &id, icons.keys()) {
         QListWidgetItem * item = icons[id];
         item->setSelected(id == icon);
         if (id == icon) {

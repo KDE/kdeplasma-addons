@@ -184,7 +184,7 @@ bool Runner::hasContextActions(int index) const
     }
 
     QString id = itemAt(index).data.value< QStringList >().at(0);
-    foreach (const Plasma::QueryMatch match, m_runnerManager->matches()) {
+    foreach (const Plasma::QueryMatch &match, m_runnerManager->matches()) {
         if (match.id() == id) {
             if (m_runnerManager->actionsForMatch(match).size() > 0) {
                 return true;
@@ -205,7 +205,7 @@ void Runner::setContextActions(int index, Lancelot::PopupMenu * menu)
     }
 
     QString id = itemAt(index).data.value< QStringList >().at(0);
-    foreach (const Plasma::QueryMatch match, m_runnerManager->matches()) {
+    foreach (const Plasma::QueryMatch &match, m_runnerManager->matches()) {
         if (match.id() == id) {
             foreach (QAction * action, m_runnerManager->actionsForMatch(match)) {
                 menu->addAction(action->icon(), action->text());

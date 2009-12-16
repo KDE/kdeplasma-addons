@@ -515,7 +515,7 @@ void LancelotWindow::setupModels()
         MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
-        foreach (const QString plugin, plugins.split(',')) {
+        foreach (const QString &plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
             MergedAddModel(m_modelGroups["ContactsLeft"], model->selfTitle(), model);
         }
@@ -528,7 +528,7 @@ void LancelotWindow::setupModels()
         MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
-        foreach (const QString plugin, plugins.split(',')) {
+        foreach (const QString &plugin, plugins.split(',')) {
             model = new Lancelot::PlasmaServiceListModel(plugin);
             MergedAddModel(m_modelGroups["ContactsRight"], model->selfTitle(), model);
         }

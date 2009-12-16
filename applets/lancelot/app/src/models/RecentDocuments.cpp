@@ -67,7 +67,7 @@ void RecentDocuments::contextActivate(int index, QAction * context)
             break;
         case 1:
             // clearing the list
-            foreach (const QString file, QDir(m_dirPath).entryList(QDir::Files)) {
+            foreach (const QString &file, QDir(m_dirPath).entryList(QDir::Files)) {
                 QFile::remove(m_dirPath + '/' + file);
             }
             break;

@@ -57,7 +57,7 @@ void ContactsKopete::timerEvent(QTimerEvent * event)
         if (m_contactsToUpdate.size() > 5) {
             load(true);
         } else {
-            foreach(const QString contact, m_contactsToUpdate) {
+            foreach(const QString &contact, m_contactsToUpdate) {
                 updateContactData(contact);
             }
         }
