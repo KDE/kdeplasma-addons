@@ -310,11 +310,12 @@ void WeatherWallpaper::showAdvancedDialog()
 
 void WeatherWallpaper::getNewWallpaper()
 {
-    KNS3::DownloadDialog dialog("wallpaper.knsrc", m_configWidget);
-    dialog.exec();
-    if (m_model && dialog.changedEntries().size() > 0) {
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("wallpaper.knsrc", m_configWidget);
+    dialog->exec();
+    if (m_model && dialog->changedEntries().size() > 0) {
         m_model->reload();
     }
+    delete dialog;
 }
 
 void WeatherWallpaper::colorChanged(const QColor& color)
