@@ -5,6 +5,7 @@ Name[fr]=GroupingPanel
 Name[pt]=Painel de Agrupamento
 Name[sv]=Grupperingspanel
 Name[uk]=Панель групування
+Name[x-test]=xxGroupingPanelxx
 Icon=
 Type=Service
 X-KDE-ServiceTypes=Plasma/Containment
