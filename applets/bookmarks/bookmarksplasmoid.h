@@ -47,6 +47,7 @@ class BookmarksPlasmoid : public Applet
 
   public: // Plasma::Applet API
     virtual void init();
+    virtual QList<QAction*> contextualActions();
 
   protected Q_SLOTS:
     void toggleMenu( bool toggle );
@@ -55,7 +56,9 @@ class BookmarksPlasmoid : public Applet
   private:
     IconWidget* mIcon;
 
-    KActionCollection* mActionCollection;
+    QList<QAction*> mContextualActions;
+
+    KActionCollection* mBookmarkActionCollection;
     KBookmarkMenu* mBookmarkMenu;
     BookmarkOwner* mBookmarkOwner;
 };

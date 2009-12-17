@@ -27,6 +27,7 @@
 #include <Plasma/ToolTipManager>
 // KDE
 #include <KActionCollection>
+#include <KStandardAction>
 #include <KIconLoader>
 #include <KIcon>
 #include <KBookmarkMenu>
@@ -57,6 +58,7 @@ namespace Plasma
 BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args )
   : Applet( parent, args ),
     mIcon( new IconWidget(KIcon( QString::fromLatin1("bookmarks") ),QString(),this) ),
+    mBookmarkActionCollection( 0 ),
     mBookmarkMenu( 0 ),
     mBookmarkOwner( 0 )
 {
@@ -82,6 +84,16 @@ void BookmarksPlasmoid::init()
     Plasma::ToolTipManager::self()->registerWidget( this );
     Plasma::ToolTipContent toolTipContent( i18n("Bookmarks"), i18n("Quick Access to the Bookmarks"), mIcon->icon() );
     Plasma::ToolTipManager::self()->setContent( this, toolTipContent );
+
+    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
+
+    KAction* editorOpener = KStandardAction::editBookmarks( bookmarkManager, SLOT(slotEditBookmarks()), this );
+    mContextualActions.append( editorOpener );
+}
+
+QList<QAction*> BookmarksPlasmoid::contextualActions()
+{
+    return mContextualActions;
 }
 
 void BookmarksPlasmoid::toggleMenu( bool toggle )
@@ -96,7 +108,7 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
     if( isFirstTime )
     {
         mBookmarkOwner = new BookmarkOwner();
-        mActionCollection = new KActionCollection( this );
+        mBookmarkActionCollection = new KActionCollection( this );
     }
 
     delete mBookmarkMenu;
@@ -106,7 +118,7 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
     KMenu* menu = new KMenu();
     menu->setAttribute( Qt::WA_DeleteOnClose );
     connect( menu, SIGNAL(aboutToHide()), mIcon, SLOT(setUnpressed()) );
-    mBookmarkMenu = new KBookmarkMenu( bookmarkManager, mBookmarkOwner, menu, mActionCollection );
+    mBookmarkMenu = new KBookmarkMenu( bookmarkManager, mBookmarkOwner, menu, mBookmarkActionCollection );
 
     menu->popup( popupPosition(menu->sizeHint()) );
 }
