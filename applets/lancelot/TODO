@@ -68,4 +68,5 @@ Feature requests:
  - Disk free space info - maybe
  - return the old logout dim-screen (https://bugs.kde.org/show_bug.cgi?id=196219)
  - configurable sizes for item heights - maybe
+ - file actions move/delete for folder model - maybe
 
