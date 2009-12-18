@@ -42,6 +42,7 @@ AbstractGroupPrivate::AbstractGroupPrivate(AbstractGroup *group)
         immutability(Plasma::Mutable),
         groupType(AbstractGroup::FreeGroup),
         interestingGroup(0),
+        isMainGroup(false),
         m_mainConfig(0)
 {
     background = new Plasma::FrameSvg(q);
@@ -193,7 +194,9 @@ AbstractGroup::~AbstractGroup()
 
 void AbstractGroup::setImmutability(Plasma::ImmutabilityType immutability)
 {
-    setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
+    if (!isMainGroup()) {
+        setFlag(QGraphicsItem::ItemIsMovable, immutability == Plasma::Mutable);
+    }
     d->immutability = immutability;
 }
 
@@ -390,6 +393,17 @@ AbstractGroup::GroupType AbstractGroup::groupType() const
     return d->groupType;
 }
 
+void AbstractGroup::setIsMainGroup(bool isMainGroup)
+{
+    d->isMainGroup = isMainGroup;
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+}
+
+bool AbstractGroup::isMainGroup() const
+{
+    return d->isMainGroup;
+}
+
 bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
 {
     AbstractGroup *group = qobject_cast<AbstractGroup *>(obj);
@@ -435,7 +449,7 @@ bool AbstractGroup::eventFilter(QObject *obj, QEvent *event)
                         }
                     }
                 }
-                if (children().contains(widget) && !contentsRect().contains(widget->geometry())) {
+                if (children().contains(widget) && !contentsRect().contains(widget->geometry()) && !isMainGroup()) {
                     AbstractGroup *parentGroup = qgraphicsitem_cast<AbstractGroup *>(parentItem());
                     if (applet) {
                         removeApplet(applet, parentGroup);
@@ -480,12 +494,12 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
-                         (d->containment->formFactor() != Plasma::Horizontal)) {
+//     if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
+//                          (d->containment->formFactor() != Plasma::Horizontal)) {
         d->background->paintFrame(painter);
-    } else {
+//     } else {
         //TODO draw a halo, something
-    }
+//     }
 }
 
 #include "abstractgroup.moc"

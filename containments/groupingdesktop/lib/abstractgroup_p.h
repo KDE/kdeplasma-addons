@@ -49,6 +49,7 @@ class AbstractGroupPrivate
         QPointF currChildPos;
         AbstractGroup::GroupType groupType;
         AbstractGroup *interestingGroup;
+        bool isMainGroup;
 
     private:
         KConfigGroup *m_mainConfig;

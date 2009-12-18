@@ -35,7 +35,7 @@ class AbstractGroupPrivate;
  *
  * AbstractGroup is a base class for special widgets thoughts to contain Plasma::Applet
  */
-class AbstractGroup : public QGraphicsWidget
+class PLASMA_EXPORT AbstractGroup : public QGraphicsWidget
 {
     Q_OBJECT
     public:
@@ -161,6 +161,10 @@ class AbstractGroup : public QGraphicsWidget
          * Returns the plugin name for the group
          **/
         virtual QString pluginName() const = 0;
+
+        void setIsMainGroup(bool isMainGroup);
+
+        bool isMainGroup() const;
 
         /**
          * Reimplemented from QGraphicsWidget

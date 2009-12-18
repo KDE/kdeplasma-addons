@@ -100,10 +100,11 @@ GridGroup::GridGroup(QGraphicsItem *parent, Qt::WindowFlags wFlags)
             m_overlay(0)
 {
     resize(200,200);
-    setMinimumSize(50,50);
+    setMinimumSize(100,50);
     setGroupType(AbstractGroup::ConstrainedGroup);
 
     m_layout->setContentsMargins(10, 10, 10, 10);
+    m_layout->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     setLayout(m_layout);
 
     m_spacer->parent = this;
@@ -458,6 +459,10 @@ void GridGroup::overlayEndsMoving()
 
 void GridGroup::onItemMovedOutside(qreal x, qreal y)
 {
+    if (isMainGroup()) {
+        return;
+    }
+
     QGraphicsWidget *item = m_overlay->item();
     QPointF newPos(item->pos() + QPointF(x, y));
     item->moveBy(x, y);

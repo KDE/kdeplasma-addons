@@ -24,9 +24,7 @@
 #include "../lib/groupingcontainment.h"
 
 class QAction;
-class QTimer;
 class QGraphicsLinearLayout;
-class Spacer;
 
 namespace Plasma
 {
@@ -36,65 +34,44 @@ namespace Plasma
 class GroupingPanel : public GroupingContainment
 {
     Q_OBJECT
-public:
-    GroupingPanel(QObject *parent, const QVariantList &args);
-    ~GroupingPanel();
-    void init();
-    QList<QAction*> contextualActions();
+    public:
+        GroupingPanel(QObject *parent, const QVariantList &args);
+        ~GroupingPanel();
+        void init();
+        QList<QAction*> contextualActions();
 
-    void constraintsEvent(Plasma::Constraints constraints);
+        void constraintsEvent(Plasma::Constraints constraints);
 
-    void paintInterface(QPainter *painter,
-                        const QStyleOptionGraphicsItem *option,
-                        const QRect &contentsRect);
-    void paintBackground(QPainter *painter, const QRect &contentsRect);
-    void showDropZone(const QPoint pos);
+        void paintInterface(QPainter *painter,
+                            const QStyleOptionGraphicsItem *option,
+                            const QRect &contentsRect);
+        void paintBackground(QPainter *painter, const QRect &contentsRect);
 
-protected:
-    void saveState(KConfigGroup &config) const;
+    protected:
+        void saveState(KConfigGroup &config) const;
 
-    void saveContents(KConfigGroup &group) const;
-    void restore(KConfigGroup &group);
+    private slots:
+        void themeUpdated();
+        void backgroundChanged();
 
-private slots:
-    void themeUpdated();
-    void backgroundChanged();
-    void layoutApplet(Plasma::Applet* applet, const QPointF &pos);
-    void layoutGroup(AbstractGroup *group, const QPointF &pos);
-    void layoutWidget(QGraphicsWidget *widget, const QPointF &pos);
-    void appletRemoved(Plasma::Applet* applet);
-    void groupRemoved(AbstractGroup *group);
-    void widgetRemoved(QGraphicsWidget *widget);
-    void updateSize();
-    void adjustLastSpace();
-    void enableUpdateSize();
+    private:
+        /**
+        * update the formfactor based on the location
+        */
+        void setFormFactorFromLocation(Plasma::Location loc);
 
-private:
-    /**
-     * update the formfactor based on the location
-     */
-    void setFormFactorFromLocation(Plasma::Location loc);
+        /**
+        * recalculate which borders to show
+        */
+        void updateBorders(const QRect &geom, bool themeChange = false);
 
-    /**
-     * recalculate which borders to show
-     */
-    void updateBorders(const QRect &geom, bool themeChange = false);
+        Plasma::FrameSvg *m_background;
+        QAction* m_configureAction;
 
-    Plasma::FrameSvg *m_background;
-    QAction* m_configureAction;
-
-    //cached values
-    QSize m_currentSize;
-    QRect m_lastViewGeom;
-    bool m_maskDirty;
-    bool m_canResize;
-    int m_spacerIndex;
-    Spacer *m_spacer;
-    Spacer *m_lastSpace;
-    QTimer *m_lastSpaceTimer;
-    QGraphicsLinearLayout *m_layout;
-
-    friend class Spacer;
+        //cached values
+        QSize m_currentSize;
+        QRect m_lastViewGeom;
+        bool m_maskDirty;
 };
 
 

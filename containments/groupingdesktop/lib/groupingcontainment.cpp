@@ -21,6 +21,7 @@
 
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneContextMenuEvent>
+#include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QAction>
 
 #include <KDebug>
@@ -38,7 +39,10 @@ class GroupingContainmentPrivate
     public:
         GroupingContainmentPrivate(GroupingContainment *containment)
             : q(containment),
-              interestingGroup(0)
+              interestingGroup(0),
+              mainGroup(0),
+              mainGroupId(0),
+              layout(0)
         {
             newGroupAction = new QAction(i18n("Add a new group"), q);
             newGroupMenu = new KMenu(i18n("Add a new group"), 0);
@@ -66,7 +70,6 @@ class GroupingContainmentPrivate
 
         AbstractGroup *createGroup(const QString &plugin, const QPointF &pos, unsigned int id)
         {
-            kDebug()<<plugin;
             AbstractGroup *group = 0;
             if (plugin == "grid") {
                 group = new GridGroup(q);
@@ -125,6 +128,10 @@ class GroupingContainmentPrivate
 
         AbstractGroup *groupAt(const QPointF &pos)
         {
+            if (pos.isNull()) {
+                return 0;
+            }
+
             QGraphicsItem *item = q->scene()->itemAt(q->mapToScene(pos));
 
             AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(item);
@@ -215,6 +222,9 @@ class GroupingContainmentPrivate
         QAction *separator;
         QAction *deleteGroupAction;
         QPointF lastClick;
+        AbstractGroup *mainGroup;
+        unsigned int mainGroupId;
+        QGraphicsLinearLayout *layout;
 };
 
 GroupingContainment::GroupingContainment(QObject* parent, const QVariantList& args)
@@ -235,15 +245,13 @@ void GroupingContainment::init()
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
             this, SLOT(manageApplet(Plasma::Applet*, QPointF)));
-    connect(this, SIGNAL(groupAdded(AbstractGroup*, QPointF)),
-            this, SLOT(manageGroup(AbstractGroup*, QPointF)));
 
 //     addGroup("grid", QPointF(100,100), 0);
 }
 
-void GroupingContainment::addGroup(const QString &plugin, const QPointF &pos, int id)
+AbstractGroup *GroupingContainment::addGroup(const QString &plugin, const QPointF &pos, int id)
 {
-    d->createGroup(plugin, pos, id);
+    return d->createGroup(plugin, pos, id);
 }
 
 void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
@@ -274,11 +282,37 @@ void GroupingContainment::addGroup(AbstractGroup *group, const QPointF &pos)
     emit groupAdded(group, pos);
 }
 
+QList<AbstractGroup *> GroupingContainment::groups() const
+{
+    return d->groups;
+}
+
 QList<QAction *> GroupingContainment::contextualActions()
 {
     QList<QAction *> list;
     list << d->newGroupAction << d->separator << d->deleteGroupAction;
     return list;
+}
+
+void GroupingContainment::setMainGroup(const QString &name)
+{
+    AbstractGroup *group = addGroup(name);
+    setMainGroup(group);
+}
+
+void GroupingContainment::setMainGroup(AbstractGroup *group)
+{
+    d->mainGroup = group;
+    if (!d->layout) {
+        d->layout = new QGraphicsLinearLayout(this);
+    }
+    d->layout->addItem(group);
+    group->setIsMainGroup(true);
+}
+
+AbstractGroup *GroupingContainment::mainGroup() const
+{
+    return d->mainGroup;
 }
 
 bool GroupingContainment::sceneEventFilter(QGraphicsItem* watched, QEvent* event)
@@ -410,6 +444,15 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     return Plasma::Containment::eventFilter(obj, event);
 }
 
+void GroupingContainment::save(KConfigGroup &group) const
+{
+    Plasma::Containment::save(group);
+
+    if (d->mainGroup) {
+        group.writeEntry("mainGroup", d->mainGroup->id());
+    }
+}
+
 void GroupingContainment::saveContents(KConfigGroup &group) const
 {
     Plasma::Containment::saveContents(group);
@@ -422,10 +465,13 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
 
     foreach (AbstractGroup *group, d->groups) {
         foreach (Plasma::Applet *applet, group->applets()) {
+            kDebug()<<applet->id();
             KConfigGroup appletConfig = applet->config().parent();
             KConfigGroup groupConfig(&appletConfig, QString("GroupInformation"));
             groupConfig.writeEntry("Group", group->id());
             group->saveChildGroupInfo(applet, groupConfig);
+
+            groupConfig.sync();
         }
         foreach (AbstractGroup *subGroup, group->subGroups()) {
             KConfigGroup subGroupConfig = subGroup->config().parent();
@@ -437,6 +483,13 @@ void GroupingContainment::saveContents(KConfigGroup &group) const
             subGroupConfig.sync();
         }
     }
+}
+
+void GroupingContainment::restore(KConfigGroup &group)
+{
+    d->mainGroupId = group.readEntry("mainGroup", 0);
+
+    Plasma::Containment::restore(group);
 }
 
 void GroupingContainment::restoreContents(KConfigGroup& group)
@@ -453,6 +506,14 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
         AbstractGroup *group = d->createGroup(plugin, geometry.topLeft(), id);
         if (group) {
             group->resize(geometry.size());
+        }
+    }
+
+    if (d->mainGroupId != 0) {
+        foreach (AbstractGroup *group, d->groups) {
+            if (group->id() == d->mainGroupId) {
+                setMainGroup(group);
+            }
         }
     }
 
@@ -509,12 +570,12 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 {
     AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(scene()->itemAt(event->scenePos()));
 
-    if (group) {
+    d->deleteGroupAction->setVisible(false);
+    if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
-        showContextMenu(event->pos(), event->scenePos().toPoint());
-        d->deleteGroupAction->setVisible(false);
     }
+    showContextMenu(event->pos(), event->scenePos().toPoint());
 
     event->ignore();
 

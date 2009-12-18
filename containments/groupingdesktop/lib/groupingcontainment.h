@@ -33,17 +33,22 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
         virtual ~GroupingContainment();
 
         void init();
-
-        void saveContents(KConfigGroup &group) const;
-        void restoreContents(KConfigGroup &group);
+        virtual void save(KConfigGroup &group) const;
+        virtual void restore(KConfigGroup &group);
         QList<QAction *> contextualActions();
-        void addGroup(const QString &plugin, const QPointF &pos, int id = 0);
+        AbstractGroup *addGroup(const QString &plugin, const QPointF &pos = QPointF(0, 0), int id = 0);
         void addGroup(AbstractGroup *group, const QPointF &pos);
+        QList<AbstractGroup *> groups() const;
 
     protected:
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+        virtual void saveContents(KConfigGroup &group) const;
+        virtual void restoreContents(KConfigGroup &group);
+        void setMainGroup(const QString &name);
+        void setMainGroup(AbstractGroup *group);
+        AbstractGroup *mainGroup() const;
 
     signals:
         void groupAdded(AbstractGroup *group, const QPointF &pos);
