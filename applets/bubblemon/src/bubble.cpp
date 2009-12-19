@@ -48,6 +48,7 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_max(0),
        m_speed(1000),
        m_bubbles(20),
+       m_bubbleCount(0),
        m_labelTransparency(0)
 {
     m_svg = new Plasma::Svg(this);
@@ -60,7 +61,7 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
     setAspectRatioMode(Plasma::Square);
     setBackgroundHints(NoBackground);
     
-    m_animation = new QPropertyAnimation(this, "labelTransparency");
+    m_animation = new QPropertyAnimation(this, "labelTransparency", this);
     m_animation->setDuration(200);
     m_animation->setStartValue(0.0);
     m_animation->setEndValue(1.0);
