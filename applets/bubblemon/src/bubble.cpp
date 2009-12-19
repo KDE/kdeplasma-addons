@@ -49,7 +49,8 @@ Bubble::Bubble(QObject *parent, const QVariantList &args)
        m_speed(1000),
        m_bubbles(20),
        m_bubbleCount(0),
-       m_labelTransparency(0)
+       m_labelTransparency(0),
+       m_rebuildClip(true)
 {
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath(Plasma::Theme::defaultTheme()->imagePath("bubblemon/bubble"));
@@ -86,6 +87,7 @@ Bubble::reloadTheme()
 void
 Bubble::interpolateValue()
 {
+    m_rebuildClip = true;
     update();
 }
 
@@ -138,6 +140,7 @@ Bubble::resizeEvent(QGraphicsSceneResizeEvent *evt)
     qreal size = qMin(contentsRect().size().width(), contentsRect().size().height());
     m_svg->resize(size, size);
     m_bubbleHeight = m_svg->elementSize("bubble").height();
+    m_rebuildClip = true;
 }
 
 void
@@ -230,31 +233,41 @@ Bubble::paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option
     m_svg->paint(painter, m_svg->elementRect("background"), "background");
     
     if (m_max>0 && m_val>0) {
-        QRect clipRect(contentsRect);
         float drawValue;
         if (m_animated && !shouldConserveResources())
             drawValue = m_interpolator->currentFrame();
         else
             drawValue = m_val;
-        clipRect.setTop(contentsRect.height()-(contentsRect.height()*((float)drawValue/m_max)));
-        QPainterPath clipPath;
-        QPainterPath fillPath;
-        QPainterPath bubblePath;
-        fillPath.addEllipse(m_svg->elementRect("fill").adjusted(-5, 0, 5, 5));
-        bubblePath.addEllipse(m_svg->elementRect("fill"));
-        clipPath.addRect(clipRect);
-        painter->setClipPath(clipPath.intersected(fillPath));
+        if (m_rebuildClip) {
+            //Clipping the fill is easy. We just stop after some point.
+            QRectF clipRect(contentsRect);
+            clipRect.setTop(contentsRect.height()-(contentsRect.height()*((float)drawValue/m_max)));
+            m_clip = clipRect;
+
+            //To clip the individual bubbles, we first build a path of the whole bubble.
+            //Then we take that path and subtract the empty portion.
+            //This would be easier of QPainterPath could simply subtract primitives, but alas.
+            QPainterPath bubbleClipPath;
+            QPainterPath bubblePath;
+            QPainterPath filledPath;
+            QRectF unfilledRect(contentsRect);
+            unfilledRect.setBottom(clipRect.top());
+            bubblePath.addEllipse(m_svg->elementRect("fill"));
+            filledPath.addRect(unfilledRect);
+
+            bubbleClipPath = bubblePath - filledPath;
+
+            m_bubbleClip = bubbleClipPath;
+            m_rebuildClip = false;
+        }
+        painter->setClipRect(m_clip);
         m_svg->paint(painter, m_svg->elementRect("fill"), "fill");
         if (m_bubbleCount>0 && m_animated && !shouldConserveResources()) {
-            painter->setClipPath(clipPath.intersected(bubblePath));
+            painter->setClipPath(m_bubbleClip);
             for(int i = 0;i<m_bubbleCount;i++) {
-                if (m_bubbles.at(i).y()<contentsRect.bottom())
+                if (m_bubbles.at(i).y()+m_bubbleHeight>m_clip.top())
                     m_svg->paint(painter, m_bubbles.at(i), "bubble");
             }
-            /*foreach(const QPoint& p, m_bubbles) {
-                if (p.y()<contentsRect.bottom())
-                    m_svg->paint(painter, p, "bubble");
-            }*/
         }
         painter->setClipping(false);
     }
@@ -388,7 +401,8 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
     //formula taken fron Bubble::paintInterface
     QRect toUpdate(0, geometry().height()-(geometry().height()*((float)upper/m_max)),
                    geometry().width(), geometry().height()-(geometry().height()*((float)lower/m_max)) );
-                   
+
+    m_rebuildClip = true;
     update(toUpdate);
 }
 
@@ -489,5 +503,6 @@ Bubble::configAccepted()
     
 
     emit configNeedsSaving();
+    m_rebuildClip = true;
     update();
 }

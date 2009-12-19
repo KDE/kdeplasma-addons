@@ -94,6 +94,9 @@ class Bubble : public Plasma::Applet {
         Plasma::DataEngine *m_engine;
         QStandardItemModel *m_sensorModel;
         QPropertyAnimation *m_animation;
+        QRectF m_clip;
+        QPainterPath m_bubbleClip;
+        bool m_rebuildClip;
 };
 
 #endif
