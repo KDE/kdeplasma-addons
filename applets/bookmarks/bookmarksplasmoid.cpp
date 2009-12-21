@@ -23,12 +23,13 @@
 #include "bookmarksplasmoid.h"
 
 // Plasmoid
+#include "generalconfigeditor.h"
 #include "bookmarkowner.h"
 // Plasma
 #include <Plasma/IconWidget>
 #include <Plasma/ToolTipManager>
 // KDE
-#include <KActionCollection>
+#include <KConfigDialog>
 #include <KStandardAction>
 #include <KIconLoader>
 #include <KIcon>
@@ -41,10 +42,12 @@
 namespace Plasma
 {
 
+static const char bookmarkFolderAddressConfigKey[] = "BookmarkFolderAddress";
+
+
 BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args )
   : Applet( parent, args ),
     mIcon( 0 ),
-    mBookmarkActionCollection( 0 ),
     mBookmarkMenu( 0 ),
     mBookmarkOwner( 0 )
 {
@@ -53,6 +56,11 @@ BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args 
 
 void BookmarksPlasmoid::init()
 {
+    // read config
+    KConfigGroup configGroup = config();
+    mBookmarkFolderAddress = configGroup.readEntry( bookmarkFolderAddressConfigKey );
+
+    // general
     setHasConfigurationInterface( true );
     connect( this, SIGNAL(activate()), SLOT(toggleMenu()) );
 
@@ -97,10 +105,7 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
 
     const bool isFirstTime = ( mBookmarkOwner == 0 );
     if( isFirstTime )
-    {
         mBookmarkOwner = new BookmarkOwner();
-        mBookmarkActionCollection = new KActionCollection( this );
-    }
 
     delete mBookmarkMenu;
 
@@ -109,7 +114,8 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
     KMenu* menu = new KMenu();
     menu->setAttribute( Qt::WA_DeleteOnClose );
     connect( menu, SIGNAL(aboutToHide()), mIcon, SLOT(setUnpressed()) );
-    mBookmarkMenu = new KBookmarkMenu( bookmarkManager, mBookmarkOwner, menu, mBookmarkActionCollection );
+    // TODO: only renew if manager emits changed
+    mBookmarkMenu = new KBookmarkMenu( bookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress );
 
     menu->popup( popupPosition(menu->sizeHint()) );
 }
@@ -118,6 +124,33 @@ void BookmarksPlasmoid::toggleMenu()
 {
     toggleMenu( true );
 }
+
+void BookmarksPlasmoid::createConfigurationInterface( KConfigDialog* parent )
+{
+    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
+
+    mGeneralConfigEditor = new GeneralConfigEditor( bookmarkManager, parent );
+    mGeneralConfigEditor->setBookmarkFolderAddress( mBookmarkFolderAddress );
+    parent->addPage( mGeneralConfigEditor, i18n("General"), icon() );
+    connect( parent, SIGNAL(applyClicked()), SLOT(applyConfigChanges()) );
+    connect( parent, SIGNAL(okClicked()), SLOT(applyConfigChanges()) );
+}
+
+void BookmarksPlasmoid::applyConfigChanges()
+{
+    const QString bookmarkFolderAddress = mGeneralConfigEditor->bookmarkFolderAddress();
+
+    if( mBookmarkFolderAddress != bookmarkFolderAddress )
+    {
+        mBookmarkFolderAddress = bookmarkFolderAddress;
+
+        KConfigGroup configGroup = config();
+        configGroup.writeEntry( bookmarkFolderAddressConfigKey, mBookmarkFolderAddress );
+
+        emit configNeedsSaving();
+    }
+}
+
 
 BookmarksPlasmoid::~BookmarksPlasmoid()
 {

@@ -1,6 +1,7 @@
 project( plasma-bookmarks )
 
 set( bookmarks_SRCS
+    generalconfigeditor.cpp
     bookmarksplasmoid.cpp
     main.cpp
 )

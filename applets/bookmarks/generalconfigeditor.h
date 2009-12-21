@@ -20,55 +20,48 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BOOKMARKSPLASMOID_H
-#define BOOKMARKSPLASMOID_H
+#ifndef GENERALCONFIGEDITOR_H
+#define GENERALCONFIGEDITOR_H
 
-// Plasma
-#include <Plasma/Applet>
+// KDE
+#include <KBookmarkGroup>
+// Qt
+#include <QtGui/QWidget>
+#include <QtCore/QString>
 
-class GeneralConfigEditor;
-class BookmarkOwner;
-
-class KBookmarkMenu;
-
-
-namespace Plasma
-{
-class IconWidget;
+class KBookmarkManager;
+class QLabel;
 
 
-class BookmarksPlasmoid : public Applet
+class GeneralConfigEditor : public QWidget
 {
   Q_OBJECT
 
   public:
-    BookmarksPlasmoid( QObject* parent, const QVariantList& args );
+    GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWidget* parent );
 
-    virtual ~BookmarksPlasmoid();
+  public:
+    const QString bookmarkFolderAddress() const;
 
-  public: // Plasma::Applet API
-    virtual void init();
-    virtual QList<QAction*> contextualActions();
-    virtual void createConfigurationInterface( KConfigDialog* parent );
+  public:
+    void setBookmarkFolderAddress( const QString& bookmarkFolderAddress );
+
+  protected:
+    void updateFolder();
 
   protected Q_SLOTS:
-    void toggleMenu( bool toggle );
-    void toggleMenu();
-    void applyConfigChanges();
+    void selectBookmarkFolder();
 
-  private:
-    QString mBookmarkFolderAddress;
+  protected:
+    KBookmarkGroup mBookmarkFolder;
 
-    IconWidget* mIcon;
+    KBookmarkManager* mBookmarkManager;
 
-    QList<QAction*> mContextualActions;
-
-    KBookmarkMenu* mBookmarkMenu;
-    BookmarkOwner* mBookmarkOwner;
-
-    GeneralConfigEditor* mGeneralConfigEditor;
+    QLabel* mFolderIconLabel;
+    QLabel* mFolderNameLabel;
 };
 
-}
+
+inline const QString GeneralConfigEditor::bookmarkFolderAddress() const { return mBookmarkFolder.address(); }
 
 #endif
