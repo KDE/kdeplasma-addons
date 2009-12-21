@@ -22,6 +22,8 @@
 
 #include "bookmarksplasmoid.h"
 
+// Plasmoid
+#include "bookmarkowner.h"
 // Plasma
 #include <Plasma/IconWidget>
 #include <Plasma/ToolTipManager>
@@ -31,25 +33,9 @@
 #include <KIconLoader>
 #include <KIcon>
 #include <KBookmarkMenu>
-#include <KRun>
 // Qt
 #include <QtGui/QPainter>
 #include <QtGui/QGraphicsLinearLayout>
-
-
-class BookmarkOwner : public KBookmarkOwner
-{
-  public:
-    BookmarkOwner() : KBookmarkOwner() {}
-
-  public: // KBookmarkOwner API
-    virtual bool enableOption(BookmarkOption) const { return false; }
-    virtual bool supportsTabs() const { return false; }
-    virtual void openBookmark( const KBookmark& bookmark, Qt::MouseButtons, Qt::KeyboardModifiers )
-    {
-        new KRun( bookmark.url(), (QWidget*)0 );
-    }
-};
 
 
 namespace Plasma
