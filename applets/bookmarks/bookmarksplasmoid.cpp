@@ -63,7 +63,7 @@ BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args 
     mBookmarkOwner( 0 )
 {
     setAspectRatioMode( ConstrainedSquare );
-    setHasConfigurationInterface( false );
+    setHasConfigurationInterface( true );
     setBackgroundHints( NoBackground );
 
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout( this );
