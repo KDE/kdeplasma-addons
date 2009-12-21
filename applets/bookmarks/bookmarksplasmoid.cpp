@@ -57,38 +57,43 @@ namespace Plasma
 
 BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args )
   : Applet( parent, args ),
-    mIcon( new IconWidget(KIcon( QString::fromLatin1("bookmarks") ),QString(),this) ),
+    mIcon( 0 ),
     mBookmarkActionCollection( 0 ),
     mBookmarkMenu( 0 ),
     mBookmarkOwner( 0 )
 {
-    setAspectRatioMode( ConstrainedSquare );
-    setHasConfigurationInterface( true );
-    setBackgroundHints( NoBackground );
-
-    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout( this );
-    layout->setContentsMargins( 0, 0, 0, 0 );
-    layout->setSpacing( 0 );
-    layout->addItem( mIcon );
-
-    mIcon->setFlag( ItemIsMovable, false );
-    connect( mIcon, SIGNAL(pressed( bool )), SLOT(toggleMenu( bool )) );
-    connect( this, SIGNAL(activate()), SLOT(toggleMenu()) );
-
-    resize( IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2 );
 }
 
 
 void BookmarksPlasmoid::init()
 {
+    setHasConfigurationInterface( true );
+    connect( this, SIGNAL(activate()), SLOT(toggleMenu()) );
+
+    // context menu
+    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
+    KAction* editorOpener = KStandardAction::editBookmarks( bookmarkManager, SLOT(slotEditBookmarks()), this );
+    mContextualActions.append( editorOpener );
+
+    // view
+    setAspectRatioMode( ConstrainedSquare );
+    setBackgroundHints( NoBackground );
+
+    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout( this );
+    layout->setContentsMargins( 0, 0, 0, 0 );
+    layout->setSpacing( 0 );
+
+    mIcon = new IconWidget( KIcon(QString::fromLatin1( "bookmarks" )), QString(), this );
+    mIcon->setFlag( ItemIsMovable, false );
+    connect( mIcon, SIGNAL(pressed( bool )), SLOT(toggleMenu( bool )) );
+    layout->addItem( mIcon );
+
+    resize( IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2 );
+
+    // tooltip
     Plasma::ToolTipManager::self()->registerWidget( this );
     Plasma::ToolTipContent toolTipContent( i18n("Bookmarks"), i18n("Quick Access to the Bookmarks"), mIcon->icon() );
     Plasma::ToolTipManager::self()->setContent( this, toolTipContent );
-
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-
-    KAction* editorOpener = KStandardAction::editBookmarks( bookmarkManager, SLOT(slotEditBookmarks()), this );
-    mContextualActions.append( editorOpener );
 }
 
 QList<QAction*> BookmarksPlasmoid::contextualActions()
