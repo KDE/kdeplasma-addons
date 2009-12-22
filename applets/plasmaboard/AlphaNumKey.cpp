@@ -20,20 +20,16 @@
 
 #include "AlphaNumKey.h"
 
-#include <kpushbutton.h>
 #include "Helpers.h"
 
 AlphaNumKey::AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym):
         BoardKey(parent){
 
-	//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), this, SLOT( released() ) );
-	QObject::connect(this, SIGNAL( clicked() ), this, SLOT( released() ) );
-	QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( pressed() ) );
 	//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), parent, SLOT( clearTooltip() ) );
         QObject::connect(this, SIGNAL( clicked() ), parent, SLOT( clear() ) );
 	QObject::connect(this, SIGNAL( keyPressed ( QString, QSizeF, QPointF ) ), parent, SLOT( setTooltip( QString, QSizeF, QPointF ) ) );
 
-        setKeycode(keysym);
+	setKeycode(keysym);
 }
 
 AlphaNumKey::~AlphaNumKey() {
@@ -41,12 +37,8 @@ AlphaNumKey::~AlphaNumKey() {
 }
 
 void AlphaNumKey::pressed(){
+	BoardKey::pressed();
 	emit keyPressed(text(), size(), pos());
-}
-
-void AlphaNumKey::released(){
-	sendKeycodePress();
-	sendKeycodeRelease();
 }
 
 void AlphaNumKey::setKeycode(unsigned int keycodeP) {
@@ -75,7 +67,6 @@ void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
 }
 
 void AlphaNumKey::sendKeycodePress() {
-
         Helpers::fakeKeyPress(getKeycode());
 }
 

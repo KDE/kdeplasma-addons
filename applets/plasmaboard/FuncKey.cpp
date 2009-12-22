@@ -51,11 +51,12 @@ bool FuncKey::toggled(){
 void FuncKey::setKeycode(unsigned int code, bool sendUp){
 	keycode = Helpers::keysymToKeycode(code);
 	if(sendUp){
-		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodePress() ) );
-                QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), this, SLOT( sendKeycodeRelease() ) );
+		//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodePress() ) );
+		//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), this, SLOT( sendKeycodeRelease() ) );
 	}
 	else {
-		QObject::connect(this, SIGNAL( clicked() ), this, SLOT( sendKeycodeToggled() ) );
+		disconnect(SIGNAL( clicked() ));
+		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodeToggled() ) );
 	}
 }
 
@@ -67,7 +68,6 @@ void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
 
 void FuncKey::sendKeycodePress() {
 	Helpers::fakeKeyPress(getKeycode());
-	toggleOn();
 }
 
 void FuncKey::sendKeycodeToggled() {
@@ -83,7 +83,6 @@ void FuncKey::sendKeycodeToggled() {
 
 void FuncKey::sendKeycodeRelease() {
 	Helpers::fakeKeyRelease(getKeycode());
-	toggleOff();
 }
 
 void FuncKey::paintArrow(QPainter *painter){

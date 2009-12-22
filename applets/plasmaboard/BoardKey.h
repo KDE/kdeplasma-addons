@@ -40,6 +40,7 @@ public:
 	void setText(QString text);
         QString text();
 private:
+	QTimer* m_pushUp;
 	QString labelText;
 	int fontSize;
 
@@ -47,6 +48,21 @@ public Q_SLOTS:
 	virtual void sendKeycodePress();
 	virtual void sendKeycodeRelease();
 	virtual void sendKeycodeToggled();
+
+
+protected Q_SLOTS:
+	/*
+	 * Called to "unpress" the button
+	 */
+	void reset();
+	/*
+	 * called when button is pressed
+	 */
+	virtual void pressed();
+	/*
+	 * called when button is pressed
+	 */
+	virtual void released();
 
 protected:
         void setUpPainter(QPainter *painter);

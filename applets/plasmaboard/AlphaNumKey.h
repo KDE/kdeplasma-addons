@@ -24,8 +24,6 @@
 #include "BoardKey.h"
 
 class PlasmaboardWidget;
-
-
 class AlphaNumKey: public BoardKey {
 
     Q_OBJECT
@@ -53,17 +51,17 @@ public Q_SLOTS:
           * called when button is released
           */
 	virtual void sendKeycodeRelease();
+
+protected Q_SLOTS:
 	/*
 	  * called when button is pressed
 	  */
 	virtual void pressed();
-	/*
-	  * called when button is pressed
-	  */
-	virtual void released();
+
 
 signals:
 	void keyPressed ( QString text, QSizeF size, QPointF pos );
+
 };
 
 #endif /* ALPHANUMKEY_H */

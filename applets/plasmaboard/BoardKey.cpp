@@ -19,33 +19,47 @@
 
 #include "BoardKey.h"
 #include <QPainter>
+#include <QTimer>
 #include <plasma/theme.h>
+#include <kpushbutton.h>
 
 BoardKey::BoardKey(PlasmaboardWidget *parent):
 	Plasma::PushButton(parent),fontSize(60) {
-	//this->setOrientation(Qt::Horizontal);
-	//this->setDrawBackground(true);
+
 	setMinimumSize(5,5);
 	setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored, QSizePolicy::DefaultType);
+
+	connect(this, SIGNAL( clicked() ), this, SLOT( released() ) );
+	connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( pressed() ) );
+
+	m_pushUp = new QTimer();
+	connect(m_pushUp, SIGNAL( timeout() ), this, SLOT( reset() ) );
+
 	//setFocusPolicy(Qt::NoFocus);
 }
 
 BoardKey::~BoardKey() {
-	// TODO Auto-generated destructor stub
-}
-
-void BoardKey::setText(QString text) {
-        labelText = text;
-	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 20 : 40) : 60;
-        //Plasma::PushButton::setText(text);
-}
-
-QString BoardKey::text() {
-        return labelText;
+	delete m_pushUp;
 }
 
 unsigned int BoardKey::getKeycode() {
 	return keycode;
+}
+
+void BoardKey::pressed(){
+	m_pushUp->stop();
+}
+
+void BoardKey::released(){
+	m_pushUp->start(500);
+	nativeWidget()->setDown(true);
+	sendKeycodePress();
+	sendKeycodeRelease();
+}
+
+void BoardKey::reset(){
+	nativeWidget()->setDown(false);
+	m_pushUp->stop();
 }
 
 void BoardKey::sendKeycodePress() {}
@@ -59,7 +73,6 @@ void BoardKey::setUpPainter(QPainter *painter){
 	painter->translate(contentsRect().center());
 	double mul = qMin(contentsRect().width(), contentsRect().height()) / 10;
 	painter->scale(mul, mul);
-
 }
 
 void BoardKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
@@ -70,4 +83,14 @@ void BoardKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
 	painter->drawText(QRect(-50,-50,100,100), Qt::AlignCenter , labelText); // don't know why rect must be like that
+}
+
+void BoardKey::setText(QString text) {
+	labelText = text;
+	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 20 : 40) : 60;
+	//Plasma::PushButton::setText(text);
+}
+
+QString BoardKey::text() {
+	return labelText;
 }
