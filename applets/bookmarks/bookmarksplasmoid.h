@@ -51,10 +51,15 @@ class BookmarksPlasmoid : public Applet
     virtual QList<QAction*> contextualActions();
     virtual void createConfigurationInterface( KConfigDialog* parent );
 
+  protected:
+    void updateFolderData();
+
   protected Q_SLOTS:
     void toggleMenu( bool toggle );
     void toggleMenu();
     void applyConfigChanges();
+
+    void onBookmarksChanged( const QString& address );
 
   private:
     QString mBookmarkFolderAddress;

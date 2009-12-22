@@ -26,6 +26,7 @@
 #include <KBookmarkManager>
 // #include <KBookmarkDialog> TODO: CamelCase only added after 4.3.4 and 4.5.0 Beta 2
 #include <kbookmarkdialog.h>
+#include <KBookmarkGroup>
 #include <KSqueezedTextLabel>
 #include <KPushButton>
 #include <KLocale>
@@ -38,9 +39,10 @@
 
 GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWidget* parent )
   : QWidget( parent ),
-    mBookmarkFolder( bookmarkManager->root() ),
+    mBookmarkFolderAddress( bookmarkManager->root().address() ),
     mBookmarkManager( bookmarkManager )
 {
+
     QVBoxLayout* pageLayout = new QVBoxLayout( this );
     pageLayout->setMargin( 0 );
 
@@ -82,40 +84,53 @@ GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWi
     pageLayout->addLayout( folderSelectLayout );
     pageLayout->addStretch();
 
+    connect( mBookmarkManager, SIGNAL(changed( const QString&, const QString& )), SLOT(onBookmarksChanged( const QString& )) );
+
     updateFolder();
 }
 
 void GeneralConfigEditor::setBookmarkFolderAddress( const QString& bookmarkFolderAddress )
 {
-    KBookmark bookmark = mBookmarkManager->findByAddress( bookmarkFolderAddress );
-
-    if( bookmark.isNull() || ! bookmark.isGroup() )
+    if( mBookmarkFolderAddress == bookmarkFolderAddress )
         return;
 
-    mBookmarkFolder = bookmark.toGroup();
+    mBookmarkFolderAddress = bookmarkFolderAddress;
 
     updateFolder();
 }
 
 void GeneralConfigEditor::selectBookmarkFolder()
 {
+    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
+
     KBookmarkDialog* dialog = new KBookmarkDialog( mBookmarkManager, this );
-    KBookmarkGroup selectedFolder = dialog->selectFolder( mBookmarkFolder );
-    if( ! selectedFolder.isNull() ) // TODO: would isValid be better? API dox are inconsistent
+    KBookmarkGroup selectedFolder = dialog->selectFolder( bookmarkFolder );
+    delete dialog;
+
+    if( ! selectedFolder.isNull() )
     {
-        mBookmarkFolder = selectedFolder;
+        mBookmarkFolderAddress = selectedFolder.address();
         updateFolder();
     }
-    delete dialog;
 }
 
 void GeneralConfigEditor::updateFolder()
 {
-    const bool isRoot = ( ! mBookmarkFolder.hasParent() );
+    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
 
-    const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : mBookmarkFolder.icon();
-    const QString folderName = isRoot ? i18n("Bookmarks") : mBookmarkFolder.text();
+    const bool isRoot = ( ! bookmarkFolder.hasParent() );
+
+    const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
+    const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
 
     mFolderIconLabel->setPixmap( SmallIcon(iconName) );
     mFolderNameLabel->setText( folderName );
+}
+
+
+void GeneralConfigEditor::onBookmarksChanged( const QString& address )
+{
+    Q_UNUSED( address );
+
+    updateFolder();
 }

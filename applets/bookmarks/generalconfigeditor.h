@@ -23,8 +23,6 @@
 #ifndef GENERALCONFIGEDITOR_H
 #define GENERALCONFIGEDITOR_H
 
-// KDE
-#include <KBookmarkGroup>
 // Qt
 #include <QtGui/QWidget>
 #include <QtCore/QString>
@@ -41,7 +39,7 @@ class GeneralConfigEditor : public QWidget
     GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWidget* parent );
 
   public:
-    const QString bookmarkFolderAddress() const;
+    const QString& bookmarkFolderAddress() const;
 
   public:
     void setBookmarkFolderAddress( const QString& bookmarkFolderAddress );
@@ -52,8 +50,10 @@ class GeneralConfigEditor : public QWidget
   protected Q_SLOTS:
     void selectBookmarkFolder();
 
+    void onBookmarksChanged( const QString& address );
+
   protected:
-    KBookmarkGroup mBookmarkFolder;
+    QString mBookmarkFolderAddress;
 
     KBookmarkManager* mBookmarkManager;
 
@@ -62,6 +62,6 @@ class GeneralConfigEditor : public QWidget
 };
 
 
-inline const QString GeneralConfigEditor::bookmarkFolderAddress() const { return mBookmarkFolder.address(); }
+inline const QString& GeneralConfigEditor::bookmarkFolderAddress() const { return mBookmarkFolderAddress; }
 
 #endif
