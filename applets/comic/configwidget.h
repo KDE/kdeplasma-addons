@@ -35,6 +35,10 @@ class QComboBox;
 class QSortFilterProxyModel;
 class QPushButton;
 
+namespace KNS3 {
+    class DownloadDialog;
+}
+
 class ConfigWidget : public QWidget
 {
         Q_OBJECT
@@ -76,6 +80,7 @@ class ConfigWidget : public QWidget
 
     protected slots:
         void getNewStuff();
+        void newStuffFinished();
 
     private:
         Ui::ComicSettings comicUi;
@@ -83,6 +88,7 @@ class ConfigWidget : public QWidget
         ComicModel *mModel;
         Plasma::DataEngine *mEngine;
         QSortFilterProxyModel *mProxyModel;
+        KNS3::DownloadDialog* mNewStuffDialog;
 };
 
 #endif

@@ -112,7 +112,7 @@ class ComicModel : public QAbstractTableModel
 
 
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
-    : QWidget( parent ), mEngine( engine )
+    : QWidget( parent ), mEngine( engine ), mNewStuffDialog(0)
 {
     comicSettings = new QWidget();
     comicUi.setupUi( comicSettings );
@@ -145,10 +145,16 @@ ConfigWidget::~ConfigWidget()
 
 void ConfigWidget::getNewStuff()
 {
-    KNS3::DownloadDialog dialog( "comic.knsrc", this );
-    dialog.exec();
+    if (!mNewStuffDialog) {
+        mNewStuffDialog = new KNS3::DownloadDialog( "comic.knsrc", this );
+        connect(mNewStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
+    }
+    mNewStuffDialog->show();
+}
 
-    if ( dialog.changedEntries().count() ) {
+void ConfigWidget::newStuffFinished()
+{
+    if ( mNewStuffDialog->changedEntries().count() ) {
         QStringList tmp = comicIdentifier();
         mModel->setComics( mEngine->query( "providers" ) );
         setComicIdentifier( tmp );
