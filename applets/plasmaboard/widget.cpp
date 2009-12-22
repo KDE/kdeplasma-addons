@@ -95,7 +95,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_layout->setRowMinimumHeight ( 0, 10 );
     m_layout->setRowPreferredHeight ( 0, 10 );
     m_layout->setRowMaximumHeight ( 0, 15 );
-    QObject::connect(switcher, SIGNAL( linkActivated(QString) ), parent, SLOT( toggleMode() ) );
+    QObject::connect(switcher, SIGNAL( linkHovered(QString) ), parent, SLOT( toggleMode() ) );
 
     engine = dataEngine("keystate");
     if(engine){

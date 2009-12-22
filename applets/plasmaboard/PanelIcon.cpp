@@ -31,8 +31,7 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
         setPopupIcon("preferences-desktop-keyboard");
 	setFocusPolicy(Qt::NoFocus);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        KConfigGroup cg = config();
-        extendedMode = cg.readEntry("extendedMode", false);
+
         setPassivePopup(true);
 
         contextExtended = new QAction(i18n("Switch to basic mode"), this);
@@ -42,12 +41,6 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
 
 	connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(initKeyboard()));
 
-
-	Plasma::ToolTipManager::self()->registerWidget(this);
-	Plasma::ToolTipContent toolTip;
-	toolTip.setImage(KIcon("preferences-desktop-keyboard"));
-	toolTip.setMainText(i18n("Virtual Keyboard"));
-	Plasma::ToolTipManager::self()->setContent(this, toolTip);
 }
 
 
@@ -56,6 +49,17 @@ PanelIcon::~PanelIcon() {
 
         delete contextExtended;
         delete contextBasic;
+}
+
+void PanelIcon::init() {
+        KConfigGroup cg = config();
+        extendedMode = cg.readEntry("extendedMode", false);
+
+        Plasma::ToolTipManager::self()->registerWidget(this);
+        Plasma::ToolTipContent toolTip;
+        toolTip.setImage(KIcon("preferences-desktop-keyboard"));
+        toolTip.setMainText(i18n("Virtual Keyboard"));
+        Plasma::ToolTipManager::self()->setContent(this, toolTip);
 }
 
 QGraphicsWidget *PanelIcon::graphicsWidget()

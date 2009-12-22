@@ -60,6 +60,9 @@ protected:
 	virtual void popupEvent(bool show);
 
 private:
+        void init();
+
+private:
 	PlasmaboardWidget *m_plasmaboard;
 	const QVariantList args;
         QAction *contextBasic;
