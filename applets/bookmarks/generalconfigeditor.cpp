@@ -107,7 +107,9 @@ void GeneralConfigEditor::updateFolder()
 {
     const bool isRoot = ( ! mBookmarkFolder.hasParent() );
 
-    mFolderIconLabel->setPixmap( SmallIcon(isRoot?QString::fromLatin1("bookmarks"):mBookmarkFolder.icon()) );
-    mFolderNameLabel->setText( isRoot?i18n("Bookmarks"):mBookmarkFolder.text() );
-    // TODO: ellipsis label and tooltip
+    const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : mBookmarkFolder.icon();
+    const QString folderName = isRoot ? i18n("Bookmarks") : mBookmarkFolder.text();
+
+    mFolderIconLabel->setPixmap( SmallIcon(iconName) );
+    mFolderNameLabel->setText( folderName );
 }
