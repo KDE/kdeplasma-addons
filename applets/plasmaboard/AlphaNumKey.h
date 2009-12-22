@@ -42,15 +42,6 @@ public:
           */
 	void setLabel(int level);
 
-public Q_SLOTS:
-        /*
-          * called when button is pressed
-          */
-	virtual void sendKeycodePress();
-        /*
-          * called when button is released
-          */
-	virtual void sendKeycodeRelease();
 
 protected Q_SLOTS:
 	/*

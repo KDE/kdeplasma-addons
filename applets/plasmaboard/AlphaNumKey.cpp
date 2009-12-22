@@ -25,7 +25,6 @@
 AlphaNumKey::AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym):
         BoardKey(parent){
 
-	//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), parent, SLOT( clearTooltip() ) );
         QObject::connect(this, SIGNAL( clicked() ), parent, SLOT( clear() ) );
 	QObject::connect(this, SIGNAL( keyPressed ( QString, QSizeF, QPointF ) ), parent, SLOT( setTooltip( QString, QSizeF, QPointF ) ) );
 
@@ -64,14 +63,6 @@ void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
 		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0))));*/
         }
 	update();
-}
-
-void AlphaNumKey::sendKeycodePress() {
-        Helpers::fakeKeyPress(getKeycode());
-}
-
-void AlphaNumKey::sendKeycodeRelease() {
-	Helpers::fakeKeyRelease(getKeycode());
 }
 
 

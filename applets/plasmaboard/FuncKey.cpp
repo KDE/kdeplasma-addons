@@ -26,7 +26,52 @@
 #include "Helpers.h"
 
 FuncKey::FuncKey(PlasmaboardWidget *parent):
-	BoardKey(parent), pressed(false) {
+	BoardKey(parent), pressed(false), toggler(false) {
+}
+
+void FuncKey::paintArrow(QPainter *painter){
+
+    	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+	painter->drawLine(-1, 0 , 3, 0);
+
+	const QPointF points[3] = {
+	     QPointF(-3, 0),
+	     QPointF(-1, 1),
+	     QPointF(-1, -1),
+	 };
+
+	painter->drawConvexPolygon(points, 3);
+}
+
+void FuncKey::released() {
+	if(!toggler){
+		BoardKey::released();
+	}
+}
+
+void FuncKey::setKeycode(unsigned int code, bool sendUp){
+	keycode = Helpers::keysymToKeycode(code);
+	if(!sendUp){
+		toggler = true;
+		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodeToggled() ) );
+	}
+}
+
+
+void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
+	setKeycode(code, sendUp);
+	setText(text);
+}
+
+void FuncKey::sendKeycodeToggled() {
+	if( pressed ) {
+		sendKeycodeRelease();
+		toggleOff();
+	}
+	else {
+		sendKeycodePress();
+		toggleOn();
+	}
 }
 
 void FuncKey::toggleOn(){
@@ -46,55 +91,4 @@ void FuncKey::toggle(bool toggle){
 
 bool FuncKey::toggled(){
 	return pressed;
-}
-
-void FuncKey::setKeycode(unsigned int code, bool sendUp){
-	keycode = Helpers::keysymToKeycode(code);
-	if(sendUp){
-		//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodePress() ) );
-		//QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( released() ), this, SLOT( sendKeycodeRelease() ) );
-	}
-	else {
-		disconnect(SIGNAL( clicked() ));
-		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodeToggled() ) );
-	}
-}
-
-
-void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
-        setKeycode(code, sendUp);
-        setText(text);
-}
-
-void FuncKey::sendKeycodePress() {
-	Helpers::fakeKeyPress(getKeycode());
-}
-
-void FuncKey::sendKeycodeToggled() {
-	if( pressed ) {
-		sendKeycodeRelease();
-		toggleOff();
-	}
-	else {
-		Helpers::fakeKeyPress(getKeycode());
-		toggleOn();
-	}
-}
-
-void FuncKey::sendKeycodeRelease() {
-	Helpers::fakeKeyRelease(getKeycode());
-}
-
-void FuncKey::paintArrow(QPainter *painter){
-
-    	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
-	painter->drawLine(-1, 0 , 3, 0);
-
-	const QPointF points[3] = {
-	     QPointF(-3, 0),
-	     QPointF(-1, 1),
-	     QPointF(-1, -1),
-	 };
-
-	painter->drawConvexPolygon(points, 3);
 }

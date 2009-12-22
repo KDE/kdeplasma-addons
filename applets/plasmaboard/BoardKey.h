@@ -45,9 +45,9 @@ private:
 	int fontSize;
 
 public Q_SLOTS:
-	virtual void sendKeycodePress();
-	virtual void sendKeycodeRelease();
-	virtual void sendKeycodeToggled();
+	void sendKeycodePress();
+	void sendKeycodeRelease();
+	void sendKeycodeToggled();
 
 
 protected Q_SLOTS:

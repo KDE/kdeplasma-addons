@@ -39,15 +39,15 @@ public:
 
 
 public Q_SLOTS:
-	virtual void sendKeycodePress();
-	virtual void sendKeycodeRelease();
-	virtual void sendKeycodeToggled();
+	void sendKeycodeToggled();
 	void toggle(bool toggle);
 
+protected:
+	virtual void released();
 
 private:
-	QString oldStyle;
 	bool pressed;
+	bool toggler;
 
 protected:
 	void paintArrow(QPainter *painter);

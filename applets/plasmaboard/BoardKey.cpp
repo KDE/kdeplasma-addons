@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "BoardKey.h"
+#include "Helpers.h"
 #include <QPainter>
 #include <QTimer>
 #include <plasma/theme.h>
@@ -34,8 +35,6 @@ BoardKey::BoardKey(PlasmaboardWidget *parent):
 
 	m_pushUp = new QTimer();
 	connect(m_pushUp, SIGNAL( timeout() ), this, SLOT( reset() ) );
-
-	//setFocusPolicy(Qt::NoFocus);
 }
 
 BoardKey::~BoardKey() {
@@ -62,8 +61,15 @@ void BoardKey::reset(){
 	m_pushUp->stop();
 }
 
-void BoardKey::sendKeycodePress() {}
-void BoardKey::sendKeycodeRelease() {}
+void BoardKey::sendKeycodePress() {
+	Helpers::fakeKeyPress(getKeycode());
+}
+
+void BoardKey::sendKeycodeRelease() {
+	Helpers::fakeKeyRelease(getKeycode());
+}
+
+
 void BoardKey::sendKeycodeToggled() {}
 
 void BoardKey::setUpPainter(QPainter *painter){
