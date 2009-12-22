@@ -45,15 +45,22 @@ GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWi
     pageLayout->setMargin( 0 );
 
     // folder selection
-    QHBoxLayout* folderLayout = new QHBoxLayout;
-    folderLayout->setMargin( 0 );
+    QHBoxLayout* folderSelectLayout = new QHBoxLayout;
 
     const QString folderSelectLabelText =
          i18nc( "@label:edit the bookmark folder to show",
                 "Folder:" );
     QLabel* label = new QLabel( folderSelectLabelText );
+
+    QHBoxLayout* folderLayout = new QHBoxLayout;
+    folderLayout->setMargin( 0 );
+
     mFolderIconLabel = new QLabel;
     mFolderNameLabel = new KSqueezedTextLabel;
+
+    folderLayout->addWidget( mFolderIconLabel );
+    folderLayout->addWidget( mFolderNameLabel, 10 );
+
     KPushButton* folderSelectButton = new KPushButton( KIcon("folder-open"), QString() );
     label->setBuddy( folderSelectButton );
     connect( folderSelectButton, SIGNAL(clicked( bool )), SLOT(selectBookmarkFolder()) );
@@ -68,12 +75,11 @@ GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWi
 //                "Select the folder which should be used to in the menu." );
 //     folderSelectButton->setWhatsThis( groupSizeWhatsThis );
 
-    folderLayout->addWidget( label );
-    folderLayout->addWidget( mFolderIconLabel );
-    folderLayout->addWidget( mFolderNameLabel, 10 );
-    folderLayout->addWidget( folderSelectButton );
+    folderSelectLayout->addWidget( label );
+    folderSelectLayout->addLayout( folderLayout, 10 );
+    folderSelectLayout->addWidget( folderSelectButton );
 
-    pageLayout->addLayout( folderLayout );
+    pageLayout->addLayout( folderSelectLayout );
     pageLayout->addStretch();
 
     updateFolder();
