@@ -90,6 +90,9 @@ void OpenDesktop::init()
     (void)graphicsWidget();
     
     kDebug() << "init: opendesktop";
+
+    m_engine->connectSource("Providers", this);
+
     KConfigGroup cg = config();
     m_geolocation->city = cg.readEntry("geoCity", QString());
     m_geolocation->country = cg.readEntry("geoCountry", QString());
@@ -98,7 +101,6 @@ void OpenDesktop::init()
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
 
     connectGeolocation();
-
 }
 
 void OpenDesktop::connectGeolocation()
@@ -110,7 +112,6 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
 {
     if (!m_tabs) {
         m_engine = dataEngine("ocs");
-        m_engine->connectSource("Providers", this);
 
         // People near me
         m_nearList = new ContactList(m_engine);
@@ -245,7 +246,7 @@ void OpenDesktop::startWork()
 void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
 {
     kDebug() << "source updated:" << source << data;
-    
+
     m_tabs->setPreferredSize(-1, -1);
     emit sizeHintChanged(Qt::PreferredSize);
 
