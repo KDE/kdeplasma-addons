@@ -494,6 +494,10 @@ void AbstractGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
+    if (isMainGroup()) {
+        return;
+    }
+    
 //     if (d->background && (d->containment->formFactor() != Plasma::Vertical) &&
 //                          (d->containment->formFactor() != Plasma::Horizontal)) {
         d->background->paintFrame(painter);

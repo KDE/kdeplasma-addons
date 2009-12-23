@@ -43,6 +43,7 @@ class PLASMA_EXPORT GroupingContainment: public Plasma::Containment
     protected:
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
         virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
         virtual void saveContents(KConfigGroup &group) const;
         virtual void restoreContents(KConfigGroup &group);

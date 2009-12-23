@@ -134,18 +134,16 @@ class GroupingContainmentPrivate
 
             QGraphicsItem *item = q->scene()->itemAt(q->mapToScene(pos));
 
-            AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(item);
-
-            if (group) {
-                return group;
-            }
-
-            if (item) {
-                //FIXME i'm quite unsure about this: in a group there could be a grandchild
-                group = qgraphicsitem_cast<AbstractGroup *>(item->parentItem());
+            while (item != q) {
+                if (!item) {
+                    return 0;
+                }
+                AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(item);
                 if (group) {
                     return group;
                 }
+
+                item = item->parentItem();
             }
 
             return 0;
@@ -444,8 +442,13 @@ bool GroupingContainment::eventFilter(QObject *obj, QEvent *event)
     return Plasma::Containment::eventFilter(obj, event);
 }
 
-void GroupingContainment::save(KConfigGroup &group) const
+void GroupingContainment::save(KConfigGroup &g) const
 {
+    KConfigGroup group = g;
+    if (!group.isValid()) {
+        group = config();
+    }
+
     Plasma::Containment::save(group);
 
     if (d->mainGroup) {
@@ -566,16 +569,23 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
     }
 }
 
+void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    d->deleteGroupAction->setVisible(false);
+
+    Plasma::Containment::mousePressEvent(event);
+}
+
 void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    AbstractGroup *group = qgraphicsitem_cast<AbstractGroup *>(scene()->itemAt(event->scenePos()));
+    AbstractGroup *group = d->groupAt(event->pos());
 
-    d->deleteGroupAction->setVisible(false);
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
+        showContextMenu(event->pos(), event->screenPos());
+        return;
     }
-    showContextMenu(event->pos(), event->scenePos().toPoint());
 
     event->ignore();
 

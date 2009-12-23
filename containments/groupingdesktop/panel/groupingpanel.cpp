@@ -79,7 +79,8 @@ GroupingPanel::~GroupingPanel()
 
 void GroupingPanel::init()
 {
-    setContainmentType(Containment::PanelContainment);
+    setContainmentType(Containment::CustomPanelContainment);
+//     setContainmentType(Containment::PanelContainment);
 
     GroupingContainment::init();
     //FIXME: This should be enabled, but in that case proxywidgets won't get rendered
