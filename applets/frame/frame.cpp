@@ -197,7 +197,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 QSizeF Frame::contentSizeHint() const
 {
     if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
-        const qreal maxSize = contentsRect().width() > contentsRect().height() ? contentsRect().width() : contentsRect().height();
+        const qreal maxSize = qMax(contentsRect().width(), contentsRect().height());
         QSize size = m_pictureSize;
         size.scale(maxSize, maxSize, Qt::KeepAspectRatio);
         return size;
