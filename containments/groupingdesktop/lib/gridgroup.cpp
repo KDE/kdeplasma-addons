@@ -342,7 +342,11 @@ Position GridGroup::itemPosition(QGraphicsItem *item) const
 void GridGroup::layoutChild(QGraphicsWidget *child, const QPointF &pos)
 {
     Q_UNUSED(pos)
-kDebug()<<"layout";
+
+    if (!m_spacer->isVisible()) {
+        showDropZone(pos);
+    }
+
     Position spacerPos = itemPosition(m_spacer);
     if ((spacerPos.row != -1) && (spacerPos.column != -1)) {
         m_spacer->hide();

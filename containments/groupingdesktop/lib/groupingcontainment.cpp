@@ -164,7 +164,11 @@ class GroupingContainmentPrivate
 
         void manageGroup(AbstractGroup *subGroup, const QPointF &pos)
         {
+            //FIXME i don't like this setPos's at all
+            subGroup->setPos(q->geometry().bottomRight());
             AbstractGroup *group = groupAt(pos);
+            subGroup->setPos(pos);
+
             if (group && (group != subGroup)) {
                 group->addSubGroup(subGroup);
             } else {
@@ -303,6 +307,7 @@ void GroupingContainment::setMainGroup(AbstractGroup *group)
     d->mainGroup = group;
     if (!d->layout) {
         d->layout = new QGraphicsLinearLayout(this);
+        d->layout->setContentsMargins(0, 0, 0, 0);
     }
     d->layout->addItem(group);
     group->setIsMainGroup(true);
@@ -572,6 +577,7 @@ void GroupingContainment::restoreContents(KConfigGroup& group)
 void GroupingContainment::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     d->deleteGroupAction->setVisible(false);
+    d->lastClick = event->pos();
 
     Plasma::Containment::mousePressEvent(event);
 }
@@ -583,6 +589,7 @@ void GroupingContainment::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     if (group && (immutability() == Plasma::Mutable) && (group->immutability() == Plasma::Mutable) && !group->isMainGroup()) {
         d->deleteGroupAction->setVisible(true);
         d->deleteGroupAction->setData(group->id());
+        d->lastClick = event->pos();
         showContextMenu(event->pos(), event->screenPos());
         return;
     }

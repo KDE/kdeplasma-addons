@@ -472,6 +472,17 @@ void AbstractGroup::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
     showDropZone(event->pos());
 }
 
+void AbstractGroup::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    event->ignore();
+
+    QPointF pos(event->pos());
+    if (pos.y() < 1 || abs(pos.y() - size().height()) < 2 ||
+        pos.x() < 1 || abs(pos.x() - size().width()) < 2) {
+        showDropZone(QPointF());
+    }
+}
+
 void AbstractGroup::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     scene()->sendEvent(d->containment, event);
