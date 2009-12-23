@@ -61,6 +61,8 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     setAcceptsHoverEvents(true);
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     resize(400, 300);
+    //make size()==contentssize(), resolves auto-shrinking once for all
+    setContentsMargins(0, 0, 0, 0);
     m_mySlideShow = new SlideShow(this);
     if (args.count()) {
         m_currentUrl = args.value(0).toString();
