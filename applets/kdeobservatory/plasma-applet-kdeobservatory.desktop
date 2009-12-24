@@ -32,8 +32,7 @@ Icon=kdeobservatory.png
 
 X-KDE-ServiceTypes=Plasma/Applet
 X-KDE-Library=plasma_applet_kdeobservatory
-X-KDE-PluginInfo-Author=Sandro S. Andrade
-X-KDE-PluginInfo-Email=sandroandrade@kde.org
+X-KDE-PluginInfo-Author=<a href='mailto:sandroandrade@kde.org'>Sandro S. Andrade</a> (developer)<br/><a href='mailto:leetolson@gmail.com'>Lee Olson</a> (artwork)
 X-KDE-PluginInfo-Name=kdeobservatory
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
