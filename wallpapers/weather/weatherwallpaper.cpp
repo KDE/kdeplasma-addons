@@ -53,6 +53,7 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     , m_advancedDialog(0)
     , m_fileDialog(0)
     , m_model(0)
+    , m_newStuffDialog(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
@@ -310,12 +311,18 @@ void WeatherWallpaper::showAdvancedDialog()
 
 void WeatherWallpaper::getNewWallpaper()
 {
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("wallpaper.knsrc", m_configWidget);
-    dialog->exec();
-    if (m_model && dialog->changedEntries().size() > 0) {
+    if (!m_newStuffDialog) {
+        m_newStuffDialog = new KNS3::DownloadDialog( "wallpaper.knsrc", m_configWidget );
+        connect(m_newStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
+    }
+    m_newStuffDialog->show();
+}
+
+void WeatherWallpaper::newStuffFinished()
+{
+    if (m_model && m_newStuffDialog->changedEntries().size() > 0) {
         m_model->reload();
     }
-    delete dialog;
 }
 
 void WeatherWallpaper::colorChanged(const QColor& color)

@@ -35,6 +35,10 @@ class QStandardItem;
 class KDialog;
 class KFileDialog;
 
+namespace KNS3 {
+    class DownloadDialog;
+}
+
 class BackgroundListModel;
 class WeatherConfig;
 class WeatherLocation;
@@ -73,6 +77,7 @@ protected slots:
     void configWidgetDestroyed();
     void advancedDialogDestroyed();
     void locationReady(const QString &source);
+    void newStuffFinished();
 
 protected:
     void init(const KConfigGroup & config);
@@ -112,6 +117,7 @@ private:
     BackgroundListModel *m_model;
     QSize m_size;
     QString m_img;
+    KNS3::DownloadDialog* m_newStuffDialog;
 };
 
 #endif //PLASMA_PLUGIN_WALLPAPER_WEATHER_H
