@@ -27,7 +27,6 @@
 // #include <KBookmarkDialog> TODO: CamelCase only added after 4.3.4 and 4.5.0 Beta 2
 #include <kbookmarkdialog.h>
 #include <KBookmarkGroup>
-#include <KSqueezedTextLabel>
 #include <KPushButton>
 #include <KLocale>
 #include <KIconLoader>
@@ -54,32 +53,23 @@ GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWi
                 "Folder:" );
     QLabel* label = new QLabel( folderSelectLabelText );
 
-    QHBoxLayout* folderLayout = new QHBoxLayout;
-    folderLayout->setMargin( 0 );
-
-    mFolderIconLabel = new QLabel;
-    mFolderNameLabel = new KSqueezedTextLabel;
-
-    folderLayout->addWidget( mFolderIconLabel );
-    folderLayout->addWidget( mFolderNameLabel, 10 );
-
-    KPushButton* folderSelectButton = new KPushButton( KIcon("folder-open"), QString() );
-    label->setBuddy( folderSelectButton );
-    connect( folderSelectButton, SIGNAL(clicked( bool )), SLOT(selectBookmarkFolder()) );
+    mFolderSelectButton = new KPushButton;
+    label->setBuddy( mFolderSelectButton );
+    connect( mFolderSelectButton, SIGNAL(clicked( bool )), SLOT(selectBookmarkFolder()) );
 
     const QString folderToolTip =
         i18nc( "@info:tooltip",
                "The folder which will be used as the base for the menu." );
     label->setToolTip( folderToolTip );
-    folderSelectButton->setToolTip( folderToolTip );
+    mFolderSelectButton->setToolTip( folderToolTip );
 //     const QString folderWhatsThis =
 //         i18nc( "@info:whatsthis",
 //                "Select the folder which should be used to in the menu." );
-//     folderSelectButton->setWhatsThis( groupSizeWhatsThis );
+//     mFolderSelectButton->setWhatsThis( groupSizeWhatsThis );
 
     folderSelectLayout->addWidget( label );
-    folderSelectLayout->addLayout( folderLayout, 10 );
-    folderSelectLayout->addWidget( folderSelectButton );
+    folderSelectLayout->addWidget( mFolderSelectButton );
+    folderSelectLayout->addStretch();
 
     pageLayout->addLayout( folderSelectLayout );
     pageLayout->addStretch();
@@ -123,8 +113,8 @@ void GeneralConfigEditor::updateFolder()
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
     const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
 
-    mFolderIconLabel->setPixmap( SmallIcon(iconName) );
-    mFolderNameLabel->setText( folderName );
+    mFolderSelectButton->setIcon( KIcon(iconName) );
+    mFolderSelectButton->setText( folderName );
 }
 
 

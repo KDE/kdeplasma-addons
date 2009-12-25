@@ -28,8 +28,7 @@
 #include <QtCore/QString>
 
 class KBookmarkManager;
-class KSqueezedTextLabel;
-class QLabel;
+class KPushButton;
 
 
 class GeneralConfigEditor : public QWidget
@@ -58,8 +57,7 @@ class GeneralConfigEditor : public QWidget
 
     KBookmarkManager* mBookmarkManager;
 
-    QLabel* mFolderIconLabel;
-    KSqueezedTextLabel* mFolderNameLabel;
+    KPushButton* mFolderSelectButton;
 };
 
 
