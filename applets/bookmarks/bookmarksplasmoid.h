@@ -57,6 +57,7 @@ class BookmarksPlasmoid : public Applet
   protected Q_SLOTS:
     void toggleMenu( bool toggle );
     void toggleMenu();
+    void editBookmarks();
     void applyConfigChanges();
 
     void onBookmarksChanged( const QString& address );

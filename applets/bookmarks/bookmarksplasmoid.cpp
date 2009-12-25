@@ -70,7 +70,7 @@ void BookmarksPlasmoid::init()
     Plasma::ToolTipManager::self()->registerWidget( this );
 
     // context menu
-    KAction* editorOpener = KStandardAction::editBookmarks( bookmarkManager, SLOT(slotEditBookmarks()), this );
+    KAction* editorOpener = KStandardAction::editBookmarks( this, SLOT(editBookmarks()), this );
     mContextualActions.append( editorOpener );
 
     // view
@@ -180,6 +180,12 @@ void BookmarksPlasmoid::applyConfigChanges()
 
         updateFolderData();
     }
+}
+
+void BookmarksPlasmoid::editBookmarks()
+{
+    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
+    bookmarkManager->slotEditBookmarksAtAddress( mBookmarkFolderAddress );
 }
 
 void BookmarksPlasmoid::onBookmarksChanged( const QString& address )
