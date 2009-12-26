@@ -259,6 +259,8 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     m_saveTimer.setSingleShot(true);
     connect(&m_saveTimer, SIGNAL(timeout()), this, SLOT(saveNote()));
     resize(256, 256);
+    //FIXME: this shouldn't be there, find out where somebody sets the monimum size as (1, 1) and kill that call
+    setMinimumSize(-1, -1);
 
     m_textEdit = new PlasmaTextEdit(this);
     m_textEdit->setMinimumSize(QSize(60, 60)); //Ensure a minimum size (height) for the textEdit
