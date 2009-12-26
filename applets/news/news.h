@@ -44,6 +44,7 @@ class News : public Plasma::PopupApplet
         virtual void createConfigurationInterface(KConfigDialog *parent);
         void connectToEngine();
         QMap<QString, QString> akregatorFeeds();
+        bool eventFilter(QObject *receiver, QEvent *event);
 
     protected Q_SLOTS:
         void dropEvent(QGraphicsSceneDragDropEvent *event);

@@ -112,6 +112,7 @@ QGraphicsWidget *News::graphicsWidget()
     m_layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     m_news = new Plasma::WebView(this);
+    m_news->installEventFilter(this);
     m_news->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
     connect(m_news->page(), SIGNAL(linkClicked(const QUrl&)),
             this, SLOT(linkActivated(const QUrl&)));
@@ -329,6 +330,15 @@ void News::dropEvent(QGraphicsSceneDragDropEvent *event)
             connectToEngine();
         }
     }
+}
+
+bool News::eventFilter(QObject *receiver, QEvent *event)
+{
+    if (receiver == m_news && event->type() == QEvent::GraphicsSceneContextMenu) {
+        return true;
+    }
+
+    return false;
 }
 
 void News::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
