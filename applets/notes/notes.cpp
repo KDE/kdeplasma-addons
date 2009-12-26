@@ -189,16 +189,14 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
     if (native->verticalScrollBar() && w->verticalScrollBar()) {
         native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
     }
-    connect(native, SIGNAL(textChanged()), this, SIGNAL(textChanged()));
+    setNativeWidget(native);
+
     connect(native, SIGNAL(cursorMoved()), this, SIGNAL(textChanged()));
     connect(native, SIGNAL(mouseUnhovered()), this, SIGNAL(mouseUnhovered()));
 
     // scrollwheel + ctrl changes font size
     connect(native, SIGNAL(scrolledUp()), parent, SLOT(increaseFontSize()));
     connect(native, SIGNAL(scrolledDown()), parent, SLOT(decreaseFontSize()));
-    setWidget(native);
-    delete w;
-    native->setAttribute(Qt::WA_NoSystemBackground);
 }
 
 PlasmaTextEdit::~PlasmaTextEdit()
@@ -263,9 +261,9 @@ Notes::Notes(QObject *parent, const QVariantList &args)
     resize(256, 256);
 
     m_textEdit = new PlasmaTextEdit(this);
-    m_textEdit->setMinimumSize(QSize(0, 0));
+    m_textEdit->setMinimumSize(QSize(60, 60)); //Ensure a minimum size (height) for the textEdit
     m_layout = new QGraphicsLinearLayout(Qt::Vertical);
-    m_layout->setSpacing(0);
+    m_layout->setSpacing(2); //We need a bit of spacing between the edit and the buttons
     m_textEdit->nativeWidget()->setFrameShape(QFrame::NoFrame);
     m_textEdit->nativeWidget()->viewport()->setAutoFillBackground(false);
     m_layout->addItem(m_textEdit);
