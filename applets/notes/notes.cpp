@@ -67,9 +67,7 @@ void NotesTextEdit::setFormatMenu(QMenu *menu)
 void NotesTextEdit::contextMenuEvent( QContextMenuEvent *event )
 {
     QMenu *popup = mousePopupMenu();
-    popup->setWindowFlags(popup->windowFlags() | Qt::BypassGraphicsProxyWidget);
-    popup->setParent(0);
-    //popup->setParent(this);
+
     popup->addSeparator();
     popup->addAction(KStandardAction::saveAs(this, SLOT(saveToFile()), this));
 
@@ -185,6 +183,7 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
 {
     KTextEdit *w = nativeWidget();
     native = new NotesTextEdit;
+    native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
     //FIXME: we need a way to just add actions without changing the native widget under its feet
     if (native->verticalScrollBar() && w->verticalScrollBar()) {
         native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
