@@ -30,6 +30,7 @@ class GeneralConfigEditor;
 class BookmarkOwner;
 
 class KBookmarkMenu;
+class KBookmarkManager;
 
 
 namespace Plasma
@@ -69,6 +70,7 @@ class BookmarksPlasmoid : public Applet
 
     QList<QAction*> mContextualActions;
 
+    KBookmarkManager* mBookmarkManager;
     KBookmarkMenu* mBookmarkMenu;
     BookmarkOwner* mBookmarkOwner;
 

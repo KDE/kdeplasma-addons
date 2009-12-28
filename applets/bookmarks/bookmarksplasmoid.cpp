@@ -49,6 +49,7 @@ static const char bookmarkFolderAddressConfigKey[] = "BookmarkFolderAddress";
 BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args )
   : Applet( parent, args ),
     mIcon( 0 ),
+    mBookmarkManager( 0 ),
     mBookmarkMenu( 0 ),
     mBookmarkOwner( 0 )
 {
@@ -57,8 +58,8 @@ BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args 
 
 void BookmarksPlasmoid::init()
 {
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-    connect( bookmarkManager, SIGNAL(changed( const QString&, const QString& )), SLOT(onBookmarksChanged( const QString& )) );
+    mBookmarkManager = KBookmarkManager::userBookmarksManager();
+    connect( mBookmarkManager, SIGNAL(changed( const QString&, const QString& )), SLOT(onBookmarksChanged( const QString& )) );
 
     // read config
     KConfigGroup configGroup = config();
@@ -98,11 +99,10 @@ QList<QAction*> BookmarksPlasmoid::contextualActions()
 
 void BookmarksPlasmoid::updateFolderData()
 {
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-    const KBookmark bookmark = bookmarkManager->findByAddress( mBookmarkFolderAddress );
+    const KBookmark bookmark = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
 
     KBookmarkGroup bookmarkFolder =
-        ( bookmark.isNull() || ! bookmark.isGroup() ) ? bookmarkManager->root() : bookmark.toGroup();
+        ( bookmark.isNull() || ! bookmark.isGroup() ) ? mBookmarkManager->root() : bookmark.toGroup();
 
     const bool isRoot = ( ! bookmarkFolder.hasParent() );
 
@@ -138,13 +138,11 @@ void BookmarksPlasmoid::toggleMenu( bool toggle )
 
     delete mBookmarkMenu;
 
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-
     KMenu* menu = new KMenu();
     menu->setAttribute( Qt::WA_DeleteOnClose );
     connect( menu, SIGNAL(aboutToHide()), mIcon, SLOT(setUnpressed()) );
     // TODO: only renew if manager emits changed
-    mBookmarkMenu = new KBookmarkMenu( bookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress );
+    mBookmarkMenu = new KBookmarkMenu( mBookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress );
 
     menu->popup( popupPosition(menu->sizeHint()) );
 }
@@ -156,9 +154,7 @@ void BookmarksPlasmoid::toggleMenu()
 
 void BookmarksPlasmoid::createConfigurationInterface( KConfigDialog* parent )
 {
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-
-    mGeneralConfigEditor = new GeneralConfigEditor( bookmarkManager, parent );
+    mGeneralConfigEditor = new GeneralConfigEditor( mBookmarkManager, parent );
     mGeneralConfigEditor->setBookmarkFolderAddress( mBookmarkFolderAddress );
     parent->addPage( mGeneralConfigEditor, i18n("General"), icon() );
     connect( parent, SIGNAL(applyClicked()), SLOT(applyConfigChanges()) );
@@ -184,8 +180,7 @@ void BookmarksPlasmoid::applyConfigChanges()
 
 void BookmarksPlasmoid::editBookmarks()
 {
-    KBookmarkManager* bookmarkManager = KBookmarkManager::userBookmarksManager();
-    bookmarkManager->slotEditBookmarksAtAddress( mBookmarkFolderAddress );
+    mBookmarkManager->slotEditBookmarksAtAddress( mBookmarkFolderAddress );
 }
 
 void BookmarksPlasmoid::onBookmarksChanged( const QString& address )
