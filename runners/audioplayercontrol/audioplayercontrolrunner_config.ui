@@ -45,7 +45,7 @@ You may add another player. That player has to support the MPRIS specification.<
          <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
-         <string>Seach &amp;collection</string>
+         <string>Search &amp;collection</string>
         </property>
         <property name="checked">
          <bool>true</bool>
