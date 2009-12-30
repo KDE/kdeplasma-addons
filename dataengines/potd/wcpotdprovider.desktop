@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=wcpotd
 Icon=
 
 Name=Wikimedia Picture of the Day
+Name[ca]=Imatge Viquimèdia del dia
 Name[cs]=Obrázek dne z Wikimedie
 Name[da]=Dagens Wikimedia-billede
 Name[de]=Wikimedia Bild des Tages

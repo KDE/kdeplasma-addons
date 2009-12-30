@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Wikipedia
+Name[ca]=Viquipèdia
 Name[cs]=Wikipedia
 Name[da]=Wikipedia
 Name[de]=Wikipedia
@@ -17,6 +18,7 @@ Name[uk]=Вікіпедія
 Name[x-test]=xxWikipediaxx
 Name[zh_TW]=維基百科
 Comment=Search on Wikipedia
+Comment[ca]=Cerca en la Viquipèdia
 Comment[da]=Søg på Wikipedia
 Comment[de]=Auf Wikipedia suchen
 Comment[en_GB]=Search on Wikipedia

@@ -7,6 +7,7 @@ X-KDE-PlasmaPoTDProvider-Identifier=flickr
 Icon=
 
 Name=Flickr Picture of the Day
+Name[ca]=Imatge Flickr del dia
 Name[cs]=Obrázek dne z Flickru
 Name[da]=Dagens Flickr-billede
 Name[de]=Bild des Tages von Flickr

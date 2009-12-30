@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Web Slice
+Name[ca]=Lliscador Web
 Name[da]=Web Slice
 Name[de]=Web-Scheibchen
 Name[en_GB]=Web Slice
@@ -15,6 +16,7 @@ Name[uk]=Веб-зріз
 Name[x-test]=xxWeb Slicexx
 Name[zh_TW]=網頁切片
 Comment=Show a part of a webpage
+Comment[ca]=Mostra una part d'una pàgina web
 Comment[da]=Vis en del af en webside
 Comment[de]=Einen Teil einer Webseite anzeigen
 Comment[en_GB]=Show a part of a webpage

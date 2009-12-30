@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Keyboard
+Name[ca]=Teclat
 Name[da]=Tastatur
 Name[de]=Tastatur
 Name[en_GB]=Keyboard
@@ -20,6 +21,7 @@ Name[uk]=Клавіатура
 Name[x-test]=xxKeyboardxx
 Name[zh_TW]=鍵盤
 Comment=A virtual, on-screen keyboard
+Comment[ca]=Un teclat virtual de pantalla
 Comment[da]=Et virtuelt tastatur på skærmen
 Comment[de]=Eine virtuelle Tastatur auf dem Bildschirm
 Comment[en_GB]=A virtual, on-screen keyboard
