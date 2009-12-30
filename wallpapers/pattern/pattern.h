@@ -24,7 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PATTERN_H
 
 #include <Plasma/Wallpaper>
-#include <QColor>
 
 #include "ui_config.h"
 

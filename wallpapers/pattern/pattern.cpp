@@ -25,12 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qimageblitz.h"
 
 #include <QFileInfo>
-#include <QImage>
 #include <QPainter>
-#include <QPixmap>
 
 #include <KDebug>
-#include <KGlobal>
 #include <KStandardDirs>
 
 

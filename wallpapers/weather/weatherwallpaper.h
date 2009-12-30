@@ -30,9 +30,7 @@
 #include "ui_weatherAdvanced.h"
 
 class QStandardItemModel;
-class QStandardItem;
 
-class KDialog;
 class KFileDialog;
 
 namespace KNS3 {

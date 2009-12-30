@@ -22,18 +22,15 @@
 #include "weatherwallpaper.h"
 
 // Qt includes
-#include <QImage>
 #include <QPainter>
 
 // KDE includes
-#include <KDialog>
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KNS3/DownloadDialog>
 #include <KPushButton>
 #include <KStandardDirs>
 #include <Plasma/Animator>
-#include <Plasma/DataEngineManager>
 #include <Plasma/Theme>
 
 // Libplasmaweather includes
