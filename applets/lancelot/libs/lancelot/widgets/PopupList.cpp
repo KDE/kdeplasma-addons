@@ -22,6 +22,7 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QDebug>
 
 #include <KMessageBox>
 
@@ -207,8 +208,12 @@ void PopupList::updateSize()
     if (width < MENU_WIDTH) {
         width = MENU_WIDTH;
     }
-    d->list->resize(width,
-            (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT);
+
+    qreal height =
+            (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT;
+    d->list->resize(width, height);
+    resize(width + 16, height + 16);
+    qDebug() << "PopupList::updateSize: " << width << height;
 }
 
 void PopupList::exec(const QPoint & p)
