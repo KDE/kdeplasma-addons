@@ -212,8 +212,9 @@ void PopupList::updateSize()
     qreal height =
             (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT;
     d->list->resize(width, height);
+
+    // TODO: Load margins from the background svg
     resize(width + 16, height + 16);
-    qDebug() << "PopupList::updateSize: " << width << height;
 }
 
 void PopupList::exec(const QPoint & p)
