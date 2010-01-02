@@ -51,6 +51,7 @@ Feature requests:
  - The menu key should show the context menu just like alt+enter - FINISHED
  - DnD fixed devices - FINISHED
  - rearanging favorites by DnD - FINISHED
+ - advanced parts widget: search bar - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
@@ -62,11 +63,9 @@ Feature requests:
  - status of mails in the contacts icon - possibly
  - add to panel/desktop action - probably
  - additional sub-applets: keep-open (yes), collapse sect btns (possibly) ...
- - advanced parts widget: list mode, icons mode, ..., search bar... - yes
- - align lists that don't have enough items bottom when the mouse comes from bottom - not likely
- - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350)
+ - advanced parts widget: list mode, icons mode, ... - maybe
+ - sticky Favourites section (https://bugs.kde.org/show_bug.cgi?id=191350) - maybe
  - Disk free space info - maybe
- - return the old logout dim-screen (https://bugs.kde.org/show_bug.cgi?id=196219)
  - configurable sizes for item heights - maybe
  - file actions move/delete for folder model - maybe
 
