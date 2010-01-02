@@ -83,7 +83,7 @@ p, li { white-space: pre-wrap; }
      <item>
       <widget class="QPushButton" name="registerButton">
        <property name="text">
-        <string>Register</string>
+        <string comment="@action:button Registers a new account">Register</string>
        </property>
       </widget>
      </item>
