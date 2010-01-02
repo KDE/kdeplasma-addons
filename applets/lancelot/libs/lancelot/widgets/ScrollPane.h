@@ -194,7 +194,6 @@ public:
 protected:
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    L_Override void wheelEvent(QGraphicsSceneWheelEvent * event);
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
 
 public Q_SLOTS:

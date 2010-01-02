@@ -308,20 +308,6 @@ void ScrollPane::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
     }
 } //<
 
-void ScrollPane::wheelEvent(QGraphicsSceneWheelEvent * event) //>
-{
-    // TODO: Remove this - we are using Plasma::Animator::registerScrollingManager
-    // for wheel scrolling
-    Widget::wheelEvent(event);
-    return;
-
-    // if (event->modifiers() & Qt::ControlModifier) {
-    //     d->horizontal->wheelEvent(event);
-    // } else {
-    //     d->vertical->wheelEvent(event);
-    // }
-} //<
-
 void ScrollPane::setFlip(Plasma::Flip flip) //>
 {
     if (flip & Plasma::HorizontalFlip) {
