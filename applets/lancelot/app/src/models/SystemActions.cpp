@@ -32,6 +32,7 @@
 #include <KJob>
 #include <kworkspace/kworkspace.h>
 #include <solid/control/powermanager.h>
+#include <solid/powermanagement.h>
 
 #include <plasma/abstractrunner.h>
 #include "screensaver_interface.h"
@@ -116,9 +117,16 @@ QStringList SystemActions::actions() const
            << ID_LOCK_SCREEN
            << ID_LOGOUT
            << ID_REBOOT
-           << ID_POWEROFF
-           << ID_SUSPEND_DISK
-           << ID_SUSPEND_RAM;
+           << ID_POWEROFF;
+
+    QSet <Solid::PowerManagement::SleepState> sleepstates = Solid::PowerManagement::supportedSleepStates();
+    foreach (const Solid::PowerManagement::SleepState &sleepstate, sleepstates) {
+        if (sleepstate == Solid::PowerManagement::SuspendState) {
+            result << ID_SUSPEND_RAM;
+        } else if (sleepstate == Solid::PowerManagement::HibernateState) {
+            result << ID_SUSPEND_DISK;
+        }
+    }
     return result;
 }
 
@@ -178,12 +186,18 @@ void SystemActions::load()
 
     StandardActionTreeModel::Item * item;
 
+    QStringList acts = actions();
+
     item = new ItemFor(ID_MENU_LEAVE);
     item->children << new ItemFor(ID_LOGOUT);
     item->children << new ItemFor(ID_REBOOT);
     item->children << new ItemFor(ID_POWEROFF);
-    item->children << new ItemFor(ID_SUSPEND_DISK);
-    item->children << new ItemFor(ID_SUSPEND_RAM);
+    if (acts.contains(ID_SUSPEND_DISK)) {
+        item->children << new ItemFor(ID_SUSPEND_DISK);
+    }
+    if (acts.contains(ID_SUSPEND_RAM)) {
+        item->children << new ItemFor(ID_SUSPEND_RAM);
+    }
     add(item);
 
     switchUserModel = new Lancelot::ActionTreeModelProxy(
@@ -250,10 +264,20 @@ void SystemActions::delayedActivate()
 
     QString cmd = root()->children.at(delayedActivateItemIndex)->data.toString();
 
-    if (cmd == ID_LOCK_SCREEN ||
-            cmd == ID_SUSPEND_DISK ||
-            cmd == ID_SUSPEND_RAM
-        ) {
+    if (cmd == ID_SUSPEND_DISK || cmd == ID_SUSPEND_RAM) {
+        QDBusConnection dbus(QDBusConnection::sessionBus());
+        QDBusInterface iface("org.kde.kded", "/modules/powerdevil", "org.kde.PowerDevil", dbus);
+
+        if (cmd == ID_SUSPEND_DISK) {
+            iface.asyncCall("suspend", Solid::Control::PowerManager::ToDisk);
+        } else {
+            iface.asyncCall("suspend", Solid::Control::PowerManager::ToRam);
+        }
+
+        ApplicationConnector::self()->hide(true);
+        return;
+
+    } else if (cmd == ID_LOCK_SCREEN) {
         org::freedesktop::ScreenSaver screensaver("org.freedesktop.ScreenSaver", "/ScreenSaver", QDBusConnection::sessionBus());
 
         if (screensaver.isValid()) {
@@ -267,9 +291,7 @@ void SystemActions::delayedActivate()
                     i18n("Session locking error"));
         }
 
-        if (cmd == ID_LOCK_SCREEN) {
-            return;
-        }
+        return;
     }
 
     KWorkSpace::ShutdownConfirm confirm = KWorkSpace::ShutdownConfirmDefault;
@@ -293,24 +315,24 @@ void SystemActions::delayedActivate()
 
     // Solid related
 
-    KJob * job = NULL;
-    Solid::Control::PowerManager::SuspendMethod method =
-        Solid::Control::PowerManager::UnknownSuspendMethod;
+    // KJob * job = NULL;
+    // Solid::Control::PowerManager::SuspendMethod method =
+    //     Solid::Control::PowerManager::UnknownSuspendMethod;
 
-    if (cmd == ID_SUSPEND_DISK) {
-        method = Solid::Control::PowerManager::ToDisk;
-    } else if (cmd == ID_SUSPEND_RAM) {
-        method = Solid::Control::PowerManager::ToRam;
-    }
+    // if (cmd == ID_SUSPEND_DISK) {
+    //     method = Solid::Control::PowerManager::ToDisk;
+    // } else if (cmd == ID_SUSPEND_RAM) {
+    //     method = Solid::Control::PowerManager::ToRam;
+    // }
 
-    if (method) {
-        ApplicationConnector::self()->hide(true);
-        job = Solid::Control::PowerManager::suspend(method);
-        if (job) {
-            job->start();
-        }
-        return;
-    }
+    // if (method) {
+    //     ApplicationConnector::self()->hide(true);
+    //     job = Solid::Control::PowerManager::suspend(method);
+    //     if (job) {
+    //         job->start();
+    //     }
+    //     return;
+    // }
 }
 
 // Sessions
