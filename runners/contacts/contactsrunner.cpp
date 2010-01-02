@@ -84,7 +84,7 @@ void ContactsRunner::match(Plasma::RunnerContext &context)
             matchedMail = indexOf > -1 && indexOf < a.preferredEmail().indexOf('@');
         }
 
-        if (matchedName || matchedMail) {
+        if ((matchedName || matchedMail) && !a.preferredEmail().isEmpty()) {
             //kDebug() << "Possible match: " << a.realName() << " <" << a.preferredEmail() << ">";
             Plasma::QueryMatch match(this);
 
