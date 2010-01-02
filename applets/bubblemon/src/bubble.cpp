@@ -453,6 +453,7 @@ Bubble::createConfigurationInterface(KConfigDialog* dlg)
 
     if (currentSensor.isValid()) {
         ui.sensorView->selectionModel()->setCurrentIndex(currentSensor, QItemSelectionModel::ClearAndSelect);
+        ui.sensorView->scrollTo(currentSensor, QAbstractItemView::PositionAtTop);
     }
 
     ui.searchBox->setProxy(proxy);
