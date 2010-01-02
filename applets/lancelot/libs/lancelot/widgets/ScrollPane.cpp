@@ -217,6 +217,12 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
         }
     }
 
+    if (hasVertical) {
+        Plasma::Animator::self()->registerScrollingManager(this);
+    } else {
+        Plasma::Animator::self()->unregisterScrollingManager(this);
+    }
+
     d->updateViewport();
 } //<
 
