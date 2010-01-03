@@ -44,9 +44,9 @@ def parseFile(inputFile):
     includes = []
 
     reNamespace = re.compile("namespace\s+([^\s]+)")
-    reClass     = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([^\s]+)|class.*[\s]+([^\s]+)[\s]*(:|{|;|$)")
+    reClass     = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([A-Za-z]+)?|class.*[\s]+([^\s]+)[\s]*(:|{|;|$)")
     reProperty  = re.compile("Q_PROPERTY\s*\(\s*([^\s]+)\s+([^\s]+)\s+READ\s+([^\s]+)\s+WRITE\s+([^\s]+)\s*\)")
-    reIncludes  = re.compile("L_INCLUDE\s*\(\s*(.+)\s*\)")
+    reIncludes  = re.compile("(\/\/\s*@puck\s*)?L_INCLUDE\s*\(\s*(.+)\s*\)")
     reExtra     = re.compile(".*L_EXTRA\s*\(\s*(.+)\s*\)")
 
     data = open(inputFile).readlines()
@@ -61,6 +61,7 @@ def parseFile(inputFile):
 
         match = reClass.match(line)
         if match:
+            print "-------"
             if className != "":
                 processClass()
 
@@ -94,8 +95,9 @@ def parseFile(inputFile):
 
         match = reIncludes.match(line)
         if match:
-            print "Found includes ", match.group(1)
-            includes = match.group(1)
+            print "Debug ", match
+            print "Found includes ", match.group(2)
+            includes = match.group(2)
             print includes
     if className != "":
         processClass()

@@ -50,8 +50,8 @@ class LANCELOT_EXPORT BasicWidget: public Lancelot::Widget {
     Q_PROPERTY ( QString description READ description WRITE setDescription ) L_EXTRA ( i18n )
     Q_PROPERTY ( Qt::Orientation innerOrientation READ innerOrientation WRITE setInnerOrientation )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
 
 public:
     /**

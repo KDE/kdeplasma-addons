@@ -39,8 +39,8 @@ class LANCELOT_EXPORT ScrollBar: public Plasma::ScrollBar {
 
     Q_PROPERTY ( int activationMethod READ activationMethod WRITE setActivationMethod )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/ScrollBar.h lancelot/lancelot.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/ScrollBar.h lancelot/lancelot.h)
 
 public:
     /**

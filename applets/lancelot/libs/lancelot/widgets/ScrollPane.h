@@ -98,8 +98,8 @@ class LANCELOT_EXPORT ScrollPane: public Lancelot::Widget {
     Q_PROPERTY(QSizeF contentsSize READ contentsSize)
     Q_PROPERTY(QRectF viewportGeometry READ viewportGeometry)
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/ScrollPane.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/ScrollPane.h)
 
 public:
     enum Flag {

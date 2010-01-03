@@ -44,8 +44,8 @@ class LANCELOT_EXPORT Panel: public Lancelot::Widget
     Q_PROPERTY ( QString title READ title WRITE setTitle ) L_EXTRA ( i18n )
     Q_PROPERTY ( bool showingTitle READ isShowingTitle WRITE setShowingTitle )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/Panel.h QIcon QSize QString)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/Panel.h QIcon QSize QString)
 
 public:
     /**

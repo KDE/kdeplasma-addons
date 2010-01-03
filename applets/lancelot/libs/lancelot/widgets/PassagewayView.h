@@ -48,8 +48,8 @@ class LANCELOT_EXPORT PassagewayView : public Lancelot::Panel
 
     Q_PROPERTY ( int activationMethod READ activationMethod WRITE setActivationMethod )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/PassagewayView.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/PassagewayView.h)
 
 public:
     PassagewayView(QGraphicsItem * parent = 0);

@@ -41,8 +41,8 @@ class LANCELOT_EXPORT HoverIcon: public Plasma::IconWidget {
 
     Q_PROPERTY ( int activationMethod READ activationMethod WRITE setActivationMethod )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/HoverIcon.h plasma/widgets/icon.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/HoverIcon.h plasma/widgets/icon.h)
 
 public:
     /**

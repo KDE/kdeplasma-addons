@@ -33,8 +33,8 @@ namespace Lancelot
  */
 class LANCELOT_EXPORT ResizeBordersPanel: public Lancelot::Panel {
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/ResizeBordersPanel.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/ResizeBordersPanel.h)
 
 public:
     /**

@@ -30,7 +30,7 @@
 namespace Lancelot
 {
 
-class LANCELOT_EXPORT ActionListView : public CustomListView
+class LANCELOT_EXPORT ActionListView : public Lancelot::CustomListView
 {
     Q_OBJECT
 
@@ -41,8 +41,8 @@ class LANCELOT_EXPORT ActionListView : public CustomListView
 
     // Q_PROPERTY ( int activationMethod READ activationMethod WRITE setActivationMethod )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/ActionListView.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/ActionListView.h)
 
 public:
     ActionListView(QGraphicsItem * parent = 0);

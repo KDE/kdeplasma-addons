@@ -39,8 +39,8 @@ class LANCELOT_EXPORT Widget : public QGraphicsWidget {
 
     Q_PROPERTY(QString group READ groupName WRITE setGroupByName)
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/Widget.h QString)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/Widget.h QString)
 
 public:
     /**

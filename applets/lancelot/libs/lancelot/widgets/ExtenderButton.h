@@ -40,13 +40,15 @@ class LANCELOT_EXPORT ExtenderButton : public Lancelot::BasicWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY ( int /*ExtenderPosition*/ extenderPosition READ extenderPosition WRITE setExtenderPosition )
-    Q_PROPERTY ( int /*ActivationMethod*/ activationMethod READ activationMethod WRITE setActivationMethod )
+    /* type: ExtenderPosition */
+    Q_PROPERTY ( int extenderPosition READ extenderPosition WRITE setExtenderPosition )
+    /* type: ActivationMethod */
+    Q_PROPERTY ( int activationMethod READ activationMethod WRITE setActivationMethod )
     Q_PROPERTY ( bool checkable READ isCheckable WRITE setCheckable )
     Q_PROPERTY ( bool checked READ isChecked WRITE setChecked )
 
-    L_WIDGET
-    L_INCLUDE(lancelot/widgets/ExtenderButton.h lancelot/lancelot.h)
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/ExtenderButton.h lancelot/lancelot.h)
 
 public:
     /**
