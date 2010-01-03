@@ -273,7 +273,7 @@ bool PartsMergedModel::load(const QString & input)
                 }
             } else if (modelID == "Folder") {
                 qDebug() << "LancelotPart::" << modelExtraData;
-                if (modelExtraData.startsWith("applications:/")) {
+                if (modelExtraData.startsWith(QLatin1String("applications:/"))) {
                     modelExtraData.remove(0, 14);
                     addModel(modelExtraData,
                         QIcon(),

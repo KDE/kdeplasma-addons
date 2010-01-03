@@ -40,7 +40,7 @@ protected:
      */
     class LANCELOT_EXPORT Item {
     public:
-        Item(QString itemTitle = QString(),
+        explicit Item(QString itemTitle = QString(),
              QString itemDescription = QString(),
              QIcon itemIcon = QIcon(),
              QVariant itemData = QVariant())
