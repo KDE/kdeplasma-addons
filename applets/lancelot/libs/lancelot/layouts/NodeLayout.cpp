@@ -81,7 +81,8 @@ public:
 
     void relayout()
     {
-        foreach (QGraphicsLayoutItem * item, items.keys()) {
+        foreach (QGraphicsLayoutItem * item, items.keys()) // krazy:exclude=foreach
+        {
             if (item) {
                 item->setGeometry(calculateRectangle(item));
             }
@@ -143,7 +144,8 @@ public:
             sizeHintCache[Qt::MinimumSize] = QSizeF();
             sizeHintCache[Qt::MaximumSize] = QSizeF();
             sizeHintCache[Qt::PreferredSize] = QSizeF();
-            foreach (QGraphicsLayoutItem * item, items.keys()) {
+            foreach (QGraphicsLayoutItem * item, items.keys()) // krazy:exclude=foreach
+            {
                 if (item) {
                     calculateSizeHint(item);
                 }
@@ -159,7 +161,8 @@ public:
 
             QSizeF size;
 
-            foreach (const Qt::SizeHint &which, sizeHintCache.keys()) {
+            foreach (const Qt::SizeHint &which, sizeHintCache.keys()) // krazy:exclude=foreach
+            {
                 size = item->effectiveSizeHint(which);
                 size.scale(
                     1 / qMin(scaled.width(), qreal(1.0)),

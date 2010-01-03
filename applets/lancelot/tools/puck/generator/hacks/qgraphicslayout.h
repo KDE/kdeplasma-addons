@@ -1,3 +1,5 @@
+//krazy:skip
+
 #ifndef LANCELOT_QGRAPHICS_LAYOUT_H
 #define LANCELOT_QGRAPHICS_LAYOUT_H
 

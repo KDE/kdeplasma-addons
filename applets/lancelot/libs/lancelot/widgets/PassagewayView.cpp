@@ -293,7 +293,7 @@ public:
         drag->setPixmap(pixmap);
         drag->setHotSpot(event->pos().toPoint());
 
-        drag->exec();
+        drag->exec(); //krazy:exclude=crashy
     }
 
 

@@ -215,7 +215,8 @@ bool PartsMergedModel::load(const QString & input)
             QStringList modelDef = data["model"].split(' ');
             // qDebug() << "LancelotPart::load" << input << modelDef;
             QString modelID = modelDef[0];
-            QString modelExtraData = QString();
+            QString modelExtraData;
+
             if (modelDef.size() != 1) {
                 modelExtraData = modelDef[1];
             }
