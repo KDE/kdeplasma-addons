@@ -36,12 +36,14 @@ FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical);
     layout->addItem(m_invitations);
     layout->setContentsMargins(0,0,0,0);
-
-    Plasma::ScrollWidget* friendScroll = new Plasma::ScrollWidget(m_friendListWidget);
-
+    
+    Plasma::ScrollWidget* friendScroll = new Plasma::ScrollWidget(this);
+    friendScroll->setWidget(m_friendListWidget);
+    
     layout->addItem(friendScroll);
+    
     setLayout(layout);
-
+  
     connect(m_friendListWidget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));
     connect(m_friendListWidget, SIGNAL(sendMessage(QString)), SIGNAL(sendMessage(QString)));
     connect(m_friendListWidget, SIGNAL(showDetails(QString)), SIGNAL(showDetails(QString)));
