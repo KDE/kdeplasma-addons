@@ -26,6 +26,7 @@
 #include <Plasma/ToolTipContent>
 
 #include <KConfigDialog>
+#include <KColorUtils>
 
 #include <QtGui/QPainter>
 
@@ -467,8 +468,8 @@ static inline void drawSection(QPainter* p, const QColor& color, const QRectF& r
 {
     if (rect.height() > 0.0) {
         static QLinearGradient grad(0.0, 0.0, 1.0, 0.0);
-        grad.setColorAt(0, color.lighter());
-        grad.setColorAt(1, color.darker());
+        grad.setColorAt(0, KColorUtils::lighten(color));
+        grad.setColorAt(1, KColorUtils::darken(color));
         QBrush brush(grad);
         p->setBrush(brush);
         p->setPen(QPen(brush, 0));
