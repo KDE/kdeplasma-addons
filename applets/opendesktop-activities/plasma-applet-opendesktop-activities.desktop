@@ -23,6 +23,7 @@ Name[sv]=OpenDesktop aktiviteter
 Name[tr]=OpenDesktop Eylemleri
 Name[uk]=Простори дій OpenDesktop
 Name[x-test]=xxopenDesktop Activitiesxx
+Name[zh_CN]=openDesktop 活动
 Name[zh_TW]=openDesktop 活動
 Comment=Stay informed with the Social Desktop
 Comment[ca]=Mantingueu-vos informat amb l'escriptori social
@@ -47,6 +48,7 @@ Comment[sv]=Håll dig informerad med det sociala skrivbordet
 Comment[tr]=Sosyal Masaüstünü kullan, haberin olsun
 Comment[uk]=Отримуйте інформацію за допомогою соціальної стільниці
 Comment[x-test]=xxStay informed with the Social Desktopxx
+Comment[zh_CN]=使用社会桌面沟通
 Comment[zh_TW]=使用 Social Desktop 聯繫
 
 Icon=system-users

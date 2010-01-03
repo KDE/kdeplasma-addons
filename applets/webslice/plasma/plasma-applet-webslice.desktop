@@ -18,6 +18,7 @@ Name[sr@latin]=veb isečak
 Name[sv]=Webbutdrag
 Name[uk]=Веб-зріз
 Name[x-test]=xxWeb Slicexx
+Name[zh_CN]=网页切片
 Name[zh_TW]=網頁切片
 Comment=Show a part of a webpage
 Comment[ca]=Mostra una part d'una pàgina web
@@ -38,6 +39,7 @@ Comment[sr@latin]=Prikaz dela veb stranice
 Comment[sv]=Visa en del av en webbsida
 Comment[uk]=Показ частини веб-сторінки
 Comment[x-test]=xxShow a part of a webpagexx
+Comment[zh_CN]=显示网页的一部分
 Comment[zh_TW]=顯示一部份的網頁
 
 Type=Service

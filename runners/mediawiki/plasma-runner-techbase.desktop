@@ -18,6 +18,7 @@ Name[sr@latin]=Techbase
 Name[sv]=Techbase
 Name[uk]=TechBase
 Name[x-test]=xxTechBasexx
+Name[zh_CN]=TechBase
 Name[zh_TW]=TechBase
 Comment=Search on KDE's TechBase
 Comment[ca]=Cerca en la TechBase del KDE
@@ -38,6 +39,7 @@ Comment[sr@latin]=Pretraga po Techbasi KDE‑a
 Comment[sv]=Sök på KDE:s Techbase
 Comment[uk]=Пошук у TechBase KDE
 Comment[x-test]=xxSearch on KDE's TechBasexx
+Comment[zh_CN]=搜索 KDE 的技术文档库
 Comment[zh_TW]=搜尋 KDE TechBase
 Icon=kde
 

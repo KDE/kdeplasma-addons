@@ -20,6 +20,7 @@ Name[sr@latin]=dokumentacija KDE‑a
 Name[sv]=KDE-dokumentation
 Name[uk]=Документація KDE
 Name[x-test]=xxKDE Documentationxx
+Name[zh_CN]=KDE 文档
 Name[zh_TW]=KDE 文件
 Comment=Search on KDE's Userbase
 Comment[ca]=Cerca en la Userbase del KDE
@@ -40,6 +41,7 @@ Comment[sr@latin]=Pretraga po Korisničkoj bazi KDE‑a
 Comment[sv]=Sök på KDE:s Userbase
 Comment[uk]=Пошук у Userbase KDE
 Comment[x-test]=xxSearch on KDE's Userbasexx
+Comment[zh_CN]=搜索 KDE 的用户文档库
 Comment[zh_TW]=搜尋 KDE 的 Userbase
 Icon=kde
 

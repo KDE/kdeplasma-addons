@@ -17,6 +17,7 @@ Name[sr@latin]=izvođač Kopeteovih kontakata
 Name[sv]=Kopete Kontakt-körning
 Name[uk]=Інструмент запуску контактів Kopete
 Name[x-test]=xxKopete Contact Runnerxx
+Name[zh_CN]=Kopete 联系人运行器
 Name[zh_TW]=Kopete 聯絡人執行器
 Comment=Kopete Contact runner
 Comment[ca]=Visualitzador de contactes del Kopete
@@ -36,6 +37,7 @@ Comment[sr@latin]=izvođač Kopeteovih kontakata
 Comment[sv]=Kopete Kontakt-körning
 Comment[uk]=Інструмент запуску контактів Kopete
 Comment[x-test]=xxKopete Contact runnerxx
+Comment[zh_CN]=Kopete 联系人运行器
 Comment[zh_TW]=Kopete 聯絡人執行器
 Icon=kopete
 

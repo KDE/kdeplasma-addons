@@ -20,6 +20,7 @@ Name[sr@latin]=provera pravopisa
 Name[sv]=Stavningskontroll
 Name[uk]=Перевірка правопису
 Name[x-test]=xxSpell Checkxx
+Name[zh_CN]=拼写检查
 Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
@@ -41,6 +42,7 @@ Comment[sr@latin]=Brza provera pravopisa
 Comment[sv]=Snabb stavningskontroll
 Comment[uk]=Швидка перевірка правопису
 Comment[x-test]=xxFast spell checkingxx
+Comment[zh_CN]=快速拼写检查
 Comment[zh_TW]=快速拼字檢查
 
 Icon=tools-check-spelling
