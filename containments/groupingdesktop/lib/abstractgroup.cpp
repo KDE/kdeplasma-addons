@@ -75,7 +75,7 @@ void AbstractGroupPrivate::destroyGroup()
 
     Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::DisappearAnimation, q);
     if (anim) {
-    anim->setWidgetToAnimate(q);
+    anim->setTargetWidget(q);
     anim->start();
     }
 
