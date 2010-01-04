@@ -31,6 +31,7 @@ class Runner : public BaseModel {
     Q_OBJECT
 public:
     explicit Runner(bool limitRunners = false, QString search = QString());
+    explicit Runner(QStringList allowedRunners, QString search = QString());
     virtual ~Runner();
 
     QString searchString() const;

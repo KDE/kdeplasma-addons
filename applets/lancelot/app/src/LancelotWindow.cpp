@@ -480,7 +480,26 @@ void LancelotWindow::setupModels()
     // m_models["Contacts"]          = new Models::ContactsKopete();
     // m_models["Messages"]          = new Models::MessagesKmail();
 
-    m_models["Runner"]            = new Models::Runner();
+    QStringList allowedRunners = m_mainConfig.readEntry("allowedRunners", QStringList());
+    if (allowedRunners.isEmpty()) {
+        allowedRunners
+            << "places"
+            << "windows"
+            << "kill"
+            << "solid"
+            << "services"
+            << "PowerDevil"
+            << "browserhistory"
+            << "shell"
+            << "locations"
+            << "konsolesessions"
+            << "recentdocuments"
+            << "calculator"
+            << "bookmarks"
+            << "unitconverter";
+    }
+
+    m_models["Runner"]            = new Models::Runner(allowedRunners);
 
     // Groups:
 
