@@ -23,5 +23,8 @@
         <entry name="privacy" type="bool">
             <label>If the file should be private or not</label>
         </entry>
+        <entry name="backend" type="int">
+            <label>The backend to be used</label>
+        </entry>
     </group>
 </kcfg>
