@@ -132,9 +132,9 @@ void Runner::timerEvent(QTimerEvent * event)
             m_runnerManager->launchQuery(m_searchString, m_runnerName);
         }
 
-        foreach (Plasma::AbstractRunner * runner, m_runnerManager->runners()) {
-            qDebug() << "Runner: " << runner->id();
-        }
+        // foreach (Plasma::AbstractRunner * runner, m_runnerManager->runners()) {
+        //     qDebug() << "Runner: " << runner->id();
+        // }
     }
 }
 
