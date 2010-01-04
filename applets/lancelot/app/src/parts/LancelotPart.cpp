@@ -77,6 +77,8 @@ void LancelotPart::init()
     );
 
     m_list = new Lancelot::ActionListView(m_root);
+    m_list->setShowsExtendersOutside(false);
+
     m_model = new Models::PartsMergedModel();
     m_list->setModel(m_model);
 
@@ -146,7 +148,8 @@ bool LancelotPart::loadFromList(const QStringList & list)
     bool loaded = false;
 
     foreach (const QString& line, list) {
-        if (load(line)) {
+        kDebug() << line;
+        if (m_model->load(line)) {
             loaded = true;
         }
     }
@@ -173,6 +176,9 @@ bool LancelotPart::loadConfig()
     KConfigGroup kcg = config();
 
     QString data = kcg.readEntry("partData", QString());
+
+    kDebug() << data;
+
     if (data.isEmpty()) {
         return false;
     }

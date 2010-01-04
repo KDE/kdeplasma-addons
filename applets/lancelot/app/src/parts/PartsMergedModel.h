@@ -49,7 +49,6 @@ public:
 
     QString serializedData() const;
 
-protected:
     bool load(const QString & data);
     bool loadFromFile(const QString & url);
     bool loadFromList(const QStringList & list);

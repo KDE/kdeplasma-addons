@@ -22,6 +22,7 @@
 #include <QTextStream>
 #include <KIcon>
 #include <KLocalizedString>
+#include <KDebug>
 
 #include "../models/BaseModel.h"
 #include "../models/Devices.h"
@@ -203,6 +204,7 @@ bool PartsMergedModel::loadDirectory(const QString & url)
 bool PartsMergedModel::load(const QString & input)
 {
     QMap < QString, QString > data = Serializator::deserialize(input);
+    kDebug() << data;
 
     if (!data.contains("version")) {
         return false;
@@ -213,9 +215,10 @@ bool PartsMergedModel::load(const QString & input)
     if (data["version"] <= "1.0") {
         if (data["type"] == "list") {
             QStringList modelDef = data["model"].split(' ');
-            // qDebug() << "LancelotPart::load" << input << modelDef;
             QString modelID = modelDef[0];
             QString modelExtraData;
+
+            kDebug() << modelDef << modelID << modelExtraData;
 
             if (modelDef.size() != 1) {
                 modelExtraData = modelDef[1];
