@@ -29,7 +29,8 @@ KrazyCollector::KrazyCollector(const QHash<QString, bool> &krazyReportViewProjec
 : ICollector(parent),
   m_header("GET", "/krazy/index.php"),
   m_krazyReportViewProjects(krazyReportViewProjects),
-  m_projects(projects)
+  m_projects(projects),
+  m_lastCollect("")
 {
     m_connectId = setHost("www.englishbreakfastnetwork.org", QHttp::ConnectionModeHttp, 0);
     m_header.setValue("Host", "www.englishbreakfastnetwork.org");
@@ -41,6 +42,16 @@ KrazyCollector::~KrazyCollector()
 {
 }
 
+void KrazyCollector::setLastCollect(QString lastCollect)
+{
+    this->m_lastCollect = lastCollect;
+}
+
+QString KrazyCollector::lastCollect() const
+{
+    return m_lastCollect;
+}
+
 void KrazyCollector::run()
 {
     m_projectsCollected = 0;
@@ -50,17 +61,27 @@ void KrazyCollector::run()
     bool collected = false;
     QHashIterator<QString, bool> i(m_krazyReportViewProjects);
     QString projectName;
-    while (i.hasNext())
+
+    QString now = QDate::currentDate().toString("yyyyMMdd");
+
+    // We suppose krazy updates values once a day ...
+    if (m_lastCollect != now)
     {
-        i.next();
-        projectName = i.key();
-        if (i.value() && !m_projects[projectName].krazyReport.isEmpty())
+        m_lastCollect = now;
+
+        while (i.hasNext())
         {
-            collected = true;
-            ++m_activeProjects;
-            collectProject(projectName);
+            i.next();
+            projectName = i.key();
+            if (i.value() && !m_projects[projectName].krazyReport.isEmpty())
+            {
+                collected = true;
+                ++m_activeProjects;
+                collectProject(projectName);
+            }
         }
     }
+
     if (!collected)
         emit collectFinished();
 }

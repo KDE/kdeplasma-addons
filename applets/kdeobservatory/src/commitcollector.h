@@ -38,6 +38,9 @@ public:
     void setCommitsRead(int commitsRead);
     int commitsRead() const;
 
+    void setLastArchiveRead(QString lastArchiveRead);
+    QString lastArchiveRead() const;
+
     void setFullUpdate(bool fullUpdate);
     bool fullUpdate() const;
 
@@ -56,8 +59,8 @@ protected Q_SLOTS:
 private:
     bool m_fullUpdate;
     int  m_commitsRead;
-    QString m_lastArchiveRead;
     int  m_commitsToBeRead;
+    int  m_initialCommitsToBeRead;
 
     int m_extent;
     int m_page;
@@ -69,6 +72,7 @@ private:
     QStack<Commit> m_commits;
     QHttpRequestHeader m_header;
     QString m_archiveName;
+    QString m_lastArchiveRead;
     QString m_initialArchiveName;
 };
 

@@ -331,6 +331,9 @@ void KdeObservatory::collectFinished()
         updateViews();
 
         m_configGroup.writeEntry("commitsRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->commitsRead());
+        m_configGroup.writeEntry("lastArchiveRead", (qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]))->lastArchiveRead());
+        m_configGroup.writeEntry("lastKrazyCollect", (qobject_cast<KrazyCollector *>(m_collectors["Krazy Collector"]))->lastCollect());
+
         m_synchronizationTimer->start();
     }
 }
@@ -410,6 +413,7 @@ void KdeObservatory::runCollectors()
     m_collectorsFinished = 0;
     m_lastViewCount = m_views.count();
     m_synchronizationTimer->stop();
+
     foreach (ICollector *collector, m_collectors)
         collector->run();
 }
@@ -456,8 +460,12 @@ void KdeObservatory::loadConfig()
     m_configGroup = config();
 
     CommitCollector *commitCollector = qobject_cast<CommitCollector *>(m_collectors["Commit Collector"]);
+    KrazyCollector  *krazyCollector  = qobject_cast<KrazyCollector * >(m_collectors["Krazy Collector"]);
 
     commitCollector->setCommitsRead(m_configGroup.readEntry("commitsRead", 0));
+    commitCollector->setLastArchiveRead(m_configGroup.readEntry("lastArchiveRead", QString()));
+    krazyCollector->setLastCollect(m_configGroup.readEntry("lastKrazyCollect", QString()));
+
     if (commitCollector->commitsRead() == 0)
         commitCollector->setFullUpdate(true);
 

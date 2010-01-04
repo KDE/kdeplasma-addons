@@ -33,8 +33,8 @@ public:
     KrazyCollector(const QHash<QString, bool> &krazyReportViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QObject *parent = 0);
     virtual ~KrazyCollector();
 
-    void setExtent (int extent);
-    int extent() const;
+    void setLastCollect(QString lastCollect);
+    QString lastCollect() const;
 
     virtual void run();
 
@@ -56,6 +56,8 @@ private:
     const QMap<QString, KdeObservatory::Project> &m_projects;
     QMap<int, QString> m_idFilePrefixMap;
     QMap<int, QString> m_idProjectNameMap;
+
+    QString m_lastCollect;
 };
 
 #endif
