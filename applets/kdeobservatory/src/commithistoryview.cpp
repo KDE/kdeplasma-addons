@@ -34,10 +34,18 @@
 class TimeScaleDraw : public QwtScaleDraw
 {
 public:
+    TimeScaleDraw(const QDate &minDate)
+    {
+        m_minDate = minDate;
+    }
+
     virtual QwtText label(double v) const
     {
-        return QwtText(QString::number(v).insert(2, "/"));
+        return QwtText(m_minDate.addDays((int)v).toString("dd/MM"));
     }
+
+private:
+    QDate m_minDate;
 };
 
 CommitHistoryView::CommitHistoryView(const QHash<QString, bool> &commitHistoryViewProjects, const QMap<QString, KdeObservatory::Project> &projects, QGraphicsWidget *parent, Qt::WindowFlags wFlags)
@@ -76,17 +84,18 @@ void CommitHistoryView::updateViews()
         {
             int maxCommit = 0;
 
-            long long maxDate = QDate::fromString(projectCommits.at(projectCommits.count()-1).first, "yyyy-MM-dd").toString("MMdd").toInt();
-            int minDate = QDate::fromString(projectCommits.at(0).first, "yyyy-MM-dd").toString("MMdd").toInt();
+            QString tmpStr = projectCommits.at(0).first;
+            qlonglong minDate = tmpStr.remove('-').toLongLong();
             double x[30];
             double y[30];
 
             int count = projectCommits.count();
             int j;
-            for (j=0; j < count; ++j)
+            for (j = 0; j < count; ++j)
             {
                 const QPair<QString, int> &pair = projectCommits.at(j);
-                x[j] = QDate::fromString(pair.first, "yyyy-MM-dd").toString("MMdd").toInt();
+                tmpStr = pair.first;
+                x[j] = j;
                 y[j] = pair.second;
                 if (y[j] > maxCommit)
                     maxCommit = y[j];
@@ -101,9 +110,8 @@ void CommitHistoryView::updateViews()
             plot->setAttribute(Qt::WA_TranslucentBackground, true);
 
             plot->setAxisScale(QwtPlot::yLeft, 0, qRound((maxCommit/5.)+0.5)*5, qRound((maxCommit/5.)+0.5));
-            plot->setAxisScale(QwtPlot::xBottom, minDate, maxDate, qRound(((maxDate-minDate)/7)+0.5));
 
-            plot->setAxisScaleDraw(QwtPlot::xBottom, new TimeScaleDraw);
+            plot->setAxisScaleDraw(QwtPlot::xBottom, new TimeScaleDraw(QDate::fromString(QString::number(minDate), "yyyyMMdd")));
 
             plot->setAxisFont(QwtPlot::yLeft, KGlobalSettings::smallestReadableFont());
             plot->setAxisFont(QwtPlot::xBottom, KGlobalSettings::smallestReadableFont());
