@@ -765,12 +765,12 @@ void Notes::createTextFormatingWidgets()
         m_buttonAnimGroup->addAnimation(m_buttonAnim[i]);
     }
 
-    m_buttonAnim[0]->setWidgetToAnimate(m_buttonBold);
-    m_buttonAnim[1]->setWidgetToAnimate(m_buttonItalic);
-    m_buttonAnim[2]->setWidgetToAnimate(m_buttonUnderline);
-    m_buttonAnim[3]->setWidgetToAnimate(m_buttonStrikeThrough);
-    m_buttonAnim[4]->setWidgetToAnimate(m_buttonCenter);
-    m_buttonAnim[5]->setWidgetToAnimate(m_buttonFill);
+    m_buttonAnim[0]->setTargetWidget(m_buttonBold);
+    m_buttonAnim[1]->setTargetWidget(m_buttonItalic);
+    m_buttonAnim[2]->setTargetWidget(m_buttonUnderline);
+    m_buttonAnim[3]->setTargetWidget(m_buttonStrikeThrough);
+    m_buttonAnim[4]->setTargetWidget(m_buttonCenter);
+    m_buttonAnim[5]->setTargetWidget(m_buttonFill);
 
     showOptions(false);
     connect(m_buttonOption->nativeWidget(), SIGNAL(toggled(bool)), this, SLOT(showOptions(bool)));
