@@ -62,13 +62,12 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
     }
 
     QString url(data);
-    QRegExp re(".*<done_page>([^<]+)</done_page>.*");
+    QRegExp re(".*Short.*href='([^']*)'.*");
     if (!re.exactMatch(url)) {
-        emit postError();
         return;
     }
 
-    QString pasteUrl = re.cap(1).replace("&amp;", "&");
+    QString pasteUrl = re.cap(1);
 
     // little dirty hack to avoid emiting the
     // second redirection of imageshack.us
@@ -156,12 +155,6 @@ bool ImageshackServer::addFile(const QString& name,const QString& path)
 void ImageshackServer::post(const QString& content)
 {
     KUrl url(QString("%1").arg(m_server));
-
-    addPair("tags", "plasma");
-    url.addQueryItem("tags", "plasma");
-
-    addPair("xml", "yes");
-    url.addQueryItem("xml", "yes");
 
     addFile("fileupload", content);
     finish();
