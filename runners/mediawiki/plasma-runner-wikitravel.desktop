@@ -54,4 +54,4 @@ X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=false
 
-X-Plasma-Args=http://wikitravel.org/wiki/en/api.php
+X-Plasma-Args=http://en.wikitravel.org/wiki/en/api.php

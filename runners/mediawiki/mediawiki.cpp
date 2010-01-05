@@ -56,8 +56,9 @@ MediaWiki::MediaWiki( QObject *parent )
     d->state = StateApiChanged;
     // should be overwritten by the user
     d->apiUrl = QUrl("http://en.wikipedia.org/w/api.php");
-    //d->manager = new QNetworkAccessManager( this );
-    d->manager = new KIO::AccessManager( this );
+    //FIXME: at the moment KIO doesn't seem to work in threads
+    d->manager = new QNetworkAccessManager( this );
+    //d->manager = new KIO::AccessManager( this );
     d->maxItems = 10;
     d->timeout = 30 * 1000; // 30 second
     d->reply = 0;
