@@ -449,6 +449,13 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                     connect(profile, SIGNAL(triggered()), this, SLOT(openProfile()));
                 }
                 m_pictureMap[user] = pm;
+                m_avatarHistory.removeAll(user);
+                m_avatarHistory.append(user);
+                if (m_avatarHistory.size() > 30) {
+                    QString oldestUser = m_avatarHistory.first();
+                    m_avatarHistory.pop_front();
+                    m_pictureMap.remove(oldestUser);
+                }
                 //TODO it would be nice to check whether the updated image is actually in use
                 scheduleShowTweets();
             }

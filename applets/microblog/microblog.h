@@ -160,6 +160,7 @@ class MicroBlog : public Plasma::PopupApplet
         Plasma::Frame *m_headerFrame;
 
         QMap<QString, QPixmap> m_pictureMap;
+        QStringList m_avatarHistory;
         QMap<qulonglong, Plasma::DataEngine::Data> m_tweetMap;
         QList<PostWidget *> m_tweetWidgets;
 
