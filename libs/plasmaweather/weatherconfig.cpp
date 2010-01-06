@@ -85,9 +85,12 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     d->ui.visibilityComboBox->addItem(i18n("Kilometers"), Kilometer);
     d->ui.visibilityComboBox->addItem(i18n("Miles"), Mile);
 
-    // Setup GHNS button icon
-    d->ui.ghnsProviderButton->setIcon(KIcon("get-hot-new-stuff"));
-    connect(d->ui.ghnsProviderButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
+    // Setup GHNS button icon -- TODO: spstarr: Enable for for KDE 4.5, we need some plumbing done in Plasma javascript dataengine first.
+    //d->ui.ghnsProviderButton->setIcon(KIcon("get-hot-newstuff"));
+    //connect(d->ui.ghnsProviderButton, SIGNAL(clicked()), this, SLOT(getNewStuff()));
+
+    d->ui.providerLabel_2->hide();
+    d->ui.ghnsProviderButton->hide();
 
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
