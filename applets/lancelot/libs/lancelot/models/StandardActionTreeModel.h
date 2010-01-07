@@ -32,7 +32,7 @@ protected:
     /**
      * This class represents an item in the list model.
      */
-    class LANCELOT_EXPORT Item {
+    class LANCELOT_EXPORT Item { //krazy:exclude=dpointer
     public:
         explicit Item(QString itemTitle = QString(),
              QString itemDescription = QString(),

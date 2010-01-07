@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>533</width>
-    <height>328</height>
+    <width>542</width>
+    <height>335</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QGroupBox" name="panelContents">
      <property name="title">
-      <string>Contents</string>
+      <string comment="Contents of the applet">Contents</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -67,14 +67,14 @@
          <item>
           <widget class="QRadioButton" name="radioContentsExtenderPositionLeft">
            <property name="text">
-            <string>Left</string>
+            <string comment="Position the extender left">Left</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="radioContentsExtenderPositionRight">
            <property name="text">
-            <string>Right</string>
+            <string comment="Position the extender right">Right</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -119,11 +119,11 @@
           <height>64</height>
          </size>
         </property>
-        <property name="icon">
-         <string>lancelot-part</string>
-        </property>
         <property name="iconSize">
-         <number>48</number>
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
        </widget>
       </item>
