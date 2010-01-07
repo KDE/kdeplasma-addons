@@ -44,7 +44,7 @@ def parseFile(inputFile):
     includes = []
 
     reNamespace = re.compile("namespace\s+([^\s]+)")
-    reClass     = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([A-Za-z]+)?|class.*[\s]+([^\s]+)[\s]*(:|{|;|$)")
+    reClass     = re.compile("class.*[\s]+([^\s]+)[\s]*:[\s]*public[\s]*([A-Za-z::]+)?|class.*[\s]+([^\s]+)[\s]*({|;|$)")
     reProperty  = re.compile("Q_PROPERTY\s*\(\s*([^\s]+)\s+([^\s]+)\s+READ\s+([^\s]+)\s+WRITE\s+([^\s]+)\s*\)")
     reIncludes  = re.compile("(\/\/\s*@puck\s*)?L_INCLUDE\s*\(\s*(.+)\s*\)")
     reExtra     = re.compile(".*L_EXTRA\s*\(\s*(.+)\s*\)")
@@ -184,8 +184,13 @@ def processClass():
 
     template = template[0:begin] + propertiesCode + template[end + 21:]
     # print template
-    output = open(outputFile, 'w')
-    print >> output, template
+
+    reValidFile = re.compile("^[A-Za-z0-9_.]*$")
+    match = reValidFile.match(outputFile)
+    if match:
+        output = open(outputFile, 'w')
+        print >> output, template
+        output.close()
 
 ######## MAIN PROGRAM ###########
 

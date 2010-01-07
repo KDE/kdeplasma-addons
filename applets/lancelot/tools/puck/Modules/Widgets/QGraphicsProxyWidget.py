@@ -1,10 +1,10 @@
 from .. import WidgetHandlerManager
 from .. import AbstractItem
+from . import QGraphicsWidget
 
-
-class Lancelot__Private;Handler(AbstractItem.AbstractItemHandler):
+class QGraphicsProxyWidgetHandler(QGraphicsWidget.QGraphicsWidgetHandler):
     def name(self):
-        return "Lancelot::Private;"
+        return "QGraphicsProxyWidget"
 
     def include(self):
         includes = "".split(" ")
@@ -16,10 +16,12 @@ class Lancelot__Private;Handler(AbstractItem.AbstractItemHandler):
 
 
     def setup(self):
-        setup = AbstractItem.AbstractItemHandler.setup(self)
+        setup = QGraphicsWidget.QGraphicsWidgetHandler.setup(self)
 
         
 
         return setup;
+
+WidgetHandlerManager.addHandler(QGraphicsProxyWidgetHandler())
 
 

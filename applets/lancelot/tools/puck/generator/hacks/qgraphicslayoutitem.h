@@ -1,8 +1,5 @@
 //krazy:skip
 
-#ifndef LANCELOT_QGRAPHICS_LAYOUT_ITEM_H
-#define LANCELOT_QGRAPHICS_LAYOUT_ITEM_H
-
 class Q_GUI_EXPORT QGraphicsLayoutItem
 {
     Q_PROPERTY ( QSize minimumSize READ minimumSize WRITE setMinimumSize )
@@ -18,4 +15,3 @@ class Q_GUI_EXPORT QGraphicsLayoutItem
     Q_PROPERTY ( qreal preferredHeight READ preferredHeight WRITE setPreferredHeight )
 
 };
-#endif /* LANCELOT_QGRAPHICS_LAYOUT_ITEM_H */

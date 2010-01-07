@@ -1,13 +1,13 @@
 from .. import WidgetHandlerManager
 from .. import AbstractItem
-from . import Lancelot__Panel
+from . import Plasma__IconWidget
 
-class Lancelot__PassagewayViewHandler(Lancelot__Panel.Lancelot__PanelHandler):
+class Lancelot__HoverIconHandler(Plasma__IconWidget.Plasma__IconWidgetHandler):
     def name(self):
-        return "Lancelot::PassagewayView"
+        return "Lancelot::HoverIcon"
 
     def include(self):
-        includes = "lancelot/widgets/PassagewayView.h".split(" ")
+        includes = "lancelot/widgets/HoverIcon.h plasma/widgets/icon.h".split(" ")
         includesCode = ""
         for include in includes:
             if (include != ""):
@@ -16,16 +16,16 @@ class Lancelot__PassagewayViewHandler(Lancelot__Panel.Lancelot__PanelHandler):
 
 
     def setup(self):
-        setup = Lancelot__Panel.Lancelot__PanelHandler.setup(self)
+        setup = Plasma__IconWidget.Plasma__IconWidgetHandler.setup(self)
 
-
+        
         if self.hasAttribute('activationMethod'):
             setup += self.attribute('name') \
                   + '->setActivationMethod(' + self.attribute('activationMethod') + ');'
-
+        
 
         return setup;
 
-WidgetHandlerManager.addHandler(Lancelot__PassagewayViewHandler())
+WidgetHandlerManager.addHandler(Lancelot__HoverIconHandler())
 
 

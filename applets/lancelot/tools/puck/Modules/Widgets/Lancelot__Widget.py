@@ -18,11 +18,15 @@ class Lancelot__WidgetHandler(QGraphicsWidget.QGraphicsWidgetHandler):
     def setup(self):
         setup = QGraphicsWidget.QGraphicsWidgetHandler.setup(self)
 
-        
+
         if self.hasAttribute('group'):
             setup += self.attribute('name') \
                   + '->setGroupByName("' + self.attribute('group') + '");'
-        
+
+        if self.hasAttribute('down'):
+            setup += self.attribute('name') \
+                  + '->setDown(' + self.attribute('down') + ');'
+
 
         return setup;
 

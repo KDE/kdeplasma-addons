@@ -28,7 +28,7 @@ class Lancelot__ActionListViewHandler(Lancelot__Widget.Lancelot__WidgetHandler):
 
         if self.hasAttribute('extenderPosition'):
             setup += self.attribute('name') \
-                  + '->setExtenderPosition(Lancelot::' + self.attribute('extenderPosition') + 'Extender);'
+                  + '->setExtenderPosition(' + self.attribute('extenderPosition') + ');'
 
         return setup;
 
