@@ -70,7 +70,7 @@ void LancelotPart::init()
 
     m_searchText = new Plasma::LineEdit(m_root);
     m_searchText->nativeWidget()->setClearButtonShown(true);
-    m_searchText->nativeWidget()->setClickMessage(i18n("Search"));
+    m_searchText->nativeWidget()->setClickMessage(i18nc("Enter the text to search for", "Search..."));
     connect(m_searchText->widget(),
         SIGNAL(textChanged(const QString &)),
         this, SLOT(search(const QString &))

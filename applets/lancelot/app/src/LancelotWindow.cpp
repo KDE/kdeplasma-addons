@@ -120,7 +120,7 @@ LancelotWindow::LancelotWindow()
     editSearch = new Plasma::LineEdit();
     editSearch->setParentItem(m_root);
     editSearch->nativeWidget()->setClearButtonShown(true);
-    editSearch->nativeWidget()->setClickMessage(i18n("Search"));
+    editSearch->nativeWidget()->setClickMessage(i18nc("Enter the text to search for", "Search..."));
     editSearch->nativeWidget()->setContextMenuPolicy(Qt::NoContextMenu);
     editSearch->show();
     layoutSearch->addItem(editSearch,

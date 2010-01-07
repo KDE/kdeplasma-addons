@@ -62,7 +62,7 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
             KIcon("start-here"), i18n("Start here"), listIcons);
     icons["start-here"] = item;
     item = new QListWidgetItem(
-            KIcon("unknown"), i18n("Custom"), listIcons);
+            KIcon("unknown"), i18nc("Choose a custom icon", "Custom"), listIcons);
     icons["custom"] = item;
 
     // showing categs

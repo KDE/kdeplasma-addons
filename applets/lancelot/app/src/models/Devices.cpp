@@ -48,11 +48,11 @@ Devices::Devices(Type filter)
 {
     switch (filter) {
         case Models::Devices::Removable:
-            setSelfTitle(i18n("Removable"));
+            setSelfTitle(i18nc("Removable devices", "Removable"));
             setSelfIcon(KIcon("media-optical"));
             break;
         case Models::Devices::Fixed:
-            setSelfTitle(i18n("Fixed"));
+            setSelfTitle(i18nc("Fixed devices", "Fixed"));
             setSelfIcon(KIcon("drive-harddisk"));
             break;
         default:
