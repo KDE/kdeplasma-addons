@@ -24,6 +24,14 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 
+#define CATEGORY_MINIMUM_SIZE 20
+#define CATEGORY_MAXIMUM_SIZE 35
+#define CATEGORY_PREFERRED_SIZE 27
+
+#define ITEM_MINIMUM_SIZE 40
+#define ITEM_MAXIMUM_SIZE 70
+#define ITEM_PREFERRED_SIZE 55
+
 namespace Lancelot {
 
 //> ActionListViewItem
@@ -128,13 +136,13 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, Ac
     setCategoriesGroup(NULL);
     setModel(model);
 
-    m_categoryHeight[Qt::MinimumSize] = 20;
-    m_categoryHeight[Qt::MaximumSize] = 35;
-    m_categoryHeight[Qt::PreferredSize] = 27;
+    m_categoryHeight[Qt::MinimumSize]   = CATEGORY_MINIMUM_SIZE;
+    m_categoryHeight[Qt::MaximumSize]   = CATEGORY_MAXIMUM_SIZE;
+    m_categoryHeight[Qt::PreferredSize] = CATEGORY_PREFERRED_SIZE;
 
-    m_itemHeight[Qt::MinimumSize] = 40;
-    m_itemHeight[Qt::MaximumSize] = 70;
-    m_itemHeight[Qt::PreferredSize] = 55;
+    m_itemHeight[Qt::MinimumSize]   = ITEM_MINIMUM_SIZE;
+    m_itemHeight[Qt::MaximumSize]   = ITEM_MAXIMUM_SIZE;
+    m_itemHeight[Qt::PreferredSize] = ITEM_PREFERRED_SIZE;
 } //<
 
 ActionListViewItemFactory::~ActionListViewItemFactory() //>
@@ -305,6 +313,11 @@ void ActionListViewItemFactory::setItemHeight(int height, Qt::SizeHint which)
     emit updated();
 }
 
+int ActionListViewItemFactory::itemHeight(Qt::SizeHint which) const
+{
+    return m_itemHeight.value(which);
+}
+
 void ActionListViewItemFactory::setCategoryHeight(int height, Qt::SizeHint which)
 {
     m_categoryHeight[which] = height;
@@ -315,6 +328,11 @@ void ActionListViewItemFactory::setCategoryHeight(int height, Qt::SizeHint which
         item->setMaximumHeight(itemHeight(index, Qt::MaximumSize));
     }
     emit updated();
+}
+
+int ActionListViewItemFactory::categoryHeight(Qt::SizeHint which) const
+{
+    return m_categoryHeight.value(which);
 }
 
 void ActionListViewItemFactory::setItemIconSize(QSize size)
@@ -331,6 +349,11 @@ void ActionListViewItemFactory::setItemIconSize(QSize size)
     emit updated();
 }
 
+QSize ActionListViewItemFactory::itemIconSize() const
+{
+    return m_itemIconSize;
+}
+
 void ActionListViewItemFactory::setCategoryIconSize(QSize size)
 {
     m_categoryIconSize = size;
@@ -343,6 +366,11 @@ void ActionListViewItemFactory::setCategoryIconSize(QSize size)
         i++;
     }
     emit updated();
+}
+
+QSize ActionListViewItemFactory::categoryIconSize() const
+{
+    return m_categoryIconSize;
 }
 
 int ActionListViewItemFactory::itemHeight(int index, Qt::SizeHint which) const //>
@@ -783,12 +811,28 @@ void ActionListView::setItemHeight(int height, Qt::SizeHint which)
     return d->itemFactory->setItemHeight(height, which);
 }
 
+int ActionListView::itemHeight(Qt::SizeHint which) const
+{
+    if (!d->itemFactory) {
+        return 0;
+    }
+    return d->itemFactory->itemHeight(which);
+}
+
 void ActionListView::setCategoryHeight(int height, Qt::SizeHint which)
 {
     if (!d->itemFactory) {
         return;
     }
     return d->itemFactory->setCategoryHeight(height, which);
+}
+
+int ActionListView::categoryHeight(Qt::SizeHint which) const
+{
+    if (!d->itemFactory) {
+        return 0;
+    }
+    return d->itemFactory->categoryHeight(which);
 }
 
 void ActionListView::setItemIconSize(QSize size)
@@ -799,12 +843,28 @@ void ActionListView::setItemIconSize(QSize size)
     return d->itemFactory->setItemIconSize(size);
 }
 
+QSize ActionListView::itemIconSize() const
+{
+    if (!d->itemFactory) {
+        return QSize();
+    }
+    return d->itemFactory->itemIconSize();
+}
+
 void ActionListView::setCategoryIconSize(QSize size)
 {
     if (!d->itemFactory) {
         return;
     }
     return d->itemFactory->setCategoryIconSize(size);
+}
+
+QSize ActionListView::categoryIconSize() const
+{
+    if (!d->itemFactory) {
+        return QSize();
+    }
+    return d->itemFactory->categoryIconSize();
 }
 
 void ActionListView::setShowsExtendersOutside(bool value)

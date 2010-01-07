@@ -105,8 +105,15 @@ public:
 
     void setItemHeight(int height, Qt::SizeHint which);
     void setCategoryHeight(int height, Qt::SizeHint which);
+
+    int itemHeight(Qt::SizeHint which) const;
+    int categoryHeight(Qt::SizeHint which) const;
+
     void setItemIconSize(QSize size);
     void setCategoryIconSize(QSize size);
+
+    QSize itemIconSize() const;
+    QSize categoryIconSize() const;
 
 private:
     void reload();
