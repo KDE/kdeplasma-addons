@@ -168,7 +168,7 @@ LancelotWindow::LancelotWindow()
     connect(QApplication::instance(), SIGNAL(focusChanged(QWidget *, QWidget *)),
             this, SLOT(focusChanged(QWidget *, QWidget *)));
 
-    setStyleSheet("background: black");
+    setStyleSheet("LancelotWindow { background: black }");
 }
 
 void LancelotWindow::drawBackground(QPainter * painter, const QRectF & rect)
