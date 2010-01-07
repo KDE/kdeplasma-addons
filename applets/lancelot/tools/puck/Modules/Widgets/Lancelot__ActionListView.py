@@ -1,8 +1,8 @@
 from .. import WidgetHandlerManager
 from .. import AbstractItem
-from . import Lancelot__Widget
+from . import Lancelot__CustomListView
 
-class Lancelot__ActionListViewHandler(Lancelot__Widget.Lancelot__WidgetHandler):
+class Lancelot__ActionListViewHandler(Lancelot__CustomListView.Lancelot__CustomListViewHandler):
     def name(self):
         return "Lancelot::ActionListView"
 
@@ -16,19 +16,21 @@ class Lancelot__ActionListViewHandler(Lancelot__Widget.Lancelot__WidgetHandler):
 
 
     def setup(self):
-        setup = Lancelot__Widget.Lancelot__WidgetHandler.setup(self)
+        setup = Lancelot__CustomListView.Lancelot__CustomListViewHandler.setup(self)
 
-        if self.hasAttribute('itemsGroup'):
-            setup += self.attribute('name') \
-                  + '->setItemsGroupByName("' + self.attribute('itemsGroup') + '");'
-
-        if self.hasAttribute('categoriesGroup'):
-            setup += self.attribute('name') \
-                  + '->setItemsGroupByName("' + self.attribute('categoriesGroup') + '");'
-
+        
         if self.hasAttribute('extenderPosition'):
             setup += self.attribute('name') \
                   + '->setExtenderPosition(' + self.attribute('extenderPosition') + ');'
+        
+        if self.hasAttribute('categoriesActivable'):
+            setup += self.attribute('name') \
+                  + '->setCategoriesActivable(' + self.attribute('categoriesActivable') + ');'
+        
+        if self.hasAttribute('showsExtendersOutside'):
+            setup += self.attribute('name') \
+                  + '->setShowsExtendersOutside(' + self.attribute('showsExtendersOutside') + ');'
+        
 
         return setup;
 

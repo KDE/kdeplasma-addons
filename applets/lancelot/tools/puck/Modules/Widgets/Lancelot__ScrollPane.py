@@ -18,11 +18,11 @@ class Lancelot__ScrollPaneHandler(Lancelot__Widget.Lancelot__WidgetHandler):
     def setup(self):
         setup = Lancelot__Widget.Lancelot__WidgetHandler.setup(self)
 
-
+        
         if self.hasAttribute('scrollPosition'):
             setup += self.attribute('name') \
                   + '->setScrollPosition(QPointF(' + self.attribute('scrollPosition') + '));'
-
+        
 
         return setup;
 

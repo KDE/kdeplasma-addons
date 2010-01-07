@@ -143,7 +143,7 @@ private:
  * Wrapper around the CustomList which implements the actual
  * scrolling.
  */
-class LANCELOT_EXPORT CustomListView: public ScrollPane {
+class LANCELOT_EXPORT CustomListView: public Lancelot::ScrollPane {
     Q_OBJECT
 public:
     CustomListView(QGraphicsItem * parent = NULL);
