@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>542</width>
-    <height>335</height>
+    <width>533</width>
+    <height>328</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -119,11 +119,11 @@
           <height>64</height>
          </size>
         </property>
+        <property name="icon">
+         <string>lancelot-part</string>
+        </property>
         <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
+         <number>48</number>
         </property>
        </widget>
       </item>
