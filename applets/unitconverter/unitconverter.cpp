@@ -166,7 +166,7 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         if (unit2 >= 0) {
             m_pCmbUnit2->nativeWidget()->setCurrentIndex(unit2);
         }
-        m_pTxtValue1->setText(cg.readEntry("value", "1.0"));
+        m_pTxtValue1->setText(cg.readEntry("value", "1"));
         calculate();
 
         connect(m_pTxtValue1->nativeWidget(), SIGNAL(textChanged(const QString&)),
