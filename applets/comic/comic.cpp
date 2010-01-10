@@ -345,7 +345,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     KConfigGroup cg = config();
     mShownIdentifierSuffix = "";
     if ( mSuffixType == "Number" ) {
-        mShownIdentifierSuffix = i18nc("an abbrevation for Number", "# %1", mCurrentIdentifierSuffix);
+        mShownIdentifierSuffix = i18nc("an abbreviation for Number", "# %1", mCurrentIdentifierSuffix);
         int tempNum = mCurrentIdentifierSuffix.toInt();
         if ( mMaxStripNum[ mComicIdentifier ] < tempNum ) {
             mMaxStripNum[ mComicIdentifier ] = tempNum;

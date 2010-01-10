@@ -122,7 +122,7 @@ void WebSlice::configAccepted()
             w = (qreal)(gel[2].toDouble(&ok));
             h = (qreal)(gel[3].toDouble(&ok));
             if (!ok) {
-                kWarning() << "a conversion error occured." << gel;
+                kWarning() << "a conversion error occurred." << gel;
             } else {
                 m_sliceGeometry = QRectF(x, y, w, h);
                 config().writeEntry("sliceGeometry", m_sliceGeometry);
