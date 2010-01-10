@@ -23,6 +23,7 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
+#include <QRegExp>
 #include <KComboBox>
 #include <KLineEdit>
 #include <Plasma/ComboBox>
@@ -111,7 +112,14 @@ void UnitConverter::calculate()
         Value dblValueIn(m_pTxtValue1->text().toDouble(), in);
         Value dblValueOut = dblValueIn.convertTo(out->id());
 
-        m_pTxtValue2->setText(QString::number(dblValueOut.number()));
+        QRegExp decimalCheck("^\\d+\\.0$");
+        QRegExp onlyDecimal("^\\d+$");
+        if(decimalCheck.exactMatch(m_pTxtValue1->text()) && onlyDecimal.exactMatch(QString::number(dblValueOut.number()))) {
+           QString addZero = QString::number(dblValueOut.number()) + ".0";
+           m_pTxtValue2->setText(addZero);
+	} else {
+           m_pTxtValue2->setText(QString::number(dblValueOut.number()));
+	}
     }
 }
 
