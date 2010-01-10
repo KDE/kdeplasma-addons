@@ -84,10 +84,11 @@ void SnippetConfig::addClicked()
 
 void SnippetConfig::addMacroClicked()
 {
-    AddMacro dlg(this);
-    if (dlg.exec() == QDialog::Accepted) {
-        textEdit->insertPlainText(dlg.macro());
+    QPointer<AddMacro> dlg = new AddMacro(this);
+    if (dlg->exec() == QDialog::Accepted) {
+        textEdit->insertPlainText(dlg->macro());
     }
+    delete dlg;
 }
 
 void SnippetConfig::removeClicked()
