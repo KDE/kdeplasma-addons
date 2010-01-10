@@ -387,14 +387,15 @@ void Frame::previousPicture()
 
 void Frame::addDir()
 {
-    KDirSelectDialog dialog(KUrl(), true);
-    if (dialog.exec()) {
-        QString path = dialog.url().url();
+    QPointer<KDirSelectDialog> dialog = new KDirSelectDialog(KUrl(), true);
+    if (dialog->exec()) {
+        QString path = dialog->url().url();
         if (!m_slideShowPaths.contains(path)) {
             m_configDialog->imageUi.slideShowDirList->addItem(path);
         }
         updateButtons();
     }
+    delete dialog;
 }
 
 void Frame::removeDir()

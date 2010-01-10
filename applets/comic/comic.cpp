@@ -596,10 +596,11 @@ void ComicApplet::slotStartTimer()
 void ComicApplet::slotGoJump()
 {
     if ( mSuffixType == "Number" ) {
-        ChooseStripNumDialog pageDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
-        if ( pageDialog.exec() == QDialog::Accepted ) {
-            updateComic( QString::number( pageDialog.getStripNumber() ) );
+        QPointer<ChooseStripNumDialog> pageDialog = new ChooseStripNumDialog( 0, mCurrentIdentifierSuffix.toInt(), mFirstStripNum[ mComicIdentifier ], mMaxStripNum[ mComicIdentifier ] );
+        if ( pageDialog->exec() == QDialog::Accepted ) {
+            updateComic( QString::number( pageDialog->getStripNumber() ) );
         }
+        delete pageDialog;
         slotStartTimer();
     } else if ( mSuffixType == "Date" ) {
         KDatePicker *calendar = new KDatePicker;
