@@ -54,7 +54,7 @@ Comment[zh_CN]=虚拟屏幕键盘
 Comment[zh_TW]=螢幕上的虛擬鍵盤
 Type=Service
 ServiceTypes=Plasma/Applet
-Icon=keyboard
+Icon=input-keyboard
 
 X-KDE-Library=plasma_applet_plasmaboard
 X-KDE-PluginInfo-Author=Björn Ruberg
