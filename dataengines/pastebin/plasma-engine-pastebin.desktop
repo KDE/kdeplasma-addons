@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Pastebin engine
 Name[ca]=Motor Pastebin
+Name[ca@valencia]=Motor Pastebin
 Name[da]=Pastebin-motor
 Name[de]=Pastebin-Treiber
 Name[en_GB]=Pastebin engine
@@ -26,6 +27,7 @@ Name[zh_CN]=Pastebin 引擎
 Name[zh_TW]=Pastebin 引擎
 Comment=Engine to paste text and images to servers
 Comment[ca]=Motor per enganxar text/imatges en servidors
+Comment[ca@valencia]=Motor per enganxar text/imatges en servidors
 Comment[cs]=Nástroj pro vkládání obrázků a textu na servery
 Comment[da]=Motor til at indsætte tekst og billeder på servere
 Comment[de]=Text und Bilder auf einen Server hochladen

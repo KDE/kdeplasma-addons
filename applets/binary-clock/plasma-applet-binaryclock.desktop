@@ -2,6 +2,7 @@
 Name=Binary Clock
 Name[ar]=ساعة ثنائية
 Name[ca]=Rellotge binari
+Name[ca@valencia]=Rellotge binari
 Name[cs]=Binární hodiny
 Name[da]=Binært ur
 Name[de]=Binäre Uhr
@@ -51,6 +52,7 @@ Name[zh_TW]=數位時鐘
 Comment=Time displayed in binary format
 Comment[ar]=الوقت يظهر بالتنسيق الثنائي
 Comment[ca]=L'hora mostrada en format binari
+Comment[ca@valencia]=L'hora mostrada en format binari
 Comment[cs]=Zobrazení času v binárním formátu
 Comment[da]=Tiden vist i binært format
 Comment[de]=Zeitanzeige im Binärformat

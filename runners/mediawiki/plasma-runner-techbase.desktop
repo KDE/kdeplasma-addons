@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=TechBase
 Name[ca]=TechBase
+Name[ca@valencia]=TechBase
 Name[da]=TechBase
 Name[de]=TechBase
 Name[en_GB]=TechBase
@@ -22,6 +23,7 @@ Name[zh_CN]=TechBase
 Name[zh_TW]=TechBase
 Comment=Search on KDE's TechBase
 Comment[ca]=Cerca en la TechBase del KDE
+Comment[ca@valencia]=Cerca en la TechBase del KDE
 Comment[da]=Søg på KDE's TechBase
 Comment[de]=Auf KDE-TechBase suchen
 Comment[en_GB]=Search on KDE's TechBase

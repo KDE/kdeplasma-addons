@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Wikitravel
 Name[ca]=Viquitrabel
+Name[ca@valencia]=Viquitrabel
 Name[cs]=Wikitravel
 Name[da]=Wikitravel
 Name[de]=Wikitravel
@@ -23,6 +24,7 @@ Name[zh_CN]=维基旅行
 Name[zh_TW]=Wikitravel
 Comment=Search on Wikitravel
 Comment[ca]=Cerca en Viquitravel
+Comment[ca@valencia]=Cerca en Viquitravel
 Comment[da]=Søg på Wikitravel
 Comment[de]=Auf Wikitravel suchen
 Comment[en_GB]=Search on Wikitravel

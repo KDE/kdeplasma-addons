@@ -8,6 +8,7 @@ X-KDE-PluginKeyword=kcm_krunner_audioplayercontrol
 
 Name=Control audio player
 Name[ca]=Controlador del reproductor d'àudio
+Name[ca@valencia]=Controlador del reproductor d'àudio
 Name[da]=Betjening af lydafspiller
 Name[de]=Medienwiedergabe steuern
 Name[en_GB]=Control audio player

@@ -8,6 +8,7 @@ Icon=
 
 Name=Astronomy Picture of the Day
 Name[ca]=Imatge astronòmica del dia
+Name[ca@valencia]=Imatge astronòmica del dia
 Name[cs]=Obrázek dne z Astronomie
 Name[da]=Dagens astronomibillede
 Name[de]=Bild des Tages der Astronomie
@@ -36,6 +37,7 @@ Name[zh_TW]=本日天文圖片
 Comment=Apod Provider
 Comment[ar]=المزود Apod
 Comment[ca]=Proveïdor Apod
+Comment[ca@valencia]=Proveïdor Apod
 Comment[cs]=Poskytovatel Apodu
 Comment[da]=Apod-udbyder.
 Comment[de]=Apod-Anbieter

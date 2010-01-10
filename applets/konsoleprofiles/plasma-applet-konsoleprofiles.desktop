@@ -2,6 +2,7 @@
 Name=Konsole Profiles
 Name[ar]=تشكيلات كونسول
 Name[ca]=Perfils del Konsole
+Name[ca@valencia]=Perfils del Konsole
 Name[cs]=Profily Konsole
 Name[da]=Konsole-profiler
 Name[de]=Konsole-Profile
@@ -51,6 +52,7 @@ Name[zh_TW]=Konsole 設定檔
 Comment=List and launch Konsole profiles
 Comment[ar]=تعرض و تطلق تشكيلات كونسول
 Comment[ca]=Llista i executa els perfils del Konsole
+Comment[ca@valencia]=Llista i executa els perfils del Konsole
 Comment[cs]=Seznam a spouštění profilů Konsole
 Comment[da]=Vis og start Konsole-profiler.
 Comment[de]=Konsole-Profile anzeigen und starten

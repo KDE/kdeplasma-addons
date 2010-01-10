@@ -2,6 +2,7 @@
 Name=Konqueror Sessions
 Name[ar]=جلسات كنكير
 Name[ca]=Sessions del Konqueror
+Name[ca@valencia]=Sessions del Konqueror
 Name[cs]=Relace Konqueroru
 Name[da]=Konqueror-sessioner
 Name[de]=Konqueror-Sitzungen
@@ -51,6 +52,7 @@ Name[zh_TW]=Konqueror 工作階段
 Comment=Matches Konqueror Sessions
 Comment[ar]=تطابق جلسات كنكير
 Comment[ca]=Coincideix amb les sessions del Konqueror
+Comment[ca@valencia]=Coincideix amb les sessions del Konqueror
 Comment[cs]=Vyhledávání v relacích Konqueroru
 Comment[da]=Matcher Konqueror-sessioner.
 Comment[de]=Findet Konqueror-Sitzungen

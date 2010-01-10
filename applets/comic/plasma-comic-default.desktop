@@ -2,6 +2,7 @@
 Name=Comic Strip
 Name[ar]=شريط هزلي
 Name[ca]=Tira còmica
+Name[ca@valencia]=Tira còmica
 Name[cs]=Komiksový proužek
 Name[csb]=Kòmiksowi sztrépk
 Name[da]=Tegneseriestribe
@@ -50,6 +51,7 @@ Name[zh_TW]=漫畫
 Comment=View comic strips from the Internet
 Comment[ar]=اعرض شرائط هزلية من الإنترنت
 Comment[ca]=Mostra una tira còmica des d'Internet
+Comment[ca@valencia]=Mostra una tira còmica des d'Internet
 Comment[cs]=Ukáže komiksový proužek z internetu
 Comment[da]=Se tegneseriestriber fra internettet.
 Comment[de]=Comics aus dem Internet anzeigen

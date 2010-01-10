@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KnowledgeBase
 Name[ca]=KnowledgeBase
+Name[ca@valencia]=KnowledgeBase
 Name[da]=KnowledgeBase
 Name[de]=KnowledgeBase
 Name[en_GB]=KnowledgeBase
@@ -25,6 +26,7 @@ Name[zh_CN]=知识库
 Name[zh_TW]=知識庫
 Comment=Opendesktop Knowledgebase
 Comment[ca]=Knowledgebase Opendesktop
+Comment[ca@valencia]=Knowledgebase Opendesktop
 Comment[da]=Opendesktop Knowledgebase
 Comment[de]=OpenDesktop KnowledgeBase
 Comment[en_GB]=Opendesktop Knowledgebase

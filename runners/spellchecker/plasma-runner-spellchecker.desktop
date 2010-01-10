@@ -2,6 +2,7 @@
 Name=Spell Checker Runner
 Name[ar]=مشغل المدقق الإملائي
 Name[ca]=Executador de la verificació ortogràfica
+Name[ca@valencia]=Executador de la verificació ortogràfica
 Name[cs]=Kontrola pravopisu
 Name[da]=Runner til stavekontrol
 Name[de]=Rechtschreibprüfung
@@ -50,6 +51,7 @@ Name[zh_TW]=拼字檢查執行器
 Comment=Check the spelling of a word
 Comment[ar]=تحقق من هجاء الكلمات
 Comment[ca]=Comprova l'ortografia d'una paraula
+Comment[ca@valencia]=Comprova l'ortografia d'una paraula
 Comment[cs]=Kontrola pravopisu
 Comment[da]=Tjekker et ords stavning.
 Comment[de]=Rechtschreibung eines Wortes überprüfen

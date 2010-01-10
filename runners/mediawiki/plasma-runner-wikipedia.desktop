@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Wikipedia
 Name[ca]=Viquipèdia
+Name[ca@valencia]=Viquipèdia
 Name[cs]=Wikipedia
 Name[da]=Wikipedia
 Name[de]=Wikipedia
@@ -25,6 +26,7 @@ Name[zh_CN]=维基百科
 Name[zh_TW]=維基百科
 Comment=Search on Wikipedia
 Comment[ca]=Cerca en la Viquipèdia
+Comment[ca@valencia]=Cerca en la Viquipèdia
 Comment[da]=Søg på Wikipedia
 Comment[de]=Auf Wikipedia suchen
 Comment[en_GB]=Search on Wikipedia

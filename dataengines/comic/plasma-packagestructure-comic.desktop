@@ -2,6 +2,7 @@
 Name=Comic
 Name[ar]=Comic
 Name[ca]=Còmic
+Name[ca@valencia]=Còmic
 Name[cs]=Komiks
 Name[da]=Tegneserie
 Name[de]=Comic
@@ -50,6 +51,7 @@ Name[zh_TW]=漫畫
 Comment=Comic Package Structure
 Comment[ar]=بنية حزمة Comic
 Comment[ca]=Estructura de paquet de còmic
+Comment[ca@valencia]=Estructura de paquet de còmic
 Comment[cs]=Struktura komiksového balíčku
 Comment[da]=Tegneseriepakkestruktur
 Comment[de]=Comic-Paketstruktur

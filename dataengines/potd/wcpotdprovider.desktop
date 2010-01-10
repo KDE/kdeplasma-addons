@@ -8,6 +8,7 @@ Icon=
 
 Name=Wikimedia Picture of the Day
 Name[ca]=Imatge Viquimèdia del dia
+Name[ca@valencia]=Imatge Viquimèdia del dia
 Name[cs]=Obrázek dne z Wikimedie
 Name[da]=Dagens Wikimedia-billede
 Name[de]=Wikimedia Bild des Tages
@@ -35,6 +36,7 @@ Name[zh_TW]=本日維基百科圖片
 Comment=Wcpotd Provider
 Comment[ar]=المزود Wcpotd
 Comment[ca]=Proveïdor Wcpotd
+Comment[ca@valencia]=Proveïdor Wcpotd
 Comment[cs]=Poskytovatel Wcpotd
 Comment[da]=Wcpotd-udbyder.
 Comment[de]=Wcpotd-Anbieter

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=openDesktop Activities
 Name[ca]=Activitats openDesktop
+Name[ca@valencia]=Activitats openDesktop
 Name[cs]=Aktivity openDesktop
 Name[da]=openDesktop-aktiviteter
 Name[de]=openDesktop-Aktivitäten
@@ -28,6 +29,7 @@ Name[zh_CN]=openDesktop 活动
 Name[zh_TW]=openDesktop 活動
 Comment=Stay informed with the Social Desktop
 Comment[ca]=Mantingueu-vos informat amb l'escriptori social
+Comment[ca@valencia]=Mantingueu-vos informat amb l'escriptori social
 Comment[da]=Hold dig opdateret med den sociale desktop
 Comment[de]=Bleiben Sie auf dem Laufenden mit dem Social Desktop
 Comment[en_GB]=Stay informed with the Social Desktop
@@ -65,6 +67,7 @@ X-KDE-PluginInfo-Website=http://plasma.kde.org/
 Keywords=Utilities
 Keywords[ar]=أدوات
 Keywords[ca]=Utilitats
+Keywords[ca@valencia]=Utilitats
 Keywords[cs]=Nástroje
 Keywords[da]=Redskaber
 Keywords[de]=Dienstprogramme

@@ -2,6 +2,7 @@
 Name=Web Browser History
 Name[ar]=تاريخ متصفح الويب
 Name[ca]=Historial del navegador web
+Name[ca@valencia]=Historial del navegador web
 Name[cs]=Historie prohlížeče
 Name[da]=Webbrowser-historik
 Name[de]=Webbrowser-Verlauf
@@ -41,6 +42,7 @@ Name[zh_TW]=網頁瀏覽器歷史紀錄
 Comment=Searches in Konqueror's history
 Comment[ar]=تبحث في تاريخ كنيكر
 Comment[ca]=Cerques a l'historial del Konqueror
+Comment[ca@valencia]=Cerques a l'historial del Konqueror
 Comment[cs]=Vyhledávání v historii prohlížeče Konqueror
 Comment[da]=Søger i Konquerors historik.
 Comment[de]=Suche im Verlauf von Konqueror

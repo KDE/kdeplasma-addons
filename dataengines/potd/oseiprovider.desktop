@@ -8,6 +8,7 @@ Icon=
 
 Name=Operational Significant Event Imagery Picture of the Day
 Name[ca]=Imatge operacional d'esdeveniment rellevant del dia
+Name[ca@valencia]=Imatge operacional d'esdeveniment rellevant del dia
 Name[da]=Dagens billede fra Operational Significant Event Imagery
 Name[de]=Bild des Tages der Operational Significant Event Imagery
 Name[en_GB]=Operational Significant Event Imagery Picture of the Day
@@ -33,6 +34,7 @@ Name[zh_TW]=本日 Operational Significant Event Imagery 圖片
 Comment=Osei Provider
 Comment[ar]=المزود Osei
 Comment[ca]=Proveïdor Osei
+Comment[ca@valencia]=Proveïdor Osei
 Comment[cs]=Poskytovatel Osei
 Comment[da]=Osei-udbyder.
 Comment[de]=Osei-Anbieter

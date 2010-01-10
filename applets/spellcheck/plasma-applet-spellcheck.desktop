@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Spell Check
 Name[ca]=Verificació ortogràfica
+Name[ca@valencia]=Verificació ortogràfica
 Name[da]=Stavekontrol
 Name[de]=Rechtschreibprüfung
 Name[en_GB]=Spell Check
@@ -25,6 +26,7 @@ Name[zh_TW]=拼字檢查
 
 Comment=Fast spell checking
 Comment[ca]=Verificador ortogràfic ràpid
+Comment[ca@valencia]=Verificador ortogràfic ràpid
 Comment[da]=Hurtig stavekontrol
 Comment[de]=Schnelle Rechtschreibprüfung
 Comment[en_GB]=Fast spell checking

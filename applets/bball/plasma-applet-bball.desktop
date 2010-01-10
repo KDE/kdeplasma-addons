@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Bouncy Ball
 Name[ca]=Una pilota que bota
+Name[ca@valencia]=Una pilota que bota
 Name[cs]=Poskakující míč
 Name[da]=Hoppebold
 Name[de]=Springender Ball
@@ -30,6 +31,7 @@ Name[zh_TW]=彈跳球
 Comment=A bouncy ball for plasma
 Comment[ar]=كرة النطاطة للبلازما
 Comment[ca]=Una pilota que bota per al plasma
+Comment[ca@valencia]=Una pilota que bota per al plasma
 Comment[cs]=Poskakující míč pro Plasmu
 Comment[da]=En hoppende bold til Plasma
 Comment[de]=Ein Springball für Plasma

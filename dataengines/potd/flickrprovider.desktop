@@ -8,6 +8,7 @@ Icon=
 
 Name=Flickr Picture of the Day
 Name[ca]=Imatge Flickr del dia
+Name[ca@valencia]=Imatge Flickr del dia
 Name[cs]=Obrázek dne z Flickru
 Name[da]=Dagens Flickr-billede
 Name[de]=Bild des Tages von Flickr
@@ -34,6 +35,7 @@ Name[zh_TW]=本日 Flickr 圖片
 Comment=Flickr Provider
 Comment[ar]=الموزد Flickr
 Comment[ca]=Proveïdor Flickr
+Comment[ca@valencia]=Proveïdor Flickr
 Comment[cs]=Poskytovatel Flickru
 Comment[da]=Flickr-udbyder.
 Comment[de]=Flickr-Anbieter

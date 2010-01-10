@@ -2,6 +2,7 @@
 Name=Media Player
 Name[ar]=مشغل وسائط
 Name[ca]=Reproductor Multimèdia
+Name[ca@valencia]=Reproductor Multimèdia
 Name[cs]=Přehrávač médií
 Name[da]=Medieafspiller
 Name[de]=Medienspieler
@@ -39,6 +40,7 @@ Name[zh_TW]=媒體播放器
 Comment=Widget that can play video and sound
 Comment[ar]=ودجة تستطيع أن تشغل الصوت و الفيديو
 Comment[ca]=Estri que permet reproduir vídeos i so.
+Comment[ca@valencia]=Estri que permet reproduir vídeos i so.
 Comment[cs]=Applet přehrávající video a zvuk
 Comment[da]=Widget der kan afspille video og lyd.
 Comment[de]=Abspielen von Video- und Audio-Dateien

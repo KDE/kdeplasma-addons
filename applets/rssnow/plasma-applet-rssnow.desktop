@@ -2,6 +2,7 @@
 Name=RSSNOW
 Name[ar]=RSSNOW
 Name[ca]=RSSNOW
+Name[ca@valencia]=RSSNOW
 Name[cs]=RSSNOW
 Name[da]=RSSNOW
 Name[de]=RSSNOW
@@ -52,6 +53,7 @@ Name[zh_TW]=RSSNOW
 Comment=Show news from various sources
 Comment[ar]=أظهر الأخبار من مصادر متعددة
 Comment[ca]=Mostra les notícies de diverses fonts
+Comment[ca@valencia]=Mostra les notícies de diverses fonts
 Comment[cs]=Zobrazit novinky z různých zdrojů
 Comment[da]=Viser nyheder fra forskellige kilder.
 Comment[de]=Neuigkeiten aus verschiedenen Quellen anzeigen

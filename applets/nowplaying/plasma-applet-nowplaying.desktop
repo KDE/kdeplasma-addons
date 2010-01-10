@@ -2,6 +2,7 @@
 Name=Now Playing
 Name[ar]=المشغل الآن
 Name[ca]=Ara s'està escoltant
+Name[ca@valencia]=Ara s'està escoltant
 Name[cs]=Nyní se hraje
 Name[da]=Nu spilles
 Name[de]=Musiktitel-Anzeige
@@ -54,6 +55,7 @@ Name[zh_TW]=現正播放
 Comment=Displays currently playing audio
 Comment[ar]=أظهر الملفات الصوتية التي تعمل حاليا
 Comment[ca]=Mostra la reproducció d'àudio actual
+Comment[ca@valencia]=Mostra la reproducció d'àudio actual
 Comment[cs]=Zobrazení informací o právě přehrávaných skladbách
 Comment[da]=Viser musikken som aktuelt afspilles.
 Comment[de]=Den derzeit laufenden Musiktitel anzeigen
