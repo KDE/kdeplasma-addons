@@ -2,6 +2,7 @@
 Name=Dictionary
 Name[ar]=قاموس
 Name[ca]=Diccionari
+Name[ca@valencia]=Diccionari
 Name[cs]=Slovník
 Name[csb]=Slowôrz
 Name[da]=Ordbog
@@ -53,6 +54,7 @@ Name[zh_TW]=字典
 Comment=Look up the meaning of words and their translation into different languages
 Comment[ar]=انظر معاني الكلمات و ترجمتها بلغات مختلفة
 Comment[ca]=Cerca el significat de paraules i la seva traducció en diferents idiomes
+Comment[ca@valencia]=Cerca el significat de paraules i la seua traducció en diferents idiomes
 Comment[cs]=Vyhledat význam slov a jejich překlad do různých jazyků
 Comment[da]=Slå ords betydning op samt deres oversættelse til forskellige sprog.
 Comment[de]=Die Bedeutung von Wörtern und ihre Übersetzung in verschiedene Sprachen nachschlagen

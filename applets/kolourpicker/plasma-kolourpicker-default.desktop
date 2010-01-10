@@ -2,6 +2,7 @@
 Name=Color Picker
 Name[ar]=منتق الألوان
 Name[ca]=Selector de color
+Name[ca@valencia]=Selector de color
 Name[cs]=Kapátko
 Name[csb]=Wrbiérk farwë
 Name[da]=Farvevælger
@@ -52,6 +53,7 @@ Name[zh_TW]=顏色挑選器
 Comment=Pick a color from the desktop
 Comment[ar]=اختر لونا من سطح المكتب
 Comment[ca]=Selecciona un color de l'escriptori
+Comment[ca@valencia]=Selecciona un color de l'escriptori
 Comment[cs]=Vzít barvu z plochy
 Comment[csb]=Wëbiérzë farwã z pùltu
 Comment[da]=Pluk en farve fra skrivebordet.

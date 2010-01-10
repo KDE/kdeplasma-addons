@@ -2,6 +2,7 @@
 Name=Show Desktop
 Name[ar]=أظهر سطح المكتب
 Name[ca]=Mostra l'escriptori
+Name[ca@valencia]=Mostra l'escriptori
 Name[cs]=Zobrazit plochu
 Name[da]=Vis skrivebord
 Name[de]=Arbeitsfläche anzeigen
@@ -51,6 +52,7 @@ Name[zh_TW]=顯示桌面
 Comment=Show the Plasma desktop
 Comment[ar]=أظهر سطح مكتب بلازما
 Comment[ca]=Mostra l'escriptori Plasma
+Comment[ca@valencia]=Mostra l'escriptori Plasma
 Comment[cs]=Zobrazení plochy Plasmy
 Comment[da]=Viser Plasmas skrivebord.
 Comment[de]=Die Plasma-Arbeitsfläche anzeigen

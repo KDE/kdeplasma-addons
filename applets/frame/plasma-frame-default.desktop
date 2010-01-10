@@ -2,6 +2,7 @@
 Name=Picture Frame
 Name[ar]=إطار الصورة
 Name[ca]=Marc de fotografies
+Name[ca@valencia]=Marc de fotografies
 Name[cs]=Rámeček obrázku
 Name[csb]=Ramka òbrazu
 Name[da]=Billedramme
@@ -50,6 +51,7 @@ Name[zh_TW]=圖片框架
 Comment=Display your favorite pictures
 Comment[ar]=اعرض صورك المفضلة
 Comment[ca]=Mostra les fotografies preferides
+Comment[ca@valencia]=Mostra les fotografies preferides
 Comment[cs]=Zobrazit vaše oblíbené obrázky
 Comment[csb]=Wëskrzëni swòj lubòtny òbrôzk
 Comment[da]=Vis dine yndlingsbilleder.

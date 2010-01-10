@@ -2,6 +2,7 @@
 Name=Show Widget Dashboard
 Name[ar]=أظهر لوحة الودجات
 Name[ca]=Mostra el tauler d'estris
+Name[ca@valencia]=Mostra el tauler d'estris
 Name[cs]=Zobrazit přístrojovou desku
 Name[da]=Vis widget-instrumentbræt
 Name[de]=Widget-Dashboard anzeigen
@@ -48,6 +49,7 @@ Name[zh_TW]=顯示元件資訊看板
 Comment=Show the Plasma widget dashboard above other windows
 Comment[ar]=اظهر لوحة ودجات البلازما فوق النوافذ
 Comment[ca]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres
+Comment[ca@valencia]=Mostra el tauler d'estris del Plasma per sobre de les altres finestres
 Comment[cs]=Zobrazit přístrojovou desku Plasmy na ostatními okny
 Comment[da]=Viser Plasmas widget-instrumentbræt over andre vinduer.
 Comment[de]=Das Widget-Dashbord über anderen Fenstern anzeigen

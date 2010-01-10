@@ -2,6 +2,7 @@
 Name=Fuzzy Clock
 Name[ar]=ساعة تقريبية
 Name[ca]=Rellotge aproximat
+Name[ca@valencia]=Rellotge aproximat
 Name[cs]=Nejasné hodiny
 Name[da]=Unøjagtigt ur
 Name[de]=Umgangssprachliche Uhr
@@ -51,6 +52,7 @@ Name[zh_TW]=模糊時鐘
 Comment=Time displayed in a less precise format
 Comment[ar]=الوقت يظهر بتنسيق أقل دقة
 Comment[ca]=L'hora mostrada en un format aproximat
+Comment[ca@valencia]=L'hora mostrada en un format aproximat
 Comment[cs]=Zobrazení času v nejasném formátu
 Comment[da]=Tiden vist i et mindre præcist format.
 Comment[de]=Zeigt die Zeit weniger genau an

@@ -2,6 +2,7 @@
 Name=Fifteen Puzzle
 Name[ar]=أحجية الخمسة عشر
 Name[ca]=Trencaclosques quinze
+Name[ca@valencia]=Trencaclosques quinze
 Name[cs]=Hra Patnáct
 Name[csb]=Piãtnôsce pùzzlów
 Name[da]=Puslespillet 15
@@ -50,6 +51,7 @@ Name[zh_TW]=Fifteen 解謎遊戲
 Comment=Put the pieces in order
 Comment[ar]=ضع القطع في مكانها الصحيح
 Comment[ca]=Poseu les peces en ordre
+Comment[ca@valencia]=Poseu les peces en orde
 Comment[cs]=Zkuste dílky správně poskládat
 Comment[da]=Sæt brikkerne i orden.
 Comment[de]=Bringen Sie die Teile in die richtige Reihenfolge

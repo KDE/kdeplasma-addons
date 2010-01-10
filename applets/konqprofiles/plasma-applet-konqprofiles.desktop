@@ -2,6 +2,7 @@
 Name=Konqueror Profiles
 Name[ar]=تشكيلة كنيكر
 Name[ca]=Perfils del Konqueror
+Name[ca@valencia]=Perfils del Konqueror
 Name[cs]=Profily Konqueroru
 Name[da]=Konqueror-profiler
 Name[de]=Konqueror-Profile
@@ -49,6 +50,7 @@ Name[zh_TW]=Konqueror 設定檔
 Comment=List and launch Konqueror profiles
 Comment[ar]=تعرض و تطلق تشكيلات كنكير
 Comment[ca]=Llista i executa els perfils del Konqueror
+Comment[ca@valencia]=Llista i executa els perfils del Konqueror
 Comment[cs]=Seznam a spouštění profilů Konqueroru
 Comment[da]=Vis og start Konqueror-profiler.
 Comment[de]=Konqueror-Profile anzeigen und starten

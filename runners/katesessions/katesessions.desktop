@@ -2,6 +2,7 @@
 Name=Kate Sessions
 Name[ar]=جلسات كيت
 Name[ca]=Sessions del Kate
+Name[ca@valencia]=Sessions del Kate
 Name[cs]=Relace Kate
 Name[da]=Kate-sessioner
 Name[de]=Kate-Sitzungen
@@ -49,6 +50,7 @@ Name[zh_TW]=Kate 工作階段
 Comment=Matches Kate Sessions
 Comment[ar]=تطابق جلسات كيت
 Comment[ca]=Coincideix amb les sessions del Kate
+Comment[ca@valencia]=Coincideix amb les sessions del Kate
 Comment[cs]=Vyhledávání v relacích Kate
 Comment[da]=Matcher Kate-sessioner.
 Comment[de]=Findet Kate-Sitzungen

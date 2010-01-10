@@ -2,6 +2,7 @@
 Name=Microblogging
 Name[ar]=التدوين المصغر
 Name[ca]=Microblocs
+Name[ca@valencia]=Microblocs
 Name[cs]=Mikroblogování
 Name[da]=Mikroblogning
 Name[de]=Microblogging
@@ -43,6 +44,7 @@ Name[zh_TW]=Microblogging
 Comment=identi.ca and twitter micro-blogging services
 Comment[ar]=خدمات التدوين المصغر من تويتر و identi.ca
 Comment[ca]=Serveis de microblocs identi.ca i twitter
+Comment[ca@valencia]=Serveis de microblocs identi.ca i twitter
 Comment[da]=identi.ca og twitter mikroblogningstjenester
 Comment[de]=identi.ca und twitter Micro-Blogging-Services
 Comment[el]=Υπηρεσίες identi.ca και twitter μικροϊστολογίου

@@ -2,6 +2,7 @@
 Name=Luna
 Name[ar]=لونا
 Name[ca]=Lluna
+Name[ca@valencia]=Lluna
 Name[cs]=Luna
 Name[da]=Luna
 Name[de]=Luna
@@ -50,6 +51,7 @@ Name[zh_TW]=Luna
 Comment=Display moon phases for your location
 Comment[ar]=أظهر أطوار القمر في المكان الذي انت فيه
 Comment[ca]=Mostra les fases de la lluna per a la vostra ubicació
+Comment[ca@valencia]=Mostra les fases de la lluna per a la vostra ubicació
 Comment[cs]=Zobrazení fází měsíce
 Comment[da]=Viser månefaser for dit lokalområde.
 Comment[de]=Mondphasen für Ihren Standort anzeigen

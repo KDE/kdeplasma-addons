@@ -2,6 +2,7 @@
 Name=Magnifique
 Name[ar]=المكبر
 Name[ca]=Magnifique
+Name[ca@valencia]=Magnifique
 Name[cs]=Magnifique
 Name[da]=Magnifique
 Name[de]=Vergrößerung
@@ -40,6 +41,7 @@ Name[zh_CN]=魅影
 Name[zh_TW]=Magnifique
 Comment=A magnification glass for the Plasma desktop
 Comment[ca]=Una lent d'augment per l'escriptori Plasma
+Comment[ca@valencia]=Una lent d'augment per l'escriptori Plasma
 Comment[cs]=Zvětšovací sklo pro Plasma desktop
 Comment[da]=Et forstørrelsesglas til Plasma-skrivebordet
 Comment[de]=Ein Vergrößerungsglas für die Plasma-Arbeitsfläche

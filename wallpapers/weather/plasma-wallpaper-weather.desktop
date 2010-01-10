@@ -3,6 +3,7 @@ Type=Service
 Name=Weather
 Name[ar]=الطقس
 Name[ca]=Meteorologia
+Name[ca@valencia]=Meteorologia
 Name[cs]=Počasí
 Name[da]=Vejr
 Name[de]=Wetter
