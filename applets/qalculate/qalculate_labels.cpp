@@ -211,7 +211,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             } else {
                 nm.push_back(-1);
             }
-            do_space.push_back(!terms[i].endsWith("valign=\"middle\">"));
+            do_space.push_back(!terms[i].endsWith(QLatin1String("valign=\"middle\">")));
             par_prev = ips_n.wrap;
         }
         for (size_t i = 0; i < terms.size(); i++) {
@@ -256,7 +256,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
                 ips_n.wrap = m[i].needsParenthesis(po, ips_n, m, i + 1, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
                 terms.push_back(drawStructure(m[i], po, ips_n));
             }
-            do_space.push_back(!terms[i].endsWith("valign=\"middle\">"));
+            do_space.push_back(!terms[i].endsWith(QLatin1String("valign=\"middle\">")));
         }
         for (size_t i = 0; i < terms.size(); i++) {
             if (i > 0) {
@@ -313,7 +313,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
         } else {
             str += ename->name.c_str();
         }
-        str.replace("_", " ");
+        str.replace('_', ' ');
         mstr += str;
 
         mstr += '(';
@@ -388,7 +388,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             else
                 str += ename->name.c_str();
         }
-        str.replace("_", " ");
+        str.replace('_', ' ');
         mstr += str;
 
         STR_MARKUP_END(mstr);
@@ -584,7 +584,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             QString tstr;
             ips_n.wrap = m[0][1].needsParenthesis(po, ips_n, m[0], 2, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[0][1], po, ips_n);
-            do_space = !tstr.endsWith("valign=\"middle\">");
+            do_space = !tstr.endsWith(QLatin1String("valign=\"middle\">"));
             mstr += tstr;
             STR_MARKUP_BEGIN(mstr);
             if (do_space) mstr += ' ';
@@ -618,7 +618,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
 
             ips_n.wrap = m[0][0].needsParenthesis(po, ips_n, m[0], 1, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[0][0], po, ips_n);
-            do_space = !tstr.endsWith("valign=\"middle\">");
+            do_space = !tstr.endsWith(QLatin1String("valign=\"middle\">"));
             if (do_space) mstr += ' ';
             STR_MARKUP_END(mstr);
             mstr += tstr;
@@ -655,7 +655,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
 
             ips_n.wrap = m[1][1].needsParenthesis(po, ips_n, m[1], 2, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[1][1], po, ips_n);
-            do_space = !tstr.endsWith("valign=\"middle\">");
+            do_space = !tstr.endsWith(QLatin1String("valign=\"middle\">"));
             if (do_space) mstr += ' ';
             STR_MARKUP_END(mstr);
             mstr += tstr;
@@ -737,7 +737,7 @@ QString QalculateLabels::drawStructure(MathStructure& m, const PrintOptions& po,
             do_space_prev = do_space;
             ips_n.wrap = m[i].needsParenthesis(po, ips_n, m, i + 1, ips.division_depth > 0 || ips.power_depth > 0, ips.power_depth > 0);
             tstr = drawStructure(m[i], po, ips_n);
-            do_space = !tstr.endsWith("valign=\"middle\">");
+            do_space = !tstr.endsWith(QLatin1String("valign=\"middle\">"));
             if (i > 0) {
                 STR_MARKUP_BEGIN(mstr);
                 if (do_space_prev) mstr += ' ';

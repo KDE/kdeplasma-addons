@@ -256,7 +256,7 @@ const ListItem* TaskModel::currentList() {
 
 void TaskModel::dataUpdated(const QString& name, const Plasma::DataEngine::Data& data) {
   //kDebug() << name;
-  if (name.startsWith("List:")) {
+  if (name.startsWith(QLatin1String("List:"))) {
     //kDebug() << data.value("id");
     qulonglong id = data.value("id").toULongLong();
     if (id == 0)
@@ -279,7 +279,7 @@ void TaskModel::dataUpdated(const QString& name, const Plasma::DataEngine::Data&
     if (id == m_currentList)
       switchToList(m_currentList);
   }
-  else if (name.startsWith("Task:")) {
+  else if (name.startsWith(QLatin1String("Task:"))) {
     qulonglong id = data.value("id").toULongLong();
     if (id == 0) // Seems to happen when multiple applets are running
       return;

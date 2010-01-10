@@ -201,7 +201,7 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
 {
     setBusy(false);
 
-    if (source.startsWith("KnowledgeBaseList\\")) {
+    if (source.startsWith(QLatin1String("KnowledgeBaseList\\"))) {
         m_totalItems = data["TotalItems"].toInt();
         m_totalPages = ceil((qreal)m_totalItems/m_itemsPerPage);
 
@@ -224,7 +224,7 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
         QStringList keys = data.keys();
         keys.sort();
         foreach (const QString &kb, keys) {
-            if (kb.startsWith("KnowledgeBase-")) {
+            if (kb.startsWith(QLatin1String("KnowledgeBase-"))) {
                 Plasma::DataEngine::Data kbData = data[kb].value<Plasma::DataEngine::Data>();
 
                 KBItemWidget *kbItem = new KBItemWidget(m_KBItemsPage);
@@ -246,7 +246,7 @@ void KnowledgeBase::dataUpdated(const QString &source, const Plasma::DataEngine:
             }
         }
 
-    } else if (source.startsWith("Person\\")) {
+    } else if (source.startsWith(QLatin1String("Person\\"))) {
         Plasma::DataEngine::Data personData = data[source].value<Plasma::DataEngine::Data>();
         QList<KBItemWidget *> items = m_kbItemsByUser[personData["Id"].toString()];
 

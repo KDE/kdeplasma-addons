@@ -141,23 +141,23 @@ bool TaskSortFilter::filterAcceptsRow(int source_row, const QModelIndex& source_
 
 
 void TaskSortFilter::setFilterWildcard(QString pattern) {
-  if (pattern.startsWith("tag:")) {
+  if (pattern.startsWith(QLatin1String("tag:"))) {
     pattern.remove("tag:");
     filterOn = Tags;
   }
-  else if (pattern.startsWith("task:")) {
+  else if (pattern.startsWith(QLatin1String("task:"))) {
     pattern.remove("task:");
     filterOn = Name;
   }
-  else if (pattern.startsWith("name:")) {
+  else if (pattern.startsWith(QLatin1String("name:"))) {
     pattern.remove("name:");
     filterOn = Name;
   }
-  else if (pattern.startsWith("date:")) {
+  else if (pattern.startsWith(QLatin1String("date:"))) {
     pattern.remove("date:");
     filterOn = Due;
   }
-  else if (pattern.startsWith("due:")) {
+  else if (pattern.startsWith(QLatin1String("due:"))) {
     pattern.remove("due:");
     filterOn = Due;
   }

@@ -126,7 +126,7 @@ void PostWidget::askReply()
 
 void PostWidget::askForward()
 {
-    emit forward(QChar(0x267B) + QString(" @") + m_author->text() + " " + m_text->nativeWidget()->toPlainText());
+    emit forward(QChar(0x267B) + QString(" @") + m_author->text() + ' ' + m_text->nativeWidget()->toPlainText());
 }
 
 void PostWidget::askProfile()

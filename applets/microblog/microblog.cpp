@@ -394,7 +394,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
 {
     //kDebug() << source << data.count() << m_curTimeline;
     if (data.isEmpty()) {
-        if (source.startsWith("Error")) {
+        if (source.startsWith(QLatin1String("Error"))) {
             m_flash->kill(); //FIXME only clear it if it was showing an error msg
         } else {
             //this is a fake update from a new source
@@ -460,7 +460,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
                 scheduleShowTweets();
             }
         }
-    } else if (source.startsWith("Error")) {
+    } else if (source.startsWith(QLatin1String("Error"))) {
         QString desc = data["description"].toString();
 
         if (desc == "Authentication required"){

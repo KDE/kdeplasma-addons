@@ -121,7 +121,7 @@ void CommitCollector::requestFinished (int id, bool error)
 
     if (m_page == 1)
     {
-        QRegExp regExpMsg(m_archiveName.left(4) + "-" + m_archiveName.right(2) + ".*\\((\\d+) messages\\)");
+        QRegExp regExpMsg(m_archiveName.left(4) + '-' + m_archiveName.right(2) + ".*\\((\\d+) messages\\)");
         regExpMsg.setMinimal(true);
         regExpMsg.indexIn(source, 0);
         int commitsToBeRead = regExpMsg.cap(1).trimmed().toInt();

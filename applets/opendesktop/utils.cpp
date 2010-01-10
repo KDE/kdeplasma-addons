@@ -63,7 +63,7 @@ QString messageListUnreadQuery(const QString& provider, const QString& folder)
 
 
 QString messageRemovePrefix(const QString& id) {
-    if (id.startsWith("Message-")) {
+    if (id.startsWith(QLatin1String("Message-"))) {
         QString message = QString(id).remove(0, 8);
         return message;
     } else {
@@ -107,7 +107,7 @@ QString personQuery(const QString& provider, const QString& id) {
 
 
 QString personRemovePrefix(const QString& id) {
-    if (id.startsWith("Person-")) {
+    if (id.startsWith(QLatin1String("Person-"))) {
         QString person = QString(id).remove(0, 7);
         return person;
     } else {
