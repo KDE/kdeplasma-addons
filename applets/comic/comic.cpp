@@ -379,7 +379,7 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
         toolTipData = Plasma::ToolTipContent( mAdditionalText, QString() );
         toolTipData.setAutohide( false );
     }
-    Plasma::ToolTipManager::self()->setContent( this, toolTipData );
+    Plasma::ToolTipManager::self()->setContent( mMainWidget, toolTipData );
 
     if ( !mImage.isNull() ) {
         QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
