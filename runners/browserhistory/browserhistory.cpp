@@ -61,7 +61,7 @@ void BrowserHistoryRunner::loadHistory()
 
     QMutableStringListIterator it(lstHistory);
     while (it.hasNext()) {
-        if (it.next().startsWith("error:/")) {
+        if (it.next().startsWith(QLatin1String("error:/"))) {
             it.remove();
         }
     }
@@ -89,10 +89,10 @@ void BrowserHistoryRunner::match(Plasma::RunnerContext &context)
             match.setIcon(m_icon);
             match.setData(historyitem);
             QString text = historyitem;
-            text.replace("http://", "");
-            text.replace("https://", "");
+            text.remove("http://");
+            text.remove("https://");
             match.setSubtext(text);
-            text.replace(QRegExp("/.*"), "");
+            text.remove(QRegExp("/.*"));
             match.setText(text);
             context.addMatch(term, match);
         }

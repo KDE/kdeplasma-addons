@@ -101,7 +101,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
 
     bool list_all = false;
 
-    if (term.toLower().startsWith("kate")) {
+    if (term.toLower().startsWith(QLatin1String("kate"))) {
         if (term.toLower().trimmed() == "kate") {
             list_all = true;
         }

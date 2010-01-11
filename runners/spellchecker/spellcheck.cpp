@@ -91,10 +91,10 @@ void SpellCheckRunner::match(Plasma::RunnerContext &context)
     match.setType(Plasma::QueryMatch::InformationalMatch);
 
     if (correct) {
-        match.setIcon(KIcon("checkmark"));
+        match.setIcon(KIcon("checkbox"));
         match.setText(i18n("Correct"));
     } else {
-        match.setIcon(KIcon("no"));
+        match.setIcon(KIcon("edit-delete"));
         const QString recommended = i18n("Suggested words: %1", suggestions.join (", "));
         //TODO: try setting a text and a subtext, with the subtext being the suggestions
         match.setText(recommended);
