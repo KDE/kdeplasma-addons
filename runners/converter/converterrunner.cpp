@@ -128,7 +128,7 @@ ConverterRunner::ConverterRunner(QObject* parent, const QVariantList &args)
 
     m_separators << QString(CONVERSION_CHAR);
     m_separators << i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'",
-                          "in;to;as").split(";");
+                          "in;to;as").split(';');
 
     //can not ignore commands: we have things like m4
     setIgnoredTypes(Plasma::RunnerContext::Directory | Plasma::RunnerContext::File |
