@@ -45,6 +45,12 @@ class ComicModel : public QAbstractTableModel
         void setComics( const Plasma::DataEngine::Data &comics )
         {
             mComics = comics;
+            mState.clear();
+            Plasma::DataEngine::Data::const_iterator it;
+            Plasma::DataEngine::Data::const_iterator itEnd = mComics.constEnd();
+            for ( it = mComics.constBegin(); it != itEnd; ++it ) {
+                mState[ it.key() ] = Qt::Unchecked;
+            }
             reset();
         }
 
@@ -67,18 +73,19 @@ class ComicModel : public QAbstractTableModel
             if ( !index.isValid() || index.row() >= mComics.keys().count() )
                 return QVariant();
 
+            const QString data = mComics.keys()[ index.row() ];
             if ( index.column() == 0 ) {
                 if ( role == Qt::CheckStateRole ) {
-                    return mState[ mComics.keys()[ index.row() ] ];
+                    return mState[ data ];
                 }
             } else if ( index.column() == 1 ) {
                 switch( role ) {
                     case Qt::DisplayRole:
-                        return mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 0 ];
+                        return mComics[ data ].toStringList()[ 0 ];
                     case Qt::DecorationRole:
-                        return KIcon( mComics[ mComics.keys()[ index.row() ] ].toStringList()[ 1 ] );
+                        return KIcon( mComics[ data ].toStringList()[ 1 ] );
                     case Qt::UserRole:
-                        return mComics.keys()[ index.row() ];
+                        return data;
                 }
             }
 
@@ -157,39 +164,48 @@ void ConfigWidget::newStuffFinished()
     if ( mNewStuffDialog->changedEntries().count() ) {
         QStringList tmp = comicIdentifier();
         mModel->setComics( mEngine->query( "providers" ) );
+        if ( tmp.first().isEmpty() ) {
+            tmp.takeFirst();
+        }
         setComicIdentifier( tmp );
+        comicUi.listView_comic->resizeColumnToContents( 0 );
     }
 }
 
 void ConfigWidget::setComicIdentifier( const QStringList &comics )
 {
-    if ( comics.isEmpty() && comicUi.comboBox_comic->count() > 0 ) {
-        comicUi.comboBox_comic->setCurrentIndex( 0 );
-        QModelIndex index( mProxyModel->index( 0, 0 ) );
-        comicUi.listView_comic->model()->setData( index, Qt::Checked, Qt::CheckStateRole );
-    } else {
+    if ( comics.isEmpty() ) {
+        if ( mProxyModel->rowCount() ) {
+            comicUi.comboBox_comic->setCurrentIndex( 0 );
+            QModelIndex index( mProxyModel->index( 0, 0 ) );
+            comicUi.listView_comic->model()->setData( index, Qt::Checked, Qt::CheckStateRole );
+        }
+    } else if ( mProxyModel->rowCount() ) {
         QModelIndex indexCheck;
         QModelIndex indexName;
 
         //select an item of comboBox_comic
+        comicUi.comboBox_comic->setCurrentIndex( 0 ); //set to 0 in any case
         for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            indexName = mProxyModel->index( i, 1 );
-            if ( indexName.data( Qt::UserRole ).toString() == comics.at( 0 ) ) {
+            const QString name = mProxyModel->index( i, 1 ).data( Qt::UserRole ).toString();
+            if ( comics.contains( name ) ) {
                 comicUi.comboBox_comic->setCurrentIndex( i );
                 break;
             }
         }
 
         //check the items of listView_comic
-        for ( int k = 0; k < comics.count(); ++k ) {
-            for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-                indexCheck = mProxyModel->index( i, 0 );
-                indexName = mProxyModel->index( i, 1 );
-                if ( indexName.data( Qt::UserRole ).toString() == comics.at( k ) ) {
-                    comicUi.listView_comic->model()->setData( indexCheck, Qt::Checked, Qt::CheckStateRole );
-                    break;
-                }
+        bool somethingChecked = false;
+        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+            indexCheck = mProxyModel->index( i, 0 );
+            const QString name = mProxyModel->index( i, 1 ).data( Qt::UserRole ).toString();
+            if ( comics.contains( name ) ) {
+                comicUi.listView_comic->model()->setData( indexCheck, Qt::Checked, Qt::CheckStateRole );
+                somethingChecked = true;
             }
+        }
+        if ( !somethingChecked ) { //check at least the first
+            comicUi.listView_comic->model()->setData( indexCheck, Qt::Checked, Qt::CheckStateRole );
         }
     }
 }
