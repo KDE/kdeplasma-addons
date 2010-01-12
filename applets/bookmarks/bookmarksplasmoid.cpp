@@ -110,13 +110,7 @@ void BookmarksPlasmoid::updateFolderData()
     const QString folderName = isRoot ? i18nc("name of the container of all browser bookmarks",
                                               "Bookmarks") :
                                         bookmarkFolder.text();
-    QString comment;
-    if (isRoot)
-        comment = i18n("Quick access to your bookmarks.");
-    else {
-        const QDomNode subnode = bookmarkFolder.internalElement().namedItem("desc");
-        comment = (subnode.firstChild().isNull()) ? QString() : subnode.firstChild().toText().data();
-    }
+    const QString comment = isRoot ? i18n("Quick access to your bookmarks.") : bookmarkFolder.description();
 
     // icon
     mIcon->setIcon(iconName);
