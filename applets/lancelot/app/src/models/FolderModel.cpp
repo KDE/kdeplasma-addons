@@ -20,6 +20,7 @@
 #include "FolderModel.h"
 #include <KStandardDirs>
 #include <KIcon>
+#include <KDebug>
 
 namespace Models {
 
@@ -57,7 +58,7 @@ void FolderModel::load()
     QStringList items = config.readEntry(m_dirPath, QStringList());
     foreach (const QString &item, items) {
         if (QFile::exists(item)) {
-            addItem(QUrl(item).toString());
+            addItem(KUrl(item));
         }
     }
 }
@@ -69,11 +70,15 @@ void FolderModel::clear()
 
 void FolderModel::deleteItem(const KFileItem & fileItem)
 {
+    kDebug() << fileItem.localPath() << fileItem.url() << m_items;
     for (int i = 0; i < size(); i++) {
         Item item = itemAt(i);
 
-        if (fileItem.localPath() == item.data.toString()) {
+        kDebug() << "##" << item.data.toString();
+        if (fileItem.localPath() == item.data.toString()
+            || fileItem.url()    == item.data.toString()) {
             m_items.removeAll(item.data.toString());
+            kDebug() << m_items;
             removeAt(i);
         }
     }
@@ -82,21 +87,22 @@ void FolderModel::deleteItem(const KFileItem & fileItem)
 void FolderModel::newItems(const KFileItemList &items)
 {
     foreach (const KFileItem &item, items) {
+        kDebug() << item.localPath();
         QFileInfo info(item.localPath());
         if (info.isFile() || info.isDir()) {
-            addItem(item.localPath());
+            addItem(item.url());
         }
     }
 }
 
-void FolderModel::addItem(const QString & url)
+void FolderModel::addItem(const KUrl & url)
 {
-    if (m_items.contains(url)) {
+    if (m_items.contains(url.url())) {
+        kDebug() << " Already have: " << url;
         return;
     }
 
-    qDebug() << "FolderModel::addItem:" << url;
-    m_items << url;
+    m_items << url.url();
     addUrl(url);
 }
 
@@ -135,7 +141,7 @@ void FolderModel::save()
         items << itemAt(i).data.toString();
     }
 
-    qDebug() << "FolderModel::save:"
+    kDebug() << "FolderModel::save:"
         << m_dirPath
         << items;
 

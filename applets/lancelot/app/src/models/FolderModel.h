@@ -41,7 +41,7 @@ protected:
     void save();
 
 protected:
-    void addItem(const QString & url);
+    void addItem(const KUrl & url);
 
     KDirLister * m_dirLister;
     QString m_dirPath;
