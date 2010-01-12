@@ -349,7 +349,7 @@ void Notes::init()
     m_textEdit->nativeWidget()->setTextCursor(oldCursor);
 
     m_customFontSize = cg.readEntry("customFontSize", m_font.pointSize());
-    m_autoFont = cg.readEntry("autoFont", true);
+    m_autoFont = cg.readEntry("autoFont", false);
     m_autoFontPercent = cg.readEntry("autoFontPercent", 4);
 
     m_checkSpelling = cg.readEntry("checkSpelling", false);
