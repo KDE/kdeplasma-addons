@@ -108,7 +108,7 @@ void GeneralConfigEditor::updateFolder()
     const bool isRoot = (! bookmarkFolder.hasParent());
 
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
-    const QString folderName = isRoot ? i18nc("name of the basefolder of all browser bookmarks",
+    const QString folderName = isRoot ? i18nc("name of the container of all browser bookmarks",
                                               "Bookmarks") :
                                         bookmarkFolder.text();
 
