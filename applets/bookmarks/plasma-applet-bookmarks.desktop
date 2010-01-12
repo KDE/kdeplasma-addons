@@ -1,23 +1,9 @@
 [Desktop Entry]
 Name=Bookmarks
-Name[en_GB]=Bookmarks
-Name[eo]=Legosignoj
-Name[et]=Järjehoidjad
-Name[fr]=Marque-pages
-Name[nb]=Bokmerker
-Name[nn]=Bokmerke
-Name[pt]=Favoritos
-Name[sv]=Bokmärken
-Name[uk]=Закладки
-Name[x-test]=xxBookmarksxx
+Name[el]=Σελιδοδείκτες
+Name[nds]=Leestekens
+Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
-Comment[en_GB]=Quick Access to the Bookmarks
-Comment[et]=Kiire ligipääs järjehoidjatele
-Comment[fr]=Accès rapide aux marque-pages
-Comment[pt]=Acesso Rápido aos Favoritos
-Comment[sv]=Snabbåtkomst till bokmärken
-Comment[uk]=Швидкий доступ до закладок
-Comment[x-test]=xxQuick Access to the Bookmarksxx
 Type=Service
 Icon=bookmarks
 ServiceTypes=Plasma/Applet
