@@ -28,7 +28,6 @@
 #include <KBookmarkGroup>
 #include <KPushButton>
 #include <KLocale>
-#include <KIconLoader>
 // Qt
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QHBoxLayout>
