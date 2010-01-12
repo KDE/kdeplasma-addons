@@ -205,9 +205,9 @@ void LancelotPart::timerEvent(QTimerEvent * event)
 bool LancelotPart::eventFilter(QObject * object, QEvent * event)
 {
     if (!m_iconClickActivation && object == m_icon) {
-        if (event->type() == QEvent::QEvent::GraphicsSceneHoverEnter) {
+        if (event->type() == QEvent::GraphicsSceneHoverEnter) {
             m_timer.start(ACTIVATION_TIME, this);
-        } else if (event->type() == QEvent::QEvent::GraphicsSceneHoverLeave) {
+        } else if (event->type() == QEvent::GraphicsSceneHoverLeave) {
             m_timer.stop();
         }
     }
