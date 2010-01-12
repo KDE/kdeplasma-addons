@@ -30,21 +30,24 @@
 
 class BookmarkOwner : public KBookmarkOwner
 {
-  public:
+public:
     BookmarkOwner();
 
-  public: // KBookmarkOwner API
-    virtual bool enableOption( BookmarkOption ) const;
-    virtual void openBookmark( const KBookmark& bookmark, Qt::MouseButtons, Qt::KeyboardModifiers );
+public: // KBookmarkOwner API
+    virtual bool enableOption(BookmarkOption) const;
+    virtual void openBookmark(const KBookmark& bookmark, Qt::MouseButtons, Qt::KeyboardModifiers);
 };
 
 
 inline BookmarkOwner::BookmarkOwner() : KBookmarkOwner() {}
 
-inline bool BookmarkOwner::enableOption(BookmarkOption) const { return false; }
-inline void BookmarkOwner::openBookmark( const KBookmark& bookmark, Qt::MouseButtons, Qt::KeyboardModifiers )
+inline bool BookmarkOwner::enableOption(BookmarkOption) const
 {
-    new KRun( bookmark.url(), (QWidget*)0 );
+    return false;
+}
+inline void BookmarkOwner::openBookmark(const KBookmark& bookmark, Qt::MouseButtons, Qt::KeyboardModifiers)
+{
+    new KRun(bookmark.url(), (QWidget*)0);
 }
 
 #endif

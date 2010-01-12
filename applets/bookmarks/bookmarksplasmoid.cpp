@@ -46,12 +46,12 @@ namespace Plasma
 static const char bookmarkFolderAddressConfigKey[] = "BookmarkFolderAddress";
 
 
-BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args )
-  : Applet( parent, args ),
-    mIcon( 0 ),
-    mBookmarkManager( 0 ),
-    mBookmarkMenu( 0 ),
-    mBookmarkOwner( 0 )
+BookmarksPlasmoid::BookmarksPlasmoid(QObject* parent, const QVariantList& args)
+  : Applet(parent, args),
+    mIcon(0),
+    mBookmarkManager(0),
+    mBookmarkMenu(0),
+    mBookmarkOwner(0)
 {
 }
 
@@ -59,35 +59,35 @@ BookmarksPlasmoid::BookmarksPlasmoid( QObject* parent, const QVariantList& args 
 void BookmarksPlasmoid::init()
 {
     mBookmarkManager = KBookmarkManager::userBookmarksManager();
-    connect( mBookmarkManager, SIGNAL(changed( const QString&, const QString& )), SLOT(onBookmarksChanged( const QString& )) );
+    connect(mBookmarkManager, SIGNAL(changed(const QString&, const QString&)), SLOT(onBookmarksChanged(const QString&)));
 
     // read config
     KConfigGroup configGroup = config();
-    mBookmarkFolderAddress = configGroup.readEntry( bookmarkFolderAddressConfigKey );
+    mBookmarkFolderAddress = configGroup.readEntry(bookmarkFolderAddressConfigKey);
 
     // general
-    setHasConfigurationInterface( true );
-    connect( this, SIGNAL(activate()), SLOT(toggleMenu()) );
-    Plasma::ToolTipManager::self()->registerWidget( this );
+    setHasConfigurationInterface(true);
+    connect(this, SIGNAL(activate()), SLOT(toggleMenu()));
+    Plasma::ToolTipManager::self()->registerWidget(this);
 
     // context menu
-    KAction* editorOpener = KStandardAction::editBookmarks( this, SLOT(editBookmarks()), this );
-    mContextualActions.append( editorOpener );
+    KAction* editorOpener = KStandardAction::editBookmarks(this, SLOT(editBookmarks()), this);
+    mContextualActions.append(editorOpener);
 
     // view
-    setAspectRatioMode( ConstrainedSquare );
-    setBackgroundHints( NoBackground );
+    setAspectRatioMode(ConstrainedSquare);
+    setBackgroundHints(NoBackground);
 
-    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout( this );
-    layout->setContentsMargins( 0, 0, 0, 0 );
-    layout->setSpacing( 0 );
+    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
-    mIcon = new IconWidget( this );
-    mIcon->setFlag( ItemIsMovable, false );
-    connect( mIcon, SIGNAL(pressed( bool )), SLOT(toggleMenu( bool )) );
-    layout->addItem( mIcon );
+    mIcon = new IconWidget(this);
+    mIcon->setFlag(ItemIsMovable, false);
+    connect(mIcon, SIGNAL(pressed(bool)), SLOT(toggleMenu(bool)));
+    layout->addItem(mIcon);
 
-    resize( IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2 );
+    resize(IconSize(KIconLoader::Desktop) * 2, IconSize(KIconLoader::Desktop) * 2);
 
     updateFolderData();
 }
@@ -99,78 +99,76 @@ QList<QAction*> BookmarksPlasmoid::contextualActions()
 
 void BookmarksPlasmoid::updateFolderData()
 {
-    const KBookmark bookmark = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
+    const KBookmark bookmark = mBookmarkManager->findByAddress(mBookmarkFolderAddress);
 
     KBookmarkGroup bookmarkFolder =
-        ( bookmark.isNull() || ! bookmark.isGroup() ) ? mBookmarkManager->root() : bookmark.toGroup();
+        (bookmark.isNull() || ! bookmark.isGroup()) ? mBookmarkManager->root() : bookmark.toGroup();
 
-    const bool isRoot = ( ! bookmarkFolder.hasParent() );
+    const bool isRoot = (! bookmarkFolder.hasParent());
 
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
     const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
     QString comment;
-    if( isRoot )
+    if (isRoot)
         comment = i18n("Quick access to your bookmarks.");
-    else
-    {
+    else {
         const QDomNode subnode = bookmarkFolder.internalElement().namedItem("desc");
         comment = (subnode.firstChild().isNull()) ? QString() : subnode.firstChild().toText().data();
     }
 
     // icon
-    mIcon->setIcon( iconName );
+    mIcon->setIcon(iconName);
     // tooltip
-    Plasma::ToolTipContent toolTipContent( folderName, comment, KIcon(iconName) );
-    Plasma::ToolTipManager::self()->setContent( this, toolTipContent );
+    Plasma::ToolTipContent toolTipContent(folderName, comment, KIcon(iconName));
+    Plasma::ToolTipManager::self()->setContent(this, toolTipContent);
 }
 
-void BookmarksPlasmoid::toggleMenu( bool toggle )
+void BookmarksPlasmoid::toggleMenu(bool toggle)
 {
-    if( ! toggle )
+    if (! toggle)
         return;
 
-    Plasma::ToolTipManager::self()->hide( this );
+    Plasma::ToolTipManager::self()->hide(this);
     mIcon->setPressed();
 
-    const bool isFirstTime = ( mBookmarkOwner == 0 );
-    if( isFirstTime )
+    const bool isFirstTime = (mBookmarkOwner == 0);
+    if (isFirstTime)
         mBookmarkOwner = new BookmarkOwner();
 
     delete mBookmarkMenu;
 
     KMenu* menu = new KMenu();
-    menu->setAttribute( Qt::WA_DeleteOnClose );
-    connect( menu, SIGNAL(aboutToHide()), mIcon, SLOT(setUnpressed()) );
+    menu->setAttribute(Qt::WA_DeleteOnClose);
+    connect(menu, SIGNAL(aboutToHide()), mIcon, SLOT(setUnpressed()));
     // TODO: only renew if manager emits changed
-    mBookmarkMenu = new KBookmarkMenu( mBookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress );
+    mBookmarkMenu = new KBookmarkMenu(mBookmarkManager, mBookmarkOwner, menu, mBookmarkFolderAddress);
 
-    menu->popup( popupPosition(menu->sizeHint()) );
+    menu->popup(popupPosition(menu->sizeHint()));
 }
 
 void BookmarksPlasmoid::toggleMenu()
 {
-    toggleMenu( true );
+    toggleMenu(true);
 }
 
-void BookmarksPlasmoid::createConfigurationInterface( KConfigDialog* parent )
+void BookmarksPlasmoid::createConfigurationInterface(KConfigDialog* parent)
 {
-    mGeneralConfigEditor = new GeneralConfigEditor( mBookmarkManager, parent );
-    mGeneralConfigEditor->setBookmarkFolderAddress( mBookmarkFolderAddress );
-    parent->addPage( mGeneralConfigEditor, i18n("General"), icon() );
-    connect( parent, SIGNAL(applyClicked()), SLOT(applyConfigChanges()) );
-    connect( parent, SIGNAL(okClicked()), SLOT(applyConfigChanges()) );
+    mGeneralConfigEditor = new GeneralConfigEditor(mBookmarkManager, parent);
+    mGeneralConfigEditor->setBookmarkFolderAddress(mBookmarkFolderAddress);
+    parent->addPage(mGeneralConfigEditor, i18n("General"), icon());
+    connect(parent, SIGNAL(applyClicked()), SLOT(applyConfigChanges()));
+    connect(parent, SIGNAL(okClicked()), SLOT(applyConfigChanges()));
 }
 
 void BookmarksPlasmoid::applyConfigChanges()
 {
     const QString& bookmarkFolderAddress = mGeneralConfigEditor->bookmarkFolderAddress();
 
-    if( mBookmarkFolderAddress != bookmarkFolderAddress )
-    {
+    if (mBookmarkFolderAddress != bookmarkFolderAddress) {
         mBookmarkFolderAddress = bookmarkFolderAddress;
 
         KConfigGroup configGroup = config();
-        configGroup.writeEntry( bookmarkFolderAddressConfigKey, mBookmarkFolderAddress );
+        configGroup.writeEntry(bookmarkFolderAddressConfigKey, mBookmarkFolderAddress);
 
         emit configNeedsSaving();
 
@@ -180,12 +178,12 @@ void BookmarksPlasmoid::applyConfigChanges()
 
 void BookmarksPlasmoid::editBookmarks()
 {
-    mBookmarkManager->slotEditBookmarksAtAddress( mBookmarkFolderAddress );
+    mBookmarkManager->slotEditBookmarksAtAddress(mBookmarkFolderAddress);
 }
 
-void BookmarksPlasmoid::onBookmarksChanged( const QString& address )
+void BookmarksPlasmoid::onBookmarksChanged(const QString& address)
 {
-    Q_UNUSED( address );
+    Q_UNUSED(address);
 
     updateFolderData();
 }

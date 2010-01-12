@@ -33,26 +33,26 @@ class KPushButton;
 
 class GeneralConfigEditor : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWidget* parent );
+public:
+    GeneralConfigEditor(KBookmarkManager* bookmarkManager, QWidget* parent);
 
-  public:
+public: // getter
     const QString& bookmarkFolderAddress() const;
 
-  public:
-    void setBookmarkFolderAddress( const QString& bookmarkFolderAddress );
+public: // setter
+    void setBookmarkFolderAddress(const QString& bookmarkFolderAddress);
 
-  protected:
+protected:
     void updateFolder();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void selectBookmarkFolder();
 
-    void onBookmarksChanged( const QString& address );
+    void onBookmarksChanged(const QString& address);
 
-  protected:
+protected:
     QString mBookmarkFolderAddress;
 
     KBookmarkManager* mBookmarkManager;
@@ -61,6 +61,9 @@ class GeneralConfigEditor : public QWidget
 };
 
 
-inline const QString& GeneralConfigEditor::bookmarkFolderAddress() const { return mBookmarkFolderAddress; }
+inline const QString& GeneralConfigEditor::bookmarkFolderAddress() const
+{
+    return mBookmarkFolderAddress;
+}
 
 #endif

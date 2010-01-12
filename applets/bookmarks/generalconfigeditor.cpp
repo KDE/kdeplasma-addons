@@ -24,8 +24,7 @@
 
 // KDE
 #include <KBookmarkManager>
-// #include <KBookmarkDialog> TODO: CamelCase only added after 4.3.4 and 4.5.0 Beta 2
-#include <kbookmarkdialog.h>
+#include <KBookmarkDialog>
 #include <KBookmarkGroup>
 #include <KPushButton>
 #include <KLocale>
@@ -36,52 +35,52 @@
 #include <QtGui/QLabel>
 
 
-GeneralConfigEditor::GeneralConfigEditor( KBookmarkManager* bookmarkManager, QWidget* parent )
-  : QWidget( parent ),
-    mBookmarkFolderAddress( bookmarkManager->root().address() ),
-    mBookmarkManager( bookmarkManager )
+GeneralConfigEditor::GeneralConfigEditor(KBookmarkManager* bookmarkManager, QWidget* parent)
+  : QWidget(parent),
+    mBookmarkFolderAddress(bookmarkManager->root().address()),
+    mBookmarkManager(bookmarkManager)
 {
 
-    QVBoxLayout* pageLayout = new QVBoxLayout( this );
-    pageLayout->setMargin( 0 );
+    QVBoxLayout* pageLayout = new QVBoxLayout(this);
+    pageLayout->setMargin(0);
 
     // folder selection
     QHBoxLayout* folderSelectLayout = new QHBoxLayout;
 
     const QString folderSelectLabelText =
-         i18nc( "@label:edit the bookmark folder to show",
-                "Folder:" );
-    QLabel* label = new QLabel( folderSelectLabelText );
+        i18nc("@label:edit the bookmark folder to show",
+              "Folder:");
+    QLabel* label = new QLabel(folderSelectLabelText);
 
     mFolderSelectButton = new KPushButton;
-    label->setBuddy( mFolderSelectButton );
-    connect( mFolderSelectButton, SIGNAL(clicked( bool )), SLOT(selectBookmarkFolder()) );
+    label->setBuddy(mFolderSelectButton);
+    connect(mFolderSelectButton, SIGNAL(clicked(bool)), SLOT(selectBookmarkFolder()));
 
     const QString folderToolTip =
-        i18nc( "@info:tooltip",
-               "The folder which will be used as the base for the menu." );
-    label->setToolTip( folderToolTip );
-    mFolderSelectButton->setToolTip( folderToolTip );
+        i18nc("@info:tooltip",
+              "The folder which will be used as the base for the menu.");
+    label->setToolTip(folderToolTip);
+    mFolderSelectButton->setToolTip(folderToolTip);
 //     const QString folderWhatsThis =
 //         i18nc( "@info:whatsthis",
 //                "Select the folder which should be used to in the menu." );
 //     mFolderSelectButton->setWhatsThis( groupSizeWhatsThis );
 
-    folderSelectLayout->addWidget( label );
-    folderSelectLayout->addWidget( mFolderSelectButton );
+    folderSelectLayout->addWidget(label);
+    folderSelectLayout->addWidget(mFolderSelectButton);
     folderSelectLayout->addStretch();
 
-    pageLayout->addLayout( folderSelectLayout );
+    pageLayout->addLayout(folderSelectLayout);
     pageLayout->addStretch();
 
-    connect( mBookmarkManager, SIGNAL(changed( const QString&, const QString& )), SLOT(onBookmarksChanged( const QString& )) );
+    connect(mBookmarkManager, SIGNAL(changed(const QString&, const QString&)), SLOT(onBookmarksChanged(const QString&)));
 
     updateFolder();
 }
 
-void GeneralConfigEditor::setBookmarkFolderAddress( const QString& bookmarkFolderAddress )
+void GeneralConfigEditor::setBookmarkFolderAddress(const QString& bookmarkFolderAddress)
 {
-    if( mBookmarkFolderAddress == bookmarkFolderAddress )
+    if (mBookmarkFolderAddress == bookmarkFolderAddress)
         return;
 
     mBookmarkFolderAddress = bookmarkFolderAddress;
@@ -91,14 +90,13 @@ void GeneralConfigEditor::setBookmarkFolderAddress( const QString& bookmarkFolde
 
 void GeneralConfigEditor::selectBookmarkFolder()
 {
-    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
+    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress(mBookmarkFolderAddress);
 
-    KBookmarkDialog* dialog = new KBookmarkDialog( mBookmarkManager, this );
-    KBookmarkGroup selectedFolder = dialog->selectFolder( bookmarkFolder );
+    KBookmarkDialog* dialog = new KBookmarkDialog(mBookmarkManager, this);
+    KBookmarkGroup selectedFolder = dialog->selectFolder(bookmarkFolder);
     delete dialog;
 
-    if( ! selectedFolder.isNull() )
-    {
+    if (! selectedFolder.isNull()) {
         mBookmarkFolderAddress = selectedFolder.address();
         updateFolder();
     }
@@ -106,21 +104,21 @@ void GeneralConfigEditor::selectBookmarkFolder()
 
 void GeneralConfigEditor::updateFolder()
 {
-    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress( mBookmarkFolderAddress );
+    const KBookmark bookmarkFolder = mBookmarkManager->findByAddress(mBookmarkFolderAddress);
 
-    const bool isRoot = ( ! bookmarkFolder.hasParent() );
+    const bool isRoot = (! bookmarkFolder.hasParent());
 
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
     const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
 
-    mFolderSelectButton->setIcon( KIcon(iconName) );
-    mFolderSelectButton->setText( folderName );
+    mFolderSelectButton->setIcon(KIcon(iconName));
+    mFolderSelectButton->setText(folderName);
 }
 
 
-void GeneralConfigEditor::onBookmarksChanged( const QString& address )
+void GeneralConfigEditor::onBookmarksChanged(const QString& address)
 {
-    Q_UNUSED( address );
+    Q_UNUSED(address);
 
     updateFolder();
 }

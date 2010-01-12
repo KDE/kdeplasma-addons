@@ -23,4 +23,4 @@
 // Plasmoid
 #include "bookmarksplasmoid.h"
 
-K_EXPORT_PLASMA_APPLET( bookmarks, Plasma::BookmarksPlasmoid)
+K_EXPORT_PLASMA_APPLET(bookmarks, Plasma::BookmarksPlasmoid)

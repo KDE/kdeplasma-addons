@@ -40,30 +40,30 @@ class IconWidget;
 
 class BookmarksPlasmoid : public Applet
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    BookmarksPlasmoid( QObject* parent, const QVariantList& args );
+public:
+    BookmarksPlasmoid(QObject* parent, const QVariantList& args);
 
     virtual ~BookmarksPlasmoid();
 
-  public: // Plasma::Applet API
+public: // Plasma::Applet API
     virtual void init();
     virtual QList<QAction*> contextualActions();
-    virtual void createConfigurationInterface( KConfigDialog* parent );
+    virtual void createConfigurationInterface(KConfigDialog* parent);
 
-  protected:
+protected:
     void updateFolderData();
 
-  protected Q_SLOTS:
-    void toggleMenu( bool toggle );
+protected Q_SLOTS:
+    void toggleMenu(bool toggle);
     void toggleMenu();
     void editBookmarks();
     void applyConfigChanges();
 
-    void onBookmarksChanged( const QString& address );
+    void onBookmarksChanged(const QString& address);
 
-  private:
+private:
     QString mBookmarkFolderAddress;
 
     IconWidget* mIcon;
