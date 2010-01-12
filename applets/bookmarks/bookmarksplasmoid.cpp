@@ -1,7 +1,7 @@
 /*
     This file is part of the Bookmarks plasmoid, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -107,7 +107,9 @@ void BookmarksPlasmoid::updateFolderData()
     const bool isRoot = (! bookmarkFolder.hasParent());
 
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
-    const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
+    const QString folderName = isRoot ? i18nc("name of the basefolder of all browser bookmarks",
+                                              "Bookmarks") :
+                                        bookmarkFolder.text();
     QString comment;
     if (isRoot)
         comment = i18n("Quick access to your bookmarks.");
@@ -155,7 +157,8 @@ void BookmarksPlasmoid::createConfigurationInterface(KConfigDialog* parent)
 {
     mGeneralConfigEditor = new GeneralConfigEditor(mBookmarkManager, parent);
     mGeneralConfigEditor->setBookmarkFolderAddress(mBookmarkFolderAddress);
-    parent->addPage(mGeneralConfigEditor, i18n("General"), icon());
+    const QString pageName = i18nc("@title:tab name of settings page with general parameters","General");
+    parent->addPage(mGeneralConfigEditor, pageName, icon());
     connect(parent, SIGNAL(applyClicked()), SLOT(applyConfigChanges()));
     connect(parent, SIGNAL(okClicked()), SLOT(applyConfigChanges()));
 }

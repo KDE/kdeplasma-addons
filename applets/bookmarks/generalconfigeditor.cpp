@@ -1,7 +1,7 @@
 /*
     This file is part of the Bookmarks plasmoid, part of the KDE project.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -108,7 +108,9 @@ void GeneralConfigEditor::updateFolder()
     const bool isRoot = (! bookmarkFolder.hasParent());
 
     const QString iconName = isRoot ? QString::fromLatin1("bookmarks") : bookmarkFolder.icon();
-    const QString folderName = isRoot ? i18n("Bookmarks") : bookmarkFolder.text();
+    const QString folderName = isRoot ? i18nc("name of the basefolder of all browser bookmarks",
+                                              "Bookmarks") :
+                                        bookmarkFolder.text();
 
     mFolderSelectButton->setIcon(KIcon(iconName));
     mFolderSelectButton->setText(folderName);
