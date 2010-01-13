@@ -1,9 +1,20 @@
 [Desktop Entry]
 Name=Bookmarks
 Name[el]=Σελιδοδείκτες
+Name[en_GB]=Bookmarks
 Name[nds]=Leestekens
+Name[pt]=Favoritos
+Name[pt_BR]=Favoritos
+Name[sv]=Bokmärken
+Name[uk]=Закладки
 Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[en_GB]=Quick Access to the Bookmarks
+Comment[pt]=Acesso Rápido aos Favoritos
+Comment[pt_BR]=Adicionar este compartilhamento aos favoritos
+Comment[sv]=Snabbåtkomst till bokmärken
+Comment[uk]=Швидкий доступ до закладок
+Comment[zh_TW]=快速存取書籤
 Type=Service
 Icon=bookmarks
 ServiceTypes=Plasma/Applet
