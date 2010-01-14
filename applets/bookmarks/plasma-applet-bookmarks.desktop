@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[da]=Bogmærker
 Name[el]=Σελιδοδείκτες
 Name[en_GB]=Bookmarks
 Name[nds]=Leestekens
@@ -9,6 +10,7 @@ Name[sv]=Bokmärken
 Name[uk]=Закладки
 Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[da]=Hurtig adgang til bogmærker
 Comment[en_GB]=Quick Access to the Bookmarks
 Comment[pt]=Acesso Rápido aos Favoritos
 Comment[pt_BR]=Adicionar este compartilhamento aos favoritos
