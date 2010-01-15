@@ -59,6 +59,7 @@ BookmarksPlasmoid::BookmarksPlasmoid(QObject* parent, const QVariantList& args)
 void BookmarksPlasmoid::init()
 {
     mBookmarkManager = KBookmarkManager::userBookmarksManager();
+    mBookmarkManager->setEditorOptions(name(), true);
     connect(mBookmarkManager, SIGNAL(changed(const QString&, const QString&)), SLOT(onBookmarksChanged(const QString&)));
 
     // read config
