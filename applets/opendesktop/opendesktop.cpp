@@ -220,7 +220,7 @@ void OpenDesktop::showFriendsWidget()
 
 void OpenDesktop::connectNearby(int latitude, int longitude)
 {
-    QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3\\distance:2")
+    QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3\\distance:0")
         .arg(m_provider)
         .arg(latitude)
         .arg(longitude);
