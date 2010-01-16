@@ -1,17 +1,21 @@
 [Desktop Entry]
 Name=Bookmarks
+Name[cs]=Záložky
 Name[da]=Bogmærker
 Name[el]=Σελιδοδείκτες
 Name[en_GB]=Bookmarks
 Name[nds]=Leestekens
+Name[pa]=ਬੁੱਕਮਾਰਕ
 Name[pt]=Favoritos
 Name[pt_BR]=Favoritos
 Name[sv]=Bokmärken
 Name[uk]=Закладки
 Name[zh_TW]=書籤
 Comment=Quick Access to the Bookmarks
+Comment[cs]=Rychlý přístup k záložkám
 Comment[da]=Hurtig adgang til bogmærker
 Comment[en_GB]=Quick Access to the Bookmarks
+Comment[pa]=ਆਪਣੇ ਬੁੱਕਮਾਰਕ ਤੁਰੰਤ ਵਰਤੋਂ
 Comment[pt]=Acesso Rápido aos Favoritos
 Comment[pt_BR]=Adicionar este compartilhamento aos favoritos
 Comment[sv]=Snabbåtkomst till bokmärken
