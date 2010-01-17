@@ -28,6 +28,9 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Model containing the recently opened documents
+ */
 class LANCELOT_EXPORT RecentDocuments : public FolderModel {
     Q_OBJECT
 public:

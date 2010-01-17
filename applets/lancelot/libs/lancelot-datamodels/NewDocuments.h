@@ -27,12 +27,18 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Model contains links to office applications
+ */
 class LANCELOT_EXPORT NewDocuments : public FolderModel {
     Q_OBJECT
 public:
     NewDocuments();
     virtual ~NewDocuments();
 
+    /**
+     * @returns path where the .desktop files are being kept
+     */
     static QString path();
 
 };

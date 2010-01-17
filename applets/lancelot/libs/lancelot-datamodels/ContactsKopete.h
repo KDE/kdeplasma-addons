@@ -27,17 +27,46 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Model containing online contacts from Kopete
+ */
 class LANCELOT_EXPORT ContactsKopete : public BaseModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of ContactsKopete
+     */
     ContactsKopete();
+
+    /**
+     * Destroys this ContactsKopete
+     */
     ~ContactsKopete();
 
 protected:
+    /**
+     * Opens a chat window for the specified contact
+     * @param index index of the ocntact in model
+     */
     void activate(int index);
+
+    /**
+     * Loads the model data
+     */
     void load();
+
+    /**
+     * Loads the model data
+     * @param forceReload if true, all contacts will be reloaded
+     */
     void load(bool forceReload);
+
+    /**
+     * Updated contact data
+     * @param contactId id of the contact to update
+     */
     void updateContactData(const QString & contactId);
+
     void timerEvent(QTimerEvent * event);
 
 protected Q_SLOTS:

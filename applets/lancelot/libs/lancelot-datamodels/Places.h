@@ -27,14 +27,14 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Dolphin's places
+ */
 class LANCELOT_EXPORT Places : public XbelModel {
     Q_OBJECT
 public:
     Places();
     virtual ~Places();
-
-// protected:
-//     void load();
 };
 
 } // namespace Models

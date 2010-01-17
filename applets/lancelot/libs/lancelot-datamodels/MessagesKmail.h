@@ -30,16 +30,31 @@ using TaskManager::TaskPtr;
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Lists folders in KMail that have unread mail in them
+ */
 class LANCELOT_EXPORT MessagesKmail : public BaseModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new MessagesKmail instance
+     */
     MessagesKmail();
+
+    /**
+     * Destroys this MessagesKmail
+     */
     ~MessagesKmail();
 
     void timerEvent(QTimerEvent * event);
 
 protected:
+    /**
+     * Opens the message folder
+     * @param index index of the folder to open
+     */
     void activate(int index);
+
     void load();
 
 private Q_SLOTS:

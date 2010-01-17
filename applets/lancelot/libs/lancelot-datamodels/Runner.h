@@ -30,16 +30,46 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Interface model for KRunner
+ */
 class LANCELOT_EXPORT Runner : public BaseModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of the Runner model
+     * @param limitRunners sets whether default whitelisting
+     *      of runners should be enforced
+     * @param search initial search string
+     */
     explicit Runner(bool limitRunners = false, QString search = QString());
+
+    /**
+     * Creates a new instance of the Runner model
+     * @param allowedRunners sets which runners should be enabled
+     * @param search initial search string
+     */
     explicit Runner(QStringList allowedRunners, QString search = QString());
+
+    /**
+     * Destroys this Runner model
+     */
     virtual ~Runner();
 
+    /**
+     * @returns current search string
+     */
     QString searchString() const;
 
+    /**
+     * @returns which runner is used, if only one runner is used
+     */
     QString runnerName() const;
+
+    /**
+     * Sets the model to return results only from one runner.
+     * Not to be confused with whitelisting and allowed runners.
+     */
     void setRunnerName(const QString & name);
 
     L_Override bool hasContextActions(int index) const;
@@ -51,7 +81,16 @@ public:
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
 public Q_SLOTS:
+    /**
+     * Sets the search string
+     * @param search
+     */
     void setSearchString(const QString & search);
+
+    /**
+     * Sets the search results
+     * @param matches results
+     */
     void setQueryMatches(const QList<Plasma::QueryMatch> &matches);
 
 protected:
@@ -60,11 +99,8 @@ protected:
     void timerEvent(QTimerEvent * event);
 
 private:
-    QString m_searchString;
-    QString m_runnerName;
-    QBasicTimer m_timer;
-    Plasma::RunnerManager * m_runnerManager;
-    bool valid : 1;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models
