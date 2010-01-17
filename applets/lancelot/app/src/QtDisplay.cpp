@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2005,2006,2007 by Siraj Razick <siraj@kde.org>
+ *   Copyright (C) 2005, 2006, 2007 by Siraj Razick <siraj@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,

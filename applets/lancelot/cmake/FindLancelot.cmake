@@ -1,4 +1,4 @@
-#   Copyright (C) 2007 Ivan Cukic <ivan.cukic(at)kde.org>
+#   Copyright (C) 2007, 2008, 2009, 2010 Ivan Cukic <ivan.cukic(at)kde.org>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License version 2,
@@ -19,7 +19,6 @@
 
 # LANCELOT_INCLUDE_DIR
 # LANCELOT_FOUND
-# Copyright (C) 2007 Brad Hards <bradh@frogmouth.net>
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
