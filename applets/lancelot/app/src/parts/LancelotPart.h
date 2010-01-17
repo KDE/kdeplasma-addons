@@ -32,9 +32,9 @@
 #include <lancelot/widgets/Widget.h>
 #include <lancelot/widgets/ActionListView.h>
 #include <lancelot/layouts/FullBorderLayout.h>
+#include <lancelot-datamodels/Runner.h>
 
 #include "PartsMergedModel.h"
-#include "models/Runner.h"
 #include "LancelotPartConfig.h"
 
 class LancelotPart : public Plasma::PopupApplet
@@ -78,7 +78,7 @@ private:
     Plasma::LineEdit * m_searchText;
 
     Models::PartsMergedModel * m_model;
-    Models::Runner * m_runnnerModel;
+    Lancelot::Models::Runner * m_runnnerModel;
 
     QString m_cmdarg;
     Plasma::IconWidget * m_icon;

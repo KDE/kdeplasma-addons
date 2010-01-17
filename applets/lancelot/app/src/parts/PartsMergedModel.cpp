@@ -24,26 +24,26 @@
 #include <KLocalizedString>
 #include <KDebug>
 
-#include "../models/BaseModel.h"
-#include "../models/Devices.h"
-#include "../models/Places.h"
-#include "../models/SystemServices.h"
-#include "../models/RecentDocuments.h"
-#include "../models/OpenDocuments.h"
-#include "../models/NewDocuments.h"
-#include "../models/FolderModel.h"
-#include "../models/FavoriteApplications.h"
-#include "../models/Applications.h"
-#include "../models/Runner.h"
-#include "../models/ContactsKopete.h"
-#include "../models/MessagesKmail.h"
-#include "../models/SystemActions.h"
-#include "../Serializator.h"
+#include <lancelot-datamodels/BaseModel.h>
+#include <lancelot-datamodels/Devices.h>
+#include <lancelot-datamodels/Places.h>
+#include <lancelot-datamodels/SystemServices.h>
+#include <lancelot-datamodels/RecentDocuments.h>
+#include <lancelot-datamodels/OpenDocuments.h>
+#include <lancelot-datamodels/NewDocuments.h>
+#include <lancelot-datamodels/FolderModel.h>
+#include <lancelot-datamodels/FavoriteApplications.h>
+#include <lancelot-datamodels/Applications.h>
+#include <lancelot-datamodels/Runner.h>
+#include <lancelot-datamodels/ContactsKopete.h>
+#include <lancelot-datamodels/MessagesKmail.h>
+#include <lancelot-datamodels/SystemActions.h>
+#include <lancelot-datamodels/Serializator.h>
 
 namespace Models {
 
 PartsMergedModel::PartsMergedModel()
-    : BaseMergedModel()
+    : Lancelot::Models::BaseMergedModel()
 {
 }
 
@@ -198,12 +198,12 @@ bool PartsMergedModel::loadDirectory(const QString & url)
     data["version"]     = "1.0";
     data["type"]        = "list";
     data["model"]       = "Folder " + url;
-    return load(Serializator::serialize(data));
+    return load(Lancelot::Models::Serializator::serialize(data));
 }
 
 bool PartsMergedModel::load(const QString & input)
 {
-    QMap < QString, QString > data = Serializator::deserialize(input);
+    QMap < QString, QString > data = Lancelot::Models::Serializator::deserialize(input);
     kDebug() << data;
 
     if (!data.contains("version")) {
@@ -227,51 +227,51 @@ bool PartsMergedModel::load(const QString & input)
 
             if (modelID == "Places") {
                 addModel(modelID, QIcon(), i18n("Places"),
-                        model = new Models::Places());
+                        model = new Lancelot::Models::Places());
                 m_models.append(model);
             } else if (modelID == "System") {
                 addModel(modelID, QIcon(), i18n("System"),
-                        model = new Models::SystemServices());
+                        model = new Lancelot::Models::SystemServices());
                 m_models.append(model);
             } else if (modelID == "Devices/Removable") {
                 addModel(modelID, QIcon(), i18n("Removable devices"),
-                        model = new Models::Devices(Models::Devices::Removable));
+                        model = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable));
                 m_models.append(model);
             } else if (modelID == "Devices/Fixed") {
                 addModel(modelID, QIcon(), i18n("Fixed devices"),
-                        model = new Models::Devices(Models::Devices::Fixed));
+                        model = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed));
                 m_models.append(model);
             } else if (modelID == "NewDocuments") {
                 addModel(modelID, QIcon(), i18n("New Documents"),
-                        model = new Models::NewDocuments());
+                        model = new Lancelot::Models::NewDocuments());
                 m_models.append(model);
             } else if (modelID == "OpenDocuments") {
                 addModel(modelID, QIcon(), i18n("Open Documents"),
-                        model = new Models::OpenDocuments());
+                        model = new Lancelot::Models::OpenDocuments());
                 m_models.append(model);
             } else if (modelID =="RecentDocuments") {
                 addModel(modelID, QIcon(), i18n("Recent Documents"),
-                        model = new Models::RecentDocuments());
+                        model = new Lancelot::Models::RecentDocuments());
                 m_models.append(model);
             } else if (modelID =="Messages") {
                 addModel(modelID, QIcon(), i18n("Unread messages"),
-                        model = new Models::MessagesKmail());
+                        model = new Lancelot::Models::MessagesKmail());
                 m_models.append(model);
             } else if (modelID =="Contacts") {
                 addModel(modelID, QIcon(), i18n("Online contacts"),
-                        model = new Models::ContactsKopete());
+                        model = new Lancelot::Models::ContactsKopete());
                 m_models.append(model);
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
                 addModel(modelID, QIcon(), i18n("Favorite Applications"),
-                        model = Models::FavoriteApplications::self());
+                        model = Lancelot::Models::FavoriteApplications::self());
             } else if (modelID == "SystemActions") {
                 // We don't want to delete this one (singleton)
                 if (modelExtraData.isEmpty()) {
                     addModel(modelID, QIcon(), i18n("System"),
-                            model = Models::SystemActions::self());
+                            model = Lancelot::Models::SystemActions::self());
                 } else {
-                    model = Models::SystemActions::self()->action(modelExtraData, false);
+                    model = Lancelot::Models::SystemActions::self()->action(modelExtraData, false);
                     if (!model) return false;
                     addModel(modelID, QIcon(), i18n("System"), model);
                 }
@@ -282,12 +282,12 @@ bool PartsMergedModel::load(const QString & input)
                     addModel(modelExtraData,
                         QIcon(),
                         modelExtraData,
-                        model = new Models::Applications(modelExtraData, QString(), QIcon(), true));
+                        model = new Lancelot::Models::Applications(modelExtraData, QString(), QIcon(), true));
                 } else {
                     addModel(modelExtraData,
                         QIcon(),
                         modelExtraData,
-                        model = new Models::FolderModel(modelExtraData));
+                        model = new Lancelot::Models::FolderModel(modelExtraData));
                 }
                 m_models.append(model);
             }

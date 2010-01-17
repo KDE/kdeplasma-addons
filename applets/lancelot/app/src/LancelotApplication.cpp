@@ -29,11 +29,11 @@
 #include <KLocale>
 
 #include <lancelot/Global.h>
+#include <lancelot-datamodels/BaseModel.h>
 
 #include "AboutData.h"
 #include "LancelotWindow.h"
 #include "lancelotadaptor.h"
-#include "models/BaseModel.h"
 
 #include "QtDisplay.h"
 
@@ -72,7 +72,7 @@ void LancelotApplication::init()
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject("/Lancelot", this);
 
-    Models::ApplicationConnector * ac = Models::ApplicationConnector::self();
+    Lancelot::Models::ApplicationConnector * ac = Lancelot::Models::ApplicationConnector::self();
     connect(
             ac, SIGNAL(doSearch(QString)),
             this, SLOT(search(QString))

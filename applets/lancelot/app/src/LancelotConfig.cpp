@@ -23,9 +23,9 @@
 #include <KRun>
 #include <KUrl>
 
-#include "models/NewDocuments.h"
-#include "models/SystemActions.h"
-#include "models/SystemServices.h"
+#include <lancelot-datamodels/NewDocuments.h>
+#include <lancelot-datamodels/SystemActions.h>
+#include <lancelot-datamodels/SystemServices.h>
 
 LancelotConfig::LancelotConfig()
     : systemButtonActionsMenu(NULL), clickedSystemButton(NULL),
@@ -64,7 +64,7 @@ void LancelotConfig::systemButtonClicked()
     clickedSystemButton = static_cast < QPushButton * > (sender());
     if (!systemButtonActionsMenu) {
         systemButtonActionsMenu = new QMenu();
-        Models::SystemActions * model = Models::SystemActions::self();
+        Lancelot::Models::SystemActions * model = Lancelot::Models::SystemActions::self();
         foreach (const QString &id, model->actions()) {
             systemButtonActionsMenu->addAction(
                     model->actionIcon(id),
@@ -88,9 +88,9 @@ void LancelotConfig::systemButtonActionsMenuClicked()
 
 void LancelotConfig::setButtonData(QPushButton * button)
 {
-    button->setText(Models::SystemActions::self()->actionTitle(
+    button->setText(Lancelot::Models::SystemActions::self()->actionTitle(
                 systemButtonActions[button]));
-    button->setIcon(Models::SystemActions::self()->actionIcon(
+    button->setIcon(Lancelot::Models::SystemActions::self()->actionIcon(
                 systemButtonActions[button]));
 }
 
@@ -207,14 +207,14 @@ void LancelotConfig::setEnableUsageStatistics(bool value)
 void LancelotConfig::buttonNewDocumentsEditClicked()
 {
     new KRun(KUrl(
-        Models::NewDocuments::path()
+        Lancelot::Models::NewDocuments::path()
     ), 0);
 }
 
 void LancelotConfig::buttonSystemApplicationsEditClicked()
 {
     new KRun(KUrl(
-        Models::SystemServices::path()
+        Lancelot::Models::SystemServices::path()
     ), 0);
 }
 

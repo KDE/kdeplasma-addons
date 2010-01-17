@@ -40,30 +40,27 @@
 #include <QtDBus/QDBusReply>
 
 #include <kworkspace/kworkspace.h>
-// #include "ksmserver_interface.h"
-// #include "screensaver_interface.h"
-#include <Serializator.h>
+#include <lancelot/models/PlasmaServiceListModel.h>
 
-#include "models/Devices.h"
-#include "models/Places.h"
-#include "models/SystemServices.h"
-#include "models/RecentDocuments.h"
-#include "models/OpenDocuments.h"
-#include "models/NewDocuments.h"
-#include "models/FolderModel.h"
-#include "models/FavoriteApplications.h"
-#include "models/Applications.h"
-#include "models/Runner.h"
-#include "models/SystemActions.h"
-#include "models/ContactsKopete.h"
-#include "models/MessagesKmail.h"
-
-#include "models/BaseMergedModel.h"
-#include "logger/Logger.h"
+#include <lancelot-datamodels/Serializator.h>
+#include <lancelot-datamodels/Devices.h>
+#include <lancelot-datamodels/Places.h>
+#include <lancelot-datamodels/SystemServices.h>
+#include <lancelot-datamodels/RecentDocuments.h>
+#include <lancelot-datamodels/OpenDocuments.h>
+#include <lancelot-datamodels/NewDocuments.h>
+#include <lancelot-datamodels/FolderModel.h>
+#include <lancelot-datamodels/FavoriteApplications.h>
+#include <lancelot-datamodels/Applications.h>
+#include <lancelot-datamodels/Runner.h>
+#include <lancelot-datamodels/SystemActions.h>
+#include <lancelot-datamodels/ContactsKopete.h>
+#include <lancelot-datamodels/MessagesKmail.h>
+#include <lancelot-datamodels/BaseMergedModel.h>
+#include <lancelot-datamodels/Logger.h>
 
 #include <lancelot/widgets/ResizeBordersPanel.h>
 #include <lancelot/widgets/PopupMenu.h>
-#include <lancelot/models/PlasmaServiceListModel.h>
 
 #include <KLineEdit>
 #include <Plasma/LineEdit>
@@ -422,7 +419,7 @@ void LancelotWindow::search(const QString & string)
 
     m_searchString = string;
 
-    ((Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
+    ((Lancelot::Models::Runner *) m_models["Runner"])->setSearchString(m_searchString);
     if (m_searchString.isEmpty()) {
         sectionActivated("applications");
     } else {
@@ -436,14 +433,14 @@ void LancelotWindow::systemButtonClicked()
         static_cast < Lancelot::ExtenderButton * > (sender());
 
     Lancelot::ActionTreeModel * model =
-        Models::SystemActions::self()->action(systemButtonActions[button]);
+        Lancelot::Models::SystemActions::self()->action(systemButtonActions[button]);
 
     if (!model) return;
 
     if (!menuSystemButton) {
         menuSystemButton = new Lancelot::PopupList();
         menuSystemButton->resize(200, 200);
-        Models::ApplicationConnector * ac = Models::ApplicationConnector::self();
+        Lancelot::Models::ApplicationConnector * ac = Lancelot::Models::ApplicationConnector::self();
         connect(
                 ac, SIGNAL(doHide(bool)),
                 menuSystemButton, SLOT(close())
@@ -468,17 +465,17 @@ void LancelotWindow::systemButtonClicked()
 void LancelotWindow::setupModels()
 {
     // Models:
-    m_models["Places"]            = new Models::Places();
-    m_models["SystemServices"]    = new Models::SystemServices();
-    m_models["Devices/Removable"] = new Models::Devices(Models::Devices::Removable);
-    m_models["Devices/Fixed"]     = new Models::Devices(Models::Devices::Fixed);
+    m_models["Places"]            = new Lancelot::Models::Places();
+    m_models["SystemServices"]    = new Lancelot::Models::SystemServices();
+    m_models["Devices/Removable"] = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable);
+    m_models["Devices/Fixed"]     = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed);
 
-    m_models["NewDocuments"]      = new Models::NewDocuments();
-    m_models["RecentDocuments"]   = new Models::RecentDocuments();
-    m_models["OpenDocuments"]     = new Models::OpenDocuments();
+    m_models["NewDocuments"]      = new Lancelot::Models::NewDocuments();
+    m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
+    m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
 
-    // m_models["Contacts"]          = new Models::ContactsKopete();
-    // m_models["Messages"]          = new Models::MessagesKmail();
+    // m_models["Contacts"]          = new Lancelot::Models::ContactsKopete();
+    // m_models["Messages"]          = new Lancelot::Models::MessagesKmail();
 
     QStringList allowedRunners = m_mainConfig.readEntry("allowedRunners", QStringList());
     if (allowedRunners.isEmpty()) {
@@ -499,21 +496,21 @@ void LancelotWindow::setupModels()
             << "unitconverter";
     }
 
-    m_models["Runner"]            = new Models::Runner(allowedRunners);
+    m_models["Runner"]            = new Lancelot::Models::Runner(allowedRunners);
 
     // Groups:
 
-    m_modelGroups["ComputerLeft"]   = new Models::BaseMergedModel();
-    m_modelGroups["DocumentsLeft"]  = new Models::BaseMergedModel();
-    m_modelGroups["ContactsLeft"]   = new Models::BaseMergedModel();
+    m_modelGroups["ComputerLeft"]   = new Lancelot::Models::BaseMergedModel();
+    m_modelGroups["DocumentsLeft"]  = new Lancelot::Models::BaseMergedModel();
+    m_modelGroups["ContactsLeft"]   = new Lancelot::Models::BaseMergedModel();
 
-    m_modelGroups["ComputerRight"]  = new Models::BaseMergedModel();
-    m_modelGroups["DocumentsRight"] = new Models::BaseMergedModel();
-    m_modelGroups["ContactsRight"]  = new Models::BaseMergedModel();
+    m_modelGroups["ComputerRight"]  = new Lancelot::Models::BaseMergedModel();
+    m_modelGroups["DocumentsRight"] = new Lancelot::Models::BaseMergedModel();
+    m_modelGroups["ContactsRight"]  = new Lancelot::Models::BaseMergedModel();
 
     // Assignments: Model - Group:
     #define MergedAddModel(MergedModel, ModelID, Model) \
-        ((Models::BaseMergedModel *)(MergedModel))      \
+        ((Lancelot::Models::BaseMergedModel *)(MergedModel))      \
         ->addModel((ModelID), QIcon(), (Model)->selfTitle(), Model);
 
     MergedAddModel(m_modelGroups["ComputerLeft"], "Places", m_models["Places"]);
@@ -532,7 +529,7 @@ void LancelotWindow::setupModels()
     // Contacts Mail
     plugins = m_mainConfig.readEntry("mailPlugins", QString());
     if (plugins.isEmpty()) {
-        m_models["Messages"]          = new Models::MessagesKmail();
+        m_models["Messages"]          = new Lancelot::Models::MessagesKmail();
         MergedAddModel(m_modelGroups["ContactsLeft"], "Messages", m_models["Messages"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
@@ -545,7 +542,7 @@ void LancelotWindow::setupModels()
     // Contacts IM
     plugins = m_mainConfig.readEntry("imPlugins", QString());
     if (plugins.isEmpty()) {
-        m_models["Contacts"]          = new Models::ContactsKopete();
+        m_models["Contacts"]          = new Lancelot::Models::ContactsKopete();
         MergedAddModel(m_modelGroups["ContactsRight"], "Contacts", m_models["Contacts"]);
     } else if (plugins != "disabled") {
         Lancelot::ActionListModel * model;
@@ -571,9 +568,9 @@ void LancelotWindow::setupModels()
 
     // Applications passageview
     passagewayApplications->setEntranceModel(
-        new Models::FavoriteApplications::PassagewayViewProxy()
+        new Lancelot::Models::FavoriteApplications::PassagewayViewProxy()
     );
-    passagewayApplications->setAtlasModel(new Models::Applications());
+    passagewayApplications->setAtlasModel(new Lancelot::Models::Applications());
 
     #undef MergedAddModel
 }
@@ -896,17 +893,17 @@ void LancelotWindow::loadConfig()
     while (i.hasNext()) {
         i.next();
 
-        i.key()->setTitle(Models::SystemActions::self()->actionTitle(
+        i.key()->setTitle(Lancelot::Models::SystemActions::self()->actionTitle(
                     i.value()));
-        i.key()->setIcon(Models::SystemActions::self()->actionIcon(
+        i.key()->setIcon(Lancelot::Models::SystemActions::self()->actionIcon(
                     i.value()));
     }
 
     // Logging
-    Logger::self()->setEnabled(m_configUi.enableUsageStatistics());
+    Lancelot::Models::Logger::self()->setEnabled(m_configUi.enableUsageStatistics());
 
     // Keep open
-    Models::ApplicationConnector::self()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
+    Lancelot::Models::ApplicationConnector::self()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
 }
 
 void LancelotWindow::lancelotContext()

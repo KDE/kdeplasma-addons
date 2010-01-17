@@ -20,12 +20,12 @@
 #ifndef LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 #define LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 
-#include "../models/BaseMergedModel.h"
+#include <lancelot-datamodels/BaseMergedModel.h>
 #include <kfileitem.h>
 
 namespace Models {
 
-class PartsMergedModel: public BaseMergedModel {
+class PartsMergedModel: public Lancelot::Models::BaseMergedModel {
     Q_OBJECT
 public:
     PartsMergedModel();

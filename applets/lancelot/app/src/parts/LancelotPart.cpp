@@ -335,7 +335,7 @@ void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
 void LancelotPart::search(const QString & query)
 {
     if (!m_runnnerModel) {
-        m_runnnerModel = new Models::Runner(true);
+        m_runnnerModel = new Lancelot::Models::Runner(true);
     }
 
     if (query.isEmpty()) {
