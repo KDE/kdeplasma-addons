@@ -28,10 +28,24 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Applications data model.
+ */
 class LANCELOT_EXPORT Applications : public Lancelot::ActionTreeModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of Applications
+     * @param root category to show applications for
+     * @param title the title of the data model
+     * @param icon the icon of the data model
+     * @param flat if false, subcategories will behave like normal items
+     */
     explicit Applications(QString root = "", QString title = "", QIcon icon = QIcon(), bool flat = false);
+
+    /**
+     * Destroys this Applications instance
+     */
     virtual ~Applications();
 
     L_Override QString title(int index) const;
@@ -57,27 +71,9 @@ public:
 public Q_SLOTS:
     virtual void activate(int index);
 
-private Q_SLOTS:
-    void sycocaUpdated(const QStringList & resources);
-
 private:
-    void load();
-    void clear();
-
-    class ApplicationData {
-    public:
-        QString name, description;
-        QIcon icon;
-        QString desktopFile;
-    };
-
-    QList < Applications * > m_submodels;
-    QList < ApplicationData > m_items;
-
-    QString m_root;
-    QString m_title;
-    QIcon m_icon;
-    bool m_flat;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models

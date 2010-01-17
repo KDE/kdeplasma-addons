@@ -19,6 +19,8 @@
  */
 
 #include "Applications.h"
+#include "Applications_p.h"
+
 #include "FavoriteApplications.h"
 
 #include <kstandarddirs.h>
@@ -30,51 +32,48 @@
 #include <KSycoca>
 
 #include "Logger.h"
+
 // Applications
 
 namespace Lancelot {
 namespace Models {
 
-Applications::Applications(QString root, QString title, QIcon icon, bool flat):
-    m_root(root), m_title(title), m_icon(icon), m_flat(flat)
+Applications::Private::Private(Applications * parent)
+    : q(parent)
 {
-    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
-            this, SLOT(sycocaUpdated(const QStringList &)));
-    load();
 }
 
-Applications::~Applications()
+Applications::Private::~Private()
 {
-    clear();
 }
 
-void Applications::clear()
+void Applications::Private::sycocaUpdated(const QStringList & resources)
 {
-    foreach(Applications * applist, m_submodels) {
-        delete applist;
+    if (resources.contains("services")) {
+        load();
     }
 }
 
-void Applications::load()
+void Applications::Private::load()
 {
-    KServiceGroup::Ptr root = KServiceGroup::group(m_root);
-    if (!root || !root->isValid())
+    KServiceGroup::Ptr services = KServiceGroup::group(root);
+    if (!services || !services->isValid())
         return;
 
-    if (m_title.isEmpty() || m_icon.isNull()) {
-        m_title = root->caption();
-        m_icon = KIcon(root->icon());
+    if (title.isEmpty() || icon.isNull()) {
+        title = services->caption();
+        icon = KIcon(services->icon());
     }
 
-    // KServiceGroup::List list = root->entries();
+    // KServiceGroup::List list = services->entries();
     const KServiceGroup::List list =
-            root->entries(true  /* sorted */,
+            services->entries(true  /* sorted */,
                           true  /* exclude no display entries */,
                           false /* allow separators */,
                           false /* sort by generic name */);
-    m_items.clear();
-    QList < Applications * > submodelsOld = m_submodels;
-    m_submodels.clear();
+    items.clear();
+    QList < Applications * > submodelsOld = submodels;
+    submodels.clear();
 
     // application name <-> service map for detecting duplicate entries
     QHash<QString,KService::Ptr> existingServices;
@@ -94,7 +93,7 @@ void Applications::load()
             data.description = service->genericName();
             data.desktopFile = service->entryPath();
 
-            m_items.append(data);
+            items.append(data);
         } else if (p->isType(KST_KServiceGroup)) {
             const KServiceGroup::Ptr serviceGroup =
                     KServiceGroup::Ptr::staticCast(p);
@@ -105,21 +104,21 @@ void Applications::load()
             bool found = false;
             Applications * model;
             foreach (model, submodelsOld) {
-                if (serviceGroup->relPath() == model->m_root) {
+                if (serviceGroup->relPath() == model->d->root) {
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                m_submodels.append(new Applications(
+                submodels.append(new Applications(
                     serviceGroup->relPath(),
                     serviceGroup->caption().replace('&', "&&"),
                     KIcon(serviceGroup->icon())
                 ));
             } else {
                 submodelsOld.removeAll(model);
-                m_submodels.append(model);
-                model->load();
+                submodels.append(model);
+                model->d->load();
                 // TODO: Find a way to delete the remaining
                 // items in submodelsOld - can't delete now
                 // because some action list could use the model
@@ -128,62 +127,87 @@ void Applications::load()
             // appName = serviceGroup->comment();
         }
     }
-    emit updated();
+    emit q->updated();
+}
+
+void Applications::Private::clear()
+{
+    foreach(Applications * applist, submodels) {
+        delete applist;
+    }
+}
+
+Applications::Applications(QString root, QString title, QIcon icon, bool flat)
+    : d(new Private(this))
+{
+    d->root = root;
+    d->title = title;
+    d->icon = icon;
+    d->flat = flat;
+
+    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
+            d, SLOT(sycocaUpdated(const QStringList &)));
+    d->load();
+}
+
+Applications::~Applications()
+{
+    d->clear();
 }
 
 QString Applications::title(int index) const
 {
     if (index >= size()) return "";
     return
-        (index < m_submodels.size()) ?
-            m_submodels.at(index)->selfTitle() :
-            m_items.at(index - m_submodels.size()).name;
+        (index < d->submodels.size()) ?
+            d->submodels.at(index)->selfTitle() :
+            d->items.at(index - d->submodels.size()).name;
 }
 
 QString Applications::description(int index) const
 {
     if (index >= size()) return "";
-    if (index < m_submodels.size()) return "";
-    return m_items.at(index - m_submodels.size()).description;
+    if (index < d->submodels.size()) return "";
+    return d->items.at(index - d->submodels.size()).description;
 }
 
 QIcon Applications::icon(int index) const
 {
     if (index >= size()) return QIcon();
     return
-        (index < m_submodels.size()) ?
-            m_submodels.at(index)->selfIcon() :
-            m_items.at(index - m_submodels.size()).icon;
+        (index < d->submodels.size()) ?
+            d->submodels.at(index)->selfIcon() :
+            d->items.at(index - d->submodels.size()).icon;
 }
 
 bool Applications::isCategory(int index) const
 {
     //Q_UNUSED(index);
     //return false;
-    if (m_flat) {
+    if (d->flat) {
         return false;
     }
-    return (index < m_submodels.size());
+    return (index < d->submodels.size());
 }
 
 int Applications::size() const
 {
-    return m_submodels.size() + m_items.size();
+    return d->submodels.size() + d->items.size();
 }
 
 void Applications::activate(int index)
 {
     if (index >= size() || index < 0) return;
 
-    if (index < m_submodels.size()) {
-        if (m_flat) {
+    if (index < d->submodels.size()) {
+        if (d->flat) {
             // opening the dir in external viewer
-            new KRun(KUrl("applications:/" + m_submodels[index]->m_root), 0);
+            new KRun(KUrl("applications:/" + d->submodels[index]->d->root), 0);
         }
         return;
     }
 
-    QString data = m_items.at(index - m_submodels.size()).desktopFile;
+    QString data = d->items.at(index - d->submodels.size()).desktopFile;
     Logger::self()->log("applications-model", data);
     new KRun(KUrl(data), 0);
     ApplicationConnector::self()->hide(true);
@@ -192,12 +216,12 @@ void Applications::activate(int index)
 QMimeData * Applications::mimeData(int index) const
 {
     if (index >= size()) return NULL;
-    if (index < m_submodels.size()) {
+    if (index < d->submodels.size()) {
         return BaseModel::mimeForUrl("applications:/" +
-            m_submodels.at(index)->m_root);
+            d->submodels.at(index)->d->root);
     }
 
-    return BaseModel::mimeForUrl(m_items.at(index - m_submodels.size()).desktopFile);
+    return BaseModel::mimeForUrl(d->items.at(index - d->submodels.size()).desktopFile);
 }
 
 void Applications::setDropActions(int index,
@@ -210,19 +234,19 @@ void Applications::setDropActions(int index,
 
 Lancelot::ActionTreeModel * Applications::child(int index)
 {
-    if (index >= m_submodels.size())
+    if (index >= d->submodels.size())
         return NULL;
-    return m_submodels.at(index);
+    return d->submodels.at(index);
 }
 
 QString Applications::selfTitle() const
 {
-    return m_title;
+    return d->title;
 }
 
 QIcon Applications::selfIcon() const
 {
-    return m_icon;
+    return d->icon;
 }
 
 bool Applications::hasContextActions(int index) const
@@ -246,23 +270,16 @@ void Applications::contextActivate(int index, QAction * context)
         return;
     }
 
-    int appIndex = index - m_submodels.size();
+    int appIndex = index - d->submodels.size();
     if (context->data().toInt() == 0) {
         FavoriteApplications::self()
-            ->addFavorite(m_items.at(appIndex).desktopFile);
-    }
-}
-
-void Applications::sycocaUpdated(const QStringList & resources)
-{
-    if (resources.contains("services")) {
-        load();
+            ->addFavorite(d->items.at(appIndex).desktopFile);
     }
 }
 
 QMimeData * Applications::selfMimeData() const
 {
-    return BaseModel::mimeForUrl("applications:/" + m_root);
+    return BaseModel::mimeForUrl("applications:/" + d->root);
 }
 
 } // namespace Models
