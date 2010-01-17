@@ -28,25 +28,27 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Model that reads Xbel formated bookmarks files
+ */
 class LANCELOT_EXPORT XbelModel : public BaseModel {
     Q_OBJECT
 public:
     explicit XbelModel(QString file);
     virtual ~XbelModel();
 
+protected Q_SLOTS:
+    /**
+     * Reloads the bookmarks
+     */
+    void reload();
+
 protected:
     void load();
 
-    void readXbel();
-    void readFolder();
-    void readBookmark();
-
-protected:
-    QString m_filePath;
-    QXmlStreamReader m_xmlReader;
-
-protected Q_SLOTS:
-    void reload();
+private:
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models

@@ -27,9 +27,21 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Utility class for (de)serializing string to string maps
+ */
 class LANCELOT_EXPORT Serializator {
 public:
+    /**
+     * @param data data to be serialized
+     * @returns serialized string
+     */
     static QString serialize(const QMap < QString , QString > data);
+
+    /**
+     * @param data to be deserialized
+     * @returns map
+     */
     static QMap < QString , QString > deserialize(const QString & data);
 };
 

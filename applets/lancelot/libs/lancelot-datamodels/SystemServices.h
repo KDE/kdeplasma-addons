@@ -27,12 +27,20 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Contains links to useful applications from the
+ * system category
+ */
 class LANCELOT_EXPORT SystemServices : public FolderModel {
     Q_OBJECT
 public:
     SystemServices();
     virtual ~SystemServices();
 
+    /**
+     * Returns the path where the links to the
+     * applications are held
+     */
     static QString path();
 
 };

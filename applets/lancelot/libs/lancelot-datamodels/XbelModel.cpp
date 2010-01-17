@@ -24,14 +24,33 @@
 namespace Lancelot {
 namespace Models {
 
+class XbelModel::Private {
+public:
+    Private(XbelModel * parent)
+        : q(parent)
+    {}
+
+    void readXbel();
+    void readFolder();
+    void readBookmark();
+
+    QString filePath;
+    QXmlStreamReader xmlReader;
+
+    XbelModel * const q;
+
+};
+
 XbelModel::XbelModel(QString filePath)
-    : BaseModel(true), m_filePath(filePath)
+    : BaseModel(true), d(new Private(this))
 {
+    d->filePath = filePath;
     load();
 }
 
 XbelModel::~XbelModel()
 {
+    delete d;
 }
 
 void XbelModel::reload()
@@ -42,59 +61,59 @@ void XbelModel::reload()
 
 void XbelModel::load()
 {
-    QFile file(m_filePath);
+    QFile file(d->filePath);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
     }
-    m_xmlReader.setDevice(& file);
+    d->xmlReader.setDevice(& file);
 
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!d->xmlReader.atEnd()) {
+        d->xmlReader.readNext();
 
-        if (m_xmlReader.isStartElement()) {
-            if (m_xmlReader.name() == "xbel") {
-                readXbel();
+        if (d->xmlReader.isStartElement()) {
+            if (d->xmlReader.name() == "xbel") {
+                d->readXbel();
             }
         }
     }
 }
 
-void XbelModel::readXbel()
+void XbelModel::Private::readXbel()
 {
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNext();
 
-        if (m_xmlReader.isEndElement() &&
-                m_xmlReader.name() == "xbel")
+        if (xmlReader.isEndElement() &&
+                xmlReader.name() == "xbel")
             break;
 
-        if (m_xmlReader.isStartElement()) {
-            if (m_xmlReader.name() == "folder")
+        if (xmlReader.isStartElement()) {
+            if (xmlReader.name() == "folder")
                 readFolder();
-            else if (m_xmlReader.name() == "bookmark")
+            else if (xmlReader.name() == "bookmark")
                 readBookmark();
         }
     }
 }
 
-void XbelModel::readFolder()
+void XbelModel::Private::readFolder()
 {
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNext();
 
-        if (m_xmlReader.isEndElement() && m_xmlReader.name() == "folder") {
+        if (xmlReader.isEndElement() && xmlReader.name() == "folder") {
             break;
         }
     }
 }
 
-void XbelModel::readBookmark()
+void XbelModel::Private::readBookmark()
 {
     Item bookmarkItem;
     bool showBookmark = true;
 
-    KUrl url(m_xmlReader.attributes().value("href").toString());
+    KUrl url(xmlReader.attributes().value("href").toString());
     bookmarkItem.data = url.url();
     if (url.isLocalFile()) {
         bookmarkItem.description = url.path();
@@ -102,29 +121,29 @@ void XbelModel::readBookmark()
         bookmarkItem.description = url.url();
     }
 
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNext();
 
-        if (m_xmlReader.isEndElement() && m_xmlReader.name() == "bookmark") {
+        if (xmlReader.isEndElement() && xmlReader.name() == "bookmark") {
             break;
         }
 
-        if (m_xmlReader.name() == "title") {
-            bookmarkItem.title = m_xmlReader.readElementText();
-        } else if (m_xmlReader.name() == "icon") {
-            QString icon = m_xmlReader.attributes().value("name").toString();
+        if (xmlReader.name() == "title") {
+            bookmarkItem.title = xmlReader.readElementText();
+        } else if (xmlReader.name() == "icon") {
+            QString icon = xmlReader.attributes().value("name").toString();
             if (!icon.isEmpty()) {
                 bookmarkItem.icon = KIcon(icon);
             }
-        } else if (m_xmlReader.name() == "IsHidden") {
-            if (m_xmlReader.readElementText() != "false") {
+        } else if (xmlReader.name() == "IsHidden") {
+            if (xmlReader.readElementText() != "false") {
                 showBookmark = false;
             }
         }
     }
 
     if (showBookmark) {
-        add(bookmarkItem);
+        q->add(bookmarkItem);
     }
 }
 
