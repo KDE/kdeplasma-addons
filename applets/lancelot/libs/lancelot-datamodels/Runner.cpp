@@ -189,8 +189,8 @@ void Runner::activate(int index)
     Logger::self()->log("run-model", data);
     m_runnerManager->run(data);
     m_runnerManager->reset();
-    changeLancelotSearchString(QString());
-    hideLancelotWindow();
+    changeApplicationSearchString(QString());
+    hideApplicationWindow();
 }
 
 bool Runner::hasContextActions(int index) const

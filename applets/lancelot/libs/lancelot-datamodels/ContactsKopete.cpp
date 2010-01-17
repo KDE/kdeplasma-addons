@@ -101,7 +101,7 @@ void ContactsKopete::activate(int index)
     } else {
         BaseModel::activate(index);
     }
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
 void ContactsKopete::load()

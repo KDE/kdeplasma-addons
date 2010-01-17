@@ -120,15 +120,15 @@ void BaseModel::activate(int index)
 
     Logger::self()->log("base-model", data);
     new KRun(KUrl(data), 0);
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
-void BaseModel::hideLancelotWindow()
+void BaseModel::hideApplicationWindow()
 {
     ApplicationConnector::self()->hide(true);
 }
 
-void BaseModel::changeLancelotSearchString(const QString & string)
+void BaseModel::changeApplicationSearchString(const QString & string)
 {
     ApplicationConnector::self()->search(string);
 }

@@ -29,19 +29,53 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Common interface from models to the parent application
+ */
 class LANCELOT_EXPORT ApplicationConnector: public QObject {
     Q_OBJECT
 public:
+    /**
+     * @returns singleton instance of ApplicationConnector
+     */
     static ApplicationConnector * self();
 
+    /**
+     * Requests a search
+     * @param search string to search for
+     */
     void search(const QString & search);
+
+    /**
+     * Requests window hide
+     * @param immediate whether there shouldn't be any
+     *     delays before hiding
+     */
     void hide(bool immediate = false);
 
+    /**
+     * Sets whether hide() should be ignored
+     * @param value if true - hide() will not be ignored
+     */
     void setAutohideEnabled(bool value);
+
+    /**
+     * @see setAutohideEnabled()
+     */
     bool autohideEnabled() const;
 
 Q_SIGNALS:
+    /**
+     * This signal is emitted when searching is requested
+     * @param search string to search for
+     */
     void doSearch(const QString & search);
+
+    /**
+     * This signal is emitted when hiding is requested
+     * @param immediate whether there shouldn't be any
+     *     delays before hiding
+     */
     void doHide(bool immediate);
 
 private:
@@ -54,10 +88,22 @@ private:
     Private * const d;
 };
 
-class BaseModel : public Lancelot::StandardActionListModel {
+/**
+ * Implements a few useful methods for Lancelot::StandardActionListModel
+ */
+class LANCELOT_EXPORT BaseModel : public Lancelot::StandardActionListModel {
     Q_OBJECT
 public:
+    /**
+     * Creates a new BaseModel
+     * @param enableDefaultDnD whether default drag and drop
+     *      handling should be turned on
+     */
     BaseModel(bool enableDefaultDnD = false);
+
+    /**
+     * Destroys this BaseModel
+     */
     virtual ~BaseModel();
 
     L_Override QMimeData * mimeData(int index) const;
@@ -70,43 +116,142 @@ public:
 
 protected:
     virtual void activate(int index);
+
+    /**
+     * Reimplement this function to load the model data
+     */
     virtual void load() = 0;
 
-    // add functions
+    /**
+     * Adds a service or application to the model
+     * @param service name of the service
+     */
     bool addService(const QString & service);
+
+    /**
+     * Adds a service or application to the model
+     * @param service service to add
+     */
     bool addService(const KService::Ptr & service);
 
+    /**
+     * Adds a list of services or applications to the model
+     * @param service names of the services
+     */
     int addServices(const QStringList & services);
 
+    /**
+     * Adds an url to the model
+     * @param url url to add
+     */
     bool addUrl(const QString & url);
+
+    /**
+     * Adds an url to the model
+     * @param url url to add
+     */
     bool addUrl(const KUrl & url);
 
+    /**
+     * Adds a list of urls to the model
+     * @param url url to add
+     */
     int addUrls(const QStringList & urls);
 
-    // insert functions
+    /**
+     * Inserts a service or application to the model
+     * @param where where to insert the service
+     * @param service name of the service
+     */
     bool insertService(int where, const QString & service);
+
+    /**
+     * Inserts a service or application to the model
+     * @param where where to insert the service
+     * @param service service
+     */
     bool insertService(int where, const KService::Ptr & service);
 
+    /**
+     * Inserts a list of services or applications to the model
+     * @param where where to insert the services
+     * @param services names of the services
+     */
     int insertServices(int where, const QStringList & services);
 
+    /**
+     * Inserts an url to the model
+     * @param where where to insert the url
+     * @param url url to add
+     */
     bool insertUrl(int where, const QString & url);
+
+    /**
+     * Inserts an url to the model
+     * @param where where to insert the url
+     * @param url url to add
+     */
     bool insertUrl(int where, const KUrl & url);
 
+    /**
+     * Inserts a list of urls to the model
+     * @param where where to insert the urls
+     * @param urls urls to add
+     */
     int insertUrls(int where, const QStringList & urls);
 
-    // other
-    static void hideLancelotWindow();
-    static void changeLancelotSearchString(const QString & string);
+    /**
+     * Hides the parent application window
+     * (if the parent application listens to
+     * ApplicationConnector signals)
+     */
+    static void hideApplicationWindow();
 
+    /**
+     * Changed the search string of the parent
+     * application (if the parent application listens to
+     * ApplicationConnector signals)
+     */
+    static void changeApplicationSearchString(const QString & string);
+
+    /**
+     * Sets the title for the model
+     */
     void setSelfTitle(const QString & title);
+
+    /**
+     * Sets the icon for the model
+     */
     void setSelfIcon(const QIcon & icon);
+
+    /**
+     * Sets the mime data for the model
+     */
     void setSelfMimeData(QMimeData * data);
 
 public:
+    /**
+     * @param url url
+     * @returns the mime data for the specified url
+     */
     static QMimeData * mimeForUrl(const KUrl & url);
+
+    /**
+     * @param url url
+     * @returns the mime data for the specified url
+     */
     static QMimeData * mimeForUrl(const QString & url);
 
+    /**
+     * @param service service
+     * @returns the mime data for the specified service
+     */
     static QMimeData * mimeForService(const KService::Ptr & service);
+
+    /**
+     * @param service service
+     * @returns the mime data for the specified service
+     */
     static QMimeData * mimeForService(const QString & service);
 
 private:

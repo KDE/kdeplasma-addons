@@ -300,7 +300,7 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
     }
 
     KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
 void Devices::tearDevice(const QString & udi)
@@ -333,7 +333,7 @@ void Devices::setupDevice(const QString & udi, bool openAfterSetup)
         return;
     } else if (openAfterSetup) {
         KRun::runUrl(KUrl(access->filePath()), "inode/directory", 0);
-        hideLancelotWindow();
+        hideApplicationWindow();
     }
 }
 

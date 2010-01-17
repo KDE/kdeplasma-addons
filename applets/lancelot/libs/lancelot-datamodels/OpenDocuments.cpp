@@ -182,7 +182,7 @@ void OpenDocuments::activate(int index)
     if (valid && m_tasks.contains(wid)) {
         m_tasks[wid]->activate();
     }
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
 } // namespace Models

@@ -105,7 +105,7 @@ void MessagesKmail::activate(int index)
     } else {
         BaseModel::activate(index);
     }
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
 void MessagesKmail::load()

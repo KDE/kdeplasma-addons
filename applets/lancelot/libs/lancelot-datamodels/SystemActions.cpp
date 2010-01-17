@@ -387,7 +387,7 @@ void Sessions::activate(int index)
         return;
     }
 
-    hideLancelotWindow();
+    hideApplicationWindow();
 
     if (data == "display-manager-error") {
         KMessageBox::error(
@@ -440,7 +440,7 @@ void Sessions::activate(int index)
         }
     }
 
-    hideLancelotWindow();
+    hideApplicationWindow();
 }
 
 Sessions::~Sessions()
