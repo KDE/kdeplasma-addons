@@ -19,6 +19,7 @@
  */
 
 #include "SystemActions.h"
+#include "SystemActions_p.h"
 
 #include <KRun>
 #include <KIcon>
@@ -50,30 +51,39 @@
 namespace Lancelot {
 namespace Models {
 
-SystemActions * SystemActions::m_instance = NULL;
+SystemActions * SystemActions::Private::instance = NULL;
+
+SystemActions::Private::Private(SystemActions * parent)
+    : delayedActivateItemIndex(-1),
+      switchUserModel(NULL),
+      q(parent)
+{
+}
 
 SystemActions::SystemActions()
     : StandardActionTreeModel(NULL),
-      delayedActivateItemIndex(-1)
+      d(new Private(this))
 {
 }
 
 SystemActions::SystemActions(Item * r)
-    : StandardActionTreeModel(r)
+    : StandardActionTreeModel(r),
+      d(new Private(this))
 {
 }
 
 SystemActions::~SystemActions()
 {
+    delete d;
 }
 
 SystemActions * SystemActions::self()
 {
-    if (!m_instance) {
-        m_instance = new SystemActions();
-        m_instance->load();
+    if (!SystemActions::Private::instance) {
+        SystemActions::Private::instance = new SystemActions();
+        SystemActions::Private::instance->load();
     }
-    return m_instance;
+    return SystemActions::Private::instance;
 }
 
 Lancelot::ActionTreeModel * SystemActions::action(const QString & id, bool execute)
@@ -201,7 +211,7 @@ void SystemActions::load()
     }
     add(item);
 
-    switchUserModel = new Lancelot::ActionTreeModelProxy(
+    d->switchUserModel = new Lancelot::ActionTreeModelProxy(
             new Sessions()
             );
     add(new ItemFor(ID_MENU_SWITCH_USER));
@@ -240,7 +250,7 @@ Lancelot::ActionTreeModel * SystemActions::child(int index)
 
     if (root()->children.at(index)->data.toString()
             == ID_MENU_SWITCH_USER) {
-        return switchUserModel;
+        return d->switchUserModel;
     }
 
     return Lancelot::StandardActionTreeModel::child(index);
@@ -249,21 +259,21 @@ Lancelot::ActionTreeModel * SystemActions::child(int index)
 void SystemActions::activate(int index)
 {
     if (index < 0 || index >= root()->children.size()) {
-        delayedActivateItemIndex = -1;
+        d->delayedActivateItemIndex = -1;
         return;
     }
 
-    delayedActivateItemIndex = index;
-    QTimer::singleShot(0, this, SLOT(delayedActivate()));
+    d->delayedActivateItemIndex = index;
+    QTimer::singleShot(0, d, SLOT(delayedActivate()));
 }
 
-void SystemActions::delayedActivate()
+void SystemActions::Private::delayedActivate()
 {
     if (delayedActivateItemIndex < 0) {
         return;
     }
 
-    QString cmd = root()->children.at(delayedActivateItemIndex)->data.toString();
+    QString cmd = q->root()->children.at(delayedActivateItemIndex)->data.toString();
 
     if (cmd == ID_SUSPEND_DISK || cmd == ID_SUSPEND_RAM) {
         QDBusConnection dbus(QDBusConnection::sessionBus());
@@ -313,48 +323,32 @@ void SystemActions::delayedActivate()
         KWorkSpace::requestShutDown(confirm, type);
         return;
     }
-
-    // Solid related
-
-    // KJob * job = NULL;
-    // Solid::Control::PowerManager::SuspendMethod method =
-    //     Solid::Control::PowerManager::UnknownSuspendMethod;
-
-    // if (cmd == ID_SUSPEND_DISK) {
-    //     method = Solid::Control::PowerManager::ToDisk;
-    // } else if (cmd == ID_SUSPEND_RAM) {
-    //     method = Solid::Control::PowerManager::ToRam;
-    // }
-
-    // if (method) {
-    //     ApplicationConnector::self()->hide(true);
-    //     job = Solid::Control::PowerManager::suspend(method);
-    //     if (job) {
-    //         job->start();
-    //     }
-    //     return;
-    // }
 }
 
 // Sessions
 Sessions::Sessions()
-    : BaseModel()
+    : BaseModel(), d(new Private())
 {
     load();
+}
+
+Sessions::~Sessions()
+{
+    delete d;
 }
 
 void Sessions::load()
 {
     if (KAuthorized::authorizeKAction("start_new_session") &&
-        dm.isSwitchable() &&
-        dm.numReserve() >= 0) {
+        d->dm.isSwitchable() &&
+        d->dm.numReserve() >= 0) {
         add(
             i18n("New Session"), "",
             KIcon("system-switch-user"), ID_MENU_SWITCH_USER);
     }
 
     SessList sessions;
-    dm.localSessions(sessions);
+    d->dm.localSessions(sessions);
 
     foreach (const SessEnt& session, sessions) {
         if (session.self) {
@@ -426,25 +420,21 @@ void Sessions::activate(int index)
                 "/ScreenSaver", "org.freedesktop.ScreenSaver");
         screensaver.call( "Lock" );
 
-        dm.startReserve();
+        d->dm.startReserve();
         return;
     }
 
     SessList sessions;
-    if (dm.localSessions(sessions)) {
+    if (d->dm.localSessions(sessions)) {
         foreach (const SessEnt &session, sessions) {
             if (data == KDisplayManager::sess2Str(session)) {
-                dm.lockSwitchVT(session.vt);
+                d->dm.lockSwitchVT(session.vt);
                 break;
             }
         }
     }
 
     hideApplicationWindow();
-}
-
-Sessions::~Sessions()
-{
 }
 
 } // namespace Models

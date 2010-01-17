@@ -64,20 +64,16 @@ public:
 
     void activate(int index);
 
-private Q_SLOTS:
-    void delayedActivate();
-
 private:
-    int delayedActivateItemIndex;
     explicit SystemActions(Item * root);
     explicit SystemActions();
 
-    Lancelot::ActionTreeModelProxy * switchUserModel;
+    class Private;
+    Private * const d;
 
-    static SystemActions * m_instance;
 };
 
-class Sessions: public BaseModel {
+class LANCELOT_EXPORT Sessions: public BaseModel {
     Q_OBJECT
 public:
     Sessions();
@@ -87,7 +83,8 @@ public:
     void activate(int index);
 
 private:
-    KDisplayManager dm;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models
