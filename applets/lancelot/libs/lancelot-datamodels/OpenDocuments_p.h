@@ -17,12 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_OPENDOCUMENTS_H
-#define LANCELOTAPP_MODELS_OPENDOCUMENTS_H
+#ifndef LANCELOTAPP_MODELS_OPENDOCUMENTS_P_H
+#define LANCELOTAPP_MODELS_OPENDOCUMENTS_P_H
 
-#include <lancelot/lancelot_export.h>
-
-#include "BaseModel.h"
+#include "OpenDocuments.h"
 #include <taskmanager/taskmanager.h>
 #include <QSet>
 
@@ -31,20 +29,38 @@ using TaskManager::TaskPtr;
 namespace Lancelot {
 namespace Models {
 
-class LANCELOT_EXPORT OpenDocuments : public BaseModel {
+class SupportedTask {
+public:
+    explicit SupportedTask(const QString & classPattern = 0,
+            const QString & documentNameExtractor = 0);
+    QRegExp m_classPattern;
+    QRegExp m_documentNameExtractor;
+};
+
+class OpenDocuments::Private : public QObject {
     Q_OBJECT
 public:
-    OpenDocuments();
-    virtual ~OpenDocuments();
+    Private(OpenDocuments * parent);
 
-protected:
-    void activate(int index);
-    void load();
+public Q_SLOTS:
+    void taskChanged();
+    void taskAdded(TaskPtr task);
+    void taskRemoved(TaskPtr task);
+
+    void connectTask(TaskPtr task);
+    bool setDataForTask(TaskPtr task);
+
+    int indexOf(WId wid);
+
+public:
+    QMap <WId, TaskPtr > tasks;
+    QList <SupportedTask> supportedTasks;
 
 private:
-    class Private;
-    Private * const d;
+    OpenDocuments * const q;
+
 };
+
 
 } // namespace Models
 } // namespace Lancelot

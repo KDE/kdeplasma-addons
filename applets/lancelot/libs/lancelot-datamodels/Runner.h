@@ -87,6 +87,7 @@ public Q_SLOTS:
      */
     void setSearchString(const QString & search);
 
+protected Q_SLOTS:
     /**
      * Sets the search results
      * @param matches results

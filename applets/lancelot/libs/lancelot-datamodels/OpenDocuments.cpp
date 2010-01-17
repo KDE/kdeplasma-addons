@@ -19,25 +19,32 @@
  */
 
 #include "OpenDocuments.h"
+#include "OpenDocuments_p.h"
 #include <KIcon>
 #include <QDebug>
 
 namespace Lancelot {
 namespace Models {
 
-OpenDocuments::SupportedTask::SupportedTask(const QString & classPattern,
+SupportedTask::SupportedTask(const QString & classPattern,
         const QString & documentNameExtractor)
     : m_classPattern(classPattern), m_documentNameExtractor(documentNameExtractor)
 {
 }
 
+OpenDocuments::Private::Private(OpenDocuments * parent)
+    : q(parent)
+{
+}
+
 OpenDocuments::OpenDocuments()
+    : d(new Private(this))
 {
     setSelfTitle(i18nc("@title Title of a list of documents that are open",
             "Open documents"));
     setSelfIcon(KIcon("document-edit"));
 
-    m_supportedTasks
+    d->supportedTasks
         // KDE applications
         << SupportedTask("(kate|kwrite|kword|krita|karbon|kchart|kexi|kformula|kpresenter|kspread).*", ".*([^/]+) . ([^ ]*)")
 
@@ -57,7 +64,7 @@ OpenDocuments::~OpenDocuments()
 {
 }
 
-void OpenDocuments::connectTask(TaskPtr task)
+void OpenDocuments::Private::connectTask(TaskPtr task)
 {
     Q_ASSERT(task);
     connect(
@@ -69,39 +76,39 @@ void OpenDocuments::connectTask(TaskPtr task)
 void OpenDocuments::load()
 {
     foreach (TaskPtr task, TaskManager::TaskManager::self()->tasks()) {
-        if (setDataForTask(task)) {
-            connectTask(task);
+        if (d->setDataForTask(task)) {
+            d->connectTask(task);
         }
     }
 
     connect(
         TaskManager::TaskManager::self(), SIGNAL(taskAdded(TaskPtr)),
-        this, SLOT(taskAdded(TaskPtr))
+        d, SLOT(taskAdded(TaskPtr))
     );
 
     connect(
         TaskManager::TaskManager::self(), SIGNAL(taskRemoved(TaskPtr)),
-        this, SLOT(taskRemoved(TaskPtr))
+        d, SLOT(taskRemoved(TaskPtr))
     );
 }
 
-void OpenDocuments::taskAdded(TaskPtr task)
+void OpenDocuments::Private::taskAdded(TaskPtr task)
 {
     connectTask(task);
     setDataForTask(task);
 }
 
-void OpenDocuments::taskRemoved(TaskPtr task)
+void OpenDocuments::Private::taskRemoved(TaskPtr task)
 {
     Q_ASSERT(task);
     int index = indexOf(task->window());
     if (index != -1) {
-        removeAt(index);
-        m_tasks.remove(task->window());
+        q->removeAt(index);
+        tasks.remove(task->window());
     }
 }
 
-void OpenDocuments::taskChanged()
+void OpenDocuments::Private::taskChanged()
 {
     TaskManager::Task* task = qobject_cast<TaskManager::Task*>(sender());
     Q_ASSERT(task);
@@ -109,14 +116,14 @@ void OpenDocuments::taskChanged()
     setDataForTask(TaskPtr(task));
 }
 
-bool OpenDocuments::setDataForTask(TaskPtr task)
+bool OpenDocuments::Private::setDataForTask(TaskPtr task)
 {
     Q_ASSERT(task);
 
     QRegExp extractor;
     QString className = task->className();
 
-    foreach (const SupportedTask &st, m_supportedTasks) {
+    foreach (const SupportedTask &st, supportedTasks) {
         // qDebug() << "OpenDocuments::setDataForTask" << task->className() << task->visibleName();
         if (st.m_classPattern.exactMatch(task->className())) {
             extractor = st.m_documentNameExtractor;
@@ -129,11 +136,11 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
     int index = indexOf(task->window());
     if (index == -1) {
-        index = size();
-        add (
+        index = q->size();
+        q->add (
             "", "", QIcon(), uint(task->window())
         );
-        m_tasks[task->window()] = task;
+        tasks[task->window()] = task;
     }
 
     QString title = task->visibleName();
@@ -145,15 +152,15 @@ bool OpenDocuments::setDataForTask(TaskPtr task)
 
     QIcon icon = QIcon(task->icon(32, 32));
 
-    set(index, title, description, icon, uint(task->window()));
+    q->set(index, title, description, icon, uint(task->window()));
 
     return true;
 }
 
-int OpenDocuments::indexOf(WId wid)
+int OpenDocuments::Private::indexOf(WId wid)
 {
-    for (int i = size() - 1; i >= 0; i--) {
-        const Item * item = & itemAt(i);
+    for (int i = q->size() - 1; i >= 0; i--) {
+        const Item * item = & q->itemAt(i);
         if (item->data.toUInt() == wid) {
             return i;
         }
@@ -179,8 +186,8 @@ void OpenDocuments::activate(int index)
 {
     bool valid = true;
     WId wid = itemAt(index).data.toUInt(&valid);
-    if (valid && m_tasks.contains(wid)) {
-        m_tasks[wid]->activate();
+    if (valid && d->tasks.contains(wid)) {
+        d->tasks[wid]->activate();
     }
     hideApplicationWindow();
 }
@@ -189,3 +196,4 @@ void OpenDocuments::activate(int index)
 } // namespace Lancelot
 
 #include "OpenDocuments.moc"
+#include "OpenDocuments_p.moc"
