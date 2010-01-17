@@ -57,7 +57,7 @@ protected:
 
     void load();
 
-private Q_SLOTS:
+protected Q_SLOTS:
     void unreadCountChanged();
 
 private:

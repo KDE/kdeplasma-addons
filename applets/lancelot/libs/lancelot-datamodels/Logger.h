@@ -54,7 +54,7 @@ public:
     /**
      * @returns the path where the log files are located
      */
-    QString path() const;
+    static QString path();
 
     /**
      * @returns the size of the log in bytes
@@ -77,16 +77,13 @@ public:
     bool isEnabled() const;
 
 private:
-    void openFile();
-    void closeFile();
-
-    static Logger * m_instance;
-
-    QIODevice * m_file;
-    QDataStream * m_stream;
+    class Private;
+    Private * const d;
 
     Logger(bool enabled);
     virtual ~Logger();
+
+    static Logger * m_instance;
 };
 
 } // namespace Models

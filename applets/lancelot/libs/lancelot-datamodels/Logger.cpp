@@ -30,10 +30,24 @@
 namespace Lancelot {
 namespace Models {
 
+class Logger::Private {
+public:
+    Private()
+        : file(NULL), stream(NULL)
+    {
+    }
+
+    void openFile();
+    void closeFile();
+
+    QIODevice * file;
+    QDataStream * stream;
+};
+
 Logger * Logger::m_instance = NULL;
 
 Logger::Logger(bool enabled)
-    : m_file(NULL), m_stream(NULL)
+    : d(new Private())
 {
     setEnabled(enabled);
 }
@@ -67,12 +81,12 @@ void Logger::log(
 
     QDateTime timestamp = QDateTime::currentDateTime();
 
-    (*m_stream) << source
+    (*d->stream) << source
              << message
              << timestamp;
 }
 
-QString Logger::path() const
+QString Logger::path()
 {
     QDir dir;
     QString path = KStandardDirs::locateLocal("data", "lancelot", true);
@@ -90,7 +104,9 @@ QString Logger::path() const
         notify->setText(i18n("Usage logging is activated."));
         notify->setPixmap(KIcon("view-history").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
         notify->setActions(QStringList(i18n("Configure")));
-        connect(notify, SIGNAL(activated(unsigned int)), this, SLOT(configureMenu()));
+
+        QObject::connect(notify, SIGNAL(activated(unsigned int)), Logger::self(), SLOT(configureMenu()));
+
         notify->sendEvent();
     }
 
@@ -114,27 +130,27 @@ void Logger::clear()
 void Logger::setEnabled(bool value)
 {
     if (value) {
-        openFile();
+        d->openFile();
     } else {
-        closeFile();
+        d->closeFile();
     }
 }
 
 bool Logger::isEnabled() const
 {
-    return m_file != NULL;
+    return d->file != NULL;
 }
 
-void Logger::openFile()
+void Logger::Private::openFile()
 {
-    if (m_file) {
+    if (file) {
         return;
     }
 
-    m_file = new QFile(path());
-    if (m_file->open(QIODevice::WriteOnly | QIODevice::Unbuffered | QIODevice::Append)) {
-        m_stream = new QDataStream(m_file);
-        m_stream->setVersion(QDataStream::Qt_4_0);
+    file = new QFile(Logger::path());
+    if (file->open(QIODevice::WriteOnly | QIODevice::Unbuffered | QIODevice::Append)) {
+        stream = new QDataStream(file);
+        stream->setVersion(QDataStream::Qt_4_0);
     } else {
         KNotification * notify = new KNotification("ErrorOpeningLog");
         notify->setText(i18n("Failed to open the log file. Logging is disabled."));
@@ -142,21 +158,21 @@ void Logger::openFile()
         notify->sendEvent();
 
         // Show error message
-        delete m_file;
+        delete file;
     }
 }
 
-void Logger::closeFile()
+void Logger::Private::closeFile()
 {
-    if (!m_file) {
+    if (!file) {
         return;
     }
 
-    delete m_stream;
-    m_file->close();
-    delete m_file;
+    delete stream;
+    file->close();
+    delete file;
 
-    m_file = NULL;
+    file = NULL;
 }
 
 } // namespace Models
