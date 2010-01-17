@@ -19,6 +19,7 @@
  */
 
 #include "Devices.h"
+#include "Devices_p.h"
 
 #include <KMessageBox>
 #include <KRun>
@@ -44,9 +45,16 @@
 namespace Lancelot {
 namespace Models {
 
-Devices::Devices(Type filter)
-    : m_filter(filter)
+Devices::Private::Private(Devices * parent)
+    : q(parent)
 {
+}
+
+Devices::Devices(Type filter)
+    : d(new Private(this))
+{
+    d->filter = filter;
+
     switch (filter) {
         case Models::Devices::Removable:
             setSelfTitle(i18nc("Removable devices", "Removable"));
@@ -63,39 +71,40 @@ Devices::Devices(Type filter)
     load();
 
     connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceAdded(QString)),
-        this, SLOT(deviceAdded(QString)));
+        d, SLOT(deviceAdded(QString)));
     connect(Solid::DeviceNotifier::instance(), SIGNAL(deviceRemoved(QString)),
-        this, SLOT(deviceRemoved(QString)));
+        d, SLOT(deviceRemoved(QString)));
 }
 
 Devices::~Devices()
 {
+    delete d;
 }
 
-void Devices::deviceRemoved(const QString & udi)
+void Devices::Private::deviceRemoved(const QString & udi)
 {
-    for (int i = size() - 1; i >= 0; i--) {
-        const Item * item = & itemAt(i);
+    for (int i = q->size() - 1; i >= 0; i--) {
+        const Item * item = & q->itemAt(i);
         if (item->data.toString() == udi) {
-            removeAt(i);
+            q->removeAt(i);
             return;
         }
     }
 }
 
-void Devices::deviceAdded(const QString & udi)
+void Devices::Private::deviceAdded(const QString & udi)
 {
     addDevice(Solid::Device(udi));
 }
 
-void Devices::addDevice(const Solid::Device & device)
+void Devices::Private::addDevice(const Solid::Device & device)
 {
     const Solid::StorageAccess * access = device.as < Solid::StorageAccess > ();
 
     if (!access) return;
 
     // Testing if it is removable
-    if (m_filter != All) {
+    if (filter != All) {
         bool removable;
 
         Solid::StorageDrive *drive = 0;
@@ -107,7 +116,7 @@ void Devices::addDevice(const Solid::Device & device)
         }
 
         removable = (drive && (drive->isHotpluggable() || drive->isRemovable()));
-        if ((m_filter == Removable) == !removable) return; // Dirty trick simulating XOR
+        if ((filter == Removable) == !removable) return; // Dirty trick simulating XOR
     }
 
     connect (
@@ -120,7 +129,7 @@ void Devices::addDevice(const Solid::Device & device)
         description = i18n("Unmounted");
     }
 
-    add(
+    q->add(
         device.product(),
         description,
         KIcon(device.icon()),
@@ -128,21 +137,21 @@ void Devices::addDevice(const Solid::Device & device)
     );
 }
 
-void Devices::udiAccessibilityChanged(bool accessible, const QString & udi)
+void Devices::Private::udiAccessibilityChanged(bool accessible, const QString & udi)
 {
     Q_UNUSED(accessible);
 
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
 
-    for (int i = size() - 1; i >= 0; i--) {
-        Item * item = const_cast < Item * > (& itemAt(i));
+    for (int i = q->size() - 1; i >= 0; i--) {
+        Item * item = const_cast < Item * > (& q->itemAt(i));
         if (item->data.toString() == udi) {
             item->description = access->filePath();
             if (!access->isAccessible() || item->description.isEmpty()) {
                 item->description = i18n("Unmounted");
             }
 
-            emit itemAltered(i);
+            emit q->itemAltered(i);
             return;
         }
     }
@@ -160,14 +169,14 @@ void Devices::load()
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
     }
-    m_xmlReader.setDevice(& file);
+    d->xmlReader.setDevice(& file);
 
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!d->xmlReader.atEnd()) {
+        d->xmlReader.readNext();
 
-        if (m_xmlReader.isStartElement()) {
-            if (m_xmlReader.name() == "xbel") {
-                readXbel();
+        if (d->xmlReader.isStartElement()) {
+            if (d->xmlReader.name() == "xbel") {
+                d->readXbel();
             }
         }
     }
@@ -175,57 +184,57 @@ void Devices::load()
     // Loading items
     setEmitInhibited(true);
     foreach(const Solid::Device & device, deviceList) {
-        if (!m_udis.contains(device.udi())) {
-            addDevice(device);
+        if (!d->udis.contains(device.udi())) {
+            d->addDevice(device);
         }
     }
     setEmitInhibited(false);
     emit updated();
 }
 
-void Devices::readXbel()
+void Devices::Private::readXbel()
 {
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNext();
 
-        if (m_xmlReader.isEndElement() &&
-                m_xmlReader.name() == "xbel")
+        if (xmlReader.isEndElement() &&
+                xmlReader.name() == "xbel")
             break;
 
-        if (m_xmlReader.isStartElement()) {
-            if (m_xmlReader.name() == "separator")
+        if (xmlReader.isStartElement()) {
+            if (xmlReader.name() == "separator")
                 readItem();
         }
     }
 }
 
-void Devices::readItem()
+void Devices::Private::readItem()
 {
     QString udi;
     bool showItem = true;
 
-    while (!m_xmlReader.atEnd()) {
-        m_xmlReader.readNext();
+    while (!xmlReader.atEnd()) {
+        xmlReader.readNext();
 
-        if (m_xmlReader.isEndElement() && m_xmlReader.name() == "separator") {
+        if (xmlReader.isEndElement() && xmlReader.name() == "separator") {
             break;
         }
 
-        if (m_xmlReader.name() == "UDI") {
-            udi = m_xmlReader.readElementText();
-        } else if (m_xmlReader.name() == "IsHidden") {
-            if (m_xmlReader.readElementText() == "true") {
+        if (xmlReader.name() == "UDI") {
+            udi = xmlReader.readElementText();
+        } else if (xmlReader.name() == "IsHidden") {
+            if (xmlReader.readElementText() == "true") {
                 showItem = false;
             }
         }
     }
 
     if (!showItem) {
-        m_udis << udi;
+        udis << udi;
     }
 }
 
-void Devices::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
+void Devices::Private::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
 {
     Q_UNUSED(mountPoint);
     Q_UNUSED(kbSize);
@@ -240,7 +249,7 @@ void Devices::activate(int index)
     QString udi = itemAt(index).data.toString();
     Logger::self()->log("devices-model", udi);
 
-    setupDevice(udi, true);
+    d->setupDevice(udi, true);
 }
 
 bool Devices::hasContextActions(int index) const
@@ -279,22 +288,19 @@ void Devices::contextActivate(int index, QAction * context)
     int data = context->data().toInt();
 
     if (data == 0) {
-        tearDevice(udi);
+        d->tearDevice(udi);
     } else if (data == 1) {
-        setupDevice(udi, false);
+        d->setupDevice(udi, false);
     }
 }
 
-void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi)
+void Devices::Private::deviceSetupDone(Solid::ErrorType err, QVariant errorData, const QString & udi)
 {
-    Q_UNUSED(error);
-    Q_UNUSED(errorData);
-
     Solid::StorageAccess * access = Solid::Device(udi).as<Solid::StorageAccess>();
     access->disconnect(this, SLOT(deviceSetupDone(Solid::ErrorType, QVariant, const QString &)));
 
-    if (error || !access || !access->isAccessible()) {
-        m_error = errorData.toString();
+    if (err || !access || !access->isAccessible()) {
+        error = errorData.toString();
         QTimer::singleShot(0, this, SLOT(showError()));
         return;
     }
@@ -303,7 +309,7 @@ void Devices::deviceSetupDone(Solid::ErrorType error, QVariant errorData, const 
     hideApplicationWindow();
 }
 
-void Devices::tearDevice(const QString & udi)
+void Devices::Private::tearDevice(const QString & udi)
 {
     Solid::Device device(udi);
     if (device.is<Solid::OpticalDisc>()) {
@@ -318,7 +324,7 @@ void Devices::tearDevice(const QString & udi)
     }
 }
 
-void Devices::setupDevice(const QString & udi, bool openAfterSetup)
+void Devices::Private::setupDevice(const QString & udi, bool openAfterSetup)
 {
     Solid::StorageAccess * access = Solid::Device(udi).as < Solid::StorageAccess > ();
 
@@ -337,9 +343,9 @@ void Devices::setupDevice(const QString & udi, bool openAfterSetup)
     }
 }
 
-void Devices::showError()
+void Devices::Private::showError()
 {
-    KMessageBox::detailedError(NULL, i18n("The requested device can not be accessed."), m_error, i18n("Failed to open"));
+    KMessageBox::detailedError(NULL, i18n("The requested device can not be accessed."), error, i18n("Failed to open"));
 }
 
 QMimeData * Devices::mimeData(int index) const

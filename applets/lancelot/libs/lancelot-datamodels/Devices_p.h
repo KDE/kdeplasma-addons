@@ -17,12 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LANCELOTAPP_MODELS_DEVICES_H
-#define LANCELOTAPP_MODELS_DEVICES_H
+#ifndef LANCELOTAPP_MODELS_DEVICES_PH
+#define LANCELOTAPP_MODELS_DEVICES_PH
 
-#include <lancelot/lancelot_export.h>
-
-#include "BaseModel.h"
+#include "Devices.h"
 #include <solid/device.h>
 #include <solid/storageaccess.h>
 #include <QXmlStreamReader>
@@ -30,30 +28,36 @@
 namespace Lancelot {
 namespace Models {
 
-class LANCELOT_EXPORT Devices : public BaseModel {
+class Devices::Private: public QObject {
     Q_OBJECT
 public:
-    enum Type {
-        Fixed = 1,
-        Removable = 2,
-        All = 0
-    };
+    Private(Devices * parent);
 
-    Devices(Type filter = All);
-    virtual ~Devices();
+public Q_SLOTS:
+    void deviceRemoved(const QString & udi);
+    void deviceAdded(const QString & udi);
+    void freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable);
+    void udiAccessibilityChanged(bool accessible, const QString & udi);
 
-    L_Override bool hasContextActions(int index) const;
-    L_Override void setContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override void contextActivate(int index, QAction * context);
-    L_Override QMimeData * mimeData(int index) const;
+    void deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi);
 
-protected:
-    void activate(int index);
-    void load();
+    void tearDevice(const QString & udi);
+    void setupDevice(const QString & udi, bool openAfterSetup);
+    void showError();
+
+public:
+    void readXbel();
+    void readItem();
+
+    void addDevice(const Solid::Device & device);
+
+    QString error;
+    QStringList udis;
+    Type filter;
+    QXmlStreamReader xmlReader;
 
 private:
-    class Private;
-    Private * const d;
+    Devices * const q;
 };
 
 } // namespace Models
