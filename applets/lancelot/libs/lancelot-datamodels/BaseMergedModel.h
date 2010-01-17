@@ -27,20 +27,46 @@
 namespace Lancelot {
 namespace Models {
 
+/**
+ * Provides a basic implementation of Lancelot::MergedActionListModel
+ * with drag and drop support
+ */
 class LANCELOT_EXPORT BaseMergedModel: public Lancelot::MergedActionListModel {
 public:
+    /**
+     * Creates a new instance of BaseMergedModel
+     */
     BaseMergedModel();
+
+    /**
+     * Deletes this BaseMergedModel
+     */
     ~BaseMergedModel();
 
+    /**
+     * Adds a new model to the merged model
+     * @param id id of the model to be added
+     * @param icon icon of the model to be added
+     * @param title title of the model to be added
+     * @param model model to be added
+     */
     void addModel(const QString & id, QIcon icon,
             const QString & title, ActionListModel * model);
+
+    /**
+     * Adds a new model to the merged model.
+     * @param id id of the model to be added
+     * @param model model to be added
+     */
     void addModel(const QString & id, ActionListModel * model);
+
     L_Override QMimeData * modelMimeData(int index) const;
     L_Override void setModelDropActions(int index,
             Qt::DropActions & actions, Qt::DropAction & defaultAction);
 
 private:
-    QList < QString > m_modelIDs;
+    class Private;
+    Private * const d;
 };
 
 } // namespace Models

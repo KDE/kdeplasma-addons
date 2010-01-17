@@ -26,14 +26,21 @@
 namespace Lancelot {
 namespace Models {
 
+class BaseMergedModel::Private {
+public:
+    QList < QString > modelIDs;
+};
+
 BaseMergedModel::BaseMergedModel()
-    : Lancelot::MergedActionListModel()
+    : Lancelot::MergedActionListModel(),
+      d(new Private())
 {
 
 }
 
 BaseMergedModel::~BaseMergedModel()
 {
+    delete d;
 }
 
 void BaseMergedModel::addModel(const QString & id, ActionListModel * model)
@@ -44,20 +51,20 @@ void BaseMergedModel::addModel(const QString & id, ActionListModel * model)
 void BaseMergedModel::addModel(const QString & id, QIcon icon,
         const QString & title, ActionListModel * model)
 {
-    m_modelIDs.append(id);
+    d->modelIDs.append(id);
     Lancelot::MergedActionListModel::addModel(icon, title, model);
 }
 
 QMimeData * BaseMergedModel::modelMimeData(int index) const
 {
-    if ((index < 0) || (index >= m_modelIDs.size())) {
+    if ((index < 0) || (index >= d->modelIDs.size())) {
         return NULL;
     }
 
     QMap < QString , QString > map;
     map["version"] = "1.0";
     map["type"]    = "list";
-    map["model"]   = m_modelIDs.at(index);
+    map["model"]   = d->modelIDs.at(index);
 
     QMimeData * data = new QMimeData();
     data->setData("text/x-lancelotpart", Serializator::serialize(map).toAscii());

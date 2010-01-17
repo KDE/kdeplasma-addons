@@ -45,6 +45,7 @@ Applications::Private::Private(Applications * parent)
 
 Applications::Private::~Private()
 {
+    clear();
 }
 
 void Applications::Private::sycocaUpdated(const QStringList & resources)
@@ -152,7 +153,7 @@ Applications::Applications(QString root, QString title, QIcon icon, bool flat)
 
 Applications::~Applications()
 {
-    d->clear();
+    delete d;
 }
 
 QString Applications::title(int index) const
