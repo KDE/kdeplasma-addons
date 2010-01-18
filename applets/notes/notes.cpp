@@ -715,6 +715,12 @@ void Notes::createTextFormatingWidgets()
     connect(actionStrikeThrough, SIGNAL(triggered()), m_textEdit->native, SLOT(strikeOut()));
     connect(actionCenter, SIGNAL(triggered()), m_textEdit->native, SLOT(justifyCenter()));
     connect(actionFill, SIGNAL(triggered()), m_textEdit->native, SLOT(justifyFill()));
+    connect(actionItalic, SIGNAL(triggered()), this, SLOT(updateOptions()));
+    connect(actionBold, SIGNAL(triggered()), this, SLOT(updateOptions()));
+    connect(actionUnderline, SIGNAL(triggered()), this, SLOT(updateOptions()));
+    connect(actionStrikeThrough, SIGNAL(triggered()), this, SLOT(updateOptions()));
+    connect(actionCenter, SIGNAL(triggered()), this, SLOT(updateOptions()));
+    connect(actionFill, SIGNAL(triggered()), this, SLOT(updateOptions()));
 
     QGraphicsWidget *widget = new QGraphicsWidget(this);
     widget->setMaximumHeight(25);
@@ -774,6 +780,8 @@ void Notes::createTextFormatingWidgets()
 
     showOptions(false);
     connect(m_buttonOption->nativeWidget(), SIGNAL(toggled(bool)), this, SLOT(showOptions(bool)));
+    
+    connect(m_textEdit->nativeWidget(), SIGNAL(cursorPositionChanged()), this, SLOT(updateOptions()));
 }
 
 void Notes::showOptions(bool show)
@@ -789,6 +797,16 @@ void Notes::showOptions(bool show)
     }
 
     m_buttonAnimGroup->start();
+}
+
+void Notes::updateOptions()
+{
+    m_buttonBold->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontWeight() == QFont::Bold);
+    m_buttonItalic->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontItalic());
+    m_buttonUnderline->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontUnderline());
+    m_buttonStrikeThrough->nativeWidget()->setDown(m_textEdit->nativeWidget()->currentFont().strikeOut());
+    m_buttonCenter->nativeWidget()->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignHCenter);
+    m_buttonFill->nativeWidget()->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignJustify);
 }
 
 #include "notes.moc"

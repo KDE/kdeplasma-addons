@@ -140,6 +140,7 @@ class Notes : public Plasma::Applet
         void increaseFontSize();
         void decreaseFontSize();
         void themeChanged();
+        void updateOptions();
 
     private:
         void createTextFormatingWidgets();
