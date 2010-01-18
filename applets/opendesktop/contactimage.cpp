@@ -46,6 +46,9 @@ ContactImage::ContactImage(DataEngine* engine, QGraphicsWidget* parent)
 
 void ContactImage::setUrl(const QUrl& url)
 {
+    if (!m_engine) {
+        return;
+    }
     if (!m_source.isEmpty()) {
         m_engine->disconnectSource(m_source, this);
     }
