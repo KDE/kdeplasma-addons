@@ -30,6 +30,27 @@
 
 namespace Lancelot {
 
+class PopupListMarginCache: public QObject {
+    Q_OBJECT
+public:
+    static PopupListMarginCache * self();
+
+    int width();
+    int height();
+
+public Q_SLOTS:
+    void plasmaThemeChanged();
+
+private:
+    int m_width;
+    int m_height;
+
+    void updateSizes();
+    static PopupListMarginCache * m_instance;
+    PopupListMarginCache();
+
+};
+
 class PopupList::Private: public QObject {
     Q_OBJECT
 public:

@@ -24,6 +24,8 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
+#include <Plasma/Theme>
+
 #include <KMessageBox>
 
 #define ITEM_HEIGHT 24
@@ -33,6 +35,54 @@
 
 namespace Lancelot {
 
+PopupListMarginCache * PopupListMarginCache::m_instance = NULL;
+
+PopupListMarginCache::PopupListMarginCache()
+    : m_width(-1), m_height(-1)
+{
+}
+
+PopupListMarginCache * PopupListMarginCache::self()
+{
+    if (!m_instance) {
+        m_instance = new PopupListMarginCache();
+        connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()),
+            m_instance, SLOT(plasmaThemeChanged()));
+    }
+    return m_instance;
+}
+
+int PopupListMarginCache::width()
+{
+    if (m_width == -1) {
+        updateSizes();
+    }
+    return m_width;
+}
+
+int PopupListMarginCache::height()
+{
+    if (m_height == -1) {
+        updateSizes();
+    }
+    return m_height;
+}
+
+void PopupListMarginCache::plasmaThemeChanged()
+{
+    m_width = m_height = -1;
+}
+
+void PopupListMarginCache::updateSizes()
+{
+    Plasma::FrameSvg * bgsvg = new Plasma::FrameSvg(this);
+    bgsvg->setImagePath("dialogs/background");
+
+    m_width  = bgsvg->marginSize(Plasma::LeftMargin)
+                + bgsvg->marginSize(Plasma::RightMargin) + 4;
+    m_height = bgsvg->marginSize(Plasma::TopMargin)
+                + bgsvg->marginSize(Plasma::BottomMargin) + 4;
+}
 
 PopupList::Private::Private(PopupList * parent)
     : listModel(NULL),
@@ -213,8 +263,8 @@ void PopupList::updateSize()
             (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT;
     d->list->resize(width, height);
 
-    // TODO: Load margins from the background svg
-    resize(width + 16, height + 16);
+    resize(width  + PopupListMarginCache::self()->width(),
+           height + PopupListMarginCache::self()->height());
 }
 
 void PopupList::exec(const QPoint & p)
