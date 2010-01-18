@@ -97,8 +97,8 @@ void OpenDesktop::init()
     m_geolocation->city = cg.readEntry("geoCity", QString());
     m_geolocation->country = cg.readEntry("geoCountry", QString());
     m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
-    m_geolocation->latitude = cg.readEntry("geoLatitude", 0);
-    m_geolocation->longitude = cg.readEntry("geoLongitude", 0);
+    m_geolocation->latitude = cg.readEntry("geoLatitude", 0.0);
+    m_geolocation->longitude = cg.readEntry("geoLongitude", 0.0);
 
     connectGeolocation();
 }
@@ -218,7 +218,7 @@ void OpenDesktop::showFriendsWidget()
 }
 
 
-void OpenDesktop::connectNearby(int latitude, int longitude)
+void OpenDesktop::connectNearby(qreal latitude, qreal longitude)
 {
     QString src = QString("Near\\provider:%1\\latitude:%2\\longitude:%3\\distance:0")
         .arg(m_provider)
