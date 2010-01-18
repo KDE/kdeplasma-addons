@@ -213,8 +213,13 @@ void PopupList::updateSize()
             (d->list->list()->itemFactory()->itemCount()) * ITEM_HEIGHT;
     d->list->resize(width, height);
 
-    // TODO: Load margins from the background svg
-    resize(width + 16, height + 16);
+    // TODO: Cache the size until theme changes
+    Plasma::FrameSvg * bgsvg = new Plasma::FrameSvg(this);
+    bgsvg->setImagePath("dialogs/background");
+    resize(
+        width + bgsvg->marginSize(Plasma::LeftMargin) + bgsvg->marginSize(Plasma::RightMargin) + 4,
+        height + bgsvg->marginSize(Plasma::TopMargin) + bgsvg->marginSize(Plasma::BottomMargin) + 4
+        );
 }
 
 void PopupList::exec(const QPoint & p)
