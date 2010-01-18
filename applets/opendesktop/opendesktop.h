@@ -80,7 +80,7 @@ class OpenDesktop : public Plasma::PopupApplet
         
     private:
         void connectGeolocation();
-        void connectNearby(const int latitude, const int longitude);
+        void connectNearby(qreal latitude, qreal longitude);
 
         // Configuration dialog
         Ui::opendesktopConfig ui;
