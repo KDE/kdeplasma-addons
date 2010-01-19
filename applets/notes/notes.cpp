@@ -801,12 +801,12 @@ void Notes::showOptions(bool show)
 
 void Notes::updateOptions()
 {
-    m_buttonBold->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontWeight() == QFont::Bold);
-    m_buttonItalic->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontItalic());
-    m_buttonUnderline->nativeWidget()->setDown(m_textEdit->nativeWidget()->fontUnderline());
-    m_buttonStrikeThrough->nativeWidget()->setDown(m_textEdit->nativeWidget()->currentFont().strikeOut());
-    m_buttonCenter->nativeWidget()->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignHCenter);
-    m_buttonFill->nativeWidget()->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignJustify);
+    m_buttonBold->setDown(m_textEdit->nativeWidget()->fontWeight() == QFont::Bold);
+    m_buttonItalic->setDown(m_textEdit->nativeWidget()->fontItalic());
+    m_buttonUnderline->setDown(m_textEdit->nativeWidget()->fontUnderline());
+    m_buttonStrikeThrough->setDown(m_textEdit->nativeWidget()->currentFont().strikeOut());
+    m_buttonCenter->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignHCenter);
+    m_buttonFill->setDown(m_textEdit->nativeWidget()->alignment() == Qt::AlignJustify);
 }
 
 #include "notes.moc"
