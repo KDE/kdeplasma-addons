@@ -18,17 +18,18 @@
  */
 
 #include "LancelotApplet.h"
-#include <KIcon>
 #include <climits>
 
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QGraphicsLinearLayout>
 
-#include <plasma/corona.h>
+#include <KIcon>
 
-#include <lancelot/widgets/HoverIcon.h>
-#include <lancelot/lancelot.h>
+#include <Plasma/Corona>
+
+#include <Lancelot/HoverIcon>
+#include <Lancelot/Lancelot>
 
 #include "lancelot_interface.h"
 #include "../LancelotConfig.h"

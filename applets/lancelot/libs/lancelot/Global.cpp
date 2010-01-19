@@ -27,7 +27,7 @@
 #include <KGlobal>
 #include <KStandardDirs>
 
-#include <plasma/theme.h>
+#include <Plasma/Theme>
 
 namespace Lancelot
 {

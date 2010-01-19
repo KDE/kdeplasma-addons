@@ -23,9 +23,11 @@
 #include <lancelot/lancelot_export.h>
 
 #include "BaseModel.h"
+
 #include <QBasicTimer>
-#include <plasma/runnermanager.h>
-#include <plasma/querymatch.h>
+
+#include <Plasma/RunnerManager>
+#include <Plasma/QueryMatch>
 
 namespace Lancelot {
 namespace Models {

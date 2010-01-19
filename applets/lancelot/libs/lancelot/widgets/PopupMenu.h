@@ -20,7 +20,7 @@
 #ifndef LANCELOT_POPUPMENU_H
 #define LANCELOT_POPUPMENU_H
 
-#include <plasma/dialog.h>
+#include <Plasma/Dialog>
 
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>

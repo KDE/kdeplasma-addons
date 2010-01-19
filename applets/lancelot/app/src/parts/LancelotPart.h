@@ -20,18 +20,20 @@
 #ifndef LANCELOT_PARTS_H
 #define LANCELOT_PARTS_H
 
-#include <KConfigDialog>
 #include <QBasicTimer>
 #include <QGraphicsLinearLayout>
 
-#include <plasma/applet.h>
-#include <plasma/popupapplet.h>
-#include <plasma/widgets/lineedit.h>
+#include <KConfigDialog>
 
-#include <lancelot/Global.h>
-#include <lancelot/widgets/Widget.h>
-#include <lancelot/widgets/ActionListView.h>
-#include <lancelot/layouts/FullBorderLayout.h>
+#include <Plasma/Applet>
+#include <Plasma/PopupApplet>
+#include <Plasma/LineEdit>
+
+#include <Lancelot/Global>
+#include <Lancelot/Widget>
+#include <Lancelot/ActionListView>
+#include <Lancelot/FullBorderLayout>
+
 #include <lancelot-datamodels/Runner.h>
 
 #include "PartsMergedModel.h"

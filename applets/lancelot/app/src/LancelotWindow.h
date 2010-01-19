@@ -28,12 +28,12 @@
 #include <KConfigGroup>
 #include <KIcon>
 
-#include <plasma/svg.h>
-#include <plasma/plasma.h>
-#include <plasma/corona.h>
+#include <Plasma/Svg>
+#include <Plasma/Plasma>
+#include <Plasma/Corona>
 
-#include <lancelot/widgets/PopupList.h>
-#include <lancelot/widgets/PopupMenu.h>
+#include <Lancelot/PopupList>
+#include <Lancelot/PopupMenu>
 
 #include "LancelotConfig.h"
 #include "ui_LancelotWindowBase.h"

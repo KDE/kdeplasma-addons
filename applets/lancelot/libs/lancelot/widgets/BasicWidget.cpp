@@ -25,7 +25,7 @@
 
 #include <KGlobalSettings>
 
-#include <plasma/paintutils.h>
+#include <Plasma/PaintUtils>
 
 #include <cmath>
 

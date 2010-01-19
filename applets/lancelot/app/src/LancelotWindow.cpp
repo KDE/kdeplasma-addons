@@ -18,29 +18,36 @@
  */
 
 #include "LancelotWindow.h"
-#include <kwindowsystem.h>
 
-#include <QGraphicsItem>
-#include <QStyleOptionGraphicsItem>
-#include <QGraphicsView>
 #include <QDesktopWidget>
-
-#include <KRecentDocument>
-#include <KActionCollection>
-#include <KStandardAction>
-#include <KAuthorized>
-#include <KGlobalAccel>
-#include <KShortcutsDialog>
-#include <KConfigDialog>
-#include <KProcess>
-#include <plasma/animator.h>
-#include <plasma/windoweffects.h>
-
+#include <QGraphicsItem>
+#include <QGraphicsView>
+#include <QStyleOptionGraphicsItem>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 
+#include <KAboutApplicationDialog>
+#include <KActionCollection>
+#include <KAuthorized>
+#include <KCmdLineArgs>
+#include <KConfigDialog>
+#include <KGlobalAccel>
+#include <KLineEdit>
+#include <KProcess>
+#include <KRecentDocument>
+#include <KShortcutsDialog>
+#include <KStandardAction>
+#include <KWindowSystem.h>
+
 #include <kworkspace/kworkspace.h>
-#include <lancelot/models/PlasmaServiceListModel.h>
+
+#include <Plasma/Animator>
+#include <Plasma/LineEdit>
+#include <Plasma/WindowEffects>
+
+#include <Lancelot/PlasmaServiceListModel>
+#include <Lancelot/PopupMenu>
+#include <Lancelot/ResizeBordersPanel>
 
 #include <lancelot-datamodels/Serializator.h>
 #include <lancelot-datamodels/Devices.h>
@@ -58,14 +65,6 @@
 #include <lancelot-datamodels/MessagesKmail.h>
 #include <lancelot-datamodels/BaseMergedModel.h>
 #include <lancelot-datamodels/Logger.h>
-
-#include <lancelot/widgets/ResizeBordersPanel.h>
-#include <lancelot/widgets/PopupMenu.h>
-
-#include <KLineEdit>
-#include <Plasma/LineEdit>
-#include <KAboutApplicationDialog>
-#include <KCmdLineArgs>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500

@@ -20,10 +20,13 @@
 #ifndef LANCELOT_APPLET_H
 #define LANCELOT_APPLET_H
 
-#include <plasma/applet.h>
-#include <KConfigDialog>
 #include <QString>
 #include <QPainter>
+
+#include <KConfigDialog>
+
+#include <Plasma/Applet>
+
 #include "LancelotAppletConfig.h"
 #include "../LancelotConfig.h"
 

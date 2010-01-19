@@ -21,7 +21,8 @@
 #define LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 
 #include <lancelot-datamodels/BaseMergedModel.h>
-#include <kfileitem.h>
+
+#include <KFileItem>
 
 namespace Models {
 

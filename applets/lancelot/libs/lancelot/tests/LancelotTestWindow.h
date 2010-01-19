@@ -20,12 +20,14 @@
 #ifndef LANCELOT_TEST_WINDOW_H
 #define LANCELOT_TEST_WINDOW_H
 
-#include <plasma/svg.h>
-#include <plasma/plasma.h>
-#include <plasma/corona.h>
+#include <QGraphicsView>
+
 #include <KConfig>
 #include <KConfigGroup>
-#include <QGraphicsView>
+
+#include <Plasma/Svg>
+#include <Plasma/Plasma>
+#include <Plasma/Corona>
 
 #include <../lancelot.h>
 #include <../Global.h>

@@ -21,7 +21,8 @@
 #define LANCELOT_PART_CONFIG_H
 
 #include <ui_LancelotPartConfigBase.h>
-#include <lancelot/lancelot.h>
+
+#include <Lancelot/Lancelot>
 
 class LancelotPartConfig: public Ui::LancelotPartConfigBase {
 public:

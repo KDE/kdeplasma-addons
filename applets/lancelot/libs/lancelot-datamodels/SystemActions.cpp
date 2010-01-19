@@ -21,21 +21,22 @@
 #include "SystemActions.h"
 #include "SystemActions_p.h"
 
+#include <QDBusInterface>
+
 #include <KRun>
 #include <KIcon>
 #include <KLocalizedString>
 #include <KStandardDirs>
-#include "FavoriteApplications.h"
 #include <KAuthorized>
 #include <KMessageBox>
-#include <QDBusInterface>
-
 #include <KJob>
+
+#include <Plasma/AbstractRunner>
+
 #include <kworkspace/kworkspace.h>
 #include <solid/control/powermanager.h>
 #include <solid/powermanagement.h>
 
-#include <plasma/abstractrunner.h>
 #include "screensaver_interface.h"
 
 #define ID_MENU_LEAVE       "menu-leave"

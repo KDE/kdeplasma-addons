@@ -22,7 +22,7 @@
 
 #include <QtGui/QIcon>
 
-#include <plasma/plasma.h>
+#include <Plasma/Plasma>
 
 #include <lancelot/lancelot_export.h>
 #include <lancelot/widgets/Widget.h>

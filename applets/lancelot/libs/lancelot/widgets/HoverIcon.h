@@ -20,7 +20,7 @@
 #ifndef LANCELOT_HOVER_ICON_H
 #define LANCELOT_HOVER_ICON_H
 
-#include <plasma/widgets/iconwidget.h>
+#include <Plasma/IconWidget>
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>

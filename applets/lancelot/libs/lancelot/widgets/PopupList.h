@@ -20,7 +20,7 @@
 #ifndef LANCELOT_POPUPLIST_H
 #define LANCELOT_POPUPLIST_H
 
-#include <plasma/dialog.h>
+#include <Plasma/Dialog>
 
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>

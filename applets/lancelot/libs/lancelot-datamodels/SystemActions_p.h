@@ -21,6 +21,7 @@
 #define LANCELOTAPP_MODELS_SYSTEM_ACTIONS_P_H
 
 #include "SystemActions.h"
+
 #include <kworkspace/kdisplaymanager.h>
 
 namespace Lancelot {

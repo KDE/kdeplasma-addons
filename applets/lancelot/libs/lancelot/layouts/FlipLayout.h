@@ -23,7 +23,7 @@
 #include <QGraphicsLayout>
 #include <QGraphicsLayoutItem>
 
-#include <plasma/plasma.h>
+#include <Plasma/Plasma>
 
 #include <lancelot/lancelot_export.h>
 

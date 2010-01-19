@@ -21,7 +21,7 @@
 
 #include <QGraphicsScene>
 
-#include <plasma/plasma.h>
+#include <Plasma/Plasma>
 
 namespace Lancelot
 {

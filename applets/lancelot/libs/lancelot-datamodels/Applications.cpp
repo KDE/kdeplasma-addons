@@ -21,16 +21,14 @@
 #include "Applications.h"
 #include "Applications_p.h"
 
-#include "FavoriteApplications.h"
-
-#include <kstandarddirs.h>
-#include <kservicegroup.h>
-
-#include <KRun>
-#include <KUrl>
 #include <KIcon>
+#include <KRun>
+#include <KServiceGroup>
+#include <KStandardDirs>
 #include <KSycoca>
+#include <KUrl>
 
+#include "FavoriteApplications.h"
 #include "Logger.h"
 
 // Applications

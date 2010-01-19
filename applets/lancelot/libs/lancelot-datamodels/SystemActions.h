@@ -20,13 +20,14 @@
 #ifndef LANCELOTAPP_MODELS_SYSTEM_ACTIONS_H
 #define LANCELOTAPP_MODELS_SYSTEM_ACTIONS_H
 
-#include <lancelot/lancelot_export.h>
+#include <Plasma/RunnerManager>
+#include <Plasma/QueryMatch>
 
+#include <lancelot/lancelot_export.h>
 #include <lancelot/models/StandardActionTreeModel.h>
 #include <lancelot/models/ActionTreeModelProxy.h>
+
 #include "BaseModel.h"
-#include <plasma/runnermanager.h>
-#include <plasma/querymatch.h>
 #include "Runner.h"
 
 #include <kworkspace/kdisplaymanager.h>

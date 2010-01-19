@@ -20,7 +20,7 @@
 #include "Panel.h"
 #include "BasicWidget.h"
 
-#include <plasma/framesvg.h>
+#include <Plasma/FrameSvg>
 
 namespace Lancelot
 {

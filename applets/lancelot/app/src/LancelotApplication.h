@@ -27,7 +27,7 @@
 
 #include <KUniqueApplication>
 
-#include <plasma/plasma.h>
+#include <Plasma/Plasma>
 
 class LancelotWindow;
 class KActionCollection;

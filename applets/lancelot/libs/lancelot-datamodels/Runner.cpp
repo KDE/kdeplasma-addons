@@ -18,16 +18,20 @@
  */
 
 #include "Runner.h"
+
+#include <QDebug>
+
 #include <KRun>
 #include <KIcon>
 #include <KLocalizedString>
 #include <KApplication>
 #include <KStandardDirs>
-#include "Logger.h"
-#include <QDebug>
 
-#include <plasma/abstractrunner.h>
+#include <Plasma/AbstractRunner>
+
+#include "Logger.h"
 #include "FavoriteApplications.h"
+
 #define SLEEP 200
 
 namespace Lancelot {

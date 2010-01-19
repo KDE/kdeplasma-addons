@@ -22,13 +22,14 @@
 #include <QIcon>
 #include <QtDBus>
 
-#include <KAction>
-#include <KCrash>
-#include <KCmdLineArgs>
 #include <KAboutData>
+#include <KAction>
+#include <KCmdLineArgs>
+#include <KCrash>
 #include <KLocale>
 
-#include <lancelot/Global.h>
+#include <Lancelot/Global>
+
 #include <lancelot-datamodels/BaseModel.h>
 
 #include "AboutData.h"

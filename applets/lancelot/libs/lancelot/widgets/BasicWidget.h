@@ -23,7 +23,7 @@
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QIcon>
 
-#include <plasma/svg.h>
+#include <Plasma/Svg>
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>

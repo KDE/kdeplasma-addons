@@ -18,16 +18,19 @@
  */
 
 #include "LancelotPart.h"
+
+#include <QGraphicsLayoutItem>
+#include <QGraphicsLayout>
+#include <QDataStream>
+
 #include <KIcon>
 #include <KMimeType>
 #include <KUrl>
 #include <KLineEdit>
-#include <QGraphicsLayoutItem>
-#include <QGraphicsLayout>
-#include <QDataStream>
-#include <plasma/framesvg.h>
-#include <plasma/corona.h>
-#include <plasma/widgets/iconwidget.h>
+
+#include <Plasma/FrameSvg>
+#include <Plasma/Corona>
+#include <Plasma/IconWidget>
 
 #define ACTIVATION_TIME 300
 

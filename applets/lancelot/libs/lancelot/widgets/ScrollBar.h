@@ -23,8 +23,7 @@
 #include <lancelot/lancelot_export.h>
 #include <lancelot/lancelot.h>
 
-// #include <lancelot/widgets/Widget.h>
-#include <plasma/widgets/scrollbar.h>
+#include <Plasma/ScrollBar>
 
 namespace Lancelot
 {

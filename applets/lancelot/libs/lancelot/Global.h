@@ -29,8 +29,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-#include <plasma/framesvg.h>
-#include <plasma/plasma.h>
+#include <Plasma/FrameSvg>
+#include <Plasma/Plasma>
 
 #include <lancelot/lancelot_export.h>
 

@@ -22,7 +22,7 @@
 
 #include <QIcon>
 
-#include <plasma/widgets/svgwidget.h>
+#include <Plasma/SvgWidget>
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
