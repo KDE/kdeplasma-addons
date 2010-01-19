@@ -34,7 +34,7 @@
 #include <Lancelot/ActionListView>
 #include <Lancelot/FullBorderLayout>
 
-#include <Lancelot/DataModels/Runner>
+#include <Lancelot/Models/Runner>
 
 #include "PartsMergedModel.h"
 #include "LancelotPartConfig.h"

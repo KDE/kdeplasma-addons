@@ -125,24 +125,24 @@ install(FILES
 )
 
 install(FILES
-   Lancelot/DataModels/Applications
-   Lancelot/DataModels/BaseMergedModel
-   Lancelot/DataModels/BaseModel
-   Lancelot/DataModels/ContactsKopete
-   Lancelot/DataModels/Devices
-   Lancelot/DataModels/FavoriteApplications
-   Lancelot/DataModels/FolderModel
-   Lancelot/DataModels/Logger
-   Lancelot/DataModels/MessagesKmail
-   Lancelot/DataModels/NewDocuments
-   Lancelot/DataModels/OpenDocuments
-   Lancelot/DataModels/Places
-   Lancelot/DataModels/RecentDocuments
-   Lancelot/DataModels/Runner
-   Lancelot/DataModels/Serializator
-   Lancelot/DataModels/SystemActions
-   Lancelot/DataModels/SystemServices
-   Lancelot/DataModels/XbelModel
-   DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Lancelot/DataModels COMPONENT Devel
+   Lancelot/Models/Applications
+   Lancelot/Models/BaseMergedModel
+   Lancelot/Models/BaseModel
+   Lancelot/Models/ContactsKopete
+   Lancelot/Models/Devices
+   Lancelot/Models/FavoriteApplications
+   Lancelot/Models/FolderModel
+   Lancelot/Models/Logger
+   Lancelot/Models/MessagesKmail
+   Lancelot/Models/NewDocuments
+   Lancelot/Models/OpenDocuments
+   Lancelot/Models/Places
+   Lancelot/Models/RecentDocuments
+   Lancelot/Models/Runner
+   Lancelot/Models/Serializator
+   Lancelot/Models/SystemActions
+   Lancelot/Models/SystemServices
+   Lancelot/Models/XbelModel
+   DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Lancelot/Models COMPONENT Devel
 )
 

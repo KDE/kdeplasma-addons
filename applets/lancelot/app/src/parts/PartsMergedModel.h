@@ -20,7 +20,7 @@
 #ifndef LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 #define LANCELOTPARTS_MODELS_PARTSMERGEDMODEL_H
 
-#include <Lancelot/DataModels/BaseMergedModel>
+#include <Lancelot/Models/BaseMergedModel>
 
 #include <KFileItem>
 

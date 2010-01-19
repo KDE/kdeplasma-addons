@@ -24,21 +24,21 @@
 #include <KLocalizedString>
 #include <KDebug>
 
-#include <Lancelot/DataModels/BaseModel>
-#include <Lancelot/DataModels/Devices>
-#include <Lancelot/DataModels/Places>
-#include <Lancelot/DataModels/SystemServices>
-#include <Lancelot/DataModels/RecentDocuments>
-#include <Lancelot/DataModels/OpenDocuments>
-#include <Lancelot/DataModels/NewDocuments>
-#include <Lancelot/DataModels/FolderModel>
-#include <Lancelot/DataModels/FavoriteApplications>
-#include <Lancelot/DataModels/Applications>
-#include <Lancelot/DataModels/Runner>
-#include <Lancelot/DataModels/ContactsKopete>
-#include <Lancelot/DataModels/MessagesKmail>
-#include <Lancelot/DataModels/SystemActions>
-#include <Lancelot/DataModels/Serializator>
+#include <Lancelot/Models/BaseModel>
+#include <Lancelot/Models/Devices>
+#include <Lancelot/Models/Places>
+#include <Lancelot/Models/SystemServices>
+#include <Lancelot/Models/RecentDocuments>
+#include <Lancelot/Models/OpenDocuments>
+#include <Lancelot/Models/NewDocuments>
+#include <Lancelot/Models/FolderModel>
+#include <Lancelot/Models/FavoriteApplications>
+#include <Lancelot/Models/Applications>
+#include <Lancelot/Models/Runner>
+#include <Lancelot/Models/ContactsKopete>
+#include <Lancelot/Models/MessagesKmail>
+#include <Lancelot/Models/SystemActions>
+#include <Lancelot/Models/Serializator>
 
 namespace Models {
 
