@@ -30,7 +30,7 @@
 
 #include <Lancelot/Global>
 
-#include <lancelot-datamodels/BaseModel.h>
+#include <Lancelot/DataModels/BaseModel>
 
 #include "AboutData.h"
 #include "LancelotWindow.h"

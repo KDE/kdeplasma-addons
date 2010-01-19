@@ -24,21 +24,21 @@
 #include <KLocalizedString>
 #include <KDebug>
 
-#include <lancelot-datamodels/BaseModel.h>
-#include <lancelot-datamodels/Devices.h>
-#include <lancelot-datamodels/Places.h>
-#include <lancelot-datamodels/SystemServices.h>
-#include <lancelot-datamodels/RecentDocuments.h>
-#include <lancelot-datamodels/OpenDocuments.h>
-#include <lancelot-datamodels/NewDocuments.h>
-#include <lancelot-datamodels/FolderModel.h>
-#include <lancelot-datamodels/FavoriteApplications.h>
-#include <lancelot-datamodels/Applications.h>
-#include <lancelot-datamodels/Runner.h>
-#include <lancelot-datamodels/ContactsKopete.h>
-#include <lancelot-datamodels/MessagesKmail.h>
-#include <lancelot-datamodels/SystemActions.h>
-#include <lancelot-datamodels/Serializator.h>
+#include <Lancelot/DataModels/BaseModel>
+#include <Lancelot/DataModels/Devices>
+#include <Lancelot/DataModels/Places>
+#include <Lancelot/DataModels/SystemServices>
+#include <Lancelot/DataModels/RecentDocuments>
+#include <Lancelot/DataModels/OpenDocuments>
+#include <Lancelot/DataModels/NewDocuments>
+#include <Lancelot/DataModels/FolderModel>
+#include <Lancelot/DataModels/FavoriteApplications>
+#include <Lancelot/DataModels/Applications>
+#include <Lancelot/DataModels/Runner>
+#include <Lancelot/DataModels/ContactsKopete>
+#include <Lancelot/DataModels/MessagesKmail>
+#include <Lancelot/DataModels/SystemActions>
+#include <Lancelot/DataModels/Serializator>
 
 namespace Models {
 

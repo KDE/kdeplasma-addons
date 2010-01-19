@@ -23,9 +23,9 @@
 #include <KRun>
 #include <KUrl>
 
-#include <lancelot-datamodels/NewDocuments.h>
-#include <lancelot-datamodels/SystemActions.h>
-#include <lancelot-datamodels/SystemServices.h>
+#include <Lancelot/DataModels/NewDocuments>
+#include <Lancelot/DataModels/SystemActions>
+#include <Lancelot/DataModels/SystemServices>
 
 LancelotConfig::LancelotConfig()
     : systemButtonActionsMenu(NULL), clickedSystemButton(NULL),

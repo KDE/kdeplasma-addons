@@ -8,7 +8,7 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 set(LANCELOT_INCLUDE_DIR
         "${CMAKE_CURRENT_SOURCE_DIR}/.."
-        "${CMAKE_CURRENT_SOURCE_DIR}/includes/"
+        "${CMAKE_CURRENT_SOURCE_DIR}/"
         CACHE STRING
         "Location of liblancelot headers"
         FORCE)
@@ -140,35 +140,35 @@ install(FILES
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/models COMPONENT Devel)
 
 install(FILES
-   includes/Lancelot/ActionListModel
-   includes/Lancelot/ActionListView
-   includes/Lancelot/ActionTreeModel
-   includes/Lancelot/ActionTreeModelProxy
-   includes/Lancelot/BasicWidget
-   includes/Lancelot/CardLayout
-   includes/Lancelot/ColumnLayout
-   includes/Lancelot/CustomListView
-   includes/Lancelot/ExtenderButton
-   includes/Lancelot/FlipLayout
-   includes/Lancelot/FullBorderLayout
-   includes/Lancelot/Global
-   includes/Lancelot/HoverIcon
-   includes/Lancelot/Lancelot
-   includes/Lancelot/LancelotTestApplication
-   includes/Lancelot/LancelotTestWindow
-   includes/Lancelot/MergedActionListModel
-   includes/Lancelot/NodeLayout
-   includes/Lancelot/Panel
-   includes/Lancelot/PassagewayView
-   includes/Lancelot/PlasmaServiceListModel
-   includes/Lancelot/PopupList
-   includes/Lancelot/PopupMenu
-   includes/Lancelot/ResizeBordersPanel
-   includes/Lancelot/ScrollBar
-   includes/Lancelot/ScrollPane
-   includes/Lancelot/StandardActionListModel
-   includes/Lancelot/StandardActionTreeModel
-   includes/Lancelot/Widget
+   Lancelot/ActionListModel
+   Lancelot/ActionListView
+   Lancelot/ActionTreeModel
+   Lancelot/ActionTreeModelProxy
+   Lancelot/BasicWidget
+   Lancelot/CardLayout
+   Lancelot/ColumnLayout
+   Lancelot/CustomListView
+   Lancelot/ExtenderButton
+   Lancelot/FlipLayout
+   Lancelot/FullBorderLayout
+   Lancelot/Global
+   Lancelot/HoverIcon
+   Lancelot/Lancelot
+   Lancelot/LancelotTestApplication
+   Lancelot/LancelotTestWindow
+   Lancelot/MergedActionListModel
+   Lancelot/NodeLayout
+   Lancelot/Panel
+   Lancelot/PassagewayView
+   Lancelot/PlasmaServiceListModel
+   Lancelot/PopupList
+   Lancelot/PopupMenu
+   Lancelot/ResizeBordersPanel
+   Lancelot/ScrollBar
+   Lancelot/ScrollPane
+   Lancelot/StandardActionListModel
+   Lancelot/StandardActionTreeModel
+   Lancelot/Widget
    DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Lancelot COMPONENT Devel)
 
 # tests

@@ -37,7 +37,7 @@
 #include <KRecentDocument>
 #include <KShortcutsDialog>
 #include <KStandardAction>
-#include <KWindowSystem.h>
+#include <KWindowSystem>
 
 #include <kworkspace/kworkspace.h>
 
@@ -49,22 +49,22 @@
 #include <Lancelot/PopupMenu>
 #include <Lancelot/ResizeBordersPanel>
 
-#include <lancelot-datamodels/Serializator.h>
-#include <lancelot-datamodels/Devices.h>
-#include <lancelot-datamodels/Places.h>
-#include <lancelot-datamodels/SystemServices.h>
-#include <lancelot-datamodels/RecentDocuments.h>
-#include <lancelot-datamodels/OpenDocuments.h>
-#include <lancelot-datamodels/NewDocuments.h>
-#include <lancelot-datamodels/FolderModel.h>
-#include <lancelot-datamodels/FavoriteApplications.h>
-#include <lancelot-datamodels/Applications.h>
-#include <lancelot-datamodels/Runner.h>
-#include <lancelot-datamodels/SystemActions.h>
-#include <lancelot-datamodels/ContactsKopete.h>
-#include <lancelot-datamodels/MessagesKmail.h>
-#include <lancelot-datamodels/BaseMergedModel.h>
-#include <lancelot-datamodels/Logger.h>
+#include <Lancelot/DataModels/Serializator>
+#include <Lancelot/DataModels/Devices>
+#include <Lancelot/DataModels/Places>
+#include <Lancelot/DataModels/SystemServices>
+#include <Lancelot/DataModels/RecentDocuments>
+#include <Lancelot/DataModels/OpenDocuments>
+#include <Lancelot/DataModels/NewDocuments>
+#include <Lancelot/DataModels/FolderModel>
+#include <Lancelot/DataModels/FavoriteApplications>
+#include <Lancelot/DataModels/Applications>
+#include <Lancelot/DataModels/Runner>
+#include <Lancelot/DataModels/SystemActions>
+#include <Lancelot/DataModels/ContactsKopete>
+#include <Lancelot/DataModels/MessagesKmail>
+#include <Lancelot/DataModels/BaseMergedModel>
+#include <Lancelot/DataModels/Logger>
 
 #define sectionsWidth 128
 #define windowHeightDefault 500

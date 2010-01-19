@@ -11,6 +11,7 @@ find_package(Lancelot REQUIRED)
 
 set(LANCELOT_DATAMODELS_INCLUDE_DIR
    "${CMAKE_CURRENT_SOURCE_DIR}/.."
+   "${CMAKE_CURRENT_SOURCE_DIR}/"
    CACHE STRING
    "Location of liblancelot-datamodels headers"
    FORCE)
@@ -121,5 +122,27 @@ set(lancelot_datamodels_LIB_INCLUDES
 install(FILES
    ${lancelot_datamodels_LIB_INCLUDES}
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot-datamodels COMPONENT Devel
+)
+
+install(FILES
+   Lancelot/DataModels/Applications
+   Lancelot/DataModels/BaseMergedModel
+   Lancelot/DataModels/BaseModel
+   Lancelot/DataModels/ContactsKopete
+   Lancelot/DataModels/Devices
+   Lancelot/DataModels/FavoriteApplications
+   Lancelot/DataModels/FolderModel
+   Lancelot/DataModels/Logger
+   Lancelot/DataModels/MessagesKmail
+   Lancelot/DataModels/NewDocuments
+   Lancelot/DataModels/OpenDocuments
+   Lancelot/DataModels/Places
+   Lancelot/DataModels/RecentDocuments
+   Lancelot/DataModels/Runner
+   Lancelot/DataModels/Serializator
+   Lancelot/DataModels/SystemActions
+   Lancelot/DataModels/SystemServices
+   Lancelot/DataModels/XbelModel
+   DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Lancelot/DataModels COMPONENT Devel
 )
 
