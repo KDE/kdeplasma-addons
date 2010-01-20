@@ -76,8 +76,8 @@ void MarbleWallpaper::init(const KConfigGroup &config)
         m_map->home(home_lon, home_lat, home_zoom);
 
         // These settings apply to Marble's "satellite" view mostly, e.g. make it beautiful
-        //m_map->setShowClouds(true);   // Note: The cloud layers look ugly over America
-        m_map->sunLocator()->setCitylights(true);
+        m_map->setShowClouds(true);
+        m_map->sunLocator()->setCitylights(false);
         m_map->sunLocator()->setShow(true);
 
         // Disable all render plugins (scale bar, compass, etc.) except the "stars" plugin
