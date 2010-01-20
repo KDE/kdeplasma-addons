@@ -6,7 +6,7 @@
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License as
- *   published by the Free Software Foundation; either version 2 of 
+ *   published by the Free Software Foundation; either version 2 of
  *   the License, or (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
@@ -41,7 +41,7 @@
 #include <Plasma/Theme>
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
-
+#include <plasma/animations/animation.h>
 
 #define AUTO_DEFINE_TIMEOUT 500
 
@@ -97,7 +97,6 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_wordEdit->nativeWidget()->setClearButtonShown( true );
     m_wordEdit->nativeWidget()->setClickMessage(i18n("Enter word to define here"));
     m_wordEdit->show();
-    Plasma::Animator::self()->animateItem(m_wordEdit, Plasma::Animator::AppearAnimation);
 
     // Gets the color scheme from default theme
     KColorScheme colorScheme(QPalette::Active, KColorScheme::View, Plasma::Theme::defaultTheme()->colorScheme());
@@ -167,6 +166,13 @@ QGraphicsWidget *DictApplet::graphicsWidget()
     m_graphicsWidget = new QGraphicsWidget(this);
     m_graphicsWidget->setLayout(m_layout);
     m_graphicsWidget->setPreferredSize(500, 200);
+
+    Animation *zoomAnim =
+        Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+    zoomAnim->setTargetWidget(m_wordEdit);
+    zoomAnim->setProperty("zoom", 1.0);
+    zoomAnim->setProperty("duration", 350);
+    zoomAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
     return m_graphicsWidget;
 }
