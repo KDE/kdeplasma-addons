@@ -114,9 +114,12 @@ QFlags< Qt::DropAction > TaskModel::supportedDropActions() const {
 
 QFlags< Qt::ItemFlag > TaskModel::flags(const QModelIndex& index) const {
   Qt::ItemFlags defaultFlags = QStandardItemModel::flags(index);
+  
+  if (defaultFlags.testFlag(Qt::ItemIsDragEnabled))
+    defaultFlags ^= Qt::ItemIsDragEnabled; // bitwise xor, i.e. remove this flag if it is there.
 
   if (index.data(Qt::RTMItemType).toInt() != RTMTaskItem) //header item
-      return Qt::ItemIsDropEnabled;
+      return Qt::ItemIsDropEnabled | defaultFlags;
   else
       return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | defaultFlags;
 }
