@@ -69,7 +69,7 @@ if ( Qwt5-Qt4_FOUND )
 endif( Qwt5-Qt4_FOUND )
 
 if(NOT WIN32)
-  # add_subdirectory(lancelot)
+  add_subdirectory(lancelot)
   add_subdirectory(incomingmsg)
   add_subdirectory(leavenote)
   add_subdirectory(showdesktop)

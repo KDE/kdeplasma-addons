@@ -47,5 +47,6 @@ add_subdirectory(dataengines)
 add_subdirectory(runners)
 add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
+add_subdirectory(cmake)
 
 macro_display_feature_log()
