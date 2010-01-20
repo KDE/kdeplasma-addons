@@ -7,7 +7,6 @@ SET(CMAKE_C_FLAGS_CODECHECK "${CMAKE_C_FLAGS} -save-temps")
 message("Flags for CodeCheck are ${CMAKE_CXX_FLAGS_CODECHECK}")
 
 add_subdirectory(tools)
-add_subdirectory(libs)
 
 add_subdirectory(app)
 add_subdirectory(cmake)
