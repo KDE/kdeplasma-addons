@@ -103,8 +103,7 @@ class RTM::SessionPrivate {
     reply->deleteLater();
   }
   void settingsReply(RTM::Request* request) {
-    QString reply = request->readAll();
-        
+    QString reply = request->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
     
     // We're basically assuming no error here.... FIXME
     QString timezone = reply.remove(0, reply.indexOf("<timezone>")+10);

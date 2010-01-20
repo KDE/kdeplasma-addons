@@ -62,8 +62,7 @@ void RTM::Auth::showLoginWebpage()
 
 void RTM::Auth::showLoginWindowInternal(RTM::Request *rawReply)
 {
-  QString reply = rawReply->data();
-  //QString reply = rawReply->readAll(); //FIXME: I have no idea why this line isn't working?
+  QString reply = rawReply->data(); // Get the full data of the reply, readAll() doesn't guarentee that.
   frob = reply.remove(0, reply.indexOf("<frob>")+6);
   frob.truncate(frob.indexOf("</frob>"));
   kDebug() << "Frob: " << frob;
