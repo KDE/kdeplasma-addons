@@ -60,19 +60,8 @@ UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
     // listen for changes to the stylesheet file
 
     m_css = new StyleSheet(this);
-    m_cssFile = KStandardDirs::locate("data", "plasma-applet-opendesktop/user.css");
     connect(m_css, SIGNAL(styleSheetChanged(const QString&)), this, SLOT(setStyleSheet(const QString&)));
 
-
-    //loadStyleSheet(m_cssFile);
-
-    /*
-    KDirWatch *cssWatch = new KDirWatch(this);
-    cssWatch->addFile(m_cssFile);
-    connect(cssWatch,SIGNAL(dirty(QString)),this,SLOT(loadStyleSheet(QString)));
-    connect(cssWatch,SIGNAL(created(QString)),this,SLOT(loadStyleSheet(QString)));
-    connect(cssWatch,SIGNAL(deleted(QString)),this,SLOT(loadStyleSheet(QString)));
-    */
     setMinimumHeight(200);
     setMinimumWidth(200);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

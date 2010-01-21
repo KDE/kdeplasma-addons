@@ -73,7 +73,6 @@ class UserWidget : public Plasma::Frame
 
         StyleSheet* m_css;
 
-        QString m_cssFile;
         // Caches the content part of the widget
         QString m_info;
         // Caches the title part of the widget
