@@ -127,6 +127,7 @@ ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
 {
     setHasConfigurationInterface( true );
     resize( 600, 250 );
+    setAspectRatioMode( Plasma::IgnoreAspectRatio );
 
     setPopupIcon( "face-smile-big" );
 
@@ -320,12 +321,6 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     mSuffixType = data[ "SuffixType" ].toString();
     mScaleComic = mActionScaleContent->isChecked();
 
-    if ( mScaleComic ) {
-        setAspectRatioMode( Plasma::IgnoreAspectRatio );
-    } else {
-        setAspectRatioMode( Plasma::KeepAspectRatio );
-    }
-
     // get the text at top
     QString tempTop;
     if ( mShowComicTitle ) {
@@ -504,8 +499,12 @@ void ComicApplet::loadConfig()
     mScaleComic = cg.readEntry( "scaleToContent_" + mComicIdentifier, false );
     mMaxStripNum[ mComicIdentifier ] = cg.readEntry( "maxStripNum_" + mComicIdentifier, 0 );
     mStoredIdentifierSuffix = cg.readEntry( "storedPosition_" + mComicIdentifier, QString() );
-    mMaxSize = cg.readEntry( "maxSize", mMainWidget->geometry().size() );
+
+    //use a decent default size
+    const QSizeF tempMaxSize = isInPanel() ? QSizeF( 600, 250 ) : this->size();
+    mMaxSize = cg.readEntry( "maxSize", tempMaxSize );
     mLastSize = mMaxSize;
+
     mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
     mShowTabBar = cg.readEntry( "showTabBar", true );
     mTabText = cg.readEntry( "tabText", QStringList( QString() ) );
@@ -660,6 +659,10 @@ bool ComicApplet::isInPanel() const
 
 void ComicApplet::updateSize()
 {
+    if ( configurationRequired() ) {
+        return;
+    }
+
     QSizeF notAvailableSize;
     if ( isInPanel() ) {
         notAvailableSize =  mMainWidget->geometry().size() - mImageWidget->size();
@@ -922,11 +925,6 @@ bool ComicApplet::eventFilter( QObject *receiver, QEvent *event )
 void ComicApplet::slotScaleToContent()
 {
     mScaleComic = mActionScaleContent->isChecked();
-    if ( mScaleComic ) {
-        setAspectRatioMode( Plasma::IgnoreAspectRatio );
-    } else {
-        setAspectRatioMode( Plasma::KeepAspectRatio );
-    }
     mImageWidget->setScaled( !mScaleComic );
 
     KConfigGroup cg = config();
