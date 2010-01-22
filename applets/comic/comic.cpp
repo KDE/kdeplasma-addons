@@ -677,6 +677,7 @@ void ComicApplet::updateSize()
         mMainWidget->resize( mLastSize );
     } else {
         resize( mLastSize );
+        mLastSize = this->size();//NOTE the applet won't be smaller than the minimum size of the MainWidget, thus the result of the resize might not correspond with mLastSize
         emit sizeHintChanged( Qt::PreferredSize );
         emit appletTransformedItself();
     }
