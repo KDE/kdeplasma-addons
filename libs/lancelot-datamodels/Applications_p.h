@@ -21,6 +21,7 @@
 #define LANCELOTAPP_MODELS_APPLICATIONS_P_H
 
 #include "BaseModel.h"
+#include "Applications.h"
 
 namespace Lancelot {
 namespace Models {
