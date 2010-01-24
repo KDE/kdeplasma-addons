@@ -172,7 +172,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             setMinimumSize(QSizeF(contentsRect().height()*1.33,0));
             setMaximumSize(QSizeF(contentsRect().height()*1.33,-1));
         } else {
-            int min = 22;
+            int min = 48;
             if (m_shadow) {
                 min += m_swOutline;
             }
@@ -282,7 +282,7 @@ void Frame::updatePicture()
         // The shadow is drawn from inside to the outside
         shadowRect.adjust(+shadowLines, +shadowLines, -shadowLines, -shadowLines);
 
-        // Make the path ot paint the frame in a bit smaller so it's inside the shadow
+        // Make the path to paint the frame in a bit smaller so it's inside the shadow
         frameRect.adjust(+shadowLines, +shadowLines, -shadowLines, -shadowLines);
         framePath = Plasma::PaintUtils::roundedRectangle(frameRect, roundingFactor);
 
