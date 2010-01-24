@@ -882,7 +882,7 @@ void OcsEngine::updateProviderData()
         removeData("Providers", "loading");
     }
     
-    foreach(QSharedPointer<Attica::Provider> provider, m_providers) {
+    foreach(const QSharedPointer<Attica::Provider> &provider, m_providers) {
         Plasma::DataEngine::Data providerData;
         
         providerData.insert("BaseUrl", provider->baseUrl());
