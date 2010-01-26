@@ -74,6 +74,10 @@ Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
             case PastebinService::SIMPLESTIMAGEHOSTING:
                 m_imageServer = new SimplestImageHostingServer(server);
                 break;
+
+            case PastebinService::IMGUR:
+                m_imageServer = new ImgurServer(server);
+                break;
         }
 
         connect(m_imageServer, SIGNAL(postFinished(QString)),

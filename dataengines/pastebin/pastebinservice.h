@@ -39,7 +39,7 @@ class PastebinService : public Plasma::Service
 
 public:
     enum textServers { PASTEBINCA, PASTEBINCOM };
-    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING };
+    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING, IMGUR };
 
     PastebinService(PastebinEngine *engine);
     Plasma::ServiceJob *createJob(const QString &operation,

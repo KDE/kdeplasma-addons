@@ -7,6 +7,7 @@ set(pastebin_engine_SRCS
         backends/imagebinca.cpp
         backends/imageshack.cpp
         backends/simplestimagehosting.cpp
+        backends/imgur.cpp
         pastebinengine.cpp
         pastebinservice.cpp)
 

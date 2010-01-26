@@ -25,5 +25,6 @@
 #include "imagebinca.h"
 #include "imageshack.h"
 #include "simplestimagehosting.h"
+#include "imgur.h"
 
 #endif
