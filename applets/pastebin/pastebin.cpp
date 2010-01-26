@@ -523,6 +523,10 @@ void Pastebin::editImageServer()
             serverAddress = cg.readEntry("simplestimagehosting",
                                          "http://api.simplest-image-hosting.net");
             break;
+        
+        case Pastebin::IMGUR:
+            serverAddress = cg.readEntry("imgur", "http://imgur.com/api/upload");
+            break;
     }
 
     uiServers.server->setText(serverAddress);
@@ -544,6 +548,11 @@ void Pastebin::saveImageServer()
         case Pastebin::SIMPLESTIMAGEHOSTING:
             cg.writeEntry("simplestimagehosting", uiServers.server->text());
             break;
+
+        case Pastebin::IMGUR:
+            cg.writeEntry("imgur", uiServers.server->text());
+            break;
+
     }
     closeServerDialog();
 }
@@ -841,6 +850,10 @@ void Pastebin::postContent(QString text, QImage imageData)
             case Pastebin::SIMPLESTIMAGEHOSTING:
                 ops.writeEntry("server", cg.readEntry("simplestimagehosting",
                                                       "http://api.simplest-image-hosting.net"));
+                break;
+
+            case Pastebin::IMGUR:
+                ops.writeEntry("server", cg.readEntry("imgur", "http://imgur.com/api/upload"));
                 break;
         }
 

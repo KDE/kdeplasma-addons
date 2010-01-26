@@ -71,7 +71,7 @@ public:
     };
 
     enum textServers { PASTEBINCA, PASTEBINCOM };
-    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING };
+    enum imageServers { IMAGEBINCA, IMAGESHACK, SIMPLESTIMAGEHOSTING, IMGUR };
 
 public slots:
     void configAccepted();

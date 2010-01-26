@@ -118,6 +118,11 @@
          <string>Simplest-Image-Hosting.net</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Imgur</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="2" column="0">
