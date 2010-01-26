@@ -32,7 +32,7 @@ class PassagewayViewSizer: public ColumnLayout::ColumnSizer {
 public:
     PassagewayViewSizer()
     {
-        m_sizer = ColumnLayout::ColumnSizer::create(ColumnSizer::ColumnSizer::GoldenSizer);
+        m_sizer = ColumnLayout::ColumnSizer::create(ColumnLayout::ColumnSizer::GoldenSizer);
     }
 
     void init(int size)
