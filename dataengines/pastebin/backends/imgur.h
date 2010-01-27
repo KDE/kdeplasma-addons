@@ -29,7 +29,7 @@
 #include <kio/global.h>
 #include <kio/job.h>
 
-#define IMGUR_SERVER "http://imgur.com/api/uploadaaaaaaaaaaaaaaaaaaa"
+#define IMGUR_SERVER "http://imgur.com/api/upload"
 
 class ImgurServer : public PastebinServer
 {
