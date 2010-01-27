@@ -1,5 +1,8 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Nikhil Marathe <nsm.nikhil@gmail.com>           *
+ *   Copyright (C) 2010 by Nikhil Marathe <nsm.nikhil@gmail.com>           *
+ *                         Vardhman Jain <vardhman@gmail.com>              *
+ *                         Gilles Caulier <caulier.gilles@gmail.com>       *
+ *                         Michał Ziąbkowski <mziab@o2.pl>             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -158,8 +161,9 @@ void ImgurServer::post(const QString& content)
     KUrl url(QString("%1").arg(m_server));
     addFile( "image", content );
 
-    // key belongs to Shantanu Tushar
-    addPair( "key", "b0522e5b15ee9f1cd1190fcfe427710d" );
+    // key associated with plasma-devel@kde.org
+    // thanks to Alan Schaaf of Imgur ( alan@imgur.com )
+    addPair( "key", "d0757bc2e94a0d4652f28079a0be9379" );
 
     KIO::TransferJob *tf = KIO::http_post(url, m_buffer, KIO::HideProgressInfo);
 
