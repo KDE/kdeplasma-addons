@@ -183,7 +183,8 @@ PlasmaTextEdit::PlasmaTextEdit(QGraphicsWidget *parent)
 {
     KTextEdit *w = nativeWidget();
     native = new NotesTextEdit;
-    native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
+    //workaround for Qt bug 7254
+    //native->setWindowFlags(native->windowFlags() | Qt::BypassGraphicsProxyWidget);
     //FIXME: we need a way to just add actions without changing the native widget under its feet
     if (native->verticalScrollBar() && w->verticalScrollBar()) {
         native->verticalScrollBar()->setStyle(w->verticalScrollBar()->style());
