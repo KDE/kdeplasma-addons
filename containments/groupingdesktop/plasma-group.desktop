@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Plasma/Group
 Name=Plasma group
 Name[en_GB]=Plasma group
+Name[et]=Plasma rühmitamine
 Name[fr]=Groupe Plasma
 Name[nl]=Plasma-groep
 Name[pt]=Grupo do Plasma
