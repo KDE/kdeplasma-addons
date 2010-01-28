@@ -61,6 +61,9 @@ public:
     bool enableUsageStatistics() const;
     void setEnableUsageStatistics(bool value);
 
+    QStringList searchHistory() const;
+    void setSearchHistory(const QStringList & history);
+
     QButtonGroup * qbgActivationMethod;
     QButtonGroup * qbgAppbrowserColumnLimit;
 

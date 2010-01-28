@@ -127,6 +127,12 @@ LancelotWindow::LancelotWindow()
     editSearch->setFocusPolicy(Qt::WheelFocus);
     editSearch->nativeWidget()->setFocusPolicy(Qt::WheelFocus);
 
+    m_completion = new KCompletion();
+    editSearch->nativeWidget()->setCompletionObject(m_completion);
+    editSearch->nativeWidget()->setCompletionMode(
+        KGlobalSettings::CompletionMan);
+    m_completion->insertItems(m_configUi.searchHistory());
+
     passagewayApplications->setEntranceTitle(i18n("Favorites"));
     passagewayApplications->setEntranceIcon(KIcon("favorites"));
     passagewayApplications->setAtlasTitle(i18n("Applications"));
@@ -192,6 +198,7 @@ void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
 
 LancelotWindow::~LancelotWindow()
 {
+    m_configUi.setSearchHistory(m_completion->items());
     delete m_configWidget;
 }
 
@@ -673,6 +680,11 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
                 if (m_activeSection == "search") {
                     if (listSearchLeft->selectedIndex() == -1) {
                         listSearchLeft->initialSelection();
+                    }
+
+                    if (!editSearch->text().isEmpty()) {
+                        m_completion->addItem(editSearch->text());
+                        m_configUi.setSearchHistory(m_completion->items());
                     }
                 }
             case Qt::Key_Up:

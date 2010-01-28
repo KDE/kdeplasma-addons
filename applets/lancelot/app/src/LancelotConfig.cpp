@@ -204,6 +204,18 @@ void LancelotConfig::setEnableUsageStatistics(bool value)
     checkUsageStatisticsEnable->setChecked(value);
 }
 
+QStringList LancelotConfig::searchHistory() const
+{
+    return m_mainConfig.readEntry("searchHistory",
+            QStringList());
+}
+
+void LancelotConfig::setSearchHistory(const QStringList & history)
+{
+    m_mainConfig.writeEntry("searchHistory", history);
+    m_mainConfig.sync();
+}
+
 void LancelotConfig::buttonNewDocumentsEditClicked()
 {
     new KRun(KUrl(

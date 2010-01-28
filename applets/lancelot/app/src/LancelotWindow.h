@@ -27,6 +27,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KIcon>
+#include <KCompletion>
 
 #include <Plasma/Svg>
 #include <Plasma/Plasma>
@@ -188,6 +189,7 @@ private:
     Plasma::Corona      * m_corona;
 
     Plasma::LineEdit    * editSearch;
+    KCompletion         * m_completion;
 
     QHash < Lancelot::ExtenderButton *, QString > systemButtonActions;
 
