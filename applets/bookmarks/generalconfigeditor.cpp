@@ -39,7 +39,6 @@ GeneralConfigEditor::GeneralConfigEditor(KBookmarkManager* bookmarkManager, QWid
     mBookmarkFolderAddress(bookmarkManager->root().address()),
     mBookmarkManager(bookmarkManager)
 {
-
     QVBoxLayout* pageLayout = new QVBoxLayout(this);
     pageLayout->setMargin(0);
 
