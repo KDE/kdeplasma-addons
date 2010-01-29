@@ -197,7 +197,7 @@ void LancelotApplet::loadConfig()
 {
     KConfigGroup kcg = config();
     d->showCategories =  (kcg.readEntry("show", "main") != "main");
-    d->mainIcon = kcg.readEntry("icon", "lancelot");
+    d->mainIcon = kcg.readEntry("icon", "kde");
     d->clickActivation = (kcg.readEntry("activate", "click") == "click");
     d->categsHide = kcg.readEntry("hiddenCategories", QStringList());
 }
