@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Calendar Events
+Comment=Calendar Events runner
+Icon=korganizer
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Runner
+X-KDE-Library=krunner_events
+X-KDE-PluginInfo-Author=Alexey Noskov
+X-KDE-PluginInfo-Email=alexey.noskov@gmail.com
+X-KDE-PluginInfo-Name=events_runner
+X-KDE-PluginInfo-Version=0.2.2
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Ubuntu-Gettext-Domain=desktop_kdesdk
