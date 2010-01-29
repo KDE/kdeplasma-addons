@@ -22,6 +22,9 @@
 #include <KConfigGroup>
 #include <KRun>
 #include <KUrl>
+#include <KServiceTypeTrader>
+#include <KService>
+#include <KPluginInfo>
 
 #include <Lancelot/Models/NewDocuments>
 #include <Lancelot/Models/SystemActions>
@@ -36,6 +39,21 @@ LancelotConfig::LancelotConfig()
 void LancelotConfig::setupUi(QWidget * widget)
 {
     Ui::LancelotConfigBase::setupUi(widget);
+
+    KService::List offers = KServiceTypeTrader::self()->query("Plasma/Runner");
+    QList < KPluginInfo > runnerInfo = KPluginInfo::fromServices(offers);
+
+    m_searchPlugins = new KPluginSelector(widget);
+    m_searchPlugins->addPlugins(
+            runnerInfo,
+            KPluginSelector::ReadConfigFile,
+            i18n("Available Features"),
+            QString(),
+            KSharedConfig::openConfig("lancelotrc")
+        );
+    tabWidget->addTab(m_searchPlugins, i18n("Search"));
+
+
     tabWidget->setCurrentIndex(0);
 
     qbgActivationMethod = new QButtonGroup(widget);

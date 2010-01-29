@@ -29,6 +29,7 @@
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <KPluginSelector>
 
 class LancelotConfig: public QObject, public Ui::LancelotConfigBase {
     Q_OBJECT
@@ -85,6 +86,7 @@ private Q_SLOTS:
 
 private:
     bool m_appbrowserPopupSubmenus;
+    KPluginSelector * m_searchPlugins;
 };
 
 #endif // LANCELOTCONFIG_H

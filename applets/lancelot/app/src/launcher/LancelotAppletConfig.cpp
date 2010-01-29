@@ -53,8 +53,8 @@ void LancelotAppletConfig::setupUi(QWidget * widget)
     // showing icons
     QListWidgetItem * item;
     item = new QListWidgetItem(
-            KIcon("lancelot"), i18n("Lancelot"), listIcons);
-    icons["lancelot"] = item;
+            KIcon("lancelot-start"), i18n("Lancelot"), listIcons);
+    icons["lancelot-start"] = item;
     item = new QListWidgetItem(
             KIcon("kde"), i18n("KDE Logo"), listIcons);
     icons["kde"] = item;
