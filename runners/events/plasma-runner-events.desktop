@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Calendar Events
+Name[uk]=Події календаря
 Comment=Calendar Events runner
+Comment[uk]=Інструмент роботи з подіями календаря
 Icon=korganizer
 Type=Service
 
