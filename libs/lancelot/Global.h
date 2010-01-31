@@ -194,7 +194,7 @@ public:
     /**
      * @returns a pointer to the theme configuration file
      */
-    KConfig * theme();
+    KConfig * theme() const;
 
     /**
      * @returns a pointer to the configuration file

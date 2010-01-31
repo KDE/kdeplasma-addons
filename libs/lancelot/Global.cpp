@@ -418,7 +418,7 @@ Global::~Global()
     delete d;
 }
 
-KConfig * Global::theme()
+KConfig * Global::theme() const
 {
     return d->confTheme;
 }
@@ -435,7 +435,9 @@ bool Global::groupExists(const QString & name) const
         groupName = "Default";
     }
 
-    return (!d->groups.contains(groupName));
+    return (!d->groups.contains(groupName))
+        || theme()->groupList().contains(
+        "Group-" + groupName);
 }
 
 Group * Global::group(const QString & name)
