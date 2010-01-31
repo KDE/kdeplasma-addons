@@ -32,7 +32,6 @@
 #include <Lancelot/Lancelot>
 
 #include "lancelot_interface.h"
-#include "../LancelotConfig.h"
 
 #define SIZE_CMIN 16
 #define SIZE_CPREF 32

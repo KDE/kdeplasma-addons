@@ -28,7 +28,7 @@
 #include <Plasma/Applet>
 
 #include "LancelotAppletConfig.h"
-#include "../LancelotConfig.h"
+#include "../application/LancelotConfig.h"
 
 class LancelotApplet: public Plasma::Applet
 {

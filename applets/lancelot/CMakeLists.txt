@@ -6,8 +6,18 @@ SET(CMAKE_CXX_FLAGS_CODECHECK "${CMAKE_CXX_FLAGS} -save-temps")
 SET(CMAKE_C_FLAGS_CODECHECK "${CMAKE_C_FLAGS} -save-temps")
 message("Flags for CodeCheck are ${CMAKE_CXX_FLAGS_CODECHECK}")
 
+find_package(SharedMimeInfo REQUIRED)
+
+# Finding liblancelot
+find_package(Lancelot REQUIRED)
+
 add_subdirectory(tools)
 
-add_subdirectory(app)
+add_subdirectory(application)
+add_subdirectory(launcher)
+add_subdirectory(parts)
+
+add_subdirectory(themes)
+add_subdirectory(icons)
 add_subdirectory(cmake)
 
