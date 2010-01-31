@@ -31,6 +31,7 @@
 #include <KAuthorized>
 #include <KCmdLineArgs>
 #include <KConfigDialog>
+#include <KDebug>
 #include <KGlobalAccel>
 #include <KLineEdit>
 #include <KProcess>
@@ -782,7 +783,7 @@ void LancelotWindow::configurationChanged()
 
 void LancelotWindow::nextSection(int increment)
 {
-    qDebug() << "LancelotWindow::nextSection " << increment;
+    kDebug() << increment;
     if (! (layoutMain->flip() & Plasma::VerticalFlip)) {
         increment = - increment;
     }

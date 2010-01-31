@@ -23,6 +23,7 @@
 #include <QGraphicsLayout>
 #include <QDataStream>
 
+#include <KDebug>
 #include <KIcon>
 #include <KMimeType>
 #include <KUrl>
@@ -331,7 +332,7 @@ QGraphicsWidget * LancelotPart::graphicsWidget()
 
 void LancelotPart::immutabilityChanged(Plasma::ImmutabilityType value)
 {
-    qDebug() << "LancelotPart::immutabilityChanged:" << value;
+    kDebug() << value;
     Lancelot::Global::self()->setImmutability(value);
 }
 

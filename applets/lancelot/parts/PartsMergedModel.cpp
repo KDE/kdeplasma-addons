@@ -18,8 +18,10 @@
  */
 
 #include "PartsMergedModel.h"
+
 #include <QFile>
 #include <QTextStream>
+
 #include <KIcon>
 #include <KLocalizedString>
 #include <KDebug>
@@ -276,7 +278,7 @@ bool PartsMergedModel::load(const QString & input)
                     addModel(modelID, QIcon(), i18n("System"), model);
                 }
             } else if (modelID == "Folder") {
-                qDebug() << "LancelotPart::" << modelExtraData;
+                kDebug() << modelExtraData;
                 if (modelExtraData.startsWith(QLatin1String("applications:/"))) {
                     modelExtraData.remove(0, 14);
                     addModel(modelExtraData,

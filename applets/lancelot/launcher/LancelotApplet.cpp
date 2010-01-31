@@ -24,6 +24,7 @@
 #include <QDBusReply>
 #include <QGraphicsLinearLayout>
 
+#include <KDebug>
 #include <KIcon>
 
 #include <Plasma/Corona>
@@ -247,7 +248,6 @@ void LancelotApplet::init()
     );
     KGlobal::locale()->insertCatalog("lancelot");
 
-    qDebug() << "LancelotApplet::init()";
     Plasma::Corona * corona = (Plasma::Corona *) scene();
     connect(corona, SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)),
         this, SLOT(updateImmutability(Plasma::ImmutabilityType)));
@@ -390,7 +390,7 @@ QSizeF LancelotApplet::sizeHint(Qt::SizeHint which, const QSizeF & constraint) c
 
 void LancelotApplet::updateImmutability(const Plasma::ImmutabilityType immutable)
 {
-    qDebug() << "LancelotApplet::setImmutability " << immutable;
+    kDebug() << immutable;
     d->lancelot->setImmutability(immutable);
     Plasma::Applet::setImmutability(immutable);
 }
