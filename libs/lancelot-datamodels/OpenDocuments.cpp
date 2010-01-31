@@ -21,7 +21,6 @@
 #include "OpenDocuments.h"
 #include "OpenDocuments_p.h"
 #include <KIcon>
-#include <QDebug>
 
 namespace Lancelot {
 namespace Models {
@@ -124,7 +123,6 @@ bool OpenDocuments::Private::setDataForTask(TaskPtr task)
     QString className = task->className();
 
     foreach (const SupportedTask &st, supportedTasks) {
-        // qDebug() << "OpenDocuments::setDataForTask" << task->className() << task->visibleName();
         if (st.m_classPattern.exactMatch(task->className())) {
             extractor = st.m_documentNameExtractor;
             break;

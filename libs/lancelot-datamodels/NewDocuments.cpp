@@ -18,6 +18,8 @@
  */
 
 #include "NewDocuments.h"
+
+#include <KDebug>
 #include <KStandardDirs>
 #include <KIcon>
 
@@ -25,10 +27,10 @@ namespace Lancelot {
 namespace Models {
 
 #define LinkOrCopy(source, destination)           \
-    qDebug() << "Models::LinkOrCopy:"             \
+    kDebug() << "Models::LinkOrCopy:"             \
                  << source << destination;        \
     if (!QFile::link((source), (destination))) {  \
-        qDebug() << "Models::LinkOrCopy:"         \
+        kDebug() << "Models::LinkOrCopy:"         \
                  << "Linking failed ... copying"; \
         QFile::copy((source), (destination));     \
     }

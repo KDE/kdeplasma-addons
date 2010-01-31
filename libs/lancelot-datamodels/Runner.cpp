@@ -19,8 +19,7 @@
 
 #include "Runner.h"
 
-#include <QDebug>
-
+#include <KDebug>
 #include <KRun>
 #include <KIcon>
 #include <KLocalizedString>
@@ -149,17 +148,13 @@ void Runner::timerEvent(QTimerEvent * event)
         } else {
             d->runnerManager->launchQuery(d->searchString, d->runnerName);
         }
-
-        // foreach (Plasma::AbstractRunner * runner, d->runnerManager->runners()) {
-        //     qDebug() << "Runner: " << runner->id();
-        // }
     }
 }
 
 // Code taken from KRunner Runner::setQueryMatches
 void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 {
-    qDebug() << "Runner::setQueryMatches" << m.size();
+    kDebug() << m.size();
     setEmitInhibited(true);
     clear();
 

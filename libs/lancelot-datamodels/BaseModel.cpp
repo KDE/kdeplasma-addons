@@ -24,6 +24,7 @@
 #include <KRun>
 #include <KLocalizedString>
 #include <KDesktopFile>
+#include <KDebug>
 #include <KFileItem>
 #include <KIcon>
 #include <KGlobal>
@@ -159,7 +160,7 @@ bool BaseModel::addService(const KService::Ptr & service)
         return false;
     }
 
-    qDebug() << "BaseModel::addService" << service->name()
+    kDebug() << service->name()
         << service->isApplication() << service->exec()
         << service->isValid();
 
@@ -194,7 +195,7 @@ bool BaseModel::addUrl(const QString & url)
 
 bool BaseModel::addUrl(const KUrl & url)
 {
-    qDebug() << "BaseModel::addUrl" << url;
+    kDebug() << url;
     KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url);
 
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {

@@ -18,6 +18,8 @@
  */
 
 #include "ContactsKopete.h"
+
+#include <KDebug>
 #include <KIcon>
 #include <KStandardDirs>
 
@@ -72,7 +74,7 @@ void ContactsKopete::timerEvent(QTimerEvent * event)
     if (event->timerId() == d->checkRunningTimer.timerId()) {
         load();
     } else if (event->timerId() == d->delayTimer.timerId()) {
-        qDebug() << "ContactsKopete::contactChanged [delayed]:"
+        kDebug() << "contactChanged [delayed]:"
             << d->contactsToUpdate.size();
         d->delayTimer.stop();
         // checking whether we have a large update
@@ -117,7 +119,6 @@ void ContactsKopete::load(bool forceReload)
 
     if (!d->interface->isValid()) {
         if (d->kopeteRunning) {
-            qDebug() << "ContactsKopete::disconnecting D-Bus";
             disconnect(d->interface, SIGNAL(contactChanged(const QString &)),
                     this, SLOT(contactChanged(const QString &)));
             statusChanged = true;
@@ -139,14 +140,13 @@ void ContactsKopete::load(bool forceReload)
         }
     } else {
         if (!d->kopeteRunning) {
-            qDebug() << "ContactsKopete::connecting D-Bus";
             connect(d->interface, SIGNAL(contactChanged(const QString &)),
                     this, SLOT(contactChanged(const QString &)));
             statusChanged = true;
         }
 
         if (forceReload || statusChanged) {
-            qDebug() << "ContactsKopete::load: full";
+            kDebug() << "full";
             clear();
             d->kopeteRunning = true;
             d->noOnlineContacts = false;
@@ -236,8 +236,6 @@ void ContactsKopete::updateContactData(const QString & contact)
 
 void ContactsKopete::contactChanged(const QString & contactId)
 {
-    // qDebug() << "ContactsKopete::contactChanged:" << contactId;
-    // updateContactData(contactId);
     // delaying the update
     if (!d->contactsToUpdate.contains(contactId)) {
         d->contactsToUpdate << contactId;
