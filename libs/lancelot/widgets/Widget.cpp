@@ -21,7 +21,6 @@
 #include "Global.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <QVariant>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QPainter>

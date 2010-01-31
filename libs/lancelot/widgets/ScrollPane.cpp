@@ -23,7 +23,6 @@
 
 #include <Plasma/Animator>
 #include <QGraphicsSceneWheelEvent>
-#include <QDebug>
 
 #include <lancelot/layouts/FullBorderLayout.h>
 
@@ -70,7 +69,6 @@ public:
           vertical(NULL), horizontal(NULL),
           flags(ScrollPane::ClipScrollable)
     {
-        qDebug() << "Plasma::Animator";
         q->setAcceptTouchEvents(true);
     }
 

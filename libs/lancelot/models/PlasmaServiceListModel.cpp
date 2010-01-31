@@ -19,8 +19,7 @@
 
 #include "PlasmaServiceListModel.h"
 
-#include <QDebug>
-
+#include <KDebug>
 #include <KIcon>
 #include <KConfigGroup>
 
@@ -48,7 +47,7 @@ PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
     d->engine = Plasma::DataEngineManager::self()->loadEngine(dataEngine);
 
     if (!d->engine->sources().contains(".metadata")) {
-        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model - it doesn't have the .metadata structure";
+        kDebug() << dataEngine << "is not a lancelot model - it doesn't have the .metadata structure";
         d->engine = NULL;
         return;
     }
@@ -58,11 +57,11 @@ PlasmaServiceListModel::PlasmaServiceListModel(QString dataEngine)
     if (!data.contains("lancelot") ||
         data["lancelot"].toMap()["version"] != "1.0"
     ) {
-        qDebug() << "PlasmaServiceListModel:" << dataEngine << "is not a lancelot model - the version is not valid";
+        kDebug() << dataEngine << "is not a lancelot model - the version is not valid";
         d->engine = NULL;
         return;
     }
-    qDebug() << "PlasmaServiceListModel:" << data
+    kDebug() << data
              << data["lancelot"].toMap()["modelTitle"].toString()
              << data["lancelot"].toMap()["modelIcon"].toString();
 

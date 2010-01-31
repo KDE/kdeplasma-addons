@@ -21,7 +21,6 @@
 #include "ActionListView_p.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 
 #include <Plasma/ItemBackground>

@@ -26,6 +26,7 @@
 
 #include <KGlobal>
 #include <KStandardDirs>
+#include <KDebug>
 
 #include <Plasma/Theme>
 
@@ -70,7 +71,7 @@ void Group::Private::reset()
     while (i.hasNext()) {
         i.next();
         if (!persistentProperties.contains(i.key())) {
-            qDebug() << "Group::load: reloading property:" << i.key();
+            kDebug() << "reloading property:" << i.key();
             i.remove();
         }
     }
@@ -169,7 +170,7 @@ void Group::setProperty(const QString & property, const QVariant & value, bool p
     // QString property = prop;
     // property[0] = property[0].toLower();
 
-    qDebug() << "Group::setProperty:" << property << value;
+    kDebug() << property << value;
 
     d->properties[property] = value;
 
@@ -220,14 +221,13 @@ void Group::load(bool full)
     if (d->loaded && !full) return;
     d->loaded = true;
 
-    qDebug() << "Group::load: loading group:" << name();
+    kDebug() << name();
 
     // d->properties.clear();
     d->reset();
 
     Group * group;
 
-    qDebug() << "Loading group " << d->name;
     KConfigGroup confGroupTheme = d->confGroupTheme();
     if (!confGroupTheme.exists()) {
         group = Global::self()->defaultGroup();
@@ -253,7 +253,7 @@ void Group::load(bool full)
 
     QString type = confGroupTheme.readEntry("background.type", "none");
     if (type == "color" || type == "color-compact") {
-        qDebug() << "Group::load: loading color background";
+        kDebug() << "loading color background";
         if (type == "color") {
             setProperty("WholeColorBackground", 1, false);
         } else {
@@ -263,7 +263,7 @@ void Group::load(bool full)
         d->backgroundColor.active   = confGroupTheme.readEntry("background.color.active",   d->backgroundColor.active);
         d->backgroundColor.disabled = confGroupTheme.readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
-        qDebug() << "Group::load: loading svg background";
+        kDebug() << "loading svg background";
         // we have already deleted the backgroundSvg
         // if (d->ownsBackgroundSvg) {
         //     delete d->backgroundSvg;
@@ -274,13 +274,13 @@ void Group::load(bool full)
                 confGroupTheme.readEntry("background.svg"));
 
         d->backgroundSvg->setImagePath(imagePath);
-        qDebug() << "Background is: " <<
+        kDebug() << "Background is: " <<
             d->backgroundSvg->imagePath();
         d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
 
         if (!d->backgroundSvg->isValid()) {
-            qDebug() << "Background is not valid: " <<
+            kDebug() << "Background is not valid: " <<
                 d->backgroundSvg->imagePath();
             delete d->backgroundSvg;
             d->backgroundSvg = NULL;
@@ -348,7 +348,7 @@ void Global::Private::createConfTheme()
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/" + app + "theme.config";
     QString path =  KStandardDirs::locate( "data", search );
-    qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
+    kDebug() << "path:" << search << "=" << path;
 
     // if we didn't find the theme specific for this application
     // we'll use the main theme file
@@ -357,7 +357,7 @@ void Global::Private::createConfTheme()
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
-        qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
+        kDebug() << "path:" << search << "=" << path;
     }
 
     // if the above fails, we are loading the default theme's
@@ -365,7 +365,7 @@ void Global::Private::createConfTheme()
     if (path.isEmpty()) {
         search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
-        qDebug() << "Global::Private::createConfTheme: path:" << search << "=" << path;
+        kDebug() << "path:" << search << "=" << path;
     }
 
     // this doesn't really do anything useful
@@ -379,7 +379,6 @@ void Global::Private::createConfTheme()
 
 void Global::Private::themeChanged()
 {
-    qDebug() << "Global::Private::themeChanged";
     createConfTheme();
     loadAllGroups(true);
 }
@@ -495,7 +494,7 @@ void Global::setImmutability(const Plasma::ImmutabilityType immutable)
     }
 
     d->immutability = immutable;
-    qDebug() << "Global::setImmutability " << immutable;
+    kDebug() << immutable;
     emit immutabilityChanged(immutable);
 }
 

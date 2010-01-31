@@ -22,7 +22,6 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QDebug>
 
 #include <Plasma/Theme>
 
