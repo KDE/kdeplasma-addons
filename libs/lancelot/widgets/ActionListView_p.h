@@ -23,6 +23,7 @@
 #include <QIcon>
 
 #include <Plasma/SvgWidget>
+#include <Plasma/ItemBackground>
 
 #include <lancelot/lancelot.h>
 #include <lancelot/lancelot_export.h>
@@ -124,6 +125,9 @@ private Q_SLOTS:
     void modelItemDeleted(int index);
     void modelItemAltered(int index);
     void itemActivated();
+    void itemHovered();
+
+    void updateSelectedBackground(ActionListViewItem * item = NULL);
 
     qreal preferredWidth() const;
 
@@ -134,6 +138,7 @@ private:
     ActionListModel * m_model;
     QList < ActionListViewItem * > m_items;
     int m_extenderPosition;
+
 
     Group * m_itemsGroup;
     Group * m_categoriesGroup;
@@ -147,6 +152,8 @@ private:
     QSize m_categoryIconSize;
 
     ActionListViewItem * m_selectedItem;
+    Plasma::ItemBackground * m_selectedItemBackground;
+
     friend class ActionListViewItem;
     friend class ActionListView;
 };

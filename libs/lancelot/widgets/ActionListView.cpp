@@ -24,6 +24,8 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 
+#include <Plasma/ItemBackground>
+
 #define CATEGORY_MINIMUM_SIZE 20
 #define CATEGORY_MAXIMUM_SIZE 35
 #define CATEGORY_PREFERRED_SIZE 27
@@ -35,6 +37,7 @@
 namespace Lancelot {
 
 //> ActionListViewItem
+
 ActionListViewItem::ActionListViewItem(ActionListViewItemFactory * factory)
     : ExtenderButton(), m_inSetSelected(false), m_factory(factory)
 {
@@ -143,6 +146,8 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, Ac
     m_itemHeight[Qt::MinimumSize]   = ITEM_MINIMUM_SIZE;
     m_itemHeight[Qt::MaximumSize]   = ITEM_MAXIMUM_SIZE;
     m_itemHeight[Qt::PreferredSize] = ITEM_PREFERRED_SIZE;
+
+    m_selectedItemBackground = new Plasma::ItemBackground(view->list());
 } //<
 
 ActionListViewItemFactory::~ActionListViewItemFactory() //>
@@ -201,6 +206,8 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
         setItemExtender(index);
         connect(item, SIGNAL(activated()),
                 this, SLOT(itemActivated()));
+        connect(item, SIGNAL(mouseHoverEnter()),
+                this, SLOT(itemHovered()));
     }
 
     if (reload) {
@@ -594,13 +601,39 @@ void ActionListViewItemFactory::setSelectedItem(ActionListViewItem * item, bool 
             m_selectedItem->setSelected(false);
         }
         m_selectedItem = NULL;
+        m_selectedItemBackground->setTarget(QRectF());
     } else if (m_selectedItem != item && selected) {
         if (m_selectedItem) {
             m_selectedItem->setSelected(false);
         }
         m_selectedItem = item;
         m_selectedItem->setSelected(true);
+        m_selectedItemBackground->setTarget(item->geometry());
     }
+} //<
+
+void ActionListViewItemFactory::itemHovered() //>
+{
+    if (!sender()) {
+        return;
+    }
+
+    Lancelot::ActionListViewItem * item =
+        static_cast < Lancelot::ActionListViewItem * > (sender());
+    updateSelectedBackground(item);
+
+} //<
+
+void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * item) //>
+{
+    if (item && item->isEnabled()) {
+        m_selectedItemBackground->setTarget(item->geometry());
+    } else if (m_selectedItem) {
+        m_selectedItemBackground->setTarget(m_selectedItem->geometry());
+    } else {
+        m_selectedItemBackground->setTarget(QRectF());
+    }
+
 } //<
 
 void ActionListViewItemFactory::selectRelItem(int rel) //>
@@ -1050,6 +1083,24 @@ QSizeF ActionListView::sizeHint(Qt::SizeHint which, const QSizeF & constraint) c
         result = result.boundedTo(constraint);
     }
     return result;
+} //<
+
+void ActionListView::resizeEvent(QGraphicsSceneResizeEvent * event) //>
+{
+    CustomListView::resizeEvent(event);
+
+    if (d->itemFactory) {
+        d->itemFactory->updateSelectedBackground();
+    }
+} //<
+
+void ActionListView::hoverLeaveEvent(QGraphicsSceneHoverEvent * event) //>
+{
+    CustomListView::hoverLeaveEvent(event);
+
+    if (d->itemFactory) {
+        d->itemFactory->updateSelectedBackground();
+    }
 } //<
 
 //<

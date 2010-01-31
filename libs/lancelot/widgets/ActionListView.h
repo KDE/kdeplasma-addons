@@ -98,6 +98,10 @@ protected:
     L_Override bool sceneEvent(QEvent * event);
     L_Override QSizeF sizeHint(Qt::SizeHint which,
             const QSizeF & constraint = QSizeF()) const;
+    L_Override void resizeEvent(
+            QGraphicsSceneResizeEvent * event);
+    L_Override void hoverLeaveEvent(
+            QGraphicsSceneHoverEvent * event);
 
 Q_SIGNALS:
     void activated(int index);
