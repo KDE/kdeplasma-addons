@@ -50,6 +50,7 @@ class LANCELOT_EXPORT CardLayout : public QObject, public QGraphicsLayout
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsLayout)
+
 public:
 
     /**

@@ -43,6 +43,7 @@ set(lancelot_LIB_SRCS
         widgets/Panel.cpp
         widgets/ResizeBordersPanel.cpp
         widgets/HoverIcon.cpp
+        widgets/TabBar.cpp
 
         widgets/ScrollBar.cpp
         widgets/ScrollPane.cpp
@@ -114,6 +115,7 @@ install(FILES
    widgets/ResizeBordersPanel.h
    widgets/Widget.h
    widgets/HoverIcon.h
+   widgets/TabBar.h
    widgets/PopupList.h
    widgets/PopupMenu.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/lancelot/widgets COMPONENT Devel)
@@ -165,6 +167,7 @@ install(FILES
    Lancelot/PlasmaServiceListModel
    Lancelot/PopupList
    Lancelot/PopupMenu
+   Lancelot/TabBar
    Lancelot/ResizeBordersPanel
    Lancelot/ScrollBar
    Lancelot/ScrollPane
