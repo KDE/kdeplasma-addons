@@ -69,7 +69,7 @@ TabBar::Private::Private(TabBar * parent)
 void TabBar::Private::relayout()
 {
     int diff;
-    QPointF cursor = QPointF(0, 0); //q->geometry().topLeft();
+    QPointF cursor = QPointF(0, 0);
     QSizeF  size = q->size();
 
     if (q->size().isNull() || tabs.size() == 0) {
@@ -88,21 +88,13 @@ void TabBar::Private::relayout()
         cursor.ry() += diff;
     }
 
-    kDebug() << "Tab" << q->size() << tabs.size() << size;
-
     foreach(Lancelot::ExtenderButton * button, tabs) {
         if (orientation == Qt::Vertical && textDirection == Qt::Horizontal) {
-            // button->setGeometry(
-            //     QRectF(cursor, QSizeF(size.height(), size.width()))
-            // );
             button->setRotation(-90);
-            button->setMaximumSize(size);
-            button->setGeometry(QRectF(cursor, size));
-
-        } else {
-            button->setMaximumSize(size);
-            button->setGeometry(QRectF(cursor, size));
         }
+
+        button->setMaximumSize(size);
+        button->setGeometry(QRectF(cursor, size));
 
         if (orientation == Qt::Horizontal) {
             cursor.rx() += diff;
