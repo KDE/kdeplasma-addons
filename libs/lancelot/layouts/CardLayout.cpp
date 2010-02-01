@@ -142,7 +142,7 @@ void CardLayout::removeAt(int i)
     d->removeItem(itemAt(i));
 }
 
-void CardLayout::show(const QString & id)
+void CardLayout::showCard(const QString & id)
 {
     if (!d->widgets.contains(id)) return;
     if (d->shown == d->widgets[id]) return;

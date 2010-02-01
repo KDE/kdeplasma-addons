@@ -21,6 +21,8 @@
 #define LANCELOT_CARD_LAYOUT_H
 
 #include <QtCore/QMap>
+#include <QtCore/QObject>
+
 #include <QtGui/QGraphicsLayout>
 #include <QtGui/QGraphicsLayoutItem>
 #include <QtGui/QGraphicsWidget>
@@ -44,8 +46,10 @@ namespace Lancelot
  *
  */
 
-class LANCELOT_EXPORT CardLayout : public QGraphicsLayout
+class LANCELOT_EXPORT CardLayout : public QObject, public QGraphicsLayout
 {
+    Q_OBJECT
+    Q_INTERFACES(QGraphicsLayout)
 public:
 
     /**
@@ -73,17 +77,19 @@ public:
      */
     void addItem(QGraphicsWidget * widget, const QString & id);
 
+public Q_SLOTS:
     /**
      * Shows the item specified by id, and hides all other
      * items
      */
-    void show(const QString & id);
+    void showCard(const QString & id);
 
     /**
      * Hides all items that can be hidden
      */
     void hideAll();
 
+public:
     L_Override void setGeometry(const QRectF & rect);
     L_Override int count() const;
     L_Override QGraphicsLayoutItem * itemAt(int i) const;

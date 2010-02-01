@@ -415,7 +415,7 @@ void LancelotWindow::sectionActivated(const QString & item)
         m_focusList << listDocumentsRight;
     }
 
-    layoutCenter->show(item);
+    layoutCenter->showCard(item);
 }
 
 void LancelotWindow::search(const QString & string)
