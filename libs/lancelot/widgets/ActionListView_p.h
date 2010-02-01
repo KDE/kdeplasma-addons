@@ -31,6 +31,8 @@
 #include <lancelot/widgets/ActionListView.h>
 #include <lancelot/widgets/CustomListView.h>
 
+#include <lancelot/widgets/CustomItemBackground_p.h>
+
 namespace Lancelot
 {
 
@@ -153,7 +155,8 @@ private:
     QSize m_categoryIconSize;
 
     ActionListViewItem * m_selectedItem;
-    Plasma::ItemBackground * m_selectedItemBackground;
+
+    CustomItemBackground * m_selectedItemBackground;
 
     friend class ActionListViewItem;
     friend class ActionListView;

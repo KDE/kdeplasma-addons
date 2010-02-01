@@ -55,6 +55,8 @@ set(lancelot_LIB_SRCS
         widgets/PopupList.cpp
         widgets/PopupMenu.cpp
 
+        widgets/CustomItemBackground_p.cpp
+
         # Layouts
         layouts/FullBorderLayout.cpp
         layouts/NodeLayout.cpp

@@ -150,7 +150,7 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, Ac
     m_itemHeight[Qt::MaximumSize]   = ITEM_MAXIMUM_SIZE;
     m_itemHeight[Qt::PreferredSize] = ITEM_PREFERRED_SIZE;
 
-    m_selectedItemBackground = new Plasma::ItemBackground(view->list());
+    m_selectedItemBackground = new CustomItemBackground(view->list());
 } //<
 
 ActionListViewItemFactory::~ActionListViewItemFactory() //>
