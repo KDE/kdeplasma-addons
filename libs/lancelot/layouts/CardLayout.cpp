@@ -33,30 +33,6 @@ public:
     {
     }
 
-    void _hide(QGraphicsWidget * widget) {
-        // since Qt has some strange bug (or it
-        // just doesn't behave as it should,
-        // this is a temporary solution
-        // so instead of hiding the item,
-        // we are removing it from scene
-
-        if (widget->parentItem()) {
-            parentItem = widget->parentItem();
-            widget->setParentItem(NULL);
-            if (widget->scene()) {
-                widget->scene()->removeItem(widget);
-            }
-        }
-    }
-
-    void _show(QGraphicsWidget * widget) {
-        // see the comment in _hide
-
-        if (!widget->parentItem()) {
-            widget->setParentItem(parentItem);
-        }
-    }
-
     void relayout()
     {
         QRectF g = q->geometry();
@@ -66,10 +42,10 @@ public:
         }
 
         foreach (QGraphicsWidget * l, widgets) {
-            _show(l);
+            l->setVisible(true);
             l->setGeometry(g);
             if (shown != l) {
-                _hide(l);
+                l->setVisible(false);
             }
         }
     }
@@ -135,8 +111,7 @@ void CardLayout::addItem(QGraphicsWidget * widget, const QString & id)
 {
     if (widget) {
         d->widgets[id] = widget;
-        // widget->hide(); // BUGS in QT
-        d->_hide(widget);
+        widget->hide();
     } else {
         d->removeItem(id);
     }
@@ -172,17 +147,17 @@ void CardLayout::show(const QString & id)
     if (!d->widgets.contains(id)) return;
     if (d->shown == d->widgets[id]) return;
     if (d->shown) {
-        d->_hide(d->shown);
+        d->shown->setVisible(false);
     }
     d->shown = d->widgets[id];
     d->shown->setGeometry(geometry());
-    d->_show(d->shown);
+    d->shown->setVisible(true);
 }
 
 void CardLayout::hideAll()
 {
     if (!d->shown) return;
-    d->_hide(d->shown);
+    d->shown->setVisible(false);
     d->shown = NULL;
 }
 

@@ -600,15 +600,14 @@ void ActionListViewItemFactory::setSelectedItem(ActionListViewItem * item, bool 
             m_selectedItem->setSelected(false);
         }
         m_selectedItem = NULL;
-        m_selectedItemBackground->setTarget(QRectF());
     } else if (m_selectedItem != item && selected) {
         if (m_selectedItem) {
             m_selectedItem->setSelected(false);
         }
         m_selectedItem = item;
         m_selectedItem->setSelected(true);
-        m_selectedItemBackground->setTarget(item->geometry());
     }
+        updateSelectedBackground(m_selectedItem);
 } //<
 
 void ActionListViewItemFactory::itemHovered() //>
@@ -625,7 +624,6 @@ void ActionListViewItemFactory::itemHovered() //>
 
 void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * item) //>
 {
-    #define INVISBLE_SIZE 0.01
     QRectF newTarget;
 
     if (item && item->isEnabled()) {
@@ -636,11 +634,15 @@ void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * i
         newTarget = m_selectedItemBackground->target();
 
         newTarget.setTopLeft(newTarget.center());
-        newTarget.setSize(QSizeF(INVISBLE_SIZE, INVISBLE_SIZE));
+        newTarget.setSize(QSizeF(0, 0));
     }
 
-    m_selectedItemBackground->setTarget(newTarget);
-    #undef INVISBLE_SIZE
+    if (newTarget.isEmpty()) {
+        m_selectedItemBackground->hide();
+    } else {
+        m_selectedItemBackground->setTarget(newTarget);
+        m_selectedItemBackground->show();
+    }
 } //<
 
 void ActionListViewItemFactory::selectRelItem(int rel) //>

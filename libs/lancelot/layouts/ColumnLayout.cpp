@@ -99,30 +99,6 @@ public:
         : q(parent), parentItem(NULL),
           sizer(new GoldenColumnSizer()), count(2) {}
 
-    void _hide(QGraphicsWidget * widget) {
-        // since Qt has some strange bug (or it
-        // just doesn't behave as it should,
-        // this is a temporary solution
-        // so instead of hiding the item,
-        // we are removing it from scene
-
-        if (widget->parentItem()) {
-            parentItem = widget->parentItem();
-            widget->setParentItem(NULL);
-            if (widget->scene()) {
-                widget->scene()->removeItem(widget);
-            }
-        }
-    }
-
-    void _show(QGraphicsWidget * widget) {
-        // see the comment in _hide
-
-        if (!widget->parentItem()) {
-            widget->setParentItem(parentItem);
-        }
-    }
-
     void relayout(RelayoutType type = Clean)
     {
         Q_UNUSED(type);
@@ -138,18 +114,17 @@ public:
 
         foreach (QGraphicsWidget * item, items) {
             if (items.size() - showItems > i++) {
-                // item->setVisible(false);
-                _hide(item);
+                item->setVisible(false);
             } else {
                 qreal itemWidth = sizer->size() * width;
                 if (itemWidth != 0) {
                     newGeometry.setWidth(itemWidth);
                     item->setGeometry(newGeometry);
-                    _show(item);
+                    item->show();
+
                     newGeometry.moveLeft(newGeometry.left() + itemWidth);
                 } else {
-                    // item->setVisible(false);
-                    _hide(item);
+                    item->setVisible(false);
                 }
             }
         }
