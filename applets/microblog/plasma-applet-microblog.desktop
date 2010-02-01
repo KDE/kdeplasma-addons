@@ -81,6 +81,7 @@ Comment[zh_CN]=更新并浏览您的微博客状态
 Comment[zh_TW]=更新並檢視您的 microblog 狀態。
 Type=Service
 ServiceTypes=Plasma/Applet
+Icon=view-pim-journal
 
 X-KDE-Library=plasma_applet_microblog
 X-KDE-PluginInfo-Author=André Duffeck
@@ -92,4 +93,6 @@ X-KDE-PluginInfo-Category=Online Services
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
+
+
 
