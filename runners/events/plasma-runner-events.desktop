@@ -2,13 +2,18 @@
 Name=Calendar Events
 Name[de]=Kalenderereignisse
 Name[es]=Eventos del calendario
+Name[fr]=Évènements d'agenda
 Name[pt]=Eventos do Calendário
 Name[pt_BR]=Eventos do calendário
 Name[uk]=Події календаря
+Name[x-test]=xxCalendar Eventsxx
 Comment=Calendar Events runner
 Comment[es]=Lanzador de eventos del calendario
+Comment[fr]=Outil d'exécution d'évènements d'agenda
 Comment[pt]=Execução de Eventos do Calendário
+Comment[pt_BR]=Execução de eventos do calendário
 Comment[uk]=Інструмент роботи з подіями календаря
+Comment[x-test]=xxCalendar Events runnerxx
 Icon=korganizer
 Type=Service
 
