@@ -42,22 +42,26 @@ ActionListViewItem::ActionListViewItem(ActionListViewItemFactory * factory)
 {
     connect(this, SIGNAL(activated()),
             this, SLOT(select()));
+    m_categoryTriangle.setImagePath("lancelot/category-triangle");
 }
 
 ActionListViewItem::~ActionListViewItem()
 {
 }
 
+Plasma::Svg ActionListViewItem::m_categoryTriangle;
+
 void ActionListViewItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
         QWidget * widget) {
-    if (isSelected() && !isHovered()) {
-        if (Plasma::FrameSvg * svg = group()->backgroundSvg()) {
-            svg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
-        }
-        paintBackground(painter, "active");
-        paintForeground(painter);
-    } else {
-        ExtenderButton::paint(painter, option, widget);
+    ExtenderButton::paint(painter, option, widget);
+
+    if (m_factory->m_categoriesActivable &&
+        m_factory->m_model->isCategory(m_factory->m_items.indexOf(this))) {
+        QSizeF diff = size() - m_categoryTriangle.size();
+        m_categoryTriangle.paint(painter,
+            diff.width() - 4,
+            diff.height() / 2
+            );
     }
 }
 

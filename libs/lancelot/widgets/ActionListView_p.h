@@ -57,6 +57,7 @@ private:
     QPointF m_mousePos;
     bool m_inSetSelected;
     ActionListViewItemFactory * m_factory;
+    static Plasma::Svg m_categoryTriangle;
 
 private Q_SLOTS:
     void select();
