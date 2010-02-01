@@ -624,24 +624,15 @@ void ActionListViewItemFactory::itemHovered() //>
 
 void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * item) //>
 {
-    QRectF newTarget;
-
-    if (item && item->isEnabled()) {
-        newTarget = item->geometry();
-    } else if (m_selectedItem) {
-        newTarget = m_selectedItem->geometry();
-    } else {
-        newTarget = m_selectedItemBackground->target();
-
-        newTarget.setTopLeft(newTarget.center());
-        newTarget.setSize(QSizeF(0, 0));
+    if (!item || !item->isEnabled()) {
+        item = m_selectedItem;
     }
 
-    if (newTarget.isEmpty()) {
-        m_selectedItemBackground->hide();
-    } else {
-        m_selectedItemBackground->setTarget(newTarget);
+    if (item) {
+        m_selectedItemBackground->setTarget(item->geometry());
         m_selectedItemBackground->show();
+    } else {
+        m_selectedItemBackground->hide();
     }
 } //<
 
