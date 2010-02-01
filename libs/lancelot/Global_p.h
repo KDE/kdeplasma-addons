@@ -41,6 +41,7 @@ public:
             const QString & property, const QVariant & value);
     void copyFrom(Group::Private * d);
     void reset();
+    KConfigGroup confGroupTheme();
 
     QString name;
     QMap < QString, QVariant > properties;
@@ -54,7 +55,6 @@ public:
 
     bool ownsBackgroundSvg : 1;
     bool loaded : 1;
-    KConfigGroup confGroupTheme();
 };
 
 class Global::Private: public QObject {
