@@ -22,13 +22,8 @@ TODO: M18 m (e) 'flick' scrolling in locked mode
 
 Library:
 TODO: L01   (e) check for memory leaks related to Private
-TODO: L02 l (a) switch groups to QMetaObject and properties
-TODO: L02 l (a) switch groups properties names to enums and integers
 TODO: L03 l (m) add margin features to layouts
 TODO: L04 l (m) add proper size hints to layouts and widgets
-TODO: L05 l (m) move the groups mechanism away from Widget
-             so that ordinary plasma widgets could be extended
-             when needed. Add groups support to HoverIcon
 
 Launcher Applet:
 None
@@ -37,20 +32,6 @@ Parts Applet:
 None
 
 Feature requests:
- - Choose which of the system buttons to show what - FINISHED
- - extenders in passageway view to overlap next list - FINISHED
- - return to the applications when the search string is empty - FINISHED
- - highlight the path in passageway view (not only the breadcrumb) - FINISHED
- - clear documents history - FINISHED
- - places to load from dolphin - FINISHED
- - choose which categories to show in the applet - FINISHED
- - menu sorting - FINISHED
- - DnD searched applications - FINISHED
- - choosing the applications in documents and computer section - FINISHED
- - The menu key should show the context menu just like alt+enter - FINISHED
- - DnD fixed devices - FINISHED
- - rearanging favorites by DnD - FINISHED
- - advanced parts widget: search bar - FINISHED
 
  - width of categories section changeable - maybe
  - web history - page titles - interesting
