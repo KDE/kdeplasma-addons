@@ -625,14 +625,22 @@ void ActionListViewItemFactory::itemHovered() //>
 
 void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * item) //>
 {
+    #define INVISBLE_SIZE 0.01
+    QRectF newTarget;
+
     if (item && item->isEnabled()) {
-        m_selectedItemBackground->setTarget(item->geometry());
+        newTarget = item->geometry();
     } else if (m_selectedItem) {
-        m_selectedItemBackground->setTarget(m_selectedItem->geometry());
+        newTarget = m_selectedItem->geometry();
     } else {
-        m_selectedItemBackground->setTarget(QRectF());
+        newTarget = m_selectedItemBackground->target();
+
+        newTarget.setTopLeft(newTarget.center());
+        newTarget.setSize(QSizeF(INVISBLE_SIZE, INVISBLE_SIZE));
     }
 
+    m_selectedItemBackground->setTarget(newTarget);
+    #undef INVISBLE_SIZE
 } //<
 
 void ActionListViewItemFactory::selectRelItem(int rel) //>
