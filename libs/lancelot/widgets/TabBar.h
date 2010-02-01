@@ -41,6 +41,9 @@ class LANCELOT_EXPORT TabBar: public QGraphicsWidget {
     Q_PROPERTY(Qt::Orientation textDirection READ textDirection WRITE setTextDirection)
     Q_PROPERTY(QString currentTab READ currentTab WRITE setCurrentTab)
 
+    // @puck L_WIDGET
+    // @puck L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
+
 public:
     TabBar(QGraphicsWidget * parent = 0);
     ~TabBar();

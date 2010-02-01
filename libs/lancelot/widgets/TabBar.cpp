@@ -69,7 +69,7 @@ TabBar::Private::Private(TabBar * parent)
 void TabBar::Private::relayout()
 {
     int diff;
-    QPointF cursor = q->geometry().topLeft();
+    QPointF cursor = QPointF(0, 0); //q->geometry().topLeft();
     QSizeF  size = q->size();
 
     if (q->size().isNull() || tabs.size() == 0) {
@@ -139,8 +139,8 @@ void TabBar::paint(QPainter * painter,
     const QStyleOptionGraphicsItem * option,
     QWidget * widget)
 {
-    painter->fillRect(0, 0, size().width(), size().height(),
-        QBrush(QColor(0, 0, 0)));
+    // painter->fillRect(0, 0, size().width(), size().height(),
+    //     QBrush(QColor(0, 0, 0)));
 }
 
 Qt::Orientation TabBar::orientation() const

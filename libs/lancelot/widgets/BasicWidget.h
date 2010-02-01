@@ -51,7 +51,7 @@ class LANCELOT_EXPORT BasicWidget: public Lancelot::Widget {
     Q_PROPERTY ( Qt::Orientation innerOrientation READ innerOrientation WRITE setInnerOrientation )
 
     // @puck L_WIDGET
-    // @puck L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
+    // @puck L_INCLUDE(lancelot/widgets/TabBar.h QIcon QSize QString)
 
 public:
     /**
