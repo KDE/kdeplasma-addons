@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2008 by Thomas Gillespie <tomjamesgillespie@googlemail.com> *
+ *   Copyright 2010 by Enrico Ros <enrico.ros@gmail.com>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,18 +19,16 @@
  ***************************************************************************/
 
 #include "bball.h"
-#include <QPainter>
-#include <QSizeF>
-#include <qdesktopwidget.h>
+#include <QtCore/QSizeF>
+#include <QtGui/QPainter>
+#include <QtGui/QDesktopWidget>
+#include <QtGui/QGraphicsScene>
+#include <QtGui/QGraphicsSceneMouseEvent>
 #include <KSharedConfig>
 #include <KLocale>
 #include <KStandardDirs>
 #include <KIO/NetAccess>
 #include <KMessageBox>
-
-#include <plasma/svg.h>
-#include <plasma/theme.h>
-#include <plasma/animator.h>
 
 #include <stdlib.h>
 
@@ -37,462 +36,397 @@
 #include <iso646.h>
 #endif
 
-const int ball_size = 100;
-const int ball_radius = ball_size / 2;
-const int ball_circum = (int) (2.0 * 3.14158 * ball_radius);
+// default values
+static const int initial_ball_radius = 64;
 
 using namespace Plasma;
 
-bballApplet::bballApplet (QObject * parent, const QVariantList & args):
-  Plasma::Applet(parent, args),
-  m_radius(50),
-  m_bottom_left(0),
-  m_bottom_right(0),
-  m_bottom(0),
-  m_angle(0.0),
-  m_ball_img(),
-  m_x_vel(0.0),
-  m_y_vel(0.0),
-  m_circum_vel(0.0),
-  m_mouse_pressed(false),
-  m_refresh_pos(false)
+bballApplet::bballApplet(QObject * parent, const QVariantList & args):
+    Plasma::Applet(parent, args),
+    // keep this in sync with readConfiguration's default values
+    m_overlay_enabled(false),
+    m_overlay_opacity(0),
+    m_gravity(1.5),
+    m_friction(0.03),
+    m_restitution(0.8),
+    m_sound_enabled(false),
+    m_sound_volume(100),
+    m_auto_bounce_enabled(false),
+    m_auto_bounce_strength(0),
+    // more status
+    m_radius(initial_ball_radius),
+    m_angle(0),
+    m_angularVelocity(0),
+    m_mousePressed(false),
+    m_soundPlayer(0),
+    m_audioOutput(0)
 {
-  setHasConfigurationInterface (true);
-  //TODO figure out why it is not good enough to set it here
-  // but that it needs to be set in constraintsEvent
-  // see also the icon applet
-  // update: apparently it gets reset when the formfactor changes
-  // this can be caught in constraintsEvent with Plasma::FormFactorConstraint
-  setBackgroundHints(NoBackground);
-  resize(125, 125);
+    setHasConfigurationInterface(true);
+    //TODO figure out why it is not good enough to set it here
+    // but that it needs to be set in constraintsEvent
+    // see also the icon applet
+    // update: apparently it gets reset when the formfactor changes
+    // this can be caught in constraintsEvent with Plasma::FormFactorConstraint
+    setBackgroundHints(NoBackground);
+    resize(contentSizeHint());
 }
 
-bballApplet::~bballApplet ()
+void bballApplet::init()
 {
+    readConfiguration();
+    // monitor the scene for size changes (so we change the bouncing rect)
+    if (scene())
+        connect(scene(), SIGNAL(sceneRectChanged(QRectF)), this, SLOT(updateScreenRect()));
+    m_timer.start(25, this);
 }
 
-void bballApplet::init ()
+void bballApplet::paintInterface(QPainter * p, const QStyleOptionGraphicsItem * option, const QRect & contentsRect)
 {
-  readConfiguration();
+    Q_UNUSED(option);
+    Q_UNUSED(contentsRect);
 
-  m_sound = new Phonon::MediaObject (this);
-  audioOutput = new Phonon::AudioOutput (Phonon::MusicCategory, this);
-  if (m_sound_enabled)
-  {
-    m_sound->setCurrentSource (m_sound_url);
-    audioOutput->setVolume (m_sound_volume);
-  }
-  createPath (m_sound, audioOutput);
+    if (m_ballPixmap.isNull())
+        return;
 
-  m_position = QRectF(geometry().x(), geometry().y(), 100, 100);
-  QDesktopWidget *desktop = new QDesktopWidget();
-  m_screen = desktop->availableGeometry();
-
-  //timer
-  m_timer = new QTimer (this);
-  connect(m_timer, SIGNAL(timeout()), this, SLOT(goPhysics()));
-  m_timer->start(25);
-  delete desktop;
+    if (m_angle) {
+        p->translate(m_radius, m_radius);
+        p->rotate(360 * m_angle / 6.28);
+        p->translate(-m_radius, -m_radius);
+        p->setRenderHint(QPainter::SmoothPixmapTransform);
+        p->setRenderHint(QPainter::Antialiasing);
+    }
+    p->drawPixmap(QPoint(0, 0), m_ballPixmap);
 }
 
-void bballApplet::readConfiguration()
+QSizeF bballApplet::contentSizeHint() const
 {
-  KConfigGroup cg = config ();
-
-  //Appearance
-  m_image_url = cg.readEntry ("ImgURL", KStandardDirs::locate ("data", "bball/bball.svgz"));
-  m_ball_img.setImagePath(m_image_url);
-  m_overlay_enabled = cg.readEntry ("OverlayEnabled", false);
-  m_overlay_colour = cg.readEntry ("OverlayColour", QColor ());
-  m_overlay_opacity = cg.readEntry ("OverlayOpactiy", 0);
-  kDebug() << m_overlay_enabled;
-  kDebug() << m_overlay_colour;
-  kDebug() << m_overlay_opacity;
-  updateScaledBallImage();
-
-  //Physics
-  m_gravity = cg.readEntry ("Gravity", 1.5);
-  m_friction = cg.readEntry ("Friction", 0.97);
-  m_resitution = cg.readEntry ("Resitution", 0.8);
-
-  //Sound
-  m_sound_enabled = cg.readEntry ("SoundEnabled", false);
-  m_sound_url = cg.readEntry ("SoundURL", KStandardDirs::locate ("data", "bball/bounce.ogg"));
-  m_sound_volume = cg.readEntry ("SoundVolume", 100);
-
-  //Misc
-  m_auto_bounce_enabled = cg.readEntry ("AutoBounceEnabled", false);
-  m_auto_bounce_strength = cg.readEntry ("AutoBounceStrength", 0);
+    return QSizeF(m_radius * 2, m_radius * 2);
 }
 
 void bballApplet::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget;
-    ui.setupUi (widget);
+    ui.setupUi(widget);
 
-    connect(parent, SIGNAL(accepted()), this, SLOT(configAccepted()));
+    // Appearance
+    ui.imageUrl->setUrl(KUrl::fromPath(m_image_url));
+    ui.colourizeEnabled->setChecked(m_overlay_enabled);
+    ui.colourizeLabel->setEnabled(m_overlay_enabled);
+    ui.colourize->setEnabled(m_overlay_enabled);
+    ui.colourize->setColor(m_overlay_colour);
+    ui.colourizeOpacityLabel->setEnabled(m_overlay_enabled);
+    ui.colourizeOpacitySlider->setEnabled(m_overlay_enabled);
+    ui.colourizeOpacitySlider->setSliderPosition(static_cast< int >(m_overlay_opacity/2.55)-1);
 
-    //Appearance
-    ui.imageUrl->setUrl (KUrl::fromPath (m_image_url));
-    ui.colourizeEnabled->setChecked (m_overlay_enabled);
-    ui.colourizeLabel->setEnabled (m_overlay_enabled);
-    ui.colourize->setEnabled (m_overlay_enabled);
-    ui.colourize->setColor (m_overlay_colour);
-    ui.colourizeOpacityLabel->setEnabled (m_overlay_enabled);
-    ui.colourizeOpacitySlider->setEnabled (m_overlay_enabled);
-    ui.colourizeOpacitySlider->setSliderPosition (static_cast < int >(m_overlay_opacity/2.55)-1);
+    // Physics
+    ui.gravity->setSliderPosition(static_cast< int >(m_gravity * 100));
+    ui.friction->setSliderPosition(static_cast< int >(m_friction * 100));
+    ui.resitution->setSliderPosition(static_cast < int >(m_restitution * 100));
 
-    //Physics
-    ui.gravity->setSliderPosition (static_cast < int >(m_gravity * 100));
-    ui.friction->setSliderPosition (static_cast < int >(100 - m_friction * 100));
-    ui.resitution->setSliderPosition (static_cast < int >(m_resitution * 100));
+    // Sound
+    ui.soundEnabled->setChecked(m_sound_enabled);
+    ui.soundVolumeLabel->setEnabled(m_sound_enabled);
+    ui.soundVolume->setEnabled(m_sound_enabled);
+    ui.soundVolume->setSliderPosition(m_sound_volume);
+    ui.soundFileLabel->setEnabled(m_sound_enabled);
+    ui.soundFile->setEnabled(m_sound_enabled);
+    ui.soundFile->setUrl(KUrl::fromPath(m_sound_url));
 
-    //Sound
-    ui.soundEnabled->setChecked (m_sound_enabled);
-    ui.soundVolumeLabel->setEnabled (m_sound_enabled);
-    ui.soundVolume->setEnabled (m_sound_enabled);
-    ui.soundVolume->setSliderPosition (m_sound_volume);
-    ui.soundFileLabel->setEnabled (m_sound_enabled);
-    ui.soundFile->setEnabled (m_sound_enabled);
-    ui.soundFile->setUrl (KUrl::fromPath (m_sound_url));
+    // Misc
+    ui.autoBounceEnabled->setChecked(m_auto_bounce_enabled);
+    ui.autoBounceStrengthLabel->setEnabled(m_auto_bounce_enabled);
+    ui.autoBounceStrength->setValue(static_cast < int >(m_auto_bounce_strength));
+    ui.autoBounceStrength->setEnabled(m_auto_bounce_enabled);
 
-    //Misc
-    ui.autoBounceEnabled->setChecked (m_auto_bounce_enabled);
-    ui.autoBounceStrengthLabel->setEnabled (m_auto_bounce_enabled);
-    ui.autoBounceStrength->setValue (static_cast < int >(m_auto_bounce_strength));
-    ui.autoBounceStrength->setEnabled (m_auto_bounce_enabled);
     parent->addPage(widget, i18n("General"), icon());
+    connect(parent, SIGNAL(accepted()), this, SLOT(configurationChanged()));
 }
 
-void bballApplet::configAccepted ()
+void bballApplet::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-  KConfigGroup cg = config ();
+    if (immutability() != Plasma::Mutable)
+        return;
 
-  //Appearance
-  if(KIO::NetAccess::exists(ui.imageUrl->url (), KIO::NetAccess::SourceSide, NULL))
-  {
-    m_image_url = ui.imageUrl->url ().path ();
-    m_ball_img.setImagePath(m_image_url);
-    cg.writeEntry ("ImgURL", m_image_url);
-  }
-  else
-  {
-    KMessageBox::error(0, i18n("The given image could not be loaded. The image will not be changed."));
-  }
-  m_overlay_enabled = ui.colourizeEnabled->checkState () == Qt::Checked;
-  cg.writeEntry ("OverlayEnabled", m_overlay_enabled);
-  m_overlay_colour = ui.colourize->color ();
-  cg.writeEntry ("OverlayColour", m_overlay_colour);
-  m_overlay_opacity = static_cast < int > (ui.colourizeOpacitySlider->value() * 2.55);
-  kDebug() << "Colour: h-" << m_overlay_colour.hueF() << " s-" << m_overlay_colour.saturationF() << " v-" << m_overlay_colour.valueF() << endl;
-  cg.writeEntry ("OverlayOpacity", m_overlay_opacity);
-  m_overlay_colour.setAlpha (m_overlay_opacity);
-  updateScaledBallImage();
+    if (m_geometry.isNull())
+        syncGeometry();
 
-  //Physics
-  m_gravity = ui.gravity->value () / 100.0;
-  cg.writeEntry ("Gravity", m_gravity);
-  m_friction = (100 - ui.friction->value ()) / 100.0;
-  cg.writeEntry ("Friction", m_friction);
-  m_resitution = ui.resitution->value () / 100.0;
-  cg.writeEntry ("Resitution", m_resitution);
+    // reset timing
+    m_timer.stop();
+    m_time = QTime();
 
-  //Sound
-  m_sound_enabled = (ui.soundEnabled->checkState () == Qt::Checked);
-  cg.writeEntry ("SoundEnabled", m_sound_enabled);
-  if ( m_sound_enabled )
-  {
-    if(KIO::NetAccess::exists(ui.soundFile->url (), KIO::NetAccess::SourceSide, NULL))
-    {
-      m_sound_url = ui.soundFile->url ().path ();
-      cg.writeEntry ("SoundURL", m_sound_url);
-      m_sound->setCurrentSource (m_sound_url);
+    // reset physics
+    m_velocity = QVector2D();
+    m_angularVelocity = 0;
+
+    // save mouse position
+    m_mouseScenePos = event->scenePos();
+    m_mousePressed = true;
+
+    event->accept();
+}
+
+void bballApplet::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (immutability() != Plasma::Mutable)
+        return;
+
+    // TODO: use real timing instead of the fixed step (1/0.025)
+    m_velocity = QVector2D(m_mouseScenePos - m_prevMouseScenePos) / 0.025;
+    m_mousePressed = false;
+    m_timer.start(25, this);
+    event->accept();
+}
+
+void bballApplet::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (immutability() != Plasma::Mutable)
+        return;
+
+    m_prevMouseScenePos = m_mouseScenePos;
+    m_mouseScenePos = event->scenePos();
+    m_geometry.translate(m_mouseScenePos - m_prevMouseScenePos);
+    setGeometry(m_geometry);
+    event->accept();
+}
+
+void bballApplet::timerEvent(QTimerEvent *event)
+{
+    if (event->timerId() == m_timer.timerId()) {
+        updatePhysics();
+        return;
     }
-    else
-    {
-      KMessageBox::error(0, i18n("The given sound could not be loaded. The sound will not be changed."));
-    }
-    m_sound_volume = ui.soundVolume->value ();
-    cg.writeEntry ("SoundVolume", m_sound_volume);
-    audioOutput->setVolume (m_sound_volume);
-  }
-
-  //Misc
-  m_auto_bounce_enabled = ui.autoBounceEnabled->checkState () == Qt::Checked;
-  cg.writeEntry ("AutoBounceEnabled", m_auto_bounce_enabled);
-  m_auto_bounce_strength = ui.autoBounceStrength->value ();
-  cg.writeEntry ("AutoBounceStrength", m_auto_bounce_strength);
-  if ( m_auto_bounce_enabled)
-  {
-    m_timer->start ();
-  }
-
-  //mouse - undo the mouse clicked
-  m_mouse_pressed = false;
-
-  update();
+    Applet::timerEvent(event);
 }
 
-QSizeF bballApplet::contentSizeHint() const
+void bballApplet::constraintsEvent(Plasma::Constraints constraints)
 {
-    return QSizeF(m_radius*2, m_radius*2);
-}
+    if (constraints & Plasma::LocationConstraint)
+        m_geometry = QRectF();
 
-void bballApplet::constraintsEvent (Plasma::Constraints constraints)
-{
-    if (constraints & Plasma::FormFactorConstraint) {
+    if (constraints & Plasma::FormFactorConstraint)
         setBackgroundHints(NoBackground);
+
+    if (constraints & Plasma::SizeConstraint)
+        syncGeometry();
+}
+
+void bballApplet::updateScreenRect()
+{
+    m_screenRect = QDesktopWidget().availableGeometry();
+    m_timer.start(25, this);
+}
+
+void bballApplet::configurationChanged()
+{
+    KConfigGroup cg = config();
+
+    // Appearance
+    if (KIO::NetAccess::exists(ui.imageUrl->url(), KIO::NetAccess::SourceSide, NULL)) {
+        m_image_url = ui.imageUrl->url().path();
+        cg.writeEntry("ImgURL", m_image_url);
+        m_ballSvg.setImagePath(m_image_url);
+    } else
+        KMessageBox::error(0, i18n("The given image could not be loaded. The image will not be changed."));
+    m_overlay_enabled = ui.colourizeEnabled->checkState() == Qt::Checked;
+    cg.writeEntry("OverlayEnabled", m_overlay_enabled);
+    m_overlay_colour = ui.colourize->color();
+    cg.writeEntry("OverlayColour", m_overlay_colour);
+    m_overlay_opacity = static_cast< int >(ui.colourizeOpacitySlider->value() * 2.55);
+    cg.writeEntry("OverlayOpacity", m_overlay_opacity);
+    m_overlay_colour.setAlpha(m_overlay_opacity);
+    updateScaledBallImage();
+
+    // Physics
+    m_gravity = (qreal)ui.gravity->value() / 100.0;
+    cg.writeEntry("Gravity", m_gravity);
+    m_friction = (qreal)ui.friction->value() / 100.0;
+    cg.writeEntry("Friction", 1.0 - m_friction); // RETROCOMP
+    m_restitution = ui.resitution->value () / 100.0;
+    cg.writeEntry("Resitution", m_restitution);
+
+    // Sound
+    m_sound_enabled = ui.soundEnabled->checkState() == Qt::Checked;
+    cg.writeEntry("SoundEnabled", m_sound_enabled);
+    if (m_sound_enabled) {
+        if (KIO::NetAccess::exists(ui.soundFile->url(), KIO::NetAccess::SourceSide, NULL)) {
+            m_sound_url = ui.soundFile->url().path();
+            cg.writeEntry("SoundURL", m_sound_url);
+            if (m_soundPlayer)
+                m_soundPlayer->setCurrentSource(m_sound_url);
+        } else
+            KMessageBox::error(0, i18n("The given sound could not be loaded. The sound will not be changed."));
+    }
+    m_sound_volume = ui.soundVolume->value();
+    cg.writeEntry("SoundVolume", m_sound_volume);
+    if (m_audioOutput)
+        m_audioOutput->setVolume(m_sound_volume);
+
+    // Misc
+    m_auto_bounce_enabled = ui.autoBounceEnabled->checkState() == Qt::Checked;
+    cg.writeEntry("AutoBounceEnabled", m_auto_bounce_enabled);
+    m_auto_bounce_strength = ui.autoBounceStrength->value();
+    cg.writeEntry ("AutoBounceStrength", m_auto_bounce_strength);
+    if (m_auto_bounce_enabled)
+        m_timer.start(25, this);
+
+    // mouse - undo the mouse clicked
+    m_mousePressed = false;
+
+    update();
+}
+
+void bballApplet::readConfiguration()
+{
+    KConfigGroup cg = config ();
+
+    // Appearance
+    m_image_url = cg.readEntry("ImgURL", KStandardDirs::locate("data", "bball/bball.svgz"));
+    m_overlay_enabled = cg.readEntry("OverlayEnabled", false);
+    m_overlay_colour = cg.readEntry("OverlayColour", QColor());
+    m_overlay_opacity = cg.readEntry("OverlayOpactiy", 0);
+    m_ballSvg.setImagePath(m_image_url);
+    updateScaledBallImage();
+
+    // Physics
+    m_gravity = cg.readEntry("Gravity", 1.5);
+    m_friction = 1.0 - cg.readEntry("Friction", 0.97); // RETROCOMP
+    m_restitution = cg.readEntry("Resitution", 0.8);
+
+    // Sound
+    m_sound_enabled = cg.readEntry("SoundEnabled", false);
+    m_sound_url = cg.readEntry("SoundURL", KStandardDirs::locate ("data", "bball/bounce.ogg"));
+    m_sound_volume = cg.readEntry("SoundVolume", 100);
+
+    // Misc
+    m_auto_bounce_enabled = cg.readEntry("AutoBounceEnabled", false);
+    m_auto_bounce_strength = cg.readEntry("AutoBounceStrength", 0);
+}
+
+void bballApplet::updatePhysics()
+{
+    // find out the delta-time since the last call
+    if (m_time.isNull())
+        m_time.start();
+    qreal dT = qMin((qreal)m_time.restart() / 1000.0, 0.5);
+
+    // skip progessing if externally moved (disabled because plasma moves this too frequently)
+    //if (m_geometry != geometry())
+    //    m_geometry = QRectF();
+
+    // skip if dragging
+    if (m_mousePressed || m_geometry.isNull() || m_radius < 1)
+        return;
+
+    if (m_screenRect.isNull())
+        updateScreenRect();
+
+    // add some randomness if autobouncing
+    if (m_auto_bounce_enabled && rand() < RAND_MAX/35) {
+        m_velocity += QVector2D(
+                (rand() - RAND_MAX/2) * m_auto_bounce_strength * 0.0000005,
+                (rand() - RAND_MAX/2) * m_auto_bounce_strength * 0.0000005);
     }
 
-    if (constraints & Plasma::LocationConstraint) {
-        // m_position needs to be updated
-        m_refresh_pos = true;
+    // update velocity and position
+    m_velocity += QVector2D(0, (qreal)m_screenRect.height() * m_gravity * dT);
+    m_velocity *= (1.0 - m_friction * dT);
+    m_geometry.translate((m_velocity * dT).toPointF());
+
+    // floor
+    bool collision = false;
+    bool bottom = false;
+    if (m_geometry.bottom() >= m_screenRect.bottom() && m_velocity.y() > 0) {
+        m_geometry.moveBottom(m_screenRect.bottom());
+        m_velocity *= QVector2D(1, -m_restitution);
+        m_angularVelocity = m_velocity.x() / m_radius;
+        collision = true;
+        bottom = true;
     }
 
-    if (constraints & Plasma::SizeConstraint) {
-        m_position = geometry();
-        m_radius = static_cast<int>(geometry().width()) / 2;
-        updateScaledBallImage();
+    // ceiling
+    if (m_geometry.top() <= m_screenRect.top() && m_velocity.y() < 0) {
+        m_geometry.moveTop(m_screenRect.top ());
+        m_velocity *= QVector2D(1, -m_restitution);
+        m_angularVelocity = -m_velocity.x() / m_radius;
+        collision = true;
     }
+
+    // right
+    if (m_geometry.right() >= m_screenRect.right() && m_velocity.x() > 0) {
+        m_geometry.moveRight(m_screenRect.right() - 0.1);
+        m_velocity *= QVector2D(-m_restitution, 1);
+        m_angularVelocity = -m_velocity.y() / m_radius;
+        if (bottom)
+            m_velocity.setX(0);
+        collision = true;
+    }
+
+    // left
+    if (m_geometry.left() <= m_screenRect.left() && m_velocity.x() < 0) {
+        m_geometry.moveLeft(m_screenRect.left () + 0.1);
+        m_velocity *= QVector2D(-m_restitution, 1);
+        m_angularVelocity = m_velocity.y() / m_radius;
+        if (bottom)
+            m_velocity.setX(0);
+        collision = true;
+    }
+
+    m_angle += m_angularVelocity * dT;
+
+    if (collision)
+        playBoingSound();
+
+    // stop animation if reached bottom and still
+    if (m_velocity.length() < 20.0 && m_geometry.bottom() >= m_screenRect.bottom() && !m_auto_bounce_enabled) {
+        m_timer.stop();
+        return;
+    }
+
+    // move this and update graphics
+    setGeometry(m_geometry);
+    update();
+}
+
+void bballApplet::playBoingSound()
+{
+    if (!m_sound_enabled || m_velocity.x() == 0.0 || m_velocity.y() == 0.0)
+        return;
+
+    // create the player if missing
+    if (!m_soundPlayer) {
+        m_soundPlayer = new Phonon::MediaObject(this);
+        m_soundPlayer->setCurrentSource(m_sound_url);
+        m_audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
+        m_audioOutput->setVolume(m_sound_volume);
+        createPath(m_soundPlayer, m_audioOutput);
+    }
+
+    // play the sound
+    m_soundPlayer->seek(0);
+    m_soundPlayer->play();
+}
+
+void bballApplet::syncGeometry()
+{
+    m_geometry = geometry();
+    m_radius = static_cast<int>(geometry().width()) / 2;
+    updateScaledBallImage();
 }
 
 void bballApplet::updateScaledBallImage()
 {
+    // regen m_ballPixmap
+    m_ballSvg.resize(contentSizeHint());
+    m_ballPixmap = m_ballSvg.pixmap();
 
-  kDebug() << "Updating Ball";
-  kDebug() << m_overlay_enabled;
-  kDebug() << m_overlay_colour;
-  kDebug() << m_overlay_opacity;
-
-  m_ball_img.resize( m_radius * 2, m_radius * 2 );
-  m_pixmap = m_ball_img.pixmap();
-  if (m_overlay_enabled)
-  {
-    QPainter p(&m_pixmap);
-    p.setPen (QColor (0, 0, 0, 0));
-    p.setBrush (m_overlay_colour);
-    p.drawPie (m_pie_size, 0, 5760);
-  }
-
-  m_pie_size = QRectF(0, 0, m_radius * 2, m_radius * 2);
-}
-
-inline void bballApplet::adjustAngularVelocity( double * velocity, double circ_velocity )
-{
-  // make sure angular velocity doesn't infinitely accelerate
-  if (qAbs (*velocity + circ_velocity) <= qAbs (circ_velocity))
-  {
-    *velocity = circ_velocity;
-  }
-}
-
-inline void bballApplet::bottomCollision()
-{
-  m_position.moveBottom (m_screen.bottom ());
-  m_y_vel *= -m_resitution;
-  adjustAngularVelocity( &m_x_vel, m_circum_vel );
-  m_circum_vel = m_x_vel;
-  m_bottom=1;
-}
-
-inline void bballApplet::topCollision()
-{
-  m_position.moveTop (m_screen.top ());
-  m_y_vel *= -m_resitution;
-  adjustAngularVelocity( &m_x_vel, -m_circum_vel );
-  m_circum_vel = -m_x_vel;
-}
-
-inline void bballApplet::rightCollision()
-{
-  m_position.moveRight (m_screen.right () - 0.1);
-  m_x_vel *= -m_resitution;
-  adjustAngularVelocity( &m_y_vel, -m_circum_vel );
-  m_circum_vel = -m_y_vel;
-  if (m_bottom == 1)
-  {
-    //kDebug() << "HIT Bottom AND RIGHT";
-    m_x_vel = 0.0;
-    m_bottom=0;
-    m_bottom_right=1;
-  }
-}
-
-inline void bballApplet::leftCollision()
-{
-  m_position.moveLeft (m_screen.left () + 0.1);
-  m_x_vel *= -m_resitution;
-  adjustAngularVelocity( &m_y_vel, m_circum_vel );
-  m_circum_vel = m_y_vel;
-  if (m_bottom == 1)
-  {
-    //kDebug() << "HIT Bottom AND LEFT";
-    m_bottom=0;
-    m_bottom_left=1;
-  }
-}
-
-inline void bballApplet::checkCollisions()
-{
-  bool collision = false;
-  kDebug() << "my geometry: " << geometry();
-
-  //floor
-  if (m_position.bottom() >= m_screen.bottom())
-  {
-    bottomCollision();
-    collision = true;
-    kDebug() << "m_position.bottom: " << m_position.bottom();
-    kDebug() << "m_screen.bottom: " << m_screen.bottom();
-    kDebug() << "geometry: " << geometry();
-    kDebug() << "pixmap geometry: " << m_pixmap.size();
-    kDebug() << "Bottom collision";
-  }
-
-  //ceiling
-  if (m_position.top () <= m_screen.top ())
-  {
-    topCollision();
-    collision = true;
-  }
-
-  //right
-  if (m_position.right () >= m_screen.right ())
-  {
-    rightCollision();
-    collision = true;
-  }
-
-  //left
-  if (m_position.left () <= m_screen.left ())
-  {
-    leftCollision();
-    collision = true;
-  }
-
-  if ( collision )
-  {
-    boing();
-  }
-}
-
-inline void bballApplet::applyPhysics()
-{
-  m_y_vel += m_gravity;
-  m_y_vel *= m_friction;
-  m_x_vel *= m_friction;
-  if (m_bottom_right == 1 || m_bottom_left == 1) {
-    m_x_vel=0.0;
-  }
-}
-
-inline void bballApplet::moveAndRotateBall()
-{
-  m_position.translate (m_x_vel, m_y_vel);
-  m_angle += (m_circum_vel / ball_circum) * 360.0;
-  setGeometry(m_position);
-}
-
-void bballApplet::goPhysics ()
-{
-  if ( m_mouse_pressed ) {
-    return;
-  }
-
-  if ( m_x_vel < 1.0 and m_y_vel < 1.0 and m_position.bottom() >= m_screen.bottom() and !m_auto_bounce_enabled )
-  {
-    m_timer->stop();
-    return;
-  }
-  //add some randomness, maybe
-  if(rand() < RAND_MAX/35 and m_auto_bounce_enabled)
-  {
-    int randx, randy; //lol
-    randx = rand();
-    randy = rand();
-    m_x_vel += (randx - RAND_MAX/2) * m_auto_bounce_strength * 0.000000005;
-    m_y_vel += (randy - RAND_MAX/2) * m_auto_bounce_strength * 0.000000005;
-  }
-
-  checkCollisions();
-
-  applyPhysics();
-  moveAndRotateBall();
-}
-
-
-void bballApplet::boing ()
-{
-  if (m_sound_enabled and m_x_vel != 0 and m_y_vel != 0)
-  {
-    m_sound->seek(0);
-    m_sound->play();
-  }
-}
-
-void bballApplet::paintInterface (QPainter * p, const QStyleOptionGraphicsItem * option, const QRect & contentsRect)
-{
-  Q_UNUSED (option);
-  Q_UNUSED( contentsRect );
-
-// INFO - Not needed, if ball is still plasma does not paint, and if this is in it messes up repaintting if, for example, the mouse is hovered over it.
-//  if (m_x_vel == 0 and m_y_vel == 0 and not m_mouse_pressed)
-//  {
-//   return;
-//  }
-
-  p->setRenderHint (QPainter::SmoothPixmapTransform);
-  p->setRenderHint (QPainter::Antialiasing);
-
-  p->translate(m_radius, m_radius);
-  p->rotate(m_angle);
-  p->translate(-m_radius, -m_radius);
-  p->drawPixmap(QPoint(0, 0), m_pixmap);
-}
-
-void bballApplet::mousePressEvent (QGraphicsSceneMouseEvent * event)
-{
-    if (immutability() != Plasma::Mutable) {
-        return;
+    // tint the pixmap if requested
+    if (m_overlay_enabled) {
+        QPainter p(&m_ballPixmap);
+        p.setRenderHint(QPainter::Antialiasing, true);
+        p.setPen(Qt::NoPen);
+        p.setBrush(m_overlay_colour);
+        p.drawEllipse(QRectF(0, 0, m_radius * 2, m_radius * 2));
     }
-
-    if (m_refresh_pos) {
-        m_refresh_pos = false;
-        m_position = geometry();
-    }
-
-    m_x_vel = 0;
-    m_y_vel = 0;
-    m_circum_vel = 0;
-    m_mouse = event->scenePos();
-    m_mouse_pressed = true;
-    event->accept();
-}
-
-void bballApplet::mouseReleaseEvent (QGraphicsSceneMouseEvent * event)
-{
-    if (immutability() != Plasma::Mutable) {
-        return;
-    }
-
-    m_x_vel = (m_mouse - m_old_mouse).x();
-    m_y_vel = (m_mouse - m_old_mouse).y();
-    m_mouse_pressed = false;
-    m_timer->start();
-    event->accept();
-}
-
-void bballApplet::mouseMoveEvent (QGraphicsSceneMouseEvent * event)
-{
-    if (immutability() != Plasma::Mutable) {
-        return;
-    }
-
-    m_old_mouse = m_mouse;
-    m_mouse = event->scenePos();
-    m_position.translate(m_mouse - m_old_mouse);
-    setGeometry(m_position);
-    event->accept();
 }
 
 #include "bball.moc"

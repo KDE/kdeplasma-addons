@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2008 by Thomas Gillespie <tomjamesgillespie@googlemail.com> *
+ *   Copyright 2010 by Enrico Ros <enrico.ros@gmail.com>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,8 +21,9 @@
 #ifndef bball_HEADER
 #define bball_HEADER
 
-#include <QTimer>
-#include <QGraphicsSceneMouseEvent>
+#include <QtCore/QBasicTimer>
+#include <QtCore/QTime>
+#include <QtGui/QVector2D>
 #include <KConfigDialog>
 
 #include <Plasma/Applet>
@@ -34,60 +36,81 @@
 
 #include "ui_bballConfig.h"
 
+class QGraphicsSceneMouseEvent;
 class QSizeF;
 
 class bballApplet : public Plasma::Applet
 {
     Q_OBJECT
 public:
-  bballApplet (QObject * parent, const QVariantList & args);
-  ~bballApplet ();
-  void init ();
-  void paintInterface (QPainter * painter, const QStyleOptionGraphicsItem * option, const QRect & contentsRect);
-  QSizeF contentSizeHint () const;
+    bballApplet(QObject * parent, const QVariantList & args);
 
-  void mousePressEvent (QGraphicsSceneMouseEvent * event);
-  void mouseReleaseEvent (QGraphicsSceneMouseEvent * event);
-  void mouseMoveEvent (QGraphicsSceneMouseEvent * event);
-
-  public slots:
-    void goPhysics ();
+    // ::Plasma::Applet
+    void init();
+    void paintInterface(QPainter * painter, const QStyleOptionGraphicsItem * option, const QRect & contentsRect);
+    QSizeF contentSizeHint() const;
     void createConfigurationInterface(KConfigDialog *parent);
 
-  protected slots:
-    void configAccepted ();
+    // ::QGraphicsItem
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    void timerEvent(QTimerEvent *event);
 
-  protected:
-    void constraintsEvent (Plasma::Constraints constraints);
+protected:
+    // ::Plasma::Applet
+    void constraintsEvent(Plasma::Constraints constraints);
+
+protected Q_SLOTS:
+    void updateScreenRect();
+    void configurationChanged();
 
 private:
-  void boing ();
-  void updateScaledBallImage();
-  void readConfiguration();
-  inline void adjustAngularVelocity( double * velocity, double circ_velocity );
-  inline void bottomCollision();
-  inline void topCollision();
-  inline void leftCollision();
-  inline void rightCollision();
-  inline void checkCollisions();
-  inline void applyPhysics();
-  inline void moveAndRotateBall();
+    void readConfiguration();
+    void updatePhysics();
+    void playBoingSound();
+    void syncGeometry();
+    void updateScaledBallImage();
 
-  int m_radius, m_old_radius, m_sound_volume, m_overlay_opacity, m_bottom_left, m_bottom_right, m_bottom;
-  QRectF m_position, m_screen, m_pie_size;
-  QPointF m_old_mouse, m_mouse;
-  qreal m_angle;
-  Plasma::Svg m_ball_img;
-  QPixmap m_pixmap;
-  double m_x_vel, m_y_vel, m_gravity, m_resitution, m_friction, m_circum_vel, m_auto_bounce_strength;
-    bool m_mouse_pressed, m_sound_enabled, m_auto_bounce_enabled, m_overlay_enabled, m_refresh_pos;
-  QTimer *m_timer;
-  //Config dialog
-  Ui::bballConfig ui;
-  QString m_image_url, m_sound_url;
-  QColor m_overlay_colour;
-  Phonon::AudioOutput * audioOutput;
-  Phonon::MediaObject * m_sound;
+    // config values
+    QString m_image_url;
+    bool m_overlay_enabled;
+    int m_overlay_opacity;
+    QColor m_overlay_colour;
+
+    qreal m_gravity, m_friction, m_restitution;
+
+    bool m_sound_enabled;
+    int m_sound_volume;
+    QString m_sound_url;
+
+    bool m_auto_bounce_enabled;
+    qreal m_auto_bounce_strength;
+
+    // status
+    QBasicTimer m_timer;
+    QTime m_time;
+
+    QRectF m_screenRect;
+
+    int m_radius;
+    QRectF m_geometry;
+    QVector2D m_velocity;
+
+    qreal m_angle;
+    qreal m_angularVelocity;
+
+    Plasma::Svg m_ballSvg;
+    QPixmap m_ballPixmap;
+
+    bool m_mousePressed;
+    QPointF m_mouseScenePos;
+    QPointF m_prevMouseScenePos;
+
+    Ui::bballConfig ui;
+
+    Phonon::MediaObject * m_soundPlayer;
+    Phonon::AudioOutput * m_audioOutput;
 };
 
 K_EXPORT_PLASMA_APPLET (BbalL, bballApplet)
