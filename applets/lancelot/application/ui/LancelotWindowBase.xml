@@ -45,6 +45,7 @@
             bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
             rightSize="0"
         >
+            <!--
             <item:widget
                 name="panelSections" type="Lancelot::Panel"
 
@@ -121,6 +122,12 @@
                         Lancelot__NodeLayout:bottomRight = "1, 1   , 0, -1"
                     />
                 </item:layout>
+            </item:widget>
+            -->
+            <item:widget
+                name="panelSections" type="Lancelot::TabBar"
+
+                Lancelot__FullBorderLayout:position="Left">
             </item:widget>
             <item:layout
                 name="layoutSearch" type="Lancelot::NodeLayout"

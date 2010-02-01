@@ -48,6 +48,7 @@
 
 #include <Lancelot/PlasmaServiceListModel>
 #include <Lancelot/PopupMenu>
+#include <Lancelot/TabBar>
 #include <Lancelot/ResizeBordersPanel>
 
 #include <Lancelot/Models/Serializator>
@@ -140,6 +141,21 @@ LancelotWindow::LancelotWindow()
     passagewayApplications->setAtlasIcon(KIcon("applications-other"));
     /* End TODO */
 
+    // Lancelot::TabBar * tabbar = new Lancelot::TabBar(m_root);
+    Lancelot::TabBar * tabbar = panelSections;
+    tabbar->setTabsGroupName("SectionButtons");
+    tabbar->addTab("applications", KIcon("applications-other"),  "Applications");
+    tabbar->addTab("computer",     KIcon("computer-laptop"),     "Computer");
+    tabbar->addTab("contacts",     KIcon("kontact"),             "Contacts");
+    tabbar->addTab("documents",    KIcon("applications-office"), "Documents");
+    tabbar->setOrientation(Qt::Vertical);
+    tabbar->setTextDirection(Qt::Vertical);
+
+    // tabbar->setGeometry(QRectF(0, 0, 128, 500));
+
+    connect(tabbar, SIGNAL(currentTabChanged(const QString &)),
+            layoutCenter, SLOT(showCard(const QString &)));
+
     m_sectionsSignalMapper = new QSignalMapper(this);
     connect (m_sectionsSignalMapper,
         SIGNAL(mapped(const QString &)),
@@ -147,12 +163,14 @@ LancelotWindow::LancelotWindow()
         SLOT(sectionActivated(const QString &))
     );
 
-    QMapIterator<QString, Lancelot::ExtenderButton * > i(sectionButtons);
-    while (i.hasNext()) {
-        i.next();
-        connect(i.value(), SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
-        m_sectionsSignalMapper->setMapping(i.value(), i.key());
-    }
+    // QMapIterator<QString, Lancelot::ExtenderButton * > i(sectionButtons);
+    // while (i.hasNext()) {
+    //     i.next();
+    //     //TEMP:
+    //     i.value()->hide();
+    //     connect(i.value(), SIGNAL(activated()), m_sectionsSignalMapper, SLOT(map()));
+    //     m_sectionsSignalMapper->setMapping(i.value(), i.key());
+    // }
 
     connect(buttonSystem1, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
     connect(buttonSystem2, SIGNAL(activated()), this, SLOT(systemButtonClicked()));
@@ -297,7 +315,7 @@ void LancelotWindow::showWindow(int x, int y, bool centered)
     }
 
     layoutMain->setFlip(flip);
-    layoutSections->setFlip(flip);
+    // layoutSections->setFlip(flip);
 
     if (m_configUi.activationMethod() == LancelotConfig::NoClick) {
         Lancelot::Global::self()->group("SystemButtons")->setProperty("extenderPosition", QVariant(
@@ -381,13 +399,13 @@ void LancelotWindow::sectionActivated(const QString & item)
 
     m_activeSection = item;
 
-    foreach (Lancelot::ExtenderButton * button, sectionButtons) {
-        button->setChecked(false);
-    }
+    // foreach (Lancelot::ExtenderButton * button, sectionButtons) {
+    //     button->setChecked(false);
+    // }
 
-    if (sectionButtons.contains(item)) {
-        sectionButtons[item]->setChecked(true);
-    }
+    // if (sectionButtons.contains(item)) {
+    //     sectionButtons[item]->setChecked(true);
+    // }
 
     if (m_focusIndex >= 0 && m_focusIndex < m_focusList.count()) {
         if (m_focusList.at(m_focusIndex) != passagewayApplications) {
