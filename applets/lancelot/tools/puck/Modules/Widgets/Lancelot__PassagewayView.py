@@ -11,7 +11,7 @@ class Lancelot__PassagewayViewHandler(Lancelot__Panel.Lancelot__PanelHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 

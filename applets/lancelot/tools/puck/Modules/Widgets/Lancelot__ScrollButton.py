@@ -11,14 +11,14 @@ class Lancelot__ScrollButtonHandler(Lancelot__BasicWidget.Lancelot__BasicWidgetH
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = Lancelot__BasicWidget.Lancelot__BasicWidgetHandler.setup(self)
 
-        
+
 
         return setup;
 

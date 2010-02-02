@@ -11,18 +11,18 @@ class Lancelot__ScrollBarHandler(Plasma__ScrollBar.Plasma__ScrollBarHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = Plasma__ScrollBar.Plasma__ScrollBarHandler.setup(self)
 
-        
+
         if self.hasAttribute('activationMethod'):
             setup += self.attribute('name') \
                   + '->setActivationMethod(' + self.attribute('activationMethod') + ');'
-        
+
 
         return setup;
 

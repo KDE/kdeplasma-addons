@@ -11,7 +11,7 @@ class Lancelot__ExtenderButtonHandler(Lancelot__BasicWidget.Lancelot__BasicWidge
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 

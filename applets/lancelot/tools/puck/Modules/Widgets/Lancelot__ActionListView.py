@@ -11,26 +11,26 @@ class Lancelot__ActionListViewHandler(Lancelot__CustomListView.Lancelot__CustomL
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = Lancelot__CustomListView.Lancelot__CustomListViewHandler.setup(self)
 
-        
+
         if self.hasAttribute('extenderPosition'):
             setup += self.attribute('name') \
                   + '->setExtenderPosition(' + self.attribute('extenderPosition') + ');'
-        
+
         if self.hasAttribute('categoriesActivable'):
             setup += self.attribute('name') \
                   + '->setCategoriesActivable(' + self.attribute('categoriesActivable') + ');'
-        
+
         if self.hasAttribute('showsExtendersOutside'):
             setup += self.attribute('name') \
                   + '->setShowsExtendersOutside(' + self.attribute('showsExtendersOutside') + ');'
-        
+
 
         return setup;
 

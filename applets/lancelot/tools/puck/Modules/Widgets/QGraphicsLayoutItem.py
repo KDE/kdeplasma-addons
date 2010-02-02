@@ -11,7 +11,7 @@ class QGraphicsLayoutItemHandler(AbstractItem.AbstractItemHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 

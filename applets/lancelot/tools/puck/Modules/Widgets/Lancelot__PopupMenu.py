@@ -11,14 +11,14 @@ class Lancelot__PopupMenuHandler(PopupList.PopupListHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = PopupList.PopupListHandler.setup(self)
 
-        
+
 
         return setup;
 

@@ -11,7 +11,7 @@ class Lancelot__WidgetHandler(QGraphicsWidget.QGraphicsWidgetHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 

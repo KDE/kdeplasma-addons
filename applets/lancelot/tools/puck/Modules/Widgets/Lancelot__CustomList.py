@@ -11,14 +11,14 @@ class Lancelot__CustomListHandler(QGraphicsWidget.QGraphicsWidgetHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = QGraphicsWidget.QGraphicsWidgetHandler.setup(self)
 
-        
+
 
         return setup;
 

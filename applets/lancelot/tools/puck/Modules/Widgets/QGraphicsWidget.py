@@ -14,7 +14,7 @@ class QGraphicsWidgetHandler(QGraphicsLayoutItem.QGraphicsLayoutItemHandler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
     ## Changed area begin: ##

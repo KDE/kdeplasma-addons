@@ -11,7 +11,7 @@ class ${PYTHON_NAME}Handler(${PARENT_PYTHON_NAME}.${PARENT_PYTHON_NAME}Handler):
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 

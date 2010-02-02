@@ -11,14 +11,14 @@ class Lancelot__CustomListViewHandler(Lancelot__ScrollPane.Lancelot__ScrollPaneH
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = Lancelot__ScrollPane.Lancelot__ScrollPaneHandler.setup(self)
 
-        
+
 
         return setup;
 

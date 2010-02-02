@@ -11,14 +11,14 @@ class Lancelot__ResizeBordersPanelHandler(Lancelot__Panel.Lancelot__PanelHandler
         includesCode = ""
         for include in includes:
             if (include != ""):
-                includesCode = "#include<" + include + ">\n"
+                includesCode += "#include<" + include + ">\n"
         return includesCode
 
 
     def setup(self):
         setup = Lancelot__Panel.Lancelot__PanelHandler.setup(self)
 
-        
+
 
         return setup;
 
