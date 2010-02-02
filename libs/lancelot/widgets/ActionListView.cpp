@@ -23,6 +23,8 @@
 #include <QApplication>
 #include <QGraphicsSceneMouseEvent>
 
+#include <KDebug>
+
 #include <Plasma/ItemBackground>
 
 #define CATEGORY_MINIMUM_SIZE 20
@@ -633,7 +635,21 @@ void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * i
     }
 
     if (item) {
-        m_selectedItemBackground->setTarget(item->geometry());
+
+        QTransform transform = item->transform();
+        if (transform.isIdentity()) {
+            m_selectedItemBackground->setTarget(item->geometry());
+        } else {
+            QRectF g = item->geometry();
+            if (transform.m32() != 0) {
+                g.setTopLeft(g.topLeft() * transform);
+                g.setBottomRight(g.bottomRight() * transform);
+            } else {
+                g.setHeight(g.height() * transform.m22());
+            }
+            m_selectedItemBackground->setTarget(g);
+        }
+
         m_selectedItemBackground->show();
     } else {
         m_selectedItemBackground->hide();
