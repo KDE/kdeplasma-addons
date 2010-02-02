@@ -32,6 +32,9 @@ namespace Lancelot
 {
 
 /**
+ * Provides a group of buttons representing tabs. Can
+ * be used for controlling the CardLayout
+ *
  * @author Ivan Cukic
  */
 class LANCELOT_EXPORT TabBar: public QGraphicsWidget {
@@ -46,39 +49,101 @@ class LANCELOT_EXPORT TabBar: public QGraphicsWidget {
     // @puck L_INCLUDE(lancelot/widgets/TabBar.h QIcon QSize QString)
 
 public:
+    /**
+     * Creates a new Lancelot::TabBar
+     * @param parent parent item
+     */
     TabBar(QGraphicsWidget * parent = 0);
+
+    /**
+     * Destroys this Lancelot::TabBar
+     */
     ~TabBar();
 
+    /**
+     * @returns the tab bar orientation
+     */
     Qt::Orientation orientation() const;
+
+    /**
+     * Sets the tab bar orientation
+     * @param value new orientation
+     */
     void setOrientation(Qt::Orientation value);
 
+    /**
+     * @returns the inner layout of buttons
+     * @see setTextDirection
+     */
     Qt::Orientation textDirection() const;
+
+    /**
+     * Sets the inner layout of tab buttons - that is
+     * whether the icon is above or beside the text
+     */
     void setTextDirection(Qt::Orientation value);
 
+    /**
+     * @returns the active tab
+     */
     QString currentTab() const;
 
+    /**
+     * Adds a new tab
+     * @param id id of the tab
+     * @param icon icon for the tab
+     * @param title tab title
+     */
     void addTab(const QString & id, const QIcon & icon, const QString & title);
+
+    /**
+     * Removes the specified tab
+     * @param id id of the tab to remove
+     */
     void removeTab(const QString & id);
 
+    /**
+     * Sets the Lancelot::Group for the tab buttons
+     * @param groupName name of the specific Lancelot::Group
+     */
     void setTabsGroupName(const QString & groupName);
 
-    void paint(QPainter * painter,
-        const QStyleOptionGraphicsItem * option,
-        QWidget * widget = 0);
-
+    /**
+     * Sets the layout flip
+     * @param flip new value
+     */
     void setFlip(Plasma::Flip flip);
+
+    /**
+     * @returns the current layout flip
+     */
     Plasma::Flip flip() const;
 
+    /**
+     * Sets the icon size for tab buttons
+     * @param size new size
+     */
     void setTabIconSize(const QSize & size);
+
+    /**
+     * @returns the current icon size of tab buttons
+     */
     QSize tabIconSize() const;
 
 protected:
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
 
 Q_SIGNALS:
+    /**
+     * This signal is emitted when the currently selected
+     * tab is changed
+     */
     void currentTabChanged(const QString & current);
 
 public Q_SLOTS:
+    /**
+     * Sets the current tab
+     */
     void setCurrentTab(const QString & current);
 
 private:

@@ -155,14 +155,6 @@ TabBar::~TabBar()
     delete d;
 }
 
-void TabBar::paint(QPainter * painter,
-    const QStyleOptionGraphicsItem * option,
-    QWidget * widget)
-{
-    // painter->fillRect(0, 0, size().width(), size().height(),
-    //     QBrush(QColor(0, 0, 0)));
-}
-
 Qt::Orientation TabBar::orientation() const
 {
     return d->orientation;
