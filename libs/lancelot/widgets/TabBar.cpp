@@ -39,11 +39,14 @@ public:
 
     Qt::Orientation orientation;
     Qt::Orientation textDirection;
+    Plasma::Flip flip;
 
     QString currentTab;
     QString groupName;
+    QSize tabIconSize;
 
     QMap < QString, ExtenderButton * > tabs;
+    QList < ExtenderButton * > tabButtons;
     QSignalMapper mapper;
     CustomItemBackground * background;
 
@@ -59,6 +62,7 @@ TabBar::Private::Private(TabBar * parent)
     orientation = Qt::Horizontal;
     textDirection = Qt::Horizontal;
     groupName = QLatin1String("TabBarButton");
+    tabIconSize = QSize(32, 32);
 
     connect(&mapper, SIGNAL(mapped(const QString &)),
             parent,  SIGNAL(currentTabChanged(const QString &)));
@@ -88,7 +92,20 @@ void TabBar::Private::relayout()
         cursor.ry() += diff;
     }
 
-    foreach(Lancelot::ExtenderButton * button, tabs) {
+    bool shouldFlip =
+        (orientation == Qt::Vertical && (flip & Plasma::VerticalFlip))
+        ||
+        (orientation == Qt::Horizontal && (flip & Plasma::HorizontalFlip));
+
+    QListIterator < ExtenderButton * > i (tabButtons);
+    if (shouldFlip) {
+        i.toBack();
+    }
+
+    while (shouldFlip ? i.hasPrevious() : i.hasNext()) {
+        ExtenderButton * button =
+           shouldFlip ? i.previous() : i.next();
+
         if (orientation == Qt::Vertical && textDirection == Qt::Horizontal) {
             button->setRotation(-90);
         }
@@ -102,6 +119,8 @@ void TabBar::Private::relayout()
             cursor.ry() += diff;
         }
     }
+
+    q->setCurrentTab(currentTab);
 }
 
 void TabBar::Private::updateOrientation()
@@ -164,7 +183,8 @@ QString TabBar::currentTab() const
 
 void TabBar::setCurrentTab(const QString & current)
 {
-    if (d->currentTab == current || !d->tabs.contains(current)) {
+    if (!d->tabs.contains(current)) {
+        d->background->hide();
         return;
     }
 
@@ -185,7 +205,9 @@ void TabBar::addTab(const QString & id, const QIcon & icon, const QString & titl
     Lancelot::ExtenderButton * button = new ExtenderButton(
         icon, title, QString::null, this);
     d->tabs[id] = button;
+    d->tabButtons.append(button);
 
+    button->setIconSize(d->tabIconSize);
     button->setGroupByName(d->groupName);
 
     connect(
@@ -203,6 +225,7 @@ void TabBar::removeTab(const QString & id)
         return;
     }
 
+    d->tabButtons.removeAll(d->tabs[id]);
     delete d->tabs[id];
     d->tabs.remove(id);
 
@@ -221,6 +244,32 @@ void TabBar::setTabsGroupName(const QString & groupName)
 void TabBar::resizeEvent(QGraphicsSceneResizeEvent * event)
 {
     d->relayout();
+}
+
+void TabBar::setFlip(Plasma::Flip flip)
+{
+    kDebug() << flip;
+    d->flip = flip;
+    d->relayout();
+}
+
+Plasma::Flip TabBar::flip() const
+{
+    return d->flip;
+}
+
+
+void TabBar::setTabIconSize(const QSize & size)
+{
+    d->tabIconSize = size;
+    foreach (ExtenderButton * button, d->tabButtons) {
+        button->setIconSize(size);
+    }
+}
+
+QSize TabBar::tabIconSize() const
+{
+    return d->tabIconSize;
 }
 
 } // namespace Lancelot

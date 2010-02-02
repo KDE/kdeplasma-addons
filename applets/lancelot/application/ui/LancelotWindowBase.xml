@@ -45,87 +45,9 @@
             bottomSize="SYSTEM_HEIGHT + 2 * SYSTEM_PADDING"
             rightSize="0"
         >
-            <!--
             <item:widget
-                name="panelSections" type="Lancelot::Panel"
-
-                Lancelot__FullBorderLayout:position="Left"
-            >
-                <item:layout
-                    name="layoutSections" type="Lancelot::FlipLayout"
-                    realLayout="Lancelot::NodeLayout"
-                    margin="0" spacing="0"
-                >
-                    <code:declaration><![CDATA[
-                        QMap < QString, Lancelot::ExtenderButton * > sectionButtons;
-                    ]]></code:declaration>
-                    <code:setup><![CDATA[
-                        sectionButtons["applications"] = buttonSectionsApplications;
-                        sectionButtons["computer"]     = buttonSectionsComputer;
-                        sectionButtons["documents"]    = buttonSectionsDocuments;
-                        sectionButtons["contacts"]     = buttonSectionsContacts;
-                    ]]></code:setup>
-                    <item:widget
-                        name="buttonSectionsDocuments" type="Lancelot::ExtenderButton"
-
-                        title="&amp;Documents"
-                        icon="applications-office"
-                        group="SectionButtons"
-                        activationMethod="Lancelot::HoverActivate"
-                        iconSize="48, 48"
-                        innerOrientation="Vertical"
-                        checkable="true"
-
-                        Lancelot__NodeLayout:topLeft     = "0, 0  , 0, 1"
-                        Lancelot__NodeLayout:bottomRight = "1, .25, 0, -1"
-                    />
-                    <item:widget
-                        name="buttonSectionsContacts" type="Lancelot::ExtenderButton"
-
-                        title="&amp;Contacts"
-                        icon="kontact"
-                        group="SectionButtons"
-                        activationMethod="Lancelot::HoverActivate"
-                        iconSize="48, 48"
-                        innerOrientation="Vertical"
-                        checkable="true"
-
-                        Lancelot__NodeLayout:topLeft     = "0, .25  , 0, 1"
-                        Lancelot__NodeLayout:bottomRight = "1, .5  , 0, -1"
-                    />
-                    <item:widget
-                        name="buttonSectionsComputer" type="Lancelot::ExtenderButton"
-
-                        title="Co&amp;mputer"
-                        icon="computer-laptop"
-                        group="SectionButtons"
-                        activationMethod="Lancelot::HoverActivate"
-                        iconSize="48, 48"
-                        innerOrientation="Vertical"
-                        checkable="true"
-
-                        Lancelot__NodeLayout:topLeft     = "0, .5  , 0, 1"
-                        Lancelot__NodeLayout:bottomRight = "1, .75  , 0, -1"
-                    />
-                    <item:widget
-                        name="buttonSectionsApplications" type="Lancelot::ExtenderButton"
-
-                        title="&amp;Applications"
-                        icon="applications-other"
-                        group="SectionButtons"
-                        activationMethod="Lancelot::HoverActivate"
-                        iconSize="48, 48"
-                        innerOrientation="Vertical"
-                        checkable="true"
-
-                        Lancelot__NodeLayout:topLeft     = "0, .75 , 0, 1"
-                        Lancelot__NodeLayout:bottomRight = "1, 1   , 0, -1"
-                    />
-                </item:layout>
-            </item:widget>
-            -->
-            <item:widget
-                name="panelSections" type="Lancelot::TabBar"
+                name="tabbarSections" type="Lancelot::TabBar"
+                tabIconSize="48, 48"
 
                 Lancelot__FullBorderLayout:position="Left">
             </item:widget>

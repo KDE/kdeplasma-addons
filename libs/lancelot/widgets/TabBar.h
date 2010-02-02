@@ -40,9 +40,10 @@ class LANCELOT_EXPORT TabBar: public QGraphicsWidget {
     Q_PROPERTY(Qt::Orientation orientation READ orientation WRITE setOrientation)
     Q_PROPERTY(Qt::Orientation textDirection READ textDirection WRITE setTextDirection)
     Q_PROPERTY(QString currentTab READ currentTab WRITE setCurrentTab)
+    Q_PROPERTY(QSize tabIconSize READ tabIconSize WRITE setTabIconSize)
 
     // @puck L_WIDGET
-    // @puck L_INCLUDE(lancelot/widgets/BasicWidget.h QIcon QSize QString)
+    // @puck L_INCLUDE(lancelot/widgets/TabBar.h QIcon QSize QString)
 
 public:
     TabBar(QGraphicsWidget * parent = 0);
@@ -64,6 +65,12 @@ public:
     void paint(QPainter * painter,
         const QStyleOptionGraphicsItem * option,
         QWidget * widget = 0);
+
+    void setFlip(Plasma::Flip flip);
+    Plasma::Flip flip() const;
+
+    void setTabIconSize(const QSize & size);
+    QSize tabIconSize() const;
 
 protected:
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
