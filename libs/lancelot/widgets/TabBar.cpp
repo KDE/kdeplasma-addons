@@ -254,9 +254,15 @@ void TabBar::removeTab(const QString & id)
 
 void TabBar::setTabsGroupName(const QString & groupName)
 {
+    Group * group = Global::self()->group(groupName);
+
+    if (!group) return;
+
     foreach (ExtenderButton * button, d->tabs) {
-        button->setGroupByName(groupName);
+        button->setGroup(group);
     }
+
+    d->background->setSvg(group->backgroundSvg(), "down");
 
     d->groupName = groupName;
 }

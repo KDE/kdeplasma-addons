@@ -182,7 +182,6 @@ void Widget::paintBackground(QPainter * painter, const QString & element)
         if (svg->size() != size().toSize()) {
             svg->resizeFrame(size().toSize());
         }
-        // svg->clearCache();
 
         if (rtl && d->paintBackwards) {
             painter->translate(size().width(), 0);

@@ -41,8 +41,11 @@ public:
     void setTarget(const QRectF & target);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void setSvg(Plasma::FrameSvg * svg, const QString & prefix = QString());
+
 private:
     Plasma::FrameSvg * m_svg;
+    QString m_svgPrefix;
     bool m_animation : 1;
 
 };
