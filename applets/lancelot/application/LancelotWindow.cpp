@@ -68,7 +68,9 @@
 #include <Lancelot/Models/BaseMergedModel>
 #include <Lancelot/Models/Logger>
 
-#define sectionsWidth 128
+#define sectionsWidth \
+    (m_mainConfig.readEntry("collapseSections", false) ? 64 : 128)
+
 #define windowHeightDefault 500
 #define mainWidthDefault    422
 
@@ -141,6 +143,7 @@ LancelotWindow::LancelotWindow()
     passagewayApplications->setAtlasIcon(KIcon("applications-other"));
     /* End TODO */
 
+    tabbarSections->installEventFilter(this);
     tabbarSections->setTabsGroupName("SectionButtons");
     tabbarSections->addTab("documents",    KIcon("applications-office"), "Documents");
     tabbarSections->addTab("contacts",     KIcon("kontact"),             "Contacts");
@@ -202,6 +205,35 @@ void LancelotWindow::focusChanged(QWidget * old, QWidget * now)
     }
 }
 
+void LancelotWindow::toggleCollapsedSections()
+{
+    updateCollapsedSections(true);
+}
+
+void LancelotWindow::updateCollapsedSections(bool toggle)
+{
+    bool collapseSections = m_mainConfig.readEntry("collapseSections", false);
+    if (toggle) {
+        collapseSections = !collapseSections;
+    }
+
+    m_mainConfig.writeEntry("collapseSections", collapseSections);
+    m_mainConfig.sync();
+
+    layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
+
+    if (collapseSections) {
+        tabbarSections->setTabIconSize(QSize(32, 32));
+        tabbarSections->setTextDirection(Qt::Horizontal);
+    } else {
+        tabbarSections->setTabIconSize(QSize(48, 48));
+        tabbarSections->setTextDirection(Qt::Vertical);
+    }
+
+
+    resizeWindow();
+}
+
 LancelotWindow::~LancelotWindow()
 {
     m_configUi.setSearchHistory(m_completion->items());
@@ -245,6 +277,7 @@ void LancelotWindow::lancelotHide(bool immediate)
 void LancelotWindow::showWindow(int x, int y, bool centered)
 {
     tabbarSections->setVisible(m_showingFull);
+    updateCollapsedSections();
 
     layoutMain->setSize((m_showingFull ? sectionsWidth : 0), Lancelot::FullBorderLayout::LeftBorder);
 
@@ -675,6 +708,24 @@ void LancelotWindow::sendKeyEvent(QKeyEvent * event)
 
 bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
 {
+    // Right-click the tabbarSections
+    if (event->type() == QEvent::GraphicsSceneMousePress &&
+        object == tabbarSections) {
+        QGraphicsSceneMouseEvent * mouseEvent = static_cast<QGraphicsSceneMouseEvent *>(event);
+        if (mouseEvent->button() == Qt::RightButton) {
+            Lancelot::PopupMenu * menu = new Lancelot::PopupMenu(this);
+
+            connect(
+                    menu->addAction(KIcon(),
+                        i18n("Toggle collapsed sections")), SIGNAL(triggered(bool)),
+                    this, SLOT(toggleCollapsedSections()));
+
+            menu->exec(QCursor::pos());
+        }
+    }
+
+    // Catching key presses because no item has explicit
+    // focus
     if (event->type() == QEvent::KeyPress) {
         bool pass = false;
         int oindex = m_focusIndex;
@@ -741,6 +792,7 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         editSearch->nativeWidget()->setFocus();
         editSearch->setFocus();
     }
+
     return QWidget::eventFilter(object, event);
 }
 

@@ -113,6 +113,8 @@ private Q_SLOTS:
     void hideImmediate();
 
     void focusChanged(QWidget * old, QWidget * now);
+    void toggleCollapsedSections();
+    void updateCollapsedSections(bool toggle = false);
 
 public:
     /**

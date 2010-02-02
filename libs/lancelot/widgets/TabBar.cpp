@@ -52,6 +52,7 @@ public:
 
     void relayout();
     void updateOrientation();
+    bool isRotated() const;
 
     TabBar * const q;
 };
@@ -68,6 +69,11 @@ TabBar::Private::Private(TabBar * parent)
             parent,  SIGNAL(currentTabChanged(const QString &)));
     connect(&mapper, SIGNAL(mapped(const QString &)),
             parent,  SLOT(setCurrentTab(const QString &)));
+}
+
+bool TabBar::Private::isRotated() const
+{
+    return (orientation == Qt::Vertical && textDirection == Qt::Horizontal);
 }
 
 void TabBar::Private::relayout()
@@ -88,8 +94,9 @@ void TabBar::Private::relayout()
        size.setHeight(diff);
     }
 
-    if (orientation == Qt::Vertical && textDirection == Qt::Horizontal) {
+    if (isRotated()) {
         cursor.ry() += diff;
+        size = QSizeF(size.height(), size.width());
     }
 
     bool shouldFlip =
@@ -106,8 +113,10 @@ void TabBar::Private::relayout()
         ExtenderButton * button =
            shouldFlip ? i.previous() : i.next();
 
-        if (orientation == Qt::Vertical && textDirection == Qt::Horizontal) {
+        if (isRotated()) {
             button->setRotation(-90);
+        } else {
+            button->setRotation(0);
         }
 
         button->setMaximumSize(size);
@@ -190,7 +199,18 @@ void TabBar::setCurrentTab(const QString & current)
 
     d->currentTab = current;
 
-    d->background->setTarget(d->tabs[current]->geometry());
+    if (d->isRotated()) {
+        QRectF g = d->tabs[current]->geometry();
+
+        g.setSize(QSizeF(g.size().height(), g.size().width()));
+        g.moveTop(g.top() - g.height());
+
+        d->background->setTarget(g);
+
+    } else {
+        d->background->setTarget(d->tabs[current]->geometry());
+
+    }
     d->background->show();
 
     emit currentTabChanged(current);
