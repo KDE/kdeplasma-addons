@@ -642,8 +642,8 @@ void ActionListViewItemFactory:: updateSelectedBackground(ActionListViewItem * i
         } else {
             QRectF g = item->geometry();
             if (transform.m32() != 0) {
-                g.setTopLeft(g.topLeft() * transform);
-                g.setBottomRight(g.bottomRight() * transform);
+                g.setHeight(g.height() * transform.m22());
+                g.moveTop(g.top() + transform.m32());
             } else {
                 g.setHeight(g.height() * transform.m22());
             }
