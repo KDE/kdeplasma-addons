@@ -414,21 +414,13 @@ QStringList LancelotWindow::sectionIcons()
 
 void LancelotWindow::sectionActivated(const QString & item)
 {
+    tabbarSections->setCurrentTab(item);
+
     if (item == m_activeSection) {
         return;
     }
 
     m_activeSection = item;
-
-    tabbarSections->setCurrentTab(item);
-
-    // foreach (Lancelot::ExtenderButton * button, sectionButtons) {
-    //     button->setChecked(false);
-    // }
-
-    // if (sectionButtons.contains(item)) {
-    //     sectionButtons[item]->setChecked(true);
-    // }
 
     if (m_focusIndex >= 0 && m_focusIndex < m_focusList.count()) {
         if (m_focusList.at(m_focusIndex) != passagewayApplications) {
@@ -715,10 +707,16 @@ bool LancelotWindow::eventFilter(QObject * object, QEvent * event)
         if (mouseEvent->button() == Qt::RightButton) {
             Lancelot::PopupMenu * menu = new Lancelot::PopupMenu(this);
 
+            QString text;
+            if (m_mainConfig.readEntry("collapseSections", false)) {
+                text = i18n("Make buttons wider");
+            } else {
+                text = i18n("Make buttons narrower");
+            }
             connect(
-                    menu->addAction(KIcon(),
-                        i18n("Toggle collapsed sections")), SIGNAL(triggered(bool)),
-                    this, SLOT(toggleCollapsedSections()));
+                    menu->addAction(KIcon(), text), SIGNAL(triggered(bool)),
+                    this, SLOT(toggleCollapsedSections())
+                    );
 
             menu->exec(QCursor::pos());
         }
