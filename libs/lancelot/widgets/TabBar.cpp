@@ -254,13 +254,16 @@ void TabBar::setTabsGroupName(const QString & groupName)
         button->setGroup(group);
     }
 
-    d->background->setSvg(group->backgroundSvg(), "down");
+    // d->background->setSvg(group->backgroundSvg(), "down");
+    d->background->setGroup(group);
+    d->background->setSvgElementPrefix("down");
 
     d->groupName = groupName;
 }
 
 void TabBar::resizeEvent(QGraphicsSceneResizeEvent * event)
 {
+    Q_UNUSED(event);
     d->relayout();
 }
 

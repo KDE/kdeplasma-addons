@@ -26,6 +26,8 @@
 #include <Plasma/ItemBackground>
 #include <Plasma/FrameSvg>
 
+#include <lancelot/Global.h>
+
 namespace Lancelot
 {
 
@@ -41,12 +43,13 @@ public:
     void setTarget(const QRectF & target);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setSvg(Plasma::FrameSvg * svg, const QString & prefix = QString());
+    void setSvgElementPrefix(const QString & prefix = QString());
+    void setGroup(Group * group);
 
 private:
-    Plasma::FrameSvg * m_svg;
     QString m_svgPrefix;
     bool m_animation : 1;
+    Group * m_group;
 
 };
 

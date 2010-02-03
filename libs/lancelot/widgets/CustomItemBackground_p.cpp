@@ -32,7 +32,7 @@ namespace Lancelot
 {
 
 CustomItemBackground::CustomItemBackground(QGraphicsWidget * parent)
-    : Plasma::ItemBackground(parent), m_svg(NULL)
+    : Plasma::ItemBackground(parent), m_group(NULL)
 {
     KConfigGroup config(Global::self()->config(), "Main");
     m_animation = config.readEntry("itemViewBackgroundAnimation", true);
@@ -55,20 +55,26 @@ void CustomItemBackground::paint(QPainter *painter, const QStyleOptionGraphicsIt
 {
     Q_UNUSED(widget)
 
-    if (!m_svg) {
+    if (!m_group || !m_group->backgroundSvg()) {
         Plasma::ItemBackground::paint(painter, option, widget);
         return;
     }
 
-    m_svg->setElementPrefix(m_svgPrefix);
-    m_svg->resizeFrame(size().toSize());
-    m_svg->paintFrame(painter);
+    Plasma::FrameSvg * svg = m_group->backgroundSvg();
+    svg->setElementPrefix(m_svgPrefix);
+    svg->resizeFrame(size().toSize());
+    svg->paintFrame(painter);
 }
 
-void CustomItemBackground::setSvg(Plasma::FrameSvg * svg, const QString & prefix)
+void CustomItemBackground::setSvgElementPrefix(const QString & prefix)
 {
-    m_svg = svg;
     m_svgPrefix = prefix;
+}
+
+void CustomItemBackground::setGroup(Group * group)
+{
+    m_group = group;
+    group->add(this);
 }
 
 } // namespace Lancelot
