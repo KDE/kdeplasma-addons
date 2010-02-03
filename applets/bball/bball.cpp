@@ -92,8 +92,10 @@ void bballApplet::paintInterface(QPainter * p, const QStyleOptionGraphicsItem * 
         p->translate(m_radius, m_radius);
         p->rotate(360 * m_angle / 6.28);
         p->translate(-m_radius, -m_radius);
-        p->setRenderHint(QPainter::SmoothPixmapTransform);
-        p->setRenderHint(QPainter::Antialiasing);
+        if (m_velocity.length() < 300) {
+            p->setRenderHint(QPainter::SmoothPixmapTransform);
+            p->setRenderHint(QPainter::Antialiasing);
+        }
     }
     p->drawPixmap(QPoint(0, 0), m_ballPixmap);
 }
@@ -153,6 +155,7 @@ void bballApplet::mousePressEvent(QGraphicsSceneMouseEvent * event)
     // reset timing
     m_timer.stop();
     m_time = QTime();
+    update();
 
     // reset physics
     m_velocity = QVector2D();
@@ -233,7 +236,6 @@ void bballApplet::configurationChanged()
     cg.writeEntry("OverlayColour", m_overlay_colour);
     m_overlay_opacity = static_cast< int >(ui.colourizeOpacitySlider->value() * 2.55);
     cg.writeEntry("OverlayOpacity", m_overlay_opacity);
-    m_overlay_colour.setAlpha(m_overlay_opacity);
     updateScaledBallImage();
 
     // Physics
@@ -266,7 +268,7 @@ void bballApplet::configurationChanged()
     cg.writeEntry("AutoBounceEnabled", m_auto_bounce_enabled);
     m_auto_bounce_strength = ui.autoBounceStrength->value();
     cg.writeEntry ("AutoBounceStrength", m_auto_bounce_strength);
-    if (m_auto_bounce_enabled)
+    if (m_auto_bounce_enabled || m_gravity > 0)
         m_timer.start(25, this);
 
     // mouse - undo the mouse clicked
@@ -282,7 +284,7 @@ void bballApplet::readConfiguration()
     // Appearance
     m_image_url = cg.readEntry("ImgURL", KStandardDirs::locate("data", "bball/bball.svgz"));
     m_overlay_enabled = cg.readEntry("OverlayEnabled", false);
-    m_overlay_colour = cg.readEntry("OverlayColour", QColor());
+    m_overlay_colour = cg.readEntry("OverlayColour", QColor(Qt::white));
     m_overlay_opacity = cg.readEntry("OverlayOpactiy", 0);
     m_ballSvg.setImagePath(m_image_url);
     updateScaledBallImage();
@@ -329,7 +331,7 @@ void bballApplet::updatePhysics()
 
     // update velocity and position
     m_velocity += QVector2D(0, (qreal)m_screenRect.height() * m_gravity * dT);
-    m_velocity *= (1.0 - m_friction * dT);
+    m_velocity *= (1.0 - 2 * m_friction * dT);
     m_geometry.translate((m_velocity * dT).toPointF());
 
     // floor
@@ -371,20 +373,22 @@ void bballApplet::updatePhysics()
         collision = true;
     }
 
+    m_angularVelocity *= (0.9999 - 2 * m_friction * dT);
     m_angle += m_angularVelocity * dT;
 
-    if (collision)
-        playBoingSound();
-
     // stop animation if reached bottom and still
-    if (m_velocity.length() < 20.0 && m_geometry.bottom() >= m_screenRect.bottom() && !m_auto_bounce_enabled) {
+    if (m_velocity.length() < 10.0 && qAbs(m_angularVelocity) < 0.1 && !m_auto_bounce_enabled) {
         m_timer.stop();
+        update();
         return;
     }
 
     // move this and update graphics
     setGeometry(m_geometry);
     update();
+
+    if (collision)
+        playBoingSound();
 }
 
 void bballApplet::playBoingSound()
@@ -424,7 +428,9 @@ void bballApplet::updateScaledBallImage()
         QPainter p(&m_ballPixmap);
         p.setRenderHint(QPainter::Antialiasing, true);
         p.setPen(Qt::NoPen);
-        p.setBrush(m_overlay_colour);
+        QColor brush = m_overlay_colour;
+        brush.setAlpha(m_overlay_opacity);
+        p.setBrush(brush);
         p.drawEllipse(QRectF(0, 0, m_radius * 2, m_radius * 2));
     }
 }
