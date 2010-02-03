@@ -559,7 +559,7 @@ void Notes::createConfigurationInterface(KConfigDialog *parent)
 
     QList<QAction *> colorActions = m_colorMenu->actions();
     for (int i = 0; i < colorActions.size(); i++){
-        QString text = colorActions.at(i)->text();
+        QString text = colorActions.at(i)->text().remove('&');
         if (!text.isEmpty()){
             ui.notesColorComboBox->insertItem(i, text);
             if (colorActions.at(i)->property("color").toString() == m_color) {
@@ -686,11 +686,14 @@ void Notes::configAccepted()
     }
 
     QList<QAction *> colorActions = m_colorMenu->actions();
-    QString tmpColor = colorActions[ui.notesColorComboBox->currentIndex()]->property("color").toString();
-    if (tmpColor != m_color){
-        m_color = tmpColor;
-        cg.writeEntry("color", m_color);
-        changed = true;
+    QAction *colorAction = colorActions.value(ui.notesColorComboBox->currentIndex());
+    if (colorAction) {
+        QString tmpColor = colorAction->property("color").toString();
+        if (tmpColor != m_color){
+            m_color = tmpColor;
+            cg.writeEntry("color", m_color);
+            changed = true;
+        }
     }
 
     if (changed) {
