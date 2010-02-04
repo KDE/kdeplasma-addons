@@ -29,6 +29,7 @@
 
 #include "ui_weatherAdvanced.h"
 
+class QPropertyAnimation;
 class QStandardItemModel;
 
 class KFileDialog;
@@ -44,13 +45,16 @@ class WeatherLocation;
 class WeatherWallpaper : public Plasma::Wallpaper
 {
 Q_OBJECT
-public:
+Q_PROPERTY(qreal fadeValue READ fadeValue WRITE setFadeValue)
+
+  public:
     WeatherWallpaper(QObject * parent, const QVariantList & args);
     ~WeatherWallpaper();
 
     QWidget * createConfigurationInterface(QWidget * parent);
     void paint(QPainter * painter, const QRectF & exposedRect);
     void updateScreenshot(QPersistentModelIndex index);
+    qreal fadeValue();
 
 signals:
     void settingsChanged(bool changed = true);
@@ -71,7 +75,7 @@ protected slots:
     void wallpaperBrowseCompleted();
     void updateBackground(const QImage &img);
     void showFileDialog();
-    void updateFadedImage(qreal frame);
+    void setFadeValue(qreal value);
     void configWidgetDestroyed();
     void advancedDialogDestroyed();
     void locationReady(const QString &source);
@@ -112,6 +116,8 @@ private:
     QPixmap m_oldPixmap;
     QPixmap m_oldFadedPixmap;
     KFileDialog *m_fileDialog;
+    qreal m_fadeValue;
+    QPropertyAnimation *m_animation;
     BackgroundListModel *m_model;
     QSize m_size;
     QString m_img;

@@ -23,6 +23,8 @@
 
 // Qt includes
 #include <QPainter>
+#include <QEasingCurve>
+#include <QPropertyAnimation>
 
 // KDE includes
 #include <KFileDialog>
@@ -49,6 +51,8 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     , m_weatherLocation(0)
     , m_advancedDialog(0)
     , m_fileDialog(0)
+    , m_fadeValue(0)
+    , m_animation(0)
     , m_model(0)
     , m_newStuffDialog(0)
 {
@@ -57,6 +61,7 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
 
 WeatherWallpaper::~WeatherWallpaper()
 {
+    delete m_animation;
 }
 
 void WeatherWallpaper::init(const KConfigGroup & config)
@@ -72,6 +77,12 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_dir = KStandardDirs::installPath("wallpaper");
     m_usersWallpapers = config.readEntry("userswallpapers", QStringList());
     m_resizeMethod = (ResizeMethod)config.readEntry("wallpaperposition", (int)ScaledResize);
+
+    m_animation = new QPropertyAnimation(this, "fadeValue");
+    m_animation->setProperty("easingCurve", QEasingCurve::InQuad);
+    m_animation->setProperty("duration", 1000);
+    m_animation->setProperty("startValue", 0.0);
+    m_animation->setProperty("endValue", 1.0);
 
     m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
     m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace/");
@@ -526,7 +537,7 @@ void WeatherWallpaper::updateBackground(const QImage &img)
     m_pixmap = QPixmap::fromImage(img);
 
     if (!m_oldPixmap.isNull()) {
-        Plasma::Animator::self()->customAnimation(254, 1000, Plasma::Animator::EaseInCurve, this, "updateFadedImage");
+        m_animation->start();
     } else {
         emit update(boundingRect());
     }
@@ -537,10 +548,17 @@ void WeatherWallpaper::updateScreenshot(QPersistentModelIndex index)
     m_advancedUi.m_wallpaperView->view()->update(index);
 }
 
-void WeatherWallpaper::updateFadedImage(qreal frame)
+qreal WeatherWallpaper::fadeValue()
 {
+    return m_fadeValue;
+}
+
+void WeatherWallpaper::setFadeValue(qreal value)
+{
+    m_fadeValue = value;
+
     //If we are done, delete the pixmaps and don't draw.
-    if (frame == 1) {
+    if (qFuzzyCompare(m_fadeValue, qreal(1.0))) {
         m_oldFadedPixmap = QPixmap();
         m_oldPixmap = QPixmap();
         emit update(boundingRect());
@@ -555,7 +573,8 @@ void WeatherWallpaper::updateFadedImage(qreal frame)
     p.drawPixmap(0, 0, m_oldPixmap);
 
     p.setCompositionMode(QPainter::CompositionMode_DestinationIn);  
-    p.fillRect(m_oldFadedPixmap.rect(), QColor(0, 0, 0, 254 * (1-frame)));//255*((150 - frame)/150)));
+    p.fillRect(m_oldFadedPixmap.rect(), QColor(0, 0, 0, 254 * (1-m_fadeValue)));//255*((150 - m_fadeValue)/150)));
+
     p.end();
 
     emit update(boundingRect());
