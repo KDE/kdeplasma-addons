@@ -24,6 +24,7 @@
 
 #include <QFile>
 #include <QString>
+#include <QXmlStreamReader>
 
 #include <kmimetype.h>
 #include <kurl.h>
@@ -52,27 +53,25 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job);
 
-    if (!first) {
+    if (data.length() == 0) {
         return;
     }
 
-    if (data.length() == 0) {
+    QXmlStreamReader xml(data);
+    if (xml.hasError()) {
         emit postError();
         return;
     }
 
-    QString url(data);
-    QRegExp re(".*Short.*href='([^']*)'.*");
-    if (!re.exactMatch(url)) {
-        return;
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        if (xml.name() == "ad_link") {
+            QString url = xml.readElementText();
+            emit postFinished(url);
+            return;
+        }
     }
-
-    QString pasteUrl = re.cap(1);
-
-    // little dirty hack to avoid emiting the
-    // second redirection of imageshack.us
-    first = false;
-    emit postFinished(pasteUrl);
 }
 
 // taken from flickr KIPI Plugin
@@ -87,26 +86,7 @@ void ImageshackServer::finish()
 }
 
 // taken from flickr KIPI Plugin
-bool ImageshackServer::addPair(const QString& name, const QString& value)
-{
-     QByteArray str;
-
-     str += "--";
-     str += m_boundary;
-     str += "\r\n";
-     str += "Content-Disposition: form-data; name=\"";
-     str += name.toAscii();
-     str += "\"";
-     str += "\r\n\r\n";
-     str += value.toUtf8();
-     str += "\r\n";
-
-     m_buffer.append(str);
-     return true;
-}
-
-// taken from flickr KIPI Plugin
-bool ImageshackServer::addFile(const QString& name,const QString& path)
+bool ImageshackServer::addFile(const QString& name, const QString& path)
 {
     KMimeType::Ptr ptr = KMimeType::findByUrl(path);
     QString mime = ptr->name();
@@ -134,6 +114,9 @@ bool ImageshackServer::addFile(const QString& name,const QString& path)
     str += "\"; ";
     str += "filename=\"";
     str += QFile::encodeName(KUrl(path).fileName()).replace(".tmp", ".jpg");
+    str += "\"; ";
+    str += "key=\"";
+    str += IMAGESHACK_KEY;
     str += "\"";
     str += "\r\n";
     str += "Content-Type: ";
@@ -154,7 +137,7 @@ bool ImageshackServer::addFile(const QString& name,const QString& path)
 
 void ImageshackServer::post(const QString& content)
 {
-    KUrl url(QString("%1").arg(m_server));
+    KUrl url(QString("%1/upload_api.php").arg(m_server));
 
     addFile("fileupload", content);
     finish();
