@@ -42,7 +42,6 @@
 
 #include <kworkspace/kworkspace.h>
 
-#include <Plasma/Animator>
 #include <Plasma/LineEdit>
 #include <Plasma/WindowEffects>
 
