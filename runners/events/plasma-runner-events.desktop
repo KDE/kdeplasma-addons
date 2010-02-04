@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Calendar Events
+Name[da]=Kalenderbegivenheder
 Name[de]=Kalenderereignisse
 Name[es]=Eventos del calendario
 Name[et]=Kalendri sündmused
@@ -11,6 +12,7 @@ Name[sv]=Kalenderhändelser
 Name[uk]=Події календаря
 Name[x-test]=xxCalendar Eventsxx
 Comment=Calendar Events runner
+Comment[da]=Runner til kalenderbegivenheder
 Comment[es]=Lanzador de eventos del calendario
 Comment[et]=Kalendri sündmuste käivitaja
 Comment[fr]=Outil d'exécution d'évènements d'agenda
