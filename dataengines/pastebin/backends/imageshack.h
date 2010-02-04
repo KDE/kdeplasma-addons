@@ -30,6 +30,7 @@
 #include <kio/job.h>
 
 #define IMAGESHACK_SERVER "http://imageshack.us"
+#define IMAGESHACK_KEY "GHNTUVXYcd75a72f93afd1e797ffd9630154cc99"
 
 class ImageshackServer : public PastebinServer
 {
@@ -42,7 +43,6 @@ public:
     virtual void post(const QString& content);
 
     void finish();
-    bool addPair(const QString& name, const QString& value);
     bool addFile(const QString& name,const QString& path);
 
 protected:
