@@ -269,7 +269,6 @@ void TabBar::resizeEvent(QGraphicsSceneResizeEvent * event)
 
 void TabBar::setFlip(Plasma::Flip flip)
 {
-    kDebug() << flip;
     d->flip = flip;
     d->relayout();
 }

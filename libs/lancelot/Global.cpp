@@ -67,11 +67,17 @@ void Group::Private::setObjectProperty(QObject * object,
 // clearing all info
 void Group::Private::reset()
 {
+    loaded = false;
+
+    // kDebug() << name << "Persistent properties:"
+    //          << persistentProperties << "of"
+    //          << properties;
+
     QMutableMapIterator < QString, QVariant > i(properties);
     while (i.hasNext()) {
         i.next();
         if (!persistentProperties.contains(i.key())) {
-            kDebug() << "reloading property:" << i.key();
+            // kDebug() << "reloading property:" << i.key();
             i.remove();
         }
     }
@@ -90,8 +96,21 @@ void Group::Private::copyFrom(Group::Private * d)
 {
     if (this == d) return;
 
+    QMap < QString, QVariant > savedProperties;
+
+    foreach (const QString & key, persistentProperties) {
+        savedProperties[key] = properties[key];
+    }
+
     properties = d->properties;
-    persistentProperties = d->persistentProperties;
+    persistentProperties += d->persistentProperties;
+
+    QMapIterator < QString, QVariant > i( savedProperties );
+    while (i.hasNext()) {
+        i.next();
+
+        properties[i.key()] = i.value();
+    }
 
     foregroundColor = d->foregroundColor;
     backgroundColor = d->backgroundColor;
@@ -140,37 +159,21 @@ void Group::remove(QObject * object, bool setDefaultGroup)
 
     if (!d->objects.contains(object)) return;
     d->objects.remove(object);
-
-    if (setDefaultGroup) {
-        // object->setGroup(NULL);
-    }
 }
 
 bool Group::hasProperty(const QString & property) const
 {
-    // TODO: remove this after 4.3
-    // QString property = prop;
-    // property[0] = property[0].toLower();
-
     return d->properties.contains(property);
 }
 
 QVariant Group::property(const QString & property) const
 {
-    // TODO: remove this after 4.3
-    // QString property = prop;
-    // property[0] = property[0].toLower();
-
     return d->properties.value(property);
 }
 
 void Group::setProperty(const QString & property, const QVariant & value, bool persistent)
 {
-    // TODO: remove this after 4.3
-    // QString property = prop;
-    // property[0] = property[0].toLower();
-
-    kDebug() << property << value;
+    // kDebug() << property << value;
 
     d->properties[property] = value;
 
@@ -185,10 +188,6 @@ void Group::setProperty(const QString & property, const QVariant & value, bool p
 
 void Group::clearProperty(const QString & property)
 {
-    // TODO: remove this after 4.3
-    // QString property = prop;
-    // property[0] = property[0].toLower();
-
     d->properties.remove(property);
 }
 
@@ -219,12 +218,11 @@ const Group::ColorScheme * Group::foregroundColor() const
 void Group::load(bool full)
 {
     if (d->loaded && !full) return;
-    d->loaded = true;
 
-    kDebug() << name();
+    // kDebug() << name();
 
-    // d->properties.clear();
     d->reset();
+    d->loaded = true;
 
     Group * group;
 
@@ -253,7 +251,7 @@ void Group::load(bool full)
 
     QString type = confGroupTheme.readEntry("background.type", "none");
     if (type == "color" || type == "color-compact") {
-        kDebug() << "loading color background";
+        // kDebug() << "loading color background";
         if (type == "color") {
             setProperty("WholeColorBackground", 1, false);
         } else {
@@ -263,7 +261,7 @@ void Group::load(bool full)
         d->backgroundColor.active   = confGroupTheme.readEntry("background.color.active",   d->backgroundColor.active);
         d->backgroundColor.disabled = confGroupTheme.readEntry("background.color.disabled", d->backgroundColor.disabled);
     } else if (type == "svg") {
-        kDebug() << "loading svg background";
+        // kDebug() << "loading svg background";
         // we have already deleted the backgroundSvg
         // if (d->ownsBackgroundSvg) {
         //     delete d->backgroundSvg;
@@ -274,14 +272,14 @@ void Group::load(bool full)
                 confGroupTheme.readEntry("background.svg"));
 
         d->backgroundSvg->setImagePath(imagePath);
-        kDebug() << "Background is: " <<
-            d->backgroundSvg->imagePath();
+        // kDebug() << "Background is: " <<
+        //    d->backgroundSvg->imagePath();
         d->backgroundSvg->setCacheAllRenderedFrames(true);
         d->ownsBackgroundSvg = true;
 
         if (!d->backgroundSvg->isValid()) {
-            kDebug() << "Background is not valid: " <<
-                d->backgroundSvg->imagePath();
+            // kDebug() << "Background is not valid: " <<
+            //     d->backgroundSvg->imagePath();
             delete d->backgroundSvg;
             d->backgroundSvg = NULL;
             d->ownsBackgroundSvg = false;
@@ -348,7 +346,7 @@ void Global::Private::createConfTheme()
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/" + app + "theme.config";
     QString path =  KStandardDirs::locate( "data", search );
-    kDebug() << "path:" << search << "=" << path;
+    // kDebug() << "path:" << search << "=" << path;
 
     // if we didn't find the theme specific for this application
     // we'll use the main theme file
@@ -357,7 +355,7 @@ void Global::Private::createConfTheme()
             Plasma::Theme::defaultTheme()->themeName()
             + "/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
-        kDebug() << "path:" << search << "=" << path;
+        // kDebug() << "path:" << search << "=" << path;
     }
 
     // if the above fails, we are loading the default theme's
@@ -365,7 +363,7 @@ void Global::Private::createConfTheme()
     if (path.isEmpty()) {
         search = "desktoptheme/default/lancelot/theme.config";
         path =  KStandardDirs::locate( "data", search );
-        kDebug() << "path:" << search << "=" << path;
+        // kDebug() << "path:" << search << "=" << path;
     }
 
     // this doesn't really do anything useful
@@ -385,8 +383,10 @@ void Global::Private::themeChanged()
 
 void Global::Private::loadAllGroups(bool clearFirst)
 {
-    foreach(Group * group, groups) {
-        group->d->reset();
+    if (clearFirst) {
+        foreach(Group * group, groups) {
+            group->d->reset();
+        }
     }
 
     foreach(Group * group, groups) {
@@ -494,7 +494,6 @@ void Global::setImmutability(const Plasma::ImmutabilityType immutable)
     }
 
     d->immutability = immutable;
-    kDebug() << immutable;
     emit immutabilityChanged(immutable);
 }
 
