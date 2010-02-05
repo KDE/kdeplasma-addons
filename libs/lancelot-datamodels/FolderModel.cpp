@@ -71,15 +71,15 @@ void FolderModel::clear()
 
 void FolderModel::deleteItem(const KFileItem & fileItem)
 {
-    kDebug() << fileItem.localPath() << fileItem.url() << m_items;
+    // kDebug() << fileItem.localPath() << fileItem.url() << m_items;
     for (int i = 0; i < size(); i++) {
         Item item = itemAt(i);
 
-        kDebug() << "##" << item.data.toString();
+        // kDebug() << "##" << item.data.toString();
         if (fileItem.localPath() == item.data.toString()
             || fileItem.url()    == item.data.toString()) {
             m_items.removeAll(item.data.toString());
-            kDebug() << m_items;
+            // kDebug() << m_items;
             removeAt(i);
         }
     }
@@ -88,7 +88,7 @@ void FolderModel::deleteItem(const KFileItem & fileItem)
 void FolderModel::newItems(const KFileItemList &items)
 {
     foreach (const KFileItem &item, items) {
-        kDebug() << item.localPath();
+        // kDebug() << item.localPath();
         QFileInfo info(item.localPath());
         if (info.isFile() || info.isDir()) {
             addItem(item.url());
@@ -99,7 +99,7 @@ void FolderModel::newItems(const KFileItemList &items)
 void FolderModel::addItem(const KUrl & url)
 {
     if (m_items.contains(url.url())) {
-        kDebug() << " Already have: " << url;
+        // kDebug() << " Already have: " << url;
         return;
     }
 
@@ -142,9 +142,9 @@ void FolderModel::save()
         items << itemAt(i).data.toString();
     }
 
-    kDebug() << "FolderModel::save:"
-        << m_dirPath
-        << items;
+    // kDebug() << "FolderModel::save:"
+    //     << m_dirPath
+    //     << items;
 
     KConfig cfg(KStandardDirs::locate("config", "lancelotrc"));
     KConfigGroup config = cfg.group("FolderModel");

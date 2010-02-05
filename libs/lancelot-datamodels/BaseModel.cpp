@@ -160,9 +160,9 @@ bool BaseModel::addService(const KService::Ptr & service)
         return false;
     }
 
-    kDebug() << service->name()
-        << service->isApplication() << service->exec()
-        << service->isValid();
+    // kDebug() << service->name()
+    //     << service->isApplication() << service->exec()
+    //     << service->isValid();
 
     QString genericName = service->genericName();
     QString appName = service->name();
@@ -195,7 +195,7 @@ bool BaseModel::addUrl(const QString & url)
 
 bool BaseModel::addUrl(const KUrl & url)
 {
-    kDebug() << url;
+    // kDebug() << url;
     KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url);
 
     if (url.isLocalFile() && QFileInfo(url.path()).suffix() == "desktop") {

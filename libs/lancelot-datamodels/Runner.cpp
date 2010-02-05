@@ -154,7 +154,7 @@ void Runner::timerEvent(QTimerEvent * event)
 // Code taken from KRunner Runner::setQueryMatches
 void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
 {
-    kDebug() << m.size();
+    // kDebug() << m.size();
     setEmitInhibited(true);
     clear();
 

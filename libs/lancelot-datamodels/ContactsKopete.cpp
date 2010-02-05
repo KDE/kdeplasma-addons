@@ -74,8 +74,8 @@ void ContactsKopete::timerEvent(QTimerEvent * event)
     if (event->timerId() == d->checkRunningTimer.timerId()) {
         load();
     } else if (event->timerId() == d->delayTimer.timerId()) {
-        kDebug() << "contactChanged [delayed]:"
-            << d->contactsToUpdate.size();
+        // kDebug() << "contactChanged [delayed]:"
+        //     << d->contactsToUpdate.size();
         d->delayTimer.stop();
         // checking whether we have a large update
         if (d->contactsToUpdate.size() > 5) {
@@ -146,7 +146,7 @@ void ContactsKopete::load(bool forceReload)
         }
 
         if (forceReload || statusChanged) {
-            kDebug() << "full";
+            // kDebug() << "full";
             clear();
             d->kopeteRunning = true;
             d->noOnlineContacts = false;
