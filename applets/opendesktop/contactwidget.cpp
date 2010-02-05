@@ -332,6 +332,18 @@ void ContactWidget::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void ContactWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
+    return;
+    Q_UNUSED(event);
+}
+
+void ContactWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    Q_UNUSED(event);
+}
+
+void ContactWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+{
+    Q_UNUSED(event);
     emit showDetails();
 }
 

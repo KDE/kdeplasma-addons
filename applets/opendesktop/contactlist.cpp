@@ -27,7 +27,7 @@
 ContactList::ContactList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     : ScrollWidget(parent)
 {
-    m_widget = new ContactContainer(engine);
+    m_widget = new ContactContainer(engine, this);
     setWidget(m_widget);
 
     connect(m_widget, SIGNAL(addFriend(QString)), SIGNAL(addFriend(QString)));

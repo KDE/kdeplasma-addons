@@ -33,12 +33,17 @@
 class ContactWidget;
 class QGraphicsLinearLayout;
 
+namespace Plasma
+{
+    class ScrollWidget;
+}
+
 class ContactContainer : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
-    explicit ContactContainer(Plasma::DataEngine* engine, QGraphicsWidget* parent = 0);
+    explicit ContactContainer(Plasma::DataEngine* engine, Plasma::ScrollWidget* parent = 0);
 
 Q_SIGNALS:
     void addFriend(const QString& id);
@@ -57,6 +62,7 @@ private Q_SLOTS:
     void personRemoved(const QString& person);
 
 private:
+    Plasma::ScrollWidget *m_scrollWidget;
     QSignalMapper m_addFriendMapper;
     Plasma::DataEngine* m_engine;
     PersonWatchList m_friendWatcher;

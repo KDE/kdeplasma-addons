@@ -23,14 +23,17 @@
 
 #include <QtGui/QGraphicsLinearLayout>
 
+#include <Plasma/ScrollWidget>
+
 #include "contactwidget.h"
 #include "utils.h"
 
 
 using namespace Plasma;
 
-ContactContainer::ContactContainer(DataEngine* engine, QGraphicsWidget* parent)
+ContactContainer::ContactContainer(DataEngine* engine, Plasma::ScrollWidget* parent)
     : QGraphicsWidget(parent),
+      m_scrollWidget(parent),
       m_engine(engine),
       m_friendWatcher(engine),
       m_layout(new QGraphicsLinearLayout(Qt::Vertical)),
@@ -64,7 +67,12 @@ void ContactContainer::friendRemoved(const QString& person) {
 
 void ContactContainer::personAdded(const QString& person)
 {
-    ContactWidget* widget = new ContactWidget(m_engine);
+    ContactWidget* widget = new ContactWidget(m_engine, this);
+
+    if (m_scrollWidget) {
+        m_scrollWidget->registerAsDragHandle(widget);
+    }
+
     widget->setProvider(m_provider);
     widget->setId(person);
     widget->setIsFriend(m_friendWatcher.contains(person));

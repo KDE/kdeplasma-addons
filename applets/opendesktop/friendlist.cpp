@@ -30,7 +30,6 @@ FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
 : QGraphicsWidget(parent)
 {
     m_invitations = new FriendManagementContainer(engine);
-    m_friendListWidget = new ContactContainer(engine);
 
     setContentsMargins(0,0,0,0);
     QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical);
@@ -38,6 +37,7 @@ FriendList::FriendList(Plasma::DataEngine* engine, QGraphicsWidget* parent)
     layout->setContentsMargins(0,0,0,0);
     
     Plasma::ScrollWidget* friendScroll = new Plasma::ScrollWidget(this);
+    m_friendListWidget = new ContactContainer(engine, friendScroll);
     friendScroll->setWidget(m_friendListWidget);
     
     layout->addItem(friendScroll);
