@@ -10,6 +10,7 @@ find_package(SharedMimeInfo REQUIRED)
 
 # Finding liblancelot
 find_package(Lancelot REQUIRED)
+find_package(Lancelot-Datamodels REQUIRED)
 
 add_subdirectory(tools)
 
