@@ -8,6 +8,7 @@ include_directories(
    ${KDE4_INCLUDES}
 
    ${LANCELOT_INCLUDE_DIR}
+   ${LANCELOT_DATAMODELS_INCLUDE_DIR}
 )
 
 # Lancelot client files
