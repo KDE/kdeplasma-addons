@@ -26,6 +26,8 @@
 #include <QRectF>
 #include <QTimer>
 
+#include <KDebug>
+
 #define ACTIVATION_TIME 300
 #define EXTENDER_Z_VALUE 100000.0
 
@@ -188,6 +190,8 @@ ExtenderButton::ExtenderButton(QString title,
 {
     setGroupByName("ExtenderButton");
     connect(this, SIGNAL(clicked()), this, SLOT(activate()));
+
+    setTitle(title);
 }
 
 ExtenderButton::ExtenderButton(QIcon icon, QString title,
@@ -197,6 +201,8 @@ ExtenderButton::ExtenderButton(QIcon icon, QString title,
 {
     setGroupByName("ExtenderButton");
     connect(this, SIGNAL(clicked()), this, SLOT(activate()));
+
+    setTitle(title);
 }
 
 ExtenderButton::ExtenderButton(const Plasma::Svg & icon, QString title,
@@ -206,6 +212,8 @@ ExtenderButton::ExtenderButton(const Plasma::Svg & icon, QString title,
 {
     setGroupByName("ExtenderButton");
     connect(this, SIGNAL(clicked()), this, SLOT(activate()));
+
+    setTitle(title);
 }
 
 void ExtenderButton::setGroup(Group * g)
@@ -369,6 +377,8 @@ bool ExtenderButton::isCheckable() const
 
 void ExtenderButton::setShortcutKey(const QString & key)
 {
+    kDebug() << title() << " set the key:" << key;
+
     if (key.isEmpty()) {
         delete d->shortcut;
         d->shortcut = NULL;

@@ -144,10 +144,10 @@ LancelotWindow::LancelotWindow()
 
     tabbarSections->installEventFilter(this);
     tabbarSections->setTabsGroupName("SectionButtons");
-    tabbarSections->addTab("documents",    KIcon("applications-office"), "Documents");
-    tabbarSections->addTab("contacts",     KIcon("kontact"),             "Contacts");
-    tabbarSections->addTab("computer",     KIcon("computer-laptop"),     "Computer");
-    tabbarSections->addTab("applications", KIcon("applications-other"),  "Applications");
+    tabbarSections->addTab("documents",    KIcon("applications-office"), i18n("&Documents"));
+    tabbarSections->addTab("contacts",     KIcon("kontact"),             i18n("&Contacts"));
+    tabbarSections->addTab("computer",     KIcon("computer-laptop"),     i18n("Co&mputer"));
+    tabbarSections->addTab("applications", KIcon("applications-other"),  i18n("&Applications"));
     tabbarSections->setOrientation(Qt::Vertical);
     tabbarSections->setTextDirection(Qt::Vertical);
 
