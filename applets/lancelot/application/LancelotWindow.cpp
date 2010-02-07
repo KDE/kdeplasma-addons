@@ -140,7 +140,6 @@ LancelotWindow::LancelotWindow()
     passagewayApplications->setEntranceIcon(KIcon("favorites"));
     passagewayApplications->setAtlasTitle(i18n("Applications"));
     passagewayApplications->setAtlasIcon(KIcon("applications-other"));
-    /* End TODO */
 
     tabbarSections->installEventFilter(this);
     tabbarSections->setTabsGroupName("SectionButtons");
@@ -150,6 +149,7 @@ LancelotWindow::LancelotWindow()
     tabbarSections->addTab("applications", KIcon("applications-other"),  i18n("&Applications"));
     tabbarSections->setOrientation(Qt::Vertical);
     tabbarSections->setTextDirection(Qt::Vertical);
+    /* End TODO */
 
     connect(tabbarSections, SIGNAL(currentTabChanged(const QString &)),
             layoutCenter, SLOT(showCard(const QString &)));
