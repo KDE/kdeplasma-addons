@@ -137,21 +137,31 @@ void Devices::Private::addDevice(const Solid::Device & device)
         KDiskFreeSpaceInfo info = KDiskFreeSpaceInfo::freeSpaceInfo(description);
         if (info.isValid()) {
             qreal percentage = info.used() / (qreal)info.size();
-            QPixmap pixmap = icon.pixmap(32, 32);
-
-            QPainter painter(&pixmap);
-            painter.setRenderHint(QPainter::Antialiasing);
-            painter.setBrush(colorForPercentage(percentage));
-            painter.setPen(QPen(
-                QBrush(QColor(255, 255, 255, 128)), 1
-            ));
-
             if (percentage <= 0.999) {
-                painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
-            }
+                QPixmap pixmap = icon.pixmap(32, 32);
 
-            icon = QIcon();
-            icon.addPixmap(pixmap);
+                QPainter painter(&pixmap);
+                painter.setRenderHint(QPainter::Antialiasing);
+
+                QColor color;
+
+                color = QColor(0, 0, 0, 100);
+
+                painter.setBrush(color);
+                painter.setPen(QPen(color, 0));
+                painter.drawEllipse(10, 10, 18, 18);
+
+                color = colorForPercentage(percentage);
+
+                painter.setBrush(color);
+                color.setAlpha(200);
+                painter.setPen(QPen(color.lighter(200), 1));
+
+                painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+
+                icon = QIcon();
+                icon.addPixmap(pixmap);
+            }
 
             /*
              * TODO: Hover - show percentage
