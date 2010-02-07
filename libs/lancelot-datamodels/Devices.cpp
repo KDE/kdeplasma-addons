@@ -138,29 +138,42 @@ void Devices::Private::addDevice(const Solid::Device & device)
         if (info.isValid()) {
             qreal percentage = info.used() / (qreal)info.size();
             if (percentage <= 0.999) {
-                QPixmap pixmap = icon.pixmap(32, 32);
+                QPixmap pixmapNormal = icon.pixmap(32, 32);
+                QPixmap pixmapActive = icon.pixmap(32, 32, QIcon::Active);
 
-                QPainter painter(&pixmap);
-                painter.setRenderHint(QPainter::Antialiasing);
+                QPainter painterNormal(&pixmapNormal);
+                QPainter painterActive(&pixmapActive);
+
+                painterNormal.setRenderHint(QPainter::Antialiasing);
+                painterActive.setRenderHint(QPainter::Antialiasing);
 
                 QColor color;
 
                 color = QColor(0, 0, 0, 100);
 
-                painter.setBrush(color);
-                painter.setPen(QPen(color, 0));
-                painter.drawEllipse(10, 10, 18, 18);
+                painterNormal.setBrush(color);
+                painterNormal.setPen(QPen(color, 0));
+                painterNormal.drawEllipse(10, 10, 18, 18);
+
+                painterActive.setBrush(color);
+                painterActive.setPen(QPen(color, 0));
+                painterActive.drawEllipse(10, 10, 18, 18);
 
                 color = colorForPercentage(percentage);
 
-                painter.setBrush(color);
+                painterNormal.setBrush(color);
                 color.setAlpha(200);
-                painter.setPen(QPen(color.lighter(200), 1));
+                painterNormal.setPen(QPen(color.lighter(200), 1));
+                painterNormal.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
 
-                painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+                painterActive.setBrush(color.lighter());
+                color.setAlpha(200);
+                painterActive.setPen(QPen(Qt::white, 1));
+                painterActive.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
 
                 icon = QIcon();
-                icon.addPixmap(pixmap);
+                icon.addPixmap(pixmapNormal);
+                icon.addPixmap(pixmapActive, QIcon::Active);
             }
 
             /*
