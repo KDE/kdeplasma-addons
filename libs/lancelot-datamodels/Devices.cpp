@@ -146,7 +146,9 @@ void Devices::Private::addDevice(const Solid::Device & device)
                 QBrush(QColor(255, 255, 255, 128)), 1
             ));
 
-            painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+            if (percentage <= 0.999) {
+                painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+            }
 
             icon = QIcon();
             icon.addPixmap(pixmap);
