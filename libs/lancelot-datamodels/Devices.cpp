@@ -21,16 +21,18 @@
 #include "Devices.h"
 #include "Devices_p.h"
 
-#include <KMessageBox>
-#include <KRun>
-#include <KLocalizedString>
-#include <KStandardDirs>
-
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QFile>
 #include <QDebug>
+
+#include <KMessageBox>
+#include <KRun>
+#include <KLocalizedString>
+#include <KStandardDirs>
+#include <KDiskFreeSpaceInfo>
 #include <KIcon>
+#include <KDebug>
 
 #include "Logger.h"
 
@@ -41,6 +43,8 @@
 #include <solid/storagedrive.h>
 #include <solid/opticaldrive.h>
 #include <solid/opticaldisc.h>
+
+#include <cmath>
 
 namespace Lancelot {
 namespace Models {
@@ -124,18 +128,98 @@ void Devices::Private::addDevice(const Solid::Device & device)
         this, SLOT(udiAccessibilityChanged(bool, const QString &))
     );
 
+    QIcon icon = KIcon(device.icon());
+
     QString description = access->filePath();
     if (!access->isAccessible() || description.isEmpty()) {
         description = i18n("Unmounted");
+    } else {
+        KDiskFreeSpaceInfo info = KDiskFreeSpaceInfo::freeSpaceInfo(description);
+        if (info.isValid()) {
+            qreal percentage = info.used() / (qreal)info.size();
+            QPixmap pixmap = icon.pixmap(32, 32);
+
+            QPainter painter(&pixmap);
+            painter.setRenderHint(QPainter::Antialiasing);
+            painter.setBrush(colorForPercentage(percentage));
+            painter.setPen(QPen(
+                QBrush(QColor(255, 255, 255, 128)), 1
+            ));
+
+            painter.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+
+            icon = QIcon();
+            icon.addPixmap(pixmap);
+
+            /*
+             * TODO: Hover - show percentage
+             *
+            QFont font = painter.font();
+            font.setBold(true);
+            font.setPixelSize(10);
+            painter.setFont(font);
+
+            painter.setPen(QColor(0, 0, 0));
+            painter.drawText(12, 22,
+                QString::number(qRound(percentage * 100)) + "%");
+
+            icon.addPixmap(pixmap, QIcon::Active);
+            */
+        }
     }
 
     q->add(
         device.product(),
         description,
-        KIcon(device.icon()),
+        icon,
         device.udi()
     );
 }
+
+QColor Devices::Private::combineColors(
+        QColor c1, qreal f1,
+        QColor c2, qreal f2)
+{
+    return QColor(
+        c1.red()   * f1  + c2.red()   * f2,
+        c1.green() * f1  + c2.green() * f2,
+        c1.blue()  * f1  + c2.blue()  * f2
+    );
+}
+
+#define PI 3.1415926535
+// Blue 97 147 207
+#define LowUsageColor QColor(97, 147, 207)
+
+// Yellow 227 173 0
+#define MediumUsageColor QColor(227, 173, 0)
+
+// Red 172 67 17
+#define HighUsageColor QColor(172, 67, 17)
+
+QColor Devices::Private::colorForPercentage(qreal percentage)
+{
+    if (percentage < .25) {
+        return LowUsageColor;
+    } else if (percentage <= .5) {
+        qreal diff = pow(sin((percentage - .25) * 2 * PI), 2);
+
+        return combineColors(
+            LowUsageColor,  1 - diff,
+            MediumUsageColor, diff
+        );
+    } else {
+        qreal diff = pow(sin(percentage * PI), 2);
+
+        return combineColors(
+            MediumUsageColor, diff,
+            HighUsageColor, 1 - diff
+        );
+    }
+
+}
+
+#undef PI
 
 void Devices::Private::udiAccessibilityChanged(bool accessible, const QString & udi)
 {
@@ -232,14 +316,6 @@ void Devices::Private::readItem()
     if (!showItem) {
         udis << udi;
     }
-}
-
-void Devices::Private::freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable)
-{
-    Q_UNUSED(mountPoint);
-    Q_UNUSED(kbSize);
-    Q_UNUSED(kbUsed);
-    Q_UNUSED(kbAvailable);
 }
 
 void Devices::activate(int index)

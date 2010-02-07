@@ -36,7 +36,6 @@ public:
 public Q_SLOTS:
     void deviceRemoved(const QString & udi);
     void deviceAdded(const QString & udi);
-    void freeSpaceInfoAvailable(const QString & mountPoint, quint64 kbSize, quint64 kbUsed, quint64 kbAvailable);
     void udiAccessibilityChanged(bool accessible, const QString & udi);
 
     void deviceSetupDone(Solid::ErrorType error, QVariant errorData, const QString & udi);
@@ -50,6 +49,13 @@ public:
     void readItem();
 
     void addDevice(const Solid::Device & device);
+
+    QColor combineColors(
+        QColor c1, qreal f1,
+        QColor c2, qreal f2
+        );
+
+    QColor colorForPercentage(qreal percentage);
 
     QString error;
     QStringList udis;
