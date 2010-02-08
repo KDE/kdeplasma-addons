@@ -48,7 +48,8 @@ class KopeteRunner : public Plasma::AbstractRunner
         typedef QHash<QString, ContactProperties> ContactData;
 
         ContactData m_contactData;
-        bool m_loaded;
+        bool m_loaded : 1;
+        bool m_checkLoaded : 1;
 };
 
 K_EXPORT_PLASMA_RUNNER(kopete, KopeteRunner)
