@@ -24,7 +24,8 @@
 #include <QtCore/QHashIterator>
 #include <QtCore/QUuid>
 #include <QtDBus/QDBusConnection>
-#include <QDBusInterface>
+#include <QtDBus/QDBusConnectionInterface>
+#include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusReply>
 
@@ -47,7 +48,8 @@ static QDBusMessage generateMethodCall(const QString& method)
 
 KopeteRunner::KopeteRunner(QObject* parent, const QVariantList& args) :
         AbstractRunner(parent, args),
-        m_loaded(false)
+        m_loaded(false),
+        m_checkLoaded(false)
 {
     Q_UNUSED(args);
     setObjectName("Kopete contacts");
@@ -229,13 +231,14 @@ void KopeteRunner::run(const Plasma::RunnerContext& context, const Plasma::Query
 
 void KopeteRunner::loadData()
 {
-    if (m_loaded) {
+    if (m_checkLoaded) {
         return;
     }
 
 
-    QDBusInterface iface(KopeteDBusService, KopeteDBusPath);
-    m_loaded = iface.isValid();
+    m_checkLoaded = true;
+    QDBusReply<bool> reply = QDBusConnection::sessionBus().interface()->isServiceRegistered(KopeteDBusService);
+    m_loaded = reply.isValid() && reply.value();
     //kDebug() << "**************************" << m_loaded;
 #if 0
     // Request contacts
@@ -285,7 +288,7 @@ void KopeteRunner::slotTeardown()
 #endif
     //kDebug();
     m_contactData.clear();
-    m_loaded = false;
+    m_checkLoaded = false;
 }
 
 void KopeteRunner::updateContact(const QString& uuid)
