@@ -2,6 +2,7 @@
 Name=Calendar Events
 Name[da]=Kalenderbegivenheder
 Name[de]=Kalenderereignisse
+Name[en_GB]=Calendar Events
 Name[es]=Eventos del calendario
 Name[et]=Kalendri sündmused
 Name[fr]=Évènements d'agenda
@@ -13,6 +14,7 @@ Name[uk]=Події календаря
 Name[x-test]=xxCalendar Eventsxx
 Comment=Calendar Events runner
 Comment[da]=Runner til kalenderbegivenheder
+Comment[en_GB]=Calendar Events runner
 Comment[es]=Lanzador de eventos del calendario
 Comment[et]=Kalendri sündmuste käivitaja
 Comment[fr]=Outil d'exécution d'évènements d'agenda
