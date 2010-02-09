@@ -73,11 +73,11 @@ void EventsRunner::collectionsReceived( const Collection::List & list ) {
 void EventsRunner::describeSyntaxes() {
     QList<RunnerSyntax> syntaxes;
 
-    RunnerSyntax eventSyntax( QString("%1 :q:").arg( eventKeyword ), i18n("Creates event in calendar by its description in :q:, which consists of parts divided by semicolon. Two first obligatory parts are event summary and its start date, third, optional, is list of event categories, divided by comma.") );
+    RunnerSyntax eventSyntax( QString("%1 :q:").arg( eventKeyword ), i18n("Creates event in calendar by its description in :q:, which consists of parts divided by semicolons.  The first two parts (both obligatory) are the event summary and its start date.  The third, optional, is list of event categories, divided by commas.") );
     eventSyntax.setSearchTermDescription( i18n( "event description" ) );
     syntaxes.append(eventSyntax);
 
-    RunnerSyntax todoSyntax( QString("%1 :q:").arg( todoKeyword ), i18n("Creates todo in calendar by its description in :q:, which consists of parts divided by semicolon. Two first obligatory parts are todo summary and its due date, third, optional, is list of todo categories, divided by comma.") );
+    RunnerSyntax todoSyntax( QString("%1 :q:").arg( todoKeyword ), i18n("Creates todo in calendar by its description in :q:, which consists of parts divided by semicolons. The first two parts (both obligatory) are a summary of the todo, and its due date.  The third, optional, is list of todo categories, divided by commas.") );
     todoSyntax.setSearchTermDescription( i18n( "todo description" ) );
     syntaxes.append(todoSyntax);
 
