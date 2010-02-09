@@ -164,12 +164,16 @@ void Devices::Private::addDevice(const Solid::Device & device)
                 painterNormal.setBrush(color);
                 color.setAlpha(200);
                 painterNormal.setPen(QPen(color.lighter(200), 1));
-                painterNormal.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+                painterNormal.drawPie(8, 8, 22, 22,
+                    90.0 * 16.0 - 360.0 * 16.0 * percentage,
+                    360.0 * 16.0 * percentage);
 
                 painterActive.setBrush(color.lighter());
                 color.setAlpha(200);
                 painterActive.setPen(QPen(Qt::white, 1));
-                painterActive.drawPie(8, 8, 22, 22, 0, 360.0 * 16.0 * percentage);
+                painterActive.drawPie(8, 8, 22, 22,
+                    90.0 * 16.0 - 360.0 * 16.0 * percentage,
+                    360.0 * 16.0 * percentage);
 
                 icon = QIcon();
                 icon.addPixmap(pixmapNormal);
