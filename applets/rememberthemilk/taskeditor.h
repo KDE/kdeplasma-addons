@@ -23,6 +23,7 @@
 
 namespace Plasma {
   class ServiceJob;
+  class Animation;
 }
 
 //#include <Plasma/Frame>
@@ -35,6 +36,7 @@ namespace Plasma {
 #include <QGraphicsGridLayout>
 #include <QGraphicsWidget>
 #include <QModelIndex>
+#include <QWeakPointer>
 
 class TaskEditor : public QGraphicsWidget
 {
@@ -58,7 +60,6 @@ signals:
 
 public slots:
   void startAnimation(QSizeF endSize, bool show = true);
-  void onAnimValueChanged(qreal value);
   void animationFinished();
 
 protected slots:
@@ -90,12 +91,12 @@ private:
 
   bool appearing; // used to know which direction to go in for the animation
   QSizeF fullSize;
-  qreal opacity;
   QString m_name;
   QString m_date;
   QString m_tags;
   int m_priority;
   Plasma::Service* m_service;
+  QWeakPointer<Plasma::Animation> m_fadeAnimation;
 };
 
 #endif // TASKEDITOR_H

@@ -34,6 +34,7 @@
 
 #include <Plasma/Theme>
 #include <Plasma/Animator>
+#include <Plasma/Animation>
 #include <Plasma/IconWidget>
 #include <Plasma/Service>
 
@@ -99,8 +100,6 @@ TaskEditor::TaskEditor(Plasma::DataEngine* engine, QGraphicsWidget* parent)
 
   mainLayout->addItem(saveChangesButton, 7, 0, 1, 2);
   mainLayout->addItem(discardChangesButton, 8, 0, 1, 2);
-
-  opacity = .9;
 
   setLayout(mainLayout);
 }
@@ -194,7 +193,6 @@ void TaskEditor::saveChanges() {
 void TaskEditor::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) {
   Q_UNUSED(widget)
   QColor wash = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
-  wash.setAlphaF(opacity);
   painter->setBrush(wash);
   painter->drawRect(option->exposedRect);
 }
@@ -208,45 +206,45 @@ void TaskEditor::setFullSize(QSizeF size) {
 
 void TaskEditor::startAnimation(QSizeF endSize, bool show) {
     appearing = show;
-    if (appearing) {
-      opacity = 0;
+    if (appearing)
       foreach(QGraphicsItem* child, childItems())
-	child->show();
-    }
-    else
-      this->show();
+        child->show();
+
     this->show();
+
     fullSize = endSize;
     resize(fullSize);
-    if (show)
-      Plasma::Animator::self()->customAnimation(10, 100, Plasma::Animator::EaseInCurve, this, "onAnimValueChanged");
-    else
-      Plasma::Animator::self()->customAnimation(10, 100, Plasma::Animator::EaseOutCurve, this, "onAnimValueChanged");
-}
 
-void TaskEditor::onAnimValueChanged(qreal value) {
-    if (value == 1.0) {
-        animationFinished();
-        return;
+    Plasma::Animation *animation = m_fadeAnimation.data();
+    if (!animation) {
+      animation = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
+      animation->setTargetWidget(this);
+      animation->setProperty("startValue", 0.0);
+      animation->setProperty("endValue", 1.0);
+      animation->setProperty("duration", 100);
+      m_fadeAnimation = animation;
+      connect(animation, SIGNAL(finished()), this, SLOT(animationFinished()));
+    } else if (animation->state() == QAbstractAnimation::Running) {
+      animation->pause();
     }
 
-
-  if (appearing)
-    opacity = value*.9;
-  else
-    opacity = (1-value)*.9;
-
-    update();
+    if (show) {
+      animation->setProperty("easingCurve", QEasingCurve::InQuad);
+      animation->setProperty("direction", QAbstractAnimation::Forward);
+      animation->start(QAbstractAnimation::KeepWhenStopped);
+    } else {
+      animation->setProperty("easingCurve", QEasingCurve::OutQuad);
+      animation->setProperty("direction", QAbstractAnimation::Backward);
+      animation->start(QAbstractAnimation::DeleteWhenStopped);
+    }
 }
 
 void TaskEditor::animationFinished() {
     if (appearing) {
       setPos(0, 0);
       resize(fullSize);
-      opacity = .9;
     }
     else {
-      opacity = 0;
       hide();
     }
 
