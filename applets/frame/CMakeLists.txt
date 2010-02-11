@@ -1,7 +1,7 @@
 project(plasma-frame)
 
 macro_optional_find_package(Kexiv2)
-macro_log_feature(KEXIV2_FOUND "libkexiv2" "Library to access EXIF information" "http://www.kde.org" FALSE "0.2.0" "RECOMENDED: Enables automatic rotation for frame applet" )
+macro_log_feature(KEXIV2_FOUND "libkexiv2" "Library to access EXIF information" "http://www.kde.org" FALSE "0.2.0" "RECOMMENDED: Enables automatic rotation for frame applet" )
 
 set(frame_SRCS
     frame.cpp
