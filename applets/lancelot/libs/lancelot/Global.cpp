@@ -66,6 +66,8 @@ void Group::Private::setObjectProperty(QObject * object,
 // clearing all info
 void Group::Private::reset()
 {
+    loaded = false;
+
     QMutableMapIterator < QString, QVariant > i(properties);
     while (i.hasNext()) {
         i.next();
@@ -89,8 +91,20 @@ void Group::Private::copyFrom(Group::Private * d)
 {
     if (this == d) return;
 
+    QMap < QString, QVariant > savedProperties;
+
+    foreach (const QString & key, persistentProperties) {
+        savedProperties[key] = properties[key];
+    }
+
     properties = d->properties;
-    persistentProperties = d->persistentProperties;
+    persistentProperties += d->persistentProperties;
+
+    QMapIterator < QString, QVariant > i( savedProperties );
+    while (i.hasNext()) {
+        i.next();
+        properties[i.key()] = i.value();
+    }
 
     foregroundColor = d->foregroundColor;
     backgroundColor = d->backgroundColor;
@@ -224,6 +238,7 @@ void Group::load(bool full)
 
     // d->properties.clear();
     d->reset();
+    d->loaded = true;
 
     Group * group;
 
@@ -386,8 +401,10 @@ void Global::Private::themeChanged()
 
 void Global::Private::loadAllGroups(bool clearFirst)
 {
-    foreach(Group * group, groups) {
-        group->d->reset();
+    if (clearFirst) {
+        foreach(Group * group, groups) {
+            group->d->reset();
+        }
     }
 
     foreach(Group * group, groups) {
