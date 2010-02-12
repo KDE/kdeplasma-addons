@@ -35,13 +35,16 @@
 #include <QClipboard>
 #include <QTimer>
 #include <QPen>
+#include <QWeakPointer>
 
 class QSignalMapper;
 class KAction;
+class QPropertyAnimation;
 
 class Pastebin : public Plasma::Applet
 {
     Q_OBJECT
+    Q_PROPERTY(qreal animationUpdate READ animationValue WRITE animationUpdate)
 public:
     Pastebin(QObject *parent, const QVariantList &args);
     ~Pastebin();
@@ -53,6 +56,8 @@ public:
     void paintInterface(QPainter *painter, const QStyleOptionGraphicsItem *option,
                         const QRect &contents);
     void constraintsEvent(Plasma::Constraints constraints);
+
+    qreal animationValue() const;
 
     enum InteractionState { /* What is the user doing, used for visual feedback on user actions */
         Off = 0,            /* Not set */
@@ -122,7 +127,7 @@ private:
 
     bool m_isHovered;
     bool m_fadeIn;
-    int m_animId;
+    QWeakPointer<QPropertyAnimation> m_animation;
     qreal m_alpha;
 
     QFont m_font;

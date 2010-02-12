@@ -46,6 +46,7 @@
 #include <QPainter>
 #include <QPaintEngine>
 #include <QSignalMapper>
+#include <QPropertyAnimation>
 
 
 Pastebin::Pastebin(QObject *parent, const QVariantList &args)
@@ -397,28 +398,36 @@ void Pastebin::showOverlay(bool show)
         return;
     }
     m_fadeIn = show;
-    const int FadeInDuration = 400;
 
-    if (m_animId != -1) {
-        Plasma::Animator::self()->stopCustomAnimation(m_animId);
+    QPropertyAnimation *animation = m_animation.data();
+    if (!animation) {
+        animation = new QPropertyAnimation(this, "animationUpdate");
+        animation->setDuration(400);
+        animation->setStartValue(0.0);
+        animation->setEndValue(1.0);
+        animation->setEasingCurve(QEasingCurve::OutQuad);
+        m_animation = animation;
+    } else if (animation->state() == QAbstractAnimation::Running) {
+        animation->pause();
     }
-    m_animId = Plasma::Animator::self()->customAnimation(40 / (1000 / FadeInDuration), FadeInDuration,
-                                                      Plasma::Animator::EaseOutCurve, this,
-                                                      "animationUpdate");
+
+    if (m_fadeIn) {
+        animation->setDirection(QAbstractAnimation::Forward);
+        animation->start(QAbstractAnimation::KeepWhenStopped);
+    } else {
+        animation->setDirection(QAbstractAnimation::Backward);
+        animation->start(QAbstractAnimation::DeleteWhenStopped);
+    }
+}
+
+qreal Pastebin::animationValue() const
+{
+    return m_alpha;
 }
 
 void Pastebin::animationUpdate(qreal progress)
 {
-    if (progress == 1) {
-        m_animId = -1;
-    }
-    if (!m_fadeIn) {
-        qreal new_alpha = m_fadeIn ? progress : 1 - progress;
-        m_alpha = qMin(new_alpha, m_alpha);
-    } else {
-        m_alpha = m_fadeIn ? progress : 1 - progress;
-    }
-    m_alpha = qMax(qreal(0.0), m_alpha);
+    m_alpha = m_fadeIn ? progress : 1 - progress;
     update();
 }
 
