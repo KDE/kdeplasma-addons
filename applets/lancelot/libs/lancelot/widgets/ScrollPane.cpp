@@ -217,12 +217,6 @@ void ScrollPane::scrollableWidgetSizeUpdateNeeded() //>
         }
     }
 
-    if (hasVertical) {
-        Plasma::Animator::self()->registerScrollingManager(this);
-    } else {
-        Plasma::Animator::self()->unregisterScrollingManager(this);
-    }
-
     d->updateViewport();
 } //<
 
@@ -329,17 +323,21 @@ void ScrollPane::scrollTo(QRectF rect) //>
     QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
 
     // Vertical scroll
-    if (d->vertical->value() > rect.top()) {
-        scrollVertical(rect.top());
-    } else if (d->vertical->value() + viewportSize.height() < rect.bottom()) {
-        scrollVertical(rect.bottom() - viewportSize.height());
+    if (d->vertical->isVisible()) {
+        if (d->vertical->value() > rect.top()) {
+            scrollVertical(rect.top());
+        } else if (d->vertical->value() + viewportSize.height() < rect.bottom()) {
+            scrollVertical(rect.bottom() - viewportSize.height());
+        }
     }
 
     // Horizontal scroll
-    if (d->horizontal->value() > rect.left()) {
-        scrollHorizontal(rect.left());
-    } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
-        scrollVertical(rect.right() - viewportSize.width());
+    if (d->horizontal->isVisible()) {
+        if (d->horizontal->value() > rect.left()) {
+            scrollHorizontal(rect.left());
+        } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
+            scrollHorizontal(rect.right() - viewportSize.width());
+        }
     }
 } //<
 
