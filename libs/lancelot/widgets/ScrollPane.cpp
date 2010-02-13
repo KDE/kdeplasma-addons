@@ -334,7 +334,7 @@ void ScrollPane::scrollTo(QRectF rect) //>
         if (d->horizontal->value() > rect.left()) {
             scrollHorizontal(rect.left());
         } else if (d->horizontal->value() + viewportSize.width() < rect.right()) {
-            scrollVertical(rect.right() - viewportSize.width());
+            scrollHorizontal(rect.right() - viewportSize.width());
         }
     }
 } //<
