@@ -137,12 +137,21 @@ void Devices::Private::addDevice(const Solid::Device & device)
         KDiskFreeSpaceInfo info = KDiskFreeSpaceInfo::freeSpaceInfo(description);
         if (info.isValid()) {
             qreal percentage = info.used() / (qreal)info.size();
+
             if (percentage <= 0.999) {
-                QPixmap pixmapNormal = icon.pixmap(32, 32);
-                QPixmap pixmapActive = icon.pixmap(32, 32, QIcon::Active);
+                QPixmap pixmapNormal(32, 32);
+                QPixmap pixmapActive(32, 32);
+
+                pixmapNormal.fill(QColor(0, 0, 0, 0));
+                pixmapActive.fill(QColor(0, 0, 0, 0));
 
                 QPainter painterNormal(&pixmapNormal);
                 QPainter painterActive(&pixmapActive);
+
+                icon.paint(
+                    &painterNormal, 0, 0, 24, 24, Qt::AlignCenter, QIcon::Normal);
+                icon.paint(
+                    &painterActive, 0, 0, 24, 24, Qt::AlignCenter, QIcon::Active);
 
                 painterNormal.setRenderHint(QPainter::Antialiasing);
                 painterActive.setRenderHint(QPainter::Antialiasing);
@@ -175,25 +184,23 @@ void Devices::Private::addDevice(const Solid::Device & device)
                     90.0 * 16.0 - 360.0 * 16.0 * percentage,
                     360.0 * 16.0 * percentage);
 
+                /*
+                 * TODO: Hover - show percentage
+                 *
+                QFont font = painterActive.font();
+                font.setBold(true);
+                font.setPixelSize(10);
+                painterActive.setFont(font);
+
+                painterActive.setPen(QColor(0, 0, 0));
+                painterActive.drawText(12, 22,
+                    QString::number(qRound(percentage * 100)) + "%");
+                */
+
                 icon = QIcon();
                 icon.addPixmap(pixmapNormal);
                 icon.addPixmap(pixmapActive, QIcon::Active);
             }
-
-            /*
-             * TODO: Hover - show percentage
-             *
-            QFont font = painter.font();
-            font.setBold(true);
-            font.setPixelSize(10);
-            painter.setFont(font);
-
-            painter.setPen(QColor(0, 0, 0));
-            painter.drawText(12, 22,
-                QString::number(qRound(percentage * 100)) + "%");
-
-            icon.addPixmap(pixmap, QIcon::Active);
-            */
         }
     }
 
