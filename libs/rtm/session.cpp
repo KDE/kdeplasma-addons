@@ -162,9 +162,10 @@ void RTM::Session::tokenCheckReply(RTM::Request* response)
   if (!reply.contains(d->token)) {
     kDebug() << "Failed Token Check: " << reply;
     emit tokenCheck(false);
+  } else {
+    kDebug() << "Successful Token Check: " << reply;
+    emit tokenCheck(true);
   }
-  kDebug() << "Successful Token Check: " << reply;
-  emit tokenCheck(true);
 }
 
 
