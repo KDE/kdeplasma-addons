@@ -295,7 +295,7 @@ void Previewer::addPreview(const QUrl& url, KMimeType::Ptr mimeType)
 
     if (m_previewWidget->previews().isEmpty()) {
         // animating this is WICKED smooth =)
-        m_previewWidget->expand();
+        m_previewWidget->animateHeight(true);
     }
 
     m_previewWidget->addItem(url);

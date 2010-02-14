@@ -23,6 +23,7 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+#include <QPropertyAnimation>
 
 // KDE
 #include <KDebug>
@@ -47,8 +48,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
       m_selectedIndex(-1),
       m_hoveredIndex(-1),
       m_hoverSvg(new Plasma::FrameSvg(this)),
-      m_closeStatus(true),
-      m_animId(-1)
+      m_closeStatus(true)
 {
     m_scrollBar = new Plasma::ScrollBar(this);
     connect(m_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrolled( int )));
@@ -67,7 +67,7 @@ PreviewWidget::PreviewWidget(QGraphicsItem *parent)
 
     m_logo = new Plasma::Svg(this);
     m_logo->setImagePath("widgets/previewer-16");
-    
+
     m_hoverSvg->setImagePath("widgets/viewitem");
     m_hoverSvg->setEnabledBorders(Plasma::FrameSvg::AllBorders);
     m_hoverSvg->setCacheAllRenderedFrames(true);
@@ -124,7 +124,7 @@ void PreviewWidget::layoutItems()
     m_scrollBar->setSingleStep(itemHeight + s_spacing);
     m_scrollBar->setPageStep(m_itemsRect.height());
 
-    if (m_animId < 1) {
+    if (m_animation.isNull() || m_animation.data()->state() != QAbstractAnimation::Running) {
         if (m_items.last().bottom() > m_itemsRect.bottom() || m_items.first().top() < m_itemsRect.top()) {
             if (!m_scrollBar->isVisible()) {
                 m_scrollBar->show();
@@ -210,7 +210,7 @@ void PreviewWidget::updateSelectedItems(const QPoint &point)
             break;
         }
     }
-    
+
     if (m_selectedIndex == -1) {
         return;
     }
@@ -296,11 +296,7 @@ void PreviewWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (m_itemsRect.contains(event->pos().toPoint())) {
             updateSelectedItems(event->pos().toPoint());
         } else if (m_arrowRect.contains(event->pos().toPoint())) {
-            if (m_closeStatus) {
-                expand();
-            } else {
-                contract();
-            }
+            animateHeight(m_closeStatus);
         }
     }
 
@@ -353,12 +349,11 @@ void PreviewWidget::calculateRects()
     const int bottomBorder = bottomBorderHeight();
 
     // items rect shouldn't be visible even if the status is close
-    if (m_previewHistory.isEmpty() || (m_closeStatus && m_animId < 1)) {
+    const bool isAnimating = m_animation.isNull() || m_animation.data()->state() != QAbstractAnimation::Running;
+    if (m_previewHistory.isEmpty() || (m_closeStatus && isAnimating)) {
         m_animationHeight = s_topBorder + bottomBorder;
-    } else {
-        if (m_animId < 1) {
-            m_animationHeight = rect.height();
-        }
+    } else if (isAnimating) {
+        m_animationHeight = rect.height();
     }
 
     const int itemRectHeight = m_animationHeight - s_topBorder - bottomBorder;
@@ -382,77 +377,56 @@ void PreviewWidget::calculateRects()
     m_layoutIsValid = false;
 }
 
+qreal PreviewWidget::animationValue() const
+{
+    return m_animationHeight;
+}
+
 void PreviewWidget::expandingSlot(qreal progress)
 {
     const int min = s_topBorder + bottomBorderHeight();
-    if (qFuzzyCompare(qreal(1.0), progress)) {
-        m_animId = -1;
 
-        if (m_closeStatus) {
-            m_animationHeight = min;
-        } else {
-            m_animationHeight = int(size().height()) - min;
-
-            // show the scroll bar again if necessary
-            if (!m_items.isEmpty() && (m_items.last().bottom() > m_itemsRect.bottom() ||
-                m_items.first().top() < m_itemsRect.top())) {
-                m_scrollBar->show();
-            }
-        }
-    } else {
-        m_animationHeight = qMax(qreal(min),
-                                 min - 1 + ((size().height() - min)  * 
-                                            (m_closeStatus ? qreal(1.0) - progress : progress)));
+    if (!m_closeStatus && !m_items.isEmpty() && (m_items.last().bottom() > m_itemsRect.bottom() ||
+        m_items.first().top() < m_itemsRect.top())) {
+        m_scrollBar->show();
     }
+
+    m_animationHeight = qMax(qreal(min), min - 1 + ((size().height() - min)  * progress));
 
     calculateRects();
     update();
 }
 
-void PreviewWidget::contract()
+void PreviewWidget::animateHeight(bool isExpanding)
 {
-    if (m_closeStatus) {
+    if (m_closeStatus != isExpanding) {
         return;
     }
 
-    m_closeStatus = true;
+    m_closeStatus = !isExpanding;
 
-    if (m_animId > 0) {
-        Plasma::Animator::self()->stopCustomAnimation(m_animId);
+    QPropertyAnimation *animation = m_animation.data();
+    if (!animation) {
+        animation = new QPropertyAnimation(this, "animationValue");
+        animation->setDuration(EXPANDING_DURATION);
+        animation->setStartValue(0.0);
+        animation->setEndValue(1.0);
+        animation->setEasingCurve(QEasingCurve::InOutQuad);
+        m_animation = animation;
+    } else if (animation->state() == QAbstractAnimation::Running) {
+        animation->pause();
     }
 
     // don't draw the scrollbar while animating
     m_scrollBar->hide();
 
-    // nasty hack alert: expandingSlot will get called before customAnimation returns
-    // and we rely on m_animId != -1 .. so .. set it to a dummy value here
-    m_animId = 1;
-    m_animId = Plasma::Animator::self()->customAnimation(20, EXPANDING_DURATION,
-                                                         Plasma::Animator::EaseInOutCurve,
-                                                         this, "expandingSlot");
-}
-
-void PreviewWidget::expand()
-{
-    if (!m_closeStatus) {
-        return;
+    if (isExpanding) {
+        animation->setDirection(QAbstractAnimation::Forward);
+        animation->start(QAbstractAnimation::KeepWhenStopped);
+    } else {
+        animation->setDirection(QAbstractAnimation::Backward);
+        animation->start(QAbstractAnimation::DeleteWhenStopped);
     }
-
-    m_closeStatus = false;
-
-    if (m_animId > 0) {
-        Plasma::Animator::self()->stopCustomAnimation(m_animId);
-    }
-
-    // don't draw the scrollbar while animating
-    m_scrollBar->hide();
-
-    // nasty hack alert: expandingSlot will get called before customAnimation returns
-    // and we rely on m_animId != -1 .. so .. set it to a dummy value here
-    m_animId = 1;
-    m_animId = Plasma::Animator::self()->customAnimation(20, EXPANDING_DURATION,
-                                                         Plasma::Animator::EaseInOutCurve,
-                                                         this, "expandingSlot");
 }
 
 void PreviewWidget::scrolled( int value )
@@ -660,7 +634,7 @@ void PreviewWidget::removeItem(int index)
     m_hoveredIndex = -1;
     m_layoutIsValid = false;
     if (m_previewHistory.isEmpty()) {
-        contract();
+        animateHeight(false);
     }
     lookForPreview();
     update();

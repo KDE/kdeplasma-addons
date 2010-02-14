@@ -20,6 +20,7 @@
 
 #include <QGraphicsWidget>
 #include <QStyleOptionViewItem>
+#include <QWeakPointer>
 
 #include <KFileItemDelegate>
 #include <KUrl>
@@ -36,10 +37,12 @@ class QGraphicsSceneWheelEvent;
 class QGraphicsSceneResizeEvent;
 class KFileItem;
 class QTimeLine;
+class QPropertyAnimation;
 
 class PreviewWidget : public QGraphicsWidget
 {
     Q_OBJECT
+    Q_PROPERTY(qreal animationValue READ animationValue WRITE expandingSlot)
 
     public:
         PreviewWidget(QGraphicsItem *parent);
@@ -59,13 +62,14 @@ class PreviewWidget : public QGraphicsWidget
 
         QList<QUrl> previews();
 
+        qreal animationValue() const;
+
         static const int s_spacing = 2;
         static const int s_logoSize = 27;
         static const int s_topBorder = s_logoSize + 8;
 
     public slots:
-        void expand();
-        void contract();
+        void animateHeight(bool isExpanding);
         void expandingSlot(qreal progress);
         void addItem(const QUrl &);
         void removeItem(int index);
@@ -120,7 +124,7 @@ class PreviewWidget : public QGraphicsWidget
        bool m_closeStatus; // defines whether the widget should be drawn open or close
        QRect m_arrowRect;
        int m_animationHeight;
-       int m_animId;
+       QWeakPointer<QPropertyAnimation> m_animation;
 };
 
 #endif
