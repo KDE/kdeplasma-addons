@@ -26,6 +26,8 @@
 #include "rtm.h"
 #include "task.h"
 
+#include <Solid/Networking>
+
 namespace RTM {
   class Request;
   class SessionPrivate;
@@ -69,6 +71,7 @@ Q_OBJECT
     RTM::Timeline getTimeline() const;
 
     void checkToken();
+    bool currentlyOnline() const;
 
     QString apiKey() const;
     QString sharedSecret() const;
@@ -119,6 +122,7 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void listUpdate(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
+    Q_PRIVATE_SLOT(d, void networkStatusChanged(Solid::Networking::Status))
 };
 
 } // Namespace RTM

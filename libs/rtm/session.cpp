@@ -58,6 +58,9 @@ RTM::Session::~Session()
   delete d;
 }
 
+bool RTM::Session::currentlyOnline() const {
+  return d->online;
+}
 
 void RTM::Session::showLoginWindow()
 {
@@ -143,10 +146,11 @@ void RTM::Session::continueAuthForToken()
 }
 
 void RTM::Session::checkToken() {
-  if (d->token.isEmpty()) {
+  if (d->token.isEmpty() || !currentlyOnline()) {
     emit tokenCheck(false);
     return;
   }
+
   RTM::Request *tokenRequest = new RTM::Request("rtm.auth.checkToken", d->apiKey, d->sharedSecret);
   tokenRequest->addArgument("auth_token", d->token);
   connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenCheckReply(RTM::Request*)));
@@ -195,6 +199,9 @@ void RTM::Session::handleResponse()
 }
 
 void RTM::Session::refreshTasksFromServer() {
+  if (!currentlyOnline())
+    return;
+
   RTM::Request *allTasks = request("rtm.tasks.getList");
   if (d->lastRefresh.isValid())
     allTasks->addArgument("last_sync", d->lastRefresh.toUTC().toString(Qt::ISODate));
@@ -203,6 +210,9 @@ void RTM::Session::refreshTasksFromServer() {
 }
 
 void RTM::Session::refreshListsFromServer() {
+  if (!currentlyOnline())
+    return;
+
   RTM::Request *allLists = new RTM::Request("rtm.lists.getList", d->apiKey, d->sharedSecret);
   allLists->addArgument("auth_token", d->token);
   connectListRequest(allLists);
@@ -250,6 +260,9 @@ RTM::Request* RTM::Session::request(const QString& method) {
 
 void RTM::Session::addTask(const QString& task, RTM::ListId listId)
 {
+  if (!currentlyOnline())
+    return;
+
   kDebug() << "Adding Task: " << task << "to list with id: " << listId;
   RTM::Request *newTask = request("rtm.tasks.add"); // auth token is done for us
   newTask->addArgument("name", task);

@@ -42,21 +42,53 @@
 #include <KSystemTimeZones>
 #include <KTimeZone>
 #include <KDebug>
+#include <Solid/Networking>
 
 class RTM::SessionPrivate {
   SessionPrivate(Session *parent)
     : q(parent),
-      auth(0)
+      auth(0),
+      online(true)
   {
-
+      QObject::connect(Solid::Networking::notifier(), SIGNAL(statusChanged(Solid::Networking::Status)), q, SLOT(networkStatusChanged(Solid::Networking::Status)));
+      if (Solid::Networking::status() == Solid::Networking::Unconnected) {
+        online = false;
+        kDebug() << "We are NOT Online :(";
+      }
   }
   ~SessionPrivate() {
     if (auth)
       auth->deleteLater();
   }
 
+  void networkStatusChanged(Solid::Networking::Status status) {
+    switch (status) {
+    case Solid::Networking::Connected: case Solid::Networking::Unknown:
+        if (online)
+          return;
+
+        online = true;
+        q->checkToken();
+        refreshSettings();
+        q->refreshListsFromServer();
+        q->refreshTasksFromServer();
+        break;
+      case Solid::Networking::Unconnected:
+      case Solid::Networking::Disconnecting:
+      case Solid::Networking::Connecting:
+        if (!online)
+          return;
+
+        online = false;
+        break;
+      }
+  }
+
   void populateSmartList(List * list)
   {
+    if (!online)
+      return;
+
     kDebug() << "Populating Smart List: " << list->name();
     // We do this next bit manually so it doesn't get auto-connected to taskUpdate()
     RTM::Request *smartListRequest = new RTM::Request("rtm.tasks.getList", q->apiKey(), q->sharedSecret());
@@ -122,6 +154,9 @@ class RTM::SessionPrivate {
     emit q->settingsUpdated();
   }
   void refreshSettings() {
+    if (!online)
+      return;
+
     RTM::Request *settingsRequest = new RTM::Request("rtm.settings.getList", q->apiKey(), q->sharedSecret());
     settingsRequest->addArgument("auth_token", q->token());
     
@@ -140,6 +175,7 @@ class RTM::SessionPrivate {
   QString sharedSecret;
   QString token;
   QDateTime lastRefresh;
+  bool online;
   RTM::Permissions permissions;
   KTimeZone timezone;
 
