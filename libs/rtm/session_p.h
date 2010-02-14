@@ -43,6 +43,7 @@
 #include <KTimeZone>
 #include <KDebug>
 #include <Solid/Networking>
+#include <QTimer>
 
 class RTM::SessionPrivate {
   SessionPrivate(Session *parent)
@@ -83,7 +84,23 @@ class RTM::SessionPrivate {
         break;
       }
   }
-
+  
+  void offlineError() {
+    online = false;
+    kDebug() << "retesting offline status in 60 seconds";
+    QTimer::singleShot(60*1000, q, SLOT(retestOfflineStatus()));
+  }
+  
+  void retestOfflineStatus() {
+    online = true;
+    kDebug() << "retesting offline status";
+    q->checkToken();
+  }
+  
+  void connectOfflineSignal(RTM::Request *request) {
+    QObject::connect(request, SIGNAL(offlineError()), q, SLOT(offlineError()));
+  }
+  
   void populateSmartList(List * list)
   {
     if (!online)

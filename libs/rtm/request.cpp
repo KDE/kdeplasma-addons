@@ -91,6 +91,11 @@ void RTM::Request::finished(KJob* job) {
         currentJob = 0;
         sendRequest(); 
         return;
+      case KIO::ERR_UNKNOWN_HOST: // Guess that we're offline
+        kDebug() << "Unknown host, we're probably offline";
+        emit offlineError();
+        this->deleteLater();
+        return;
       //TODO: Handle other error cases.
     }
   }

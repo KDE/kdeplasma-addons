@@ -49,6 +49,7 @@ Q_OBJECT
 
   signals:
     void replyReceived(RTM::Request *request);
+    void offlineError();
 
   public slots:
     void sendRequest();

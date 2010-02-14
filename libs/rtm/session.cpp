@@ -152,6 +152,7 @@ void RTM::Session::checkToken() {
   }
 
   RTM::Request *tokenRequest = new RTM::Request("rtm.auth.checkToken", d->apiKey, d->sharedSecret);
+  d->connectOfflineSignal(tokenRequest);
   tokenRequest->addArgument("auth_token", d->token);
   connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), SLOT(tokenCheckReply(RTM::Request*)));
   connect(tokenRequest, SIGNAL(replyReceived(RTM::Request*)), tokenRequest, SLOT(deleteLater()));
@@ -254,6 +255,7 @@ void RTM::Session::connectListRequest(RTM::Request* request) {
 
 RTM::Request* RTM::Session::request(const QString& method) {
   RTM::Request *request = new RTM::Request(method, apiKey(), sharedSecret());
+  d->connectOfflineSignal(request);
   request->addArgument("auth_token", token());
   connectTaskRequest(request);
   return request;

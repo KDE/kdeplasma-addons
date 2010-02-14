@@ -123,6 +123,8 @@ Q_OBJECT
     Q_PRIVATE_SLOT(d, void smartListReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void settingsReply(RTM::Request* reply))
     Q_PRIVATE_SLOT(d, void networkStatusChanged(Solid::Networking::Status))
+    Q_PRIVATE_SLOT(d, void offlineError())
+    Q_PRIVATE_SLOT(d, void retestOfflineStatus())
 };
 
 } // Namespace RTM
