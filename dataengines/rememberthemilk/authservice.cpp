@@ -41,11 +41,12 @@ AuthJob::AuthJob(RTM::Session* session, const QString& operation, QMap< QString,
   : Plasma::ServiceJob("Auth", operation, parameters, parent),
     m_session(session)
 {
+  connect(m_session, SIGNAL(tokenCheck(bool)), SLOT(tokenReply(bool)));
   kDebug() << m_session;
+  autoRetry = 0;
 }
 
 void AuthJob::start() {
-  connect(m_session, SIGNAL(tokenCheck(bool)), SLOT(result(bool)));
   //FIXME: error handling?
   if (operationName() == "Login") {
     m_session->showLoginWindow();
@@ -55,11 +56,21 @@ void AuthJob::start() {
   }
 }
 
-void AuthJob::result(bool tokenValid) {
-  kDebug() << "TokenValid" << tokenValid;
-  setError(false);
-  setResult(true);
-  
+void AuthJob::tokenReply(bool tokenValid) {
+  if (!tokenValid) {
+    if (autoRetry < 5) {
+      kDebug() << "Auto-retry" << autoRetry;
+      QTimer::singleShot(10*1000, this, SLOT(start()));
+      autoRetry++;
+      return;
+    } else {
+      setError(true);
+      setResult("TokenInvalid");
+    }
+  } else {
+    setError(false);
+    setResult("TokenValid");
+  }
   this->deleteLater();
 }
 

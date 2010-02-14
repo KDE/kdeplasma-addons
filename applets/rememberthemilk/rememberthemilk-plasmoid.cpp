@@ -122,7 +122,7 @@ void RememberTheMilkPlasmoid::startAuth()
   KConfigGroup cg = m_authService->operationDescription("Login");
   busyUntil(m_authService->startOperationCall(cg));
   busyUntil(0); // Sets busy until we manually call jobFinished(0). Busy until first tasks refresh
-  m_authenticated = false;  
+  m_authenticated = false;
 }
 
 void RememberTheMilkPlasmoid::configAccepted() {
@@ -190,6 +190,8 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
       m_authWidgetUi->authStatus->setText(i18n("Not Authenticated"));
       m_authWidgetUi->kled->setState(KLed::Off); 
       m_authWidgetUi->kled->setColor(Qt::red);
+      m_busyUntil.clear(); // no longer trying to authenticate
+      setBusy(false);
     }
     
     if (m_authenticated) {
@@ -198,6 +200,7 @@ void RememberTheMilkPlasmoid::dataUpdated(const QString& name, const Plasma::Dat
       config().writeEntry("token", m_token);
       m_engine->connectSource("Lists", this);
       m_engine->connectSource("Tasks", this);
+      busyUntil(0);
     }
     else if (m_categoriesBar->count() == 1 && m_lists.isEmpty())
       m_categoriesBar->nativeWidget()->setTabText(0, i18n("Login Failed. Please try again."));

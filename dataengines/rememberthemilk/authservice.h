@@ -22,6 +22,7 @@
 
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
+#include <QTimer>
 
 namespace RTM {
   class Session;
@@ -44,13 +45,16 @@ class AuthJob : public Plasma::ServiceJob
   Q_OBJECT
 public:
     AuthJob(RTM::Session* session, const QString& operation, QMap< QString, QVariant >& parameters, QObject* parent);
+    
+public slots:
     void start();
 
 private slots:
-    void result(bool token);
+    void tokenReply(bool tokenValid);
     
 protected:
     RTM::Session* m_session;
+    int autoRetry;
 };
 
 #endif // AUTHSERVICE_H
