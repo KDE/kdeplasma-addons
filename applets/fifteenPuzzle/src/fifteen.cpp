@@ -27,7 +27,8 @@
 #include <KDebug>
 #include <KGlobalSettings>
 
-#include "plasma/animator.h"
+#include <Plasma/Animation>
+#include <Plasma/Animator>
 
 Fifteen::Fifteen(QGraphicsItem* parent, int size)
     : QGraphicsWidget(parent)
@@ -240,7 +241,21 @@ void Fifteen::swapPieceWithBlank(Piece *item)
 
   // swap widget positions
   QPointF pos = QPointF(item->boardX() * width, item->boardY() * height);
-  Plasma::Animator::self()->moveItem(item, Plasma::Animator::FastSlideInMovement, m_blank->pos().toPoint());
+
+  Plasma::Animation *animation = m_animations.value(item).data();
+  if (!animation) {
+      animation = Plasma::Animator::create(Plasma::Animator::SlideAnimation, this);
+      animation->setTargetWidget(item);
+      animation->setProperty("easingCurve", QEasingCurve::InOutQuad);
+      animation->setProperty("movementDirection", Plasma::Animation::MoveAny);
+      m_animations[item] = animation;
+  } else if (animation->state() == QAbstractAnimation::Running) {
+      animation->pause();
+  }
+
+  animation->setProperty("distancePointF", m_blank->pos());
+  animation->start(QAbstractAnimation::DeleteWhenStopped);
+
   m_blank->setPos(pos);
 
   // swap game positions

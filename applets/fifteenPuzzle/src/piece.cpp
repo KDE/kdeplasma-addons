@@ -31,7 +31,7 @@
 #include "fifteen.h"
 
 Piece::Piece(int id, Fifteen* parent, Plasma::Svg* svg)
-    : QGraphicsItem(parent)
+    : QGraphicsWidget(parent)
 {
   m_id = id;
   m_numeral = true;

@@ -21,10 +21,17 @@
 #define FIFTEEN_H
 
 #include <QGraphicsWidget>
+#include <QHash>
+#include <QWeakPointer>
 
 #include <Plasma/Svg>
 
 class Piece;
+
+namespace Plasma
+{
+    class Animation;
+}
 
 class Fifteen : public QGraphicsWidget
 {
@@ -62,6 +69,7 @@ class Fifteen : public QGraphicsWidget
     QFont m_font;
     bool m_splitPixmap;
     bool m_numerals;
+    QHash<Piece*, QWeakPointer<Plasma::Animation> > m_animations;
 };
 
 #endif

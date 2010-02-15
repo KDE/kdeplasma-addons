@@ -21,13 +21,12 @@
 #define PIECE_H
 
 #include <QFont>
-#include <QGraphicsItem>
-#include <QObject>
+#include <QGraphicsWidget>
 
 #include <Plasma/Svg>
 class Fifteen;
 
-class Piece : public QObject, public QGraphicsItem
+class Piece : public QGraphicsWidget
 {
   Q_OBJECT
   public:
