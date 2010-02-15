@@ -32,17 +32,15 @@
 #include <QList>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QPropertyAnimation>
 #include <plasma/widgets/iconwidget.h>
-#include <plasma/animator.h>
 #define BTN_SIZE 20
 
 using namespace Plasma;
 
 Scroller::Scroller(QGraphicsItem *parent) :
         QGraphicsWidget(parent),
-        m_animid(0),
         m_current(0),
-        m_animdirection(0),
         m_animations(true),
         m_delayedNext(0),
         m_delayedPrev(0),
@@ -52,7 +50,8 @@ Scroller::Scroller(QGraphicsItem *parent) :
         m_itemlist(new QList<SingleFeedItem *>()),
         m_activeitemlist(new QList<SingleFeedItem *>()),
         m_left(new Plasma::IconWidget(this)),
-        m_right(new Plasma::IconWidget(this))
+        m_right(new Plasma::IconWidget(this)),
+        m_isAnimating(false)
 {
 
     setAcceptedMouseButtons(Qt::LeftButton);
@@ -78,16 +77,9 @@ Scroller::Scroller(QGraphicsItem *parent) :
 
     connect(m_left, SIGNAL(clicked()), this, SLOT(leftClicked()));
     connect(m_right, SIGNAL(clicked()), this, SLOT(rightClicked()));
-    connect(Animator::self(), SIGNAL(customAnimationFinished(int)),
-                     this, SLOT(animationComplete(int)));
 }
 
 Scroller::~Scroller() {
-    //avoid possible problems when shutting down while animations
-    //are happening.
-    if (m_animid != 0) {
-        Animator::self()->stopCustomAnimation(m_animid);
-    }
     foreach (KIcon * icon, m_feedIcons) {
 	   delete icon;
     }
@@ -161,7 +153,7 @@ void Scroller::delayedMoveNext(int delay)
 
 void Scroller::movePrev()
 {
-    if (m_animid != 0 ) {
+    if (m_isAnimating) {
         m_delayedPrev++;
     } else {
         if (m_current > 0) {
@@ -169,14 +161,13 @@ void Scroller::movePrev()
         } else {
             m_current = m_list->size() - 1;
         }
-        m_animdirection = -1;
-        doAnimation();
+        doAnimation(QAbstractAnimation::Backward);
     }
 }
 
 void Scroller::moveNext()
 {
-    if (m_animid != 0 ) {
+    if (m_isAnimating) {
         m_delayedNext++;
     } else {
         if (m_current < (m_list->size()-1)) {
@@ -184,21 +175,20 @@ void Scroller::moveNext()
         } else {
             m_current = 0;
         }
-        m_animdirection = 1;
-        doAnimation();
+        doAnimation(QAbstractAnimation::Forward);
     }
 }
 
-void Scroller::doAnimation()
+void Scroller::doAnimation(QAbstractAnimation::Direction direction)
 {
     if (m_list->size() > 1) {
-        if (m_animations && m_animid == 0) {
+        if (m_animations && !m_isAnimating) {
             SingleFeedItem * item = new SingleFeedItem(this);
             item->setFeedData(m_list->at(m_current));
             item->setDisplayExtra(m_hovered);
             item->setZValue(m_itemlist->size() + 1);
             item->show();
-            item->setPos(m_animdirection * size().width(), 0);
+            item->setPos((direction == QAbstractAnimation::Forward? 1 : -1) * size().width(), 0);
             item->setRect(QRect(0, 0, size().width(), size().height()));
             if (!m_itemlist->contains(item)) {
                 m_itemlist->append(item);
@@ -213,54 +203,82 @@ void Scroller::doAnimation()
             }
             time = 400 / queuelength;
             frames = time / 40;
-            m_animid = Animator::self()->customAnimation(frames, time,
-                                            Animator::LinearCurve,
-                                            this, "animate");
+
+            QPropertyAnimation *animation = m_animation.data();
+            if (!animation) {
+                animation = new QPropertyAnimation(this, "animate");
+                animation->setStartValue(0.0);
+                animation->setEndValue(1.0);
+                animation->setEasingCurve(QEasingCurve::InOutQuad);
+                m_animation = animation;
+                connect(animation, SIGNAL(finished()), this, SLOT(animationComplete()));
+            } else if (animation->state() == QAbstractAnimation::Running) {
+                animation->pause();
+            }
+
+            animation->setDuration(time);
+            animation->setDirection(direction);
+            if (m_delayedNext > 0 || m_delayedPrev > 0) {
+                animation->start(QAbstractAnimation::KeepWhenStopped);
+            } else {
+                animation->start(QAbstractAnimation::DeleteWhenStopped);
+            }
+            m_isAnimating = true;
         } else {
             m_itemlist->at(m_itemlist->size() - 1)->setFeedData(m_list->at(m_current));
         }
     }
 }
 
-void Scroller::animationComplete(int id)
+void Scroller::animationComplete()
 {
-    bool stillAnimating = false;
-    if (id == m_animid) {
-        m_animid = 0;
-        m_activeitemlist->takeFirst(); //remove the first item.
-        if (m_delayedNext > 0) {
-            m_delayedPrev = 0;
-            m_delayedNext--;
-            QTimer::singleShot(0, this, SLOT(moveNext()));
-            stillAnimating = true;
-        } else if (m_delayedPrev > 0) {
-            m_delayedPrev--;
-            QTimer::singleShot(0, this, SLOT(movePrev()));
-            stillAnimating = true;
-        }
-    }
+    m_isAnimating = false;
 
-    if (!stillAnimating && (m_itemlist->size() > 2) &&
-        !Animator::self()->isAnimating()) {
-            QTimer::singleShot(0, this, SLOT(clearUnusedItems()));
+    m_activeitemlist->takeFirst(); //remove the first item.
+    if (m_delayedNext > 0) {
+        m_delayedPrev = 0;
+        m_delayedNext--;
+        QTimer::singleShot(50, this, SLOT(moveNext()));
+    } else if (m_delayedPrev > 0) {
+        m_delayedNext = 0;
+        m_delayedPrev--;
+        QTimer::singleShot(50, this, SLOT(movePrev()));
+    } else if (m_itemlist->size() > 2) {
+        QTimer::singleShot(0, this, SLOT(clearUnusedItems()));
     }
 }
 
-void Scroller::animate(qreal anim)
+qreal Scroller::animValue() const
 {
-    int width = size().width();
-    foreach (SingleFeedItem * item, *m_activeitemlist) {
-        int left;
+    qreal xPosition = 0.0;
+
+    foreach (SingleFeedItem *item, *m_activeitemlist) {
         if (m_current == item->itemNumber()) {
-            left = (m_animdirection * (1-anim) * width);
-        } else {
-            if (m_animdirection == 1) {
-                left = ((-1 * width) + ((1-anim) * width));
-            } else {
-                left = (anim * width);
-            }
+            xPosition = item->pos().x();
+            break;
         }
-        item->setPos(left, 0);
+    }
+
+    return xPosition;
+}
+
+void Scroller::animate(qreal value)
+{
+    if (m_animation.isNull()) {
+        return;
+    }
+
+    const int width = size().width();
+    const bool isForward = m_animation.data()->direction() == QAbstractAnimation::Forward;
+    int xPosition;
+
+    foreach (SingleFeedItem * item, *m_activeitemlist) {
+        if (m_current == item->itemNumber()) {
+            xPosition = (isForward ? 1 * (1-value) : -1 * value) * width;
+        } else {
+            xPosition = (1-value) * width + (isForward ? -1 * width : 0);
+        }
+        item->setX(xPosition);
     }
 }
 
@@ -292,7 +310,7 @@ void Scroller::updateSize()
     QRect rect;
     rect.setWidth(width);
     rect.setHeight(height);
-    if (m_itemlist != 0 && !m_animid) {
+    if (m_itemlist != 0 && !m_isAnimating) {
         for (int i = 0; i < m_itemlist->size(); i++) {
             item = m_itemlist->at(i);
             item->setRect(rect);

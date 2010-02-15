@@ -23,6 +23,8 @@
 #include "feeddata.h"
 #include <QList>
 #include <QGraphicsWidget>
+#include <QWeakPointer>
+#include <QAbstractAnimation>
 #include <plasma/plasma_export.h>
 #include <plasma/animator.h>
 #include <plasma/dataengine.h>
@@ -31,6 +33,7 @@
 class KIcon;
 class SingleFeedItem;
 class FeedData;
+class QPropertyAnimation;
 
 namespace Plasma
 {
@@ -42,6 +45,7 @@ namespace Plasma
 class Scroller : public QGraphicsWidget
 {
     Q_OBJECT
+    Q_PROPERTY(qreal animate READ animValue WRITE animate)
 
 public:
     Scroller(QGraphicsItem *parent = 0);
@@ -64,6 +68,8 @@ public:
 
     bool hovering() const;
 
+    qreal animValue() const;
+
 public slots:
     void dataUpdated(const QString& source, const Plasma::DataEngine::Data &data);
 
@@ -79,18 +85,16 @@ protected slots:
     void rightClicked();
     void moveNext();
     void movePrev();
-    void animationComplete(int);
+    void animationComplete();
     void clearUnusedItems();
-    void animate(qreal anim);
+    void animate(qreal value);
 
 private:
     void updateSize();
-    void doAnimation();
+    void doAnimation(QAbstractAnimation::Direction direction);
     QString fuzzyDate(const QDateTime& datetime);
 
-    int m_animid;
     int m_current;
-    int m_animdirection;
     bool m_animations;
 
     //how many times has the user clicked / scrolled next or previous
@@ -116,6 +120,8 @@ private:
     Plasma::IconWidget *m_right;
 
     bool m_hovered;
+    bool m_isAnimating;
+    QWeakPointer<QPropertyAnimation> m_animation;
 };
 
 #endif
