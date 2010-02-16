@@ -64,14 +64,7 @@ void WeatherStation::init()
     m_lcdPanel->hide();
 
     //m_lcd->setItemOn("under_construction");
-
-    KConfigGroup cfg = config();
-
-    m_useBackground = cfg.readEntry("background", true);
-    m_showToolTip = cfg.readEntry("tooltip", true);
-    setBackground();
-
-    setLCDIcon();
+    configChanged();
 
     WeatherPopupApplet::init();
 }
@@ -116,14 +109,22 @@ void WeatherStation::configAccepted()
             m_appearanceConfig.backgroundCheckBox->isChecked());
     cfg.writeEntry("tooltip", m_showToolTip =
             m_appearanceConfig.tooltipCheckBox->isChecked());
+    WeatherPopupApplet::configAccepted();
+}
+
+void WeatherStation::configChanged()
+{
+    KConfigGroup cfg = config();
+    m_useBackground = cfg.readEntry("background", true);
+    m_showToolTip = cfg.readEntry("tooltip", true);
 
     if (!m_showToolTip) {
         m_lcd->setLabel("weather-label", i18n("CURRENT WEATHER"));
         Plasma::ToolTipManager::self()->clearContent(this);
     }
     setBackground();
-
-    WeatherPopupApplet::configAccepted();
+    setLCDIcon();
+    WeatherPopupApplet::configChanged();
 }
 
 void WeatherStation::setLCDIcon()

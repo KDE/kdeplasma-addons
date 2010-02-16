@@ -43,6 +43,7 @@ class WeatherStation : public WeatherPopupApplet
         virtual void configAccepted();
         virtual void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
         void clicked(const QString &name);
+        void configChanged();
 
     protected:
         void setLCDIcon();
