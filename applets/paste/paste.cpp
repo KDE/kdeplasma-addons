@@ -85,6 +85,11 @@ void Paste::configAccepted()
     emit configNeedsSaving();
 }
 
+void Paste::configChanged()
+{
+    cfg.readEntries();
+}
+
 void Paste::showOk()
 {
     // Show ok icon like in DeviceNotifier

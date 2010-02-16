@@ -45,6 +45,7 @@ class Paste : public Plasma::PopupApplet
         void showOk();
         void configAccepted();
         void resetIcon();
+        void configChanged();
 
     private:
         ListForm *m_list;
