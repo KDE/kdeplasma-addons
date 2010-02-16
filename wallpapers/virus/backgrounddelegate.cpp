@@ -11,9 +11,11 @@
 
 #include <QPen>
 #include <QPainter>
+#include <QApplication>
 
 #include <KGlobalSettings>
 #include <KLocalizedString>
+#include <KDebug>
 
 BackgroundDelegate::BackgroundDelegate(QObject *listener, float ratio, QObject *parent)
     : QAbstractItemDelegate(parent), 
@@ -38,7 +40,8 @@ void BackgroundDelegate::paint(QPainter *painter,
         painter->drawRect(option.rect.adjusted(2, 2, -2, -2));
         painter->setPen(oldPen);
     }
-
+    
+    QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &option, painter);
     // draw pixmap
     int maxheight = SCREENSHOT_SIZE;
     int maxwidth = int(maxheight * m_ratio);

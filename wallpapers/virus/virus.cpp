@@ -284,6 +284,7 @@ void Virus::pictureChanged(QModelIndex index)
     }
 
     setSingleImage();
+    emit settingsChanged(true);
 }
 
 
