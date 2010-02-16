@@ -25,7 +25,7 @@
 #include <KMessageBox>
 #include <KInputDialog>
 
-#include <KNS/Engine>
+#include <KNS3/DownloadDialog>
 #include <KUnitConversion/Converter>
 
 using namespace KUnitConversion;
@@ -116,13 +116,12 @@ WeatherConfig::~WeatherConfig()
 
 void WeatherConfig::getNewStuff()
 {
-    KNS::Engine engine(this);
-    if (engine.init("plasmaweather.knsrc")) {
-        KNS::Entry::List entries = engine.downloadDialogModal(this);
-        if (entries.size() > 0) {
-            kDebug() << "About to ask WeatherEngine for plugin update!";
-            d->m_engine->setProperty("update", true);
-        }
+    KNS3::DownloadDialog dialog("kmediafactory.knsrc", this);
+    dialog.exec();
+    KNS3::Entry::List entries = dialog.changedEntries();
+    if (entries.size() > 0) {
+        kDebug() << "About to ask WeatherEngine for plugin update!";
+        d->m_engine->setProperty("update", true);
     }
 }
 
