@@ -39,6 +39,7 @@ class News : public Plasma::PopupApplet
 
     public Q_SLOTS:
         void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
+        void configChanged();
 
     protected:
         virtual void createConfigurationInterface(KConfigDialog *parent);

@@ -36,7 +36,7 @@
 #include <Plasma/Theme>
 #include <Plasma/WebView>
 
-static const char *BEGIN = 
+static const char *BEGIN =
 "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\""
 "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -98,14 +98,6 @@ QGraphicsWidget *News::graphicsWidget()
         return m_graphicsWidget;
     }
 
-    KConfigGroup cg = config();
-    m_interval = cg.readEntry("interval", 30);
-    m_showTimestamps = cg.readEntry("showTimestamps", true);
-    m_showTitles = cg.readEntry("showTitles", true);
-    m_showDescriptions = cg.readEntry("showDescriptions", false);
-
-    m_feeds = cg.readEntry("feeds", QStringList("http://www.kde.org/dotkdeorg.rdf"));
-
     m_layout = new QGraphicsLinearLayout();
     m_layout->setContentsMargins(0, 0, 0, 0);
     m_layout->setSpacing(0);
@@ -131,9 +123,23 @@ QGraphicsWidget *News::graphicsWidget()
     //a tiny minimum size, a panel 48px high is enough to display the whole applet
     m_graphicsWidget->setMinimumSize(150, 48);
 
-    connectToEngine();
+    configChanged();
 
     return m_graphicsWidget;
+}
+
+void News::configChanged()
+{
+    kDebug();
+    KConfigGroup cg = config();
+    m_interval = cg.readEntry("interval", 30);
+    m_showTimestamps = cg.readEntry("showTimestamps", true);
+    m_showTitles = cg.readEntry("showTitles", true);
+    m_showDescriptions = cg.readEntry("showDescriptions", false);
+
+    m_feeds = cg.readEntry("feeds", QStringList("http://www.kde.org/dotkdeorg.rdf"));
+
+    connectToEngine();
 }
 
 void News::connectToEngine()
@@ -311,7 +317,6 @@ void News::configAccepted()
     cg.writeEntry("showTitles", m_showTitles);
     cg.writeEntry("showDescriptions", m_showDescriptions);
 
-    connectToEngine();
     dataUpdated(m_feedstring, m_dataCache);
 }
 
