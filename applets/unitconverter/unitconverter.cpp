@@ -116,9 +116,9 @@ void UnitConverter::calculate()
         if(decimalCheck.exactMatch(m_pTxtValue1->text()) && onlyDecimal.exactMatch(QString::number(dblValueOut.number()))) {
            QString addZero = QString::number(dblValueOut.number()) + ".0";
            m_pTxtValue2->setText(addZero);
-	} else {
+        } else {
            m_pTxtValue2->setText(QString::number(dblValueOut.number()));
-	}
+        }
     }
 }
 
@@ -160,21 +160,6 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         foreach (UnitCategory* category, m_converter.categories()) {
             m_pCmbCategory->nativeWidget()->addItem(category->name(), QVariant::fromValue(category));
         }
-        // Load previous values
-        KConfigGroup cg = config();
-        int category = cg.readEntry("category", 0);
-        m_pCmbCategory->nativeWidget()->setCurrentIndex(category);
-        sltCategoryChanged(category);
-        int unit1 = cg.readEntry("unit1", -1);
-        if (unit1 >= 0) {
-            m_pCmbUnit1->nativeWidget()->setCurrentIndex(unit1);
-        }
-        int unit2 = cg.readEntry("unit2", -1);
-        if (unit2 >= 0) {
-            m_pCmbUnit2->nativeWidget()->setCurrentIndex(unit2);
-        }
-        m_pTxtValue1->setText(cg.readEntry("value", "1"));
-        calculate();
 
         connect(m_pTxtValue1->nativeWidget(), SIGNAL(textChanged(const QString&)),
                 this, SLOT(sltValueChanged(const QString&)));
@@ -184,8 +169,29 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
                 this, SLOT(sltUnitChanged(int)));
         connect(m_pCmbUnit2->nativeWidget(), SIGNAL(currentIndexChanged(int)),
                 this, SLOT(sltUnitChanged(int)));
+
+        configChanged();
     }
     return m_widget;
+}
+
+void UnitConverter::configChanged()
+{
+    // Load previous values
+    KConfigGroup cg = config();
+    int category = cg.readEntry("category", 0);
+    m_pCmbCategory->nativeWidget()->setCurrentIndex(category);
+    sltCategoryChanged(category);
+    int unit1 = cg.readEntry("unit1", -1);
+    if (unit1 >= 0) {
+        m_pCmbUnit1->nativeWidget()->setCurrentIndex(unit1);
+    }
+    int unit2 = cg.readEntry("unit2", -1);
+    if (unit2 >= 0) {
+        m_pCmbUnit2->nativeWidget()->setCurrentIndex(unit2);
+    }
+    m_pTxtValue1->setText(cg.readEntry("value", "1"));
+    calculate();
 }
 
 #include "unitconverter.moc"

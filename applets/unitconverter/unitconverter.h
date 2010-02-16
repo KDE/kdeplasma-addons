@@ -42,6 +42,9 @@ class UnitConverter : public Plasma::PopupApplet
         virtual void init();
         virtual QGraphicsWidget *graphicsWidget();
 
+    public slots:
+        void configChanged();
+
     private slots:
         void sltValueChanged(const QString &sNewValue);
         void sltUnitChanged(int index);
