@@ -92,6 +92,11 @@ class PLASMAWEATHER_EXPORT WeatherPopupApplet : public Plasma::PopupApplet
         virtual void dataUpdated(const QString &name,
                                  const Plasma::DataEngine::Data &data);
 
+        /**
+         * Called when config is chnaged
+         */
+        virtual void configChanged();
+
     protected:
         /**
          * Connects applet to dataengine

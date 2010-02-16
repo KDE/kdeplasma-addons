@@ -202,25 +202,7 @@ WeatherPopupApplet::~WeatherPopupApplet()
 
 void WeatherPopupApplet::init()
 {
-    KConfigGroup cfg = config();
-
-    if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
-        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "C"));
-        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "m/s"));
-        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "hPa"));
-        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "km"));
-    } else {
-        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "F"));
-        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "mph"));
-        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "mb"));
-        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "ml"));
-    }
-    d->updateInterval = cfg.readEntry("updateWeather", 30);
-    d->source = cfg.readEntry("source", "");
-
-    d->weatherEngine = dataEngine("weather");
-    d->timeEngine = dataEngine("time");
-    connectToEngine();
+    configChanged();
 }
 
 void WeatherPopupApplet::connectToEngine()
@@ -252,11 +234,6 @@ void WeatherPopupApplet::createConfigurationInterface(KConfigDialog *parent)
 
 void WeatherPopupApplet::configAccepted()
 {
-    setConfigurationRequired(false);
-    if (!d->source.isEmpty()) {
-        d->weatherEngine->disconnectSource(d->source, this);
-    }
-
     d->temperatureUnit = d->converter.unit(d->weatherConfig->temperatureUnit());
     d->speedUnit = d->converter.unit(d->weatherConfig->speedUnit());
     d->pressureUnit = d->converter.unit(d->weatherConfig->pressureUnit());
@@ -273,6 +250,34 @@ void WeatherPopupApplet::configAccepted()
     cfg.writeEntry("source", d->source);
 
     emit configNeedsSaving();
+}
+
+void WeatherPopupApplet::configChanged()
+{
+    setConfigurationRequired(false);
+    if (!d->source.isEmpty()) {
+        d->weatherEngine->disconnectSource(d->source, this);
+    }
+
+    KConfigGroup cfg = config();
+
+    if (KGlobal::locale()->measureSystem() == KLocale::Metric) {
+        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "C"));
+        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "m/s"));
+        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "hPa"));
+        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "km"));
+    } else {
+        d->temperatureUnit = d->unit(cfg.readEntry("temperatureUnit", "F"));
+        d->speedUnit = d->unit(cfg.readEntry("speedUnit", "mph"));
+        d->pressureUnit = d->unit(cfg.readEntry("pressureUnit", "mb"));
+        d->visibilityUnit = d->unit(cfg.readEntry("visibilityUnit", "ml"));
+    }
+    d->updateInterval = cfg.readEntry("updateWeather", 30);
+    d->source = cfg.readEntry("source", "");
+
+    d->weatherEngine = dataEngine("weather");
+    d->timeEngine = dataEngine("time");
+
     connectToEngine();
 }
 
