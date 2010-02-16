@@ -10,6 +10,7 @@
 #include "backgrounddelegate.h"
 
 #include <QPen>
+#include <QApplication>
 #include <QPainter>
 
 #include <KGlobalSettings>
@@ -39,6 +40,7 @@ void BackgroundDelegate::paint(QPainter *painter,
         painter->setPen(oldPen);
     }
 
+    QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &option, painter);
     // draw pixmap
     int maxheight = SCREENSHOT_SIZE;
     int maxwidth = int(maxheight * m_ratio);
