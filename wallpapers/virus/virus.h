@@ -54,9 +54,9 @@ class Virus : public Plasma::Wallpaper
         void maxCellsChanged(int interval);
         void showCellsChanged(int state);
         void virusUpdated();
+        void modified();
 
     protected:
-        void modified();
         void init(const KConfigGroup &config);
         void fillMetaInfo(Plasma::Package *b);
         bool setMetadata(QLabel *label, const QString &text);
