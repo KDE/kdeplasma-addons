@@ -180,8 +180,22 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 
     Converter converter;
     UnitCategory* category = converter.categoryForUnit(unit1);
-    if (!category) {
-        return;
+    bool found = false;
+    if (category->id() == InvalidCategory) {
+        foreach (category, converter.categories()) {
+            foreach (const QString& s, category->allUnits()) {
+                if (s.compare(unit1, Qt::CaseInsensitive) == 0) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
+        if (!found) {
+            return;
+        }
     }
 
     QList<UnitPtr> units;
