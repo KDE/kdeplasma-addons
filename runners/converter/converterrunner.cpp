@@ -220,11 +220,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 
     foreach (const UnitPtr& u, units) {
         Value v = category->convert(Value(value, unit1), u);
-        kDebug() << v.toString() << u->symbol();
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(KIcon("edit-copy"));
-        match.setText(v.toString());
+        match.setText(QString("%1 (%2)").arg(v.toString()).arg(u->symbol()));
         match.setData(v.number());
         context.addMatch(term, match);
     }
