@@ -81,6 +81,8 @@ void UnitConverter::sltCategoryChanged(int index)
         }
         ++i;
     }
+    m_pCmbUnit1->nativeWidget()->model()->sort(0);
+    m_pCmbUnit2->nativeWidget()->model()->sort(0);
     if (!category->description().isEmpty()) {
         m_pInfo->setText(QString("<a href=\"%2\">%1</a>")
                 .arg(category->description()).arg(category->url().prettyUrl()));
@@ -160,6 +162,7 @@ QGraphicsWidget *UnitConverter::graphicsWidget()
         foreach (UnitCategory* category, m_converter.categories()) {
             m_pCmbCategory->nativeWidget()->addItem(category->name(), QVariant::fromValue(category));
         }
+        m_pCmbCategory->nativeWidget()->model()->sort(0);
 
         connect(m_pTxtValue1->nativeWidget(), SIGNAL(textChanged(const QString&)),
                 this, SLOT(sltValueChanged(const QString&)));
