@@ -23,6 +23,7 @@
 #include <QGraphicsGridLayout>
 #include <QWebPage>
 #include <QLabel>
+#include <QSignalMapper>
 
 //KDE
 #include <KDebug>
@@ -119,14 +120,29 @@ void UserWidget::buildDialog()
     back->setMinimumWidth(actionSize);
     back->setMaximumWidth(actionSize);
 
+    m_sendMessage = new Plasma::IconWidget;
+    m_sendMessage->setIcon("mail-send");
+    m_sendMessage->setToolTip(i18n("Send message"));
+    m_sendMessage->setMinimumHeight(actionSize);
+    m_sendMessage->setMaximumHeight(actionSize);
+    m_sendMessage->setMinimumWidth(actionSize);
+    m_sendMessage->setMaximumWidth(actionSize);
+
     QGraphicsLinearLayout* actionLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     actionLayout->addItem(back);
     actionLayout->addStretch();
+    actionLayout->addItem(m_sendMessage);
 
-    m_layout->addItem(actionLayout, 2, 0);
+    m_layout->addItem(actionLayout, 2, 0, 1, 2);
     setLayout(m_layout);
 
+    m_mapper = new QSignalMapper(this);
+
     connect(back, SIGNAL(clicked()), SIGNAL(done()));
+    connect(m_sendMessage, SIGNAL(clicked()), m_mapper, SLOT(map()));
+
+    connect(m_mapper, SIGNAL(mapped(const QString &)),
+            this, SIGNAL(sendMessage(const QString &)));
 
     updateColors();
 
@@ -136,6 +152,7 @@ void UserWidget::buildDialog()
 void UserWidget::setId(const QString& id)
 {
     m_id = id;
+    m_mapper->setMapping(m_sendMessage, m_id);
     m_personWatch.setId(id);
 }
 

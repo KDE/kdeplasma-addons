@@ -61,6 +61,8 @@ ActionStack::ActionStack(DataEngine* engine, QGraphicsWidget* mainWidget, QGraph
     connect(this, SIGNAL(providerChanged(QString)), m_requestFriendship, SLOT(setProvider(QString)));
     connect(this, SIGNAL(providerChanged(QString)), m_sendMessage, SLOT(setProvider(QString)));
 
+    connect(m_details, SIGNAL(sendMessage(const QString &)), this, SLOT(sendMessage(const QString &)));
+
     connect(m_details, SIGNAL(done()), SLOT(showMainWidget()));
 
     connect(m_requestFriendship, SIGNAL(done()), SLOT(showMainWidget()));

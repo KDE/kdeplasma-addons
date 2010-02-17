@@ -34,10 +34,13 @@
 
 namespace Plasma
 {
+    class IconWidget;
     class Label;
     class Frame;
     class WebView;
 }
+
+class QSignalMapper;
 
 class ContactImage;
 class StyleSheet;
@@ -51,6 +54,7 @@ class UserWidget : public Plasma::Frame
         virtual ~UserWidget();
 
     Q_SIGNALS:
+        void sendMessage(const QString &);
         void done();
 
     public Q_SLOTS:
@@ -84,6 +88,9 @@ class UserWidget : public Plasma::Frame
         Plasma::WebView* m_infoView;
         // The user id to display
         QString m_id;
+        //to be able to emit sendMessage(const QString &)
+        QSignalMapper *m_mapper;
+        Plasma::IconWidget* m_sendMessage;
         // The data engine used
         Plasma::DataEngine* m_engine;
         PersonWatch m_personWatch;
