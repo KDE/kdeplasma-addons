@@ -53,6 +53,7 @@ UserWidget::UserWidget(DataEngine* engine, QGraphicsWidget* parent)
       m_image(0),
       m_nameLabel(0),
       m_infoView(0),
+      m_friendWatcher(engine),
       m_engine(engine),
       m_personWatch(engine)
 {
@@ -120,6 +121,14 @@ void UserWidget::buildDialog()
     back->setMinimumWidth(actionSize);
     back->setMaximumWidth(actionSize);
 
+    m_addFriend = new Plasma::IconWidget;
+    m_addFriend->setIcon("list-add-user");
+    m_addFriend->setToolTip(i18n("Add friend"));
+    m_addFriend->setMinimumHeight(actionSize);
+    m_addFriend->setMaximumHeight(actionSize);
+    m_addFriend->setMinimumWidth(actionSize);
+    m_addFriend->setMaximumWidth(actionSize);
+
     m_sendMessage = new Plasma::IconWidget;
     m_sendMessage->setIcon("mail-send");
     m_sendMessage->setToolTip(i18n("Send message"));
@@ -131,6 +140,7 @@ void UserWidget::buildDialog()
     QGraphicsLinearLayout* actionLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     actionLayout->addItem(back);
     actionLayout->addStretch();
+    actionLayout->addItem(m_addFriend);
     actionLayout->addItem(m_sendMessage);
 
     m_layout->addItem(actionLayout, 2, 0, 1, 2);
@@ -140,6 +150,7 @@ void UserWidget::buildDialog()
 
     connect(back, SIGNAL(clicked()), SIGNAL(done()));
     connect(m_sendMessage, SIGNAL(clicked()), m_mapper, SLOT(map()));
+    connect(m_addFriend, SIGNAL(clicked()), m_mapper, SLOT(map()));
 
     connect(m_mapper, SIGNAL(mapped(const QString &)),
             this, SIGNAL(sendMessage(const QString &)));
@@ -153,13 +164,24 @@ void UserWidget::setId(const QString& id)
 {
     m_id = id;
     m_mapper->setMapping(m_sendMessage, m_id);
+    m_mapper->setMapping(m_addFriend, m_id);
     m_personWatch.setId(id);
+    m_addFriend->setVisible(!m_friendWatcher.contains(m_id));
 }
 
+void UserWidget::setOwnId(const QString& ownId)
+{
+    m_ownId = ownId;
+    m_friendWatcher.setSource(friendsQuery(m_provider, m_ownId));
+    m_addFriend->setVisible(!m_friendWatcher.contains(m_id));
+}
 
 void UserWidget::setProvider(const QString& provider)
 {
     m_personWatch.setProvider(provider);
+    m_provider = provider;
+    m_friendWatcher.setSource(friendsQuery(m_provider, m_ownId));
+    m_addFriend->setVisible(!m_friendWatcher.contains(m_id));
 }
 
 

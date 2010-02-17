@@ -30,6 +30,7 @@
 #include <Plasma/DataEngine>
 
 #include "personwatch.h"
+#include "personwatchlist.h"
 
 
 namespace Plasma
@@ -52,6 +53,8 @@ class UserWidget : public Plasma::Frame
     public:
         explicit UserWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
         virtual ~UserWidget();
+
+        void setOwnId(const QString& id);
 
     Q_SIGNALS:
         void sendMessage(const QString &);
@@ -88,9 +91,15 @@ class UserWidget : public Plasma::Frame
         Plasma::WebView* m_infoView;
         // The user id to display
         QString m_id;
+        // our id
+        QString m_ownId;
+        QString m_provider;
         //to be able to emit sendMessage(const QString &)
         QSignalMapper *m_mapper;
         Plasma::IconWidget* m_sendMessage;
+        Plasma::IconWidget* m_addFriend;
+        //to know if the contact displayed is our friend
+        PersonWatchList m_friendWatcher;
         // The data engine used
         Plasma::DataEngine* m_engine;
         PersonWatch m_personWatch;

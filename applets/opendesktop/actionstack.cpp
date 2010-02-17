@@ -89,6 +89,7 @@ void ActionStack::sendMessage(const QString& id)
 
 void ActionStack::setOwnId(const QString& ownId)
 {
+    m_details->setOwnId(ownId);
     emit ownIdChanged(ownId);
 }
 
