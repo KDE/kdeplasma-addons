@@ -183,38 +183,44 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
     if (!category) {
         return;
     }
-    Value v = category->convert(Value(value, unit1), unit2);
-    if (v.isValid()) {
+
+    QList<UnitPtr> units;
+
+    if (!unit2.isEmpty()) {
+        UnitPtr u = category->unit(unit2);
+        if (u->isValid()) {
+            units.append(u);
+        } else {
+            const QStringList unitStrings = category->allUnits();
+            QSet<UnitPtr> matchingUnits;
+            foreach (const QString& s, unitStrings) {
+                if (s.startsWith(unit2, Qt::CaseInsensitive)) {
+                    matchingUnits << category->unit(s);
+                }
+            }
+            units = matchingUnits.toList();
+        }
+    } else {
+        units = category->mostCommonUnits();
+    }
+
+    foreach (const UnitPtr& u, units) {
+        Value v = category->convert(Value(value, unit1), u);
+        kDebug() << v.toString() << u->symbol();
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(KIcon("edit-copy"));
         match.setText(v.toString());
         match.setData(v.number());
         context.addMatch(term, match);
-    } else if (!unit2.isEmpty()) {
-        const QStringList units = category->allUnits();
-        QSet<UnitPtr> matchingUnits;
-        foreach (const QString& s, units) {
-            if (s.startsWith(unit2, Qt::CaseInsensitive)) {
-                matchingUnits << category->unit(s);
-            }
-        }
-        foreach (const UnitPtr& u, matchingUnits) {
-            v = category->convert(Value(value, unit1), u->symbol());
-            Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::InformationalMatch);
-            match.setIcon(KIcon("edit-copy"));
-            match.setText(v.toString());
-            match.setData(v.number());
-            context.addMatch(term, match);
-        }
     }
-    if (v.isValid() && !v.unit()->category()->description().isEmpty()) {
+
+    if (units.count() > 0 && !category->description().isEmpty()) {
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::PossibleMatch);
         match.setIcon(KIcon("document-open-remote"));
-        match.setText(v.unit()->category()->description());
-        match.setData(v.unit()->category()->url().prettyUrl());
+        match.setText(category->description());
+        match.setData(category->url().prettyUrl());
         context.addMatch(term, match);
     }
 }
