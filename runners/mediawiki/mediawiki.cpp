@@ -47,6 +47,7 @@ struct MediaWikiPrivate {
     QNetworkReply *reply;
     int timeout;
     QUrl query;
+    QByteArray userAgent;
 };
 
 MediaWiki::MediaWiki( QObject *parent )
@@ -62,6 +63,7 @@ MediaWiki::MediaWiki( QObject *parent )
     d->maxItems = 10;
     d->timeout = 30 * 1000; // 30 second
     d->reply = 0;
+    d->userAgent = QByteArray("KDE Plasma Silk; MediaWikiRunner; 1.0");
 
     connect( d->manager, SIGNAL(finished(QNetworkReply*)), SLOT(finished(QNetworkReply *)) );
 }
@@ -131,7 +133,11 @@ void MediaWiki::search( const QString &searchTerm )
     kDebug() << "Constructed search URL" << url;
 
     if ( d->state == StateReady ) {
-        d->reply = d->manager->get( QNetworkRequest(url) );
+        QNetworkRequest req(url);
+        req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
+        kDebug() << "mediawiki User-Agent" << req.rawHeader(QByteArray("UserAgent"));
+
+        d->reply = d->manager->get( req );
         QTimer::singleShot( d->timeout, this, SLOT( abort() ) );
     } else if ( d->state == StateApiChanged ) {
         d->query = url;
@@ -148,7 +154,10 @@ void MediaWiki::findBase()
     url.addQueryItem( QString("meta"), QString("siteinfo") );
 
     kDebug() << "Constructed base query URL" << url;
-    d->reply = d->manager->get( QNetworkRequest(url) );
+    QNetworkRequest req(url);
+    req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
+
+    d->reply = d->manager->get( req );
     d->state = StateApiUpdating;
 }
 
@@ -168,7 +177,10 @@ void MediaWiki::finished( QNetworkReply *reply )
         reply->deleteLater();
         reply= 0;
         d->state = StateReady;
-        d->reply = d->manager->get( QNetworkRequest(d->query) );
+
+        QNetworkRequest req(d->query);
+        req.setRawHeader( QByteArray("User-Agent"), d->userAgent );
+        d->reply = d->manager->get( req );
         QTimer::singleShot( d->timeout, this, SLOT( abort() ) );
     } else {
         bool ok = processSearchResult( reply );
