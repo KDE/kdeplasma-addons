@@ -202,7 +202,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
 
     if (!unit2.isEmpty()) {
         UnitPtr u = category->unit(unit2);
-        if (u->isValid()) {
+        if (!u.isNull() && u->isValid()) {
             units.append(u);
             config().writeEntry(category->name(), u->symbol());
         } else {
@@ -214,11 +214,14 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
                 }
             }
             units = matchingUnits.toList();
+            if (units.count() == 1) {
+                config().writeEntry(category->name(), units[0]->symbol());
+            }
         }
     } else {
         units = category->mostCommonUnits();
         UnitPtr u = category->unit(config().readEntry(category->name()));
-        if (units.indexOf(u) < 0) {
+        if (!u.isNull() && units.indexOf(u) < 0) {
             units << u;
         }
     }
