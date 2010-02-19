@@ -204,6 +204,7 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         UnitPtr u = category->unit(unit2);
         if (u->isValid()) {
             units.append(u);
+            config().writeEntry(category->name(), u->symbol());
         } else {
             const QStringList unitStrings = category->allUnits();
             QSet<UnitPtr> matchingUnits;
@@ -216,6 +217,10 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         }
     } else {
         units = category->mostCommonUnits();
+        UnitPtr u = category->unit(config().readEntry(category->name()));
+        if (units.indexOf(u) < 0) {
+            units << u;
+        }
     }
 
     UnitPtr u1 = category->unit(unit1);
