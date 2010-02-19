@@ -405,7 +405,7 @@ void Pastebin::showOverlay(bool show)
         animation->setDuration(400);
         animation->setStartValue(0.0);
         animation->setEndValue(1.0);
-        animation->setEasingCurve(QEasingCurve::OutQuad);
+        animation->setEasingCurve(QEasingCurve::Linear);
         m_animation = animation;
     } else if (animation->state() == QAbstractAnimation::Running) {
         animation->pause();
@@ -427,7 +427,7 @@ qreal Pastebin::animationValue() const
 
 void Pastebin::animationUpdate(qreal progress)
 {
-    m_alpha = m_fadeIn ? progress : 1 - progress;
+    m_alpha = progress;
     update();
 }
 
@@ -532,7 +532,7 @@ void Pastebin::editImageServer()
             serverAddress = cg.readEntry("simplestimagehosting",
                                          "http://api.simplest-image-hosting.net");
             break;
-        
+
         case Pastebin::IMGUR:
             serverAddress = cg.readEntry("imgur", "http://imgur.com/api/upload");
             break;
