@@ -218,8 +218,12 @@ void ConverterRunner::match(Plasma::RunnerContext &context)
         units = category->mostCommonUnits();
     }
 
+    UnitPtr u1 = category->unit(unit1);
     foreach (const UnitPtr& u, units) {
-        Value v = category->convert(Value(value, unit1), u);
+        if (u1 == u) {
+            continue;
+        }
+        Value v = category->convert(Value(value.toDouble(), u1), u);
         Plasma::QueryMatch match(this);
         match.setType(Plasma::QueryMatch::InformationalMatch);
         match.setIcon(KIcon("edit-copy"));
