@@ -95,6 +95,10 @@ void KGraphicsWebSlice::createSlice(bool ok)
     if (ok) {
         createSlice();
     }
+    else {
+      qDebug() << "loadFinished called createSlice with false";
+      emit loadFinished(false);
+    }
 }
 
 void KGraphicsWebSlice::createSlice()
@@ -108,7 +112,11 @@ void KGraphicsWebSlice::createSlice()
         frame->setScrollPosition( geo.topLeft().toPoint() );
         refresh();
         emit sizeChanged(geo.size());
-        emit loadFinished();
+        emit loadFinished(true);
+    }
+    else {
+      qDebug() << "createSlice was unable to find the geometry (fail)";
+      emit loadFinished(false);
     }
 }
 

@@ -80,7 +80,7 @@ QGraphicsWidget* WebSlice::graphicsWidget()
 
         m_slice = new KGraphicsWebSlice(m_widget);
         connect(m_slice, SIGNAL(sizeChanged(QSizeF)), this, SLOT(sizeChanged(QSizeF)));
-        connect(m_slice, SIGNAL(loadFinished()), this, SLOT(loadFinished()));
+        connect(m_slice, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));
         setBusy(true);
         m_slice->setLoadingText(i18nc("displayed in the widget while loading", "<h1>Loading...</h1>"));
         m_slice->setUrl(m_url);
@@ -170,9 +170,16 @@ void WebSlice::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void WebSlice::loadFinished()
+void WebSlice::loadFinished(bool ok)
 {
     setBusy(false);
+
+    if (!ok) {
+      // TODO set error image
+      kDebug() << "loading failed, but at least we know...";
+      return;
+    }
+
     m_slice->show();
     m_size = m_slice->geometry().size();
 

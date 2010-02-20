@@ -132,16 +132,18 @@ signals:
      * Emitted when the webslice has found out its preferred geometry
      */
     void sizeChanged(QSizeF);
+
     /**
      * Emitted when the webpage has loaded and the initial slicing is done
      */
-    void loadFinished();
+    void loadFinished(bool);
 
 protected Q_SLOTS:
     /**
      * Slot to catch errors, passes on to createSlice()
      */
     void createSlice(bool ok);
+
     /**
      * Reimplemented from QGraphicsWidget
      */

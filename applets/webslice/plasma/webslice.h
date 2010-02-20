@@ -45,7 +45,7 @@ class WebSlice: public Plasma::PopupApplet
 
     private slots:
         void sizeChanged (QSizeF newsize);
-        void loadFinished();
+        void loadFinished(bool);
 
     private:
         QString sliceGeometryToString();
