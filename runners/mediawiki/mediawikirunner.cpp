@@ -54,7 +54,7 @@ MediaWikiRunner::MediaWikiRunner(QObject *parent, const QVariantList& args)
         m_icon = KIcon(info.icon());
     }
 
-    Plasma::RunnerSyntax s(i18nc("Mediawiki runner syntax", "wiki::q:"),
+    Plasma::RunnerSyntax s(i18nc("Mediawiki runner syntax", "wiki :q:"),
                            i18n("Searches for :q: in the MediaWiki at %1.", m_apiUrl.toString()));
     addSyntax(s);
 
@@ -71,16 +71,16 @@ void MediaWikiRunner::match(Plasma::RunnerContext &context)
     // TODO: check for networkconnection
 
     QString term = context.query();
-    if (!term.startsWith("wiki:")) {
+    if (!term.startsWith("wiki ")) {
         return;
     } else {
-        term = term.remove("wiki:");
+        term = term.remove("wiki ");
     }
     if (!m_apiUrl.isValid() || term.length() < 3) {
-        kDebug() << "yours is too short" << term;
+        //kDebug() << "yours is too short" << term;
         return;
     }
-    kDebug() << "QUerying ... " << term << m_apiUrl;
+
     QEventLoop loop;
     // Wait a second, we don't want to  query on every keypress
     QMutex mutex;
