@@ -103,7 +103,7 @@ bool BlackBoardWidget::event(QEvent *event)
                     m_painter.drawLine(touchPoint.lastPos(), touchPoint.pos());
 
                     m_changed = true;
-                    int rad = 2;
+                    int rad = 3*touchPoint.pressure() + 1;
                     update(rect.toRect().adjusted(-rad,-rad, +rad, +rad));
                 }
                 break;
