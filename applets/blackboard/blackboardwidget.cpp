@@ -95,16 +95,17 @@ bool BlackBoardWidget::event(QEvent *event)
                 // don't do anything if this touch point hasn't moved
                 continue;
             default: {
-                    QRectF rect;
-                    rect.setTopLeft(touchPoint.lastPos());
-                    rect.setBottomRight(touchPoint.pos());
-
                     m_painter.setPen(QPen(m_color, 3*touchPoint.pressure()));
                     m_painter.drawLine(touchPoint.lastPos(), touchPoint.pos());
-
-                    m_changed = true;
                     int rad = 3*touchPoint.pressure() + 1;
-                    update(rect.toRect().adjusted(-rad,-rad, +rad, +rad));
+
+                    qreal x = qMin(touchPoint.lastPos().x(), touchPoint.pos().x()) -rad;
+                    qreal y = qMin(touchPoint.lastPos().y(), touchPoint.pos().y()) -rad;
+                    qreal w = qMax(touchPoint.lastPos().x(), touchPoint.pos().x()) +rad - x;
+                    qreal h = qMax(touchPoint.lastPos().y(), touchPoint.pos().y()) +rad - y;
+
+                    update(x,y,w,h);
+                    m_changed = true;
                 }
                 break;
             }
