@@ -82,6 +82,20 @@ void BlackBoardWidget::mousePressEvent(QGraphicsSceneMouseEvent *)
     update(contentsRect());
 }
 
+void BlackBoardWidget::drawSegment(QPointF point0, QPointF point1, qreal penRadius)
+{
+    m_painter.setPen(QPen(m_color, penRadius));
+    m_painter.drawLine(point0, point1);
+
+    qreal x = qMin(point0.x(), point1.x()) -(penRadius + 1);
+    qreal y = qMin(point0.y(), point1.y()) -(penRadius + 1);
+    qreal w = qMax(point0.x(), point1.x()) + penRadius + 1 - x;
+    qreal h = qMax(point0.y(), point1.y()) + penRadius + 1 - y;
+
+    update(x,y,w,h);
+    m_changed = true;  
+}
+
 bool BlackBoardWidget::event(QEvent *event)
 {
     switch (event->type()) {
@@ -94,19 +108,8 @@ bool BlackBoardWidget::event(QEvent *event)
             case Qt::TouchPointStationary:
                 // don't do anything if this touch point hasn't moved
                 continue;
-            default: {
-                    m_painter.setPen(QPen(m_color, 3*touchPoint.pressure()));
-                    m_painter.drawLine(touchPoint.lastPos(), touchPoint.pos());
-                    int rad = 3*touchPoint.pressure() + 1;
-
-                    qreal x = qMin(touchPoint.lastPos().x(), touchPoint.pos().x()) -rad;
-                    qreal y = qMin(touchPoint.lastPos().y(), touchPoint.pos().y()) -rad;
-                    qreal w = qMax(touchPoint.lastPos().x(), touchPoint.pos().x()) +rad - x;
-                    qreal h = qMax(touchPoint.lastPos().y(), touchPoint.pos().y()) +rad - y;
-
-                    update(x,y,w,h);
-                    m_changed = true;
-                }
+            default:
+                drawSegment(touchPoint.lastPos(), touchPoint.pos(), 3*touchPoint.pressure());
                 break;
             }
         }
@@ -123,15 +126,7 @@ void BlackBoardWidget::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
     QPointF lastPos = event->lastPos();
 
     if (m_oldPoint.x() != -1){
-        m_painter.drawLine(m_oldPoint, lastPos);
-
-        qreal x = qMin(lastPos.x(), m_oldPoint.x()) - 1;
-        qreal y = qMin(lastPos.y(), m_oldPoint.y()) - 1;
-        qreal w = qMax(lastPos.x(), m_oldPoint.x()) + 1 - x;
-        qreal h = qMax(lastPos.y(), m_oldPoint.y()) + 1 - y;
-
-        update(x, y, w, h);
-	m_changed = true;
+        drawSegment(m_oldPoint, lastPos, 1);      
     }
 
     m_oldPoint = lastPos;

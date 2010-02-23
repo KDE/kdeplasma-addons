@@ -62,6 +62,7 @@ class BlackBoardWidget : public QGraphicsWidget
     private:
         QString imagePath();
       
+	void drawSegment(QPointF point0, QPointF point1, qreal penRadius);
         bool m_changed;
 	Plasma::Applet *m_parentApplet;
         QString m_id;
