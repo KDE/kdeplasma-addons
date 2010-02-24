@@ -1,5 +1,6 @@
 [Global]
-Comment=OpenDesktop Activities Plasmoid
+IconName=system-users
+Comment=OpenDesktop Activities Widget
 Comment[ca]=Estri d'activitats OpenDesktop
 Comment[ca@valencia]=Estri d'activitats OpenDesktop
 Comment[da]=Plasmoid til openDesktop-aktiviteter
