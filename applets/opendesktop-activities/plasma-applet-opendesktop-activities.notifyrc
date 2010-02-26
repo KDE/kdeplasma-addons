@@ -1,6 +1,10 @@
 [Global]
 IconName=system-users
 Comment=OpenDesktop Activities Widget
+Comment[pt]=Elemento de Actividades do OpenDesktop
+Comment[pt_BR]=Widget de atividades do OpenDesktop
+Comment[uk]=Віджет просторів дій OpenDesktop
+Comment[x-test]=xxOpenDesktop Activities Widgetxx
 
 [Event/activity]
 Name=New Activity
