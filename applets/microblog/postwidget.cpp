@@ -101,6 +101,7 @@ void PostWidget::setData(const Plasma::DataEngine::Data &data)
     m_author->setText(data["User"].toString());
     QLocale english(QLocale::English, QLocale::UnitedStates);
     QDateTime dt = english.toDateTime(data.value( "Date" ).toString(), "ddd MMM dd HH:mm:ss +0000 yyyy");
+    dt.setTimeSpec(Qt::UTC);
     m_from->setText(i18n("%1 from %2",timeDescription( dt ), data.value( "Source" ).toString()));
 
     QString status = data["Status"].toString();
