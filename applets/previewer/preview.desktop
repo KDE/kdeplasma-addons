@@ -55,4 +55,4 @@ Name[x-test]=xxPreview This Filexx
 Name[zh_CN]=预览此文件
 Name[zh_TW]=預覽此檔案
 Icon=previewer
-Exec=qdbus org.kde.plasma /Previewer org.kde.Previewer.openFile %u
+Exec=qdbus org.kde.plasma-desktop /Previewer org.kde.Previewer.openFile %u
