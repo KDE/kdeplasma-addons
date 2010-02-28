@@ -237,7 +237,7 @@ void TimelineSource::readStatus(QXmlStreamReader &xml)
             if (tag == "user") {
                 readUser(xml);
             } else {
-                cdata = xml.readElementText().trimmed();
+                cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
             }
 
             if (tag == "created_at") {
@@ -286,7 +286,7 @@ void TimelineSource::readUser(QXmlStreamReader &xml, const QString &tagName)
             if (tag == "status") {
                 readStatus(xml);
             } else {
-                cdata = xml.readElementText().trimmed();
+                cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
             }
 
             if (tag == "screen_name") {
@@ -334,7 +334,7 @@ void TimelineSource::readDirectMessage(QXmlStreamReader &xml)
             } else if (tag == "recipient") {
                 skipTag(xml, "recipient");
             } else {
-                cdata = xml.readElementText().trimmed();
+                cdata = xml.readElementText(QXmlStreamReader::IncludeChildElements).trimmed();
             }
 
             if (tag == "created_at") {
