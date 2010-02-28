@@ -19,8 +19,13 @@
 
 #include "PanelIcon.h"
 #include <QAction>
+#include <QGraphicsView>
+
 #include <KIcon>
+#include <KWindowSystem>
+
 #include <plasma/theme.h>
+#include <plasma/corona.h>
 #include <Plasma/ToolTipManager>
 #include <Plasma/ToolTipContent>
 
@@ -69,10 +74,10 @@ QGraphicsWidget *PanelIcon::graphicsWidget()
         initKeyboard();
     }
 
-    bool restrictedH = formFactor() == Plasma::Horizontal;
-    bool restrictedV = formFactor() == Plasma::Vertical;
-    if(!restrictedH && !restrictedV){
-	m_plasmaboard->setEnabled(false);
+    QGraphicsView *window = view();
+    if (window) {
+        KWindowInfo info = KWindowSystem::windowInfo(window->effectiveWinId(),  NET::WMWindowType);
+        m_plasmaboard->setEnabled(info.windowType(NET::AllTypesMask) == NET::Dock);
     }
 
     return m_plasmaboard;
