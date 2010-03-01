@@ -39,7 +39,6 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
     m_slice(0),
     m_url(0),
-    m_element(0),
     m_size(192, 192)
 {
     setPopupIcon("internet-web-browser");
