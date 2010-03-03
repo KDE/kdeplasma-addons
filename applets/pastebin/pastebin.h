@@ -116,6 +116,7 @@ private:
     int iconSize();
     void showOverlay(bool show);
     void postContent(QString text, QImage imageData);
+    void postClipboard(bool preferSelection);
 
     void addToHistory(const QString &url);
 

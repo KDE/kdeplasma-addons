@@ -65,6 +65,7 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
 
     connect(m_signalMapper, SIGNAL(mapped(const QString &)),
              this, SLOT(copyToClipboard(const QString &)));
+    connect(this, SIGNAL(activate()), this, SLOT(postClipboard()));
 
     Plasma::DataEngine *engine = dataEngine("pastebin");
     engine->connectSource("result", this);
@@ -637,24 +638,7 @@ void Pastebin::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::MidButton) {
         if (m_actionState == Idle) {
             // paste clipboard content
-#ifdef Q_WS_WIN
-            // Same as for D'n'D, Windows doesn't pass any actual image data when pasting
-            // image files. Though, it does provide us with those files' Urls. Since posting
-            // multiple images isn't yet implemented - we'll use first Url from list
-            lastMode = QClipboard::Clipboard;
-            QImage image;
-            QString imageFileName;
-            if (QApplication::clipboard()->mimeData()->hasUrls()) {
-                imageFileName = QApplication::clipboard()->mimeData()->urls().at(0).toLocalFile();
-                image.load(imageFileName);
-                postContent(imageFileName, image);
-            } else {
-                postContent(QApplication::clipboard()->mimeData()->text(), image);
-            };
-#else
-            lastMode = QApplication::clipboard()->supportsSelection() ? QClipboard::Selection : QClipboard::Clipboard;
-            postContent(QApplication::clipboard()->text(lastMode), QApplication::clipboard()->image(lastMode));
-#endif //Q_WS_WIN
+            postClipboard(true);
         } else {
             // Now releasing the middlebutton click copies to clipboard
             event->accept();
@@ -768,6 +752,11 @@ QList<QAction*> Pastebin::contextualActions()
 
 void Pastebin::postClipboard()
 {
+    postClipboard(false);
+}
+
+void Pastebin::postClipboard(bool preferSelection)
+{
     lastMode = QClipboard::Clipboard;
 #ifdef Q_WS_WIN
 // Same as for D'n'D, Windows doesn't pass any actual image data when pasting
@@ -783,7 +772,12 @@ void Pastebin::postClipboard()
         postContent(QApplication::clipboard()->mimeData()->text(), image);
     };
 #else
-    postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
+    if (preferSelection) {
+        lastMode = QApplication::clipboard()->supportsSelection() ? QClipboard::Selection : QClipboard::Clipboard;
+        postContent(QApplication::clipboard()->text(lastMode), QApplication::clipboard()->image(lastMode));
+    } else {
+        postContent(QApplication::clipboard()->text(), QApplication::clipboard()->image());
+    }
 #endif //Q_WS_WIN
 }
 
