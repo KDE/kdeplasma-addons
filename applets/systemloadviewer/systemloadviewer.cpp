@@ -68,8 +68,8 @@ void SystemLoadViewer::init()
     readConfig();
 
     sys_mon = dataEngine("systemmonitor");
-    reconnectSources();
     connect(sys_mon, SIGNAL(sourceAdded(const QString &)), this, SLOT(sourcesAdded(const QString &)));
+    reconnectSources();
 
     Plasma::ToolTipManager::self()->registerWidget(this);
 }
@@ -140,6 +140,7 @@ void SystemLoadViewer::disconnectSources()
 
 void SystemLoadViewer::disconnectCPUSources()
 {
+#if 0
     if (!m_showMultiCPU) {
 
         sys_mon->disconnectSource("cpu/system/user", this);
@@ -164,6 +165,7 @@ void SystemLoadViewer::disconnectCPUSources()
 
         }
     }
+#endif
 }
 
 void SystemLoadViewer::sourcesAdded(const QString &source)
@@ -173,7 +175,7 @@ void SystemLoadViewer::sourcesAdded(const QString &source)
 
         sys_mon->connectSource(source, this, m_updateInterval);
 
-    } else if (source.startsWith(QLatin1String("cpu/system/")) && !m_showMultiCPU) {
+    } else if (source.startsWith(QLatin1String("cpu/system/"))) {
 
         if (source.endsWith(QLatin1String("/user")) || source.endsWith(QLatin1String("/sys")) ||
             source.endsWith(QLatin1String("/nice")) || source.endsWith(QLatin1String("/wait")) ||
@@ -182,7 +184,7 @@ void SystemLoadViewer::sourcesAdded(const QString &source)
             sys_mon->connectSource(source, this, m_updateInterval);
         }
 
-    } else if (source.startsWith(QLatin1String("cpu/cpu")) && m_showMultiCPU) {
+    } else if (source.startsWith(QLatin1String("cpu/cpu"))) {
 
         if (source.endsWith(QLatin1String("/user")) || source.endsWith(QLatin1String("/sys")) ||
             source.endsWith(QLatin1String("/nice")) || source.endsWith(QLatin1String("/wait")) ||
@@ -420,7 +422,7 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_cpuInfo[0].clockValid = true;
             m_cpuInfo[0].clock = (data["value"].toString().toDouble());
         }
-    } else if (m_showMultiCPU && source.startsWith(QLatin1String("cpu/")) && (m_numCPUs != 0)) {
+    } else if (m_showMultiCPU && source.startsWith(QLatin1String("cpu/cpu")) && (m_numCPUs != 0)) {
         int cpu = source.split('/')[1].mid(3).toInt();
 
         if (cpu >= m_cpuInfo.size()) {
