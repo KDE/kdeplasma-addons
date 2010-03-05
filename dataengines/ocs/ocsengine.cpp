@@ -431,6 +431,9 @@ bool OcsEngine::sourceRequestEvent(const QString& source)
         QString baseUrl = arguments.value("provider");
 
         Provider* provider = m_providers.value(baseUrl).data();
+        if (!provider) {
+            m_sourcesWithoutProvider[baseUrl].append(source);
+        }
         bool success = providerDependentRequest(request, arguments, source, baseUrl, provider);
         if (!success) {
             qDebug() << "Source failed:" << source;
@@ -869,6 +872,11 @@ void OcsEngine::providerAdded(const Attica::Provider& provider)
         m_providers.insert(baseUrl, QSharedPointer<Provider>(new Provider(provider)));
 
         updateProviderData();
+
+        foreach (QString source, m_sourcesWithoutProvider.value(provider.baseUrl().toString())) {
+            sourceRequestEvent(source);
+        }
+        m_sourcesWithoutProvider.remove(provider.baseUrl().toString());
     }
 }
 

@@ -103,6 +103,8 @@ private:
     QHash<QPair<QString, QString>, Attica::Message> m_messageCache;
     QHash<QString, QSharedPointer<Attica::Provider> > m_providers;
     QHash<QString, QSet<QString> > m_requestCache;
+    //base urls that still did not have a loaded provider when the source was requested
+    QHash<QString, QStringList> m_sourcesWithoutProvider;
     Attica::ProviderManager m_pm;
     QSharedPointer<QSignalMapper> m_serviceUpdates;
 };
