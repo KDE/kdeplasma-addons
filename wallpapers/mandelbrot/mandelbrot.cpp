@@ -31,7 +31,8 @@ K_EXPORT_PLASMA_WALLPAPER(mandelbrot, Mandelbrot)
 Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args), m_image(0), m_tileImagePtr(0), m_tile(this),
       m_abortRenderingAsSoonAsPossible(false),
-      m_imageIsReady(false)
+      m_imageIsReady(false),
+      m_firstInit(true)
 {
     qRegisterMetaType<MandelbrotTile>();
     m_hasSSE2 = system_has_SSE2();
@@ -80,20 +81,23 @@ void Mandelbrot::updateCache()
 }
 
 void Mandelbrot::paint(QPainter *painter, const QRectF& exposedRect)
-{   
+{
     painter->drawImage(exposedRect, *m_image, exposedRect.translated(-boundingRect().topLeft()));
 }
 
 void Mandelbrot::save(KConfigGroup &config)
 {
-    config.writeEntry(MANDELBROT_CENTER_KEY, m_center);
-    config.writeEntry(MANDELBROT_ZOOM_KEY, m_zoom);
+    if (!isPreviewing())
+    {
+        config.writeEntry(MANDELBROT_CENTER_KEY, m_center);
+        config.writeEntry(MANDELBROT_ZOOM_KEY, m_zoom);
+    }
+
     config.writeEntry(MANDELBROT_COLOR1_KEY, m_color1);
     config.writeEntry(MANDELBROT_COLOR2_KEY, m_color2);
     config.writeEntry(MANDELBROT_COLOR3_KEY, m_color3);
     config.writeEntry(MANDELBROT_QUALITY_KEY, m_quality);
     config.writeEntry(MANDELBROT_LOCK_KEY, int(m_lock));
-
     // and this is where we update the cache. It's important to update the cache at the same time we save the config.
     // Otherwise we could easily have stale cached images, or missing ones, for example in case of a crash.
     updateCache();
@@ -103,14 +107,18 @@ void Mandelbrot::init(const KConfigGroup &config)
 {
     QString old_key = key();
 
-    m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(0,0));
-    m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(2));
+    if (m_firstInit)
+    {
+        m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(0,0));
+        m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(2));
+        m_firstInit = false;
+    }
+
     m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(255,255,255));
     m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(64,255,255));
     m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,255));
-    m_quality = config.readEntry(MANDELBROT_QUALITY_KEY, 1);
-    if(m_quality > 4) m_quality = 4;
     m_lock = Qt::CheckState(config.readEntry(MANDELBROT_LOCK_KEY, int(Qt::Unchecked)));
+    m_quality = qBound(0, config.readEntry(MANDELBROT_QUALITY_KEY, 1), 4);
 
     if(key() != old_key)
     {

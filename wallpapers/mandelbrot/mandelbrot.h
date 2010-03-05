@@ -161,11 +161,12 @@ class Mandelbrot : public Plasma::Wallpaper
         MandelbrotRenderThread **m_renderThreads;
         int m_renderThreadCount;
         QPointF m_mousePressPos, m_mouseLastMovePos;
-        bool m_abortRenderingAsSoonAsPossible;
         int m_min_iter_divergence;
-        bool m_hasSSE2;
         QString m_cacheKey;
-        bool m_imageIsReady;
+        bool m_abortRenderingAsSoonAsPossible : 1;
+        bool m_hasSSE2 : 1;
+        bool m_imageIsReady : 1;
+        bool m_firstInit : 1;
 };
 
 #endif
