@@ -59,6 +59,8 @@ static KMenu* buildMenuForColor(const QColor &color)
         act = menu->addAction(mimeIcon, htmlNameUp.mid(1));
         act->setData(colorData);
     }
+    act = menu->addAction(mimeIcon, htmlName + QString::fromLatin1("ff"));
+    act->setData(colorData);
     return menu;
 }
 
