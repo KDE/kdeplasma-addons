@@ -376,10 +376,10 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         m_courtesyLabel->setText(creditUrl);
     }
 
-    if (data["Condition Icon"].toString() == "N/A") {
-        m_currentIcon->setIcon(KIcon("weather-not-available"));
-        setPopupIcon("weather-not-available");
-    } else if (!isValidData(data["Condition Icon"]) || data["Condition Icon"].toString() == "N/U") {
+    if (!isValidData(data["Condition Icon"]) ||
+        data["Condition Icon"].toString() == "N/U" ||
+        data["Condition Icon"].toString() == "N/A" ||
+        data["Condition Icon"].toString() == "weather-none-available") {
         m_currentIcon->hide();
     } else {
         m_currentIcon->setIcon(KIcon(data["Condition Icon"].toString()));
