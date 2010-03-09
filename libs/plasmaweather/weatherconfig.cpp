@@ -30,20 +30,28 @@
 
 using namespace KUnitConversion;
 
-class WeatherConfig::Private
+class WeatherConfig::Private : public QObject
 {
 public:
     Private(WeatherConfig *weatherconfig)
-        : q(weatherconfig)
-        , searchDlg(weatherconfig)
+        : q(weatherconfig),
+          searchDlg(weatherconfig)
     {
     }
 
     void changePressed()
     {
         searchDlg.setSource(source);
-        if (searchDlg.exec() == QDialog::Accepted) {
+        searchDlg.show();
+    }
+
+    void searchResult(int result)
+    {
+        if (result == QDialog::Accepted) {
             q->setSource(searchDlg.source());
+            searchDlg.hide();
+        } else {
+            searchDlg.hide();
         }
     }
 
@@ -93,6 +101,8 @@ WeatherConfig::WeatherConfig(QWidget *parent)
     d->ui.ghnsProviderButton->hide();
 
     connect(d->ui.changeButton, SIGNAL(clicked()), this, SLOT(changePressed()));
+    connect(&d->searchDlg, SIGNAL(finished(int)), this, SLOT(searchResult(int)));
+
     connect(d->ui.updateIntervalSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setUpdateInterval(int)));
 
