@@ -136,6 +136,7 @@ private:
     Private * const d;
 
     Q_PRIVATE_SLOT(d, void changePressed())
+    Q_PRIVATE_SLOT(d, void searchResult(int result))
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(WeatherConfig::ConfigurableUnits)
