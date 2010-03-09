@@ -93,9 +93,22 @@ QGraphicsWidget* WebSlice::graphicsWidget()
 
 void WebSlice::createConfigurationInterface(KConfigDialog *parent)
 {
+    QLabel *info = new QLabel(parent);
+    info->setWordWrap(true);
+    info->setText(i18n("<p>The Webslice Widget allows you to display a part of a webpage on your desktop or in a panel. The webslice is fully interactive.</p>"
+    "<p>"
+    "Specify the URL of the webpage in the URL field."
+    "In the <em>Element to Show</em> field, fill in a CSS identifier (for example #mybox for elements with the id \"mybox\").  This is the preferred method as it works best with layout changes on the webpage."
+    "</p>"
+    "<p>"
+    "Alternatively, you can specify a rectangle on the webpage to use as slice. Use \"x,y,width,height\" in pixels, for example <em>\"100,80,300,360\"</em>. This method is a fallback for webpages that do not provide enough semantic markup for the above mechanism."
+    "</p>"
+    "If both methods (element and geometry) are used, the element will take precedence."));
+    parent->addPage(info, i18nc("informational page", "Info"), "help-hint");
+
     QWidget *widget = new QWidget(parent);
     ui.setupUi(widget);
-    parent->addPage(widget, i18nc("general config page", "General"), Applet::icon());
+    parent->addPage(widget, i18nc("general config page", "Webpage"), Applet::icon());
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.urlEdit->setText(m_url.toString());
