@@ -95,6 +95,7 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
 {
     QLabel *info = new QLabel(parent);
     info->setWordWrap(true);
+    info->setTextInteractionFlags(Qt::TextBrowserInteraction);
     info->setText(i18n("<p>The Webslice Widget allows you to display a part of a webpage on your desktop or in a panel. The webslice is fully interactive.</p>"
     "<p>"
     "Specify the URL of the webpage in the URL field."
