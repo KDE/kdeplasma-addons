@@ -113,14 +113,15 @@ void WebSlice::createConfigurationInterface(KConfigDialog *parent)
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     ui.urlEdit->setText(m_url.toString());
+    ui.geometryEdit->setText(sliceGeometryToString());
     ui.elementEdit->setText(m_element);
 }
 
 void WebSlice::configAccepted()
 {
-    if ( m_url.toString() != ui.urlEdit->text() ||
-         m_element != ui.elementEdit->text() ||
-         ui.geometryEdit->text() != sliceGeometryToString() ) {
+    if (m_url.toString() != ui.urlEdit->text() ||
+        m_element != ui.elementEdit->text() ||
+        ui.geometryEdit->text() != sliceGeometryToString()) {
 
         m_url = QUrl(ui.urlEdit->text());
         m_element = ui.elementEdit->text();
@@ -165,7 +166,7 @@ void WebSlice::configAccepted()
 
 QString WebSlice::sliceGeometryToString()
 {
-    QString s = QString("%1,%2,%3,%4").arg(m_sliceGeometry.x(), m_sliceGeometry.y(), m_sliceGeometry.width(), m_sliceGeometry.height());
+    QString s = QString("%1,%2,%3,%4").arg(m_sliceGeometry.x()).arg(m_sliceGeometry.y()).arg(m_sliceGeometry.width()).arg(m_sliceGeometry.height());
     return s;
 }
 
