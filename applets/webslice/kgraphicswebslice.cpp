@@ -113,8 +113,7 @@ void KGraphicsWebSlice::createSlice()
         refresh();
         emit sizeChanged(geo.size());
         emit loadFinished(true);
-    }
-    else {
+    } else {
       qDebug() << "createSlice was unable to find the geometry (fail)";
       emit loadFinished(false);
     }
@@ -125,7 +124,7 @@ QRectF KGraphicsWebSlice::sliceGeometry()
     QWebFrame *frame = d->view->page()->mainFrame();
     QRectF geo = QRectF();
     if (!d->selector.isEmpty()) {
-       QWebElement element = frame->findFirstElement( d->selector );
+        QWebElement element = frame->findFirstElement(d->selector);
         if ( element.isNull() ) {
             return QRectF();
         }
@@ -133,9 +132,11 @@ QRectF KGraphicsWebSlice::sliceGeometry()
     } else if (d->sliceGeometry.isValid()) {
         geo = d->sliceGeometry;
     }
+
     if (!geo.isValid()) {
         return QRectF();
     }
+
     return geo;
 }
 

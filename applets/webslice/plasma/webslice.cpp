@@ -83,7 +83,7 @@ QGraphicsWidget* WebSlice::graphicsWidget()
         setBusy(true);
         m_slice->setLoadingText(i18nc("displayed in the widget while loading", "<h1>Loading...</h1>"));
         m_slice->setUrl(m_url);
-        m_slice->setElement( m_element );
+        m_slice->setElement(m_element);
         m_slice->setSliceGeometry(m_sliceGeometry);
         m_slice->hide();
         l->addItem(m_slice);
