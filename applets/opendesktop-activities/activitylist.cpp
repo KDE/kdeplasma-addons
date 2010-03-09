@@ -104,9 +104,8 @@ void ActivityList::dataUpdated(const QString& source, const Plasma::DataEngine::
         m_firstUpdateDone = true;
     }
 
-    
     QStringList displayedActivities = getDisplayedActivities(data);
-    
+
     // FIXME: This is still highly inefficient
     while (m_layout->count()) {
         ActivityWidget* widget = static_cast<ActivityWidget*>(m_layout->itemAt(0));
@@ -122,9 +121,9 @@ void ActivityList::dataUpdated(const QString& source, const Plasma::DataEngine::
             m_layout->addItem(widget);
         }
     }
-    
+
     // Go to the top of the list
-    this->setPos(0, 0);
+    setScrollPosition(QPointF(0, 0));
 }
 
 
