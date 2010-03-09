@@ -30,7 +30,7 @@
 
 using namespace KUnitConversion;
 
-class WeatherConfig::Private : public QObject
+class WeatherConfig::Private
 {
 public:
     Private(WeatherConfig *weatherconfig)
