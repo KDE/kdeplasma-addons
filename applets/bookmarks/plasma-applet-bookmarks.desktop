@@ -2,6 +2,8 @@
 Name=Bookmarks
 Name[de]=Lesezeichen
 Name[en_GB]=Bookmarks
+Name[es]=Marcadores
+Name[et]=Järjehoidjad
 Name[nb]=Bokmerker
 Name[nds]=Leestekens
 Name[nn]=Bokmerke
@@ -14,6 +16,8 @@ Name[x-test]=xxBookmarksxx
 Comment=Quick Access to the Bookmarks
 Comment[de]=Schnellzugriff auf die Lesezeichen
 Comment[en_GB]=Quick Access to the Bookmarks
+Comment[es]=Acceso rápido a los marcadores
+Comment[et]=Kiire ligipääs järjehoidjatele
 Comment[nb]=Kjapp tilgang til bokmerkene dine
 Comment[nds]=Fixtogriep op de Leestekens
 Comment[nn]=Kjapp tilgang til bokmerka
