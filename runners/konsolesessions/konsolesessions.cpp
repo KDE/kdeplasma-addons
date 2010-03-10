@@ -37,7 +37,7 @@ KonsoleSessions::KonsoleSessions(QObject *parent, const QVariantList& args)
     Q_UNUSED(args);
     setObjectName("Konsole Sessions");
     m_icon = KIcon("utilities-terminal");
-    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
+    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
     loadSessions();
 
     KDirWatch *historyWatch = new KDirWatch(this);
@@ -96,7 +96,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
         return;
     }
 
-    if (term.toLower() == "konsole") {
+    if (term.compare("konsole", Qt::CaseInsensitive) == 0) {
         QHashIterator<QString, QString> i(m_sessions);
         while (i.hasNext()) {
             i.next();
@@ -125,7 +125,7 @@ void KonsoleSessions::match(Plasma::RunnerContext &context)
                 match.setData(i.key());
                 match.setText("Konsole: " + i.value());
 
-                if (i.value().toLower() == term) {
+                if (i.value().compare(term, Qt::CaseInsensitive) == 0) {
                     match.setRelevance(1.0);
                 } else {
                     match.setRelevance(0.6);
