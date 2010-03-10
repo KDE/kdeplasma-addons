@@ -81,7 +81,6 @@ void WeatherApplet::init()
 {
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(reloadTheme()));
     m_graphicsWidget = new QGraphicsWidget(this);
-    m_graphicsWidget->setMinimumSize(385, 285);
 
     switch (formFactor()) {
     case Plasma::Horizontal:
