@@ -123,9 +123,9 @@ void KateSessions::match(Plasma::RunnerContext &context)
 
         if (listAll || (!term.isEmpty() && session.contains(term, Qt::CaseInsensitive))) {
             Plasma::QueryMatch match(this);
-            match.setType(Plasma::QueryMatch::PossibleMatch);
             if (listAll) {
                 // All sessions listed, but with a low priority
+                match.setType(Plasma::QueryMatch::ExactMatch);
                 match.setRelevance(0.8);
             } else {
                 if (session.compare(term, Qt::CaseInsensitive) == 0) {
@@ -134,6 +134,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
                     match.setRelevance(1.0);
                 } else {
                     // fuzzy match of the session in "kate $session"
+                    match.setType(Plasma::QueryMatch::PossibleMatch);
                     match.setRelevance(0.8);
                 }
             }
