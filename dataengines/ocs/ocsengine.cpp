@@ -605,6 +605,7 @@ void OcsEngine::slotKnowledgeBaseListResult(BaseJob* j)
         qDebug() << "Getting knowledgebase list" << source << "failed with code" << j->metadata().statusCode();
     }
     setStatusData(source, j);
+    forceImmediateUpdateOfAllVisualizations();
 }
 
 void OcsEngine::slotPersonListResult(BaseJob* j)
