@@ -38,9 +38,8 @@ bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) 
 KateSessions::KateSessions(QObject *parent, const QVariantList& args)
     : Plasma::AbstractRunner(parent, args)
 {
-    Q_UNUSED(args);
     setObjectName("Kate Sessions");
-    setIgnoredTypes(Plasma::RunnerContext::FileSystem | Plasma::RunnerContext::NetworkLocation);
+    setIgnoredTypes(Plasma::RunnerContext::File | Plasma::RunnerContext::Directory | Plasma::RunnerContext::NetworkLocation);
     m_icon = KIcon("kate");
 
     loadSessions();
@@ -95,21 +94,25 @@ void KateSessions::match(Plasma::RunnerContext &context)
     }
 
     QString term = context.query();
-    if (term.length() < 3) {
+    if (term.length() < 4) {
         return;
     }
 
-    bool list_all = false;
+    bool listAll = false;
 
-    if (term.toLower().startsWith(QLatin1String("kate"))) {
-        if (term.toLower().trimmed() == "kate") {
-            list_all = true;
+    if (term.startsWith(QLatin1String("kate"), Qt::CaseInsensitive)) {
+        if (term.trimmed().compare(QLatin1String("kate"), Qt::CaseInsensitive) == 0) {
+            listAll = true;
+            term.clear();
+        } else if (term.at(4) == ' ' ) {
+            term.remove("kate", Qt::CaseInsensitive);
+            term = term.trimmed();
+        } else {
+            term.clear();
         }
-        term.remove("kate", Qt::CaseInsensitive);
-        term = term.trimmed();
     }
 
-    if (term.isEmpty() && !list_all) {
+    if (term.isEmpty() && !listAll) {
         return;
     }
 
@@ -118,14 +121,14 @@ void KateSessions::match(Plasma::RunnerContext &context)
             return;
         }
 
-        if (list_all || (!term.isEmpty() && session.contains(term, Qt::CaseInsensitive))) {
+        if (listAll || (!term.isEmpty() && session.contains(term, Qt::CaseInsensitive))) {
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::PossibleMatch);
-            if (list_all) {
+            if (listAll) {
                 // All sessions listed, but with a low priority
-                match.setRelevance(0.5);
+                match.setRelevance(0.8);
             } else {
-                if (session.toLower() == term) {
+                if (session.compare(term, Qt::CaseInsensitive) == 0) {
                     // parameter to kate matches session exactly, bump it up!
                     match.setType(Plasma::QueryMatch::ExactMatch);
                     match.setRelevance(1.0);
@@ -151,7 +154,7 @@ void KateSessions::run(const Plasma::RunnerContext &context, const Plasma::Query
 
     if (!session.isEmpty()) {
         QStringList args;
-       	args << "--start" << session;
+       	args << "--start" << session << "-n";
         KToolInvocation::kdeinitExec("kate", args);
     }
 }
