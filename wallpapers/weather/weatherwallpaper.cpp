@@ -84,7 +84,6 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_animation->setProperty("startValue", 0.0);
     m_animation->setProperty("endValue", 1.0);
 
-    m_weatherMap["weather-none-available"] = Plasma::Theme::defaultTheme()->wallpaperPath();
     m_weatherMap["weather-clear"] = config.readEntry("clearPaper", m_dir + "Fields_of_Peace/");
     m_weatherMap["weather-few-clouds"] = config.readEntry("partlyCloudyPaper", m_dir + "Evening/");
     m_weatherMap["weather-clouds"] = config.readEntry("cloudyPaper", m_dir + "Colorado_Farm/");
@@ -94,6 +93,7 @@ void WeatherWallpaper::init(const KConfigGroup & config)
     m_weatherMap["weather-rain"] = config.readEntry("rainPaper", m_dir + "There_is_Rain_on_the_Table/");
     m_weatherMap["weather-mist"] = config.readEntry("mistPaper", m_dir + "Fresh_Morning/");
     m_weatherMap["weather-storm"] = config.readEntry("stormPaper", m_dir + "Lightning/");
+    m_weatherMap["weather-scattered-storms"] = m_weatherMap["weather-storm"];
     m_weatherMap["weather-hail"] = config.readEntry("hailPaper", m_dir + "Hail/");
     m_weatherMap["weather-snow"] = config.readEntry("snowPaper", m_dir + "Winter_Track/");
     m_weatherMap["weather-snow-scattered"] = config.readEntry("snowScatteredPaper", m_dir + "Winter_Track/");
@@ -224,7 +224,18 @@ void WeatherWallpaper::paint(QPainter * painter, const QRectF & exposedRect)
 
 void WeatherWallpaper::loadImage()
 {
-    m_wallpaper = m_weatherMap[m_condition];
+    m_wallpaper = m_weatherMap.value(m_condition);
+
+    if (m_wallpaper.isEmpty()) {
+       QHashIterator<QString, QString> it(m_weatherMap);
+       while (it.hasNext()) {
+           it.next();
+           if (m_condition.startsWith(it.key())) {
+               m_wallpaper = it.value();
+               break;
+           }
+       }
+    }
 
     if (m_wallpaper.isEmpty()) {
         m_wallpaper = Plasma::Theme::defaultTheme()->wallpaperPath();
