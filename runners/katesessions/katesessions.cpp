@@ -94,7 +94,7 @@ void KateSessions::match(Plasma::RunnerContext &context)
     }
 
     QString term = context.query();
-    if (term.length() < 4) {
+    if (term.length() < 3) {
         return;
     }
 
