@@ -128,6 +128,7 @@ void Mandelbrot::init(const KConfigGroup &config)
         {
             delete m_image;
             m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
+            QPainter(m_image).fillRect(m_image->rect(), Qt::black);
         }
 
         loadFromCacheOrStartRendering();
