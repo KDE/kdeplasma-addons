@@ -23,8 +23,8 @@
 #include <QGraphicsSceneMouseEvent>
 //#include <KDebug>
 
-#define MOUSE_MMB_SPEED ((qreal)10.)
-#define MOUSE_WHEEL_SPEED ((qreal)0.002)
+const qreal MOUSE_MMB_SPEED = (qreal)10.;
+const qreal MOUSE_WHEEL_SPEED = (qreal)0.002;
 
 K_EXPORT_PLASMA_WALLPAPER(mandelbrot, Mandelbrot)
 
@@ -233,8 +233,8 @@ void Mandelbrot::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void Mandelbrot::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
+    event->ignore();
     if(m_lock) return;
-
     event->accept();
     zoomView(event->pos(), std::exp(-MOUSE_WHEEL_SPEED * event->delta()));
 }
@@ -304,17 +304,16 @@ void Mandelbrot::translateView(const QPointF& _delta)
 
     // compute which pixel to render first, so we start with the tiles the user is most interested in
     qreal renderfirstx, renderfirsty;
-    int noise = (qrand()%(width()/2)) - width()/4; // if user is scrolling continuously, don't always rerender the same tile.
     if(delta.y()!=0 && qAbs(_delta.x()/_delta.y())<qAbs(qreal(width())/height()))
     {
       if(delta.y()>0)
       {
-        renderfirstx = width()/2 - _delta.x() * height() / (2 * _delta.y()) + noise;
+        renderfirstx = width()/2 - _delta.x() * height() / (2 * _delta.y());
         renderfirsty = 0.;
       }
       else
       {
-        renderfirstx = width()/2 + _delta.x() * height() / (2 * _delta.y()) + noise;
+        renderfirstx = width()/2 + _delta.x() * height() / (2 * _delta.y());
         renderfirsty = height();
       }
     }
@@ -322,12 +321,12 @@ void Mandelbrot::translateView(const QPointF& _delta)
     {
       if(delta.x()>0)
       {
-        renderfirsty = height()/2 - _delta.y() * width() / (2 * _delta.x()) + noise;
+        renderfirsty = height()/2 - _delta.y() * width() / (2 * _delta.x());
         renderfirstx = 0.;
       }
       else
       {
-        renderfirsty = height()/2 + _delta.y() * width() / (2 * _delta.x()) + noise;
+        renderfirsty = height()/2 + _delta.y() * width() / (2 * _delta.x());
         renderfirstx = width();
       }
     }
