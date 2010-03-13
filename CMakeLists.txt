@@ -41,11 +41,11 @@ include_directories (${KDE4_INCLUDES}
                      ${KDEPIMLIBS_INCLUDE_DIR}
                      ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
-add_subdirectory(libs)
-add_subdirectory(applets)
-add_subdirectory(dataengines)
-add_subdirectory(runners)
-add_subdirectory(scriptengines)
+#add_subdirectory(libs)
+#add_subdirectory(applets)
+#add_subdirectory(dataengines)
+#add_subdirectory(runners)
+#add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
 add_subdirectory(cmake)
 

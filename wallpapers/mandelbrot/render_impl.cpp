@@ -19,6 +19,7 @@
 #include "mandelbrot.h"
 #include "mix.h"
 #include <Eigen/Array>
+#include <limits>
 
 #ifdef THIS_PATH_WITH_SSE2_EXPLICTLY_ENABLED
 namespace with_SSE2_explicitly_enabled_if_x86 {
@@ -127,6 +128,8 @@ void mandelbrot_render_tile_impl<Real>::init()
 template<typename Real>
 void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
 {
+  const Real square_bailout_radius = 20; // value found in papers on continuous escape time formulas, changing it can degrade the smoothness.
+  
   // pointer to the first pixel to render
   unsigned char *pixel = const_cast<unsigned char*>(static_cast<const QImage *>(image)->scanLine(y)) + 4*x;
 
@@ -190,7 +193,7 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
     pzabs2 += pzi.cwise().square();
     for(int i = 0; i < packet_size; i++) {
       if(!(pixel_diverge[i])) {
-        if(pzabs2[i] > Real(4)) {
+        if(pzabs2[i] > square_bailout_radius) {
           pixel_diverge[i] = 1;
           pzr_before_diverge[i] = pzr_previous[i];
           pzi_before_diverge[i] = pzi_previous[i];
@@ -200,22 +203,21 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
       }
     }
 
-    j++;
+    j += iter_before_test;
   }
-  while(j < max_iter/iter_before_test && count_not_yet_diverged);
+  while(j < max_iter && count_not_yet_diverged);
 
   /* Second step: we know the iteration count before divergence for each pixel but only up to precision
     * 'iter_before_test'. We now want to get the exact iteration count before divergence,
     * so we iterate again starting from where we were before divergence, and now we test at every iteration.
     */
-
   j = 0;
   pzr = pzr_before_diverge;
   pzi = pzi_before_diverge;
   pixel_diverge = Packeti::Zero();
   count_not_yet_diverged = packet_size;
   typedef Eigen::Matrix<float,packet_size,1> Packet_to_float;
-  Packet_to_float escape_modulus = Packet_to_float::Zero();
+  Packet_to_float square_escape_modulus = Packet_to_float::Zero();
   do
   {
     pzr_buf = pzr;
@@ -228,9 +230,9 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
     pzabs2 += pzi.cwise().square();
     for(int i = 0; i < packet_size; i++) {
       if(!(pixel_diverge[i])) {
-        if(pzabs2[i] > Real(4)) {
+        if(pzabs2[i] > square_bailout_radius) {
           pixel_diverge[i] = 1;
-          escape_modulus[i] = (float)pzabs2[i];
+          square_escape_modulus[i] = (float)pzabs2[i];
           count_not_yet_diverged--;
         }
         else pixel_iter[i]++;
@@ -248,26 +250,14 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
 
   int pixels_to_write = std::min(int(packet_size), image->width()-x);
 
-  Packet_to_float log_log_escape_modulus = escape_modulus.template cast<float>();
-  log_log_escape_modulus = log_log_escape_modulus.cwise().log().cwise().log();
-
-  Packet_to_float shift, normalized_iter_count;
-
-  for(int i = 0; i < packet_size; i++)
-  {
-    shift[i] = (-log_log_escape_modulus[i]+log_of_2log2)/log_of_2;
-    shift[i]=CLAMP(shift[i],-1.f,0.f);
-    normalized_iter_count[i] = pixel_iter[i] + shift[i];
-    if(normalized_iter_count[i]<=1.f) normalized_iter_count[i]=1.f;
-  }
-
-  Packet_to_float log_normalized_iter_count = normalized_iter_count.cwise().log();
-
-  Packet_to_float t;
-  t = log_normalized_iter_count / log_max_iter;
-
   for(int i = 0; i < pixels_to_write; i++)
   {
+    Real log_log_escape_modulus = std::log(std::log(square_escape_modulus[i]));
+    Real log_log_bailout = std::log(std::log(square_bailout_radius));
+    Real normalized_iter_count = pixel_iter[i] + (log_log_bailout - log_log_escape_modulus) / log_of_2;
+    Real log_normalized_iter_count = std::log(Real(normalized_iter_count));
+    Real t = log_normalized_iter_count / log_max_iter;
+    
     // Now, remember that we did a little statistical analysis on some samples
     // to determine roughly what would be the smallest count of iterations before divergence.
     // At the beginning of the present function, we used that to compute 'tmin'.
@@ -276,36 +266,33 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
     // will always be black (at least if our statistical analysis went well).
     // In other words, we are trying to get optimal contrast. This is important as otherwise there could be
     // almost no contrast at all and an interesting viewpoint could give an almost blank image.
-    if(t[i] <= tmin) t[i] = 0.f;
-    else t[i] = (t[i]-tmin)/(1.f-tmin);
-    t[i] = CLAMP(t[i], 0.f, 1.f);
-  }
+    if(t <= tmin) t = 0.f;
+    else t = (t-tmin)/(1.f-tmin);
+    t = CLAMP(t, Real(0), Real(1));
 
-  Packet_to_float t_plus_tshift = t.cwise()+tshift;
-  Packet_to_float t_plus_tshift_to_gamma = (t_plus_tshift.cwise().log() * gamma).cwise().exp();
+    Real t_plus_tshift = t+tshift;
+    Real t_plus_tshift_to_gamma = std::pow(t_plus_tshift, gamma);
 
+    // Another homemade formula. It seems that some amount of gamma correction is beneficial.
+    // However it must be avoided for t near zero as x^gamma is non differentiable at x=0.
+    // So we just shift t a little bit to avoid 0.
+    t = (t_plus_tshift_to_gamma-tshift_to_gamma) / (tshift_plus_1_to_gamma - tshift_to_gamma);
 
-  // Another homemade formula. It seems that some amount of gamma correction is beneficial.
-  // However it must be avoided for t near zero as x^gamma is non differentiable at x=0.
-  // So we just shift t a little bit to avoid 0.
-  t = (t_plus_tshift_to_gamma.cwise()-tshift_to_gamma) / (tshift_plus_1_to_gamma - tshift_to_gamma);
-
-  for(int i = 0; i < pixels_to_write; i++)
-  {
     Color3 rgb;
-    if(t[i] < 0.5f) {
-      rgb = 2*t[i]*rgb3;
+    if(t < 0.5f) {
+      rgb = 2*t*rgb3;
     }
-    else if(t[i] < 0.75f) {
-      rgb = mix(rgb2, hsv2, rgb3, hsv3, 4*t[i] - 2.f);
+    else if(t < 0.75f) {
+      rgb = mix(rgb2, hsv2, rgb3, hsv3, 4*t - 2.f);
     }
     else {
-      rgb = mix(rgb1, hsv1, rgb2, hsv2,  4*t[i] - 3.f);
+      rgb = mix(rgb1, hsv1, rgb2, hsv2,  4*t - 3.f);
     }
 
     pixel[0] = (unsigned char)(255*rgb[2]);
     pixel[1] = (unsigned char)(255*rgb[1]);
     pixel[2] = (unsigned char)(255*rgb[0]);
+    pixel[3] = 255;
     pixel+=4;
   }
 

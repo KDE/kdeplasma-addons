@@ -118,6 +118,10 @@ class Mandelbrot : public Plasma::Wallpaper
         /** To be called whenever the given tile is done rendering */
         void tileDone(const MandelbrotTile& t);
 
+        void exportImage();
+        void exportConfig();
+        void importConfig();
+
     protected:
         virtual void init(const KConfigGroup &config);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -168,6 +172,9 @@ class Mandelbrot : public Plasma::Wallpaper
         QString m_cacheKey;
         int m_tilesFinishedRendering;
         QMutex m_imageMutex;
+        QAction m_exportImageAction;
+        QAction m_exportConfigAction;
+        QAction m_importConfigAction;
         bool m_abortRenderingAsSoonAsPossible : 1;
         bool m_hasSSE2 : 1;
         bool m_imageIsReady : 1;

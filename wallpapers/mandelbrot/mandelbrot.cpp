@@ -21,6 +21,10 @@
 
 #include <cmath>
 #include <QGraphicsSceneMouseEvent>
+#include <kfiledialog.h>
+#include <QByteArray>
+#include <QBuffer>
+#include <kio/job.h>
 //#include <KDebug>
 
 const qreal MOUSE_MMB_SPEED = (qreal)10.;
@@ -30,6 +34,9 @@ K_EXPORT_PLASMA_WALLPAPER(mandelbrot, Mandelbrot)
 
 Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args), m_image(0), m_tiling(this),
+      m_exportImageAction(i18n("Export Mandelbrot image..."), this),
+      m_exportConfigAction(i18n("Export Mandelbrot parameters..."), this),
+      m_importConfigAction(i18n("Import Mandelbrot parameters..."), this),
       m_abortRenderingAsSoonAsPossible(false),
       m_imageIsReady(false),
       m_firstInit(true)
@@ -41,7 +48,16 @@ Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
     for(int th = 0; th < m_renderThreadCount; th++) m_renderThreads[th] = new MandelbrotRenderThread(this);
     setUsingRenderingCache(true);
 
+    QList<QAction*> actionsList;
+    actionsList.append(&m_exportImageAction);
+    actionsList.append(&m_exportConfigAction);
+    actionsList.append(&m_importConfigAction);
+    setContextualActions(actionsList);
+
     connect(this, SIGNAL(renderHintsChanged()), this, SLOT(checkRenderHints()));
+    connect(&m_exportImageAction, SIGNAL(triggered()), this, SLOT(exportImage()));
+    connect(&m_exportConfigAction, SIGNAL(triggered()), this, SLOT(exportConfig()));
+    connect(&m_importConfigAction, SIGNAL(triggered()), this, SLOT(importConfig()));
 }
 
 Mandelbrot::~Mandelbrot()
@@ -109,14 +125,14 @@ void Mandelbrot::init(const KConfigGroup &config)
 
     if (m_firstInit)
     {
-        m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(qreal(-0.244297544842035),qreal(-0.720526210252514)));
-        m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(0.0320467835367234));
+        m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(qreal(-0.25),qreal(0)));
+        m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(4));
         m_firstInit = false;
     }
 
     m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(0,0,0));
     m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(255,255,255));
-    m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,128));
+    m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,255));
     m_lock = Qt::CheckState(config.readEntry(MANDELBROT_LOCK_KEY, int(Qt::Unchecked)));
     m_quality = qBound(0, config.readEntry(MANDELBROT_QUALITY_KEY, 1), 4);
 
@@ -274,6 +290,7 @@ void Mandelbrot::loadFromCacheOrStartRendering()
 
 void Mandelbrot::startRendering(const QPointF& renderFirst)
 {
+    abortRendering(); // without that line, I had observed a thread link. investigate.
     if(m_image->size() != boundingRect().size()) {
         delete m_image;
         m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
@@ -462,6 +479,41 @@ void Mandelbrot::tileDone(const MandelbrotTile& t)
     emit update(QRectF(t.destination()).translated(boundingRect().topLeft()));
     m_tilesFinishedRendering++;
     if(m_tilesFinishedRendering >= TILING_SIZE*TILING_SIZE) m_imageIsReady = true;
+}
+
+void Mandelbrot::exportImage()
+{
+    KUrl url = KFileDialog::getSaveUrl(
+                   KUrl(),
+                   "*.png|PNG images",
+                   0,
+                   i18n("Save File"),
+                   KFileDialog::ConfirmOverwrite
+                 );
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+    m_image->save(&buffer, "PNG");
+    KIO::storedPut(ba, url, -1);
+}
+
+void Mandelbrot::exportConfig()
+{
+    KUrl url = KFileDialog::getSaveUrl(
+                   KUrl(),
+                   "*.txt|Text files",
+                   0,
+                   i18n("Save File"),
+                   KFileDialog::ConfirmOverwrite
+                 );
+    KConfig config(url.fileName());
+    KConfigGroup configgroup(&config, "Mandelbrot");
+    save(configgroup);
+    configgroup.config()->sync();
+}
+
+void Mandelbrot::importConfig()
+{
 }
 
 #include "mandelbrot.moc"
