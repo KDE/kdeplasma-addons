@@ -69,7 +69,7 @@ void Mandelbrot::updateCache()
             // only cache large images. Prevents the mini-monitor in Desktop Settings dialog from overwriting the cache
             // (if we say, as we currently do, that the image size isn't written in the key) or from leaving stale cached images
             // (if we made the image size part of the key).
-            if(width()*height()>100000) {
+            if(!isPreviewing()) {
                 //kDebug() << "caching " << k << " replacing " << m_cacheKey;
                 insertIntoCache(k, *m_image);
                 m_cacheKey = k;
@@ -205,21 +205,23 @@ void Mandelbrot::checkRenderHints()
 
 void Mandelbrot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->ignore();
     if(m_lock) return;
     m_mousePressPos = m_mouseLastMovePos = event->pos();
-    event->accept();
+    if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
 }
 
 void Mandelbrot::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->ignore();
     if(m_lock) return;
+    if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
 
-    event->accept();
     QPointF delta = event->pos() - m_mouseLastMovePos;
     m_mouseLastMovePos = event->pos();
-    
+
     if(event->buttons() & Qt::MidButton)
-    {      
+    {
         zoomView(m_mousePressPos, std::exp(MOUSE_MMB_SPEED * qreal(delta.y()) / height()));
     }
 
