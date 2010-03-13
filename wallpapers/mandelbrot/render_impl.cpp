@@ -315,6 +315,10 @@ template<typename Real> void mandelbrot_render_tile(
       }
     }
   }
+#else
+  Q_UNUSED(mandelbrot);
+  Q_UNUSED(interleaving_number);
+  Q_UNUSED(image);
 #endif
 }
 
