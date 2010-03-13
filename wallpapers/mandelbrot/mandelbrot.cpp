@@ -1,4 +1,4 @@
-// Copyright 2008-2009 by Benoît Jacob <jacob.benoit.1@gmail.com>
+// Copyright 2008-2010 by Benoît Jacob <jacob.benoit.1@gmail.com>
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -17,6 +17,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mandelbrot.h"
+#include<iostream>
 
 #include <cmath>
 #include <QPainter>
@@ -29,7 +30,7 @@ const qreal MOUSE_WHEEL_SPEED = (qreal)0.002;
 K_EXPORT_PLASMA_WALLPAPER(mandelbrot, Mandelbrot)
 
 Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
-    : Plasma::Wallpaper(parent, args), m_image(0), m_tileImagePtr(0), m_tile(this),
+    : Plasma::Wallpaper(parent, args), m_image(0), m_tiling(this),
       m_abortRenderingAsSoonAsPossible(false),
       m_imageIsReady(false),
       m_firstInit(true)
@@ -38,7 +39,7 @@ Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
     m_hasSSE2 = system_has_SSE2();
     m_renderThreadCount = QThread::idealThreadCount();
     m_renderThreads = new MandelbrotRenderThread*[m_renderThreadCount];
-    for(int th = 0; th < m_renderThreadCount; th++) m_renderThreads[th] = new MandelbrotRenderThread(this, th);
+    for(int th = 0; th < m_renderThreadCount; th++) m_renderThreads[th] = new MandelbrotRenderThread(this);
     setUsingRenderingCache(true);
 
     connect(this, SIGNAL(renderHintsChanged()), this, SLOT(checkRenderHints()));
@@ -50,7 +51,6 @@ Mandelbrot::~Mandelbrot()
     for(int th = 0; th < m_renderThreadCount; th++) delete m_renderThreads[th];
     delete[] m_renderThreads;
     delete m_image;
-    delete m_tileImagePtr;
 }
 
 void Mandelbrot::updateCache()
@@ -82,6 +82,7 @@ void Mandelbrot::updateCache()
 
 void Mandelbrot::paint(QPainter *painter, const QRectF& exposedRect)
 {
+    QMutexLocker locker(imageMutex());
     painter->drawImage(exposedRect, *m_image, exposedRect.translated(-boundingRect().topLeft()));
 }
 
@@ -278,8 +279,14 @@ void Mandelbrot::startRendering(const QPointF& renderFirst)
         m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
     }
     m_imageIsReady = false;
-    m_tile.start(renderFirst);
-    m_renderThreads[0]->start(QThread::LowPriority);
+    m_tilesFinishedRendering = 0;
+    m_tiling.start(renderFirst);
+    computeStats();
+    // abort if required
+    if(abortRenderingAsSoonAsPossible()) return;
+    for(int i = 0; i < renderThreadCount(); i++) {
+        renderThread(i)->start(QThread::LowPriority);
+    }
 }
 
 void Mandelbrot::translateView(const QPointF& _delta)
@@ -453,6 +460,8 @@ void Mandelbrot::computeStats()
 void Mandelbrot::tileDone(const MandelbrotTile& t)
 {
     emit update(QRectF(t.destination()).translated(boundingRect().topLeft()));
+    m_tilesFinishedRendering++;
+    if(m_tilesFinishedRendering >= 64) m_imageIsReady = true;
 }
 
 #include "mandelbrot.moc"

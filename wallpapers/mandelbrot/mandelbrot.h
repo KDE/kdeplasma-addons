@@ -22,6 +22,7 @@
 
 #include <QColor>
 #include <QRect>
+#include <QMutex>
 #include <plasma/wallpaper.h>
 
 #include "ui_config.h"
@@ -39,6 +40,11 @@
 class Mandelbrot : public Plasma::Wallpaper
 {
     Q_OBJECT
+
+#ifdef MANDELBROT_KEEP_KDE44_COMPATIBILITY
+        inline bool isPreviewing() { return width()*height()<100000; }
+#endif
+        
     public:
         Mandelbrot(QObject* parent, const QVariantList& args);
         ~Mandelbrot();
@@ -59,11 +65,6 @@ class Mandelbrot : public Plasma::Wallpaper
         const qreal& zoom() const { return m_zoom; }
         /** \returns the image of the wallpaper \see m_image */
         QImage *image() { return m_image; }
-        /** \returns a pointer to the image of the tile currently being rendered. The memory management is done by the first
-          * MandelbrotRenderThread, not by Mandelbrot itself. \sees setTileImagePtr, m_tileImagePtr */
-        QImage *tileImagePtr() { return m_tileImagePtr; }
-        /** sets the value of m_tileImagePtr \see tileImagePtr() */
-        void setTileImagePtr(QImage *ptr) { m_tileImagePtr = ptr; }
         /** \returns the first color of the gradient, a.k.a. the inside color \see m_color1 */
         const QColor& color1() const { return m_color1; }
         /** \returns the second color of the gradient, a.k.a. the frontier color \see m_color2 */
@@ -75,8 +76,8 @@ class Mandelbrot : public Plasma::Wallpaper
         /** \returns true is the view is locked (as set in the UI in the corresponding checkbox) \see m_lock */
         bool lock() const { return m_lock; }
 
-        /** \returns a reference to the current tile being rendered \see m_tile*/
-        MandelbrotTile& tile() { return m_tile; }
+        /** \returns a reference to the current tiling state being rendered \see m_tiling*/
+        MandelbrotTiling& tiling() { return m_tiling; }
         /** \returns the number of rendering threads \see m_renderThreadCount */
         int renderThreadCount() const { return m_renderThreadCount; }
         /** \returns a pointer to the i-th rendering thread \see m_renderThreads*/
@@ -106,6 +107,7 @@ class Mandelbrot : public Plasma::Wallpaper
         void computeStats();
         /** sets the value of  m_imageIsReady. \see m_imageIsReady */
         void setImageIsReady(bool b) { m_imageIsReady = b; }
+        QMutex *imageMutex() { return &m_imageMutex; }
 
     signals:
         /** Signals that the configuration has changed */
@@ -154,8 +156,8 @@ class Mandelbrot : public Plasma::Wallpaper
         QColor m_color1, m_color2, m_color3;
         int m_quality;
         Qt::CheckState m_lock;
-        QImage *m_image, *m_tileImagePtr;
-        MandelbrotTile m_tile;
+        QImage *m_image;
+        MandelbrotTiling m_tiling;
         QPointF m_center;
         qreal m_zoom;
         MandelbrotRenderThread **m_renderThreads;
@@ -163,6 +165,8 @@ class Mandelbrot : public Plasma::Wallpaper
         QPointF m_mousePressPos, m_mouseLastMovePos;
         int m_min_iter_divergence;
         QString m_cacheKey;
+        int m_tilesFinishedRendering;
+        QMutex m_imageMutex;
         bool m_abortRenderingAsSoonAsPossible : 1;
         bool m_hasSSE2 : 1;
         bool m_imageIsReady : 1;

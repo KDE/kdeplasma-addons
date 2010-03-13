@@ -22,6 +22,6 @@
 
 template<typename Real> void mandelbrot_render_tile(
   Mandelbrot *mandelbrot,
-  int interleaving_number,
-  QImage *image
+  QImage *image,
+  const MandelbrotTile& tile
 );

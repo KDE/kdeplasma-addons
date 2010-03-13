@@ -22,6 +22,7 @@
 
 #include <QPoint>
 #include <QRect>
+#include <QMutex>
 
 #include "global.h"
 
@@ -29,21 +30,16 @@
   * This class is completely unaware of the pixel and complex coordinates of the tile,
   * it only stores a pointer to a Mandelbrot wallpaper
   * and has a method destination() computing the QRect in pixels where the tile belongs.
-  *
-  * This class remembers, in the 8x8 checkerboard, which tiles are already rendered, and uses it in the next()
-  * method to determine which tile to render next.
   */
 class MandelbrotTile
 {
-        Mandelbrot *m_mandelbrot;
         int m_x, m_y;
-        int m_number;
-        int m_board[8][8];
-        QPoint m_renderFirst;
+        Mandelbrot *m_mandelbrot;
 
     public:
         /** Initializes the tile at given (x,y) location in the checkerboard*/
-        MandelbrotTile(Mandelbrot *m, int x=3, int y=3) : m_mandelbrot(m), m_x(x), m_y(y) {}
+        void set(Mandelbrot *mandelbrot, int x, int y) { m_mandelbrot = mandelbrot; m_x = x; m_y = y; }
+        MandelbrotTile(Mandelbrot *mandelbrot) : m_mandelbrot(mandelbrot) {}
         MandelbrotTile() {} // needed by qRegisterMetaType
         ~MandelbrotTile() {}
         /** \returns the x-coordinate of the tile in the checkerboard */
@@ -54,15 +50,31 @@ class MandelbrotTile
         QRect destination() const;
         /** \returns the complex coordinate of the top-left corner of the tile */
         QPointF affix() const;
-        /** moves the tile to the next not-yet-rendered tile to render. \returns true if there
+};
+
+Q_DECLARE_METATYPE(MandelbrotTile)
+
+/** This class remembers, in the 8x8 checkerboard, which tiles are already rendered, and uses it in the next()
+  * method to determine which tile to render next.
+  */
+class MandelbrotTiling
+{
+        Mandelbrot *m_mandelbrot;
+        int m_number;
+        int m_board[8][8];
+        QPoint m_renderFirst;
+        QMutex m_mutex;
+
+    public:
+        /** Initializes the tile at given (x,y) location in the checkerboard*/
+        MandelbrotTiling(Mandelbrot* m) : m_mandelbrot(m) {}
+        /** finds the next not-yet-rendered tile to render. \returns true if there
           * is indeed such a next tile to render; false if the rendering is complete. */
-        bool next();
-        /** Resets the checkerboard and the tile. \param renderFirst the pixel coordinate of the
+        bool next(MandelbrotTile *result);
+        /** Resets the checkerboard. \param renderFirst the pixel coordinate of the
           * pixel the user is most interested in. Tiles will be prioritized according to distance
           * from that pixel. */
         void start(const QPointF& renderFirst);
 };
-
-Q_DECLARE_METATYPE(MandelbrotTile)
 
 #endif

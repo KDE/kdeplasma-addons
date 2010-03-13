@@ -1,4 +1,4 @@
-// Copyright 2008-2009 by Benoît Jacob <jacob.benoit.1@gmail.com>
+// Copyright 2008-2010 by Benoît Jacob <jacob.benoit.1@gmail.com>
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -36,9 +36,6 @@ template<typename T> struct iter_before_test { enum { ret = 4 }; };
 template<> struct iter_before_test<double> { enum { ret = 8 }; };
 
 /** This is the main rendering function. It renders only the current tile of the Mandelbrot wallpaper.
-  * Moreover, if the Mandelbrot wallpaper is using n threads, then this function will only render every n-th scanline.
-  * The parameter interleaving_number then controls which scanline to start from, so typically different threads will use
-  * different values of interleaving_number.
   *
   * The image parameter is the image to render the tile to. The size of this image determines how many pixels we render.
   * So to get supersampled rendering, just pass a larger image here, and then scale it down to the real size using smooth
@@ -49,8 +46,8 @@ template<> struct iter_before_test<double> { enum { ret = 8 }; };
   */
 template<typename Real> void mandelbrot_render_tile(
   Mandelbrot *mandelbrot,
-  int interleaving_number,
-  QImage *image
+  QImage *image,
+  const MandelbrotTile& tile
 )
 {
 // if we're compiling the path with SSE2 explicitly enabled, since it's only used on x86 (and not even on x86-64 since it has SSE2 by
@@ -78,15 +75,11 @@ template<typename Real> void mandelbrot_render_tile(
   // must be a multiple of 4 as we'll peel the inner loop by 4
   enum { iter_before_test = iter_before_test<Real>::ret };
 
-  // the current tile of mandelbrot. Used to determine the viewpoint. We won't directly render to this tile in
-  // mandelbrot's image, we'll only render to the 'image' parameter passed to this function.
-  const MandelbrotTile& tile = mandelbrot->tile();
-
   const Real real_start = Real(tile.affix().x());
   const Real imaginary_start = Real(tile.affix().y());
 
   // the supersampling factor. It's only used to determine the resolution.
-  const Real supersampling = image->width() / mandelbrot->tile().destination().width();
+  const Real supersampling = image->width() / tile.destination().width();
 
   // the resolution, i.e. the distance in the complex plane between adjacent pixels.
   const Real resolution = Real(mandelbrot->resolution()) / supersampling;
@@ -96,8 +89,6 @@ template<typename Real> void mandelbrot_render_tile(
   Supersampling only means that 'image' is bigger and 'resolution' is smaller than they would otherwise be,
   but from now on we don't need to care.
   ***************/
-
-  int interleaving_count = mandelbrot->renderThreadCount();
 
   // how many iterations we do on each sample before declaring that it doesn't diverge
   const int max_iter = mandelbrot->maxIter();
@@ -128,9 +119,8 @@ template<typename Real> void mandelbrot_render_tile(
 
   /****** Beginning of rendering *********/
 
-  // iterate over scanlines. Notice how each thread works on a different set of scanlines -- since each thread uses
-  // a different value for interleaving_number
-  for(int y = interleaving_number; y < image->height(); y += interleaving_count)
+  // iterate over scanlines.
+  for(int y = 0; y < image->height(); y++)
   {
     // pointer to the first pixel in the scanline to render
     unsigned char *pixel = const_cast<unsigned char*>(static_cast<const QImage *>(image)->scanLine(y));
@@ -162,10 +152,15 @@ template<typename Real> void mandelbrot_render_tile(
       Packet pzr_previous, pzi_previous,
              pzr_before_diverge = Packet::Zero(), pzi_before_diverge = Packet::Zero();
 
+      /* First step, computationally the main step: we only test for divergence
+       * every iter_before_test iterations, in order to go faster.
+       */
       do
       {
         pzr_previous = pzr;
         pzi_previous = pzi;
+
+        /* perform iter_before_test iterations */
         for(int i = 0; i < iter_before_test/4; i++) // we peel the inner loop by 4
         {
           LowlevelPacket lpzr, lpzi;
@@ -193,6 +188,8 @@ template<typename Real> void mandelbrot_render_tile(
                             );
           }
         }
+
+        /* test for divergence */
         pzabs2 = pzr.cwise().square();
         pzabs2 += pzi.cwise().square();
         for(int i = 0; i < packet_size; i++) {
@@ -206,6 +203,7 @@ template<typename Real> void mandelbrot_render_tile(
             else pixel_iter[i] += iter_before_test;
           }
         }
+        
         j++;
       }
       while(j < max_iter/iter_before_test && count_not_yet_diverged);
@@ -317,21 +315,21 @@ template<typename Real> void mandelbrot_render_tile(
   }
 #else
   Q_UNUSED(mandelbrot);
-  Q_UNUSED(interleaving_number);
   Q_UNUSED(image);
+  Q_UNUSED(tile);
 #endif
 }
 
 template void mandelbrot_render_tile<float>(
   Mandelbrot *mandelbrot,
-  int interleaving_number,
-  QImage *image
+  QImage *image,
+  const MandelbrotTile& tile
 );
 
 template void mandelbrot_render_tile<double>(
   Mandelbrot *mandelbrot,
-  int interleaving_number,
-  QImage *image
+  QImage *image,
+  const MandelbrotTile& tile
 );
 
 }

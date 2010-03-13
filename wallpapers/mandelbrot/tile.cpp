@@ -16,11 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QMutexLocker>
 
 #include "mandelbrot.h"
 
-bool MandelbrotTile::next()
+bool MandelbrotTiling::next(MandelbrotTile *result)
 {
+    QMutexLocker locker(&m_mutex);
     int m_square_horiz_dist[8], m_square_vert_dist[8];
     for(int i = 0; i < 8; i++) {
         int x = m_renderFirst.x() - int((1./16. + i/8.) * m_mandelbrot->width());
@@ -30,35 +32,31 @@ bool MandelbrotTile::next()
     }
 
     int min_square_distance = INT_MAX;
+    int result_x = 0, result_y = 0;
     for(int i = 0; i < 8; i++) for(int j = 0; j < 8; j++) {
         if(m_board[i][j] == 0) {
             int square_distance = m_square_horiz_dist[i] + m_square_vert_dist[j];
             if(square_distance<min_square_distance) {
-                m_x = i;
-                m_y = j;
+                result_x = i;
+                result_y = j;
                 min_square_distance = square_distance;
             }
         }
     }
 
-    m_board[m_x][m_y] = 1;
+    result->set(m_mandelbrot, result_x, result_y);
+    m_board[result->x()][result->y()] = 1;
     m_number++;
 
     return m_number < 64;
 }
 
-void MandelbrotTile::start(const QPointF& renderFirst)
+void MandelbrotTiling::start(const QPointF& renderFirst)
 {
+    QMutexLocker locker(&m_mutex);
     m_number = 0;
     m_renderFirst = QPoint((int)renderFirst.x(), (int)renderFirst.y());
     for(int i = 0; i < 8; i++) for(int j = 0; j < 8; j++) m_board[i][j] = 0;
-    m_x = 8 * renderFirst.x() / m_mandelbrot->width();
-    m_y = 8 * renderFirst.y() / m_mandelbrot->height();
-    if(m_x < 0) m_x = 0;
-    if(m_y < 0) m_y = 0;
-    if(m_x > 7) m_x = 7;
-    if(m_y > 7) m_y = 7;
-    m_board[m_x][m_y] = 1;
 }
 
 QPointF MandelbrotTile::affix() const
