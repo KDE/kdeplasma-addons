@@ -109,14 +109,14 @@ void Mandelbrot::init(const KConfigGroup &config)
 
     if (m_firstInit)
     {
-        m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(0,0));
-        m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(2));
+        m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(qreal(-0.244297544842035),qreal(-0.720526210252514)));
+        m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(0.0320467835367234));
         m_firstInit = false;
     }
 
-    m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(255,255,255));
-    m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(64,255,255));
-    m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,255));
+    m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(0,0,0));
+    m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(255,255,255));
+    m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,128));
     m_lock = Qt::CheckState(config.readEntry(MANDELBROT_LOCK_KEY, int(Qt::Unchecked)));
     m_quality = qBound(0, config.readEntry(MANDELBROT_QUALITY_KEY, 1), 4);
 
