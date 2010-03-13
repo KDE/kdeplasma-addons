@@ -18,7 +18,6 @@
 
 #include "mandelbrot.h"
 #include "render.h"
-#include <QPainter>
 
 MandelbrotRenderThread::MandelbrotRenderThread(Mandelbrot *m) : m_mandelbrot(m)
 {
@@ -36,13 +35,14 @@ void MandelbrotRenderThread::run()
         QSize tileImageSize = destination.size() * supersampling;
         QImage tileImage(tileImageSize, MANDELBROT_QIMAGE_FORMAT);
 
-        const qreal float_epsilon = (qreal)1.192e-07;
+        // this is on purpose slightly larger than machine epsilon for float (gave artifacts near the transition point)
+        const qreal double_precision_threshold = (qreal)4.0e-07;
         const qreal rendering_resolution = m_mandelbrot->resolution() / supersampling;
 
 #ifdef HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED
         if(m_mandelbrot->hasSSE2())
         {
-            if(rendering_resolution > float_epsilon) {
+            if(rendering_resolution > double_precision_threshold) {
                 with_SSE2_explicitly_enabled_if_x86::mandelbrot_render_tile<float>(m_mandelbrot, &tileImage, tile);
             }
             else {
@@ -52,7 +52,7 @@ void MandelbrotRenderThread::run()
         else
 #endif
         {
-            if(rendering_resolution > float_epsilon) {
+            if(rendering_resolution > double_precision_threshold) {
                 with_arch_defaults::mandelbrot_render_tile<float>(m_mandelbrot, &tileImage, tile);
             }
             else {

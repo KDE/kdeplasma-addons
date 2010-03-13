@@ -19,7 +19,7 @@
 #ifndef GLOBAL_HEADER
 #define GLOBAL_HEADER
 
-#define TILING_SIZE 8
+#define TILING_SIZE 20
 
 #define MAX_PACKET_SIZE 4
 

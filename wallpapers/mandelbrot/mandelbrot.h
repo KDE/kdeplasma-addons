@@ -23,6 +23,7 @@
 #include <QColor>
 #include <QRect>
 #include <QMutex>
+#include <QPainter>
 #include <plasma/wallpaper.h>
 
 #include "ui_config.h"
