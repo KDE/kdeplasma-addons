@@ -197,16 +197,18 @@ void Mandelbrot::checkRenderHints()
 
 void Mandelbrot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->ignore();
     if(m_lock) return;
     m_mousePressPos = m_mouseLastMovePos = event->pos();
-    event->accept();
+    if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
 }
 
 void Mandelbrot::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    event->ignore();
     if(m_lock) return;
+    if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
 
-    event->accept();
     QPointF delta = event->pos() - m_mouseLastMovePos;
     m_mouseLastMovePos = event->pos();
     
