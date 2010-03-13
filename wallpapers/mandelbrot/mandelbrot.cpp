@@ -494,6 +494,7 @@ void Mandelbrot::exportImage()
     QBuffer buffer(&ba);
     buffer.open(QIODevice::WriteOnly);
     m_image->save(&buffer, "PNG");
+    KIO::file_delete(url);
     KIO::storedPut(ba, url, -1);
 }
 
