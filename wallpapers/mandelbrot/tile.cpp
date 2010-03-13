@@ -23,17 +23,17 @@
 bool MandelbrotTiling::next(MandelbrotTile *result)
 {
     QMutexLocker locker(&m_mutex);
-    int m_square_horiz_dist[8], m_square_vert_dist[8];
-    for(int i = 0; i < 8; i++) {
-        int x = m_renderFirst.x() - int((1./16. + i/8.) * m_mandelbrot->width());
+    int m_square_horiz_dist[TILING_SIZE], m_square_vert_dist[TILING_SIZE];
+    for(int i = 0; i < TILING_SIZE; i++) {
+        int x = m_renderFirst.x() - int((1/(2*double(TILING_SIZE)) + i/double(TILING_SIZE)) * m_mandelbrot->width());
         m_square_horiz_dist[i] = x*x;
-        int y = m_renderFirst.y() - int((1./16. + i/8.) * m_mandelbrot->height());
+        int y = m_renderFirst.y() - int((1/(2*double(TILING_SIZE)) + i/double(TILING_SIZE)) * m_mandelbrot->height());
         m_square_vert_dist[i] = y*y;
     }
 
     int min_square_distance = INT_MAX;
     int result_x = 0, result_y = 0;
-    for(int i = 0; i < 8; i++) for(int j = 0; j < 8; j++) {
+    for(int i = 0; i < TILING_SIZE; i++) for(int j = 0; j < TILING_SIZE; j++) {
         if(m_board[i][j] == 0) {
             int square_distance = m_square_horiz_dist[i] + m_square_vert_dist[j];
             if(square_distance<min_square_distance) {
@@ -48,29 +48,28 @@ bool MandelbrotTiling::next(MandelbrotTile *result)
     m_board[result->x()][result->y()] = 1;
     m_number++;
 
-    return m_number < 64;
+    return m_number <= TILING_SIZE*TILING_SIZE;
 }
 
 void MandelbrotTiling::start(const QPointF& renderFirst)
 {
-    QMutexLocker locker(&m_mutex);
     m_number = 0;
     m_renderFirst = QPoint((int)renderFirst.x(), (int)renderFirst.y());
-    for(int i = 0; i < 8; i++) for(int j = 0; j < 8; j++) m_board[i][j] = 0;
+    for(int i = 0; i < TILING_SIZE; i++) for(int j = 0; j < TILING_SIZE; j++) m_board[i][j] = 0;
 }
 
 QPointF MandelbrotTile::affix() const
 {
-    return QPointF(m_mandelbrot->center().x() + (-1+qreal(m_x)/4) * m_mandelbrot->zoom(),
-                   m_mandelbrot->center().y() + (-1+qreal(m_y)/4) * m_mandelbrot->zoom()
+    return QPointF(m_mandelbrot->center().x() + (-1+2*qreal(m_x)/TILING_SIZE) * m_mandelbrot->zoom(),
+                   m_mandelbrot->center().y() + (-1+2*qreal(m_y)/TILING_SIZE) * m_mandelbrot->zoom()
                                                 * m_mandelbrot->height() / m_mandelbrot->width());
 }
 
 QRect MandelbrotTile::destination() const
 {
-    int left = m_x*m_mandelbrot->width()/8;
-    int top = m_y*m_mandelbrot->height()/8;
-    int next_left = (m_x+1)*m_mandelbrot->width()/8;
-    int next_top = (m_y+1)*m_mandelbrot->height()/8;
+    int left = m_x*m_mandelbrot->width()/TILING_SIZE;
+    int top = m_y*m_mandelbrot->height()/TILING_SIZE;
+    int next_left = (m_x+1)*m_mandelbrot->width()/TILING_SIZE;
+    int next_top = (m_y+1)*m_mandelbrot->height()/TILING_SIZE;
     return QRect(left, top, next_left-left, next_top-top);
 }

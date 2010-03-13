@@ -461,7 +461,7 @@ void Mandelbrot::tileDone(const MandelbrotTile& t)
 {
     emit update(QRectF(t.destination()).translated(boundingRect().topLeft()));
     m_tilesFinishedRendering++;
-    if(m_tilesFinishedRendering >= 64) m_imageIsReady = true;
+    if(m_tilesFinishedRendering >= TILING_SIZE*TILING_SIZE) m_imageIsReady = true;
 }
 
 #include "mandelbrot.moc"

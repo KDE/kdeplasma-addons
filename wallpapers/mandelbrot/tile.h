@@ -61,7 +61,7 @@ class MandelbrotTiling
 {
         Mandelbrot *m_mandelbrot;
         int m_number;
-        int m_board[8][8];
+        int m_board[TILING_SIZE][TILING_SIZE];
         QPoint m_renderFirst;
         QMutex m_mutex;
 

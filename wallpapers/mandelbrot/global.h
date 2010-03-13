@@ -19,6 +19,8 @@
 #ifndef GLOBAL_HEADER
 #define GLOBAL_HEADER
 
+#define TILING_SIZE 8
+
 #define MAX_PACKET_SIZE 4
 
 #if (defined(__i386__) || defined(_M_IX86)) && !(defined(__x86_64__) || defined(_M_X64))
