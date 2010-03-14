@@ -261,11 +261,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabSearch">
-      <attribute name="title">
-       <string>&amp;Search</string>
-      </attribute>
-     </widget>
      <widget class="QWidget" name="tabUsageStatistics">
       <attribute name="title">
        <string>&amp;Usage Statistics</string>

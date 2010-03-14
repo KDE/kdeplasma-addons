@@ -387,7 +387,11 @@ void LancelotWindow::resizeWindow()
     }
     resize(newSize);
     m_root->group()->backgroundSvg()->resizeFrame(newSize);
-    setMask(m_root->group()->backgroundSvg()->mask());
+
+    const QRegion & mask = m_root->group()->backgroundSvg()->mask();
+    // setMask(mask);
+    Plasma::WindowEffects::enableBlurBehind(winId(), true, mask);
+    Plasma::WindowEffects::overrideShadow(winId(), true);
 }
 
 QStringList LancelotWindow::sectionIDs()
@@ -516,26 +520,26 @@ void LancelotWindow::setupModels()
     // m_models["Contacts"]          = new Lancelot::Models::ContactsKopete();
     // m_models["Messages"]          = new Lancelot::Models::MessagesKmail();
 
-    QStringList allowedRunners = m_mainConfig.readEntry("allowedRunners", QStringList());
-    if (allowedRunners.isEmpty()) {
-        allowedRunners
-            << "places"
-            << "windows"
-            << "kill"
-            << "solid"
-            << "services"
-            << "PowerDevil"
-            << "browserhistory"
-            << "shell"
-            << "locations"
-            << "konsolesessions"
-            << "recentdocuments"
-            << "calculator"
-            << "bookmarks"
-            << "unitconverter";
-    }
+    // QStringList allowedRunners = m_mainConfig.readEntry("allowedRunners", QStringList());
+    // if (allowedRunners.isEmpty()) {
+    //     allowedRunners
+    //         << "places"
+    //         << "windows"
+    //         << "kill"
+    //         << "solid"
+    //         << "services"
+    //         << "PowerDevil"
+    //         << "browserhistory"
+    //         << "shell"
+    //         << "locations"
+    //         << "konsolesessions"
+    //         << "recentdocuments"
+    //         << "calculator"
+    //         << "bookmarks"
+    //         << "unitconverter";
+    // }
 
-    m_models["Runner"]            = new Lancelot::Models::Runner(allowedRunners);
+    m_models["Runner"]            = new Lancelot::Models::Runner(); //allowedRunners);
 
     // Groups:
 
@@ -677,7 +681,10 @@ void LancelotWindow::mouseMoveEvent(QMouseEvent * e)
 
         setGeometry(QRect(newWindowPosition, newSize));
 
-        setMask(m_root->group()->backgroundSvg()->mask());
+        const QRegion & mask = m_root->group()->backgroundSvg()->mask();
+        // setMask(mask);
+        Plasma::WindowEffects::enableBlurBehind(winId(), true, mask);
+        Plasma::WindowEffects::overrideShadow(winId(), true);
     }
     QGraphicsView::mouseMoveEvent(e);
 }
@@ -973,6 +980,9 @@ void LancelotWindow::loadConfig()
 
     // Keep open
     Lancelot::Models::ApplicationConnector::self()->setAutohideEnabled(!m_configUi.checkKeepOpen->isChecked());
+
+    // Runners
+    ((Lancelot::Models::Runner *) m_models["Runner"])->reloadConfiguration();
 }
 
 void LancelotWindow::lancelotContext()

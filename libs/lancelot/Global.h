@@ -38,6 +38,7 @@ namespace Lancelot
 {
 
 class Global;
+class GroupPrivate;
 
 /**
  * Represents a group of object
@@ -158,8 +159,7 @@ public:
     void notifyUpdated() {}
 
 private:
-    class Private;
-    Private * const d;
+    GroupPrivate * const d;
 
     Group(QString name);
     virtual ~Group();

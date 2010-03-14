@@ -133,6 +133,8 @@ void LancelotConfig::loadConfig()
 
     checkKeepOpen->setChecked(m_mainConfig.readEntry("enableKeepOpen", false));
     setEnableUsageStatistics(m_mainConfig.readEntry("enableUsageStatistics", true));
+
+    m_searchPlugins->load();
 }
 
 void LancelotConfig::saveConfig()
@@ -148,6 +150,8 @@ void LancelotConfig::saveConfig()
 
     m_mainConfig.writeEntry("enableUsageStatistics", enableUsageStatistics());
     m_mainConfig.writeEntry("enableKeepOpen", checkKeepOpen->isChecked());
+
+    m_searchPlugins->save();
 
     m_mainConfig.sync();
 }

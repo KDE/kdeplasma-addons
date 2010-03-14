@@ -39,7 +39,7 @@ Group::ColorScheme::ColorScheme()
 {
 }
 
-Group::Private::Private()
+GroupPrivate::GroupPrivate()
     : name(QString()), backgroundSvg(NULL),
       ownsBackgroundSvg(false), loaded(false)
        // TODO : Add caching?
@@ -48,7 +48,7 @@ Group::Private::Private()
 }
 
 
-Group::Private::~Private()
+GroupPrivate::~GroupPrivate()
 {
     if (ownsBackgroundSvg) {
         delete backgroundSvg;
@@ -58,14 +58,14 @@ Group::Private::~Private()
     //delete d->cachedBackgroundDisabled;
 }
 
-void Group::Private::setObjectProperty(QObject * object,
+void GroupPrivate::setObjectProperty(QObject * object,
         const QString & property, const QVariant & value)
 {
     object->setProperty(property.toAscii(), value);
 }
 
 // clearing all info
-void Group::Private::reset()
+void GroupPrivate::reset()
 {
     loaded = false;
 
@@ -92,7 +92,7 @@ void Group::Private::reset()
 
 }
 
-void Group::Private::copyFrom(Group::Private * d)
+void GroupPrivate::copyFrom(GroupPrivate * d)
 {
     if (this == d) return;
 
@@ -122,13 +122,13 @@ void Group::Private::copyFrom(Group::Private * d)
     ownsBackgroundSvg = false;
 }
 
-KConfigGroup Group::Private::confGroupTheme()
+KConfigGroup GroupPrivate::confGroupTheme()
 {
     return KConfigGroup(Global::self()->theme(), "Group-" + name);
 }
 
 Group::Group(QString name)
-    : d(new Private())
+    : d(new GroupPrivate())
 {
     d->name = name;
 }

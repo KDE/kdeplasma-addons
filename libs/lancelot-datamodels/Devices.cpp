@@ -105,7 +105,7 @@ void Devices::Private::addDevice(const Solid::Device & device)
 {
     const Solid::StorageAccess * access = device.as < Solid::StorageAccess > ();
 
-    if (!access) return;
+    if (!access || udis.contains(device.udi())) return;
 
     // Testing if it is removable
     if (filter != All) {
@@ -304,9 +304,7 @@ void Devices::load()
     // Loading items
     setEmitInhibited(true);
     foreach(const Solid::Device & device, deviceList) {
-        if (!d->udis.contains(device.udi())) {
-            d->addDevice(device);
-        }
+        d->addDevice(device);
     }
     setEmitInhibited(false);
     emit updated();

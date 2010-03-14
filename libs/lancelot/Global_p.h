@@ -33,13 +33,13 @@ namespace Lancelot
 {
 
 // Group
-class Group::Private {
+class GroupPrivate {
 public:
-    Private();
-    ~Private();
+    GroupPrivate();
+    ~GroupPrivate();
     void setObjectProperty(QObject * object,
             const QString & property, const QVariant & value);
-    void copyFrom(Group::Private * d);
+    void copyFrom(GroupPrivate * d);
     void reset();
     KConfigGroup confGroupTheme();
 
@@ -49,8 +49,8 @@ public:
 
     QSet < QObject * > objects;
 
-    ColorScheme foregroundColor;
-    ColorScheme backgroundColor;
+    Group::ColorScheme foregroundColor;
+    Group::ColorScheme backgroundColor;
     Plasma::FrameSvg * backgroundSvg;
 
     bool ownsBackgroundSvg : 1;

@@ -90,6 +90,11 @@ Runner::~Runner()
 {
 }
 
+void Runner::reloadConfiguration()
+{
+    d->runnerManager->reloadConfiguration();
+}
+
 QString Runner::searchString() const
 {
     return d->searchString;
