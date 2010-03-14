@@ -529,6 +529,7 @@ void Mandelbrot::importConfig()
                      0,
                      QString()
                    );
+    if(file.isEmpty()) return;
     KConfig config(file, KConfig::SimpleConfig);
     KConfigGroup configgroup(&config, "Mandelbrot");
     readConfig(configgroup, ReadViewpoint); // reading colors and quality level is implicit
