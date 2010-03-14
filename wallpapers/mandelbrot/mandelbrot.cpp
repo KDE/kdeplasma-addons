@@ -17,7 +17,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mandelbrot.h"
-#include<iostream>
+#include <iostream>
 
 #include <cmath>
 #include <QGraphicsSceneMouseEvent>
@@ -119,22 +119,25 @@ void Mandelbrot::save(KConfigGroup &config)
     updateCache();
 }
 
-void Mandelbrot::init(const KConfigGroup &config)
+void Mandelbrot::readConfig(const KConfigGroup &config, int options)
 {
     QString old_key = key();
 
-    if (m_firstInit)
+    if(options & ReadViewpoint)
     {
         m_center = config.readEntry(MANDELBROT_CENTER_KEY, QPointF(qreal(-0.25),qreal(0)));
         m_zoom = config.readEntry(MANDELBROT_ZOOM_KEY, qreal(4));
-        m_firstInit = false;
     }
 
     m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(0,0,0));
     m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(255,255,255));
     m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,255));
-    m_lock = Qt::CheckState(config.readEntry(MANDELBROT_LOCK_KEY, int(Qt::Unchecked)));
     m_quality = qBound(0, config.readEntry(MANDELBROT_QUALITY_KEY, 1), 4);
+
+    if(options & ReadLockStatus)
+    {
+      m_lock = Qt::CheckState(config.readEntry(MANDELBROT_LOCK_KEY, int(Qt::Unchecked)));
+    }
 
     if(key() != old_key)
     {
@@ -149,6 +152,12 @@ void Mandelbrot::init(const KConfigGroup &config)
 
         loadFromCacheOrStartRendering();
     }
+}
+
+void Mandelbrot::init(const KConfigGroup &config)
+{
+    readConfig(config, (m_firstInit?ReadViewpoint:0) | ReadLockStatus);
+    m_firstInit = false;
 }
 
 QWidget* Mandelbrot::createConfigurationInterface(QWidget* parent)
@@ -483,11 +492,11 @@ void Mandelbrot::tileDone(const MandelbrotTile& t)
 
 void Mandelbrot::exportImage()
 {
-    KUrl url = KFileDialog::getSaveUrl(
+    KUrl url = KFileDialog::getSaveFileName(
                    KUrl(),
                    "*.png|PNG images",
                    0,
-                   i18n("Save File"),
+                   QString(),
                    KFileDialog::ConfirmOverwrite
                  );
     QByteArray ba;
@@ -500,14 +509,14 @@ void Mandelbrot::exportImage()
 
 void Mandelbrot::exportConfig()
 {
-    KUrl url = KFileDialog::getSaveUrl(
-                   KUrl(),
-                   "*.txt|Text files",
-                   0,
-                   i18n("Save File"),
-                   KFileDialog::ConfirmOverwrite
-                 );
-    KConfig config(url.fileName());
+    QString file = KFileDialog::getSaveFileName(
+                     KUrl(),
+                     "*.txt|Text files",
+                     0,
+                     QString(),
+                     KFileDialog::ConfirmOverwrite
+                   );
+    KConfig config(file, KConfig::SimpleConfig);
     KConfigGroup configgroup(&config, "Mandelbrot");
     save(configgroup);
     configgroup.config()->sync();
@@ -515,6 +524,15 @@ void Mandelbrot::exportConfig()
 
 void Mandelbrot::importConfig()
 {
-}
+    QString file = KFileDialog::getOpenFileName(
+                     KUrl(),
+                     "*.txt|Text files",
+                     0,
+                     QString()
+                   );
+    KConfig config(file, KConfig::SimpleConfig);
+    KConfigGroup configgroup(&config, "Mandelbrot");
+    readConfig(configgroup, ReadViewpoint); // reading colors and quality level is implicit
+}                                           // but we dont want to read the lock status
 
 #include "mandelbrot.moc"

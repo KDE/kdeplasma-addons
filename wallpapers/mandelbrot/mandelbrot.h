@@ -148,6 +148,9 @@ class Mandelbrot : public Plasma::Wallpaper
         /** removes the current cache entry if it is obsolete, and inserts the new image into cache if it is ready */
         void updateCache();
 
+        enum { ReadViewpoint=0x1, ReadLockStatus=0x4 };
+        void readConfig(const KConfigGroup &config, int options);
+
     protected slots:
         void setColor1(const QColor& color1);
         void setColor2(const QColor& color2);

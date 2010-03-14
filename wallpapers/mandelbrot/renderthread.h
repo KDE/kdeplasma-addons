@@ -28,7 +28,6 @@ class MandelbrotRenderThread : public QThread
     Q_OBJECT
     friend class Mandelbrot;
     Mandelbrot * const m_mandelbrot;
-    long long total_iter;
 
   public:
     MandelbrotRenderThread(Mandelbrot *m);
