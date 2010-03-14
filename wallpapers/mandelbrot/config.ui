@@ -268,7 +268,7 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Mouse navigation: use the mouse wheel or drag with the middle button to zoom, and drag with the left button to move around.</string>
+      <string>Use the mouse to navigate through the Mandelbrot set. Note: certain activities, such as Folder View, don't allow that.</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>

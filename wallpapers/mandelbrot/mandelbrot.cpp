@@ -63,6 +63,8 @@ Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
 Mandelbrot::~Mandelbrot()
 {
     abortRendering();
+    // the user may have moved the viewpoint, so we must save the config on exit (and that takes care of the cache, too)
+    emit(configNeedsSaving());
     for(int th = 0; th < m_renderThreadCount; th++) delete m_renderThreads[th];
     delete[] m_renderThreads;
     delete m_image;
@@ -70,6 +72,9 @@ Mandelbrot::~Mandelbrot()
 
 void Mandelbrot::updateCache()
 {
+    // Don't let the mini-previewer in Desktop Settings affect the cache.
+    if(isPreviewing()) return;
+    
     QString k = key();
 
     // if the view parameters changed since we loaded from cache, or if we couldn't load from cache
@@ -81,15 +86,9 @@ void Mandelbrot::updateCache()
 
         // if the image is ready to be cached, cache it
         if(m_imageIsReady) {
-            // only cache large images. Prevents the mini-monitor in Desktop Settings dialog from overwriting the cache
-            // (if we say, as we currently do, that the image size isn't written in the key) or from leaving stale cached images
-            // (if we made the image size part of the key).
-            if(!isPreviewing()) {
-                //kDebug() << "caching " << k << " replacing " << m_cacheKey;
-                insertIntoCache(k, *m_image);
-                m_cacheKey = k;
-            }
-            //else kDebug() << "small image, don't cache";
+            //kDebug() << "caching " << k << " replacing " << m_cacheKey;
+            insertIntoCache(k, *m_image);
+            m_cacheKey = k;
         }
     }
     //else kDebug() << k << " is already cached";
