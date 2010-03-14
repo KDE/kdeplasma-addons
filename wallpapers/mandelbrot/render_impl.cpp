@@ -324,15 +324,15 @@ template<typename Real> void mandelbrot_render_tile(
 
   mandelbrot_render_tile_impl<Real> renderer(mandelbrot, image, tile);
 
-  // first render the border to check if the tile is probably entirely inside the interior of the Mandelbrot set
-  for(int y = 1; y < image->height()-1; y++)
+  // first render a part of the border to check if the tile is probably entirely inside the interior of the Mandelbrot set
+  for(int y = 1; y < image->height()-1; y+=4)  // render every 4th pixel on the border
   {
     renderer.renderPacket(0,y);
     renderer.renderPacket(image->width() - packet_size, y);
     // abort if required
     if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
   }
-  for(int x = 0; x < image->width(); x+= packet_size)
+  for(int x = 0; x < image->width(); x+= 4*packet_size)
   {
     renderer.renderPacket(x,0);
     renderer.renderPacket(x,image->height()-1);
@@ -340,17 +340,16 @@ template<typename Real> void mandelbrot_render_tile(
     if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
   }
 
-  // now exit if the tile looks like it's entirely inside the interior
+  // now, if the tile looks like it's entirely inside the interior, just assume that's the case
   if(!(renderer.found_exterior_point)) {
     QPainter(image).fillRect(image->rect(), mandelbrot->color1());
     return;
   }
   
-  // iterate over scanlines.
-  for(int y = 1; y < image->height()-1; y++)
+  // ok now do the actual rendering. not much point trying to reuse the part of the border we've already rendered.
+  for(int y = 0; y < image->height(); y++)
   {
-    // iterate over pixels in the current scanline, by steps of 'packet_size'.
-    for(int x = packet_size; x < image->width()-packet_size; x += packet_size)
+    for(int x = 0; x < image->width(); x += packet_size)
     {
       renderer.renderPacket(x,y);
       // abort if required
