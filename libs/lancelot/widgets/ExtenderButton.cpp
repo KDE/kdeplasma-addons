@@ -264,6 +264,9 @@ void ExtenderButton::setGroup(Group * g)
 
 ExtenderButton::~ExtenderButton()
 {
+    if (ExtenderButton::Private::m_extender->parentItem() == this) {
+        ExtenderButton::Private::m_extender->setParentItem(0);
+    }
     delete d;
 }
 
