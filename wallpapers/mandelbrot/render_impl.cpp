@@ -339,6 +339,9 @@ template<typename Real> void mandelbrot_render_tile(
     // abort if required
     if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
   }
+  // render the bottom-right packet: due to our rendering only every 4-th packet on the border, we could be
+  // missing this corner of the tile.
+  renderer.renderPacket(image->width()-packet_size,image->height()-1);
 
   // now, if the tile looks like it's entirely inside the interior, just assume that's the case
   if(!(renderer.found_exterior_point)) {
@@ -346,7 +349,8 @@ template<typename Real> void mandelbrot_render_tile(
     return;
   }
   
-  // ok now do the actual rendering. not much point trying to reuse the part of the border we've already rendered.
+  // ok now do the actual rendering. not much point trying to reuse the part of the border we've already rendered,
+  // it's few pixels and it would take some nontrivial code.
   for(int y = 0; y < image->height(); y++)
   {
     for(int x = 0; x < image->width(); x += packet_size)
