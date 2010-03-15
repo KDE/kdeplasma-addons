@@ -104,8 +104,7 @@ void mandelbrot_render_tile_impl<Real>::init()
   log_max_iter = std::log(float(max_iter));
   if(mandelbrot->min_iter_divergence() != 0 && mandelbrot->min_iter_divergence() != max_iter)
   {
-    tmin = std::log(float(mandelbrot->min_iter_divergence()) * 0.7f) / log_max_iter;
-    if(tmin < 0.f) tmin = 0.f;
+    tmin = std::log(float(mandelbrot->min_iter_divergence())) / log_max_iter;
   }
   else tmin = 0.f;
 
