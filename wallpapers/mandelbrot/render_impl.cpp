@@ -242,9 +242,15 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
 
   for(int i = 0; i < packet_size; i++)
   {
-    Real log_log_escape_modulus = std::log(std::log(square_escape_modulus[i]));
+    Real log_log_escape_modulus = Real(0);
+    if(square_escape_modulus[i] > Real(1))
+    {
+      Real log_escape_modulus = std::log(square_escape_modulus[i]);
+      if(log_escape_modulus > Real(1))
+        log_log_escape_modulus = std::log(log_escape_modulus);
+    }
     Real normalized_iter_count = pixel_iter[i] + (log_log_square_bailout_radius - log_log_escape_modulus) / log_of_2;
-    Real log_normalized_iter_count = std::log(Real(normalized_iter_count));
+    Real log_normalized_iter_count = (normalized_iter_count > Real(1)) ? std::log(normalized_iter_count) : Real(0);
     Real t = log_normalized_iter_count / log_max_iter;
     
     // Now, remember that we did a little statistical analysis on some samples
@@ -255,8 +261,7 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
     // will always be black (at least if our statistical analysis went well).
     // In other words, we are trying to get optimal contrast. This is important as otherwise there could be
     // almost no contrast at all and an interesting viewpoint could give an almost blank image.
-    if(t <= tmin) t = 0.f;
-    else t = (t-tmin)/(1.f-tmin);
+    t = (t-tmin)/(1.f-tmin);
     t = CLAMP(t, Real(0), Real(1));
 
     float threshold1 = 0.16f;
