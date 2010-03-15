@@ -22,7 +22,6 @@
 
 #include <QColor>
 #include <QRect>
-#include <QMutex>
 #include <QPainter>
 #include <plasma/wallpaper.h>
 
@@ -95,8 +94,6 @@ class Mandelbrot : public Plasma::Wallpaper
         bool hasSSE2() const { return m_hasSSE2; }
         /** \returns true if rendering should be aborted as soon as possible */
         bool abortRenderingAsSoonAsPossible() const { return m_abortRenderingAsSoonAsPossible; }
-        /** \returns the gamma correction factor that should be used during rendering */
-        float gamma() const;
         /** \returns the maximum number of iterations to try before declaring non-divergence */
         int maxIter() const;
         /** \returns 1 for no supersampling, 2 for 4x (2x2) supersampling, 4 for 16x (4x4) supersampling, etc... */
@@ -108,7 +105,6 @@ class Mandelbrot : public Plasma::Wallpaper
         void computeStats();
         /** sets the value of  m_imageIsReady. \see m_imageIsReady */
         void setImageIsReady(bool b) { m_imageIsReady = b; }
-        QMutex *imageMutex() { return &m_imageMutex; }
 
     signals:
         /** Signals that the configuration has changed */
@@ -148,7 +144,7 @@ class Mandelbrot : public Plasma::Wallpaper
         /** removes the current cache entry if it is obsolete, and inserts the new image into cache if it is ready */
         void updateCache();
 
-        enum { ReadViewpoint=0x1, ReadLockStatus=0x4 };
+        enum { ReadViewpoint=0x1, ReadLockStatus=0x2 };
         void readConfig(const KConfigGroup &config, int options);
 
     protected slots:
@@ -174,7 +170,6 @@ class Mandelbrot : public Plasma::Wallpaper
         int m_min_iter_divergence;
         QString m_cacheKey;
         int m_tilesFinishedRendering;
-        QMutex m_imageMutex;
         QAction m_exportImageAction;
         QAction m_exportConfigAction;
         QAction m_importConfigAction;

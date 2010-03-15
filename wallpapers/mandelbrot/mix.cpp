@@ -45,3 +45,13 @@ Color3 mix(const Color3& a_rgb, const Color3& a_hsv, const Color3& b_rgb, const 
     return result_rgb;
   }
 }
+
+unsigned char qreal_to_uchar_color_channel(qreal t)
+{
+  qreal t_scaled = qreal(255)*t;
+  qreal floor_t_scaled = std::floor(t_scaled);
+  qreal probability_to_add_one = t_scaled - floor_t_scaled;
+  qreal result = floor_t_scaled + (std::rand() < int(qreal(RAND_MAX)*probability_to_add_one) ? qreal(1) : qreal(0));
+  int result_int_clamped = (int) CLAMP(result, qreal(0), qreal(255));
+  return (unsigned char) result_int_clamped;
+}

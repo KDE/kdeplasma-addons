@@ -60,25 +60,23 @@ struct mandelbrot_render_tile_impl
   enum { iter_before_test = iter_before_test<Real>::ret };
 
   Real resolution;
+  int supersampling;
   int max_iter;
   float log_max_iter;
   float tmin;
-  float gamma;
-  float tshift_to_gamma;
-  float tshift;
-  float tshift_plus_1_to_gamma;
   float log_of_2;
   float log_of_2log2;
+  Real square_bailout_radius, log_log_square_bailout_radius;
   Color3 rgb1, rgb2, rgb3, hsv1, hsv2, hsv3;
   Mandelbrot *mandelbrot;
   QImage *image;
   const MandelbrotTile& tile;
   bool found_exterior_point;
 
-  mandelbrot_render_tile_impl(Mandelbrot *m, QImage *i, const MandelbrotTile& t)
-   : mandelbrot(m), image(i), tile(t) { init(); }
+  mandelbrot_render_tile_impl(Mandelbrot *m, const MandelbrotTile& t)
+   : mandelbrot(m), tile(t) { init(); }
   void init();
-  void renderPacket(int x, int y);
+  void computePacket(int x, int y, Color3 *pixels);
 };
 
 template<typename Real>
@@ -87,8 +85,8 @@ void mandelbrot_render_tile_impl<Real>::init()
   // remember if we already rendered some exterior point. will be useful for the check for fully interior tiles
   found_exterior_point = false;
   
-  // the supersampling factor. It's only used to determine the resolution.
-  const Real supersampling = image->width() / tile.destination().width();
+  // the supersampling factor.
+  supersampling = mandelbrot->supersampling();
 
   // the resolution, i.e. the distance in the complex plane between adjacent pixels.
   resolution = Real(mandelbrot->resolution()) / supersampling;
@@ -106,14 +104,14 @@ void mandelbrot_render_tile_impl<Real>::init()
   log_max_iter = std::log(float(max_iter));
   if(mandelbrot->min_iter_divergence() != 0 && mandelbrot->min_iter_divergence() != max_iter)
   {
-    tmin = std::log(Real(mandelbrot->min_iter_divergence())) / log_max_iter;
+    tmin = std::log(float(mandelbrot->min_iter_divergence()) * 0.7f) / log_max_iter;
+    if(tmin < 0.f) tmin = 0.f;
   }
   else tmin = 0.f;
-  gamma = mandelbrot->gamma();
-  tshift_to_gamma = 0.3f;
-  tshift = std::pow(tshift_to_gamma, 1.f/gamma);
-  tshift_plus_1_to_gamma = std::pow(tshift+1.f, gamma);
 
+  square_bailout_radius = 20; // value found in papers on continuous escape time formulas, changing it can degrade the smoothness.
+  log_log_square_bailout_radius = std::log(std::log(square_bailout_radius));
+  
   log_of_2 = std::log(2.f);
   log_of_2log2 = std::log(2.f*log_of_2);
 
@@ -126,13 +124,8 @@ void mandelbrot_render_tile_impl<Real>::init()
 }
 
 template<typename Real>
-void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
+void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixels)
 {
-  const Real square_bailout_radius = 20; // value found in papers on continuous escape time formulas, changing it can degrade the smoothness.
-  
-  // pointer to the first pixel to render
-  unsigned char *pixel = const_cast<unsigned char*>(static_cast<const QImage *>(image)->scanLine(y)) + 4*x;
-
   // for each pixel, we're going to do the iteration z := z^2 + c where z and c are complex numbers,
   // starting with z = c = complex coord of the pixel. pzr and pzi denote the real and imaginary parts of z.
   // pcr and pci denote the real and imaginary parts of c.
@@ -248,13 +241,10 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
 
   /* Third step: compute pixel colors. */
 
-  int pixels_to_write = std::min(int(packet_size), image->width()-x);
-
-  for(int i = 0; i < pixels_to_write; i++)
+  for(int i = 0; i < packet_size; i++)
   {
     Real log_log_escape_modulus = std::log(std::log(square_escape_modulus[i]));
-    Real log_log_bailout = std::log(std::log(square_bailout_radius));
-    Real normalized_iter_count = pixel_iter[i] + (log_log_bailout - log_log_escape_modulus) / log_of_2;
+    Real normalized_iter_count = pixel_iter[i] + (log_log_square_bailout_radius - log_log_escape_modulus) / log_of_2;
     Real log_normalized_iter_count = std::log(Real(normalized_iter_count));
     Real t = log_normalized_iter_count / log_max_iter;
     
@@ -270,33 +260,18 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
     else t = (t-tmin)/(1.f-tmin);
     t = CLAMP(t, Real(0), Real(1));
 
-    Real t_plus_tshift = t+tshift;
-    Real t_plus_tshift_to_gamma = std::pow(t_plus_tshift, gamma);
-
-    // Another homemade formula. It seems that some amount of gamma correction is beneficial.
-    // However it must be avoided for t near zero as x^gamma is non differentiable at x=0.
-    // So we just shift t a little bit to avoid 0.
-    t = (t_plus_tshift_to_gamma-tshift_to_gamma) / (tshift_plus_1_to_gamma - tshift_to_gamma);
-
-    Color3 rgb;
-    if(t < 0.5f) {
-      rgb = 2*t*rgb3;
+    float threshold1 = 0.16f;
+    float threshold2 = 0.4f;
+    if(t < threshold1) {
+      pixels[i] = (t/threshold1)*rgb3;
     }
-    else if(t < 0.75f) {
-      rgb = mix(rgb2, hsv2, rgb3, hsv3, 4*t - 2.f);
+    else if(t < threshold2) {
+      pixels[i] = mix(rgb2, hsv2, rgb3, hsv3, (t - threshold1) / (threshold2 - threshold1));
     }
     else {
-      rgb = mix(rgb1, hsv1, rgb2, hsv2,  4*t - 3.f);
+      pixels[i] = mix(rgb1, hsv1, rgb2, hsv2,  (t - threshold2) / (1.f - threshold2));
     }
-
-    pixel[0] = (unsigned char)(255*rgb[2]);
-    pixel[1] = (unsigned char)(255*rgb[1]);
-    pixel[2] = (unsigned char)(255*rgb[0]);
-    pixel[3] = 255;
-    pixel+=4;
   }
-
-
 }
 
 
@@ -311,7 +286,6 @@ void mandelbrot_render_tile_impl<Real>::renderPacket(int x, int y)
   */
 template<typename Real> void mandelbrot_render_tile(
   Mandelbrot *mandelbrot,
-  QImage *image,
   const MandelbrotTile& tile
 )
 {
@@ -321,61 +295,117 @@ template<typename Real> void mandelbrot_render_tile(
 #if defined(HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED) || !defined(THIS_PATH_WITH_SSE2_EXPLICTLY_ENABLED)
 
   enum { packet_size = Eigen::ei_packet_traits<Real>::size };
+  Color3 dummy_buffer[packet_size];
+  
+  mandelbrot_render_tile_impl<Real> renderer(mandelbrot, tile);
 
-  mandelbrot_render_tile_impl<Real> renderer(mandelbrot, image, tile);
+  int supersampling = renderer.supersampling;
+  int supersampled_packet_size = supersampling * packet_size;
+  int tile_x = tile.destination().x();
+  int tile_y = tile.destination().y();
+  int tile_width = tile.destination().width();
+  int tile_height = tile.destination().height();
+  int supersampled_tile_width = supersampling * tile_width;
+  int supersampled_tile_height = supersampling * tile_height;
 
   // first render a part of the border to check if the tile is probably entirely inside the interior of the Mandelbrot set
-  for(int y = 1; y < image->height()-1; y+=4)  // render every 4th pixel on the border
+  for(int y = 1; y < supersampled_tile_height-1; y+=4)  // render every 4th pixel on the border
   {
-    renderer.renderPacket(0,y);
-    renderer.renderPacket(image->width() - packet_size, y);
+    renderer.computePacket(0,y,dummy_buffer);
+    renderer.computePacket(supersampled_tile_width - packet_size, y, dummy_buffer);
     // abort if required
     if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
   }
-  for(int x = 0; x < image->width(); x+= 4*packet_size)
+  for(int x = 0; x < supersampled_tile_width; x+= 4*packet_size)
   {
-    renderer.renderPacket(x,0);
-    renderer.renderPacket(x,image->height()-1);
+    renderer.computePacket(x,0,dummy_buffer);
+    renderer.computePacket(x,supersampled_tile_height-1,dummy_buffer);
     // abort if required
     if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
   }
   // render the bottom-right packet: due to our rendering only every 4-th packet on the border, we could be
   // missing this corner of the tile.
-  renderer.renderPacket(image->width()-packet_size,image->height()-1);
+  renderer.computePacket(supersampled_tile_width-packet_size,supersampled_tile_height-1,dummy_buffer);
 
-  // now, if the tile looks like it's entirely inside the interior, just assume that's the case
-  if(!(renderer.found_exterior_point)) {
-    QPainter(image).fillRect(image->rect(), mandelbrot->color1());
+  // now, if the tile looks like it's entirely inside the interior, just assume that's the case,
+  // so fill it (not using a QPainter so as to avoid having to lock a mutex in case the image is being accessed
+  // by another QPainter in the GUI thread) and return.
+  if(!(renderer.found_exterior_point))
+  {
+    for(int y = 0; y < tile_height; y++)
+    {
+      for(int x = 0; x < tile_width; x++)
+      {
+        unsigned char *pixel
+          = const_cast<unsigned char*>(
+              static_cast<const QImage *>(mandelbrot->image())->scanLine(tile_y+y)
+            ) + 4*(tile_x+x);
+        pixel[0] = mandelbrot->color1().blue();
+        pixel[1] = mandelbrot->color1().green();
+        pixel[2] = mandelbrot->color1().red();
+        pixel[3] = 255;
+      }
+    }
     return;
   }
   
   // ok now do the actual rendering. not much point trying to reuse the part of the border we've already rendered,
   // it's few pixels and it would take some nontrivial code.
-  for(int y = 0; y < image->height(); y++)
+
+  qreal one_over_supersampling_squared = qreal(1) / (supersampling*supersampling);
+  
+  for(int y = 0; y < tile_height; y++)
   {
-    for(int x = 0; x < image->width(); x += packet_size)
+    for(int x = 0; x < tile_width; x += packet_size)
     {
-      renderer.renderPacket(x,y);
-      // abort if required
-      if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
+      Color3 supersampled_buffer[MAX_SUPERSAMPLING][packet_size * MAX_SUPERSAMPLING];
+
+      for(int y2 = 0; y2 < supersampling; y2++)
+      {
+        for(int x2 = 0; x2 < supersampled_packet_size; x2 += packet_size)
+        {
+          renderer.computePacket(supersampling*x+x2,supersampling*y+y2,&supersampled_buffer[y2][x2]);
+          // abort if required
+          if(mandelbrot->abortRenderingAsSoonAsPossible()) return;
+        }
+      }
+
+      int pixels_to_write = std::min(int(packet_size), tile_width-x);
+      for(int i = 0; i < pixels_to_write; i++)
+      {
+        Color3 color = Color3::Zero();
+        for(int y2 = 0; y2 < supersampling; y2++)
+        {
+          for(int x2 = 0; x2 < supersampling; x2++)
+          {
+            color += supersampled_buffer[y2][x2 + i*supersampling];
+          }
+        }
+        color *= one_over_supersampling_squared;
+        unsigned char *pixel
+          = const_cast<unsigned char*>(
+              static_cast<const QImage *>(mandelbrot->image())->scanLine(tile_y+y)
+            ) + 4*(tile_x+x+i);
+        pixel[0] = qreal_to_uchar_color_channel(color[2]);
+        pixel[1] = qreal_to_uchar_color_channel(color[1]);
+        pixel[2] = qreal_to_uchar_color_channel(color[0]);
+        pixel[3] = 255;
+      }
     }
   }
 #else
   Q_UNUSED(mandelbrot);
-  Q_UNUSED(image);
   Q_UNUSED(tile);
 #endif
 }
 
 template void mandelbrot_render_tile<float>(
   Mandelbrot *mandelbrot,
-  QImage *image,
   const MandelbrotTile& tile
 );
 
 template void mandelbrot_render_tile<double>(
   Mandelbrot *mandelbrot,
-  QImage *image,
   const MandelbrotTile& tile
 );
 

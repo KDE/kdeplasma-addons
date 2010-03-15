@@ -24,5 +24,6 @@
 
 typedef Eigen::Matrix<qreal,3,1> Color3;
 Color3 mix(const Color3& a_rgb, const Color3& a_hsv, const Color3& b_rgb, const Color3& b_hsv, qreal s);
+unsigned char qreal_to_uchar_color_channel(qreal t);
 
 #endif // MIX_HEADER

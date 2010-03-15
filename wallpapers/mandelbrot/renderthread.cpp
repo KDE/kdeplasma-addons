@@ -31,55 +31,37 @@ void MandelbrotRenderThread::run()
         MandelbrotTile tile;
         if(!m_mandelbrot->tiling().next(&tile)) return;
         QRect destination = tile.destination();
-        int supersampling = m_mandelbrot->supersampling();
-        QSize tileImageSize = destination.size() * supersampling;
-        QImage tileImage(tileImageSize, MANDELBROT_QIMAGE_FORMAT);
 
         // this is on purpose slightly larger than machine epsilon for float (gave artifacts near the transition point)
         const qreal double_precision_threshold = (qreal)4.0e-07;
-        const qreal rendering_resolution = m_mandelbrot->resolution() / supersampling;
+        const qreal rendering_resolution = m_mandelbrot->resolution() / m_mandelbrot->supersampling();
 
 #ifdef HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED
         if(m_mandelbrot->hasSSE2())
         {
             if(rendering_resolution > double_precision_threshold) {
-                with_SSE2_explicitly_enabled_if_x86::mandelbrot_render_tile<float>(m_mandelbrot, &tileImage, tile);
+                with_SSE2_explicitly_enabled_if_x86::mandelbrot_render_tile<float>(m_mandelbrot, tile);
             }
             else {
-                with_SSE2_explicitly_enabled_if_x86::mandelbrot_render_tile<double>(m_mandelbrot, &tileImage, tile);
+                with_SSE2_explicitly_enabled_if_x86::mandelbrot_render_tile<double>(m_mandelbrot, tile);
             }
         }
         else
 #endif
         {
             if(rendering_resolution > double_precision_threshold) {
-                with_arch_defaults::mandelbrot_render_tile<float>(m_mandelbrot, &tileImage, tile);
+                with_arch_defaults::mandelbrot_render_tile<float>(m_mandelbrot, tile);
             }
             else {
-                with_arch_defaults::mandelbrot_render_tile<double>(m_mandelbrot, &tileImage, tile);
+                with_arch_defaults::mandelbrot_render_tile<double>(m_mandelbrot, tile);
             }
         }
 
         // abort if required
         if(m_mandelbrot->abortRenderingAsSoonAsPossible()) return;
-
-        if(supersampling>1) {
-            QMutexLocker locker (m_mandelbrot->imageMutex());
-            // need smooth scaling
-            QPainter(m_mandelbrot->image())
-              .drawImage(destination, tileImage.scaled(destination.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        }
-        else {
-            // no need for any scaling
-            QMutexLocker locker (m_mandelbrot->imageMutex());
-            QPainter(m_mandelbrot->image()).drawImage(destination, tileImage);
-        }
 
         // tell the world we've got a shiny new tile
         emit tileDone(tile);
-
-        // abort if required
-        if(m_mandelbrot->abortRenderingAsSoonAsPossible()) return;
     }
 }
 

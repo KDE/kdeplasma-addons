@@ -96,7 +96,6 @@ void Mandelbrot::updateCache()
 
 void Mandelbrot::paint(QPainter *painter, const QRectF& exposedRect)
 {
-    QMutexLocker locker(imageMutex());
     painter->drawImage(exposedRect, *m_image, exposedRect.translated(-boundingRect().topLeft()));
 }
 
@@ -224,6 +223,7 @@ void Mandelbrot::checkRenderHints()
         abortRendering();
         delete m_image;
         m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
+        QPainter(m_image).fillRect(m_image->rect(), Qt::black);
         loadFromCacheOrStartRendering();
     }
 }
@@ -298,10 +298,11 @@ void Mandelbrot::loadFromCacheOrStartRendering()
 
 void Mandelbrot::startRendering(const QPointF& renderFirst)
 {
-    abortRendering(); // without that line, I had observed a thread link. investigate.
+    abortRendering();
     if(m_image->size() != boundingRect().size()) {
         delete m_image;
         m_image = new QImage(width(), height(), MANDELBROT_QIMAGE_FORMAT);
+        QPainter(m_image).fillRect(m_image->rect(), Qt::black);
     }
     m_imageIsReady = false;
     m_tilesFinishedRendering = 0;
@@ -310,7 +311,7 @@ void Mandelbrot::startRendering(const QPointF& renderFirst)
     // abort if required
     if(abortRenderingAsSoonAsPossible()) return;
     for(int i = 0; i < renderThreadCount(); i++) {
-        renderThread(i)->start(QThread::LowPriority);
+        renderThread(i)->start(QThread::LowestPriority);
     }
 }
 
@@ -410,13 +411,6 @@ void Mandelbrot::zoomView(const QPointF& at, qreal zoomFactor)
     startRendering(at);
 }
 
-float Mandelbrot::gamma() const
-{
-    if(quality() == 0) return 0.40f;
-    else if(quality() == 1) return 0.28f;
-    else return 0.22f;
-}
-
 int Mandelbrot::maxIter() const
 {
     int max_iter_factor;
@@ -491,7 +485,7 @@ void Mandelbrot::tileDone(const MandelbrotTile& t)
 
 void Mandelbrot::exportImage()
 {
-    KUrl url = KFileDialog::getSaveFileName(
+    KUrl url = KFileDialog::getSaveUrl(
                    KUrl(),
                    "*.png|PNG images",
                    0,

@@ -22,6 +22,8 @@
 #define TILING_SIZE 20
 
 #define MAX_PACKET_SIZE 4
+#define MAX_SUPERSAMPLING 4
+
 
 #if (defined(__i386__) || defined(_M_IX86)) && !(defined(__x86_64__) || defined(_M_X64))
 #define HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED
