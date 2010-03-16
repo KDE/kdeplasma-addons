@@ -30,6 +30,7 @@
 #include <QCheckBox>
 #include <QFileInfo>
 #include <QStandardItemModel>
+#include <QThreadPool>
 
 #include <KDebug>
 #include <KConfigDialog>
@@ -50,6 +51,7 @@
 #include "configdialog.h"
 #include "picture.h"
 #include "slideshow.h"
+#include "imagescaler.h"
 
 Frame::Frame(QObject *parent, const QVariantList &args)
         : Plasma::Applet(parent, args),
@@ -94,7 +96,6 @@ void Frame::init()
     m_frame = cg.readEntry("frame", false);
     m_shadow = cg.readEntry("shadow", true);
     m_roundCorners = cg.readEntry("roundCorners", false);
-    m_smoothScaling = cg.readEntry("smoothScaling", true);
     m_slideShow = cg.readEntry("slideshow", false);
     m_random = cg.readEntry("random", false);
     m_recursiveSlideShow = cg.readEntry("recursive slideshow", false);
@@ -110,7 +111,7 @@ void Frame::init()
     m_swOutline = 8;
 
     // Initialize the slideshow timer
-    connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(updatePicture()));
+    connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(scalePictureAndUpdate()));
 
     initSlideShow();
     if (frameReceivedUrlArgs) {
@@ -191,7 +192,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             m_slideFrame->setPos(x, y);
         }
 
-        updatePicture();
+        scalePictureAndUpdate();
         m_updateTimer->start(400);
     }
 }
@@ -217,6 +218,20 @@ QSizeF Frame::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     }
 }
 
+void Frame::scalePictureAndUpdate()
+{
+    QImage img = m_mySlideShow->image();
+    ImageScaler *scaler = new ImageScaler(img, contentSizeHint().toSize());
+    connect(scaler, SIGNAL(scaled(const QImage&)), this, SLOT(imageScaled(const QImage&)));
+    QThreadPool::globalInstance()->start(scaler);
+}
+
+void Frame::imageScaled(const QImage &img)
+{
+    m_scaledImage = img;
+    updatePicture();
+}
+
 void Frame::updatePicture()
 {
     m_pictureSize = m_mySlideShow->image().size();
@@ -236,7 +251,7 @@ void Frame::updatePicture()
     kDebug() << "Rendering picture";
 
     // create a QPixmap which can be drawn in paintInterface()
-    QPixmap picture = m_mySlideShow->image();
+    QPixmap picture = QPixmap::fromImage(m_scaledImage);
 
     if (picture.isNull()) {
         return;
@@ -320,12 +335,11 @@ void Frame::updatePicture()
     }
 
     // Respect the smoothScaling setting
-    p->setRenderHint(QPainter::SmoothPixmapTransform, m_smoothScaling);
+    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
     // draw our pixmap into the computed rectangle
-    p->drawPixmap(frameRect.toRect(), m_mySlideShow->image());
+    p->drawPixmap(frameRect.toRect(), picture);
     p->restore();
 
-    p->setRenderHint(QPainter::SmoothPixmapTransform, true);
     // black frame
     if (m_frame) {
         p->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
@@ -446,7 +460,6 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     connect(m_configDialog->imageUi.slideShowDirList, SIGNAL(currentRowChanged(int)), this, SLOT(updateButtons()));
 
     m_configDialog->setRoundCorners(m_roundCorners);
-    m_configDialog->setSmoothScaling(m_smoothScaling);
     m_configDialog->setShadow(m_shadow);
     m_configDialog->setShowFrame(m_frame);
     m_configDialog->setFrameColor(m_frameColor);
@@ -478,8 +491,6 @@ void Frame::configAccepted()
     // Appearance
     m_roundCorners = m_configDialog->roundCorners();
     cg.writeEntry("roundCorners", m_roundCorners);
-    m_smoothScaling = m_configDialog->smoothScaling();
-    cg.writeEntry("smoothScaling", m_smoothScaling);
     m_shadow = m_configDialog->shadow();
     cg.writeEntry("shadow", m_shadow);
     m_frame = m_configDialog->showFrame();
@@ -567,7 +578,7 @@ void Frame::initSlideShow()
     }
 
     if (!m_potd) {
-        updatePicture();
+        scalePictureAndUpdate();
     }
 }
 

@@ -7,6 +7,8 @@ set(frame_SRCS
     frame.cpp
     slideshow.cpp
     picture.cpp
+    imagescaler.cpp
+    imageloader.cpp
     configdialog.cpp)
 
 kde4_add_ui_files(frame_SRCS imageSettings.ui appearanceSettings.ui)

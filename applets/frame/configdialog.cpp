@@ -19,16 +19,19 @@
 
 #include "configdialog.h"
 
+#include <QThreadPool>
+
 #include <KLocale>
 #include <KStandardDirs>
 
 #include "picture.h"
+#include "imagescaler.h"
 
 ConfigDialog::ConfigDialog(QWidget *parent)
         : QObject(parent)
 {
     m_picture = new Picture(this);
-    connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
+    connect(m_picture, SIGNAL(pictureLoaded(QImage)), this, SLOT(pictureLoaded(QImage)));
 
     appearanceSettings = new QWidget();
     appearanceUi.setupUi(appearanceSettings);
@@ -120,10 +123,16 @@ KUrl ConfigDialog::currentUrl() const
     return imageUi.picRequester->url();
 }
 
-void ConfigDialog::previewPicture(const QPixmap &image)
+void ConfigDialog::previewPicture(const QImage &image)
 {
-    QPixmap scaledImage = image.scaled(QRect(23, 14, 151, 115).size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
-    m_preview->setPixmap(scaledImage);
+    ImageScaler *scaler = new ImageScaler(image, QRect(23, 14, 151, 115).size());
+    connect(scaler, SIGNAL(scaled(const QImage&)), this, SLOT(previewScaled(const QImage&)));
+    QThreadPool::globalInstance()->start(scaler);
+}
+
+void ConfigDialog::previewScaled(const QImage &image)
+{
+    m_preview->setPixmap(QPixmap::fromImage(image));
 }
 
 void ConfigDialog::changePreview(const KUrl &path)
@@ -131,7 +140,7 @@ void ConfigDialog::changePreview(const KUrl &path)
     m_picture->setPicture(path);
 }
 
-void ConfigDialog::pictureLoaded(QPixmap image)
+void ConfigDialog::pictureLoaded(QImage image)
 {
     previewPicture(image);
 }
@@ -139,15 +148,5 @@ void ConfigDialog::pictureLoaded(QPixmap image)
 void ConfigDialog::changePreview(const QString &path)
 {
     m_picture->setPicture(KUrl(path));
-}
-
-void ConfigDialog::setSmoothScaling(bool smooth)
-{
-    appearanceUi.smoothScaling->setChecked(smooth);
-}
-
-bool ConfigDialog::smoothScaling() const
-{
-    return appearanceUi.smoothScaling->isChecked();
 }
 

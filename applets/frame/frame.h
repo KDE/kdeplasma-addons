@@ -23,6 +23,7 @@
 #define FRAME_H
 
 #include <QAction>
+#include <QImage>
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsItem>
@@ -70,6 +71,8 @@ private Q_SLOTS:
     void removeDir();
     void updateButtons();
     void delayedUpdateSize();
+    void scalePictureAndUpdate();
+    void imageScaled(const QImage &img);
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -90,8 +93,6 @@ private:
     bool m_frame;
     /// If true, the frame will have rounded corners
     bool m_roundCorners;
-    /// If true, smooth scaling (better visual results, but more cpu intensive) is used for resizing
-    bool m_smoothScaling;
     /// If true, the picture will have a drop shadow.
     bool m_shadow;
     /// PoTD
@@ -115,6 +116,7 @@ private:
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
     QPixmap m_pixmap;
+    QImage m_scaledImage;
     QTimer* m_updateTimer;
     Plasma::ToolButton* m_backButton;
     Plasma::ToolButton* m_nextButton;

@@ -36,7 +36,7 @@ SlideShow::SlideShow(QObject *parent)
     m_useRandom = false;
 
     m_picture = new Picture(this);
-    connect(m_picture, SIGNAL(pictureLoaded(QPixmap)), this, SLOT(pictureLoaded(QPixmap)));
+    connect(m_picture, SIGNAL(pictureLoaded(QImage)), this, SLOT(pictureLoaded(QImage)));
 
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(nextPicture()));
@@ -55,12 +55,12 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 {
     QDateTime setDirStart = QDateTime::currentDateTime();
 
-    m_image = QPixmap();
+    m_image = QImage();
     m_picturePaths.clear();
     foreach(const QString &path, slideShowPath) {
         addDir(KUrl(path).path(), recursive);
     }
-    
+
     KRandomSequence randomSequence;
     m_indexList.clear();
 
@@ -79,7 +79,7 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 
 void SlideShow::setImage(const QString &imagePath)
 {
-    m_image = QPixmap();
+    m_image = QImage();
     m_picturePaths.clear();
     addImage(imagePath);
     m_currentUrl = url();
@@ -106,7 +106,7 @@ void SlideShow::addDir(const QString &path, bool recursive)
     m_picturePaths.append(dirPicturePaths);
 }
 
-QPixmap SlideShow::image() const 
+QImage SlideShow::image() const
 {
     if (m_image.isNull() || m_currentUrl != m_picture->url()) {
         kDebug() << "reloading from Picture" << m_currentUrl;
@@ -178,12 +178,12 @@ void SlideShow::setUpdateInterval(int msec)
     }
 }
 
-QString SlideShow::message() const 
+QString SlideShow::message() const
 {
     return m_picture->message();
 }
 
-void SlideShow::pictureLoaded(QPixmap image)
+void SlideShow::pictureLoaded(QImage image)
 {
     m_image = image;
     emit pictureUpdated();
@@ -191,18 +191,25 @@ void SlideShow::pictureLoaded(QPixmap image)
 
 void SlideShow::clearPicture()
 {
-    m_image = QPixmap();
+    m_image = QImage();
 }
 
 void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(name)
     if (data.isEmpty()) {
-        m_image = QPixmap();
+        m_image = QImage();
         return;
     }
 
-    m_image = data[0].value<QPixmap>();
+    m_image = data[0].value<QImage>();
+    //Compatibility with old dataengines
+    if (m_image.isNull()){
+        QPixmap tmpPixmap = data[0].value<QPixmap>();
+        if (!tmpPixmap.isNull()){
+            m_image = tmpPixmap.toImage();
+        }
+    }
     emit pictureUpdated();
 }
 

@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright  2008 by Anne-Marie Mahfouf <annma@kde.org>                 *
- *   Copyright  2008 by Thomas Coopman <thomas.coopman@gmail.com>          *
+ *   Copyright  2010 by Davide Bettio <davide.bettio@kdemail.net>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,58 +17,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef PICTURE_H
-#define PICTURE_H
+#ifndef IMAGESCALER_H
+#define IMAGESCALER_H
 
+#include <QImage>
+#include <QObject>
+#include <QRunnable>
+#include <QSize>
 
-#include <KUrl>
-#include <KIO/StoredTransferJob>
-#include <KDirWatch>
-
-/**
- * @brief Picture choice
- * @author Anne-Marie Mahfouf <annma@kde.org>
- *
- * This class handles the choice of the picture and
- * makes it ready for the Frame class to paint this picture.
- */
-
-class Picture : public QObject
+class ImageScaler : public QObject, public QRunnable
 {
     Q_OBJECT
 
-public:
-    explicit Picture(QObject *parent);
-    ~Picture();
-    /**
-    * Set Default picture with written message @p message if no picture or folder was chosen
-    * by the user
-    **/
-    QImage defaultPicture(const QString &message);
-    /**
-    * Set picture from location @p currentUrl
-    **/
-    void setPicture(const KUrl &currentUrl);
-    KIO::StoredTransferJob * m_job;
-    KUrl url();
-    QString message();
-
-Q_SIGNALS:
-    void pictureLoaded(QImage image);
-
-private Q_SLOTS:
-    void slotFinished(KJob *job);
-    void reload();
-
-private:
-    void setPath(const QString &path);
-    KUrl m_currentUrl;
-    QString m_path; // The local path of the image on disk
-    KDirWatch *m_fileWatch;
-    QString m_message;
-    QString m_defaultImage;
+  public:
+    ImageScaler(const QImage &img, QSize size);
+    void run();
+    
+  Q_SIGNALS:
+    void scaled(const QImage &image);
+    
+  private:
+    QImage m_image;
+    QSize m_size;
 };
 
-
 #endif
-

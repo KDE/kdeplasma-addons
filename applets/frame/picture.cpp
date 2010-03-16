@@ -21,6 +21,7 @@
 #include "picture.h"
 
 #include <QFile>
+#include <QThreadPool>
 
 #include <KGlobalSettings>
 #include <KUrl>
@@ -32,9 +33,7 @@
 #include <Plasma/Theme>
 #include <Plasma/Svg>
 
-#ifdef HAVE_KEXIV2
-#include <libkexiv2/kexiv2.h>
-#endif
+#include "imageloader.h"
 
 Picture::Picture(QObject *parent)
 : QObject(parent)
@@ -58,12 +57,12 @@ QString Picture::message()
     return m_message;
 }
 
-QPixmap Picture::defaultPicture(const QString &message)
+QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
 
     kDebug() << "Default Image:" << m_defaultImage;
-    QPixmap image = QPixmap(m_defaultImage);
+    QImage image = QImage(m_defaultImage);
     m_message = message;
     return image;
 }
@@ -71,26 +70,27 @@ QPixmap Picture::defaultPicture(const QString &message)
 void Picture::setPicture(const KUrl &currentUrl)
 {
     m_currentUrl = currentUrl;
-    QPixmap image;
+    ImageLoader *loader;
     kDebug() << currentUrl;
     if (!m_currentUrl.isEmpty() && !m_currentUrl.isLocalFile()) {
         kDebug() << "Not a local file, downloading" << currentUrl;
         m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
-        image = QPixmap(m_defaultImage);
+        loader = new ImageLoader(m_defaultImage);
         m_message = i18n("Loading image...");
     } else {
         if (currentUrl.isEmpty()) {
-            image = QPixmap(m_defaultImage);
+            loader = new ImageLoader(m_defaultImage);
             m_message = i18nc("Info", "Put your photo here or drop a folder to start a slideshow");
             kDebug() << "default image ...";
         } else {
-            image = correctRotation(QPixmap(m_currentUrl.path()), m_currentUrl.path());
+            loader = new ImageLoader(m_currentUrl.path());
             setPath(m_currentUrl.path());
             m_message.clear();
         }
     }
-    emit pictureLoaded(image);
+    connect(loader, SIGNAL(loaded(QImage)), this, SIGNAL(pictureLoaded(QImage)));
+    QThreadPool::globalInstance()->start(loader);
 }
 
 KUrl Picture::url()
@@ -113,43 +113,16 @@ void Picture::setPath(const QString &path)
 void Picture::reload()
 {
     kDebug() << "Picture reload";
-    emit pictureLoaded(correctRotation(QPixmap(m_path), m_path));
-}
-
-QPixmap Picture::correctRotation(const QPixmap& tempImage, const QString &path)
-{
-    kDebug() << path;
-    QPixmap image = QPixmap();
-    if (tempImage.isNull()) {
-        image = defaultPicture(i18nc("Error", "Error loading image"));
-    } else {
-#ifdef HAVE_KEXIV2
-        KExiv2Iface::KExiv2 exif(path);
-        QMatrix m;
-        switch (exif.getImageOrientation()) {
-            case KExiv2Iface::KExiv2::ORIENTATION_HFLIP: m.scale(-1.0,1.0); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_180: m.rotate(180);  image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_VFLIP: m.scale(1.0,-1.0); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90: m.rotate(90); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP: m.rotate(90); m.scale(-1.0,1.0);
-            image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP: m.rotate(90); m.scale(1.0,-1.0);
-            image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_270: m.rotate(270);  image = tempImage.transformed(m); break;
-            default: image = tempImage;
-        }
-#else
-        image = tempImage;
-#endif
-    }
-    return image;
+    ImageLoader *loader = new ImageLoader(m_defaultImage);
+    connect(loader, SIGNAL(loaded(QImage)), this, SIGNAL(pictureLoaded(QImage)));
+    QThreadPool::globalInstance()->start(loader);
 }
 
 void Picture::slotFinished( KJob *job )
 {
     QString filename = m_currentUrl.fileName();
     QString path = KGlobalSettings::downloadPath() + m_currentUrl.fileName();
-    QPixmap image;
+    QImage image;
     if (job->error()) {
         kDebug() << "Error loading image:" << job->errorString();
         image = defaultPicture(i18n("Error loading image: %1", job->errorString()));
@@ -172,7 +145,7 @@ void Picture::slotFinished( KJob *job )
         kDebug() << "Saved to" << path;
         setPath(path);
     }
-    emit pictureLoaded(correctRotation(image, path));
+    emit pictureLoaded(ImageLoader::correctRotation(image, path));
 }
 
 #include "picture.moc"

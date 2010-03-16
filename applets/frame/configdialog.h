@@ -38,9 +38,6 @@ public:
     /// Randomness for the slideshow
     void setRandom(bool random);
     bool random() const;
-    /// Smooth scaling
-    void setSmoothScaling(bool smooth);
-    bool smoothScaling() const;
     /// Set a shadow for the frame
     void setShadow(bool round);
     bool shadow() const;
@@ -60,7 +57,7 @@ public:
     QWidget *appearanceSettings;
     /// Image Preview
     /// Allow to preview each new chosen picture
-    void previewPicture(const QPixmap &pix);
+    void previewPicture(const QImage &img);
 
 private slots:
     /// Update preview when URL changes via the file dialog
@@ -68,7 +65,9 @@ private slots:
     /// Update preview when URL changes via the combobox
     void changePreview(const QString &);
     /// The image is loaded, update the preview
-    void pictureLoaded(QPixmap image);
+    void pictureLoaded(QImage image);
+    /// The preview is scaled
+    void previewScaled(const QImage &);
 
 private:
     Picture *m_picture;

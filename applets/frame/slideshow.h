@@ -43,7 +43,7 @@ public:
     void setDirs(const QStringList &slideShowPaths, bool recursive = false);
     void setImage(const QString &imagePath);
     void setRandom(bool);
-    QPixmap image() const;
+    QImage image() const;
     KUrl currentUrl() const;
     QString message() const;
 
@@ -60,7 +60,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void clearPicture();
-    void pictureLoaded(QPixmap image);
+    void pictureLoaded(QImage image);
 
 private:
     void addImage(const QString &imagePath);
@@ -75,7 +75,7 @@ private:
     QList<int> m_indexList;
     KUrl m_currentUrl;
     QTimer *m_timer;
-    QPixmap m_image;
+    QImage m_image;
     Picture *m_picture;
 };
 
