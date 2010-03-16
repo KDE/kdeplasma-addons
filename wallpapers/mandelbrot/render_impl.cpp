@@ -264,8 +264,8 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
     t = (t-tmin)/(1.f-tmin);
     t = CLAMP(t, Real(0), Real(1));
 
-    float threshold1 = 0.16f;
-    float threshold2 = 0.4f;
+    float threshold1 = 0.09f;
+    float threshold2 = 0.3f;
     if(t < threshold1) {
       pixels[i] = (t/threshold1)*rgb3;
     }
