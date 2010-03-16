@@ -113,6 +113,10 @@ void Frame::init()
     // Initialize the slideshow timer
     connect(m_mySlideShow, SIGNAL(pictureUpdated()), this, SLOT(scalePictureAndUpdate()));
 
+    connect(&m_waitForResize, SIGNAL(timeout()), this, SLOT(scalePictureAndUpdate()));
+    m_waitForResize.setSingleShot(true);
+    m_waitForResize.setInterval(200);
+
     initSlideShow();
     if (frameReceivedUrlArgs) {
         cg.writeEntry("url", m_currentUrl);
@@ -192,7 +196,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             m_slideFrame->setPos(x, y);
         }
 
-        scalePictureAndUpdate();
+        m_waitForResize.start();
         m_updateTimer->start(400);
     }
 }
@@ -683,7 +687,7 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
         m_mySlideShow->setUpdateInterval(0);
     }
 
-    p->drawPixmap(rect, m_pixmap, rect);
+    p->drawPixmap(rect, m_pixmap);
 
     if (m_slideShow) {
         // unsuspend the slideshow to allow time for loading the image

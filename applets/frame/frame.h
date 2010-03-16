@@ -28,6 +28,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QColor>
+#include <QTimer>
 
 #include <plasma/applet.h>
 #include <plasma/animator.h>
@@ -121,6 +122,7 @@ private:
     Plasma::ToolButton* m_backButton;
     Plasma::ToolButton* m_nextButton;
     Plasma::Frame* m_slideFrame;
+    QTimer m_waitForResize;
 };
 
 K_EXPORT_PLASMA_APPLET(frame, Frame)
