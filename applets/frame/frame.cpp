@@ -162,8 +162,11 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             m_frameOutline = 8;
             m_swOutline = 8;
             //Restore widget geometry to image proportions
-            resize(contentSizeHint());
-            emit appletTransformedItself();
+            QSizeF sizeHint = contentSizeHint();
+            if (sizeHint != geometry().size()){
+                resize(sizeHint);
+                emit appletTransformedItself();
+            }
         }
         m_updateTimer->start(400);
     }
@@ -249,8 +252,12 @@ void Frame::updatePicture()
         setAssociatedApplicationUrls(m_mySlideShow->currentUrl());
     }
 
-    emit sizeHintChanged(Qt::PreferredSize);
-    resize(contentSizeHint());
+    if (sizeHint != geometry().size()){
+        emit sizeHintChanged(Qt::PreferredSize);
+        resize(sizeHint);
+    }
+
+
 
     kDebug() << "Rendering picture";
 
@@ -697,8 +704,11 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
 
 void Frame::delayedUpdateSize()
 {
-    resize(contentSizeHint());
-    emit appletTransformedItself();
+    QSizeF sizeHint = contentSizeHint();
+    if (sizeHint != geometry().size()){
+        resize(sizeHint);
+        emit appletTransformedItself();
+    }
 }
 
 #include "frame.moc"
