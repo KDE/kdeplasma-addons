@@ -138,9 +138,9 @@ void Pastebin::dataUpdated(const QString &sourceName, const Plasma::DataEngine::
 
 void Pastebin::setHistorySize(int max)
 {
-    if (max <= 0)
+    if (max <= 0) {
         max = 0;
-
+    }
     while (max < m_actionHistory.count()) {
         delete m_actionHistory.takeFirst();
     }
