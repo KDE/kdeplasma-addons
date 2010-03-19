@@ -79,6 +79,12 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
     QDateTime dt;
     const QString tz = term.right(term.length() - (date ? dateWord.length() : timeWord.length()) - 1);
 
+    if (tz.compare("UTC", Qt::CaseInsensitive) == 0) {
+        tzName = "UTC";
+        dt = KDateTime::currentDateTime(KTimeZone::utc()).dateTime();
+        return dt;
+    }
+
     KTimeZones::ZoneMap zones = KSystemTimeZones::zones();
     QMapIterator<QString, KTimeZone> it(zones);
     while (it.hasNext()) {
@@ -92,6 +98,13 @@ QDateTime DateTimeRunner::datetime(const QString &term, bool date, QString &tzNa
                 it.key().contains(tz, Qt::CaseInsensitive)) {
                 tzName = it.value().name();
                 dt = KDateTime::currentDateTime(it.value()).dateTime();
+            } else {
+                foreach (const QByteArray &abbrev, it.value().abbreviations()) {
+                    if (QString(abbrev).contains(tz, Qt::CaseInsensitive)) {
+                        tzName = abbrev;
+                        dt = KDateTime::currentDateTime(it.value()).dateTime();
+                    }
+                }
             }
         }
     }
@@ -111,6 +124,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     matches << match;
     context.addMatches(context.query(), matches);
 }
+
 K_EXPORT_PLASMA_RUNNER(datetimerunner, DateTimeRunner)
 
 #include "datetimerunner.moc"
