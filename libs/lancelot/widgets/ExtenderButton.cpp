@@ -104,29 +104,31 @@ public:
     }
 
     ExtenderObject * extender() {
-        if (!m_extender) {
-            m_extender = new ExtenderObject(extenderIconSvg, NULL);
-            m_extender->setVisible(false);
+        ExtenderObject * result = 0;
 
-            m_extender->setIconSize(QSize(16, 16));
+        if (!m_extenders.contains(q->scene())) {
+            result = new ExtenderObject(extenderIconSvg, NULL);
+
+            result->setVisible(false);
+            result->setIconSize(QSize(16, 16));
 
             connect(
-                    m_extender, SIGNAL(mouseHoverEnter()),
+                    result, SIGNAL(mouseHoverEnter()),
                     timer, SLOT(start())
                    );
             connect(
-                    m_extender, SIGNAL(mouseHoverLeave()),
+                    result, SIGNAL(mouseHoverLeave()),
                     timer, SLOT(stop())
                    );
 
+            m_extenders[q->scene()] = result;
+        } else {
+            result = m_extenders[q->scene()];
         }
 
-        if (m_extender->parentItem() != q) {
-            if (m_extender->scene() && m_extender->scene() != q->scene()) {
-                m_extender->scene()->removeItem(m_extender);
-            }
-            m_extender->setParentItem(q);
-            m_extender->setGroupByName(
+        if (result->parentItem() != q) {
+            result->setParentItem(q);
+            result->setGroupByName(
                     q->group()->name() + "-Extender"
                     );
 
@@ -134,7 +136,7 @@ public:
             relayoutExtender();
         }
 
-        return m_extender;
+        return result;
     }
 
     ~Private()
@@ -143,7 +145,8 @@ public:
 
     void relayoutExtender()
     {
-        if (!m_extender || q != m_extender->parentItem()) return;
+        if (!m_extenders.contains(q->scene())
+            || q != m_extenders[q->scene()]->parentItem()) return;
         QRectF geometry = QRectF(QPointF(0, 0), q->size());
 
         extender()->borders = Plasma::FrameSvg::AllBorders;
@@ -193,7 +196,7 @@ public:
     Plasma::FrameSvg::EnabledBorders borders;
 
     static Plasma::Svg extenderIconSvg;
-    static ExtenderObject * m_extender;
+    static QHash < QGraphicsScene *, ExtenderObject * > m_extenders;
     static QTimer * timer;
 
     bool checkable : 1;
@@ -202,7 +205,7 @@ public:
 };
 
 Plasma::Svg ExtenderButton::Private::extenderIconSvg;
-ExtenderObject * ExtenderButton::Private::m_extender = 0;
+QHash < QGraphicsScene *, ExtenderObject * > ExtenderButton::Private::m_extenders;
 QTimer * ExtenderButton::Private::timer = 0;
 
 ExtenderButton::ExtenderButton(QGraphicsItem * parent)
@@ -264,9 +267,11 @@ void ExtenderButton::setGroup(Group * g)
 
 ExtenderButton::~ExtenderButton()
 {
-    if (ExtenderButton::Private::m_extender->parentItem() == this) {
-        ExtenderButton::Private::m_extender->setParentItem(0);
+    if (Private::m_extenders.contains(scene())
+        && Private::m_extenders[scene()]->parentItem() == this) {
+        Private::m_extenders[scene()]->setParentItem(0);
     }
+
     delete d;
 }
 
