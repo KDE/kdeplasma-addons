@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Date and Timer
+
+Comment=The current date and time, locally or in any timezone
+
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=clock
+X-KDE-Library=krunner_datetime
+X-KDE-PluginInfo-Author=Plasma Team
+X-KDE-PluginInfo-Email=plasma-devel@kde.org
+X-KDE-PluginInfo-Name=plasmamobileapps
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
