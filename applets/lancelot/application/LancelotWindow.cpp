@@ -517,28 +517,6 @@ void LancelotWindow::setupModels()
     m_models["RecentDocuments"]   = new Lancelot::Models::RecentDocuments();
     m_models["OpenDocuments"]     = new Lancelot::Models::OpenDocuments();
 
-    // m_models["Contacts"]          = new Lancelot::Models::ContactsKopete();
-    // m_models["Messages"]          = new Lancelot::Models::MessagesKmail();
-
-    // QStringList allowedRunners = m_mainConfig.readEntry("allowedRunners", QStringList());
-    // if (allowedRunners.isEmpty()) {
-    //     allowedRunners
-    //         << "places"
-    //         << "windows"
-    //         << "kill"
-    //         << "solid"
-    //         << "services"
-    //         << "PowerDevil"
-    //         << "browserhistory"
-    //         << "shell"
-    //         << "locations"
-    //         << "konsolesessions"
-    //         << "recentdocuments"
-    //         << "calculator"
-    //         << "bookmarks"
-    //         << "unitconverter";
-    // }
-
     m_models["Runner"]            = new Lancelot::Models::Runner(); //allowedRunners);
 
     // Groups:

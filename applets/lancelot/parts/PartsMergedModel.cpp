@@ -257,42 +257,52 @@ bool PartsMergedModel::load(const QString & input)
                 addModel(modelID, QIcon(), i18n("Places"),
                         model = new Lancelot::Models::Places());
                 m_models.append(model);
+
             } else if (modelID == "System") {
                 addModel(modelID, QIcon(), i18n("System"),
                         model = new Lancelot::Models::SystemServices());
                 m_models.append(model);
+
             } else if (modelID == "Devices/Removable") {
                 addModel(modelID, QIcon(), i18n("Removable devices"),
                         model = new Lancelot::Models::Devices(Lancelot::Models::Devices::Removable));
                 m_models.append(model);
+
             } else if (modelID == "Devices/Fixed") {
                 addModel(modelID, QIcon(), i18n("Fixed devices"),
                         model = new Lancelot::Models::Devices(Lancelot::Models::Devices::Fixed));
                 m_models.append(model);
+
             } else if (modelID == "NewDocuments") {
                 addModel(modelID, QIcon(), i18n("New Documents"),
                         model = new Lancelot::Models::NewDocuments());
                 m_models.append(model);
+
             } else if (modelID == "OpenDocuments") {
                 addModel(modelID, QIcon(), i18n("Open Documents"),
                         model = new Lancelot::Models::OpenDocuments());
                 m_models.append(model);
+
             } else if (modelID =="RecentDocuments") {
                 addModel(modelID, QIcon(), i18n("Recent Documents"),
                         model = new Lancelot::Models::RecentDocuments());
                 m_models.append(model);
+
             } else if (modelID =="Messages") {
                 addModel(modelID, QIcon(), i18n("Unread messages"),
                         model = new Lancelot::Models::MessagesKmail());
                 m_models.append(model);
+
             } else if (modelID =="Contacts") {
                 addModel(modelID, QIcon(), i18n("Online contacts"),
                         model = new Lancelot::Models::ContactsKopete());
                 m_models.append(model);
+
             } else if (modelID == "FavoriteApplications") {
                 // We don't want to delete this one (singleton)
                 addModel(modelID, QIcon(), i18n("Favorite Applications"),
                         model = Lancelot::Models::FavoriteApplications::self());
+
             } else if (modelID == "SystemActions") {
                 // We don't want to delete this one (singleton)
                 if (modelExtraData.isEmpty()) {
@@ -303,6 +313,7 @@ bool PartsMergedModel::load(const QString & input)
                     if (!model) return false;
                     addModel(modelID, QIcon(), i18n("System"), model);
                 }
+
             } else if (modelID == "Folder") {
                 kDebug() << modelExtraData;
                 if (modelExtraData.startsWith(QLatin1String("applications:/"))) {
@@ -318,6 +329,7 @@ bool PartsMergedModel::load(const QString & input)
                         model = new Lancelot::Models::FolderModel(modelExtraData));
                 }
                 m_models.append(model);
+
             }
             loaded = (model != NULL);
         }
