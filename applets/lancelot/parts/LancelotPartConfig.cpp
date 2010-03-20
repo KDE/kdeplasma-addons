@@ -41,6 +41,10 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionLeft);
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionRight);
 
+    buttonContentsAdd->setIcon(KIcon("list-add"));
+    buttonContentsRemove->setIcon(KIcon("list-remove"));
+    buttonContentsModify->setIcon(KIcon("configure"));
+
     QObject::connect(
         buttonContentsAdd, SIGNAL(clicked()),
         this, SLOT(buttonContentsAddClicked()));

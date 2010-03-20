@@ -150,7 +150,25 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QListWidget" name="listModels"/>
+          <widget class="QCheckBox" name="checkShowSearchBox">
+           <property name="text">
+            <string>Show the search box</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListWidget" name="listModels">
+           <property name="styleSheet">
+            <string>border: none; background: transparent;</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QFrame" name="frame">
@@ -193,20 +211,6 @@
              </widget>
             </item>
            </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkShowSearchBox">
-           <property name="text">
-            <string>Show the search box</string>
-           </property>
           </widget>
          </item>
         </layout>
