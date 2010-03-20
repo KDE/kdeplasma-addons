@@ -124,14 +124,6 @@ Q_SIGNALS:
 
 protected:
     /**
-     * This function is invoked when the group containing this
-     * widget is updated. Reimplement if you need any additional
-     * properties in your widget which need to be set using
-     * the groups mechanism.
-     */
-    // virtual void groupUpdated();
-
-    /**
      * Paints the widget background using the widget's SVG. Element name is
      * calculated according to widget's state
      * @param painter painter to paint on
