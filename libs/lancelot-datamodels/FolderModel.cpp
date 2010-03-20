@@ -48,6 +48,7 @@ FolderModel::FolderModel(QString dirPath, QDir::SortFlags sort)
 
 FolderModel::~FolderModel()
 {
+    disconnect(m_dirLister, 0, this, 0);
     delete m_dirLister;
 }
 
