@@ -125,12 +125,15 @@ QRectF KGraphicsWebSlice::sliceGeometry()
     QRectF geo = QRectF();
     if (!d->selector.isEmpty()) {
         QWebElement element = frame->findFirstElement(d->selector);
-        if ( element.isNull() ) {
-            return QRectF();
+        if ( !element.isNull() ) {
+            geo = element.geometry();
         }
-        geo = element.geometry();
-    } else if (d->sliceGeometry.isValid()) {
+    }
+    if (d->sliceGeometry.isValid()) {
         geo = d->sliceGeometry;
+    } else {
+        QWebElement element = frame->documentElement();
+        geo = element.geometry();
     }
 
     if (!geo.isValid()) {

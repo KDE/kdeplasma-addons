@@ -31,6 +31,7 @@
 
 // KDE
 #include <KConfigDialog>
+#include <KServiceTypeTrader>
 
 // Plasma
 #include <Plasma/Label>
@@ -51,14 +52,33 @@ WebSlice::WebSlice(QObject *parent, const QVariantList &args)
 
 void WebSlice::init()
 {
-    KConfigGroup cg = config();
-    m_url = cg.readEntry("url", "http://www.kde.org/");
-    m_element = cg.readEntry("element", "#hotspot");
+    const QString constraint = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName());
+    const KService::List offers = KServiceTypeTrader::self()->query("Plasma/Applet",
+                                                                    constraint);
+    foreach (const KService::Ptr &service, offers) {
+        QStringList args = service->property("X-Plasma-Args").toStringList();
+        if (args.count() >= 1) {
+            m_url = KUrl(args[0]);
+            if (args.count() >= 2) {
+                m_element = args[1];
+                if (args.count() >= 6) {
+                    m_sliceGeometry = QRectF(args[2].toInt(), args[3].toInt(),
+                                            args[4].toInt(), args[5].toInt());
+                }
+            }
+        }
+    }
 
-    // for testing geometry
-    //m_url = cg.readEntry("url", "http://buienradar.nl/");
-    //m_sliceGeometry = cg.readEntry("size", QRectF(258, 102, 550, 511));
-    m_sliceGeometry = cg.readEntry("sliceGeometry", QRectF());
+    KConfigGroup cg = config();
+    if (!m_url.isValid() || m_url.isEmpty()) {
+        m_url = cg.readEntry("url", "http://www.kde.org/");
+        m_element = cg.readEntry("element", "#hotspot");
+
+        // for testing geometry
+        //m_url = cg.readEntry("url", "http://buienradar.nl/");
+        //m_sliceGeometry = cg.readEntry("size", QRectF(258, 102, 550, 511));
+        m_sliceGeometry = cg.readEntry("sliceGeometry", QRectF());
+    }
     m_size = cg.readEntry("size", m_size);
     setAssociatedApplicationUrls(KUrl::List(m_url));
 
