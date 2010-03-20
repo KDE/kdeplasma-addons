@@ -71,7 +71,7 @@ private:
     void showSearchBox(bool value);
 
     void saveConfig();
-    bool loadConfig();
+    void loadConfig();
     void applyConfig();
 
     QGraphicsWidget * m_root;

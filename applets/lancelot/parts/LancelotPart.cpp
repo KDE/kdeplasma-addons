@@ -114,16 +114,17 @@ void LancelotPart::init()
     immutabilityChanged(Plasma::Mutable);
 
     // Loading data
-    bool loaded = loadConfig();
+    // bool loaded = loadConfig();
 
-    if (!loaded && !m_cmdarg.isEmpty()) {
+    applyConfig();
+
+    if (m_model->modelCount() == 0 && !m_cmdarg.isEmpty()) {
         KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(m_cmdarg));
         m_model->append(m_cmdarg, fileItem);
         saveConfig();
     }
 
     KGlobal::locale()->insertCatalog("lancelot");
-    applyConfig();
 
     modelContentsUpdated();
 }
@@ -190,20 +191,23 @@ void LancelotPart::saveConfig()
     kcg.sync();
 }
 
-bool LancelotPart::loadConfig()
+void LancelotPart::loadConfig()
 {
-    applyConfig();
+    // applyConfig();
 
     KConfigGroup kcg = config();
 
     QString data = kcg.readEntry("partData", QString());
 
+    m_model->clear();
+
     kDebug() << data;
 
     if (data.isEmpty()) {
-        return false;
+        return;
     }
-    return loadFromList(data.split('\n'));
+
+    loadFromList(data.split('\n'));
 }
 
 void LancelotPart::removeModel(int index)
@@ -319,6 +323,8 @@ void LancelotPart::applyConfig()
     }
 
     showSearchBox(kcg.readEntry("showSearchBox", false));
+
+    loadConfig();
 }
 
 void LancelotPart::configAccepted()

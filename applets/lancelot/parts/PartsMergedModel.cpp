@@ -51,7 +51,8 @@ PartsMergedModel::PartsMergedModel()
 
 PartsMergedModel::~PartsMergedModel()
 {
-    qDeleteAll(m_models);
+    clear();
+    // qDeleteAll(m_models);
 }
 
 bool PartsMergedModel::hasModelContextActions(int index) const
@@ -187,6 +188,18 @@ void PartsMergedModel::remove(int index)
     m_data = configs.join("\n");
 
     emit modelContentsUpdated();
+}
+
+void PartsMergedModel::clear()
+{
+    while (modelCount()) {
+        removeModel(0);
+    }
+
+    qDeleteAll(m_models);
+    m_models.clear();
+
+    m_data.clear();
 }
 
 bool PartsMergedModel::loadFromFile(const QString & url)

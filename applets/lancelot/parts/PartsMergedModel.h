@@ -37,6 +37,7 @@ public:
     bool append(const QString & path, const KFileItem & fileItem);
 
     void remove(int index);
+    void clear();
 
     QString serializedData() const;
 
