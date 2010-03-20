@@ -6,17 +6,152 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>533</width>
-    <height>328</height>
+    <width>629</width>
+    <height>692</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <widget class="QGroupBox" name="panelContents">
-     <property name="title">
-      <string comment="Contents of the applet">Contents</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+    <widget class="QFrame" name="pageAdvanced">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="panelContents">
+        <property name="title">
+         <string comment="Contents of the applet">Activation:</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QRadioButton" name="radioContentsActivationClick">
+           <property name="text">
+            <string>Click to activate items</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioContentsActivationExtender">
+           <property name="text">
+            <string>Use no-click interface</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="panelContentsExtenderPosition">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="title">
+            <string>Extender Position</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QRadioButton" name="radioContentsExtenderPositionLeft">
+              <property name="text">
+               <string comment="Position the extender left">Left</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioContentsExtenderPositionRight">
+              <property name="text">
+               <string comment="Position the extender right">Right</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="panelIcon">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Applet Icon</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="KIconButton" name="iconChooser">
+           <property name="minimumSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20000</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QRadioButton" name="radioIconActivationClick">
+             <property name="text">
+              <string>Show contents on &amp;click</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioIconActivationHover">
+             <property name="text">
+              <string>Show contents on icon &amp;hover (after a predefined interval of time)</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="pageContents">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QCheckBox" name="checkShowSearchBox">
         <property name="text">
@@ -25,128 +160,17 @@
        </widget>
       </item>
       <item>
-       <widget class="Line" name="line">
+       <spacer name="verticalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Activation:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioContentsActivationClick">
-        <property name="text">
-         <string>Click to activate items</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioContentsActivationExtender">
-        <property name="text">
-         <string>Use no-click interface</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="panelContentsExtenderPosition">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="title">
-         <string>Extender Position</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QRadioButton" name="radioContentsExtenderPositionLeft">
-           <property name="text">
-            <string comment="Position the extender left">Left</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioContentsExtenderPositionRight">
-           <property name="text">
-            <string comment="Position the extender right">Right</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="panelIcon">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Applet Icon</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="KIconButton" name="iconChooser">
-        <property name="minimumSize">
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>64</width>
-          <height>64</height>
+          <width>20</width>
+          <height>299</height>
          </size>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>20000</width>
-          <height>64</height>
-         </size>
-        </property>
-        <property name="baseSize">
-         <size>
-          <width>64</width>
-          <height>64</height>
-         </size>
-        </property>
-        <property name="icon">
-         <string>lancelot-part</string>
-        </property>
-        <property name="iconSize">
-         <number>48</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QRadioButton" name="radioIconActivationClick">
-          <property name="text">
-           <string>Show contents on &amp;click</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioIconActivationHover">
-          <property name="text">
-           <string>Show contents on icon &amp;hover (after a predefined interval of time)</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       </spacer>
       </item>
      </layout>
     </widget>

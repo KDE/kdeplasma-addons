@@ -34,6 +34,7 @@
 #include <Plasma/IconWidget>
 
 #define ACTIVATION_TIME 300
+#define DEFAULT_ICON "plasmaapplet-shelf"
 
 LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
   : Plasma::PopupApplet(parent, args),
@@ -46,7 +47,7 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
-    setPopupIcon("lancelot-part");
+    setPopupIcon(DEFAULT_ICON);
     setBackgroundHints(StandardBackground);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     // setPassivePopup(true);
@@ -118,6 +119,10 @@ void LancelotPart::init()
 
     KGlobal::locale()->insertCatalog("lancelot");
     applyConfig();
+
+    if (!m_model->m_models.size()) {
+        setConfigurationRequired(true);
+    }
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -250,9 +255,9 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
 
     KConfigGroup kcg = config();
 
-    QString iconPath = kcg.readEntry("iconLocation", "lancelot-part");
+    QString iconPath = kcg.readEntry("iconLocation", DEFAULT_ICON);
     m_config.setIcon(iconPath);
-    if (iconPath == "lancelot-part") {
+    if (iconPath == DEFAULT_ICON) {
         m_config.setIcon(popupIcon());
     }
 
@@ -270,17 +275,23 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-    parent->addPage(widget, parent->windowTitle(), icon());
+
+    // m_config.pageContents->setParent(parent);
+    parent->addPage(m_config.pageContents, i18n("Contents"), icon());
+
+    // m_config.pageAdvanced->setParent(parent);
+    // parent->addPage(widget, i18n("Advanced"), icon());
+    parent->addPage(m_config.pageAdvanced, i18n("Advanced"), icon());
 }
 
 void LancelotPart::applyConfig()
 {
     KConfigGroup kcg = config();
 
-    QString icon = kcg.readEntry("iconLocation", "lancelot-part");
+    QString icon = kcg.readEntry("iconLocation", DEFAULT_ICON);
     setPopupIcon(icon);
 
-    if (icon == "lancelot-part") {
+    if (icon == DEFAULT_ICON) {
         if (m_model->modelCount() > 0) {
             Lancelot::ActionListModel * model = m_model->modelAt(0);
             if (!model->selfIcon().isNull()) {
