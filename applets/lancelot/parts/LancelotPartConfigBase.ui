@@ -176,14 +176,14 @@
        <widget class="QFrame" name="frame">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QPushButton" name="buttonAdd">
+          <widget class="QPushButton" name="buttonContentsAdd">
            <property name="text">
             <string>Add</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="buttonModify">
+          <widget class="QPushButton" name="buttonContentsModify">
            <property name="text">
             <string>Modify</string>
            </property>
@@ -203,7 +203,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="buttonRemove">
+          <widget class="QPushButton" name="buttonContentsRemove">
            <property name="text">
             <string>Remove</string>
            </property>

@@ -24,7 +24,9 @@
 
 #include <Lancelot/Lancelot>
 
-class LancelotPartConfig: public Ui::LancelotPartConfigBase {
+class LancelotPartConfig: public QObject, public Ui::LancelotPartConfigBase {
+    Q_OBJECT
+
 public:
     void setupUi(QWidget * widget);
 
@@ -46,9 +48,19 @@ public:
     void setPartData(const QString & data);
     QString partData() const;
 
+    void addItem(const QString & itemData);
+    void setItemData(
+        QListWidgetItem * item, const QString & itemData);
+
     QButtonGroup * qbgIcon;
     QButtonGroup * qbgContents;
     QButtonGroup * qbgContentsExtenderPosition;
+
+public Q_SLOTS:
+    void buttonContentsAddClicked();
+    void buttonContentsModifyClicked();
+    void buttonContentsRemoveClicked();
+
 };
 
 #endif /* LANCELOT_LAUNCHER_APPLET_CONFIG_H_ */

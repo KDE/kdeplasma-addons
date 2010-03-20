@@ -19,6 +19,12 @@
 
 #include "LancelotPartConfig.h"
 
+#include <QStyledItemDelegate>
+#include <QPainter>
+#include <QInputDialog>
+
+#include <Lancelot/Models/Serializator>
+
 void LancelotPartConfig::setupUi(QWidget * widget)
 {
     Ui::LancelotPartConfigBase::setupUi(widget);
@@ -34,6 +40,16 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     qbgContentsExtenderPosition = new QButtonGroup(widget);
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionLeft);
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionRight);
+
+    QObject::connect(
+        buttonContentsAdd, SIGNAL(clicked()),
+        this, SLOT(buttonContentsAddClicked()));
+    QObject::connect(
+        buttonContentsModify, SIGNAL(clicked()),
+        this, SLOT(buttonContentsModifyClicked()));
+    QObject::connect(
+        buttonContentsRemove, SIGNAL(clicked()),
+        this, SLOT(buttonContentsRemoveClicked()));
 }
 
 bool LancelotPartConfig::iconClickActivation() const
@@ -106,10 +122,85 @@ void LancelotPartConfig::setIcon(const QIcon & icon)
 
 void LancelotPartConfig::setPartData(const QString & data)
 {
-    textData->setPlainText(data);
+    foreach (const QString & itemData, data.split('\n')) {
+        addItem(itemData);
+    }
+}
+
+void LancelotPartConfig::addItem(const QString & itemData)
+{
+    if (itemData.isEmpty()) return;
+
+    listModels->addItem(QString::null);
+    setItemData(listModels->item(listModels->count() - 1) , itemData);
+}
+
+void LancelotPartConfig::setItemData(
+    QListWidgetItem * item, const QString & itemData)
+{
+    if (itemData.isEmpty()) return;
+
+    QMap < QString, QString > dataMap =
+        Lancelot::Models::Serializator::deserialize(itemData);
+
+    item->setData(Qt::DisplayRole, dataMap["model"]);
+    item->setData(Qt::UserRole, itemData);
+    item->setData(Qt::SizeHintRole, QSize(0, 48));
+    item->setData(Qt::DecorationRole, KIcon("plasmaapplet-shelf"));
+
 }
 
 QString LancelotPartConfig::partData() const
 {
-    return textData->toPlainText();
+    QString result;
+
+    for (int i = 0; i < listModels->count(); i++) {
+        if (!result.isEmpty()) {
+            result += '\n';
+        }
+
+        QListWidgetItem * item = listModels->item(i);
+        result += item->data(Qt::UserRole).toString();
+
+    }
+
+    return result;
 }
+
+void LancelotPartConfig::buttonContentsAddClicked()
+{
+    addItem(
+        QInputDialog::getText(
+            0,
+            "...",
+            "...",
+            QLineEdit::Normal,
+            QString::null
+        )
+    );
+
+}
+
+void LancelotPartConfig::buttonContentsModifyClicked()
+{
+    foreach (QListWidgetItem * item, listModels->selectedItems()) {
+        setItemData(item,
+            QInputDialog::getText(
+                0,
+                "...",
+                "...",
+                QLineEdit::Normal,
+                item->data(Qt::UserRole).toString()
+            )
+        );
+    }
+
+}
+
+void LancelotPartConfig::buttonContentsRemoveClicked()
+{
+    foreach (QListWidgetItem * item, listModels->selectedItems()) {
+        listModels->removeItemWidget(item);
+    }
+}
+
