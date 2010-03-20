@@ -43,6 +43,9 @@ public:
     void setContentsExtenderPosition(Lancelot::ExtenderPosition position);
     void setShowSearchBox(bool value);
 
+    void setPartData(const QString & data);
+    QString partData() const;
+
     QButtonGroup * qbgIcon;
     QButtonGroup * qbgContents;
     QButtonGroup * qbgContentsExtenderPosition;

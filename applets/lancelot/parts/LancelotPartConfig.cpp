@@ -103,3 +103,13 @@ void LancelotPartConfig::setIcon(const QIcon & icon)
 {
     iconChooser->setIcon(icon);
 }
+
+void LancelotPartConfig::setPartData(const QString & data)
+{
+    textData->setPlainText(data);
+}
+
+QString LancelotPartConfig::partData() const
+{
+    return textData->toPlainText();
+}

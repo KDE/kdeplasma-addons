@@ -32,16 +32,6 @@ public:
     PartsMergedModel();
     ~PartsMergedModel();
 
-    L_Override bool hasModelContextActions(int index) const;
-    L_Override void setModelContextActions(int index, Lancelot::PopupMenu * menu);
-    L_Override void modelContextActivate(int index, QAction * context);
-    L_Override void setModelDropActions(int index,
-            Qt::DropActions & actions, Qt::DropAction & defaultAction);
-    L_Override void modelDataDropped(int index, Qt::DropAction action);
-
-    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
-    L_Override void dataDropped(int where, const QMimeData * mimeData);
-
     bool append(const QMimeData * mimeData);
     bool append(const QString & mimeData);
     bool append(const QString & path, const KFileItem & fileItem);
@@ -55,11 +45,23 @@ public:
     bool loadFromList(const QStringList & list);
     bool loadDirectory(const QString & url);
 
+    L_Override bool hasModelContextActions(int index) const;
+    L_Override void setModelContextActions(int index, Lancelot::PopupMenu * menu);
+    L_Override void modelContextActivate(int index, QAction * context);
+    L_Override void setModelDropActions(int index,
+            Qt::DropActions & actions, Qt::DropAction & defaultAction);
+    L_Override void modelDataDropped(int index, Qt::DropAction action);
+
+    L_Override bool dataDropAvailable(int where, const QMimeData * mimeData);
+    L_Override void dataDropped(int where, const QMimeData * mimeData);
+
+private:
     QList < Lancelot::ActionListModel * > m_models;
     QString m_data;
 
 Q_SIGNALS:
     void removeModelRequested(int index);
+    void modelContentsUpdated();
 };
 
 } // namespace Models

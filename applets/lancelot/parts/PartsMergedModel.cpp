@@ -100,8 +100,15 @@ void PartsMergedModel::modelDataDropped(int index, Qt::DropAction action)
 
 bool PartsMergedModel::dataDropAvailable(int where, const QMimeData * mimeData)
 {
+    kDebug() << mimeData->formats();
+
     if (mimeData->formats().contains("text/x-lancelotpart") ||
         mimeData->formats().contains("inode/directory")) {
+        return true;
+    }
+
+    if (mimeData->formats().contains("text/uri-list")) {
+        // TODO: Check whether urls are for directories
         return true;
     }
 
@@ -111,7 +118,9 @@ bool PartsMergedModel::dataDropAvailable(int where, const QMimeData * mimeData)
 void PartsMergedModel::dataDropped(int where, const QMimeData * mimeData)
 {
     if (mimeData->formats().contains("text/x-lancelotpart") ||
-            mimeData->formats().contains("inode/directory")) {
+            mimeData->formats().contains("inode/directory") ||
+            mimeData->formats().contains("text/uri-list")
+            ) {
         append(mimeData);
     }
 
@@ -136,6 +145,8 @@ bool PartsMergedModel::append(const QMimeData * mimeData)
     }
 
     QString file = mimeData->data("text/uri-list");
+    kDebug() << file;
+
     KMimeType::Ptr mimeptr = KMimeType::findByUrl(KUrl(file));
     if (!mimeptr) {
         return false;
@@ -174,6 +185,8 @@ void PartsMergedModel::remove(int index)
     QStringList configs = m_data.split('\n');
     configs.removeAt(index);
     m_data = configs.join("\n");
+
+    emit modelContentsUpdated();
 }
 
 bool PartsMergedModel::loadFromFile(const QString & url)
@@ -304,6 +317,7 @@ bool PartsMergedModel::load(const QString & input)
         m_data += input;
     }
 
+    emit modelContentsUpdated();
     return loaded;
 }
 

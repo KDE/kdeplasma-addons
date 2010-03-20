@@ -64,6 +64,7 @@ protected:
 private Q_SLOTS:
     void removeModel(int index);
     void immutabilityChanged(Plasma::ImmutabilityType value);
+    void modelContentsUpdated();
 
 private:
     bool loadFromList(const QStringList & list);
@@ -74,7 +75,6 @@ private:
     void applyConfig();
 
     QGraphicsWidget * m_root;
-    // Lancelot::FullBorderLayout * m_layout;
     QGraphicsLinearLayout * m_layout;
     Lancelot::ActionListView * m_list;
     Plasma::LineEdit * m_searchText;

@@ -47,11 +47,13 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
 
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
+
     setPopupIcon(DEFAULT_ICON);
     setBackgroundHints(StandardBackground);
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
-    // setPassivePopup(true);
 
+    // Searching for Plasma::IconWidget so that we can react
+    // to hover without clicking if the user wants it
     foreach (QGraphicsItem * child, childItems()) {
         Plasma::IconWidget * icon = dynamic_cast < Plasma::IconWidget * > (child);
         if (icon) {
@@ -59,7 +61,6 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
             m_icon->installEventFilter(this);
         }
     }
-
 }
 
 void LancelotPart::init()
@@ -67,7 +68,6 @@ void LancelotPart::init()
     // Setting up UI
     m_root = new QGraphicsWidget(this);
 
-    // m_layout = new Lancelot::FullBorderLayout();
     m_layout = new QGraphicsLinearLayout();
     m_layout->setOrientation(Qt::Vertical);
 
@@ -101,6 +101,11 @@ void LancelotPart::init()
             this, SLOT(removeModel(int))
     );
 
+    connect(
+            m_model, SIGNAL(modelContentsUpdated()),
+            this, SLOT(modelContentsUpdated())
+    );
+
     // Listening to immutability
     Plasma::Corona * corona = (Plasma::Corona *) scene();
     immutabilityChanged(corona->immutability());
@@ -120,9 +125,14 @@ void LancelotPart::init()
     KGlobal::locale()->insertCatalog("lancelot");
     applyConfig();
 
-    if (!m_model->m_models.size()) {
-        setConfigurationRequired(true);
-    }
+    modelContentsUpdated();
+}
+
+void LancelotPart::modelContentsUpdated()
+{
+    kDebug() << m_model->modelCount();
+    setConfigurationRequired(m_model->modelCount() < 1);
+    saveConfig();
 }
 
 void LancelotPart::dragEnterEvent(QGraphicsSceneDragDropEvent * event)
@@ -271,17 +281,15 @@ void LancelotPart::createConfigurationInterface(KConfigDialog * parent)
             (int)Lancelot::RightExtender));
     m_config.setShowSearchBox(
             kcg.readEntry("showSearchBox", false));
+    m_config.setPartData(
+            kcg.readEntry("partData", QString()));
 
     parent->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
 
-    // m_config.pageContents->setParent(parent);
     parent->addPage(m_config.pageContents, i18n("Contents"), icon());
-
-    // m_config.pageAdvanced->setParent(parent);
-    // parent->addPage(widget, i18n("Advanced"), icon());
-    parent->addPage(m_config.pageAdvanced, i18n("Advanced"), icon());
+    parent->addPage(m_config.pageAdvanced, i18n("Advanced"), "configure");
 }
 
 void LancelotPart::applyConfig()
@@ -326,6 +334,7 @@ void LancelotPart::configAccepted()
     kcg.writeEntry("contentsExtenderPosition",
             (int)m_config.contentsExtenderPosition());
     kcg.writeEntry("showSearchBox", m_config.showSearchBox());
+    kcg.writeEntry("partData", m_config.partData());
 
     kcg.sync();
     applyConfig();

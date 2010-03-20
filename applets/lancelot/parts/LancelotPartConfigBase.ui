@@ -160,6 +160,59 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Contents:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="listModels"/>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="textData"/>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="buttonAdd">
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonModify">
+           <property name="text">
+            <string>Modify</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonRemove">
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -167,7 +220,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>299</height>
+          <height>36</height>
          </size>
         </property>
        </spacer>
