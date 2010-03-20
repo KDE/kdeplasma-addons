@@ -200,7 +200,7 @@ void LancelotPartConfig::buttonContentsModifyClicked()
 void LancelotPartConfig::buttonContentsRemoveClicked()
 {
     foreach (QListWidgetItem * item, listModels->selectedItems()) {
-        listModels->removeItemWidget(item);
+        listModels->takeItem(listModels->row(item));
     }
 }
 
