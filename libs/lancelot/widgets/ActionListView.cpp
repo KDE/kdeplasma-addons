@@ -301,6 +301,7 @@ void ActionListViewItemFactory::activate(int index) //>
         return;
     }
     m_model->activated(index);
+
     emit activated(index);
 } //<
 

@@ -23,6 +23,7 @@
 #include <ui_LancelotPartConfigBase.h>
 
 #include <Lancelot/Lancelot>
+#include <Lancelot/PopupList>
 
 class LancelotPartConfig: public QObject, public Ui::LancelotPartConfigBase {
     Q_OBJECT
@@ -58,8 +59,11 @@ public:
 
 public Q_SLOTS:
     void buttonContentsAddClicked();
-    void buttonContentsModifyClicked();
     void buttonContentsRemoveClicked();
+    void buttonContentsAddItemSelected(int index);
+
+private:
+    Lancelot::PopupList * popup;
 
 };
 

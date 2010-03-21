@@ -44,6 +44,7 @@ set(lancelot_datamodels_LIB_SRCS
    Devices.cpp
    FavoriteApplications.cpp
    FolderModel.cpp
+   AvailableModels.cpp
    Logger.cpp
    MessagesKmail.cpp
    NewDocuments.cpp
@@ -106,6 +107,7 @@ set(lancelot_datamodels_LIB_INCLUDES
    Devices.h
    FavoriteApplications.h
    FolderModel.h
+   AvailableModels.h
    Logger.h
    MessagesKmail.h
    NewDocuments.h
@@ -126,6 +128,7 @@ install(FILES
 
 install(FILES
    Lancelot/Models/Applications
+   Lancelot/Models/AvailableModels
    Lancelot/Models/BaseMergedModel
    Lancelot/Models/BaseModel
    Lancelot/Models/ContactsKopete

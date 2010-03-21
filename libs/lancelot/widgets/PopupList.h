@@ -120,6 +120,8 @@ protected:
      */
     void exec(const QPoint & p, PopupList * parent);
 
+Q_SIGNALS:
+    void activated(int index);
 
 public Q_SLOTS:
     /**

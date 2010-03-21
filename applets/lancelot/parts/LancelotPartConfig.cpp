@@ -24,10 +24,16 @@
 #include <QInputDialog>
 
 #include <Lancelot/Models/Serializator>
+#include <Lancelot/Models/AvailableModels>
+#include <Lancelot/PopupList>
+
+#include <KDebug>
 
 void LancelotPartConfig::setupUi(QWidget * widget)
 {
     Ui::LancelotPartConfigBase::setupUi(widget);
+
+    popup = NULL;
 
     qbgIcon = new QButtonGroup(widget);
     qbgIcon->addButton(radioIconActivationClick);
@@ -43,17 +49,14 @@ void LancelotPartConfig::setupUi(QWidget * widget)
 
     buttonContentsAdd->setIcon(KIcon("list-add"));
     buttonContentsRemove->setIcon(KIcon("list-remove"));
-    buttonContentsModify->setIcon(KIcon("configure"));
 
     QObject::connect(
         buttonContentsAdd, SIGNAL(clicked()),
         this, SLOT(buttonContentsAddClicked()));
     QObject::connect(
-        buttonContentsModify, SIGNAL(clicked()),
-        this, SLOT(buttonContentsModifyClicked()));
-    QObject::connect(
         buttonContentsRemove, SIGNAL(clicked()),
         this, SLOT(buttonContentsRemoveClicked()));
+
 }
 
 bool LancelotPartConfig::iconClickActivation() const
@@ -173,38 +176,33 @@ QString LancelotPartConfig::partData() const
 
 void LancelotPartConfig::buttonContentsAddClicked()
 {
-    addItem(
-        QInputDialog::getText(
-            0,
-            "...",
-            "...",
-            QLineEdit::Normal,
-            QString::null
-        )
-    );
-
-}
-
-void LancelotPartConfig::buttonContentsModifyClicked()
-{
-    foreach (QListWidgetItem * item, listModels->selectedItems()) {
-        setItemData(item,
-            QInputDialog::getText(
-                0,
-                "...",
-                "...",
-                QLineEdit::Normal,
-                item->data(Qt::UserRole).toString()
-            )
-        );
+    if (!popup) {
+        popup = new Lancelot::PopupList();
+        connect(popup, SIGNAL(activated(int)),
+            this, SLOT(buttonContentsAddItemSelected(int)));
+        popup->setModel(Lancelot::Models::AvailableModels::self());
     }
 
+    popup->exec(QCursor::pos());
 }
 
 void LancelotPartConfig::buttonContentsRemoveClicked()
 {
     foreach (QListWidgetItem * item, listModels->selectedItems()) {
         listModels->takeItem(listModels->row(item));
+    }
+}
+
+void LancelotPartConfig::buttonContentsAddItemSelected(int index)
+{
+    kDebug() << index;
+    QString data = Lancelot::Models::AvailableModels::self()->
+            serializedDataForItem(index);
+    kDebug() << data;
+
+    if (!data.isEmpty()) {
+        addItem(data);
+        popup->hide();
     }
 }
 

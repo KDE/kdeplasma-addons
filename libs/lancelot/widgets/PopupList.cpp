@@ -157,6 +157,8 @@ void PopupList::Private::listItemActivated(int index)
                 // nothing
         }
     }
+
+    emit q->activated(index);
 }
 
 PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
