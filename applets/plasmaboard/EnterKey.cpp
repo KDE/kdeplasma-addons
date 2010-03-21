@@ -22,15 +22,14 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-EnterKey::EnterKey(PlasmaboardWidget *parent) : FuncKey(parent) {
-	// TODO Auto-generated constructor stub
-	setKeycode(XK_Return, true);
+EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Return, QString()) {
+
 }
 
-void EnterKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-	Plasma::PushButton::paint(painter, option, widget);
 
-	setUpPainter(painter);
+void EnterKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+
 	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
 	painter->drawLine(-1, 0, 3, 0);

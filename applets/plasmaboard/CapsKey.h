@@ -25,7 +25,7 @@
 
 class CapsKey: public FuncKey {
 public:
-	CapsKey(PlasmaboardWidget *parent);
+        CapsKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

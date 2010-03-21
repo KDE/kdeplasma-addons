@@ -21,14 +21,12 @@
 #include "CapsKey.h"
 #include <QPainter>
 
-CapsKey::CapsKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Caps_Lock, true);
+CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Caps_Lock, QString()){
+
 }
 
 void CapsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-	Plasma::PushButton::paint(painter, option, widget);
-
-	setUpPainter(painter);
 
 	const QPointF points[7] = {
 		     QPointF(0, 3),

@@ -22,14 +22,13 @@
 #include <QPainter>
 #include <plasma/theme.h>
 
-TabKey::TabKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Tab, true);
+TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Tab, QString()){
+
 }
 
 void TabKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-	Plasma::PushButton::paint(painter, option, widget);
 
-	setUpPainter(painter);
 	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
 	painter->drawLine(-1, -2 , 3, -2);

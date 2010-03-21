@@ -21,53 +21,49 @@
 #define BOARDKEY_H
 
 #include <widget.h>
-#include <plasma/widgets/pushbutton.h>
 
-class PlasmaboardWidget;
+class BoardKey  {
 
-class BoardKey : public Plasma::PushButton  {
-	 Q_OBJECT
 public:
-	BoardKey(PlasmaboardWidget *parent);
-	virtual ~BoardKey();
+    BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
+    virtual ~BoardKey();
 
-	unsigned int getKeycode();
+    const bool contains (const QPoint &point) const;
+    const bool intersects (const QRectF &rect) const;
+    const unsigned int getKeycode() const;
+    virtual const QString label() const;
+    virtual void paint(QPainter *painter);
+    const QPoint position() const;
+    /**
+      * called when button is pressed
+      */
+    virtual void pressed();
+    const QRectF rect() const;
+    const QSize relativeSize() const;
+    /**
+      * called when button is pressed
+      */
+    virtual void released();
+    /**
+      * Called to "unpress" the button
+      */
+    void reset();
+    void sendKeycode();
+    void sendKeycodePress();
+    void sendKeycodeRelease();
+    void setPixmap(QPixmap *pixmap);
+    const QSize size() const;
+    void unpressed();
+    void updateDimensions(double factor_x, double factor_y);
 
-	/*
-	  Replaces text on the button. Warning! This does not trigger a repaint for performance reasons.
-	  If you are updating an already painted button, call update() !
-	  */
-	void setText(QString text);
-        QString text();
 private:
-	QTimer* m_pushUp;
-	QString labelText;
-	int fontSize;
-
-public Q_SLOTS:
-	void sendKeycodePress();
-	void sendKeycodeRelease();
-	void sendKeycodeToggled();
-
-
-protected Q_SLOTS:
-	/*
-	 * Called to "unpress" the button
-	 */
-	void reset();
-	/*
-	 * called when button is pressed
-	 */
-	virtual void pressed();
-	/*
-	 * called when button is pressed
-	 */
-	virtual void released();
-
-protected:
-        void setUpPainter(QPainter *painter);
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-	unsigned int keycode;
+    unsigned int m_keycode;
+    QPixmap* m_pixmap;
+    QPoint m_position;
+    QPoint m_relativePosition;
+    QRectF m_rect;
+    QSize m_relativeSize;
+    QSize m_size;
 
 };
 

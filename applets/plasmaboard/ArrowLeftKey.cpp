@@ -21,14 +21,12 @@
 #include "ArrowLeftKey.h"
 #include <QPainter>
 
-ArrowLeftKey::ArrowLeftKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Left, true);
+ArrowLeftKey::ArrowLeftKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Left, QString()){
+
 }
 
 void ArrowLeftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
-	Plasma::PushButton::paint(painter, option, widget);
-	setUpPainter(painter);
 
 	paintArrow(painter);
 }

@@ -20,83 +20,109 @@
 #include "BoardKey.h"
 #include "Helpers.h"
 #include <QPainter>
-#include <QTimer>
-#include <plasma/theme.h>
-#include <kpushbutton.h>
 
-BoardKey::BoardKey(PlasmaboardWidget *parent):
-	Plasma::PushButton(parent),fontSize(60) {
+BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode) :
+    m_relativePosition(relativePosition), m_relativeSize(relativeSize), m_keycode(keycode){
 
-	setMinimumSize(5,5);
-	setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored, QSizePolicy::DefaultType);
-
-	connect(this, SIGNAL( clicked() ), this, SLOT( released() ) );
-	connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( pressed() ) );
-
-	m_pushUp = new QTimer();
-	connect(m_pushUp, SIGNAL( timeout() ), this, SLOT( reset() ) );
 }
 
-BoardKey::~BoardKey() {
-	delete m_pushUp;
+BoardKey::~BoardKey()
+{
+
 }
 
-unsigned int BoardKey::getKeycode() {
-	return keycode;
+const bool BoardKey::contains (const QPoint &point) const
+{
+    return m_rect.contains(point);
 }
 
-void BoardKey::pressed(){
-	m_pushUp->stop();
-}
-
-void BoardKey::released(){
-	m_pushUp->start(500);
-	nativeWidget()->setDown(true);
-	sendKeycodePress();
-	sendKeycodeRelease();
-}
-
-void BoardKey::reset(){
-	nativeWidget()->setDown(false);
-	m_pushUp->stop();
-}
-
-void BoardKey::sendKeycodePress() {
-	Helpers::fakeKeyPress(getKeycode());
-}
-
-void BoardKey::sendKeycodeRelease() {
-	Helpers::fakeKeyRelease(getKeycode());
+const bool BoardKey::intersects (const QRectF &rect) const
+{
+    return m_rect.intersects(rect);
 }
 
 
-void BoardKey::sendKeycodeToggled() {}
-
-void BoardKey::setUpPainter(QPainter *painter){
-	painter->setRenderHints(QPainter::Antialiasing);
-	painter->setPen(QPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor)));
-
-	painter->translate(contentsRect().center());
-	double mul = qMin(contentsRect().width(), contentsRect().height()) / 10;
-	painter->scale(mul, mul);
+const unsigned int BoardKey::getKeycode() const
+{
+    return m_keycode;
 }
 
-void BoardKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-        Plasma::PushButton::paint(painter, option, widget);
-
-	setUpPainter(painter); // scales the matrix
-	painter->scale(0.1, 0.1);
-
-	painter->setFont(QFont ( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
-	painter->drawText(QRect(-50,-50,100,100), Qt::AlignCenter , labelText); // don't know why rect must be like that
+const QString BoardKey::label() const
+{
+    return QString();
 }
 
-void BoardKey::setText(QString text) {
-	labelText = text;
-	fontSize = (text.size() > 1) ? ((text.size() > 3) ? 20 : 40) : 60;
-	//Plasma::PushButton::setText(text);
+void BoardKey::paint(QPainter *painter)
+{
+    painter->eraseRect(m_rect);
+    //painter->fillRect(m_rect, QColor(Qt::transparent));
+    painter->drawPixmap(m_position, *m_pixmap);
+    //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
 }
 
-QString BoardKey::text() {
-	return labelText;
+const QPoint BoardKey::position() const
+{
+    return m_position;
+}
+
+void BoardKey::pressed()
+{
+
+}
+
+void BoardKey::released()
+{	
+    sendKeycode();
+}
+
+const QRectF BoardKey::rect() const
+{
+    return m_rect;
+}
+
+const QSize BoardKey::relativeSize() const
+{
+    return m_relativeSize;
+}
+
+void BoardKey::reset()
+{
+}
+
+void BoardKey::sendKeycode()
+{
+    sendKeycodePress();
+    sendKeycodeRelease();
+}
+
+void BoardKey::sendKeycodePress()
+{
+     Helpers::fakeKeyPress(getKeycode());
+}
+
+void BoardKey::sendKeycodeRelease()
+{
+    Helpers::fakeKeyRelease(getKeycode());
+}
+
+void BoardKey::setPixmap(QPixmap *pixmap)
+{
+    m_pixmap = pixmap;
+}
+
+const QSize BoardKey::size() const
+{
+    return m_size;
+}
+
+void BoardKey::unpressed()
+{
+
+}
+
+void BoardKey::updateDimensions(double factor_x, double factor_y)
+{
+    m_position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
+    m_size = QSize(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
+    m_rect = QRect(m_position, m_size);
 }

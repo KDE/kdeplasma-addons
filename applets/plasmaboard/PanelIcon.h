@@ -26,7 +26,7 @@
 
 
 class PanelIcon: public Plasma::PopupApplet {
-Q_OBJECT
+    Q_OBJECT
 public:
 	PanelIcon(QObject *parent, const QVariantList &args);
 	virtual ~PanelIcon();
@@ -48,10 +48,10 @@ public Q_SLOTS:
 
 	void toggleMode();
 
-        /*
+    /*
          * Initialize the keyboard with the configured layout
         */
-        void initKeyboard();
+    void initKeyboard();
 
 protected:
 	/*
@@ -60,13 +60,13 @@ protected:
 	virtual void popupEvent(bool show);
 
 private:
-        void init();
+    void init();
 
 private:
 	PlasmaboardWidget *m_plasmaboard;
 	const QVariantList args;
-        QAction *contextBasic;
-        QAction *contextExtended;
+    QAction *contextBasic;
+    QAction *contextExtended;
 	bool extendedMode;
 
 };

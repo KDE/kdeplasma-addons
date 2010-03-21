@@ -23,35 +23,25 @@
 
 #include "BoardKey.h"
 
-class PlasmaboardWidget;
 class AlphaNumKey: public BoardKey {
 
-    Q_OBJECT
 
 public:
-	AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym);
-	virtual ~AlphaNumKey();
+    AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
+    virtual ~AlphaNumKey();
 
-	void switchKey(bool isLevel2, bool isAlternative, bool isLocked);
-        /*
-          defines the keycode this button must send
-          */
-	void setKeycode(unsigned int keysym);
-        /*
-          * Sets button text regarding the key level
-          */
-	void setLabel(int level);
+    virtual const QString label() const;
+    virtual void paint(QPainter *painter);
 
+    /**
+      * Sets button text regarding the key level
+      */
+    void setLabel(int level);
+    void setLabel(QString &label);
+    void switchKey(bool isLevel2, bool isAlternative, bool isLocked); 
 
-protected Q_SLOTS:
-	/*
-	  * called when button is pressed
-	  */
-	virtual void pressed();
-
-
-signals:
-	void keyPressed ( QString text, QSizeF size, QPointF pos );
+private:
+    QString m_label;
 
 };
 

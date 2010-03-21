@@ -24,9 +24,9 @@
 #include "FuncKey.h"
 
 class ShiftKey: public FuncKey {
-    Q_OBJECT
+
 public:
-	ShiftKey(PlasmaboardWidget *parent);
+        ShiftKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

@@ -21,33 +21,31 @@
 #ifndef FUNCKEY_H
 #define FUNCKEY_H
 
-#include "BoardKey.h"
+#include "AlphaNumKey.h"
 
 class PlasmaboardWidget;
 
-class FuncKey: public BoardKey {
+class FuncKey: public AlphaNumKey {
 
-    Q_OBJECT
 
 public:
-	FuncKey(PlasmaboardWidget *parent);
+    FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label);
 	void toggleOn();
 	void toggleOff();
 	bool toggled();
-	void setKeycode(unsigned int code, bool sendUp);
 	void setKey(unsigned int code, bool sendUp, const QString text);
-
-
-public Q_SLOTS:
 	void sendKeycodeToggled();
 	void toggle(bool toggle);
 
 protected:
+    virtual void paint(QPainter *painter);
 	virtual void released();
 
 private:
+    QString m_label;
 	bool pressed;
 	bool toggler;
+
 
 protected:
 	void paintArrow(QPainter *painter);

@@ -21,16 +21,12 @@
 #include "ShiftKey.h"
 #include <QPainter>
 
-ShiftKey::ShiftKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Shift_L, false);
-	QObject::connect(parent, SIGNAL( shiftKey(bool) ), this, SLOT( toggle(bool) ) );
+ShiftKey::ShiftKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Shift_L, QString()){
+
 }
 
 void ShiftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-	Plasma::PushButton::paint(painter, option, widget);
-
-	setUpPainter(painter);
-
 
 	const QPointF points[7] = {
 		     QPointF(0, -3),

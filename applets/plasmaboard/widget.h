@@ -26,8 +26,6 @@
 
 #include <plasma/containment.h>
 #include <plasma/dataengine.h>
-#include <plasma/widgets/label.h>
-
 
 
 #define XK_TECHNICAL
@@ -36,97 +34,109 @@
 #include <X11/keysym.h>
 
 class AlphaNumKey;
+class BoardKey;
 class FuncKey;
-class QGraphicsGridLayout;
 
+namespace {
+    class DataEngine;
+    class FrameSvg;
+}
 
 class PlasmaboardWidget : public Plasma::Containment
 {
     Q_OBJECT
-    public:
-        // Basic Create/Destroy
-    	PlasmaboardWidget(QGraphicsWidget *parent);
-        ~PlasmaboardWidget();
+public:
 
-        // The paintInterface procedure paints the applet to screen
-        void paint(QPainter *painter,
-                const QStyleOptionGraphicsItem *option,
-                 QWidget*);
+    PlasmaboardWidget(QGraphicsWidget *parent);
+    ~PlasmaboardWidget();
 
-        /*
-          * Draws just basic keys on the keyboard - just for writing
-          */
-        void initBasicKeyboard(int offset=0);
+    /**
+      * Clears lock key and calls clear()
+      */
+    void clearAnything();
 
-        /*
-          * Draws nearly all keys of a pc-105 keyboard on the board
-          */
-        void initExtendedKeyboard();
+    /**
+      * Draws just basic keys on the keyboard - just for writing
+      */
+    void initKeyboard();
 
-        /*
-          * Deletes all keys for resetting the keyboard
-          */
-        void resetKeyboard();
+    /**
+      * The paintInterface procedure paints the applet to screen
+      */
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*);
 
-        /*
-          * Clears lock key and calls clear()
-          */
-        void clearAnything();
+    /**
+      * Deletes all keys for resetting the keyboard
+      */
+    void resetKeyboard();
 
-	Plasma::Label* switcher;
+protected:
+    virtual void mouseMoveEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void mousePressEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void resizeEvent ( QGraphicsSceneResizeEvent * event );
+    //virtual bool event ( QEvent * event );
+
+private:
+    /**
+      * Removes tooltip
+      */
+    void clearTooltip();    
+    QPixmap *getActiveFrame(const QSize &size);
+    QPixmap *getFrame(const QSize &size);
+    void press(BoardKey* key);
+    void release(BoardKey* key);
+    void unpress(BoardKey* key);
+
+public Q_SLOTS:
+
+    /**
+      * Unsets all pressed keys despite of caps
+      */
+    void clear();
+
+    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
+
+    /**
+      * Triggers a relabeling of alphanumeric keys on the keyboard
+      */
+    void relabelKeys();
+    void refresh();
+
+    /**
+      * Sets tooltip to a new text
+      */
+    void setTooltip(BoardKey* key);
+
+signals:
+    void shiftKey(bool value);
+    void altKey(bool value);
+    void altGrKey(bool value);
+    void superKey(bool value);
+    void controlKey(bool value);
+    void menuKey(bool value);
 
 
-    public Q_SLOTS:
+private:
+    Plasma::FrameSvg* m_activeFrame;
+    QHash<QSize, QPixmap*> m_activeFrames;
+    QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
+    Plasma::DataEngine* m_engine;
+    Plasma::FrameSvg* m_frame;
+    QHash<QSize, QPixmap*> m_frames;
+    QList<FuncKey*> m_funcKeys; // functional keys like shift, backspace, enter
+    bool m_isAlternative; // alternative key level activated
+    bool m_isLevel2; // second key level activated
+    bool m_isLocked; // is lock activated
+    QList<BoardKey*> m_keys;
+    QList<BoardKey*> m_pressedList;
+    Tooltip* m_tooltip;
 
-        /*
-          Unsets all pressed keys despite of caps
-          */
-	void clear();
-
-	/*
-	  Triggers a relabeling of alphanumeric keys on the keyboard
-	  */
-	void relabelKeys();
-
-        /*
-          Sets tooltip to a new text
-          */
-	void setTooltip(QString text, QSizeF buttonSize, QPointF position);
-
-
-	void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
-
-	private:
-
-	 /*
-	  * Removes tooltip
-	  */
-	void clearTooltip();
-
-
-		Plasma::DataEngine* engine;
-
-                QList<AlphaNumKey*> alphaKeys; // normal keys labeled with symbols like a, b, c
-                QList<FuncKey*> funcKeys; // functional keys like shift, backspace, enter
-                QList<FuncKey*> extKeys; // keys only shown in the extended layout as F1, F2,..
-                bool isLevel2; // second key level activated
-                bool isAlternative; // alternative key level activated
-                bool isLocked; // is lock activddated
-                bool basicKeys; // are basic keys displayed
-                bool extendedKeys; // are extended keys displayed
-                QGraphicsGridLayout *m_layout; // layout the keys are positioned in
-		//Plasma::ToolTipContent tooltip;
-
-		Tooltip* tooltip;
-
-	signals:
-		void shiftKey(bool value);
-		void altKey(bool value);
-		void altGrKey(bool value);
-		void superKey(bool value);
-		void controlKey(bool value);
-		void menuKey(bool value);
 };
 
+inline uint qHash(const QSize &key)
+{
+    return qHash(key.width()) + qHash(key.height());
+}
 
 #endif /* WIDGET_H */

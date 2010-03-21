@@ -24,7 +24,7 @@
 
 class EnterKey: public FuncKey {
 public:
-	EnterKey(PlasmaboardWidget *parent);
+        EnterKey(QPoint relativePosition, QSize relativeSize);
 
 	protected:
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

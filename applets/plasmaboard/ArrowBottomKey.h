@@ -25,7 +25,7 @@
 
 class ArrowBottomKey: public FuncKey {
 public:
-	ArrowBottomKey(PlasmaboardWidget *parent);
+        ArrowBottomKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

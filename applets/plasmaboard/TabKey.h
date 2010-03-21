@@ -25,7 +25,7 @@
 
 class TabKey: public FuncKey {
 public:
-	TabKey(PlasmaboardWidget *parent);
+        TabKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

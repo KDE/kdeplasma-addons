@@ -22,14 +22,12 @@
 #include <QPainter>
 
 
-ArrowTopKey::ArrowTopKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Up, true);
+ArrowTopKey::ArrowTopKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Up, QString()){
+
 }
 
 void ArrowTopKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
-	Plasma::PushButton::paint(painter, option, widget);
-	setUpPainter(painter);
 
 	painter->rotate(90);
 	paintArrow(painter);

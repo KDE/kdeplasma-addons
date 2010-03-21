@@ -32,8 +32,8 @@
 #include "ArrowLeftKey.h"
 #include "ArrowRightKey.h"
 #include <QPainter>
-#include <QGraphicsGridLayout>
-
+#include <QGraphicsSceneResizeEvent>
+#include <plasma/theme.h>
 #include "Helpers.h"
 
 #define BACKSPACEKEY 0
@@ -64,9 +64,6 @@
 #define ARROWBOTTOMKEY	24
 #define ARROWRIGHTKEY	25
 
-#define FIRST_ROW 1
-
-
 QChar Helpers::mapXtoUTF8[0xffff+1];
 
 PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
@@ -80,62 +77,113 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     Helpers::buildUp();
-    isLevel2 = false;
-    isAlternative = false;
-    isLocked = false;
-    m_layout = new QGraphicsGridLayout(this);
-    extendedKeys = false;
-    basicKeys = false;
+    m_isLevel2 = false;
+    m_isAlternative = false;
+    m_isLocked = false;
 
-    tooltip = new Tooltip("");
+    m_tooltip = new Tooltip("");
 
-    switcher = new Plasma::Label(this);
+    m_frame = new Plasma::FrameSvg();
+    m_frame->setImagePath("widgets/button");
+    m_frame->setElementPrefix("normal");
 
-    m_layout->addItem(switcher, 0, 0, 1, 10, Qt::AlignRight);
-    m_layout->setRowMinimumHeight ( 0, 10 );
-    m_layout->setRowPreferredHeight ( 0, 10 );
-    m_layout->setRowMaximumHeight ( 0, 15 );
-    QObject::connect(switcher, SIGNAL( linkActivated(QString) ), parent, SLOT( toggleMode() ) );
+    m_activeFrame = new Plasma::FrameSvg();
+    m_activeFrame->setImagePath("widgets/button");
+    m_activeFrame->setElementPrefix("active");
 
-    engine = dataEngine("keystate");
-    if(engine){
-	engine -> connectAllSources(this);
+    m_engine = dataEngine("keystate");
+    if(m_engine){
+        m_engine -> connectAllSources(this);
     }
+
+     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(refresh()));
 }
 
 
-PlasmaboardWidget::~PlasmaboardWidget(){
-    delete switcher;
-    delete tooltip;
+PlasmaboardWidget::~PlasmaboardWidget()
+{
+    delete m_frame;
+    delete m_activeFrame;
+    delete m_tooltip;
+    qDeleteAll(m_alphaKeys);
+    qDeleteAll(m_funcKeys);
+    qDeleteAll(m_frames);
+    qDeleteAll(m_activeFrames);
 }
 
-void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data){
+void PlasmaboardWidget::clear()
+{
+    bool change = false;
+    if( m_funcKeys[SHIFT_L_KEY]->toggled() || m_funcKeys[SHIFT_R_KEY]->toggled() ){
+        Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
+        m_funcKeys[SHIFT_L_KEY]->toggleOff();
+        m_funcKeys[SHIFT_R_KEY]->toggleOff();
+        m_isLevel2 = false;
+        change = true;
+    }
+    if( m_funcKeys[ALTGRKEY]->toggled() ){
+        Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_ISO_Level3_Shift));
+        m_funcKeys[ALTGRKEY]->toggleOff();
+        m_isAlternative = false;
+        change = true;
+    }
 
+    if(change){
+        relabelKeys();
+    }
+
+    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Control_L));
+    m_funcKeys[CTLKEY]->toggleOff();
+    m_funcKeys[CONTROL_LEFT]->toggleOff();
+    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
+    m_funcKeys[SUPER_L_KEY]->toggleOff();
+    m_funcKeys[SUPER_R_KEY]->toggleOff();
+    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
+    m_funcKeys[ALT_L_KEY]->toggleOff();
+
+    //clearTooltip();
+}
+
+void PlasmaboardWidget::clearAnything()
+{
+    if ( m_isLocked ) {
+        //m_funcKeys[CAPSKEY]->sendKeycode();
+    }
+    clear();
+}
+
+void PlasmaboardWidget::clearTooltip()
+{
+    m_tooltip->hide();
+}
+
+void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
+{
     if ( sourceName == "Shift" ){
 	if ( data["Pressed"].toBool() ){
 	    emit shiftKey(true);
-	    isLevel2 = true;
+        m_isLevel2 = true;
 	}
 	else{
 	    emit shiftKey(false);
-	    isLevel2 = false;
+        m_isLevel2 = false;
 	}
     }
     
     else if ( sourceName == "Caps Lock" ) {
 	if ( data["Pressed"].toBool() )
-	    isLocked = true;
+        m_isLocked = true;
 	else
-	    isLocked = false;
+        m_isLocked = false;
     }
 
     else if ( sourceName == "AltGr" ) {
 	if ( data["Pressed"].toBool() ){
-	    isAlternative = true;
+        m_isAlternative = true;
 	    emit altGrKey(true);
 	}
 	else{
-	    isAlternative = false;
+        m_isAlternative = false;
 	    emit altGrKey(false);
 	}
     }
@@ -169,354 +217,217 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
     relabelKeys();
 }
 
-void PlasmaboardWidget::resetKeyboard(){
-
-	if( basicKeys ){
-		int i = m_layout->count() - 1;
-		while(i >= 0){
-			m_layout->removeAt(i--);
-		}
-
-                qDeleteAll(funcKeys);
-                funcKeys.clear();
-
-                qDeleteAll(alphaKeys);
-                alphaKeys.clear();
-
-		basicKeys = false;
-	}
-
-	if( extendedKeys ) {
-                qDeleteAll(extKeys);
-                extKeys.clear();
-		extendedKeys = false;
-	}
-}
-
-void PlasmaboardWidget::initExtendedKeyboard(){
-	extendedKeys = true;
-
-	int i = 0;
-	while ( i < 42 ) {
-                extKeys << new FuncKey(this);
-		QObject::connect(extKeys[i], SIGNAL( clicked() ), this, SLOT( clear() ) );
-		i++;
-	}
-
-	delete extKeys[ARROWTOPKEY];
-	delete extKeys[ARROWLEFTKEY];
-	delete extKeys[ARROWBOTTOMKEY];
-	delete extKeys[ARROWRIGHTKEY];
-	extKeys[ARROWTOPKEY] = new ArrowTopKey(this);
-	extKeys[ARROWLEFTKEY] = new ArrowLeftKey(this);
-	extKeys[ARROWBOTTOMKEY] = new ArrowBottomKey(this);
-	extKeys[ARROWRIGHTKEY] = new ArrowRightKey(this);
-
-	m_layout->addItem(extKeys[0], FIRST_ROW, 0, 1, 2);
-	i = 1;
-	for(i = 1; i < 5; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+1, 1, 2);
-	}
-	for(i = 5; i < 9; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+2, 1, 2);
-	}
-	for(i = 9; i < 13; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+3, 1, 2);
-	}
-
-	for(i = 13; i < 16; i++){
-		m_layout->addItem(extKeys[i], FIRST_ROW, (i*2)+4, 1, 2);
-	}
-
-	extKeys[0]->setKey(XK_Escape, true, i18nc("The escape key on a keyboard", "Esc"));
-        extKeys[1]->setKey(XK_F1, true, i18n("F1"));
-        extKeys[2]->setKey(XK_F2, true, i18n("F2"));
-        extKeys[3]->setKey(XK_F3, true, i18n("F3"));
-        extKeys[4]->setKey(XK_F4, true, i18n("F4"));
-        extKeys[5]->setKey(XK_F5, true, i18n("F5"));
-        extKeys[6]->setKey(XK_F6, true, i18n("F6"));
-        extKeys[7]->setKey(XK_F7, true, i18n("F7"));
-        extKeys[8]->setKey(XK_F8, true, i18n("F8"));
-        extKeys[9]->setKey(XK_F9, true, i18n("F9"));
-        extKeys[10]->setKey(XK_F10, true, i18n("F10"));
-        extKeys[11]->setKey(XK_F11, true, i18n("F11"));
-        extKeys[12]->setKey(XK_F12, true, i18n("F12"));
-	extKeys[13]->setKey(XK_Print, true, i18nc("The print key on a keyboard", "Print"));
-	extKeys[14]->setKey(XK_Num_Lock, true, i18nc("The num key on a keyboard", "Num"));
-	extKeys[15]->setKey(XK_Pause, true, i18nc("The pause key on a keyboard", "Pause"));
-	
-	m_layout->addItem(extKeys[ARROWLEFTKEY], FIRST_ROW + 5, 29, 1, 2);
-
-	int col = 31;
-
-	m_layout->addItem(extKeys[HOMEKEY], FIRST_ROW + 1, col, 1, 2);
-	extKeys[HOMEKEY]->setKey(XK_Home, true, i18nc("The home key on a keyboard", "Home"));
-
-	m_layout->addItem(extKeys[ENDKEY], FIRST_ROW + 2, col, 1, 2);
-	extKeys[ENDKEY]->setKey(XK_End, true, i18nc("The end key on a keyboard", "End"));
-
-	m_layout->addItem(extKeys[INSKEY], FIRST_ROW + 3, col, 1, 2);
-	extKeys[INSKEY]->setKey(XK_Insert, true, i18nc("The insert key on a keyboard", "Ins"));
-
-	m_layout->addItem(extKeys[ARROWTOPKEY], FIRST_ROW + 4, col, 1, 2);
-	m_layout->addItem(extKeys[ARROWBOTTOMKEY], FIRST_ROW + 5, col, 1, 2);
-
-	col+=2;
-
-	m_layout->addItem(extKeys[ARROWRIGHTKEY], FIRST_ROW + 5, col, 1, 2);
-	m_layout->addItem(extKeys[DELKEY], FIRST_ROW + 1, col, 1, 2);
-	extKeys[DELKEY]->setKey(XK_Delete, true, i18nc("The delete key on a keyboard", "Del"));
-	m_layout->addItem(extKeys[PGUPKEY], FIRST_ROW + 2, col, 1, 2);
-	extKeys[PGUPKEY]->setKey(XK_Page_Up, true, i18nc("The page up key on a keyboard", "PgUp"));
-	m_layout->addItem(extKeys[PGDOWNKEY], FIRST_ROW + 3, col, 1, 2);
-	extKeys[PGDOWNKEY]->setKey(XK_Page_Down, true, i18nc("The page down key on a keyboard", "PgDn"));
-
-	col+=3;
-
-	m_layout->addItem(extKeys[26], FIRST_ROW + 2, col, 1, 2);
-        extKeys[26]->setKey(XK_KP_7, true, i18n("7"));
-	m_layout->addItem(extKeys[27], FIRST_ROW + 3, col, 1, 2);
-        extKeys[27]->setKey(XK_KP_4, true, i18n("4"));
-	m_layout->addItem(extKeys[28], FIRST_ROW + 4, col, 1, 2);
-        extKeys[28]->setKey(XK_KP_1, true, i18n("1"));
-	m_layout->addItem(extKeys[29], FIRST_ROW + 5, col, 1, 4);
-        extKeys[29]->setKey(XK_KP_0, true, i18n("0"));
-
-	col+=2;
-
-	m_layout->addItem(extKeys[30], FIRST_ROW + 1, col, 1, 2);
-        extKeys[30]->setKey(XK_KP_Divide, true, i18n("/"));
-	m_layout->addItem(extKeys[31], FIRST_ROW + 2, col, 1, 2);
-        extKeys[31]->setKey(XK_KP_8, true, i18n("8"));
-	m_layout->addItem(extKeys[32], FIRST_ROW + 3, col, 1, 2);
-        extKeys[32]->setKey(XK_KP_5, true, i18n("5"));
-	m_layout->addItem(extKeys[33], FIRST_ROW + 4, col, 1, 2);
-        extKeys[33]->setKey(XK_KP_2, true, i18n("2"));
-
-	col+=2;
-
-	m_layout->addItem(extKeys[34], FIRST_ROW + 1, col, 1, 2);
-        extKeys[34]->setKey(XK_KP_Multiply, true, i18n("*"));
-	m_layout->addItem(extKeys[35], FIRST_ROW + 2, col, 1, 2);
-        extKeys[35]->setKey(XK_KP_9, true, i18n("9"));
-	m_layout->addItem(extKeys[36], FIRST_ROW + 3, col, 1, 2);
-        extKeys[36]->setKey(XK_KP_6, true, i18n("6"));
-	m_layout->addItem(extKeys[37], FIRST_ROW + 4, col, 1, 2);
-        extKeys[37]->setKey(XK_KP_3, true, i18n("3"));
-	m_layout->addItem(extKeys[38], FIRST_ROW + 5, col, 1, 2);
-        extKeys[38]->setKey(XK_KP_Separator, true, i18n("."));
-
-	col+=2;
-
-	m_layout->addItem(extKeys[39], FIRST_ROW + 1, col, 1, 2);
-        extKeys[39]->setKey(XK_KP_Subtract, true, i18n("-"));
-	m_layout->addItem(extKeys[40], FIRST_ROW + 2, col, 2, 2);
-        extKeys[40]->setKey(XK_KP_Add, true, i18n("+"));
-	m_layout->addItem(extKeys[41], FIRST_ROW + 4, col, 2, 2);
-	extKeys[41]->setKey(XK_KP_Enter, true, i18nc("The enter key on a keyboard", "Enter"));
-
-	initBasicKeyboard(1);
-
-
-
-	int t_width = size().width() / 30;
-	for(int i = 30; i < 44; i++){
-		m_layout->setColumnPreferredWidth(i,t_width);
-	}
-}
-
-void PlasmaboardWidget::initBasicKeyboard(int offset){
-
-	basicKeys = true;
-	offset += FIRST_ROW;
-
-	// create objects
-
-        funcKeys.append( new BackspaceKey(this) );
-        funcKeys << new TabKey(this);
-        funcKeys << new EnterKey(this);
-        funcKeys << new CapsKey(this);
-        funcKeys << new ShiftKey(this);
-        funcKeys << new ShiftKey(this);
-
-        int i = 6;
-        while ( i < 14 ) {
-                funcKeys << new FuncKey(this);
-                i++;
-        }
-
-	funcKeys[CTLKEY]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
-	QObject::connect(this, SIGNAL( controlKey(bool) ), funcKeys[CTLKEY], SLOT( toggle(bool) ) );
-	funcKeys[SUPER_L_KEY]->setKey(XK_Super_L, false, i18nc("The meta (windows) key on a keyboard", "Super"));
-	QObject::connect(this, SIGNAL( superKey(bool) ), funcKeys[SUPER_L_KEY], SLOT( toggle(bool) ) );
-	funcKeys[ALT_L_KEY]->setKey(XK_Alt_L, false, i18nc("The alt key on a keyboard", "Alt"));
-	QObject::connect(this, SIGNAL( altKey(bool) ), funcKeys[ALT_L_KEY], SLOT( toggle(bool) ) );
-        funcKeys[SPACE]->setKeycode(XK_space, true);
-	funcKeys[ALTGRKEY]->setKey(XK_ISO_Level3_Shift, false, i18nc("The Alt Gr key on a keyboard", "Alt Gr"));
-	QObject::connect(this, SIGNAL( altGrKey(bool) ), funcKeys[ALTGRKEY], SLOT( toggle(bool) ) );
-	funcKeys[SUPER_R_KEY]->setKey(XK_Super_L, false, i18n("Super"));
-	QObject::connect(this, SIGNAL( superKey(bool) ), funcKeys[SUPER_R_KEY], SLOT( toggle(bool) ) );
-	funcKeys[MENU]->setKey(XK_Menu, true, i18nc("The menu key on a keyboard", "Menu"));
-	QObject::connect(this, SIGNAL( menuKey(bool) ), funcKeys[MENU], SLOT( toggle(bool) ) );
-	funcKeys[CONTROL_LEFT]->setKey(XK_Control_L, false, i18nc("The Ctrl key on a keyboard", "Ctrl"));
-	QObject::connect(this, SIGNAL( controlKey(bool) ), funcKeys[CONTROL_LEFT], SLOT( toggle(bool) ) );
-
-        // set Keymap
-
-        alphaKeys << new AlphaNumKey(this, 49);
-
-        for ( i = 10; i < 22; i++ ){
-               alphaKeys << new AlphaNumKey(this, i);
-        }
-
-        for ( i = 24; i < 36; i++ ){
-               alphaKeys << new AlphaNumKey(this, i);
-        }
-
-        for ( i = 38; i < 49; i++ ){
-               alphaKeys << new AlphaNumKey(this, i);
-        }
-
-        alphaKeys << new AlphaNumKey(this, 51);
-        alphaKeys << new AlphaNumKey(this, 94);
-
-        for ( i = 52; i < 62; i++ ){
-               alphaKeys << new AlphaNumKey(this, i);
-        }
-
-
-	// create layout
-
-	int numberOfCols = 30;
-
-	int x;
-	int row = offset;
-	for(x = 0; x<=12; x++){
-		m_layout->addItem(alphaKeys[x], row, x*2, 1, 2);
-	}
-	m_layout->addItem(funcKeys[BACKSPACEKEY], row, x*2, 1, 4);
-
-	row++;
-
-	m_layout->addItem(funcKeys[TABKEY], row, 0, 1, 3);
-	int t = 3;
-	for(x = 13; x<=24; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
-		t+=2;
-	}
-	m_layout->addItem(funcKeys[ENTERKEY], row, t+1, 2, 2);
-
-	row++;
-
-	m_layout->addItem(funcKeys[CAPSKEY], row, 0, 1, 4);
-	t = 4;
-	for(x = 25; x<=36; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
-		t+=2;
-	}
-
-	row++;
-
-	m_layout->addItem(funcKeys[SHIFT_L_KEY], row, 0, 1, 3);
-	t = 3;
-	for(x = 37; x<=47; x++){
-		m_layout->addItem(alphaKeys[x], row, t, 1, 2);
-		t+=2;
-	}
-	m_layout->addItem(funcKeys[SHIFT_R_KEY], row, t, 1, 5);
-
-	row++;
-
-	m_layout->addItem(funcKeys[CTLKEY], row, 0, 1, 2);
-	m_layout->addItem(funcKeys[SUPER_L_KEY], row, 2, 1, 2);
-	m_layout->addItem(funcKeys[ALT_L_KEY], row, 4, 1, 2);
-	m_layout->addItem(funcKeys[SPACE], row, 6, 1, 14);
-	m_layout->addItem(funcKeys[ALTGRKEY], row, 20, 1, 2);
-	m_layout->addItem(funcKeys[SUPER_R_KEY], row, 22, 1, 2);
-	m_layout->addItem(funcKeys[MENU], row, 24, 1, 2);
-	m_layout->addItem(funcKeys[CONTROL_LEFT], row, 26, 1, 3);
-
-	for(int i = 0; i<numberOfCols; i++){
-                m_layout->setColumnPreferredWidth(i,size().width()/numberOfCols);
-	}
-
-	for(int i = 30; i < 44; i++){
-		m_layout->setColumnPreferredWidth(i, 0);
-	}
-
-	m_layout->setSpacing(0);
-	m_layout->setContentsMargins(0,0,0,0);
-
+QPixmap *PlasmaboardWidget::getActiveFrame(const QSize &size)
+{
+    QPixmap *pixmap;
+    if(!m_activeFrames.contains(size)){
+        m_activeFrame->resizeFrame(size);
+        pixmap = new QPixmap(m_activeFrame->framePixmap());
+        m_activeFrames[size] = pixmap;
+    }
+    else{
+        pixmap = m_activeFrames[size];
+    }
+    return pixmap;
 
 }
+
+QPixmap *PlasmaboardWidget::getFrame(const QSize &size)
+{
+    QPixmap *pixmap;
+    if(!m_frames.contains(size)){
+        m_frame->resizeFrame(size);
+        pixmap = new QPixmap(m_frame->framePixmap());
+        m_frames[size] = pixmap;
+    }
+    else{
+        pixmap = m_frames[size];
+    }
+    return pixmap;
+}
+
+void PlasmaboardWidget::initKeyboard()
+{
+    m_funcKeys << new FuncKey(QPoint(0,0), QSize(700,1000), XK_Escape, QString(i18n("Esc")));
+    m_funcKeys << new FuncKey(QPoint(725,0), QSize(700,1000), XK_F1, QString(i18n("F1")));
+    m_funcKeys << new FuncKey(QPoint(1450,0), QSize(700,1000), XK_F2, QString(i18n("F2")));
+    m_funcKeys << new FuncKey(QPoint(2175,0), QSize(700,1000), XK_F3, QString(i18n("F3")));
+    m_funcKeys << new FuncKey(QPoint(2900,0), QSize(700,1000), XK_F4, QString(i18n("F4")));
+    m_funcKeys << new FuncKey(QPoint(3625,0), QSize(700,1000), XK_F5, QString(i18n("F5")));
+    m_funcKeys << new FuncKey(QPoint(4350,0), QSize(700,1000), XK_F6, QString(i18n("F6")));
+    m_funcKeys << new FuncKey(QPoint(5075,0), QSize(700,1000), XK_F7, QString(i18n("F7")));
+    m_funcKeys << new FuncKey(QPoint(5800,0), QSize(700,1000), XK_F8, QString(i18n("F8")));
+    m_funcKeys << new FuncKey(QPoint(6525,0), QSize(700,1000), XK_F9, QString(i18n("F9")));
+    m_funcKeys << new FuncKey(QPoint(7250,0), QSize(700,1000), XK_F10, QString(i18n("F10")));
+    m_funcKeys << new FuncKey(QPoint(7975,0), QSize(700,1000), XK_F11, QString(i18n("F11")));
+    m_funcKeys << new FuncKey(QPoint(8700,0), QSize(700,1000), XK_F12, QString(i18n("F12")));
+
+    m_alphaKeys << new AlphaNumKey(QPoint(2200,100), QSize(2000,2000), 42);
+    m_alphaKeys << new AlphaNumKey(QPoint(4400,100), QSize(2000,2000), 43);
+    m_alphaKeys << new AlphaNumKey(QPoint(1100,2200), QSize(4000,4000), 44);
+
+    Q_FOREACH(BoardKey* key, m_alphaKeys){
+        m_keys << key;
+    }
+    Q_FOREACH(BoardKey* key, m_funcKeys){
+        m_keys << key;
+    }
+
+}
+
+void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
+{    
+    if(m_pressedList.count() > 0){
+        QPoint click = event->pos().toPoint();
+
+        /*if(!boundingRect().contains(click)){
+            Q_FOREACH(BoardKey* clickedKey, m_pressedList){ // release all pressed keys
+                unpress(clickedKey);
+            }
+            return;
+        }*/
+
+        Q_FOREACH(BoardKey* key, m_pressedList){
+            if(key->contains(click)){
+                return; // if mouse move is inside an already clicked button, we do nothing
+            }
+        }
+
+        Q_FOREACH(BoardKey* key, m_keys){
+            if(key->contains(click)){
+                Q_FOREACH(BoardKey* clickedKey, m_pressedList){ // release all pressed keys
+                    unpress(clickedKey);
+                }
+                press(key);
+                return;
+            }
+        }
+    }
+}
+
+void PlasmaboardWidget::mousePressEvent ( QGraphicsSceneMouseEvent * event )
+{
+    QPoint click = event->pos().toPoint();
+    Q_FOREACH(BoardKey* key, m_keys){
+        if(key->contains(click)){
+            press(key);
+            return;
+        }
+    }
+}
+
+void PlasmaboardWidget::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
+{
+    QPoint click = event->pos().toPoint();
+    Q_FOREACH(BoardKey* key, m_pressedList){
+        if(key->contains(click)){
+            release(key);
+            return;
+        }
+    }
+}
+
+/*bool PlasmaboardWidget::event ( QEvent * event )
+{
+    qDebug() << event->type();
+    return QGraphicsWidget::event(event);
+}*/
 
 void PlasmaboardWidget::paint(QPainter *p,
-                const QStyleOptionGraphicsItem *option,
-                 QWidget*)
+                              const QStyleOptionGraphicsItem *option,
+                              QWidget* widget)
 {
     p->setRenderHint(QPainter::SmoothPixmapTransform);
     p->setRenderHint(QPainter::Antialiasing);
+    p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
+
+    if(option->exposedRect != boundingRect()){
+        QRectF rect = option->exposedRect;
+        Q_FOREACH(BoardKey *key, m_keys){
+            if(key->intersects(rect)){
+                key->paint(p);
+            }
+        }
+        qDebug() << "Partially Painting!";
+        return;
+    }
+
+    Q_FOREACH(BoardKey* key, m_keys){
+        key->paint(p);
+    }
+
+    qDebug() << "Painting!";
 }
 
-void PlasmaboardWidget::relabelKeys() {
-	foreach (AlphaNumKey* key, alphaKeys){
-	    key->switchKey(isLevel2, isAlternative, isLocked);
-	}
+void PlasmaboardWidget::press(BoardKey *key)
+{
+    key->pressed();
+    key->setPixmap(getActiveFrame(key->size()));
+    m_pressedList << key;    
+    update(key->rect());
+    setTooltip(key);
 }
 
-void PlasmaboardWidget::clearAnything(){
-	if ( isLocked ) {
-		funcKeys[CAPSKEY]->sendKeycodePress();
-		funcKeys[CAPSKEY]->sendKeycodeRelease();
-	}
-	clear();
+void PlasmaboardWidget::refresh()
+{
+    qDeleteAll(m_frames);
+    m_frames.clear();
+    qDeleteAll(m_activeFrames);
+    m_activeFrames.clear();
+
+    double factor_x = size().width() / 10000;
+    double factor_y = size().height() / 10000;
+
+    Q_FOREACH(BoardKey* key, m_keys){
+        key->updateDimensions(factor_x, factor_y);
+        key->setPixmap(getFrame(key->size()));
+    }
+    update();
 }
 
-void PlasmaboardWidget::clear(){
-
-	bool change = false;
-	if( funcKeys[SHIFT_L_KEY]->toggled() || funcKeys[SHIFT_R_KEY]->toggled() ){
-		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
-		funcKeys[SHIFT_L_KEY]->toggleOff();
-		funcKeys[SHIFT_R_KEY]->toggleOff();
-		isLevel2 = false;
-		change = true;
-	}
-	if( funcKeys[ALTGRKEY]->toggled() ){
-		Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_ISO_Level3_Shift));
-		funcKeys[ALTGRKEY]->toggleOff();
-		isAlternative = false;
-		change = true;
-	}
-
-	if(change){
-		relabelKeys();
-	}
-
-	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Control_L));
-	funcKeys[CTLKEY]->toggleOff();
-        funcKeys[CONTROL_LEFT]->toggleOff();
-	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
-	funcKeys[SUPER_L_KEY]->toggleOff();
-	funcKeys[SUPER_R_KEY]->toggleOff();
-	Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
-	funcKeys[ALT_L_KEY]->toggleOff();
-
-	clearTooltip();
+void PlasmaboardWidget::relabelKeys()
+{
+    foreach (AlphaNumKey* key, m_alphaKeys){
+        key->switchKey(m_isLevel2, m_isAlternative, m_isLocked);
+    }
 }
 
-
-void PlasmaboardWidget::setTooltip(QString text, QSizeF buttonSize, QPointF position){
-    tooltip -> setText( text );
-    tooltip -> move( popupPosition(buttonSize.toSize()) + QPoint(position.x() - buttonSize.width() / 2 , position.y() - buttonSize.height()) );
-    tooltip -> resize( (buttonSize * 2).toSize() );
-    tooltip -> show();
-
-    //tooltipTimer->start(300);
+void PlasmaboardWidget::release(BoardKey *key)
+{    
+    key->released();
+    key->setPixmap(getFrame(key->size()));
+    m_pressedList.removeAll(key);
+    update(key->rect());
+    clearTooltip();
 }
 
-void PlasmaboardWidget::clearTooltip(){
+void PlasmaboardWidget::resetKeyboard()
+{
+    qDeleteAll(m_funcKeys);
+    m_funcKeys.clear();
 
-    tooltip->hide();
+    qDeleteAll(m_alphaKeys);
+    m_alphaKeys.clear();
+}
+
+void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
+{
+    refresh();
+}
+
+void PlasmaboardWidget::setTooltip(BoardKey* key)
+{
+    m_tooltip -> setText( key->label() );
+    m_tooltip -> move( popupPosition( key->size() ) + key->position() );
+    m_tooltip -> resize( key->size() );
+    m_tooltip -> show();
+}
+
+void PlasmaboardWidget::unpress(BoardKey *key)
+{
+    key->unpressed();
+    key->setPixmap(getFrame(key->size()));
+    update(key->rect());
+    m_pressedList.removeAll(key);
 }
 

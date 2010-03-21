@@ -21,14 +21,12 @@
 #include "ArrowBottomKey.h"
 #include <QPainter>
 
-ArrowBottomKey::ArrowBottomKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_Down, true);
+ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_Down, QString()){
+
 }
 
 void ArrowBottomKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
-	Plasma::PushButton::paint(painter, option, widget);
-	setUpPainter(painter);
 
 	painter->rotate(-90);
 	paintArrow(painter);

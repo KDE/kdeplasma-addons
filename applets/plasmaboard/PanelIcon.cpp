@@ -34,8 +34,8 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
 	Plasma::PopupApplet(parent, args), m_plasmaboard(0){
         setAspectRatioMode(Plasma::IgnoreAspectRatio);
         setPopupIcon("preferences-desktop-keyboard");
-	setFocusPolicy(Qt::NoFocus);
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        //setFocusPolicy(Qt::NoFocus);
+        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         setPassivePopup(true);
 
@@ -98,14 +98,9 @@ void PanelIcon::toggleMode(){
 
 void PanelIcon::initKeyboard() {
 	m_plasmaboard->resetKeyboard();
-	if (extendedMode) {
-	    m_plasmaboard->initExtendedKeyboard();
-	    m_plasmaboard->switcher->setText("<a href=\"#test\" style=\"color:"+Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).name()+";\">"+i18n("Fewer Keys")+"</a>");
-	}
-	else{
-	    m_plasmaboard->switcher->setText("<a href=\"#test\" style=\"color:"+Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor).name()+";\">"+i18n("More Keys")+"</a>");
-	    m_plasmaboard->initBasicKeyboard();
-	}
+
+        m_plasmaboard->initKeyboard();
+
 }
 
 void PanelIcon::popupEvent(bool show){

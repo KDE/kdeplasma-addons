@@ -25,13 +25,18 @@
 #include <plasma/theme.h>
 #include "Helpers.h"
 
-FuncKey::FuncKey(PlasmaboardWidget *parent):
-	BoardKey(parent), pressed(false), toggler(false) {
+FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
+        AlphaNumKey(relativePosition, relativeSize, keycode), pressed(false), toggler(false) {
+    setLabel(label);
+}
+
+void FuncKey::paint(QPainter *painter){
+    AlphaNumKey::paint(painter);
 }
 
 void FuncKey::paintArrow(QPainter *painter){
 
-    	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+    painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 	painter->drawLine(-1, 0 , 3, 0);
 
 	const QPointF points[3] = {
@@ -49,18 +54,9 @@ void FuncKey::released() {
 	}
 }
 
-void FuncKey::setKeycode(unsigned int code, bool sendUp){
-	keycode = Helpers::keysymToKeycode(code);
-	if(!sendUp){
-		toggler = true;
-		QObject::connect(static_cast<const KPushButton*>(this->nativeWidget()), SIGNAL( pressed() ), this, SLOT( sendKeycodeToggled() ) );
-	}
-}
-
-
 void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
-	setKeycode(code, sendUp);
-	setText(text);
+        //setKeycode(code, sendUp);
+        //setText(text);
 }
 
 void FuncKey::sendKeycodeToggled() {
@@ -75,17 +71,14 @@ void FuncKey::sendKeycodeToggled() {
 }
 
 void FuncKey::toggleOn(){
-	nativeWidget()->setDown(true);
 	pressed = true;
 }
 
 void FuncKey::toggleOff(){
-	nativeWidget()->setDown(false);
 	pressed = false;
 }
 
 void FuncKey::toggle(bool toggle){
-	nativeWidget()->setDown(toggle);
 	pressed = toggle;
 }
 

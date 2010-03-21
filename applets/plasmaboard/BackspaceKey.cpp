@@ -22,14 +22,13 @@
 #include <QPainter>
 
 
-BackspaceKey::BackspaceKey(PlasmaboardWidget *parent) : FuncKey(parent){
-	setKeycode(XK_BackSpace, true);
+BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
+        FuncKey(relativePosition, relativeSize, XK_BackSpace, QString()){
+
 }
 
 void BackspaceKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
 
-	Plasma::PushButton::paint(painter, option, widget);
-	setUpPainter(painter);
 	painter->translate(-2, 0);
 
 	paintArrow(painter);

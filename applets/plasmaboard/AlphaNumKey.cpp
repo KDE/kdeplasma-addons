@@ -19,37 +19,46 @@
 
 
 #include "AlphaNumKey.h"
-
 #include "Helpers.h"
+#include <QPainter>
 
-AlphaNumKey::AlphaNumKey(PlasmaboardWidget *parent, unsigned int keysym):
-        BoardKey(parent){
+AlphaNumKey::AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode):
+        BoardKey(relativePosition, relativeSize, keycode){
 
-        QObject::connect(this, SIGNAL( clicked() ), parent, SLOT( clear() ) );
-	QObject::connect(this, SIGNAL( keyPressed ( QString, QSizeF, QPointF ) ), parent, SLOT( setTooltip( QString, QSizeF, QPointF ) ) );
-
-	setKeycode(keysym);
+    setLabel(0);
 }
 
 AlphaNumKey::~AlphaNumKey() {
 
 }
 
-void AlphaNumKey::pressed(){
-	BoardKey::pressed();
-	emit keyPressed(text(), size(), pos());
+const QString AlphaNumKey::label() const
+{
+    return m_label;
 }
 
-void AlphaNumKey::setKeycode(unsigned int keycodeP) {
-	keycode = keycodeP;
-	setLabel(0);
+void AlphaNumKey::paint(QPainter *painter)
+{
+    BoardKey::paint(painter);
+    painter->save();
+    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
+    painter->scale(1.0/(relativeSize().width()/size().width()), 1.0/(relativeSize().width()/size().width()));
+    painter->drawText(QPoint(-100,100), m_label);
+    painter->restore();
 }
 
-void AlphaNumKey::setLabel(int level){
-	setText( Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level)) );
+void AlphaNumKey::setLabel(int level)
+{
+    m_label = Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level));
 }
 
-void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
+void AlphaNumKey::setLabel(QString &label)
+{
+    m_label = label;
+}
+
+void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked)
+{
 	if(isLocked){
 		isLevel2 = !isLevel2;
 	}
@@ -61,8 +70,7 @@ void AlphaNumKey::switchKey(bool isLevel2, bool isAlternative, bool isLocked){
 		/*isAlternative ?
 		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0)))) :
 		setText(QChar(Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),0))));*/
-        }
-	update();
+    }
 }
 
 

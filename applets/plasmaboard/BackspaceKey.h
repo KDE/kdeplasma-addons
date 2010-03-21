@@ -25,10 +25,10 @@
 
 class BackspaceKey: public FuncKey {
 public:
-	BackspaceKey(PlasmaboardWidget *parent);
+        BackspaceKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 };
 
 #endif /* BACKSPACEKEY_H */
