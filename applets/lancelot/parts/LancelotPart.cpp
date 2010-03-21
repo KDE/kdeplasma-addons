@@ -204,6 +204,7 @@ void LancelotPart::loadConfig()
     kDebug() << data;
 
     if (data.isEmpty()) {
+        modelContentsUpdated();
         return;
     }
 
