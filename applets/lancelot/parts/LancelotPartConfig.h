@@ -61,6 +61,7 @@ public Q_SLOTS:
     void buttonContentsAddClicked();
     void buttonContentsRemoveClicked();
     void buttonContentsAddItemSelected(int index);
+    void listModelsItemClicked(QListWidgetItem * item);
 
 private:
     Lancelot::PopupList * popup;

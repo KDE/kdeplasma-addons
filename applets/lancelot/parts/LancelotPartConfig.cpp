@@ -47,12 +47,11 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionLeft);
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionRight);
 
-    buttonContentsAdd->setIcon(KIcon("list-add"));
     buttonContentsRemove->setIcon(KIcon("list-remove"));
 
     QObject::connect(
-        buttonContentsAdd, SIGNAL(clicked()),
-        this, SLOT(buttonContentsAddClicked()));
+        listModels, SIGNAL(itemClicked(QListWidgetItem *)),
+        this, SLOT(listModelsItemClicked(QListWidgetItem *)));
     QObject::connect(
         buttonContentsRemove, SIGNAL(clicked()),
         this, SLOT(buttonContentsRemoveClicked()));
@@ -129,6 +128,11 @@ void LancelotPartConfig::setIcon(const QIcon & icon)
 
 void LancelotPartConfig::setPartData(const QString & data)
 {
+    listModels->addItem("Add...");
+    QListWidgetItem * itemAdd = listModels->item(listModels->count() - 1);
+    itemAdd->setData(Qt::DecorationRole, KIcon("list-add"));
+    itemAdd->setData(Qt::SizeHintRole, QSize(0, 32));
+
     foreach (const QString & itemData, data.split('\n')) {
         addItem(itemData);
     }
@@ -138,14 +142,17 @@ void LancelotPartConfig::addItem(const QString & itemData)
 {
     if (itemData.isEmpty()) return;
 
-    listModels->addItem(QString::null);
-    setItemData(listModels->item(listModels->count() - 1) , itemData);
+    int index = listModels->count() - 1;
+    listModels->insertItem(index, QString::null);
+    setItemData(listModels->item(index) , itemData);
+
+    listModels->clearSelection();
 }
 
 void LancelotPartConfig::setItemData(
     QListWidgetItem * item, const QString & itemData)
 {
-    if (itemData.isEmpty()) return;
+    if (!item || itemData.isEmpty()) return;
 
     QMap < QString, QString > dataMap =
         Lancelot::Models::Serializator::deserialize(itemData);
@@ -189,8 +196,12 @@ void LancelotPartConfig::buttonContentsAddClicked()
 void LancelotPartConfig::buttonContentsRemoveClicked()
 {
     foreach (QListWidgetItem * item, listModels->selectedItems()) {
-        listModels->takeItem(listModels->row(item));
+        if (item != listModels->item(listModels->count() - 1)) {
+            listModels->takeItem(listModels->row(item));
+        }
     }
+
+    listModels->clearSelection();
 }
 
 void LancelotPartConfig::buttonContentsAddItemSelected(int index)
@@ -203,6 +214,13 @@ void LancelotPartConfig::buttonContentsAddItemSelected(int index)
     if (!data.isEmpty()) {
         addItem(data);
         popup->hide();
+    }
+}
+
+void LancelotPartConfig::listModelsItemClicked(QListWidgetItem * item)
+{
+    if (item == listModels->item(listModels->count() - 1)) {
+        buttonContentsAddClicked();
     }
 }
 
