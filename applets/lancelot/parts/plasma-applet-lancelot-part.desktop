@@ -2,6 +2,8 @@
 Icon=plasmaapplet-shelf
 
 Name=Shelf
+Name[sv]=Lägg undan
+Name[uk]=Полиця
 Comment=
 
 Type=Service
