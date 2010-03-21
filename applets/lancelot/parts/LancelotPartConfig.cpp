@@ -47,11 +47,17 @@ void LancelotPartConfig::setupUi(QWidget * widget)
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionLeft);
     qbgContentsExtenderPosition->addButton(radioContentsExtenderPositionRight);
 
+    buttonContentsRemove = new QToolButton(listModels);
     buttonContentsRemove->setIcon(KIcon("list-remove"));
+    buttonContentsRemove->setToolTip(i18n("Remove"));
+    buttonContentsRemove->hide();
 
     QObject::connect(
         listModels, SIGNAL(itemClicked(QListWidgetItem *)),
         this, SLOT(listModelsItemClicked(QListWidgetItem *)));
+    QObject::connect(
+        listModels, SIGNAL(itemSelectionChanged()),
+        this, SLOT(listModelsItemSelectionChanged()));
     QObject::connect(
         buttonContentsRemove, SIGNAL(clicked()),
         this, SLOT(buttonContentsRemoveClicked()));
@@ -221,6 +227,29 @@ void LancelotPartConfig::listModelsItemClicked(QListWidgetItem * item)
 {
     if (item == listModels->item(listModels->count() - 1)) {
         buttonContentsAddClicked();
+    }
+}
+
+void LancelotPartConfig::listModelsItemSelectionChanged()
+{
+    QListWidgetItem * selectedItem = 0;
+
+    if (listModels->selectedItems().count()) {
+        selectedItem = listModels->selectedItems()[0];
+
+        if (selectedItem == listModels->item(listModels->count() - 1)) {
+            selectedItem = NULL;
+        }
+    }
+
+    if (selectedItem) {
+        QRect rect = listModels->visualItemRect(selectedItem);
+        rect.setLeft(rect.right() - 32);
+        rect.setHeight(32);
+        buttonContentsRemove->setGeometry(rect);
+        buttonContentsRemove->setVisible(true);
+    } else {
+        buttonContentsRemove->setVisible(false);
     }
 }
 

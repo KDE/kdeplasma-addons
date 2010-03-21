@@ -22,6 +22,8 @@
 
 #include <ui_LancelotPartConfigBase.h>
 
+#include <QToolButton>
+
 #include <Lancelot/Lancelot>
 #include <Lancelot/PopupList>
 
@@ -57,11 +59,15 @@ public:
     QButtonGroup * qbgContents;
     QButtonGroup * qbgContentsExtenderPosition;
 
+    QToolButton  * buttonContentsRemove;
+
 public Q_SLOTS:
     void buttonContentsAddClicked();
     void buttonContentsRemoveClicked();
     void buttonContentsAddItemSelected(int index);
+
     void listModelsItemClicked(QListWidgetItem * item);
+    void listModelsItemSelectionChanged();
 
 private:
     Lancelot::PopupList * popup;
