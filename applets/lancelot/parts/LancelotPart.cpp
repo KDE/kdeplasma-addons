@@ -22,6 +22,7 @@
 #include <QGraphicsLayoutItem>
 #include <QGraphicsLayout>
 #include <QDataStream>
+#include <QMessageBox>
 
 #include <KDebug>
 #include <KIcon>
@@ -42,7 +43,12 @@ LancelotPart::LancelotPart(QObject * parent, const QVariantList &args)
     m_icon(NULL)
 {
     if (args.size() > 0) {
-        m_cmdarg = args[0].toString();
+        m_cmdarg = KUrl(args[0].toString()).toLocalFile();
+
+        if (m_cmdarg.isEmpty()) {
+            m_cmdarg = args[0].toString();
+
+        }
     }
 
     setAcceptDrops(true);
