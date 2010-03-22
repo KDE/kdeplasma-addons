@@ -133,7 +133,7 @@ QString RTM::Request::requestUrl()
     //kDebug() << "Creating url";
     QString url = RTM::baseMethodUrl;
     foreach(const QString &key, arguments.keys()) 
-      url.append('&' + key + '=' + arguments.value(key));
+      url.append('&' + key + '=' + arguments.value(key).toUtf8().toPercentEncoding());
     return url;
 }
 
