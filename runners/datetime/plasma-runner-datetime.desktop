@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=Date and Timer
+Name[pt]=Data e Hora
 Name[sv]=Datum och tidtagning
 Name[uk]=Дата і час
 
 Comment=The current date and time, locally or in any timezone
+Comment[pt]=A data e hora actuais, seja a nível local ou para qualquer fuso-horário
 Comment[sv]=Nuvarande datum och tid, lokalt eller i godtycklig tidszon
 Comment[uk]=Поточна дата і час, місцевий або час будь-якого часового поясу
 
