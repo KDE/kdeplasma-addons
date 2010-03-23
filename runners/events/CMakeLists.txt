@@ -14,10 +14,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 # We add our source code here
 set(events_SRCS events.cpp datetime_parser.cpp)
 
-kde4_add_plugin(krunner_events ${events_SRCS})
-target_link_libraries(krunner_events ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_AKONADI_LIBS} ${KDEPIMLIBS_KCAL_LIBS})
+kde4_add_plugin(plasma_runner_events ${events_SRCS})
+target_link_libraries(plasma_runner_events ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_AKONADI_LIBS} ${KDEPIMLIBS_KCAL_LIBS})
 
-install(TARGETS krunner_events
+install(TARGETS plasma_runner_events
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(FILES plasma-runner-events.desktop

@@ -35,7 +35,7 @@ Icon=korganizer
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Runner
-X-KDE-Library=krunner_events
+X-KDE-Library=plasma_runner_events
 X-KDE-PluginInfo-Author=Alexey Noskov
 X-KDE-PluginInfo-Email=alexey.noskov@gmail.com
 X-KDE-PluginInfo-Name=events_runner
