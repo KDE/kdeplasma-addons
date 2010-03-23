@@ -245,14 +245,14 @@ void AudioPlayerControlRunner::run(const Plasma::RunnerContext &context, const P
             list << KUrl(data[2].toString());
             KRun::run("amarok --queue %u", list, 0);
         } else if (a == action(APPEND)) {
-            tracklist.call("AddTrack", data[2].toString(), false);
+            tracklist.call(QDBus::NoBlock, "AddTrack", data[2].toString(), false);
         } else {
             //Action play was selected
-            tracklist.call("AddTrack",data[2].toString(), true);
+            tracklist.call(QDBus::NoBlock, "AddTrack",data[2].toString(), true);
         }
     } else if (data[3].toString().compare(NONE)) {
         //Append to playlist and play track (m_command oriented interface)
-        tracklist.call("AddTrack", data[2].toString(), true);
+        tracklist.call(QDBus::NoBlock, "AddTrack", data[2].toString(), true);
     } /* Only Amarok part over */ else {
         if ((data[4].toString().compare("start") == 0)) {
             //The players's interface isn't availalbe but it should be started
@@ -269,7 +269,7 @@ void AudioPlayerControlRunner::run(const Plasma::RunnerContext &context, const P
             args << data[i];
         }
         msg.setArguments(args);
-        QDBusConnection::sessionBus().call(msg);
+        QDBusConnection::sessionBus().call(msg, QDBus::NoBlock);
     }
 }
 
@@ -388,22 +388,22 @@ bool AudioPlayerControlRunner::startPlayer()
 int AudioPlayerControlRunner::songsInPlaylist()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> length = player.call("GetLength");
+    QDBusReply<int> length = player.asyncCall("GetLength");
     return length;
 }
 
 bool AudioPlayerControlRunner::nextSongAvailable()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> length = player.call("GetLength");
-    QDBusReply<int> current = player.call("GetCurrentTrack");
+    QDBusReply<int> length = player.asyncCall("GetLength");
+    QDBusReply<int> current = player.asyncCall("GetCurrentTrack");
     return !((length - 1) == current);
 }
 
 bool AudioPlayerControlRunner::prevSongAvailable()
 {
     QDBusInterface player(QString("org.mpris.%1").arg(m_player), "/TrackList", "org.freedesktop.MediaPlayer");
-    QDBusReply<int> current = player.call("GetCurrentTrack");
+    QDBusReply<int> current = player.asyncCall("GetCurrentTrack");
     return current > 0;
 }
 
@@ -435,7 +435,7 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 
     query.append("</filters><includeCollection id=\"localCollection\" /></query>");
 
-    QDBusReply<QList<QVariantMap> > reply = amarok.call("Query", query);
+    QDBusReply<QList<QVariantMap> > reply = amarok.asyncCall("Query", query);
 
     if (!reply.isValid()) {
         return QList<Plasma::QueryMatch>();
@@ -470,7 +470,7 @@ QList<Plasma::QueryMatch> AudioPlayerControlRunner::searchCollectionFor(const QS
 int AudioPlayerControlRunner::currentSong()
 {
     QDBusReply<int> current = QDBusInterface(QString("org.mpris.%1").arg(m_player), "/TrackList",
-                              "org.freedesktop.MediaPlayer").call("GetCurrentTrack");
+                              "org.freedesktop.MediaPlayer").asyncCall("GetCurrentTrack");
     return current;
 }
 #include "audioplayercontrolrunner.moc"
