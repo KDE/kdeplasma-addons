@@ -18,9 +18,12 @@
 
 //Project-Includes
 #include "audioplayercontrolrunner_config.h"
+
 //KDE-Includes
-#include <plasma/abstractrunner.h>
+#include <Plasma/AbstractRunner>
 #include <KDebug>
+
+#include "audioplayercontrolconfigkeys.h"
 
 K_EXPORT_RUNNER_CONFIG(audioplayercontrol, AudioPlayerControlRunnerConfig)
 

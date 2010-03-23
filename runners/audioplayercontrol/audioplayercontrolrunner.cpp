@@ -19,7 +19,6 @@
  */
 
 #include "audioplayercontrolrunner.h"
-#include "audioplayercontrolrunner_config.h"
 
 #include <QDBusInterface>
 #include <QDBusMetaType>
@@ -31,6 +30,9 @@
 #include <KIcon>
 #include <KRun>
 #include <KUrl>
+
+#include "audioplayercontrolrunner_config.h"
+#include "audioplayercontrolconfigkeys.h"
 
 Q_DECLARE_METATYPE(QList<QVariantMap>)
 

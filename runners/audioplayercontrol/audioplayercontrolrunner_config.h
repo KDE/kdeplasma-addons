@@ -26,24 +26,6 @@
 //KDE-Includes
 #include <KCModule>
 
-static const char * CONFIG_COMMANDS = "useCommands";
-static const char * CONFIG_COLLECTION = "searchCollection";
-static const char * CONFIG_PLAY = "com_play";
-static const char * CONFIG_APPEND = "com_append";
-static const char * CONFIG_QUEUE = "com_queue";
-static const char * CONFIG_PAUSE = "com_pause";
-static const char * CONFIG_NEXT = "com_next";
-static const char * CONFIG_MUTE = "com_mute";
-static const char * CONFIG_INCREASE = "com_up";
-static const char * CONFIG_INCREASE_BY = "val_up";
-static const char * CONFIG_DECREASE = "com_down";
-static const char * CONFIG_DECREASE_BY = "val_down";
-static const char * CONFIG_PREV = "com_prev";
-static const char * CONFIG_STOP = "com_stop";
-static const char * CONFIG_VOLUME = "com_volume";
-static const char * CONFIG_QUIT = "com_quit";
-static const char * CONFIG_PLAYER = "player";
-
 class AudioPlayerControlRunnerConfigForm : public QWidget, public Ui::AudioPlayerControlRunnerUI
 {
     Q_OBJECT
