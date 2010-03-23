@@ -21,7 +21,7 @@
 #define LANCELOTAPP_MODELS_AVAILABLEMODELS_H
 
 #include <lancelot/lancelot_export.h>
-#include <Lancelot/StandardActionTreeModel>
+#include <lancelot/models/StandardActionTreeModel.h>
 
 #include "BaseModel.h"
 
