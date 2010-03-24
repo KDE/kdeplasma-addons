@@ -2,6 +2,8 @@
 Icon=plasmaapplet-shelf
 
 Name=Shelf
+Name[en_GB]=Shelf
+Name[et]=Sahtel
 Name[pt]=Concha
 Name[sv]=Lägg undan
 Name[uk]=Полиця
