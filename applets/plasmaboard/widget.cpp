@@ -105,8 +105,7 @@ PlasmaboardWidget::~PlasmaboardWidget()
     delete m_frame;
     delete m_activeFrame;
     delete m_tooltip;
-    qDeleteAll(m_alphaKeys);
-    qDeleteAll(m_funcKeys);
+    qDeleteAll(m_keys);
     qDeleteAll(m_frames);
     qDeleteAll(m_activeFrames);
 }
@@ -141,7 +140,7 @@ void PlasmaboardWidget::clear()
     Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
     m_funcKeys[ALT_L_KEY]->toggleOff();
 
-    //clearTooltip();
+    clearTooltip();
 }
 
 void PlasmaboardWidget::clearAnything()
@@ -277,15 +276,16 @@ void PlasmaboardWidget::initKeyboard()
 
 void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
 {    
-    if(m_pressedList.count() > 0){
+    if(m_pressedList.count() > 0){ // as long no key is pressed, we don't care about mouse moves
         QPoint click = event->pos().toPoint();
 
-        /*if(!boundingRect().contains(click)){
-            Q_FOREACH(BoardKey* clickedKey, m_pressedList){ // release all pressed keys
+        if(!boundingRect().contains(click)){ // if mouse is moved outside the widget...
+            Q_FOREACH(BoardKey* clickedKey, m_pressedList){  // ... we unpress all pressed keys
                 unpress(clickedKey);
             }
+            clearTooltip();
             return;
-        }*/
+        }
 
         Q_FOREACH(BoardKey* key, m_pressedList){
             if(key->contains(click)){
