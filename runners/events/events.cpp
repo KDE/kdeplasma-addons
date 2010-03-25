@@ -1,3 +1,23 @@
+/*
+ *   Copyright (C) 2010 Alexey Noskov <alexey.noskov@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation; either version 2 of
+ *   the License or (at your option) version 3 or any later version
+ *   accepted by the membership of KDE e.V. (or its successor approved
+ *   by the membership of KDE e.V.), which shall act as a proxy
+ *   defined in Section 14 of version 3 of the license.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "events.h"
 
 #include <KDebug>
@@ -34,6 +54,10 @@ static KDateTime variantToDateTime( const QVariant & var ) {
 
 static QVariant dateTimeToVariant( const KDateTime & dt ) {
     return dt.isDateOnly() ? QVariant( dt.date() ) : QVariant( dt.dateTime() );
+}
+
+static QString dateTimeToString( const KDateTime & dt ) {
+    return dt.toString( dt.isDateOnly() ? "%d.%m.%Y" : "%H:%M %d.%m.%Y" );
 }
 
 EventsRunner::EventsRunner(QObject *parent, const QVariantList& args)
@@ -73,11 +97,11 @@ void EventsRunner::collectionsReceived( const Collection::List & list ) {
 void EventsRunner::describeSyntaxes() {
     QList<RunnerSyntax> syntaxes;
 
-    RunnerSyntax eventSyntax( QString("%1 :q:").arg( eventKeyword ), i18n("Creates event in calendar by its description in :q:, which consists of parts divided by semicolons.  The first two parts (both obligatory) are the event summary and its start date.  The third, optional, is list of event categories, divided by commas.") );
+    RunnerSyntax eventSyntax( QString("%1 :q:").arg( eventKeyword ), i18n("Creates event in calendar by its description in :q:, which consists of parts divided by semicolon. Two first obligatory parts are event summary and its start date, third, optional, is list of event categories, divided by comma.") );
     eventSyntax.setSearchTermDescription( i18n( "event description" ) );
     syntaxes.append(eventSyntax);
 
-    RunnerSyntax todoSyntax( QString("%1 :q:").arg( todoKeyword ), i18n("Creates todo in calendar by its description in :q:, which consists of parts divided by semicolons. The first two parts (both obligatory) are a summary of the todo, and its due date.  The third, optional, is list of todo categories, divided by commas.") );
+    RunnerSyntax todoSyntax( QString("%1 :q:").arg( todoKeyword ), i18n("Creates todo in calendar by its description in :q:, which consists of parts divided by semicolon. Two first obligatory parts are todo summary and its due date, third, optional, is list of todo categories, divided by comma.") );
     todoSyntax.setSearchTermDescription( i18n( "todo description" ) );
     syntaxes.append(todoSyntax);
 
@@ -94,16 +118,17 @@ QueryMatch EventsRunner::createQueryMatch( const QString & definition, EventsRun
         *it = (*it).trimmed(); // Trim all arguments
     }
 
-    KDateTime date = dateTimeParser.parse( args[1].trimmed() );
+    DateTimeRange range = dateTimeParser.parseRange( args[1].trimmed() );
 
-    if ( !date.isValid() )
+    if ( !range.start.isValid() || !range.finish.isValid() )
         return QueryMatch( 0 ); // Return invalid match if date is invalid
 
     QMap<QString,QVariant> data; // Map for data
 
     data["type"] = type;
     data["summary"] = args[0];
-    data["date"] = dateTimeToVariant( date );
+    data["start"] = dateTimeToVariant( range.start );
+    data["finish"] = dateTimeToVariant( range.finish );
 
     if ( args.length() > 2 && !args[2].isEmpty() ) // If categories info present
         data["categories"] = args[2];
@@ -111,10 +136,18 @@ QueryMatch EventsRunner::createQueryMatch( const QString & definition, EventsRun
     QueryMatch match( this );
 
     if ( type == Event ) {
-        match.setText( i18n( "Create event \"%1\" at %2", data["summary"].toString(), date.toString( date.isDateOnly() ? "%d.%m.%Y" : "%H:%M %d.%m.%Y" ) ) );
+        if ( range.isPoint() )
+            match.setText( i18n( "Create event \"%1\" at %2", data["summary"].toString(), dateTimeToString( range.start ) ) );
+        else
+            match.setText( i18n( "Create event \"%1\" from %2 to %3", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
+
         match.setId( eventKeyword + '|' + definition );
     } else if ( type == Todo ) {
-        match.setText( i18n( "Create todo \"%1\" due to %2", data["summary"].toString(), date.toString( date.isDateOnly() ? "%d.%m.%Y" : "%H:%M %d.%m.%Y" ) ) );
+        if ( range.isPoint() )
+            match.setText( i18n( "Create todo \"%1\" due to %2", data["summary"].toString(), dateTimeToString( range.finish ) ) );
+        else
+            match.setText( i18n( "Create todo \"%1\" due to %3 starting at %2", data["summary"].toString(), dateTimeToString( range.start ), dateTimeToString( range.finish ) ) );
+
         match.setId( todoKeyword + '|' + definition );
     }
 
@@ -166,11 +199,16 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         
         KCal::Event::Ptr event( new KCal::Event() );
         event->setSummary( data["summary"].toString() );
-        event->setDtStart( variantToDateTime( data["date"] ) );
+
+        event->setDtStart( variantToDateTime( data["start"] ) );
+
+        if ( data["start"] != data["finish"] ) { // Set end date if it differs from start date
+            event->setDtEnd( variantToDateTime( data["finish"] ) );
+        }
 
         if ( data.contains("categories") ) // Set categories if present
             event->setCategories( data["categories"].toString() );
-            
+
         Item item( eventMimeType );
         item.setPayload<KCal::Event::Ptr>( event );
             
@@ -183,10 +221,17 @@ void EventsRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         
         KCal::Todo::Ptr todo( new KCal::Todo() );
         todo->setSummary( data["summary"].toString() );
-        todo->setDtDue( variantToDateTime( data["date"] ) );
         todo->setPercentComplete( 0 );
-        todo->setHasStartDate( false );
+
+        todo->setDtDue( variantToDateTime( data["finish"] ) );
         todo->setHasDueDate( true );
+
+        if ( data["start"] != data["finish"] ) { // Set start date if it differs from due date
+            todo->setDtStart( variantToDateTime( data["start"] ) );
+            todo->setHasStartDate( true );
+        } else {
+            todo->setHasStartDate( false );
+        }
 
         if ( data.contains("categories") ) // Set categories if present
             todo->setCategories( data["categories"].toString() );

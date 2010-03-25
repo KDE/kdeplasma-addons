@@ -18,36 +18,37 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATETIME_PARSER_H
-#define DATETIME_PARSER_H
+#ifndef DATETIME_RANGE_H
+#define DATETIME_RANGE_H
 
-#include "datetime_range.h"
+#include <KDateTime>
 
-#include <QMap>
-
-class DateTimeParser {
+class DateTimeRange {
 public:
-    DateTimeParser();
-    
-    KDateTime parse( const QString & s );
-    DateTimeRange parseRange( const QString & s );
-    
-    void addTimeFormat( const QString & s );
-    void addDateFormat( const QString & s );
-    
-private:
-    
-    typedef QMap< QString, QRegExp > FormatMap;
-    
-private:
-    
-    QString parseElement( const QString & s, DateTimeRange & range, DateTimeRange::Elements elems, const QDate & defaultDate = QDate(), const QTime & defaultTime = QTime() );
+    enum Elements {
+        Start = 1,
+        Finish = 2,
+        Both = 3
+    };
+public:
+    DateTimeRange() {}
+    DateTimeRange( const KDateTime & dateTime ) : start( dateTime ), finish( dateTime ) {}
+    DateTimeRange( const KDateTime & start, const KDateTime & finish ) : start( start ), finish( finish ) {}
 
-private:
-    QString now, today, tomorrow, yesterday, from, to;
-    
-    FormatMap timeFormats;
-    FormatMap dateFormats;
+    bool isPoint() const {
+        return start == finish;
+    }
+
+    void setDate( const QDate & date, Elements elems );
+    void setTime( const QTime & time, Elements elems );
+
+    void addSecs( int secs, Elements elems );
+    void addDays( int days, Elements elems );
+    void addMonths( int months, Elements elems );
+    void addYears( int years, Elements elems );
+public:
+    KDateTime start;
+    KDateTime finish;
 };
 
 #endif

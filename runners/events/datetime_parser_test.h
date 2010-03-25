@@ -18,36 +18,23 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATETIME_PARSER_H
-#define DATETIME_PARSER_H
+#ifndef DATETIME_PARSER_TEST_H
+#define DATETIME_PARSER_TEST_H
 
-#include "datetime_range.h"
+#include <QtTest/QtTest>
 
-#include <QMap>
+#include "datetime_parser.h"
 
-class DateTimeParser {
-public:
-    DateTimeParser();
-    
-    KDateTime parse( const QString & s );
-    DateTimeRange parseRange( const QString & s );
-    
-    void addTimeFormat( const QString & s );
-    void addDateFormat( const QString & s );
-    
+class DateTimeParserTest: public QObject {
+    Q_OBJECT
+private slots:
+    void testSimpleKeywords();
+    void testRelativeKeywords();
+    void testPreciseSpecs();
+    void testPointRanges();
+    void testNonPointRanges();
 private:
-    
-    typedef QMap< QString, QRegExp > FormatMap;
-    
-private:
-    
-    QString parseElement( const QString & s, DateTimeRange & range, DateTimeRange::Elements elems, const QDate & defaultDate = QDate(), const QTime & defaultTime = QTime() );
-
-private:
-    QString now, today, tomorrow, yesterday, from, to;
-    
-    FormatMap timeFormats;
-    FormatMap dateFormats;
+    DateTimeParser parser;
 };
 
 #endif

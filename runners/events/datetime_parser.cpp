@@ -1,20 +1,42 @@
+/*
+ *   Copyright (C) 2010 Alexey Noskov <alexey.noskov@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License as
+ *   published by the Free Software Foundation; either version 2 of
+ *   the License or (at your option) version 3 or any later version
+ *   accepted by the membership of KDE e.V. (or its successor approved
+ *   by the membership of KDE e.V.), which shall act as a proxy
+ *   defined in Section 14 of version 3 of the license.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "datetime_parser.h"
 
 #include <KLocalizedString>
 #include <QDebug>
 
-QRegExp inMinutes("in\\s*([+-]?\\d+)\\s*minutes\\s*(from\\s+)?");
-QRegExp inHours("in\\s*([+-]?\\d+)\\s*hours\\s*(from\\s+)?");
-QRegExp inDays("in\\s*([+-]?\\d+)\\s*days\\s*(from\\s+)?");
-QRegExp inWeeks("in\\s*([+-]?\\d+)\\s*weeks\\s*(from\\s+)?");
-QRegExp inMonths("in\\s*([+-]?\\d+)\\s*months\\s*(from\\s+)?");
-QRegExp inYears("in\\s*([+-]?\\d+)\\s*years\\s*(from\\s+)?");
+QRegExp inMinutes("in\\s*([+-]?\\d+)\\s*minutes\\s*(after\\s+)?");
+QRegExp inHours("in\\s*([+-]?\\d+)\\s*hours\\s*(after\\s+)?");
+QRegExp inDays("in\\s*([+-]?\\d+)\\s*days\\s*(after\\s+)?");
+QRegExp inWeeks("in\\s*([+-]?\\d+)\\s*weeks\\s*(after\\s+)?");
+QRegExp inMonths("in\\s*([+-]?\\d+)\\s*months\\s*(after\\s+)?");
+QRegExp inYears("in\\s*([+-]?\\d+)\\s*years\\s*(after\\s+)?");
 
 DateTimeParser::DateTimeParser() {
-    now = i18n("now");
-    today = i18n("today");
-    tomorrow = i18n("tomorrow");
-    yesterday = i18n("yesterday");
+    now = i18nc( "Current time keyword", "now" );
+    today = i18nc( "Current day keyword", "today" );
+    tomorrow = i18nc( "Next day keyword", "tomorrow" );
+    yesterday = i18nc( "Previous day keyword", "yesterday" );
+    from = i18nc( "Keyword for start datetime", "from" ) + " ";
+    to = i18nc( "Keyword for finish datetime", "to" ) + " ";
     
     addTimeFormat( "h:mm" );
     
@@ -54,86 +76,128 @@ void DateTimeParser::addDateFormat( const QString & s ) {
     dateFormats.insert( s, QRegExp( formatRegexp ) );
 }
 
-KDateTime DateTimeParser::parse( const QString& s ) {    
-    if ( s.isEmpty() )
-        return KDateTime();    
-    
+DateTimeRange DateTimeParser::parseRange( const QString & s ) {
+    DateTimeRange range;
+    QString remaining = s.trimmed();
+    DateTimeRange::Elements elems = DateTimeRange::Both;
+
+    while ( !remaining.isEmpty() ) {
+        if ( remaining.startsWith( from ) ) {
+            elems = DateTimeRange::Start;
+            remaining = remaining.mid( from.length() ).trimmed();
+        } else if ( remaining.startsWith( to ) ) {
+            elems = DateTimeRange::Finish;
+            remaining = remaining.mid( to.length() ).trimmed();
+        } else {
+            remaining = parseElement( remaining, range, elems );
+        }
+    }
+
+    return range;
+}
+
+QString DateTimeParser::parseElement( const QString & s, DateTimeRange & range, DateTimeRange::Elements elems, const QDate & defaultDate, const QTime & defaultTime ) {
     if ( s.startsWith( now ) ) {
-        return KDateTime::currentLocalDateTime();
+        range.setDate( QDate::currentDate(), elems );
+        range.setTime( QTime::currentTime(), elems );
+
+        return s.mid( now.length() ).trimmed();
     } else if ( s.startsWith( today ) ) {
-        return merge( QDate::currentDate(), s, today.length() );
+        range.setDate( QDate::currentDate(), elems );
+
+        return s.mid( today.length() ).trimmed();
     } else if ( s.startsWith( tomorrow ) ) {
-        return merge( QDate::currentDate().addDays( 1 ), s, tomorrow.length() );
+        range.setDate( QDate::currentDate().addDays( 1 ), elems );
+
+        return s.mid( tomorrow.length() ).trimmed();
     } else if ( s.startsWith( yesterday ) ) {
-        return merge( QDate::currentDate().addDays( -1 ), s, yesterday.length() );
+        range.setDate( QDate::currentDate().addDays( -1 ), elems );
+
+        return s.mid( yesterday.length() ).trimmed();
     }
-    
-    if ( inMinutes.indexIn( s ) == 0 )
-        return parseOrNow( s.mid( inMinutes.matchedLength() ) ).addSecs( inMinutes.cap( 1 ).toInt() * 60 );
-    
-    if ( inHours.indexIn( s ) == 0 )
-        return parseOrNow( s.mid( inHours.matchedLength() ) ).addSecs( inHours.cap( 1 ).toInt() * 3600 );
-    
-    if ( inDays.indexIn( s ) == 0 )
-        return parseOrToday( s.mid( inDays.matchedLength() ) ).addDays( inDays.cap( 1 ).toInt() );
-    
-    if ( inWeeks.indexIn( s ) == 0 )
-        return parseOrToday( s.mid( inWeeks.matchedLength() ) ).addDays( inWeeks.cap( 1 ).toInt() * 7 );
-    
-    if ( inMonths.indexIn( s ) == 0 )
-        return parseOrToday( s.mid( inMonths.matchedLength() ) ).addMonths( inMonths.cap( 1 ).toInt() );
-    
-    if ( inYears.indexIn( s ) == 0 )
-        return parseOrToday( s.mid( inYears.matchedLength() ) ).addYears( inYears.cap( 1 ).toInt() );
-    
-    for ( FormatMap::iterator it = timeFormats.begin(); it != timeFormats.end(); ++ it )
-        if ( it.value().indexIn( s ) == 0 )
-            return merge( QTime::fromString( s.left( it.value().matchedLength() ), it.key() ), s, it.value().matchedLength() );
-    
-    for ( FormatMap::iterator it = dateFormats.begin(); it != dateFormats.end(); ++ it )
-        if ( it.value().indexIn( s ) == 0 )
-            return merge( QDate::fromString( s.left( it.value().matchedLength() ), it.key() ), s, it.value().matchedLength() );
-            
-    return KDateTime();
-}
 
-KDateTime DateTimeParser::parseOrNow( const QString& s ) {
-    KDateTime dt = parse( s );
-    
-    if ( !dt.isValid() )
-        dt = KDateTime::currentLocalDateTime();
-    
-    return dt;
-}
+    if ( inMinutes.indexIn( s ) == 0 ) {
+        int value = inMinutes.cap( 1 ).toInt();
+        QString rem = s.mid( inMinutes.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate(), QTime::currentTime() );
 
-KDateTime DateTimeParser::parseOrToday( const QString& s ) {
-    KDateTime dt = parse( s );
-    
-    if ( !dt.isValid() )
-        dt = KDateTime( QDate::currentDate() );
-    
-    return dt;
-}
+        range.addSecs( value * 60, elems );
 
-KDateTime DateTimeParser::merge( const QDate & date, const QString & s, int offset ) {
-    KDateTime dt = parse( s.mid( offset ).trimmed() );
-    
-    if ( dt.isValid() ) {
-        dt.setDate( date );
-        return dt;
-    } else {
-        return KDateTime( date );
+        return res;
     }
+
+    if ( inHours.indexIn( s ) == 0 ) {
+        int value = inHours.cap( 1 ).toInt();
+        QString rem = s.mid( inHours.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate(), QTime::currentTime() );
+
+        range.addSecs( value * 3600, elems );
+
+        return res;
+    }
+
+    if ( inDays.indexIn( s ) == 0 ) {
+        int value = inDays.cap( 1 ).toInt();
+        QString rem = s.mid( inDays.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate::currentDate() );
+
+        range.addDays( value, elems );
+
+        return res;
+    }
+
+    if ( inWeeks.indexIn( s ) == 0 ) {
+        int value = inWeeks.cap( 1 ).toInt();
+        QString rem = s.mid( inWeeks.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate::currentDate() );
+
+        range.addDays( value * 7, elems );
+
+        return res;
+    }
+
+    if ( inMonths.indexIn( s ) == 0 ) {
+        int value = inMonths.cap( 1 ).toInt();
+        QString rem = s.mid( inMonths.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate::currentDate() );
+
+        range.addMonths( value, elems );
+
+        return res;
+    }
+
+    if ( inYears.indexIn( s ) == 0 ) {
+        int value = inYears.cap( 1 ).toInt();
+        QString rem = s.mid( inYears.matchedLength() ).trimmed();
+        QString res = parseElement( rem, range, elems, QDate::currentDate() );
+
+        range.addYears( value, elems );
+
+        return res;
+    }
+
+    for ( FormatMap::iterator it = timeFormats.begin(); it != timeFormats.end(); ++ it ) {
+        if ( it.value().indexIn( s ) == 0 ) {
+            range.setTime( QTime::fromString( s.left( it.value().matchedLength() ), it.key() ), elems );
+
+            return s.mid( it.value().matchedLength() ).trimmed();
+        }
+    }
+
+    for ( FormatMap::iterator it = dateFormats.begin(); it != dateFormats.end(); ++ it ) {
+        if ( it.value().indexIn( s ) == 0 ) {
+            range.setDate( QDate::fromString( s.left( it.value().matchedLength() ), it.key() ), elems );
+
+            return s.mid( it.value().matchedLength() ).trimmed();
+        }
+    }
+
+    range.setDate( defaultDate, elems );
+    range.setTime( defaultTime, elems );
+
+    return "";
 }
 
-KDateTime DateTimeParser::merge( const QTime & time, const QString & s, int offset ) {
-    KDateTime dt = parse( s.mid( offset ).trimmed() );
-    
-    if ( dt.isValid() ) {
-        dt.setDateOnly( false );
-        dt.setTime( time );
-        return dt;
-    } else {
-        return KDateTime( QDate::currentDate(), time );
-    }
+KDateTime DateTimeParser::parse( const QString& s ) {
+    return parseRange( s ).start;
 }
