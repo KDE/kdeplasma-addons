@@ -24,10 +24,10 @@
 
 class EnterKey: public FuncKey {
 public:
-        EnterKey(QPoint relativePosition, QSize relativeSize);
+    EnterKey(QPoint relativePosition, QSize relativeSize);
 
-	protected:
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+protected:
+    virtual void paint(QPainter *painter);
 };
 
 #endif /* ENTERKEY_H */

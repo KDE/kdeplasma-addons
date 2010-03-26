@@ -26,7 +26,8 @@ ShiftKey::ShiftKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void ShiftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void ShiftKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
 	const QPointF points[7] = {
 		     QPointF(0, -3),

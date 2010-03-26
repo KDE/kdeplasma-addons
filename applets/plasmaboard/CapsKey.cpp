@@ -26,7 +26,8 @@ CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void CapsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void CapsKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
 	const QPointF points[7] = {
 		     QPointF(0, 3),

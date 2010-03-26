@@ -27,8 +27,8 @@ BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void BackspaceKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-
+void BackspaceKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 	painter->translate(-2, 0);
 
 	paintArrow(painter);

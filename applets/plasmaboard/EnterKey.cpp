@@ -28,7 +28,8 @@ EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
 }
 
 
-void EnterKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void EnterKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
 	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 

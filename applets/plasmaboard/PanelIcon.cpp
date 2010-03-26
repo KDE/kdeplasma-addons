@@ -23,6 +23,7 @@
 
 #include <KIcon>
 #include <KWindowSystem>
+#include <KStandardDirs>
 
 #include <plasma/theme.h>
 #include <plasma/corona.h>
@@ -97,9 +98,9 @@ void PanelIcon::toggleMode(){
 }
 
 void PanelIcon::initKeyboard() {
-	m_plasmaboard->resetKeyboard();
+    //m_plasmaboard->resetKeyboard();
 
-        m_plasmaboard->initKeyboard();
+    m_plasmaboard->initKeyboard(KStandardDirs::locate("data", "plasmaboard/qwert_layout.xml"));
 
 }
 

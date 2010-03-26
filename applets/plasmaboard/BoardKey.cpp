@@ -57,6 +57,7 @@ void BoardKey::paint(QPainter *painter)
     painter->eraseRect(m_rect);
     //painter->fillRect(m_rect, QColor(Qt::transparent));
     painter->drawPixmap(m_position, *m_pixmap);
+    //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
     //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
 }
 

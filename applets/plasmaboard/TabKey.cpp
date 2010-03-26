@@ -27,7 +27,9 @@ TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void TabKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void TabKey::paint(QPainter *painter){
+
+    FuncKey::paint(painter);
 
 	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 

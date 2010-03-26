@@ -33,6 +33,7 @@
 #include "ArrowRightKey.h"
 #include <QPainter>
 #include <QGraphicsSceneResizeEvent>
+#include <QFile>
 #include <plasma/theme.h>
 #include "Helpers.h"
 
@@ -84,10 +85,12 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_tooltip = new Tooltip("");
 
     m_frame = new Plasma::FrameSvg();
+    m_frame->setCacheAllRenderedFrames(false);
     m_frame->setImagePath("widgets/button");
     m_frame->setElementPrefix("normal");
 
     m_activeFrame = new Plasma::FrameSvg();
+    m_activeFrame->setCacheAllRenderedFrames(false);
     m_activeFrame->setImagePath("widgets/button");
     m_activeFrame->setElementPrefix("active");
 
@@ -96,7 +99,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
         m_engine -> connectAllSources(this);
     }
 
-     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(refresh()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
 }
 
 
@@ -154,6 +157,35 @@ void PlasmaboardWidget::clearAnything()
 void PlasmaboardWidget::clearTooltip()
 {
     m_tooltip->hide();
+}
+
+FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QString action, QString label)
+{
+
+    if(action == "ALT")
+        return new FuncKey(point, size, XK_Alt_L, QString(i18n("Alt")));
+    else if(action == "ALTGR")
+        return new FuncKey(point, size, XK_Alt_L, QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
+    else if(action == "BACKSPACE")
+        return new BackspaceKey(point, size);
+    else if(action == "CAPSLOCK")
+        return new CapsKey(point, size);
+    else if(action == "CONTROLLEFT")
+        return new FuncKey(point, size, XK_Control_L, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+    else if(action == "CONTROLRIGHT")
+        return new FuncKey(point, size, XK_Control_R, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+    else if(action == "ENTER")
+        return new EnterKey(point, size);
+    else if(action == "SHIFT")
+        return new ShiftKey(point, size);
+    else if(action == "SPACE")
+        return new FuncKey(point, size, XK_space, QString());
+    else if(action == "SUPERLEFT")
+        return new FuncKey(point, size, XK_Super_L, QString( i18nc("The meta (windows) key on a keyboard", "Super")));
+    else if(action == "TAB")
+        return new TabKey(point, size);
+
+    return new FuncKey(point, size, XK_Tab, QString(i18n("Tab")));
 }
 
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
@@ -245,9 +277,87 @@ QPixmap *PlasmaboardWidget::getFrame(const QSize &size)
     return pixmap;
 }
 
-void PlasmaboardWidget::initKeyboard()
+void PlasmaboardWidget::initKeyboard(const QString &file)
 {
-    m_funcKeys << new FuncKey(QPoint(0,0), QSize(700,1000), XK_Escape, QString(i18n("Esc")));
+    int spacing = 100;
+    int rowHeight = 100;
+    int rowWidth = 100;
+    int keyWidth = 100;
+    QPoint currentPoint = QPoint(0,0);
+    QSize currentSize = QSize(100,100);
+    int currentWidth;
+    int currentHeight;
+
+    QFile* fileP = new QFile(file);
+    fileP->open(QIODevice::ReadOnly | QIODevice::Text);
+
+    m_xmlReader.setDevice(fileP);
+
+    // reading in header information
+    if (m_xmlReader.readNextStartElement()) {
+        qDebug() << m_xmlReader.name();
+        if (m_xmlReader.name() == "keyboard"){
+            spacing = QVariant(m_xmlReader.attributes().value("spacing").toString()).toInt();
+
+        }
+        else {
+            m_xmlReader.raiseError(QObject::tr("Missing keyboard tag"));
+        }
+    }
+
+    qDebug() << "Read header, start building keys";
+
+    // building up layout
+    while(!m_xmlReader.atEnd()) {
+        qDebug() << "Enter Loop";
+        m_xmlReader.readNextStartElement();
+
+        if (m_xmlReader.name() == "row"){
+            qDebug() << "Got Row";
+            rowHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
+            rowWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
+
+            while(m_xmlReader.readNextStartElement()){
+
+                currentPoint += QPoint(spacing, 0);
+
+                if(m_xmlReader.attributes().hasAttribute("width")){
+                    currentWidth = QVariant(m_xmlReader.attributes().value("width").toString()).toInt();
+                }
+                else {
+                    currentWidth = rowWidth;
+                }
+
+                if(m_xmlReader.attributes().hasAttribute("height")){
+                    currentHeight = QVariant(m_xmlReader.attributes().value("height").toString()).toInt();
+                }
+                else {
+                    currentHeight = rowHeight;
+                }
+
+                currentSize = QSize(currentWidth, currentHeight);
+
+                if(m_xmlReader.name() == "key"){
+                    qDebug() << "Got Key";
+                    m_alphaKeys << new AlphaNumKey(currentPoint, currentSize, QVariant(m_xmlReader.attributes().value("code").toString()).toInt());
+                }
+                else if(m_xmlReader.name() == "fkey"){
+                    qDebug() << "Got Function Key";
+                    m_funcKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString(), m_xmlReader.text().toString());
+                }
+
+                m_xmlReader.skipCurrentElement();
+                currentPoint += QPoint(currentWidth, 0);
+
+            }
+
+            currentPoint = QPoint(0, currentPoint.y() + rowHeight + spacing);
+        }
+
+        //m_xmlReader.skipCurrentElement();
+    }
+
+    /*m_funcKeys << new FuncKey(QPoint(0,0), QSize(700,1000), XK_Escape, QString(i18n("Esc")));
     m_funcKeys << new FuncKey(QPoint(725,0), QSize(700,1000), XK_F1, QString(i18n("F1")));
     m_funcKeys << new FuncKey(QPoint(1450,0), QSize(700,1000), XK_F2, QString(i18n("F2")));
     m_funcKeys << new FuncKey(QPoint(2175,0), QSize(700,1000), XK_F3, QString(i18n("F3")));
@@ -263,7 +373,7 @@ void PlasmaboardWidget::initKeyboard()
 
     m_alphaKeys << new AlphaNumKey(QPoint(2200,100), QSize(2000,2000), 42);
     m_alphaKeys << new AlphaNumKey(QPoint(4400,100), QSize(2000,2000), 43);
-    m_alphaKeys << new AlphaNumKey(QPoint(1100,2200), QSize(4000,4000), 44);
+    m_alphaKeys << new AlphaNumKey(QPoint(1100,2200), QSize(4000,4000), 44);*/
 
     Q_FOREACH(BoardKey* key, m_alphaKeys){
         m_keys << key;
@@ -271,6 +381,8 @@ void PlasmaboardWidget::initKeyboard()
     Q_FOREACH(BoardKey* key, m_funcKeys){
         m_keys << key;
     }
+
+    delete fileP;
 
 }
 
@@ -341,7 +453,10 @@ void PlasmaboardWidget::paint(QPainter *p,
     p->setRenderHint(QPainter::Antialiasing);
     p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
 
-    if(option->exposedRect != boundingRect()){
+    qDebug() << option->exposedRect;
+    qDebug () << contentsRect();
+
+    if( boundingRect().contains(option->exposedRect) ){
         QRectF rect = option->exposedRect;
         Q_FOREACH(BoardKey *key, m_keys){
             if(key->intersects(rect)){
@@ -368,13 +483,8 @@ void PlasmaboardWidget::press(BoardKey *key)
     setTooltip(key);
 }
 
-void PlasmaboardWidget::refresh()
+void PlasmaboardWidget::refreshKeys()
 {
-    qDeleteAll(m_frames);
-    m_frames.clear();
-    qDeleteAll(m_activeFrames);
-    m_activeFrames.clear();
-
     double factor_x = size().width() / 10000;
     double factor_y = size().height() / 10000;
 
@@ -382,7 +492,7 @@ void PlasmaboardWidget::refresh()
         key->updateDimensions(factor_x, factor_y);
         key->setPixmap(getFrame(key->size()));
     }
-    update();
+
 }
 
 void PlasmaboardWidget::relabelKeys()
@@ -408,11 +518,13 @@ void PlasmaboardWidget::resetKeyboard()
 
     qDeleteAll(m_alphaKeys);
     m_alphaKeys.clear();
+
+    m_keys.clear();
 }
 
 void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-    refresh();
+    refreshKeys();
 }
 
 void PlasmaboardWidget::setTooltip(BoardKey* key)
@@ -421,6 +533,16 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
     m_tooltip -> move( popupPosition( key->size() ) + key->position() );
     m_tooltip -> resize( key->size() );
     m_tooltip -> show();
+}
+
+void PlasmaboardWidget::themeChanged()
+{
+    qDeleteAll(m_frames);
+    m_frames.clear();
+    qDeleteAll(m_activeFrames);
+    m_activeFrames.clear();
+
+    refreshKeys();
 }
 
 void PlasmaboardWidget::unpress(BoardKey *key)

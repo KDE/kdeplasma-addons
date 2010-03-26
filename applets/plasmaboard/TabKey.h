@@ -25,10 +25,10 @@
 
 class TabKey: public FuncKey {
 public:
-        TabKey(QPoint relativePosition, QSize relativeSize);
+    TabKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    virtual void paint(QPainter *painter);
 };
 
 #endif /* TABKEY_H */

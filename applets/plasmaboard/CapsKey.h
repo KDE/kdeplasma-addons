@@ -25,10 +25,10 @@
 
 class CapsKey: public FuncKey {
 public:
-        CapsKey(QPoint relativePosition, QSize relativeSize);
+    CapsKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    virtual void paint(QPainter *painter);
 };
 
 #endif /* CAPSKEY_H */

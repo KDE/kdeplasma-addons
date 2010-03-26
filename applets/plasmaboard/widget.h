@@ -27,6 +27,7 @@
 #include <plasma/containment.h>
 #include <plasma/dataengine.h>
 
+#include <QXmlStreamReader>
 
 #define XK_TECHNICAL
 #define XK_PUBLISHING
@@ -58,7 +59,7 @@ public:
     /**
       * Draws just basic keys on the keyboard - just for writing
       */
-    void initKeyboard();
+    void initKeyboard(const QString &file);
 
     /**
       * The paintInterface procedure paints the applet to screen
@@ -81,7 +82,8 @@ private:
     /**
       * Removes tooltip
       */
-    void clearTooltip();    
+    void clearTooltip();
+    FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action, QString label);
     QPixmap *getActiveFrame(const QSize &size);
     QPixmap *getFrame(const QSize &size);
     void press(BoardKey* key);
@@ -101,12 +103,13 @@ public Q_SLOTS:
       * Triggers a relabeling of alphanumeric keys on the keyboard
       */
     void relabelKeys();
-    void refresh();
+    void refreshKeys();
 
     /**
       * Sets tooltip to a new text
       */
     void setTooltip(BoardKey* key);
+    void themeChanged();
 
 signals:
     void shiftKey(bool value);
@@ -131,7 +134,7 @@ private:
     QList<BoardKey*> m_keys;
     QList<BoardKey*> m_pressedList;
     Tooltip* m_tooltip;
-
+    QXmlStreamReader m_xmlReader;
 };
 
 inline uint qHash(const QSize &key)

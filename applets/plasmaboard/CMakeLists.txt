@@ -21,6 +21,8 @@ target_link_libraries(plasma_applet_plasmaboard
                 ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} kephal plasmaclock ${X11_XTest_LIB} ${X11_X11_LIB} ${X11_LIBS})
  
 install(TARGETS plasma_applet_plasmaboard DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install( FILES qwert_layout.xml DESTINATION ${DATA_INSTALL_DIR}/plasmaboard )
  
 install(FILES plasma_applet_plasmaboard.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
