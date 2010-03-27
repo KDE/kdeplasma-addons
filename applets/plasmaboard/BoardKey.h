@@ -56,6 +56,9 @@ public:
     void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 
+protected:
+    void setUpPainter(QPainter *painter);
+
 private:
     unsigned int m_keycode;
     QPixmap* m_pixmap;

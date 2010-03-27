@@ -31,7 +31,9 @@ EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
 void EnterKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
-	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+    painter->save();
+    setUpPainter(painter);
+    painter->scale(size().width()/10.0, size().height()/10.0);
 
 	painter->drawLine(-1, 0, 3, 0);
 	painter->drawLine(3, 0, 3, -1);
@@ -43,5 +45,5 @@ void EnterKey::paint(QPainter *painter){
 	 };
 
 	painter->drawConvexPolygon(points, 3);
-
+    painter->restore();
 }

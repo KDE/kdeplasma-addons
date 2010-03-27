@@ -29,6 +29,10 @@ CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
 void CapsKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
+    painter->save();
+    setUpPainter(painter);
+    painter->scale(size().width()/10.0, size().height()/10.0);
+
 	const QPointF points[7] = {
 		     QPointF(0, 3),
 		     QPointF(-2, 0),
@@ -40,5 +44,5 @@ void CapsKey::paint(QPainter *painter){
 	};
 
 	painter->drawConvexPolygon(points, 7);
-
+    painter->restore();
 }

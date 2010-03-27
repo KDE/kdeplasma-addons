@@ -30,7 +30,7 @@
   <key code="33" ></key>
   <key code="34" ></key>
   <key code="35" ></key>
-  <fkey action="ENTER" width="900" height="4000"></fkey>
+  <fkey action="ENTER" width="750" height="4000"></fkey>
 </row>
 <row height="2000" width="650">
   <fkey action="CAPSLOCK" width="1000"></fkey>
@@ -45,10 +45,11 @@
   <key code="46" ></key>
   <key code="47" ></key>
   <key code="48" ></key>
-  <key code="49" ></key>
+  <key code="51" ></key>
 </row>
 <row height="2000" width="650">
-  <fkey action="SHIFT" width="800"></fkey>
+  <fkey action="SHIFT" width="700"></fkey>
+  <key code="94"></key>
   <key code="52"></key>
   <key code="53" ></key>
   <key code="54" ></key>
@@ -59,9 +60,7 @@
   <key code="59" ></key>
   <key code="60" ></key>
   <key code="61" ></key>
-  <key code="62" ></key>
-  <key code="63" ></key>
-  <fkey action="SHIFT" width="900"></fkey>
+  <fkey action="SHIFT" width="1500"></fkey>
 </row>
 <row height="2000" width="900">
   <fkey action="CONTROLLEFT"></fkey>

@@ -29,7 +29,13 @@ BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
 
 void BackspaceKey::paint(QPainter *painter){
     FuncKey::paint(painter);
-	painter->translate(-2, 0);
 
+    painter->save();
+    setUpPainter(painter);
+    painter->scale(size().width()/10.0, size().height()/10.0);
+
+    //painter->translate(-1, 0);
 	paintArrow(painter);
+
+    painter->restore();
 }

@@ -20,7 +20,7 @@
 
 #include "TabKey.h"
 #include <QPainter>
-#include <plasma/theme.h>
+
 
 TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, XK_Tab, QString()){
@@ -31,7 +31,9 @@ void TabKey::paint(QPainter *painter){
 
     FuncKey::paint(painter);
 
-	painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+    painter->save();
+    setUpPainter(painter);
+    painter->scale(size().width()/10.0, size().height()/10.0);
 
 	painter->drawLine(-1, -2 , 3, -2);
 	QPointF points[3] = {
@@ -51,4 +53,5 @@ void TabKey::paint(QPainter *painter){
 	painter->drawConvexPolygon(points2, 3);
 	painter->drawLine(3, 1 , 3, -1);
 
+    painter->restore();
 }

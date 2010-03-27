@@ -41,9 +41,9 @@ void AlphaNumKey::paint(QPainter *painter)
 {
     BoardKey::paint(painter);
     painter->save();
-    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
+    setUpPainter(painter);
     painter->scale(1.0/(relativeSize().width()/size().width()), 1.0/(relativeSize().width()/size().width()));
-    painter->drawText(QPoint(-100,100), m_label);
+    painter->drawText(QPoint(-80 * m_label.size(),100), m_label);
     painter->restore();
 }
 

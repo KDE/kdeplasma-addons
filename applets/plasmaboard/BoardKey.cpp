@@ -20,6 +20,7 @@
 #include "BoardKey.h"
 #include "Helpers.h"
 #include <QPainter>
+#include <plasma/theme.h>
 
 BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode) :
     m_relativePosition(relativePosition), m_relativeSize(relativeSize), m_keycode(keycode){
@@ -59,6 +60,7 @@ void BoardKey::paint(QPainter *painter)
     painter->drawPixmap(m_position, *m_pixmap);
     //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
     //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
+
 }
 
 const QPoint BoardKey::position() const
@@ -109,6 +111,12 @@ void BoardKey::sendKeycodeRelease()
 void BoardKey::setPixmap(QPixmap *pixmap)
 {
     m_pixmap = pixmap;
+}
+
+void BoardKey::setUpPainter(QPainter *painter)
+{
+    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
+    painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 }
 
 const QSize BoardKey::size() const

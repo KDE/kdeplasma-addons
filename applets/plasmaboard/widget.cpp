@@ -181,7 +181,7 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
     else if(action == "SPACE")
         return new FuncKey(point, size, XK_space, QString());
     else if(action == "SUPERLEFT")
-        return new FuncKey(point, size, XK_Super_L, QString( i18nc("The meta (windows) key on a keyboard", "Super")));
+        return new FuncKey(point, size, XK_Super_L, QString( i18nc("The meta (windows) key on a keyboard", "Meta")));
     else if(action == "TAB")
         return new TabKey(point, size);
 
