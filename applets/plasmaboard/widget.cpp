@@ -115,6 +115,12 @@ PlasmaboardWidget::~PlasmaboardWidget()
 
 void PlasmaboardWidget::clear()
 {
+    Q_FOREACH(BoardKey* key, m_pressedList){
+        key->unpressed();
+    }
+
+    // DO I STILL NEED THIS STUFF BELOW???
+
     bool change = false;
     if( m_funcKeys[SHIFT_L_KEY]->toggled() || m_funcKeys[SHIFT_R_KEY]->toggled() ){
         Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
@@ -159,7 +165,7 @@ void PlasmaboardWidget::clearTooltip()
     m_tooltip->hide();
 }
 
-FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QString action, QString label)
+FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QString action)
 {
 
     if(action == "ALT")
@@ -343,7 +349,7 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
                 }
                 else if(m_xmlReader.name() == "fkey"){
                     qDebug() << "Got Function Key";
-                    m_funcKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString(), m_xmlReader.text().toString());
+                    m_funcKeys << createFunctionKey(currentPoint, currentSize, m_xmlReader.attributes().value("action").toString());
                 }
 
                 m_xmlReader.skipCurrentElement();
@@ -354,26 +360,7 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
             currentPoint = QPoint(0, currentPoint.y() + rowHeight + spacing);
         }
 
-        //m_xmlReader.skipCurrentElement();
     }
-
-    /*m_funcKeys << new FuncKey(QPoint(0,0), QSize(700,1000), XK_Escape, QString(i18n("Esc")));
-    m_funcKeys << new FuncKey(QPoint(725,0), QSize(700,1000), XK_F1, QString(i18n("F1")));
-    m_funcKeys << new FuncKey(QPoint(1450,0), QSize(700,1000), XK_F2, QString(i18n("F2")));
-    m_funcKeys << new FuncKey(QPoint(2175,0), QSize(700,1000), XK_F3, QString(i18n("F3")));
-    m_funcKeys << new FuncKey(QPoint(2900,0), QSize(700,1000), XK_F4, QString(i18n("F4")));
-    m_funcKeys << new FuncKey(QPoint(3625,0), QSize(700,1000), XK_F5, QString(i18n("F5")));
-    m_funcKeys << new FuncKey(QPoint(4350,0), QSize(700,1000), XK_F6, QString(i18n("F6")));
-    m_funcKeys << new FuncKey(QPoint(5075,0), QSize(700,1000), XK_F7, QString(i18n("F7")));
-    m_funcKeys << new FuncKey(QPoint(5800,0), QSize(700,1000), XK_F8, QString(i18n("F8")));
-    m_funcKeys << new FuncKey(QPoint(6525,0), QSize(700,1000), XK_F9, QString(i18n("F9")));
-    m_funcKeys << new FuncKey(QPoint(7250,0), QSize(700,1000), XK_F10, QString(i18n("F10")));
-    m_funcKeys << new FuncKey(QPoint(7975,0), QSize(700,1000), XK_F11, QString(i18n("F11")));
-    m_funcKeys << new FuncKey(QPoint(8700,0), QSize(700,1000), XK_F12, QString(i18n("F12")));
-
-    m_alphaKeys << new AlphaNumKey(QPoint(2200,100), QSize(2000,2000), 42);
-    m_alphaKeys << new AlphaNumKey(QPoint(4400,100), QSize(2000,2000), 43);
-    m_alphaKeys << new AlphaNumKey(QPoint(1100,2200), QSize(4000,4000), 44);*/
 
     Q_FOREACH(BoardKey* key, m_alphaKeys){
         m_keys << key;
@@ -449,6 +436,8 @@ void PlasmaboardWidget::paint(QPainter *p,
                               const QStyleOptionGraphicsItem *option,
                               QWidget* widget)
 {
+    //Plasma::Containment::paint(p, option, widget);
+
     p->setRenderHint(QPainter::SmoothPixmapTransform);
     p->setRenderHint(QPainter::Antialiasing);
     p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));

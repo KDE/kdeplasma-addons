@@ -14,7 +14,7 @@
   <key code="19"></key>
   <key code="20"></key>
   <key code="21"></key>
-  <fkey action="BACKSPACE" width="1000"></fkey>
+  <fkey action="BACKSPACE" width="1040"></fkey>
 </row>
 <row height="2000" width="650">
   <fkey action="TAB" width="900"></fkey>
@@ -30,7 +30,8 @@
   <key code="33" ></key>
   <key code="34" ></key>
   <key code="35" ></key>
-  <fkey action="ENTER" width="750" height="4000"></fkey>
+  <space width="50"></space>
+  <fkey action="ENTER" width="700" height="4000"></fkey>
 </row>
 <row height="2000" width="650">
   <fkey action="CAPSLOCK" width="1000"></fkey>
@@ -60,7 +61,7 @@
   <key code="59" ></key>
   <key code="60" ></key>
   <key code="61" ></key>
-  <fkey action="SHIFT" width="1500"></fkey>
+  <fkey action="SHIFT" width="1660"></fkey>
 </row>
 <row height="2000" width="900">
   <fkey action="CONTROLLEFT"></fkey>

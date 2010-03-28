@@ -40,17 +40,11 @@ public:
 
 
 public Q_SLOTS:
-	//void initBatteryExtender(Plasma::ExtenderItem *item);
 
-	/*
-	 * Toggles between extended and basic keyboard layout
-	 */
 
-	void toggleMode();
-
-    /*
-         * Initialize the keyboard with the configured layout
-        */
+    /**
+      * Initialize the keyboard with the configured layout
+      */
     void initKeyboard();
 
 protected:
@@ -65,9 +59,6 @@ private:
 private:
 	PlasmaboardWidget *m_plasmaboard;
 	const QVariantList args;
-    QAction *contextBasic;
-    QAction *contextExtended;
-	bool extendedMode;
 
 };
 

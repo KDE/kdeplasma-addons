@@ -33,7 +33,7 @@ void TabKey::paint(QPainter *painter){
 
     painter->save();
     setUpPainter(painter);
-    painter->scale(size().width()/10.0, size().height()/10.0);
+    painter->scale(size().height()/10.0, size().height()/10.0);
 
 	painter->drawLine(-1, -2 , 3, -2);
 	QPointF points[3] = {

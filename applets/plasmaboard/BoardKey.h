@@ -57,7 +57,7 @@ public:
     void updateDimensions(double factor_x, double factor_y);
 
 protected:
-    void setUpPainter(QPainter *painter);
+    void setUpPainter(QPainter *painter) const;
 
 private:
     unsigned int m_keycode;

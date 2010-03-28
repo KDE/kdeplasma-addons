@@ -33,10 +33,10 @@ void EnterKey::paint(QPainter *painter){
 
     painter->save();
     setUpPainter(painter);
-    painter->scale(size().width()/10.0, size().height()/10.0);
+    painter->scale(size().height()/20.0, size().height()/20.0);
 
-	painter->drawLine(-1, 0, 3, 0);
-	painter->drawLine(3, 0, 3, -1);
+    painter->drawLine(-1, 0, 2, 0);
+    painter->drawLine(2, 0, 2, -1);
 
 	const QPointF points[3] = {
 	     QPointF(-3, 0),

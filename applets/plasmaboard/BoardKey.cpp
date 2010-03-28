@@ -55,7 +55,7 @@ const QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
-    painter->eraseRect(m_rect);
+    //painter->eraseRect(m_rect);
     //painter->fillRect(m_rect, QColor(Qt::transparent));
     painter->drawPixmap(m_position, *m_pixmap);
     //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
@@ -113,7 +113,7 @@ void BoardKey::setPixmap(QPixmap *pixmap)
     m_pixmap = pixmap;
 }
 
-void BoardKey::setUpPainter(QPainter *painter)
+void BoardKey::setUpPainter(QPainter *painter) const
 {
     painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
     painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));

@@ -32,7 +32,7 @@ void BackspaceKey::paint(QPainter *painter){
 
     painter->save();
     setUpPainter(painter);
-    painter->scale(size().width()/10.0, size().height()/10.0);
+    painter->scale(size().height()/10.0, size().height()/10.0);
 
     //painter->translate(-1, 0);
 	paintArrow(painter);

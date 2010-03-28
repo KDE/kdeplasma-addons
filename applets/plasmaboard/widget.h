@@ -83,7 +83,7 @@ private:
       * Removes tooltip
       */
     void clearTooltip();
-    FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action, QString label);
+    FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
     QPixmap *getActiveFrame(const QSize &size);
     QPixmap *getFrame(const QSize &size);
     void press(BoardKey* key);

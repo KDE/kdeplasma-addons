@@ -37,7 +37,7 @@ public:
       * Sets button text regarding the key level
       */
     void setLabel(int level);
-    void setLabel(QString &label);
+    void setLabel(const QString &label);
     void switchKey(bool isLevel2, bool isAlternative, bool isLocked); 
 
 private:

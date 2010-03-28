@@ -52,7 +52,7 @@ void AlphaNumKey::setLabel(int level)
     m_label = Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level));
 }
 
-void AlphaNumKey::setLabel(QString &label)
+void AlphaNumKey::setLabel(const QString &label)
 {
     m_label = label;
 }
