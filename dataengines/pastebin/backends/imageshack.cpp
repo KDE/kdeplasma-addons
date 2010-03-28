@@ -40,7 +40,6 @@ ImageshackServer::ImageshackServer(const QString &server)
         m_server = server;
     }
 
-    first = true;
     m_boundary  = "----------";
     m_boundary += KRandom::randomString(42 + 13).toAscii();
 }
@@ -49,15 +48,9 @@ ImageshackServer::~ImageshackServer()
 {
 }
 
-void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
+void ImageshackServer::finished(KJob *job)
 {
-    Q_UNUSED(job);
-
-    if (data.length() == 0) {
-        return;
-    }
-
-    QXmlStreamReader xml(data);
+    QXmlStreamReader xml(_data);
     if (xml.hasError()) {
         emit postError();
         return;
@@ -72,6 +65,17 @@ void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
             return;
         }
     }
+}
+
+void ImageshackServer::readKIOData(KIO::Job *job, const QByteArray &data)
+{
+    Q_UNUSED(job);
+
+    if (data.length() == 0) {
+        return;
+    }
+
+    _data.append(data);
 }
 
 // taken from flickr KIPI Plugin
@@ -138,15 +142,16 @@ bool ImageshackServer::addFile(const QString& name, const QString& path)
 void ImageshackServer::post(const QString& content)
 {
     KUrl url(QString("%1/upload_api.php").arg(m_server));
-
     addFile("fileupload", content);
-    finish();
 
-    first = true;
+    finish();
+    _data.clear();
+
     KIO::TransferJob *tf = KIO::http_post(url, m_buffer, KIO::HideProgressInfo);
 
     tf->addMetaData("content-type","Content-Type: multipart/form-data; boundary=" + m_boundary);
 
     connect(tf, SIGNAL(data(KIO::Job*, const QByteArray&)),
             this, SLOT(readKIOData(KIO::Job*, const QByteArray&)));
+    connect(tf, SIGNAL(result(KJob *)), this, SLOT(finished(KJob *)));
 }

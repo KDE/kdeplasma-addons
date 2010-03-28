@@ -161,11 +161,8 @@ bool ImagebinCAServer::addFile(const QString& name,const QString& path)
 void ImagebinCAServer::post(const QString& content)
 {
     KUrl url(QString("%1/upload.php").arg(m_server));
-
     addPair("t", "file");
-
     addPair("name", QFile::encodeName(KUrl(content).fileName()));
-
     addPair("tags", "plasma");
 
     QString adult;
@@ -176,9 +173,7 @@ void ImagebinCAServer::post(const QString& content)
     }
 
     addPair("adult", adult);
-
     addFile("f", content);
-
     finish();
 
     _data.clear();

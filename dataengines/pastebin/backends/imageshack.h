@@ -50,10 +50,11 @@ protected:
     QByteArray m_boundary;
 
 public slots:
+    void finished(KJob *job);
     void readKIOData(KIO::Job *job, const QByteArray &data);
 
 private:
-    bool first;
+    QByteArray _data;
 };
 
 #endif
