@@ -163,13 +163,10 @@ void ImagebinCAServer::post(const QString& content)
     KUrl url(QString("%1/upload.php").arg(m_server));
 
     addPair("t", "file");
-    url.addQueryItem("t", "file");
 
     addPair("name", QFile::encodeName(KUrl(content).fileName()));
-    url.addQueryItem("name", QFile::encodeName(KUrl(content).fileName()));
 
     addPair("tags", "plasma");
-    url.addQueryItem("tags", "plasma");
 
     QString adult;
     if(m_privacy == 0){
@@ -179,7 +176,6 @@ void ImagebinCAServer::post(const QString& content)
     }
 
     addPair("adult", adult);
-    url.addQueryItem("adult", adult);
 
     addFile("f", content);
 
