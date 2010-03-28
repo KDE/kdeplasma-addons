@@ -411,7 +411,8 @@ QStringList LancelotWindow::sectionNames()
 QStringList LancelotWindow::sectionIcons()
 {
     QStringList res;
-    res << "applications-other" << "computer-laptop" << "kontact" << "applications-office";
+    res << "kde" << "computer-laptop" << "kontact" << "applications-office";
+    // res << "applications-other" << "computer-laptop" << "kontact" << "applications-office";
     return res;
 }
 
