@@ -91,13 +91,16 @@ public:
         // Loading Lancelot application categories
         QDBusReply<QStringList> replyIDs   = lancelot->sectionIDs();
         QDBusReply<QStringList> replyNames = lancelot->sectionNames();
-        QDBusReply<QStringList> replyIcons = lancelot->sectionIcons();
+        QDBusReply<QStringList> replyIcons_ = lancelot->sectionIcons();
 
-        if (!replyIDs.isValid() || !replyNames.isValid() || !replyIcons.isValid()) {
+        if (!replyIDs.isValid() || !replyNames.isValid() || !replyIcons_.isValid()) {
             // Error connecting to Lancelot via d-bus
             // setFailedToLaunch(true);
             return;
         }
+
+        QStringList replyIcons = q->config().readEntry(
+            "overrideSectionIcons", replyIcons_.value());
 
         // Creating buttons...
         for (int i = 0; i < replyIDs.value().size(); i++) {
@@ -106,7 +109,7 @@ public:
             }
 
             Lancelot::HoverIcon * button = new Lancelot::HoverIcon(
-                KIcon(replyIcons.value().at(i)), "", q);
+                KIcon(replyIcons.at(i)), "", q);
 
             connect(
                 button, SIGNAL(activated()),
