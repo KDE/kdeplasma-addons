@@ -32,7 +32,7 @@ AlphaNumKey::~AlphaNumKey() {
 
 }
 
-const QString AlphaNumKey::label() const
+QString AlphaNumKey::label() const
 {
     return m_label;
 }

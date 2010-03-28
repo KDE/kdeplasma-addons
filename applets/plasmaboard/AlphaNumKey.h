@@ -30,7 +30,7 @@ public:
     AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
     virtual ~AlphaNumKey();
 
-    virtual const QString label() const;
+    virtual QString label() const;
     virtual void paint(QPainter *painter);
 
     /**

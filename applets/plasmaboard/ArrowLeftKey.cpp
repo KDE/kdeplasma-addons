@@ -26,7 +26,7 @@ ArrowLeftKey::ArrowLeftKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void ArrowLeftKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void ArrowLeftKey::paint(QPainter *painter){
 
 	paintArrow(painter);
 }

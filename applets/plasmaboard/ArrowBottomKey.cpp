@@ -26,7 +26,7 @@ ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void ArrowBottomKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void ArrowBottomKey::paint(QPainter *painter){
 
 	painter->rotate(-90);
 	paintArrow(painter);

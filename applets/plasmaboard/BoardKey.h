@@ -28,18 +28,18 @@ public:
     BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode);
     virtual ~BoardKey();
 
-    const bool contains (const QPoint &point) const;
-    const bool intersects (const QRectF &rect) const;
-    const unsigned int getKeycode() const;
-    virtual const QString label() const;
+    bool contains (const QPoint &point) const;
+    bool intersects (const QRectF &rect) const;
+    unsigned int getKeycode() const;
+    virtual QString label() const;
     virtual void paint(QPainter *painter);
-    const QPoint position() const;
+    QPoint position() const;
     /**
       * called when button is pressed
       */
     virtual void pressed();
-    const QRectF rect() const;
-    const QSize relativeSize() const;
+    QRectF rect() const;
+    QSize relativeSize() const;
     /**
       * called when button is pressed
       */
@@ -52,7 +52,7 @@ public:
     void sendKeycodePress();
     void sendKeycodeRelease();
     void setPixmap(QPixmap *pixmap);
-    const QSize size() const;
+    QSize size() const;
     void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 

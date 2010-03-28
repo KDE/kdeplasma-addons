@@ -87,6 +87,7 @@ private:
     QPixmap *getActiveFrame(const QSize &size);
     QPixmap *getFrame(const QSize &size);
     void press(BoardKey* key);
+    void press(BoardKey* key, bool state);
     void release(BoardKey* key);
     void unpress(BoardKey* key);
 
@@ -111,19 +112,12 @@ public Q_SLOTS:
     void setTooltip(BoardKey* key);
     void themeChanged();
 
-signals:
-    void shiftKey(bool value);
-    void altKey(bool value);
-    void altGrKey(bool value);
-    void superKey(bool value);
-    void controlKey(bool value);
-    void menuKey(bool value);
-
-
 private:
     Plasma::FrameSvg* m_activeFrame;
     QHash<QSize, QPixmap*> m_activeFrames;
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
+    QList<FuncKey*> m_altKeys;
+    QList<FuncKey*> m_capsKeys;
     Plasma::DataEngine* m_engine;
     Plasma::FrameSvg* m_frame;
     QHash<QSize, QPixmap*> m_frames;
@@ -133,6 +127,7 @@ private:
     bool m_isLocked; // is lock activated
     QList<BoardKey*> m_keys;
     QList<BoardKey*> m_pressedList;
+    QList<FuncKey*> m_shiftKeys;
     Tooltip* m_tooltip;
     QXmlStreamReader m_xmlReader;
 };

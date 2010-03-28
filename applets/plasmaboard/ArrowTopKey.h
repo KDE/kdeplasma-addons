@@ -25,10 +25,10 @@
 
 class ArrowTopKey: public FuncKey {
 public:
-        ArrowTopKey(QPoint relativePosition, QSize relativeSize);
+    ArrowTopKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    virtual void paint(QPainter *painter);
 };
 
 #endif /* ARROWTOPKEY_H */

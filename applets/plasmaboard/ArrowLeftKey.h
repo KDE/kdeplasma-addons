@@ -25,10 +25,10 @@
 
 class ArrowLeftKey: public FuncKey {
 public:
-        ArrowLeftKey(QPoint relativePosition, QSize relativeSize);
+    ArrowLeftKey(QPoint relativePosition, QSize relativeSize);
 
 protected:
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    virtual void paint(QPainter *painter);
 };
 
 #endif /* ARROWLEFTKEY_H */

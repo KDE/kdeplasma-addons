@@ -32,23 +32,23 @@ BoardKey::~BoardKey()
 
 }
 
-const bool BoardKey::contains (const QPoint &point) const
+bool BoardKey::contains (const QPoint &point) const
 {
     return m_rect.contains(point);
 }
 
-const bool BoardKey::intersects (const QRectF &rect) const
+bool BoardKey::intersects (const QRectF &rect) const
 {
     return m_rect.intersects(rect);
 }
 
 
-const unsigned int BoardKey::getKeycode() const
+unsigned int BoardKey::getKeycode() const
 {
     return m_keycode;
 }
 
-const QString BoardKey::label() const
+QString BoardKey::label() const
 {
     return QString();
 }
@@ -63,7 +63,7 @@ void BoardKey::paint(QPainter *painter)
 
 }
 
-const QPoint BoardKey::position() const
+QPoint BoardKey::position() const
 {
     return m_position;
 }
@@ -78,12 +78,12 @@ void BoardKey::released()
     sendKeycode();
 }
 
-const QRectF BoardKey::rect() const
+QRectF BoardKey::rect() const
 {
     return m_rect;
 }
 
-const QSize BoardKey::relativeSize() const
+QSize BoardKey::relativeSize() const
 {
     return m_relativeSize;
 }
@@ -119,7 +119,7 @@ void BoardKey::setUpPainter(QPainter *painter) const
     painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 }
 
-const QSize BoardKey::size() const
+QSize BoardKey::size() const
 {
     return m_size;
 }

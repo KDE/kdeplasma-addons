@@ -27,7 +27,7 @@ ArrowTopKey::ArrowTopKey(QPoint relativePosition, QSize relativeSize) :
 
 }
 
-void ArrowTopKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+void ArrowTopKey::paint(QPainter *painter){
 
 	painter->rotate(90);
 	paintArrow(painter);
