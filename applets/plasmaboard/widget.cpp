@@ -113,6 +113,14 @@ PlasmaboardWidget::~PlasmaboardWidget()
     qDeleteAll(m_activeFrames);
 }
 
+void PlasmaboardWidget::change(FuncKey *key, bool state)
+{
+    if(state)
+        press(key);
+    else
+        unpress(key);
+}
+
 void PlasmaboardWidget::clear()
 {
     Q_FOREACH(BoardKey* key, m_pressedList){
@@ -168,10 +176,16 @@ void PlasmaboardWidget::clearTooltip()
 FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QString action)
 {
 
-    if(action == "ALT")
-        return new FuncKey(point, size, XK_Alt_L, QString(i18n("Alt")));
-    else if(action == "ALTGR")
-        return new FuncKey(point, size, XK_Alt_L, QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
+    if(action == "ALT"){
+        FuncKey *k = new FuncKey(point, size, XK_Alt_L, QString(i18n("Alt")));
+        m_altKeys << k;
+        return k;
+    }
+    else if(action == "ALTGR"){
+        FuncKey *k = new FuncKey(point, size, XK_Alt_L, QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
+        m_altgrKeys << k;
+        return k;
+    }
     else if(action == "BACKSPACE")
         return new BackspaceKey(point, size);
     else if(action == "CAPSLOCK"){
@@ -179,10 +193,16 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         m_capsKeys << k;
         return k;
     }
-    else if(action == "CONTROLLEFT")
-        return new FuncKey(point, size, XK_Control_L, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
-    else if(action == "CONTROLRIGHT")
-        return new FuncKey(point, size, XK_Control_R, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+    else if(action == "CONTROLLEFT"){
+        FuncKey *k = new FuncKey(point, size, XK_Control_L, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        m_ctlKeys << k;
+        return k;
+    }
+    else if(action == "CONTROLRIGHT"){
+        FuncKey *k = new FuncKey(point, size, XK_Control_R, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        m_ctlKeys << k;
+        return k;
+    }
     else if(action == "ENTER")
         return new EnterKey(point, size);
     else if(action == "SHIFT") {
@@ -192,8 +212,11 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
     }
     else if(action == "SPACE")
         return new FuncKey(point, size, XK_space, QString());
-    else if(action == "SUPERLEFT")
-        return new FuncKey(point, size, XK_Super_L, QString( i18nc("The meta (windows) key on a keyboard", "Meta")));
+    else if(action == "SUPERLEFT"){
+        FuncKey *k = new FuncKey(point, size, XK_Super_L, QString( i18nc("The super (windows) key on a keyboard", "Super")));
+        m_superKeys << k;
+        return k;
+    }
     else if(action == "TAB")
         return new TabKey(point, size);
 
@@ -202,68 +225,50 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
 
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
 {
-    bool state;
+    bool state = data["Pressed"].toBool();
 
     if ( sourceName == "Shift" ){
-        state = data["Pressed"].toBool();
         Q_FOREACH(FuncKey* key, m_shiftKeys){
-            press(key, state);
+            change(key, state);
         }
         m_isLevel2 = state;
         relabelKeys();
     }
     
     else if ( sourceName == "Caps Lock" ) {
-        state = data["Pressed"].toBool();
         Q_FOREACH(FuncKey* key, m_capsKeys){
-            press(key, state);
+            change(key, state);
         }
         m_isLocked = state;
         relabelKeys();
     }
 
     else if ( sourceName == "AltGr" ) {
-        if ( data["Pressed"].toBool() ) {
-            m_isAlternative = true;
+        Q_FOREACH(FuncKey* key, m_altgrKeys){
+            change(key, state);
         }
-        else{
-            m_isAlternative = false;
-        }
+        m_isAlternative = state;
     }
 
     else if ( sourceName == "Alt" ) {
-        if ( data["Pressed"].toBool() ) {
-
+        Q_FOREACH(FuncKey* key, m_altKeys){
+            change(key, state);
         }
-        else{
-
-            }
     }
 
     else if ( sourceName == "Super" ) {
-        if ( data["Pressed"].toBool() ) {
-
-        }
-        else{
-
+        Q_FOREACH(FuncKey* key, m_superKeys){
+            change(key, state);
         }
     }
 
     else if ( sourceName == "Ctrl" ) {
-        if ( data["Pressed"].toBool() ) {
-
-        }
-        else {
-
+        Q_FOREACH(FuncKey* key, m_ctlKeys){
+            change(key, state);
         }
     }
     else if ( sourceName == "Menu" ) {
-        if ( data["Pressed"].toBool() ) {
 
-        }
-        else {
-
-        }
     }    
 }
 
@@ -476,12 +481,12 @@ void PlasmaboardWidget::press(BoardKey *key)
     setTooltip(key);
 }
 
-void PlasmaboardWidget::press(BoardKey *key, bool state)
+void PlasmaboardWidget::press(FuncKey *key)
 {
-    if(state)
-        press(key);
-    else
-        unpress(key);
+    key->pressed();
+    key->setPixmap(getActiveFrame(key->size()));
+    m_pressedList << key;
+    update(key->rect());
 }
 
 void PlasmaboardWidget::refreshKeys()
@@ -523,8 +528,11 @@ void PlasmaboardWidget::resetKeyboard()
 
     m_keys.clear();
     m_altKeys.clear();
+    m_altgrKeys.clear();;
     m_capsKeys.clear();
-    m_shiftKeys.clear();
+    m_ctlKeys.clear();;
+    m_shiftKeys.clear();        
+    m_superKeys.clear();
 }
 
 void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)

@@ -23,8 +23,8 @@
 #include <plasma/theme.h>
 
 BoardKey::BoardKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode) :
-    m_relativePosition(relativePosition), m_relativeSize(relativeSize), m_keycode(keycode){
-
+    m_relativePosition(relativePosition), m_relativeSize(relativeSize){
+    m_keycode = keycode;
 }
 
 BoardKey::~BoardKey()

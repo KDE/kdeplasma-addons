@@ -82,12 +82,14 @@ private:
     /**
       * Removes tooltip
       */
+    void change(FuncKey* key, bool state);
     void clearTooltip();
     FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
     QPixmap *getActiveFrame(const QSize &size);
     QPixmap *getFrame(const QSize &size);
     void press(BoardKey* key);
-    void press(BoardKey* key, bool state);
+    void press(FuncKey* key);
+
     void release(BoardKey* key);
     void unpress(BoardKey* key);
 
@@ -117,7 +119,9 @@ private:
     QHash<QSize, QPixmap*> m_activeFrames;
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
     QList<FuncKey*> m_altKeys;
+    QList<FuncKey*> m_altgrKeys;
     QList<FuncKey*> m_capsKeys;
+    QList<FuncKey*> m_ctlKeys;
     Plasma::DataEngine* m_engine;
     Plasma::FrameSvg* m_frame;
     QHash<QSize, QPixmap*> m_frames;
@@ -128,6 +132,7 @@ private:
     QList<BoardKey*> m_keys;
     QList<BoardKey*> m_pressedList;
     QList<FuncKey*> m_shiftKeys;
+    QList<FuncKey*> m_superKeys;
     Tooltip* m_tooltip;
     QXmlStreamReader m_xmlReader;
 };

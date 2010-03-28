@@ -43,7 +43,7 @@ protected:
 
 private:
     QString m_label;
-	bool pressed;
+    bool is_pressed;
 	bool toggler;
 
 

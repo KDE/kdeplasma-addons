@@ -26,7 +26,7 @@
 #include "Helpers.h"
 
 FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, keycode), pressed(false), toggler(false) {
+        AlphaNumKey(relativePosition, relativeSize, keycode), is_pressed(false), toggler(false) {
     setLabel(label);
 }
 
@@ -60,7 +60,7 @@ void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
 }
 
 void FuncKey::sendKeycodeToggled() {
-	if( pressed ) {
+    if( is_pressed ) {
 		sendKeycodeRelease();
 		toggleOff();
 	}
@@ -71,17 +71,17 @@ void FuncKey::sendKeycodeToggled() {
 }
 
 void FuncKey::toggleOn(){
-	pressed = true;
+    is_pressed = true;
 }
 
 void FuncKey::toggleOff(){
-	pressed = false;
+    is_pressed = false;
 }
 
 void FuncKey::toggle(bool toggle){
-	pressed = toggle;
+    is_pressed = toggle;
 }
 
 bool FuncKey::toggled(){
-	return pressed;
+    return is_pressed;
 }
