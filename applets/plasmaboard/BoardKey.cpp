@@ -105,7 +105,7 @@ void BoardKey::sendKeycodePress()
 
 void BoardKey::sendKeycodeRelease()
 {
-    Helpers::fakeKeyRelease(getKeycode());
+     Helpers::fakeKeyRelease(getKeycode());
 }
 
 void BoardKey::setPixmap(QPixmap *pixmap)

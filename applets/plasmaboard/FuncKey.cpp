@@ -26,7 +26,7 @@
 #include "Helpers.h"
 
 FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, keycode), is_pressed(false), toggler(false) {
+        AlphaNumKey(relativePosition, relativeSize, Helpers::keysymToKeycode(keycode)), is_pressed(false), toggler(false) {
     setLabel(label);
 }
 
@@ -50,7 +50,7 @@ void FuncKey::paintArrow(QPainter *painter){
 
 void FuncKey::released() {
 	if(!toggler){
-		BoardKey::released();
+        AlphaNumKey::released();
 	}
 }
 

@@ -317,8 +317,7 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
     m_xmlReader.setDevice(fileP);
 
     // reading in header information
-    if (m_xmlReader.readNextStartElement()) {
-        qDebug() << m_xmlReader.name();
+    if (m_xmlReader.readNextStartElement()) {       
         if (m_xmlReader.name() == "keyboard"){
             spacing = QVariant(m_xmlReader.attributes().value("spacing").toString()).toInt();
 

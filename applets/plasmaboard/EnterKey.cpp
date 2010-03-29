@@ -24,7 +24,6 @@
 
 EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
         FuncKey(relativePosition, relativeSize, XK_Return, QString()) {
-
 }
 
 
@@ -39,10 +38,10 @@ void EnterKey::paint(QPainter *painter){
     painter->drawLine(2, 0, 2, -1);
 
 	const QPointF points[3] = {
-	     QPointF(-3, 0),
-	     QPointF(-1, 1),
-	     QPointF(-1, -1),
-	 };
+        QPointF(-3, 0),
+        QPointF(-1, 1),
+        QPointF(-1, -1),
+    };
 
 	painter->drawConvexPolygon(points, 3);
     painter->restore();
