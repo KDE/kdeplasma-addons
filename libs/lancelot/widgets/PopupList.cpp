@@ -30,7 +30,8 @@
 #define ITEM_HEIGHT 24
 #define ICON_SIZE QSize(16, 16)
 #define MENU_WIDTH 200
-#define POPOFFSET 16
+#define POP_BORDER_OFFSET 16
+#define POP_MINIMUM_OFFSET 64
 
 namespace Lancelot {
 
@@ -89,6 +90,7 @@ PopupList::Private::Private(PopupList * parent)
       openAction(PopupList::PopupNew),
       closeTimeout(1000),
       child(NULL),
+      parentList(NULL),
       q(parent)
 {
     scene = new QGraphicsScene();
@@ -156,16 +158,32 @@ void PopupList::Private::listItemActivated(int index)
                 break;
                 // nothing
         }
+    } else {
+        hidePopupAndParents();
     }
 
     emit q->activated(index);
+}
+
+void PopupList::Private::hidePopupAndParents()
+{
+    PopupList * list = q;
+
+    while (list) {
+        list->hide();
+        list = list->parentList();
+    }
 }
 
 PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
   : Plasma::Dialog(parent, f),
     d(new Private(this))
 {
-    setWindowFlags(Qt::Popup | Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
+    d->animation = new QPropertyAnimation(this, "pos", this);
+    d->animation->setEasingCurve(QEasingCurve::InOutQuad);
+    d->animation->setDuration(250);
 }
 
 PopupList::~PopupList()
@@ -177,6 +195,10 @@ void PopupList::setModel(ActionListModel * model)
 {
     if (!model) {
         return;
+    }
+
+    if (d->child) {
+        d->child->hide();
     }
 
     d->treeModel = dynamic_cast < ActionTreeModel * > (model);
@@ -196,16 +218,20 @@ void PopupList::setModel(ActionListModel * model)
     d->connectSignals();
 }
 
-// ActionListView * PopupList::list() const
-// {
-//     return d->list;
-// }
-
 void PopupList::showEvent(QShowEvent * event)
 {
     Plasma::Dialog::showEvent(event);
     d->list->setFocus();
     d->timer.stop();
+}
+
+void PopupList::hideEvent(QHideEvent * event)
+{
+    Plasma::Dialog::hideEvent(event);
+
+    if (d->child) {
+        d->child->hide();
+    }
 }
 
 void PopupList::setCloseTimeout(int timeout)
@@ -268,9 +294,17 @@ void PopupList::updateSize()
            height + PopupListMarginCache::self()->height());
 }
 
+void PopupList::Private::prepareToShow()
+{
+    q->updateSize();
+    timer.stop();
+}
+
 void PopupList::exec(const QPoint & p)
 {
-    updateSize();
+    d->prepareToShow();
+
+    d->parentList = NULL;
 
     QRect g = geometry();
     g.moveTopLeft(p);
@@ -291,36 +325,90 @@ void PopupList::exec(const QPoint & p)
         g.moveTop(screen.top());
     }
 
-    setGeometry(g);
+    moveTo(g.topLeft());
 
     show();
 }
 
 void PopupList::exec(const QPoint & p, PopupList * parent)
 {
-    updateSize();
+    d->prepareToShow();
 
-    QRect g = geometry();
-    g.moveTopLeft(p);
+    d->parentList = parent;
 
-    QRect screen = QApplication::desktop()->screenGeometry(
+    QRect selfGeometry = geometry();
+    selfGeometry.moveTopLeft(p);
+
+    QRect screenGeometry = QApplication::desktop()->screenGeometry(
             QApplication::desktop()->screenNumber(p)
         );
 
-    g.moveLeft(parent->geometry().right() - POPOFFSET);
-    if (g.right() > screen.right()) {
-        g.moveRight(parent->geometry().left() + POPOFFSET);
+    QRect rootParentGeometry;
+    int numberOfParentLists = 0;
+
+    PopupList * list = this;
+
+    while (list->parentList()) {
+        list = list->parentList();
+        numberOfParentLists++;
     }
 
-    if (g.bottom() > screen.bottom()) {
-        g.moveBottom(screen.bottom());
-    } else if (g.top() < screen.top()) {
-        g.moveTop(screen.top());
+    rootParentGeometry = list->geometry();
+
+    // Moving...
+    selfGeometry.moveLeft(rootParentGeometry.right() - POP_BORDER_OFFSET);
+    if (selfGeometry.right() > screenGeometry.right()) {
+        selfGeometry.moveRight(screenGeometry.right());
+
+        if (selfGeometry.left() - rootParentGeometry.left() <
+                numberOfParentLists * POP_MINIMUM_OFFSET) {
+            rootParentGeometry.moveLeft(selfGeometry.left()
+                - numberOfParentLists * POP_MINIMUM_OFFSET);
+        }
     }
 
-    setGeometry(g);
+    if (selfGeometry.bottom() > screenGeometry.bottom()) {
+        selfGeometry.moveBottom(screenGeometry.bottom());
+    } else if (selfGeometry.top() < screenGeometry.top()) {
+        selfGeometry.moveTop(screenGeometry.top());
+    }
+
+    moveTo(selfGeometry.topLeft());
+
+    list = this;
+
+    int shift = (selfGeometry.left() - rootParentGeometry.left())
+        / numberOfParentLists;
+    int left  = selfGeometry.left();
+
+    while (list->parentList()) {
+        list = list->parentList();
+
+        QPoint parentPosition = list->pos();
+
+        left -= shift;
+        parentPosition.setX(left);
+        list->moveTo(parentPosition);
+
+    }
 
     show();
+}
+
+void PopupList::moveTo(const QPoint & to)
+{
+    if (!isVisible() ||
+            !(KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects)) {
+        move(to);
+        return;
+    }
+
+    if (d->animation->state() == QAbstractAnimation::Running) {
+        d->animation->stop();
+    }
+
+    d->animation->setEndValue(to);
+    d->animation->start();
 }
 
 bool PopupList::eventFilter(QObject * object, QEvent * event)
@@ -332,6 +420,11 @@ bool PopupList::eventFilter(QObject * object, QEvent * event)
         }
     }
     return Plasma::Dialog::eventFilter(object, event);
+}
+
+PopupList * PopupList::parentList() const
+{
+    return d->parentList;
 }
 
 } // namespace Lancelot

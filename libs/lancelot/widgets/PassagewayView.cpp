@@ -23,6 +23,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QWidget>
+#include <QPointer>
 
 #include <climits>
 
@@ -68,7 +69,7 @@ public:
             ActionTreeModel * atlasModel,
             PassagewayView * p)
       : focusIndex(0), layout(NULL), buttonsLayout(NULL), listsLayout(NULL),
-        parent(p), popupMenus(false)
+        parent(p), popup(NULL), popupMenus(false)
     {
         parent->setLayout(layout = new NodeLayout());
         layout->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
@@ -116,6 +117,7 @@ public:
         delete buttonsLayout;
         delete listsLayout;
         delete layout;
+        delete popup;
 
         qDeleteAll(buttons);
         qDeleteAll(lists);
@@ -307,6 +309,7 @@ public:
     QGraphicsLinearLayout       * buttonsLayout;
     ColumnLayout                * listsLayout;
     PassagewayView              * parent;
+    QPointer < PopupMenu >        popup;
     bool                          popupMenus;
 };
 
@@ -356,9 +359,23 @@ void PassagewayView::listItemActivated(int index, int listIndex)
         model = model->child(index);
         if (model) {
             if (d->popupMenus) {
-                PopupMenu * popup = new PopupMenu();
-                popup->setModel(model);
-                popup->exec(QCursor::pos());
+                if (!d->popup) {
+                    d->popup = new PopupMenu();
+                }
+                d->popup->setModel(model);
+
+                QPoint p = QCursor::pos();
+
+                if (scene() && scene()->views().size()) {
+                    QGraphicsView * view = scene()->views().first();
+
+                    p.setX(
+                        (view->pos() + view->mapFromScene(scenePos())).x()
+                        + geometry().width());
+
+                    p.setY(p.y() - 16);
+                }
+                d->popup->exec(p);
             } else {
                 d->next(Private::Step(model->selfTitle(), model->selfIcon(), model));
             }

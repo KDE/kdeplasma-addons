@@ -32,7 +32,9 @@ class ActionListView;
 class ActionListModel;
 
 /**
- * The list that pops up in its own window
+ * The list that pops up in its own window.
+ * Note: Don't save pointers to this object, it can destroy
+ * itself. Use QPointer.
  *
  * @author Ivan Cukic
  */
@@ -63,12 +65,6 @@ public:
      * Destroys Lancelot::PopupList
      */
     virtual ~PopupList();
-
-    // /**
-    //  * @returns the pointer to the ActionListView widget
-    //  * contained by this PopupList
-    //  */
-    // ActionListView * list() const;
 
     /**
      * Sets the timer for auto-closing when the popup
@@ -107,6 +103,7 @@ public:
 
 protected:
     L_Override void showEvent(QShowEvent * event);
+    L_Override void hideEvent(QHideEvent * event);
 
     L_Override void enterEvent(QEvent * event);
     L_Override void leaveEvent(QEvent * event);
@@ -119,6 +116,16 @@ protected:
      * @param parent parent list
      */
     void exec(const QPoint & p, PopupList * parent);
+
+    /**
+     * Moves the list to the specified point
+     */
+    void moveTo(const QPoint & p);
+
+    /**
+     * @returns the parent PopupList
+     */
+    PopupList * parentList() const;
 
 Q_SIGNALS:
     void activated(int index);

@@ -64,6 +64,7 @@ void LancelotConfig::setupUi(QWidget * widget)
     qbgAppbrowserColumnLimit = new QButtonGroup(widget);
     qbgAppbrowserColumnLimit->addButton(radioAppBrowserNoColumnLimit);
     qbgAppbrowserColumnLimit->addButton(radioAppBrowserTwoColumnLimit);
+    qbgAppbrowserColumnLimit->addButton(radioAppBrowserCascade);
 
     connect(buttonSystem1, SIGNAL(clicked()), this, SLOT(systemButtonClicked()));
     connect(buttonSystem2, SIGNAL(clicked()), this, SLOT(systemButtonClicked()));
@@ -208,12 +209,14 @@ void LancelotConfig::setAppbrowserColumnLimitted(bool value)
 
 bool LancelotConfig::appbrowserPopupSubmenus() const
 {
-    return m_appbrowserPopupSubmenus;
+    return radioAppBrowserCascade->isChecked();
 }
 
 void LancelotConfig::setAppbrowserPopupSubmenus(bool value)
 {
-    m_appbrowserPopupSubmenus = value;
+    if (value) {
+        radioAppBrowserCascade->click();
+    }
 }
 
 bool LancelotConfig::enableUsageStatistics() const

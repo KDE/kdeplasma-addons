@@ -85,7 +85,6 @@ private Q_SLOTS:
     void setButtonData(QPushButton * button);
 
 private:
-    bool m_appbrowserPopupSubmenus;
     KPluginSelector * m_searchPlugins;
 };
 

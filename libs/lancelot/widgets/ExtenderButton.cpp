@@ -25,6 +25,7 @@
 #include <QIcon>
 #include <QRectF>
 #include <QTimer>
+#include <QPointer>
 
 #include <KDebug>
 
@@ -94,8 +95,24 @@ public:
 
     }
 
-    void connectTimer() {
+    void releaseExtender() {
+        ExtenderObject * ext = extender(false);
+        if (ext) {
+            ext->setVisible(false);
+            ext->hoverLeaveEvent(NULL);
+            ext->setParentItem(NULL);
+        }
+
+        disconnectTimer();
+    }
+
+    void disconnectTimer() {
+        timer->stop();
         disconnect(timer, SIGNAL(timeout()), 0, 0);
+    }
+
+    void connectTimer() {
+        disconnectTimer();
 
         connect(
                 timer, SIGNAL(timeout()),
@@ -103,10 +120,11 @@ public:
                );
     }
 
-    ExtenderObject * extender() {
+    ExtenderObject * extender(bool take = true) {
         ExtenderObject * result = 0;
 
-        if (!m_extenders.contains(q->scene())) {
+        if (!m_extenders.contains(q->scene()) ||
+                !m_extenders[q->scene()]) {
             result = new ExtenderObject(extenderIconSvg, NULL);
 
             result->setVisible(false);
@@ -127,6 +145,10 @@ public:
         }
 
         if (result->parentItem() != q) {
+            if (!take) {
+                return NULL;
+            }
+
             result->setParentItem(q);
             result->setGroupByName(
                     q->group()->name() + "-Extender"
@@ -146,6 +168,7 @@ public:
     void relayoutExtender()
     {
         if (!m_extenders.contains(q->scene())
+            || !m_extenders[q->scene()]
             || q != m_extenders[q->scene()]->parentItem()) return;
         QRectF geometry = QRectF(QPointF(0, 0), q->size());
 
@@ -196,7 +219,7 @@ public:
     Plasma::FrameSvg::EnabledBorders borders;
 
     static Plasma::Svg extenderIconSvg;
-    static QHash < QGraphicsScene *, ExtenderObject * > m_extenders;
+    static QHash < QGraphicsScene *, QPointer < ExtenderObject > > m_extenders;
     static QTimer * timer;
 
     bool checkable : 1;
@@ -205,7 +228,7 @@ public:
 };
 
 Plasma::Svg ExtenderButton::Private::extenderIconSvg;
-QHash < QGraphicsScene *, ExtenderObject * > ExtenderButton::Private::m_extenders;
+QHash < QGraphicsScene *, QPointer < ExtenderObject > > ExtenderButton::Private::m_extenders;
 QTimer * ExtenderButton::Private::timer = 0;
 
 ExtenderButton::ExtenderButton(QGraphicsItem * parent)
@@ -282,18 +305,14 @@ void ExtenderButton::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 
 void ExtenderButton::hideEvent(QHideEvent * event)
 {
-    d->extender()->setVisible(false);
-    d->timer->stop();
-    d->extender()->hoverLeaveEvent(NULL);
     BasicWidget::hideEvent(event);
+    d->releaseExtender();
 }
 
 void ExtenderButton::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
-    d->extender()->setVisible(false);
-    d->timer->stop();
-    d->extender()->hoverLeaveEvent(event);
     BasicWidget::hoverLeaveEvent(event);
+    d->releaseExtender();
 }
 
 void ExtenderButton::setExtenderPosition(int position)
@@ -326,11 +345,10 @@ int ExtenderButton::activationMethod() const
 void ExtenderButton::activate()
 {
     toggle();
-    d->timer->stop();
-    d->extender()->hide();
-    // Qt bug... - element is hidden but doesn't receive hoverLeaveEvent
+
     hoverLeaveEvent(0);
-    //d->extender()->hoverLeaveEvent(0);
+    d->releaseExtender();
+
     update();
     emit activated();
 }

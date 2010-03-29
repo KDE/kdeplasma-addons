@@ -23,6 +23,10 @@
 #include "PopupList.h"
 
 #include <QBasicTimer>
+#include <QPropertyAnimation>
+#include <QPointer>
+
+#include <KGlobalSettings>
 
 #include <lancelot/widgets/ActionListView.h>
 #include <lancelot/models/ActionTreeModel.h>
@@ -68,8 +72,14 @@ public:
     QBasicTimer timer;
     int closeTimeout;
 
-    PopupList * child;
+    QPointer < PopupList > child;
+    PopupList * parentList;
     PopupList * q;
+
+    QPropertyAnimation * animation;
+
+    void hidePopupAndParents();
+    void prepareToShow();
 
 public Q_SLOTS:
     void listItemActivated(int index);
