@@ -254,17 +254,6 @@ void ExtenderButton::setGroup(Group * g)
     BasicWidget::setGroup(g);
 }
 
-// void ExtenderButton::groupUpdated()
-// {
-//     BasicWidget::groupUpdated();
-//     if (group()->hasProperty("ExtenderPosition")) {
-//         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
-//     }
-//     if (group()->hasProperty("ActivationMethod")) {
-//         setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
-//     }
-// }
-
 ExtenderButton::~ExtenderButton()
 {
     if (Private::m_extenders.contains(scene())

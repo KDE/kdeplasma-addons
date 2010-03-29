@@ -85,7 +85,6 @@ public:
     void setShowsExtendersOutside(bool value);
     bool showsExtendersOutside() const;
 
-    // L_Override void groupUpdated();
     L_Override void keyPressEvent(QKeyEvent * event);
 
 public Q_SLOTS:

@@ -1016,15 +1016,6 @@ Group * ActionListView::categoriesGroup() const //>
     return d->itemFactory->categoriesGroup();
 } //<
 
-// void ActionListView::groupUpdated() //>
-// {
-//     Widget::groupUpdated();
-//
-//     if (group()->hasProperty("ExtenderPosition")) {
-//         setExtenderPosition((ExtenderPosition)(group()->property("ExtenderPosition").toInt()));
-//     }
-// } //<
-
 void ActionListView::keyPressEvent(QKeyEvent * event) //>
 {
     if (!d->itemFactory) {

@@ -76,7 +76,6 @@ public:
     void clearSelection();
 
     L_Override void setGroup(Group * group = NULL);
-    // L_Override void groupUpdated();
     L_Override void keyPressEvent(QKeyEvent * event);
 
 protected Q_SLOTS:

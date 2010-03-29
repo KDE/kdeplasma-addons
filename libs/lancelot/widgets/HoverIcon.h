@@ -85,8 +85,6 @@ public:
      */
     int activationMethod() const;
 
-    // L_Override void groupUpdated();
-
 protected:
     L_Override void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     L_Override void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);

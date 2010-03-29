@@ -130,7 +130,6 @@ public:
     bool isChecked() const;
 
     L_Override void setGroup(Group * group = NULL);
-    // L_Override void groupUpdated();
 
     L_Override QRectF boundingRect() const;
 

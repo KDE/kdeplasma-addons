@@ -494,15 +494,6 @@ void PassagewayView::reset()
     }
 }
 
-// void PassagewayView::groupUpdated()
-// {
-//     Panel::groupUpdated();
-//
-//     if (group()->hasProperty("ActivationMethod")) {
-//         setActivationMethod((ActivationMethod)(group()->property("ActivationMethod").toInt()));
-//     }
-// }
-
 void PassagewayView::clearSelection()
 {
 
