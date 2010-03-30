@@ -19,11 +19,12 @@
 
 
 #include "TabKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 
 TabKey::TabKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Tab, QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Tab), QString()){
 
 }
 

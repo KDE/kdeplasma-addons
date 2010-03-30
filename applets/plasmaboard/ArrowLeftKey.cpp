@@ -19,10 +19,11 @@
 
 
 #include "ArrowLeftKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 ArrowLeftKey::ArrowLeftKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Left, QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Left), QString()){
 
 }
 

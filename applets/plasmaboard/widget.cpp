@@ -19,51 +19,26 @@
 
 
 #include "widget.h"
-#include "BoardKey.h"
+
 #include "AlphaNumKey.h"
-#include "FuncKey.h"
-#include "EnterKey.h"
-#include "BackspaceKey.h"
-#include "TabKey.h"
-#include "ShiftKey.h"
-#include "CapsKey.h"
-#include "ArrowTopKey.h"
 #include "ArrowBottomKey.h"
 #include "ArrowLeftKey.h"
 #include "ArrowRightKey.h"
-#include <QPainter>
-#include <QGraphicsSceneResizeEvent>
+#include "ArrowTopKey.h"
+#include "BackspaceKey.h"
+#include "BoardKey.h"
+#include "CapsKey.h"
+#include "EnterKey.h"
+#include "FuncKey.h"
+#include "ShiftKey.h"
+#include "StickyKey.h"
+#include "TabKey.h"
+
 #include <QFile>
+#include <QGraphicsSceneResizeEvent>
+#include <QPainter>
 #include <plasma/theme.h>
 #include "Helpers.h"
-
-#define BACKSPACEKEY 0
-#define TABKEY 1
-#define ENTERKEY 2
-#define CAPSKEY 3
-#define SHIFT_L_KEY 4
-#define SHIFT_R_KEY 5
-#define CTLKEY 6
-#define SUPER_L_KEY 7
-#define ALT_L_KEY 8
-#define SPACE 9
-#define ALTGRKEY 10
-#define SUPER_R_KEY 11
-
-#define MENU 12
-#define CONTROL_LEFT 13
-
-#define HOMEKEY 16
-#define ENDKEY 17
-#define INSKEY 18
-#define DELKEY 19
-#define PGUPKEY 20
-#define PGDOWNKEY 21
-
-#define ARROWTOPKEY 	22
-#define ARROWLEFTKEY	23
-#define ARROWBOTTOMKEY	24
-#define ARROWRIGHTKEY	25
 
 QChar Helpers::mapXtoUTF8[0xffff+1];
 
@@ -127,45 +102,7 @@ void PlasmaboardWidget::clear()
         key->unpressed();
     }
 
-    // DO I STILL NEED THIS STUFF BELOW???
-
-    bool change = false;
-    if( m_funcKeys[SHIFT_L_KEY]->toggled() || m_funcKeys[SHIFT_R_KEY]->toggled() ){
-        Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Shift_L));
-        m_funcKeys[SHIFT_L_KEY]->toggleOff();
-        m_funcKeys[SHIFT_R_KEY]->toggleOff();
-        m_isLevel2 = false;
-        change = true;
-    }
-    if( m_funcKeys[ALTGRKEY]->toggled() ){
-        Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_ISO_Level3_Shift));
-        m_funcKeys[ALTGRKEY]->toggleOff();
-        m_isAlternative = false;
-        change = true;
-    }
-
-    if(change){
-        relabelKeys();
-    }
-
-    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Control_L));
-    m_funcKeys[CTLKEY]->toggleOff();
-    m_funcKeys[CONTROL_LEFT]->toggleOff();
-    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Meta_L));
-    m_funcKeys[SUPER_L_KEY]->toggleOff();
-    m_funcKeys[SUPER_R_KEY]->toggleOff();
-    Helpers::fakeKeyRelease(Helpers::keysymToKeycode(XK_Alt_L));
-    m_funcKeys[ALT_L_KEY]->toggleOff();
-
     clearTooltip();
-}
-
-void PlasmaboardWidget::clearAnything()
-{
-    if ( m_isLocked ) {
-        //m_funcKeys[CAPSKEY]->sendKeycode();
-    }
-    clear();
 }
 
 void PlasmaboardWidget::clearTooltip()
@@ -177,12 +114,12 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
 {
 
     if(action == "ALT"){
-        FuncKey *k = new FuncKey(point, size, XK_Alt_L, QString(i18n("Alt")));
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Alt_L), QString(i18n("Alt")));
         m_altKeys << k;
         return k;
     }
     else if(action == "ALTGR"){
-        FuncKey *k = new FuncKey(point, size, XK_Alt_L, QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_ISO_Level3_Shift), QString( i18nc("The Alt Gr key on a keyboard", "Alt Gr")));
         m_altgrKeys << k;
         return k;
     }
@@ -194,12 +131,12 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return k;
     }
     else if(action == "CONTROLLEFT"){
-        FuncKey *k = new FuncKey(point, size, XK_Control_L, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_L), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
         m_ctlKeys << k;
         return k;
     }
     else if(action == "CONTROLRIGHT"){
-        FuncKey *k = new FuncKey(point, size, XK_Control_R, QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Control_R), QString(i18nc("The Ctrl key on a keyboard", "Ctrl")));
         m_ctlKeys << k;
         return k;
     }
@@ -211,16 +148,16 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return k;
     }
     else if(action == "SPACE")
-        return new FuncKey(point, size, XK_space, QString());
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString());
     else if(action == "SUPERLEFT"){
-        FuncKey *k = new FuncKey(point, size, XK_Super_L, QString( i18nc("The super (windows) key on a keyboard", "Super")));
+        StickyKey *k = new StickyKey(point, size, Helpers::keysymToKeycode(XK_Super_L), QString( i18nc("The super (windows) key on a keyboard", "Super")));
         m_superKeys << k;
         return k;
     }
     else if(action == "TAB")
         return new TabKey(point, size);
-
-    return new FuncKey(point, size, XK_Tab, QString(i18n("Tab")));
+    else
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
 }
 
 void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
@@ -248,6 +185,7 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
             change(key, state);
         }
         m_isAlternative = state;
+        relabelKeys();
     }
 
     else if ( sourceName == "Alt" ) {
@@ -270,6 +208,23 @@ void PlasmaboardWidget::dataUpdated(const QString &sourceName, const Plasma::Dat
     else if ( sourceName == "Menu" ) {
 
     }    
+}
+
+void PlasmaboardWidget::deleteKeys()
+{
+    qDeleteAll(m_funcKeys);
+    m_funcKeys.clear();
+
+    qDeleteAll(m_alphaKeys);
+    m_alphaKeys.clear();
+
+    m_keys.clear();
+    m_altKeys.clear();
+    m_altgrKeys.clear();;
+    m_capsKeys.clear();
+    m_ctlKeys.clear();;
+    m_shiftKeys.clear();
+    m_superKeys.clear();
 }
 
 QPixmap *PlasmaboardWidget::getActiveFrame(const QSize &size)
@@ -380,7 +335,6 @@ void PlasmaboardWidget::initKeyboard(const QString &file)
     }
 
     delete fileP;
-
 }
 
 void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
@@ -453,22 +407,12 @@ void PlasmaboardWidget::paint(QPainter *p,
     p->setRenderHint(QPainter::Antialiasing);
     p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
 
-    if( boundingRect().contains(option->exposedRect) ){
-        QRectF rect = option->exposedRect;
-        Q_FOREACH(BoardKey *key, m_keys){
-            if(key->intersects(rect)){
-                key->paint(p);
-            }
+    QRectF rect = option->exposedRect;
+    Q_FOREACH(BoardKey *key, m_keys){
+        if(key->intersects(rect)){
+            key->paint(p);
         }
-        qDebug() << "Partially Painting!";
-        return;
     }
-
-    Q_FOREACH(BoardKey* key, m_keys){
-        key->paint(p);
-    }
-
-    qDebug() << "Painting!";
 }
 
 void PlasmaboardWidget::press(BoardKey *key)
@@ -482,7 +426,7 @@ void PlasmaboardWidget::press(BoardKey *key)
 
 void PlasmaboardWidget::press(FuncKey *key)
 {
-    key->pressed();
+    //key->pressed();
     key->setPixmap(getActiveFrame(key->size()));
     m_pressedList << key;
     update(key->rect());
@@ -502,6 +446,7 @@ void PlasmaboardWidget::refreshKeys()
 
 void PlasmaboardWidget::relabelKeys()
 {
+    qDebug() << "Relabeling";
     foreach (AlphaNumKey* key, m_alphaKeys){
         key->switchKey(m_isLevel2, m_isAlternative, m_isLocked);
         update(key->rect());
@@ -515,29 +460,41 @@ void PlasmaboardWidget::release(BoardKey *key)
     m_pressedList.removeAll(key);
     update(key->rect());
     clearTooltip();
+
+    if(m_alphaKeys.contains((AlphaNumKey*) key)){
+        reset();
+    }
 }
 
-void PlasmaboardWidget::resetKeyboard()
-{
-    qDeleteAll(m_funcKeys);
-    m_funcKeys.clear();
-
-    qDeleteAll(m_alphaKeys);
-    m_alphaKeys.clear();
-
-    m_keys.clear();
-    m_altKeys.clear();
-    m_altgrKeys.clear();;
-    m_capsKeys.clear();
-    m_ctlKeys.clear();;
-    m_shiftKeys.clear();        
-    m_superKeys.clear();
-}
 
 void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     Q_UNUSED(event);
     refreshKeys();
+}
+
+void PlasmaboardWidget::reset(){
+
+    Q_FOREACH(StickyKey* key, m_altKeys){
+        key->reset();
+    }
+
+    Q_FOREACH(StickyKey* key, m_altgrKeys){
+        key->reset();
+    }
+
+    Q_FOREACH(StickyKey* key, m_ctlKeys){
+        key->reset();
+    }
+
+    Q_FOREACH(StickyKey* key, m_shiftKeys){
+        key->reset();
+    }
+
+    Q_FOREACH(StickyKey* key, m_superKeys){
+        key->reset();
+    }
+
 }
 
 void PlasmaboardWidget::setTooltip(BoardKey* key)

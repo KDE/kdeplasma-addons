@@ -49,7 +49,8 @@ void AlphaNumKey::paint(QPainter *painter)
 
 void AlphaNumKey::setLabel(int level)
 {
-    m_label = Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level));
+    //m_label = Helpers::mapToUnicode(Helpers::keycodeToKeysym(getKeycode(),level));
+    setLabel(Helpers::mapToUnicode(getKeysymbol(level)));
 }
 
 void AlphaNumKey::setLabel(const QString &label)

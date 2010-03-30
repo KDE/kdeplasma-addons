@@ -48,6 +48,11 @@ unsigned int BoardKey::getKeycode() const
     return m_keycode;
 }
 
+unsigned int BoardKey::getKeysymbol(int level) const
+{
+    return Helpers::keycodeToKeysym(getKeycode(), level);
+}
+
 QString BoardKey::label() const
 {
     return QString();
@@ -55,6 +60,7 @@ QString BoardKey::label() const
 
 void BoardKey::paint(QPainter *painter)
 {
+    qDebug() << "Paint: " << m_rect;
     //painter->eraseRect(m_rect);
     //painter->fillRect(m_rect, QColor(Qt::transparent));
     painter->drawPixmap(m_position, *m_pixmap);
@@ -75,7 +81,7 @@ void BoardKey::pressed()
 
 void BoardKey::released()
 {	
-    sendKeycode();
+    sendKey();
 }
 
 QRectF BoardKey::rect() const
@@ -92,18 +98,18 @@ void BoardKey::reset()
 {
 }
 
-void BoardKey::sendKeycode()
+void BoardKey::sendKey()
 {
-    sendKeycodePress();
-    sendKeycodeRelease();
+    sendKeyPress();
+    sendKeyRelease();
 }
 
-void BoardKey::sendKeycodePress()
+void BoardKey::sendKeyPress()
 {
      Helpers::fakeKeyPress(getKeycode());
 }
 
-void BoardKey::sendKeycodeRelease()
+void BoardKey::sendKeyRelease()
 {
      Helpers::fakeKeyRelease(getKeycode());
 }

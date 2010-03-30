@@ -13,7 +13,7 @@ include_directories(
    )
 	 
 # We add our source code here
-set(plasmaboard_SRCS widget.cpp BoardKey.cpp PanelIcon.cpp AlphaNumKey.cpp FuncKey.cpp EnterKey.cpp BackspaceKey.cpp TabKey.cpp ShiftKey.cpp CapsKey.cpp ArrowTopKey.cpp ArrowBottomKey.cpp ArrowLeftKey.cpp ArrowRightKey.cpp tooltip.cpp)
+set(plasmaboard_SRCS widget.cpp BoardKey.cpp PanelIcon.cpp AlphaNumKey.cpp FuncKey.cpp EnterKey.cpp BackspaceKey.cpp TabKey.cpp ShiftKey.cpp CapsKey.cpp ArrowTopKey.cpp ArrowBottomKey.cpp ArrowLeftKey.cpp ArrowRightKey.cpp tooltip.cpp StickyKey.cpp)
 	 
 # Now make sure all files get to the right place
 kde4_add_plugin(plasma_applet_plasmaboard ${plasmaboard_SRCS})

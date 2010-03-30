@@ -31,6 +31,7 @@ public:
     bool contains (const QPoint &point) const;
     bool intersects (const QRectF &rect) const;
     unsigned int getKeycode() const;
+    unsigned int getKeysymbol(int level) const;
     virtual QString label() const;
     virtual void paint(QPainter *painter);
     QPoint position() const;
@@ -47,13 +48,13 @@ public:
     /**
       * Called to "unpress" the button
       */
-    void reset();
-    void sendKeycode();
-    void sendKeycodePress();
-    void sendKeycodeRelease();
-    void setPixmap(QPixmap *pixmap);
+    virtual void reset();
+    void sendKey();
+    void sendKeyPress();
+    void sendKeyRelease();
+    virtual void setPixmap(QPixmap *pixmap);
     QSize size() const;
-    void unpressed();
+    virtual void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 
 protected:

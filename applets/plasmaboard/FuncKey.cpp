@@ -26,7 +26,7 @@
 #include "Helpers.h"
 
 FuncKey::FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label):
-        AlphaNumKey(relativePosition, relativeSize, Helpers::keysymToKeycode(keycode)), is_pressed(false), toggler(false) {
+        AlphaNumKey(relativePosition, relativeSize, keycode) {
     setLabel(label);
 }
 
@@ -46,42 +46,4 @@ void FuncKey::paintArrow(QPainter *painter){
 	 };
 
 	painter->drawConvexPolygon(points, 3);
-}
-
-void FuncKey::released() {
-	if(!toggler){
-        AlphaNumKey::released();
-	}
-}
-
-void FuncKey::setKey(unsigned int code, bool sendUp, const QString text) {
-        //setKeycode(code, sendUp);
-        //setText(text);
-}
-
-void FuncKey::sendKeycodeToggled() {
-    if( is_pressed ) {
-		sendKeycodeRelease();
-		toggleOff();
-	}
-	else {
-		sendKeycodePress();
-		toggleOn();
-	}
-}
-
-void FuncKey::toggleOn(){
-    is_pressed = true;
-}
-
-void FuncKey::toggleOff(){
-    is_pressed = false;
-}
-
-void FuncKey::toggle(bool toggle){
-    is_pressed = toggle;
-}
-
-bool FuncKey::toggled(){
-    return is_pressed;
 }

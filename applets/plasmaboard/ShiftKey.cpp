@@ -19,10 +19,11 @@
 
 
 #include "ShiftKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 ShiftKey::ShiftKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Shift_L, QString()){
+        StickyKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Shift_L), QString()){
 
 }
 

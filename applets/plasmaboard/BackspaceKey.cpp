@@ -19,11 +19,12 @@
 
 
 #include "BackspaceKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 
 BackspaceKey::BackspaceKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_BackSpace, QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_BackSpace), QString()){
 
 }
 

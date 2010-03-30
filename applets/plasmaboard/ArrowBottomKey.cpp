@@ -19,10 +19,11 @@
 
 
 #include "ArrowBottomKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Down, QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Down), QString()){
 
 }
 

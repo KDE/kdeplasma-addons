@@ -23,29 +23,11 @@
 
 #include "AlphaNumKey.h"
 
-class PlasmaboardWidget;
-
 class FuncKey: public AlphaNumKey {
-
 
 public:
     FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label);
-	void toggleOn();
-	void toggleOff();
-	bool toggled();
-	void setKey(unsigned int code, bool sendUp, const QString text);
-	void sendKeycodeToggled();
-	void toggle(bool toggle);
-
-protected:
     virtual void paint(QPainter *painter);
-	virtual void released();
-
-private:
-    QString m_label;
-    bool is_pressed;
-	bool toggler;
-
 
 protected:
 	void paintArrow(QPainter *painter);

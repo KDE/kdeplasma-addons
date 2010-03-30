@@ -19,11 +19,11 @@
 
 
 #include "EnterKey.h"
+#include "Helpers.h"
 #include <QPainter>
-#include <plasma/theme.h>
 
 EnterKey::EnterKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Return, QString()) {
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Return), QString()) {
 }
 
 

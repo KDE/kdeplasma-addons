@@ -37,6 +37,7 @@
 class AlphaNumKey;
 class BoardKey;
 class FuncKey;
+class StickyKey;
 
 namespace {
     class DataEngine;
@@ -52,11 +53,6 @@ public:
     ~PlasmaboardWidget();
 
     /**
-      * Clears lock key and calls clear()
-      */
-    void clearAnything();
-
-    /**
       * Draws just basic keys on the keyboard - just for writing
       */
     void initKeyboard(const QString &file);
@@ -66,10 +62,7 @@ public:
       */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*);
 
-    /**
-      * Deletes all keys for resetting the keyboard
-      */
-    void resetKeyboard();
+
 
 protected:
     virtual void mouseMoveEvent ( QGraphicsSceneMouseEvent * event );
@@ -85,12 +78,16 @@ private:
     void change(FuncKey* key, bool state);
     void clearTooltip();
     FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
+    /**
+      * Deletes all keys for resetting the keyboard
+      */
+    void deleteKeys();
     QPixmap *getActiveFrame(const QSize &size);
     QPixmap *getFrame(const QSize &size);
     void press(BoardKey* key);
     void press(FuncKey* key);
-
     void release(BoardKey* key);
+    void reset();
     void unpress(BoardKey* key);
 
 public Q_SLOTS:
@@ -118,10 +115,10 @@ private:
     Plasma::FrameSvg* m_activeFrame;
     QHash<QSize, QPixmap*> m_activeFrames;
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
-    QList<FuncKey*> m_altKeys;
-    QList<FuncKey*> m_altgrKeys;
+    QList<StickyKey*> m_altKeys;
+    QList<StickyKey*> m_altgrKeys;
     QList<FuncKey*> m_capsKeys;
-    QList<FuncKey*> m_ctlKeys;
+    QList<StickyKey*> m_ctlKeys;
     Plasma::DataEngine* m_engine;
     Plasma::FrameSvg* m_frame;
     QHash<QSize, QPixmap*> m_frames;
@@ -131,8 +128,8 @@ private:
     bool m_isLocked; // is lock activated
     QList<BoardKey*> m_keys;
     QList<BoardKey*> m_pressedList;
-    QList<FuncKey*> m_shiftKeys;
-    QList<FuncKey*> m_superKeys;
+    QList<StickyKey*> m_shiftKeys;
+    QList<StickyKey*> m_superKeys;
     Tooltip* m_tooltip;
     QXmlStreamReader m_xmlReader;
 };

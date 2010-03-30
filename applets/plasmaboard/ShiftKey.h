@@ -21,9 +21,9 @@
 #ifndef SHIFTKEY_H
 #define SHIFTKEY_H
 
-#include "FuncKey.h"
+#include "StickyKey.h"
 
-class ShiftKey: public FuncKey {
+class ShiftKey: public StickyKey {
 
 public:
     ShiftKey(QPoint relativePosition, QSize relativeSize);

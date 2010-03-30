@@ -19,10 +19,11 @@
 
 
 #include "CapsKey.h"
+#include "Helpers.h"
 #include <QPainter>
 
 CapsKey::CapsKey(QPoint relativePosition, QSize relativeSize) :
-        FuncKey(relativePosition, relativeSize, XK_Caps_Lock, QString()){
+        FuncKey(relativePosition, relativeSize, Helpers::keysymToKeycode(XK_Caps_Lock), QString()){
 
 }
 
