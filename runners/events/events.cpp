@@ -34,7 +34,7 @@
 #include <boost/shared_ptr.hpp>
 
 // This is the command that links your applet to the .desktop file
-K_EXPORT_PLASMA_RUNNER(events_runner, EventsRunner)
+K_EXPORT_PLASMA_RUNNER(events, EventsRunner)
 
 // Mime types
 QString eventMimeType( "text/calendar" );

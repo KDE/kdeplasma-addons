@@ -125,7 +125,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     context.addMatches(context.query(), matches);
 }
 
-K_EXPORT_PLASMA_RUNNER(datetimerunner, DateTimeRunner)
+K_EXPORT_PLASMA_RUNNER(datetime, DateTimeRunner)
 
 #include "datetimerunner.moc"
 
