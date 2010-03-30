@@ -79,6 +79,11 @@ void BoardKey::pressed()
 
 }
 
+void BoardKey::pressRepeated()
+{
+    Helpers::fakeKeyPress(getKeycode());
+}
+
 void BoardKey::released()
 {	
     sendKey();

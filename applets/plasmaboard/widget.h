@@ -37,6 +37,7 @@
 class AlphaNumKey;
 class BoardKey;
 class FuncKey;
+class QTimer;
 class StickyKey;
 
 namespace {
@@ -161,6 +162,11 @@ public Q_SLOTS:
     void relabelKeys();
 
     /**
+      * Presses all pressed keys so that they can be repeated
+      */
+    void repeatKeys();
+
+    /**
       * Is called after a AlphaNumeric key is released. It unpresses all pressed modifier keys
       * Currently it unpresses all other pressed keys too. FIXME for multi touch support
       */
@@ -193,8 +199,10 @@ private:
     bool m_isAlternative; // alternative key level activated
     bool m_isLevel2; // second key level activated
     bool m_isLocked; // is lock activated
+    bool m_isRepeating;
     QList<BoardKey*> m_keys; // list of all keys displayed
     QList<BoardKey*> m_pressedList; // list all currently pressed keys
+    QTimer* m_repeatTimer;
     QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
     QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
     Tooltip* m_tooltip; // pointer to widget which is used as tooltip

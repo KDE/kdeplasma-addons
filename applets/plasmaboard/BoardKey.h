@@ -39,6 +39,8 @@ public:
       * called when button is pressed
       */
     virtual void pressed();
+
+    virtual void pressRepeated();
     QRectF rect() const;
     QSize relativeSize() const;
     /**
@@ -49,15 +51,15 @@ public:
       * Called to "unpress" the button
       */
     virtual void reset();
-    void sendKey();
-    void sendKeyPress();
-    void sendKeyRelease();
     virtual void setPixmap(QPixmap *pixmap);
     QSize size() const;
     virtual void unpressed();
     void updateDimensions(double factor_x, double factor_y);
 
-protected:
+protected:    
+    void sendKey();
+    void sendKeyPress();
+    void sendKeyRelease();
     void setUpPainter(QPainter *painter) const;
 
 private:

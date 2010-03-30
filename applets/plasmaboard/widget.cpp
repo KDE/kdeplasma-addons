@@ -37,6 +37,7 @@
 #include <QFile>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneResizeEvent>
+#include <QTimer>
 #include <QPainter>
 #include <plasma/theme.h>
 #include "Helpers.h"
@@ -57,6 +58,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_isLevel2 = false;
     m_isAlternative = false;
     m_isLocked = false;
+    m_isRepeating = false;
 
     m_tooltip = new Tooltip("");
 
@@ -75,7 +77,11 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
         m_engine -> connectAllSources(this);
     }
 
+    m_repeatTimer = new QTimer(this);
+    connect(m_repeatTimer, SIGNAL(timeout()), this, SLOT(repeatKeys()));
+
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
+
 }
 
 
@@ -358,10 +364,17 @@ void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
         }
 
         Q_FOREACH(BoardKey* key, m_keys){
+            if(m_isRepeating){
+                Q_FOREACH(BoardKey* clickedKey, m_pressedList){ // release all pressed keys
+                    clickedKey->released();
+                }
+                m_isRepeating = false;
+            }
+
             if(key->contains(click)){
                 Q_FOREACH(BoardKey* clickedKey, m_pressedList){ // release all pressed keys
                     unpress(clickedKey);
-                }
+                }                
                 press(key);
                 return;
             }
@@ -423,11 +436,11 @@ void PlasmaboardWidget::press(BoardKey *key)
     m_pressedList << key;    
     update(key->rect());
     setTooltip(key);
+    m_repeatTimer->start(1500);
 }
 
 void PlasmaboardWidget::press(FuncKey *key)
 {
-    //key->pressed();
     key->setPixmap(getActiveFrame(key->size()));
     m_pressedList << key;
     update(key->rect());
@@ -465,8 +478,17 @@ void PlasmaboardWidget::release(BoardKey *key)
     if(m_alphaKeys.contains((AlphaNumKey*) key)){
         reset();
     }
+
+    m_repeatTimer->stop();
 }
 
+void PlasmaboardWidget::repeatKeys()
+{
+    Q_FOREACH(BoardKey* key, m_pressedList){
+        key->pressRepeated();
+    }
+    m_isRepeating = true;
+}
 
 void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
@@ -478,7 +500,6 @@ void PlasmaboardWidget::reset(){
 
     Q_FOREACH(BoardKey* key, m_pressedList){
         unpress(key);
-        return;
     }
 
     Q_FOREACH(StickyKey* key, m_altKeys){
@@ -525,10 +546,11 @@ void PlasmaboardWidget::themeChanged()
 }
 
 void PlasmaboardWidget::unpress(BoardKey *key)
-{
+{    
     key->unpressed();
     key->setPixmap(getFrame(key->size()));
     update(key->rect());
     m_pressedList.removeAll(key);
+    m_repeatTimer->stop();
 }
 
