@@ -35,6 +35,7 @@
 #include "TabKey.h"
 
 #include <QFile>
+#include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneResizeEvent>
 #include <QPainter>
 #include <plasma/theme.h>
@@ -43,7 +44,7 @@
 QChar Helpers::mapXtoUTF8[0xffff+1];
 
 PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
-    : Plasma::Containment(parent)
+    : Plasma::Applet(parent)
 {
     setPreferredSize(500, 200);
     setMinimumSize(200,100);
@@ -474,6 +475,11 @@ void PlasmaboardWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 }
 
 void PlasmaboardWidget::reset(){
+
+    Q_FOREACH(BoardKey* key, m_pressedList){
+        unpress(key);
+        return;
+    }
 
     Q_FOREACH(StickyKey* key, m_altKeys){
         key->reset();

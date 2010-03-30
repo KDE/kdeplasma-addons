@@ -24,7 +24,7 @@
 
 #include "tooltip.h"
 
-#include <plasma/containment.h>
+#include <plasma/applet.h>
 #include <plasma/dataengine.h>
 
 #include <QXmlStreamReader>
@@ -44,7 +44,16 @@ namespace {
     class FrameSvg;
 }
 
-class PlasmaboardWidget : public Plasma::Containment
+/**
+ * @class PlasmaboardWidget applets/plasmaboard/widget.h
+ *
+ * @short The main widget of the onscreen keyboard
+ *
+ * Widget provides main functionality of the onscreen keyboard
+ *
+ */
+
+class PlasmaboardWidget : public Plasma::Applet
 {
     Q_OBJECT
 public:
@@ -54,6 +63,7 @@ public:
 
     /**
       * Draws just basic keys on the keyboard - just for writing
+      * @param Absolute path to the file which contains xml layout of keyboard
       */
     void initKeyboard(const QString &file);
 
@@ -62,6 +72,10 @@ public:
       */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget*);
 
+    /**
+      * Resets the keyboard. Unpresses all pressed keys and releases all sticking functional keys
+      */
+    void reset();
 
 
 protected:
@@ -73,21 +87,63 @@ protected:
 
 private:
     /**
-      * Removes tooltip
+      * Presses or unpresses key
+      * @param FuncKey to act on
+      * @param state to change to. True: press, False: unpress
       */
     void change(FuncKey* key, bool state);
+
+    /**
+      * Hides Tooltip
+      */
     void clearTooltip();
+
+    /**
+      * @param Position of the key
+      * @param Size of the key
+      * @param String which classifys the functional key that should be returned
+      * @return FuncKey corresponding to the action
+      */
     FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
+
     /**
       * Deletes all keys for resetting the keyboard
       */
     void deleteKeys();
+
+    /**
+      * @param Size of the pixmap requested
+      * @return QPixmap in pressed state with correct size
+      */
     QPixmap *getActiveFrame(const QSize &size);
+
+    /**
+      * @param Size of the pixmap requested
+      * @return QPixmap in unpressed state with correct size
+      */
     QPixmap *getFrame(const QSize &size);
+
+    /**
+      * Presses given key. Calls key->press() sets the needed pixmap and show tooltip
+      * @param key to act on
+      */
     void press(BoardKey* key);
+
+    /**
+      * Causes repaint of the key in pressed state, but does not act on the key or trigger tooltip
+      */
     void press(FuncKey* key);
-    void release(BoardKey* key);
-    void reset();
+
+    /**
+      * Releases given key. In most cases this actually sends the token to the X-server
+      * @param Key to act on
+      */
+    void release(BoardKey* key);    
+
+    /**
+      * Unpresses given key. This undoes the press without actually sending anything to the X-Server
+      * @param Key to act on
+      */
     void unpress(BoardKey* key);
 
 public Q_SLOTS:
@@ -100,38 +156,49 @@ public Q_SLOTS:
     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
 
     /**
-      * Triggers a relabeling of alphanumeric keys on the keyboard
+      * Triggers a relabeling of alphanumeric keys on the keyboard respecting key modifiers
       */
     void relabelKeys();
+
+    /**
+      * Is called after a AlphaNumeric key is released. It unpresses all pressed modifier keys
+      * Currently it unpresses all other pressed keys too. FIXME for multi touch support
+      */
     void refreshKeys();
 
     /**
-      * Sets tooltip to a new text
+      * Sets tooltip to a new text, new size, new position and show it
+      * @param key to show the tooltip for
       */
     void setTooltip(BoardKey* key);
+
+    /**
+      * Called when the plasma theme changes
+      * Clears pixmap caches and triggers redraw of keyboard
+      */
     void themeChanged();
 
 private:
-    Plasma::FrameSvg* m_activeFrame;
-    QHash<QSize, QPixmap*> m_activeFrames;
+    Plasma::FrameSvg* m_activeFrame; // svg with active state
+    QHash<QSize, QPixmap*> m_activeFrames; // cache of all pixmap sizes with active state
     QList<AlphaNumKey*> m_alphaKeys; // normal keys labeled with symbols like a, b, c
-    QList<StickyKey*> m_altKeys;
-    QList<StickyKey*> m_altgrKeys;
-    QList<FuncKey*> m_capsKeys;
-    QList<StickyKey*> m_ctlKeys;
-    Plasma::DataEngine* m_engine;
-    Plasma::FrameSvg* m_frame;
-    QHash<QSize, QPixmap*> m_frames;
+    QList<StickyKey*> m_altKeys; // List of all AltKeys on keyboard
+    QList<StickyKey*> m_altgrKeys; // List of all AltGr keys on keyboard
+    QList<FuncKey*> m_capsKeys; // List of all caps keys on keyboard
+    QList<StickyKey*> m_ctlKeys; // List of Control keys on keyboard
+    Plasma::DataEngine* m_engine; // key state data engine
+    Plasma::FrameSvg* m_frame; // svg in normal state
+    QHash<QSize, QPixmap*> m_frames; // cace of all pixmap sizes with normal state
     QList<FuncKey*> m_funcKeys; // functional keys like shift, backspace, enter
     bool m_isAlternative; // alternative key level activated
     bool m_isLevel2; // second key level activated
     bool m_isLocked; // is lock activated
-    QList<BoardKey*> m_keys;
-    QList<BoardKey*> m_pressedList;
-    QList<StickyKey*> m_shiftKeys;
-    QList<StickyKey*> m_superKeys;
-    Tooltip* m_tooltip;
-    QXmlStreamReader m_xmlReader;
+    QList<BoardKey*> m_keys; // list of all keys displayed
+    QList<BoardKey*> m_pressedList; // list all currently pressed keys
+    QList<StickyKey*> m_shiftKeys; // list of Shift-Keys on keyboard
+    QList<StickyKey*> m_superKeys; // list of all super-keys on keyboard
+    Tooltip* m_tooltip; // pointer to widget which is used as tooltip
+    QXmlStreamReader m_xmlReader; // instance of QXMLStreamReader for parsing layout files
 };
 
 inline uint qHash(const QSize &key)
