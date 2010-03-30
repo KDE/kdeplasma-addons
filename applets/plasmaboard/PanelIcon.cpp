@@ -91,7 +91,7 @@ void PanelIcon::initKeyboard() {
 
 void PanelIcon::popupEvent(bool show){
 	if ( !show ) {
-		m_plasmaboard->clearAnything();
+		m_plasmaboard->clear();
 	}
 }
 
