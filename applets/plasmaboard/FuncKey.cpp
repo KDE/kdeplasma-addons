@@ -47,3 +47,16 @@ void FuncKey::paintArrow(QPainter *painter){
 
 	painter->drawConvexPolygon(points, 3);
 }
+
+void FuncKey::paintLabel(QPainter *painter)
+{
+    painter->save();
+    setUpPainter(painter);
+
+    double factor_x = relativeSize().width()/size().width();
+    double factor_y = relativeSize().height()/size().height();
+    painter->scale(2.0/ qMax(factor_x, factor_y), 2.0/ qMax(factor_x, factor_y) );
+
+    painter->drawText(QPoint(-70 * label().size(),100), label());
+    painter->restore();
+}

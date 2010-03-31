@@ -31,7 +31,7 @@ public:
     virtual ~AlphaNumKey();
 
     virtual QString label() const;
-    virtual void paint(QPainter *painter);
+    virtual void paint(QPainter *painter);    
 
     /**
       * Sets button text regarding the key level
@@ -39,6 +39,9 @@ public:
     void setLabel(int level);
     void setLabel(const QString &label);
     void switchKey(bool isLevel2, bool isAlternative, bool isLocked); 
+
+private:
+    virtual void paintLabel(QPainter *painter);
 
 private:
     QString m_label;

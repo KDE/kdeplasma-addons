@@ -126,8 +126,7 @@ void BoardKey::setPixmap(QPixmap *pixmap)
 
 void BoardKey::setUpPainter(QPainter *painter) const
 {
-    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );
-    painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
+    painter->translate(position() + QPoint(size().width()/2, size().height()/2) );    
 }
 
 QSize BoardKey::size() const

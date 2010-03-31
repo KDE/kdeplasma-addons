@@ -29,6 +29,9 @@ public:
     FuncKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode, QString label);
     virtual void paint(QPainter *painter);
 
+private:
+    virtual void paintLabel(QPainter *painter);
+
 protected:
 	void paintArrow(QPainter *painter);
 };

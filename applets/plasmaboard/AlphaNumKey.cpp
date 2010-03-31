@@ -40,10 +40,19 @@ QString AlphaNumKey::label() const
 void AlphaNumKey::paint(QPainter *painter)
 {
     BoardKey::paint(painter);
+    paintLabel(painter);
+
+}
+
+void AlphaNumKey::paintLabel(QPainter *painter)
+{
     painter->save();
     setUpPainter(painter);
-    painter->scale(1.0/(relativeSize().width()/size().width()), 1.0/(relativeSize().width()/size().width()));
-    painter->drawText(QPoint(-80 * m_label.size(),100), m_label);
+
+    double factor_x = relativeSize().width()/size().width();
+    double factor_y = relativeSize().height()/size().height();
+    painter->scale(3.0/ qMax(factor_x, factor_y), 3.0/ qMax(factor_x, factor_y) );
+    painter->drawText(QPoint(-100 * m_label.size(),100), m_label);
     painter->restore();
 }
 

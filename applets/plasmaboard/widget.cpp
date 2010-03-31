@@ -420,6 +420,7 @@ void PlasmaboardWidget::paint(QPainter *p,
     p->setRenderHint(QPainter::SmoothPixmapTransform);
     p->setRenderHint(QPainter::Antialiasing);
     p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
+    p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
     QRectF rect = option->exposedRect;
     Q_FOREACH(BoardKey *key, m_keys){
