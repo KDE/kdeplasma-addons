@@ -60,6 +60,7 @@ endif(PHONON_FOUND)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/qalculate/cmake_modules)
 macro_optional_find_package(Qalculate)
 if ( QALCULATE_FOUND )
+    macro_log_feature(QALCULATE_FOUND "Qalculate!" "Qalculate Library" "http://qalculate.sourceforge.net/" FALSE "" "Needed for building the Qalculate plasma applet")
     add_subdirectory(qalculate)
 endif( QALCULATE_FOUND )
 
