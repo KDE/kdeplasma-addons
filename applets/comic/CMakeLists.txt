@@ -2,6 +2,7 @@ project(plasma-comic)
 
 set(comic_SRCS
     comic.cpp
+    comicmodel.cpp
     configwidget.cpp
     fullviewwidget.cpp
     imagewidget.cpp

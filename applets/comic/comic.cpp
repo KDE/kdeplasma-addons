@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
- *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -23,14 +23,12 @@
 
 #include <QtCore/QPropertyAnimation>
 #include <QtCore/QTimer>
-#include <QtGui/QAction>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsSceneMouseEvent>
 #include <QtGui/QGraphicsSceneWheelEvent>
-#include <QtGui/QLabel>
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QSortFilterProxyModel>
 
 #include <KConfigDialog>
 #include <KDatePicker>
@@ -58,6 +56,7 @@
 #include <plasma/tooltipmanager.h>
 
 #include "arrowwidget.h"
+#include "comicmodel.h"
 #include "configwidget.h"
 #include "fullviewwidget.h"
 #include "imagewidget.h"
@@ -107,6 +106,7 @@ class ChooseStripNumDialog : public KDialog
 
 ComicApplet::ComicApplet( QObject *parent, const QVariantList &args )
     : Plasma::PopupApplet( parent, args ),
+      mDifferentComic( true ),
       mShowPreviousButton( false ),
       mShowNextButton( false ),
       mShowComicUrl( false ),
@@ -141,6 +141,13 @@ void ComicApplet::init()
     Plasma::ToolTipManager::self()->registerWidget( this );
 
     loadConfig();
+
+    mEngine = dataEngine( "comic" );
+    mModel = new ComicModel( mEngine->query( "providers" ), mTabIdentifier, this );
+    mProxy = new QSortFilterProxyModel( this );
+    mProxy->setSourceModel( mModel );
+    mProxy->setSortCaseSensitivity( Qt::CaseInsensitive );
+    mProxy->sort( 1, Qt::AscendingOrder );
 
     mCurrentDay = QDate::currentDate();
     mDateChangedTimer = new QTimer( this );
@@ -192,7 +199,7 @@ void ComicApplet::init()
     mActions.append( mActionStorePosition );
     connect( mActionStorePosition, SIGNAL( triggered( bool ) ), this, SLOT( slotStorePosition() ) );
 
-    updateTabBar();
+    updateUsedComics();
     changeComic( true );
 }
 
@@ -386,8 +393,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     //to not have tab switches while configurating things
     mReloadTimer->stop();
 
-    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), parent );
-    mConfigWidget->setComicIdentifier( mTabIdentifier );
+    mConfigWidget = new ConfigWidget( dataEngine( "comic" ), mModel, mTabIdentifier, mProxy, parent );
     mConfigWidget->setShowComicUrl( mShowComicUrl );
     mConfigWidget->setShowComicAuthor( mShowComicAuthor );
     mConfigWidget->setShowComicTitle( mShowComicTitle );
@@ -399,6 +405,7 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
     mConfigWidget->setHideTabBar( !mShowTabBar );
     mConfigWidget->setUseTabs( mUseTabs );
     mConfigWidget->setSwitchTabs( mSwitchTabs );
+    mConfigWidget->setTabView( mTabView - 1);//-1 because counting starts at 0, yet we use flags that start at 1
 
     parent->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
     parent->addPage( mConfigWidget->comicSettings, i18n( "General" ), icon(), i18n( "Press the \"Get New Comics ...\" button to install comics." ) );
@@ -412,12 +419,6 @@ void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
 
 void ComicApplet::applyConfig()
 {
-    const bool differentComic = ( mComicIdentifier != mConfigWidget->comicIdentifier().at( 0 ) );
-
-    mTabIdentifier = mConfigWidget->comicIdentifier();
-    mComicIdentifier = mTabIdentifier.at( 0 );
-    mTabText = mConfigWidget->comicName();
-    mComicTitle = mTabText.at( 0 );
     mShowComicUrl = mConfigWidget->showComicUrl();
     mShowComicAuthor = mConfigWidget->showComicAuthor();
     mShowComicTitle = mConfigWidget->showComicTitle();
@@ -429,13 +430,14 @@ void ComicApplet::applyConfig()
     mShowTabBar = !mConfigWidget->hideTabBar();
     mUseTabs = mConfigWidget->useTabs();
     mSwitchTabs = mConfigWidget->switchTabs();
+    mTabView = mConfigWidget->tabView() + 1;//+1 because counting starts at 0, yet we use flags that start at 1
 
+    updateUsedComics();
     slotStartTimer();
-    updateTabBar();
     saveConfig();
     buttonBar();
 
-    changeComic( differentComic );
+    changeComic( mDifferentComic );
 }
 
 void ComicApplet::changeComic( bool differentComic )
@@ -456,19 +458,45 @@ void ComicApplet::changeComic( bool differentComic )
     }
 }
 
-void ComicApplet::updateTabBar()
+void ComicApplet::updateUsedComics()
 {
-    for ( int i = mTabBar->count(); i > 0; --i ) {
-        mTabBar->removeTab( i - 1 );
-    }
-    for ( int i = 0; i < mTabIdentifier.count(); ++i ) {
-        mTabBar->addTab( mTabText.at( i ) );
+    const QString oldIdentifier = mComicIdentifier;
+    mTabBar->removeAllTabs();
+    mTabIdentifier.clear();
+    mComicIdentifier.clear();
+    mComicTitle.clear();
+
+    bool isFirst = true;
+    QModelIndex data;
+    for ( int i = 0; i < mProxy->rowCount(); ++i ) {
+        if ( mProxy->index( i, 0 ).data( Qt::CheckStateRole) == Qt::Checked ) {
+            data = mProxy->index( i, 1 );
+
+            if ( isFirst ) {
+                isFirst = false;
+                mComicIdentifier = data.data( Qt::UserRole ).toString();
+                mDifferentComic = ( oldIdentifier != mComicIdentifier );
+                mComicTitle = data.data().toString();
+            }
+
+            QIcon icon;
+            QString name;
+            if ( mTabView & ShowText ) {
+                name = data.data().toString();
+            }
+            if ( mTabView & ShowIcon ) {
+                icon = data.data( Qt::DecorationRole ).value<QIcon>();
+            }
+
+            mTabBar->addTab( icon, name );
+            mTabIdentifier << data.data( Qt::UserRole ).toString();
+        }
     }
 }
 
 void ComicApplet::slotTabChanged( int newIndex )
 {
-    if (newIndex >= mTabIdentifier.count()) {
+    if ( newIndex >= mTabIdentifier.count() ) {
         return;
     }
 
@@ -507,10 +535,9 @@ void ComicApplet::loadConfig()
 
     mSwitchTabTime = cg.readEntry( "switchTabTime", 10 );// 10 seconds as default
     mShowTabBar = cg.readEntry( "showTabBar", true );
-    mTabText = cg.readEntry( "tabText", QStringList( QString() ) );
-    mComicTitle = mTabText.count() ? mTabText.at( 0 ) : QString();
     mUseTabs = cg.readEntry( "useTabs", false );
     mSwitchTabs = cg.readEntry( "switchTabs", false );
+    mTabView = cg.readEntry( "tabView", ShowText | ShowIcon );
     mSavingDir = cg.readEntry( "savingDir", QString() );
     mOldSource = mComicIdentifier + ':' + mStoredIdentifierSuffix;
 
@@ -530,9 +557,9 @@ void ComicApplet::saveConfig()
     cg.writeEntry( "switchTabTime", mSwitchTabTime );
     cg.writeEntry( "showTabBar", mShowTabBar );
     cg.writeEntry( "tabIdentifier", mTabIdentifier );
-    cg.writeEntry( "tabText", mTabText );
     cg.writeEntry( "useTabs", mUseTabs );
     cg.writeEntry( "switchTabs", mSwitchTabs );
+    cg.writeEntry( "tabView", mTabView );
     cg.writeEntry( "savingDir", mSavingDir );
 }
 

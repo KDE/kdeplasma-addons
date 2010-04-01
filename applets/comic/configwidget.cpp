@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
- *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,109 +19,17 @@
  ***************************************************************************/
 
 #include "configwidget.h"
+#include "comicmodel.h"
 
-#include <QtCore/QAbstractListModel>
 #include <QtCore/QTimer>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
 #include <QtGui/QSortFilterProxyModel>
 
-#include <KIcon>
 #include <KNS3/DownloadDialog>
 
-class ComicModel : public QAbstractTableModel
+ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, QWidget *parent )
+    : QWidget( parent ), mEngine( engine ), mModel( model ), mUsedComics( usedComics ), mProxyModel( proxy ), mNewStuffDialog( 0 )
 {
-    public:
-        ComicModel( const Plasma::DataEngine::Data &comics, QObject *parent = 0 )
-            : QAbstractTableModel( parent )
-        {
-            setComics( comics );
-        }
-
-        void setComics( const Plasma::DataEngine::Data &comics )
-        {
-            mComics = comics;
-            mState.clear();
-            Plasma::DataEngine::Data::const_iterator it;
-            Plasma::DataEngine::Data::const_iterator itEnd = mComics.constEnd();
-            for ( it = mComics.constBegin(); it != itEnd; ++it ) {
-                mState[ it.key() ] = Qt::Unchecked;
-            }
-            reset();
-        }
-
-        virtual int rowCount( const QModelIndex &index = QModelIndex() ) const
-        {
-            if ( !index.isValid() )
-                return mComics.count();
-            else
-                return 0;
-        }
-
-        virtual int columnCount( const QModelIndex &index = QModelIndex() ) const
-        {
-            Q_UNUSED( index )
-            return 2;
-        }
-
-        virtual QVariant data( const QModelIndex &index, int role = Qt::CheckStateRole ) const
-        {
-            if ( !index.isValid() || index.row() >= mComics.keys().count() )
-                return QVariant();
-
-            const QString data = mComics.keys()[ index.row() ];
-            if ( index.column() == 0 ) {
-                if ( role == Qt::CheckStateRole ) {
-                    return mState[ data ];
-                }
-            } else if ( index.column() == 1 ) {
-                switch( role ) {
-                    case Qt::DisplayRole:
-                        return mComics[ data ].toStringList()[ 0 ];
-                    case Qt::DecorationRole:
-                        return KIcon( mComics[ data ].toStringList()[ 1 ] );
-                    case Qt::UserRole:
-                        return data;
-                }
-            }
-
-            return QVariant();
-        }
-
-        virtual Qt::ItemFlags flags( const QModelIndex &index ) const
-        {
-            if ( index.isValid() && ( index.column() == 0 ) ) {
-                return QAbstractItemModel::flags( index ) | Qt::ItemIsUserCheckable;
-            } else {
-                return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-            }
-        }
-
-        virtual bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole )
-        {
-            if ( index.isValid() && ( role == Qt::CheckStateRole ) ) {
-                mState[ mComics.keys()[ index.row() ] ] = static_cast< Qt::CheckState >( value.toInt() );
-                emit dataChanged( index, index );
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-    private:
-        Plasma::DataEngine::Data mComics;
-        QHash<QString, Qt::CheckState> mState;
-};
-
-
-ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
-    : QWidget( parent ), mEngine( engine ), mNewStuffDialog(0)
-{
-    comicSettings = new QWidget();
+    comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
     comicUi.pushButton_GHNS->setIcon( KIcon( "get-hot-new-stuff" ) );
     comicUi.pushButton_GHNS_2->setIcon( KIcon( "get-hot-new-stuff" ) );
@@ -132,22 +40,60 @@ ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, QWidget *parent )
     connect( appearanceUi.pushButton_Size, SIGNAL( clicked() ), this, SIGNAL( maxSizeClicked() ) );
     connect( comicUi.pushButton_GHNS, SIGNAL( clicked() ), this, SLOT( getNewStuff() ) );
 
-    mModel = new ComicModel( mEngine->query( "providers" ), this );
-    mProxyModel = new QSortFilterProxyModel( this );
-    mProxyModel->setSourceModel( mModel );
-    mProxyModel->setSortCaseSensitivity( Qt::CaseInsensitive );
-    mProxyModel->sort( 1, Qt::AscendingOrder );
-
     comicUi.timeEdit_tabs->setMinimumTime( QTime( 0, 0, 10 ) );//minimum to 10 seconds
 
+    //initialize the comboBox
     comicUi.comboBox_comic->setModel( mProxyModel );
     comicUi.comboBox_comic->setModelColumn( 1 );
+    if ( mProxyModel->rowCount() && usedComics.count() ) {
+        //set the correct initial item of the comboBox if it is defined
+        const int index = comicUi.comboBox_comic->findData( usedComics.first() );
+        comicUi.comboBox_comic->setCurrentIndex( index );
+        mCurrentIndex = mProxyModel->index( index, 0 );
+    }
+
     comicUi.listView_comic->setModel( mProxyModel );
     comicUi.listView_comic->resizeColumnToContents( 0 );
+
+    connect( comicUi.comboBox_comic, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotCurrentIndexChanged( int ) ) );
+    connect( comicUi.checkBox_useTabs_2, SIGNAL( clicked( bool ) ), this, SLOT( slotComboBoxChosen() ) );
 }
 
 ConfigWidget::~ConfigWidget()
 {
+}
+
+void ConfigWidget::slotComboBoxChosen()
+{
+    comicUi.comboBox_comic->setCurrentIndex( 0 );
+}
+
+void ConfigWidget::slotCurrentIndexChanged( int newIndex )
+{
+    if ( !mProxyModel->rowCount() ) {
+        return;
+    }
+
+    //decide wether to modify newIndex or not
+    const bool oldIsChecked = mCurrentIndex.isValid() && mCurrentIndex.data( Qt::CheckStateRole ) == Qt::Checked;
+    if ( !oldIsChecked ) {
+        //is not checked, i.e. comics have been added/removed, choose the first entry instead
+        newIndex = 0;
+    }
+
+    //set all items of mProxyModel to unchecked
+    for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
+        QModelIndex index = mProxyModel->index( i, 0 );
+        mProxyModel->setData( index, Qt::Unchecked, Qt::CheckStateRole );
+    }
+
+    //check the selected index
+    mCurrentIndex = mProxyModel->index( newIndex, 0 );
+    mProxyModel->setData( mCurrentIndex, Qt::Checked, Qt::CheckStateRole );//FIXME things might be selected that are not checked!!!
+
+    if ( !oldIsChecked ) {
+        comicUi.comboBox_comic->setCurrentIndex( 0 );
+    }
 }
 
 void ConfigWidget::getNewStuff()
@@ -162,127 +108,14 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::newStuffFinished()
 {
     if ( mNewStuffDialog->changedEntries().count() ) {
-        QStringList tmp = comicIdentifier();
-        mModel->setComics( mEngine->query( "providers" ) );
-        if ( tmp.first().isEmpty() ) {
-            tmp.takeFirst();
-        }
-        setComicIdentifier( tmp );
+        mModel->setComics( mEngine->query( "providers" ), mUsedComics );//HACK if nothing is checked/selected, then do check/select something automatically??
+
         comicUi.listView_comic->resizeColumnToContents( 0 );
-    }
-}
 
-void ConfigWidget::setComicIdentifier( const QStringList &comics )
-{
-    if ( comics.isEmpty() ) {
-        if ( mProxyModel->rowCount() ) {
+        if ( !useTabs() && mProxyModel->rowCount() ) {
             comicUi.comboBox_comic->setCurrentIndex( 0 );
-            QModelIndex index( mProxyModel->index( 0, 0 ) );
-            comicUi.listView_comic->model()->setData( index, Qt::Checked, Qt::CheckStateRole );
-        }
-    } else if ( mProxyModel->rowCount() ) {
-        QModelIndex indexCheck;
-        QModelIndex indexName;
-
-        //select an item of comboBox_comic
-        comicUi.comboBox_comic->setCurrentIndex( 0 ); //set to 0 in any case
-        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            const QString name = mProxyModel->index( i, 1 ).data( Qt::UserRole ).toString();
-            if ( comics.contains( name ) ) {
-                comicUi.comboBox_comic->setCurrentIndex( i );
-                break;
-            }
-        }
-
-        //check the items of listView_comic
-        bool somethingChecked = false;
-        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            indexCheck = mProxyModel->index( i, 0 );
-            const QString name = mProxyModel->index( i, 1 ).data( Qt::UserRole ).toString();
-            if ( comics.contains( name ) ) {
-                comicUi.listView_comic->model()->setData( indexCheck, Qt::Checked, Qt::CheckStateRole );
-                somethingChecked = true;
-            }
-        }
-        if ( !somethingChecked ) { //check at least the first
-            comicUi.listView_comic->model()->setData( indexCheck, Qt::Checked, Qt::CheckStateRole );
         }
     }
-}
-
-QStringList ConfigWidget::comicIdentifier() const
-{
-    QStringList identifiers;
-
-    if ( mProxyModel->rowCount() ) {
-        QModelIndex indexCheck;
-        QModelIndex indexName;
-        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            indexCheck = mProxyModel->index( i, 0 );
-            indexName = mProxyModel->index( i, 1 );
-            if ( indexCheck.data( Qt::CheckStateRole ) == Qt::Checked ) {
-                identifiers << indexName.data( Qt::UserRole ).toString();
-            }
-        }
-
-        //if no tabs are used or if nothing has been selected on listView_comic use the comboBox_comic
-        if ( !comicUi.checkBox_useTabs->isChecked() || identifiers.isEmpty() ) {
-            int indexNum = comicUi.comboBox_comic->currentIndex();
-
-            //use the currentIndex or if none has been set then the first
-            if ( indexNum > -1 ) {
-                indexName  = mProxyModel->index( indexNum, 1 );
-            } else {
-                indexName  = mProxyModel->index( 0, 1 );
-            }
-            identifiers = QStringList( indexName.data( Qt::UserRole ).toString() );
-        }
-    }
-
-    //if identifiers is still empty add an empty string
-    if ( identifiers.isEmpty() ) {
-        identifiers << QString();
-    }
-
-    return identifiers;
-}
-
-QStringList ConfigWidget::comicName() const
-{
-    QStringList names;
-
-    if ( mProxyModel->rowCount() ) {
-        QModelIndex indexCheck;
-        QModelIndex indexName;
-        for ( int i = 0; i < mProxyModel->rowCount(); ++i ) {
-            indexCheck = mProxyModel->index( i, 0 );
-            indexName = mProxyModel->index( i, 1 );
-            if ( indexCheck.data( Qt::CheckStateRole ) == Qt::Checked ) {
-                names << indexName.data( Qt::DisplayRole ).toString();
-            }
-        }
-
-        //if no tabs are used or if nothing has been selected on listView_comic use the comboBox_comic
-        if ( !comicUi.checkBox_useTabs->isChecked() || names.isEmpty() ) {
-            int indexNum = comicUi.comboBox_comic->currentIndex();
-
-
-            //use the currentIndex or if none has been set then the first
-            if ( indexNum > -1 ) {
-                indexName  = mProxyModel->index( indexNum, 1 );
-            } else {
-                indexName  = mProxyModel->index( 0, 1 );
-            }
-            names = QStringList( indexName.data( Qt::DisplayRole ).toString() );
-        }
-    }
-
-    //if names is still empty add an empty string
-    if ( names.isEmpty() ) {
-        names << QString();
-    }
-
-    return names;
 }
 
 void ConfigWidget::setShowComicUrl( bool show )
@@ -385,6 +218,16 @@ void ConfigWidget::setSwitchTabs( bool switchTabs )
 bool ConfigWidget::switchTabs() const
 {
     return comicUi.checkBox_switchTabs->isChecked();
+}
+
+void ConfigWidget::setTabView(int tabView)
+{
+    appearanceUi.kbuttongroup->setSelected( tabView );
+}
+
+int ConfigWidget::tabView() const
+{
+    return appearanceUi.kbuttongroup->selected();
 }
 
 #include "configwidget.moc"

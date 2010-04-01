@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
- *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -27,8 +27,6 @@
 #include <QtGui/QWidget>
 #include <QTime>
 
-#include <Plasma/DataEngine>
-
 class ComicModel;
 class QCheckBox;
 class QComboBox;
@@ -39,15 +37,16 @@ namespace KNS3 {
     class DownloadDialog;
 }
 
+namespace Plasma {
+    class DataEngine;
+}
+
 class ConfigWidget : public QWidget
 {
         Q_OBJECT
     public:
-        ConfigWidget( Plasma::DataEngine *engine, QWidget *parent );
+        ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, const QStringList &usedComics, QSortFilterProxyModel *proxy, QWidget *parent );
         ~ConfigWidget();
-
-        void setComicIdentifier( const QStringList &comics );
-        QStringList comicIdentifier() const;
 
         void setShowComicUrl( bool show );
         bool showComicUrl() const;
@@ -69,7 +68,8 @@ class ConfigWidget : public QWidget
         bool useTabs() const;
         void setSwitchTabs( bool switchTabs );
         bool switchTabs() const;
-        QStringList comicName() const;
+        void setTabView( int tabView );
+        int tabView() const;
 
         QWidget *comicSettings;
         QWidget *appearanceSettings;
@@ -82,13 +82,19 @@ class ConfigWidget : public QWidget
         void getNewStuff();
         void newStuffFinished();
 
+    private slots:
+        void slotCurrentIndexChanged( int newIndex );
+        void slotComboBoxChosen();
+
     private:
         Ui::ComicSettings comicUi;
         Ui::AppearanceSettings appearanceUi;
-        ComicModel *mModel;
         Plasma::DataEngine *mEngine;
+        ComicModel *mModel;
+        QStringList mUsedComics;
         QSortFilterProxyModel *mProxyModel;
         KNS3::DownloadDialog* mNewStuffDialog;
+        QModelIndex mCurrentIndex;
 };
 
 #endif

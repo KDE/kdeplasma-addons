@@ -1,7 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2007 by Tobias Koenig <tokoe@kde.org>                   *
  *   Copyright (C) 2008 by Marco Martin <notmart@gmail.com>                *
- *   Copyright (C) 2008 Matthias Fuchs <mat69@gmx.net>                     *
+ *   Copyright (C) 2008-2010 Matthias Fuchs <mat69@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -32,12 +32,14 @@
 #include <Plasma/TabBar>
 
 class ArrowWidget;
+class ComicModel;
 class ConfigWidget;
 class FullViewWidget;
 class ImageWidget;
 class QAction;
 class QGraphicsLayout;
 class QPropertyAnimation;
+class QSortFilterProxyModel;
 class QTimer;
 
 namespace Plasma {
@@ -51,6 +53,13 @@ class ComicTabBar : public Plasma::TabBar
     public:
         ComicTabBar( QGraphicsWidget *parent = 0 ) : TabBar( parent ) {}
         ~ComicTabBar() {}
+
+        void removeAllTabs()
+        {
+            while ( this->count() ) {
+                this->removeTab( 0 );
+            }
+        }
 
     protected:
         QSizeF sizeHint( Qt::SizeHint which, const QSizeF &constraint = QSizeF() ) const
@@ -149,7 +158,7 @@ class ComicApplet : public Plasma::PopupApplet
     private:
         void changeComic( bool differentComic );
         void updateComic( const QString &identifierSuffix = QString() );
-        void updateTabBar();
+        void updateUsedComics();
         void updateButtons();
         void updateContextMenu();
         void loadConfig();
@@ -157,6 +166,9 @@ class ComicApplet : public Plasma::PopupApplet
         bool isInPanel() const;
 
     private:
+        ComicModel *mModel;
+        QSortFilterProxyModel *mProxy;
+
         QImage mImage;
         QDate mCurrentDay;
         KUrl mWebsiteUrl;
@@ -177,6 +189,7 @@ class ComicApplet : public Plasma::PopupApplet
         QString mSavingDir;
         QString mOldSource;
         ConfigWidget *mConfigWidget;
+        bool mDifferentComic;
         bool mScaleComic;
         bool mShowPreviousButton;
         bool mShowNextButton;
@@ -223,7 +236,12 @@ class ComicApplet : public Plasma::PopupApplet
         int mSwitchTabTime;
         ComicTabBar *mTabBar;
         QStringList mTabIdentifier;
-        QStringList mTabText;
+
+        enum TabView {
+            ShowText = 0x1,
+            ShowIcon = 0x2
+        };
+        int mTabView;
 };
 
 K_EXPORT_PLASMA_APPLET( comic, ComicApplet )
