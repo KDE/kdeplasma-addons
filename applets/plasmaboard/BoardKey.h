@@ -65,11 +65,9 @@ protected:
 private:
     unsigned int m_keycode;
     QPixmap* m_pixmap;
-    QPoint m_position;
     QPoint m_relativePosition;
     QRectF m_rect;
     QSize m_relativeSize;
-    QSize m_size;
 
 };
 

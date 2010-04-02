@@ -63,7 +63,7 @@ void BoardKey::paint(QPainter *painter)
     qDebug() << "Paint: " << m_rect;
     //painter->eraseRect(m_rect);
     //painter->fillRect(m_rect, QColor(Qt::transparent));
-    painter->drawPixmap(m_position, *m_pixmap);
+    painter->drawPixmap(m_rect.topLeft(), *m_pixmap);
     //painter->drawPixmap(m_rect.toRect(), *m_pixmap);
     //painter->drawRect(QRect(m_position, QPoint( frames[m_size].width() + m_position.x(), frames[m_size].height() + m_position.y() )));
 
@@ -71,7 +71,7 @@ void BoardKey::paint(QPainter *painter)
 
 QPoint BoardKey::position() const
 {
-    return m_position;
+    return m_rect.topLeft().toPoint();
 }
 
 void BoardKey::pressed()
@@ -131,7 +131,7 @@ void BoardKey::setUpPainter(QPainter *painter) const
 
 QSize BoardKey::size() const
 {
-    return m_size;
+    return m_rect.size().toSize();
 }
 
 void BoardKey::unpressed()
@@ -141,7 +141,7 @@ void BoardKey::unpressed()
 
 void BoardKey::updateDimensions(double factor_x, double factor_y)
 {
-    m_position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
-    m_size = QSize(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
-    m_rect = QRect(m_position, m_size);
+    QPoint position = QPoint(m_relativePosition.x() * factor_x, m_relativePosition.y() * factor_y);
+    QSize size = QSize(m_relativeSize.width() * factor_x, m_relativeSize.height() * factor_y);
+    m_rect = QRect(position, size);
 }
