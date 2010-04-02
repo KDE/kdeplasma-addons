@@ -70,7 +70,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     m_activeFrame = new Plasma::FrameSvg();
     m_activeFrame->setCacheAllRenderedFrames(false);
     m_activeFrame->setImagePath("widgets/button");
-    m_activeFrame->setElementPrefix("active");
+    m_activeFrame->setElementPrefix("pressed");
 
     m_engine = dataEngine("keystate");
     if(m_engine){
@@ -417,8 +417,6 @@ void PlasmaboardWidget::paint(QPainter *p,
     Q_UNUSED(widget);
     //Plasma::Containment::paint(p, option, widget);
 
-    p->setRenderHint(QPainter::SmoothPixmapTransform);
-    p->setRenderHint(QPainter::Antialiasing);
     p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
     p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 

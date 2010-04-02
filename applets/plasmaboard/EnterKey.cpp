@@ -31,6 +31,7 @@ void EnterKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
     painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
     painter->scale(size().height()/20.0, size().height()/20.0);
 

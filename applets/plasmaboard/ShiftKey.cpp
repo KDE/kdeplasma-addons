@@ -31,6 +31,7 @@ void ShiftKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
     painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
     painter->scale(size().height()/10.0, size().height()/10.0);
 
