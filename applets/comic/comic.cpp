@@ -386,6 +386,15 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
     if ( !mImage.isNull() ) {
         QTimer::singleShot( 1, this, SLOT( updateSize()) );//HACK
     }
+
+    //prefechtes the previous and following comic for faster navigation
+    if ( !mNextIdentifierSuffix.isEmpty() ) {
+        mEngine->query( mComicIdentifier + ':' + mNextIdentifierSuffix );
+    }
+
+    if ( !mPreviousIdentifierSuffix.isEmpty() ) {
+        mEngine->query( mComicIdentifier + ':' + mPreviousIdentifierSuffix );
+    }
 }
 
 void ComicApplet::createConfigurationInterface( KConfigDialog *parent )
