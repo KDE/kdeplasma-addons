@@ -37,7 +37,7 @@ Tooltip::Tooltip(QString text) : QWidget()
 
     frame = new Plasma::FrameSvg(this);
     frame->setEnabledBorders(Plasma::FrameSvg::AllBorders);
-    frame->setImagePath("dialogs/background");
+    frame->setImagePath("widgets/tooltip");
     frame->resizeFrame(size());
 
     connect(frame, SIGNAL(repaintNeeded()), this, SLOT(update()));
@@ -47,6 +47,7 @@ Tooltip::Tooltip(QString text) : QWidget()
 
     m_layout = new QHBoxLayout(this);
     m_layout->addWidget(label);
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(updateMask()));
 }
 
 Tooltip::~Tooltip() {
@@ -64,14 +65,34 @@ void Tooltip::setText(QString text) {
     label->setText(text);
 }
 
-void Tooltip::resize(QSize size) {
+void Tooltip::resizeEvent(QResizeEvent *event) {
+    QSize size = event->size();
     QWidget::resize(size);
     setFont(QFont ( "Helvetica", qMin(size.height(),size.width()) / 3) );
     frame->resizeFrame(size);
+    updateMask();
     /*
     QImage img( size, QImage::Format_Mono);
     img.fill(0);
     setMask(QBitmap::fromImage(img, Qt::MonoOnly));*/
+}
+
+void Tooltip::showEvent(QShowEvent * event)
+{
+    Q_UNUSED(event);
+    Plasma::WindowEffects::overrideShadow(winId(), true);
+}
+
+void Tooltip::updateMask()
+{
+    const bool translucency = Plasma::Theme::defaultTheme()->windowTranslucencyEnabled();
+    Plasma::WindowEffects::enableBlurBehind(winId(), translucency,
+                                    translucency ? frame->mask() : QRegion());
+    if (translucency) {
+        clearMask();
+    } else {
+        setMask(frame->mask());
+    }
 }
 
 void Tooltip::paintEvent ( QPaintEvent * event ){

@@ -21,7 +21,8 @@
 #define TOOLTIP_H
 
 #include <QWidget>
-#include <plasma/framesvg.h>
+#include <Plasma/FrameSvg>
+#include <Plasma/WindowEffects>
 
 class QWidget;
 class QLabel;
@@ -34,10 +35,16 @@ public:
     Tooltip(QString text);
     ~Tooltip();
     void setText(QString text);
-    void resize(QSize size);
+
 protected:
     void paintEvent ( QPaintEvent * event );
+    void resizeEvent(QResizeEvent *event);
+    void showEvent(QShowEvent * event);
     //bool event(QEvent *event);
+
+protected Q_SLOTS:
+    void updateMask();
+
 private:
     Plasma::FrameSvg* frame;
     QLabel* label;
