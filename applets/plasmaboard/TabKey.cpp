@@ -35,25 +35,25 @@ void TabKey::paint(QPainter *painter){
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
-    painter->scale(size().height()/10.0, size().height()/10.0);
+    int unit = qMin(size().width(), size().height()) / 8;
 
-	painter->drawLine(-1, -2 , 3, -2);
+    painter->drawLine(-1*unit, -2*unit , 3*unit, -2*unit);
 	QPointF points[3] = {
-	     QPointF(-3, -2),
-	     QPointF(-1, -1),
-	     QPointF(-1, -3),
+         QPointF(-3*unit, -2*unit),
+         QPointF(-1*unit, -1*unit),
+         QPointF(-1*unit, -3*unit),
 	 };
 	painter->drawConvexPolygon(points, 3);
-	painter->drawLine(-3, -1 , -3, -3);
+    painter->drawLine(-3*unit, -1*unit , -3*unit, -3*unit);
 
-	painter->drawLine(-3, 0 , 1, 0);
+    painter->drawLine(-3*unit, 0 , 1*unit, 0);
 	QPointF points2[3] = {
-	     QPointF(1, -1),
-	     QPointF(3, 0),
-	     QPointF(1, 1),
+         QPointF(1*unit, -1*unit),
+         QPointF(3*unit, 0),
+         QPointF(1*unit, 1*unit),
 	 };
 	painter->drawConvexPolygon(points2, 3);
-	painter->drawLine(3, 1 , 3, -1);
+    painter->drawLine(3*unit, 1*unit , 3*unit, -1*unit);
 
     painter->restore();
 }

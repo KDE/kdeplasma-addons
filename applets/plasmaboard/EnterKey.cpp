@@ -31,17 +31,18 @@ void EnterKey::paint(QPainter *painter){
     FuncKey::paint(painter);
 
     painter->save();
+
     painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
-    painter->scale(size().height()/20.0, size().height()/20.0);
+    int unit = qMin(size().width(), size().height()) / 8;
 
-    painter->drawLine(-1, 0, 2, 0);
-    painter->drawLine(2, 0, 2, -1);
+    painter->drawLine(-1*unit, 0, 2*unit, 0);
+    painter->drawLine(2*unit, 0, 2*unit, -1*unit);
 
 	const QPointF points[3] = {
-        QPointF(-3, 0),
-        QPointF(-1, 1),
-        QPointF(-1, -1),
+        QPointF(-3*unit, 0),
+        QPointF(-1*unit, 1*unit),
+        QPointF(-1*unit, -1*unit),
     };
 
 	painter->drawConvexPolygon(points, 3);

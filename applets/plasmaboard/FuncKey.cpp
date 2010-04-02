@@ -36,13 +36,13 @@ void FuncKey::paint(QPainter *painter){
 
 void FuncKey::paintArrow(QPainter *painter){
 
-    painter->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
-	painter->drawLine(-1, 0 , 3, 0);
+    int unit = qMin(size().width(), size().height()) / 8;
+    painter->drawLine(-1*unit, 0 , 3*unit, 0);
 
 	const QPointF points[3] = {
-	     QPointF(-3, 0),
-	     QPointF(-1, 1),
-	     QPointF(-1, -1),
+         QPointF(-3*unit, 0),
+         QPointF(-1*unit, 1*unit),
+         QPointF(-1*unit, -1*unit),
 	 };
 
 	painter->drawConvexPolygon(points, 3);

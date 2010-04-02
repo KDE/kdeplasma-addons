@@ -48,7 +48,6 @@ void AlphaNumKey::paint(QPainter *painter)
 void AlphaNumKey::paintLabel(QPainter *painter)
 {
     painter->save();
-    //setUpPainter(painter);
     int fontSize = qMin(size().width(), size().height()) / 2;
     painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
     painter->drawText(rect(), Qt::AlignCenter, m_label);

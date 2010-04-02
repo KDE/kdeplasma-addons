@@ -33,16 +33,16 @@ void ShiftKey::paint(QPainter *painter){
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
-    painter->scale(size().height()/10.0, size().height()/10.0);
+    int unit = qMin(size().width(), size().height()) / 8;
 
 	const QPointF points[7] = {
-		     QPointF(0, -3),
-		     QPointF(-2, 0),
-		     QPointF(-1, 0),
-		     QPointF(-1, 2),
-		     QPointF( 1, 2),
-		     QPointF( 1, 0),
-		     QPointF( 2, 0)
+             QPointF(0, -3*unit),
+             QPointF(-2*unit, 0),
+             QPointF(-1*unit, 0),
+             QPointF(-1*unit, 2*unit),
+             QPointF( 1*unit, 2*unit),
+             QPointF( 1*unit, 0),
+             QPointF( 2*unit, 0)
 	};
 
 	painter->drawConvexPolygon(points, 7);
