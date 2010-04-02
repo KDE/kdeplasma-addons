@@ -527,8 +527,8 @@ void PlasmaboardWidget::setTooltip(BoardKey* key)
     QString label = key->label();
     if(label.size() > 0) {
         m_tooltip -> setText( key->label() );
-        m_tooltip -> move( popupPosition( key->size() ) + key->position() );
-        m_tooltip -> resize( key->size() );
+        m_tooltip -> move( popupPosition( key->size()*2 ) + key->position() - QPoint(key->size().width()/2, 0) );
+        m_tooltip -> resize( key->size()*2 );
         m_tooltip -> show();
     }
 }
