@@ -417,7 +417,6 @@ void PlasmaboardWidget::paint(QPainter *p,
     Q_UNUSED(widget);
     //Plasma::Containment::paint(p, option, widget);
 
-    p->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), 200));
     p->setBrush(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
 
     QRectF rect = option->exposedRect;

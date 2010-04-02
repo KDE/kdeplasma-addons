@@ -21,6 +21,7 @@
 #include "AlphaNumKey.h"
 #include "Helpers.h"
 #include <QPainter>
+#include <plasma/theme.h>
 
 AlphaNumKey::AlphaNumKey(QPoint relativePosition, QSize relativeSize, unsigned int keycode):
         BoardKey(relativePosition, relativeSize, keycode){
@@ -47,12 +48,10 @@ void AlphaNumKey::paint(QPainter *painter)
 void AlphaNumKey::paintLabel(QPainter *painter)
 {
     painter->save();
-    setUpPainter(painter);
-
-    double factor_x = relativeSize().width()/size().width();
-    double factor_y = relativeSize().height()/size().height();
-    painter->scale(3.0/ qMax(factor_x, factor_y), 3.0/ qMax(factor_x, factor_y) );
-    painter->drawText(QPoint(-100 * m_label.size(),100), m_label);
+    //setUpPainter(painter);
+    int fontSize = qMin(size().width(), size().height()) / 2;
+    painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
+    painter->drawText(rect(), Qt::AlignCenter, m_label);
     painter->restore();
 }
 
