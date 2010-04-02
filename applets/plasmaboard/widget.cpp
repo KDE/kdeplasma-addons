@@ -352,8 +352,7 @@ void PlasmaboardWidget::mouseMoveEvent ( QGraphicsSceneMouseEvent * event )
         if(!boundingRect().contains(click)){ // if mouse is moved outside the widget...
             Q_FOREACH(BoardKey* clickedKey, m_pressedList){  // ... we unpress all pressed keys
                 unpress(clickedKey);
-            }
-            clearTooltip();
+            }            
             return;
         }
 
@@ -545,6 +544,7 @@ void PlasmaboardWidget::themeChanged()
 
 void PlasmaboardWidget::unpress(BoardKey *key)
 {    
+    clearTooltip();
     key->unpressed();
     key->setPixmap(getFrame(key->size()));
     update(key->rect());
