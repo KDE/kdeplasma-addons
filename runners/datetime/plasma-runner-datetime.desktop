@@ -1,13 +1,16 @@
 [Desktop Entry]
 Name=Date and Timer
 Name[en_GB]=Date and Timer
+Name[es]=Fecha y hora
 Name[pt]=Data e Hora
+Name[pt_BR]=Data e hora
 Name[sv]=Datum och tidtagning
 Name[uk]=Дата і час
 Name[x-test]=xxDate and Timerxx
 
 Comment=The current date and time, locally or in any timezone
 Comment[en_GB]=The current date and time, locally or in any timezone
+Comment[es]=La fecha y la hora actuales, localmente o en cualquier huso horario
 Comment[pt]=A data e hora actuais, a nível local ou em qualquer fuso-horário
 Comment[pt_BR]=A data e hora atual, localmente ou em qualquer fuso horário
 Comment[sv]=Nuvarande datum och tid, lokalt eller i godtycklig tidszon
