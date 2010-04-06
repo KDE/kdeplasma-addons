@@ -276,7 +276,7 @@ void WeatherWallpaper::showAdvancedDialog()
         m_advancedUi.m_wallpaperView->view()->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         connect(m_advancedUi.m_conditionCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(conditionChanged(int)));
-        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clear"), i18n("Clear"), "weather-clear");
+        m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clear"), i18nc("weather condition", "Clear"), "weather-clear");
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-few-clouds"), i18n("Partly Cloudy"), "weather-few-clouds");
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-clouds"), i18n("Cloudy"), "weather-clouds");
         m_advancedUi.m_conditionCombo->addItem(KIcon("weather-many-clouds"), i18n("Very Cloudy"), "weather-many-clouds");
