@@ -565,9 +565,8 @@ void Frame::initSlideShow()
         m_mySlideShow->setImage(m_currentUrl.url());
     }
 
-    if (!m_potd) {
-        updatePicture();
-    }
+    updatePicture();
+
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
