@@ -80,16 +80,14 @@ void PanelIcon::init() {
     QString layout;
     layout = cg.readEntry("layout", layout);
 
-    qDebug() << layout;
-
-    QString file = KStandardDirs::locate("data", layout);
+    QString file = KStandardDirs::locate("data", layout); // lookup whether saved layout exists
     if(layout.size() > 0 && file.size() > 0){
         m_layout = file;
     }
-    else{
+    else{ // fallback to default layout
         m_layout = KStandardDirs::locate("data", "plasmaboard/qwert_layout.xml");
     }
-    qDebug() << m_layout;
+
 }
 
 void PanelIcon::initKeyboard() {
@@ -135,8 +133,6 @@ void PanelIcon::saveLayout(QString path) {
     int pos = path.indexOf("plasmaboard");
 
     KConfigGroup cg = config();
-    qDebug() << path;
-    qDebug() << path.right(path.size() - pos);
     cg.writeEntry("layout", path.right(path.size() - pos));
 
 }
