@@ -63,6 +63,11 @@ public:
     ~PlasmaboardWidget();
 
     /**
+      * Deletes all keys for resetting the keyboard
+      */
+    void deleteKeys();
+
+    /**
       * Draws just basic keys on the keyboard - just for writing
       * @param Absolute path to the file which contains xml layout of keyboard
       */
@@ -106,11 +111,6 @@ private:
       * @return FuncKey corresponding to the action
       */
     FuncKey *createFunctionKey(QPoint &point, QSize &size, QString action);
-
-    /**
-      * Deletes all keys for resetting the keyboard
-      */
-    void deleteKeys();
 
     /**
       * @param Size of the pixmap requested

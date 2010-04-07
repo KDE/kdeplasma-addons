@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "PanelIcon.h"
+#include "Layout.h"
 #include <QAction>
 #include <QGraphicsView>
 
@@ -26,7 +27,6 @@
 #include <KStandardDirs>
 
 #include <plasma/theme.h>
-#include <plasma/corona.h>
 #include <Plasma/ToolTipManager>
 #include <Plasma/ToolTipContent>
 
@@ -38,34 +38,81 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
     //setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setPassivePopup(true);
-
-
-	connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(initKeyboard()));
-
 }
 
 
 PanelIcon::~PanelIcon() {
 	Plasma::ToolTipManager::self()->unregisterWidget(this);
+    qDeleteAll(m_layouts);
+}
 
+QList<QAction*> PanelIcon::contextualActions(){
+    QList<QAction*> list;
+    Q_FOREACH(Layout* l, m_layouts){
+        QAction *action = new QAction(l->name(), this);
+        action->setData(l->path());
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(initKeyboard()));
+        list << action;
+    }
+
+    QAction *sep = new QAction(this);
+    sep->setSeparator(true);
+    list << sep;
+
+    return list;
 }
 
 void PanelIcon::init() {
-    KConfigGroup cg = config();
-    //extendedMode = cg.readEntry("extendedMode", false);
+
+    QStringList layoutList = KGlobal::dirs()->findAllResources("data", "plasmaboard/*.xml");
+    Q_FOREACH(QString path, layoutList){
+        m_layouts << new Layout(path);
+    }
 
     Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipContent toolTip;
     toolTip.setImage(KIcon("preferences-desktop-keyboard"));
     toolTip.setMainText(i18n("Virtual Keyboard"));
     Plasma::ToolTipManager::self()->setContent(this, toolTip);
+
+
+    KConfigGroup cg = config();
+    QString layout;
+    layout = cg.readEntry("layout", layout);
+
+    qDebug() << layout;
+
+    QString file = KStandardDirs::locate("data", layout);
+    if(layout.size() > 0 && file.size() > 0){
+        m_layout = file;
+    }
+    else{
+        m_layout = KStandardDirs::locate("data", "plasmaboard/qwert_layout.xml");
+    }
+    qDebug() << m_layout;
+}
+
+void PanelIcon::initKeyboard() {
+    QString path = ((QAction*)sender())->data().toString();
+    qDebug() << path;
+    m_plasmaboard->deleteKeys();
+    m_plasmaboard->initKeyboard(path);
+    m_plasmaboard->refreshKeys();
+    m_plasmaboard->update();
+    saveLayout(path);
+}
+
+void PanelIcon::initKeyboard(QString layoutFile) {
+    m_plasmaboard->deleteKeys();
+    m_plasmaboard->initKeyboard(layoutFile);
+    saveLayout(layoutFile);
 }
 
 QGraphicsWidget *PanelIcon::graphicsWidget()
 {
     if (!m_plasmaboard) {
         m_plasmaboard = new PlasmaboardWidget(this);
-        initKeyboard();
+        initKeyboard(m_layout);
     }
 
     QGraphicsView *window = view();
@@ -77,24 +124,22 @@ QGraphicsWidget *PanelIcon::graphicsWidget()
     return m_plasmaboard;
 }
 
-QList<QAction*> PanelIcon::contextualActions(){
-	QList<QAction*> list;
-	return list;
-}
-
-void PanelIcon::initKeyboard() {
-    //m_plasmaboard->resetKeyboard();
-
-    m_plasmaboard->initKeyboard(KStandardDirs::locate("data", "plasmaboard/qwert_layout.xml"));
-
-}
-
 void PanelIcon::popupEvent(bool show){
 	if ( !show ) {
         m_plasmaboard->reset();
 	}
 }
 
+void PanelIcon::saveLayout(QString path) {
+
+    int pos = path.indexOf("plasmaboard");
+
+    KConfigGroup cg = config();
+    qDebug() << path;
+    qDebug() << path.right(path.size() - pos);
+    cg.writeEntry("layout", path.right(path.size() - pos));
+
+}
 
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(plasmaboard, PanelIcon)

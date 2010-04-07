@@ -24,6 +24,7 @@
 #include "plasma/popupapplet.h"
 #include "widget.h"
 
+class Layout;
 
 class PanelIcon: public Plasma::PopupApplet {
     Q_OBJECT
@@ -40,8 +41,6 @@ public:
 
 
 public Q_SLOTS:
-
-
     /**
       * Initialize the keyboard with the configured layout
       */
@@ -55,8 +54,12 @@ protected:
 
 private:
     void init();
+    void initKeyboard(QString layoutFile);
+    void saveLayout(QString path);
 
 private:
+    QString m_layout;
+    QList<Layout*> m_layouts;
 	PlasmaboardWidget *m_plasmaboard;
 	const QVariantList args;
 

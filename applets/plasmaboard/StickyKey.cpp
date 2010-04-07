@@ -34,6 +34,7 @@ void StickyKey::pressed()
     if(!m_toggled){
         sendKeyPress(); // if the key has not pressed, send immediately a press to X server
         m_toggled = true;
+        m_dorelease = false;
     }
     else {
         m_toggled = false;
