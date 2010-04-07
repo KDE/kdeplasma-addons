@@ -53,6 +53,7 @@ public:
     KIO::StoredTransferJob * m_job;
     KUrl url();
     QString message();
+    void setMessage(const QString &message);
 
 Q_SIGNALS:
     void pictureLoaded(QImage image);

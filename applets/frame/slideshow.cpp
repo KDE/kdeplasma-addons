@@ -196,20 +196,21 @@ void SlideShow::clearPicture()
 
 void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
-    Q_UNUSED(name)
     if (data.isEmpty()) {
         m_image = QImage();
+        m_picture->setMessage(i18n("No Picture fot this Provider."));
         return;
     }
 
-    m_image = data[0].value<QImage>();
+    m_image = data[name].value<QImage>();
     //Compatibility with old dataengines
     if (m_image.isNull()){
-        QPixmap tmpPixmap = data[0].value<QPixmap>();
+        QPixmap tmpPixmap = data[name].value<QPixmap>();
         if (!tmpPixmap.isNull()){
             m_image = tmpPixmap.toImage();
         }
     }
+    m_picture->setMessage(QString());
     emit pictureUpdated();
 }
 

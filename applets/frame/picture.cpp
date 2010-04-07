@@ -57,6 +57,11 @@ QString Picture::message()
     return m_message;
 }
 
+void Picture::setMessage(const QString &message)
+{
+    m_message = message;
+}
+
 QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize

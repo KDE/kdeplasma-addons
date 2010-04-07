@@ -564,7 +564,6 @@ void Frame::stopPotd()
     QDate mCurrentDate = QDate::currentDate();
     const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
     engine->disconnectSource(identifier, m_mySlideShow);
-    m_potd = false;
 }
 
 void Frame::initSlideShow()
@@ -624,6 +623,7 @@ void Frame::dropEvent(QGraphicsSceneDragDropEvent *event)
     }
 
     stopPotd();
+    m_potd = false;
     initSlideShow();
 
     KConfigGroup cg = config();
