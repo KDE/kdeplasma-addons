@@ -175,4 +175,9 @@ void Picture::slotFinished( KJob *job )
     emit pictureLoaded(correctRotation(image, path));
 }
 
+void Picture::setMessage(const QString &message)
+{
+    m_message = message;
+}
+
 #include "picture.moc"
