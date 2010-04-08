@@ -22,7 +22,7 @@ target_link_libraries(plasma_applet_plasmaboard
  
 install(TARGETS plasma_applet_plasmaboard DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES qwert_layout.xml pc105_layout.xml DESTINATION ${DATA_INSTALL_DIR}/plasmaboard )
+install( FILES basic.xml extended.xml DESTINATION ${DATA_INSTALL_DIR}/plasmaboard )
  
 install(FILES plasma_applet_plasmaboard.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

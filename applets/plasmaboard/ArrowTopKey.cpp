@@ -29,8 +29,12 @@ ArrowTopKey::ArrowTopKey(QPoint relativePosition, QSize relativeSize) :
 }
 
 void ArrowTopKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
+    painter->save();
+    setUpPainter(painter);
+    painter->setRenderHint(QPainter::Antialiasing);
 	painter->rotate(90);
 	paintArrow(painter);
-
+    painter->restore();
 }

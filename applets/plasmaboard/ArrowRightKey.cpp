@@ -28,8 +28,12 @@ ArrowRightKey::ArrowRightKey(QPoint relativePosition, QSize relativeSize) :
 }
 
 void ArrowRightKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
+    painter->save();
+    setUpPainter(painter);
+    painter->setRenderHint(QPainter::Antialiasing);
 	painter->rotate(180);
 	paintArrow(painter);
-
+    painter->restore();
 }

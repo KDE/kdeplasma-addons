@@ -79,7 +79,6 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
 
     m_repeatTimer = new QTimer(this);
     connect(m_repeatTimer, SIGNAL(timeout()), this, SLOT(repeatKeys()));
-
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SLOT(themeChanged()));
 
 }
@@ -207,6 +206,14 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Insert), QString(i18nc("The insert key on a keyboard", "Ins")));
     else if(action == "PAGEDOWN")
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Down), QString(i18nc("The page down key on a keyboard", "PgDn")));
+    else if(action == "ARROWUP")
+        return new ArrowTopKey(point, size);
+    else if(action == "ARROWDOWN")
+        return new ArrowBottomKey(point, size);
+    else if(action == "ARROWLEFT")
+        return new ArrowLeftKey(point, size);
+    else if(action == "ARROWRIGHT")
+        return new ArrowRightKey(point, size);
 
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));

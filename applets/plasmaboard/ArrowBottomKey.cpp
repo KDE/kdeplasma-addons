@@ -28,7 +28,12 @@ ArrowBottomKey::ArrowBottomKey(QPoint relativePosition, QSize relativeSize) :
 }
 
 void ArrowBottomKey::paint(QPainter *painter){
+    FuncKey::paint(painter);
 
+    painter->save();
+    setUpPainter(painter);
+    painter->setRenderHint(QPainter::Antialiasing);
 	painter->rotate(-90);
 	paintArrow(painter);
+    painter->restore();
 }

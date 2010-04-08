@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keyboard title="Basic QWERT" spacing="40"> 
+<keyboard title="Basic" spacing="40"> 
 <row height="2000" width="650">
   <key code="49"></key>
   <key code="10"></key>

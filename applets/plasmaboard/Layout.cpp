@@ -20,6 +20,7 @@
 #include "Layout.h"
 #include <QFile>
 #include <QXmlStreamReader>
+#include <KLocale>
 
 Layout::Layout(QString path)
 {
@@ -32,7 +33,7 @@ Layout::Layout(QString path)
     // reading in header information
     if (xmlReader->readNextStartElement()) {
         if (xmlReader->name() == "keyboard"){
-            m_name = xmlReader->attributes().value("title").toString();
+            m_name = i18n(xmlReader->attributes().value("title").toString().toAscii());
         }
     }
 
