@@ -22,10 +22,10 @@ target_link_libraries(plasma_applet_plasmaboard
  
 install(TARGETS plasma_applet_plasmaboard DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES basic.xml extended.xml DESTINATION ${DATA_INSTALL_DIR}/plasmaboard )
- 
 install(FILES plasma_applet_plasmaboard.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
+
+add_subdirectory(layouts)
         
 #install(FILES plasmaboard_key.svg
 #	DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
