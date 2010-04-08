@@ -56,20 +56,18 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
     }
     
     const QString data = QString::fromUtf8( job->data() );
-    kDebug() << "####### data " << data << endl;
+    //kDebug() << "####### data " << data << endl;
     
-    // TODO extract the picture name "image/*.jpg" better from data!!!
-    const QString pattern( "<IMG SRC= \"archive/images/*.jpg" );
+    const QString pattern( "<p><strong><a href=*" );
     QRegExp exp( pattern );
     exp.setPatternSyntax(QRegExp::Wildcard);
     
     int pos = exp.indexIn( data ) + pattern.length();
-    kDebug() << "length " << exp.matchedLength() << endl;
-    const QString sub = data.mid( pos, exp.matchedLength() -31);
+    kDebug() << "length " << pattern.length() << endl;
+    const QString sub = data.mid( pos, pattern.length()+41);
     kDebug() << "####### sub " << sub << endl; //TODO should return *.jpg
     
-    KUrl url( QString( "http://epod.usra.edu/archive/images/%1" ).arg( sub ) );
-    kDebug() << "####### URL " << url.path() << endl; //should return URL for the pic
+    KUrl url(  sub  );
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
     QObject::connect(imageJob, SIGNAL( finished( KJob* )), mParent, SLOT( imageRequestFinished( KJob* ) ) );
@@ -96,7 +94,7 @@ EpodProvider::EpodProvider( QObject *parent, const QVariantList &args )
     else
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
-    KUrl url( QString( "http://epod.usra.edu/" ) );
+    KUrl url( QString( "http://epod.usra.edu/blog/" ) );
     KIO::StoredTransferJob *job = KIO::storedGet( url );
 
     connect( job, SIGNAL( finished( KJob* ) ), SLOT( pageRequestFinished( KJob* ) ) );
