@@ -168,6 +168,7 @@ class Mandelbrot : public Plasma::Wallpaper
         MandelbrotRenderThread **m_renderThreads;
         int m_renderThreadCount;
         QPointF m_mousePressPos, m_mouseLastMovePos;
+        Qt::MouseButtons m_mousePressedButtons;
         int m_min_iter_divergence;
         QString m_cacheKey;
         int m_tilesFinishedRendering;

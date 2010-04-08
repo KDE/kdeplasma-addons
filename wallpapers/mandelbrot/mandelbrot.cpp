@@ -233,6 +233,7 @@ void Mandelbrot::mousePressEvent(QGraphicsSceneMouseEvent *event)
     event->ignore();
     if(m_lock) return;
     m_mousePressPos = m_mouseLastMovePos = event->pos();
+    m_mousePressedButtons = event->buttons();
     if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
 }
 
@@ -240,7 +241,7 @@ void Mandelbrot::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     event->ignore();
     if(m_lock) return;
-    if(event->buttons() & (Qt::LeftButton|Qt::MidButton)) event->accept();
+    if(m_mousePressedButtons & (Qt::LeftButton|Qt::MidButton)) event->accept();
 }
 
 void Mandelbrot::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
