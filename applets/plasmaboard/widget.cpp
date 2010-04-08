@@ -163,6 +163,51 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
     }
     else if(action == "TAB")
         return new TabKey(point, size);
+    else if(action == "ESCAPE")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Escape), QString(i18nc("The escape key on a keyboard", "Esc")));
+    else if(action == "F1")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F1), QString(i18n("F1")));
+    else if(action == "F2")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F2), QString(i18n("F2")));
+    else if(action == "F3")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F3), QString(i18n("F3")));
+    else if(action == "F4")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F4), QString(i18n("F4")));
+    else if(action == "F5")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F5), QString(i18n("F5")));
+    else if(action == "F6")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F6), QString(i18n("F6")));
+    else if(action == "F7")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F7), QString(i18n("F7")));
+    else if(action == "F8")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F8), QString(i18n("F8")));
+    else if(action == "F9")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F9), QString(i18n("F9")));
+    else if(action == "F10")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F10), QString(i18n("F10")));
+    else if(action == "F11")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F11), QString(i18n("F11")));
+    else if(action == "F12")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_F12), QString(i18n("F12")));
+    else if(action == "PRINT")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Print), QString(i18nc("The print key on a keyboard", "Print")));
+    else if(action == "NUM")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Num_Lock), QString(i18nc("The num key on a keyboard", "Num")));
+    else if(action == "PAUSE")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Pause), QString(i18nc("The pause key on a keyboard", "Pause")));
+    else if(action == "HOME")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Home), QString(i18nc("The home key on a keyboard", "Home")));
+    else if(action == "DEL")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Delete), QString(i18nc("The delete key on a keyboard", "Del")));
+    else if(action == "END")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_End), QString(i18nc("The end key on a keyboard", "End")));
+    else if(action == "PAGEUP")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Up), QString(i18nc("The page up key on a keyboard", "PgUp")));
+    else if(action == "INSERT")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Insert), QString(i18nc("The insert key on a keyboard", "Ins")));
+    else if(action == "PAGEDOWN")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_Page_Down), QString(i18nc("The page down key on a keyboard", "PgDn")));
+
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
 }
