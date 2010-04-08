@@ -122,9 +122,10 @@ class Mandelbrot : public Plasma::Wallpaper
         virtual void init(const KConfigGroup &config);
         virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
         virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
         virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
 
-        /** starts rendering. For restarting, call abortRendering() beforehand
+        /** (re-)starts rendering.
           * \param renderFirst pixel in the image that the user is most interested in. The nearest tiles will be rendered first.
           */
         void startRendering(const QPointF& renderFirst);
