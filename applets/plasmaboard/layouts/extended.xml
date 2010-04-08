@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keyboard title="Complete" spacing="30"> 
+<keyboard title="Extended" spacing="30"> 
 <row height="1450" width="550">
   <fkey action="ESCAPE"></fkey>
   <space width="100"></space>
