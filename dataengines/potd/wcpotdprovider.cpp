@@ -55,15 +55,8 @@ void WcpotdProvider::Private::pageRequestFinished( KJob *_job )
 	return;
     }
 
-    const QString data = QString::fromUtf8( job->data() );
-    //get image URL
-    const QString pattern( "<a href=\"http://commons.wikimedia.org/wiki/Image:*.jpg" );
-    QRegExp exp( pattern );
-    exp.setPatternSyntax(QRegExp::Wildcard);
-    int pos = exp.indexIn( data );
-    //38 is for <img src=\"http://commons.wikimedia.org
-    const QString sub = data.mid( pos+49, pattern.length()-14);//FIXME check if this really works!!!
-    KUrl picUrl( QString( "http://toolserver.org/tsthumb/tsthumb?f=%1&amp;domain=commons.wikimedia.org&amp;w=800" ).arg( sub ) );
+
+    KUrl picUrl( QString( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" ) );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( picUrl );
     mParent->connect( imageJob, SIGNAL( finished( KJob *) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
@@ -89,7 +82,7 @@ WcpotdProvider::WcpotdProvider( QObject *parent, const QVariantList &args )
     else
 	Q_ASSERT( false && "Invalid type passed to potd provider" );
 
-    KUrl url( "http://toolserver.org/~daniel/potd/commons/potd-800x600.snippet" );
+    KUrl url( "http://tools.wikimedia.de/~daniel/potd/potd.php/commons/800x600" );
     KIO::StoredTransferJob *job = KIO::storedGet( url );
     connect( job, SIGNAL( finished( KJob *) ), SLOT( pageRequestFinished( KJob* ) ) );
 }
