@@ -34,6 +34,7 @@
 
 #include <Plasma/Label>
 #include <Plasma/Meter>
+#include <Plasma/DataEngine>
 #include <Plasma/PushButton>
 
 #include "krazycollector.h"
@@ -91,6 +92,25 @@ void KdeObservatory::init()
     createViewProviders();
     runCollectors();
     setPopupIcon(KIcon("kdeobservatory"));
+    Plasma::DataEngine *engine = dataEngine("kdecommits");
+    if (!engine) kDebug() << "Nao leu engine"; else kDebug() << "Leu o engine !";
+    Plasma::DataEngine::Data data = engine->query("top-projects");
+    kDebug() << "Top project names  : " << data["projects"].toStringList();
+    kDebug() << "Top project commit#: " << data["commits"].toStringList();
+
+    Plasma::DataEngine::Data data2 = engine->query("top-developers/plasma");
+    kDebug() << "Top plasma developer names  : " << data2["developers"].toStringList();
+    kDebug() << "Top plasma developer commit#: " << data2["commits"].toStringList();
+
+    Plasma::DataEngine::Data data3 = engine->query("krazy-report/plasma");
+    QStringList list1 = data3["types"].toStringList();
+    QList<QVariant> list2 = data3["errorLists"].toList();
+    
+    for (int i = 0; i < list1.size(); ++i)
+    {
+        QStringList list3 = list2.at(i).toStringList();
+        kDebug() << "Error of type " << list1.at(i) << list3;
+    }
 }
 
 QGraphicsWidget *KdeObservatory::graphicsWidget()
