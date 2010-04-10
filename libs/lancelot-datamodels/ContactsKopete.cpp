@@ -29,8 +29,6 @@
 #include "Logger.h"
 
 #define KOPETE_SERVICE "org.kde.kopete"
-// #define UPDATE_INTERVAL 15000
-#define CHECK_RUNNING_INTERVAL 5000
 #define DELAY_INTERVAL 500
 
 namespace Lancelot {
