@@ -72,6 +72,8 @@ protected:
 protected Q_SLOTS:
     void contactChanged(const QString & contactId);
 
+    void kopeteServiceOwnerChanged(const QString & serviceName, const QString & oldOwner, const QString & newOwner);
+
 private:
     class Private;
     Private * const d;

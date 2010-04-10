@@ -19,6 +19,8 @@
 
 #include "ContactsKopete.h"
 
+#include <QDBusServiceWatcher>
+
 #include <KDebug>
 #include <KIcon>
 #include <KStandardDirs>
@@ -26,6 +28,7 @@
 #include "kopete_interface.h"
 #include "Logger.h"
 
+#define KOPETE_SERVICE "org.kde.kopete"
 // #define UPDATE_INTERVAL 15000
 #define CHECK_RUNNING_INTERVAL 5000
 #define DELAY_INTERVAL 500
@@ -35,49 +38,79 @@ namespace Models {
 
 class ContactsKopete::Private {
 public:
-    Private()
-        : interface(NULL), kopeteRunning(false)
+    Private(ContactsKopete * parent)
+        : interface(NULL), q(parent)
     {}
 
     ~Private()
     {
-        delete interface;
     }
 
     org::kde::Kopete * interface;
+
+    void serviceOnline()
+    {
+        if (interface) return;
+
+        interface = new org::kde::Kopete(
+            KOPETE_SERVICE, "/Kopete", QDBusConnection::sessionBus());
+        connect(interface, SIGNAL(contactChanged(const QString &)),
+            q, SLOT(contactChanged(const QString &)));
+
+        q->load(true);
+    }
+
+    void serviceOffline()
+    {
+        if (!interface) return;
+
+        delete interface;
+        interface = NULL;
+
+        q->load(true);
+    }
+
+    QDBusServiceWatcher * dbusWatcher;
+
     QBasicTimer delayTimer;
-    QBasicTimer checkRunningTimer;
     QStringList contactsToUpdate;
-    QString kopeteAvatarsDir;
-    bool kopeteRunning : 1;
     bool noOnlineContacts : 1;
+
+private:
+    ContactsKopete * const q;
 };
 
 ContactsKopete::ContactsKopete()
-    : d(new Private())
+    : d(new Private(this))
 {
     setSelfTitle(i18n("Contacts"));
     setSelfIcon(KIcon("kopete"));
 
-    d->interface = new org::kde::Kopete(
-            "org.kde.kopete", "/Kopete", QDBusConnection::sessionBus());
+    // service watcher
+    d->dbusWatcher = new QDBusServiceWatcher(
+        KOPETE_SERVICE, QDBusConnection::sessionBus());
 
-    d->kopeteAvatarsDir = KStandardDirs::locate(
-            "data", "kopete/avatars/Contacts/");
+    connect(d->dbusWatcher, SIGNAL(serviceOwnerChanged(const QString &, const QString &, const QString &)),
+            this, SLOT(kopeteServiceOwnerChanged(const QString &, const QString &, const QString &)));
 
-    d->checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
+    // other
+
+    kopeteServiceOwnerChanged(QString::null, QString::null, QString::null);
+
     load();
+}
+
+ContactsKopete::~ContactsKopete()
+{
+    delete d->interface;
+    delete d->dbusWatcher;
+    delete d;
 }
 
 void ContactsKopete::timerEvent(QTimerEvent * event)
 {
-    if (event->timerId() == d->checkRunningTimer.timerId()) {
-        load();
-    } else if (event->timerId() == d->delayTimer.timerId()) {
-        // kDebug() << "contactChanged [delayed]:"
-        //     << d->contactsToUpdate.size();
+    if (event->timerId() == d->delayTimer.timerId()) {
         d->delayTimer.stop();
-        // checking whether we have a large update
         if (d->contactsToUpdate.size() > 5) {
             load(true);
         } else {
@@ -89,14 +122,9 @@ void ContactsKopete::timerEvent(QTimerEvent * event)
     }
 }
 
-ContactsKopete::~ContactsKopete()
-{
-    delete d;
-}
-
 void ContactsKopete::activate(int index)
 {
-    if (d->kopeteRunning && !d->noOnlineContacts) {
+    if (d->interface && !d->noOnlineContacts) {
         QString data = title(index);
         Logger::self()->log("kopete-model", data);
         d->interface->openChat(data);
@@ -113,47 +141,33 @@ void ContactsKopete::load()
 
 void ContactsKopete::load(bool forceReload)
 {
+    if (forceReload) {
+        d->delayTimer.stop();
+        d->contactsToUpdate.clear();
+    }
+
     setEmitInhibited(true);
-    bool statusChanged = false;
-    // clear();
 
-    if (!d->interface->isValid()) {
-        if (d->kopeteRunning) {
-            disconnect(d->interface, SIGNAL(contactChanged(const QString &)),
-                    this, SLOT(contactChanged(const QString &)));
-            statusChanged = true;
-        }
+    if (!d->interface) {
 
-        if (forceReload || statusChanged) {
-            clear();
-            d->kopeteRunning = false;
-            d->checkRunningTimer.start(CHECK_RUNNING_INTERVAL, this);
+        clear();
 
-            if (addService("kopete")) {
-                Item * item = const_cast < Item * > (& itemAt(0));
-                item->title = i18n("Messaging client");
-                item->description = i18n("Messaging client is not running");
-            } else {
-                add(i18n("Unable to find Kopete"), "",
-                        KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
-            }
+        if (addService("kopete")) {
+            Item * item = const_cast < Item * > (& itemAt(0));
+            // item->title = i18n("Messaging client");
+            item->description = i18n("Messaging client is not running");
+        } else {
+            add(i18n("Unable to find Kopete"), "",
+                    KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
         }
     } else {
-        if (!d->kopeteRunning) {
-            connect(d->interface, SIGNAL(contactChanged(const QString &)),
-                    this, SLOT(contactChanged(const QString &)));
-            statusChanged = true;
-        }
-
-        if (forceReload || statusChanged) {
+        if (forceReload) {
             // kDebug() << "full";
             clear();
-            d->kopeteRunning = true;
             d->noOnlineContacts = false;
 
             QDBusReply < QStringList > contacts = d->interface->contactsByFilter("online");
             if (!contacts.isValid()) {
-                d->kopeteRunning = false;
                 return;
             }
 
@@ -167,12 +181,18 @@ void ContactsKopete::load(bool forceReload)
             }
         }
     }
+
     setEmitInhibited(false);
     emit updated();
 }
 
 void ContactsKopete::updateContactData(const QString & contact)
 {
+    if (d->noOnlineContacts) {
+        load(true);
+        return;
+    }
+
     // Retrieving contact name
     QDBusReply < QString > contactName = d->interface->getDisplayName(contact);
     if (!contactName.isValid()) {
@@ -191,6 +211,10 @@ void ContactsKopete::updateContactData(const QString & contact)
 
     QString avatarPath = contactProperties.value().value("picture").toString();
     avatarPath = KUrl(avatarPath).toLocalFile();
+    if (avatarPath.isEmpty()) {
+        avatarPath = "user-online";
+    }
+    kDebug() << "avatarPath" << avatarPath;
 
     QString status = contactProperties.value().value("status_message").toString();
     if (status.isEmpty()) {
@@ -241,6 +265,31 @@ void ContactsKopete::contactChanged(const QString & contactId)
         d->contactsToUpdate << contactId;
     }
     d->delayTimer.start(DELAY_INTERVAL, this);
+}
+
+void ContactsKopete::kopeteServiceOwnerChanged(const QString & serviceName, const QString & oldOwner, const QString & newOwner)
+{
+    Q_UNUSED(oldOwner);
+
+    bool enabled;
+
+    if (serviceName.isEmpty()) {
+        enabled = QDBusConnection::sessionBus().interface()->isServiceRegistered(KOPETE_SERVICE).value();
+
+    } else {
+        enabled = !newOwner.isEmpty();
+
+    }
+
+    kDebug() << "service enabled" << enabled;
+
+    if (enabled) {
+        d->serviceOnline();
+
+    } else {
+        d->serviceOffline();
+
+    }
 }
 
 } // namespace Models
