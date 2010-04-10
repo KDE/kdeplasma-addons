@@ -28,6 +28,7 @@ class KdeCommitsEngine : public Plasma::DataEngine
     Q_OBJECT
 public:
     KdeCommitsEngine(QObject *parent, const QVariantList &args);
+    void init();
 
 protected:
     bool sourceRequestEvent(const QString& name);
