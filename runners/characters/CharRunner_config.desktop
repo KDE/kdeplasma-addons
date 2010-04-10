@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=special Characters
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=kcm_krunner_charrunner
+X-KDE-ParentComponents=CharacterRunner
+X-KDE-PluginKeyword=kcm_krunner_charrunner 

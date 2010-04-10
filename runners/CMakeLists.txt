@@ -6,6 +6,7 @@ add_subdirectory(konquerorsessions)
 add_subdirectory(kopete)
 add_subdirectory(mediawiki)
 add_subdirectory(spellchecker)
+add_subdirectory(characters)
 
 if(KDEPIMLIBS_FOUND)
 add_subdirectory(contacts)

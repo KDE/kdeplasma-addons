@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=special characters
+Name[de]=Sonderzeichen
+Icon=accessories-character-map
+Comment=creates special characters from its hexadecimal-code
+Comment[de]=erzeugt Sonderzeichen aus ihrem Hexadezimal-code
+Type=Service
+X-KDE-ServiceTypes=Plasma/Runner
+
+X-KDE-Library=krunner_charrunner
+X-KDE-PluginInfo-Author=Anton Kreuzkamp
+X-KDE-PluginInfo-Email=akreuzkamp@web.de
+X-KDE-PluginInfo-Name=CharacterRunner
+X-KDE-PluginInfo-Version=1
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true 
