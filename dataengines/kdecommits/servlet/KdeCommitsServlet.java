@@ -36,12 +36,12 @@ public class KdeCommitsServlet extends HttpServlet
             String url ="jdbc:mysql://" + dbHost + ":3306/" + dbName;
             Connection Conn = DriverManager.getConnection(url, username, password);
             Statement Stmt = Conn.createStatement();
-            String query = "select * from developers";
+            String query = "select p.commit_subject, count(*) from projects p, commits c where INSTR(c.path, p.commit_subject) > 0 group by p.commit_subject order by count(*) desc";
             ResultSet res = Stmt.executeQuery(query);
             out.println("Query result :</br>");
             while(res.next())
             {
-                out.println(res.getObject(1) + " - " + res.getObject(2) + " - " + res.getObject(3) + " - " + res.getObject(4));
+                out.println(res.getObject(1) + " - " + res.getObject(2) + "</br>");
             }
             out.println("</br>");
         }
