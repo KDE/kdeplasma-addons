@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=KDE Commits Engine
+Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
+Type=Service
+ 
+X-KDE-ServiceTypes=Plasma/DataEngine
+X-KDE-Library=plasma_engine_kdecommits
+X-Plasma-EngineName=kdecommits
+X-KDE-PluginInfo-Author=Sandro Andrade
+X-KDE-PluginInfo-Email=sandroandrade@kde.org
+X-KDE-PluginInfo-Name=kdecommits
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Development Tools
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
