@@ -2,7 +2,7 @@
 Name=KDE Commits Engine
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
 Type=Service
- 
+
 X-KDE-ServiceTypes=Plasma/DataEngine
 X-KDE-Library=plasma_engine_kdecommits
 X-Plasma-EngineName=kdecommits
