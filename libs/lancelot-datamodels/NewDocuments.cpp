@@ -46,11 +46,11 @@ NewDocuments::NewDocuments()
 
         QStringList applications;
         applications
-            << "ooo-writer|writer|kword"
-            << "ooo-impress|impress|kpresenter"
-            << "ooo-calc|calc|kspread"
-            << "inkscape|karbon"
-            << "gimp|krita";
+            << "kword|openoffice.org-writer.desktop|ooo-writer|writer"
+            << "kpresenter|openoffice.org-impress.desktop|ooo-impress|impress"
+            << "kspread|openoffice.org-calc.desktop|ooo-calc|calc"
+            << "karbon|inkscape"
+            << "krita|gimp";
 
         int index = 0;
 
