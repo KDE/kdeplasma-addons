@@ -57,15 +57,15 @@ void EpodProvider::Private::pageRequestFinished(KJob *_job)
     
     const QString data = QString::fromUtf8( job->data() );
     //kDebug() << "####### data " << data << endl;
-    
-    const QString pattern( "<p><strong><a href=*" );
+
+    const QString pattern( "<strong><a href=*" );
     QRegExp exp( pattern );
     exp.setPatternSyntax(QRegExp::Wildcard);
     
     int pos = exp.indexIn( data ) + pattern.length();
-    kDebug() << "length " << pattern.length() << endl;
+    //kDebug() << "length " << pattern.length() << endl;
     const QString sub = data.mid( pos, pattern.length()+41);
-    kDebug() << "####### sub " << sub << endl; //TODO should return *.jpg
+    //kDebug() << "####### sub " << sub << endl; //TODO should return *.jpg
     
     KUrl url(  sub  );
 
