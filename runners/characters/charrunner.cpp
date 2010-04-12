@@ -33,6 +33,7 @@ CharacterRunner::CharacterRunner( QObject* parent, const QVariantList &args )
                          Plasma::RunnerContext::ShellCommand);
     reloadConfiguration();
 }
+
 CharacterRunner::~CharacterRunner()
 {
 }
@@ -40,23 +41,19 @@ CharacterRunner::~CharacterRunner()
 void CharacterRunner::reloadConfiguration()
 {
   KConfigGroup grp = config(); //Create config-object
-  
+
   m_triggerWord = grp.readEntry(CONFIG_TRIGGERWORD, "#"); //read out the triggerword
-  for(int i=0; i<grp.readEntry(CONFIG_ALIASES, QList<QString>()).size(); i++) //Copy alias-/codelists
-  {
-    m_aliases.append(grp.readEntry(CONFIG_ALIASES, QList<QString>())[i]);
-    m_codes.append(grp.readEntry(CONFIG_CODES, QList<QString>())[i]);
-  }
+  m_aliases = grp.readEntry(CONFIG_ALIASES, QStringList());
+  m_codes = grp.readEntry(CONFIG_CODES, QStringList());
   addSyntax(Plasma::RunnerSyntax(m_triggerWord + ":q:",
-                                     i18n("Creates Characters from <search term> if it's a hexadecimalcode or a defined alias.")));
+                                 i18n("Creates Characters from :q: if it's a hexadecimal code or a defined alias.")));
 }
 
 void CharacterRunner::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
     QString specChar;
-    
-    
+
     term = term.replace(' ', ""); //remove blanks
     if (term.length() < 2) //ignore too short queries
     {
@@ -75,7 +72,7 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
     
     bool ok; //checkvariable
     int hex = term.toInt(&ok, 16); //convert query into int
-    if(!ok) //check if conversion was successful
+    if (!ok) //check if conversion was successful
     {
       return;
     }
