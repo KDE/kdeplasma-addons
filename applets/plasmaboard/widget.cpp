@@ -53,6 +53,7 @@ PlasmaboardWidget::PlasmaboardWidget(QGraphicsWidget *parent)
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    setBackgroundHints(Plasma::Applet::TranslucentBackground);
 
     Helpers::buildUp();
     m_isLevel2 = false;
