@@ -22,6 +22,7 @@
 #include <QAction>
 #include <QGraphicsView>
 
+#include <KConfigDialog>
 #include <KIcon>
 #include <KWindowSystem>
 #include <KStandardDirs>
@@ -38,6 +39,7 @@ PanelIcon::PanelIcon(QObject *parent, const QVariantList &args)  :
     //setFocusPolicy(Qt::NoFocus);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setPassivePopup(true);
+    setHasConfigurationInterface(true);
 }
 
 
@@ -46,7 +48,27 @@ PanelIcon::~PanelIcon() {
     qDeleteAll(m_layouts);
 }
 
-QList<QAction*> PanelIcon::contextualActions(){
+void PanelIcon::configAccepted()
+{
+    initKeyboard(m_layout);
+}
+
+void PanelIcon::configChanged(QString name)
+{
+    Layout *lay = m_layouts[0];
+
+    Q_FOREACH(Layout* l, m_layouts){
+        if(l->name() == name){
+            lay = l;
+            break;
+        }
+    }
+
+    m_layout = lay->path();
+    ui.descriptionLabel->setText(lay->description());
+}
+
+/*QList<QAction*> PanelIcon::contextualActions(){
     QList<QAction*> list;
     Q_FOREACH(Layout* l, m_layouts){
         QAction *action = new QAction(l->name(), this);
@@ -60,7 +82,27 @@ QList<QAction*> PanelIcon::contextualActions(){
     list << sep;
 
     return list;
+}*/
+
+void PanelIcon::createConfigurationInterface(KConfigDialog *parent)
+{
+    QWidget *widget = new QWidget(parent);
+    ui.setupUi(widget);
+    parent->addPage(widget, i18nc("Different keyboard layouts","Layouts"), "plasmaboard");
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+
+    Q_FOREACH(Layout* l, m_layouts){
+        ui.layoutsComboBox->addItem(l->name(), l->path());
+        if(l->path() == m_layout){
+            ui.descriptionLabel->setText(l->description());
+            ui.layoutsComboBox->setCurrentIndex(ui.layoutsComboBox->count() - 1);
+        }
+    }
+
+    connect(ui.layoutsComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(configChanged(QString)));
 }
+
 
 void PanelIcon::init() {
 
@@ -92,7 +134,6 @@ void PanelIcon::init() {
 
 void PanelIcon::initKeyboard() {
     QString path = ((QAction*)sender())->data().toString();
-    qDebug() << path;
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(path);
     m_plasmaboard->refreshKeys();
@@ -103,6 +144,8 @@ void PanelIcon::initKeyboard() {
 void PanelIcon::initKeyboard(QString layoutFile) {
     m_plasmaboard->deleteKeys();
     m_plasmaboard->initKeyboard(layoutFile);
+    m_plasmaboard->refreshKeys();
+    m_plasmaboard->update();
     saveLayout(layoutFile);
 }
 

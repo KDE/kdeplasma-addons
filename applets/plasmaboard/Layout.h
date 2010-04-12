@@ -26,12 +26,14 @@ class Layout
 {
 public:
     Layout(QString path);
+    QString description();
     QString name();
     QString path();
 
 private:
     QString m_name;
     QString m_path;
+    QString m_description;
 };
 
 #endif // LAYOUT_H

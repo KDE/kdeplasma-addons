@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keyboard title="Full" spacing="30"> 
+<keyboard title="Full" spacing="30" description="Full pc-105 keyboard providing functional keys and keypad"> 
 <row height="1450" width="450">
   <fkey action="ESCAPE"></fkey>
   <space width="50"></space>

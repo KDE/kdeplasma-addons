@@ -34,12 +34,18 @@ Layout::Layout(QString path)
     if (xmlReader->readNextStartElement()) {
         if (xmlReader->name() == "keyboard"){
             m_name = i18n(xmlReader->attributes().value("title").toString().toAscii());
+            m_description = i18n(xmlReader->attributes().value("description").toString().toAscii());
         }
     }
 
     delete file;
     delete xmlReader;
 }
+
+QString Layout::description() {
+    return m_description;
+}
+
 
 QString Layout::name() {
     return m_name;

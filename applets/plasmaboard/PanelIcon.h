@@ -24,6 +24,8 @@
 #include "plasma/popupapplet.h"
 #include "widget.h"
 
+#include "ui_config.h"
+
 class Layout;
 
 class PanelIcon: public Plasma::PopupApplet {
@@ -37,16 +39,19 @@ public:
 	 * Adds the layout switching entry to the context menu
 	 */
 
-	QList<QAction*> contextualActions();
+    //QList<QAction*> contextualActions();
 
 
 public Q_SLOTS:
+    void configAccepted();
+    void configChanged(QString name);
     /**
       * Initialize the keyboard with the configured layout
       */
     void initKeyboard();
 
 protected:
+    void createConfigurationInterface(KConfigDialog *parent);
 	/*
 	 * Clears all pressed keys when keyboard is cloased
 	 */
@@ -62,6 +67,8 @@ private:
     QList<Layout*> m_layouts;
 	PlasmaboardWidget *m_plasmaboard;
 	const QVariantList args;
+
+    Ui::config ui;
 
 };
 
