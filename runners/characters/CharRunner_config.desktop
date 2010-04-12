@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=special Characters
+Name[pt]=Caracteres Especiais
+Name[pt_BR]=caracteres especiais
+Name[sv]=specialtecken
+Name[uk]=Спеціальні символи
 Type=Service
 X-KDE-ServiceTypes=KCModule
 
