@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=KDE Commits Engine
+Name[pt]=Motor de Envios de Código para o KDE
+Name[pt_BR]=Mecanismo de envio (commit) do KDE
+Name[sv]=KDE-incheckningsgränssnitt
+Name[uk]=Рушій внесків до KDE
 Comment=A Data Engine for acquiring consolidated data about KDE SVN Commits
+Comment[pt]=Um motor de dados para adquirir os dados consolidados dos envios de SVN do KDE
+Comment[pt_BR]=Um mecanismo de dados para adquirir dados consolidados sobre os envios (commits) do SVN do KDE
+Comment[sv]=Ett datagränssnitt för att hämta sammanställd data om incheckningar i KDE:s SVN-arkiv
+Comment[uk]=Рушій даних для отримання загальних даних щодо внесків до SVN KDE
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
