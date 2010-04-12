@@ -214,7 +214,38 @@ FuncKey* PlasmaboardWidget::createFunctionKey(QPoint &point, QSize &size, QStrin
         return new ArrowLeftKey(point, size);
     else if(action == "ARROWRIGHT")
         return new ArrowRightKey(point, size);
-
+    else if(action == "KEYPADDIVIDE")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Divide), QString(i18nc("Divider on the keypad", "/")));
+    else if(action == "KEYPADMULTIPLY")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Multiply), QString(i18nc("Multiplier on keypad", "*")));
+    else if(action == "KEYPADADD")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Add), QString(i18nc("Plus sign Divider on the keypad", "+")));
+    else if(action == "KEYPADSUBTRACT")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Subtract), QString(i18nc("Plus sign Divider on the keypad", "+")));
+    else if(action == "KEYPADENTER")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Enter), QString(i18nc("Enter key on the keypad", "Enter")));
+    else if(action == "KEYPADSEPARATOR")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_Separator), QString(i18nc("Seperator key on the keypad", ".")));
+    else if(action == "KEYPAD1")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_1), QString(i18nc("1 key on the keypad", "1")));
+    else if(action == "KEYPAD2")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_2), QString(i18nc("2 key on the keypad", "2")));
+    else if(action == "KEYPAD3")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_3), QString(i18nc("3 key on the keypad", "3")));
+    else if(action == "KEYPAD4")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_4), QString(i18nc("4 key on the keypad", "4")));
+    else if(action == "KEYPAD5")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_5), QString(i18nc("5 key on the keypad", "5")));
+    else if(action == "KEYPAD6")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_6), QString(i18nc("6 key on the keypad", "6")));
+    else if(action == "KEYPAD7")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_7), QString(i18nc("7 key on the keypad", "7")));
+    else if(action == "KEYPAD8")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_8), QString(i18nc("8 key on the keypad", "8")));
+    else if(action == "KEYPAD9")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_9), QString(i18nc("9 key on the keypad", "9")));
+    else if(action == "KEYPAD0")
+        return new FuncKey(point, size, Helpers::keysymToKeycode(XK_KP_0), QString(i18nc("0 key on the keypad", "0")));
     else
         return new FuncKey(point, size, Helpers::keysymToKeycode(XK_space), QString("Unkown"));
 }

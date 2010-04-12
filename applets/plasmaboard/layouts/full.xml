@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keyboard title="Full" spacing="30"> 
+<row height="1450" width="450">
+  <fkey action="ESCAPE"></fkey>
+  <space width="50"></space>
+  <fkey action="F1"></fkey>
+  <fkey action="F2"></fkey>
+  <fkey action="F3"></fkey>
+  <fkey action="F4"></fkey>
+  <space width="50"></space>
+  <fkey action="F5"></fkey>
+  <fkey action="F6"></fkey>
+  <fkey action="F7"></fkey>
+  <fkey action="F8"></fkey>
+  <space width="50"></space>
+  <fkey action="F9"></fkey>
+  <fkey action="F10"></fkey>
+  <fkey action="F11"></fkey>
+  <fkey action="F12"></fkey>
+  <space width="100"></space>
+  <fkey action="PRINT"></fkey>
+  <fkey action="NUM"></fkey>
+  <fkey action="PAUSE"></fkey>
+</row>
+<row height="1700" width="400">
+  <key code="49"></key>
+  <key code="10"></key>
+  <key code="11"></key>
+  <key code="12"></key>
+  <key code="13"></key>
+  <key code="14"></key>
+  <key code="15"></key>
+  <key code="16"></key>
+  <key code="17"></key>
+  <key code="18"></key>
+  <key code="19"></key>
+  <key code="20"></key>
+  <key code="21"></key>
+  <fkey action="BACKSPACE" width="850"></fkey>
+  <space width="110"></space>
+  <fkey action="INSERT" width="450"></fkey>
+  <fkey action="HOME" width="450"></fkey>
+  <fkey action="PAGEUP" width="450"></fkey> 
+  <space width="50"></space>
+  <space width="450"></space>
+  <fkey action="KEYPADDIVIDE" width="450"></fkey> 
+  <fkey action="KEYPADMULTIPLY" width="450"></fkey> 
+  <fkey action="KEYPADSUBTRACT" width="450"></fkey> 
+</row>
+<row height="1700" width="400">
+  <fkey action="TAB" width="600"></fkey>
+  <key code="24"></key>
+  <key code="25" ></key>
+  <key code="26" ></key>
+  <key code="27" ></key>
+  <key code="28" ></key>
+  <key code="29" ></key>
+  <key code="30" ></key>
+  <key code="31" ></key>
+  <key code="32" ></key>
+  <key code="33" ></key>
+  <key code="34" ></key>
+  <key code="35" ></key>
+  <space width="125"></space>
+  <fkey action="ENTER" width="485" height="3400"></fkey>
+  <space width="120"></space>
+  <fkey action="DEL" width="450"></fkey>
+  <fkey action="END" width="450"></fkey>
+  <fkey action="PAGEDOWN" width="450"></fkey>
+  <space width="50"></space>
+  <fkey action="KEYPAD7" width="450"></fkey> 	
+  <fkey action="KEYPAD8" width="450"></fkey> 	
+  <fkey action="KEYPAD9" width="450"></fkey> 	
+  <fkey action="KEYPADADD" width="450" height="3400"></fkey> 
+</row>
+<row height="1700" width="400">
+  <fkey action="CAPSLOCK" width="700"></fkey>
+  <key code="38"></key>
+  <key code="39" ></key>
+  <key code="40" ></key>
+  <key code="41" ></key>
+  <key code="42" ></key>
+  <key code="43" ></key>
+  <key code="44" ></key>
+  <key code="45" ></key>
+  <key code="46" ></key>
+  <key code="47" ></key>
+  <key code="48" ></key>
+  <key code="51" ></key>
+  <space width="2133"></space>
+  <space width="50"></space>
+  <fkey action="KEYPAD4" width="450"></fkey> 	
+  <fkey action="KEYPAD5" width="450"></fkey> 	
+  <fkey action="KEYPAD6" width="450"></fkey> 	
+</row>
+<row height="1700" width="400">
+  <fkey action="SHIFT" width="600"></fkey>
+  <key code="94"></key>
+  <key code="52"></key>
+  <key code="53" ></key>
+  <key code="54" ></key>
+  <key code="55" ></key>
+  <key code="56" ></key>
+  <key code="57" ></key>
+  <key code="58" ></key>
+  <key code="59" ></key>
+  <key code="60" ></key>
+  <key code="61" ></key>
+  <fkey action="SHIFT" width="1075"></fkey>
+  <space width="250"></space>
+  <fkey action="ARROWUP" width="450"></fkey>
+  <space width="880"></space>
+  <fkey action="KEYPAD1" width="450"></fkey> 	
+  <fkey action="KEYPAD2" width="450"></fkey> 	
+  <fkey action="KEYPAD3" width="450"></fkey> 	
+  <fkey action="KEYPADENTER" width="450" height="3400"></fkey> 
+</row>
+<row height="1600" width="550">
+  <fkey action="CONTROLLEFT"></fkey>
+  <fkey action="SUPERLEFT"></fkey>
+  <fkey action="ALT"></fkey>
+  <fkey action="SPACE" width="3100"></fkey>
+  <fkey action="ALTGR"></fkey>
+  <fkey action="CONTROLRIGHT"></fkey>
+  <space width="210"></space>
+  <fkey action="ARROWLEFT" width="450"></fkey>
+  <fkey action="ARROWDOWN" width="450"></fkey>
+  <fkey action="ARROWRIGHT" width="450"></fkey>
+  <space width="400"></space>
+  <fkey action="KEYPAD0" width="930"></fkey> 	
+  <fkey action="KEYPADSEPARATOR" width="450"></fkey> 	
+</row>
+</keyboard>
