@@ -51,7 +51,7 @@ void FuncKey::paintArrow(QPainter *painter){
 void FuncKey::paintLabel(QPainter *painter)
 {
     painter->save();
-    int fontSize = qMin(size().width(), size().height()) / 5;
+    int fontSize = qMin(size().width(), size().height()) / 5 - (label().size()/6 + 1);
     painter->setFont(QFont( Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize ));
     painter->drawText(rect(), Qt::AlignCenter, label());
     
