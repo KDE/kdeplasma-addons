@@ -528,8 +528,8 @@ void PlasmaboardWidget::press(FuncKey *key)
 
 void PlasmaboardWidget::refreshKeys()
 {
-    double factor_x = size().width() / 10000;
-    double factor_y = size().height() / 10001;
+    double factor_x = size().width() / 10048;
+    double factor_y = size().height() / 10002;
 
     Q_FOREACH(BoardKey* key, m_keys){
         key->updateDimensions(factor_x, factor_y);
