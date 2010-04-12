@@ -135,6 +135,8 @@ void PanelIcon::saveLayout(QString path) {
     KConfigGroup cg = config();
     cg.writeEntry("layout", path.right(path.size() - pos));
 
+    emit configNeedsSaving();
+
 }
 
 // This is the command that links your applet to the .desktop file
