@@ -4,6 +4,7 @@ Name[pt]=Caracteres Especiais
 Name[pt_BR]=caracteres especiais
 Name[sv]=specialtecken
 Name[uk]=Спеціальні символи
+Name[x-test]=xxspecial Charactersxx
 Type=Service
 X-KDE-ServiceTypes=KCModule
 
