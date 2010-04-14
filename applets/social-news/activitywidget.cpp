@@ -1,5 +1,6 @@
 /*
     Copyright 2009 by Marco Martin <notmart@gmail.com>
+    Copyright 2010 Frederik Gladhorn <gladhorn@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -43,7 +44,7 @@ ActivityWidget::ActivityWidget(DataEngine* engine, QGraphicsWidget* parent)
     setAcceptHoverEvents(true);
 
     m_layout = new QGraphicsLinearLayout(this);
-
+    
     m_image = new ContactImage(engine, this);
     m_image->setMinimumSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
     m_image->setMaximumSize(m_image->minimumSize());
@@ -71,12 +72,13 @@ ActivityWidget::~ActivityWidget()
 {
 }
 
-
 void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
 {
     m_atticaData = data;
     const QString user = data.value("user").toString();
     const QString message = data.value("message").toString();
+    m_timestamp = data.value("timestamp").toDateTime();
+    
     if (!message.startsWith(user)) {
         m_messageLabel->setText(i18n("%1: <i>%2</i>", user, message));
     } else {
@@ -87,6 +89,15 @@ void ActivityWidget::setActivityData(Plasma::DataEngine::Data data)
     updateActions();
 }
 
+QString ActivityWidget::message()
+{
+    return m_messageLabel->text();
+}
+
+QDateTime ActivityWidget::timestamp()
+{
+    return m_timestamp;
+}
 
 Plasma::DataEngine::Data ActivityWidget::activityData() const
 {

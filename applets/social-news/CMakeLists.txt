@@ -6,7 +6,6 @@ set(activities_SRCS
     activitylist.cpp
     activitywidget.cpp
     contactimage.cpp
-    sourcewatchlist.cpp
 )
 
 kde4_add_plugin(plasma_applet_opendesktop_activities ${activities_SRCS})

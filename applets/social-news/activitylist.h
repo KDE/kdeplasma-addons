@@ -2,6 +2,7 @@
     This file is part of KDE.
 
     Copyright (c) 2009 Eckhart Wörner <ewoerner@kde.org>
+    Copyright 2010 Frederik Gladhorn <gladhorn@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,24 +62,12 @@ class ActivityList : public Plasma::ScrollWidget
          */
         void setLimit(int limit);
 
-        /**
-         * Sets the provider used to fetch the activities
-         * @param provider the new provider
-         */
-        void setProvider(const QString& provider);
-
-        /**
-         * Adjusts the interval for refreshing the activities list
-         * @param interval the new interval in seconds
-         */
-        void setUpdateInterval(int interval);
-
-    private Q_SLOTS:
+    public Q_SLOTS:
         void dataUpdated(const QString& source, const Plasma::DataEngine::Data& data);
 
     private:
         QStringList getDisplayedActivities(const Plasma::DataEngine::Data& data);
-        
+        QSet<QString> m_knownEvents;
         QGraphicsWidget* m_container;
         Plasma::DataEngine* m_engine;
         QGraphicsLinearLayout* m_layout;

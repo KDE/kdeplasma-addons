@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2009 by Marco Martin <notmart@gmail.com>                    *
+ *   Copyright 2010 Frederik Gladhorn <gladhorn@kde.org>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -41,6 +42,9 @@ class ActivityWidget : public Plasma::Frame
 public:
     explicit ActivityWidget(Plasma::DataEngine* engine, QGraphicsWidget *parent = 0);
     virtual ~ActivityWidget();
+    
+    QDateTime timestamp();
+    QString message();
 
 public Q_SLOTS:
     void setActivityData(Plasma::DataEngine::Data data);
@@ -60,6 +64,7 @@ private:
     Plasma::Label *m_messageLabel;
     ContactImage* m_image;
     Plasma::IconWidget* m_link;
+    QDateTime m_timestamp;
     bool m_isHovered;
 };
 

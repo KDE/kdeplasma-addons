@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2009 by Eckhart Wörner <ewoerner@kde.org>                   *
+ *   Copyright 2010 Frederik Gladhorn <gladhorn@kde.org>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,14 +22,9 @@
 #define ACTIVITIES_H
 
 #include <Plasma/PopupApplet>
+#include <Plasma/DataEngine>
 
-
-namespace Plasma
-{
-    class DataEngine;
-}
 class ActivityList;
-class SourceWatchList;
 
 class OpenDesktopActivities : public Plasma::PopupApplet
 {
@@ -41,12 +37,15 @@ class OpenDesktopActivities : public Plasma::PopupApplet
 
     private Q_SLOTS:
         void initAsync();
-        void newActivities(const QSet<QString>& keys);
+        
+        void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
 
     private:
+        void initEngine();
         ActivityList* m_activityList;
-        SourceWatchList* m_activityWatcher;
-        QString m_provider;
+        Plasma::DataEngine* m_engine;
+        int m_updateInterval;
+        bool m_firstUpdateDone;
 };
 
 #endif

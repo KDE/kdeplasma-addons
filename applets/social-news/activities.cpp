@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2009 by Eckhart Wörner <ewoerner@kde.org>                   *
+ *   Copyright 2010 Frederik Gladhorn <gladhorn@kde.org>                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,12 +23,10 @@
 #include <QtCore/QTimer>
 
 #include <KLocale>
-#include <KNotification>
 
 #include <Plasma/DataEngine>
 
 #include "activitylist.h"
-#include "sourcewatchlist.h"
 #include <Plasma/Frame>
 
 
@@ -38,7 +37,10 @@ using namespace Plasma;
 
 OpenDesktopActivities::OpenDesktopActivities(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
-      m_activityList(0)
+      m_activityList(0),
+      m_engine(0),
+      m_updateInterval(10 * 60),
+      m_firstUpdateDone(false)
 {
     KGlobal::locale()->insertCatalog("plasma_applet_opendesktop_activities");
     setBackgroundHints(StandardBackground);
@@ -54,8 +56,8 @@ OpenDesktopActivities::OpenDesktopActivities(QObject *parent, const QVariantList
 QGraphicsWidget* OpenDesktopActivities::graphicsWidget()
 {
     if (!m_activityList) {
-        m_activityList = new ActivityList(dataEngine("ocs"), this);
-        m_activityList->setProvider(m_provider);
+        initEngine();
+        m_activityList = new ActivityList(m_engine, this);
         m_activityList->setMinimumSize(300, 300);
     }
     return m_activityList;
@@ -68,34 +70,39 @@ void OpenDesktopActivities::init()
     setAssociatedApplicationUrls(KUrl("http://opendesktop.org"));
 }
 
-
 void OpenDesktopActivities::initAsync()
 {
-    m_provider = config().readEntry("provider", "https://api.opendesktop.org/v1/");
-    if (m_activityList) {
-        m_activityList->setProvider(m_provider);
-    }
-
-    m_activityWatcher = new SourceWatchList(dataEngine("ocs"), this);
-    m_activityWatcher->setQuery("Activities\\provider:" + m_provider);
-    connect(m_activityWatcher, SIGNAL(keysAdded(QSet<QString>)), SLOT(newActivities(QSet<QString>)));
+    initEngine();
 }
 
-
-void OpenDesktopActivities::newActivities(const QSet<QString>& keys)
+void OpenDesktopActivities::initEngine()
 {
-    // FIXME: This still needs to take into account which activities have already been displayed
+    if (m_engine) {
+        return;
+    }
+    m_engine = dataEngine("ocs");
+    m_engine->connectSource("Providers", this);
+}
 
-    // Don't mass-spam the user with activities
-    if (keys.size() <= 2) {
-        foreach (const QString& key, keys) {
-            Plasma::DataEngine::Data activity = m_activityWatcher->value(key).value<Plasma::DataEngine::Data>();
-            KNotification* notification = new KNotification("activity");
-            notification->setTitle("OpenDesktop Activities");
-            notification->setText(activity.value("message").toString());
-            notification->setComponentData(KComponentData("plasma-applet-opendesktop-activities", "plasma-applet-opendesktop-activities", KComponentData::SkipMainComponentRegistration));
-            notification->sendEvent();
+void OpenDesktopActivities::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+{
+    if (source == "Providers") {
+        foreach(const QString& key, data.keys()) {
+            m_engine->connectSource("Activities\\provider:" + key, this);
         }
+    } else {
+        if (!m_firstUpdateDone) {
+            if (data.contains("SourceStatus") && data.value("SourceStatus") == "retrieving") {
+                return;
+            }
+            m_engine->connectSource(source, this, m_updateInterval * 1000);
+            m_firstUpdateDone = true;
+        }
+        
+        if (m_activityList) {
+            m_activityList->dataUpdated(source, data);
+        }
+        //kDebug() << "Data: " << data;
     }
 }
 
