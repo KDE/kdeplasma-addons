@@ -99,6 +99,8 @@ void OpenDesktop::init()
     m_geolocation->countryCode = cg.readEntry("geoCountryCode", QString());
     m_geolocation->latitude = cg.readEntry("geoLatitude", 0.0);
     m_geolocation->longitude = cg.readEntry("geoLongitude", 0.0);
+    
+    m_provider = cg.readEntry("provider", QString("https://api.opendesktop.org/v1/"));
 
     connectGeolocation();
 }
@@ -281,7 +283,6 @@ void OpenDesktop::dataUpdated(const QString &source, const Plasma::DataEngine::D
                 showFriendsWidget();
                 emit usernameChanged(user);
             }
-
         }
     }
 }
@@ -294,7 +295,16 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
     parent->addPage(generalSettingswidget, i18n("General"), Applet::icon());
 
     m_engine->connectSource(m_credentialsSource, this);
-    ui.provider->addItem(m_provider);
+    
+    QVariant providers = m_engine->query("Providers");
+    kDebug() << providers;
+    QVariantHash p = providers.toHash();
+    
+    foreach(const QString& key, p.keys()) {
+        QString name = p.value(key).toHash().value("Name").toString();
+        QString id = key;
+        ui.provider->addItem(name, id);
+    }
 
     QWidget *locationWidget = new QWidget(parent);
     locationUi.setupUi(locationWidget);
@@ -326,6 +336,15 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
 
 void OpenDesktop::configAccepted()
 {
+    QString provider = ui.provider->itemData(ui.provider->currentIndex()).toString();
+    if(provider != m_provider) {
+        kDebug() << "Provider changed" << provider;
+        m_provider = provider;
+        emit providerChanged(m_provider);
+        KConfigGroup cg = config();
+        cg.writeEntry("provider", m_provider);
+        emit configNeedsSaving();
+    }
     if (!ui.username->text().isEmpty()) {
         Service* service = m_engine->serviceForSource(settingsQuery(m_provider, "setCredentials"));
         KConfigGroup cg = service->operationDescription("setCredentials");
