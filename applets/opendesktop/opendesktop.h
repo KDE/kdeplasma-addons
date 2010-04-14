@@ -34,6 +34,7 @@ namespace Plasma
     class DataEngine;
     class TabBar;
 }
+class KCMultiDialog;
 
 class ActionStack;
 class ContactList;
@@ -77,6 +78,7 @@ class OpenDesktop : public Plasma::PopupApplet
         void showFriendsWidget();
         
         void loginFinished();
+        void kcm_finished();
         
     private:
         void connectGeolocation();
@@ -115,6 +117,9 @@ class OpenDesktop : public Plasma::PopupApplet
         QString m_user;
         QString m_password;
         QString m_credentialsSource;
+        
+        // show attica config
+        KCMultiDialog* m_kcmDialog;
 };
 
 #endif

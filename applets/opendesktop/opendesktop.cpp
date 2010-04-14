@@ -27,6 +27,7 @@
 #include <KLocale>
 #include <KToolInvocation>
 #include <KNotification>
+#include <KCMultiDialog>
 
 //plasma
 #include <Plasma/Label>
@@ -67,7 +68,8 @@ OpenDesktop::OpenDesktop(QObject *parent, const QVariantList &args)
         m_friendList(0),
         m_nearList(0),
         m_provider("https://api.opendesktop.org/v1/"),
-        m_credentialsSource(QString("Credentials\\provider:%1").arg(m_provider))
+        m_credentialsSource(QString("Credentials\\provider:%1").arg(m_provider)),
+        m_kcmDialog(0)
 {
     KGlobal::locale()->insertCatalog("plasma_applet_opendesktop");
     setBackgroundHints(StandardBackground);
@@ -305,6 +307,8 @@ void OpenDesktop::createConfigurationInterface(KConfigDialog *parent)
         QString id = key;
         ui.provider->addItem(name, id);
     }
+    
+    // FIXME connect current changed to get different user name
 
     QWidget *locationWidget = new QWidget(parent);
     locationUi.setupUi(locationWidget);
@@ -340,6 +344,7 @@ void OpenDesktop::configAccepted()
     if(provider != m_provider) {
         kDebug() << "Provider changed" << provider;
         m_provider = provider;
+        m_credentialsSource = QString("Credentials\\provider:%1").arg(m_provider),
         emit providerChanged(m_provider);
         KConfigGroup cg = config();
         cg.writeEntry("provider", m_provider);
@@ -359,7 +364,21 @@ void OpenDesktop::configAccepted()
 void OpenDesktop::registerAccount()
 {
     kDebug() << "register new account";
-    KToolInvocation::invokeBrowser("https://www.opendesktop.org/usermanager/new.php");
+    if (m_kcmDialog) {
+        m_kcmDialog->show();
+        return;
+    }
+    m_kcmDialog = new KCMultiDialog();
+    connect(m_kcmDialog, SIGNAL(finished()), this, SLOT(kcm_finished()));
+    m_kcmDialog->addModule("kcm_attica");
+    m_kcmDialog->setWindowTitle(i18nc("title of control center dialog to configure providers for community applet", "Provider Configuration - Community Plasma Applet"));
+    m_kcmDialog->show();   
+}
+
+void OpenDesktop::kcm_finished()
+{
+    m_kcmDialog->deleteLater();
+    m_kcmDialog = 0;
 }
 
 void OpenDesktop::syncGeoLocation()
