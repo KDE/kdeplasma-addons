@@ -205,7 +205,7 @@ QString UserWidget::addRow(const QString& title, const QString& text)
 
 void UserWidget::setStyleSheet(const QString &stylesheet)
 {
-    kDebug() << "Setting new stylesheet" << stylesheet;
+    // kDebug() << "Setting new stylesheet" << stylesheet;
     updateColors();
     setName();
     setInfo();
@@ -240,7 +240,7 @@ void UserWidget::updateColors()
         m_infoView->page()->setPalette(p);
     }
     update();
-    kDebug() << "CSS:" << m_css->styleSheet();
+    // kDebug() << "CSS:" << m_css->styleSheet();
 }
 
 void UserWidget::setName()
