@@ -7,6 +7,34 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 find_package(Lancelot REQUIRED)
 
+########### are akonadi and pimlibs available? ##########
+
+# find_package(KdepimLibs)
+
+if (KDEPIMLIBS_FOUND)
+   set( LANCELOT_DATAMODELS_HAS_PIMLIBS 1 )
+
+   include_directories(
+      ${AKONADI_INCLUDE_DIR}
+      ${KDEPIMLIBS_INCLUDE_DIRS}
+   )
+
+endif(KDEPIMLIBS_FOUND)
+
+macro_log_feature(LANCELOT_DATAMODELS_HAS_PIMLIBS
+   "Akonadi and KDE PIM Libs"
+   "Support for unread messages model"
+   "http://www.kde.org/"
+   FALSE
+   ""
+   "STRONGLY_RECOMMENDED: Akonadi and KDE PIM libraries are required for messages datamodel and kmail support"
+)
+
+configure_file(config-lancelot-datamodels.h.cmake
+   ${CMAKE_CURRENT_BINARY_DIR}/config-lancelot-datamodels.h )
+
+
+
 ########### define variables ##########
 
 set(LANCELOT_DATAMODELS_INCLUDE_DIR

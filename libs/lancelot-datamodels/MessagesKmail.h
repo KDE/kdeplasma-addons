@@ -22,10 +22,7 @@
 
 #include <lancelot/lancelot_export.h>
 
-#include <taskmanager/taskmanager.h>
 #include "BaseModel.h"
-
-using TaskManager::TaskPtr;
 
 namespace Lancelot {
 namespace Models {
@@ -46,8 +43,6 @@ public:
      */
     ~MessagesKmail();
 
-    void timerEvent(QTimerEvent * event);
-
 protected:
     /**
      * Opens the message folder
@@ -56,9 +51,6 @@ protected:
     void activate(int index);
 
     void load();
-
-protected Q_SLOTS:
-    void unreadCountChanged();
 
 private:
     class Private;

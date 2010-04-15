@@ -151,9 +151,9 @@ void ContactsKopete::load(bool forceReload)
         clear();
 
         if (addService("kopete")) {
-            Item * item = const_cast < Item * > (& itemAt(0));
+            // Item * item = const_cast < Item * > (& itemAt(0));
             // item->title = i18n("Messaging client");
-            item->description = i18n("Messaging client is not running");
+            // item->description = i18n("Messaging client is not running");
         } else {
             add(i18n("Unable to find Kopete"), "",
                     KIcon("application-x-executable"), QVariant("http://kopete.kde.org"));
