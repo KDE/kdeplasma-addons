@@ -24,48 +24,29 @@
 #include <KStandardDirs>
 
 #include "Logger.h"
-//#include "config-lancelot-datamodels.h"
 
-namespace Lancelot {
-namespace Models {
+//#include "config-lancelot-datamodels.h"
 
 #ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
 
-// We don't have akonadi and pimlibs, thus, the model is
-// showing only kmail icon
+    #define DummyModelClassName MessagesKmail
+    #define DummyModelInit \
+        setSelfTitle(i18n("Unread messages"));  \
+        setSelfIcon(KIcon("kmail"));            \
+        if (!addService("kontact") && !addService("kmail")) {   \
+            add(i18n("Unable to find Kontact"), "",             \
+                    KIcon("application-x-executable"),          \
+                    QVariant("http://kontact.kde.org"));        \
+        }
 
-MessagesKmail::MessagesKmail()
-    : d(NULL)
-{
-    setSelfTitle(i18n("Unread messages"));
-    setSelfIcon(KIcon("kmail"));
+    #include "DummyModel_p.cpp"
 
-    load();
-}
-
-MessagesKmail::~MessagesKmail()
-{
-}
-
-void MessagesKmail::activate(int index)
-{
-    Q_UNUSED(index)
-}
-
-void MessagesKmail::load()
-{
-    if (!addService("kontact") && !addService("kmail")) {
-        add(i18n("Unable to find Kontact"), "",
-                KIcon("application-x-executable"), QVariant("http://kontact.kde.org"));
-    }
-}
+    #undef DummyModelClassName
+    #undef DummyModelInit
 
 #else
 
 #error "Not implemented yet"
 
-
 #endif
 
-} // namespace Models
-} // namespace Lancelot
