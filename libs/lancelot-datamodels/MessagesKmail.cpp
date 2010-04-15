@@ -25,7 +25,7 @@
 
 #include "Logger.h"
 
-//#include "config-lancelot-datamodels.h"
+#include "config-lancelot-datamodels.h"
 
 #ifndef LANCELOT_DATAMODELS_HAS_PIMLIBS
 
@@ -46,7 +46,64 @@
 
 #else
 
-#error "Not implemented yet"
+// We have kdepimlibs
+
+#include <KJob>
+#include <Akonadi/Collection>
+#include <Akonadi/CollectionStatistics>
+#include <Akonadi/CollectionFetchJob>
+#include "MessagesKmail_p.h"
+
+namespace Lancelot {
+namespace Models {
+
+void MessagesKmail::Private::fetchEmailCollectionsDone(KJob * job)
+{
+    if ( job->error() ) {
+        kDebug() << "Job Error:" << job->errorString();
+
+    } else {
+        Akonadi::CollectionFetchJob * cjob =
+            static_cast < Akonadi::CollectionFetchJob * > ( job );
+        int i = 0;
+        foreach (const Akonadi::Collection & collection, cjob->collections()) {
+            if (collection.contentMimeTypes().contains("message/rfc822")) {
+                kDebug() << collection.name() << collection.statistics().unreadCount();
+            }
+        }
+    }
+}
+
+
+MessagesKmail::MessagesKmail()
+    : d(new Private())
+{
+    load();
+}
+
+MessagesKmail::~MessagesKmail()
+{
+}
+
+void MessagesKmail::activate(int index)
+{
+    Q_UNUSED(index)
+}
+
+void MessagesKmail::load()
+{
+    Akonadi::Collection emailCollection(Akonadi::Collection::root());
+    emailCollection.setContentMimeTypes(QStringList() << "message/rfc822");
+
+    Akonadi::CollectionFetchJob * fetch = new Akonadi::CollectionFetchJob(
+            emailCollection, Akonadi::CollectionFetchJob::Recursive);
+
+    connect(fetch, SIGNAL(result(KJob*)),
+            d, SLOT(fetchEmailCollectionsDone(KJob*)));
+}
+
+} // namespace Models
+} // namespace Lancelot
 
 #endif
 

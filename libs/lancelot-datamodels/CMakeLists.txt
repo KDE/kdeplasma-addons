@@ -7,6 +7,8 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 find_package(Lancelot REQUIRED)
 
+set (ADDITIONAL_LINK_LIBRARIES)
+
 ########### are akonadi and pimlibs available? ##########
 
 # find_package(KdepimLibs)
@@ -18,6 +20,12 @@ if (KDEPIMLIBS_FOUND)
       ${AKONADI_INCLUDE_DIR}
       ${KDEPIMLIBS_INCLUDE_DIRS}
    )
+
+   set (ADDITIONAL_LINK_LIBRARIES
+        ${ADDITIONAL_LINK_LIBRARIES}
+        ${KDE4_AKONADI_LIBS}
+        )
+
 
 endif(KDEPIMLIBS_FOUND)
 
@@ -118,6 +126,7 @@ target_link_libraries(
    ${KDE4_SOLID_LIBS}
    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
    ${LANCELOT_LIBS}
+   ${ADDITIONAL_LINK_LIBRARIES}
    solidcontrol
    kworkspace
 )
