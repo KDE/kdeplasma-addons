@@ -86,7 +86,7 @@ void MicroBlog::constraintsEvent(Plasma::Constraints constraints)
 {
     //i am an icon?
     if ((constraints|Plasma::SizeConstraint || constraints|Plasma::FormFactorConstraint) &&
-        layout()->itemAt(0) != m_graphicsWidget) {
+        layout() && layout()->itemAt(0) != m_graphicsWidget) {
         paintIcon();
     }
 }
