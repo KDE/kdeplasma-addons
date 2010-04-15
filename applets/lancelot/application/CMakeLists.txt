@@ -14,8 +14,8 @@ macro_log_feature(LANCELOT_HAVE_COMPOSITING
    "http://www.x.org/"
    FALSE
    ""
-   "STRONGLY_RECOMMENDED: XRender extension is required for Lancelot compositing support")
-
+   "STRONGLY_RECOMMENDED: XRender extension is required for Lancelot compositing support"
+)
 
 configure_file(config-lancelot.h.cmake
    ${CMAKE_CURRENT_BINARY_DIR}/config-lancelot.h )
@@ -81,7 +81,7 @@ target_link_libraries(
    )
 
 if(LANCELOT_HAVE_COMPOSITING)
-target_link_libraries(lancelot-menu ${X11_Xrender_LIB} ${X11_X11_LIB})
+   target_link_libraries(lancelot-menu ${X11_Xrender_LIB} ${X11_X11_LIB})
 endif(LANCELOT_HAVE_COMPOSITING)
 
 set_target_properties(lancelot-menu PROPERTIES OUTPUT_NAME lancelot)
