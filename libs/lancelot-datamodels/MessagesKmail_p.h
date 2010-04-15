@@ -18,7 +18,11 @@
  */
 
 #include "MessagesKmail.h"
+#include <QHash>
+#include <KIcon>
 #include <KJob>
+#include <Akonadi/Entity>
+#include <Akonadi/Collection>
 
 namespace Lancelot {
 namespace Models {
@@ -27,11 +31,20 @@ class MessagesKmail::Private: public QObject {
     Q_OBJECT
 
 public:
+    Private(MessagesKmail * parent);
 
+    QHash < KJob *, Akonadi::Collection > collectionJobs;
+
+    QString entityName(const Akonadi::Collection & collection) const;
+    KIcon entityIcon(const Akonadi::Collection & collection) const;
+    QString entityPath(const Akonadi::Entity & entity) const;
 
 public Q_SLOTS:
     void fetchEmailCollectionsDone(KJob * job);
+    void fetchCollectionStatisticsDone(KJob * job);
 
+private:
+    MessagesKmail * const q;
 };
 
 }
