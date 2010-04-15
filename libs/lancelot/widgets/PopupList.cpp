@@ -91,6 +91,7 @@ PopupList::Private::Private(PopupList * parent)
       closeTimeout(1000),
       child(NULL),
       parentList(NULL),
+      hovered(false),
       q(parent)
 {
     scene = new QGraphicsScene();
@@ -180,6 +181,7 @@ PopupList::PopupList(QWidget * parent, Qt::WindowFlags f)
     d(new Private(this))
 {
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    d->list->setDisplayMode(ActionListView::SingleLineNameFirst);
 
     d->animation = new QPropertyAnimation(this, "pos", this);
     d->animation->setEasingCurve(QEasingCurve::InOutQuad);
@@ -232,6 +234,12 @@ void PopupList::hideEvent(QHideEvent * event)
     if (d->child) {
         d->child->hide();
     }
+
+    if (parentList()) {
+        if (!parentList()->d->hovered) {
+            parentList()->close();
+        }
+    }
 }
 
 void PopupList::setCloseTimeout(int timeout)
@@ -258,6 +266,8 @@ void PopupList::enterEvent(QEvent * event)
 {
     d->timer.stop();
     Plasma::Dialog::enterEvent(event);
+
+    d->hovered = true;
 }
 
 void PopupList::leaveEvent(QEvent * event)
@@ -266,6 +276,8 @@ void PopupList::leaveEvent(QEvent * event)
         d->timer.start(d->closeTimeout, this);
     }
     Plasma::Dialog::leaveEvent(event);
+
+    d->hovered = false;
 }
 
 void PopupList::timerEvent(QTimerEvent * event)
@@ -273,6 +285,7 @@ void PopupList::timerEvent(QTimerEvent * event)
     if (d->timer.timerId() == event->timerId()) {
         if (!d->child || d->child->isHidden()) {
             close();
+
             d->timer.stop();
         }
     }

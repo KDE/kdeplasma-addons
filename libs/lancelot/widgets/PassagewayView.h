@@ -78,6 +78,10 @@ public:
     L_Override void setGroup(Group * group = NULL);
     L_Override void keyPressEvent(QKeyEvent * event);
 
+protected:
+    L_Override void hideEvent(QHideEvent * event);
+
+
 protected Q_SLOTS:
     virtual void listItemActivated(int itemIndex, int listIndex = -1);
     virtual void pathButtonActivated();

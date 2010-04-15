@@ -45,6 +45,15 @@ class LANCELOT_EXPORT ActionListView : public Lancelot::CustomListView
     // @puck L_INCLUDE(lancelot/widgets/ActionListView.h)
 
 public:
+    enum ItemDisplayMode {
+        Standard = 0,
+        DescriptionFirst = 1,
+        SingleLineNameFirst = 2,
+        SingleLineDescriptionFirst = 3,
+        OnlyName = 4,
+        OnlyDescription = 5
+    };
+
     ActionListView(QGraphicsItem * parent = 0);
     explicit ActionListView(ActionListModel * model, QGraphicsItem * parent = 0);
     virtual ~ActionListView();
@@ -54,6 +63,9 @@ public:
 
     void setExtenderPosition(int position);
     int extenderPosition() const;
+
+    void setDisplayMode(ItemDisplayMode mode);
+    ItemDisplayMode displayMode() const;
     // void setActivationMethod(int method);
     // int activationMethod() const;
 

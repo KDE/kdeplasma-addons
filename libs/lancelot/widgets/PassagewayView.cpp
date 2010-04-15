@@ -578,5 +578,12 @@ void PassagewayView::keyPressEvent(QKeyEvent * event)
     }
 }
 
+void PassagewayView::hideEvent(QHideEvent * event)
+{
+    if (d->popup) {
+        d->popup->hide();
+    }
+}
+
 } // namespace Lancelot
 

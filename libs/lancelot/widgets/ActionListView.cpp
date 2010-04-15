@@ -138,7 +138,8 @@ ActionListViewItemFactory::ActionListViewItemFactory(ActionListModel * model, Ac
       m_itemsGroup(NULL), m_categoriesGroup(NULL),
       m_view(view),
       m_categoriesActivable(false), m_itemIconSize(32, 32),
-      m_categoryIconSize(20, 20), m_selectedItem(NULL)
+      m_categoryIconSize(20, 20), m_selectedItem(NULL),
+      m_displayMode(ActionListView::Standard)
 {
     setItemsGroup(NULL);
     setCategoriesGroup(NULL);
@@ -216,8 +217,68 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
     }
 
     if (reload) {
-        item->setTitle(m_model->title(index));
-        item->setDescription(m_model->description(index));
+        switch (m_displayMode) {
+            case ActionListView::Standard:
+                item->setTitle(m_model->title(index));
+                item->setDescription(m_model->description(index));
+                break;
+
+            case ActionListView::DescriptionFirst:
+                if (!m_model->description(index).isEmpty()) {
+                    item->setTitle(m_model->description(index));
+                    item->setDescription(m_model->title(index));
+                } else {
+                    item->setTitle(m_model->title(index));
+                    item->setDescription(QString::null);
+                }
+                break;
+
+            case ActionListView::SingleLineNameFirst:
+                if (!m_model->description(index).isEmpty()) {
+                    item->setTitle(
+                        QString("%1 (%2)")
+                            .arg(m_model->title(index))
+                            .arg(m_model->description(index))
+                        );
+                } else {
+                    item->setTitle(m_model->title(index));
+                }
+
+                item->setDescription(QString::null);
+                break;
+
+            case ActionListView::SingleLineDescriptionFirst:
+                if (!m_model->description(index).isEmpty()) {
+                    item->setTitle(
+                        QString("%1 (%2)")
+                            .arg(m_model->description(index))
+                            .arg(m_model->title(index))
+                        );
+                } else {
+                    item->setTitle(m_model->title(index));
+                }
+
+                item->setDescription(QString::null);
+                break;
+
+            case ActionListView::OnlyName:
+                item->setTitle(m_model->title(index));
+                item->setDescription(QString::null);
+                break;
+
+            case ActionListView::OnlyDescription:
+                if (!m_model->description(index).isEmpty()) {
+                    item->setTitle(m_model->description(index));
+                } else {
+                    item->setTitle(m_model->title(index));
+                }
+                item->setDescription(QString::null);
+                break;
+
+
+        }
+
+
         item->setIcon(m_model->icon(index));
         item->setMinimumHeight(itemHeight(index, Qt::MinimumSize));
         item->setPreferredHeight(itemHeight(index, Qt::PreferredSize));
@@ -234,6 +295,23 @@ CustomListItem * ActionListViewItemFactory::itemForIndex(int index,
     }
 
     return item;
+} //<
+
+void ActionListViewItemFactory::setDisplayMode(ActionListView::ItemDisplayMode mode) //>
+{
+    if (m_displayMode == mode) {
+        return;
+    }
+
+    m_displayMode = mode;
+
+
+
+} //<
+
+ActionListView::ItemDisplayMode ActionListViewItemFactory::displayMode() const //>
+{
+    return m_displayMode;
 } //<
 
 void ActionListViewItemFactory::setItemsGroup(Group * group) //>
@@ -253,7 +331,7 @@ void ActionListViewItemFactory::setItemsGroup(Group * group) //>
         }
         i++;
     }
-}
+} //<
 
 Group * ActionListViewItemFactory::itemsGroup() const //>
 {
@@ -968,6 +1046,24 @@ int ActionListView::extenderPosition() const //>
         return NoExtender;
     }
     return d->itemFactory->extenderPosition();
+} //<
+
+void ActionListView::setDisplayMode(ActionListView::ItemDisplayMode mode) //>
+{
+    if (!d->itemFactory) {
+        return;
+    }
+
+    d->itemFactory->setDisplayMode(mode);
+} //<
+
+ActionListView::ItemDisplayMode ActionListView::displayMode() const //>
+{
+    if (!d->itemFactory) {
+        return Standard;
+    }
+
+    return d->itemFactory->displayMode();
 } //<
 
 void ActionListView::setItemsGroup(Group * group) //>

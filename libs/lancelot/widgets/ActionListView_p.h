@@ -86,6 +86,9 @@ public:
     void setExtenderPosition(int position);
     int extenderPosition() const;
 
+    void setDisplayMode(ActionListView::ItemDisplayMode mode);
+    ActionListView::ItemDisplayMode displayMode() const;
+
     void itemContext(ActionListViewItem * sender,
             bool mouseCoordinate = true);
     void itemDrag(ActionListViewItem * sender, QGraphicsSceneMouseEvent * event);
@@ -155,6 +158,7 @@ private:
     QSize m_categoryIconSize;
 
     ActionListViewItem * m_selectedItem;
+    ActionListView::ItemDisplayMode m_displayMode;
 
     CustomItemBackground * m_selectedItemBackground;
 

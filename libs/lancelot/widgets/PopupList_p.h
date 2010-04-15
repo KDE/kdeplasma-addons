@@ -77,6 +77,7 @@ public:
     PopupList * q;
 
     QPropertyAnimation * animation;
+    bool hovered;
 
     void hidePopupAndParents();
     void prepareToShow();
