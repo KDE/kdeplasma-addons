@@ -24,7 +24,7 @@ AboutData::AboutData()
             QByteArray("lancelot"),
             QByteArray(""),
             ki18n("Lancelot"),
-            QByteArray("1.8"),
+            QByteArray("1.9.5"),
             ki18n("Next-generation application launcher."),
             KAboutData::License_GPL,
             ki18n("(C) 2007, 2008, 2009, 2010 Ivan Čukić"),

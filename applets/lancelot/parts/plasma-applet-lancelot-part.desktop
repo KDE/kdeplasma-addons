@@ -10,6 +10,7 @@ Name[pt]=Concha
 Name[sv]=Lägg undan
 Name[uk]=Полиця
 Name[x-test]=xxShelfxx
+
 Comment=
 
 Type=Service
@@ -21,7 +22,7 @@ X-KDE-Library=plasma_applet_lancelot_part
 X-KDE-PluginInfo-Author=Ivan Čukić
 X-KDE-PluginInfo-Email=ivan.cukic(at)kde.org
 X-KDE-PluginInfo-Name=lancelot_part
-X-KDE-PluginInfo-Version=1.2
+X-KDE-PluginInfo-Version=1.5
 X-KDE-PluginInfo-Website=http://lancelot.fomentgroup.org/
 X-KDE-PluginInfo-Category=Miscellaneous
 X-KDE-PluginInfo-Depends=
