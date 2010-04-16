@@ -39,6 +39,7 @@ class ComicModel : public QAbstractTableModel
         bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
 
         int numSelected() const;
+        QStringList selected() const;
 
     private:
         Plasma::DataEngine::Data mComics;

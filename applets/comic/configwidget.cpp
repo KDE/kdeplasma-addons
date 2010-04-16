@@ -70,7 +70,7 @@ void ConfigWidget::slotComboBoxChosen()
 
 void ConfigWidget::slotCurrentIndexChanged( int newIndex )
 {
-    if ( !mProxyModel->rowCount() ) {
+    if ( useTabs() || !mProxyModel->rowCount() ) {
         return;
     }
 
@@ -108,7 +108,7 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::newStuffFinished()
 {
     if ( mNewStuffDialog->changedEntries().count() ) {
-        mModel->setComics( mEngine->query( "providers" ), mUsedComics );//HACK if nothing is checked/selected, then do check/select something automatically??
+        mModel->setComics( mEngine->query( "providers" ), mModel->selected() );//HACK if nothing is checked/selected, then do check/select something automatically??
 
         comicUi.listView_comic->resizeColumnToContents( 0 );
 

@@ -38,9 +38,9 @@ void ComicModel::setComics( const Plasma::DataEngine::Data &comics, const QStrin
     Plasma::DataEngine::Data::const_iterator it;
     Plasma::DataEngine::Data::const_iterator itEnd = mComics.constEnd();
     for ( it = mComics.constBegin(); it != itEnd; ++it ) {
-        const bool isChecked = usedComics.contains(it.key());
+        const bool isChecked = usedComics.contains( it.key() );
         mState[ it.key() ] = ( isChecked ? Qt::Checked : Qt::Unchecked );
-        if (isChecked) {
+        if ( isChecked ) {
             ++mNumSelected;
         }
     }
@@ -120,4 +120,18 @@ bool ComicModel::setData( const QModelIndex &index, const QVariant &value, int r
 int ComicModel::numSelected() const
 {
     return mNumSelected;
+}
+
+QStringList ComicModel::selected() const
+{
+    QStringList list;
+    QHash< QString, Qt::CheckState >::const_iterator it;
+    QHash< QString, Qt::CheckState >::const_iterator itEnd = mState.constEnd();
+    for ( it = mState.constBegin(); it != itEnd; ++it ) {
+        if ( it.value() == Qt::Checked ) {
+            list << it.key();
+        }
+    }
+
+    return list;
 }
