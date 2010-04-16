@@ -130,15 +130,25 @@ void XbelModel::Private::readBookmark()
 
         if (xmlReader.name() == "title") {
             bookmarkItem.title = xmlReader.readElementText();
+
         } else if (xmlReader.name() == "icon") {
             QString icon = xmlReader.attributes().value("name").toString();
             if (!icon.isEmpty()) {
                 bookmarkItem.icon = KIcon(icon);
             }
+
         } else if (xmlReader.name() == "IsHidden") {
             if (xmlReader.readElementText() != "false") {
                 showBookmark = false;
             }
+
+        } else if (xmlReader.name() == "isSystemItem") {
+            // This is a bit dirty, but needed for a translation bug fix...
+
+            if (xmlReader.readElementText() == "true") {
+                bookmarkItem.title = i18n(bookmarkItem.title.toUtf8().data());
+            }
+
         }
     }
 
