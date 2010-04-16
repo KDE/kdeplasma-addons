@@ -302,27 +302,47 @@ void ComicApplet::dataUpdated( const QString&, const Plasma::DataEngine::Data &d
 {
     setBusy( false );
     slotStartTimer();
+
+    //there was an error, display information as image
     if ( data[ "Error" ].toBool() ) {
-        if ( !data[ "Previous identifier suffix" ].toString().isEmpty() ) {
+        QPixmap errorPic( 500, 400 );
+        errorPic.fill();
+        QPainter p( &errorPic );
+        QFont font = Plasma::Theme::defaultTheme()->font( Plasma::Theme::DefaultFont );
+        font.setPointSize( 24 );
+        p.setPen( QColor( 0, 0, 0 ) );
+        p.setFont( font );
+        QString title = i18n( "Getting comic strip failed:" );
+        p.drawText( QRect( 10, 10 , 480, 100 ), Qt::TextWordWrap | Qt::AlignHCenter | Qt::AlignVCenter, title );
+        QString text = i18n( "Maybe there is no internet connection.\nMaybe the comic plugin is broken.\nAnother reason might be that there is no comic for this day/number/string, so choosing a different one might work." );
+
+        mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+        mNextIdentifierSuffix.clear();
+        if ( !mPreviousIdentifierSuffix.isEmpty() ) {
             if ( !data[ "Identifier" ].toString().isEmpty() ) {
                 mIdentifierError = data[ "Identifier" ].toString();
             }
-            updateComic( data[ "Previous identifier suffix" ].toString() );
-        } else {
-            setConfigurationRequired( true );
+            text.append( i18n( "\n\nChoose the previous strip to go to the last cached strip." ) );
         }
-        return;
+
+        font.setPointSize( 16 );
+        p.setFont( font );
+        p.drawText( QRect( 10, 120 , 480, 270 ), Qt::TextWordWrap | Qt::AlignLeft, text );
+
+        mImage = errorPic.toImage();
+        mAdditionalText = title + text;
+    } else {
+        mImage = data[ "Image" ].value<QImage>();
+        mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
+        mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
+        mAdditionalText = data[ "Additional text" ].toString();
     }
 
-    mImage = data[ "Image" ].value<QImage>();
     mWebsiteUrl = data[ "Website Url" ].value<KUrl>();
     setAssociatedApplicationUrls(mWebsiteUrl);
     mShopUrl = data[ "Shop Url" ].value<KUrl>();
-    mNextIdentifierSuffix = data[ "Next identifier suffix" ].toString();
-    mPreviousIdentifierSuffix = data[ "Previous identifier suffix" ].toString();
     mFirstIdentifierSuffix = data[ "First strip identifier suffix" ].toString();
     mStripTitle = data[ "Strip title" ].toString();
-    mAdditionalText = data[ "Additional text" ].toString();
     mComicAuthor = data[ "Comic Author" ].toString();
     mComicTitle = data[ "Title" ].toString();
     mSuffixType = data[ "SuffixType" ].toString();
@@ -766,10 +786,8 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
         mEngine->connectSource( identifier, this );
         const Plasma::DataEngine::Data data = mEngine->query( identifier );
 
-        if ( data[ "Error" ].toBool() && data[ "Previous identifier suffix" ].toString().isEmpty() ) {
-            setBusy( false );
-            setConfigurationRequired( true );
-            slotStartTimer();
+        if ( data[ "Error" ].toBool() ) {
+            dataUpdated( QString(), data );
         }
     } else {
         setConfigurationRequired( true );
