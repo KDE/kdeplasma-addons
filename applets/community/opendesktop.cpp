@@ -122,12 +122,9 @@ QGraphicsWidget* OpenDesktop::graphicsWidget()
         m_nearStack = new ActionStack(m_engine, m_nearList);
         
         m_nearStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        m_nearStack->setPreferredSize(300, 400);
-        m_nearStack->setMinimumSize(150, 200);
 
         m_tabs = new Plasma::TabBar;
-        m_tabs->setPreferredSize(300, 400);
-        m_tabs->setMinimumSize(150, 200);
+
         m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         
         m_tabs->addTab(i18n("Nearby"), m_nearStack);
