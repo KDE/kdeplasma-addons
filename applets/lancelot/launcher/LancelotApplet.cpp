@@ -367,13 +367,13 @@ QList< QAction * > LancelotApplet::contextualActions()
         d->actions.append(action = new QAction(
                     KIcon("configure-shortcuts"),
                     i18n("Configure Shortcuts..."),
-                    parent));
+                    this));
         connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(configureShortcuts()));
 
         d->actions.append(action = new QAction(
                     KIcon(),
                     i18n("Menu Editor"),
-                    parent));
+                    this));
         connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
     }
 
