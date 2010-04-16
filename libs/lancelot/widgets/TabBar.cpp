@@ -307,20 +307,18 @@ QSize TabBar::tabIconSize() const
 
 bool TabBar::sceneEventFilter(QGraphicsItem * object, QEvent * event)
 {
-    ExtenderButton * button = static_cast < ExtenderButton * > (object);
-
-    if (!button) {
-        kDebug() << "sender is NULL" << object;
+    if (Global::self()->immutability() != Plasma::Mutable
+            || event->type() != QEvent::GraphicsSceneMouseMove) {
+        return false;
     }
 
+    ExtenderButton * button = static_cast < ExtenderButton * > (object);
+
     if (!button
-        || event->type() != QEvent::GraphicsSceneMouseMove
         || !d->mimes.contains(button)
     ) {
         return false;
     }
-
-    kDebug() << "Drag?";
 
     QMimeData * data = new QMimeData();
     data->setData(
