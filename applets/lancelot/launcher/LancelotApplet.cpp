@@ -168,19 +168,6 @@ LancelotApplet::LancelotApplet(QObject * parent,
     setBackgroundHints(NoBackground);
     setAcceptsHoverEvents(true);
 
-    QAction * action;
-    d->actions.append(action = new QAction(
-            KIcon("configure-shortcuts"),
-            i18n("Configure Shortcuts..."),
-            parent));
-    connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(configureShortcuts()));
-
-    d->actions.append(action = new QAction(
-            KIcon(),
-            i18n("Menu Editor"),
-            parent));
-    connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
-
     d->waitClick.setInterval(500); // 1/2 sec
     d->waitClick.setSingleShot(true);
 }
@@ -373,6 +360,23 @@ QList< QAction * > LancelotApplet::contextualActions()
     d->offline = true;
     d->lancelot->hide(true);
     QList < QAction * > result = Plasma::Applet::contextualActions();
+
+    if (!d->actions.size()) {
+        QAction * action;
+
+        d->actions.append(action = new QAction(
+                    KIcon("configure-shortcuts"),
+                    i18n("Configure Shortcuts..."),
+                    parent));
+        connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(configureShortcuts()));
+
+        d->actions.append(action = new QAction(
+                    KIcon(),
+                    i18n("Menu Editor"),
+                    parent));
+        connect(action, SIGNAL(triggered(bool)), d->lancelot, SLOT(showMenuEditor()));
+    }
+
     result << d->actions;
     return result;
 }
