@@ -736,6 +736,7 @@ void ComicApplet::updateComic( const QString &identifierSuffix )
             slotStartTimer();
         }
     } else {
+        kError() << "Either no identifier was specified or the engine could not be created:" << "id" << mComicIdentifier << "engine valid:" << ( mEngine && mEngine->isValid() );
         setConfigurationRequired( true );
         slotStartTimer();
     }
