@@ -373,6 +373,11 @@ void LancelotPart::search(const QString & query)
 {
     if (!m_runnnerModel) {
         m_runnnerModel = new Lancelot::Models::Runner(true);
+        kDebug() << "connect " <<
+        connect(
+                m_runnnerModel, SIGNAL(itemActivated(int)),
+                this, SLOT(resetSearch())
+            );
     }
 
     if (query.isEmpty()) {
@@ -380,6 +385,7 @@ void LancelotPart::search(const QString & query)
     } else {
         m_runnnerModel->setSearchString(query);
         m_list->setModel(m_runnnerModel);
+
     }
 }
 
@@ -396,6 +402,13 @@ void LancelotPart::showSearchBox(bool value)
     } else {
         m_layout->removeItem(m_searchText);
     }
+}
+
+void LancelotPart::resetSearch()
+{
+    kDebug();
+    m_searchText->setText(QString::null);
+    search(QString::null);
 }
 
 #include "LancelotPart.moc"

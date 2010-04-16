@@ -65,6 +65,7 @@ private Q_SLOTS:
     void removeModel(int index);
     void immutabilityChanged(Plasma::ImmutabilityType value);
     void modelContentsUpdated();
+    void resetSearch();
 
 private:
     bool loadFromList(const QStringList & list);
