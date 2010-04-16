@@ -96,6 +96,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         //: are mandatory
         if ( parts.count() < 2 ) {
             setData( identifier, "Error", true );
+            kError() << "Less than two arguments specified.";
             return false;
         }
         if ( !mFactories.contains( parts[ 0 ] ) ) {
@@ -103,6 +104,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             updateFactories();
             if ( !mFactories.contains( parts[ 0 ] ) ) {
                 setData( identifier, "Error", true );
+                kError() << identifier << "comic plugin does not seem to be installed.";
                 return false;
             }
         }
@@ -114,6 +116,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
             setData( identifier, "Error", true );
             setData( identifier, "Identifier", identifier );
             setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+            kWarning() << "No connection.";
             return true;
         }
 
@@ -141,6 +144,7 @@ bool ComicEngine::updateSourceEvent( const QString &identifier )
         provider = service->createInstance<ComicProvider>( this, args );
         if ( !provider ) {
             setData( identifier, "Error", true );
+            kError() << identifier << "plugin could be created.";
             return false;
         }
         provider->setIsCurrent( isCurrentComic );
@@ -219,6 +223,8 @@ void ComicEngine::error( ComicProvider *provider )
     QString identifier( provider->identifier() );
     mIdentifierError = identifier;
 
+    kWarning() << identifier << "pluging reported an error.";
+
     /**
      * Requests for the current day have no suffix (date or id)
      * set initially, so we have to remove the 'faked' suffix
@@ -231,10 +237,10 @@ void ComicEngine::error( ComicProvider *provider )
     setData( identifier, "Error", true );
 
     // if there was an error loading the last cached comic strip, do not return its id anymore
-    if ( lastCachedIdentifier( identifier ) !=
-         provider->identifier().mid( provider->identifier().indexOf( ':' ) + 1 ) ) {
+    const QString lastCachedId = lastCachedIdentifier( identifier );
+    if ( lastCachedId != provider->identifier().mid( provider->identifier().indexOf( ':' ) + 1 ) ) {
         // sets the previousIdentifier to the identifier of a strip that has been cached before
-        setData( identifier, "Previous identifier suffix", lastCachedIdentifier( identifier ) );
+        setData( identifier, "Previous identifier suffix", lastCachedId );
     }
     setData( identifier, "Next identifier suffix", QString() );
 
