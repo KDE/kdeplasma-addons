@@ -94,7 +94,8 @@ public:
      * @param icon icon for the tab
      * @param title tab title
      */
-    void addTab(const QString & id, const QIcon & icon, const QString & title);
+    void addTab(const QString & id, const QIcon & icon, const QString & title,
+            const QString & mimeType = QString::null, const QString & mimeData = QString::null);
 
     /**
      * Removes the specified tab
@@ -132,6 +133,8 @@ public:
 
 protected:
     L_Override void resizeEvent(QGraphicsSceneResizeEvent * event);
+    L_Override bool sceneEventFilter(QGraphicsItem * watched, QEvent * event);
+
 
 Q_SIGNALS:
     /**

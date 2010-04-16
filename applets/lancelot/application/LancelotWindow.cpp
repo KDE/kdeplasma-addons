@@ -143,10 +143,14 @@ LancelotWindow::LancelotWindow()
 
     tabbarSections->installEventFilter(this);
     tabbarSections->setTabsGroupName("SectionButtons");
-    tabbarSections->addTab("documents",    KIcon("applications-office"), i18n("&Documents"));
-    tabbarSections->addTab("contacts",     KIcon("kontact"),             i18n("&Contacts"));
-    tabbarSections->addTab("computer",     KIcon("computer-laptop"),     i18n("Co&mputer"));
-    tabbarSections->addTab("applications", KIcon("applications-other"),  i18n("&Applications"));
+    tabbarSections->addTab("documents",    KIcon("applications-office"), i18n("&Documents"),    "text/x-lancelotpart",
+            "model=NewDocuments&type=list&version=1.0\nmodel=OpenDocuments&type=list&version=1.0\nmodel=RecentDocuments&type=list&version=1.0");
+    tabbarSections->addTab("contacts",     KIcon("kontact"),             i18n("&Contacts"),
+            "text/x-lancelotpart", "model=Messages&type=list&version=1.0\nmodel=Contacts&type=list&version=1.0");
+    tabbarSections->addTab("computer",     KIcon("computer-laptop"),     i18n("Co&mputer"),     "text/x-lancelotpart",
+            "model=Places&type=list&version=1.0\nmodel=System&type=list&version=1.0\nmodel=Devices%2FRemovable&type=list&version=1.0\nmodel=Devices%2FFixed&type=list&version=1.0");
+    tabbarSections->addTab("applications", KIcon("applications-other"),  i18n("&Applications"), "text/x-lancelotpart",
+            "model=FavoriteApplications&type=list&version=1.0\nmodel=Folder%20applications%3A%2F&type=list&version=1.0");
     tabbarSections->setOrientation(Qt::Vertical);
     tabbarSections->setTextDirection(Qt::Vertical);
     /* End TODO */

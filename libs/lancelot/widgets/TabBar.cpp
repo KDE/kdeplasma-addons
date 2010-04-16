@@ -21,6 +21,7 @@
 
 #include <QPainter>
 #include <QSignalMapper>
+#include <QGraphicsSceneMoveEvent>
 
 #include <KDebug>
 
@@ -47,6 +48,9 @@ public:
 
     QMap < QString, ExtenderButton * > tabs;
     QList < ExtenderButton * > tabButtons;
+
+    QMap < ExtenderButton *, QPair < QString, QString > > mimes;
+
     QSignalMapper mapper;
     CustomItemBackground * background;
 
@@ -208,7 +212,8 @@ void TabBar::setCurrentTab(const QString & current)
     emit currentTabChanged(current);
 }
 
-void TabBar::addTab(const QString & id, const QIcon & icon, const QString & title)
+void TabBar::addTab(const QString & id, const QIcon & icon, const QString & title,
+            const QString & mimeType, const QString & mimeData)
 {
     if (d->tabs.contains(id)) {
         return;
@@ -219,8 +224,14 @@ void TabBar::addTab(const QString & id, const QIcon & icon, const QString & titl
     d->tabs[id] = button;
     d->tabButtons.append(button);
 
+    button->installSceneEventFilter(this);
+
     button->setIconSize(d->tabIconSize);
     button->setGroupByName(d->groupName);
+
+    if (!mimeType.isEmpty() && !mimeData.isEmpty()) {
+        d->mimes[button] = QPair < QString, QString > (mimeType, mimeData);
+    }
 
     connect(
         button, SIGNAL(activated()),
@@ -238,6 +249,8 @@ void TabBar::removeTab(const QString & id)
     }
 
     d->tabButtons.removeAll(d->tabs[id]);
+    d->mimes.remove(d->tabs[id]);
+
     delete d->tabs[id];
     d->tabs.remove(id);
 
@@ -290,6 +303,36 @@ void TabBar::setTabIconSize(const QSize & size)
 QSize TabBar::tabIconSize() const
 {
     return d->tabIconSize;
+}
+
+bool TabBar::sceneEventFilter(QGraphicsItem * object, QEvent * event)
+{
+    ExtenderButton * button = static_cast < ExtenderButton * > (object);
+
+    if (!button) {
+        kDebug() << "sender is NULL" << object;
+    }
+
+    if (!button
+        || event->type() != QEvent::GraphicsSceneMouseMove
+        || !d->mimes.contains(button)
+    ) {
+        return false;
+    }
+
+    kDebug() << "Drag?";
+
+    QMimeData * data = new QMimeData();
+    data->setData(
+        d->mimes[button].first,
+        d->mimes[button].second.toAscii());
+
+    QDrag * drag = new QDrag(
+        static_cast < QGraphicsSceneMoveEvent * > (event)->widget());
+    drag->setMimeData(data);
+    drag->exec();
+
+    return false;
 }
 
 } // namespace Lancelot
