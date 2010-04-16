@@ -89,7 +89,7 @@ void ConfigWidget::slotCurrentIndexChanged( int newIndex )
 
     //check the selected index
     mCurrentIndex = mProxyModel->index( newIndex, 0 );
-    mProxyModel->setData( mCurrentIndex, Qt::Checked, Qt::CheckStateRole );//FIXME things might be selected that are not checked!!!
+    mProxyModel->setData( mCurrentIndex, Qt::Checked, Qt::CheckStateRole );
 
     if ( !oldIsChecked ) {
         comicUi.comboBox_comic->setCurrentIndex( 0 );
@@ -108,7 +108,7 @@ void ConfigWidget::getNewStuff()
 void ConfigWidget::newStuffFinished()
 {
     if ( mNewStuffDialog->changedEntries().count() ) {
-        mModel->setComics( mEngine->query( "providers" ), mModel->selected() );//HACK if nothing is checked/selected, then do check/select something automatically??
+        mModel->setComics( mEngine->query( "providers" ), mModel->selected() );
 
         comicUi.listView_comic->resizeColumnToContents( 0 );
 
