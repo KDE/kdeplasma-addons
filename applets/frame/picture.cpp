@@ -123,7 +123,7 @@ void Picture::reload()
 void Picture::slotFinished( KJob *job )
 {
     QString filename = m_currentUrl.fileName();
-    QString path = KGlobalSettings::downloadPath() + m_currentUrl.fileName();
+    QString path = KStandardDirs::locateLocal("cache", "plasma-frame/" +  m_currentUrl.fileName());
     QImage image;
     if (job->error()) {
         kDebug() << "Error loading image:" << job->errorString();
@@ -132,17 +132,6 @@ void Picture::slotFinished( KJob *job )
         image.loadFromData(m_job->data());
         kDebug() << "Successfully downloaded, saving image to" << path;
         m_message.clear();
-        int i = 1;
-        while (QFile(path).exists()) {
-            // the file exists, prepend $number- to the filename and count up
-            QString tmppath = path;
-            tmppath.replace(filename, QString("%1-%2").arg(QString("%1").arg(i), filename));
-            if (!QFile(tmppath).exists()) {
-                path = tmppath;
-            } else {
-                i++;
-            }
-        }
         image.save(path);
         kDebug() << "Saved to" << path;
         setPath(path);
