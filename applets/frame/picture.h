@@ -61,6 +61,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void slotFinished(KJob *job);
     void reload();
+    void checkImageLoaded(QImage newImage);
 
 private:
     void setPath(const QString &path);

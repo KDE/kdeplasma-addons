@@ -45,7 +45,6 @@ Picture::Picture(QObject *parent)
     connect(m_fileWatch,SIGNAL(dirty(QString)),this,SLOT(reload()));
     connect(m_fileWatch,SIGNAL(created(QString)),this,SLOT(reload()));
     connect(m_fileWatch,SIGNAL(deleted(QString)),this,SLOT(reload()));
-
 }
 
 Picture::~Picture()
@@ -65,7 +64,6 @@ void Picture::setMessage(const QString &message)
 QImage Picture::defaultPicture(const QString &message)
 {
     // Create a QImage with same axpect ratio of default svg and current pixelSize
-
     kDebug() << "Default Image:" << m_defaultImage;
     QImage image = QImage(m_defaultImage);
     m_message = message;
@@ -81,8 +79,7 @@ void Picture::setPicture(const KUrl &currentUrl)
         kDebug() << "Not a local file, downloading" << currentUrl;
         m_job = KIO::storedGet( currentUrl, KIO::NoReload, KIO::DefaultFlags );
         connect(m_job, SIGNAL(finished(KJob*)), this, SLOT(slotFinished(KJob*)));
-        loader = new ImageLoader(m_defaultImage);
-        m_message = i18n("Loading image...");
+        emit pictureLoaded(defaultPicture(i18n("Loading image...")));
     } else {
         if (currentUrl.isEmpty()) {
             loader = new ImageLoader(m_defaultImage);
@@ -92,10 +89,10 @@ void Picture::setPicture(const KUrl &currentUrl)
             loader = new ImageLoader(m_currentUrl.path());
             setPath(m_currentUrl.path());
             m_message.clear();
-        }
+        }   
+        connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
+        QThreadPool::globalInstance()->start(loader);     
     }
-    connect(loader, SIGNAL(loaded(QImage)), this, SIGNAL(pictureLoaded(QImage)));
-    QThreadPool::globalInstance()->start(loader);
 }
 
 KUrl Picture::url()
@@ -118,8 +115,8 @@ void Picture::setPath(const QString &path)
 void Picture::reload()
 {
     kDebug() << "Picture reload";
-    ImageLoader *loader = new ImageLoader(m_defaultImage);
-    connect(loader, SIGNAL(loaded(QImage)), this, SIGNAL(pictureLoaded(QImage)));
+    ImageLoader *loader = new ImageLoader(m_path);
+    connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
     QThreadPool::globalInstance()->start(loader);
 }
 
@@ -150,7 +147,16 @@ void Picture::slotFinished( KJob *job )
         kDebug() << "Saved to" << path;
         setPath(path);
     }
-    emit pictureLoaded(ImageLoader::correctRotation(image, path));
+    emit checkImageLoaded(ImageLoader::correctRotation(image, path));
+}
+
+void Picture::checkImageLoaded(QImage newImage)
+{
+  if ( newImage.isNull()) {
+    emit pictureLoaded(defaultPicture(i18n("Error loading image. Image was probably deleted.")));
+  } else {
+    emit pictureLoaded(newImage);
+  }
 }
 
 #include "picture.moc"
