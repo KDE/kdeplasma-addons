@@ -76,10 +76,15 @@ Frame::Frame(QObject *parent, const QVariantList &args)
     m_updateTimer = new QTimer(this);
     m_updateTimer->setSingleShot(true);
     connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(delayedUpdateSize()));
+
+    m_autoUpdateTimer = new QTimer(this);
+    m_autoUpdateTimer->setSingleShot(true);
+    connect(m_autoUpdateTimer, SIGNAL(timeout()), this, SLOT(reloadImage()));
 }
 
 Frame::~Frame()
 {
+    m_autoUpdateTimer->stop();
 }
 
 void Frame::init()
@@ -105,6 +110,7 @@ void Frame::init()
     setAssociatedApplicationUrls(m_currentUrl);
     m_potdProvider = cg.readEntry("potdProvider", "");
     m_potd = cg.readEntry("potd", false);
+    m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
 
     // Frame & Shadow dimensions
     m_frameOutline = 8;
@@ -257,8 +263,6 @@ void Frame::updatePicture()
         resize(sizeHint);
     }
 
-
-
     kDebug() << "Rendering picture";
 
     // create a QPixmap which can be drawn in paintInterface()
@@ -394,6 +398,11 @@ void Frame::updatePicture()
     p->end();
     delete p;
     update();
+
+    if (m_doAutoUpdate && !m_autoUpdateTimer->isActive()) {
+      kDebug() << "Autoupdate timer restarted:" << m_autoUpdateIntervall << "s";
+      m_autoUpdateTimer->start(m_autoUpdateIntervall * 1000);
+    }
 }
 
 void Frame::nextPicture()
@@ -494,6 +503,7 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->imageUi.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
     m_configDialog->imageUi.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_configDialog->previewPicture(m_mySlideShow->image());
+    m_configDialog->imageUi.autoUpdateTime->setTime(QTime(m_autoUpdateIntervall / 3600, (m_autoUpdateIntervall / 60) % 60));
 }
 
 void Frame::configAccepted()
@@ -541,6 +551,12 @@ void Frame::configAccepted()
     m_slideshowTime = timerTime.second() + timerTime.minute() * 60 + timerTime.hour() * 3600;
     cg.writeEntry("slideshow time", m_slideshowTime);
 
+    m_autoUpdateTimer->stop();
+
+    QTime AutoUpdateTimer = m_configDialog->imageUi.autoUpdateTime->time();
+    m_autoUpdateIntervall = AutoUpdateTimer.minute() * 60 + AutoUpdateTimer.hour() * 3600;
+    cg.writeEntry("autoupdate time", m_autoUpdateIntervall);
+
     QString potdProvider = m_configDialog->imageUi.potdComboBox->itemData(m_configDialog->imageUi.potdComboBox->currentIndex()).toString();
 
     if ((wasPotd && !m_potd) || (m_potd && potdProvider != m_potdProvider)) {
@@ -569,6 +585,7 @@ void Frame::stopPotd()
 void Frame::initSlideShow()
 {
     m_mySlideShow->setUpdateInterval(0);
+    m_doAutoUpdate = false;
 
     if (m_slideShow) {
         m_mySlideShow->setRandom(m_random);
@@ -585,6 +602,10 @@ void Frame::initSlideShow()
     } else { //no slideshow so no random stuff
         m_mySlideShow->setRandom(false);
         m_mySlideShow->setImage(m_currentUrl.url());
+
+        if (m_autoUpdateIntervall > 0) {
+            m_doAutoUpdate = true;
+        }
     }
 
     if (!m_potd) {
@@ -709,6 +730,11 @@ void Frame::delayedUpdateSize()
         resize(sizeHint);
         emit appletTransformedItself();
     }
+}
+
+void Frame::reloadImage()
+{
+    m_mySlideShow->updateImage(m_currentUrl.url());
 }
 
 #include "frame.moc"

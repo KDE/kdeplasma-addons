@@ -117,6 +117,11 @@ QImage SlideShow::image() const
     return m_image;
 }
 
+void SlideShow::updateImage(QString newUrl)
+{
+    m_picture->setPicture(newUrl);
+}
+
 KUrl SlideShow::url(int offset)
 {
     if (!m_picturePaths.isEmpty()) {
@@ -215,4 +220,3 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
 }
 
 #include "slideshow.moc"
-

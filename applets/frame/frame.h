@@ -74,6 +74,7 @@ private Q_SLOTS:
     void delayedUpdateSize();
     void scalePictureAndUpdate();
     void imageScaled(const QImage &img);
+    void reloadImage();
 
 protected:
     void constraintsEvent(Plasma::Constraints constraints);
@@ -116,6 +117,11 @@ private:
     bool m_random;
     bool m_recursiveSlideShow;
     SlideShow* m_mySlideShow;
+    /// Autoupdate
+    int m_autoUpdateIntervall;
+    bool m_doAutoUpdate;
+    QTimer* m_autoUpdateTimer;
+
     QPixmap m_pixmap;
     QImage m_scaledImage;
     QTimer* m_updateTimer;

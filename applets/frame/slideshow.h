@@ -46,7 +46,7 @@ public:
     QImage image() const;
     KUrl currentUrl() const;
     QString message() const;
-
+    void updateImage(QString);
     void setUpdateInterval(int msec);
 
 public Q_SLOTS:
