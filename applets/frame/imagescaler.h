@@ -29,14 +29,14 @@ class ImageScaler : public QObject, public QRunnable
 {
     Q_OBJECT
 
-  public:
+public:
     ImageScaler(const QImage &img, QSize size);
     void run();
-    
-  Q_SIGNALS:
+
+Q_SIGNALS:
     void scaled(const QImage &image);
-    
-  private:
+
+private:
     QImage m_image;
     QSize m_size;
 };

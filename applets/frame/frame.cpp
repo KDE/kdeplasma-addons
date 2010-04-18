@@ -108,7 +108,7 @@ void Frame::init()
     m_slideshowTime = cg.readEntry("slideshow time", 60); // default to 1 minute
     m_currentUrl = cg.readEntry("url", m_currentUrl);
     setAssociatedApplicationUrls(m_currentUrl);
-    m_potdProvider = cg.readEntry("potdProvider", "");
+    m_potdProvider = cg.readEntry("potdProvider", QString());
     m_potd = cg.readEntry("potd", false);
     m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
 
@@ -169,7 +169,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
             m_swOutline = 8;
             //Restore widget geometry to image proportions
             QSizeF sizeHint = contentSizeHint();
-            if (sizeHint != geometry().size()){
+            if (sizeHint != geometry().size()) {
                 resize(sizeHint);
                 emit appletTransformedItself();
             }
@@ -179,10 +179,10 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 
     if (constraints & Plasma::SizeConstraint) {
         //If on panel, keep geometry to 4:3 ratio
-        if(formFactor() == Plasma::Vertical) {
+        if (formFactor() == Plasma::Vertical) {
             setMinimumSize(QSizeF(0, contentsRect().width()/1.33));
             setMaximumSize(QSizeF(-1, contentsRect().width()/1.33));
-        } else if(formFactor() == Plasma::Horizontal) {
+        } else if (formFactor() == Plasma::Horizontal) {
             setMinimumSize(QSizeF(contentsRect().height()*1.33,0));
             setMaximumSize(QSizeF(contentsRect().height()*1.33,-1));
         } else {
@@ -212,7 +212,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 
 QSizeF Frame::contentSizeHint() const
 {
-    if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)){
+    if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) {
         const qreal maxSize = qMax(contentsRect().width(), contentsRect().height());
         QSize size = m_pictureSize;
         size.scale(maxSize, maxSize, Qt::KeepAspectRatio);
@@ -258,7 +258,7 @@ void Frame::updatePicture()
         setAssociatedApplicationUrls(m_mySlideShow->currentUrl());
     }
 
-    if (sizeHint != geometry().size()){
+    if (sizeHint != geometry().size()) {
         emit sizeHintChanged(Qt::PreferredSize);
         resize(sizeHint);
     }
@@ -286,7 +286,7 @@ void Frame::updatePicture()
     QSizeF scaledSize = frameRect.size();
     scaledSize.scale(frameRect.size(), Qt::KeepAspectRatio);
     frameRect = QRectF(QPoint(frameRect.x() + (frameRect.width() - scaledSize.width()) / 2,
-                      frameRect.y() + (frameRect.height() - scaledSize.height()) / 2), scaledSize);
+                              frameRect.y() + (frameRect.height() - scaledSize.height()) / 2), scaledSize);
 
     QRectF shadowRect;
     if (m_frame) {
@@ -341,7 +341,6 @@ void Frame::updatePicture()
     }
 
     // Picture
-
     // We save the painter here so the clipping only happens on the pixmap,
     // not on pixmap, frame, shadow, etc
     p->save();
@@ -400,8 +399,8 @@ void Frame::updatePicture()
     update();
 
     if (m_doAutoUpdate && !m_autoUpdateTimer->isActive()) {
-      kDebug() << "Autoupdate timer restarted:" << m_autoUpdateIntervall << "s";
-      m_autoUpdateTimer->start(m_autoUpdateIntervall * 1000);
+        kDebug() << "Autoupdate timer restarted:" << m_autoUpdateIntervall << "s";
+        m_autoUpdateTimer->start(m_autoUpdateIntervall * 1000);
     }
 }
 
@@ -595,10 +594,8 @@ void Frame::initSlideShow()
         Plasma::DataEngine *engine = dataEngine("potd");
         QDate mCurrentDate = QDate::currentDate();
         const QString identifier = m_potdProvider + ':' + mCurrentDate.toString(Qt::ISODate);
-
         engine->connectSource(identifier, m_mySlideShow);
 
-//FIXME: why is there a manual kicking of the engine?        const Plasma::DataEngine::Data data = engine->query(identifier);
     } else { //no slideshow so no random stuff
         m_mySlideShow->setRandom(false);
         m_mySlideShow->setImage(m_currentUrl.url());
@@ -660,7 +657,6 @@ void Frame::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         checkSlideFrame();
         m_slideFrame->show();
     }
-
     Applet::hoverEnterEvent(event);
 }
 
@@ -670,15 +666,14 @@ void Frame::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
         checkSlideFrame();
         m_slideFrame->hide();
     }
-
     Applet::hoverLeaveEvent( event );
 }
 
 void Frame::checkSlideFrame()
 {
-    if (m_slideFrame)
+    if (m_slideFrame) {
         return;
-
+    }
     m_slideFrame = new Plasma::Frame( this );
     m_slideFrame->setZValue( 10 );
 
@@ -708,7 +703,6 @@ void Frame::checkSlideFrame()
 
 void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, const QRect &rect)
 {
-    //kDebug() << "Paint!";
     Q_UNUSED(option)
     if (m_slideShow) {
         // temporarily suspend the slideshow to allow time for loading the image
@@ -726,7 +720,7 @@ void Frame::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, 
 void Frame::delayedUpdateSize()
 {
     QSizeF sizeHint = contentSizeHint();
-    if (sizeHint != geometry().size()){
+    if (sizeHint != geometry().size()) {
         resize(sizeHint);
         emit appletTransformedItself();
     }

@@ -36,7 +36,7 @@
 #include "imageloader.h"
 
 Picture::Picture(QObject *parent)
-: QObject(parent)
+        : QObject(parent)
 {
     m_defaultImage = KGlobal::dirs()->findResource("data", "plasma-applet-frame/picture-frame-default.jpg");
 
@@ -89,9 +89,9 @@ void Picture::setPicture(const KUrl &currentUrl)
             loader = new ImageLoader(m_currentUrl.path());
             setPath(m_currentUrl.path());
             m_message.clear();
-        }   
+        }
         connect(loader, SIGNAL(loaded(QImage)), this, SLOT(checkImageLoaded(QImage)));
-        QThreadPool::globalInstance()->start(loader);     
+        QThreadPool::globalInstance()->start(loader);
     }
 }
 
@@ -136,16 +136,16 @@ void Picture::slotFinished( KJob *job )
         kDebug() << "Saved to" << path;
         setPath(path);
     }
-    emit checkImageLoaded(ImageLoader::correctRotation(image, path));
+    emit checkImageLoaded(ImageLoader::correctRotation(image));
 }
 
 void Picture::checkImageLoaded(QImage newImage)
 {
-  if ( newImage.isNull()) {
-    emit pictureLoaded(defaultPicture(i18n("Error loading image. Image was probably deleted.")));
-  } else {
-    emit pictureLoaded(newImage);
-  }
+    if ( newImage.isNull()) {
+        emit pictureLoaded(defaultPicture(i18n("Error loading image. Image was probably deleted.")));
+    } else {
+        emit pictureLoaded(newImage);
+    }
 }
 
 #include "picture.moc"

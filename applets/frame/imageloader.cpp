@@ -31,26 +31,47 @@ ImageLoader::ImageLoader(const QString &path)
     m_path = path;
 }
 
-
-QImage ImageLoader::correctRotation(const QImage& tempImage, const QString &path)
+QImage ImageLoader::correctRotation(const QImage& tempImage)
 {
     QImage image = QImage();
-    if (!tempImage.isNull()){
+    if (!tempImage.isNull()) {
 #ifdef HAVE_KEXIV2
         KExiv2Iface::KExiv2 exif(path);
         QMatrix m;
         switch (exif.getImageOrientation()) {
-            case KExiv2Iface::KExiv2::ORIENTATION_HFLIP: m.scale(-1.0,1.0); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_180: m.rotate(180);  image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_VFLIP: m.scale(1.0,-1.0); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90: m.rotate(90); image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP: m.rotate(90); m.scale(-1.0,1.0);
-            image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP: m.rotate(90); m.scale(1.0,-1.0);
-            image = tempImage.transformed(m); break;
-            case KExiv2Iface::KExiv2::ORIENTATION_ROT_270: m.rotate(270);  image = tempImage.transformed(m); break;
-            default: image = tempImage;
-    }
+        case KExiv2Iface::KExiv2::ORIENTATION_HFLIP:
+            m.scale(-1.0,1.0);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_ROT_180:
+            m.rotate(180);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_VFLIP:
+            m.scale(1.0,-1.0);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90:
+            m.rotate(90);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP:
+            m.rotate(90);
+            m.scale(-1.0,1.0);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP:
+            m.rotate(90);
+            m.scale(1.0,-1.0);
+            image = tempImage.transformed(m);
+            break;
+        case KExiv2Iface::KExiv2::ORIENTATION_ROT_270:
+            m.rotate(270);
+            image = tempImage.transformed(m);
+            break;
+        default:
+            image = tempImage;
+        }
 #else
         image = tempImage;
 #endif
@@ -60,8 +81,7 @@ QImage ImageLoader::correctRotation(const QImage& tempImage, const QString &path
 
 void ImageLoader::run()
 {
-    QImage img = correctRotation(QImage(m_path), m_path);
-
+    QImage img = correctRotation(QImage(m_path));
     emit loaded(img);
 }
 

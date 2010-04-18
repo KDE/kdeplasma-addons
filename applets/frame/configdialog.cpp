@@ -48,8 +48,8 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     // Geometry of "display" part of monitor image: (23,14)-[151x115]
     imageUi.monitorLabel->setPixmap(QPixmap(monitorPath));
     imageUi.monitorLabel->setWhatsThis(i18n(
-                                      "This picture of a monitor contains a preview of "
-                                      "the picture you currently have in your frame."));
+                                           "This picture of a monitor contains a preview of "
+                                           "the picture you currently have in your frame."));
     m_preview = new QLabel(imageUi.monitorLabel);
     m_preview->setScaledContents(true);
     m_preview->setGeometry(23, 14, 151, 115);
@@ -149,4 +149,3 @@ void ConfigDialog::changePreview(const QString &path)
 {
     m_picture->setPicture(KUrl(path));
 }
-

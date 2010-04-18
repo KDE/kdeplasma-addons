@@ -29,7 +29,7 @@
 #include "picture.h"
 
 SlideShow::SlideShow(QObject *parent)
-    : QObject(parent)
+        : QObject(parent)
 {
     m_filters << "*.jpeg" << "*.jpg" << "*.png" << "*.svg" << "*.svgz"; // use mime types?
     m_slideNumber = 0;
@@ -71,9 +71,8 @@ void SlideShow::setDirs(const QStringList &slideShowPath, bool recursive)
 
     // select 1st picture
     firstPicture();
-    
+
     // TODO do something meaningful if m_picturePaths.empty()
-    
     kDebug() << "Loaded " << m_picturePaths.size() << " pictures in " << setDirStart.secsTo(QDateTime::currentDateTime()) << " seconds";
 }
 
@@ -99,7 +98,7 @@ void SlideShow::addDir(const QString &path, bool recursive)
         dirIterator.next();
         dirPicturePaths.append(dirIterator.filePath());
     }
-    
+
     // the pictures have to be sorted before adding them to the list,
     // because the QDirIterator sorts them in a different way than QDir::entryList
     dirPicturePaths.sort();
@@ -113,7 +112,6 @@ QImage SlideShow::image() const
         //m_currentUrl = m_picture->url();
         m_picture->setPicture(m_currentUrl);
     }
-    kDebug();
     return m_image;
 }
 
@@ -141,7 +139,6 @@ KUrl SlideShow::url(int offset)
             return KUrl(m_picturePaths.at(m_slideNumber));
         }
     }
-
     return KUrl();
 }
 
@@ -209,9 +206,9 @@ void SlideShow::dataUpdated(const QString &name, const Plasma::DataEngine::Data 
 
     m_image = data[name].value<QImage>();
     //Compatibility with old dataengines
-    if (m_image.isNull()){
+    if (m_image.isNull()) {
         QPixmap tmpPixmap = data[name].value<QPixmap>();
-        if (!tmpPixmap.isNull()){
+        if (!tmpPixmap.isNull()) {
             m_image = tmpPixmap.toImage();
         }
     }

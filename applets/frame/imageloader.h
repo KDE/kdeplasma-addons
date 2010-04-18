@@ -30,15 +30,15 @@ class ImageLoader : public QObject, public QRunnable
 {
     Q_OBJECT
 
-  public:
+public:
     ImageLoader(const QString &path);
-    static QImage correctRotation(const QImage& tempImage, const QString &path);
+    static QImage correctRotation(const QImage& tempImage);
     void run();
-    
-  Q_SIGNALS:
+
+Q_SIGNALS:
     void loaded(QImage);
-    
-  private:
+
+private:
     QString m_path;
 };
 
