@@ -134,7 +134,7 @@
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Autoupdate:</string>
+            <string>Auto-update:</string>
            </property>
           </widget>
          </item>
