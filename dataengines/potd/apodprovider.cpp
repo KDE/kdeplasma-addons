@@ -62,9 +62,7 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
     exp.setPatternSyntax(QRegExp::Wildcard);
     
     int pos = exp.indexIn( data ) + pattern.length();
-    
-    const QString sub = data.mid( pos, exp.matchedLength() -21);
-    kDebug() << "####### sub " << sub << endl; //TODO should return *.jpg
+    const QString sub = data.mid( pos, pattern.length()-1);
     
     KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ).arg(QDate::currentDate().toString( "yyMM" ) ).arg( sub ) );
 
