@@ -92,6 +92,17 @@ class BasicWidget::Private {
         return -1;
     }
 
+    void rotatePainterForIcon(QPainter * painter, qreal angle, QRect & iconRect)
+    {
+        // TODO: Make this work for other angles
+        if (angle != 90 && angle != -90) return;
+
+        painter->rotate(angle);
+
+        iconRect.moveLeft(iconRect.width() / 2);
+        iconRect.moveTop(WIDGET_PADDING - iconRect.height() * 1.5);
+    }
+
     QIcon icon;
     Plasma::Svg iconInSvg;
     QSize iconSize;
@@ -236,8 +247,12 @@ void BasicWidget::paintForeground(QPainter * painter)
             top = widgetRect.height() - height + WIDGET_PADDING;
 
         if (!d->icon.isNull() || d->iconInSvg.isValid()) { // using real painter...
+
             iconRect.moveTop(top);
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
+
+            d->rotatePainterForIcon(_painter, -rotation(), rect);
+
             if (!d->icon.isNull()) {
                 d->icon.paint(_painter, rect);
             } else {
@@ -245,6 +260,8 @@ void BasicWidget::paintForeground(QPainter * painter)
                 d->iconInSvg.paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive");
             }
             top += d->iconSize.height() + WIDGET_PADDING;
+
+            d->rotatePainterForIcon(_painter, rotation(), rect);
         }
 
         if (!d->title.isEmpty()) {
@@ -319,6 +336,9 @@ void BasicWidget::paintForeground(QPainter * painter)
 
         if (!d->icon.isNull() || d->iconInSvg.isValid()) {  // using real painter...
             QRect rect(QPoint(lround(iconRect.left()), lround(iconRect.top())), d->iconSize);
+
+            d->rotatePainterForIcon(_painter, -rotation(), rect);
+
             if (!d->icon.isNull()) {
                 QIcon::Mode mode;
                 if (!isEnabled()) {
@@ -334,6 +354,9 @@ void BasicWidget::paintForeground(QPainter * painter)
                 d->iconInSvg.resize(d->iconSize);
                 d->iconInSvg.paint(_painter, rect.left(), rect.top(), isHovered()?"active":"inactive"); //TODO: add disabled state
             }
+
+            d->rotatePainterForIcon(_painter, rotation(), rect);
+
         }
 
         if (!d->title.isEmpty()) {
