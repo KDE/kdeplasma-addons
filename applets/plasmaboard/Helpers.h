@@ -47,11 +47,13 @@ public:
     static void fakeKeyPress(const unsigned int &code){
 #ifdef Q_WS_X11
         XTestFakeKeyEvent(QX11Info::display(), code, true, 0);
+        XSync(QX11Info::display(), False);
 #endif
     }
     static void fakeKeyRelease(const unsigned int &code){
 #ifdef Q_WS_X11
         XTestFakeKeyEvent(QX11Info::display(), code, false, 0);
+        XSync(QX11Info::display(), False);
 #endif
     }
 
