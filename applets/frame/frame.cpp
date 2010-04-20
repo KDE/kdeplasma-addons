@@ -604,10 +604,8 @@ void Frame::initSlideShow()
             m_doAutoUpdate = true;
         }
     }
-
-    if (!m_potd) {
-        scalePictureAndUpdate();
-    }
+    
+    scalePictureAndUpdate();
 }
 
 void Frame::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
