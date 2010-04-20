@@ -24,7 +24,7 @@ configure_file(config-lancelot.h.cmake
 # Checking for Composite End                            #
 #########################################################
 
-include(PlasmaUIMacros)
+# include(PlasmaUIMacros)
 
 include_directories(
    ${CMAKE_SOURCE_DIR}
@@ -46,9 +46,10 @@ set(plasma_lancelot_application_SRCS
    AboutData.cpp
 )
 
-plasmaui_add_ui_files(plasma_lancelot_application_SRCS
-   "ui/LancelotWindowBase.xml"
-)
+# This is done manually now:
+# plasmaui_add_ui_files(plasma_lancelot_application_SRCS
+#    "ui/LancelotWindowBase.xml"
+# )
 
 set(ksmserver_xml ${DBUS_INTERFACES_INSTALL_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma_lancelot_application_SRCS ${ksmserver_xml} ksmserver_interface)
