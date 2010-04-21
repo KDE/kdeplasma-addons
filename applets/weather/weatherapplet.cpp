@@ -395,7 +395,7 @@ void WeatherApplet::weatherContent(const Plasma::DataEngine::Data &data)
         setPopupIcon(data["Condition Icon"].toString());
     }
 
-    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_tabBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     // If we have items in tab clean it up first
     while (m_tabBar->count()) {
