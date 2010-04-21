@@ -42,6 +42,7 @@ public:
 
 protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
 
 Q_SIGNALS:
     void geometryChanged(void);

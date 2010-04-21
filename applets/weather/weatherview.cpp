@@ -85,6 +85,19 @@ void WeatherView::resizeEvent(QGraphicsSceneResizeEvent *event)
     emit geometryChanged();
 }
 
+QSizeF WeatherView::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+    switch (which) {
+    case Qt::PreferredSize:
+        return QSizeF(400, 120);
+    case Qt::MinimumSize:
+        return QSizeF(200, 90);
+    case Qt::MaximumSize:
+    default:
+        return QSizeF(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+    }
+}
+
 }
 
 #include <weatherview.moc>
