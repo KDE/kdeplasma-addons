@@ -470,6 +470,8 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->imageUi.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
     m_configDialog->imageUi.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_configDialog->previewPicture(m_mySlideShow->image());
+    
+    m_configDialog->imageUi.potdComboBox->setCurrentIndex(0);
 }
 
 void Frame::configAccepted()
