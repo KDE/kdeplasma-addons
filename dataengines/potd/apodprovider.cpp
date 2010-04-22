@@ -62,10 +62,9 @@ void ApodProvider::Private::pageRequestFinished( KJob *_job )
     exp.setPatternSyntax(QRegExp::Wildcard);
     
     int pos = exp.indexIn( data ) + pattern.length();
-    const QString sub = data.mid( pos, pattern.length()-1);
-    
-    KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ).arg(QDate::currentDate().toString( "yyMM" ) ).arg( sub ) );
+    const QString sub = data.mid( pos, exp.matchedLength() -21);
 
+    KUrl url( QString( "http://antwrp.gsfc.nasa.gov/apod/image/%1/%2" ).arg(QDate::currentDate().toString( "yyMM" ) ).arg( sub ) );
     KIO::StoredTransferJob *imageJob = KIO::storedGet( url );
     mParent->connect( imageJob, SIGNAL( finished( KJob* ) ), SLOT( imageRequestFinished( KJob* ) ) );
 }
