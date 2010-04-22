@@ -108,7 +108,7 @@ void Frame::init()
     m_slideshowTime = cg.readEntry("slideshow time", 60); // default to 1 minute
     m_currentUrl = cg.readEntry("url", m_currentUrl);
     setAssociatedApplicationUrls(m_currentUrl);
-    m_potdProvider = cg.readEntry("potdProvider", QString());
+    m_potdProvider = cg.readEntry("potdProvider", "wcpotd");
     m_potd = cg.readEntry("potd", false);
     m_autoUpdateIntervall = cg.readEntry("autoupdate time", 0);
 
