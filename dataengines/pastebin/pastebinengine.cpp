@@ -28,8 +28,17 @@ PastebinEngine::PastebinEngine(QObject* parent, const QVariantList& args)
 
 void PastebinEngine::init()
 {
-    setData("result", "");
-    setData("error", "");
+    Plasma::DataEngine::Data data;
+    data.insert("pastebin.ca", PastebinService::PASTEBINCA);
+    data.insert("pastebin.com", PastebinService::PASTEBINCOM);
+    setData("textservers", data);
+
+    data.clear();
+    data.insert("imgur", PastebinService::IMGUR);
+    data.insert("imagebin.ca", PastebinService::IMAGEBINCA);
+    data.insert("imagashack", PastebinService::IMAGESHACK);
+    data.insert("simplesttimagehosting", PastebinService::SIMPLESTIMAGEHOSTING);
+    setData("imageservers", data);
 }
 
 Plasma::Service *PastebinEngine::serviceForSource(const QString &source)

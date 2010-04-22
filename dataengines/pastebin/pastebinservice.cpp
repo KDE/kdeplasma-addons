@@ -26,117 +26,132 @@
 
 
 PastebinService::PastebinService(PastebinEngine *engine)
-    : Plasma::Service(), m_textServer(0), m_imageServer(0)
+    : Plasma::Service(engine)
 {
-    m_engine = engine;
     setName("pastebin");
 }
 
 Plasma::ServiceJob *PastebinService::createJob(const QString &operation,
                                                QMap<QString, QVariant> &parameters)
 {
-    QString server = parameters["server"].toString();
+    return new PastebinJob(destination(), operation, parameters, this);
+}
 
-    // it's a text
-    if (operation == "text") {
-        delete m_textServer;
+PastebinJob::PastebinJob(const QString &destination, const QString &operation,
+                         QMap<QString, QVariant> &parameters, QObject *parent)
+    : Plasma::ServiceJob(destination, operation, parameters, parent),
+      m_server(0)
+{
+    const QString server = parameters["server"].toString();
+    const int backend = parameters["backend"].toInt();
 
-        int backend = parameters["backend"].toInt();
-        switch(backend) {
-            case PastebinService::PASTEBINCA:
-                m_textServer = new PastebinCAServer(server);
-                break;
-
-            case PastebinService::PASTEBINCOM:
-                m_textServer = new PastebinCOMServer(server);
-                break;
-        }
-
-        connect(m_textServer, SIGNAL(postFinished(QString)),
-                this, SLOT(showResults(QString)));
-        connect(m_textServer, SIGNAL(postError()),
-                this, SLOT(showErrors()));
-
-        postText(parameters);
-    } else {
-        delete m_imageServer;
-
-        int backend = parameters["backend"].toInt();
-        switch(backend) {
+    if (operation == "image") {
+        switch (backend) {
             case PastebinService::IMAGEBINCA:
-                m_imageServer = new ImagebinCAServer(server);
+                m_server = new ImagebinCAServer(server);
                 break;
 
             case PastebinService::IMAGESHACK:
-                m_imageServer = new ImageshackServer(server);
+                m_server = new ImageshackServer(server);
                 break;
 
             case PastebinService::SIMPLESTIMAGEHOSTING:
-                m_imageServer = new SimplestImageHostingServer(server);
+                m_server = new SimplestImageHostingServer(server);
                 break;
 
             case PastebinService::IMGUR:
-                m_imageServer = new ImgurServer(server);
+                m_server = new ImgurServer(server);
+                break;
+
+            default:
                 break;
         }
+    } else {
+        switch (backend) {
+            case PastebinService::PASTEBINCA:
+                m_server = new PastebinCAServer(server);
+                break;
 
-        connect(m_imageServer, SIGNAL(postFinished(QString)),
-                this, SLOT(showResults(QString)));
-        connect(m_imageServer, SIGNAL(postError()),
-                this, SLOT(showErrors()));
+            case PastebinService::PASTEBINCOM:
+                m_server = new PastebinCOMServer(server);
+                break;
 
-        postImage(parameters);
+            default:
+                break;
+        }
     }
 
-    return 0;
+    if (m_server) {
+        connect(m_server, SIGNAL(postFinished(QString)), this, SLOT(showResults(QString)));
+        connect(m_server, SIGNAL(postError()), this, SLOT(showErrors()));
+        connect(m_server, SIGNAL(postError(QString)), this, SLOT(showErrors(QString)));
+    }
 }
 
-void PastebinService::postText(QMap<QString, QVariant> &parameters)
+void PastebinJob::start()
 {
-    QString text = parameters["fileName"].toString();
-
-    KUrl testPath(text);
-    bool validPath = QFile::exists(testPath.toLocalFile());
-
-    // if it's a valid path, then take the file's content
-    // otherwise just post the content's of fileName
-    if (validPath) {
-        QFile file(testPath.toLocalFile());
-        file.open(QIODevice::ReadOnly);
-        QTextStream in(&file);
-        text = in.readAll();
-    } else if (testPath.scheme().toLower() == QString("http")) {
-        // lets use tiny url ;)
-        QString tinyUrl = QString("http://tinyurl.com/api-create.php?url=%1").arg(testPath.prettyUrl());
-        manager = new QNetworkAccessManager(this);
-        connect(manager, SIGNAL(finished(QNetworkReply*)),
-                this, SLOT(processTinyUrl(QNetworkReply*)));
-        manager->get(QNetworkRequest(tinyUrl));
-        return;
+    if (!m_server) {
+        showErrors(i18n("Invalid service requested."));
+    } else if (operationName() == "image") {
+        postImage();
+    } else {
+        postText();
     }
-
-    // the post
-    m_textServer->post(text);
 }
 
-void PastebinService::postImage(QMap<QString, QVariant> &parameters)
+void PastebinJob::postText()
+{
+    const bool fromFile = operationName() == "text";
+    const QString text = (fromFile ? parameters()["fileName"] : parameters()["text"]).toString();
+    kDebug() << "posting:" << fromFile << text;
+
+    if (text.isEmpty()) {
+        showErrors(i18n("Content posted was empty."));
+    } else if (fromFile) {
+        KUrl testPath(text);
+        bool validPath = QFile::exists(testPath.toLocalFile());
+
+        // if it's a valid path, then take the file's content
+        // otherwise just post the content's of fileName
+        if (validPath) {
+            QFile file(testPath.toLocalFile());
+            file.open(QIODevice::ReadOnly);
+            QTextStream in(&file);
+            QString text = in.readAll();
+            m_server->post(text);
+        } else if (testPath.scheme().toLower() == QString("http")) {
+            // lets use tiny url ;)
+            QString tinyUrl = QString("http://tinyurl.com/api-create.php?url=%1").arg(testPath.prettyUrl());
+            QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+            connect(manager, SIGNAL(finished(QNetworkReply*)),
+                    this, SLOT(processTinyUrl(QNetworkReply*)));
+            manager->get(QNetworkRequest(tinyUrl));
+        } else {
+            showErrors(i18n("Invalid URL"));
+        }
+    } else {
+        m_server->post(text);
+    }
+}
+
+void PastebinJob::postImage()
 {
     // it's an image
-    QString url = parameters["server"].toString();
-    QString fileName = parameters["fileName"].toString();
+    QString url = parameters()["server"].toString();
+    QString fileName = parameters()["fileName"].toString();
     //    bool privacy = parameters["privacy"].toBool();
 
     KUrl testPath(fileName);
     bool validPath = QFile::exists(testPath.toLocalFile());
 
     if (validPath) {
-        m_imageServer->post(testPath.toLocalFile());
+        m_server->post(testPath.toLocalFile());
     } else {
         showErrors(i18n("Could not post image."));
     }
 }
 
-void PastebinService::processTinyUrl(QNetworkReply *reply)
+void PastebinJob::processTinyUrl(QNetworkReply *reply)
 {
     QByteArray dataRaw(reply->readAll());
     QString data(dataRaw);
@@ -150,18 +165,23 @@ void PastebinService::processTinyUrl(QNetworkReply *reply)
     showResults(data);
 }
 
-void PastebinService::showResults(const QString &url)
+void PastebinJob::showResults(const QString &url)
 {
-    m_engine->setData("result", url);
+    setResult(url);
 }
 
-void PastebinService::showErrors(const QString &message)
+void PastebinJob::showErrors(const QString &message)
 {
     QString errorMsg = message;
-
     if (errorMsg.isEmpty()) {
         errorMsg = i18n("Unknown Error");
     }
 
-    m_engine->setData("error", errorMsg);
+    setError(1);
+    setErrorText(message);
+    emitResult();
 }
+
+#include "pastebinservice.moc"
+
+

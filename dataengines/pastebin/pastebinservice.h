@@ -24,14 +24,10 @@
 #include "backends/backends.h"
 
 #include <Plasma/Service>
-
+#include <Plasma/ServiceJob>
 
 class QNetworkAccessManager;
 class QNetworkReply;
-
-namespace Plasma {
-    class ServiceJob;
-}
 
 class PastebinService : public Plasma::Service
 {
@@ -44,10 +40,20 @@ public:
     PastebinService(PastebinEngine *engine);
     Plasma::ServiceJob *createJob(const QString &operation,
                                   QMap<QString, QVariant> &parameters);
+};
+
+class PastebinJob : public Plasma::ServiceJob
+{
+    Q_OBJECT
+public:
+    PastebinJob(const QString &destination, const QString &operation,
+                QMap<QString, QVariant> &parameters, QObject *parent = 0);
+
+    void start();
 
 protected:
-    void postText(QMap<QString, QVariant> &parameters);
-    void postImage(QMap<QString, QVariant> &parameters);
+    void postText();
+    void postImage();
 
 protected slots:
     void processTinyUrl(QNetworkReply *reply);
@@ -55,13 +61,7 @@ protected slots:
     void showErrors(const QString &url = "");
 
 private:
-    PastebinEngine *m_engine;
-
-    PastebinServer *m_textServer;
-    PastebinServer *m_imageServer;
-
-    // to handle request to tinyUrl
-    QNetworkAccessManager *manager;
+    PastebinServer *m_server;
 };
 
 #endif // PASTEBIN_SERVICE
