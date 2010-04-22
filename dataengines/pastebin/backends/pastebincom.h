@@ -39,8 +39,11 @@ public:
 
     virtual void post(const QString& content);
 
-public slots:
-    void result(KIO::Job *job, const KUrl &url);
+private Q_SLOTS:
+    void data(KIO::Job* job, const QByteArray &data);
+
+private:
+    QString m_resultingUrl;
 };
 
 #endif

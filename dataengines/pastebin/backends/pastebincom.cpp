@@ -35,33 +35,35 @@ PastebinCOMServer::~PastebinCOMServer()
 {
 }
 
-void PastebinCOMServer::result(KIO::Job *job, const KUrl &url)
+void PastebinCOMServer::data(KIO::Job* job, const QByteArray &data)
 {
-    Q_UNUSED(job);
-
-    if (url.url().contains("pastebin.php")) {
-        // we had an error
-        emit postError();
-        return;
+    if (data.isEmpty()) {
+        if (job->error()) {
+            emit postError(job->errorString());
+        } else if (m_resultingUrl.isEmpty() || m_resultingUrl.startsWith("ERROR")) {
+            emit postError(m_resultingUrl);
+        } else {
+            emit postFinished(m_resultingUrl);
+        }
+    } else {
+        m_resultingUrl += data;
     }
-
-    emit postFinished(url.url());
 }
 
 void PastebinCOMServer::post(const QString& content)
 {
-    QByteArray bytearray = "code2=";
+    m_resultingUrl.clear();
+    QByteArray bytearray = "paste_code=";
     bytearray.append(QUrl::toPercentEncoding(content,"/"));
-    bytearray.append("&parent_pid=&format=text&expiry=d&poster=&paste=Send");
+    bytearray.append("&paste_format=text&paste_expiry_date=1D&paste_email=");
 
-    QString url("/pastebin.php");
-    url.prepend(m_server);
+    QString url(m_server + "/api_public.php");
 
-    KIO::TransferJob *tf = KIO::http_post(KUrl(url),
-                                          bytearray,KIO::HideProgressInfo);
+    KIO::TransferJob *tf = KIO::http_post(KUrl(url), bytearray, KIO::HideProgressInfo);
 
     tf->addMetaData("content-type","Content-Type: application/x-www-form-urlencoded");
-    connect(tf, SIGNAL(redirection(KIO::Job*, const KUrl&)),
-            this, SLOT(result(KIO::Job*, const KUrl&)));
-
+    connect(tf, SIGNAL(data(KIO::Job *, const QByteArray &)), this, SLOT(data(KIO::Job*, const QByteArray&)));
 }
+
+#include "pastebincom.moc"
+
