@@ -102,7 +102,7 @@ void Frame::init()
     m_slideshowTime = cg.readEntry("slideshow time", 60); // default to 1 minute
     m_currentUrl = cg.readEntry("url", m_currentUrl);
     setAssociatedApplicationUrls(m_currentUrl);
-    m_potdProvider = cg.readEntry("potdProvider", "");
+    m_potdProvider = cg.readEntry("potdProvider", "wcpotd");
     m_potd = cg.readEntry("potd", false);
 
     // Frame & Shadow dimensions
@@ -470,8 +470,6 @@ void Frame::createConfigurationInterface(KConfigDialog *parent)
     m_configDialog->imageUi.removeDirButton->setEnabled(!m_slideShowPaths.isEmpty());
     m_configDialog->imageUi.slideShowDelay->setTime(QTime(m_slideshowTime / 3600, (m_slideshowTime / 60) % 60, m_slideshowTime % 60));
     m_configDialog->previewPicture(m_mySlideShow->image());
-    
-    m_configDialog->imageUi.potdComboBox->setCurrentIndex(0);
 }
 
 void Frame::configAccepted()
